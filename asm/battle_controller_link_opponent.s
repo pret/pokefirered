@@ -1,0 +1,6260 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
+
+	.syntax unified
+
+	.text
+
+	thumb_func_start nullsub_19
+nullsub_19: @ 803A664
+	bx lr
+	thumb_func_end nullsub_19
+
+	thumb_func_start sub_803A668
+sub_803A668: @ 803A668
+	ldr r1, _0803A678 @ =gUnknown_3004FE0
+	ldr r0, _0803A67C @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803A680 @ =sub_803A684
+	str r1, [r0]
+	bx lr
+	.align 2, 0
+_0803A678: .4byte gUnknown_3004FE0
+_0803A67C: .4byte gUnknown_2023BC4
+_0803A680: .4byte sub_803A684
+	thumb_func_end sub_803A668
+
+	thumb_func_start sub_803A684
+sub_803A684: @ 803A684
+	push {lr}
+	ldr r2, _0803A6B8 @ =gUnknown_2023BC8
+	ldr r1, _0803A6BC @ =gUnknown_825E45C
+	ldr r0, _0803A6C0 @ =gUnknown_2023BC4
+	ldrb r3, [r0]
+	lsls r0, r3, 2
+	adds r0, r1
+	ldr r1, [r2]
+	ldr r0, [r0]
+	ands r1, r0
+	cmp r1, 0
+	beq _0803A6D0
+	ldr r0, _0803A6C4 @ =gUnknown_2022BC4
+	lsls r1, r3, 9
+	adds r1, r0
+	ldrb r0, [r1]
+	cmp r0, 0x38
+	bhi _0803A6CC
+	ldr r0, _0803A6C8 @ =gUnknown_8250B20
+	ldrb r1, [r1]
+	lsls r1, 2
+	adds r1, r0
+	ldr r0, [r1]
+	bl _call_via_r0
+	b _0803A6D0
+	.align 2, 0
+_0803A6B8: .4byte gUnknown_2023BC8
+_0803A6BC: .4byte gUnknown_825E45C
+_0803A6C0: .4byte gUnknown_2023BC4
+_0803A6C4: .4byte gUnknown_2022BC4
+_0803A6C8: .4byte gUnknown_8250B20
+_0803A6CC:
+	bl sub_803B124
+_0803A6D0:
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803A684
+
+	thumb_func_start sub_803A6D4
+sub_803A6D4: @ 803A6D4
+	push {lr}
+	ldr r2, _0803A6FC @ =gUnknown_202063C
+	ldr r1, _0803A700 @ =gUnknown_2023D44
+	ldr r0, _0803A704 @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	adds r0, r1
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r2, 0x1C
+	adds r0, r2
+	ldr r1, [r0]
+	ldr r0, _0803A708 @ =nullsub_8
+	cmp r1, r0
+	bne _0803A6F8
+	bl sub_803B124
+_0803A6F8:
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803A6FC: .4byte gUnknown_202063C
+_0803A700: .4byte gUnknown_2023D44
+_0803A704: .4byte gUnknown_2023BC4
+_0803A708: .4byte nullsub_8
+	thumb_func_end sub_803A6D4
+
+	thumb_func_start sub_803A70C
+sub_803A70C: @ 803A70C
+	push {r4-r6,lr}
+	ldr r4, _0803A784 @ =gUnknown_202063C
+	ldr r6, _0803A788 @ =gUnknown_2023D44
+	ldr r5, _0803A78C @ =gUnknown_2023BC4
+	ldrb r0, [r5]
+	adds r0, r6
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r2, r0, 2
+	adds r0, r4, 0
+	adds r0, 0x1C
+	adds r0, r2, r0
+	ldr r1, [r0]
+	ldr r0, _0803A790 @ =nullsub_8
+	cmp r1, r0
+	bne _0803A77C
+	adds r0, r2, r4
+	ldrh r0, [r0, 0x6]
+	bl sub_803477C
+	ldrb r0, [r5]
+	adds r0, r6
+	ldrb r0, [r0]
+	lsls r1, r0, 4
+	adds r1, r0
+	lsls r1, 2
+	adds r1, r4
+	ldrh r0, [r1, 0x38]
+	ldr r2, _0803A794 @ =0x000003ff
+	ands r2, r0
+	ldrh r3, [r1, 0x4]
+	ldr r0, _0803A798 @ =0xfffffc00
+	ands r0, r3
+	orrs r0, r2
+	strh r0, [r1, 0x4]
+	ldrb r0, [r5]
+	adds r0, r6
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	bl sub_80077D8
+	ldrb r0, [r5]
+	adds r0, r6
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	bl sub_8007280
+	bl sub_803B124
+_0803A77C:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803A784: .4byte gUnknown_202063C
+_0803A788: .4byte gUnknown_2023D44
+_0803A78C: .4byte gUnknown_2023BC4
+_0803A790: .4byte nullsub_8
+_0803A794: .4byte 0x000003ff
+_0803A798: .4byte 0xfffffc00
+	thumb_func_end sub_803A70C
+
+	thumb_func_start sub_803A79C
+sub_803A79C: @ 803A79C
+	push {r4,lr}
+	ldr r4, _0803A7DC @ =gUnknown_2024018
+	ldr r1, [r4]
+	ldr r3, _0803A7E0 @ =gUnknown_2023BC4
+	ldrb r0, [r3]
+	ldr r2, [r1, 0x4]
+	lsls r1, r0, 1
+	adds r1, r0
+	lsls r1, 2
+	adds r1, r2
+	ldrb r0, [r1, 0x9]
+	subs r0, 0x1
+	strb r0, [r1, 0x9]
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0xFF
+	bne _0803A7D4
+	ldr r0, [r4]
+	ldrb r1, [r3]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	movs r1, 0
+	strb r1, [r0, 0x9]
+	bl sub_803B124
+_0803A7D4:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803A7DC: .4byte gUnknown_2024018
+_0803A7E0: .4byte gUnknown_2023BC4
+	thumb_func_end sub_803A79C
+
+	thumb_func_start sub_803A7E4
+sub_803A7E4: @ 803A7E4
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	movs r6, 0
+	bl sub_8075290
+	lsls r0, 24
+	cmp r0, 0
+	beq _0803A80C
+	bl sub_8075290
+	lsls r0, 24
+	cmp r0, 0
+	beq _0803A840
+	ldr r0, _0803A82C @ =gUnknown_2022B4C
+	ldr r0, [r0]
+	movs r1, 0x40
+	ands r0, r1
+	cmp r0, 0
+	beq _0803A840
+_0803A80C:
+	ldr r2, _0803A830 @ =gUnknown_202063C
+	ldr r1, _0803A834 @ =gUnknown_3004FF0
+	ldr r0, _0803A838 @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	adds r0, r1
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r2, 0x1C
+	adds r0, r2
+	ldr r1, [r0]
+	ldr r0, _0803A83C @ =nullsub_8
+	cmp r1, r0
+	bne _0803A876
+	b _0803A874
+	.align 2, 0
+_0803A82C: .4byte gUnknown_2022B4C
+_0803A830: .4byte gUnknown_202063C
+_0803A834: .4byte gUnknown_3004FF0
+_0803A838: .4byte gUnknown_2023BC4
+_0803A83C: .4byte nullsub_8
+_0803A840:
+	ldr r2, _0803A95C @ =gUnknown_202063C
+	ldr r5, _0803A960 @ =gUnknown_3004FF0
+	ldr r0, _0803A964 @ =gUnknown_2023BC4
+	ldrb r3, [r0]
+	adds r0, r3, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r2, 0x1C
+	adds r0, r2
+	ldr r4, [r0]
+	ldr r0, _0803A968 @ =nullsub_8
+	cmp r4, r0
+	bne _0803A876
+	movs r0, 0x2
+	eors r3, r0
+	adds r0, r3, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldr r0, [r0]
+	cmp r0, r4
+	bne _0803A876
+_0803A874:
+	movs r6, 0x1
+_0803A876:
+	bl sub_80721F0
+	lsls r0, 24
+	cmp r0, 0
+	beq _0803A882
+	movs r6, 0
+_0803A882:
+	cmp r6, 0
+	bne _0803A888
+	b _0803A9AA
+_0803A888:
+	ldr r0, _0803A964 @ =gUnknown_2023BC4
+	mov r8, r0
+	ldrb r0, [r0]
+	bl sub_80751D8
+	lsls r0, 24
+	lsrs r3, r0, 24
+	cmp r3, 0x1
+	bne _0803A936
+	ldr r7, _0803A96C @ =gUnknown_2024018
+	ldr r0, [r7]
+	mov r1, r8
+	ldrb r2, [r1]
+	ldr r5, [r0, 0x4]
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 2
+	adds r4, r0, r5
+	ldrb r1, [r4, 0x1]
+	adds r0, r3, 0
+	ands r0, r1
+	cmp r0, 0
+	beq _0803A9AA
+	movs r6, 0x2
+	adds r1, r6, 0
+	eors r1, r2
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	ldrb r1, [r0, 0x1]
+	adds r0, r3, 0
+	ands r0, r1
+	cmp r0, 0
+	beq _0803A9AA
+	ldrb r1, [r4]
+	movs r3, 0x7F
+	adds r0, r3, 0
+	ands r0, r1
+	strb r0, [r4]
+	ldr r0, [r7]
+	mov r1, r8
+	ldrb r2, [r1]
+	ldr r0, [r0, 0x4]
+	lsls r1, r2, 1
+	adds r1, r2
+	lsls r1, 2
+	adds r1, r0
+	ldrb r2, [r1, 0x1]
+	movs r4, 0x2
+	negs r4, r4
+	adds r0, r4, 0
+	ands r0, r2
+	strb r0, [r1, 0x1]
+	ldr r2, [r7]
+	mov r1, r8
+	ldrb r0, [r1]
+	adds r1, r6, 0
+	eors r1, r0
+	ldr r2, [r2, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r1, [r0]
+	ands r3, r1
+	strb r3, [r0]
+	ldr r2, [r7]
+	mov r1, r8
+	ldrb r0, [r1]
+	adds r1, r6, 0
+	eors r1, r0
+	ldr r2, [r2, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r1, [r0, 0x1]
+	ands r4, r1
+	strb r4, [r0, 0x1]
+	ldr r4, _0803A970 @ =0x000027f9
+	adds r0, r4, 0
+	bl sub_800874C
+	adds r0, r4, 0
+	bl sub_8008A30
+_0803A936:
+	ldr r0, _0803A974 @ =gUnknown_2022B4C
+	ldr r0, [r0]
+	movs r1, 0x40
+	ands r0, r1
+	cmp r0, 0
+	beq _0803A97C
+	mov r1, r8
+	ldrb r0, [r1]
+	bl sub_80751D8
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _0803A988
+	ldr r0, _0803A978 @ =gMPlay_BGM
+	bl m4aMPlayContinue
+	b _0803A988
+	.align 2, 0
+_0803A95C: .4byte gUnknown_202063C
+_0803A960: .4byte gUnknown_3004FF0
+_0803A964: .4byte gUnknown_2023BC4
+_0803A968: .4byte nullsub_8
+_0803A96C: .4byte gUnknown_2024018
+_0803A970: .4byte 0x000027f9
+_0803A974: .4byte gUnknown_2022B4C
+_0803A978: .4byte gMPlay_BGM
+_0803A97C:
+	ldr r0, _0803A9B4 @ =gMPlay_BGM
+	ldr r1, _0803A9B8 @ =0x0000ffff
+	movs r2, 0x80
+	lsls r2, 1
+	bl m4aMPlayVolumeControl
+_0803A988:
+	ldr r0, _0803A9BC @ =gUnknown_2024018
+	ldr r0, [r0]
+	ldr r3, _0803A9C0 @ =gUnknown_2023BC4
+	ldrb r1, [r3]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	movs r1, 0x3
+	strb r1, [r0, 0x9]
+	ldr r1, _0803A9C4 @ =gUnknown_3004FE0
+	ldrb r0, [r3]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803A9C8 @ =sub_803A79C
+	str r1, [r0]
+_0803A9AA:
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803A9B4: .4byte gMPlay_BGM
+_0803A9B8: .4byte 0x0000ffff
+_0803A9BC: .4byte gUnknown_2024018
+_0803A9C0: .4byte gUnknown_2023BC4
+_0803A9C4: .4byte gUnknown_3004FE0
+_0803A9C8: .4byte sub_803A79C
+	thumb_func_end sub_803A7E4
+
+	thumb_func_start sub_803A9CC
+sub_803A9CC: @ 803A9CC
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	ldr r0, _0803ABEC @ =gUnknown_2024018
+	mov r8, r0
+	ldr r0, [r0]
+	ldr r7, _0803ABF0 @ =gUnknown_2023BC4
+	ldrb r2, [r7]
+	ldr r3, [r0, 0x4]
+	lsls r5, r2, 1
+	adds r0, r5, r2
+	lsls r0, 2
+	adds r0, r3
+	ldrb r4, [r0]
+	movs r6, 0x8
+	adds r0, r6, 0
+	ands r0, r4
+	cmp r0, 0
+	beq _0803A9F8
+	b _0803ABDC
+_0803A9F8:
+	movs r1, 0x2
+	mov r9, r1
+	adds r1, r2, 0
+	mov r0, r9
+	eors r1, r0
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r3
+	ldrb r1, [r0]
+	adds r0, r6, 0
+	ands r0, r1
+	lsls r0, 24
+	lsrs r0, 24
+	mov r10, r0
+	cmp r0, 0
+	beq _0803AA1C
+	b _0803ABDC
+_0803AA1C:
+	movs r6, 0x80
+	adds r0, r6, 0
+	ands r0, r4
+	cmp r0, 0
+	bne _0803AA3A
+	ldr r0, _0803ABF4 @ =gUnknown_2023BCE
+	adds r0, r5, r0
+	ldrh r1, [r0]
+	movs r0, 0x64
+	muls r1, r0
+	ldr r0, _0803ABF8 @ =gUnknown_202402C
+	adds r1, r0
+	adds r0, r2, 0
+	bl sub_80F1720
+_0803AA3A:
+	mov r2, r8
+	ldr r1, [r2]
+	ldrb r0, [r7]
+	mov r2, r9
+	eors r2, r0
+	ldr r1, [r1, 0x4]
+	lsls r3, r2, 1
+	adds r0, r3, r2
+	lsls r0, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	adds r0, r6, 0
+	ands r0, r1
+	cmp r0, 0
+	bne _0803AA6C
+	ldr r0, _0803ABF4 @ =gUnknown_2023BCE
+	adds r0, r3, r0
+	ldrh r1, [r0]
+	movs r0, 0x64
+	muls r1, r0
+	ldr r0, _0803ABF8 @ =gUnknown_202402C
+	adds r1, r0
+	adds r0, r2, 0
+	bl sub_80F1720
+_0803AA6C:
+	ldr r0, _0803ABFC @ =gUnknown_2022B4C
+	ldr r0, [r0]
+	movs r1, 0x40
+	ands r0, r1
+	cmp r0, 0
+	beq _0803AABA
+	ldrb r0, [r7]
+	bl sub_80751D8
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x3
+	bne _0803AABA
+	mov r1, r8
+	ldr r0, [r1]
+	ldrb r2, [r7]
+	ldr r0, [r0, 0x4]
+	lsls r1, r2, 1
+	adds r1, r2
+	lsls r1, 2
+	adds r1, r0
+	ldrb r0, [r1, 0x9]
+	adds r0, 0x1
+	strb r0, [r1, 0x9]
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _0803AAA6
+	b _0803ABDC
+_0803AAA6:
+	mov r2, r8
+	ldr r0, [r2]
+	ldrb r1, [r7]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	mov r1, r10
+	strb r1, [r0, 0x9]
+_0803AABA:
+	bl sub_8075290
+	lsls r0, 24
+	cmp r0, 0
+	beq _0803AB50
+	ldr r0, _0803ABFC @ =gUnknown_2022B4C
+	ldr r0, [r0]
+	movs r1, 0x40
+	ands r0, r1
+	cmp r0, 0
+	bne _0803AB50
+	ldr r1, _0803AC00 @ =gUnknown_3004FFC
+	ldr r5, _0803ABF0 @ =gUnknown_2023BC4
+	ldrb r0, [r5]
+	movs r4, 0x2
+	eors r0, r4
+	adds r0, r1
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	ldr r1, _0803AC04 @ =gUnknown_202063C
+	adds r0, r1
+	bl sub_8007280
+	ldr r2, _0803AC08 @ =gUnknown_3004FF0
+	mov r8, r2
+	ldrb r0, [r5]
+	adds r1, r4, 0
+	eors r1, r0
+	adds r0, r1, r2
+	ldrb r0, [r0]
+	ldr r2, _0803ABF4 @ =gUnknown_2023BCE
+	mov r10, r2
+	lsls r1, 1
+	add r1, r10
+	ldrh r1, [r1]
+	movs r2, 0x64
+	mov r9, r2
+	mov r2, r9
+	muls r2, r1
+	adds r1, r2, 0
+	ldr r6, _0803ABF8 @ =gUnknown_202402C
+	adds r1, r6
+	movs r2, 0
+	bl sub_8049D98
+	ldrb r0, [r5]
+	eors r0, r4
+	bl sub_804BD94
+	ldrb r0, [r5]
+	eors r0, r4
+	add r0, r8
+	ldrb r0, [r0]
+	bl sub_80481D4
+	ldrb r0, [r5]
+	eors r4, r0
+	lsls r0, r4, 1
+	add r0, r10
+	ldrh r0, [r0]
+	mov r1, r9
+	muls r1, r0
+	adds r0, r1, 0
+	adds r0, r6
+	movs r1, 0xB
+	bl sub_803FBE8
+	adds r1, r0, 0
+	lsls r1, 16
+	lsrs r1, 16
+	adds r0, r4, 0
+	bl sub_8035708
+_0803AB50:
+	ldr r1, _0803AC00 @ =gUnknown_3004FFC
+	ldr r5, _0803ABF0 @ =gUnknown_2023BC4
+	ldrb r0, [r5]
+	adds r0, r1
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	ldr r1, _0803AC04 @ =gUnknown_202063C
+	adds r0, r1
+	bl sub_8007280
+	ldr r4, _0803AC08 @ =gUnknown_3004FF0
+	ldrb r1, [r5]
+	adds r0, r1, r4
+	ldrb r0, [r0]
+	ldr r2, _0803ABF4 @ =gUnknown_2023BCE
+	mov r9, r2
+	lsls r1, 1
+	add r1, r9
+	ldrh r1, [r1]
+	movs r2, 0x64
+	mov r8, r2
+	mov r2, r8
+	muls r2, r1
+	adds r1, r2, 0
+	ldr r6, _0803ABF8 @ =gUnknown_202402C
+	adds r1, r6
+	movs r2, 0
+	bl sub_8049D98
+	ldrb r0, [r5]
+	bl sub_804BD94
+	ldrb r0, [r5]
+	adds r0, r4
+	ldrb r0, [r0]
+	bl sub_80481D4
+	ldrb r4, [r5]
+	lsls r0, r4, 1
+	add r0, r9
+	ldrh r0, [r0]
+	mov r1, r8
+	muls r1, r0
+	adds r0, r1, 0
+	adds r0, r6
+	movs r1, 0xB
+	bl sub_803FBE8
+	adds r1, r0, 0
+	lsls r1, 16
+	lsrs r1, 16
+	adds r0, r4, 0
+	bl sub_8035708
+	ldr r0, _0803ABEC @ =gUnknown_2024018
+	ldr r0, [r0]
+	ldr r2, [r0, 0x8]
+	ldrb r1, [r2, 0x9]
+	movs r0, 0x2
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r2, 0x9]
+	ldr r1, _0803AC0C @ =gUnknown_3004FE0
+	ldrb r0, [r5]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803AC10 @ =sub_803A7E4
+	str r1, [r0]
+_0803ABDC:
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803ABEC: .4byte gUnknown_2024018
+_0803ABF0: .4byte gUnknown_2023BC4
+_0803ABF4: .4byte gUnknown_2023BCE
+_0803ABF8: .4byte gUnknown_202402C
+_0803ABFC: .4byte gUnknown_2022B4C
+_0803AC00: .4byte gUnknown_3004FFC
+_0803AC04: .4byte gUnknown_202063C
+_0803AC08: .4byte gUnknown_3004FF0
+_0803AC0C: .4byte gUnknown_3004FE0
+_0803AC10: .4byte sub_803A7E4
+	thumb_func_end sub_803A9CC
+
+	thumb_func_start sub_803AC14
+sub_803AC14: @ 803AC14
+	push {r4-r7,lr}
+	ldr r2, _0803AC70 @ =gUnknown_202063C
+	ldr r0, _0803AC74 @ =gUnknown_2023D44
+	ldr r7, _0803AC78 @ =gUnknown_2023BC4
+	ldrb r3, [r7]
+	adds r0, r3, r0
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r1, r0, r2
+	adds r0, r1, 0
+	adds r0, 0x3F
+	ldrb r0, [r0]
+	lsls r0, 27
+	lsrs r2, r0, 31
+	cmp r2, 0x1
+	bne _0803ACC0
+	movs r4, 0x24
+	ldrsh r0, [r1, r4]
+	cmp r0, 0
+	bne _0803ACC0
+	ldr r6, _0803AC7C @ =gUnknown_2024018
+	ldr r0, [r6]
+	ldr r1, [r0, 0x4]
+	lsls r4, r3, 1
+	adds r0, r4, r3
+	lsls r0, 2
+	adds r1, r0, r1
+	ldrb r5, [r1]
+	movs r0, 0x80
+	ands r0, r5
+	cmp r0, 0
+	bne _0803AC88
+	ldr r0, _0803AC80 @ =gUnknown_2023BCE
+	adds r0, r4, r0
+	ldrh r1, [r0]
+	movs r0, 0x64
+	muls r1, r0
+	ldr r0, _0803AC84 @ =gUnknown_202402C
+	adds r1, r0
+	adds r0, r3, 0
+	bl sub_80F1720
+	b _0803ACC0
+	.align 2, 0
+_0803AC70: .4byte gUnknown_202063C
+_0803AC74: .4byte gUnknown_2023D44
+_0803AC78: .4byte gUnknown_2023BC4
+_0803AC7C: .4byte gUnknown_2024018
+_0803AC80: .4byte gUnknown_2023BCE
+_0803AC84: .4byte gUnknown_202402C
+_0803AC88:
+	ldrb r0, [r1, 0x1]
+	ands r2, r0
+	cmp r2, 0
+	beq _0803ACC0
+	movs r0, 0x7F
+	ands r0, r5
+	strb r0, [r1]
+	ldr r0, [r6]
+	ldrb r2, [r7]
+	ldr r0, [r0, 0x4]
+	lsls r1, r2, 1
+	adds r1, r2
+	lsls r1, 2
+	adds r1, r0
+	ldrb r2, [r1, 0x1]
+	movs r0, 0x2
+	negs r0, r0
+	ands r0, r2
+	strb r0, [r1, 0x1]
+	ldr r4, _0803ACC8 @ =0x000027f9
+	adds r0, r4, 0
+	bl sub_800874C
+	adds r0, r4, 0
+	bl sub_8008A30
+	bl sub_803B124
+_0803ACC0:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803ACC8: .4byte 0x000027f9
+	thumb_func_end sub_803AC14
+
+	thumb_func_start sub_803ACCC
+sub_803ACCC: @ 803ACCC
+	push {r4-r6,lr}
+	ldr r6, _0803AD0C @ =gUnknown_2023BC4
+	ldrb r0, [r6]
+	ldr r5, _0803AD10 @ =gUnknown_3004FF0
+	adds r1, r0, r5
+	ldrb r1, [r1]
+	movs r2, 0
+	movs r3, 0
+	bl sub_8049FD8
+	adds r4, r0, 0
+	lsls r4, 16
+	lsrs r4, 16
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r0, [r0]
+	bl sub_80481D4
+	lsls r4, 16
+	asrs r1, r4, 16
+	movs r0, 0x1
+	negs r0, r0
+	cmp r1, r0
+	beq _0803AD14
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r0, [r0]
+	movs r2, 0
+	bl sub_8048440
+	b _0803AD18
+	.align 2, 0
+_0803AD0C: .4byte gUnknown_2023BC4
+_0803AD10: .4byte gUnknown_3004FF0
+_0803AD14:
+	bl sub_803B124
+_0803AD18:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803ACCC
+
+	thumb_func_start sub_803AD20
+sub_803AD20: @ 803AD20
+	push {lr}
+	ldr r2, _0803AD54 @ =gUnknown_202063C
+	ldr r0, _0803AD58 @ =gUnknown_2023D44
+	ldr r1, _0803AD5C @ =gUnknown_2023BC4
+	ldrb r3, [r1]
+	adds r0, r3, r0
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	adds r0, 0x3E
+	ldrb r0, [r0]
+	lsls r0, 31
+	cmp r0, 0
+	bne _0803AD4E
+	ldr r0, _0803AD60 @ =gUnknown_3004FF0
+	adds r0, r3, r0
+	ldrb r0, [r0]
+	bl sub_8048188
+	bl sub_803B124
+_0803AD4E:
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803AD54: .4byte gUnknown_202063C
+_0803AD58: .4byte gUnknown_2023D44
+_0803AD5C: .4byte gUnknown_2023BC4
+_0803AD60: .4byte gUnknown_3004FF0
+	thumb_func_end sub_803AD20
+
+	thumb_func_start sub_803AD64
+sub_803AD64: @ 803AD64
+	push {r4-r6,lr}
+	ldr r0, _0803ADC4 @ =gUnknown_2024018
+	ldr r0, [r0]
+	ldr r6, _0803ADC8 @ =gUnknown_2023BC4
+	ldrb r2, [r6]
+	ldr r1, [r0, 0x4]
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	movs r0, 0x40
+	ands r0, r1
+	cmp r0, 0
+	bne _0803ADBE
+	ldr r5, _0803ADCC @ =gUnknown_2023D44
+	adds r0, r2, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	ldr r4, _0803ADD0 @ =gUnknown_202063C
+	adds r0, r4
+	bl sub_80077D8
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	bl sub_8007280
+	ldrb r0, [r6]
+	bl sub_8035794
+	ldr r1, _0803ADD4 @ =gUnknown_3004FF0
+	ldrb r0, [r6]
+	adds r0, r1
+	ldrb r0, [r0]
+	bl sub_8048188
+	bl sub_803B124
+_0803ADBE:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803ADC4: .4byte gUnknown_2024018
+_0803ADC8: .4byte gUnknown_2023BC4
+_0803ADCC: .4byte gUnknown_2023D44
+_0803ADD0: .4byte gUnknown_202063C
+_0803ADD4: .4byte gUnknown_3004FF0
+	thumb_func_end sub_803AD64
+
+	thumb_func_start sub_803ADD8
+sub_803ADD8: @ 803ADD8
+	push {lr}
+	movs r0, 0
+	bl sub_8002E64
+	lsls r0, 16
+	cmp r0, 0
+	bne _0803ADEA
+	bl sub_803B124
+_0803ADEA:
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803ADD8
+
+	thumb_func_start sub_803ADF0
+sub_803ADF0: @ 803ADF0
+	push {r4,lr}
+	ldr r1, _0803AE2C @ =gUnknown_2023D44
+	ldr r0, _0803AE30 @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	adds r0, r1
+	ldrb r1, [r0]
+	ldr r2, _0803AE34 @ =gUnknown_202063C
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r4, r0, r2
+	movs r1, 0x30
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x20
+	bne _0803AE3C
+	movs r3, 0
+	movs r0, 0
+	strh r0, [r4, 0x30]
+	adds r2, r4, 0
+	adds r2, 0x3E
+	ldrb r1, [r2]
+	subs r0, 0x5
+	ands r0, r1
+	strb r0, [r2]
+	ldr r0, _0803AE38 @ =gUnknown_2024005
+	strb r3, [r0]
+	bl sub_803B124
+	b _0803AE66
+	.align 2, 0
+_0803AE2C: .4byte gUnknown_2023D44
+_0803AE30: .4byte gUnknown_2023BC4
+_0803AE34: .4byte gUnknown_202063C
+_0803AE38: .4byte gUnknown_2024005
+_0803AE3C:
+	ldrh r0, [r4, 0x30]
+	movs r1, 0x3
+	ands r0, r1
+	cmp r0, 0
+	bne _0803AE60
+	adds r3, r4, 0
+	adds r3, 0x3E
+	ldrb r2, [r3]
+	lsls r0, r2, 29
+	lsrs r0, 31
+	movs r1, 0x1
+	eors r1, r0
+	lsls r1, 2
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r3]
+_0803AE60:
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x1
+	strh r0, [r4, 0x30]
+_0803AE66:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803ADF0
+
+	thumb_func_start sub_803AE6C
+sub_803AE6C: @ 803AE6C
+	push {r4,lr}
+	ldr r2, _0803AEC0 @ =gUnknown_202063C
+	ldr r0, _0803AEC4 @ =gUnknown_3004FF0
+	ldr r4, _0803AEC8 @ =gUnknown_2023BC4
+	ldrb r3, [r4]
+	adds r0, r3, r0
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r2, 0x1C
+	adds r0, r2
+	ldr r1, [r0]
+	ldr r0, _0803AECC @ =nullsub_8
+	cmp r1, r0
+	bne _0803AEB8
+	ldr r0, _0803AED0 @ =gUnknown_2024018
+	ldr r0, [r0]
+	ldr r1, [r0]
+	lsls r0, r3, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	movs r0, 0x4
+	ands r0, r1
+	cmp r0, 0
+	beq _0803AEAC
+	adds r0, r3, 0
+	adds r1, r3, 0
+	adds r2, r3, 0
+	movs r3, 0x6
+	bl sub_80341D8
+_0803AEAC:
+	ldr r0, _0803AED4 @ =gUnknown_3004FE0
+	ldrb r1, [r4]
+	lsls r1, 2
+	adds r1, r0
+	ldr r0, _0803AED8 @ =sub_803AEDC
+	str r0, [r1]
+_0803AEB8:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803AEC0: .4byte gUnknown_202063C
+_0803AEC4: .4byte gUnknown_3004FF0
+_0803AEC8: .4byte gUnknown_2023BC4
+_0803AECC: .4byte nullsub_8
+_0803AED0: .4byte gUnknown_2024018
+_0803AED4: .4byte gUnknown_3004FE0
+_0803AED8: .4byte sub_803AEDC
+	thumb_func_end sub_803AE6C
+
+	thumb_func_start sub_803AEDC
+sub_803AEDC: @ 803AEDC
+	push {lr}
+	ldr r0, _0803AF18 @ =gUnknown_2024018
+	ldr r2, [r0]
+	ldr r0, _0803AF1C @ =gUnknown_2023BC4
+	ldrb r1, [r0]
+	ldr r2, [r2, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r1, [r0]
+	movs r0, 0x40
+	ands r0, r1
+	cmp r0, 0
+	bne _0803AF14
+	bl sub_80721F0
+	lsls r0, 24
+	cmp r0, 0
+	bne _0803AF14
+	ldr r0, _0803AF20 @ =gMPlay_BGM
+	ldr r1, _0803AF24 @ =0x0000ffff
+	movs r2, 0x80
+	lsls r2, 1
+	bl m4aMPlayVolumeControl
+	bl sub_803B124
+_0803AF14:
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803AF18: .4byte gUnknown_2024018
+_0803AF1C: .4byte gUnknown_2023BC4
+_0803AF20: .4byte gMPlay_BGM
+_0803AF24: .4byte 0x0000ffff
+	thumb_func_end sub_803AEDC
+
+	thumb_func_start sub_803AF28
+sub_803AF28: @ 803AF28
+	push {r4,r5,lr}
+	ldr r3, _0803AFD4 @ =gUnknown_2024018
+	ldr r0, [r3]
+	ldr r5, _0803AFD8 @ =gUnknown_2023BC4
+	ldrb r1, [r5]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r2, r0, r2
+	ldrb r1, [r2, 0x1]
+	movs r0, 0x1
+	ands r0, r1
+	cmp r0, 0
+	beq _0803AFCC
+	ldrb r1, [r2]
+	movs r0, 0x7F
+	ands r0, r1
+	strb r0, [r2]
+	ldr r0, [r3]
+	ldrb r2, [r5]
+	ldr r0, [r0, 0x4]
+	lsls r1, r2, 1
+	adds r1, r2
+	lsls r1, 2
+	adds r1, r0
+	ldrb r2, [r1, 0x1]
+	movs r0, 0x2
+	negs r0, r0
+	ands r0, r2
+	strb r0, [r1, 0x1]
+	ldr r4, _0803AFDC @ =0x000027f9
+	adds r0, r4, 0
+	bl sub_800874C
+	adds r0, r4, 0
+	bl sub_8008A30
+	ldr r1, _0803AFE0 @ =gUnknown_2023D44
+	ldrb r0, [r5]
+	adds r0, r1
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	ldr r1, _0803AFE4 @ =gUnknown_202063C
+	adds r0, r1
+	movs r1, 0
+	bl sub_800838C
+	ldr r4, _0803AFE8 @ =gUnknown_3004FF0
+	ldrb r1, [r5]
+	adds r0, r1, r4
+	ldrb r0, [r0]
+	ldr r2, _0803AFEC @ =gUnknown_2023BCE
+	lsls r1, 1
+	adds r1, r2
+	ldrh r2, [r1]
+	movs r1, 0x64
+	muls r1, r2
+	ldr r2, _0803AFF0 @ =gUnknown_202402C
+	adds r1, r2
+	movs r2, 0
+	bl sub_8049D98
+	ldrb r0, [r5]
+	bl sub_804BD94
+	ldrb r0, [r5]
+	adds r0, r4
+	ldrb r0, [r0]
+	bl sub_80481D4
+	ldrb r0, [r5]
+	bl sub_8034BB4
+	ldr r1, _0803AFF4 @ =gUnknown_3004FE0
+	ldrb r0, [r5]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803AFF8 @ =sub_803AE6C
+	str r1, [r0]
+_0803AFCC:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803AFD4: .4byte gUnknown_2024018
+_0803AFD8: .4byte gUnknown_2023BC4
+_0803AFDC: .4byte 0x000027f9
+_0803AFE0: .4byte gUnknown_2023D44
+_0803AFE4: .4byte gUnknown_202063C
+_0803AFE8: .4byte gUnknown_3004FF0
+_0803AFEC: .4byte gUnknown_2023BCE
+_0803AFF0: .4byte gUnknown_202402C
+_0803AFF4: .4byte gUnknown_3004FE0
+_0803AFF8: .4byte sub_803AE6C
+	thumb_func_end sub_803AF28
+
+	thumb_func_start sub_803AFFC
+sub_803AFFC: @ 803AFFC
+	push {r4-r6,lr}
+	ldr r6, _0803B0A0 @ =gUnknown_2024018
+	ldr r0, [r6]
+	ldr r5, _0803B0A4 @ =gUnknown_2023BC4
+	ldrb r2, [r5]
+	ldr r1, [r0, 0x4]
+	lsls r3, r2, 1
+	adds r0, r3, r2
+	lsls r0, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	movs r0, 0x88
+	ands r0, r1
+	cmp r0, 0
+	bne _0803B02E
+	ldr r0, _0803B0A8 @ =gUnknown_2023BCE
+	adds r0, r3, r0
+	ldrh r1, [r0]
+	movs r0, 0x64
+	muls r1, r0
+	ldr r0, _0803B0AC @ =gUnknown_202402C
+	adds r1, r0
+	adds r0, r2, 0
+	bl sub_80F1720
+_0803B02E:
+	ldr r4, _0803B0B0 @ =gUnknown_202063C
+	ldr r0, _0803B0B4 @ =gUnknown_3004FFC
+	ldrb r2, [r5]
+	adds r0, r2, r0
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r3, r0, 2
+	adds r0, r4, 0
+	adds r0, 0x1C
+	adds r0, r3, r0
+	ldr r1, [r0]
+	ldr r0, _0803B0B8 @ =nullsub_8
+	cmp r1, r0
+	bne _0803B098
+	ldr r0, [r6]
+	ldr r1, [r0, 0x4]
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	movs r0, 0x8
+	ands r0, r1
+	cmp r0, 0
+	bne _0803B098
+	adds r0, r3, r4
+	bl sub_8007280
+	ldrb r4, [r5]
+	ldr r1, _0803B0A8 @ =gUnknown_2023BCE
+	lsls r0, r4, 1
+	adds r0, r1
+	ldrh r1, [r0]
+	movs r0, 0x64
+	muls r0, r1
+	ldr r1, _0803B0AC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0xB
+	bl sub_803FBE8
+	adds r1, r0, 0
+	lsls r1, 16
+	lsrs r1, 16
+	adds r0, r4, 0
+	bl sub_8035708
+	ldr r1, _0803B0BC @ =gUnknown_3004FE0
+	ldrb r0, [r5]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803B0C0 @ =sub_803AF28
+	str r1, [r0]
+_0803B098:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803B0A0: .4byte gUnknown_2024018
+_0803B0A4: .4byte gUnknown_2023BC4
+_0803B0A8: .4byte gUnknown_2023BCE
+_0803B0AC: .4byte gUnknown_202402C
+_0803B0B0: .4byte gUnknown_202063C
+_0803B0B4: .4byte gUnknown_3004FFC
+_0803B0B8: .4byte nullsub_8
+_0803B0BC: .4byte gUnknown_3004FE0
+_0803B0C0: .4byte sub_803AF28
+	thumb_func_end sub_803AFFC
+
+	thumb_func_start sub_803B0C4
+sub_803B0C4: @ 803B0C4
+	push {lr}
+	ldr r0, _0803B0EC @ =gUnknown_2024018
+	ldr r2, [r0]
+	ldr r0, _0803B0F0 @ =gUnknown_2023BC4
+	ldrb r1, [r0]
+	ldr r2, [r2, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r1, [r0]
+	movs r0, 0x10
+	ands r0, r1
+	cmp r0, 0
+	bne _0803B0E6
+	bl sub_803B124
+_0803B0E6:
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803B0EC: .4byte gUnknown_2024018
+_0803B0F0: .4byte gUnknown_2023BC4
+	thumb_func_end sub_803B0C4
+
+	thumb_func_start sub_803B0F4
+sub_803B0F4: @ 803B0F4
+	push {lr}
+	ldr r0, _0803B11C @ =gUnknown_2024018
+	ldr r2, [r0]
+	ldr r0, _0803B120 @ =gUnknown_2023BC4
+	ldrb r1, [r0]
+	ldr r2, [r2, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r1, [r0]
+	movs r0, 0x20
+	ands r0, r1
+	cmp r0, 0
+	bne _0803B116
+	bl sub_803B124
+_0803B116:
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803B11C: .4byte gUnknown_2024018
+_0803B120: .4byte gUnknown_2023BC4
+	thumb_func_end sub_803B0F4
+
+	thumb_func_start sub_803B124
+sub_803B124: @ 803B124
+	push {r4,lr}
+	sub sp, 0x4
+	ldr r1, _0803B164 @ =gUnknown_3004FE0
+	ldr r4, _0803B168 @ =gUnknown_2023BC4
+	ldrb r0, [r4]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803B16C @ =sub_803A684
+	str r1, [r0]
+	ldr r0, _0803B170 @ =gUnknown_2022B4C
+	ldr r0, [r0]
+	movs r1, 0x2
+	ands r0, r1
+	cmp r0, 0
+	beq _0803B178
+	bl sub_800A404
+	mov r1, sp
+	strb r0, [r1]
+	movs r0, 0x2
+	movs r1, 0x4
+	mov r2, sp
+	bl sub_800D9EC
+	ldr r1, _0803B174 @ =gUnknown_2022BC4
+	ldrb r0, [r4]
+	lsls r0, 9
+	adds r0, r1
+	movs r1, 0x38
+	strb r1, [r0]
+	b _0803B18A
+	.align 2, 0
+_0803B164: .4byte gUnknown_3004FE0
+_0803B168: .4byte gUnknown_2023BC4
+_0803B16C: .4byte sub_803A684
+_0803B170: .4byte gUnknown_2022B4C
+_0803B174: .4byte gUnknown_2022BC4
+_0803B178:
+	ldr r2, _0803B194 @ =gUnknown_2023BC8
+	ldr r1, _0803B198 @ =gUnknown_825E45C
+	ldrb r0, [r4]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, [r0]
+	ldr r0, [r2]
+	bics r0, r1
+	str r0, [r2]
+_0803B18A:
+	add sp, 0x4
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803B194: .4byte gUnknown_2023BC8
+_0803B198: .4byte gUnknown_825E45C
+	thumb_func_end sub_803B124
+
+	thumb_func_start sub_803B19C
+sub_803B19C: @ 803B19C
+	push {r4-r6,lr}
+	sub sp, 0x100
+	movs r6, 0
+	ldr r1, _0803B1C8 @ =gUnknown_2022BC4
+	ldr r0, _0803B1CC @ =gUnknown_2023BC4
+	ldrb r2, [r0]
+	lsls r0, r2, 9
+	adds r1, 0x2
+	adds r1, r0, r1
+	ldrb r0, [r1]
+	cmp r0, 0
+	bne _0803B1D4
+	ldr r0, _0803B1D0 @ =gUnknown_2023BCE
+	lsls r1, r2, 1
+	adds r1, r0
+	ldrb r0, [r1]
+	mov r1, sp
+	bl sub_803B210
+	adds r6, r0, 0
+	b _0803B1F6
+	.align 2, 0
+_0803B1C8: .4byte gUnknown_2022BC4
+_0803B1CC: .4byte gUnknown_2023BC4
+_0803B1D0: .4byte gUnknown_2023BCE
+_0803B1D4:
+	ldrb r4, [r1]
+	movs r5, 0
+_0803B1D8:
+	movs r0, 0x1
+	ands r0, r4
+	cmp r0, 0
+	beq _0803B1EE
+	lsls r0, r5, 24
+	lsrs r0, 24
+	mov r2, sp
+	adds r1, r2, r6
+	bl sub_803B210
+	adds r6, r0
+_0803B1EE:
+	lsrs r4, 1
+	adds r5, 0x1
+	cmp r5, 0x5
+	ble _0803B1D8
+_0803B1F6:
+	lsls r1, r6, 16
+	lsrs r1, 16
+	movs r0, 0x1
+	mov r2, sp
+	bl sub_800E708
+	bl sub_803B124
+	add sp, 0x100
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803B19C
+
+	thumb_func_start sub_803B210
+sub_803B210: @ 803B210
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x90
+	adds r7, r1, 0
+	lsls r0, 24
+	lsrs r5, r0, 24
+	movs r6, 0
+	ldr r2, _0803B244 @ =gUnknown_2022BC4
+	ldr r3, _0803B248 @ =gUnknown_2023BC4
+	ldrb r0, [r3]
+	lsls r0, 9
+	adds r1, r2, 0x1
+	adds r0, r1
+	ldrb r0, [r0]
+	cmp r0, 0x3B
+	bls _0803B23A
+	bl _0803B9A6
+_0803B23A:
+	lsls r0, 2
+	ldr r1, _0803B24C @ =_0803B250
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.align 2, 0
+_0803B244: .4byte gUnknown_2022BC4
+_0803B248: .4byte gUnknown_2023BC4
+_0803B24C: .4byte _0803B250
+	.align 2, 0
+_0803B250:
+	.4byte _0803B340
+	.4byte _0803B564
+	.4byte _0803B574
+	.4byte _0803B584
+	.4byte _0803B5EC
+	.4byte _0803B5EC
+	.4byte _0803B5EC
+	.4byte _0803B5EC
+	.4byte _0803B608
+	.4byte _0803B644
+	.4byte _0803B644
+	.4byte _0803B644
+	.4byte _0803B644
+	.4byte _0803B9A6
+	.4byte _0803B9A6
+	.4byte _0803B9A6
+	.4byte _0803B9A6
+	.4byte _0803B660
+	.4byte _0803B670
+	.4byte _0803B6A0
+	.4byte _0803B6B0
+	.4byte _0803B6C0
+	.4byte _0803B6D0
+	.4byte _0803B6E0
+	.4byte _0803B6F0
+	.4byte _0803B700
+	.4byte _0803B710
+	.4byte _0803B720
+	.4byte _0803B730
+	.4byte _0803B740
+	.4byte _0803B750
+	.4byte _0803B760
+	.4byte _0803B7B0
+	.4byte _0803B7C0
+	.4byte _0803B7D0
+	.4byte _0803B7E0
+	.4byte _0803B7F0
+	.4byte _0803B800
+	.4byte _0803B810
+	.4byte _0803B820
+	.4byte _0803B830
+	.4byte _0803B864
+	.4byte _0803B874
+	.4byte _0803B884
+	.4byte _0803B894
+	.4byte _0803B8A4
+	.4byte _0803B8B4
+	.4byte _0803B8C4
+	.4byte _0803B8D4
+	.4byte _0803B8F4
+	.4byte _0803B904
+	.4byte _0803B914
+	.4byte _0803B924
+	.4byte _0803B934
+	.4byte _0803B944
+	.4byte _0803B954
+	.4byte _0803B964
+	.4byte _0803B974
+	.4byte _0803B984
+	.4byte _0803B994
+_0803B340:
+	movs r0, 0x64
+	adds r4, r5, 0
+	muls r4, r0
+	ldr r0, _0803B554 @ =gUnknown_202402C
+	adds r4, r0
+	adds r0, r4, 0
+	movs r1, 0xB
+	bl sub_803FBE8
+	mov r1, sp
+	strh r0, [r1]
+	adds r0, r4, 0
+	movs r1, 0xC
+	bl sub_803FBE8
+	mov r1, sp
+	strh r0, [r1, 0x2E]
+	movs r6, 0
+	add r0, sp, 0x24
+	mov r9, r0
+	movs r1, 0x3B
+	add r1, sp
+	mov r10, r1
+	mov r2, sp
+	adds r2, 0x2B
+	str r2, [sp, 0x80]
+	mov r0, sp
+	adds r0, 0x2A
+	str r0, [sp, 0x7C]
+	mov r1, sp
+	adds r1, 0x68
+	str r1, [sp, 0x8C]
+	adds r2, 0x5
+	str r2, [sp, 0x84]
+	adds r0, 0x12
+	str r0, [sp, 0x88]
+	mov r8, r4
+	add r4, sp, 0xC
+_0803B38C:
+	adds r1, r6, 0
+	adds r1, 0xD
+	mov r0, r8
+	bl sub_803FBE8
+	strh r0, [r4]
+	adds r1, r6, 0
+	adds r1, 0x11
+	mov r0, r8
+	bl sub_803FBE8
+	mov r2, r9
+	adds r1, r2, r6
+	strb r0, [r1]
+	adds r4, 0x2
+	adds r6, 0x1
+	cmp r6, 0x3
+	ble _0803B38C
+	movs r0, 0x64
+	adds r4, r5, 0
+	muls r4, r0
+	ldr r0, _0803B554 @ =gUnknown_202402C
+	adds r4, r0
+	adds r0, r4, 0
+	movs r1, 0x15
+	bl sub_803FBE8
+	mov r1, r10
+	strb r0, [r1]
+	adds r0, r4, 0
+	movs r1, 0x20
+	bl sub_803FBE8
+	ldr r2, [sp, 0x80]
+	strb r0, [r2]
+	adds r0, r4, 0
+	movs r1, 0x19
+	bl sub_803FBE8
+	str r0, [sp, 0x44]
+	adds r0, r4, 0
+	movs r1, 0x27
+	bl sub_803FBE8
+	mov r3, sp
+	movs r5, 0x1F
+	ands r0, r5
+	ldrb r2, [r3, 0x14]
+	movs r1, 0x20
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r3, 0x14]
+	adds r0, r4, 0
+	movs r1, 0x28
+	bl sub_803FBE8
+	mov r3, sp
+	movs r6, 0x1F
+	ands r0, r6
+	lsls r0, 5
+	ldrh r2, [r3, 0x14]
+	ldr r1, _0803B558 @ =0xfffffc1f
+	ands r1, r2
+	orrs r1, r0
+	strh r1, [r3, 0x14]
+	adds r0, r4, 0
+	movs r1, 0x29
+	bl sub_803FBE8
+	mov r3, sp
+	ands r0, r5
+	lsls r0, 2
+	ldrb r2, [r3, 0x15]
+	movs r1, 0x7D
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r3, 0x15]
+	adds r0, r4, 0
+	movs r1, 0x2A
+	bl sub_803FBE8
+	movs r1, 0x1F
+	ands r1, r0
+	lsls r1, 15
+	ldr r0, [sp, 0x14]
+	ldr r2, _0803B55C @ =0xfff07fff
+	ands r0, r2
+	orrs r0, r1
+	str r0, [sp, 0x14]
+	adds r0, r4, 0
+	movs r1, 0x2B
+	bl sub_803FBE8
+	mov r3, sp
+	ands r0, r6
+	lsls r0, 4
+	ldrh r2, [r3, 0x16]
+	ldr r1, _0803B560 @ =0xfffffe0f
+	ands r1, r2
+	orrs r1, r0
+	strh r1, [r3, 0x16]
+	adds r0, r4, 0
+	movs r1, 0x2C
+	bl sub_803FBE8
+	mov r3, sp
+	ands r0, r5
+	lsls r0, 1
+	ldrb r2, [r3, 0x17]
+	movs r1, 0x3F
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r3, 0x17]
+	adds r0, r4, 0
+	movs r1, 0
+	bl sub_803FBE8
+	str r0, [sp, 0x48]
+	adds r0, r4, 0
+	movs r1, 0x37
+	bl sub_803FBE8
+	str r0, [sp, 0x4C]
+	adds r0, r4, 0
+	movs r1, 0x38
+	bl sub_803FBE8
+	ldr r1, [sp, 0x7C]
+	strb r0, [r1]
+	adds r0, r4, 0
+	movs r1, 0x39
+	bl sub_803FBE8
+	mov r1, sp
+	strh r0, [r1, 0x28]
+	adds r0, r4, 0
+	movs r1, 0x3A
+	bl sub_803FBE8
+	mov r1, sp
+	strh r0, [r1, 0x2C]
+	adds r0, r4, 0
+	movs r1, 0x3B
+	bl sub_803FBE8
+	mov r1, sp
+	strh r0, [r1, 0x2]
+	adds r0, r4, 0
+	movs r1, 0x3C
+	bl sub_803FBE8
+	mov r1, sp
+	strh r0, [r1, 0x4]
+	adds r0, r4, 0
+	movs r1, 0x3D
+	bl sub_803FBE8
+	mov r1, sp
+	strh r0, [r1, 0x6]
+	adds r0, r4, 0
+	movs r1, 0x3E
+	bl sub_803FBE8
+	mov r1, sp
+	strh r0, [r1, 0x8]
+	adds r0, r4, 0
+	movs r1, 0x3F
+	bl sub_803FBE8
+	mov r1, sp
+	strh r0, [r1, 0xA]
+	adds r0, r4, 0
+	movs r1, 0x2D
+	bl sub_803FBE8
+	mov r3, sp
+	movs r1, 0x1
+	ands r0, r1
+	lsls r0, 6
+	ldrb r2, [r3, 0x17]
+	movs r1, 0x41
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r3, 0x17]
+	adds r0, r4, 0
+	movs r1, 0x2E
+	bl sub_803FBE8
+	mov r3, sp
+	lsls r0, 7
+	ldrb r2, [r3, 0x17]
+	movs r1, 0x7F
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r3, 0x17]
+	adds r0, r4, 0
+	movs r1, 0x1
+	bl sub_803FBE8
+	str r0, [sp, 0x54]
+	adds r0, r4, 0
+	movs r1, 0x2
+	ldr r2, [sp, 0x8C]
+	bl sub_803FBE8
+	ldr r0, [sp, 0x84]
+	ldr r1, [sp, 0x8C]
+	bl sub_8008CF4
+	adds r0, r4, 0
+	movs r1, 0x7
+	ldr r2, [sp, 0x88]
+	bl sub_803FBE8
+	mov r2, sp
+	movs r6, 0
+_0803B544:
+	adds r0, r7, r6
+	adds r1, r2, r6
+	ldrb r1, [r1]
+	strb r1, [r0]
+	adds r6, 0x1
+	cmp r6, 0x57
+	bls _0803B544
+	b _0803B9A6
+	.align 2, 0
+_0803B554: .4byte gUnknown_202402C
+_0803B558: .4byte 0xfffffc1f
+_0803B55C: .4byte 0xfff07fff
+_0803B560: .4byte 0xfffffe0f
+_0803B564:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B570 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0xB
+	b _0803B8DE
+	.align 2, 0
+_0803B570: .4byte gUnknown_202402C
+_0803B574:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B580 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0xC
+	b _0803B8DE
+	.align 2, 0
+_0803B580: .4byte gUnknown_202402C
+_0803B584:
+	movs r6, 0
+	add r2, sp, 0x58
+	mov r9, r2
+	add r0, sp, 0x60
+	mov r10, r0
+	movs r0, 0x64
+	adds r1, r5, 0
+	muls r1, r0
+	ldr r0, _0803B5E8 @ =gUnknown_202402C
+	adds r4, r1, r0
+	mov r8, r9
+_0803B59A:
+	adds r1, r6, 0
+	adds r1, 0xD
+	adds r0, r4, 0
+	bl sub_803FBE8
+	mov r1, r8
+	strh r0, [r1]
+	adds r1, r6, 0
+	adds r1, 0x11
+	adds r0, r4, 0
+	bl sub_803FBE8
+	mov r2, r10
+	adds r1, r2, r6
+	strb r0, [r1]
+	movs r0, 0x2
+	add r8, r0
+	adds r6, 0x1
+	cmp r6, 0x3
+	ble _0803B59A
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B5E8 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x15
+	bl sub_803FBE8
+	mov r1, r9
+	strb r0, [r1, 0xC]
+	mov r2, r9
+	movs r6, 0
+_0803B5D8:
+	adds r0, r7, r6
+	adds r1, r2, r6
+	ldrb r1, [r1]
+	strb r1, [r0]
+	adds r6, 0x1
+	cmp r6, 0xF
+	bls _0803B5D8
+	b _0803B9A6
+	.align 2, 0
+_0803B5E8: .4byte gUnknown_202402C
+_0803B5EC:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B604 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r1, [r3]
+	lsls r1, 9
+	adds r2, 0x1
+	adds r1, r2
+	ldrb r1, [r1]
+	adds r1, 0x9
+	b _0803B8DE
+	.align 2, 0
+_0803B604: .4byte gUnknown_202402C
+_0803B608:
+	movs r6, 0
+	movs r0, 0x64
+	adds r4, r5, 0
+	muls r4, r0
+	ldr r2, _0803B640 @ =gUnknown_202402C
+	mov r8, r2
+_0803B614:
+	adds r1, r6, 0
+	adds r1, 0x11
+	mov r2, r8
+	adds r0, r4, r2
+	bl sub_803FBE8
+	adds r1, r7, r6
+	strb r0, [r1]
+	adds r6, 0x1
+	cmp r6, 0x3
+	ble _0803B614
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B640 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x15
+	bl sub_803FBE8
+	adds r1, r7, r6
+	strb r0, [r1]
+	adds r6, 0x1
+	b _0803B9A6
+	.align 2, 0
+_0803B640: .4byte gUnknown_202402C
+_0803B644:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B65C @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r1, [r3]
+	lsls r1, 9
+	adds r2, 0x1
+	adds r1, r2
+	ldrb r1, [r1]
+	adds r1, 0x8
+	b _0803B99E
+	.align 2, 0
+_0803B65C: .4byte gUnknown_202402C
+_0803B660:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B66C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x1
+	b _0803B67A
+	.align 2, 0
+_0803B66C: .4byte gUnknown_202402C
+_0803B670:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B69C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x19
+_0803B67A:
+	bl sub_803FBE8
+	adds r1, r0, 0
+	strb r1, [r7]
+	movs r0, 0xFF
+	lsls r0, 8
+	ands r0, r1
+	lsrs r0, 8
+	strb r0, [r7, 0x1]
+	movs r0, 0xFF
+	lsls r0, 16
+	ands r0, r1
+	lsrs r0, 16
+	strb r0, [r7, 0x2]
+	movs r6, 0x3
+	b _0803B9A6
+	.align 2, 0
+_0803B69C: .4byte gUnknown_202402C
+_0803B6A0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B6AC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x1A
+	b _0803B99E
+	.align 2, 0
+_0803B6AC: .4byte gUnknown_202402C
+_0803B6B0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B6BC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x1B
+	b _0803B99E
+	.align 2, 0
+_0803B6BC: .4byte gUnknown_202402C
+_0803B6C0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B6CC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x1C
+	b _0803B99E
+	.align 2, 0
+_0803B6CC: .4byte gUnknown_202402C
+_0803B6D0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B6DC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x1D
+	b _0803B99E
+	.align 2, 0
+_0803B6DC: .4byte gUnknown_202402C
+_0803B6E0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B6EC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x1E
+	b _0803B99E
+	.align 2, 0
+_0803B6EC: .4byte gUnknown_202402C
+_0803B6F0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B6FC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x1F
+	b _0803B99E
+	.align 2, 0
+_0803B6FC: .4byte gUnknown_202402C
+_0803B700:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B70C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x20
+	b _0803B99E
+	.align 2, 0
+_0803B70C: .4byte gUnknown_202402C
+_0803B710:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B71C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x22
+	b _0803B99E
+	.align 2, 0
+_0803B71C: .4byte gUnknown_202402C
+_0803B720:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B72C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x23
+	b _0803B99E
+	.align 2, 0
+_0803B72C: .4byte gUnknown_202402C
+_0803B730:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B73C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x24
+	b _0803B99E
+	.align 2, 0
+_0803B73C: .4byte gUnknown_202402C
+_0803B740:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B74C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x25
+	b _0803B99E
+	.align 2, 0
+_0803B74C: .4byte gUnknown_202402C
+_0803B750:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B75C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x26
+	b _0803B99E
+	.align 2, 0
+_0803B75C: .4byte gUnknown_202402C
+_0803B760:
+	movs r0, 0x64
+	adds r4, r5, 0
+	muls r4, r0
+	ldr r0, _0803B7AC @ =gUnknown_202402C
+	adds r4, r0
+	adds r0, r4, 0
+	movs r1, 0x27
+	bl sub_803FBE8
+	strb r0, [r7]
+	adds r0, r4, 0
+	movs r1, 0x28
+	bl sub_803FBE8
+	strb r0, [r7, 0x1]
+	adds r0, r4, 0
+	movs r1, 0x29
+	bl sub_803FBE8
+	strb r0, [r7, 0x2]
+	adds r0, r4, 0
+	movs r1, 0x2A
+	bl sub_803FBE8
+	strb r0, [r7, 0x3]
+	adds r0, r4, 0
+	movs r1, 0x2B
+	bl sub_803FBE8
+	strb r0, [r7, 0x4]
+	adds r0, r4, 0
+	movs r1, 0x2C
+	bl sub_803FBE8
+	strb r0, [r7, 0x5]
+	movs r6, 0x6
+	b _0803B9A6
+	.align 2, 0
+_0803B7AC: .4byte gUnknown_202402C
+_0803B7B0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B7BC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x27
+	b _0803B99E
+	.align 2, 0
+_0803B7BC: .4byte gUnknown_202402C
+_0803B7C0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B7CC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x28
+	b _0803B99E
+	.align 2, 0
+_0803B7CC: .4byte gUnknown_202402C
+_0803B7D0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B7DC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x29
+	b _0803B99E
+	.align 2, 0
+_0803B7DC: .4byte gUnknown_202402C
+_0803B7E0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B7EC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x2A
+	b _0803B99E
+	.align 2, 0
+_0803B7EC: .4byte gUnknown_202402C
+_0803B7F0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B7FC @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x2B
+	b _0803B99E
+	.align 2, 0
+_0803B7FC: .4byte gUnknown_202402C
+_0803B800:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B80C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x2C
+	b _0803B99E
+	.align 2, 0
+_0803B80C: .4byte gUnknown_202402C
+_0803B810:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B81C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0
+	b _0803B83A
+	.align 2, 0
+_0803B81C: .4byte gUnknown_202402C
+_0803B820:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B82C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x9
+	b _0803B8DE
+	.align 2, 0
+_0803B82C: .4byte gUnknown_202402C
+_0803B830:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B860 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x37
+_0803B83A:
+	bl sub_803FBE8
+	adds r1, r0, 0
+	strb r1, [r7]
+	movs r0, 0xFF
+	lsls r0, 8
+	ands r0, r1
+	lsrs r0, 8
+	strb r0, [r7, 0x1]
+	movs r0, 0xFF
+	lsls r0, 16
+	ands r0, r1
+	lsrs r0, 16
+	strb r0, [r7, 0x2]
+	lsrs r0, r1, 24
+	strb r0, [r7, 0x3]
+	movs r6, 0x4
+	b _0803B9A6
+	.align 2, 0
+_0803B860: .4byte gUnknown_202402C
+_0803B864:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B870 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x38
+	b _0803B99E
+	.align 2, 0
+_0803B870: .4byte gUnknown_202402C
+_0803B874:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B880 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x39
+	b _0803B8DE
+	.align 2, 0
+_0803B880: .4byte gUnknown_202402C
+_0803B884:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B890 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x3A
+	b _0803B8DE
+	.align 2, 0
+_0803B890: .4byte gUnknown_202402C
+_0803B894:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B8A0 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x3B
+	b _0803B8DE
+	.align 2, 0
+_0803B8A0: .4byte gUnknown_202402C
+_0803B8A4:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B8B0 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x3C
+	b _0803B8DE
+	.align 2, 0
+_0803B8B0: .4byte gUnknown_202402C
+_0803B8B4:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B8C0 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x3D
+	b _0803B8DE
+	.align 2, 0
+_0803B8C0: .4byte gUnknown_202402C
+_0803B8C4:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B8D0 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x3E
+	b _0803B8DE
+	.align 2, 0
+_0803B8D0: .4byte gUnknown_202402C
+_0803B8D4:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B8F0 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x3F
+_0803B8DE:
+	bl sub_803FBE8
+	lsls r0, 16
+	lsrs r0, 16
+	strb r0, [r7]
+	lsrs r0, 8
+	strb r0, [r7, 0x1]
+	movs r6, 0x2
+	b _0803B9A6
+	.align 2, 0
+_0803B8F0: .4byte gUnknown_202402C
+_0803B8F4:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B900 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x16
+	b _0803B99E
+	.align 2, 0
+_0803B900: .4byte gUnknown_202402C
+_0803B904:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B910 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x17
+	b _0803B99E
+	.align 2, 0
+_0803B910: .4byte gUnknown_202402C
+_0803B914:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B920 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x18
+	b _0803B99E
+	.align 2, 0
+_0803B920: .4byte gUnknown_202402C
+_0803B924:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B930 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x21
+	b _0803B99E
+	.align 2, 0
+_0803B930: .4byte gUnknown_202402C
+_0803B934:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B940 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x2F
+	b _0803B99E
+	.align 2, 0
+_0803B940: .4byte gUnknown_202402C
+_0803B944:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B950 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x30
+	b _0803B99E
+	.align 2, 0
+_0803B950: .4byte gUnknown_202402C
+_0803B954:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B960 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x32
+	b _0803B99E
+	.align 2, 0
+_0803B960: .4byte gUnknown_202402C
+_0803B964:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B970 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x33
+	b _0803B99E
+	.align 2, 0
+_0803B970: .4byte gUnknown_202402C
+_0803B974:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B980 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x34
+	b _0803B99E
+	.align 2, 0
+_0803B980: .4byte gUnknown_202402C
+_0803B984:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B990 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x35
+	b _0803B99E
+	.align 2, 0
+_0803B990: .4byte gUnknown_202402C
+_0803B994:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803B9B8 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x36
+_0803B99E:
+	bl sub_803FBE8
+	strb r0, [r7]
+	movs r6, 0x1
+_0803B9A6:
+	adds r0, r6, 0
+	add sp, 0x90
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r1}
+	bx r1
+	.align 2, 0
+_0803B9B8: .4byte gUnknown_202402C
+	thumb_func_end sub_803B210
+
+	thumb_func_start sub_803B9BC
+sub_803B9BC: @ 803B9BC
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803B9BC
+
+	thumb_func_start sub_803B9C8
+sub_803B9C8: @ 803B9C8
+	push {r4,r5,lr}
+	ldr r1, _0803B9EC @ =gUnknown_2022BC4
+	ldr r0, _0803B9F0 @ =gUnknown_2023BC4
+	ldrb r2, [r0]
+	lsls r0, r2, 9
+	adds r1, 0x2
+	adds r1, r0, r1
+	ldrb r0, [r1]
+	cmp r0, 0
+	bne _0803B9F8
+	ldr r0, _0803B9F4 @ =gUnknown_2023BCE
+	lsls r1, r2, 1
+	adds r1, r0
+	ldrb r0, [r1]
+	bl sub_803BA20
+	b _0803BA16
+	.align 2, 0
+_0803B9EC: .4byte gUnknown_2022BC4
+_0803B9F0: .4byte gUnknown_2023BC4
+_0803B9F4: .4byte gUnknown_2023BCE
+_0803B9F8:
+	ldrb r4, [r1]
+	movs r5, 0
+_0803B9FC:
+	movs r0, 0x1
+	ands r0, r4
+	cmp r0, 0
+	beq _0803BA0A
+	adds r0, r5, 0
+	bl sub_803BA20
+_0803BA0A:
+	lsrs r4, 1
+	adds r0, r5, 0x1
+	lsls r0, 24
+	lsrs r5, r0, 24
+	cmp r5, 0x5
+	bls _0803B9FC
+_0803BA16:
+	bl sub_803B124
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803B9C8
+
+	thumb_func_start sub_803BA20
+sub_803BA20: @ 803BA20
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x38
+	lsls r0, 24
+	lsrs r5, r0, 24
+	ldr r3, _0803BA58 @ =gUnknown_2023BC4
+	ldrb r0, [r3]
+	lsls r0, 9
+	ldr r2, _0803BA5C @ =gUnknown_2022BC7
+	adds r4, r0, r2
+	adds r7, r4, 0
+	subs r1, r2, 0x2
+	adds r0, r1
+	ldrb r0, [r0]
+	adds r6, r3, 0
+	adds r3, r2, 0
+	cmp r0, 0x3B
+	bls _0803BA4E
+	bl _0803C32C
+_0803BA4E:
+	lsls r0, 2
+	ldr r1, _0803BA60 @ =_0803BA64
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.align 2, 0
+_0803BA58: .4byte gUnknown_2023BC4
+_0803BA5C: .4byte gUnknown_2022BC7
+_0803BA60: .4byte _0803BA64
+	.align 2, 0
+_0803BA64:
+	.4byte _0803BB54
+	.4byte _0803BCEC
+	.4byte _0803BD08
+	.4byte _0803BD24
+	.4byte _0803BD78
+	.4byte _0803BD78
+	.4byte _0803BD78
+	.4byte _0803BD78
+	.4byte _0803BD98
+	.4byte _0803BE00
+	.4byte _0803BE00
+	.4byte _0803BE00
+	.4byte _0803BE00
+	.4byte _0803C32C
+	.4byte _0803C32C
+	.4byte _0803C32C
+	.4byte _0803C32C
+	.4byte _0803BE28
+	.4byte _0803BE44
+	.4byte _0803BE60
+	.4byte _0803BE7C
+	.4byte _0803BE98
+	.4byte _0803BEB4
+	.4byte _0803BED0
+	.4byte _0803BEEC
+	.4byte _0803BF08
+	.4byte _0803BF24
+	.4byte _0803BF40
+	.4byte _0803BF5C
+	.4byte _0803BF78
+	.4byte _0803BF94
+	.4byte _0803BFB0
+	.4byte _0803C024
+	.4byte _0803C040
+	.4byte _0803C05C
+	.4byte _0803C078
+	.4byte _0803C094
+	.4byte _0803C0B0
+	.4byte _0803C0CC
+	.4byte _0803C0E8
+	.4byte _0803C104
+	.4byte _0803C120
+	.4byte _0803C13C
+	.4byte _0803C158
+	.4byte _0803C174
+	.4byte _0803C190
+	.4byte _0803C1AC
+	.4byte _0803C1C8
+	.4byte _0803C1E4
+	.4byte _0803C200
+	.4byte _0803C21C
+	.4byte _0803C238
+	.4byte _0803C254
+	.4byte _0803C270
+	.4byte _0803C28C
+	.4byte _0803C2A8
+	.4byte _0803C2C4
+	.4byte _0803C2E0
+	.4byte _0803C2FC
+	.4byte _0803C318
+_0803BB54:
+	movs r0, 0x64
+	adds r4, r5, 0
+	muls r4, r0
+	ldr r0, _0803BCE8 @ =gUnknown_202402C
+	adds r4, r0
+	adds r0, r4, 0
+	movs r1, 0xB
+	adds r2, r7, 0
+	bl sub_804037C
+	adds r2, r7, 0
+	adds r2, 0x2E
+	adds r0, r4, 0
+	movs r1, 0xC
+	bl sub_804037C
+	movs r0, 0
+	mov r8, r0
+	movs r0, 0x3B
+	adds r0, r7
+	mov r10, r0
+	adds r0, r7, 0
+	adds r0, 0x2B
+	str r0, [sp, 0x20]
+	adds r0, 0x19
+	str r0, [sp, 0x28]
+	adds r0, 0x4
+	str r0, [sp, 0x2C]
+	adds r0, 0x4
+	str r0, [sp, 0x30]
+	subs r0, 0x22
+	str r0, [sp, 0x1C]
+	subs r0, 0x2
+	str r0, [sp, 0x18]
+	adds r0, 0x4
+	str r0, [sp, 0x24]
+	adds r0, r7, 0x2
+	str r0, [sp, 0x4]
+	adds r0, r7, 0x4
+	str r0, [sp, 0x8]
+	adds r0, r7, 0x6
+	str r0, [sp, 0xC]
+	adds r0, 0x2
+	str r0, [sp, 0x10]
+	adds r0, 0x2
+	str r0, [sp, 0x14]
+	mov r9, r4
+	adds r6, r7, 0
+	adds r6, 0x24
+	adds r4, r7, 0
+	adds r4, 0xC
+_0803BBBA:
+	mov r1, r8
+	adds r1, 0xD
+	mov r0, r9
+	adds r2, r4, 0
+	bl sub_804037C
+	mov r1, r8
+	adds r1, 0x11
+	mov r0, r9
+	adds r2, r6, 0
+	bl sub_804037C
+	adds r6, 0x1
+	adds r4, 0x2
+	movs r0, 0x1
+	add r8, r0
+	mov r0, r8
+	cmp r0, 0x3
+	ble _0803BBBA
+	movs r0, 0x64
+	adds r4, r5, 0
+	muls r4, r0
+	ldr r0, _0803BCE8 @ =gUnknown_202402C
+	adds r4, r0
+	adds r0, r4, 0
+	movs r1, 0x15
+	mov r2, r10
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x20
+	ldr r2, [sp, 0x20]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x19
+	ldr r2, [sp, 0x28]
+	bl sub_804037C
+	ldrb r0, [r7, 0x14]
+	lsls r0, 27
+	lsrs r0, 27
+	mov r1, sp
+	strb r0, [r1]
+	adds r0, r4, 0
+	movs r1, 0x27
+	mov r2, sp
+	bl sub_804037C
+	mov r1, sp
+	ldrh r0, [r7, 0x14]
+	lsls r0, 22
+	lsrs r0, 27
+	strb r0, [r1]
+	adds r0, r4, 0
+	movs r1, 0x28
+	mov r2, sp
+	bl sub_804037C
+	mov r1, sp
+	ldrb r0, [r7, 0x15]
+	lsls r0, 25
+	lsrs r0, 27
+	strb r0, [r1]
+	adds r0, r4, 0
+	movs r1, 0x29
+	mov r2, sp
+	bl sub_804037C
+	mov r1, sp
+	ldr r0, [r7, 0x14]
+	lsls r0, 12
+	lsrs r0, 27
+	strb r0, [r1]
+	adds r0, r4, 0
+	movs r1, 0x2A
+	mov r2, sp
+	bl sub_804037C
+	mov r1, sp
+	ldrh r0, [r7, 0x16]
+	lsls r0, 23
+	lsrs r0, 27
+	strb r0, [r1]
+	adds r0, r4, 0
+	movs r1, 0x2B
+	mov r2, sp
+	bl sub_804037C
+	mov r1, sp
+	ldrb r0, [r7, 0x17]
+	lsls r0, 26
+	lsrs r0, 27
+	strb r0, [r1]
+	adds r0, r4, 0
+	movs r1, 0x2C
+	mov r2, sp
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0
+	ldr r2, [sp, 0x2C]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x37
+	ldr r2, [sp, 0x30]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x38
+	ldr r2, [sp, 0x1C]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x39
+	ldr r2, [sp, 0x18]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x3A
+	ldr r2, [sp, 0x24]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x3B
+	ldr r2, [sp, 0x4]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x3C
+	ldr r2, [sp, 0x8]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x3D
+	ldr r2, [sp, 0xC]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x3E
+	ldr r2, [sp, 0x10]
+	bl sub_804037C
+	adds r0, r4, 0
+	movs r1, 0x3F
+	ldr r2, [sp, 0x14]
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BCE8: .4byte gUnknown_202402C
+_0803BCEC:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BD04 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0xB
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BD04: .4byte gUnknown_202402C
+_0803BD08:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BD20 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0xC
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BD20: .4byte gUnknown_202402C
+_0803BD24:
+	movs r0, 0
+	mov r8, r0
+	movs r0, 0xC
+	adds r0, r4
+	mov r9, r0
+	movs r0, 0x64
+	adds r1, r5, 0
+	muls r1, r0
+	ldr r0, _0803BD74 @ =gUnknown_202402C
+	adds r7, r1, r0
+	adds r6, r4, 0
+	adds r6, 0x8
+_0803BD3C:
+	mov r1, r8
+	adds r1, 0xD
+	adds r0, r7, 0
+	adds r2, r4, 0
+	bl sub_804037C
+	mov r1, r8
+	adds r1, 0x11
+	adds r0, r7, 0
+	adds r2, r6, 0
+	bl sub_804037C
+	adds r6, 0x1
+	adds r4, 0x2
+	movs r0, 0x1
+	add r8, r0
+	mov r0, r8
+	cmp r0, 0x3
+	ble _0803BD3C
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BD74 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x15
+	mov r2, r9
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BD74: .4byte gUnknown_202402C
+_0803BD78:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BD90 @ =gUnknown_202402C
+	adds r0, r1
+	ldr r3, _0803BD94 @ =gUnknown_2022BC4
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r1, r3, 0x1
+	adds r1, r2, r1
+	ldrb r1, [r1]
+	adds r1, 0x9
+	b _0803BE16
+	.align 2, 0
+_0803BD90: .4byte gUnknown_202402C
+_0803BD94: .4byte gUnknown_2022BC4
+_0803BD98:
+	movs r0, 0x64
+	adds r4, r5, 0
+	muls r4, r0
+	ldr r0, _0803BDFC @ =gUnknown_202402C
+	adds r4, r0
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	adds r0, r4, 0
+	movs r1, 0x11
+	str r3, [sp, 0x34]
+	bl sub_804037C
+	ldrb r2, [r6]
+	lsls r2, 9
+	ldr r3, [sp, 0x34]
+	adds r0, r3, 0x1
+	adds r2, r0
+	adds r0, r4, 0
+	movs r1, 0x12
+	bl sub_804037C
+	ldrb r2, [r6]
+	lsls r2, 9
+	ldr r3, [sp, 0x34]
+	adds r0, r3, 0x2
+	adds r2, r0
+	adds r0, r4, 0
+	movs r1, 0x13
+	bl sub_804037C
+	ldrb r2, [r6]
+	lsls r2, 9
+	ldr r3, [sp, 0x34]
+	adds r0, r3, 0x3
+	adds r2, r0
+	adds r0, r4, 0
+	movs r1, 0x14
+	bl sub_804037C
+	ldrb r2, [r6]
+	lsls r2, 9
+	ldr r3, [sp, 0x34]
+	adds r0, r3, 0x4
+	adds r2, r0
+	adds r0, r4, 0
+	movs r1, 0x15
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BDFC: .4byte gUnknown_202402C
+_0803BE00:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BE20 @ =gUnknown_202402C
+	adds r0, r1
+	ldr r3, _0803BE24 @ =gUnknown_2022BC4
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r1, r3, 0x1
+	adds r1, r2, r1
+	ldrb r1, [r1]
+	adds r1, 0x8
+_0803BE16:
+	adds r3, 0x3
+	adds r2, r3
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BE20: .4byte gUnknown_202402C
+_0803BE24: .4byte gUnknown_2022BC4
+_0803BE28:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BE40 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x1
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BE40: .4byte gUnknown_202402C
+_0803BE44:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BE5C @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x19
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BE5C: .4byte gUnknown_202402C
+_0803BE60:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BE78 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x1A
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BE78: .4byte gUnknown_202402C
+_0803BE7C:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BE94 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x1B
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BE94: .4byte gUnknown_202402C
+_0803BE98:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BEB0 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x1C
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BEB0: .4byte gUnknown_202402C
+_0803BEB4:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BECC @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x1D
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BECC: .4byte gUnknown_202402C
+_0803BED0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BEE8 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x1E
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BEE8: .4byte gUnknown_202402C
+_0803BEEC:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BF04 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x1F
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BF04: .4byte gUnknown_202402C
+_0803BF08:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BF20 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x20
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BF20: .4byte gUnknown_202402C
+_0803BF24:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BF3C @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x22
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BF3C: .4byte gUnknown_202402C
+_0803BF40:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BF58 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x23
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BF58: .4byte gUnknown_202402C
+_0803BF5C:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BF74 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x24
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BF74: .4byte gUnknown_202402C
+_0803BF78:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BF90 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x25
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BF90: .4byte gUnknown_202402C
+_0803BF94:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803BFAC @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x26
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803BFAC: .4byte gUnknown_202402C
+_0803BFB0:
+	movs r0, 0x64
+	adds r4, r5, 0
+	muls r4, r0
+	ldr r0, _0803C020 @ =gUnknown_202402C
+	adds r4, r0
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	adds r0, r4, 0
+	movs r1, 0x27
+	str r3, [sp, 0x34]
+	bl sub_804037C
+	ldrb r2, [r6]
+	lsls r2, 9
+	ldr r3, [sp, 0x34]
+	adds r0, r3, 0x1
+	adds r2, r0
+	adds r0, r4, 0
+	movs r1, 0x28
+	bl sub_804037C
+	ldrb r2, [r6]
+	lsls r2, 9
+	ldr r3, [sp, 0x34]
+	adds r0, r3, 0x2
+	adds r2, r0
+	adds r0, r4, 0
+	movs r1, 0x29
+	bl sub_804037C
+	ldrb r2, [r6]
+	lsls r2, 9
+	ldr r3, [sp, 0x34]
+	adds r0, r3, 0x3
+	adds r2, r0
+	adds r0, r4, 0
+	movs r1, 0x2A
+	bl sub_804037C
+	ldrb r2, [r6]
+	lsls r2, 9
+	ldr r3, [sp, 0x34]
+	adds r0, r3, 0x4
+	adds r2, r0
+	adds r0, r4, 0
+	movs r1, 0x2B
+	bl sub_804037C
+	ldrb r2, [r6]
+	lsls r2, 9
+	ldr r3, [sp, 0x34]
+	adds r0, r3, 0x5
+	adds r2, r0
+	adds r0, r4, 0
+	b _0803C0BE
+	.align 2, 0
+_0803C020: .4byte gUnknown_202402C
+_0803C024:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C03C @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x27
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C03C: .4byte gUnknown_202402C
+_0803C040:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C058 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x28
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C058: .4byte gUnknown_202402C
+_0803C05C:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C074 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x29
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C074: .4byte gUnknown_202402C
+_0803C078:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C090 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x2A
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C090: .4byte gUnknown_202402C
+_0803C094:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C0AC @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x2B
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C0AC: .4byte gUnknown_202402C
+_0803C0B0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C0C8 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+_0803C0BE:
+	movs r1, 0x2C
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C0C8: .4byte gUnknown_202402C
+_0803C0CC:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C0E4 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C0E4: .4byte gUnknown_202402C
+_0803C0E8:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C100 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x9
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C100: .4byte gUnknown_202402C
+_0803C104:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C11C @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x37
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C11C: .4byte gUnknown_202402C
+_0803C120:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C138 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x38
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C138: .4byte gUnknown_202402C
+_0803C13C:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C154 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x39
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C154: .4byte gUnknown_202402C
+_0803C158:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C170 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x3A
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C170: .4byte gUnknown_202402C
+_0803C174:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C18C @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x3B
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C18C: .4byte gUnknown_202402C
+_0803C190:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C1A8 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x3C
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C1A8: .4byte gUnknown_202402C
+_0803C1AC:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C1C4 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x3D
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C1C4: .4byte gUnknown_202402C
+_0803C1C8:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C1E0 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x3E
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C1E0: .4byte gUnknown_202402C
+_0803C1E4:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C1FC @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x3F
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C1FC: .4byte gUnknown_202402C
+_0803C200:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C218 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x16
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C218: .4byte gUnknown_202402C
+_0803C21C:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C234 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x17
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C234: .4byte gUnknown_202402C
+_0803C238:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C250 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x18
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C250: .4byte gUnknown_202402C
+_0803C254:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C26C @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x21
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C26C: .4byte gUnknown_202402C
+_0803C270:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C288 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x2F
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C288: .4byte gUnknown_202402C
+_0803C28C:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C2A4 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x30
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C2A4: .4byte gUnknown_202402C
+_0803C2A8:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C2C0 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x32
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C2C0: .4byte gUnknown_202402C
+_0803C2C4:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C2DC @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x33
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C2DC: .4byte gUnknown_202402C
+_0803C2E0:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C2F8 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x34
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C2F8: .4byte gUnknown_202402C
+_0803C2FC:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C314 @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x35
+	bl sub_804037C
+	b _0803C32C
+	.align 2, 0
+_0803C314: .4byte gUnknown_202402C
+_0803C318:
+	movs r0, 0x64
+	muls r0, r5
+	ldr r1, _0803C33C @ =gUnknown_202402C
+	adds r0, r1
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r2, r3
+	movs r1, 0x36
+	bl sub_804037C
+_0803C32C:
+	add sp, 0x38
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803C33C: .4byte gUnknown_202402C
+	thumb_func_end sub_803BA20
+
+	thumb_func_start sub_803C340
+sub_803C340: @ 803C340
+	push {r4-r7,lr}
+	ldr r1, _0803C3A4 @ =gUnknown_2023BCE
+	ldr r7, _0803C3A8 @ =gUnknown_2023BC4
+	ldrb r2, [r7]
+	lsls r0, r2, 1
+	adds r0, r1
+	ldrh r1, [r0]
+	movs r0, 0x64
+	adds r3, r1, 0
+	muls r3, r0
+	ldr r4, _0803C3AC @ =gUnknown_2022BC4
+	lsls r2, 9
+	adds r0, r4, 0x1
+	adds r0, r2, r0
+	ldrb r0, [r0]
+	ldr r1, _0803C3B0 @ =gUnknown_202402C
+	adds r0, r1
+	adds r5, r3, r0
+	movs r3, 0
+	adds r0, r4, 0x2
+	adds r2, r0
+	ldrb r2, [r2]
+	cmp r3, r2
+	bcs _0803C398
+	adds r6, r4, 0
+	adds r2, r7, 0
+	adds r4, r0, 0
+_0803C376:
+	adds r1, r5, r3
+	ldrb r0, [r2]
+	lsls r0, 9
+	adds r0, 0x3
+	adds r0, r3, r0
+	adds r0, r6
+	ldrb r0, [r0]
+	strb r0, [r1]
+	adds r0, r3, 0x1
+	lsls r0, 24
+	lsrs r3, r0, 24
+	ldrb r0, [r2]
+	lsls r0, 9
+	adds r0, r4
+	ldrb r0, [r0]
+	cmp r3, r0
+	bcc _0803C376
+_0803C398:
+	bl sub_803B124
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803C3A4: .4byte gUnknown_2023BCE
+_0803C3A8: .4byte gUnknown_2023BC4
+_0803C3AC: .4byte gUnknown_2022BC4
+_0803C3B0: .4byte gUnknown_202402C
+	thumb_func_end sub_803C340
+
+	thumb_func_start sub_803C3B4
+sub_803C3B4: @ 803C3B4
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	ldr r7, _0803C4DC @ =gUnknown_2023BCE
+	ldr r6, _0803C4E0 @ =gUnknown_2023BC4
+	ldrb r0, [r6]
+	lsls r0, 1
+	adds r0, r7
+	ldrh r0, [r0]
+	movs r1, 0x64
+	mov r10, r1
+	mov r2, r10
+	muls r2, r0
+	adds r0, r2, 0
+	ldr r1, _0803C4E4 @ =gUnknown_202402C
+	mov r9, r1
+	add r0, r9
+	movs r1, 0xB
+	bl sub_803FBE8
+	adds r4, r0, 0
+	lsls r4, 16
+	lsrs r4, 16
+	ldrb r1, [r6]
+	lsls r0, r1, 1
+	adds r0, r7
+	ldrh r0, [r0]
+	mov r2, r10
+	muls r2, r0
+	adds r0, r2, 0
+	add r0, r9
+	bl sub_8034320
+	ldrb r0, [r6]
+	bl sub_80751D8
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	adds r0, r4, 0
+	bl sub_803F7D4
+	ldr r0, _0803C4E8 @ =gUnknown_20244DC
+	mov r8, r0
+	ldrb r0, [r6]
+	movs r1, 0x2
+	bl sub_8074480
+	adds r5, r0, 0
+	lsls r5, 24
+	lsrs r5, 24
+	ldrb r0, [r6]
+	bl sub_80748A8
+	adds r4, r0, 0
+	lsls r4, 24
+	lsrs r4, 24
+	ldrb r0, [r6]
+	bl sub_807685C
+	adds r3, r0, 0
+	lsls r3, 24
+	lsrs r3, 24
+	mov r0, r8
+	adds r1, r5, 0
+	adds r2, r4, 0
+	bl sub_8006F8C
+	ldr r4, _0803C4EC @ =gUnknown_2023D44
+	ldrb r1, [r6]
+	adds r1, r4
+	strb r0, [r1]
+	ldr r5, _0803C4F0 @ =gUnknown_202063C
+	ldrb r0, [r6]
+	adds r0, r4
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	ldr r1, _0803C4F4 @ =0x0000ff10
+	strh r1, [r0, 0x24]
+	ldrb r2, [r6]
+	adds r0, r2, r4
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	strh r2, [r0, 0x2E]
+	ldrb r3, [r6]
+	adds r0, r3, r4
+	ldrb r0, [r0]
+	lsls r1, r0, 4
+	adds r1, r0
+	lsls r1, 2
+	adds r1, r5
+	lsls r3, 4
+	ldrb r2, [r1, 0x5]
+	movs r0, 0xF
+	ands r0, r2
+	orrs r0, r3
+	strb r0, [r1, 0x5]
+	ldrb r2, [r6]
+	adds r4, r2, r4
+	ldrb r1, [r4]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	ldr r1, _0803C4F8 @ =gUnknown_2024024
+	adds r2, r1
+	ldrb r1, [r2]
+	bl sub_800838C
+	ldrb r4, [r6]
+	lsls r0, r4, 1
+	adds r0, r7
+	ldrh r0, [r0]
+	mov r1, r10
+	muls r1, r0
+	adds r0, r1, 0
+	add r0, r9
+	movs r1, 0xB
+	bl sub_803FBE8
+	adds r1, r0, 0
+	lsls r1, 16
+	lsrs r1, 16
+	adds r0, r4, 0
+	bl sub_8035708
+	ldr r1, _0803C4FC @ =gUnknown_3004FE0
+	ldrb r0, [r6]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803C500 @ =sub_803AC14
+	str r1, [r0]
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803C4DC: .4byte gUnknown_2023BCE
+_0803C4E0: .4byte gUnknown_2023BC4
+_0803C4E4: .4byte gUnknown_202402C
+_0803C4E8: .4byte gUnknown_20244DC
+_0803C4EC: .4byte gUnknown_2023D44
+_0803C4F0: .4byte gUnknown_202063C
+_0803C4F4: .4byte 0x0000ff10
+_0803C4F8: .4byte gUnknown_2024024
+_0803C4FC: .4byte gUnknown_3004FE0
+_0803C500: .4byte sub_803AC14
+	thumb_func_end sub_803C3B4
+
+	thumb_func_start sub_803C504
+sub_803C504: @ 803C504
+	push {r4,lr}
+	ldr r1, _0803C53C @ =gUnknown_2023BCE
+	ldr r4, _0803C540 @ =gUnknown_2023BC4
+	ldrb r0, [r4]
+	lsls r2, r0, 1
+	adds r2, r1
+	ldr r3, _0803C544 @ =gUnknown_2022BC4
+	lsls r0, 9
+	adds r1, r3, 0x1
+	adds r0, r1
+	ldrb r0, [r0]
+	strh r0, [r2]
+	ldrb r0, [r4]
+	lsls r1, r0, 9
+	adds r3, 0x2
+	adds r1, r3
+	ldrb r1, [r1]
+	bl sub_803C550
+	ldr r1, _0803C548 @ =gUnknown_3004FE0
+	ldrb r0, [r4]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803C54C @ =sub_803AFFC
+	str r1, [r0]
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803C53C: .4byte gUnknown_2023BCE
+_0803C540: .4byte gUnknown_2023BC4
+_0803C544: .4byte gUnknown_2022BC4
+_0803C548: .4byte gUnknown_3004FE0
+_0803C54C: .4byte sub_803AFFC
+	thumb_func_end sub_803C504
+
+	thumb_func_start sub_803C550
+sub_803C550: @ 803C550
+	push {r4-r6,lr}
+	mov r6, r10
+	mov r5, r9
+	mov r4, r8
+	push {r4-r6}
+	adds r6, r0, 0
+	lsls r6, 24
+	lsrs r6, 24
+	lsls r1, 24
+	lsrs r1, 24
+	adds r0, r6, 0
+	bl sub_803589C
+	ldr r0, _0803C6AC @ =gUnknown_2023BCE
+	lsls r4, r6, 1
+	adds r4, r0
+	ldr r0, _0803C6B0 @ =gUnknown_2022BC4
+	lsls r1, r6, 9
+	adds r0, 0x1
+	adds r1, r0
+	ldrb r0, [r1]
+	strh r0, [r4]
+	ldrh r0, [r4]
+	movs r1, 0x64
+	mov r9, r1
+	mov r1, r9
+	muls r1, r0
+	adds r0, r1, 0
+	ldr r5, _0803C6B4 @ =gUnknown_202402C
+	adds r0, r5
+	movs r1, 0xB
+	bl sub_803FBE8
+	mov r8, r0
+	lsls r0, 16
+	lsrs r0, 16
+	mov r8, r0
+	ldr r0, _0803C6B8 @ =sub_8033E3C
+	bl sub_8044EF8
+	ldr r1, _0803C6BC @ =gUnknown_3004FFC
+	mov r10, r1
+	add r10, r6
+	mov r1, r10
+	strb r0, [r1]
+	ldrh r0, [r4]
+	mov r1, r9
+	muls r1, r0
+	adds r0, r1, 0
+	adds r0, r5
+	adds r1, r6, 0
+	bl sub_8034320
+	adds r0, r6, 0
+	bl sub_80751D8
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	mov r0, r8
+	bl sub_803F7D4
+	ldr r0, _0803C6C0 @ =gUnknown_20244DC
+	mov r9, r0
+	adds r0, r6, 0
+	movs r1, 0x2
+	bl sub_8074480
+	adds r5, r0, 0
+	lsls r5, 24
+	lsrs r5, 24
+	adds r0, r6, 0
+	bl sub_80748A8
+	adds r4, r0, 0
+	lsls r4, 24
+	lsrs r4, 24
+	adds r0, r6, 0
+	bl sub_807685C
+	adds r3, r0, 0
+	lsls r3, 24
+	lsrs r3, 24
+	mov r0, r9
+	adds r1, r5, 0
+	adds r2, r4, 0
+	bl sub_8006F8C
+	ldr r4, _0803C6C4 @ =gUnknown_2023D44
+	adds r4, r6, r4
+	strb r0, [r4]
+	ldr r5, _0803C6C8 @ =gUnknown_202063C
+	mov r0, r10
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	ldrb r1, [r4]
+	strh r1, [r0, 0x30]
+	ldrb r1, [r4]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	strh r6, [r0, 0x2E]
+	ldrb r1, [r4]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	mov r1, r8
+	strh r1, [r0, 0x32]
+	ldrb r0, [r4]
+	lsls r1, r0, 4
+	adds r1, r0
+	lsls r1, 2
+	adds r1, r5
+	lsls r3, r6, 4
+	ldrb r2, [r1, 0x5]
+	movs r0, 0xF
+	ands r0, r2
+	orrs r0, r3
+	strb r0, [r1, 0x5]
+	ldrb r1, [r4]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	ldr r1, _0803C6CC @ =gUnknown_2024024
+	adds r6, r1
+	ldrb r1, [r6]
+	bl sub_800838C
+	ldrb r1, [r4]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	adds r0, 0x3E
+	ldrb r1, [r0]
+	movs r2, 0x4
+	orrs r1, r2
+	strb r1, [r0]
+	ldrb r1, [r4]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r1, r5, 0
+	adds r1, 0x1C
+	adds r0, r1
+	ldr r1, _0803C6D0 @ =nullsub_8
+	str r1, [r0]
+	movs r0, 0
+	movs r1, 0xFE
+	bl sub_804A938
+	mov r1, r10
+	ldrb r2, [r1]
+	lsls r1, r2, 4
+	adds r1, r2
+	lsls r1, 2
+	adds r1, r5
+	lsls r0, 24
+	lsrs r0, 24
+	strh r0, [r1, 0x2E]
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803C6AC: .4byte gUnknown_2023BCE
+_0803C6B0: .4byte gUnknown_2022BC4
+_0803C6B4: .4byte gUnknown_202402C
+_0803C6B8: .4byte sub_8033E3C
+_0803C6BC: .4byte gUnknown_3004FFC
+_0803C6C0: .4byte gUnknown_20244DC
+_0803C6C4: .4byte gUnknown_2023D44
+_0803C6C8: .4byte gUnknown_202063C
+_0803C6CC: .4byte gUnknown_2024024
+_0803C6D0: .4byte nullsub_8
+	thumb_func_end sub_803C550
+
+	thumb_func_start sub_803C6D4
+sub_803C6D4: @ 803C6D4
+	push {r4-r6,lr}
+	ldr r1, _0803C708 @ =gUnknown_2022BC4
+	ldr r6, _0803C70C @ =gUnknown_2023BC4
+	ldrb r2, [r6]
+	lsls r0, r2, 9
+	adds r1, 0x1
+	adds r0, r1
+	ldrb r3, [r0]
+	cmp r3, 0
+	bne _0803C71C
+	ldr r0, _0803C710 @ =gUnknown_2024018
+	ldr r0, [r0]
+	ldr r1, [r0, 0x4]
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 2
+	adds r0, r1
+	strb r3, [r0, 0x4]
+	ldr r1, _0803C714 @ =gUnknown_3004FE0
+	ldrb r0, [r6]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803C718 @ =sub_803C76C
+	str r1, [r0]
+	b _0803C758
+	.align 2, 0
+_0803C708: .4byte gUnknown_2022BC4
+_0803C70C: .4byte gUnknown_2023BC4
+_0803C710: .4byte gUnknown_2024018
+_0803C714: .4byte gUnknown_3004FE0
+_0803C718: .4byte sub_803C76C
+_0803C71C:
+	ldr r5, _0803C760 @ =gUnknown_2023D44
+	adds r0, r2, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	ldr r4, _0803C764 @ =gUnknown_202063C
+	adds r0, r4
+	bl sub_80077D8
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	bl sub_8007280
+	ldrb r0, [r6]
+	bl sub_8035794
+	ldr r1, _0803C768 @ =gUnknown_3004FF0
+	ldrb r0, [r6]
+	adds r0, r1
+	ldrb r0, [r0]
+	bl sub_8048188
+	bl sub_803B124
+_0803C758:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803C760: .4byte gUnknown_2023D44
+_0803C764: .4byte gUnknown_202063C
+_0803C768: .4byte gUnknown_3004FF0
+	thumb_func_end sub_803C6D4
+
+	thumb_func_start sub_803C76C
+sub_803C76C: @ 803C76C
+	push {r4-r6,lr}
+	ldr r6, _0803C78C @ =gUnknown_2024018
+	ldr r4, [r6]
+	ldr r5, _0803C790 @ =gUnknown_2023BC4
+	ldrb r2, [r5]
+	ldr r1, [r4, 0x4]
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 2
+	adds r3, r0, r1
+	ldrb r0, [r3, 0x4]
+	cmp r0, 0
+	beq _0803C794
+	cmp r0, 0x1
+	beq _0803C7C2
+	b _0803C7EA
+	.align 2, 0
+_0803C78C: .4byte gUnknown_2024018
+_0803C790: .4byte gUnknown_2023BC4
+_0803C794:
+	ldr r1, [r4]
+	lsls r0, r2, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	movs r0, 0x4
+	ands r0, r1
+	cmp r0, 0
+	beq _0803C7AE
+	adds r0, r2, 0
+	adds r1, r2, 0
+	movs r3, 0x5
+	bl sub_80341D8
+_0803C7AE:
+	ldr r0, [r6]
+	ldrb r1, [r5]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	movs r1, 0x1
+	strb r1, [r0, 0x4]
+	b _0803C7EA
+_0803C7C2:
+	ldrb r1, [r3]
+	movs r0, 0x40
+	ands r0, r1
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	bne _0803C7EA
+	strb r0, [r3, 0x4]
+	ldrb r2, [r5]
+	adds r0, r2, 0
+	adds r1, r2, 0
+	movs r3, 0x2
+	bl sub_80341D8
+	ldr r1, _0803C7F0 @ =gUnknown_3004FE0
+	ldrb r0, [r5]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803C7F4 @ =sub_803AD64
+	str r1, [r0]
+_0803C7EA:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803C7F0: .4byte gUnknown_3004FE0
+_0803C7F4: .4byte sub_803AD64
+	thumb_func_end sub_803C76C
+
+	thumb_func_start sub_803C7F8
+sub_803C7F8: @ 803C7F8
+	push {r4-r7,lr}
+	mov r7, r9
+	mov r6, r8
+	push {r6,r7}
+	ldr r0, _0803C884 @ =gUnknown_2022B4C
+	ldr r0, [r0]
+	movs r1, 0x40
+	ands r0, r1
+	cmp r0, 0
+	beq _0803C8C0
+	ldr r6, _0803C888 @ =gUnknown_2023BC4
+	ldrb r0, [r6]
+	bl sub_80751D8
+	movs r1, 0x2
+	ands r1, r0
+	movs r7, 0xC8
+	cmp r1, 0
+	beq _0803C820
+	movs r7, 0x98
+_0803C820:
+	ldrb r0, [r6]
+	bl sub_8043658
+	ldr r5, _0803C88C @ =gUnknown_202273C
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r5
+	movs r4, 0xFF
+	ldrb r0, [r1]
+	cmp r0, 0x2
+	beq _0803C866
+	ldrb r0, [r6]
+	bl sub_8043658
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r5
+	ldrh r1, [r1]
+	adds r0, r4, 0
+	ands r0, r1
+	cmp r0, 0x1
+	beq _0803C866
+	ldrb r0, [r6]
+	bl sub_8043658
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r5
+	ldrh r0, [r1]
+	ands r4, r0
+	cmp r4, 0x3
+	bne _0803C8A0
+_0803C866:
+	ldr r4, _0803C88C @ =gUnknown_202273C
+	ldr r0, _0803C888 @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	bl sub_8043658
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r4
+	ldrb r0, [r1, 0x13]
+	cmp r0, 0
+	beq _0803C894
+	ldr r0, _0803C890 @ =gUnknown_82538A8
+	adds r0, 0x3D
+	b _0803C990
+	.align 2, 0
+_0803C884: .4byte gUnknown_2022B4C
+_0803C888: .4byte gUnknown_2023BC4
+_0803C88C: .4byte gUnknown_202273C
+_0803C890: .4byte gUnknown_82538A8
+_0803C894:
+	ldr r0, _0803C89C @ =gUnknown_82538A8
+	adds r0, 0x3A
+	b _0803C990
+	.align 2, 0
+_0803C89C: .4byte gUnknown_82538A8
+_0803C8A0:
+	ldrb r0, [r6]
+	bl sub_8043658
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r5
+	ldrb r0, [r1, 0x13]
+	cmp r0, 0
+	beq _0803C98C
+	ldr r0, _0803C8BC @ =gUnknown_82538A8
+	adds r0, 0x87
+	b _0803C990
+	.align 2, 0
+_0803C8BC: .4byte gUnknown_82538A8
+_0803C8C0:
+	movs r7, 0xB0
+	ldr r0, _0803C8D8 @ =gUnknown_20386AE
+	ldrh r1, [r0]
+	movs r0, 0xC0
+	lsls r0, 4
+	cmp r1, r0
+	bne _0803C8DC
+	bl sub_80447AC
+	lsls r0, 16
+	lsrs r0, 16
+	b _0803C992
+	.align 2, 0
+_0803C8D8: .4byte gUnknown_20386AE
+_0803C8DC:
+	bl sub_800A404
+	ldr r6, _0803C954 @ =gUnknown_202273C
+	movs r5, 0x1
+	eors r0, r5
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r6
+	movs r4, 0xFF
+	ldrb r0, [r1]
+	cmp r0, 0x2
+	beq _0803C930
+	bl sub_800A404
+	eors r0, r5
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r6
+	ldrh r1, [r1]
+	adds r0, r4, 0
+	ands r0, r1
+	cmp r0, 0x1
+	beq _0803C930
+	bl sub_800A404
+	eors r0, r5
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r6
+	ldrh r0, [r1]
+	ands r4, r0
+	cmp r4, 0x3
+	bne _0803C968
+_0803C930:
+	ldr r4, _0803C954 @ =gUnknown_202273C
+	bl sub_800A404
+	movs r1, 0x1
+	eors r0, r1
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r4
+	ldrb r0, [r1, 0x13]
+	cmp r0, 0
+	beq _0803C95C
+	ldr r0, _0803C958 @ =gUnknown_82538A8
+	adds r0, 0x3D
+	b _0803C990
+	.align 2, 0
+_0803C954: .4byte gUnknown_202273C
+_0803C958: .4byte gUnknown_82538A8
+_0803C95C:
+	ldr r0, _0803C964 @ =gUnknown_82538A8
+	adds r0, 0x3A
+	b _0803C990
+	.align 2, 0
+_0803C964: .4byte gUnknown_82538A8
+_0803C968:
+	bl sub_800A404
+	eors r0, r5
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, r0, 3
+	subs r1, r0
+	lsls r1, 2
+	adds r1, r6
+	ldrb r0, [r1, 0x13]
+	cmp r0, 0
+	beq _0803C98C
+	ldr r0, _0803C988 @ =gUnknown_82538A8
+	adds r0, 0x87
+	b _0803C990
+	.align 2, 0
+_0803C988: .4byte gUnknown_82538A8
+_0803C98C:
+	ldr r0, _0803CAC8 @ =gUnknown_82538A8
+	adds r0, 0x86
+_0803C990:
+	ldrb r0, [r0]
+_0803C992:
+	mov r9, r0
+	ldr r0, _0803CACC @ =gUnknown_2023BC4
+	mov r8, r0
+	ldrb r1, [r0]
+	mov r0, r9
+	bl sub_80346C4
+	mov r1, r8
+	ldrb r0, [r1]
+	bl sub_80751D8
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	mov r0, r9
+	bl sub_803F864
+	ldr r5, _0803CAD0 @ =gUnknown_20244DC
+	adds r6, r7, 0
+	ldr r1, _0803CAD4 @ =gUnknown_823932C
+	mov r2, r9
+	lsls r0, r2, 2
+	adds r0, r1
+	ldrb r0, [r0]
+	movs r4, 0x8
+	subs r4, r0
+	lsls r4, 18
+	movs r0, 0xA0
+	lsls r0, 14
+	adds r4, r0
+	asrs r4, 16
+	mov r1, r8
+	ldrb r0, [r1]
+	bl sub_807685C
+	adds r3, r0, 0
+	lsls r3, 24
+	lsrs r3, 24
+	adds r0, r5, 0
+	adds r1, r6, 0
+	adds r2, r4, 0
+	bl sub_8006F8C
+	ldr r5, _0803CAD8 @ =gUnknown_2023D44
+	mov r2, r8
+	ldrb r1, [r2]
+	adds r1, r5
+	strb r0, [r1]
+	ldr r4, _0803CADC @ =gUnknown_202063C
+	ldrb r0, [r2]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	ldr r1, _0803CAE0 @ =0x0000ff10
+	strh r1, [r0, 0x24]
+	ldrb r0, [r2]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	movs r1, 0x2
+	strh r1, [r0, 0x2E]
+	ldr r0, _0803CAE4 @ =gUnknown_8239A1C
+	mov r1, r9
+	lsls r6, r1, 3
+	adds r0, r6, r0
+	ldrh r0, [r0, 0x4]
+	bl sub_80089E8
+	mov r2, r8
+	ldrb r1, [r2]
+	adds r1, r5
+	ldrb r1, [r1]
+	lsls r2, r1, 4
+	adds r2, r1
+	lsls r2, 2
+	adds r2, r4
+	lsls r0, 4
+	ldrb r3, [r2, 0x5]
+	movs r1, 0xF
+	ands r1, r3
+	orrs r1, r0
+	strb r1, [r2, 0x5]
+	mov r1, r8
+	ldrb r0, [r1]
+	adds r0, r5
+	ldrb r0, [r0]
+	lsls r1, r0, 4
+	adds r1, r0
+	lsls r1, 2
+	adds r1, r4
+	ldrh r0, [r1, 0x4]
+	lsls r0, 22
+	lsrs r0, 22
+	strh r0, [r1, 0x38]
+	ldr r0, _0803CAE8 @ =gUnknown_823957C
+	adds r6, r0
+	ldrh r0, [r6, 0x6]
+	bl sub_8008804
+	mov r2, r8
+	ldrb r1, [r2]
+	adds r1, r5
+	ldrb r2, [r1]
+	lsls r1, r2, 4
+	adds r1, r2
+	lsls r1, 2
+	adds r1, r4
+	ldr r2, _0803CAEC @ =0x000003ff
+	ands r2, r0
+	ldrh r3, [r1, 0x4]
+	ldr r0, _0803CAF0 @ =0xfffffc00
+	ands r0, r3
+	orrs r0, r2
+	strh r0, [r1, 0x4]
+	mov r1, r8
+	ldrb r0, [r1]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	mov r2, r9
+	strh r2, [r0, 0x6]
+	mov r1, r8
+	ldrb r0, [r1]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r4, 0x1C
+	adds r0, r4
+	ldr r1, _0803CAF4 @ =sub_8033EEC
+	str r1, [r0]
+	ldr r1, _0803CAF8 @ =gUnknown_3004FE0
+	mov r2, r8
+	ldrb r0, [r2]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803CAFC @ =sub_803A6D4
+	str r1, [r0]
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803CAC8: .4byte gUnknown_82538A8
+_0803CACC: .4byte gUnknown_2023BC4
+_0803CAD0: .4byte gUnknown_20244DC
+_0803CAD4: .4byte gUnknown_823932C
+_0803CAD8: .4byte gUnknown_2023D44
+_0803CADC: .4byte gUnknown_202063C
+_0803CAE0: .4byte 0x0000ff10
+_0803CAE4: .4byte gUnknown_8239A1C
+_0803CAE8: .4byte gUnknown_823957C
+_0803CAEC: .4byte 0x000003ff
+_0803CAF0: .4byte 0xfffffc00
+_0803CAF4: .4byte sub_8033EEC
+_0803CAF8: .4byte gUnknown_3004FE0
+_0803CAFC: .4byte sub_803A6D4
+	thumb_func_end sub_803C7F8
+
+	thumb_func_start sub_803CB00
+sub_803CB00: @ 803CB00
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CB00
+
+	thumb_func_start sub_803CB0C
+sub_803CB0C: @ 803CB0C
+	push {r4-r6,lr}
+	ldr r6, _0803CB9C @ =gUnknown_2023D44
+	ldr r4, _0803CBA0 @ =gUnknown_2023BC4
+	ldrb r0, [r4]
+	adds r0, r6
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	ldr r5, _0803CBA4 @ =gUnknown_202063C
+	adds r0, r5
+	bl sub_80750FC
+	ldrb r0, [r4]
+	adds r0, r6
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	movs r1, 0x23
+	strh r1, [r0, 0x2E]
+	ldrb r0, [r4]
+	adds r0, r6
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	movs r1, 0x8C
+	lsls r1, 1
+	strh r1, [r0, 0x32]
+	ldrb r0, [r4]
+	adds r0, r6
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	ldrh r1, [r0, 0x22]
+	strh r1, [r0, 0x36]
+	ldrb r0, [r4]
+	adds r0, r6
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r1, r5, 0
+	adds r1, 0x1C
+	adds r0, r1
+	ldr r1, _0803CBA8 @ =sub_8075590
+	str r1, [r0]
+	ldrb r0, [r4]
+	adds r0, r6
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	ldr r1, _0803CBAC @ =nullsub_8
+	bl sub_8074A68
+	ldr r1, _0803CBB0 @ =gUnknown_3004FE0
+	ldrb r0, [r4]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803CBB4 @ =sub_803A70C
+	str r1, [r0]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803CB9C: .4byte gUnknown_2023D44
+_0803CBA0: .4byte gUnknown_2023BC4
+_0803CBA4: .4byte gUnknown_202063C
+_0803CBA8: .4byte sub_8075590
+_0803CBAC: .4byte nullsub_8
+_0803CBB0: .4byte gUnknown_3004FE0
+_0803CBB4: .4byte sub_803A70C
+	thumb_func_end sub_803CB0C
+
+	thumb_func_start sub_803CBB8
+sub_803CBB8: @ 803CBB8
+	push {r4-r6,lr}
+	ldr r6, _0803CC04 @ =gUnknown_2024018
+	ldr r4, [r6]
+	ldr r5, _0803CC08 @ =gUnknown_2023BC4
+	ldrb r2, [r5]
+	ldr r0, [r4, 0x4]
+	lsls r1, r2, 1
+	adds r1, r2
+	lsls r1, 2
+	adds r3, r1, r0
+	ldrb r0, [r3, 0x4]
+	cmp r0, 0
+	bne _0803CC0C
+	ldr r1, [r4]
+	lsls r0, r2, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	movs r0, 0x4
+	ands r0, r1
+	cmp r0, 0
+	beq _0803CBEC
+	adds r0, r2, 0
+	adds r1, r2, 0
+	movs r3, 0x5
+	bl sub_80341D8
+_0803CBEC:
+	ldr r0, [r6]
+	ldrb r1, [r5]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r1, [r0, 0x4]
+	adds r1, 0x1
+	strb r1, [r0, 0x4]
+	b _0803CC48
+	.align 2, 0
+_0803CC04: .4byte gUnknown_2024018
+_0803CC08: .4byte gUnknown_2023BC4
+_0803CC0C:
+	ldrb r1, [r3]
+	movs r0, 0x40
+	ands r0, r1
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	bne _0803CC48
+	strb r0, [r3, 0x4]
+	movs r0, 0x10
+	movs r1, 0x3F
+	bl sub_80722F4
+	ldr r2, _0803CC50 @ =gUnknown_202063C
+	ldr r1, _0803CC54 @ =gUnknown_2023D44
+	ldrb r0, [r5]
+	adds r0, r1
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r2, 0x1C
+	adds r0, r2
+	ldr r1, _0803CC58 @ =sub_8011EA0
+	str r1, [r0]
+	ldr r1, _0803CC5C @ =gUnknown_3004FE0
+	ldrb r0, [r5]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803CC60 @ =sub_803AD20
+	str r1, [r0]
+_0803CC48:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803CC50: .4byte gUnknown_202063C
+_0803CC54: .4byte gUnknown_2023D44
+_0803CC58: .4byte sub_8011EA0
+_0803CC5C: .4byte gUnknown_3004FE0
+_0803CC60: .4byte sub_803AD20
+	thumb_func_end sub_803CBB8
+
+	thumb_func_start sub_803CC64
+sub_803CC64: @ 803CC64
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CC64
+
+	thumb_func_start sub_803CC70
+sub_803CC70: @ 803CC70
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CC70
+
+	thumb_func_start sub_803CC7C
+sub_803CC7C: @ 803CC7C
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CC7C
+
+	thumb_func_start sub_803CC88
+sub_803CC88: @ 803CC88
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CC88
+
+	thumb_func_start sub_803CC94
+sub_803CC94: @ 803CC94
+	push {r4-r6,lr}
+	ldr r6, _0803CD78 @ =gUnknown_2023BC4
+	ldrb r0, [r6]
+	bl sub_80342A4
+	lsls r0, 24
+	cmp r0, 0
+	beq _0803CCA6
+	b _0803CDBA
+_0803CCA6:
+	ldr r0, _0803CD7C @ =gUnknown_2022BC4
+	mov r12, r0
+	ldrb r2, [r6]
+	lsls r2, 9
+	adds r0, 0x1
+	adds r0, r2, r0
+	ldrb r0, [r0]
+	mov r1, r12
+	adds r1, 0x2
+	adds r1, r2, r1
+	ldrb r1, [r1]
+	lsls r1, 8
+	orrs r0, r1
+	ldr r5, _0803CD80 @ =gUnknown_2037F16
+	mov r1, r12
+	adds r1, 0x3
+	adds r2, r1
+	ldrb r1, [r2]
+	strb r1, [r5]
+	ldr r4, _0803CD84 @ =gUnknown_2037EEC
+	ldrb r2, [r6]
+	lsls r2, 9
+	mov r1, r12
+	adds r1, 0x4
+	adds r1, r2, r1
+	ldrb r3, [r1]
+	mov r1, r12
+	adds r1, 0x5
+	adds r2, r1
+	ldrb r1, [r2]
+	lsls r1, 8
+	orrs r3, r1
+	strh r3, [r4]
+	ldr r4, _0803CD88 @ =gUnknown_2037EE8
+	ldrb r2, [r6]
+	lsls r2, 9
+	mov r1, r12
+	adds r1, 0x6
+	adds r1, r2, r1
+	ldrb r3, [r1]
+	mov r1, r12
+	adds r1, 0x7
+	adds r1, r2, r1
+	ldrb r1, [r1]
+	lsls r1, 8
+	orrs r3, r1
+	mov r1, r12
+	adds r1, 0x8
+	adds r1, r2, r1
+	ldrb r1, [r1]
+	lsls r1, 16
+	orrs r3, r1
+	mov r1, r12
+	adds r1, 0x9
+	adds r2, r1
+	ldrb r1, [r2]
+	lsls r1, 24
+	orrs r3, r1
+	str r3, [r4]
+	ldr r3, _0803CD8C @ =gUnknown_2037EFE
+	ldrb r1, [r6]
+	lsls r1, 9
+	mov r2, r12
+	adds r2, 0xA
+	adds r1, r2
+	ldrb r1, [r1]
+	strb r1, [r3]
+	ldr r4, _0803CD90 @ =gUnknown_2037F00
+	ldrb r2, [r6]
+	lsls r2, 9
+	mov r1, r12
+	adds r1, 0xC
+	adds r1, r2, r1
+	ldrb r3, [r1]
+	mov r1, r12
+	adds r1, 0xD
+	adds r2, r1
+	ldrb r1, [r2]
+	lsls r1, 8
+	orrs r3, r1
+	strh r3, [r4]
+	ldr r3, _0803CD94 @ =gUnknown_2037EE4
+	ldrb r2, [r6]
+	lsls r2, 9
+	mov r1, r12
+	adds r1, 0x10
+	adds r2, r1
+	str r2, [r3]
+	ldr r3, _0803CD98 @ =gUnknown_2024008
+	ldrb r1, [r6]
+	lsls r1, 2
+	adds r1, r3
+	ldr r2, [r2]
+	str r2, [r1]
+	ldrb r1, [r5]
+	bl sub_80342A0
+	lsls r0, 24
+	lsrs r3, r0, 24
+	cmp r3, 0
+	beq _0803CD9C
+	bl sub_803B124
+	b _0803CDBA
+	.align 2, 0
+_0803CD78: .4byte gUnknown_2023BC4
+_0803CD7C: .4byte gUnknown_2022BC4
+_0803CD80: .4byte gUnknown_2037F16
+_0803CD84: .4byte gUnknown_2037EEC
+_0803CD88: .4byte gUnknown_2037EE8
+_0803CD8C: .4byte gUnknown_2037EFE
+_0803CD90: .4byte gUnknown_2037F00
+_0803CD94: .4byte gUnknown_2037EE4
+_0803CD98: .4byte gUnknown_2024008
+_0803CD9C:
+	ldr r0, _0803CDC0 @ =gUnknown_2024018
+	ldr r0, [r0]
+	ldrb r1, [r6]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	strb r3, [r0, 0x4]
+	ldr r1, _0803CDC4 @ =gUnknown_3004FE0
+	ldrb r0, [r6]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803CDC8 @ =sub_803CDCC
+	str r1, [r0]
+_0803CDBA:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803CDC0: .4byte gUnknown_2024018
+_0803CDC4: .4byte gUnknown_3004FE0
+_0803CDC8: .4byte sub_803CDCC
+	thumb_func_end sub_803CC94
+
+	thumb_func_start sub_803CDCC
+sub_803CDCC: @ 803CDCC
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	ldr r2, _0803CE18 @ =gUnknown_2022BC4
+	ldr r6, _0803CE1C @ =gUnknown_2023BC4
+	ldrb r3, [r6]
+	lsls r1, r3, 9
+	adds r0, r2, 0x1
+	mov r10, r0
+	adds r0, r1, r0
+	ldrb r4, [r0]
+	adds r5, r2, 0x2
+	mov r9, r5
+	adds r0, r1, r5
+	ldrb r0, [r0]
+	lsls r0, 8
+	orrs r4, r0
+	adds r2, 0xB
+	adds r1, r2
+	ldrb r1, [r1]
+	mov r8, r1
+	ldr r7, _0803CE20 @ =gUnknown_2024018
+	ldr r5, [r7]
+	ldr r1, [r5, 0x4]
+	lsls r0, r3, 1
+	adds r0, r3
+	lsls r0, 2
+	adds r0, r1
+	ldrb r2, [r0, 0x4]
+	cmp r2, 0x1
+	beq _0803CE64
+	cmp r2, 0x1
+	bgt _0803CE24
+	cmp r2, 0
+	beq _0803CE2E
+	b _0803CF40
+	.align 2, 0
+_0803CE18: .4byte gUnknown_2022BC4
+_0803CE1C: .4byte gUnknown_2023BC4
+_0803CE20: .4byte gUnknown_2024018
+_0803CE24:
+	cmp r2, 0x2
+	beq _0803CE8E
+	cmp r2, 0x3
+	beq _0803CF04
+	b _0803CF40
+_0803CE2E:
+	ldr r1, [r5]
+	lsls r0, r3, 2
+	adds r1, r0, r1
+	ldrb r2, [r1]
+	movs r0, 0xC
+	ands r0, r2
+	cmp r0, 0x4
+	bne _0803CE50
+	movs r0, 0x8
+	orrs r0, r2
+	strb r0, [r1]
+	ldrb r2, [r6]
+	adds r0, r2, 0
+	adds r1, r2, 0
+	movs r3, 0x5
+	bl sub_80341D8
+_0803CE50:
+	ldr r0, [r7]
+	ldrb r1, [r6]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	movs r1, 0x1
+	strb r1, [r0, 0x4]
+	b _0803CF40
+_0803CE64:
+	ldrb r1, [r0]
+	movs r0, 0x40
+	ands r0, r1
+	cmp r0, 0
+	bne _0803CF40
+	movs r0, 0
+	bl sub_8035450
+	adds r0, r4, 0
+	bl sub_807259C
+	ldr r0, [r7]
+	ldrb r1, [r6]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	movs r1, 0x2
+	strb r1, [r0, 0x4]
+	b _0803CF40
+_0803CE8E:
+	ldr r0, _0803CEF4 @ =gUnknown_2037EDC
+	ldr r0, [r0]
+	bl _call_via_r0
+	ldr r0, _0803CEF8 @ =gUnknown_2037EE1
+	ldrb r0, [r0]
+	cmp r0, 0
+	bne _0803CF40
+	movs r0, 0x1
+	bl sub_8035450
+	ldr r0, [r7]
+	ldrb r2, [r6]
+	ldr r1, [r0]
+	lsls r0, r2, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	movs r0, 0x4
+	ands r0, r1
+	cmp r0, 0
+	beq _0803CEDC
+	mov r0, r8
+	cmp r0, 0x1
+	bhi _0803CEDC
+	adds r0, r2, 0
+	adds r1, r2, 0
+	movs r3, 0x6
+	bl sub_80341D8
+	ldr r0, [r7]
+	ldrb r1, [r6]
+	ldr r0, [r0]
+	lsls r1, 2
+	adds r1, r0
+	ldrb r2, [r1]
+	movs r0, 0x9
+	negs r0, r0
+	ands r0, r2
+	strb r0, [r1]
+_0803CEDC:
+	ldr r0, _0803CEFC @ =gUnknown_2024018
+	ldr r2, [r0]
+	ldr r0, _0803CF00 @ =gUnknown_2023BC4
+	ldrb r1, [r0]
+	ldr r2, [r2, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	movs r1, 0x3
+	strb r1, [r0, 0x4]
+	b _0803CF40
+	.align 2, 0
+_0803CEF4: .4byte gUnknown_2037EDC
+_0803CEF8: .4byte gUnknown_2037EE1
+_0803CEFC: .4byte gUnknown_2024018
+_0803CF00: .4byte gUnknown_2023BC4
+_0803CF04:
+	ldrb r1, [r0]
+	movs r0, 0x40
+	ands r0, r1
+	lsls r0, 24
+	lsrs r4, r0, 24
+	cmp r4, 0
+	bne _0803CF40
+	bl sub_8034B40
+	ldrb r0, [r6]
+	lsls r2, r0, 9
+	mov r3, r10
+	adds r1, r2, r3
+	ldrb r1, [r1]
+	add r2, r9
+	ldrb r2, [r2]
+	lsls r2, 8
+	orrs r1, r2
+	bl sub_8035200
+	ldr r0, [r7]
+	ldrb r1, [r6]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	strb r4, [r0, 0x4]
+	bl sub_803B124
+_0803CF40:
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CDCC
+
+	thumb_func_start sub_803CF50
+sub_803CF50: @ 803CF50
+	push {r4,lr}
+	ldr r0, _0803CF84 @ =gUnknown_2022974
+	movs r1, 0
+	strh r1, [r0]
+	ldr r0, _0803CF88 @ =gUnknown_2022976
+	strh r1, [r0]
+	ldr r0, _0803CF8C @ =gUnknown_2023BC4
+	ldrb r4, [r0]
+	lsls r4, 9
+	ldr r0, _0803CF90 @ =gUnknown_2022BC6
+	adds r4, r0
+	ldrh r0, [r4]
+	bl sub_80D7274
+	ldrh r0, [r4]
+	bl sub_80D89B0
+	lsls r0, 24
+	cmp r0, 0
+	beq _0803CF98
+	ldr r0, _0803CF94 @ =gUnknown_202298C
+	movs r1, 0x40
+	bl sub_80D87BC
+	b _0803CFA0
+	.align 2, 0
+_0803CF84: .4byte gUnknown_2022974
+_0803CF88: .4byte gUnknown_2022976
+_0803CF8C: .4byte gUnknown_2023BC4
+_0803CF90: .4byte gUnknown_2022BC6
+_0803CF94: .4byte gUnknown_202298C
+_0803CF98:
+	ldr r0, _0803CFB4 @ =gUnknown_202298C
+	movs r1, 0
+	bl sub_80D87BC
+_0803CFA0:
+	ldr r1, _0803CFB8 @ =gUnknown_3004FE0
+	ldr r0, _0803CFBC @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803CFC0 @ =sub_803ADD8
+	str r1, [r0]
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803CFB4: .4byte gUnknown_202298C
+_0803CFB8: .4byte gUnknown_3004FE0
+_0803CFBC: .4byte gUnknown_2023BC4
+_0803CFC0: .4byte sub_803ADD8
+	thumb_func_end sub_803CF50
+
+	thumb_func_start sub_803CFC4
+sub_803CFC4: @ 803CFC4
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CFC4
+
+	thumb_func_start sub_803CFD0
+sub_803CFD0: @ 803CFD0
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CFD0
+
+	thumb_func_start sub_803CFDC
+sub_803CFDC: @ 803CFDC
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CFDC
+
+	thumb_func_start sub_803CFE8
+sub_803CFE8: @ 803CFE8
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CFE8
+
+	thumb_func_start sub_803CFF4
+sub_803CFF4: @ 803CFF4
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803CFF4
+
+	thumb_func_start sub_803D000
+sub_803D000: @ 803D000
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D000
+
+	thumb_func_start sub_803D00C
+sub_803D00C: @ 803D00C
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D00C
+
+	thumb_func_start sub_803D018
+sub_803D018: @ 803D018
+	push {r4-r7,lr}
+	mov r7, r9
+	mov r6, r8
+	push {r6,r7}
+	sub sp, 0x4
+	movs r0, 0
+	bl sub_8034964
+	ldr r3, _0803D090 @ =gUnknown_2022BC4
+	ldr r0, _0803D094 @ =gUnknown_2023BC4
+	mov r9, r0
+	ldrb r4, [r0]
+	lsls r2, r4, 9
+	adds r0, r3, 0x2
+	adds r0, r2, r0
+	ldrb r1, [r0]
+	adds r3, 0x3
+	adds r2, r3
+	ldrb r0, [r2]
+	lsls r0, 8
+	orrs r1, r0
+	lsls r1, 16
+	asrs r7, r1, 16
+	ldr r0, _0803D098 @ =0x00007fff
+	cmp r7, r0
+	beq _0803D0A8
+	ldr r6, _0803D09C @ =gUnknown_2023BCE
+	lsls r0, r4, 1
+	adds r0, r6
+	ldrh r0, [r0]
+	movs r5, 0x64
+	muls r0, r5
+	ldr r4, _0803D0A0 @ =gUnknown_202402C
+	adds r0, r4
+	movs r1, 0x3A
+	bl sub_803FBE8
+	mov r8, r0
+	mov r1, r9
+	ldrb r0, [r1]
+	lsls r0, 1
+	adds r0, r6
+	ldrh r0, [r0]
+	muls r0, r5
+	adds r0, r4
+	movs r1, 0x39
+	bl sub_803FBE8
+	adds r3, r0, 0
+	mov r1, r9
+	ldrb r0, [r1]
+	ldr r1, _0803D0A4 @ =gUnknown_3004FF0
+	adds r1, r0, r1
+	ldrb r1, [r1]
+	str r7, [sp]
+	mov r2, r8
+	bl sub_8048150
+	b _0803D0D2
+	.align 2, 0
+_0803D090: .4byte gUnknown_2022BC4
+_0803D094: .4byte gUnknown_2023BC4
+_0803D098: .4byte 0x00007fff
+_0803D09C: .4byte gUnknown_2023BCE
+_0803D0A0: .4byte gUnknown_202402C
+_0803D0A4: .4byte gUnknown_3004FF0
+_0803D0A8:
+	ldr r1, _0803D0F0 @ =gUnknown_2023BCE
+	lsls r0, r4, 1
+	adds r0, r1
+	ldrh r1, [r0]
+	movs r0, 0x64
+	muls r0, r1
+	ldr r1, _0803D0F4 @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0x3A
+	bl sub_803FBE8
+	adds r2, r0, 0
+	mov r1, r9
+	ldrb r0, [r1]
+	ldr r1, _0803D0F8 @ =gUnknown_3004FF0
+	adds r1, r0, r1
+	ldrb r1, [r1]
+	str r7, [sp]
+	movs r3, 0
+	bl sub_8048150
+_0803D0D2:
+	ldr r1, _0803D0FC @ =gUnknown_3004FE0
+	ldr r0, _0803D100 @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803D104 @ =sub_803ACCC
+	str r1, [r0]
+	add sp, 0x4
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D0F0: .4byte gUnknown_2023BCE
+_0803D0F4: .4byte gUnknown_202402C
+_0803D0F8: .4byte gUnknown_3004FF0
+_0803D0FC: .4byte gUnknown_3004FE0
+_0803D100: .4byte gUnknown_2023BC4
+_0803D104: .4byte sub_803ACCC
+	thumb_func_end sub_803D018
+
+	thumb_func_start sub_803D108
+sub_803D108: @ 803D108
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D108
+
+	thumb_func_start sub_803D114
+sub_803D114: @ 803D114
+	push {r4,lr}
+	ldr r4, _0803D170 @ =gUnknown_2023BC4
+	ldrb r0, [r4]
+	bl sub_80342A4
+	lsls r0, 24
+	cmp r0, 0
+	bne _0803D168
+	ldr r0, _0803D174 @ =gUnknown_3004FF0
+	ldrb r1, [r4]
+	adds r0, r1, r0
+	ldrb r0, [r0]
+	ldr r2, _0803D178 @ =gUnknown_2023BCE
+	lsls r1, 1
+	adds r1, r2
+	ldrh r2, [r1]
+	movs r1, 0x64
+	muls r1, r2
+	ldr r2, _0803D17C @ =gUnknown_202402C
+	adds r1, r2
+	movs r2, 0x9
+	bl sub_8049D98
+	ldrb r2, [r4]
+	ldr r0, _0803D180 @ =gUnknown_2024018
+	ldr r0, [r0]
+	ldr r0, [r0, 0x4]
+	lsls r1, r2, 1
+	adds r1, r2
+	lsls r1, 2
+	adds r1, r0
+	ldrb r2, [r1]
+	movs r0, 0x11
+	negs r0, r0
+	ands r0, r2
+	strb r0, [r1]
+	ldr r1, _0803D184 @ =gUnknown_3004FE0
+	ldrb r0, [r4]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803D188 @ =sub_803B0C4
+	str r1, [r0]
+_0803D168:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D170: .4byte gUnknown_2023BC4
+_0803D174: .4byte gUnknown_3004FF0
+_0803D178: .4byte gUnknown_2023BCE
+_0803D17C: .4byte gUnknown_202402C
+_0803D180: .4byte gUnknown_2024018
+_0803D184: .4byte gUnknown_3004FE0
+_0803D188: .4byte sub_803B0C4
+	thumb_func_end sub_803D114
+
+	thumb_func_start sub_803D18C
+sub_803D18C: @ 803D18C
+	push {r4,r5,lr}
+	ldr r5, _0803D1E4 @ =gUnknown_2023BC4
+	ldrb r0, [r5]
+	bl sub_80342A4
+	lsls r0, 24
+	cmp r0, 0
+	bne _0803D1DC
+	ldr r4, _0803D1E8 @ =gUnknown_2022BC4
+	ldrb r3, [r5]
+	lsls r3, 9
+	adds r0, r4, 0x1
+	adds r0, r3, r0
+	ldrb r0, [r0]
+	adds r1, r4, 0x2
+	adds r1, r3, r1
+	ldrb r1, [r1]
+	adds r2, r4, 0x3
+	adds r2, r3, r2
+	ldrb r2, [r2]
+	lsls r2, 8
+	orrs r1, r2
+	adds r2, r4, 0x4
+	adds r2, r3, r2
+	ldrb r2, [r2]
+	lsls r2, 16
+	orrs r1, r2
+	adds r4, 0x5
+	adds r3, r4
+	ldrb r2, [r3]
+	lsls r2, 24
+	orrs r1, r2
+	bl sub_8033F1C
+	ldr r1, _0803D1EC @ =gUnknown_3004FE0
+	ldrb r0, [r5]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803D1F0 @ =sub_803B0C4
+	str r1, [r0]
+_0803D1DC:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D1E4: .4byte gUnknown_2023BC4
+_0803D1E8: .4byte gUnknown_2022BC4
+_0803D1EC: .4byte gUnknown_3004FE0
+_0803D1F0: .4byte sub_803B0C4
+	thumb_func_end sub_803D18C
+
+	thumb_func_start sub_803D1F4
+sub_803D1F4: @ 803D1F4
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D1F4
+
+	thumb_func_start sub_803D200
+sub_803D200: @ 803D200
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D200
+
+	thumb_func_start sub_803D20C
+sub_803D20C: @ 803D20C
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D20C
+
+	thumb_func_start sub_803D218
+sub_803D218: @ 803D218
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D218
+
+	thumb_func_start sub_803D224
+sub_803D224: @ 803D224
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D224
+
+	thumb_func_start sub_803D230
+sub_803D230: @ 803D230
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D230
+
+	thumb_func_start sub_803D23C
+sub_803D23C: @ 803D23C
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D23C
+
+	thumb_func_start sub_803D248
+sub_803D248: @ 803D248
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D248
+
+	thumb_func_start sub_803D254
+sub_803D254: @ 803D254
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D254
+
+	thumb_func_start sub_803D260
+sub_803D260: @ 803D260
+	push {lr}
+	ldr r2, _0803D278 @ =gUnknown_2022870
+	ldrb r1, [r2]
+	movs r0, 0x80
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r2]
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D278: .4byte gUnknown_2022870
+	thumb_func_end sub_803D260
+
+	thumb_func_start sub_803D27C
+sub_803D27C: @ 803D27C
+	push {lr}
+	ldr r3, _0803D2A8 @ =gUnknown_2022870
+	ldr r1, _0803D2AC @ =gUnknown_2022BC4
+	ldr r0, _0803D2B0 @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	lsls r0, 9
+	adds r1, 0x1
+	adds r0, r1
+	ldrb r0, [r0]
+	movs r1, 0x7F
+	ands r1, r0
+	ldrb r2, [r3]
+	movs r0, 0x80
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r3]
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D2A8: .4byte gUnknown_2022870
+_0803D2AC: .4byte gUnknown_2022BC4
+_0803D2B0: .4byte gUnknown_2023BC4
+	thumb_func_end sub_803D27C
+
+	thumb_func_start sub_803D2B4
+sub_803D2B4: @ 803D2B4
+	push {lr}
+	ldr r2, _0803D2C8 @ =gUnknown_2022870
+	ldrb r1, [r2]
+	movs r0, 0x7F
+	ands r0, r1
+	strb r0, [r2]
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D2C8: .4byte gUnknown_2022870
+	thumb_func_end sub_803D2B4
+
+	thumb_func_start sub_803D2CC
+sub_803D2CC: @ 803D2CC
+	push {lr}
+	ldr r3, _0803D2F0 @ =gUnknown_2022870
+	ldr r1, [r3]
+	lsls r1, 24
+	lsrs r1, 31
+	movs r0, 0x1
+	eors r1, r0
+	lsls r1, 7
+	ldrb r2, [r3]
+	movs r0, 0x7F
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r3]
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D2F0: .4byte gUnknown_2022870
+	thumb_func_end sub_803D2CC
+
+	thumb_func_start sub_803D2F4
+sub_803D2F4: @ 803D2F4
+	push {r4,lr}
+	ldr r3, _0803D31C @ =gUnknown_202063C
+	ldr r2, _0803D320 @ =gUnknown_2023D44
+	ldr r4, _0803D324 @ =gUnknown_2023BC4
+	ldrb r0, [r4]
+	adds r0, r2
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r3
+	adds r0, 0x3E
+	ldrb r0, [r0]
+	lsls r0, 29
+	cmp r0, 0
+	bge _0803D328
+	bl sub_803B124
+	b _0803D352
+	.align 2, 0
+_0803D31C: .4byte gUnknown_202063C
+_0803D320: .4byte gUnknown_2023D44
+_0803D324: .4byte gUnknown_2023BC4
+_0803D328:
+	ldr r1, _0803D358 @ =gUnknown_2024005
+	movs r0, 0x1
+	strb r0, [r1]
+	ldrb r0, [r4]
+	adds r0, r2
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r3
+	movs r1, 0
+	strh r1, [r0, 0x30]
+	ldrb r0, [r4]
+	bl sub_804BE70
+	ldr r1, _0803D35C @ =gUnknown_3004FE0
+	ldrb r0, [r4]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803D360 @ =sub_803ADF0
+	str r1, [r0]
+_0803D352:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D358: .4byte gUnknown_2024005
+_0803D35C: .4byte gUnknown_3004FE0
+_0803D360: .4byte sub_803ADF0
+	thumb_func_end sub_803D2F4
+
+	thumb_func_start sub_803D364
+sub_803D364: @ 803D364
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D364
+
+	thumb_func_start sub_803D370
+sub_803D370: @ 803D370
+	push {r4,lr}
+	ldr r4, _0803D3AC @ =gUnknown_2023BC4
+	ldrb r0, [r4]
+	bl sub_80751C4
+	lsls r0, 24
+	movs r3, 0x3F
+	cmp r0, 0
+	bne _0803D384
+	movs r3, 0xC0
+_0803D384:
+	ldr r2, _0803D3B0 @ =gUnknown_2022BC4
+	ldrb r1, [r4]
+	lsls r1, 9
+	adds r0, r2, 0x1
+	adds r0, r1, r0
+	ldrb r0, [r0]
+	adds r2, 0x2
+	adds r1, r2
+	ldrb r1, [r1]
+	lsls r1, 8
+	orrs r0, r1
+	lsls r1, r3, 24
+	asrs r1, 24
+	bl sub_80722F4
+	bl sub_803B124
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D3AC: .4byte gUnknown_2023BC4
+_0803D3B0: .4byte gUnknown_2022BC4
+	thumb_func_end sub_803D370
+
+	thumb_func_start sub_803D3B4
+sub_803D3B4: @ 803D3B4
+	push {lr}
+	ldr r2, _0803D3DC @ =gUnknown_2022BC4
+	ldr r0, _0803D3E0 @ =gUnknown_2023BC4
+	ldrb r1, [r0]
+	lsls r1, 9
+	adds r0, r2, 0x1
+	adds r0, r1, r0
+	ldrb r0, [r0]
+	adds r2, 0x2
+	adds r1, r2
+	ldrb r1, [r1]
+	lsls r1, 8
+	orrs r0, r1
+	bl sub_8071C60
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D3DC: .4byte gUnknown_2022BC4
+_0803D3E0: .4byte gUnknown_2023BC4
+	thumb_func_end sub_803D3B4
+
+	thumb_func_start sub_803D3E4
+sub_803D3E4: @ 803D3E4
+	push {lr}
+	ldr r1, _0803D414 @ =gUnknown_2023BCE
+	ldr r0, _0803D418 @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	lsls r0, 1
+	adds r0, r1
+	ldrh r1, [r0]
+	movs r0, 0x64
+	muls r0, r1
+	ldr r1, _0803D41C @ =gUnknown_202402C
+	adds r0, r1
+	movs r1, 0xB
+	bl sub_803FBE8
+	lsls r0, 16
+	lsrs r0, 16
+	movs r1, 0x19
+	movs r2, 0x5
+	bl sub_8071E60
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D414: .4byte gUnknown_2023BCE
+_0803D418: .4byte gUnknown_2023BC4
+_0803D41C: .4byte gUnknown_202402C
+	thumb_func_end sub_803D3E4
+
+	thumb_func_start sub_803D420
+sub_803D420: @ 803D420
+	push {lr}
+	ldr r1, _0803D448 @ =gUnknown_2022BC4
+	ldr r0, _0803D44C @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	lsls r0, 9
+	adds r1, 0x1
+	adds r0, r1
+	ldrb r0, [r0]
+	bl sub_80BC3A0
+	ldr r2, _0803D450 @ =gUnknown_2023F4C
+	ldrh r0, [r2]
+	movs r1, 0x1
+	orrs r0, r1
+	strh r0, [r2]
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D448: .4byte gUnknown_2022BC4
+_0803D44C: .4byte gUnknown_2023BC4
+_0803D450: .4byte gUnknown_2023F4C
+	thumb_func_end sub_803D420
+
+	thumb_func_start sub_803D454
+sub_803D454: @ 803D454
+	push {r4-r6,lr}
+	ldr r5, _0803D534 @ =gUnknown_2023D44
+	ldr r6, _0803D538 @ =gUnknown_2023BC4
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	ldr r4, _0803D53C @ =gUnknown_202063C
+	adds r0, r4
+	bl sub_80750FC
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	movs r1, 0x23
+	strh r1, [r0, 0x2E]
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	movs r1, 0x8C
+	lsls r1, 1
+	strh r1, [r0, 0x32]
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	ldrh r1, [r0, 0x22]
+	strh r1, [r0, 0x36]
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r1, r4, 0
+	adds r1, 0x1C
+	adds r0, r1
+	ldr r1, _0803D540 @ =sub_8075590
+	str r1, [r0]
+	ldrb r0, [r6]
+	adds r0, r5
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r4
+	ldr r1, _0803D544 @ =sub_803D648
+	bl sub_8074A68
+	ldr r0, _0803D548 @ =sub_803D564
+	movs r1, 0x5
+	bl sub_807741C
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r4, _0803D54C @ =gUnknown_3005090
+	lsls r1, r0, 2
+	adds r1, r0
+	lsls r1, 3
+	adds r1, r4
+	ldrb r0, [r6]
+	strh r0, [r1, 0x8]
+	ldr r3, _0803D550 @ =gUnknown_2024018
+	ldr r0, [r3]
+	ldrb r2, [r6]
+	ldr r1, [r0, 0x4]
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	movs r0, 0x1
+	ands r0, r1
+	cmp r0, 0
+	beq _0803D516
+	ldr r0, _0803D554 @ =gUnknown_2024000
+	adds r0, r2, r0
+	ldrb r1, [r0]
+	lsls r0, r1, 2
+	adds r0, r1
+	lsls r0, 3
+	adds r0, r4
+	ldr r1, _0803D558 @ =sub_80491B0
+	str r1, [r0]
+_0803D516:
+	ldr r0, [r3]
+	ldr r2, [r0, 0x8]
+	ldrb r0, [r2, 0x9]
+	movs r1, 0x1
+	orrs r0, r1
+	strb r0, [r2, 0x9]
+	ldr r1, _0803D55C @ =gUnknown_3004FE0
+	ldrb r0, [r6]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803D560 @ =nullsub_19
+	str r1, [r0]
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D534: .4byte gUnknown_2023D44
+_0803D538: .4byte gUnknown_2023BC4
+_0803D53C: .4byte gUnknown_202063C
+_0803D540: .4byte sub_8075590
+_0803D544: .4byte sub_803D648
+_0803D548: .4byte sub_803D564
+_0803D54C: .4byte gUnknown_3005090
+_0803D550: .4byte gUnknown_2024018
+_0803D554: .4byte gUnknown_2024000
+_0803D558: .4byte sub_80491B0
+_0803D55C: .4byte gUnknown_3004FE0
+_0803D560: .4byte nullsub_19
+	thumb_func_end sub_803D454
+
+	thumb_func_start sub_803D564
+sub_803D564: @ 803D564
+	push {r4-r7,lr}
+	mov r7, r9
+	mov r6, r8
+	push {r6,r7}
+	lsls r0, 24
+	lsrs r0, 24
+	mov r8, r0
+	ldr r7, _0803D5BC @ =gUnknown_2023BC4
+	ldrb r0, [r7]
+	mov r9, r0
+	ldr r1, _0803D5C0 @ =gUnknown_3005090
+	mov r2, r8
+	lsls r0, r2, 2
+	add r0, r8
+	lsls r0, 3
+	adds r0, r1
+	ldrh r0, [r0, 0x8]
+	strb r0, [r7]
+	bl sub_8075290
+	lsls r0, 24
+	cmp r0, 0
+	beq _0803D59E
+	ldr r0, _0803D5C4 @ =gUnknown_2022B4C
+	ldr r0, [r0]
+	movs r1, 0x40
+	ands r0, r1
+	cmp r0, 0
+	beq _0803D5D0
+_0803D59E:
+	ldr r0, _0803D5C8 @ =gUnknown_2022BC4
+	ldrb r1, [r7]
+	lsls r2, r1, 9
+	adds r0, 0x1
+	adds r2, r0
+	ldr r0, _0803D5CC @ =gUnknown_2023BCE
+	lsls r1, 1
+	adds r1, r0
+	ldrh r0, [r1]
+	strb r0, [r2]
+	ldrb r0, [r7]
+	movs r1, 0
+	bl sub_803C550
+	b _0803D610
+	.align 2, 0
+_0803D5BC: .4byte gUnknown_2023BC4
+_0803D5C0: .4byte gUnknown_3005090
+_0803D5C4: .4byte gUnknown_2022B4C
+_0803D5C8: .4byte gUnknown_2022BC4
+_0803D5CC: .4byte gUnknown_2023BCE
+_0803D5D0:
+	ldr r4, _0803D634 @ =gUnknown_2022BC4
+	ldrb r0, [r7]
+	lsls r1, r0, 9
+	adds r4, 0x1
+	adds r1, r4
+	ldr r6, _0803D638 @ =gUnknown_2023BCE
+	lsls r0, 1
+	adds r0, r6
+	ldrh r0, [r0]
+	strb r0, [r1]
+	ldrb r0, [r7]
+	movs r1, 0
+	bl sub_803C550
+	ldrb r0, [r7]
+	movs r5, 0x2
+	eors r0, r5
+	strb r0, [r7]
+	ldrb r0, [r7]
+	lsls r1, r0, 9
+	adds r1, r4
+	lsls r0, 1
+	adds r0, r6
+	ldrh r0, [r0]
+	strb r0, [r1]
+	ldrb r0, [r7]
+	movs r1, 0
+	bl sub_803C550
+	ldrb r0, [r7]
+	eors r0, r5
+	strb r0, [r7]
+_0803D610:
+	ldr r1, _0803D63C @ =gUnknown_3004FE0
+	ldr r2, _0803D640 @ =gUnknown_2023BC4
+	ldrb r0, [r2]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803D644 @ =sub_803A9CC
+	str r1, [r0]
+	mov r0, r9
+	strb r0, [r2]
+	mov r0, r8
+	bl sub_8077508
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D634: .4byte gUnknown_2022BC4
+_0803D638: .4byte gUnknown_2023BCE
+_0803D63C: .4byte gUnknown_3004FE0
+_0803D640: .4byte gUnknown_2023BC4
+_0803D644: .4byte sub_803A9CC
+	thumb_func_end sub_803D564
+
+	thumb_func_start sub_803D648
+sub_803D648: @ 803D648
+	push {r4,lr}
+	adds r4, r0, 0
+	ldrh r0, [r4, 0x6]
+	bl sub_803477C
+	ldrh r0, [r4, 0x38]
+	ldr r1, _0803D674 @ =0x000003ff
+	ands r1, r0
+	ldrh r2, [r4, 0x4]
+	ldr r0, _0803D678 @ =0xfffffc00
+	ands r0, r2
+	orrs r0, r1
+	strh r0, [r4, 0x4]
+	adds r0, r4, 0
+	bl sub_80077D8
+	adds r0, r4, 0
+	bl sub_8007280
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D674: .4byte 0x000003ff
+_0803D678: .4byte 0xfffffc00
+	thumb_func_end sub_803D648
+
+	thumb_func_start sub_803D67C
+sub_803D67C: @ 803D67C
+	push {r4-r7,lr}
+	ldr r1, _0803D6A4 @ =gUnknown_2022BC4
+	ldr r0, _0803D6A8 @ =gUnknown_2023BC4
+	ldrb r2, [r0]
+	lsls r0, r2, 9
+	adds r1, 0x1
+	adds r0, r1
+	ldrb r0, [r0]
+	cmp r0, 0
+	beq _0803D6AC
+	adds r0, r2, 0
+	bl sub_80751C4
+	lsls r0, 24
+	cmp r0, 0
+	bne _0803D6AC
+	bl sub_803B124
+	b _0803D776
+	.align 2, 0
+_0803D6A4: .4byte gUnknown_2022BC4
+_0803D6A8: .4byte gUnknown_2023BC4
+_0803D6AC:
+	ldr r4, _0803D704 @ =gUnknown_2024018
+	ldr r0, [r4]
+	ldr r3, _0803D708 @ =gUnknown_2023BC4
+	ldrb r1, [r3]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r1, [r0]
+	movs r2, 0x1
+	orrs r1, r2
+	strb r1, [r0]
+	ldr r1, _0803D70C @ =gUnknown_2022BC4
+	ldrb r2, [r3]
+	lsls r0, r2, 9
+	adds r1, 0x2
+	adds r0, r1
+	ldrb r0, [r0]
+	adds r7, r3, 0
+	cmp r0, 0
+	beq _0803D718
+	ldr r0, [r4]
+	ldr r1, [r0, 0x4]
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 2
+	adds r3, r0, r1
+	ldrb r2, [r3, 0x1]
+	lsls r1, r2, 26
+	lsrs r0, r1, 27
+	cmp r0, 0x1
+	bhi _0803D710
+	adds r0, 0x1
+	movs r1, 0x1F
+	ands r0, r1
+	lsls r0, 1
+	movs r1, 0x3F
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r3, 0x1]
+	b _0803D776
+	.align 2, 0
+_0803D704: .4byte gUnknown_2024018
+_0803D708: .4byte gUnknown_2023BC4
+_0803D70C: .4byte gUnknown_2022BC4
+_0803D710:
+	movs r0, 0x3F
+	negs r0, r0
+	ands r0, r2
+	strb r0, [r3, 0x1]
+_0803D718:
+	adds r5, r7, 0
+	ldrb r0, [r5]
+	lsls r3, r0, 9
+	ldr r4, _0803D77C @ =gUnknown_2022BC8
+	adds r1, r3, r4
+	subs r2, r4, 0x3
+	adds r2, r3, r2
+	ldrb r2, [r2]
+	subs r4, 0x2
+	adds r3, r4
+	ldrb r3, [r3]
+	bl sub_8048D14
+	ldr r2, _0803D780 @ =gUnknown_2024000
+	ldrb r1, [r5]
+	adds r1, r2
+	movs r3, 0
+	strb r0, [r1]
+	ldr r6, _0803D784 @ =gUnknown_2024018
+	ldr r0, [r6]
+	ldrb r1, [r5]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	strb r3, [r0, 0x5]
+	ldrb r2, [r5]
+	lsls r0, r2, 9
+	adds r0, r4
+	ldrb r0, [r0]
+	cmp r0, 0
+	beq _0803D76A
+	ldr r0, [r6]
+	ldr r1, [r0, 0x4]
+	lsls r0, r2, 1
+	adds r0, r2
+	lsls r0, 2
+	adds r0, r1
+	movs r1, 0x5D
+	strb r1, [r0, 0x5]
+_0803D76A:
+	ldr r0, _0803D788 @ =gUnknown_3004FE0
+	ldrb r1, [r7]
+	lsls r1, 2
+	adds r1, r0
+	ldr r0, _0803D78C @ =sub_803D790
+	str r0, [r1]
+_0803D776:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D77C: .4byte gUnknown_2022BC8
+_0803D780: .4byte gUnknown_2024000
+_0803D784: .4byte gUnknown_2024018
+_0803D788: .4byte gUnknown_3004FE0
+_0803D78C: .4byte sub_803D790
+	thumb_func_end sub_803D67C
+
+	thumb_func_start sub_803D790
+sub_803D790: @ 803D790
+	push {r4,lr}
+	ldr r4, _0803D7D0 @ =gUnknown_2024018
+	ldr r0, [r4]
+	ldr r3, _0803D7D4 @ =gUnknown_2023BC4
+	ldrb r1, [r3]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r1, [r0, 0x5]
+	adds r2, r1, 0x1
+	strb r2, [r0, 0x5]
+	lsls r1, 24
+	lsrs r1, 24
+	cmp r1, 0x5C
+	bls _0803D7C8
+	ldr r0, [r4]
+	ldrb r1, [r3]
+	ldr r2, [r0, 0x4]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	movs r1, 0
+	strb r1, [r0, 0x5]
+	bl sub_803B124
+_0803D7C8:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D7D0: .4byte gUnknown_2024018
+_0803D7D4: .4byte gUnknown_2023BC4
+	thumb_func_end sub_803D790
+
+	thumb_func_start sub_803D7D8
+sub_803D7D8: @ 803D7D8
+	push {lr}
+	ldr r0, _0803D814 @ =gUnknown_2024018
+	ldr r1, [r0]
+	ldr r0, _0803D818 @ =gUnknown_2023BC4
+	ldrb r3, [r0]
+	ldr r1, [r1, 0x4]
+	lsls r0, r3, 1
+	adds r0, r3
+	lsls r0, 2
+	adds r0, r1
+	ldrb r1, [r0]
+	movs r0, 0x1
+	ands r0, r1
+	cmp r0, 0
+	beq _0803D80A
+	ldr r2, _0803D81C @ =gUnknown_3005090
+	ldr r0, _0803D820 @ =gUnknown_2024000
+	adds r0, r3, r0
+	ldrb r1, [r0]
+	lsls r0, r1, 2
+	adds r0, r1
+	lsls r0, 3
+	adds r0, r2
+	ldr r1, _0803D824 @ =sub_80491B0
+	str r1, [r0]
+_0803D80A:
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D814: .4byte gUnknown_2024018
+_0803D818: .4byte gUnknown_2023BC4
+_0803D81C: .4byte gUnknown_3005090
+_0803D820: .4byte gUnknown_2024000
+_0803D824: .4byte sub_80491B0
+	thumb_func_end sub_803D7D8
+
+	thumb_func_start sub_803D828
+sub_803D828: @ 803D828
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D828
+
+	thumb_func_start sub_803D834
+sub_803D834: @ 803D834
+	push {r4,lr}
+	ldr r4, _0803D884 @ =gUnknown_2023BC4
+	ldrb r0, [r4]
+	bl sub_8075224
+	lsls r0, 24
+	cmp r0, 0
+	beq _0803D87A
+	ldr r3, _0803D888 @ =gUnknown_202063C
+	ldr r0, _0803D88C @ =gUnknown_2023D44
+	ldrb r1, [r4]
+	adds r0, r1, r0
+	ldrb r0, [r0]
+	lsls r2, r0, 4
+	adds r2, r0
+	lsls r2, 2
+	adds r2, r3
+	ldr r0, _0803D890 @ =gUnknown_2022BC4
+	lsls r1, 9
+	adds r0, 0x1
+	adds r1, r0
+	adds r2, 0x3E
+	movs r0, 0x1
+	ldrb r1, [r1]
+	ands r1, r0
+	lsls r1, 2
+	ldrb r3, [r2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r3
+	orrs r0, r1
+	strb r0, [r2]
+	ldrb r0, [r4]
+	bl sub_8034BB4
+_0803D87A:
+	bl sub_803B124
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D884: .4byte gUnknown_2023BC4
+_0803D888: .4byte gUnknown_202063C
+_0803D88C: .4byte gUnknown_2023D44
+_0803D890: .4byte gUnknown_2022BC4
+	thumb_func_end sub_803D834
+
+	thumb_func_start sub_803D894
+sub_803D894: @ 803D894
+	push {r4-r6,lr}
+	sub sp, 0x4
+	ldr r6, _0803D8D8 @ =gUnknown_2023BC4
+	ldrb r0, [r6]
+	bl sub_80342A4
+	lsls r0, 24
+	cmp r0, 0
+	bne _0803D8EC
+	ldr r5, _0803D8DC @ =gUnknown_2022BC4
+	ldrb r2, [r6]
+	lsls r1, r2, 9
+	adds r0, r5, 0x1
+	adds r0, r1, r0
+	ldrb r3, [r0]
+	adds r0, r5, 0x2
+	adds r0, r1, r0
+	ldrb r4, [r0]
+	adds r5, 0x3
+	adds r1, r5
+	ldrb r0, [r1]
+	lsls r0, 8
+	orrs r4, r0
+	str r4, [sp]
+	adds r0, r2, 0
+	adds r1, r2, 0
+	bl sub_803401C
+	lsls r0, 24
+	cmp r0, 0
+	beq _0803D8E0
+	bl sub_803B124
+	b _0803D8EC
+	.align 2, 0
+_0803D8D8: .4byte gUnknown_2023BC4
+_0803D8DC: .4byte gUnknown_2022BC4
+_0803D8E0:
+	ldr r0, _0803D8F4 @ =gUnknown_3004FE0
+	ldrb r1, [r6]
+	lsls r1, 2
+	adds r1, r0
+	ldr r0, _0803D8F8 @ =sub_803B0F4
+	str r0, [r1]
+_0803D8EC:
+	add sp, 0x4
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D8F4: .4byte gUnknown_3004FE0
+_0803D8F8: .4byte sub_803B0F4
+	thumb_func_end sub_803D894
+
+	thumb_func_start sub_803D8FC
+sub_803D8FC: @ 803D8FC
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D8FC
+
+	thumb_func_start sub_803D908
+sub_803D908: @ 803D908
+	push {lr}
+	bl sub_803B124
+	pop {r0}
+	bx r0
+	thumb_func_end sub_803D908
+
+	thumb_func_start sub_803D914
+sub_803D914: @ 803D914
+	push {lr}
+	ldr r1, _0803D930 @ =gUnknown_2022BC4
+	ldr r0, _0803D934 @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	lsls r0, 9
+	adds r1, 0x1
+	adds r0, r1
+	ldrb r2, [r0]
+	cmp r2, 0x3
+	bne _0803D93C
+	ldr r0, _0803D938 @ =gUnknown_2023E8A
+	strb r2, [r0]
+	b _0803D944
+	.align 2, 0
+_0803D930: .4byte gUnknown_2022BC4
+_0803D934: .4byte gUnknown_2023BC4
+_0803D938: .4byte gUnknown_2023E8A
+_0803D93C:
+	ldr r0, _0803D968 @ =gUnknown_2023E8A
+	movs r1, 0x3
+	eors r1, r2
+	strb r1, [r0]
+_0803D944:
+	movs r0, 0x5
+	bl sub_8071AB4
+	movs r0, 0x3
+	bl sub_8070E44
+	bl sub_803B124
+	ldr r1, _0803D96C @ =gUnknown_3004FE0
+	ldr r0, _0803D970 @ =gUnknown_2023BC4
+	ldrb r0, [r0]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, _0803D974 @ =sub_802F6A8
+	str r1, [r0]
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0803D968: .4byte gUnknown_2023E8A
+_0803D96C: .4byte gUnknown_3004FE0
+_0803D970: .4byte gUnknown_2023BC4
+_0803D974: .4byte sub_802F6A8
+	thumb_func_end sub_803D914
+
+	thumb_func_start nullsub_20
+nullsub_20: @ 803D978
+	bx lr
+	thumb_func_end nullsub_20
+
+	.align 2, 0 @ Don't pad with nop.

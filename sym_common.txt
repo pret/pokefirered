@@ -1,0 +1,497 @@
+gUnknown_30030E0: @ 30030E0
+	.space 0x4
+
+gUnknown_30030E4: @ 30030E4
+	.space 0xC
+
+gUnknown_30030F0: @ 30030F0
+	.space 0x2C
+
+gUnknown_300311C: @ 300311C
+	.space 0xC
+
+gUnknown_3003128: @ 3003128
+	.space 0x400
+
+gUnknown_3003528: @ 3003528
+	.space 0x4
+
+gUnknown_300352C: @ 300352C
+	.space 0x4
+
+gUnknown_3003530: @ 3003530
+	.space 0x10
+
+gIntrTable: @ 3003540
+	.space 0x4
+
+gUnknown_3003544: @ 3003544
+	.space 0x34
+
+gUnknown_3003578: @ 3003578
+	.space 0x4
+
+gUnknown_300357C: @ 300357C
+	.space 0x4
+
+gUnknown_3003580: @ 3003580
+	.space 0x800
+
+gUnknown_3003D80: @ 3003D80
+	.space 0x4
+
+gUnknown_3003D84: @ 3003D84
+	.space 0x4
+
+gUnknown_3003D88: @ 3003D88
+	.space 0x4
+
+gUnknown_3003D8C: @ 3003D8C
+	.space 0x4
+
+gUnknown_3003D90: @ 3003D90
+	.space 0x10
+
+gUnknown_3003DA0: @ 3003DA0
+	.space 0x20
+
+gUnknown_3003DC0: @ 3003DC0
+	.space 0x20
+
+gUnknown_3003DE0: @ 3003DE0
+	.space 0x20
+
+gUnknown_3003E00: @ 3003E00
+	.space 0x20
+
+gUnknown_3003E20: @ 3003E20
+	.space 0x10
+
+gUnknown_3003E30: @ 3003E30
+	.space 0x10
+
+gUnknown_3003E40: @ 3003E40
+	.space 0x10
+
+gUnknown_3003E50: @ 3003E50
+	.space 0x4
+
+gUnknown_3003E54: @ 3003E54
+	.space 0x4
+
+gUnknown_3003E58: @ 3003E58
+	.space 0x8
+
+gUnknown_3003E60: @ 3003E60
+	.space 0xC
+
+gUnknown_3003E6C: @ 3003E6C
+	.space 0x4
+
+gUnknown_3003E70: @ 3003E70
+	.space 0x3C
+
+gUnknown_3003EAC: @ 3003EAC
+	.space 0x4
+
+gUnknown_3003EB0: @ 3003EB0
+	.space 0x8
+
+gUnknown_3003EB8: @ 3003EB8
+	.space 0x4
+
+gUnknown_3003EBC: @ 3003EBC
+	.space 0x8
+
+gUnknown_3003EC4: @ 3003EC4
+	.space 0xC
+
+gUnknown_3003ED0: @ 3003ED0
+	.space 0x2
+
+gUnknown_3003ED2: @ 3003ED2
+	.space 0x2
+
+gUnknown_3003ED4: @ 3003ED4
+	.space 0x4C
+
+gUnknown_3003F20: @ 3003F20
+	.space 0x4
+
+gUnknown_3003F24: @ 3003F24
+	.space 0x4
+
+gUnknown_3003F28: @ 3003F28
+	.space 0x4
+
+gUnknown_3003F2C: @ 3003F2C
+	.space 0x4
+
+gUnknown_3003F30: @ 3003F30
+	.space 0x4
+
+gUnknown_3003F34: @ 3003F34
+	.space 0x4
+
+gUnknown_3003F38: @ 3003F38
+	.space 0x4
+
+gUnknown_3003F3C: @ 3003F3C
+	.space 0x4
+
+gUnknown_3003F40: @ 3003F40
+	.space 0x10
+
+gUnknown_3003F50: @ 3003F50
+	.space 0x10
+
+gUnknown_3003F60: @ 3003F60
+	.space 0x4
+
+gUnknown_3003F64: @ 3003F64
+	.space 0xC
+
+gUnknown_3003F70: @ 3003F70
+	.space 0x10
+
+gUnknown_3003F80: @ 3003F80
+	.space 0x4
+
+gUnknown_3003F84: @ 3003F84
+	.space 0x4
+
+gUnknown_3003F88: @ 3003F88
+	.space 0x8
+
+gUnknown_3003F90: @ 3003F90
+	.space 0x10
+
+gUnknown_3003FA0: @ 3003FA0
+	.space 0x10
+
+gUnknown_3003FB0: @ 3003FB0
+	.space 0x4
+
+gUnknown_3003FB4: @ 3003FB4
+	.space 0xFBC
+
+gUnknown_3004F70: @ 3004F70
+	.space 0x4
+
+gUnknown_3004F74: @ 3004F74
+	.space 0xC
+
+gUnknown_3004F80: @ 3004F80
+	.space 0x4
+
+gUnknown_3004F84: @ 3004F84
+	.space 0xC
+
+gUnknown_3004F90: @ 3004F90
+	.space 0x44
+
+gUnknown_3004FD4: @ 3004FD4
+	.space 0xC
+
+gUnknown_3004FE0: @ 3004FE0
+	.space 0x10
+
+gUnknown_3004FF0: @ 3004FF0
+	.space 0x4
+
+gUnknown_3004FF4: @ 3004FF4
+	.space 0x4
+
+gUnknown_3004FF8: @ 3004FF8
+	.space 0x4
+
+gUnknown_3004FFC: @ 3004FFC
+	.space 0x4
+
+gUnknown_3005000: @ 3005000
+	.space 0x4
+
+gUnknown_3005004: @ 3005004
+	.space 0x4
+
+gUnknown_3005008: @ 3005008
+	.space 0x4
+
+gUnknown_300500C: @ 300500C
+	.space 0x4
+
+gUnknown_3005010: @ 3005010
+	.space 0x4
+
+gUnknown_3005014: @ 3005014
+	.space 0x4
+
+gUnknown_3005018: @ 3005018
+	.space 0x4
+
+gUnknown_300501C: @ 300501C
+	.space 0x4
+
+gUnknown_3005020: @ 3005020
+	.space 0x4
+
+gUnknown_3005024: @ 3005024
+	.space 0x4
+
+gUnknown_3005028: @ 3005028
+	.space 0x4
+
+gUnknown_300502C: @ 300502C
+	.space 0x4
+
+gUnknown_3005030: @ 3005030
+	.space 0x10
+
+gUnknown_3005040: @ 3005040
+	.space 0x10
+
+gUnknown_3005050: @ 3005050
+	.space 0x18
+
+gUnknown_3005068: @ 3005068
+	.space 0x4
+
+gUnknown_300506C: @ 300506C
+	.space 0x4
+
+gUnknown_3005070: @ 3005070
+	.space 0x4
+
+gUnknown_3005074: @ 3005074
+	.space 0x4
+
+gUnknown_3005078: @ 3005078
+	.space 0x4
+
+gUnknown_300507C: @ 300507C
+	.space 0x4
+
+gUnknown_3005080: @ 3005080
+	.space 0x10
+
+gUnknown_3005090: @ 3005090
+	.space 0x8
+
+gUnknown_3005098: @ 3005098
+	.space 0x298
+
+gUnknown_3005330: @ 3005330
+	.space 0x4
+
+gUnknown_3005334: @ 3005334
+	.space 0x4
+
+gUnknown_3005338: @ 3005338
+	.space 0x4
+
+gUnknown_300533C: @ 300533C
+	.space 0x4
+
+gUnknown_3005340: @ 3005340
+	.space 0x4
+
+gUnknown_3005344: @ 3005344
+	.space 0x4
+
+gUnknown_3005348: @ 3005348
+	.space 0x4
+
+gUnknown_300534C: @ 300534C
+	.space 0x4
+
+gUnknown_3005350: @ 3005350
+	.space 0x4
+
+gUnknown_3005354: @ 3005354
+	.space 0xC
+
+gUnknown_3005360: @ 3005360
+	.space 0x18
+
+gUnknown_3005378: @ 3005378
+	.space 0x4
+
+gUnknown_300537C: @ 300537C
+	.space 0x4
+
+gUnknown_3005380: @ 3005380
+	.space 0x4
+
+gUnknown_3005384: @ 3005384
+	.space 0x4
+
+gUnknown_3005388: @ 3005388
+	.space 0x4
+
+gUnknown_300538C: @ 300538C
+	.space 0x4
+
+gUnknown_3005390: @ 3005390
+	.space 0x4
+
+gUnknown_3005394: @ 3005394
+	.space 0x4
+
+gUnknown_3005398: @ 3005398
+	.space 0x8
+
+gUnknown_30053A0: @ 30053A0
+	.space 0x4
+
+gUnknown_30053A4: @ 30053A4
+	.space 0xC
+
+gUnknown_30053B0: @ 30053B0
+	.space 0x70
+
+gUnknown_3005420: @ 3005420
+	.space 0x4
+
+gUnknown_3005424: @ 3005424
+	.space 0x4
+
+gUnknown_3005428: @ 3005428
+	.space 0x4
+
+gUnknown_300542C: @ 300542C
+	.space 0x4
+
+gUnknown_3005430: @ 3005430
+	.space 0x10
+
+gUnknown_3005440: @ 3005440
+	.space 0x10
+
+gUnknown_3005450: @ 3005450
+	.space 0x14
+
+gUnknown_3005464: @ 3005464
+	.space 0x58
+
+gUnknown_30054BC: @ 30054BC
+	.space 0x2
+
+gUnknown_30054BE: @ 30054BE
+	.space 0x76
+
+gUnknown_3005534: @ 3005534
+	.space 0xE
+
+gUnknown_3005542: @ 3005542
+	.space 0x18
+
+gUnknown_300555A: @ 300555A
+	.space 0x1A
+
+gUnknown_3005574: @ 3005574
+	.space 0x57C
+
+gUnknown_3005AF0: @ 3005AF0
+	.space 0x29F
+
+gUnknown_3005D8F: @ 3005D8F
+	.space 0x47
+
+gUnknown_3005DD6: @ 3005DD6
+	.space 0x3
+
+gUnknown_3005DD9: @ 3005DD9
+	.space 0x4
+
+gUnknown_3005DDD: @ 3005DDD
+	.space 0x9
+
+gUnknown_3005DE6: @ 3005DE6
+	.space 0x1A
+
+gUnknown_3005E00: @ 3005E00
+	.space 0x10
+
+gUnknown_3005E10: @ 3005E10
+	.space 0x10
+
+gUnknown_3005E20: @ 3005E20
+	.space 0x40
+
+gUnknown_3005E60: @ 3005E60
+	.space 0x10
+
+gUnknown_3005E70: @ 3005E70
+	.space 0x18
+
+gUnknown_3005E88: @ 3005E88
+	.space 0x4
+
+gUnknown_3005E8C: @ 3005E8C
+	.space 0x4
+
+gUnknown_3005E90: @ 3005E90
+	.space 0x4
+
+gUnknown_3005E94: @ 3005E94
+	.space 0x4
+
+gUnknown_3005E98: @ 3005E98
+	.space 0x4
+
+gUnknown_3005E9C: @ 3005E9C
+	.space 0x4
+
+gUnknown_3005EA0: @ 3005EA0
+	.space 0x10
+
+gUnknown_3005EB0: @ 3005EB0
+	.space 0x18
+
+gUnknown_3005EC8: @ 3005EC8
+	.space 0x4
+
+gUnknown_3005ECC: @ 3005ECC
+	.space 0x4
+
+gUnknown_3005ED0: @ 3005ED0
+	.space 0x10
+
+gUnknown_3005EE0: @ 3005EE0
+	.space 0x10
+
+gUnknown_3005EF0: @ 3005EF0
+	.space 0x4
+
+gUnknown_3005EF4: @ 3005EF4
+	.space 0x4
+
+gUnknown_3005EF8: @ 3005EF8
+	.space 0x8
+
+gUnknown_3005F00: @ 3005F00
+	.space 0x50
+
+	.include "m4a_2.o"
+	.include "agb_flash.o"
+
+gRfuState: @ 3007438
+	.space 0x8
+
+gUnknown_3007440: @ 3007440
+	.space 0x10
+
+gUnknown_3007450: @ 3007450
+	.space 0x10
+
+gUnknown_3007460: @ 3007460
+	.space 0x4
+
+gUnknown_3007464: @ 3007464
+	.space 0x4
+
+gUnknown_3007468: @ 3007468
+	.space 0x8
+
+gUnknown_3007470: @ 3007470
+	.space 0xC

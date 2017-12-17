@@ -1,0 +1,15 @@
+*.pal text eol=crlf
+
+*.s text eol=lf
+*.txt text eol=lf
+Makefile text eol=lf
+*.mk text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.pl text eol=lf
+*.inc text eol=lf
+*.sha1 text eol=lf
+*.sed text eol=lf
+
+*.png binary
+*.bin binary

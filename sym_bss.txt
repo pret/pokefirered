@@ -1,0 +1,395 @@
+gUnknown_3000000: @ 3000000
+	.space 0x4
+
+gUnknown_3000004: @ 3000004
+	.space 0x5C
+
+gUnknown_3000060: @ 3000060
+	.space 0x60
+
+gUnknown_30000C0: @ 30000C0
+	.space 0x1
+
+gUnknown_30000C1: @ 30000C1
+	.space 0x1
+
+gUnknown_30000C2: @ 30000C2
+	.space 0x6
+
+gUnknown_30000C8: @ 30000C8
+	.space 0xC
+
+gUnknown_30000D4: @ 30000D4
+	.space 0x1C
+
+gUnknown_30000F0: @ 30000F0
+	.space 0xA
+
+gUnknown_30000FA: @ 30000FA
+	.space 0x7CE
+
+gUnknown_30008C8: @ 30008C8
+	.space 0x1
+
+gUnknown_30008C9: @ 30008C9
+	.space 0x7
+
+gUnknown_30008D0: @ 30008D0
+	.space 0x18
+
+gUnknown_30008E8: @ 30008E8
+	.space 0x4
+
+gUnknown_30008EC: @ 30008EC
+	.space 0x8
+
+gUnknown_30008F4: @ 30008F4
+	.space 0x34
+
+gUnknown_3000928: @ 3000928
+	.space 0x10
+
+gUnknown_3000938: @ 3000938
+	.space 0x100
+
+gUnknown_3000A38: @ 3000A38
+	.space 0x4
+
+gUnknown_3000A3C: @ 3000A3C
+	.space 0x4
+
+gUnknown_3000A40: @ 3000A40
+	.space 0xA2
+
+gUnknown_3000AE2: @ 3000AE2
+	.space 0x2
+
+gUnknown_3000AE4: @ 3000AE4
+	.space 0x2
+
+gUnknown_3000AE6: @ 3000AE6
+	.space 0x2
+
+gUnknown_3000AE8: @ 3000AE8
+	.space 0x80
+
+gUnknown_3000B68: @ 3000B68
+	.space 0x100
+
+gUnknown_3000C68: @ 3000C68
+	.space 0x180
+
+gUnknown_3000DE8: @ 3000DE8
+	.space 0x20
+
+gUnknown_3000E08: @ 3000E08
+	.space 0x10
+
+gUnknown_3000E18: @ 3000E18
+	.space 0x30
+
+gUnknown_3000E48: @ 3000E48
+	.space 0x4
+
+gUnknown_3000E4C: @ 3000E4C
+	.space 0x4
+
+gUnknown_3000E50: @ 3000E50
+	.space 0x4
+
+gUnknown_3000E54: @ 3000E54
+	.space 0x4
+
+gUnknown_3000E58: @ 3000E58
+	.space 0x4
+
+gUnknown_3000E5C: @ 3000E5C
+	.space 0x4
+
+gUnknown_3000E60: @ 3000E60
+	.space 0x4
+
+gUnknown_3000E64: @ 3000E64
+	.space 0x1
+
+gUnknown_3000E65: @ 3000E65
+	.space 0x1
+
+gUnknown_3000E66: @ 3000E66
+	.space 0x2
+
+gUnknown_3000E68: @ 3000E68
+	.space 0x2
+
+gUnknown_3000E6A: @ 3000E6A
+	.space 0x1
+
+gUnknown_3000E6B: @ 3000E6B
+	.space 0x1
+
+gUnknown_3000E6C: @ 3000E6C
+	.space 0x8
+
+gUnknown_3000E74: @ 3000E74
+	.space 0x4
+
+gUnknown_3000E78: @ 3000E78
+	.space 0x4
+
+gUnknown_3000E7C: @ 3000E7C
+	.space 0x4
+
+gUnknown_3000E80: @ 3000E80
+	.space 0x4
+
+gUnknown_3000E84: @ 3000E84
+	.space 0x4
+
+gUnknown_3000E88: @ 3000E88
+	.space 0x1
+
+gUnknown_3000E89: @ 3000E89
+	.space 0x7
+
+gUnknown_3000E90: @ 3000E90
+	.space 0x8
+
+gUnknown_3000E98: @ 3000E98
+	.space 0x2
+
+gUnknown_3000E9A: @ 3000E9A
+	.space 0x2
+
+gUnknown_3000E9C: @ 3000E9C
+	.space 0x4
+
+gUnknown_3000EA0: @ 3000EA0
+	.space 0x8
+
+gUnknown_3000EA8: @ 3000EA8
+	.space 0x8
+
+gUnknown_3000EB0: @ 3000EB0
+	.space 0x78
+
+gUnknown_3000F28: @ 3000F28
+	.space 0x74
+
+gUnknown_3000F9C: @ 3000F9C
+	.space 0x1
+
+gUnknown_3000F9D: @ 3000F9D
+	.space 0x1
+
+gUnknown_3000F9E: @ 3000F9E
+	.space 0x1
+
+gUnknown_3000F9F: @ 3000F9F
+	.space 0x1
+
+gUnknown_3000FA0: @ 3000FA0
+	.space 0x1
+
+gUnknown_3000FA1: @ 3000FA1
+	.space 0x3
+
+gUnknown_3000FA4: @ 3000FA4
+	.space 0x4
+
+gUnknown_3000FA8: @ 3000FA8
+	.space 0x1
+
+gUnknown_3000FA9: @ 3000FA9
+	.space 0x3
+
+gUnknown_3000FAC: @ 3000FAC
+	.space 0x2
+
+gUnknown_3000FAE: @ 3000FAE
+	.space 0x2
+
+gUnknown_3000FB0: @ 3000FB0
+	.space 0x2
+
+gUnknown_3000FB2: @ 3000FB2
+	.space 0x2
+
+gUnknown_3000FB4: @ 3000FB4
+	.space 0x4
+
+gUnknown_3000FB8: @ 3000FB8
+	.space 0x4
+
+gUnknown_3000FBC: @ 3000FBC
+	.space 0x4
+
+gUnknown_3000FC0: @ 3000FC0
+	.space 0x2
+
+gUnknown_3000FC2: @ 3000FC2
+	.space 0x2
+
+gUnknown_3000FC4: @ 3000FC4
+	.space 0x1
+
+gUnknown_3000FC5: @ 3000FC5
+	.space 0x1
+
+gUnknown_3000FC6: @ 3000FC6
+	.space 0x2
+
+gUnknown_3000FC8: @ 3000FC8
+	.space 0x20
+
+gUnknown_3000FE8: @ 3000FE8
+	.space 0x184
+
+gUnknown_300116C: @ 300116C
+	.space 0x4
+
+gUnknown_3001170: @ 3001170
+	.space 0x4
+
+gUnknown_3001174: @ 3001174
+	.space 0x4
+
+gUnknown_3001178: @ 3001178
+	.space 0x4
+
+gUnknown_300117C: @ 300117C
+	.space 0x4
+
+gUnknown_3001180: @ 3001180
+	.space 0x4
+
+gUnknown_3001184: @ 3001184
+	.space 0x4
+
+gUnknown_3001188: @ 3001188
+	.space 0x8
+
+gUnknown_3001190: @ 3001190
+	.space 0xE68
+
+gUnknown_3001FF8: @ 3001FF8
+	.space 0x10
+
+gUnknown_3002008: @ 3002008
+	.space 0x10
+
+gUnknown_3002018: @ 3002018
+	.space 0x4
+
+gUnknown_300201C: @ 300201C
+	.space 0x4
+
+gUnknown_3002020: @ 3002020
+	.space 0x4
+
+gUnknown_3002024: @ 3002024
+	.space 0x4
+
+gUnknown_3002028: @ 3002028
+	.space 0x4
+
+gUnknown_300202C: @ 300202C
+	.space 0x4
+
+gUnknown_3002030: @ 3002030
+	.space 0x8
+
+gUnknown_3002038: @ 3002038
+	.space 0x8
+
+gUnknown_3002040: @ 3002040
+	.space 0x4
+
+gUnknown_3002044: @ 3002044
+	.space 0x4
+
+gUnknown_3002048: @ 3002048
+	.space 0x18
+
+gUnknown_3002060: @ 3002060
+	.space 0x2
+
+gUnknown_3002062: @ 3002062
+	.space 0x2
+
+gUnknown_3002064: @ 3002064
+	.space 0x2
+
+gUnknown_3002066: @ 3002066
+	.space 0x2
+
+gUnknown_3002068: @ 3002068
+	.space 0x4
+
+gUnknown_300206C: @ 300206C
+	.space 0x2
+
+gUnknown_300206E: @ 300206E
+	.space 0x2
+
+gUnknown_3002070: @ 3002070
+	.space 0x2
+
+gUnknown_3002072: @ 3002072
+	.space 0x2
+
+gUnknown_3002074: @ 3002074
+	.space 0x4
+
+gUnknown_3002078: @ 3002078
+	.space 0x4
+
+gUnknown_300207C: @ 300207C
+	.space 0x4
+
+gUnknown_3002080: @ 3002080
+	.space 0x8
+
+	.include "asm/m4a_1.o"
+	.include "src/agb_flash.o"
+
+	.space 0x4 @ This isn't needed for Ruby/Sapphire or Emerald.
+
+	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
+	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"
+	.include "tools/agbcc/lib/libc.a:memcpy.o"
+	.include "tools/agbcc/lib/libc.a:memset.o"
+	.include "tools/agbcc/lib/libc.a:strcmp.o"
+	.include "tools/agbcc/lib/libc.a:strcpy.o"
+	.include "tools/agbcc/lib/libc.a:impure.o"
+	.include "tools/agbcc/lib/libc.a:vsprintf.o"
+	.include "tools/agbcc/lib/libc.a:vfprintf.o"
+	.include "tools/agbcc/lib/libc.a:wsetup.o"
+	.include "tools/agbcc/lib/libc.a:dtoa.o"
+	.include "tools/agbcc/lib/libc.a:fflush.o"
+	.include "tools/agbcc/lib/libc.a:findfp.o"
+	.include "tools/agbcc/lib/libc.a:freer.o"
+	.include "tools/agbcc/lib/libc.a:mtrim.o"
+	.include "tools/agbcc/lib/libc.a:fvwrite.o"
+	.include "tools/agbcc/lib/libc.a:fwalk.o"
+	.include "tools/agbcc/lib/libc.a:locale.o"
+	.include "tools/agbcc/lib/libc.a:makebuf.o"
+	.include "tools/agbcc/lib/libc.a:mallocr.o"
+	.include "tools/agbcc/lib/libc.a:mbtowc_r.o"
+	.include "tools/agbcc/lib/libc.a:memchr.o"
+	.include "tools/agbcc/lib/libc.a:memmove.o"
+	.include "tools/agbcc/lib/libc.a:mlock.o"
+	.include "tools/agbcc/lib/libc.a:mprec.o"
+	.include "tools/agbcc/lib/libc.a:s_isinf.o"
+	.include "tools/agbcc/lib/libc.a:s_isnan.o"
+	.include "tools/agbcc/lib/libc.a:sbrkr.o"
+	.include "tools/agbcc/lib/libc.a:stdio.o"
+	.include "tools/agbcc/lib/libc.a:strlen.o"
+	.include "tools/agbcc/lib/libc.a:syscalls.o"
+	.include "tools/agbcc/lib/libc.a:writer.o"
+	.include "tools/agbcc/lib/libc.a:callocr.o"
+	.include "tools/agbcc/lib/libc.a:closer.o"
+	.include "tools/agbcc/lib/libc.a:errno.o"
+	.include "tools/agbcc/lib/libc.a:fstatr.o"
+	.include "tools/agbcc/lib/libc.a:libcfunc.o"
+	.include "tools/agbcc/lib/libc.a:lseekr.o"
+	.include "tools/agbcc/lib/libc.a:readr.o"

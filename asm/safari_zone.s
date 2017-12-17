@@ -1,0 +1,167 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
+
+	.syntax unified
+
+	.text
+
+	thumb_func_start sub_80A0E90
+sub_80A0E90: @ 80A0E90
+	push {lr}
+	movs r0, 0x80
+	lsls r0, 4
+	bl sub_806E6D0
+	lsls r0, 24
+	lsrs r0, 24
+	pop {r1}
+	bx r1
+	thumb_func_end sub_80A0E90
+
+	thumb_func_start sub_80A0EA4
+sub_80A0EA4: @ 80A0EA4
+	push {lr}
+	movs r0, 0x80
+	lsls r0, 4
+	bl sub_806E680
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80A0EA4
+
+	thumb_func_start sub_80A0EB4
+sub_80A0EB4: @ 80A0EB4
+	push {lr}
+	movs r0, 0x80
+	lsls r0, 4
+	bl sub_806E6A8
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80A0EB4
+
+	thumb_func_start sub_80A0EC4
+sub_80A0EC4: @ 80A0EC4
+	push {lr}
+	movs r0, 0x11
+	bl sub_8054E90
+	bl sub_80A0EA4
+	ldr r1, _080A0EE4 @ =gUnknown_2039994
+	movs r0, 0x1E
+	strb r0, [r1]
+	ldr r1, _080A0EE8 @ =gUnknown_2039996
+	movs r2, 0x96
+	lsls r2, 2
+	adds r0, r2, 0
+	strh r0, [r1]
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080A0EE4: .4byte gUnknown_2039994
+_080A0EE8: .4byte gUnknown_2039996
+	thumb_func_end sub_80A0EC4
+
+	thumb_func_start sub_80A0EEC
+sub_80A0EEC: @ 80A0EEC
+	push {lr}
+	bl sub_80A0EB4
+	ldr r1, _080A0F04 @ =gUnknown_2039994
+	movs r0, 0
+	strb r0, [r1]
+	ldr r1, _080A0F08 @ =gUnknown_2039996
+	movs r0, 0
+	strh r0, [r1]
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080A0F04: .4byte gUnknown_2039994
+_080A0F08: .4byte gUnknown_2039996
+	thumb_func_end sub_80A0EEC
+
+	thumb_func_start sub_80A0F0C
+sub_80A0F0C: @ 80A0F0C
+	push {lr}
+	bl sub_80A0E90
+	cmp r0, 0
+	beq _080A0F24
+	ldr r1, _080A0F28 @ =gUnknown_2039996
+	ldrh r0, [r1]
+	subs r0, 0x1
+	strh r0, [r1]
+	lsls r0, 16
+	cmp r0, 0
+	beq _080A0F2C
+_080A0F24:
+	movs r0, 0
+	b _080A0F34
+	.align 2, 0
+_080A0F28: .4byte gUnknown_2039996
+_080A0F2C:
+	ldr r0, _080A0F38 @ =gUnknown_81BFBC5
+	bl sub_8069AE4
+	movs r0, 0x1
+_080A0F34:
+	pop {r1}
+	bx r1
+	.align 2, 0
+_080A0F38: .4byte gUnknown_81BFBC5
+	thumb_func_end sub_80A0F0C
+
+	thumb_func_start sub_80A0F3C
+sub_80A0F3C: @ 80A0F3C
+	push {lr}
+	ldr r0, _080A0F48 @ =gUnknown_81BFBAA
+	bl sub_8069AE4
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080A0F48: .4byte gUnknown_81BFBAA
+	thumb_func_end sub_80A0F3C
+
+	thumb_func_start sub_80A0F4C
+sub_80A0F4C: @ 80A0F4C
+	push {lr}
+	ldr r0, _080A0F60 @ =gUnknown_2039994
+	ldrb r0, [r0]
+	cmp r0, 0
+	beq _080A0F68
+	ldr r0, _080A0F64 @ =sub_80567DC
+	bl sub_8000544
+	b _080A0FB0
+	.align 2, 0
+_080A0F60: .4byte gUnknown_2039994
+_080A0F64: .4byte sub_80567DC
+_080A0F68:
+	ldr r0, _080A0F88 @ =gUnknown_2023E8A
+	ldrb r0, [r0]
+	cmp r0, 0x8
+	bne _080A0F9C
+	ldr r0, _080A0F8C @ =gUnknown_81BFB87
+	bl sub_8069B48
+	bl sub_8055378
+	ldr r1, _080A0F90 @ =gUnknown_3005020
+	ldr r0, _080A0F94 @ =sub_807E3EC
+	str r0, [r1]
+	ldr r0, _080A0F98 @ =sub_805671C
+	bl sub_8000544
+	b _080A0FB0
+	.align 2, 0
+_080A0F88: .4byte gUnknown_2023E8A
+_080A0F8C: .4byte gUnknown_81BFB87
+_080A0F90: .4byte gUnknown_3005020
+_080A0F94: .4byte sub_807E3EC
+_080A0F98: .4byte sub_805671C
+_080A0F9C:
+	cmp r0, 0x7
+	bne _080A0FB0
+	ldr r0, _080A0FB4 @ =gUnknown_81BFBD7
+	bl sub_8069AE4
+	bl sub_8069B28
+	ldr r0, _080A0FB8 @ =sub_80568E0
+	bl sub_8000544
+_080A0FB0:
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080A0FB4: .4byte gUnknown_81BFBD7
+_080A0FB8: .4byte sub_80568E0
+	thumb_func_end sub_80A0F4C
+
+	.align 2, 0 @ Don't pad with nop.

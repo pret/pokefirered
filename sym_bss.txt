@@ -1,20 +1,6 @@
-gUnknown_3000000: @ 3000000
+	.include "src/gpu_regs.o"
+
 	.space 0x4
-
-gUnknown_3000004: @ 3000004
-	.space 0x5C
-
-gUnknown_3000060: @ 3000060
-	.space 0x60
-
-gUnknown_30000C0: @ 30000C0
-	.space 0x1
-
-gUnknown_30000C1: @ 30000C1
-	.space 0x1
-
-gUnknown_30000C2: @ 30000C2
-	.space 0x6
 
 gUnknown_30000C8: @ 30000C8
 	.space 0xC

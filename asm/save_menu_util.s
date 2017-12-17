@@ -47,13 +47,13 @@ _080F800C:
 	.4byte _080F80A8
 	.4byte _080F806C
 _080F8024:
-	ldr r0, _080F8030 @ =gUnknown_300500C
+	ldr r0, _080F8030 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r5, 0
 	bl StringCopy
 	b _080F80D8
 	.align 2, 0
-_080F8030: .4byte gUnknown_300500C
+_080F8030: .4byte gSaveBlock2Ptr
 _080F8034:
 	bl sub_806E25C
 	cmp r0, 0
@@ -74,16 +74,16 @@ _080F804A:
 	bl ConvertIntToDecimalStringN
 	b _080F80D8
 _080F805C:
-	ldr r4, _080F8068 @ =gUnknown_300500C
+	ldr r4, _080F8068 @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
 	adds r0, r5, 0
 	movs r2, 0
 	b _080F8076
 	.align 2, 0
-_080F8068: .4byte gUnknown_300500C
+_080F8068: .4byte gSaveBlock2Ptr
 _080F806C:
-	ldr r4, _080F8094 @ =gUnknown_300500C
+	ldr r4, _080F8094 @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
 	adds r0, r5, 0
@@ -103,7 +103,7 @@ _080F8076:
 	bl ConvertIntToDecimalStringN
 	b _080F80D8
 	.align 2, 0
-_080F8094: .4byte gUnknown_300500C
+_080F8094: .4byte gSaveBlock2Ptr
 _080F8098:
 	ldr r0, _080F80A4 @ =gUnknown_2036DFC
 	ldrb r1, [r0, 0x14]

@@ -168,7 +168,7 @@ StorePokemonInDaycare: @ 80454CC
 	beq _08045524
 	adds r0, r4, 0
 	adds r0, 0x74
-	ldr r1, _08045550 @ =gUnknown_300500C
+	ldr r1, _08045550 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	bl StringCopy
 	adds r1, r4, 0
@@ -180,7 +180,7 @@ StorePokemonInDaycare: @ 80454CC
 	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08045554 @ =gUnknown_3005008
+	ldr r1, _08045554 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	lsls r2, r0, 3
 	adds r2, r0
@@ -217,8 +217,8 @@ _08045524:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08045550: .4byte gUnknown_300500C
-_08045554: .4byte gUnknown_3005008
+_08045550: .4byte gSaveBlock2Ptr
+_08045554: .4byte gSaveBlock1Ptr
 _08045558: .4byte 0x00002cd0
 	thumb_func_end StorePokemonInDaycare
 
@@ -252,7 +252,7 @@ StoreSelectedPokemonInDaycare: @ 8045580
 	muls r0, r1
 	ldr r1, _080455A4 @ =gUnknown_2024284
 	adds r0, r1
-	ldr r1, _080455A8 @ =gUnknown_3005008
+	ldr r1, _080455A8 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	movs r2, 0xBE
 	lsls r2, 6
@@ -262,7 +262,7 @@ StoreSelectedPokemonInDaycare: @ 8045580
 	bx r0
 	.align 2, 0
 _080455A4: .4byte gUnknown_2024284
-_080455A8: .4byte gUnknown_3005008
+_080455A8: .4byte gSaveBlock1Ptr
 	thumb_func_end StoreSelectedPokemonInDaycare
 
 	thumb_func_start ShiftDaycareSlots
@@ -453,7 +453,7 @@ TakeSelectedPokemonMonFromDaycareShiftSlots: @ 8045700
 	thumb_func_start TakePokemonFromDaycare
 TakePokemonFromDaycare: @ 8045728
 	push {lr}
-	ldr r0, _08045744 @ =gUnknown_3005008
+	ldr r0, _08045744 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -466,7 +466,7 @@ TakePokemonFromDaycare: @ 8045728
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08045744: .4byte gUnknown_3005008
+_08045744: .4byte gSaveBlock1Ptr
 _08045748: .4byte gUnknown_20370C0
 	thumb_func_end TakePokemonFromDaycare
 
@@ -593,7 +593,7 @@ GetDaycareCostForMon: @ 8045820
 	thumb_func_start GetDaycareCost
 GetDaycareCost: @ 8045838
 	push {lr}
-	ldr r0, _08045854 @ =gUnknown_3005008
+	ldr r0, _08045854 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -606,7 +606,7 @@ GetDaycareCost: @ 8045838
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08045854: .4byte gUnknown_3005008
+_08045854: .4byte gSaveBlock1Ptr
 _08045858: .4byte gUnknown_20370C0
 _0804585C: .4byte gUnknown_20370C2
 	thumb_func_end GetDaycareCost
@@ -615,7 +615,7 @@ _0804585C: .4byte gUnknown_20370C2
 sub_8045860: @ 8045860
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, _08045888 @ =gUnknown_3005008
+	ldr r1, _08045888 @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldr r1, _0804588C @ =0x00003008
 	adds r3, r2, r1
@@ -634,7 +634,7 @@ sub_8045860: @ 8045860
 	str r1, [r2]
 	bx lr
 	.align 2, 0
-_08045888: .4byte gUnknown_3005008
+_08045888: .4byte gSaveBlock1Ptr
 _0804588C: .4byte 0x00003008
 _08045890: .4byte 0x00003094
 _08045894: .4byte 0x00003d20
@@ -643,7 +643,7 @@ _08045894: .4byte 0x00003d20
 	thumb_func_start GetNumLevelsGainedFromDaycare
 GetNumLevelsGainedFromDaycare: @ 8045898
 	push {r4-r6,lr}
-	ldr r6, _080458C0 @ =gUnknown_3005008
+	ldr r6, _080458C0 @ =gSaveBlock1Ptr
 	ldr r5, _080458C4 @ =gUnknown_20370C0
 	ldrh r0, [r5]
 	movs r4, 0x8C
@@ -661,7 +661,7 @@ GetNumLevelsGainedFromDaycare: @ 8045898
 	movs r0, 0
 	b _080458E0
 	.align 2, 0
-_080458C0: .4byte gUnknown_3005008
+_080458C0: .4byte gSaveBlock1Ptr
 _080458C4: .4byte gUnknown_20370C0
 _080458C8:
 	ldrh r0, [r5]
@@ -879,7 +879,7 @@ _08045A44: .4byte 0x00000266
 	thumb_func_start sub_8045A48
 sub_8045A48: @ 8045A48
 	push {lr}
-	ldr r0, _08045A5C @ =gUnknown_3005008
+	ldr r0, _08045A5C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -888,13 +888,13 @@ sub_8045A48: @ 8045A48
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08045A5C: .4byte gUnknown_3005008
+_08045A5C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8045A48
 
 	thumb_func_start sub_8045A60
 sub_8045A60: @ 8045A60
 	push {lr}
-	ldr r0, _08045A74 @ =gUnknown_3005008
+	ldr r0, _08045A74 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -903,7 +903,7 @@ sub_8045A60: @ 8045A60
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08045A74: .4byte gUnknown_3005008
+_08045A74: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8045A60
 
 	thumb_func_start RemoveIVIndexFromList
@@ -1570,7 +1570,7 @@ RemoveEggFromDayCare: @ 8045F70
 	thumb_func_start RejectEggFromDayCare
 RejectEggFromDayCare: @ 8045F88
 	push {lr}
-	ldr r0, _08045F9C @ =gUnknown_3005008
+	ldr r0, _08045F9C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -1579,7 +1579,7 @@ RejectEggFromDayCare: @ 8045F88
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08045F9C: .4byte gUnknown_3005008
+_08045F9C: .4byte gSaveBlock1Ptr
 	thumb_func_end RejectEggFromDayCare
 
 	thumb_func_start sub_8045FA0
@@ -1972,7 +1972,7 @@ _080462A8: .4byte gUnknown_8254795
 	thumb_func_start GiveEggFromDaycare
 GiveEggFromDaycare: @ 80462AC
 	push {lr}
-	ldr r0, _080462C0 @ =gUnknown_3005008
+	ldr r0, _080462C0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -1981,7 +1981,7 @@ GiveEggFromDaycare: @ 80462AC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080462C0: .4byte gUnknown_3005008
+_080462C0: .4byte gSaveBlock1Ptr
 	thumb_func_end GiveEggFromDaycare
 
 	thumb_func_start sub_80462C4
@@ -2111,7 +2111,7 @@ _080463B4: .4byte gUnknown_2024029
 	thumb_func_start sub_80463B8
 sub_80463B8: @ 80463B8
 	push {r4,lr}
-	ldr r4, _080463F0 @ =gUnknown_3005008
+	ldr r4, _080463F0 @ =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, _080463F4 @ =0x00003c98
 	adds r0, r1
@@ -2137,7 +2137,7 @@ _080463D8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080463F0: .4byte gUnknown_3005008
+_080463F0: .4byte gSaveBlock1Ptr
 _080463F4: .4byte 0x00003c98
 _080463F8: .4byte 0x00003d20
 	thumb_func_end sub_80463B8
@@ -2226,7 +2226,7 @@ _08046498: .4byte gUnknown_2021CD0
 	thumb_func_start GetDaycareMonNicknames
 GetDaycareMonNicknames: @ 804649C
 	push {lr}
-	ldr r0, _080464B0 @ =gUnknown_3005008
+	ldr r0, _080464B0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -2235,13 +2235,13 @@ GetDaycareMonNicknames: @ 804649C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080464B0: .4byte gUnknown_3005008
+_080464B0: .4byte gSaveBlock1Ptr
 	thumb_func_end GetDaycareMonNicknames
 
 	thumb_func_start sub_80464B4
 sub_80464B4: @ 80464B4
 	push {r4,lr}
-	ldr r4, _080464D0 @ =gUnknown_3005008
+	ldr r4, _080464D0 @ =gSaveBlock1Ptr
 	ldr r0, [r4]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -2253,7 +2253,7 @@ sub_80464B4: @ 80464B4
 	movs r0, 0x1
 	b _080464F2
 	.align 2, 0
-_080464D0: .4byte gUnknown_3005008
+_080464D0: .4byte gSaveBlock1Ptr
 _080464D4:
 	ldr r0, [r4]
 	movs r1, 0xBE
@@ -2279,7 +2279,7 @@ _080464F2:
 	thumb_func_start GetDaycarePokemonCount
 GetDaycarePokemonCount: @ 80464F8
 	push {lr}
-	ldr r0, _08046518 @ =gUnknown_3005008
+	ldr r0, _08046518 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -2294,7 +2294,7 @@ _08046512:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08046518: .4byte gUnknown_3005008
+_08046518: .4byte gSaveBlock1Ptr
 	thumb_func_end GetDaycarePokemonCount
 
 	thumb_func_start EggGroupsOverlap
@@ -2484,7 +2484,7 @@ _0804665C:
 	thumb_func_start GetDaycareCompatibilityScoreFromSave
 GetDaycareCompatibilityScoreFromSave: @ 804666C
 	push {lr}
-	ldr r0, _08046684 @ =gUnknown_3005008
+	ldr r0, _08046684 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -2495,7 +2495,7 @@ GetDaycareCompatibilityScoreFromSave: @ 804666C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08046684: .4byte gUnknown_3005008
+_08046684: .4byte gSaveBlock1Ptr
 	thumb_func_end GetDaycareCompatibilityScoreFromSave
 
 	thumb_func_start SetDaycareCompatibilityString
@@ -2934,7 +2934,7 @@ DaycarePrintMonInfo: @ 80469B4
 	lsrs r5, r2, 24
 	cmp r6, 0x1
 	bhi _080469EE
-	ldr r0, _080469F8 @ =gUnknown_3005008
+	ldr r0, _080469F8 @ =gSaveBlock1Ptr
 	mov r8, r0
 	ldr r0, [r0]
 	movs r4, 0xBE
@@ -2958,7 +2958,7 @@ _080469EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080469F8: .4byte gUnknown_3005008
+_080469F8: .4byte gSaveBlock1Ptr
 	thumb_func_end DaycarePrintMonInfo
 
 	thumb_func_start Task_HandleDaycareLevelMenuInput
@@ -2975,7 +2975,7 @@ Task_HandleDaycareLevelMenuInput: @ 80469FC
 	ldrb r0, [r4, 0x8]
 	bl ListMenuHandleInput
 	adds r1, r0, 0
-	ldr r0, _08046A30 @ =gUnknown_30030F0
+	ldr r0, _08046A30 @ =gMain
 	ldrh r2, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r2
@@ -2988,7 +2988,7 @@ Task_HandleDaycareLevelMenuInput: @ 80469FC
 	b _08046A46
 	.align 2, 0
 _08046A2C: .4byte gUnknown_3005090
-_08046A30: .4byte gUnknown_30030F0
+_08046A30: .4byte gMain
 _08046A34:
 	ldr r0, _08046A3C @ =gUnknown_20370D0
 	strh r1, [r0]
@@ -3105,13 +3105,13 @@ _08046B24: .4byte gUnknown_3005090
 ChooseSendDaycareMon: @ 8046B28
 	push {lr}
 	bl sub_8128370
-	ldr r1, _08046B38 @ =gUnknown_30030F0
+	ldr r1, _08046B38 @ =gMain
 	ldr r0, _08046B3C @ =c2_exit_to_overworld_2_switch
 	str r0, [r1, 0x8]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046B38: .4byte gUnknown_30030F0
+_08046B38: .4byte gMain
 _08046B3C: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end ChooseSendDaycareMon
 
@@ -3125,7 +3125,7 @@ sub_8046B40: @ 8046B40
 	muls r0, r1
 	ldr r1, _08046B64 @ =gUnknown_2024284
 	adds r0, r1
-	ldr r1, _08046B68 @ =gUnknown_3005008
+	ldr r1, _08046B68 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, _08046B6C @ =0x00003c98
 	adds r1, r2
@@ -3134,14 +3134,14 @@ sub_8046B40: @ 8046B40
 	bx r0
 	.align 2, 0
 _08046B64: .4byte gUnknown_2024284
-_08046B68: .4byte gUnknown_3005008
+_08046B68: .4byte gSaveBlock1Ptr
 _08046B6C: .4byte 0x00003c98
 	thumb_func_end sub_8046B40
 
 	thumb_func_start sub_8046B70
 sub_8046B70: @ 8046B70
 	push {lr}
-	ldr r0, _08046B88 @ =gUnknown_3005008
+	ldr r0, _08046B88 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08046B8C @ =0x00003c98
 	adds r0, r1
@@ -3151,7 +3151,7 @@ sub_8046B70: @ 8046B70
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046B88: .4byte gUnknown_3005008
+_08046B88: .4byte gSaveBlock1Ptr
 _08046B8C: .4byte 0x00003c98
 _08046B90: .4byte gUnknown_20370C2
 	thumb_func_end sub_8046B70
@@ -3159,7 +3159,7 @@ _08046B90: .4byte gUnknown_20370C2
 	thumb_func_start sub_8046B94
 sub_8046B94: @ 8046B94
 	push {lr}
-	ldr r0, _08046BAC @ =gUnknown_3005008
+	ldr r0, _08046BAC @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08046BB0 @ =0x00003c98
 	adds r0, r1
@@ -3170,7 +3170,7 @@ sub_8046B94: @ 8046B94
 	movs r0, 0
 	b _08046BB6
 	.align 2, 0
-_08046BAC: .4byte gUnknown_3005008
+_08046BAC: .4byte gSaveBlock1Ptr
 _08046BB0: .4byte 0x00003c98
 _08046BB4:
 	movs r0, 0x1
@@ -3182,7 +3182,7 @@ _08046BB6:
 	thumb_func_start sub_8046BBC
 sub_8046BBC: @ 8046BBC
 	push {lr}
-	ldr r0, _08046BD4 @ =gUnknown_3005008
+	ldr r0, _08046BD4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08046BD8 @ =0x00003c98
 	adds r0, r1
@@ -3192,14 +3192,14 @@ sub_8046BBC: @ 8046BBC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08046BD4: .4byte gUnknown_3005008
+_08046BD4: .4byte gSaveBlock1Ptr
 _08046BD8: .4byte 0x00003c98
 	thumb_func_end sub_8046BBC
 
 	thumb_func_start sub_8046BDC
 sub_8046BDC: @ 8046BDC
 	push {lr}
-	ldr r0, _08046BF4 @ =gUnknown_3005008
+	ldr r0, _08046BF4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08046BF8 @ =0x00003c98
 	adds r0, r1
@@ -3209,7 +3209,7 @@ sub_8046BDC: @ 8046BDC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08046BF4: .4byte gUnknown_3005008
+_08046BF4: .4byte gSaveBlock1Ptr
 _08046BF8: .4byte 0x00003c98
 	thumb_func_end sub_8046BDC
 

@@ -89,7 +89,7 @@ sub_813F898: @ 813F898
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	ldr r0, _0813F8BC @ =gUnknown_30030F0
+	ldr r0, _0813F8BC @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r4, r0, r1
@@ -100,7 +100,7 @@ sub_813F898: @ 813F898
 	beq _0813F8EC
 	b _0813F916
 	.align 2, 0
-_0813F8BC: .4byte gUnknown_30030F0
+_0813F8BC: .4byte gMain
 _0813F8C0:
 	bl sub_814104C
 	cmp r0, 0
@@ -222,7 +222,7 @@ _0813F9A4:
 	.align 2, 0
 _0813F9B8: .4byte sub_813FBC0
 _0813F9BC:
-	ldr r1, _0813F9F4 @ =gUnknown_30030F0
+	ldr r1, _0813F9F4 @ =gMain
 	ldrh r2, [r1, 0x2E]
 	movs r0, 0x80
 	ands r0, r2
@@ -246,7 +246,7 @@ _0813F9BC:
 	movs r0, 0x1
 	b _0813FBB6
 	.align 2, 0
-_0813F9F4: .4byte gUnknown_30030F0
+_0813F9F4: .4byte gMain
 _0813F9F8: .4byte gUnknown_203F3A0
 _0813F9FC:
 	movs r0, 0x80
@@ -378,7 +378,7 @@ _0813FB08:
 	bl sub_8141180
 	cmp r0, 0
 	bne _0813FBB8
-	ldr r0, _0813FB40 @ =gUnknown_30030F0
+	ldr r0, _0813FB40 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -398,7 +398,7 @@ _0813FB08:
 	movs r0, 0x4
 	b _0813FBB6
 	.align 2, 0
-_0813FB40: .4byte gUnknown_30030F0
+_0813FB40: .4byte gMain
 _0813FB44: .4byte gUnknown_203F3A0
 _0813FB48:
 	ldr r5, _0813FB90 @ =gUnknown_203F3A0
@@ -498,7 +498,7 @@ _0813FC02:
 	strh r0, [r4]
 	b _0813FC1C
 _0813FC0A:
-	ldr r0, _0813FC24 @ =gUnknown_30030F0
+	ldr r0, _0813FC24 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -511,7 +511,7 @@ _0813FC1C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813FC24: .4byte gUnknown_30030F0
+_0813FC24: .4byte gMain
 _0813FC28: .4byte sub_813FFD8
 	thumb_func_end sub_813FBC0
 
@@ -552,7 +552,7 @@ _0813FC62:
 	bne _0813FCA0
 	b _0813FC82
 _0813FC6E:
-	ldr r0, _0813FC8C @ =gUnknown_30030F0
+	ldr r0, _0813FC8C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x20
 	ands r0, r1
@@ -568,7 +568,7 @@ _0813FC82:
 	strh r0, [r4]
 	b _0813FCA0
 	.align 2, 0
-_0813FC8C: .4byte gUnknown_30030F0
+_0813FC8C: .4byte gMain
 _0813FC90:
 	movs r0, 0
 	bl sub_8141180
@@ -840,7 +840,7 @@ _0813FEA0:
 _0813FEB0:
 	movs r0, 0x8
 	strh r0, [r5, 0x2]
-	ldr r0, _0813FEC8 @ =gUnknown_30030F0
+	ldr r0, _0813FEC8 @ =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x1
 	ands r0, r1
@@ -850,7 +850,7 @@ _0813FEB0:
 	strh r0, [r5, 0x2]
 	b _0813FFAC
 	.align 2, 0
-_0813FEC8: .4byte gUnknown_30030F0
+_0813FEC8: .4byte gMain
 _0813FECC:
 	movs r0, 0
 	bl sub_8141180
@@ -861,7 +861,7 @@ _0813FECC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813FF0C
-	ldr r0, _0813FF04 @ =gUnknown_30030F0
+	ldr r0, _0813FF04 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x8
 	ands r0, r1
@@ -877,7 +877,7 @@ _0813FECC:
 	strh r6, [r0]
 	b _0813FF58
 	.align 2, 0
-_0813FF04: .4byte gUnknown_30030F0
+_0813FF04: .4byte gMain
 _0813FF08: .4byte gUnknown_203F3A0
 _0813FF0C:
 	ldrh r0, [r5, 0x2]
@@ -909,7 +909,7 @@ _0813FF28:
 _0813FF44:
 	movs r0, 0x8
 	strh r0, [r5, 0x2]
-	ldr r0, _0813FF74 @ =gUnknown_30030F0
+	ldr r0, _0813FF74 @ =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x1
 	ands r0, r1
@@ -930,7 +930,7 @@ _0813FF58:
 	b _0813FFAC
 	.align 2, 0
 _0813FF70: .4byte gUnknown_203F3A0
-_0813FF74: .4byte gUnknown_30030F0
+_0813FF74: .4byte gMain
 _0813FF78:
 	bl IsFanfareTaskInactive
 	lsls r0, 24

@@ -381,7 +381,7 @@ _080A0330: .4byte gUnknown_2024284
 	thumb_func_start sub_80A0334
 sub_80A0334: @ 80A0334
 	push {lr}
-	ldr r1, _080A0348 @ =gUnknown_30030F0
+	ldr r1, _080A0348 @ =gMain
 	ldr r0, _080A034C @ =sub_80A0350
 	str r0, [r1, 0x8]
 	movs r0, 0
@@ -389,7 +389,7 @@ sub_80A0334: @ 80A0334
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A0348: .4byte gUnknown_30030F0
+_080A0348: .4byte gMain
 _080A034C: .4byte sub_80A0350
 	thumb_func_end sub_80A0334
 
@@ -423,7 +423,7 @@ _080A037C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_start sub_80A0380
 sub_80A0380: @ 80A0380
 	push {lr}
-	ldr r1, _080A0394 @ =gUnknown_30030F0
+	ldr r1, _080A0394 @ =gMain
 	ldr r0, _080A0398 @ =sub_80A039C
 	str r0, [r1, 0x8]
 	movs r0, 0x1
@@ -431,7 +431,7 @@ sub_80A0380: @ 80A0380
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A0394: .4byte gUnknown_30030F0
+_080A0394: .4byte gMain
 _080A0398: .4byte sub_80A039C
 	thumb_func_end sub_80A0380
 

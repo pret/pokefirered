@@ -7,7 +7,7 @@
 
 	thumb_func_start sub_809FD58
 sub_809FD58: @ 809FD58
-	ldr r1, _0809FD6C @ =gUnknown_300500C
+	ldr r1, _0809FD6C @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	movs r2, 0xF2
 	lsls r2, 4
@@ -17,12 +17,12 @@ sub_809FD58: @ 809FD58
 	eors r0, r1
 	bx lr
 	.align 2, 0
-_0809FD6C: .4byte gUnknown_300500C
+_0809FD6C: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_809FD58
 
 	thumb_func_start sub_809FD70
 sub_809FD70: @ 809FD70
-	ldr r2, _0809FD84 @ =gUnknown_300500C
+	ldr r2, _0809FD84 @ =gSaveBlock2Ptr
 	ldr r2, [r2]
 	movs r3, 0xF2
 	lsls r3, 4
@@ -32,7 +32,7 @@ sub_809FD70: @ 809FD70
 	str r2, [r0]
 	bx lr
 	.align 2, 0
-_0809FD84: .4byte gUnknown_300500C
+_0809FD84: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_809FD70
 
 	thumb_func_start IsEnoughMoney
@@ -105,7 +105,7 @@ _0809FDEE:
 	thumb_func_start IsEnoughForCostInVar0x8005
 IsEnoughForCostInVar0x8005: @ 809FDFC
 	push {lr}
-	ldr r0, _0809FE18 @ =gUnknown_3005008
+	ldr r0, _0809FE18 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -118,14 +118,14 @@ IsEnoughForCostInVar0x8005: @ 809FDFC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809FE18: .4byte gUnknown_3005008
+_0809FE18: .4byte gSaveBlock1Ptr
 _0809FE1C: .4byte gUnknown_20370C2
 	thumb_func_end IsEnoughForCostInVar0x8005
 
 	thumb_func_start sub_809FE20
 sub_809FE20: @ 809FE20
 	push {lr}
-	ldr r0, _0809FE38 @ =gUnknown_3005008
+	ldr r0, _0809FE38 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -136,7 +136,7 @@ sub_809FE20: @ 809FE20
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809FE38: .4byte gUnknown_3005008
+_0809FE38: .4byte gSaveBlock1Ptr
 _0809FE3C: .4byte gUnknown_20370C2
 	thumb_func_end sub_809FE20
 

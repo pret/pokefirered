@@ -881,7 +881,7 @@ _0807F4A8:
 	movs r0, 0x1
 	bl GetHealLocationPointer
 	adds r3, r0, 0
-	ldr r0, _0807F520 @ =gUnknown_3005008
+	ldr r0, _0807F520 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r0, [r2, 0x1C]
 	ldrh r5, [r3]
@@ -911,7 +911,7 @@ _0807F4A8:
 	.align 2, 0
 _0807F518: .4byte gUnknown_83C68E4
 _0807F51C: .4byte gUnknown_3005090
-_0807F520: .4byte gUnknown_3005008
+_0807F520: .4byte gSaveBlock1Ptr
 _0807F524:
 	ldr r0, _0807F534 @ =gUnknown_3005090
 	adds r1, r4, r6

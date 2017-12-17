@@ -278,7 +278,7 @@ MEScrCmd_setenigmaberry: @ 80DA9B8
 	adds r4, r0
 	ldr r0, _080DAA0C @ =gUnknown_2021CD0
 	mov r9, r0
-	ldr r6, _080DAA10 @ =gUnknown_3005008
+	ldr r6, _080DAA10 @ =gSaveBlock1Ptr
 	ldr r1, [r6]
 	ldr r5, _080DAA14 @ =0x000030ec
 	adds r1, r5
@@ -300,7 +300,7 @@ MEScrCmd_setenigmaberry: @ 80DA9B8
 	b _080DAA44
 	.align 2, 0
 _080DAA0C: .4byte gUnknown_2021CD0
-_080DAA10: .4byte gUnknown_3005008
+_080DAA10: .4byte gSaveBlock1Ptr
 _080DAA14: .4byte 0x000030ec
 _080DAA18: .4byte gUnknown_2021CF0
 _080DAA1C: .4byte gUnknown_2021D18
@@ -609,7 +609,7 @@ sub_80DAC8C: @ 80DAC8C
 	subs r1, r0
 	ldr r0, [r4, 0x64]
 	adds r1, r0
-	ldr r0, _080DACC8 @ =gUnknown_300500C
+	ldr r0, _080DACC8 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	movs r2, 0x94
 	lsls r2, 3
@@ -627,7 +627,7 @@ sub_80DAC8C: @ 80DAC8C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DACC8: .4byte gUnknown_300500C
+_080DACC8: .4byte gSaveBlock2Ptr
 _080DACCC: .4byte gUnknown_2021D18
 _080DACD0: .4byte gUnknown_8488DBD
 	thumb_func_end sub_80DAC8C

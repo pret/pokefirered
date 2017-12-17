@@ -84,7 +84,7 @@ BuildOamBuffer: @ 8006BA8
 	bl UpdateOamCoords
 	bl BuildSpritePriorities
 	bl SortSprites
-	ldr r5, _08006BE8 @ =gUnknown_30030F0
+	ldr r5, _08006BE8 @ =gMain
 	ldr r0, _08006BEC @ =0x00000439
 	adds r5, r0
 	ldrb r0, [r5]
@@ -108,7 +108,7 @@ BuildOamBuffer: @ 8006BA8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08006BE8: .4byte gUnknown_30030F0
+_08006BE8: .4byte gMain
 _08006BEC: .4byte 0x00000439
 _08006BF0: .4byte gUnknown_2021840
 	thumb_func_end BuildOamBuffer
@@ -492,7 +492,7 @@ _08006EB4: .4byte gUnknown_2021780
 CopyMatricesToOamBuffer: @ 8006EB8
 	push {r4-r6,lr}
 	movs r4, 0
-	ldr r5, _08006EFC @ =gUnknown_30030F0
+	ldr r5, _08006EFC @ =gMain
 	ldr r6, _08006F00 @ =gUnknown_2021BCC
 _08006EC0:
 	lsls r2, r4, 2
@@ -526,7 +526,7 @@ _08006EC0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08006EFC: .4byte gUnknown_30030F0
+_08006EFC: .4byte gMain
 _08006F00: .4byte gUnknown_2021BCC
 	thumb_func_end CopyMatricesToOamBuffer
 
@@ -570,7 +570,7 @@ _08006F3A:
 	cmp r0, r1
 	bcs _08006F70
 	mov r1, sp
-	ldr r5, _08006F84 @ =gUnknown_3003128
+	ldr r5, _08006F84 @ =gMain + 0x38
 	ldr r0, _08006F88 @ =gUnknown_8231CE4
 	ldr r2, [r0]
 	ldr r3, [r0, 0x4]
@@ -597,7 +597,7 @@ _08006F70:
 _08006F78: .4byte gUnknown_2021800
 _08006F7C: .4byte gUnknown_202063C
 _08006F80: .4byte gUnknown_2021B44
-_08006F84: .4byte gUnknown_3003128
+_08006F84: .4byte gMain + 0x38
 _08006F88: .4byte gUnknown_8231CE4
 	thumb_func_end AddSpritesToOamBuffer
 
@@ -1061,7 +1061,7 @@ ResetOamRange: @ 80072E8
 	lsrs r3, r0, 24
 	cmp r3, r4
 	bcs _08007310
-	ldr r6, _08007318 @ =gUnknown_3003128
+	ldr r6, _08007318 @ =gMain + 0x38
 	ldr r5, _0800731C @ =gUnknown_8231CE4
 _080072FA:
 	lsls r0, r3, 3
@@ -1080,14 +1080,14 @@ _08007310:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08007318: .4byte gUnknown_3003128
+_08007318: .4byte gMain + 0x38
 _0800731C: .4byte gUnknown_8231CE4
 	thumb_func_end ResetOamRange
 
 	thumb_func_start LoadOam
 LoadOam: @ 8007320
 	push {lr}
-	ldr r2, _08007344 @ =gUnknown_30030F0
+	ldr r2, _08007344 @ =gMain
 	ldr r1, _08007348 @ =0x00000439
 	adds r0, r2, r1
 	ldrb r1, [r0]
@@ -1105,7 +1105,7 @@ _08007340:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08007344: .4byte gUnknown_30030F0
+_08007344: .4byte gMain
 _08007348: .4byte 0x00000439
 _0800734C: .4byte 0x04000100
 	thumb_func_end LoadOam
@@ -4352,7 +4352,7 @@ _08008A7C:
 	cmp r0, 0
 	bne _08008AB0
 _08008A90:
-	ldr r0, _08008AAC @ =gUnknown_30030F0
+	ldr r0, _08008AAC @ =gMain
 	ldrb r2, [r3]
 	lsls r2, 3
 	adds r0, 0x38
@@ -4367,11 +4367,11 @@ _08008A90:
 	movs r0, 0
 	b _08008AC4
 	.align 2, 0
-_08008AAC: .4byte gUnknown_30030F0
+_08008AAC: .4byte gMain
 _08008AB0:
 	ldrb r1, [r3]
 	lsls r1, 3
-	ldr r0, _08008ACC @ =gUnknown_3003128
+	ldr r0, _08008ACC @ =gMain + 0x38
 	adds r1, r0
 	adds r0, r4, 0
 	adds r2, r3, 0
@@ -4383,7 +4383,7 @@ _08008AC4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08008ACC: .4byte gUnknown_3003128
+_08008ACC: .4byte gMain + 0x38
 	thumb_func_end AddSpriteToOamBuffer
 
 	thumb_func_start AddSubspritesToOamBuffer

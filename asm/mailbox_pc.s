@@ -120,7 +120,7 @@ sub_810EC20: @ 810EC20
 	negs r0, r0
 	cmp r3, r0
 	beq _0810EC82
-	ldr r0, _0810EC8C @ =gUnknown_3005008
+	ldr r0, _0810EC8C @ =gSaveBlock1Ptr
 	lsls r1, r3, 3
 	adds r1, r3
 	lsls r1, 2
@@ -161,7 +161,7 @@ _0810EC82:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810EC8C: .4byte gUnknown_3005008
+_0810EC8C: .4byte gSaveBlock1Ptr
 _0810EC90: .4byte 0x00002dba
 _0810EC94: .4byte gUnknown_8454000
 	thumb_func_end sub_810EC20

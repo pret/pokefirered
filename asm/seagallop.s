@@ -23,7 +23,7 @@ _08146E90: .4byte sub_8146E94
 sub_8146E94: @ 8146E94
 	push {r4,lr}
 	sub sp, 0x8
-	ldr r0, _08146EB4 @ =gUnknown_30030F0
+	ldr r0, _08146EB4 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -38,7 +38,7 @@ _08146EA8:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08146EB4: .4byte gUnknown_30030F0
+_08146EB4: .4byte gMain
 _08146EB8: .4byte _08146EBC
 	.align 2, 0
 _08146EBC:
@@ -155,7 +155,7 @@ _08146FBE:
 	movs r3, 0
 	bl BeginNormalPaletteFade
 _08146FCE:
-	ldr r1, _08146FE0 @ =gUnknown_30030F0
+	ldr r1, _08146FE0 @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -164,7 +164,7 @@ _08146FCE:
 	strb r0, [r1]
 	b _0814703C
 	.align 2, 0
-_08146FE0: .4byte gUnknown_30030F0
+_08146FE0: .4byte gMain
 _08146FE4:
 	bl sub_814731C
 	ldr r0, _08147044 @ =sub_8147058
@@ -193,7 +193,7 @@ _08146FE4:
 	bl CreateTask
 	ldr r0, _08147050 @ =sub_814706C
 	bl SetMainCallback2
-	ldr r0, _08147054 @ =gUnknown_30030F0
+	ldr r0, _08147054 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -209,7 +209,7 @@ _08147044: .4byte sub_8147058
 _08147048: .4byte 0x00001888
 _0814704C: .4byte sub_8147084
 _08147050: .4byte sub_814706C
-_08147054: .4byte gUnknown_30030F0
+_08147054: .4byte gMain
 	thumb_func_end sub_8146E94
 
 	thumb_func_start sub_8147058

@@ -18,7 +18,7 @@ sub_8079B7C: @ 8079B7C
 	movs r1, 0x80
 	bl ClearGpuRegBits
 	strh r4, [r5]
-	ldr r1, _08079BF0 @ =gUnknown_30030F0
+	ldr r1, _08079BF0 @ =gMain
 	ldr r0, _08079BF4 @ =0x00000439
 	adds r1, r0
 	ldrb r2, [r1]
@@ -40,7 +40,7 @@ sub_8079B7C: @ 8079B7C
 _08079BC4:
 	bl Sav2_ClearSetDefault
 _08079BC8:
-	ldr r0, _08079BFC @ =gUnknown_300500C
+	ldr r0, _08079BFC @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	lsls r0, 31
@@ -57,10 +57,10 @@ _08079BC8:
 	bx r0
 	.align 2, 0
 _08079BEC: .4byte 0x04000208
-_08079BF0: .4byte gUnknown_30030F0
+_08079BF0: .4byte gMain
 _08079BF4: .4byte 0x00000439
 _08079BF8: .4byte gUnknown_30053A0
-_08079BFC: .4byte gUnknown_300500C
+_08079BFC: .4byte gSaveBlock2Ptr
 _08079C00: .4byte gHeap
 _08079C04: .4byte sub_8056938
 	thumb_func_end sub_8079B7C

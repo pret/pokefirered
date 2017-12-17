@@ -128,7 +128,7 @@ sub_807F704: @ 807F704
 	bl sub_807F7D8
 	b _0807F744
 _0807F714:
-	ldr r0, _0807F73C @ =gUnknown_3005008
+	ldr r0, _0807F73C @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -146,7 +146,7 @@ _0807F714:
 	bl sub_807F810
 	b _0807F744
 	.align 2, 0
-_0807F73C: .4byte gUnknown_3005008
+_0807F73C: .4byte gSaveBlock1Ptr
 _0807F740:
 	bl sub_807F748
 _0807F744:
@@ -160,7 +160,7 @@ sub_807F748: @ 807F748
 	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_805C780
-	ldr r1, _0807F780 @ =gUnknown_30030F0
+	ldr r1, _0807F780 @ =gMain
 	ldr r0, _0807F784 @ =sub_807FB40
 	str r0, [r1, 0x8]
 	ldr r1, _0807F788 @ =gUnknown_2022B4C
@@ -178,7 +178,7 @@ sub_807F748: @ 807F748
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F780: .4byte gUnknown_30030F0
+_0807F780: .4byte gMain
 _0807F784: .4byte sub_807FB40
 _0807F788: .4byte gUnknown_2022B4C
 	thumb_func_end sub_807F748
@@ -189,7 +189,7 @@ sub_807F78C: @ 807F78C
 	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_805C780
-	ldr r1, _0807F7C8 @ =gUnknown_30030F0
+	ldr r1, _0807F7C8 @ =gMain
 	ldr r0, _0807F7CC @ =sub_807FB40
 	str r0, [r1, 0x8]
 	ldr r1, _0807F7D0 @ =gUnknown_2022B4C
@@ -208,7 +208,7 @@ sub_807F78C: @ 807F78C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F7C8: .4byte gUnknown_30030F0
+_0807F7C8: .4byte gMain
 _0807F7CC: .4byte sub_807FB40
 _0807F7D0: .4byte gUnknown_2022B4C
 _0807F7D4: .4byte 0x00000155
@@ -220,7 +220,7 @@ sub_807F7D8: @ 807F7D8
 	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_805C780
-	ldr r1, _0807F804 @ =gUnknown_30030F0
+	ldr r1, _0807F804 @ =gMain
 	ldr r0, _0807F808 @ =sub_80A0F4C
 	str r0, [r1, 0x8]
 	ldr r1, _0807F80C @ =gUnknown_2022B4C
@@ -234,7 +234,7 @@ sub_807F7D8: @ 807F7D8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F804: .4byte gUnknown_30030F0
+_0807F804: .4byte gMain
 _0807F808: .4byte sub_80A0F4C
 _0807F80C: .4byte gUnknown_2022B4C
 	thumb_func_end sub_807F7D8
@@ -245,7 +245,7 @@ sub_807F810: @ 807F810
 	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_805C780
-	ldr r1, _0807F854 @ =gUnknown_30030F0
+	ldr r1, _0807F854 @ =gMain
 	ldr r0, _0807F858 @ =sub_807FB40
 	str r0, [r1, 0x8]
 	ldr r1, _0807F85C @ =gUnknown_2022B4C
@@ -268,7 +268,7 @@ sub_807F810: @ 807F810
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F854: .4byte gUnknown_30030F0
+_0807F854: .4byte gMain
 _0807F858: .4byte sub_807FB40
 _0807F85C: .4byte gUnknown_2022B4C
 _0807F860: .4byte gUnknown_202402C
@@ -299,7 +299,7 @@ sub_807F888: @ 807F888
 	movs r2, 0x5
 	bl CreateMaleMon
 	bl ScriptContext2_Enable
-	ldr r1, _0807F8B8 @ =gUnknown_30030F0
+	ldr r1, _0807F8B8 @ =gMain
 	ldr r0, _0807F8BC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	str r0, [r1, 0x8]
 	ldr r1, _0807F8C0 @ =gUnknown_2022B4C
@@ -313,7 +313,7 @@ sub_807F888: @ 807F888
 	bx r0
 	.align 2, 0
 _0807F8B4: .4byte gUnknown_202402C
-_0807F8B8: .4byte gUnknown_30030F0
+_0807F8B8: .4byte gMain
 _0807F8BC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _0807F8C0: .4byte gUnknown_2022B4C
 	thumb_func_end sub_807F888
@@ -322,7 +322,7 @@ _0807F8C0: .4byte gUnknown_2022B4C
 sub_807F8C4: @ 807F8C4
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r1, _0807F8F8 @ =gUnknown_30030F0
+	ldr r1, _0807F8F8 @ =gMain
 	ldr r0, _0807F8FC @ =sub_807FBA0
 	str r0, [r1, 0x8]
 	ldr r1, _0807F900 @ =gUnknown_2022B4C
@@ -341,7 +341,7 @@ sub_807F8C4: @ 807F8C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F8F8: .4byte gUnknown_30030F0
+_0807F8F8: .4byte gMain
 _0807F8FC: .4byte sub_807FBA0
 _0807F900: .4byte gUnknown_2022B4C
 	thumb_func_end sub_807F8C4
@@ -351,7 +351,7 @@ sub_807F904: @ 807F904
 	push {lr}
 	sub sp, 0xC
 	bl ScriptContext2_Enable
-	ldr r1, _0807F944 @ =gUnknown_30030F0
+	ldr r1, _0807F944 @ =gMain
 	ldr r0, _0807F948 @ =sub_807FBF0
 	str r0, [r1, 0x8]
 	ldr r0, _0807F94C @ =0x00000167
@@ -377,7 +377,7 @@ sub_807F904: @ 807F904
 	bl CreateMonWithGenderNatureLetter
 	b _0807F960
 	.align 2, 0
-_0807F944: .4byte gUnknown_30030F0
+_0807F944: .4byte gMain
 _0807F948: .4byte sub_807FBF0
 _0807F94C: .4byte 0x00000167
 _0807F950: .4byte gUnknown_2022B4C
@@ -414,7 +414,7 @@ _0807F994: .4byte gUnknown_841D148
 sub_807F998: @ 807F998
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r1, _0807F9CC @ =gUnknown_30030F0
+	ldr r1, _0807F9CC @ =gMain
 	ldr r0, _0807F9D0 @ =sub_807FBA0
 	str r0, [r1, 0x8]
 	ldr r1, _0807F9D4 @ =gUnknown_2022B4C
@@ -433,7 +433,7 @@ sub_807F998: @ 807F998
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F9CC: .4byte gUnknown_30030F0
+_0807F9CC: .4byte gMain
 _0807F9D0: .4byte sub_807FBA0
 _0807F9D4: .4byte gUnknown_2022B4C
 	thumb_func_end sub_807F998
@@ -442,7 +442,7 @@ _0807F9D4: .4byte gUnknown_2022B4C
 sub_807F9D8: @ 807F9D8
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r1, _0807FA0C @ =gUnknown_30030F0
+	ldr r1, _0807FA0C @ =gMain
 	ldr r0, _0807FA10 @ =sub_807FBA0
 	str r0, [r1, 0x8]
 	ldr r1, _0807FA14 @ =gUnknown_2022B4C
@@ -465,7 +465,7 @@ sub_807F9D8: @ 807F9D8
 	blt _0807FA4C
 	b _0807FA3C
 	.align 2, 0
-_0807FA0C: .4byte gUnknown_30030F0
+_0807FA0C: .4byte gMain
 _0807FA10: .4byte sub_807FBA0
 _0807FA14: .4byte gUnknown_2022B4C
 _0807FA18: .4byte gUnknown_202402C
@@ -514,14 +514,14 @@ _0807FA56:
 sub_807FA68: @ 807FA68
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r1, _0807FA90 @ =gUnknown_30030F0
+	ldr r1, _0807FA90 @ =gMain
 	ldr r0, _0807FA94 @ =sub_807FBA0
 	str r0, [r1, 0x8]
 	ldr r1, _0807FA98 @ =gUnknown_2022B4C
 	movs r0, 0xC0
 	lsls r0, 6
 	str r0, [r1]
-	ldr r0, _0807FA9C @ =gUnknown_81E9F10
+	ldr r0, _0807FA9C @ =gGameVersion
 	ldrb r0, [r0]
 	cmp r0, 0x4
 	bne _0807FAA0
@@ -531,10 +531,10 @@ sub_807FA68: @ 807FA68
 	bl sub_807F690
 	b _0807FAAA
 	.align 2, 0
-_0807FA90: .4byte gUnknown_30030F0
+_0807FA90: .4byte gMain
 _0807FA94: .4byte sub_807FBA0
 _0807FA98: .4byte gUnknown_2022B4C
-_0807FA9C: .4byte gUnknown_81E9F10
+_0807FA9C: .4byte gGameVersion
 _0807FAA0:
 	movs r1, 0x85
 	lsls r1, 1
@@ -553,7 +553,7 @@ _0807FAAA:
 sub_807FABC: @ 807FABC
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r1, _0807FAEC @ =gUnknown_30030F0
+	ldr r1, _0807FAEC @ =gMain
 	ldr r0, _0807FAF0 @ =sub_807FBA0
 	str r0, [r1, 0x8]
 	ldr r1, _0807FAF4 @ =gUnknown_2022B4C
@@ -571,7 +571,7 @@ sub_807FABC: @ 807FABC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807FAEC: .4byte gUnknown_30030F0
+_0807FAEC: .4byte gMain
 _0807FAF0: .4byte sub_807FBA0
 _0807FAF4: .4byte gUnknown_2022B4C
 	thumb_func_end sub_807FABC
@@ -591,7 +591,7 @@ sub_807FB08: @ 807FB08
 	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_805C780
-	ldr r1, _0807FB38 @ =gUnknown_30030F0
+	ldr r1, _0807FB38 @ =gMain
 	ldr r0, _0807FB3C @ =sub_807FAF8
 	str r0, [r1, 0x8]
 	bl copy_player_party_to_sav1
@@ -604,7 +604,7 @@ sub_807FB08: @ 807FB08
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807FB38: .4byte gUnknown_30030F0
+_0807FB38: .4byte gMain
 _0807FB3C: .4byte sub_807FAF8
 	thumb_func_end sub_807FB08
 
@@ -1507,7 +1507,7 @@ battle_80801F0: @ 80801F0
 	strh r1, [r0]
 	lsls r0, r1, 24
 	lsrs r0, 24
-	ldr r1, _08080220 @ =gUnknown_3005008
+	ldr r1, _08080220 @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -1520,7 +1520,7 @@ _08080212:
 	.align 2, 0
 _08080218: .4byte gUnknown_20386B0
 _0808021C: .4byte gUnknown_20370D2
-_08080220: .4byte gUnknown_3005008
+_08080220: .4byte gSaveBlock1Ptr
 _08080224: .4byte gUnknown_3005074
 	thumb_func_end battle_80801F0
 
@@ -1832,7 +1832,7 @@ sub_8080464: @ 8080464
 	orrs r0, r1
 	str r0, [r4]
 _0808048C:
-	ldr r1, _080804A4 @ =gUnknown_30030F0
+	ldr r1, _080804A4 @ =gMain
 	ldr r0, _080804A8 @ =sub_80804AC
 	str r0, [r1, 0x8]
 	bl sub_807F868
@@ -1842,7 +1842,7 @@ _0808048C:
 	bx r0
 	.align 2, 0
 _080804A0: .4byte gUnknown_2022B4C
-_080804A4: .4byte gUnknown_30030F0
+_080804A4: .4byte gMain
 _080804A8: .4byte sub_80804AC
 	thumb_func_end sub_8080464
 
@@ -1970,7 +1970,7 @@ sub_80805B0: @ 80805B0
 	ldr r1, _080805CC @ =gUnknown_2022B4C
 	movs r0, 0x8
 	str r0, [r1]
-	ldr r1, _080805D0 @ =gUnknown_30030F0
+	ldr r1, _080805D0 @ =gMain
 	ldr r0, _080805D4 @ =sub_8080558
 	str r0, [r1, 0x8]
 	bl sub_807F868
@@ -1979,7 +1979,7 @@ sub_80805B0: @ 80805B0
 	bx r0
 	.align 2, 0
 _080805CC: .4byte gUnknown_2022B4C
-_080805D0: .4byte gUnknown_30030F0
+_080805D0: .4byte gMain
 _080805D4: .4byte sub_8080558
 	thumb_func_end sub_80805B0
 

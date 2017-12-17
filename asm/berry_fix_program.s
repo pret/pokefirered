@@ -173,7 +173,7 @@ _0815F84C:
 	movs r0, 0x1
 	b _0815F9A4
 _0815F856:
-	ldr r0, _0815F870 @ =gUnknown_30030F0
+	ldr r0, _0815F870 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -186,9 +186,9 @@ _0815F864:
 	movs r0, 0x2
 	b _0815F9A4
 	.align 2, 0
-_0815F870: .4byte gUnknown_30030F0
+_0815F870: .4byte gMain
 _0815F874:
-	ldr r0, _0815F88C @ =gUnknown_30030F0
+	ldr r0, _0815F88C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -201,7 +201,7 @@ _0815F882:
 	movs r0, 0x4
 	b _0815F9A4
 	.align 2, 0
-_0815F88C: .4byte gUnknown_30030F0
+_0815F88C: .4byte gMain
 _0815F890:
 	ldr r0, _0815F8B4 @ =gUnknown_3005EF0
 	ldr r1, _0815F8B8 @ =gMultiBootProgram_BerryGlitchFix_Start
@@ -305,7 +305,7 @@ _0815F96A:
 	movs r0, 0x8
 	b _0815F9A4
 _0815F96E:
-	ldr r0, _0815F988 @ =gUnknown_30030F0
+	ldr r0, _0815F988 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -313,17 +313,17 @@ _0815F96E:
 	beq _0815F9A6
 	adds r0, r2, 0
 	bl DestroyTask
-	bl sub_80008D8
+	bl DoSoftReset
 	b _0815F9A6
 	.align 2, 0
-_0815F988: .4byte gUnknown_30030F0
+_0815F988: .4byte gMain
 _0815F98C:
 	movs r0, 0x4
 	bl sub_815F6E0
 	movs r0, 0xA
 	b _0815F9A4
 _0815F996:
-	ldr r0, _0815F9B0 @ =gUnknown_30030F0
+	ldr r0, _0815F9B0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -338,7 +338,7 @@ _0815F9A6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815F9B0: .4byte gUnknown_30030F0
+_0815F9B0: .4byte gMain
 	thumb_func_end sub_815F7F0
 
 	.align 2, 0 @ Don't pad with nop.

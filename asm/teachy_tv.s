@@ -94,7 +94,7 @@ _0815AC28: .4byte gUnknown_203F444
 sub_815AC2C: @ 815AC2C
 	push {r4-r6,lr}
 	sub sp, 0x4
-	ldr r0, _0815AC44 @ =gUnknown_30030F0
+	ldr r0, _0815AC44 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r6, r0, r1
@@ -105,7 +105,7 @@ sub_815AC2C: @ 815AC2C
 	beq _0815AC9C
 	b _0815AD6E
 	.align 2, 0
-_0815AC44: .4byte gUnknown_30030F0
+_0815AC44: .4byte gMain
 _0815AC48:
 	ldr r4, _0815AC90 @ =gUnknown_203F450
 	ldr r0, _0815AC94 @ =0x00004008
@@ -907,7 +907,7 @@ sub_815B2C0: @ 815B2C0
 	adds r2, r4, 0x2
 	adds r1, r4, 0
 	bl get_coro_args_x18_x1A
-	ldr r0, _0815B328 @ =gUnknown_30030F0
+	ldr r0, _0815B328 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -931,7 +931,7 @@ _0815B30A:
 _0815B31C: .4byte gUnknown_3005098
 _0815B320: .4byte gUnknown_2037AB8
 _0815B324: .4byte gUnknown_203F44A
-_0815B328: .4byte gUnknown_30030F0
+_0815B328: .4byte gMain
 _0815B32C: .4byte sub_8107EB8
 _0815B330:
 	movs r0, 0x5
@@ -1167,7 +1167,7 @@ sub_815B4EC: @ 815B4EC
 	lsls r6, r0, 3
 	ldr r7, _0815B548 @ =gUnknown_3005098
 	adds r5, r6, r7
-	ldr r0, _0815B54C @ =gUnknown_30030F0
+	ldr r0, _0815B54C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -1202,7 +1202,7 @@ sub_815B4EC: @ 815B4EC
 	b _0815B578
 	.align 2, 0
 _0815B548: .4byte gUnknown_3005098
-_0815B54C: .4byte gUnknown_30030F0
+_0815B54C: .4byte gMain
 _0815B550: .4byte gUnknown_203F450
 _0815B554: .4byte 0x00004006
 _0815B558: .4byte sub_815B92C
@@ -1323,7 +1323,7 @@ sub_815B624: @ 815B624
 	lsls r1, 3
 	ldr r0, _0815B65C @ =gUnknown_3005098
 	adds r4, r1, r0
-	ldr r0, _0815B660 @ =gUnknown_30030F0
+	ldr r0, _0815B660 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -1344,7 +1344,7 @@ _0815B656:
 	bx r0
 	.align 2, 0
 _0815B65C: .4byte gUnknown_3005098
-_0815B660: .4byte gUnknown_30030F0
+_0815B660: .4byte gMain
 	thumb_func_end sub_815B624
 
 	thumb_func_start sub_815B664
@@ -2158,7 +2158,7 @@ sub_815BC90: @ 815BC90
 	ldr r4, _0815BCD4 @ =gUnknown_203F444
 	ldrb r0, [r4, 0x5]
 	strh r0, [r1]
-	ldr r1, _0815BCD8 @ =gUnknown_30030F0
+	ldr r1, _0815BCD8 @ =gMain
 	ldr r0, _0815BCDC @ =sub_815BD58
 	str r0, [r1, 0x8]
 	bl copy_player_party_to_sav1
@@ -2174,7 +2174,7 @@ sub_815BC90: @ 815BC90
 _0815BCCC: .4byte gUnknown_3005098
 _0815BCD0: .4byte gUnknown_20370C0
 _0815BCD4: .4byte gUnknown_203F444
-_0815BCD8: .4byte gUnknown_30030F0
+_0815BCD8: .4byte gMain
 _0815BCDC: .4byte sub_815BD58
 _0815BCE0:
 	movs r0, 0x8

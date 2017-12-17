@@ -2771,7 +2771,7 @@ _0807B0FA:
 	thumb_func_start SetSav1Weather
 SetSav1Weather: @ 807B100
 	push {r4,r5,lr}
-	ldr r4, _0807B12C @ =gUnknown_3005008
+	ldr r4, _0807B12C @ =gSaveBlock1Ptr
 	ldr r1, [r4]
 	adds r1, 0x2E
 	ldrb r5, [r1]
@@ -2790,24 +2790,24 @@ SetSav1Weather: @ 807B100
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B12C: .4byte gUnknown_3005008
+_0807B12C: .4byte gSaveBlock1Ptr
 	thumb_func_end SetSav1Weather
 
 	thumb_func_start sav1_get_weather_probably
 sav1_get_weather_probably: @ 807B130
-	ldr r0, _0807B13C @ =gUnknown_3005008
+	ldr r0, _0807B13C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x2E
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_0807B13C: .4byte gUnknown_3005008
+_0807B13C: .4byte gSaveBlock1Ptr
 	thumb_func_end sav1_get_weather_probably
 
 	thumb_func_start sub_807B140
 sub_807B140: @ 807B140
 	push {r4,r5,lr}
-	ldr r4, _0807B16C @ =gUnknown_3005008
+	ldr r4, _0807B16C @ =gSaveBlock1Ptr
 	ldr r0, [r4]
 	adds r0, 0x2E
 	ldrb r5, [r0]
@@ -2826,7 +2826,7 @@ sub_807B140: @ 807B140
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B16C: .4byte gUnknown_3005008
+_0807B16C: .4byte gSaveBlock1Ptr
 _0807B170: .4byte gUnknown_2036DFC
 	thumb_func_end sub_807B140
 
@@ -2964,7 +2964,7 @@ _0807B278: .4byte gUnknown_83C65C0
 _0807B27C:
 	ldr r1, _0807B28C @ =gUnknown_83C65C4
 _0807B27E:
-	ldr r0, _0807B290 @ =gUnknown_3005008
+	ldr r0, _0807B290 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x2F
 	ldrb r0, [r0]
@@ -2973,7 +2973,7 @@ _0807B27E:
 	b _0807B296
 	.align 2, 0
 _0807B28C: .4byte gUnknown_83C65C4
-_0807B290: .4byte gUnknown_3005008
+_0807B290: .4byte gSaveBlock1Ptr
 _0807B294:
 	movs r0, 0
 _0807B296:
@@ -2984,7 +2984,7 @@ _0807B296:
 	thumb_func_start UpdateWeatherPerDay
 UpdateWeatherPerDay: @ 807B29C
 	lsls r0, 16
-	ldr r1, _0807B2B8 @ =gUnknown_3005008
+	ldr r1, _0807B2B8 @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	adds r2, 0x2F
 	lsrs r0, 16
@@ -2998,7 +2998,7 @@ UpdateWeatherPerDay: @ 807B29C
 	strb r1, [r2]
 	bx lr
 	.align 2, 0
-_0807B2B8: .4byte gUnknown_3005008
+_0807B2B8: .4byte gSaveBlock1Ptr
 	thumb_func_end UpdateWeatherPerDay
 
 	thumb_func_start UpdateRainCounter

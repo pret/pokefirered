@@ -210,7 +210,7 @@ _080F4D9A:
 	beq _080F4DD6
 	b _080F4DC2
 _080F4DA8:
-	ldr r0, _080F4DCC @ =gUnknown_30030F0
+	ldr r0, _080F4DCC @ =gMain
 	ldrh r0, [r0, 0x2E]
 	ands r1, r0
 	cmp r1, 0
@@ -229,7 +229,7 @@ _080F4DC2:
 	strb r0, [r1]
 	b _080F4DD6
 	.align 2, 0
-_080F4DCC: .4byte gUnknown_30030F0
+_080F4DCC: .4byte gMain
 _080F4DD0:
 	adds r0, r2, 0
 	bl sub_80F4DE0
@@ -514,7 +514,7 @@ sub_80F5018: @ 80F5018
 	push {r4-r6,lr}
 	sub sp, 0xAC
 	bl UnkTextUtil_Reset
-	ldr r0, _080F5040 @ =gUnknown_300500C
+	ldr r0, _080F5040 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0
 	bl UnkTextUtil_SetPtrI
@@ -527,7 +527,7 @@ sub_80F5018: @ 80F5018
 	bl UnkTextUtil_SetPtrI
 	b _080F5050
 	.align 2, 0
-_080F5040: .4byte gUnknown_300500C
+_080F5040: .4byte gSaveBlock2Ptr
 _080F5044: .4byte gUnknown_841B68F
 _080F5048:
 	ldr r1, _080F50E0 @ =gUnknown_841B698

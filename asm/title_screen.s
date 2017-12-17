@@ -9,7 +9,7 @@
 sub_8078914: @ 8078914
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r0, _08078930 @ =gUnknown_30030F0
+	ldr r0, _08078930 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -22,13 +22,13 @@ sub_8078914: @ 8078914
 	beq _08078946
 	b _0807893A
 	.align 2, 0
-_08078930: .4byte gUnknown_30030F0
+_08078930: .4byte gMain
 _08078934:
 	cmp r6, 0x2
 	bne _0807893A
 	b _08078AC0
 _0807893A:
-	ldr r0, _080789D0 @ =gUnknown_30030F0
+	ldr r0, _080789D0 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -93,7 +93,7 @@ _08078946:
 	strb r0, [r1]
 	b _08078B18
 	.align 2, 0
-_080789D0: .4byte gUnknown_30030F0
+_080789D0: .4byte gMain
 _080789D4: .4byte gHeap
 _080789D8: .4byte 0x040000d4
 _080789DC: .4byte 0x8100c000
@@ -216,7 +216,7 @@ _08078B0C: .4byte gUnknown_2037F30
 _08078B10: .4byte sub_8078BB4
 _08078B14: .4byte sub_8078B9C
 _08078B18:
-	ldr r1, _08078B30 @ =gUnknown_30030F0
+	ldr r1, _08078B30 @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -229,7 +229,7 @@ _08078B26:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08078B30: .4byte gUnknown_30030F0
+_08078B30: .4byte gMain
 	thumb_func_end sub_8078914
 
 	thumb_func_start sub_8078B34
@@ -353,7 +353,7 @@ sub_8078C24: @ 8078C24
 	lsls r1, 3
 	ldr r0, _08078C6C @ =gUnknown_3005098
 	adds r4, r1, r0
-	ldr r0, _08078C70 @ =gUnknown_30030F0
+	ldr r0, _08078C70 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xB
 	ands r0, r1
@@ -378,7 +378,7 @@ sub_8078C24: @ 8078C24
 	b _08078C86
 	.align 2, 0
 _08078C6C: .4byte gUnknown_3005098
-_08078C70: .4byte gUnknown_30030F0
+_08078C70: .4byte gMain
 _08078C74:
 	ldr r0, _08078C8C @ =gUnknown_83BFB84
 	movs r2, 0
@@ -826,7 +826,7 @@ _08078FD6:
 	adds r0, 0x1
 	strh r0, [r4, 0x2]
 _08079004:
-	ldr r2, _08079034 @ =gUnknown_30030F0
+	ldr r2, _08079034 @ =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x46
 	ands r0, r1
@@ -845,7 +845,7 @@ _08079004:
 	.align 2, 0
 _0807902C: .4byte sub_807941C
 _08079030: .4byte sub_8079840
-_08079034: .4byte gUnknown_30030F0
+_08079034: .4byte gMain
 _08079038: .4byte sub_8078C24
 _0807903C: .4byte sub_80796CC
 _08079040:
@@ -1119,7 +1119,7 @@ _08079248:
 _08079276:
 	bl Sav2_ClearSetDefault
 _0807927A:
-	ldr r0, _080792B8 @ =gUnknown_300500C
+	ldr r0, _080792B8 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	lsls r0, 31
@@ -1144,7 +1144,7 @@ _080792A6:
 	.align 2, 0
 _080792B0: .4byte gUnknown_2037AB8
 _080792B4: .4byte gUnknown_30053A0
-_080792B8: .4byte gUnknown_300500C
+_080792B8: .4byte gSaveBlock2Ptr
 _080792BC: .4byte gHeap
 _080792C0: .4byte sub_800C300
 _080792C4: .4byte sub_8078C24

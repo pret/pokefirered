@@ -6704,7 +6704,7 @@ OpponentHandleCmd55: @ 8039140
 	ands r0, r1
 	cmp r0, 0x2
 	bne _0803916A
-	ldr r2, _08039178 @ =gUnknown_30030F0
+	ldr r2, _08039178 @ =gMain
 	ldr r0, _0803917C @ =0x00000439
 	adds r3, r2, r0
 	ldrb r1, [r3]
@@ -6723,7 +6723,7 @@ _0803916A:
 	bx r0
 	.align 2, 0
 _08039174: .4byte gUnknown_2022B4C
-_08039178: .4byte gUnknown_30030F0
+_08039178: .4byte gMain
 _0803917C: .4byte 0x00000439
 _08039180: .4byte gUnknown_3004F80
 	thumb_func_end OpponentHandleCmd55

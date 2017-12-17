@@ -105,8 +105,8 @@ _080F86BC: .4byte gUnknown_202273C
 _080F86C0: .4byte 0x01000046
 	thumb_func_end sub_80F85F8
 
-	thumb_func_start sub_80F86C4
-sub_80F86C4: @ 80F86C4
+	thumb_func_start InitRFU
+InitRFU: @ 80F86C4
 	push {r4-r6,lr}
 	ldr r4, _080F86EC @ =gIntrTable
 	ldr r5, [r4, 0x4]
@@ -127,14 +127,14 @@ sub_80F86C4: @ 80F86C4
 	.align 2, 0
 _080F86EC: .4byte gIntrTable
 _080F86F0: .4byte 0x04000208
-	thumb_func_end sub_80F86C4
+	thumb_func_end InitRFU
 
 	thumb_func_start sub_80F86F4
 sub_80F86F4: @ 80F86F4
 	push {r4,lr}
 	ldr r0, _080F8728 @ =gUnknown_3001190
 	ldr r1, _080F872C @ =0x00000e64
-	ldr r4, _080F8730 @ =gUnknown_3003544
+	ldr r4, _080F8730 @ =gIntrTable + 0x4
 	adds r2, r4, 0
 	movs r3, 0x1
 	bl sub_81E05B0
@@ -157,7 +157,7 @@ _080F8722:
 	.align 2, 0
 _080F8728: .4byte gUnknown_3001190
 _080F872C: .4byte 0x00000e64
-_080F8730: .4byte gUnknown_3003544
+_080F8730: .4byte gIntrTable + 0x4
 _080F8734: .4byte gUnknown_202271A
 	thumb_func_end sub_80F86F4
 
@@ -2248,7 +2248,7 @@ rfu_func_080F97B8: @ 80F97B8
 	ldrh r2, [r3]
 	cmp r2, 0
 	beq _080F97EA
-	ldr r0, _080F97F8 @ =gUnknown_30030E4
+	ldr r0, _080F97F8 @ =gLinkTransferringData
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080F97EA
@@ -2269,7 +2269,7 @@ _080F97EA:
 	.align 2, 0
 _080F97F0: .4byte gUnknown_3003F64
 _080F97F4: .4byte gUnknown_3005028
-_080F97F8: .4byte gUnknown_30030E4
+_080F97F8: .4byte gLinkTransferringData
 _080F97FC: .4byte gUnknown_3001188
 	thumb_func_end rfu_func_080F97B8
 
@@ -5150,7 +5150,7 @@ sub_80FAD98: @ 80FAD98
 	ldrb r0, [r0, 0x2]
 	cmp r0, 0
 	bne _080FAE30
-	ldr r6, _080FAE18 @ =gUnknown_30030F0
+	ldr r6, _080FAE18 @ =gMain
 	ldr r1, [r6, 0x4]
 	ldr r0, _080FAE1C @ =sub_814208C
 	cmp r1, r0
@@ -5198,7 +5198,7 @@ _080FADF8:
 	.align 2, 0
 _080FAE10: .4byte gUnknown_3005450
 _080FAE14: .4byte gUnknown_3005E10
-_080FAE18: .4byte gUnknown_30030F0
+_080FAE18: .4byte gMain
 _080FAE1C: .4byte sub_814208C
 _080FAE20: .4byte gUnknown_3003F3C
 _080FAE24: .4byte c2_800ACD4
@@ -5335,14 +5335,14 @@ _080FAF18: .4byte gUnknown_3005450
 sub_80FAF1C: @ 80FAF1C
 	push {lr}
 	ldr r0, _080FAF2C @ =gUnknown_3005E00
-	ldr r1, _080FAF30 @ =gUnknown_300500C
+	ldr r1, _080FAF30 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	bl StringCopy
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080FAF2C: .4byte gUnknown_3005E00
-_080FAF30: .4byte gUnknown_300500C
+_080FAF30: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_80FAF1C
 
 	thumb_func_start sub_80FAF34
@@ -6821,13 +6821,13 @@ sub_80FBA2C: @ 80FBA2C
 _080FBA34: .4byte gUnknown_3005450
 	thumb_func_end sub_80FBA2C
 
-	thumb_func_start LinkVSync
-LinkVSync: @ 80FBA38
+	thumb_func_start RFUVSync
+RFUVSync: @ 80FBA38
 	push {lr}
 	bl rfu_syncVBlank_
 	pop {r0}
 	bx r0
-	thumb_func_end LinkVSync
+	thumb_func_end RFUVSync
 
 	thumb_func_start sub_80FBA44
 sub_80FBA44: @ 80FBA44
@@ -6876,13 +6876,13 @@ sub_80FBA78: @ 80FBA78
 	strh r0, [r1]
 	bl sub_800B1F4
 	bl sub_8009804
-	ldr r0, _080FBB00 @ =gUnknown_30030F0
+	ldr r0, _080FBB00 @ =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng
 	movs r4, 0
 _080FBAB4:
 	bl Random
-	ldr r1, _080FBB04 @ =gUnknown_300500C
+	ldr r1, _080FBB04 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	adds r1, 0xA
 	adds r1, r4
@@ -6909,8 +6909,8 @@ _080FBAEC:
 _080FBAF4: .4byte sub_80FBA64
 _080FBAF8: .4byte gUnknown_202271A
 _080FBAFC: .4byte 0x00001111
-_080FBB00: .4byte gUnknown_30030F0
-_080FBB04: .4byte gUnknown_300500C
+_080FBB00: .4byte gMain
+_080FBB04: .4byte gSaveBlock2Ptr
 _080FBB08: .4byte sub_80FBB74
 	thumb_func_end sub_80FBA78
 
@@ -9106,7 +9106,7 @@ sub_80FCB54: @ 80FCB54
 	lsrs r1, 24
 	mov r9, r1
 	movs r4, 0
-	ldr r0, _080FCC30 @ =gUnknown_300500C
+	ldr r0, _080FCC30 @ =gSaveBlock2Ptr
 	mov r8, r0
 	adds r6, r7, 0x2
 	ldr r0, [r0]
@@ -9207,7 +9207,7 @@ _080FCB88:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FCC30: .4byte gUnknown_300500C
+_080FCC30: .4byte gSaveBlock2Ptr
 _080FCC34: .4byte 0x00000844
 _080FCC38: .4byte 0x0000082c
 	thumb_func_end sub_80FCB54
@@ -9489,7 +9489,7 @@ sub_80FCE44: @ 80FCE44
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	ldr r3, _080FCE9C @ =gUnknown_30030F0
+	ldr r3, _080FCE9C @ =gMain
 	movs r0, 0x84
 	lsls r0, 3
 	adds r3, r0
@@ -9509,7 +9509,7 @@ _080FCE8A:
 _080FCE90: .4byte gUnknown_202063C
 _080FCE94: .4byte gUnknown_203ACE4
 _080FCE98: .4byte 0x00001234
-_080FCE9C: .4byte gUnknown_30030F0
+_080FCE9C: .4byte gMain
 _080FCEA0: .4byte gUnknown_8231CE4
 _080FCEA4: .4byte 0x070003e8
 	thumb_func_end sub_80FCE44
@@ -9760,7 +9760,7 @@ _080FD06C:
 	adds r0, 0x1
 	strh r0, [r6, 0x34]
 _080FD072:
-	ldr r4, _080FD110 @ =gUnknown_30030F0
+	ldr r4, _080FD110 @ =gMain
 	movs r1, 0x84
 	lsls r1, 3
 	adds r0, r4, r1
@@ -9838,7 +9838,7 @@ _080FD106:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FD110: .4byte gUnknown_30030F0
+_080FD110: .4byte gMain
 _080FD114: .4byte gUnknown_843F204
 _080FD118: .4byte 0x00000422
 _080FD11C: .4byte 0x000001ff
@@ -9964,7 +9964,7 @@ _080FD1C8:
 	adds r3, r7, r0
 _080FD1F4:
 	ldrh r1, [r3]
-	ldr r0, _080FD254 @ =gUnknown_3005008
+	ldr r0, _080FD254 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r7, _080FD250 @ =0x00003ba8
 	adds r0, r2, r7
@@ -10000,7 +10000,7 @@ _080FD22C:
 	movs r0, 0
 	mov r8, r0
 	movs r4, 0
-	ldr r1, _080FD254 @ =gUnknown_3005008
+	ldr r1, _080FD254 @ =gSaveBlock1Ptr
 	mov r9, r1
 	mov r7, sp
 	movs r5, 0
@@ -10009,7 +10009,7 @@ _080FD22C:
 	.align 2, 0
 _080FD24C: .4byte gUnknown_2022744
 _080FD250: .4byte 0x00003ba8
-_080FD254: .4byte gUnknown_3005008
+_080FD254: .4byte gSaveBlock1Ptr
 _080FD258:
 	bl GetMultiplayerId
 	lsls r0, 24
@@ -10055,7 +10055,7 @@ _080FD2A4:
 	cmp r4, r0
 	blt _080FD258
 	movs r4, 0
-	ldr r7, _080FD330 @ =gUnknown_3005008
+	ldr r7, _080FD330 @ =gSaveBlock1Ptr
 	mov r9, r7
 	ldr r6, _080FD334 @ =0x00003ba8
 	movs r7, 0
@@ -10096,7 +10096,7 @@ _080FD2F8:
 	cmp r4, 0x13
 	ble _080FD2C6
 _080FD302:
-	ldr r0, _080FD330 @ =gUnknown_3005008
+	ldr r0, _080FD330 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _080FD334 @ =0x00003ba8
 	adds r0, r1
@@ -10117,7 +10117,7 @@ _080FD318:
 	.align 2, 0
 _080FD328: .4byte gUnknown_202273C
 _080FD32C: .4byte 0x00003bac
-_080FD330: .4byte gUnknown_3005008
+_080FD330: .4byte gSaveBlock1Ptr
 _080FD334: .4byte 0x00003ba8
 	thumb_func_end sub_80FD1A0
 
@@ -10132,7 +10132,7 @@ sub_80FD338: @ 80FD338
 	lsrs r0, 16
 	mov r8, r0
 	movs r7, 0
-	ldr r6, _080FD374 @ =gUnknown_3005008
+	ldr r6, _080FD374 @ =gSaveBlock1Ptr
 	ldr r4, _080FD378 @ =0x00003ba8
 	movs r5, 0
 _080FD350:
@@ -10154,7 +10154,7 @@ _080FD350:
 	movs r0, 0x1
 	b _080FD396
 	.align 2, 0
-_080FD374: .4byte gUnknown_3005008
+_080FD374: .4byte gSaveBlock1Ptr
 _080FD378: .4byte 0x00003ba8
 _080FD37C:
 	ldr r0, [r6]

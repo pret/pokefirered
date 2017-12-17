@@ -33,7 +33,7 @@ _0814F8A4:
 	.4byte _0814FC70
 	.4byte _0814FC82
 _0814F8C0:
-	ldr r2, _0814F914 @ =gUnknown_30030F0
+	ldr r2, _0814F914 @ =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x3
 	ands r0, r1
@@ -78,7 +78,7 @@ _0814F904:
 	strb r0, [r6, 0x1E]
 	b _0814FB42
 	.align 2, 0
-_0814F914: .4byte gUnknown_30030F0
+_0814F914: .4byte gMain
 _0814F918: .4byte gUnknown_3003E50
 _0814F91C:
 	ldr r2, _0814F92C @ =gUnknown_3003E50
@@ -457,7 +457,7 @@ _0814FBFC:
 	cmp r2, 0
 	beq _0814FC6C
 	ldr r4, _0814FC30 @ =gUnknown_846FB08
-	ldr r5, _0814FC34 @ =gUnknown_300500C
+	ldr r5, _0814FC34 @ =gSaveBlock2Ptr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x14]
 	lsls r1, r0, 29
@@ -479,7 +479,7 @@ _0814FBFC:
 	b _0814FC62
 	.align 2, 0
 _0814FC30: .4byte gUnknown_846FB08
-_0814FC34: .4byte gUnknown_300500C
+_0814FC34: .4byte gSaveBlock2Ptr
 _0814FC38:
 	ldrb r0, [r6, 0x4]
 	lsrs r1, 29

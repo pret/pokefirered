@@ -502,13 +502,13 @@ _08077BA6:
 	beq _08077BC8
 	cmp r4, 0
 	bne _08077BC8
-	ldr r0, _08077BC4 @ =gUnknown_300500C
+	ldr r0, _08077BC4 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	b _08077BDA
 	.align 2, 0
 _08077BC0: .4byte gUnknown_2022B4C
-_08077BC4: .4byte gUnknown_300500C
+_08077BC4: .4byte gSaveBlock2Ptr
 _08077BC8:
 	ldr r0, [r0]
 	movs r1, 0x80
@@ -748,7 +748,7 @@ _08077DAC:
 	beq _08077E10
 	cmp r7, 0
 	bne _08077E10
-	ldr r5, _08077E04 @ =gUnknown_300500C
+	ldr r5, _08077E04 @ =gSaveBlock2Ptr
 	ldr r0, [r5]
 	ldrb r4, [r0, 0x8]
 	movs r0, 0
@@ -781,7 +781,7 @@ _08077DAC:
 	b _08077E54
 	.align 2, 0
 _08077E00: .4byte gUnknown_2022B4C
-_08077E04: .4byte gUnknown_300500C
+_08077E04: .4byte gSaveBlock2Ptr
 _08077E08: .4byte gUnknown_20244DC
 _08077E0C: .4byte gUnknown_8239F8C
 _08077E10:

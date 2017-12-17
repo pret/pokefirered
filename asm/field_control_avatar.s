@@ -1980,7 +1980,7 @@ sub_806D804: @ 806D804
 	lsls r2, 24
 	lsrs r5, r2, 24
 	adds r7, r5, 0
-	ldr r0, _0806D840 @ =gUnknown_30030F0
+	ldr r0, _0806D840 @ =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x30
 	ands r0, r1
@@ -2002,7 +2002,7 @@ sub_806D804: @ 806D804
 	adds r1, r5, 0
 	b _0806D888
 	.align 2, 0
-_0806D840: .4byte gUnknown_30030F0
+_0806D840: .4byte gMain
 _0806D844: .4byte gUnknown_81A76E7
 _0806D848:
 	cmp r4, 0x1
@@ -2583,7 +2583,7 @@ _0806DC78:
 	bne _0806DCC4
 	adds r0, r6, r1
 	ldrb r0, [r0, 0x5]
-	ldr r1, _0806DCCC @ =gUnknown_3005008
+	ldr r1, _0806DCCC @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	movs r1, 0x4
 	ldrsb r1, [r2, r1]
@@ -2597,7 +2597,7 @@ _0806DCC4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806DCCC: .4byte gUnknown_3005008
+_0806DCCC: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_806DC54
 
 	thumb_func_start sub_806DCD0
@@ -2805,7 +2805,7 @@ sub_806DE28: @ 806DE28
 	movs r0, 0x25
 	bl sub_80722CC
 	ldrb r0, [r5, 0x8]
-	ldr r4, _0806DE6C @ =gUnknown_3005008
+	ldr r4, _0806DE6C @ =gSaveBlock1Ptr
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2823,7 +2823,7 @@ _0806DE64:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806DE6C: .4byte gUnknown_3005008
+_0806DE6C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_806DE28
 
 	thumb_func_start sub_806DE70

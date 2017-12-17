@@ -454,7 +454,7 @@ sub_809AE00: @ 809AE00
 sub_809AE14: @ 809AE14
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r0, _0809AE90 @ =gUnknown_30030F0
+	ldr r0, _0809AE90 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r5, r0, r1
@@ -507,7 +507,7 @@ _0809AE2C:
 	bl SetMainCallback2
 	b _0809AF64
 	.align 2, 0
-_0809AE90: .4byte gUnknown_30030F0
+_0809AE90: .4byte gMain
 _0809AE94: .4byte gUnknown_2039934
 _0809AE98: .4byte sub_809BBC0
 _0809AE9C: .4byte gUnknown_3005E70
@@ -2211,7 +2211,7 @@ _0809BC1A:
 	lsls r1, 16
 	lsrs r1, 16
 	str r1, [r0, 0x8]
-	ldr r0, _0809BC70 @ =gUnknown_3005008
+	ldr r0, _0809BC70 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r2, 0xA4
 	lsls r2, 2
@@ -2226,7 +2226,7 @@ _0809BC1A:
 	bl sub_813F75C
 	b _0809BC8E
 	.align 2, 0
-_0809BC70: .4byte gUnknown_3005008
+_0809BC70: .4byte gSaveBlock1Ptr
 _0809BC74: .4byte gUnknown_8416842
 _0809BC78: .4byte sub_809BF98
 _0809BC7C:
@@ -2296,7 +2296,7 @@ sub_809BCA0: @ 809BCA0
 	bl sub_809BB44
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r0, _0809BD50 @ =gUnknown_3005008
+	ldr r0, _0809BD50 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -2322,7 +2322,7 @@ _0809BD40: .4byte gUnknown_3005098
 _0809BD44: .4byte gUnknown_2021CD0
 _0809BD48: .4byte gUnknown_2021D18
 _0809BD4C: .4byte gUnknown_8416749
-_0809BD50: .4byte gUnknown_3005008
+_0809BD50: .4byte gSaveBlock1Ptr
 _0809BD54: .4byte gUnknown_2039934
 _0809BD58:
 	ldr r1, _0809BD80 @ =gUnknown_2039934
@@ -2385,7 +2385,7 @@ sub_809BD8C: @ 809BD8C
 _0809BDCC: .4byte gUnknown_3005098
 _0809BDD0: .4byte gUnknown_2039934
 _0809BDD4:
-	ldr r0, _0809BE3C @ =gUnknown_30030F0
+	ldr r0, _0809BE3C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2426,7 +2426,7 @@ _0809BDD4:
 	bl sub_813F75C
 	b _0809BE88
 	.align 2, 0
-_0809BE3C: .4byte gUnknown_30030F0
+_0809BE3C: .4byte gMain
 _0809BE40: .4byte gUnknown_2021CD0
 _0809BE44: .4byte gUnknown_2021CF0
 _0809BE48: .4byte gUnknown_2021D04
@@ -2527,7 +2527,7 @@ sub_809BF0C: @ 809BF0C
 	lsrs r4, 24
 	movs r0, 0x26
 	bl IncrementGameStat
-	ldr r6, _0809BF58 @ =gUnknown_3005008
+	ldr r6, _0809BF58 @ =gSaveBlock1Ptr
 	ldr r0, [r6]
 	movs r5, 0xA4
 	lsls r5, 2
@@ -2555,7 +2555,7 @@ sub_809BF0C: @ 809BF0C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809BF58: .4byte gUnknown_3005008
+_0809BF58: .4byte gSaveBlock1Ptr
 _0809BF5C: .4byte gUnknown_2039934
 _0809BF60: .4byte gUnknown_3005090
 _0809BF64: .4byte sub_809BF68
@@ -2566,7 +2566,7 @@ sub_809BF68: @ 809BF68
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0809BF94 @ =gUnknown_30030F0
+	ldr r0, _0809BF94 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2586,7 +2586,7 @@ _0809BF8E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809BF94: .4byte gUnknown_30030F0
+_0809BF94: .4byte gMain
 	thumb_func_end sub_809BF68
 
 	thumb_func_start sub_809BF98

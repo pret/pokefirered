@@ -4565,7 +4565,7 @@ _0805D5C0: .4byte gUnknown_835B91A
 _0805D5C4: .4byte gUnknown_2037078
 _0805D5C8: .4byte gUnknown_202063C
 _0805D5CC:
-	ldr r0, _0805D5E8 @ =gUnknown_30030F0
+	ldr r0, _0805D5E8 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -4582,7 +4582,7 @@ _0805D5DE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805D5E8: .4byte gUnknown_30030F0
+_0805D5E8: .4byte gMain
 	thumb_func_end sub_805D580
 
 	thumb_func_start sub_805D5EC

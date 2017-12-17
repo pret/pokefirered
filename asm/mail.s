@@ -159,7 +159,7 @@ _080BED14: .4byte sub_80BF110
 sub_80BED18: @ 80BED18
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r0, _080BED38 @ =gUnknown_30030F0
+	ldr r0, _080BED38 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -174,7 +174,7 @@ _080BED2C:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080BED38: .4byte gUnknown_30030F0
+_080BED38: .4byte gMain
 _080BED3C: .4byte _080BED40
 	.align 2, 0
 _080BED40:
@@ -433,7 +433,7 @@ _080BEF28:
 	movs r2, 0x20
 	bl LoadPalette
 	ldr r1, _080BEFE0 @ =gUnknown_83EE9C0
-	ldr r0, _080BEFE4 @ =gUnknown_300500C
+	ldr r0, _080BEFE4 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x8]
 	lsls r0, 2
@@ -463,7 +463,7 @@ _080BEFD4: .4byte gUnknown_83EE9C8
 _080BEFD8: .4byte gUnknown_20399C4
 _080BEFDC: .4byte gUnknown_20375F8
 _080BEFE0: .4byte gUnknown_83EE9C0
-_080BEFE4: .4byte gUnknown_300500C
+_080BEFE4: .4byte gSaveBlock2Ptr
 _080BEFE8:
 	ldr r0, _080BEFFC @ =gUnknown_20399C4
 	ldr r0, [r0]
@@ -590,7 +590,7 @@ _080BF0E8: .4byte gUnknown_2037AB8
 _080BF0EC: .4byte gUnknown_20399C4
 _080BF0F0: .4byte sub_80BF394
 _080BF0F4:
-	ldr r1, _080BF10C @ =gUnknown_30030F0
+	ldr r1, _080BF10C @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -605,7 +605,7 @@ _080BF104:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BF10C: .4byte gUnknown_30030F0
+_080BF10C: .4byte gMain
 	thumb_func_end sub_80BED18
 
 	thumb_func_start sub_80BF110
@@ -952,7 +952,7 @@ _080BF3B4: .4byte sub_80BF3B8
 sub_80BF3B8: @ 80BF3B8
 	push {lr}
 	sub sp, 0x4
-	ldr r0, _080BF3E8 @ =gUnknown_30030F0
+	ldr r0, _080BF3E8 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -975,7 +975,7 @@ _080BF3E2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BF3E8: .4byte gUnknown_30030F0
+_080BF3E8: .4byte gMain
 _080BF3EC: .4byte gUnknown_20399C4
 _080BF3F0: .4byte sub_80BF3F4
 	thumb_func_end sub_80BF3B8

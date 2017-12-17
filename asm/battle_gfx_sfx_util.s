@@ -2711,7 +2711,7 @@ sub_803539C: @ 803539C
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, _08035440 @ =gUnknown_30030F0
+	ldr r0, _08035440 @ =gMain
 	ldr r1, _08035444 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -2782,7 +2782,7 @@ _08035432:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08035440: .4byte gUnknown_30030F0
+_08035440: .4byte gMain
 _08035444: .4byte 0x00000439
 _08035448: .4byte gUnknown_2023BCE
 _0803544C: .4byte gUnknown_2024284

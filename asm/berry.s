@@ -8,7 +8,7 @@
 	thumb_func_start sub_809C718
 sub_809C718: @ 809C718
 	push {r4,r5,lr}
-	ldr r2, _0809C778 @ =gUnknown_3005008
+	ldr r2, _0809C778 @ =gSaveBlock1Ptr
 	ldr r1, [r2]
 	ldr r0, _0809C77C @ =gUnknown_83DF7E8
 	ldr r3, _0809C780 @ =0x000030ec
@@ -56,7 +56,7 @@ _0809C740:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809C778: .4byte gUnknown_3005008
+_0809C778: .4byte gSaveBlock1Ptr
 _0809C77C: .4byte gUnknown_83DF7E8
 _0809C780: .4byte 0x000030ec
 _0809C784: .4byte 0x00003108
@@ -72,7 +72,7 @@ sub_809C794: @ 809C794
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, _0809C7B8 @ =gUnknown_3005008
+	ldr r0, _0809C7B8 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, _0809C7BC @ =0x000030ec
 	adds r1, r0
@@ -84,7 +84,7 @@ sub_809C794: @ 809C794
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809C7B8: .4byte gUnknown_3005008
+_0809C7B8: .4byte gSaveBlock1Ptr
 _0809C7BC: .4byte 0x000030ec
 _0809C7C0: .4byte 0x0100001a
 	thumb_func_end sub_809C794
@@ -95,7 +95,7 @@ sub_809C7C4: @ 809C7C4
 	adds r4, r0, 0
 	bl sub_809C794
 	adds r5, r4, 0
-	ldr r0, _0809C824 @ =gUnknown_3005008
+	ldr r0, _0809C824 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r0, _0809C828 @ =0x000030ec
 	adds r4, r2, r0
@@ -139,7 +139,7 @@ _0809C7F0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809C824: .4byte gUnknown_3005008
+_0809C824: .4byte gSaveBlock1Ptr
 _0809C828: .4byte 0x000030ec
 _0809C82C: .4byte 0x00003108
 _0809C830: .4byte 0x00000516
@@ -167,7 +167,7 @@ _0809C840:
 	thumb_func_start IsEnigmaBerryValid
 IsEnigmaBerryValid: @ 809C854
 	push {r4,lr}
-	ldr r4, _0809C888 @ =gUnknown_3005008
+	ldr r4, _0809C888 @ =gSaveBlock1Ptr
 	ldr r1, [r4]
 	movs r2, 0xC4
 	lsls r2, 6
@@ -192,7 +192,7 @@ IsEnigmaBerryValid: @ 809C854
 	movs r0, 0x1
 	b _0809C89A
 	.align 2, 0
-_0809C888: .4byte gUnknown_3005008
+_0809C888: .4byte gSaveBlock1Ptr
 _0809C88C: .4byte 0x000030f6
 _0809C890: .4byte 0x000030ec
 _0809C894: .4byte 0x0000311c
@@ -214,12 +214,12 @@ sub_809C8A0: @ 809C8A0
 	bl IsEnigmaBerryValid
 	cmp r0, 0
 	beq _0809C8C4
-	ldr r0, _0809C8BC @ =gUnknown_3005008
+	ldr r0, _0809C8BC @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _0809C8C0 @ =0x000030ec
 	b _0809C8D8
 	.align 2, 0
-_0809C8BC: .4byte gUnknown_3005008
+_0809C8BC: .4byte gSaveBlock1Ptr
 _0809C8C0: .4byte 0x000030ec
 _0809C8C4:
 	subs r0, r4, 0x1

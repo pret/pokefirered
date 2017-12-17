@@ -759,7 +759,7 @@ _0815A508:
 	b _0815A224
 _0815A512:
 	ldr r0, _0815A538 @ =gUnknown_2036E38
-	ldr r1, _0815A53C @ =gUnknown_3005008
+	ldr r1, _0815A53C @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	movs r2, 0xD4
 	lsls r2, 3
@@ -777,7 +777,7 @@ _0815A512:
 	bx r0
 	.align 2, 0
 _0815A538: .4byte gUnknown_2036E38
-_0815A53C: .4byte gUnknown_3005008
+_0815A53C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_815A1F8
 
 	thumb_func_start sub_815A540

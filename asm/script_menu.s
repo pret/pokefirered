@@ -482,7 +482,7 @@ _0809CCDE:
 _0809CCE2:
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0809CD20 @ =gUnknown_30030F0
+	ldr r0, _0809CD20 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xC0
 	ands r0, r1
@@ -511,7 +511,7 @@ _0809CCF8:
 	strh r0, [r1]
 	b _0809CD2C
 	.align 2, 0
-_0809CD20: .4byte gUnknown_30030F0
+_0809CD20: .4byte gMain
 _0809CD24: .4byte gUnknown_20370D0
 _0809CD28:
 	ldr r0, _0809CD44 @ =gUnknown_20370D0

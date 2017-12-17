@@ -22,7 +22,7 @@ _080CD23C: .4byte sub_80CD240
 sub_80CD240: @ 80CD240
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _080CD260 @ =gUnknown_30030F0
+	ldr r0, _080CD260 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -37,7 +37,7 @@ _080CD254:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080CD260: .4byte gUnknown_30030F0
+_080CD260: .4byte gMain
 _080CD264: .4byte _080CD268
 	.align 2, 0
 _080CD268:
@@ -115,7 +115,7 @@ _080CD314:
 	movs r3, 0
 	bl BeginNormalPaletteFade
 _080CD324:
-	ldr r1, _080CD334 @ =gUnknown_30030F0
+	ldr r1, _080CD334 @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -124,7 +124,7 @@ _080CD324:
 	strb r0, [r1]
 	b _080CD376
 	.align 2, 0
-_080CD334: .4byte gUnknown_30030F0
+_080CD334: .4byte gMain
 _080CD338:
 	bl sub_80CD628
 	ldr r0, _080CD350 @ =sub_80CD38C
@@ -146,7 +146,7 @@ _080CD35C:
 	bl CreateTask
 	ldr r0, _080CD384 @ =sub_80CD3A0
 	bl SetMainCallback2
-	ldr r0, _080CD388 @ =gUnknown_30030F0
+	ldr r0, _080CD388 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -160,7 +160,7 @@ _080CD376:
 	.align 2, 0
 _080CD380: .4byte sub_80CD3B8
 _080CD384: .4byte sub_80CD3A0
-_080CD388: .4byte gUnknown_30030F0
+_080CD388: .4byte gMain
 	thumb_func_end sub_80CD240
 
 	thumb_func_start sub_80CD38C
@@ -221,7 +221,7 @@ sub_80CD3E8: @ 80CD3E8
 	lsls r1, 3
 	ldr r0, _080CD41C @ =gUnknown_3005090
 	adds r4, r1, r0
-	ldr r0, _080CD420 @ =gUnknown_30030F0
+	ldr r0, _080CD420 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -242,7 +242,7 @@ _080CD416:
 	bx r0
 	.align 2, 0
 _080CD41C: .4byte gUnknown_3005090
-_080CD420: .4byte gUnknown_30030F0
+_080CD420: .4byte gMain
 _080CD424: .4byte sub_80CD428
 	thumb_func_end sub_80CD3E8
 
@@ -859,7 +859,7 @@ _080CD8BE:
 	thumb_func_start InitLinkBattleRecords
 InitLinkBattleRecords: @ 80CD8DC
 	push {lr}
-	ldr r0, _080CD8F0 @ =gUnknown_300500C
+	ldr r0, _080CD8F0 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _080CD8F4 @ =0x00000a98
 	adds r0, r1
@@ -867,7 +867,7 @@ InitLinkBattleRecords: @ 80CD8DC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CD8F0: .4byte gUnknown_300500C
+_080CD8F0: .4byte gSaveBlock2Ptr
 _080CD8F4: .4byte 0x00000a98
 	thumb_func_end InitLinkBattleRecords
 
@@ -957,7 +957,7 @@ sub_80CD98C: @ 80CD98C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r0, _080CD9DC @ =gUnknown_3005008
+	ldr r0, _080CD9DC @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x80
@@ -966,7 +966,7 @@ sub_80CD98C: @ 80CD98C
 	beq _080CD9D4
 	adds r0, r6, 0
 	bl sub_80CD950
-	ldr r0, _080CD9E0 @ =gUnknown_300500C
+	ldr r0, _080CD9E0 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _080CD9E4 @ =0x00000a98
 	adds r0, r1
@@ -994,8 +994,8 @@ _080CD9D4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CD9DC: .4byte gUnknown_3005008
-_080CD9E0: .4byte gUnknown_300500C
+_080CD9DC: .4byte gSaveBlock1Ptr
+_080CD9E0: .4byte gSaveBlock2Ptr
 _080CD9E4: .4byte 0x00000a98
 _080CD9E8: .4byte gUnknown_2039654
 _080CD9EC: .4byte gUnknown_2023E8A
@@ -1292,7 +1292,7 @@ sub_80CDBE4: @ 80CDBE4
 	movs r1, 0x2
 	movs r3, 0x4
 	bl AddTextPrinterParametrized2
-	ldr r5, _080CDCA8 @ =gUnknown_300500C
+	ldr r5, _080CDCA8 @ =gSaveBlock2Ptr
 	ldr r0, [r5]
 	ldr r1, _080CDCAC @ =0x00000a98
 	mov r8, r1
@@ -1340,7 +1340,7 @@ _080CDC70:
 _080CDC9C: .4byte gUnknown_2021D18
 _080CDCA0: .4byte gUnknown_8418174
 _080CDCA4: .4byte gUnknown_83F6C78
-_080CDCA8: .4byte gUnknown_300500C
+_080CDCA8: .4byte gSaveBlock2Ptr
 _080CDCAC: .4byte 0x00000a98
 _080CDCB0: .4byte gUnknown_84181A4
 	thumb_func_end sub_80CDBE4

@@ -1158,7 +1158,7 @@ GroundEffect_SpawnOnTallGrass: @ 806837C
 	str r1, [r3, 0x10]
 	ldrb r0, [r0, 0xA]
 	str r0, [r3, 0x14]
-	ldr r0, _080683C4 @ =gUnknown_3005008
+	ldr r0, _080683C4 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x5]
 	lsls r0, 8
@@ -1173,7 +1173,7 @@ GroundEffect_SpawnOnTallGrass: @ 806837C
 	bx r0
 	.align 2, 0
 _080683C0: .4byte gUnknown_20386E0
-_080683C4: .4byte gUnknown_3005008
+_080683C4: .4byte gSaveBlock1Ptr
 	thumb_func_end GroundEffect_SpawnOnTallGrass
 
 	thumb_func_start GroundEffect_StepOnTallGrass
@@ -1198,7 +1198,7 @@ GroundEffect_StepOnTallGrass: @ 80683C8
 	str r1, [r3, 0x10]
 	ldrb r0, [r0, 0xA]
 	str r0, [r3, 0x14]
-	ldr r0, _08068410 @ =gUnknown_3005008
+	ldr r0, _08068410 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x5]
 	lsls r0, 8
@@ -1213,7 +1213,7 @@ GroundEffect_StepOnTallGrass: @ 80683C8
 	bx r0
 	.align 2, 0
 _0806840C: .4byte gUnknown_20386E0
-_08068410: .4byte gUnknown_3005008
+_08068410: .4byte gSaveBlock1Ptr
 	thumb_func_end GroundEffect_StepOnTallGrass
 
 	thumb_func_start GroundEffect_SpawnOnLongGrass
@@ -1238,7 +1238,7 @@ GroundEffect_SpawnOnLongGrass: @ 8068414
 	str r1, [r3, 0x10]
 	ldrb r0, [r0, 0xA]
 	str r0, [r3, 0x14]
-	ldr r0, _0806845C @ =gUnknown_3005008
+	ldr r0, _0806845C @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x5]
 	lsls r0, 8
@@ -1253,7 +1253,7 @@ GroundEffect_SpawnOnLongGrass: @ 8068414
 	bx r0
 	.align 2, 0
 _08068458: .4byte gUnknown_20386E0
-_0806845C: .4byte gUnknown_3005008
+_0806845C: .4byte gSaveBlock1Ptr
 	thumb_func_end GroundEffect_SpawnOnLongGrass
 
 	thumb_func_start GroundEffect_StepOnLongGrass
@@ -1278,7 +1278,7 @@ GroundEffect_StepOnLongGrass: @ 8068460
 	str r1, [r3, 0x10]
 	ldrb r0, [r0, 0xA]
 	str r0, [r3, 0x14]
-	ldr r0, _080684A8 @ =gUnknown_3005008
+	ldr r0, _080684A8 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x5]
 	lsls r0, 8
@@ -1293,7 +1293,7 @@ GroundEffect_StepOnLongGrass: @ 8068460
 	bx r0
 	.align 2, 0
 _080684A4: .4byte gUnknown_20386E0
-_080684A8: .4byte gUnknown_3005008
+_080684A8: .4byte gSaveBlock1Ptr
 	thumb_func_end GroundEffect_StepOnLongGrass
 
 	thumb_func_start GroundEffect_WaterReflection

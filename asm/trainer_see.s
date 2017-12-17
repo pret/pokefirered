@@ -1008,7 +1008,7 @@ sub_808226C: @ 808226C
 	adds r4, r1, 0
 	movs r0, 0
 	strh r0, [r4, 0x12]
-	ldr r0, _080822C4 @ =gUnknown_3005008
+	ldr r0, _080822C4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r3, [r0]
 	adds r3, 0x7
@@ -1045,7 +1045,7 @@ sub_808226C: @ 808226C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080822C4: .4byte gUnknown_3005008
+_080822C4: .4byte gSaveBlock1Ptr
 _080822C8: .4byte gUnknown_2036E38
 	thumb_func_end sub_808226C
 
@@ -1055,7 +1055,7 @@ sub_80822CC: @ 80822CC
 	sub sp, 0x4
 	adds r5, r1, 0
 	adds r6, r2, 0
-	ldr r0, _08082348 @ =gUnknown_3005008
+	ldr r0, _08082348 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -1110,7 +1110,7 @@ _08082312:
 	strh r0, [r5, 0x12]
 	b _0808236E
 	.align 2, 0
-_08082348: .4byte gUnknown_3005008
+_08082348: .4byte gSaveBlock1Ptr
 _0808234C: .4byte gUnknown_2036E38
 _08082350:
 	ldr r1, _08082378 @ =gUnknown_20386E0
@@ -1141,7 +1141,7 @@ sub_808237C: @ 808237C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r1, 0
-	ldr r0, _08082404 @ =gUnknown_3005008
+	ldr r0, _08082404 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -1201,14 +1201,14 @@ _080823CC:
 	strh r0, [r5, 0x12]
 	b _0808242E
 	.align 2, 0
-_08082404: .4byte gUnknown_3005008
+_08082404: .4byte gSaveBlock1Ptr
 _08082408: .4byte gUnknown_2036E38
 _0808240C:
 	bl GetPlayerAvatarObjectId
 	lsls r0, 24
 	lsrs r0, 24
 	bl CameraObjectSetFollowedObjectId
-	ldr r0, _08082438 @ =gUnknown_3005008
+	ldr r0, _08082438 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -1225,7 +1225,7 @@ _0808242E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08082438: .4byte gUnknown_3005008
+_08082438: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_808237C
 
 	thumb_func_start sub_808243C

@@ -9,7 +9,7 @@
 ClearMailData: @ 8097C84
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _08097CAC @ =gUnknown_3005008
+	ldr r5, _08097CAC @ =gSaveBlock1Ptr
 _08097C8A:
 	lsls r1, r4, 3
 	adds r1, r4
@@ -28,7 +28,7 @@ _08097C8A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08097CAC: .4byte gUnknown_3005008
+_08097CAC: .4byte gSaveBlock1Ptr
 _08097CB0: .4byte 0x00002cd0
 	thumb_func_end ClearMailData
 
@@ -132,7 +132,7 @@ sub_8097D38: @ 8097D38
 	mov r9, r4
 	adds r5, r4, 0
 _08097D62:
-	ldr r2, _08097EC0 @ =gUnknown_3005008
+	ldr r2, _08097EC0 @ =gSaveBlock1Ptr
 	ldr r0, [r2]
 	ldrb r3, [r5]
 	lsls r1, r3, 3
@@ -147,7 +147,7 @@ _08097D62:
 	b _08097EE0
 _08097D7C:
 	movs r4, 0
-	ldr r3, _08097EC8 @ =gUnknown_300500C
+	ldr r3, _08097EC8 @ =gSaveBlock2Ptr
 	mov r10, r3
 	adds r7, r2, 0
 	mov r5, r12
@@ -178,9 +178,9 @@ _08097D8A:
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	beq _08097DEE
-	ldr r3, _08097EC8 @ =gUnknown_300500C
+	ldr r3, _08097EC8 @ =gSaveBlock2Ptr
 _08097DBC:
-	ldr r0, _08097EC0 @ =gUnknown_3005008
+	ldr r0, _08097EC0 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	mov r0, r12
 	ldrb r1, [r0]
@@ -208,7 +208,7 @@ _08097DBC:
 _08097DEE:
 	cmp r4, 0x5
 	bhi _08097E16
-	ldr r7, _08097EC0 @ =gUnknown_3005008
+	ldr r7, _08097EC0 @ =gSaveBlock1Ptr
 	mov r3, r12
 	ldr r6, _08097ED4 @ =0x00002ce2
 	movs r5, 0
@@ -228,7 +228,7 @@ _08097DFA:
 	cmp r4, 0x5
 	bls _08097DFA
 _08097E16:
-	ldr r3, _08097EC0 @ =gUnknown_3005008
+	ldr r3, _08097EC0 @ =gSaveBlock1Ptr
 	ldr r2, [r3]
 	mov r0, r12
 	ldrb r1, [r0]
@@ -277,7 +277,7 @@ _08097E36:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl SpeciesToMailSpecies
-	ldr r1, _08097EC0 @ =gUnknown_3005008
+	ldr r1, _08097EC0 @ =gSaveBlock1Ptr
 	ldr r3, [r1]
 	mov r4, r9
 	ldrb r2, [r4]
@@ -310,9 +310,9 @@ _08097E36:
 	ldrb r0, [r1]
 	b _08097EEE
 	.align 2, 0
-_08097EC0: .4byte gUnknown_3005008
+_08097EC0: .4byte gSaveBlock1Ptr
 _08097EC4: .4byte 0x00002cf0
-_08097EC8: .4byte gUnknown_300500C
+_08097EC8: .4byte gSaveBlock2Ptr
 _08097ECC: .4byte 0x0000ffff
 _08097ED0: .4byte 0x00002cd0
 _08097ED4: .4byte 0x00002ce2
@@ -395,7 +395,7 @@ GiveMailToMon2: @ 8097F44
 	ldrb r2, [r4]
 	cmp r2, 0xFF
 	beq _08097FA8
-	ldr r0, _08097FA0 @ =gUnknown_3005008
+	ldr r0, _08097FA0 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r2, 3
 	adds r0, r2
@@ -426,7 +426,7 @@ GiveMailToMon2: @ 8097F44
 	ldrb r0, [r4]
 	b _08097FAA
 	.align 2, 0
-_08097FA0: .4byte gUnknown_3005008
+_08097FA0: .4byte gSaveBlock1Ptr
 _08097FA4: .4byte 0x00002cd0
 _08097FA8:
 	movs r0, 0xFF
@@ -457,7 +457,7 @@ TakeMailFromMon: @ 8097FB8
 	bl GetMonData
 	add r2, sp, 0x4
 	strb r0, [r2]
-	ldr r0, _08098010 @ =gUnknown_3005008
+	ldr r0, _08098010 @ =gSaveBlock1Ptr
 	ldr r3, [r0]
 	ldrb r1, [r2]
 	lsls r0, r1, 3
@@ -487,7 +487,7 @@ _08098008:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08098010: .4byte gUnknown_3005008
+_08098010: .4byte gSaveBlock1Ptr
 _08098014: .4byte 0x00002cf0
 	thumb_func_end TakeMailFromMon
 
@@ -495,7 +495,7 @@ _08098014: .4byte 0x00002cf0
 sub_8098018: @ 8098018
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08098034 @ =gUnknown_3005008
+	ldr r1, _08098034 @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -507,7 +507,7 @@ sub_8098018: @ 8098018
 	strh r0, [r2]
 	bx lr
 	.align 2, 0
-_08098034: .4byte gUnknown_3005008
+_08098034: .4byte gSaveBlock1Ptr
 _08098038: .4byte 0x00002cf0
 	thumb_func_end sub_8098018
 
@@ -528,7 +528,7 @@ sub_809803C: @ 809803C
 	strb r0, [r1]
 	movs r7, 0x6
 	mov r9, r1
-	ldr r0, _080980D0 @ =gUnknown_3005008
+	ldr r0, _080980D0 @ =gSaveBlock1Ptr
 	mov r8, r0
 	ldr r3, _080980D4 @ =0x00002cd0
 _08098060:
@@ -585,7 +585,7 @@ _08098060:
 	adds r0, r7, 0
 	b _080980E8
 	.align 2, 0
-_080980D0: .4byte gUnknown_3005008
+_080980D0: .4byte gSaveBlock1Ptr
 _080980D4: .4byte 0x00002cd0
 _080980D8: .4byte 0x00002cf0
 _080980DC:

@@ -1,0 +1,12 @@
+gKeyRepeatStartDelay
+gLinkTransferringData
+gMain
+gKeyRepeatContinueDelay
+gSoftResetDisabled
+gIntrTable
+gUnknown_3003578
+gLinkVSyncDisabled
+IntrMain_Buffer
+gUnknown_3003D80
+gUnknown_3003D84
+gPcmDmaCounter

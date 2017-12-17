@@ -82,7 +82,7 @@ SECTIONS {
     SUBALIGN(4)
     {
         asm/crt0.o(.text);
-        asm/main.o(.text);
+        src/main.o(.text);
         asm/gpu_regs.o(.text);
         asm/dma3_manager.o(.text);
         asm/bg.o(.text);
@@ -391,6 +391,7 @@ SECTIONS {
     .rodata :
     SUBALIGN(4)
     {
+        src/main.o(.rodata);
         data/data.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

@@ -271,14 +271,14 @@ _0814BD20:
 	strb r0, [r7, 0xC]
 	b _0814BD68
 _0814BD38:
-	ldr r0, _0814BD44 @ =gUnknown_30030F0
+	ldr r0, _0814BD44 @ =gMain
 	ldrh r0, [r0, 0x2E]
 	ands r4, r0
 	cmp r4, 0
 	bne _0814BD68
 	b _0814BD6E
 	.align 2, 0
-_0814BD44: .4byte gUnknown_30030F0
+_0814BD44: .4byte gMain
 _0814BD48:
 	ldrb r1, [r5, 0x1]
 	movs r0, 0x1
@@ -1449,7 +1449,7 @@ sub_814C618: @ 814C618
 	mov r7, r8
 	push {r7}
 	adds r5, r0, 0
-	ldr r3, _0814C6AC @ =gUnknown_30030F0
+	ldr r3, _0814C6AC @ =gMain
 	ldrh r1, [r3, 0x2E]
 	movs r4, 0x1
 	adds r0, r4, 0
@@ -1522,7 +1522,7 @@ _0814C670:
 	orrs r0, r1
 	b _0814C6BC
 	.align 2, 0
-_0814C6AC: .4byte gUnknown_30030F0
+_0814C6AC: .4byte gMain
 _0814C6B0: .4byte gUnknown_846E3C4
 _0814C6B4:
 	ldrb r1, [r6]
@@ -2729,7 +2729,7 @@ _0814CFFC:
 	strb r0, [r1]
 	b _0814D08A
 _0814D00E:
-	ldr r0, _0814D028 @ =gUnknown_30030F0
+	ldr r0, _0814D028 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2741,7 +2741,7 @@ _0814D00E:
 	bl sub_814E80C
 	b _0814D084
 	.align 2, 0
-_0814D028: .4byte gUnknown_30030F0
+_0814D028: .4byte gMain
 _0814D02C:
 	ldrh r0, [r5, 0x12]
 	cmp r0, 0xC

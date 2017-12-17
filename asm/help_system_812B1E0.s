@@ -108,7 +108,7 @@ _0812B278: .4byte gUnknown_845C5BC
 sub_812B27C: @ 812B27C
 	push {r4,lr}
 	adds r2, r0, 0
-	ldr r0, _0812B2AC @ =gUnknown_3005008
+	ldr r0, _0812B2AC @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -132,7 +132,7 @@ _0812B2A2:
 	movs r0, 0x1
 	b _0812B2BE
 	.align 2, 0
-_0812B2AC: .4byte gUnknown_3005008
+_0812B2AC: .4byte gSaveBlock1Ptr
 _0812B2B0: .4byte 0x0000ffff
 _0812B2B4:
 	adds r1, 0x2
@@ -173,7 +173,7 @@ _0812B2EC:
 	adds r3, r1, r5
 	adds r0, r3, r4
 	ldrb r1, [r0]
-	ldr r0, _0812B324 @ =gUnknown_3005008
+	ldr r0, _0812B324 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r2, r0]
@@ -199,7 +199,7 @@ _0812B320:
 	movs r0, 0x1
 	b _0812B34C
 	.align 2, 0
-_0812B324: .4byte gUnknown_3005008
+_0812B324: .4byte gSaveBlock1Ptr
 _0812B328: .4byte 0x00000849
 _0812B32C:
 	adds r0, r6, 0x1
@@ -257,7 +257,7 @@ _0812B388:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B400
-	ldr r0, _0812B3B4 @ =gUnknown_3005008
+	ldr r0, _0812B3B4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	cmp r1, 0x4
@@ -272,7 +272,7 @@ _0812B3A8:
 	b _0812B406
 	.align 2, 0
 _0812B3B0: .4byte gUnknown_2036DFC
-_0812B3B4: .4byte gUnknown_3005008
+_0812B3B4: .4byte gSaveBlock1Ptr
 _0812B3B8:
 	movs r0, 0xC1
 	lsls r0, 2
@@ -1312,7 +1312,7 @@ _0812BC7C: .4byte gUnknown_841DFA5
 sub_812BC80: @ 812BC80
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _0812BCA4 @ =gUnknown_30030F0
+	ldr r0, _0812BCA4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1328,7 +1328,7 @@ _0812BC9A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0812BCA4: .4byte gUnknown_30030F0
+_0812BCA4: .4byte gMain
 	thumb_func_end sub_812BC80
 
 	thumb_func_start sub_812BCA8
@@ -1646,7 +1646,7 @@ _0812BF14: .4byte gUnknown_3005E9C
 sub_812BF18: @ 812BF18
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _0812BF40 @ =gUnknown_30030F0
+	ldr r0, _0812BF40 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -1664,7 +1664,7 @@ _0812BF30:
 	movs r0, 0x1
 	b _0812BF54
 	.align 2, 0
-_0812BF40: .4byte gUnknown_30030F0
+_0812BF40: .4byte gMain
 _0812BF44:
 	movs r0, 0xC0
 	lsls r0, 2

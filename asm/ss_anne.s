@@ -88,7 +88,7 @@ sub_815D3A8: @ 815D3A8
 	strh r0, [r5, 0x2]
 	bl sub_815D5A4
 _0815D3D6:
-	ldr r0, _0815D428 @ =gUnknown_3005008
+	ldr r0, _0815D428 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -127,7 +127,7 @@ _0815D3D6:
 	b _0815D44A
 	.align 2, 0
 _0815D424: .4byte gUnknown_3005098
-_0815D428: .4byte gUnknown_3005008
+_0815D428: .4byte gSaveBlock1Ptr
 _0815D42C: .4byte gUnknown_2036E38
 _0815D430: .4byte gUnknown_202063C
 _0815D434: .4byte sub_815D454
@@ -185,7 +185,7 @@ _0815D494: .4byte 0x00000fa1
 sub_815D498: @ 815D498
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _0815D508 @ =gUnknown_3005008
+	ldr r0, _0815D508 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -237,7 +237,7 @@ sub_815D498: @ 815D498
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815D508: .4byte gUnknown_3005008
+_0815D508: .4byte gSaveBlock1Ptr
 _0815D50C: .4byte gUnknown_2036E38
 _0815D510: .4byte gUnknown_202063C
 _0815D514: .4byte gUnknown_8479C88
@@ -248,7 +248,7 @@ sub_815D518: @ 815D518
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	ldr r0, _0815D598 @ =gUnknown_3005008
+	ldr r0, _0815D598 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -307,7 +307,7 @@ _0815D58E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815D598: .4byte gUnknown_3005008
+_0815D598: .4byte gSaveBlock1Ptr
 _0815D59C: .4byte gUnknown_2036E38
 _0815D5A0: .4byte gUnknown_202063C
 	thumb_func_end sub_815D518
@@ -316,7 +316,7 @@ _0815D5A0: .4byte gUnknown_202063C
 sub_815D5A4: @ 815D5A4
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _0815D614 @ =gUnknown_3005008
+	ldr r0, _0815D614 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -370,7 +370,7 @@ _0815D60C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815D614: .4byte gUnknown_3005008
+_0815D614: .4byte gSaveBlock1Ptr
 _0815D618: .4byte gUnknown_2036E38
 _0815D61C: .4byte gUnknown_202063C
 _0815D620: .4byte gUnknown_8479CC0

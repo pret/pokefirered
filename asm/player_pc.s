@@ -535,7 +535,7 @@ sub_80EBAB8: @ 80EBAB8
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r4, r5, 0
-	ldr r2, _080EBAE4 @ =gUnknown_30030F0
+	ldr r2, _080EBAE4 @ =gMain
 	ldrh r1, [r2, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -551,7 +551,7 @@ sub_80EBAB8: @ 80EBAB8
 	negs r0, r0
 	b _080EBB04
 	.align 2, 0
-_080EBAE4: .4byte gUnknown_30030F0
+_080EBAE4: .4byte gMain
 _080EBAE8:
 	movs r0, 0x80
 	ands r0, r1
@@ -922,7 +922,7 @@ sub_80EBDC8: @ 80EBDC8
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0x6
-	ldr r0, _080EBDFC @ =gUnknown_3005008
+	ldr r0, _080EBDFC @ =gSaveBlock1Ptr
 	ldr r3, [r0]
 	ldr r4, _080EBE00 @ =0x00002cf0
 _080EBDD4:
@@ -948,7 +948,7 @@ _080EBDEA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080EBDFC: .4byte gUnknown_3005008
+_080EBDFC: .4byte gSaveBlock1Ptr
 _080EBE00: .4byte 0x00002cf0
 	thumb_func_end sub_80EBDC8
 
@@ -968,7 +968,7 @@ _080EBE12:
 	mov r8, r1
 	cmp r4, 0xF
 	bhi _080EBE8A
-	ldr r0, _080EBEA4 @ =gUnknown_3005008
+	ldr r0, _080EBEA4 @ =gSaveBlock1Ptr
 	mov r10, r0
 	lsls r0, r2, 3
 	adds r0, r2
@@ -1039,7 +1039,7 @@ _080EBE8A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EBEA4: .4byte gUnknown_3005008
+_080EBEA4: .4byte gSaveBlock1Ptr
 _080EBEA8: .4byte 0x00002cd0
 _080EBEAC: .4byte 0x00002cf0
 	thumb_func_end sub_80EBE04
@@ -1203,7 +1203,7 @@ sub_80EBFFC: @ 80EBFFC
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r4, _080EC054 @ =gUnknown_2021CD0
-	ldr r2, _080EC058 @ =gUnknown_3005008
+	ldr r2, _080EC058 @ =gSaveBlock1Ptr
 	ldr r1, _080EC05C @ =gUnknown_203AAC4
 	ldrh r0, [r1]
 	adds r0, 0x6
@@ -1244,7 +1244,7 @@ _080EC044:
 	b _080EC06C
 	.align 2, 0
 _080EC054: .4byte gUnknown_2021CD0
-_080EC058: .4byte gUnknown_3005008
+_080EC058: .4byte gSaveBlock1Ptr
 _080EC05C: .4byte gUnknown_203AAC4
 _080EC060: .4byte 0x00002ce2
 _080EC064:
@@ -1439,7 +1439,7 @@ sub_80EC1D4: @ 80EC1D4
 	bne _080EC216
 	bl sub_810EDB0
 	bl sub_80563F0
-	ldr r2, _080EC220 @ =gUnknown_3005008
+	ldr r2, _080EC220 @ =gSaveBlock1Ptr
 	ldr r1, _080EC224 @ =gUnknown_203AAC4
 	ldrh r0, [r1]
 	adds r0, 0x6
@@ -1463,7 +1463,7 @@ _080EC216:
 	bx r0
 	.align 2, 0
 _080EC21C: .4byte gUnknown_2037AB8
-_080EC220: .4byte gUnknown_3005008
+_080EC220: .4byte gSaveBlock1Ptr
 _080EC224: .4byte gUnknown_203AAC4
 _080EC228: .4byte 0x00002cd0
 _080EC22C: .4byte sub_80EC2C0
@@ -1634,7 +1634,7 @@ sub_80EC364: @ 80EC364
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r2, _080EC3A0 @ =gUnknown_3005008
+	ldr r2, _080EC3A0 @ =gSaveBlock1Ptr
 	ldr r4, _080EC3A4 @ =gUnknown_203AAC4
 	ldrh r1, [r4]
 	adds r1, 0x6
@@ -1660,7 +1660,7 @@ sub_80EC364: @ 80EC364
 	bl DisplayItemMessageOnField
 	b _080EC3EA
 	.align 2, 0
-_080EC3A0: .4byte gUnknown_3005008
+_080EC3A0: .4byte gSaveBlock1Ptr
 _080EC3A4: .4byte gUnknown_203AAC4
 _080EC3A8: .4byte 0x00002cd0
 _080EC3AC: .4byte gUnknown_8417858

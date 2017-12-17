@@ -648,7 +648,7 @@ CB2_TradeEvolutionSceneLoadGraphics: @ 80CE2DC
 	ldr r1, _080CE320 @ =gUnknown_2024284
 	adds r4, r2, r1
 	ldrh r6, [r0, 0xC]
-	ldr r0, _080CE324 @ =gUnknown_30030F0
+	ldr r0, _080CE324 @ =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r0, r3
@@ -666,7 +666,7 @@ _080CE30E:
 _080CE318: .4byte gUnknown_3005090
 _080CE31C: .4byte gUnknown_2039A20
 _080CE320: .4byte gUnknown_2024284
-_080CE324: .4byte gUnknown_30030F0
+_080CE324: .4byte gMain
 _080CE328: .4byte _080CE32C
 	.align 2, 0
 _080CE32C:
@@ -728,7 +728,7 @@ _080CE3BC:
 	bl SetHBlankCallback
 	ldr r0, _080CE3DC @ =sub_80D00D8
 	bl SetVBlankCallback
-	ldr r1, _080CE3E0 @ =gUnknown_30030F0
+	ldr r1, _080CE3E0 @ =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -736,7 +736,7 @@ _080CE3BC:
 	.align 2, 0
 _080CE3D8: .4byte nullsub_76
 _080CE3DC: .4byte sub_80D00D8
-_080CE3E0: .4byte gUnknown_30030F0
+_080CE3E0: .4byte gMain
 _080CE3E4:
 	bl sub_80544FC
 	b _080CE4EC
@@ -753,13 +753,13 @@ _080CE3EA:
 	bl FillBgTilemapBufferRect
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
-	ldr r1, _080CE410 @ =gUnknown_30030F0
+	ldr r1, _080CE410 @ =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
 	b _080CE4F4
 	.align 2, 0
-_080CE410: .4byte gUnknown_30030F0
+_080CE410: .4byte gMain
 _080CE414:
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -822,7 +822,7 @@ _080CE45C:
 	movs r2, 0x20
 	orrs r0, r2
 	strb r0, [r1, 0x5]
-	ldr r1, _080CE4C8 @ =gUnknown_30030F0
+	ldr r1, _080CE4C8 @ =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -837,7 +837,7 @@ _080CE4B8: .4byte gUnknown_8231CFC
 _080CE4BC: .4byte gUnknown_2039A20
 _080CE4C0: .4byte gUnknown_202063C
 _080CE4C4: .4byte nullsub_10
-_080CE4C8: .4byte gUnknown_30030F0
+_080CE4C8: .4byte gMain
 _080CE4CC:
 	ldr r0, _080CE4FC @ =gUnknown_3003F3C
 	ldrb r0, [r0]
@@ -854,7 +854,7 @@ _080CE4E0:
 	movs r2, 0
 	bl BlendPalettes
 _080CE4EC:
-	ldr r1, _080CE500 @ =gUnknown_30030F0
+	ldr r1, _080CE500 @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -865,7 +865,7 @@ _080CE4F4:
 	b _080CE534
 	.align 2, 0
 _080CE4FC: .4byte gUnknown_3003F3C
-_080CE500: .4byte gUnknown_30030F0
+_080CE500: .4byte gMain
 _080CE504:
 	movs r0, 0x1
 	negs r0, r0
@@ -1351,7 +1351,7 @@ _080CE93C: .4byte gUnknown_3005090
 _080CE940: .4byte gUnknown_2024284
 _080CE944: .4byte gUnknown_2023E82
 _080CE948:
-	ldr r0, _080CE9A0 @ =gUnknown_30030F0
+	ldr r0, _080CE9A0 @ =gMain
 	ldrh r1, [r0, 0x2C]
 	ldr r3, _080CE9A4 @ =gUnknown_3005090
 	mov r10, r3
@@ -1393,7 +1393,7 @@ _080CE948:
 	bl sub_80D04A8
 	bl _080CF528
 	.align 2, 0
-_080CE9A0: .4byte gUnknown_30030F0
+_080CE9A0: .4byte gMain
 _080CE9A4: .4byte gUnknown_3005090
 _080CE9A8: .4byte gUnknown_2023E82
 _080CE9AC:
@@ -2310,7 +2310,7 @@ _080CF1B0: .4byte gUnknown_3005090
 _080CF1B4: .4byte gUnknown_83FE791
 _080CF1B8: .4byte gUnknown_2023E82
 _080CF1BC:
-	ldr r0, _080CF244 @ =gUnknown_30030F0
+	ldr r0, _080CF244 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -2327,7 +2327,7 @@ _080CF1BC:
 	strb r0, [r4, 0x1]
 	bl sub_802DCB8
 _080CF1E2:
-	ldr r0, _080CF244 @ =gUnknown_30030F0
+	ldr r0, _080CF244 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x80
 	ands r0, r1
@@ -2344,7 +2344,7 @@ _080CF1E2:
 	strb r0, [r4, 0x1]
 	bl sub_802DCB8
 _080CF208:
-	ldr r0, _080CF244 @ =gUnknown_30030F0
+	ldr r0, _080CF244 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
 	adds r0, r2, 0
@@ -2372,7 +2372,7 @@ _080CF208:
 	strh r0, [r1, 0x14]
 	b _080CF276
 	.align 2, 0
-_080CF244: .4byte gUnknown_30030F0
+_080CF244: .4byte gMain
 _080CF248: .4byte gUnknown_2023E82
 _080CF24C: .4byte gUnknown_3005090
 _080CF250:
@@ -2395,7 +2395,7 @@ _080CF250:
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 _080CF276:
-	ldr r0, _080CF2B0 @ =gUnknown_30030F0
+	ldr r0, _080CF2B0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -2422,7 +2422,7 @@ _080CF284:
 	b _080CF528
 	.align 2, 0
 _080CF2AC: .4byte gUnknown_3005090
-_080CF2B0: .4byte gUnknown_30030F0
+_080CF2B0: .4byte gMain
 _080CF2B4:
 	ldr r0, _080CF2F4 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -3740,7 +3740,7 @@ _080CFE30:
 	beq _080CFE3E
 	b _080D003A
 _080CFE3E:
-	ldr r0, _080CFE68 @ =gUnknown_30030F0
+	ldr r0, _080CFE68 @ =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, _080CFE6C @ =sub_80CE72C
 	cmp r1, r0
@@ -3760,7 +3760,7 @@ _080CFE4A:
 	b _080D0038
 	.align 2, 0
 _080CFE64: .4byte gUnknown_2037AB8
-_080CFE68: .4byte gUnknown_30030F0
+_080CFE68: .4byte gMain
 _080CFE6C: .4byte sub_80CE72C
 _080CFE70: .4byte gUnknown_3005090
 _080CFE74:

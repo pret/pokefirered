@@ -9,7 +9,7 @@
 IsCurMapInLocationList: @ 810B6F4
 	push {r4,lr}
 	adds r2, r0, 0
-	ldr r0, _0810B724 @ =gUnknown_3005008
+	ldr r0, _0810B724 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -33,7 +33,7 @@ _0810B71A:
 	movs r0, 0x1
 	b _0810B736
 	.align 2, 0
-_0810B724: .4byte gUnknown_3005008
+_0810B724: .4byte gSaveBlock1Ptr
 _0810B728: .4byte 0x0000ffff
 _0810B72C:
 	adds r1, 0x2
@@ -87,16 +87,16 @@ TrySetPokeCenterWarpStatus: @ 810B76C
 	bl IsCurMapPokeCenter
 	cmp r0, 0
 	bne _0810B788
-	ldr r0, _0810B784 @ =gUnknown_300500C
+	ldr r0, _0810B784 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0xFD
 	ands r0, r1
 	b _0810B792
 	.align 2, 0
-_0810B784: .4byte gUnknown_300500C
+_0810B784: .4byte gSaveBlock2Ptr
 _0810B788:
-	ldr r0, _0810B798 @ =gUnknown_300500C
+	ldr r0, _0810B798 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0x2
@@ -106,7 +106,7 @@ _0810B792:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810B798: .4byte gUnknown_300500C
+_0810B798: .4byte gSaveBlock2Ptr
 	thumb_func_end TrySetPokeCenterWarpStatus
 
 	thumb_func_start TrySetReloadWarpStatus
@@ -115,16 +115,16 @@ TrySetReloadWarpStatus: @ 810B79C
 	bl IsCurMapReloadLocation
 	cmp r0, 0
 	bne _0810B7B8
-	ldr r0, _0810B7B4 @ =gUnknown_300500C
+	ldr r0, _0810B7B4 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0xFB
 	ands r0, r1
 	b _0810B7C2
 	.align 2, 0
-_0810B7B4: .4byte gUnknown_300500C
+_0810B7B4: .4byte gSaveBlock2Ptr
 _0810B7B8:
-	ldr r0, _0810B7C8 @ =gUnknown_300500C
+	ldr r0, _0810B7C8 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0x4
@@ -134,7 +134,7 @@ _0810B7C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810B7C8: .4byte gUnknown_300500C
+_0810B7C8: .4byte gSaveBlock2Ptr
 	thumb_func_end TrySetReloadWarpStatus
 
 	thumb_func_start sub_810B7CC
@@ -143,16 +143,16 @@ sub_810B7CC: @ 810B7CC
 	bl sub_810B75C
 	cmp r0, 0
 	bne _0810B7E8
-	ldr r0, _0810B7E4 @ =gUnknown_300500C
+	ldr r0, _0810B7E4 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0xF7
 	ands r0, r1
 	b _0810B7F2
 	.align 2, 0
-_0810B7E4: .4byte gUnknown_300500C
+_0810B7E4: .4byte gSaveBlock2Ptr
 _0810B7E8:
-	ldr r0, _0810B7F8 @ =gUnknown_300500C
+	ldr r0, _0810B7F8 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0x8
@@ -162,7 +162,7 @@ _0810B7F2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810B7F8: .4byte gUnknown_300500C
+_0810B7F8: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_810B7CC
 
 	thumb_func_start TrySetMapSaveWarpStatus
@@ -177,7 +177,7 @@ TrySetMapSaveWarpStatus: @ 810B7FC
 
 	thumb_func_start sub_810B810
 sub_810B810: @ 810B810
-	ldr r0, _0810B828 @ =gUnknown_300500C
+	ldr r0, _0810B828 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	adds r2, 0xA8
 	ldr r0, [r2]
@@ -190,12 +190,12 @@ sub_810B810: @ 810B810
 	str r0, [r2]
 	bx lr
 	.align 2, 0
-_0810B828: .4byte gUnknown_300500C
+_0810B828: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_810B810
 
 	thumb_func_start sub_810B82C
 sub_810B82C: @ 810B82C
-	ldr r3, _0810B854 @ =gUnknown_300500C
+	ldr r3, _0810B854 @ =gSaveBlock2Ptr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0x80
@@ -216,7 +216,7 @@ sub_810B82C: @ 810B82C
 	str r0, [r2]
 	bx lr
 	.align 2, 0
-_0810B854: .4byte gUnknown_300500C
+_0810B854: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_810B82C
 
 	.align 2, 0 @ Don't pad with nop.

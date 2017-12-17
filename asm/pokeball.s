@@ -146,7 +146,7 @@ _0804AA54: .4byte gUnknown_2024284
 _0804AA58: .4byte gUnknown_2022B4C
 _0804AA5C: .4byte gUnknown_202273C
 _0804AA60:
-	ldr r0, _0804AAB8 @ =gUnknown_300500C
+	ldr r0, _0804AAB8 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	mov r10, r0
@@ -190,7 +190,7 @@ _0804AA68:
 	movs r4, 0x40
 	b _0804AACE
 	.align 2, 0
-_0804AAB8: .4byte gUnknown_300500C
+_0804AAB8: .4byte gSaveBlock2Ptr
 _0804AABC: .4byte gUnknown_82606F4
 _0804AAC0: .4byte gUnknown_202063C
 _0804AAC4: .4byte gUnknown_2022B4C
@@ -1202,7 +1202,7 @@ sub_804B268: @ 804B268
 	strh r0, [r6, 0x2E]
 	ldr r0, _0804B2FC @ =HandleBallAnimEnd
 	str r0, [r6, 0x1C]
-	ldr r0, _0804B300 @ =gUnknown_30030F0
+	ldr r0, _0804B300 @ =gMain
 	ldr r1, _0804B304 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1230,7 +1230,7 @@ _0804B2DA:
 	b _0804B324
 	.align 2, 0
 _0804B2FC: .4byte HandleBallAnimEnd
-_0804B300: .4byte gUnknown_30030F0
+_0804B300: .4byte gMain
 _0804B304: .4byte 0x00000439
 _0804B308: .4byte gUnknown_2023BCE
 _0804B30C: .4byte gUnknown_202402C
@@ -1631,7 +1631,7 @@ _0804B600:
 	bl DestroySprite
 	adds r0, r6, 0
 	bl DestroySpriteAndFreeResources
-	ldr r0, _0804B678 @ =gUnknown_30030F0
+	ldr r0, _0804B678 @ =gMain
 	ldr r1, _0804B67C @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1659,7 +1659,7 @@ _0804B666:
 _0804B66C: .4byte 0x0000013b
 _0804B670: .4byte gUnknown_202063C
 _0804B674: .4byte gUnknown_2023D44
-_0804B678: .4byte gUnknown_30030F0
+_0804B678: .4byte gMain
 _0804B67C: .4byte 0x00000439
 _0804B680: .4byte gUnknown_2024018
 	thumb_func_end sub_804B5C8

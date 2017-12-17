@@ -995,14 +995,14 @@ sub_80590D8: @ 80590D8
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, _08059144 @ =gUnknown_300500C
+	ldr r0, _08059144 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _08059148 @ =0x00000898
 	adds r4, r0, r1
 	ldr r0, _0805914C @ =gUnknown_3005040
 	ldr r0, [r0]
 	mov r8, r0
-	ldr r0, _08059150 @ =gUnknown_3005008
+	ldr r0, _08059150 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r2, 0
 	ldrsh r6, [r0, r2]
@@ -1050,10 +1050,10 @@ _08059138:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059144: .4byte gUnknown_300500C
+_08059144: .4byte gSaveBlock2Ptr
 _08059148: .4byte 0x00000898
 _0805914C: .4byte gUnknown_3005040
-_08059150: .4byte gUnknown_3005008
+_08059150: .4byte gSaveBlock1Ptr
 _08059154: .4byte gUnknown_2031DFC
 	thumb_func_end sub_80590D8
 
@@ -1062,7 +1062,7 @@ sub_8059158: @ 8059158
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0
-	ldr r0, _08059184 @ =gUnknown_300500C
+	ldr r0, _08059184 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r4, _08059188 @ =0x00000898
 	adds r3, r0, r4
@@ -1082,7 +1082,7 @@ _08059168:
 	movs r0, 0
 	b _08059192
 	.align 2, 0
-_08059184: .4byte gUnknown_300500C
+_08059184: .4byte gSaveBlock2Ptr
 _08059188: .4byte 0x00000898
 _0805918C: .4byte 0x000001ff
 _08059190:
@@ -1100,7 +1100,7 @@ sub_8059198: @ 8059198
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, _080591B8 @ =gUnknown_300500C
+	ldr r0, _080591B8 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, _080591BC @ =0x00000898
 	adds r1, r0
@@ -1111,7 +1111,7 @@ sub_8059198: @ 8059198
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080591B8: .4byte gUnknown_300500C
+_080591B8: .4byte gSaveBlock2Ptr
 _080591BC: .4byte 0x00000898
 _080591C0: .4byte 0x01000100
 	thumb_func_end sub_8059198
@@ -1122,7 +1122,7 @@ sub_80591C4: @ 80591C4
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, _0805923C @ =gUnknown_300500C
+	ldr r0, _0805923C @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _08059240 @ =0x00000898
 	adds r4, r0, r1
@@ -1132,7 +1132,7 @@ sub_80591C4: @ 80591C4
 	ldr r0, _08059244 @ =gUnknown_3005040
 	ldr r0, [r0]
 	mov r8, r0
-	ldr r0, _08059248 @ =gUnknown_3005008
+	ldr r0, _08059248 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r2, 0
 	ldrsh r6, [r0, r2]
@@ -1182,10 +1182,10 @@ _08059230:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805923C: .4byte gUnknown_300500C
+_0805923C: .4byte gSaveBlock2Ptr
 _08059240: .4byte 0x00000898
 _08059244: .4byte gUnknown_3005040
-_08059248: .4byte gUnknown_3005008
+_08059248: .4byte gSaveBlock1Ptr
 _0805924C: .4byte gUnknown_2031DFC
 	thumb_func_end sub_80591C4
 
@@ -1200,7 +1200,7 @@ sub_8059250: @ 8059250
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r2, r1, 0
-	ldr r0, _0805929C @ =gUnknown_300500C
+	ldr r0, _0805929C @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, _080592A0 @ =0x00000898
 	adds r3, r0, r3
@@ -1211,7 +1211,7 @@ sub_8059250: @ 8059250
 	movs r4, 0
 	mov r9, r4
 	mov r8, r4
-	ldr r0, _080592A8 @ =gUnknown_3005008
+	ldr r0, _080592A8 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r3, 0
 	ldrsh r6, [r0, r3]
@@ -1229,10 +1229,10 @@ sub_8059250: @ 8059250
 	beq _080592BE
 	b _080592D6
 	.align 2, 0
-_0805929C: .4byte gUnknown_300500C
+_0805929C: .4byte gSaveBlock2Ptr
 _080592A0: .4byte 0x00000898
 _080592A4: .4byte gUnknown_3005040
-_080592A8: .4byte gUnknown_3005008
+_080592A8: .4byte gSaveBlock1Ptr
 _080592AC:
 	cmp r2, 0x3
 	beq _080592C8
@@ -1454,7 +1454,7 @@ _08059432:
 GetPostCameraMoveMapBorderId: @ 805943C
 	push {r4,lr}
 	adds r3, r1, 0
-	ldr r1, _08059460 @ =gUnknown_3005008
+	ldr r1, _08059460 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	movs r4, 0
 	ldrsh r2, [r1, r4]
@@ -1470,13 +1470,13 @@ GetPostCameraMoveMapBorderId: @ 805943C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08059460: .4byte gUnknown_3005008
+_08059460: .4byte gSaveBlock1Ptr
 	thumb_func_end GetPostCameraMoveMapBorderId
 
 	thumb_func_start CanCameraMoveInDirection
 CanCameraMoveInDirection: @ 8059464
 	push {r4,r5,lr}
-	ldr r1, _0805949C @ =gUnknown_3005008
+	ldr r1, _0805949C @ =gSaveBlock1Ptr
 	ldr r4, [r1]
 	movs r1, 0
 	ldrsh r3, [r4, r1]
@@ -1502,7 +1502,7 @@ CanCameraMoveInDirection: @ 8059464
 	movs r0, 0x1
 	b _080594A6
 	.align 2, 0
-_0805949C: .4byte gUnknown_3005008
+_0805949C: .4byte gSaveBlock1Ptr
 _080594A0: .4byte gUnknown_826D2D8
 _080594A4:
 	movs r0, 0
@@ -1533,7 +1533,7 @@ _080594CA:
 	beq _080594E8
 	cmp r4, 0x4
 	bne _08059526
-	ldr r0, _080594E4 @ =gUnknown_3005008
+	ldr r0, _080594E4 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	negs r0, r6
 	strh r0, [r1]
@@ -1542,9 +1542,9 @@ _080594CA:
 	subs r0, r2
 	b _08059524
 	.align 2, 0
-_080594E4: .4byte gUnknown_3005008
+_080594E4: .4byte gSaveBlock1Ptr
 _080594E8:
-	ldr r0, _080594FC @ =gUnknown_3005008
+	ldr r0, _080594FC @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, [r3]
 	ldr r0, [r0]
@@ -1554,9 +1554,9 @@ _080594E8:
 	subs r0, r2
 	b _08059524
 	.align 2, 0
-_080594FC: .4byte gUnknown_3005008
+_080594FC: .4byte gSaveBlock1Ptr
 _08059500:
-	ldr r0, _08059510 @ =gUnknown_3005008
+	ldr r0, _08059510 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r2, [r5, 0x4]
 	ldrh r0, [r1]
@@ -1565,9 +1565,9 @@ _08059500:
 	negs r0, r7
 	b _08059524
 	.align 2, 0
-_08059510: .4byte gUnknown_3005008
+_08059510: .4byte gSaveBlock1Ptr
 _08059514:
-	ldr r0, _0805952C @ =gUnknown_3005008
+	ldr r0, _0805952C @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r2, [r5, 0x4]
 	ldrh r0, [r1]
@@ -1582,7 +1582,7 @@ _08059526:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805952C: .4byte gUnknown_3005008
+_0805952C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_80594AC
 
 	thumb_func_start CameraMove
@@ -1608,7 +1608,7 @@ CameraMove: @ 8059530
 	adds r0, r7, 0x1
 	cmp r0, 0x1
 	bhi _08059578
-	ldr r0, _08059574 @ =gUnknown_3005008
+	ldr r0, _08059574 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrh r0, [r1]
 	add r0, r10
@@ -1619,10 +1619,10 @@ CameraMove: @ 8059530
 	b _080595E2
 	.align 2, 0
 _08059570: .4byte gUnknown_2036E18
-_08059574: .4byte gUnknown_3005008
+_08059574: .4byte gSaveBlock1Ptr
 _08059578:
 	bl sub_80590D8
-	ldr r1, _080595F8 @ =gUnknown_3005008
+	ldr r1, _080595F8 @ =gSaveBlock1Ptr
 	ldr r0, [r1]
 	movs r2, 0
 	ldrsh r5, [r0, r2]
@@ -1649,7 +1649,7 @@ _08059578:
 	orrs r0, r1
 	ldr r2, _080595FC @ =gUnknown_2036E18
 	strb r0, [r2]
-	ldr r0, _080595F8 @ =gUnknown_3005008
+	ldr r0, _080595F8 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r2, 0
 	ldrsh r0, [r1, r2]
@@ -1682,7 +1682,7 @@ _080595E2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080595F8: .4byte gUnknown_3005008
+_080595F8: .4byte gSaveBlock1Ptr
 _080595FC: .4byte gUnknown_2036E18
 	thumb_func_end CameraMove
 
@@ -1977,7 +1977,7 @@ sub_80597EC: @ 80597EC
 	lsrs r0, 16
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, _08059804 @ =gUnknown_3005008
+	ldr r2, _08059804 @ =gSaveBlock1Ptr
 	ldr r2, [r2]
 	subs r0, 0x7
 	strh r0, [r2]
@@ -1985,12 +1985,12 @@ sub_80597EC: @ 80597EC
 	strh r1, [r2, 0x2]
 	bx lr
 	.align 2, 0
-_08059804: .4byte gUnknown_3005008
+_08059804: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_80597EC
 
 	thumb_func_start sav1_camera_get_focus_coords
 sav1_camera_get_focus_coords: @ 8059808
-	ldr r2, _0805981C @ =gUnknown_3005008
+	ldr r2, _0805981C @ =gSaveBlock1Ptr
 	ldr r3, [r2]
 	ldrh r2, [r3]
 	adds r2, 0x7
@@ -2000,23 +2000,23 @@ sav1_camera_get_focus_coords: @ 8059808
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_0805981C: .4byte gUnknown_3005008
+_0805981C: .4byte gSaveBlock1Ptr
 	thumb_func_end sav1_camera_get_focus_coords
 
 	thumb_func_start SetCameraCoords
 SetCameraCoords: @ 8059820
-	ldr r2, _0805982C @ =gUnknown_3005008
+	ldr r2, _0805982C @ =gSaveBlock1Ptr
 	ldr r2, [r2]
 	strh r0, [r2]
 	strh r1, [r2, 0x2]
 	bx lr
 	.align 2, 0
-_0805982C: .4byte gUnknown_3005008
+_0805982C: .4byte gSaveBlock1Ptr
 	thumb_func_end SetCameraCoords
 
 	thumb_func_start GetCameraCoords
 GetCameraCoords: @ 8059830
-	ldr r2, _08059840 @ =gUnknown_3005008
+	ldr r2, _08059840 @ =gSaveBlock1Ptr
 	ldr r3, [r2]
 	ldrh r2, [r3]
 	strh r2, [r0]
@@ -2024,7 +2024,7 @@ GetCameraCoords: @ 8059830
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_08059840: .4byte gUnknown_3005008
+_08059840: .4byte gSaveBlock1Ptr
 	thumb_func_end GetCameraCoords
 
 	thumb_func_start copy_tileset_patterns_to_vram

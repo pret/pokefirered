@@ -311,7 +311,7 @@ _080F57D4:
 	ldr r0, [r5]
 	bl Free
 	str r4, [r5]
-	bl sub_80008D8
+	bl DoSoftReset
 _080F57FE:
 	add sp, 0x4
 	pop {r4-r6}

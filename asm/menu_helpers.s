@@ -233,12 +233,12 @@ _080BF62C: .4byte sub_80BF560
 	thumb_func_start GetLRKeysState
 GetLRKeysState: @ 80BF630
 	push {lr}
-	ldr r0, _080BF650 @ =gUnknown_300500C
+	ldr r0, _080BF650 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
 	bne _080BF666
-	ldr r0, _080BF654 @ =gUnknown_30030F0
+	ldr r0, _080BF654 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x80
 	lsls r0, 2
@@ -248,8 +248,8 @@ GetLRKeysState: @ 80BF630
 	movs r0, 0x1
 	b _080BF668
 	.align 2, 0
-_080BF650: .4byte gUnknown_300500C
-_080BF654: .4byte gUnknown_30030F0
+_080BF650: .4byte gSaveBlock2Ptr
+_080BF654: .4byte gMain
 _080BF658:
 	movs r0, 0x80
 	lsls r0, 1
@@ -268,12 +268,12 @@ _080BF668:
 	thumb_func_start sub_80BF66C
 sub_80BF66C: @ 80BF66C
 	push {lr}
-	ldr r0, _080BF68C @ =gUnknown_300500C
+	ldr r0, _080BF68C @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
 	bne _080BF6A2
-	ldr r0, _080BF690 @ =gUnknown_30030F0
+	ldr r0, _080BF690 @ =gMain
 	ldrh r1, [r0, 0x30]
 	movs r0, 0x80
 	lsls r0, 2
@@ -283,8 +283,8 @@ sub_80BF66C: @ 80BF66C
 	movs r0, 0x1
 	b _080BF6A4
 	.align 2, 0
-_080BF68C: .4byte gUnknown_300500C
-_080BF690: .4byte gUnknown_30030F0
+_080BF68C: .4byte gSaveBlock2Ptr
+_080BF690: .4byte gMain
 _080BF694:
 	movs r0, 0x80
 	lsls r0, 1
@@ -307,7 +307,7 @@ sub_80BF6A8: @ 80BF6A8
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _080BF6D0
-	ldr r0, _080BF6CC @ =gUnknown_3005008
+	ldr r0, _080BF6CC @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x80
@@ -321,7 +321,7 @@ _080BF6C8:
 	movs r0, 0
 	b _080BF6D2
 	.align 2, 0
-_080BF6CC: .4byte gUnknown_3005008
+_080BF6CC: .4byte gSaveBlock1Ptr
 _080BF6D0:
 	movs r0, 0x1
 _080BF6D2:
@@ -528,7 +528,7 @@ sub_80BF848: @ 80BF848
 	adds r5, r1, 0
 	ldrh r4, [r2]
 	adds r6, r4, 0
-	ldr r0, _080BF87C @ =gUnknown_30030F0
+	ldr r0, _080BF87C @ =gMain
 	ldrh r0, [r0, 0x30]
 	movs r3, 0xF0
 	ands r3, r0
@@ -549,7 +549,7 @@ _080BF876:
 	lsls r0, r4, 16
 	b _080BF8CA
 	.align 2, 0
-_080BF87C: .4byte gUnknown_30030F0
+_080BF87C: .4byte gMain
 _080BF880:
 	cmp r3, 0x80
 	bne _080BF896

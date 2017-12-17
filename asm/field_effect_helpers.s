@@ -851,7 +851,7 @@ unc_grass_normal: @ 80DB3EC
 	ands r0, r1
 	cmp r0, 0
 	beq _080DB438
-	ldr r0, _080DB49C @ =gUnknown_3005008
+	ldr r0, _080DB49C @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0x5
 	ldrsb r0, [r2, r0]
@@ -922,7 +922,7 @@ _080DB48C:
 	b _080DB4E4
 	.align 2, 0
 _080DB498: .4byte gUnknown_2036E18
-_080DB49C: .4byte gUnknown_3005008
+_080DB49C: .4byte gSaveBlock1Ptr
 _080DB4A0:
 	mov r0, sp
 	ldrb r1, [r0]
@@ -1202,7 +1202,7 @@ unc_grass_tall: @ 80DB69C
 	ands r0, r1
 	cmp r0, 0
 	beq _080DB6E8
-	ldr r0, _080DB74C @ =gUnknown_3005008
+	ldr r0, _080DB74C @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0x5
 	ldrsb r0, [r2, r0]
@@ -1273,7 +1273,7 @@ _080DB73C:
 	b _080DB786
 	.align 2, 0
 _080DB748: .4byte gUnknown_2036E18
-_080DB74C: .4byte gUnknown_3005008
+_080DB74C: .4byte gSaveBlock1Ptr
 _080DB750:
 	mov r0, sp
 	ldrb r1, [r0]

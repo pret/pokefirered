@@ -1895,11 +1895,11 @@ _080D81C8:
 _080D81D4: .4byte gUnknown_2023FC4
 _080D81D8: .4byte gUnknown_2022744
 _080D81DC:
-	ldr r0, _080D81E4 @ =gUnknown_300500C
+	ldr r0, _080D81E4 @ =gSaveBlock2Ptr
 	ldr r4, [r0]
 	b _080D8382
 	.align 2, 0
-_080D81E4: .4byte gUnknown_300500C
+_080D81E4: .4byte gSaveBlock2Ptr
 _080D81E8:
 	ldr r0, _080D8204 @ =gUnknown_2022B4C
 	ldr r0, [r0]

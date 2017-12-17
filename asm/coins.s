@@ -7,12 +7,12 @@
 
 	thumb_func_start sub_80D0554
 sub_80D0554: @ 80D0554
-	ldr r0, _080D0574 @ =gUnknown_3005008
+	ldr r0, _080D0574 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0xA5
 	lsls r0, 2
 	adds r1, r0
-	ldr r0, _080D0578 @ =gUnknown_300500C
+	ldr r0, _080D0578 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	movs r2, 0xF2
 	lsls r2, 4
@@ -24,17 +24,17 @@ sub_80D0554: @ 80D0554
 	lsrs r0, 16
 	bx lr
 	.align 2, 0
-_080D0574: .4byte gUnknown_3005008
-_080D0578: .4byte gUnknown_300500C
+_080D0574: .4byte gSaveBlock1Ptr
+_080D0578: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_80D0554
 
 	thumb_func_start sub_80D057C
 sub_80D057C: @ 80D057C
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, _080D059C @ =gUnknown_3005008
+	ldr r1, _080D059C @ =gSaveBlock1Ptr
 	ldr r2, [r1]
-	ldr r1, _080D05A0 @ =gUnknown_300500C
+	ldr r1, _080D05A0 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	movs r3, 0xF2
 	lsls r3, 4
@@ -47,8 +47,8 @@ sub_80D057C: @ 80D057C
 	strh r0, [r2]
 	bx lr
 	.align 2, 0
-_080D059C: .4byte gUnknown_3005008
-_080D05A0: .4byte gUnknown_300500C
+_080D059C: .4byte gSaveBlock1Ptr
+_080D05A0: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_80D057C
 
 	thumb_func_start sub_80D05A4

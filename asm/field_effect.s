@@ -5880,7 +5880,7 @@ sub_8086110: @ 8086110
 	strh r0, [r4, 0x20]
 	adds r0, r4, 0
 	adds r0, 0x22
-	ldr r1, _08086170 @ =gUnknown_30030F0
+	ldr r1, _08086170 @ =gMain
 	ldr r1, [r1, 0xC]
 	bl StoreWordInTwoHalfwords
 	ldr r1, _08086174 @ =0x0000f0f1
@@ -5911,7 +5911,7 @@ sub_8086110: @ 8086110
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086170: .4byte gUnknown_30030F0
+_08086170: .4byte gMain
 _08086174: .4byte 0x0000f0f1
 _08086178: .4byte 0x00005051
 _0808617C: .4byte sub_80863C0
@@ -6330,7 +6330,7 @@ sub_8086498: @ 8086498
 	bl SetGpuReg
 	adds r0, r4, 0
 	adds r0, 0x22
-	ldr r1, _080864CC @ =gUnknown_30030F0
+	ldr r1, _080864CC @ =gMain
 	ldr r1, [r1, 0xC]
 	bl StoreWordInTwoHalfwords
 	ldr r0, _080864D0 @ =sub_80866E0
@@ -6342,7 +6342,7 @@ sub_8086498: @ 8086498
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080864CC: .4byte gUnknown_30030F0
+_080864CC: .4byte gMain
 _080864D0: .4byte sub_80866E0
 	thumb_func_end sub_8086498
 
@@ -7880,7 +7880,7 @@ sub_808706C: @ 808706C
 	lsls r0, 2
 	ldr r4, _0808710C @ =gUnknown_202063C
 	adds r0, r4
-	ldr r1, _08087110 @ =gUnknown_300500C
+	ldr r1, _08087110 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x8]
 	lsls r1, 1
@@ -7917,7 +7917,7 @@ _080870FC:
 _08087104: .4byte gUnknown_2037078
 _08087108: .4byte gUnknown_2036E38
 _0808710C: .4byte gUnknown_202063C
-_08087110: .4byte gUnknown_300500C
+_08087110: .4byte gSaveBlock2Ptr
 _08087114: .4byte sub_8087828
 	thumb_func_end sub_808706C
 
@@ -8088,7 +8088,7 @@ sub_8087220: @ 8087220
 	adds r0, r4, 0
 	movs r1, 0
 	bl StartSpriteAffineAnim
-	ldr r0, _08087260 @ =gUnknown_300500C
+	ldr r0, _08087260 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -8097,7 +8097,7 @@ sub_8087220: @ 8087220
 	b _08087266
 	.align 2, 0
 _0808725C: .4byte gUnknown_83CC1CC
-_08087260: .4byte gUnknown_300500C
+_08087260: .4byte gSaveBlock2Ptr
 _08087264:
 	movs r0, 0x76
 _08087266:
@@ -8255,7 +8255,7 @@ sub_8087364: @ 8087364
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAffineAnim
-	ldr r0, _080873A4 @ =gUnknown_300500C
+	ldr r0, _080873A4 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -8264,7 +8264,7 @@ sub_8087364: @ 8087364
 	b _080873AA
 	.align 2, 0
 _080873A0: .4byte gUnknown_83CC1CC
-_080873A4: .4byte gUnknown_300500C
+_080873A4: .4byte gSaveBlock2Ptr
 _080873A8:
 	movs r0, 0x64
 _080873AA:
@@ -8500,7 +8500,7 @@ _0808751A:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	ldr r1, _080875C0 @ =gUnknown_300500C
+	ldr r1, _080875C0 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x8]
 	lsls r1, 25
@@ -8534,7 +8534,7 @@ _080875AE:
 _080875B4: .4byte gUnknown_2037078
 _080875B8: .4byte gUnknown_2036E38
 _080875BC: .4byte gUnknown_202063C
-_080875C0: .4byte gUnknown_300500C
+_080875C0: .4byte gSaveBlock2Ptr
 _080875C4: .4byte sub_8087828
 	thumb_func_end sub_80874C8
 

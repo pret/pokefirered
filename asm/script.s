@@ -816,7 +816,7 @@ _08069CAC:
 	thumb_func_start CalculateRamScriptChecksum
 CalculateRamScriptChecksum: @ 8069CB0
 	push {lr}
-	ldr r0, _08069CCC @ =gUnknown_3005008
+	ldr r0, _08069CCC @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08069CD0 @ =0x00003620
 	adds r0, r1
@@ -828,7 +828,7 @@ CalculateRamScriptChecksum: @ 8069CB0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08069CCC: .4byte gUnknown_3005008
+_08069CCC: .4byte gSaveBlock1Ptr
 _08069CD0: .4byte 0x00003620
 	thumb_func_end CalculateRamScriptChecksum
 
@@ -838,7 +838,7 @@ ClearRamScript: @ 8069CD4
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, _08069CF4 @ =gUnknown_3005008
+	ldr r0, _08069CF4 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, _08069CF8 @ =0x0000361c
 	adds r1, r0
@@ -849,7 +849,7 @@ ClearRamScript: @ 8069CD4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08069CF4: .4byte gUnknown_3005008
+_08069CF4: .4byte gSaveBlock1Ptr
 _08069CF8: .4byte 0x0000361c
 _08069CFC: .4byte 0x050000fb
 	thumb_func_end ClearRamScript
@@ -874,7 +874,7 @@ InitRamScript: @ 8069D00
 	lsrs r7, r3, 24
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, _08069D64 @ =gUnknown_3005008
+	ldr r0, _08069D64 @ =gSaveBlock1Ptr
 	mov r10, r0
 	ldr r5, [r0]
 	ldr r1, _08069D68 @ =0x00003620
@@ -903,7 +903,7 @@ InitRamScript: @ 8069D00
 	movs r0, 0x1
 	b _08069D7A
 	.align 2, 0
-_08069D64: .4byte gUnknown_3005008
+_08069D64: .4byte gSaveBlock1Ptr
 _08069D68: .4byte 0x00003620
 _08069D6C: .4byte 0x000003e3
 _08069D70: .4byte 0x00003624
@@ -927,7 +927,7 @@ GetRamScript: @ 8069D8C
 	adds r4, r1, 0
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r6, _08069DDC @ =gUnknown_3005008
+	ldr r6, _08069DDC @ =gSaveBlock1Ptr
 	ldr r5, [r6]
 	ldr r0, _08069DE0 @ =0x00003620
 	adds r2, r5, r0
@@ -962,7 +962,7 @@ GetRamScript: @ 8069D8C
 	adds r0, r5, r1
 	b _08069DF6
 	.align 2, 0
-_08069DDC: .4byte gUnknown_3005008
+_08069DDC: .4byte gSaveBlock1Ptr
 _08069DE0: .4byte 0x00003620
 _08069DE4: .4byte gUnknown_20370A4
 _08069DE8: .4byte 0x0000361c
@@ -980,7 +980,7 @@ _08069DF6:
 	thumb_func_start sub_8069DFC
 sub_8069DFC: @ 8069DFC
 	push {r4,lr}
-	ldr r4, _08069E34 @ =gUnknown_3005008
+	ldr r4, _08069E34 @ =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r2, _08069E38 @ =0x00003620
 	adds r1, r0, r2
@@ -1006,7 +1006,7 @@ sub_8069DFC: @ 8069DFC
 	movs r0, 0x1
 	b _08069E42
 	.align 2, 0
-_08069E34: .4byte gUnknown_3005008
+_08069E34: .4byte gSaveBlock1Ptr
 _08069E38: .4byte 0x00003620
 _08069E3C: .4byte 0x0000361c
 _08069E40:
@@ -1020,7 +1020,7 @@ _08069E42:
 	thumb_func_start sub_8069E48
 sub_8069E48: @ 8069E48
 	push {r4-r6,lr}
-	ldr r6, _08069E88 @ =gUnknown_3005008
+	ldr r6, _08069E88 @ =gSaveBlock1Ptr
 	ldr r5, [r6]
 	ldr r0, _08069E8C @ =0x00003620
 	adds r4, r5, r0
@@ -1050,7 +1050,7 @@ sub_8069E48: @ 8069E48
 	adds r0, r5, r1
 	b _08069E9E
 	.align 2, 0
-_08069E88: .4byte gUnknown_3005008
+_08069E88: .4byte gSaveBlock1Ptr
 _08069E8C: .4byte 0x00003620
 _08069E90: .4byte 0x0000361c
 _08069E94: .4byte 0x00003624

@@ -1778,7 +1778,7 @@ sub_80A1D9C: @ 80A1D9C
 	cmp r0, 0x2
 	bne _080A1DD2
 _080A1DB2:
-	ldr r0, _080A1DEC @ =gUnknown_3005008
+	ldr r0, _080A1DEC @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -1806,7 +1806,7 @@ _080A1DD2:
 	b _080A1E00
 	.align 2, 0
 _080A1DE8: .4byte gUnknown_2036DFC
-_080A1DEC: .4byte gUnknown_3005008
+_080A1DEC: .4byte gSaveBlock1Ptr
 _080A1DF0: .4byte gUnknown_3005090
 _080A1DF4:
 	ldr r1, _080A1E04 @ =gUnknown_2039998
@@ -1982,7 +1982,7 @@ sub_80A1F48: @ 80A1F48
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A1F74 @ =gUnknown_30030F0
+	ldr r0, _080A1F74 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2001,7 +2001,7 @@ _080A1F6C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1F74: .4byte gUnknown_30030F0
+_080A1F74: .4byte gMain
 	thumb_func_end sub_80A1F48
 
 	thumb_func_start sub_80A1F78

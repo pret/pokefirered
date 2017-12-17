@@ -182,7 +182,7 @@ _080F5274: .4byte gUnknown_3005420
 _080F5278: .4byte gUnknown_8418CD9
 _080F527C: .4byte gUnknown_203AB50
 _080F5280:
-	ldr r0, _080F5294 @ =gUnknown_30030F0
+	ldr r0, _080F5294 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -192,7 +192,7 @@ _080F5280:
 	strb r0, [r2]
 	b _080F52D6
 	.align 2, 0
-_080F5294: .4byte gUnknown_30030F0
+_080F5294: .4byte gMain
 _080F5298:
 	movs r0, 0
 	movs r1, 0

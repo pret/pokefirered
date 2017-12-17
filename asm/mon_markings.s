@@ -18,7 +18,7 @@ _080BE474: .4byte gUnknown_20399C0
 sub_80BE478: @ 80BE478
 	push {lr}
 	sub sp, 0x4
-	ldr r0, _080BE4B0 @ =gUnknown_300500C
+	ldr r0, _080BE4B0 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
@@ -43,7 +43,7 @@ sub_80BE478: @ 80BE478
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BE4B0: .4byte gUnknown_300500C
+_080BE4B0: .4byte gSaveBlock2Ptr
 _080BE4B4: .4byte gUnknown_20399C0
 _080BE4B8: .4byte 0x000010b4
 _080BE4BC: .4byte 0x01000800
@@ -341,7 +341,7 @@ _080BE6EC: .4byte gUnknown_20399C0
 	thumb_func_start sub_80BE6F0
 sub_80BE6F0: @ 80BE6F0
 	push {r4,r5,lr}
-	ldr r0, _080BE720 @ =gUnknown_30030F0
+	ldr r0, _080BE720 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -364,7 +364,7 @@ sub_80BE6F0: @ 80BE6F0
 	strb r0, [r1, 0x5]
 	b _080BE7B0
 	.align 2, 0
-_080BE720: .4byte gUnknown_30030F0
+_080BE720: .4byte gMain
 _080BE724: .4byte gUnknown_20399C0
 _080BE728:
 	movs r0, 0x80

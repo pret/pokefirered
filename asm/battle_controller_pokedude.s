@@ -233,7 +233,7 @@ sub_8156254: @ 8156254
 	ands r0, r1
 	cmp r0, 0
 	bne _0815627E
-	ldr r2, _08156288 @ =gUnknown_30030F0
+	ldr r2, _08156288 @ =gMain
 	ldr r0, _0815628C @ =0x00000439
 	adds r3, r2, r0
 	ldrb r1, [r3]
@@ -251,7 +251,7 @@ _0815627E:
 	bx r0
 	.align 2, 0
 _08156284: .4byte gUnknown_2037AB8
-_08156288: .4byte gUnknown_30030F0
+_08156288: .4byte gMain
 _0815628C: .4byte 0x00000439
 _08156290: .4byte gUnknown_3004F80
 	thumb_func_end sub_8156254
@@ -584,7 +584,7 @@ _08156534: .4byte gUnknown_3004FFC
 	thumb_func_start sub_8156538
 sub_8156538: @ 8156538
 	push {lr}
-	ldr r0, _08156568 @ =gUnknown_30030F0
+	ldr r0, _08156568 @ =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, _0815656C @ =sub_8011100
 	cmp r1, r0
@@ -606,7 +606,7 @@ sub_8156538: @ 8156538
 	bl EmitChosenMonReturnValue
 	b _0815658A
 	.align 2, 0
-_08156568: .4byte gUnknown_30030F0
+_08156568: .4byte gMain
 _0815656C: .4byte sub_8011100
 _08156570: .4byte gUnknown_2037AB8
 _08156574: .4byte gUnknown_203B0C0
@@ -669,7 +669,7 @@ _081565E2:
 	thumb_func_start sub_81565E8
 sub_81565E8: @ 81565E8
 	push {lr}
-	ldr r0, _08156614 @ =gUnknown_30030F0
+	ldr r0, _08156614 @ =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, _08156618 @ =sub_8011100
 	cmp r1, r0
@@ -689,7 +689,7 @@ _0815660E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08156614: .4byte gUnknown_30030F0
+_08156614: .4byte gMain
 _08156618: .4byte sub_8011100
 _0815661C: .4byte gUnknown_2037AB8
 _08156620: .4byte gUnknown_203AD30
@@ -7281,7 +7281,7 @@ _08159C64:
 	lsrs r4, r0, 16
 	cmp r4, 0
 	bne _08159CEE
-	ldr r0, _08159CA8 @ =gUnknown_30030F0
+	ldr r0, _08159CA8 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -7310,7 +7310,7 @@ _08159C9E:
 	strb r0, [r1, 0x2]
 	b _08159CEE
 	.align 2, 0
-_08159CA8: .4byte gUnknown_30030F0
+_08159CA8: .4byte gMain
 _08159CAC: .4byte gUnknown_3005EE0
 _08159CB0: .4byte gUnknown_2023BC4
 _08159CB4:
@@ -7481,7 +7481,7 @@ _08159E0C:
 	lsrs r4, r0, 16
 	cmp r4, 0
 	bne _08159EDE
-	ldr r0, _08159E58 @ =gUnknown_30030F0
+	ldr r0, _08159E58 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -7511,7 +7511,7 @@ _08159E0C:
 	movs r3, 0x8
 	b _08159E80
 	.align 2, 0
-_08159E58: .4byte gUnknown_30030F0
+_08159E58: .4byte gMain
 _08159E5C: .4byte gUnknown_825E45C
 _08159E60: .4byte gUnknown_2023FE8
 _08159E64:

@@ -2163,7 +2163,7 @@ _0803A296:
 	mov r0, r9
 	cmp r0, 0xAF
 	bne _0803A2BC
-	ldr r0, _0803A2B4 @ =gUnknown_3005008
+	ldr r0, _0803A2B4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _0803A2B8 @ =0x00003108
 	adds r5, r0, r1
@@ -2172,7 +2172,7 @@ _0803A296:
 _0803A2A8: .4byte gUnknown_202402C
 _0803A2AC: .4byte gUnknown_2023FF4
 _0803A2B0: .4byte gUnknown_82528BC
-_0803A2B4: .4byte gUnknown_3005008
+_0803A2B4: .4byte gSaveBlock1Ptr
 _0803A2B8: .4byte 0x00003108
 _0803A2BC:
 	adds r5, r1, 0

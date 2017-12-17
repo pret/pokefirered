@@ -398,7 +398,7 @@ sub_810BB40: @ 810BB40
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0810BB70 @ =gUnknown_3005008
+	ldr r0, _0810BB70 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -413,7 +413,7 @@ sub_810BB40: @ 810BB40
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810BB70: .4byte gUnknown_3005008
+_0810BB70: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_810BB40
 
 	thumb_func_start sub_810BB74

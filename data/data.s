@@ -1,17 +1,5 @@
 	.section .rodata
 
-gUnknown_81E9F10:: @ 81E9F10
-	.incbin "baserom.gba", 0x1E9F10, 0x1
-
-gUnknown_81E9F11:: @ 81E9F11
-	.incbin "baserom.gba", 0x1E9F11, 0x17
-
-gUnknown_81E9F28:: @ 81E9F28
-	.incbin "baserom.gba", 0x1E9F28, 0x38
-
-gUnknown_81E9F60:: @ 81E9F60
-	.incbin "baserom.gba", 0x1E9F60, 0x4
-
 gUnknown_81E9F64:: @ 81E9F64
 	.incbin "baserom.gba", 0x1E9F64, 0x4
 

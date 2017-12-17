@@ -89,7 +89,7 @@ _08106F68:
 	ldrb r0, [r5, 0x6]
 	bl ListMenuHandleInput
 	str r0, [r5]
-	ldr r1, _08106FA4 @ =gUnknown_30030F0
+	ldr r1, _08106FA4 @ =gMain
 	ldrh r0, [r1, 0x2E]
 	ands r4, r0
 	cmp r4, 0
@@ -117,7 +117,7 @@ _08106F92:
 	bl ClearWindowTilemap
 	b _08106FBA
 	.align 2, 0
-_08106FA4: .4byte gUnknown_30030F0
+_08106FA4: .4byte gMain
 _08106FA8:
 	mov r4, r10
 	cmp r4, 0
@@ -237,7 +237,7 @@ ListMenuHandleInput: @ 8107078
 	lsls r1, 3
 	ldr r0, _081070A4 @ =gUnknown_3005098
 	adds r3, r1, r0
-	ldr r2, _081070A8 @ =gUnknown_30030F0
+	ldr r2, _081070A8 @ =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -253,7 +253,7 @@ ListMenuHandleInput: @ 8107078
 	b _08107136
 	.align 2, 0
 _081070A4: .4byte gUnknown_3005098
-_081070A8: .4byte gUnknown_30030F0
+_081070A8: .4byte gMain
 _081070AC:
 	movs r0, 0x2
 	ands r0, r1

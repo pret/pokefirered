@@ -616,7 +616,7 @@ sub_805E27C: @ 805E27C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _0805E2DE
-	ldr r0, _0805E2B8 @ =gUnknown_3005008
+	ldr r0, _0805E2B8 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0
 	ldrsh r1, [r2, r0]
@@ -634,7 +634,7 @@ sub_805E27C: @ 805E27C
 	lsls r0, r4, 16
 	b _0805E2CE
 	.align 2, 0
-_0805E2B8: .4byte gUnknown_3005008
+_0805E2B8: .4byte gSaveBlock1Ptr
 _0805E2BC:
 	movs r1, 0
 	ldrsh r0, [r2, r1]
@@ -686,7 +686,7 @@ sub_805E2E8: @ 805E2E8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _0805E37C
-	ldr r0, _0805E378 @ =gUnknown_3005008
+	ldr r0, _0805E378 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r2, 0
 	ldrsh r1, [r1, r2]
@@ -737,7 +737,7 @@ _0805E36A:
 	b _0805E37E
 	.align 2, 0
 _0805E374: .4byte gUnknown_3005040
-_0805E378: .4byte gUnknown_3005008
+_0805E378: .4byte gSaveBlock1Ptr
 _0805E37C:
 	movs r0, 0x1
 _0805E37E:
@@ -792,7 +792,7 @@ _0805E3CE:
 	movs r5, 0
 	cmp r5, r6
 	bcs _0805E404
-	ldr r7, _0805E410 @ =gUnknown_3005008
+	ldr r7, _0805E410 @ =gSaveBlock1Ptr
 _0805E3D8:
 	lsls r0, r5, 1
 	adds r0, r5
@@ -825,7 +825,7 @@ _0805E406:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805E410: .4byte gUnknown_3005008
+_0805E410: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_805E3A0
 
 	thumb_func_start GetAvailableFieldObjectSlot
@@ -1351,7 +1351,7 @@ SpawnSpecialFieldObject: @ 805E7F4
 	add r0, sp, 0x4
 	adds r1, r4, 0
 	bl GetFieldObjectMovingCameraOffset
-	ldr r0, _0805E82C @ =gUnknown_3005008
+	ldr r0, _0805E82C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -1370,7 +1370,7 @@ SpawnSpecialFieldObject: @ 805E7F4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805E82C: .4byte gUnknown_3005008
+_0805E82C: .4byte gSaveBlock1Ptr
 	thumb_func_end SpawnSpecialFieldObject
 
 	thumb_func_start SpawnSpecialFieldObjectParametrized
@@ -1907,7 +1907,7 @@ sub_805EC30: @ 805EC30
 	ldr r3, [r0, 0x4]
 	cmp r3, 0
 	beq _0805ECF8
-	ldr r7, _0805ED0C @ =gUnknown_3005008
+	ldr r7, _0805ED0C @ =gSaveBlock1Ptr
 	ldr r2, [r7]
 	ldrh r1, [r2]
 	subs r0, r1, 0x2
@@ -2002,7 +2002,7 @@ _0805ECF8:
 	bx r0
 	.align 2, 0
 _0805ED08: .4byte gUnknown_2036DFC
-_0805ED0C: .4byte gUnknown_3005008
+_0805ED0C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_805EC30
 
 	thumb_func_start RemoveFieldObjectsOutsideView
@@ -2062,7 +2062,7 @@ _0805ED6C: .4byte 0x00010001
 RemoveFieldObjectIfOutsideView: @ 805ED70
 	push {r4-r7,lr}
 	adds r3, r0, 0
-	ldr r0, _0805EDEC @ =gUnknown_3005008
+	ldr r0, _0805EDEC @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r0, [r2]
 	subs r1, r0, 0x2
@@ -2124,7 +2124,7 @@ _0805EDE4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EDEC: .4byte gUnknown_3005008
+_0805EDEC: .4byte gSaveBlock1Ptr
 	thumb_func_end RemoveFieldObjectIfOutsideView
 
 	thumb_func_start sub_805EDF0
@@ -4272,7 +4272,7 @@ GetFieldObjectTemplateByLocalIdAndMap: @ 805FD5C
 	lsrs r3, r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, _0805FD8C @ =gUnknown_3005008
+	ldr r0, _0805FD8C @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x5
 	ldrsb r0, [r1, r0]
@@ -4289,7 +4289,7 @@ GetFieldObjectTemplateByLocalIdAndMap: @ 805FD5C
 	ldr r0, [r0, 0x4]
 	b _0805FDA0
 	.align 2, 0
-_0805FD8C: .4byte gUnknown_3005008
+_0805FD8C: .4byte gSaveBlock1Ptr
 _0805FD90: .4byte gUnknown_2036DFC
 _0805FD94:
 	adds r0, r2, 0
@@ -4348,7 +4348,7 @@ sub_805FDE8: @ 805FDE8
 	push {r7}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x9]
-	ldr r1, _0805FE0C @ =gUnknown_3005008
+	ldr r1, _0805FE0C @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	movs r1, 0x5
 	ldrsb r1, [r2, r1]
@@ -4361,7 +4361,7 @@ sub_805FDE8: @ 805FDE8
 	beq _0805FE18
 	b _0805FE50
 	.align 2, 0
-_0805FE0C: .4byte gUnknown_3005008
+_0805FE0C: .4byte gSaveBlock1Ptr
 _0805FE10:
 	mov r1, r8
 	adds r0, r5, r1
@@ -12878,7 +12878,7 @@ _08063AD0: .4byte gUnknown_83A64C8
 	thumb_func_start sub_8063AD4
 sub_8063AD4: @ 8063AD4
 	push {r4,r5,lr}
-	ldr r5, _08063B10 @ =gUnknown_3005008
+	ldr r5, _08063B10 @ =gSaveBlock1Ptr
 	ldr r4, [r5]
 	ldrh r4, [r4]
 	lsls r0, 16
@@ -12907,7 +12907,7 @@ sub_8063AD4: @ 8063AD4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063B10: .4byte gUnknown_3005008
+_08063B10: .4byte gSaveBlock1Ptr
 _08063B14: .4byte gUnknown_300506C
 _08063B18: .4byte gUnknown_3005068
 	thumb_func_end sub_8063AD4
@@ -12966,7 +12966,7 @@ _08063B70:
 	adds r0, r1
 	lsrs r4, r0, 16
 _08063B7C:
-	ldr r2, _08063BC0 @ =gUnknown_3005008
+	ldr r2, _08063BC0 @ =gSaveBlock1Ptr
 	ldr r0, [r2]
 	ldrh r1, [r0]
 	lsls r0, r5, 16
@@ -12996,7 +12996,7 @@ _08063BB0: .4byte gUnknown_300506C
 _08063BB4: .4byte gUnknown_3005050
 _08063BB8: .4byte gUnknown_3005068
 _08063BBC: .4byte 0xfff00000
-_08063BC0: .4byte gUnknown_3005008
+_08063BC0: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8063B1C
 
 	thumb_func_start sub_8063BC4
@@ -21984,7 +21984,7 @@ _08067A9C:
 	adds r0, r2
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, _08067B00 @ =gUnknown_3005008
+	ldr r0, _08067B00 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, _08067B04 @ =0x00000401
@@ -22030,7 +22030,7 @@ _08067AFA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08067B00: .4byte gUnknown_3005008
+_08067B00: .4byte gSaveBlock1Ptr
 _08067B04: .4byte 0x00000401
 _08067B08: .4byte 0x0000fff0
 	thumb_func_end sub_8067A10

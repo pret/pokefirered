@@ -1362,7 +1362,7 @@ _080EF6F4: .4byte gUnknown_2022B4C
 _080EF6F8:
 	movs r5, 0x17
 	movs r6, 0xB
-	ldr r0, _080EF7C4 @ =gUnknown_300500C
+	ldr r0, _080EF7C4 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x1
@@ -1456,7 +1456,7 @@ _080EF708:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EF7C4: .4byte gUnknown_300500C
+_080EF7C4: .4byte gSaveBlock2Ptr
 _080EF7C8: .4byte gUnknown_2023D68
 _080EF7CC: .4byte gUnknown_82606F4
 _080EF7D0: .4byte gUnknown_202063C
@@ -3348,7 +3348,7 @@ _080F0670: .4byte gUnknown_3005090
 	thumb_func_start sub_80F0674
 sub_80F0674: @ 80F0674
 	push {lr}
-	ldr r0, _080F0698 @ =gUnknown_30030F0
+	ldr r0, _080F0698 @ =gMain
 	ldr r1, _080F069C @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -3366,7 +3366,7 @@ _080F0692:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F0698: .4byte gUnknown_30030F0
+_080F0698: .4byte gMain
 _080F069C: .4byte 0x00000439
 _080F06A0: .4byte gUnknown_2024018
 	thumb_func_end sub_80F0674
@@ -3461,7 +3461,7 @@ _080F0740:
 	adds r2, r0, 0
 	cmp r1, 0xF
 	bne _080F079C
-	ldr r0, _080F0794 @ =gUnknown_30030F0
+	ldr r0, _080F0794 @ =gMain
 	ldr r4, _080F0798 @ =0x00000439
 	adds r0, r4
 	ldrb r1, [r0]
@@ -3487,7 +3487,7 @@ _080F0784: .4byte gUnknown_840C0A4
 _080F0788: .4byte gUnknown_202063C
 _080F078C: .4byte gUnknown_840C068
 _080F0790: .4byte sub_80F07BC
-_080F0794: .4byte gUnknown_30030F0
+_080F0794: .4byte gMain
 _080F0798: .4byte 0x00000439
 _080F079C:
 	mov r4, r8
@@ -3651,7 +3651,7 @@ _080F08BE:
 	lsrs r7, r0, 24
 	cmp r7, 0x7
 	bls _080F085E
-	ldr r0, _080F0914 @ =gUnknown_30030F0
+	ldr r0, _080F0914 @ =gMain
 	ldr r1, _080F0918 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -3684,7 +3684,7 @@ _080F0904: .4byte gUnknown_840C0A4
 _080F0908: .4byte gUnknown_840C068
 _080F090C: .4byte gUnknown_2020658
 _080F0910: .4byte sub_80F0D5C
-_080F0914: .4byte gUnknown_30030F0
+_080F0914: .4byte gMain
 _080F0918: .4byte 0x00000439
 	thumb_func_end sub_80F0818
 
@@ -3777,7 +3777,7 @@ _080F09C2:
 	lsrs r7, r0, 24
 	cmp r7, 0x7
 	bls _080F0962
-	ldr r0, _080F0A18 @ =gUnknown_30030F0
+	ldr r0, _080F0A18 @ =gMain
 	ldr r1, _080F0A1C @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -3810,7 +3810,7 @@ _080F0A08: .4byte gUnknown_840C0A4
 _080F0A0C: .4byte gUnknown_840C068
 _080F0A10: .4byte gUnknown_2020658
 _080F0A14: .4byte sub_80F0D5C
-_080F0A18: .4byte gUnknown_30030F0
+_080F0A18: .4byte gMain
 _080F0A1C: .4byte 0x00000439
 	thumb_func_end sub_80F091C
 
@@ -3901,7 +3901,7 @@ _080F0AC2:
 	lsrs r7, r0, 24
 	cmp r7, 0x7
 	bls _080F0A66
-	ldr r0, _080F0B18 @ =gUnknown_30030F0
+	ldr r0, _080F0B18 @ =gMain
 	ldr r1, _080F0B1C @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -3934,7 +3934,7 @@ _080F0B08: .4byte gUnknown_840C068
 _080F0B0C: .4byte gUnknown_840C0A4
 _080F0B10: .4byte gUnknown_2020658
 _080F0B14: .4byte sub_80F0D5C
-_080F0B18: .4byte gUnknown_30030F0
+_080F0B18: .4byte gMain
 _080F0B1C: .4byte 0x00000439
 	thumb_func_end sub_80F0A20
 
@@ -4029,7 +4029,7 @@ _080F0BCA:
 	lsrs r7, r0, 24
 	cmp r7, 0x9
 	bls _080F0B66
-	ldr r0, _080F0C20 @ =gUnknown_30030F0
+	ldr r0, _080F0C20 @ =gMain
 	ldr r1, _080F0C24 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -4062,7 +4062,7 @@ _080F0C10: .4byte gUnknown_840C0A4
 _080F0C14: .4byte gUnknown_840C068
 _080F0C18: .4byte gUnknown_2020658
 _080F0C1C: .4byte sub_80F0D5C
-_080F0C20: .4byte gUnknown_30030F0
+_080F0C20: .4byte gMain
 _080F0C24: .4byte 0x00000439
 	thumb_func_end sub_80F0B20
 
@@ -4179,7 +4179,7 @@ _080F0CE0:
 	asrs r2, r0, 16
 	cmp r2, 0x2
 	bne _080F0D2A
-	ldr r0, _080F0D54 @ =gUnknown_30030F0
+	ldr r0, _080F0D54 @ =gMain
 	ldr r4, _080F0D58 @ =0x00000439
 	adds r0, r4
 	ldrb r1, [r0]
@@ -4213,7 +4213,7 @@ _080F0D44: .4byte gUnknown_840C0A4
 _080F0D48: .4byte gUnknown_2020658
 _080F0D4C: .4byte sub_80F0D5C
 _080F0D50: .4byte gUnknown_3005090
-_080F0D54: .4byte gUnknown_30030F0
+_080F0D54: .4byte gMain
 _080F0D58: .4byte 0x00000439
 	thumb_func_end sub_80F0C28
 
@@ -4347,7 +4347,7 @@ _080F0E52:
 	lsrs r7, r0, 24
 	cmp r7, 0xB
 	bls _080F0DFA
-	ldr r0, _080F0EA8 @ =gUnknown_30030F0
+	ldr r0, _080F0EA8 @ =gMain
 	ldr r1, _080F0EAC @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -4380,7 +4380,7 @@ _080F0E98: .4byte gUnknown_840C068
 _080F0E9C: .4byte gUnknown_840C0A4
 _080F0EA0: .4byte gUnknown_2020658
 _080F0EA4: .4byte sub_80F0EB0
-_080F0EA8: .4byte gUnknown_30030F0
+_080F0EA8: .4byte gMain
 _080F0EAC: .4byte 0x00000439
 	thumb_func_end sub_80F0DB4
 
@@ -4547,7 +4547,7 @@ _080F0FE4:
 	mov r8, r0
 	cmp r0, 0x1
 	bls _080F0F54
-	ldr r0, _080F1030 @ =gUnknown_30030F0
+	ldr r0, _080F1030 @ =gMain
 	ldr r2, _080F1034 @ =0x00000439
 	adds r0, r2
 	ldrb r1, [r0]
@@ -4574,7 +4574,7 @@ _080F1018:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F1030: .4byte gUnknown_30030F0
+_080F1030: .4byte gMain
 _080F1034: .4byte 0x00000439
 _080F1038: .4byte gUnknown_202063C
 	thumb_func_end sub_80F0F10
@@ -4661,7 +4661,7 @@ _080F10D4:
 	lsrs r7, r0, 24
 	cmp r7, 0x7
 	bls _080F1082
-	ldr r0, _080F112C @ =gUnknown_30030F0
+	ldr r0, _080F112C @ =gMain
 	ldr r1, _080F1130 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -4694,7 +4694,7 @@ _080F111C: .4byte gUnknown_840C068
 _080F1120: .4byte gUnknown_840C0A4
 _080F1124: .4byte gUnknown_2020658
 _080F1128: .4byte sub_80F1134
-_080F112C: .4byte gUnknown_30030F0
+_080F112C: .4byte gMain
 _080F1130: .4byte 0x00000439
 	thumb_func_end sub_80F103C
 
@@ -4752,7 +4752,7 @@ _080F1190:
 sub_80F1198: @ 80F1198
 	push {r4-r7,lr}
 	adds r7, r0, 0
-	ldr r0, _080F11BC @ =gUnknown_30030F0
+	ldr r0, _080F11BC @ =gMain
 	ldr r1, _080F11C0 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -4768,7 +4768,7 @@ sub_80F1198: @ 80F1198
 	bl DestroySpriteAndFreeResources
 	b _080F1212
 	.align 2, 0
-_080F11BC: .4byte gUnknown_30030F0
+_080F11BC: .4byte gMain
 _080F11C0: .4byte 0x00000439
 _080F11C4:
 	ldr r2, _080F1200 @ =gUnknown_2024018

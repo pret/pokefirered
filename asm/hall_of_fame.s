@@ -31,7 +31,7 @@ sub_80F1DC0: @ 80F1DC0
 InitHallOfFameScreen: @ 80F1DDC
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _080F1DFC @ =gUnknown_30030F0
+	ldr r0, _080F1DFC @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -46,7 +46,7 @@ _080F1DF0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080F1DFC: .4byte gUnknown_30030F0
+_080F1DFC: .4byte gMain
 _080F1E00: .4byte _080F1E04
 	.align 2, 0
 _080F1E04:
@@ -66,7 +66,7 @@ _080F1E18:
 	ldr r0, _080F1E48 @ =0x00002008
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r0, _080F1E4C @ =gUnknown_30030F0
+	ldr r0, _080F1E4C @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -77,7 +77,7 @@ _080F1E18:
 _080F1E40: .4byte gUnknown_3005ECC
 _080F1E44: .4byte gUnknown_203AB3C
 _080F1E48: .4byte 0x00002008
-_080F1E4C: .4byte gUnknown_30030F0
+_080F1E4C: .4byte gMain
 _080F1E50:
 	bl sub_80F36BC
 	b _080F1EAA
@@ -117,7 +117,7 @@ _080F1E88:
 	movs r3, 0
 	bl BeginNormalPaletteFade
 _080F1EAA:
-	ldr r1, _080F1EC0 @ =gUnknown_30030F0
+	ldr r1, _080F1EC0 @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -127,7 +127,7 @@ _080F1EAA:
 	b _080F1EF0
 	.align 2, 0
 _080F1EBC: .4byte sub_80F1DAC
-_080F1EC0: .4byte gUnknown_30030F0
+_080F1EC0: .4byte gMain
 _080F1EC4:
 	bl UpdatePaletteFade
 	ldr r0, _080F1EE8 @ =gUnknown_2037AB8
@@ -1168,7 +1168,7 @@ sub_80F26D4: @ 80F26D4
 	bl ShowBg
 	movs r0, 0x3
 	bl ShowBg
-	ldr r0, _080F2748 @ =gUnknown_300500C
+	ldr r0, _080F2748 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
@@ -1204,7 +1204,7 @@ sub_80F26D4: @ 80F26D4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2748: .4byte gUnknown_300500C
+_080F2748: .4byte gSaveBlock2Ptr
 _080F274C: .4byte 0x0000ffff
 _080F2750: .4byte gUnknown_3005090
 _080F2754: .4byte gUnknown_840C234
@@ -1298,7 +1298,7 @@ Task_Hof_ExitOnKeyPressed: @ 80F2804
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080F2830 @ =gUnknown_30030F0
+	ldr r0, _080F2830 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1318,7 +1318,7 @@ _080F282A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2830: .4byte gUnknown_30030F0
+_080F2830: .4byte gMain
 _080F2834: .4byte gUnknown_3005090
 _080F2838: .4byte Task_Hof_HandlePaletteOnExit
 	thumb_func_end Task_Hof_ExitOnKeyPressed
@@ -1472,7 +1472,7 @@ _080F2974: .4byte gUnknown_2031DD8
 	thumb_func_start sub_80F2978
 sub_80F2978: @ 80F2978
 	push {r4,lr}
-	ldr r0, _080F2994 @ =gUnknown_30030F0
+	ldr r0, _080F2994 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -1485,7 +1485,7 @@ sub_80F2978: @ 80F2978
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080F2994: .4byte gUnknown_30030F0
+_080F2994: .4byte gMain
 _080F2998: .4byte _080F299C
 	.align 2, 0
 _080F299C:
@@ -1503,7 +1503,7 @@ _080F29B4:
 	ldr r0, _080F29DC @ =0x00002008
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r0, _080F29E0 @ =gUnknown_30030F0
+	ldr r0, _080F29E0 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -1513,7 +1513,7 @@ _080F29B4:
 	.align 2, 0
 _080F29D8: .4byte gUnknown_203AB3C
 _080F29DC: .4byte 0x00002008
-_080F29E0: .4byte gUnknown_30030F0
+_080F29E0: .4byte gMain
 _080F29E4:
 	bl sub_80F36BC
 	b _080F2A42
@@ -1553,7 +1553,7 @@ _080F2A28:
 	cmp r0, 0
 	bne _080F2A8C
 _080F2A42:
-	ldr r1, _080F2A54 @ =gUnknown_30030F0
+	ldr r1, _080F2A54 @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -1562,7 +1562,7 @@ _080F2A42:
 	strb r0, [r1]
 	b _080F2A8C
 	.align 2, 0
-_080F2A54: .4byte gUnknown_30030F0
+_080F2A54: .4byte gMain
 _080F2A58:
 	ldr r1, _080F2A94 @ =0x00003f42
 	movs r0, 0x50
@@ -2087,7 +2087,7 @@ Task_HofPC_HandleInput: @ 80F2E8C
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080F2F00 @ =gUnknown_30030F0
+	ldr r1, _080F2F00 @ =gMain
 	ldrh r2, [r1, 0x2E]
 	movs r0, 0x1
 	ands r0, r2
@@ -2142,7 +2142,7 @@ _080F2EF8:
 	str r0, [r1]
 	b _080F2FD8
 	.align 2, 0
-_080F2F00: .4byte gUnknown_30030F0
+_080F2F00: .4byte gMain
 _080F2F04: .4byte gUnknown_3005090
 _080F2F08: .4byte sub_80F2B6C
 _080F2F0C:
@@ -2385,7 +2385,7 @@ Task_HofPC_ExitOnButtonPress: @ 80F310C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080F3130 @ =gUnknown_30030F0
+	ldr r0, _080F3130 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2402,7 +2402,7 @@ _080F312C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F3130: .4byte gUnknown_30030F0
+_080F3130: .4byte gMain
 _080F3134: .4byte gUnknown_3005090
 _080F3138: .4byte sub_80F2FEC
 	thumb_func_end Task_HofPC_ExitOnButtonPress
@@ -2765,7 +2765,7 @@ sub_80F33DC: @ 80F33DC
 	movs r2, 0x4
 	movs r3, 0x3
 	bl AddTextPrinterParametrized2
-	ldr r0, _080F35FC @ =gUnknown_300500C
+	ldr r0, _080F35FC @ =gSaveBlock2Ptr
 	mov r10, r0
 	ldr r1, [r0]
 	movs r0, 0x2
@@ -2926,7 +2926,7 @@ _080F3582:
 	movs r0, 0xF0
 	strb r0, [r1, 0x3]
 	adds r4, r1, 0
-	ldr r0, _080F35FC @ =gUnknown_300500C
+	ldr r0, _080F35FC @ =gSaveBlock2Ptr
 	ldr r5, [r0]
 	ldrb r0, [r5, 0x10]
 	movs r1, 0x64
@@ -2974,7 +2974,7 @@ _080F35EC: .4byte gUnknown_840C234
 _080F35F0: .4byte 0x0000021d
 _080F35F4: .4byte gUnknown_840C240
 _080F35F8: .4byte gUnknown_84160FC
-_080F35FC: .4byte gUnknown_300500C
+_080F35FC: .4byte gSaveBlock2Ptr
 _080F3600: .4byte gUnknown_8416104
 _080F3604: .4byte 0x000186a0
 _080F3608: .4byte 0x00002710

@@ -94,7 +94,7 @@ sub_810C444: @ 810C444
 	mov r7, r8
 	push {r7}
 	sub sp, 0x4
-	ldr r0, _0810C4E0 @ =gUnknown_3005008
+	ldr r0, _0810C4E0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x8E
 	lsls r1, 4
@@ -129,7 +129,7 @@ _0810C47A:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r5]
-	ldr r1, _0810C4E0 @ =gUnknown_3005008
+	ldr r1, _0810C4E0 @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -169,7 +169,7 @@ _0810C4D2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810C4E0: .4byte gUnknown_3005008
+_0810C4E0: .4byte gSaveBlock1Ptr
 _0810C4E4: .4byte gUnknown_2036DFC
 _0810C4E8: .4byte gUnknown_2036E38
 	thumb_func_end sub_810C444
@@ -185,7 +185,7 @@ sub_810C4EC: @ 810C4EC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0810C516
-	ldr r0, _0810C568 @ =gUnknown_3005008
+	ldr r0, _0810C568 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r2, 0xC7
 	lsls r2, 3
@@ -204,7 +204,7 @@ _0810C516:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0810C570
-	ldr r6, _0810C568 @ =gUnknown_3005008
+	ldr r6, _0810C568 @ =gSaveBlock1Ptr
 	ldr r0, [r6]
 	movs r5, 0xC7
 	lsls r5, 3
@@ -236,7 +236,7 @@ _0810C548:
 	movs r0, 0x1
 	b _0810C572
 	.align 2, 0
-_0810C568: .4byte gUnknown_3005008
+_0810C568: .4byte gSaveBlock1Ptr
 _0810C56C: .4byte 0x00000801
 _0810C570:
 	movs r0, 0
@@ -320,7 +320,7 @@ _0810C600: .4byte gUnknown_202063C
 
 	thumb_func_start sub_810C604
 sub_810C604: @ 810C604
-	ldr r0, _0810C61C @ =gUnknown_3005008
+	ldr r0, _0810C61C @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0xC7
 	lsls r0, 3
@@ -332,12 +332,12 @@ sub_810C604: @ 810C604
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_0810C61C: .4byte gUnknown_3005008
+_0810C61C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_810C604
 
 	thumb_func_start sub_810C620
 sub_810C620: @ 810C620
-	ldr r0, _0810C63C @ =gUnknown_3005008
+	ldr r0, _0810C63C @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0xC7
 	lsls r0, 3
@@ -351,12 +351,12 @@ sub_810C620: @ 810C620
 	strh r0, [r2]
 	bx lr
 	.align 2, 0
-_0810C63C: .4byte gUnknown_3005008
+_0810C63C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_810C620
 
 	thumb_func_start sub_810C640
 sub_810C640: @ 810C640
-	ldr r0, _0810C650 @ =gUnknown_3005008
+	ldr r0, _0810C650 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xC7
 	lsls r1, 3
@@ -365,12 +365,12 @@ sub_810C640: @ 810C640
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
-_0810C650: .4byte gUnknown_3005008
+_0810C650: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_810C640
 
 	thumb_func_start sub_810C654
 sub_810C654: @ 810C654
-	ldr r0, _0810C66C @ =gUnknown_3005008
+	ldr r0, _0810C66C @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0xC7
 	lsls r0, 3
@@ -383,7 +383,7 @@ sub_810C654: @ 810C654
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_0810C66C: .4byte gUnknown_3005008
+_0810C66C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_810C654
 
 	.align 2, 0 @ Don't pad with nop.

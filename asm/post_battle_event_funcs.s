@@ -34,7 +34,7 @@ _080CA318:
 	bl GetGameStat
 	cmp r0, 0
 	bne _080CA33A
-	ldr r0, _080CA3B4 @ =gUnknown_300500C
+	ldr r0, _080CA3B4 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrh r1, [r2, 0xE]
 	lsls r1, 16
@@ -100,7 +100,7 @@ _080CA39E:
 	bx r1
 	.align 2, 0
 _080CA3B0: .4byte gUnknown_203AB44
-_080CA3B4: .4byte gUnknown_300500C
+_080CA3B4: .4byte gSaveBlock2Ptr
 _080CA3B8: .4byte gUnknown_2024284
 _080CA3BC: .4byte 0x0000083b
 _080CA3C0: .4byte CB2_DoHallOfFameScreen

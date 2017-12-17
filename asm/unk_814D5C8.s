@@ -2487,7 +2487,7 @@ _0814EA20: .4byte gUnknown_2021CF0
 _0814EA24: .4byte gUnknown_841D090
 _0814EA28: .4byte gUnknown_841D098
 _0814EA2C:
-	ldr r0, _0814EA3C @ =gUnknown_30030F0
+	ldr r0, _0814EA3C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2495,7 +2495,7 @@ _0814EA2C:
 	bne _0814EA66
 	b _0814EA6C
 	.align 2, 0
-_0814EA3C: .4byte gUnknown_30030F0
+_0814EA3C: .4byte gMain
 _0814EA40:
 	ldrb r0, [r7, 0x2]
 	movs r1, 0x1
@@ -2540,7 +2540,7 @@ sub_814EA7C: @ 814EA7C
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _0814EACC @ =gUnknown_300500C
+	ldr r0, _0814EACC @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	movs r3, 0xAF
 	lsls r3, 4
@@ -2564,7 +2564,7 @@ sub_814EA7C: @ 814EA7C
 	.align 2, 0
 _0814EAC4: .4byte sub_814E830
 _0814EAC8: .4byte gUnknown_3005090
-_0814EACC: .4byte gUnknown_300500C
+_0814EACC: .4byte gSaveBlock2Ptr
 _0814EAD0: .4byte 0x00000af6
 	thumb_func_end sub_814EA7C
 

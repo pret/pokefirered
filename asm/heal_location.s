@@ -93,7 +93,7 @@ sub_80BFCD0: @ 80BFCD0
 	lsrs r5, r0, 16
 	cmp r5, 0x1
 	bne _080BFD38
-	ldr r0, _080BFD28 @ =gUnknown_3005008
+	ldr r0, _080BFD28 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r2, _080BFD2C @ =0x00003d34
 	adds r0, r1, r2
@@ -127,12 +127,12 @@ _080BFD0A:
 	b _080BFDFA
 	.align 2, 0
 _080BFD24: .4byte 0x00004082
-_080BFD28: .4byte gUnknown_3005008
+_080BFD28: .4byte gSaveBlock1Ptr
 _080BFD2C: .4byte 0x00003d34
 _080BFD30: .4byte 0x00003d42
 _080BFD34: .4byte gUnknown_20370D2
 _080BFD38:
-	ldr r0, _080BFD7C @ =gUnknown_3005008
+	ldr r0, _080BFD7C @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x1C
 	ldrsb r0, [r1, r0]
@@ -166,7 +166,7 @@ _080BFD38:
 	movs r0, 0x5
 	b _080BFDF2
 	.align 2, 0
-_080BFD7C: .4byte gUnknown_3005008
+_080BFD7C: .4byte gSaveBlock1Ptr
 _080BFD80: .4byte gUnknown_83EEC98
 _080BFD84:
 	ldr r0, _080BFDA4 @ =gUnknown_83EEC98

@@ -28,7 +28,7 @@ sub_80423A4: @ 80423A4
 	movs r1, 0x37
 	mov r2, sp
 	bl sub_804037C
-	ldr r0, _080423FC @ =gUnknown_30030F0
+	ldr r0, _080423FC @ =gMain
 	ldr r1, _08042400 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -50,7 +50,7 @@ _080423F6:
 	movs r0, 0
 	b _0804240A
 	.align 2, 0
-_080423FC: .4byte gUnknown_30030F0
+_080423FC: .4byte gMain
 _08042400: .4byte 0x00000439
 _08042404: .4byte gUnknown_2023BE4
 _08042408:
@@ -101,7 +101,7 @@ _08042458:
 	ldr r0, _080424B4 @ =gUnknown_2024004
 	ldrb r2, [r0]
 	strb r2, [r1]
-	ldr r0, _080424B8 @ =gUnknown_30030F0
+	ldr r0, _080424B8 @ =gMain
 	ldr r1, _080424BC @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -143,7 +143,7 @@ _08042458:
 	.align 2, 0
 _080424B0: .4byte gUnknown_2023D6F
 _080424B4: .4byte gUnknown_2024004
-_080424B8: .4byte gUnknown_30030F0
+_080424B8: .4byte gMain
 _080424BC: .4byte 0x00000439
 _080424C0: .4byte gUnknown_2023BC4
 _080424C4: .4byte gUnknown_2023BCC
@@ -200,7 +200,7 @@ _08042528:
 	cmp r2, 0xAF
 	bne _0804257C
 _0804252E:
-	ldr r0, _08042550 @ =gUnknown_30030F0
+	ldr r0, _08042550 @ =gMain
 	ldr r1, _08042554 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -217,19 +217,19 @@ _0804252E:
 	adds r0, r1
 	b _0804257C
 	.align 2, 0
-_08042550: .4byte gUnknown_30030F0
+_08042550: .4byte gMain
 _08042554: .4byte 0x00000439
 _08042558: .4byte gUnknown_2023BC4
 _0804255C: .4byte gUnknown_2023F5C
 _08042560:
-	ldr r0, _0804256C @ =gUnknown_3005008
+	ldr r0, _0804256C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, _08042570 @ =0x00003108
 	adds r2, r0, r2
 	str r2, [sp, 0x14]
 	b _0804257E
 	.align 2, 0
-_0804256C: .4byte gUnknown_3005008
+_0804256C: .4byte gSaveBlock1Ptr
 _08042570: .4byte 0x00003108
 _08042574:
 	movs r0, 0
@@ -273,7 +273,7 @@ _080425B0:
 	adds r5, r2, 0
 	cmp r0, 0
 	beq _080425F4
-	ldr r0, _0804263C @ =gUnknown_30030F0
+	ldr r0, _0804263C @ =gMain
 	ldr r2, _08042640 @ =0x00000439
 	adds r0, r2
 	ldrb r1, [r0]
@@ -338,7 +338,7 @@ _08042628:
 	asrs r0, 24
 	b _080426F2
 	.align 2, 0
-_0804263C: .4byte gUnknown_30030F0
+_0804263C: .4byte gMain
 _08042640: .4byte 0x00000439
 _08042644: .4byte gUnknown_2023BE4
 _08042648: .4byte gUnknown_2023BC4
@@ -568,7 +568,7 @@ _080427F6:
 	bne _08042802
 	b _08042BCA
 _08042802:
-	ldr r0, _08042844 @ =gUnknown_30030F0
+	ldr r0, _08042844 @ =gMain
 	ldr r1, _08042848 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -602,7 +602,7 @@ _08042832:
 _08042838: .4byte gUnknown_2023DE4
 _0804283C: .4byte gUnknown_2023BC4
 _08042840: .4byte 0x00000f88
-_08042844: .4byte gUnknown_30030F0
+_08042844: .4byte gMain
 _08042848: .4byte 0x00000439
 _0804284C: .4byte gUnknown_2023BE4
 _08042850:
@@ -1306,7 +1306,7 @@ sub_8042DA4: @ 8042DA4
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _08042DF8
-	ldr r0, _08042DD4 @ =gUnknown_30030F0
+	ldr r0, _08042DD4 @ =gMain
 	ldr r1, _08042DD8 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1323,18 +1323,18 @@ sub_8042DA4: @ 8042DA4
 	adds r7, r0, r1
 	b _08042E04
 	.align 2, 0
-_08042DD4: .4byte gUnknown_30030F0
+_08042DD4: .4byte gMain
 _08042DD8: .4byte 0x00000439
 _08042DDC: .4byte gUnknown_2024004
 _08042DE0: .4byte gUnknown_2023F5C
 _08042DE4:
-	ldr r0, _08042DF0 @ =gUnknown_3005008
+	ldr r0, _08042DF0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08042DF4 @ =0x00003108
 	adds r7, r0, r1
 	b _08042E02
 	.align 2, 0
-_08042DF0: .4byte gUnknown_3005008
+_08042DF0: .4byte gSaveBlock1Ptr
 _08042DF4: .4byte 0x00003108
 _08042DF8:
 	ldr r1, _08042E3C @ =gUnknown_82528BC
@@ -1486,14 +1486,14 @@ sub_8042EC4: @ 8042EC4
 	ldrh r0, [r0]
 	cmp r0, 0xAF
 	bne _08042F38
-	ldr r0, _08042F30 @ =gUnknown_3005008
+	ldr r0, _08042F30 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08042F34 @ =0x0000311a
 	adds r0, r1
 	ldrb r0, [r0]
 	b _08042F40
 	.align 2, 0
-_08042F30: .4byte gUnknown_3005008
+_08042F30: .4byte gSaveBlock1Ptr
 _08042F34: .4byte 0x0000311a
 _08042F38:
 	bl ItemId_GetHoldEffect
@@ -2598,7 +2598,7 @@ sub_80436F8: @ 80436F8
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _08043758
-	ldr r0, _08043738 @ =gUnknown_30030F0
+	ldr r0, _08043738 @ =gMain
 	ldr r1, _0804373C @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -2610,18 +2610,18 @@ sub_80436F8: @ 80436F8
 	ldrb r4, [r0, 0x7]
 	b _08043760
 	.align 2, 0
-_08043738: .4byte gUnknown_30030F0
+_08043738: .4byte gMain
 _0804373C: .4byte 0x00000439
 _08043740: .4byte gUnknown_2023F54
 _08043744:
-	ldr r0, _08043750 @ =gUnknown_3005008
+	ldr r0, _08043750 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08043754 @ =0x0000311a
 	adds r0, r1
 	ldrb r4, [r0]
 	b _08043760
 	.align 2, 0
-_08043750: .4byte gUnknown_3005008
+_08043750: .4byte gSaveBlock1Ptr
 _08043754: .4byte 0x0000311a
 _08043758:
 	bl ItemId_GetHoldEffect
@@ -2917,7 +2917,7 @@ _0804397C:
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _080439C8
-	ldr r0, _080439A8 @ =gUnknown_30030F0
+	ldr r0, _080439A8 @ =gMain
 	ldr r1, _080439AC @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -2930,18 +2930,18 @@ _0804397C:
 	b _080439D0
 	.align 2, 0
 _080439A4: .4byte gUnknown_8254784
-_080439A8: .4byte gUnknown_30030F0
+_080439A8: .4byte gMain
 _080439AC: .4byte 0x00000439
 _080439B0: .4byte gUnknown_2023F54
 _080439B4:
-	ldr r0, _080439C0 @ =gUnknown_3005008
+	ldr r0, _080439C0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, _080439C4 @ =0x0000311a
 	adds r0, r2
 	ldrb r0, [r0]
 	b _080439D0
 	.align 2, 0
-_080439C0: .4byte gUnknown_3005008
+_080439C0: .4byte gSaveBlock1Ptr
 _080439C4: .4byte 0x0000311a
 _080439C8:
 	bl ItemId_GetHoldEffect
@@ -4155,7 +4155,7 @@ IsTradedMon: @ 804425C
 IsOtherTrainer: @ 8044288
 	push {r4,r5,lr}
 	adds r5, r1, 0
-	ldr r1, _080442CC @ =gUnknown_300500C
+	ldr r1, _080442CC @ =gSaveBlock2Ptr
 	ldr r3, [r1]
 	ldrb r2, [r3, 0xA]
 	ldrb r1, [r3, 0xB]
@@ -4189,7 +4189,7 @@ _080442C6:
 	movs r0, 0
 	b _080442D2
 	.align 2, 0
-_080442CC: .4byte gUnknown_300500C
+_080442CC: .4byte gSaveBlock2Ptr
 _080442D0:
 	movs r0, 0x1
 _080442D2:
@@ -4557,7 +4557,7 @@ _08044590:
 	ands r0, r1
 	cmp r0, 0
 	beq _08044632
-	ldr r0, _080445B4 @ =gUnknown_30030F0
+	ldr r0, _080445B4 @ =gMain
 	ldr r1, _080445B8 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -4568,7 +4568,7 @@ _08044590:
 	b _0804461A
 	.align 2, 0
 _080445B0: .4byte gUnknown_2022B4C
-_080445B4: .4byte gUnknown_30030F0
+_080445B4: .4byte gMain
 _080445B8: .4byte 0x00000439
 _080445BC:
 	ldr r0, _080445E8 @ =gUnknown_2022B4C
@@ -4577,7 +4577,7 @@ _080445BC:
 	ands r0, r1
 	cmp r0, 0
 	beq _08044632
-	ldr r0, _080445EC @ =gUnknown_30030F0
+	ldr r0, _080445EC @ =gMain
 	ldr r1, _080445F0 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -4594,7 +4594,7 @@ _080445BC:
 	b _08044632
 	.align 2, 0
 _080445E8: .4byte gUnknown_2022B4C
-_080445EC: .4byte gUnknown_30030F0
+_080445EC: .4byte gMain
 _080445F0: .4byte 0x00000439
 _080445F4:
 	ldr r0, _08044638 @ =gUnknown_2022B4C
@@ -4604,7 +4604,7 @@ _080445F4:
 	ands r0, r3
 	cmp r0, 0
 	beq _08044648
-	ldr r0, _0804463C @ =gUnknown_30030F0
+	ldr r0, _0804463C @ =gMain
 	ldr r1, _08044640 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -4633,11 +4633,11 @@ _08044632:
 	b _08044666
 	.align 2, 0
 _08044638: .4byte gUnknown_2022B4C
-_0804463C: .4byte gUnknown_30030F0
+_0804463C: .4byte gMain
 _08044640: .4byte 0x00000439
 _08044644: .4byte gUnknown_202273C
 _08044648:
-	ldr r0, _0804466C @ =gUnknown_30030F0
+	ldr r0, _0804466C @ =gMain
 	ldr r1, _08044670 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -4658,7 +4658,7 @@ _08044666:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0804466C: .4byte gUnknown_30030F0
+_0804466C: .4byte gMain
 _08044670: .4byte 0x00000439
 	thumb_func_end sub_804455C
 
@@ -4960,7 +4960,7 @@ sub_8044898: @ 8044898
 	lsrs r0, 16
 	cmp r0, 0xC9
 	bne _080448D8
-	ldr r0, _080448F4 @ =gUnknown_300500C
+	ldr r0, _080448F4 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	str r7, [r0, 0x1C]
 _080448D8:
@@ -4971,7 +4971,7 @@ _080448D8:
 	lsls r1, 17
 	cmp r0, r1
 	bne _080448EE
-	ldr r0, _080448F4 @ =gUnknown_300500C
+	ldr r0, _080448F4 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	str r7, [r0, 0x20]
 _080448EE:
@@ -4979,7 +4979,7 @@ _080448EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080448F4: .4byte gUnknown_300500C
+_080448F4: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_8044898
 
 	thumb_func_start sub_80448F8

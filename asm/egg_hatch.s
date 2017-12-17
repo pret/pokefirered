@@ -292,7 +292,7 @@ sub_8046E34: @ 8046E34
 	adds r4, 0x74
 	cmp r0, 0
 	bne _08046E74
-	ldr r0, _08046E90 @ =gUnknown_300500C
+	ldr r0, _08046E90 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r1, r4, 0
 	bl StringCompare
@@ -311,7 +311,7 @@ _08046E74:
 	movs r0, 0x1
 	b _08046EA2
 	.align 2, 0
-_08046E90: .4byte gUnknown_300500C
+_08046E90: .4byte gSaveBlock2Ptr
 _08046E94: .4byte gUnknown_2021CD0
 _08046E98: .4byte gUnknown_2021CF0
 _08046E9C: .4byte gUnknown_2021D04
@@ -327,7 +327,7 @@ _08046EA2:
 	thumb_func_start sub_8046EAC
 sub_8046EAC: @ 8046EAC
 	push {lr}
-	ldr r0, _08046EC8 @ =gUnknown_3005008
+	ldr r0, _08046EC8 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
@@ -340,7 +340,7 @@ sub_8046EAC: @ 8046EAC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08046EC8: .4byte gUnknown_3005008
+_08046EC8: .4byte gSaveBlock1Ptr
 _08046ECC: .4byte gUnknown_20370C0
 	thumb_func_end sub_8046EAC
 
@@ -528,7 +528,7 @@ _08047040: .4byte sub_807DD24
 CB2_EggHatch_0: @ 8047044
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _08047064 @ =gUnknown_30030F0
+	ldr r0, _08047064 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -543,7 +543,7 @@ _08047058:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08047064: .4byte gUnknown_30030F0
+_08047064: .4byte gMain
 _08047068: .4byte _0804706C
 	.align 2, 0
 _0804706C:
@@ -732,7 +732,7 @@ _08047214:
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 _0804724A:
-	ldr r1, _08047268 @ =gUnknown_30030F0
+	ldr r1, _08047268 @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -744,7 +744,7 @@ _0804724A:
 _0804725C: .4byte gUnknown_8EAEA20
 _08047260: .4byte gUnknown_8EAEA80
 _08047264: .4byte gUnknown_826601C
-_08047268: .4byte gUnknown_30030F0
+_08047268: .4byte gMain
 _0804726C:
 	ldr r0, _08047298 @ =sub_8047338
 	bl SetMainCallback2

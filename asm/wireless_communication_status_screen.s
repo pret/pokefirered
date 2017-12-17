@@ -472,7 +472,7 @@ _0814F58A:
 	movs r1, 0x3
 	bl CopyWindowToVram
 _0814F5A4:
-	ldr r0, _0814F5F8 @ =gUnknown_30030F0
+	ldr r0, _0814F5F8 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -515,7 +515,7 @@ _0814F5E2:
 	bl sub_814F364
 	b _0814F648
 	.align 2, 0
-_0814F5F8: .4byte gUnknown_30030F0
+_0814F5F8: .4byte gMain
 _0814F5FC: .4byte gUnknown_3005090
 _0814F600: .4byte gUnknown_3002040
 _0814F604: .4byte gUnknown_3005098

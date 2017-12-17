@@ -232,7 +232,7 @@ sub_80808F0: @ 80808F0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08080924 @ =gUnknown_30030F0
+	ldr r0, _08080924 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -255,7 +255,7 @@ sub_80808F0: @ 80808F0
 	movs r0, 0x1
 	b _08080936
 	.align 2, 0
-_08080924: .4byte gUnknown_30030F0
+_08080924: .4byte gMain
 _08080928: .4byte gUnknown_202271A
 _0808092C: .4byte gUnknown_3005090
 _08080930: .4byte sub_8080FB4
@@ -279,7 +279,7 @@ sub_808093C: @ 808093C
 	movs r0, 0x1
 	bl SetSuppressLinkErrorMessage
 _08080952:
-	ldr r0, _08080964 @ =gUnknown_30030F0
+	ldr r0, _08080964 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -288,7 +288,7 @@ _08080952:
 	movs r0, 0
 	b _0808097E
 	.align 2, 0
-_08080964: .4byte gUnknown_30030F0
+_08080964: .4byte gMain
 _08080968:
 	ldr r1, _08080984 @ =gUnknown_202271A
 	movs r0, 0
@@ -545,7 +545,7 @@ sub_8080B20: @ 8080B20
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl sub_8080808
-	ldr r0, _08080BB8 @ =gUnknown_30030F0
+	ldr r0, _08080BB8 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -580,7 +580,7 @@ _08080BA8:
 	bx r0
 	.align 2, 0
 _08080BB4: .4byte gUnknown_3005098
-_08080BB8: .4byte gUnknown_30030F0
+_08080BB8: .4byte gMain
 _08080BBC: .4byte gUnknown_2021CD0
 _08080BC0: .4byte gUnknown_81BC50D
 _08080BC4: .4byte sub_8080BC8
@@ -615,7 +615,7 @@ sub_8080BC8: @ 8080BC8
 	lsls r0, 24
 	cmp r4, r0
 	bne _08080C16
-	ldr r0, _08080C2C @ =gUnknown_30030F0
+	ldr r0, _08080C2C @ =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x2
 	ands r0, r1
@@ -633,7 +633,7 @@ _08080C16:
 	str r1, [r0]
 	b _08080C5C
 	.align 2, 0
-_08080C2C: .4byte gUnknown_30030F0
+_08080C2C: .4byte gMain
 _08080C30: .4byte gUnknown_81BC4CE
 _08080C34: .4byte gUnknown_3005090
 _08080C38: .4byte sub_8080AD0
@@ -1639,7 +1639,7 @@ _0808141A:
 	strh r0, [r1]
 	ldr r0, _08081448 @ =sub_800FD9C
 	bl SetMainCallback2
-	ldr r1, _0808144C @ =gUnknown_30030F0
+	ldr r1, _0808144C @ =gMain
 	ldr r0, _08081450 @ =sub_8081668
 	str r0, [r1, 0x8]
 	adds r0, r5, 0
@@ -1652,7 +1652,7 @@ _0808143A:
 _08081440: .4byte gUnknown_2022B4C
 _08081444: .4byte gUnknown_20386AE
 _08081448: .4byte sub_800FD9C
-_0808144C: .4byte gUnknown_30030F0
+_0808144C: .4byte gMain
 _08081450: .4byte sub_8081668
 	thumb_func_end sub_8081318
 
@@ -1862,7 +1862,7 @@ _080815EA:
 	strh r0, [r1]
 	ldr r0, _08081618 @ =sub_800FD9C
 	bl SetMainCallback2
-	ldr r1, _0808161C @ =gUnknown_30030F0
+	ldr r1, _0808161C @ =gMain
 	ldr r0, _08081620 @ =sub_8081668
 	str r0, [r1, 0x8]
 	adds r0, r4, 0
@@ -1875,14 +1875,14 @@ _0808160A:
 _08081610: .4byte gUnknown_2022B4C
 _08081614: .4byte gUnknown_20386AE
 _08081618: .4byte sub_800FD9C
-_0808161C: .4byte gUnknown_30030F0
+_0808161C: .4byte gMain
 _08081620: .4byte sub_8081668
 	thumb_func_end sub_8081454
 
 	thumb_func_start sub_8081624
 sub_8081624: @ 8081624
 	push {r4,lr}
-	ldr r0, _0808163C @ =gUnknown_30030F0
+	ldr r0, _0808163C @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r4, r0, r1
@@ -1893,7 +1893,7 @@ sub_8081624: @ 8081624
 	beq _0808164C
 	b _0808165C
 	.align 2, 0
-_0808163C: .4byte gUnknown_30030F0
+_0808163C: .4byte gMain
 _08081640:
 	bl sub_800AAC0
 	ldrb r0, [r4]
@@ -1989,15 +1989,15 @@ _0808170A:
 	bl InUnionRoom
 	cmp r0, 0x1
 	bne _08081724
-	ldr r1, _0808171C @ =gUnknown_30030F0
+	ldr r1, _0808171C @ =gMain
 	ldr r0, _08081720 @ =sub_8081624
 	b _08081728
 	.align 2, 0
 _08081718: .4byte gUnknown_202273C
-_0808171C: .4byte gUnknown_30030F0
+_0808171C: .4byte gMain
 _08081720: .4byte sub_8081624
 _08081724:
-	ldr r1, _08081738 @ =gUnknown_30030F0
+	ldr r1, _08081738 @ =gMain
 	ldr r0, _0808173C @ =c2_8056854
 _08081728:
 	str r0, [r1, 0x8]
@@ -2007,7 +2007,7 @@ _08081728:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081738: .4byte gUnknown_30030F0
+_08081738: .4byte gMain
 _0808173C: .4byte c2_8056854
 _08081740: .4byte sub_806FB7C
 	thumb_func_end sub_8081668

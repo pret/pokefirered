@@ -2033,7 +2033,7 @@ _081489FE:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _08148A10:
-	ldr r0, _08148A2C @ =gUnknown_30030F0
+	ldr r0, _08148A2C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2046,7 +2046,7 @@ _08148A10:
 	ldr r1, [r0]
 	b _08148A40
 	.align 2, 0
-_08148A2C: .4byte gUnknown_30030F0
+_08148A2C: .4byte gMain
 _08148A30: .4byte gUnknown_203F3D4
 _08148A34:
 	movs r0, 0x1
@@ -2260,7 +2260,7 @@ _08148BCC:
 	ldrh r0, [r1, 0x3C]
 	adds r2, r0, 0x1
 	strh r2, [r1, 0x3C]
-	ldr r0, _08148BF8 @ =gUnknown_30030F0
+	ldr r0, _08148BF8 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2280,7 +2280,7 @@ _08148BEE:
 	strh r0, [r1, 0xA]
 	b _08148C78
 	.align 2, 0
-_08148BF8: .4byte gUnknown_30030F0
+_08148BF8: .4byte gMain
 _08148BFC:
 	bl sub_814A6FC
 	cmp r0, 0
@@ -7718,14 +7718,14 @@ sub_814B460: @ 814B460
 
 	thumb_func_start sub_814B46C
 sub_814B46C: @ 814B46C
-	ldr r0, _0814B478 @ =gUnknown_300500C
+	ldr r0, _0814B478 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	movs r1, 0xB0
 	lsls r1, 4
 	adds r0, r1
 	bx lr
 	.align 2, 0
-_0814B478: .4byte gUnknown_300500C
+_0814B478: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_814B46C
 
 	thumb_func_start ResetPokeJumpResults
@@ -7870,7 +7870,7 @@ _0814B570:
 	bne _0814B5BE
 	b _0814B596
 _0814B57C:
-	ldr r0, _0814B5A0 @ =gUnknown_30030F0
+	ldr r0, _0814B5A0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -7888,7 +7888,7 @@ _0814B596:
 	strh r0, [r4]
 	b _0814B5BE
 	.align 2, 0
-_0814B5A0: .4byte gUnknown_30030F0
+_0814B5A0: .4byte gMain
 _0814B5A4:
 	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24

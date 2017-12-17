@@ -246,7 +246,7 @@ sub_812E6DC: @ 812E6DC
 	lsls r3, 16
 	lsrs r6, r3, 16
 	movs r4, 0
-	ldr r0, _0812E734 @ =gUnknown_300500C
+	ldr r0, _0812E734 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	ldr r7, _0812E738 @ =gUnknown_2021D18
@@ -278,7 +278,7 @@ _0812E70A:
 	bl PrintTextOnWindow
 	b _0812E75C
 	.align 2, 0
-_0812E734: .4byte gUnknown_300500C
+_0812E734: .4byte gSaveBlock2Ptr
 _0812E738: .4byte gUnknown_2021D18
 _0812E73C:
 	lsls r3, r5, 24

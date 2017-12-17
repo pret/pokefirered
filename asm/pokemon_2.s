@@ -2797,7 +2797,7 @@ CopyMon: @ 8040B08
 GiveMonToPlayer: @ 8040B14
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r4, _08040B40 @ =gUnknown_300500C
+	ldr r4, _08040B40 @ =gSaveBlock2Ptr
 	ldr r2, [r4]
 	movs r1, 0x7
 	bl sub_804037C
@@ -2814,7 +2814,7 @@ GiveMonToPlayer: @ 8040B14
 	movs r5, 0
 	b _08040B46
 	.align 2, 0
-_08040B40: .4byte gUnknown_300500C
+_08040B40: .4byte gSaveBlock2Ptr
 _08040B44:
 	adds r5, 0x1
 _08040B46:

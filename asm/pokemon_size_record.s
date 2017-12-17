@@ -426,7 +426,7 @@ GiveGiftRibbonToParty: @ 80A09AC
 	bhi _080A0A28
 	cmp r5, 0x40
 	bhi _080A0A28
-	ldr r0, _080A0A38 @ =gUnknown_3005008
+	ldr r0, _080A0A38 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _080A0A3C @ =0x0000309c
 	adds r0, r1
@@ -473,7 +473,7 @@ _080A0A28:
 	bx r0
 	.align 2, 0
 _080A0A34: .4byte gUnknown_83E27AC
-_080A0A38: .4byte gUnknown_3005008
+_080A0A38: .4byte gSaveBlock1Ptr
 _080A0A3C: .4byte 0x0000309c
 _080A0A40: .4byte gUnknown_2024284
 _080A0A44: .4byte 0x0000083b

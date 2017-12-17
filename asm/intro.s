@@ -81,7 +81,7 @@ _080EC628: .4byte gUnknown_203AAD4
 sub_80EC62C: @ 80EC62C
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r0, _080EC64C @ =gUnknown_30030F0
+	ldr r0, _080EC64C @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r5, r0, r1
@@ -96,7 +96,7 @@ _080EC640:
 	beq _080EC65E
 	b _080EC732
 	.align 2, 0
-_080EC64C: .4byte gUnknown_30030F0
+_080EC64C: .4byte gMain
 _080EC650:
 	cmp r4, 0x8D
 	bne _080EC656
@@ -191,12 +191,12 @@ _080EC65E:
 	movs r0, 0
 	bl SetGpuReg
 	ldr r0, _080EC76C @ =SerialCb_CopyrightScreen
-	bl sub_8000718
+	bl SetSerialCallback
 	ldr r0, _080EC770 @ =gUnknown_203AAD4
 	bl GameCubeMultiBoot_Init
 _080EC732:
 	bl UpdatePaletteFade
-	ldr r0, _080EC774 @ =gUnknown_30030F0
+	ldr r0, _080EC774 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -217,7 +217,7 @@ _080EC764: .4byte 0x0000ffff
 _080EC768: .4byte sub_80EC5A4
 _080EC76C: .4byte SerialCb_CopyrightScreen
 _080EC770: .4byte gUnknown_203AAD4
-_080EC774: .4byte gUnknown_30030F0
+_080EC774: .4byte gMain
 _080EC778:
 	ldr r4, _080EC7A0 @ =gUnknown_203AAD4
 	adds r0, r4, 0
@@ -277,7 +277,7 @@ _080EC7F0: .4byte gMultiBootProgram_PokemonColosseum_Start
 _080EC7F4:
 	bl GameCubeMultiBoot_Quit
 	ldr r0, _080EC804 @ =SerialCB
-	bl sub_8000718
+	bl SetSerialCallback
 _080EC7FE:
 	movs r0, 0
 	b _080EC814
@@ -298,8 +298,8 @@ _080EC814:
 _080EC81C: .4byte sub_80EC5B8
 	thumb_func_end sub_80EC62C
 
-	thumb_func_start sub_80EC820
-sub_80EC820: @ 80EC820
+	thumb_func_start c2_copyright_1
+c2_copyright_1: @ 80EC820
 	push {lr}
 	bl sub_80EC62C
 	lsls r0, 24
@@ -318,7 +318,7 @@ sub_80EC820: @ 80EC820
 _080EC846:
 	bl Sav2_ClearSetDefault
 _080EC84A:
-	ldr r0, _080EC860 @ =gUnknown_300500C
+	ldr r0, _080EC860 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	lsls r0, 31
@@ -329,8 +329,8 @@ _080EC858:
 	bx r0
 	.align 2, 0
 _080EC85C: .4byte gUnknown_30053A0
-_080EC860: .4byte gUnknown_300500C
-	thumb_func_end sub_80EC820
+_080EC860: .4byte gSaveBlock2Ptr
+	thumb_func_end c2_copyright_1
 
 	thumb_func_start sub_80EC864
 sub_80EC864: @ 80EC864
@@ -344,7 +344,7 @@ sub_80EC864: @ 80EC864
 sub_80EC870: @ 80EC870
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r0, _080EC88C @ =gUnknown_30030F0
+	ldr r0, _080EC88C @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -357,12 +357,12 @@ sub_80EC870: @ 80EC870
 	beq _080EC8A0
 	b _080EC894
 	.align 2, 0
-_080EC88C: .4byte gUnknown_30030F0
+_080EC88C: .4byte gMain
 _080EC890:
 	cmp r4, 0x2
 	beq _080EC988
 _080EC894:
-	ldr r0, _080EC928 @ =gUnknown_30030F0
+	ldr r0, _080EC928 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -427,7 +427,7 @@ _080EC8A0:
 	bl sub_8001658
 	b _080EC9B8
 	.align 2, 0
-_080EC928: .4byte gUnknown_30030F0
+_080EC928: .4byte gMain
 _080EC92C: .4byte gHeap
 _080EC930: .4byte 0x040000d4
 _080EC934: .4byte 0x8100c000
@@ -482,7 +482,7 @@ _080EC988:
 _080EC9B0: .4byte sub_80EC9D4
 _080EC9B4: .4byte sub_80EC9EC
 _080EC9B8:
-	ldr r1, _080EC9D0 @ =gUnknown_30030F0
+	ldr r1, _080EC9D0 @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -495,7 +495,7 @@ _080EC9C6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC9D0: .4byte gUnknown_30030F0
+_080EC9D0: .4byte gMain
 	thumb_func_end sub_80EC870
 
 	thumb_func_start sub_80EC9D4
@@ -607,7 +607,7 @@ sub_80ECAB0: @ 80ECAB0
 	movs r1, 0
 	bl GetWordTaskArg
 	adds r4, r0, 0
-	ldr r0, _080ECAE8 @ =gUnknown_30030F0
+	ldr r0, _080ECAE8 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xD
 	ands r0, r1
@@ -627,7 +627,7 @@ _080ECAD8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ECAE8: .4byte gUnknown_30030F0
+_080ECAE8: .4byte gMain
 _080ECAEC: .4byte sub_80EDBE8
 	thumb_func_end sub_80ECAB0
 
@@ -2528,7 +2528,7 @@ _080EDA7C:
 	.align 2, 0
 _080EDA94: .4byte sub_80EDBE8
 _080EDA98:
-	ldr r0, _080EDACC @ =gUnknown_30030F0
+	ldr r0, _080EDACC @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x80
 	lsls r0, 1
@@ -2556,7 +2556,7 @@ _080EDAC4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EDACC: .4byte gUnknown_30030F0
+_080EDACC: .4byte gMain
 _080EDAD0: .4byte 0xffff0064
 _080EDAD4: .4byte 0x00007fff
 	thumb_func_end sub_80ED898

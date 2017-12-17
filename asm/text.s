@@ -408,7 +408,7 @@ _08005654: .4byte gUnknown_3003E50
 _08005658:
 	adds r0, r2, 0
 	bl TextPrinterDrawDownArrow
-	ldr r0, _0800567C @ =gUnknown_30030F0
+	ldr r0, _0800567C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -423,7 +423,7 @@ _08005672:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800567C: .4byte gUnknown_30030F0
+_0800567C: .4byte gMain
 	thumb_func_end TextPrinterWaitWithDownArrow
 
 	thumb_func_start TextPrinterWait
@@ -445,7 +445,7 @@ TextPrinterWait: @ 8005680
 	.align 2, 0
 _080056A0: .4byte gUnknown_3003E50
 _080056A4:
-	ldr r0, _080056C0 @ =gUnknown_30030F0
+	ldr r0, _080056C0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -460,7 +460,7 @@ _080056B8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080056C0: .4byte gUnknown_30030F0
+_080056C0: .4byte gMain
 	thumb_func_end TextPrinterWait
 
 	thumb_func_start DrawDownArrow
@@ -596,7 +596,7 @@ _080057B0:
 	.4byte _08005D44
 	.4byte _08005D56
 _080057CC:
-	ldr r2, _08005820 @ =gUnknown_30030F0
+	ldr r2, _08005820 @ =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x3
 	ands r0, r1
@@ -641,7 +641,7 @@ _08005810:
 	strb r0, [r6, 0x1E]
 	b _08005B30
 	.align 2, 0
-_08005820: .4byte gUnknown_30030F0
+_08005820: .4byte gMain
 _08005824: .4byte gUnknown_3003E50
 _08005828:
 	ldr r2, _08005838 @ =gUnknown_3003E50
@@ -1252,7 +1252,7 @@ _08005CD0:
 	cmp r2, 0
 	beq _08005D40
 	ldr r4, _08005D04 @ =gUnknown_81EA650
-	ldr r5, _08005D08 @ =gUnknown_300500C
+	ldr r5, _08005D08 @ =gSaveBlock2Ptr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x14]
 	lsls r1, r0, 29
@@ -1274,7 +1274,7 @@ _08005CD0:
 	b _08005D36
 	.align 2, 0
 _08005D04: .4byte gUnknown_81EA650
-_08005D08: .4byte gUnknown_300500C
+_08005D08: .4byte gSaveBlock2Ptr
 _08005D0C:
 	ldrb r0, [r6, 0x4]
 	lsrs r1, 29

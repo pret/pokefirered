@@ -230,7 +230,7 @@ _081425A4:
 	movs r2, 0x14
 	movs r3, 0x1
 	bl DrawDownArrow
-	ldr r0, _081425D4 @ =gUnknown_30030F0
+	ldr r0, _081425D4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -242,7 +242,7 @@ _081425C8:
 	b _08142602
 	.align 2, 0
 _081425D0: .4byte gUnknown_203F3B0
-_081425D4: .4byte gUnknown_30030F0
+_081425D4: .4byte gMain
 _081425D8:
 	movs r0, 0x1
 	str r0, [sp]
@@ -331,7 +331,7 @@ sub_8142660: @ 8142660
 	b _08142698
 _08142670:
 	bl sub_8142610
-	ldr r0, _08142688 @ =gUnknown_30030F0
+	ldr r0, _08142688 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -342,7 +342,7 @@ _08142670:
 	strb r0, [r4]
 	b _08142698
 	.align 2, 0
-_08142688: .4byte gUnknown_30030F0
+_08142688: .4byte gMain
 _0814268C:
 	bl sub_8142638
 	movs r0, 0
@@ -996,7 +996,7 @@ _08142B80:
 	.align 2, 0
 _08142B88: .4byte gUnknown_841ED50
 _08142B8C:
-	ldr r0, _08142BA0 @ =gUnknown_30030F0
+	ldr r0, _08142BA0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -1008,7 +1008,7 @@ _08142B98:
 	strb r0, [r4]
 	b _08142BB0
 	.align 2, 0
-_08142BA0: .4byte gUnknown_30030F0
+_08142BA0: .4byte gMain
 _08142BA4:
 	movs r0, 0
 	strb r0, [r4]
@@ -1926,7 +1926,7 @@ _081432DE:
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0
 	bne _08143308
-	ldr r2, _08143304 @ =gUnknown_30030F0
+	ldr r2, _08143304 @ =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1944,9 +1944,9 @@ _081432F4:
 _08143300:
 	b _08143326
 	.align 2, 0
-_08143304: .4byte gUnknown_30030F0
+_08143304: .4byte gMain
 _08143308:
-	ldr r0, _0814331C @ =gUnknown_30030F0
+	ldr r0, _0814331C @ =gMain
 	ldrh r0, [r0, 0x2E]
 	bl sub_8146884
 	cmp r0, 0
@@ -1955,7 +1955,7 @@ _08143308:
 	beq _08143326
 	b _081435C6
 	.align 2, 0
-_0814331C: .4byte gUnknown_30030F0
+_0814331C: .4byte gMain
 _08143320:
 	bl sub_81467EC
 	b _08143402

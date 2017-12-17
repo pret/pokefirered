@@ -1231,7 +1231,7 @@ _0800FBA6:
 	ands r0, r1
 	cmp r0, 0
 	beq _0800FBD8
-	ldr r0, _0800FBCC @ =gUnknown_81E9F10
+	ldr r0, _0800FBCC @ =gGameVersion
 	ldrb r0, [r0]
 	cmp r0, 0x4
 	bne _0800FBD0
@@ -1240,7 +1240,7 @@ _0800FBA6:
 	b _0800FC26
 	.align 2, 0
 _0800FBC8: .4byte 0x00080902
-_0800FBCC: .4byte gUnknown_81E9F10
+_0800FBCC: .4byte gGameVersion
 _0800FBD0:
 	movs r0, 0x4
 	bl sub_800F2AC

@@ -1,40 +1,28 @@
-gUnknown_30030E0: @ 30030E0
+gKeyRepeatStartDelay: @ 30030E0
 	.space 0x4
 
-gUnknown_30030E4: @ 30030E4
+gLinkTransferringData: @ 30030E4
 	.space 0xC
 
-gUnknown_30030F0: @ 30030F0
-	.space 0x2C
+gMain: @ 30030F0
+	.space 0x43C
 
-gUnknown_300311C: @ 300311C
-	.space 0xC
-
-gUnknown_3003128: @ 3003128
-	.space 0x400
-
-gUnknown_3003528: @ 3003528
+gKeyRepeatContinueDelay: @ 300352C
 	.space 0x4
 
-gUnknown_300352C: @ 300352C
-	.space 0x4
-
-gUnknown_3003530: @ 3003530
+gSoftResetDisabled: @ 3003530
 	.space 0x10
 
 gIntrTable: @ 3003540
-	.space 0x4
-
-gUnknown_3003544: @ 3003544
-	.space 0x34
+	.space 0x38
 
 gUnknown_3003578: @ 3003578
 	.space 0x4
 
-gUnknown_300357C: @ 300357C
+gLinkVSyncDisabled: @ 300357C
 	.space 0x4
 
-gUnknown_3003580: @ 3003580
+IntrMain_Buffer: @ 3003580
 	.space 0x800
 
 gUnknown_3003D80: @ 3003D80
@@ -43,7 +31,7 @@ gUnknown_3003D80: @ 3003D80
 gUnknown_3003D84: @ 3003D84
 	.space 0x4
 
-gUnknown_3003D88: @ 3003D88
+gPcmDmaCounter: @ 3003D88
 	.space 0x4
 
 gUnknown_3003D8C: @ 3003D8C
@@ -214,10 +202,10 @@ gUnknown_3005000: @ 3005000
 gUnknown_3005004: @ 3005004
 	.space 0x4
 
-gUnknown_3005008: @ 3005008
+gSaveBlock1Ptr: @ 3005008
 	.space 0x4
 
-gUnknown_300500C: @ 300500C
+gSaveBlock2Ptr: @ 300500C
 	.space 0x4
 
 gUnknown_3005010: @ 3005010

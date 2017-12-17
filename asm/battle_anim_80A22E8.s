@@ -53813,7 +53813,7 @@ _080BC3C0:
 	ands r1, r0
 	cmp r1, 0
 	beq _080BC3E0
-	ldr r0, _080BC3D8 @ =gUnknown_81E9F10
+	ldr r0, _080BC3D8 @ =gGameVersion
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _080BC3E0
@@ -53821,7 +53821,7 @@ _080BC3C0:
 	ldr r0, _080BC3DC @ =task00_battle_intro_80BC6C8
 	b _080BC3E8
 	.align 2, 0
-_080BC3D8: .4byte gUnknown_81E9F10
+_080BC3D8: .4byte gGameVersion
 _080BC3DC: .4byte task00_battle_intro_80BC6C8
 _080BC3E0:
 	ldr r1, _080BC414 @ =gUnknown_83E7CD4

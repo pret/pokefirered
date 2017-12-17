@@ -218,7 +218,7 @@ _0800FF7E:
 	bl sub_80112E0
 	bl SetWildMonHeldItem
 _0800FF98:
-	ldr r0, _0800FFDC @ =gUnknown_30030F0
+	ldr r0, _0800FFDC @ =gMain
 	ldr r1, _0800FFE0 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -248,7 +248,7 @@ _0800FFCC: .4byte sub_8010508
 _0800FFD0: .4byte gUnknown_2022B4C
 _0800FFD4: .4byte gUnknown_202402C
 _0800FFD8: .4byte gUnknown_20386AE
-_0800FFDC: .4byte gUnknown_30030F0
+_0800FFDC: .4byte gMain
 _0800FFE0: .4byte 0x00000439
 _0800FFE4: .4byte gUnknown_2024284
 _0800FFE8: .4byte gUnknown_2023E82
@@ -373,7 +373,7 @@ sub_80100B8: @ 80100B8
 	cmp r0, 0x1
 	bne _08010134
 	movs r2, 0
-	ldr r7, _08010124 @ =gUnknown_3005008
+	ldr r7, _08010124 @ =gSaveBlock1Ptr
 	movs r1, 0xC8
 	lsls r1, 1
 	adds r5, r1
@@ -394,7 +394,7 @@ _080100DA:
 	strb r0, [r1]
 	movs r2, 0
 	adds r3, r5, 0
-	ldr r6, _08010124 @ =gUnknown_3005008
+	ldr r6, _08010124 @ =gSaveBlock1Ptr
 	ldr r5, _0801012C @ =0x00003108
 _080100FA:
 	adds r0, r3, r2
@@ -418,7 +418,7 @@ _080100FA:
 	b _08010174
 	.align 2, 0
 _08010120: .4byte gUnknown_2023FE8
-_08010124: .4byte gUnknown_3005008
+_08010124: .4byte gSaveBlock1Ptr
 _08010128: .4byte 0x000030ec
 _0801012C: .4byte 0x00003108
 _08010130: .4byte 0x0000311a
@@ -482,7 +482,7 @@ _08010194:
 	bne _08010250
 	movs r5, 0
 	ldr r3, _08010238 @ =gUnknown_2023F54
-	ldr r0, _0801023C @ =gUnknown_3005008
+	ldr r0, _0801023C @ =gSaveBlock1Ptr
 	mov r8, r0
 	adds r6, r3, 0
 	mov r4, r8
@@ -517,7 +517,7 @@ _080101AE:
 	movs r5, 0
 	adds r7, r3, 0
 	adds r7, 0x8
-	ldr r4, _0801023C @ =gUnknown_3005008
+	ldr r4, _0801023C @ =gSaveBlock1Ptr
 	ldr r2, _08010244 @ =0x00003108
 	adds r6, r3, 0
 	adds r6, 0x40
@@ -561,7 +561,7 @@ _080101EC:
 	.align 2, 0
 _08010234: .4byte gUnknown_2022B4C
 _08010238: .4byte gUnknown_2023F54
-_0801023C: .4byte gUnknown_3005008
+_0801023C: .4byte gSaveBlock1Ptr
 _08010240: .4byte 0x000030ec
 _08010244: .4byte 0x00003108
 _08010248: .4byte 0x0000311a
@@ -1296,7 +1296,7 @@ _0801084C:
 	cmp r0, 0
 	beq _080108B8
 	ldr r2, _08010884 @ =gUnknown_3004F80
-	ldr r1, _08010888 @ =gUnknown_30030F0
+	ldr r1, _08010888 @ =gMain
 	ldr r0, [r1]
 	str r0, [r2]
 	ldr r0, _0801088C @ =sub_80123E4
@@ -1316,7 +1316,7 @@ _0801084C:
 	.align 2, 0
 _08010880: .4byte gUnknown_2023E83
 _08010884: .4byte gUnknown_3004F80
-_08010888: .4byte gUnknown_30030F0
+_08010888: .4byte gMain
 _0801088C: .4byte sub_80123E4
 _08010890: .4byte sub_8011100
 _08010894: .4byte gUnknown_2022B4C
@@ -1600,7 +1600,7 @@ _08010ABA:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r1, _08010AF0 @ =gUnknown_30030F0
+	ldr r1, _08010AF0 @ =gMain
 	ldr r0, [r1, 0x8]
 	mov r2, r9
 	str r0, [r2]
@@ -1616,7 +1616,7 @@ _08010ABA:
 _08010AE4: .4byte gUnknown_2022118
 _08010AE8: .4byte gUnknown_2022B58
 _08010AEC: .4byte gUnknown_2023E82
-_08010AF0: .4byte gUnknown_30030F0
+_08010AF0: .4byte gMain
 _08010AF4: .4byte gUnknown_2022B4C
 _08010AF8: .4byte sub_80109C8
 _08010AFC:
@@ -1653,7 +1653,7 @@ _08010B2A:
 	mov r2, r8
 	ldrh r0, [r2]
 	str r0, [r1]
-	ldr r1, _08010B5C @ =gUnknown_30030F0
+	ldr r1, _08010B5C @ =gMain
 	mov r2, r9
 	ldr r0, [r2]
 	str r0, [r1, 0x8]
@@ -1663,7 +1663,7 @@ _08010B2A:
 	.align 2, 0
 _08010B54: .4byte gUnknown_3003F3C
 _08010B58: .4byte gUnknown_2022B4C
-_08010B5C: .4byte gUnknown_30030F0
+_08010B5C: .4byte gMain
 _08010B60: .4byte sub_800FE24
 _08010B64:
 	ldr r0, _08010B90 @ =gUnknown_3003F64
@@ -1674,7 +1674,7 @@ _08010B64:
 	mov r2, r8
 	ldrh r0, [r2]
 	str r0, [r1]
-	ldr r1, _08010B98 @ =gUnknown_30030F0
+	ldr r1, _08010B98 @ =gMain
 	mov r2, r9
 	ldr r0, [r2]
 	str r0, [r1, 0x8]
@@ -1690,7 +1690,7 @@ _08010B82:
 	.align 2, 0
 _08010B90: .4byte gUnknown_3003F64
 _08010B94: .4byte gUnknown_2022B4C
-_08010B98: .4byte gUnknown_30030F0
+_08010B98: .4byte gMain
 _08010B9C: .4byte sub_800FE24
 	thumb_func_end sub_80109C8
 
@@ -2300,7 +2300,7 @@ _08011084:
 	cmp r0, 0
 	beq _080110F0
 	ldr r2, _080110BC @ =gUnknown_3004F80
-	ldr r1, _080110C0 @ =gUnknown_30030F0
+	ldr r1, _080110C0 @ =gMain
 	ldr r0, [r1]
 	str r0, [r2]
 	ldr r0, _080110C4 @ =sub_80123E4
@@ -2320,7 +2320,7 @@ _08011084:
 	.align 2, 0
 _080110B8: .4byte gUnknown_2023E83
 _080110BC: .4byte gUnknown_3004F80
-_080110C0: .4byte gUnknown_30030F0
+_080110C0: .4byte gMain
 _080110C4: .4byte sub_80123E4
 _080110C8: .4byte sub_8011100
 _080110CC: .4byte gUnknown_2022B4C
@@ -2362,7 +2362,7 @@ sub_8011100: @ 8011100
 	bl sub_8002DE8
 	bl UpdatePaletteFade
 	bl RunTasks
-	ldr r0, _08011160 @ =gUnknown_30030F0
+	ldr r0, _08011160 @ =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x2
 	ands r0, r1
@@ -2396,7 +2396,7 @@ _08011158:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011160: .4byte gUnknown_30030F0
+_08011160: .4byte gMain
 _08011164: .4byte gUnknown_2022B4C
 _08011168: .4byte gUnknown_20370D0
 _0801116C: .4byte gUnknown_2023E8A
@@ -2406,7 +2406,7 @@ _08011170: .4byte CB2_QuitRecordedBattle
 	thumb_func_start FreeRestoreBattleData
 FreeRestoreBattleData: @ 8011174
 	push {lr}
-	ldr r1, _080111AC @ =gUnknown_30030F0
+	ldr r1, _080111AC @ =gMain
 	ldr r0, _080111B0 @ =gUnknown_3004F80
 	ldr r0, [r0]
 	str r0, [r1]
@@ -2429,7 +2429,7 @@ FreeRestoreBattleData: @ 8011174
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080111AC: .4byte gUnknown_30030F0
+_080111AC: .4byte gMain
 _080111B0: .4byte gUnknown_3004F80
 _080111B4: .4byte gUnknown_2039600
 _080111B8: .4byte 0x00000439
@@ -2447,7 +2447,7 @@ CB2_QuitRecordedBattle: @ 80111BC
 	bne _080111DE
 	bl FreeRestoreBattleData
 	bl FreeAllWindowBuffers
-	ldr r0, _080111E8 @ =gUnknown_30030F0
+	ldr r0, _080111E8 @ =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _080111DE:
@@ -2455,7 +2455,7 @@ _080111DE:
 	bx r0
 	.align 2, 0
 _080111E4: .4byte gUnknown_2037AB8
-_080111E8: .4byte gUnknown_30030F0
+_080111E8: .4byte gMain
 	thumb_func_end CB2_QuitRecordedBattle
 
 	thumb_func_start sub_80111EC
@@ -3732,7 +3732,7 @@ _08011C10:
 	ands r0, r1
 	cmp r0, 0
 	bne _08011C34
-	ldr r0, _08011C40 @ =gUnknown_30030F0
+	ldr r0, _08011C40 @ =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 	bl sub_812C224
@@ -3746,7 +3746,7 @@ _08011C34:
 	bx r0
 	.align 2, 0
 _08011C3C: .4byte gUnknown_2037AB8
-_08011C40: .4byte gUnknown_30030F0
+_08011C40: .4byte gMain
 	thumb_func_end sub_8011BB0
 
 	thumb_func_start sub_8011C44
@@ -4945,7 +4945,7 @@ _080124F2:
 	ands r0, r1
 	cmp r0, 0
 	bne _08012522
-	ldr r1, _0801271C @ =gUnknown_300500C
+	ldr r1, _0801271C @ =gSaveBlock2Ptr
 	ldr r0, [r1]
 	ldrb r1, [r0, 0x15]
 	movs r0, 0x4
@@ -4956,7 +4956,7 @@ _080124F2:
 	ldr r2, _08012710 @ =gUnknown_2023DD0
 	str r0, [r2]
 _08012522:
-	ldr r1, _0801271C @ =gUnknown_300500C
+	ldr r1, _0801271C @ =gSaveBlock2Ptr
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x15]
 	lsls r0, 30
@@ -5191,7 +5191,7 @@ _0801270C: .4byte gUnknown_2023F20
 _08012710: .4byte gUnknown_2023DD0
 _08012714: .4byte gUnknown_2022B4C
 _08012718: .4byte 0x00010002
-_0801271C: .4byte gUnknown_300500C
+_0801271C: .4byte gSaveBlock2Ptr
 _08012720: .4byte gUnknown_2023FC4
 _08012724: .4byte gUnknown_2023D72
 _08012728: .4byte gUnknown_2023E8A
@@ -11609,7 +11609,7 @@ _08015B2C: .4byte ReturnFromBattleToOverworld
 	thumb_func_start sub_8015B30
 sub_8015B30: @ 8015B30
 	push {lr}
-	ldr r0, _08015B48 @ =gUnknown_30030F0
+	ldr r0, _08015B48 @ =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, _08015B4C @ =sub_8011100
 	cmp r1, r0
@@ -11621,7 +11621,7 @@ _08015B42:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08015B48: .4byte gUnknown_30030F0
+_08015B48: .4byte gMain
 _08015B4C: .4byte sub_8011100
 _08015B50: .4byte gUnknown_3004F84
 _08015B54: .4byte sub_8015AA0
@@ -11656,7 +11656,7 @@ _08015B86:
 	ldr r5, _08015BEC @ =gUnknown_2023E8A
 	ldrb r0, [r5]
 	strh r0, [r1]
-	ldr r3, _08015BF0 @ =gUnknown_30030F0
+	ldr r3, _08015BF0 @ =gMain
 	ldr r0, _08015BF4 @ =0x00000439
 	adds r2, r3, r0
 	ldrb r1, [r2]
@@ -11686,7 +11686,7 @@ _08015BC2:
 _08015BC6:
 	movs r0, 0x53
 	bl m4aSongNumStop
-	ldr r0, _08015BF0 @ =gUnknown_30030F0
+	ldr r0, _08015BF0 @ =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _08015BD4:
@@ -11699,7 +11699,7 @@ _08015BE0: .4byte gUnknown_2024284
 _08015BE4: .4byte gUnknown_3003F64
 _08015BE8: .4byte gUnknown_20370D0
 _08015BEC: .4byte gUnknown_2023E8A
-_08015BF0: .4byte gUnknown_30030F0
+_08015BF0: .4byte gMain
 _08015BF4: .4byte 0x00000439
 _08015BF8: .4byte gUnknown_3004F80
 _08015BFC: .4byte gUnknown_202402C

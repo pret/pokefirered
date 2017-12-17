@@ -97,7 +97,7 @@ sub_811C5D4: @ 811C5D4
 	mov r8, r0
 	lsls r1, 16
 	lsrs r6, r1, 16
-	ldr r0, _0811C61C @ =gUnknown_30030F0
+	ldr r0, _0811C61C @ =gMain
 	ldr r1, _0811C620 @ =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -119,7 +119,7 @@ _0811C5FC:
 	movs r0, 0
 	b _0811C6D2
 	.align 2, 0
-_0811C61C: .4byte gUnknown_30030F0
+_0811C61C: .4byte gMain
 _0811C620: .4byte 0x00000439
 _0811C624: .4byte 0x000028dc
 _0811C628:
@@ -392,7 +392,7 @@ sub_811C834: @ 811C834
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0811C870
-	ldr r0, _0811C868 @ =gUnknown_30030F0
+	ldr r0, _0811C868 @ =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x3
 	ands r0, r1
@@ -404,7 +404,7 @@ sub_811C834: @ 811C834
 	bl sub_811C718
 	b _0811CA16
 	.align 2, 0
-_0811C868: .4byte gUnknown_30030F0
+_0811C868: .4byte gMain
 _0811C86C: .4byte sub_811CF88
 _0811C870:
 	adds r0, r4, 0
@@ -549,7 +549,7 @@ _0811C996:
 	strb r0, [r1]
 	b _0811C9F4
 _0811C9AA:
-	ldr r0, _0811C9DC @ =gUnknown_30030F0
+	ldr r0, _0811C9DC @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -573,7 +573,7 @@ _0811C9AA:
 	bl BeginNormalPaletteFade
 	b _0811C9F4
 	.align 2, 0
-_0811C9DC: .4byte gUnknown_30030F0
+_0811C9DC: .4byte gMain
 _0811C9E0:
 	ldrh r0, [r5]
 	adds r0, 0x2
@@ -833,7 +833,7 @@ sub_811CBE4: @ 811CBE4
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0811CC1C
-	ldr r0, _0811CC14 @ =gUnknown_30030F0
+	ldr r0, _0811CC14 @ =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x2
 	ands r0, r1
@@ -844,7 +844,7 @@ sub_811CBE4: @ 811CBE4
 	bl sub_811C718
 	b _0811CD5A
 	.align 2, 0
-_0811CC14: .4byte gUnknown_30030F0
+_0811CC14: .4byte gMain
 _0811CC18: .4byte sub_811CF88
 _0811CC1C:
 	adds r0, r5, 0
@@ -955,7 +955,7 @@ _0811CCF8:
 	strb r0, [r1]
 	b _0811CD2A
 _0811CD0C:
-	ldr r0, _0811CD34 @ =gUnknown_30030F0
+	ldr r0, _0811CD34 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -975,7 +975,7 @@ _0811CD2A:
 	strh r0, [r4]
 	b _0811CD5A
 	.align 2, 0
-_0811CD34: .4byte gUnknown_30030F0
+_0811CD34: .4byte gMain
 _0811CD38:
 	ldr r0, _0811CD64 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -1009,7 +1009,7 @@ sub_811CD68: @ 811CD68
 	movs r1, 0
 	bl GetWordTaskArg
 	adds r5, r0, 0
-	ldr r0, _0811CD90 @ =gUnknown_30030F0
+	ldr r0, _0811CD90 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -1020,7 +1020,7 @@ sub_811CD68: @ 811CD68
 	bl sub_811C718
 	b _0811CE3E
 	.align 2, 0
-_0811CD90: .4byte gUnknown_30030F0
+_0811CD90: .4byte gMain
 _0811CD94: .4byte sub_811CF88
 _0811CD98:
 	adds r4, r5, 0
@@ -1126,7 +1126,7 @@ sub_811CE4C: @ 811CE4C
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0811CE88
-	ldr r0, _0811CE80 @ =gUnknown_30030F0
+	ldr r0, _0811CE80 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -1138,7 +1138,7 @@ sub_811CE4C: @ 811CE4C
 	bl sub_811C718
 	b _0811CF7E
 	.align 2, 0
-_0811CE80: .4byte gUnknown_30030F0
+_0811CE80: .4byte gMain
 _0811CE84: .4byte sub_811CF88
 _0811CE88:
 	adds r0, r5, 0

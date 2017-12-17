@@ -107,7 +107,7 @@ sub_80E763C: @ 80E763C
 	movs r2, 0x7
 	movs r3, 0x1
 	bl dp11b_obj_instanciate
-	ldr r0, _080E76A4 @ =gUnknown_30030F0
+	ldr r0, _080E76A4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
 	adds r0, r2, 0
@@ -130,7 +130,7 @@ sub_80E763C: @ 80E763C
 	.align 2, 0
 _080E769C: .4byte gUnknown_2022BC4
 _080E76A0: .4byte gUnknown_2023BC4
-_080E76A4: .4byte gUnknown_30030F0
+_080E76A4: .4byte gMain
 _080E76A8: .4byte gUnknown_2023FF8
 _080E76AC:
 	cmp r0, 0x2
@@ -470,7 +470,7 @@ sub_80E7930: @ 80E7930
 	ands r0, r1
 	cmp r0, 0
 	bne _080E795A
-	ldr r2, _080E7964 @ =gUnknown_30030F0
+	ldr r2, _080E7964 @ =gMain
 	ldr r0, _080E7968 @ =0x00000439
 	adds r3, r2, r0
 	ldrb r1, [r3]
@@ -488,7 +488,7 @@ _080E795A:
 	bx r0
 	.align 2, 0
 _080E7960: .4byte gUnknown_2037AB8
-_080E7964: .4byte gUnknown_30030F0
+_080E7964: .4byte gMain
 _080E7968: .4byte 0x00000439
 _080E796C: .4byte gUnknown_3004F80
 	thumb_func_end sub_80E7930
@@ -579,7 +579,7 @@ _080E7A10: .4byte gUnknown_3004FFC
 	thumb_func_start sub_80E7A14
 sub_80E7A14: @ 80E7A14
 	push {lr}
-	ldr r0, _080E7A44 @ =gUnknown_30030F0
+	ldr r0, _080E7A44 @ =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, _080E7A48 @ =sub_8011100
 	cmp r1, r0
@@ -601,7 +601,7 @@ sub_80E7A14: @ 80E7A14
 	bl EmitChosenMonReturnValue
 	b _080E7A66
 	.align 2, 0
-_080E7A44: .4byte gUnknown_30030F0
+_080E7A44: .4byte gMain
 _080E7A48: .4byte sub_8011100
 _080E7A4C: .4byte gUnknown_2037AB8
 _080E7A50: .4byte gUnknown_203B0C0
@@ -661,7 +661,7 @@ _080E7AC0:
 	thumb_func_start sub_80E7AC4
 sub_80E7AC4: @ 80E7AC4
 	push {lr}
-	ldr r0, _080E7B14 @ =gUnknown_30030F0
+	ldr r0, _080E7B14 @ =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, _080E7B18 @ =sub_8011100
 	cmp r1, r0
@@ -698,7 +698,7 @@ sub_80E7AC4: @ 80E7AC4
 	str r1, [r0]
 	b _080E7B42
 	.align 2, 0
-_080E7B14: .4byte gUnknown_30030F0
+_080E7B14: .4byte gMain
 _080E7B18: .4byte sub_8011100
 _080E7B1C: .4byte gUnknown_2037AB8
 _080E7B20: .4byte gUnknown_203AD30
@@ -4961,7 +4961,7 @@ sub_80E9E6C: @ 80E9E6C
 	ands r0, r1
 	cmp r0, 0
 	beq _080E9EE0
-	ldr r4, _080E9ECC @ =gUnknown_300500C
+	ldr r4, _080E9ECC @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
 	ldr r6, _080E9ED0 @ =gUnknown_2023BC4
@@ -4998,7 +4998,7 @@ sub_80E9E6C: @ 80E9E6C
 	b _080E9F1C
 	.align 2, 0
 _080E9EC8: .4byte gUnknown_2022B4C
-_080E9ECC: .4byte gUnknown_300500C
+_080E9ECC: .4byte gSaveBlock2Ptr
 _080E9ED0: .4byte gUnknown_2023BC4
 _080E9ED4: .4byte gUnknown_20244DC
 _080E9ED8: .4byte gUnknown_8239F8C
@@ -5107,7 +5107,7 @@ sub_80E9FB0: @ 80E9FB0
 	ands r0, r1
 	cmp r0, 0
 	beq _080EA024
-	ldr r4, _080EA010 @ =gUnknown_300500C
+	ldr r4, _080EA010 @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
 	ldr r6, _080EA014 @ =gUnknown_2023BC4
@@ -5144,7 +5144,7 @@ sub_80E9FB0: @ 80E9FB0
 	b _080EA060
 	.align 2, 0
 _080EA00C: .4byte gUnknown_2022B4C
-_080EA010: .4byte gUnknown_300500C
+_080EA010: .4byte gSaveBlock2Ptr
 _080EA014: .4byte gUnknown_2023BC4
 _080EA018: .4byte gUnknown_20244DC
 _080EA01C: .4byte gUnknown_8239F8C
@@ -6892,7 +6892,7 @@ _080EAD64:
 	adds r4, r0, 0
 	lsls r4, 24
 	ldr r1, _080EAEC0 @ =gUnknown_8239FD4
-	ldr r0, _080EAEC4 @ =gUnknown_300500C
+	ldr r0, _080EAEC4 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	lsls r0, 3
@@ -6974,7 +6974,7 @@ _080EAEB4: .4byte sub_8075590
 _080EAEB8: .4byte sub_80335F8
 _080EAEBC: .4byte 0x0000d6f8
 _080EAEC0: .4byte gUnknown_8239FD4
-_080EAEC4: .4byte gUnknown_300500C
+_080EAEC4: .4byte gSaveBlock2Ptr
 _080EAEC8: .4byte sub_80EB0A8
 _080EAECC: .4byte gUnknown_3005090
 _080EAED0: .4byte gUnknown_2024018

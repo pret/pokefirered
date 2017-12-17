@@ -1370,7 +1370,7 @@ _080DA1C6:
 UpdateSaveAddresses: @ 80DA1D4
 	push {r4,r5,lr}
 	ldr r3, _080DA234 @ =gUnknown_30053B0
-	ldr r0, _080DA238 @ =gUnknown_300500C
+	ldr r0, _080DA238 @ =gSaveBlock2Ptr
 	ldr r2, _080DA23C @ =gUnknown_83FEC94
 	ldrh r1, [r2]
 	ldr r0, [r0]
@@ -1378,7 +1378,7 @@ UpdateSaveAddresses: @ 80DA1D4
 	str r0, [r3]
 	ldrh r0, [r2, 0x2]
 	strh r0, [r3, 0x4]
-	ldr r5, _080DA240 @ =gUnknown_3005008
+	ldr r5, _080DA240 @ =gSaveBlock1Ptr
 	adds r3, 0x8
 	adds r2, 0x4
 	movs r4, 0x3
@@ -1419,9 +1419,9 @@ _080DA216:
 	bx r0
 	.align 2, 0
 _080DA234: .4byte gUnknown_30053B0
-_080DA238: .4byte gUnknown_300500C
+_080DA238: .4byte gSaveBlock2Ptr
 _080DA23C: .4byte gUnknown_83FEC94
-_080DA240: .4byte gUnknown_3005008
+_080DA240: .4byte gSaveBlock1Ptr
 _080DA244: .4byte gUnknown_3005010
 	thumb_func_end UpdateSaveAddresses
 
@@ -1430,7 +1430,7 @@ sub_80DA248: @ 80DA248
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _080DA268 @ =gUnknown_30030F0
+	ldr r1, _080DA268 @ =gMain
 	ldr r6, [r1, 0x20]
 	movs r0, 0
 	str r0, [r1, 0x20]
@@ -1443,7 +1443,7 @@ sub_80DA248: @ 80DA248
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080DA268: .4byte gUnknown_30030F0
+_080DA268: .4byte gMain
 _080DA26C: .4byte _080DA270
 	.align 2, 0
 _080DA270:
@@ -1538,7 +1538,7 @@ _080DA328:
 	ldr r1, _080DA35C @ =gUnknown_30053B0
 	bl save_write_to_flash
 _080DA346:
-	ldr r0, _080DA360 @ =gUnknown_30030F0
+	ldr r0, _080DA360 @ =gMain
 	str r6, [r0, 0x20]
 	movs r0, 0
 	pop {r4-r6}
@@ -1548,7 +1548,7 @@ _080DA346:
 _080DA354: .4byte EraseFlashSector
 _080DA358: .4byte 0x0000ffff
 _080DA35C: .4byte gUnknown_30053B0
-_080DA360: .4byte gUnknown_30030F0
+_080DA360: .4byte gMain
 	thumb_func_end sub_80DA248
 
 	thumb_func_start TrySavingData
@@ -1969,7 +1969,7 @@ _080DA664:
 	.4byte _080DA7B4
 	.4byte _080DA7D4
 _080DA694:
-	ldr r1, _080DA6A8 @ =gUnknown_3003530
+	ldr r1, _080DA6A8 @ =gSoftResetDisabled
 	movs r0, 0x1
 	strb r0, [r1]
 	lsls r0, r4, 2
@@ -1980,7 +1980,7 @@ _080DA694:
 	strh r1, [r0, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA6A8: .4byte gUnknown_3003530
+_080DA6A8: .4byte gSoftResetDisabled
 _080DA6AC:
 	bl sub_800AB9C
 	ldr r0, _080DA6C0 @ =gUnknown_3005090
@@ -2140,7 +2140,7 @@ _080DA7D4:
 	asrs r0, 16
 	cmp r0, 0x5
 	ble _080DA7F6
-	ldr r1, _080DA7FC @ =gUnknown_3003530
+	ldr r1, _080DA7FC @ =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
@@ -2150,7 +2150,7 @@ _080DA7F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DA7FC: .4byte gUnknown_3003530
+_080DA7FC: .4byte gSoftResetDisabled
 	thumb_func_end sub_80DA634
 
 	.align 2, 0 @ Don't pad with nop.

@@ -807,7 +807,7 @@ _08144E24:
 	bl sub_8069EA4
 	b _08144E60
 _08144E30:
-	ldr r0, _08144E48 @ =gUnknown_300500C
+	ldr r0, _08144E48 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	movs r1, 0x94
 	lsls r1, 3
@@ -818,7 +818,7 @@ _08144E30:
 	bl sub_80E7490
 	b _08144E60
 	.align 2, 0
-_08144E48: .4byte gUnknown_300500C
+_08144E48: .4byte gSaveBlock2Ptr
 _08144E4C:
 	ldr r0, _08144E68 @ =gUnknown_201C000
 	ldr r1, [r4, 0x18]
@@ -896,9 +896,9 @@ sub_8144EBC: @ 8144EBC
 	adds r4, r0, 0
 	ldr r3, _08144EE4 @ =gUnknown_201C000
 	adds r0, r4, 0x4
-	ldr r1, _08144EE8 @ =gUnknown_300500C
+	ldr r1, _08144EE8 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
-	ldr r2, _08144EEC @ =gUnknown_3005008
+	ldr r2, _08144EEC @ =gSaveBlock1Ptr
 	ldr r2, [r2]
 	bl _call_via_r3
 	cmp r0, 0x1
@@ -914,8 +914,8 @@ _08144EDC:
 	bx r1
 	.align 2, 0
 _08144EE4: .4byte gUnknown_201C000
-_08144EE8: .4byte gUnknown_300500C
-_08144EEC: .4byte gUnknown_3005008
+_08144EE8: .4byte gSaveBlock2Ptr
+_08144EEC: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8144EBC
 
 	thumb_func_start mevent_srv_ish_exec

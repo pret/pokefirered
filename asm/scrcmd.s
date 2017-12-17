@@ -2326,7 +2326,7 @@ ScrCmd_getplayerxy: @ 806B010
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
-	ldr r2, _0806B048 @ =gUnknown_3005008
+	ldr r2, _0806B048 @ =gSaveBlock1Ptr
 	ldr r1, [r2]
 	ldrh r1, [r1]
 	strh r1, [r5]
@@ -2338,7 +2338,7 @@ ScrCmd_getplayerxy: @ 806B010
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B048: .4byte gUnknown_3005008
+_0806B048: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_getplayerxy
 
 	thumb_func_start ScrCmd_getpartysize
@@ -2609,7 +2609,7 @@ ScrCmd_applymovement: @ 806B200
 	adds r3, r0, 0
 	lsls r0, r4, 24
 	lsrs r0, 24
-	ldr r1, _0806B23C @ =gUnknown_3005008
+	ldr r1, _0806B23C @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2621,7 +2621,7 @@ ScrCmd_applymovement: @ 806B200
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B23C: .4byte gUnknown_3005008
+_0806B23C: .4byte gSaveBlock1Ptr
 _0806B240: .4byte gUnknown_20370B0
 	thumb_func_end ScrCmd_applymovement
 
@@ -2695,7 +2695,7 @@ ScrCmd_waitmovement: @ 806B2B0
 	strh r1, [r0]
 _0806B2CC:
 	ldr r1, _0806B2F4 @ =gUnknown_20370B2
-	ldr r0, _0806B2F8 @ =gUnknown_3005008
+	ldr r0, _0806B2F8 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r2, r0]
@@ -2714,7 +2714,7 @@ _0806B2CC:
 	.align 2, 0
 _0806B2F0: .4byte gUnknown_20370B0
 _0806B2F4: .4byte gUnknown_20370B2
-_0806B2F8: .4byte gUnknown_3005008
+_0806B2F8: .4byte gSaveBlock1Ptr
 _0806B2FC: .4byte gUnknown_20370B4
 _0806B300: .4byte WaitForMovementFinish
 	thumb_func_end ScrCmd_waitmovement
@@ -2768,7 +2768,7 @@ ScrCmd_removeobject: @ 806B358
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0806B37C @ =gUnknown_3005008
+	ldr r1, _0806B37C @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2777,7 +2777,7 @@ ScrCmd_removeobject: @ 806B358
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B37C: .4byte gUnknown_3005008
+_0806B37C: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_removeobject
 
 	thumb_func_start ScrCmd_removeobject_at
@@ -2813,7 +2813,7 @@ ScrCmd_addobject: @ 806B3B0
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0806B3D4 @ =gUnknown_3005008
+	ldr r1, _0806B3D4 @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2822,7 +2822,7 @@ ScrCmd_addobject: @ 806B3B0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B3D4: .4byte gUnknown_3005008
+_0806B3D4: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_addobject
 
 	thumb_func_start ScrCmd_addobject_at
@@ -2876,7 +2876,7 @@ ScrCmd_setobjectxy: @ 806B408
 	bl VarGet
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, _0806B46C @ =gUnknown_3005008
+	ldr r1, _0806B46C @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2894,7 +2894,7 @@ ScrCmd_setobjectxy: @ 806B408
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B46C: .4byte gUnknown_3005008
+_0806B46C: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_setobjectxy
 
 	thumb_func_start ScrCmd_setobjectxyperm
@@ -2946,7 +2946,7 @@ ScrCmd_moveobjectoffscreen: @ 806B4C8
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0806B4EC @ =gUnknown_3005008
+	ldr r1, _0806B4EC @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2955,7 +2955,7 @@ ScrCmd_moveobjectoffscreen: @ 806B4C8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B4EC: .4byte gUnknown_3005008
+_0806B4EC: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_moveobjectoffscreen
 
 	thumb_func_start ScrCmd_showobject_at
@@ -3106,7 +3106,7 @@ ScrCmd_turnobject: @ 806B5F4
 	str r1, [r4, 0x8]
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0806B624 @ =gUnknown_3005008
+	ldr r1, _0806B624 @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -3116,7 +3116,7 @@ ScrCmd_turnobject: @ 806B5F4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B624: .4byte gUnknown_3005008
+_0806B624: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_turnobject
 
 	thumb_func_start ScrCmd_setobjectmovementtype
@@ -3451,7 +3451,7 @@ sub_806B88C: @ 806B88C
 	thumb_func_start sub_806B898
 sub_806B898: @ 806B898
 	push {r4,lr}
-	ldr r0, _0806B8F0 @ =gUnknown_30030F0
+	ldr r0, _0806B8F0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -3490,7 +3490,7 @@ sub_806B898: @ 806B898
 	bl sub_8069964
 	b _0806B922
 	.align 2, 0
-_0806B8F0: .4byte gUnknown_30030F0
+_0806B8F0: .4byte gMain
 _0806B8F4: .4byte gUnknown_3005070
 _0806B8F8: .4byte gUnknown_203ADFA
 _0806B8FC:
@@ -3563,7 +3563,7 @@ _0806B968:
 	thumb_func_start sub_806B96C
 sub_806B96C: @ 806B96C
 	push {lr}
-	ldr r2, _0806B988 @ =gUnknown_30030F0
+	ldr r2, _0806B988 @ =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -3576,7 +3576,7 @@ sub_806B96C: @ 806B96C
 	movs r0, 0x1
 	b _0806BA36
 	.align 2, 0
-_0806B988: .4byte gUnknown_30030F0
+_0806B988: .4byte gMain
 _0806B98C: .4byte gUnknown_20370D4
 _0806B990:
 	ldrh r1, [r2, 0x2C]
@@ -4596,7 +4596,7 @@ ScrCmd_givemoney: @ 806C124
 	str r0, [r4, 0x8]
 	cmp r1, 0
 	bne _0806C14A
-	ldr r0, _0806C154 @ =gUnknown_3005008
+	ldr r0, _0806C154 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -4609,7 +4609,7 @@ _0806C14A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C154: .4byte gUnknown_3005008
+_0806C154: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_givemoney
 
 	thumb_func_start ScrCmd_takemoney
@@ -4624,7 +4624,7 @@ ScrCmd_takemoney: @ 806C158
 	str r0, [r4, 0x8]
 	cmp r1, 0
 	bne _0806C17E
-	ldr r0, _0806C188 @ =gUnknown_3005008
+	ldr r0, _0806C188 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -4637,7 +4637,7 @@ _0806C17E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C188: .4byte gUnknown_3005008
+_0806C188: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_takemoney
 
 	thumb_func_start ScrCmd_checkmoney
@@ -4653,7 +4653,7 @@ ScrCmd_checkmoney: @ 806C18C
 	cmp r1, 0
 	bne _0806C1BA
 	ldr r4, _0806C1C4 @ =gUnknown_20370D0
-	ldr r0, _0806C1C8 @ =gUnknown_3005008
+	ldr r0, _0806C1C8 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -4670,7 +4670,7 @@ _0806C1BA:
 	bx r1
 	.align 2, 0
 _0806C1C4: .4byte gUnknown_20370D0
-_0806C1C8: .4byte gUnknown_3005008
+_0806C1C8: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_checkmoney
 
 	thumb_func_start sub_806C1CC
@@ -4694,7 +4694,7 @@ sub_806C1CC: @ 806C1CC
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806C20A
-	ldr r0, _0806C218 @ =gUnknown_3005008
+	ldr r0, _0806C218 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -4710,7 +4710,7 @@ _0806C20A:
 	bx r1
 	.align 2, 0
 _0806C214: .4byte sub_809D6D4
-_0806C218: .4byte gUnknown_3005008
+_0806C218: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_806C1CC
 
 	thumb_func_start sub_806C21C
@@ -4734,7 +4734,7 @@ sub_806C228: @ 806C228
 	str r2, [r0, 0x8]
 	cmp r1, 0
 	bne _0806C24E
-	ldr r0, _0806C254 @ =gUnknown_3005008
+	ldr r0, _0806C254 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -4746,7 +4746,7 @@ _0806C24E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C254: .4byte gUnknown_3005008
+_0806C254: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_806C228
 
 	thumb_func_start sub_806C258
@@ -5134,7 +5134,7 @@ ScrCmd_setrespawn: @ 806C4D4
 	thumb_func_start ScrCmd_checkplayergender
 ScrCmd_checkplayergender: @ 806C4F0
 	ldr r1, _0806C500 @ =gUnknown_20370D0
-	ldr r0, _0806C504 @ =gUnknown_300500C
+	ldr r0, _0806C504 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
@@ -5142,7 +5142,7 @@ ScrCmd_checkplayergender: @ 806C4F0
 	bx lr
 	.align 2, 0
 _0806C500: .4byte gUnknown_20370D0
-_0806C504: .4byte gUnknown_300500C
+_0806C504: .4byte gSaveBlock2Ptr
 	thumb_func_end ScrCmd_checkplayergender
 
 	thumb_func_start ScrCmd_playmoncry

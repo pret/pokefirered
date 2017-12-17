@@ -909,7 +909,7 @@ _080F410A:
 	.align 2, 0
 _080F4114: .4byte gUnknown_203AB40
 _080F4118:
-	ldr r0, _080F4140 @ =gUnknown_30030F0
+	ldr r0, _080F4140 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -930,7 +930,7 @@ _080F413C:
 	strb r0, [r1]
 	b _080F3D06
 	.align 2, 0
-_080F4140: .4byte gUnknown_30030F0
+_080F4140: .4byte gMain
 _080F4144: .4byte 0x00007fff
 _080F4148: .4byte gUnknown_203AB40
 _080F414C:
@@ -1966,7 +1966,7 @@ _080F49A8:
 _080F49D0: .4byte gUnknown_841431C
 _080F49D4: .4byte 0x0000ffff
 _080F49D8:
-	ldr r0, _080F4A0C @ =gUnknown_300500C
+	ldr r0, _080F4A0C @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -1991,7 +1991,7 @@ _080F49D8:
 	ldr r0, _080F4A1C @ =gUnknown_8410E10
 	b _080F4A36
 	.align 2, 0
-_080F4A0C: .4byte gUnknown_300500C
+_080F4A0C: .4byte gSaveBlock2Ptr
 _080F4A10: .4byte gUnknown_8410E30
 _080F4A14: .4byte 0xffff0000
 _080F4A18: .4byte 0x0000ffff

@@ -182,7 +182,7 @@ sub_814FE40: @ 814FE40
 	lsrs r4, 16
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r1, _0814FE68 @ =gUnknown_300500C
+	ldr r1, _0814FE68 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x14]
 	lsrs r1, 3
@@ -192,7 +192,7 @@ sub_814FE40: @ 814FE40
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814FE68: .4byte gUnknown_300500C
+_0814FE68: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_814FE40
 
 	thumb_func_start sub_814FE6C
@@ -427,7 +427,7 @@ sub_815001C: @ 815001C
 	lsrs r4, 16
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r1, _08150044 @ =gUnknown_300500C
+	ldr r1, _08150044 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x14]
 	lsrs r1, 3
@@ -437,7 +437,7 @@ sub_815001C: @ 815001C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08150044: .4byte gUnknown_300500C
+_08150044: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_815001C
 
 	thumb_func_start sub_8150048

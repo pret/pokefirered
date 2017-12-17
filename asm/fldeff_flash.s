@@ -185,7 +185,7 @@ sub_80C9BFC: @ 80C9BFC
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C9CC2
-	ldr r0, _080C9CE4 @ =gUnknown_30030F0
+	ldr r0, _080C9CE4 @ =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _080C9CC2:
@@ -200,7 +200,7 @@ _080C9CD4: .4byte 0x05000002
 _080C9CD8: .4byte 0x810001ff
 _080C9CDC: .4byte sub_80C9BE8
 _080C9CE0: .4byte sub_80C9BD0
-_080C9CE4: .4byte gUnknown_30030F0
+_080C9CE4: .4byte gMain
 	thumb_func_end sub_80C9BFC
 
 	thumb_func_start sub_80C9CE8
@@ -579,14 +579,14 @@ sub_80C9FA0: @ 80C9FA0
 	.align 2, 0
 _080C9FC0: .4byte gUnknown_3005090
 _080C9FC4:
-	ldr r0, _080C9FD0 @ =gUnknown_30030F0
+	ldr r0, _080C9FD0 @ =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _080C9FCC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C9FD0: .4byte gUnknown_30030F0
+_080C9FD0: .4byte gMain
 	thumb_func_end sub_80C9FA0
 
 	thumb_func_start sub_80C9FD4
@@ -766,7 +766,7 @@ _080CA140:
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r0, _080CA15C @ =gUnknown_30030F0
+	ldr r0, _080CA15C @ =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _080CA152:
@@ -775,7 +775,7 @@ _080CA152:
 	bx r0
 	.align 2, 0
 _080CA158: .4byte gUnknown_83F5824
-_080CA15C: .4byte gUnknown_30030F0
+_080CA15C: .4byte gMain
 	thumb_func_end sub_80CA108
 
 	thumb_func_start sub_80CA160
@@ -837,7 +837,7 @@ _080CA1C0:
 	.4byte _080CA262
 	.4byte _080CA2A4
 _080CA1D8:
-	ldr r0, _080CA204 @ =gUnknown_30030F0
+	ldr r0, _080CA204 @ =gMain
 	ldr r2, [r0, 0xC]
 	adds r0, r5, 0
 	movs r1, 0x5
@@ -854,7 +854,7 @@ _080CA1D8:
 	bl BlendPalettes
 	b _080CA294
 	.align 2, 0
-_080CA204: .4byte gUnknown_30030F0
+_080CA204: .4byte gMain
 _080CA208:
 	bl sub_80F8258
 	cmp r0, 0
@@ -904,7 +904,7 @@ _080CA262:
 	ldrsh r1, [r4, r2]
 	cmp r0, r1
 	bgt _080CA280
-	ldr r0, _080CA29C @ =gUnknown_30030F0
+	ldr r0, _080CA29C @ =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x2
 	ands r0, r1
@@ -926,7 +926,7 @@ _080CA294:
 	strh r0, [r4]
 	b _080CA2D2
 	.align 2, 0
-_080CA29C: .4byte gUnknown_30030F0
+_080CA29C: .4byte gMain
 _080CA2A0: .4byte 0x00007fff
 _080CA2A4:
 	bl UpdatePaletteFade

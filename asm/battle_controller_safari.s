@@ -69,7 +69,7 @@ _080DD5A0:
 	thumb_func_start HandleInputChooseAction_0
 HandleInputChooseAction_0: @ 80DD5A4
 	push {r4,r5,lr}
-	ldr r0, _080DD5D4 @ =gUnknown_30030F0
+	ldr r0, _080DD5D4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
 	adds r0, r2, 0
@@ -91,7 +91,7 @@ HandleInputChooseAction_0: @ 80DD5A4
 	beq _080DD5EA
 	b _080DD60C
 	.align 2, 0
-_080DD5D4: .4byte gUnknown_30030F0
+_080DD5D4: .4byte gMain
 _080DD5D8: .4byte gUnknown_2023FF8
 _080DD5DC: .4byte gUnknown_2023BC4
 _080DD5E0:
@@ -336,7 +336,7 @@ sub_80DD7B0: @ 80DD7B0
 	ands r0, r1
 	cmp r0, 0
 	bne _080DD7DA
-	ldr r2, _080DD7E4 @ =gUnknown_30030F0
+	ldr r2, _080DD7E4 @ =gMain
 	ldr r0, _080DD7E8 @ =0x00000439
 	adds r3, r2, r0
 	ldrb r1, [r3]
@@ -354,7 +354,7 @@ _080DD7DA:
 	bx r0
 	.align 2, 0
 _080DD7E0: .4byte gUnknown_2037AB8
-_080DD7E4: .4byte gUnknown_30030F0
+_080DD7E4: .4byte gMain
 _080DD7E8: .4byte 0x00000439
 _080DD7EC: .4byte gUnknown_3004F80
 	thumb_func_end sub_80DD7B0
@@ -420,7 +420,7 @@ _080DD858: .4byte CompleteWhenChosePokeblock
 	thumb_func_start CompleteWhenChosePokeblock
 CompleteWhenChosePokeblock: @ 80DD85C
 	push {lr}
-	ldr r0, _080DD888 @ =gUnknown_30030F0
+	ldr r0, _080DD888 @ =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, _080DD88C @ =sub_8011100
 	cmp r1, r0
@@ -440,7 +440,7 @@ _080DD882:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD888: .4byte gUnknown_30030F0
+_080DD888: .4byte gMain
 _080DD88C: .4byte sub_8011100
 _080DD890: .4byte gUnknown_2037AB8
 _080DD894: .4byte gUnknown_203AD30
@@ -614,7 +614,7 @@ sub_80DD9B8: @ 80DD9B8
 	thumb_func_start SafariHandleDrawTrainerPic
 SafariHandleDrawTrainerPic: @ 80DD9C4
 	push {r4-r6,lr}
-	ldr r4, _080DDA7C @ =gUnknown_300500C
+	ldr r4, _080DDA7C @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
 	ldr r5, _080DDA80 @ =gUnknown_2023BC4
@@ -702,7 +702,7 @@ SafariHandleDrawTrainerPic: @ 80DD9C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DDA7C: .4byte gUnknown_300500C
+_080DDA7C: .4byte gSaveBlock2Ptr
 _080DDA80: .4byte gUnknown_2023BC4
 _080DDA84: .4byte gUnknown_20244DC
 _080DDA88: .4byte gUnknown_8239F8C

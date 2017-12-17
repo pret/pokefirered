@@ -54,7 +54,7 @@ _0813F6CC: .4byte gUnknown_846483C
 	thumb_func_start sub_813F6D0
 sub_813F6D0: @ 813F6D0
 	push {lr}
-	ldr r0, _0813F6F0 @ =gUnknown_3005008
+	ldr r0, _0813F6F0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
 	lsls r1, 2
@@ -68,7 +68,7 @@ sub_813F6D0: @ 813F6D0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813F6F0: .4byte gUnknown_3005008
+_0813F6F0: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_813F6D0
 
 	thumb_func_start sub_813F6F4

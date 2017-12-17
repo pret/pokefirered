@@ -90,7 +90,7 @@ sub_80BD100: @ 80BD100
 	bl sub_805A1DC
 	cmp r0, 0x1
 	bne _080BD176
-	ldr r0, _080BD164 @ =gUnknown_30030F0
+	ldr r0, _080BD164 @ =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r2, 0x2
 	movs r0, 0x2
@@ -107,7 +107,7 @@ sub_80BD100: @ 80BD100
 	.align 2, 0
 _080BD15C: .4byte gUnknown_2037078
 _080BD160: .4byte gUnknown_2036E38
-_080BD164: .4byte gUnknown_30030F0
+_080BD164: .4byte gMain
 _080BD168:
 	ldrb r0, [r6]
 	cmp r0, 0

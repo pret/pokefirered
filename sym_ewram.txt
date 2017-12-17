@@ -25,7 +25,7 @@ gUnknown_201FEE0: @ 201FEE0
 gUnknown_201FF00: @ 201FF00
 	.space 0x100
 
-gUnknown_2020000: @ 2020000
+gTrainerId: @ 2020000
 	.space 0x4
 
 gUnknown_2020004: @ 2020004
@@ -592,13 +592,13 @@ gUnknown_202456C: @ 202456C
 gUnknown_2024580: @ 2024580
 	.space 0x8
 
-gUnknown_2024588: @ 2024588
+gSaveBlock2: @ 2024588
 	.space 0xFA4
 
-gUnknown_202552C: @ 202552C
+gSaveBlock1: @ 202552C
 	.space 0x3DE8
 
-gUnknown_2029314: @ 2029314
+gPokemonStorage: @ 2029314
 	.space 0x8450
 
 gUnknown_2031764: @ 2031764

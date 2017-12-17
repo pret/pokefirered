@@ -2190,7 +2190,7 @@ _080F78A4: .4byte gUnknown_841F43C
 	thumb_func_start sub_80F78A8
 sub_80F78A8: @ 80F78A8
 	push {lr}
-	ldr r3, _080F78D8 @ =gUnknown_300500C
+	ldr r3, _080F78D8 @ =gSaveBlock2Ptr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x14]
 	lsls r0, r1, 29
@@ -2214,7 +2214,7 @@ _080F78C4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F78D8: .4byte gUnknown_300500C
+_080F78D8: .4byte gSaveBlock2Ptr
 _080F78DC: .4byte gUnknown_841F428
 	thumb_func_end sub_80F78A8
 

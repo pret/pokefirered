@@ -130,7 +130,7 @@ _0805A680: .4byte gUnknown_3000E9A
 	thumb_func_start DrawWholeMapView
 DrawWholeMapView: @ 805A684
 	push {lr}
-	ldr r0, _0805A6A0 @ =gUnknown_3005008
+	ldr r0, _0805A6A0 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r2, 0
 	ldrsh r0, [r1, r2]
@@ -142,7 +142,7 @@ DrawWholeMapView: @ 805A684
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805A6A0: .4byte gUnknown_3005008
+_0805A6A0: .4byte gSaveBlock1Ptr
 _0805A6A4: .4byte gUnknown_2036DFC
 	thumb_func_end DrawWholeMapView
 
@@ -290,7 +290,7 @@ _0805A7A6:
 	adds r1, r6, r0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _0805A7D4 @ =gUnknown_3005008
+	ldr r0, _0805A7D4 @ =gSaveBlock1Ptr
 	ldr r3, [r0]
 	movs r0, 0
 	ldrsh r2, [r3, r0]
@@ -310,7 +310,7 @@ _0805A7A6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805A7D4: .4byte gUnknown_3005008
+_0805A7D4: .4byte gSaveBlock1Ptr
 	thumb_func_end RedrawMapSliceNorth
 
 	thumb_func_start RedrawMapSliceSouth
@@ -333,7 +333,7 @@ _0805A7E4:
 	lsrs r0, 24
 _0805A7F6:
 	adds r1, r6, r0
-	ldr r0, _0805A820 @ =gUnknown_3005008
+	ldr r0, _0805A820 @ =gSaveBlock1Ptr
 	ldr r3, [r0]
 	movs r0, 0
 	ldrsh r2, [r3, r0]
@@ -352,7 +352,7 @@ _0805A7F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805A820: .4byte gUnknown_3005008
+_0805A820: .4byte gSaveBlock1Ptr
 	thumb_func_end RedrawMapSliceSouth
 
 	thumb_func_start RedrawMapSliceEast
@@ -379,7 +379,7 @@ _0805A844:
 	adds r1, r6
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _0805A878 @ =gUnknown_3005008
+	ldr r0, _0805A878 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r3, 0
 	ldrsh r2, [r0, r3]
@@ -400,7 +400,7 @@ _0805A844:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805A878: .4byte gUnknown_3005008
+_0805A878: .4byte gSaveBlock1Ptr
 	thumb_func_end RedrawMapSliceEast
 
 	thumb_func_start RedrawMapSliceWest
@@ -437,7 +437,7 @@ _0805A8AE:
 	adds r1, r5
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _0805A8E4 @ =gUnknown_3005008
+	ldr r0, _0805A8E4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r3, 0
 	ldrsh r2, [r0, r3]
@@ -459,7 +459,7 @@ _0805A8AE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805A8E4: .4byte gUnknown_3005008
+_0805A8E4: .4byte gSaveBlock1Ptr
 	thumb_func_end RedrawMapSliceWest
 
 	thumb_func_start CurrentMapDrawMetatileAt
@@ -729,7 +729,7 @@ _0805AAE4: .4byte gUnknown_3005018
 MapPosToBgTilemapOffset: @ 805AAE8
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, _0805AB18 @ =gUnknown_3005008
+	ldr r0, _0805AB18 @ =gSaveBlock1Ptr
 	ldr r3, [r0]
 	movs r5, 0
 	ldrsh r0, [r3, r5]
@@ -754,7 +754,7 @@ _0805AB12:
 	negs r0, r0
 	b _0805AB2A
 	.align 2, 0
-_0805AB18: .4byte gUnknown_3005008
+_0805AB18: .4byte gSaveBlock1Ptr
 _0805AB1C:
 	ldrb r0, [r4, 0x3]
 	adds r2, r0

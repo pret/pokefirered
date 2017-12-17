@@ -8,7 +8,7 @@
 	thumb_func_start sub_815D654
 sub_815D654: @ 815D654
 	push {lr}
-	ldr r0, _0815D674 @ =gUnknown_3005008
+	ldr r0, _0815D674 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _0815D678 @ =0x00003d41
 	adds r0, r1
@@ -23,7 +23,7 @@ sub_815D654: @ 815D654
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0815D674: .4byte gUnknown_3005008
+_0815D674: .4byte gSaveBlock1Ptr
 _0815D678: .4byte 0x00003d41
 	thumb_func_end sub_815D654
 

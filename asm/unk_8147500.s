@@ -95,7 +95,7 @@ _0814758E:
 	thumb_func_start sub_8147594
 sub_8147594: @ 8147594
 	push {lr}
-	ldr r0, _081475B0 @ =gUnknown_3005008
+	ldr r0, _081475B0 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r1, [r2, 0x4]
 	ldr r0, _081475B4 @ =0x00000503
@@ -108,7 +108,7 @@ sub_8147594: @ 8147594
 	movs r0, 0x1
 	b _081475BA
 	.align 2, 0
-_081475B0: .4byte gUnknown_3005008
+_081475B0: .4byte gSaveBlock1Ptr
 _081475B4: .4byte 0x00000503
 _081475B8:
 	movs r0, 0

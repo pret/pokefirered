@@ -30,7 +30,7 @@ _08009498:
 	beq _080094C4
 	bl sub_800B210
 	bl sub_80098B8
-	bl sub_8000874
+	bl RestoreSerialTimer3IntrHandlers
 	movs r0, 0
 	b _080094CE
 	.align 2, 0
@@ -237,13 +237,13 @@ sub_8009640: @ 8009640
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_8009804
-	ldr r0, _080096E0 @ =gUnknown_30030F0
+	ldr r0, _080096E0 @ =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng
 	movs r4, 0
 _08009670:
 	bl Random
-	ldr r1, _080096E4 @ =gUnknown_300500C
+	ldr r1, _080096E4 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	adds r1, 0xA
 	adds r1, r4
@@ -285,8 +285,8 @@ _08009670:
 _080096D4: .4byte sub_800978C
 _080096D8: .4byte gUnknown_202271A
 _080096DC: .4byte 0x00001111
-_080096E0: .4byte gUnknown_30030F0
-_080096E4: .4byte gUnknown_300500C
+_080096E0: .4byte gMain
+_080096E4: .4byte gSaveBlock2Ptr
 _080096E8: .4byte sub_80094D4
 _080096EC: .4byte gUnknown_3000E58
 _080096F0: .4byte task00_link_test
@@ -308,7 +308,7 @@ _08009704: .4byte gUnknown_2022720
 sub_8009708: @ 8009708
 	push {r4,r5,lr}
 	ldr r5, _08009774 @ =gUnknown_2022720
-	ldr r4, _08009778 @ =gUnknown_300500C
+	ldr r4, _08009778 @ =gSaveBlock2Ptr
 	ldr r1, [r4]
 	ldrb r2, [r1, 0xA]
 	ldrb r0, [r1, 0xB]
@@ -330,10 +330,10 @@ sub_8009708: @ 8009708
 	ldr r0, _0800977C @ =gUnknown_202271A
 	ldrh r0, [r0]
 	str r0, [r5, 0x14]
-	ldr r0, _08009780 @ =gUnknown_81E9F11
+	ldr r0, _08009780 @ =gGameLanguage
 	ldrb r0, [r0]
 	strh r0, [r5, 0x1A]
-	ldr r0, _08009784 @ =gUnknown_81E9F10
+	ldr r0, _08009784 @ =gGameVersion
 	ldrb r0, [r0]
 	movs r2, 0x80
 	lsls r2, 7
@@ -360,10 +360,10 @@ _0800976E:
 	bx r0
 	.align 2, 0
 _08009774: .4byte gUnknown_2022720
-_08009778: .4byte gUnknown_300500C
+_08009778: .4byte gSaveBlock2Ptr
 _0800977C: .4byte gUnknown_202271A
-_08009780: .4byte gUnknown_81E9F11
-_08009784: .4byte gUnknown_81E9F10
+_08009780: .4byte gGameLanguage
+_08009784: .4byte gGameVersion
 _08009788: .4byte 0x00000844
 	thumb_func_end sub_8009708
 
@@ -443,7 +443,7 @@ sub_8009804: @ 8009804
 	ldr r1, _08009850 @ =gUnknown_3003F80
 	ldr r0, _08009854 @ =sub_800A720
 	str r0, [r1]
-	ldr r0, _08009858 @ =gUnknown_300357C
+	ldr r0, _08009858 @ =gLinkVSyncDisabled
 	strb r4, [r0]
 	ldr r0, _0800985C @ =gUnknown_3003EAC
 	strb r4, [r0]
@@ -467,7 +467,7 @@ sub_8009804: @ 8009804
 _0800984C: .4byte gUnknown_3003F3C
 _08009850: .4byte gUnknown_3003F80
 _08009854: .4byte sub_800A720
-_08009858: .4byte gUnknown_300357C
+_08009858: .4byte gLinkVSyncDisabled
 _0800985C: .4byte gUnknown_3003EAC
 _08009860: .4byte gUnknown_3003F38
 _08009864: .4byte gUnknown_3000E4C
@@ -647,7 +647,7 @@ _080099CC: .4byte gUnknown_2022111
 LinkTestProcessKeyInput: @ 80099D0
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r4, _08009A70 @ =gUnknown_30030F0
+	ldr r4, _08009A70 @ =gMain
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -710,7 +710,7 @@ _08009A46:
 	cmp r0, 0
 	beq _08009A66
 	ldr r2, [r4, 0x24]
-	ldr r0, _08009A84 @ =gUnknown_300357C
+	ldr r0, _08009A84 @ =gLinkVSyncDisabled
 	ldrb r1, [r0]
 	ldr r0, _08009A88 @ =gUnknown_3003F80
 	ldr r0, [r0]
@@ -727,12 +727,12 @@ _08009A66:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08009A70: .4byte gUnknown_30030F0
+_08009A70: .4byte gMain
 _08009A74: .4byte gUnknown_3003F84
 _08009A78: .4byte gHeap + 0x4000
 _08009A7C: .4byte 0x00002004
 _08009A80: .4byte gUnknown_2022110
-_08009A84: .4byte gUnknown_300357C
+_08009A84: .4byte gLinkVSyncDisabled
 _08009A88: .4byte gUnknown_3003F80
 	thumb_func_end LinkTestProcessKeyInput
 
@@ -1327,12 +1327,12 @@ _08009F18: .4byte gUnknown_202271A
 _08009F1C:
 	ldr r0, _08009F28 @ =gUnknown_3003F50
 	strh r2, [r0]
-	ldr r1, _08009F2C @ =gUnknown_30030F0
+	ldr r1, _08009F2C @ =gMain
 	ldrh r1, [r1, 0x2C]
 	b _08009FD4
 	.align 2, 0
 _08009F28: .4byte gUnknown_3003F50
-_08009F2C: .4byte gUnknown_30030F0
+_08009F2C: .4byte gMain
 _08009F30:
 	ldr r0, _08009F38 @ =gUnknown_3003F50
 	movs r1, 0
@@ -1408,7 +1408,7 @@ _08009FC0:
 	ldrh r1, [r0]
 	cmp r1, 0
 	beq _08009FD6
-	ldr r0, _08009FE0 @ =gUnknown_30030E4
+	ldr r0, _08009FE0 @ =gLinkTransferringData
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08009FD6
@@ -1422,7 +1422,7 @@ _08009FD6:
 	bx r0
 	.align 2, 0
 _08009FDC: .4byte gUnknown_3005028
-_08009FE0: .4byte gUnknown_30030E4
+_08009FE0: .4byte gLinkTransferringData
 _08009FE4: .4byte gUnknown_3003F50
 	thumb_func_end sub_8009E60
 
@@ -3042,7 +3042,7 @@ _0800AB5C:
 	ldr r1, _0800AB8C @ =0x0000ffdf
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, _0800AB90 @ =gUnknown_300357C
+	ldr r0, _0800AB90 @ =gLinkVSyncDisabled
 	movs r4, 0x1
 	strb r4, [r0]
 	bl sub_80098B8
@@ -3059,7 +3059,7 @@ _0800AB7E:
 _0800AB84: .4byte gUnknown_3003F30
 _0800AB88: .4byte gUnknown_2022B4C
 _0800AB8C: .4byte 0x0000ffdf
-_0800AB90: .4byte gUnknown_300357C
+_0800AB90: .4byte gLinkVSyncDisabled
 _0800AB94: .4byte gUnknown_3003F80
 _0800AB98: .4byte gUnknown_3003F24
 	thumb_func_end sub_800AB38
@@ -3312,14 +3312,14 @@ _0800AD30:
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, _0800AE0C @ =gUnknown_3003530
+	ldr r1, _0800AE0C @ =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0800AE10 @ =sub_80094D4
 	movs r1, 0
 	bl CreateTask
 	bl StopMapMusic
-	ldr r1, _0800AE14 @ =gUnknown_30030F0
+	ldr r1, _0800AE14 @ =gMain
 	movs r0, 0
 	str r0, [r1]
 	bl RunTasks
@@ -3344,9 +3344,9 @@ _0800ADFC: .4byte gUnknown_82345E8
 _0800AE00: .4byte gUnknown_2022860
 _0800AE04: .4byte gUnknown_82345F0
 _0800AE08: .4byte gUnknown_841F408
-_0800AE0C: .4byte gUnknown_3003530
+_0800AE0C: .4byte gSoftResetDisabled
 _0800AE10: .4byte sub_80094D4
-_0800AE14: .4byte gUnknown_30030F0
+_0800AE14: .4byte gMain
 _0800AE18: .4byte sub_800AF2C
 	thumb_func_end c2_800ACD4
 
@@ -3469,7 +3469,7 @@ _0800AF28: .4byte gUnknown_841DE9D
 sub_800AF2C: @ 800AF2C
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r0, _0800AF4C @ =gUnknown_30030F0
+	ldr r0, _0800AF4C @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -3484,7 +3484,7 @@ sub_800AF2C: @ 800AF2C
 	beq _0800AF72
 	b _0800AFC4
 	.align 2, 0
-_0800AF4C: .4byte gUnknown_30030F0
+_0800AF4C: .4byte gMain
 _0800AF50:
 	cmp r0, 0x5A
 	beq _0800AF72
@@ -3543,7 +3543,7 @@ _0800AFA8:
 	movs r3, 0x14
 	bl box_print
 _0800AFC4:
-	ldr r0, _0800B004 @ =gUnknown_30030F0
+	ldr r0, _0800B004 @ =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r0, r2
@@ -3571,7 +3571,7 @@ _0800AFC4:
 	.align 2, 0
 _0800AFFC: .4byte gUnknown_8234610
 _0800B000: .4byte gUnknown_841DF4C
-_0800B004: .4byte gUnknown_30030F0
+_0800B004: .4byte gMain
 _0800B008: .4byte gUnknown_3003F3C
 _0800B00C: .4byte gUnknown_2022854
 _0800B010:
@@ -3585,9 +3585,9 @@ _0800B010:
 	bl sub_812B484
 	bl rfu_REQ_stopMode
 	bl rfu_waitREQComplete
-	bl sub_80008D8
+	bl DoSoftReset
 _0800B02E:
-	ldr r0, _0800B050 @ =gUnknown_30030F0
+	ldr r0, _0800B050 @ =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r0, r2
@@ -3607,7 +3607,7 @@ _0800B048:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B050: .4byte gUnknown_30030F0
+_0800B050: .4byte gMain
 	thumb_func_end sub_800AF2C
 
 	thumb_func_start GetSioMultiSI
@@ -3783,7 +3783,7 @@ HandleLinkConnection: @ 800B178
 	bl LinkMain1
 	ldr r4, _0800B1C0 @ =gUnknown_3003F20
 	str r0, [r4]
-	ldr r0, _0800B1C4 @ =gUnknown_300311C
+	ldr r0, _0800B1C4 @ =gMain + 0x2C
 	bl LinkMain2
 	ldr r0, [r4]
 	movs r1, 0x80
@@ -3803,7 +3803,7 @@ _0800B1B4: .4byte gUnknown_3003F84
 _0800B1B8: .4byte gUnknown_3003F50
 _0800B1BC: .4byte gUnknown_3003ED0
 _0800B1C0: .4byte gUnknown_3003F20
-_0800B1C4: .4byte gUnknown_300311C
+_0800B1C4: .4byte gMain + 0x2C
 _0800B1C8:
 	bl sub_80FAE94
 	adds r4, r0, 0
@@ -4505,8 +4505,8 @@ _0800B710: .4byte 0x04000208
 _0800B714: .4byte gUnknown_3004F74
 	thumb_func_end sub_800B608
 
-	thumb_func_start sub_800B718
-sub_800B718: @ 800B718
+	thumb_func_start LinkVSync
+LinkVSync: @ 800B718
 	push {r4,lr}
 	ldr r3, _0800B740 @ =gUnknown_3003FB0
 	ldrb r4, [r3]
@@ -4568,7 +4568,7 @@ _0800B77E:
 	bx r0
 	.align 2, 0
 _0800B784: .4byte gUnknown_3000E64
-	thumb_func_end sub_800B718
+	thumb_func_end LinkVSync
 
 	thumb_func_start Timer3Intr
 Timer3Intr: @ 800B788

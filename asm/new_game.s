@@ -46,7 +46,7 @@ InitPlayerTrainerId: @ 8054928
 	lsls r0, 16
 	lsrs r0, 16
 	orrs r4, r0
-	ldr r0, _08054950 @ =gUnknown_300500C
+	ldr r0, _08054950 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r1, 0xA
 	adds r0, r4, 0
@@ -55,12 +55,12 @@ InitPlayerTrainerId: @ 8054928
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054950: .4byte gUnknown_300500C
+_08054950: .4byte gSaveBlock2Ptr
 	thumb_func_end InitPlayerTrainerId
 
 	thumb_func_start SetDefaultOptions
 SetDefaultOptions: @ 8054954
-	ldr r3, _080549A8 @ =gUnknown_300500C
+	ldr r3, _080549A8 @ =gSaveBlock2Ptr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x8
@@ -103,13 +103,13 @@ SetDefaultOptions: @ 8054954
 	strb r0, [r1, 0x13]
 	bx lr
 	.align 2, 0
-_080549A8: .4byte gUnknown_300500C
+_080549A8: .4byte gSaveBlock2Ptr
 	thumb_func_end SetDefaultOptions
 
 	thumb_func_start sub_80549AC
 sub_80549AC: @ 80549AC
 	push {r4,lr}
-	ldr r4, _080549D0 @ =gUnknown_300500C
+	ldr r4, _080549D0 @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	adds r0, 0x28
 	movs r1, 0
@@ -124,7 +124,7 @@ sub_80549AC: @ 80549AC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080549D0: .4byte gUnknown_300500C
+_080549D0: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_80549AC
 
 	thumb_func_start sub_80549D4
@@ -133,7 +133,7 @@ sub_80549D4: @ 80549D4
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, _080549F0 @ =gUnknown_300500C
+	ldr r0, _080549F0 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r1, 0xB0
 	ldr r2, _080549F4 @ =0x050001fa
@@ -143,7 +143,7 @@ sub_80549D4: @ 80549D4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080549F0: .4byte gUnknown_300500C
+_080549F0: .4byte gSaveBlock2Ptr
 _080549F4: .4byte 0x050001fa
 	thumb_func_end sub_80549D4
 
@@ -203,7 +203,7 @@ sub_8054A60: @ 8054A60
 	mov r6, r8
 	push {r6}
 	sub sp, 0x8
-	ldr r6, _08054B50 @ =gUnknown_3005008
+	ldr r6, _08054B50 @ =gSaveBlock1Ptr
 	ldr r1, [r6]
 	ldr r0, _08054B54 @ =0x00003a4c
 	mov r8, r0
@@ -213,7 +213,7 @@ sub_8054A60: @ 8054A60
 	ldr r1, _08054B58 @ =gUnknown_2031DB0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r4, _08054B5C @ =gUnknown_300500C
+	ldr r4, _08054B5C @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	movs r1, 0xF2
 	lsls r1, 4
@@ -286,10 +286,10 @@ sub_8054A60: @ 8054A60
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054B50: .4byte gUnknown_3005008
+_08054B50: .4byte gSaveBlock1Ptr
 _08054B54: .4byte 0x00003a4c
 _08054B58: .4byte gUnknown_2031DB0
-_08054B5C: .4byte gUnknown_300500C
+_08054B5C: .4byte gSaveBlock2Ptr
 _08054B60: .4byte 0x00000bb8
 _08054B64: .4byte gUnknown_2024029
 _08054B68: .4byte 0x00000296
@@ -303,7 +303,7 @@ sub_8054B70: @ 8054B70
 	mov r0, sp
 	movs r5, 0
 	strh r5, [r0]
-	ldr r4, _08054BBC @ =gUnknown_300500C
+	ldr r4, _08054BBC @ =gSaveBlock2Ptr
 	ldr r1, [r4]
 	movs r0, 0xAF
 	lsls r0, 4
@@ -332,7 +332,7 @@ sub_8054B70: @ 8054B70
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054BBC: .4byte gUnknown_300500C
+_08054BBC: .4byte gSaveBlock2Ptr
 _08054BC0: .4byte 0x01000008
 _08054BC4: .4byte 0x00000af8
 	thumb_func_end sub_8054B70

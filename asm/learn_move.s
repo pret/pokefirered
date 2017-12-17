@@ -979,7 +979,7 @@ _080E4EA8:
 	.align 2, 0
 _080E4EBC: .4byte gUnknown_203AAB4
 _080E4EC0:
-	ldr r0, _080E4EE8 @ =gUnknown_30030F0
+	ldr r0, _080E4EE8 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1003,7 +1003,7 @@ _080E4EDA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E4EE8: .4byte gUnknown_30030F0
+_080E4EE8: .4byte gMain
 _080E4EEC: .4byte gUnknown_203AAB4
 	thumb_func_end sub_80E48F4
 
@@ -1410,7 +1410,7 @@ sub_80E5204: @ 80E5204
 	adds r0, r1
 	ldrb r0, [r0]
 	bl ListMenuHandleInput
-	ldr r0, _080E5260 @ =gUnknown_30030F0
+	ldr r0, _080E5260 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1443,7 +1443,7 @@ sub_80E5204: @ 80E5204
 	.align 2, 0
 _080E5258: .4byte gUnknown_203AAB4
 _080E525C: .4byte 0x00000263
-_080E5260: .4byte gUnknown_30030F0
+_080E5260: .4byte gMain
 _080E5264: .4byte 0x00000a67
 _080E5268: .4byte gUnknown_2021CF0
 _080E526C: .4byte gUnknown_841E3FB

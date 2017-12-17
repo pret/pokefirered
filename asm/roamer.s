@@ -8,7 +8,7 @@
 	thumb_func_start sub_8141C54
 sub_8141C54: @ 8141C54
 	push {lr}
-	ldr r0, _08141C84 @ =gUnknown_3005008
+	ldr r0, _08141C84 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08141C88 @ =0x000030d0
 	adds r0, r1
@@ -32,7 +32,7 @@ _08141C74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08141C84: .4byte gUnknown_3005008
+_08141C84: .4byte gSaveBlock1Ptr
 _08141C88: .4byte 0x000030d0
 _08141C8C: .4byte gUnknown_203F3AE
 _08141C90: .4byte gUnknown_203F3A8
@@ -70,7 +70,7 @@ _08141CBA:
 	movs r2, 0x32
 	movs r3, 0x20
 	bl CreateMon
-	ldr r5, _08141D8C @ =gUnknown_3005008
+	ldr r5, _08141D8C @ =gSaveBlock1Ptr
 	ldr r1, [r5]
 	ldr r4, _08141D90 @ =0x000030d0
 	adds r1, r4
@@ -154,7 +154,7 @@ _08141CBA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08141D8C: .4byte gUnknown_3005008
+_08141D8C: .4byte gSaveBlock1Ptr
 _08141D90: .4byte 0x000030d0
 _08141D94: .4byte gUnknown_203F3AE
 _08141D98: .4byte gUnknown_8466C58
@@ -180,7 +180,7 @@ UpdateLocationHistoryForRoamer: @ 8141DAC
 	strb r1, [r0, 0x2]
 	ldrb r1, [r0, 0x1]
 	strb r1, [r0, 0x3]
-	ldr r1, _08141DD0 @ =gUnknown_3005008
+	ldr r1, _08141DD0 @ =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x4]
 	strb r1, [r0]
@@ -189,13 +189,13 @@ UpdateLocationHistoryForRoamer: @ 8141DAC
 	bx lr
 	.align 2, 0
 _08141DCC: .4byte gUnknown_203F3A8
-_08141DD0: .4byte gUnknown_3005008
+_08141DD0: .4byte gSaveBlock1Ptr
 	thumb_func_end UpdateLocationHistoryForRoamer
 
 	thumb_func_start RoamerMoveToOtherLocationSet
 RoamerMoveToOtherLocationSet: @ 8141DD4
 	push {r4,r5,lr}
-	ldr r0, _08141E18 @ =gUnknown_3005008
+	ldr r0, _08141E18 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08141E1C @ =0x000030d0
 	adds r0, r1
@@ -228,7 +228,7 @@ _08141E10:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08141E18: .4byte gUnknown_3005008
+_08141E18: .4byte gSaveBlock1Ptr
 _08141E1C: .4byte 0x000030d0
 _08141E20: .4byte gUnknown_203F3AE
 _08141E24: .4byte gUnknown_8466C58
@@ -248,7 +248,7 @@ RoamerMove: @ 8141E28
 	bl RoamerMoveToOtherLocationSet
 	b _08141EB2
 _08141E42:
-	ldr r0, _08141E94 @ =gUnknown_3005008
+	ldr r0, _08141E94 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08141E98 @ =0x000030d0
 	adds r0, r1
@@ -291,7 +291,7 @@ _08141E8C:
 	strb r1, [r7, 0x1]
 	b _08141EB2
 	.align 2, 0
-_08141E94: .4byte gUnknown_3005008
+_08141E94: .4byte gSaveBlock1Ptr
 _08141E98: .4byte 0x000030d0
 _08141E9C: .4byte gUnknown_203F3AE
 _08141EA0: .4byte gUnknown_8466C58
@@ -315,7 +315,7 @@ IsRoamerAt: @ 8141EB8
 	lsrs r2, r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, _08141EE4 @ =gUnknown_3005008
+	ldr r0, _08141EE4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, _08141EE8 @ =0x000030d0
 	adds r0, r3
@@ -332,7 +332,7 @@ IsRoamerAt: @ 8141EB8
 	movs r0, 0x1
 	b _08141EF2
 	.align 2, 0
-_08141EE4: .4byte gUnknown_3005008
+_08141EE4: .4byte gSaveBlock1Ptr
 _08141EE8: .4byte 0x000030d0
 _08141EEC: .4byte gUnknown_203F3AE
 _08141EF0:
@@ -348,7 +348,7 @@ CreateRoamerMonInstance: @ 8141EF8
 	sub sp, 0x4
 	ldr r5, _08141F84 @ =gUnknown_202402C
 	bl ZeroEnemyPartyMons
-	ldr r4, _08141F88 @ =gUnknown_3005008
+	ldr r4, _08141F88 @ =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, _08141F8C @ =0x000030d0
 	adds r0, r1
@@ -407,7 +407,7 @@ CreateRoamerMonInstance: @ 8141EF8
 	bx r0
 	.align 2, 0
 _08141F84: .4byte gUnknown_202402C
-_08141F88: .4byte gUnknown_3005008
+_08141F88: .4byte gSaveBlock1Ptr
 _08141F8C: .4byte 0x000030d0
 _08141F90: .4byte 0x000030dd
 _08141F94: .4byte 0x000030da
@@ -421,7 +421,7 @@ _08141FA8: .4byte 0x000030e2
 	thumb_func_start TryStartRoamerEncounter
 TryStartRoamerEncounter: @ 8141FAC
 	push {lr}
-	ldr r0, _08141FDC @ =gUnknown_3005008
+	ldr r0, _08141FDC @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x4]
 	ldrb r1, [r1, 0x5]
@@ -441,7 +441,7 @@ TryStartRoamerEncounter: @ 8141FAC
 	movs r0, 0x1
 	b _08141FE2
 	.align 2, 0
-_08141FDC: .4byte gUnknown_3005008
+_08141FDC: .4byte gSaveBlock1Ptr
 _08141FE0:
 	movs r0, 0
 _08141FE2:
@@ -455,7 +455,7 @@ UpdateRoamerHPStatus: @ 8141FE8
 	adds r6, r0, 0
 	movs r1, 0x39
 	bl GetMonData
-	ldr r5, _08142014 @ =gUnknown_3005008
+	ldr r5, _08142014 @ =gSaveBlock1Ptr
 	ldr r1, [r5]
 	ldr r4, _08142018 @ =0x000030d0
 	adds r1, r4
@@ -471,13 +471,13 @@ UpdateRoamerHPStatus: @ 8141FE8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08142014: .4byte gUnknown_3005008
+_08142014: .4byte gSaveBlock1Ptr
 _08142018: .4byte 0x000030d0
 	thumb_func_end UpdateRoamerHPStatus
 
 	thumb_func_start SetRoamerInactive
 SetRoamerInactive: @ 814201C
-	ldr r0, _0814202C @ =gUnknown_3005008
+	ldr r0, _0814202C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08142030 @ =0x000030d0
 	adds r0, r1
@@ -485,7 +485,7 @@ SetRoamerInactive: @ 814201C
 	strb r1, [r0, 0x13]
 	bx lr
 	.align 2, 0
-_0814202C: .4byte gUnknown_3005008
+_0814202C: .4byte gSaveBlock1Ptr
 _08142030: .4byte 0x000030d0
 	thumb_func_end SetRoamerInactive
 
@@ -504,7 +504,7 @@ _08142040: .4byte gUnknown_203F3AE
 	thumb_func_start sub_8142044
 sub_8142044: @ 8142044
 	push {lr}
-	ldr r0, _08142064 @ =gUnknown_3005008
+	ldr r0, _08142064 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, _08142068 @ =0x000030d0
 	adds r0, r1
@@ -518,7 +518,7 @@ sub_8142044: @ 8142044
 	ldrb r0, [r0, 0x14]
 	b _08142072
 	.align 2, 0
-_08142064: .4byte gUnknown_3005008
+_08142064: .4byte gSaveBlock1Ptr
 _08142068: .4byte 0x000030d0
 _0814206C: .4byte gUnknown_203F3AE
 _08142070:

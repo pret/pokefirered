@@ -31,7 +31,7 @@ sub_81420A4: @ 81420A4
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r7, r0, 0
-	ldr r0, _081420C4 @ =gUnknown_30030F0
+	ldr r0, _081420C4 @ =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r6, r0, r1
@@ -46,7 +46,7 @@ _081420BA:
 	beq _081420D6
 	b _081422A0
 	.align 2, 0
-_081420C4: .4byte gUnknown_30030F0
+_081420C4: .4byte gMain
 _081420C8:
 	cmp r5, 0x2
 	bne _081420CE

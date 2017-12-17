@@ -262,7 +262,7 @@ _0803DB6C:
 	str r0, [sp, 0x18]
 	b _0803DB92
 _0803DB78:
-	ldr r0, _0803DCBC @ =gUnknown_300500C
+	ldr r0, _0803DCBC @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0xA]
 	ldrb r0, [r2, 0xB]
@@ -296,11 +296,11 @@ _0803DB92:
 	movs r1, 0x2
 	mov r2, sp
 	bl sub_80404D0
-	ldr r2, _0803DCC0 @ =gUnknown_81E9F11
+	ldr r2, _0803DCC0 @ =gGameLanguage
 	adds r0, r7, 0
 	movs r1, 0x3
 	bl sub_80404D0
-	ldr r5, _0803DCBC @ =gUnknown_300500C
+	ldr r5, _0803DCBC @ =gSaveBlock2Ptr
 	ldr r2, [r5]
 	adds r0, r7, 0
 	movs r1, 0x7
@@ -353,7 +353,7 @@ _0803DB92:
 	movs r1, 0x24
 	add r2, sp, 0x10
 	bl sub_80404D0
-	ldr r2, _0803DCCC @ =gUnknown_81E9F10
+	ldr r2, _0803DCCC @ =gGameVersion
 	adds r0, r7, 0
 	movs r1, 0x25
 	bl sub_80404D0
@@ -403,11 +403,11 @@ _0803DB92:
 	bl sub_80404D0
 	b _0803DD58
 	.align 2, 0
-_0803DCBC: .4byte gUnknown_300500C
-_0803DCC0: .4byte gUnknown_81E9F11
+_0803DCBC: .4byte gSaveBlock2Ptr
+_0803DCC0: .4byte gGameLanguage
 _0803DCC4: .4byte gUnknown_8254784
 _0803DCC8: .4byte gUnknown_8253AE4
-_0803DCCC: .4byte gUnknown_81E9F10
+_0803DCCC: .4byte gGameVersion
 _0803DCD0:
 	bl Random
 	lsls r0, 16

@@ -1117,7 +1117,7 @@ IsCryFinished: @ 80721A0
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080721BC
-	bl sub_8000944
+	bl ClearPokemonCrySongs
 	movs r0, 0x1
 	b _080721BE
 	.align 2, 0
@@ -1135,7 +1135,7 @@ StopCryAndClearCrySongs: @ 80721C4
 	ldr r0, _080721D8 @ =gUnknown_2037ECC
 	ldr r0, [r0]
 	bl m4aMPlayStop
-	bl sub_8000944
+	bl ClearPokemonCrySongs
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1162,7 +1162,7 @@ IsCryPlayingOrClearCrySongs: @ 80721F0
 	bl IsPokemonCryPlaying
 	cmp r0, 0
 	bne _0807220C
-	bl sub_8000944
+	bl ClearPokemonCrySongs
 	movs r0, 0
 	b _0807220E
 	.align 2, 0

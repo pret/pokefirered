@@ -7,7 +7,7 @@
 
 	thumb_func_start sub_815EDDC
 sub_815EDDC: @ 815EDDC
-	ldr r1, _0815EDF0 @ =gUnknown_300500C
+	ldr r1, _0815EDF0 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	movs r2, 0xF2
 	lsls r2, 4
@@ -17,12 +17,12 @@ sub_815EDDC: @ 815EDDC
 	eors r0, r1
 	bx lr
 	.align 2, 0
-_0815EDF0: .4byte gUnknown_300500C
+_0815EDF0: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_815EDDC
 
 	thumb_func_start sub_815EDF4
 sub_815EDF4: @ 815EDF4
-	ldr r2, _0815EE08 @ =gUnknown_300500C
+	ldr r2, _0815EE08 @ =gSaveBlock2Ptr
 	ldr r2, [r2]
 	movs r3, 0xF2
 	lsls r3, 4
@@ -32,13 +32,13 @@ sub_815EDF4: @ 815EDF4
 	str r2, [r0]
 	bx lr
 	.align 2, 0
-_0815EE08: .4byte gUnknown_300500C
+_0815EE08: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_815EDF4
 
 	thumb_func_start sub_815EE0C
 sub_815EE0C: @ 815EE0C
 	push {r4-r6,lr}
-	ldr r6, _0815EE30 @ =gUnknown_3005008
+	ldr r6, _0815EE30 @ =gSaveBlock1Ptr
 	ldr r5, _0815EE34 @ =0x00003d38
 	movs r4, 0x3
 _0815EE14:
@@ -55,14 +55,14 @@ _0815EE14:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815EE30: .4byte gUnknown_3005008
+_0815EE30: .4byte gSaveBlock1Ptr
 _0815EE34: .4byte 0x00003d38
 _0815EE38: .4byte 0x00034bbf
 	thumb_func_end sub_815EE0C
 
 	thumb_func_start sub_815EE3C
 sub_815EE3C: @ 815EE3C
-	ldr r1, _0815EE50 @ =gUnknown_300500C
+	ldr r1, _0815EE50 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
 	movs r2, 0xF2
 	lsls r2, 4
@@ -72,12 +72,12 @@ sub_815EE3C: @ 815EE3C
 	eors r0, r1
 	bx lr
 	.align 2, 0
-_0815EE50: .4byte gUnknown_300500C
+_0815EE50: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_815EE3C
 
 	thumb_func_start sub_815EE54
 sub_815EE54: @ 815EE54
-	ldr r2, _0815EE68 @ =gUnknown_300500C
+	ldr r2, _0815EE68 @ =gSaveBlock2Ptr
 	ldr r2, [r2]
 	movs r3, 0xF2
 	lsls r3, 4
@@ -87,14 +87,14 @@ sub_815EE54: @ 815EE54
 	str r2, [r0]
 	bx lr
 	.align 2, 0
-_0815EE68: .4byte gUnknown_300500C
+_0815EE68: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_815EE54
 
 	thumb_func_start sub_815EE6C
 sub_815EE6C: @ 815EE6C
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, _0815EE80 @ =gUnknown_300500C
+	ldr r0, _0815EE80 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, _0815EE84 @ =0x00000af8
 	adds r0, r2
@@ -102,7 +102,7 @@ sub_815EE6C: @ 815EE6C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815EE80: .4byte gUnknown_300500C
+_0815EE80: .4byte gSaveBlock2Ptr
 _0815EE84: .4byte 0x00000af8
 	thumb_func_end sub_815EE6C
 
@@ -110,7 +110,7 @@ _0815EE84: .4byte 0x00000af8
 sub_815EE88: @ 815EE88
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _0815EEA0 @ =gUnknown_300500C
+	ldr r0, _0815EEA0 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _0815EEA4 @ =0x00000af8
 	adds r0, r1
@@ -120,7 +120,7 @@ sub_815EE88: @ 815EE88
 	movs r0, 0x1
 	b _0815EEAA
 	.align 2, 0
-_0815EEA0: .4byte gUnknown_300500C
+_0815EEA0: .4byte gSaveBlock2Ptr
 _0815EEA4: .4byte 0x00000af8
 _0815EEA8:
 	movs r0, 0
@@ -133,7 +133,7 @@ _0815EEAA:
 	thumb_func_start sub_815EEB0
 sub_815EEB0: @ 815EEB0
 	push {lr}
-	ldr r0, _0815EECC @ =gUnknown_300500C
+	ldr r0, _0815EECC @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _0815EED0 @ =0x00000af8
 	adds r0, r1
@@ -145,7 +145,7 @@ sub_815EEB0: @ 815EEB0
 	movs r0, 0x1
 	b _0815EEDA
 	.align 2, 0
-_0815EECC: .4byte gUnknown_300500C
+_0815EECC: .4byte gSaveBlock2Ptr
 _0815EED0: .4byte 0x00000af8
 _0815EED4: .4byte gUnknown_20370C0
 _0815EED8:
@@ -159,7 +159,7 @@ _0815EEDA:
 sub_815EEE0: @ 815EEE0
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, _0815EF04 @ =gUnknown_300500C
+	ldr r0, _0815EF04 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _0815EF08 @ =0x00000af8
 	adds r5, r0, r1
@@ -174,7 +174,7 @@ sub_815EEE0: @ 815EEE0
 	movs r0, 0x1
 	b _0815EF1A
 	.align 2, 0
-_0815EF04: .4byte gUnknown_300500C
+_0815EF04: .4byte gSaveBlock2Ptr
 _0815EF08: .4byte 0x00000af8
 _0815EF0C: .4byte 0x0001869f
 _0815EF10:
@@ -192,7 +192,7 @@ _0815EF1A:
 sub_815EF20: @ 815EF20
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _0815EF4C @ =gUnknown_300500C
+	ldr r0, _0815EF4C @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _0815EF50 @ =0x00000af8
 	adds r4, r0, r1
@@ -210,7 +210,7 @@ sub_815EF20: @ 815EF20
 	movs r0, 0x1
 	b _0815EF56
 	.align 2, 0
-_0815EF4C: .4byte gUnknown_300500C
+_0815EF4C: .4byte gSaveBlock2Ptr
 _0815EF50: .4byte 0x00000af8
 _0815EF54:
 	movs r0, 0
@@ -223,7 +223,7 @@ _0815EF56:
 	thumb_func_start sub_815EF5C
 sub_815EF5C: @ 815EF5C
 	push {r4,r5,lr}
-	ldr r0, _0815EF8C @ =gUnknown_300500C
+	ldr r0, _0815EF8C @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _0815EF90 @ =0x00000af8
 	adds r4, r0, r1
@@ -243,7 +243,7 @@ sub_815EF5C: @ 815EF5C
 	movs r0, 0x1
 	b _0815EF9A
 	.align 2, 0
-_0815EF8C: .4byte gUnknown_300500C
+_0815EF8C: .4byte gSaveBlock2Ptr
 _0815EF90: .4byte 0x00000af8
 _0815EF94: .4byte gUnknown_20370C0
 _0815EF98:
@@ -257,7 +257,7 @@ _0815EF9A:
 	thumb_func_start sub_815EFA0
 sub_815EFA0: @ 815EFA0
 	push {lr}
-	ldr r0, _0815EFB4 @ =gUnknown_300500C
+	ldr r0, _0815EFB4 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, _0815EFB8 @ =0x00000af8
 	adds r0, r1
@@ -265,7 +265,7 @@ sub_815EFA0: @ 815EFA0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0815EFB4: .4byte gUnknown_300500C
+_0815EFB4: .4byte gSaveBlock2Ptr
 _0815EFB8: .4byte 0x00000af8
 	thumb_func_end sub_815EFA0
 

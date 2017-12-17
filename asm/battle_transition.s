@@ -15,7 +15,7 @@ sub_80D08B8: @ 80D08B8
 	movs r0, 0x3C
 	bl AllocZeroed
 	str r0, [r5]
-	ldr r1, _080D08E0 @ =gUnknown_30030F0
+	ldr r1, _080D08E0 @ =gMain
 	ldr r0, _080D08E4 @ =sub_80565A8
 	str r0, [r1, 0x4]
 	adds r0, r4, 0
@@ -25,7 +25,7 @@ sub_80D08B8: @ 80D08B8
 	bx r0
 	.align 2, 0
 _080D08DC: .4byte gUnknown_2039A2C
-_080D08E0: .4byte gUnknown_30030F0
+_080D08E0: .4byte gMain
 _080D08E4: .4byte sub_80565A8
 	thumb_func_end sub_80D08B8
 
@@ -4174,7 +4174,7 @@ Phase2_Mugshot_Func2: @ 80D28A8
 	movs r2, 0x20
 	bl LoadPalette
 	ldr r1, _080D295C @ =gUnknown_83FA754
-	ldr r0, _080D2960 @ =gUnknown_300500C
+	ldr r0, _080D2960 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	lsls r0, 2
@@ -4235,7 +4235,7 @@ _080D2950: .4byte gUnknown_83FAC34
 _080D2954: .4byte gUnknown_83F8F60
 _080D2958: .4byte gUnknown_83FA740
 _080D295C: .4byte gUnknown_83FA754
-_080D2960: .4byte gUnknown_300500C
+_080D2960: .4byte gSaveBlock2Ptr
 _080D2964: .4byte sub_80D2E6C
 	thumb_func_end Phase2_Mugshot_Func2
 
@@ -4949,7 +4949,7 @@ sub_80D2EA4: @ 80D2EA4
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
-	ldr r0, _080D3008 @ =gUnknown_300500C
+	ldr r0, _080D3008 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
@@ -5078,7 +5078,7 @@ _080D2FF8: .4byte gUnknown_3003E58
 _080D2FFC: .4byte gUnknown_83FA494
 _080D3000: .4byte gUnknown_83FA4AE
 _080D3004: .4byte gUnknown_201C000
-_080D3008: .4byte gUnknown_300500C
+_080D3008: .4byte gSaveBlock2Ptr
 _080D300C: .4byte gUnknown_202063C
 _080D3010: .4byte sub_80D301C
 _080D3014: .4byte gUnknown_83FA49A

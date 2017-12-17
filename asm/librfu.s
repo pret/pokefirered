@@ -2770,11 +2770,11 @@ _081E0956:
 sub_81E095C: @ 81E095C
 	push {lr}
 	ldr r2, _081E0964 @ =gUnknown_86FC068
-	ldr r3, _081E0968 @ =gUnknown_30000F0
+	ldr r3, _081E0968 @ =0x30000F0
 	b _081E0976
 	.align 2, 0
 _081E0964: .4byte gUnknown_86FC068
-_081E0968: .4byte gUnknown_30000F0
+_081E0968: .4byte 0x30000F0
 _081E096C:
 	ldrb r0, [r3]
 	adds r3, 0x1
@@ -2800,7 +2800,7 @@ _081E0984:
 	lsrs r1, r0, 24
 	cmp r1, 0x59
 	bls _081E0984
-	ldr r0, _081E09C0 @ =gUnknown_30000FA
+	ldr r0, _081E09C0 @ =0x30000FA
 	ldrh r0, [r0]
 	cmp r3, r0
 	bne _081E09CC
@@ -2819,7 +2819,7 @@ _081E0984:
 	movs r0, 0
 	b _081E09CE
 	.align 2, 0
-_081E09C0: .4byte gUnknown_30000FA
+_081E09C0: .4byte 0x30000FA
 _081E09C4: .4byte gUnknown_3007460
 _081E09C8: .4byte gUnknown_3007464
 _081E09CC:

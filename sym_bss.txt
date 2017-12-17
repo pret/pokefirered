@@ -2,24 +2,11 @@
 
 	.space 0x4
 
-gUnknown_30000C8: @ 30000C8
-	.space 0xC
+	.include "src/dma3_manager.o"
 
-gUnknown_30000D4: @ 30000D4
-	.space 0x1C
+	.space 0x4
 
-gUnknown_30000F0: @ 30000F0
-	.space 0xA
-
-gUnknown_30000FA: @ 30000FA
-	.space 0x7CE
-
-gUnknown_30008C8: @ 30008C8
-	.space 0x1
-
-gUnknown_30008C9: @ 30008C9
-	.space 0x7
-
+	.align 2
 gUnknown_30008D0: @ 30008D0
 	.space 0x18
 

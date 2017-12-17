@@ -81,18 +81,18 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-extern u16 gKeyRepeatStartDelay;
-extern u8 gLinkTransferringData;
-extern struct Main gMain;
-extern u16 gKeyRepeatContinueDelay;
-extern u8 gSoftResetDisabled;
-extern IntrFunc gIntrTable[INTR_COUNT];
-extern bool8 gLinkVSyncDisabled;
-extern u32 IntrMain_Buffer[0x200];
-extern u8 gPcmDmaCounter;
-extern u8 gUnknown_3003578;
-extern u8 gUnknown_3003D80;
-extern u8 gUnknown_3003D84;
+u16 gKeyRepeatStartDelay;
+u8 gLinkTransferringData;
+struct Main gMain;
+u16 gKeyRepeatContinueDelay;
+u8 gSoftResetDisabled;
+IntrFunc gIntrTable[INTR_COUNT];
+bool8 gLinkVSyncDisabled;
+u32 IntrMain_Buffer[0x200];
+u8 gPcmDmaCounter;
+u8 gUnknown_3003578;
+u8 gUnknown_3003D80;
+u8 gUnknown_3003D84;
 
 static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 

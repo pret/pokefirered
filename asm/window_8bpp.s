@@ -238,7 +238,7 @@ FillWindowPixelRect8Bit: @ 8005180
 	add r0, sp, 0x8
 	adds r1, r2, 0
 	mov r2, r9
-	bl sub_8004F90
+	bl FillBitmapRect8Bit
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -339,7 +339,7 @@ BlitBitmapRectToWindow4BitTo8Bit: @ 800520C
 	ldr r6, [sp, 0x28]
 	str r6, [sp, 0x14]
 	add r0, sp, 0x18
-	bl sub_8004D40
+	bl BlitBitmapRect4BitTo8Bit
 	add sp, 0x2C
 	pop {r3-r5}
 	mov r8, r3

@@ -141,7 +141,7 @@ sub_80D060C: @ 80D060C
 	ldr r0, _080D066C @ =gUnknown_2021D18
 	mov r9, r0
 	ldr r1, _080D0670 @ =gUnknown_84162C4
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0
@@ -223,7 +223,7 @@ sub_80D06D0: @ 80D06D0
 	ldr r4, _080D0720 @ =gUnknown_2021D18
 	ldr r1, _080D0724 @ =gUnknown_84162C4
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -287,7 +287,7 @@ sub_80D072C: @ 80D072C
 	str r1, [sp, 0x1C]
 	ldr r4, _080D07BC @ =gUnknown_2039A28
 	add r0, sp, 0x18
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0

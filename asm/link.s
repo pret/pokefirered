@@ -1523,8 +1523,8 @@ _0800A080:
 _0800A084: .4byte gUnknown_3003F80
 	thumb_func_end sub_800A068
 
-	thumb_func_start sub_800A088
-sub_800A088: @ 800A088
+	thumb_func_start GetLinkPlayerCount
+GetLinkPlayerCount: @ 800A088
 	push {lr}
 	ldr r0, _0800A0A0 @ =gUnknown_3003F3C
 	ldrb r0, [r0]
@@ -1546,7 +1546,7 @@ _0800A0A8:
 _0800A0B0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A088
+	thumb_func_end GetLinkPlayerCount
 
 	thumb_func_start sub_800A0B4
 sub_800A0B4: @ 800A0B4
@@ -1590,7 +1590,7 @@ _0800A0F0:
 _0800A0F8: .4byte gUnknown_3003F64
 _0800A0FC: .4byte gUnknown_3000E54
 _0800A100:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800A112
@@ -1618,12 +1618,12 @@ _0800A134:
 	adds r5, 0x1C
 	adds r6, 0x1
 _0800A138:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
 	blt _0800A124
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r7, r0
@@ -1738,12 +1738,12 @@ _0800A21A:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0800A220:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	bcc _0800A200
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
@@ -2687,7 +2687,7 @@ _0800A8DE:
 	lsrs r4, r0, 24
 	adds r5, 0x1
 _0800A8EA:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -3016,7 +3016,7 @@ _0800AB34: .4byte sub_800AB38
 	thumb_func_start sub_800AB38
 sub_800AB38: @ 800AB38
 	push {r4,lr}
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r3, 0
@@ -3120,7 +3120,7 @@ _0800ABFC: .4byte sub_800AC00
 	thumb_func_start sub_800AC00
 sub_800AC00: @ 800AC00
 	push {r4,lr}
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
@@ -3283,7 +3283,7 @@ _0800AD30:
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
 	ldr r0, _0800AE04 @ =gUnknown_82345F0
-	bl sub_8003B24
+	bl InitWindows
 	lsls r0, 16
 	cmp r0, 0
 	beq _0800ADD8
@@ -3387,7 +3387,7 @@ sub_800AE1C: @ 800AE1C
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x5
-	bl sub_812E51C
+	bl box_print
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	ldr r0, _0800AECC @ =gUnknown_841DF05
@@ -3396,7 +3396,7 @@ sub_800AE1C: @ 800AE1C
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -3444,7 +3444,7 @@ sub_800AED0: @ 800AED0
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -3522,7 +3522,7 @@ _0800AF7A:
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x14
-	bl sub_812E51C
+	bl box_print
 	b _0800AFC4
 	.align 2, 0
 _0800AF9C: .4byte gUnknown_3003F3C
@@ -3541,7 +3541,7 @@ _0800AFA8:
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x14
-	bl sub_812E51C
+	bl box_print
 _0800AFC4:
 	ldr r0, _0800B004 @ =gUnknown_30030F0
 	movs r2, 0x87

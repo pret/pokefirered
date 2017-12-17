@@ -33,7 +33,7 @@ _080A0FE6:
 	lsrs r4, r0, 24
 	ldr r0, _080A1010 @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_809A260
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -153,7 +153,7 @@ sub_80A10C4: @ 80A10C4
 	lsrs r6, r2, 24
 	ldr r5, _080A10F0 @ =gUnknown_2021D18
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	cmp r4, 0
 	bne _080A10F8
 	ldr r3, _080A10F4 @ =sub_810A1F8
@@ -467,14 +467,14 @@ sub_80A1338: @ 80A1338
 	cmp r0, 0x1
 	bne _080A1360
 	ldr r1, _080A1358 @ =gUnknown_2039998
-	ldr r0, _080A135C @ =sub_80A1410
+	ldr r0, _080A135C @ =ItemUseOnFieldCB_Rod
 	str r0, [r1]
 	adds r0, r4, 0
 	bl sub_80A103C
 	b _080A1372
 	.align 2, 0
 _080A1358: .4byte gUnknown_2039998
-_080A135C: .4byte sub_80A1410
+_080A135C: .4byte ItemUseOnFieldCB_Rod
 _080A1360:
 	ldr r0, _080A1378 @ =gUnknown_3005090
 	lsls r1, r4, 2
@@ -512,7 +512,7 @@ sub_80A137C: @ 80A137C
 	lsls r0, r6, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
-	bl sub_805A104
+	bl MetatileBehavior_IsWaterfall
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1404
@@ -565,8 +565,8 @@ _080A1406:
 	bx r1
 	thumb_func_end sub_80A137C
 
-	thumb_func_start sub_80A1410
-sub_80A1410: @ 80A1410
+	thumb_func_start ItemUseOnFieldCB_Rod
+ItemUseOnFieldCB_Rod: @ 80A1410
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -584,16 +584,16 @@ sub_80A1410: @ 80A1410
 	bx r0
 	.align 2, 0
 _080A1434: .4byte gUnknown_203AD30
-	thumb_func_end sub_80A1410
+	thumb_func_end ItemUseOnFieldCB_Rod
 
-	thumb_func_start sub_80A1438
-sub_80A1438: @ 80A1438
+	thumb_func_start ItemUseOutOfBattle_Itemfinder
+ItemUseOutOfBattle_Itemfinder: @ 80A1438
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x27
-	bl sub_8054E90
+	bl IncrementGameStat
 	ldr r1, _080A1458 @ =gUnknown_2039998
 	ldr r0, _080A145C @ =sub_813EC8C
 	str r0, [r1]
@@ -605,7 +605,7 @@ sub_80A1438: @ 80A1438
 	.align 2, 0
 _080A1458: .4byte gUnknown_2039998
 _080A145C: .4byte sub_813EC8C
-	thumb_func_end sub_80A1438
+	thumb_func_end ItemUseOutOfBattle_Itemfinder
 
 	thumb_func_start sub_80A1460
 sub_80A1460: @ 80A1460
@@ -624,7 +624,7 @@ sub_80A1460: @ 80A1460
 	ldr r4, _080A14B8 @ =gUnknown_2021D18
 	ldr r1, _080A14BC @ =gUnknown_8416537
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r0, _080A14C0 @ =gUnknown_203AD30
 	ldrh r2, [r0]
 	ldr r3, _080A14C4 @ =0x0000ffff
@@ -683,7 +683,7 @@ sub_80A14E8: @ 80A14E8
 	ldr r4, _080A153C @ =gUnknown_2021D18
 	ldr r1, _080A1540 @ =gUnknown_8416644
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r0, _080A1544 @ =gUnknown_203AD30
 	ldrh r2, [r0]
 	ldr r3, _080A1548 @ =0x0000ffff
@@ -963,14 +963,14 @@ sub_80A1734: @ 80A1734
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080A1748 @ =gUnknown_3005E98
-	ldr r1, _080A174C @ =sub_81262AC
+	ldr r1, _080A174C @ =dp05_rare_candy
 	str r1, [r2]
 	bl sub_80A16D0
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A1748: .4byte gUnknown_3005E98
-_080A174C: .4byte sub_81262AC
+_080A174C: .4byte dp05_rare_candy
 	thumb_func_end sub_80A1734
 
 	thumb_func_start sub_80A1750
@@ -1377,7 +1377,7 @@ sub_80A1A44: @ 80A1A44
 	bl sub_8099E90
 	ldr r0, _080A1A8C @ =gUnknown_2021D18
 	ldr r1, _080A1A90 @ =gUnknown_841658C
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1412,7 +1412,7 @@ sub_80A1A94: @ 80A1A94
 	bl sub_8099E90
 	ldr r0, _080A1AE8 @ =gUnknown_2021D18
 	ldr r1, _080A1AEC @ =gUnknown_84165D2
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r1, _080A1AF0 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1438,7 +1438,7 @@ _080A1AF4:
 	bl sub_8099E90
 	ldr r0, _080A1B38 @ =gUnknown_2021D18
 	ldr r1, _080A1B3C @ =gUnknown_8416600
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r1, _080A1B40 @ =gUnknown_3005090
 	lsls r0, r6, 2
 	adds r0, r6
@@ -1517,8 +1517,8 @@ _080A1BA6:
 	bx r1
 	thumb_func_end sub_80A1B8C
 
-	thumb_func_start sub_80A1BAC
-sub_80A1BAC: @ 80A1BAC
+	thumb_func_start ItemUseOutOfBattle_EscapeRope
+ItemUseOutOfBattle_EscapeRope: @ 80A1BAC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1560,7 +1560,7 @@ _080A1BFE:
 	bx r0
 	.align 2, 0
 _080A1C04: .4byte gUnknown_3005090
-	thumb_func_end sub_80A1BAC
+	thumb_func_end ItemUseOutOfBattle_EscapeRope
 
 	thumb_func_start sub_80A1C08
 sub_80A1C08: @ 80A1C08
@@ -2011,7 +2011,7 @@ sub_80A1F78: @ 80A1F78
 	lsrs r4, r0, 24
 	ldr r0, _080A1F9C @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_809A260
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -2043,14 +2043,14 @@ sub_80A1FBC: @ 80A1FBC
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080A1FD0 @ =gUnknown_3005E98
-	ldr r1, _080A1FD4 @ =sub_81253B0
+	ldr r1, _080A1FD4 @ =ItemUseCB_Medicine
 	str r1, [r2]
 	bl sub_80A1F78
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A1FD0: .4byte gUnknown_3005E98
-_080A1FD4: .4byte sub_81253B0
+_080A1FD4: .4byte ItemUseCB_Medicine
 	thumb_func_end sub_80A1FBC
 
 	thumb_func_start sub_80A1FD8
@@ -2125,8 +2125,8 @@ _080A2060:
 	bx r0
 	thumb_func_end sub_80A2010
 
-	thumb_func_start sub_80A2068
-sub_80A2068: @ 80A2068
+	thumb_func_start ItemUseOutOfBattle_EnigmaBerry
+ItemUseOutOfBattle_EnigmaBerry: @ 80A2068
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2252,10 +2252,10 @@ _080A2188:
 	bx r0
 	.align 2, 0
 _080A2190: .4byte gUnknown_3005090
-	thumb_func_end sub_80A2068
+	thumb_func_end ItemUseOutOfBattle_EnigmaBerry
 
-	thumb_func_start sub_80A2194
-sub_80A2194: @ 80A2194
+	thumb_func_start ItemUseInBattle_EnigmaBerry
+ItemUseInBattle_EnigmaBerry: @ 80A2194
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2317,7 +2317,7 @@ _080A2232:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A2194
+	thumb_func_end ItemUseInBattle_EnigmaBerry
 
 	thumb_func_start sub_80A2238
 sub_80A2238: @ 80A2238
@@ -2326,7 +2326,7 @@ sub_80A2238: @ 80A2238
 	lsrs r5, r0, 24
 	ldr r0, _080A2268 @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_809A260
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -2334,7 +2334,7 @@ sub_80A2238: @ 80A2238
 	ldr r4, _080A226C @ =gUnknown_2021D18
 	ldr r1, _080A2270 @ =gUnknown_8416425
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r3, _080A2274 @ =sub_813E2B8
 	adds r0, r5, 0
 	movs r1, 0x4

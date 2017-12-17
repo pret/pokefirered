@@ -141,7 +141,7 @@ sub_80F3AA4: @ 80F3AA4
 sub_80F3AC4: @ 80F3AC4
 	push {r4,lr}
 	ldr r0, _080F3AFC @ =gUnknown_8410E08
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r4, _080F3B00 @ =gUnknown_203AB40
 	ldr r1, [r4]
 	strb r0, [r1, 0xA]
@@ -422,7 +422,7 @@ _080F3D0A:
 	movs r1, 0x1
 	movs r2, 0x8
 	movs r3, 0x29
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldr r1, [r7]
 	movs r0, 0x5
 	b _080F413C
@@ -649,7 +649,7 @@ _080F3EB4:
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x6
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldr r1, [r7]
 	movs r0, 0x8
 	b _080F3FB8
@@ -696,7 +696,7 @@ _080F3F24:
 	movs r1, 0x2
 	movs r2, 0x8
 	movs r3, 0x6
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldr r1, [r7]
 	movs r0, 0x9
 	b _080F3FB8
@@ -1002,7 +1002,7 @@ _080F41BA:
 	b _080F42C2
 _080F41C4:
 	ldr r0, _080F41F4 @ =gUnknown_840C5B0
-	bl sub_8003B24
+	bl InitWindows
 	movs r0, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
@@ -1027,7 +1027,7 @@ _080F41F8: .4byte gUnknown_840CB8C
 _080F41FC: .4byte gUnknown_840D228
 _080F4200:
 	ldr r0, _080F4234 @ =gUnknown_840C5D0
-	bl sub_8003B24
+	bl InitWindows
 	movs r0, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
@@ -1053,7 +1053,7 @@ _080F4238: .4byte gUnknown_840E158
 _080F423C: .4byte gUnknown_840E904
 _080F4240:
 	ldr r0, _080F427C @ =gUnknown_840C5F0
-	bl sub_8003B24
+	bl InitWindows
 	movs r0, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
@@ -1084,7 +1084,7 @@ _080F4280: .4byte gUnknown_840F240
 _080F4284: .4byte gUnknown_840F944
 _080F4288:
 	ldr r0, _080F42E4 @ =gUnknown_840C610
-	bl sub_8003B24
+	bl InitWindows
 	movs r0, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer

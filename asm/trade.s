@@ -43,7 +43,7 @@ sub_804C600: @ 804C600
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
 	ldr r0, _0804C70C @ =gUnknown_8261F2C
-	bl sub_8003B24
+	bl InitWindows
 	lsls r0, 16
 	cmp r0, 0
 	beq _0804C6F0
@@ -3912,7 +3912,7 @@ _0804E670: .4byte 0x0000bbcc
 	thumb_func_start sub_804E674
 sub_804E674: @ 804E674
 	push {r4,lr}
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4019,7 +4019,7 @@ _0804E740: .4byte gUnknown_2031DA8
 	thumb_func_start sub_804E744
 sub_804E744: @ 804E744
 	push {r4,r5,lr}
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -4827,7 +4827,7 @@ _0804ECEC:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	movs r3, 0x4
-	bl sub_812E51C
+	bl box_print
 	add r6, sp, 0x28
 	adds r0, r6, 0
 	ldr r1, [sp, 0x60]
@@ -4847,7 +4847,7 @@ _0804ECEC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -5110,7 +5110,7 @@ sub_804EFB4: @ 804EFB4
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x4
-	bl sub_812E51C
+	bl box_print
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -7866,7 +7866,7 @@ sub_80504CC: @ 80504CC
 	movs r2, 0x20
 	bl LoadCompressedPalette
 	ldr r0, _080505C8 @ =gUnknown_826D1BC
-	bl sub_8003B24
+	bl InitWindows
 	mov r0, r9
 	str r0, [sp]
 	movs r0, 0
@@ -9373,7 +9373,7 @@ _08051470:
 	ldr r4, _080514AC @ =gUnknown_2021D18
 	ldr r1, _080514B0 @ =gUnknown_841E1E9
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -9442,7 +9442,7 @@ _080514C8:
 	ldr r4, _08051524 @ =gUnknown_2021D18
 	ldr r1, _08051528 @ =gUnknown_841E200
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -10916,7 +10916,7 @@ _08052128:
 	ldr r4, _08052154 @ =gUnknown_2021D18
 	ldr r1, _08052158 @ =gUnknown_841E20D
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -11002,7 +11002,7 @@ _080521D0:
 	ldr r4, _080521F8 @ =gUnknown_2021D18
 	ldr r1, _080521FC @ =gUnknown_841E21E
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -11549,7 +11549,7 @@ _08052860:
 	ldr r4, _0805289C @ =gUnknown_2021D18
 	ldr r1, _080528A0 @ =gUnknown_841E1E9
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -11618,7 +11618,7 @@ _080528B8:
 	ldr r4, _08052914 @ =gUnknown_2021D18
 	ldr r1, _08052918 @ =gUnknown_841E200
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -11823,7 +11823,7 @@ _08052AAC:
 	lsls r1, 3
 	movs r0, 0x52
 	bl SetGpuReg
-	ldr r0, _08052ADC @ =sub_8054588
+	ldr r0, _08052ADC @ =c3_08054588
 	movs r1, 0x5
 	bl CreateTask
 	ldr r1, [r7]
@@ -11831,9 +11831,9 @@ _08052AAC:
 	.align 2, 0
 _08052AD4: .4byte gUnknown_202063C
 _08052AD8: .4byte 0x00000452
-_08052ADC: .4byte sub_8054588
+_08052ADC: .4byte c3_08054588
 _08052AE0:
-	ldr r0, _08052B00 @ =sub_8054588
+	ldr r0, _08052B00 @ =c3_08054588
 	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
@@ -11847,7 +11847,7 @@ _08052AF0:
 	strh r1, [r0]
 	bl _08053774
 	.align 2, 0
-_08052B00: .4byte sub_8054588
+_08052B00: .4byte c3_08054588
 _08052B04: .4byte gUnknown_2031DAC
 _08052B08:
 	ldr r2, [r7]
@@ -12151,11 +12151,11 @@ _08052D76:
 	ldrh r0, [r1]
 	adds r0, 0x1
 	strh r0, [r1]
-	ldr r0, _08052D98 @ =sub_805465C
+	ldr r0, _08052D98 @ =c3_0805465C
 	b _08052FBE
 	.align 2, 0
 _08052D94: .4byte gUnknown_202063C
-_08052D98: .4byte sub_805465C
+_08052D98: .4byte c3_0805465C
 _08052D9C:
 	ldr r2, _08052DAC @ =0x0000ffff
 	movs r0, 0x8
@@ -12654,7 +12654,7 @@ _08053180:
 	str r0, [r2, 0x64]
 	cmp r0, 0xA
 	bne _080531C4
-	ldr r0, _080531E0 @ =sub_8054588
+	ldr r0, _080531E0 @ =c3_08054588
 	movs r1, 0x5
 	bl CreateTask
 	lsls r0, 24
@@ -12682,7 +12682,7 @@ _080531D8:
 	b _08053708
 	.align 2, 0
 _080531DC: .4byte gUnknown_2031DAC
-_080531E0: .4byte sub_8054588
+_080531E0: .4byte c3_08054588
 _080531E4: .4byte gUnknown_3005090
 _080531E8:
 	ldr r0, [r7]
@@ -12714,7 +12714,7 @@ _080531E8:
 	.align 2, 0
 _08053220: .4byte gUnknown_202063C
 _08053224:
-	ldr r0, _08053244 @ =sub_8054588
+	ldr r0, _08053244 @ =c3_08054588
 	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -12731,7 +12731,7 @@ _08053234:
 	str r3, [r2, 0x64]
 	b _08053774
 	.align 2, 0
-_08053244: .4byte sub_8054588
+_08053244: .4byte c3_08054588
 _08053248: .4byte gUnknown_2031DAC
 _0805324C:
 	ldr r1, [r7]
@@ -13141,7 +13141,7 @@ _08053584:
 	ldr r4, _080535B0 @ =gUnknown_2021D18
 	ldr r1, _080535B4 @ =gUnknown_841E20D
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -13227,7 +13227,7 @@ _0805362C:
 	ldr r4, _08053654 @ =gUnknown_2021D18
 	ldr r1, _08053658 @ =gUnknown_841E21E
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -13984,7 +13984,7 @@ sub_8053B48: @ 8053B48
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	beq _08053CC0
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053CB4
@@ -14446,7 +14446,7 @@ _080540DC:
 	ldr r1, _08054100 @ =gUnknown_8419F54
 _080540EA:
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -14474,7 +14474,7 @@ _08054120:
 	movs r0, 0xC
 	bl sub_8113550
 	movs r0, 0x15
-	bl sub_8054E90
+	bl IncrementGameStat
 _08054132:
 	ldr r0, _08054178 @ =gUnknown_3003F3C
 	ldrb r0, [r0]
@@ -14989,7 +14989,7 @@ sub_8054508: @ 8054508
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -15004,8 +15004,8 @@ _08054580: .4byte gUnknown_2031DAC
 _08054584: .4byte 0x00000105
 	thumb_func_end sub_8054508
 
-	thumb_func_start sub_8054588
-sub_8054588: @ 8054588
+	thumb_func_start c3_08054588
+c3_08054588: @ 8054588
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -15112,10 +15112,10 @@ _08054656:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8054588
+	thumb_func_end c3_08054588
 
-	thumb_func_start sub_805465C
-sub_805465C: @ 805465C
+	thumb_func_start c3_0805465C
+c3_0805465C: @ 805465C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -15218,7 +15218,7 @@ _0805471E:
 _08054728: .4byte gUnknown_3005098
 _0805472C: .4byte gUnknown_2031DAC
 _08054730: .4byte 0x0000010b
-	thumb_func_end sub_805465C
+	thumb_func_end c3_0805465C
 
 	thumb_func_start sub_8054734
 sub_8054734: @ 8054734

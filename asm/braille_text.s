@@ -360,7 +360,7 @@ _0814FB38:
 _0814FB3A:
 	strb r0, [r6, 0x1C]
 	adds r0, r6, 0
-	bl sub_80054C8
+	bl TextPrinterInitDownArrowCounters
 _0814FB42:
 	movs r0, 0x3
 	b _0814FC96

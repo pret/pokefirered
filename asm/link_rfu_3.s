@@ -201,7 +201,7 @@ _081159B8:
 _08115A10:
 	ldr r0, _08115A1C @ =gUnknown_2021D18
 	ldr r1, _08115A20 @ =gUnknown_8457234
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _08115A18:
 	pop {r0}
 	bx r0
@@ -374,13 +374,13 @@ _08115B5C:
 	bl sub_811A054
 	strb r0, [r5, 0x17]
 	ldr r0, _08115C48 @ =gUnknown_8456CD0
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5, 0x10]
 	ldr r0, _08115C4C @ =gUnknown_8456CFC
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5, 0xF]
 	ldr r0, _08115C50 @ =gUnknown_8456D04
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5, 0x11]
 	ldrb r0, [r5, 0x10]
 	movs r1, 0x22
@@ -460,7 +460,7 @@ _08115C60:
 	beq _08115CB0
 	ldr r0, _08115CA8 @ =gUnknown_2021D18
 	ldr r1, _08115CAC @ =gUnknown_8457264
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _08115CCC
 	.align 2, 0
 _08115C98: .4byte gUnknown_2021CD0
@@ -472,7 +472,7 @@ _08115CAC: .4byte gUnknown_8457264
 _08115CB0:
 	ldr r0, _08115CBC @ =gUnknown_2021D18
 	ldr r1, _08115CC0 @ =gUnknown_8457234
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _08115CCC
 	.align 2, 0
 _08115CBC: .4byte gUnknown_2021D18
@@ -828,7 +828,7 @@ _08115F5C:
 	bl ConvertInternationalString
 	ldr r0, _08115FA8 @ =gUnknown_2021D18
 	ldr r1, _08115FAC @ =gUnknown_8457554
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0xD
 	strb r0, [r5, 0xC]
 _08115F90:
@@ -1215,14 +1215,14 @@ _081162C0:
 	ldr r1, _081162CC @ =gUnknown_84574C4
 _081162C2:
 	adds r0, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _081162D8
 	.align 2, 0
 _081162CC: .4byte gUnknown_84574C4
 _081162D0:
 	ldr r1, _081162DC @ =gUnknown_84574EC
 	adds r0, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _081162D8:
 	pop {r0}
 	bx r0
@@ -1251,13 +1251,13 @@ _081162F6:
 	b _08116312
 _08116300:
 	ldr r1, _08116308 @ =gUnknown_8457E28
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _08116312
 	.align 2, 0
 _08116308: .4byte gUnknown_8457E28
 _0811630C:
 	ldr r1, _08116318 @ =gUnknown_8457E44
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _08116312:
 	pop {r0}
 	bx r0
@@ -1308,14 +1308,14 @@ _08116338:
 _08116390:
 	ldr r1, _0811639C @ =gUnknown_8459238
 	adds r0, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _081163A8
 	.align 2, 0
 _0811639C: .4byte gUnknown_8459238
 _081163A0:
 	ldr r1, _081163AC @ =gUnknown_8459250
 	adds r0, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _081163A8:
 	pop {r0}
 	bx r0
@@ -1366,14 +1366,14 @@ _081163CC:
 _08116424:
 	ldr r1, _08116430 @ =gUnknown_84576AC
 	adds r0, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811643C
 	.align 2, 0
 _08116430: .4byte gUnknown_84576AC
 _08116434:
 	ldr r1, _08116440 @ =gUnknown_84576C4
 	adds r0, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _0811643C:
 	pop {r0}
 	bx r0
@@ -1892,13 +1892,13 @@ _08116838:
 	movs r4, 0
 	strb r0, [r6, 0x11]
 	ldr r0, _081168EC @ =gUnknown_8456CD0
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r6, 0xC]
 	ldr r0, _081168F0 @ =gUnknown_8456D4C
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r6, 0xB]
 	ldr r0, _081168F4 @ =gUnknown_8456D54
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r6, 0xD]
 	ldrb r0, [r6, 0xC]
 	movs r1, 0x22
@@ -2196,7 +2196,7 @@ _08116AF0:
 	bl StringCopy
 	ldr r1, _08116B40 @ =gUnknown_8457700
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _08116B70
 	.align 2, 0
 _08116B30: .4byte gUnknown_2021D18
@@ -3033,7 +3033,7 @@ _0811719C:
 	movs r2, 0x64
 	bl memcpy
 	movs r0, 0x32
-	bl sub_8054E90
+	bl IncrementGameStat
 	bl ResetBlockReceivedFlags
 	b _081171FA
 	.align 2, 0
@@ -3177,12 +3177,12 @@ _081172E8:
 	adds r5, 0x60
 	adds r4, 0x1
 _08117302:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	blt _081172E8
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -3272,7 +3272,7 @@ sub_81173C0: @ 81173C0
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
-	bl sub_80A0058
+	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
 	ldr r5, _0811742C @ =gUnknown_202273C
@@ -3310,7 +3310,7 @@ sub_81173C0: @ 81173C0
 	str r0, [r1, 0x8]
 	ldr r0, _0811743C @ =gUnknown_2022B4C
 	str r6, [r0]
-	bl sub_8044074
+	bl PlayBattleBGM
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3400,7 +3400,7 @@ sub_81174B4: @ 81174B4
 	strh r1, [r0]
 	ldr r0, _08117528 @ =0x0000406f
 	bl VarSet
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	ldr r1, _0811752C @ =gUnknown_3005030
 	strb r0, [r1]
 	bl GetMultiplayerId
@@ -3660,7 +3660,7 @@ _081177A0:
 	ldr r0, _081177C4 @ =gUnknown_2022618
 	movs r1, 0x1
 	bl sub_8117594
-	bl sub_80A0058
+	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
 	movs r0, 0x1
@@ -3673,7 +3673,7 @@ _081177A0:
 _081177C4: .4byte gUnknown_2022618
 _081177C8:
 	bl sub_80563F0
-	bl sub_80A0058
+	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
 	ldr r0, _081177EC @ =gUnknown_2022618
@@ -3689,7 +3689,7 @@ _081177C8:
 _081177EC: .4byte gUnknown_2022618
 _081177F0:
 	bl sub_80563F0
-	bl sub_80A0058
+	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
 	ldr r0, _08117814 @ =gUnknown_2022618
@@ -4064,7 +4064,7 @@ _08117AB8:
 	orrs r1, r0
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5, 0xF]
 	ldrb r0, [r5, 0xF]
 	bl sub_814240C
@@ -4292,7 +4292,7 @@ _08117CB2:
 	bl ConvertInternationalString
 	ldr r0, _08117D34 @ =gUnknown_2021D18
 	ldr r1, _08117D38 @ =gUnknown_8457554
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x9
 	strb r0, [r5, 0xC]
 	bl sub_80F8F5C
@@ -4617,10 +4617,10 @@ _08117FC0:
 	orrs r1, r0
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5, 0xB]
 	ldr r0, _08118064 @ =gUnknown_8456D54
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5, 0xD]
 	ldrb r0, [r5, 0xB]
 	bl sub_814240C
@@ -5038,7 +5038,7 @@ _08118380:
 	orrs r1, r0
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5, 0xB]
 	ldrb r0, [r5, 0xB]
 	bl sub_814240C
@@ -5371,7 +5371,7 @@ sub_8118664: @ 8118664
 	cmp r3, r0
 	beq _0811867E
 	adds r1, r3, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _0811867E:
 	pop {r0}
 	bx r0
@@ -5392,7 +5392,7 @@ sub_811868C: @ 811868C
 	cmp r2, r0
 	beq _081186A4
 	adds r1, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _081186A4:
 	pop {r0}
 	bx r0
@@ -6307,7 +6307,7 @@ _08118ED6:
 	lsls r1, r5, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x21
 	bl _081198DA
 	.align 2, 0
@@ -6557,7 +6557,7 @@ _08119122:
 	lsls r1, r5, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _081198DC
 	.align 2, 0
 _08119150: .4byte sub_8117280
@@ -6899,7 +6899,7 @@ _08119414:
 	bl sub_8008E78
 	ldr r0, _08119460 @ =gUnknown_2021D18
 	ldr r1, _08119464 @ =gUnknown_8458DBC
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _0811944A:
 	ldr r1, _08119460 @ =gUnknown_2021D18
 	movs r0, 0x2C
@@ -7457,8 +7457,8 @@ _081198DC:
 _081198E8: .4byte gUnknown_2021D18
 	thumb_func_end sub_81186E0
 
-	thumb_func_start sub_81198EC
-sub_81198EC: @ 81198EC
+	thumb_func_start var_800D_set_xB
+var_800D_set_xB: @ 81198EC
 	push {lr}
 	bl InUnionRoom
 	cmp r0, 0x1
@@ -7471,7 +7471,7 @@ _081198FC:
 	bx r0
 	.align 2, 0
 _08119900: .4byte gUnknown_20370D0
-	thumb_func_end sub_81198EC
+	thumb_func_end var_800D_set_xB
 
 	thumb_func_start sub_8119904
 sub_8119904: @ 8119904
@@ -8488,7 +8488,7 @@ sub_811A0B4: @ 811A0B4
 	bl sub_80F6EE4
 	ldr r0, _0811A0DC @ =gUnknown_2021D18
 	adds r1, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_80F6E54
@@ -8534,7 +8534,7 @@ _0811A10A:
 	bl sub_80F6EE4
 	ldr r0, _0811A12C @ =gUnknown_2021D18
 	adds r1, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl sub_80F6E08
 	ldrb r0, [r4]
@@ -8593,7 +8593,7 @@ _0811A174:
 	negs r0, r0
 	b _0811A1A4
 _0811A186:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r2, 0x80
@@ -8618,7 +8618,7 @@ _0811A1A4:
 sub_811A1AC: @ 811A1AC
 	push {r4,lr}
 	sub sp, 0x8
-	bl sub_8003CE4
+	bl AddWindow
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -8684,7 +8684,7 @@ sub_811A218: @ 811A218
 	beq _0811A274
 	b _0811A2DA
 _0811A234:
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5]
 	ldrb r0, [r5]
 	movs r1, 0
@@ -8790,7 +8790,7 @@ _0811A308:
 	bl sub_811A1AC
 	strb r0, [r7]
 	ldr r0, [sp, 0x1C]
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
@@ -9805,7 +9805,7 @@ sub_811AA5C: @ 811AA5C
 	adds r1, r2
 	adds r1, r3
 	ldr r1, [r1]
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	b _0811ABD2
 	.align 2, 0
@@ -9925,7 +9925,7 @@ _0811ABB0:
 	ldr r1, [r0]
 _0811ABB6:
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811ABD0
 	.align 2, 0
 _0811ABC0: .4byte gUnknown_2021D18
@@ -9933,7 +9933,7 @@ _0811ABC4: .4byte gUnknown_84589AC
 _0811ABC8:
 	ldr r0, _0811ABD8 @ =gUnknown_2021D18
 	ldr r1, _0811ABDC @ =gUnknown_8457F90
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _0811ABD0:
 	movs r0, 0
 _0811ABD2:
@@ -10321,7 +10321,7 @@ _0811AEA4:
 	ldr r1, _0811AEB0 @ =gUnknown_8458F9C
 _0811AEA6:
 	adds r0, r3, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811AEC2
 	.align 2, 0
 _0811AEB0: .4byte gUnknown_8458F9C
@@ -10331,7 +10331,7 @@ _0811AEB4:
 	adds r1, r0
 	ldr r1, [r1]
 	adds r0, r3, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _0811AEC2:
 	pop {r0}
 	bx r0
@@ -10552,7 +10552,7 @@ _0811B078:
 	ldr r1, _0811B084 @ =gUnknown_8457C48
 _0811B07A:
 	adds r0, r7, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _0811B080:
 	movs r2, 0x1
 	b _0811B092
@@ -10561,7 +10561,7 @@ _0811B084: .4byte gUnknown_8457C48
 _0811B088:
 	ldr r1, _0811B0A0 @ =gUnknown_8457E0C
 	adds r0, r7, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r2, 0x2
 _0811B092:
 	adds r0, r2, 0
@@ -12702,7 +12702,7 @@ _0811C096:
 	cmp r4, r6
 	ble _0811C096
 	movs r0, 0x32
-	bl sub_8054E90
+	bl IncrementGameStat
 	bl CalculatePlayerPartyCount
 	ldr r0, _0811C0D8 @ =gUnknown_20386AE
 	movs r2, 0xC0
@@ -12766,7 +12766,7 @@ sub_811C0E0: @ 811C0E0
 	movs r1, 0x3
 	adds r2, r6, 0
 	ldr r3, [sp, 0x14]
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -12815,7 +12815,7 @@ _0811C168:
 	b _0811C1AA
 _0811C196:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -12937,7 +12937,7 @@ _0811C2C0:
 	bl sub_8001658
 	bl reset_temp_tile_data_buffers
 	ldr r0, _0811C358 @ =gUnknown_8457198
-	bl sub_8003B24
+	bl InitWindows
 	lsls r0, 16
 	cmp r0, 0
 	bne _0811C300

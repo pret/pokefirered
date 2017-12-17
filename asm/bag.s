@@ -13,14 +13,14 @@ sub_810B858: @ 810B858
 	cmp r0, 0x3
 	beq _0810B874
 	ldr r0, _0810B870 @ =gUnknown_84530C4
-	bl sub_8003B24
+	bl InitWindows
 	b _0810B87A
 	.align 2, 0
 _0810B86C: .4byte gUnknown_203ACFC
 _0810B870: .4byte gUnknown_84530C4
 _0810B874:
 	ldr r0, _0810B8E4 @ =gUnknown_84530E4
-	bl sub_8003B24
+	bl InitWindows
 _0810B87A:
 	bl DeactivateAllTextPrinters
 	movs r0, 0
@@ -118,7 +118,7 @@ sub_810B8F0: @ 810B8F0
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -152,7 +152,7 @@ sub_810B958: @ 810B958
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r3, 0x1
-	bl sub_812E51C
+	bl box_print
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -213,7 +213,7 @@ sub_810B9DC: @ 810B9DC
 	lsls r0, 3
 	ldr r1, _0810BA14 @ =gUnknown_8453104
 	adds r0, r1
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	cmp r5, 0x6
 	beq _0810BA18
@@ -285,7 +285,7 @@ sub_810BA70: @ 810BA70
 	lsls r0, r1, 3
 	ldr r1, _0810BA98 @ =gUnknown_8453104
 	adds r0, r1
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 _0810BA8C:
 	ldrb r0, [r4]

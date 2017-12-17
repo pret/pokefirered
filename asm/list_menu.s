@@ -41,7 +41,7 @@ DoMysteryGiftListMenu: @ 8106ED0
 	beq _08106FCC
 _08106F06:
 	mov r0, r12
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5, 0x5]
 	cmp r6, 0x1
 	beq _08106F24
@@ -782,7 +782,7 @@ ListMenuPrint: @ 8107428
 	str r6, [sp, 0x10]
 	adds r2, r7, 0
 	mov r3, r12
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldrb r1, [r5, 0x3]
 	movs r0, 0x7F
 	ands r0, r1
@@ -820,7 +820,7 @@ _08107494:
 	str r6, [sp, 0x10]
 	adds r2, r7, 0
 	mov r3, r12
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 _081074D2:
 	add sp, 0x18
 	pop {r4-r7}
@@ -989,7 +989,7 @@ _08107608:
 	ldrb r5, [r6, 0x1E]
 	ldrb r0, [r6, 0x10]
 	movs r1, 0x1
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r4, r0, 0
 	lsls r4, 19
 	ldr r0, _0810763C @ =0xffff0000
@@ -997,7 +997,7 @@ _08107608:
 	lsrs r4, 16
 	ldrb r0, [r6, 0x10]
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r2, r0, 0
 	lsls r2, 3
 	adds r2, r7
@@ -1023,7 +1023,7 @@ _08107650:
 	ldrb r5, [r6, 0x1E]
 	ldrb r0, [r6, 0x10]
 	movs r1, 0x1
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r4, r0, 0
 	lsls r4, 3
 	add r4, r8
@@ -1031,7 +1031,7 @@ _08107650:
 	lsrs r4, 16
 	ldrb r0, [r6, 0x10]
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r2, r0, 0
 	lsls r2, 3
 	adds r2, r7
@@ -1062,7 +1062,7 @@ ListMenuAddCursorObject: @ 810768C
 	strb r0, [r1, 0x1]
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x3
-	bl sub_8004950
+	bl GetWindowAttribute
 	mov r1, sp
 	lsls r0, 3
 	adds r0, 0x2
@@ -1379,13 +1379,13 @@ _0810789E:
 	lsrs r4, 16
 	ldrb r0, [r6, 0x10]
 	movs r1, 0x3
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r5, r0, 0
 	lsls r5, 19
 	lsrs r5, 16
 	ldrb r0, [r6, 0x10]
 	movs r1, 0x4
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 3
 	subs r0, r4
 	lsls r0, 16
@@ -1429,7 +1429,7 @@ _08107930:
 	bl ListMenuPrintEntries
 	ldrb r0, [r6, 0x10]
 	movs r1, 0x3
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 19
 	lsrs r0, 16
 	ldrb r3, [r6, 0x10]

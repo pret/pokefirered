@@ -78,7 +78,7 @@ sub_80E469C: @ 80E469C
 	bl sub_8001658
 	bl reset_temp_tile_data_buffers
 	ldr r0, _080E4778 @ =gUnknown_83FFA44
-	bl sub_8003B24
+	bl InitWindows
 	lsls r0, 16
 	cmp r0, 0
 	beq _080E476C
@@ -255,7 +255,7 @@ _080E486C: .4byte sub_80E4870
 sub_80E4870: @ 80E4870
 	push {r4,lr}
 	movs r0, 0x7
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080E4882
@@ -295,7 +295,7 @@ sub_80E48C0: @ 80E48C0
 	adds r1, r0, 0
 	ldr r4, _080E48F0 @ =gUnknown_2021D18
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_80F78A8
 	lsls r0, 24
 	lsrs r0, 24
@@ -1036,7 +1036,7 @@ sub_80E4F0C: @ 80E4F0C
 	ldr r4, _080E4F4C @ =gUnknown_2021D18
 	ldr r1, _080E4F50 @ =gUnknown_841E3E3
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	str r5, [sp]
 	movs r0, 0x2
 	str r0, [sp, 0x4]
@@ -1814,7 +1814,7 @@ _080E5570: .4byte 0x00000a67
 	thumb_func_start sub_80E5574
 sub_80E5574: @ 80E5574
 	push {r4,lr}
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -1936,7 +1936,7 @@ _080E563E:
 	movs r1, 0x3
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x14
 	pop {r3-r5}
 	mov r8, r3

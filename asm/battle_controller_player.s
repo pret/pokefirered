@@ -249,7 +249,7 @@ _0802E4EA:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -277,7 +277,7 @@ _0802E522:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -321,7 +321,7 @@ _0802E578:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -333,7 +333,7 @@ _0802E590:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 	b _0802E634
 	.align 2, 0
 _0802E5A4: .4byte gUnknown_2023FF8
@@ -1145,7 +1145,7 @@ _0802EC38:
 	b _0802EDBA
 _0802EC52:
 	ldrb r0, [r2]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldrb r1, [r6]
 	adds r1, r4
 	ldrb r0, [r1]
@@ -1179,7 +1179,7 @@ _0802EC84:
 	b _0802EDBA
 _0802EC92:
 	ldrb r0, [r3]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldrb r1, [r6]
 	adds r1, r4
 	ldrb r0, [r1]
@@ -1204,7 +1204,7 @@ _0802ECAC:
 	b _0802EDBA
 _0802ECC6:
 	ldrb r0, [r2]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldrb r1, [r6]
 	adds r1, r4
 	ldrb r0, [r1]
@@ -1234,7 +1234,7 @@ _0802ECDC:
 	cmp r0, r1
 	bcs _0802EDBA
 	ldrb r0, [r3]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldrb r1, [r6]
 	adds r1, r4
 	ldrb r0, [r1]
@@ -1247,7 +1247,7 @@ _0802ED10:
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	bl MoveSelectionDisplayPpNumber
 	bl MoveSelectionDisplayMoveType
 _0802ED2C:
@@ -1283,7 +1283,7 @@ _0802ED4C:
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x1D
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	ldrb r0, [r6]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -1305,7 +1305,7 @@ _0802ED94:
 _0802ED9C:
 	ldrb r0, [r0]
 	movs r1, 0x1B
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	ldr r0, _0802EDCC @ =gUnknown_83FE7A0
 	movs r1, 0xB
 	bl sub_80D87BC
@@ -1379,7 +1379,7 @@ _0802EE18:
 	cmp r0, 0
 	beq _0802EE58
 	ldrb r0, [r2]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -1392,7 +1392,7 @@ _0802EE18:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 _0802EE58:
 	ldr r0, _0802EF40 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -1417,7 +1417,7 @@ _0802EE58:
 	cmp r0, r1
 	bcs _0802EEA6
 	ldrb r0, [r3]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -1429,7 +1429,7 @@ _0802EE58:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 _0802EEA6:
 	ldr r0, _0802EF40 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -1447,7 +1447,7 @@ _0802EEA6:
 	cmp r0, 0
 	beq _0802EEE8
 	ldrb r0, [r2]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -1460,7 +1460,7 @@ _0802EEA6:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 _0802EEE8:
 	ldr r0, _0802EF40 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -1485,7 +1485,7 @@ _0802EEE8:
 	cmp r0, r1
 	bcs _0802EF36
 	ldrb r0, [r3]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -1497,7 +1497,7 @@ _0802EEE8:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 _0802EF36:
 	adds r0, r7, 0
 	pop {r4-r7}
@@ -2005,7 +2005,7 @@ _0802F324:
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	bl MoveSelectionDisplayPpString
 	bl MoveSelectionDisplayPpNumber
 	bl MoveSelectionDisplayMoveType
@@ -2020,14 +2020,14 @@ _0802F34C:
 	bl sub_80722CC
 	ldr r0, _0802F3A0 @ =gUnknown_3004FF4
 	ldrb r0, [r0]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldr r1, _0802F39C @ =gUnknown_2023FFC
 	ldr r4, _0802F394 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	ldr r0, _0802F3A8 @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x10
@@ -2082,7 +2082,7 @@ _0802F3C8:
 	bne _0802F410
 	ldrb r0, [r1]
 	movs r1, 0x1D
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	b _0802F416
 	.align 2, 0
 _0802F3F8: .4byte gUnknown_3004FE0
@@ -2093,7 +2093,7 @@ _0802F408: .4byte gUnknown_2023FFC
 _0802F40C: .4byte gUnknown_2023BC4
 _0802F410:
 	ldrb r0, [r3]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 _0802F416:
 	ldr r4, _0802F440 @ =gUnknown_3004FF4
 	ldrb r0, [r4]
@@ -2112,7 +2112,7 @@ _0802F416:
 	bne _0802F44C
 	adds r0, r1, 0
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	b _0802F454
 	.align 2, 0
 _0802F440: .4byte gUnknown_3004FF4
@@ -2121,7 +2121,7 @@ _0802F448: .4byte gUnknown_2023BC4
 _0802F44C:
 	ldrb r0, [r4]
 	movs r1, 0x1B
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 _0802F454:
 	ldr r0, _0802F490 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -2150,7 +2150,7 @@ _0802F454:
 	bne _0802F4A4
 	ldrb r0, [r1]
 	movs r1, 0x1D
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	b _0802F4AA
 	.align 2, 0
 _0802F490: .4byte gUnknown_30030F0
@@ -2160,7 +2160,7 @@ _0802F49C: .4byte gUnknown_2023FFC
 _0802F4A0: .4byte gUnknown_2023BC4
 _0802F4A4:
 	ldrb r0, [r3]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 _0802F4AA:
 	ldr r4, _0802F4D4 @ =gUnknown_3004FF4
 	ldrb r0, [r4]
@@ -2179,7 +2179,7 @@ _0802F4AA:
 	bne _0802F4E0
 	adds r0, r1, 0
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	b _0802F4E8
 	.align 2, 0
 _0802F4D4: .4byte gUnknown_3004FF4
@@ -2188,7 +2188,7 @@ _0802F4DC: .4byte gUnknown_2023BC4
 _0802F4E0:
 	ldrb r0, [r4]
 	movs r1, 0x1B
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 _0802F4E8:
 	ldr r0, _0802F518 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -2211,7 +2211,7 @@ _0802F4E8:
 	bne _0802F528
 	ldrb r0, [r1]
 	movs r1, 0x1D
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	b _0802F52E
 	.align 2, 0
 _0802F518: .4byte gUnknown_30030F0
@@ -2220,7 +2220,7 @@ _0802F520: .4byte gUnknown_2023FFC
 _0802F524: .4byte gUnknown_2023BC4
 _0802F528:
 	ldrb r0, [r3]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 _0802F52E:
 	ldr r4, _0802F558 @ =gUnknown_3004FF4
 	ldrb r0, [r4]
@@ -2239,7 +2239,7 @@ _0802F52E:
 	bne _0802F564
 	adds r0, r1, 0
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	b _0802F56C
 	.align 2, 0
 _0802F558: .4byte gUnknown_3004FF4
@@ -2248,7 +2248,7 @@ _0802F560: .4byte gUnknown_2023BC4
 _0802F564:
 	ldrb r0, [r4]
 	movs r1, 0x1B
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 _0802F56C:
 	ldr r0, _0802F5A8 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -2277,7 +2277,7 @@ _0802F56C:
 	bne _0802F5BC
 	ldrb r0, [r1]
 	movs r1, 0x1D
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	b _0802F5C2
 	.align 2, 0
 _0802F5A8: .4byte gUnknown_30030F0
@@ -2287,7 +2287,7 @@ _0802F5B4: .4byte gUnknown_2023FFC
 _0802F5B8: .4byte gUnknown_2023BC4
 _0802F5BC:
 	ldrb r0, [r3]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 _0802F5C2:
 	ldr r4, _0802F5EC @ =gUnknown_3004FF4
 	ldrb r0, [r4]
@@ -2306,7 +2306,7 @@ _0802F5C2:
 	bne _0802F5F8
 	adds r0, r1, 0
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	b _0802F600
 	.align 2, 0
 _0802F5EC: .4byte gUnknown_3004FF4
@@ -2315,7 +2315,7 @@ _0802F5F4: .4byte gUnknown_2023BC4
 _0802F5F8:
 	ldrb r0, [r4]
 	movs r1, 0x1B
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 _0802F600:
 	add sp, 0x24
 	pop {r3-r5}
@@ -3282,8 +3282,8 @@ _0802FDEC: .4byte gUnknown_3004FE0
 _0802FDF0: .4byte sub_802FBF4
 	thumb_func_end sub_802FD18
 
-	thumb_func_start sub_802FDF4
-sub_802FDF4: @ 802FDF4
+	thumb_func_start c3_0802FDF4
+c3_0802FDF4: @ 802FDF4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3305,10 +3305,10 @@ _0802FE16:
 	.align 2, 0
 _0802FE1C: .4byte gMPlay_BGM
 _0802FE20: .4byte 0x0000ffff
-	thumb_func_end sub_802FDF4
+	thumb_func_end c3_0802FDF4
 
-	thumb_func_start sub_802FE24
-sub_802FE24: @ 802FE24
+	thumb_func_start CompleteOnHealthbarDone
+CompleteOnHealthbarDone: @ 802FE24
 	push {r4-r6,lr}
 	ldr r5, _0802FE64 @ =gUnknown_2023BC4
 	ldrb r0, [r5]
@@ -3359,13 +3359,13 @@ _0802FE86:
 	.align 2, 0
 _0802FE8C: .4byte gUnknown_2023BCE
 _0802FE90: .4byte gUnknown_2024284
-	thumb_func_end sub_802FE24
+	thumb_func_end CompleteOnHealthbarDone
 
 	thumb_func_start sub_802FE94
 sub_802FE94: @ 802FE94
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0802FEA6
@@ -4045,7 +4045,7 @@ _0803040C:
 	.4byte _080304E8
 _08030428:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0803051C
@@ -4280,7 +4280,7 @@ _0803060C: .4byte gUnknown_3004FF0
 sub_8030610: @ 8030610
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _08030622
@@ -4563,7 +4563,7 @@ sub_8030830: @ 8030830
 _08030848:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	adds r0, r6, 0
 	ldr r1, _080308A0 @ =gUnknown_83FE770
 	bl StringCopy
@@ -4632,7 +4632,7 @@ MoveSelectionDisplayPpNumber: @ 80308CC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _08030928
-	bl sub_80D89DC
+	bl SetPpNumbersPaletteInMoveSelection
 	ldrb r1, [r7]
 	lsls r4, r1, 9
 	adds r0, r5, 0x4
@@ -4737,8 +4737,8 @@ _080309C4: .4byte gUnknown_2023FFC
 _080309C8: .4byte gUnknown_824F1A0
 	thumb_func_end MoveSelectionDisplayMoveType
 
-	thumb_func_start sub_80309CC
-sub_80309CC: @ 80309CC
+	thumb_func_start MoveSelectionCreateCursorAt
+MoveSelectionCreateCursorAt: @ 80309CC
 	push {lr}
 	sub sp, 0x10
 	adds r3, r0, 0
@@ -4773,10 +4773,10 @@ sub_80309CC: @ 80309CC
 	add sp, 0x10
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80309CC
+	thumb_func_end MoveSelectionCreateCursorAt
 
-	thumb_func_start sub_8030A14
-sub_8030A14: @ 8030A14
+	thumb_func_start MoveSelectionDestroyCursorAt
+MoveSelectionDestroyCursorAt: @ 8030A14
 	push {lr}
 	sub sp, 0x10
 	adds r3, r0, 0
@@ -4807,10 +4807,10 @@ sub_8030A14: @ 8030A14
 	add sp, 0x10
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8030A14
+	thumb_func_end MoveSelectionDestroyCursorAt
 
-	thumb_func_start sub_8030A54
-sub_8030A54: @ 8030A54
+	thumb_func_start ActionSelectionCreateCursorAt
+ActionSelectionCreateCursorAt: @ 8030A54
 	push {r4,lr}
 	sub sp, 0x10
 	adds r3, r0, 0
@@ -4843,10 +4843,10 @@ sub_8030A54: @ 8030A54
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8030A54
+	thumb_func_end ActionSelectionCreateCursorAt
 
-	thumb_func_start sub_8030A98
-sub_8030A98: @ 8030A98
+	thumb_func_start ActionSelectionDestroyCursorAt
+ActionSelectionDestroyCursorAt: @ 8030A98
 	push {lr}
 	sub sp, 0x10
 	adds r3, r0, 0
@@ -4879,7 +4879,7 @@ sub_8030A98: @ 8030A98
 	add sp, 0x10
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8030A98
+	thumb_func_end ActionSelectionDestroyCursorAt
 
 	thumb_func_start sub_8030ADC
 sub_8030ADC: @ 8030ADC
@@ -7452,7 +7452,7 @@ sub_8031FF4: @ 8031FF4
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -8640,7 +8640,7 @@ _08032A10:
 	movs r0, 0
 	bl sub_8035450
 	adds r0, r4, 0
-	bl sub_807259C
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -8867,7 +8867,7 @@ sub_8032BD4: @ 8032BD4
 _08032BF6:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _08032BF6
@@ -8877,9 +8877,9 @@ _08032BF6:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 	ldr r0, _08032C40 @ =gUnknown_83FE6D5
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _08032C44 @ =gUnknown_202298C
 	movs r1, 0x1
 	bl sub_80D87BC
@@ -8967,7 +8967,7 @@ sub_8032CB4: @ 8032CB4
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 	bl MoveSelectionDisplayPpString
 	bl MoveSelectionDisplayPpNumber
 	bl MoveSelectionDisplayMoveType
@@ -9245,7 +9245,7 @@ _08032F16:
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08032F48 @ =sub_802FE24
+	ldr r1, _08032F48 @ =CompleteOnHealthbarDone
 	str r1, [r0]
 	add sp, 0x4
 	pop {r3,r4}
@@ -9260,7 +9260,7 @@ _08032F38: .4byte gUnknown_2024284
 _08032F3C: .4byte gUnknown_3004FF0
 _08032F40: .4byte gUnknown_3004FE0
 _08032F44: .4byte gUnknown_2023BC4
-_08032F48: .4byte sub_802FE24
+_08032F48: .4byte CompleteOnHealthbarDone
 	thumb_func_end sub_8032E4C
 
 	thumb_func_start PlayerHandleExpUpdate

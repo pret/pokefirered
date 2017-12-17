@@ -176,7 +176,7 @@ _080E76EE:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -204,7 +204,7 @@ _080E7726:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -248,7 +248,7 @@ _080E777C:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -260,7 +260,7 @@ _080E7794:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 	b _080E7838
 	.align 2, 0
 _080E77A8: .4byte gUnknown_2023FF8
@@ -382,10 +382,10 @@ _080E787C:
 	movs r0, 0x5
 	bl sub_80722CC
 	movs r0, 0
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 	ldr r0, [r4]
 	adds r0, 0x96
 	movs r1, 0x40
@@ -451,7 +451,7 @@ _080E7914: .4byte nullsub_8
 sub_80E7918: @ 80E7918
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080E792A
@@ -1005,7 +1005,7 @@ _080E7D02:
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl FreeSpritePaletteByTag
-	ldr r0, _080E7DF0 @ =sub_802FDF4
+	ldr r0, _080E7DF0 @ =c3_0802FDF4
 	movs r1, 0xA
 	bl CreateTask
 	ldr r2, _080E7DF4 @ =gUnknown_2023BCE
@@ -1039,7 +1039,7 @@ _080E7DE0: .4byte gUnknown_2023BC4
 _080E7DE4: .4byte nullsub_8
 _080E7DE8: .4byte gUnknown_2024018
 _080E7DEC: .4byte 0x000027f9
-_080E7DF0: .4byte sub_802FDF4
+_080E7DF0: .4byte c3_0802FDF4
 _080E7DF4: .4byte gUnknown_2023BCE
 _080E7DF8: .4byte gUnknown_2024284
 _080E7DFC: .4byte gUnknown_3004FE0
@@ -1779,7 +1779,7 @@ _080E83FE:
 _080E8404: .4byte gUnknown_2037AB8
 _080E8408:
 	ldr r0, _080E8418 @ =gUnknown_83FDAE2
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080E841C @ =gUnknown_202298C
 	movs r1, 0x18
 	bl sub_80D87BC
@@ -1789,7 +1789,7 @@ _080E8418: .4byte gUnknown_83FDAE2
 _080E841C: .4byte gUnknown_202298C
 _080E8420:
 	movs r0, 0x18
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, 0
@@ -1830,7 +1830,7 @@ _080E8468:
 	cmp r0, 0
 	bne _080E855E
 	ldr r0, _080E8488 @ =gUnknown_83FDB92
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080E848C @ =gUnknown_202298C
 	movs r1, 0x18
 	bl sub_80D87BC
@@ -1841,7 +1841,7 @@ _080E8488: .4byte gUnknown_83FDB92
 _080E848C: .4byte gUnknown_202298C
 _080E8490:
 	movs r0, 0x18
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, 0
@@ -1880,7 +1880,7 @@ _080E84D8:
 	cmp r0, 0
 	bne _080E855E
 	ldr r0, _080E84F8 @ =gUnknown_83FDBEF
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080E84FC @ =gUnknown_202298C
 	movs r1, 0x18
 	bl sub_80D87BC
@@ -1891,7 +1891,7 @@ _080E84F8: .4byte gUnknown_83FDBEF
 _080E84FC: .4byte gUnknown_202298C
 _080E8500:
 	movs r0, 0x18
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -2038,7 +2038,7 @@ _080E8600:
 	.4byte _080E86B4
 _080E8618:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080E86F2
@@ -2082,7 +2082,7 @@ _080E865A:
 _080E866C: .4byte gUnknown_2037AB8
 _080E8670:
 	adds r0, r2, 0
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080E8680 @ =gUnknown_202298C
 	movs r1, 0x18
 	bl sub_80D87BC
@@ -2091,7 +2091,7 @@ _080E8670:
 _080E8680: .4byte gUnknown_202298C
 _080E8684:
 	movs r0, 0x18
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -2262,7 +2262,7 @@ _080E87D0:
 _080E87E4: .4byte gUnknown_2037AB8
 _080E87E8:
 	ldr r0, _080E87F8 @ =gUnknown_83FDCD2
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080E87FC @ =gUnknown_202298C
 	movs r1, 0x18
 	bl sub_80D87BC
@@ -2272,7 +2272,7 @@ _080E87F8: .4byte gUnknown_83FDCD2
 _080E87FC: .4byte gUnknown_202298C
 _080E8800:
 	movs r0, 0x18
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, 0
@@ -2419,7 +2419,7 @@ _080E892C: .4byte gUnknown_2024284
 sub_80E8930: @ 80E8930
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080E8942
@@ -5687,7 +5687,7 @@ _080EA46A:
 	movs r0, 0
 	bl sub_8035450
 	adds r0, r4, 0
-	bl sub_807259C
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -6014,7 +6014,7 @@ sub_80EA6FC: @ 80EA6FC
 _080EA71E:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _080EA71E
@@ -6024,7 +6024,7 @@ _080EA71E:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 	ldr r0, _080EA768 @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x10
@@ -6032,7 +6032,7 @@ _080EA71E:
 	cmp r0, 0
 	beq _080EA770
 	ldr r0, _080EA76C @ =gUnknown_83FE6D5
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	b _080EA776
 	.align 2, 0
 _080EA750: .4byte gUnknown_3004FE0
@@ -6045,7 +6045,7 @@ _080EA768: .4byte gUnknown_2022B4C
 _080EA76C: .4byte gUnknown_83FE6D5
 _080EA770:
 	ldr r0, _080EA784 @ =gUnknown_83FE6FA
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 _080EA776:
 	ldr r0, _080EA788 @ =gUnknown_202298C
 	movs r1, 0x1
@@ -7081,7 +7081,7 @@ sub_80EAF34: @ 80EAF34
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

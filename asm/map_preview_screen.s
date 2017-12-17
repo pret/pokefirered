@@ -297,7 +297,7 @@ sub_80F8318: @ 80F8318
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _080F83A8 @ =gUnknown_843EBA8
-	bl sub_8003CE4
+	bl AddWindow
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 16
@@ -345,7 +345,7 @@ sub_80F8318: @ 80F8318
 	adds r0, r6, 0
 	movs r1, 0x2
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	mov r0, r8
 	add sp, 0x14
 	pop {r3,r4}

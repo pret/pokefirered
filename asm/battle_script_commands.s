@@ -1288,8 +1288,8 @@ _0801E1C2:
 _0801E1D4: .4byte gUnknown_2023E82
 	thumb_func_end sub_801DDC4
 
-	thumb_func_start sub_801E1D8
-sub_801E1D8: @ 801E1D8
+	thumb_func_start atk02_attackstring
+atk02_attackstring: @ 801E1D8
 	push {r4,r5,lr}
 	ldr r0, _0801E218 @ =gUnknown_2023BC8
 	ldr r5, [r0]
@@ -1328,10 +1328,10 @@ _0801E21C: .4byte gUnknown_2023DD0
 _0801E220: .4byte gUnknown_2023D6B
 _0801E224: .4byte gUnknown_2023D74
 _0801E228: .4byte gUnknown_2023E82
-	thumb_func_end sub_801E1D8
+	thumb_func_end atk02_attackstring
 
-	thumb_func_start sub_801E22C
-sub_801E22C: @ 801E22C
+	thumb_func_start atk03_ppreduce
+atk03_ppreduce: @ 801E22C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1561,7 +1561,7 @@ _0801E3F8: .4byte gUnknown_2023BC4
 _0801E3FC: .4byte gUnknown_2023DD0
 _0801E400: .4byte 0xfffff7ff
 _0801E404: .4byte gUnknown_2023D74
-	thumb_func_end sub_801E22C
+	thumb_func_end atk03_ppreduce
 
 	thumb_func_start sub_801E408
 sub_801E408: @ 801E408
@@ -8928,7 +8928,7 @@ _08021EB6:
 	muls r1, r2
 	adds r1, r3
 	ldrh r1, [r1]
-	bl sub_8043890
+	bl MonGainEVs
 _08021F4C:
 	ldr r0, _08021F5C @ =gUnknown_2023FE8
 	ldr r1, [r0]
@@ -15314,7 +15314,7 @@ atk57: @ 80251C4
 	ldr r0, _080251F4 @ =gUnknown_2023E8A
 	ldrb r1, [r0]
 	movs r0, 0
-	bl sub_800EB94
+	bl EmitCmd55
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	ldr r1, _080251F8 @ =gUnknown_2023D74
@@ -16510,7 +16510,7 @@ atk60_incrementgamestat: @ 8025B74
 	ldr r0, _08025BA0 @ =gUnknown_2023D74
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl sub_8054E90
+	bl IncrementGameStat
 _08025B8E:
 	ldr r1, _08025BA0 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -18491,7 +18491,7 @@ _08026B78:
 _08026B84: .4byte gUnknown_2023D6C
 _08026B88: .4byte gUnknown_2023BC4
 _08026B8C:
-	bl sub_8013D54
+	bl IsRunningFromBattleImpossible
 	ldr r1, _08026B98 @ =gUnknown_2023E82
 	strb r0, [r1]
 	b _08026F4E
@@ -23623,7 +23623,7 @@ _08029442:
 	strb r0, [r1]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB74
+	bl EmitResetActionMoveSelection
 	mov r2, r8
 	ldrb r0, [r2]
 	bl MarkBufferBankForExecution
@@ -28073,8 +28073,8 @@ _0802B76C: .4byte gUnknown_2023FE8
 _0802B770: .4byte gUnknown_2023D74
 	thumb_func_end sub_802B678
 
-	thumb_func_start sub_802B774
-sub_802B774: @ 802B774
+	thumb_func_start atkC2_selectfirstvalidtarget
+atkC2_selectfirstvalidtarget: @ 802B774
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -28131,10 +28131,10 @@ _0802B7D8: .4byte gUnknown_2023D74
 _0802B7DC: .4byte gUnknown_2023D6B
 _0802B7E0: .4byte gUnknown_825E45C
 _0802B7E4: .4byte gUnknown_2023D70
-	thumb_func_end sub_802B774
+	thumb_func_end atkC2_selectfirstvalidtarget
 
-	thumb_func_start sub_802B7E8
-sub_802B7E8: @ 802B7E8
+	thumb_func_start atkC3_trysetfutureattack
+atkC3_trysetfutureattack: @ 802B7E8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -28275,7 +28275,7 @@ _0802B8F6:
 	.align 2, 0
 _0802B908: .4byte gUnknown_2023E82
 _0802B90C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802B7E8
+	thumb_func_end atkC3_trysetfutureattack
 
 	thumb_func_start atkC4_trydobeatup
 atkC4_trydobeatup: @ 802B910
@@ -31165,7 +31165,7 @@ atkE7_trycastformdatachange: @ 802CF98
 	cmp r4, 0
 	beq _0802CFC2
 	ldr r0, _0802CFD0 @ =gUnknown_81D92F8
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	ldr r0, _0802CFD4 @ =gUnknown_2023FE8
 	ldr r0, [r0]
 	adds r0, 0x7F
@@ -32268,7 +32268,7 @@ _0802D88C:
 	movs r1, 0x2
 	bl GetMonData
 	ldr r4, _0802D938 @ =gUnknown_2021D04
-	bl sub_80CC7A8
+	bl get_unknown_box_id
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBoxNamePtr
@@ -32506,7 +32506,7 @@ _0802DAC0: .4byte 0x05006000
 _0802DAC4: .4byte sub_80116F4
 _0802DAC8:
 	bl sub_800F34C
-	bl sub_800F420
+	bl LoadBattleTextboxAndBackground
 	ldr r1, _0802DADC @ =gUnknown_2022980
 	movs r2, 0x80
 	lsls r2, 1
@@ -33028,7 +33028,7 @@ _0802DE4E:
 	movs r0, 0x2
 	adds r2, r6, 0
 	adds r3, r5, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	ldr r1, _0802DF14 @ =gUnknown_2023E82
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -33120,8 +33120,8 @@ _0802DFA6:
 _0802DFB8: .4byte gUnknown_2023D74
 	thumb_func_end sub_802DD38
 
-	thumb_func_start sub_802DFBC
-sub_802DFBC: @ 802DFBC
+	thumb_func_start atkF4_subattackerhpbydmg
+atkF4_subattackerhpbydmg: @ 802DFBC
 	ldr r2, _0802DFDC @ =gUnknown_2023BE4
 	ldr r0, _0802DFE0 @ =gUnknown_2023D6B
 	ldrb r1, [r0]
@@ -33143,10 +33143,10 @@ _0802DFDC: .4byte gUnknown_2023BE4
 _0802DFE0: .4byte gUnknown_2023D6B
 _0802DFE4: .4byte gUnknown_2023D50
 _0802DFE8: .4byte gUnknown_2023D74
-	thumb_func_end sub_802DFBC
+	thumb_func_end atkF4_subattackerhpbydmg
 
-	thumb_func_start sub_802DFEC
-sub_802DFEC: @ 802DFEC
+	thumb_func_start atkF5_removeattackerstatus1
+atkF5_removeattackerstatus1: @ 802DFEC
 	ldr r1, _0802E008 @ =gUnknown_2023BE4
 	ldr r0, _0802E00C @ =gUnknown_2023D6B
 	ldrb r2, [r0]
@@ -33165,7 +33165,7 @@ sub_802DFEC: @ 802DFEC
 _0802E008: .4byte gUnknown_2023BE4
 _0802E00C: .4byte gUnknown_2023D6B
 _0802E010: .4byte gUnknown_2023D74
-	thumb_func_end sub_802DFEC
+	thumb_func_end atkF5_removeattackerstatus1
 
 	thumb_func_start sub_802E014
 sub_802E014: @ 802E014

@@ -56,7 +56,7 @@ sub_810EBAC: @ 810EBAC
 	lsls r0, r1, 3
 	ldr r1, _0810EBDC @ =gUnknown_8453FE8
 	adds r0, r1
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
@@ -154,7 +154,7 @@ _0810EC62:
 	movs r1, 0x2
 	movs r2, 0x8
 	adds r3, r5, 0
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 _0810EC82:
 	add sp, 0x34
 	pop {r4,r5}

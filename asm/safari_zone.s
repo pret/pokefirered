@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80A0E90
-sub_80A0E90: @ 80A0E90
+	thumb_func_start GetSafariZoneFlag
+GetSafariZoneFlag: @ 80A0E90
 	push {lr}
 	movs r0, 0x80
 	lsls r0, 4
@@ -15,7 +15,7 @@ sub_80A0E90: @ 80A0E90
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A0E90
+	thumb_func_end GetSafariZoneFlag
 
 	thumb_func_start sub_80A0EA4
 sub_80A0EA4: @ 80A0EA4
@@ -27,21 +27,21 @@ sub_80A0EA4: @ 80A0EA4
 	bx r0
 	thumb_func_end sub_80A0EA4
 
-	thumb_func_start sub_80A0EB4
-sub_80A0EB4: @ 80A0EB4
+	thumb_func_start ResetSafariZoneFlag
+ResetSafariZoneFlag: @ 80A0EB4
 	push {lr}
 	movs r0, 0x80
 	lsls r0, 4
 	bl FlagClear
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A0EB4
+	thumb_func_end ResetSafariZoneFlag
 
 	thumb_func_start sub_80A0EC4
 sub_80A0EC4: @ 80A0EC4
 	push {lr}
 	movs r0, 0x11
-	bl sub_8054E90
+	bl IncrementGameStat
 	bl sub_80A0EA4
 	ldr r1, _080A0EE4 @ =gUnknown_2039994
 	movs r0, 0x1E
@@ -61,7 +61,7 @@ _080A0EE8: .4byte gUnknown_2039996
 	thumb_func_start sub_80A0EEC
 sub_80A0EEC: @ 80A0EEC
 	push {lr}
-	bl sub_80A0EB4
+	bl ResetSafariZoneFlag
 	ldr r1, _080A0F04 @ =gUnknown_2039994
 	movs r0, 0
 	strb r0, [r1]
@@ -78,7 +78,7 @@ _080A0F08: .4byte gUnknown_2039996
 	thumb_func_start sub_80A0F0C
 sub_80A0F0C: @ 80A0F0C
 	push {lr}
-	bl sub_80A0E90
+	bl GetSafariZoneFlag
 	cmp r0, 0
 	beq _080A0F24
 	ldr r1, _080A0F28 @ =gUnknown_2039996

@@ -2981,8 +2981,8 @@ _0807B296:
 	bx r1
 	thumb_func_end sub_807B1CC
 
-	thumb_func_start sub_807B29C
-sub_807B29C: @ 807B29C
+	thumb_func_start UpdateWeatherPerDay
+UpdateWeatherPerDay: @ 807B29C
 	lsls r0, 16
 	ldr r1, _0807B2B8 @ =gUnknown_3005008
 	ldr r2, [r1]
@@ -2999,7 +2999,7 @@ sub_807B29C: @ 807B29C
 	bx lr
 	.align 2, 0
 _0807B2B8: .4byte gUnknown_3005008
-	thumb_func_end sub_807B29C
+	thumb_func_end UpdateWeatherPerDay
 
 	thumb_func_start sub_807B2BC
 sub_807B2BC: @ 807B2BC
@@ -3015,7 +3015,7 @@ sub_807B2BC: @ 807B2BC
 	bne _0807B2D6
 _0807B2D0:
 	movs r0, 0x28
-	bl sub_8054E90
+	bl IncrementGameStat
 _0807B2D6:
 	pop {r0}
 	bx r0

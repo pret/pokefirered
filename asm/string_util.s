@@ -454,8 +454,8 @@ _08008FB8:
 	bx r1
 	thumb_func_end sub_8008F18
 
-	thumb_func_start sub_8008FCC
-sub_8008FCC: @ 8008FCC
+	thumb_func_start StringExpandPlaceholders
+StringExpandPlaceholders: @ 8008FCC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -487,7 +487,7 @@ _08009004:
 	bl GetExpandedPlaceholder
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, r0, 0
 	b _08008FD2
 _08009018:
@@ -557,10 +557,10 @@ _080090AC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008FCC
+	thumb_func_end StringExpandPlaceholders
 
-	thumb_func_start sub_80090B8
-sub_80090B8: @ 80090B8
+	thumb_func_start StringBraille
+StringBraille: @ 80090B8
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r5, r0, 0
@@ -608,7 +608,7 @@ _0800910A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80090B8
+	thumb_func_end StringBraille
 
 	thumb_func_start sub_8009118
 sub_8009118: @ 8009118

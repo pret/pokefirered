@@ -1212,7 +1212,7 @@ sub_814DF44: @ 814DF44
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_812E51C
+	bl box_print
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -1355,7 +1355,7 @@ _0814E048:
 	movs r1, 0x2
 	adds r2, r7, 0
 	adds r3, r4, 0
-	bl sub_812E51C
+	bl box_print
 	ldr r1, [sp, 0x2C]
 	ldrb r0, [r1]
 	adds r2, r7, 0
@@ -1370,7 +1370,7 @@ _0814E048:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	adds r3, r4, 0
-	bl sub_812E51C
+	bl box_print
 	mov r9, r6
 _0814E0C8:
 	ldr r6, [sp, 0x20]
@@ -1482,7 +1482,7 @@ _0814E178:
 	adds r0, r2, r0
 	ldr r1, [r0]
 	ldr r0, _0814E1F8 @ =gUnknown_2021D18
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	ldr r1, _0814E1F8 @ =gUnknown_2021D18
 	movs r2, 0
@@ -1509,7 +1509,7 @@ _0814E178:
 	ldr r1, _0814E1F8 @ =gUnknown_2021D18
 	str r1, [sp, 0x8]
 	movs r1, 0x2
-	bl sub_812E51C
+	bl box_print
 	b _0814E27E
 	.align 2, 0
 _0814E1E4: .4byte gUnknown_2021CD0
@@ -1544,7 +1544,7 @@ _0814E21A:
 	ldr r0, _0814E29C @ =gUnknown_846F4B8
 	ldr r1, [r0, 0x8]
 	ldr r0, _0814E2A0 @ =gUnknown_2021D18
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	ldr r1, _0814E2A0 @ =gUnknown_2021D18
 	movs r2, 0x1
@@ -1573,7 +1573,7 @@ _0814E21A:
 	ldr r1, _0814E2A0 @ =gUnknown_2021D18
 	str r1, [sp, 0x8]
 	movs r1, 0x2
-	bl sub_812E51C
+	bl box_print
 	mov r9, r4
 	mov r6, r8
 	adds r6, 0xA2
@@ -1632,7 +1632,7 @@ _0814E2B8:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r2, 0x4
-	bl sub_812E51C
+	bl box_print
 	mov r2, r10
 	lsls r0, r2, 24
 	lsrs r0, 24
@@ -1681,7 +1681,7 @@ sub_814E32C: @ 814E32C
 	mov r9, r4
 	ldrb r0, [r4]
 	movs r1, 0x4
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 27
 	movs r1, 0xD6
 	lsls r1, 24
@@ -1702,7 +1702,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	movs r2, 0x2
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	ldr r4, _0814E568 @ =gUnknown_841D088
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -1722,7 +1722,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	adds r0, r6, 0
 	subs r0, 0x20
 	lsls r0, 24
@@ -1748,7 +1748,7 @@ sub_814E32C: @ 814E32C
 	ldr r5, _0814E574 @ =gUnknown_2021D18
 	ldr r1, _0814E578 @ =gUnknown_841D080
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	mov r4, r9
 	ldrb r0, [r4]
 	ldr r1, _0814E560 @ =gUnknown_846E3DC
@@ -1759,7 +1759,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	ldr r4, _0814E57C @ =gUnknown_841D078
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -1779,7 +1779,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	adds r0, r6, 0
 	subs r0, 0x9
 	lsls r0, 24
@@ -1795,7 +1795,7 @@ sub_814E32C: @ 814E32C
 	bl sub_8008E78
 	ldr r1, _0814E580 @ =gUnknown_841D074
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	mov r4, r9
 	ldrb r0, [r4]
 	ldr r1, _0814E560 @ =gUnknown_846E3DC
@@ -1806,7 +1806,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	adds r0, r7, 0
 	adds r0, 0xE
 	lsls r0, 24
@@ -1821,7 +1821,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	movs r2, 0x2
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	ldr r4, _0814E588 @ =gUnknown_841D098
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -1842,7 +1842,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x3
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	mov r4, r8
 	ldrb r2, [r4, 0x16]
 	ldrh r0, [r4, 0x16]
@@ -1893,7 +1893,7 @@ _0814E4EA:
 	ldr r4, _0814E574 @ =gUnknown_2021D18
 	ldr r1, _0814E594 @ =gUnknown_841D090
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r6, 0
 	subs r0, 0x26
 	lsls r0, 24
@@ -1919,7 +1919,7 @@ _0814E4EA:
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	b _0814E5B6
 	.align 2, 0
 _0814E560: .4byte gUnknown_846E3DC
@@ -1949,7 +1949,7 @@ _0814E59C:
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 _0814E5B6:
 	adds r0, r7, 0
 	adds r0, 0xE
@@ -1970,7 +1970,7 @@ _0814E5B6:
 	movs r1, 0x2
 	movs r2, 0x2
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	ldr r0, _0814E638 @ =gUnknown_2021CD0
 	ldr r4, [sp, 0x10]
 	ldrh r1, [r4, 0x8]
@@ -1980,7 +1980,7 @@ _0814E5B6:
 	ldr r4, _0814E63C @ =gUnknown_2021D18
 	ldr r1, _0814E640 @ =gUnknown_841D0A4
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	adds r1, r4, 0
 	movs r2, 0
@@ -1998,7 +1998,7 @@ _0814E5B6:
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -2074,7 +2074,7 @@ _0814E6B2:
 	mov r0, sp
 	strb r1, [r0, 0x4]
 	mov r0, sp
-	bl sub_8003CE4
+	bl AddWindow
 	adds r1, r6, 0
 	adds r1, 0x82
 	strb r0, [r1]
@@ -2297,7 +2297,7 @@ _0814E874:
 	b _0814EA66
 _0814E876:
 	ldr r0, _0814E8A8 @ =gUnknown_846E3F0
-	bl sub_8003CE4
+	bl AddWindow
 	strh r0, [r7, 0x2]
 	lsls r0, 24
 	lsrs r0, 24
@@ -2341,7 +2341,7 @@ _0814E8B0:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	ldr r5, _0814EA04 @ =gUnknown_841D124
 	movs r0, 0x2
 	adds r1, r5, 0
@@ -2358,7 +2358,7 @@ _0814E8B0:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x12
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0x2A
 	str r0, [sp, 0xC]
 	ldr r1, _0814EA08 @ =gUnknown_2021D18
@@ -2372,7 +2372,7 @@ _0814E90E:
 	bl sub_8008E78
 	mov r0, r8
 	ldr r1, _0814EA10 @ =gUnknown_841D13C
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldrb r0, [r7, 0x2]
 	ldr r1, _0814EA14 @ =gUnknown_846E3DC
 	str r1, [sp]
@@ -2383,7 +2383,7 @@ _0814E90E:
 	movs r1, 0x2
 	movs r2, 0x4
 	ldr r3, [sp, 0xC]
-	bl sub_812E51C
+	bl box_print
 	movs r3, 0
 	mov r0, r9
 	lsls r4, r0, 1
@@ -2433,7 +2433,7 @@ _0814E96E:
 	bl sub_8008E78
 	mov r0, r8
 	ldr r1, _0814EA24 @ =gUnknown_841D090
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r1, 0
 	strb r1, [r0]
 	adds r0, 0x1
@@ -2456,7 +2456,7 @@ _0814E96E:
 	str r1, [sp, 0x8]
 	movs r1, 0x3
 	ldr r3, [sp, 0xC]
-	bl sub_812E51C
+	bl box_print
 	ldr r1, [sp, 0x10]
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -2651,7 +2651,7 @@ _0814EB46:
 	lsls r0, 3
 	ldr r1, _0814EBA8 @ =gUnknown_846E3F8
 	adds r0, r1
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, _0814EBAC @ =0x000001bb
 	adds r4, r5, r1
 	adds r4, r6
@@ -2723,7 +2723,7 @@ _0814EBC6:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	b _0814EC4C
 	.align 2, 0
 _0814EC10: .4byte 0x000001bb
@@ -2752,7 +2752,7 @@ _0814EC18:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 _0814EC4C:
 	ldr r1, _0814EC7C @ =0x000001bb
 	adds r0, r6, r1

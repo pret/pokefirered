@@ -296,7 +296,7 @@ _080BEE70: .4byte gUnknown_20399C4
 _080BEE74: .4byte 0x000010fc
 _080BEE78:
 	ldr r0, _080BEE84 @ =gUnknown_83EE9A4
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	b _080BF0F4
 	.align 2, 0
@@ -811,7 +811,7 @@ _080BF260:
 	str r0, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	bl sub_812E51C
+	bl box_print
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, 0xF8
@@ -856,7 +856,7 @@ _080BF2CE:
 	str r4, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_812E51C
+	bl box_print
 	ldr r1, [r5]
 	adds r0, r1, 0
 	adds r0, 0xE9
@@ -875,7 +875,7 @@ _080BF2CE:
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

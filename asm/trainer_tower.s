@@ -11,7 +11,7 @@ sub_815D7BC: @ 815D7BC
 	adds r5, r0, 0
 	adds r4, r1, 0
 	movs r0, 0x1E
-	bl sub_80DA588
+	bl TryCopySpecialSaveSection
 	cmp r0, 0x1
 	bne _0815D804
 	ldr r2, _0815D800 @ =0x00000f88
@@ -20,7 +20,7 @@ sub_815D7BC: @ 815D7BC
 	bl memcpy
 	movs r0, 0x1F
 	adds r1, r4, 0
-	bl sub_80DA588
+	bl TryCopySpecialSaveSection
 	cmp r0, 0x1
 	bne _0815D804
 	ldr r1, _0815D800 @ =0x00000f88
@@ -1312,7 +1312,7 @@ _0815E180:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl sub_8044090
+	bl PlayMapChosenOrBattleBGM
 	bl sub_8080060
 	lsls r0, 24
 	lsrs r0, 24
@@ -2018,7 +2018,7 @@ sub_815E720: @ 815E720
 	sub sp, 0xC
 	bl sub_815EC0C
 	ldr r0, _0815E85C @ =gUnknown_847A218
-	bl sub_8003CE4
+	bl AddWindow
 	lsls r0, 24
 	lsrs r7, r0, 24
 	bl sub_80F6E9C
@@ -2094,7 +2094,7 @@ _0815E76C:
 	bl sub_8008E78
 	ldr r0, _0815E87C @ =gUnknown_2021D18
 	ldr r1, _0815E880 @ =gUnknown_83FE998
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r1, _0815E884 @ =gUnknown_83FE9C4
 	mov r0, r8
 	subs r0, 0x1
@@ -2708,7 +2708,7 @@ sub_815EC8C: @ 815EC8C
 	movs r1, 0x2
 	movs r2, 0x4A
 	movs r3, 0
-	bl sub_812E51C
+	bl box_print
 	movs r7, 0
 	movs r0, 0x90
 	lsls r0, 22
@@ -2759,7 +2759,7 @@ _0815ECDC:
 	bl sub_8008E78
 	ldr r0, _0815EDD0 @ =gUnknown_2021D18
 	ldr r1, _0815EDD4 @ =gUnknown_83FE998
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	lsls r1, r7, 2
 	mov r0, r10
 	lsrs r4, r0, 24
@@ -2775,7 +2775,7 @@ _0815ECDC:
 	movs r1, 0x2
 	movs r2, 0x18
 	adds r3, r4, 0
-	bl sub_812E51C
+	bl box_print
 	ldr r0, _0815EDB4 @ =gUnknown_847A22C
 	str r0, [sp]
 	movs r0, 0
@@ -2786,7 +2786,7 @@ _0815ECDC:
 	movs r1, 0x2
 	movs r2, 0x60
 	adds r3, r4, 0
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0xA0
 	lsls r0, 21
 	add r10, r0

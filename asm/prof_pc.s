@@ -24,11 +24,11 @@ _080CA3F4: .4byte gUnknown_20370C0
 _080CA3F8: .4byte gUnknown_20370C2
 _080CA3FC:
 	movs r0, 0
-	bl sub_8088E8C
+	bl pokedex_count
 	ldr r1, _080CA41C @ =gUnknown_20370C2
 	strh r0, [r1]
 	movs r0, 0x1
-	bl sub_8088E8C
+	bl pokedex_count
 _080CA40C:
 	ldr r1, _080CA420 @ =gUnknown_20370C4
 	strh r0, [r1]

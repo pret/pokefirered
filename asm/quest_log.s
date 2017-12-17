@@ -1088,7 +1088,7 @@ _0811107A:
 	ldr r0, _0811111C @ =gUnknown_845661C
 	adds r4, r0
 	adds r0, r4, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r6, _08111120 @ =gUnknown_203ADFE
 	adds r1, r5, r6
 	strb r0, [r1]
@@ -1111,7 +1111,7 @@ _0811107A:
 	ldr r5, _08111124 @ =gUnknown_2021D18
 	ldr r1, _08111128 @ =gUnknown_841A155
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	cmp r7, 0
 	beq _081110D2
 	ldr r4, _0811112C @ =gUnknown_2021CD0
@@ -1137,7 +1137,7 @@ _081110D2:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldrb r0, [r6]
 	bl PutWindowTilemap
 	ldrb r0, [r6, 0x1]
@@ -2715,7 +2715,7 @@ _08111D42:
 	str r1, [sp, 0x10]
 	movs r1, 0x2
 	movs r2, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x14
@@ -3051,7 +3051,7 @@ sub_8111FCC: @ 8111FCC
 	bl sub_80C4DF8
 	ldr r0, _08112038 @ =gUnknown_2021D18
 	ldr r1, _0811203C @ =gUnknown_841B073
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_8111D10
 _0811200E:
 	strh r4, [r5, 0x8]
@@ -4950,7 +4950,7 @@ sub_8112EB4: @ 8112EB4
 	cmp r0, 0xFF
 	bne _08112ECC
 	ldr r0, _08112ED8 @ =gUnknown_8456928
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	bl PutWindowTilemap
@@ -5007,12 +5007,12 @@ sub_8112F18: @ 8112F18
 	lsrs r0, 24
 	mov r10, r0
 	movs r1, 0x3
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r10
 	movs r1, 0x4
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r0, r7, 5
@@ -5121,7 +5121,7 @@ sub_8112FE4: @ 8112FE4
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x5
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x14
 	pop {r0}
 	bx r0
@@ -7232,7 +7232,7 @@ sub_8113F3C: @ 8113F3C
 	bl sub_8113EAC
 	ldr r0, _08113F78 @ =gUnknown_2021D18
 	ldr r1, _08113F7C @ =gUnknown_841A16F
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x4
 	adds r0, r4, 0
 	pop {r4}
@@ -7326,7 +7326,7 @@ _08113FFC:
 	bl sub_80C4DF8
 	ldr r0, _0811402C @ =gUnknown_2021D18
 	ldr r1, _08114030 @ =gUnknown_841AFA6
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811413C
 	.align 2, 0
 _08114024: .4byte gUnknown_2021CD0
@@ -7344,7 +7344,7 @@ _08114034:
 	bl sub_8113EAC
 	ldr r0, _08114058 @ =gUnknown_2021D18
 	ldr r1, _0811405C @ =gUnknown_841A1E7
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811413C
 	.align 2, 0
 _08114050: .4byte 0x0000ffff
@@ -7354,7 +7354,7 @@ _0811405C: .4byte gUnknown_841A1E7
 _08114060:
 	ldr r0, _0811406C @ =gUnknown_2021D18
 	ldr r1, _08114070 @ =gUnknown_841A210
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811413C
 	.align 2, 0
 _0811406C: .4byte gUnknown_2021D18
@@ -7368,7 +7368,7 @@ _08114074:
 	bl StringCopy
 	ldr r0, _08114094 @ =gUnknown_2021D18
 	ldr r1, _08114098 @ =gUnknown_841A220
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811413C
 	.align 2, 0
 _08114090: .4byte gUnknown_2021CD0
@@ -7406,7 +7406,7 @@ _0811409C:
 	bls _08114104
 	ldr r0, _081140FC @ =gUnknown_2021D18
 	ldr r1, _08114100 @ =gUnknown_841A965
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811413C
 	.align 2, 0
 _081140E8: .4byte gUnknown_2021CD0
@@ -7419,7 +7419,7 @@ _08114100: .4byte gUnknown_841A965
 _08114104:
 	ldr r0, _08114110 @ =gUnknown_2021D18
 	ldr r1, _08114114 @ =gUnknown_841A277
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811413C
 	.align 2, 0
 _08114110: .4byte gUnknown_2021D18
@@ -7432,7 +7432,7 @@ _08114118:
 	bls _08114134
 	ldr r0, _0811412C @ =gUnknown_2021D18
 	ldr r1, _08114130 @ =gUnknown_841A938
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811413C
 	.align 2, 0
 _0811412C: .4byte gUnknown_2021D18
@@ -7440,7 +7440,7 @@ _08114130: .4byte gUnknown_841A938
 _08114134:
 	ldr r0, _08114144 @ =gUnknown_2021D18
 	ldr r1, _08114148 @ =gUnknown_841A255
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _0811413C:
 	adds r0, r5, 0x6
 	pop {r4-r7}
@@ -7506,7 +7506,7 @@ sub_8114188: @ 8114188
 	bl StringCopy
 	ldr r0, _081141C8 @ =gUnknown_2021D18
 	ldr r1, _081141CC @ =gUnknown_841AB74
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x4
 	adds r0, r4, 0
 	pop {r4,r5}
@@ -7550,7 +7550,7 @@ sub_81141E4: @ 81141E4
 	bl StringCopy
 	ldr r0, _08114224 @ =gUnknown_2021D18
 	ldr r1, _08114228 @ =gUnknown_841AB8E
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x4
 	adds r0, r4, 0
 	pop {r4,r5}
@@ -7594,7 +7594,7 @@ sub_8114240: @ 8114240
 	bl StringCopy
 	ldr r0, _08114280 @ =gUnknown_2021D18
 	ldr r1, _08114284 @ =gUnknown_841A6A5
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x4
 	adds r0, r4, 0
 	pop {r4,r5}
@@ -7638,7 +7638,7 @@ sub_811429C: @ 811429C
 	bl StringCopy
 	ldr r0, _081142DC @ =gUnknown_2021D18
 	ldr r1, _081142E0 @ =gUnknown_841A1CD
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x4
 	adds r0, r4, 0
 	pop {r4,r5}
@@ -7714,7 +7714,7 @@ sub_8114324: @ 8114324
 	bl StringCopy
 	ldr r0, _08114378 @ =gUnknown_2021D18
 	ldr r1, _0811437C @ =gUnknown_841A193
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x6
 	adds r0, r4, 0
 	pop {r4,r5}
@@ -7765,7 +7765,7 @@ sub_8114394: @ 8114394
 	bl StringCopy
 	ldr r0, _081143E8 @ =gUnknown_2021D18
 	ldr r1, _081143EC @ =gUnknown_841A6E1
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x6
 	adds r0, r4, 0
 	pop {r4,r5}
@@ -7827,7 +7827,7 @@ sub_811443C: @ 811443C
 	adds r4, r0, 0
 	ldr r0, _08114454 @ =gUnknown_2021D18
 	ldr r1, _08114458 @ =gUnknown_841A2B0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x4
 	adds r0, r4, 0
 	pop {r4}
@@ -7892,7 +7892,7 @@ sub_811448C: @ 811448C
 	bl sub_8113EAC
 	ldr r0, _081144E4 @ =gUnknown_2021D18
 	ldr r1, _081144E8 @ =gUnknown_841A3FF
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r6, 0x8
 	adds r0, r6, 0
 	pop {r4-r6}
@@ -8171,7 +8171,7 @@ sub_8114724: @ 8114724
 	adds r4, r0, 0
 	ldr r0, _0811473C @ =gUnknown_2021D18
 	ldr r1, _08114740 @ =gUnknown_841A50B
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x4
 	adds r0, r4, 0
 	pop {r4}
@@ -8201,7 +8201,7 @@ sub_8114758: @ 8114758
 	adds r4, r0, 0
 	ldr r0, _08114770 @ =gUnknown_2021D18
 	ldr r1, _08114774 @ =gUnknown_841A732
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x4
 	adds r0, r4, 0
 	pop {r4}
@@ -8266,7 +8266,7 @@ sub_81147A8: @ 81147A8
 	bl sub_8113EAC
 	ldr r0, _08114800 @ =gUnknown_2021D18
 	ldr r1, _08114804 @ =gUnknown_841A76A
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r6, 0x8
 	adds r0, r6, 0
 	pop {r4-r6}
@@ -8328,7 +8328,7 @@ sub_8114834: @ 8114834
 	bl StringCopy
 	ldr r0, _08114884 @ =gUnknown_2021D18
 	ldr r1, _08114888 @ =gUnknown_841A7B0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r5, 0xC
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -8879,7 +8879,7 @@ sub_8114C8C: @ 8114C8C
 	bl sub_8099E90
 	ldr r0, _08114CB8 @ =gUnknown_2021D18
 	ldr r1, _08114CBC @ =gUnknown_841A391
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x2
 	adds r0, r4, 0
 	pop {r4}
@@ -8926,7 +8926,7 @@ sub_8114CE4: @ 8114CE4
 	bl sub_8099E90
 	ldr r0, _08114D10 @ =gUnknown_2021D18
 	ldr r1, _08114D14 @ =gUnknown_841A3DA
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x2
 	adds r0, r4, 0
 	pop {r4}
@@ -9677,7 +9677,7 @@ _081152F2:
 	beq _08115364
 	ldr r0, _0811532C @ =gUnknown_2021D18
 	ldr r1, _08115330 @ =gUnknown_841AE48
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811533E
 	.align 2, 0
 _08115318: .4byte gUnknown_2021CD0
@@ -9704,7 +9704,7 @@ _0811533E:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811538A
 	.align 2, 0
 _08115358: .4byte gUnknown_2021D18
@@ -9713,7 +9713,7 @@ _08115360: .4byte gUnknown_8456BE4
 _08115364:
 	ldr r0, _08115370 @ =gUnknown_2021D18
 	ldr r1, _08115374 @ =gUnknown_841AE8F
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0811533E
 	.align 2, 0
 _08115370: .4byte gUnknown_2021D18
@@ -9725,7 +9725,7 @@ _08115378:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r7, r5, 0x2
 _0811538A:
 	adds r0, r7, 0
@@ -9900,7 +9900,7 @@ _081154B4:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r5, 0x2
 	pop {r4,r5}
 	pop {r1}
@@ -10189,7 +10189,7 @@ sub_8115700: @ 8115700
 	bl StringCopy
 	ldr r0, _08115740 @ =gUnknown_2021D18
 	ldr r1, _08115744 @ =gUnknown_841B03F
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r5, 0x2
 	adds r0, r5, 0
 	pop {r4-r6}
@@ -10318,7 +10318,7 @@ sub_8115800: @ 8115800
 	bl sub_80C4DF8
 	ldr r0, _0811582C @ =gUnknown_2021D18
 	ldr r1, _08115830 @ =gUnknown_841B064
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r4, 0x2
 	adds r0, r4, 0
 	pop {r4}

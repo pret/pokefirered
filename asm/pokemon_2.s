@@ -2864,7 +2864,7 @@ SendMonToPC: @ 8040B90
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80CC79C
+	bl set_unknown_box_id
 	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2892,7 +2892,7 @@ _08040BB2:
 	strh r5, [r0]
 	ldr r0, _08040C0C @ =gUnknown_20370D8
 	strh r6, [r0]
-	bl sub_80CC7A8
+	bl get_unknown_box_id
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r5

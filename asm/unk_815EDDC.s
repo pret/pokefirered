@@ -411,7 +411,7 @@ sub_815F094: @ 815F094
 	str r1, [sp, 0x1C]
 	ldr r4, _0815F10C @ =gUnknown_203F464
 	add r0, sp, 0x18
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0

@@ -235,7 +235,7 @@ sub_80E583C: @ 80E583C
 	ldr r4, _080E5890 @ =gUnknown_2021D18
 	ldr r1, _080E5894 @ =gUnknown_8416F27
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_81202F8

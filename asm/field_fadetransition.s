@@ -505,10 +505,10 @@ _0807DEE8:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0807DF04
-	ldr r5, _0807DF00 @ =sub_807E20C
+	ldr r5, _0807DF00 @ =task_map_chg_seq_0807E20C
 	b _0807DF2E
 	.align 2, 0
-_0807DF00: .4byte sub_807E20C
+_0807DF00: .4byte task_map_chg_seq_0807E20C
 _0807DF04:
 	adds r0, r4, 0
 	bl sub_8059C5C
@@ -518,17 +518,17 @@ _0807DF04:
 	bne _0807DF2C
 	ldr r0, _0807DF20 @ =gUnknown_2031DE0
 	ldrb r0, [r0]
-	ldr r5, _0807DF24 @ =sub_807E2CC
+	ldr r5, _0807DF24 @ =task_map_chg_seq_0807E2CC
 	cmp r0, 0
 	bne _0807DF2E
 	ldr r5, _0807DF28 @ =sub_807EC34
 	b _0807DF2E
 	.align 2, 0
 _0807DF20: .4byte gUnknown_2031DE0
-_0807DF24: .4byte sub_807E2CC
+_0807DF24: .4byte task_map_chg_seq_0807E2CC
 _0807DF28: .4byte sub_807EC34
 _0807DF2C:
-	ldr r5, _0807DF44 @ =sub_807E2CC
+	ldr r5, _0807DF44 @ =task_map_chg_seq_0807E2CC
 _0807DF2E:
 	ldr r1, _0807DF48 @ =gUnknown_2031DE0
 	movs r0, 0
@@ -541,7 +541,7 @@ _0807DF2E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807DF44: .4byte sub_807E2CC
+_0807DF44: .4byte task_map_chg_seq_0807E2CC
 _0807DF48: .4byte gUnknown_2031DE0
 	thumb_func_end sub_807DE78
 
@@ -871,8 +871,8 @@ _0807E206:
 	bx r0
 	thumb_func_end sub_807DFBC
 
-	thumb_func_start sub_807E20C
-sub_807E20C: @ 807E20C
+	thumb_func_start task_map_chg_seq_0807E20C
+task_map_chg_seq_0807E20C: @ 807E20C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -960,10 +960,10 @@ _0807E2C6:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807E20C
+	thumb_func_end task_map_chg_seq_0807E20C
 
-	thumb_func_start sub_807E2CC
-sub_807E2CC: @ 807E2CC
+	thumb_func_start task_map_chg_seq_0807E2CC
+task_map_chg_seq_0807E2CC: @ 807E2CC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1000,7 +1000,7 @@ _0807E316:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807E2CC
+	thumb_func_end task_map_chg_seq_0807E2CC
 
 	thumb_func_start sub_807E31C
 sub_807E31C: @ 807E31C
@@ -1176,8 +1176,8 @@ _0807E468: .4byte sub_807DF64
 _0807E46C: .4byte sub_807E718
 	thumb_func_end sub_807E438
 
-	thumb_func_start sub_807E470
-sub_807E470: @ 807E470
+	thumb_func_start sp13E_warp_to_last_warp
+sp13E_warp_to_last_warp: @ 807E470
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055F88
@@ -1195,7 +1195,7 @@ sub_807E470: @ 807E470
 _0807E494: .4byte gUnknown_3005020
 _0807E498: .4byte sub_807DF64
 _0807E49C: .4byte sub_807E718
-	thumb_func_end sub_807E470
+	thumb_func_end sp13E_warp_to_last_warp
 
 	thumb_func_start sub_807E4A0
 sub_807E4A0: @ 807E4A0
@@ -1282,10 +1282,10 @@ _0807E540: .4byte sub_807DF64
 _0807E544: .4byte sub_807E784
 	thumb_func_end sub_807E524
 
-	thumb_func_start sub_807E548
-sub_807E548: @ 807E548
+	thumb_func_start sp13F_fall_to_last_warp
+sp13F_fall_to_last_warp: @ 807E548
 	push {lr}
-	bl sub_807E470
+	bl sp13E_warp_to_last_warp
 	ldr r1, _0807E558 @ =gUnknown_3005020
 	ldr r0, _0807E55C @ =sub_8084454
 	str r0, [r1]
@@ -1294,7 +1294,7 @@ sub_807E548: @ 807E548
 	.align 2, 0
 _0807E558: .4byte gUnknown_3005020
 _0807E55C: .4byte sub_8084454
-	thumb_func_end sub_807E548
+	thumb_func_end sp13F_fall_to_last_warp
 
 	thumb_func_start sub_807E560
 sub_807E560: @ 807E560

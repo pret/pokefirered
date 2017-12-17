@@ -146,7 +146,7 @@ sub_8142504: @ 8142504
 	adds r1, r0, 0
 	ldr r4, _08142558 @ =gUnknown_2021D18
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -162,7 +162,7 @@ sub_8142504: @ 8142504
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xF
@@ -518,7 +518,7 @@ _081427C8:
 	b _081428E6
 _081427CA:
 	ldr r0, _081427D8 @ =gUnknown_2021D18
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	cmp r6, 0
 	bne _081427E0
 	ldr r0, _081427DC @ =gUnknown_8466D90
@@ -529,7 +529,7 @@ _081427DC: .4byte gUnknown_8466D90
 _081427E0:
 	ldr r0, _08142828 @ =gUnknown_8466D98
 _081427E2:
-	bl sub_8003CE4
+	bl AddWindow
 	strh r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0x11
@@ -546,7 +546,7 @@ _081427E2:
 	str r1, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldrb r0, [r4]
 	movs r1, 0x1
 	movs r2, 0xF
@@ -606,7 +606,7 @@ _0814287E:
 	.align 2, 0
 _08142888: .4byte 0xff00ffff
 _0814288C:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r6, r0, 24
 	movs r1, 0x80
@@ -678,7 +678,7 @@ _08142914:
 	bne _0814292C
 	ldr r0, _08142924 @ =gUnknown_2021D18
 	ldr r1, _08142928 @ =gUnknown_841EA86
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _08142934
 	.align 2, 0
 _08142924: .4byte gUnknown_2021D18
@@ -686,10 +686,10 @@ _08142928: .4byte gUnknown_841EA86
 _0814292C:
 	ldr r0, _08142984 @ =gUnknown_2021D18
 	ldr r1, _08142988 @ =gUnknown_841EAB7
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _08142934:
 	ldr r0, _0814298C @ =gUnknown_8466DA0
-	bl sub_8003CE4
+	bl AddWindow
 	strh r0, [r5]
 	lsls r0, 24
 	lsrs r0, 24
@@ -707,7 +707,7 @@ _08142934:
 	str r1, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldrb r0, [r5]
 	movs r1, 0x1
 	movs r2, 0xF

@@ -347,7 +347,7 @@ _08088556:
 	movs r2, 0
 	bl ChangeBgY
 	ldr r0, _0808867C @ =gUnknown_83CC2B8
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	movs r0, 0x50
 	movs r1, 0xC1
@@ -409,7 +409,7 @@ sub_8088680: @ 8088680
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0x2
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -906,7 +906,7 @@ _08088A72:
 	movs r1, 0x2
 	mov r2, r8
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	b _08088ADE
 	.align 2, 0
 _08088A94: .4byte gUnknown_83CC354
@@ -940,7 +940,7 @@ _08088A9C:
 	movs r1, 0x2
 	mov r2, r8
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 _08088ADE:
 	movs r0, 0x1
 	bl PutWindowTilemap

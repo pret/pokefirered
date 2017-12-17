@@ -666,7 +666,7 @@ sub_810C050: @ 810C050
 	lsrs r6, r3, 24
 	adds r0, r2, 0
 	movs r1, 0x7
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r3, r0, 0
 	movs r0, 0
 	str r0, [sp]

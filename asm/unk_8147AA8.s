@@ -92,7 +92,7 @@ _08147B5C: .4byte gUnknown_203F3D4
 sub_8147B60: @ 8147B60
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	movs r2, 0
 	strb r0, [r4, 0x5]
 	adds r1, r4, 0
@@ -4176,7 +4176,7 @@ _0814999C:
 	thumb_func_start sub_81499A4
 sub_81499A4: @ 81499A4
 	push {lr}
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -4792,7 +4792,7 @@ _08149DF0:
 	movs r2, 0x4
 	bl sub_8001658
 	ldr r0, _08149EEC @ =gUnknown_846D8E4
-	bl sub_8003B24
+	bl InitWindows
 	bl sub_80F6C14
 	bl reset_temp_tile_data_buffers
 	ldr r0, [r6]
@@ -5961,7 +5961,7 @@ _0814A73C:
 	thumb_func_start sub_814A744
 sub_814A744: @ 814A744
 	push {lr}
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}
@@ -6006,7 +6006,7 @@ sub_814A754: @ 814A754
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_8003CE4
+	bl AddWindow
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -6116,7 +6116,7 @@ sub_814A84C: @ 814A84C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	add r0, sp, 0xC
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -6126,7 +6126,7 @@ sub_814A84C: @ 814A84C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -6493,7 +6493,7 @@ _0814AB2A:
 	orrs r0, r2
 	str r0, [sp]
 	mov r0, sp
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, _0814AB94 @ =gUnknown_203F3D8
 	ldr r1, [r1]
 	lsls r2, r5, 1
@@ -6582,7 +6582,7 @@ sub_814AB98: @ 814AB98
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	ldr r0, [r6]
 	adds r0, 0x1C
 	add r0, r8
@@ -7854,7 +7854,7 @@ _0814B54C:
 	b _0814B5BE
 _0814B556:
 	ldr r0, _0814B56C @ =gUnknown_846E2CC
-	bl sub_8003CE4
+	bl AddWindow
 	strh r0, [r4, 0x2]
 	ldrh r0, [r4, 0x2]
 	bl sub_814B5C4

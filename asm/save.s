@@ -1467,12 +1467,12 @@ _080DA28C:
 	bls _080DA28C
 _080DA29E:
 	movs r0, 0xA
-	bl sub_8054EC4
+	bl GetGameStat
 	ldr r1, _080DA2E0 @ =0x000003e6
 	cmp r0, r1
 	bhi _080DA2B0
 	movs r0, 0xA
-	bl sub_8054E90
+	bl IncrementGameStat
 _080DA2B0:
 	ldr r4, _080DA2E4 @ =gUnknown_201C000
 	movs r5, 0xF8
@@ -1794,7 +1794,7 @@ _080DA528:
 	bl sub_80D9E14
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_804C310
+	bl LoadSerializedGame
 	ldr r0, _080DA54C @ =gUnknown_30053A0
 	strh r4, [r0]
 	ldr r1, _080DA550 @ =gUnknown_30053A4
@@ -1834,8 +1834,8 @@ _080DA57C:
 _080DA584: .4byte gUnknown_201C000
 	thumb_func_end sub_80DA4FC
 
-	thumb_func_start sub_80DA588
-sub_80DA588: @ 80DA588
+	thumb_func_start TryCopySpecialSaveSection
+TryCopySpecialSaveSection: @ 80DA588
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1882,7 +1882,7 @@ _080DA5D6:
 	bx r1
 	.align 2, 0
 _080DA5DC: .4byte 0x00000ffb
-	thumb_func_end sub_80DA588
+	thumb_func_end TryCopySpecialSaveSection
 
 	thumb_func_start sub_80DA5E0
 sub_80DA5E0: @ 80DA5E0

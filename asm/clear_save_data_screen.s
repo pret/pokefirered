@@ -134,7 +134,7 @@ _080F5660:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	movs r0, 0x1
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -204,7 +204,7 @@ sub_80F5708: @ 80F5708
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F578C
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x1
@@ -241,7 +241,7 @@ _080F5744:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	movs r0, 0x1
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -445,7 +445,7 @@ _080F5846:
 	movs r2, 0
 	bl ChangeBgY
 	ldr r0, _080F5948 @ =gUnknown_841EE68
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	movs r1, 0x82
 	lsls r1, 5

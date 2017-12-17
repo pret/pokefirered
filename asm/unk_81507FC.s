@@ -273,7 +273,7 @@ _081509E8:
 _08150A26:
 	ldr r0, [sp, 0x10]
 	strb r1, [r0]
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	mov r1, r8
 	strb r0, [r1]
 	bl GetMultiplayerId
@@ -3096,7 +3096,7 @@ sub_8152048: @ 8152048
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
-	bl sub_8044470
+	bl IsMonShiny
 	strb r0, [r4]
 	pop {r4}
 	pop {r0}
@@ -6394,7 +6394,7 @@ _08153858:
 	b _081538CA
 _08153862:
 	ldr r0, _08153878 @ =gUnknown_84755E0
-	bl sub_8003CE4
+	bl AddWindow
 	strh r0, [r4, 0x2]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6580,7 +6580,7 @@ _081539E8: .4byte gUnknown_8475602
 	thumb_func_start sub_81539EC
 sub_81539EC: @ 81539EC
 	push {lr}
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	ldr r1, _08153A00 @ =gUnknown_203F3E0
 	ldr r1, [r1]
 	adds r1, 0x24
@@ -8965,7 +8965,7 @@ _08154BD0:
 	orrs r0, r2
 	str r0, [sp, 0xC]
 	add r0, sp, 0xC
-	bl sub_8003CE4
+	bl AddWindow
 	mov r2, r10
 	ldr r1, [r2]
 	add r1, r9
@@ -9014,7 +9014,7 @@ _08154C4E:
 	str r4, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0x1
-	bl sub_812E51C
+	bl box_print
 	mov r2, r10
 	ldr r0, [r2]
 	add r0, r9
@@ -9319,7 +9319,7 @@ _08154EC8:
 	movs r1, 0
 	movs r2, 0x1C
 	adds r3, r6, 0
-	bl sub_812E51C
+	bl box_print
 	add r0, sp, 0xC
 	mov r1, r9
 	movs r2, 0x1
@@ -9440,7 +9440,7 @@ _08155004: .4byte 0x0000301c
 _08155008:
 	ldr r6, _08155050 @ =gUnknown_8475674
 	adds r0, r6, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r4, _08155054 @ =gUnknown_203F440
 	ldr r1, [r4]
 	ldr r2, _08155058 @ =0x00003008
@@ -9450,7 +9450,7 @@ _08155008:
 	movs r0, 0x8
 	adds r0, r6
 	mov r9, r0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r4]
 	ldr r5, _0815505C @ =0x00003009
 	adds r1, r5
@@ -9563,7 +9563,7 @@ _081550EA:
 	str r6, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0x2
-	bl sub_812E51C
+	bl box_print
 	movs r7, 0
 	mov r0, r9
 	adds r0, 0x1
@@ -9624,7 +9624,7 @@ _0815512E:
 	add r1, sp, 0xC
 	str r1, [sp, 0x8]
 	movs r1, 0
-	bl sub_812E51C
+	bl box_print
 	b _081551FA
 	.align 2, 0
 _081551A8: .4byte gUnknown_203F440
@@ -9924,7 +9924,7 @@ _0815542C:
 	bl RemoveWindow
 	ldr r6, _0815547C @ =gUnknown_8475684
 	adds r0, r6, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1]
@@ -10242,7 +10242,7 @@ _0815571C:
 _0815571E:
 	ldr r5, _08155788 @ =gUnknown_847568C
 	adds r0, r5, 0
-	bl sub_8003CE4
+	bl AddWindow
 	mov r2, r10
 	ldr r1, [r2]
 	ldr r3, _0815578C @ =0x00003008
@@ -10251,7 +10251,7 @@ _0815571E:
 	movs r0, 0x8
 	adds r0, r5
 	mov r8, r0
-	bl sub_8003CE4
+	bl AddWindow
 	mov r2, r10
 	ldr r1, [r2]
 	ldr r4, _08155790 @ =0x00003009
@@ -10765,7 +10765,7 @@ _08155B74:
 _08155B7A:
 	ldr r4, _08155B9C @ =gUnknown_84756A4
 	adds r0, r4, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r5]
 	ldr r2, _08155BA0 @ =0x00003008
 	adds r1, r2
@@ -10918,7 +10918,7 @@ _08155CA8:
 _08155CB2:
 	ldr r4, _08155CF8 @ =gUnknown_847569C
 	adds r0, r4, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r6]
 	ldr r2, _08155CFC @ =0x00003008
 	adds r1, r2

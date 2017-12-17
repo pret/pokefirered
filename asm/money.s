@@ -175,7 +175,7 @@ _0809FE72:
 _0809FE7E:
 	ldr r1, _0809FEC0 @ =gUnknown_841697A
 	adds r0, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r4, _0809FEBC @ =gUnknown_2021D18
 	movs r0, 0
 	adds r1, r4, 0
@@ -248,7 +248,7 @@ _0809FF08:
 _0809FF14:
 	ldr r1, _0809FF44 @ =gUnknown_841697A
 	adds r0, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r2, _0809FF40 @ =gUnknown_2021D18
 	str r6, [sp]
 	str r5, [sp, 0x4]
@@ -361,7 +361,7 @@ sub_809FFB8: @ 809FFB8
 	str r1, [sp, 0x1C]
 	ldr r4, _080A002C @ =gUnknown_2039990
 	add r0, sp, 0x18
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0

@@ -47,7 +47,7 @@ sub_812845C: @ 812845C
 	strb r5, [r4, 0x16]
 	movs r0, 0xFF
 	strb r0, [r4, 0x1A]
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	strb r0, [r4, 0xD]
 	bl GetMultiplayerId
 	strb r0, [r4, 0x13]
@@ -2749,7 +2749,7 @@ _0812994E:
 	movs r0, 0x1
 	strh r0, [r4]
 _08129952:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	adds r2, r0, 0
@@ -2916,7 +2916,7 @@ _08129A8C:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0
 	beq _08129AC0
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -2998,7 +2998,7 @@ sub_8129B14: @ 8129B14
 	movs r2, 0x4
 	bl sub_8001658
 	ldr r0, _08129B6C @ =gUnknown_845AA94
-	bl sub_8003B24
+	bl InitWindows
 	bl reset_temp_tile_data_buffers
 	bl sub_812AD50
 	ldr r0, [r4]
@@ -4246,7 +4246,7 @@ sub_812A424: @ 812A424
 	orrs r0, r1
 	str r0, [sp, 0x10]
 	add r0, sp, 0xC
-	bl sub_8003CE4
+	bl AddWindow
 	adds r1, r0, 0
 	ldr r6, _0812A510 @ =gUnknown_203B0E4
 	ldr r0, [r6]
@@ -4441,7 +4441,7 @@ sub_812A578: @ 812A578
 	str r0, [sp, 0x14]
 _0812A5F8:
 	add r0, sp, 0x14
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r5, _0812A63C @ =gUnknown_203B0E4
 	ldr r1, [r5]
 	strh r0, [r1, 0x1E]
@@ -4689,7 +4689,7 @@ _0812A7B4:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_812E51C
+	bl box_print
 	add sp, 0x34
 	pop {r3-r5}
 	mov r8, r3
@@ -4767,7 +4767,7 @@ _0812A866:
 	movs r0, 0x2
 	movs r1, 0
 	lsrs r2, r5, 24
-	bl sub_812E51C
+	bl box_print
 	adds r4, 0x4
 	adds r7, 0x1
 	adds r0, r6, 0
@@ -4807,7 +4807,7 @@ _0812A8A8:
 	movs r4, 0x80
 	lsls r4, 19
 	lsrs r2, r4, 24
-	bl sub_812E51C
+	bl box_print
 	adds r0, r7, 0x1
 	str r0, [sp, 0x48]
 	adds r6, 0xC
@@ -4858,7 +4858,7 @@ _0812A90C:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl sub_812E51C
+	bl box_print
 	adds r2, r7, 0
 	add r0, sp, 0xC
 	str r0, [sp]
@@ -4870,7 +4870,7 @@ _0812A90C:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl sub_812E51C
+	bl box_print
 _0812A960:
 	ldr r7, [sp, 0x48]
 	mov r4, r10
@@ -5063,7 +5063,7 @@ sub_812AA78: @ 812AA78
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r4, 0
-	bl sub_812E51C
+	bl box_print
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}

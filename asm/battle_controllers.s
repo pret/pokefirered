@@ -80,7 +80,7 @@ _0800D298:
 	ldr r0, _0800D300 @ =gUnknown_2023BC8
 	movs r4, 0
 	str r4, [r0]
-	bl sub_80724C0
+	bl ClearBattleAnimationVars
 	bl sub_8043FBC
 	bl sub_80C6D0C
 	ldr r0, _0800D304 @ =gUnknown_2022B54
@@ -1519,7 +1519,7 @@ _0800DE16:
 	lsls r0, r1, 24
 	lsrs r4, r0, 24
 _0800DE1C:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -3353,8 +3353,8 @@ sub_800EB54: @ 800EB54
 _0800EB70: .4byte gUnknown_2022874
 	thumb_func_end sub_800EB54
 
-	thumb_func_start sub_800EB74
-sub_800EB74: @ 800EB74
+	thumb_func_start EmitResetActionMoveSelection
+EmitResetActionMoveSelection: @ 800EB74
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3369,10 +3369,10 @@ sub_800EB74: @ 800EB74
 	bx r0
 	.align 2, 0
 _0800EB90: .4byte gUnknown_2022874
-	thumb_func_end sub_800EB74
+	thumb_func_end EmitResetActionMoveSelection
 
-	thumb_func_start sub_800EB94
-sub_800EB94: @ 800EB94
+	thumb_func_start EmitCmd55
+EmitCmd55: @ 800EB94
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3387,6 +3387,6 @@ sub_800EB94: @ 800EB94
 	bx r0
 	.align 2, 0
 _0800EBB0: .4byte gUnknown_2022874
-	thumb_func_end sub_800EB94
+	thumb_func_end EmitCmd55
 
 	.align 2, 0 @ Don't pad with nop.

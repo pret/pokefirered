@@ -332,7 +332,7 @@ _08098384:
 	movs r6, 0x2D
 _08098396:
 	mov r0, sp
-	bl sub_8003CE4
+	bl AddWindow
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r4, 0

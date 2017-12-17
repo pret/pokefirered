@@ -10,7 +10,7 @@ sub_800FD9C: @ 800FD9C
 	push {r4,lr}
 	bl sub_804C0A4
 	bl sub_802E03C
-	bl sub_8033DB8
+	bl AllocateBattleSpritesData
 	bl AllocateMonSpritesGfx
 	ldr r4, _0800FDCC @ =gUnknown_2022B4C
 	ldr r0, [r4]
@@ -161,7 +161,7 @@ _0800FEA6:
 	ldr r1, _0800FF64 @ =gUnknown_2022B50
 	strb r0, [r1]
 	bl sub_800F34C
-	bl sub_800F420
+	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl ResetTasks
 	bl sub_800FAE0
@@ -369,7 +369,7 @@ sub_80100B8: @ 80100B8
 	movs r0, 0xC4
 	lsls r0, 1
 	adds r4, r5, r0
-	bl sub_809C854
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _08010134
 	movs r2, 0
@@ -477,7 +477,7 @@ sub_801017C: @ 801017C
 	beq _08010194
 	b _080102C0
 _08010194:
-	bl sub_809C854
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _08010250
 	movs r5, 0
@@ -2389,7 +2389,7 @@ sub_8011100: @ 8011100
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _08011170 @ =sub_80111BC
+	ldr r0, _08011170 @ =CB2_QuitRecordedBattle
 	bl SetMainCallback2
 _08011158:
 	add sp, 0x4
@@ -2400,11 +2400,11 @@ _08011160: .4byte gUnknown_30030F0
 _08011164: .4byte gUnknown_2022B4C
 _08011168: .4byte gUnknown_20370D0
 _0801116C: .4byte gUnknown_2023E8A
-_08011170: .4byte sub_80111BC
+_08011170: .4byte CB2_QuitRecordedBattle
 	thumb_func_end sub_8011100
 
-	thumb_func_start sub_8011174
-sub_8011174: @ 8011174
+	thumb_func_start FreeRestoreBattleData
+FreeRestoreBattleData: @ 8011174
 	push {lr}
 	ldr r1, _080111AC @ =gUnknown_30030F0
 	ldr r0, _080111B0 @ =gUnknown_3004F80
@@ -2424,7 +2424,7 @@ sub_8011174: @ 8011174
 	movs r0, 0x53
 	bl m4aSongNumStop
 	bl FreeMonSpritesGfx
-	bl sub_8033DF8
+	bl FreeBattleSpritesData
 	bl sub_802E138
 	pop {r0}
 	bx r0
@@ -2433,10 +2433,10 @@ _080111AC: .4byte gUnknown_30030F0
 _080111B0: .4byte gUnknown_3004F80
 _080111B4: .4byte gUnknown_2039600
 _080111B8: .4byte 0x00000439
-	thumb_func_end sub_8011174
+	thumb_func_end FreeRestoreBattleData
 
-	thumb_func_start sub_80111BC
-sub_80111BC: @ 80111BC
+	thumb_func_start CB2_QuitRecordedBattle
+CB2_QuitRecordedBattle: @ 80111BC
 	push {lr}
 	bl UpdatePaletteFade
 	ldr r0, _080111E4 @ =gUnknown_2037AB8
@@ -2445,7 +2445,7 @@ sub_80111BC: @ 80111BC
 	ands r0, r1
 	cmp r0, 0
 	bne _080111DE
-	bl sub_8011174
+	bl FreeRestoreBattleData
 	bl FreeAllWindowBuffers
 	ldr r0, _080111E8 @ =gUnknown_30030F0
 	ldr r0, [r0, 0x8]
@@ -2456,7 +2456,7 @@ _080111DE:
 	.align 2, 0
 _080111E4: .4byte gUnknown_2037AB8
 _080111E8: .4byte gUnknown_30030F0
-	thumb_func_end sub_80111BC
+	thumb_func_end CB2_QuitRecordedBattle
 
 	thumb_func_start sub_80111EC
 sub_80111EC: @ 80111EC
@@ -3737,7 +3737,7 @@ _08011C10:
 	bl SetMainCallback2
 	bl sub_812C224
 	bl FreeMonSpritesGfx
-	bl sub_8033DF8
+	bl FreeBattleSpritesData
 	bl sub_802E138
 _08011C34:
 	add sp, 0x4
@@ -4780,14 +4780,14 @@ sub_80123C0: @ 80123C0
 	movs r0, 0
 	strb r0, [r1, 0x1]
 	ldr r1, _080123DC @ =gUnknown_3004F84
-	ldr r0, _080123E0 @ =sub_8012FAC
+	ldr r0, _080123E0 @ =BattleIntroGetMonsData
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080123D8: .4byte gUnknown_2023E82
 _080123DC: .4byte gUnknown_3004F84
-_080123E0: .4byte sub_8012FAC
+_080123E0: .4byte BattleIntroGetMonsData
 	thumb_func_end sub_80123C0
 
 	thumb_func_start sub_80123E4
@@ -6259,8 +6259,8 @@ _08012FA4: .4byte gUnknown_2023FF4
 _08012FA8: .4byte gUnknown_8254784
 	thumb_func_end sub_8012BC8
 
-	thumb_func_start sub_8012FAC
-sub_8012FAC: @ 8012FAC
+	thumb_func_start BattleIntroGetMonsData
+BattleIntroGetMonsData: @ 8012FAC
 	push {r4,r5,lr}
 	ldr r5, _08012FBC @ =gUnknown_2023E82
 	ldrb r0, [r5]
@@ -6302,24 +6302,24 @@ _08012FE4:
 	cmp r0, r1
 	bne _08013018
 	ldr r1, _08013010 @ =gUnknown_3004F84
-	ldr r0, _08013014 @ =sub_8013020
+	ldr r0, _08013014 @ =BattleIntroPrepareBackgroundSlide
 	str r0, [r1]
 	b _0801301A
 	.align 2, 0
 _08013008: .4byte gUnknown_2023BC8
 _0801300C: .4byte gUnknown_2023BCC
 _08013010: .4byte gUnknown_3004F84
-_08013014: .4byte sub_8013020
+_08013014: .4byte BattleIntroPrepareBackgroundSlide
 _08013018:
 	strb r2, [r5]
 _0801301A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8012FAC
+	thumb_func_end BattleIntroGetMonsData
 
-	thumb_func_start sub_8013020
-sub_8013020: @ 8013020
+	thumb_func_start BattleIntroPrepareBackgroundSlide
+BattleIntroPrepareBackgroundSlide: @ 8013020
 	push {r4,r5,lr}
 	ldr r0, _08013058 @ =gUnknown_2023BC8
 	ldr r5, [r0]
@@ -6352,7 +6352,7 @@ _08013060: .4byte gUnknown_2022B50
 _08013064: .4byte gUnknown_3004F84
 _08013068: .4byte sub_8013070
 _0801306C: .4byte gUnknown_2023E82
-	thumb_func_end sub_8013020
+	thumb_func_end BattleIntroPrepareBackgroundSlide
 
 	thumb_func_start sub_8013070
 sub_8013070: @ 8013070
@@ -6674,7 +6674,7 @@ _080132F8:
 	b _080130A0
 _0801330E:
 	ldr r1, _08013334 @ =gUnknown_3004F84
-	ldr r0, _08013338 @ =sub_801333C
+	ldr r0, _08013338 @ =BattleIntroDrawPartySummaryScreens
 	str r0, [r1]
 _08013314:
 	pop {r3-r5}
@@ -6690,11 +6690,11 @@ _08013328: .4byte gUnknown_2022B4C
 _0801332C: .4byte gUnknown_2023BC4
 _08013330: .4byte gUnknown_2023BCC
 _08013334: .4byte gUnknown_3004F84
-_08013338: .4byte sub_801333C
+_08013338: .4byte BattleIntroDrawPartySummaryScreens
 	thumb_func_end sub_8013070
 
-	thumb_func_start sub_801333C
-sub_801333C: @ 801333C
+	thumb_func_start BattleIntroDrawPartySummaryScreens
+BattleIntroDrawPartySummaryScreens: @ 801333C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -6827,12 +6827,12 @@ _0801342E:
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	ldr r1, _08013460 @ =gUnknown_3004F84
-	ldr r0, _08013464 @ =sub_80134DC
+	ldr r0, _08013464 @ =BattleIntroPrintTrainerWantsToBattle
 	b _080134C6
 	.align 2, 0
 _0801345C: .4byte gUnknown_2023BC4
 _08013460: .4byte gUnknown_3004F84
-_08013464: .4byte sub_80134DC
+_08013464: .4byte BattleIntroPrintTrainerWantsToBattle
 _08013468:
 	movs r7, 0
 	add r6, sp, 0x4
@@ -6892,10 +6892,10 @@ _080134C8:
 	.align 2, 0
 _080134D4: .4byte gUnknown_3004F84
 _080134D8: .4byte sub_8013514
-	thumb_func_end sub_801333C
+	thumb_func_end BattleIntroDrawPartySummaryScreens
 
-	thumb_func_start sub_80134DC
-sub_80134DC: @ 80134DC
+	thumb_func_start BattleIntroPrintTrainerWantsToBattle
+BattleIntroPrintTrainerWantsToBattle: @ 80134DC
 	push {lr}
 	ldr r0, _08013504 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -6919,7 +6919,7 @@ _08013504: .4byte gUnknown_2023BC8
 _08013508: .4byte gUnknown_2023BC4
 _0801350C: .4byte gUnknown_3004F84
 _08013510: .4byte sub_8013568
-	thumb_func_end sub_80134DC
+	thumb_func_end BattleIntroPrintTrainerWantsToBattle
 
 	thumb_func_start sub_8013514
 sub_8013514: @ 8013514
@@ -6946,7 +6946,7 @@ sub_8013514: @ 8013514
 	ldr r1, _08013560 @ =gUnknown_2023FC4
 	strb r0, [r1, 0x17]
 	ldr r0, _08013564 @ =gUnknown_81D91A1
-	bl sub_801BBE4
+	bl BattleScriptExecute
 _0801354A:
 	pop {r0}
 	bx r0
@@ -7388,7 +7388,7 @@ _080138C0:
 	ldrb r1, [r1]
 	movs r2, 0x1
 	str r3, [sp, 0x4]
-	bl sub_8014CD8
+	bl GetWhoStrikesFirst
 	lsls r0, 24
 	ldr r3, [sp, 0x4]
 	cmp r0, 0
@@ -7396,7 +7396,7 @@ _080138C0:
 	lsls r1, r4, 24
 	lsrs r1, 24
 	lsrs r0, r7, 24
-	bl sub_8014CA4
+	bl SwapTurnOrder
 	ldr r3, [sp, 0x4]
 _080138E4:
 	adds r4, 0x1
@@ -7799,7 +7799,7 @@ _08013BF8:
 	beq _08013C04
 	b _08013D20
 _08013C04:
-	bl sub_8018F90
+	bl HandleFaintedMonActions
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -7950,8 +7950,8 @@ _08013D4C: .4byte gUnknown_2023DC4
 _08013D50: .4byte gUnknown_2023E80
 	thumb_func_end sub_8013BD4
 
-	thumb_func_start sub_8013D54
-sub_8013D54: @ 8013D54
+	thumb_func_start IsRunningFromBattleImpossible
+IsRunningFromBattleImpossible: @ 8013D54
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r1, _08013D78 @ =gUnknown_2023BE4
@@ -8216,7 +8216,7 @@ _08013F5E:
 	bx r1
 	.align 2, 0
 _08013F68: .4byte gUnknown_2023E82
-	thumb_func_end sub_8013D54
+	thumb_func_end IsRunningFromBattleImpossible
 
 	thumb_func_start sub_8013F6C
 sub_8013F6C: @ 8013F6C
@@ -9096,7 +9096,7 @@ _080146AC:
 	cmp r0, 0x3
 	bne _080146EC
 	ldr r0, _080146E4 @ =gUnknown_81D8924
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	ldr r1, _080146E8 @ =gUnknown_2023E82
 	ldrb r0, [r4]
 	adds r0, r1
@@ -9108,7 +9108,7 @@ _080146E0: .4byte gUnknown_2023BC4
 _080146E4: .4byte gUnknown_81D8924
 _080146E8: .4byte gUnknown_2023E82
 _080146EC:
-	bl sub_8013D54
+	bl IsRunningFromBattleImpossible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08014750
@@ -9798,8 +9798,8 @@ _08014C9C: .4byte gUnknown_3004F84
 _08014CA0: .4byte sub_80150A8
 	thumb_func_end sub_8014040
 
-	thumb_func_start sub_8014CA4
-sub_8014CA4: @ 8014CA4
+	thumb_func_start SwapTurnOrder
+SwapTurnOrder: @ 8014CA4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -9825,10 +9825,10 @@ sub_8014CA4: @ 8014CA4
 	.align 2, 0
 _08014CD0: .4byte gUnknown_2023BDA
 _08014CD4: .4byte gUnknown_2023BDE
-	thumb_func_end sub_8014CA4
+	thumb_func_end SwapTurnOrder
 
-	thumb_func_start sub_8014CD8
-sub_8014CD8: @ 8014CD8
+	thumb_func_start GetWhoStrikesFirst
+GetWhoStrikesFirst: @ 8014CD8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -10314,7 +10314,7 @@ _08015096:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8014CD8
+	thumb_func_end GetWhoStrikesFirst
 
 	thumb_func_start sub_80150A8
 sub_80150A8: @ 80150A8
@@ -10593,7 +10593,7 @@ _080152A8:
 	beq _080152E4
 	adds r0, r3, 0
 	movs r2, 0
-	bl sub_8014CD8
+	bl GetWhoStrikesFirst
 	lsls r0, 24
 	cmp r0, 0
 	beq _080152E4
@@ -10601,7 +10601,7 @@ _080152A8:
 	lsrs r1, 24
 	mov r3, r8
 	lsrs r0, r3, 24
-	bl sub_8014CA4
+	bl SwapTurnOrder
 _080152E4:
 	adds r4, 0x1
 	ldr r0, _08015320 @ =gUnknown_2023BCC
@@ -10901,7 +10901,7 @@ _080154CC:
 	cmp r0, 0
 	blt _08015550
 	ldr r0, _0801554C @ =gUnknown_81D9015
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	b _08015598
 	.align 2, 0
 _08015528: .4byte gUnknown_2023DD0
@@ -10923,7 +10923,7 @@ _08015550:
 	cmp r0, r1
 	bcc _080154CC
 _0801555E:
-	bl sub_8019284
+	bl TryClearRageStatuses
 	ldr r1, _080155A0 @ =gUnknown_2023BE2
 	movs r0, 0
 	strb r0, [r1]
@@ -11502,14 +11502,14 @@ sub_8015A30: @ 8015A30
 	beq _08015A6C
 _08015A52:
 	ldr r1, _08015A64 @ =gUnknown_3004F84
-	ldr r0, _08015A68 @ =sub_8015B58
+	ldr r0, _08015A68 @ =ReturnFromBattleToOverworld
 	b _08015A70
 	.align 2, 0
 _08015A58: .4byte gUnknown_2037AB8
 _08015A5C: .4byte gUnknown_3004FD4
 _08015A60: .4byte gUnknown_2023E8A
 _08015A64: .4byte gUnknown_3004F84
-_08015A68: .4byte sub_8015B58
+_08015A68: .4byte ReturnFromBattleToOverworld
 _08015A6C:
 	ldr r1, _08015A94 @ =gUnknown_3004F84
 	ldr r0, _08015A98 @ =sub_8015AA0
@@ -11523,7 +11523,7 @@ _08015A70:
 	cmp r0, 0
 	bne _08015A8E
 	bl FreeMonSpritesGfx
-	bl sub_8033DF8
+	bl FreeBattleSpritesData
 	bl sub_802E138
 _08015A8E:
 	pop {r0}
@@ -11594,7 +11594,7 @@ _08015B08:
 	bne _08015AAC
 _08015B16:
 	ldr r1, _08015B28 @ =gUnknown_3004F84
-	ldr r0, _08015B2C @ =sub_8015B58
+	ldr r0, _08015B2C @ =ReturnFromBattleToOverworld
 	str r0, [r1]
 _08015B1C:
 	pop {r4,r5}
@@ -11603,7 +11603,7 @@ _08015B1C:
 	.align 2, 0
 _08015B24: .4byte gUnknown_3004FD4
 _08015B28: .4byte gUnknown_3004F84
-_08015B2C: .4byte sub_8015B58
+_08015B2C: .4byte ReturnFromBattleToOverworld
 	thumb_func_end sub_8015AA0
 
 	thumb_func_start sub_8015B30
@@ -11627,8 +11627,8 @@ _08015B50: .4byte gUnknown_3004F84
 _08015B54: .4byte sub_8015AA0
 	thumb_func_end sub_8015B30
 
-	thumb_func_start sub_8015B58
-sub_8015B58: @ 8015B58
+	thumb_func_start ReturnFromBattleToOverworld
+ReturnFromBattleToOverworld: @ 8015B58
 	push {r4-r6,lr}
 	ldr r6, _08015BDC @ =gUnknown_2022B4C
 	ldr r0, [r6]
@@ -11703,10 +11703,10 @@ _08015BF0: .4byte gUnknown_30030F0
 _08015BF4: .4byte 0x00000439
 _08015BF8: .4byte gUnknown_3004F80
 _08015BFC: .4byte gUnknown_202402C
-	thumb_func_end sub_8015B58
+	thumb_func_end ReturnFromBattleToOverworld
 
-	thumb_func_start sub_8015C00
-sub_8015C00: @ 8015C00
+	thumb_func_start RunBattleScriptCommands_PopCallbacksStack
+RunBattleScriptCommands_PopCallbacksStack: @ 8015C00
 	push {lr}
 	ldr r0, _08015C3C @ =gUnknown_2023BE3
 	ldrb r0, [r0]
@@ -11761,7 +11761,7 @@ _08015C62:
 _08015C68: .4byte gUnknown_2023BC8
 _08015C6C: .4byte gUnknown_825011C
 _08015C70: .4byte gUnknown_2023D74
-	thumb_func_end sub_8015C00
+	thumb_func_end RunBattleScriptCommands_PopCallbacksStack
 
 	thumb_func_start sub_8015C74
 sub_8015C74: @ 8015C74
@@ -13760,7 +13760,7 @@ _08016D10: .4byte gUnknown_2023BDA
 	thumb_func_start HandleAction_Action11
 HandleAction_Action11: @ 8016D14
 	push {lr}
-	bl sub_8018F90
+	bl HandleFaintedMonActions
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0

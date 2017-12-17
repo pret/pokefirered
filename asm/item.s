@@ -40,11 +40,11 @@ sub_8099DBC: @ 8099DBC
 _08099DD4: .4byte gUnknown_300500C
 	thumb_func_end sub_8099DBC
 
-	thumb_func_start sub_8099DD8
-sub_8099DD8: @ 8099DD8
+	thumb_func_start GetBagItemId
+GetBagItemId: @ 8099DD8
 	ldrh r0, [r0]
 	bx lr
-	thumb_func_end sub_8099DD8
+	thumb_func_end GetBagItemId
 
 	thumb_func_start sub_8099DDC
 sub_8099DDC: @ 8099DDC
@@ -52,8 +52,8 @@ sub_8099DDC: @ 8099DDC
 	bx lr
 	thumb_func_end sub_8099DDC
 
-	thumb_func_start sub_8099DE0
-sub_8099DE0: @ 8099DE0
+	thumb_func_start ApplyNewEncryptionKeyToBagItems
+ApplyNewEncryptionKeyToBagItems: @ 8099DE0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -100,15 +100,15 @@ _08099E20:
 	bx r0
 	.align 2, 0
 _08099E34: .4byte gUnknown_203988C
-	thumb_func_end sub_8099DE0
+	thumb_func_end ApplyNewEncryptionKeyToBagItems
 
-	thumb_func_start sub_8099E38
-sub_8099E38: @ 8099E38
+	thumb_func_start ApplyNewEncryptionKeyToBagItems_
+ApplyNewEncryptionKeyToBagItems_: @ 8099E38
 	push {lr}
-	bl sub_8099DE0
+	bl ApplyNewEncryptionKeyToBagItems
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8099E38
+	thumb_func_end ApplyNewEncryptionKeyToBagItems_
 
 	thumb_func_start sub_8099E44
 sub_8099E44: @ 8099E44
@@ -669,8 +669,8 @@ _0809A25A:
 	bx r1
 	thumb_func_end sub_809A1D8
 
-	thumb_func_start sub_809A260
-sub_809A260: @ 809A260
+	thumb_func_start GetPocketByItemId
+GetPocketByItemId: @ 809A260
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -679,10 +679,10 @@ sub_809A260: @ 809A260
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809A260
+	thumb_func_end GetPocketByItemId
 
-	thumb_func_start sub_809A274
-sub_809A274: @ 809A274
+	thumb_func_start ClearItemSlots
+ClearItemSlots: @ 809A274
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	lsls r1, 24
@@ -708,7 +708,7 @@ _0809A29E:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809A274
+	thumb_func_end ClearItemSlots
 
 	thumb_func_start sub_809A2A4
 sub_809A2A4: @ 809A2A4
@@ -751,7 +751,7 @@ _0809A2E2:
 	adds r1, r5
 	ldr r0, [r1]
 	ldrb r1, [r1, 0x4]
-	bl sub_809A274
+	bl ClearItemSlots
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -854,7 +854,7 @@ _0809A380:
 	adds r0, r1, r2
 	ldr r1, _0809A3B0 @ =0x0000029a
 	adds r0, r1
-	bl sub_8099DD8
+	bl GetBagItemId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r5
@@ -900,7 +900,7 @@ _0809A3D6:
 	adds r4, r1, r0
 	adds r0, r2, r4
 	adds r0, 0x2
-	bl sub_8099DD8
+	bl GetBagItemId
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r0, r5
@@ -1001,7 +1001,7 @@ _0809A49E:
 	ldr r0, [r7]
 	adds r0, r4
 	adds r0, 0x2
-	bl sub_8099DD8
+	bl GetBagItemId
 	mov r1, r8
 	subs r0, r1
 	lsls r0, 16

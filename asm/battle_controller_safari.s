@@ -142,7 +142,7 @@ _080DD612:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -170,7 +170,7 @@ _080DD650:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -198,7 +198,7 @@ _080DD68C:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -210,7 +210,7 @@ _080DD6BE:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 	b _080DD71A
 	.align 2, 0
 _080DD6D0: .4byte gUnknown_2023FF8
@@ -234,7 +234,7 @@ _080DD6D8:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -245,7 +245,7 @@ _080DD6D8:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 _080DD71A:
 	pop {r4,r5}
 	pop {r0}
@@ -288,7 +288,7 @@ _080DD75C: .4byte nullsub_8
 CompleteOnInactiveTextPrinter_3: @ 80DD760
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080DD772
@@ -969,7 +969,7 @@ sub_80DDC78: @ 80DDC78
 _080DDC9A:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _080DDC9A
@@ -979,9 +979,9 @@ _080DDC9A:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 	ldr r0, _080DDCE4 @ =gUnknown_83FE6E6
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080DDCE8 @ =gUnknown_202298C
 	movs r1, 0x1
 	bl sub_80D87BC
@@ -1078,8 +1078,8 @@ sub_80DDD68: @ 80DDD68
 	bx r0
 	thumb_func_end sub_80DDD68
 
-	thumb_func_start sub_80DDD74
-sub_80DDD74: @ 80DDD74
+	thumb_func_start SafariHandleStatusIconUpdate
+SafariHandleStatusIconUpdate: @ 80DDD74
 	push {lr}
 	ldr r0, _080DDDA0 @ =gUnknown_3004FF0
 	ldr r1, _080DDDA4 @ =gUnknown_2023BC4
@@ -1104,7 +1104,7 @@ _080DDDA0: .4byte gUnknown_3004FF0
 _080DDDA4: .4byte gUnknown_2023BC4
 _080DDDA8: .4byte gUnknown_2023BCE
 _080DDDAC: .4byte gUnknown_2024284
-	thumb_func_end sub_80DDD74
+	thumb_func_end SafariHandleStatusIconUpdate
 
 	thumb_func_start sub_80DDDB0
 sub_80DDDB0: @ 80DDDB0
@@ -1234,8 +1234,8 @@ sub_80DDE64: @ 80DDE64
 	bx r0
 	thumb_func_end sub_80DDE64
 
-	thumb_func_start sub_80DDE70
-sub_80DDE70: @ 80DDE70
+	thumb_func_start SafariHandlePlaySE
+SafariHandlePlaySE: @ 80DDE70
 	push {r4,lr}
 	ldr r4, _080DDEAC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -1267,7 +1267,7 @@ _080DDE84:
 	.align 2, 0
 _080DDEAC: .4byte gUnknown_2023BC4
 _080DDEB0: .4byte gUnknown_2022BC4
-	thumb_func_end sub_80DDE70
+	thumb_func_end SafariHandlePlaySE
 
 	thumb_func_start sub_80DDEB4
 sub_80DDEB4: @ 80DDEB4

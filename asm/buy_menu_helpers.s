@@ -12,13 +12,13 @@ sub_813F66C: @ 813F66C
 	cmp r4, 0x1
 	beq _0813F680
 	ldr r0, _0813F67C @ =gUnknown_8464804
-	bl sub_8003B24
+	bl InitWindows
 	b _0813F686
 	.align 2, 0
 _0813F67C: .4byte gUnknown_8464804
 _0813F680:
 	ldr r0, _0813F6CC @ =gUnknown_846483C
-	bl sub_8003B24
+	bl InitWindows
 _0813F686:
 	bl DeactivateAllTextPrinters
 	movs r0, 0
@@ -114,7 +114,7 @@ sub_813F6F4: @ 813F6F4
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3

@@ -402,7 +402,7 @@ _0810C998:
 	movs r1, 0x64
 	subs r1, r0
 	movs r0, 0
-	bl sub_80CBED4
+	bl TV_PrintIntToStringVar
 	movs r0, 0
 _0810C9A4:
 	pop {r1}

@@ -224,7 +224,7 @@ textbox_fdecode_auto_and_task_add: @ 80694C8
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _080694E0 @ =gUnknown_2021D18
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl sub_80F6D5C
 	bl task_add_textbox

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80A0058
-sub_80A0058: @ 80A0058
+	thumb_func_start sp000_heal_pokemon
+sp000_heal_pokemon: @ 80A0058
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -100,10 +100,10 @@ _080A0104:
 	.align 2, 0
 _080A0114: .4byte gUnknown_2024029
 _080A0118: .4byte gUnknown_2024284
-	thumb_func_end sub_80A0058
+	thumb_func_end sp000_heal_pokemon
 
-	thumb_func_start sub_80A011C
-sub_80A011C: @ 80A011C
+	thumb_func_start ScriptGiveMon
+ScriptGiveMon: @ 80A011C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -168,7 +168,7 @@ _080A0196:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A011C
+	thumb_func_end ScriptGiveMon
 
 	thumb_func_start sub_80A01AC
 sub_80A01AC: @ 80A01AC
@@ -182,7 +182,7 @@ sub_80A01AC: @ 80A01AC
 	adds r5, r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8046150
+	bl CreateEgg
 	movs r1, 0x1
 	mov r0, sp
 	strb r1, [r0]

@@ -2540,7 +2540,7 @@ sub_8084708: @ 8084708
 	movs r1, 0x1
 	bl VarSet
 	movs r0, 0x8
-	bl sub_805BDEC
+	bl SetPlayerAvatarTransitionFlags
 	movs r0, 0x16
 	bl sub_812B1F0
 _08084760:
@@ -3398,7 +3398,7 @@ sub_8084DCC: @ 8084DCC
 	b _08084E1E
 _08084DE2:
 	ldrb r0, [r4, 0x1E]
-	bl sub_805A104
+	bl MetatileBehavior_IsWaterfall
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -6948,7 +6948,7 @@ sub_8086944: @ 8086944
 	ldr r0, _08086988 @ =gUnknown_20386E0
 	ldr r0, [r0]
 	strh r0, [r1, 0x26]
-	bl sub_8055E84
+	bl sav1_reset_battle_music_maybe
 	ldr r4, _0808698C @ =0x00000131
 	adds r0, r4, 0
 	bl sub_8056124
@@ -7723,7 +7723,7 @@ sub_8086F64: @ 8086F64
 	movs r0, 0x10
 	strh r0, [r4, 0xC]
 	movs r0, 0x1
-	bl sub_805BDEC
+	bl SetPlayerAvatarTransitionFlags
 	ldr r0, _08086FA0 @ =gUnknown_2037078
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3

@@ -87,7 +87,7 @@ sub_814F1E4: @ 814F1E4
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
 	ldr r0, _0814F318 @ =gUnknown_846FA7C
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	bl ResetPaletteFade
 	bl ResetSpriteData
@@ -654,7 +654,7 @@ _0814F6E6:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x18
 	pop {r4-r7}
 	pop {r0}

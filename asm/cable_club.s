@@ -59,7 +59,7 @@ sub_808078C: @ 808078C
 	ldr r5, _080807E0 @ =gUnknown_2021D18
 	ldr r1, _080807E4 @ =gUnknown_841DF82
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r1, 0
 	str r1, [sp]
 	movs r0, 0xFF
@@ -388,7 +388,7 @@ sub_80809F8: @ 80809F8
 	bl sub_800AA24
 	bl sub_800A270
 	ldr r0, _08080A2C @ =gUnknown_83C6AB0
-	bl sub_8003CE4
+	bl AddWindow
 	strh r0, [r4, 0xA]
 	b _08080A3C
 	.align 2, 0
@@ -817,7 +817,7 @@ _08080DA8:
 	adds r4, 0x1C
 	adds r5, 0x1
 _08080DAC:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -975,7 +975,7 @@ _08080EF2:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08080EF8:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1587,7 +1587,7 @@ _080813B8:
 	cmp r0, 0
 	beq _080813D4
 	ldr r0, _080813D0 @ =0x00000109
-	bl sub_8044090
+	bl PlayMapChosenOrBattleBGM
 	b _080813DC
 	.align 2, 0
 _080813CC: .4byte gUnknown_202273C
@@ -1595,7 +1595,7 @@ _080813D0: .4byte 0x00000109
 _080813D4:
 	movs r0, 0x85
 	lsls r0, 1
-	bl sub_8044090
+	bl PlayMapChosenOrBattleBGM
 _080813DC:
 	ldr r0, _080813F0 @ =gUnknown_20370C0
 	ldrh r0, [r0]
@@ -1763,7 +1763,7 @@ _08081510:
 	adds r5, 0x1C
 	adds r4, 0x1
 _08081536:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1805,7 +1805,7 @@ _0808157A:
 	cmp r0, 0
 	beq _08081598
 	ldr r0, _08081594 @ =0x00000109
-	bl sub_8044090
+	bl PlayMapChosenOrBattleBGM
 	b _080815A0
 	.align 2, 0
 _08081590: .4byte gUnknown_202273C
@@ -1813,7 +1813,7 @@ _08081594: .4byte 0x00000109
 _08081598:
 	movs r0, 0x85
 	lsls r0, 1
-	bl sub_8044090
+	bl PlayMapChosenOrBattleBGM
 _080815A0:
 	ldr r0, _080815B8 @ =gUnknown_202273C
 	ldr r1, _080815BC @ =0x00002211

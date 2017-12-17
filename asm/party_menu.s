@@ -649,7 +649,7 @@ _0811EF8C:
 	ldr r4, _0811EFAC @ =gUnknown_203B0B8
 	ldr r0, _0811EFB0 @ =gUnknown_8E82700
 	mov r1, sp
-	bl sub_80F6AA0
+	bl malloc_and_decompress
 	adds r1, r0, 0
 	str r1, [r4]
 	ldr r2, [sp]
@@ -2531,7 +2531,7 @@ sub_811FE24: @ 811FE24
 	ldr r5, _0811FE60 @ =gUnknown_2021D18
 	ldr r1, _0811FE64 @ =gUnknown_84176CF
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_81202F8
@@ -2585,7 +2585,7 @@ sub_811FEA4: @ 811FEA4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3387,7 +3387,7 @@ _08120468:
 	ldr r4, _081204A4 @ =gUnknown_2021D18
 	ldr r1, _081204A8 @ =gUnknown_8416C2A
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl sub_81202F8
@@ -3428,7 +3428,7 @@ sub_81204AC: @ 81204AC
 	ldr r4, _08120504 @ =gUnknown_2021D18
 	ldr r1, _08120508 @ =gUnknown_8416CAC
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_81202F8
@@ -3462,7 +3462,7 @@ sub_812050C: @ 812050C
 	ldr r4, _08120550 @ =gUnknown_2021D18
 	ldr r1, _08120554 @ =gUnknown_8416C49
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_81202F8
@@ -3509,7 +3509,7 @@ sub_8120558: @ 8120558
 	ldr r4, _081205C0 @ =gUnknown_2021D18
 	ldr r1, _081205C4 @ =gUnknown_8416CEA
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl sub_81202F8
@@ -3536,7 +3536,7 @@ sub_81205C8: @ 81205C8
 	lsrs r4, r5, 16
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3634,7 +3634,7 @@ _08120686:
 	bl StringCopy
 	ldr r0, _081206A0 @ =gUnknown_2021D18
 	ldr r1, _081206A4 @ =gUnknown_8416D78
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3929,7 +3929,7 @@ _081208B6:
 	bne _081208DE
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8043A70
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	bne _081208DC
@@ -4198,7 +4198,7 @@ sub_8120AC4: @ 8120AC4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4876,7 +4876,7 @@ _08120FAC: .4byte sub_8120FB0
 	thumb_func_start sub_8120FB0
 sub_8120FB0: @ 8120FB0
 	push {lr}
-	bl sub_8011174
+	bl FreeRestoreBattleData
 	bl sub_804C230
 	bl sub_815AC20
 	ldr r0, _08120FC8 @ =sub_815ABFC
@@ -4982,25 +4982,25 @@ _08121076:
 	b _081210A0
 _0812107C:
 	ldr r0, _08121084 @ =gUnknown_845A010
-	bl sub_8003B24
+	bl InitWindows
 	b _081210A6
 	.align 2, 0
 _08121084: .4byte gUnknown_845A010
 _08121088:
 	ldr r0, _08121090 @ =gUnknown_845A050
-	bl sub_8003B24
+	bl InitWindows
 	b _081210A6
 	.align 2, 0
 _08121090: .4byte gUnknown_845A050
 _08121094:
 	ldr r0, _0812109C @ =gUnknown_845A090
-	bl sub_8003B24
+	bl InitWindows
 	b _081210A6
 	.align 2, 0
 _0812109C: .4byte gUnknown_845A090
 _081210A0:
 	ldr r0, _081210F4 @ =gUnknown_845A0D0
-	bl sub_8003B24
+	bl InitWindows
 _081210A6:
 	bl DeactivateAllTextPrinters
 	movs r4, 0
@@ -5055,7 +5055,7 @@ _0812110E:
 	cmp r2, 0x1
 	bne _08121188
 	ldr r0, _08121178 @ =gUnknown_845A118
-	bl sub_8003CE4
+	bl AddWindow
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -5084,14 +5084,14 @@ _0812110E:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl CopyWindowToVram
 	ldr r0, _08121184 @ =gUnknown_845A110
-	bl sub_8003CE4
+	bl AddWindow
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -5104,7 +5104,7 @@ _08121180: .4byte gUnknown_8459FFC
 _08121184: .4byte gUnknown_845A110
 _08121188:
 	ldr r0, _081211E0 @ =gUnknown_845A108
-	bl sub_8003CE4
+	bl AddWindow
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0x3
@@ -5141,7 +5141,7 @@ _08121194:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_812E51C
+	bl box_print
 	b _08121224
 	.align 2, 0
 _081211E0: .4byte gUnknown_845A108
@@ -5172,7 +5172,7 @@ _081211F0:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_812E51C
+	bl box_print
 _08121224:
 	adds r0, r6, 0
 	bl PutWindowTilemap
@@ -5459,7 +5459,7 @@ sub_812142C: @ 812142C
 	adds r5, r4, 0
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x5
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 28
 	lsrs r6, r0, 24
 	adds r7, r6, 0
@@ -5778,7 +5778,7 @@ sub_8121704: @ 8121704
 	str r1, [sp, 0x8]
 	movs r1, 0
 	adds r2, r5, 0
-	bl sub_812E51C
+	bl box_print
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -5997,7 +5997,7 @@ sub_81218BC: @ 81218BC
 	adds r5, r4, 0
 	ldrb r0, [r7, 0x8]
 	movs r1, 0x5
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 28
 	lsrs r6, r0, 24
 	cmp r4, 0
@@ -6303,7 +6303,7 @@ sub_8121B2C: @ 8121B2C
 	mov r9, r1
 	ldrb r0, [r6, 0x8]
 	movs r1, 0x5
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 28
 	lsrs r7, r0, 24
 	mov r1, r8
@@ -6486,7 +6486,7 @@ _08121CAA:
 	ldr r1, [r1]
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	bl sub_812E51C
+	bl box_print
 _08121CD0:
 	add sp, 0xC
 	pop {r3}
@@ -6574,14 +6574,14 @@ _08121D6C: .4byte gUnknown_845A138
 _08121D70:
 	ldr r0, _08121D7C @ =gUnknown_845A140
 _08121D72:
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5]
 	b _08121D88
 	.align 2, 0
 _08121D7C: .4byte gUnknown_845A140
 _08121D80:
 	ldr r0, _08121D9C @ =gUnknown_845A120
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4, 0xD]
 _08121D88:
 	cmp r6, 0
@@ -6615,7 +6615,7 @@ _08121DB0:
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldrb r0, [r5]
 	movs r1, 0x2
 	str r1, [sp]
@@ -6761,7 +6761,7 @@ _08121ED2:
 	str r0, [sp, 0x1C]
 	str r1, [sp, 0x20]
 	add r0, sp, 0x1C
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r6, _08121EFC @ =gUnknown_203B09C
 	ldr r1, [r6]
 	strb r0, [r1, 0xC]
@@ -6831,7 +6831,7 @@ _08121F3C:
 	str r1, [sp, 0x10]
 	movs r1, 0x2
 	mov r2, r9
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -6938,7 +6938,7 @@ _08122030: .4byte gUnknown_845A160
 sub_8122034: @ 8122034
 	push {r4,lr}
 	ldr r0, _0812205C @ =gUnknown_845A168
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r4, _08122060 @ =gUnknown_203B09C
 	ldr r1, [r4]
 	strb r0, [r1, 0xC]
@@ -6984,7 +6984,7 @@ sub_8122084: @ 8122084
 	lsrs r4, 24
 	ldr r5, _081220CC @ =gUnknown_2021D18
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r2, _081220D0 @ =gUnknown_3003E50
 	ldrb r0, [r2]
 	movs r1, 0x1
@@ -7019,7 +7019,7 @@ _081220D0: .4byte gUnknown_3003E50
 sub_81220D4: @ 81220D4
 	push {r4,lr}
 	ldr r0, _08122108 @ =gUnknown_845A170
-	bl sub_8003CE4
+	bl AddWindow
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -7093,7 +7093,7 @@ _0812216C:
 	cmp r0, 0xFF
 	bne _0812217A
 	ldr r0, _081221C8 @ =gUnknown_845A178
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4, 0xE]
 _0812217A:
 	ldrb r0, [r4, 0xE]
@@ -7121,7 +7121,7 @@ _0812217A:
 	movs r1, 0x2
 	movs r2, 0x3
 	movs r3, 0x6
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldrb r0, [r4, 0xE]
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -7553,7 +7553,7 @@ sub_81224D0: @ 81224D0
 	.align 2, 0
 _081224F4: .4byte gUnknown_202063C
 _081224F8:
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812251C
@@ -7643,7 +7643,7 @@ _08122588:
 	adds r0, r7, r5
 	ldrb r4, [r0]
 	adds r0, r1, 0
-	bl sub_80980F8
+	bl itemid_is_mail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7676,7 +7676,7 @@ _081225CC:
 	adds r0, r5, r7
 	ldrb r4, [r0, 0x6]
 	adds r0, r1, 0
-	bl sub_80980F8
+	bl itemid_is_mail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -8327,7 +8327,7 @@ _08122AB6:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08122AEC
@@ -8727,8 +8727,8 @@ _08122DF8: .4byte gUnknown_203B0A0
 _08122DFC: .4byte sub_8122C30
 	thumb_func_end sub_8122DBC
 
-	thumb_func_start sub_8122E00
-sub_8122E00: @ 8122E00
+	thumb_func_start brm_switch
+brm_switch: @ 8122E00
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r6, 24
@@ -8767,7 +8767,7 @@ _08122E4C: .4byte gUnknown_203B0A0
 _08122E50: .4byte gUnknown_203B09C
 _08122E54: .4byte gUnknown_3005090
 _08122E58: .4byte sub_811FB28
-	thumb_func_end sub_8122E00
+	thumb_func_end brm_switch
 
 	thumb_func_start sub_8122E5C
 sub_8122E5C: @ 8122E5C
@@ -8808,22 +8808,22 @@ _08122E8C:
 	adds r0, r2, 0
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl sub_8004950
+	bl GetWindowAttribute
 	strh r0, [r6]
 	add r0, sp, 0x8
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	strh r0, [r6, 0x2]
 	add r0, sp, 0x8
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8004950
+	bl GetWindowAttribute
 	strh r0, [r6, 0x4]
 	add r0, sp, 0x8
 	ldrb r0, [r0]
 	movs r1, 0x4
-	bl sub_8004950
+	bl GetWindowAttribute
 	strh r0, [r6, 0x6]
 	strh r4, [r6, 0x10]
 	movs r1, 0x4
@@ -8855,22 +8855,22 @@ _08122EEE:
 	adds r0, r2, 0
 	ldrb r0, [r0, 0x1]
 	movs r1, 0x1
-	bl sub_8004950
+	bl GetWindowAttribute
 	strh r0, [r6, 0x8]
 	add r0, sp, 0x8
 	ldrb r0, [r0, 0x1]
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	strh r0, [r6, 0xA]
 	add r0, sp, 0x8
 	ldrb r0, [r0, 0x1]
 	movs r1, 0x3
-	bl sub_8004950
+	bl GetWindowAttribute
 	strh r0, [r6, 0xC]
 	add r0, sp, 0x8
 	ldrb r0, [r0, 0x1]
 	movs r1, 0x4
-	bl sub_8004950
+	bl GetWindowAttribute
 	strh r0, [r6, 0xE]
 	strh r4, [r6, 0x12]
 	movs r1, 0xC
@@ -9339,7 +9339,7 @@ sub_8123270: @ 8123270
 	ldrsh r0, [r6, r2]
 	negs r0, r0
 	strh r0, [r6, 0x16]
-	bl sub_81234EC
+	bl swap_pokemon_and_oams
 	ldr r4, _08123374 @ =gUnknown_203B0A0
 	ldrb r0, [r4, 0x9]
 	bl sub_811F234
@@ -9488,8 +9488,8 @@ _08123418:
 	bx r0
 	thumb_func_end sub_8123388
 
-	thumb_func_start sub_8123420
-sub_8123420: @ 8123420
+	thumb_func_start oamt_swap_pos
+oamt_swap_pos: @ 8123420
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -9591,10 +9591,10 @@ sub_8123420: @ 8123420
 	bx r0
 	.align 2, 0
 _081234E8: .4byte gUnknown_202063C
-	thumb_func_end sub_8123420
+	thumb_func_end oamt_swap_pos
 
-	thumb_func_start sub_81234EC
-sub_81234EC: @ 81234EC
+	thumb_func_start swap_pokemon_and_oams
+swap_pokemon_and_oams: @ 81234EC
 	push {r4-r6,lr}
 	sub sp, 0x8
 	ldr r1, _08123580 @ =gUnknown_203B0B4
@@ -9639,22 +9639,22 @@ sub_81234EC: @ 81234EC
 	adds r0, 0xB
 	ldr r1, [sp, 0x4]
 	adds r1, 0xB
-	bl sub_8123420
+	bl oamt_swap_pos
 	ldr r0, [sp]
 	adds r0, 0xA
 	ldr r1, [sp, 0x4]
 	adds r1, 0xA
-	bl sub_8123420
+	bl oamt_swap_pos
 	ldr r0, [sp]
 	adds r0, 0x9
 	ldr r1, [sp, 0x4]
 	adds r1, 0x9
-	bl sub_8123420
+	bl oamt_swap_pos
 	ldr r0, [sp]
 	adds r0, 0xC
 	ldr r1, [sp, 0x4]
 	adds r1, 0xC
-	bl sub_8123420
+	bl oamt_swap_pos
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -9663,7 +9663,7 @@ sub_81234EC: @ 81234EC
 _08123580: .4byte gUnknown_203B0B4
 _08123584: .4byte gUnknown_203B0A0
 _08123588: .4byte gUnknown_2024284
-	thumb_func_end sub_81234EC
+	thumb_func_end swap_pokemon_and_oams
 
 	thumb_func_start sub_812358C
 sub_812358C: @ 812358C
@@ -9748,8 +9748,8 @@ _08123638: .4byte gUnknown_3005090
 _0812363C: .4byte sub_811FB28
 	thumb_func_end sub_81235E8
 
-	thumb_func_start sub_8123640
-sub_8123640: @ 8123640
+	thumb_func_start brm_cancel_1
+brm_cancel_1: @ 8123640
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -9791,7 +9791,7 @@ _08123682:
 	.align 2, 0
 _08123698: .4byte gUnknown_3005090
 _0812369C: .4byte sub_811FB28
-	thumb_func_end sub_8123640
+	thumb_func_end brm_cancel_1
 
 	thumb_func_start sub_81236A0
 sub_81236A0: @ 81236A0
@@ -9937,7 +9937,7 @@ _081237C4: .4byte gUnknown_2024284
 _081237C8: .4byte sub_81238A4
 _081237CC:
 	ldrh r0, [r6]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081237F8
@@ -10113,7 +10113,7 @@ sub_8123930: @ 8123930
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10165,7 +10165,7 @@ _081239A4: .4byte gUnknown_3005090
 _081239A8: .4byte sub_81203B8
 _081239AC:
 	ldrh r0, [r5]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081239EC
@@ -10521,7 +10521,7 @@ _08123C9C:
 	ldr r4, _08123CB8 @ =gUnknown_2021D18
 	ldr r1, _08123CBC @ =gUnknown_8416C8F
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	b _08123CC8
 	.align 2, 0
@@ -10752,7 +10752,7 @@ sub_8123E8C: @ 8123E8C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10871,7 +10871,7 @@ sub_8123F80: @ 8123F80
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -11423,7 +11423,7 @@ _08124414: .4byte gUnknown_2024284
 _08124418:
 	ldr r0, _08124424 @ =gUnknown_2021D18
 	ldr r1, _08124428 @ =gUnknown_84170BC
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _08124434
 	.align 2, 0
 _08124424: .4byte gUnknown_2021D18
@@ -11431,7 +11431,7 @@ _08124428: .4byte gUnknown_84170BC
 _0812442C:
 	ldr r0, _08124478 @ =gUnknown_2021D18
 	ldr r1, _0812447C @ =gUnknown_84170E0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _08124434:
 	movs r0, 0x1A
 	bl sub_80722CC
@@ -11472,8 +11472,8 @@ _08124488: .4byte gUnknown_3005090
 _0812448C: .4byte sub_81203B8
 	thumb_func_end sub_8124384
 
-	thumb_func_start sub_8124490
-sub_8124490: @ 8124490
+	thumb_func_start brm_trade_1
+brm_trade_1: @ 8124490
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -11539,7 +11539,7 @@ sub_8124490: @ 8124490
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x1A
 	bl sub_80722CC
 	ldr r4, _08124574 @ =gUnknown_203B09C
@@ -11588,7 +11588,7 @@ _08124590:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8124490
+	thumb_func_end brm_trade_1
 
 	thumb_func_start nullsub_93
 nullsub_93: @ 81245A0
@@ -11764,7 +11764,7 @@ _081246F0:
 	ldr r0, _08124740 @ =gUnknown_2021D18
 	ldr r1, _08124744 @ =gUnknown_8417615
 _08124720:
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r6, 0
 	bl sub_81247C4
 	ldr r0, _08124748 @ =gUnknown_203B09C
@@ -11897,7 +11897,7 @@ sub_8124828: @ 8124828
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -12040,7 +12040,7 @@ task_brm_cancel_1_on_keypad_a_or_b: @ 812492C
 	beq _0812494C
 _08124946:
 	adds r0, r2, 0
-	bl sub_8123640
+	bl brm_cancel_1
 _0812494C:
 	pop {r0}
 	bx r0
@@ -12279,7 +12279,7 @@ hm_prepare_waterfall: @ 8124AF8
 	bl sub_8058F78
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805A104
+	bl MetatileBehavior_IsWaterfall
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12531,7 +12531,7 @@ _08124D0C:
 _08124D16:
 	ldr r0, _08124D30 @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_809A260
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -12549,7 +12549,7 @@ _08124D3C: .4byte sub_8124DB0
 _08124D40: .4byte sub_8124FC8
 _08124D44:
 	ldrh r0, [r4]
-	bl sub_809A260
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -12986,7 +12986,7 @@ _0812507C:
 _081250C8:
 	ldr r0, _081250D4 @ =gUnknown_2021D18
 	ldr r1, _081250D8 @ =gUnknown_8416F4E
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _081250D4: .4byte gUnknown_2021D18
@@ -12994,7 +12994,7 @@ _081250D8: .4byte gUnknown_8416F4E
 _081250DC:
 	ldr r0, _081250E8 @ =gUnknown_2021D18
 	ldr r1, _081250EC @ =gUnknown_8416F8C
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _081250E8: .4byte gUnknown_2021D18
@@ -13002,7 +13002,7 @@ _081250EC: .4byte gUnknown_8416F8C
 _081250F0:
 	ldr r0, _081250FC @ =gUnknown_2021D18
 	ldr r1, _08125100 @ =gUnknown_8416F9A
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _081250FC: .4byte gUnknown_2021D18
@@ -13010,7 +13010,7 @@ _08125100: .4byte gUnknown_8416F9A
 _08125104:
 	ldr r0, _08125110 @ =gUnknown_2021D18
 	ldr r1, _08125114 @ =gUnknown_8416FB2
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _08125110: .4byte gUnknown_2021D18
@@ -13018,7 +13018,7 @@ _08125114: .4byte gUnknown_8416FB2
 _08125118:
 	ldr r0, _08125124 @ =gUnknown_2021D18
 	ldr r1, _08125128 @ =gUnknown_8416F6F
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _08125124: .4byte gUnknown_2021D18
@@ -13026,7 +13026,7 @@ _08125128: .4byte gUnknown_8416F6F
 _0812512C:
 	ldr r0, _08125138 @ =gUnknown_2021D18
 	ldr r1, _0812513C @ =gUnknown_8417052
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _08125138: .4byte gUnknown_2021D18
@@ -13034,7 +13034,7 @@ _0812513C: .4byte gUnknown_8417052
 _08125140:
 	ldr r0, _0812514C @ =gUnknown_2021D18
 	ldr r1, _08125150 @ =gUnknown_8417075
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _0812514C: .4byte gUnknown_2021D18
@@ -13042,7 +13042,7 @@ _08125150: .4byte gUnknown_8417075
 _08125154:
 	ldr r0, _08125160 @ =gUnknown_2021D18
 	ldr r1, _08125164 @ =gUnknown_8416FED
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _08125160: .4byte gUnknown_2021D18
@@ -13089,7 +13089,7 @@ _081251BC:
 	bl StringCopy
 	ldr r0, _081251D4 @ =gUnknown_2021D18
 	ldr r1, _081251D8 @ =gUnknown_8417032
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _081251CC: .4byte gUnknown_2021CF0
@@ -13099,7 +13099,7 @@ _081251D8: .4byte gUnknown_8417032
 _081251DC:
 	ldr r0, _081251E8 @ =gUnknown_2021D18
 	ldr r1, _081251EC @ =gUnknown_8417002
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _081251E8: .4byte gUnknown_2021D18
@@ -13107,7 +13107,7 @@ _081251EC: .4byte gUnknown_8417002
 _081251F0:
 	ldr r0, _081251FC @ =gUnknown_2021D18
 	ldr r1, _08125200 @ =gUnknown_8416FC7
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _0812520C
 	.align 2, 0
 _081251FC: .4byte gUnknown_2021D18
@@ -13115,7 +13115,7 @@ _08125200: .4byte gUnknown_8416FC7
 _08125204:
 	ldr r0, _08125210 @ =gUnknown_2021D18
 	ldr r1, _08125214 @ =gUnknown_84169DC
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _0812520C:
 	pop {r0}
 	bx r0
@@ -13316,7 +13316,7 @@ _08125380:
 	adds r0, r7, 0
 	bl sub_8124DC0
 	ldr r1, _081253A8 @ =gUnknown_3005E98
-	ldr r0, _081253AC @ =sub_81253B0
+	ldr r0, _081253AC @ =ItemUseCB_Medicine
 	str r0, [r1]
 _08125398:
 	pop {r3}
@@ -13327,11 +13327,11 @@ _08125398:
 	.align 2, 0
 _081253A4: .4byte 0x0000ffff
 _081253A8: .4byte gUnknown_3005E98
-_081253AC: .4byte sub_81253B0
+_081253AC: .4byte ItemUseCB_Medicine
 	thumb_func_end sub_81252D0
 
-	thumb_func_start sub_81253B0
-sub_81253B0: @ 81253B0
+	thumb_func_start ItemUseCB_Medicine
+ItemUseCB_Medicine: @ 81253B0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -13523,7 +13523,7 @@ _08125538:
 _08125548: .4byte gUnknown_2021CD0
 _0812554C: .4byte gUnknown_2021D18
 _08125550: .4byte gUnknown_3005090
-	thumb_func_end sub_81253B0
+	thumb_func_end ItemUseCB_Medicine
 
 	thumb_func_start sub_8125554
 sub_8125554: @ 8125554
@@ -13543,7 +13543,7 @@ sub_8125554: @ 8125554
 	ldr r4, _081255AC @ =gUnknown_2021D18
 	ldr r1, _081255B0 @ =gUnknown_8416F27
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_81202F8
@@ -14220,7 +14220,7 @@ sub_8125AF0: @ 8125AF0
 	adds r1, r0, 0
 	ldr r4, _08125B10 @ =gUnknown_2021D18
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81202F8
@@ -14422,7 +14422,7 @@ _08125C84:
 	ldr r4, _08125CE4 @ =gUnknown_2021D18
 	ldr r1, _08125CE8 @ =gUnknown_8416DB3
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81202F8
@@ -14561,7 +14561,7 @@ sub_8125DBC: @ 8125DBC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -14951,7 +14951,7 @@ sub_81260D8: @ 81260D8
 	ldr r4, _0812612C @ =gUnknown_2021D18
 	ldr r1, _08126130 @ =gUnknown_8416E6B
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81202F8
@@ -15016,7 +15016,7 @@ sub_8126170: @ 8126170
 	muls r1, r0
 	ldr r0, _081261A4 @ =gUnknown_2024284
 	adds r4, r1, r0
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -15050,7 +15050,7 @@ _081261AE:
 	ldr r4, _08126200 @ =gUnknown_2021D18
 	ldr r1, _08126204 @ =gUnknown_8416E84
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81202F8
@@ -15149,8 +15149,8 @@ _081262A4:
 	bx r0
 	thumb_func_end sub_812628C
 
-	thumb_func_start sub_81262AC
-sub_81262AC: @ 81262AC
+	thumb_func_start dp05_rare_candy
+dp05_rare_candy: @ 81262AC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -15225,7 +15225,7 @@ _0812633C:
 	.align 2, 0
 _08126348: .4byte gUnknown_3005E98
 _0812634C: .4byte sub_8126350
-	thumb_func_end sub_81262AC
+	thumb_func_end dp05_rare_candy
 
 	thumb_func_start sub_8126350
 sub_8126350: @ 8126350
@@ -15293,7 +15293,7 @@ sub_8126350: @ 8126350
 	ldr r4, _08126430 @ =gUnknown_2021D18
 	ldr r1, _08126434 @ =gUnknown_8417017
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81202F8
@@ -15760,7 +15760,7 @@ sub_8126770: @ 8126770
 	ldr r4, _081267F4 @ =gUnknown_2021D18
 	ldr r1, _081267F8 @ =gUnknown_8416DF7
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81202F8
@@ -15824,7 +15824,7 @@ sub_8126804: @ 8126804
 	ldr r4, _08126884 @ =gUnknown_2021D18
 	ldr r1, _08126888 @ =gUnknown_8416DB3
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81202F8
@@ -16165,7 +16165,7 @@ sub_8126AFC: @ 8126AFC
 	ldr r4, _08126B50 @ =gUnknown_2021D18
 	ldr r1, _08126B54 @ =gUnknown_8416F27
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_81202F8
@@ -16655,7 +16655,7 @@ sub_8126EDC: @ 8126EDC
 	sub sp, 0xC
 	ldr r0, _08126EF8 @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_809A260
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -16736,7 +16736,7 @@ _08126F84: .4byte gUnknown_203B0A0
 _08126F88: .4byte gUnknown_2024284
 _08126F8C:
 	ldrh r0, [r5]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08126FA0
@@ -16780,7 +16780,7 @@ sub_8126FD8: @ 8126FD8
 	lsrs r4, r0, 24
 	ldr r5, _08127004 @ =gUnknown_203B0A0
 	ldrh r0, [r5, 0xC]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08127010
@@ -17093,7 +17093,7 @@ sub_8127268: @ 8127268
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -17135,7 +17135,7 @@ _081272C4: .4byte gUnknown_203B0D8
 _081272C8: .4byte gUnknown_2021D18
 _081272CC:
 	adds r0, r4, 0
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081272F0
@@ -18090,7 +18090,7 @@ _08127A2C: .4byte sub_8107ECC
 _08127A30:
 	ldr r0, _08127A74 @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_809A260
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, _08127A78 @ =sub_8107ECC
@@ -18361,7 +18361,7 @@ _08127C64:
 	ldr r0, _08127CA4 @ =gUnknown_2021D18
 	ldr r1, _08127CA8 @ =gUnknown_8416A1E
 _08127C86:
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _08127C8A:
 	movs r0, 0
 _08127C8C:
@@ -19302,7 +19302,7 @@ sub_8128370: @ 8128370
 	push {lr}
 	sub sp, 0xC
 	ldr r1, _08128398 @ =gUnknown_3005024
-	ldr r0, _0812839C @ =sub_81283E4
+	ldr r0, _0812839C @ =hm_add_c3_without_phase_2
 	str r0, [r1]
 	movs r0, 0xF
 	str r0, [sp]
@@ -19320,7 +19320,7 @@ sub_8128370: @ 8128370
 	bx r0
 	.align 2, 0
 _08128398: .4byte gUnknown_3005024
-_0812839C: .4byte sub_81283E4
+_0812839C: .4byte hm_add_c3_without_phase_2
 _081283A0: .4byte sub_811FB28
 _081283A4: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8128370
@@ -19332,7 +19332,7 @@ sub_81283A8: @ 81283A8
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _081283D4 @ =gUnknown_3005024
-	ldr r1, _081283D8 @ =sub_81283E4
+	ldr r1, _081283D8 @ =hm_add_c3_without_phase_2
 	str r1, [r2]
 	movs r1, 0
 	str r1, [sp]
@@ -19349,27 +19349,27 @@ sub_81283A8: @ 81283A8
 	bx r0
 	.align 2, 0
 _081283D4: .4byte gUnknown_3005024
-_081283D8: .4byte sub_81283E4
+_081283D8: .4byte hm_add_c3_without_phase_2
 _081283DC: .4byte sub_811FB28
 _081283E0: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_81283A8
 
-	thumb_func_start sub_81283E4
-sub_81283E4: @ 81283E4
+	thumb_func_start hm_add_c3_without_phase_2
+hm_add_c3_without_phase_2: @ 81283E4
 	push {lr}
 	bl sub_807DC00
-	ldr r0, _081283F8 @ =sub_81283FC
+	ldr r0, _081283F8 @ =task_hm_without_phase_2
 	movs r1, 0xA
 	bl CreateTask
 	movs r0, 0x1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081283F8: .4byte sub_81283FC
-	thumb_func_end sub_81283E4
+_081283F8: .4byte task_hm_without_phase_2
+	thumb_func_end hm_add_c3_without_phase_2
 
-	thumb_func_start sub_81283FC
-sub_81283FC: @ 81283FC
+	thumb_func_start task_hm_without_phase_2
+task_hm_without_phase_2: @ 81283FC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -19385,6 +19385,6 @@ _0812841A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81283FC
+	thumb_func_end task_hm_without_phase_2
 
 	.align 2, 0 @ Don't pad with nop.

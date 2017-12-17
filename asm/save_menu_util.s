@@ -59,7 +59,7 @@ _080F8034:
 	cmp r0, 0
 	beq _080F8044
 	movs r0, 0x1
-	bl sub_8088E8C
+	bl pokedex_count
 	b _080F804A
 _080F8044:
 	movs r0, 0x1

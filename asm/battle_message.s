@@ -690,7 +690,7 @@ _080D77D0:
 	ldr r7, [r0]
 _080D77DC:
 	adds r0, r7, 0
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 _080D77E2:
 	pop {r3-r5}
 	mov r8, r3
@@ -703,8 +703,8 @@ _080D77E2:
 _080D77F0: .4byte gUnknown_83FDF3C
 	thumb_func_end sub_80D7274
 
-	thumb_func_start sub_80D77F4
-sub_80D77F4: @ 80D77F4
+	thumb_func_start BattleStringExpandPlaceholdersToDisplayedString
+BattleStringExpandPlaceholdersToDisplayedString: @ 80D77F4
 	push {lr}
 	ldr r1, _080D7800 @ =gUnknown_202298C
 	bl sub_80D7868
@@ -712,10 +712,10 @@ sub_80D77F4: @ 80D77F4
 	bx r1
 	.align 2, 0
 _080D7800: .4byte gUnknown_202298C
-	thumb_func_end sub_80D77F4
+	thumb_func_end BattleStringExpandPlaceholdersToDisplayedString
 
-	thumb_func_start sub_80D7804
-sub_80D7804: @ 80D7804
+	thumb_func_start TryGetStatusString
+TryGetStatusString: @ 80D7804
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -768,7 +768,7 @@ _080D785E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D7804
+	thumb_func_end TryGetStatusString
 
 	thumb_func_start sub_80D7868
 sub_80D7868: @ 80D7868
@@ -871,7 +871,7 @@ _080D7984: .4byte gUnknown_2022AB8
 _080D7988: .4byte gUnknown_2021CD0
 _080D798C:
 	adds r0, r5, 0
-	bl sub_80D7804
+	bl TryGetStatusString
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _080D799C
@@ -2937,8 +2937,8 @@ _080D89D6:
 	bx r1
 	thumb_func_end sub_80D89B0
 
-	thumb_func_start sub_80D89DC
-sub_80D89DC: @ 80D89DC
+	thumb_func_start SetPpNumbersPaletteInMoveSelection
+SetPpNumbersPaletteInMoveSelection: @ 80D89DC
 	push {r4,r5,lr}
 	ldr r0, _080D8A38 @ =gUnknown_2023BC4
 	ldrb r2, [r0]
@@ -2956,7 +2956,7 @@ sub_80D89DC: @ 80D89DC
 	adds r1, 0xC
 	adds r1, r2
 	ldrb r1, [r1]
-	bl sub_80D8A50
+	bl GetCurrentPpToMaxPpState
 	lsls r0, 24
 	ldr r5, _080D8A48 @ =gUnknown_20371F8
 	lsrs r0, 22
@@ -2988,10 +2988,10 @@ _080D8A40: .4byte gUnknown_8D2FBB4
 _080D8A44: .4byte gUnknown_2023FFC
 _080D8A48: .4byte gUnknown_20371F8
 _080D8A4C: .4byte gUnknown_20376B0
-	thumb_func_end sub_80D89DC
+	thumb_func_end SetPpNumbersPaletteInMoveSelection
 
-	thumb_func_start sub_80D8A50
-sub_80D8A50: @ 80D8A50
+	thumb_func_start GetCurrentPpToMaxPpState
+GetCurrentPpToMaxPpState: @ 80D8A50
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -3038,6 +3038,6 @@ _080D8A98:
 _080D8A9A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D8A50
+	thumb_func_end GetCurrentPpToMaxPpState
 
 	.align 2, 0 @ Don't pad with nop.

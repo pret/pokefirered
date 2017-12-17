@@ -70,7 +70,7 @@ FldEff_UseTeleport: @ 80F6750
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
 	movs r0, 0x1
-	bl sub_805BDEC
+	bl SetPlayerAvatarTransitionFlags
 	movs r0, 0
 	pop {r1}
 	bx r1

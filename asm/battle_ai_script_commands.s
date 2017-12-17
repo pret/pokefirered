@@ -2899,7 +2899,7 @@ sub_80C8238: @ 80C8238
 	ldr r1, _080C8274 @ =gUnknown_2023D6C
 	ldrb r1, [r1]
 	movs r2, 0x1
-	bl sub_8014CD8
+	bl GetWhoStrikesFirst
 	ldr r3, _080C8278 @ =gUnknown_2039A00
 	ldr r2, [r3]
 	lsls r0, 24
@@ -2939,7 +2939,7 @@ sub_80C8284: @ 80C8284
 	ldr r1, _080C82C0 @ =gUnknown_2023D6C
 	ldrb r1, [r1]
 	movs r2, 0x1
-	bl sub_8014CD8
+	bl GetWhoStrikesFirst
 	ldr r3, _080C82C4 @ =gUnknown_2039A00
 	ldr r2, [r3]
 	lsls r0, 24
@@ -3289,8 +3289,8 @@ _080C852C: .4byte gUnknown_2023BE4
 _080C8530: .4byte gUnknown_2039A00
 	thumb_func_end sub_80C841C
 
-	thumb_func_start sub_80C8534
-sub_80C8534: @ 80C8534
+	thumb_func_start BattleAICmd_get_highest_type_effectiveness
+BattleAICmd_get_highest_type_effectiveness: @ 80C8534
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3404,10 +3404,10 @@ _080C8610: .4byte gUnknown_2023BF0
 _080C8614: .4byte gUnknown_2023D6B
 _080C8618: .4byte gUnknown_2023D6C
 _080C861C: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C8534
+	thumb_func_end BattleAICmd_get_highest_type_effectiveness
 
-	thumb_func_start sub_80C8620
-sub_80C8620: @ 80C8620
+	thumb_func_start BattleAICmd_if_type_effectiveness
+BattleAICmd_if_type_effectiveness: @ 80C8620
 	push {r4,r5,lr}
 	ldr r0, _080C86B8 @ =gUnknown_2023F50
 	movs r1, 0
@@ -3506,7 +3506,7 @@ _080C86E8:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C8620
+	thumb_func_end BattleAICmd_if_type_effectiveness
 
 	thumb_func_start nullsub_66
 nullsub_66: @ 80C86F0
@@ -5042,8 +5042,8 @@ _080C9244:
 _080C924C: .4byte gUnknown_2039A00
 	thumb_func_end sub_80C91B4
 
-	thumb_func_start sub_80C9250
-sub_80C9250: @ 80C9250
+	thumb_func_start BattleAICmd_watch
+BattleAICmd_watch: @ 80C9250
 	ldr r0, _080C9260 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r2, [r0, 0x14]
@@ -5054,10 +5054,10 @@ sub_80C9250: @ 80C9250
 	bx lr
 	.align 2, 0
 _080C9260: .4byte gUnknown_2023FF4
-	thumb_func_end sub_80C9250
+	thumb_func_end BattleAICmd_watch
 
-	thumb_func_start sub_80C9264
-sub_80C9264: @ 80C9264
+	thumb_func_start BattleAICmd_get_hold_effect
+BattleAICmd_get_hold_effect: @ 80C9264
 	push {r4,lr}
 	ldr r0, _080C9274 @ =gUnknown_2039A00
 	ldr r0, [r0]
@@ -5119,7 +5119,7 @@ _080C92CA:
 _080C92D8: .4byte gUnknown_2023BE4
 _080C92DC: .4byte gUnknown_2023FF4
 _080C92E0: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C9264
+	thumb_func_end BattleAICmd_get_hold_effect
 
 	thumb_func_start BattleAICmd_get_gender
 BattleAICmd_get_gender: @ 80C92E4

@@ -15,7 +15,7 @@ CheckForFlashMemory: @ 804BFE4
 	ldr r1, _0804BFFC @ =gUnknown_3005004
 	movs r0, 0x1
 	str r0, [r1]
-	bl sub_80007C8
+	bl InitFlashTimer
 	b _0804C006
 	.align 2, 0
 _0804BFFC: .4byte gUnknown_3005004
@@ -424,14 +424,14 @@ SaveSerializedGame: @ 804C300
 	bx r0
 	thumb_func_end SaveSerializedGame
 
-	thumb_func_start sub_804C310
-sub_804C310: @ 804C310
+	thumb_func_start LoadSerializedGame
+LoadSerializedGame: @ 804C310
 	push {lr}
 	bl sub_804C230
 	bl sub_804C2B8
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804C310
+	thumb_func_end LoadSerializedGame
 
 	thumb_func_start copy_bags_and_unk_data_from_save_blocks
 copy_bags_and_unk_data_from_save_blocks: @ 804C320
@@ -711,7 +711,7 @@ _0804C4FE:
 	ldr r1, [r2]
 	str r1, [r0]
 	adds r0, r4, 0
-	bl sub_8099DE0
+	bl ApplyNewEncryptionKeyToBagItems
 	mov r6, r8
 	ldr r0, [r6]
 	adds r0, r5
@@ -787,7 +787,7 @@ _0804C5AE:
 	adds r0, r5, 0
 	bl sub_8054F38
 	adds r0, r5, 0
-	bl sub_8099E38
+	bl ApplyNewEncryptionKeyToBagItems_
 	adds r0, r5, 0
 	bl sub_815EE6C
 	ldr r4, _0804C5F8 @ =gUnknown_3005008

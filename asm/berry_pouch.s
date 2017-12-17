@@ -871,7 +871,7 @@ sub_813D430: @ 813D430
 	ldr r4, _0813D4A8 @ =gUnknown_2021D18
 	ldr r1, _0813D4AC @ =gUnknown_84162B9
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	str r5, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -1549,7 +1549,7 @@ sub_813D940: @ 813D940
 	ldr r0, _0813D9F0 @ =gUnknown_2021D18
 	mov r9, r0
 	adds r1, r6, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [sp]
 	movs r6, 0x1
@@ -1576,7 +1576,7 @@ sub_813D940: @ 813D940
 	bl sub_8008E78
 	ldr r1, _0813D9F4 @ =gUnknown_84162B9
 	mov r0, r9
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0xA
 	str r0, [sp]
 	str r6, [sp, 0x4]
@@ -1633,7 +1633,7 @@ sub_813D9F8: @ 813D9F8
 	ldr r4, _0813DA60 @ =gUnknown_2021D18
 	ldr r1, _0813DA64 @ =gUnknown_84162B9
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0xA
 	str r0, [sp]
 	movs r1, 0x1
@@ -1987,7 +1987,7 @@ _0813DC86:
 	ldr r5, _0813DD6C @ =gUnknown_2021D18
 	ldr r1, _0813DD70 @ =gUnknown_84162FF
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [sp]
 	movs r1, 0x1
@@ -2259,7 +2259,7 @@ sub_813DF54: @ 813DF54
 	ldr r5, _0813DFBC @ =gUnknown_2021D18
 	ldr r1, _0813DFC0 @ =gUnknown_8416409
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x7
 	bl sub_813EA08
 	lsls r0, 24
@@ -2436,7 +2436,7 @@ sub_813E0DC: @ 813E0DC
 	ldr r5, _0813E158 @ =gUnknown_2021D18
 	ldr r1, _0813E15C @ =gUnknown_84163F4
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x9
 	bl sub_813EA08
 	lsls r0, 24
@@ -2740,7 +2740,7 @@ sub_813E37C: @ 813E37C
 	ldr r4, _0813E3CC @ =gUnknown_2021D18
 	ldr r1, _0813E3D0 @ =gUnknown_8416374
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r3, _0813E3D4 @ =sub_813E290
 	adds r0, r5, 0
 	movs r1, 0x2
@@ -2819,7 +2819,7 @@ sub_813E428: @ 813E428
 	ldr r4, _0813E47C @ =gUnknown_2021D18
 	ldr r1, _0813E480 @ =gUnknown_84168F1
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_80BF8E4
 	adds r1, r0, 0
 	lsls r1, 24
@@ -2859,7 +2859,7 @@ _0813E4A8:
 	ldr r4, _0813E4D8 @ =gUnknown_2021D18
 	ldr r1, _0813E4DC @ =gUnknown_8416911
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_80BF8E4
 	adds r1, r0, 0
 	lsls r1, 24
@@ -2909,7 +2909,7 @@ sub_813E4E4: @ 813E4E4
 	ldr r4, _0813E548 @ =gUnknown_2021D18
 	ldr r1, _0813E54C @ =gUnknown_8416936
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_80BF8E4
 	adds r1, r0, 0
 	lsls r1, 24
@@ -3006,7 +3006,7 @@ sub_813E5B8: @ 813E5B8
 	mov r8, r2
 	ldr r1, _0813E660 @ =gUnknown_84162B9
 	mov r0, r8
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0xA
 	str r0, [sp]
 	movs r1, 0x1
@@ -3208,7 +3208,7 @@ sub_813E768: @ 813E768
 	ldr r4, _0813E7E4 @ =gUnknown_2021D18
 	ldr r1, _0813E7E8 @ =gUnknown_8416959
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r3, _0813E7EC @ =sub_813E7F0
 	adds r0, r5, 0
 	movs r1, 0x2
@@ -3362,7 +3362,7 @@ _0813E90C: .4byte gUnknown_30030F0
 sub_813E910: @ 813E910
 	push {r4,lr}
 	ldr r0, _0813E994 @ =gUnknown_84643B8
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	movs r0, 0
 	movs r1, 0x1
@@ -3465,7 +3465,7 @@ sub_813E9A0: @ 813E9A0
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -3490,7 +3490,7 @@ sub_813EA08: @ 813EA08
 	lsls r0, r4, 3
 	ldr r1, _0813EA50 @ =gUnknown_84643D8
 	adds r0, r1
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5]
 	cmp r4, 0x2
 	beq _0813EA38
@@ -3639,7 +3639,7 @@ sub_813EB20: @ 813EB20
 	cmp r0, 0xFF
 	bne _0813EB44
 	ldr r0, _0813EB78 @ =gUnknown_8464400
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4, 0x5]
 _0813EB44:
 	bl sub_80F78A8

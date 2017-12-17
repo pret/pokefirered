@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80697AC
-sub_80697AC: @ 80697AC
+	thumb_func_start InitScriptContext
+InitScriptContext: @ 80697AC
 	push {lr}
 	adds r3, r0, 0
 	movs r0, 0
@@ -38,32 +38,32 @@ _080697DA:
 	bge _080697DA
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80697AC
+	thumb_func_end InitScriptContext
 
-	thumb_func_start sub_80697E8
-sub_80697E8: @ 80697E8
+	thumb_func_start SetupBytecodeScript
+SetupBytecodeScript: @ 80697E8
 	str r1, [r0, 0x8]
 	movs r1, 0x1
 	strb r1, [r0, 0x1]
 	movs r0, 0x1
 	bx lr
-	thumb_func_end sub_80697E8
+	thumb_func_end SetupBytecodeScript
 
-	thumb_func_start sub_80697F4
-sub_80697F4: @ 80697F4
+	thumb_func_start SetupNativeScript
+SetupNativeScript: @ 80697F4
 	movs r2, 0x2
 	strb r2, [r0, 0x1]
 	str r1, [r0, 0x4]
 	bx lr
-	thumb_func_end sub_80697F4
+	thumb_func_end SetupNativeScript
 
-	thumb_func_start sub_80697FC
-sub_80697FC: @ 80697FC
+	thumb_func_start StopScript
+StopScript: @ 80697FC
 	movs r1, 0
 	strb r1, [r0, 0x1]
 	str r1, [r0, 0x8]
 	bx lr
-	thumb_func_end sub_80697FC
+	thumb_func_end StopScript
 
 	thumb_func_start sub_8069804
 sub_8069804: @ 8069804
@@ -499,7 +499,7 @@ ScriptContext1_Init: @ 8069A80
 	ldr r0, _08069A98 @ =gUnknown_3000EB0
 	ldr r1, _08069A9C @ =gUnknown_815F9B4
 	ldr r2, _08069AA0 @ =gUnknown_815FD08
-	bl sub_80697AC
+	bl InitScriptContext
 	ldr r1, _08069AA4 @ =gUnknown_3000EA8
 	movs r0, 0x2
 	strb r0, [r1]
@@ -555,10 +555,10 @@ ScriptContext1_SetupScript: @ 8069AE4
 	ldr r1, _08069B1C @ =gUnknown_815F9B4
 	ldr r2, _08069B20 @ =gUnknown_815FD08
 	adds r0, r4, 0
-	bl sub_80697AC
+	bl InitScriptContext
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80697E8
+	bl SetupBytecodeScript
 	bl ScriptContext2_Enable
 	ldr r1, _08069B24 @ =gUnknown_3000EA8
 	movs r0, 0
@@ -604,10 +604,10 @@ ScriptContext2_RunNewScript: @ 8069B48
 	ldr r1, _08069B78 @ =gUnknown_815F9B4
 	ldr r2, _08069B7C @ =gUnknown_815FD08
 	adds r0, r4, 0
-	bl sub_80697AC
+	bl InitScriptContext
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80697E8
+	bl SetupBytecodeScript
 _08069B60:
 	ldr r0, _08069B74 @ =gUnknown_3000F28
 	bl sub_8069804

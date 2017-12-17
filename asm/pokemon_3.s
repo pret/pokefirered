@@ -691,7 +691,7 @@ _080428E4:
 	.4byte _08042A4A
 _08042904:
 	mov r0, r8
-	bl sub_8043A40
+	bl GetMonEVCount
 	lsls r0, 16
 	ldr r1, _0804292C @ =0x01fd0000
 	cmp r0, r1
@@ -909,7 +909,7 @@ _08042A9C:
 	.4byte _08042B92
 _08042ABC:
 	mov r0, r8
-	bl sub_8043A40
+	bl GetMonEVCount
 	lsls r0, 16
 	ldr r1, _08042AEC @ =0x01fd0000
 	cmp r0, r1
@@ -1283,7 +1283,7 @@ sub_8042D50: @ 8042D50
 	ldr r1, _08042D9C @ =gUnknown_83FCB4A
 	bl StringCopy
 	ldr r0, _08042DA0 @ =gUnknown_83FCB6A
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1383,7 +1383,7 @@ _08042E4C:
 	mov r1, r8
 	strb r0, [r1]
 	ldr r0, _08042E8C @ =gUnknown_83FBBE9
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 _08042E5A:
 	adds r6, 0x2
 	adds r5, 0x1
@@ -1399,7 +1399,7 @@ _08042E5A:
 	ldrb r0, [r0]
 	strb r0, [r1]
 	ldr r0, _08042E94 @ =gUnknown_83FBBB4
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 _08042E7A:
 	ldr r0, _08042E98 @ =gUnknown_202298C
 	pop {r3}
@@ -2783,8 +2783,8 @@ _08043888: .4byte gUnknown_20386AE
 _0804388C: .4byte gUnknown_825DFF6
 	thumb_func_end sub_80436F8
 
-	thumb_func_start sub_8043890
-sub_8043890: @ 8043890
+	thumb_func_start MonGainEVs
+MonGainEVs: @ 8043890
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2816,7 +2816,7 @@ _080438A4:
 _080438C8:
 	mov r0, r8
 	movs r1, 0
-	bl sub_8043AD8
+	bl CheckPartyHasHadPokerus
 	lsls r0, 24
 	movs r2, 0x1
 	cmp r0, 0
@@ -3007,10 +3007,10 @@ _08043A2E:
 	bx r0
 	.align 2, 0
 _08043A3C: .4byte 0x000001fd
-	thumb_func_end sub_8043890
+	thumb_func_end MonGainEVs
 
-	thumb_func_start sub_8043A40
-sub_8043A40: @ 8043A40
+	thumb_func_start GetMonEVCount
+GetMonEVCount: @ 8043A40
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r5, 0
@@ -3031,7 +3031,7 @@ _08043A48:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8043A40
+	thumb_func_end GetMonEVCount
 
 	thumb_func_start sub_8043A68
 sub_8043A68: @ 8043A68
@@ -3040,8 +3040,8 @@ sub_8043A68: @ 8043A68
 	bx lr
 	thumb_func_end sub_8043A68
 
-	thumb_func_start sub_8043A70
-sub_8043A70: @ 8043A70
+	thumb_func_start CheckPartyPokerus
+CheckPartyPokerus: @ 8043A70
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -3095,10 +3095,10 @@ _08043ACC:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8043A70
+	thumb_func_end CheckPartyPokerus
 
-	thumb_func_start sub_8043AD8
-sub_8043AD8: @ 8043AD8
+	thumb_func_start CheckPartyHasHadPokerus
+CheckPartyHasHadPokerus: @ 8043AD8
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -3148,7 +3148,7 @@ _08043B2C:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8043AD8
+	thumb_func_end CheckPartyHasHadPokerus
 
 	thumb_func_start sub_8043B38
 sub_8043B38: @ 8043B38
@@ -3862,8 +3862,8 @@ _08044070:
 	bx r1
 	thumb_func_end sub_8043FD4
 
-	thumb_func_start sub_8044074
-sub_8044074: @ 8044074
+	thumb_func_start PlayBattleBGM
+PlayBattleBGM: @ 8044074
 	push {lr}
 	bl ResetMapMusic
 	bl m4aMPlayAllStop
@@ -3873,10 +3873,10 @@ sub_8044074: @ 8044074
 	bl PlayBGM
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8044074
+	thumb_func_end PlayBattleBGM
 
-	thumb_func_start sub_8044090
-sub_8044090: @ 8044090
+	thumb_func_start PlayMapChosenOrBattleBGM
+PlayMapChosenOrBattleBGM: @ 8044090
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -3896,7 +3896,7 @@ _080440B6:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8044090
+	thumb_func_end PlayMapChosenOrBattleBGM
 
 	thumb_func_start GetMonFrontSpritePal
 GetMonFrontSpritePal: @ 80440BC
@@ -4396,8 +4396,8 @@ _08044468:
 	bx r0
 	thumb_func_end sub_80443F4
 
-	thumb_func_start sub_8044470
-sub_8044470: @ 8044470
+	thumb_func_start IsMonShiny
+IsMonShiny: @ 8044470
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
@@ -4410,16 +4410,16 @@ sub_8044470: @ 8044470
 	bl GetMonData
 	adds r1, r0, 0
 	adds r0, r5, 0
-	bl sub_804449C
+	bl IsShinyOtIdPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8044470
+	thumb_func_end IsMonShiny
 
-	thumb_func_start sub_804449C
-sub_804449C: @ 804449C
+	thumb_func_start IsShinyOtIdPersonality
+IsShinyOtIdPersonality: @ 804449C
 	push {r4,lr}
 	movs r4, 0
 	lsrs r2, r0, 16
@@ -4440,7 +4440,7 @@ _080444B6:
 	bx r1
 	.align 2, 0
 _080444C0: .4byte 0x0000ffff
-	thumb_func_end sub_804449C
+	thumb_func_end IsShinyOtIdPersonality
 
 	thumb_func_start sub_80444C4
 sub_80444C4: @ 80444C4

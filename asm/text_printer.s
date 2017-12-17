@@ -218,7 +218,7 @@ _08002DAA:
 	cmp r4, r7
 	bhi _08002DB8
 	ldr r0, _08002DE0 @ =gUnknown_2020010
-	bl sub_8002E7C
+	bl RenderFont
 	cmp r0, 0x1
 	bne _08002DA4
 _08002DB8:
@@ -263,7 +263,7 @@ _08002DF8:
 	cmp r0, 0
 	beq _08002E4C
 	mov r0, r8
-	bl sub_8002E7C
+	bl RenderFont
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0x1
@@ -315,8 +315,8 @@ _08002E4C:
 	bx r0
 	thumb_func_end sub_8002DE8
 
-	thumb_func_start sub_8002E64
-sub_8002E64: @ 8002E64
+	thumb_func_start IsTextPrinterActive
+IsTextPrinterActive: @ 8002E64
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08002E78 @ =gUnknown_2020034
@@ -328,10 +328,10 @@ sub_8002E64: @ 8002E64
 	bx lr
 	.align 2, 0
 _08002E78: .4byte gUnknown_2020034
-	thumb_func_end sub_8002E64
+	thumb_func_end IsTextPrinterActive
 
-	thumb_func_start sub_8002E7C
-sub_8002E7C: @ 8002E7C
+	thumb_func_start RenderFont
+RenderFont: @ 8002E7C
 	push {r4,lr}
 	adds r4, r0, 0
 _08002E80:
@@ -354,7 +354,7 @@ _08002E80:
 	bx r1
 	.align 2, 0
 _08002EA4: .4byte gUnknown_3003D90
-	thumb_func_end sub_8002E7C
+	thumb_func_end RenderFont
 
 	thumb_func_start sub_8002EA8
 sub_8002EA8: @ 8002EA8
@@ -451,8 +451,8 @@ _08002F54: .4byte gUnknown_3000AE6
 _08002F58: .4byte gUnknown_3000A40
 	thumb_func_end sub_8002EA8
 
-	thumb_func_start sub_8002F5C
-sub_8002F5C: @ 8002F5C
+	thumb_func_start SaveTextColors
+SaveTextColors: @ 8002F5C
 	ldr r3, _08002F70 @ =gUnknown_3000AE2
 	ldrh r3, [r3]
 	strb r3, [r1]
@@ -467,10 +467,10 @@ sub_8002F5C: @ 8002F5C
 _08002F70: .4byte gUnknown_3000AE2
 _08002F74: .4byte gUnknown_3000AE4
 _08002F78: .4byte gUnknown_3000AE6
-	thumb_func_end sub_8002F5C
+	thumb_func_end SaveTextColors
 
-	thumb_func_start sub_8002F7C
-sub_8002F7C: @ 8002F7C
+	thumb_func_start RestoreTextColors
+RestoreTextColors: @ 8002F7C
 	push {lr}
 	ldrb r0, [r0]
 	ldrb r1, [r1]
@@ -478,7 +478,7 @@ sub_8002F7C: @ 8002F7C
 	bl sub_8002EA8
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8002F7C
+	thumb_func_end RestoreTextColors
 
 	thumb_func_start sub_8002F8C
 sub_8002F8C: @ 8002F8C

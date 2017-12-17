@@ -19,7 +19,7 @@ sub_8054BC8: @ 8054BC8
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl RemoveMoney
-	bl sub_80A0058
+	bl sp000_heal_pokemon
 	bl sub_8054DD8
 	bl sub_80554BC
 	bl warp_in
@@ -313,15 +313,15 @@ _08054E74:
 _08054E8C: .4byte gUnknown_3005008
 	thumb_func_end sub_8054E68
 
-	thumb_func_start sub_8054E90
-sub_8054E90: @ 8054E90
+	thumb_func_start IncrementGameStat
+IncrementGameStat: @ 8054E90
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x33
 	bhi _08054EB8
 	adds r0, r4, 0
-	bl sub_8054EC4
+	bl GetGameStat
 	adds r1, r0, 0
 	ldr r0, _08054EAC @ =0x00fffffe
 	cmp r1, r0
@@ -341,10 +341,10 @@ _08054EB8:
 	bx r0
 	.align 2, 0
 _08054EC0: .4byte 0x00ffffff
-	thumb_func_end sub_8054E90
+	thumb_func_end IncrementGameStat
 
-	thumb_func_start sub_8054EC4
-sub_8054EC4: @ 8054EC4
+	thumb_func_start GetGameStat
+GetGameStat: @ 8054EC4
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -374,7 +374,7 @@ _08054EF8:
 _08054EFA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8054EC4
+	thumb_func_end GetGameStat
 
 	thumb_func_start sub_8054F00
 sub_8054F00: @ 8054F00
@@ -1715,10 +1715,10 @@ sub_8055864: @ 8055864
 	bl sub_807B140
 	bl sub_805610C
 	bl sub_8055CB8
-	bl sub_8055E84
+	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
 	bl sub_815D8F8
-	bl sub_80589D4
+	bl not_trainer_hill_battle_pyramid
 	ldr r4, _0805591C @ =gUnknown_2036DFC
 	ldr r0, [r4]
 	bl copy_map_tileset2_to_vram_2
@@ -1737,7 +1737,7 @@ _080558D4:
 	bl RoamerMove
 	bl sub_8110920
 	bl sub_807B1A4
-	bl sub_806E918
+	bl wild_encounter_reset_coro_args
 	bl mapheader_run_script_with_tag_x5
 	bl sub_80561B4
 	ldr r1, _0805591C @ =gUnknown_2036DFC
@@ -1792,13 +1792,13 @@ sub_8055920: @ 8055920
 	bl FlagClear
 _08055974:
 	bl sub_8055CB8
-	bl sub_8055E84
+	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
 	bl sub_815D8F8
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMoveToOtherLocationSet
 	bl sub_8110920
-	bl sub_80589D4
+	bl not_trainer_hill_battle_pyramid
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1823,7 +1823,7 @@ sub_80559A8: @ 80559A8
 	bl sub_8110920
 	bl sub_8111708
 	bl set_current_map_header_from_sav1
-	bl sub_80589D4
+	bl not_trainer_hill_battle_pyramid
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2103,13 +2103,13 @@ _08055BD8:
 	cmp r0, 0x1
 	beq _08055C68
 	adds r0, r5, 0
-	bl sub_8059CF0
+	bl MetatileBehavior_IsWestArrowWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08055C3E
 	adds r0, r5, 0
-	bl sub_8059CDC
+	bl MetatileBehavior_IsEastArrowWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2474,8 +2474,8 @@ sub_8055E78: @ 8055E78
 _08055E80: .4byte gUnknown_3005008
 	thumb_func_end sub_8055E78
 
-	thumb_func_start sub_8055E84
-sub_8055E84: @ 8055E84
+	thumb_func_start sav1_reset_battle_music_maybe
+sav1_reset_battle_music_maybe: @ 8055E84
 	ldr r0, _08055E90 @ =gUnknown_3005008
 	ldr r1, [r0]
 	movs r0, 0
@@ -2483,7 +2483,7 @@ sub_8055E84: @ 8055E84
 	bx lr
 	.align 2, 0
 _08055E90: .4byte gUnknown_3005008
-	thumb_func_end sub_8055E84
+	thumb_func_end sav1_reset_battle_music_maybe
 
 	thumb_func_start sub_8055E94
 sub_8055E94: @ 8055E94
@@ -2550,8 +2550,8 @@ _08055F14:
 	bx r0
 	thumb_func_end sub_8055E94
 
-	thumb_func_start sub_8055F1C
-sub_8055F1C: @ 8055F1C
+	thumb_func_start Overworld_ChangeMusicToDefault
+Overworld_ChangeMusicToDefault: @ 8055F1C
 	push {r4,lr}
 	bl GetCurrentMapMusic
 	adds r4, r0, 0
@@ -2571,7 +2571,7 @@ _08055F42:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8055F1C
+	thumb_func_end Overworld_ChangeMusicToDefault
 
 	thumb_func_start sub_8055F48
 sub_8055F48: @ 8055F48
@@ -2811,7 +2811,7 @@ _08056106:
 sub_805610C: @ 805610C
 	push {lr}
 	ldr r0, _0805611C @ =gUnknown_2031DDC
-	bl sub_8082FE8
+	bl GetLocalWildMon
 	ldr r1, _08056120 @ =gUnknown_2031DDA
 	strh r0, [r1]
 	pop {r0}
@@ -3071,7 +3071,7 @@ sub_80562B0: @ 80562B0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	bl sub_8056E74
+	bl MoveSaveBlocks_ResetHeap_
 	bl sub_8056E80
 	movs r0, 0
 	bl sub_8001618
@@ -3220,7 +3220,7 @@ _0805641C: .4byte gUnknown_3005018
 	thumb_func_start sub_8056420
 sub_8056420: @ 8056420
 	push {lr}
-	bl sub_80A0EB4
+	bl ResetSafariZoneFlag
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8056420
@@ -3421,7 +3421,7 @@ _080565C8:
 	bl sub_8056578
 	cmp r4, 0
 	beq _080565D4
-	bl sub_8056A04
+	bl SetFieldVBlankCallback
 _080565D4:
 	pop {r4}
 	pop {r0}
@@ -3505,8 +3505,8 @@ CB2_NewGame: @ 8056644
 	movs r0, 0
 	str r0, [r1]
 	ldr r0, _08056698 @ =gUnknown_3003528
-	bl sub_8056E5C
-	bl sub_8056A04
+	bl do_load_map_stuff_loop
+	bl SetFieldVBlankCallback
 	ldr r0, _0805669C @ =sub_8056534
 	bl sub_80565E0
 	ldr r0, _080566A0 @ =sub_80565B4
@@ -3552,9 +3552,9 @@ c2_whiteout: @ 80566A4
 	movs r0, 0
 	strb r0, [r1]
 	mov r0, sp
-	bl sub_8056E5C
+	bl do_load_map_stuff_loop
 	bl sub_8112364
-	bl sub_8056A04
+	bl SetFieldVBlankCallback
 	ldr r0, _08056714 @ =sub_8056534
 	bl sub_80565E0
 	ldr r0, _08056718 @ =sub_80565B4
@@ -3596,7 +3596,7 @@ _08056748: .4byte sub_805674C
 sub_805674C: @ 805674C
 	push {lr}
 	ldr r0, _08056768 @ =gUnknown_3003528
-	bl sub_8056E5C
+	bl do_load_map_stuff_loop
 	bl sub_8113748
 	lsls r0, 24
 	lsrs r0, 24
@@ -3607,7 +3607,7 @@ sub_805674C: @ 805674C
 	.align 2, 0
 _08056768: .4byte gUnknown_3003528
 _0805676C:
-	bl sub_8056A04
+	bl SetFieldVBlankCallback
 	ldr r0, _08056780 @ =sub_8056534
 	bl sub_80565E0
 	ldr r0, _08056784 @ =sub_80565B4
@@ -3644,7 +3644,7 @@ c2_80567AC: @ 80567AC
 	bl sub_8056A5C
 	cmp r0, 0
 	beq _080567CC
-	bl sub_8056A04
+	bl SetFieldVBlankCallback
 	ldr r0, _080567D4 @ =c1_link_related
 	bl sub_80565E0
 	bl sub_80578D8
@@ -3688,7 +3688,7 @@ c2_exit_to_overworld_2_local: @ 8056808
 	bl sub_8056CD8
 	cmp r0, 0
 	beq _0805681E
-	bl sub_8056A04
+	bl SetFieldVBlankCallback
 	ldr r0, _08056828 @ =sub_80565B4
 	bl SetMainCallback2
 _0805681E:
@@ -3706,7 +3706,7 @@ c2_exit_to_overworld_2_link: @ 805682C
 	cmp r0, 0
 	bne _08056846
 	ldr r0, _0805684C @ =gUnknown_3003528
-	bl sub_8056D44
+	bl map_loading_iteration_2_link
 	cmp r0, 0
 	beq _08056846
 	ldr r0, _08056850 @ =sub_80565B4
@@ -3917,19 +3917,19 @@ _080569F4:
 	bx r0
 	thumb_func_end sub_80569BC
 
-	thumb_func_start sub_8056A04
-sub_8056A04: @ 8056A04
+	thumb_func_start SetFieldVBlankCallback
+SetFieldVBlankCallback: @ 8056A04
 	push {lr}
-	ldr r0, _08056A10 @ =sub_8056A14
+	ldr r0, _08056A10 @ =VBlankCB_Field
 	bl SetVBlankCallback
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056A10: .4byte sub_8056A14
-	thumb_func_end sub_8056A04
+_08056A10: .4byte VBlankCB_Field
+	thumb_func_end SetFieldVBlankCallback
 
-	thumb_func_start sub_8056A14
-sub_8056A14: @ 8056A14
+	thumb_func_start VBlankCB_Field
+VBlankCB_Field: @ 8056A14
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
@@ -3939,7 +3939,7 @@ sub_8056A14: @ 8056A14
 	bl TransferTilesetAnimsBuffer
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8056A14
+	thumb_func_end VBlankCB_Field
 
 	thumb_func_start sub_8056A34
 sub_8056A34: @ 8056A34
@@ -4298,8 +4298,8 @@ _08056D3E:
 	bx r1
 	thumb_func_end sub_8056CD8
 
-	thumb_func_start sub_8056D44
-sub_8056D44: @ 8056D44
+	thumb_func_start map_loading_iteration_2_link
+map_loading_iteration_2_link: @ 8056D44
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4]
@@ -4407,7 +4407,7 @@ _08056E3E:
 	strb r0, [r4]
 	b _08056E54
 _08056E46:
-	bl sub_8056A04
+	bl SetFieldVBlankCallback
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -4419,10 +4419,10 @@ _08056E56:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8056D44
+	thumb_func_end map_loading_iteration_2_link
 
-	thumb_func_start sub_8056E5C
-sub_8056E5C: @ 8056E5C
+	thumb_func_start do_load_map_stuff_loop
+do_load_map_stuff_loop: @ 8056E5C
 	push {r4,lr}
 	adds r4, r0, 0
 _08056E60:
@@ -4434,15 +4434,15 @@ _08056E60:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8056E5C
+	thumb_func_end do_load_map_stuff_loop
 
-	thumb_func_start sub_8056E74
-sub_8056E74: @ 8056E74
+	thumb_func_start MoveSaveBlocks_ResetHeap_
+MoveSaveBlocks_ResetHeap_: @ 8056E74
 	push {lr}
 	bl sub_804C0A4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8056E74
+	thumb_func_end MoveSaveBlocks_ResetHeap_
 
 	thumb_func_start sub_8056E80
 sub_8056E80: @ 8056E80
@@ -4637,11 +4637,11 @@ sub_8057024: @ 8057024
 	cmp r4, 0
 	bne _08057050
 	movs r0, 0
-	bl sub_805FECC
+	bl npc_paltag_set_load
 	b _08057056
 _08057050:
 	movs r0, 0x1
-	bl sub_805FECC
+	bl npc_paltag_set_load
 _08057056:
 	bl FieldEffectActiveListClear
 	bl sub_8079C08
@@ -4704,7 +4704,7 @@ mli4_mapscripts_and_other: @ 805709C
 	ldrb r3, [r3, 0x8]
 	bl InitPlayerAvatar
 	ldrb r0, [r5]
-	bl sub_805BDEC
+	bl SetPlayerAvatarTransitionFlags
 	bl sub_80559E4
 	movs r0, 0
 	movs r1, 0
@@ -4962,7 +4962,7 @@ sub_80572D8: @ 80572D8
 	push {lr}
 	ldr r0, _080572F4 @ =gUnknown_3003528
 	bl sub_8057300
-	bl sub_8056A04
+	bl SetFieldVBlankCallback
 	ldr r0, _080572F8 @ =sub_8056534
 	bl sub_80565E0
 	ldr r0, _080572FC @ =sub_80565B4
@@ -5180,7 +5180,7 @@ _080574B8:
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	cmp r4, 0
 	beq _080574E0
-	bl sub_8056A04
+	bl SetFieldVBlankCallback
 _080574E0:
 	pop {r4}
 	pop {r0}
@@ -5347,7 +5347,7 @@ _0805762C:
 	ldr r0, _08057640 @ =gUnknown_3005050
 	ldr r1, _08057644 @ =sub_8057748
 	str r1, [r0]
-	bl sub_8056A04
+	bl SetFieldVBlankCallback
 	movs r0, 0
 	strb r0, [r7]
 	movs r0, 0x1

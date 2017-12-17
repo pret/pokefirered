@@ -181,7 +181,7 @@ _080778E8:
 	.align 2, 0
 _080778FC: .4byte 0x01006000
 _08077900:
-	bl sub_800F420
+	bl LoadBattleTextboxAndBackground
 	b _08077A8A
 _08077906:
 	bl FreeAllSpritePalettes
@@ -323,7 +323,7 @@ _08077A14:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 	ldr r0, _08077A54 @ =gUnknown_3003F3C
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -609,13 +609,13 @@ _08077C74:
 	cmp r0, 0
 	beq _08077C94
 	adds r0, r7, 0
-	bl sub_80748BC
+	bl GetSubstituteSpriteDefault_Y
 	b _08077C9A
 	.align 2, 0
 _08077C90: .4byte gUnknown_2024018
 _08077C94:
 	adds r0, r7, 0
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 _08077C9A:
 	lsls r0, 24
 	lsrs r0, 24

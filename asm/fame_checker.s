@@ -220,7 +220,7 @@ _0812C540:
 	b _0812C5BE
 _0812C578:
 	ldr r0, _0812C598 @ =gUnknown_845FC04
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	bl sub_812CEC0
 	ldr r4, _0812C59C @ =gUnknown_203B100
@@ -515,7 +515,7 @@ _0812C7DC:
 	cmp r0, 0
 	beq _0812C828
 	movs r0, 0x2
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0812C8EA
@@ -887,7 +887,7 @@ sub_812CAD8: @ 812CAD8
 	cmp r0, 0
 	beq _0812CB2E
 	movs r0, 0x2
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0812CB2E
@@ -1228,7 +1228,7 @@ _0812CDAC:
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_80F78A8
 	adds r3, r0, 0
 	lsls r3, 24
@@ -1299,7 +1299,7 @@ sub_812CE04: @ 812CE04
 	adds r0, r2
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_80F78A8
 	adds r3, r0, 0
 	lsls r3, 24
@@ -1665,7 +1665,7 @@ _0812D10A:
 	movs r0, 0x1
 	movs r1, 0
 	movs r3, 0
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	movs r0, 0x1
 	bl sub_812CEE0
 	add sp, 0x14
@@ -2172,7 +2172,7 @@ sub_812D558: @ 812D558
 	bl dp13_810BB8C
 	bl ResetPaletteFade
 	movs r0, 0
-	bl sub_805FECC
+	bl npc_paltag_set_load
 	ldr r1, _0812D580 @ =gUnknown_3003E58
 	movs r0, 0x7
 	strb r0, [r1]
@@ -2855,13 +2855,13 @@ sub_812DA14: @ 812DA14
 	movs r0, 0x3
 	movs r1, 0
 	movs r3, 0
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldr r6, _0812DB08 @ =gUnknown_2021CD0
 	ldr r0, _0812DB0C @ =gUnknown_845FA1C
 	adds r5, r0
 	ldr r1, [r5]
 	adds r0, r6, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r6, 0
 	movs r2, 0
@@ -2883,7 +2883,7 @@ sub_812DA14: @ 812DA14
 	movs r0, 0x3
 	movs r1, 0
 	movs r3, 0xA
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	movs r0, 0x3
 	bl sub_812CEE0
 	add sp, 0x14
@@ -3315,7 +3315,7 @@ sub_812DDF0: @ 812DDF0
 	movs r0, 0
 	movs r1, 0x2
 	movs r2, 0x8
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	cmp r5, 0
 	bne _0812DEC0
 	add r0, sp, 0x14
@@ -3370,7 +3370,7 @@ _0812DE88:
 	movs r0, 0
 	movs r1, 0x2
 	movs r2, 0x8
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 _0812DEC0:
 	ldr r1, _0812DEE4 @ =gUnknown_203B0FC
 	ldr r0, [r1]
@@ -4137,7 +4137,7 @@ sub_812E4A4: @ 812E4A4
 	movs r0, 0
 	movs r1, 0x2
 	movs r2, 0
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	b _0812E50A
 	.align 2, 0
 _0812E4E0: .4byte gUnknown_203B0FC
@@ -4157,7 +4157,7 @@ _0812E4EC:
 	movs r0, 0
 	movs r1, 0x2
 	movs r2, 0
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 _0812E50A:
 	add sp, 0x14
 	pop {r4}

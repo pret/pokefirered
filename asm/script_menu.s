@@ -60,8 +60,8 @@ _0809C9AA:
 	bx r1
 	thumb_func_end sub_809C974
 
-	thumb_func_start sub_809C9B4
-sub_809C9B4: @ 809C9B4
+	thumb_func_start ScriptMenu_Multichoice
+ScriptMenu_Multichoice: @ 809C9B4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -100,10 +100,10 @@ _0809C9FA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809C9B4
+	thumb_func_end ScriptMenu_Multichoice
 
-	thumb_func_start sub_809CA04
-sub_809CA04: @ 809CA04
+	thumb_func_start ScriptMenu_MultichoiceWithDefault
+ScriptMenu_MultichoiceWithDefault: @ 809CA04
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -149,7 +149,7 @@ _0809CA56:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809CA04
+	thumb_func_end ScriptMenu_MultichoiceWithDefault
 
 	thumb_func_start sub_809CA64
 sub_809CA64: @ 809CA64
@@ -244,7 +244,7 @@ _0809CB02:
 	mov r0, r9
 	ldr r1, [sp, 0x14]
 	adds r2, r5, 0
-	bl sub_809D654
+	bl CreateWindowFromRect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
@@ -616,7 +616,7 @@ _0809CDE8: .4byte gUnknown_83E0748
 	thumb_func_start sub_809CDEC
 sub_809CDEC: @ 809CDEC
 	push {r4,lr}
-	ldr r4, _0809CE04 @ =sub_809CE54
+	ldr r4, _0809CE04 @ =task_yes_no_maybe
 	adds r0, r4, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -626,7 +626,7 @@ sub_809CDEC: @ 809CDEC
 	movs r0, 0
 	b _0809CE28
 	.align 2, 0
-_0809CE04: .4byte sub_809CE54
+_0809CE04: .4byte task_yes_no_maybe
 _0809CE08:
 	ldr r1, _0809CE30 @ =gUnknown_20370D0
 	movs r0, 0xFF
@@ -669,8 +669,8 @@ _0809CE4E:
 	bx r1
 	thumb_func_end sub_809CE38
 
-	thumb_func_start sub_809CE54
-sub_809CE54: @ 809CE54
+	thumb_func_start task_yes_no_maybe
+task_yes_no_maybe: @ 809CE54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -690,7 +690,7 @@ sub_809CE54: @ 809CE54
 	.align 2, 0
 _0809CE74: .4byte gUnknown_3005090
 _0809CE78:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x1
@@ -731,7 +731,7 @@ _0809CEBC:
 	bx r0
 	.align 2, 0
 _0809CEC4: .4byte gUnknown_20370D0
-	thumb_func_end sub_809CE54
+	thumb_func_end task_yes_no_maybe
 
 	thumb_func_start sub_809CEC8
 sub_809CEC8: @ 809CEC8
@@ -817,7 +817,7 @@ _0809CF08:
 	lsrs r3, 24
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
-	bl sub_809D654
+	bl CreateWindowFromRect
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x14]
@@ -914,8 +914,8 @@ _0809D034:
 _0809D03C: .4byte gUnknown_20370D0
 	thumb_func_end sub_809CFDC
 
-	thumb_func_start sub_809D040
-sub_809D040: @ 809D040
+	thumb_func_start sp109_CreatePCMenu
+sp109_CreatePCMenu: @ 809D040
 	push {lr}
 	ldr r0, _0809D060 @ =sub_809CC98
 	bl FuncIsActiveTask
@@ -937,7 +937,7 @@ _0809D068:
 _0809D06A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809D040
+	thumb_func_end sp109_CreatePCMenu
 
 	thumb_func_start sub_809D070
 sub_809D070: @ 809D070
@@ -984,7 +984,7 @@ _0809D0B0:
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xA
-	bl sub_809D654
+	bl CreateWindowFromRect
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
@@ -1045,7 +1045,7 @@ _0809D14C:
 	movs r0, 0
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_809D654
+	bl CreateWindowFromRect
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
@@ -1122,7 +1122,7 @@ _0809D1FA:
 	ldr r4, _0809D24C @ =gUnknown_2021D18
 	ldr r1, _0809D250 @ =gUnknown_8417BB6
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r7, 0
@@ -1295,7 +1295,7 @@ _0809D31C:
 	adds r1, r6, 0
 	movs r2, 0x8
 	movs r3, 0x8
-	bl sub_809D654
+	bl CreateWindowFromRect
 	ldr r1, _0809D3B4 @ =gUnknown_3005090
 	lsls r3, r4, 2
 	adds r3, r4
@@ -1600,7 +1600,7 @@ _0809D572:
 	ldrb r1, [r6]
 	movs r2, 0x8
 	movs r3, 0x8
-	bl sub_809D654
+	bl CreateWindowFromRect
 	ldr r2, _0809D61C @ =gUnknown_3005090
 	lsls r1, r4, 2
 	adds r1, r4
@@ -1664,8 +1664,8 @@ _0809D64E:
 	bx r1
 	thumb_func_end sub_809D620
 
-	thumb_func_start sub_809D654
-sub_809D654: @ 809D654
+	thumb_func_start CreateWindowFromRect
+CreateWindowFromRect: @ 809D654
 	push {r4,r5,lr}
 	sub sp, 0x20
 	adds r4, r0, 0
@@ -1698,7 +1698,7 @@ sub_809D654: @ 809D654
 	str r0, [sp, 0x18]
 	str r1, [sp, 0x1C]
 	add r0, sp, 0x18
-	bl sub_8003CE4
+	bl AddWindow
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1709,7 +1709,7 @@ sub_809D654: @ 809D654
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809D654
+	thumb_func_end CreateWindowFromRect
 
 	thumb_func_start sub_809D6B0
 sub_809D6B0: @ 809D6B0
@@ -1854,7 +1854,7 @@ _0809D7B8:
 	movs r0, 0x11
 	adds r1, r5, 0
 	movs r2, 0xB
-	bl sub_809D654
+	bl CreateWindowFromRect
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r7, 0

@@ -88,7 +88,7 @@ _0814B784: .4byte gUnknown_3003F64
 _0814B788: .4byte gUnknown_3003F3C
 _0814B78C: .4byte gUnknown_3005450
 _0814B790:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0

@@ -149,7 +149,7 @@ sub_800C318: @ 800C318
 	movs r2, 0
 	bl ChangeBgY
 	ldr r0, _0800C4B8 @ =gUnknown_8234618
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	ldr r0, _0800C4BC @ =gUnknown_8234648
 	movs r1, 0
@@ -438,7 +438,7 @@ sub_800C688: @ 800C688
 	bne _0800C6F8
 	bl sub_8002DE8
 	movs r0, 0x4
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0800C6F8
@@ -639,7 +639,7 @@ _0800C828:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	ldr r0, _0800C86C @ =gUnknown_8234618
 	bl sub_800D0B4
 	movs r0, 0
@@ -670,7 +670,7 @@ _0800C870:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0800C8E8 @ =gUnknown_8415A6E
@@ -679,7 +679,7 @@ _0800C870:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	bl sub_800CE58
 	ldr r4, _0800C8EC @ =gUnknown_8234620
 	adds r0, r4, 0
@@ -725,7 +725,7 @@ _0800C8F0:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0800C9B8 @ =gUnknown_8415A6E
@@ -734,7 +734,7 @@ _0800C8F0:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0x1
 	strh r0, [r6, 0x1C]
 	str r5, [sp]
@@ -745,7 +745,7 @@ _0800C8F0:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	bl sub_800CE58
 	ldr r4, _0800C9C0 @ =gUnknown_8234620
 	adds r0, r4, 0
@@ -1094,7 +1094,7 @@ _0800CC18: .4byte gUnknown_2037AB8
 _0800CC1C:
 	bl sub_8002DE8
 	movs r0, 0x4
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 _0800CC28:
 	cmp r0, 0
@@ -1355,7 +1355,7 @@ sub_800CDF8: @ 800CDF8
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0x4
 	bl PutWindowTilemap
 	movs r0, 0x4
@@ -1404,7 +1404,7 @@ sub_800CE70: @ 800CE70
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x12
-	bl sub_812E51C
+	bl box_print
 	add r1, sp, 0xC
 	movs r2, 0
 	ldr r0, _0800CED0 @ =gUnknown_300500C
@@ -1430,7 +1430,7 @@ _0800CE96:
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x12
-	bl sub_812E51C
+	bl box_print
 	add sp, 0x14
 	pop {r0}
 	bx r0
@@ -1455,7 +1455,7 @@ sub_800CED4: @ 800CED4
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x22
-	bl sub_812E51C
+	bl box_print
 	ldr r4, _0800CF38 @ =gUnknown_300500C
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
@@ -1479,7 +1479,7 @@ sub_800CED4: @ 800CED4
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x22
-	bl sub_812E51C
+	bl box_print
 	add sp, 0x2C
 	pop {r4-r6}
 	pop {r0}
@@ -1504,7 +1504,7 @@ sub_800CF3C: @ 800CF3C
 	cmp r0, 0
 	beq _0800CF64
 	movs r0, 0x1
-	bl sub_8088E8C
+	bl pokedex_count
 	b _0800CF6A
 	.align 2, 0
 _0800CF60: .4byte 0x00000829
@@ -1525,7 +1525,7 @@ _0800CF6A:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x32
-	bl sub_812E51C
+	bl box_print
 	add r0, sp, 0xC
 	adds r1, r6, 0
 	movs r2, 0
@@ -1541,7 +1541,7 @@ _0800CF6A:
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x32
-	bl sub_812E51C
+	bl box_print
 _0800CFAE:
 	add sp, 0x2C
 	pop {r4-r6}
@@ -1586,7 +1586,7 @@ _0800CFE2:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x42
-	bl sub_812E51C
+	bl box_print
 	add r0, sp, 0xC
 	adds r1, r6, 0
 	movs r2, 0x2
@@ -1602,7 +1602,7 @@ _0800CFE2:
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x42
-	bl sub_812E51C
+	bl box_print
 	add sp, 0x2C
 	pop {r4-r6}
 	pop {r0}

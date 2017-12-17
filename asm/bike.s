@@ -681,8 +681,8 @@ _080BD582:
 	bx r1
 	thumb_func_end sub_80BD540
 
-	thumb_func_start sub_80BD58C
-sub_80BD58C: @ 80BD58C
+	thumb_func_start player_should_look_direction_be_enforced_upon_movement
+player_should_look_direction_be_enforced_upon_movement: @ 80BD58C
 	push {lr}
 	movs r0, 0x4
 	bl TestPlayerAvatarFlags
@@ -711,7 +711,7 @@ _080BD5C0:
 _080BD5C2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BD58C
+	thumb_func_end player_should_look_direction_be_enforced_upon_movement
 
 	thumb_func_start sub_80BD5C8
 sub_80BD5C8: @ 80BD5C8
@@ -728,8 +728,8 @@ sub_80BD5C8: @ 80BD5C8
 	cmp r0, 0
 	beq _080BD5F8
 	movs r0, 0x1
-	bl sub_805BDEC
-	bl sub_8055E84
+	bl SetPlayerAvatarTransitionFlags
+	bl sav1_reset_battle_music_maybe
 	bl sub_8055DC4
 	b _080BD618
 	.align 2, 0
@@ -737,7 +737,7 @@ _080BD5F0: .4byte gUnknown_2036E2C
 _080BD5F4: .4byte gUnknown_2037078
 _080BD5F8:
 	adds r0, r2, 0
-	bl sub_805BDEC
+	bl SetPlayerAvatarTransitionFlags
 	movs r4, 0x8D
 	lsls r4, 1
 	adds r0, r4, 0

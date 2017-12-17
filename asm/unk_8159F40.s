@@ -818,7 +818,7 @@ sub_815A540: @ 815A540
 	ldr r0, _0815A5B4 @ =gUnknown_2036E38
 	adds r4, r0
 	movs r0, 0x1
-	bl sub_805BDEC
+	bl SetPlayerAvatarTransitionFlags
 	ldrb r1, [r4, 0x1A]
 	lsls r0, r1, 4
 	adds r0, r1

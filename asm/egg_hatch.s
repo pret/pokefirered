@@ -506,7 +506,7 @@ sub_8047004: @ 8047004
 	cmp r0, 0
 	bne _0804702C
 	bl sub_80563F0
-	ldr r0, _08047038 @ =sub_8047044
+	ldr r0, _08047038 @ =CB2_EggHatch_0
 	bl SetMainCallback2
 	ldr r1, _0804703C @ =gUnknown_3005020
 	ldr r0, _08047040 @ =sub_807DD24
@@ -519,13 +519,13 @@ _0804702C:
 	bx r0
 	.align 2, 0
 _08047034: .4byte gUnknown_2037AB8
-_08047038: .4byte sub_8047044
+_08047038: .4byte CB2_EggHatch_0
 _0804703C: .4byte gUnknown_3005020
 _08047040: .4byte sub_807DD24
 	thumb_func_end sub_8047004
 
-	thumb_func_start sub_8047044
-sub_8047044: @ 8047044
+	thumb_func_start CB2_EggHatch_0
+CB2_EggHatch_0: @ 8047044
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _08047064 @ =gUnknown_30030F0
@@ -632,7 +632,7 @@ _08047154: .4byte gUnknown_20370C2
 _08047158: .4byte gUnknown_826019C
 _0804715C:
 	ldr r0, _0804716C @ =gUnknown_82601A4
-	bl sub_8003B24
+	bl InitWindows
 	ldr r0, _08047170 @ =gUnknown_3000E74
 	ldr r1, [r0]
 	movs r0, 0
@@ -765,10 +765,10 @@ _0804727A:
 	.align 2, 0
 _08047298: .4byte sub_8047338
 _0804729C: .4byte gUnknown_3000E74
-	thumb_func_end sub_8047044
+	thumb_func_end CB2_EggHatch_0
 
-	thumb_func_start sub_80472A0
-sub_80472A0: @ 80472A0
+	thumb_func_start EggHatchSetMonNickname
+EggHatchSetMonNickname: @ 80472A0
 	push {lr}
 	ldr r0, _080472D0 @ =gUnknown_20370C0
 	ldrh r1, [r0]
@@ -794,7 +794,7 @@ _080472D4: .4byte gUnknown_2024284
 _080472D8: .4byte gUnknown_2021D04
 _080472DC: .4byte gUnknown_3000E74
 _080472E0: .4byte c2_exit_to_overworld_2_switch
-	thumb_func_end sub_80472A0
+	thumb_func_end EggHatchSetMonNickname
 
 	thumb_func_start sub_80472E4
 sub_80472E4: @ 80472E4
@@ -1004,7 +1004,7 @@ _08047482:
 	ldr r4, _080474DC @ =gUnknown_2021D18
 	ldr r1, _080474E0 @ =gUnknown_841B6FD
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0xFF
@@ -1061,7 +1061,7 @@ _08047504:
 	ldr r4, _08047540 @ =gUnknown_2021D18
 	ldr r1, _08047544 @ =gUnknown_841B716
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
@@ -1080,7 +1080,7 @@ _08047544: .4byte gUnknown_841B716
 _08047548:
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x8]
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r6, r0, 16
 	cmp r6, 0
@@ -1108,7 +1108,7 @@ _0804755A:
 	.align 2, 0
 _08047584: .4byte gUnknown_82601B4
 _08047588:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1173,19 +1173,19 @@ _080475A8:
 	movs r2, 0
 	bl GetMonData
 	str r0, [sp]
-	ldr r0, _08047630 @ =sub_80472A0
+	ldr r0, _08047630 @ =EggHatchSetMonNickname
 	str r0, [sp, 0x4]
 	movs r0, 0x3
 	mov r1, r10
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	b _08047684
 	.align 2, 0
 _08047624: .4byte gUnknown_3000E74
 _08047628: .4byte gUnknown_2024284
 _0804762C: .4byte gUnknown_2021D04
-_08047630: .4byte sub_80472A0
+_08047630: .4byte EggHatchSetMonNickname
 _08047634:
 	movs r0, 0x1
 	negs r0, r0
@@ -1806,7 +1806,7 @@ EggHatchPrintMessage: @ 8047A9C
 	movs r1, 0x3
 	adds r2, r6, 0
 	ldr r3, [sp, 0x14]
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x18
 	pop {r3}
 	mov r8, r3

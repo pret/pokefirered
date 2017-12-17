@@ -892,7 +892,7 @@ _08041AC8:
 	.4byte _0804202C
 _08041AE8:
 	mov r0, r8
-	bl sub_8043A40
+	bl GetMonEVCount
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _08041B28 @ =0x000001fd
@@ -1595,7 +1595,7 @@ _0804208C:
 	.4byte _080422B4
 _080420AC:
 	mov r0, r8
-	bl sub_8043A40
+	bl GetMonEVCount
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _080420F4 @ =0x000001fd

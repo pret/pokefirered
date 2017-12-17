@@ -439,7 +439,7 @@ _0813FB98:
 	cmp r0, 0x6
 	bne _0813FBA2
 	movs r0, 0x1C
-	bl sub_8054E90
+	bl IncrementGameStat
 _0813FBA2:
 	bl sub_8140A70
 	ldr r0, _0813FBB0 @ =sub_813FE1C
@@ -629,7 +629,7 @@ _0813FD00:
 	strh r0, [r4]
 	b _0813FD78
 _0813FD08:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3480,7 +3480,7 @@ _081411D0:
 	movs r2, 0x4
 	bl sub_8001658
 	ldr r0, _081413A4 @ =gUnknown_8466B20
-	bl sub_8003B24
+	bl InitWindows
 	ldr r1, _081413A8 @ =0x0000205c
 	add r1, r8
 	movs r0, 0x3
@@ -3603,7 +3603,7 @@ _081411D0:
 	movs r0, 0x1
 	movs r1, 0
 	movs r3, 0
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	movs r1, 0x83

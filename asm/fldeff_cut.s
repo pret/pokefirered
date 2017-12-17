@@ -172,7 +172,7 @@ sub_80979A0: @ 80979A0
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
 	movs r0, 0x12
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -214,7 +214,7 @@ sub_80979F0: @ 80979F0
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
 	movs r0, 0x12
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -410,29 +410,29 @@ _08097B8C:
 	adds r2, 0x2
 	adds r2, r3, r2
 	ldrh r2, [r2]
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 _08097BA0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8097B50
 
-	thumb_func_start sub_8097BA8
-sub_8097BA8: @ 8097BA8
+	thumb_func_start objc_8097BA8
+objc_8097BA8: @ 8097BA8
 	movs r2, 0
 	movs r1, 0x8
 	strh r1, [r0, 0x2E]
 	strh r2, [r0, 0x30]
 	strh r2, [r0, 0x34]
-	ldr r1, _08097BB8 @ =sub_8097BBC
+	ldr r1, _08097BB8 @ =objc_8097BBC
 	str r1, [r0, 0x1C]
 	bx lr
 	.align 2, 0
-_08097BB8: .4byte sub_8097BBC
-	thumb_func_end sub_8097BA8
+_08097BB8: .4byte objc_8097BBC
+	thumb_func_end objc_8097BA8
 
-	thumb_func_start sub_8097BBC
-sub_8097BBC: @ 8097BBC
+	thumb_func_start objc_8097BBC
+objc_8097BBC: @ 8097BBC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x32
@@ -478,7 +478,7 @@ _08097C0C:
 	bx r0
 	.align 2, 0
 _08097C14: .4byte sub_8097C18
-	thumb_func_end sub_8097BBC
+	thumb_func_end objc_8097BBC
 
 	thumb_func_start sub_8097C18
 sub_8097C18: @ 8097C18

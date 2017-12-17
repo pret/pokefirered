@@ -196,7 +196,7 @@ EvolutionScene: @ 80CDDF4
 	movs r0, 0x9
 	strb r0, [r1]
 	bl sub_800F34C
-	bl sub_800F420
+	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl remove_some_task
 	bl ResetTasks
@@ -517,7 +517,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	movs r0, 0x9
 	strb r0, [r1]
 	bl sub_800F34C
-	bl sub_800F420
+	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	ldr r1, _080CE2B4 @ =gUnknown_3003E58
@@ -1494,7 +1494,7 @@ _080CEAA0:
 	ldr r4, _080CEAC4 @ =gUnknown_2021D18
 	ldr r1, _080CEAC8 @ =gUnknown_83FE672
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80D87BC
@@ -1511,7 +1511,7 @@ _080CEAC8: .4byte gUnknown_83FE672
 _080CEACC: .4byte gUnknown_3005090
 _080CEAD0:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CEAE0
@@ -1799,7 +1799,7 @@ _080CED3A:
 	ldr r4, _080CEDA8 @ =gUnknown_2021D18
 	ldr r1, _080CEDAC @ =gUnknown_83FE688
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80D87BC
@@ -1837,7 +1837,7 @@ _080CED3A:
 	movs r1, 0x3
 	bl sub_8088E74
 	movs r0, 0xE
-	bl sub_8054E90
+	bl IncrementGameStat
 	b _080CF528
 	.align 2, 0
 _080CEDA8: .4byte gUnknown_2021D18
@@ -1846,7 +1846,7 @@ _080CEDB0: .4byte 0x00000103
 _080CEDB4: .4byte gUnknown_3005090
 _080CEDB8:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CEDC6
@@ -2042,7 +2042,7 @@ _080CEF48:
 	beq _080CEF70
 	ldr r0, _080CEF68 @ =gUnknown_2021D18
 	ldr r1, _080CEF6C @ =gUnknown_83FE6D0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	b _080CEF78
 	.align 2, 0
 _080CEF64: .4byte gUnknown_3005090
@@ -2051,7 +2051,7 @@ _080CEF6C: .4byte gUnknown_83FE6D0
 _080CEF70:
 	ldr r0, _080CEF90 @ =gUnknown_2021D18
 	ldr r1, _080CEF94 @ =gUnknown_83FE6B5
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _080CEF78:
 	ldr r0, _080CEF90 @ =gUnknown_2021D18
 	movs r1, 0
@@ -2070,7 +2070,7 @@ _080CEF94: .4byte gUnknown_83FE6B5
 _080CEF98: .4byte gUnknown_3005090
 _080CEF9C:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CEFAA
@@ -2087,7 +2087,7 @@ _080CEFB6:
 	bl PlayFanfare
 	ldr r0, _080CEFEC @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0xC]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CEFF0 @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2110,7 +2110,7 @@ _080CEFF0: .4byte gUnknown_202298C
 _080CEFF4: .4byte gUnknown_3005090
 _080CEFF8:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CF006
@@ -2175,7 +2175,7 @@ _080CF054:
 	.4byte _080CF504
 _080CF088:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CF096
@@ -2190,7 +2190,7 @@ _080CF0A2:
 	bl BufferMoveToLearnIntoBattleTextBuff2
 	ldr r0, _080CF0C8 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x10]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF0CC @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2208,7 +2208,7 @@ _080CF0CC: .4byte gUnknown_202298C
 _080CF0D0: .4byte gUnknown_3005090
 _080CF0D4:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CF0E2
@@ -2222,7 +2222,7 @@ _080CF0E2:
 _080CF0EE:
 	ldr r0, _080CF110 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x14]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF114 @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2240,7 +2240,7 @@ _080CF114: .4byte gUnknown_202298C
 _080CF118: .4byte gUnknown_3005090
 _080CF11C:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080CF15A
@@ -2250,7 +2250,7 @@ _080CF11C:
 	bne _080CF15A
 	ldr r0, _080CF1A8 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x18]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF1AC @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2268,7 +2268,7 @@ _080CF11C:
 	strh r0, [r1, 0x14]
 _080CF15A:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CF168
@@ -2507,7 +2507,7 @@ _080CF34C:
 	ldr r3, _080CF38C @ =0x000004cc
 	adds r0, r3
 	ldr r0, [r0]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF390 @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2563,7 +2563,7 @@ _080CF3E0:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF40C @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2581,7 +2581,7 @@ _080CF40C: .4byte gUnknown_202298C
 _080CF410: .4byte gUnknown_3005090
 _080CF414:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CF422
@@ -2595,7 +2595,7 @@ _080CF422:
 _080CF42E:
 	ldr r0, _080CF450 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x1C]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF454 @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2613,7 +2613,7 @@ _080CF454: .4byte gUnknown_202298C
 _080CF458: .4byte gUnknown_3005090
 _080CF45C:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080CF528
@@ -2626,7 +2626,7 @@ _080CF45C:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF49C @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2645,7 +2645,7 @@ _080CF4A0: .4byte gUnknown_3005090
 _080CF4A4:
 	ldr r0, _080CF4CC @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x20]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF4D0 @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2668,7 +2668,7 @@ _080CF4D4: .4byte gUnknown_3005090
 _080CF4D8:
 	ldr r0, _080CF4F8 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x24]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF4FC @ =gUnknown_202298C
 	movs r1, 0
 	bl sub_80D87BC
@@ -2687,7 +2687,7 @@ _080CF4FC: .4byte gUnknown_202298C
 _080CF500: .4byte gUnknown_3005090
 _080CF504:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080CF528
@@ -2813,7 +2813,7 @@ _080CF620:
 	ldr r4, _080CF640 @ =gUnknown_2021D18
 	ldr r1, _080CF644 @ =gUnknown_83FE672
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -2829,7 +2829,7 @@ _080CF644: .4byte gUnknown_83FE672
 _080CF648: .4byte gUnknown_3005090
 _080CF64C:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CF65C
@@ -3106,7 +3106,7 @@ _080CF8A8:
 	ldr r4, _080CF914 @ =gUnknown_2021D18
 	ldr r1, _080CF918 @ =gUnknown_83FE688
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -3144,7 +3144,7 @@ _080CF8A8:
 	movs r1, 0x3
 	bl sub_8088E74
 	movs r0, 0xE
-	bl sub_8054E90
+	bl IncrementGameStat
 	b _080D003A
 	.align 2, 0
 _080CF914: .4byte gUnknown_2021D18
@@ -3153,7 +3153,7 @@ _080CF91C: .4byte 0x00000103
 _080CF920: .4byte gUnknown_3005090
 _080CF924:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CF932
@@ -3233,7 +3233,7 @@ _080CF9C8: .4byte gUnknown_841E325
 _080CF9CC: .4byte gUnknown_3005090
 _080CF9D0:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0
@@ -3337,7 +3337,7 @@ _080CFAA8:
 	ldr r4, _080CFACC @ =gUnknown_2021D18
 	ldr r1, _080CFAD0 @ =gUnknown_83FE6D0
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -3355,7 +3355,7 @@ _080CFAD0: .4byte gUnknown_83FE6D0
 _080CFAD4: .4byte gUnknown_3005090
 _080CFAD8:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CFAE6
@@ -3372,7 +3372,7 @@ _080CFAF2:
 	bl PlayFanfare
 	ldr r0, _080CFB28 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0xC]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFB2C @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3395,7 +3395,7 @@ _080CFB2C: .4byte gUnknown_202298C
 _080CFB30: .4byte gUnknown_3005090
 _080CFB34:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CFB42
@@ -3458,7 +3458,7 @@ _080CFB90:
 	.4byte _080D0018
 _080CFBC0:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CFBCE
@@ -3473,7 +3473,7 @@ _080CFBDA:
 	bl BufferMoveToLearnIntoBattleTextBuff2
 	ldr r0, _080CFC00 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x10]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFC04 @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3491,7 +3491,7 @@ _080CFC04: .4byte gUnknown_202298C
 _080CFC08: .4byte gUnknown_3005090
 _080CFC0C:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CFC1A
@@ -3505,7 +3505,7 @@ _080CFC1A:
 _080CFC26:
 	ldr r0, _080CFC48 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x14]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFC4C @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3523,7 +3523,7 @@ _080CFC4C: .4byte gUnknown_202298C
 _080CFC50: .4byte gUnknown_3005090
 _080CFC54:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080CFC92
@@ -3533,7 +3533,7 @@ _080CFC54:
 	bne _080CFC92
 	ldr r0, _080CFCE8 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x18]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFCEC @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3551,7 +3551,7 @@ _080CFC54:
 	strh r0, [r1, 0x14]
 _080CFC92:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CFCA0
@@ -3597,7 +3597,7 @@ _080CFCF0: .4byte gUnknown_3005090
 _080CFCF4: .4byte gUnknown_826D1CC
 _080CFCF8: .4byte gUnknown_2023E82
 _080CFCFC:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r4, r0, 24
 	cmp r4, 0
@@ -3621,7 +3621,7 @@ _080CFD1C:
 	lsls r3, 3
 	adds r0, r3
 	ldr r0, [r0]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFD68 @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3661,7 +3661,7 @@ _080CFD70:
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFDA4 @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3778,7 +3778,7 @@ _080CFE74:
 	ldr r3, _080CFEB4 @ =0x000004cc
 	adds r0, r3
 	ldr r0, [r0]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFEB8 @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3821,7 +3821,7 @@ _080CFEC0:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFF20 @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3841,7 +3841,7 @@ _080CFF20: .4byte gUnknown_202298C
 _080CFF24: .4byte gUnknown_3005090
 _080CFF28:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CFF36
@@ -3855,7 +3855,7 @@ _080CFF36:
 _080CFF42:
 	ldr r0, _080CFF64 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x1C]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFF68 @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3873,7 +3873,7 @@ _080CFF68: .4byte gUnknown_202298C
 _080CFF6C: .4byte gUnknown_3005090
 _080CFF70:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080D003A
@@ -3886,7 +3886,7 @@ _080CFF70:
 	lsls r3, 2
 	adds r0, r3
 	ldr r0, [r0]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFFB0 @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3905,7 +3905,7 @@ _080CFFB4: .4byte gUnknown_3005090
 _080CFFB8:
 	ldr r0, _080CFFE0 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x20]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080CFFE4 @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3928,7 +3928,7 @@ _080CFFE8: .4byte gUnknown_3005090
 _080CFFEC:
 	ldr r0, _080D000C @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x24]
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, _080D0010 @ =gUnknown_202298C
 	movs r0, 0
 	movs r2, 0x1
@@ -3947,7 +3947,7 @@ _080D0010: .4byte gUnknown_202298C
 _080D0014: .4byte gUnknown_3005090
 _080D0018:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080D003A

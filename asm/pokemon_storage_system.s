@@ -754,7 +754,7 @@ sub_808BEB4: @ 808BEB4
 	orrs r0, r1
 	str r0, [r5, 0x4]
 	adds r0, r5, 0
-	bl sub_8003CE4
+	bl AddWindow
 	lsls r0, 16
 	lsrs r0, 16
 	mov r10, r0
@@ -769,7 +769,7 @@ sub_808BEB4: @ 808BEB4
 	bl FillWindowPixelBuffer
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r6, r0, 0
 	ldrb r0, [r5, 0x3]
 	lsls r0, 5
@@ -807,7 +807,7 @@ _0808BF3C:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldr r0, [sp, 0x50]
 	mov r10, r4
 	cmp r0, 0x6
@@ -922,7 +922,7 @@ sub_808BFE0: @ 808BFE0
 	lsrs r5, 24
 	lsls r5, 5
 	mov r0, r8
-	bl sub_8003CE4
+	bl AddWindow
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -934,7 +934,7 @@ sub_808BFE0: @ 808BFE0
 	bl FillWindowPixelBuffer
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r7, r0, 0
 	mov r0, r8
 	ldrb r0, [r0, 0x3]
@@ -960,7 +960,7 @@ sub_808BFE0: @ 808BFE0
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	lsrs r5, 1
 	adds r0, r7, 0
 	ldr r1, [sp, 0x24]
@@ -1775,8 +1775,8 @@ _0808C6D0: .4byte c3_0808C39C
 _0808C6D4: .4byte gUnknown_3005090
 	thumb_func_end sub_808C6A8
 
-	thumb_func_start sub_808C6D8
-sub_808C6D8: @ 808C6D8
+	thumb_func_start mapldr_0808C6D8
+mapldr_0808C6D8: @ 808C6D8
 	push {r4,r5,lr}
 	ldr r0, _0808C71C @ =gUnknown_30030F0
 	ldr r5, [r0, 0xC]
@@ -1810,7 +1810,7 @@ _0808C71C: .4byte gUnknown_30030F0
 _0808C720: .4byte c3_0808C39C
 _0808C724: .4byte gUnknown_3005090
 _0808C728: .4byte gUnknown_20397A8
-	thumb_func_end sub_808C6D8
+	thumb_func_end mapldr_0808C6D8
 
 	thumb_func_start sub_808C72C
 sub_808C72C: @ 808C72C
@@ -1825,7 +1825,7 @@ sub_808C72C: @ 808C72C
 	lsls r6, 24
 	lsrs r6, 24
 	ldr r0, _0808C7AC @ =gUnknown_83CDA48
-	bl sub_8003CE4
+	bl AddWindow
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -1884,7 +1884,7 @@ sub_808C7B4: @ 808C7B4
 	ldr r1, _0808C7D0 @ =gUnknown_20397A8
 	strb r0, [r1]
 	ldr r1, _0808C7D4 @ =gUnknown_3005020
-	ldr r0, _0808C7D8 @ =sub_808C6D8
+	ldr r0, _0808C7D8 @ =mapldr_0808C6D8
 	str r0, [r1]
 	ldr r0, _0808C7DC @ =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
@@ -1893,7 +1893,7 @@ sub_808C7B4: @ 808C7B4
 	.align 2, 0
 _0808C7D0: .4byte gUnknown_20397A8
 _0808C7D4: .4byte gUnknown_3005020
-_0808C7D8: .4byte sub_808C6D8
+_0808C7D8: .4byte mapldr_0808C6D8
 _0808C7DC: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_808C7B4
 
@@ -3377,7 +3377,7 @@ _0808D3DC:
 	ldr r1, _0808D40C @ =0x00000ce2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808D404
@@ -3491,7 +3491,7 @@ _0808D4D8:
 	ldr r1, _0808D504 @ =0x00000ce2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808D508
@@ -4109,7 +4109,7 @@ _0808DA20:
 	ldr r2, _0808DA54 @ =0x00000ce2
 	adds r0, r2
 	ldrh r0, [r0]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808DAA0
@@ -4154,7 +4154,7 @@ _0808DA90:
 	ldr r2, _0808DAA8 @ =0x00000ce2
 	adds r0, r1, r2
 	ldrh r0, [r0]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808DAAC
@@ -4700,7 +4700,7 @@ _0808DF24:
 	adds r0, 0x1
 	strb r0, [r1]
 _0808DF3A:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4971,7 +4971,7 @@ _0808E166:
 	ldr r1, _0808E17C @ =0x00000ce2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E180
@@ -5275,7 +5275,7 @@ _0808E3FC:
 	ldr r1, _0808E418 @ =0x00000ce2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E41C
@@ -5479,7 +5479,7 @@ _0808E59C:
 	.align 2, 0
 _0808E5B8: .4byte gUnknown_20397B0
 _0808E5BC:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6284,7 +6284,7 @@ _0808EC40:
 	.align 2, 0
 _0808EC50: .4byte gUnknown_30030F0
 _0808EC54:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6426,7 +6426,7 @@ _0808ED74:
 	.align 2, 0
 _0808ED84: .4byte gUnknown_30030F0
 _0808ED88:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6582,7 +6582,7 @@ _0808EEBC:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	b _0808EEF6
 	.align 2, 0
 _0808EEE4: .4byte sub_808CE60
@@ -6755,7 +6755,7 @@ _0808F040: .4byte 0x00005abc
 sub_808F044: @ 808F044
 	push {lr}
 	ldr r0, _0808F05C @ =gUnknown_83CEA30
-	bl sub_8003B24
+	bl InitWindows
 	lsls r0, 16
 	cmp r0, 0
 	beq _0808F060
@@ -6988,7 +6988,7 @@ BoxSetMosaic: @ 808F200
 	movs r0, 0x1
 	strh r0, [r2, 0x30]
 	ldr r2, [r1]
-	ldr r0, _0808F254 @ =sub_808F274
+	ldr r0, _0808F254 @ =BoxSetMosaic2
 	str r0, [r2, 0x1C]
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x2E]
@@ -7005,7 +7005,7 @@ _0808F248:
 	.align 2, 0
 _0808F24C: .4byte gUnknown_20397B0
 _0808F250: .4byte 0x00002238
-_0808F254: .4byte sub_808F274
+_0808F254: .4byte BoxSetMosaic2
 	thumb_func_end BoxSetMosaic
 
 	thumb_func_start sub_808F258
@@ -7024,8 +7024,8 @@ _0808F26C: .4byte gUnknown_20397B0
 _0808F270: .4byte 0x00002238
 	thumb_func_end sub_808F258
 
-	thumb_func_start sub_808F274
-sub_808F274: @ 808F274
+	thumb_func_start BoxSetMosaic2
+BoxSetMosaic2: @ 808F274
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x2E]
@@ -7063,7 +7063,7 @@ _0808F2B2:
 	bx r0
 	.align 2, 0
 _0808F2B8: .4byte nullsub_8
-	thumb_func_end sub_808F274
+	thumb_func_end BoxSetMosaic2
 
 	thumb_func_start sub_808F2BC
 sub_808F2BC: @ 808F2BC
@@ -18314,7 +18314,7 @@ _08094A48: .4byte gUnknown_20397B0
 _08094A4C: .4byte 0x00000ce2
 _08094A50:
 	ldrh r0, [r1]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08094A68
@@ -18344,7 +18344,7 @@ _08094A70:
 _08094A8C: .4byte 0x00000ce2
 _08094A90:
 	ldrh r0, [r1]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18915,7 +18915,7 @@ sub_8094E88: @ 8094E88
 	ldr r0, [r5]
 	ldr r1, _08094F84 @ =0x00000c68
 	adds r0, r1
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r5]
 	ldr r4, _08094F88 @ =0x00000cac
 	adds r1, r4

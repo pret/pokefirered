@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_812E51C
-sub_812E51C: @ 812E51C
+	thumb_func_start box_print
+box_print: @ 812E51C
 	push {r4-r6,lr}
 	sub sp, 0x10
 	adds r4, r1, 0
@@ -72,10 +72,10 @@ sub_812E51C: @ 812E51C
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812E51C
+	thumb_func_end box_print
 
-	thumb_func_start sub_812E5A4
-sub_812E5A4: @ 812E5A4
+	thumb_func_start AddTextPrinterParametrized2
+AddTextPrinterParametrized2: @ 812E5A4
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -143,7 +143,7 @@ sub_812E5A4: @ 812E5A4
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_812E5A4
+	thumb_func_end AddTextPrinterParametrized2
 
 	thumb_func_start sub_812E62C
 sub_812E62C: @ 812E62C
@@ -260,7 +260,7 @@ _0812E700:
 	bne _0812E700
 _0812E70A:
 	adds r0, r7, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	cmp r4, 0x5
 	beq _0812E73C
 	lsls r3, r5, 24

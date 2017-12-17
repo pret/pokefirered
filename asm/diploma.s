@@ -395,7 +395,7 @@ _080F4E66:
 	movs r2, 0
 	bl ChangeBgY
 	ldr r0, _080F4F94 @ =gUnknown_8415A10
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	movs r1, 0x82
 	lsls r1, 5
@@ -559,7 +559,7 @@ _080F5050:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x4
-	bl sub_812E51C
+	bl box_print
 	ldr r1, _080F50EC @ =gUnknown_841B619
 	add r0, sp, 0xC
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -579,7 +579,7 @@ _080F5050:
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0x1E
-	bl sub_812E51C
+	bl box_print
 	str r6, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -589,7 +589,7 @@ _080F5050:
 	movs r1, 0x2
 	movs r2, 0x78
 	movs r3, 0x69
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0
 	bl PutWindowTilemap
 	add sp, 0xAC

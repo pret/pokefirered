@@ -189,8 +189,8 @@ _080054B8:
 	bx r1
 	thumb_func_end Font5Func
 
-	thumb_func_start sub_80054C8
-sub_80054C8: @ 80054C8
+	thumb_func_start TextPrinterInitDownArrowCounters
+TextPrinterInitDownArrowCounters: @ 80054C8
 	push {lr}
 	adds r2, r0, 0
 	adds r2, 0x14
@@ -217,10 +217,10 @@ _080054E4:
 _080054F4:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80054C8
+	thumb_func_end TextPrinterInitDownArrowCounters
 
-	thumb_func_start sub_80054F8
-sub_80054F8: @ 80054F8
+	thumb_func_start TextPrinterDrawDownArrow
+TextPrinterDrawDownArrow: @ 80054F8
 	push {r4-r7,lr}
 	sub sp, 0x18
 	adds r5, r0, 0
@@ -330,7 +330,7 @@ _080055C2:
 	.align 2, 0
 _080055CC: .4byte gUnknown_81EA24C
 _080055D0: .4byte gUnknown_81EA64C
-	thumb_func_end sub_80054F8
+	thumb_func_end TextPrinterDrawDownArrow
 
 	thumb_func_start sub_80055D4
 sub_80055D4: @ 80055D4
@@ -407,7 +407,7 @@ TextPrinterWaitWithDownArrow: @ 8005634
 _08005654: .4byte gUnknown_3003E50
 _08005658:
 	adds r0, r2, 0
-	bl sub_80054F8
+	bl TextPrinterDrawDownArrow
 	ldr r0, _0800567C @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
@@ -1035,7 +1035,7 @@ _08005B26:
 _08005B28:
 	strb r0, [r6, 0x1C]
 	adds r0, r6, 0
-	bl sub_80054C8
+	bl TextPrinterInitDownArrowCounters
 _08005B30:
 	movs r0, 0x3
 	b _08005D6A
@@ -1333,8 +1333,8 @@ _08005D6A:
 	bx r1
 	thumb_func_end sub_8005790
 
-	thumb_func_start sub_8005D70
-sub_8005D70: @ 8005D70
+	thumb_func_start GetStringWidthFixedWidthFont
+GetStringWidthFixedWidthFont: @ 8005D70
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1471,10 +1471,10 @@ _08005E80:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8005D70
+	thumb_func_end GetStringWidthFixedWidthFont
 
-	thumb_func_start sub_8005EA4
-sub_8005EA4: @ 8005EA4
+	thumb_func_start GetFontWidthFunc
+GetFontWidthFunc: @ 8005EA4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1501,7 +1501,7 @@ _08005ECC:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8005EA4
+	thumb_func_end GetFontWidthFunc
 
 	thumb_func_start sub_8005ED4
 sub_8005ED4: @ 8005ED4
@@ -1521,7 +1521,7 @@ sub_8005ED4: @ 8005ED4
 	mov r9, r0
 	movs r7, 0
 	ldr r0, [sp]
-	bl sub_8005EA4
+	bl GetFontWidthFunc
 	mov r8, r0
 	cmp r0, 0
 	bne _08005F02
@@ -1693,7 +1693,7 @@ _08006054:
 _08006058:
 	adds r4, 0x1
 	ldrb r0, [r4]
-	bl sub_8005EA4
+	bl GetFontWidthFunc
 	mov r8, r0
 	cmp r0, 0
 	bne _08006068
@@ -1825,7 +1825,7 @@ sub_8006124: @ 8006124
 	mov r0, sp
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_8002F5C
+	bl SaveTextColors
 	movs r0, 0x1
 	str r0, [sp, 0x4]
 	movs r1, 0
@@ -1973,7 +1973,7 @@ _08006286:
 	adds r1, 0x1
 	mov r2, sp
 	adds r2, 0x2
-	bl sub_8002F7C
+	bl RestoreTextColors
 	movs r0, 0x1
 	add sp, 0xC
 	pop {r3-r5}

@@ -165,14 +165,14 @@ sub_80549F8: @ 80549F8
 	bx r0
 	thumb_func_end sub_80549F8
 
-	thumb_func_start sub_8054A18
-sub_8054A18: @ 8054A18
+	thumb_func_start Sav2_ClearSetDefault
+Sav2_ClearSetDefault: @ 8054A18
 	push {lr}
 	bl ClearSav2
 	bl SetDefaultOptions
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8054A18
+	thumb_func_end Sav2_ClearSetDefault
 
 	thumb_func_start sub_8054A28
 sub_8054A28: @ 8054A28

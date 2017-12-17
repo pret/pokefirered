@@ -244,8 +244,8 @@ _0805B0BC:
 	bx r1
 	thumb_func_end sub_805B060
 
-	thumb_func_start sub_805B0C4
-sub_805B0C4: @ 805B0C4
+	thumb_func_start door_find
+door_find: @ 805B0C4
 	push {lr}
 	adds r2, r0, 0
 	lsls r1, 16
@@ -267,10 +267,10 @@ _0805B0DA:
 _0805B0E2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805B0C4
+	thumb_func_end door_find
 
-	thumb_func_start sub_805B0E8
-sub_805B0E8: @ 805B0E8
+	thumb_func_start task_overworld_door_add_if_inactive
+task_overworld_door_add_if_inactive: @ 805B0E8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -319,7 +319,7 @@ _0805B140:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805B0E8
+	thumb_func_end task_overworld_door_add_if_inactive
 
 	thumb_func_start sub_805B14C
 sub_805B14C: @ 805B14C
@@ -342,7 +342,7 @@ sub_805B158: @ 805B158
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_805B0C4
+	bl door_find
 	adds r4, r0, 0
 	cmp r0, 0
 	beq _0805B196
@@ -397,7 +397,7 @@ sub_805B1B8: @ 805B1B8
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_805B0C4
+	bl door_find
 	adds r2, r0, 0
 	adds r4, r2, 0
 	cmp r2, 0
@@ -420,7 +420,7 @@ _0805B1F4:
 _0805B1F8:
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_805B0E8
+	bl task_overworld_door_add_if_inactive
 	lsls r0, 24
 	asrs r0, 24
 _0805B204:
@@ -444,7 +444,7 @@ sub_805B210: @ 805B210
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_805B0C4
+	bl door_find
 	adds r2, r0, 0
 	adds r4, r2, 0
 	cmp r2, 0
@@ -467,7 +467,7 @@ _0805B24C:
 _0805B250:
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_805B0E8
+	bl task_overworld_door_add_if_inactive
 	lsls r0, 24
 	asrs r0, 24
 _0805B25C:
@@ -648,7 +648,7 @@ sub_805B388: @ 805B388
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_805B0C4
+	bl door_find
 	cmp r0, 0
 	beq _0805B3AC
 	ldrb r0, [r0, 0x2]

@@ -141,7 +141,7 @@ _081420D6:
 	movs r3, 0
 	bl sub_80F696C
 	ldr r0, _081421E8 @ =gUnknown_8466D70
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	movs r1, 0xC0
 	lsls r1, 7
@@ -342,7 +342,7 @@ _08142362:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	movs r0, 0
 	adds r1, r6, 0
 	movs r2, 0
@@ -359,7 +359,7 @@ _08142362:
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	b _081423E8
 	.align 2, 0
 _081423A4: .4byte gUnknown_841EDCA
@@ -379,7 +379,7 @@ _081423B4:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -390,7 +390,7 @@ _081423B4:
 	movs r1, 0
 	movs r2, 0x78
 	movs r3, 0x2
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 _081423E8:
 	movs r0, 0
 	movs r1, 0x2

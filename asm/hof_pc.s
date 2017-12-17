@@ -76,7 +76,7 @@ sub_80CA5C0: @ 80CA5C0
 	sub sp, 0x4
 	bl ScriptContext2_Enable
 	bl sub_8055DC4
-	bl sub_809D040
+	bl sp109_CreatePCMenu
 	bl sub_809D254
 	movs r0, 0x1
 	negs r0, r0

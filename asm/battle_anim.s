@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80724C0
-sub_80724C0: @ 80724C0
+	thumb_func_start ClearBattleAnimationVars
+ClearBattleAnimationVars: @ 80724C0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -102,10 +102,10 @@ _0807258C: .4byte gUnknown_2037F24
 _08072590: .4byte 0x0000ffff
 _08072594: .4byte gUnknown_2037EEE
 _08072598: .4byte gUnknown_2037F02
-	thumb_func_end sub_80724C0
+	thumb_func_end ClearBattleAnimationVars
 
-	thumb_func_start sub_807259C
-sub_807259C: @ 807259C
+	thumb_func_start DoMoveAnim
+DoMoveAnim: @ 807259C
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 16
@@ -129,7 +129,7 @@ _080725C4: .4byte gUnknown_2023D6B
 _080725C8: .4byte gUnknown_2037F1B
 _080725CC: .4byte gUnknown_2023D6C
 _080725D0: .4byte gUnknown_81C68F4
-	thumb_func_end sub_807259C
+	thumb_func_end DoMoveAnim
 
 	thumb_func_start sub_80725D4
 sub_80725D4: @ 80725D4
@@ -1011,7 +1011,7 @@ _08072C88:
 	ldr r0, _08072CDC @ =gUnknown_2023D44
 	adds r0, r5, r0
 	ldrb r4, [r0]
-	ldr r0, _08072CE0 @ =sub_8073174
+	ldr r0, _08072CE0 @ =task_pA_ma0A_obj_to_bg_pal
 	movs r1, 0xA
 	bl CreateTask
 	lsls r0, 24
@@ -1045,7 +1045,7 @@ _08072C88:
 	.align 2, 0
 _08072CD8: .4byte gUnknown_2037F1B
 _08072CDC: .4byte gUnknown_2023D44
-_08072CE0: .4byte sub_8073174
+_08072CE0: .4byte task_pA_ma0A_obj_to_bg_pal
 _08072CE4: .4byte gUnknown_3005090
 _08072CE8: .4byte gUnknown_202063C
 _08072CEC: .4byte gUnknown_2022978
@@ -1095,7 +1095,7 @@ _08072D3E:
 	ldr r0, _08072D9C @ =gUnknown_2023D44
 	adds r0, r5, r0
 	ldrb r4, [r0]
-	ldr r0, _08072DA0 @ =sub_8073174
+	ldr r0, _08072DA0 @ =task_pA_ma0A_obj_to_bg_pal
 	movs r1, 0xA
 	bl CreateTask
 	lsls r0, 24
@@ -1132,7 +1132,7 @@ _08072D90: .4byte gUnknown_202297E
 _08072D94: .4byte gUnknown_3005090
 _08072D98: .4byte gUnknown_2037F14
 _08072D9C: .4byte gUnknown_2023D44
-_08072DA0: .4byte sub_8073174
+_08072DA0: .4byte task_pA_ma0A_obj_to_bg_pal
 _08072DA4: .4byte gUnknown_202063C
 _08072DA8: .4byte gUnknown_2022978
 _08072DAC: .4byte gUnknown_202297A
@@ -1589,8 +1589,8 @@ _0807316C: .4byte gUnknown_202297C
 _08073170: .4byte gUnknown_202297E
 	thumb_func_end sub_8073128
 
-	thumb_func_start sub_8073174
-sub_8073174: @ 8073174
+	thumb_func_start task_pA_ma0A_obj_to_bg_pal
+task_pA_ma0A_obj_to_bg_pal: @ 8073174
 	push {r4-r6,lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -1688,10 +1688,10 @@ _0807323C: .4byte gUnknown_202297C
 _08073240: .4byte gUnknown_202297E
 _08073244: .4byte gUnknown_20377F8
 _08073248: .4byte 0x04000008
-	thumb_func_end sub_8073174
+	thumb_func_end task_pA_ma0A_obj_to_bg_pal
 
-	thumb_func_start sub_807324C
-sub_807324C: @ 807324C
+	thumb_func_start ScriptCmd_clearmonbg
+ScriptCmd_clearmonbg: @ 807324C
 	push {r4,r5,lr}
 	ldr r0, _08073260 @ =gUnknown_2037ED4
 	ldr r2, [r0]
@@ -1796,7 +1796,7 @@ _080732E6:
 _08073310: .4byte sub_807331C
 _08073314: .4byte gUnknown_3005090
 _08073318: .4byte gUnknown_2037ED4
-	thumb_func_end sub_807324C
+	thumb_func_end ScriptCmd_clearmonbg
 
 	thumb_func_start sub_807331C
 sub_807331C: @ 807331C
@@ -3867,8 +3867,8 @@ _0807429E:
 	bx r0
 	thumb_func_end sub_807423C
 
-	thumb_func_start sub_80742A4
-sub_80742A4: @ 80742A4
+	thumb_func_start ScriptCmd_invisible
+ScriptCmd_invisible: @ 80742A4
 	push {r4,lr}
 	ldr r4, _080742D8 @ =gUnknown_2037ED4
 	ldr r0, [r4]
@@ -3898,10 +3898,10 @@ _080742CC:
 	.align 2, 0
 _080742D8: .4byte gUnknown_2037ED4
 _080742DC: .4byte gUnknown_202063C
-	thumb_func_end sub_80742A4
+	thumb_func_end ScriptCmd_invisible
 
-	thumb_func_start sub_80742E0
-sub_80742E0: @ 80742E0
+	thumb_func_start ScriptCmd_visible
+ScriptCmd_visible: @ 80742E0
 	push {r4,lr}
 	ldr r4, _08074318 @ =gUnknown_2037ED4
 	ldr r0, [r4]
@@ -3932,7 +3932,7 @@ _0807430A:
 	.align 2, 0
 _08074318: .4byte gUnknown_2037ED4
 _0807431C: .4byte gUnknown_202063C
-	thumb_func_end sub_80742E0
+	thumb_func_end ScriptCmd_visible
 
 	thumb_func_start sub_8074320
 sub_8074320: @ 8074320

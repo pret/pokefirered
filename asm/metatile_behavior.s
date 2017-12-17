@@ -163,8 +163,8 @@ _08059BB0:
 	bx r1
 	thumb_func_end sub_8059B90
 
-	thumb_func_start sub_8059BB4
-sub_8059BB4: @ 8059BB4
+	thumb_func_start MetatileBehavior_IsIce
+MetatileBehavior_IsIce: @ 8059BB4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -177,10 +177,10 @@ _08059BC2:
 _08059BC4:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059BB4
+	thumb_func_end MetatileBehavior_IsIce
 
-	thumb_func_start sub_8059BC8
-sub_8059BC8: @ 8059BC8
+	thumb_func_start MetatileBehavior_IsWarpDoor
+MetatileBehavior_IsWarpDoor: @ 8059BC8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -193,7 +193,7 @@ _08059BD6:
 _08059BD8:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059BC8
+	thumb_func_end MetatileBehavior_IsWarpDoor
 
 	thumb_func_start sub_8059BDC
 sub_8059BDC: @ 8059BDC
@@ -385,8 +385,8 @@ _08059CD8:
 	bx r1
 	thumb_func_end sub_8059CC8
 
-	thumb_func_start sub_8059CDC
-sub_8059CDC: @ 8059CDC
+	thumb_func_start MetatileBehavior_IsEastArrowWarp
+MetatileBehavior_IsEastArrowWarp: @ 8059CDC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -399,10 +399,10 @@ _08059CEA:
 _08059CEC:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059CDC
+	thumb_func_end MetatileBehavior_IsEastArrowWarp
 
-	thumb_func_start sub_8059CF0
-sub_8059CF0: @ 8059CF0
+	thumb_func_start MetatileBehavior_IsWestArrowWarp
+MetatileBehavior_IsWestArrowWarp: @ 8059CF0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -415,7 +415,7 @@ _08059CFE:
 _08059D00:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059CF0
+	thumb_func_end MetatileBehavior_IsWestArrowWarp
 
 	thumb_func_start sub_8059D04
 sub_8059D04: @ 8059D04
@@ -456,12 +456,12 @@ sub_8059D2C: @ 8059D2C
 	lsrs r4, r0, 24
 	movs r5, 0
 	adds r0, r4, 0
-	bl sub_8059CDC
+	bl MetatileBehavior_IsEastArrowWarp
 	lsls r0, 24
 	cmp r0, 0
 	bne _08059D64
 	adds r0, r4, 0
-	bl sub_8059CF0
+	bl MetatileBehavior_IsWestArrowWarp
 	lsls r0, 24
 	cmp r0, 0
 	bne _08059D64
@@ -914,8 +914,8 @@ _08059F84:
 	bx r1
 	thumb_func_end sub_8059F74
 
-	thumb_func_start sub_8059F88
-sub_8059F88: @ 8059F88
+	thumb_func_start MetatileBehavior_IsMB_0B
+MetatileBehavior_IsMB_0B: @ 8059F88
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -928,10 +928,10 @@ _08059F96:
 _08059F98:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059F88
+	thumb_func_end MetatileBehavior_IsMB_0B
 
-	thumb_func_start sub_8059F9C
-sub_8059F9C: @ 8059F9C
+	thumb_func_start MetatileBehavior_IsMountain
+MetatileBehavior_IsMountain: @ 8059F9C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -944,7 +944,7 @@ _08059FAA:
 _08059FAC:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059F9C
+	thumb_func_end MetatileBehavior_IsMountain
 
 	thumb_func_start sub_8059FB0
 sub_8059FB0: @ 8059FB0
@@ -1079,7 +1079,7 @@ MetatileBehavior_IsSurfableAndNotWaterfall: @ 805A050
 	cmp r0, 0
 	beq _0805A072
 	adds r0, r4, 0
-	bl sub_805A104
+	bl MetatileBehavior_IsWaterfall
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805A072
@@ -1183,8 +1183,8 @@ sub_805A0EC: @ 805A0EC
 	bx lr
 	thumb_func_end sub_805A0EC
 
-	thumb_func_start sub_805A0F0
-sub_805A0F0: @ 805A0F0
+	thumb_func_start MetatileBehavior_IsHotSprings
+MetatileBehavior_IsHotSprings: @ 805A0F0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1197,10 +1197,10 @@ _0805A0FE:
 _0805A100:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805A0F0
+	thumb_func_end MetatileBehavior_IsHotSprings
 
-	thumb_func_start sub_805A104
-sub_805A104: @ 805A104
+	thumb_func_start MetatileBehavior_IsWaterfall
+MetatileBehavior_IsWaterfall: @ 805A104
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1213,7 +1213,7 @@ _0805A112:
 _0805A114:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805A104
+	thumb_func_end MetatileBehavior_IsWaterfall
 
 	thumb_func_start sub_805A118
 sub_805A118: @ 805A118
@@ -1303,8 +1303,8 @@ sub_805A158: @ 805A158
 	bx lr
 	thumb_func_end sub_805A158
 
-	thumb_func_start sub_805A15C
-sub_805A15C: @ 805A15C
+	thumb_func_start MetatileBehavior_IsLavaridge1FWarp
+MetatileBehavior_IsLavaridge1FWarp: @ 805A15C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1317,10 +1317,10 @@ _0805A16A:
 _0805A16C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805A15C
+	thumb_func_end MetatileBehavior_IsLavaridge1FWarp
 
-	thumb_func_start sub_805A170
-sub_805A170: @ 805A170
+	thumb_func_start MetatileBehavior_IsAquaHideoutWarp
+MetatileBehavior_IsAquaHideoutWarp: @ 805A170
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1333,7 +1333,7 @@ _0805A17E:
 _0805A180:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805A170
+	thumb_func_end MetatileBehavior_IsAquaHideoutWarp
 
 	thumb_func_start sub_805A184
 sub_805A184: @ 805A184

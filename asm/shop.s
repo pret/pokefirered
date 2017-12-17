@@ -45,7 +45,7 @@ _0809AAF8:
 	strh r1, [r4, 0x16]
 	ldr r4, _0809AB6C @ =gUnknown_2039950
 	ldr r0, _0809AB70 @ =gUnknown_83DF0BC
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
@@ -1191,7 +1191,7 @@ _0809B450:
 _0809B45C:
 	ldr r1, _0809B490 @ =gUnknown_841697A
 	adds r0, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r2, _0809B48C @ =gUnknown_2021D18
 	str r5, [sp]
 	movs r0, 0
@@ -2121,7 +2121,7 @@ sub_809BB44: @ 809BB44
 	ldr r4, _0809BBB8 @ =gUnknown_2021D18
 	ldr r1, _0809BBBC @ =gUnknown_84162B9
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0xA
 	str r0, [sp]
 	movs r0, 0
@@ -2274,7 +2274,7 @@ sub_809BCA0: @ 809BCA0
 	ldr r6, _0809BD48 @ =gUnknown_2021D18
 	ldr r1, _0809BD4C @ =gUnknown_8416749
 	adds r0, r6, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [sp]
 	movs r0, 0
@@ -2526,7 +2526,7 @@ sub_809BF0C: @ 809BF0C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x26
-	bl sub_8054E90
+	bl IncrementGameStat
 	ldr r6, _0809BF58 @ =gUnknown_3005008
 	ldr r0, [r6]
 	movs r5, 0xA4
@@ -2955,7 +2955,7 @@ _0809C238:
 	orrs r2, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	b _0809C280
 	.align 2, 0
 _0809C26C: .4byte gUnknown_3005090
@@ -2966,7 +2966,7 @@ _0809C270:
 	orrs r2, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 _0809C280:
 	movs r2, 0x80
 	lsls r2, 9
@@ -3028,7 +3028,7 @@ _0809C2B8:
 	orrs r2, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	b _0809C30A
 _0809C2FA:
 	mov r1, r9
@@ -3037,7 +3037,7 @@ _0809C2FA:
 	orrs r2, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 _0809C30A:
 	movs r2, 0x80
 	lsls r2, 9
@@ -3328,14 +3328,14 @@ sub_809C500: @ 809C500
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	ldr r2, _0809C548 @ =0x00000eb5
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	adds r1, 0x2
 	ldr r2, _0809C54C @ =0x00000eb7
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	b _0809C56E
 	.align 2, 0
 _0809C544: .4byte gUnknown_3005098
@@ -3347,14 +3347,14 @@ _0809C550:
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	ldr r2, _0809C5EC @ =0x00000eb6
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	adds r1, 0x2
 	ldr r2, _0809C5F0 @ =0x00000eb8
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 _0809C56E:
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
@@ -3389,14 +3389,14 @@ _0809C588:
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	ldr r2, _0809C5F4 @ =0x00000e8a
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	adds r1, 0x2
 	ldr r2, _0809C5F8 @ =0x00000e96
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
@@ -3479,14 +3479,14 @@ sub_809C640: @ 809C640
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	ldr r2, _0809C6AC @ =0x00000e85
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	adds r1, 0x1
 	ldr r2, _0809C6B0 @ =0x00000eb4
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
@@ -3519,14 +3519,14 @@ _0809C6BA:
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	ldr r2, _0809C710 @ =0x00000eb9
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
 	adds r1, 0x1
 	ldr r2, _0809C714 @ =0x00000eba
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	movs r2, 0x6

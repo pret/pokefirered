@@ -10,8 +10,8 @@ nullsub_6: @ 8003B20
 	bx lr
 	thumb_func_end nullsub_6
 
-	thumb_func_start sub_8003B24
-sub_8003B24: @ 8003B24
+	thumb_func_start InitWindows
+InitWindows: @ 8003B24
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -154,7 +154,7 @@ _08003C2E:
 	cmp r4, 0
 	bne _08003C70
 	adds r0, r7, 0
-	bl sub_8004A34
+	bl GetNumActiveWindowsOnBg
 	lsls r0, 24
 	cmp r0, 0
 	bne _08003BB4
@@ -231,10 +231,10 @@ _08003CC8:
 _08003CD8: .4byte gUnknown_20204B4
 _08003CDC: .4byte gUnknown_3003D8C
 _08003CE0: .4byte gUnknown_3003E30
-	thumb_func_end sub_8003B24
+	thumb_func_end InitWindows
 
-	thumb_func_start sub_8003CE4
-sub_8003CE4: @ 8003CE4
+	thumb_func_start AddWindow
+AddWindow: @ 8003CE4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -337,7 +337,7 @@ _08003D96:
 	cmp r4, 0
 	bne _08003DE8
 	adds r0, r7, 0
-	bl sub_8004A34
+	bl GetNumActiveWindowsOnBg
 	lsls r0, 24
 	cmp r0, 0
 	bne _08003DCE
@@ -403,7 +403,7 @@ _08003E24:
 	.align 2, 0
 _08003E34: .4byte gUnknown_20204B4
 _08003E38: .4byte gUnknown_3003D8C
-	thumb_func_end sub_8003CE4
+	thumb_func_end AddWindow
 
 	thumb_func_start RemoveWindow
 RemoveWindow: @ 8003E3C
@@ -435,7 +435,7 @@ _08003E68:
 	str r0, [r4]
 	str r1, [r4, 0x4]
 	adds r0, r7, 0
-	bl sub_8004A34
+	bl GetNumActiveWindowsOnBg
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -1894,8 +1894,8 @@ _0800494A:
 	bx r1
 	thumb_func_end sub_80048BC
 
-	thumb_func_start sub_8004950
-sub_8004950: @ 8004950
+	thumb_func_start GetWindowAttribute
+GetWindowAttribute: @ 8004950
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -2006,10 +2006,10 @@ _08004A2C:
 _08004A2E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8004950
+	thumb_func_end GetWindowAttribute
 
-	thumb_func_start sub_8004A34
-sub_8004A34: @ 8004A34
+	thumb_func_start GetNumActiveWindowsOnBg
+GetNumActiveWindowsOnBg: @ 8004A34
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2034,6 +2034,6 @@ _08004A4C:
 	bx r1
 	.align 2, 0
 _08004A5C: .4byte gUnknown_20204B4
-	thumb_func_end sub_8004A34
+	thumb_func_end GetNumActiveWindowsOnBg
 
 	.align 2, 0 @ Don't pad with nop.

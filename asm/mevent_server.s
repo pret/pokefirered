@@ -695,7 +695,7 @@ _08144D3C:
 	b _08144E5A
 _08144D4E:
 	ldrb r0, [r2, 0x4]
-	bl sub_8054EC4
+	bl GetGameStat
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0x12

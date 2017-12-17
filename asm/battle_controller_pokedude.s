@@ -79,7 +79,7 @@ _08156128: .4byte gUnknown_2023BC4
 _0815612C: .4byte gUnknown_2022BC4
 _08156130: .4byte gUnknown_8478F1C
 _08156134:
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08156138:
 	pop {r4,r5}
 	pop {r0}
@@ -112,7 +112,7 @@ sub_815614C: @ 815614C
 	ldr r0, _08156180 @ =nullsub_8
 	cmp r1, r0
 	bne _08156170
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08156170:
 	pop {r0}
 	bx r0
@@ -201,7 +201,7 @@ _081561F8:
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl FreeSpritePaletteByTag
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08156230:
 	pop {r4-r7}
 	pop {r0}
@@ -214,11 +214,11 @@ _08156238: .4byte 0x000027f9
 sub_815623C: @ 815623C
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0815624E
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _0815624E:
 	pop {r0}
 	bx r0
@@ -273,7 +273,7 @@ sub_8156294: @ 8156294
 	ands r0, r1
 	cmp r0, 0
 	bne _081562D4
-	ldr r0, _081562E4 @ =sub_802FDF4
+	ldr r0, _081562E4 @ =c3_0802FDF4
 	movs r1, 0xA
 	bl CreateTask
 	ldr r2, _081562E8 @ =gUnknown_2023BCE
@@ -286,7 +286,7 @@ sub_8156294: @ 8156294
 	ldr r2, _081562EC @ =gUnknown_2024284
 	adds r0, r2
 	bl HandleLowHpMusicChange
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _081562D4:
 	pop {r4}
 	pop {r0}
@@ -294,7 +294,7 @@ _081562D4:
 	.align 2, 0
 _081562DC: .4byte gUnknown_2024018
 _081562E0: .4byte gUnknown_2023BC4
-_081562E4: .4byte sub_802FDF4
+_081562E4: .4byte c3_0802FDF4
 _081562E8: .4byte gUnknown_2023BCE
 _081562EC: .4byte gUnknown_2024284
 	thumb_func_end sub_8156294
@@ -493,7 +493,7 @@ sub_8156484: @ 8156484
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08156492
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08156492:
 	pop {r0}
 	bx r0
@@ -529,7 +529,7 @@ sub_815649C: @ 815649C
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x9]
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _081564D4:
 	pop {r4}
 	pop {r0}
@@ -618,7 +618,7 @@ _08156580:
 	movs r2, 0
 	bl EmitChosenMonReturnValue
 _0815658A:
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _0815658E:
 	pop {r0}
 	bx r0
@@ -684,7 +684,7 @@ sub_81565E8: @ 81565E8
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _0815660E:
 	pop {r0}
 	bx r0
@@ -981,7 +981,7 @@ _081567DA:
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl FreeSpritePaletteByTag
-	ldr r0, _081568C8 @ =sub_802FDF4
+	ldr r0, _081568C8 @ =c3_0802FDF4
 	movs r1, 0xA
 	bl CreateTask
 	ldr r2, _081568CC @ =gUnknown_2023BCE
@@ -1015,7 +1015,7 @@ _081568B8: .4byte gUnknown_2023BC4
 _081568BC: .4byte nullsub_8
 _081568C0: .4byte gUnknown_2024018
 _081568C4: .4byte 0x000027f9
-_081568C8: .4byte sub_802FDF4
+_081568C8: .4byte c3_0802FDF4
 _081568CC: .4byte gUnknown_2023BCE
 _081568D0: .4byte gUnknown_2024284
 _081568D4: .4byte gUnknown_3004FE0
@@ -1667,7 +1667,7 @@ sub_8156DCC: @ 8156DCC
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	b _08156E66
 	.align 2, 0
 _08156E2C: .4byte gUnknown_2023BC4
@@ -1693,7 +1693,7 @@ _08156E3C:
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08156E66:
 	pop {r4-r6}
 	pop {r0}
@@ -1748,7 +1748,7 @@ _08156EC0:
 	ldr r2, _08156EE4 @ =gUnknown_2024284
 	adds r0, r2
 	bl HandleLowHpMusicChange
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08156EDA:
 	pop {r4-r6}
 	pop {r0}
@@ -1762,11 +1762,11 @@ _08156EE4: .4byte gUnknown_2024284
 sub_8156EE8: @ 8156EE8
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _08156EFA
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08156EFA:
 	pop {r0}
 	bx r0
@@ -1800,7 +1800,7 @@ sub_8156F00: @ 8156F00
 	strb r0, [r2]
 	ldr r0, _08156F48 @ =gUnknown_2024005
 	strb r3, [r0]
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	b _08156F76
 	.align 2, 0
 _08156F3C: .4byte gUnknown_2023D44
@@ -1875,7 +1875,7 @@ sub_8156F7C: @ 8156F7C
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08156FD0:
 	pop {r4-r6}
 	pop {r0}
@@ -1906,7 +1906,7 @@ sub_8156FEC: @ 8156FEC
 	ldr r0, _08157020 @ =nullsub_8
 	cmp r1, r0
 	bne _08157010
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08157010:
 	pop {r0}
 	bx r0
@@ -1934,7 +1934,7 @@ sub_8157024: @ 8157024
 	ands r0, r1
 	cmp r0, 0
 	bne _08157046
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08157046:
 	pop {r0}
 	bx r0
@@ -1960,7 +1960,7 @@ sub_8157054: @ 8157054
 	ands r0, r1
 	cmp r0, 0
 	bne _08157076
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08157076:
 	pop {r0}
 	bx r0
@@ -1969,8 +1969,8 @@ _0815707C: .4byte gUnknown_2024018
 _08157080: .4byte gUnknown_2023BC4
 	thumb_func_end sub_8157054
 
-	thumb_func_start sub_8157084
-sub_8157084: @ 8157084
+	thumb_func_start PlayerPartnerBufferExecCompleted
+PlayerPartnerBufferExecCompleted: @ 8157084
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, _081570C4 @ =gUnknown_3004FE0
@@ -2024,10 +2024,10 @@ _081570EA:
 	.align 2, 0
 _081570F4: .4byte gUnknown_2023BC8
 _081570F8: .4byte gUnknown_825E45C
-	thumb_func_end sub_8157084
+	thumb_func_end PlayerPartnerBufferExecCompleted
 
-	thumb_func_start sub_81570FC
-sub_81570FC: @ 81570FC
+	thumb_func_start CompleteOnFinishedStatusAnimation_7
+CompleteOnFinishedStatusAnimation_7: @ 81570FC
 	push {lr}
 	ldr r0, _08157124 @ =gUnknown_2024018
 	ldr r2, [r0]
@@ -2043,14 +2043,14 @@ sub_81570FC: @ 81570FC
 	ands r0, r1
 	cmp r0, 0
 	bne _0815711E
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _0815711E:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08157124: .4byte gUnknown_2024018
 _08157128: .4byte gUnknown_2023BC4
-	thumb_func_end sub_81570FC
+	thumb_func_end CompleteOnFinishedStatusAnimation_7
 
 	thumb_func_start sub_815712C
 sub_815712C: @ 815712C
@@ -2103,7 +2103,7 @@ _08157186:
 	movs r0, 0x1
 	mov r2, sp
 	bl EmitDataTransfer
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
@@ -2843,7 +2843,7 @@ _0815779E:
 	cmp r5, 0x5
 	bls _08157790
 _081577AA:
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3884,7 +3884,7 @@ _081580D0: .4byte gUnknown_2024284
 	thumb_func_start sub_81580D4
 sub_81580D4: @ 81580D4
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81580D4
@@ -3922,7 +3922,7 @@ sub_81580E0: @ 81580E0
 	add r0, r10
 	bl BattleLoadOpponentMonSpriteGfx
 	ldrb r0, [r6]
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -4025,7 +4025,7 @@ sub_81580E0: @ 81580E0
 	adds r0, r1
 	ldr r1, _08158238 @ =sub_8156184
 	str r1, [r0]
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -4157,7 +4157,7 @@ _081582FC:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08158332:
 	pop {r4-r6}
 	pop {r0}
@@ -4497,7 +4497,7 @@ _0815860C: .4byte sub_8156FEC
 	thumb_func_start sub_8158610
 sub_8158610: @ 8158610
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8158610
@@ -4648,7 +4648,7 @@ _08158744: .4byte sub_8156DCC
 	thumb_func_start sub_8158748
 sub_8158748: @ 8158748
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8158748
@@ -4740,7 +4740,7 @@ _08158804: .4byte sub_8156484
 	thumb_func_start sub_8158808
 sub_8158808: @ 8158808
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8158808
@@ -4849,7 +4849,7 @@ sub_8158814: @ 8158814
 	lsrs r3, r0, 24
 	cmp r3, 0
 	beq _0815890C
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	b _0815892A
 	.align 2, 0
 _081588E8: .4byte gUnknown_2022BC4
@@ -4966,7 +4966,7 @@ _081589C6:
 	movs r0, 0
 	bl sub_8035450
 	adds r0, r4, 0
-	bl sub_807259C
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -5042,7 +5042,7 @@ _08158A40:
 	lsls r0, 2
 	adds r0, r2
 	strb r4, [r0, 0x4]
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08158A7C:
 	pop {r3,r4}
 	mov r8, r3
@@ -5118,7 +5118,7 @@ sub_8158AFC: @ 8158AFC
 	.align 2, 0
 _08158B14: .4byte gUnknown_2023BC4
 _08158B18:
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _08158B1C:
 	pop {r0}
 	bx r0
@@ -5180,7 +5180,7 @@ sub_8158B60: @ 8158B60
 _08158B8E:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _08158B8E
@@ -5190,9 +5190,9 @@ _08158B8E:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 	ldr r0, _08158BD4 @ =gUnknown_83FE6D5
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _08158BD8 @ =gUnknown_202298C
 	movs r1, 0x1
 	bl sub_80D87BC
@@ -5225,7 +5225,7 @@ _08158BF4: .4byte sub_8156140
 	thumb_func_start sub_8158BF8
 sub_8158BF8: @ 8158BF8
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8158BF8
@@ -5452,7 +5452,7 @@ _08158DC8: .4byte gUnknown_2024004
 	thumb_func_start sub_8158DCC
 sub_8158DCC: @ 8158DCC
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8158DCC
@@ -5590,7 +5590,7 @@ sub_8158ED0: @ 8158ED0
 	bl GetMonData
 	cmp r0, 0x63
 	bls _08158F08
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	b _08158F54
 	.align 2, 0
 _08158EFC: .4byte gUnknown_2022BC4
@@ -5824,7 +5824,7 @@ _081590BC:
 	movs r1, 0x37
 	mov r2, sp
 	bl sub_804037C
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -5839,7 +5839,7 @@ _081590FC: .4byte gUnknown_2023BC4
 	thumb_func_start sub_8159100
 sub_8159100: @ 8159100
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159100
@@ -5847,7 +5847,7 @@ sub_8159100: @ 8159100
 	thumb_func_start sub_815910C
 sub_815910C: @ 815910C
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_815910C
@@ -5855,7 +5855,7 @@ sub_815910C: @ 815910C
 	thumb_func_start sub_8159118
 sub_8159118: @ 8159118
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159118
@@ -5863,7 +5863,7 @@ sub_8159118: @ 8159118
 	thumb_func_start sub_8159124
 sub_8159124: @ 8159124
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159124
@@ -5871,7 +5871,7 @@ sub_8159124: @ 8159124
 	thumb_func_start sub_8159130
 sub_8159130: @ 8159130
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159130
@@ -5879,7 +5879,7 @@ sub_8159130: @ 8159130
 	thumb_func_start sub_815913C
 sub_815913C: @ 815913C
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_815913C
@@ -5887,7 +5887,7 @@ sub_815913C: @ 815913C
 	thumb_func_start sub_8159148
 sub_8159148: @ 8159148
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159148
@@ -5895,7 +5895,7 @@ sub_8159148: @ 8159148
 	thumb_func_start sub_8159154
 sub_8159154: @ 8159154
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159154
@@ -5903,7 +5903,7 @@ sub_8159154: @ 8159154
 	thumb_func_start sub_8159160
 sub_8159160: @ 8159160
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159160
@@ -5911,7 +5911,7 @@ sub_8159160: @ 8159160
 	thumb_func_start sub_815916C
 sub_815916C: @ 815916C
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_815916C
@@ -5919,7 +5919,7 @@ sub_815916C: @ 815916C
 	thumb_func_start sub_8159178
 sub_8159178: @ 8159178
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159178
@@ -5927,7 +5927,7 @@ sub_8159178: @ 8159178
 	thumb_func_start sub_8159184
 sub_8159184: @ 8159184
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159184
@@ -5950,7 +5950,7 @@ sub_8159190: @ 8159190
 	lsls r0, 29
 	cmp r0, 0
 	bge _081591C4
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	b _081591EE
 	.align 2, 0
 _081591B8: .4byte gUnknown_202063C
@@ -5990,7 +5990,7 @@ _081591FC: .4byte sub_8156F00
 	thumb_func_start sub_8159200
 sub_8159200: @ 8159200
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159200
@@ -6011,7 +6011,7 @@ sub_815920C: @ 815920C
 	lsls r1, 8
 	orrs r0, r1
 	bl sub_80722CC
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6035,7 +6035,7 @@ sub_815923C: @ 815923C
 	lsls r1, 8
 	orrs r0, r1
 	bl PlayFanfare
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6082,7 +6082,7 @@ _081592AC:
 	lsrs r0, 16
 	movs r1, 0x19
 	bl PlayCry1
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6107,7 +6107,7 @@ sub_81592D0: @ 81592D0
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6346,7 +6346,7 @@ sub_8159478: @ 8159478
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -6531,7 +6531,7 @@ sub_8159660: @ 8159660
 	lsls r0, 24
 	cmp r0, 0
 	bne _08159690
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	b _081596CE
 	.align 2, 0
 _08159688: .4byte gUnknown_2022BC4
@@ -6565,7 +6565,7 @@ _08159690:
 	ldrb r1, [r5]
 	adds r1, r2
 	strb r0, [r1]
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 _081596CE:
 	pop {r4,r5}
 	pop {r0}
@@ -6580,7 +6580,7 @@ _081596E0: .4byte gUnknown_2024000
 	thumb_func_start sub_81596E4
 sub_81596E4: @ 81596E4
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81596E4
@@ -6595,7 +6595,7 @@ sub_81596F0: @ 81596F0
 	ldrb r0, [r4]
 	movs r1, 0
 	bl dp11b_obj_free
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6606,7 +6606,7 @@ _08159710: .4byte gUnknown_2023BC4
 	thumb_func_start sub_8159714
 sub_8159714: @ 8159714
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8159714
@@ -6637,7 +6637,7 @@ sub_8159720: @ 8159720
 	lsls r0, 24
 	cmp r0, 0
 	beq _08159760
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	b _0815976C
 	.align 2, 0
 _08159758: .4byte gUnknown_2022BC4
@@ -6680,7 +6680,7 @@ sub_815977C: @ 815977C
 	movs r1, 0
 	bl dp11b_obj_free
 _081597A4:
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6692,7 +6692,7 @@ _081597B4: .4byte gUnknown_2023BC4
 	thumb_func_start sub_81597B8
 sub_81597B8: @ 81597B8
 	push {lr}
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81597B8
@@ -6713,7 +6713,7 @@ sub_81597C4: @ 81597C4
 	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	ldr r0, _08159814 @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x6
@@ -6847,7 +6847,7 @@ _081598E6:
 	movs r2, 0
 	bl EmitTwoReturnValues
 _081598F0:
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	ldr r3, _08159924 @ =gUnknown_3005EE0
 	ldr r2, _08159928 @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -6890,7 +6890,7 @@ _0815992C:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A98
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r2, r1, r5
 	lsls r0, r1, 2
@@ -6906,7 +6906,7 @@ _0815992C:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8030A54
+	bl ActionSelectionCreateCursorAt
 _08159972:
 	ldr r1, _08159990 @ =gUnknown_3005EE0
 	ldr r0, _08159994 @ =gUnknown_2023BC4
@@ -6985,7 +6985,7 @@ _081599DE:
 	movs r0, 0x1
 	movs r1, 0xA
 	bl EmitTwoReturnValues
-	bl sub_8157084
+	bl PlayerPartnerBufferExecCompleted
 	ldrb r0, [r6]
 	lsls r0, 2
 	add r0, r8
@@ -7027,7 +7027,7 @@ _08159A48:
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8030A14
+	bl MoveSelectionDestroyCursorAt
 	ldrb r1, [r6]
 	adds r2, r1, r5
 	lsls r0, r1, 2
@@ -7043,7 +7043,7 @@ _08159A48:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_80309CC
+	bl MoveSelectionCreateCursorAt
 _08159A8E:
 	ldr r1, _08159AB0 @ =gUnknown_3005EE0
 	ldr r0, _08159AB4 @ =gUnknown_2023BC4
@@ -7266,7 +7266,7 @@ _08159C44:
 	movs r0, 0
 	strh r0, [r1]
 	bl sub_8159EF0
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _08159C60 @ =gUnknown_202298C
 	movs r1, 0x18
 	bl sub_80D87BC
@@ -7276,7 +7276,7 @@ _08159C5C: .4byte gUnknown_2022976
 _08159C60: .4byte gUnknown_202298C
 _08159C64:
 	movs r0, 0x18
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -7467,7 +7467,7 @@ _08159DEA:
 _08159DF0: .4byte gUnknown_2037AB8
 _08159DF4:
 	bl sub_8159EF0
-	bl sub_80D77F4
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _08159E08 @ =gUnknown_202298C
 	movs r1, 0x18
 	bl sub_80D87BC
@@ -7476,7 +7476,7 @@ _08159DF4:
 _08159E08: .4byte gUnknown_202298C
 _08159E0C:
 	movs r0, 0x18
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0

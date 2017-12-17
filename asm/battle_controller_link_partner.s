@@ -644,7 +644,7 @@ _080D4714: .4byte gUnknown_3004FF0
 sub_80D4718: @ 80D4718
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080D472A
@@ -838,7 +838,7 @@ sub_80D484C: @ 80D484C
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl FreeSpritePaletteByTag
-	ldr r0, _080D4924 @ =sub_802FDF4
+	ldr r0, _080D4924 @ =c3_0802FDF4
 	movs r1, 0xA
 	bl CreateTask
 	ldr r0, _080D4928 @ =gUnknown_2023BCE
@@ -898,7 +898,7 @@ _080D490E:
 _080D4918: .4byte gUnknown_2024018
 _080D491C: .4byte gUnknown_2023BC4
 _080D4920: .4byte 0x000027f9
-_080D4924: .4byte sub_802FDF4
+_080D4924: .4byte c3_0802FDF4
 _080D4928: .4byte gUnknown_2023BCE
 _080D492C: .4byte gUnknown_2024284
 _080D4930: .4byte gUnknown_2023D44
@@ -3380,7 +3380,7 @@ sub_80D5DB4: @ 80D5DB4
 	lsls r5, 24
 	lsrs r5, 24
 	ldrb r0, [r6]
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3572,7 +3572,7 @@ sub_80D5F40: @ 80D5F40
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4466,7 +4466,7 @@ _080D66E0:
 	movs r0, 0
 	bl sub_8035450
 	adds r0, r4, 0
-	bl sub_807259C
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]

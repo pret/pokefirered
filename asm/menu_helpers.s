@@ -38,7 +38,7 @@ DisplayMessageAndContinueTask: @ 80BF474
 	beq _080BF4B8
 	adds r0, r4, 0
 	ldr r1, [sp, 0x30]
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _080BF4B8:
 	ldr r2, _080BF508 @ =gUnknown_3003E50
 	ldrb r0, [r2]
@@ -92,7 +92,7 @@ sub_80BF518: @ 80BF518
 	lsrs r4, 24
 	bl sub_8002DE8
 	adds r0, r4, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r4}
@@ -129,7 +129,7 @@ sub_80BF560: @ 80BF560
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -342,7 +342,7 @@ itemid_80BF6D8_mail_related: @ 80BF6D8
 	bne _080BF700
 _080BF6EE:
 	adds r0, r4, 0
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

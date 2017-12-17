@@ -67,7 +67,7 @@ sub_805B3E0: @ 805B3E0
 	bne _0805B448
 	adds r0, r5, 0
 	bl npc_clear_strange_bits
-	bl sub_805BE08
+	bl DoPlayerAvatarTransition
 	bl sub_805B5A0
 	lsls r0, 24
 	cmp r0, 0
@@ -1150,7 +1150,7 @@ _0805BBF8:
 	cmp r0, 0
 	beq _0805BC1C
 	movs r0, 0x2B
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x6
 	b _0805BC50
 _0805BC1C:
@@ -1394,8 +1394,8 @@ _0805BDE6:
 	bx r0
 	thumb_func_end sub_805BDAC
 
-	thumb_func_start sub_805BDEC
-sub_805BDEC: @ 805BDEC
+	thumb_func_start SetPlayerAvatarTransitionFlags
+SetPlayerAvatarTransitionFlags: @ 805BDEC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1403,15 +1403,15 @@ sub_805BDEC: @ 805BDEC
 	ldrb r1, [r2, 0x1]
 	orrs r0, r1
 	strb r0, [r2, 0x1]
-	bl sub_805BE08
+	bl DoPlayerAvatarTransition
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805BE04: .4byte gUnknown_2037078
-	thumb_func_end sub_805BDEC
+	thumb_func_end SetPlayerAvatarTransitionFlags
 
-	thumb_func_start sub_805BE08
-sub_805BE08: @ 805BE08
+	thumb_func_start DoPlayerAvatarTransition
+DoPlayerAvatarTransition: @ 805BE08
 	push {r4,r5,lr}
 	ldr r0, _0805BE50 @ =gUnknown_2037078
 	ldrb r4, [r0, 0x1]
@@ -1453,7 +1453,7 @@ _0805BE48:
 _0805BE50: .4byte gUnknown_2037078
 _0805BE54: .4byte gUnknown_835B844
 _0805BE58: .4byte gUnknown_2036E38
-	thumb_func_end sub_805BE08
+	thumb_func_end DoPlayerAvatarTransition
 
 	thumb_func_start nullsub_22
 nullsub_22: @ 805BE5C
@@ -2022,7 +2022,7 @@ sub_805C23C: @ 805C23C
 	movs r0, 0xA
 	bl sub_80722CC
 	adds r0, r4, 0
-	bl sub_8064110
+	bl GetJumpLedgeAnimId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8
@@ -2052,7 +2052,7 @@ sub_805C270: @ 805C270
 	cmp r0, 0
 	bne _0805C2A6
 _0805C27E:
-	bl sub_80BD58C
+	bl player_should_look_direction_be_enforced_upon_movement
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C2A6
@@ -2365,7 +2365,7 @@ _0805C4A0:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8059BC8
+	bl MetatileBehavior_IsWarpDoor
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805C4DE
@@ -3081,7 +3081,7 @@ SetPlayerAvatarExtraStateTransition: @ 805CA0C
 	ldrb r1, [r5, 0x1]
 	orrs r0, r1
 	strb r0, [r5, 0x1]
-	bl sub_805BE08
+	bl DoPlayerAvatarTransition
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3965,8 +3965,8 @@ sub_805D0F8: @ 805D0F8
 	lsrs r4, 24
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	bl sub_8055E84
-	bl sub_8055F1C
+	bl sav1_reset_battle_music_maybe
+	bl Overworld_ChangeMusicToDefault
 	ldr r2, _0805D148 @ =gUnknown_2037078
 	ldrb r1, [r2]
 	movs r0, 0xF7
@@ -3976,7 +3976,7 @@ sub_805D0F8: @ 805D0F8
 	strb r0, [r2]
 	movs r0, 0x1
 	strb r0, [r2, 0x6]
-	ldr r5, _0805D14C @ =sub_805D1D4
+	ldr r5, _0805D14C @ =taskFF_0805D1D4
 	adds r0, r5, 0
 	movs r1, 0xFF
 	bl CreateTask
@@ -3994,7 +3994,7 @@ sub_805D0F8: @ 805D0F8
 	bx r0
 	.align 2, 0
 _0805D148: .4byte gUnknown_2037078
-_0805D14C: .4byte sub_805D1D4
+_0805D14C: .4byte taskFF_0805D1D4
 _0805D150: .4byte gUnknown_3005090
 	thumb_func_end sub_805D0F8
 
@@ -4015,7 +4015,7 @@ sub_805D154: @ 805D154
 	strb r0, [r2]
 	movs r0, 0x1
 	strb r0, [r2, 0x6]
-	ldr r5, _0805D1A0 @ =sub_805D1D4
+	ldr r5, _0805D1A0 @ =taskFF_0805D1D4
 	adds r0, r5, 0
 	movs r1, 0xFF
 	bl CreateTask
@@ -4033,7 +4033,7 @@ sub_805D154: @ 805D154
 	bx r0
 	.align 2, 0
 _0805D19C: .4byte gUnknown_2037078
-_0805D1A0: .4byte sub_805D1D4
+_0805D1A0: .4byte taskFF_0805D1D4
 _0805D1A4: .4byte gUnknown_3005090
 	thumb_func_end sub_805D154
 
@@ -4060,8 +4060,8 @@ _0805D1CC: .4byte gUnknown_3005E88
 _0805D1D0: .4byte gUnknown_835B820
 	thumb_func_end sub_805D1A8
 
-	thumb_func_start sub_805D1D4
-sub_805D1D4: @ 805D1D4
+	thumb_func_start taskFF_0805D1D4
+taskFF_0805D1D4: @ 805D1D4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -4109,7 +4109,7 @@ _0805D230: .4byte gUnknown_2037078
 _0805D234: .4byte gUnknown_2036E38
 _0805D238: .4byte gUnknown_3005090
 _0805D23C: .4byte sub_805D240
-	thumb_func_end sub_805D1D4
+	thumb_func_end taskFF_0805D1D4
 
 	thumb_func_start sub_805D240
 sub_805D240: @ 805D240
@@ -4250,8 +4250,8 @@ sub_805D33C: @ 805D33C
 _0805D358: .4byte gUnknown_2037078
 	thumb_func_end sub_805D33C
 
-	thumb_func_start sub_805D35C
-sub_805D35C: @ 805D35C
+	thumb_func_start fish1
+fish1: @ 805D35C
 	push {r4-r6,lr}
 	sub sp, 0x10
 	adds r5, r0, 0
@@ -4318,10 +4318,10 @@ _0805D3E4: .4byte gUnknown_835B90C
 _0805D3E8: .4byte gUnknown_835B912
 _0805D3EC: .4byte gUnknown_2036E38
 _0805D3F0: .4byte gUnknown_2037078
-	thumb_func_end sub_805D35C
+	thumb_func_end fish1
 
-	thumb_func_start sub_805D3F4
-sub_805D3F4: @ 805D3F4
+	thumb_func_start fish2
+fish2: @ 805D3F4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _0805D428 @ =gUnknown_2037078
@@ -4350,7 +4350,7 @@ _0805D41E:
 	.align 2, 0
 _0805D428: .4byte gUnknown_2037078
 _0805D42C: .4byte gUnknown_202063C
-	thumb_func_end sub_805D3F4
+	thumb_func_end fish2
 
 	thumb_func_start sub_805D430
 sub_805D430: @ 805D430
@@ -4717,7 +4717,7 @@ _0805D6EA:
 	cmp r0, 0
 	bne _0805D788
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r6, r0, 16
 	cmp r6, 0
@@ -5032,7 +5032,7 @@ sub_805D980: @ 805D980
 	push {lr}
 	bl sub_8002DE8
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0

@@ -207,7 +207,7 @@ sub_814FE6C: @ 814FE6C
 	lsls r5, 24
 	lsrs r5, 24
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0814FEA8 @ =gUnknown_84566A8
@@ -239,7 +239,7 @@ sub_814FEAC: @ 814FEAC
 	lsls r5, 24
 	lsrs r5, 24
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0814FEE8 @ =gUnknown_841F1C8
@@ -271,7 +271,7 @@ sub_814FEEC: @ 814FEEC
 	lsls r5, 24
 	lsrs r5, 24
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0814FF28 @ =gUnknown_8470B0C
@@ -303,7 +303,7 @@ sub_814FF2C: @ 814FF2C
 	lsls r5, 24
 	lsrs r5, 24
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0814FF68 @ =gUnknown_8471A4C
@@ -332,7 +332,7 @@ sub_814FF6C: @ 814FF6C
 	lsls r4, 16
 	lsrs r4, 16
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0814FF94 @ =gUnknown_8471A4C
@@ -356,7 +356,7 @@ sub_814FF98: @ 814FF98
 	lsls r4, 16
 	lsrs r4, 16
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0814FFC0 @ =gUnknown_8471B6C
@@ -390,7 +390,7 @@ sub_814FFC4: @ 814FFC4
 	lsrs r1, 24
 	mov r8, r1
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _08150018 @ =gUnknown_8471E8C
@@ -459,25 +459,25 @@ sub_8150048: @ 8150048
 	str r2, [sp, 0xC]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8004950
+	bl GetWindowAttribute
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8004950
+	bl GetWindowAttribute
 	mov r9, r0
 	mov r2, r9
 	lsls r2, 16
@@ -485,7 +485,7 @@ sub_8150048: @ 8150048
 	mov r9, r2
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x10]
@@ -648,31 +648,31 @@ sub_81501D0: @ 81501D0
 	mov r10, r2
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8004950
+	bl GetWindowAttribute
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_8004950
+	bl GetWindowAttribute
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0xC]
@@ -836,14 +836,14 @@ rbox_fill_rectangle: @ 815036C
 	lsrs r6, 24
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_8004950
+	bl GetWindowAttribute
 	mov r9, r0
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_8004950
+	bl GetWindowAttribute
 	mov r8, r0
 	mov r1, r8
 	lsls r1, 16
@@ -851,19 +851,19 @@ rbox_fill_rectangle: @ 815036C
 	mov r8, r1
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r6, 0
 	movs r1, 0x4
-	bl sub_8004950
+	bl GetWindowAttribute
 	movs r1, 0x1
 	negs r1, r1
 	add r8, r1

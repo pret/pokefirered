@@ -925,7 +925,7 @@ _080361E0: .4byte gUnknown_3004FF0
 sub_80361E4: @ 80361E4
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080361F6
@@ -3638,7 +3638,7 @@ _08037890:
 	adds r0, r6
 	bl BattleLoadOpponentMonSpriteGfx
 	ldrb r0, [r4]
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	lsls r0, 24
 	lsrs r5, r0, 24
 _080378AA:
@@ -3770,8 +3770,8 @@ _080379C0: .4byte gUnknown_3004FE0
 _080379C4: .4byte sub_8035FE8
 	thumb_func_end sub_80377FC
 
-	thumb_func_start sub_80379C8
-sub_80379C8: @ 80379C8
+	thumb_func_start OpponentHandleSwitchInAnim
+OpponentHandleSwitchInAnim: @ 80379C8
 	push {r4,lr}
 	ldr r4, _08037A10 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -3813,7 +3813,7 @@ _08037A18: .4byte gUnknown_2023BCE
 _08037A1C: .4byte gUnknown_2022BC4
 _08037A20: .4byte gUnknown_3004FE0
 _08037A24: .4byte sub_8036408
-	thumb_func_end sub_80379C8
+	thumb_func_end OpponentHandleSwitchInAnim
 
 	thumb_func_start sub_8037A28
 sub_8037A28: @ 8037A28
@@ -3882,7 +3882,7 @@ sub_8037A28: @ 8037A28
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -5006,7 +5006,7 @@ _080383D0:
 	movs r0, 0
 	bl sub_8035450
 	adds r0, r4, 0
-	bl sub_807259C
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -6695,8 +6695,8 @@ sub_8039134: @ 8039134
 	bx r0
 	thumb_func_end sub_8039134
 
-	thumb_func_start sub_8039140
-sub_8039140: @ 8039140
+	thumb_func_start OpponentHandleCmd55
+OpponentHandleCmd55: @ 8039140
 	push {lr}
 	ldr r0, _08039174 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -6726,7 +6726,7 @@ _08039174: .4byte gUnknown_2022B4C
 _08039178: .4byte gUnknown_30030F0
 _0803917C: .4byte 0x00000439
 _08039180: .4byte gUnknown_3004F80
-	thumb_func_end sub_8039140
+	thumb_func_end OpponentHandleCmd55
 
 	thumb_func_start nullsub_18
 nullsub_18: @ 8039184

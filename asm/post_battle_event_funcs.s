@@ -9,7 +9,7 @@
 sub_80CA2E4: @ 80CA2E4
 	push {r4-r7,lr}
 	sub sp, 0x4
-	bl sub_80A0058
+	bl sp000_heal_pokemon
 	ldr r4, _080CA304 @ =0x0000082c
 	adds r0, r4, 0
 	bl FlagGet
@@ -31,7 +31,7 @@ _080CA30C:
 	bl FlagSet
 _080CA318:
 	movs r0, 0x1
-	bl sub_8054EC4
+	bl GetGameStat
 	cmp r0, 0
 	bne _080CA33A
 	ldr r0, _080CA3B4 @ =gUnknown_300500C
@@ -87,11 +87,11 @@ _080CA388:
 	cmp r6, 0x1
 	bne _080CA39E
 	movs r0, 0x2A
-	bl sub_8054E90
+	bl IncrementGameStat
 	ldr r0, _080CA3BC @ =0x0000083b
 	bl FlagSet
 _080CA39E:
-	ldr r0, _080CA3C0 @ =sub_80F1EFC
+	ldr r0, _080CA3C0 @ =CB2_DoHallOfFameScreen
 	bl SetMainCallback2
 	movs r0, 0
 	add sp, 0x4
@@ -103,7 +103,7 @@ _080CA3B0: .4byte gUnknown_203AB44
 _080CA3B4: .4byte gUnknown_300500C
 _080CA3B8: .4byte gUnknown_2024284
 _080CA3BC: .4byte 0x0000083b
-_080CA3C0: .4byte sub_80F1EFC
+_080CA3C0: .4byte CB2_DoHallOfFameScreen
 	thumb_func_end sub_80CA2E4
 
 	thumb_func_start sub_80CA3C4

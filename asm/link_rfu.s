@@ -4359,7 +4359,7 @@ _080FF4A2:
 	thumb_func_start sub_80FF4A8
 sub_80FF4A8: @ 80FF4A8
 	push {lr}
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4400,7 +4400,7 @@ _080FF4EA:
 	thumb_func_start sub_80FF4F0
 sub_80FF4F0: @ 80FF4F0
 	push {r4,lr}
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4446,7 +4446,7 @@ _080FF53E:
 	thumb_func_start sub_80FF544
 sub_80FF544: @ 80FF544
 	push {lr}
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6055,7 +6055,7 @@ _080FFFD4:
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
 	ldr r0, _08100030 @ =gUnknown_843F8B0
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	bl sub_8100CBC
 	bl sub_8100C5C
@@ -7823,7 +7823,7 @@ _08100E0A:
 	str r0, [sp, 0x8]
 	mov r0, r12
 	adds r2, r7, 0
-	bl sub_812E51C
+	bl box_print
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -8021,7 +8021,7 @@ sub_8100F44: @ 8100F44
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, _08100FD8 @ =gUnknown_203ACEC
 	ldr r1, [r1]
 	strh r0, [r1, 0x2]
@@ -10787,7 +10787,7 @@ sub_8102428: @ 8102428
 	orrs r0, r1
 	str r0, [sp, 0x10]
 	add r0, sp, 0xC
-	bl sub_8003CE4
+	bl AddWindow
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

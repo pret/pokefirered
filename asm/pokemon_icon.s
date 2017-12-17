@@ -166,7 +166,7 @@ mon_icon_convert_unown_species_id: @ 8096F5C
 	cmp r2, 0xC9
 	bne _08096F86
 	adds r0, r1, 0
-	bl sub_8096F98
+	bl mon_icon_personality_to_unown_id
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -195,8 +195,8 @@ _08096F92:
 	bx r1
 	thumb_func_end mon_icon_convert_unown_species_id
 
-	thumb_func_start sub_8096F98
-sub_8096F98: @ 8096F98
+	thumb_func_start mon_icon_personality_to_unown_id
+mon_icon_personality_to_unown_id: @ 8096F98
 	push {lr}
 	adds r2, r0, 0
 	cmp r2, 0
@@ -228,7 +228,7 @@ _08096FCE:
 _08096FD0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8096F98
+	thumb_func_end mon_icon_personality_to_unown_id
 
 	thumb_func_start sub_8096FD4
 sub_8096FD4: @ 8096FD4

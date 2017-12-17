@@ -363,7 +363,7 @@ _0815AEB4: .4byte 0x00002004
 sub_815AEB8: @ 815AEB8
 	push {lr}
 	ldr r0, _0815AEE4 @ =gUnknown_84792F0
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	movs r0, 0
 	movs r1, 0xCC
@@ -2164,7 +2164,7 @@ sub_815BC90: @ 815BC90
 	bl copy_player_party_to_sav1
 	bl sub_8159F40
 	movs r0, 0
-	bl sub_8044090
+	bl PlayMapChosenOrBattleBGM
 	ldrb r0, [r4, 0x5]
 	cmp r0, 0
 	bne _0815BCE0

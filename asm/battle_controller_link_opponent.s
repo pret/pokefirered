@@ -929,7 +929,7 @@ _0803ADD4: .4byte gUnknown_3004FF0
 CompleteOnInactiveTextPrinter_5: @ 803ADD8
 	push {lr}
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0803ADEA
@@ -3586,7 +3586,7 @@ sub_803C3B4: @ 803C3B4
 	lsls r5, 24
 	lsrs r5, 24
 	ldrb r0, [r6]
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3790,7 +3790,7 @@ sub_803C550: @ 803C550
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4609,8 +4609,8 @@ sub_803CC88: @ 803CC88
 	bx r0
 	thumb_func_end sub_803CC88
 
-	thumb_func_start sub_803CC94
-sub_803CC94: @ 803CC94
+	thumb_func_start RecordedOpponentHandleMoveAnimation
+RecordedOpponentHandleMoveAnimation: @ 803CC94
 	push {r4-r6,lr}
 	ldr r6, _0803CD78 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
@@ -4746,7 +4746,7 @@ _0803CD9C:
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0803CDC8 @ =sub_803CDCC
+	ldr r1, _0803CDC8 @ =RecordedOpponentDoMoveAnimation
 	str r1, [r0]
 _0803CDBA:
 	pop {r4-r6}
@@ -4755,11 +4755,11 @@ _0803CDBA:
 	.align 2, 0
 _0803CDC0: .4byte gUnknown_2024018
 _0803CDC4: .4byte gUnknown_3004FE0
-_0803CDC8: .4byte sub_803CDCC
-	thumb_func_end sub_803CC94
+_0803CDC8: .4byte RecordedOpponentDoMoveAnimation
+	thumb_func_end RecordedOpponentHandleMoveAnimation
 
-	thumb_func_start sub_803CDCC
-sub_803CDCC: @ 803CDCC
+	thumb_func_start RecordedOpponentDoMoveAnimation
+RecordedOpponentDoMoveAnimation: @ 803CDCC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4845,7 +4845,7 @@ _0803CE64:
 	movs r0, 0
 	bl sub_8035450
 	adds r0, r4, 0
-	bl sub_807259C
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -4947,7 +4947,7 @@ _0803CF40:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803CDCC
+	thumb_func_end RecordedOpponentDoMoveAnimation
 
 	thumb_func_start sub_803CF50
 sub_803CF50: @ 803CF50
@@ -5555,8 +5555,8 @@ _0803D3DC: .4byte gUnknown_2022BC4
 _0803D3E0: .4byte gUnknown_2023BC4
 	thumb_func_end sub_803D3B4
 
-	thumb_func_start sub_803D3E4
-sub_803D3E4: @ 803D3E4
+	thumb_func_start RecordedOpponentHandleFaintingCry
+RecordedOpponentHandleFaintingCry: @ 803D3E4
 	push {lr}
 	ldr r1, _0803D414 @ =gUnknown_2023BCE
 	ldr r0, _0803D418 @ =gUnknown_2023BC4
@@ -5582,10 +5582,10 @@ sub_803D3E4: @ 803D3E4
 _0803D414: .4byte gUnknown_2023BCE
 _0803D418: .4byte gUnknown_2023BC4
 _0803D41C: .4byte gUnknown_202402C
-	thumb_func_end sub_803D3E4
+	thumb_func_end RecordedOpponentHandleFaintingCry
 
-	thumb_func_start sub_803D420
-sub_803D420: @ 803D420
+	thumb_func_start RecordedOpponentHandleIntroSlide
+RecordedOpponentHandleIntroSlide: @ 803D420
 	push {lr}
 	ldr r1, _0803D448 @ =gUnknown_2022BC4
 	ldr r0, _0803D44C @ =gUnknown_2023BC4
@@ -5607,7 +5607,7 @@ sub_803D420: @ 803D420
 _0803D448: .4byte gUnknown_2022BC4
 _0803D44C: .4byte gUnknown_2023BC4
 _0803D450: .4byte gUnknown_2023F4C
-	thumb_func_end sub_803D420
+	thumb_func_end RecordedOpponentHandleIntroSlide
 
 	thumb_func_start sub_803D454
 sub_803D454: @ 803D454

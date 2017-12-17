@@ -806,7 +806,7 @@ _0810DA58:
 	ldr r4, _0810DAAC @ =gUnknown_2021D18
 	ldr r1, _0810DAB0 @ =gUnknown_84162B9
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	str r5, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -1221,7 +1221,7 @@ sub_810DD80: @ 810DD80
 	adds r0, r1
 	ldr r1, _0810DDA0 @ =0x0000029a
 	adds r0, r1
-	bl sub_8099DD8
+	bl GetBagItemId
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -1558,7 +1558,7 @@ sub_810DFE0: @ 810DFE0
 	ldr r4, _0810E0A8 @ =gUnknown_2021D18
 	ldr r1, _0810E0AC @ =gUnknown_841633F
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	movs r1, 0
 	bl FillWindowPixelBuffer
@@ -1890,7 +1890,7 @@ sub_810E274: @ 810E274
 	ldr r6, _0810E34C @ =gUnknown_2021D18
 	ldr r1, _0810E350 @ =gUnknown_84162FF
 	adds r0, r6, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [sp]
 	movs r0, 0x1
@@ -2058,7 +2058,7 @@ sub_810E418: @ 810E418
 	ldr r4, _0810E4AC @ =gUnknown_2021D18
 	ldr r1, _0810E4B0 @ =gUnknown_84177C5
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	bl sub_810EAB4
 	lsls r0, 24
@@ -2245,7 +2245,7 @@ sub_810E5E0: @ 810E5E0
 	ldr r5, _0810E664 @ =gUnknown_2021D18
 	ldr r1, _0810E668 @ =gUnknown_84177AC
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl sub_810EAB4
 	lsls r0, 24
@@ -2265,7 +2265,7 @@ sub_810E5E0: @ 810E5E0
 	bl sub_8008E78
 	ldr r1, _0810E66C @ =gUnknown_84162B9
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x3
 	bl sub_810EA9C
 	movs r0, 0xA
@@ -2319,7 +2319,7 @@ sub_810E670: @ 810E670
 	ldr r4, _0810E6D0 @ =gUnknown_2021D18
 	ldr r1, _0810E6D4 @ =gUnknown_84162B9
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0xA
 	str r0, [sp]
 	movs r1, 0x1
@@ -2589,7 +2589,7 @@ _0810E8EC: .4byte gUnknown_3005098
 sub_810E8F0: @ 810E8F0
 	push {r4,lr}
 	ldr r0, _0810E974 @ =gUnknown_8453F98
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	movs r1, 0xF0
 	lsls r1, 2
@@ -2782,7 +2782,7 @@ sub_810EA34: @ 810EA34
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -2821,7 +2821,7 @@ sub_810EAB4: @ 810EAB4
 	lsls r0, r1, 3
 	ldr r1, _0810EAE8 @ =gUnknown_8453FD0
 	adds r0, r1
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	ldr r2, _0810EAEC @ =0x000003a3

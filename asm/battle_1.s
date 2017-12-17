@@ -184,7 +184,7 @@ sub_800F324: @ 800F324
 	movs r2, 0x4
 	bl sub_8001658
 	ldr r0, _0800F348 @ =gUnknown_8248330
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	pop {r0}
 	bx r0
@@ -291,8 +291,8 @@ sub_800F40C: @ 800F40C
 	bx r0
 	thumb_func_end sub_800F40C
 
-	thumb_func_start sub_800F420
-sub_800F420: @ 800F420
+	thumb_func_start LoadBattleTextboxAndBackground
+LoadBattleTextboxAndBackground: @ 800F420
 	push {lr}
 	ldr r0, _0800F454 @ =gUnknown_8D00000
 	movs r1, 0xC0
@@ -317,7 +317,7 @@ sub_800F420: @ 800F420
 _0800F454: .4byte gUnknown_8D00000
 _0800F458: .4byte gUnknown_8D0051C
 _0800F45C: .4byte gUnknown_8D004D8
-	thumb_func_end sub_800F420
+	thumb_func_end LoadBattleTextboxAndBackground
 
 	thumb_func_start sub_800F460
 sub_800F460: @ 800F460

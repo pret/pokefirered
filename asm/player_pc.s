@@ -145,7 +145,7 @@ _080EB778: .4byte gUnknown_8402248
 _080EB77C:
 	ldr r0, _080EB804 @ =gUnknown_8402250
 _080EB77E:
-	bl sub_8003CE4
+	bl AddWindow
 	strh r0, [r7, 0x14]
 	ldrb r0, [r7, 0x14]
 	movs r1, 0
@@ -459,7 +459,7 @@ _080EBA18:
 	bl sub_812B1F0
 _080EBA1E:
 	ldr r0, _080EBA80 @ =gUnknown_8402258
-	bl sub_8003CE4
+	bl AddWindow
 	strh r0, [r6, 0x14]
 	lsls r0, 24
 	lsrs r0, 24
@@ -1255,7 +1255,7 @@ _080EC06C:
 	ldr r4, _080EC088 @ =gUnknown_2021D18
 	ldr r1, _080EC08C @ =gUnknown_8417806
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r3, _080EC090 @ =sub_80EC0D8
 	adds r0, r5, 0
 	movs r1, 0x2
@@ -1599,7 +1599,7 @@ sub_80EC324: @ 80EC324
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1

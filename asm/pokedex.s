@@ -72,8 +72,8 @@ sub_8088E74: @ 8088E74
 	bx r1
 	thumb_func_end sub_8088E74
 
-	thumb_func_start sub_8088E8C
-sub_8088E8C: @ 8088E8C
+	thumb_func_start pokedex_count
+pokedex_count: @ 8088E8C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -117,7 +117,7 @@ _08088ECA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8088E8C
+	thumb_func_end pokedex_count
 
 	thumb_func_start sub_8088EDC
 sub_8088EDC: @ 8088EDC

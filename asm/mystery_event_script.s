@@ -40,7 +40,7 @@ sub_80DA830: @ 80DA830
 	push {lr}
 	ldr r0, _080DA844 @ =gUnknown_2021D18
 	ldr r1, _080DA848 @ =gUnknown_8488DFD
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x3
 	bl sub_80DA8E8
 	pop {r0}
@@ -57,10 +57,10 @@ sub_80DA84C: @ 80DA84C
 	adds r5, r1, 0
 	ldr r1, _080DA874 @ =gUnknown_81DBCF0
 	ldr r2, _080DA878 @ =0x081dbd34
-	bl sub_80697AC
+	bl InitScriptContext
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80697E8
+	bl SetupBytecodeScript
 	str r5, [r4, 0x64]
 	movs r0, 0
 	str r0, [r4, 0x68]
@@ -151,7 +151,7 @@ _080DA8F0: .4byte gUnknown_203AA3C
 	thumb_func_start script_status_stop_and_ret_1
 script_status_stop_and_ret_1: @ 80DA8F4
 	push {lr}
-	bl sub_80697FC
+	bl StopScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -234,7 +234,7 @@ sub_80DA964: @ 80DA964
 	bne _080DA98E
 _080DA988:
 	ldr r0, _080DA998 @ =gUnknown_2021D18
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 _080DA98E:
 	movs r0, 0
 	pop {r4,r5}
@@ -267,7 +267,7 @@ sub_80DA9B8: @ 80DA9B8
 	mov r6, r8
 	push {r6,r7}
 	adds r7, r0, 0
-	bl sub_809C854
+	bl IsEnigmaBerryValid
 	mov r8, r0
 	adds r0, r7, 0
 	bl ScriptReadWord
@@ -321,10 +321,10 @@ _080DAA40:
 	ldr r0, _080DAA60 @ =gUnknown_2021D18
 	ldr r1, _080DAA64 @ =gUnknown_8488CCE
 _080DAA44:
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r7, 0x6C]
-	bl sub_809C854
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _080DAA6C
 	ldr r0, _080DAA68 @ =0x00004033
@@ -362,7 +362,7 @@ sub_80DAA80: @ 80DAA80
 	bl GiveGiftRibbonToParty
 	ldr r0, _080DAAAC @ =gUnknown_2021D18
 	ldr r1, _080DAAB0 @ =gUnknown_8488CF6
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
 	movs r0, 0
@@ -433,7 +433,7 @@ sub_80DAB1C: @ 80DAB1C
 	bl sub_806E22C
 	ldr r0, _080DAB38 @ =gUnknown_2021D18
 	ldr r1, _080DAB3C @ =gUnknown_8488D2A
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
 	movs r0, 0
@@ -456,7 +456,7 @@ sub_80DAB40: @ 80DAB40
 	bl sub_80BDB70
 	ldr r0, _080DAB64 @ =gUnknown_2021D18
 	ldr r1, _080DAB68 @ =gUnknown_8488D60
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
 	movs r0, 0
@@ -530,7 +530,7 @@ _080DABDA:
 	bne _080DAC04
 	ldr r0, _080DABFC @ =gUnknown_2021D18
 	ldr r1, _080DAC00 @ =gUnknown_8488D8E
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x3
 	b _080DAC6E
 	.align 2, 0
@@ -570,7 +570,7 @@ _080DAC3E:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DAC5C
@@ -582,7 +582,7 @@ _080DAC5C:
 	bl CalculatePlayerPartyCount
 	ldr r0, _080DAC84 @ =gUnknown_2021D18
 	ldr r1, _080DAC88 @ =gUnknown_8488D7C
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 _080DAC6E:
 	str r0, [r6, 0x6C]
@@ -619,7 +619,7 @@ sub_80DAC8C: @ 80DAC8C
 	bl sub_80E7490
 	ldr r0, _080DACCC @ =gUnknown_2021D18
 	ldr r1, _080DACD0 @ =gUnknown_8488DBD
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
 	movs r0, 0

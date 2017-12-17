@@ -5524,7 +5524,7 @@ AddTextPrinterAndCreateWindowOnHealthbox: @ 804A648
 	str r0, [sp, 0x18]
 	str r1, [sp, 0x1C]
 	add r0, sp, 0x18
-	bl sub_8003CE4
+	bl AddWindow
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -5559,12 +5559,12 @@ AddTextPrinterAndCreateWindowOnHealthbox: @ 804A648
 	movs r1, 0
 	adds r2, r6, 0
 	mov r3, r8
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	mov r0, r10
 	str r4, [r0]
 	adds r0, r5, 0
 	movs r1, 0x7
-	bl sub_8004950
+	bl GetWindowAttribute
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3

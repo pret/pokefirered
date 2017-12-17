@@ -89,7 +89,7 @@ MonHasMail: @ 8097D08
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08097D30
@@ -346,7 +346,7 @@ sub_8097F00: @ 8097F00
 	cmp r0, 0xC9
 	bne _08097F18
 	adds r0, r1, 0
-	bl sub_8096F98
+	bl mon_icon_personality_to_unown_id
 	lsls r0, 16
 	ldr r1, _08097F1C @ =0x75300000
 	adds r0, r1
@@ -605,8 +605,8 @@ _080980E8:
 	bx r1
 	thumb_func_end sub_809803C
 
-	thumb_func_start sub_80980F8
-sub_80980F8: @ 80980F8
+	thumb_func_start itemid_is_mail
+itemid_is_mail: @ 80980F8
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -621,6 +621,6 @@ _0809810A:
 _0809810C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80980F8
+	thumb_func_end itemid_is_mail
 
 	.align 2, 0 @ Don't pad with nop.

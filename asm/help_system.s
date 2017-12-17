@@ -384,7 +384,7 @@ sub_813BBC8: @ 813BBC8
 	ldr r0, _0813BBD8 @ =gUnknown_203F18A
 	adds r1, r0, 0x1
 	adds r2, r0, 0x2
-	bl sub_8002F5C
+	bl SaveTextColors
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -453,7 +453,7 @@ sub_813BC48: @ 813BC48
 	ldr r0, _0813BC58 @ =gUnknown_203F18A
 	adds r1, r0, 0x1
 	adds r2, r0, 0x2
-	bl sub_8002F7C
+	bl RestoreTextColors
 	pop {r0}
 	bx r0
 	.align 2, 0

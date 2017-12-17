@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8033DB8
-sub_8033DB8: @ 8033DB8
+	thumb_func_start AllocateBattleSpritesData
+AllocateBattleSpritesData: @ 8033DB8
 	push {r4,lr}
 	ldr r4, _08033DF4 @ =gUnknown_2024018
 	movs r0, 0x10
@@ -33,10 +33,10 @@ sub_8033DB8: @ 8033DB8
 	bx r0
 	.align 2, 0
 _08033DF4: .4byte gUnknown_2024018
-	thumb_func_end sub_8033DB8
+	thumb_func_end AllocateBattleSpritesData
 
-	thumb_func_start sub_8033DF8
-sub_8033DF8: @ 8033DF8
+	thumb_func_start FreeBattleSpritesData
+FreeBattleSpritesData: @ 8033DF8
 	push {r4,r5,lr}
 	ldr r5, _08033E38 @ =gUnknown_2024018
 	ldr r0, [r5]
@@ -67,7 +67,7 @@ _08033E32:
 	bx r0
 	.align 2, 0
 _08033E38: .4byte gUnknown_2024018
-	thumb_func_end sub_8033DF8
+	thumb_func_end FreeBattleSpritesData
 
 	thumb_func_start sub_8033E3C
 sub_8033E3C: @ 8033E3C
@@ -1913,7 +1913,7 @@ _08034C16:
 	adds r0, r7, 0
 	bl Free
 	mov r0, r9
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	ldrb r2, [r4]
 	lsls r1, r2, 4
 	adds r1, r2
@@ -2037,7 +2037,7 @@ _08034D88:
 	bl CpuSet
 _08034E0E:
 	mov r0, r9
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	ldrb r2, [r5]
 	lsls r1, r2, 4
 	adds r1, r2
@@ -2284,7 +2284,7 @@ _08034FFC:
 	ldrb r0, [r0]
 	strb r0, [r4]
 	mov r0, r9
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 	ldr r1, [sp, 0x10]
 	ldrb r2, [r1]
 	lsls r1, r2, 4
@@ -2473,14 +2473,14 @@ LoadBattleMonGfxAndAnimate: @ 80351A8
 	cmp r5, 0
 	bne _080351EC
 	adds r0, r6, 0
-	bl sub_80748BC
+	bl GetSubstituteSpriteDefault_Y
 	b _080351F2
 	.align 2, 0
 _080351E4: .4byte gUnknown_202063C
 _080351E8: .4byte gUnknown_2024024
 _080351EC:
 	adds r0, r6, 0
-	bl sub_80748A8
+	bl GetBankSpriteDefault_Y
 _080351F2:
 	lsls r0, 24
 	lsrs r0, 24

@@ -217,7 +217,7 @@ _0814BCA2:
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldrb r3, [r7, 0xB]
 	str r6, [sp]
 	mov r0, r8
@@ -260,7 +260,7 @@ _0814BD12:
 _0814BD1C: .4byte gUnknown_846E328
 _0814BD20:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0814BD6E
@@ -2949,7 +2949,7 @@ _0814D1CA:
 	bl sub_80F7858
 	b _0814D230
 _0814D1D0:
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -3259,7 +3259,7 @@ _0814D40C:
 _0814D418: .4byte gUnknown_846E328
 _0814D41C:
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0814D45C
@@ -3367,7 +3367,7 @@ sub_814D4D8: @ 814D4D8
 	adds r4, r0, 0
 	movs r5, 0
 	movs r0, 0x33
-	bl sub_8054E90
+	bl IncrementGameStat
 	strb r5, [r4, 0xD]
 	movs r1, 0
 	strh r5, [r4, 0x10]

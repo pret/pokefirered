@@ -381,7 +381,7 @@ sub_813EF40: @ 813EF40
 	strh r5, [r0]
 	ldrh r1, [r1]
 	movs r0, 0
-	bl sub_80CBED4
+	bl TV_PrintIntToStringVar
 	strh r5, [r4, 0x4]
 	movs r0, 0
 	strh r0, [r4]
@@ -524,7 +524,7 @@ sub_813F070: @ 813F070
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r6, r2, 0
-	bl sub_80589C4
+	bl mapconnection_get_mapheader
 	adds r3, r0, 0
 	ldrb r0, [r4]
 	cmp r0, 0x2

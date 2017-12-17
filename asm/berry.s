@@ -47,7 +47,7 @@ _0809C740:
 	ldr r0, [r4]
 	ldr r3, _0809C780 @ =0x000030ec
 	adds r0, r3
-	bl sub_809C838
+	bl GetEnigmaBerryChecksum
 	ldr r1, [r4]
 	ldr r4, _0809C790 @ =0x0000311c
 	adds r1, r4
@@ -133,7 +133,7 @@ _0809C7F0:
 	adds r1, 0x1
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_809C838
+	bl GetEnigmaBerryChecksum
 	str r0, [r4, 0x30]
 	pop {r4-r7}
 	pop {r0}
@@ -146,8 +146,8 @@ _0809C830: .4byte 0x00000516
 _0809C834: .4byte 0x00000529
 	thumb_func_end sub_809C7C4
 
-	thumb_func_start sub_809C838
-sub_809C838: @ 809C838
+	thumb_func_start GetEnigmaBerryChecksum
+GetEnigmaBerryChecksum: @ 809C838
 	push {lr}
 	adds r3, r0, 0
 	movs r2, 0
@@ -162,10 +162,10 @@ _0809C840:
 	adds r0, r2, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809C838
+	thumb_func_end GetEnigmaBerryChecksum
 
-	thumb_func_start sub_809C854
-sub_809C854: @ 809C854
+	thumb_func_start IsEnigmaBerryValid
+IsEnigmaBerryValid: @ 809C854
 	push {r4,lr}
 	ldr r4, _0809C888 @ =gUnknown_3005008
 	ldr r1, [r4]
@@ -182,7 +182,7 @@ sub_809C854: @ 809C854
 	beq _0809C898
 	ldr r2, _0809C890 @ =0x000030ec
 	adds r0, r1, r2
-	bl sub_809C838
+	bl GetEnigmaBerryChecksum
 	ldr r1, [r4]
 	ldr r2, _0809C894 @ =0x0000311c
 	adds r1, r2
@@ -202,7 +202,7 @@ _0809C89A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809C854
+	thumb_func_end IsEnigmaBerryValid
 
 	thumb_func_start sub_809C8A0
 sub_809C8A0: @ 809C8A0
@@ -211,7 +211,7 @@ sub_809C8A0: @ 809C8A0
 	lsrs r4, r0, 24
 	cmp r4, 0x2B
 	bne _0809C8C4
-	bl sub_809C854
+	bl IsEnigmaBerryValid
 	cmp r0, 0
 	beq _0809C8C4
 	ldr r0, _0809C8BC @ =gUnknown_3005008

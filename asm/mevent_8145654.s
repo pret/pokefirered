@@ -214,7 +214,7 @@ _08145790:
 	bl decompress_and_copy_tile_data_to_vram
 	ldr r4, _08145830 @ =gUnknown_8467074
 	adds r0, r4, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r5]
 	movs r2, 0xBB
 	lsls r2, 1
@@ -222,7 +222,7 @@ _08145790:
 	strh r0, [r1]
 	adds r0, r4, 0
 	adds r0, 0x8
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r5]
 	movs r2, 0xBC
 	lsls r2, 1
@@ -230,7 +230,7 @@ _08145790:
 	strh r0, [r1]
 	adds r4, 0x10
 	adds r0, r4, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r5]
 	movs r2, 0xBD
 	lsls r2, 1
@@ -920,7 +920,7 @@ _08145D70:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_812E51C
+	bl box_print
 	ldr r4, [r7]
 	movs r1, 0xDA
 	lsls r1, 1
@@ -961,7 +961,7 @@ _08145DCE:
 	adds r0, r5, 0
 	movs r1, 0x3
 	movs r3, 0x11
-	bl sub_812E51C
+	bl box_print
 	ldr r2, [r7]
 	ldr r0, [r2, 0x4]
 	mov r9, r6
@@ -988,7 +988,7 @@ _08145E06:
 	movs r1, 0x2
 	movs r2, 0xA6
 	movs r3, 0x11
-	bl sub_812E51C
+	bl box_print
 	b _08146038
 	.align 2, 0
 _08145E34: .4byte gUnknown_8467068
@@ -1032,7 +1032,7 @@ _08145E42:
 	lsrs r0, r2, 24
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_812E51C
+	bl box_print
 	adds r4, 0x1
 	lsls r4, 24
 	lsrs r0, r4, 24
@@ -1074,7 +1074,7 @@ _08145EA4:
 	adds r0, r5, 0
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_812E51C
+	bl box_print
 	ldr r2, [r7]
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x3
@@ -1107,7 +1107,7 @@ _08145EA4:
 	adds r0, r5, 0
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_812E51C
+	bl box_print
 	mov r9, r6
 	b _08146038
 	.align 2, 0
@@ -1175,7 +1175,7 @@ _08145F6E:
 	ldr r0, [sp, 0x10]
 	movs r1, 0x3
 	ldr r3, [sp, 0x14]
-	bl sub_812E51C
+	bl box_print
 	ldr r1, [r7]
 	adds r0, r1, r5
 	ldr r2, _0814605C @ =0x00000306
@@ -1213,7 +1213,7 @@ _08145F6E:
 	ldr r0, [sp, 0x10]
 	movs r1, 0x2
 	ldr r3, [sp, 0x14]
-	bl sub_812E51C
+	bl box_print
 	ldr r1, [r7]
 	adds r1, r4
 	adds r1, 0x2A
@@ -1754,7 +1754,7 @@ _081463EC:
 	bl decompress_and_copy_tile_data_to_vram
 	ldr r4, _08146490 @ =gUnknown_8468040
 	adds r0, r4, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r5]
 	movs r2, 0xE4
 	lsls r2, 1
@@ -1762,7 +1762,7 @@ _081463EC:
 	strh r0, [r1]
 	adds r4, 0x8
 	adds r0, r4, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r5]
 	movs r3, 0xE5
 	lsls r3, 1
@@ -2549,7 +2549,7 @@ _08146AA0:
 	str r4, [sp, 0x8]
 	movs r1, 0x3
 	movs r3, 0x6
-	bl sub_812E51C
+	bl box_print
 _08146AD0:
 	ldr r6, _08146B4C @ =gUnknown_203F3CC
 	ldr r4, [r6]
@@ -2584,7 +2584,7 @@ _08146AD0:
 	str r4, [sp, 0x8]
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_812E51C
+	bl box_print
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24

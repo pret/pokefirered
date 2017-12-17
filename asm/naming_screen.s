@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_809D954
-sub_809D954: @ 809D954
+	thumb_func_start DoNamingScreen
+DoNamingScreen: @ 809D954
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -56,7 +56,7 @@ _0809D984:
 	bne _0809D9B8
 	bl StartTimer1
 _0809D9B8:
-	ldr r0, _0809D9DC @ =sub_809D9E0
+	ldr r0, _0809D9DC @ =c2_choose_name_or_words_screen
 	bl SetMainCallback2
 _0809D9BE:
 	pop {r3}
@@ -70,11 +70,11 @@ _0809D9CC: .4byte 0x00001e34
 _0809D9D0: .4byte 0x00001e38
 _0809D9D4: .4byte 0x00001e30
 _0809D9D8: .4byte 0x00001e3c
-_0809D9DC: .4byte sub_809D9E0
-	thumb_func_end sub_809D954
+_0809D9DC: .4byte c2_choose_name_or_words_screen
+	thumb_func_end DoNamingScreen
 
-	thumb_func_start sub_809D9E0
-sub_809D9E0: @ 809D9E0
+	thumb_func_start c2_choose_name_or_words_screen
+c2_choose_name_or_words_screen: @ 809D9E0
 	push {lr}
 	ldr r0, _0809D9FC @ =gUnknown_30030F0
 	movs r1, 0x87
@@ -106,7 +106,7 @@ _0809DA24:
 	bl sub_809DA84
 	b _0809DA62
 _0809DA2E:
-	bl sub_809DBB0
+	bl choose_name_or_words_screen_init_bgs
 	b _0809DA62
 _0809DA34:
 	bl ResetPaletteFade
@@ -145,7 +145,7 @@ _0809DA78:
 _0809DA80:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809D9E0
+	thumb_func_end c2_choose_name_or_words_screen
 
 	thumb_func_start sub_809DA84
 sub_809DA84: @ 809DA84
@@ -291,8 +291,8 @@ _0809DB94:
 _0809DBAC: .4byte gUnknown_202063C
 	thumb_func_end sub_809DB70
 
-	thumb_func_start sub_809DBB0
-sub_809DBB0: @ 809DBB0
+	thumb_func_start choose_name_or_words_screen_init_bgs
+choose_name_or_words_screen_init_bgs: @ 809DBB0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -407,7 +407,7 @@ _0809DCA4:
 	lsls r0, r4, 3
 	ldr r1, _0809DD50 @ =gUnknown_83E22A0
 	adds r0, r1
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r5, _0809DD54 @ =gUnknown_203998C
 	ldr r1, [r5]
 	ldr r2, _0809DD58 @ =0x00001e11
@@ -481,7 +481,7 @@ _0809DD50: .4byte gUnknown_83E22A0
 _0809DD54: .4byte gUnknown_203998C
 _0809DD58: .4byte 0x00001e11
 _0809DD5C: .4byte 0x0000080c
-	thumb_func_end sub_809DBB0
+	thumb_func_end choose_name_or_words_screen_init_bgs
 
 	thumb_func_start sub_809DD60
 sub_809DD60: @ 809DD60
@@ -932,7 +932,7 @@ _0809E104:
 	ldr r1, [r1]
 	bl StringCopy
 	ldr r4, _0809E1C0 @ =gUnknown_2021D04
-	bl sub_80CC7A8
+	bl get_unknown_box_id
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBoxNamePtr
@@ -956,7 +956,7 @@ _0809E156:
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
 	bl sub_80F6EE4
@@ -1006,7 +1006,7 @@ sub_809E1D4: @ 809E1D4
 	push {lr}
 	bl sub_8002DE8
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0809E1FE
@@ -3657,7 +3657,7 @@ _0809F5EE:
 	movs r1, 0x2
 	movs r2, 0x68
 	movs r3, 0x1
-	bl sub_812E51C
+	bl box_print
 _0809F614:
 	add sp, 0x10
 	pop {r4,r5}
@@ -4196,7 +4196,7 @@ _0809FA12:
 	adds r0, r6, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_812E51C
+	bl box_print
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4317,7 +4317,7 @@ sub_809FAE4: @ 809FAE4
 	str r1, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0
-	bl sub_812E51C
+	bl box_print
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -4494,7 +4494,7 @@ sub_809FC90: @ 809FC90
 	str r0, [sp, 0x4]
 	movs r0, 0
 	movs r3, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -4516,7 +4516,7 @@ sub_809FCB8: @ 809FCB8
 	str r0, [sp, 0x4]
 	movs r0, 0x1
 	movs r3, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -4538,7 +4538,7 @@ sub_809FCE0: @ 809FCE0
 	str r0, [sp, 0x4]
 	movs r0, 0x2
 	movs r3, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -4560,7 +4560,7 @@ sub_809FD08: @ 809FD08
 	str r0, [sp, 0x4]
 	movs r0, 0x3
 	movs r3, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -4582,7 +4582,7 @@ sub_809FD30: @ 809FD30
 	str r0, [sp, 0x4]
 	movs r0, 0x4
 	movs r3, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r0}
 	bx r0

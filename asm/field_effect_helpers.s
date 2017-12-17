@@ -202,7 +202,7 @@ _080DAEF4:
 	b _080DAF12
 _080DAF02:
 	adds r0, r4, 0
-	bl sub_805FF34
+	bl npc_paltag_by_palslot
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -2857,7 +2857,7 @@ sub_80DC348: @ 80DC348
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
 	ldrh r2, [r4, 0x34]
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r2, 0x32

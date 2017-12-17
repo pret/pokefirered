@@ -402,8 +402,8 @@ _08004D30:
 	bx r0
 	thumb_func_end FillBitmapRect4Bit
 
-	thumb_func_start sub_8004D40
-sub_8004D40: @ 8004D40
+	thumb_func_start BlitBitmapRect4BitTo8Bit
+BlitBitmapRect4BitTo8Bit: @ 8004D40
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -716,10 +716,10 @@ _08004F7E:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8004D40
+	thumb_func_end BlitBitmapRect4BitTo8Bit
 
-	thumb_func_start sub_8004F90
-sub_8004F90: @ 8004F90
+	thumb_func_start FillBitmapRect8Bit
+FillBitmapRect8Bit: @ 8004F90
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -808,6 +808,6 @@ _08005024:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8004F90
+	thumb_func_end FillBitmapRect8Bit
 
 	.align 2, 0 @ Don't pad with nop.

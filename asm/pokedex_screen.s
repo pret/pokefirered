@@ -109,7 +109,7 @@ _081025A0:
 	bl sub_80F696C
 _081025AE:
 	ldr r0, _081026A8 @ =gUnknown_8451ECC
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	bl m4aSoundVSyncOn
 	ldr r0, _081026AC @ =sub_81024C0
@@ -903,16 +903,16 @@ sub_8102C28: @ 8102C28
 	movs r3, 0
 	bl FillBgTilemapBufferRect
 	ldr r0, _08102DA4 @ =gUnknown_8451F54
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r7, _08102DA8 @ =gUnknown_203ACF0
 	ldr r1, [r7]
 	strb r0, [r1, 0x14]
 	ldr r0, _08102DAC @ =gUnknown_8451F5C
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r7]
 	strb r0, [r1, 0x15]
 	ldr r0, _08102DB0 @ =gUnknown_8451F64
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r7]
 	strb r0, [r1, 0x16]
 	bl sub_806E25C
@@ -1508,7 +1508,7 @@ sub_810317C: @ 810317C
 	movs r3, 0
 	bl FillBgTilemapBufferRect
 	ldr r0, _08103224 @ =gUnknown_845216C
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r2, _08103228 @ =gUnknown_203ACF0
 	ldr r1, [r2]
 	adds r1, 0x40
@@ -1837,7 +1837,7 @@ sub_810345C: @ 810345C
 	movs r3, 0
 	bl FillBgTilemapBufferRect
 	ldr r0, _08103504 @ =gUnknown_845216C
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r2, _08103508 @ =gUnknown_203ACF0
 	ldr r1, [r2]
 	adds r1, 0x40
@@ -4266,7 +4266,7 @@ _08104852:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x18
 	pop {r4-r7}
 	pop {r0}
@@ -4876,7 +4876,7 @@ sub_8104C64: @ 8104C64
 	orrs r0, r1
 	str r0, [sp, 0x1C]
 	add r0, sp, 0x18
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r7]
 	adds r1, 0x20
 	adds r1, r5
@@ -4959,7 +4959,7 @@ _08104D72:
 	adds r1, r0
 	strh r1, [r3, 0x6]
 	adds r0, r3, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r6]
 	adds r1, 0x24
 	adds r1, r5
@@ -7028,7 +7028,7 @@ sub_8105E1C: @ 8105E1C
 	movs r3, 0x2
 	bl FillBgTilemapBufferRect_Palette0
 	ldr r0, _08105FD0 @ =gUnknown_84521D4
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r4, _08105FD4 @ =gUnknown_203ACF0
 	ldr r1, [r4]
 	adds r1, 0x4A
@@ -7036,12 +7036,12 @@ sub_8105E1C: @ 8105E1C
 	mov r8, r2
 	strb r0, [r1]
 	ldr r0, _08105FD8 @ =gUnknown_84521DC
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r4]
 	adds r1, 0x4B
 	strb r0, [r1]
 	ldr r0, _08105FDC @ =gUnknown_84521E4
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r4]
 	adds r1, 0x4C
 	strb r0, [r1]
@@ -7436,7 +7436,7 @@ _081061F0:
 	cmp r4, 0x6
 	ble _081061E2
 	ldr r0, _08106450 @ =gUnknown_8452214
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r5, _08106424 @ =gUnknown_203ACF0
 	ldr r1, [r5]
 	adds r1, 0x4A
@@ -7453,7 +7453,7 @@ _081061F0:
 	ldrb r4, [r0]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r2, r0, 0
 	add r2, r9
 	adds r0, r4, 0
@@ -7483,7 +7483,7 @@ _08106246:
 	lsls r4, 3
 	adds r0, r4, r7
 	ldr r0, [r0]
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r5]
 	adds r1, 0x4A
 	adds r1, r6
@@ -7503,7 +7503,7 @@ _08106246:
 	ldrb r4, [r0]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r2, r0, 0
 	add r2, r9
 	adds r0, r4, 0
@@ -7525,7 +7525,7 @@ _081062B4:
 	cmp r4, 0x6
 	ble _08106246
 	ldr r0, _0810645C @ =gUnknown_84521F4
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r7, _08106424 @ =gUnknown_203ACF0
 	ldr r1, [r7]
 	adds r1, 0x52
@@ -7533,24 +7533,24 @@ _081062B4:
 	strb r0, [r1]
 	ldr r5, _08106460 @ =gUnknown_84521FC
 	adds r0, r5, 0
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r7]
 	adds r1, 0x53
 	strb r0, [r1]
 	ldr r3, _08106464 @ =gUnknown_8452204
 	mov r8, r3
 	mov r0, r8
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r7]
 	adds r1, 0x54
 	strb r0, [r1]
 	ldr r0, _08106468 @ =gUnknown_84521EC
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r7]
 	adds r1, 0x55
 	strb r0, [r1]
 	ldr r0, _0810646C @ =gUnknown_845220C
-	bl sub_8003CE4
+	bl AddWindow
 	ldr r1, [r7]
 	adds r1, 0x56
 	strb r0, [r1]
@@ -7651,7 +7651,7 @@ _081062B4:
 	ldrb r4, [r0]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8004950
+	bl GetWindowAttribute
 	adds r2, r0, 0
 	add r2, r9
 	adds r0, r4, 0

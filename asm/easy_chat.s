@@ -42,8 +42,8 @@ _080BD74E:
 	bx r1
 	thumb_func_end sub_80BD718
 
-	thumb_func_start sub_80BD754
-sub_80BD754: @ 80BD754
+	thumb_func_start start_menu_is_selected_item_valid
+start_menu_is_selected_item_valid: @ 80BD754
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -51,7 +51,7 @@ sub_80BD754: @ 80BD754
 	cmp r0, 0x15
 	bne _080BD76C
 	movs r0, 0
-	bl sub_8088E8C
+	bl pokedex_count
 	lsls r0, 16
 	lsrs r0, 16
 	b _080BD782
@@ -73,7 +73,7 @@ _080BD782:
 	bx r1
 	.align 2, 0
 _080BD788: .4byte gUnknown_83ECED4
-	thumb_func_end sub_80BD754
+	thumb_func_end start_menu_is_selected_item_valid
 
 	thumb_func_start sub_80BD78C
 sub_80BD78C: @ 80BD78C
@@ -808,7 +808,7 @@ sub_80BDCA8: @ 80BDCA8
 sub_80BDCB8: @ 80BDCB8
 	push {r4-r7,lr}
 	movs r0, 0
-	bl sub_80BD754
+	bl start_menu_is_selected_item_valid
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -1054,7 +1054,7 @@ sub_80BDE88: @ 80BDE88
 	ldr r1, [r4]
 	movs r0, 0
 	strh r0, [r1]
-	bl sub_8088E8C
+	bl pokedex_count
 	lsls r0, 16
 	cmp r0, 0
 	beq _080BDEB0

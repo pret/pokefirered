@@ -64,7 +64,7 @@ sub_8081B84: @ 8081B84
 	adds r0, r5, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
 	adds r6, r0, 0
-	bl sub_8080378
+	bl GetTrainerFlagFromScriptPointer
 	cmp r0, 0
 	bne _08081BE4
 	lsls r4, r5, 3
@@ -1545,8 +1545,8 @@ _080826A0: .4byte gUnknown_20386E0
 _080826A4: .4byte 0x0000fffb
 	thumb_func_end sub_808265C
 
-	thumb_func_start sub_80826A8
-sub_80826A8: @ 80826A8
+	thumb_func_start objc_exclamation_mark_probably
+objc_exclamation_mark_probably: @ 80826A8
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1623,6 +1623,6 @@ _08082736:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80826A8
+	thumb_func_end objc_exclamation_mark_probably
 
 	.align 2, 0 @ Don't pad with nop.

@@ -53,7 +53,7 @@ sub_810EE0C: @ 810EE0C
 	ldr r5, _0810EE54 @ =gUnknown_203ADF2
 	adds r0, r6, 0
 	movs r1, 0x5
-	bl sub_8004950
+	bl GetWindowAttribute
 	strb r0, [r5]
 	ldr r1, _0810EE58 @ =sub_810EE5C
 	adds r0, r6, 0
@@ -675,7 +675,7 @@ sub_810F330: @ 810F330
 	ldr r5, _0810F378 @ =gUnknown_203ADF2
 	adds r0, r6, 0
 	movs r1, 0x5
-	bl sub_8004950
+	bl GetWindowAttribute
 	strb r0, [r5]
 	ldr r1, _0810F37C @ =DrawWindowBorder
 	adds r0, r6, 0
@@ -978,7 +978,7 @@ _0810F592:
 	strh r4, [r1, 0x6]
 	ldr r4, _0810F5BC @ =gUnknown_203ADF4
 	mov r0, sp
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	cmp r5, 0xF
 	bls _0810F5C0
@@ -1041,7 +1041,7 @@ sub_810F5E8: @ 810F5E8
 	adds r0, r1, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl sub_812E51C
+	bl box_print
 	cmp r6, 0
 	beq _0810F63E
 	ldrb r0, [r4]
@@ -1118,7 +1118,7 @@ _0810F684:
 	adds r0, r1, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl sub_812E51C
+	bl box_print
 _0810F6CE:
 	ldrb r0, [r6]
 	movs r1, 0
@@ -1132,7 +1132,7 @@ _0810F6CE:
 	movs r1, 0x1
 	movs r2, 0x4
 	movs r3, 0x1
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	cmp r7, 0
 	beq _0810F6F6
 	ldrb r0, [r6]
@@ -2263,7 +2263,7 @@ sub_810FF04: @ 810FF04
 	str r0, [sp, 0x18]
 	str r1, [sp, 0x1C]
 	add r0, sp, 0x18
-	bl sub_8003CE4
+	bl AddWindow
 	lsls r0, 16
 	lsrs r0, 16
 	add sp, 0x20
@@ -2306,7 +2306,7 @@ sub_810FF60: @ 810FF60
 	lsrs r1, 24
 	mov r10, r1
 	ldr r7, _0811009C @ =gUnknown_203ADF3
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r7]
 	ldrb r0, [r7]
 	movs r1, 0x1
@@ -2445,8 +2445,8 @@ sub_81100A4: @ 81100A4
 	bx r0
 	thumb_func_end sub_81100A4
 
-	thumb_func_start sub_81100C8
-sub_81100C8: @ 81100C8
+	thumb_func_start ProcessMenuInputNoWrap_
+ProcessMenuInputNoWrap_: @ 81100C8
 	push {r4,lr}
 	bl ProcessMenuInputNoWrapAround
 	lsls r0, 24
@@ -2461,7 +2461,7 @@ _081100DE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81100C8
+	thumb_func_end ProcessMenuInputNoWrap_
 
 	thumb_func_start sub_81100E8
 sub_81100E8: @ 81100E8

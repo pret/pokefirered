@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80589C4
-sub_80589C4: @ 80589C4
+	thumb_func_start mapconnection_get_mapheader
+mapconnection_get_mapheader: @ 80589C4
 	push {lr}
 	ldrb r2, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
@@ -14,10 +14,10 @@ sub_80589C4: @ 80589C4
 	bl get_mapheader_by_bank_and_number
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80589C4
+	thumb_func_end mapconnection_get_mapheader
 
-	thumb_func_start sub_80589D4
-sub_80589D4: @ 80589D4
+	thumb_func_start not_trainer_hill_battle_pyramid
+not_trainer_hill_battle_pyramid: @ 80589D4
 	push {lr}
 	ldr r0, _080589E4 @ =gUnknown_2036DFC
 	bl sub_8058A00
@@ -26,7 +26,7 @@ sub_80589D4: @ 80589D4
 	bx r0
 	.align 2, 0
 _080589E4: .4byte gUnknown_2036DFC
-	thumb_func_end sub_80589D4
+	thumb_func_end not_trainer_hill_battle_pyramid
 
 	thumb_func_start sub_80589E8
 sub_80589E8: @ 80589E8
@@ -160,7 +160,7 @@ mapheader_copy_mapdata_of_adjacent_maps: @ 8058AC8
 	adds r7, r1, 0
 _08058AE6:
 	adds r0, r5, 0
-	bl sub_80589C4
+	bl mapconnection_get_mapheader
 	adds r1, r0, 0
 	ldr r2, [r5, 0x4]
 	ldrb r0, [r5]
@@ -817,8 +817,8 @@ sub_8058F8C: @ 8058F8C
 	bx r1
 	thumb_func_end sub_8058F8C
 
-	thumb_func_start sub_8058FA4
-sub_8058FA4: @ 8058FA4
+	thumb_func_start MapGridSetMetatileIdAt
+MapGridSetMetatileIdAt: @ 8058FA4
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	lsls r2, 16
@@ -854,10 +854,10 @@ _08058FDC:
 	.align 2, 0
 _08058FE4: .4byte gUnknown_3005040
 _08058FE8: .4byte 0x00000fff
-	thumb_func_end sub_8058FA4
+	thumb_func_end MapGridSetMetatileIdAt
 
-	thumb_func_start sub_8058FEC
-sub_8058FEC: @ 8058FEC
+	thumb_func_start MapGridSetMetatileEntryAt
+MapGridSetMetatileEntryAt: @ 8058FEC
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	lsls r2, 16
@@ -886,7 +886,7 @@ _08059018:
 	bx r0
 	.align 2, 0
 _08059020: .4byte gUnknown_3005040
-	thumb_func_end sub_8058FEC
+	thumb_func_end MapGridSetMetatileEntryAt
 
 	thumb_func_start sub_8059024
 sub_8059024: @ 8059024
@@ -1519,7 +1519,7 @@ sub_80594AC: @ 80594AC
 	adds r4, r1, 0
 	adds r6, r2, 0
 	adds r7, r3, 0
-	bl sub_80589C4
+	bl mapconnection_get_mapheader
 	adds r3, r0, 0
 	cmp r4, 0x2
 	beq _08059514
@@ -1748,7 +1748,7 @@ sub_8059658: @ 8059658
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	adds r0, r5, 0
-	bl sub_80589C4
+	bl mapconnection_get_mapheader
 	adds r2, r0, 0
 	cmp r4, 0x1
 	blt _080596B0
@@ -1842,7 +1842,7 @@ sub_80596FC: @ 80596FC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r6, r2, 0
-	bl sub_80589C4
+	bl mapconnection_get_mapheader
 	adds r1, r0, 0
 	ldrb r0, [r4]
 	cmp r0, 0x1
@@ -2027,8 +2027,8 @@ GetCameraCoords: @ 8059830
 _08059840: .4byte gUnknown_3005008
 	thumb_func_end GetCameraCoords
 
-	thumb_func_start sub_8059844
-sub_8059844: @ 8059844
+	thumb_func_start copy_tileset_patterns_to_vram
+copy_tileset_patterns_to_vram: @ 8059844
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r3, r0, 0
@@ -2063,10 +2063,10 @@ _08059880:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8059844
+	thumb_func_end copy_tileset_patterns_to_vram
 
-	thumb_func_start sub_8059888
-sub_8059888: @ 8059888
+	thumb_func_start copy_tileset_patterns_to_vram2
+copy_tileset_patterns_to_vram2: @ 8059888
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r3, r0, 0
@@ -2101,7 +2101,7 @@ _080598C4:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8059888
+	thumb_func_end copy_tileset_patterns_to_vram2
 
 	thumb_func_start sub_80598CC
 sub_80598CC: @ 80598CC
@@ -2306,7 +2306,7 @@ sub_8059A54: @ 8059A54
 	movs r1, 0xA0
 	lsls r1, 2
 	movs r2, 0
-	bl sub_8059844
+	bl copy_tileset_patterns_to_vram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8059A54
@@ -2319,7 +2319,7 @@ sub_8059A68: @ 8059A68
 	lsls r1, 1
 	movs r2, 0xA0
 	lsls r2, 2
-	bl sub_8059844
+	bl copy_tileset_patterns_to_vram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8059A68
@@ -2332,7 +2332,7 @@ copy_map_tileset2_to_vram_2: @ 8059A7C
 	lsls r1, 1
 	movs r2, 0xA0
 	lsls r2, 2
-	bl sub_8059888
+	bl copy_tileset_patterns_to_vram2
 	pop {r0}
 	bx r0
 	thumb_func_end copy_map_tileset2_to_vram_2
@@ -2370,12 +2370,12 @@ copy_map_tileset1_tileset2_to_vram: @ 8059AB0
 	lsls r4, 2
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8059888
+	bl copy_tileset_patterns_to_vram2
 	ldr r0, [r5, 0x14]
 	movs r1, 0xC0
 	lsls r1, 1
 	adds r2, r4, 0
-	bl sub_8059888
+	bl copy_tileset_patterns_to_vram2
 _08059AD2:
 	pop {r4,r5}
 	pop {r0}

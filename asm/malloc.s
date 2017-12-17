@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_800292C
-sub_800292C: @ 800292C
+	thumb_func_start PutMemBlockHeader
+PutMemBlockHeader: @ 800292C
 	push {r4,lr}
 	movs r4, 0
 	strh r4, [r0]
@@ -20,19 +20,19 @@ sub_800292C: @ 800292C
 	bx r0
 	.align 2, 0
 _08002944: .4byte 0x0000a3a3
-	thumb_func_end sub_800292C
+	thumb_func_end PutMemBlockHeader
 
-	thumb_func_start sub_8002948
-sub_8002948: @ 8002948
+	thumb_func_start PutFirstMemBlockHeader
+PutFirstMemBlockHeader: @ 8002948
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r1, 0
 	subs r3, 0x10
 	adds r1, r2, 0
-	bl sub_800292C
+	bl PutMemBlockHeader
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8002948
+	thumb_func_end PutFirstMemBlockHeader
 
 	thumb_func_start sub_800295C
 sub_800295C: @ 800295C
@@ -84,7 +84,7 @@ _080029A4:
 	str r5, [r4, 0x4]
 	ldr r2, [r4, 0xC]
 	adds r1, r4, 0
-	bl sub_800292C
+	bl PutMemBlockHeader
 	ldr r0, [r6]
 	ldr r1, [r7]
 	str r1, [r0, 0xC]
@@ -331,7 +331,7 @@ InitHeap: @ 8002B80
 	str r0, [r2]
 	ldr r2, _08002B98 @ =gUnknown_3000A3C
 	str r1, [r2]
-	bl sub_8002948
+	bl PutFirstMemBlockHeader
 	pop {r0}
 	bx r0
 	.align 2, 0

@@ -2314,7 +2314,7 @@ _0805EEDC:
 	bne _0805EF6A
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_805F02C
+	bl SetPlayerAvatarFieldObjectIdAndObjectId
 	bl sub_80DB0C4
 	strb r0, [r6, 0x1B]
 _0805EF6A:
@@ -2413,8 +2413,8 @@ sub_805EFF4: @ 805EFF4
 	bx r0
 	thumb_func_end sub_805EFF4
 
-	thumb_func_start sub_805F02C
-sub_805F02C: @ 805F02C
+	thumb_func_start SetPlayerAvatarFieldObjectIdAndObjectId
+SetPlayerAvatarFieldObjectIdAndObjectId: @ 805F02C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2438,7 +2438,7 @@ sub_805F02C: @ 805F02C
 	.align 2, 0
 _0805F058: .4byte gUnknown_2037078
 _0805F05C: .4byte gUnknown_2036E38
-	thumb_func_end sub_805F02C
+	thumb_func_end SetPlayerAvatarFieldObjectIdAndObjectId
 
 	thumb_func_start sub_805F060
 sub_805F060: @ 805F060
@@ -4474,8 +4474,8 @@ _0805FEC2:
 _0805FEC8: .4byte gUnknown_2036E38
 	thumb_func_end sub_805FE94
 
-	thumb_func_start sub_805FECC
-sub_805FECC: @ 805FECC
+	thumb_func_start npc_paltag_set_load
+npc_paltag_set_load: @ 805FECC
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -4522,10 +4522,10 @@ _0805FF2A:
 	bx r0
 	.align 2, 0
 _0805FF30: .4byte gUnknown_83A5330
-	thumb_func_end sub_805FECC
+	thumb_func_end npc_paltag_set_load
 
-	thumb_func_start sub_805FF34
-sub_805FF34: @ 805FF34
+	thumb_func_start npc_paltag_by_palslot
+npc_paltag_by_palslot: @ 805FF34
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -4591,7 +4591,7 @@ _0805FFA2:
 _0805FFA8: .4byte gUnknown_83A5278
 _0805FFAC: .4byte 0x000011ff
 _0805FFB0: .4byte gUnknown_203709A
-	thumb_func_end sub_805FF34
+	thumb_func_end npc_paltag_by_palslot
 
 	thumb_func_start sub_805FFB4
 sub_805FFB4: @ 805FFB4
@@ -10995,7 +10995,7 @@ oac_hopping: @ 8062D98
 	movs r3, 0x2
 	bl sub_8063A6C
 	adds r0, r6, 0
-	bl sub_8064110
+	bl GetJumpLedgeAnimId
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -13759,8 +13759,8 @@ _080640FC:
 _0806410C: .4byte gUnknown_83A652D
 	thumb_func_end sub_80640E4
 
-	thumb_func_start sub_8064110
-sub_8064110: @ 8064110
+	thumb_func_start GetJumpLedgeAnimId
+GetJumpLedgeAnimId: @ 8064110
 	push {r4,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -13782,7 +13782,7 @@ _08064128:
 	bx r1
 	.align 2, 0
 _08064138: .4byte gUnknown_83A6532
-	thumb_func_end sub_8064110
+	thumb_func_end GetJumpLedgeAnimId
 
 	thumb_func_start sub_806413C
 sub_806413C: @ 806413C
@@ -14791,8 +14791,8 @@ sub_8064830: @ 8064830
 	bx r0
 	thumb_func_end sub_8064830
 
-	thumb_func_start sub_806485C
-sub_806485C: @ 806485C
+	thumb_func_start an_walk_any_2
+an_walk_any_2: @ 806485C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -14821,7 +14821,7 @@ _0806488E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806485C
+	thumb_func_end an_walk_any_2
 
 	thumb_func_start sub_8064894
 sub_8064894: @ 8064894
@@ -15103,7 +15103,7 @@ sub_8064A68: @ 8064A68
 sub_8064A88: @ 8064A88
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_806485C
+	bl an_walk_any_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064A9A
@@ -15140,7 +15140,7 @@ sub_8064AA8: @ 8064AA8
 sub_8064AC8: @ 8064AC8
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_806485C
+	bl an_walk_any_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064ADA
@@ -15177,7 +15177,7 @@ sub_8064AE8: @ 8064AE8
 sub_8064B08: @ 8064B08
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_806485C
+	bl an_walk_any_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064B1A
@@ -15214,7 +15214,7 @@ sub_8064B28: @ 8064B28
 sub_8064B48: @ 8064B48
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_806485C
+	bl an_walk_any_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064B5A
@@ -19861,7 +19861,7 @@ sub_8066BB0: @ 8066BB0
 sub_8066BE4: @ 8066BE4
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_806485C
+	bl an_walk_any_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _08066BF6
@@ -19913,7 +19913,7 @@ sub_8066C10: @ 8066C10
 sub_8066C44: @ 8066C44
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_806485C
+	bl an_walk_any_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _08066C56

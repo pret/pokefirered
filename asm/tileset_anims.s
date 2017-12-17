@@ -114,7 +114,7 @@ _0806FF98: .4byte gUnknown_2037108
 cur_mapheader_run_tileset_funcs_after_some_cpuset: @ 806FF9C
 	push {lr}
 	bl ResetTilesetAnimBuffer
-	bl sub_807002C
+	bl cur_mapheader_run_tileset1_func
 	bl cur_mapheader_run_tileset2_func
 	pop {r0}
 	bx r0
@@ -184,8 +184,8 @@ _08070024: .4byte gUnknown_3000FB8
 _08070028: .4byte gUnknown_3000FBC
 	thumb_func_end sub_806FFBC
 
-	thumb_func_start sub_807002C
-sub_807002C: @ 807002C
+	thumb_func_start cur_mapheader_run_tileset1_func
+cur_mapheader_run_tileset1_func: @ 807002C
 	push {lr}
 	ldr r0, _08070058 @ =gUnknown_3000FAE
 	movs r1, 0
@@ -212,7 +212,7 @@ _08070058: .4byte gUnknown_3000FAE
 _0807005C: .4byte gUnknown_3000FB0
 _08070060: .4byte gUnknown_3000FB8
 _08070064: .4byte gUnknown_2036DFC
-	thumb_func_end sub_807002C
+	thumb_func_end cur_mapheader_run_tileset1_func
 
 	thumb_func_start cur_mapheader_run_tileset2_func
 cur_mapheader_run_tileset2_func: @ 8070068

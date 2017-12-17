@@ -31,8 +31,8 @@ _080EC5CA:
 _080EC5D0: .4byte sub_80EC870
 	thumb_func_end sub_80EC5B8
 
-	thumb_func_start sub_80EC5D4
-sub_80EC5D4: @ 80EC5D4
+	thumb_func_start load_copyright_graphics
+load_copyright_graphics: @ 80EC5D4
 	push {r4-r6,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -64,10 +64,10 @@ sub_80EC5D4: @ 80EC5D4
 _080EC610: .4byte gUnknown_8402280
 _080EC614: .4byte gUnknown_84024E4
 _080EC618: .4byte gUnknown_8402260
-	thumb_func_end sub_80EC5D4
+	thumb_func_end load_copyright_graphics
 
-	thumb_func_start sub_80EC61C
-sub_80EC61C: @ 80EC61C
+	thumb_func_start SerialCb_CopyrightScreen
+SerialCb_CopyrightScreen: @ 80EC61C
 	push {lr}
 	ldr r0, _080EC628 @ =gUnknown_203AAD4
 	bl GameCubeMultiBoot_HandleSerialInterrupt
@@ -75,7 +75,7 @@ sub_80EC61C: @ 80EC61C
 	bx r0
 	.align 2, 0
 _080EC628: .4byte gUnknown_203AAD4
-	thumb_func_end sub_80EC61C
+	thumb_func_end SerialCb_CopyrightScreen
 
 	thumb_func_start sub_80EC62C
 sub_80EC62C: @ 80EC62C
@@ -165,7 +165,7 @@ _080EC65E:
 	lsls r1, 6
 	movs r0, 0
 	movs r2, 0
-	bl sub_80EC5D4
+	bl load_copyright_graphics
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetSpriteData
@@ -190,7 +190,7 @@ _080EC65E:
 	lsls r1, 1
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, _080EC76C @ =sub_80EC61C
+	ldr r0, _080EC76C @ =SerialCb_CopyrightScreen
 	bl sub_8000718
 	ldr r0, _080EC770 @ =gUnknown_203AAD4
 	bl GameCubeMultiBoot_Init
@@ -215,7 +215,7 @@ _080EC75C: .4byte 0x05000002
 _080EC760: .4byte 0x810001ff
 _080EC764: .4byte 0x0000ffff
 _080EC768: .4byte sub_80EC5A4
-_080EC76C: .4byte sub_80EC61C
+_080EC76C: .4byte SerialCb_CopyrightScreen
 _080EC770: .4byte gUnknown_203AAD4
 _080EC774: .4byte gUnknown_30030F0
 _080EC778:
@@ -316,7 +316,7 @@ sub_80EC820: @ 80EC820
 	cmp r0, 0x2
 	bne _080EC84A
 _080EC846:
-	bl sub_8054A18
+	bl Sav2_ClearSetDefault
 _080EC84A:
 	ldr r0, _080EC860 @ =gUnknown_300500C
 	ldr r0, [r0]
@@ -644,7 +644,7 @@ sub_80ECAF0: @ 80ECAF0
 	b _080ECB8A
 _080ECB02:
 	ldr r0, _080ECB68 @ =gUnknown_840BBA8
-	bl sub_8003B24
+	bl InitWindows
 	ldr r0, _080ECB6C @ =gUnknown_840272C
 	ldr r1, _080ECB70 @ =0x0000043c
 	adds r4, r5, r1

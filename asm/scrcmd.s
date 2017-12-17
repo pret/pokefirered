@@ -20,7 +20,7 @@ sub_8069ED4: @ 8069ED4
 	thumb_func_start ScrCmd_end
 ScrCmd_end: @ 8069ED8
 	push {lr}
-	bl sub_80697FC
+	bl StopScript
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -33,7 +33,7 @@ ScrCmd_gotonative: @ 8069EE4
 	bl ScriptReadWord
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -510,7 +510,7 @@ ScrCmd_killscript: @ 806A25C
 	adds r4, r0, 0
 	bl ClearRamScript
 	adds r0, r4, 0
-	bl sub_80697FC
+	bl StopScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -1053,8 +1053,8 @@ sub_806A610: @ 806A610
 _0806A658: .4byte gUnknown_20370D0
 	thumb_func_end sub_806A610
 
-	thumb_func_start sub_806A65C
-sub_806A65C: @ 806A65C
+	thumb_func_start ScrCmd_takeitem
+ScrCmd_takeitem: @ 806A65C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl ScriptReadHalfword
@@ -1084,7 +1084,7 @@ sub_806A65C: @ 806A65C
 	bx r1
 	.align 2, 0
 _0806A69C: .4byte gUnknown_20370D0
-	thumb_func_end sub_806A65C
+	thumb_func_end ScrCmd_takeitem
 
 	thumb_func_start sub_806A6A0
 sub_806A6A0: @ 806A6A0
@@ -1162,7 +1162,7 @@ ScrCmd_checkitemtype: @ 806A728
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0806A750 @ =gUnknown_20370D0
-	bl sub_809A260
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -1335,7 +1335,7 @@ ScrCmd_incrementgamestat: @ 806A870
 	adds r1, 0x1
 	str r1, [r0, 0x8]
 	adds r0, r2, 0
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1353,7 +1353,7 @@ sub_806A888: @ 806A888
 	bl ScriptReadWord
 	adds r6, r0, 0
 	adds r0, r4, 0
-	bl sub_8054EC4
+	bl GetGameStat
 	cmp r0, r6
 	bcs _0806A8AA
 	movs r0, 0
@@ -1452,7 +1452,7 @@ ScrCmd_fadescreen: @ 806A938
 	bl fade_screen
 	ldr r1, _0806A95C @ =sub_806A918
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -1477,7 +1477,7 @@ ScrCmd_fadescreenspeed: @ 806A960
 	bl fade_screen
 	ldr r1, _0806A98C @ =sub_806A918
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -1486,8 +1486,8 @@ ScrCmd_fadescreenspeed: @ 806A960
 _0806A98C: .4byte sub_806A918
 	thumb_func_end ScrCmd_fadescreenspeed
 
-	thumb_func_start sub_806A990
-sub_806A990: @ 806A990
+	thumb_func_start RunPauseTimer
+RunPauseTimer: @ 806A990
 	push {lr}
 	ldr r1, _0806A9A4 @ =gUnknown_20370AE
 	ldrh r0, [r1]
@@ -1505,26 +1505,26 @@ _0806A9A8:
 _0806A9AA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A990
+	thumb_func_end RunPauseTimer
 
-	thumb_func_start sub_806A9B0
-sub_806A9B0: @ 806A9B0
+	thumb_func_start ScrCmd_delay
+ScrCmd_delay: @ 806A9B0
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptReadHalfword
 	ldr r1, _0806A9CC @ =gUnknown_20370AE
 	strh r0, [r1]
-	ldr r1, _0806A9D0 @ =sub_806A990
+	ldr r1, _0806A9D0 @ =RunPauseTimer
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806A9CC: .4byte gUnknown_20370AE
-_0806A9D0: .4byte sub_806A990
-	thumb_func_end sub_806A9B0
+_0806A9D0: .4byte RunPauseTimer
+	thumb_func_end ScrCmd_delay
 
 	thumb_func_start sub_806A9D4
 sub_806A9D4: @ 806A9D4
@@ -1596,7 +1596,7 @@ ScrCmd_setstepcallback: @ 806AA30
 	adds r1, 0x1
 	str r1, [r0, 0x8]
 	adds r0, r2, 0
-	bl sub_806E8D0
+	bl ActivatePerStepCallback
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1733,7 +1733,7 @@ ScrCmd_warpsilent: @ 806AAEC
 	adds r2, r6, 0
 	adds r3, r4, 0
 	bl Overworld_SetWarpDestination
-	bl sub_807E470
+	bl sp13E_warp_to_last_warp
 	bl sub_80559E4
 	movs r0, 0x1
 	add sp, 0x4
@@ -1859,7 +1859,7 @@ _0806AC3A:
 	str r4, [sp]
 	bl Overworld_SetWarpDestination
 _0806AC5E:
-	bl sub_807E548
+	bl sp13F_fall_to_last_warp
 	bl sub_80559E4
 	movs r0, 0x1
 	add sp, 0x8
@@ -2389,7 +2389,7 @@ _0806B08E:
 sub_806B094: @ 806B094
 	push {lr}
 	ldr r1, _0806B0A4 @ =WaitForSoundEffectFinish
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -2423,7 +2423,7 @@ WaitForFanfareFinish: @ 806B0BC
 sub_806B0CC: @ 806B0CC
 	push {lr}
 	ldr r1, _0806B0DC @ =WaitForFanfareFinish
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -2488,7 +2488,7 @@ sub_806B134: @ 806B134
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _0806B148
-	bl sub_8055F1C
+	bl Overworld_ChangeMusicToDefault
 _0806B148:
 	movs r0, 0
 	pop {r1}
@@ -2552,7 +2552,7 @@ _0806B1AE:
 _0806B1B4:
 	ldr r1, _0806B1C4 @ =IsBGMPausedOrStopped
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 _0806B1BE:
 	pop {r4}
@@ -2706,7 +2706,7 @@ _0806B2CC:
 	strh r0, [r1]
 	ldr r1, _0806B300 @ =WaitForMovementFinish
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -2747,7 +2747,7 @@ _0806B320:
 	strh r1, [r0]
 	ldr r1, _0806B354 @ =WaitForMovementFinish
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -3222,7 +3222,7 @@ ScrCmd_lockall: @ 806B6DC
 	bl ScriptFreezeMapObjects
 	ldr r1, _0806B6F8 @ =sub_8069590
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	b _0806B6FE
 	.align 2, 0
@@ -3259,7 +3259,7 @@ _0806B714:
 	bl LockSelectedMapObject
 	ldr r1, _0806B740 @ =sub_8069648
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	b _0806B750
 	.align 2, 0
 _0806B738: .4byte gUnknown_2036E38
@@ -3269,7 +3269,7 @@ _0806B744:
 	bl ScriptFreezeMapObjects
 	ldr r1, _0806B758 @ =sub_8069590
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 _0806B750:
 	movs r0, 0x1
 _0806B752:
@@ -3391,7 +3391,7 @@ sub_806B828: @ 806B828
 	ldr r0, [r4, 0x64]
 _0806B836:
 	bl sub_80F7974
-	bl sub_80F793C
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -3431,7 +3431,7 @@ _0806B86A:
 sub_806B878: @ 806B878
 	push {lr}
 	ldr r1, _0806B888 @ =IsFieldMessageBoxHidden
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3695,7 +3695,7 @@ _0806BA58:
 _0806BA5E:
 	ldr r1, _0806BA7C @ =sub_806B898
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -3750,7 +3750,7 @@ ScrCmd_multichoice: @ 806BAAC
 	adds r4, 0x1
 	str r4, [r0, 0x8]
 	adds r0, r5, 0
-	bl sub_809C9B4
+	bl ScriptMenu_Multichoice
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3791,7 +3791,7 @@ ScrCmd_multichoicedefault: @ 806BAE8
 	str r4, [r0, 0x8]
 	str r6, [sp]
 	mov r0, r8
-	bl sub_809CA04
+	bl ScriptMenu_MultichoiceWithDefault
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3913,7 +3913,7 @@ sub_806BBD8: @ 806BBD8
 	cmp r1, 0
 	beq _0806BBF0
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	b _0806BBF2
 _0806BBF0:
@@ -4046,7 +4046,7 @@ ScrCmd_bufferleadmonspeciesname: @ 806BCC8
 	lsls r2, 2
 	adds r2, r0
 	ldr r4, [r2]
-	bl sub_80CACFC
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -4352,7 +4352,7 @@ ScrCmd_vloadword: @ 806BF3C
 	ldr r0, [r0]
 	subs r1, r0
 	ldr r0, _0806BF5C @ =gUnknown_2021D18
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -4460,7 +4460,7 @@ ScrCmd_givemon: @ 806BFD0
 	mov r1, r9
 	adds r2, r5, 0
 	mov r3, r8
-	bl sub_80A011C
+	bl ScriptGiveMon
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -4970,8 +4970,8 @@ sub_806C3D4: @ 806C3D4
 	bx r1
 	thumb_func_end sub_806C3D4
 
-	thumb_func_start sub_806C3E8
-sub_806C3E8: @ 806C3E8
+	thumb_func_start ScrCmd_playslotmachine
+ScrCmd_playslotmachine: @ 806C3E8
 	push {lr}
 	bl ScriptReadHalfword
 	lsls r0, 16
@@ -4987,7 +4987,7 @@ sub_806C3E8: @ 806C3E8
 	bx r1
 	.align 2, 0
 _0806C40C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
-	thumb_func_end sub_806C3E8
+	thumb_func_end ScrCmd_playslotmachine
 
 	thumb_func_start sub_806C410
 sub_806C410: @ 806C410
@@ -5106,7 +5106,7 @@ ScrCmd_waitfieldeffect: @ 806C4A8
 	strh r0, [r1]
 	ldr r1, _0806C4D0 @ =WaitForFieldEffectFinish
 	adds r0, r4, 0
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -5176,7 +5176,7 @@ ScrCmd_playmoncry: @ 806C508
 sub_806C540: @ 806C540
 	push {lr}
 	ldr r1, _0806C550 @ =IsCryFinished
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -5225,7 +5225,7 @@ ScrCmd_setmetatile: @ 806C554
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r7, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	b _0806C5CA
 _0806C5B8:
 	movs r1, 0xC0
@@ -5235,7 +5235,7 @@ _0806C5B8:
 	orrs r2, r0
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 _0806C5CA:
 	movs r0, 0
 	pop {r4-r7}
@@ -5336,7 +5336,7 @@ _0806C682:
 sub_806C688: @ 806C688
 	push {lr}
 	ldr r1, _0806C698 @ =sub_806C670
-	bl sub_80697F4
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -5518,8 +5518,8 @@ sub_806C7C8: @ 806C7C8
 	bx r1
 	thumb_func_end sub_806C7C8
 
-	thumb_func_start sub_806C7D4
-sub_806C7D4: @ 806C7D4
+	thumb_func_start ScrCmd_setmonobedient
+ScrCmd_setmonobedient: @ 806C7D4
 	push {lr}
 	sub sp, 0x4
 	movs r2, 0x1
@@ -5544,10 +5544,10 @@ sub_806C7D4: @ 806C7D4
 	bx r1
 	.align 2, 0
 _0806C808: .4byte gUnknown_2024284
-	thumb_func_end sub_806C7D4
+	thumb_func_end ScrCmd_setmonobedient
 
-	thumb_func_start sub_806C80C
-sub_806C80C: @ 806C80C
+	thumb_func_start ScrCmd_checkmonobedience
+ScrCmd_checkmonobedience: @ 806C80C
 	push {r4,lr}
 	bl ScriptReadHalfword
 	lsls r0, 16
@@ -5571,7 +5571,7 @@ sub_806C80C: @ 806C80C
 	.align 2, 0
 _0806C83C: .4byte gUnknown_20370D0
 _0806C840: .4byte gUnknown_2024284
-	thumb_func_end sub_806C80C
+	thumb_func_end ScrCmd_checkmonobedience
 
 	thumb_func_start sub_806C844
 sub_806C844: @ 806C844

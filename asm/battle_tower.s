@@ -2110,7 +2110,7 @@ _080E6970:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl sub_8044090
+	bl PlayMapChosenOrBattleBGM
 	bl sub_8080060
 	lsls r0, 24
 	lsrs r0, 24
@@ -2150,7 +2150,7 @@ _080E69A0:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl sub_8044090
+	bl PlayMapChosenOrBattleBGM
 	bl sub_8080060
 	lsls r0, 24
 	lsrs r0, 24
@@ -3317,7 +3317,7 @@ _080E7320:
 	cmp r0, 0
 	beq _080E732E
 	movs r0, 0x2A
-	bl sub_8054E90
+	bl IncrementGameStat
 _080E732E:
 	pop {r4-r7}
 	pop {r0}

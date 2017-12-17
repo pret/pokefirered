@@ -373,17 +373,17 @@ _0807F0AC: .4byte gUnknown_83C68D4
 sub_807F0B0: @ 807F0B0
 	push {lr}
 	bl sub_8055FD4
-	ldr r0, _0807F0C4 @ =sub_807F0C8
+	ldr r0, _0807F0C4 @ =task50_0807F0C8
 	movs r1, 0x50
 	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F0C4: .4byte sub_807F0C8
+_0807F0C4: .4byte task50_0807F0C8
 	thumb_func_end sub_807F0B0
 
-	thumb_func_start sub_807F0C8
-sub_807F0C8: @ 807F0C8
+	thumb_func_start task50_0807F0C8
+task50_0807F0C8: @ 807F0C8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -399,7 +399,7 @@ _0807F0E4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807F0C8
+	thumb_func_end task50_0807F0C8
 
 	thumb_func_start sub_807F0EC
 sub_807F0EC: @ 807F0EC
@@ -771,7 +771,7 @@ _0807F3E0:
 	ldr r5, _0807F424 @ =gUnknown_2021D18
 	adds r0, r5, 0
 	mov r1, r8
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	mov r8, r0
 	str r0, [sp]
@@ -785,7 +785,7 @@ _0807F3E0:
 	movs r1, 0x2
 	mov r2, r10
 	mov r3, r9
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldr r2, _0807F42C @ =gUnknown_3003E50
 	ldrb r1, [r2]
 	movs r0, 0x2
@@ -802,7 +802,7 @@ _0807F42C: .4byte gUnknown_3003E50
 _0807F430:
 	bl sub_8002DE8
 	adds r0, r7, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -859,7 +859,7 @@ _0807F48C:
 	.4byte _0807F5D0
 _0807F4A8:
 	ldr r0, _0807F518 @ =gUnknown_83C68E4
-	bl sub_8003CE4
+	bl AddWindow
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, _0807F51C @ =gUnknown_3005090

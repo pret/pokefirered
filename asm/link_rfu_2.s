@@ -3720,7 +3720,7 @@ sub_80FA2B0: @ 80FA2B0
 	bl sub_80F9D04
 	strh r4, [r5]
 _080FA2DE:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
@@ -3837,7 +3837,7 @@ _080FA3B8: .4byte 0x0000069e
 _080FA3BC: .4byte gUnknown_3003F50
 _080FA3C0: .4byte sub_80FA2B0
 _080FA3C4:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0x1
@@ -9651,7 +9651,7 @@ _080FCF88:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _080FCFA6:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -9992,7 +9992,7 @@ _080FD220:
 	ble _080FD1F4
 	mov r4, r9
 _080FD22C:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -10049,7 +10049,7 @@ _080FD29E:
 	adds r5, 0x1C
 	adds r4, 0x1
 _080FD2A4:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0

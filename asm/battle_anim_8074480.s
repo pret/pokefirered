@@ -545,8 +545,8 @@ _0807489E:
 	bx r1
 	thumb_func_end sub_8074844
 
-	thumb_func_start sub_80748A8
-sub_80748A8: @ 80748A8
+	thumb_func_start GetBankSpriteDefault_Y
+GetBankSpriteDefault_Y: @ 80748A8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -556,10 +556,10 @@ sub_80748A8: @ 80748A8
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80748A8
+	thumb_func_end GetBankSpriteDefault_Y
 
-	thumb_func_start sub_80748BC
-sub_80748BC: @ 80748BC
+	thumb_func_start GetSubstituteSpriteDefault_Y
+GetSubstituteSpriteDefault_Y: @ 80748BC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -592,7 +592,7 @@ _080748F0:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80748BC
+	thumb_func_end GetSubstituteSpriteDefault_Y
 
 	thumb_func_start sub_8074900
 sub_8074900: @ 8074900

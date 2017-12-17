@@ -70,8 +70,8 @@ nullsub_39: @ 806E7D8
 	bx lr
 	thumb_func_end nullsub_39
 
-	thumb_func_start sub_806E7DC
-sub_806E7DC: @ 806E7DC
+	thumb_func_start trigger_activate_weather
+trigger_activate_weather: @ 806E7DC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -100,6 +100,6 @@ _0806E80A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E7DC
+	thumb_func_end trigger_activate_weather
 
 	.align 2, 0 @ Don't pad with nop.

@@ -222,8 +222,8 @@ _08045554: .4byte gUnknown_3005008
 _08045558: .4byte 0x00002cd0
 	thumb_func_end StorePokemonInDaycare
 
-	thumb_func_start sub_804555C
-sub_804555C: @ 804555C
+	thumb_func_start StorePokemonInEmptyDaycareSlot
+StorePokemonInEmptyDaycareSlot: @ 804555C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -240,10 +240,10 @@ sub_804555C: @ 804555C
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804555C
+	thumb_func_end StorePokemonInEmptyDaycareSlot
 
-	thumb_func_start sub_8045580
-sub_8045580: @ 8045580
+	thumb_func_start StoreSelectedPokemonInDaycare
+StoreSelectedPokemonInDaycare: @ 8045580
 	push {lr}
 	bl GetCursorSelectionMonId
 	lsls r0, 24
@@ -257,13 +257,13 @@ sub_8045580: @ 8045580
 	movs r2, 0xBE
 	lsls r2, 6
 	adds r1, r2
-	bl sub_804555C
+	bl StorePokemonInEmptyDaycareSlot
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080455A4: .4byte gUnknown_2024284
 _080455A8: .4byte gUnknown_3005008
-	thumb_func_end sub_8045580
+	thumb_func_end StoreSelectedPokemonInDaycare
 
 	thumb_func_start ShiftDaycareSlots
 ShiftDaycareSlots: @ 80455AC
@@ -1763,7 +1763,7 @@ sub_80460D4: @ 80460D4
 	ldrh r1, [r4]
 	mov r0, sp
 	adds r2, r5, 0
-	bl sub_8046208
+	bl SetInitialEggData
 	mov r0, sp
 	adds r1, r5, 0
 	bl InheritIVs
@@ -1803,8 +1803,8 @@ sub_80460D4: @ 80460D4
 _0804614C: .4byte gUnknown_2024284
 	thumb_func_end sub_80460D4
 
-	thumb_func_start sub_8046150
-sub_8046150: @ 8046150
+	thumb_func_start CreateEgg
+CreateEgg: @ 8046150
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1889,10 +1889,10 @@ _080461E2:
 	.align 2, 0
 _08046200: .4byte gUnknown_825F83E
 _08046204: .4byte gUnknown_8254795
-	thumb_func_end sub_8046150
+	thumb_func_end CreateEgg
 
-	thumb_func_start sub_8046208
-sub_8046208: @ 8046208
+	thumb_func_start SetInitialEggData
+SetInitialEggData: @ 8046208
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -1967,7 +1967,7 @@ sub_8046208: @ 8046208
 	.align 2, 0
 _080462A4: .4byte gUnknown_825F83E
 _080462A8: .4byte gUnknown_8254795
-	thumb_func_end sub_8046208
+	thumb_func_end SetInitialEggData
 
 	thumb_func_start sub_80462AC
 sub_80462AC: @ 80462AC
@@ -3054,7 +3054,7 @@ ShowDaycareLevelMenu: @ 8046AB8
 	push {r4,r5,lr}
 	sub sp, 0x18
 	ldr r0, _08046B18 @ =gUnknown_825F7F4
-	bl sub_8003CE4
+	bl AddWindow
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

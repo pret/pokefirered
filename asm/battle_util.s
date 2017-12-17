@@ -605,7 +605,7 @@ _080172B4:
 	str r0, [r5]
 	adds r4, 0x1
 _080172C2:
-	bl sub_800A088
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1820,7 +1820,7 @@ _08017C2C:
 	adds r1, r4, r7
 	ldrb r1, [r1]
 	movs r2, 0
-	bl sub_8014CD8
+	bl GetWhoStrikesFirst
 	lsls r0, 24
 	cmp r0, 0
 	beq _08017C4C
@@ -1828,7 +1828,7 @@ _08017C2C:
 	lsrs r1, 24
 	mov r2, r8
 	lsrs r0, r2, 24
-	bl sub_8014CA4
+	bl SwapTurnOrder
 _08017C4C:
 	adds r4, 0x1
 	ldr r0, _08017D18 @ =gUnknown_2023BCC
@@ -1900,7 +1900,7 @@ _08017C8E:
 	ands r0, r1
 	strh r0, [r3]
 	ldr r0, _08017D38 @ =gUnknown_81D8B32
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r0, 0xFD
 	strb r0, [r5]
 	movs r0, 0x2
@@ -1995,7 +1995,7 @@ _08017D56:
 	ands r0, r1
 	strh r0, [r3]
 	ldr r0, _08017DFC @ =gUnknown_81D8B32
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	ldr r0, _08017E00 @ =gUnknown_2023E82
 	strb r4, [r0, 0x5]
 	movs r0, 0xFD
@@ -2087,7 +2087,7 @@ _08017E20:
 	ands r0, r1
 	strh r0, [r2]
 	ldr r0, _08017ED8 @ =gUnknown_81D8B32
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	ldr r0, _08017EDC @ =gUnknown_2023E82
 	strb r4, [r0, 0x5]
 	movs r0, 0xFD
@@ -2190,7 +2190,7 @@ _08017EF4:
 	ands r0, r1
 	strh r0, [r3]
 	ldr r0, _08017F94 @ =gUnknown_81D8B43
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	mov r0, r9
 	adds r0, 0x1
 	lsls r0, 24
@@ -2281,7 +2281,7 @@ _08017FB0:
 	ldr r0, _08018044 @ =gUnknown_2023D6C
 	strb r2, [r0]
 	ldr r0, _08018048 @ =gUnknown_81D8ED5
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	mov r0, r9
 	adds r0, 0x1
 	lsls r0, 24
@@ -2529,7 +2529,7 @@ _080181DC:
 _080181EC:
 	ldr r0, [r3]
 _080181EE:
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	mov r0, r9
 	adds r0, 0x1
 	lsls r0, 24
@@ -3190,7 +3190,7 @@ _08018734:
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	ldr r0, _0801878C @ =gUnknown_81D904A
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	ldr r4, _08018790 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
 	strb r0, [r4]
@@ -3341,7 +3341,7 @@ _08018888:
 	bl CancelMultiTurnMoves
 _08018894:
 	ldr r0, _080188AC @ =gUnknown_81D90BC
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r5, 0x1
 	mov r9, r5
 _0801889E:
@@ -3432,7 +3432,7 @@ _08018926:
 	b _08018C08
 _08018944:
 	ldr r0, _08018954 @ =gUnknown_81D90C5
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	b _08018C08
 	.align 2, 0
 _0801894C: .4byte 0xffffefff
@@ -3785,7 +3785,7 @@ _08018B6C:
 	strb r0, [r1]
 	ldr r0, _08018C30 @ =gUnknown_81D91C7
 _08018C04:
-	bl sub_801BBE4
+	bl BattleScriptExecute
 _08018C08:
 	mov r0, r9
 	adds r0, 0x1
@@ -4188,7 +4188,7 @@ _08018F40:
 	str r0, [r1]
 	ldr r0, [r1]
 _08018F44:
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r0, 0x1
 	b _08018F74
 	.align 2, 0
@@ -4226,8 +4226,8 @@ _08018F88: .4byte gUnknown_2023DD0
 _08018F8C: .4byte 0xfeffffdf
 	thumb_func_end sub_8018C98
 
-	thumb_func_start sub_8018F90
-sub_8018F90: @ 8018F90
+	thumb_func_start HandleFaintedMonActions
+HandleFaintedMonActions: @ 8018F90
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4243,7 +4243,7 @@ sub_8018F90: @ 8018F90
 _08018FA8: .4byte gUnknown_2022B4C
 _08018FAC:
 	ldr r0, _08018FBC @ =gUnknown_81D8694
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	ldr r0, [r5]
 	adds r0, 0x4D
 	movs r1, 0x2
@@ -4252,7 +4252,7 @@ _08018FAC:
 _08018FBC: .4byte gUnknown_81D8694
 _08018FC0:
 	ldr r0, _08018FD4 @ =gUnknown_81D869D
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	ldr r0, [r5]
 	adds r0, 0x4D
 	movs r1, 0x5
@@ -4602,10 +4602,10 @@ _08019274:
 	bx r1
 	.align 2, 0
 _08019280: .4byte gUnknown_2023FE8
-	thumb_func_end sub_8018F90
+	thumb_func_end HandleFaintedMonActions
 
-	thumb_func_start sub_8019284
-sub_8019284: @ 8019284
+	thumb_func_start TryClearRageStatuses
+TryClearRageStatuses: @ 8019284
 	push {r4-r6,lr}
 	movs r3, 0
 	ldr r0, _080192C4 @ =gUnknown_2023BCC
@@ -4645,7 +4645,7 @@ _080192C4: .4byte gUnknown_2023BCC
 _080192C8: .4byte gUnknown_2023DC4
 _080192CC: .4byte gUnknown_2023C34
 _080192D0: .4byte 0xff7fffff
-	thumb_func_end sub_8019284
+	thumb_func_end TryClearRageStatuses
 
 	thumb_func_start sub_80192D4
 sub_80192D4: @ 80192D4
@@ -6518,7 +6518,7 @@ _0801A25A:
 	ldr r1, _0801A274 @ =gUnknown_2023E82
 	strb r0, [r1, 0x5]
 	ldr r0, _0801A278 @ =gUnknown_81D8B1F
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	bl _0801BBAA
 	.align 2, 0
 _0801A26C: .4byte gUnknown_2023F1C
@@ -6537,7 +6537,7 @@ _0801A28C:
 	movs r0, 0x5
 	strh r0, [r2]
 	ldr r0, _0801A2A4 @ =gUnknown_81D927F
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	ldr r0, _0801A2A8 @ =gUnknown_2023FC4
 	mov r1, r10
 	strb r1, [r0, 0x17]
@@ -6558,7 +6558,7 @@ _0801A2BC:
 	movs r0, 0x18
 	strh r0, [r2]
 	ldr r0, _0801A2D4 @ =gUnknown_81D92BF
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	ldr r0, _0801A2D8 @ =gUnknown_2023FC4
 	mov r2, r10
 	strb r2, [r0, 0x17]
@@ -6579,7 +6579,7 @@ _0801A2EC:
 	movs r0, 0x60
 	strh r0, [r2]
 	ldr r0, _0801A304 @ =gUnknown_81D9379
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	ldr r0, _0801A308 @ =gUnknown_2023FC4
 	mov r3, r10
 	strb r3, [r0, 0x17]
@@ -6625,7 +6625,7 @@ _0801A340:
 	bl _0801BBC6
 _0801A354:
 	ldr r0, _0801A364 @ =gUnknown_81D92F8
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	ldr r0, _0801A368 @ =gUnknown_2023FC4
 	mov r1, r10
 	strb r1, [r0, 0x17]
@@ -6766,7 +6766,7 @@ _0801A476:
 	mov r0, r8
 	strb r5, [r0]
 	ldr r0, _0801A4A0 @ =gUnknown_81D92AB
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	ldr r1, _0801A4A4 @ =gUnknown_2023D50
 	ldrh r0, [r4, 0x2C]
 	lsrs r0, 4
@@ -6863,7 +6863,7 @@ _0801A52C:
 	strb r1, [r4]
 	strb r1, [r0, 0x17]
 	ldr r0, _0801A588 @ =gUnknown_81D92D3
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	str r5, [sp]
 	movs r0, 0
 	movs r1, 0x28
@@ -6911,7 +6911,7 @@ _0801A5B0:
 	strb r0, [r4, 0x10]
 	strb r1, [r4, 0x11]
 	ldr r0, _0801A5D4 @ =gUnknown_81D9293
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	mov r0, r10
 	strb r0, [r4, 0x17]
 	bl _0801BB5A
@@ -9337,7 +9337,7 @@ _0801BA58: .4byte gUnknown_2023BE4
 _0801BA5C: .4byte gUnknown_2023D6A
 _0801BA60:
 	ldr r0, _0801BA78 @ =gUnknown_81D92F8
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	ldr r0, _0801BA7C @ =gUnknown_2023FC4
 	strb r4, [r0, 0x17]
 _0801BA6A:
@@ -9354,7 +9354,7 @@ _0801BA7C: .4byte gUnknown_2023FC4
 _0801BA80: .4byte gUnknown_2023FE8
 _0801BA84:
 	ldr r0, _0801BAA0 @ =gUnknown_81D92F8
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	ldr r0, _0801BAA4 @ =gUnknown_2023FC4
 	mov r3, r10
 	strb r3, [r0, 0x17]
@@ -9377,14 +9377,14 @@ _0801BAAC:
 	ands r0, r1
 	str r0, [r2]
 	ldr r0, _0801BAC4 @ =gUnknown_81D9307
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	b _0801BB52
 	.align 2, 0
 _0801BAC0: .4byte 0xfff7ffff
 _0801BAC4: .4byte gUnknown_81D9307
 _0801BAC8:
 	ldr r0, _0801BB18 @ =gUnknown_81D92A1
-	bl sub_801BC24
+	bl BattleScriptPushCursorAndCallback
 	ldr r1, _0801BB1C @ =gUnknown_2023DFC
 	ldr r0, [sp, 0x18]
 	adds r1, r0, r1
@@ -9518,8 +9518,8 @@ _0801BBDC: .4byte gUnknown_2023BE4
 _0801BBE0: .4byte gUnknown_2023D6A
 	thumb_func_end sub_8019F18
 
-	thumb_func_start sub_801BBE4
-sub_801BBE4: @ 801BBE4
+	thumb_func_start BattleScriptExecute
+BattleScriptExecute: @ 801BBE4
 	ldr r1, _0801BC10 @ =gUnknown_2023D74
 	str r0, [r1]
 	ldr r0, _0801BC14 @ =gUnknown_2023FF4
@@ -9536,7 +9536,7 @@ sub_801BBE4: @ 801BBE4
 	ldr r1, _0801BC18 @ =gUnknown_3004F84
 	ldr r0, [r1]
 	str r0, [r2]
-	ldr r0, _0801BC1C @ =sub_8015C00
+	ldr r0, _0801BC1C @ =RunBattleScriptCommands_PopCallbacksStack
 	str r0, [r1]
 	ldr r1, _0801BC20 @ =gUnknown_2023BE3
 	movs r0, 0
@@ -9546,12 +9546,12 @@ sub_801BBE4: @ 801BBE4
 _0801BC10: .4byte gUnknown_2023D74
 _0801BC14: .4byte gUnknown_2023FF4
 _0801BC18: .4byte gUnknown_3004F84
-_0801BC1C: .4byte sub_8015C00
+_0801BC1C: .4byte RunBattleScriptCommands_PopCallbacksStack
 _0801BC20: .4byte gUnknown_2023BE3
-	thumb_func_end sub_801BBE4
+	thumb_func_end BattleScriptExecute
 
-	thumb_func_start sub_801BC24
-sub_801BC24: @ 801BC24
+	thumb_func_start BattleScriptPushCursorAndCallback
+BattleScriptPushCursorAndCallback: @ 801BC24
 	push {r4,lr}
 	adds r4, r0, 0
 	bl BattleScriptPushCursor
@@ -9581,7 +9581,7 @@ _0801BC58: .4byte gUnknown_2023D74
 _0801BC5C: .4byte gUnknown_2023FF4
 _0801BC60: .4byte gUnknown_3004F84
 _0801BC64: .4byte sub_8015C74
-	thumb_func_end sub_801BC24
+	thumb_func_end BattleScriptPushCursorAndCallback
 
 	thumb_func_start sub_801BC68
 sub_801BC68: @ 801BC68
@@ -9765,7 +9765,7 @@ _0801BDD0:
 	strb r7, [r0]
 	strb r7, [r1]
 	ldr r0, _0801BE00 @ =gUnknown_81D95D9
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	bl _0801CFA6
 	.align 2, 0
 _0801BDEC: .4byte gUnknown_2023BE4
@@ -9875,7 +9875,7 @@ _0801BF14:
 	negs r0, r0
 	str r0, [r4]
 	ldr r0, _0801BF28 @ =gUnknown_81D95EF
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	b _0801C27E
 	.align 2, 0
 _0801BF24: .4byte gUnknown_2023D50
@@ -9981,7 +9981,7 @@ _0801BFE0:
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
 	ldr r0, _0801C024 @ =gUnknown_81D960C
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	mov r1, r10
 	adds r1, 0x9
 	lsls r1, 24
@@ -10043,7 +10043,7 @@ _0801C066:
 	strb r7, [r0]
 	strb r7, [r1]
 	ldr r0, _0801C094 @ =gUnknown_81D95D9
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	bl _0801C952
 	.align 2, 0
 _0801C080: .4byte gUnknown_2023BE4
@@ -10089,7 +10089,7 @@ _0801C0D4:
 	negs r0, r0
 	str r0, [r3]
 	ldr r0, _0801C0F4 @ =gUnknown_81D961C
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r0, 0x4
 	str r0, [sp, 0xC]
 	adds r0, r7, 0
@@ -10286,7 +10286,7 @@ _0801C248:
 	cmp r0, 0
 	bge _0801C278
 	ldr r0, _0801C274 @ =gUnknown_81D964F
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	b _0801C27E
 	.align 2, 0
 _0801C26C: .4byte gUnknown_2022AB8
@@ -10294,7 +10294,7 @@ _0801C270: .4byte gUnknown_2023D50
 _0801C274: .4byte gUnknown_81D964F
 _0801C278:
 	ldr r0, _0801C284 @ =gUnknown_81D95EF
-	bl sub_801BBE4
+	bl BattleScriptExecute
 _0801C27E:
 	movs r0, 0x4
 	str r0, [sp, 0xC]
@@ -10362,7 +10362,7 @@ _0801C2DC:
 	bge _0801C30C
 _0801C2F8:
 	ldr r0, _0801C308 @ =gUnknown_81D964F
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	b _0801C312
 	.align 2, 0
 _0801C300: .4byte gUnknown_2022AB8
@@ -10370,7 +10370,7 @@ _0801C304: .4byte gUnknown_2023D50
 _0801C308: .4byte gUnknown_81D964F
 _0801C30C:
 	ldr r0, _0801C318 @ =gUnknown_81D95EF
-	bl sub_801BBE4
+	bl BattleScriptExecute
 _0801C312:
 	movs r3, 0x4
 	str r3, [sp, 0xC]
@@ -10437,7 +10437,7 @@ _0801C36E:
 	bge _0801C3A0
 _0801C38A:
 	ldr r0, _0801C39C @ =gUnknown_81D964F
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	b _0801C3A6
 	.align 2, 0
 _0801C394: .4byte gUnknown_2022AB8
@@ -10445,7 +10445,7 @@ _0801C398: .4byte gUnknown_2023D50
 _0801C39C: .4byte gUnknown_81D964F
 _0801C3A0:
 	ldr r0, _0801C3AC @ =gUnknown_81D95EF
-	bl sub_801BBE4
+	bl BattleScriptExecute
 _0801C3A6:
 	movs r2, 0x4
 	str r2, [sp, 0xC]
@@ -10632,7 +10632,7 @@ _0801C506:
 	strb r0, [r1, 0x10]
 	strb r6, [r1, 0x11]
 	ldr r0, _0801C524 @ =gUnknown_81D9679
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r2, 0x5
 	str r2, [sp, 0xC]
 	b _0801C95A
@@ -10682,7 +10682,7 @@ _0801C56C:
 	strb r0, [r1, 0x10]
 	strb r6, [r1, 0x11]
 	ldr r0, _0801C588 @ =gUnknown_81D9679
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r5, 0x5
 	str r5, [sp, 0xC]
 	b _0801C95A
@@ -10724,7 +10724,7 @@ _0801C5C2:
 	orrs r2, r3
 	str r2, [r1]
 	ldr r0, _0801C5D4 @ =gUnknown_81D9694
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r2, 0x2
 	str r2, [sp, 0xC]
 	b _0801C95A
@@ -10832,7 +10832,7 @@ _0801C638:
 	strb r0, [r1, 0x10]
 	strb r2, [r1, 0x11]
 	ldr r0, _0801C6BC @ =gUnknown_81D9679
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r0, 0x5
 	str r0, [sp, 0xC]
 	b _0801C95A
@@ -10862,7 +10862,7 @@ _0801C6D8:
 	ands r2, r0
 	str r2, [r1]
 	ldr r0, _0801C6EC @ =gUnknown_81D9531
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r1, 0x1
 	str r1, [sp, 0xC]
 	b _0801C95A
@@ -10886,7 +10886,7 @@ _0801C708:
 	ands r2, r0
 	str r2, [r1]
 	ldr r0, _0801C720 @ =gUnknown_81D9549
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r2, 0x1
 	str r2, [sp, 0xC]
 	b _0801C95A
@@ -10912,7 +10912,7 @@ _0801C73C:
 	ands r2, r0
 	str r2, [r1]
 	ldr r0, _0801C750 @ =gUnknown_81D9561
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r3, 0x1
 	str r3, [sp, 0xC]
 	b _0801C95A
@@ -10937,7 +10937,7 @@ _0801C76C:
 	ands r2, r0
 	str r2, [r1]
 	ldr r0, _0801C780 @ =gUnknown_81D9579
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r5, 0x1
 	str r5, [sp, 0xC]
 	b _0801C95A
@@ -10992,7 +10992,7 @@ _0801C7D8:
 	ands r2, r0
 	str r2, [r1]
 	ldr r0, _0801C7EC @ =gUnknown_81D95A9
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r1, 0x2
 	str r1, [sp, 0xC]
 	b _0801C95A
@@ -11133,7 +11133,7 @@ _0801C8E4:
 	str r0, [r3]
 	ldr r0, _0801C918 @ =gUnknown_81D95BF
 _0801C906:
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	movs r0, 0x1
 	str r0, [sp, 0xC]
 	b _0801C95A
@@ -11161,7 +11161,7 @@ _0801C91C:
 	ldr r1, _0801C980 @ =gUnknown_82500C4
 	bl StringCopy
 	ldr r0, _0801C984 @ =gUnknown_81D95BF
-	bl sub_801BBE4
+	bl BattleScriptExecute
 	ldr r1, _0801C988 @ =gUnknown_2023E82
 	movs r0, 0
 	strb r0, [r1, 0x5]

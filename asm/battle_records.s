@@ -101,7 +101,7 @@ _080CD2E2:
 	b _080CD324
 _080CD302:
 	ldr r0, _080CD310 @ =gUnknown_83F6C68
-	bl sub_8003B24
+	bl InitWindows
 	bl DeactivateAllTextPrinters
 	b _080CD324
 	.align 2, 0
@@ -777,12 +777,12 @@ _080CD836:
 	movs r4, 0x19
 _080CD838:
 	adds r0, r4, 0
-	bl sub_8054EC4
+	bl GetGameStat
 	ldr r1, _080CD850 @ =0x0000270e
 	cmp r0, r1
 	bhi _080CD84A
 	adds r0, r4, 0
-	bl sub_8054E90
+	bl IncrementGameStat
 _080CD84A:
 	pop {r4}
 	pop {r0}
@@ -1007,13 +1007,13 @@ sub_80CD9F4: @ 80CD9F4
 	push {r4-r7,lr}
 	sub sp, 0x14
 	movs r0, 0x17
-	bl sub_8054EC4
+	bl GetGameStat
 	adds r4, r0, 0
 	movs r0, 0x18
-	bl sub_8054EC4
+	bl GetGameStat
 	adds r5, r0, 0
 	movs r0, 0x19
-	bl sub_8054EC4
+	bl GetGameStat
 	adds r6, r0, 0
 	ldr r0, _080CDAB0 @ =0x0000270f
 	cmp r4, r0
@@ -1080,7 +1080,7 @@ _080CDA72:
 	bls _080CDA54
 	adds r0, r7, 0
 	mov r1, r12
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	str r0, [sp]
 	movs r1, 0x2
@@ -1092,7 +1092,7 @@ _080CDA72:
 	movs r1, 0x2
 	movs r2, 0xC
 	movs r3, 0x18
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	add sp, 0x14
 	pop {r4-r7}
 	pop {r0}
@@ -1138,7 +1138,7 @@ sub_80CDAD0: @ 80CDAD0
 	movs r1, 0x2
 	movs r2, 0
 	mov r3, r8
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	movs r6, 0
 _080CDB0E:
 	movs r4, 0x54
@@ -1161,7 +1161,7 @@ _080CDB1C:
 	movs r0, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1230,7 +1230,7 @@ _080CDBA6:
 	movs r0, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1268,7 +1268,7 @@ sub_80CDBE4: @ 80CDBE4
 	ldr r5, _080CDC9C @ =gUnknown_2021D18
 	ldr r1, _080CDCA0 @ =gUnknown_8418174
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0x2
@@ -1291,7 +1291,7 @@ sub_80CDBE4: @ 80CDBE4
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x4
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	ldr r5, _080CDCA8 @ =gUnknown_300500C
 	ldr r0, [r5]
 	ldr r1, _080CDCAC @ =0x00000a98
@@ -1309,7 +1309,7 @@ sub_80CDBE4: @ 80CDBE4
 	movs r1, 0x2
 	movs r2, 0x54
 	movs r3, 0x30
-	bl sub_812E5A4
+	bl AddTextPrinterParametrized2
 	adds r7, r5, 0
 	movs r5, 0xF4
 	lsls r5, 22

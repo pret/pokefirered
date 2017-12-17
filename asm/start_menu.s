@@ -25,7 +25,7 @@ _0806ED70:
 	bl sub_806EE58
 	b _0806ED90
 _0806ED7E:
-	bl sub_80A0E90
+	bl GetSafariZoneFlag
 	cmp r0, 0x1
 	bne _0806ED8C
 	bl sub_806EE04
@@ -152,7 +152,7 @@ sub_806EE7C: @ 806EE7C
 	sub sp, 0xC
 	ldr r4, _0806EEF4 @ =gUnknown_2037101
 	ldr r0, _0806EEF8 @ =gUnknown_83A738C
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	bl PutWindowTilemap
@@ -180,7 +180,7 @@ sub_806EE7C: @ 806EE7C
 	ldr r5, _0806EF10 @ =gUnknown_2021D18
 	ldr r1, _0806EF14 @ =gUnknown_84162A9
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldrb r0, [r4]
 	movs r1, 0x3
 	str r1, [sp]
@@ -214,7 +214,7 @@ _0806EF14: .4byte gUnknown_84162A9
 	thumb_func_start sub_806EF18
 sub_806EF18: @ 806EF18
 	push {r4,lr}
-	bl sub_80A0E90
+	bl GetSafariZoneFlag
 	cmp r0, 0
 	beq _0806EF3A
 	ldr r4, _0806EF40 @ =gUnknown_2037101
@@ -266,7 +266,7 @@ _0806EF68:
 	cmp r1, 0x8
 	bne _0806EFA8
 _0806EF7C:
-	bl sub_80F793C
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4]
@@ -290,8 +290,8 @@ _0806EFA8:
 	add r0, r10
 	ldr r1, [r0]
 	mov r0, r9
-	bl sub_8008FCC
-	bl sub_80F793C
+	bl StringExpandPlaceholders
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r5, 4
@@ -397,7 +397,7 @@ _0806F06C:
 _0806F088: .4byte gUnknown_20370F5
 _0806F08C: .4byte gUnknown_20370FF
 _0806F090:
-	bl sub_80A0E90
+	bl GetSafariZoneFlag
 	cmp r0, 0
 	beq _0806F09C
 	bl sub_806EE7C
@@ -424,7 +424,7 @@ _0806F0B8:
 	.align 2, 0
 _0806F0C0: .4byte gUnknown_2037100
 _0806F0C4:
-	bl sub_80F793C
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0xF
@@ -462,7 +462,7 @@ _0806F0C4:
 	ldr r0, [r0]
 	bl sub_80F7974
 _0806F118:
-	bl sub_80F793C
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -502,8 +502,8 @@ _0806F156:
 _0806F164: .4byte gUnknown_20370FF
 	thumb_func_end sub_806F14C
 
-	thumb_func_start sub_806F168
-sub_806F168: @ 806F168
+	thumb_func_start task50_startmenu
+task50_startmenu: @ 806F168
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -518,7 +518,7 @@ _0806F180:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806F168
+	thumb_func_end task50_startmenu
 
 	thumb_func_start sub_806F188
 sub_806F188: @ 806F188
@@ -528,7 +528,7 @@ sub_806F188: @ 806F188
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
-	ldr r4, _0806F1B4 @ =sub_806F168
+	ldr r4, _0806F1B4 @ =task50_startmenu
 	adds r0, r4, 0
 	movs r1, 0x50
 	bl CreateTask
@@ -542,7 +542,7 @@ sub_806F188: @ 806F188
 	bx r0
 	.align 2, 0
 _0806F1B0: .4byte gUnknown_20370FF
-_0806F1B4: .4byte sub_806F168
+_0806F1B4: .4byte task50_startmenu
 	thumb_func_end sub_806F188
 
 	thumb_func_start sub_806F1B8
@@ -601,7 +601,7 @@ _0806F214:
 	bl InUnionRoom
 	cmp r0, 0x1
 	bne _0806F220
-	bl sub_81198EC
+	bl var_800D_set_xB
 _0806F220:
 	ldr r1, _0806F230 @ =gUnknown_20370F0
 	ldr r0, _0806F234 @ =sub_806F280
@@ -820,7 +820,7 @@ sub_806F3CC: @ 806F3CC
 	cmp r1, r0
 	bne _0806F408
 	movs r0, 0
-	bl sub_8088E8C
+	bl pokedex_count
 	lsls r0, 16
 	cmp r0, 0
 	bne _0806F408
@@ -853,7 +853,7 @@ sub_806F410: @ 806F410
 _0806F424: .4byte gUnknown_2037AB8
 _0806F428:
 	movs r0, 0x29
-	bl sub_8054E90
+	bl IncrementGameStat
 	bl play_some_sound
 	bl sub_806EF18
 	bl sub_80563F0
@@ -1158,13 +1158,13 @@ sub_806F67C: @ 806F67C
 	movs r0, 0xC
 	bl sub_812B1F0
 	bl sub_806F624
-	ldr r0, _0806F698 @ =sub_806F6D4
+	ldr r0, _0806F698 @ =task50_save_game
 	movs r1, 0x50
 	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806F698: .4byte sub_806F6D4
+_0806F698: .4byte task50_save_game
 	thumb_func_end sub_806F67C
 
 	thumb_func_start sub_806F69C
@@ -1174,7 +1174,7 @@ sub_806F69C: @ 806F69C
 	adds r4, r1, 0
 	ldr r0, _0806F6C8 @ =gUnknown_2021D18
 	adds r1, r2, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_80F7768
@@ -1194,8 +1194,8 @@ _0806F6CC: .4byte gUnknown_3000FA9
 _0806F6D0: .4byte gUnknown_3000FA4
 	thumb_func_end sub_806F69C
 
-	thumb_func_start sub_806F6D4
-sub_806F6D4: @ 806F6D4
+	thumb_func_start task50_save_game
+task50_save_game: @ 806F6D4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1232,7 +1232,7 @@ _0806F712:
 	bx r0
 	.align 2, 0
 _0806F718: .4byte gUnknown_20370D0
-	thumb_func_end sub_806F6D4
+	thumb_func_end task50_save_game
 
 	thumb_func_start sub_806F71C
 sub_806F71C: @ 806F71C
@@ -1324,12 +1324,12 @@ _0806F7A2:
 	thumb_func_start sub_806F7A8
 sub_806F7A8: @ 806F7A8
 	push {lr}
-	bl sub_80F793C
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
 	bl sub_80F6F9C
-	bl sub_80F7948
+	bl remove_start_menu_window_maybe
 	movs r0, 0
 	bl sub_8112EDC
 	bl sub_806FCF4
@@ -1362,7 +1362,7 @@ _0806F7F4: .4byte sub_806F7F8
 	thumb_func_start sub_806F7F8
 sub_806F7F8: @ 806F7F8
 	push {lr}
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1481,7 +1481,7 @@ _0806F8D8: .4byte sub_806F8DC
 	thumb_func_start sub_806F8DC
 sub_806F8DC: @ 806F8DC
 	push {lr}
-	bl sub_81100C8
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1536,7 +1536,7 @@ _0806F93C: .4byte sub_806F940
 sub_806F940: @ 806F940
 	push {r4,lr}
 	movs r0, 0
-	bl sub_8054E90
+	bl IncrementGameStat
 	ldr r4, _0806F95C @ =gUnknown_2031DB0
 	ldrb r0, [r4]
 	cmp r0, 0x1
@@ -1777,7 +1777,7 @@ _0806FB12:
 	movs r2, 0x1
 	bl sub_8001658
 	ldr r0, _0806FB38 @ =gUnknown_83A73BC
-	bl sub_8003B24
+	bl InitWindows
 	movs r0, 0
 	movs r1, 0x8
 	movs r2, 0xF0
@@ -2008,7 +2008,7 @@ sub_806FCF4: @ 806FCF4
 	sub sp, 0xC
 	ldr r5, _0806FE54 @ =gUnknown_2037104
 	ldr r0, _0806FE58 @ =gUnknown_83A73CC
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r5]
 	ldrb r0, [r5]
 	ldr r4, _0806FE5C @ =0x0000021d
@@ -2043,7 +2043,7 @@ sub_806FCF4: @ 806FCF4
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0x2
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -2058,7 +2058,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0xE
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2077,7 +2077,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x1C
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0x4
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2091,7 +2091,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x3C
 	movs r3, 0x1C
-	bl sub_812E51C
+	bl box_print
 	movs r7, 0x2A
 	ldr r0, _0806FE78 @ =0x00000829
 	bl FlagGet
@@ -2108,7 +2108,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x2A
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2121,7 +2121,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x3C
 	movs r3, 0x2A
-	bl sub_812E51C
+	bl box_print
 	movs r7, 0x38
 _0806FE0A:
 	ldrb r0, [r5]
@@ -2133,7 +2133,7 @@ _0806FE0A:
 	movs r1, 0
 	movs r2, 0x2
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	movs r0, 0x2
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2146,7 +2146,7 @@ _0806FE0A:
 	movs r1, 0
 	movs r2, 0x3C
 	adds r3, r7, 0
-	bl sub_812E51C
+	bl box_print
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -2193,12 +2193,12 @@ sub_806FEA0: @ 806FEA0
 	push {lr}
 	movs r0, 0x5
 	bl sub_80722CC
-	bl sub_80F793C
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
 	bl sub_80F6F9C
-	bl sub_80F7948
+	bl remove_start_menu_window_maybe
 	bl sub_80696C0
 	bl ScriptContext2_Disable
 	pop {r0}

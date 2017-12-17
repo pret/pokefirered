@@ -38,7 +38,7 @@ sub_8079B7C: @ 8079B7C
 	cmp r0, 0x2
 	bne _08079BC8
 _08079BC4:
-	bl sub_8054A18
+	bl Sav2_ClearSetDefault
 _08079BC8:
 	ldr r0, _08079BFC @ =gUnknown_300500C
 	ldr r0, [r0]

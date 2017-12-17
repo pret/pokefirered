@@ -363,7 +363,7 @@ sub_806CAC8: @ 806CAC8
 	cmp r0, 0
 	beq _0806CB74
 	movs r0, 0x5
-	bl sub_8054E90
+	bl IncrementGameStat
 	bl sub_8146CA4
 	bl sub_815D8C8
 	bl sub_80CC918
@@ -791,7 +791,7 @@ sub_806CEA0: @ 806CEA0
 	lsrs r2, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_806CEE0
+	bl TryGetScriptOnPressingA
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _0806CEB8
@@ -819,8 +819,8 @@ _0806CED8: .4byte gUnknown_8168CE4
 _0806CEDC: .4byte gUnknown_81A6955
 	thumb_func_end sub_806CEA0
 
-	thumb_func_start sub_806CEE0
-sub_806CEE0: @ 806CEE0
+	thumb_func_start TryGetScriptOnPressingA
+TryGetScriptOnPressingA: @ 806CEE0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -861,7 +861,7 @@ _0806CF2C:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806CEE0
+	thumb_func_end TryGetScriptOnPressingA
 
 	thumb_func_start sub_806CF38
 sub_806CF38: @ 806CF38
@@ -1648,7 +1648,7 @@ _0806D59C: .4byte 0x00000824
 _0806D5A0: .4byte gUnknown_81A6AC8
 _0806D5A4:
 	adds r0, r4, 0
-	bl sub_805A104
+	bl MetatileBehavior_IsWaterfall
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1833,7 +1833,7 @@ _0806D704:
 	cmp r0, 0
 	beq _0806D720
 	movs r0, 0xD
-	bl sub_8054E90
+	bl IncrementGameStat
 	ldr r0, _0806D71C @ =gUnknown_81BF546
 	bl ScriptContext1_SetupScript
 	b _0806D730
@@ -2176,7 +2176,7 @@ sub_806D964: @ 806D964
 	ldr r0, _0806D9B8 @ =gUnknown_2036DFC
 	mov r8, r0
 	adds r1, r7, 0
-	bl sub_806DC30
+	bl map_warp_check_packed
 	lsls r0, 24
 	asrs r5, r0, 24
 	movs r0, 0x1
@@ -2185,7 +2185,7 @@ sub_806D964: @ 806D964
 	beq _0806DA00
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_806DBD8
+	bl is_non_stair_warp_tile
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2216,7 +2216,7 @@ _0806D9BC:
 	cmp r0, 0
 	beq _0806D9E2
 	movs r0, 0x1
-	bl sub_805BDEC
+	bl SetPlayerAvatarTransitionFlags
 	movs r4, 0xC
 _0806D9E2:
 	bl sub_8055A08
@@ -2252,7 +2252,7 @@ sub_806DA10: @ 806DA10
 	ldr r7, _0806DA68 @ =gUnknown_2036DFC
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_806DC30
+	bl map_warp_check_packed
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x1
@@ -2296,7 +2296,7 @@ _0806DA6C:
 	b _0806DAEE
 _0806DA82:
 	adds r0, r4, 0
-	bl sub_805A15C
+	bl MetatileBehavior_IsLavaridge1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2306,7 +2306,7 @@ _0806DA82:
 	b _0806DAEE
 _0806DA98:
 	adds r0, r4, 0
-	bl sub_805A170
+	bl MetatileBehavior_IsAquaHideoutWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2356,7 +2356,7 @@ sub_806DAF4: @ 806DAF4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8059BC8
+	bl MetatileBehavior_IsWarpDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2386,13 +2386,13 @@ sub_806DAF4: @ 806DAF4
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl sub_805A15C
+	bl MetatileBehavior_IsLavaridge1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl sub_805A170
+	bl MetatileBehavior_IsAquaHideoutWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2467,8 +2467,8 @@ _0806DBD2:
 	bx r1
 	thumb_func_end sub_806DB84
 
-	thumb_func_start sub_806DBD8
-sub_806DBD8: @ 806DBD8
+	thumb_func_start is_non_stair_warp_tile
+is_non_stair_warp_tile: @ 806DBD8
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -2501,12 +2501,12 @@ _0806DC06:
 _0806DC10:
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059CF0
+	bl MetatileBehavior_IsWestArrowWarp
 	b _0806DC22
 _0806DC1A:
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059CDC
+	bl MetatileBehavior_IsEastArrowWarp
 _0806DC22:
 	lsls r0, 24
 	lsrs r0, 24
@@ -2516,10 +2516,10 @@ _0806DC28:
 _0806DC2A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DBD8
+	thumb_func_end is_non_stair_warp_tile
 
-	thumb_func_start sub_806DC30
-sub_806DC30: @ 806DC30
+	thumb_func_start map_warp_check_packed
+map_warp_check_packed: @ 806DC30
 	push {lr}
 	adds r3, r1, 0
 	ldrh r1, [r3]
@@ -2536,7 +2536,7 @@ sub_806DC30: @ 806DC30
 	asrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DC30
+	thumb_func_end map_warp_check_packed
 
 	thumb_func_start sub_806DC54
 sub_806DC54: @ 806DC54
@@ -2612,7 +2612,7 @@ sub_806DCD0: @ 806DCD0
 	bne _0806DD30
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_8059BC8
+	bl MetatileBehavior_IsWarpDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2620,7 +2620,7 @@ sub_806DCD0: @ 806DCD0
 	ldr r7, _0806DD2C @ =gUnknown_2036DFC
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_806DC30
+	bl map_warp_check_packed
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x1
@@ -2706,7 +2706,7 @@ trigger_activate: @ 806DD80
 	cmp r1, 0
 	bne _0806DD96
 	ldrb r0, [r4, 0x6]
-	bl sub_806E7DC
+	bl trigger_activate_weather
 	b _0806DDB6
 _0806DD96:
 	ldrh r0, [r4, 0x6]
@@ -2990,7 +2990,7 @@ _0806DF98:
 	cmp r0, 0
 	beq _0806DFB0
 	bl sub_8055A08
-	bl sub_807E470
+	bl sp13E_warp_to_last_warp
 	movs r0, 0xE2
 	bl sub_80722CC
 	movs r0, 0x1
@@ -3125,7 +3125,7 @@ sub_806E08C: @ 806E08C
 	ldr r4, _0806E0CC @ =gUnknown_2036DFC
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_806DC30
+	bl map_warp_check_packed
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24

@@ -1159,7 +1159,7 @@ sub_8082FB0: @ 8082FB0
 	adds r1, r5, 0
 	bl sub_8082B64
 	movs r0, 0xC
-	bl sub_8054E90
+	bl IncrementGameStat
 	bl sub_807F704
 	pop {r4,r5}
 	pop {r0}
@@ -1168,8 +1168,8 @@ sub_8082FB0: @ 8082FB0
 _08082FE4: .4byte gUnknown_83C9CB8
 	thumb_func_end sub_8082FB0
 
-	thumb_func_start sub_8082FE8
-sub_8082FE8: @ 8082FE8
+	thumb_func_start GetLocalWildMon
+GetLocalWildMon: @ 8082FE8
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r0, 0
@@ -1239,10 +1239,10 @@ _0808306E:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8082FE8
+	thumb_func_end GetLocalWildMon
 
-	thumb_func_start sub_8083074
-sub_8083074: @ 8083074
+	thumb_func_start GetLocalWaterMon
+GetLocalWaterMon: @ 8083074
 	push {r4,lr}
 	bl sub_8082934
 	lsls r0, 16
@@ -1275,7 +1275,7 @@ _080830B2:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8083074
+	thumb_func_end GetLocalWaterMon
 
 	thumb_func_start sub_80830B8
 sub_80830B8: @ 80830B8

@@ -486,12 +486,12 @@ GetGroundEffectFlags_HotSprings: @ 8067EBC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x1E]
-	bl sub_805A0F0
+	bl MetatileBehavior_IsHotSprings
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067EFA
 	ldrb r0, [r4, 0x1F]
-	bl sub_805A0F0
+	bl MetatileBehavior_IsHotSprings
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067EFA
@@ -755,7 +755,7 @@ GetReflectionTypeByMetatileBehavior: @ 80680C8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8059BB4
+	bl MetatileBehavior_IsIce
 	lsls r0, 24
 	cmp r0, 0
 	beq _080680DE

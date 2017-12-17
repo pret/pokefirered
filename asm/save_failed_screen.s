@@ -472,8 +472,8 @@ _080F549A:
 	bx r1
 	thumb_func_end sub_80F5458
 
-	thumb_func_start sub_80F54A0
-sub_80F54A0: @ 80F54A0
+	thumb_func_start VerifySectorWipe
+VerifySectorWipe: @ 80F54A0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -506,10 +506,10 @@ _080F54DA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80F54A0
+	thumb_func_end VerifySectorWipe
 
-	thumb_func_start sub_80F54E0
-sub_80F54E0: @ 80F54E0
+	thumb_func_start WipeSector
+WipeSector: @ 80F54E0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -537,7 +537,7 @@ _080F54FA:
 	cmp r4, r8
 	bls _080F54FA
 	adds r0, r7, 0
-	bl sub_80F54A0
+	bl VerifySectorWipe
 	lsls r0, 16
 	lsrs r1, r0, 16
 	lsls r0, r5, 16
@@ -557,7 +557,7 @@ _080F5528:
 	.align 2, 0
 _080F5538: .4byte ProgramFlashByte
 _080F553C: .4byte 0x00000fff
-	thumb_func_end sub_80F54E0
+	thumb_func_end WipeSector
 
 	thumb_func_start sub_80F5540
 sub_80F5540: @ 80F5540
@@ -572,7 +572,7 @@ _080F5546:
 	cmp r0, 0
 	beq _080F555E
 	adds r0, r6, 0
-	bl sub_80F54E0
+	bl WipeSector
 	cmp r0, 0
 	bne _080F555E
 	bics r5, r4

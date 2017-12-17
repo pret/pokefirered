@@ -1101,14 +1101,14 @@ sub_8108654: @ 8108654
 	bne _08108688
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_810878C
+	bl bag_menu_print_cursor
 	b _08108690
 	.align 2, 0
 _08108684: .4byte gUnknown_203AD10
 _08108688:
 	adds r0, r6, 0
 	movs r1, 0xFF
-	bl sub_810878C
+	bl bag_menu_print_cursor
 _08108690:
 	movs r0, 0x2
 	negs r0, r0
@@ -1157,7 +1157,7 @@ _08108690:
 	ldr r4, _08108724 @ =gUnknown_2021D18
 	ldr r1, _08108728 @ =gUnknown_84162B9
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -1209,8 +1209,8 @@ _08108764: .4byte 0x00000296
 _08108768: .4byte gUnknown_8452F7C
 	thumb_func_end sub_8108654
 
-	thumb_func_start sub_810876C
-sub_810876C: @ 810876C
+	thumb_func_start bag_menu_print_cursor_
+bag_menu_print_cursor_: @ 810876C
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1221,14 +1221,14 @@ sub_810876C: @ 810876C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
-	bl sub_810878C
+	bl bag_menu_print_cursor
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810876C
+	thumb_func_end bag_menu_print_cursor_
 
-	thumb_func_start sub_810878C
-sub_810878C: @ 810878C
+	thumb_func_start bag_menu_print_cursor
+bag_menu_print_cursor: @ 810878C
 	push {r4,r5,lr}
 	sub sp, 0x14
 	lsls r0, 24
@@ -1274,7 +1274,7 @@ _081087DE:
 	bx r0
 	.align 2, 0
 _081087E8: .4byte gUnknown_841623B
-	thumb_func_end sub_810878C
+	thumb_func_end bag_menu_print_cursor
 
 	thumb_func_start sub_81087EC
 sub_81087EC: @ 81087EC
@@ -2413,7 +2413,7 @@ _08109084:
 	bl sub_8108978
 	ldrb r0, [r7]
 	movs r1, 0x2
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	strh r4, [r7, 0x2]
 	ldrb r0, [r5, 0x6]
 	adds r0, 0x1
@@ -2860,7 +2860,7 @@ sub_81093B8: @ 81093B8
 	ldr r4, _081094A4 @ =gUnknown_2021D18
 	ldr r1, _081094A8 @ =gUnknown_841633F
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	movs r1, 0
 	bl FillWindowPixelBuffer
@@ -2890,7 +2890,7 @@ sub_81093B8: @ 81093B8
 	mov r2, r8
 	ldrb r0, [r2]
 	movs r1, 0x2
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	movs r0, 0x8
 	negs r0, r0
 	add r9, r0
@@ -3241,7 +3241,7 @@ sub_810971C: @ 810971C
 	ldr r0, _081097DC @ =gUnknown_2021D18
 	mov r9, r0
 	adds r1, r6, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [sp]
 	movs r1, 0x1
@@ -3269,7 +3269,7 @@ sub_810971C: @ 810971C
 	bl sub_8008E78
 	ldr r1, _081097E0 @ =gUnknown_84162B9
 	mov r0, r9
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0xA
 	str r0, [sp]
 	mov r0, r8
@@ -3326,7 +3326,7 @@ sub_81097E4: @ 81097E4
 	ldr r4, _0810984C @ =gUnknown_2021D18
 	ldr r1, _08109850 @ =gUnknown_84162B9
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0xA
 	str r0, [sp]
 	movs r1, 0x1
@@ -3551,7 +3551,7 @@ _081099EC:
 	strb r0, [r4]
 	ldr r0, _08109A10 @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3729,7 +3729,7 @@ _08109AD4:
 	ldr r6, _08109BB0 @ =gUnknown_2021D18
 	ldr r1, _08109BB4 @ =gUnknown_84162FF
 	adds r0, r6, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [sp]
 	movs r0, 0x1
@@ -3959,7 +3959,7 @@ sub_8109D38: @ 8109D38
 	ldr r5, _08109DA4 @ =gUnknown_2021D18
 	ldr r1, _08109DA8 @ =gUnknown_8416409
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x6
 	movs r1, 0x1
 	bl sub_810B9DC
@@ -4011,7 +4011,7 @@ sub_8109DB0: @ 8109DB0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	adds r0, r5, 0
 	bl sub_810910C
 	pop {r4,r5}
@@ -4092,7 +4092,7 @@ _08109E64:
 	bl schedule_bg_copy_tilemap_to_vram
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	bl sub_8108978
 	adds r0, r6, 0
 	bl sub_810910C
@@ -4135,7 +4135,7 @@ sub_8109EA8: @ 8109EA8
 	ldr r6, _08109F38 @ =gUnknown_2021D18
 	ldr r1, _08109F3C @ =gUnknown_84163F4
 	adds r0, r6, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x6
 	movs r1, 0x3
 	bl sub_810B9DC
@@ -4237,7 +4237,7 @@ _08109F6E:
 	bl schedule_bg_copy_tilemap_to_vram
 	ldrb r0, [r7]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	mov r0, r8
 	bl sub_810910C
 _08109FE0:
@@ -4451,7 +4451,7 @@ sub_810A18C: @ 810A18C
 	ldr r5, _0810A1C4 @ =gUnknown_2021D18
 	ldr r1, _0810A1C8 @ =gUnknown_841635E
 	adds r0, r5, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r3, _0810A1CC @ =sub_810A1D0
 	adds r0, r4, 0
 	movs r1, 0x2
@@ -4541,7 +4541,7 @@ sub_810A1F8: @ 810A1F8
 	bl schedule_bg_copy_tilemap_to_vram
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	mov r0, r8
 	bl sub_810910C
 	pop {r3,r4}
@@ -4585,7 +4585,7 @@ sub_810A288: @ 810A288
 	bl schedule_bg_copy_tilemap_to_vram
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	adds r0, r5, 0
 	bl sub_810910C
 	add sp, 0x4
@@ -4619,7 +4619,7 @@ sub_810A2DC: @ 810A2DC
 	adds r0, r1
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	adds r0, r4, 0
 	bl sub_810910C
 	pop {r4}
@@ -4817,7 +4817,7 @@ sub_810A468: @ 810A468
 	lsrs r4, r0, 16
 	adds r6, r4, 0
 	adds r0, r4, 0
-	bl sub_80980F8
+	bl itemid_is_mail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4973,7 +4973,7 @@ _0810A5B4:
 	ldr r4, _0810A5EC @ =gUnknown_2021D18
 	ldr r1, _0810A5F0 @ =gUnknown_84168F1
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_80BF8E4
 	adds r1, r0, 0
 	lsls r1, 24
@@ -5011,7 +5011,7 @@ _0810A618:
 	ldr r4, _0810A648 @ =gUnknown_2021D18
 	ldr r1, _0810A64C @ =gUnknown_8416911
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_80BF8E4
 	adds r1, r0, 0
 	lsls r1, 24
@@ -5104,7 +5104,7 @@ sub_810A690: @ 810A690
 	ldr r4, _0810A700 @ =gUnknown_2021D18
 	ldr r1, _0810A704 @ =gUnknown_8416936
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	bl sub_80BF8E4
 	adds r1, r0, 0
 	lsls r1, 24
@@ -5163,7 +5163,7 @@ sub_810A720: @ 810A720
 	bl schedule_bg_copy_tilemap_to_vram
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	adds r0, r5, 0
 	bl sub_810910C
 	pop {r4,r5}
@@ -5204,7 +5204,7 @@ sub_810A770: @ 810A770
 	ldr r6, _0810A824 @ =gUnknown_2021D18
 	ldr r1, _0810A828 @ =gUnknown_84162B9
 	adds r0, r6, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0xA
 	str r0, [sp]
 	movs r1, 0x1
@@ -5370,7 +5370,7 @@ _0810A8F0:
 	bl sub_8108978
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	adds r0, r6, 0
 	bl sub_810910C
 _0810A93A:
@@ -5421,7 +5421,7 @@ sub_810A940: @ 810A940
 	ldr r4, _0810A9C8 @ =gUnknown_2021D18
 	ldr r1, _0810A9CC @ =gUnknown_8416959
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	ldr r3, _0810A9D0 @ =sub_810A9D4
 	adds r0, r5, 0
 	movs r1, 0x2
@@ -5525,7 +5525,7 @@ sub_810A9D4: @ 810A9D4
 	mov r1, r8
 	strh r0, [r1]
 	movs r1, 0x2
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	movs r0, 0x2
 	bl sub_810BAD8
 	lsls r0, 24
@@ -5714,7 +5714,7 @@ _0810AC00:
 	bl schedule_bg_copy_tilemap_to_vram
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	bl sub_8108978
 	adds r0, r6, 0
 	bl sub_810910C
@@ -5766,7 +5766,7 @@ sub_810AC40: @ 810AC40
 	ldr r4, _0810ACE0 @ =gUnknown_2021D18
 	ldr r1, _0810ACE4 @ =gUnknown_84163A7
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	movs r0, 0x6
 	movs r1, 0x3
 	bl sub_810B9DC
@@ -6001,19 +6001,19 @@ _0810AE54:
 	lsls r1, 2
 	adds r0, r1
 	movs r1, 0x2A
-	bl sub_809A274
+	bl ClearItemSlots
 	ldr r0, [r4]
 	movs r2, 0xEE
 	lsls r2, 2
 	adds r0, r2
 	movs r1, 0x1E
-	bl sub_809A274
+	bl ClearItemSlots
 	ldr r0, [r4]
 	movs r3, 0x86
 	lsls r3, 3
 	adds r0, r3
 	movs r1, 0xD
-	bl sub_809A274
+	bl ClearItemSlots
 	ldr r0, [r4]
 	ldr r1, _0810AEC4 @ =0x00000296
 	adds r0, r1
@@ -6184,7 +6184,7 @@ _0810AFF6:
 	bl sub_80722CC
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
 	ldr r1, _0810B018 @ =gUnknown_203AD30
@@ -6490,7 +6490,7 @@ _0810B266:
 	bl sub_80722CC
 	ldrb r0, [r7]
 	movs r1, 0x2
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
 	ldr r1, _0810B28C @ =gUnknown_203AD30
@@ -6555,7 +6555,7 @@ _0810B29E:
 	bl sub_8109140
 	ldrb r0, [r7]
 	movs r1, 0x1
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	movs r0, 0
 	movs r1, 0x1
 	bl CopyWindowToVram
@@ -6628,7 +6628,7 @@ _0810B396:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0810B3B8
-	bl sub_8011174
+	bl FreeRestoreBattleData
 	bl sub_804C230
 	b _0810B4B6
 	.align 2, 0
@@ -6710,7 +6710,7 @@ _0810B440:
 	bl sub_80722CC
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
 	ldr r1, _0810B464 @ =gUnknown_203AD30
@@ -6790,7 +6790,7 @@ sub_810B4BC: @ 810B4BC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0810B50C
-	bl sub_8011174
+	bl FreeRestoreBattleData
 	bl sub_804C230
 	b _0810B5C6
 	.align 2, 0
@@ -6826,7 +6826,7 @@ _0810B53C:
 	bl sub_80722CC
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
 	ldr r1, _0810B560 @ =gUnknown_203AD30
@@ -6857,7 +6857,7 @@ _0810B564:
 	bl sub_810713C
 	bl sub_810AECC
 	ldr r1, _0810B5B0 @ =gUnknown_3005E98
-	ldr r0, _0810B5B4 @ =sub_81253B0
+	ldr r0, _0810B5B4 @ =ItemUseCB_Medicine
 	str r0, [r1]
 	ldr r0, _0810B5B8 @ =sub_81279A4
 	bl sub_8108EE0
@@ -6869,7 +6869,7 @@ _0810B564:
 	b _0810B5C6
 	.align 2, 0
 _0810B5B0: .4byte gUnknown_3005E98
-_0810B5B4: .4byte sub_81253B0
+_0810B5B4: .4byte ItemUseCB_Medicine
 _0810B5B8: .4byte sub_81279A4
 _0810B5BC: .4byte sub_810B070
 _0810B5C0:
@@ -6959,7 +6959,7 @@ _0810B660:
 	bl sub_80722CC
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_810876C
+	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
 	ldr r1, _0810B688 @ =gUnknown_203AD30

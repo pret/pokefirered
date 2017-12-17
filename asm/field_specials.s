@@ -28,7 +28,7 @@ sub_80CA630: @ 80CA630
 	cmp r0, 0
 	beq _080CA644
 	movs r0, 0x2
-	bl sub_805BDEC
+	bl SetPlayerAvatarTransitionFlags
 _080CA644:
 	movs r4, 0x8D
 	lsls r4, 1
@@ -200,7 +200,7 @@ _080CA768: .4byte gUnknown_20370C0
 	thumb_func_start sub_80CA76C
 sub_80CA76C: @ 80CA76C
 	push {r4,lr}
-	bl sub_80CACFC
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -495,7 +495,7 @@ _080CA96E:
 	adds r2, r3, 0
 	orrs r4, r2
 	adds r2, r4, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -571,7 +571,7 @@ _080CA9F6:
 	adds r2, r3, 0
 	orrs r4, r2
 	adds r2, r4, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	bl DrawWholeMapView
 	pop {r4-r6}
 	pop {r0}
@@ -581,8 +581,8 @@ _080CAA2C: .4byte 0x0000028f
 _080CAA30: .4byte gUnknown_3005008
 	thumb_func_end sub_80CA9A8
 
-	thumb_func_start sub_80CAA34
-sub_80CAA34: @ 80CAA34
+	thumb_func_start SpawnScriptFieldObject
+SpawnScriptFieldObject: @ 80CAA34
 	push {lr}
 	sub sp, 0x8
 	ldr r0, _080CAA80 @ =gUnknown_3005008
@@ -621,10 +621,10 @@ sub_80CAA34: @ 80CAA34
 	.align 2, 0
 _080CAA80: .4byte gUnknown_3005008
 _080CAA84: .4byte gUnknown_2036E38
-	thumb_func_end sub_80CAA34
+	thumb_func_end SpawnScriptFieldObject
 
-	thumb_func_start sub_80CAA88
-sub_80CAA88: @ 80CAA88
+	thumb_func_start RemoveScriptFieldObject
+RemoveScriptFieldObject: @ 80CAA88
 	push {lr}
 	bl GetPlayerAvatarObjectId
 	lsls r0, 24
@@ -640,7 +640,7 @@ sub_80CAA88: @ 80CAA88
 	bx r0
 	.align 2, 0
 _080CAAA8: .4byte gUnknown_3005008
-	thumb_func_end sub_80CAA88
+	thumb_func_end RemoveScriptFieldObject
 
 	thumb_func_start sub_80CAAAC
 sub_80CAAAC: @ 80CAAAC
@@ -675,7 +675,7 @@ _080CAADC: .4byte gUnknown_83F5B1A
 	thumb_func_start sub_80CAAE0
 sub_80CAAE0: @ 80CAAE0
 	push {lr}
-	bl sub_80CACFC
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -698,13 +698,13 @@ sub_80CAB08: @ 80CAB08
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0x2A
-	bl sub_8054E90
+	bl IncrementGameStat
 	ldr r0, _080CAB3C @ =0x0000083b
 	bl FlagSet
 	movs r1, 0x1
 	mov r0, sp
 	strb r1, [r0]
-	bl sub_80CACFC
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -725,14 +725,14 @@ _080CAB40: .4byte gUnknown_2024284
 	thumb_func_start sub_80CAB44
 sub_80CAB44: @ 80CAB44
 	push {lr}
-	bl sub_80CACFC
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
 	ldr r1, _080CAB68 @ =gUnknown_2024284
 	adds r0, r1
-	bl sub_8043A40
+	bl GetMonEVCount
 	lsls r0, 16
 	ldr r1, _080CAB6C @ =0x01fd0000
 	cmp r0, r1
@@ -834,7 +834,7 @@ sub_80CAC08: @ 80CAC08
 	push {lr}
 	ldr r0, _080CAC1C @ =gUnknown_2024284
 	movs r1, 0x3F
-	bl sub_8043A70
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CAC20
@@ -952,8 +952,8 @@ sub_80CACE8: @ 80CACE8
 	bx r0
 	thumb_func_end sub_80CACE8
 
-	thumb_func_start sub_80CACFC
-sub_80CACFC: @ 80CACFC
+	thumb_func_start GetLeadMonIndex
+GetLeadMonIndex: @ 80CACFC
 	push {r4-r6,lr}
 	bl CalculatePlayerPartyCount
 	lsls r0, 24
@@ -997,7 +997,7 @@ _080CAD4C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CACFC
+	thumb_func_end GetLeadMonIndex
 
 	thumb_func_start sub_80CAD54
 sub_80CAD54: @ 80CAD54
@@ -2065,7 +2065,7 @@ sub_80CB580: @ 80CB580
 	beq _080CB614
 	ldr r4, _080CB624 @ =gUnknown_2039A0C
 	ldr r0, _080CB628 @ =gUnknown_83F5B3C
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	ldr r5, _080CB62C @ =0x0000021d
@@ -2251,7 +2251,7 @@ _080CB6F6:
 	orrs r2, r0
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2297,7 +2297,7 @@ _080CB752:
 	orrs r2, r0
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2626,7 +2626,7 @@ _080CB9D2:
 	str r0, [sp, 0x18]
 	str r1, [sp, 0x1C]
 	mov r0, r9
-	bl sub_8003CE4
+	bl AddWindow
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -3080,7 +3080,7 @@ sub_80CBD80: @ 80CBD80
 	movs r0, 0x16
 	bl sub_812B1F0
 	movs r0, 0x8
-	bl sub_805BDEC
+	bl SetPlayerAvatarTransitionFlags
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80CBD80
@@ -3249,7 +3249,7 @@ _080CBEB2:
 	thumb_func_start sub_80CBEBC
 sub_80CBEBC: @ 80CBEBC
 	push {lr}
-	bl sub_80CACFC
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80CBE50
@@ -3259,8 +3259,8 @@ sub_80CBEBC: @ 80CBEBC
 	bx r1
 	thumb_func_end sub_80CBEBC
 
-	thumb_func_start sub_80CBED4
-sub_80CBED4: @ 80CBED4
+	thumb_func_start TV_PrintIntToStringVar
+TV_PrintIntToStringVar: @ 80CBED4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -3283,7 +3283,7 @@ sub_80CBED4: @ 80CBED4
 	bx r0
 	.align 2, 0
 _080CBF00: .4byte gUnknown_83F5AF8
-	thumb_func_end sub_80CBED4
+	thumb_func_end TV_PrintIntToStringVar
 
 	thumb_func_start sub_80CBF04
 sub_80CBF04: @ 80CBF04
@@ -3401,8 +3401,8 @@ _080CBFDA:
 	bx r1
 	thumb_func_end sub_80CBFA0
 
-	thumb_func_start sub_80CBFE0
-sub_80CBFE0: @ 80CBFE0
+	thumb_func_start ChangeBoxPokemonNickname
+ChangeBoxPokemonNickname: @ 80CBFE0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3439,13 +3439,13 @@ sub_80CBFE0: @ 80CBFE0
 	movs r2, 0
 	bl GetBoxMonData
 	str r0, [sp]
-	ldr r0, _080CC060 @ =sub_80CC064
+	ldr r0, _080CC060 @ =ChangeBoxPokemonNickname_CB
 	str r0, [sp, 0x4]
 	movs r0, 0x3
 	mov r1, r8
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -3457,11 +3457,11 @@ _080CC050: .4byte gUnknown_20370D6
 _080CC054: .4byte gUnknown_20370D8
 _080CC058: .4byte gUnknown_2021D04
 _080CC05C: .4byte gUnknown_2021CF0
-_080CC060: .4byte sub_80CC064
-	thumb_func_end sub_80CBFE0
+_080CC060: .4byte ChangeBoxPokemonNickname_CB
+	thumb_func_end ChangeBoxPokemonNickname
 
-	thumb_func_start sub_80CC064
-sub_80CC064: @ 80CC064
+	thumb_func_start ChangeBoxPokemonNickname_CB
+ChangeBoxPokemonNickname_CB: @ 80CC064
 	push {lr}
 	ldr r0, _080CC07C @ =gUnknown_20370D6
 	ldrb r0, [r0]
@@ -3476,10 +3476,10 @@ sub_80CC064: @ 80CC064
 _080CC07C: .4byte gUnknown_20370D6
 _080CC080: .4byte gUnknown_20370D8
 _080CC084: .4byte gUnknown_2021CF0
-	thumb_func_end sub_80CC064
+	thumb_func_end ChangeBoxPokemonNickname_CB
 
-	thumb_func_start sub_80CC088
-sub_80CC088: @ 80CC088
+	thumb_func_start ChangePokemonNickname
+ChangePokemonNickname: @ 80CC088
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -3542,13 +3542,13 @@ sub_80CC088: @ 80CC088
 	movs r2, 0
 	bl GetMonData
 	str r0, [sp]
-	ldr r0, _080CC140 @ =sub_80CC144
+	ldr r0, _080CC140 @ =ChangePokemonNickname_CB
 	str r0, [sp, 0x4]
 	movs r0, 0x3
 	mov r1, r10
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_809D954
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -3562,11 +3562,11 @@ _080CC130: .4byte gUnknown_20370C0
 _080CC134: .4byte gUnknown_2024284
 _080CC138: .4byte gUnknown_2021D04
 _080CC13C: .4byte gUnknown_2021CF0
-_080CC140: .4byte sub_80CC144
-	thumb_func_end sub_80CC088
+_080CC140: .4byte ChangePokemonNickname_CB
+	thumb_func_end ChangePokemonNickname
 
-	thumb_func_start sub_80CC144
-sub_80CC144: @ 80CC144
+	thumb_func_start ChangePokemonNickname_CB
+ChangePokemonNickname_CB: @ 80CC144
 	push {lr}
 	ldr r0, _080CC164 @ =gUnknown_20370C0
 	ldrh r1, [r0]
@@ -3584,10 +3584,10 @@ sub_80CC144: @ 80CC144
 _080CC164: .4byte gUnknown_20370C0
 _080CC168: .4byte gUnknown_2024284
 _080CC16C: .4byte gUnknown_2021CF0
-	thumb_func_end sub_80CC144
+	thumb_func_end ChangePokemonNickname_CB
 
-	thumb_func_start sub_80CC170
-sub_80CC170: @ 80CC170
+	thumb_func_start TV_CopyNicknameToStringVar1AndEnsureTerminated
+TV_CopyNicknameToStringVar1AndEnsureTerminated: @ 80CC170
 	push {r4,lr}
 	ldr r0, _080CC194 @ =gUnknown_20370C0
 	ldrh r1, [r0]
@@ -3608,10 +3608,10 @@ sub_80CC170: @ 80CC170
 _080CC194: .4byte gUnknown_20370C0
 _080CC198: .4byte gUnknown_2024284
 _080CC19C: .4byte gUnknown_2021CD0
-	thumb_func_end sub_80CC170
+	thumb_func_end TV_CopyNicknameToStringVar1AndEnsureTerminated
 
-	thumb_func_start sub_80CC1A0
-sub_80CC1A0: @ 80CC1A0
+	thumb_func_start TV_CheckMonOTIDEqualsPlayerID
+TV_CheckMonOTIDEqualsPlayerID: @ 80CC1A0
 	push {r4,lr}
 	bl sub_80CC1E4
 	adds r4, r0, 0
@@ -3643,7 +3643,7 @@ _080CC1D8:
 	bx r0
 	.align 2, 0
 _080CC1E0: .4byte gUnknown_20370D0
-	thumb_func_end sub_80CC1A0
+	thumb_func_end TV_CheckMonOTIDEqualsPlayerID
 
 	thumb_func_start sub_80CC1E4
 sub_80CC1E4: @ 80CC1E4
@@ -3883,14 +3883,14 @@ sub_80CC3CC: @ 80CC3CC
 	movs r5, 0
 	ldr r4, _080CC3F8 @ =gUnknown_20370C0
 	movs r0, 0xA
-	bl sub_8054EC4
+	bl GetGameStat
 	strh r0, [r4]
 	movs r0, 0xD
-	bl sub_8054EC4
+	bl GetGameStat
 	adds r6, r0, 0
 	ldr r4, _080CC3FC @ =gUnknown_20370C4
 	movs r0, 0x17
-	bl sub_8054EC4
+	bl GetGameStat
 	strh r0, [r4]
 	ldr r1, _080CC400 @ =0x0000ffff
 	cmp r6, r1
@@ -4385,23 +4385,23 @@ _080CC794: .4byte 0x00000f21
 _080CC798: .4byte gUnknown_83F5F24
 	thumb_func_end sub_80CC730
 
-	thumb_func_start sub_80CC79C
-sub_80CC79C: @ 80CC79C
+	thumb_func_start set_unknown_box_id
+set_unknown_box_id: @ 80CC79C
 	ldr r1, _080CC7A4 @ =gUnknown_2039A1A
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
 _080CC7A4: .4byte gUnknown_2039A1A
-	thumb_func_end sub_80CC79C
+	thumb_func_end set_unknown_box_id
 
-	thumb_func_start sub_80CC7A8
-sub_80CC7A8: @ 80CC7A8
+	thumb_func_start get_unknown_box_id
+get_unknown_box_id: @ 80CC7A8
 	ldr r0, _080CC7B0 @ =gUnknown_2039A1A
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _080CC7B0: .4byte gUnknown_2039A1A
-	thumb_func_end sub_80CC7A8
+	thumb_func_end get_unknown_box_id
 
 	thumb_func_start sub_80CC7B4
 sub_80CC7B4: @ 80CC7B4
@@ -4444,7 +4444,7 @@ sub_80CC7F8: @ 80CC7F8
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80CC79C
+	bl set_unknown_box_id
 	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4462,7 +4462,7 @@ _080CC816:
 	bl GetBoxMonData
 	cmp r0, 0
 	bne _080CC858
-	bl sub_80CC7A8
+	bl get_unknown_box_id
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r4
@@ -4900,7 +4900,7 @@ sub_80CCB94: @ 80CCB94
 	push {r6,r7}
 	movs r7, 0
 	movs r6, 0
-	bl sub_80CACFC
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -5178,7 +5178,7 @@ sub_80CCDD0: @ 80CCDD0
 	lsls r2, 2
 	movs r0, 0x1F
 	movs r1, 0x1F
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	bl DrawWholeMapView
 	movs r0, 0x14
 	bl sub_80722CC
@@ -5194,17 +5194,17 @@ _080CCDF8: .4byte 0x000002e3
 	thumb_func_start sub_80CCDFC
 sub_80CCDFC: @ 80CCDFC
 	push {lr}
-	ldr r0, _080CCE0C @ =sub_80CCE10
+	ldr r0, _080CCE0C @ =task_deoxys_sound
 	movs r1, 0x8
 	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CCE0C: .4byte sub_80CCE10
+_080CCE0C: .4byte task_deoxys_sound
 	thumb_func_end sub_80CCDFC
 
-	thumb_func_start sub_80CCE10
-sub_80CCE10: @ 80CCE10
+	thumb_func_start task_deoxys_sound
+task_deoxys_sound: @ 80CCE10
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -5299,7 +5299,7 @@ _080CCED6:
 	.align 2, 0
 _080CCEE0: .4byte 0x0000403e
 _080CCEE4: .4byte gUnknown_20370D0
-	thumb_func_end sub_80CCE10
+	thumb_func_end task_deoxys_sound
 
 	thumb_func_start sub_80CCEE8
 sub_80CCEE8: @ 80CCEE8
@@ -5618,7 +5618,7 @@ _080CD14C:
 sub_80CD154: @ 80CD154
 	push {r4,lr}
 	movs r0, 0xA
-	bl sub_8054EC4
+	bl GetGameStat
 	adds r4, r0, 0
 	cmp r4, 0x18
 	bls _080CD1AE

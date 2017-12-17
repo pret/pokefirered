@@ -164,7 +164,7 @@ decompress_and_copy_tile_data_to_vram: @ 80F6878
 	bhi _080F68E0
 	adds r0, r4, 0
 	add r1, sp, 0x4
-	bl sub_80F6AA0
+	bl malloc_and_decompress
 	adds r4, r0, 0
 	cmp r5, 0
 	bne _080F68B0
@@ -229,7 +229,7 @@ sub_80F68F0: @ 80F68F0
 	bhi _080F695C
 	adds r0, r4, 0
 	add r1, sp, 0x4
-	bl sub_80F6AA0
+	bl malloc_and_decompress
 	adds r4, r0, 0
 	ldr r0, [sp, 0x4]
 	cmp r0, r6
@@ -291,7 +291,7 @@ sub_80F696C: @ 80F696C
 	lsrs r7, r2, 24
 	adds r0, r1, 0
 	add r1, sp, 0x4
-	bl sub_80F6AA0
+	bl malloc_and_decompress
 	adds r6, r0, 0
 	cmp r5, 0
 	bne _080F699A
@@ -299,7 +299,7 @@ sub_80F696C: @ 80F696C
 _080F699A:
 	cmp r6, 0
 	beq _080F69D2
-	ldr r0, _080F69E0 @ =sub_80F6A64
+	ldr r0, _080F69E0 @ =task_free_buf_after_copying_tile_data_to_vram
 	movs r1, 0
 	bl CreateTask
 	adds r4, r0, 0
@@ -331,7 +331,7 @@ _080F69D2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F69E0: .4byte sub_80F6A64
+_080F69E0: .4byte task_free_buf_after_copying_tile_data_to_vram
 _080F69E4: .4byte gUnknown_3005090
 	thumb_func_end sub_80F696C
 
@@ -352,7 +352,7 @@ sub_80F69E8: @ 80F69E8
 	lsrs r6, r2, 24
 	adds r0, r1, 0
 	add r1, sp, 0x4
-	bl sub_80F6AA0
+	bl malloc_and_decompress
 	adds r5, r0, 0
 	ldr r0, [sp, 0x4]
 	cmp r0, r4
@@ -361,7 +361,7 @@ sub_80F69E8: @ 80F69E8
 _080F6A14:
 	cmp r5, 0
 	beq _080F6A4E
-	ldr r0, _080F6A5C @ =sub_80F6A64
+	ldr r0, _080F6A5C @ =task_free_buf_after_copying_tile_data_to_vram
 	movs r1, 0
 	bl CreateTask
 	adds r4, r0, 0
@@ -393,12 +393,12 @@ _080F6A4E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6A5C: .4byte sub_80F6A64
+_080F6A5C: .4byte task_free_buf_after_copying_tile_data_to_vram
 _080F6A60: .4byte gUnknown_3005090
 	thumb_func_end sub_80F69E8
 
-	thumb_func_start sub_80F6A64
-sub_80F6A64: @ 80F6A64
+	thumb_func_start task_free_buf_after_copying_tile_data_to_vram
+task_free_buf_after_copying_tile_data_to_vram: @ 80F6A64
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -425,10 +425,10 @@ _080F6A94:
 	bx r0
 	.align 2, 0
 _080F6A9C: .4byte gUnknown_3005090
-	thumb_func_end sub_80F6A64
+	thumb_func_end task_free_buf_after_copying_tile_data_to_vram
 
-	thumb_func_start sub_80F6AA0
-sub_80F6AA0: @ 80F6AA0
+	thumb_func_start malloc_and_decompress
+malloc_and_decompress: @ 80F6AA0
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrb r0, [r5, 0x1]
@@ -452,7 +452,7 @@ _080F6AC8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80F6AA0
+	thumb_func_end malloc_and_decompress
 
 	thumb_func_start sub_80F6AD0
 sub_80F6AD0: @ 80F6AD0
@@ -676,7 +676,7 @@ sub_80F6C14: @ 80F6C14
 sub_80F6C6C: @ 80F6C6C
 	push {lr}
 	ldr r0, _080F6C84 @ =gUnknown_841F42C
-	bl sub_8003B24
+	bl InitWindows
 	ldr r1, _080F6C88 @ =gUnknown_203ABE0
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -718,7 +718,7 @@ sub_80F6CBC: @ 80F6CBC
 	push {lr}
 	bl sub_8002DE8
 	movs r0, 0
-	bl sub_8002E64
+	bl IsTextPrinterActive
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -2250,7 +2250,7 @@ sub_80F78E0: @ 80F78E0
 	str r0, [sp, 0x18]
 	str r1, [sp, 0x1C]
 	add r0, sp, 0x18
-	bl sub_8003CE4
+	bl AddWindow
 	strb r0, [r4]
 	ldrb r0, [r4]
 	bl PutWindowTilemap
@@ -2265,17 +2265,17 @@ _080F7934: .4byte gUnknown_203ABE0
 _080F7938: .4byte 0x0000013d
 	thumb_func_end sub_80F78E0
 
-	thumb_func_start sub_80F793C
-sub_80F793C: @ 80F793C
+	thumb_func_start GetStartMenuWindowId
+GetStartMenuWindowId: @ 80F793C
 	ldr r0, _080F7944 @ =gUnknown_203ABE0
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _080F7944: .4byte gUnknown_203ABE0
-	thumb_func_end sub_80F793C
+	thumb_func_end GetStartMenuWindowId
 
-	thumb_func_start sub_80F7948
-sub_80F7948: @ 80F7948
+	thumb_func_start remove_start_menu_window_maybe
+remove_start_menu_window_maybe: @ 80F7948
 	push {r4,lr}
 	ldr r4, _080F7960 @ =gUnknown_203ABE0
 	ldrb r0, [r4]
@@ -2290,7 +2290,7 @@ _080F795A:
 	bx r0
 	.align 2, 0
 _080F7960: .4byte gUnknown_203ABE0
-	thumb_func_end sub_80F7948
+	thumb_func_end remove_start_menu_window_maybe
 
 	thumb_func_start sub_80F7964
 sub_80F7964: @ 80F7964

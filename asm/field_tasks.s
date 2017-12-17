@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_806E810
-sub_806E810: @ 806E810
+	thumb_func_start task_per_step_callback_manager
+task_per_step_callback_manager: @ 806E810
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -27,7 +27,7 @@ sub_806E810: @ 806E810
 	.align 2, 0
 _0806E834: .4byte gUnknown_3005090
 _0806E838: .4byte gUnknown_83A7310
-	thumb_func_end sub_806E810
+	thumb_func_end task_per_step_callback_manager
 
 	thumb_func_start sub_806E83C
 sub_806E83C: @ 806E83C
@@ -65,7 +65,7 @@ _0806E878: .4byte gUnknown_203ADFA
 	thumb_func_start sub_806E87C
 sub_806E87C: @ 806E87C
 	push {r4,r5,lr}
-	ldr r5, _0806E8C4 @ =sub_806E810
+	ldr r5, _0806E8C4 @ =task_per_step_callback_manager
 	adds r0, r5, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -98,17 +98,17 @@ _0806E8BC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806E8C4: .4byte sub_806E810
+_0806E8C4: .4byte task_per_step_callback_manager
 _0806E8C8: .4byte gUnknown_3005090
 _0806E8CC: .4byte sub_806E83C
 	thumb_func_end sub_806E87C
 
-	thumb_func_start sub_806E8D0
-sub_806E8D0: @ 806E8D0
+	thumb_func_start ActivatePerStepCallback
+ActivatePerStepCallback: @ 806E8D0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0806E908 @ =sub_806E810
+	ldr r0, _0806E908 @ =task_per_step_callback_manager
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -133,7 +133,7 @@ _0806E8F4:
 	strh r0, [r1]
 	b _0806E912
 	.align 2, 0
-_0806E908: .4byte sub_806E810
+_0806E908: .4byte task_per_step_callback_manager
 _0806E90C: .4byte gUnknown_3005098
 _0806E910:
 	strh r4, [r1]
@@ -141,12 +141,12 @@ _0806E912:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E8D0
+	thumb_func_end ActivatePerStepCallback
 
-	thumb_func_start sub_806E918
-sub_806E918: @ 806E918
+	thumb_func_start wild_encounter_reset_coro_args
+wild_encounter_reset_coro_args: @ 806E918
 	push {lr}
-	ldr r0, _0806E948 @ =sub_806E810
+	ldr r0, _0806E948 @ =task_per_step_callback_manager
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -168,10 +168,10 @@ _0806E942:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806E948: .4byte sub_806E810
+_0806E948: .4byte task_per_step_callback_manager
 _0806E94C: .4byte sub_806E83C
 _0806E950: .4byte gUnknown_3005098
-	thumb_func_end sub_806E918
+	thumb_func_end wild_encounter_reset_coro_args
 
 	thumb_func_start nullsub_40
 nullsub_40: @ 806E954
@@ -239,7 +239,7 @@ _0806E9A4:
 	ldrb r1, [r1]
 	adds r1, 0x7
 	ldr r2, _0806E9DC @ =0x0000035a
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 _0806E9C8:
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
@@ -380,7 +380,7 @@ _0806EAB0:
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	ldr r2, _0806EAF0 @ =0x0000035a
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	mov r0, sp
 	movs r3, 0
 	ldrsh r0, [r0, r3]
@@ -416,7 +416,7 @@ _0806EB04:
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	ldr r2, _0806EB4C @ =0x0000035b
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	mov r0, sp
 	movs r3, 0
 	ldrsh r0, [r0, r3]
@@ -543,7 +543,7 @@ sub_806EC04: @ 806EC04
 _0806EC20:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8058FA4
+	bl MapGridSetMetatileIdAt
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl CurrentMapDrawMetatileAt

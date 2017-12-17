@@ -78,7 +78,7 @@ sub_807F690: @ 807F690
 	adds r1, r2
 	strh r4, [r1, 0xA]
 	adds r0, r5, 0
-	bl sub_8044090
+	bl PlayMapChosenOrBattleBGM
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -122,7 +122,7 @@ _0807F6FE:
 	thumb_func_start sub_807F704
 sub_807F704: @ 807F704
 	push {lr}
-	bl sub_80A0E90
+	bl GetSafariZoneFlag
 	cmp r0, 0
 	beq _0807F714
 	bl sub_807F7D8
@@ -172,9 +172,9 @@ sub_807F748: @ 807F748
 	movs r1, 0
 	bl sub_807F690
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sub_8054E90
+	bl IncrementGameStat
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -202,9 +202,9 @@ sub_807F78C: @ 807F78C
 	ldr r1, _0807F7D4 @ =0x00000155
 	bl sub_807F690
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sub_8054E90
+	bl IncrementGameStat
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -262,9 +262,9 @@ sub_807F810: @ 807F810
 	movs r1, 0x2
 	bl sub_804037C
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sub_8054E90
+	bl IncrementGameStat
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -284,9 +284,9 @@ sub_807F868: @ 807F868
 	movs r1, 0
 	bl sub_807F690
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x9
-	bl sub_8054E90
+	bl IncrementGameStat
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807F868
@@ -335,9 +335,9 @@ sub_807F8C4: @ 807F8C4
 	movs r1, 0
 	bl sub_807F690
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sub_8054E90
+	bl IncrementGameStat
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -398,9 +398,9 @@ _0807F960:
 	movs r1, 0x2
 	bl sub_804037C
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sub_8054E90
+	bl IncrementGameStat
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -427,9 +427,9 @@ sub_807F998: @ 807F998
 	movs r1, 0
 	bl sub_807F690
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sub_8054E90
+	bl IncrementGameStat
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -503,9 +503,9 @@ _0807FA4C:
 	bl sub_807F690
 _0807FA56:
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sub_8054E90
+	bl IncrementGameStat
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807F9D8
@@ -542,9 +542,9 @@ _0807FAA0:
 	bl sub_807F690
 _0807FAAA:
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sub_8054E90
+	bl IncrementGameStat
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807FA68
@@ -565,9 +565,9 @@ sub_807FABC: @ 807FABC
 	movs r0, 0
 	bl sub_807F690
 	movs r0, 0x7
-	bl sub_8054E90
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sub_8054E90
+	bl IncrementGameStat
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -814,7 +814,7 @@ _0807FCF4:
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8059F88
+	bl MetatileBehavior_IsMB_0B
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FD08
@@ -854,7 +854,7 @@ _0807FD2C:
 	cmp r0, 0
 	bne _0807FD70
 	adds r0, r4, 0
-	bl sub_8059F9C
+	bl MetatileBehavior_IsMountain
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FD58
@@ -1308,8 +1308,8 @@ _0808008A:
 	bx r1
 	thumb_func_end sub_8080060
 
-	thumb_func_start sub_8080090
-sub_8080090: @ 8080090
+	thumb_func_start TrainerBattleLoadArg32
+TrainerBattleLoadArg32: @ 8080090
 	adds r2, r0, 0
 	ldrb r0, [r2]
 	ldrb r1, [r2, 0x1]
@@ -1322,26 +1322,26 @@ sub_8080090: @ 8080090
 	lsls r1, 24
 	orrs r0, r1
 	bx lr
-	thumb_func_end sub_8080090
+	thumb_func_end TrainerBattleLoadArg32
 
-	thumb_func_start sub_80800A8
-sub_80800A8: @ 80800A8
+	thumb_func_start TrainerBattleLoadArg16
+TrainerBattleLoadArg16: @ 80800A8
 	adds r1, r0, 0
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
 	lsls r1, 8
 	orrs r0, r1
 	bx lr
-	thumb_func_end sub_80800A8
+	thumb_func_end TrainerBattleLoadArg16
 
-	thumb_func_start sub_80800B4
-sub_80800B4: @ 80800B4
+	thumb_func_start TrainerBattleLoadArg8
+TrainerBattleLoadArg8: @ 80800B4
 	ldrb r0, [r0]
 	bx lr
-	thumb_func_end sub_80800B4
+	thumb_func_end TrainerBattleLoadArg8
 
-	thumb_func_start sub_80800B8
-sub_80800B8: @ 80800B8
+	thumb_func_start trainerflag_opponent
+trainerflag_opponent: @ 80800B8
 	ldr r1, _080800CC @ =gUnknown_20386AE
 	movs r2, 0xA0
 	lsls r2, 3
@@ -1353,7 +1353,7 @@ sub_80800B8: @ 80800B8
 	bx lr
 	.align 2, 0
 _080800CC: .4byte gUnknown_20386AE
-	thumb_func_end sub_80800B8
+	thumb_func_end trainerflag_opponent
 
 	thumb_func_start sub_80800D0
 sub_80800D0: @ 80800D0
@@ -1425,8 +1425,8 @@ _08080160: .4byte gUnknown_20386C8
 _08080164: .4byte gUnknown_20386CC
 	thumb_func_end sub_8080110
 
-	thumb_func_start sub_8080168
-sub_8080168: @ 8080168
+	thumb_func_start TrainerBattleLoadArgs
+TrainerBattleLoadArgs: @ 8080168
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1452,21 +1452,21 @@ _08080184:
 	.4byte _080801E4
 _080801A0:
 	adds r0, r5, 0
-	bl sub_80800B4
+	bl TrainerBattleLoadArg8
 	ldr r1, [r4]
 	strb r0, [r1]
 	adds r5, 0x1
 	b _080801E0
 _080801AE:
 	adds r0, r5, 0
-	bl sub_80800A8
+	bl TrainerBattleLoadArg16
 	ldr r1, [r4]
 	strh r0, [r1]
 	adds r5, 0x2
 	b _080801E0
 _080801BC:
 	adds r0, r5, 0
-	bl sub_8080090
+	bl TrainerBattleLoadArg32
 	ldr r1, [r4]
 	str r0, [r1]
 	adds r5, 0x4
@@ -1494,10 +1494,10 @@ _080801E4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080168
+	thumb_func_end TrainerBattleLoadArgs
 
-	thumb_func_start sub_80801F0
-sub_80801F0: @ 80801F0
+	thumb_func_start battle_80801F0
+battle_80801F0: @ 80801F0
 	push {lr}
 	ldr r0, _08080218 @ =gUnknown_20386B0
 	ldrh r1, [r0]
@@ -1522,7 +1522,7 @@ _08080218: .4byte gUnknown_20386B0
 _0808021C: .4byte gUnknown_20370D2
 _08080220: .4byte gUnknown_3005008
 _08080224: .4byte gUnknown_3005074
-	thumb_func_end sub_80801F0
+	thumb_func_end battle_80801F0
 
 	thumb_func_start sub_8080228
 sub_8080228: @ 8080228
@@ -1531,7 +1531,7 @@ sub_8080228: @ 8080228
 	bl sub_8080110
 	ldr r4, _08080250 @ =gUnknown_20386AC
 	adds r0, r5, 0
-	bl sub_80800B4
+	bl TrainerBattleLoadArg8
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -1577,8 +1577,8 @@ _08080294:
 	ldr r0, _080802A4 @ =gUnknown_83C6A68
 _08080296:
 	adds r1, r5, 0
-	bl sub_8080168
-	bl sub_80801F0
+	bl TrainerBattleLoadArgs
+	bl battle_80801F0
 	ldr r0, _080802A8 @ =gUnknown_81A4EE9
 	b _08080326
 	.align 2, 0
@@ -1588,8 +1588,8 @@ _080802AC:
 	bl sub_811231C
 	ldr r0, _080802CC @ =gUnknown_83C6990
 	adds r1, r5, 0
-	bl sub_8080168
-	bl sub_80801F0
+	bl TrainerBattleLoadArgs
+	bl battle_80801F0
 	ldr r4, _080802D0 @ =gUnknown_20386AE
 	ldrh r0, [r4]
 	bl sub_810CE64
@@ -1604,8 +1604,8 @@ _080802D8:
 	bl sub_811231C
 	ldr r0, _080802F8 @ =gUnknown_83C6900
 	adds r1, r5, 0
-	bl sub_8080168
-	bl sub_80801F0
+	bl TrainerBattleLoadArgs
+	bl battle_80801F0
 	ldr r4, _080802FC @ =gUnknown_20386AE
 	ldrh r0, [r4]
 	bl sub_810CE64
@@ -1620,7 +1620,7 @@ _08080304:
 	ldr r0, _08080310 @ =gUnknown_83C6A20
 _08080306:
 	adds r1, r5, 0
-	bl sub_8080168
+	bl TrainerBattleLoadArgs
 	ldr r0, _08080314 @ =gUnknown_81A4F21
 	b _08080326
 	.align 2, 0
@@ -1630,8 +1630,8 @@ _08080318:
 	ldr r0, _0808032C @ =gUnknown_83C6900
 _0808031A:
 	adds r1, r5, 0
-	bl sub_8080168
-	bl sub_80801F0
+	bl TrainerBattleLoadArgs
+	bl battle_80801F0
 	ldr r0, _08080330 @ =gUnknown_81A4EC1
 _08080326:
 	pop {r4,r5}
@@ -1673,11 +1673,11 @@ _08080370: .4byte gUnknown_2036E38
 _08080374: .4byte gUnknown_81A4EB4
 	thumb_func_end sub_8080334
 
-	thumb_func_start sub_8080378
-sub_8080378: @ 8080378
+	thumb_func_start GetTrainerFlagFromScriptPointer
+GetTrainerFlagFromScriptPointer: @ 8080378
 	push {lr}
 	adds r0, 0x2
-	bl sub_80800A8
+	bl TrainerBattleLoadArg16
 	lsls r0, 16
 	movs r1, 0xA0
 	lsls r1, 19
@@ -1688,7 +1688,7 @@ sub_8080378: @ 8080378
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8080378
+	thumb_func_end GetTrainerFlagFromScriptPointer
 
 	thumb_func_start sub_8080398
 sub_8080398: @ 8080398
@@ -1738,7 +1738,7 @@ _080803E0: .4byte gUnknown_20386CC
 	thumb_func_start sub_80803E4
 sub_80803E4: @ 80803E4
 	push {lr}
-	bl sub_80800B8
+	bl trainerflag_opponent
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagGet
@@ -1751,7 +1751,7 @@ sub_80803E4: @ 80803E4
 	thumb_func_start sub_80803FC
 sub_80803FC: @ 80803FC
 	push {lr}
-	bl sub_80800B8
+	bl trainerflag_opponent
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagSet
@@ -1762,7 +1762,7 @@ sub_80803FC: @ 80803FC
 	thumb_func_start sub_8080410
 sub_8080410: @ 8080410
 	push {lr}
-	bl sub_80800B8
+	bl trainerflag_opponent
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagSet
@@ -1866,7 +1866,7 @@ sub_80804AC: @ 80804AC
 	ands r1, r0
 	cmp r1, 0
 	beq _08080530
-	bl sub_80A0058
+	bl sp000_heal_pokemon
 	b _080804EE
 	.align 2, 0
 _080804D8: .4byte gUnknown_20386AC
@@ -2136,7 +2136,7 @@ sub_80806EC: @ 80806EC
 	bl sub_80806C8
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -2155,7 +2155,7 @@ sub_8080710: @ 8080710
 	bl sub_80806C8
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8008FCC
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}

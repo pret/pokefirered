@@ -1117,7 +1117,7 @@ _08079248:
 	cmp r0, 0x2
 	bne _0807927A
 _08079276:
-	bl sub_8054A18
+	bl Sav2_ClearSetDefault
 _0807927A:
 	ldr r0, _080792B8 @ =gUnknown_300500C
 	ldr r0, [r0]

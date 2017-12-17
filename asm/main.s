@@ -525,8 +525,8 @@ _080007C0: .4byte gUnknown_3003578
 _080007C4: .4byte INTR_CHECK
 	thumb_func_end sub_8000724
 
-	thumb_func_start sub_80007C8
-sub_80007C8: @ 80007C8
+	thumb_func_start InitFlashTimer
+InitFlashTimer: @ 80007C8
 	push {lr}
 	ldr r0, _080007D8 @ =gUnknown_81E9F60
 	ldr r1, [r0]
@@ -536,10 +536,10 @@ sub_80007C8: @ 80007C8
 	bx r0
 	.align 2, 0
 _080007D8: .4byte gUnknown_81E9F60
-	thumb_func_end sub_80007C8
+	thumb_func_end InitFlashTimer
 
-	thumb_func_start sub_80007DC
-sub_80007DC: @ 80007DC
+	thumb_func_start HBlankIntr
+HBlankIntr: @ 80007DC
 	push {r4,lr}
 	ldr r4, _08000804 @ =gUnknown_30030F0
 	ldr r0, [r4, 0x10]
@@ -562,7 +562,7 @@ _080007EA:
 	.align 2, 0
 _08000804: .4byte gUnknown_30030F0
 _08000808: .4byte INTR_CHECK
-	thumb_func_end sub_80007DC
+	thumb_func_end HBlankIntr
 
 	thumb_func_start sub_800080C
 sub_800080C: @ 800080C

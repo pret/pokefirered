@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8039188
-sub_8039188: @ 8039188
+	thumb_func_start ShouldSwitchIfPerishSong
+ShouldSwitchIfPerishSong: @ 8039188
 	push {lr}
 	ldr r1, _080391D4 @ =gUnknown_2023DFC
 	ldr r0, _080391D8 @ =gUnknown_2023BC4
@@ -53,7 +53,7 @@ _080391E4:
 _080391E6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8039188
+	thumb_func_end ShouldSwitchIfPerishSong
 
 	thumb_func_start sub_80391EC
 sub_80391EC: @ 80391EC
@@ -1323,7 +1323,7 @@ _08039BFA:
 	mov r0, r8
 	cmp r0, 0
 	beq _08039C74
-	bl sub_8039188
+	bl ShouldSwitchIfPerishSong
 	lsls r0, 24
 	cmp r0, 0
 	bne _08039C60

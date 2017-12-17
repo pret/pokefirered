@@ -19,7 +19,7 @@ sub_80D08B8: @ 80D08B8
 	ldr r0, _080D08E4 @ =sub_80565A8
 	str r0, [r1, 0x4]
 	adds r0, r4, 0
-	bl sub_80D0948
+	bl LaunchBattleTransitionTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -34,7 +34,7 @@ sub_80D08E8: @ 80D08E8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80D0948
+	bl LaunchBattleTransitionTask
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80D08E8
@@ -78,8 +78,8 @@ _080D093C:
 _080D0944: .4byte gUnknown_2039A2C
 	thumb_func_end sub_80D08F8
 
-	thumb_func_start sub_80D0948
-sub_80D0948: @ 80D0948
+	thumb_func_start LaunchBattleTransitionTask
+LaunchBattleTransitionTask: @ 80D0948
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -101,7 +101,7 @@ sub_80D0948: @ 80D0948
 	.align 2, 0
 _080D0970: .4byte sub_80D0978
 _080D0974: .4byte gUnknown_3005090
-	thumb_func_end sub_80D0948
+	thumb_func_end LaunchBattleTransitionTask
 
 	thumb_func_start sub_80D0978
 sub_80D0978: @ 80D0978
@@ -133,8 +133,8 @@ _080D09A8: .4byte gUnknown_83FA3B0
 _080D09AC: .4byte gUnknown_3005090
 	thumb_func_end sub_80D0978
 
-	thumb_func_start sub_80D09B0
-sub_80D09B0: @ 80D09B0
+	thumb_func_start Transition_Phase1
+Transition_Phase1: @ 80D09B0
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_807B05C
@@ -170,10 +170,10 @@ _080D09FA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D09B0
+	thumb_func_end Transition_Phase1
 
-	thumb_func_start sub_80D0A00
-sub_80D0A00: @ 80D0A00
+	thumb_func_start Transition_WaitForPhase1
+Transition_WaitForPhase1: @ 80D0A00
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, _080D0A20 @ =gUnknown_83FA320
@@ -200,10 +200,10 @@ _080D0A2C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D0A00
+	thumb_func_end Transition_WaitForPhase1
 
-	thumb_func_start sub_80D0A34
-sub_80D0A34: @ 80D0A34
+	thumb_func_start Transition_Phase2
+Transition_Phase2: @ 80D0A34
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, _080D0A58 @ =gUnknown_83FA368
@@ -223,10 +223,10 @@ sub_80D0A34: @ 80D0A34
 	bx r1
 	.align 2, 0
 _080D0A58: .4byte gUnknown_83FA368
-	thumb_func_end sub_80D0A34
+	thumb_func_end Transition_Phase2
 
-	thumb_func_start sub_80D0A5C
-sub_80D0A5C: @ 80D0A5C
+	thumb_func_start Transition_WaitForPhase2
+Transition_WaitForPhase2: @ 80D0A5C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0
@@ -251,10 +251,10 @@ _080D0A80:
 	bx r1
 	.align 2, 0
 _080D0A88: .4byte gUnknown_83FA368
-	thumb_func_end sub_80D0A5C
+	thumb_func_end Transition_WaitForPhase2
 
-	thumb_func_start sub_80D0A8C
-sub_80D0A8C: @ 80D0A8C
+	thumb_func_start Phase1Task_TransitionAll
+Phase1Task_TransitionAll: @ 80D0A8C
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -278,7 +278,7 @@ sub_80D0A8C: @ 80D0A8C
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_80D3C40
+	bl CreatePhase1Task
 	b _080D0AD4
 	.align 2, 0
 _080D0AC0: .4byte gUnknown_3005090
@@ -294,7 +294,7 @@ _080D0AD4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D0A8C
+	thumb_func_end Phase1Task_TransitionAll
 
 	thumb_func_start sub_80D0ADC
 sub_80D0ADC: @ 80D0ADC
@@ -1465,8 +1465,8 @@ _080D13F8: .4byte gUnknown_83FA3F4
 _080D13FC: .4byte gUnknown_3005090
 	thumb_func_end sub_80D13C8
 
-	thumb_func_start sub_80D1400
-sub_80D1400: @ 80D1400
+	thumb_func_start Phase2_Transition_PokeballsTrail_Func1
+Phase2_Transition_PokeballsTrail_Func1: @ 80D1400
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -1499,10 +1499,10 @@ sub_80D1400: @ 80D1400
 _080D1440: .4byte gUnknown_83F8D20
 _080D1444: .4byte 0x05000200
 _080D1448: .4byte gUnknown_83FA638
-	thumb_func_end sub_80D1400
+	thumb_func_end Phase2_Transition_PokeballsTrail_Func1
 
-	thumb_func_start sub_80D144C
-sub_80D144C: @ 80D144C
+	thumb_func_start Phase2_Transition_PokeballsTrail_Func2
+Phase2_Transition_PokeballsTrail_Func2: @ 80D144C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1568,10 +1568,10 @@ _080D147A:
 _080D14CC: .4byte gUnknown_83FA400
 _080D14D0: .4byte gUnknown_83FA404
 _080D14D4: .4byte gUnknown_20386E0
-	thumb_func_end sub_80D144C
+	thumb_func_end Phase2_Transition_PokeballsTrail_Func2
 
-	thumb_func_start sub_80D14D8
-sub_80D14D8: @ 80D14D8
+	thumb_func_start Phase2_Transition_PokeballsTrail_Func3
+Phase2_Transition_PokeballsTrail_Func3: @ 80D14D8
 	push {lr}
 	movs r0, 0x2D
 	bl FieldEffectActiveListContains
@@ -1590,10 +1590,10 @@ _080D14F8:
 	bx r1
 	.align 2, 0
 _080D1500: .4byte sub_80D13C8
-	thumb_func_end sub_80D14D8
+	thumb_func_end Phase2_Transition_PokeballsTrail_Func3
 
-	thumb_func_start sub_80D1504
-sub_80D1504: @ 80D1504
+	thumb_func_start FldEff_Pokeball
+FldEff_Pokeball: @ 80D1504
 	push {r4,r5,lr}
 	ldr r0, _080D1560 @ =gUnknown_83FA5CC
 	ldr r5, _080D1564 @ =gUnknown_20386E0
@@ -1642,7 +1642,7 @@ _080D1560: .4byte gUnknown_83FA5CC
 _080D1564: .4byte gUnknown_20386E0
 _080D1568: .4byte gUnknown_202063C
 _080D156C: .4byte 0x0000ffff
-	thumb_func_end sub_80D1504
+	thumb_func_end FldEff_Pokeball
 
 	thumb_func_start sub_80D1570
 sub_80D1570: @ 80D1570
@@ -3973,8 +3973,8 @@ _080D2760: .4byte 0x04000040
 _080D2764: .4byte 0xa6400001
 	thumb_func_end sub_80D2698
 
-	thumb_func_start sub_80D2768
-sub_80D2768: @ 80D2768
+	thumb_func_start Phase2Task_Transition_Sydney
+Phase2Task_Transition_Sydney: @ 80D2768
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3985,15 +3985,15 @@ sub_80D2768: @ 80D2768
 	adds r1, r2
 	movs r2, 0
 	strh r2, [r1, 0x26]
-	bl sub_80D2808
+	bl Phase2Task_MugShotTransition
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D2784: .4byte gUnknown_3005090
-	thumb_func_end sub_80D2768
+	thumb_func_end Phase2Task_Transition_Sydney
 
-	thumb_func_start sub_80D2788
-sub_80D2788: @ 80D2788
+	thumb_func_start Phase2Task_Transition_Phoebe
+Phase2Task_Transition_Phoebe: @ 80D2788
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4004,15 +4004,15 @@ sub_80D2788: @ 80D2788
 	adds r1, r2
 	movs r2, 0x1
 	strh r2, [r1, 0x26]
-	bl sub_80D2808
+	bl Phase2Task_MugShotTransition
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D27A4: .4byte gUnknown_3005090
-	thumb_func_end sub_80D2788
+	thumb_func_end Phase2Task_Transition_Phoebe
 
-	thumb_func_start sub_80D27A8
-sub_80D27A8: @ 80D27A8
+	thumb_func_start Phase2Task_Transition_Glacia
+Phase2Task_Transition_Glacia: @ 80D27A8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4023,15 +4023,15 @@ sub_80D27A8: @ 80D27A8
 	adds r1, r2
 	movs r2, 0x2
 	strh r2, [r1, 0x26]
-	bl sub_80D2808
+	bl Phase2Task_MugShotTransition
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D27C4: .4byte gUnknown_3005090
-	thumb_func_end sub_80D27A8
+	thumb_func_end Phase2Task_Transition_Glacia
 
-	thumb_func_start sub_80D27C8
-sub_80D27C8: @ 80D27C8
+	thumb_func_start Phase2Task_Transition_Drake
+Phase2Task_Transition_Drake: @ 80D27C8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4042,15 +4042,15 @@ sub_80D27C8: @ 80D27C8
 	adds r1, r2
 	movs r2, 0x3
 	strh r2, [r1, 0x26]
-	bl sub_80D2808
+	bl Phase2Task_MugShotTransition
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D27E4: .4byte gUnknown_3005090
-	thumb_func_end sub_80D27C8
+	thumb_func_end Phase2Task_Transition_Drake
 
-	thumb_func_start sub_80D27E8
-sub_80D27E8: @ 80D27E8
+	thumb_func_start Phase2Task_Transition_Steven
+Phase2Task_Transition_Steven: @ 80D27E8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4061,15 +4061,15 @@ sub_80D27E8: @ 80D27E8
 	adds r1, r2
 	movs r2, 0x4
 	strh r2, [r1, 0x26]
-	bl sub_80D2808
+	bl Phase2Task_MugShotTransition
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D2804: .4byte gUnknown_3005090
-	thumb_func_end sub_80D27E8
+	thumb_func_end Phase2Task_Transition_Steven
 
-	thumb_func_start sub_80D2808
-sub_80D2808: @ 80D2808
+	thumb_func_start Phase2Task_MugShotTransition
+Phase2Task_MugShotTransition: @ 80D2808
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4096,10 +4096,10 @@ _080D281A:
 	.align 2, 0
 _080D2838: .4byte gUnknown_83FA46C
 _080D283C: .4byte gUnknown_3005090
-	thumb_func_end sub_80D2808
+	thumb_func_end Phase2Task_MugShotTransition
 
-	thumb_func_start sub_80D2840
-sub_80D2840: @ 80D2840
+	thumb_func_start Phase2_Mugshot_Func1
+Phase2_Mugshot_Func1: @ 80D2840
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80D3DD0
@@ -4146,10 +4146,10 @@ _080D2898: .4byte gUnknown_2039A2C
 _080D289C: .4byte gUnknown_2038E80
 _080D28A0: .4byte 0x0000f0f1
 _080D28A4: .4byte sub_80D2D50
-	thumb_func_end sub_80D2840
+	thumb_func_end Phase2_Mugshot_Func1
 
-	thumb_func_start sub_80D28A8
-sub_80D28A8: @ 80D28A8
+	thumb_func_start Phase2_Mugshot_Func2
+Phase2_Mugshot_Func2: @ 80D28A8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4237,7 +4237,7 @@ _080D2958: .4byte gUnknown_83FA740
 _080D295C: .4byte gUnknown_83FA754
 _080D2960: .4byte gUnknown_300500C
 _080D2964: .4byte sub_80D2E6C
-	thumb_func_end sub_80D28A8
+	thumb_func_end Phase2_Mugshot_Func2
 
 	thumb_func_start sub_80D2968
 sub_80D2968: @ 80D2968
@@ -4945,7 +4945,7 @@ sub_80D2EA4: @ 80D2EA4
 	ldr r5, _080D3004 @ =gUnknown_201C000
 	str r5, [sp]
 	movs r3, 0
-	bl sub_8083858
+	bl CreateTrainerSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -4961,7 +4961,7 @@ sub_80D2EA4: @ 80D2EA4
 	str r5, [sp]
 	movs r2, 0x6A
 	movs r3, 0
-	bl sub_8083858
+	bl CreateTrainerSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
@@ -6165,8 +6165,8 @@ _080D3848: .4byte gUnknown_83FA514
 _080D384C: .4byte gUnknown_3005090
 	thumb_func_end sub_80D3818
 
-	thumb_func_start sub_80D3850
-sub_80D3850: @ 80D3850
+	thumb_func_start Phase2_Transition_GridSquares_Func1
+Phase2_Transition_GridSquares_Func1: @ 80D3850
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -6202,10 +6202,10 @@ sub_80D3850: @ 80D3850
 _080D3898: .4byte gUnknown_83FA140
 _080D389C: .4byte 0x01000400
 _080D38A0: .4byte gUnknown_83FA638
-	thumb_func_end sub_80D3850
+	thumb_func_end Phase2_Transition_GridSquares_Func1
 
-	thumb_func_start sub_80D38A4
-sub_80D38A4: @ 80D38A4
+	thumb_func_start Phase2_Transition_GridSquares_Func2
+Phase2_Transition_GridSquares_Func2: @ 80D38A4
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -6248,10 +6248,10 @@ _080D38E6:
 	bx r1
 	.align 2, 0
 _080D38F8: .4byte gUnknown_83FA140
-	thumb_func_end sub_80D38A4
+	thumb_func_end Phase2_Transition_GridSquares_Func2
 
-	thumb_func_start sub_80D38FC
-sub_80D38FC: @ 80D38FC
+	thumb_func_start Phase2_Transition_GridSquares_Func3
+Phase2_Transition_GridSquares_Func3: @ 80D38FC
 	push {lr}
 	ldrh r1, [r0, 0xA]
 	subs r1, 0x1
@@ -6271,7 +6271,7 @@ _080D391C:
 	bx r1
 	.align 2, 0
 _080D3924: .4byte sub_80D3818
-	thumb_func_end sub_80D38FC
+	thumb_func_end Phase2_Transition_GridSquares_Func3
 
 	thumb_func_start sub_80D3928
 sub_80D3928: @ 80D3928
@@ -6676,8 +6676,8 @@ _080D3C38: .4byte 0x04000040
 _080D3C3C: .4byte 0xa2400001
 	thumb_func_end sub_80D3BA4
 
-	thumb_func_start sub_80D3C40
-sub_80D3C40: @ 80D3C40
+	thumb_func_start CreatePhase1Task
+CreatePhase1Task: @ 80D3C40
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -6726,7 +6726,7 @@ sub_80D3C40: @ 80D3C40
 	.align 2, 0
 _080D3C9C: .4byte sub_80D3CC4
 _080D3CA0: .4byte gUnknown_3005090
-	thumb_func_end sub_80D3C40
+	thumb_func_end CreatePhase1Task
 
 	thumb_func_start sub_80D3CA4
 sub_80D3CA4: @ 80D3CA4
@@ -6778,8 +6778,8 @@ _080D3CF4: .4byte gUnknown_83FA588
 _080D3CF8: .4byte gUnknown_3005090
 	thumb_func_end sub_80D3CC4
 
-	thumb_func_start sub_80D3CFC
-sub_80D3CFC: @ 80D3CFC
+	thumb_func_start Phase1_TransitionAll_Func1
+Phase1_TransitionAll_Func1: @ 80D3CFC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x14]
@@ -6828,10 +6828,10 @@ _080D3D4A:
 	bx r1
 	.align 2, 0
 _080D3D54: .4byte 0x00002d6b
-	thumb_func_end sub_80D3CFC
+	thumb_func_end Phase1_TransitionAll_Func1
 
-	thumb_func_start sub_80D3D58
-sub_80D3D58: @ 80D3D58
+	thumb_func_start Phase1_TransitionAll_Func2
+Phase1_TransitionAll_Func2: @ 80D3D58
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x14]
@@ -6891,7 +6891,7 @@ _080D3DC6:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D3D58
+	thumb_func_end Phase1_TransitionAll_Func2
 
 	thumb_func_start sub_80D3DD0
 sub_80D3DD0: @ 80D3DD0

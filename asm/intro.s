@@ -276,13 +276,13 @@ _080EC7EC: .4byte 0x65366347
 _080EC7F0: .4byte gMultiBootProgram_PokemonColosseum_Start
 _080EC7F4:
 	bl GameCubeMultiBoot_Quit
-	ldr r0, _080EC804 @ =sub_800B798
+	ldr r0, _080EC804 @ =SerialCB
 	bl sub_8000718
 _080EC7FE:
 	movs r0, 0
 	b _080EC814
 	.align 2, 0
-_080EC804: .4byte sub_800B798
+_080EC804: .4byte SerialCB
 _080EC808:
 	bl sub_800B388
 	ldr r0, _080EC81C @ =sub_80EC5B8

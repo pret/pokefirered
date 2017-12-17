@@ -534,7 +534,7 @@ GetNumLevelsGainedForDaycareMon: @ 80457B4
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _080457E4 @ =gUnknown_2021CD0
 	adds r0, r5, 0
 	bl GetBoxMonNick
@@ -565,7 +565,7 @@ GetDaycareCostForSelectedMon: @ 80457E8
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
@@ -1395,7 +1395,7 @@ _08045E22:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r7, 0
-	bl sub_8043C2C
+	bl CanMonLearnTMHM
 	cmp r0, 0
 	beq _08045E5E
 	ldrh r1, [r4]
@@ -1969,8 +1969,8 @@ _080462A4: .4byte gUnknown_825F83E
 _080462A8: .4byte gUnknown_8254795
 	thumb_func_end SetInitialEggData
 
-	thumb_func_start sub_80462AC
-sub_80462AC: @ 80462AC
+	thumb_func_start GiveEggFromDaycare
+GiveEggFromDaycare: @ 80462AC
 	push {lr}
 	ldr r0, _080462C0 @ =gUnknown_3005008
 	ldr r0, [r0]
@@ -1982,7 +1982,7 @@ sub_80462AC: @ 80462AC
 	bx r0
 	.align 2, 0
 _080462C0: .4byte gUnknown_3005008
-	thumb_func_end sub_80462AC
+	thumb_func_end GiveEggFromDaycare
 
 	thumb_func_start sub_80462C4
 sub_80462C4: @ 80462C4
@@ -2757,7 +2757,7 @@ _08046842:
 	mov r0, sp
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r4, 0
 	mov r1, sp
 	bl StringAppend
@@ -2898,7 +2898,7 @@ DaycarePrintMonLvl: @ 8046944
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	mov r0, sp
 	adds r1, r4, 0
 	bl StringAppend

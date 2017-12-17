@@ -3718,7 +3718,7 @@ _08120724:
 	subs r1, r2
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 _08120740:
 	mov r0, r8
 	bl SwitchTaskToFollowupFunc
@@ -4271,7 +4271,7 @@ _08120B42:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_8043C2C
+	bl CanMonLearnTMHM
 	cmp r0, 0
 	beq _08120B7C
 	adds r0, r7, 0
@@ -5907,7 +5907,7 @@ sub_8121808: @ 8121808
 	adds r1, r2, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0812184C @ =gUnknown_2021CD0
 	ldr r1, _08121850 @ =gUnknown_8416223
 	adds r0, r4, 0
@@ -6150,7 +6150,7 @@ sub_8121A04: @ 8121A04
 	adds r1, r2, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xBA
 	strb r1, [r0]
 	movs r1, 0xFF
@@ -6234,7 +6234,7 @@ sub_8121AA4: @ 8121AA4
 	adds r1, r2, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _08121AE8 @ =gUnknown_2021CD0
 	ldr r1, _08121AEC @ =gUnknown_841620C
 	adds r0, r4, 0
@@ -7420,7 +7420,7 @@ _081223F8: .4byte sub_81223FC
 sub_81223FC: @ 81223FC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8097228
+	bl UpdateMonIconFrame
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -7445,7 +7445,7 @@ _08122422:
 	thumb_func_start sub_8122428
 sub_8122428: @ 8122428
 	push {lr}
-	bl sub_8097228
+	bl UpdateMonIconFrame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8122428
@@ -15289,7 +15289,7 @@ sub_8126350: @ 8126350
 	ldr r0, _0812642C @ =gUnknown_2021CF0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _08126430 @ =gUnknown_2021D18
 	ldr r1, _08126434 @ =gUnknown_8417017
 	adds r0, r4, 0

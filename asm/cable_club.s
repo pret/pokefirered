@@ -50,7 +50,7 @@ sub_808078C: @ 808078C
 	ldr r0, _080807DC @ =gUnknown_2021CD0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
@@ -177,14 +177,14 @@ _08080890:
 	b _080808B6
 _08080894:
 	ldr r4, _080808B0 @ =gUnknown_2021CD0
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x4
 	b _080808B6
 	.align 2, 0
@@ -202,7 +202,7 @@ sub_80808BC: @ 80808BC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800B0A8
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -238,7 +238,7 @@ sub_80808F0: @ 80808F0
 	ands r0, r1
 	cmp r0, 0
 	beq _08080934
-	bl sub_800B08C
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -272,12 +272,12 @@ sub_808093C: @ 808093C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800B08C
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08080952
 	movs r0, 0x1
-	bl sub_800B09C
+	bl SetSuppressLinkErrorMessage
 _08080952:
 	ldr r0, _08080964 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -316,7 +316,7 @@ sub_8080990: @ 8080990
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800B054
+	bl GetSioMultiSI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -417,7 +417,7 @@ sub_8080A4C: @ 8080A4C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -431,7 +431,7 @@ sub_8080A4C: @ 8080A4C
 	cmp r5, 0x1
 	bls _08080AC0
 	movs r0, 0x1
-	bl sub_800B09C
+	bl SetSuppressLinkErrorMessage
 	ldr r1, _08080AA4 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -526,7 +526,7 @@ sub_8080B20: @ 8080B20
 	mov r9, r0
 	mov r7, r8
 	add r7, r9
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -563,7 +563,7 @@ sub_8080B20: @ 8080B20
 	adds r1, r5, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _08080BC0 @ =gUnknown_81BC50D
 	bl ShowFieldAutoScrollMessage
 	mov r0, r9
@@ -610,7 +610,7 @@ sub_8080BC8: @ 8080BC8
 	bne _08080C5C
 	bl sub_800A944
 	adds r4, r0, 0
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -683,7 +683,7 @@ sub_8080C6C: @ 8080C6C
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08080CCE
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800A944
 	lsls r4, 24
@@ -772,7 +772,7 @@ _08080D44:
 	.align 2, 0
 _08080D50: .4byte sub_8080F78
 _08080D54:
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	ldr r4, _08080D7C @ =gUnknown_3005030
 	strb r0, [r4]
 	bl GetMultiplayerId
@@ -875,7 +875,7 @@ _08080E02:
 _08080E18: .4byte gUnknown_3005090
 _08080E1C: .4byte sub_8080F78
 _08080E20:
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	ldr r4, _08080E58 @ =gUnknown_3005030
 	strb r0, [r4]
 	bl GetMultiplayerId
@@ -981,7 +981,7 @@ _08080EF8:
 	cmp r5, r0
 	bcc _08080E9A
 	movs r0, 0
-	bl sub_800B09C
+	bl SetSuppressLinkErrorMessage
 	bl ResetBlockReceivedFlags
 	bl HideFieldMessageBox
 	ldr r0, _08080F44 @ =gUnknown_20370D0
@@ -1400,7 +1400,7 @@ sub_808124C: @ 808124C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1445,7 +1445,7 @@ sub_80812A0: @ 80812A0
 	lsrs r5, r0, 24
 	bl sub_800A944
 	adds r4, r0, 0
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -1476,7 +1476,7 @@ sub_80812D8: @ 80812D8
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08081300
-	bl sub_800A1F0
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

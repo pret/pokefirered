@@ -61,7 +61,7 @@ _0810C3EE:
 	cmp r0, 0
 	blt _0810C436
 	adds r0, r1, 0
-	bl sub_80688E4
+	bl FreezeMapObject
 _0810C412:
 	adds r0, r4, 0x1
 	lsls r0, 24

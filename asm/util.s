@@ -120,8 +120,8 @@ DoBgAffineSet: @ 8044F78
 	bx r0
 	thumb_func_end DoBgAffineSet
 
-	thumb_func_start sub_8044FC4
-sub_8044FC4: @ 8044FC4
+	thumb_func_start CopySpriteTiles
+CopySpriteTiles: @ 8044FC4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -357,7 +357,7 @@ _0804517A:
 	bx r0
 	.align 2, 0
 _0804518C: .4byte 0x84000008
-	thumb_func_end sub_8044FC4
+	thumb_func_end CopySpriteTiles
 
 	thumb_func_start CountTrailingZeroBits
 CountTrailingZeroBits: @ 8045190

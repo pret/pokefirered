@@ -22,8 +22,8 @@ _08044EE0: .4byte 0x41c64e6d
 _08044EE4: .4byte 0x00006073
 	thumb_func_end Random
 
-	thumb_func_start sub_8044EE8
-sub_8044EE8: @ 8044EE8
+	thumb_func_start SeedRng
+SeedRng: @ 8044EE8
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08044EF4 @ =gUnknown_3005000
@@ -31,6 +31,6 @@ sub_8044EE8: @ 8044EE8
 	bx lr
 	.align 2, 0
 _08044EF4: .4byte gUnknown_3005000
-	thumb_func_end sub_8044EE8
+	thumb_func_end SeedRng
 
 	.align 2, 0 @ Don't pad with nop.

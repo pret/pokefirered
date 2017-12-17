@@ -1140,7 +1140,7 @@ UpdateLvlInHealthbox: @ 8048398
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r1, r0, 0
 	subs r1, 0x2
 	mov r0, sp
@@ -1243,7 +1243,7 @@ sub_8048440: @ 8048440
 	add r0, sp, 0x10
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	add r3, sp, 0x2C
 	add r0, sp, 0x10
 	movs r1, 0
@@ -1267,7 +1267,7 @@ _080484BC:
 	add r0, sp, 0x10
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xBA
 	strb r1, [r0]
 	movs r1, 0xFF
@@ -1365,7 +1365,7 @@ _0804858A:
 	asrs r1, 16
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _08048608 @ =gUnknown_202401C
 	ldr r0, [r0]
 	movs r1, 0xBA
@@ -1485,7 +1485,7 @@ _0804866A:
 	asrs r1, 16
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	mov r2, r8
 	cmp r2, 0
 	bne _08048698
@@ -1852,14 +1852,14 @@ _08048966:
 	adds r0, 0x16
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r5]
 	adds r0, 0x7B
 	ldrb r1, [r0]
 	ldr r0, [sp, 0x28]
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	add r0, sp, 0x10
 	movs r1, 0
 	strb r1, [r0, 0x5]
@@ -4311,7 +4311,7 @@ UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	ldrb r1, [r1]
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	mov r1, sp
 	movs r2, 0

@@ -6878,7 +6878,7 @@ sub_80FBA78: @ 80FBA78
 	bl sub_8009804
 	ldr r0, _080FBB00 @ =gUnknown_30030F0
 	ldrh r0, [r0, 0x24]
-	bl sub_8044EE8
+	bl SeedRng
 	movs r4, 0
 _080FBAB4:
 	bl Random

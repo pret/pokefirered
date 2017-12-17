@@ -8,7 +8,7 @@
 	thumb_func_start sub_8079C08
 sub_8079C08: @ 8079C08
 	push {r4-r6,lr}
-	ldr r0, _08079CCC @ =sub_8079E0C
+	ldr r0, _08079CCC @ =Task_WeatherMain
 	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -71,7 +71,7 @@ sub_8079C08: @ 8079C08
 	strb r6, [r0]
 	movs r0, 0x10
 	movs r1, 0
-	bl sub_807ADB0
+	bl Weather_SetBlendCoeffs
 	movs r1, 0xDA
 	lsls r1, 3
 	adds r0, r4, r1
@@ -88,7 +88,7 @@ sub_8079C08: @ 8079C08
 	adds r1, r4, r0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, _08079CEC @ =sub_8079DBC
+	ldr r0, _08079CEC @ =Task_WeatherInit
 	movs r1, 0x50
 	bl CreateTask
 	ldr r1, _08079CF0 @ =0x000006c9
@@ -99,7 +99,7 @@ _08079CC4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08079CCC: .4byte sub_8079E0C
+_08079CCC: .4byte Task_WeatherMain
 _08079CD0: .4byte gUnknown_83C2CE0
 _08079CD4: .4byte gUnknown_20373F8
 _08079CD8: .4byte 0x04000008
@@ -107,7 +107,7 @@ _08079CDC: .4byte gUnknown_2037F34
 _08079CE0: .4byte 0x000006d5
 _08079CE4: .4byte 0x000006c6
 _08079CE8: .4byte 0x000006d3
-_08079CEC: .4byte sub_8079DBC
+_08079CEC: .4byte Task_WeatherInit
 _08079CF0: .4byte 0x000006c9
 	thumb_func_end sub_8079C08
 
@@ -214,8 +214,8 @@ sub_8079D8C: @ 8079D8C
 _08079DB8: .4byte gUnknown_2037F34
 	thumb_func_end sub_8079D8C
 
-	thumb_func_start sub_8079DBC
-sub_8079DBC: @ 8079DBC
+	thumb_func_start Task_WeatherInit
+Task_WeatherInit: @ 8079DBC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -241,7 +241,7 @@ sub_8079DBC: @ 8079DBC
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08079E08 @ =sub_8079E0C
+	ldr r1, _08079E08 @ =Task_WeatherMain
 	str r1, [r0]
 _08079DF4:
 	pop {r4}
@@ -251,11 +251,11 @@ _08079DF4:
 _08079DFC: .4byte gUnknown_2037F34
 _08079E00: .4byte gUnknown_83C2BC0
 _08079E04: .4byte gUnknown_3005090
-_08079E08: .4byte sub_8079E0C
-	thumb_func_end sub_8079DBC
+_08079E08: .4byte Task_WeatherMain
+	thumb_func_end Task_WeatherInit
 
-	thumb_func_start sub_8079E0C
-sub_8079E0C: @ 8079E0C
+	thumb_func_start Task_WeatherMain
+Task_WeatherMain: @ 8079E0C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -335,7 +335,7 @@ _08079EB0: .4byte gUnknown_83C2BC0
 _08079EB4: .4byte gUnknown_83C2CB0
 _08079EB8: .4byte gUnknown_2037F34
 _08079EBC: .4byte 0x000006c6
-	thumb_func_end sub_8079E0C
+	thumb_func_end Task_WeatherMain
 
 	thumb_func_start sub_8079EC0
 sub_8079EC0: @ 8079EC0
@@ -1720,7 +1720,7 @@ _0807A8FA:
 	adds r2, 0x68
 	adds r1, r4, r2
 	ldrb r1, [r1]
-	bl sub_807ADB0
+	bl Weather_SetBlendCoeffs
 	movs r3, 0xD9
 	lsls r3, 3
 	adds r4, r3
@@ -1872,7 +1872,7 @@ _0807AA24:
 	adds r2, 0x68
 	adds r1, r4, r2
 	ldrb r1, [r1]
-	bl sub_807ADB0
+	bl Weather_SetBlendCoeffs
 	movs r3, 0xD9
 	lsls r3, 3
 	adds r4, r3
@@ -2318,8 +2318,8 @@ _0807ADA8: .4byte gUnknown_20386A8
 _0807ADAC: .4byte 0x0000073c
 	thumb_func_end sub_807AC98
 
-	thumb_func_start sub_807ADB0
-sub_807ADB0: @ 807ADB0
+	thumb_func_start Weather_SetBlendCoeffs
+Weather_SetBlendCoeffs: @ 807ADB0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2349,10 +2349,10 @@ sub_807ADB0: @ 807ADB0
 	.align 2, 0
 _0807ADE8: .4byte gUnknown_2037F34
 _0807ADEC: .4byte 0x00000736
-	thumb_func_end sub_807ADB0
+	thumb_func_end Weather_SetBlendCoeffs
 
-	thumb_func_start sub_807ADF0
-sub_807ADF0: @ 807ADF0
+	thumb_func_start Weather_SetTargetBlendCoeffs
+Weather_SetTargetBlendCoeffs: @ 807ADF0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2384,10 +2384,10 @@ _0807AE24: .4byte gUnknown_2037F34
 _0807AE28: .4byte 0x00000734
 _0807AE2C: .4byte 0x00000736
 _0807AE30: .4byte 0x0000073a
-	thumb_func_end sub_807ADF0
+	thumb_func_end Weather_SetTargetBlendCoeffs
 
-	thumb_func_start sub_807AE34
-sub_807AE34: @ 807AE34
+	thumb_func_start Weather_UpdateBlend
+Weather_UpdateBlend: @ 807AE34
 	push {r4-r6,lr}
 	ldr r0, _0807AE8C @ =gUnknown_2037F34
 	movs r1, 0xE6
@@ -2488,7 +2488,7 @@ _0807AEFA:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807AE34
+	thumb_func_end Weather_UpdateBlend
 
 	thumb_func_start sub_807AF00
 sub_807AF00: @ 807AF00
@@ -2519,43 +2519,43 @@ _0807AF1C:
 	.4byte _0807AF8C
 _0807AF44:
 	movs r0, 0x1
-	bl sub_807B174
+	bl SetWeather
 	b _0807AF92
 _0807AF4C:
 	movs r0, 0x2
-	bl sub_807B174
+	bl SetWeather
 	b _0807AF92
 _0807AF54:
 	movs r0, 0x3
-	bl sub_807B174
+	bl SetWeather
 	b _0807AF92
 _0807AF5C:
 	movs r0, 0x4
-	bl sub_807B174
+	bl SetWeather
 	b _0807AF92
 _0807AF64:
 	movs r0, 0x5
-	bl sub_807B174
+	bl SetWeather
 	b _0807AF92
 _0807AF6C:
 	movs r0, 0x6
-	bl sub_807B174
+	bl SetWeather
 	b _0807AF92
 _0807AF74:
 	movs r0, 0x9
-	bl sub_807B174
+	bl SetWeather
 	b _0807AF92
 _0807AF7C:
 	movs r0, 0x7
-	bl sub_807B174
+	bl SetWeather
 	b _0807AF92
 _0807AF84:
 	movs r0, 0x8
-	bl sub_807B174
+	bl SetWeather
 	b _0807AF92
 _0807AF8C:
 	movs r0, 0xB
-	bl sub_807B174
+	bl SetWeather
 _0807AF92:
 	pop {r0}
 	bx r0
@@ -2573,8 +2573,8 @@ weather_get_current: @ 807AF98
 _0807AFA4: .4byte gUnknown_2037F34
 	thumb_func_end weather_get_current
 
-	thumb_func_start sub_807AFA8
-sub_807AFA8: @ 807AFA8
+	thumb_func_start SetRainStrengthFromSoundEffect
+SetRainStrengthFromSoundEffect: @ 807AFA8
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -2623,7 +2623,7 @@ _0807AFFA:
 	bx r0
 	.align 2, 0
 _0807B000: .4byte 0x000006dd
-	thumb_func_end sub_807AFA8
+	thumb_func_end SetRainStrengthFromSoundEffect
 
 	thumb_func_start play_some_sound
 play_some_sound: @ 807B004
@@ -2777,7 +2777,7 @@ SetSav1Weather: @ 807B100
 	ldrb r5, [r1]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_807B1CC
+	bl TranslateWeatherNum
 	ldr r1, [r4]
 	adds r1, 0x2E
 	strb r0, [r1]
@@ -2785,7 +2785,7 @@ SetSav1Weather: @ 807B100
 	adds r0, 0x2E
 	ldrb r0, [r0]
 	adds r1, r5, 0
-	bl sub_807B2BC
+	bl UpdateRainCounter
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2813,7 +2813,7 @@ sub_807B140: @ 807B140
 	ldrb r5, [r0]
 	ldr r0, _0807B170 @ =gUnknown_2036DFC
 	ldrb r0, [r0, 0x16]
-	bl sub_807B1CC
+	bl TranslateWeatherNum
 	ldr r1, [r4]
 	adds r1, 0x2E
 	strb r0, [r1]
@@ -2821,7 +2821,7 @@ sub_807B140: @ 807B140
 	adds r0, 0x2E
 	ldrb r0, [r0]
 	adds r1, r5, 0
-	bl sub_807B2BC
+	bl UpdateRainCounter
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2830,8 +2830,8 @@ _0807B16C: .4byte gUnknown_3005008
 _0807B170: .4byte gUnknown_2036DFC
 	thumb_func_end sub_807B140
 
-	thumb_func_start sub_807B174
-sub_807B174: @ 807B174
+	thumb_func_start SetWeather
+SetWeather: @ 807B174
 	push {lr}
 	bl SetSav1Weather
 	bl sav1_get_weather_probably
@@ -2840,7 +2840,7 @@ sub_807B174: @ 807B174
 	bl weather_set
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807B174
+	thumb_func_end SetWeather
 
 	thumb_func_start sub_807B18C
 sub_807B18C: @ 807B18C
@@ -2854,8 +2854,8 @@ sub_807B18C: @ 807B18C
 	bx r0
 	thumb_func_end sub_807B18C
 
-	thumb_func_start sub_807B1A4
-sub_807B1A4: @ 807B1A4
+	thumb_func_start DoCurrentWeather
+DoCurrentWeather: @ 807B1A4
 	push {lr}
 	bl sav1_get_weather_probably
 	lsls r0, 24
@@ -2863,7 +2863,7 @@ sub_807B1A4: @ 807B1A4
 	bl weather_set
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807B1A4
+	thumb_func_end DoCurrentWeather
 
 	thumb_func_start sub_807B1B8
 sub_807B1B8: @ 807B1B8
@@ -2876,8 +2876,8 @@ sub_807B1B8: @ 807B1B8
 	bx r0
 	thumb_func_end sub_807B1B8
 
-	thumb_func_start sub_807B1CC
-sub_807B1CC: @ 807B1CC
+	thumb_func_start TranslateWeatherNum
+TranslateWeatherNum: @ 807B1CC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2979,7 +2979,7 @@ _0807B294:
 _0807B296:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807B1CC
+	thumb_func_end TranslateWeatherNum
 
 	thumb_func_start UpdateWeatherPerDay
 UpdateWeatherPerDay: @ 807B29C
@@ -3001,8 +3001,8 @@ UpdateWeatherPerDay: @ 807B29C
 _0807B2B8: .4byte gUnknown_3005008
 	thumb_func_end UpdateWeatherPerDay
 
-	thumb_func_start sub_807B2BC
-sub_807B2BC: @ 807B2BC
+	thumb_func_start UpdateRainCounter
+UpdateRainCounter: @ 807B2BC
 	push {lr}
 	lsls r0, 24
 	lsls r1, 24
@@ -3019,6 +3019,6 @@ _0807B2D0:
 _0807B2D6:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807B2BC
+	thumb_func_end UpdateRainCounter
 
 	.align 2, 0 @ Don't pad with nop.

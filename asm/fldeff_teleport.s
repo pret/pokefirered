@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80F66F0
-sub_80F66F0: @ 80F66F0
+	thumb_func_start SetUpFieldMove_Teleport
+SetUpFieldMove_Teleport: @ 80F66F0
 	push {lr}
 	ldr r0, _080F6708 @ =gUnknown_2036DFC
 	ldrb r0, [r0, 0x17]
@@ -35,7 +35,7 @@ _080F6720: .4byte gUnknown_3005024
 _080F6724: .4byte hm_add_c3_launch_phase_2
 _080F6728: .4byte gUnknown_203B0C4
 _080F672C: .4byte hm_teleport_run_dp02scr
-	thumb_func_end sub_80F66F0
+	thumb_func_end SetUpFieldMove_Teleport
 
 	thumb_func_start hm_teleport_run_dp02scr
 hm_teleport_run_dp02scr: @ 80F6730

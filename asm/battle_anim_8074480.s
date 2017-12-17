@@ -789,8 +789,8 @@ StoreSpriteCallbackInData6: @ 8074A68
 	bx lr
 	thumb_func_end StoreSpriteCallbackInData6
 
-	thumb_func_start sub_8074A70
-sub_8074A70: @ 8074A70
+	thumb_func_start SetCallbackToStoredInData
+SetCallbackToStoredInData: @ 8074A70
 	ldrh r2, [r0, 0x3A]
 	movs r3, 0x3C
 	ldrsh r1, [r0, r3]
@@ -798,7 +798,7 @@ sub_8074A70: @ 8074A70
 	orrs r2, r1
 	str r2, [r0, 0x1C]
 	bx lr
-	thumb_func_end sub_8074A70
+	thumb_func_end SetCallbackToStoredInData
 
 	thumb_func_start sub_8074A80
 sub_8074A80: @ 8074A80
@@ -847,7 +847,7 @@ _08074ACC:
 	b _08074ADA
 _08074AD4:
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074ADA:
 	pop {r4}
 	pop {r0}
@@ -915,7 +915,7 @@ _08074B48:
 	b _08074B56
 _08074B50:
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074B56:
 	pop {r4}
 	pop {r0}
@@ -991,7 +991,7 @@ _08074BD0:
 	b _08074BDE
 _08074BD8:
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074BDE:
 	pop {r4}
 	pop {r0}
@@ -1045,7 +1045,7 @@ _08074C30:
 	b _08074C3E
 _08074C38:
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074C3E:
 	pop {r4}
 	pop {r0}
@@ -1066,7 +1066,7 @@ sub_8074C44: @ 8074C44
 	b _08074C5E
 _08074C58:
 	adds r0, r1, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074C5E:
 	pop {r0}
 	bx r0
@@ -1153,7 +1153,7 @@ sub_8074CD0: @ 8074CD0
 	b _08074CFA
 _08074CF4:
 	adds r0, r1, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074CFA:
 	pop {r0}
 	bx r0
@@ -1187,7 +1187,7 @@ sub_8074D00: @ 8074D00
 	b _08074D36
 _08074D30:
 	adds r0, r2, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074D36:
 	pop {r0}
 	bx r0
@@ -1221,10 +1221,10 @@ sub_8074D3C: @ 8074D3C
 	b _08074D72
 _08074D6C:
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074D72:
 	adds r0, r4, 0
-	bl sub_8097228
+	bl UpdateMonIconFrame
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1302,7 +1302,7 @@ sub_8074DC4: @ 8074DC4
 _08074E04: .4byte gUnknown_202063C
 _08074E08:
 	adds r0, r3, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074E0E:
 	pop {r4}
 	pop {r0}
@@ -1353,7 +1353,7 @@ sub_8074E14: @ 8074E14
 _08074E60: .4byte gUnknown_202063C
 _08074E64:
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074E6A:
 	pop {r4}
 	pop {r0}
@@ -1412,7 +1412,7 @@ sub_8074E70: @ 8074E70
 	b _08074ED8
 _08074ED2:
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074ED8:
 	pop {r4}
 	pop {r0}
@@ -1490,7 +1490,7 @@ sub_8074F50: @ 8074F50
 	cmp r0, 0
 	beq _08074F66
 	adds r0, r2, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074F66:
 	pop {r0}
 	bx r0
@@ -1507,7 +1507,7 @@ sub_8074F6C: @ 8074F6C
 	cmp r0, 0
 	beq _08074F82
 	adds r0, r2, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08074F82:
 	pop {r0}
 	bx r0
@@ -2453,7 +2453,7 @@ sub_807563C: @ 807563C
 	cmp r0, 0
 	beq _08075650
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08075650:
 	pop {r4}
 	pop {r0}
@@ -2471,7 +2471,7 @@ sub_8075658: @ 8075658
 	cmp r0, 0
 	beq _08075672
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _08075672:
 	pop {r4}
 	pop {r0}
@@ -2692,7 +2692,7 @@ sub_80757E8: @ 80757E8
 	cmp r0, 0
 	beq _080757FC
 	adds r0, r4, 0
-	bl sub_8074A70
+	bl SetCallbackToStoredInData
 _080757FC:
 	pop {r4}
 	pop {r0}
@@ -3112,8 +3112,8 @@ sub_8075AD8: @ 8075AD8
 	bx r0
 	thumb_func_end sub_8075AD8
 
-	thumb_func_start sub_8075B18
-sub_8075B18: @ 8075B18
+	thumb_func_start ArcTan2_
+ArcTan2_: @ 8075B18
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
@@ -3124,7 +3124,7 @@ sub_8075B18: @ 8075B18
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8075B18
+	thumb_func_end ArcTan2_
 
 	thumb_func_start sub_8075B30
 sub_8075B30: @ 8075B30
@@ -3133,7 +3133,7 @@ sub_8075B30: @ 8075B30
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8075B18
+	bl ArcTan2_
 	lsls r0, 16
 	negs r0, r0
 	lsrs r0, 16

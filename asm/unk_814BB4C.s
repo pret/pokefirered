@@ -2180,7 +2180,7 @@ _0814CBBC:
 	ldr r1, [r5, 0x1C]
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r4, 0
 	str r4, [sp]
 	adds r0, r6, 0
@@ -2756,14 +2756,14 @@ _0814D03C:
 	ldr r1, [r5, 0x1C]
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0814D080 @ =gUnknown_2021CF0
 	bl sub_815EFA0
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r4, 0
 	str r4, [sp]
 	adds r0, r6, 0

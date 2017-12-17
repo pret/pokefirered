@@ -1879,7 +1879,7 @@ _080F2CB4:
 	ldrsh r1, [r4, r5]
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r5, _080F2D18 @ =gUnknown_2021D18
 	ldr r1, _080F2D1C @ =gUnknown_84160B4
 	adds r0, r5, 0
@@ -2685,7 +2685,7 @@ _080F3348:
 	lsrs r1, 1
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r0, sp, 0xC
@@ -2702,7 +2702,7 @@ _080F3348:
 	ldrh r1, [r7]
 	movs r2, 0x2
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r0, sp, 0xC

@@ -664,7 +664,7 @@ sub_8131D48: @ 8131D48
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -686,7 +686,7 @@ _08131DA4:
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -806,7 +806,7 @@ sub_8131E68: @ 8131E68
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _08131EEC @ =gUnknown_2021D18
 	ldr r1, _08131EF0 @ =gUnknown_84162B9
 	adds r0, r4, 0
@@ -2183,7 +2183,7 @@ sub_81329C4: @ 81329C4
 	adds r0, r6, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _08132A28 @ =gUnknown_2021D18
 	ldr r1, _08132A2C @ =gUnknown_8416936
 	adds r0, r4, 0
@@ -2283,7 +2283,7 @@ sub_8132AAC: @ 8132AAC
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r5, _08132B50 @ =gUnknown_2021D18
 	ldr r1, _08132B54 @ =gUnknown_84162B9
 	adds r0, r5, 0
@@ -2357,7 +2357,7 @@ sub_8132B5C: @ 8132B5C
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r5, _08132BC0 @ =gUnknown_2021D18
 	ldr r1, _08132BC4 @ =gUnknown_84162B9
 	adds r0, r5, 0
@@ -2522,7 +2522,7 @@ sub_8132CAC: @ 8132CAC
 	adds r0, r6, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _08132D28 @ =gUnknown_2021D18
 	ldr r1, _08132D2C @ =gUnknown_8416959
 	adds r0, r4, 0
@@ -3458,7 +3458,7 @@ _081334E0:
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r2, r4, 0
 _081334F0:
 	movs r0, 0xC
@@ -3495,7 +3495,7 @@ _08133530:
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r2, r4, 0
 _08133540:
 	movs r0, 0x18
@@ -3522,7 +3522,7 @@ _08133540:
 	adds r0, r5, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x24
 	str r0, [sp]
 	str r4, [sp, 0x4]

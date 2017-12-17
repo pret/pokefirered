@@ -3518,8 +3518,8 @@ nullsub_67: @ 80C86F4
 	bx lr
 	thumb_func_end nullsub_67
 
-	thumb_func_start sub_80C86F8
-sub_80C86F8: @ 80C86F8
+	thumb_func_start BattleAICmd_if_status_in_party
+BattleAICmd_if_status_in_party: @ 80C86F8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3619,10 +3619,10 @@ _080C87A6:
 	.align 2, 0
 _080C87B4: .4byte gUnknown_2024284
 _080C87B8: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C86F8
+	thumb_func_end BattleAICmd_if_status_in_party
 
-	thumb_func_start sub_80C87BC
-sub_80C87BC: @ 80C87BC
+	thumb_func_start BattleAICmd_if_status_not_in_party
+BattleAICmd_if_status_not_in_party: @ 80C87BC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3719,7 +3719,7 @@ _080C8844:
 	.align 2, 0
 _080C8878: .4byte gUnknown_2024284
 _080C887C: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C87BC
+	thumb_func_end BattleAICmd_if_status_not_in_party
 
 	thumb_func_start BattleAICmd_get_weather
 BattleAICmd_get_weather: @ 80C8880

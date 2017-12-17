@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start .gcc2_compiled._0
-.gcc2_compiled._0: @ 80A0460
+	thumb_func_start CheckMonIsValid
+CheckMonIsValid: @ 80A0460
 	push {lr}
 	movs r1, 0x41
 	bl GetMonData
@@ -26,16 +26,16 @@ _080A047C:
 _080A047E:
 	pop {r1}
 	bx r1
-	thumb_func_end .gcc2_compiled._0
+	thumb_func_end CheckMonIsValid
 
-	thumb_func_start sub_80A0484
-sub_80A0484: @ 80A0484
+	thumb_func_start AllMonsFainted
+AllMonsFainted: @ 80A0484
 	push {r4,r5,lr}
 	ldr r4, _080A04A4 @ =gUnknown_2024284
 	movs r5, 0
 _080A048A:
 	adds r0, r4, 0
-	bl .gcc2_compiled._0
+	bl CheckMonIsValid
 	cmp r0, 0
 	beq _080A04A8
 	adds r0, r4, 0
@@ -57,10 +57,10 @@ _080A04B2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A0484
+	thumb_func_end AllMonsFainted
 
-	thumb_func_start sub_80A04B8
-sub_80A04B8: @ 80A04B8
+	thumb_func_start MonFaintFromPoisonOnField
+MonFaintFromPoisonOnField: @ 80A04B8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -93,10 +93,10 @@ sub_80A04B8: @ 80A04B8
 	.align 2, 0
 _080A04FC: .4byte gUnknown_2024284
 _080A0500: .4byte gUnknown_2021CD0
-	thumb_func_end sub_80A04B8
+	thumb_func_end MonFaintFromPoisonOnField
 
-	thumb_func_start sub_80A0504
-sub_80A0504: @ 80A0504
+	thumb_func_start CheckMonFaintedFromPoison
+CheckMonFaintedFromPoison: @ 80A0504
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -105,7 +105,7 @@ sub_80A0504: @ 80A0504
 	ldr r0, _080A0540 @ =gUnknown_2024284
 	adds r4, r1, r0
 	adds r0, r4, 0
-	bl .gcc2_compiled._0
+	bl CheckMonIsValid
 	cmp r0, 0
 	beq _080A0544
 	adds r0, r4, 0
@@ -131,10 +131,10 @@ _080A0546:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A0504
+	thumb_func_end CheckMonFaintedFromPoison
 
-	thumb_func_start sub_80A054C
-sub_80A054C: @ 80A054C
+	thumb_func_start Task_WhiteOut
+Task_WhiteOut: @ 80A054C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -167,7 +167,7 @@ _080A057A:
 _080A0584:
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_80A0504
+	bl CheckMonFaintedFromPoison
 	cmp r0, 0
 	bne _080A05D0
 	ldrh r0, [r4, 0x2]
@@ -192,7 +192,7 @@ _080A05A6:
 	strh r0, [r4]
 	b _080A05F6
 _080A05B8:
-	bl sub_80A0484
+	bl AllMonsFainted
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _080A05E8
@@ -204,7 +204,7 @@ _080A05B8:
 _080A05CC: .4byte gUnknown_20370D0
 _080A05D0:
 	ldrb r0, [r4, 0x2]
-	bl sub_80A04B8
+	bl MonFaintFromPoisonOnField
 	ldr r0, _080A05E4 @ =gUnknown_81A5476
 	bl ShowFieldMessage
 	ldrh r0, [r4]
@@ -226,20 +226,20 @@ _080A05F6:
 	bx r0
 	.align 2, 0
 _080A05FC: .4byte gUnknown_20370D0
-	thumb_func_end sub_80A054C
+	thumb_func_end Task_WhiteOut
 
-	thumb_func_start sub_80A0600
-sub_80A0600: @ 80A0600
+	thumb_func_start ExecuteWhiteOut
+ExecuteWhiteOut: @ 80A0600
 	push {lr}
-	ldr r0, _080A0614 @ =sub_80A054C
+	ldr r0, _080A0614 @ =Task_WhiteOut
 	movs r1, 0x50
 	bl CreateTask
 	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A0614: .4byte sub_80A054C
-	thumb_func_end sub_80A0600
+_080A0614: .4byte Task_WhiteOut
+	thumb_func_end ExecuteWhiteOut
 
 	thumb_func_start overworld_poison
 overworld_poison: @ 80A0618

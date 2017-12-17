@@ -1153,7 +1153,7 @@ _08108690:
 	adds r1, r4, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _08108724 @ =gUnknown_2021D18
 	ldr r1, _08108728 @ =gUnknown_84162B9
 	adds r0, r4, 0
@@ -3266,7 +3266,7 @@ sub_810971C: @ 810971C
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _081097E0 @ =gUnknown_84162B9
 	mov r0, r9
 	bl StringExpandPlaceholders
@@ -3322,7 +3322,7 @@ sub_81097E4: @ 81097E4
 	adds r1, r4, 0
 	movs r2, 0x2
 	adds r3, r5, 0
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0810984C @ =gUnknown_2021D18
 	ldr r1, _08109850 @ =gUnknown_84162B9
 	adds r0, r4, 0
@@ -3955,7 +3955,7 @@ sub_8109D38: @ 8109D38
 	ldrsh r1, [r1, r2]
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r5, _08109DA4 @ =gUnknown_2021D18
 	ldr r1, _08109DA8 @ =gUnknown_8416409
 	adds r0, r5, 0
@@ -4131,7 +4131,7 @@ sub_8109EA8: @ 8109EA8
 	ldrsh r1, [r6, r2]
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r6, _08109F38 @ =gUnknown_2021D18
 	ldr r1, _08109F3C @ =gUnknown_84163F4
 	adds r0, r6, 0
@@ -5100,7 +5100,7 @@ sub_810A690: @ 810A690
 	adds r0, r6, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0810A700 @ =gUnknown_2021D18
 	ldr r1, _0810A704 @ =gUnknown_8416936
 	adds r0, r4, 0
@@ -5200,7 +5200,7 @@ sub_810A770: @ 810A770
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r6, _0810A824 @ =gUnknown_2021D18
 	ldr r1, _0810A828 @ =gUnknown_84162B9
 	adds r0, r6, 0
@@ -5417,7 +5417,7 @@ sub_810A940: @ 810A940
 	adds r0, r6, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0810A9C8 @ =gUnknown_2021D18
 	ldr r1, _0810A9CC @ =gUnknown_8416959
 	adds r0, r4, 0
@@ -5762,7 +5762,7 @@ sub_810AC40: @ 810AC40
 	ldrsh r1, [r7, r2]
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0810ACE0 @ =gUnknown_2021D18
 	ldr r1, _0810ACE4 @ =gUnknown_84163A7
 	adds r0, r4, 0

@@ -133,7 +133,7 @@ sub_81436BC: @ 81436BC
 	strh r0, [r1]
 	bl sub_8009804
 	movs r0, 0x1
-	bl sub_800B09C
+	bl SetSuppressLinkErrorMessage
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -199,7 +199,7 @@ sub_814374C: @ 814374C
 	lsls r0, 24
 	cmp r0, 0
 	beq _08143768
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -224,7 +224,7 @@ sub_8143770: @ 8143770
 	lsrs r0, 24
 	cmp r0, 0x2
 	bhi _08143794
-	bl sub_800B0A8
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	beq _08143794
@@ -258,7 +258,7 @@ _081437C4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08143814
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -280,7 +280,7 @@ _081437E0:
 	strb r0, [r4]
 	b _08143898
 _081437F8:
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -317,7 +317,7 @@ _0814382C:
 	movs r0, 0x5
 	b _0814389A
 _08143842:
-	bl sub_800B08C
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08143898
@@ -325,7 +325,7 @@ _08143842:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08143872
-	bl sub_800A1F0
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814386C
@@ -586,7 +586,7 @@ _08143A5C:
 	.align 2, 0
 _08143A7C: .4byte gUnknown_30030F0
 _08143A80:
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -756,7 +756,7 @@ _08143BEC:
 	strb r0, [r4, 0x8]
 	b _08143D1A
 _08143BF6:
-	bl sub_800B0A8
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	beq _08143C06

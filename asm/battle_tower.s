@@ -2844,7 +2844,7 @@ _080E6F68:
 	ble _080E6F68
 	ldr r0, [r6]
 	adds r0, 0xB0
-	bl sub_80E70F4
+	bl SetBattleTowerRecordChecksum
 	bl sub_80E6E48
 	pop {r4-r6}
 	pop {r0}
@@ -2970,7 +2970,7 @@ _080E7076:
 	beq _080E7098
 	adds r0, r1, 0
 	adds r0, 0xB0
-	bl sub_80E7118
+	bl ClearBattleTowerRecord
 _080E7098:
 	movs r4, 0
 	adds r7, r5, 0
@@ -3008,7 +3008,7 @@ _080E70B4:
 	lsls r3, 1
 	adds r0, r1, r3
 	adds r0, r2, r0
-	bl sub_80E7118
+	bl ClearBattleTowerRecord
 _080E70E0:
 	adds r4, r5, 0
 	cmp r4, 0x4
@@ -3022,8 +3022,8 @@ _080E70E0:
 _080E70F0: .4byte gUnknown_300500C
 	thumb_func_end sub_80E7064
 
-	thumb_func_start sub_80E70F4
-sub_80E70F4: @ 80E70F4
+	thumb_func_start SetBattleTowerRecordChecksum
+SetBattleTowerRecordChecksum: @ 80E70F4
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r2, 0xA0
@@ -3042,10 +3042,10 @@ _080E7102:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E70F4
+	thumb_func_end SetBattleTowerRecordChecksum
 
-	thumb_func_start sub_80E7118
-sub_80E7118: @ 80E7118
+	thumb_func_start ClearBattleTowerRecord
+ClearBattleTowerRecord: @ 80E7118
 	push {lr}
 	movs r1, 0
 	movs r2, 0
@@ -3056,7 +3056,7 @@ _080E711E:
 	bls _080E711E
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E7118
+	thumb_func_end ClearBattleTowerRecord
 
 	thumb_func_start sub_80E712C
 sub_80E712C: @ 80E712C

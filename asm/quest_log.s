@@ -1119,7 +1119,7 @@ _0811107A:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -9149,7 +9149,7 @@ _08114E84:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x2
 	adds r1, r4, 0
 	bl UnkTextUtil_SetPtrI
@@ -9162,7 +9162,7 @@ _08114E84:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x4
 	adds r1, r4, 0
 	bl UnkTextUtil_SetPtrI
@@ -9989,7 +9989,7 @@ _08115570:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x2
 	adds r1, r4, 0
 	bl UnkTextUtil_SetPtrI
@@ -10091,7 +10091,7 @@ _08115648:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x4
 	adds r1, r4, 0
 	bl UnkTextUtil_SetPtrI
@@ -10127,7 +10127,7 @@ _08115690:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x2
 	adds r1, r4, 0
 	bl UnkTextUtil_SetPtrI

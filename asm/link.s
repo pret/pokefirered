@@ -231,7 +231,7 @@ sub_8009640: @ 8009640
 	bl ResetTasks
 	ldr r0, _080096D4 @ =sub_800978C
 	bl SetVBlankCallback
-	bl sub_800A294
+	bl ResetBlockSend
 	ldr r1, _080096D8 @ =gUnknown_202271A
 	ldr r2, _080096DC @ =0x00001111
 	adds r0, r2, 0
@@ -239,7 +239,7 @@ sub_8009640: @ 8009640
 	bl sub_8009804
 	ldr r0, _080096E0 @ =gUnknown_30030F0
 	ldrh r0, [r0, 0x24]
-	bl sub_8044EE8
+	bl SeedRng
 	movs r4, 0
 _08009670:
 	bl Random
@@ -450,7 +450,7 @@ sub_8009804: @ 8009804
 	ldr r0, _08009860 @ =gUnknown_3003F38
 	strb r4, [r0]
 	bl ResetBlockReceivedFlags
-	bl sub_800A294
+	bl ResetBlockSend
 	ldr r0, _08009864 @ =gUnknown_3000E4C
 	str r4, [r0]
 	ldr r0, _08009868 @ =gUnknown_3003F28
@@ -531,8 +531,8 @@ _080098E0: .4byte gUnknown_3003F3C
 _080098E4: .4byte gUnknown_2022718
 	thumb_func_end sub_80098B8
 
-	thumb_func_start sub_80098E8
-sub_80098E8: @ 80098E8
+	thumb_func_start TestBlockTransfer
+TestBlockTransfer: @ 80098E8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -604,7 +604,7 @@ _08009958:
 	lsls r1, 2
 	add r1, r9
 	ldrh r1, [r1, 0x2]
-	bl sub_800A5E4
+	bl LinkTestCalcBlockChecksum
 	ldr r1, _080099C4 @ =gUnknown_3003F88
 	adds r4, r1
 	movs r6, 0
@@ -641,10 +641,10 @@ _080099C0: .4byte gUnknown_2022118
 _080099C4: .4byte gUnknown_3003F88
 _080099C8: .4byte gUnknown_2022110
 _080099CC: .4byte gUnknown_2022111
-	thumb_func_end sub_80098E8
+	thumb_func_end TestBlockTransfer
 
-	thumb_func_start sub_80099D0
-sub_80099D0: @ 80099D0
+	thumb_func_start LinkTestProcessKeyInput
+LinkTestProcessKeyInput: @ 80099D0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r4, _08009A70 @ =gUnknown_30030F0
@@ -665,7 +665,7 @@ _080099E6:
 	beq _080099FA
 	ldr r0, _08009A78 @ =gHeap + 0x4000
 	ldr r1, _08009A7C @ =0x00002004
-	bl sub_800A2A8
+	bl InitBlockSend
 _080099FA:
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x80
@@ -687,7 +687,7 @@ _08009A16:
 	cmp r0, 0
 	beq _08009A26
 	movs r0, 0x1
-	bl sub_800B09C
+	bl SetSuppressLinkErrorMessage
 _08009A26:
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x80
@@ -734,16 +734,16 @@ _08009A7C: .4byte 0x00002004
 _08009A80: .4byte gUnknown_2022110
 _08009A84: .4byte gUnknown_300357C
 _08009A88: .4byte gUnknown_3003F80
-	thumb_func_end sub_80099D0
+	thumb_func_end LinkTestProcessKeyInput
 
 	thumb_func_start c2_08009A8C
 c2_08009A8C: @ 8009A8C
 	push {lr}
-	bl sub_80099D0
+	bl LinkTestProcessKeyInput
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80098E8
+	bl TestBlockTransfer
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
@@ -752,8 +752,8 @@ c2_08009A8C: @ 8009A8C
 	bx r0
 	thumb_func_end c2_08009A8C
 
-	thumb_func_start sub_8009AB0
-sub_8009AB0: @ 8009AB0
+	thumb_func_start LinkMain2
+LinkMain2: @ 8009AB0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, _08009AC0 @ =gUnknown_2022718
@@ -811,10 +811,10 @@ _08009B18: .4byte gUnknown_3003F50
 _08009B1C: .4byte gUnknown_3003F20
 _08009B20: .4byte 0x04000128
 _08009B24: .4byte gUnknown_3003F80
-	thumb_func_end sub_8009AB0
+	thumb_func_end LinkMain2
 
-	thumb_func_start sub_8009B28
-sub_8009B28: @ 8009B28
+	thumb_func_start HandleReceiveRemoteLinkPlayer
+HandleReceiveRemoteLinkPlayer: @ 8009B28
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -833,7 +833,7 @@ _08009B40:
 	adds r5, r0
 	adds r4, 0x1
 _08009B48:
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -852,7 +852,7 @@ _08009B64:
 	bx r0
 	.align 2, 0
 _08009B6C: .4byte gUnknown_3003F64
-	thumb_func_end sub_8009B28
+	thumb_func_end HandleReceiveRemoteLinkPlayer
 
 	thumb_func_start sub_8009B70
 sub_8009B70: @ 8009B70
@@ -985,7 +985,7 @@ _08009C38:
 	ldrb r2, [r4, 0x2]
 	strb r2, [r1, 0x2]
 	movs r1, 0x3C
-	bl sub_800A2A8
+	bl InitBlockSend
 	b _08009E3E
 	.align 2, 0
 _08009C7C: .4byte gUnknown_3003E70
@@ -1161,7 +1161,7 @@ _08009DD8: .4byte c2_800ACD4
 _08009DDC:
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_8009B28
+	bl HandleReceiveRemoteLinkPlayer
 	b _08009E3E
 _08009DE6:
 	lsls r0, r6, 24
@@ -1574,7 +1574,7 @@ sub_800A0D0: @ 800A0D0
 	ldrb r4, [r0]
 	cmp r4, 0x1
 	bne _0800A1C8
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1710,8 +1710,8 @@ _0800A1E8: .4byte gUnknown_202271C
 _0800A1EC: .4byte gUnknown_3000E54
 	thumb_func_end sub_800A0D0
 
-	thumb_func_start sub_800A1F0
-sub_800A1F0: @ 800A1F0
+	thumb_func_start IsLinkPlayerDataExchangeComplete
+IsLinkPlayerDataExchangeComplete: @ 800A1F0
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r4, 0
@@ -1766,7 +1766,7 @@ _0800A24C:
 	bx r1
 	.align 2, 0
 _0800A254: .4byte gUnknown_3000E54
-	thumb_func_end sub_800A1F0
+	thumb_func_end IsLinkPlayerDataExchangeComplete
 
 	thumb_func_start GetLinkPlayerTrainerId
 GetLinkPlayerTrainerId: @ 800A258
@@ -1805,8 +1805,8 @@ _0800A276:
 _0800A290: .4byte gUnknown_202273C
 	thumb_func_end sub_800A270
 
-	thumb_func_start sub_800A294
-sub_800A294: @ 800A294
+	thumb_func_start ResetBlockSend
+ResetBlockSend: @ 800A294
 	ldr r1, _0800A2A4 @ =gUnknown_3000E08
 	movs r0, 0
 	strb r0, [r1, 0x8]
@@ -1816,10 +1816,10 @@ sub_800A294: @ 800A294
 	bx lr
 	.align 2, 0
 _0800A2A4: .4byte gUnknown_3000E08
-	thumb_func_end sub_800A294
+	thumb_func_end ResetBlockSend
 
-	thumb_func_start sub_800A2A8
-sub_800A2A8: @ 800A2A8
+	thumb_func_start InitBlockSend
+InitBlockSend: @ 800A2A8
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	adds r6, r1, 0
@@ -1857,7 +1857,7 @@ _0800A2EA:
 	ldr r0, _0800A308 @ =0x0000bbbb
 	bl sub_8009E60
 	ldr r1, _0800A30C @ =gUnknown_3003F80
-	ldr r0, _0800A310 @ =sub_800A318
+	ldr r0, _0800A310 @ =LinkCB_BlockSendBegin
 	str r0, [r1]
 	ldr r1, _0800A314 @ =gUnknown_3000E48
 	movs r0, 0
@@ -1871,12 +1871,12 @@ _0800A2FE:
 _0800A304: .4byte gUnknown_2022618
 _0800A308: .4byte 0x0000bbbb
 _0800A30C: .4byte gUnknown_3003F80
-_0800A310: .4byte sub_800A318
+_0800A310: .4byte LinkCB_BlockSendBegin
 _0800A314: .4byte gUnknown_3000E48
-	thumb_func_end sub_800A2A8
+	thumb_func_end InitBlockSend
 
-	thumb_func_start sub_800A318
-sub_800A318: @ 800A318
+	thumb_func_start LinkCB_BlockSendBegin
+LinkCB_BlockSendBegin: @ 800A318
 	push {lr}
 	ldr r1, _0800A330 @ =gUnknown_3000E48
 	ldr r0, [r1]
@@ -1885,7 +1885,7 @@ sub_800A318: @ 800A318
 	cmp r0, 0x2
 	bls _0800A32C
 	ldr r1, _0800A334 @ =gUnknown_3003F80
-	ldr r0, _0800A338 @ =sub_800A33C
+	ldr r0, _0800A338 @ =LinkCB_BlockSend
 	str r0, [r1]
 _0800A32C:
 	pop {r0}
@@ -1893,11 +1893,11 @@ _0800A32C:
 	.align 2, 0
 _0800A330: .4byte gUnknown_3000E48
 _0800A334: .4byte gUnknown_3003F80
-_0800A338: .4byte sub_800A33C
-	thumb_func_end sub_800A318
+_0800A338: .4byte LinkCB_BlockSend
+	thumb_func_end LinkCB_BlockSendBegin
 
-	thumb_func_start sub_800A33C
-sub_800A33C: @ 800A33C
+	thumb_func_start LinkCB_BlockSend
+LinkCB_BlockSend: @ 800A33C
 	push {r4-r6,lr}
 	ldr r0, _0800A38C @ =gUnknown_3000E08
 	ldr r5, [r0, 0x4]
@@ -1945,7 +1945,7 @@ _0800A390: .4byte gUnknown_3003F50
 _0800A394: .4byte 0x00008888
 _0800A398: .4byte gUnknown_3003F80
 _0800A39C: .4byte sub_800A3A0
-	thumb_func_end sub_800A33C
+	thumb_func_end LinkCB_BlockSend
 
 	thumb_func_start sub_800A3A0
 sub_800A3A0: @ 800A3A0
@@ -2061,7 +2061,7 @@ SendBlock: @ 800A448
 	cmp r0, 0x1
 	beq _0800A464
 	adds r0, r3, 0
-	bl sub_800A2A8
+	bl InitBlockSend
 	b _0800A46A
 	.align 2, 0
 _0800A460: .4byte gUnknown_3003F3C
@@ -2289,8 +2289,8 @@ _0800A5DC: .4byte gUnknown_3003F20
 _0800A5E0: .4byte gUnknown_3003F84
 	thumb_func_end sub_800A5BC
 
-	thumb_func_start sub_800A5E4
-sub_800A5E4: @ 800A5E4
+	thumb_func_start LinkTestCalcBlockChecksum
+LinkTestCalcBlockChecksum: @ 800A5E4
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -2316,10 +2316,10 @@ _0800A60A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A5E4
+	thumb_func_end LinkTestCalcBlockChecksum
 
-	thumb_func_start sub_800A614
-sub_800A614: @ 800A614
+	thumb_func_start PrintHexDigit
+PrintHexDigit: @ 800A614
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2348,7 +2348,7 @@ sub_800A614: @ 800A614
 	bx r0
 	.align 2, 0
 _0800A648: .4byte gUnknown_3003F70
-	thumb_func_end sub_800A614
+	thumb_func_end PrintHexDigit
 
 	thumb_func_start sub_800A64C
 sub_800A64C: @ 800A64C
@@ -2416,7 +2416,7 @@ _0800A6B6:
 	ldrb r0, [r0]
 	adds r1, r6, 0
 	adds r2, r7, 0
-	bl sub_800A614
+	bl PrintHexDigit
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2570,28 +2570,28 @@ task00_link_test: @ 800A74C
 	movs r2, 0xD
 	movs r3, 0x8
 	bl sub_800A684
-	bl sub_800B054
+	bl GetSioMultiSI
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x19
 	movs r2, 0x5
 	movs r3, 0x1
 	bl sub_800A684
-	bl sub_800B064
+	bl IsSioMultiMaster
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x19
 	movs r2, 0x6
 	movs r3, 0x1
 	bl sub_800A684
-	bl sub_800B08C
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x19
 	movs r2, 0x7
 	movs r3, 0x1
 	bl sub_800A684
-	bl sub_800B0A8
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x19
@@ -2871,8 +2871,8 @@ _0800AA30: .4byte gUnknown_3003F40
 _0800AA34: .4byte gUnknown_3003F60
 	thumb_func_end sub_800AA24
 
-	thumb_func_start sub_800AA38
-sub_800AA38: @ 800AA38
+	thumb_func_start GetLinkPlayerCount_2
+GetLinkPlayerCount_2: @ 800AA38
 	ldr r0, _0800AA44 @ =gUnknown_3003F20
 	ldr r0, [r0]
 	movs r1, 0x1C
@@ -2881,7 +2881,7 @@ sub_800AA38: @ 800AA38
 	bx lr
 	.align 2, 0
 _0800AA44: .4byte gUnknown_3003F20
-	thumb_func_end sub_800AA38
+	thumb_func_end GetLinkPlayerCount_2
 
 	thumb_func_start sub_800AA48
 sub_800AA48: @ 800AA48
@@ -3610,8 +3610,8 @@ _0800B048:
 _0800B050: .4byte gUnknown_30030F0
 	thumb_func_end sub_800AF2C
 
-	thumb_func_start sub_800B054
-sub_800B054: @ 800B054
+	thumb_func_start GetSioMultiSI
+GetSioMultiSI: @ 800B054
 	ldr r0, _0800B060 @ =0x04000128
 	ldrh r0, [r0]
 	lsrs r0, 2
@@ -3620,10 +3620,10 @@ sub_800B054: @ 800B054
 	bx lr
 	.align 2, 0
 _0800B060: .4byte 0x04000128
-	thumb_func_end sub_800B054
+	thumb_func_end GetSioMultiSI
 
-	thumb_func_start sub_800B064
-sub_800B064: @ 800B064
+	thumb_func_start IsSioMultiMaster
+IsSioMultiMaster: @ 800B064
 	push {lr}
 	movs r3, 0
 	ldr r2, _0800B088 @ =0x04000128
@@ -3644,10 +3644,10 @@ _0800B080:
 	bx r1
 	.align 2, 0
 _0800B088: .4byte 0x04000128
-	thumb_func_end sub_800B064
+	thumb_func_end IsSioMultiMaster
 
-	thumb_func_start sub_800B08C
-sub_800B08C: @ 800B08C
+	thumb_func_start IsLinkConnectionEstablished
+IsLinkConnectionEstablished: @ 800B08C
 	ldr r0, _0800B098 @ =gUnknown_3003F20
 	ldr r0, [r0]
 	lsrs r0, 6
@@ -3656,25 +3656,25 @@ sub_800B08C: @ 800B08C
 	bx lr
 	.align 2, 0
 _0800B098: .4byte gUnknown_3003F20
-	thumb_func_end sub_800B08C
+	thumb_func_end IsLinkConnectionEstablished
 
-	thumb_func_start sub_800B09C
-sub_800B09C: @ 800B09C
+	thumb_func_start SetSuppressLinkErrorMessage
+SetSuppressLinkErrorMessage: @ 800B09C
 	ldr r1, _0800B0A4 @ =gUnknown_3003F38
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
 _0800B0A4: .4byte gUnknown_3003F38
-	thumb_func_end sub_800B09C
+	thumb_func_end SetSuppressLinkErrorMessage
 
-	thumb_func_start sub_800B0A8
-sub_800B0A8: @ 800B0A8
+	thumb_func_start HasLinkErrorOccurred
+HasLinkErrorOccurred: @ 800B0A8
 	ldr r0, _0800B0B0 @ =gUnknown_3003EAC
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _0800B0B0: .4byte gUnknown_3003EAC
-	thumb_func_end sub_800B0A8
+	thumb_func_end HasLinkErrorOccurred
 
 	thumb_func_start sub_800B0B4
 sub_800B0B4: @ 800B0B4
@@ -3780,11 +3780,11 @@ HandleLinkConnection: @ 800B178
 	ldr r0, _0800B1B4 @ =gUnknown_3003F84
 	ldr r1, _0800B1B8 @ =gUnknown_3003F50
 	ldr r2, _0800B1BC @ =gUnknown_3003ED0
-	bl sub_800B398
+	bl LinkMain1
 	ldr r4, _0800B1C0 @ =gUnknown_3003F20
 	str r0, [r4]
 	ldr r0, _0800B1C4 @ =gUnknown_300311C
-	bl sub_8009AB0
+	bl LinkMain2
 	ldr r0, [r4]
 	movs r1, 0x80
 	lsls r1, 1
@@ -4044,8 +4044,8 @@ sub_800B388: @ 800B388
 	bx r0
 	thumb_func_end sub_800B388
 
-	thumb_func_start sub_800B398
-sub_800B398: @ 800B398
+	thumb_func_start LinkMain1
+LinkMain1: @ 800B398
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -4094,7 +4094,7 @@ _0800B3F8:
 	beq _0800B408
 	cmp r1, 0x2
 	beq _0800B420
-	bl sub_800B4C4
+	bl CheckMasterOrSlave
 	b _0800B44A
 _0800B408:
 	ldr r2, _0800B41C @ =gUnknown_3003FB0
@@ -4119,7 +4119,7 @@ _0800B420:
 _0800B42C: .4byte gUnknown_3003FB0
 _0800B430: .4byte 0x0400012a
 _0800B434:
-	bl sub_800B4F0
+	bl InitTimer
 	ldr r1, _0800B484 @ =gUnknown_3003FB0
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
@@ -4195,10 +4195,10 @@ _0800B4BA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800B398
+	thumb_func_end LinkMain1
 
-	thumb_func_start sub_800B4C4
-sub_800B4C4: @ 800B4C4
+	thumb_func_start CheckMasterOrSlave
+CheckMasterOrSlave: @ 800B4C4
 	push {lr}
 	ldr r0, _0800B4E0 @ =0x04000128
 	ldr r1, [r0]
@@ -4221,10 +4221,10 @@ _0800B4E8:
 _0800B4EC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800B4C4
+	thumb_func_end CheckMasterOrSlave
 
-	thumb_func_start sub_800B4F0
-sub_800B4F0: @ 800B4F0
+	thumb_func_start InitTimer
+InitTimer: @ 800B4F0
 	push {lr}
 	ldr r0, _0800B514 @ =gUnknown_3003FB0
 	ldrb r0, [r0]
@@ -4246,7 +4246,7 @@ _0800B50E:
 _0800B514: .4byte gUnknown_3003FB0
 _0800B518: .4byte 0x0400010c
 _0800B51C: .4byte 0x0000ff3b
-	thumb_func_end sub_800B4F0
+	thumb_func_end InitTimer
 
 	thumb_func_start sub_800B520
 sub_800B520: @ 800B520
@@ -4573,14 +4573,14 @@ _0800B784: .4byte gUnknown_3000E64
 	thumb_func_start Timer3Intr
 Timer3Intr: @ 800B788
 	push {lr}
-	bl sub_800BAF8
+	bl StopTimer
 	bl sub_800B820
 	pop {r0}
 	bx r0
 	thumb_func_end Timer3Intr
 
-	thumb_func_start sub_800B798
-sub_800B798: @ 800B798
+	thumb_func_start SerialCB
+SerialCB: @ 800B798
 	push {r4,lr}
 	ldr r4, _0800B7C4 @ =gUnknown_3003FB0
 	ldr r0, _0800B7C8 @ =0x04000128
@@ -4596,15 +4596,15 @@ sub_800B798: @ 800B798
 	lsls r0, r1, 25
 	lsrs r0, 31
 	strb r0, [r4, 0x10]
-	bl sub_800B92C
-	bl sub_800BA44
-	bl sub_800BB2C
+	bl DoRecv
+	bl DoSend
+	bl SendRecvDone
 	b _0800B7EA
 	.align 2, 0
 _0800B7C4: .4byte gUnknown_3003FB0
 _0800B7C8: .4byte 0x04000128
 _0800B7CC:
-	bl sub_800B830
+	bl DoHandshake
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800B7EA
@@ -4645,7 +4645,7 @@ _0800B810: .4byte gUnknown_3003FB0
 _0800B814: .4byte gUnknown_3000E64
 _0800B818: .4byte gUnknown_3004F70
 _0800B81C: .4byte 0x00000fbd
-	thumb_func_end sub_800B798
+	thumb_func_end SerialCB
 
 	thumb_func_start sub_800B820
 sub_800B820: @ 800B820
@@ -4659,8 +4659,8 @@ sub_800B820: @ 800B820
 _0800B82C: .4byte 0x04000128
 	thumb_func_end sub_800B820
 
-	thumb_func_start sub_800B830
-sub_800B830: @ 800B830
+	thumb_func_start DoHandshake
+DoHandshake: @ 800B830
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4787,10 +4787,10 @@ _0800B91E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800B830
+	thumb_func_end DoHandshake
 
-	thumb_func_start sub_800B92C
-sub_800B92C: @ 800B92C
+	thumb_func_start DoRecv
+DoRecv: @ 800B92C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4936,10 +4936,10 @@ _0800BA30:
 	.align 2, 0
 _0800BA3C: .4byte gUnknown_3000E68
 _0800BA40: .4byte 0x00000fbd
-	thumb_func_end sub_800B92C
+	thumb_func_end DoRecv
 
-	thumb_func_start sub_800BA44
-sub_800BA44: @ 800BA44
+	thumb_func_start DoSend
+DoSend: @ 800BA44
 	push {r4,lr}
 	ldr r0, _0800BA80 @ =gUnknown_3003FB0
 	ldrb r1, [r0, 0x16]
@@ -5030,10 +5030,10 @@ _0800BAEC:
 	bx r0
 	.align 2, 0
 _0800BAF4: .4byte 0x0400012a
-	thumb_func_end sub_800BA44
+	thumb_func_end DoSend
 
-	thumb_func_start sub_800BAF8
-sub_800BAF8: @ 800BAF8
+	thumb_func_start StopTimer
+StopTimer: @ 800BAF8
 	push {lr}
 	ldr r0, _0800BB18 @ =gUnknown_3003FB0
 	ldrb r0, [r0]
@@ -5057,10 +5057,10 @@ _0800BB1C: .4byte 0x0400010e
 _0800BB20: .4byte 0x0000ff7f
 _0800BB24: .4byte 0x0400010c
 _0800BB28: .4byte 0x0000ff3b
-	thumb_func_end sub_800BAF8
+	thumb_func_end StopTimer
 
-	thumb_func_start sub_800BB2C
-sub_800BB2C: @ 800BB2C
+	thumb_func_start SendRecvDone
+SendRecvDone: @ 800BB2C
 	push {lr}
 	ldr r1, _0800BB40 @ =gUnknown_3003FB0
 	ldrb r0, [r1, 0x17]
@@ -5086,10 +5086,10 @@ _0800BB54:
 	bx r0
 	.align 2, 0
 _0800BB58: .4byte 0x0400010e
-	thumb_func_end sub_800BB2C
+	thumb_func_end SendRecvDone
 
-	thumb_func_start sub_800BB5C
-sub_800BB5C: @ 800BB5C
+	thumb_func_start ResetSendBuffer
+ResetSendBuffer: @ 800BB5C
 	push {r4-r6,lr}
 	ldr r1, _0800BBA4 @ =gUnknown_3003FB0
 	ldr r2, _0800BBA8 @ =0x00000339
@@ -5131,10 +5131,10 @@ _0800BB82:
 _0800BBA4: .4byte gUnknown_3003FB0
 _0800BBA8: .4byte 0x00000339
 _0800BBAC: .4byte 0x0000efff
-	thumb_func_end sub_800BB5C
+	thumb_func_end ResetSendBuffer
 
-	thumb_func_start sub_800BBB0
-sub_800BBB0: @ 800BBB0
+	thumb_func_start ResetRecvBuffer
+ResetRecvBuffer: @ 800BBB0
 	push {r4-r7,lr}
 	ldr r1, _0800BC10 @ =gUnknown_3003FB0
 	ldr r2, _0800BC14 @ =0x00000fbd
@@ -5191,6 +5191,6 @@ _0800BC10: .4byte gUnknown_3003FB0
 _0800BC14: .4byte 0x00000fbd
 _0800BC18: .4byte 0x00000fbc
 _0800BC1C: .4byte 0x0000efff
-	thumb_func_end sub_800BBB0
+	thumb_func_end ResetRecvBuffer
 
 	.align 2, 0 @ Don't pad with nop.

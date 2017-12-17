@@ -266,7 +266,7 @@ sub_80BD27C: @ 80BD27C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805C1F4
+	bl PlayerFaceDirection
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80BD27C
@@ -293,7 +293,7 @@ sub_80BD28C: @ 80BD28C
 	lsrs r4, r0, 4
 _080BD2B2:
 	adds r0, r4, 0
-	bl sub_805C1F4
+	bl PlayerFaceDirection
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -351,7 +351,7 @@ _080BD322:
 	cmp r0, 0x3
 	bls _080BD350
 	adds r0, r4, 0
-	bl sub_805C1AC
+	bl PlayerOnBikeCollide
 	b _080BD350
 _080BD334:
 	cmp r1, 0xE
@@ -782,8 +782,8 @@ _080BD638:
 _080BD64C: .4byte gUnknown_2037078
 	thumb_func_end sub_80BD620
 
-	thumb_func_start sub_80BD650
-sub_80BD650: @ 80BD650
+	thumb_func_start Bike_UpdateBikeCounterSpeed
+Bike_UpdateBikeCounterSpeed: @ 80BD650
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BD660 @ =gUnknown_2037078
@@ -794,7 +794,7 @@ sub_80BD650: @ 80BD650
 	bx lr
 	.align 2, 0
 _080BD660: .4byte gUnknown_2037078
-	thumb_func_end sub_80BD650
+	thumb_func_end Bike_UpdateBikeCounterSpeed
 
 	thumb_func_start sub_80BD664
 sub_80BD664: @ 80BD664
@@ -807,8 +807,8 @@ sub_80BD664: @ 80BD664
 _080BD670: .4byte gUnknown_2037078
 	thumb_func_end sub_80BD664
 
-	thumb_func_start sub_80BD674
-sub_80BD674: @ 80BD674
+	thumb_func_start GetPlayerSpeed
+GetPlayerSpeed: @ 80BD674
 	push {lr}
 	sub sp, 0x8
 	ldr r1, _080BD69C @ =gUnknown_83E7D1C
@@ -850,10 +850,10 @@ _080BD6BE:
 	add sp, 0x8
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BD674
+	thumb_func_end GetPlayerSpeed
 
-	thumb_func_start sub_80BD6C4
-sub_80BD6C4: @ 80BD6C4
+	thumb_func_start Bike_HandleBumpySlopeJump
+Bike_HandleBumpySlopeJump: @ 80BD6C4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _080BD714 @ =gUnknown_2037078
@@ -892,6 +892,6 @@ _080BD70C:
 	bx r0
 	.align 2, 0
 _080BD714: .4byte gUnknown_2037078
-	thumb_func_end sub_80BD6C4
+	thumb_func_end Bike_HandleBumpySlopeJump
 
 	.align 2, 0 @ Don't pad with nop.

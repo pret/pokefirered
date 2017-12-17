@@ -5619,7 +5619,7 @@ sub_814A468: @ 814A468
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	subs r4, 0x85
 	lsls r4, 16
 	lsrs r4, 16
@@ -7987,7 +7987,7 @@ _0814B63E:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r5, 0
 	bl sub_814B6D4
 	movs r0, 0x2

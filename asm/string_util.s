@@ -259,8 +259,8 @@ _08008E72:
 	bx r1
 	thumb_func_end StringCompareN
 
-	thumb_func_start sub_8008E78
-sub_8008E78: @ 8008E78
+	thumb_func_start ConvertIntToDecimalStringN
+ConvertIntToDecimalStringN: @ 8008E78
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -348,7 +348,7 @@ _08008F08:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008E78
+	thumb_func_end ConvertIntToDecimalStringN
 
 	thumb_func_start sub_8008F18
 sub_8008F18: @ 8008F18

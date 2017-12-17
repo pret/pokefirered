@@ -87,7 +87,7 @@ sub_8081B84: @ 8081B84
 _08081BC0:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8080334
+	bl TrainerWantsBattle
 	adds r0, r4, r5
 	lsls r0, 2
 	ldr r1, _08081BE0 @ =gUnknown_2036E38
@@ -462,7 +462,7 @@ sub_8081E68: @ 8081E68
 	adds r5, r0, 0
 	lsls r4, r1, 24
 	lsrs r4, 24
-	ldr r0, _08081E94 @ =sub_8081EDC
+	ldr r0, _08081E94 @ =RunTrainerSeeFuncList
 	movs r1, 0x50
 	bl CreateTask
 	lsls r0, 24
@@ -480,7 +480,7 @@ sub_8081E68: @ 8081E68
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081E94: .4byte sub_8081EDC
+_08081E94: .4byte RunTrainerSeeFuncList
 _08081E98: .4byte gUnknown_3005090
 	thumb_func_end sub_8081E68
 
@@ -488,7 +488,7 @@ _08081E98: .4byte gUnknown_3005090
 sub_8081E9C: @ 8081E9C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r5, _08081ED4 @ =sub_8081EDC
+	ldr r5, _08081ED4 @ =RunTrainerSeeFuncList
 	adds r0, r5, 0
 	bl FindTaskIdByFunc
 	adds r4, r0, 0
@@ -511,12 +511,12 @@ sub_8081E9C: @ 8081E9C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081ED4: .4byte sub_8081EDC
+_08081ED4: .4byte RunTrainerSeeFuncList
 _08081ED8: .4byte gUnknown_3005090
 	thumb_func_end sub_8081E9C
 
-	thumb_func_start sub_8081EDC
-sub_8081EDC: @ 8081EDC
+	thumb_func_start RunTrainerSeeFuncList
+RunTrainerSeeFuncList: @ 8081EDC
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -560,7 +560,7 @@ _08081F28:
 	bx r0
 	.align 2, 0
 _08081F30: .4byte gUnknown_83C7258
-	thumb_func_end sub_8081EDC
+	thumb_func_end RunTrainerSeeFuncList
 
 	thumb_func_start sub_8081F34
 sub_8081F34: @ 8081F34
@@ -1338,8 +1338,8 @@ _08082518: .4byte sub_808243C
 _0808251C: .4byte gUnknown_3005098
 	thumb_func_end sub_80824EC
 
-	thumb_func_start sub_8082520
-sub_8082520: @ 8082520
+	thumb_func_start ScrSpecial_EndTrainerApproach
+ScrSpecial_EndTrainerApproach: @ 8082520
 	push {lr}
 	ldr r0, _0808252C @ =sub_8082530
 	bl sub_8081E9C
@@ -1347,7 +1347,7 @@ sub_8082520: @ 8082520
 	bx r0
 	.align 2, 0
 _0808252C: .4byte sub_8082530
-	thumb_func_end sub_8082520
+	thumb_func_end ScrSpecial_EndTrainerApproach
 
 	thumb_func_start sub_8082530
 sub_8082530: @ 8082530
@@ -1360,8 +1360,8 @@ sub_8082530: @ 8082530
 	bx r0
 	thumb_func_end sub_8082530
 
-	thumb_func_start sub_8082544
-sub_8082544: @ 8082544
+	thumb_func_start FldEff_ExclamationMarkIcon1
+FldEff_ExclamationMarkIcon1: @ 8082544
 	push {lr}
 	ldr r0, _08082574 @ =gUnknown_83C7388
 	movs r1, 0
@@ -1387,7 +1387,7 @@ _0808256C:
 	.align 2, 0
 _08082574: .4byte gUnknown_83C7388
 _08082578: .4byte gUnknown_202063C
-	thumb_func_end sub_8082544
+	thumb_func_end FldEff_ExclamationMarkIcon1
 
 	thumb_func_start sub_808257C
 sub_808257C: @ 808257C

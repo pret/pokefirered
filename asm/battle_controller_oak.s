@@ -2134,7 +2134,7 @@ _080E86B4:
 _080E86D8: .4byte gUnknown_2037AB8
 _080E86DC: .4byte gUnknown_2023BC4
 _080E86E0:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _080E86E4:
 	ldr r0, _080E86FC @ =gUnknown_2023E82
 	movs r1, 0

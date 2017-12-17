@@ -477,7 +477,7 @@ _081459F2:
 _08145A2C: .4byte gUnknown_203F3C8
 _08145A30:
 	bl sub_81461D8
-	bl sub_8097114
+	bl FreeMonIconPalettes
 	b _08145A7A
 _08145A3A:
 	ldr r0, _08145A48 @ =gUnknown_203F3B8
@@ -581,7 +581,7 @@ _08145AF4:
 	ldr r1, [r1, 0x4]
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r6, r4, 0
 _08145B06:
 	ldr r2, [r6]
@@ -802,7 +802,7 @@ _08145CA8:
 	ldrh r1, [r1]
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	mov r0, r8
 	ldr r1, [r0]
 	adds r0, r1, r7

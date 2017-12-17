@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start .gcc2_compiled._3
-.gcc2_compiled._3: @ 80D8AA0
+	thumb_func_start sub_80D8AA0
+sub_80D8AA0: @ 80D8AA0
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
@@ -22,7 +22,7 @@ _080D8AB4:
 	asrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end .gcc2_compiled._3
+	thumb_func_end sub_80D8AA0
 
 	thumb_func_start sub_80D8ABC
 sub_80D8ABC: @ 80D8ABC

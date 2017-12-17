@@ -3364,7 +3364,7 @@ _0813611C:
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 _0813612C:
 	ldr r0, _08136158 @ =gUnknown_203B144
 	ldr r1, [r0]
@@ -3536,7 +3536,7 @@ _08136264:
 	adds r0, r2
 	movs r2, 0x2
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r5
 	movs r1, 0x38
@@ -3545,7 +3545,7 @@ _08136264:
 	mov r0, sp
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	ldr r4, _08136328 @ =0x00003088
 	adds r0, r4
@@ -3619,7 +3619,7 @@ sub_8136350: @ 8136350
 	adds r0, r4
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
 	ldr r1, _08136504 @ =gUnknown_841620C
@@ -3634,7 +3634,7 @@ sub_8136350: @ 8136350
 	mov r0, sp
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
 	mov r1, sp
@@ -3679,7 +3679,7 @@ _081363E6:
 	adds r0, r4
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
 	bl StringLength
@@ -3704,7 +3704,7 @@ _081363E6:
 	adds r0, r4
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
 	bl StringLength
@@ -3728,7 +3728,7 @@ _081363E6:
 	adds r0, r4
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
 	bl StringLength
@@ -3752,7 +3752,7 @@ _081363E6:
 	adds r0, r4
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
 	bl StringLength
@@ -3776,7 +3776,7 @@ _081363E6:
 	adds r0, r4
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
 	bl StringLength
@@ -3814,7 +3814,7 @@ _08136518:
 	adds r0, r5
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	adds r0, r5
 	bl StringLength
@@ -3840,7 +3840,7 @@ _08136518:
 	adds r0, r5
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	adds r0, r5
 	bl StringLength
@@ -3864,7 +3864,7 @@ _08136518:
 	adds r0, r5
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	adds r0, r5
 	bl StringLength
@@ -3888,7 +3888,7 @@ _08136518:
 	adds r0, r5
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	adds r0, r5
 	bl StringLength
@@ -3912,7 +3912,7 @@ _08136518:
 	adds r0, r5
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	adds r0, r5
 	bl StringLength
@@ -3940,7 +3940,7 @@ _08136630:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0x7
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
 	bl StringLength
@@ -3995,7 +3995,7 @@ _081366B8:
 	adds r0, r4
 	movs r2, 0
 	movs r3, 0x7
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
 	bl StringLength
@@ -4268,7 +4268,7 @@ _081368B0:
 	ldrb r1, [r1, 0x4]
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _08136968 @ =0x000030f0
 	adds r4, r0
 	ldr r0, [r6]
@@ -4284,7 +4284,7 @@ _081368B0:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	b _081369D0
 	.align 2, 0
 _08136948: .4byte 0x00003264
@@ -4316,7 +4316,7 @@ _0813696C:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r3, _08136A58 @ =0x000030f0
 	adds r5, r3
 	mov r4, r8
@@ -4341,7 +4341,7 @@ _0813696C:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 _081369D0:
 	ldr r6, _08136A4C @ =gUnknown_203B140
 	movs r0, 0xB
@@ -4421,7 +4421,7 @@ _08136A70:
 	ldrb r1, [r1, 0x1]
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 _08136A84:
 	ldr r2, _08136AB4 @ =gUnknown_8250C04
 	ldr r0, _08136AB8 @ =gUnknown_203B140
@@ -4459,7 +4459,7 @@ _08136AC8:
 	ldrb r1, [r1, 0x3]
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 _08136ADA:
 	pop {r3,r4}
 	mov r8, r3
@@ -5774,7 +5774,7 @@ _081375B2:
 	add r0, sp, 0x14
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x1
 	add r1, sp, 0x14
 	bl UnkTextUtil_SetPtrI
@@ -5971,7 +5971,7 @@ _0813775E:
 	add r0, sp, 0x14
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x1
 	add r1, sp, 0x14
 	bl UnkTextUtil_SetPtrI
@@ -10757,7 +10757,7 @@ sub_8139DBC: @ 8139DBC
 	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_80970A0
+	bl SafeLoadMonIconPalette
 	ldr r2, [r6]
 	ldr r1, _08139E10 @ =0x000032f8
 	adds r0, r2, r1

@@ -134,8 +134,8 @@ _080BFA00: .4byte gUnknown_3005020
 _080BFA04: .4byte sub_807DD24
 	thumb_func_end sub_80BF9BC
 
-	thumb_func_start sub_80BFA08
-sub_80BFA08: @ 80BFA08
+	thumb_func_start ScrSpecial_CountPokemonMoves
+ScrSpecial_CountPokemonMoves: @ 80BFA08
 	push {r4,r5,lr}
 	ldr r1, _080BFA44 @ =gUnknown_20370D0
 	movs r0, 0
@@ -170,10 +170,10 @@ _080BFA32:
 _080BFA44: .4byte gUnknown_20370D0
 _080BFA48: .4byte gUnknown_20370C0
 _080BFA4C: .4byte gUnknown_2024284
-	thumb_func_end sub_80BFA08
+	thumb_func_end ScrSpecial_CountPokemonMoves
 
-	thumb_func_start sub_80BFA50
-sub_80BFA50: @ 80BFA50
+	thumb_func_start ScrSpecial_GetPokemonNicknameAndMoveName
+ScrSpecial_GetPokemonNicknameAndMoveName: @ 80BFA50
 	push {r4,r5,lr}
 	ldr r0, _080BFA90 @ =gUnknown_20370C0
 	ldrh r1, [r0]
@@ -209,7 +209,7 @@ _080BFA98: .4byte gUnknown_20370C2
 _080BFA9C: .4byte gUnknown_2021CD0
 _080BFAA0: .4byte gUnknown_2021CF0
 _080BFAA4: .4byte gUnknown_8247094
-	thumb_func_end sub_80BFA50
+	thumb_func_end ScrSpecial_GetPokemonNicknameAndMoveName
 
 	thumb_func_start sub_80BFAA8
 sub_80BFAA8: @ 80BFAA8

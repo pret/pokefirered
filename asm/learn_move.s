@@ -1589,7 +1589,7 @@ _080E5388:
 	add r0, sp, 0x8
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -1625,7 +1625,7 @@ _080E53D4:
 	add r0, sp, 0x8
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -1644,7 +1644,7 @@ _080E53F4:
 	add r0, sp, 0x8
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r4, 0
 	str r4, [sp]
 	str r4, [sp, 0x4]

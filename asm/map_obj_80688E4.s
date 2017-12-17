@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80688E4
-sub_80688E4: @ 80688E4
+	thumb_func_start FreezeMapObject
+FreezeMapObject: @ 80688E4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r1, [r5]
@@ -80,7 +80,7 @@ _0806896E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80688E4
+	thumb_func_end FreezeMapObject
 
 	thumb_func_start player_bitmagic
 player_bitmagic: @ 8068974
@@ -101,7 +101,7 @@ _0806897A:
 	cmp r4, r0
 	beq _08068998
 	adds r0, r1, 0
-	bl sub_80688E4
+	bl FreezeMapObject
 _08068998:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -116,8 +116,8 @@ _080689A8: .4byte gUnknown_2036E38
 _080689AC: .4byte gUnknown_2037078
 	thumb_func_end player_bitmagic
 
-	thumb_func_start sub_80689B0
-sub_80689B0: @ 80689B0
+	thumb_func_start FreezeMapObjectsExceptOne
+FreezeMapObjectsExceptOne: @ 80689B0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -139,7 +139,7 @@ _080689BA:
 	cmp r4, r0
 	beq _080689DC
 	adds r0, r1, 0
-	bl sub_80688E4
+	bl FreezeMapObject
 _080689DC:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -152,7 +152,7 @@ _080689DC:
 	.align 2, 0
 _080689EC: .4byte gUnknown_2036E38
 _080689F0: .4byte gUnknown_2037078
-	thumb_func_end sub_80689B0
+	thumb_func_end FreezeMapObjectsExceptOne
 
 	thumb_func_start npc_sync_anim_pause_bits
 npc_sync_anim_pause_bits: @ 80689F4
@@ -1130,7 +1130,7 @@ sub_8069094: @ 8069094
 	ldr r1, _080690F8 @ =gUnknown_202063C
 	adds r4, r0, r1
 	adds r0, r5, 0
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	ldrh r3, [r4, 0x4]
 	lsls r3, 22
 	ldr r1, [r0, 0x10]
@@ -1474,7 +1474,7 @@ DoRippleFieldEffect: @ 806930C
 	push {r4,lr}
 	adds r4, r1, 0
 	ldrb r0, [r0, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	ldr r2, _08069344 @ =gUnknown_20386E0
 	movs r3, 0x20
 	ldrsh r1, [r4, r3]

@@ -1168,7 +1168,7 @@ sub_809B408: @ 809B408
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r4, 0
 	bl StringLength
 	lsls r0, 16
@@ -1231,7 +1231,7 @@ sub_809B494: @ 809B494
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r5, _0809B51C @ =gUnknown_2021D18
 	ldr r1, _0809B520 @ =gUnknown_8416226
 	adds r0, r5, 0
@@ -1985,7 +1985,7 @@ _0809BA56:
 	lsls r0, 2
 	add r0, r8
 	ldrb r0, [r0, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	movs r1, 0
 	ldrsh r2, [r4, r1]
 	lsls r1, r2, 3
@@ -2117,7 +2117,7 @@ sub_809BB44: @ 809BB44
 	ldrsh r1, [r4, r2]
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0809BBB8 @ =gUnknown_2021D18
 	ldr r1, _0809BBBC @ =gUnknown_84162B9
 	adds r0, r4, 0
@@ -2270,7 +2270,7 @@ sub_809BCA0: @ 809BCA0
 	adds r1, r4, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r6, _0809BD48 @ =gUnknown_2021D18
 	ldr r1, _0809BD4C @ =gUnknown_8416749
 	adds r0, r6, 0
@@ -2414,12 +2414,12 @@ _0809BDD4:
 	ldrsh r1, [r4, r2]
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0809BE48 @ =gUnknown_2021D04
 	ldr r1, [r6, 0x8]
 	movs r2, 0
 	movs r3, 0x8
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _0809BE4C @ =gUnknown_841678E
 	ldr r2, _0809BE50 @ =sub_809BE90
 	adds r0, r5, 0

@@ -2522,8 +2522,8 @@ sub_804367C: @ 804367C
 _08043694: .4byte gUnknown_823EAC8
 	thumb_func_end sub_804367C
 
-	thumb_func_start sub_8043698
-sub_8043698: @ 8043698
+	thumb_func_start nature_stat_mod
+nature_stat_mod: @ 8043698
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2576,7 +2576,7 @@ _080436F2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8043698
+	thumb_func_end nature_stat_mod
 
 	thumb_func_start sub_80436F8
 sub_80436F8: @ 80436F8
@@ -3280,8 +3280,8 @@ _08043C22:
 	bx r1
 	thumb_func_end sub_8043B90
 
-	thumb_func_start sub_8043C2C
-sub_8043C2C: @ 8043C2C
+	thumb_func_start CanMonLearnTMHM
+CanMonLearnTMHM: @ 8043C2C
 	push {r4,r5,lr}
 	lsls r1, 24
 	lsrs r4, r1, 24
@@ -3328,7 +3328,7 @@ _08043C7A:
 	bx r1
 	.align 2, 0
 _08043C80: .4byte gUnknown_8252BC8
-	thumb_func_end sub_8043C2C
+	thumb_func_end CanMonLearnTMHM
 
 	thumb_func_start GetMoveRelearnerMoves
 GetMoveRelearnerMoves: @ 8043C84
@@ -3973,8 +3973,8 @@ _0804413C:
 _08044144: .4byte gUnknown_82380CC
 	thumb_func_end GetFrontSpritePalFromSpeciesAndPersonality
 
-	thumb_func_start sub_8044148
-sub_8044148: @ 8044148
+	thumb_func_start GetMonSpritePalStruct
+GetMonSpritePalStruct: @ 8044148
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0x41
@@ -3999,7 +3999,7 @@ sub_8044148: @ 8044148
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8044148
+	thumb_func_end GetMonSpritePalStruct
 
 	thumb_func_start GetMonSpritePalStructFromOtIdPersonality
 GetMonSpritePalStructFromOtIdPersonality: @ 8044180
@@ -4336,8 +4336,8 @@ _080443EC: .4byte gUnknown_83FCA2C
 _080443F0: .4byte gUnknown_2021D18
 	thumb_func_end sub_8044348
 
-	thumb_func_start sub_80443F4
-sub_80443F4: @ 80443F4
+	thumb_func_start SetWildMonHeldItem
+SetWildMonHeldItem: @ 80443F4
 	push {r4,r5,lr}
 	ldr r0, _0804444C @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -4394,7 +4394,7 @@ _08044468:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80443F4
+	thumb_func_end SetWildMonHeldItem
 
 	thumb_func_start IsMonShiny
 IsMonShiny: @ 8044470
@@ -4726,7 +4726,7 @@ _080446CC:
 	lsls r2, r6, 24
 	lsrs r2, 24
 	adds r1, r4, 0
-	bl sub_8043698
+	bl nature_stat_mod
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0

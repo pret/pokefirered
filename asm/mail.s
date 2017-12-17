@@ -92,7 +92,7 @@ _080BEC90:
 	str r0, [r2]
 	ldrh r0, [r5, 0x1E]
 	mov r1, sp
-	bl sub_8097F20
+	bl MailSpeciesToSpecies
 	lsls r0, 16
 	ldr r1, _080BECCC @ =0xffff0000
 	adds r0, r1

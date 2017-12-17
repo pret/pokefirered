@@ -213,7 +213,7 @@ _0800D3DC: .4byte gUnknown_3004FE0
 _0800D3E0: .4byte sub_80E75B0
 _0800D3E4:
 	ldr r1, _0800D400 @ =gUnknown_3004FE0
-	ldr r0, _0800D404 @ =sub_802E314
+	ldr r0, _0800D404 @ =SetBankFuncToPlayerBufferRunCommand
 _0800D3E8:
 	str r0, [r1]
 	adds r2, r1, 0
@@ -229,7 +229,7 @@ _0800D3E8:
 	b _0800D478
 	.align 2, 0
 _0800D400: .4byte gUnknown_3004FE0
-_0800D404: .4byte sub_802E314
+_0800D404: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D408: .4byte gUnknown_2023BD6
 _0800D40C: .4byte sub_8035A7C
 _0800D410: .4byte gUnknown_2023BCC
@@ -265,7 +265,7 @@ _0800D450: .4byte sub_81560A4
 _0800D454: .4byte gUnknown_2023BD6
 _0800D458:
 	ldr r2, _0800D480 @ =gUnknown_3004FE0
-	ldr r0, _0800D484 @ =sub_802E314
+	ldr r0, _0800D484 @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
 	ldr r1, _0800D488 @ =gUnknown_2023BD6
 	strb r3, [r1]
@@ -288,7 +288,7 @@ _0800D478:
 	bx r0
 	.align 2, 0
 _0800D480: .4byte gUnknown_3004FE0
-_0800D484: .4byte sub_802E314
+_0800D484: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D488: .4byte gUnknown_2023BD6
 _0800D48C: .4byte sub_8035A7C
 _0800D490: .4byte gUnknown_2023BCC
@@ -316,7 +316,7 @@ sub_800D494: @ 800D494
 	ldr r0, _0800D4D8 @ =sub_80123C0
 	str r0, [r1]
 	ldr r2, _0800D4DC @ =gUnknown_3004FE0
-	ldr r0, _0800D4E0 @ =sub_802E314
+	ldr r0, _0800D4E0 @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
 	ldr r1, _0800D4E4 @ =gUnknown_2023BD6
 	strb r3, [r1]
@@ -331,13 +331,13 @@ _0800D4D0: .4byte gUnknown_2022B4C
 _0800D4D4: .4byte gUnknown_3004F84
 _0800D4D8: .4byte sub_80123C0
 _0800D4DC: .4byte gUnknown_3004FE0
-_0800D4E0: .4byte sub_802E314
+_0800D4E0: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D4E4: .4byte gUnknown_2023BD6
 _0800D4E8: .4byte sub_803A668
 _0800D4EC: .4byte gUnknown_2023BCC
 _0800D4F0:
 	ldr r2, _0800D508 @ =gUnknown_3004FE0
-	ldr r0, _0800D50C @ =sub_802E314
+	ldr r0, _0800D50C @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2, 0x4]
 	ldr r1, _0800D510 @ =gUnknown_2023BD6
 	strb r4, [r1, 0x1]
@@ -349,7 +349,7 @@ _0800D4F0:
 	b _0800D752
 	.align 2, 0
 _0800D508: .4byte gUnknown_3004FE0
-_0800D50C: .4byte sub_802E314
+_0800D50C: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D510: .4byte gUnknown_2023BD6
 _0800D514: .4byte sub_803A668
 _0800D518: .4byte gUnknown_2023BCC
@@ -367,7 +367,7 @@ _0800D51C:
 	ldr r0, _0800D558 @ =sub_80123C0
 	str r0, [r1]
 	ldr r2, _0800D55C @ =gUnknown_3004FE0
-	ldr r4, _0800D560 @ =sub_802E314
+	ldr r4, _0800D560 @ =SetBankFuncToPlayerBufferRunCommand
 	str r4, [r2]
 	ldr r1, _0800D564 @ =gUnknown_2023BD6
 	movs r0, 0
@@ -386,12 +386,12 @@ _0800D51C:
 _0800D554: .4byte gUnknown_3004F84
 _0800D558: .4byte sub_80123C0
 _0800D55C: .4byte gUnknown_3004FE0
-_0800D560: .4byte sub_802E314
+_0800D560: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D564: .4byte gUnknown_2023BD6
 _0800D568: .4byte sub_803A668
 _0800D56C:
 	ldr r2, _0800D590 @ =gUnknown_3004FE0
-	ldr r0, _0800D594 @ =sub_802E314
+	ldr r0, _0800D594 @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2, 0x4]
 	ldr r1, _0800D598 @ =gUnknown_2023BD6
 	strb r3, [r1, 0x1]
@@ -410,7 +410,7 @@ _0800D588:
 	b _0800D754
 	.align 2, 0
 _0800D590: .4byte gUnknown_3004FE0
-_0800D594: .4byte sub_802E314
+_0800D594: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D598: .4byte gUnknown_2023BD6
 _0800D59C: .4byte sub_803A668
 _0800D5A0: .4byte gUnknown_2023BCC
@@ -480,7 +480,7 @@ _0800D61A:
 	lsls r1, 2
 	ldr r2, _0800D644 @ =gUnknown_3004FE0
 	adds r1, r2
-	ldr r2, _0800D648 @ =sub_802E314
+	ldr r2, _0800D648 @ =SetBankFuncToPlayerBufferRunCommand
 	str r2, [r1]
 	ldrh r1, [r3, 0x18]
 	mov r12, r0
@@ -494,7 +494,7 @@ _0800D61A:
 	.align 2, 0
 _0800D640: .4byte gUnknown_202273C
 _0800D644: .4byte gUnknown_3004FE0
-_0800D648: .4byte sub_802E314
+_0800D648: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D64C:
 	cmp r1, 0x3
 	bne _0800D740
@@ -1239,7 +1239,7 @@ _0800DBEE:
 	.align 2, 0
 _0800DBF0: .4byte gUnknown_3003F64
 _0800DBF4:
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, _0800DC10 @ =gUnknown_2022B4C
@@ -2426,8 +2426,8 @@ EmitChooseAction: @ 800E4D4
 _0800E4FC: .4byte gUnknown_2022874
 	thumb_func_end EmitChooseAction
 
-	thumb_func_start sub_800E500
-sub_800E500: @ 800E500
+	thumb_func_start Emitcmd19
+Emitcmd19: @ 800E500
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -2442,7 +2442,7 @@ sub_800E500: @ 800E500
 	bx r0
 	.align 2, 0
 _0800E51C: .4byte gUnknown_2022874
-	thumb_func_end sub_800E500
+	thumb_func_end Emitcmd19
 
 	thumb_func_start EmitChooseMove
 EmitChooseMove: @ 800E520
@@ -3132,8 +3132,8 @@ EmitPlaySE: @ 800E9C4
 _0800E9EC: .4byte gUnknown_2022874
 	thumb_func_end EmitPlaySE
 
-	thumb_func_start sub_800E9F0
-sub_800E9F0: @ 800E9F0
+	thumb_func_start Emitcmd44
+Emitcmd44: @ 800E9F0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3155,7 +3155,7 @@ sub_800E9F0: @ 800E9F0
 	bx r0
 	.align 2, 0
 _0800EA18: .4byte gUnknown_2022874
-	thumb_func_end sub_800E9F0
+	thumb_func_end Emitcmd44
 
 	thumb_func_start EmitFaintingCry
 EmitFaintingCry: @ 800EA1C
@@ -3335,8 +3335,8 @@ EmitBattleAnimation: @ 800EB28
 _0800EB50: .4byte gUnknown_2022874
 	thumb_func_end EmitBattleAnimation
 
-	thumb_func_start sub_800EB54
-sub_800EB54: @ 800EB54
+	thumb_func_start EmitLinkStandbyMsg
+EmitLinkStandbyMsg: @ 800EB54
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3351,7 +3351,7 @@ sub_800EB54: @ 800EB54
 	bx r0
 	.align 2, 0
 _0800EB70: .4byte gUnknown_2022874
-	thumb_func_end sub_800EB54
+	thumb_func_end EmitLinkStandbyMsg
 
 	thumb_func_start EmitResetActionMoveSelection
 EmitResetActionMoveSelection: @ 800EB74

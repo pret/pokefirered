@@ -602,7 +602,7 @@ sub_8067F88: @ 8067F88
 	push {r5-r7}
 	adds r5, r0, 0
 	ldrb r0, [r5, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	movs r4, 0
 	movs r0, 0x1
 	mov r10, r0
@@ -1330,7 +1330,7 @@ GroundEffect_SandTracks: @ 80684D4
 	adds r4, r0, 0
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	ldr r1, _080684FC @ =gUnknown_83A709C
 	ldrb r0, [r0, 0xD]
 	lsls r0, 2
@@ -1353,7 +1353,7 @@ GroundEffect_DeepSandTracks: @ 8068500
 	adds r4, r0, 0
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	ldr r1, _08068528 @ =gUnknown_83A709C
 	ldrb r0, [r0, 0xD]
 	lsls r0, 2

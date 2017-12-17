@@ -135,7 +135,7 @@ sub_8115924: @ 8115924
 	add r0, sp, 0x8
 	movs r2, 0x2
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r5, 0
 	add r1, sp, 0x8
 	bl StringAppend
@@ -3406,7 +3406,7 @@ sub_81174B4: @ 81174B4
 	bl GetMultiplayerId
 	ldr r1, _08117530 @ =gUnknown_300502C
 	strb r0, [r1]
-	bl sub_806E08C
+	bl SetCableClubWarp
 	lsls r4, 24
 	asrs r4, 24
 	lsls r5, 24
@@ -6896,7 +6896,7 @@ _08119414:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _08119460 @ =gUnknown_2021D18
 	ldr r1, _08119464 @ =gUnknown_8458DBC
 	bl StringExpandPlaceholders
@@ -9500,7 +9500,7 @@ sub_811A81C: @ 811A81C
 	adds r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _0811A908 @ =gUnknown_84571B0
 	mov r0, r8
 	bl StringAppend
@@ -9553,7 +9553,7 @@ sub_811A81C: @ 811A81C
 	add r0, sp, 0x8
 	movs r2, 0x2
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _0811A90C @ =gUnknown_84571B4
 	mov r0, r8
 	bl StringCopy
@@ -9635,7 +9635,7 @@ sub_811A910: @ 811A910
 	add r0, sp, 0x8
 	movs r2, 0x2
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0811A9B0 @ =gUnknown_2021D18
 	ldr r1, _0811A9B4 @ =gUnknown_84571B4
 	adds r0, r4, 0
@@ -10015,7 +10015,7 @@ _0811AC3C:
 	mov r1, r9
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x2
 	add r1, sp, 0x8
 	movs r2, 0
@@ -10474,7 +10474,7 @@ _0811AFC8:
 	ldrh r1, [r4, 0xC]
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r6, 0
 	adds r0, 0x63
 	ldrh r2, [r4, 0xA]
@@ -10505,7 +10505,7 @@ _0811AFFA:
 	adds r0, 0x6E
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldrh r1, [r5, 0x2]
 	movs r0, 0xB
 	muls r1, r0
@@ -10992,7 +10992,7 @@ sub_811B31C: @ 811B31C
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x3
 	adds r1, r5, 0
 	bl UnkTextUtil_SetPtrI
@@ -11004,7 +11004,7 @@ sub_811B31C: @ 811B31C
 	mov r0, r10
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	mov r4, r9
 	adds r4, 0xE8
 	mov r2, r8
@@ -11012,7 +11012,7 @@ sub_811B31C: @ 811B31C
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x4
 	mov r1, r10
 	bl UnkTextUtil_SetPtrI
@@ -11038,7 +11038,7 @@ _0811B40A:
 	adds r0, r6, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	adds r1, r6, 0
 	bl UnkTextUtil_SetPtrI
@@ -11053,7 +11053,7 @@ _0811B426:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x2
 	adds r1, r4, 0
 	bl UnkTextUtil_SetPtrI
@@ -11062,7 +11062,7 @@ _0811B426:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x3
 	adds r1, r5, 0
 	bl UnkTextUtil_SetPtrI
@@ -11460,7 +11460,7 @@ _0811B730:
 	b _0811B748
 _0811B742:
 	adds r0, r4, 0
-	bl sub_80688E4
+	bl FreezeMapObject
 _0811B748:
 	movs r0, 0x1
 _0811B74A:

@@ -79,7 +79,7 @@ sub_8054C48: @ 8054C48
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1564,8 +1564,8 @@ sub_8055778: @ 8055778
 _08055788: .4byte gUnknown_3005008
 	thumb_func_end sub_8055778
 
-	thumb_func_start sub_805578C
-sub_805578C: @ 805578C
+	thumb_func_start GetMapConnection
+GetMapConnection: @ 805578C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1599,7 +1599,7 @@ _080557BE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805578C
+	thumb_func_end GetMapConnection
 
 	thumb_func_start sub_80557C4
 sub_80557C4: @ 80557C4
@@ -1611,7 +1611,7 @@ sub_80557C4: @ 80557C4
 	lsrs r4, r1, 16
 	lsls r2, 16
 	lsrs r5, r2, 16
-	bl sub_805578C
+	bl GetMapConnection
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _080557FC
@@ -1736,7 +1736,7 @@ _080558D4:
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMove
 	bl sub_8110920
-	bl sub_807B1A4
+	bl DoCurrentWeather
 	bl wild_encounter_reset_coro_args
 	bl mapheader_run_script_with_tag_x5
 	bl sub_80561B4
@@ -2592,8 +2592,8 @@ _08055F62:
 	bx r0
 	thumb_func_end sub_8055F48
 
-	thumb_func_start sub_8055F68
-sub_8055F68: @ 8055F68
+	thumb_func_start GetMapMusicFadeoutSpeed
+GetMapMusicFadeoutSpeed: @ 8055F68
 	push {lr}
 	bl warp1_get_mapheader
 	ldrb r0, [r0, 0x17]
@@ -2609,7 +2609,7 @@ _08055F80:
 _08055F82:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8055F68
+	thumb_func_end GetMapMusicFadeoutSpeed
 
 	thumb_func_start sub_8055F88
 sub_8055F88: @ 8055F88
@@ -2628,7 +2628,7 @@ sub_8055F88: @ 8055F88
 	lsrs r0, 16
 	cmp r4, r0
 	beq _08055FB8
-	bl sub_8055F68
+	bl GetMapMusicFadeoutSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	bl FadeOutMapMusic
@@ -2650,14 +2650,14 @@ sub_8055FC4: @ 8055FC4
 	bx r1
 	thumb_func_end sub_8055FC4
 
-	thumb_func_start sub_8055FD4
-sub_8055FD4: @ 8055FD4
+	thumb_func_start Overworld_FadeOutMapMusic
+Overworld_FadeOutMapMusic: @ 8055FD4
 	push {lr}
 	movs r0, 0x4
 	bl FadeOutMapMusic
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8055FD4
+	thumb_func_end Overworld_FadeOutMapMusic
 
 	thumb_func_start sub_8055FE0
 sub_8055FE0: @ 8055FE0
@@ -4852,7 +4852,7 @@ _080571D8:
 	adds r4, r7
 	ldrb r3, [r4, 0x13]
 	adds r0, r5, 0
-	bl sub_805839C
+	bl SpawnLinkPlayerMapObject
 	ldrb r1, [r4]
 	adds r0, r5, 0
 	bl sub_8058878
@@ -6783,7 +6783,7 @@ _08058074:
 	movs r2, 0
 	ldrsh r0, [r0, r2]
 	asrs r1, 16
-	bl sub_80585B8
+	bl GetLinkPlayerIdAt
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r2, r1, 0
@@ -7136,12 +7136,12 @@ _08058368: .4byte gUnknown_3005450
 _0805836C: .4byte 0x000008d2
 	thumb_func_end sub_805833C
 
-	thumb_func_start sub_8058370
-sub_8058370: @ 8058370
+	thumb_func_start ZeroLinkPlayerMapObject
+ZeroLinkPlayerMapObject: @ 8058370
 	movs r1, 0
 	str r1, [r0]
 	bx lr
-	thumb_func_end sub_8058370
+	thumb_func_end ZeroLinkPlayerMapObject
 
 	thumb_func_start strange_npc_table_clear
 strange_npc_table_clear: @ 8058378
@@ -7156,18 +7156,18 @@ strange_npc_table_clear: @ 8058378
 _08058388: .4byte gUnknown_2031DEC
 	thumb_func_end strange_npc_table_clear
 
-	thumb_func_start sub_805838C
-sub_805838C: @ 805838C
+	thumb_func_start ZeroMapObject
+ZeroMapObject: @ 805838C
 	push {lr}
 	movs r1, 0
 	movs r2, 0x24
 	bl memset
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805838C
+	thumb_func_end ZeroMapObject
 
-	thumb_func_start sub_805839C
-sub_805839C: @ 805839C
+	thumb_func_start SpawnLinkPlayerMapObject
+SpawnLinkPlayerMapObject: @ 805839C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7203,9 +7203,9 @@ sub_805839C: @ 805839C
 	ldr r0, _08058444 @ =gUnknown_2036E38
 	adds r5, r0
 	adds r0, r4, 0
-	bl sub_8058370
+	bl ZeroLinkPlayerMapObject
 	adds r0, r5, 0
-	bl sub_805838C
+	bl ZeroMapObject
 	movs r2, 0
 	movs r1, 0x1
 	movs r0, 0x1
@@ -7238,7 +7238,7 @@ sub_805839C: @ 805839C
 	adds r0, r5, 0
 	mov r1, r9
 	mov r2, r10
-	bl sub_8058448
+	bl InitLinkPlayerMapObjectPos
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -7249,10 +7249,10 @@ sub_805839C: @ 805839C
 	.align 2, 0
 _08058440: .4byte gUnknown_2031DEC
 _08058444: .4byte gUnknown_2036E38
-	thumb_func_end sub_805839C
+	thumb_func_end SpawnLinkPlayerMapObject
 
-	thumb_func_start sub_8058448
-sub_8058448: @ 8058448
+	thumb_func_start InitLinkPlayerMapObjectPos
+InitLinkPlayerMapObjectPos: @ 8058448
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
@@ -7282,7 +7282,7 @@ sub_8058448: @ 8058448
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8058448
+	thumb_func_end InitLinkPlayerMapObjectPos
 
 	thumb_func_start sub_8058488
 sub_8058488: @ 8058488
@@ -7454,8 +7454,8 @@ _080585B0: .4byte gUnknown_2031DEC
 _080585B4: .4byte gUnknown_2036E38
 	thumb_func_end sub_8058590
 
-	thumb_func_start sub_80585B8
-sub_80585B8: @ 80585B8
+	thumb_func_start GetLinkPlayerIdAt
+GetLinkPlayerIdAt: @ 80585B8
 	push {r4-r6,lr}
 	movs r2, 0
 	ldr r5, _080585FC @ =gUnknown_2031DEC
@@ -7505,7 +7505,7 @@ _08058610:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80585B8
+	thumb_func_end GetLinkPlayerIdAt
 
 	thumb_func_start sub_8058618
 sub_8058618: @ 8058618
@@ -7884,7 +7884,7 @@ _080588BC:
 _080588C6:
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08058904 @ =sub_805890C
+	ldr r1, _08058904 @ =SpriteCB_LinkPlayer
 	movs r2, 0
 	str r2, [sp]
 	movs r3, 0
@@ -7914,12 +7914,12 @@ _080588FC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058904: .4byte sub_805890C
+_08058904: .4byte SpriteCB_LinkPlayer
 _08058908: .4byte gUnknown_202063C
 	thumb_func_end sub_8058878
 
-	thumb_func_start sub_805890C
-sub_805890C: @ 805890C
+	thumb_func_start SpriteCB_LinkPlayer
+SpriteCB_LinkPlayer: @ 805890C
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r0, 0x2E
@@ -8005,6 +8005,6 @@ _080589BC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805890C
+	thumb_func_end SpriteCB_LinkPlayer
 
 	.align 2, 0 @ Don't pad with nop.

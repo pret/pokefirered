@@ -1579,14 +1579,14 @@ ScrCmd_resetweather: @ 806AA18
 	bx r1
 	thumb_func_end ScrCmd_resetweather
 
-	thumb_func_start sub_806AA24
-sub_806AA24: @ 806AA24
+	thumb_func_start ScrCmd_doweather
+ScrCmd_doweather: @ 806AA24
 	push {lr}
-	bl sub_807B1A4
+	bl DoCurrentWeather
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AA24
+	thumb_func_end ScrCmd_doweather
 
 	thumb_func_start ScrCmd_setstepcallback
 ScrCmd_setstepcallback: @ 806AA30
@@ -4281,7 +4281,7 @@ ScrCmd_buffernumberstring: @ 806BE90
 	ldr r0, [r5]
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -4584,8 +4584,8 @@ _0806C116:
 _0806C120: .4byte gUnknown_2024284
 	thumb_func_end ScrCmd_checkpartymove
 
-	thumb_func_start sub_806C124
-sub_806C124: @ 806C124
+	thumb_func_start ScrCmd_givemoney
+ScrCmd_givemoney: @ 806C124
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptReadWord
@@ -4610,7 +4610,7 @@ _0806C14A:
 	bx r1
 	.align 2, 0
 _0806C154: .4byte gUnknown_3005008
-	thumb_func_end sub_806C124
+	thumb_func_end ScrCmd_givemoney
 
 	thumb_func_start ScrCmd_takemoney
 ScrCmd_takemoney: @ 806C158
@@ -5344,8 +5344,8 @@ sub_806C688: @ 806C688
 _0806C698: .4byte sub_806C670
 	thumb_func_end sub_806C688
 
-	thumb_func_start sub_806C69C
-sub_806C69C: @ 806C69C
+	thumb_func_start ScrCmd_setdooropen
+ScrCmd_setdooropen: @ 806C69C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl ScriptReadHalfword
@@ -5375,10 +5375,10 @@ sub_806C69C: @ 806C69C
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C69C
+	thumb_func_end ScrCmd_setdooropen
 
-	thumb_func_start sub_806C6E0
-sub_806C6E0: @ 806C6E0
+	thumb_func_start ScrCmd_setdoorclosed
+ScrCmd_setdoorclosed: @ 806C6E0
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl ScriptReadHalfword
@@ -5408,7 +5408,7 @@ sub_806C6E0: @ 806C6E0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C6E0
+	thumb_func_end ScrCmd_setdoorclosed
 
 	thumb_func_start sub_806C724
 sub_806C724: @ 806C724

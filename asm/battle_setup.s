@@ -166,7 +166,7 @@ sub_807F748: @ 807F748
 	ldr r1, _0807F788 @ =gUnknown_2022B4C
 	movs r0, 0
 	str r0, [r1]
-	bl sub_807FF34
+	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -196,7 +196,7 @@ sub_807F78C: @ 807F78C
 	movs r0, 0x80
 	lsls r0, 3
 	str r0, [r1]
-	bl sub_807FF34
+	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0807F7D4 @ =0x00000155
@@ -226,7 +226,7 @@ sub_807F7D8: @ 807F7D8
 	ldr r1, _0807F80C @ =gUnknown_2022B4C
 	movs r0, 0x80
 	str r0, [r1]
-	bl sub_807FF34
+	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -252,7 +252,7 @@ sub_807F810: @ 807F810
 	movs r0, 0x80
 	lsls r0, 8
 	str r0, [r1]
-	bl sub_807FF34
+	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -329,7 +329,7 @@ sub_807F8C4: @ 807F8C4
 	movs r0, 0x80
 	lsls r0, 10
 	str r0, [r1]
-	bl sub_807FF34
+	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -388,7 +388,7 @@ _0807F958:
 	lsls r0, 8
 	str r0, [r1]
 _0807F960:
-	bl sub_807FF34
+	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -421,7 +421,7 @@ sub_807F998: @ 807F998
 	movs r0, 0x80
 	lsls r0, 6
 	str r0, [r1]
-	bl sub_807FF34
+	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -596,7 +596,7 @@ sub_807FB08: @ 807FB08
 	str r0, [r1, 0x8]
 	bl copy_player_party_to_sav1
 	bl sub_8159F40
-	bl sub_807FF34
+	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -625,7 +625,7 @@ sub_807FB40: @ 807FB40
 	bl ResetOamRange
 	ldr r0, _0807FB78 @ =gUnknown_2023E8A
 	ldrb r0, [r0]
-	bl sub_80800D0
+	bl IsPlayerDefeated
 	cmp r0, 0x1
 	bne _0807FB80
 	ldr r0, _0807FB7C @ =c2_whiteout
@@ -668,7 +668,7 @@ sub_807FBA0: @ 807FBA0
 	bl ResetOamRange
 	ldr r0, _0807FBD8 @ =gUnknown_2023E8A
 	ldrb r0, [r0]
-	bl sub_80800D0
+	bl IsPlayerDefeated
 	cmp r0, 0x1
 	bne _0807FBE0
 	ldr r0, _0807FBDC @ =c2_whiteout
@@ -706,7 +706,7 @@ sub_807FBF0: @ 807FBF0
 	bl ResetOamRange
 	ldr r4, _0807FC28 @ =gUnknown_2023E8A
 	ldrb r0, [r4]
-	bl sub_80800D0
+	bl IsPlayerDefeated
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _0807FC30
@@ -893,8 +893,8 @@ _0807FD88:
 	bx r1
 	thumb_func_end sub_807FC5C
 
-	thumb_func_start sub_807FD90
-sub_807FD90: @ 807FD90
+	thumb_func_start GetBattleTransitionTypeByMap
+GetBattleTransitionTypeByMap: @ 807FD90
 	push {r4,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -943,10 +943,10 @@ _0807FDEA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807FD90
+	thumb_func_end GetBattleTransitionTypeByMap
 
-	thumb_func_start sub_807FDF4
-sub_807FDF4: @ 807FDF4
+	thumb_func_start GetSumOfPlayerPartyLevel
+GetSumOfPlayerPartyLevel: @ 807FDF4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -995,7 +995,7 @@ _0807FE48:
 	bx r1
 	.align 2, 0
 _0807FE50: .4byte gUnknown_2024284
-	thumb_func_end sub_807FDF4
+	thumb_func_end GetSumOfPlayerPartyLevel
 
 	thumb_func_start reads_trainer_data_byte0
 reads_trainer_data_byte0: @ 807FE54
@@ -1123,10 +1123,10 @@ _0807FF2C:
 	bx r1
 	thumb_func_end reads_trainer_data_byte0
 
-	thumb_func_start sub_807FF34
-sub_807FF34: @ 807FF34
+	thumb_func_start GetWildBattleTransition
+GetWildBattleTransition: @ 807FF34
 	push {r4,r5,lr}
-	bl sub_807FD90
+	bl GetBattleTransitionTypeByMap
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _0807FF64 @ =gUnknown_202402C
@@ -1136,7 +1136,7 @@ sub_807FF34: @ 807FF34
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl sub_807FDF4
+	bl GetSumOfPlayerPartyLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1159,7 +1159,7 @@ _0807FF70:
 	bx r1
 	.align 2, 0
 _0807FF7C: .4byte gUnknown_83C68F0
-	thumb_func_end sub_807FF34
+	thumb_func_end GetWildBattleTransition
 
 	thumb_func_start sub_807FF80
 sub_807FF80: @ 807FF80
@@ -1246,7 +1246,7 @@ _08080010:
 	bne _0808001A
 	movs r5, 0x2
 _0808001A:
-	bl sub_807FD90
+	bl GetBattleTransitionTypeByMap
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrh r0, [r4]
@@ -1256,7 +1256,7 @@ _0808001A:
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_807FDF4
+	bl GetSumOfPlayerPartyLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1291,7 +1291,7 @@ sub_8080060: @ 8080060
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl sub_807FDF4
+	bl GetSumOfPlayerPartyLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1355,8 +1355,8 @@ trainerflag_opponent: @ 80800B8
 _080800CC: .4byte gUnknown_20386AE
 	thumb_func_end trainerflag_opponent
 
-	thumb_func_start sub_80800D0
-sub_80800D0: @ 80800D0
+	thumb_func_start IsPlayerDefeated
+IsPlayerDefeated: @ 80800D0
 	push {lr}
 	subs r0, 0x1
 	cmp r0, 0x6
@@ -1385,7 +1385,7 @@ _08080108:
 _0808010A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80800D0
+	thumb_func_end IsPlayerDefeated
 
 	thumb_func_start sub_8080110
 sub_8080110: @ 8080110
@@ -1642,8 +1642,8 @@ _0808032C: .4byte gUnknown_83C6900
 _08080330: .4byte gUnknown_81A4EC1
 	thumb_func_end sub_8080228
 
-	thumb_func_start sub_8080334
-sub_8080334: @ 8080334
+	thumb_func_start TrainerWantsBattle
+TrainerWantsBattle: @ 8080334
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1671,7 +1671,7 @@ _08080368: .4byte gUnknown_3005074
 _0808036C: .4byte gUnknown_20370D2
 _08080370: .4byte gUnknown_2036E38
 _08080374: .4byte gUnknown_81A4EB4
-	thumb_func_end sub_8080334
+	thumb_func_end TrainerWantsBattle
 
 	thumb_func_start GetTrainerFlagFromScriptPointer
 GetTrainerFlagFromScriptPointer: @ 8080378
@@ -1735,8 +1735,8 @@ sub_80803D8: @ 80803D8
 _080803E0: .4byte gUnknown_20386CC
 	thumb_func_end sub_80803D8
 
-	thumb_func_start sub_80803E4
-sub_80803E4: @ 80803E4
+	thumb_func_start ScrSpecial_HasTrainerBeenFought
+ScrSpecial_HasTrainerBeenFought: @ 80803E4
 	push {lr}
 	bl trainerflag_opponent
 	lsls r0, 16
@@ -1746,7 +1746,7 @@ sub_80803E4: @ 80803E4
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80803E4
+	thumb_func_end ScrSpecial_HasTrainerBeenFought
 
 	thumb_func_start sub_80803FC
 sub_80803FC: @ 80803FC
@@ -1855,7 +1855,7 @@ sub_80804AC: @ 80804AC
 	bne _08080508
 	ldr r0, _080804DC @ =gUnknown_2023E8A
 	ldrb r0, [r0]
-	bl sub_80800D0
+	bl IsPlayerDefeated
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _080804E8
@@ -1902,7 +1902,7 @@ _08080520: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _08080524:
 	ldr r0, _08080538 @ =gUnknown_2023E8A
 	ldrb r0, [r0]
-	bl sub_80800D0
+	bl IsPlayerDefeated
 	cmp r0, 0x1
 	bne _08080540
 _08080530:
@@ -1942,7 +1942,7 @@ _08080574: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _08080578:
 	ldr r0, _0808058C @ =gUnknown_2023E8A
 	ldrb r0, [r0]
-	bl sub_80800D0
+	bl IsPlayerDefeated
 	cmp r0, 0x1
 	bne _08080594
 	ldr r0, _08080590 @ =c2_whiteout

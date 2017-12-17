@@ -78,7 +78,7 @@ _0806C910:
 	cmp r6, 0
 	bne _0806C9D0
 _0806C914:
-	bl sub_80BD674
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x4
@@ -3108,8 +3108,8 @@ GetFieldObjectScriptPointerForComparison: @ 806E050
 	bx r1
 	thumb_func_end GetFieldObjectScriptPointerForComparison
 
-	thumb_func_start sub_806E08C
-sub_806E08C: @ 806E08C
+	thumb_func_start SetCableClubWarp
+SetCableClubWarp: @ 806E08C
 	push {r4,lr}
 	sub sp, 0x8
 	bl player_get_direction_upper_nybble
@@ -3139,6 +3139,6 @@ sub_806E08C: @ 806E08C
 	bx r1
 	.align 2, 0
 _0806E0CC: .4byte gUnknown_2036DFC
-	thumb_func_end sub_806E08C
+	thumb_func_end SetCableClubWarp
 
 	.align 2, 0 @ Don't pad with nop.

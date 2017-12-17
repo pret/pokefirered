@@ -5097,7 +5097,7 @@ sub_8104EC0: @ 8104EC0
 	adds r1, r4, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r1, r0, 0
 	movs r0, 0xBA
 	strb r0, [r1]
@@ -5106,7 +5106,7 @@ sub_8104EC0: @ 8104EC0
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	mov r0, sp
 	movs r1, 0x2
 	bl sub_8106E78

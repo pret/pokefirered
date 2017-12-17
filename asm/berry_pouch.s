@@ -727,7 +727,7 @@ sub_813D31C: @ 813D31C
 	adds r0, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl StringAppend
@@ -867,7 +867,7 @@ sub_813D430: @ 813D430
 	ldr r0, _0813D4A4 @ =gUnknown_2021CD0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0813D4A8 @ =gUnknown_2021D18
 	ldr r1, _0813D4AC @ =gUnknown_84162B9
 	adds r0, r4, 0
@@ -1573,7 +1573,7 @@ sub_813D940: @ 813D940
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _0813D9F4 @ =gUnknown_84162B9
 	mov r0, r9
 	bl StringExpandPlaceholders
@@ -1629,7 +1629,7 @@ sub_813D9F8: @ 813D9F8
 	adds r1, r4, 0
 	movs r2, 0x2
 	adds r3, r5, 0
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0813DA60 @ =gUnknown_2021D18
 	ldr r1, _0813DA64 @ =gUnknown_84162B9
 	adds r0, r4, 0
@@ -2255,7 +2255,7 @@ sub_813DF54: @ 813DF54
 	ldrsh r1, [r1, r2]
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r5, _0813DFBC @ =gUnknown_2021D18
 	ldr r1, _0813DFC0 @ =gUnknown_8416409
 	adds r0, r5, 0
@@ -2432,7 +2432,7 @@ sub_813E0DC: @ 813E0DC
 	ldrsh r1, [r5, r2]
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r5, _0813E158 @ =gUnknown_2021D18
 	ldr r1, _0813E15C @ =gUnknown_84163F4
 	adds r0, r5, 0
@@ -2905,7 +2905,7 @@ sub_813E4E4: @ 813E4E4
 	adds r0, r6, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0813E548 @ =gUnknown_2021D18
 	ldr r1, _0813E54C @ =gUnknown_8416936
 	adds r0, r4, 0
@@ -3001,7 +3001,7 @@ sub_813E5B8: @ 813E5B8
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r2, _0813E65C @ =gUnknown_2021D18
 	mov r8, r2
 	ldr r1, _0813E660 @ =gUnknown_84162B9
@@ -3204,7 +3204,7 @@ sub_813E768: @ 813E768
 	adds r0, r6, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0813E7E4 @ =gUnknown_2021D18
 	ldr r1, _0813E7E8 @ =gUnknown_8416959
 	adds r0, r4, 0

@@ -3535,8 +3535,8 @@ _0803C3AC: .4byte gUnknown_2022BC4
 _0803C3B0: .4byte gUnknown_202402C
 	thumb_func_end RecordedOpponentHandleSetRawMonData
 
-	thumb_func_start sub_803C3B4
-sub_803C3B4: @ 803C3B4
+	thumb_func_start LinkOpponentHandleLoadPokeSprite
+LinkOpponentHandleLoadPokeSprite: @ 803C3B4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3684,10 +3684,10 @@ _0803C4F4: .4byte 0x0000ff10
 _0803C4F8: .4byte gUnknown_2024024
 _0803C4FC: .4byte gUnknown_3004FE0
 _0803C500: .4byte sub_803AC14
-	thumb_func_end sub_803C3B4
+	thumb_func_end LinkOpponentHandleLoadPokeSprite
 
-	thumb_func_start sub_803C504
-sub_803C504: @ 803C504
+	thumb_func_start LinkOpponentHandleSendOutPoke
+LinkOpponentHandleSendOutPoke: @ 803C504
 	push {r4,lr}
 	ldr r1, _0803C53C @ =gUnknown_2023BCE
 	ldr r4, _0803C540 @ =gUnknown_2023BC4
@@ -3721,7 +3721,7 @@ _0803C540: .4byte gUnknown_2023BC4
 _0803C544: .4byte gUnknown_2022BC4
 _0803C548: .4byte gUnknown_3004FE0
 _0803C54C: .4byte sub_803AFFC
-	thumb_func_end sub_803C504
+	thumb_func_end LinkOpponentHandleSendOutPoke
 
 	thumb_func_start sub_803C550
 sub_803C550: @ 803C550
@@ -3899,8 +3899,8 @@ _0803C6CC: .4byte gUnknown_2024024
 _0803C6D0: .4byte nullsub_8
 	thumb_func_end sub_803C550
 
-	thumb_func_start sub_803C6D4
-sub_803C6D4: @ 803C6D4
+	thumb_func_start LinkOpponentHandleReturnPokeToBall
+LinkOpponentHandleReturnPokeToBall: @ 803C6D4
 	push {r4-r6,lr}
 	ldr r1, _0803C708 @ =gUnknown_2022BC4
 	ldr r6, _0803C70C @ =gUnknown_2023BC4
@@ -3966,7 +3966,7 @@ _0803C758:
 _0803C760: .4byte gUnknown_2023D44
 _0803C764: .4byte gUnknown_202063C
 _0803C768: .4byte gUnknown_3004FF0
-	thumb_func_end sub_803C6D4
+	thumb_func_end LinkOpponentHandleReturnPokeToBall
 
 	thumb_func_start sub_803C76C
 sub_803C76C: @ 803C76C
@@ -5531,8 +5531,8 @@ _0803D3AC: .4byte gUnknown_2023BC4
 _0803D3B0: .4byte gUnknown_2022BC4
 	thumb_func_end RecordedOpponentHandlePlaySE
 
-	thumb_func_start sub_803D3B4
-sub_803D3B4: @ 803D3B4
+	thumb_func_start LinkOpponentHandlecmd44
+LinkOpponentHandlecmd44: @ 803D3B4
 	push {lr}
 	ldr r2, _0803D3DC @ =gUnknown_2022BC4
 	ldr r0, _0803D3E0 @ =gUnknown_2023BC4
@@ -5553,7 +5553,7 @@ sub_803D3B4: @ 803D3B4
 	.align 2, 0
 _0803D3DC: .4byte gUnknown_2022BC4
 _0803D3E0: .4byte gUnknown_2023BC4
-	thumb_func_end sub_803D3B4
+	thumb_func_end LinkOpponentHandlecmd44
 
 	thumb_func_start RecordedOpponentHandleFaintingCry
 RecordedOpponentHandleFaintingCry: @ 803D3E4

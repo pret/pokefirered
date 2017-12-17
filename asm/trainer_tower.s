@@ -1983,17 +1983,17 @@ _0815E690:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0815E718 @ =gUnknown_2021CF0
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0815E71C @ =gUnknown_2021D04
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2081,17 +2081,17 @@ _0815E76C:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0815E874 @ =gUnknown_2021CF0
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0815E878 @ =gUnknown_2021D04
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0815E87C @ =gUnknown_2021D18
 	ldr r1, _0815E880 @ =gUnknown_83FE998
 	bl StringExpandPlaceholders
@@ -2212,7 +2212,7 @@ sub_815E8CC: @ 815E8CC
 	ldrb r1, [r1, 0x4]
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _0815E8F4 @ =gUnknown_20370D0
 	movs r0, 0x1
 	b _0815E8FC
@@ -2746,17 +2746,17 @@ _0815ECDC:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0815EDC8 @ =gUnknown_2021CF0
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0815EDCC @ =gUnknown_2021D04
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0815EDD0 @ =gUnknown_2021D18
 	ldr r1, _0815EDD4 @ =gUnknown_83FE998
 	bl StringExpandPlaceholders

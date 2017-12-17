@@ -257,7 +257,7 @@ sub_803937C: @ 803937C
 	mov r5, r8
 	push {r5-r7}
 	movs r0, 0x1
-	bl sub_8039698
+	bl ai_has_super_effective_move_on_field
 	lsls r0, 24
 	cmp r0, 0
 	beq _080393A8
@@ -640,8 +640,8 @@ _08039690: .4byte gUnknown_2023BC4
 _08039694: .4byte gUnknown_2023FE8
 	thumb_func_end sub_8039598
 
-	thumb_func_start sub_8039698
-sub_8039698: @ 8039698
+	thumb_func_start ai_has_super_effective_move_on_field
+ai_has_super_effective_move_on_field: @ 8039698
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -799,10 +799,10 @@ _080397D0: .4byte gUnknown_2023D70
 _080397D4: .4byte gUnknown_825E45C
 _080397D8: .4byte gUnknown_2023BE4
 _080397DC: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8039698
+	thumb_func_end ai_has_super_effective_move_on_field
 
-	thumb_func_start sub_80397E0
-sub_80397E0: @ 80397E0
+	thumb_func_start AI_AreStatsRaised
+AI_AreStatsRaised: @ 80397E0
 	push {r4,lr}
 	movs r4, 0
 	ldr r1, _08039820 @ =gUnknown_2023BE4
@@ -841,7 +841,7 @@ _0803981A:
 	.align 2, 0
 _08039820: .4byte gUnknown_2023BE4
 _08039824: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80397E0
+	thumb_func_end AI_AreStatsRaised
 
 	thumb_func_start sub_8039828
 sub_8039828: @ 8039828
@@ -1340,11 +1340,11 @@ _08039BFA:
 	cmp r0, 0
 	bne _08039C60
 	movs r0, 0
-	bl sub_8039698
+	bl ai_has_super_effective_move_on_field
 	lsls r0, 24
 	cmp r0, 0
 	bne _08039C74
-	bl sub_80397E0
+	bl AI_AreStatsRaised
 	lsls r0, 24
 	cmp r0, 0
 	bne _08039C74

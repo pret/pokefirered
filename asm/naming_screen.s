@@ -699,7 +699,7 @@ sub_809DF28: @ 809DF28
 	cmp r0, 0
 	bne _0809DF50
 	movs r0, 0x1
-	bl sub_809F240
+	bl SetInputState
 	movs r0, 0x1
 	bl sub_809EA64
 	ldr r0, _0809DF5C @ =gUnknown_203998C
@@ -737,7 +737,7 @@ sub_809DF74: @ 809DF74
 	cmp r0, 0
 	beq _0809DF96
 	movs r0, 0x1
-	bl sub_809F240
+	bl SetInputState
 	bl sub_809E9F8
 	ldr r0, _0809DF9C @ =gUnknown_203998C
 	ldr r0, [r0]
@@ -759,7 +759,7 @@ pokemon_store: @ 809DFA4
 	push {r4,lr}
 	bl sub_809F7EC
 	movs r0, 0
-	bl sub_809F240
+	bl SetInputState
 	movs r0, 0
 	bl sub_809EA64
 	movs r0, 0x3
@@ -1036,7 +1036,7 @@ _0809E20C: .4byte 0x00001e10
 sub_809E210: @ 809E210
 	push {lr}
 	movs r0, 0
-	bl sub_809F240
+	bl SetInputState
 	bl sub_809EC20
 	bl sub_809E30C
 	movs r0, 0x1
@@ -1140,7 +1140,7 @@ _0809E2E4:
 	bl sub_809E948
 	bl sub_809FA60
 	movs r0, 0x1
-	bl sub_809F240
+	bl SetInputState
 	movs r0, 0
 	bl sub_809EA0C
 _0809E302:
@@ -1511,7 +1511,7 @@ c3_0809E58C: @ 809E58C
 	ldrb r3, [r4, 0xE]
 	adds r1, r3, 0
 	adds r2, r3, 0
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r1, [r4, 0x12]
 	movs r2, 0x12
 	ldrsh r0, [r4, r2]
@@ -1800,7 +1800,7 @@ _0809E7AE:
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r5, 0
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 _0809E7E4:
 	pop {r4-r6}
 	pop {r0}
@@ -2951,7 +2951,7 @@ _0809F0C8: .4byte gUnknown_202063C
 	thumb_func_start sub_809F0CC
 sub_809F0CC: @ 809F0CC
 	push {r4,r5,lr}
-	bl sub_809F21C
+	bl GetInputEvent
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
@@ -3012,7 +3012,7 @@ sub_809F11C: @ 809F11C
 	cmp r4, 0
 	beq _0809F156
 	movs r0, 0
-	bl sub_809F240
+	bl SetInputState
 	ldr r0, _0809F160 @ =gUnknown_203998C
 	ldr r0, [r0]
 	ldr r1, _0809F164 @ =0x00001e10
@@ -3029,8 +3029,8 @@ _0809F160: .4byte gUnknown_203998C
 _0809F164: .4byte 0x00001e10
 	thumb_func_end sub_809F11C
 
-	thumb_func_start sub_809F168
-sub_809F168: @ 809F168
+	thumb_func_start KeyboardKeyHandler_Page
+KeyboardKeyHandler_Page: @ 809F168
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3051,10 +3051,10 @@ _0809F18A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809F168
+	thumb_func_end KeyboardKeyHandler_Page
 
-	thumb_func_start sub_809F190
-sub_809F190: @ 809F190
+	thumb_func_start KeyboardKeyHandler_Backspace
+KeyboardKeyHandler_Backspace: @ 809F190
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3071,10 +3071,10 @@ _0809F1AA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809F190
+	thumb_func_end KeyboardKeyHandler_Backspace
 
-	thumb_func_start sub_809F1B4
-sub_809F1B4: @ 809F1B4
+	thumb_func_start KeyboardKeyHandler_OK
+KeyboardKeyHandler_OK: @ 809F1B4
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3104,7 +3104,7 @@ _0809F1E2:
 	.align 2, 0
 _0809F1E8: .4byte gUnknown_203998C
 _0809F1EC: .4byte 0x00001e10
-	thumb_func_end sub_809F1B4
+	thumb_func_end KeyboardKeyHandler_OK
 
 	thumb_func_start sub_809F1F0
 sub_809F1F0: @ 809F1F0
@@ -3121,8 +3121,8 @@ _0809F200: .4byte gUnknown_203998C
 _0809F204: .4byte 0x00001e10
 	thumb_func_end sub_809F1F0
 
-	thumb_func_start sub_809F208
-sub_809F208: @ 809F208
+	thumb_func_start InputInit
+InputInit: @ 809F208
 	push {lr}
 	ldr r0, _0809F218 @ =sub_809F26C
 	movs r1, 0x1
@@ -3131,10 +3131,10 @@ sub_809F208: @ 809F208
 	bx r0
 	.align 2, 0
 _0809F218: .4byte sub_809F26C
-	thumb_func_end sub_809F208
+	thumb_func_end InputInit
 
-	thumb_func_start sub_809F21C
-sub_809F21C: @ 809F21C
+	thumb_func_start GetInputEvent
+GetInputEvent: @ 809F21C
 	push {lr}
 	ldr r0, _0809F238 @ =sub_809F26C
 	bl FindTaskIdByFunc
@@ -3151,10 +3151,10 @@ sub_809F21C: @ 809F21C
 	.align 2, 0
 _0809F238: .4byte sub_809F26C
 _0809F23C: .4byte gUnknown_3005090
-	thumb_func_end sub_809F21C
+	thumb_func_end GetInputEvent
 
-	thumb_func_start sub_809F240
-sub_809F240: @ 809F240
+	thumb_func_start SetInputState
+SetInputState: @ 809F240
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3175,7 +3175,7 @@ sub_809F240: @ 809F240
 	.align 2, 0
 _0809F264: .4byte sub_809F26C
 _0809F268: .4byte gUnknown_3005090
-	thumb_func_end sub_809F240
+	thumb_func_end SetInputState
 
 	thumb_func_start sub_809F26C
 sub_809F26C: @ 809F26C
@@ -3202,15 +3202,15 @@ _0809F294: .4byte gUnknown_83E23E0
 _0809F298: .4byte gUnknown_3005090
 	thumb_func_end sub_809F26C
 
-	thumb_func_start sub_809F29C
-sub_809F29C: @ 809F29C
+	thumb_func_start InputState_Disabled
+InputState_Disabled: @ 809F29C
 	movs r1, 0
 	strh r1, [r0, 0xA]
 	bx lr
-	thumb_func_end sub_809F29C
+	thumb_func_end InputState_Disabled
 
-	thumb_func_start sub_809F2A4
-sub_809F2A4: @ 809F2A4
+	thumb_func_start InputState_Enabled
+InputState_Enabled: @ 809F2A4
 	push {lr}
 	adds r2, r0, 0
 	movs r0, 0
@@ -3256,7 +3256,7 @@ _0809F2EE:
 _0809F2F4:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809F2A4
+	thumb_func_end InputState_Enabled
 
 	thumb_func_start sub_809F2F8
 sub_809F2F8: @ 809F2F8
@@ -4012,7 +4012,7 @@ _0809F8BC: .4byte gUnknown_83E26E4
 	thumb_func_start sub_809F8C0
 sub_809F8C0: @ 809F8C0
 	push {lr}
-	bl sub_809F208
+	bl InputInit
 	bl sub_809E4F0
 	pop {r0}
 	bx r0

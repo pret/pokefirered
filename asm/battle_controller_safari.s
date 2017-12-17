@@ -1269,8 +1269,8 @@ _080DDEAC: .4byte gUnknown_2023BC4
 _080DDEB0: .4byte gUnknown_2022BC4
 	thumb_func_end SafariHandlePlaySE
 
-	thumb_func_start sub_80DDEB4
-sub_80DDEB4: @ 80DDEB4
+	thumb_func_start SafariHandlecmd44
+SafariHandlecmd44: @ 80DDEB4
 	push {lr}
 	ldr r2, _080DDEDC @ =gUnknown_2022BC4
 	ldr r0, _080DDEE0 @ =gUnknown_2023BC4
@@ -1291,7 +1291,7 @@ sub_80DDEB4: @ 80DDEB4
 	.align 2, 0
 _080DDEDC: .4byte gUnknown_2022BC4
 _080DDEE0: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80DDEB4
+	thumb_func_end SafariHandlecmd44
 
 	thumb_func_start SafariHandleFaintingCry
 SafariHandleFaintingCry: @ 80DDEE4

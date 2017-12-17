@@ -261,8 +261,8 @@ _080828F0:
 	bx r1
 	thumb_func_end ChooseWildMonIndex_Fishing
 
-	thumb_func_start sub_80828F8
-sub_80828F8: @ 80828F8
+	thumb_func_start ChooseWildMonLevel
+ChooseWildMonLevel: @ 80828F8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x1]
@@ -292,7 +292,7 @@ _0808290C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80828F8
+	thumb_func_end ChooseWildMonLevel
 
 	thumb_func_start sub_8082934
 sub_8082934: @ 8082934
@@ -558,7 +558,7 @@ _08082B24:
 	lsls r4, r6, 2
 	ldr r0, [r7, 0x4]
 	adds r0, r4
-	bl sub_80828F8
+	bl ChooseWildMonLevel
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r0, r8
@@ -600,7 +600,7 @@ sub_8082B64: @ 8082B64
 	lsls r5, r4, 2
 	ldr r0, [r6, 0x4]
 	adds r0, r5
-	bl sub_80828F8
+	bl ChooseWildMonLevel
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

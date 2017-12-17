@@ -321,13 +321,13 @@ _0805B140:
 	bx r1
 	thumb_func_end task_overworld_door_add_if_inactive
 
-	thumb_func_start sub_805B14C
-sub_805B14C: @ 805B14C
+	thumb_func_start DrawClosedDoor
+DrawClosedDoor: @ 805B14C
 	push {lr}
 	bl sub_805AF54
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805B14C
+	thumb_func_end DrawClosedDoor
 
 	thumb_func_start sub_805B158
 sub_805B158: @ 805B158
@@ -525,7 +525,7 @@ sub_805B29C: @ 805B29C
 	ldr r0, _0805B2CC @ =gUnknown_835B5D8
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_805B14C
+	bl DrawClosedDoor
 _0805B2C6:
 	pop {r4,r5}
 	pop {r0}

@@ -1887,7 +1887,7 @@ sub_8089F78: @ 8089F78
 	ldrh r1, [r1]
 	movs r2, 0x2
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _08089FD8 @ =gUnknown_83CD8E9
 	ldrb r1, [r0, 0x1]
 	ldr r2, _08089FDC @ =gUnknown_83CD924
@@ -1939,7 +1939,7 @@ sub_8089FEC: @ 8089FEC
 	ldr r1, [r1]
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	ldr r1, _0808A070 @ =0x00000457
 	adds r0, r1
@@ -2075,7 +2075,7 @@ _0808A112:
 	add r0, sp, 0xC
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	ldr r2, _0808A1A0 @ =0x00000457
 	adds r0, r2
@@ -2290,7 +2290,7 @@ _0808A2F4:
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0808A3A4 @ =gUnknown_83CD8E9
 	ldrb r0, [r0, 0x1]
 	mov r10, r0
@@ -2343,7 +2343,7 @@ _0808A2F4:
 	adds r1, r7, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _0808A3CC @ =gUnknown_83CD934
 	mov r2, r9
 	ldr r0, [r2]
@@ -2626,7 +2626,7 @@ sub_808A5B8: @ 808A5B8
 	mov r0, sp
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r5]
 	adds r0, 0x93
 	mov r1, sp
@@ -2644,7 +2644,7 @@ sub_808A5B8: @ 808A5B8
 	mov r0, sp
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r5]
 	adds r0, 0x93
 	mov r1, sp
@@ -2662,7 +2662,7 @@ sub_808A5B8: @ 808A5B8
 	mov r0, sp
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r5]
 	adds r0, 0x93
 	mov r1, sp
@@ -2767,7 +2767,7 @@ sub_808A6C8: @ 808A6C8
 	mov r0, sp
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	ldr r1, _0808A754 @ =0x00000165
 	adds r0, r1
@@ -2780,7 +2780,7 @@ sub_808A6C8: @ 808A6C8
 	mov r0, sp
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	ldr r1, _0808A75C @ =0x000001ab
 	adds r0, r1
@@ -2902,7 +2902,7 @@ sub_808A810: @ 808A810
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 _0808A83A:
 	pop {r4}
 	pop {r0}
@@ -2995,7 +2995,7 @@ sub_808A8D0: @ 808A8D0
 	ldr r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 _0808A900:
 	pop {r4}
 	pop {r0}
@@ -3093,7 +3093,7 @@ sub_808A9A4: @ 808A9A4
 	ldr r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 _0808A9D2:
 	pop {r4}
 	pop {r0}

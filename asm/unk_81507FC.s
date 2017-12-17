@@ -6512,7 +6512,7 @@ _08153946:
 	ldrb r3, [r0]
 	mov r0, r8
 	movs r2, 0
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x2
 	mov r1, r8
 	movs r2, 0x1
@@ -9324,7 +9324,7 @@ _08154EC8:
 	mov r1, r9
 	movs r2, 0x1
 	movs r3, 0x7
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	add r1, sp, 0xC
 	adds r2, r4, 0
@@ -9592,7 +9592,7 @@ _0815512E:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	add r1, sp, 0xC
 	movs r2, 0x1

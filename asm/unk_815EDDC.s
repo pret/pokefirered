@@ -294,7 +294,7 @@ sub_815EFBC: @ 815EFBC
 	mov r9, r0
 	movs r2, 0x1
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0

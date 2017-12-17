@@ -64,7 +64,7 @@ _08096E7E:
 	asrs r2, 16
 	mov r0, sp
 	mov r3, r9
-	bl sub_8097300
+	bl CreateMonIconSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -73,7 +73,7 @@ _08096E7E:
 	lsls r0, 2
 	ldr r1, _08096EC8 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8097228
+	bl UpdateMonIconFrame
 	adds r0, r4, 0
 	add sp, 0x30
 	pop {r3,r4}
@@ -134,7 +134,7 @@ sub_8096ECC: @ 8096ECC
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_8097300
+	bl CreateMonIconSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -143,7 +143,7 @@ sub_8096ECC: @ 8096ECC
 	lsls r0, 2
 	ldr r1, _08096F58 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8097228
+	bl UpdateMonIconFrame
 	adds r0, r4, 0
 	add sp, 0x18
 	pop {r4-r7}
@@ -238,7 +238,7 @@ sub_8096FD4: @ 8096FD4
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_8097F20
+	bl MailSpeciesToSpecies
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xC9
@@ -351,8 +351,8 @@ _08097082:
 _0809709C: .4byte gUnknown_83D4038
 	thumb_func_end sub_809707C
 
-	thumb_func_start sub_80970A0
-sub_80970A0: @ 80970A0
+	thumb_func_start SafeLoadMonIconPalette
+SafeLoadMonIconPalette: @ 80970A0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -383,7 +383,7 @@ _080970D0:
 	.align 2, 0
 _080970D8: .4byte gUnknown_83D3E80
 _080970DC: .4byte gUnknown_83D4038
-	thumb_func_end sub_80970A0
+	thumb_func_end SafeLoadMonIconPalette
 
 	thumb_func_start sub_80970E0
 sub_80970E0: @ 80970E0
@@ -413,8 +413,8 @@ _0809710C: .4byte gUnknown_83D3E80
 _08097110: .4byte gUnknown_83D4038
 	thumb_func_end sub_80970E0
 
-	thumb_func_start sub_8097114
-sub_8097114: @ 8097114
+	thumb_func_start FreeMonIconPalettes
+FreeMonIconPalettes: @ 8097114
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _08097134 @ =gUnknown_83D4038
@@ -433,7 +433,7 @@ _0809711A:
 	bx r0
 	.align 2, 0
 _08097134: .4byte gUnknown_83D4038
-	thumb_func_end sub_8097114
+	thumb_func_end FreeMonIconPalettes
 
 	thumb_func_start sub_8097138
 sub_8097138: @ 8097138
@@ -484,7 +484,7 @@ _08097188: .4byte gUnknown_83D4038
 	thumb_func_start sub_809718C
 sub_809718C: @ 809718C
 	push {lr}
-	bl sub_8097228
+	bl UpdateMonIconFrame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_809718C
@@ -576,8 +576,8 @@ sub_8097218: @ 8097218
 _08097224: .4byte gUnknown_83D3E80
 	thumb_func_end sub_8097218
 
-	thumb_func_start sub_8097228
-sub_8097228: @ 8097228
+	thumb_func_start UpdateMonIconFrame
+UpdateMonIconFrame: @ 8097228
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -686,10 +686,10 @@ _080972F0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8097228
+	thumb_func_end UpdateMonIconFrame
 
-	thumb_func_start sub_8097300
-sub_8097300: @ 8097300
+	thumb_func_start CreateMonIconSprite
+CreateMonIconSprite: @ 8097300
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -792,7 +792,7 @@ _080973C8: .4byte gUnknown_83D40E8
 _080973CC: .4byte 0xffff0000
 _080973D0: .4byte 0x0000ffff
 _080973D4: .4byte gUnknown_202063C
-	thumb_func_end sub_8097300
+	thumb_func_end CreateMonIconSprite
 
 	thumb_func_start sub_80973D8
 sub_80973D8: @ 80973D8

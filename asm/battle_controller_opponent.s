@@ -60,7 +60,7 @@ _08035AD4: .4byte gUnknown_2023BC4
 _08035AD8: .4byte gUnknown_2022BC4
 _08035ADC: .4byte gUnknown_8250A34
 _08035AE0:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08035AE4:
 	pop {r0}
 	bx r0
@@ -84,7 +84,7 @@ sub_8035AE8: @ 8035AE8
 	ldr r0, _08035B1C @ =nullsub_8
 	cmp r1, r0
 	bne _08035B0C
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08035B0C:
 	pop {r0}
 	bx r0
@@ -113,7 +113,7 @@ sub_8035B20: @ 8035B20
 	ldr r0, _08035B54 @ =nullsub_8
 	cmp r1, r0
 	bne _08035B44
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08035B44:
 	pop {r0}
 	bx r0
@@ -177,7 +177,7 @@ sub_8035B58: @ 8035B58
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08035BC8:
 	pop {r4-r6}
 	pop {r0}
@@ -219,7 +219,7 @@ sub_8035BE8: @ 8035BE8
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x9]
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08035C20:
 	pop {r4}
 	pop {r0}
@@ -759,7 +759,7 @@ _0803605C:
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl FreeSpritePaletteByTag
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08036094:
 	pop {r4-r7}
 	pop {r0}
@@ -827,7 +827,7 @@ _08036114: .4byte gUnknown_2022B4C
 _08036118: .4byte gUnknown_3004FE0
 _0803611C: .4byte sub_80E8570
 _08036120:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08036124:
 	pop {r4-r6}
 	pop {r0}
@@ -856,7 +856,7 @@ sub_803612C: @ 803612C
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _0803615A:
 	pop {r0}
 	bx r0
@@ -908,7 +908,7 @@ sub_8036170: @ 8036170
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _080361CA:
 	pop {r4-r6}
 	pop {r0}
@@ -929,7 +929,7 @@ sub_80361E4: @ 80361E4
 	lsls r0, 16
 	cmp r0, 0
 	bne _080361F6
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _080361F6:
 	pop {r0}
 	bx r0
@@ -963,7 +963,7 @@ sub_80361FC: @ 80361FC
 	strb r0, [r2]
 	ldr r0, _08036244 @ =gUnknown_2024005
 	strb r3, [r0]
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	b _08036272
 	.align 2, 0
 _08036238: .4byte gUnknown_2023D44
@@ -1079,7 +1079,7 @@ sub_80362E8: @ 80362E8
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08036320:
 	pop {r0}
 	bx r0
@@ -1294,7 +1294,7 @@ sub_80364D0: @ 80364D0
 	ands r0, r1
 	cmp r0, 0
 	bne _080364F2
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _080364F2:
 	pop {r0}
 	bx r0
@@ -1320,7 +1320,7 @@ sub_8036500: @ 8036500
 	ands r0, r1
 	cmp r0, 0
 	bne _08036522
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08036522:
 	pop {r0}
 	bx r0
@@ -1329,8 +1329,8 @@ _08036528: .4byte gUnknown_2024018
 _0803652C: .4byte gUnknown_2023BC4
 	thumb_func_end sub_8036500
 
-	thumb_func_start sub_8036530
-sub_8036530: @ 8036530
+	thumb_func_start OpponentBufferExecCompleted
+OpponentBufferExecCompleted: @ 8036530
 	ldr r1, _08036554 @ =gUnknown_3004FE0
 	ldr r2, _08036558 @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -1354,10 +1354,10 @@ _08036558: .4byte gUnknown_2023BC4
 _0803655C: .4byte sub_8035A98
 _08036560: .4byte gUnknown_2023BC8
 _08036564: .4byte gUnknown_825E45C
-	thumb_func_end sub_8036530
+	thumb_func_end OpponentBufferExecCompleted
 
-	thumb_func_start sub_8036568
-sub_8036568: @ 8036568
+	thumb_func_start OpponentHandleGetAttributes
+OpponentHandleGetAttributes: @ 8036568
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -1407,12 +1407,12 @@ _080365C2:
 	movs r0, 0x1
 	mov r2, sp
 	bl EmitDataTransfer
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8036568
+	thumb_func_end OpponentHandleGetAttributes
 
 	thumb_func_start sub_80365DC
 sub_80365DC: @ 80365DC
@@ -2348,8 +2348,8 @@ _08036D72:
 _08036D84: .4byte gUnknown_202402C
 	thumb_func_end sub_80365DC
 
-	thumb_func_start sub_8036D88
-sub_8036D88: @ 8036D88
+	thumb_func_start OpponentHandlecmd1
+OpponentHandlecmd1: @ 8036D88
 	push {r4-r7,lr}
 	sub sp, 0x58
 	ldr r2, _08036E00 @ =gUnknown_2023BCE
@@ -2404,7 +2404,7 @@ _08036DDE:
 	movs r0, 0x1
 	adds r2, r4, 0
 	bl EmitDataTransfer
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	add sp, 0x58
 	pop {r4-r7}
 	pop {r0}
@@ -2414,10 +2414,10 @@ _08036E00: .4byte gUnknown_2023BCE
 _08036E04: .4byte gUnknown_2023BC4
 _08036E08: .4byte gUnknown_2022BC4
 _08036E0C: .4byte gUnknown_202402C
-	thumb_func_end sub_8036D88
+	thumb_func_end OpponentHandlecmd1
 
-	thumb_func_start sub_8036E10
-sub_8036E10: @ 8036E10
+	thumb_func_start OpponentHandleSetAttributes
+OpponentHandleSetAttributes: @ 8036E10
 	push {r4,r5,lr}
 	ldr r1, _08036E34 @ =gUnknown_2022BC4
 	ldr r0, _08036E38 @ =gUnknown_2023BC4
@@ -2456,11 +2456,11 @@ _08036E52:
 	cmp r5, 0x5
 	bls _08036E44
 _08036E5E:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8036E10
+	thumb_func_end OpponentHandleSetAttributes
 
 	thumb_func_start sub_8036E68
 sub_8036E68: @ 8036E68
@@ -3502,8 +3502,8 @@ _08037774:
 _08037784: .4byte gUnknown_202402C
 	thumb_func_end sub_8036E68
 
-	thumb_func_start sub_8037788
-sub_8037788: @ 8037788
+	thumb_func_start OpponentHandlecmd3
+OpponentHandlecmd3: @ 8037788
 	push {r4-r7,lr}
 	ldr r1, _080377EC @ =gUnknown_2023BCE
 	ldr r7, _080377F0 @ =gUnknown_2023BC4
@@ -3550,7 +3550,7 @@ _080377BE:
 	cmp r3, r0
 	bcc _080377BE
 _080377E0:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3559,7 +3559,7 @@ _080377EC: .4byte gUnknown_2023BCE
 _080377F0: .4byte gUnknown_2023BC4
 _080377F4: .4byte gUnknown_2022BC4
 _080377F8: .4byte gUnknown_202402C
-	thumb_func_end sub_8037788
+	thumb_func_end OpponentHandlecmd3
 
 	thumb_func_start sub_80377FC
 sub_80377FC: @ 80377FC
@@ -4049,7 +4049,7 @@ _08037BF4:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08037C30:
 	pop {r4-r6}
 	pop {r0}
@@ -4741,7 +4741,7 @@ _080381CC: .4byte sub_803612C
 	thumb_func_start sub_80381D0
 sub_80381D0: @ 80381D0
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80381D0
@@ -4749,7 +4749,7 @@ sub_80381D0: @ 80381D0
 	thumb_func_start sub_80381DC
 sub_80381DC: @ 80381DC
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80381DC
@@ -4757,7 +4757,7 @@ sub_80381DC: @ 80381DC
 	thumb_func_start sub_80381E8
 sub_80381E8: @ 80381E8
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80381E8
@@ -4765,7 +4765,7 @@ sub_80381E8: @ 80381E8
 	thumb_func_start sub_80381F4
 sub_80381F4: @ 80381F4
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80381F4
@@ -4881,7 +4881,7 @@ _08038212:
 	lsrs r3, r0, 24
 	cmp r3, 0
 	beq _08038308
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	b _08038326
 	.align 2, 0
 _080382E4: .4byte gUnknown_2023BC4
@@ -5099,7 +5099,7 @@ _08038470:
 	lsls r0, 2
 	adds r0, r2
 	strb r4, [r0, 0x4]
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _080384AC:
 	pop {r3-r5}
 	mov r8, r3
@@ -5204,7 +5204,7 @@ _08038584: .4byte sub_80361E4
 	thumb_func_start sub_8038588
 sub_8038588: @ 8038588
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038588
@@ -5213,7 +5213,7 @@ sub_8038588: @ 8038588
 sub_8038594: @ 8038594
 	push {lr}
 	bl sub_8039C84
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038594
@@ -5221,7 +5221,7 @@ sub_8038594: @ 8038594
 	thumb_func_start sub_80385A4
 sub_80385A4: @ 80385A4
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80385A4
@@ -5318,7 +5318,7 @@ _08038656:
 	adds r2, r4, 0
 	bl EmitTwoReturnValues
 _08038668:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	b _08038712
 	.align 2, 0
 _08038670: .4byte gUnknown_8250C04
@@ -5393,7 +5393,7 @@ _080386F8:
 	movs r1, 0xA
 	bl EmitTwoReturnValues
 _0803870E:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08038712:
 	pop {r4-r6}
 	pop {r0}
@@ -5414,7 +5414,7 @@ sub_8038718: @ 8038718
 	ldrb r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5529,7 +5529,7 @@ _0803880A:
 	movs r0, 0x1
 	movs r2, 0
 	bl EmitChosenMonReturnValue
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -5541,7 +5541,7 @@ _08038834: .4byte gUnknown_2023FE8
 	thumb_func_start sub_8038838
 sub_8038838: @ 8038838
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038838
@@ -5657,7 +5657,7 @@ _08038930: .4byte sub_80360A0
 	thumb_func_start sub_8038934
 sub_8038934: @ 8038934
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038934
@@ -5772,7 +5772,7 @@ _08038A1C: .4byte sub_80364D0
 	thumb_func_start sub_8038A20
 sub_8038A20: @ 8038A20
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038A20
@@ -5780,7 +5780,7 @@ sub_8038A20: @ 8038A20
 	thumb_func_start sub_8038A2C
 sub_8038A2C: @ 8038A2C
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038A2C
@@ -5788,7 +5788,7 @@ sub_8038A2C: @ 8038A2C
 	thumb_func_start sub_8038A38
 sub_8038A38: @ 8038A38
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038A38
@@ -5796,7 +5796,7 @@ sub_8038A38: @ 8038A38
 	thumb_func_start sub_8038A44
 sub_8038A44: @ 8038A44
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038A44
@@ -5804,7 +5804,7 @@ sub_8038A44: @ 8038A44
 	thumb_func_start sub_8038A50
 sub_8038A50: @ 8038A50
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038A50
@@ -5812,7 +5812,7 @@ sub_8038A50: @ 8038A50
 	thumb_func_start sub_8038A5C
 sub_8038A5C: @ 8038A5C
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038A5C
@@ -5820,7 +5820,7 @@ sub_8038A5C: @ 8038A5C
 	thumb_func_start sub_8038A68
 sub_8038A68: @ 8038A68
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038A68
@@ -5828,7 +5828,7 @@ sub_8038A68: @ 8038A68
 	thumb_func_start sub_8038A74
 sub_8038A74: @ 8038A74
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038A74
@@ -5836,13 +5836,13 @@ sub_8038A74: @ 8038A74
 	thumb_func_start sub_8038A80
 sub_8038A80: @ 8038A80
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038A80
 
-	thumb_func_start sub_8038A8C
-sub_8038A8C: @ 8038A8C
+	thumb_func_start OpponentHandlecmd37
+OpponentHandlecmd37: @ 8038A8C
 	push {lr}
 	ldr r2, _08038AA4 @ =gUnknown_2022870
 	ldrb r1, [r2]
@@ -5850,15 +5850,15 @@ sub_8038A8C: @ 8038A8C
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08038AA4: .4byte gUnknown_2022870
-	thumb_func_end sub_8038A8C
+	thumb_func_end OpponentHandlecmd37
 
-	thumb_func_start sub_8038AA8
-sub_8038AA8: @ 8038AA8
+	thumb_func_start OpponentHandlecmd38
+OpponentHandlecmd38: @ 8038AA8
 	push {lr}
 	ldr r3, _08038AD4 @ =gUnknown_2022870
 	ldr r1, _08038AD8 @ =gUnknown_2022BC4
@@ -5876,32 +5876,32 @@ sub_8038AA8: @ 8038AA8
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08038AD4: .4byte gUnknown_2022870
 _08038AD8: .4byte gUnknown_2022BC4
 _08038ADC: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8038AA8
+	thumb_func_end OpponentHandlecmd38
 
-	thumb_func_start sub_8038AE0
-sub_8038AE0: @ 8038AE0
+	thumb_func_start OpponentHandlecmd39
+OpponentHandlecmd39: @ 8038AE0
 	push {lr}
 	ldr r2, _08038AF4 @ =gUnknown_2022870
 	ldrb r1, [r2]
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08038AF4: .4byte gUnknown_2022870
-	thumb_func_end sub_8038AE0
+	thumb_func_end OpponentHandlecmd39
 
-	thumb_func_start sub_8038AF8
-sub_8038AF8: @ 8038AF8
+	thumb_func_start OpponentHandlecmd40
+OpponentHandlecmd40: @ 8038AF8
 	push {lr}
 	ldr r3, _08038B1C @ =gUnknown_2022870
 	ldr r1, [r3]
@@ -5915,15 +5915,15 @@ sub_8038AF8: @ 8038AF8
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08038B1C: .4byte gUnknown_2022870
-	thumb_func_end sub_8038AF8
+	thumb_func_end OpponentHandlecmd40
 
-	thumb_func_start sub_8038B20
-sub_8038B20: @ 8038B20
+	thumb_func_start OpponentHandleHitAnimation
+OpponentHandleHitAnimation: @ 8038B20
 	push {r4,lr}
 	ldr r3, _08038B48 @ =gUnknown_202063C
 	ldr r2, _08038B4C @ =gUnknown_2023D44
@@ -5940,7 +5940,7 @@ sub_8038B20: @ 8038B20
 	lsls r0, 29
 	cmp r0, 0
 	bge _08038B54
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	b _08038B7E
 	.align 2, 0
 _08038B48: .4byte gUnknown_202063C
@@ -5975,18 +5975,18 @@ _08038B7E:
 _08038B84: .4byte gUnknown_2024005
 _08038B88: .4byte gUnknown_3004FE0
 _08038B8C: .4byte sub_80361FC
-	thumb_func_end sub_8038B20
+	thumb_func_end OpponentHandleHitAnimation
 
 	thumb_func_start sub_8038B90
 sub_8038B90: @ 8038B90
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8038B90
 
-	thumb_func_start sub_8038B9C
-sub_8038B9C: @ 8038B9C
+	thumb_func_start OpponentHandleEffectivenessSound
+OpponentHandleEffectivenessSound: @ 8038B9C
 	push {r4,lr}
 	ldr r4, _08038BD8 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -6011,17 +6011,17 @@ _08038BB0:
 	lsls r1, r3, 24
 	asrs r1, 24
 	bl PlaySE12WithPanning
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08038BD8: .4byte gUnknown_2023BC4
 _08038BDC: .4byte gUnknown_2022BC4
-	thumb_func_end sub_8038B9C
+	thumb_func_end OpponentHandleEffectivenessSound
 
-	thumb_func_start sub_8038BE0
-sub_8038BE0: @ 8038BE0
+	thumb_func_start OpponentHandlecmd44
+OpponentHandlecmd44: @ 8038BE0
 	push {lr}
 	ldr r2, _08038C08 @ =gUnknown_2022BC4
 	ldr r0, _08038C0C @ =gUnknown_2023BC4
@@ -6036,16 +6036,16 @@ sub_8038BE0: @ 8038BE0
 	lsls r1, 8
 	orrs r0, r1
 	bl PlayFanfare
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08038C08: .4byte gUnknown_2022BC4
 _08038C0C: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8038BE0
+	thumb_func_end OpponentHandlecmd44
 
-	thumb_func_start sub_8038C10
-sub_8038C10: @ 8038C10
+	thumb_func_start OpponentHandleFaintingCry
+OpponentHandleFaintingCry: @ 8038C10
 	push {lr}
 	ldr r1, _08038C40 @ =gUnknown_2023BCE
 	ldr r0, _08038C44 @ =gUnknown_2023BC4
@@ -6064,17 +6064,17 @@ sub_8038C10: @ 8038C10
 	movs r1, 0x19
 	movs r2, 0x5
 	bl PlayCry3
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08038C40: .4byte gUnknown_2023BCE
 _08038C44: .4byte gUnknown_2023BC4
 _08038C48: .4byte gUnknown_202402C
-	thumb_func_end sub_8038C10
+	thumb_func_end OpponentHandleFaintingCry
 
-	thumb_func_start sub_8038C4C
-sub_8038C4C: @ 8038C4C
+	thumb_func_start OpponentHandleIntroSlide
+OpponentHandleIntroSlide: @ 8038C4C
 	push {lr}
 	ldr r1, _08038C74 @ =gUnknown_2022BC4
 	ldr r0, _08038C78 @ =gUnknown_2023BC4
@@ -6089,14 +6089,14 @@ sub_8038C4C: @ 8038C4C
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08038C74: .4byte gUnknown_2022BC4
 _08038C78: .4byte gUnknown_2023BC4
 _08038C7C: .4byte gUnknown_2023F4C
-	thumb_func_end sub_8038C4C
+	thumb_func_end OpponentHandleIntroSlide
 
 	thumb_func_start sub_8038C80
 sub_8038C80: @ 8038C80
@@ -6376,7 +6376,7 @@ sub_8038EA8: @ 8038EA8
 	lsls r0, 24
 	cmp r0, 0
 	bne _08038ED8
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	b _08038FA2
 	.align 2, 0
 _08038ED0: .4byte gUnknown_2022BC4
@@ -6522,7 +6522,7 @@ sub_8038FBC: @ 8038FBC
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x5]
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 _08038FF4:
 	pop {r4}
 	pop {r0}
@@ -6560,7 +6560,7 @@ sub_8039004: @ 8039004
 	ldr r1, _08039050 @ =sub_80491B0
 	str r1, [r0]
 _08039036:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6574,7 +6574,7 @@ _08039050: .4byte sub_80491B0
 	thumb_func_start sub_8039054
 sub_8039054: @ 8039054
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8039054
@@ -6615,7 +6615,7 @@ sub_8039060: @ 8039060
 	ldrb r0, [r4]
 	bl CopyBattleSpriteInvisibility
 _080390A6:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6657,7 +6657,7 @@ sub_80390C0: @ 80390C0
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803910C
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	b _08039118
 	.align 2, 0
 _08039104: .4byte gUnknown_2023BC4
@@ -6682,7 +6682,7 @@ _08039124: .4byte sub_8036500
 	thumb_func_start sub_8039128
 sub_8039128: @ 8039128
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8039128
@@ -6690,7 +6690,7 @@ sub_8039128: @ 8039128
 	thumb_func_start sub_8039134
 sub_8039134: @ 8039134
 	push {lr}
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8039134
@@ -6718,7 +6718,7 @@ OpponentHandleCmd55: @ 8039140
 	ldr r0, [r2, 0x8]
 	bl SetMainCallback2
 _0803916A:
-	bl sub_8036530
+	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0

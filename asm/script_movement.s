@@ -24,7 +24,7 @@ ScriptMovement_StartObjectMovementScript: @ 8097434
 	movs r0, 0x1
 	b _0809747E
 _08097456:
-	ldr r0, _08097488 @ =sub_80977AC
+	ldr r0, _08097488 @ =Task_80A244C
 	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
@@ -47,7 +47,7 @@ _0809747E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08097488: .4byte sub_80977AC
+_08097488: .4byte Task_80A244C
 	thumb_func_end ScriptMovement_StartObjectMovementScript
 
 	thumb_func_start ScriptMovement_IsObjectMovementFinished
@@ -99,7 +99,7 @@ sub_80974D8: @ 80974D8
 	cmp r4, 0xFF
 	beq _080974F2
 	adds r0, r4, 0
-	bl sub_8097768
+	bl UnfreezeObjects
 	adds r0, r4, 0
 	bl DestroyTask
 _080974F2:
@@ -114,7 +114,7 @@ sub_80974F8: @ 80974F8
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, _08097534 @ =sub_80977AC
+	ldr r0, _08097534 @ =Task_80A244C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
@@ -141,7 +141,7 @@ _08097518:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08097534: .4byte sub_80977AC
+_08097534: .4byte Task_80A244C
 _08097538: .4byte gUnknown_3005098
 _0809753C: .4byte 0x0000ffff
 	thumb_func_end sub_80974F8
@@ -149,14 +149,14 @@ _0809753C: .4byte 0x0000ffff
 	thumb_func_start sub_8097540
 sub_8097540: @ 8097540
 	push {lr}
-	ldr r0, _08097550 @ =sub_80977AC
+	ldr r0, _08097550 @ =Task_80A244C
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08097550: .4byte sub_80977AC
+_08097550: .4byte Task_80A244C
 	thumb_func_end sub_8097540
 
 	thumb_func_start sub_8097554
@@ -460,8 +460,8 @@ sub_8097728: @ 8097728
 	bx r0
 	thumb_func_end sub_8097728
 
-	thumb_func_start sub_8097768
-sub_8097768: @ 8097768
+	thumb_func_start UnfreezeObjects
+UnfreezeObjects: @ 8097768
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -496,10 +496,10 @@ _08097792:
 	.align 2, 0
 _080977A4: .4byte gUnknown_3005098
 _080977A8: .4byte gUnknown_2036E38
-	thumb_func_end sub_8097768
+	thumb_func_end UnfreezeObjects
 
-	thumb_func_start sub_80977AC
-sub_80977AC: @ 80977AC
+	thumb_func_start Task_80A244C
+Task_80A244C: @ 80977AC
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -532,7 +532,7 @@ _080977DC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80977AC
+	thumb_func_end Task_80A244C
 
 	thumb_func_start sub_80977F0
 sub_80977F0: @ 80977F0
@@ -577,7 +577,7 @@ _08097838:
 	adds r1, r5, 0
 	bl sub_80976A8
 	adds r0, r4, 0
-	bl sub_80688E4
+	bl FreezeMapObject
 	b _0809786A
 	.align 2, 0
 _08097850: .4byte gUnknown_2036E38

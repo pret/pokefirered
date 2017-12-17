@@ -1932,7 +1932,7 @@ _0808C80E:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	lsls r4, 16
 	lsrs r5, r4, 16
 	cmp r5, 0xD
@@ -2548,7 +2548,7 @@ _0808CCC0:
 	adds r1, r7, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x3
@@ -16863,7 +16863,7 @@ _08093EF2:
 	adds r0, r2, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r2, r0, 0
 	strb r5, [r2]
 	movs r0, 0xFF

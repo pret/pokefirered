@@ -637,7 +637,7 @@ _0806ECCE:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806ED2E
-	bl sub_80BD674
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x4

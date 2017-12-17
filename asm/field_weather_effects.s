@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_807B2DC
-sub_807B2DC: @ 807B2DC
+	thumb_func_start Clouds_InitVars
+Clouds_InitVars: @ 807B2DC
 	push {lr}
 	ldr r0, _0807B314 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
@@ -31,7 +31,7 @@ sub_807B2DC: @ 807B2DC
 	bne _0807B310
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_807ADB0
+	bl Weather_SetBlendCoeffs
 _0807B310:
 	pop {r0}
 	bx r0
@@ -41,12 +41,12 @@ _0807B318: .4byte 0x000006c1
 _0807B31C: .4byte 0x000006c2
 _0807B320: .4byte 0x000006d2
 _0807B324: .4byte 0x000006de
-	thumb_func_end sub_807B2DC
+	thumb_func_end Clouds_InitVars
 
-	thumb_func_start sub_807B328
-sub_807B328: @ 807B328
+	thumb_func_start Clouds_InitAll
+Clouds_InitAll: @ 807B328
 	push {r4,lr}
-	bl sub_807B2DC
+	bl Clouds_InitVars
 	ldr r0, _0807B350 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r2, _0807B354 @ =0x000006d2
@@ -56,7 +56,7 @@ sub_807B328: @ 807B328
 	bne _0807B348
 	adds r4, r1, r2
 _0807B33E:
-	bl sub_807B358
+	bl Clouds_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807B33E
@@ -67,10 +67,10 @@ _0807B348:
 	.align 2, 0
 _0807B350: .4byte gUnknown_83C2BBC
 _0807B354: .4byte 0x000006d2
-	thumb_func_end sub_807B328
+	thumb_func_end Clouds_InitAll
 
-	thumb_func_start sub_807B358
-sub_807B358: @ 807B358
+	thumb_func_start Clouds_Main
+Clouds_Main: @ 807B358
 	push {r4,r5,lr}
 	ldr r0, _0807B374 @ =gUnknown_83C2BBC
 	ldr r5, [r0]
@@ -92,16 +92,16 @@ _0807B37C:
 	beq _0807B394
 	b _0807B3AC
 _0807B382:
-	bl sub_807B438
+	bl CreateCloudSprites
 	b _0807B3A6
 _0807B388:
 	movs r0, 0xC
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807B3A6
 _0807B394:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807B3AC
@@ -119,10 +119,10 @@ _0807B3AC:
 	bx r0
 	.align 2, 0
 _0807B3B4: .4byte 0x000006d2
-	thumb_func_end sub_807B358
+	thumb_func_end Clouds_Main
 
-	thumb_func_start sub_807B3B8
-sub_807B3B8: @ 807B3B8
+	thumb_func_start Clouds_Finish
+Clouds_Finish: @ 807B3B8
 	push {r4,lr}
 	ldr r0, _0807B3D0 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
@@ -142,10 +142,10 @@ _0807B3D8:
 	movs r0, 0
 	movs r1, 0x10
 	movs r2, 0x1
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807B3F2
 _0807B3E4:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807B3F8
@@ -160,10 +160,10 @@ _0807B3FA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807B3B8
+	thumb_func_end Clouds_Finish
 
-	thumb_func_start sub_807B400
-sub_807B400: @ 807B400
+	thumb_func_start Weather2_InitVars
+Weather2_InitVars: @ 807B400
 	ldr r0, _0807B418 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r0, _0807B41C @ =0x000006c1
@@ -179,15 +179,15 @@ sub_807B400: @ 807B400
 _0807B418: .4byte gUnknown_83C2BBC
 _0807B41C: .4byte 0x000006c1
 _0807B420: .4byte 0x000006c2
-	thumb_func_end sub_807B400
+	thumb_func_end Weather2_InitVars
 
-	thumb_func_start sub_807B424
-sub_807B424: @ 807B424
+	thumb_func_start Weather2_InitAll
+Weather2_InitAll: @ 807B424
 	push {lr}
-	bl sub_807B400
+	bl Weather2_InitVars
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807B424
+	thumb_func_end Weather2_InitAll
 
 	thumb_func_start nullsub_48
 nullsub_48: @ 807B430
@@ -200,8 +200,8 @@ sub_807B434: @ 807B434
 	bx lr
 	thumb_func_end sub_807B434
 
-	thumb_func_start sub_807B438
-sub_807B438: @ 807B438
+	thumb_func_start CreateCloudSprites
+CreateCloudSprites: @ 807B438
 	push {r4,r5,lr}
 	ldr r0, _0807B4B0 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
@@ -296,7 +296,7 @@ _0807B4F4:
 	.align 2, 0
 _0807B4FC: .4byte gUnknown_83C2BBC
 _0807B500: .4byte 0x000006de
-	thumb_func_end sub_807B438
+	thumb_func_end CreateCloudSprites
 
 	thumb_func_start sub_807B504
 sub_807B504: @ 807B504
@@ -362,8 +362,8 @@ _0807B570:
 	bx r0
 	thumb_func_end sub_807B558
 
-	thumb_func_start sub_807B574
-sub_807B574: @ 807B574
+	thumb_func_start Drought_InitVars
+Drought_InitVars: @ 807B574
 	ldr r0, _0807B598 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r0, _0807B59C @ =0x000006cc
@@ -386,12 +386,12 @@ _0807B598: .4byte gUnknown_83C2BBC
 _0807B59C: .4byte 0x000006cc
 _0807B5A0: .4byte 0x000006d2
 _0807B5A4: .4byte 0x000006c2
-	thumb_func_end sub_807B574
+	thumb_func_end Drought_InitVars
 
-	thumb_func_start sub_807B5A8
-sub_807B5A8: @ 807B5A8
+	thumb_func_start Drought_InitAll
+Drought_InitAll: @ 807B5A8
 	push {r4,lr}
-	bl sub_807B574
+	bl Drought_InitVars
 	ldr r0, _0807B5D0 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r2, _0807B5D4 @ =0x000006d2
@@ -401,7 +401,7 @@ sub_807B5A8: @ 807B5A8
 	bne _0807B5C8
 	adds r4, r1, r2
 _0807B5BE:
-	bl sub_807B5D8
+	bl Drought_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807B5BE
@@ -412,10 +412,10 @@ _0807B5C8:
 	.align 2, 0
 _0807B5D0: .4byte gUnknown_83C2BBC
 _0807B5D4: .4byte 0x000006d2
-	thumb_func_end sub_807B5A8
+	thumb_func_end Drought_InitAll
 
-	thumb_func_start sub_807B5D8
-sub_807B5D8: @ 807B5D8
+	thumb_func_start Drought_Main
+Drought_Main: @ 807B5D8
 	push {lr}
 	ldr r1, _0807B5F4 @ =gUnknown_83C2BBC
 	ldr r0, [r1]
@@ -518,7 +518,7 @@ _0807B6B4:
 _0807B6B8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807B5D8
+	thumb_func_end Drought_Main
 
 	thumb_func_start sub_807B6BC
 sub_807B6BC: @ 807B6BC
@@ -657,8 +657,8 @@ _0807B7C2:
 	bx r0
 	thumb_func_end task50_0807B6D4
 
-	thumb_func_start sub_807B7C8
-sub_807B7C8: @ 807B7C8
+	thumb_func_start LightRain_InitVars
+LightRain_InitVars: @ 807B7C8
 	push {r4,lr}
 	ldr r0, _0807B818 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -693,7 +693,7 @@ sub_807B7C8: @ 807B7C8
 	movs r0, 0x14
 	strb r0, [r1]
 	movs r0, 0x4E
-	bl sub_807AFA8
+	bl SetRainStrengthFromSoundEffect
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -705,12 +705,12 @@ _0807B824: .4byte 0x000006db
 _0807B828: .4byte 0x000006dc
 _0807B82C: .4byte 0x000006c1
 _0807B830: .4byte 0x000006c2
-	thumb_func_end sub_807B7C8
+	thumb_func_end LightRain_InitVars
 
-	thumb_func_start sub_807B834
-sub_807B834: @ 807B834
+	thumb_func_start LightRain_InitAll
+LightRain_InitAll: @ 807B834
 	push {r4,lr}
-	bl sub_807B7C8
+	bl LightRain_InitVars
 	ldr r0, _0807B85C @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r2, _0807B860 @ =0x000006d2
@@ -720,7 +720,7 @@ sub_807B834: @ 807B834
 	bne _0807B854
 	adds r4, r1, r2
 _0807B84A:
-	bl sub_807B864
+	bl LightRain_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807B84A
@@ -731,10 +731,10 @@ _0807B854:
 	.align 2, 0
 _0807B85C: .4byte gUnknown_83C2BBC
 _0807B860: .4byte 0x000006d2
-	thumb_func_end sub_807B834
+	thumb_func_end LightRain_InitAll
 
-	thumb_func_start sub_807B864
-sub_807B864: @ 807B864
+	thumb_func_start LightRain_Main
+LightRain_Main: @ 807B864
 	push {r4,r5,lr}
 	ldr r0, _0807B880 @ =gUnknown_83C2BBC
 	ldr r5, [r0]
@@ -756,10 +756,10 @@ _0807B888:
 	beq _0807B8A0
 	b _0807B8B8
 _0807B88E:
-	bl sub_807BC08
+	bl LoadRainSpriteSheet
 	b _0807B8B2
 _0807B894:
-	bl sub_807BC18
+	bl CreateRainSprite
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807B8B8
@@ -783,10 +783,10 @@ _0807B8B8:
 	bx r0
 	.align 2, 0
 _0807B8C0: .4byte 0x000006d2
-	thumb_func_end sub_807B864
+	thumb_func_end LightRain_Main
 
-	thumb_func_start sub_807B8C4
-sub_807B8C4: @ 807B8C4
+	thumb_func_start LightRain_Finish
+LightRain_Finish: @ 807B8C4
 	push {r4,r5,lr}
 	ldr r0, _0807B8E0 @ =gUnknown_83C2BBC
 	ldr r2, [r0]
@@ -836,7 +836,7 @@ _0807B91C:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807B948
-	bl sub_807BDD8
+	bl DestroyRainSprites
 	ldr r0, _0807B940 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r5, _0807B944 @ =0x000006ce
@@ -856,7 +856,7 @@ _0807B94A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807B8C4
+	thumb_func_end LightRain_Finish
 
 	thumb_func_start sub_807B950
 sub_807B950: @ 807B950
@@ -1207,8 +1207,8 @@ _0807BBFC:
 	bx r0
 	thumb_func_end sub_807BB54
 
-	thumb_func_start sub_807BC08
-sub_807BC08: @ 807BC08
+	thumb_func_start LoadRainSpriteSheet
+LoadRainSpriteSheet: @ 807BC08
 	push {lr}
 	ldr r0, _0807BC14 @ =gUnknown_83C66CC
 	bl LoadSpriteSheet
@@ -1216,10 +1216,10 @@ sub_807BC08: @ 807BC08
 	bx r0
 	.align 2, 0
 _0807BC14: .4byte gUnknown_83C66CC
-	thumb_func_end sub_807BC08
+	thumb_func_end LoadRainSpriteSheet
 
-	thumb_func_start sub_807BC18
-sub_807BC18: @ 807BC18
+	thumb_func_start CreateRainSprite
+CreateRainSprite: @ 807BC18
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1372,7 +1372,7 @@ _0807BD3E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807BC18
+	thumb_func_end CreateRainSprite
 
 	thumb_func_start sub_807BD4C
 sub_807BD4C: @ 807BD4C
@@ -1449,8 +1449,8 @@ _0807BDD2:
 	bx r1
 	thumb_func_end sub_807BD4C
 
-	thumb_func_start sub_807BDD8
-sub_807BDD8: @ 807BDD8
+	thumb_func_start DestroyRainSprites
+DestroyRainSprites: @ 807BDD8
 	push {r4-r7,lr}
 	movs r4, 0
 	ldr r0, _0807BE20 @ =gUnknown_83C2BBC
@@ -1492,10 +1492,10 @@ _0807BE0A:
 _0807BE20: .4byte gUnknown_83C2BBC
 _0807BE24: .4byte 0x000006da
 _0807BE28: .4byte 0x00001206
-	thumb_func_end sub_807BDD8
+	thumb_func_end DestroyRainSprites
 
-	thumb_func_start sub_807BE2C
-sub_807BE2C: @ 807BE2C
+	thumb_func_start Snow_InitVars
+Snow_InitVars: @ 807BE2C
 	push {r4,lr}
 	ldr r0, _0807BE68 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -1532,14 +1532,14 @@ _0807BE6C: .4byte 0x000006cc
 _0807BE70: .4byte 0x000006d2
 _0807BE74: .4byte 0x000006c1
 _0807BE78: .4byte 0x000006e5
-	thumb_func_end sub_807BE2C
+	thumb_func_end Snow_InitVars
 
-	thumb_func_start sub_807BE7C
-sub_807BE7C: @ 807BE7C
+	thumb_func_start Snow_InitAll
+Snow_InitAll: @ 807BE7C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl sub_807BE2C
+	bl Snow_InitVars
 	ldr r2, _0807BEDC @ =gUnknown_83C2BBC
 	ldr r1, [r2]
 	ldr r3, _0807BEE0 @ =0x000006d2
@@ -1589,7 +1589,7 @@ _0807BED2:
 _0807BEDC: .4byte gUnknown_83C2BBC
 _0807BEE0: .4byte 0x000006d2
 _0807BEE4: .4byte 0x000006e4
-	thumb_func_end sub_807BE7C
+	thumb_func_end Snow_InitAll
 
 	thumb_func_start snowflakes_progress2
 snowflakes_progress2: @ 807BEE8
@@ -1622,8 +1622,8 @@ _0807BF1C: .4byte 0x000006cc
 _0807BF20: .4byte 0x000006d2
 	thumb_func_end snowflakes_progress2
 
-	thumb_func_start sub_807BF24
-sub_807BF24: @ 807BF24
+	thumb_func_start Snow_Finish
+Snow_Finish: @ 807BF24
 	push {r4,lr}
 	ldr r0, _0807BF3C @ =gUnknown_83C2BBC
 	ldr r2, [r0]
@@ -1673,7 +1673,7 @@ _0807BF82:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807BF24
+	thumb_func_end Snow_Finish
 
 	thumb_func_start snowflakes_progress
 snowflakes_progress: @ 807BF88
@@ -2157,7 +2157,7 @@ sub_807C2E4: @ 807C2E4
 	adds r1, r0
 	strb r3, [r1]
 	movs r0, 0x4A
-	bl sub_807AFA8
+	bl SetRainStrengthFromSoundEffect
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2184,7 +2184,7 @@ sub_807C358: @ 807C358
 	bne _0807C378
 	adds r4, r1, r2
 _0807C36E:
-	bl sub_807C424
+	bl Rain_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807C36E
@@ -2235,7 +2235,7 @@ sub_807C388: @ 807C388
 	strb r0, [r1]
 	strb r4, [r3]
 	movs r0, 0x4C
-	bl sub_807AFA8
+	bl SetRainStrengthFromSoundEffect
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2261,7 +2261,7 @@ sub_807C3F4: @ 807C3F4
 	bne _0807C414
 	adds r4, r1, r2
 _0807C40A:
-	bl sub_807C424
+	bl Rain_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807C40A
@@ -2274,10 +2274,10 @@ _0807C41C: .4byte gUnknown_83C2BBC
 _0807C420: .4byte 0x000006d2
 	thumb_func_end sub_807C3F4
 
-	thumb_func_start sub_807C424
-sub_807C424: @ 807C424
+	thumb_func_start Rain_Main
+Rain_Main: @ 807C424
 	push {r4,r5,lr}
-	bl sub_807C898
+	bl UpdateThunderSound
 	ldr r0, _0807C444 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
 	ldr r1, _0807C448 @ =0x000006cc
@@ -2314,7 +2314,7 @@ _0807C450:
 	.4byte _0807C748
 	.4byte _0807C77C
 _0807C48C:
-	bl sub_807BC08
+	bl LoadRainSpriteSheet
 	ldr r0, _0807C4A0 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r2, _0807C4A4 @ =0x000006cc
@@ -2326,7 +2326,7 @@ _0807C48C:
 _0807C4A0: .4byte gUnknown_83C2BBC
 _0807C4A4: .4byte 0x000006cc
 _0807C4A8:
-	bl sub_807BC18
+	bl CreateRainSprite
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807C4B4
@@ -2478,7 +2478,7 @@ _0807C5CA:
 	cmp r0, 0x1
 	bne _0807C5EE
 	movs r0, 0x14
-	bl sub_807C85C
+	bl SetThunderCounter
 _0807C5EE:
 	bl Random
 	ldr r1, _0807C614 @ =gUnknown_83C2BBC
@@ -2620,7 +2620,7 @@ _0807C704:
 	cmp r0, 0
 	bne _0807C79A
 	movs r0, 0x64
-	bl sub_807C85C
+	bl SetThunderCounter
 	movs r0, 0x13
 	bl sub_807A790
 	bl Random
@@ -2688,10 +2688,10 @@ _0807C7A0: .4byte gUnknown_83C2BBC
 _0807C7A4: .4byte 0x000006c6
 _0807C7A8: .4byte 0x000006ea
 _0807C7AC: .4byte 0x000006cc
-	thumb_func_end sub_807C424
+	thumb_func_end Rain_Main
 
-	thumb_func_start sub_807C7B0
-sub_807C7B0: @ 807C7B0
+	thumb_func_start Rain_Finish
+Rain_Finish: @ 807C7B0
 	push {r4-r6,lr}
 	ldr r0, _0807C7CC @ =gUnknown_83C2BBC
 	ldr r6, [r0]
@@ -2720,7 +2720,7 @@ _0807C7DA:
 	adds r0, 0x1
 	strh r0, [r5]
 _0807C7E6:
-	bl sub_807C424
+	bl Rain_Main
 	ldr r0, _0807C824 @ =gUnknown_83C2BBC
 	ldr r2, [r0]
 	ldr r1, _0807C820 @ =0x000006ea
@@ -2758,7 +2758,7 @@ _0807C830:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _0807C854
-	bl sub_807BDD8
+	bl DestroyRainSprites
 	ldr r1, _0807C850 @ =0x000006ed
 	adds r0, r6, r1
 	strb r4, [r0]
@@ -2776,10 +2776,10 @@ _0807C856:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807C7B0
+	thumb_func_end Rain_Finish
 
-	thumb_func_start sub_807C85C
-sub_807C85C: @ 807C85C
+	thumb_func_start SetThunderCounter
+SetThunderCounter: @ 807C85C
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -2808,10 +2808,10 @@ _0807C88A:
 	.align 2, 0
 _0807C890: .4byte gUnknown_83C2BBC
 _0807C894: .4byte 0x000006ed
-	thumb_func_end sub_807C85C
+	thumb_func_end SetThunderCounter
 
-	thumb_func_start sub_807C898
-sub_807C898: @ 807C898
+	thumb_func_start UpdateThunderSound
+UpdateThunderSound: @ 807C898
 	push {r4,lr}
 	ldr r0, _0807C8D0 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -2861,10 +2861,10 @@ _0807C8F8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807C898
+	thumb_func_end UpdateThunderSound
 
-	thumb_func_start sub_807C900
-sub_807C900: @ 807C900
+	thumb_func_start Fog1_InitVars
+Fog1_InitVars: @ 807C900
 	push {lr}
 	ldr r0, _0807C94C @ =gUnknown_83C2BBC
 	ldr r3, [r0]
@@ -2899,7 +2899,7 @@ sub_807C900: @ 807C900
 	strh r1, [r0]
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_807ADB0
+	bl Weather_SetBlendCoeffs
 _0807C948:
 	pop {r0}
 	bx r0
@@ -2909,12 +2909,12 @@ _0807C950: .4byte 0x000006cc
 _0807C954: .4byte 0x000006d2
 _0807C958: .4byte 0x000006c2
 _0807C95C: .4byte 0x000006fb
-	thumb_func_end sub_807C900
+	thumb_func_end Fog1_InitVars
 
-	thumb_func_start sub_807C960
-sub_807C960: @ 807C960
+	thumb_func_start Fog1_InitAll
+Fog1_InitAll: @ 807C960
 	push {r4,lr}
-	bl sub_807C900
+	bl Fog1_InitVars
 	ldr r0, _0807C988 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r2, _0807C98C @ =0x000006d2
@@ -2924,7 +2924,7 @@ sub_807C960: @ 807C960
 	bne _0807C980
 	adds r4, r1, r2
 _0807C976:
-	bl sub_807C990
+	bl Fog1_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807C976
@@ -2935,10 +2935,10 @@ _0807C980:
 	.align 2, 0
 _0807C988: .4byte gUnknown_83C2BBC
 _0807C98C: .4byte 0x000006d2
-	thumb_func_end sub_807C960
+	thumb_func_end Fog1_InitAll
 
-	thumb_func_start sub_807C990
-sub_807C990: @ 807C990
+	thumb_func_start Fog1_Main
+Fog1_Main: @ 807C990
 	push {r4-r6,lr}
 	ldr r0, _0807C9DC @ =gUnknown_83C2BBC
 	ldr r6, [r0]
@@ -2984,7 +2984,7 @@ _0807C9E4: .4byte 0x000006f2
 _0807C9E8: .4byte 0x000006ee
 _0807C9EC: .4byte 0x000006cc
 _0807C9F0:
-	bl sub_807CB4C
+	bl CreateFog1Sprites
 	movs r3, 0xDA
 	lsls r3, 3
 	adds r0, r6, r3
@@ -2994,13 +2994,13 @@ _0807C9F0:
 	movs r0, 0xC
 	movs r1, 0x8
 	movs r2, 0x3
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807CA16
 _0807CA0C:
 	movs r0, 0x4
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 _0807CA16:
 	ldr r0, _0807CA28 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -3014,7 +3014,7 @@ _0807CA16:
 _0807CA28: .4byte gUnknown_83C2BBC
 _0807CA2C: .4byte 0x000006cc
 _0807CA30:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807CA46
@@ -3030,10 +3030,10 @@ _0807CA46:
 	bx r0
 	.align 2, 0
 _0807CA4C: .4byte 0x000006d2
-	thumb_func_end sub_807C990
+	thumb_func_end Fog1_Main
 
-	thumb_func_start sub_807CA50
-sub_807CA50: @ 807CA50
+	thumb_func_start Fog1_Finish
+Fog1_Finish: @ 807CA50
 	push {r4,lr}
 	ldr r0, _0807CAA0 @ =gUnknown_83C2BBC
 	ldr r2, [r0]
@@ -3088,16 +3088,16 @@ _0807CABA:
 	movs r0, 0
 	movs r1, 0x10
 	movs r2, 0x3
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807CAD6
 _0807CAC6:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807CAE2
 	b _0807CAD6
 _0807CAD2:
-	bl sub_807CC08
+	bl DestroyFog1Sprites
 _0807CAD6:
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -3112,10 +3112,10 @@ _0807CAE4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807CA50
+	thumb_func_end Fog1_Finish
 
-	thumb_func_start sub_807CAEC
-sub_807CAEC: @ 807CAEC
+	thumb_func_start Fog1SpriteCallback
+Fog1SpriteCallback: @ 807CAEC
 	push {r4,lr}
 	adds r3, r0, 0
 	ldr r0, _0807CB38 @ =gUnknown_2021BCA
@@ -3160,10 +3160,10 @@ _0807CB3C: .4byte gUnknown_83C2BBC
 _0807CB40: .4byte 0x000006ee
 _0807CB44: .4byte 0x010f0000
 _0807CB48: .4byte 0x000001ff
-	thumb_func_end sub_807CAEC
+	thumb_func_end Fog1SpriteCallback
 
-	thumb_func_start sub_807CB4C
-sub_807CB4C: @ 807CB4C
+	thumb_func_start CreateFog1Sprites
+CreateFog1Sprites: @ 807CB4C
 	push {r4,r5,lr}
 	sub sp, 0x8
 	ldr r0, _0807CBC0 @ =gUnknown_83C2BBC
@@ -3251,10 +3251,10 @@ _0807CBF6:
 	.align 2, 0
 _0807CC00: .4byte gUnknown_83C2BBC
 _0807CC04: .4byte 0x000006fb
-	thumb_func_end sub_807CB4C
+	thumb_func_end CreateFog1Sprites
 
-	thumb_func_start sub_807CC08
-sub_807CC08: @ 807CC08
+	thumb_func_start DestroyFog1Sprites
+DestroyFog1Sprites: @ 807CC08
 	push {r4,r5,lr}
 	ldr r0, _0807CC50 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -3295,10 +3295,10 @@ _0807CC48:
 _0807CC50: .4byte gUnknown_83C2BBC
 _0807CC54: .4byte 0x000006fb
 _0807CC58: .4byte 0x00001201
-	thumb_func_end sub_807CC08
+	thumb_func_end DestroyFog1Sprites
 
-	thumb_func_start sub_807CC5C
-sub_807CC5C: @ 807CC5C
+	thumb_func_start Ash_InitVars
+Ash_InitVars: @ 807CC5C
 	push {lr}
 	ldr r0, _0807CCA8 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -3328,7 +3328,7 @@ sub_807CC5C: @ 807CC5C
 	bne _0807CCA4
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_807ADB0
+	bl Weather_SetBlendCoeffs
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x52
@@ -3341,12 +3341,12 @@ _0807CCA8: .4byte gUnknown_83C2BBC
 _0807CCAC: .4byte 0x000006cc
 _0807CCB0: .4byte 0x000006d2
 _0807CCB4: .4byte 0x000006c2
-	thumb_func_end sub_807CC5C
+	thumb_func_end Ash_InitVars
 
-	thumb_func_start sub_807CCB8
-sub_807CCB8: @ 807CCB8
+	thumb_func_start Ash_InitAll
+Ash_InitAll: @ 807CCB8
 	push {r4,lr}
-	bl sub_807CC5C
+	bl Ash_InitVars
 	ldr r0, _0807CCE0 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r2, _0807CCE4 @ =0x000006d2
@@ -3356,7 +3356,7 @@ sub_807CCB8: @ 807CCB8
 	bne _0807CCD8
 	adds r4, r1, r2
 _0807CCCE:
-	bl sub_807CCE8
+	bl Ash_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807CCCE
@@ -3367,10 +3367,10 @@ _0807CCD8:
 	.align 2, 0
 _0807CCE0: .4byte gUnknown_83C2BBC
 _0807CCE4: .4byte 0x000006d2
-	thumb_func_end sub_807CCB8
+	thumb_func_end Ash_InitAll
 
-	thumb_func_start sub_807CCE8
-sub_807CCE8: @ 807CCE8
+	thumb_func_start Ash_Main
+Ash_Main: @ 807CCE8
 	push {r4,r5,lr}
 	ldr r2, _0807CD2C @ =gUnknown_83C2BBC
 	ldr r1, [r2]
@@ -3417,7 +3417,7 @@ _0807CD40:
 	beq _0807CD68
 	b _0807CD88
 _0807CD46:
-	bl sub_807CDFC
+	bl LoadAshSpriteSheet
 	b _0807CD7A
 _0807CD4C:
 	movs r1, 0xE0
@@ -3426,15 +3426,15 @@ _0807CD4C:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807CD5C
-	bl sub_807CE0C
+	bl CreateAshSprites
 _0807CD5C:
 	movs r0, 0x10
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807CD7A
 _0807CD68:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807CD8C
@@ -3450,15 +3450,15 @@ _0807CD7A:
 	.align 2, 0
 _0807CD84: .4byte 0x000006d2
 _0807CD88:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 _0807CD8C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807CCE8
+	thumb_func_end Ash_Main
 
-	thumb_func_start sub_807CD94
-sub_807CD94: @ 807CD94
+	thumb_func_start Ash_Finish
+Ash_Finish: @ 807CD94
 	push {r4,lr}
 	ldr r0, _0807CDB0 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
@@ -3483,14 +3483,14 @@ _0807CDBE:
 	movs r0, 0
 	movs r1, 0x10
 	movs r2, 0x1
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807CDD8
 _0807CDCA:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807CDF2
-	bl sub_807CEB4
+	bl DestroyAshSprites
 _0807CDD8:
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -3512,10 +3512,10 @@ _0807CDF4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807CD94
+	thumb_func_end Ash_Finish
 
-	thumb_func_start sub_807CDFC
-sub_807CDFC: @ 807CDFC
+	thumb_func_start LoadAshSpriteSheet
+LoadAshSpriteSheet: @ 807CDFC
 	push {lr}
 	ldr r0, _0807CE08 @ =gUnknown_83C67B0
 	bl LoadSpriteSheet
@@ -3523,10 +3523,10 @@ sub_807CDFC: @ 807CDFC
 	bx r0
 	.align 2, 0
 _0807CE08: .4byte gUnknown_83C67B0
-	thumb_func_end sub_807CDFC
+	thumb_func_end LoadAshSpriteSheet
 
-	thumb_func_start sub_807CE0C
-sub_807CE0C: @ 807CE0C
+	thumb_func_start CreateAshSprites
+CreateAshSprites: @ 807CE0C
 	push {r4,r5,lr}
 	ldr r0, _0807CE78 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
@@ -3608,10 +3608,10 @@ _0807CEA8:
 	bx r0
 	.align 2, 0
 _0807CEB0: .4byte gUnknown_83C2BBC
-	thumb_func_end sub_807CE0C
+	thumb_func_end CreateAshSprites
 
-	thumb_func_start sub_807CEB4
-sub_807CEB4: @ 807CEB4
+	thumb_func_start DestroyAshSprites
+DestroyAshSprites: @ 807CEB4
 	push {r4,r5,lr}
 	ldr r0, _0807CF00 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -3653,7 +3653,7 @@ _0807CEF8:
 	.align 2, 0
 _0807CF00: .4byte gUnknown_83C2BBC
 _0807CF04: .4byte 0x00001202
-	thumb_func_end sub_807CEB4
+	thumb_func_end DestroyAshSprites
 
 	thumb_func_start sub_807CF08
 sub_807CF08: @ 807CF08
@@ -3718,8 +3718,8 @@ _0807CF7C: .4byte 0x010f0000
 _0807CF80: .4byte 0x000001ff
 	thumb_func_end sub_807CF08
 
-	thumb_func_start sub_807CF84
-sub_807CF84: @ 807CF84
+	thumb_func_start Fog2_InitVars
+Fog2_InitVars: @ 807CF84
 	push {r4,lr}
 	ldr r0, _0807CFF4 @ =gUnknown_83C2BBC
 	ldr r3, [r0]
@@ -3771,7 +3771,7 @@ sub_807CF84: @ 807CF84
 	strh r2, [r0]
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_807ADB0
+	bl Weather_SetBlendCoeffs
 _0807CFEE:
 	pop {r4}
 	pop {r0}
@@ -3782,12 +3782,12 @@ _0807CFF8: .4byte 0x000006cc
 _0807CFFC: .4byte 0x000006d2
 _0807D000: .4byte 0x000006c2
 _0807D004: .4byte 0x00000724
-	thumb_func_end sub_807CF84
+	thumb_func_end Fog2_InitVars
 
-	thumb_func_start sub_807D008
-sub_807D008: @ 807D008
+	thumb_func_start Fog2_InitAll
+Fog2_InitAll: @ 807D008
 	push {r4,lr}
-	bl sub_807CF84
+	bl Fog2_InitVars
 	ldr r0, _0807D030 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r2, _0807D034 @ =0x000006d2
@@ -3797,7 +3797,7 @@ sub_807D008: @ 807D008
 	bne _0807D028
 	adds r4, r1, r2
 _0807D01E:
-	bl sub_807D038
+	bl Fog2_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807D01E
@@ -3808,10 +3808,10 @@ _0807D028:
 	.align 2, 0
 _0807D030: .4byte gUnknown_83C2BBC
 _0807D034: .4byte 0x000006d2
-	thumb_func_end sub_807D008
+	thumb_func_end Fog2_InitAll
 
-	thumb_func_start sub_807D038
-sub_807D038: @ 807D038
+	thumb_func_start Fog2_Main
+Fog2_Main: @ 807D038
 	push {r4,r5,lr}
 	bl sub_807D0FC
 	ldr r0, _0807D058 @ =gUnknown_83C2BBC
@@ -3834,16 +3834,16 @@ _0807D060:
 	beq _0807D078
 	b _0807D090
 _0807D066:
-	bl sub_807D190
+	bl CreateFog2Sprites
 	b _0807D08A
 _0807D06C:
 	movs r0, 0xC
 	movs r1, 0x8
 	movs r2, 0x8
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807D08A
 _0807D078:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807D090
@@ -3861,10 +3861,10 @@ _0807D090:
 	bx r0
 	.align 2, 0
 _0807D098: .4byte 0x000006d2
-	thumb_func_end sub_807D038
+	thumb_func_end Fog2_Main
 
-	thumb_func_start sub_807D09C
-sub_807D09C: @ 807D09C
+	thumb_func_start Fog2_Finish
+Fog2_Finish: @ 807D09C
 	push {r4,lr}
 	bl sub_807D0FC
 	ldr r0, _0807D0BC @ =gUnknown_83C2BBC
@@ -3890,16 +3890,16 @@ _0807D0CA:
 	movs r0, 0
 	movs r1, 0x10
 	movs r2, 0x1
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807D0E6
 _0807D0D6:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807D0F2
 	b _0807D0E6
 _0807D0E2:
-	bl sub_807D248
+	bl DestroyFog2Sprites
 _0807D0E6:
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -3914,7 +3914,7 @@ _0807D0F4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807D09C
+	thumb_func_end Fog2_Finish
 
 	thumb_func_start sub_807D0FC
 sub_807D0FC: @ 807D0FC
@@ -3990,8 +3990,8 @@ _0807D188: .4byte gUnknown_2021BC8
 _0807D18C: .4byte gUnknown_2021BCA
 	thumb_func_end sub_807D0FC
 
-	thumb_func_start sub_807D190
-sub_807D190: @ 807D190
+	thumb_func_start CreateFog2Sprites
+CreateFog2Sprites: @ 807D190
 	push {r4-r6,lr}
 	sub sp, 0x8
 	ldr r0, _0807D1FC @ =gUnknown_83C2BBC
@@ -4078,10 +4078,10 @@ _0807D236:
 	.align 2, 0
 _0807D240: .4byte gUnknown_83C2BBC
 _0807D244: .4byte 0x00000724
-	thumb_func_end sub_807D190
+	thumb_func_end CreateFog2Sprites
 
-	thumb_func_start sub_807D248
-sub_807D248: @ 807D248
+	thumb_func_start DestroyFog2Sprites
+DestroyFog2Sprites: @ 807D248
 	push {r4,r5,lr}
 	ldr r0, _0807D290 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -4123,10 +4123,10 @@ _0807D28A:
 _0807D290: .4byte gUnknown_83C2BBC
 _0807D294: .4byte 0x00000724
 _0807D298: .4byte 0x00001203
-	thumb_func_end sub_807D248
+	thumb_func_end DestroyFog2Sprites
 
-	thumb_func_start sub_807D29C
-sub_807D29C: @ 807D29C
+	thumb_func_start Fog2SpriteCallback
+Fog2SpriteCallback: @ 807D29C
 	push {r4,lr}
 	adds r3, r0, 0
 	ldr r0, _0807D2EC @ =gUnknown_83C2BBC
@@ -4172,10 +4172,10 @@ _0807D2EC: .4byte gUnknown_83C2BBC
 _0807D2F0: .4byte 0x0000071a
 _0807D2F4: .4byte 0x010f0000
 _0807D2F8: .4byte 0x000001ff
-	thumb_func_end sub_807D29C
+	thumb_func_end Fog2SpriteCallback
 
-	thumb_func_start sub_807D2FC
-sub_807D2FC: @ 807D2FC
+	thumb_func_start Sandstorm_InitVars
+Sandstorm_InitVars: @ 807D2FC
 	push {r4,lr}
 	ldr r0, _0807D360 @ =gUnknown_83C2BBC
 	ldr r3, [r0]
@@ -4221,7 +4221,7 @@ sub_807D2FC: @ 807D2FC
 _0807D350:
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_807ADB0
+	bl Weather_SetBlendCoeffs
 _0807D358:
 	pop {r4}
 	pop {r0}
@@ -4234,12 +4234,12 @@ _0807D36C: .4byte 0x000006c1
 _0807D370: .4byte 0x000006c2
 _0807D374: .4byte 0x00000716
 _0807D378: .4byte 0x00000712
-	thumb_func_end sub_807D2FC
+	thumb_func_end Sandstorm_InitVars
 
-	thumb_func_start sub_807D37C
-sub_807D37C: @ 807D37C
+	thumb_func_start Sandstorm_InitAll
+Sandstorm_InitAll: @ 807D37C
 	push {r4,lr}
-	bl sub_807D2FC
+	bl Sandstorm_InitVars
 	ldr r0, _0807D3A4 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r2, _0807D3A8 @ =0x000006d2
@@ -4249,7 +4249,7 @@ sub_807D37C: @ 807D37C
 	bne _0807D39C
 	adds r4, r1, r2
 _0807D392:
-	bl sub_807D3AC
+	bl Sandstorm_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807D392
@@ -4260,10 +4260,10 @@ _0807D39C:
 	.align 2, 0
 _0807D3A4: .4byte gUnknown_83C2BBC
 _0807D3A8: .4byte 0x000006d2
-	thumb_func_end sub_807D37C
+	thumb_func_end Sandstorm_InitAll
 
-	thumb_func_start sub_807D3AC
-sub_807D3AC: @ 807D3AC
+	thumb_func_start Sandstorm_Main
+Sandstorm_Main: @ 807D3AC
 	push {r4,r5,lr}
 	bl sub_807D4C4
 	bl sub_807D48C
@@ -4296,17 +4296,17 @@ _0807D3E8:
 	beq _0807D404
 	b _0807D41C
 _0807D3EE:
-	bl sub_807D5D8
-	bl sub_807D698
+	bl CreateSandstormSprites_1
+	bl CreateSandstormSprites_2
 	b _0807D416
 _0807D3F8:
 	movs r0, 0x10
 	movs r1, 0
 	movs r2, 0
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807D416
 _0807D404:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807D41C
@@ -4324,10 +4324,10 @@ _0807D41C:
 	bx r0
 	.align 2, 0
 _0807D424: .4byte 0x000006d2
-	thumb_func_end sub_807D3AC
+	thumb_func_end Sandstorm_Main
 
-	thumb_func_start sub_807D428
-sub_807D428: @ 807D428
+	thumb_func_start Sandstorm_Finish
+Sandstorm_Finish: @ 807D428
 	push {r4,lr}
 	bl sub_807D4C4
 	bl sub_807D48C
@@ -4354,10 +4354,10 @@ _0807D45A:
 	movs r0, 0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_807ADF0
+	bl Weather_SetTargetBlendCoeffs
 	b _0807D476
 _0807D466:
-	bl sub_807AE34
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807D482
@@ -4378,7 +4378,7 @@ _0807D484:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807D428
+	thumb_func_end Sandstorm_Finish
 
 	thumb_func_start sub_807D48C
 sub_807D48C: @ 807D48C
@@ -4549,8 +4549,8 @@ _0807D5D0: .4byte 0x00001204
 _0807D5D4: .4byte 0x00000717
 	thumb_func_end sub_807D544
 
-	thumb_func_start sub_807D5D8
-sub_807D5D8: @ 807D5D8
+	thumb_func_start CreateSandstormSprites_1
+CreateSandstormSprites_1: @ 807D5D8
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r0, _0807D648 @ =gUnknown_83C2BBC
@@ -4638,10 +4638,10 @@ _0807D686:
 	.align 2, 0
 _0807D690: .4byte gUnknown_83C2BBC
 _0807D694: .4byte 0x00000716
-	thumb_func_end sub_807D5D8
+	thumb_func_end CreateSandstormSprites_1
 
-	thumb_func_start sub_807D698
-sub_807D698: @ 807D698
+	thumb_func_start CreateSandstormSprites_2
+CreateSandstormSprites_2: @ 807D698
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4720,7 +4720,7 @@ _0807D6B8:
 	movs r3, 0
 	bl CalcCenterToCornerVec
 	ldr r1, [r4]
-	ldr r0, _0807D758 @ =sub_807D7F8
+	ldr r0, _0807D758 @ =SandstormSpriteCallback2
 	str r0, [r1, 0x1C]
 	b _0807D76E
 	.align 2, 0
@@ -4730,7 +4730,7 @@ _0807D748: .4byte gUnknown_83C683C
 _0807D74C: .4byte gUnknown_202063C
 _0807D750: .4byte 0x00006730
 _0807D754: .4byte gUnknown_83C685C
-_0807D758: .4byte sub_807D7F8
+_0807D758: .4byte SandstormSpriteCallback2
 _0807D75C:
 	mov r2, r9
 	ldr r0, [r2]
@@ -4763,10 +4763,10 @@ _0807D784:
 	bx r0
 	.align 2, 0
 _0807D794: .4byte 0x00000717
-	thumb_func_end sub_807D698
+	thumb_func_end CreateSandstormSprites_2
 
-	thumb_func_start sub_807D798
-sub_807D798: @ 807D798
+	thumb_func_start SandstormSpriteCallback1
+SandstormSpriteCallback1: @ 807D798
 	push {r4,lr}
 	adds r3, r0, 0
 	ldr r0, _0807D7E8 @ =gUnknown_83C2BBC
@@ -4812,10 +4812,10 @@ _0807D7E8: .4byte gUnknown_83C2BBC
 _0807D7EC: .4byte 0x0000070e
 _0807D7F0: .4byte 0x010f0000
 _0807D7F4: .4byte 0x000001ff
-	thumb_func_end sub_807D798
+	thumb_func_end SandstormSpriteCallback1
 
-	thumb_func_start sub_807D7F8
-sub_807D7F8: @ 807D7F8
+	thumb_func_start SandstormSpriteCallback2
+SandstormSpriteCallback2: @ 807D7F8
 	push {lr}
 	adds r2, r0, 0
 	ldrh r0, [r2, 0x34]
@@ -4827,17 +4827,17 @@ sub_807D7F8: @ 807D7F8
 	negs r1, r1
 	cmp r0, r1
 	bne _0807D812
-	ldr r0, _0807D818 @ =sub_807D81C
+	ldr r0, _0807D818 @ =SandstormSpriteCallback3
 	str r0, [r2, 0x1C]
 _0807D812:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D818: .4byte sub_807D81C
-	thumb_func_end sub_807D7F8
+_0807D818: .4byte SandstormSpriteCallback3
+	thumb_func_end SandstormSpriteCallback2
 
-	thumb_func_start sub_807D81C
-sub_807D81C: @ 807D81C
+	thumb_func_start SandstormSpriteCallback3
+SandstormSpriteCallback3: @ 807D81C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x22]
@@ -4898,10 +4898,10 @@ _0807D886:
 	bx r0
 	.align 2, 0
 _0807D88C: .4byte gUnknown_825E074
-	thumb_func_end sub_807D81C
+	thumb_func_end SandstormSpriteCallback3
 
-	thumb_func_start sub_807D890
-sub_807D890: @ 807D890
+	thumb_func_start Weather11_InitVars
+Weather11_InitVars: @ 807D890
 	ldr r0, _0807D8B0 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r0, _0807D8B4 @ =0x000006cc
@@ -4922,15 +4922,15 @@ _0807D8B0: .4byte gUnknown_83C2BBC
 _0807D8B4: .4byte 0x000006cc
 _0807D8B8: .4byte 0x000006c1
 _0807D8BC: .4byte 0x000006c2
-	thumb_func_end sub_807D890
+	thumb_func_end Weather11_InitVars
 
-	thumb_func_start sub_807D8C0
-sub_807D8C0: @ 807D8C0
+	thumb_func_start Weather11_InitAll
+Weather11_InitAll: @ 807D8C0
 	push {lr}
-	bl sub_807D890
+	bl Weather11_InitVars
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807D8C0
+	thumb_func_end Weather11_InitAll
 
 	thumb_func_start nullsub_49
 nullsub_49: @ 807D8CC
@@ -4943,10 +4943,10 @@ sub_807D8D0: @ 807D8D0
 	bx lr
 	thumb_func_end sub_807D8D0
 
-	thumb_func_start sub_807D8D4
-sub_807D8D4: @ 807D8D4
+	thumb_func_start Bubbles_InitVars
+Bubbles_InitVars: @ 807D8D4
 	push {r4,r5,lr}
-	bl sub_807C900
+	bl Fog1_InitVars
 	ldr r0, _0807D914 @ =gUnknown_83C2BBC
 	ldr r4, [r0]
 	ldr r1, _0807D918 @ =0x0000072e
@@ -4981,12 +4981,12 @@ _0807D918: .4byte 0x0000072e
 _0807D91C: .4byte gUnknown_83C6870
 _0807D920: .4byte gUnknown_83C6868
 _0807D924: .4byte 0x0000072a
-	thumb_func_end sub_807D8D4
+	thumb_func_end Bubbles_InitVars
 
-	thumb_func_start sub_807D928
-sub_807D928: @ 807D928
+	thumb_func_start Bubbles_InitAll
+Bubbles_InitAll: @ 807D928
 	push {r4,lr}
-	bl sub_807D8D4
+	bl Bubbles_InitVars
 	ldr r0, _0807D950 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
 	ldr r2, _0807D954 @ =0x000006d2
@@ -4996,7 +4996,7 @@ sub_807D928: @ 807D928
 	bne _0807D948
 	adds r4, r1, r2
 _0807D93E:
-	bl sub_807D958
+	bl Bubbles_Main
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0807D93E
@@ -5007,12 +5007,12 @@ _0807D948:
 	.align 2, 0
 _0807D950: .4byte gUnknown_83C2BBC
 _0807D954: .4byte 0x000006d2
-	thumb_func_end sub_807D928
+	thumb_func_end Bubbles_InitAll
 
-	thumb_func_start sub_807D958
-sub_807D958: @ 807D958
+	thumb_func_start Bubbles_Main
+Bubbles_Main: @ 807D958
 	push {r4-r7,lr}
-	bl sub_807C990
+	bl Fog1_Main
 	ldr r0, _0807D9B8 @ =gUnknown_83C2BBC
 	ldr r5, [r0]
 	ldr r0, _0807D9BC @ =0x00000726
@@ -5064,12 +5064,12 @@ _0807D9BC: .4byte 0x00000726
 _0807D9C0: .4byte 0x0000ffff
 _0807D9C4: .4byte gUnknown_83C6868
 _0807D9C8: .4byte 0x0000072a
-	thumb_func_end sub_807D958
+	thumb_func_end Bubbles_Main
 
-	thumb_func_start sub_807D9CC
-sub_807D9CC: @ 807D9CC
+	thumb_func_start Bubbles_Finish
+Bubbles_Finish: @ 807D9CC
 	push {lr}
-	bl sub_807CA50
+	bl Fog1_Finish
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807D9DC
@@ -5081,7 +5081,7 @@ _0807D9DC:
 _0807D9E2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807D9CC
+	thumb_func_end Bubbles_Finish
 
 	thumb_func_start sub_807D9E8
 sub_807D9E8: @ 807D9E8
@@ -5184,8 +5184,8 @@ _0807DAAC: .4byte gUnknown_83C68BC
 _0807DAB0: .4byte 0x00001205
 	thumb_func_end sub_807DA70
 
-	thumb_func_start sub_807DAB4
-sub_807DAB4: @ 807DAB4
+	thumb_func_start unc_0807DAB4
+unc_0807DAB4: @ 807DAB4
 	push {lr}
 	adds r1, r0, 0
 	ldrh r0, [r1, 0x2E]
@@ -5235,6 +5235,6 @@ _0807DAF4:
 _0807DB0E:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807DAB4
+	thumb_func_end unc_0807DAB4
 
 	.align 2, 0 @ Don't pad with nop.

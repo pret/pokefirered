@@ -216,7 +216,7 @@ _0800FF7E:
 	ldr r1, _0800FFD8 @ =gUnknown_20386AE
 	ldrh r1, [r1]
 	bl sub_80112E0
-	bl sub_80443F4
+	bl SetWildMonHeldItem
 _0800FF98:
 	ldr r0, _0800FFDC @ =gUnknown_30030F0
 	ldr r1, _0800FFE0 @ =0x00000439
@@ -3892,8 +3892,8 @@ _08011D5C: .4byte 0x0000012f
 _08011D60: .4byte gUnknown_824F008
 	thumb_func_end sub_8011D0C
 
-	thumb_func_start sub_8011D64
-sub_8011D64: @ 8011D64
+	thumb_func_start oac_poke_opponent
+oac_poke_opponent: @ 8011D64
 	push {lr}
 	sub sp, 0x4
 	ldr r1, _08011D8C @ =sub_8011D94
@@ -3914,7 +3914,7 @@ sub_8011D64: @ 8011D64
 	.align 2, 0
 _08011D8C: .4byte sub_8011D94
 _08011D90: .4byte 0x00002108
-	thumb_func_end sub_8011D64
+	thumb_func_end oac_poke_opponent
 
 	thumb_func_start sub_8011D94
 sub_8011D94: @ 8011D94
@@ -9602,7 +9602,7 @@ _08014ACA:
 _08014AFE:
 	movs r0, 0
 	movs r1, 0
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	b _08014B24
 	.align 2, 0
 _08014B08: .4byte gUnknown_2023BC8
@@ -9613,7 +9613,7 @@ _08014B18: .4byte gUnknown_2023FE8
 _08014B1C:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 _08014B24:
 	ldr r4, _08014B3C @ =gUnknown_2023BC4
 _08014B26:

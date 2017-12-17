@@ -1806,7 +1806,7 @@ _0811D3C0:
 	adds r0, r2, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r2, r0, 0
 	ldr r1, _0811D3D8 @ =gUnknown_841B2A7
 	bl StringAppend
@@ -4593,7 +4593,7 @@ _0811E8F4:
 	ldr r0, [sp, 0x28]
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r2, r4, 0
 	adds r2, 0x38
 	mov r1, r10
@@ -4701,7 +4701,7 @@ _0811E9C0:
 	mov r0, r9
 	movs r2, 0
 	adds r3, r4, 0
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x4
 	subs r0, r4
 	lsls r4, r0, 1

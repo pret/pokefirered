@@ -412,7 +412,7 @@ _08046F1C:
 	adds r2, r4, 0
 	bl sub_800ECC4
 	adds r0, r5, 0
-	bl sub_8044148
+	bl GetMonSpritePalStruct
 	bl LoadCompressedObjectPalette
 	mov r0, r9
 	strh r4, [r0]
@@ -422,7 +422,7 @@ _08046F64: .4byte gUnknown_82350AC
 _08046F68: .4byte gUnknown_202401C
 _08046F6C:
 	adds r0, r5, 0
-	bl sub_8044148
+	bl GetMonSpritePalStruct
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
 	bl sub_803F7D4

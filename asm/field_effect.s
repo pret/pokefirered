@@ -581,8 +581,8 @@ _08083854:
 	bx r1
 	thumb_func_end FieldEffectActiveListContains
 
-	thumb_func_start sub_8083858
-sub_8083858: @ 8083858
+	thumb_func_start CreateTrainerSprite
+CreateTrainerSprite: @ 8083858
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -655,10 +655,10 @@ _080838E8: .4byte gUnknown_83CBE50
 _080838EC: .4byte gUnknown_8231CF0
 _080838F0: .4byte gUnknown_8231CFC
 _080838F4: .4byte nullsub_8
-	thumb_func_end sub_8083858
+	thumb_func_end CreateTrainerSprite
 
-	thumb_func_start sub_80838F8
-sub_80838F8: @ 80838F8
+	thumb_func_start LoadTrainerGfx_TrainerCard
+LoadTrainerGfx_TrainerCard: @ 80838F8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -683,7 +683,7 @@ sub_80838F8: @ 80838F8
 	.align 2, 0
 _08083928: .4byte gUnknown_823957C
 _0808392C: .4byte gUnknown_8239A1C
-	thumb_func_end sub_80838F8
+	thumb_func_end LoadTrainerGfx_TrainerCard
 
 	thumb_func_start AddNewGameBirchObject
 AddNewGameBirchObject: @ 8083930
@@ -860,8 +860,8 @@ _08083A7A:
 	bx r0
 	thumb_func_end sub_8083A5C
 
-	thumb_func_start sub_8083A88
-sub_8083A88: @ 8083A88
+	thumb_func_start MultiplyInvertedPaletteRGBComponents
+MultiplyInvertedPaletteRGBComponents: @ 8083A88
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -930,10 +930,10 @@ sub_8083A88: @ 8083A88
 	.align 2, 0
 _08083B0C: .4byte gUnknown_20371F8
 _08083B10: .4byte gUnknown_20375F8
-	thumb_func_end sub_8083A88
+	thumb_func_end MultiplyInvertedPaletteRGBComponents
 
-	thumb_func_start sub_8083B14
-sub_8083B14: @ 8083B14
+	thumb_func_start MultiplyPaletteRGBComponents
+MultiplyPaletteRGBComponents: @ 8083B14
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -992,7 +992,7 @@ sub_8083B14: @ 8083B14
 	.align 2, 0
 _08083B84: .4byte gUnknown_20371F8
 _08083B88: .4byte gUnknown_20375F8
-	thumb_func_end sub_8083B14
+	thumb_func_end MultiplyPaletteRGBComponents
 
 	thumb_func_start sub_8083B8C
 sub_8083B8C: @ 8083B8C
@@ -1054,8 +1054,8 @@ _08083BF8: .4byte gUnknown_3005090
 _08083BFC: .4byte gUnknown_83CBFD0
 	thumb_func_end sub_8083BD0
 
-	thumb_func_start sub_8083C00
-sub_8083C00: @ 8083C00
+	thumb_func_start PokecenterHealEffect_0
+PokecenterHealEffect_0: @ 8083C00
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x8]
@@ -1076,17 +1076,17 @@ sub_8083C00: @ 8083C00
 	ldrsh r0, [r4, r1]
 	movs r2, 0x12
 	ldrsh r1, [r4, r2]
-	bl sub_8084200
+	bl PokecenterHealEffectHelper
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x16]
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8083C00
+	thumb_func_end PokecenterHealEffect_0
 
-	thumb_func_start sub_8083C3C
-sub_8083C3C: @ 8083C3C
+	thumb_func_start PokecenterHealEffect_1
+PokecenterHealEffect_1: @ 8083C3C
 	push {r4,lr}
 	adds r2, r0, 0
 	ldr r3, _08083C74 @ =gUnknown_202063C
@@ -1118,7 +1118,7 @@ _08083C6E:
 	bx r0
 	.align 2, 0
 _08083C74: .4byte gUnknown_202063C
-	thumb_func_end sub_8083C3C
+	thumb_func_end PokecenterHealEffect_1
 
 	thumb_func_start sub_8083C78
 sub_8083C78: @ 8083C78
@@ -1145,8 +1145,8 @@ _08083C98:
 _08083C9C: .4byte gUnknown_202063C
 	thumb_func_end sub_8083C78
 
-	thumb_func_start sub_8083CA0
-sub_8083CA0: @ 8083CA0
+	thumb_func_start PokecenterHealEffect_3
+PokecenterHealEffect_3: @ 8083CA0
 	push {lr}
 	ldr r2, _08083CD8 @ =gUnknown_202063C
 	movs r3, 0x14
@@ -1174,7 +1174,7 @@ _08083CD2:
 	.align 2, 0
 _08083CD8: .4byte gUnknown_202063C
 _08083CDC: .4byte sub_8083BD0
-	thumb_func_end sub_8083CA0
+	thumb_func_end PokecenterHealEffect_3
 
 	thumb_func_start sub_8083CE0
 sub_8083CE0: @ 8083CE0
@@ -1232,8 +1232,8 @@ _08083D44: .4byte gUnknown_3005090
 _08083D48: .4byte gUnknown_83CBFE0
 	thumb_func_end sub_8083D1C
 
-	thumb_func_start sub_8083D4C
-sub_8083D4C: @ 8083D4C
+	thumb_func_start HallOfFameRecordEffect_0
+HallOfFameRecordEffect_0: @ 8083D4C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x8]
@@ -1253,7 +1253,7 @@ sub_8083D4C: @ 8083D4C
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8083D4C
+	thumb_func_end HallOfFameRecordEffect_0
 
 	thumb_func_start sub_8083D74
 sub_8083D74: @ 8083D74
@@ -1406,8 +1406,8 @@ sub_8083E70: @ 8083E70
 _08083E88: .4byte gUnknown_83CBFF0
 	thumb_func_end sub_8083E70
 
-	thumb_func_start sub_8083E8C
-sub_8083E8C: @ 8083E8C
+	thumb_func_start PokeballGlowEffect_0
+PokeballGlowEffect_0: @ 8083E8C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x30]
@@ -1483,10 +1483,10 @@ _08083F12:
 _08083F18: .4byte gUnknown_83CBF88
 _08083F1C: .4byte gUnknown_83CC010
 _08083F20: .4byte gUnknown_202063C
-	thumb_func_end sub_8083E8C
+	thumb_func_end PokeballGlowEffect_0
 
-	thumb_func_start sub_8083F24
-sub_8083F24: @ 8083F24
+	thumb_func_start PokeballGlowEffect_1
+PokeballGlowEffect_1: @ 8083F24
 	push {lr}
 	adds r1, r0, 0
 	ldrh r0, [r1, 0x30]
@@ -1513,10 +1513,10 @@ sub_8083F24: @ 8083F24
 _08083F54:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8083F24
+	thumb_func_end PokeballGlowEffect_1
 
-	thumb_func_start sub_8083F58
-sub_8083F58: @ 8083F58
+	thumb_func_start PokeballGlowEffect_2
+PokeballGlowEffect_2: @ 8083F58
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1568,7 +1568,7 @@ _08083F88:
 	mov r9, r3
 	add r4, r9
 	ldrb r3, [r4]
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r4, [r7, 0x32]
 	adds r4, 0x2
 	mov r0, r8
@@ -1587,7 +1587,7 @@ _08083F88:
 	ldrb r2, [r2]
 	add r4, r9
 	ldrb r3, [r4]
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r4, [r7, 0x32]
 	adds r4, 0x1
 	mov r3, r8
@@ -1606,7 +1606,7 @@ _08083F88:
 	ldrb r2, [r2]
 	add r4, r9
 	ldrb r3, [r4]
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r4, [r7, 0x32]
 	lsls r4, 24
 	lsrs r4, 24
@@ -1626,7 +1626,7 @@ _08083F88:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r10
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1637,7 +1637,7 @@ _08083F88:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	movs r3, 0x34
 	ldrsh r0, [r7, r3]
 	cmp r0, 0x2
@@ -1664,10 +1664,10 @@ _08084088: .4byte gUnknown_83CC02C
 _0808408C: .4byte gUnknown_83CC030
 _08084090: .4byte 0x01050000
 _08084094: .4byte 0x01030000
-	thumb_func_end sub_8083F58
+	thumb_func_end PokeballGlowEffect_2
 
-	thumb_func_start sub_8084098
-sub_8084098: @ 8084098
+	thumb_func_start PokeballGlowEffect_3
+PokeballGlowEffect_3: @ 8084098
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1717,7 +1717,7 @@ _080840C8:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r8
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1729,7 +1729,7 @@ _080840C8:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r8
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1741,7 +1741,7 @@ _080840C8:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r8
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1752,7 +1752,7 @@ _080840C8:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r8
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1763,7 +1763,7 @@ _080840C8:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8083A88
+	bl MultiplyInvertedPaletteRGBComponents
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -1776,10 +1776,10 @@ _0808417C: .4byte gUnknown_83CC02C
 _08084180: .4byte gUnknown_83CC030
 _08084184: .4byte 0x01050000
 _08084188: .4byte 0x01030000
-	thumb_func_end sub_8084098
+	thumb_func_end PokeballGlowEffect_3
 
-	thumb_func_start sub_808418C
-sub_808418C: @ 808418C
+	thumb_func_start PokeballGlowEffect_4
+PokeballGlowEffect_4: @ 808418C
 	push {lr}
 	adds r1, r0, 0
 	ldrh r0, [r1, 0x30]
@@ -1794,18 +1794,18 @@ sub_808418C: @ 808418C
 _080841A2:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808418C
+	thumb_func_end PokeballGlowEffect_4
 
-	thumb_func_start sub_80841A8
-sub_80841A8: @ 80841A8
+	thumb_func_start PokeballGlowEffect_5
+PokeballGlowEffect_5: @ 80841A8
 	ldrh r1, [r0, 0x2E]
 	adds r1, 0x1
 	strh r1, [r0, 0x2E]
 	bx lr
-	thumb_func_end sub_80841A8
+	thumb_func_end PokeballGlowEffect_5
 
-	thumb_func_start sub_80841B0
-sub_80841B0: @ 80841B0
+	thumb_func_start PokeballGlowEffect_6
+PokeballGlowEffect_6: @ 80841B0
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x38
@@ -1824,15 +1824,15 @@ _080841CC:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80841B0
+	thumb_func_end PokeballGlowEffect_6
 
 	thumb_func_start nullsub_50
 nullsub_50: @ 80841D4
 	bx lr
 	thumb_func_end nullsub_50
 
-	thumb_func_start sub_80841D8
-sub_80841D8: @ 80841D8
+	thumb_func_start SpriteCB_PokeballGlow
+SpriteCB_PokeballGlow: @ 80841D8
 	push {lr}
 	adds r3, r0, 0
 	ldr r2, _080841FC @ =gUnknown_202063C
@@ -1853,10 +1853,10 @@ _080841F8:
 	bx r0
 	.align 2, 0
 _080841FC: .4byte gUnknown_202063C
-	thumb_func_end sub_80841D8
+	thumb_func_end SpriteCB_PokeballGlow
 
-	thumb_func_start sub_8084200
-sub_8084200: @ 8084200
+	thumb_func_start PokecenterHealEffectHelper
+PokecenterHealEffectHelper: @ 8084200
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -1892,7 +1892,7 @@ sub_8084200: @ 8084200
 	.align 2, 0
 _08084244: .4byte gUnknown_83CBFA0
 _08084248: .4byte gUnknown_202063C
-	thumb_func_end sub_8084200
+	thumb_func_end PokecenterHealEffectHelper
 
 	thumb_func_start sub_808424C
 sub_808424C: @ 808424C
@@ -3428,8 +3428,8 @@ _08084E1E:
 	bx r1
 	thumb_func_end sub_8084DCC
 
-	thumb_func_start sub_8084E24
-sub_8084E24: @ 8084E24
+	thumb_func_start FldEff_UseDive
+FldEff_UseDive: @ 8084E24
 	push {r4,lr}
 	ldr r4, _08084E54 @ =sub_8084E60
 	adds r0, r4, 0
@@ -3456,7 +3456,7 @@ sub_8084E24: @ 8084E24
 _08084E54: .4byte sub_8084E60
 _08084E58: .4byte gUnknown_3005090
 _08084E5C: .4byte gUnknown_20386E0
-	thumb_func_end sub_8084E24
+	thumb_func_end FldEff_UseDive
 
 	thumb_func_start sub_8084E60
 sub_8084E60: @ 8084E60
@@ -4107,8 +4107,8 @@ _08085344: .4byte gUnknown_2037078
 _08085348: .4byte sub_80851E8
 	thumb_func_end sub_8085314
 
-	thumb_func_start sub_808534C
-sub_808534C: @ 808534C
+	thumb_func_start FldEff_LavaridgeGymWarp
+FldEff_LavaridgeGymWarp: @ 808534C
 	push {r4,lr}
 	ldr r4, _080853A4 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -4154,7 +4154,7 @@ sub_808534C: @ 808534C
 _080853A4: .4byte gUnknown_20386E0
 _080853A8: .4byte gUnknown_83A0010
 _080853AC: .4byte gUnknown_202063C
-	thumb_func_end sub_808534C
+	thumb_func_end FldEff_LavaridgeGymWarp
 
 	thumb_func_start sub_80853B0
 sub_80853B0: @ 80853B0
@@ -4411,8 +4411,8 @@ _08085598: .4byte sub_805671C
 _0808559C: .4byte sub_80853E4
 	thumb_func_end sub_808554C
 
-	thumb_func_start sub_80855A0
-sub_80855A0: @ 80855A0
+	thumb_func_start FldEff_PopOutOfAsh
+FldEff_PopOutOfAsh: @ 80855A0
 	push {r4,lr}
 	ldr r4, _080855F8 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -4458,7 +4458,7 @@ sub_80855A0: @ 80855A0
 _080855F8: .4byte gUnknown_20386E0
 _080855FC: .4byte gUnknown_83A0010
 _08085600: .4byte gUnknown_202063C
-	thumb_func_end sub_80855A0
+	thumb_func_end FldEff_PopOutOfAsh
 
 	thumb_func_start sub_8085604
 sub_8085604: @ 8085604
@@ -5410,7 +5410,7 @@ sub_8085D34: @ 8085D34
 	ldr r0, _08085D78 @ =sub_805671C
 	bl SetMainCallback2
 	ldr r1, _08085D7C @ =gUnknown_3005020
-	ldr r0, _08085D80 @ =sub_8085D88
+	ldr r0, _08085D80 @ =mapldr_08085D88
 	str r0, [r1]
 	ldr r0, _08085D84 @ =sub_8085B78
 	bl FindTaskIdByFunc
@@ -5424,12 +5424,12 @@ _08085D70:
 _08085D74: .4byte gUnknown_2037AB8
 _08085D78: .4byte sub_805671C
 _08085D7C: .4byte gUnknown_3005020
-_08085D80: .4byte sub_8085D88
+_08085D80: .4byte mapldr_08085D88
 _08085D84: .4byte sub_8085B78
 	thumb_func_end sub_8085D34
 
-	thumb_func_start sub_8085D88
-sub_8085D88: @ 8085D88
+	thumb_func_start mapldr_08085D88
+mapldr_08085D88: @ 8085D88
 	push {lr}
 	bl sub_8055DC4
 	bl pal_fill_for_maplights
@@ -5461,7 +5461,7 @@ _08085DCC: .4byte gUnknown_3005020
 _08085DD0: .4byte gUnknown_2036E38
 _08085DD4: .4byte gUnknown_2037078
 _08085DD8: .4byte sub_8085DDC
-	thumb_func_end sub_8085D88
+	thumb_func_end mapldr_08085D88
 
 	thumb_func_start sub_8085DDC
 sub_8085DDC: @ 8085DDC
@@ -5755,8 +5755,8 @@ _08086020: .4byte gUnknown_2036E38
 _08086024: .4byte sub_8085DDC
 	thumb_func_end sub_8085F9C
 
-	thumb_func_start sub_8086028
-sub_8086028: @ 8086028
+	thumb_func_start FldEff_FieldMoveShowMon
+FldEff_FieldMoveShowMon: @ 8086028
 	push {r4,lr}
 	bl sav1_map_get_light_level
 	lsls r0, 24
@@ -5798,10 +5798,10 @@ _0808604A:
 _08086078: .4byte sub_8086468
 _0808607C: .4byte gUnknown_20386E0
 _08086080: .4byte gUnknown_3005090
-	thumb_func_end sub_8086028
+	thumb_func_end FldEff_FieldMoveShowMon
 
-	thumb_func_start sub_8086084
-sub_8086084: @ 8086084
+	thumb_func_start FldEff_FieldMoveShowMonInit
+FldEff_FieldMoveShowMonInit: @ 8086084
 	push {r4-r6,lr}
 	ldr r5, _080860D8 @ =gUnknown_20386E0
 	ldr r0, [r5]
@@ -5841,7 +5841,7 @@ sub_8086084: @ 8086084
 	.align 2, 0
 _080860D8: .4byte gUnknown_20386E0
 _080860DC: .4byte gUnknown_2024284
-	thumb_func_end sub_8086084
+	thumb_func_end FldEff_FieldMoveShowMonInit
 
 	thumb_func_start sub_80860E0
 sub_80860E0: @ 80860E0
@@ -7537,8 +7537,8 @@ _08086E06:
 _08086E0C: .4byte gUnknown_202063C
 	thumb_func_end sub_8086D94
 
-	thumb_func_start sub_8086E10
-sub_8086E10: @ 8086E10
+	thumb_func_start FldEff_UseFly
+FldEff_UseFly: @ 8086E10
 	push {lr}
 	ldr r0, _08086E34 @ =sub_8086E40
 	movs r1, 0xFE
@@ -7560,7 +7560,7 @@ sub_8086E10: @ 8086E10
 _08086E34: .4byte sub_8086E40
 _08086E38: .4byte gUnknown_3005090
 _08086E3C: .4byte gUnknown_20386E0
-	thumb_func_end sub_8086E10
+	thumb_func_end FldEff_UseFly
 
 	thumb_func_start sub_8086E40
 sub_8086E40: @ 8086E40
@@ -8383,8 +8383,8 @@ _0808747C: .4byte gUnknown_202063C
 _08087480: .4byte sub_8087364
 	thumb_func_end sub_8087458
 
-	thumb_func_start sub_8087484
-sub_8087484: @ 8087484
+	thumb_func_start FldEff_FlyIn
+FldEff_FlyIn: @ 8087484
 	push {lr}
 	ldr r0, _08087494 @ =sub_8087498
 	movs r1, 0xFE
@@ -8394,7 +8394,7 @@ sub_8087484: @ 8087484
 	bx r1
 	.align 2, 0
 _08087494: .4byte sub_8087498
-	thumb_func_end sub_8087484
+	thumb_func_end FldEff_FlyIn
 
 	thumb_func_start sub_8087498
 sub_8087498: @ 8087498
@@ -8761,8 +8761,8 @@ _08087774:
 _0808777C: .4byte gUnknown_202063C
 	thumb_func_end sub_8087748
 
-	thumb_func_start sub_8087780
-sub_8087780: @ 8087780
+	thumb_func_start fishE
+fishE: @ 8087780
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0xA]
@@ -8818,7 +8818,7 @@ _080877EA:
 _080877F0: .4byte gUnknown_2037078
 _080877F4: .4byte gUnknown_2036E38
 _080877F8: .4byte sub_8087498
-	thumb_func_end sub_8087780
+	thumb_func_end fishE
 
 	thumb_func_start sub_80877FC
 sub_80877FC: @ 80877FC

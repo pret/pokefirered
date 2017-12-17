@@ -848,7 +848,7 @@ PlayerNotOnBikeNotMoving: @ 805B9B0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805C1F4
+	bl PlayerFaceDirection
 	pop {r0}
 	bx r0
 	thumb_func_end PlayerNotOnBikeNotMoving
@@ -886,7 +886,7 @@ _0805B9FA:
 	cmp r0, 0x8
 	bne _0805BA06
 	adds r0, r4, 0
-	bl sub_805C1F4
+	bl PlayerFaceDirection
 	b _0805BAA4
 _0805BA06:
 	subs r0, r1, 0x5
@@ -895,7 +895,7 @@ _0805BA06:
 	cmp r0, 0x3
 	bls _0805BAA4
 	adds r0, r4, 0
-	bl sub_805C1D0
+	bl PlayerNotOnBikeCollide
 	b _0805BAA4
 _0805BA18:
 	ldr r6, _0805BA2C @ =gUnknown_2037078
@@ -1176,7 +1176,7 @@ _0805BC38:
 	asrs r1, r4, 16
 	mov r2, r10
 	mov r3, sp
-	bl sub_805BDAC
+	bl check_acro_bike_metatile
 _0805BC4C:
 	mov r0, sp
 	ldrb r0, [r0]
@@ -1357,8 +1357,8 @@ _0805BDA2:
 	bx r1
 	thumb_func_end sub_805BCEC
 
-	thumb_func_start sub_805BDAC
-sub_805BDAC: @ 805BDAC
+	thumb_func_start check_acro_bike_metatile
+check_acro_bike_metatile: @ 805BDAC
 	push {r4-r7,lr}
 	adds r6, r3, 0
 	lsls r2, 24
@@ -1392,7 +1392,7 @@ _0805BDE6:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805BDAC
+	thumb_func_end check_acro_bike_metatile
 
 	thumb_func_start SetPlayerAvatarTransitionFlags
 SetPlayerAvatarTransitionFlags: @ 805BDEC
@@ -1933,8 +1933,8 @@ sub_805C194: @ 805C194
 	bx r0
 	thumb_func_end sub_805C194
 
-	thumb_func_start sub_805C1AC
-sub_805C1AC: @ 805C1AC
+	thumb_func_start PlayerOnBikeCollide
+PlayerOnBikeCollide: @ 805C1AC
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -1950,10 +1950,10 @@ sub_805C1AC: @ 805C1AC
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C1AC
+	thumb_func_end PlayerOnBikeCollide
 
-	thumb_func_start sub_805C1D0
-sub_805C1D0: @ 805C1D0
+	thumb_func_start PlayerNotOnBikeCollide
+PlayerNotOnBikeCollide: @ 805C1D0
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -1969,10 +1969,10 @@ sub_805C1D0: @ 805C1D0
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C1D0
+	thumb_func_end PlayerNotOnBikeCollide
 
-	thumb_func_start sub_805C1F4
-sub_805C1F4: @ 805C1F4
+	thumb_func_start PlayerFaceDirection
+PlayerFaceDirection: @ 805C1F4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1983,7 +1983,7 @@ sub_805C1F4: @ 805C1F4
 	bl sub_805C024
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C1F4
+	thumb_func_end PlayerFaceDirection
 
 	thumb_func_start sub_805C20C
 sub_805C20C: @ 805C20C
@@ -2718,9 +2718,9 @@ sub_805C780: @ 805C780
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C7B8
-	bl sub_80BD6C4
+	bl Bike_HandleBumpySlopeJump
 	movs r0, 0
-	bl sub_80BD650
+	bl Bike_UpdateBikeCounterSpeed
 _0805C7B8:
 	pop {r4}
 	pop {r0}
@@ -3695,8 +3695,8 @@ _0805CEE4: .4byte gUnknown_2037078
 _0805CEE8: .4byte gUnknown_2036E38
 	thumb_func_end sub_805CEA0
 
-	thumb_func_start sub_805CEEC
-sub_805CEEC: @ 805CEEC
+	thumb_func_start PlayerAvatar_DoSecretBaseMatJump
+PlayerAvatar_DoSecretBaseMatJump: @ 805CEEC
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r1, 0
@@ -3745,7 +3745,7 @@ _0805CF48:
 	.align 2, 0
 _0805CF50: .4byte gUnknown_2037078
 _0805CF54: .4byte sub_805CEA0
-	thumb_func_end sub_805CEEC
+	thumb_func_end PlayerAvatar_DoSecretBaseMatJump
 
 	thumb_func_start sub_805CF58
 sub_805CF58: @ 805CF58

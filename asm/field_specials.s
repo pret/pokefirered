@@ -672,8 +672,8 @@ sub_80CAABC: @ 80CAABC
 _080CAADC: .4byte gUnknown_83F5B1A
 	thumb_func_end sub_80CAABC
 
-	thumb_func_start sub_80CAAE0
-sub_80CAAE0: @ 80CAAE0
+	thumb_func_start LeadMonHasEffortRibbon
+LeadMonHasEffortRibbon: @ 80CAAE0
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -691,10 +691,10 @@ sub_80CAAE0: @ 80CAAE0
 	bx r1
 	.align 2, 0
 _080CAB04: .4byte gUnknown_2024284
-	thumb_func_end sub_80CAAE0
+	thumb_func_end LeadMonHasEffortRibbon
 
-	thumb_func_start sub_80CAB08
-sub_80CAB08: @ 80CAB08
+	thumb_func_start GivLeadMonEffortRibbon
+GivLeadMonEffortRibbon: @ 80CAB08
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0x2A
@@ -720,10 +720,10 @@ sub_80CAB08: @ 80CAB08
 	.align 2, 0
 _080CAB3C: .4byte 0x0000083b
 _080CAB40: .4byte gUnknown_2024284
-	thumb_func_end sub_80CAB08
+	thumb_func_end GivLeadMonEffortRibbon
 
-	thumb_func_start sub_80CAB44
-sub_80CAB44: @ 80CAB44
+	thumb_func_start ScrSpecial_AreLeadMonEVsMaxedOut
+ScrSpecial_AreLeadMonEVsMaxedOut: @ 80CAB44
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -747,7 +747,7 @@ _080CAB70:
 _080CAB72:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CAB44
+	thumb_func_end ScrSpecial_AreLeadMonEVsMaxedOut
 
 	thumb_func_start sub_80CAB78
 sub_80CAB78: @ 80CAB78
@@ -3277,7 +3277,7 @@ TV_PrintIntToStringVar: @ 80CBED4
 	lsrs r3, 24
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3806,7 +3806,7 @@ _080CC318:
 	mov r0, sp
 	ldrh r0, [r0]
 	ldr r1, [sp, 0xC]
-	bl sub_8097F00
+	bl SpeciesToMailSpecies
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -3816,7 +3816,7 @@ _080CC318:
 	mov r0, sp
 	ldrh r0, [r0, 0x2]
 	ldr r1, [r7, 0x4]
-	bl sub_8097F00
+	bl SpeciesToMailSpecies
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -3826,7 +3826,7 @@ _080CC318:
 	mov r0, sp
 	ldrh r0, [r0, 0x4]
 	ldr r1, [r7, 0x8]
-	bl sub_8097F00
+	bl SpeciesToMailSpecies
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -3836,7 +3836,7 @@ _080CC318:
 	mov r0, sp
 	ldrh r0, [r0, 0x6]
 	ldr r1, [r7, 0xC]
-	bl sub_8097F00
+	bl SpeciesToMailSpecies
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -3846,7 +3846,7 @@ _080CC318:
 	mov r0, sp
 	ldrh r0, [r0, 0x8]
 	ldr r1, [r7, 0x10]
-	bl sub_8097F00
+	bl SpeciesToMailSpecies
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -3856,7 +3856,7 @@ _080CC318:
 	mov r0, sp
 	ldrh r0, [r0, 0xA]
 	ldr r1, [r7, 0x14]
-	bl sub_8097F00
+	bl SpeciesToMailSpecies
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16

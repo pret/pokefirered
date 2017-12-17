@@ -531,8 +531,8 @@ sub_80CD638: @ 80CD638
 	bx r0
 	thumb_func_end sub_80CD638
 
-	thumb_func_start sub_80CD690
-sub_80CD690: @ 80CD690
+	thumb_func_start InitLinkBattleRecord
+InitLinkBattleRecord: @ 80CD690
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -556,16 +556,16 @@ sub_80CD690: @ 80CD690
 	bx r0
 	.align 2, 0
 _080CD6BC: .4byte 0x01000008
-	thumb_func_end sub_80CD690
+	thumb_func_end InitLinkBattleRecord
 
-	thumb_func_start sub_80CD6C0
-sub_80CD6C0: @ 80CD6C0
+	thumb_func_start InitLinkBattleRecords_
+InitLinkBattleRecords_: @ 80CD6C0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0x4
 _080CD6C6:
 	adds r0, r4, 0
-	bl sub_80CD690
+	bl InitLinkBattleRecord
 	adds r4, 0x10
 	subs r5, 0x1
 	cmp r5, 0
@@ -582,10 +582,10 @@ _080CD6C6:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80CD6C0
+	thumb_func_end InitLinkBattleRecords_
 
-	thumb_func_start sub_80CD6F4
-sub_80CD6F4: @ 80CD6F4
+	thumb_func_start GetLinkBattleRecordTotalBattles
+GetLinkBattleRecordTotalBattles: @ 80CD6F4
 	adds r1, r0, 0
 	ldrh r0, [r1, 0xA]
 	ldrh r2, [r1, 0xC]
@@ -593,7 +593,7 @@ sub_80CD6F4: @ 80CD6F4
 	ldrh r1, [r1, 0xE]
 	adds r0, r1
 	bx lr
-	thumb_func_end sub_80CD6F4
+	thumb_func_end GetLinkBattleRecordTotalBattles
 
 	thumb_func_start sub_80CD704
 sub_80CD704: @ 80CD704
@@ -627,8 +627,8 @@ _080CD732:
 	bx r1
 	thumb_func_end sub_80CD704
 
-	thumb_func_start sub_80CD738
-sub_80CD738: @ 80CD738
+	thumb_func_start SortLinkBattleRecords
+SortLinkBattleRecords: @ 80CD738
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -649,10 +649,10 @@ _080CD746:
 _080CD758:
 	adds r0, r6, 0
 	str r2, [sp, 0x10]
-	bl sub_80CD6F4
+	bl GetLinkBattleRecordTotalBattles
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_80CD6F4
+	bl GetLinkBattleRecordTotalBattles
 	ldr r2, [sp, 0x10]
 	cmp r4, r0
 	ble _080CD792
@@ -693,10 +693,10 @@ _080CD7A0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80CD738
+	thumb_func_end SortLinkBattleRecords
 
-	thumb_func_start sub_80CD7B4
-sub_80CD7B4: @ 80CD7B4
+	thumb_func_start UpdateLinkBattleRecord
+UpdateLinkBattleRecord: @ 80CD7B4
 	push {lr}
 	adds r2, r0, 0
 	cmp r1, 0x2
@@ -751,10 +751,10 @@ _080CD80E:
 	bx r0
 	.align 2, 0
 _080CD814: .4byte 0x0000270f
-	thumb_func_end sub_80CD7B4
+	thumb_func_end UpdateLinkBattleRecord
 
-	thumb_func_start sub_80CD818
-sub_80CD818: @ 80CD818
+	thumb_func_start UpdateLinkBattleGameStats
+UpdateLinkBattleGameStats: @ 80CD818
 	push {r4,lr}
 	cmp r0, 0x2
 	beq _080CD832
@@ -789,7 +789,7 @@ _080CD84A:
 	bx r0
 	.align 2, 0
 _080CD850: .4byte 0x0000270e
-	thumb_func_end sub_80CD818
+	thumb_func_end UpdateLinkBattleGameStats
 
 	thumb_func_start sub_80CD854
 sub_80CD854: @ 80CD854
@@ -821,9 +821,9 @@ _080CD882:
 	bl StringCopy
 _080CD88A:
 	mov r0, r8
-	bl sub_80CD818
+	bl UpdateLinkBattleGameStats
 	adds r0, r6, 0
-	bl sub_80CD738
+	bl SortLinkBattleRecords
 	adds r0, r6, 0
 	mov r1, sp
 	adds r2, r7, 0
@@ -835,7 +835,7 @@ _080CD88A:
 	adds r4, r6, 0
 	adds r4, 0x40
 	adds r0, r4, 0
-	bl sub_80CD690
+	bl InitLinkBattleRecord
 	adds r0, r4, 0
 	mov r1, sp
 	movs r2, 0x7
@@ -845,9 +845,9 @@ _080CD8BE:
 	lsls r0, r5, 4
 	adds r0, r6, r0
 	mov r1, r8
-	bl sub_80CD7B4
+	bl UpdateLinkBattleRecord
 	adds r0, r6, 0
-	bl sub_80CD738
+	bl SortLinkBattleRecords
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -863,7 +863,7 @@ InitLinkBattleRecords: @ 80CD8DC
 	ldr r0, [r0]
 	ldr r1, _080CD8F4 @ =0x00000a98
 	adds r0, r1
-	bl sub_80CD6C0
+	bl InitLinkBattleRecords_
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1032,17 +1032,17 @@ _080CDA24:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _080CDAB8 @ =gUnknown_2021CF0
 	adds r1, r5, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _080CDABC @ =gUnknown_2021D04
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r3, 0
 	ldr r6, _080CDAC0 @ =gUnknown_83F6C84
 	ldr r7, _080CDAC4 @ =gUnknown_2021D18
@@ -1205,7 +1205,7 @@ _080CDB86:
 	ldr r0, _080CDB94 @ =gUnknown_2021CD0
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	b _080CDBA6
 	.align 2, 0
 _080CDB94: .4byte gUnknown_2021CD0
@@ -1215,7 +1215,7 @@ _080CDB98:
 	ldr r0, _080CDBDC @ =gUnknown_2021CD0
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 _080CDBA6:
 	adds r2, r4, 0
 	mov r0, r9

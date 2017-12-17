@@ -204,8 +204,8 @@ sub_80A01AC: @ 80A01AC
 	bx r1
 	thumb_func_end sub_80A01AC
 
-	thumb_func_start sub_80A01F4
-sub_80A01F4: @ 80A01F4
+	thumb_func_start CheckForAlivePartyMons
+CheckForAlivePartyMons: @ 80A01F4
 	push {lr}
 	bl GetMonsStateToDoubles
 	lsls r0, 24
@@ -228,10 +228,10 @@ _080A0214:
 	bx r0
 	.align 2, 0
 _080A0218: .4byte gUnknown_20370D0
-	thumb_func_end sub_80A01F4
+	thumb_func_end CheckForAlivePartyMons
 
-	thumb_func_start sub_80A021C
-sub_80A021C: @ 80A021C
+	thumb_func_start CheckPartyMonHasHeldItem
+CheckPartyMonHasHeldItem: @ 80A021C
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -271,13 +271,13 @@ _080A0264:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A021C
+	thumb_func_end CheckPartyMonHasHeldItem
 
-	thumb_func_start sub_80A026C
-sub_80A026C: @ 80A026C
+	thumb_func_start GetNameOfEnigmaBerryInPlayerParty
+GetNameOfEnigmaBerryInPlayerParty: @ 80A026C
 	push {r4,lr}
 	movs r0, 0xAF
-	bl sub_80A021C
+	bl CheckPartyMonHasHeldItem
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
@@ -296,7 +296,7 @@ _080A028E:
 	bx r1
 	.align 2, 0
 _080A0298: .4byte gUnknown_2021CD0
-	thumb_func_end sub_80A026C
+	thumb_func_end GetNameOfEnigmaBerryInPlayerParty
 
 	thumb_func_start CreateScriptedWildMon
 CreateScriptedWildMon: @ 80A029C

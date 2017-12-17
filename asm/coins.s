@@ -137,7 +137,7 @@ sub_80D060C: @ 80D060C
 	ldr r0, _080D0668 @ =gUnknown_2021CD0
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _080D066C @ =gUnknown_2021D18
 	mov r9, r0
 	ldr r1, _080D0670 @ =gUnknown_84162C4
@@ -219,7 +219,7 @@ sub_80D06D0: @ 80D06D0
 	ldr r0, _080D071C @ =gUnknown_2021CD0
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _080D0720 @ =gUnknown_2021D18
 	ldr r1, _080D0724 @ =gUnknown_84162C4
 	adds r0, r4, 0

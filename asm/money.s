@@ -152,7 +152,7 @@ sub_809FE40: @ 809FE40
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r4, 0
 	bl StringLength
 	lsls r0, 16
@@ -225,7 +225,7 @@ sub_809FEC4: @ 809FEC4
 	adds r1, r3, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r4, 0
 	bl StringLength
 	lsls r0, 16

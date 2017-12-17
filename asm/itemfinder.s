@@ -112,7 +112,7 @@ sub_813ED3C: @ 813ED3C
 	ldrsh r0, [r4, r2]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_813F2F0
+	bl GetPlayerDirectionTowardsHiddenItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r1, 0x8
@@ -871,8 +871,8 @@ _0813F2E2:
 	bx r0
 	thumb_func_end sub_813F220
 
-	thumb_func_start sub_813F2F0
-sub_813F2F0: @ 813F2F0
+	thumb_func_start GetPlayerDirectionTowardsHiddenItem
+GetPlayerDirectionTowardsHiddenItem: @ 813F2F0
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsls r1, 16
@@ -943,7 +943,7 @@ _0813F35E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_813F2F0
+	thumb_func_end GetPlayerDirectionTowardsHiddenItem
 
 	thumb_func_start sub_813F364
 sub_813F364: @ 813F364

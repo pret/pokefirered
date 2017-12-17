@@ -105,7 +105,7 @@ _080DAE3C: .4byte gUnknown_8231CFC
 sub_80DAE40: @ 80DAE40
 	push {lr}
 	ldrb r0, [r0, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	ldrh r0, [r0, 0xA]
 	subs r0, 0x2
 	lsls r0, 16
@@ -127,7 +127,7 @@ npc_pal_op: @ 80DAE54
 	movs r0, 0
 	strh r0, [r4, 0x32]
 	ldrb r0, [r5, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	ldrb r1, [r0, 0xC]
 	movs r0, 0x80
 	ands r0, r1
@@ -176,7 +176,7 @@ npc_pal_op_B: @ 80DAEC4
 	lsls r1, 24
 	lsrs r4, r1, 24
 	ldrb r0, [r0, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r2, r0, 0
 	ldrh r1, [r2, 0x4]
 	ldr r0, _080DAEF0 @ =0x000011ff
@@ -222,7 +222,7 @@ npc_pal_op_A: @ 80DAF20
 	lsls r1, 24
 	lsrs r4, r1, 24
 	ldrb r0, [r0, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r2, r0, 0
 	ldrh r1, [r2, 0x4]
 	ldr r0, _080DAF4C @ =0x000011ff
@@ -593,7 +593,7 @@ oei_shadow: @ 80DB1DC
 	lsls r1, 2
 	adds r1, r2
 	ldrb r0, [r1, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r4, r0, 0
 	ldr r2, _080DB270 @ =gUnknown_83A0010
 	ldr r1, _080DB274 @ =gUnknown_83FECD2
@@ -969,8 +969,8 @@ _080DB4E4:
 _080DB4F0: .4byte gUnknown_2036E38
 	thumb_func_end unc_grass_normal
 
-	thumb_func_start sub_80DB4F4
-sub_80DB4F4: @ 80DB4F4
+	thumb_func_start FldEff_JumpTallGrass
+FldEff_JumpTallGrass: @ 80DB4F4
 	push {r4,lr}
 	ldr r4, _080DB558 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -1024,7 +1024,7 @@ _080DB550:
 _080DB558: .4byte gUnknown_20386E0
 _080DB55C: .4byte gUnknown_83A0010
 _080DB560: .4byte gUnknown_202063C
-	thumb_func_end sub_80DB4F4
+	thumb_func_end FldEff_JumpTallGrass
 
 	thumb_func_start sub_80DB564
 sub_80DB564: @ 80DB564
@@ -1103,8 +1103,8 @@ _080DB5E8:
 	bx r1
 	thumb_func_end sub_80DB564
 
-	thumb_func_start sub_80DB5F4
-sub_80DB5F4: @ 80DB5F4
+	thumb_func_start FldEff_LongGrass
+FldEff_LongGrass: @ 80DB5F4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _080DB690 @ =gUnknown_20386E0
@@ -1183,7 +1183,7 @@ _080DB684:
 _080DB690: .4byte gUnknown_20386E0
 _080DB694: .4byte gUnknown_83A0010
 _080DB698: .4byte gUnknown_202063C
-	thumb_func_end sub_80DB5F4
+	thumb_func_end FldEff_LongGrass
 
 	thumb_func_start unc_grass_tall
 unc_grass_tall: @ 80DB69C
@@ -1312,8 +1312,8 @@ _080DB786:
 _080DB794: .4byte gUnknown_2036E38
 	thumb_func_end unc_grass_tall
 
-	thumb_func_start sub_80DB798
-sub_80DB798: @ 80DB798
+	thumb_func_start FldEff_JumpLongGrass
+FldEff_JumpLongGrass: @ 80DB798
 	push {r4,lr}
 	ldr r4, _080DB7FC @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -1367,7 +1367,7 @@ _080DB7F4:
 _080DB7FC: .4byte gUnknown_20386E0
 _080DB800: .4byte gUnknown_83A0010
 _080DB804: .4byte gUnknown_202063C
-	thumb_func_end sub_80DB798
+	thumb_func_end FldEff_JumpLongGrass
 
 	thumb_func_start sub_80DB808
 sub_80DB808: @ 80DB808
@@ -1492,7 +1492,7 @@ _080DB8EA:
 _080DB8F4: .4byte gUnknown_2036E38
 _080DB8F8:
 	ldrb r0, [r1, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	mov r8, r0
 	mov r0, sp
 	ldrb r1, [r0]
@@ -1576,8 +1576,8 @@ _080DB98E:
 _080DB99C: .4byte gUnknown_202063C
 	thumb_func_end sub_80DB8AC
 
-	thumb_func_start sub_80DB9A0
-sub_80DB9A0: @ 80DB9A0
+	thumb_func_start FldEff_SandFootprints
+FldEff_SandFootprints: @ 80DB9A0
 	push {r4,lr}
 	ldr r4, _080DBA08 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -1631,10 +1631,10 @@ _080DB9FE:
 _080DBA08: .4byte gUnknown_20386E0
 _080DBA0C: .4byte gUnknown_83A0010
 _080DBA10: .4byte gUnknown_202063C
-	thumb_func_end sub_80DB9A0
+	thumb_func_end FldEff_SandFootprints
 
-	thumb_func_start sub_80DBA14
-sub_80DBA14: @ 80DBA14
+	thumb_func_start FldEff_DeepSandFootprints
+FldEff_DeepSandFootprints: @ 80DBA14
 	push {r4,r5,lr}
 	ldr r4, _080DBA7C @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -1689,10 +1689,10 @@ _080DBA74:
 _080DBA7C: .4byte gUnknown_20386E0
 _080DBA80: .4byte gUnknown_83A0010
 _080DBA84: .4byte gUnknown_202063C
-	thumb_func_end sub_80DBA14
+	thumb_func_end FldEff_DeepSandFootprints
 
-	thumb_func_start sub_80DBA88
-sub_80DBA88: @ 80DBA88
+	thumb_func_start FldEff_BikeTireTracks
+FldEff_BikeTireTracks: @ 80DBA88
 	push {r4,r5,lr}
 	ldr r4, _080DBAF0 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -1747,7 +1747,7 @@ _080DBAE8:
 _080DBAF0: .4byte gUnknown_20386E0
 _080DBAF4: .4byte gUnknown_83A0010
 _080DBAF8: .4byte gUnknown_202063C
-	thumb_func_end sub_80DBA88
+	thumb_func_end FldEff_BikeTireTracks
 
 	thumb_func_start sub_80DBAFC
 sub_80DBAFC: @ 80DBAFC
@@ -1826,8 +1826,8 @@ _080DBB80:
 	bx r0
 	thumb_func_end sub_80DBB3C
 
-	thumb_func_start sub_80DBB88
-sub_80DBB88: @ 80DBB88
+	thumb_func_start FldEff_Splash
+FldEff_Splash: @ 80DBB88
 	push {r4-r6,lr}
 	ldr r6, _080DBC1C @ =gUnknown_20386E0
 	ldrb r0, [r6]
@@ -1852,7 +1852,7 @@ sub_80DBB88: @ 80DBB88
 	cmp r4, 0x40
 	beq _080DBC12
 	ldrb r0, [r5, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	lsls r3, r4, 4
 	adds r3, r4
 	lsls r3, 2
@@ -1903,7 +1903,7 @@ _080DBC1C: .4byte gUnknown_20386E0
 _080DBC20: .4byte gUnknown_2036E38
 _080DBC24: .4byte gUnknown_83A0010
 _080DBC28: .4byte gUnknown_202063C
-	thumb_func_end sub_80DBB88
+	thumb_func_end FldEff_Splash
 
 	thumb_func_start sub_80DBC2C
 sub_80DBC2C: @ 80DBC2C
@@ -1977,8 +1977,8 @@ _080DBCB0: .4byte gUnknown_202063C
 _080DBCB4: .4byte gUnknown_2036E38
 	thumb_func_end sub_80DBC2C
 
-	thumb_func_start sub_80DBCB8
-sub_80DBCB8: @ 80DBCB8
+	thumb_func_start FldEff_JumpSmallSplash
+FldEff_JumpSmallSplash: @ 80DBCB8
 	push {r4,lr}
 	ldr r4, _080DBD1C @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -2032,7 +2032,7 @@ _080DBD14:
 _080DBD1C: .4byte gUnknown_20386E0
 _080DBD20: .4byte gUnknown_83A0010
 _080DBD24: .4byte gUnknown_202063C
-	thumb_func_end sub_80DBCB8
+	thumb_func_end FldEff_JumpSmallSplash
 
 	thumb_func_start oei_water_drop_tall
 oei_water_drop_tall: @ 80DBD28
@@ -2091,8 +2091,8 @@ _080DBD90: .4byte gUnknown_83A0010
 _080DBD94: .4byte gUnknown_202063C
 	thumb_func_end oei_water_drop_tall
 
-	thumb_func_start sub_80DBD98
-sub_80DBD98: @ 80DBD98
+	thumb_func_start FldEff_FeetInFlowingWater
+FldEff_FeetInFlowingWater: @ 80DBD98
 	push {r4-r7,lr}
 	ldr r7, _080DBE38 @ =gUnknown_20386E0
 	ldrb r0, [r7]
@@ -2117,7 +2117,7 @@ sub_80DBD98: @ 80DBD98
 	cmp r5, 0x40
 	beq _080DBE2E
 	ldrb r0, [r6, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r4, r0, 0
 	lsls r0, r5, 4
 	adds r0, r5
@@ -2176,7 +2176,7 @@ _080DBE40: .4byte gUnknown_83A0010
 _080DBE44: .4byte gUnknown_202063C
 _080DBE48: .4byte sub_80DBE50
 _080DBE4C: .4byte 0x0000ffff
-	thumb_func_end sub_80DBD98
+	thumb_func_end FldEff_FeetInFlowingWater
 
 	thumb_func_start sub_80DBE50
 sub_80DBE50: @ 80DBE50
@@ -2431,7 +2431,7 @@ _080DC02E:
 _080DC038: .4byte gUnknown_2036E38
 _080DC03C:
 	ldrb r0, [r1, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	mov r1, sp
 	ldrb r2, [r1]
 	lsls r1, r2, 3
@@ -2471,8 +2471,8 @@ _080DC080:
 _080DC088: .4byte gUnknown_202063C
 	thumb_func_end sub_80DBFF4
 
-	thumb_func_start sub_80DC08C
-sub_80DC08C: @ 80DC08C
+	thumb_func_start FldEff_Unknown19
+FldEff_Unknown19: @ 80DC08C
 	push {r4,lr}
 	ldr r4, _080DC0EC @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -2524,10 +2524,10 @@ _080DC0E4:
 _080DC0EC: .4byte gUnknown_20386E0
 _080DC0F0: .4byte gUnknown_83A0010
 _080DC0F4: .4byte gUnknown_202063C
-	thumb_func_end sub_80DC08C
+	thumb_func_end FldEff_Unknown19
 
-	thumb_func_start sub_80DC0F8
-sub_80DC0F8: @ 80DC0F8
+	thumb_func_start FldEff_Unknown20
+FldEff_Unknown20: @ 80DC0F8
 	push {r4,lr}
 	ldr r4, _080DC158 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -2579,10 +2579,10 @@ _080DC150:
 _080DC158: .4byte gUnknown_20386E0
 _080DC15C: .4byte gUnknown_83A0010
 _080DC160: .4byte gUnknown_202063C
-	thumb_func_end sub_80DC0F8
+	thumb_func_end FldEff_Unknown20
 
-	thumb_func_start sub_80DC164
-sub_80DC164: @ 80DC164
+	thumb_func_start FldEff_Unknown21
+FldEff_Unknown21: @ 80DC164
 	push {r4,lr}
 	ldr r4, _080DC1C4 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -2634,10 +2634,10 @@ _080DC1BC:
 _080DC1C4: .4byte gUnknown_20386E0
 _080DC1C8: .4byte gUnknown_83A0010
 _080DC1CC: .4byte gUnknown_202063C
-	thumb_func_end sub_80DC164
+	thumb_func_end FldEff_Unknown21
 
-	thumb_func_start sub_80DC1D0
-sub_80DC1D0: @ 80DC1D0
+	thumb_func_start FldEff_Unknown22
+FldEff_Unknown22: @ 80DC1D0
 	push {r4,lr}
 	ldr r4, _080DC230 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -2689,7 +2689,7 @@ _080DC228:
 _080DC230: .4byte gUnknown_20386E0
 _080DC234: .4byte gUnknown_83A0010
 _080DC238: .4byte gUnknown_202063C
-	thumb_func_end sub_80DC1D0
+	thumb_func_end FldEff_Unknown22
 
 	thumb_func_start ash
 ash: @ 80DC23C
@@ -3384,8 +3384,8 @@ _080DC738:
 _080DC73C: .4byte gUnknown_202063C
 	thumb_func_end sub_80DC700
 
-	thumb_func_start sub_80DC740
-sub_80DC740: @ 80DC740
+	thumb_func_start FldEff_Dust
+FldEff_Dust: @ 80DC740
 	push {r4,lr}
 	ldr r4, _080DC7A4 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -3439,10 +3439,10 @@ _080DC79C:
 _080DC7A4: .4byte gUnknown_20386E0
 _080DC7A8: .4byte gUnknown_83A0010
 _080DC7AC: .4byte gUnknown_202063C
-	thumb_func_end sub_80DC740
+	thumb_func_end FldEff_Dust
 
-	thumb_func_start sub_80DC7B0
-sub_80DC7B0: @ 80DC7B0
+	thumb_func_start FldEff_SandPile
+FldEff_SandPile: @ 80DC7B0
 	push {r4-r7,lr}
 	ldr r7, _080DC85C @ =gUnknown_20386E0
 	ldrb r0, [r7]
@@ -3467,7 +3467,7 @@ sub_80DC7B0: @ 80DC7B0
 	cmp r4, 0x40
 	beq _080DC854
 	ldrb r0, [r6, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r5, r0, 0
 	lsls r0, r4, 4
 	adds r0, r4
@@ -3531,7 +3531,7 @@ _080DC85C: .4byte gUnknown_20386E0
 _080DC860: .4byte gUnknown_2036E38
 _080DC864: .4byte gUnknown_83A0010
 _080DC868: .4byte gUnknown_202063C
-	thumb_func_end sub_80DC7B0
+	thumb_func_end FldEff_SandPile
 
 	thumb_func_start sub_80DC86C
 sub_80DC86C: @ 80DC86C
@@ -3638,8 +3638,8 @@ _080DC930: .4byte gUnknown_202063C
 _080DC934: .4byte gUnknown_2036E38
 	thumb_func_end sub_80DC86C
 
-	thumb_func_start sub_80DC938
-sub_80DC938: @ 80DC938
+	thumb_func_start FldEff_Bubbles
+FldEff_Bubbles: @ 80DC938
 	push {r4,lr}
 	ldr r4, _080DC990 @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -3687,7 +3687,7 @@ _080DC988:
 _080DC990: .4byte gUnknown_20386E0
 _080DC994: .4byte gUnknown_83A0010
 _080DC998: .4byte gUnknown_202063C
-	thumb_func_end sub_80DC938
+	thumb_func_end FldEff_Bubbles
 
 	thumb_func_start sub_80DC99C
 sub_80DC99C: @ 80DC99C
@@ -3890,7 +3890,7 @@ _080DCAF8:
 	lsls r0, 2
 	adds r0, r4
 	ldrb r0, [r0, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	mov r1, sp
 	ldrb r2, [r1]
 	lsls r1, r2, 3
@@ -4040,8 +4040,8 @@ _080DCC18:
 	bx r1
 	thumb_func_end sub_80DCBE0
 
-	thumb_func_start sub_80DCC1C
-sub_80DCC1C: @ 80DCC1C
+	thumb_func_start FldEff_Sparkle
+FldEff_Sparkle: @ 80DCC1C
 	push {r4,lr}
 	ldr r4, _080DCC84 @ =gUnknown_20386E0
 	ldr r0, [r4]
@@ -4097,7 +4097,7 @@ _080DCC7C:
 _080DCC84: .4byte gUnknown_20386E0
 _080DCC88: .4byte gUnknown_83A0010
 _080DCC8C: .4byte gUnknown_202063C
-	thumb_func_end sub_80DCC1C
+	thumb_func_end FldEff_Sparkle
 
 	thumb_func_start sub_80DCC90
 sub_80DCC90: @ 80DCC90
@@ -4224,7 +4224,7 @@ _080DCD5E:
 	cmp r0, 0
 	beq _080DCE00
 	ldrb r0, [r4, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1

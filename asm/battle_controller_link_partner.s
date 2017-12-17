@@ -17,17 +17,17 @@ sub_80D4204: @ 80D4204
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080D421C @ =sub_80D4220
+	ldr r1, _080D421C @ =LinkPartnerBufferRunCommand
 	str r1, [r0]
 	bx lr
 	.align 2, 0
 _080D4214: .4byte gUnknown_3004FE0
 _080D4218: .4byte gUnknown_2023BC4
-_080D421C: .4byte sub_80D4220
+_080D421C: .4byte LinkPartnerBufferRunCommand
 	thumb_func_end sub_80D4204
 
-	thumb_func_start sub_80D4220
-sub_80D4220: @ 80D4220
+	thumb_func_start LinkPartnerBufferRunCommand
+LinkPartnerBufferRunCommand: @ 80D4220
 	push {lr}
 	ldr r2, _080D4254 @ =gUnknown_2023BC8
 	ldr r1, _080D4258 @ =gUnknown_825E45C
@@ -64,7 +64,7 @@ _080D4268:
 _080D426C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D4220
+	thumb_func_end LinkPartnerBufferRunCommand
 
 	thumb_func_start sub_80D4270
 sub_80D4270: @ 80D4270
@@ -994,7 +994,7 @@ sub_80D49E8: @ 80D49E8
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080D4A30 @ =sub_80D4220
+	ldr r1, _080D4A30 @ =LinkPartnerBufferRunCommand
 	str r1, [r0]
 	ldr r0, _080D4A34 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -1019,7 +1019,7 @@ sub_80D49E8: @ 80D49E8
 	.align 2, 0
 _080D4A28: .4byte gUnknown_3004FE0
 _080D4A2C: .4byte gUnknown_2023BC4
-_080D4A30: .4byte sub_80D4220
+_080D4A30: .4byte LinkPartnerBufferRunCommand
 _080D4A34: .4byte gUnknown_2022B4C
 _080D4A38: .4byte gUnknown_2022BC4
 _080D4A3C:
@@ -1094,8 +1094,8 @@ _080D4AB8: .4byte gUnknown_2024018
 _080D4ABC: .4byte gUnknown_2023BC4
 	thumb_func_end sub_80D4A90
 
-	thumb_func_start sub_80D4AC0
-sub_80D4AC0: @ 80D4AC0
+	thumb_func_start LinkPartnerHandleGetAttributes
+LinkPartnerHandleGetAttributes: @ 80D4AC0
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -1113,7 +1113,7 @@ sub_80D4AC0: @ 80D4AC0
 	adds r1, r0
 	ldrb r0, [r1]
 	mov r1, sp
-	bl sub_80D4B34
+	bl dp01_getattr_by_ch1_for_player_pokemon
 	adds r6, r0, 0
 	b _080D4B1A
 	.align 2, 0
@@ -1132,7 +1132,7 @@ _080D4AFC:
 	lsrs r0, 24
 	mov r2, sp
 	adds r1, r2, r6
-	bl sub_80D4B34
+	bl dp01_getattr_by_ch1_for_player_pokemon
 	adds r6, r0
 _080D4B12:
 	lsrs r4, 1
@@ -1150,10 +1150,10 @@ _080D4B1A:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D4AC0
+	thumb_func_end LinkPartnerHandleGetAttributes
 
-	thumb_func_start sub_80D4B34
-sub_80D4B34: @ 80D4B34
+	thumb_func_start dp01_getattr_by_ch1_for_player_pokemon
+dp01_getattr_by_ch1_for_player_pokemon: @ 80D4B34
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2084,7 +2084,7 @@ _080D52CA:
 	bx r1
 	.align 2, 0
 _080D52DC: .4byte gUnknown_2024284
-	thumb_func_end sub_80D4B34
+	thumb_func_end dp01_getattr_by_ch1_for_player_pokemon
 
 	thumb_func_start sub_80D52E0
 sub_80D52E0: @ 80D52E0
@@ -2094,8 +2094,8 @@ sub_80D52E0: @ 80D52E0
 	bx r0
 	thumb_func_end sub_80D52E0
 
-	thumb_func_start sub_80D52EC
-sub_80D52EC: @ 80D52EC
+	thumb_func_start LinkPartnerHandleSetAttributes
+LinkPartnerHandleSetAttributes: @ 80D52EC
 	push {r4,r5,lr}
 	ldr r1, _080D5310 @ =gUnknown_2022BC4
 	ldr r0, _080D5314 @ =gUnknown_2023BC4
@@ -2138,7 +2138,7 @@ _080D533A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D52EC
+	thumb_func_end LinkPartnerHandleSetAttributes
 
 	thumb_func_start sub_80D5344
 sub_80D5344: @ 80D5344
@@ -3277,8 +3277,8 @@ _080D5D38: .4byte gUnknown_2023BC4
 _080D5D3C: .4byte gUnknown_2023BCE
 	thumb_func_end sub_80D5344
 
-	thumb_func_start sub_80D5D40
-sub_80D5D40: @ 80D5D40
+	thumb_func_start LinkPartnerHandlecmd3
+LinkPartnerHandlecmd3: @ 80D5D40
 	push {r4-r7,lr}
 	ldr r1, _080D5DA4 @ =gUnknown_2023BCE
 	ldr r7, _080D5DA8 @ =gUnknown_2023BC4
@@ -3334,10 +3334,10 @@ _080D5DA4: .4byte gUnknown_2023BCE
 _080D5DA8: .4byte gUnknown_2023BC4
 _080D5DAC: .4byte gUnknown_2022BC4
 _080D5DB0: .4byte gUnknown_2024284
-	thumb_func_end sub_80D5D40
+	thumb_func_end LinkPartnerHandlecmd3
 
-	thumb_func_start sub_80D5DB4
-sub_80D5DB4: @ 80D5DB4
+	thumb_func_start LinkPartnerHandleLoadPokeSprite
+LinkPartnerHandleLoadPokeSprite: @ 80D5DB4
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3461,10 +3461,10 @@ _080D5EC0: .4byte 0x0000ff10
 _080D5EC4: .4byte gUnknown_2024024
 _080D5EC8: .4byte gUnknown_3004FE0
 _080D5ECC: .4byte sub_80D4590
-	thumb_func_end sub_80D5DB4
+	thumb_func_end LinkPartnerHandleLoadPokeSprite
 
-	thumb_func_start sub_80D5ED0
-sub_80D5ED0: @ 80D5ED0
+	thumb_func_start LinkPartnerHandleSendOutPoke
+LinkPartnerHandleSendOutPoke: @ 80D5ED0
 	push {r4-r6,lr}
 	ldr r5, _080D5F28 @ =gUnknown_2023BC4
 	ldrb r0, [r5]
@@ -3513,7 +3513,7 @@ _080D5F30: .4byte gUnknown_2023BCE
 _080D5F34: .4byte gUnknown_2024284
 _080D5F38: .4byte gUnknown_3004FE0
 _080D5F3C: .4byte sub_80D4944
-	thumb_func_end sub_80D5ED0
+	thumb_func_end LinkPartnerHandleSendOutPoke
 
 	thumb_func_start sub_80D5F40
 sub_80D5F40: @ 80D5F40
@@ -3681,8 +3681,8 @@ _080D60A4: .4byte gUnknown_2024024
 _080D60A8: .4byte nullsub_8
 	thumb_func_end sub_80D5F40
 
-	thumb_func_start sub_80D60AC
-sub_80D60AC: @ 80D60AC
+	thumb_func_start LinkPartnerHandleReturnPokeToBall
+LinkPartnerHandleReturnPokeToBall: @ 80D60AC
 	push {r4-r6,lr}
 	ldr r1, _080D60E0 @ =gUnknown_2022BC4
 	ldr r6, _080D60E4 @ =gUnknown_2023BC4
@@ -3746,7 +3746,7 @@ _080D612A:
 _080D6130: .4byte gUnknown_2023D44
 _080D6134: .4byte gUnknown_202063C
 _080D6138: .4byte gUnknown_3004FF0
-	thumb_func_end sub_80D60AC
+	thumb_func_end LinkPartnerHandleReturnPokeToBall
 
 	thumb_func_start sub_80D613C
 sub_80D613C: @ 80D613C
@@ -4973,8 +4973,8 @@ sub_80D6AD0: @ 80D6AD0
 	bx r0
 	thumb_func_end sub_80D6AD0
 
-	thumb_func_start sub_80D6ADC
-sub_80D6ADC: @ 80D6ADC
+	thumb_func_start LinkPartnerHandlecmd37
+LinkPartnerHandlecmd37: @ 80D6ADC
 	push {lr}
 	ldr r2, _080D6AF4 @ =gUnknown_2022870
 	ldrb r1, [r2]
@@ -4987,10 +4987,10 @@ sub_80D6ADC: @ 80D6ADC
 	bx r0
 	.align 2, 0
 _080D6AF4: .4byte gUnknown_2022870
-	thumb_func_end sub_80D6ADC
+	thumb_func_end LinkPartnerHandlecmd37
 
-	thumb_func_start sub_80D6AF8
-sub_80D6AF8: @ 80D6AF8
+	thumb_func_start LinkPartnerHandlecmd38
+LinkPartnerHandlecmd38: @ 80D6AF8
 	push {lr}
 	ldr r3, _080D6B24 @ =gUnknown_2022870
 	ldr r1, _080D6B28 @ =gUnknown_2022BC4
@@ -5015,10 +5015,10 @@ sub_80D6AF8: @ 80D6AF8
 _080D6B24: .4byte gUnknown_2022870
 _080D6B28: .4byte gUnknown_2022BC4
 _080D6B2C: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80D6AF8
+	thumb_func_end LinkPartnerHandlecmd38
 
-	thumb_func_start sub_80D6B30
-sub_80D6B30: @ 80D6B30
+	thumb_func_start LinkPartnerHandlecmd39
+LinkPartnerHandlecmd39: @ 80D6B30
 	push {lr}
 	ldr r2, _080D6B44 @ =gUnknown_2022870
 	ldrb r1, [r2]
@@ -5030,10 +5030,10 @@ sub_80D6B30: @ 80D6B30
 	bx r0
 	.align 2, 0
 _080D6B44: .4byte gUnknown_2022870
-	thumb_func_end sub_80D6B30
+	thumb_func_end LinkPartnerHandlecmd39
 
-	thumb_func_start sub_80D6B48
-sub_80D6B48: @ 80D6B48
+	thumb_func_start LinkPartnerHandlecmd40
+LinkPartnerHandlecmd40: @ 80D6B48
 	push {lr}
 	ldr r3, _080D6B6C @ =gUnknown_2022870
 	ldr r1, [r3]
@@ -5052,10 +5052,10 @@ sub_80D6B48: @ 80D6B48
 	bx r0
 	.align 2, 0
 _080D6B6C: .4byte gUnknown_2022870
-	thumb_func_end sub_80D6B48
+	thumb_func_end LinkPartnerHandlecmd40
 
-	thumb_func_start sub_80D6B70
-sub_80D6B70: @ 80D6B70
+	thumb_func_start LinkPartnerHandleHitAnimation
+LinkPartnerHandleHitAnimation: @ 80D6B70
 	push {r4,lr}
 	ldr r3, _080D6B98 @ =gUnknown_202063C
 	ldr r2, _080D6B9C @ =gUnknown_2023D44
@@ -5107,7 +5107,7 @@ _080D6BCE:
 _080D6BD4: .4byte gUnknown_2024005
 _080D6BD8: .4byte gUnknown_3004FE0
 _080D6BDC: .4byte sub_80D4730
-	thumb_func_end sub_80D6B70
+	thumb_func_end LinkPartnerHandleHitAnimation
 
 	thumb_func_start sub_80D6BE0
 sub_80D6BE0: @ 80D6BE0
@@ -5117,8 +5117,8 @@ sub_80D6BE0: @ 80D6BE0
 	bx r0
 	thumb_func_end sub_80D6BE0
 
-	thumb_func_start sub_80D6BEC
-sub_80D6BEC: @ 80D6BEC
+	thumb_func_start LinkPartnerHandleEffectivenessSound
+LinkPartnerHandleEffectivenessSound: @ 80D6BEC
 	push {r4,lr}
 	ldr r4, _080D6C28 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -5150,10 +5150,10 @@ _080D6C00:
 	.align 2, 0
 _080D6C28: .4byte gUnknown_2023BC4
 _080D6C2C: .4byte gUnknown_2022BC4
-	thumb_func_end sub_80D6BEC
+	thumb_func_end LinkPartnerHandleEffectivenessSound
 
-	thumb_func_start sub_80D6C30
-sub_80D6C30: @ 80D6C30
+	thumb_func_start LinkPartnerHandlecmd44
+LinkPartnerHandlecmd44: @ 80D6C30
 	push {lr}
 	ldr r2, _080D6C58 @ =gUnknown_2022BC4
 	ldr r0, _080D6C5C @ =gUnknown_2023BC4
@@ -5174,10 +5174,10 @@ sub_80D6C30: @ 80D6C30
 	.align 2, 0
 _080D6C58: .4byte gUnknown_2022BC4
 _080D6C5C: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80D6C30
+	thumb_func_end LinkPartnerHandlecmd44
 
-	thumb_func_start sub_80D6C60
-sub_80D6C60: @ 80D6C60
+	thumb_func_start LinkPartnerHandleFaintingCry
+LinkPartnerHandleFaintingCry: @ 80D6C60
 	push {lr}
 	ldr r1, _080D6C94 @ =gUnknown_2023BCE
 	ldr r0, _080D6C98 @ =gUnknown_2023BC4
@@ -5204,10 +5204,10 @@ sub_80D6C60: @ 80D6C60
 _080D6C94: .4byte gUnknown_2023BCE
 _080D6C98: .4byte gUnknown_2023BC4
 _080D6C9C: .4byte gUnknown_2024284
-	thumb_func_end sub_80D6C60
+	thumb_func_end LinkPartnerHandleFaintingCry
 
-	thumb_func_start sub_80D6CA0
-sub_80D6CA0: @ 80D6CA0
+	thumb_func_start LinkPartnerHandleIntroSlide
+LinkPartnerHandleIntroSlide: @ 80D6CA0
 	push {lr}
 	ldr r1, _080D6CC8 @ =gUnknown_2022BC4
 	ldr r0, _080D6CCC @ =gUnknown_2023BC4
@@ -5229,7 +5229,7 @@ sub_80D6CA0: @ 80D6CA0
 _080D6CC8: .4byte gUnknown_2022BC4
 _080D6CCC: .4byte gUnknown_2023BC4
 _080D6CD0: .4byte gUnknown_2023F4C
-	thumb_func_end sub_80D6CA0
+	thumb_func_end LinkPartnerHandleIntroSlide
 
 	thumb_func_start sub_80D6CD4
 sub_80D6CD4: @ 80D6CD4
@@ -5771,8 +5771,8 @@ sub_80D7138: @ 80D7138
 	bx r0
 	thumb_func_end sub_80D7138
 
-	thumb_func_start sub_80D7144
-sub_80D7144: @ 80D7144
+	thumb_func_start LinkPartnerHandleSpriteInvisibility
+LinkPartnerHandleSpriteInvisibility: @ 80D7144
 	push {r4,lr}
 	ldr r4, _080D7194 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -5816,10 +5816,10 @@ _080D7194: .4byte gUnknown_2023BC4
 _080D7198: .4byte gUnknown_202063C
 _080D719C: .4byte gUnknown_2023D44
 _080D71A0: .4byte gUnknown_2022BC4
-	thumb_func_end sub_80D7144
+	thumb_func_end LinkPartnerHandleSpriteInvisibility
 
-	thumb_func_start sub_80D71A4
-sub_80D71A4: @ 80D71A4
+	thumb_func_start LinkPartnerHandleBattleAnimation
+LinkPartnerHandleBattleAnimation: @ 80D71A4
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, _080D71E8 @ =gUnknown_2023BC4
@@ -5869,7 +5869,7 @@ _080D71FC:
 	.align 2, 0
 _080D7204: .4byte gUnknown_3004FE0
 _080D7208: .4byte sub_80D4A90
-	thumb_func_end sub_80D71A4
+	thumb_func_end LinkPartnerHandleBattleAnimation
 
 	thumb_func_start sub_80D720C
 sub_80D720C: @ 80D720C
@@ -5887,8 +5887,8 @@ sub_80D7218: @ 80D7218
 	bx r0
 	thumb_func_end sub_80D7218
 
-	thumb_func_start sub_80D7224
-sub_80D7224: @ 80D7224
+	thumb_func_start LinkPartnerHandlecmd55
+LinkPartnerHandlecmd55: @ 80D7224
 	push {r4,lr}
 	ldr r2, _080D725C @ =gUnknown_2023E8A
 	ldr r1, _080D7260 @ =gUnknown_2022BC4
@@ -5919,7 +5919,7 @@ _080D7260: .4byte gUnknown_2022BC4
 _080D7264: .4byte gUnknown_2023BC4
 _080D7268: .4byte gUnknown_3004FE0
 _080D726C: .4byte sub_802F6A8
-	thumb_func_end sub_80D7224
+	thumb_func_end LinkPartnerHandlecmd55
 
 	thumb_func_start nullsub_78
 nullsub_78: @ 80D7270

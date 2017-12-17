@@ -10834,7 +10834,7 @@ _080A756E:
 	lsls r5, 16
 	asrs r5, 16
 	adds r1, r5, 0
-	bl .gcc2_compiled._3
+	bl sub_80D8AA0
 	adds r4, r0, 0
 	lsls r4, 16
 	asrs r4, 16
@@ -10846,13 +10846,13 @@ _080A756E:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl .gcc2_compiled._3
+	bl sub_80D8AA0
 	strh r0, [r7, 0x34]
 	mov r1, r8
 	lsls r0, r1, 16
 	asrs r0, 16
 	adds r1, r5, 0
-	bl .gcc2_compiled._3
+	bl sub_80D8AA0
 	adds r4, r0, 0
 	lsls r4, 16
 	asrs r4, 16
@@ -10862,7 +10862,7 @@ _080A756E:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl .gcc2_compiled._3
+	bl sub_80D8AA0
 	strh r0, [r7, 0x36]
 	ldr r0, _080A75E0 @ =sub_80A7400
 	str r0, [r7, 0x1C]
@@ -11226,7 +11226,7 @@ _080A788A:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl .gcc2_compiled._3
+	bl sub_80D8AA0
 	ldr r2, _080A7904 @ =gUnknown_3005090
 	mov r3, r8
 	adds r1, r3, r7
@@ -11236,7 +11236,7 @@ _080A788A:
 	movs r1, 0x12
 	ldrsh r0, [r6, r1]
 	movs r1, 0x80
-	bl .gcc2_compiled._3
+	bl sub_80D8AA0
 	strh r0, [r6, 0x14]
 	ldrh r0, [r5, 0x4]
 	strh r0, [r6, 0x16]
@@ -11257,7 +11257,7 @@ _080A788A:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl .gcc2_compiled._3
+	bl sub_80D8AA0
 	movs r1, 0x2
 	negs r1, r1
 	ands r1, r0
@@ -11277,7 +11277,7 @@ _080A7908:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl .gcc2_compiled._3
+	bl sub_80D8AA0
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r6, 0x18]
@@ -38055,8 +38055,8 @@ _080B480A:
 	bx r0
 	thumb_func_end sub_80B47C4
 
-	thumb_func_start sub_80B4810
-sub_80B4810: @ 80B4810
+	thumb_func_start do_boulder_dust
+do_boulder_dust: @ 80B4810
 	push {r4-r6,lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -38161,7 +38161,7 @@ _080B48FC: .4byte gUnknown_2037F02
 _080B4900: .4byte gUnknown_2037F1A
 _080B4904: .4byte gUnknown_3005090
 _080B4908: .4byte sub_80B490C
-	thumb_func_end sub_80B4810
+	thumb_func_end do_boulder_dust
 
 	thumb_func_start sub_80B490C
 sub_80B490C: @ 80B490C

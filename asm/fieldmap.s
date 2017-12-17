@@ -182,25 +182,25 @@ _08058B08:
 	b _08058B44
 _08058B12:
 	adds r0, r6, 0
-	bl sub_8058BB8
+	bl fillSouthConnection
 	ldrb r0, [r4]
 	movs r1, 0x1
 	b _08058B40
 _08058B1E:
 	adds r0, r6, 0
-	bl sub_8058C20
+	bl fillNorthConnection
 	ldrb r0, [r4]
 	movs r1, 0x2
 	b _08058B40
 _08058B2A:
 	adds r0, r6, 0
-	bl sub_8058C80
+	bl fillWestConnection
 	ldrb r0, [r4]
 	movs r1, 0x4
 	b _08058B40
 _08058B36:
 	adds r0, r6, 0
-	bl sub_8058CE0
+	bl fillEastConnection
 	ldrb r0, [r4]
 	movs r1, 0x8
 _08058B40:
@@ -271,8 +271,8 @@ _08058BB0: .4byte gUnknown_3005040
 _08058BB4: .4byte 0x001fffff
 	thumb_func_end sub_8058B54
 
-	thumb_func_start sub_8058BB8
-sub_8058BB8: @ 8058BB8
+	thumb_func_start fillSouthConnection
+fillSouthConnection: @ 8058BB8
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r3, r0, 0
@@ -326,10 +326,10 @@ _08058C12:
 	bx r0
 	.align 2, 0
 _08058C1C: .4byte gUnknown_3005040
-	thumb_func_end sub_8058BB8
+	thumb_func_end fillSouthConnection
 
-	thumb_func_start sub_8058C20
-sub_8058C20: @ 8058C20
+	thumb_func_start fillNorthConnection
+fillNorthConnection: @ 8058C20
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r5, r1, 0
@@ -380,10 +380,10 @@ _08058C74:
 	bx r0
 	.align 2, 0
 _08058C7C: .4byte gUnknown_3005040
-	thumb_func_end sub_8058C20
+	thumb_func_end fillNorthConnection
 
-	thumb_func_start sub_8058C80
-sub_8058C80: @ 8058C80
+	thumb_func_start fillWestConnection
+fillWestConnection: @ 8058C80
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r5, r1, 0
@@ -434,10 +434,10 @@ _08058CD4:
 	bx r0
 	.align 2, 0
 _08058CDC: .4byte gUnknown_3005040
-	thumb_func_end sub_8058C80
+	thumb_func_end fillWestConnection
 
-	thumb_func_start sub_8058CE0
-sub_8058CE0: @ 8058CE0
+	thumb_func_start fillEastConnection
+fillEastConnection: @ 8058CE0
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r3, r0, 0
@@ -490,7 +490,7 @@ _08058D38:
 	bx r0
 	.align 2, 0
 _08058D40: .4byte gUnknown_3005040
-	thumb_func_end sub_8058CE0
+	thumb_func_end fillEastConnection
 
 	thumb_func_start MapGridGetZCoordAt
 MapGridGetZCoordAt: @ 8058D44

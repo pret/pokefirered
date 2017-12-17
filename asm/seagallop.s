@@ -293,7 +293,7 @@ sub_81470CC: @ 81470CC
 	asrs r0, 16
 	cmp r0, 0x8C
 	bne _081470FA
-	bl sub_8055FD4
+	bl Overworld_FadeOutMapMusic
 	bl sub_807DC18
 	ldr r0, _08147104 @ =sub_8147108
 	str r0, [r4]

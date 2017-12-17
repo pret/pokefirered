@@ -164,19 +164,19 @@ sub_806EE7C: @ 806EE7C
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0806EF04 @ =gUnknown_2021CF0
 	movs r1, 0x96
 	lsls r1, 2
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r0, _0806EF08 @ =gUnknown_2021D04
 	ldr r1, _0806EF0C @ =gUnknown_2039994
 	ldrb r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r5, _0806EF10 @ =gUnknown_2021D18
 	ldr r1, _0806EF14 @ =gUnknown_84162A9
 	adds r0, r5, 0
@@ -1603,7 +1603,7 @@ sub_806F9B8: @ 806F9B8
 	movs r0, 0x30
 	bl sub_80722CC
 	ldr r1, _0806F9D8 @ =gUnknown_3000FA4
-	ldr r0, _0806F9DC @ =sub_806F9E0
+	ldr r0, _0806F9DC @ =SaveDialogCB_ReturnSuccess
 	str r0, [r1]
 _0806F9D0:
 	movs r0, 0
@@ -1611,11 +1611,11 @@ _0806F9D0:
 	bx r1
 	.align 2, 0
 _0806F9D8: .4byte gUnknown_3000FA4
-_0806F9DC: .4byte sub_806F9E0
+_0806F9DC: .4byte SaveDialogCB_ReturnSuccess
 	thumb_func_end sub_806F9B8
 
-	thumb_func_start sub_806F9E0
-sub_806F9E0: @ 806F9E0
+	thumb_func_start SaveDialogCB_ReturnSuccess
+SaveDialogCB_ReturnSuccess: @ 806F9E0
 	push {lr}
 	bl IsSEPlaying
 	lsls r0, 24
@@ -1633,7 +1633,7 @@ _0806F9FE:
 _0806FA00:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806F9E0
+	thumb_func_end SaveDialogCB_ReturnSuccess
 
 	thumb_func_start sub_806FA04
 sub_806FA04: @ 806FA04
@@ -1645,7 +1645,7 @@ sub_806FA04: @ 806FA04
 	movs r0, 0x16
 	bl sub_80722CC
 	ldr r1, _0806FA24 @ =gUnknown_3000FA4
-	ldr r0, _0806FA28 @ =sub_806FA2C
+	ldr r0, _0806FA28 @ =SaveDialogCB_ReturnError
 	str r0, [r1]
 _0806FA1C:
 	movs r0, 0
@@ -1653,11 +1653,11 @@ _0806FA1C:
 	bx r1
 	.align 2, 0
 _0806FA24: .4byte gUnknown_3000FA4
-_0806FA28: .4byte sub_806FA2C
+_0806FA28: .4byte SaveDialogCB_ReturnError
 	thumb_func_end sub_806FA04
 
-	thumb_func_start sub_806FA2C
-sub_806FA2C: @ 806FA2C
+	thumb_func_start SaveDialogCB_ReturnError
+SaveDialogCB_ReturnError: @ 806FA2C
 	push {lr}
 	bl sub_806F778
 	lsls r0, 24
@@ -1671,7 +1671,7 @@ _0806FA40:
 _0806FA42:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806FA2C
+	thumb_func_end SaveDialogCB_ReturnError
 
 	thumb_func_start sub_806FA48
 sub_806FA48: @ 806FA48

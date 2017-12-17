@@ -372,7 +372,7 @@ _0807F0AC: .4byte gUnknown_83C68D4
 	thumb_func_start sub_807F0B0
 sub_807F0B0: @ 807F0B0
 	push {lr}
-	bl sub_8055FD4
+	bl Overworld_FadeOutMapMusic
 	ldr r0, _0807F0C4 @ =task50_0807F0C8
 	movs r1, 0x50
 	bl CreateTask

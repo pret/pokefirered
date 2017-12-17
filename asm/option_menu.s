@@ -925,7 +925,7 @@ _08088A9C:
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	add r0, sp, 0xC
 	adds r1, r4, 0
 	movs r2, 0x3

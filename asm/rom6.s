@@ -279,8 +279,8 @@ _080C99D0: .4byte gUnknown_3005090
 _080C99D4: .4byte gUnknown_2037078
 	thumb_func_end sub_80C99A0
 
-	thumb_func_start sub_80C99D8
-sub_80C99D8: @ 80C99D8
+	thumb_func_start SetUpFieldMove_RockSmash
+SetUpFieldMove_RockSmash: @ 80C99D8
 	push {lr}
 	movs r0, 0x60
 	bl npc_before_player_of_type
@@ -306,7 +306,7 @@ _080C9A00: .4byte gUnknown_3005024
 _080C9A04: .4byte hm_add_c3_launch_phase_2
 _080C9A08: .4byte gUnknown_203B0C4
 _080C9A0C: .4byte sub_80C9A10
-	thumb_func_end sub_80C99D8
+	thumb_func_end SetUpFieldMove_RockSmash
 
 	thumb_func_start sub_80C9A10
 sub_80C9A10: @ 80C9A10
@@ -362,8 +362,8 @@ sub_80C9A60: @ 80C9A60
 	bx r0
 	thumb_func_end sub_80C9A60
 
-	thumb_func_start sub_80C9A78
-sub_80C9A78: @ 80C9A78
+	thumb_func_start SetUpFieldMove_Dig
+SetUpFieldMove_Dig: @ 80C9A78
 	push {lr}
 	bl sub_80A1B8C
 	lsls r0, 24
@@ -388,7 +388,7 @@ _080C9A9C: .4byte gUnknown_3005024
 _080C9AA0: .4byte hm_add_c3_launch_phase_2
 _080C9AA4: .4byte gUnknown_203B0C4
 _080C9AA8: .4byte hm2_dig
-	thumb_func_end sub_80C9A78
+	thumb_func_end SetUpFieldMove_Dig
 
 	thumb_func_start hm2_dig
 hm2_dig: @ 80C9AAC

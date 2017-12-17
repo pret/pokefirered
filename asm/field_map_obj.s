@@ -975,7 +975,7 @@ RemoveFieldObjectInternal: @ 805E510
 	sub sp, 0x8
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	ldrh r2, [r0, 0x6]
 	ldr r1, _0805E554 @ =0xffff0000
 	ldr r0, [sp, 0x4]
@@ -1074,7 +1074,7 @@ _0805E5CA:
 	ldr r1, _0805E5F4 @ =gUnknown_2036E38
 	adds r5, r0, r1
 	ldrb r0, [r5, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r6, r0, 0
 	ldrb r1, [r6, 0xC]
 	movs r0, 0xF
@@ -1266,7 +1266,7 @@ SpawnFieldObject: @ 805E72C
 	str r0, [sp, 0x20]
 	mov r1, r9
 	ldrb r0, [r1, 0x1]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r7, r0, 0
 	add r2, sp, 0x20
 	mov r0, r9
@@ -1478,7 +1478,7 @@ sub_805E8E8: @ 805E8E8
 	adds r7, r3, 0
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r5, r0, 0
 	ldrh r0, [r5]
 	strh r0, [r4]
@@ -1643,7 +1643,7 @@ sub_805E9F8: @ 805E9F8
 	lsrs r4, 24
 	str r4, [sp, 0x20]
 	adds r0, r5, 0
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r4, r0, 0
 	ldr r1, _0805EB38 @ =sub_8068FA8
 	add r3, sp, 0x1C
@@ -1793,7 +1793,7 @@ sub_805EB44: @ 805EB44
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r7, r0, 0
 	ldr r1, _0805EC24 @ =nullsub_8
 	add r3, sp, 0x18
@@ -2212,7 +2212,7 @@ _0805EE70:
 	movs r0, 0
 	str r0, [sp, 0x20]
 	ldrb r0, [r6, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r5, r0, 0
 	ldrh r2, [r5, 0x6]
 	ldr r1, _0805EFE8 @ =0xffff0000
@@ -2453,7 +2453,7 @@ sub_805F060: @ 805F060
 	lsrs r1, 24
 	str r1, [sp]
 	adds r0, r1, 0
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r5, r0, 0
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 4
@@ -2756,8 +2756,8 @@ PlayerObjectTurn: @ 805F2A8
 _0805F2C4: .4byte gUnknown_2036E38
 	thumb_func_end PlayerObjectTurn
 
-	thumb_func_start sub_805F2C8
-sub_805F2C8: @ 805F2C8
+	thumb_func_start GetFieldObjectGraphicsInfo
+GetFieldObjectGraphicsInfo: @ 805F2C8
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -2782,7 +2782,7 @@ _0805F2E6:
 	bx r1
 	.align 2, 0
 _0805F2F4: .4byte gUnknown_839FDB0
-	thumb_func_end sub_805F2C8
+	thumb_func_end GetFieldObjectGraphicsInfo
 
 	thumb_func_start FieldObjectHandleDynamicGraphicsId
 FieldObjectHandleDynamicGraphicsId: @ 805F2F8
@@ -3395,7 +3395,7 @@ sub_805F724: @ 805F724
 	ldr r1, _0805F7C0 @ =gUnknown_202063C
 	adds r7, r0, r1
 	ldrb r0, [r6, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	mov r8, r0
 	lsls r4, 16
 	asrs r4, 16
@@ -12683,8 +12683,8 @@ _08063978:
 	bx r1
 	thumb_func_end CheckForCollisionBetweenFieldObjects
 
-	thumb_func_start sub_8063980
-sub_8063980: @ 8063980
+	thumb_func_start IsBerryTreeSparkling
+IsBerryTreeSparkling: @ 8063980
 	push {lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -12727,7 +12727,7 @@ _080639CE:
 	add sp, 0x4
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8063980
+	thumb_func_end IsBerryTreeSparkling
 
 	thumb_func_start sub_80639D4
 sub_80639D4: @ 80639D4
@@ -17835,8 +17835,8 @@ _08065DE8:
 	bx r1
 	thumb_func_end sub_8065DD0
 
-	thumb_func_start sub_8065DF0
-sub_8065DF0: @ 8065DF0
+	thumb_func_start do_run_south_anim
+do_run_south_anim: @ 8065DF0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17850,7 +17850,7 @@ sub_8065DF0: @ 8065DF0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065DF0
+	thumb_func_end do_run_south_anim
 
 	thumb_func_start sub_8065E10
 sub_8065E10: @ 8065E10
@@ -17872,8 +17872,8 @@ _08065E28:
 	bx r1
 	thumb_func_end sub_8065E10
 
-	thumb_func_start sub_8065E30
-sub_8065E30: @ 8065E30
+	thumb_func_start do_run_north_anim
+do_run_north_anim: @ 8065E30
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17887,7 +17887,7 @@ sub_8065E30: @ 8065E30
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065E30
+	thumb_func_end do_run_north_anim
 
 	thumb_func_start sub_8065E50
 sub_8065E50: @ 8065E50
@@ -17909,8 +17909,8 @@ _08065E68:
 	bx r1
 	thumb_func_end sub_8065E50
 
-	thumb_func_start sub_8065E70
-sub_8065E70: @ 8065E70
+	thumb_func_start do_run_west_anim
+do_run_west_anim: @ 8065E70
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17924,7 +17924,7 @@ sub_8065E70: @ 8065E70
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065E70
+	thumb_func_end do_run_west_anim
 
 	thumb_func_start sub_8065E90
 sub_8065E90: @ 8065E90
@@ -17946,8 +17946,8 @@ _08065EA8:
 	bx r1
 	thumb_func_end sub_8065E90
 
-	thumb_func_start sub_8065EB0
-sub_8065EB0: @ 8065EB0
+	thumb_func_start do_run_east_anim
+do_run_east_anim: @ 8065EB0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17961,7 +17961,7 @@ sub_8065EB0: @ 8065EB0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065EB0
+	thumb_func_end do_run_east_anim
 
 	thumb_func_start sub_8065ED0
 sub_8065ED0: @ 8065ED0
@@ -19417,7 +19417,7 @@ sub_80668D4: @ 80668D4
 	adds r4, r0, 0
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	ldrb r1, [r0, 0xC]
 	lsls r1, 25
 	lsrs r1, 31
@@ -21913,7 +21913,7 @@ sub_8067A10: @ 8067A10
 	ands r0, r1
 	strb r0, [r5, 0x1]
 	ldrb r0, [r5, 0x5]
-	bl sub_805F2C8
+	bl GetFieldObjectGraphicsInfo
 	adds r7, r0, 0
 	adds r0, r4, 0
 	adds r0, 0x3E

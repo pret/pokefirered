@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80D972C
-sub_80D972C: @ 80D972C
+	thumb_func_start ClearSaveData
+ClearSaveData: @ 80D972C
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _080D974C @ =EraseFlashSector
@@ -24,7 +24,7 @@ _080D9732:
 	bx r0
 	.align 2, 0
 _080D974C: .4byte EraseFlashSector
-	thumb_func_end sub_80D972C
+	thumb_func_end ClearSaveData
 
 	thumb_func_start ResetSaveCounters
 ResetSaveCounters: @ 80D9750

@@ -473,7 +473,7 @@ _080984B4:
 	adds r0, r2, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r2, r0, 0
 	adds r1, r2, 0
 	movs r0, 0xC0

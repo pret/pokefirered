@@ -1462,7 +1462,7 @@ sub_800CED4: @ 800CED4
 	add r0, sp, 0xC
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xF0
 	strb r1, [r0]
 	adds r0, 0x1
@@ -1470,7 +1470,7 @@ sub_800CED4: @ 800CED4
 	ldrb r1, [r1, 0x10]
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	add r0, sp, 0xC
@@ -1530,7 +1530,7 @@ _0800CF6A:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _0800CFC0 @ =gUnknown_841B6EB
 	bl StringAppend
 	str r5, [sp]
@@ -1591,7 +1591,7 @@ _0800CFE2:
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _0800D040 @ =gUnknown_841B6F3
 	bl StringAppend
 	str r5, [sp]

@@ -434,7 +434,7 @@ _0814F542:
 	adds r0, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	cmp r4, 0x3
 	beq _0814F578
 	lsrs r0, r7, 24

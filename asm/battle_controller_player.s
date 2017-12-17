@@ -10,8 +10,8 @@ nullsub_13: @ 802E310
 	bx lr
 	thumb_func_end nullsub_13
 
-	thumb_func_start sub_802E314
-sub_802E314: @ 802E314
+	thumb_func_start SetBankFuncToPlayerBufferRunCommand
+SetBankFuncToPlayerBufferRunCommand: @ 802E314
 	ldr r1, _0802E32C @ =gUnknown_3004FE0
 	ldr r0, _0802E330 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -28,7 +28,7 @@ _0802E32C: .4byte gUnknown_3004FE0
 _0802E330: .4byte gUnknown_2023BC4
 _0802E334: .4byte PlayerBufferRunCommand
 _0802E338: .4byte gUnknown_2024005
-	thumb_func_end sub_802E314
+	thumb_func_end SetBankFuncToPlayerBufferRunCommand
 
 	thumb_func_start PlayerBufferExecCompleted
 PlayerBufferExecCompleted: @ 802E33C
@@ -4648,7 +4648,7 @@ MoveSelectionDisplayPpNumber: @ 80308CC
 	adds r0, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xBA
 	strb r1, [r0]
 	adds r0, 0x1
@@ -4660,7 +4660,7 @@ MoveSelectionDisplayPpNumber: @ 80308CC
 	ldrb r1, [r4]
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r6, 0
 	movs r1, 0x9
 	bl sub_80D87BC
@@ -7561,8 +7561,8 @@ _08032158: .4byte gUnknown_2024024
 _0803215C: .4byte nullsub_8
 	thumb_func_end sub_8031FF4
 
-	thumb_func_start sub_8032160
-sub_8032160: @ 8032160
+	thumb_func_start PlayerHandleReturnPokeToBall
+PlayerHandleReturnPokeToBall: @ 8032160
 	push {r4-r6,lr}
 	ldr r1, _08032194 @ =gUnknown_2022BC4
 	ldr r6, _08032198 @ =gUnknown_2023BC4
@@ -7626,7 +7626,7 @@ _080321DE:
 _080321E4: .4byte gUnknown_2023D44
 _080321E8: .4byte gUnknown_202063C
 _080321EC: .4byte gUnknown_3004FF0
-	thumb_func_end sub_8032160
+	thumb_func_end PlayerHandleReturnPokeToBall
 
 	thumb_func_start sub_80321F0
 sub_80321F0: @ 80321F0
@@ -9848,8 +9848,8 @@ _080333CC: .4byte gUnknown_2023BC4
 _080333D0: .4byte gUnknown_2022BC4
 	thumb_func_end PlayerHandlePlaySE
 
-	thumb_func_start sub_80333D4
-sub_80333D4: @ 80333D4
+	thumb_func_start PlayerHandlecmd44
+PlayerHandlecmd44: @ 80333D4
 	push {lr}
 	ldr r2, _080333FC @ =gUnknown_2022BC4
 	ldr r0, _08033400 @ =gUnknown_2023BC4
@@ -9870,7 +9870,7 @@ sub_80333D4: @ 80333D4
 	.align 2, 0
 _080333FC: .4byte gUnknown_2022BC4
 _08033400: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80333D4
+	thumb_func_end PlayerHandlecmd44
 
 	thumb_func_start PlayerHandleFaintingCry
 PlayerHandleFaintingCry: @ 8033404
@@ -10513,8 +10513,8 @@ _08033944: .4byte gUnknown_2023D44
 _08033948: .4byte gUnknown_2022BC4
 	thumb_func_end PlayerHandleSpriteInvisibility
 
-	thumb_func_start sub_803394C
-sub_803394C: @ 803394C
+	thumb_func_start PlayerHandleBattleAnimation
+PlayerHandleBattleAnimation: @ 803394C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, _08033990 @ =gUnknown_2023BC4
@@ -10564,10 +10564,10 @@ _080339A4:
 	.align 2, 0
 _080339AC: .4byte gUnknown_3004FE0
 _080339B0: .4byte CompleteOnFinishedBattleAnimation
-	thumb_func_end sub_803394C
+	thumb_func_end PlayerHandleBattleAnimation
 
-	thumb_func_start sub_80339B4
-sub_80339B4: @ 80339B4
+	thumb_func_start PlayerHandleLinkStandbyMsg
+PlayerHandleLinkStandbyMsg: @ 80339B4
 	push {r4,lr}
 	ldr r1, _080339D4 @ =gUnknown_2022BC4
 	ldr r0, _080339D8 @ =gUnknown_2023BC4
@@ -10610,10 +10610,10 @@ _08033A04:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80339B4
+	thumb_func_end PlayerHandleLinkStandbyMsg
 
-	thumb_func_start sub_8033A10
-sub_8033A10: @ 8033A10
+	thumb_func_start PlayerHandleResetActionMoveSelection
+PlayerHandleResetActionMoveSelection: @ 8033A10
 	push {r4,lr}
 	ldr r1, _08033A30 @ =gUnknown_2022BC4
 	ldr r4, _08033A34 @ =gUnknown_2023BC4
@@ -10666,10 +10666,10 @@ _08033A68:
 	bx r0
 	.align 2, 0
 _08033A74: .4byte gUnknown_2023FFC
-	thumb_func_end sub_8033A10
+	thumb_func_end PlayerHandleResetActionMoveSelection
 
-	thumb_func_start sub_8033A78
-sub_8033A78: @ 8033A78
+	thumb_func_start PlayerHandlecmd55
+PlayerHandlecmd55: @ 8033A78
 	push {r4,lr}
 	ldr r2, _08033AB0 @ =gUnknown_2023E8A
 	ldr r1, _08033AB4 @ =gUnknown_2022BC4
@@ -10700,7 +10700,7 @@ _08033AB4: .4byte gUnknown_2022BC4
 _08033AB8: .4byte gUnknown_2023BC4
 _08033ABC: .4byte gUnknown_3004FE0
 _08033AC0: .4byte sub_802F6A8
-	thumb_func_end sub_8033A78
+	thumb_func_end PlayerHandlecmd55
 
 	thumb_func_start nullsub_15
 nullsub_15: @ 8033AC4

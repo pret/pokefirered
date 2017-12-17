@@ -112,7 +112,7 @@ _080695F6:
 	cmp r0, 0
 	blt _0806961E
 	adds r0, r1, 0
-	bl sub_80688E4
+	bl FreezeMapObject
 	movs r0, 0x1
 	strh r0, [r5, 0xA]
 _0806961E:
@@ -161,7 +161,7 @@ LockSelectedMapObject: @ 806966C
 	push {r4,r5,lr}
 	ldr r4, _080696B0 @ =gUnknown_3005074
 	ldrb r0, [r4]
-	bl sub_80689B0
+	bl FreezeMapObjectsExceptOne
 	ldr r0, _080696B4 @ =sub_80695CC
 	movs r1, 0x50
 	bl CreateTask
@@ -178,7 +178,7 @@ LockSelectedMapObject: @ 806966C
 	cmp r0, 0
 	blt _080696AA
 	adds r0, r1, 0
-	bl sub_80688E4
+	bl FreezeMapObject
 	ldr r0, _080696BC @ =gUnknown_3005090
 	lsls r1, r5, 2
 	adds r1, r5

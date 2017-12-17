@@ -185,7 +185,7 @@ sub_80A07E4: @ 80A07E4
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x8
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _080A0828 @ =gUnknown_8417FB9
 	bl StringAppend
 	adds r4, r0, 0
@@ -196,7 +196,7 @@ sub_80A07E4: @ 80A07E4
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	pop {r4,r5}
 	pop {r0}
 	bx r0

@@ -332,7 +332,7 @@ _0804C8E2:
 	.align 2, 0
 _0804C8F0: .4byte gUnknown_2031DA8
 _0804C8F4:
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800A944
 	lsls r4, 24
@@ -381,7 +381,7 @@ _0804C950:
 	beq _0804C95A
 	b _0804CEE6
 _0804C95A:
-	bl sub_800A1F0
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3152,8 +3152,8 @@ _0804E06C:
 	bx r1
 	thumb_func_end sub_804E028
 
-	thumb_func_start sub_804E074
-sub_804E074: @ 804E074
+	thumb_func_start TradeMenuMoveCursor
+TradeMenuMoveCursor: @ 804E074
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	lsls r1, 24
@@ -3246,7 +3246,7 @@ _0804E120:
 _0804E128: .4byte gUnknown_2031DA8
 _0804E12C: .4byte gUnknown_202063C
 _0804E130: .4byte gUnknown_8261E40
-	thumb_func_end sub_804E074
+	thumb_func_end TradeMenuMoveCursor
 
 	thumb_func_start sub_804E134
 sub_804E134: @ 804E134
@@ -3309,7 +3309,7 @@ sub_804E194: @ 804E194
 	ldr r0, [r0]
 	adds r0, 0x35
 	movs r1, 0
-	bl sub_804E074
+	bl TradeMenuMoveCursor
 	b _0804E208
 	.align 2, 0
 _0804E1B4: .4byte gUnknown_30030F0
@@ -3323,7 +3323,7 @@ _0804E1BC:
 	ldr r0, [r0]
 	adds r0, 0x35
 	movs r1, 0x1
-	bl sub_804E074
+	bl TradeMenuMoveCursor
 	b _0804E208
 	.align 2, 0
 _0804E1D4: .4byte gUnknown_2031DA8
@@ -3336,7 +3336,7 @@ _0804E1D8:
 	ldr r0, [r0]
 	adds r0, 0x35
 	movs r1, 0x2
-	bl sub_804E074
+	bl TradeMenuMoveCursor
 	b _0804E208
 	.align 2, 0
 _0804E1F0: .4byte gUnknown_2031DA8
@@ -3349,7 +3349,7 @@ _0804E1F4:
 	ldr r0, [r0]
 	adds r0, 0x35
 	movs r1, 0x3
-	bl sub_804E074
+	bl TradeMenuMoveCursor
 _0804E208:
 	ldr r0, _0804E280 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -7315,7 +7315,7 @@ _0805007C:
 	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _0805009A:
 	mov r0, r8
-	bl sub_8044148
+	bl GetMonSpritePalStruct
 	bl LoadCompressedObjectPalette
 	ldr r0, _080500C4 @ =gUnknown_2031DAC
 	ldr r1, [r0]
@@ -7334,7 +7334,7 @@ _080500C0: .4byte gUnknown_202401C
 _080500C4: .4byte gUnknown_2031DAC
 _080500C8:
 	mov r0, r8
-	bl sub_8044148
+	bl GetMonSpritePalStruct
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
 	bl sub_803F7D4
@@ -7555,7 +7555,7 @@ _080502A8:
 	bne _080502B4
 	b _08050438
 _080502B4:
-	bl sub_800AA38
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800A944
 	lsls r4, 24
@@ -7591,7 +7591,7 @@ _080502F2:
 	beq _08050300
 	b _08050472
 _08050300:
-	bl sub_800A1F0
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13447,7 +13447,7 @@ _0805380E:
 _08053812:
 	strb r0, [r1]
 _08053814:
-	bl sub_800B0A8
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _08053822
@@ -14770,7 +14770,7 @@ _08054384:
 	ldr r0, _080543C0 @ =sub_80543C4
 	bl SetMainCallback2
 _08054396:
-	bl sub_800B0A8
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _080543A4

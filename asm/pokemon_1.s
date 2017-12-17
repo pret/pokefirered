@@ -1519,7 +1519,7 @@ _0803E5CE:
 	add r4, sp, 0x8
 	ldrh r1, [r4]
 	movs r2, 0x1
-	bl sub_8043698
+	bl nature_stat_mod
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x8]
@@ -1551,7 +1551,7 @@ _0803E614:
 	add r4, sp, 0xC
 	ldrh r1, [r4]
 	movs r2, 0x2
-	bl sub_8043698
+	bl nature_stat_mod
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0xC]
@@ -1583,7 +1583,7 @@ _0803E65A:
 	add r4, sp, 0x10
 	ldrh r1, [r4]
 	movs r2, 0x3
-	bl sub_8043698
+	bl nature_stat_mod
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x10]
@@ -1615,7 +1615,7 @@ _0803E6A0:
 	add r4, sp, 0x14
 	ldrh r1, [r4]
 	movs r2, 0x4
-	bl sub_8043698
+	bl nature_stat_mod
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x14]
@@ -1647,7 +1647,7 @@ _0803E6E6:
 	add r4, sp, 0x18
 	ldrh r1, [r4]
 	movs r2, 0x5
-	bl sub_8043698
+	bl nature_stat_mod
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x18]

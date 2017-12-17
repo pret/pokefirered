@@ -3634,8 +3634,8 @@ _0801F438: .4byte gUnknown_2023D68
 _0801F43C: .4byte gUnknown_2023D74
 	thumb_func_end atk08_adjustnormaldamage2
 
-	thumb_func_start sub_801F440
-sub_801F440: @ 801F440
+	thumb_func_start atk09_attackanimation
+atk09_attackanimation: @ 801F440
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3786,7 +3786,7 @@ _0801F572:
 	.align 2, 0
 _0801F580: .4byte gUnknown_2023D74
 _0801F584: .4byte gUnknown_81D89F1
-	thumb_func_end sub_801F440
+	thumb_func_end atk09_attackanimation
 
 	thumb_func_start sub_801F588
 sub_801F588: @ 801F588
@@ -7723,8 +7723,8 @@ _08021592:
 	bx r0
 	thumb_func_end atk19_tryfaintmon
 
-	thumb_func_start sub_80215A0
-sub_80215A0: @ 80215A0
+	thumb_func_start atk1A_faint_animation
+atk1A_faint_animation: @ 80215A0
 	push {r4,r5,lr}
 	ldr r0, _080215D0 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -7751,10 +7751,10 @@ _080215CA:
 _080215D0: .4byte gUnknown_2023BC8
 _080215D4: .4byte gUnknown_2023D74
 _080215D8: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80215A0
+	thumb_func_end atk1A_faint_animation
 
-	thumb_func_start sub_80215DC
-sub_80215DC: @ 80215DC
+	thumb_func_start atk1B_faint_effects_clear
+atk1B_faint_effects_clear: @ 80215DC
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r0, _08021630 @ =gUnknown_2023BC8
@@ -7799,7 +7799,7 @@ _08021630: .4byte gUnknown_2023BC8
 _08021634: .4byte gUnknown_2023D74
 _08021638: .4byte gUnknown_2023BC4
 _0802163C: .4byte gUnknown_2023BE4
-	thumb_func_end sub_80215DC
+	thumb_func_end atk1B_faint_effects_clear
 
 	thumb_func_start atk1C_jumpifstatus
 atk1C_jumpifstatus: @ 8021640
@@ -10709,8 +10709,8 @@ atk3C_return: @ 8022CC0
 	bx r0
 	thumb_func_end atk3C_return
 
-	thumb_func_start sub_8022CCC
-sub_8022CCC: @ 8022CCC
+	thumb_func_start atk3D_end
+atk3D_end: @ 8022CCC
 	ldr r0, _08022CE0 @ =gUnknown_2023DCC
 	movs r1, 0
 	strb r1, [r0]
@@ -10724,7 +10724,7 @@ sub_8022CCC: @ 8022CCC
 _08022CE0: .4byte gUnknown_2023DCC
 _08022CE4: .4byte gUnknown_2023BC4
 _08022CE8: .4byte gUnknown_2023BE3
-	thumb_func_end sub_8022CCC
+	thumb_func_end atk3D_end
 
 	thumb_func_start atk3E_end2
 atk3E_end2: @ 8022CEC
@@ -13700,7 +13700,7 @@ _08024446:
 	str r0, [r7]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	b _080244F6
@@ -13740,7 +13740,7 @@ _080244E4: .4byte gUnknown_2023ECC
 _080244E8:
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _080244F6:
@@ -13839,7 +13839,7 @@ _080245B8: .4byte gUnknown_2023FE8
 _080245BC:
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	movs r0, 0x1
@@ -13928,7 +13928,7 @@ _08024674:
 	bne _0802468C
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _0802468C:
@@ -14006,7 +14006,7 @@ _08024724: .4byte gUnknown_2023FE8
 _08024728:
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	movs r0, 0x2
@@ -14097,7 +14097,7 @@ _080247E4:
 	bne _080247FC
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _080247FC:
@@ -14136,7 +14136,7 @@ _0802483C:
 _08024840:
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldr r0, _08024880 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
 	bl MarkBufferBankForExecution
@@ -14176,7 +14176,7 @@ _08024894:
 	strb r0, [r1]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldr r0, _080248B0 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
 	bl MarkBufferBankForExecution
@@ -14556,7 +14556,7 @@ _08024BB0:
 	beq _08024BC4
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _08024BC4:
@@ -14603,7 +14603,7 @@ _08024BF0:
 _08024C20:
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_800EB54
+	bl EmitLinkStandbyMsg
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _08024C2E:
@@ -15188,8 +15188,8 @@ _080250D4: .4byte gUnknown_2023BCC
 _080250D8: .4byte gUnknown_2023D70
 	thumb_func_end sub_8024E38
 
-	thumb_func_start sub_80250DC
-sub_80250DC: @ 80250DC
+	thumb_func_start atk53_trainer_slide
+atk53_trainer_slide: @ 80250DC
 	push {lr}
 	ldr r0, _080250EC @ =gUnknown_2023D74
 	ldr r0, [r0]
@@ -15220,7 +15220,7 @@ _080250F2:
 	.align 2, 0
 _08025114: .4byte gUnknown_2023BC4
 _08025118: .4byte gUnknown_2023D74
-	thumb_func_end sub_80250DC
+	thumb_func_end atk53_trainer_slide
 
 	thumb_func_start atk54_playse
 atk54_playse: @ 802511C
@@ -15251,8 +15251,8 @@ _08025150: .4byte gUnknown_2023D6B
 _08025154: .4byte gUnknown_2023D74
 	thumb_func_end atk54_playse
 
-	thumb_func_start sub_8025158
-sub_8025158: @ 8025158
+	thumb_func_start atk55_play_sound
+atk55_play_sound: @ 8025158
 	push {r4,r5,lr}
 	ldr r5, _08025188 @ =gUnknown_2023BC4
 	ldr r0, _0802518C @ =gUnknown_2023D6B
@@ -15265,7 +15265,7 @@ sub_8025158: @ 8025158
 	lsls r0, 8
 	orrs r1, r0
 	movs r0, 0
-	bl sub_800E9F0
+	bl Emitcmd44
 	ldrb r0, [r5]
 	bl MarkBufferBankForExecution
 	ldr r0, [r4]
@@ -15278,7 +15278,7 @@ sub_8025158: @ 8025158
 _08025188: .4byte gUnknown_2023BC4
 _0802518C: .4byte gUnknown_2023D6B
 _08025190: .4byte gUnknown_2023D74
-	thumb_func_end sub_8025158
+	thumb_func_end atk55_play_sound
 
 	thumb_func_start atk56_playfaintcry
 atk56_playfaintcry: @ 8025194
@@ -17760,7 +17760,7 @@ PutLevelAndGenderOnLvlUpBox: @ 8026524
 	mov r1, r8
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r6, r0, 0
 	movs r1, 0
 	movs r2, 0x5
@@ -25852,7 +25852,7 @@ _0802A57C:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	strb r5, [r4]
 	movs r0, 0x1
 	strb r0, [r4, 0x1]

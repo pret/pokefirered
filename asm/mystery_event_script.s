@@ -35,8 +35,8 @@ _080DA82A:
 	bx r1
 	thumb_func_end sub_80DA800
 
-	thumb_func_start sub_80DA830
-sub_80DA830: @ 80DA830
+	thumb_func_start SetIncompatible
+SetIncompatible: @ 80DA830
 	push {lr}
 	ldr r0, _080DA844 @ =gUnknown_2021D18
 	ldr r1, _080DA848 @ =gUnknown_8488DFD
@@ -48,10 +48,10 @@ sub_80DA830: @ 80DA830
 	.align 2, 0
 _080DA844: .4byte gUnknown_2021D18
 _080DA848: .4byte gUnknown_8488DFD
-	thumb_func_end sub_80DA830
+	thumb_func_end SetIncompatible
 
-	thumb_func_start sub_80DA84C
-sub_80DA84C: @ 80DA84C
+	thumb_func_start InitMysteryEventScript
+InitMysteryEventScript: @ 80DA84C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -72,10 +72,10 @@ sub_80DA84C: @ 80DA84C
 	.align 2, 0
 _080DA874: .4byte gUnknown_81DBCF0
 _080DA878: .4byte 0x081dbd34
-	thumb_func_end sub_80DA84C
+	thumb_func_end InitMysteryEventScript
 
-	thumb_func_start sub_80DA87C
-sub_80DA87C: @ 80DA87C
+	thumb_func_start RunMysteryEventScriptCommand
+RunMysteryEventScriptCommand: @ 80DA87C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_8069804
@@ -93,14 +93,14 @@ _080DA896:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DA87C
+	thumb_func_end RunMysteryEventScriptCommand
 
 	thumb_func_start sub_80DA89C
 sub_80DA89C: @ 80DA89C
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _080DA8AC @ =gUnknown_203AA3C
-	bl sub_80DA84C
+	bl InitMysteryEventScript
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -113,7 +113,7 @@ sub_80DA8B0: @ 80DA8B0
 	adds r5, r0, 0
 	ldr r4, _080DA8C8 @ =gUnknown_203AA3C
 	adds r0, r4, 0
-	bl sub_80DA87C
+	bl RunMysteryEventScriptCommand
 	ldr r1, [r4, 0x6C]
 	str r1, [r5]
 	pop {r4,r5}
@@ -157,8 +157,8 @@ script_status_stop_and_ret_1: @ 80DA8F4
 	bx r1
 	thumb_func_end script_status_stop_and_ret_1
 
-	thumb_func_start sub_80DA900
-sub_80DA900: @ 80DA900
+	thumb_func_start MEScrCmd_checkcompat
+MEScrCmd_checkcompat: @ 80DA900
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	bl ScriptReadWord
@@ -188,13 +188,13 @@ sub_80DA900: @ 80DA900
 	str r0, [r7, 0x70]
 	b _080DA948
 _080DA944:
-	bl sub_80DA830
+	bl SetIncompatible
 _080DA948:
 	movs r0, 0x1
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DA900
+	thumb_func_end MEScrCmd_checkcompat
 
 	thumb_func_start sub_80DA950
 sub_80DA950: @ 80DA950
@@ -202,8 +202,8 @@ sub_80DA950: @ 80DA950
 	bx lr
 	thumb_func_end sub_80DA950
 
-	thumb_func_start sub_80DA954
-sub_80DA954: @ 80DA954
+	thumb_func_start MEScrCmd_setstatus
+MEScrCmd_setstatus: @ 80DA954
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
 	adds r1, 0x1
@@ -211,10 +211,10 @@ sub_80DA954: @ 80DA954
 	str r2, [r0, 0x6C]
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_80DA954
+	thumb_func_end MEScrCmd_setstatus
 
-	thumb_func_start sub_80DA964
-sub_80DA964: @ 80DA964
+	thumb_func_start MEScrCmd_setmsg
+MEScrCmd_setmsg: @ 80DA964
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x8]
@@ -242,10 +242,10 @@ _080DA98E:
 	bx r1
 	.align 2, 0
 _080DA998: .4byte gUnknown_2021D18
-	thumb_func_end sub_80DA964
+	thumb_func_end MEScrCmd_setmsg
 
-	thumb_func_start sub_80DA99C
-sub_80DA99C: @ 80DA99C
+	thumb_func_start MEScrCmd_runscript
+MEScrCmd_runscript: @ 80DA99C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptReadWord
@@ -258,10 +258,10 @@ sub_80DA99C: @ 80DA99C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DA99C
+	thumb_func_end MEScrCmd_runscript
 
-	thumb_func_start sub_80DA9B8
-sub_80DA9B8: @ 80DA9B8
+	thumb_func_start MEScrCmd_setenigmaberry
+MEScrCmd_setenigmaberry: @ 80DA9B8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -346,10 +346,10 @@ _080DAA70:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DA9B8
+	thumb_func_end MEScrCmd_setenigmaberry
 
-	thumb_func_start sub_80DAA80
-sub_80DAA80: @ 80DAA80
+	thumb_func_start MEScrCmd_giveribbon
+MEScrCmd_giveribbon: @ 80DAA80
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r2, [r4, 0x8]
@@ -372,10 +372,10 @@ sub_80DAA80: @ 80DAA80
 	.align 2, 0
 _080DAAAC: .4byte gUnknown_2021D18
 _080DAAB0: .4byte gUnknown_8488CF6
-	thumb_func_end sub_80DAA80
+	thumb_func_end MEScrCmd_giveribbon
 
-	thumb_func_start sub_80DAAB4
-sub_80DAAB4: @ 80DAAB4
+	thumb_func_start MEScrCmd_initramscript
+MEScrCmd_initramscript: @ 80DAAB4
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -424,7 +424,7 @@ sub_80DAAB4: @ 80DAAB4
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DAAB4
+	thumb_func_end MEScrCmd_initramscript
 
 	thumb_func_start sub_80DAB1C
 sub_80DAB1C: @ 80DAB1C
@@ -445,8 +445,8 @@ _080DAB38: .4byte gUnknown_2021D18
 _080DAB3C: .4byte gUnknown_8488D2A
 	thumb_func_end sub_80DAB1C
 
-	thumb_func_start sub_80DAB40
-sub_80DAB40: @ 80DAB40
+	thumb_func_start MEScrCmd_addrareword
+MEScrCmd_addrareword: @ 80DAB40
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, [r4, 0x8]
@@ -466,13 +466,13 @@ sub_80DAB40: @ 80DAB40
 	.align 2, 0
 _080DAB64: .4byte gUnknown_2021D18
 _080DAB68: .4byte gUnknown_8488D60
-	thumb_func_end sub_80DAB40
+	thumb_func_end MEScrCmd_addrareword
 
 	thumb_func_start sub_80DAB6C
 sub_80DAB6C: @ 80DAB6C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80DA830
+	bl SetIncompatible
 	movs r0, 0
 	str r0, [r4, 0x70]
 	movs r0, 0x1
@@ -636,7 +636,7 @@ _080DACD0: .4byte gUnknown_8488DBD
 sub_80DACD4: @ 80DACD4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80DA830
+	bl SetIncompatible
 	movs r0, 0
 	str r0, [r4, 0x70]
 	movs r0, 0x1
@@ -645,8 +645,8 @@ sub_80DACD4: @ 80DACD4
 	bx r1
 	thumb_func_end sub_80DACD4
 
-	thumb_func_start sub_80DACE8
-sub_80DACE8: @ 80DACE8
+	thumb_func_start MEScrCmd_checksum
+MEScrCmd_checksum: @ 80DACE8
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	bl ScriptReadWord
@@ -679,10 +679,10 @@ _080DAD26:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DACE8
+	thumb_func_end MEScrCmd_checksum
 
-	thumb_func_start sub_80DAD30
-sub_80DAD30: @ 80DAD30
+	thumb_func_start MEScrCmd_crc
+MEScrCmd_crc: @ 80DAD30
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	bl ScriptReadWord
@@ -717,6 +717,6 @@ _080DAD72:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DAD30
+	thumb_func_end MEScrCmd_crc
 
 	.align 2, 0 @ Don't pad with nop.

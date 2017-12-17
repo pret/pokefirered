@@ -2281,7 +2281,7 @@ _080D84D6:
 	adds r0, r6, 0
 	mov r1, r8
 	movs r2, 0
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r0, r5, 0x3
 	ldrb r4, [r4, 0x1]
 	adds r5, r0, r4

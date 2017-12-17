@@ -217,7 +217,7 @@ SeedRngAndSetTrainerId: @ 8000564
 	ldr r0, _08000580 @ =0x04000104
 	ldrh r4, [r0]
 	adds r0, r4, 0
-	bl sub_8044EE8
+	bl SeedRng
 	ldr r1, _08000584 @ =0x04000106
 	movs r0, 0
 	strh r0, [r1]

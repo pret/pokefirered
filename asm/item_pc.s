@@ -802,7 +802,7 @@ _0810DA58:
 	ldr r0, _0810DAA8 @ =gUnknown_2021CD0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0810DAAC @ =gUnknown_2021D18
 	ldr r1, _0810DAB0 @ =gUnknown_84162B9
 	adds r0, r4, 0
@@ -2054,7 +2054,7 @@ sub_810E418: @ 810E418
 	ldrsh r1, [r5, r2]
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0810E4AC @ =gUnknown_2021D18
 	ldr r1, _0810E4B0 @ =gUnknown_84177C5
 	adds r0, r4, 0
@@ -2262,7 +2262,7 @@ sub_810E5E0: @ 810E5E0
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r1, _0810E66C @ =gUnknown_84162B9
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
@@ -2315,7 +2315,7 @@ sub_810E670: @ 810E670
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _0810E6D0 @ =gUnknown_2021D18
 	ldr r1, _0810E6D4 @ =gUnknown_84162B9
 	adds r0, r4, 0

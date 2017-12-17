@@ -276,7 +276,7 @@ _08097E36:
 	bl GetBoxMonData
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8097F00
+	bl SpeciesToMailSpecies
 	ldr r1, _08097EC0 @ =gUnknown_3005008
 	ldr r3, [r1]
 	mov r4, r9
@@ -338,8 +338,8 @@ _08097EEE:
 	bx r1
 	thumb_func_end sub_8097D38
 
-	thumb_func_start sub_8097F00
-sub_8097F00: @ 8097F00
+	thumb_func_start SpeciesToMailSpecies
+SpeciesToMailSpecies: @ 8097F00
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -356,10 +356,10 @@ _08097F18:
 	bx r1
 	.align 2, 0
 _08097F1C: .4byte 0x75300000
-	thumb_func_end sub_8097F00
+	thumb_func_end SpeciesToMailSpecies
 
-	thumb_func_start sub_8097F20
-sub_8097F20: @ 8097F20
+	thumb_func_start MailSpeciesToSpecies
+MailSpeciesToSpecies: @ 8097F20
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -379,7 +379,7 @@ _08097F3C:
 _08097F3E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8097F20
+	thumb_func_end MailSpeciesToSpecies
 
 	thumb_func_start GiveMailToMon2
 GiveMailToMon2: @ 8097F44

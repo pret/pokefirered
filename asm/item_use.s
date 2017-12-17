@@ -620,7 +620,7 @@ sub_80A1460: @ 80A1460
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _080A14B8 @ =gUnknown_2021D18
 	ldr r1, _080A14BC @ =gUnknown_8416537
 	adds r0, r4, 0
@@ -679,7 +679,7 @@ sub_80A14E8: @ 80A14E8
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x5
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	ldr r4, _080A153C @ =gUnknown_2021D18
 	ldr r1, _080A1540 @ =gUnknown_8416644
 	adds r0, r4, 0

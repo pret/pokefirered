@@ -71,7 +71,7 @@ _080F804A:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	b _080F80D8
 _080F805C:
 	ldr r4, _080F8068 @ =gUnknown_300500C
@@ -90,7 +90,7 @@ _080F806C:
 	movs r2, 0x1
 _080F8076:
 	movs r3, 0x3
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	adds r5, r0, 0
 	movs r0, 0xF0
 	strb r0, [r5]
@@ -100,7 +100,7 @@ _080F8076:
 	adds r0, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8008E78
+	bl ConvertIntToDecimalStringN
 	b _080F80D8
 	.align 2, 0
 _080F8094: .4byte gUnknown_300500C

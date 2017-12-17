@@ -245,7 +245,7 @@ _080F5744:
 	movs r0, 0x1
 	movs r1, 0x3
 	bl CopyWindowToVram
-	bl sub_80D972C
+	bl ClearSaveData
 _080F577A:
 	ldr r1, [r5]
 	ldrb r0, [r1]

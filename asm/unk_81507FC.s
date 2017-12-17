@@ -1721,7 +1721,7 @@ _0815156C:
 	bl DestroyTask
 	ldr r0, [r4]
 	bl Free
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 _08151590:
 	add sp, 0x4
 	pop {r4}
@@ -6422,7 +6422,7 @@ _08153888:
 	ldrb r0, [r4, 0x2]
 	movs r1, 0x1
 _0815389E:
-	bl sub_8003F20
+	bl CopyWindowToVram
 _081538A2:
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -6436,7 +6436,7 @@ _081538B0:
 	cmp r0, 0
 	bne _081538CA
 	ldrb r0, [r4, 0x2]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r5, 0
 	bl DestroyTask
 	bl EnableBothScriptContexts
@@ -6493,7 +6493,7 @@ sub_81538D0: @ 81538D0
 	adds r0, r7, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r4, 0
 	add r2, sp, 0x18
 	mov r8, r2
@@ -6536,7 +6536,7 @@ _08153946:
 	adds r0, r7, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r3, 0xE0
 	subs r3, r5
 	lsls r3, 24
@@ -6552,7 +6552,7 @@ _08153946:
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r2, r8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r4, r6, 0
 	cmp r4, 0x2
 	ble _08153946
@@ -8680,7 +8680,7 @@ _081549C4: .4byte sub_8154A2C
 	thumb_func_start sub_81549C8
 sub_81549C8: @ 81549C8
 	push {lr}
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81549C8
@@ -9021,7 +9021,7 @@ _08154C4E:
 	adds r0, r6
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r3, [sp, 0x18]
 	ldrh r0, [r3, 0x6]
 	adds r0, 0xE
@@ -9102,7 +9102,7 @@ _08154D34:
 	adds r0, r4
 	adds r0, r6
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -9290,7 +9290,7 @@ _08154E70:
 	str r3, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
@@ -9342,7 +9342,7 @@ _08154EC8:
 	add r2, sp, 0xC
 	ldr r4, [sp, 0x6C]
 	lsrs r3, r4, 24
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r1, _08154F70 @ =gUnknown_203F440
 	ldr r0, [r1]
 	add r0, r10
@@ -9356,7 +9356,7 @@ _08154EC8:
 	str r1, [sp, 0x8]
 	ldr r2, _08154F68 @ =gUnknown_841CE1C
 	lsrs r3, 24
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -9512,7 +9512,7 @@ _08155060:
 	str r5, [sp, 0x8]
 	movs r1, 0
 	mov r2, r8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r0, [r4]
 	add r0, r9
 	ldrb r0, [r0]
@@ -9523,7 +9523,7 @@ _08155060:
 	str r5, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0x44
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0
 	mov r9, r0
 	ldr r1, [sp, 0x84]
@@ -9657,7 +9657,7 @@ _081551D0:
 	movs r1, 0
 	str r1, [sp, 0x8]
 	add r2, sp, 0xC
-	bl sub_8002C48
+	bl PrintTextOnWindow
 _081551FA:
 	adds r0, r7, 0x1
 	lsls r0, 24
@@ -9679,13 +9679,13 @@ _08155214:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _08155240 @ =0x00003009
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, [r4]
 	ldr r0, _08155248 @ =0x00003014
 	adds r1, r0
@@ -9795,7 +9795,7 @@ _081552DC:
 	movs r1, 0
 	str r1, [sp, 0x8]
 	adds r2, r6, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	b _08155658
 	.align 2, 0
 _08155330: .4byte gUnknown_203F440
@@ -9811,13 +9811,13 @@ _08155340:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _08155374 @ =0x00003009
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, [r4]
 	ldr r0, _08155378 @ =0x00003014
 	adds r1, r0
@@ -9921,7 +9921,7 @@ _0815542C:
 	ldr r4, _08155478 @ =0x00003009
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r6, _0815547C @ =gUnknown_8475684
 	adds r0, r6, 0
 	bl sub_8003CE4
@@ -9982,8 +9982,8 @@ _08155480:
 	str r6, [sp, 0x8]
 	movs r1, 0
 	adds r2, r5, 0
-	bl sub_8002C48
-	bl sub_813CC90
+	bl PrintTextOnWindow
+	bl UnkTextUtil_Reset
 	bl sub_8153390
 	lsls r0, 16
 	lsrs r0, 16
@@ -9992,10 +9992,10 @@ _08155480:
 	bl sub_8099E90
 	movs r0, 0
 	adds r1, r5, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r1, _0815556C @ =gUnknown_841CD7A
 	add r0, sp, 0xC
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	ldr r0, [r4]
 	add r0, r10
 	ldrb r0, [r0]
@@ -10007,7 +10007,7 @@ _08155480:
 	movs r1, 0
 	add r2, sp, 0xC
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	bl sub_815372C
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -10016,7 +10016,7 @@ _08155480:
 	beq _0815559E
 	cmp r4, 0x3
 	beq _0815559E
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	bl sub_8153390
 	lsls r0, 16
 	lsrs r0, 16
@@ -10024,12 +10024,12 @@ _08155480:
 	bl sub_8099E90
 	movs r0, 0
 	adds r1, r5, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	cmp r4, 0x2
 	bne _08155574
 	ldr r1, _08155570 @ =gUnknown_841CD9F
 	add r0, sp, 0xC
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08155580
 	.align 2, 0
 _08155558: .4byte 0x00000101
@@ -10044,7 +10044,7 @@ _08155574:
 	bne _08155580
 	ldr r1, _081555C4 @ =gUnknown_841CDBA
 	add r0, sp, 0xC
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 _08155580:
 	ldr r0, _081555C8 @ =gUnknown_203F440
 	ldr r0, [r0]
@@ -10059,7 +10059,7 @@ _08155580:
 	str r1, [sp, 0x8]
 	add r2, sp, 0xC
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 _0815559E:
 	ldr r4, _081555C8 @ =gUnknown_203F440
 	ldr r0, [r4]
@@ -10067,13 +10067,13 @@ _0815559E:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _081555CC @ =0x00003009
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, [r4]
 	ldr r0, _081555D4 @ =0x00003014
 	adds r1, r0
@@ -10168,11 +10168,11 @@ _08155678:
 	ldr r0, [r6]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r0, [r6]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x1E
 	str r0, [sp]
 	movs r0, 0x14
@@ -10319,7 +10319,7 @@ _0815579C:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	mov r3, r10
 	ldr r0, [r3]
 	adds r0, r7
@@ -10331,7 +10331,7 @@ _0815579C:
 	str r5, [sp, 0x4]
 	str r4, [sp, 0x8]
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	mov r2, r10
 	ldr r0, [r2]
 	adds r0, r7
@@ -10343,7 +10343,7 @@ _0815579C:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	mov r3, r10
 	ldr r0, [r3]
 	adds r0, r7
@@ -10355,19 +10355,19 @@ _0815579C:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	mov r2, r10
 	ldr r0, [r2]
 	add r0, r8
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	mov r3, r10
 	ldr r0, [r3]
 	adds r0, r7
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	mov r0, r10
 	ldr r1, [r0]
 	ldr r2, _08155864 @ =0x00003014
@@ -10435,7 +10435,7 @@ _081558B0:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	mov r2, r10
 	ldr r0, [r2]
 	adds r0, r4
@@ -10448,7 +10448,7 @@ _081558B0:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	mov r1, r10
 	ldr r0, [r1]
 	adds r0, r4
@@ -10475,14 +10475,14 @@ _08155922:
 	adds r0, r1, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r4, _08155970 @ =gUnknown_203F440
 	ldr r0, [r4]
 	ldr r1, _08155974 @ =0x00003009
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _08155978 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
 	movs r5, 0x1
@@ -10589,12 +10589,12 @@ _081559EC:
 	ldr r0, [r3]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	mov r1, r10
 	ldr r0, [r1]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x1E
 	str r0, [sp]
 	movs r0, 0x14
@@ -10669,14 +10669,14 @@ _08155AA6:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _08155B08
 	.align 2, 0
 _08155ACC: .4byte gUnknown_8419F54
 _08155AD0:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, [r5]
 	ldr r0, _08155AE0 @ =0x00003014
 	adds r1, r0
@@ -10798,12 +10798,12 @@ _08155BA4:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, [r5]
 	ldr r0, _08155BE8 @ =0x00003014
 	adds r1, r0
@@ -10862,7 +10862,7 @@ sub_8155C2C: @ 8155C2C
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x1E
 	str r0, [sp]
 	movs r0, 0x14
@@ -10970,12 +10970,12 @@ _08155D08:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r0, [r6]
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, [r6]
 	ldr r2, _08155D4C @ =0x00003014
 	adds r1, r2
@@ -11036,7 +11036,7 @@ _08155D9C:
 	ldr r0, [r6]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x1E
 	str r0, [sp]
 	movs r0, 0x14

@@ -199,7 +199,7 @@ sub_810C4EC: @ 810C4EC
 _0810C516:
 	ldr r7, _0810C56C @ =0x00000801
 	adds r0, r7, 0
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -230,7 +230,7 @@ _0810C548:
 	cmp r0, 0x64
 	bne _0810C570
 	adds r0, r7, 0
-	bl sub_806E6A8
+	bl FlagClear
 	bl sub_810C640
 	bl sub_810D0D0
 	movs r0, 0x1
@@ -250,7 +250,7 @@ _0810C572:
 sub_810C578: @ 810C578
 	push {lr}
 	ldr r0, _0810C590 @ =0x00000801
-	bl sub_806E6A8
+	bl FlagClear
 	bl sub_810C640
 	bl sub_810D0D0
 	bl sub_810C594

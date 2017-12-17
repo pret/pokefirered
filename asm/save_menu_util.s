@@ -120,7 +120,7 @@ _080F80A8:
 _080F80B0:
 	lsls r0, r4, 16
 	lsrs r0, 16
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F80C0

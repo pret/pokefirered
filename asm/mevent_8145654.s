@@ -459,19 +459,19 @@ _081459F2:
 	lsls r1, 1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r0, [r4]
 	movs r1, 0xBC
 	lsls r1, 1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r0, [r4]
 	movs r1, 0xBB
 	lsls r1, 1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	b _08145A7A
 	.align 2, 0
 _08145A2C: .4byte gUnknown_203F3C8
@@ -928,7 +928,7 @@ _08145D70:
 	add r4, r9
 	movs r0, 0x3
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -1125,7 +1125,7 @@ _08145F38:
 	adds r4, 0x10
 	movs r0, 0x3
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, [r7]
@@ -1244,7 +1244,7 @@ _08146038:
 	mov r1, r9
 	lsrs r0, r1, 24
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -2072,13 +2072,13 @@ _0814670C:
 	lsls r1, 1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r0, [r4]
 	movs r2, 0xE4
 	lsls r2, 1
 	adds r0, r2
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	b _081467C4
 	.align 2, 0
 _08146738: .4byte gUnknown_203F3CC
@@ -2511,7 +2511,7 @@ sub_8146A30: @ 8146A30
 	add r4, r8
 	movs r0, 0x3
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -2596,14 +2596,14 @@ _08146AD0:
 	adds r0, r3
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r6]
 	movs r1, 0xE5
 	lsls r1, 1
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3

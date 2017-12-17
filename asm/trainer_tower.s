@@ -107,7 +107,7 @@ _0815D86A:
 	beq _0815D87C
 	ldrb r1, [r1]
 	adds r0, r5, r1
-	bl sub_806E680
+	bl FlagSet
 _0815D87C:
 	adds r1, r7, r4
 	ldrb r0, [r1]
@@ -115,7 +115,7 @@ _0815D87C:
 	beq _0815D88C
 	ldrb r1, [r1]
 	adds r0, r5, r1
-	bl sub_806E680
+	bl FlagSet
 _0815D88C:
 	adds r1, r6, r4
 	ldrb r0, [r1]
@@ -123,7 +123,7 @@ _0815D88C:
 	beq _0815D89C
 	ldrb r1, [r1]
 	adds r0, r5, r1
-	bl sub_806E680
+	bl FlagSet
 _0815D89C:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -152,7 +152,7 @@ sub_815D8C8: @ 815D8C8
 	push {r4,lr}
 	ldr r4, _0815D8F0 @ =0x00004023
 	adds r0, r4, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, _0815D8F4 @ =0x000005db
@@ -162,7 +162,7 @@ sub_815D8C8: @ 815D8C8
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 _0815D8E8:
 	pop {r4}
 	pop {r0}
@@ -209,14 +209,14 @@ _0815D928:
 	beq _0815D956
 	ldr r4, _0815D964 @ =0x00004023
 	adds r0, r4, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	ldr r1, _0815D968 @ =0x05db0000
 	cmp r0, r1
 	bls _0815D956
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	bl sub_815D838
 	bl sub_815D96C
 _0815D956:
@@ -280,7 +280,7 @@ _0815D9B6:
 	adds r0, r2, 0
 	ldrb r1, [r1]
 	adds r0, r1
-	bl sub_806E6A8
+	bl FlagClear
 _0815D9CC:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -374,7 +374,7 @@ sub_815DA54: @ 815DA54
 	bl AllocZeroed
 	str r0, [r5]
 	ldr r0, _0815DBC8 @ =0x00004001
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	mov r10, r0
@@ -573,7 +573,7 @@ sub_815DBF4: @ 815DBF4
 	lsrs r4, 24
 	ldr r0, _0815DC28 @ =0x00004003
 	adds r1, r4, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r5, _0815DC2C @ =gUnknown_203F45C
 	ldr r1, [r5]
 	adds r0, r1, 0
@@ -611,7 +611,7 @@ sub_815DC40: @ 815DC40
 	lsrs r4, 24
 	ldr r0, _0815DC74 @ =0x00004003
 	adds r1, r4, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r5, _0815DC78 @ =gUnknown_203F45C
 	ldr r1, [r5]
 	adds r0, r1, 0
@@ -836,7 +836,7 @@ _0815DE08:
 	movs r1, 0x12
 _0815DE0A:
 	ldr r0, _0815DE14 @ =0x00004011
-	bl sub_806E584
+	bl VarSet
 	b _0815DEF0
 	.align 2, 0
 _0815DE14: .4byte 0x00004011
@@ -872,10 +872,10 @@ _0815DE48:
 	movs r4, 0x12
 _0815DE4C:
 	ldr r0, _0815DE5C @ =0x00004010
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0815DE60 @ =0x00004013
 	adds r1, r4, 0
-	bl sub_806E584
+	bl VarSet
 	b _0815DEF0
 	.align 2, 0
 _0815DE5C: .4byte 0x00004010
@@ -938,19 +938,19 @@ _0815DEC4:
 	b _0815DEEA
 _0815DECA:
 	ldr r0, _0815DED4 @ =0x00004012
-	bl sub_806E584
+	bl VarSet
 	b _0815DEEA
 	.align 2, 0
 _0815DED4: .4byte 0x00004012
 _0815DED8:
 	ldr r0, _0815DEE0 @ =0x00004010
-	bl sub_806E584
+	bl VarSet
 	b _0815DEEA
 	.align 2, 0
 _0815DEE0: .4byte 0x00004010
 _0815DEE4:
 	ldr r0, _0815DEF8 @ =0x00004011
-	bl sub_806E584
+	bl VarSet
 _0815DEEA:
 	adds r4, r5, 0
 	cmp r4, 0x2
@@ -972,7 +972,7 @@ sub_815DEFC: @ 815DEFC
 	adds r1, r5, 0
 	movs r2, 0x3
 	movs r3, 0x2
-	bl sub_80BD89C
+	bl ConvertEasyChatWordsToString
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0x2
@@ -984,7 +984,7 @@ sub_815DEFC: @ 815DEFC
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_80BD89C
+	bl ConvertEasyChatWordsToString
 	ldrb r0, [r4]
 	movs r1, 0x1
 	cmp r0, 0xFE
@@ -1214,7 +1214,7 @@ _0815E0CE:
 	cmp r4, 0xA
 	beq _0815E0F8
 	ldr r0, _0815E0E8 @ =0x00004003
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	cmp r0, 0
 	beq _0815E0F0
@@ -2034,7 +2034,7 @@ sub_815E720: @ 815E720
 	adds r0, r7, 0
 	movs r1, 0x2
 	movs r3, 0x4A
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0
 	mov r8, r0
 	movs r1, 0xB8
@@ -2111,7 +2111,7 @@ _0815E76C:
 	adds r0, r7, 0
 	movs r1, 0x2
 	movs r3, 0x18
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	mov r1, r10
 	lsrs r0, r1, 24
 	str r0, [sp]
@@ -2123,7 +2123,7 @@ _0815E76C:
 	movs r1, 0x2
 	ldr r2, _0815E87C @ =gUnknown_2021D18
 	movs r3, 0x60
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0xA0
 	lsls r0, 21
 	add r10, r0
@@ -2137,10 +2137,10 @@ _0815E76C:
 	bl PutWindowTilemap
 	adds r0, r7, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _0815E888 @ =0x00004001
 	adds r1, r7, 0
-	bl sub_806E584
+	bl VarSet
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -2168,7 +2168,7 @@ _0815E888: .4byte 0x00004001
 sub_815E88C: @ 815E88C
 	push {r4,lr}
 	ldr r0, _0815E8B0 @ =0x00004001
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -2176,7 +2176,7 @@ sub_815E88C: @ 815E88C
 	movs r1, 0x1
 	bl sub_810F4D8
 	adds r0, r4, 0
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2240,7 +2240,7 @@ sub_815E908: @ 815E908
 	cmp r1, r0
 	bne _0815E938
 	ldr r0, _0815E930 @ =0x00004082
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -2268,7 +2268,7 @@ _0815E944: .4byte gUnknown_20370D0
 sub_815E948: @ 815E948
 	push {r4,lr}
 	ldr r0, _0815E97C @ =0x00004001
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r0, _0815E980 @ =gUnknown_203F458
@@ -2365,7 +2365,7 @@ sub_815E9FC: @ 815E9FC
 	push {r5-r7}
 	sub sp, 0x4
 	ldr r0, _0815EABC @ =0x00004001
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r4, r0, 16
 	bl sub_815EBB8
@@ -2799,7 +2799,7 @@ _0815ECDC:
 	bl PutWindowTilemap
 	mov r0, r8
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	bl sub_815DD2C
 	add sp, 0xC
 	pop {r3-r5}

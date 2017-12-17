@@ -145,7 +145,7 @@ sub_8097984: @ 8097984
 	push {lr}
 	movs r0, 0x1
 	bl FieldEffectStart
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _0809799C @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -184,7 +184,7 @@ _080979CC: .4byte sub_8097A20
 	thumb_func_start sub_80979D0
 sub_80979D0: @ 80979D0
 	push {lr}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _080979E8 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24

@@ -857,7 +857,7 @@ _0808BFA4:
 _0808BFC4:
 	mov r1, r10
 	lsrs r0, r1, 24
-	bl sub_8003E3C
+	bl RemoveWindow
 	add sp, 0x2C
 	pop {r3-r5}
 	mov r8, r3
@@ -973,7 +973,7 @@ sub_808BFE0: @ 808BFE0
 	adds r2, r5, 0
 	bl CpuSet
 	adds r0, r4, 0
-	bl sub_8003E3C
+	bl RemoveWindow
 	add sp, 0x2C
 	pop {r3-r5}
 	mov r8, r3
@@ -1442,15 +1442,15 @@ _0808C3E0:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xFF
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0808C454
 	.align 2, 0
 _0808C444: .4byte gUnknown_83CDA20
@@ -1549,7 +1549,7 @@ _0808C4CE:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0808C69C
 	.align 2, 0
 _0808C504: .4byte gUnknown_30030F0
@@ -1666,7 +1666,7 @@ _0808C5F4:
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1700,7 +1700,7 @@ _0808C624:
 _0808C63C:
 	movs r0, 0x1
 	bl MoveMenuCursor
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1725,7 +1725,7 @@ _0808C66E:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	strh r4, [r5, 0x8]
 	b _0808C69C
 	.align 2, 0
@@ -1836,7 +1836,7 @@ sub_808C72C: @ 808C72C
 	bl sub_80F6F1C
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6660,7 +6660,7 @@ sub_808EF68: @ 808EF68
 	bl Free
 	movs r0, 0
 	str r0, [r4]
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6759,7 +6759,7 @@ sub_808F044: @ 808F044
 	lsls r0, 16
 	cmp r0, 0
 	beq _0808F060
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r0, 0x1
 	b _0808F062
 	.align 2, 0
@@ -7329,7 +7329,7 @@ _0808F4D4:
 	str r6, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -7352,7 +7352,7 @@ _0808F4D4:
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x6
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	b _0808F57E
 	.align 2, 0
 _0808F51C: .4byte gUnknown_20397B0
@@ -7368,7 +7368,7 @@ _0808F528:
 	str r1, [sp, 0x8]
 	movs r0, 0
 	movs r3, 0x6
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r4, 0
 	movs r5, 0xF
 _0808F542:
@@ -7392,7 +7392,7 @@ _0808F558:
 	movs r0, 0
 	str r0, [sp, 0x8]
 	movs r1, 0x2
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -7405,7 +7405,7 @@ _0808F558:
 _0808F57E:
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r4, _0808F5C4 @ =gUnknown_20397B0
 	ldr r1, [r4]
 	movs r2, 0xCE
@@ -8190,7 +8190,7 @@ sub_808FBA4: @ 808FBA4
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r1, _0808FBC8 @ =gUnknown_83CEA88
 	lsls r0, r6, 3
 	adds r0, r1
@@ -8231,7 +8231,7 @@ _0808FC04:
 	adds r1, r2
 _0808FC0C:
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	b _0808FC7C
 	.align 2, 0
 _0808FC14: .4byte gUnknown_20397B0
@@ -8281,7 +8281,7 @@ _0808FC62:
 	ldr r0, _0808FCE0 @ =0x000021db
 	adds r1, r0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 _0808FC7C:
 	ldr r5, _0808FCDC @ =gUnknown_20397B0
 	ldr r0, [r5]
@@ -8292,7 +8292,7 @@ _0808FC7C:
 	lsls r1, r6, 3
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -8307,7 +8307,7 @@ _0808FC7C:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xD
@@ -8316,7 +8316,7 @@ _0808FC7C:
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0xC
@@ -8667,14 +8667,14 @@ sub_808FF70: @ 808FF70
 	cmp r1, r0
 	beq _0808FF9A
 	ldr r0, _0808FFA4 @ =0x00000843
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r4, _0808FFA8 @ =0x00004037
 	bl StorageGetCurrentBox
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 _0808FF9A:
 	pop {r4}
 	pop {r0}
@@ -19038,7 +19038,7 @@ _08094FD4:
 	bl MoveMenuCursor
 	b _08094FF2
 _08094FEA:
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08094FF2:
@@ -19081,7 +19081,7 @@ sub_8095024: @ 8095024
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -20765,10 +20765,10 @@ _08095CF0:
 	cmp r4, 0
 	beq _08095D36
 	adds r0, r4, 0
-	bl sub_8096674
+	bl GetItemIconPic
 	adds r6, r0, 0
 	adds r0, r4, 0
-	bl sub_8096684
+	bl GetItemIconPalette
 	adds r5, r0, 0
 	bl sub_80961D8
 	adds r4, r0, 0
@@ -20920,10 +20920,10 @@ sub_8095E2C: @ 8095E2C
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r5, 0
-	bl sub_8096674
+	bl GetItemIconPic
 	mov r8, r0
 	adds r0, r5, 0
-	bl sub_8096684
+	bl GetItemIconPalette
 	adds r6, r0, 0
 	bl sub_80961D8
 	adds r4, r0, 0
@@ -21995,8 +21995,8 @@ _0809666C: .4byte gUnknown_20397B0
 _08096670: .4byte 0x000021f4
 	thumb_func_end sub_8096624
 
-	thumb_func_start sub_8096674
-sub_8096674: @ 8096674
+	thumb_func_start GetItemIconPic
+GetItemIconPic: @ 8096674
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -22004,10 +22004,10 @@ sub_8096674: @ 8096674
 	bl sub_8098974
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8096674
+	thumb_func_end GetItemIconPic
 
-	thumb_func_start sub_8096684
-sub_8096684: @ 8096684
+	thumb_func_start GetItemIconPalette
+GetItemIconPalette: @ 8096684
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -22015,7 +22015,7 @@ sub_8096684: @ 8096684
 	bl sub_8098974
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8096684
+	thumb_func_end GetItemIconPalette
 
 	thumb_func_start sub_8096694
 sub_8096694: @ 8096694

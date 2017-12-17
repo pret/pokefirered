@@ -303,7 +303,7 @@ sub_815EFBC: @ 815EFBC
 	movs r1, 0
 	mov r2, r9
 	mov r3, r8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -345,7 +345,7 @@ sub_815F014: @ 815F014
 	adds r0, r6, 0
 	movs r1, 0
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	str r4, [sp]
 	adds r0, r6, 0
 	mov r1, r8
@@ -404,7 +404,7 @@ sub_815F094: @ 815F094
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_810FE50
+	bl SetWindowTemplateFields
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]
@@ -451,7 +451,7 @@ sub_815F114: @ 815F114
 	movs r1, 0x1
 	bl sub_810F4D8
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0

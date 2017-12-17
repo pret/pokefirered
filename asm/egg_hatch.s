@@ -173,8 +173,8 @@ _08046CE6:
 	bx r0
 	thumb_func_end sub_8046BFC
 
-	thumb_func_start sub_8046D60
-sub_8046D60: @ 8046D60
+	thumb_func_start AddHatchedMonToParty
+AddHatchedMonToParty: @ 8046D60
 	push {r4,r5,lr}
 	sub sp, 0x14
 	lsls r0, 24
@@ -253,19 +253,19 @@ sub_8046D60: @ 8046D60
 _08046E14: .4byte gUnknown_2024284
 _08046E18: .4byte gUnknown_202402C
 _08046E1C: .4byte gUnknown_2021CD0
-	thumb_func_end sub_8046D60
+	thumb_func_end AddHatchedMonToParty
 
-	thumb_func_start sub_8046E20
-sub_8046E20: @ 8046E20
+	thumb_func_start ScriptHatchMon
+ScriptHatchMon: @ 8046E20
 	push {lr}
 	ldr r0, _08046E30 @ =gUnknown_20370C0
 	ldrb r0, [r0]
-	bl sub_8046D60
+	bl AddHatchedMonToParty
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08046E30: .4byte gUnknown_20370C0
-	thumb_func_end sub_8046E20
+	thumb_func_end ScriptHatchMon
 
 	thumb_func_start sub_8046E34
 sub_8046E34: @ 8046E34
@@ -616,7 +616,7 @@ _08047090:
 	adds r1, r0, 0
 	movs r0, 0
 	bl SetBgTilemapBuffer
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	bl ResetPaletteFade
 	bl FreeAllSpritePalettes
 	bl ResetSpriteData
@@ -680,7 +680,7 @@ _080471C8:
 	ldr r0, _080471DC @ =gUnknown_3000E74
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
-	bl sub_8046D60
+	bl AddHatchedMonToParty
 	b _0804724A
 	.align 2, 0
 _080471DC: .4byte gUnknown_3000E74
@@ -955,12 +955,12 @@ _0804741E:
 	lsls r0, 2
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r1, _08047440 @ =sub_80476B0
+	ldr r1, _08047440 @ =SpriteCB_Egg_0
 	str r1, [r0]
 	b _08047684
 	.align 2, 0
 _0804743C: .4byte gUnknown_202063C
-_08047440: .4byte sub_80476B0
+_08047440: .4byte SpriteCB_Egg_0
 _08047444:
 	ldr r2, _0804746C @ =gUnknown_202063C
 	ldr r3, [r5]
@@ -1012,7 +1012,7 @@ _08047482:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8047A9C
+	bl EggHatchPrintMessage
 	ldr r0, _080474E4 @ =0x00000103
 	bl PlayFanfare
 	ldr r1, [r5]
@@ -1025,7 +1025,7 @@ _08047482:
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08047684
 	.align 2, 0
 _080474D4: .4byte gUnknown_2024284
@@ -1069,7 +1069,7 @@ _08047504:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8047A9C
+	bl EggHatchPrintMessage
 	ldr r1, [r5]
 	b _08047648
 	.align 2, 0
@@ -1213,7 +1213,7 @@ _08047654:
 	bne _08047684
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x8]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0
 	bl UnsetBgTilemapBuffer
 	movs r0, 0x1
@@ -1242,8 +1242,8 @@ _080476A8: .4byte gUnknown_2037AB8
 _080476AC: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8047338
 
-	thumb_func_start sub_80476B0
-sub_80476B0: @ 80476B0
+	thumb_func_start SpriteCB_Egg_0
+SpriteCB_Egg_0: @ 80476B0
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x2E]
@@ -1253,13 +1253,13 @@ sub_80476B0: @ 80476B0
 	asrs r0, 16
 	cmp r0, 0x14
 	ble _080476D0
-	ldr r0, _080476CC @ =sub_8047708
+	ldr r0, _080476CC @ =SpriteCB_Egg_1
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 	b _08047700
 	.align 2, 0
-_080476CC: .4byte sub_8047708
+_080476CC: .4byte SpriteCB_Egg_1
 _080476D0:
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x14
@@ -1285,10 +1285,10 @@ _08047700:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80476B0
+	thumb_func_end SpriteCB_Egg_0
 
-	thumb_func_start sub_8047708
-sub_8047708: @ 8047708
+	thumb_func_start SpriteCB_Egg_1
+SpriteCB_Egg_1: @ 8047708
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x32]
@@ -1306,13 +1306,13 @@ sub_8047708: @ 8047708
 	asrs r0, 16
 	cmp r0, 0x14
 	ble _08047738
-	ldr r0, _08047734 @ =sub_804776C
+	ldr r0, _08047734 @ =SpriteCB_Egg_2
 	str r0, [r4, 0x1C]
 	strh r1, [r4, 0x2E]
 	strh r1, [r4, 0x32]
 	b _08047764
 	.align 2, 0
-_08047734: .4byte sub_804776C
+_08047734: .4byte SpriteCB_Egg_2
 _08047738:
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x14
@@ -1337,10 +1337,10 @@ _08047764:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8047708
+	thumb_func_end SpriteCB_Egg_1
 
-	thumb_func_start sub_804776C
-sub_804776C: @ 804776C
+	thumb_func_start SpriteCB_Egg_2
+SpriteCB_Egg_2: @ 804776C
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x32]
@@ -1429,7 +1429,7 @@ _08047826:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804776C
+	thumb_func_end SpriteCB_Egg_2
 
 	thumb_func_start SpriteCB_Egg_3
 SpriteCB_Egg_3: @ 804782C
@@ -1759,8 +1759,8 @@ _08047A94: .4byte gUnknown_8260184
 _08047A98: .4byte gUnknown_202063C
 	thumb_func_end CreateEggShardSprite
 
-	thumb_func_start sub_8047A9C
-sub_8047A9C: @ 8047A9C
+	thumb_func_start EggHatchPrintMessage
+EggHatchPrintMessage: @ 8047A9C
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1815,6 +1815,6 @@ sub_8047A9C: @ 8047A9C
 	bx r0
 	.align 2, 0
 _08047B08: .4byte gUnknown_3000E74
-	thumb_func_end sub_8047A9C
+	thumb_func_end EggHatchPrintMessage
 
 	.align 2, 0 @ Don't pad with nop.

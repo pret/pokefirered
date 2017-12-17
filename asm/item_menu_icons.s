@@ -329,8 +329,8 @@ _08098724:
 	bx r1
 	thumb_func_end sub_80986EC
 
-	thumb_func_start sub_809872C
-sub_809872C: @ 809872C
+	thumb_func_start CopyItemIconPicTo4x4Buffer
+CopyItemIconPicTo4x4Buffer: @ 809872C
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r5, r1, 0
@@ -352,10 +352,10 @@ _08098734:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809872C
+	thumb_func_end CopyItemIconPicTo4x4Buffer
 
-	thumb_func_start sub_8098758
-sub_8098758: @ 8098758
+	thumb_func_start AddItemIconObject
+AddItemIconObject: @ 8098758
 	push {r4-r7,lr}
 	sub sp, 0x28
 	lsls r0, 16
@@ -378,7 +378,7 @@ sub_8098758: @ 8098758
 	ldr r0, [r1]
 	ldr r2, _08098800 @ =gUnknown_2039888
 	ldr r1, [r2]
-	bl sub_809872C
+	bl CopyItemIconPicTo4x4Buffer
 	ldr r1, _08098800 @ =gUnknown_2039888
 	ldr r0, [r1]
 	str r0, [sp, 0x18]
@@ -440,10 +440,10 @@ _08098812:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8098758
+	thumb_func_end AddItemIconObject
 
-	thumb_func_start sub_809881C
-sub_809881C: @ 809881C
+	thumb_func_start AddItemIconObjectWithCustomObjectTemplate
+AddItemIconObjectWithCustomObjectTemplate: @ 809881C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -469,7 +469,7 @@ sub_809881C: @ 809881C
 	ldr r0, [r1]
 	ldr r2, _080988CC @ =gUnknown_2039888
 	ldr r1, [r2]
-	bl sub_809872C
+	bl CopyItemIconPicTo4x4Buffer
 	ldr r1, _080988CC @ =gUnknown_2039888
 	ldr r0, [r1]
 	str r0, [sp, 0x18]
@@ -532,7 +532,7 @@ _080988DA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809881C
+	thumb_func_end AddItemIconObjectWithCustomObjectTemplate
 
 	thumb_func_start sub_80988E8
 sub_80988E8: @ 80988E8
@@ -555,7 +555,7 @@ sub_80988E8: @ 80988E8
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_8098758
+	bl AddItemIconObject
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -653,7 +653,7 @@ sub_80989A0: @ 80989A0
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_8098758
+	bl AddItemIconObject
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40

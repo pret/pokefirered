@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_813CC90
-sub_813CC90: @ 813CC90
+	thumb_func_start UnkTextUtil_Reset
+UnkTextUtil_Reset: @ 813CC90
 	push {lr}
 	ldr r1, _0813CCA8 @ =gUnknown_203F34C
 	movs r2, 0
@@ -21,10 +21,10 @@ _0813CC9A:
 	bx r0
 	.align 2, 0
 _0813CCA8: .4byte gUnknown_203F34C
-	thumb_func_end sub_813CC90
+	thumb_func_end UnkTextUtil_Reset
 
-	thumb_func_start sub_813CCAC
-sub_813CCAC: @ 813CCAC
+	thumb_func_start UnkTextUtil_SetPtrI
+UnkTextUtil_SetPtrI: @ 813CCAC
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -40,10 +40,10 @@ _0813CCC0:
 	bx r0
 	.align 2, 0
 _0813CCC4: .4byte gUnknown_203F34C
-	thumb_func_end sub_813CCAC
+	thumb_func_end UnkTextUtil_SetPtrI
 
-	thumb_func_start sub_813CCC8
-sub_813CCC8: @ 813CCC8
+	thumb_func_start UnkTextUtil_StringExpandPlaceholders
+UnkTextUtil_StringExpandPlaceholders: @ 813CCC8
 	push {r4,r5,lr}
 	adds r2, r0, 0
 	adds r4, r1, 0
@@ -86,10 +86,10 @@ _0813CD08:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_813CCC8
+	thumb_func_end UnkTextUtil_StringExpandPlaceholders
 
-	thumb_func_start sub_813CD14
-sub_813CD14: @ 813CD14
+	thumb_func_start UnkTextUtil_GetPtrI
+UnkTextUtil_GetPtrI: @ 813CD14
 	lsls r0, 24
 	ldr r1, _0813CD20 @ =gUnknown_203F34C
 	lsrs r0, 22
@@ -98,7 +98,7 @@ sub_813CD14: @ 813CD14
 	bx lr
 	.align 2, 0
 _0813CD20: .4byte gUnknown_203F34C
-	thumb_func_end sub_813CD14
+	thumb_func_end UnkTextUtil_GetPtrI
 
 	thumb_func_start sub_813CD24
 sub_813CD24: @ 813CD24

@@ -31,12 +31,12 @@ sub_812E51C: @ 812E51C
 	strb r0, [r1, 0x9]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r1, sp
 	strb r0, [r1, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r1, sp
 	strb r0, [r1, 0xB]
 	mov r3, sp
@@ -67,7 +67,7 @@ sub_812E51C: @ 812E51C
 	mov r0, sp
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	add sp, 0x10
 	pop {r4-r6}
 	pop {r0}
@@ -135,7 +135,7 @@ sub_812E5A4: @ 812E5A4
 	lsrs r1, 24
 	mov r0, sp
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -191,7 +191,7 @@ sub_812E62C: @ 812E62C
 	strb r0, [r2, 0xC]
 	adds r0, r6, 0
 	movs r1, 0x5
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r3, sp
 	lsls r0, 4
 	ldrb r2, [r3, 0xC]
@@ -202,7 +202,7 @@ sub_812E62C: @ 812E62C
 	strb r1, [r3, 0xC]
 	adds r0, r6, 0
 	movs r1, 0x6
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r2, sp
 	adds r1, r4, 0
 	ands r1, r0
@@ -212,7 +212,7 @@ sub_812E62C: @ 812E62C
 	strb r5, [r2, 0xD]
 	adds r0, r6, 0
 	movs r1, 0x7
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r2, sp
 	lsls r0, 4
 	ldrb r1, [r2, 0xD]
@@ -222,7 +222,7 @@ sub_812E62C: @ 812E62C
 	mov r0, sp
 	mov r1, r8
 	adds r2, r7, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -275,7 +275,7 @@ _0812E70A:
 	mov r0, r8
 	movs r1, 0x2
 	adds r2, r7, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	b _0812E75C
 	.align 2, 0
 _0812E734: .4byte gUnknown_300500C

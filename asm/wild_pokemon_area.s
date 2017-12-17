@@ -32,7 +32,7 @@ _0813CA02:
 	movs r0, 0
 	str r0, [sp, 0x18]
 	ldr r0, _0813CA74 @ =0x00004024
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x1C]

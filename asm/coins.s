@@ -150,7 +150,7 @@ sub_80D060C: @ 80D060C
 	movs r1, 0
 	mov r2, r9
 	mov r3, r8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -194,7 +194,7 @@ sub_80D0674: @ 80D0674
 	adds r0, r6, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	str r4, [sp]
 	adds r0, r6, 0
 	mov r1, r8
@@ -242,7 +242,7 @@ sub_80D06D0: @ 80D06D0
 	adds r0, r1, 0
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -280,7 +280,7 @@ sub_80D072C: @ 80D072C
 	add r0, sp, 0x10
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_810FE50
+	bl SetWindowTemplateFields
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]
@@ -312,7 +312,7 @@ sub_80D072C: @ 80D072C
 	str r1, [sp, 0x4]
 	str r3, [sp, 0x8]
 	movs r1, 0x2
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r6, 0
 	bl sub_80D06D0
 	add sp, 0x20
@@ -335,7 +335,7 @@ sub_80D07C8: @ 80D07C8
 	movs r1, 0x1
 	bl sub_810F4D8
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0

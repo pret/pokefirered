@@ -10,7 +10,7 @@ sub_80A0E90: @ 80A0E90
 	push {lr}
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -22,7 +22,7 @@ sub_80A0EA4: @ 80A0EA4
 	push {lr}
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A0EA4
@@ -32,7 +32,7 @@ sub_80A0EB4: @ 80A0EB4
 	push {lr}
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A0EB4

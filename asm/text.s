@@ -301,7 +301,7 @@ _08005566:
 	bl BlitBitmapRectToWindow
 	ldrb r0, [r5, 0x4]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r6, 0x1]
 	movs r1, 0x20
 	negs r1, r1
@@ -352,7 +352,7 @@ sub_80055D4: @ 80055D4
 	bl FillWindowPixelRect
 	ldrb r0, [r5, 0x4]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -387,8 +387,8 @@ _0800562E:
 	bx r1
 	thumb_func_end sub_8005608
 
-	thumb_func_start sub_8005634
-sub_8005634: @ 8005634
+	thumb_func_start TextPrinterWaitWithDownArrow
+TextPrinterWaitWithDownArrow: @ 8005634
 	push {r4,lr}
 	adds r2, r0, 0
 	movs r4, 0
@@ -424,10 +424,10 @@ _08005672:
 	bx r1
 	.align 2, 0
 _0800567C: .4byte gUnknown_30030F0
-	thumb_func_end sub_8005634
+	thumb_func_end TextPrinterWaitWithDownArrow
 
-	thumb_func_start sub_8005680
-sub_8005680: @ 8005680
+	thumb_func_start TextPrinterWait
+TextPrinterWait: @ 8005680
 	push {r4,lr}
 	adds r2, r0, 0
 	movs r4, 0
@@ -461,10 +461,10 @@ _080056B8:
 	bx r1
 	.align 2, 0
 _080056C0: .4byte gUnknown_30030F0
-	thumb_func_end sub_8005680
+	thumb_func_end TextPrinterWait
 
-	thumb_func_start sub_80056C4
-sub_80056C4: @ 80056C4
+	thumb_func_start DrawDownArrow
+DrawDownArrow: @ 80056C4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -547,7 +547,7 @@ _08005736:
 	bl BlitBitmapRectToWindow
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x8
 	mov r1, r8
 	strb r0, [r1]
@@ -566,7 +566,7 @@ _08005778:
 	.align 2, 0
 _08005788: .4byte gUnknown_81EA24C
 _0800578C: .4byte gUnknown_81EA64C
-	thumb_func_end sub_80056C4
+	thumb_func_end DrawDownArrow
 
 	thumb_func_start sub_8005790
 sub_8005790: @ 8005790
@@ -1188,7 +1188,7 @@ _08005C50:
 _08005C54: .4byte gUnknown_3003DA0
 _08005C58:
 	adds r0, r6, 0
-	bl sub_8005680
+	bl TextPrinterWait
 	lsls r0, 16
 	cmp r0, 0
 	bne _08005C66
@@ -1199,7 +1199,7 @@ _08005C66:
 	b _08005B30
 _08005C6C:
 	adds r0, r6, 0
-	bl sub_8005634
+	bl TextPrinterWaitWithDownArrow
 	lsls r0, 16
 	cmp r0, 0
 	bne _08005C7A
@@ -1221,7 +1221,7 @@ _08005C7A:
 	b _08005B30
 _08005C98:
 	adds r0, r6, 0
-	bl sub_8005634
+	bl TextPrinterWaitWithDownArrow
 	lsls r0, 16
 	cmp r0, 0
 	bne _08005CA6
@@ -1299,7 +1299,7 @@ _08005D0C:
 _08005D36:
 	ldrb r0, [r6, 0x4]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08005B30
 _08005D40:
 	strb r2, [r6, 0x1C]
@@ -1460,7 +1460,7 @@ _08005E80:
 	ble _08005E74
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_80F79D8
+	bl GetFontAttribute
 	add r0, r8
 	lsls r0, 24
 	lsrs r0, 24
@@ -1538,7 +1538,7 @@ _08005F02:
 	bne _08005F20
 	ldr r0, [sp]
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -1615,7 +1615,7 @@ _08005F9E:
 	bne _08005FD4
 	adds r4, 0x1
 	ldrb r0, [r4]
-	bl sub_813CD14
+	bl UnkTextUtil_GetPtrI
 	adds r6, r0, 0
 	b _08005FD4
 	.align 2, 0
@@ -1707,7 +1707,7 @@ _08006068:
 	bne _080060FC
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0

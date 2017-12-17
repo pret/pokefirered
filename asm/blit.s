@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8004A60
-sub_8004A60: @ 8004A60
+	thumb_func_start BlitBitmapRect4BitWithoutColorKey
+BlitBitmapRect4BitWithoutColorKey: @ 8004A60
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -33,17 +33,17 @@ sub_8004A60: @ 8004A60
 	str r7, [sp, 0xC]
 	movs r4, 0xFF
 	str r4, [sp, 0x10]
-	bl sub_8004AA4
+	bl BlitBitmapRect4Bit
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8004A60
+	thumb_func_end BlitBitmapRect4BitWithoutColorKey
 
-	thumb_func_start sub_8004AA4
-sub_8004AA4: @ 8004AA4
+	thumb_func_start BlitBitmapRect4Bit
+BlitBitmapRect4Bit: @ 8004AA4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -294,10 +294,10 @@ _08004C72:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8004AA4
+	thumb_func_end BlitBitmapRect4Bit
 
-	thumb_func_start sub_8004C84
-sub_8004C84: @ 8004C84
+	thumb_func_start FillBitmapRect4Bit
+FillBitmapRect4Bit: @ 8004C84
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -400,7 +400,7 @@ _08004D30:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8004C84
+	thumb_func_end FillBitmapRect4Bit
 
 	thumb_func_start sub_8004D40
 sub_8004D40: @ 8004D40

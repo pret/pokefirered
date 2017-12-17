@@ -14,8 +14,8 @@ sub_8082740: @ 8082740
 _08082748: .4byte gUnknown_20386DC
 	thumb_func_end sub_8082740
 
-	thumb_func_start sub_808274C
-sub_808274C: @ 808274C
+	thumb_func_start ChooseWildMonIndex_Land
+ChooseWildMonIndex_Land: @ 808274C
 	push {lr}
 	bl Random
 	lsls r0, 16
@@ -119,10 +119,10 @@ _08082800:
 _08082802:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808274C
+	thumb_func_end ChooseWildMonIndex_Land
 
-	thumb_func_start sub_8082808
-sub_8082808: @ 8082808
+	thumb_func_start ChooseWildMonIndex_WaterRock
+ChooseWildMonIndex_WaterRock: @ 8082808
 	push {lr}
 	bl Random
 	lsls r0, 16
@@ -168,10 +168,10 @@ _08082856:
 _08082858:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8082808
+	thumb_func_end ChooseWildMonIndex_WaterRock
 
-	thumb_func_start sub_808285C
-sub_808285C: @ 808285C
+	thumb_func_start ChooseWildMonIndex_Fishing
+ChooseWildMonIndex_Fishing: @ 808285C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -259,7 +259,7 @@ _080828F0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808285C
+	thumb_func_end ChooseWildMonIndex_Fishing
 
 	thumb_func_start sub_80828F8
 sub_80828F8: @ 80828F8
@@ -325,7 +325,7 @@ _08082944:
 	cmp r0, r6
 	bne _08082980
 	ldr r0, _0808299C @ =0x00004024
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x8
@@ -372,7 +372,7 @@ _080829BC: .4byte 0x0000ffff
 sub_80829C0: @ 80829C0
 	push {lr}
 	ldr r0, _080829EC @ =0x00000849
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _080829F4
@@ -547,10 +547,10 @@ _08082B10:
 	beq _08082B1C
 	b _08082B24
 _08082B16:
-	bl sub_808274C
+	bl ChooseWildMonIndex_Land
 	b _08082B20
 _08082B1C:
-	bl sub_8082808
+	bl ChooseWildMonIndex_WaterRock
 _08082B20:
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -593,7 +593,7 @@ sub_8082B64: @ 8082B64
 	adds r6, r0, 0
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_808285C
+	bl ChooseWildMonIndex_Fishing
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -729,7 +729,7 @@ sub_8082C58: @ 8082C58
 	cmp r0, 0
 	bne _08082C84
 	adds r0, r4, 0
-	bl sub_8040D7C
+	bl GetMonAbility
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1207,7 +1207,7 @@ _08083028:
 _0808302E:
 	movs r0, 0x1
 	strb r0, [r6]
-	bl sub_8082808
+	bl ChooseWildMonIndex_WaterRock
 	lsls r0, 24
 	ldr r1, [r4, 0x4]
 	b _08083068
@@ -1223,12 +1223,12 @@ _0808303C:
 	bls _08083060
 	movs r0, 0x1
 	strb r0, [r6]
-	bl sub_8082808
+	bl ChooseWildMonIndex_WaterRock
 	lsls r0, 24
 	ldr r1, [r4, 0x4]
 	b _08083068
 _08083060:
-	bl sub_808274C
+	bl ChooseWildMonIndex_Land
 	lsls r0, 24
 	ldr r1, [r5, 0x4]
 _08083068:
@@ -1259,7 +1259,7 @@ sub_8083074: @ 8083074
 	ldr r4, [r0]
 	cmp r4, 0
 	beq _080830B0
-	bl sub_8082808
+	bl ChooseWildMonIndex_WaterRock
 	lsls r0, 24
 	ldr r1, [r4, 0x4]
 	lsrs r0, 22
@@ -1280,7 +1280,7 @@ _080830B2:
 	thumb_func_start sub_80830B8
 sub_80830B8: @ 80830B8
 	push {r4,r5,lr}
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	beq _08083104
 	ldr r0, _080830F8 @ =gUnknown_203ADFA
@@ -1289,7 +1289,7 @@ sub_80830B8: @ 80830B8
 	beq _08083104
 	ldr r5, _080830FC @ =0x00004020
 	adds r0, r5, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -1299,7 +1299,7 @@ sub_80830B8: @ 80830B8
 	lsrs r4, 16
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806E584
+	bl VarSet
 	cmp r4, 0
 	bne _08083104
 	ldr r0, _08083100 @ =gUnknown_81BFB65
@@ -1324,7 +1324,7 @@ sub_808310C: @ 808310C
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, _08083158 @ =0x00004020
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	cmp r0, 0
 	beq _08083152
@@ -1404,7 +1404,7 @@ _08083198:
 sub_80831A0: @ 80831A0
 	push {lr}
 	ldr r0, _080831B4 @ =0x00000803
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1415,7 +1415,7 @@ sub_80831A0: @ 80831A0
 _080831B4: .4byte 0x00000803
 _080831B8:
 	ldr r0, _080831CC @ =0x00000804
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1747,7 +1747,7 @@ sub_8083410: @ 8083410
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _0808342C @ =0x00004020
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	cmp r0, 0
 	bne _08083434

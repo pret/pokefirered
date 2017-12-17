@@ -495,7 +495,7 @@ SafariBufferExecCompleted: @ 80DD8C8
 	movs r0, 0x2
 	movs r1, 0x4
 	mov r2, sp
-	bl sub_800D9EC
+	bl PrepareBufferDataTransferLink
 	ldr r1, _080DD918 @ =gUnknown_2022BC4
 	ldrb r0, [r4]
 	lsls r0, 9

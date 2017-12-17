@@ -137,7 +137,7 @@ _080F5660:
 	bl sub_812E5A4
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _080F56E2
 	.align 2, 0
 _080F5694: .4byte gUnknown_841EE80
@@ -244,7 +244,7 @@ _080F5744:
 	bl sub_812E5A4
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	bl sub_80D972C
 _080F577A:
 	ldr r1, [r5]
@@ -307,7 +307,7 @@ _080F57D4:
 	bl sub_81100E8
 	adds r0, r6, 0
 	bl DestroyTask
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, [r5]
 	bl Free
 	str r4, [r5]
@@ -446,7 +446,7 @@ _080F5846:
 	bl ChangeBgY
 	ldr r0, _080F5948 @ =gUnknown_841EE68
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0

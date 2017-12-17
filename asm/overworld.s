@@ -95,7 +95,7 @@ sub_8054C70: @ 8054C70
 	ldr r4, _08054C9C @ =gUnknown_826D29E
 _08054C78:
 	ldrh r0, [r4]
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _08054C8A
@@ -121,27 +121,27 @@ sub_8054CA0: @ 8054CA0
 	bl sub_80559E4
 	movs r0, 0x83
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054CEC @ =0x0000405e
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _08054CF0 @ =0x00000802
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054CF4 @ =0x0000406e
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _08054CF8 @ =0x00000805
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054CFC @ =0x00000806
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054D00 @ =0x00000808
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054D04 @ =0x0000404d
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -160,27 +160,27 @@ sub_8054D08: @ 8054D08
 	bl sub_80559E4
 	movs r0, 0x83
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054D54 @ =0x0000405e
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _08054D58 @ =0x00000802
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054D5C @ =0x0000406e
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _08054D60 @ =0x00000805
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054D64 @ =0x00000806
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054D68 @ =0x00000808
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054D6C @ =0x0000404d
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -199,27 +199,27 @@ sub_8054D70: @ 8054D70
 	bl sub_80559E4
 	movs r0, 0x83
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054DBC @ =0x0000405e
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _08054DC0 @ =0x00000802
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054DC4 @ =0x0000406e
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _08054DC8 @ =0x00000805
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054DCC @ =0x00000806
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054DD0 @ =0x00000808
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054DD4 @ =0x0000404d
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -238,27 +238,27 @@ sub_8054DD8: @ 8054DD8
 	bl sub_80559E4
 	movs r0, 0x83
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054E24 @ =0x0000405e
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _08054E28 @ =0x00000802
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054E2C @ =0x0000406e
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _08054E30 @ =0x00000805
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054E34 @ =0x00000806
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054E38 @ =0x00000808
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054E3C @ =0x0000404d
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -276,13 +276,13 @@ sub_8054E40: @ 8054E40
 	push {lr}
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08054E64 @ =0x0000406e
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	bl sub_805610C
-	bl sub_8141DAC
-	bl sub_8141DD4
+	bl UpdateLocationHistoryForRoamer
+	bl RoamerMoveToOtherLocationSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1135,7 +1135,7 @@ sub_805546C: @ 805546C
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80BFCB0
+	bl GetHealLocationPointer
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _0805549A
@@ -1191,7 +1191,7 @@ sub_80554CC: @ 80554CC
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80BFCB0
+	bl GetHealLocationPointer
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _08055500
@@ -1522,7 +1522,7 @@ sub_8055738: @ 8055738
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80BFCB0
+	bl GetHealLocationPointer
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0805576C
@@ -1733,8 +1733,8 @@ _080558D4:
 	cmp r4, 0xC
 	ble _080558D4
 	bl sub_806FFB0
-	bl sub_8141DAC
-	bl sub_8141E28
+	bl UpdateLocationHistoryForRoamer
+	bl RoamerMove
 	bl sub_8110920
 	bl sub_807B1A4
 	bl sub_806E918
@@ -1789,14 +1789,14 @@ sub_8055920: @ 8055920
 	cmp r4, 0
 	beq _08055974
 	ldr r0, _080559A4 @ =0x00000806
-	bl sub_806E6A8
+	bl FlagClear
 _08055974:
 	bl sub_8055CB8
 	bl sub_8055E84
 	bl mapheader_run_script_with_tag_x3
 	bl sub_815D8F8
-	bl sub_8141DAC
-	bl sub_8141DD4
+	bl UpdateLocationHistoryForRoamer
+	bl RoamerMoveToOtherLocationSet
 	bl sub_8110920
 	bl sub_80589D4
 	pop {r4}
@@ -1964,7 +1964,7 @@ sub_8055ACC: @ 8055ACC
 	cmp r4, 0x8
 	beq _08055AE8
 	ldr r0, _08055AF0 @ =0x00000802
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _08055B30
@@ -2057,7 +2057,7 @@ sub_8055B74: @ 8055B74
 	lsls r3, 24
 	lsrs r5, r3, 24
 	ldr r0, _08055BD4 @ =0x00000802
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _08055B94
@@ -2232,7 +2232,7 @@ _08055CC8: .4byte gUnknown_2036DFC
 _08055CCC: .4byte gUnknown_3005008
 _08055CD0:
 	ldr r0, _08055CE8 @ =0x00000806
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _08055CF0
@@ -2260,8 +2260,8 @@ _08055D00: .4byte gUnknown_3005008
 _08055D04: .4byte gUnknown_83C68E0
 	thumb_func_end sub_8055CB8
 
-	thumb_func_start sub_8055D08
-sub_8055D08: @ 8055D08
+	thumb_func_start Overworld_SetFlashLevel
+Overworld_SetFlashLevel: @ 8055D08
 	push {lr}
 	adds r1, r0, 0
 	cmp r1, 0
@@ -2282,10 +2282,10 @@ _08055D1A:
 	.align 2, 0
 _08055D28: .4byte gUnknown_83C68E0
 _08055D2C: .4byte gUnknown_3005008
-	thumb_func_end sub_8055D08
+	thumb_func_end Overworld_SetFlashLevel
 
-	thumb_func_start sub_8055D30
-sub_8055D30: @ 8055D30
+	thumb_func_start sav1_get_flash_used_on_map
+sav1_get_flash_used_on_map: @ 8055D30
 	ldr r0, _08055D3C @ =gUnknown_3005008
 	ldr r0, [r0]
 	adds r0, 0x30
@@ -2293,7 +2293,7 @@ sub_8055D30: @ 8055D30
 	bx lr
 	.align 2, 0
 _08055D3C: .4byte gUnknown_3005008
-	thumb_func_end sub_8055D30
+	thumb_func_end sav1_get_flash_used_on_map
 
 	thumb_func_start sub_8055D40
 sub_8055D40: @ 8055D40
@@ -2500,7 +2500,7 @@ _08055EA8:
 	cmp r0, 0x2
 	beq _08055F14
 	ldr r0, _08055F04 @ =0x00004001
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2618,7 +2618,7 @@ sub_8055F88: @ 8055F88
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, _08055FC0 @ =0x00004001
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3439,8 +3439,8 @@ sub_80565E0: @ 80565E0
 _080565E8: .4byte gUnknown_30030F0
 	thumb_func_end sub_80565E0
 
-	thumb_func_start sub_80565EC
-sub_80565EC: @ 80565EC
+	thumb_func_start map_post_load_hook_exec
+map_post_load_hook_exec: @ 80565EC
 	push {r4,lr}
 	ldr r4, _08056604 @ =gUnknown_3005024
 	ldr r0, [r4]
@@ -3485,10 +3485,10 @@ _08056638:
 	bx r1
 	.align 2, 0
 _08056640: .4byte gUnknown_3005020
-	thumb_func_end sub_80565EC
+	thumb_func_end map_post_load_hook_exec
 
-	thumb_func_start sub_8056644
-sub_8056644: @ 8056644
+	thumb_func_start CB2_NewGame
+CB2_NewGame: @ 8056644
 	push {lr}
 	bl sub_80569BC
 	bl StopMapMusic
@@ -3520,10 +3520,10 @@ _08056694: .4byte gUnknown_3005024
 _08056698: .4byte gUnknown_3003528
 _0805669C: .4byte sub_8056534
 _080566A0: .4byte sub_80565B4
-	thumb_func_end sub_8056644
+	thumb_func_end CB2_NewGame
 
-	thumb_func_start sub_80566A4
-sub_80566A4: @ 80566A4
+	thumb_func_start c2_whiteout
+c2_whiteout: @ 80566A4
 	push {lr}
 	sub sp, 0x4
 	ldr r1, _08056708 @ =gUnknown_30030F0
@@ -3569,7 +3569,7 @@ _0805670C: .4byte gUnknown_3005020
 _08056710: .4byte sub_807F5F0
 _08056714: .4byte sub_8056534
 _08056718: .4byte sub_80565B4
-	thumb_func_end sub_80566A4
+	thumb_func_end c2_whiteout
 
 	thumb_func_start sub_805671C
 sub_805671C: @ 805671C
@@ -3899,13 +3899,13 @@ _080569CE:
 	movs r0, 0xC5
 	bl EnableInterrupts
 	movs r0, 0x2
-	bl sub_8000B94
+	bl DisableInterrupts
 	b _080569F4
 	.align 2, 0
 _080569E4: .4byte gUnknown_3003F3C
 _080569E8:
 	movs r0, 0x2
-	bl sub_8000B94
+	bl DisableInterrupts
 	movs r0, 0x1
 	bl EnableInterrupts
 _080569F4:
@@ -3944,7 +3944,7 @@ sub_8056A14: @ 8056A14
 	thumb_func_start sub_8056A34
 sub_8056A34: @ 8056A34
 	push {lr}
-	bl sub_8055D30
+	bl sav1_get_flash_used_on_map
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -4066,7 +4066,7 @@ _08056B3C:
 	.align 2, 0
 _08056B54: .4byte gUnknown_3003F3C
 _08056B58:
-	bl sub_80565EC
+	bl map_post_load_hook_exec
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056B6E
@@ -4143,7 +4143,7 @@ _08056BFA:
 	movs r0, 0x1
 	b _08056CD2
 _08056BFE:
-	bl sub_805709C
+	bl mli4_mapscripts_and_other
 	bl sub_8057114
 	ldr r0, _08056C1C @ =gUnknown_203ADFA
 	ldrb r0, [r0]
@@ -4228,7 +4228,7 @@ _08056CA8:
 	.align 2, 0
 _08056CBC: .4byte gUnknown_2036DFC
 _08056CC0:
-	bl sub_80565EC
+	bl map_post_load_hook_exec
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056CD0
@@ -4278,7 +4278,7 @@ _08056D1C:
 	bl sub_812B35C
 	b _08056D30
 _08056D26:
-	bl sub_80565EC
+	bl map_post_load_hook_exec
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056D3C
@@ -4397,7 +4397,7 @@ _08056E18:
 	.align 2, 0
 _08056E30: .4byte gUnknown_3003F3C
 _08056E34:
-	bl sub_80565EC
+	bl map_post_load_hook_exec
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056E54
@@ -4676,8 +4676,8 @@ _08057094: .4byte gUnknown_300506C
 _08057098: .4byte gUnknown_3005068
 	thumb_func_end sub_8057074
 
-	thumb_func_start sub_805709C
-sub_805709C: @ 805709C
+	thumb_func_start mli4_mapscripts_and_other
+mli4_mapscripts_and_other: @ 805709C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r0, _080570F4 @ =gUnknown_300506C
@@ -4718,7 +4718,7 @@ sub_805709C: @ 805709C
 _080570F4: .4byte gUnknown_300506C
 _080570F8: .4byte gUnknown_3005068
 _080570FC: .4byte gUnknown_300500C
-	thumb_func_end sub_805709C
+	thumb_func_end mli4_mapscripts_and_other
 
 	thumb_func_start sub_8057100
 sub_8057100: @ 8057100
@@ -5101,7 +5101,7 @@ _08057412:
 	strb r0, [r4]
 	b _08057428
 _0805741A:
-	bl sub_80565EC
+	bl map_post_load_hook_exec
 	lsls r0, 24
 	cmp r0, 0
 	beq _08057428
@@ -7888,7 +7888,7 @@ _080588C6:
 	movs r2, 0
 	str r2, [sp]
 	movs r3, 0
-	bl sub_805E978
+	bl AddPseudoFieldObject
 	strb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4

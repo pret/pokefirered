@@ -229,7 +229,7 @@ _0814BCA2:
 	movs r0, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0814BD12
 	.align 2, 0
 _0814BCE8: .4byte gUnknown_2021D18
@@ -250,11 +250,11 @@ _0814BCF0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0814BD12:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0814BD68
 	.align 2, 0
 _0814BD1C: .4byte gUnknown_846E328
@@ -2868,10 +2868,10 @@ _0814D106:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _0814D14C @ =sub_80DA634
 	movs r1, 0
 	bl CreateTask
@@ -3232,7 +3232,7 @@ _0814D3C0:
 	str r1, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0814D40C
 	.align 2, 0
 _0814D3EC: .4byte gUnknown_846E328
@@ -3249,11 +3249,11 @@ _0814D3F0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0814D40C:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0814D456
 	.align 2, 0
 _0814D418: .4byte gUnknown_846E328

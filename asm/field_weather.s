@@ -2768,8 +2768,8 @@ _0807B0FA:
 	bx r0
 	thumb_func_end sub_807B0C4
 
-	thumb_func_start sub_807B100
-sub_807B100: @ 807B100
+	thumb_func_start SetSav1Weather
+SetSav1Weather: @ 807B100
 	push {r4,r5,lr}
 	ldr r4, _0807B12C @ =gUnknown_3005008
 	ldr r1, [r4]
@@ -2791,10 +2791,10 @@ sub_807B100: @ 807B100
 	bx r0
 	.align 2, 0
 _0807B12C: .4byte gUnknown_3005008
-	thumb_func_end sub_807B100
+	thumb_func_end SetSav1Weather
 
-	thumb_func_start sub_807B130
-sub_807B130: @ 807B130
+	thumb_func_start sav1_get_weather_probably
+sav1_get_weather_probably: @ 807B130
 	ldr r0, _0807B13C @ =gUnknown_3005008
 	ldr r0, [r0]
 	adds r0, 0x2E
@@ -2802,7 +2802,7 @@ sub_807B130: @ 807B130
 	bx lr
 	.align 2, 0
 _0807B13C: .4byte gUnknown_3005008
-	thumb_func_end sub_807B130
+	thumb_func_end sav1_get_weather_probably
 
 	thumb_func_start sub_807B140
 sub_807B140: @ 807B140
@@ -2833,8 +2833,8 @@ _0807B170: .4byte gUnknown_2036DFC
 	thumb_func_start sub_807B174
 sub_807B174: @ 807B174
 	push {lr}
-	bl sub_807B100
-	bl sub_807B130
+	bl SetSav1Weather
+	bl sav1_get_weather_probably
 	lsls r0, 24
 	lsrs r0, 24
 	bl weather_set
@@ -2845,8 +2845,8 @@ sub_807B174: @ 807B174
 	thumb_func_start sub_807B18C
 sub_807B18C: @ 807B18C
 	push {lr}
-	bl sub_807B100
-	bl sub_807B130
+	bl SetSav1Weather
+	bl sav1_get_weather_probably
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8079D60
@@ -2857,7 +2857,7 @@ sub_807B18C: @ 807B18C
 	thumb_func_start sub_807B1A4
 sub_807B1A4: @ 807B1A4
 	push {lr}
-	bl sub_807B130
+	bl sav1_get_weather_probably
 	lsls r0, 24
 	lsrs r0, 24
 	bl weather_set
@@ -2868,7 +2868,7 @@ sub_807B1A4: @ 807B1A4
 	thumb_func_start sub_807B1B8
 sub_807B1B8: @ 807B1B8
 	push {lr}
-	bl sub_807B130
+	bl sav1_get_weather_probably
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8079D60

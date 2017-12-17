@@ -942,13 +942,13 @@ sub_8131FB0: @ 8131FB0
 	bne _08131FF4
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	str r4, [sp]
@@ -960,7 +960,7 @@ sub_8131FB0: @ 8131FB0
 	bl FillWindowPixelRect
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0813200A
 _08131FF4:
 	ldr r2, _08132014 @ =gUnknown_841623B
@@ -1262,7 +1262,7 @@ _08132206:
 	beq _08132212
 	bl Free
 _08132212:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1513,7 +1513,7 @@ sub_8132414: @ 8132414
 	lsls r0, 24
 	cmp r0, 0
 	bne _08132454
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	beq _08132454
 	ldr r4, _0813244C @ =gUnknown_203B118
@@ -1543,13 +1543,13 @@ _08132468:
 	strb r0, [r1, 0x10]
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x2
 	lsls r0, 24
 	lsrs r0, 24
@@ -1569,10 +1569,10 @@ _08132468:
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl sub_810FCD0
+	bl AddItemMenuActionTextPrinters
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x2
 	lsls r0, 24
 	lsrs r0, 24
@@ -1622,7 +1622,7 @@ _08132468:
 	bl sub_81335B0
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 _08132528:
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
@@ -3131,7 +3131,7 @@ sub_8133244: @ 8133244
 	push {r4,lr}
 	ldr r0, _081332E0 @ =gUnknown_8463190
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r0, 0
 	movs r1, 0x5B
 	movs r2, 0xE0
@@ -3303,7 +3303,7 @@ sub_813337C: @ 813337C
 	movs r1, 0x6
 	movs r2, 0x64
 	movs r3, 0xB
-	bl sub_80BF474
+	bl DisplayMessageAndContinueTask
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x10
@@ -3371,7 +3371,7 @@ sub_8133404: @ 8133404
 	bl sub_8107D68
 	movs r0, 0x4
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8133404
@@ -3422,7 +3422,7 @@ _0813346E:
 	bls _0813346E
 	movs r0, 0x5
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0813359A
 	.align 2, 0
 _081334A4: .4byte gUnknown_8416213
@@ -3538,7 +3538,7 @@ _08133540:
 	bl sub_81332EC
 	movs r0, 0x5
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0813359A:
 	add sp, 0x14
 	pop {r3,r4}
@@ -3661,7 +3661,7 @@ sub_8133664: @ 8133664
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0xFF

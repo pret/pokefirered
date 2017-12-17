@@ -680,7 +680,7 @@ _080ECB02:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r5, 0x4]
 	adds r0, 0x1
 	strb r0, [r5, 0x4]
@@ -1018,7 +1018,7 @@ _080ECDCC:
 	bl BlitBitmapToWindow
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _080ECE70
 	.align 2, 0
 _080ECE0C: .4byte 0x0000043c
@@ -2739,7 +2739,7 @@ _080EDC0C:
 	adds r0, r4, 0
 	bl Free
 	movs r0, 0x2
-	bl sub_8000B94
+	bl DisableInterrupts
 	movs r0, 0
 	bl SetHBlankCallback
 	ldr r0, _080EDC3C @ =sub_8078914

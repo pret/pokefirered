@@ -562,7 +562,7 @@ _0809CD78:
 	bl FillWindowPixelBuffer
 	ldr r4, _0809CDAC @ =gUnknown_83E0738
 _0809CD82:
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -578,7 +578,7 @@ _0809CD82:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0809CDE0
 	.align 2, 0
 _0809CDAC: .4byte gUnknown_83E0738
@@ -587,7 +587,7 @@ _0809CDB0:
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
 	ldr r4, _0809CDE8 @ =gUnknown_83E0748
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -603,7 +603,7 @@ _0809CDB0:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0809CDE0:
 	add sp, 0x10
 	pop {r4}
@@ -948,12 +948,12 @@ sub_809D070: @ 809D070
 	sub sp, 0xC
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	ldr r0, _0809D11C @ =gUnknown_8417BB6
 	bl sub_809C954
 	lsls r0, 16
@@ -964,7 +964,7 @@ sub_809D070: @ 809D070
 	bge _0809D0AE
 _0809D0A0:
 	ldr r0, _0809D120 @ =0x00000829
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	movs r4, 0xD
 	cmp r0, 0
@@ -973,7 +973,7 @@ _0809D0AE:
 	movs r4, 0xE
 _0809D0B0:
 	ldr r0, _0809D124 @ =0x0000082c
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -1000,7 +1000,7 @@ _0809D0B0:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r2, _0809D12C @ =gUnknown_8417BBE
 	movs r0, 0x32
 	str r0, [sp]
@@ -1009,7 +1009,7 @@ _0809D0B0:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r2, _0809D130 @ =gUnknown_8417BCB
 	movs r0, 0x42
 	str r0, [sp]
@@ -1018,7 +1018,7 @@ _0809D0B0:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	b _0809D1A8
 	.align 2, 0
 _0809D11C: .4byte gUnknown_8417BB6
@@ -1031,7 +1031,7 @@ _0809D134:
 	ldr r1, _0809D1D0 @ =0x00000829
 	mov r8, r1
 	mov r0, r8
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	movs r1, 0x3
 	mov r9, r1
@@ -1052,7 +1052,7 @@ _0809D14C:
 	movs r1, 0
 	bl sub_80F7750
 	mov r0, r8
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809D188
@@ -1065,7 +1065,7 @@ _0809D14C:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 _0809D188:
 	ldr r2, _0809D1D8 @ =gUnknown_8417BCB
 	mov r0, r9
@@ -1081,10 +1081,10 @@ _0809D188:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 _0809D1A8:
 	ldr r0, _0809D1DC @ =0x00000834
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -1099,7 +1099,7 @@ _0809D1A8:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	b _0809D1FA
 	.align 2, 0
 _0809D1D0: .4byte 0x00000829
@@ -1117,7 +1117,7 @@ _0809D1E4:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 _0809D1FA:
 	ldr r4, _0809D24C @ =gUnknown_2021D18
 	ldr r1, _0809D250 @ =gUnknown_8417BB6
@@ -1178,7 +1178,7 @@ sub_809D254: @ 809D254
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -1692,7 +1692,7 @@ sub_809D654: @ 809D654
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_810FE50
+	bl SetWindowTemplateFields
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]
@@ -1723,7 +1723,7 @@ sub_809D6B0: @ 809D6B0
 	movs r1, 0x1
 	bl sub_810F4D8
 	adds r0, r4, 0
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1842,13 +1842,13 @@ _0809D7B0:
 _0809D7B8:
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r0, r9
 	lsls r3, r0, 1
 	movs r0, 0x11
@@ -1886,7 +1886,7 @@ _0809D7F2:
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	b _0809D82E
 	.align 2, 0
 _0809D820: .4byte gUnknown_20370C0
@@ -1922,7 +1922,7 @@ _0809D844:
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r6, 0x1
 	lsls r0, 24
 	ldr r2, _0809D8BC @ =gUnknown_84161C8
@@ -1936,7 +1936,7 @@ _0809D844:
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0x10
 	str r0, [sp]
 	mov r0, r9

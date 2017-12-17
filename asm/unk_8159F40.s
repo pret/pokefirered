@@ -20,7 +20,7 @@ sub_8159F40: @ 8159F40
 	movs r0, 0x80
 	lsls r0, 9
 	str r0, [r1]
-	bl sub_803DA14
+	bl ZeroPlayerPartyMons
 	bl ZeroEnemyPartyMons
 	ldr r1, _08159F94 @ =gUnknown_84792D0
 	ldr r0, _08159F98 @ =gUnknown_20370C0

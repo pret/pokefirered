@@ -560,7 +560,7 @@ sub_80E79B8: @ 80E79B8
 	adds r1, r3
 	ldrb r4, [r1, 0x8]
 	bl DestroyTask
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r4, 0
 	bl sub_81278DC
 _080E79F6:
@@ -636,7 +636,7 @@ sub_80E7A70: @ 80E7A70
 	ldr r1, _080E7AB4 @ =sub_80E7AC4
 	str r1, [r0]
 	bl nullsub_44
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _080E7AB8 @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x10
@@ -2623,7 +2623,7 @@ WallyBufferExecCompleted: @ 80E8A9C
 	movs r0, 0x2
 	movs r1, 0x4
 	mov r2, sp
-	bl sub_800D9EC
+	bl PrepareBufferDataTransferLink
 	ldr r1, _080E8AEC @ =gUnknown_2022BC4
 	ldrb r0, [r4]
 	lsls r0, 9

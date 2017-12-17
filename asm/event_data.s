@@ -54,15 +54,15 @@ sub_806E110: @ 806E110
 	movs r2, 0x20
 	bl memset
 	ldr r0, _0806E154 @ =0x00000803
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E158 @ =0x00000804
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E15C @ =0x00000805
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E160 @ =0x00000807
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E164 @ =0x00000842
-	bl sub_806E6A8
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -85,7 +85,7 @@ sub_806E168: @ 806E168
 	strb r1, [r2, 0x1A]
 	strh r1, [r0]
 	ldr r0, _0806E18C @ =0x00000838
-	bl sub_806E6A8
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -107,7 +107,7 @@ sub_806E190: @ 806E190
 	adds r1, r2, 0
 	strh r1, [r0]
 	ldr r0, _0806E1BC @ =0x00000838
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -126,13 +126,13 @@ sub_806E1C0: @ 806E1C0
 	cmp r0, 0xDA
 	bne _0806E1FC
 	ldr r0, _0806E1F0 @ =0x0000403c
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	ldr r1, _0806E1F4 @ =0x03020000
 	cmp r0, r1
 	bne _0806E1FC
 	ldr r0, _0806E1F8 @ =0x00000838
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E1FC
@@ -162,7 +162,7 @@ sub_806E204: @ 806E204
 	strh r1, [r0]
 	movs r0, 0x84
 	lsls r0, 4
-	bl sub_806E6A8
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -184,7 +184,7 @@ sub_806E22C: @ 806E22C
 	strh r1, [r0]
 	movs r0, 0x84
 	lsls r0, 4
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -202,14 +202,14 @@ sub_806E25C: @ 806E25C
 	cmp r0, 0xB9
 	bne _0806E294
 	ldr r0, _0806E28C @ =0x0000404e
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	ldr r1, _0806E290 @ =0x62580000
 	cmp r0, r1
 	bne _0806E294
 	movs r0, 0x84
 	lsls r0, 4
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E294
@@ -230,7 +230,7 @@ _0806E296:
 sub_806E29C: @ 806E29C
 	push {lr}
 	ldr r0, _0806E2A8 @ =0x00000839
-	bl sub_806E6A8
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -241,7 +241,7 @@ _0806E2A8: .4byte 0x00000839
 sub_806E2AC: @ 806E2AC
 	push {lr}
 	ldr r0, _0806E2B8 @ =0x00000839
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -252,7 +252,7 @@ _0806E2B8: .4byte 0x00000839
 sub_806E2BC: @ 806E2BC
 	push {lr}
 	ldr r0, _0806E2CC @ =0x00000839
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -266,40 +266,40 @@ sub_806E2D0: @ 806E2D0
 	push {lr}
 	movs r0, 0xF6
 	lsls r0, 2
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E340 @ =0x000003d9
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E344 @ =0x000003da
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E348 @ =0x000003db
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0xF7
 	lsls r0, 2
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E34C @ =0x000003dd
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E350 @ =0x000003de
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E354 @ =0x000003df
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0xF8
 	lsls r0, 2
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E358 @ =0x000003e1
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E35C @ =0x000003e2
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E360 @ =0x000003e3
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0xF9
 	lsls r0, 2
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E364 @ =0x000003e5
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E368 @ =0x000003e6
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _0806E36C @ =0x000003e7
-	bl sub_806E6A8
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -322,31 +322,31 @@ sub_806E370: @ 806E370
 	push {lr}
 	ldr r0, _0806E3C0 @ =0x000040b5
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E3C4 @ =0x000040b6
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E3C8 @ =0x000040b7
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E3CC @ =0x000040b8
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E3D0 @ =0x000040b9
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E3D4 @ =0x000040ba
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E3D8 @ =0x000040bb
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E3DC @ =0x000040bc
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E3E0 @ =0x00004024
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -361,47 +361,47 @@ _0806E3DC: .4byte 0x000040bc
 _0806E3E0: .4byte 0x00004024
 	thumb_func_end sub_806E370
 
-	thumb_func_start sub_806E3E4
-sub_806E3E4: @ 806E3E4
+	thumb_func_start DisableResetRTC
+DisableResetRTC: @ 806E3E4
 	push {lr}
 	ldr r0, _0806E3F8 @ =0x00004032
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E3FC @ =0x00000837
-	bl sub_806E6A8
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0806E3F8: .4byte 0x00004032
 _0806E3FC: .4byte 0x00000837
-	thumb_func_end sub_806E3E4
+	thumb_func_end DisableResetRTC
 
-	thumb_func_start sub_806E400
-sub_806E400: @ 806E400
+	thumb_func_start EnableResetRTC
+EnableResetRTC: @ 806E400
 	push {lr}
 	ldr r0, _0806E418 @ =0x00004032
 	movs r1, 0x92
 	lsls r1, 4
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _0806E41C @ =0x00000837
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0806E418: .4byte 0x00004032
 _0806E41C: .4byte 0x00000837
-	thumb_func_end sub_806E400
+	thumb_func_end EnableResetRTC
 
-	thumb_func_start sub_806E420
-sub_806E420: @ 806E420
+	thumb_func_start CanResetRTC
+CanResetRTC: @ 806E420
 	push {lr}
 	ldr r0, _0806E444 @ =0x00000837
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E44C
 	ldr r0, _0806E448 @ =0x00004032
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	movs r1, 0x92
 	lsls r1, 20
@@ -417,7 +417,7 @@ _0806E44C:
 _0806E44E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E420
+	thumb_func_end CanResetRTC
 
 	thumb_func_start sub_806E454
 sub_806E454: @ 806E454
@@ -563,8 +563,8 @@ _0806E564:
 	bx r1
 	thumb_func_end sub_806E528
 
-	thumb_func_start sub_806E568
-sub_806E568: @ 806E568
+	thumb_func_start VarGet
+VarGet: @ 806E568
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -580,10 +580,10 @@ _0806E57E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E568
+	thumb_func_end VarGet
 
-	thumb_func_start sub_806E584
-sub_806E584: @ 806E584
+	thumb_func_start VarSet
+VarSet: @ 806E584
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -601,24 +601,24 @@ _0806E59E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E584
+	thumb_func_end VarSet
 
-	thumb_func_start sub_806E5A4
-sub_806E5A4: @ 806E5A4
+	thumb_func_start VarGetFieldObjectGraphicsId
+VarGetFieldObjectGraphicsId: @ 806E5A4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 8
 	ldr r1, _0806E5BC @ =0x40100000
 	adds r0, r1
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806E5BC: .4byte 0x40100000
-	thumb_func_end sub_806E5A4
+	thumb_func_end VarGetFieldObjectGraphicsId
 
 	thumb_func_start sub_806E5C0
 sub_806E5C0: @ 806E5C0
@@ -719,8 +719,8 @@ _0806E678: .4byte 0xffffc007
 _0806E67C: .4byte gUnknown_20370E0
 	thumb_func_end sub_806E5C0
 
-	thumb_func_start sub_806E680
-sub_806E680: @ 806E680
+	thumb_func_start FlagSet
+FlagSet: @ 806E680
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -741,10 +741,10 @@ _0806E6A0:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E680
+	thumb_func_end FlagSet
 
-	thumb_func_start sub_806E6A8
-sub_806E6A8: @ 806E6A8
+	thumb_func_start FlagClear
+FlagClear: @ 806E6A8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -765,10 +765,10 @@ _0806E6C8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E6A8
+	thumb_func_end FlagClear
 
-	thumb_func_start sub_806E6D0
-sub_806E6D0: @ 806E6D0
+	thumb_func_start FlagGet
+FlagGet: @ 806E6D0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -792,7 +792,7 @@ _0806E6F6:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E6D0
+	thumb_func_end FlagGet
 
 	thumb_func_start sub_806E6FC
 sub_806E6FC: @ 806E6FC

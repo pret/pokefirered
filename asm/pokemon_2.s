@@ -962,7 +962,7 @@ _0803FCA4:
 _0803FCAC:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8044674
+	bl GetDeoxysStat
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -971,7 +971,7 @@ _0803FCAC:
 _0803FCBE:
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8044674
+	bl GetDeoxysStat
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -980,7 +980,7 @@ _0803FCBE:
 _0803FCD0:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8044674
+	bl GetDeoxysStat
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -989,7 +989,7 @@ _0803FCD0:
 _0803FCE2:
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_8044674
+	bl GetDeoxysStat
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -998,7 +998,7 @@ _0803FCE2:
 _0803FCF4:
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_8044674
+	bl GetDeoxysStat
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -2861,7 +2861,7 @@ SendMonToPC: @ 8040B90
 	push {r7}
 	mov r8, r0
 	ldr r0, _08040C04 @ =0x00004037
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80CC79C
@@ -2898,12 +2898,12 @@ _08040BB2:
 	cmp r0, r5
 	beq _08040BF4
 	ldr r0, _08040C10 @ =0x00000843
-	bl sub_806E6A8
+	bl FlagClear
 _08040BF4:
 	lsls r1, r5, 16
 	ldr r0, _08040C04 @ =0x00004037
 	lsrs r1, 16
-	bl sub_806E584
+	bl VarSet
 	movs r0, 0x1
 	b _08040C30
 	.align 2, 0
@@ -3070,8 +3070,8 @@ _08040D30: .4byte gUnknown_2024029
 _08040D34: .4byte gUnknown_2024284
 	thumb_func_end GetMonsStateToDoubles
 
-	thumb_func_start sub_8040D38
-sub_8040D38: @ 8040D38
+	thumb_func_start GetAbilityBySpecies
+GetAbilityBySpecies: @ 8040D38
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -3105,10 +3105,10 @@ _08040D6A:
 	.align 2, 0
 _08040D74: .4byte gUnknown_2023D6A
 _08040D78: .4byte gUnknown_8254784
-	thumb_func_end sub_8040D38
+	thumb_func_end GetAbilityBySpecies
 
-	thumb_func_start sub_8040D7C
-sub_8040D7C: @ 8040D7C
+	thumb_func_start GetMonAbility
+GetMonAbility: @ 8040D7C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r1, 0xB
@@ -3125,16 +3125,16 @@ sub_8040D7C: @ 8040D7C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8040D38
+	bl GetAbilityBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8040D7C
+	thumb_func_end GetMonAbility
 
-	thumb_func_start sub_8040DB0
-sub_8040DB0: @ 8040DB0
+	thumb_func_start CreateSecretBaseEnemyParty
+CreateSecretBaseEnemyParty: @ 8040DB0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3285,7 +3285,7 @@ _08040EDC: .4byte gUnknown_202402C
 _08040EE0: .4byte gUnknown_8250C08
 _08040EE4: .4byte gUnknown_2022B4C
 _08040EE8: .4byte gUnknown_20386AE
-	thumb_func_end sub_8040DB0
+	thumb_func_end CreateSecretBaseEnemyParty
 
 	thumb_func_start GetSecretBaseTrainerPicIndex
 GetSecretBaseTrainerPicIndex: @ 8040EEC
@@ -3828,7 +3828,7 @@ _0804110A:
 	ldrh r0, [r7]
 	ldrb r1, [r7, 0x17]
 	lsrs r1, 7
-	bl sub_8040D38
+	bl GetAbilityBySpecies
 	adds r1, r7, 0
 	adds r1, 0x20
 	strb r0, [r1]

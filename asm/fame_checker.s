@@ -221,7 +221,7 @@ _0812C540:
 _0812C578:
 	ldr r0, _0812C598 @ =gUnknown_845FC04
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	bl sub_812CEC0
 	ldr r4, _0812C59C @ =gUnknown_203B100
 	movs r0, 0x88
@@ -721,7 +721,7 @@ sub_812C990: @ 812C990
 	movs r0, 0x2
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -1243,7 +1243,7 @@ _0812CDAC:
 	movs r0, 0x2
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0x2
 	bl sub_812CEE0
 _0812CDEE:
@@ -1315,7 +1315,7 @@ sub_812CE04: @ 812CE04
 	movs r0, 0x2
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0x2
 	bl sub_812CEE0
 	add sp, 0x10
@@ -1374,7 +1374,7 @@ sub_812CEE0: @ 812CEE0
 	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1548,7 +1548,7 @@ _0812CFDA:
 	bl sub_812D094
 	movs r0, 0x3
 	bl sub_812D094
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r6, 0
 	bl DestroyTask
 _0812D06C:
@@ -1579,9 +1579,9 @@ sub_812D094: @ 812D094
 	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r4, 0
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3258,7 +3258,7 @@ sub_812DDAC: @ 812DDAC
 	movs r0, 0x2
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0x2
 	bl sub_812CEE0
 	add sp, 0x10
@@ -3525,7 +3525,7 @@ sub_812DFE4: @ 812DFE4
 	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r4}
 	pop {r0}
 	bx r0

@@ -1239,13 +1239,13 @@ sub_810878C: @ 810878C
 	bne _081087C8
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	lsls r0, 24
 	lsrs r0, 24
 	str r4, [sp]
@@ -1729,7 +1729,7 @@ _08108B2A:
 	beq _08108B36
 	bl Free
 _08108B36:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2190,7 +2190,7 @@ sub_8108E70: @ 8108E70
 	adds r0, r5, 0
 	movs r2, 0x6D
 	movs r3, 0xD
-	bl sub_80BF474
+	bl DisplayMessageAndContinueTask
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x10
@@ -2534,7 +2534,7 @@ sub_8109168: @ 8109168
 	ands r0, r1
 	cmp r0, 0
 	bne _081091C6
-	bl sub_80BF630
+	bl GetLRKeysState
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, _081091A8 @ =gUnknown_30030F0
@@ -3469,7 +3469,7 @@ _0810993C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08109950
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _081099C4
 _08109950:
@@ -3670,19 +3670,19 @@ _08109AD4:
 	lsrs r6, 24
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x2
 	lsls r0, 24
 	lsrs r0, 24
@@ -3699,10 +3699,10 @@ _08109AD4:
 	movs r1, 0x2
 	adds r2, r5, 0
 	movs r3, 0x2
-	bl sub_810FCD0
+	bl AddItemMenuActionTextPrinters
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x2
 	lsls r0, 24
 	lsrs r0, 24
@@ -4320,7 +4320,7 @@ _0810A052:
 	strh r0, [r7]
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	mov r0, r8
 	bl sub_810A2DC
 	pop {r3}
@@ -4366,7 +4366,7 @@ sub_810A0A8: @ 810A0A8
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r5, 0
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -4649,7 +4649,7 @@ sub_810A324: @ 810A324
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrh r0, [r5]
 	bl ItemId_GetBattleFunc
 	adds r1, r0, 0
@@ -5820,7 +5820,7 @@ _0810AD0C: .4byte sub_810A1D0
 	thumb_func_start sub_810AD10
 sub_810AD10: @ 810AD10
 	push {r4-r6,lr}
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _0810AD1E
 	movs r0, 0
@@ -6208,7 +6208,7 @@ _0810B01C:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
@@ -6558,7 +6558,7 @@ _0810B29E:
 	bl sub_810876C
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0810B36C
 	.align 2, 0
 _0810B318: .4byte gUnknown_3005008
@@ -6734,7 +6734,7 @@ _0810B468:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0
@@ -6850,7 +6850,7 @@ _0810B564:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
@@ -6985,7 +6985,7 @@ _0810B68C:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r6]
 	movs r1, 0
 	movs r2, 0

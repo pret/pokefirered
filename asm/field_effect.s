@@ -2018,7 +2018,7 @@ task00_8084310: @ 8084310
 	lsls r0, 24
 	cmp r0, 0
 	beq _08084376
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _08084380 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -2155,7 +2155,7 @@ _08084450: .4byte gUnknown_2037AB8
 sub_8084454: @ 8084454
 	push {lr}
 	bl sub_8055DC4
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
 	bl player_bitmagic
@@ -2538,7 +2538,7 @@ sub_8084708: @ 8084708
 	bne _08084760
 	ldr r0, _0808477C @ =0x00004001
 	movs r1, 0x1
-	bl sub_806E584
+	bl VarSet
 	movs r0, 0x8
 	bl sub_805BDEC
 	movs r0, 0x16
@@ -2886,7 +2886,7 @@ _080849F0: .4byte sub_80847C0
 sub_80849F4: @ 80849F4
 	push {lr}
 	bl sub_8055DC4
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
 	bl player_bitmagic
@@ -3910,7 +3910,7 @@ _080851B8: .4byte sub_8084F44
 mapldr_080851BC: @ 80851BC
 	push {lr}
 	bl sub_8055DC4
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
 	ldr r0, _080851E0 @ =gUnknown_3005020
@@ -4966,7 +4966,7 @@ _080859C4:
 sub_80859D4: @ 80859D4
 	push {lr}
 	bl sub_8055DC4
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
 	bl player_bitmagic
@@ -5432,7 +5432,7 @@ _08085D84: .4byte sub_8085B78
 sub_8085D88: @ 8085D88
 	push {lr}
 	bl sub_8055DC4
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
 	bl player_bitmagic

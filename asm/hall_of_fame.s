@@ -27,8 +27,8 @@ sub_80F1DC0: @ 80F1DC0
 	bx r0
 	thumb_func_end sub_80F1DC0
 
-	thumb_func_start sub_80F1DDC
-sub_80F1DDC: @ 80F1DDC
+	thumb_func_start InitHallOfFameScreen
+InitHallOfFameScreen: @ 80F1DDC
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _080F1DFC @ =gUnknown_30030F0
@@ -153,12 +153,12 @@ _080F1EF2:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80F1DDC
+	thumb_func_end InitHallOfFameScreen
 
 	thumb_func_start sub_80F1EFC
 sub_80F1EFC: @ 80F1EFC
 	push {r4,lr}
-	bl sub_80F1DDC
+	bl InitHallOfFameScreen
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -191,7 +191,7 @@ _080F1F3C: .4byte gUnknown_203AB38
 	thumb_func_start sub_80F1F40
 sub_80F1F40: @ 80F1F40
 	push {lr}
-	bl sub_80F1DDC
+	bl InitHallOfFameScreen
 	lsls r0, 24
 	cmp r0, 0
 	bne _080F1F66
@@ -521,10 +521,10 @@ _080F21B2:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, _080F2218 @ =gUnknown_3005090
 	mov r0, r8
 	add r0, r9
@@ -1089,7 +1089,7 @@ _080F2630:
 	bl FillWindowPixelBuffer
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, _080F268C @ =gUnknown_3005090
 	mov r2, r9
 	adds r0, r2, r6
@@ -1277,10 +1277,10 @@ _080F27AC:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _080F2800 @ =Task_Hof_ExitOnKeyPressed
 	str r0, [r4]
 _080F27F4:
@@ -1401,7 +1401,7 @@ _080F28B6:
 	bl HideBg
 	movs r0, 0x3
 	bl HideBg
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0x1
 	bl UnsetBgTilemapBuffer
 	movs r0, 0x3
@@ -1444,10 +1444,10 @@ sub_80F2934: @ 80F2934
 	sub sp, 0x4
 	ldr r0, _080F2970 @ =0x00004085
 	movs r1, 0x1
-	bl sub_806E584
+	bl VarSet
 	movs r0, 0x80
 	lsls r0, 7
-	bl sub_806E680
+	bl FlagSet
 	ldr r1, _080F2974 @ =gUnknown_2031DD8
 	movs r0, 0x2
 	strb r0, [r1]
@@ -2299,7 +2299,7 @@ sub_80F3030: @ 80F3030
 	movs r0, 0x3
 	bl HideBg
 	bl sub_810F740
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0x1
 	bl UnsetBgTilemapBuffer
 	movs r0, 0x3
@@ -2358,10 +2358,10 @@ sub_80F30A4: @ 80F30A4
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, _080F3104 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2439,7 +2439,7 @@ sub_80F313C: @ 80F313C
 	bl sub_812E51C
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -2567,7 +2567,7 @@ _080F327C:
 	strb r0, [r1]
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -2715,7 +2715,7 @@ _080F3348:
 _080F33BA:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x34
 	pop {r3}
 	mov r8, r3
@@ -2960,7 +2960,7 @@ _080F3582:
 	bl sub_812E51C
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x2C
 	pop {r3-r5}
 	mov r8, r3

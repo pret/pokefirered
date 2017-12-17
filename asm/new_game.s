@@ -17,8 +17,8 @@ WriteUnalignedWord: @ 80548FC
 	bx lr
 	thumb_func_end WriteUnalignedWord
 
-	thumb_func_start sub_805490C
-sub_805490C: @ 805490C
+	thumb_func_start CopyUnalignedWord
+CopyUnalignedWord: @ 805490C
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r3, r1, 0
@@ -34,10 +34,10 @@ _08054914:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805490C
+	thumb_func_end CopyUnalignedWord
 
-	thumb_func_start sub_8054928
-sub_8054928: @ 8054928
+	thumb_func_start InitPlayerTrainerId
+InitPlayerTrainerId: @ 8054928
 	push {r4,lr}
 	bl Random
 	adds r4, r0, 0
@@ -56,10 +56,10 @@ sub_8054928: @ 8054928
 	bx r0
 	.align 2, 0
 _08054950: .4byte gUnknown_300500C
-	thumb_func_end sub_8054928
+	thumb_func_end InitPlayerTrainerId
 
-	thumb_func_start sub_8054954
-sub_8054954: @ 8054954
+	thumb_func_start SetDefaultOptions
+SetDefaultOptions: @ 8054954
 	ldr r3, _080549A8 @ =gUnknown_300500C
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x14]
@@ -104,7 +104,7 @@ sub_8054954: @ 8054954
 	bx lr
 	.align 2, 0
 _080549A8: .4byte gUnknown_300500C
-	thumb_func_end sub_8054954
+	thumb_func_end SetDefaultOptions
 
 	thumb_func_start sub_80549AC
 sub_80549AC: @ 80549AC
@@ -169,7 +169,7 @@ sub_80549F8: @ 80549F8
 sub_8054A18: @ 8054A18
 	push {lr}
 	bl ClearSav2
-	bl sub_8054954
+	bl SetDefaultOptions
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8054A18
@@ -180,7 +180,7 @@ sub_8054A28: @ 8054A28
 	ldr r1, _08054A5C @ =gUnknown_2031DB0
 	movs r0, 0
 	strb r0, [r1]
-	bl sub_803DA14
+	bl ZeroPlayerPartyMons
 	bl ZeroEnemyPartyMons
 	bl sub_81089BC
 	bl sub_81320AC
@@ -220,11 +220,11 @@ sub_8054A60: @ 8054A60
 	adds r0, r1
 	movs r5, 0
 	str r5, [r0]
-	bl sub_803DA14
+	bl ZeroPlayerPartyMons
 	bl ZeroEnemyPartyMons
 	bl sub_80549D4
 	bl ClearSav1
-	bl sub_8097C84
+	bl ClearMailData
 	ldr r0, [r4]
 	strb r5, [r0, 0x9]
 	ldr r0, [r4]
@@ -237,7 +237,7 @@ sub_8054A60: @ 8054A60
 	ldr r0, [r4]
 	adds r0, 0xAD
 	strb r5, [r0]
-	bl sub_8054928
+	bl InitPlayerTrainerId
 	bl PlayTimeCounter_Reset
 	bl sub_80549AC
 	bl sub_806E0D0
@@ -249,13 +249,13 @@ sub_8054A60: @ 8054A60
 	ldr r1, _08054B60 @ =0x00000bb8
 	bl sub_809FD70
 	bl sub_8054E68
-	bl sub_80CD8DC
+	bl InitLinkBattleRecords
 	bl sub_80A0904
 	bl sub_80A0958
 	bl sub_806E190
 	ldr r0, _08054B64 @ =gUnknown_2024029
 	strb r5, [r0]
-	bl sub_803DA14
+	bl ZeroPlayerPartyMons
 	bl sub_808C7E0
 	bl sub_8141C54
 	ldr r0, [r6]

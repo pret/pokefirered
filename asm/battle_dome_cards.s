@@ -92,7 +92,7 @@ _0810BC14:
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl sub_800F134
+	bl LoadSpecialPokePic_DontHandleDeoxys
 	b _0810BC4E
 	.align 2, 0
 _0810BC24: .4byte gUnknown_823654C
@@ -104,7 +104,7 @@ _0810BC28:
 	adds r0, r1
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_800EC8C
+	bl DecompressPicFromTable
 	b _0810BC4E
 	.align 2, 0
 _0810BC3C: .4byte gUnknown_823957C
@@ -114,7 +114,7 @@ _0810BC40:
 	adds r0, r1
 	adds r1, r5, 0
 	adds r2, r7, 0
-	bl sub_800EC8C
+	bl DecompressPicFromTable
 _0810BC4E:
 	movs r0, 0
 	add sp, 0x4

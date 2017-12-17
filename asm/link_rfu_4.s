@@ -171,7 +171,7 @@ sub_8142504: @ 8142504
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x14
 	pop {r4}
 	pop {r0}
@@ -190,7 +190,7 @@ sub_8142560: @ 8142560
 	bl ClearWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8142560
@@ -229,7 +229,7 @@ _081425A4:
 	movs r1, 0xD0
 	movs r2, 0x14
 	movs r3, 0x1
-	bl sub_80056C4
+	bl DrawDownArrow
 	ldr r0, _081425D4 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
@@ -254,7 +254,7 @@ _081425D8:
 	movs r1, 0xD0
 	movs r2, 0x14
 	movs r3, 0x1
-	bl sub_80056C4
+	bl DrawDownArrow
 	movs r0, 0
 	strb r0, [r4]
 	bl sub_8142560
@@ -289,7 +289,7 @@ sub_8142610: @ 8142610
 	movs r1, 0xD0
 	movs r2, 0x14
 	movs r3, 0x1
-	bl sub_80056C4
+	bl DrawDownArrow
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -311,7 +311,7 @@ sub_8142638: @ 8142638
 	movs r1, 0xD0
 	movs r2, 0x14
 	movs r3, 0x1
-	bl sub_80056C4
+	bl DrawDownArrow
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -478,7 +478,7 @@ _0814273A:
 	bl ClearWindowTilemap
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0814278A:
 	adds r0, r4, 0
 	add sp, 0x24
@@ -553,7 +553,7 @@ _081427E2:
 	bl sub_8150048
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	b _0814287E
@@ -623,9 +623,9 @@ _0814288C:
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r6, 0
 	b _081428EA
 _081428C2:
@@ -637,9 +637,9 @@ _081428C2:
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x1
 	negs r0, r0
 	b _081428EA
@@ -714,7 +714,7 @@ _08142934:
 	bl sub_8150048
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r5]
 	bl PutWindowTilemap
 	ldrb r0, [r6]
@@ -775,9 +775,9 @@ _081429D4:
 	bl ClearWindowTilemap
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r5]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r4, 0
 	b _08142A3C
 	.align 2, 0
@@ -792,9 +792,9 @@ _08142A14:
 	bl ClearWindowTilemap
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r5]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x2
 	negs r0, r0
 	b _08142A3C

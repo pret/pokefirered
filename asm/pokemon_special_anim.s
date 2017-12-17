@@ -1557,7 +1557,7 @@ sub_811D184: @ 811D184
 	adds r4, r0, 0
 	lsls r5, r1, 16
 	lsrs r5, 16
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	bl reset_temp_tile_data_buffers
 	movs r0, 0
 	movs r1, 0
@@ -1620,7 +1620,7 @@ sub_811D184: @ 811D184
 	bl sub_815001C
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl ShowBg
 	movs r0, 0x3
@@ -1672,7 +1672,7 @@ _0811D298:
 	thumb_func_start sub_811D29C
 sub_811D29C: @ 811D29C
 	push {lr}
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r0}
 	bx r0
 	thumb_func_end sub_811D29C
@@ -1691,7 +1691,7 @@ sub_811D2A8: @ 811D2A8
 	bl sub_8150048
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_811D2A8
@@ -1706,7 +1706,7 @@ sub_811D2D0: @ 811D2D0
 	bl sub_810F4D8
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_811D2D0
@@ -1815,15 +1815,15 @@ _0811D3C0:
 _0811D3D4: .4byte gUnknown_841B295
 _0811D3D8: .4byte gUnknown_841B2A7
 _0811D3DC:
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	bl sub_811D0F4
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	bl sub_811D0D0
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	adds r4, 0x14
 	ldr r1, _0811D400 @ =gUnknown_841B32E
 	b _0811D470
@@ -1866,20 +1866,20 @@ _0811D444: .4byte gUnknown_841B2F1
 _0811D448: .4byte gUnknown_841B2ED
 _0811D44C: .4byte gUnknown_8459998
 _0811D450:
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	bl sub_811D0F4
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	bl sub_811D0C4
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	adds r4, 0x14
 	ldr r1, _0811D478 @ =gUnknown_841B306
 _0811D470:
 	adds r0, r4, 0
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _0811D4A2
 	.align 2, 0
 _0811D478: .4byte gUnknown_841B306
@@ -1939,7 +1939,7 @@ sub_811D4D4: @ 811D4D4
 	bl FillWindowPixelBuffer
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_811D4D4
@@ -2299,7 +2299,7 @@ sub_811D764: @ 811D764
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -2319,7 +2319,7 @@ sub_811D7A0: @ 811D7A0
 	bl sub_811E93C
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -3043,7 +3043,7 @@ sub_811DD20: @ 811DD20
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_8098758
+	bl AddItemIconObject
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40

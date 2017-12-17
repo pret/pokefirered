@@ -348,7 +348,7 @@ _08088556:
 	bl ChangeBgY
 	ldr r0, _0808867C @ =gUnknown_83CC2B8
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r0, 0x50
 	movs r1, 0xC1
 	bl SetGpuReg
@@ -414,7 +414,7 @@ sub_8088680: @ 8088680
 	bl PutWindowTilemap
 	movs r0, 0x2
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -810,7 +810,7 @@ sub_80889A8: @ 80889A8
 	mov r8, r0
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -820,7 +820,7 @@ sub_80889A8: @ 80889A8
 	lsrs r7, r0, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x46
@@ -946,7 +946,7 @@ _08088ADE:
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x30
 	pop {r3}
 	mov r8, r3
@@ -973,7 +973,7 @@ sub_8088B00: @ 8088B00
 	ldr r0, _08088BC4 @ =gUnknown_30030F0
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r3, _08088BC8 @ =gUnknown_300500C
 	ldr r5, [r3]
 	ldr r4, _08088BCC @ =gUnknown_2039620
@@ -1073,12 +1073,12 @@ sub_8088BD0: @ 8088BD0
 	str r0, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -1268,7 +1268,7 @@ sub_8088D8C: @ 8088D8C
 _08088D9A:
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r1, r4, 0
 	muls r1, r0
 	adds r1, 0x2
@@ -1287,7 +1287,7 @@ _08088D9A:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1309,7 +1309,7 @@ sub_8088DE0: @ 8088DE0
 	lsrs r4, 16
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	subs r1, r0, 0x1

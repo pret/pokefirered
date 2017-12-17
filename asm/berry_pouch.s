@@ -927,13 +927,13 @@ sub_813D4D0: @ 813D4D0
 	bne _0813D514
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	lsls r0, 24
 	lsrs r0, 24
 	str r4, [sp]
@@ -945,7 +945,7 @@ sub_813D4D0: @ 813D4D0
 	bl FillWindowPixelRect
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0813D52A
 _0813D514:
 	ldr r2, _0813D534 @ =gUnknown_841623B
@@ -1349,7 +1349,7 @@ _0813D7E6:
 	beq _0813D7F2
 	bl Free
 _0813D7F2:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1874,7 +1874,7 @@ _0813DC24:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0813DC38
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _0813DC7C
 _0813DC38:
@@ -1926,19 +1926,19 @@ _0813DC86:
 	lsrs r6, 24
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x2
 	lsls r0, 24
 	lsrs r0, 24
@@ -1956,10 +1956,10 @@ _0813DC86:
 	movs r1, 0x2
 	adds r2, r5, 0
 	movs r3, 0x2
-	bl sub_810FCD0
+	bl AddItemMenuActionTextPrinters
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x2
 	lsls r0, 24
 	lsrs r0, 24
@@ -3363,7 +3363,7 @@ sub_813E910: @ 813E910
 	push {r4,lr}
 	ldr r0, _0813E994 @ =gUnknown_84643B8
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
@@ -3566,7 +3566,7 @@ sub_813EA98: @ 813EA98
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0xFF
@@ -3593,7 +3593,7 @@ sub_813EACC: @ 813EACC
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
@@ -3654,7 +3654,7 @@ _0813EB44:
 	adds r0, r6, 0
 	movs r2, 0x13
 	movs r3, 0xD
-	bl sub_80BF474
+	bl DisplayMessageAndContinueTask
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x10

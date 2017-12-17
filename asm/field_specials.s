@@ -77,7 +77,7 @@ _080CA688:
 sub_80CA68C: @ 80CA68C
 	push {lr}
 	ldr r0, _080CA698 @ =gUnknown_2021D18
-	bl sub_806943C
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -190,7 +190,7 @@ sub_80CA758: @ 80CA758
 	push {lr}
 	ldr r0, _080CA768 @ =gUnknown_20370C0
 	ldrh r0, [r0]
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -700,7 +700,7 @@ sub_80CAB08: @ 80CAB08
 	movs r0, 0x2A
 	bl sub_8054E90
 	ldr r0, _080CAB3C @ =0x0000083b
-	bl sub_806E680
+	bl FlagSet
 	movs r1, 0x1
 	mov r0, sp
 	strb r1, [r0]
@@ -753,7 +753,7 @@ _080CAB72:
 sub_80CAB78: @ 80CAB78
 	push {r4-r6,lr}
 	ldr r0, _080CABB4 @ =0x00004031
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80CBD94
@@ -1074,7 +1074,7 @@ sub_80CADC4: @ 80CADC4
 	movs r1, 0x2
 	add r2, sp, 0xC
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	bl sub_809D424
 	add sp, 0x10
 	pop {r0}
@@ -1384,12 +1384,12 @@ sub_80CB054: @ 80CB054
 	push {r4-r6,lr}
 	ldr r5, _080CB08C @ =0x00004035
 	adds r0, r5, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r6, _080CB090 @ =0x00004036
 	adds r0, r6, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	cmp r0, 0
 	beq _080CB0A0
@@ -1400,10 +1400,10 @@ sub_80CB054: @ 80CB054
 	bls _080CB098
 	ldr r1, _080CB094 @ =0x0000ffff
 	adds r0, r6, 0
-	bl sub_806E584
+	bl VarSet
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	b _080CB0A0
 	.align 2, 0
 _080CB08C: .4byte 0x00004035
@@ -1412,7 +1412,7 @@ _080CB094: .4byte 0x0000ffff
 _080CB098:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806E584
+	bl VarSet
 _080CB0A0:
 	pop {r4-r6}
 	pop {r0}
@@ -1424,7 +1424,7 @@ sub_80CB0A8: @ 80CB0A8
 	push {r4,lr}
 	ldr r4, _080CB10C @ =0x00004036
 	adds r0, r4, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -1438,21 +1438,21 @@ _080CB0C0:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r4, _080CB114 @ =0x0000403b
 	bl sub_80CB198
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _080CB118 @ =0x00004035
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 _080CB0EA:
 	ldr r4, _080CB11C @ =gUnknown_2021CD0
 	ldr r0, _080CB10C @ =0x00004036
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xB
@@ -1735,7 +1735,7 @@ _080CB312:
 _080CB314:
 	ldr r0, _080CB324 @ =0x0000403a
 	adds r1, r3, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2088,7 +2088,7 @@ sub_80CB580: @ 80CB580
 	str r6, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r1, _080CB634 @ =gUnknown_83F5B44
 	ldr r0, _080CB638 @ =gUnknown_20370C2
 	ldrh r0, [r0]
@@ -2112,12 +2112,12 @@ sub_80CB580: @ 80CB580
 	adds r0, r1, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _080CB614:
 	add sp, 0xC
 	pop {r3}
@@ -2143,7 +2143,7 @@ sub_80CB63C: @ 80CB63C
 	movs r1, 0x1
 	bl sub_810F4D8
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2620,7 +2620,7 @@ _080CB9D2:
 	str r0, [sp, 0xC]
 	add r0, sp, 0x10
 	movs r1, 0
-	bl sub_810FE50
+	bl SetWindowTemplateFields
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]
@@ -2656,7 +2656,7 @@ _080CB9D2:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, _080CBA74 @ =gUnknown_3005090
 	mov r2, r10
 	adds r0, r2, r7
@@ -2876,11 +2876,11 @@ sub_80CBBAC: @ 80CBBAC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r5, 0
 	bl DestroyTask
 	bl EnableBothScriptContexts
@@ -3108,7 +3108,7 @@ _080CBDAC: .4byte gUnknown_83F5D2C
 sub_80CBDB0: @ 80CBDB0
 	push {lr}
 	ldr r0, _080CBDC8 @ =0x00004031
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80CBD94
@@ -3179,7 +3179,7 @@ _080CBE20:
 	adds r0, 0x10
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_806E5A4
+	bl VarGetFieldObjectGraphicsId
 	lsls r0, 24
 	lsrs r0, 24
 _080CBE40:
@@ -3669,7 +3669,7 @@ sub_80CC204: @ 80CC204
 	push {r4,lr}
 	movs r4, 0
 	ldr r0, _080CC2A4 @ =0x0000089b
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3677,7 +3677,7 @@ sub_80CC204: @ 80CC204
 	movs r4, 0x1
 _080CC218:
 	ldr r0, _080CC2A8 @ =0x0000089c
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3686,7 +3686,7 @@ _080CC218:
 	orrs r4, r0
 _080CC22A:
 	ldr r0, _080CC2AC @ =0x0000089d
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3697,7 +3697,7 @@ _080CC22A:
 	lsrs r4, r0, 24
 _080CC240:
 	ldr r0, _080CC2B0 @ =0x0000089e
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3708,7 +3708,7 @@ _080CC240:
 	lsrs r4, r0, 24
 _080CC256:
 	ldr r0, _080CC2B4 @ =0x0000089f
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3719,7 +3719,7 @@ _080CC256:
 	lsrs r4, r0, 24
 _080CC26C:
 	ldr r0, _080CC2B8 @ =0x000008a1
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3731,7 +3731,7 @@ _080CC26C:
 _080CC282:
 	movs r0, 0x8A
 	lsls r0, 4
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3811,7 +3811,7 @@ _080CC318:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 	adds r4, 0x1
 	mov r0, sp
 	ldrh r0, [r0, 0x2]
@@ -3821,7 +3821,7 @@ _080CC318:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 	adds r4, 0x1
 	mov r0, sp
 	ldrh r0, [r0, 0x4]
@@ -3831,7 +3831,7 @@ _080CC318:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 	adds r4, 0x1
 	mov r0, sp
 	ldrh r0, [r0, 0x6]
@@ -3841,7 +3841,7 @@ _080CC318:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 	adds r4, 0x1
 	mov r0, sp
 	ldrh r0, [r0, 0x8]
@@ -3851,7 +3851,7 @@ _080CC318:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 	adds r4, 0x1
 	mov r0, sp
 	ldrh r0, [r0, 0xA]
@@ -3861,11 +3861,11 @@ _080CC318:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _080CC3C4 @ =0x00004042
 	ldr r1, _080CC3C8 @ =gUnknown_20370C0
 	ldrh r1, [r1]
-	bl sub_806E584
+	bl VarSet
 	add sp, 0x24
 	pop {r4-r7}
 	pop {r0}
@@ -4099,7 +4099,7 @@ _080CC53C:
 	bne _080CC58C
 	ldr r5, _080CC584 @ =0x0000404d
 	adds r0, r5, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x23
@@ -4109,9 +4109,9 @@ _080CC53C:
 _080CC56A:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _080CC588 @ =0x00000808
-	bl sub_806E680
+	bl FlagSet
 	b _080CC596
 	.align 2, 0
 _080CC57C: .4byte gUnknown_3005008
@@ -4135,7 +4135,7 @@ sub_80CC59C: @ 80CC59C
 	push {r4-r7,lr}
 	sub sp, 0x8
 	ldr r0, _080CC5F8 @ =0x0000404d
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r6, _080CC5FC @ =0xffffff00
@@ -4145,7 +4145,7 @@ sub_80CC59C: @ 80CC59C
 	ands r0, r4
 	str r0, [sp, 0x4]
 	ldr r0, _080CC604 @ =0x00000808
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CC5C4
@@ -4237,7 +4237,7 @@ _080CC668:
 _080CC66C:
 	bl sub_8113550
 	ldr r0, _080CC678 @ =0x00000808
-	bl sub_806E6A8
+	bl FlagClear
 	b _080CC71E
 	.align 2, 0
 _080CC678: .4byte 0x00000808
@@ -4310,14 +4310,14 @@ _080CC6FC:
 	bl sub_8113550
 	ldr r4, _080CC728 @ =0x00000808
 	adds r0, r4, 0
-	bl sub_806E6A8
+	bl FlagClear
 	cmp r5, 0x23
 	bne _080CC71E
 	ldr r0, _080CC72C @ =0x0000404d
 	movs r1, 0x20
-	bl sub_806E584
+	bl VarSet
 	adds r0, r4, 0
-	bl sub_806E680
+	bl FlagSet
 _080CC71E:
 	add sp, 0x8
 	pop {r4-r7}
@@ -4408,7 +4408,7 @@ sub_80CC7B4: @ 80CC7B4
 	push {r4,r5,lr}
 	ldr r5, _080CC7E8 @ =0x00000843
 	adds r0, r5, 0
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CC7F0
@@ -4417,13 +4417,13 @@ sub_80CC7B4: @ 80CC7B4
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _080CC7EC @ =0x00004037
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r4, r0
 	beq _080CC7F0
 	adds r0, r5, 0
-	bl sub_806E680
+	bl FlagSet
 	movs r0, 0x1
 	b _080CC7F2
 	.align 2, 0
@@ -4441,7 +4441,7 @@ _080CC7F2:
 sub_80CC7F8: @ 80CC7F8
 	push {r4-r7,lr}
 	ldr r0, _080CC850 @ =0x00004037
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80CC79C
@@ -4468,11 +4468,11 @@ _080CC816:
 	cmp r0, r4
 	beq _080CC83E
 	ldr r0, _080CC854 @ =0x00000843
-	bl sub_806E6A8
+	bl FlagClear
 _080CC83E:
 	ldr r0, _080CC850 @ =0x00004037
 	lsrs r1, r7, 16
-	bl sub_806E584
+	bl VarSet
 	bl sub_80CC7B4
 	lsls r0, 24
 	lsrs r0, 24
@@ -4589,7 +4589,7 @@ sub_80CC918: @ 80CC918
 	push {r4,lr}
 	ldr r4, _080CC940 @ =0x00004025
 	adds r0, r4, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, _080CC944 @ =0x000001f3
@@ -4599,7 +4599,7 @@ sub_80CC918: @ 80CC918
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_806E584
+	bl VarSet
 _080CC938:
 	pop {r4}
 	pop {r0}
@@ -4622,7 +4622,7 @@ sub_80CC948: @ 80CC948
 	bl sub_80436F8
 	ldr r0, _080CC970 @ =0x00004025
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4645,7 +4645,7 @@ sub_80CC974: @ 80CC974
 	ldr r6, _080CC9AC @ =gUnknown_3005098
 	adds r4, r5, r6
 	movs r0, 0x3
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4724,12 +4724,12 @@ sub_80CCA18: @ 80CCA18
 	cmp r0, 0
 	bne _080CCAE6
 	movs r0, 0x2
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CCAE6
 	movs r0, 0x5
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4819,7 +4819,7 @@ sub_80CCAF4: @ 80CCAF4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x4
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CCB5A
@@ -4991,7 +4991,7 @@ _080CCC5C:
 	movs r0, 0xB8
 	lsls r0, 2
 _080CCC6E:
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5069,7 +5069,7 @@ sub_80CCCF8: @ 80CCCF8
 	cmp r0, 0xF
 	bne _080CCD14
 	ldr r0, _080CCD10 @ =0x000002de
-	bl sub_806E680
+	bl FlagSet
 	b _080CCD2C
 	.align 2, 0
 _080CCD0C: .4byte gUnknown_20370C2
@@ -5078,17 +5078,17 @@ _080CCD14:
 	cmp r0, 0x10
 	bne _080CCD24
 	ldr r0, _080CCD20 @ =0x000002df
-	bl sub_806E680
+	bl FlagSet
 	b _080CCD2C
 	.align 2, 0
 _080CCD20: .4byte 0x000002df
 _080CCD24:
 	movs r0, 0xB8
 	lsls r0, 2
-	bl sub_806E680
+	bl FlagSet
 _080CCD2C:
 	ldr r0, _080CCD74 @ =0x000002de
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5098,7 +5098,7 @@ _080CCD2C:
 	lsrs r4, r0, 24
 _080CCD40:
 	ldr r0, _080CCD78 @ =0x000002df
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5109,7 +5109,7 @@ _080CCD40:
 _080CCD54:
 	movs r0, 0xB8
 	lsls r0, 2
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5137,7 +5137,7 @@ _080CCD7E:
 sub_80CCD84: @ 80CCD84
 	push {lr}
 	ldr r0, _080CCDB8 @ =0x000002e3
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5183,7 +5183,7 @@ sub_80CCDD0: @ 80CCDD0
 	movs r0, 0x14
 	bl sub_80722CC
 	ldr r0, _080CCDF8 @ =0x000002e3
-	bl sub_806E680
+	bl FlagSet
 	bl ScriptContext2_Disable
 	pop {r0}
 	bx r0
@@ -5211,7 +5211,7 @@ sub_80CCE10: @ 80CCE10
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, _080CCE30 @ =0x00000848
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5225,17 +5225,17 @@ _080CCE34: .4byte gUnknown_20370D0
 _080CCE38:
 	ldr r0, _080CCE80 @ =0x0000403e
 	mov r8, r0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r4, _080CCE84 @ =0x00004026
 	adds r0, r4, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	cmp r5, 0
 	beq _080CCE90
 	ldr r0, _080CCE88 @ =gUnknown_83F637C
@@ -5248,7 +5248,7 @@ _080CCE38:
 	bl sub_80CCEE8
 	mov r0, r8
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r1, _080CCE8C @ =gUnknown_20370D0
 	movs r0, 0
 	strh r0, [r1]
@@ -5262,7 +5262,7 @@ _080CCE90:
 	cmp r5, 0xA
 	bne _080CCEB4
 	ldr r0, _080CCEAC @ =0x00000848
-	bl sub_806E680
+	bl FlagSet
 	ldr r1, _080CCEB0 @ =gUnknown_20370D0
 	movs r0, 0x2
 _080CCE9E:
@@ -5284,7 +5284,7 @@ _080CCEB4:
 	bl sub_80CCEE8
 	ldr r0, _080CCEE0 @ =0x0000403e
 	adds r1, r5, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r1, _080CCEE4 @ =gUnknown_20370D0
 	movs r0, 0x1
 	strh r0, [r1]
@@ -5409,7 +5409,7 @@ sub_80CCFBC: @ 80CCFBC
 	push {r4,lr}
 	ldr r4, _080CCFEC @ =0x00004026
 	adds r0, r4, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r0, _080CCFF0 @ =gUnknown_3005008
@@ -5425,7 +5425,7 @@ sub_80CCFBC: @ 80CCFBC
 	bls _080CCFF8
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	b _080CD000
 	.align 2, 0
 _080CCFEC: .4byte 0x00004026
@@ -5434,7 +5434,7 @@ _080CCFF4: .4byte 0x00003802
 _080CCFF8:
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_806E584
+	bl VarSet
 _080CD000:
 	pop {r4}
 	pop {r0}
@@ -5445,7 +5445,7 @@ _080CD000:
 sub_80CD008: @ 80CD008
 	push {lr}
 	ldr r0, _080CD02C @ =0x0000403e
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 19
 	ldr r1, _080CD030 @ =gUnknown_83F6206
@@ -5623,41 +5623,41 @@ sub_80CD154: @ 80CD154
 	cmp r4, 0x18
 	bls _080CD1AE
 	movs r0, 0xA5
-	bl sub_806E6A8
+	bl FlagClear
 	cmp r4, 0x31
 	bls _080CD172
 	movs r0, 0xA6
-	bl sub_806E6A8
+	bl FlagClear
 _080CD172:
 	cmp r4, 0x4A
 	bls _080CD17C
 	movs r0, 0xA7
-	bl sub_806E6A8
+	bl FlagClear
 _080CD17C:
 	cmp r4, 0x63
 	bls _080CD186
 	movs r0, 0xA8
-	bl sub_806E6A8
+	bl FlagClear
 _080CD186:
 	cmp r4, 0x7C
 	bls _080CD190
 	movs r0, 0xA9
-	bl sub_806E6A8
+	bl FlagClear
 _080CD190:
 	cmp r4, 0x95
 	bls _080CD19A
 	movs r0, 0xAA
-	bl sub_806E6A8
+	bl FlagClear
 _080CD19A:
 	cmp r4, 0xAE
 	bls _080CD1A4
 	movs r0, 0xAB
-	bl sub_806E6A8
+	bl FlagClear
 _080CD1A4:
 	cmp r4, 0xC7
 	bls _080CD1AE
 	movs r0, 0xAC
-	bl sub_806E6A8
+	bl FlagClear
 _080CD1AE:
 	pop {r4}
 	pop {r0}

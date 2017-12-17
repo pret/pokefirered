@@ -185,7 +185,7 @@ sub_800F324: @ 800F324
 	bl sub_8001658
 	ldr r0, _0800F348 @ =gUnknown_8248330
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	pop {r0}
 	bx r0
 	.align 2, 0

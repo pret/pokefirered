@@ -3389,7 +3389,7 @@ _080FED50:
 	cmp r0, 0
 	bne _080FED62
 	ldr r0, _080FED7C @ =0x0000082d
-	bl sub_806E680
+	bl FlagSet
 	bl sub_80FEF2C
 _080FED62:
 	adds r0, r4, 0
@@ -3493,7 +3493,7 @@ sub_80FEE24: @ 80FEE24
 	bl sub_80BDE70
 	bl sub_80FF010
 	bl sub_810011C
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r4, 0
 	bl SetMainCallback2
 	pop {r4}
@@ -6056,7 +6056,7 @@ _080FFFD4:
 	bl SetBgTilemapBuffer
 	ldr r0, _08100030 @ =gUnknown_843F8B0
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	bl sub_8100CBC
 	bl sub_8100C5C
 	movs r0, 0
@@ -6412,7 +6412,7 @@ _0810030C: .4byte gUnknown_843F8D8
 _08100310:
 	ldrh r1, [r4]
 	mov r0, sp
-	bl sub_80BD850
+	bl CopyEasyChatWord
 	movs r0, 0x1
 	mov r1, sp
 	movs r2, 0
@@ -7729,7 +7729,7 @@ sub_8100D24: @ 8100D24
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _08100D7A:
 	add sp, 0x14
 	pop {r4,r5}
@@ -7766,7 +7766,7 @@ _08100DAC:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	adds r2, r6, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -7942,7 +7942,7 @@ _08100EEC:
 _08100F08:
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x14
 	pop {r0}
 	bx r0
@@ -8098,7 +8098,7 @@ _08101046:
 	beq _08101068
 	adds r1, r0, 0
 	adds r0, r2, 0
-	bl sub_80BD850
+	bl CopyEasyChatWord
 	adds r2, r0, 0
 	adds r4, 0x2
 	b _08101096
@@ -8170,7 +8170,7 @@ _081010D6:
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x2]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x14
 	pop {r3-r5}
 	mov r8, r3
@@ -8454,7 +8454,7 @@ _0810130A:
 _0810130E:
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -8747,7 +8747,7 @@ _0810152A:
 _08101538:
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -8822,7 +8822,7 @@ sub_81015BC: @ 81015BC
 	bl FillWindowPixelBuffer
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81015BC

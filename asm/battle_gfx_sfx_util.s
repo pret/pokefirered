@@ -767,7 +767,7 @@ _0803436C:
 	adds r0, r2, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_800F108
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	mov r3, r8
 	lsls r2, r3, 4
 	movs r0, 0x80
@@ -956,7 +956,7 @@ _0803451C:
 	ldr r1, [r1]
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_800F108
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	b _08034562
 	.align 2, 0
 _08034538: .4byte gUnknown_2024008
@@ -1160,7 +1160,7 @@ sub_80346C4: @ 80346C4
 	ldr r1, [r0]
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_800EC8C
+	bl DecompressPicFromTable
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, 0x4
@@ -1863,7 +1863,7 @@ _08034C16:
 	ldr r1, [r1]
 	mov r2, r8
 	ldr r3, [sp, 0x4]
-	bl sub_800F108
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	ldr r0, [r4]
 	adds r0, 0x4
 	adds r0, r5
@@ -2137,7 +2137,7 @@ _08034E90:
 	adds r2, r4, r2
 	ldr r3, [r2]
 	mov r2, r8
-	bl sub_800F108
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	b _08034F5E
 	.align 2, 0
 _08034EFC: .4byte gUnknown_2023BCE
@@ -2181,7 +2181,7 @@ _08034F10:
 	adds r2, r4, r2
 	ldr r3, [r2]
 	mov r2, r8
-	bl sub_800F108
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _08034F5E:
 	str r4, [sp, 0x14]
 	ldr r0, _08035080 @ =gUnknown_202401C

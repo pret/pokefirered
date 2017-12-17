@@ -424,7 +424,7 @@ _0801012C: .4byte 0x00003108
 _08010130: .4byte 0x0000311a
 _08010134:
 	movs r0, 0xAF
-	bl sub_809C8E4
+	bl ItemIdToBerryType
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_809C8A0
@@ -568,7 +568,7 @@ _08010248: .4byte 0x0000311a
 _0801024C: .4byte 0x0000311b
 _08010250:
 	movs r0, 0xAF
-	bl sub_809C8E4
+	bl ItemIdToBerryType
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_809C8A0
@@ -1924,7 +1924,7 @@ _08010D9C:
 	subs r6, 0x1
 	cmp r6, 0
 	bge _08010D3A
-	bl sub_803DA14
+	bl ZeroPlayerPartyMons
 	bl ZeroEnemyPartyMons
 	ldr r1, _08010DD8 @ =gUnknown_2023E82
 	ldrb r0, [r1]
@@ -2446,7 +2446,7 @@ sub_80111BC: @ 80111BC
 	cmp r0, 0
 	bne _080111DE
 	bl sub_8011174
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _080111E8 @ =gUnknown_30030F0
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
@@ -6470,7 +6470,7 @@ _080130FA:
 	ldrh r0, [r1]
 	ldrb r1, [r1, 0x17]
 	lsrs r1, 7
-	bl sub_8040D38
+	bl GetAbilityBySpecies
 	mov r2, r9
 	ldrb r1, [r2]
 	muls r1, r7
@@ -7787,13 +7787,13 @@ sub_8013BD4: @ 8013BD4
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08013C04
-	bl sub_8017B04
+	bl UpdateTurnCounters
 	lsls r0, 24
 	cmp r0, 0
 	beq _08013BF8
 	b _08013D20
 _08013BF8:
-	bl sub_8018258
+	bl TurnBasedEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _08013C04
@@ -9988,7 +9988,7 @@ _08014E08:
 	cmp r0, 0
 	bne _08014E3C
 	ldr r0, _08014EC8 @ =0x00000822
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _08014E3C
@@ -10098,7 +10098,7 @@ _08014EF0:
 	cmp r0, 0
 	bne _08014F20
 	ldr r0, _08014F6C @ =0x00000822
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _08014F20
@@ -11515,7 +11515,7 @@ _08015A6C:
 	ldr r0, _08015A98 @ =sub_8015AA0
 _08015A70:
 	str r0, [r1]
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _08015A9C @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x2
@@ -11576,7 +11576,7 @@ _08015AAE:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r2, 0x81
-	bl sub_80CDDF4
+	bl EvolutionScene
 	b _08015B1C
 	.align 2, 0
 _08015AF4: .4byte gUnknown_3004FD4
@@ -11880,7 +11880,7 @@ _08015CF8:
 	str r0, [r2]
 	movs r0, 0xA5
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldrb r1, [r6]
 	ldr r3, _08015D88 @ =gUnknown_2023FE8
 	ldr r2, [r3]
@@ -11969,7 +11969,7 @@ _08015DE4:
 	strb r0, [r1]
 	ldrh r0, [r2]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldrb r1, [r6]
 	ldr r3, _08015E44 @ =gUnknown_2023FE8
 	ldr r2, [r3]
@@ -12025,7 +12025,7 @@ _08015E48:
 	strb r0, [r1, 0xE]
 	ldrh r0, [r3]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldrb r1, [r6]
 	ldr r3, _08015EB8 @ =gUnknown_2023FE8
 	ldr r2, [r3]
@@ -12059,7 +12059,7 @@ _08015EBC:
 	strh r3, [r1]
 	ldrh r0, [r1]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldrb r1, [r4]
 	ldr r2, _08015F0C @ =gUnknown_2023FE8
 	ldr r2, [r2]
@@ -12696,7 +12696,7 @@ sub_8016418: @ 8016418
 	ldr r0, _08016488 @ =gUnknown_2022976
 	strh r1, [r0]
 	ldrb r0, [r4]
-	bl sub_801CFE4
+	bl ClearFuryCutterDestinyBondGrudge
 	ldr r5, _0801648C @ =gUnknown_2023D68
 	ldr r2, _08016490 @ =gUnknown_20233C4
 	ldrb r1, [r4]
@@ -13321,7 +13321,7 @@ _0801694C:
 	cmp r0, 0
 	bne _080169D8
 	ldrb r0, [r4]
-	bl sub_801CFE4
+	bl ClearFuryCutterDestinyBondGrudge
 	ldr r1, _0801697C @ =gUnknown_2023E82
 	movs r0, 0x3
 	strb r0, [r1, 0x5]

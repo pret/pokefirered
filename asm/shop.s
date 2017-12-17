@@ -52,7 +52,7 @@ _0809AAF8:
 	bl sub_80F7750
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -79,7 +79,7 @@ _0809AAF8:
 	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _0809AB78 @ =sub_809AC10
 	movs r1, 0x8
 	bl CreateTask
@@ -211,7 +211,7 @@ sub_809AC10: @ 809AC10
 	b _0809AC52
 _0809AC3C:
 	ldr r4, _0809AC58 @ =gUnknown_83DF09C
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 21
 	adds r4, 0x4
@@ -334,7 +334,7 @@ sub_809AD24: @ 809AD24
 	movs r1, 0x2
 	bl sub_810F4D8
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -357,7 +357,7 @@ sub_809AD40: @ 809AD40
 	movs r1, 0xE
 	bl GetWordTaskArg
 	bl SetMainCallback2
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r4, 0
 	bl DestroyTask
 _0809AD68:
@@ -946,7 +946,7 @@ _0809B1F2:
 	strb r1, [r5, 0x15]
 	movs r0, 0x2
 	movs r1, 0x5
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 4
 	ldrb r2, [r5, 0x14]
 	movs r4, 0xF
@@ -956,7 +956,7 @@ _0809B1F2:
 	strb r1, [r5, 0x14]
 	movs r0, 0x2
 	movs r1, 0x7
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 4
 	ldrb r2, [r5, 0x15]
 	adds r1, r4, 0
@@ -1357,13 +1357,13 @@ sub_809B59C: @ 809B59C
 	bne _0809B5E0
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	str r4, [sp]
@@ -1375,7 +1375,7 @@ sub_809B59C: @ 809B59C
 	bl FillWindowPixelRect
 	movs r0, 0x4
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0809B5F8
 _0809B5E0:
 	ldr r2, _0809B600 @ =gUnknown_841623B
@@ -1437,7 +1437,7 @@ _0809B642:
 	beq _0809B64E
 	bl Free
 _0809B64E:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2017,7 +2017,7 @@ _0809BA56:
 	str r0, [sp]
 	adds r0, r4, 0
 	ldr r1, _0809BAF4 @ =nullsub_8
-	bl sub_805E978
+	bl AddPseudoFieldObject
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4

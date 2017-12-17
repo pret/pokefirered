@@ -66,7 +66,7 @@ sub_805B3E0: @ 805B3E0
 	cmp r0, 0
 	bne _0805B448
 	adds r0, r5, 0
-	bl sub_805B4B0
+	bl npc_clear_strange_bits
 	bl sub_805BE08
 	bl sub_805B5A0
 	lsls r0, 24
@@ -75,8 +75,8 @@ sub_805B3E0: @ 805B3E0
 	adds r0, r6, 0
 	mov r1, r8
 	adds r2, r7, 0
-	bl sub_805B4D4
-	bl sub_805B50C
+	bl MovePlayerAvatarUsingKeypadInput
+	bl PlayerAllowForcedMovementIfMovingSameDirection
 _0805B448:
 	pop {r3}
 	mov r8, r3
@@ -104,7 +104,7 @@ sub_805B45C: @ 805B45C
 	cmp r0, 0
 	bne _0805B4A6
 	adds r0, r4, 0
-	bl sub_8063DA0
+	bl FieldObjectGetSpecialAnim
 	lsls r0, 24
 	movs r1, 0xDF
 	lsls r1, 24
@@ -132,8 +132,8 @@ _0805B4A8:
 	bx r1
 	thumb_func_end sub_805B45C
 
-	thumb_func_start sub_805B4B0
-sub_805B4B0: @ 805B4B0
+	thumb_func_start npc_clear_strange_bits
+npc_clear_strange_bits: @ 805B4B0
 	ldrb r2, [r0, 0x1]
 	movs r1, 0x11
 	negs r1, r1
@@ -152,10 +152,10 @@ sub_805B4B0: @ 805B4B0
 	bx lr
 	.align 2, 0
 _0805B4D0: .4byte gUnknown_2037078
-	thumb_func_end sub_805B4B0
+	thumb_func_end npc_clear_strange_bits
 
-	thumb_func_start sub_805B4D4
-sub_805B4D4: @ 805B4D4
+	thumb_func_start MovePlayerAvatarUsingKeypadInput
+MovePlayerAvatarUsingKeypadInput: @ 805B4D4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -178,15 +178,15 @@ _0805B4F8: .4byte gUnknown_2037078
 _0805B4FC:
 	adds r0, r3, 0
 	adds r1, r2, 0
-	bl sub_805B93C
+	bl MovePlayerNotOnBike
 _0805B504:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805B4D4
+	thumb_func_end MovePlayerAvatarUsingKeypadInput
 
-	thumb_func_start sub_805B50C
-sub_805B50C: @ 805B50C
+	thumb_func_start PlayerAllowForcedMovementIfMovingSameDirection
+PlayerAllowForcedMovementIfMovingSameDirection: @ 805B50C
 	push {lr}
 	ldr r2, _0805B524 @ =gUnknown_2037078
 	ldrb r0, [r2, 0x2]
@@ -201,7 +201,7 @@ _0805B51E:
 	bx r0
 	.align 2, 0
 _0805B524: .4byte gUnknown_2037078
-	thumb_func_end sub_805B50C
+	thumb_func_end PlayerAllowForcedMovementIfMovingSameDirection
 
 	thumb_func_start sub_805B528
 sub_805B528: @ 805B528
@@ -776,8 +776,8 @@ sub_805B930: @ 805B930
 	bx r1
 	thumb_func_end sub_805B930
 
-	thumb_func_start sub_805B93C
-sub_805B93C: @ 805B93C
+	thumb_func_start MovePlayerNotOnBike
+MovePlayerNotOnBike: @ 805B93C
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -787,7 +787,7 @@ sub_805B93C: @ 805B93C
 	lsrs r5, 16
 	ldr r6, _0805B968 @ =gUnknown_835B814
 	adds r0, r4, 0
-	bl sub_805B96C
+	bl CheckMovementInputNotOnBike
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r6
@@ -800,10 +800,10 @@ sub_805B93C: @ 805B93C
 	bx r0
 	.align 2, 0
 _0805B968: .4byte gUnknown_835B814
-	thumb_func_end sub_805B93C
+	thumb_func_end MovePlayerNotOnBike
 
-	thumb_func_start sub_805B96C
-sub_805B96C: @ 805B96C
+	thumb_func_start CheckMovementInputNotOnBike
+CheckMovementInputNotOnBike: @ 805B96C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -840,10 +840,10 @@ _0805B9A6:
 	bx r1
 	.align 2, 0
 _0805B9AC: .4byte gUnknown_2037078
-	thumb_func_end sub_805B96C
+	thumb_func_end CheckMovementInputNotOnBike
 
-	thumb_func_start sub_805B9B0
-sub_805B9B0: @ 805B9B0
+	thumb_func_start PlayerNotOnBikeNotMoving
+PlayerNotOnBikeNotMoving: @ 805B9B0
 	push {lr}
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -851,7 +851,7 @@ sub_805B9B0: @ 805B9B0
 	bl sub_805C1F4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805B9B0
+	thumb_func_end PlayerNotOnBikeNotMoving
 
 	thumb_func_start sub_805B9C4
 sub_805B9C4: @ 805B9C4
@@ -915,7 +915,7 @@ _0805BA30:
 	cmp r5, 0
 	beq _0805BA8C
 	ldr r0, _0805BA6C @ =0x0000082f
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805BA8C
@@ -1277,7 +1277,7 @@ sub_805BCEC: @ 805BCEC
 	lsls r2, 24
 	lsrs r7, r2, 24
 	ldr r0, _0805BD98 @ =0x00000805
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805BDA0
@@ -1342,7 +1342,7 @@ sub_805BCEC: @ 805BCEC
 _0805BD8A:
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_805CCD0
+	bl task_add_bump_boulder
 	movs r0, 0x1
 	b _0805BDA2
 	.align 2, 0
@@ -2707,7 +2707,7 @@ sub_805C780: @ 805C780
 	ldr r0, _0805C7C4 @ =gUnknown_2036E38
 	adds r4, r0
 	adds r0, r4, 0
-	bl sub_805B4B0
+	bl npc_clear_strange_bits
 	ldrb r1, [r4, 0x18]
 	lsls r1, 28
 	lsrs r1, 28
@@ -2805,8 +2805,8 @@ _0805C838:
 	bx r1
 	thumb_func_end sub_805C824
 
-	thumb_func_start sub_805C83C
-sub_805C83C: @ 805C83C
+	thumb_func_start PartyHasMonWithSurf
+PartyHasMonWithSurf: @ 805C83C
 	push {r4,r5,lr}
 	movs r0, 0x8
 	bl TestPlayerAvatarFlags
@@ -2849,10 +2849,10 @@ _0805C882:
 	bx r1
 	.align 2, 0
 _0805C888: .4byte gUnknown_2024284
-	thumb_func_end sub_805C83C
+	thumb_func_end PartyHasMonWithSurf
 
-	thumb_func_start sub_805C88C
-sub_805C88C: @ 805C88C
+	thumb_func_start IsPlayerSurfingNorth
+IsPlayerSurfingNorth: @ 805C88C
 	push {lr}
 	bl player_get_direction_upper_nybble
 	lsls r0, 24
@@ -2871,10 +2871,10 @@ _0805C8AA:
 _0805C8AC:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C88C
+	thumb_func_end IsPlayerSurfingNorth
 
-	thumb_func_start sub_805C8B0
-sub_805C8B0: @ 805C8B0
+	thumb_func_start IsPlayerFacingSurfableFishableWater
+IsPlayerFacingSurfableFishableWater: @ 805C8B0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r0, _0805C924 @ =gUnknown_2037078
@@ -2938,7 +2938,7 @@ _0805C92E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C8B0
+	thumb_func_end IsPlayerFacingSurfableFishableWater
 
 	thumb_func_start sub_805C938
 sub_805C938: @ 805C938
@@ -3430,8 +3430,8 @@ _0805CCC2:
 	bx r0
 	thumb_func_end sub_805CC40
 
-	thumb_func_start sub_805CCD0
-sub_805CCD0: @ 805CCD0
+	thumb_func_start task_add_bump_boulder
+task_add_bump_boulder: @ 805CCD0
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -3439,7 +3439,7 @@ sub_805CCD0: @ 805CCD0
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r6, _0805CD04 @ =sub_805CD0C
+	ldr r6, _0805CD04 @ =taskFF_bump_boulder
 	adds r0, r6, 0
 	movs r1, 0xFF
 	bl CreateTask
@@ -3457,12 +3457,12 @@ sub_805CCD0: @ 805CCD0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805CD04: .4byte sub_805CD0C
+_0805CD04: .4byte taskFF_bump_boulder
 _0805CD08: .4byte gUnknown_3005090
-	thumb_func_end sub_805CCD0
+	thumb_func_end task_add_bump_boulder
 
-	thumb_func_start sub_805CD0C
-sub_805CD0C: @ 805CD0C
+	thumb_func_start taskFF_bump_boulder
+taskFF_bump_boulder: @ 805CD0C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3504,7 +3504,7 @@ _0805CD54: .4byte gUnknown_835B8A0
 _0805CD58: .4byte gUnknown_3005090
 _0805CD5C: .4byte gUnknown_2036E38
 _0805CD60: .4byte gUnknown_2037078
-	thumb_func_end sub_805CD0C
+	thumb_func_end taskFF_bump_boulder
 
 	thumb_func_start sub_805CD64
 sub_805CD64: @ 805CD64
@@ -3624,7 +3624,7 @@ sub_805CE20: @ 805CE20
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Disable
-	ldr r0, _0805CE7C @ =sub_805CD0C
+	ldr r0, _0805CE7C @ =taskFF_bump_boulder
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3636,7 +3636,7 @@ _0805CE70:
 	bx r1
 	.align 2, 0
 _0805CE78: .4byte gUnknown_2037078
-_0805CE7C: .4byte sub_805CD0C
+_0805CE7C: .4byte taskFF_bump_boulder
 	thumb_func_end sub_805CE20
 
 	thumb_func_start sub_805CE80
@@ -4452,7 +4452,7 @@ _0805D4D4:
 	str r5, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -4676,7 +4676,7 @@ sub_805D66C: @ 805D66C
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -4851,7 +4851,7 @@ sub_805D7C0: @ 805D7C0
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0xD
 	strh r0, [r6, 0x8]
 	movs r0, 0x1
@@ -4904,7 +4904,7 @@ sub_805D838: @ 805D838
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]

@@ -487,7 +487,7 @@ sub_80BD40C: @ 80BD40C
 	cmp r4, 0x4
 	bhi _080BD456
 	adds r0, r5, 0
-	bl sub_805A008
+	bl MetatileBehavior_IsCrackedIce
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

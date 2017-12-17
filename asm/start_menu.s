@@ -19,7 +19,7 @@ sub_806ED54: @ 806ED54
 	.align 2, 0
 _0806ED6C: .4byte gUnknown_20370F5
 _0806ED70:
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _0806ED7E
 	bl sub_806EE58
@@ -57,7 +57,7 @@ _0806EDAC: .4byte gUnknown_20370F5
 sub_806EDB0: @ 806EDB0
 	push {lr}
 	ldr r0, _0806EDFC @ =0x00000829
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -66,7 +66,7 @@ sub_806EDB0: @ 806EDB0
 	bl sub_806ED94
 _0806EDC6:
 	ldr r0, _0806EE00 @ =0x00000828
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -191,10 +191,10 @@ sub_806EE7C: @ 806EE7C
 	movs r1, 0x2
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -223,9 +223,9 @@ sub_806EF18: @ 806EF18
 	bl sub_810F4D8
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 _0806EF3A:
 	pop {r4}
 	pop {r0}
@@ -306,7 +306,7 @@ _0806EFA8:
 	movs r1, 0x2
 	mov r2, r9
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 _0806EFDA:
 	movs r0, 0x80
 	lsls r0, 9
@@ -444,7 +444,7 @@ _0806F0C4:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F118
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	beq _0806F118
 	ldr r0, _0806F134 @ =gUnknown_300500C
@@ -466,7 +466,7 @@ _0806F118:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	b _0806F142
 	.align 2, 0
@@ -598,7 +598,7 @@ sub_806F1F0: @ 806F1F0
 	.align 2, 0
 _0806F210: .4byte gUnknown_3005098
 _0806F214:
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _0806F220
 	bl sub_81198EC
@@ -670,7 +670,7 @@ sub_806F280: @ 806F280
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F2D2
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	beq _0806F2D2
 	ldr r0, _0806F364 @ =gUnknown_300500C
@@ -705,7 +705,7 @@ _0806F2D2:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F320
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	beq _0806F320
 	ldr r0, _0806F364 @ =gUnknown_300500C
@@ -884,14 +884,14 @@ _0806F464:
 	bl play_some_sound
 	bl sub_806EF18
 	bl sub_80563F0
-	ldr r0, _0806F47C @ =sub_8126EB0
+	ldr r0, _0806F47C @ =CB2_PartyMenuFromStartMenu
 	bl SetMainCallback2
 	movs r0, 0x1
 _0806F478:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806F47C: .4byte sub_8126EB0
+_0806F47C: .4byte CB2_PartyMenuFromStartMenu
 	thumb_func_end sub_806F44C
 
 	thumb_func_start sub_806F480
@@ -1908,7 +1908,7 @@ _0806FC14:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xFF
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x8
 	movs r2, 0xF
@@ -1917,7 +1917,7 @@ _0806FC14:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	negs r0, r0
 	str r4, [sp]
@@ -1929,7 +1929,7 @@ _0806FC14:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0806FC7C
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0
 	beq _0806FC7C
 	movs r0, 0x5
@@ -1963,7 +1963,7 @@ _0806FC9C:
 	movs r0, 0x4
 	b _0806FCE6
 _0806FCB0:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _0806FCC4 @ =gUnknown_30030F0
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
@@ -2094,7 +2094,7 @@ sub_806FCF4: @ 806FCF4
 	bl sub_812E51C
 	movs r7, 0x2A
 	ldr r0, _0806FE78 @ =0x00000829
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2149,7 +2149,7 @@ _0806FE0A:
 	bl sub_812E51C
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -2180,7 +2180,7 @@ sub_806FE84: @ 806FE84
 	movs r1, 0
 	bl sub_80F6F9C
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0

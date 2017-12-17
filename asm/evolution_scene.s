@@ -14,8 +14,8 @@ sub_80CDD18: @ 80CDD18
 	bx r0
 	thumb_func_end sub_80CDD18
 
-	thumb_func_start sub_80CDD28
-sub_80CDD28: @ 80CDD28
+	thumb_func_start Task_BeginEvolutionScene
+Task_BeginEvolutionScene: @ 80CDD28
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -69,7 +69,7 @@ _080CDD68:
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_80CDDF4
+	bl EvolutionScene
 _080CDD98:
 	add sp, 0x4
 	pop {r4-r7}
@@ -78,10 +78,10 @@ _080CDD98:
 	.align 2, 0
 _080CDDA0: .4byte gUnknown_2037AB8
 _080CDDA4: .4byte gUnknown_2024284
-	thumb_func_end sub_80CDD28
+	thumb_func_end Task_BeginEvolutionScene
 
-	thumb_func_start sub_80CDDA8
-sub_80CDDA8: @ 80CDDA8
+	thumb_func_start BeginEvolutionScene
+BeginEvolutionScene: @ 80CDDA8
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -92,7 +92,7 @@ sub_80CDDA8: @ 80CDDA8
 	lsrs r5, 24
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r0, _080CDDE8 @ =sub_80CDD28
+	ldr r0, _080CDDE8 @ =Task_BeginEvolutionScene
 	movs r1, 0
 	bl CreateTask
 	lsls r0, 24
@@ -113,13 +113,13 @@ sub_80CDDA8: @ 80CDDA8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CDDE8: .4byte sub_80CDD28
+_080CDDE8: .4byte Task_BeginEvolutionScene
 _080CDDEC: .4byte gUnknown_3005090
 _080CDDF0: .4byte sub_80CDD18
-	thumb_func_end sub_80CDDA8
+	thumb_func_end BeginEvolutionScene
 
-	thumb_func_start sub_80CDDF4
-sub_80CDDF4: @ 80CDDF4
+	thumb_func_start EvolutionScene
+EvolutionScene: @ 80CDDF4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -245,7 +245,7 @@ sub_80CDDF4: @ 80CDDF4
 	ldr r1, [r2]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
-	bl sub_800EC8C
+	bl DecompressPicFromTable
 	adds r0, r5, 0
 	ldr r1, [sp, 0x20]
 	mov r2, r9
@@ -301,7 +301,7 @@ sub_80CDDF4: @ 80CDDF4
 	ldr r1, [r2]
 	ldr r1, [r1, 0x10]
 	mov r2, r10
-	bl sub_800EC8C
+	bl DecompressPicFromTable
 	mov r0, r10
 	ldr r1, [sp, 0x20]
 	mov r2, r9
@@ -427,7 +427,7 @@ _080CE0D8: .4byte gUnknown_2037238
 _080CE0DC: .4byte nullsub_76
 _080CE0E0: .4byte sub_80D0050
 _080CE0E4: .4byte sub_80CE710
-	thumb_func_end sub_80CDDF4
+	thumb_func_end EvolutionScene
 
 	thumb_func_start CB2_EvolutionSceneLoadGraphics
 CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
@@ -530,7 +530,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r5, 0
-	bl sub_800EC8C
+	bl DecompressPicFromTable
 	adds r0, r5, 0
 	mov r1, r9
 	adds r2, r6, 0
@@ -776,7 +776,7 @@ _080CE414:
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r6, 0
-	bl sub_800EC8C
+	bl DecompressPicFromTable
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
@@ -957,7 +957,7 @@ TradeEvolutionScene: @ 80CE540
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
-	bl sub_800EC8C
+	bl DecompressPicFromTable
 	adds r0, r5, 0
 	mov r1, r10
 	adds r2, r7, 0
@@ -1961,7 +1961,7 @@ _080CEEA0:
 	ldr r0, [r4]
 	bl Free
 	str r6, [r4]
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _080CEECC @ =gUnknown_300537C
 	ldr r0, [r0]
 	bl SetMainCallback2
@@ -2432,7 +2432,7 @@ _080CF2B4:
 	beq _080CF2C2
 	b _080CF528
 _080CF2C2:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _080CF2F8 @ =gUnknown_2024284
 	ldr r1, _080CF2FC @ =gUnknown_3005090
 	mov r3, r8
@@ -3702,7 +3702,7 @@ _080CFDC6:
 	movs r0, 0
 	bl GetBgTilemapBuffer
 	bl Free
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _080CFE1C @ =gUnknown_2024284
 	ldr r1, _080CFE20 @ =gUnknown_3005090
 	adds r5, r7, r6

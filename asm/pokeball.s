@@ -119,7 +119,7 @@ _0804AA12:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
@@ -366,7 +366,7 @@ SpriteCB_TestBallThrow: @ 804ABD4
 	bl GetBankPokeballItemId
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	adds r4, r0, 0
 	ldrh r0, [r7, 0x20]
 	lsls r0, 24
@@ -1175,7 +1175,7 @@ sub_804B268: @ 804B268
 	bl GetBankPokeballItemId
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	adds r4, r0, 0
 	ldrh r0, [r6, 0x20]
 	lsls r0, 24

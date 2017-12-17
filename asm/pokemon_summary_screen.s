@@ -974,13 +974,13 @@ _08134CF8:
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r3, _08134D24 @ =0x00003001
 	adds r0, r3
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r1, _08134D28 @ =0x00003002
 	adds r0, r1
@@ -1055,26 +1055,26 @@ _08134DB0:
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r3, _08134DF4 @ =0x00003004
 	adds r0, r3
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r1, _08134DF8 @ =0x00003005
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _08134DFC @ =0x00003006
 	adds r0, r2
 _08134DE2:
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08134E74
 	.align 2, 0
 _08134DEC: .4byte gUnknown_203B140
@@ -1320,7 +1320,7 @@ _08135010:
 	adds r0, r3
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r1, _08135030 @ =0x00003001
 	adds r0, r1
@@ -1351,7 +1351,7 @@ _08135054:
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r3, _0813507C @ =0x00003005
 	adds r0, r3
@@ -1412,14 +1412,14 @@ _081350E4:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _08135110 @ =0x00003002
 	adds r0, r2
 _081350FE:
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08135180
 	.align 2, 0
 _08135108: .4byte gUnknown_203B140
@@ -1623,19 +1623,19 @@ _081352BE:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _08135308 @ =0x00003004
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r3, _0813530C @ =0x00003005
 	adds r0, r3
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	b _0813544C
@@ -1661,13 +1661,13 @@ _08135328:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _08135350 @ =0x00003001
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _081353D0
 	.align 2, 0
 _0813534C: .4byte gUnknown_203B140
@@ -1714,13 +1714,13 @@ _081353AC:
 	adds r0, r3
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r1, _081353E8 @ =0x00003002
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 _081353D0:
@@ -2992,43 +2992,43 @@ _08135DEC:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _08135E68 @ =0x00003001
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r1, _08135E6C @ =0x00003002
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _08135E70 @ =0x00003006
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r1, _08135E74 @ =0x00003003
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _08135E78 @ =0x00003004
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r1, _08135E7C @ =0x00003005
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08135F00
 	.align 2, 0
 _08135E64: .4byte gUnknown_203B140
@@ -4024,7 +4024,7 @@ _081366B8:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8040D38
+	bl GetAbilityBySpecies
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4682,7 +4682,7 @@ _08136BEA:
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	ldr r1, _08136D44 @ =0x00005040
 	movs r0, 0
 	bl SetGpuReg
@@ -5747,7 +5747,7 @@ _08137574:
 sub_8137578: @ 8137578
 	push {r4-r7,lr}
 	sub sp, 0xD4
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r7, _081375E8 @ =gUnknown_203B140
 	ldr r0, [r7]
 	ldr r4, _081375EC @ =0x00003290
@@ -5760,7 +5760,7 @@ sub_8137578: @ 8137578
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, [r7]
 	adds r0, r4
 	movs r1, 0x24
@@ -5777,7 +5777,7 @@ _081375B2:
 	bl sub_8008E78
 	movs r0, 0x1
 	add r1, sp, 0x14
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, [r7]
 	adds r0, r4
 	movs r1, 0x23
@@ -5824,7 +5824,7 @@ _0813761C:
 _08137626:
 	adds r1, r4, 0
 	movs r0, 0x2
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r4, _08137664 @ =gUnknown_203B140
 	ldr r0, [r4]
 	ldr r1, _08137668 @ =0x00003290
@@ -5901,7 +5901,7 @@ _081376C0:
 	ldr r1, _081376D8 @ =gUnknown_8419841
 _081376CE:
 	adds r0, r4, 0
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _081376E6
 	.align 2, 0
 _081376D8: .4byte gUnknown_8419841
@@ -5909,7 +5909,7 @@ _081376DC:
 	add r4, sp, 0x3C
 	ldr r1, _08137714 @ =gUnknown_8419822
 	adds r0, r4, 0
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 _081376E6:
 	ldr r0, _08137718 @ =gUnknown_203B140
 	ldr r0, [r0]
@@ -5944,7 +5944,7 @@ _08137720: .4byte gUnknown_8463FA4
 sub_8137724: @ 8137724
 	push {r4-r6,lr}
 	sub sp, 0xD4
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r5, _081377A0 @ =gUnknown_203B140
 	ldr r0, [r5]
 	ldr r4, _081377A4 @ =0x00003290
@@ -5957,7 +5957,7 @@ sub_8137724: @ 8137724
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x24
@@ -5974,7 +5974,7 @@ _0813775E:
 	bl sub_8008E78
 	movs r0, 0x1
 	add r1, sp, 0x14
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x23
@@ -6025,7 +6025,7 @@ _081377D0:
 	ldr r1, _081377E8 @ =gUnknown_841979D
 _081377DE:
 	adds r0, r4, 0
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _081377F6
 	.align 2, 0
 _081377E8: .4byte gUnknown_841979D
@@ -6033,7 +6033,7 @@ _081377EC:
 	add r4, sp, 0x3C
 	ldr r1, _08137820 @ =gUnknown_8419782
 	adds r0, r4, 0
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 _081377F6:
 	ldr r0, _08137824 @ =gUnknown_203B140
 	ldr r0, [r0]
@@ -6077,7 +6077,7 @@ _08137846:
 _08137850:
 	adds r1, r4, 0
 	movs r0, 0x2
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r4, _08137890 @ =gUnknown_203B140
 	ldr r0, [r4]
 	ldr r1, _08137894 @ =0x00003290
@@ -6149,7 +6149,7 @@ _081378EA:
 	ldr r1, _081378F8 @ =gUnknown_841988A
 _081378EE:
 	adds r0, r4, 0
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08137906
 	.align 2, 0
 _081378F8: .4byte gUnknown_841988A
@@ -6157,7 +6157,7 @@ _081378FC:
 	add r4, sp, 0x3C
 	ldr r1, _08137934 @ =gUnknown_8419860
 	adds r0, r4, 0
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 _08137906:
 	ldr r0, _08137938 @ =gUnknown_203B140
 	ldr r0, [r0]
@@ -6831,7 +6831,7 @@ _08137E82:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_8138414
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r5, 0
 	bl DestroyTask
 	ldr r0, [r4]
@@ -7566,7 +7566,7 @@ _0813841A:
 	adds r0, r1
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -9093,25 +9093,25 @@ _08139034:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r6]
 	ldr r2, _081390A4 @ =0x00003004
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r6]
 	ldr r3, _081390A8 @ =0x00003005
 	adds r0, r3
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r6]
 	ldr r1, _081390AC @ =0x00003006
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
@@ -9818,25 +9818,25 @@ _08139640:
 	adds r0, r3
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r1, _08139698 @ =0x00003004
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r2, _0813969C @ =0x00003005
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	ldr r3, _081396A0 @ =0x00003006
 	adds r0, r3
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
@@ -9880,7 +9880,7 @@ _081396A8:
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
@@ -10631,7 +10631,7 @@ _08139CD4: .4byte gUnknown_203B140
 _08139CD8:
 	movs r0, 0
 _08139CDA:
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -13849,43 +13849,43 @@ _0813B678:
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	ldr r1, _0813B6F8 @ =0x00003001
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	ldr r2, _0813B6FC @ =0x00003002
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	adds r4, 0x6
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	ldr r1, _0813B700 @ =0x00003003
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	ldr r2, _0813B704 @ =0x00003004
 	adds r0, r2
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	subs r4, 0x1
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2

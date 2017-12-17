@@ -316,7 +316,7 @@ sub_80A0904: @ 80A0904
 	push {lr}
 	ldr r0, _080A0914 @ =0x0000403d
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -362,7 +362,7 @@ sub_80A0958: @ 80A0958
 	push {lr}
 	ldr r0, _080A0968 @ =0x00004040
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -463,7 +463,7 @@ _080A0A18:
 	cmp r7, 0
 	beq _080A0A28
 	ldr r0, _080A0A44 @ =0x0000083b
-	bl sub_806E680
+	bl FlagSet
 _080A0A28:
 	add sp, 0xC
 	pop {r3}

@@ -760,7 +760,7 @@ _08110DDE:
 	mov r2, sp
 	adds r1, r2, r6
 	ldrh r1, [r1]
-	bl sub_806E584
+	bl VarSet
 	ldr r7, [sp, 0x8]
 	lsls r0, r7, 16
 	lsrs r4, r0, 16
@@ -787,7 +787,7 @@ sub_8110E20: @ 8110E20
 	ldr r1, _08110E38 @ =gUnknown_3005008
 	ldr r1, [r1]
 	ldrh r1, [r1, 0x32]
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1144,13 +1144,13 @@ _081110D2:
 	bl PutWindowTilemap
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r6, 0x2]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r6, 0x1]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x14
 	pop {r4-r7}
 	pop {r0}
@@ -1172,7 +1172,7 @@ sub_8111134: @ 8111134
 	bl PutWindowTilemap
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1553,7 +1553,7 @@ sub_8111438: @ 8111438
 	movs r3, 0x20
 	bl CreateMon
 	ldr r0, _081114BC @ =0x00004027
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r1, r0, 28
 	mov r6, r9
@@ -1763,7 +1763,7 @@ sub_81115E8: @ 81115E8
 	adds r1, r4
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_806E584
+	bl VarSet
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1853,7 +1853,7 @@ _08111698:
 	adds r0, r5, r1
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r1, r5, 1
 	add r1, sp
 	strh r0, [r1]
@@ -1912,7 +1912,7 @@ sub_8111708: @ 8111708
 	push {r4,r5,lr}
 	sub sp, 0x1C
 	ldr r0, _08111754 @ =0x000040ae
-	bl sub_806E568
+	bl VarGet
 	ldr r4, _08111758 @ =gUnknown_3005008
 	ldr r1, [r4]
 	strh r0, [r1, 0x32]
@@ -2202,7 +2202,7 @@ sub_8111984: @ 8111984
 	ldr r1, _081119B8 @ =gUnknown_3005024
 	ldr r0, _081119BC @ =sub_8111F60
 	str r0, [r1]
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r1, _081119C0 @ =gUnknown_203ADFA
 	movs r0, 0x3
 	strb r0, [r1]
@@ -2824,12 +2824,12 @@ sub_8111E20: @ 8111E20
 	bl FillWindowPixelRect
 	ldrb r0, [r4, 0x2]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4, 0x1]
 	bl PutWindowTilemap
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -3190,9 +3190,9 @@ _0811211E:
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3337,10 +3337,10 @@ sub_81121D8: @ 81121D8
 	bl FillWindowPixelRect
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r5, 0x1]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrh r0, [r7, 0x2]
 	adds r0, 0x1
 	strh r0, [r7, 0x2]
@@ -4981,10 +4981,10 @@ sub_8112EDC: @ 8112EDC
 	beq _08112F02
 	ldrb r0, [r4]
 	adds r1, r5, 0
-	bl sub_8003F20
+	bl CopyWindowToVram
 _08112F02:
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0xFF
 	strb r0, [r4]
 _08112F0C:
@@ -5144,7 +5144,7 @@ sub_8113018: @ 8113018
 	ldr r0, _08113040 @ =gUnknown_203B020
 	ldrb r0, [r0]
 	adds r1, r5, 0
-	bl sub_8003F20
+	bl CopyWindowToVram
 _08113038:
 	pop {r4,r5}
 	pop {r0}
@@ -5158,10 +5158,10 @@ sub_8113044: @ 8113044
 	push {lr}
 	ldr r0, _0811305C @ =0x00004038
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r0, _08113060 @ =0x00004039
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5195,7 +5195,7 @@ sub_8113078: @ 8113078
 	ldr r1, _081130A4 @ =gUnknown_300500C
 	ldr r1, [r1]
 	ldrh r1, [r1, 0xE]
-	bl sub_806E584
+	bl VarSet
 _08113098:
 	pop {r4}
 	pop {r0}
@@ -5234,18 +5234,18 @@ sub_81130BC: @ 81130BC
 	ldr r1, _0811310C @ =gUnknown_300500C
 	ldr r1, [r1]
 	ldrh r1, [r1, 0xE]
-	bl sub_806E584
+	bl VarSet
 	movs r0, 0x6C
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0x6D
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0x6E
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0x6F
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r0, _08113110 @ =0x00004073
 	movs r1, 0x1
-	bl sub_806E584
+	bl VarSet
 _08113102:
 	pop {r4}
 	pop {r0}
@@ -5263,7 +5263,7 @@ sub_8113114: @ 8113114
 	lsls r1, 24
 	lsrs r5, r1, 24
 	ldr r0, _0811315C @ =0x00004073
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x2
@@ -5530,7 +5530,7 @@ _081132F8: .4byte gUnknown_300500C
 _081132FC: .4byte 0x000003e6
 _08113300:
 	ldr r0, _08113354 @ =0x00004039
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, [r6]
@@ -5541,7 +5541,7 @@ _08113300:
 	adds r0, r4, 0
 	bl sub_81131FC
 	ldr r0, _08113354 @ =0x00004039
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	lsls r1, 16
 	movs r0, 0xC0
@@ -5549,7 +5549,7 @@ _08113300:
 	adds r1, r0
 	lsrs r1, 16
 	ldr r0, _08113354 @ =0x00004039
-	bl sub_806E584
+	bl VarSet
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -5563,7 +5563,7 @@ _08113338:
 	ldr r0, [r6]
 	ldrh r1, [r0, 0xE]
 	ldr r0, _08113354 @ =0x00004039
-	bl sub_806E584
+	bl VarSet
 	b _0811335C
 	.align 2, 0
 _08113354: .4byte 0x00004039
@@ -5772,7 +5772,7 @@ sub_81134CC: @ 81134CC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _081134F4 @ =0x00004073
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x2
@@ -5898,7 +5898,7 @@ _081135AA:
 	bne _081135B8
 	b _081136BC
 _081135B8:
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _081135C2
 	b _081136BC
@@ -6126,7 +6126,7 @@ sub_8113778: @ 8113778
 	cmp r4, 0xB
 	beq _081137CE
 	ldr r0, _081137D4 @ =0x0000082c
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _081137AC
@@ -6143,7 +6143,7 @@ sub_8113778: @ 8113778
 	beq _081137CE
 _081137AC:
 	ldr r0, _081137D8 @ =0x00000844
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _081137DC
@@ -6394,7 +6394,7 @@ _08113970:
 	cmp r0, 0
 	bne _08113998
 	ldr r0, _081139B4 @ =0x0000082c
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _08113998
@@ -7174,14 +7174,14 @@ _08113EE0:
 	ldr r0, _08113EFC @ =gUnknown_8245EE0
 	adds r1, r0
 	adds r0, r2, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	b _08113F08
 	.align 2, 0
 _08113EFC: .4byte gUnknown_8245EE0
 _08113F00:
 	ldr r1, _08113F10 @ =gUnknown_8415A62
 	adds r0, r5, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 _08113F08:
 	pop {r4,r5}
 	pop {r0}
@@ -7934,7 +7934,7 @@ _08114514: .4byte gUnknown_203AF98
 sub_8114518: @ 8114518
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r4, _08114568 @ =gUnknown_2021CD0
 	adds r0, r4, 0
 	movs r1, 0xFF
@@ -7948,17 +7948,17 @@ sub_8114518: @ 8114518
 	bl sub_8115834
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r1, _0811456C @ =gUnknown_8456AE4
 	ldrb r0, [r5, 0x4]
 	lsls r0, 2
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08114570 @ =gUnknown_2021D18
 	ldr r1, _08114574 @ =gUnknown_841A422
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r5, 0xC
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -7999,7 +7999,7 @@ _081145A0: .4byte gUnknown_203AF98
 sub_81145A4: @ 81145A4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r4, _081145F4 @ =gUnknown_2021CD0
 	adds r0, r4, 0
 	movs r1, 0xFF
@@ -8013,17 +8013,17 @@ sub_81145A4: @ 81145A4
 	bl sub_8115834
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r1, _081145F8 @ =gUnknown_8456AE4
 	ldrb r0, [r5, 0x4]
 	lsls r0, 2
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _081145FC @ =gUnknown_2021D18
 	ldr r1, _08114600 @ =gUnknown_841A477
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r5, 0xC
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -8079,7 +8079,7 @@ sub_811464C: @ 811464C
 	mov r6, r8
 	push {r6}
 	adds r4, r0, 0
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r0, _081146F4 @ =gUnknown_2021CD0
 	mov r8, r0
 	movs r1, 0xFF
@@ -8115,26 +8115,26 @@ sub_811464C: @ 811464C
 	ldr r0, _08114700 @ =gUnknown_300500C
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0x1
 	mov r1, r8
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0x2
 	adds r1, r6, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0x3
 	adds r1, r5, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r1, _08114704 @ =gUnknown_8456AE4
 	ldrb r0, [r4, 0x4]
 	lsls r0, 2
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0x4
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08114708 @ =gUnknown_2021D18
 	ldr r1, _0811470C @ =gUnknown_841A4C6
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r4, 0x1A
 	adds r0, r4, 0
 	pop {r3}
@@ -8379,12 +8379,12 @@ sub_81148BC: @ 81148BC
 	bl sub_8113E88
 	adds r4, r0, 0
 	adds r5, r4, 0x4
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldrb r0, [r4, 0x4]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
@@ -8393,14 +8393,14 @@ sub_81148BC: @ 81148BC
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0x2
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x3
 	bl sub_8113EAC
 	ldr r0, _08114910 @ =gUnknown_2021D18
 	ldr r1, _08114914 @ =gUnknown_841A566
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r4, 0x6
 	adds r0, r4, 0
 	pop {r4,r5}
@@ -8445,12 +8445,12 @@ sub_8114944: @ 8114944
 	movs r0, 0x15
 	bl sub_8113E88
 	adds r4, r0, 0
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldrb r0, [r4, 0x4]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
@@ -8461,7 +8461,7 @@ sub_8114944: @ 8114944
 	bl sub_8113EAC
 	ldr r0, _08114988 @ =gUnknown_2021D18
 	ldr r1, _0811498C @ =gUnknown_841A5D9
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r4, 0x6
 	adds r0, r4, 0
 	pop {r4}
@@ -8518,12 +8518,12 @@ sub_81149D0: @ 81149D0
 	movs r0, 0x16
 	bl sub_8113E88
 	adds r4, r0, 0
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldrb r0, [r4, 0x4]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
@@ -8534,7 +8534,7 @@ sub_81149D0: @ 81149D0
 	bl sub_8113EAC
 	ldr r0, _08114A14 @ =gUnknown_2021D18
 	ldr r1, _08114A18 @ =gUnknown_841A60A
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r4, 0x6
 	adds r0, r4, 0
 	pop {r4}
@@ -8581,12 +8581,12 @@ sub_8114A4C: @ 8114A4C
 	bl sub_8113E88
 	adds r4, r0, 0
 	adds r5, r4, 0x2
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldrb r0, [r4, 0x2]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
@@ -8595,10 +8595,10 @@ sub_8114A4C: @ 8114A4C
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0x2
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08114A98 @ =gUnknown_2021D18
 	ldr r1, _08114A9C @ =gUnknown_841A59C
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r5, 0x2
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -8642,19 +8642,19 @@ sub_8114AC8: @ 8114AC8
 	bl sub_8113E88
 	adds r4, r0, 0
 	adds r5, r4, 0x2
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldrb r0, [r4, 0x2]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
 	bl sub_8113EAC
 	ldr r0, _08114B04 @ =gUnknown_2021D18
 	ldr r1, _08114B08 @ =gUnknown_841A5FA
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r5, 0x2
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -8698,19 +8698,19 @@ sub_8114B34: @ 8114B34
 	bl sub_8113E88
 	adds r4, r0, 0
 	adds r5, r4, 0x2
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldrb r0, [r4, 0x2]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
 	bl sub_8113EAC
 	ldr r0, _08114B70 @ =gUnknown_2021D18
 	ldr r1, _08114B74 @ =gUnknown_841A632
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r5, 0x2
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -8754,7 +8754,7 @@ sub_8114BA0: @ 8114BA0
 	bl sub_8113E88
 	adds r4, r0, 0
 	adds r5, r4, 0x2
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0
@@ -8763,10 +8763,10 @@ sub_8114BA0: @ 8114BA0
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08114BDC @ =gUnknown_2021D18
 	ldr r1, _08114BE0 @ =gUnknown_841A64F
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r5, 0x2
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -8809,19 +8809,19 @@ sub_8114C0C: @ 8114C0C
 	movs r0, 0x1B
 	bl sub_8113E88
 	adds r4, r0, 0
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldrb r0, [r4]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
 	cmp r0, r1
 	bne _08114C40
 	ldr r1, _08114C3C @ =gUnknown_841A694
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	b _08114C4E
 	.align 2, 0
 _08114C3C: .4byte gUnknown_841A694
@@ -8830,11 +8830,11 @@ _08114C40:
 	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 _08114C4E:
 	ldr r0, _08114C60 @ =gUnknown_2021D18
 	ldr r1, _08114C64 @ =gUnknown_841A66E
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r0, r4, 0x2
 	pop {r4}
 	pop {r1}
@@ -8994,14 +8994,14 @@ sub_8114D68: @ 8114D68
 	bl sub_8113E88
 	adds r4, r0, 0
 	adds r6, r4, 0x6
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r5, _08114DD4 @ =gUnknown_2021CD0
 	ldrb r1, [r4, 0x6]
 	adds r0, r5, 0
 	bl sub_80C4DF8
 	movs r0, 0
 	adds r1, r5, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4, 0x4]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -9009,7 +9009,7 @@ sub_8114D68: @ 8114D68
 	ldr r0, _08114DD8 @ =gUnknown_823EACC
 	adds r1, r0
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x2
@@ -9024,10 +9024,10 @@ sub_8114D68: @ 8114D68
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0x4
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08114DE0 @ =gUnknown_2021D18
 	ldr r1, _08114DE4 @ =gUnknown_841AF0C
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r4, 0x8
 	adds r0, r4, 0
 	pop {r4-r6}
@@ -9132,14 +9132,14 @@ _08114E80: .4byte gUnknown_8456AA0
 _08114E84:
 	adds r6, r5, 0
 	adds r6, 0x8
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r4, _08114F00 @ =gUnknown_2021CD0
 	ldrb r1, [r6, 0x2]
 	adds r0, r4, 0
 	bl sub_80C4DF8
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r5, 0x4]
 	movs r1, 0
 	movs r2, 0x1
@@ -9152,7 +9152,7 @@ _08114E84:
 	bl sub_8008E78
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r5, 0x6]
 	movs r1, 0
 	movs r2, 0x3
@@ -9165,11 +9165,11 @@ _08114E84:
 	bl sub_8008E78
 	movs r0, 0x4
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08114F0C @ =gUnknown_300500C
 	ldr r1, [r0]
 	movs r0, 0x5
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrb r0, [r5, 0x8]
 	cmp r0, 0
 	bne _08114F2C
@@ -9178,7 +9178,7 @@ _08114E84:
 	bne _08114F18
 	ldr r0, _08114F10 @ =gUnknown_2021D18
 	ldr r1, _08114F14 @ =gUnknown_841AA01
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08114FAC
 	.align 2, 0
 _08114F00: .4byte gUnknown_2021CD0
@@ -9190,7 +9190,7 @@ _08114F14: .4byte gUnknown_841AA01
 _08114F18:
 	ldr r0, _08114F24 @ =gUnknown_2021D18
 	ldr r1, _08114F28 @ =gUnknown_841AA2B
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08114FAC
 	.align 2, 0
 _08114F24: .4byte gUnknown_2021D18
@@ -9203,7 +9203,7 @@ _08114F2C:
 	bne _08114F48
 	ldr r0, _08114F40 @ =gUnknown_2021D18
 	ldr r1, _08114F44 @ =gUnknown_841A9A9
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08114FAC
 	.align 2, 0
 _08114F40: .4byte gUnknown_2021D18
@@ -9211,7 +9211,7 @@ _08114F44: .4byte gUnknown_841A9A9
 _08114F48:
 	ldr r0, _08114F54 @ =gUnknown_2021D18
 	ldr r1, _08114F58 @ =gUnknown_841A9D4
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08114FAC
 	.align 2, 0
 _08114F54: .4byte gUnknown_2021D18
@@ -9223,7 +9223,7 @@ _08114F5C:
 	bne _08114F78
 	ldr r0, _08114F70 @ =gUnknown_2021D18
 	ldr r1, _08114F74 @ =gUnknown_841AA76
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08114FAC
 	.align 2, 0
 _08114F70: .4byte gUnknown_2021D18
@@ -9231,7 +9231,7 @@ _08114F74: .4byte gUnknown_841AA76
 _08114F78:
 	ldr r0, _08114F84 @ =gUnknown_2021D18
 	ldr r1, _08114F88 @ =gUnknown_841AAAA
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08114FAC
 	.align 2, 0
 _08114F84: .4byte gUnknown_2021D18
@@ -9241,7 +9241,7 @@ _08114F8C:
 	bne _08114FA4
 	ldr r0, _08114F9C @ =gUnknown_2021D18
 	ldr r1, _08114FA0 @ =gUnknown_841AAEC
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08114FAC
 	.align 2, 0
 _08114F9C: .4byte gUnknown_2021D18
@@ -9249,7 +9249,7 @@ _08114FA0: .4byte gUnknown_841AAEC
 _08114FA4:
 	ldr r0, _08114FB4 @ =gUnknown_2021D18
 	ldr r1, _08114FB8 @ =gUnknown_841AB29
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 _08114FAC:
 	adds r0, r6, 0x4
 _08114FAE:
@@ -9320,7 +9320,7 @@ sub_811500C: @ 811500C
 	bl sub_8113E88
 	adds r4, r0, 0
 	adds r5, r4, 0x6
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldrh r0, [r4, 0x4]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -9328,7 +9328,7 @@ sub_811500C: @ 811500C
 	ldr r0, _08115068 @ =gUnknown_823EACC
 	adds r1, r0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
@@ -9343,10 +9343,10 @@ sub_811500C: @ 811500C
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0x3
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08115070 @ =gUnknown_2021D18
 	ldr r1, _08115074 @ =gUnknown_841AF3E
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r4, 0x8
 	adds r0, r4, 0
 	pop {r4,r5}
@@ -9422,7 +9422,7 @@ _081150E8: .4byte gUnknown_8456AA0
 _081150EC:
 	adds r5, r4, 0
 	adds r5, 0x8
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r0, _08115108 @ =gUnknown_203B044
 	ldrh r0, [r0, 0x2]
 	cmp r0, 0x1
@@ -9442,16 +9442,16 @@ _08115112:
 	ldr r0, _08115134 @ =gUnknown_300500C
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08115138 @ =gUnknown_3005008
 	ldr r1, [r0]
 	ldr r0, _0811513C @ =0x00003a4c
 	adds r1, r0
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08115140 @ =gUnknown_2021D18
 	ldr r1, _08115144 @ =gUnknown_841A2E1
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _081151AC
 	.align 2, 0
 _08115134: .4byte gUnknown_300500C
@@ -9465,7 +9465,7 @@ _08115148:
 	ldr r0, _08115184 @ =0x00003a4c
 	adds r1, r0
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4, 0x4]
 	movs r1, 0
 	movs r2, 0x1
@@ -9473,14 +9473,14 @@ _08115148:
 	ldr r0, _08115188 @ =gUnknown_300500C
 	ldr r1, [r0]
 	movs r0, 0x2
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4, 0x6]
 	movs r1, 0
 	movs r2, 0x3
 	bl sub_8113EAC
 	ldr r0, _0811518C @ =gUnknown_2021D18
 	ldr r1, _08115190 @ =gUnknown_841A312
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _081151AC
 	.align 2, 0
 _08115180: .4byte gUnknown_3005008
@@ -9495,10 +9495,10 @@ _08115194:
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _081151B8 @ =gUnknown_2021D18
 	ldr r1, _081151BC @ =gUnknown_841A349
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 _081151AC:
 	adds r0, r5, 0x2
 _081151AE:
@@ -9536,14 +9536,14 @@ sub_81151DC: @ 81151DC
 	bl sub_8113E88
 	adds r5, r0, 0
 	adds r6, r5, 0x6
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r4, _0811522C @ =gUnknown_2021CD0
 	ldrb r1, [r5, 0x6]
 	adds r0, r4, 0
 	bl sub_80C4DF8
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r3, _08115230 @ =gUnknown_823EAC8
 	ldrh r1, [r5, 0x4]
 	lsls r0, r1, 2
@@ -9562,7 +9562,7 @@ _0811521A:
 	bl GetExpandedPlaceholder
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	b _0811523E
 	.align 2, 0
 _0811522C: .4byte gUnknown_2021CD0
@@ -9571,7 +9571,7 @@ _08115234:
 	adds r1, r3, 0x4
 	adds r1, r2, r1
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 _0811523E:
 	ldrh r0, [r5]
 	movs r1, 0
@@ -9587,10 +9587,10 @@ _0811523E:
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0x4
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _08115278 @ =gUnknown_2021D18
 	ldr r1, _0811527C @ =gUnknown_841AF6D
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r0, r6, 0x2
 	pop {r4-r6}
 	pop {r1}
@@ -9670,7 +9670,7 @@ _081152F2:
 	movs r1, 0x82
 	lsls r1, 4
 	adds r0, r4, r1
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9959,25 +9959,25 @@ sub_8115518: @ 8115518
 	lsls r0, 16
 	ldrh r1, [r4, 0x6]
 	adds r6, r0, r1
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r5, _08115564 @ =gUnknown_2021CD0
 	ldrb r1, [r4, 0x8]
 	adds r0, r5, 0
 	bl sub_80C4DF8
 	movs r0, 0
 	adds r1, r5, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4]
 	bl ItemId_GetItem
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r4, 0x2]
 	cmp r0, 0x1
 	bhi _08115570
 	ldr r0, _08115568 @ =gUnknown_2021D18
 	ldr r1, _0811556C @ =gUnknown_841A7DD
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _0811558E
 	.align 2, 0
 _08115564: .4byte gUnknown_2021CD0
@@ -9992,10 +9992,10 @@ _08115570:
 	bl sub_8008E78
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _0811559C @ =gUnknown_2021D18
 	ldr r1, _081155A0 @ =gUnknown_841A810
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 _0811558E:
 	adds r0, r7, 0x2
 	pop {r4-r7}
@@ -10054,7 +10054,7 @@ sub_81155E0: @ 81155E0
 	lsls r0, 16
 	ldrh r1, [r5, 0x6]
 	adds r6, r0, r1
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r4, _0811563C @ =gUnknown_2021CD0
 	ldrb r1, [r5, 0x8]
 	adds r0, r4, 0
@@ -10065,21 +10065,21 @@ sub_81155E0: @ 81155E0
 	ldr r0, _08115640 @ =gUnknown_300500C
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0x1
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r5]
 	bl ItemId_GetItem
 	adds r1, r0, 0
 	movs r0, 0x2
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r5, 0x2]
 	cmp r0, 0x1
 	bne _08115648
 	ldr r1, _08115644 @ =gUnknown_841A8D4
 	movs r0, 0x3
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	b _08115670
 	.align 2, 0
 _0811563C: .4byte gUnknown_2021CD0
@@ -10094,18 +10094,18 @@ _08115648:
 	bl sub_8008E78
 	movs r0, 0x4
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r4, _08115680 @ =gUnknown_2021D04
 	ldr r1, _08115684 @ =gUnknown_841A8DD
 	adds r0, r4, 0
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x3
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 _08115670:
 	ldr r0, _08115688 @ =gUnknown_2021D18
 	ldr r1, _0811568C @ =gUnknown_841A858
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _081156C4
 	.align 2, 0
 _0811567C: .4byte gUnknown_2021CF0
@@ -10116,12 +10116,12 @@ _0811568C: .4byte gUnknown_841A858
 _08115690:
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldrh r0, [r5]
 	bl ItemId_GetItem
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r4, _081156CC @ =gUnknown_2021CF0
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -10130,10 +10130,10 @@ _08115690:
 	bl sub_8008E78
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _081156D0 @ =gUnknown_2021D18
 	ldr r1, _081156D4 @ =gUnknown_841A896
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 _081156C4:
 	adds r0, r7, 0x2
 	pop {r4-r7}
@@ -10235,7 +10235,7 @@ _08115778:
 	cmp r2, r3
 	bne _08115774
 	adds r0, r2, 0
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _08115770

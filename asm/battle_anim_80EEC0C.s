@@ -939,7 +939,7 @@ _080EF39C:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -1056,7 +1056,7 @@ sub_80EF490: @ 80EF490
 	lsrs r4, 24
 	ldr r0, _080EF4B4 @ =gUnknown_2023D68
 	ldrh r0, [r0]
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r0, 24
 	bl LoadBallGfx
@@ -1077,7 +1077,7 @@ sub_80EF4B8: @ 80EF4B8
 	lsrs r4, 24
 	ldr r0, _080EF4DC @ =gUnknown_2023D68
 	ldrh r0, [r0]
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r0, 24
 	bl FreeBallGfx
@@ -1130,8 +1130,8 @@ _080EF524: .4byte gUnknown_2037F02
 _080EF528: .4byte 0x0000fffe
 	thumb_func_end sub_80EF4E0
 
-	thumb_func_start sub_80EF52C
-sub_80EF52C: @ 80EF52C
+	thumb_func_start ItemIdToBallId
+ItemIdToBallId: @ 80EF52C
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1197,7 +1197,7 @@ _080EF5A4:
 _080EF5A6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80EF52C
+	thumb_func_end ItemIdToBallId
 
 	thumb_func_start sub_80EF5AC
 sub_80EF5AC: @ 80EF5AC
@@ -1212,7 +1212,7 @@ sub_80EF5AC: @ 80EF5AC
 	mov r10, r0
 	ldr r0, _080EF674 @ =gUnknown_2023D68
 	ldrh r0, [r0]
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1371,7 +1371,7 @@ _080EF6F8:
 _080EF708:
 	ldr r0, _080EF7C8 @ =gUnknown_2023D68
 	ldrh r0, [r0]
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1656,7 +1656,7 @@ _080EF954:
 	str r0, [r4, 0x1C]
 	ldr r0, _080EF9AC @ =gUnknown_2023D68
 	ldrh r0, [r0]
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0xB
@@ -2875,7 +2875,7 @@ sub_80F02B0: @ 80F02B0
 	str r0, [r4, 0x1C]
 	ldr r0, _080F0368 @ =gUnknown_2023D68
 	ldrh r0, [r0]
-	bl sub_80EF52C
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0xB

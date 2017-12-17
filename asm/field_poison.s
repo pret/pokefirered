@@ -206,7 +206,7 @@ _080A05D0:
 	ldrb r0, [r4, 0x2]
 	bl sub_80A04B8
 	ldr r0, _080A05E4 @ =gUnknown_81A5476
-	bl sub_806943C
+	bl ShowFieldMessage
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
@@ -291,7 +291,7 @@ _080A0668:
 	cmp r7, 0
 	beq _080A067C
 _080A0678:
-	bl sub_80A0E48
+	bl overworld_poison_effect
 _080A067C:
 	cmp r6, 0
 	beq _080A0688

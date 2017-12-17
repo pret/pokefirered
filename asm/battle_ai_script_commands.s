@@ -3721,8 +3721,8 @@ _080C8878: .4byte gUnknown_2024284
 _080C887C: .4byte gUnknown_2039A00
 	thumb_func_end sub_80C87BC
 
-	thumb_func_start sub_80C8880
-sub_80C8880: @ 80C8880
+	thumb_func_start BattleAICmd_get_weather
+BattleAICmd_get_weather: @ 80C8880
 	push {lr}
 	ldr r2, _080C88E0 @ =gUnknown_2023F1C
 	ldrh r1, [r2]
@@ -3779,7 +3779,7 @@ _080C88D4:
 _080C88E0: .4byte gUnknown_2023F1C
 _080C88E4: .4byte gUnknown_2023FF4
 _080C88E8: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C8880
+	thumb_func_end BattleAICmd_get_weather
 
 	thumb_func_start sub_80C88EC
 sub_80C88EC: @ 80C88EC
@@ -4093,8 +4093,8 @@ _080C8B1E:
 	bx r0
 	thumb_func_end sub_80C8ABC
 
-	thumb_func_start sub_80C8B24
-sub_80C8B24: @ 80C8B24
+	thumb_func_start BattleAICmd_if_can_faint
+BattleAICmd_if_can_faint: @ 80C8B24
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4207,10 +4207,10 @@ _080C8C10:
 	bx r0
 	.align 2, 0
 _080C8C1C: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C8B24
+	thumb_func_end BattleAICmd_if_can_faint
 
-	thumb_func_start sub_80C8C20
-sub_80C8C20: @ 80C8C20
+	thumb_func_start BattleAICmd_if_cant_faint
+BattleAICmd_if_cant_faint: @ 80C8C20
 	push {r4-r7,lr}
 	ldr r2, _080C8CBC @ =gUnknown_8250C04
 	ldr r7, _080C8CC0 @ =gUnknown_2023FF4
@@ -4311,7 +4311,7 @@ _080C8CF8:
 	bx r0
 	.align 2, 0
 _080C8D00: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C8C20
+	thumb_func_end BattleAICmd_if_cant_faint
 
 	thumb_func_start sub_80C8D04
 sub_80C8D04: @ 80C8D04
@@ -4797,8 +4797,8 @@ _080C9080: .4byte gUnknown_2023D6C
 _080C9084: .4byte gUnknown_8250C04
 	thumb_func_end sub_80C8FB0
 
-	thumb_func_start sub_80C9088
-sub_80C9088: @ 80C9088
+	thumb_func_start BattleAICmd_if_any_move_disabled_or_encored
+BattleAICmd_if_any_move_disabled_or_encored: @ 80C9088
 	push {r4,r5,lr}
 	ldr r0, _080C909C @ =gUnknown_2039A00
 	ldr r1, [r0]
@@ -4870,10 +4870,10 @@ _080C9108:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C9088
+	thumb_func_end BattleAICmd_if_any_move_disabled_or_encored
 
-	thumb_func_start sub_80C9110
-sub_80C9110: @ 80C9110
+	thumb_func_start BattleAICmd_if_curr_move_disabled_or_encored
+BattleAICmd_if_curr_move_disabled_or_encored: @ 80C9110
 	push {r4,lr}
 	ldr r4, _080C9124 @ =gUnknown_2039A00
 	ldr r3, [r4]
@@ -4944,10 +4944,10 @@ _080C9198:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C9110
+	thumb_func_end BattleAICmd_if_curr_move_disabled_or_encored
 
-	thumb_func_start sub_80C91A0
-sub_80C91A0: @ 80C91A0
+	thumb_func_start BattleAICmd_flee
+BattleAICmd_flee: @ 80C91A0
 	ldr r0, _080C91B0 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r2, [r0, 0x14]
@@ -4958,7 +4958,7 @@ sub_80C91A0: @ 80C91A0
 	bx lr
 	.align 2, 0
 _080C91B0: .4byte gUnknown_2023FF4
-	thumb_func_end sub_80C91A0
+	thumb_func_end BattleAICmd_flee
 
 	thumb_func_start sub_80C91B4
 sub_80C91B4: @ 80C91B4
@@ -5455,7 +5455,7 @@ BattleAICmd_call: @ 80C9530
 	ldr r4, _080C955C @ =gUnknown_2039A00
 	ldr r0, [r4]
 	adds r0, 0x5
-	bl sub_80C971C
+	bl AIStackPushVar
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -5498,7 +5498,7 @@ _080C957C: .4byte gUnknown_2039A00
 	thumb_func_start BattleAICmd_end
 BattleAICmd_end: @ 80C9580
 	push {lr}
-	bl sub_80C9768
+	bl AIStackPop
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C959A
@@ -5713,8 +5713,8 @@ _080C9714:
 _080C9718: .4byte gUnknown_2039A00
 	thumb_func_end sub_80C96CC
 
-	thumb_func_start sub_80C971C
-sub_80C971C: @ 80C971C
+	thumb_func_start AIStackPushVar
+AIStackPushVar: @ 80C971C
 	push {r4,lr}
 	ldr r1, _080C973C @ =gUnknown_2023FF4
 	ldr r1, [r1]
@@ -5733,10 +5733,10 @@ sub_80C971C: @ 80C971C
 	bx r0
 	.align 2, 0
 _080C973C: .4byte gUnknown_2023FF4
-	thumb_func_end sub_80C971C
+	thumb_func_end AIStackPushVar
 
-	thumb_func_start sub_80C9740
-sub_80C9740: @ 80C9740
+	thumb_func_start AIStackPushVar_cursor
+AIStackPushVar_cursor: @ 80C9740
 	ldr r0, _080C9760 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r2, [r0, 0x1C]
@@ -5755,10 +5755,10 @@ sub_80C9740: @ 80C9740
 	.align 2, 0
 _080C9760: .4byte gUnknown_2023FF4
 _080C9764: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C9740
+	thumb_func_end AIStackPushVar_cursor
 
-	thumb_func_start sub_80C9768
-sub_80C9768: @ 80C9768
+	thumb_func_start AIStackPop
+AIStackPop: @ 80C9768
 	push {lr}
 	ldr r3, _080C9780 @ =gUnknown_2023FF4
 	ldr r0, [r3]
@@ -5791,6 +5791,6 @@ _080C979E:
 	bx r1
 	.align 2, 0
 _080C97A4: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C9768
+	thumb_func_end AIStackPop
 
 	.align 2, 0 @ Don't pad with nop.

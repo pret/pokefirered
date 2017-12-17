@@ -242,8 +242,8 @@ _0809C8D8:
 _0809C8E0: .4byte gUnknown_83DF7CC
 	thumb_func_end sub_809C8A0
 
-	thumb_func_start sub_809C8E4
-sub_809C8E4: @ 809C8E4
+	thumb_func_start ItemIdToBerryType
+ItemIdToBerryType: @ 809C8E4
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -264,10 +264,10 @@ _0809C904:
 _0809C906:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809C8E4
+	thumb_func_end ItemIdToBerryType
 
-	thumb_func_start sub_809C90C
-sub_809C90C: @ 809C90C
+	thumb_func_start BerryTypeToItemId
+BerryTypeToItemId: @ 809C90C
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -288,10 +288,10 @@ _0809C92C:
 _0809C92E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809C90C
+	thumb_func_end BerryTypeToItemId
 
-	thumb_func_start sub_809C934
-sub_809C934: @ 809C934
+	thumb_func_start GetBerryNameByBerryType
+GetBerryNameByBerryType: @ 809C934
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -306,6 +306,6 @@ sub_809C934: @ 809C934
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809C934
+	thumb_func_end GetBerryNameByBerryType
 
 	.align 2, 0 @ Don't pad with nop.

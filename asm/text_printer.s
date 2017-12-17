@@ -5,17 +5,17 @@
 
 	.text
 
-	thumb_func_start sub_8002C1C
-sub_8002C1C: @ 8002C1C
+	thumb_func_start SetFontsPointer
+SetFontsPointer: @ 8002C1C
 	ldr r1, _08002C24 @ =gUnknown_3003D90
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _08002C24: .4byte gUnknown_3003D90
-	thumb_func_end sub_8002C1C
+	thumb_func_end SetFontsPointer
 
-	thumb_func_start sub_8002C28
-sub_8002C28: @ 8002C28
+	thumb_func_start DeactivateAllTextPrinters
+DeactivateAllTextPrinters: @ 8002C28
 	push {lr}
 	ldr r1, _08002C40 @ =gUnknown_2020034
 	movs r2, 0
@@ -31,10 +31,10 @@ _08002C32:
 	.align 2, 0
 _08002C40: .4byte gUnknown_2020034
 _08002C44: .4byte 0x0000045c
-	thumb_func_end sub_8002C28
+	thumb_func_end DeactivateAllTextPrinters
 
-	thumb_func_start sub_8002C48
-sub_8002C48: @ 8002C48
+	thumb_func_start PrintTextOnWindow
+PrintTextOnWindow: @ 8002C48
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -109,7 +109,7 @@ sub_8002C48: @ 8002C48
 	mov r0, sp
 	mov r1, r8
 	adds r2, r7, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	lsls r0, 16
 	lsrs r0, 16
 	add sp, 0x10
@@ -120,10 +120,10 @@ sub_8002C48: @ 8002C48
 	bx r1
 	.align 2, 0
 _08002CF0: .4byte gUnknown_3003D90
-	thumb_func_end sub_8002C48
+	thumb_func_end PrintTextOnWindow
 
-	thumb_func_start sub_8002CF4
-sub_8002CF4: @ 8002CF4
+	thumb_func_start AddTextPrinter
+AddTextPrinter: @ 8002CF4
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	mov r12, r2
@@ -227,7 +227,7 @@ _08002DB8:
 	ldr r0, _08002DE0 @ =gUnknown_2020010
 	ldrb r0, [r0, 0x4]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 _08002DC6:
 	ldr r2, _08002DE4 @ =gUnknown_2020034
 	ldrb r1, [r6, 0x4]
@@ -246,7 +246,7 @@ _08002DD8:
 	.align 2, 0
 _08002DE0: .4byte gUnknown_2020010
 _08002DE4: .4byte gUnknown_2020034
-	thumb_func_end sub_8002CF4
+	thumb_func_end AddTextPrinter
 
 	thumb_func_start sub_8002DE8
 sub_8002DE8: @ 8002DE8
@@ -282,7 +282,7 @@ _08002E1C:
 _08002E22:
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 _08002E2A:
 	ldr r1, _08002E44 @ =gUnknown_2020034
 	adds r0, r1, 0

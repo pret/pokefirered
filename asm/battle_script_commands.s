@@ -13119,7 +13119,7 @@ _08023F84:
 	ldrh r0, [r1]
 	ldrb r1, [r1, 0x17]
 	lsrs r1, 7
-	bl sub_8040D38
+	bl GetAbilityBySpecies
 	ldrb r1, [r7]
 	muls r1, r6
 	adds r1, r4
@@ -15662,7 +15662,7 @@ _080254A8:
 	beq _080254B6
 	b _080256D0
 _080254B6:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _080254E8 @ =gUnknown_2024284
 	ldr r1, _080254EC @ =gUnknown_2023FE8
 	ldr r1, [r1]
@@ -17430,7 +17430,7 @@ _08026304:
 	bl PutWindowTilemap
 	movs r0, 0xC
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0802636E
 _08026318:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -17453,7 +17453,7 @@ _08026330:
 	bl sub_8026448
 	movs r0, 0xC
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0802636E
 	.align 2, 0
 _0802634C: .4byte gUnknown_30030F0
@@ -17489,12 +17489,12 @@ _08026380:
 	bl ClearWindowTilemap
 	movs r0, 0xD
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0xC
 	bl ClearWindowTilemap
 	movs r0, 0xC
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x2
 	movs r1, 0x7
 	movs r2, 0x2
@@ -17622,7 +17622,7 @@ sub_8026480: @ 8026480
 	bl PutWindowTilemap
 	movs r0, 0xD
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	bl PutMonIconOnLvlUpBox
 	pop {r0}
 	bx r0
@@ -17746,7 +17746,7 @@ PutLevelAndGenderOnLvlUpBox: @ 8026524
 	strb r5, [r0, 0xD]
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	movs r0, 0xF9
 	strb r0, [r6]
 	adds r6, 0x1
@@ -17808,10 +17808,10 @@ _08026624:
 	strb r1, [r0, 0x9]
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	movs r0, 0xD
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
@@ -18501,7 +18501,7 @@ _08026B9C:
 	ldr r0, _08026BAC @ =gUnknown_2023D4A
 	ldrh r0, [r0]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldr r1, _08026BB0 @ =gUnknown_2023D6C
 	strb r0, [r1]
 	b _08026F4E
@@ -18832,7 +18832,7 @@ _08026DF6:
 	beq _08026E4E
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8040D38
+	bl GetAbilityBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2B
@@ -18907,7 +18907,7 @@ _08026E94:
 	beq _08026EEC
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8040D38
+	bl GetAbilityBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2B
@@ -19577,7 +19577,7 @@ _080273FC:
 _08027426:
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldr r1, _0802745C @ =gUnknown_2023D6C
 	strb r0, [r1]
 	ldr r5, _08027460 @ =gUnknown_2023D74
@@ -24065,7 +24065,7 @@ _08029794:
 	str r0, [r1]
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldr r1, _080297F8 @ =gUnknown_2023D6C
 	strb r0, [r1]
 	pop {r3}
@@ -25562,7 +25562,7 @@ _0802A334:
 	str r0, [r2]
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldr r1, _0802A3C0 @ =gUnknown_2023D6C
 	strb r0, [r1]
 	ldr r3, _0802A3C4 @ =gUnknown_2023D74
@@ -26197,7 +26197,7 @@ _0802A88C: .4byte gUnknown_825E45C
 _0802A890:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8040D38
+	bl GetAbilityBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 _0802A89C:
@@ -28930,7 +28930,7 @@ atkCC_callterrainattack: @ 802BE18
 	strh r0, [r4]
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldr r1, _0802BE7C @ =gUnknown_2023D6C
 	strb r0, [r1]
 	ldr r3, _0802BE80 @ =gUnknown_81D65A8
@@ -30510,7 +30510,7 @@ _0802CA3C:
 	strh r0, [r4]
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldr r1, _0802CAAC @ =gUnknown_2023D6C
 	strb r0, [r1]
 	ldr r1, _0802CAB0 @ =gUnknown_2023D74
@@ -32221,7 +32221,7 @@ sub_802D800: @ 802D800
 	strb r1, [r0, 0x5]
 	ldr r4, _0802D880 @ =gUnknown_2021CD0
 	ldr r0, _0802D884 @ =0x00004037
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBoxNamePtr
@@ -32250,7 +32250,7 @@ _0802D888: .4byte gUnknown_2021CF0
 _0802D88C:
 	ldr r4, _0802D92C @ =gUnknown_2021CD0
 	ldr r0, _0802D930 @ =0x00004037
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBoxNamePtr
@@ -32280,7 +32280,7 @@ _0802D88C:
 	strb r0, [r1, 0x5]
 _0802D8D6:
 	ldr r0, _0802D940 @ =0x00000834
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802D8EA
@@ -32451,7 +32451,7 @@ _0802DA3C:
 	beq _0802DA4A
 	b _0802DB6C
 _0802DA4A:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r5, 0
 	bl sub_8106B60
 	ldr r1, _0802DA60 @ =gUnknown_2023E82
@@ -32976,7 +32976,7 @@ _0802DE4E:
 	adds r2, 0x6D
 	movs r1, 0x2
 	bl GetMonData
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	mov r2, r10
 	ldrb r0, [r2]
 	eors r0, r4

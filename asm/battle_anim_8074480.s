@@ -5133,7 +5133,7 @@ _08076A46:
 	str r2, [sp]
 	adds r2, r6, 0
 	mov r3, r8
-	bl sub_800F134
+	bl LoadSpecialPokePic_DontHandleDeoxys
 	b _08076A7C
 	.align 2, 0
 _08076A54: .4byte gUnknown_2024018

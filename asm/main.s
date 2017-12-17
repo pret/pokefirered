@@ -36,7 +36,7 @@ AgbMain: @ 80003A4
 	movs r1, 0xE0
 	lsls r1, 9
 	bl InitHeap
-	bl sub_80F79C8
+	bl SetDefaultFontsPointer
 	ldr r0, _08000468 @ =gUnknown_3003530
 	movs r4, 0
 	strb r4, [r0]

@@ -190,7 +190,7 @@ _0812B2EC:
 	cmp r5, 0xF
 	bne _0812B320
 	ldr r0, _0812B328 @ =0x00000849
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -328,7 +328,7 @@ sub_812B40C: @ 812B40C
 	cmp r0, 0x2
 	beq _0812B440
 	ldr r0, _0812B43C @ =0x0000083c
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B440
@@ -341,7 +341,7 @@ _0812B438: .4byte gUnknown_30053A0
 _0812B43C: .4byte 0x0000083c
 _0812B440:
 	ldr r0, _0812B454 @ =0x0000083c
-	bl sub_806E680
+	bl FlagSet
 	ldr r1, _0812B458 @ =gUnknown_203B0EE
 	movs r0, 0x1
 	strb r0, [r1]
@@ -753,7 +753,7 @@ sub_812B754: @ 812B754
 	push {lr}
 	movs r0, 0x96
 	lsls r0, 3
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1116,7 +1116,7 @@ _0812BAEA:
 _0812BAF0:
 	ldr r0, _0812BAFC @ =0x00000821
 _0812BAF2:
-	bl sub_806E6D0
+	bl FlagGet
 _0812BAF6:
 	lsls r0, 24
 	lsrs r0, 24
@@ -1141,44 +1141,44 @@ _0812BB0A:
 sub_812BB10: @ 812BB10
 	push {lr}
 	ldr r0, _0812BB7C @ =0x00000237
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0812BB94
 	movs r0, 0x8E
 	lsls r0, 2
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0812BB94
 	ldr r0, _0812BB80 @ =0x00000239
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0812BB94
 	ldr r0, _0812BB84 @ =0x0000023a
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0812BB94
 	ldr r0, _0812BB88 @ =0x0000023b
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0812BB94
 	ldr r0, _0812BB8C @ =0x000002ef
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0812BB94
 	ldr r0, _0812BB90 @ =0x000001f1
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

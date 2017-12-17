@@ -378,7 +378,7 @@ _0812C2C4:
 	mov r8, r1
 	b _0812C2E2
 _0812C2D2:
-	bl sub_811B0D0
+	bl InUnionRoom
 	movs r1, 0xD
 	mov r8, r1
 	cmp r0, 0x1

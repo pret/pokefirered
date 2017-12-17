@@ -861,13 +861,13 @@ sub_810DAD4: @ 810DAD4
 	bne _0810DB10
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	str r4, [sp]
@@ -1076,7 +1076,7 @@ _0810DC66:
 	beq _0810DC72
 	bl Free
 _0810DC72:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1852,7 +1852,7 @@ sub_810E274: @ 810E274
 	mov r8, r0
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x2
 	lsls r0, 24
 	lsrs r0, 24
@@ -1868,7 +1868,7 @@ sub_810E274: @ 810E274
 	bl PrintTextArray
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x2
 	lsls r0, 24
 	lsrs r0, 24
@@ -2072,7 +2072,7 @@ sub_810E418: @ 810E418
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
@@ -2100,7 +2100,7 @@ _0810E4B8:
 	adds r0, r1, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
@@ -2257,7 +2257,7 @@ sub_810E5E0: @ 810E5E0
 	str r4, [sp, 0x8]
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r6, 0
 	movs r1, 0x1
 	movs r2, 0x2
@@ -2590,7 +2590,7 @@ sub_810E8F0: @ 810E8F0
 	push {r4,lr}
 	ldr r0, _0810E974 @ =gUnknown_8453F98
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r1, 0xF0
 	lsls r1, 2
 	movs r0, 0
@@ -2706,7 +2706,7 @@ sub_810E984: @ 810E984
 	strb r0, [r1, 0xD]
 	movs r0, 0x3
 	movs r1, 0x4
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r1, sp
 	ands r5, r0
 	ldrb r0, [r1, 0xC]
@@ -2715,13 +2715,13 @@ sub_810E984: @ 810E984
 	strb r4, [r1, 0xC]
 	movs r0, 0x3
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r1, sp
 	adds r6, r0
 	strb r6, [r1, 0xA]
 	movs r0, 0x3
 	movs r1, 0x3
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r1, sp
 	add r8, r0
 	mov r0, r8
@@ -2729,7 +2729,7 @@ sub_810E984: @ 810E984
 	mov r0, sp
 	mov r1, r9
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -2853,7 +2853,7 @@ sub_810EAF0: @ 810EAF0
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0xFF
 	strb r0, [r4]
 	pop {r4}
@@ -2897,7 +2897,7 @@ sub_810EB30: @ 810EB30
 	adds r0, r4, 0
 	movs r1, 0x5
 	movs r3, 0xB
-	bl sub_80BF474
+	bl DisplayMessageAndContinueTask
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x10

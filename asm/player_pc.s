@@ -152,13 +152,13 @@ _080EB77E:
 	bl sub_80F7750
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r7, 0x14]
@@ -177,7 +177,7 @@ _080EB77E:
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl sub_810FCD0
+	bl AddItemMenuActionTextPrinters
 	ldrb r0, [r7, 0x14]
 	str r6, [sp]
 	ldrb r1, [r5]
@@ -241,7 +241,7 @@ sub_80EB81C: @ 80EB81C
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	adds r0, r7, 0
@@ -260,7 +260,7 @@ _080EB878:
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	adds r2, r7, 0
@@ -467,7 +467,7 @@ _080EBA1E:
 	bl sub_80F7750
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -522,7 +522,7 @@ sub_80EBA8C: @ 80EBA8C
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -541,7 +541,7 @@ sub_80EBAB8: @ 80EBAB8
 	ands r0, r1
 	cmp r0, 0
 	beq _080EBAE8
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	cmp r0, 0
 	beq _080EBB64
@@ -557,7 +557,7 @@ _080EBAE8:
 	ands r0, r1
 	cmp r0, 0
 	beq _080EBB20
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -568,7 +568,7 @@ _080EBAE8:
 _080EBB04:
 	bl MoveMenuCursor
 	ldr r4, _080EBB1C @ =gUnknown_84021DC
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -586,7 +586,7 @@ _080EBB20:
 	movs r0, 0x5
 	bl sub_80722CC
 	ldr r4, _080EBB48 @ =gUnknown_8402208
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 21
 	adds r4, 0x4
@@ -756,7 +756,7 @@ _080EBC7C:
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r2, _080EBCA4 @ =gUnknown_8417774
 	ldr r3, _080EBCA8 @ =sub_80EB8E4
 	adds r0, r5, 0
@@ -866,9 +866,9 @@ sub_80EBD48: @ 80EBD48
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4, 0x14]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r5, 0
 	bl sub_80EB8BC
 	pop {r4,r5}
@@ -1082,7 +1082,7 @@ sub_80EBEB0: @ 80EBEB0
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, r8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r4, _080EBF38 @ =gUnknown_203AAC4
@@ -1317,7 +1317,7 @@ sub_80EC0D8: @ 80EC0D8
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -1672,7 +1672,7 @@ _080EC3B4:
 	movs r1, 0x2
 	bl DisplayItemMessageOnField
 	adds r0, r5, 0
-	bl sub_8097CB4
+	bl ClearMailStruct
 	bl sub_80EBE04
 	ldrb r0, [r4, 0x5]
 	subs r0, 0x1

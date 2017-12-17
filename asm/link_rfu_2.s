@@ -9178,7 +9178,7 @@ _080FCB88:
 	ands r1, r0
 	strb r1, [r7]
 	ldr r0, _080FCC34 @ =0x00000844
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 7
 	ldrb r1, [r7]
 	ands r4, r1
@@ -9191,7 +9191,7 @@ _080FCB88:
 	orrs r5, r0
 	strb r5, [r7, 0x1]
 	ldr r0, _080FCC38 @ =0x0000082c
-	bl sub_806E6D0
+	bl FlagGet
 	ands r6, r0
 	lsls r6, 1
 	ldrb r1, [r7, 0x1]

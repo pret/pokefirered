@@ -611,7 +611,7 @@ _0810CB2C:
 	movs r0, 0x15
 	bl sub_80722CC
 	ldr r0, _0810CB6C @ =0x00000801
-	bl sub_806E680
+	bl FlagSet
 	bl sub_810C640
 	movs r0, 0x2
 	b _0810CB7E
@@ -820,7 +820,7 @@ _0810CCF0: .4byte 0x0000082c
 _0810CCF4:
 	ldr r0, _0810CD10 @ =0x00000844
 _0810CCF6:
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810CD0A

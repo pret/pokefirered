@@ -24,7 +24,7 @@ _080D0808:
 	b _080D0826
 _080D080C:
 	ldr r4, _080D082C @ =gUnknown_20370D0
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -50,7 +50,7 @@ _080D083C: .4byte sub_80D0840
 	thumb_func_start sub_80D0840
 sub_80D0840: @ 80D0840
 	push {lr}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _080D0858 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24

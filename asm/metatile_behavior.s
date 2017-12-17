@@ -997,8 +997,8 @@ _08059FF0:
 	bx r1
 	thumb_func_end sub_8059FE0
 
-	thumb_func_start sub_8059FF4
-sub_8059FF4: @ 8059FF4
+	thumb_func_start MetatileBehavior_IsThinIce
+MetatileBehavior_IsThinIce: @ 8059FF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1011,10 +1011,10 @@ _0805A002:
 _0805A004:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059FF4
+	thumb_func_end MetatileBehavior_IsThinIce
 
-	thumb_func_start sub_805A008
-sub_805A008: @ 805A008
+	thumb_func_start MetatileBehavior_IsCrackedIce
+MetatileBehavior_IsCrackedIce: @ 805A008
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1027,7 +1027,7 @@ _0805A016:
 _0805A018:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805A008
+	thumb_func_end MetatileBehavior_IsCrackedIce
 
 	thumb_func_start sub_805A01C
 sub_805A01C: @ 805A01C
@@ -1068,8 +1068,8 @@ _0805A04C:
 	bx r1
 	thumb_func_end sub_805A03C
 
-	thumb_func_start sub_805A050
-sub_805A050: @ 805A050
+	thumb_func_start MetatileBehavior_IsSurfableAndNotWaterfall
+MetatileBehavior_IsSurfableAndNotWaterfall: @ 805A050
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1091,7 +1091,7 @@ _0805A074:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805A050
+	thumb_func_end MetatileBehavior_IsSurfableAndNotWaterfall
 
 	thumb_func_start sub_805A07C
 sub_805A07C: @ 805A07C

@@ -953,7 +953,7 @@ sub_8144F1C: @ 8144F1C
 	ldr r1, _08144F3C @ =gUnknown_8468B6C
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8144FA0
+	bl mevent_srv_init_common
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -972,7 +972,7 @@ sub_8144F40: @ 8144F40
 	ldr r1, _08144F60 @ =gUnknown_8468BCC
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8144FA0
+	bl mevent_srv_init_common
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1001,7 +1001,7 @@ _08144F78:
 	ldr r0, [r4]
 	ldr r1, [r0, 0x4]
 	strh r1, [r6]
-	bl sub_8144FF8
+	bl mevent_srv_free_resources
 	ldr r0, [r4]
 	bl Free
 	movs r0, 0
@@ -1014,8 +1014,8 @@ _08144F98:
 	bx r1
 	thumb_func_end sub_8144F64
 
-	thumb_func_start sub_8144FA0
-sub_8144FA0: @ 8144FA0
+	thumb_func_start mevent_srv_init_common
+mevent_srv_init_common: @ 8144FA0
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -1055,10 +1055,10 @@ sub_8144FA0: @ 8144FA0
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8144FA0
+	thumb_func_end mevent_srv_init_common
 
-	thumb_func_start sub_8144FF8
-sub_8144FF8: @ 8144FF8
+	thumb_func_start mevent_srv_free_resources
+mevent_srv_free_resources: @ 8144FF8
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x18]
@@ -1072,7 +1072,7 @@ sub_8144FF8: @ 8144FF8
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8144FF8
+	thumb_func_end mevent_srv_free_resources
 
 	thumb_func_start sub_814501C
 sub_814501C: @ 814501C

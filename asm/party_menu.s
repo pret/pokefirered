@@ -788,7 +788,7 @@ _0811F096:
 	beq _0811F0A2
 	bl Free
 _0811F0A2:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -877,7 +877,7 @@ sub_811F124: @ 811F124
 	adds r0, r4, r0
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	adds r4, r0
 	ldrb r0, [r4, 0x8]
@@ -907,7 +907,7 @@ _0811F174:
 	adds r0, r4, r0
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0811F218
 	.align 2, 0
 _0811F1A4: .4byte gUnknown_2024284
@@ -2130,14 +2130,14 @@ _0811FB04:
 	bx r0
 	thumb_func_end sub_811FAB4
 
-	thumb_func_start sub_811FB0C
-sub_811FB0C: @ 811FB0C
+	thumb_func_start GetCursorSelectionMonId
+GetCursorSelectionMonId: @ 811FB0C
 	ldr r0, _0811FB14 @ =gUnknown_203B0A0
 	ldrb r0, [r0, 0x9]
 	bx lr
 	.align 2, 0
 _0811FB14: .4byte gUnknown_203B0A0
-	thumb_func_end sub_811FB0C
+	thumb_func_end GetCursorSelectionMonId
 
 	thumb_func_start sub_811FB18
 sub_811FB18: @ 811FB18
@@ -2381,7 +2381,7 @@ _0811FCE8:
 	muls r0, r1
 	ldr r1, _0811FD30 @ =gUnknown_2024284
 	adds r0, r1
-	bl sub_8043E2C
+	bl GetNumberOfRelearnableMoves
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -5002,7 +5002,7 @@ _081210A0:
 	ldr r0, _081210F4 @ =gUnknown_845A0D0
 	bl sub_8003B24
 _081210A6:
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r4, 0
 _081210AC:
 	adds r0, r4, 0
@@ -5089,7 +5089,7 @@ _0812110E:
 	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _08121184 @ =gUnknown_845A110
 	bl sub_8003CE4
 	lsls r0, 24
@@ -5178,7 +5178,7 @@ _08121224:
 	bl PutWindowTilemap
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 _08121238:
@@ -6425,7 +6425,7 @@ _08121BCC:
 _08121C50:
 	ldrb r0, [r6, 0x8]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x8
 	pop {r3,r4}
 	mov r8, r3
@@ -6509,7 +6509,7 @@ sub_8121CE4: @ 8121CE4
 	movs r1, 0
 	bl sub_810F4D8
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0xFF
 	strb r0, [r4]
 	movs r0, 0x2
@@ -6625,7 +6625,7 @@ _08121DB0:
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 _08121DE8:
@@ -6735,7 +6735,7 @@ _08121E7E:
 	add r0, sp, 0x14
 	movs r1, 0x2
 	movs r2, 0x13
-	bl sub_810FE50
+	bl SetWindowTemplateFields
 	ldr r0, [sp, 0x14]
 	ldr r1, [sp, 0x18]
 	b _08121ED2
@@ -6781,13 +6781,13 @@ _08121EFC: .4byte gUnknown_203B09C
 _08121F00:
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -6903,7 +6903,7 @@ sub_8121FC0: @ 8121FC0
 	movs r0, 0x6
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -7005,7 +7005,7 @@ sub_8122084: @ 8122084
 	adds r0, r4, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -7056,7 +7056,7 @@ sub_8122110: @ 8122110
 	movs r1, 0
 	bl sub_810F260
 	adds r0, r4, 0
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	pop {r4}
@@ -7080,7 +7080,7 @@ sub_8122138: @ 8122138
 	beq _081221C0
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0xE]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0xFF
 	strb r0, [r4, 0xE]
 	movs r0, 0x2
@@ -7100,7 +7100,7 @@ _0812217A:
 	bl sub_8112F18
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r2, [r4, 0xE]
@@ -8563,14 +8563,14 @@ _08122CA4:
 	lsrs r5, r0, 24
 	movs r0, 0
 	ldrsh r4, [r7, r0]
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	beq _08122CCE
 	ldr r0, _08122D14 @ =gUnknown_203B09C
 	ldr r4, [r0]
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, 0xF
@@ -8578,7 +8578,7 @@ _08122CA4:
 	ldrb r0, [r4]
 	bl sub_8122138
 _08122CCE:
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7]
@@ -11600,7 +11600,7 @@ sub_81245A4: @ 81245A4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	ldr r5, _08124610 @ =gUnknown_203B09C
 	ldr r1, [r5]
 	lsls r0, 24
@@ -11632,7 +11632,7 @@ _081245D6:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _081245FA
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _0812461C
 _081245FA:
@@ -11657,7 +11657,7 @@ _0812461C:
 	movs r1, 0x82
 	lsls r1, 4
 	adds r0, r4, r1
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -11792,7 +11792,7 @@ _0812475C:
 	ldr r1, _08124780 @ =gUnknown_203B0A0
 	ldr r0, _08124784 @ =c2_exit_to_overworld_2_switch
 	str r0, [r1]
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -11917,7 +11917,7 @@ _0812484E:
 	ldr r1, _0812487C @ =gUnknown_203B0A0
 	ldr r0, _08124880 @ =c2_exit_to_overworld_2_switch
 	str r0, [r1]
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -12052,7 +12052,7 @@ _08124950: .4byte gUnknown_30030F0
 sub_8124954: @ 8124954
 	push {lr}
 	ldr r0, _0812496C @ =0x00000806
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12073,7 +12073,7 @@ _08124976:
 	thumb_func_start hm_surf_run_dp02scr
 hm_surf_run_dp02scr: @ 812497C
 	push {lr}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _08124994 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -12108,12 +12108,12 @@ sub_8124998: @ 8124998
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08124A00
-	bl sub_805C83C
+	bl PartyHasMonWithSurf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08124A00
-	bl sub_805C8B0
+	bl IsPlayerFacingSurfableFishableWater
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12246,10 +12246,10 @@ _08124AD4: .4byte sub_811FB28
 _08124AD8: .4byte sub_80568A8
 	thumb_func_end sub_8124AB0
 
-	thumb_func_start sub_8124ADC
-sub_8124ADC: @ 8124ADC
+	thumb_func_start hm2_waterfall
+hm2_waterfall: @ 8124ADC
 	push {lr}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _08124AF4 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -12260,10 +12260,10 @@ sub_8124ADC: @ 8124ADC
 	bx r0
 	.align 2, 0
 _08124AF4: .4byte gUnknown_20386E0
-	thumb_func_end sub_8124ADC
+	thumb_func_end hm2_waterfall
 
-	thumb_func_start sub_8124AF8
-sub_8124AF8: @ 8124AF8
+	thumb_func_start hm_prepare_waterfall
+hm_prepare_waterfall: @ 8124AF8
 	push {r4,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -12284,7 +12284,7 @@ sub_8124AF8: @ 8124AF8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08124B54
-	bl sub_805C88C
+	bl IsPlayerSurfingNorth
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12293,7 +12293,7 @@ sub_8124AF8: @ 8124AF8
 	ldr r0, _08124B48 @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _08124B4C @ =gUnknown_203B0C4
-	ldr r0, _08124B50 @ =sub_8124ADC
+	ldr r0, _08124B50 @ =hm2_waterfall
 	str r0, [r1]
 	movs r0, 0x1
 	b _08124B56
@@ -12301,7 +12301,7 @@ sub_8124AF8: @ 8124AF8
 _08124B44: .4byte gUnknown_3005024
 _08124B48: .4byte hm_add_c3_launch_phase_2
 _08124B4C: .4byte gUnknown_203B0C4
-_08124B50: .4byte sub_8124ADC
+_08124B50: .4byte hm2_waterfall
 _08124B54:
 	movs r0, 0
 _08124B56:
@@ -12309,7 +12309,7 @@ _08124B56:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8124AF8
+	thumb_func_end hm_prepare_waterfall
 
 	thumb_func_start sub_8124B60
 sub_8124B60: @ 8124B60
@@ -12433,7 +12433,7 @@ sub_8124C1C: @ 8124C1C
 	movs r0, 0x4
 	bl Alloc
 	adds r4, r0, 0
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -12497,7 +12497,7 @@ _08124CCC:
 _08124CD2:
 	ldr r4, _08124D30 @ =gUnknown_203AD30
 	ldrh r0, [r4]
-	bl sub_8126C68
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xA
@@ -12947,7 +12947,7 @@ GetMedicineItemEffectMessage: @ 8125058
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8126C68
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x3
@@ -13130,7 +13130,7 @@ UsingHPEVItemOnShedinja: @ 8125218
 	adds r4, r0, 0
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl sub_8126C68
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xD
@@ -13636,11 +13636,11 @@ _08125620:
 	lsrs r5, 16
 	mov r0, r8
 	movs r1, 0
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r4, r0, 0
 	mov r0, r8
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
@@ -13661,7 +13661,7 @@ _08125620:
 	mov r0, r9
 	mov r1, r8
 	adds r3, r4, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	cmp r5, 0
 	beq _08125680
 	mov r0, r10
@@ -13813,7 +13813,7 @@ sub_8125790: @ 8125790
 	ldr r0, [r0]
 	adds r0, 0xC
 	bl sub_8121CE4
-	bl sub_810F98C
+	bl GetMenuCursorPos
 	ldr r1, _081257C4 @ =gUnknown_203B0A0
 	lsls r0, 24
 	lsrs r0, 24
@@ -15500,7 +15500,7 @@ sub_8126570: @ 8126570
 	bl sub_811E7F0
 	ldrb r0, [r4, 0x18]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x8
@@ -15531,7 +15531,7 @@ sub_81265BC: @ 81265BC
 	bl sub_811E93C
 	ldrb r0, [r4, 0x18]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x4
@@ -15706,7 +15706,7 @@ sub_8126704: @ 8126704
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_80CDDA8
+	bl BeginEvolutionScene
 	adds r0, r5, 0
 	bl DestroyTask
 	b _08126762
@@ -16315,8 +16315,8 @@ _08126C62:
 	bx r1
 	thumb_func_end sub_8126C24
 
-	thumb_func_start sub_8126C68
-sub_8126C68: @ 8126C68
+	thumb_func_start GetItemEffectType
+GetItemEffectType: @ 8126C68
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -16519,7 +16519,7 @@ _08126DC2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8126C68
+	thumb_func_end GetItemEffectType
 
 	thumb_func_start sub_8126DC8
 sub_8126DC8: @ 8126DC8
@@ -16626,8 +16626,8 @@ _08126EA8: .4byte gUnknown_3005090
 _08126EAC: .4byte sub_8125D88
 	thumb_func_end sub_8126DC8
 
-	thumb_func_start sub_8126EB0
-sub_8126EB0: @ 8126EB0
+	thumb_func_start CB2_PartyMenuFromStartMenu
+CB2_PartyMenuFromStartMenu: @ 8126EB0
 	push {lr}
 	sub sp, 0xC
 	movs r0, 0
@@ -16647,7 +16647,7 @@ sub_8126EB0: @ 8126EB0
 	.align 2, 0
 _08126ED4: .4byte sub_811FB28
 _08126ED8: .4byte sub_80568A8
-	thumb_func_end sub_8126EB0
+	thumb_func_end CB2_PartyMenuFromStartMenu
 
 	thumb_func_start sub_8126EDC
 sub_8126EDC: @ 8126EDC
@@ -17345,7 +17345,7 @@ _0812746C:
 	adds r1, r4, 0
 	bl GiveMailToMon2
 	adds r0, r4, 0
-	bl sub_8097CB4
+	bl ClearMailStruct
 	ldr r0, _0812749C @ =gUnknown_8416D4F
 	movs r1, 0x1
 	bl sub_81202F8
@@ -18166,7 +18166,7 @@ sub_8127AC0: @ 8127AC0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl sub_811FA20

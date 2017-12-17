@@ -193,7 +193,7 @@ _0809FE7E:
 	adds r0, r6, 0
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -257,7 +257,7 @@ _0809FF14:
 	adds r0, r7, 0
 	movs r1, 0
 	mov r3, r8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -300,7 +300,7 @@ sub_809FF48: @ 809FF48
 	adds r0, r6, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r6, 0
 	mov r1, r8
 	movs r2, 0
@@ -354,7 +354,7 @@ sub_809FFB8: @ 809FFB8
 	add r0, sp, 0x10
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_810FE50
+	bl SetWindowTemplateFields
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]
@@ -396,9 +396,9 @@ sub_80A0034: @ 80A0034
 	bl sub_810F4D8
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0

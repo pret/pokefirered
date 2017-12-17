@@ -110,7 +110,7 @@ _081025A0:
 _081025AE:
 	ldr r0, _081026A8 @ =gUnknown_8451ECC
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	bl m4aSoundVSyncOn
 	ldr r0, _081026AC @ =sub_81024C0
 	bl SetVBlankCallback
@@ -380,7 +380,7 @@ _08102800:
 	beq _0810280A
 	bl Free
 _0810280A:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0
 	bl GetBgTilemapBuffer
 	cmp r0, 0
@@ -1126,12 +1126,12 @@ _08102E4A:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r4, _08102EBC @ =gUnknown_203ACF0
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x16]
@@ -1139,7 +1139,7 @@ _08102E4A:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x16]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x24
 	pop {r3,r4}
 	mov r8, r3
@@ -1211,7 +1211,7 @@ _08102F24:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x15]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1549,10 +1549,10 @@ sub_810317C: @ 810317C
 	bl sub_8104C2C
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x24
 	pop {r4,r5}
 	pop {r0}
@@ -1878,10 +1878,10 @@ sub_810345C: @ 810345C
 	bl sub_8104C2C
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x24
 	pop {r4,r5}
 	pop {r0}
@@ -4166,7 +4166,7 @@ sub_81047B0: @ 81047B0
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq _081047C2
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0xFF
 	strb r0, [r4]
 _081047C2:
@@ -4908,7 +4908,7 @@ sub_8104C64: @ 8104C64
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08104D72
 	.align 2, 0
 _08104D50: .4byte gUnknown_845228C
@@ -5031,7 +5031,7 @@ _08104E42:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08104E7E
 	.align 2, 0
 _08104E60: .4byte gUnknown_203ACF0
@@ -5210,7 +5210,7 @@ _08104F88:
 _08104FD0:
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
@@ -5221,7 +5221,7 @@ _08104FD0:
 _08104FEA:
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r5, _08105050 @ =gUnknown_203ACF0
 	ldr r1, [r5]
 	ldrh r0, [r1, 0x18]
@@ -6887,7 +6887,7 @@ _08105D4A:
 	strb r7, [r0, 0x9]
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 _08105D5C:
 	add sp, 0x10
 	pop {r4-r7}
@@ -7066,7 +7066,7 @@ sub_8105E1C: @ 8105E1C
 	adds r0, 0x4A
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	adds r0, 0x4B
 	ldrb r0, [r0]
@@ -7143,7 +7143,7 @@ sub_8105E1C: @ 8105E1C
 	adds r0, 0x4B
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	adds r0, 0x4C
 	ldrb r0, [r0]
@@ -7166,7 +7166,7 @@ sub_8105E1C: @ 8105E1C
 	adds r0, 0x4C
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
@@ -7200,7 +7200,7 @@ _08105FF2:
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	add sp, 0x8
 	pop {r3}
@@ -7519,7 +7519,7 @@ _08106246:
 	adds r0, r6
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 _081062B4:
 	adds r4, r6, 0
 	cmp r4, 0x6
@@ -7580,7 +7580,7 @@ _081062B4:
 	adds r0, 0x55
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r7]
 	adds r0, 0x53
 	ldrb r0, [r0]
@@ -7617,7 +7617,7 @@ _081062B4:
 	adds r0, 0x53
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r7]
 	adds r0, 0x54
 	ldrb r0, [r0]
@@ -7665,7 +7665,7 @@ _081062B4:
 	adds r0, 0x54
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r7]
 	adds r0, 0x52
 	ldrb r0, [r0]
@@ -7726,7 +7726,7 @@ _08106478:
 	adds r0, 0x52
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r7]
 	adds r0, 0x56
 	ldrb r0, [r0]
@@ -7776,7 +7776,7 @@ _08106504:
 	adds r0, 0x56
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	bl dp13_810BB8C
 	ldr r0, _081066BC @ =gUnknown_8452368
 	movs r1, 0x90
@@ -8052,7 +8052,7 @@ _0810675A:
 	adds r0, 0x4A
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
@@ -8071,7 +8071,7 @@ _0810675A:
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	add sp, 0x24
 	pop {r3-r5}

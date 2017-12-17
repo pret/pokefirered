@@ -545,13 +545,13 @@ _0809A132:
 	movs r1, 0x1
 	bl sub_8099DBC
 	ldr r0, _0809A1B4 @ =0x00000847
-	bl sub_806E680
+	bl FlagSet
 _0809A174:
 	ldr r0, _0809A1B0 @ =0x0000016d
 	cmp r6, r0
 	bne _0809A180
 	ldr r0, _0809A1B4 @ =0x00000847
-	bl sub_806E680
+	bl FlagSet
 _0809A180:
 	adds r0, r7, 0
 	bl sub_8099ECC

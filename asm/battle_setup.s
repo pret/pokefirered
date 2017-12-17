@@ -25,7 +25,7 @@ sub_807F620: @ 807F620
 	.align 2, 0
 _0807F640: .4byte gUnknown_3005098
 _0807F644:
-	bl sub_80A0E60
+	bl c3_80A0DD8_is_running
 	cmp r0, 0
 	bne _0807F686
 	bl sub_812B478
@@ -46,7 +46,7 @@ _0807F65E:
 	ldr r0, _0807F68C @ =sub_800FD9C
 	bl SetMainCallback2
 	bl sub_806D7E8
-	bl sub_806D788
+	bl overworld_poison_timer_set
 	adds r0, r5, 0
 	bl DestroyTask
 _0807F686:
@@ -628,13 +628,13 @@ sub_807FB40: @ 807FB40
 	bl sub_80800D0
 	cmp r0, 0x1
 	bne _0807FB80
-	ldr r0, _0807FB7C @ =sub_80566A4
+	ldr r0, _0807FB7C @ =c2_whiteout
 	bl SetMainCallback2
 	b _0807FB8C
 	.align 2, 0
 _0807FB74: .4byte 0x01000100
 _0807FB78: .4byte gUnknown_2023E8A
-_0807FB7C: .4byte sub_80566A4
+_0807FB7C: .4byte c2_whiteout
 _0807FB80:
 	ldr r0, _0807FB94 @ =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
@@ -671,13 +671,13 @@ sub_807FBA0: @ 807FBA0
 	bl sub_80800D0
 	cmp r0, 0x1
 	bne _0807FBE0
-	ldr r0, _0807FBDC @ =sub_80566A4
+	ldr r0, _0807FBDC @ =c2_whiteout
 	bl SetMainCallback2
 	b _0807FBE6
 	.align 2, 0
 _0807FBD4: .4byte 0x01000100
 _0807FBD8: .4byte gUnknown_2023E8A
-_0807FBDC: .4byte sub_80566A4
+_0807FBDC: .4byte c2_whiteout
 _0807FBE0:
 	ldr r0, _0807FBEC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl SetMainCallback2
@@ -710,13 +710,13 @@ sub_807FBF0: @ 807FBF0
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _0807FC30
-	ldr r0, _0807FC2C @ =sub_80566A4
+	ldr r0, _0807FC2C @ =c2_whiteout
 	bl SetMainCallback2
 	b _0807FC4C
 	.align 2, 0
 _0807FC24: .4byte 0x01000100
 _0807FC28: .4byte gUnknown_2023E8A
-_0807FC2C: .4byte sub_80566A4
+_0807FC2C: .4byte c2_whiteout
 _0807FC30:
 	ldrb r0, [r4]
 	cmp r0, 0x1
@@ -910,7 +910,7 @@ sub_807FD90: @ 807FD90
 	bl sub_8058F78
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_8055D30
+	bl sav1_get_flash_used_on_map
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FDC0
@@ -997,8 +997,8 @@ _0807FE48:
 _0807FE50: .4byte gUnknown_2024284
 	thumb_func_end sub_807FDF4
 
-	thumb_func_start sub_807FE54
-sub_807FE54: @ 807FE54
+	thumb_func_start reads_trainer_data_byte0
+reads_trainer_data_byte0: @ 807FE54
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1121,7 +1121,7 @@ _0807FF2C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807FE54
+	thumb_func_end reads_trainer_data_byte0
 
 	thumb_func_start sub_807FF34
 sub_807FF34: @ 807FF34
@@ -1251,7 +1251,7 @@ _0808001A:
 	lsrs r6, r0, 24
 	ldrh r0, [r4]
 	adds r1, r5, 0
-	bl sub_807FE54
+	bl reads_trainer_data_byte0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1683,7 +1683,7 @@ sub_8080378: @ 8080378
 	lsls r1, 19
 	adds r0, r1
 	lsrs r0, 16
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1741,7 +1741,7 @@ sub_80803E4: @ 80803E4
 	bl sub_80800B8
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1754,7 +1754,7 @@ sub_80803FC: @ 80803FC
 	bl sub_80800B8
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80803FC
@@ -1765,7 +1765,7 @@ sub_8080410: @ 8080410
 	bl sub_80800B8
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8080410
@@ -1778,7 +1778,7 @@ HasTrainerAlreadyBeenFought: @ 8080424
 	lsls r1, 19
 	adds r0, r1
 	lsrs r0, 16
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1793,7 +1793,7 @@ trainer_flag_set: @ 808043C
 	lsls r1, 19
 	adds r0, r1
 	lsrs r0, 16
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	thumb_func_end trainer_flag_set
@@ -1806,7 +1806,7 @@ trainer_flag_clear: @ 8080450
 	lsls r1, 19
 	adds r0, r1
 	lsrs r0, 16
-	bl sub_806E6A8
+	bl FlagClear
 	pop {r0}
 	bx r0
 	thumb_func_end trainer_flag_clear
@@ -1906,12 +1906,12 @@ _08080524:
 	cmp r0, 0x1
 	bne _08080540
 _08080530:
-	ldr r0, _0808053C @ =sub_80566A4
+	ldr r0, _0808053C @ =c2_whiteout
 	bl SetMainCallback2
 	b _0808054E
 	.align 2, 0
 _08080538: .4byte gUnknown_2023E8A
-_0808053C: .4byte sub_80566A4
+_0808053C: .4byte c2_whiteout
 _08080540:
 	ldr r0, _08080554 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl SetMainCallback2
@@ -1945,12 +1945,12 @@ _08080578:
 	bl sub_80800D0
 	cmp r0, 0x1
 	bne _08080594
-	ldr r0, _08080590 @ =sub_80566A4
+	ldr r0, _08080590 @ =c2_whiteout
 	bl SetMainCallback2
 	b _080805A6
 	.align 2, 0
 _0808058C: .4byte gUnknown_2023E8A
-_08080590: .4byte sub_80566A4
+_08080590: .4byte c2_whiteout
 _08080594:
 	ldr r0, _080805AC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl SetMainCallback2
@@ -1987,7 +1987,7 @@ _080805D4: .4byte sub_8080558
 sub_80805D8: @ 80805D8
 	push {lr}
 	bl sub_80806D8
-	bl sub_806943C
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80805D8
@@ -2028,7 +2028,7 @@ _08080614: .4byte gUnknown_81C555B
 sub_8080618: @ 8080618
 	push {lr}
 	bl sub_8080734
-	bl sub_806943C
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8080618

@@ -278,7 +278,7 @@ _080C0022:
 	cmp r3, 0x3
 	bls _080C0022
 	ldr r0, _080C00B4 @ =0x00000845
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -1224,7 +1224,7 @@ _080C0838:
 	bl sub_80C4D30
 	adds r0, r4, 0
 	bl DestroyTask
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _080C086C @ =gUnknown_20399D4
 	ldr r0, [r0]
 	ldr r1, _080C0870 @ =0x000047bc
@@ -1431,7 +1431,7 @@ _080C092A:
 	bl ChangeBgY
 	ldr r0, _080C0A24 @ =gUnknown_83F1A60
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	ldr r1, _080C0A28 @ =0x00006040
 	movs r0, 0
 	bl SetGpuReg
@@ -1605,7 +1605,7 @@ _080C0B44:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, _080C0B98 @ =gUnknown_83F1B0C
 	movs r0, 0
 	bl sub_80C4CF0
@@ -1723,7 +1723,7 @@ sub_80C0BB0: @ 80C0BB0
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _080C0C7A:
 	add sp, 0xC
 	pop {r4-r6}
@@ -1747,13 +1747,13 @@ sub_80C0CA0: @ 80C0CA0
 	bl FillWindowPixelBuffer
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	movs r1, 0
 	bl FillWindowPixelBuffer
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80C0CA0
@@ -1876,7 +1876,7 @@ _080C0DA6:
 	cmp r4, 0x2
 	bne _080C0DCC
 	ldr r0, _080C0DFC @ =0x000008b5
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C0DCC
@@ -1892,7 +1892,7 @@ _080C0DCC:
 	cmp r4, 0x3
 	bne _080C0DEC
 	ldr r0, _080C0E00 @ =0x000008c2
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C0DEC
@@ -1998,7 +1998,7 @@ sub_80C0E70: @ 80C0E70
 	bl AllocZeroed
 	str r0, [r4]
 	ldr r0, _080C0EA4 @ =0x00000846
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C0EAC
@@ -2013,7 +2013,7 @@ _080C0EA4: .4byte 0x00000846
 _080C0EA8: .4byte 0x00001ccc
 _080C0EAC:
 	ldr r0, _080C0EC4 @ =0x00000845
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -3704,7 +3704,7 @@ _080C1C80:
 	bl FillWindowPixelBuffer
 	movs r0, 0x2
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x2
 	bl PutWindowTilemap
 	ldr r0, _080C1CA0 @ =gUnknown_20399DC
@@ -3753,7 +3753,7 @@ _080C1CA8:
 	bl sub_812E51C
 	movs r0, 0x2
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, [r7]
 	ldr r3, _080C1D20 @ =0x00003d49
 	adds r1, r3
@@ -3840,7 +3840,7 @@ _080C1DB4:
 	bl FillWindowPixelBuffer
 	movs r0, 0x2
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r2, _080C1DE4 @ =gUnknown_20399DC
 	ldr r1, [r2]
 	ldr r0, _080C1DE8 @ =0x00003d48
@@ -5665,10 +5665,10 @@ _080C2CCC:
 	bl sub_80C4ED0
 	movs r0, 0x3
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x4
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _080C2CEC @ =gUnknown_20399E0
 	ldr r1, [r0]
 	ldr r0, _080C2CF0 @ =0x00000ccf
@@ -6768,7 +6768,7 @@ _080C3540:
 	bne _080C3572
 _080C3564:
 	ldr r0, _080C357C @ =0x000008b5
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C3572
@@ -6818,7 +6818,7 @@ _080C35A0:
 	cmp r4, 0x8D
 	bne _080C35CE
 	ldr r0, _080C35D8 @ =0x00000844
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C35CE
@@ -7067,7 +7067,7 @@ _080C3854: .4byte 0x000008a2
 _080C3858:
 	ldr r0, _080C386C @ =0x000008a3
 _080C385A:
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	movs r1, 0x3
 	cmp r0, 0
@@ -7330,7 +7330,7 @@ _080C3AA4: .4byte 0x000008c1
 _080C3AA8:
 	ldr r0, _080C3ABC @ =0x000008c2
 _080C3AAA:
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	movs r1, 0x3
 	cmp r0, 0
@@ -8988,7 +8988,7 @@ _080C4816:
 	cmp r0, 0x8D
 	bne _080C4840
 	ldr r0, _080C48B4 @ =0x00000844
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C4884
@@ -9818,7 +9818,7 @@ _080C4E48:
 	bl sub_812E51C
 	movs r0, 0x3
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -9863,7 +9863,7 @@ _080C4EA4:
 	bl sub_812E51C
 	movs r0, 0x4
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -10270,7 +10270,7 @@ _080C5220:
 	bl sub_80C0898
 	adds r0, r4, 0
 	bl DestroyTask
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _080C5250 @ =gUnknown_20399FC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x2]

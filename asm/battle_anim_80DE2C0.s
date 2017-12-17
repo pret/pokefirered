@@ -3294,8 +3294,8 @@ _080DFBDC: .4byte gUnknown_3005090
 _080DFBE0: .4byte gUnknown_2024018
 	thumb_func_end sub_80DF9BC
 
-	thumb_func_start sub_80DFBE4
-sub_80DFBE4: @ 80DFBE4
+	thumb_func_start c3_80DFBE4
+c3_80DFBE4: @ 80DFBE4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3324,7 +3324,7 @@ _080DFC14: .4byte gUnknown_2037F02
 _080DFC18: .4byte gUnknown_202063C
 _080DFC1C: .4byte gUnknown_2023D44
 _080DFC20: .4byte gUnknown_2037F1A
-	thumb_func_end sub_80DFBE4
+	thumb_func_end c3_80DFBE4
 
 	thumb_func_start sub_80DFC24
 sub_80DFC24: @ 80DFC24

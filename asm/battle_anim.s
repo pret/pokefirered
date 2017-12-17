@@ -2658,8 +2658,8 @@ sub_807396C: @ 807396C
 	bx r0
 	thumb_func_end sub_807396C
 
-	thumb_func_start sub_8073978
-sub_8073978: @ 8073978
+	thumb_func_start ScriptCmd_restorebg
+ScriptCmd_restorebg: @ 8073978
 	push {lr}
 	ldr r1, _080739A8 @ =gUnknown_2037ED4
 	ldr r0, [r1]
@@ -2688,10 +2688,10 @@ _080739AC: .4byte sub_8073850
 _080739B0: .4byte gUnknown_3005090
 _080739B4: .4byte 0x0000ffff
 _080739B8: .4byte gUnknown_2037F17
-	thumb_func_end sub_8073978
+	thumb_func_end ScriptCmd_restorebg
 
-	thumb_func_start sub_80739BC
-sub_80739BC: @ 80739BC
+	thumb_func_start ScriptCmd_waitbgfadeout
+ScriptCmd_waitbgfadeout: @ 80739BC
 	push {lr}
 	ldr r0, _080739D4 @ =gUnknown_2037F17
 	ldrb r0, [r0]
@@ -2717,7 +2717,7 @@ _080739E4:
 	bx r0
 	.align 2, 0
 _080739EC: .4byte gUnknown_2037EE0
-	thumb_func_end sub_80739BC
+	thumb_func_end ScriptCmd_waitbgfadeout
 
 	thumb_func_start sub_80739F0
 sub_80739F0: @ 80739F0
@@ -2748,8 +2748,8 @@ _08073A1A:
 _08073A20: .4byte gUnknown_2037EE0
 	thumb_func_end sub_80739F0
 
-	thumb_func_start sub_8073A24
-sub_8073A24: @ 8073A24
+	thumb_func_start ScriptCmd_changebg
+ScriptCmd_changebg: @ 8073A24
 	push {r4,lr}
 	ldr r4, _08073A40 @ =gUnknown_2037ED4
 	ldr r1, [r4]
@@ -2765,7 +2765,7 @@ sub_8073A24: @ 8073A24
 	bx r0
 	.align 2, 0
 _08073A40: .4byte gUnknown_2037ED4
-	thumb_func_end sub_8073A24
+	thumb_func_end ScriptCmd_changebg
 
 	thumb_func_start sub_8073A44
 sub_8073A44: @ 8073A44

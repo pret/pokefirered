@@ -163,7 +163,7 @@ _0803EE10:
 	bne _0803EEE8
 	movs r0, 0x82
 	lsls r0, 4
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803EE44
@@ -186,7 +186,7 @@ _0803EE44:
 	cmp r0, 0
 	bne _0803EEE8
 	ldr r0, _0803EF30 @ =0x00000824
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803EE7A
@@ -211,7 +211,7 @@ _0803EE7A:
 	cmp r0, 0
 	bne _0803EEE8
 	ldr r0, _0803EF34 @ =0x00000826
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803EEB2
@@ -237,7 +237,7 @@ _0803EEB2:
 	cmp r0, 0
 	bne _0803EEE8
 	ldr r0, _0803EF34 @ =0x00000826
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803EEE8

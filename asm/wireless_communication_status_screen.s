@@ -88,7 +88,7 @@ sub_814F1E4: @ 814F1E4
 	bl CopyToBgTilemapBuffer
 	ldr r0, _0814F318 @ =gUnknown_846FA7C
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
@@ -131,7 +131,7 @@ sub_814F1E4: @ 814F1E4
 	bl LoadPalette
 	movs r0, 0xF0
 	bl sub_80F77CC
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	movs r0, 0x20
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -170,7 +170,7 @@ _0814F328: .4byte sub_814F19C
 	thumb_func_start sub_814F32C
 sub_814F32C: @ 814F32C
 	push {r4,lr}
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r4, 0
 _0814F334:
 	lsls r0, r4, 24
@@ -309,12 +309,12 @@ _0814F3F0:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -470,7 +470,7 @@ _0814F58A:
 	bl PutWindowTilemap
 	movs r0, 0x2
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0814F5A4:
 	ldr r0, _0814F5F8 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]

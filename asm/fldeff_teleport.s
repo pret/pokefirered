@@ -24,7 +24,7 @@ _080F670C:
 	ldr r0, _080F6724 @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _080F6728 @ =gUnknown_203B0C4
-	ldr r0, _080F672C @ =sub_80F6730
+	ldr r0, _080F672C @ =hm_teleport_run_dp02scr
 	str r0, [r1]
 	movs r0, 0x1
 _080F671A:
@@ -34,16 +34,16 @@ _080F671A:
 _080F6720: .4byte gUnknown_3005024
 _080F6724: .4byte hm_add_c3_launch_phase_2
 _080F6728: .4byte gUnknown_203B0C4
-_080F672C: .4byte sub_80F6730
+_080F672C: .4byte hm_teleport_run_dp02scr
 	thumb_func_end sub_80F66F0
 
-	thumb_func_start sub_80F6730
-sub_80F6730: @ 80F6730
+	thumb_func_start hm_teleport_run_dp02scr
+hm_teleport_run_dp02scr: @ 80F6730
 	push {lr}
 	bl sub_8054D08
 	movs r0, 0x3F
 	bl FieldEffectStart
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _080F674C @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -52,10 +52,10 @@ sub_80F6730: @ 80F6730
 	bx r0
 	.align 2, 0
 _080F674C: .4byte gUnknown_20386E0
-	thumb_func_end sub_80F6730
+	thumb_func_end hm_teleport_run_dp02scr
 
-	thumb_func_start sub_80F6750
-sub_80F6750: @ 80F6750
+	thumb_func_start FldEff_UseTeleport
+FldEff_UseTeleport: @ 80F6750
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -77,7 +77,7 @@ sub_80F6750: @ 80F6750
 	.align 2, 0
 _080F6778: .4byte gUnknown_3005090
 _080F677C: .4byte sub_80F6780
-	thumb_func_end sub_80F6750
+	thumb_func_end FldEff_UseTeleport
 
 	thumb_func_start sub_80F6780
 sub_80F6780: @ 80F6780

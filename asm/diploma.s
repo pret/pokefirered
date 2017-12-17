@@ -255,7 +255,7 @@ sub_80F4DE0: @ 80F4DE0
 	bne _080F4E10
 	adds r0, r2, 0
 	bl DestroyTask
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r4, _080F4E1C @ =gUnknown_203AB48
 	ldr r0, [r4]
 	bl Free
@@ -396,7 +396,7 @@ _080F4E66:
 	bl ChangeBgY
 	ldr r0, _080F4F94 @ =gUnknown_8415A10
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
@@ -513,18 +513,18 @@ _080F5014: .4byte gUnknown_203AB48
 sub_80F5018: @ 80F5018
 	push {r4-r6,lr}
 	sub sp, 0xAC
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r0, _080F5040 @ =gUnknown_300500C
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	bl sub_8088F84
 	lsls r0, 16
 	cmp r0, 0
 	beq _080F5048
 	ldr r1, _080F5044 @ =gUnknown_841B68F
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	b _080F5050
 	.align 2, 0
 _080F5040: .4byte gUnknown_300500C
@@ -532,14 +532,14 @@ _080F5044: .4byte gUnknown_841B68F
 _080F5048:
 	ldr r1, _080F50E0 @ =gUnknown_841B698
 	movs r0, 0x1
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 _080F5050:
 	movs r0, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
 	ldr r1, _080F50E4 @ =gUnknown_841B60E
 	add r0, sp, 0xC
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r5, 0x1
 	negs r5, r5
 	movs r0, 0x2
@@ -562,7 +562,7 @@ _080F5050:
 	bl sub_812E51C
 	ldr r1, _080F50EC @ =gUnknown_841B619
 	add r0, sp, 0xC
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x2
 	add r1, sp, 0xC
 	adds r2, r5, 0

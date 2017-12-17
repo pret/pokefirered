@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_814F884
-sub_814F884: @ 814F884
+	thumb_func_start Font6Func
+Font6Func: @ 814F884
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r6, 0
@@ -382,7 +382,7 @@ _0814FB58:
 	b _0814FC96
 _0814FB62:
 	adds r0, r3, 0
-	bl sub_814FC9C
+	bl DecompressGlyphFont6
 	adds r0, r6, 0
 	bl sub_8003014
 	ldr r0, _0814FB84 @ =gUnknown_3003DA0
@@ -399,7 +399,7 @@ _0814FB62:
 _0814FB84: .4byte gUnknown_3003DA0
 _0814FB88:
 	adds r0, r6, 0
-	bl sub_8005680
+	bl TextPrinterWait
 	lsls r0, 16
 	cmp r0, 0
 	beq _0814FB42
@@ -408,7 +408,7 @@ _0814FB88:
 	b _0814FB42
 _0814FB9A:
 	adds r0, r6, 0
-	bl sub_8005634
+	bl TextPrinterWaitWithDownArrow
 	lsls r0, 16
 	cmp r0, 0
 	beq _0814FB42
@@ -428,7 +428,7 @@ _0814FB9A:
 	b _0814FB42
 _0814FBC4:
 	adds r0, r6, 0
-	bl sub_8005634
+	bl TextPrinterWaitWithDownArrow
 	lsls r0, 16
 	cmp r0, 0
 	beq _0814FB42
@@ -504,7 +504,7 @@ _0814FC38:
 _0814FC62:
 	ldrb r0, [r6, 0x4]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0814FB42
 _0814FC6C:
 	strb r2, [r6, 0x1C]
@@ -536,10 +536,10 @@ _0814FC96:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_814F884
+	thumb_func_end Font6Func
 
-	thumb_func_start sub_814FC9C
-sub_814FC9C: @ 814FC9C
+	thumb_func_start DecompressGlyphFont6
+DecompressGlyphFont6: @ 814FC9C
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r2, r0, 19
@@ -584,12 +584,12 @@ sub_814FC9C: @ 814FC9C
 	.align 2, 0
 _0814FCF8: .4byte gUnknown_846FB0C
 _0814FCFC: .4byte gUnknown_3003DA0
-	thumb_func_end sub_814FC9C
+	thumb_func_end DecompressGlyphFont6
 
-	thumb_func_start sub_814FD00
-sub_814FD00: @ 814FD00
+	thumb_func_start GetGlyphWidthFont6
+GetGlyphWidthFont6: @ 814FD00
 	movs r0, 0x10
 	bx lr
-	thumb_func_end sub_814FD00
+	thumb_func_end GetGlyphWidthFont6
 
 	.align 2, 0 @ Don't pad with nop.

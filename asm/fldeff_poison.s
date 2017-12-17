@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80A0DD8
-sub_80A0DD8: @ 80A0DD8
+	thumb_func_start task50_overworld_poison_effect
+task50_overworld_poison_effect: @ 80A0DD8
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -66,33 +66,33 @@ _080A0E32:
 _080A0E42:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A0DD8
+	thumb_func_end task50_overworld_poison_effect
 
-	thumb_func_start sub_80A0E48
-sub_80A0E48: @ 80A0E48
+	thumb_func_start overworld_poison_effect
+overworld_poison_effect: @ 80A0E48
 	push {lr}
 	movs r0, 0x48
 	bl sub_80722CC
-	ldr r0, _080A0E5C @ =sub_80A0DD8
+	ldr r0, _080A0E5C @ =task50_overworld_poison_effect
 	movs r1, 0x50
 	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A0E5C: .4byte sub_80A0DD8
-	thumb_func_end sub_80A0E48
+_080A0E5C: .4byte task50_overworld_poison_effect
+	thumb_func_end overworld_poison_effect
 
-	thumb_func_start sub_80A0E60
-sub_80A0E60: @ 80A0E60
+	thumb_func_start c3_80A0DD8_is_running
+c3_80A0DD8_is_running: @ 80A0E60
 	push {lr}
-	ldr r0, _080A0E70 @ =sub_80A0DD8
+	ldr r0, _080A0E70 @ =task50_overworld_poison_effect
 	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A0E70: .4byte sub_80A0DD8
-	thumb_func_end sub_80A0E60
+_080A0E70: .4byte task50_overworld_poison_effect
+	thumb_func_end c3_80A0DD8_is_running
 
 	.align 2, 0 @ Don't pad with nop.

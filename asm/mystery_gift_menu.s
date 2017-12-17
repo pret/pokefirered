@@ -142,7 +142,7 @@ _081420D6:
 	bl sub_80F696C
 	ldr r0, _081421E8 @ =gUnknown_8466D70
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r1, 0xC0
 	lsls r1, 7
 	movs r0, 0
@@ -292,7 +292,7 @@ sub_81422FC: @ 81422FC
 	ldr r1, _0814233C @ =gUnknown_203F3B8
 	movs r0, 0
 	strb r0, [r1]
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0
 	bl GetBgTilemapBuffer
 	bl Free
@@ -394,7 +394,7 @@ _081423B4:
 _081423E8:
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl PutWindowTilemap
 	add sp, 0x14

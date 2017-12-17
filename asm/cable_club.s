@@ -69,10 +69,10 @@ sub_808078C: @ 808078C
 	movs r1, 0x2
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -94,7 +94,7 @@ sub_80807E8: @ 80807E8
 	bl sub_80F6F9C
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1047,7 +1047,7 @@ sub_8080F78: @ 8080F78
 	bl sub_80807E8
 	bl EnableBothScriptContexts
 	ldrb r0, [r4, 0x12]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r5, 0
 	bl DestroyTask
 _08080FA6:
@@ -1986,7 +1986,7 @@ _080816EC:
 	movs r0, 0x1
 	bl sub_8144714
 _0808170A:
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _08081724
 	ldr r1, _0808171C @ =gUnknown_30030F0
@@ -2073,7 +2073,7 @@ _080817A4:
 	b _08081820
 _080817AE:
 	ldr r0, _080817BC @ =gUnknown_81BC4AC
-	bl sub_806943C
+	bl ShowFieldMessage
 	movs r0, 0x1
 	strh r0, [r5, 0x8]
 	b _08081820
@@ -2382,8 +2382,8 @@ sub_8081A04: @ 8081A04
 _08081A18: .4byte sub_808177C
 	thumb_func_end sub_8081A04
 
-	thumb_func_start sub_8081A1C
-sub_8081A1C: @ 8081A1C
+	thumb_func_start sp02A_crash_sound
+sp02A_crash_sound: @ 8081A1C
 	push {lr}
 	ldr r0, _08081A2C @ =gUnknown_20370C4
 	ldrb r0, [r0]
@@ -2394,7 +2394,7 @@ sub_8081A1C: @ 8081A1C
 	.align 2, 0
 _08081A2C: .4byte gUnknown_20370C4
 _08081A30: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
-	thumb_func_end sub_8081A1C
+	thumb_func_end sp02A_crash_sound
 
 	thumb_func_start sub_8081A34
 sub_8081A34: @ 8081A34

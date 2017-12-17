@@ -188,7 +188,7 @@ sub_80F8234: @ 80F8234
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r0, _080F8254 @ =gUnknown_203ABED
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -426,7 +426,7 @@ _080F8422:
 _080F842E:
 	ldrb r0, [r4, 0x16]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _080F84EA
 _080F8438:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -601,7 +601,7 @@ _080F8582:
 	cmp r0, 0
 	bne _080F85A4
 	adds r0, r2, 0
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F85B4
@@ -631,7 +631,7 @@ sub_80F85BC: @ 80F85BC
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _080F85D8
@@ -646,7 +646,7 @@ _080F85D8:
 _080F85DC:
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_806E680
+	bl FlagSet
 	pop {r4}
 	pop {r0}
 	bx r0

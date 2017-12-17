@@ -169,8 +169,8 @@ sub_8141D9C: @ 8141D9C
 	bx r0
 	thumb_func_end sub_8141D9C
 
-	thumb_func_start sub_8141DAC
-sub_8141DAC: @ 8141DAC
+	thumb_func_start UpdateLocationHistoryForRoamer
+UpdateLocationHistoryForRoamer: @ 8141DAC
 	ldr r0, _08141DCC @ =gUnknown_203F3A8
 	ldrb r1, [r0, 0x2]
 	strb r1, [r0, 0x4]
@@ -190,10 +190,10 @@ sub_8141DAC: @ 8141DAC
 	.align 2, 0
 _08141DCC: .4byte gUnknown_203F3A8
 _08141DD0: .4byte gUnknown_3005008
-	thumb_func_end sub_8141DAC
+	thumb_func_end UpdateLocationHistoryForRoamer
 
-	thumb_func_start sub_8141DD4
-sub_8141DD4: @ 8141DD4
+	thumb_func_start RoamerMoveToOtherLocationSet
+RoamerMoveToOtherLocationSet: @ 8141DD4
 	push {r4,r5,lr}
 	ldr r0, _08141E18 @ =gUnknown_3005008
 	ldr r0, [r0]
@@ -232,10 +232,10 @@ _08141E18: .4byte gUnknown_3005008
 _08141E1C: .4byte 0x000030d0
 _08141E20: .4byte gUnknown_203F3AE
 _08141E24: .4byte gUnknown_8466C58
-	thumb_func_end sub_8141DD4
+	thumb_func_end RoamerMoveToOtherLocationSet
 
-	thumb_func_start sub_8141E28
-sub_8141E28: @ 8141E28
+	thumb_func_start RoamerMove
+RoamerMove: @ 8141E28
 	push {r4-r7,lr}
 	movs r4, 0
 	bl Random
@@ -245,7 +245,7 @@ sub_8141E28: @ 8141E28
 	ands r1, r0
 	cmp r1, 0
 	bne _08141E42
-	bl sub_8141DD4
+	bl RoamerMoveToOtherLocationSet
 	b _08141EB2
 _08141E42:
 	ldr r0, _08141E94 @ =gUnknown_3005008
@@ -306,7 +306,7 @@ _08141EB2:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8141E28
+	thumb_func_end RoamerMove
 
 	thumb_func_start IsRoamerAt
 IsRoamerAt: @ 8141EB8
@@ -466,7 +466,7 @@ UpdateRoamerHPStatus: @ 8141FE8
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1, 0xD]
-	bl sub_8141DD4
+	bl RoamerMoveToOtherLocationSet
 	pop {r4-r6}
 	pop {r0}
 	bx r0

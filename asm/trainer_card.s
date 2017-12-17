@@ -92,7 +92,7 @@ sub_8089088: @ 8089088
 	adds r0, r1
 	ldr r0, [r0]
 	bl SetMainCallback2
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, [r5]
 	bl Free
 	movs r0, 0
@@ -321,7 +321,7 @@ _0808928A:
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0
 	beq _080892A4
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	beq _08089364
 _080892A4:
@@ -369,7 +369,7 @@ _080892E4:
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0
 	beq _08089308
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	beq _08089364
 _08089308:
@@ -411,7 +411,7 @@ _08089344:
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0
 	beq _08089370
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _08089370
 _08089364:
@@ -441,10 +441,10 @@ _0808937A:
 	str r0, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _080893B4 @ =gUnknown_20397A4
 	ldr r1, [r0]
 	movs r0, 0x10
@@ -971,7 +971,7 @@ _080897D0:
 	strh r0, [r5, 0xA]
 _080897EE:
 	ldr r0, _08089890 @ =0x00000829
-	bl sub_806E6D0
+	bl FlagGet
 	strb r0, [r5, 0x2]
 	bl sub_8088F24
 	strb r0, [r5, 0x3]
@@ -1192,27 +1192,27 @@ _080899AE:
 	adds r1, 0x4F
 	strb r0, [r1]
 	ldr r0, _08089A6C @ =0x00004049
-	bl sub_806E568
+	bl VarGet
 	adds r1, r5, 0
 	adds r1, 0x50
 	strb r0, [r1]
 	ldr r0, _08089A70 @ =0x0000404a
-	bl sub_806E568
+	bl VarGet
 	adds r1, r5, 0
 	adds r1, 0x51
 	strb r0, [r1]
 	ldr r0, _08089A74 @ =0x0000404b
-	bl sub_806E568
+	bl VarGet
 	adds r1, r5, 0
 	adds r1, 0x52
 	strb r0, [r1]
 	ldr r0, _08089A78 @ =0x00004042
-	bl sub_806E568
+	bl VarGet
 	adds r1, r5, 0
 	adds r1, 0x4E
 	strb r0, [r1]
 	ldr r0, _08089A7C @ =0x00004043
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8096FD4
@@ -1220,7 +1220,7 @@ _080899AE:
 	adds r1, 0x54
 	strh r0, [r1]
 	ldr r0, _08089A80 @ =0x00004044
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8096FD4
@@ -1228,7 +1228,7 @@ _080899AE:
 	adds r1, 0x56
 	strh r0, [r1]
 	ldr r0, _08089A84 @ =0x00004045
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8096FD4
@@ -1236,7 +1236,7 @@ _080899AE:
 	adds r1, 0x58
 	strh r0, [r1]
 	ldr r0, _08089A88 @ =0x00004046
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8096FD4
@@ -1244,7 +1244,7 @@ _080899AE:
 	adds r1, 0x5A
 	strh r0, [r1]
 	ldr r0, _08089A8C @ =0x00004047
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8096FD4
@@ -1252,7 +1252,7 @@ _080899AE:
 	adds r1, 0x5C
 	strh r0, [r1]
 	ldr r0, _08089A90 @ =0x00004048
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8096FD4
@@ -1354,7 +1354,7 @@ _08089B16:
 _08089B1C:
 	lsls r0, r4, 16
 	lsrs r0, 16
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _08089B38
@@ -1633,7 +1633,7 @@ sub_8089D0C: @ 8089D0C
 	bl ChangeBgY
 	ldr r0, _08089D88 @ =gUnknown_83CD898
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2060,7 +2060,7 @@ sub_808A100: @ 808A100
 	push {r4-r7,lr}
 	sub sp, 0x18
 	ldr r0, _0808A198 @ =0x00000829
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808A112
@@ -2568,7 +2568,7 @@ _0808A550:
 	adds r4, 0x4D
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -3467,7 +3467,7 @@ sub_808ACC8: @ 808ACC8
 	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4735,7 +4735,7 @@ sub_808B698: @ 808B698
 	lsls r1, 3
 	adds r0, r1
 	str r4, [r0]
-	bl sub_811B0D0
+	bl InUnionRoom
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _0808B6C8
@@ -4878,7 +4878,7 @@ _0808B7CC:
 	adds r1, r3
 	adds r1, r2
 	ldrh r1, [r1]
-	bl sub_80BD850
+	bl CopyEasyChatWord
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4943,7 +4943,7 @@ sub_808B838: @ 808B838
 	adds r0, r1
 	adds r0, r2
 	ldrb r4, [r0]
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _0808B8A4
 	ldr r0, _0808B898 @ =gUnknown_3003F64

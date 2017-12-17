@@ -8,7 +8,7 @@
 	thumb_func_start hm_prepare_dive_probably
 hm_prepare_dive_probably: @ 80E5684
 	push {r4-r6,lr}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0x64
@@ -20,7 +20,7 @@ hm_prepare_dive_probably: @ 80E5684
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r6
@@ -60,7 +60,7 @@ sub_80E56DC: @ 80E56DC
 	strb r1, [r0, 0xB]
 	ldrb r1, [r0, 0x9]
 	strb r1, [r0, 0xA]
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1

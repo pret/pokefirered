@@ -376,7 +376,7 @@ _08147150:
 	ldr r0, _081471C0 @ =gUnknown_203F3D0
 	ldr r0, [r0]
 	bl Free
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	add sp, 0x4
 	pop {r4}
 	pop {r0}

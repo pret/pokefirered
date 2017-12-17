@@ -201,7 +201,7 @@ _0806E966:
 	cmp r0, r1
 	bne _0806E98C
 	adds r0, r3, 0x1
-	bl sub_806E680
+	bl FlagSet
 	b _0806E996
 	.align 2, 0
 _0806E988: .4byte gUnknown_83A7330
@@ -226,7 +226,7 @@ sub_806E99C: @ 806E99C
 _0806E9A4:
 	adds r5, r4, 0x1
 	adds r0, r5, 0
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -326,7 +326,7 @@ _0806EA52:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
-	bl sub_8059FF4
+	bl MetatileBehavior_IsThinIce
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -343,7 +343,7 @@ _0806EA52:
 	b _0806EAA2
 _0806EA8E:
 	adds r0, r6, 0
-	bl sub_805A008
+	bl MetatileBehavior_IsCrackedIce
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -425,7 +425,7 @@ _0806EB04:
 	bl CurrentMapDrawMetatileAt
 	ldr r0, _0806EB50 @ =0x00004001
 	movs r1, 0x1
-	bl sub_806E584
+	bl VarSet
 _0806EB3E:
 	movs r0, 0x1
 	strh r0, [r5, 0x2]
@@ -644,7 +644,7 @@ _0806ECCE:
 	beq _0806ECF8
 	ldr r0, _0806ED14 @ =0x00004030
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 _0806ECF8:
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
@@ -684,9 +684,9 @@ _0806ED2E:
 sub_806ED38: @ 806ED38
 	push {lr}
 	ldr r0, _0806ED4C @ =0x00000829
-	bl sub_806E680
+	bl FlagSet
 	ldr r0, _0806ED50 @ =0x00000828
-	bl sub_806E680
+	bl FlagSet
 	pop {r0}
 	bx r0
 	.align 2, 0

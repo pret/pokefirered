@@ -306,7 +306,7 @@ sub_807F028: @ 807F028
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl sub_8055D30
+	bl sav1_get_flash_used_on_map
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -877,9 +877,9 @@ _0807F4A8:
 	bl PutWindowTilemap
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
-	bl sub_80BFCB0
+	bl GetHealLocationPointer
 	adds r3, r0, 0
 	ldr r0, _0807F520 @ =gUnknown_3005008
 	ldr r2, [r0]
@@ -970,10 +970,10 @@ _0807F588:
 	bl ClearWindowTilemap
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r5, 0
-	bl sub_8003E3C
-	bl sub_807DB38
+	bl RemoveWindow
+	bl palette_bg_faded_fill_black
 	bl sub_807DC00
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -1010,7 +1010,7 @@ _0807F5EC: .4byte gUnknown_81A8DD8
 sub_807F5F0: @ 807F5F0
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	ldr r0, _0807F618 @ =sub_807F45C
 	movs r1, 0xA
 	bl CreateTask

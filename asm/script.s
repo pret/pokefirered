@@ -705,10 +705,10 @@ _08069BF8:
 	orrs r5, r0
 	adds r6, 0x2
 	adds r0, r1, 0
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r4, 16
 	lsls r0, 16
 	cmp r4, r0

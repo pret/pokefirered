@@ -1105,7 +1105,7 @@ _08079248:
 	cmp r0, 0
 	bne _080792A6
 	bl SeedRngAndSetTrainerId
-	bl sub_804C058
+	bl SetSaveBlocksPointers
 	bl sub_8054A28
 	bl ResetSaveCounters
 	movs r0, 0

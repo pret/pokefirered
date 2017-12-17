@@ -68,8 +68,8 @@ _0804C050: .4byte gUnknown_202552C
 _0804C054: .4byte 0x01001ef4
 	thumb_func_end ClearSav1
 
-	thumb_func_start sub_804C058
-sub_804C058: @ 804C058
+	thumb_func_start SetSaveBlocksPointers
+SetSaveBlocksPointers: @ 804C058
 	push {r4,r5,lr}
 	ldr r4, _0804C08C @ =gUnknown_3005008
 	ldr r5, [r4]
@@ -100,7 +100,7 @@ _0804C094: .4byte gUnknown_2024588
 _0804C098: .4byte gUnknown_202552C
 _0804C09C: .4byte gUnknown_3005010
 _0804C0A0: .4byte gUnknown_2029314
-	thumb_func_end sub_804C058
+	thumb_func_end SetSaveBlocksPointers
 
 	thumb_func_start sub_804C0A4
 sub_804C0A4: @ 804C0A4
@@ -141,7 +141,7 @@ sub_804C0A4: @ 804C0A4
 	ldr r0, _0804C184 @ =gHeap + 0x4c8c
 	mov r2, r8
 	bl memcpy
-	bl sub_804C058
+	bl SetSaveBlocksPointers
 	ldr r1, _0804C168 @ =gUnknown_300500C
 	ldr r0, [r1]
 	adds r1, r5, 0
@@ -335,8 +335,8 @@ _0804C268: .4byte gUnknown_3005008
 _0804C26C: .4byte gUnknown_2024284
 	thumb_func_end sub_804C230
 
-	thumb_func_start sub_804C270
-sub_804C270: @ 804C270
+	thumb_func_start save_serialize_npcs
+save_serialize_npcs: @ 804C270
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -373,7 +373,7 @@ _0804C286:
 	.align 2, 0
 _0804C2B0: .4byte gUnknown_3005008
 _0804C2B4: .4byte gUnknown_2036E38
-	thumb_func_end sub_804C270
+	thumb_func_end save_serialize_npcs
 
 	thumb_func_start sub_804C2B8
 sub_804C2B8: @ 804C2B8
@@ -415,14 +415,14 @@ _0804C2F8: .4byte gUnknown_3005008
 _0804C2FC: .4byte gUnknown_2036E38
 	thumb_func_end sub_804C2B8
 
-	thumb_func_start sub_804C300
-sub_804C300: @ 804C300
+	thumb_func_start SaveSerializedGame
+SaveSerializedGame: @ 804C300
 	push {lr}
 	bl copy_player_party_to_sav1
-	bl sub_804C270
+	bl save_serialize_npcs
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804C300
+	thumb_func_end SaveSerializedGame
 
 	thumb_func_start sub_804C310
 sub_804C310: @ 804C310
@@ -433,8 +433,8 @@ sub_804C310: @ 804C310
 	bx r0
 	thumb_func_end sub_804C310
 
-	thumb_func_start sub_804C320
-sub_804C320: @ 804C320
+	thumb_func_start copy_bags_and_unk_data_from_save_blocks
+copy_bags_and_unk_data_from_save_blocks: @ 804C320
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -578,7 +578,7 @@ _0804C430: .4byte gUnknown_2031764
 _0804C434: .4byte 0x00000464
 _0804C438: .4byte 0x0000054c
 _0804C43C: .4byte 0x00002cd0
-	thumb_func_end sub_804C320
+	thumb_func_end copy_bags_and_unk_data_from_save_blocks
 
 	thumb_func_start sub_804C440
 sub_804C440: @ 804C440

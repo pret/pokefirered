@@ -12,7 +12,7 @@ sub_80CA2E4: @ 80CA2E4
 	bl sub_80A0058
 	ldr r4, _080CA304 @ =0x0000082c
 	adds r0, r4, 0
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -28,7 +28,7 @@ _080CA30C:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_806E680
+	bl FlagSet
 _080CA318:
 	movs r0, 0x1
 	bl sub_8054EC4
@@ -89,7 +89,7 @@ _080CA388:
 	movs r0, 0x2A
 	bl sub_8054E90
 	ldr r0, _080CA3BC @ =0x0000083b
-	bl sub_806E680
+	bl FlagSet
 _080CA39E:
 	ldr r0, _080CA3C0 @ =sub_80F1EFC
 	bl SetMainCallback2
@@ -109,13 +109,13 @@ _080CA3C0: .4byte sub_80F1EFC
 	thumb_func_start sub_80CA3C4
 sub_80CA3C4: @ 80CA3C4
 	push {lr}
-	ldr r0, _080CA3D4 @ =sub_80566A4
+	ldr r0, _080CA3D4 @ =c2_whiteout
 	bl SetMainCallback2
 	movs r0, 0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CA3D4: .4byte sub_80566A4
+_080CA3D4: .4byte c2_whiteout
 	thumb_func_end sub_80CA3C4
 
 	.align 2, 0 @ Don't pad with nop.

@@ -194,7 +194,7 @@ sub_80CA524: @ 80CA524
 	ldr r0, _080CA538 @ =gUnknown_20370C0
 	ldrh r0, [r0]
 	bl sub_80CA424
-	bl sub_806943C
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.align 2, 0

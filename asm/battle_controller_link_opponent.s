@@ -1356,7 +1356,7 @@ RecordedOpponentBufferExecCompleted: @ 803B124
 	movs r0, 0x2
 	movs r1, 0x4
 	mov r2, sp
-	bl sub_800D9EC
+	bl PrepareBufferDataTransferLink
 	ldr r1, _0803B174 @ =gUnknown_2022BC4
 	ldrb r0, [r4]
 	lsls r0, 9

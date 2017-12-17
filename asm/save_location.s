@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_810B6F4
-sub_810B6F4: @ 810B6F4
+	thumb_func_start IsCurMapInLocationList
+IsCurMapInLocationList: @ 810B6F4
 	push {r4,lr}
 	adds r2, r0, 0
 	ldr r0, _0810B724 @ =gUnknown_3005008
@@ -46,13 +46,13 @@ _0810B736:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810B6F4
+	thumb_func_end IsCurMapInLocationList
 
 	thumb_func_start IsCurMapPokeCenter
 IsCurMapPokeCenter: @ 810B73C
 	push {lr}
 	ldr r0, _0810B748 @ =gUnknown_845303C
-	bl sub_810B6F4
+	bl IsCurMapInLocationList
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -63,7 +63,7 @@ _0810B748: .4byte gUnknown_845303C
 IsCurMapReloadLocation: @ 810B74C
 	push {lr}
 	ldr r0, _0810B758 @ =gUnknown_8453092
-	bl sub_810B6F4
+	bl IsCurMapInLocationList
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -74,7 +74,7 @@ _0810B758: .4byte gUnknown_8453092
 sub_810B75C: @ 810B75C
 	push {lr}
 	ldr r0, _0810B768 @ =gUnknown_8453094
-	bl sub_810B6F4
+	bl IsCurMapInLocationList
 	pop {r1}
 	bx r1
 	.align 2, 0

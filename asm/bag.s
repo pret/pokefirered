@@ -22,7 +22,7 @@ _0810B874:
 	ldr r0, _0810B8E4 @ =gUnknown_84530E4
 	bl sub_8003B24
 _0810B87A:
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r0, 0
 	movs r1, 0x64
 	movs r2, 0xE0
@@ -188,7 +188,7 @@ sub_810B994: @ 810B994
 	movs r0, 0x2
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -260,7 +260,7 @@ sub_810BA3C: @ 810BA3C
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0xFF
@@ -312,7 +312,7 @@ sub_810BA9C: @ 810BA9C
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0

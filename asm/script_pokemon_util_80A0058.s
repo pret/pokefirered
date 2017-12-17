@@ -284,11 +284,11 @@ sub_80A026C: @ 80A026C
 	cmp r4, 0x1
 	bne _080A028E
 	movs r0, 0xAF
-	bl sub_809C8E4
+	bl ItemIdToBerryType
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _080A0298 @ =gUnknown_2021CD0
-	bl sub_809C934
+	bl GetBerryNameByBerryType
 _080A028E:
 	adds r0, r4, 0
 	pop {r4}

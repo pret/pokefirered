@@ -401,7 +401,7 @@ _0814D906:
 	bl CopyBgTilemapBufferToVram
 	b _0814D9BA
 _0814D962:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0
 	bl HideBg
 	movs r0, 0
@@ -528,7 +528,7 @@ _0814DA42:
 	lsrs r3, 16
 	ldr r0, _0814DB74 @ =gUnknown_846F470
 	adds r1, r2, 0
-	bl sub_809881C
+	bl AddItemIconObjectWithCustomObjectTemplate
 	lsls r0, 24
 	lsrs r0, 24
 	mov r2, r9
@@ -1265,7 +1265,7 @@ _0814DFE0:
 	adds r4, r2, r4
 	str r4, [sp, 0x2C]
 _0814DFF0:
-	bl sub_813CC90
+	bl UnkTextUtil_Reset
 	ldr r0, [sp, 0x10]
 	cmp r0, 0x1
 	beq _0814E0E4
@@ -1610,10 +1610,10 @@ _0814E2B8:
 	ldr r0, [sp, 0xC]
 	adds r1, r0, r1
 	movs r0, 0
-	bl sub_813CCAC
+	bl UnkTextUtil_SetPtrI
 	ldr r0, _0814E324 @ =gUnknown_2021D18
 	adds r1, r4, 0
-	bl sub_813CCC8
+	bl UnkTextUtil_StringExpandPlaceholders
 	ldr r1, [sp, 0x2C]
 	ldrb r0, [r1]
 	mov r2, r9
@@ -2215,7 +2215,7 @@ _0814E7E0:
 	adds r0, 0x82
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r1, r6, 0
 	adds r1, 0x80
 	movs r0, 0
@@ -2248,7 +2248,7 @@ sub_814E80C: @ 814E80C
 	movs r1, 0x1
 	bl sub_810F4D8
 	ldrb r0, [r5]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r4, 0
 	bl sub_814EBB0
 	pop {r4,r5}
@@ -2471,7 +2471,7 @@ _0814E96E:
 	bls _0814E90E
 	ldrb r0, [r7, 0x2]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0814EA66
 	.align 2, 0
 _0814E9FC: .4byte gUnknown_841D118
@@ -2503,7 +2503,7 @@ _0814EA40:
 	ldrb r0, [r7, 0x2]
 	bl ClearWindowTilemap
 	ldrb r0, [r7, 0x2]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r4, 0
 	bl DestroyTask
 	bl EnableBothScriptContexts
@@ -2759,7 +2759,7 @@ _0814EC4C:
 	adds r0, r7
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r7, 0x1
 	lsls r0, 24
 	lsrs r7, r0, 24

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80BF474
-sub_80BF474: @ 80BF474
+	thumb_func_start DisplayMessageAndContinueTask
+DisplayMessageAndContinueTask: @ 80BF474
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -57,7 +57,7 @@ _080BF4B8:
 	adds r1, r7, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	ldr r1, _080BF50C @ =gUnknown_20399CC
 	ldr r0, [sp, 0x34]
 	str r0, [r1]
@@ -67,7 +67,7 @@ _080BF4B8:
 	add r0, r8
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _080BF514 @ =sub_80BF534
+	ldr r1, _080BF514 @ =Task_ContinueTaskAfterMessagePrints
 	str r1, [r0]
 	add sp, 0x10
 	pop {r3}
@@ -81,8 +81,8 @@ _080BF504: .4byte gUnknown_2021D18
 _080BF508: .4byte gUnknown_3003E50
 _080BF50C: .4byte gUnknown_20399CC
 _080BF510: .4byte gUnknown_3005090
-_080BF514: .4byte sub_80BF534
-	thumb_func_end sub_80BF474
+_080BF514: .4byte Task_ContinueTaskAfterMessagePrints
+	thumb_func_end DisplayMessageAndContinueTask
 
 	thumb_func_start sub_80BF518
 sub_80BF518: @ 80BF518
@@ -100,8 +100,8 @@ sub_80BF518: @ 80BF518
 	bx r1
 	thumb_func_end sub_80BF518
 
-	thumb_func_start sub_80BF534
-sub_80BF534: @ 80BF534
+	thumb_func_start Task_ContinueTaskAfterMessagePrints
+Task_ContinueTaskAfterMessagePrints: @ 80BF534
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -122,7 +122,7 @@ _080BF552:
 	.align 2, 0
 _080BF558: .4byte gUnknown_20399D0
 _080BF55C: .4byte gUnknown_20399CC
-	thumb_func_end sub_80BF534
+	thumb_func_end Task_ContinueTaskAfterMessagePrints
 
 	thumb_func_start sub_80BF560
 sub_80BF560: @ 80BF560
@@ -230,8 +230,8 @@ _080BF628: .4byte gUnknown_3005090
 _080BF62C: .4byte sub_80BF560
 	thumb_func_end sub_80BF5D0
 
-	thumb_func_start sub_80BF630
-sub_80BF630: @ 80BF630
+	thumb_func_start GetLRKeysState
+GetLRKeysState: @ 80BF630
 	push {lr}
 	ldr r0, _080BF650 @ =gUnknown_300500C
 	ldr r0, [r0]
@@ -263,7 +263,7 @@ _080BF666:
 _080BF668:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BF630
+	thumb_func_end GetLRKeysState
 
 	thumb_func_start sub_80BF66C
 sub_80BF66C: @ 80BF66C
@@ -314,7 +314,7 @@ sub_80BF6A8: @ 80BF6A8
 	lsls r0, 1
 	cmp r1, r0
 	beq _080BF6C8
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _080BF6D0
 _080BF6C8:
@@ -337,7 +337,7 @@ itemid_80BF6D8_mail_related: @ 80BF6D8
 	bl sub_805642C
 	cmp r0, 0x1
 	beq _080BF6EE
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _080BF700
 _080BF6EE:

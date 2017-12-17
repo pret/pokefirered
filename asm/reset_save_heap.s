@@ -26,7 +26,7 @@ sub_8079B7C: @ 8079B7C
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1]
-	bl sub_804C058
+	bl SetSaveBlocksPointers
 	bl sub_8054A28
 	bl ResetSaveCounters
 	movs r0, 0

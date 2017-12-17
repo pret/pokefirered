@@ -27,10 +27,10 @@ sub_80BEBEC: @ 80BEBEC
 	ldr r2, [r4]
 	adds r1, r2, 0
 	adds r1, 0xF0
-	ldr r0, _080BEC40 @ =sub_80BD850
+	ldr r0, _080BEC40 @ =CopyEasyChatWord
 	str r0, [r1]
 	adds r1, 0x4
-	ldr r0, _080BEC44 @ =sub_80BD89C
+	ldr r0, _080BEC44 @ =ConvertEasyChatWordsToString
 	str r0, [r1]
 	ldrh r1, [r5, 0x20]
 	adds r0, r1, 0
@@ -47,8 +47,8 @@ sub_80BEBEC: @ 80BEBEC
 	.align 2, 0
 _080BEC38: .4byte gUnknown_20399C4
 _080BEC3C: .4byte 0x000020fc
-_080BEC40: .4byte sub_80BD850
-_080BEC44: .4byte sub_80BD89C
+_080BEC40: .4byte CopyEasyChatWord
+_080BEC44: .4byte ConvertEasyChatWordsToString
 _080BEC48:
 	adds r1, r2, 0
 	adds r1, 0xEA
@@ -297,7 +297,7 @@ _080BEE74: .4byte 0x000010fc
 _080BEE78:
 	ldr r0, _080BEE84 @ =gUnknown_83EE9A4
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	b _080BF0F4
 	.align 2, 0
 _080BEE84: .4byte gUnknown_83EE9A4
@@ -665,7 +665,7 @@ _080BF152:
 	lsls r2, 30
 	lsrs r2, 30
 	movs r3, 0x1
-	bl sub_80BD89C
+	bl ConvertEasyChatWordsToString
 	ldr r0, [r7]
 	adds r0, 0xF8
 	ldr r1, [r0]
@@ -878,10 +878,10 @@ _080BF2CE:
 	bl sub_812E51C
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -1023,7 +1023,7 @@ _080BF442:
 	movs r1, 0
 	bl memset
 	bl ResetPaletteFade
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, [r4]
 	bl Free
 	movs r0, 0

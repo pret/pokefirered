@@ -1495,7 +1495,7 @@ sub_8144144: @ 8144144
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1784,7 +1784,7 @@ _0814435C:
 	ldr r1, [r0]
 	adds r1, 0xA
 	adds r0, r5, 0
-	bl sub_805490C
+	bl CopyUnalignedWord
 	mov r2, r8
 	ldr r1, [r2]
 	adds r0, r6, 0

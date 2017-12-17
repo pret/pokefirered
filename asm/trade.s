@@ -47,7 +47,7 @@ sub_804C600: @ 804C600
 	lsls r0, 16
 	cmp r0, 0
 	beq _0804C6F0
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	ldr r1, _0804C710 @ =gUnknown_3000E78
 	ldr r2, _0804C714 @ =0x0000024e
 	adds r0, r2, 0
@@ -1839,7 +1839,7 @@ sub_804D5A4: @ 804D5A4
 	ldr r0, _0804D5F0 @ =gUnknown_2031C90
 	ldr r0, [r0]
 	bl Free
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _0804D5F4 @ =gUnknown_2031DA8
 	ldr r0, [r0]
 	bl Free
@@ -1864,7 +1864,7 @@ _0804D5FC:
 	ldr r0, _0804D62C @ =gUnknown_2031C90
 	ldr r0, [r0]
 	bl Free
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _0804D630 @ =gUnknown_2031DA8
 	ldr r0, [r0]
 	bl Free
@@ -3395,7 +3395,7 @@ _0804E208:
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	adds r0, 0x6F
 	movs r1, 0x1
@@ -3714,7 +3714,7 @@ _0804E4DC:
 	str r4, [sp]
 	bl sub_81344F8
 _0804E4F8:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 _0804E4FC:
 	add sp, 0x4
 	pop {r4}
@@ -3996,7 +3996,7 @@ _0804E712:
 	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x80
 	lsls r0, 17
 	adds r6, r0
@@ -4295,7 +4295,7 @@ sub_804E944: @ 804E944
 	ldr r0, _0804E980 @ =gUnknown_2031DA8
 	ldr r0, [r0]
 	bl Free
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	bl sub_80FCE44
 	ldr r0, _0804E984 @ =c2_8056854
 	bl SetMainCallback2
@@ -4316,7 +4316,7 @@ _0804E988:
 	ldr r0, _0804E9B8 @ =gUnknown_2031DA8
 	ldr r0, [r0]
 	bl Free
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _0804E9BC @ =c2_8056854
 	bl SetMainCallback2
 _0804E9AA:
@@ -4852,12 +4852,12 @@ _0804ECEC:
 	bl PutWindowTilemap
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _0804EE10 @ =gUnknown_2031DA8
 	ldr r1, [r0]
 	b _0804EE4A
@@ -4944,7 +4944,7 @@ _0804EEA4:
 	bl StringCopy10
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -5091,7 +5091,7 @@ sub_804EFB4: @ 804EFB4
 	movs r5, 0
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -5115,7 +5115,7 @@ sub_804EFB4: @ 804EFB4
 	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -5872,7 +5872,7 @@ sub_804F5BC: @ 804F5BC
 	str r0, [sp, 0x8]
 	movs r1, 0x3
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC
@@ -5881,7 +5881,7 @@ sub_804F5BC: @ 804F5BC
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -7312,7 +7312,7 @@ _0805007C:
 	ldr r1, [r2]
 	adds r2, r5, 0
 	adds r3, r7, 0
-	bl sub_800F108
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _0805009A:
 	mov r0, r8
 	bl sub_8044148
@@ -7793,7 +7793,7 @@ sub_80504B0: @ 80504B0
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80504B0
@@ -7840,7 +7840,7 @@ sub_80504CC: @ 80504CC
 	adds r1, r0, 0
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	ldr r0, _080505B8 @ =gUnknown_8D00000
 	mov r10, r0
 	movs r0, 0
@@ -8048,7 +8048,7 @@ _08050710:
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08050764
 _08050730:
 	bl sub_8050DE0
@@ -8195,7 +8195,7 @@ sub_805080C: @ 805080C
 	adds r1, r2
 	ldr r0, [r0]
 	adds r0, r1
-	bl sub_8097CB4
+	bl ClearMailStruct
 _08050866:
 	ldr r4, _080508E8 @ =gUnknown_2031DAC
 	ldr r0, [r4]
@@ -9534,7 +9534,7 @@ _080515CC:
 	bl FillWindowPixelBuffer
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	bl _080522A8
 	.align 2, 0
 _080515E8: .4byte gUnknown_2037AB8
@@ -11122,7 +11122,7 @@ _080522BC:
 	ldr r0, [r7]
 	cmp r0, 0
 	beq _0805230A
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0x3
 	bl GetBgTilemapBuffer
 	bl Free
@@ -11710,7 +11710,7 @@ _080529BC:
 	bl FillWindowPixelBuffer
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	bl _08053704
 	.align 2, 0
 _080529D8: .4byte gUnknown_2037AB8
@@ -13347,7 +13347,7 @@ _08053718:
 	ldr r0, [r7]
 	cmp r0, 0
 	beq _08053766
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0x3
 	bl GetBgTilemapBuffer
 	bl Free
@@ -14456,7 +14456,7 @@ _080540EA:
 _080540FC: .4byte gUnknown_2021D18
 _08054100: .4byte gUnknown_8419F54
 _08054104:
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0
 	beq _08054120
 	ldr r0, _0805411C @ =gUnknown_2031DAC
@@ -14800,7 +14800,7 @@ sub_80543C4: @ 80543C4
 	lsrs r5, r0, 24
 	cmp r5, 0
 	bne _0805441A
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0x3
 	bl GetBgTilemapBuffer
 	bl Free
@@ -14921,7 +14921,7 @@ _080544B2:
 	cmp r5, 0
 	beq _080544EA
 	ldr r0, _080544F8 @ =0x0000083b
-	bl sub_806E680
+	bl FlagSet
 _080544EA:
 	pop {r4,r5}
 	pop {r0}
@@ -14992,7 +14992,7 @@ sub_8054508: @ 8054508
 	bl sub_812E5A4
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3

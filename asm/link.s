@@ -346,7 +346,7 @@ sub_8009708: @ 8009708
 	bl sub_806E25C
 	strb r0, [r5, 0x10]
 	ldr r0, _08009788 @ =0x00000844
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800976E
@@ -3287,7 +3287,7 @@ _0800AD30:
 	lsls r0, 16
 	cmp r0, 0
 	beq _0800ADD8
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	bl reset_temp_tile_data_buffers
 	movs r0, 0x52
 	movs r1, 0
@@ -3403,10 +3403,10 @@ sub_800AE1C: @ 800AE1C
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x2
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl ShowBg
 	movs r0, 0x1
@@ -3451,10 +3451,10 @@ sub_800AED0: @ 800AED0
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x2
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	bl ShowBg
 	add sp, 0xC
@@ -3936,7 +3936,7 @@ sub_800B29C: @ 800B29C
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0xC0
-	bl sub_8000B94
+	bl DisableInterrupts
 	ldr r1, _0800B2DC @ =0x04000128
 	movs r2, 0x80
 	lsls r2, 6
@@ -3977,7 +3977,7 @@ sub_800B2F4: @ 800B2F4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0xC0
-	bl sub_8000B94
+	bl DisableInterrupts
 	ldr r0, _0800B354 @ =0x04000134
 	movs r4, 0
 	strh r4, [r0]

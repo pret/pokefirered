@@ -18,7 +18,7 @@ sub_80BD718: @ 80BD718
 	cmp r0, 0x11
 	blt _080BD74C
 	ldr r0, _080BD734 @ =0x0000082c
-	bl sub_806E6D0
+	bl FlagGet
 	b _080BD746
 	.align 2, 0
 _080BD734: .4byte 0x0000082c
@@ -138,8 +138,8 @@ _080BD7F2:
 	bx r1
 	thumb_func_end sub_80BD78C
 
-	thumb_func_start sub_80BD7F8
-sub_80BD7F8: @ 80BD7F8
+	thumb_func_start GetEasyChatWord
+GetEasyChatWord: @ 80BD7F8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -186,10 +186,10 @@ _080BD846:
 	bx r1
 	.align 2, 0
 _080BD84C: .4byte gUnknown_83ECED4
-	thumb_func_end sub_80BD7F8
+	thumb_func_end GetEasyChatWord
 
-	thumb_func_start sub_80BD850
-sub_80BD850: @ 80BD850
+	thumb_func_start CopyEasyChatWord
+CopyEasyChatWord: @ 80BD850
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	lsls r6, r1, 16
@@ -210,7 +210,7 @@ _080BD86C:
 	ldr r1, _080BD88C @ =0x000001ff
 	ands r1, r4
 	lsrs r0, r6, 25
-	bl sub_80BD7F8
+	bl GetEasyChatWord
 	adds r1, r0, 0
 _080BD87E:
 	adds r0, r5, 0
@@ -227,10 +227,10 @@ _080BD896:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BD850
+	thumb_func_end CopyEasyChatWord
 
-	thumb_func_start sub_80BD89C
-sub_80BD89C: @ 80BD89C
+	thumb_func_start ConvertEasyChatWordsToString
+ConvertEasyChatWordsToString: @ 80BD89C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -259,7 +259,7 @@ _080BD8CA:
 	ldrh r1, [r5]
 	adds r0, r4, 0
 	str r2, [sp]
-	bl sub_80BD850
+	bl CopyEasyChatWord
 	adds r4, r0, 0
 	ldrh r0, [r5]
 	ldr r2, [sp]
@@ -279,7 +279,7 @@ _080BD8F0:
 	ldrh r1, [r5]
 	adds r5, 0x2
 	adds r0, r4, 0
-	bl sub_80BD850
+	bl CopyEasyChatWord
 	adds r4, r0, 0
 	movs r0, 0xFE
 	strb r0, [r4]
@@ -304,7 +304,7 @@ _080BD90C:
 	.align 2, 0
 _080BD924: .4byte 0xffff0000
 _080BD928: .4byte 0x0000ffff
-	thumb_func_end sub_80BD89C
+	thumb_func_end ConvertEasyChatWordsToString
 
 	thumb_func_start sub_80BD92C
 sub_80BD92C: @ 80BD92C
@@ -328,7 +328,7 @@ _080BD944:
 	ldr r1, _080BD95C @ =0x000001ff
 	ands r1, r4
 	lsrs r0, r5, 25
-	bl sub_80BD7F8
+	bl GetEasyChatWord
 	b _080BD962
 	.align 2, 0
 _080BD95C: .4byte 0x000001ff
@@ -563,7 +563,7 @@ _080BDAF8:
 	ldr r4, _080BDB18 @ =gUnknown_2021D18
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80BD89C
+	bl ConvertEasyChatWordsToString
 	adds r0, r4, 0
 	bl ShowFieldAutoScrollMessage
 _080BDB08:
@@ -592,7 +592,7 @@ _080BDB2E:
 	lsls r1, 16
 	lsrs r1, 16
 	ldr r0, _080BDB44 @ =gUnknown_2021CF0
-	bl sub_80BD850
+	bl CopyEasyChatWord
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1084,7 +1084,7 @@ _080BDEB2:
 	cmp r3, 0x10
 	ble _080BDEB2
 	ldr r0, _080BDF34 @ =0x0000082c
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BDF0C
@@ -1232,7 +1232,7 @@ CopyEasyChatWordPadded: @ 80BDFC0
 	lsrs r1, 16
 	lsls r2, 16
 	lsrs r5, r2, 16
-	bl sub_80BD850
+	bl CopyEasyChatWord
 	adds r1, r0, 0
 	subs r4, r1, r4
 	lsls r4, 16

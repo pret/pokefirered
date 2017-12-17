@@ -46,7 +46,7 @@ _080E59B8:
 	movs r0, 0x80
 	lsls r0, 7
 	movs r1, 0x5
-	bl sub_806E584
+	bl VarSet
 	b _080E5A00
 _080E59D0:
 	lsls r0, r5, 24
@@ -71,7 +71,7 @@ _080E59F0:
 	lsls r0, 7
 	movs r1, 0x4
 _080E59F6:
-	bl sub_806E584
+	bl VarSet
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -90,7 +90,7 @@ _080E5A00:
 	movs r0, 0x80
 	lsls r0, 7
 	movs r1, 0x5
-	bl sub_806E584
+	bl VarSet
 _080E5A20:
 	bl sub_80E7064
 	pop {r4,r5}
@@ -644,7 +644,7 @@ sub_80E5E5C: @ 80E5E5C
 	push {lr}
 	ldr r0, _080E5E6C @ =0x00004010
 	movs r1, 0x12
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1872,7 +1872,7 @@ sub_80E678C: @ 80E678C
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_80BD89C
+	bl ConvertEasyChatWordsToString
 	ldrb r0, [r5]
 	movs r1, 0x1
 	cmp r0, 0xFE
@@ -1909,7 +1909,7 @@ _080E67E4:
 	adds r1, r4, 0
 	movs r2, 0x3
 	movs r3, 0x2
-	bl sub_80BD89C
+	bl ConvertEasyChatWordsToString
 _080E67F0:
 	pop {r4,r5}
 	pop {r0}
@@ -2799,7 +2799,7 @@ _080E6F0E:
 	ldr r4, _080E6FA4 @ =gUnknown_300500C
 	ldr r1, [r4]
 	adds r1, 0xA
-	bl sub_805490C
+	bl CopyUnalignedWord
 	adds r0, r5, 0x4
 	ldr r1, [r4]
 	bl StringCopy7
@@ -2912,7 +2912,7 @@ _080E7016:
 	movs r0, 0x80
 	lsls r0, 7
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	ldr r1, [r4]
 	ldr r0, _080E7040 @ =0x0000055c
 	adds r1, r0
@@ -3369,7 +3369,7 @@ _080E7372:
 	adds r0, 0xC
 	ldr r1, [r5]
 	adds r1, 0xA
-	bl sub_805490C
+	bl CopyUnalignedWord
 	adds r0, r7, 0x4
 	ldr r1, [r5]
 	bl StringCopy7
@@ -3435,8 +3435,8 @@ _080E7418: .4byte 0x00002cac
 _080E741C: .4byte gUnknown_2024284
 	thumb_func_end sub_80E7348
 
-	thumb_func_start sub_80E7420
-sub_80E7420: @ 80E7420
+	thumb_func_start GetEreaderTrainerFrontSpriteId
+GetEreaderTrainerFrontSpriteId: @ 80E7420
 	ldr r1, _080E7434 @ =gUnknown_82538A8
 	ldr r0, _080E7438 @ =gUnknown_300500C
 	ldr r0, [r0]
@@ -3450,10 +3450,10 @@ sub_80E7420: @ 80E7420
 _080E7434: .4byte gUnknown_82538A8
 _080E7438: .4byte gUnknown_300500C
 _080E743C: .4byte 0x000004a1
-	thumb_func_end sub_80E7420
+	thumb_func_end GetEreaderTrainerFrontSpriteId
 
-	thumb_func_start sub_80E7440
-sub_80E7440: @ 80E7440
+	thumb_func_start GetEreaderTrainerClassId
+GetEreaderTrainerClassId: @ 80E7440
 	ldr r1, _080E7454 @ =gUnknown_825393E
 	ldr r0, _080E7458 @ =gUnknown_300500C
 	ldr r0, [r0]
@@ -3467,7 +3467,7 @@ sub_80E7440: @ 80E7440
 _080E7454: .4byte gUnknown_825393E
 _080E7458: .4byte gUnknown_300500C
 _080E745C: .4byte 0x000004a1
-	thumb_func_end sub_80E7440
+	thumb_func_end GetEreaderTrainerClassId
 
 	thumb_func_start sub_80E7460
 sub_80E7460: @ 80E7460

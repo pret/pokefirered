@@ -122,8 +122,8 @@ LoadCompressedObjectPaletteOverrideBuffer: @ 800EC5C
 _0800EC88: .4byte 0xffff0000
 	thumb_func_end LoadCompressedObjectPaletteOverrideBuffer
 
-	thumb_func_start sub_800EC8C
-sub_800EC8C: @ 800EC8C
+	thumb_func_start DecompressPicFromTable
+DecompressPicFromTable: @ 800EC8C
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -149,7 +149,7 @@ _0800ECB4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800EC8C
+	thumb_func_end DecompressPicFromTable
 
 	thumb_func_start sub_800ECC4
 sub_800ECC4: @ 800ECC4
@@ -740,8 +740,8 @@ sub_800F0C4: @ 800F0C4
 	bx lr
 	thumb_func_end sub_800F0C4
 
-	thumb_func_start sub_800F0E0
-sub_800F0E0: @ 800F0E0
+	thumb_func_start DecompressPicFromTable_DontHandleDeoxys
+DecompressPicFromTable_DontHandleDeoxys: @ 800F0E0
 	push {lr}
 	adds r3, r0, 0
 	movs r0, 0xCE
@@ -760,10 +760,10 @@ _0800F0FC:
 _0800F102:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800F0E0
+	thumb_func_end DecompressPicFromTable_DontHandleDeoxys
 
-	thumb_func_start sub_800F108
-sub_800F108: @ 800F108
+	thumb_func_start HandleLoadSpecialPokePic_DontHandleDeoxys
+HandleLoadSpecialPokePic_DontHandleDeoxys: @ 800F108
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -779,17 +779,17 @@ _0800F11E:
 	str r1, [sp]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_800F134
+	bl LoadSpecialPokePic_DontHandleDeoxys
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0800F130: .4byte gUnknown_82350AC
-	thumb_func_end sub_800F108
+	thumb_func_end HandleLoadSpecialPokePic_DontHandleDeoxys
 
-	thumb_func_start sub_800F134
-sub_800F134: @ 800F134
+	thumb_func_start LoadSpecialPokePic_DontHandleDeoxys
+LoadSpecialPokePic_DontHandleDeoxys: @ 800F134
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -882,6 +882,6 @@ _0800F1D0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800F134
+	thumb_func_end LoadSpecialPokePic_DontHandleDeoxys
 
 	.align 2, 0 @ Don't pad with nop.

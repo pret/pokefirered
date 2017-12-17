@@ -80,7 +80,7 @@ _080F3A48: .4byte gUnknown_203AB40
 _080F3A4C:
 	movs r0, 0x80
 	lsls r0, 7
-	bl sub_806E6A8
+	bl FlagClear
 	ldr r1, _080F3A6C @ =gUnknown_2031DD8
 	movs r0, 0
 	strb r0, [r1]
@@ -155,7 +155,7 @@ sub_80F3AC4: @ 80F3AC4
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, [r4]
 	movs r0, 0x1
 	strb r0, [r1, 0xB]
@@ -176,7 +176,7 @@ sub_80F3B04: @ 80F3B04
 	cmp r0, 0
 	beq _080F3B20
 	ldrb r0, [r1, 0xA]
-	bl sub_8003E3C
+	bl RemoveWindow
 	bl sub_80563F0
 	ldr r1, [r4]
 	movs r0, 0
@@ -207,7 +207,7 @@ _080F3B40: .4byte gUnknown_203AB40
 _080F3B44:
 	movs r0, 0x80
 	lsls r0, 7
-	bl sub_806E680
+	bl FlagSet
 	ldr r1, _080F3BB8 @ =gUnknown_2031DD8
 	movs r0, 0x2
 	strb r0, [r1]
@@ -708,7 +708,7 @@ _080F3F84:
 	ldr r0, [r7]
 	ldrb r0, [r0, 0xA]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, [r7]
 	ldr r2, _080F3FC0 @ =gUnknown_8410CF4
 	ldrh r0, [r1, 0x6]
@@ -1110,13 +1110,13 @@ _080F4288:
 _080F42C2:
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -1519,7 +1519,7 @@ _080F4638:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _080F4668
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0
 	bl GetBgTilemapBuffer
 	bl Free

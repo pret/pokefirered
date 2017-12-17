@@ -568,7 +568,7 @@ sub_81564F0: @ 81564F0
 	adds r0, r1
 	ldrb r0, [r0]
 	bl DestroyTask
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	bl sub_8127968
 _08156520:
 	pop {r0}
@@ -641,7 +641,7 @@ sub_8156594: @ 8156594
 	ldr r1, _081565D4 @ =sub_81565E8
 	str r1, [r0]
 	bl nullsub_44
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, _081565D8 @ =gUnknown_20370C0
 	ldrh r0, [r0]
 	cmp r0, 0x1
@@ -1992,7 +1992,7 @@ sub_8157084: @ 8157084
 	movs r0, 0x2
 	movs r1, 0x4
 	mov r2, sp
-	bl sub_800D9EC
+	bl PrepareBufferDataTransferLink
 	ldr r1, _081570D4 @ =gUnknown_2022BC4
 	ldrb r0, [r4]
 	lsls r0, 9

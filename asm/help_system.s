@@ -1193,7 +1193,7 @@ _0813C1AC:
 	lsrs r4, r0, 24
 _0813C1BC:
 	ldr r0, _0813C1DC @ =0x00000834
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1290,7 +1290,7 @@ _0813C282:
 	strh r0, [r4, 0x6]
 	ldr r0, [sp, 0x24]
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r3, r6, 16
@@ -1300,7 +1300,7 @@ _0813C282:
 	adds r0, r4, 0
 	adds r1, r7, 0
 	mov r2, r10
-	bl sub_8004C84
+	bl FillBitmapRect4Bit
 	adds r0, r7, r6
 	lsls r0, 24
 	lsrs r7, r0, 24
@@ -1360,7 +1360,7 @@ _0813C2D4:
 	adds r1, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8004AA4
+	bl BlitBitmapRect4Bit
 	adds r0, r6, 0
 	bl GetKeypadIconWidth
 	b _0813C38E
@@ -1496,7 +1496,7 @@ _0813C402:
 	adds r0, r7, 0
 	mov r1, r8
 	movs r3, 0
-	bl sub_8004AA4
+	bl BlitBitmapRect4Bit
 	add sp, 0x14
 	pop {r3-r5}
 	mov r8, r3
@@ -1978,7 +1978,7 @@ sub_813C7CC: @ 813C7CC
 	push {r7}
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
@@ -2026,7 +2026,7 @@ sub_813C828: @ 813C828
 	push {r4,lr}
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
@@ -2058,7 +2058,7 @@ sub_813C860: @ 813C860
 	lsrs r4, 24
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24

@@ -313,8 +313,8 @@ _08000B8C: .4byte gUnknown_30000C2
 _08000B90: .4byte gUnknown_30000C1
 	thumb_func_end EnableInterrupts
 
-	thumb_func_start sub_8000B94
-sub_8000B94: @ 8000B94
+	thumb_func_start DisableInterrupts
+DisableInterrupts: @ 8000B94
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -334,7 +334,7 @@ sub_8000B94: @ 8000B94
 	.align 2, 0
 _08000BB8: .4byte gUnknown_30000C2
 _08000BBC: .4byte gUnknown_30000C1
-	thumb_func_end sub_8000B94
+	thumb_func_end DisableInterrupts
 
 	thumb_func_start UpdateRegDispstatIntrBits
 UpdateRegDispstatIntrBits: @ 8000BC0

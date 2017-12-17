@@ -13,7 +13,7 @@ sub_80C9B2C: @ 80C9B2C
 	cmp r0, 0x1
 	bne _080C9B6C
 	ldr r0, _080C9B58 @ =0x00000806
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C9B6C
@@ -46,7 +46,7 @@ sub_80C9B74: @ 80C9B74
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _080C9BA4 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -75,7 +75,7 @@ sub_80C9BB0: @ 80C9BB0
 	movs r0, 0xC8
 	bl sub_80722CC
 	ldr r0, _080C9BC8 @ =0x00000806
-	bl sub_806E680
+	bl FlagSet
 	ldr r0, _080C9BCC @ =gUnknown_81BFB5F
 	bl ScriptContext1_SetupScript
 	pop {r0}
@@ -865,7 +865,7 @@ _080CA208:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _080CA294
 _080CA224:
 	bl IsDma3ManagerBusyWithBgCopy

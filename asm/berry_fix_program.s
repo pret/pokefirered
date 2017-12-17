@@ -62,7 +62,7 @@ sub_815F74C: @ 815F74C
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _0815F7C4 @ =0x0000ffff
-	bl sub_8000B94
+	bl DisableInterrupts
 	movs r0, 0x1
 	bl EnableInterrupts
 	bl m4aSoundVSyncOff

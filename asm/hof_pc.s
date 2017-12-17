@@ -16,7 +16,7 @@ sub_80CA53C: @ 80CA53C
 	ands r0, r1
 	cmp r0, 0
 	bne _080CA564
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	movs r0, 0
 	bl sub_8001618
 	adds r0, r4, 0

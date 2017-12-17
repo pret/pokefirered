@@ -78,7 +78,7 @@ _08106F34:
 	strb r0, [r4, 0x6]
 	ldrb r0, [r4, 0x5]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	strb r0, [r4, 0x4]
 	b _08106FE4
@@ -131,7 +131,7 @@ _08106FBA:
 	ldr r0, _08106FC8 @ =gUnknown_203ACF4
 	ldrb r0, [r0, 0x5]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08106FE4
 	.align 2, 0
 _08106FC8: .4byte gUnknown_203ACF4
@@ -141,7 +141,7 @@ _08106FCC:
 	movs r2, 0
 	bl sub_810713C
 	ldrb r0, [r5, 0x5]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0
 	strb r0, [r5, 0x4]
 	ldr r0, [r5]
@@ -176,7 +176,7 @@ ListMenuInit: @ 8106FF8
 	bl PutWindowTilemap
 	ldrb r0, [r5, 0x10]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
@@ -219,7 +219,7 @@ _08107048:
 _08107064:
 	ldrb r0, [r6, 0x10]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r7, 0
 	add sp, 0x8
 	pop {r4-r7}
@@ -405,7 +405,7 @@ sub_8107180: @ 8107180
 	bl ListMenuDrawCursor
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -604,7 +604,7 @@ ListMenuGetYCoordForPrintingArrowCursor: @ 8107300
 	lsls r0, 26
 	lsrs r0, 26
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	ldrb r1, [r4, 0x16]
 	lsls r1, 26
 	lsrs r1, 29
@@ -850,7 +850,7 @@ ListMenuPrintEntries: @ 81074DC
 	lsls r0, 26
 	lsrs r0, 26
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	ldrb r1, [r4, 0x16]
 	lsls r1, 26
 	lsrs r1, 29
@@ -936,7 +936,7 @@ ListMenuDrawCursor: @ 8107594
 	lsls r0, 26
 	lsrs r0, 26
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	ldrb r1, [r6, 0x16]
 	lsls r1, 26
 	lsrs r1, 29
@@ -1071,7 +1071,7 @@ ListMenuAddCursorObject: @ 810768C
 	lsls r0, 26
 	lsrs r0, 26
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r1, sp
 	lsls r0, 24
 	lsrs r0, 24
@@ -1114,7 +1114,7 @@ ListMenuErasePrintedCursor: @ 81076EC
 	lsls r0, r1, 26
 	lsrs r0, 26
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r4, r0, 0
 	ldrb r0, [r7, 0x16]
 	lsls r0, 26
@@ -1126,7 +1126,7 @@ ListMenuErasePrintedCursor: @ 81076EC
 	lsls r0, 26
 	lsrs r0, 26
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -1134,7 +1134,7 @@ ListMenuErasePrintedCursor: @ 81076EC
 	lsls r0, 26
 	lsrs r0, 26
 	movs r1, 0x1
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r6, [r7, 0x10]
@@ -1340,7 +1340,7 @@ _0810789E:
 	lsls r0, 26
 	lsrs r0, 26
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	ldrb r1, [r6, 0x16]
 	lsls r1, 26
 	lsrs r1, 29
@@ -1537,7 +1537,7 @@ _08107A1A:
 	bl ListMenuCallSelectionChangedCallback
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08107A62
 _08107A3A:
 	adds r0, r4, 0
@@ -1554,7 +1554,7 @@ _08107A3A:
 	bl ListMenuCallSelectionChangedCallback
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 _08107A62:
 	movs r0, 0
 _08107A64:

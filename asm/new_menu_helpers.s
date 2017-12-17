@@ -691,7 +691,7 @@ _080F6C88: .4byte gUnknown_203ABE0
 	thumb_func_start sub_80F6C8C
 sub_80F6C8C: @ 80F6C8C
 	push {lr}
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F6C8C
@@ -707,7 +707,7 @@ sub_80F6C98: @ 80F6C98
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	bl sub_80F6E9C
 	pop {r0}
 	bx r0
@@ -725,8 +725,8 @@ sub_80F6CBC: @ 80F6CBC
 	bx r1
 	thumb_func_end sub_80F6CBC
 
-	thumb_func_start sub_80F6CD0
-sub_80F6CD0: @ 80F6CD0
+	thumb_func_start AddTextPrinterParametrized
+AddTextPrinterParametrized: @ 80F6CD0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -785,7 +785,7 @@ sub_80F6CD0: @ 80F6CD0
 	mov r0, sp
 	adds r1, r3, 0
 	adds r2, r7, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	lsls r0, 16
 	lsrs r0, 16
 	add sp, 0x10
@@ -796,7 +796,7 @@ sub_80F6CD0: @ 80F6CD0
 	bx r1
 	.align 2, 0
 _080F6D58: .4byte gUnknown_3003E50
-	thumb_func_end sub_80F6CD0
+	thumb_func_end AddTextPrinterParametrized
 
 	thumb_func_start sub_80F6D5C
 sub_80F6D5C: @ 80F6D5C
@@ -832,7 +832,7 @@ sub_80F6D5C: @ 80F6D5C
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _080F6DFC
 	.align 2, 0
 _080F6DA8: .4byte gUnknown_3003E50
@@ -853,7 +853,7 @@ _080F6DB0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x5
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _080F6DFC
 	.align 2, 0
 _080F6DD8: .4byte gUnknown_2021D18
@@ -871,7 +871,7 @@ _080F6DDC:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _080F6DFC:
 	add sp, 0x10
 	pop {r4,r5}
@@ -910,7 +910,7 @@ sub_80F6E08: @ 80F6E08
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -948,7 +948,7 @@ sub_80F6E54: @ 80F6E54
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -1015,7 +1015,7 @@ sub_80F6EE4: @ 80F6EE4
 	bne _080F6F12
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _080F6F12:
 	pop {r4,r5}
 	pop {r0}
@@ -1044,7 +1044,7 @@ sub_80F6F1C: @ 80F6F1C
 	bne _080F6F4A
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _080F6F4A:
 	pop {r4,r5}
 	pop {r0}
@@ -1073,7 +1073,7 @@ sub_80F6F54: @ 80F6F54
 	bne _080F6F82
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _080F6F82:
 	ldr r0, _080F6F98 @ =gUnknown_203ADFA
 	ldrb r0, [r0]
@@ -1109,7 +1109,7 @@ sub_80F6F9C: @ 80F6F9C
 	bne _080F6FCA
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _080F6FCA:
 	pop {r4,r5}
 	pop {r0}
@@ -2129,10 +2129,10 @@ DisplayItemMessageOnField: @ 80F7808
 	adds r0, r5, 0
 	movs r1, 0
 	movs r3, 0xF
-	bl sub_80BF474
+	bl DisplayMessageAndContinueTask
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
@@ -2244,7 +2244,7 @@ sub_80F78E0: @ 80F78E0
 	movs r1, 0
 	movs r2, 0x16
 	movs r3, 0x1
-	bl sub_810FE50
+	bl SetWindowTemplateFields
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]
@@ -2281,7 +2281,7 @@ sub_80F7948: @ 80F7948
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq _080F795A
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0xFF
 	strb r0, [r4]
 _080F795A:
@@ -2352,19 +2352,19 @@ sub_80F79A4: @ 80F79A4
 	bx r0
 	thumb_func_end sub_80F79A4
 
-	thumb_func_start sub_80F79C8
-sub_80F79C8: @ 80F79C8
+	thumb_func_start SetDefaultFontsPointer
+SetDefaultFontsPointer: @ 80F79C8
 	push {lr}
 	ldr r0, _080F79D4 @ =gUnknown_841F444
-	bl sub_8002C1C
+	bl SetFontsPointer
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080F79D4: .4byte gUnknown_841F444
-	thumb_func_end sub_80F79C8
+	thumb_func_end SetDefaultFontsPointer
 
-	thumb_func_start sub_80F79D8
-sub_80F79D8: @ 80F79D8
+	thumb_func_start GetFontAttribute
+GetFontAttribute: @ 80F79D8
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -2477,10 +2477,10 @@ _080F7AB6:
 	bx r1
 	.align 2, 0
 _080F7ABC: .4byte gUnknown_841F444
-	thumb_func_end sub_80F79D8
+	thumb_func_end GetFontAttribute
 
-	thumb_func_start sub_80F7AC0
-sub_80F7AC0: @ 80F7AC0
+	thumb_func_start GetMenuCursorDimensionByFont
+GetMenuCursorDimensionByFont: @ 80F7AC0
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
@@ -2492,6 +2492,6 @@ sub_80F7AC0: @ 80F7AC0
 	bx lr
 	.align 2, 0
 _080F7AD4: .4byte gUnknown_841F4A4
-	thumb_func_end sub_80F7AC0
+	thumb_func_end GetMenuCursorDimensionByFont
 
 	.align 2, 0 @ Don't pad with nop.

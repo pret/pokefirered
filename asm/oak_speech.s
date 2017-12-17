@@ -694,7 +694,7 @@ sub_812EEB0: @ 812EEB0
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x14]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r1, 0xC0
 	lsls r1, 6
 	movs r0, 0x5
@@ -810,7 +810,7 @@ _0812EF9A:
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -1055,12 +1055,12 @@ _0812F1EA:
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	adds r0, 0x14
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r0, [r5]
 	adds r0, 0x14
 	adds r0, r4
@@ -1140,12 +1140,12 @@ _0812F292:
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	adds r0, 0x14
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r0, [r5]
 	adds r0, 0x14
 	adds r0, r4
@@ -1271,7 +1271,7 @@ _0812F374:
 	bl FillWindowPixelBuffer
 	ldrb r0, [r5, 0x1C]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r4]
 	movs r1, 0
 	strh r6, [r0, 0x12]
@@ -1697,9 +1697,9 @@ sub_812F72C: @ 812F72C
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x1C]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4, 0x1C]
-	bl sub_8003E3C
+	bl RemoveWindow
 	strh r6, [r4, 0x1C]
 	movs r0, 0x1E
 	str r0, [sp]
@@ -1875,7 +1875,7 @@ _0812F8B8:
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0812F918
 	.align 2, 0
 _0812F8F0: .4byte gUnknown_81C5C78
@@ -1894,11 +1894,11 @@ _0812F8FC:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0812F918:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _0812F93C @ =gUnknown_3005090
 	lsls r1, r6, 2
 	adds r1, r6
@@ -1952,7 +1952,7 @@ sub_812F944: @ 812F944
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0812F9BC
 	.align 2, 0
 _0812F994: .4byte gUnknown_81C5D06
@@ -1971,11 +1971,11 @@ _0812F9A0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0812F9BC:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, _0812F9E4 @ =gUnknown_3005090
 	lsls r0, r6, 2
 	adds r0, r6
@@ -2129,7 +2129,7 @@ _0812FAA0:
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r4, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0812FB30
 	.align 2, 0
 _0812FAFC: .4byte gUnknown_3005090
@@ -2151,11 +2151,11 @@ _0812FB14:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0812FB30:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1D
 	movs r1, 0
 	bl PlayCry1
@@ -2203,7 +2203,7 @@ sub_812FB4C: @ 812FB4C
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0812FBC4
 	.align 2, 0
 _0812FB9C: .4byte gUnknown_81C5D4B
@@ -2222,11 +2222,11 @@ _0812FBA8:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0812FBC4:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _0812FBE8 @ =gUnknown_3005090
 	lsls r1, r6, 2
 	adds r1, r6
@@ -2393,7 +2393,7 @@ _0812FCEC:
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0812FD4C
 	.align 2, 0
 _0812FD24: .4byte gUnknown_81C5DBD
@@ -2412,11 +2412,11 @@ _0812FD30:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0812FD4C:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _0812FD70 @ =gUnknown_3005090
 	lsls r1, r6, 2
 	adds r1, r6
@@ -2526,7 +2526,7 @@ _0812FDF0:
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0812FE5C
 	.align 2, 0
 _0812FE34: .4byte gUnknown_81C59D5
@@ -2545,11 +2545,11 @@ _0812FE40:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0812FE5C:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _0812FE80 @ =gUnknown_3005090
 	lsls r1, r6, 2
 	adds r1, r6
@@ -2660,7 +2660,7 @@ sub_812FE88: @ 812FE88
 	bl sub_812E51C
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r0, 0x2
 	lsls r0, 24
 	lsrs r0, 24
@@ -2679,7 +2679,7 @@ sub_812FE88: @ 812FE88
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _0812FFA0 @ =sub_812FFA4
 	str r0, [r5]
 _0812FF7E:
@@ -2756,7 +2756,7 @@ sub_812FFF0: @ 812FFF0
 	movs r1, 0x1
 	bl sub_810F4D8
 	ldrb r0, [r4, 0x1A]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0
 	strh r0, [r4, 0x1A]
 	movs r0, 0
@@ -2877,7 +2877,7 @@ _081300D0:
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _08130134
 	.align 2, 0
 _0813010C: .4byte gUnknown_81C5DEA
@@ -2896,11 +2896,11 @@ _08130118:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _08130134:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _08130158 @ =gUnknown_3005090
 	lsls r1, r6, 2
 	adds r1, r6
@@ -3054,7 +3054,7 @@ sub_8130228: @ 8130228
 	movs r1, 0x4
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0813029C
 	.align 2, 0
 _08130278: .4byte gUnknown_203B108
@@ -3071,11 +3071,11 @@ _08130284:
 	movs r0, 0
 	movs r1, 0x4
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0813029C:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _08130306
 _081302A6:
 	movs r0, 0
@@ -3100,7 +3100,7 @@ _081302A6:
 	movs r1, 0x4
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _081302FE
 	.align 2, 0
 _081302DC: .4byte gUnknown_81C5E91
@@ -3117,11 +3117,11 @@ _081302E4:
 	movs r0, 0
 	movs r1, 0x4
 	movs r3, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _081302FE:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _08130306:
 	ldr r0, _0813031C @ =gUnknown_3005090
 	lsls r1, r6, 2
@@ -3165,7 +3165,7 @@ sub_8130324: @ 8130324
 	movs r1, 0x1
 	bl sub_810F4D8
 	ldrb r0, [r5, 0x1A]
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r0, _08130380 @ =gUnknown_203B108
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x10]
@@ -3261,7 +3261,7 @@ _08130408:
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8003E3C
+	bl RemoveWindow
 	ldr r0, _08130458 @ =gUnknown_3005008
 	ldr r1, [r0]
 	ldr r0, _0813045C @ =0x00003a4c
@@ -3277,7 +3277,7 @@ _08130440:
 	adds r0, r6, 0
 	movs r1, 0x1
 	bl sub_8131168
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 _0813044C:
 	add sp, 0x8
 	pop {r4-r6}
@@ -3348,10 +3348,10 @@ _081304BC:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	strh r4, [r5, 0x1E]
 	movs r0, 0x19
 	strh r0, [r5, 0x6]
@@ -3473,10 +3473,10 @@ _081305BC:
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r4, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _08130600 @ =sub_8130694
 	str r0, [r6]
 	b _0813063E
@@ -3667,7 +3667,7 @@ sub_813071C: @ 813071C
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r4, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	b _0813079E
 	.align 2, 0
 _08130770: .4byte gUnknown_3005098
@@ -3688,11 +3688,11 @@ _08130780:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 _0813079E:
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, _081307C4 @ =gUnknown_203B108
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -3820,10 +3820,10 @@ sub_8130858: @ 8130858
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r4, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1E
 	strh r0, [r5, 0xE]
 	ldr r0, _081308CC @ =sub_81308D0
@@ -4288,7 +4288,7 @@ sub_8130C20: @ 8130C20
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	bl sub_8044D80
 	ldr r5, _08130C58 @ =gUnknown_203B108
 	ldr r0, [r5]
@@ -4300,7 +4300,7 @@ sub_8130C20: @ 8130C20
 	subs r0, 0x2
 	ands r0, r1
 	strb r0, [r2]
-	ldr r0, _08130C60 @ =sub_8056644
+	ldr r0, _08130C60 @ =CB2_NewGame
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -4310,7 +4310,7 @@ sub_8130C20: @ 8130C20
 	.align 2, 0
 _08130C58: .4byte gUnknown_203B108
 _08130C5C: .4byte gUnknown_3003E50
-_08130C60: .4byte sub_8056644
+_08130C60: .4byte CB2_NewGame
 	thumb_func_end sub_8130C20
 
 	thumb_func_start sub_8130C64
@@ -4453,7 +4453,7 @@ _08130D78:
 	bl SetGpuReg
 	b _08130F10
 _08130DB2:
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	bl sub_80F6C6C
 	bl sub_80F6C98
 	ldr r0, _08130DCC @ =gUnknown_8460568
@@ -4631,7 +4631,7 @@ sub_8130F2C: @ 8130F2C
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x1D
-	bl sub_800EC8C
+	bl DecompressPicFromTable
 	ldr r0, _08130FA4 @ =gUnknown_82373F4
 	bl sub_800F078
 	movs r0, 0x1D
@@ -5571,7 +5571,7 @@ sub_8131660: @ 8131660
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	mov r0, r8
 	cmp r0, 0
 	bne _081316F4
@@ -5610,7 +5610,7 @@ _081316FA:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	lsls r4, 24
 	lsrs r4, 24
 	cmp r4, 0x3
@@ -5628,7 +5628,7 @@ _081316FA:
 	bl sub_810F7D8
 	ldrb r0, [r7, 0x1A]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3

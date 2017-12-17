@@ -1487,7 +1487,7 @@ _080DA2B0:
 	adds r2, r5, 0
 	bl HandleWriteSectorNBytes
 _080DA2CC:
-	bl sub_804C300
+	bl SaveSerializedGame
 	ldr r0, _080DA2E8 @ =0x0000ffff
 	ldr r1, _080DA2EC @ =gUnknown_30053B0
 	bl save_write_to_flash
@@ -1499,7 +1499,7 @@ _080DA2E4: .4byte gUnknown_201C000
 _080DA2E8: .4byte 0x0000ffff
 _080DA2EC: .4byte gUnknown_30053B0
 _080DA2F0:
-	bl sub_804C300
+	bl SaveSerializedGame
 	movs r4, 0
 _080DA2F6:
 	adds r0, r4, 0
@@ -1514,7 +1514,7 @@ _080DA2F6:
 	.align 2, 0
 _080DA30C: .4byte gUnknown_30053B0
 _080DA310:
-	bl sub_804C300
+	bl SaveSerializedGame
 	ldr r1, _080DA320 @ =gUnknown_30053B0
 	movs r0, 0
 	bl save_write_to_flash
@@ -1533,7 +1533,7 @@ _080DA328:
 	lsrs r4, r0, 24
 	cmp r4, 0x1F
 	bls _080DA328
-	bl sub_804C300
+	bl SaveSerializedGame
 	ldr r0, _080DA358 @ =0x0000ffff
 	ldr r1, _080DA35C @ =gUnknown_30053B0
 	bl save_write_to_flash
@@ -1598,7 +1598,7 @@ sub_80DA3AC: @ 80DA3AC
 	cmp r0, 0x1
 	bne _080DA3D0
 	bl UpdateSaveAddresses
-	bl sub_804C300
+	bl SaveSerializedGame
 	ldr r0, _080DA3CC @ =gUnknown_30053B0
 	bl RestoreSaveBackupVarsAndIncrement
 	movs r0, 0
@@ -1693,7 +1693,7 @@ sub_80DA45C: @ 80DA45C
 	cmp r0, 0x1
 	bne _080DA498
 	bl UpdateSaveAddresses
-	bl sub_804C300
+	bl SaveSerializedGame
 	ldr r4, _080DA490 @ =gUnknown_30053B0
 	adds r0, r4, 0
 	bl RestoreSaveBackupVars

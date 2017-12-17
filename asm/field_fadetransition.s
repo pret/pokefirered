@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_807DB14
-sub_807DB14: @ 807DB14
+	thumb_func_start palette_bg_faded_fill_white
+palette_bg_faded_fill_white: @ 807DB14
 	push {lr}
 	sub sp, 0x4
 	ldr r0, _0807DB2C @ =0x7fff7fff
@@ -22,10 +22,10 @@ sub_807DB14: @ 807DB14
 _0807DB2C: .4byte 0x7fff7fff
 _0807DB30: .4byte gUnknown_20375F8
 _0807DB34: .4byte 0x01000100
-	thumb_func_end sub_807DB14
+	thumb_func_end palette_bg_faded_fill_white
 
-	thumb_func_start sub_807DB38
-sub_807DB38: @ 807DB38
+	thumb_func_start palette_bg_faded_fill_black
+palette_bg_faded_fill_black: @ 807DB38
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0
@@ -40,10 +40,10 @@ sub_807DB38: @ 807DB38
 	.align 2, 0
 _0807DB50: .4byte gUnknown_20375F8
 _0807DB54: .4byte 0x01000100
-	thumb_func_end sub_807DB38
+	thumb_func_end palette_bg_faded_fill_black
 
-	thumb_func_start sub_807DB58
-sub_807DB58: @ 807DB58
+	thumb_func_start pal_fill_for_maplights
+pal_fill_for_maplights: @ 807DB58
 	push {r4,lr}
 	bl get_map_light_from_warp0
 	adds r4, r0, 0
@@ -63,23 +63,23 @@ sub_807DB58: @ 807DB58
 	beq _0807DB94
 	b _0807DBA4
 _0807DB82:
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	movs r0, 0
 	movs r1, 0
 	bl fade_screen
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	b _0807DBA4
 _0807DB94:
-	bl sub_807DB14
+	bl palette_bg_faded_fill_white
 	movs r0, 0x2
 	movs r1, 0
 	bl fade_screen
-	bl sub_807DB14
+	bl palette_bg_faded_fill_white
 _0807DBA4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807DB58
+	thumb_func_end pal_fill_for_maplights
 
 	thumb_func_start sub_807DBAC
 sub_807DBAC: @ 807DBAC
@@ -102,18 +102,18 @@ sub_807DBAC: @ 807DBAC
 	beq _0807DBE8
 	b _0807DBF8
 _0807DBD6:
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	movs r0, 0
 	movs r1, 0x3
 	bl fade_screen
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	b _0807DBF8
 _0807DBE8:
-	bl sub_807DB14
+	bl palette_bg_faded_fill_white
 	movs r0, 0x2
 	movs r1, 0x3
 	bl fade_screen
-	bl sub_807DB14
+	bl palette_bg_faded_fill_white
 _0807DBF8:
 	pop {r4}
 	pop {r0}
@@ -123,11 +123,11 @@ _0807DBF8:
 	thumb_func_start sub_807DC00
 sub_807DC00: @ 807DC00
 	push {lr}
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	movs r0, 0
 	movs r1, 0
 	bl fade_screen
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807DC00
@@ -343,7 +343,7 @@ _0807DD9A:
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0x1
 	beq _0807DDCA
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 _0807DDB0:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -367,7 +367,7 @@ sub_807DDD0: @ 807DDD0
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055DC4
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	ldr r0, _0807DDEC @ =task_mpl_807DD60
 	movs r1, 0xA
 	bl CreateTask
@@ -410,7 +410,7 @@ _0807DE24:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807DE50
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 _0807DE32:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -435,7 +435,7 @@ sub_807DE58: @ 807DE58
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055DC4
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	ldr r0, _0807DE74 @ =sub_807DDF0
 	movs r1, 0xA
 	bl CreateTask
@@ -491,10 +491,10 @@ sub_807DE78: @ 807DE78
 	.align 2, 0
 _0807DED8: .4byte sub_807DFBC
 _0807DEDC:
-	bl sub_807DB38
+	bl palette_bg_faded_fill_black
 	b _0807DF2E
 _0807DEE2:
-	bl sub_807DB14
+	bl palette_bg_faded_fill_white
 	b _0807DF2E
 _0807DEE8:
 	adds r0, r5, 0
@@ -551,7 +551,7 @@ sub_807DF4C: @ 807DF4C
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807DF5A
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 	b _0807DF5E
 _0807DF5A:
 	bl sub_807DC00
@@ -588,7 +588,7 @@ sub_807DF7C: @ 807DF7C
 sub_807DF94: @ 807DF94
 	push {lr}
 	bl sub_8055DC4
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	movs r0, 0x28
 	bl sub_80722CC
@@ -1090,8 +1090,8 @@ sub_807E3BC: @ 807E3BC
 	bx r1
 	thumb_func_end sub_807E3BC
 
-	thumb_func_start sub_807E3C8
-sub_807E3C8: @ 807E3C8
+	thumb_func_start task_mpl_807E3C8
+task_mpl_807E3C8: @ 807E3C8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1106,7 +1106,7 @@ _0807E3E4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807E3C8
+	thumb_func_end task_mpl_807E3C8
 
 	thumb_func_start sub_807E3EC
 sub_807E3EC: @ 807E3EC
@@ -1114,13 +1114,13 @@ sub_807E3EC: @ 807E3EC
 	bl ScriptContext2_Enable
 	bl sub_8055DC4
 	bl sub_807DC00
-	ldr r0, _0807E408 @ =sub_807E3C8
+	ldr r0, _0807E408 @ =task_mpl_807E3C8
 	movs r1, 0xA
 	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E408: .4byte sub_807E3C8
+_0807E408: .4byte task_mpl_807E3C8
 	thumb_func_end sub_807E3EC
 
 	thumb_func_start sub_807E40C
@@ -2189,7 +2189,7 @@ sub_807EC34: @ 807EC34
 _0807EC6C: .4byte gUnknown_3005098
 _0807EC70:
 	bl sub_8055DC4
-	bl sub_807DB58
+	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	adds r0, r5, 0x2
 	adds r1, r5, 0x4

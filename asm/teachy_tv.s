@@ -364,7 +364,7 @@ sub_815AEB8: @ 815AEB8
 	push {lr}
 	ldr r0, _0815AEE4 @ =gUnknown_84792F0
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r0, 0
 	movs r1, 0xCC
 	bl FillWindowPixelBuffer
@@ -374,7 +374,7 @@ sub_815AEB8: @ 815AEB8
 	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -544,7 +544,7 @@ sub_815B014: @ 815B014
 	movs r0, 0x5A
 	movs r2, 0
 	movs r3, 0
-	bl sub_805E978
+	bl AddPseudoFieldObject
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0815B058 @ =gUnknown_202063C
@@ -789,7 +789,7 @@ sub_815B1DC: @ 815B1DC
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r4, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -806,7 +806,7 @@ sub_815B220: @ 815B220
 	bl Free
 	movs r0, 0
 	str r0, [r4]
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1190,7 +1190,7 @@ sub_815B4EC: @ 815B4EC
 	bl FillWindowPixelBuffer
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	bl sub_815B908
 	strh r4, [r5, 0x4]
 	strh r4, [r5, 0x6]
@@ -1334,7 +1334,7 @@ sub_815B624: @ 815B624
 	bl FillWindowPixelBuffer
 	movs r0, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrh r0, [r4, 0x6]
 	adds r0, 0x1
 	strh r0, [r4, 0x6]

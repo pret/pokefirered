@@ -11,7 +11,7 @@ sub_80DE0B4: @ 80DE0B4
 	ldr r1, _080DE0C4 @ =gUnknown_203B0A0
 	movs r0, 0
 	strb r0, [r1, 0x9]
-	bl sub_80DE0E8
+	bl hm2_sweet_scent
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -24,7 +24,7 @@ sub_80DE0C8: @ 80DE0C8
 	ldr r0, _080DE0DC @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _080DE0E0 @ =gUnknown_203B0C4
-	ldr r0, _080DE0E4 @ =sub_80DE0E8
+	ldr r0, _080DE0E4 @ =hm2_sweet_scent
 	str r0, [r1]
 	movs r0, 0x1
 	bx lr
@@ -32,15 +32,15 @@ sub_80DE0C8: @ 80DE0C8
 _080DE0D8: .4byte gUnknown_3005024
 _080DE0DC: .4byte hm_add_c3_launch_phase_2
 _080DE0E0: .4byte gUnknown_203B0C4
-_080DE0E4: .4byte sub_80DE0E8
+_080DE0E4: .4byte hm2_sweet_scent
 	thumb_func_end sub_80DE0C8
 
-	thumb_func_start sub_80DE0E8
-sub_80DE0E8: @ 80DE0E8
+	thumb_func_start hm2_sweet_scent
+hm2_sweet_scent: @ 80DE0E8
 	push {lr}
 	movs r0, 0x33
 	bl FieldEffectStart
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _080DE100 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -49,10 +49,10 @@ sub_80DE0E8: @ 80DE0E8
 	bx r0
 	.align 2, 0
 _080DE100: .4byte gUnknown_20386E0
-	thumb_func_end sub_80DE0E8
+	thumb_func_end hm2_sweet_scent
 
-	thumb_func_start sub_80DE104
-sub_80DE104: @ 80DE104
+	thumb_func_start FldEff_SweetScent
+FldEff_SweetScent: @ 80DE104
 	push {lr}
 	bl sub_807B05C
 	bl oei_task_add
@@ -73,7 +73,7 @@ sub_80DE104: @ 80DE104
 	.align 2, 0
 _080DE12C: .4byte gUnknown_3005090
 _080DE130: .4byte sub_80DE134
-	thumb_func_end sub_80DE104
+	thumb_func_end FldEff_SweetScent
 
 	thumb_func_start sub_80DE134
 sub_80DE134: @ 80DE134

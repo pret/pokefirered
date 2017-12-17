@@ -77,8 +77,8 @@ ZeroMonData: @ 803D994
 	bx r0
 	thumb_func_end ZeroMonData
 
-	thumb_func_start sub_803DA14
-sub_803DA14: @ 803DA14
+	thumb_func_start ZeroPlayerPartyMons
+ZeroPlayerPartyMons: @ 803DA14
 	push {r4,r5,lr}
 	ldr r4, _0803DA30 @ =gUnknown_2024284
 	movs r0, 0xFA
@@ -95,7 +95,7 @@ _0803DA1E:
 	bx r0
 	.align 2, 0
 _0803DA30: .4byte gUnknown_2024284
-	thumb_func_end sub_803DA14
+	thumb_func_end ZeroPlayerPartyMons
 
 	thumb_func_start ZeroEnemyPartyMons
 ZeroEnemyPartyMons: @ 803DA34

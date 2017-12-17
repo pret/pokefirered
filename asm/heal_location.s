@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80BFC50
-sub_80BFC50: @ 80BFC50
+	thumb_func_start GetHealLocationIndexFromMapGroupAndNum
+GetHealLocationIndexFromMapGroupAndNum: @ 80BFC50
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -37,16 +37,16 @@ _080BFC82:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BFC50
+	thumb_func_end GetHealLocationIndexFromMapGroupAndNum
 
-	thumb_func_start sub_80BFC88
-sub_80BFC88: @ 80BFC88
+	thumb_func_start GetHealLocationPointerFromMapGroupAndNum
+GetHealLocationPointerFromMapGroupAndNum: @ 80BFC88
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_80BFC50
+	bl GetHealLocationIndexFromMapGroupAndNum
 	cmp r0, 0
 	beq _080BFCA8
 	lsls r0, 3
@@ -60,10 +60,10 @@ _080BFCA8:
 _080BFCAA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BFC88
+	thumb_func_end GetHealLocationPointerFromMapGroupAndNum
 
-	thumb_func_start sub_80BFCB0
-sub_80BFCB0: @ 80BFCB0
+	thumb_func_start GetHealLocationPointer
+GetHealLocationPointer: @ 80BFCB0
 	push {lr}
 	cmp r0, 0
 	beq _080BFCC8
@@ -80,7 +80,7 @@ _080BFCC8:
 _080BFCCA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BFCB0
+	thumb_func_end GetHealLocationPointer
 
 	thumb_func_start sub_80BFCD0
 sub_80BFCD0: @ 80BFCD0
@@ -88,7 +88,7 @@ sub_80BFCD0: @ 80BFCD0
 	adds r4, r0, 0
 	ldr r6, _080BFD24 @ =0x00004082
 	adds r0, r6, 0
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0x1
@@ -110,7 +110,7 @@ sub_80BFCD0: @ 80BFCD0
 	blt _080BFD0A
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 _080BFD0A:
 	ldr r0, _080BFD34 @ =gUnknown_20370D2
 	strh r5, [r0]
@@ -143,7 +143,7 @@ _080BFD38:
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_80BFC50
+	bl GetHealLocationIndexFromMapGroupAndNum
 	adds r6, r0, 0
 	ldr r2, _080BFD80 @ =gUnknown_83EEC98
 	subs r0, r6, 0x1
@@ -217,7 +217,7 @@ _080BFDC0:
 	strh r0, [r4, 0x6]
 	ldr r0, _080BFDE8 @ =0x00004082
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	b _080BFDF4
 	.align 2, 0
 _080BFDE8: .4byte 0x00004082

@@ -50,7 +50,7 @@ sub_806C8BC: @ 806C8BC
 	ldrb r1, [r0, 0x2]
 	mov r8, r1
 	ldrb r6, [r0, 0x3]
-	bl sub_806CE74
+	bl cur_mapdata_block_role_at_player_pos
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8059D70
@@ -325,7 +325,7 @@ sub_806CAC8: @ 806CAC8
 	lsrs r6, r0, 24
 	mov r4, sp
 	mov r0, sp
-	bl sub_806CE20
+	bl player_get_pos_to_and_height
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -400,7 +400,7 @@ _0806CB74:
 _0806CB88:
 	mov r7, sp
 	mov r0, sp
-	bl sub_806CE38
+	bl player_get_next_pos_and_height
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -425,7 +425,7 @@ _0806CB88:
 _0806CBBC: .4byte gUnknown_3005078
 _0806CBC0:
 	mov r0, sp
-	bl sub_806CE20
+	bl player_get_pos_to_and_height
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -478,7 +478,7 @@ _0806CC28: .4byte gUnknown_3005078
 _0806CC2C:
 	mov r4, sp
 	mov r0, sp
-	bl sub_806CE38
+	bl player_get_next_pos_and_height
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -564,7 +564,7 @@ _0806CCCC:
 	orrs r0, r1
 	strb r0, [r2]
 	ldr r0, _0806CCF8 @ =0x0000083e
-	bl sub_806E680
+	bl FlagSet
 	movs r0, 0x6
 	bl sub_80722CC
 	bl sub_806F258
@@ -717,8 +717,8 @@ _0806CE18:
 	bx r0
 	thumb_func_end sub_806CDF8
 
-	thumb_func_start sub_806CE20
-sub_806CE20: @ 806CE20
+	thumb_func_start player_get_pos_to_and_height
+player_get_pos_to_and_height: @ 806CE20
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r1, r4, 0x2
@@ -728,10 +728,10 @@ sub_806CE20: @ 806CE20
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806CE20
+	thumb_func_end player_get_pos_to_and_height
 
-	thumb_func_start sub_806CE38
-sub_806CE38: @ 806CE38
+	thumb_func_start player_get_next_pos_and_height
+player_get_next_pos_and_height: @ 806CE38
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -759,10 +759,10 @@ _0806CE6A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806CE38
+	thumb_func_end player_get_next_pos_and_height
 
-	thumb_func_start sub_806CE74
-sub_806CE74: @ 806CE74
+	thumb_func_start cur_mapdata_block_role_at_player_pos
+cur_mapdata_block_role_at_player_pos: @ 806CE74
 	push {r4,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -782,7 +782,7 @@ sub_806CE74: @ 806CE74
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806CE74
+	thumb_func_end cur_mapdata_block_role_at_player_pos
 
 	thumb_func_start sub_806CEA0
 sub_806CEA0: @ 806CEA0
@@ -1026,7 +1026,7 @@ _0806D02A:
 	cmp r0, 0xFF
 	beq _0806D092
 _0806D078:
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	bne _0806D0A0
 	adds r0, r6, r5
@@ -1173,7 +1173,7 @@ _0806D17A:
 	ldr r1, _0806D1CC @ =gUnknown_20370C4
 	strh r0, [r1]
 	ldrh r0, [r4]
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1615,7 +1615,7 @@ sub_806D548: @ 806D548
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D570
-	bl sub_805C83C
+	bl PartyHasMonWithSurf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1626,17 +1626,17 @@ sub_806D548: @ 806D548
 _0806D56C: .4byte gUnknown_81A6B0D
 _0806D570:
 	ldr r0, _0806D59C @ =0x00000824
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D5A4
-	bl sub_805C83C
+	bl PartyHasMonWithSurf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D5A4
-	bl sub_805C8B0
+	bl IsPlayerFacingSurfableFishableWater
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1654,12 +1654,12 @@ _0806D5A4:
 	cmp r0, 0x1
 	bne _0806D5E0
 	ldr r0, _0806D5D0 @ =0x00000826
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D5D8
-	bl sub_805C88C
+	bl IsPlayerSurfingNorth
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1757,7 +1757,7 @@ sub_806D660: @ 806D660
 	lsrs r2, 16
 	ldrb r3, [r0, 0x4]
 	adds r0, r4, 0
-	bl sub_806DDC0
+	bl mapheader_trigger_activate_at
 	cmp r0, 0
 	beq _0806D68C
 	bl ScriptContext1_SetupScript
@@ -1784,14 +1784,14 @@ sub_806D698: @ 806D698
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_811B0D0
+	bl InUnionRoom
 	cmp r0, 0x1
 	beq _0806D72C
 	ldr r0, _0806D6E0 @ =gUnknown_203ADFA
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _0806D72C
-	bl sub_806D74C
+	bl AdjustFriendship_step
 	ldr r0, _0806D6E4 @ =gUnknown_2037078
 	ldrb r1, [r0]
 	movs r0, 0x40
@@ -1817,7 +1817,7 @@ _0806D6E0: .4byte gUnknown_203ADFA
 _0806D6E4: .4byte gUnknown_2037078
 _0806D6E8: .4byte gUnknown_81A8CED
 _0806D6EC:
-	bl sub_806D79C
+	bl overworld_poison_step
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1861,15 +1861,15 @@ sub_806D738: @ 806D738
 	push {lr}
 	ldr r0, _0806D748 @ =0x00004021
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0806D748: .4byte 0x00004021
 	thumb_func_end sub_806D738
 
-	thumb_func_start sub_806D74C
-sub_806D74C: @ 806D74C
+	thumb_func_start AdjustFriendship_step
+AdjustFriendship_step: @ 806D74C
 	push {r4,r5,lr}
 	ldr r0, _0806D780 @ =0x00004021
 	bl sub_806E454
@@ -1899,22 +1899,22 @@ _0806D77A:
 	.align 2, 0
 _0806D780: .4byte 0x00004021
 _0806D784: .4byte gUnknown_2024284
-	thumb_func_end sub_806D74C
+	thumb_func_end AdjustFriendship_step
 
-	thumb_func_start sub_806D788
-sub_806D788: @ 806D788
+	thumb_func_start overworld_poison_timer_set
+overworld_poison_timer_set: @ 806D788
 	push {lr}
 	ldr r0, _0806D798 @ =0x00004022
 	movs r1, 0
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0806D798: .4byte 0x00004022
-	thumb_func_end sub_806D788
+	thumb_func_end overworld_poison_timer_set
 
-	thumb_func_start sub_806D79C
-sub_806D79C: @ 806D79C
+	thumb_func_start overworld_poison_step
+overworld_poison_step: @ 806D79C
 	push {r4,lr}
 	ldr r0, _0806D7D8 @ =gUnknown_2036DFC
 	ldrb r0, [r0, 0x17]
@@ -1951,7 +1951,7 @@ _0806D7E2:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806D79C
+	thumb_func_end overworld_poison_step
 
 	thumb_func_start sub_806D7E8
 sub_806D7E8: @ 806D7E8
@@ -2531,7 +2531,7 @@ sub_806DC30: @ 806DC30
 	lsls r2, 16
 	lsrs r2, 16
 	ldrb r3, [r3, 0x4]
-	bl sub_806DD38
+	bl map_warp_check
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}
@@ -2651,8 +2651,8 @@ _0806DD32:
 	bx r1
 	thumb_func_end sub_806DCD0
 
-	thumb_func_start sub_806DD38
-sub_806DD38: @ 806DD38
+	thumb_func_start map_warp_check
+map_warp_check: @ 806DD38
 	push {r4-r6,lr}
 	lsls r1, 16
 	lsrs r6, r1, 16
@@ -2694,10 +2694,10 @@ _0806DD7A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DD38
+	thumb_func_end map_warp_check
 
-	thumb_func_start sub_806DD80
-sub_806DD80: @ 806DD80
+	thumb_func_start trigger_activate
+trigger_activate: @ 806DD80
 	push {r4,lr}
 	adds r4, r0, 0
 	cmp r4, 0
@@ -2713,7 +2713,7 @@ _0806DD96:
 	cmp r0, 0
 	beq _0806DDB0
 	ldrh r0, [r4, 0x6]
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	ldrb r1, [r4, 0x8]
@@ -2730,10 +2730,10 @@ _0806DDB8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DD80
+	thumb_func_end trigger_activate
 
-	thumb_func_start sub_806DDC0
-sub_806DDC0: @ 806DDC0
+	thumb_func_start mapheader_trigger_activate_at
+mapheader_trigger_activate_at: @ 806DDC0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2770,7 +2770,7 @@ _0806DDEC:
 	bne _0806DE0C
 _0806DE02:
 	adds r0, r5, 0
-	bl sub_806DD80
+	bl trigger_activate
 	cmp r0, 0
 	bne _0806DE18
 _0806DE0C:
@@ -2789,7 +2789,7 @@ _0806DE18:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DDC0
+	thumb_func_end mapheader_trigger_activate_at
 
 	thumb_func_start sub_806DE28
 sub_806DE28: @ 806DE28
@@ -2817,7 +2817,7 @@ sub_806DE28: @ 806DE28
 	bl sub_805FCD8
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E6A8
+	bl FlagClear
 _0806DE64:
 	pop {r4,r5}
 	pop {r0}
@@ -2884,7 +2884,7 @@ sub_806DEC4: @ 806DEC4
 	lsrs r2, 16
 	ldrb r3, [r0, 0x4]
 	adds r0, r4, 0
-	bl sub_806DDC0
+	bl mapheader_trigger_activate_at
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -3089,7 +3089,7 @@ GetFieldObjectScriptPointerForComparison: @ 806E050
 	lsrs r4, 24
 	mov r5, sp
 	mov r0, sp
-	bl sub_806CE38
+	bl player_get_next_pos_and_height
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -3115,7 +3115,7 @@ sub_806E08C: @ 806E08C
 	bl player_get_direction_upper_nybble
 	mov r4, sp
 	mov r0, sp
-	bl sub_806CE20
+	bl player_get_pos_to_and_height
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]

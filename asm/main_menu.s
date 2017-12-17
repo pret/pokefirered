@@ -150,7 +150,7 @@ sub_800C318: @ 800C318
 	bl ChangeBgY
 	ldr r0, _0800C4B8 @ =gUnknown_8234618
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	ldr r0, _0800C4BC @ =gUnknown_8234648
 	movs r1, 0
 	movs r2, 0x20
@@ -693,11 +693,11 @@ _0800C870:
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x2
 _0800C8D8:
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	b _0800C994
 	.align 2, 0
 _0800C8E0: .4byte gUnknown_8234688
@@ -764,13 +764,13 @@ _0800C8F0:
 	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x3
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0800C994:
 	ldr r0, _0800C9C4 @ =gUnknown_3005090
 	mov r2, r8
@@ -980,7 +980,7 @@ _0800CB2E:
 	ldr r1, _0800CB44 @ =gUnknown_2031DE0
 	movs r0, 0
 	strb r0, [r1]
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r6, 0
 	bl DestroyTask
 	bl sub_812EB2C
@@ -996,7 +996,7 @@ _0800CB48:
 	strh r1, [r0]
 	ldr r0, _0800CB6C @ =gUnknown_2031DE0
 	strb r2, [r0]
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r6, 0
 	bl sub_8110F14
 	b _0800CB84
@@ -1008,7 +1008,7 @@ _0800CB70:
 	ldr r0, _0800CB8C @ =sub_81422AC
 	bl SetMainCallback2
 	bl sub_812B478
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r6, 0
 	bl DestroyTask
 _0800CB84:
@@ -1360,7 +1360,7 @@ sub_800CDF8: @ 800CDF8
 	bl PutWindowTilemap
 	movs r0, 0x4
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r1, _0800CE50 @ =0x000013dd
 	movs r0, 0x40
 	bl SetGpuReg
@@ -1495,7 +1495,7 @@ sub_800CF3C: @ 800CF3C
 	push {r4-r6,lr}
 	sub sp, 0x2C
 	ldr r0, _0800CF60 @ =0x00000829
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1563,7 +1563,7 @@ sub_800CFC4: @ 800CFC4
 _0800CFCE:
 	lsls r0, r4, 16
 	lsrs r0, 16
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800CFE2

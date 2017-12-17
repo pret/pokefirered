@@ -329,7 +329,7 @@ _080DAA44:
 	bne _080DAA6C
 	ldr r0, _080DAA68 @ =0x00004033
 	movs r1, 0x1
-	bl sub_806E584
+	bl VarSet
 	b _080DAA70
 	.align 2, 0
 _080DAA60: .4byte gUnknown_2021D18

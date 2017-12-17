@@ -1100,7 +1100,7 @@ _08017668:
 	ldr r5, _080176B4 @ =gUnknown_2023BC4
 	ldrb r0, [r5]
 	adds r1, r4, 0
-	bl sub_8017A64
+	bl GetImprisonedMovesCount
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801768E
@@ -1410,7 +1410,7 @@ _080178EC:
 	ldrh r1, [r5]
 	adds r0, r7, 0
 	str r3, [sp, 0x14]
-	bl sub_8017A64
+	bl GetImprisonedMovesCount
 	lsls r0, 24
 	ldr r3, [sp, 0x14]
 	cmp r0, 0
@@ -1588,8 +1588,8 @@ _08017A5A:
 _08017A60: .4byte gUnknown_2023E8C
 	thumb_func_end sub_8017998
 
-	thumb_func_start sub_8017A64
-sub_8017A64: @ 8017A64
+	thumb_func_start GetImprisonedMovesCount
+GetImprisonedMovesCount: @ 8017A64
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1670,10 +1670,10 @@ _08017AE8:
 _08017AF8: .4byte gUnknown_2023BCC
 _08017AFC: .4byte gUnknown_2023BF0
 _08017B00: .4byte gUnknown_2023DFC
-	thumb_func_end sub_8017A64
+	thumb_func_end GetImprisonedMovesCount
 
-	thumb_func_start sub_8017B04
-sub_8017B04: @ 8017B04
+	thumb_func_start UpdateTurnCounters
+UpdateTurnCounters: @ 8017B04
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2578,10 +2578,10 @@ _08018232:
 	.align 2, 0
 _08018250: .4byte gUnknown_3004F84
 _08018254: .4byte sub_8013BD4
-	thumb_func_end sub_8017B04
+	thumb_func_end UpdateTurnCounters
 
-	thumb_func_start sub_8018258
-sub_8018258: @ 8018258
+	thumb_func_start TurnBasedEffects
+TurnBasedEffects: @ 8018258
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3858,7 +3858,7 @@ _08018C88: .4byte gUnknown_2023FE8
 _08018C8C: .4byte gUnknown_2023BCC
 _08018C90: .4byte gUnknown_2023DD0
 _08018C94: .4byte 0xfeffffdf
-	thumb_func_end sub_8018258
+	thumb_func_end TurnBasedEffects
 
 	thumb_func_start sub_8018C98
 sub_8018C98: @ 8018C98
@@ -5219,7 +5219,7 @@ _080197B8:
 	ldrb r0, [r4]
 	ldr r1, _08019800 @ =gUnknown_2023D4A
 	ldrh r1, [r1]
-	bl sub_8017A64
+	bl GetImprisonedMovesCount
 	lsls r0, 24
 	cmp r0, 0
 	bne _080197CC
@@ -5595,7 +5595,7 @@ _08019AAC:
 	beq _08019AF6
 	movs r0, 0x75
 	movs r1, 0x1
-	bl sub_801D05C
+	bl GetMoveTarget
 	strb r0, [r4]
 _08019AF6:
 	ldr r1, _08019B1C @ =gUnknown_2023D74
@@ -11930,8 +11930,8 @@ _0801CFDC: .4byte gUnknown_2023D74
 _0801CFE0: .4byte gUnknown_81D9622
 	thumb_func_end sub_801BC68
 
-	thumb_func_start sub_801CFE4
-sub_801CFE4: @ 801CFE4
+	thumb_func_start ClearFuryCutterDestinyBondGrudge
+ClearFuryCutterDestinyBondGrudge: @ 801CFE4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0801D01C @ =gUnknown_2023E0C
@@ -11965,7 +11965,7 @@ _0801D020: .4byte gUnknown_2023BE4
 _0801D024: .4byte 0xfdffffff
 _0801D028: .4byte gUnknown_2023DFC
 _0801D02C: .4byte 0xffffbfff
-	thumb_func_end sub_801CFE4
+	thumb_func_end ClearFuryCutterDestinyBondGrudge
 
 	thumb_func_start sub_801D030
 sub_801D030: @ 801D030
@@ -11991,8 +11991,8 @@ _0801D054: .4byte gUnknown_825011C
 _0801D058: .4byte gUnknown_2023D74
 	thumb_func_end sub_801D030
 
-	thumb_func_start sub_801D05C
-sub_801D05C: @ 801D05C
+	thumb_func_start GetMoveTarget
+GetMoveTarget: @ 801D05C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -12352,10 +12352,10 @@ _0801D39C:
 	.align 2, 0
 _0801D3B8: .4byte gUnknown_2023D6B
 _0801D3BC: .4byte gUnknown_2023FE8
-	thumb_func_end sub_801D05C
+	thumb_func_end GetMoveTarget
 
-	thumb_func_start sub_801D3C0
-sub_801D3C0: @ 801D3C0
+	thumb_func_start HasObedientBitSet
+HasObedientBitSet: @ 801D3C0
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -12412,7 +12412,7 @@ _0801D42A:
 	.align 2, 0
 _0801D430: .4byte gUnknown_2023BCE
 _0801D434: .4byte gUnknown_2024284
-	thumb_func_end sub_801D3C0
+	thumb_func_end HasObedientBitSet
 
 	thumb_func_start sub_801D438
 sub_801D438: @ 801D438
@@ -12435,7 +12435,7 @@ sub_801D438: @ 801D438
 	cmp r0, 0x1
 	beq _0801D4F4
 	ldrb r0, [r4]
-	bl sub_801D3C0
+	bl HasObedientBitSet
 	cmp r0, 0
 	beq _0801D4BE
 	ldr r2, _0801D504 @ =gUnknown_2023BE4
@@ -12453,27 +12453,27 @@ sub_801D438: @ 801D438
 	cmp r0, 0
 	beq _0801D4F4
 	ldr r0, _0801D508 @ =0x00000827
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801D4F4
 	movs r6, 0xA
 	ldr r0, _0801D50C @ =0x00000821
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801D4A2
 	movs r6, 0x1E
 _0801D4A2:
 	ldr r0, _0801D510 @ =0x00000823
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801D4B0
 	movs r6, 0x32
 _0801D4B0:
 	ldr r0, _0801D514 @ =0x00000825
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801D4BE
@@ -12628,7 +12628,7 @@ _0801D5B6:
 	str r0, [r1]
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_801D05C
+	bl GetMoveTarget
 	ldr r1, _0801D62C @ =gUnknown_2023D6C
 	strb r0, [r1]
 	ldr r2, _0801D630 @ =gUnknown_2023DD0

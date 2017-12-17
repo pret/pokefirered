@@ -353,7 +353,7 @@ sub_80A122C: @ 80A122C
 	lsrs r4, r0, 24
 	movs r0, 0x83
 	lsls r0, 4
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -526,7 +526,7 @@ sub_80A137C: @ 80A137C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A13D4
-	bl sub_805C8B0
+	bl IsPlayerFacingSurfableFishableWater
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A1404
@@ -1281,7 +1281,7 @@ sub_80A1998: @ 80A1998
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _080A19C0 @ =0x00004020
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	cmp r0, 0
 	bne _080A19CC
@@ -1336,7 +1336,7 @@ sub_80A19E8: @ 80A19E8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_806E584
+	bl VarSet
 	bl sub_80A1A44
 	ldr r2, _080A1A3C @ =gUnknown_2021D18
 	ldr r3, _080A1A40 @ =sub_810A1F8
@@ -1404,9 +1404,9 @@ sub_80A1A94: @ 80A1A94
 	cmp r0, 0x2B
 	bne _080A1AF4
 	ldr r0, _080A1ADC @ =0x00000803
-	bl sub_806E680
+	bl FlagSet
 	ldr r0, _080A1AE0 @ =0x00000804
-	bl sub_806E6A8
+	bl FlagClear
 	ldrh r0, [r5]
 	ldr r1, _080A1AE4 @ =gUnknown_2021CF0
 	bl sub_8099E90
@@ -1430,9 +1430,9 @@ _080A1AF4:
 	cmp r0, 0x2A
 	bne _080A1B26
 	ldr r0, _080A1B2C @ =0x00000804
-	bl sub_806E680
+	bl FlagSet
 	ldr r0, _080A1B30 @ =0x00000803
-	bl sub_806E6A8
+	bl FlagClear
 	ldrh r0, [r5]
 	ldr r1, _080A1B34 @ =gUnknown_2021CF0
 	bl sub_8099E90
@@ -2132,7 +2132,7 @@ sub_80A2068: @ 80A2068
 	lsrs r4, r0, 24
 	ldr r0, _080A208C @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_8126C68
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -2261,7 +2261,7 @@ sub_80A2194: @ 80A2194
 	lsrs r4, r0, 24
 	ldr r0, _080A21B4 @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_8126C68
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x15

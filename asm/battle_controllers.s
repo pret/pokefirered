@@ -29,7 +29,7 @@ _0800D256:
 	ldr r0, _0800D274 @ =sub_8081A90
 	movs r1, 0
 	bl CreateTask
-	bl sub_800D93C
+	bl CreateTasksForSendRecvLinkBuffers
 _0800D262:
 	pop {r0}
 	bx r0
@@ -818,8 +818,8 @@ _0800D89C:
 _0800D8AC: .4byte gUnknown_2023BCC
 	thumb_func_end sub_800D768
 
-	thumb_func_start sub_800D8B0
-sub_800D8B0: @ 800D8B0
+	thumb_func_start PrepareBufferDataTransfer
+PrepareBufferDataTransfer: @ 800D8B0
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -836,7 +836,7 @@ sub_800D8B0: @ 800D8B0
 	adds r0, r3, 0
 	adds r1, r2, 0
 	adds r2, r4, 0
-	bl sub_800D9EC
+	bl PrepareBufferDataTransferLink
 	b _0800D92E
 	.align 2, 0
 _0800D8D8: .4byte gUnknown_2022B4C
@@ -891,10 +891,10 @@ _0800D92E:
 	.align 2, 0
 _0800D934: .4byte gUnknown_20233C4
 _0800D938: .4byte gUnknown_2023BC4
-	thumb_func_end sub_800D8B0
+	thumb_func_end PrepareBufferDataTransfer
 
-	thumb_func_start sub_800D93C
-sub_800D93C: @ 800D93C
+	thumb_func_start CreateTasksForSendRecvLinkBuffers
+CreateTasksForSendRecvLinkBuffers: @ 800D93C
 	push {r4-r6,lr}
 	ldr r0, _0800D9D4 @ =sub_800DB6C
 	movs r1, 0
@@ -975,10 +975,10 @@ _0800D9DC: .4byte gUnknown_3005090
 _0800D9E0: .4byte Task_HandleCopyReceivedLinkBuffersData
 _0800D9E4: .4byte gUnknown_202286D
 _0800D9E8: .4byte gUnknown_202286E
-	thumb_func_end sub_800D93C
+	thumb_func_end CreateTasksForSendRecvLinkBuffers
 
-	thumb_func_start sub_800D9EC
-sub_800D9EC: @ 800D9EC
+	thumb_func_start PrepareBufferDataTransferLink
+PrepareBufferDataTransferLink: @ 800D9EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1167,7 +1167,7 @@ _0800DB5C: .4byte gUnknown_2023D6B
 _0800DB60: .4byte gUnknown_2023D6C
 _0800DB64: .4byte gUnknown_2023D70
 _0800DB68: .4byte gUnknown_2023D6E
-	thumb_func_end sub_800D9EC
+	thumb_func_end PrepareBufferDataTransferLink
 
 	thumb_func_start sub_800DB6C
 sub_800DB6C: @ 800DB6C
@@ -1722,7 +1722,7 @@ EmitGetMonData: @ 800DFA4
 	strb r2, [r1, 0x2]
 	strb r3, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1744,7 +1744,7 @@ EmitGetRawMonData: @ 800DFC8
 	strb r2, [r1, 0x2]
 	strb r4, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1781,7 +1781,7 @@ _0800E010:
 _0800E01E:
 	adds r2, r5, 0x3
 	adds r0, r6, 0
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1818,7 +1818,7 @@ _0800E05C:
 	adds r2, r4, 0x3
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1837,7 +1837,7 @@ EmitLoadMonSprite: @ 800E070
 	strb r2, [r1, 0x1]
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1857,7 +1857,7 @@ EmitSwitchInAnim: @ 800E090
 	strb r2, [r1, 0x2]
 	strb r3, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1876,7 +1876,7 @@ EmitReturnMonToBall: @ 800E0B4
 	strb r2, [r1]
 	strb r3, [r1, 0x1]
 	movs r2, 0x2
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1895,7 +1895,7 @@ EmitDrawTrainerPic: @ 800E0D4
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1914,7 +1914,7 @@ EmitTrainerSlide: @ 800E0F4
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1933,7 +1933,7 @@ EmitTrainerSlideBack: @ 800E114
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1952,7 +1952,7 @@ EmitFaintAnimation: @ 800E134
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1971,7 +1971,7 @@ EmitPaletteFade: @ 800E154
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1990,7 +1990,7 @@ EmitSuccessBallThrowAnim: @ 800E174
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2008,7 +2008,7 @@ EmitBallThrowAnim: @ 800E194
 	strb r2, [r1]
 	strb r3, [r1, 0x1]
 	movs r2, 0x2
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2047,7 +2047,7 @@ _0800E1E2:
 	adds r2, 0x2
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2150,7 +2150,7 @@ _0800E2A6:
 	mov r0, r8
 	adds r1, r4, 0
 	movs r2, 0x2C
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -2267,7 +2267,7 @@ _0800E378:
 	mov r0, r10
 	mov r1, r9
 	movs r2, 0x44
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -2380,7 +2380,7 @@ _0800E46C:
 	mov r0, r10
 	mov r1, r9
 	movs r2, 0x44
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -2418,7 +2418,7 @@ EmitChooseAction: @ 800E4D4
 	lsrs r2, 8
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2437,7 +2437,7 @@ sub_800E500: @ 800E500
 	strb r2, [r1]
 	strb r3, [r1, 0x1]
 	movs r2, 0x2
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2470,7 +2470,7 @@ _0800E53C:
 	bls _0800E53C
 	adds r0, r6, 0
 	movs r2, 0x18
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2499,7 +2499,7 @@ _0800E56E:
 	ble _0800E56E
 	adds r0, r5, 0
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2532,7 +2532,7 @@ _0800E5AA:
 	ble _0800E5AA
 	adds r0, r5, 0
 	movs r2, 0x8
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2552,7 +2552,7 @@ EmitCmd23: @ 800E5CC
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2581,7 +2581,7 @@ EmitHealthBarUpdate: @ 800E5EC
 	strb r1, [r3, 0x3]
 	adds r1, r3, 0
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2610,7 +2610,7 @@ EmitExpUpdate: @ 800E624
 	asrs r2, 8
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2654,7 +2654,7 @@ EmitStatusIconUpdate: @ 800E658
 	lsrs r2, 24
 	strb r2, [r1, 0x8]
 	movs r2, 0x9
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2686,7 +2686,7 @@ EmitStatusAnimation: @ 800E6AC
 	lsrs r2, 24
 	strb r2, [r1, 0x5]
 	movs r2, 0x6
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2705,7 +2705,7 @@ EmitStatusXor: @ 800E6E8
 	strb r2, [r1]
 	strb r3, [r1, 0x1]
 	movs r2, 0x2
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2745,7 +2745,7 @@ _0800E738:
 	lsrs r2, 16
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2801,7 +2801,7 @@ _0800E7A0:
 	lsls r2, 16
 	lsrs r2, 16
 	adds r0, r6, 0
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2841,7 +2841,7 @@ _0800E7E6:
 	lsrs r2, 16
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2881,7 +2881,7 @@ _0800E82E:
 	lsrs r2, 16
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2905,7 +2905,7 @@ EmitTwoReturnValues: @ 800E848
 	lsrs r2, 8
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2936,7 +2936,7 @@ _0800E888:
 	adds r0, r5, 0
 	adds r1, r2, 0
 	movs r2, 0x5
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2961,7 +2961,7 @@ EmitOneReturnValue: @ 800E8AC
 	strb r4, [r3, 0x3]
 	adds r1, r3, 0
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2986,7 +2986,7 @@ EmitOneReturnValue_Duplicate: @ 800E8D8
 	strb r4, [r3, 0x3]
 	adds r1, r3, 0
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3006,7 +3006,7 @@ EmitCmd37: @ 800E904
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3024,7 +3024,7 @@ EmitCmd38: @ 800E924
 	strb r2, [r1]
 	strb r3, [r1, 0x1]
 	movs r2, 0x2
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3043,7 +3043,7 @@ EmitCmd39: @ 800E944
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3062,7 +3062,7 @@ EmitCmd40: @ 800E964
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3081,7 +3081,7 @@ EmitHitAnimation: @ 800E984
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3100,7 +3100,7 @@ EmitCmd42: @ 800E9A4
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3124,7 +3124,7 @@ EmitPlaySE: @ 800E9C4
 	strb r4, [r3, 0x3]
 	adds r1, r3, 0
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3149,7 +3149,7 @@ sub_800E9F0: @ 800E9F0
 	strb r4, [r3, 0x3]
 	adds r1, r3, 0
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3169,7 +3169,7 @@ EmitFaintingCry: @ 800EA1C
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3187,7 +3187,7 @@ EmitIntroSlide: @ 800EA3C
 	strb r2, [r1]
 	strb r3, [r1, 0x1]
 	movs r2, 0x2
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3206,7 +3206,7 @@ EmitIntroTrainerBallThrow: @ 800EA5C
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3245,7 +3245,7 @@ _0800EAA4:
 	ble _0800EAA4
 	adds r0, r5, 0
 	movs r2, 0x34
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3265,7 +3265,7 @@ EmitCmd49: @ 800EAC4
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3284,7 +3284,7 @@ EmitCmd50: @ 800EAE4
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3304,7 +3304,7 @@ EmitSpriteInvisibility: @ 800EB04
 	strb r2, [r1, 0x2]
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3327,7 +3327,7 @@ EmitBattleAnimation: @ 800EB28
 	lsrs r2, 8
 	strb r2, [r1, 0x3]
 	movs r2, 0x4
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3346,7 +3346,7 @@ sub_800EB54: @ 800EB54
 	strb r2, [r1]
 	strb r3, [r1, 0x1]
 	movs r2, 0x2
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3364,7 +3364,7 @@ sub_800EB74: @ 800EB74
 	strb r2, [r1]
 	strb r3, [r1, 0x1]
 	movs r2, 0x2
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3382,7 +3382,7 @@ sub_800EB94: @ 800EB94
 	strb r2, [r1]
 	strb r3, [r1, 0x1]
 	movs r2, 0x2
-	bl sub_800D8B0
+	bl PrepareBufferDataTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0

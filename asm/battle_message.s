@@ -899,7 +899,7 @@ _080D79C2:
 	adds r0, r1, 0
 _080D79C4:
 	adds r1, r4, 0
-	bl sub_80D8418
+	bl ExpandBattleTextBuffPlaceholders
 	bl _080D8382
 	.align 2, 0
 _080D79D0: .4byte gUnknown_2022AD8
@@ -1710,7 +1710,7 @@ _080D806E:
 	ands r1, r0
 	cmp r1, 0
 	beq _080D8084
-	bl sub_80E7440
+	bl GetEreaderTrainerClassId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0xD
@@ -2033,7 +2033,7 @@ _080D82F0: .4byte gUnknown_2023FE8
 _080D82F4: .4byte gUnknown_2024284
 _080D82F8:
 	ldr r0, _080D830C @ =0x00000834
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	ldr r4, _080D8310 @ =gUnknown_83FD81A
 	cmp r0, 0
@@ -2179,8 +2179,8 @@ _080D83FA:
 	bx r1
 	thumb_func_end sub_80D7868
 
-	thumb_func_start sub_80D8418
-sub_80D8418: @ 80D8418
+	thumb_func_start ExpandBattleTextBuffPlaceholders
+ExpandBattleTextBuffPlaceholders: @ 80D8418
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2516,7 +2516,7 @@ _080D86BA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D8418
+	thumb_func_end ExpandBattleTextBuffPlaceholders
 
 	thumb_func_start sub_80D86C8
 sub_80D86C8: @ 80D86C8
@@ -2889,7 +2889,7 @@ _080D8982:
 	mov r0, sp
 	adds r1, r3, 0
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	movs r0, 0x80
 	mov r1, r8
 	ands r1, r0
@@ -2899,7 +2899,7 @@ _080D8982:
 	bl PutWindowTilemap
 	adds r0, r7, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _080D89A4:
 	add sp, 0x10
 	pop {r3}

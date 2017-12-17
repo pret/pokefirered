@@ -4176,7 +4176,7 @@ _08037D18:
 	ands r1, r0
 	cmp r1, 0
 	beq _08037D2C
-	bl sub_80E7420
+	bl GetEreaderTrainerFrontSpriteId
 _08037D26:
 	lsls r0, 24
 	lsrs r0, 24
@@ -4395,7 +4395,7 @@ _08037EEC:
 	ands r1, r0
 	cmp r1, 0
 	beq _08037F00
-	bl sub_80E7420
+	bl GetEreaderTrainerFrontSpriteId
 _08037EFA:
 	lsls r0, 24
 	lsrs r0, 24

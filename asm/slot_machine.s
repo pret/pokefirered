@@ -3293,7 +3293,7 @@ sub_8141094: @ 8141094
 	bl DestroyTask
 _081410BA:
 	bl sub_8140C50
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3887,7 +3887,7 @@ _08141594:
 	bl sub_81417E4
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -3926,7 +3926,7 @@ _081415D8:
 	bl sub_8141AD8
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -3963,7 +3963,7 @@ _08141620:
 	bl sub_8141B18
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]

@@ -102,7 +102,7 @@ _080CD2E2:
 _080CD302:
 	ldr r0, _080CD310 @ =gUnknown_83F6C68
 	bl sub_8003B24
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	b _080CD324
 	.align 2, 0
 _080CD310: .4byte gUnknown_83F6C68
@@ -294,7 +294,7 @@ sub_80CD460: @ 80CD460
 	bl Free
 	movs r0, 0
 	bl sub_80CD4A4
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	adds r0, r4, 0
 	bl DestroyTask
 _080CD490:
@@ -320,9 +320,9 @@ sub_80CD4A4: @ 80CD4A4
 	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r4, 0
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -856,8 +856,8 @@ _080CD8BE:
 	bx r0
 	thumb_func_end sub_80CD854
 
-	thumb_func_start sub_80CD8DC
-sub_80CD8DC: @ 80CD8DC
+	thumb_func_start InitLinkBattleRecords
+InitLinkBattleRecords: @ 80CD8DC
 	push {lr}
 	ldr r0, _080CD8F0 @ =gUnknown_300500C
 	ldr r0, [r0]
@@ -869,7 +869,7 @@ sub_80CD8DC: @ 80CD8DC
 	.align 2, 0
 _080CD8F0: .4byte gUnknown_300500C
 _080CD8F4: .4byte 0x00000a98
-	thumb_func_end sub_80CD8DC
+	thumb_func_end InitLinkBattleRecords
 
 	thumb_func_start sub_80CD8F8
 sub_80CD8F8: @ 80CD8F8
@@ -1355,7 +1355,7 @@ sub_80CDCB4: @ 80CDCB4
 	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	pop {r4}
 	pop {r0}
 	bx r0

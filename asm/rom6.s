@@ -311,7 +311,7 @@ _080C9A0C: .4byte sub_80C9A10
 	thumb_func_start sub_80C9A10
 sub_80C9A10: @ 80C9A10
 	push {lr}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _080C9A28 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -325,8 +325,8 @@ _080C9A28: .4byte gUnknown_20386E0
 _080C9A2C: .4byte gUnknown_81BE064
 	thumb_func_end sub_80C9A10
 
-	thumb_func_start sub_80C9A30
-sub_80C9A30: @ 80C9A30
+	thumb_func_start oei_rocksmash
+oei_rocksmash: @ 80C9A30
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -348,7 +348,7 @@ sub_80C9A30: @ 80C9A30
 	.align 2, 0
 _080C9A58: .4byte gUnknown_3005090
 _080C9A5C: .4byte sub_80C9A60
-	thumb_func_end sub_80C9A30
+	thumb_func_end oei_rocksmash
 
 	thumb_func_start sub_80C9A60
 sub_80C9A60: @ 80C9A60
@@ -377,7 +377,7 @@ _080C9A8A:
 	ldr r0, _080C9AA0 @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _080C9AA4 @ =gUnknown_203B0C4
-	ldr r0, _080C9AA8 @ =sub_80C9AAC
+	ldr r0, _080C9AA8 @ =hm2_dig
 	str r0, [r1]
 	movs r0, 0x1
 _080C9A98:
@@ -387,16 +387,16 @@ _080C9A98:
 _080C9A9C: .4byte gUnknown_3005024
 _080C9AA0: .4byte hm_add_c3_launch_phase_2
 _080C9AA4: .4byte gUnknown_203B0C4
-_080C9AA8: .4byte sub_80C9AAC
+_080C9AA8: .4byte hm2_dig
 	thumb_func_end sub_80C9A78
 
-	thumb_func_start sub_80C9AAC
-sub_80C9AAC: @ 80C9AAC
+	thumb_func_start hm2_dig
+hm2_dig: @ 80C9AAC
 	push {lr}
 	bl sub_8054D70
 	movs r0, 0x26
 	bl FieldEffectStart
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	ldr r1, _080C9AC8 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -405,7 +405,7 @@ sub_80C9AAC: @ 80C9AAC
 	bx r0
 	.align 2, 0
 _080C9AC8: .4byte gUnknown_20386E0
-	thumb_func_end sub_80C9AAC
+	thumb_func_end hm2_dig
 
 	thumb_func_start sub_80C9ACC
 sub_80C9ACC: @ 80C9ACC

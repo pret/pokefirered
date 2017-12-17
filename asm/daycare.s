@@ -162,7 +162,7 @@ StorePokemonInDaycare: @ 80454CC
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl sub_8097D08
+	bl MonHasMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08045524
@@ -245,7 +245,7 @@ sub_804555C: @ 804555C
 	thumb_func_start sub_8045580
 sub_8045580: @ 8045580
 	push {lr}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -704,7 +704,7 @@ _08045906:
 	subs r1, 0x1
 	cmp r1, r2
 	bge _08045906
-	bl sub_8097CB4
+	bl ClearMailStruct
 	pop {r0}
 	bx r0
 	thumb_func_end ClearDaycareMonMisc
@@ -845,7 +845,7 @@ sub_80459F0: @ 80459F0
 	adds r4, r1
 	strh r0, [r4]
 	ldr r0, _08045A1C @ =0x00000266
-	bl sub_806E680
+	bl FlagSet
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -868,7 +868,7 @@ sub_8045A20: @ 8045A20
 	orrs r1, r0
 	strh r1, [r4]
 	ldr r0, _08045A44 @ =0x00000266
-	bl sub_806E680
+	bl FlagSet
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1274,7 +1274,7 @@ _08045D24:
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08045DE4 @ =gUnknown_20244F8
-	bl sub_8043DD4
+	bl GetLevelUpMovesBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -2154,8 +2154,8 @@ sub_80463FC: @ 80463FC
 	bx lr
 	thumb_func_end sub_80463FC
 
-	thumb_func_start sub_804640C
-sub_804640C: @ 804640C
+	thumb_func_start _GetDaycareMonNicknames
+_GetDaycareMonNicknames: @ 804640C
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -2192,12 +2192,12 @@ _0804644C:
 _08046454: .4byte gUnknown_2021CD0
 _08046458: .4byte gUnknown_2021D04
 _0804645C: .4byte gUnknown_2021CF0
-	thumb_func_end sub_804640C
+	thumb_func_end _GetDaycareMonNicknames
 
-	thumb_func_start sub_8046460
-sub_8046460: @ 8046460
+	thumb_func_start GetSelectedMonNickAndSpecies
+GetSelectedMonNickAndSpecies: @ 8046460
 	push {r4,r5,lr}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0x64
@@ -2206,7 +2206,7 @@ sub_8046460: @ 8046460
 	adds r0, r4
 	ldr r1, _08046498 @ =gUnknown_2021CD0
 	bl GetBoxMonNick
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r5
@@ -2221,22 +2221,22 @@ sub_8046460: @ 8046460
 	.align 2, 0
 _08046494: .4byte gUnknown_2024284
 _08046498: .4byte gUnknown_2021CD0
-	thumb_func_end sub_8046460
+	thumb_func_end GetSelectedMonNickAndSpecies
 
-	thumb_func_start sub_804649C
-sub_804649C: @ 804649C
+	thumb_func_start GetDaycareMonNicknames
+GetDaycareMonNicknames: @ 804649C
 	push {lr}
 	ldr r0, _080464B0 @ =gUnknown_3005008
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
 	adds r0, r1
-	bl sub_804640C
+	bl _GetDaycareMonNicknames
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080464B0: .4byte gUnknown_3005008
-	thumb_func_end sub_804649C
+	thumb_func_end GetDaycareMonNicknames
 
 	thumb_func_start sub_80464B4
 sub_80464B4: @ 80464B4
@@ -2830,7 +2830,7 @@ DaycareAddTextPrinter: @ 8046898
 	mov r0, sp
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -2961,8 +2961,8 @@ _080469EE:
 _080469F8: .4byte gUnknown_3005008
 	thumb_func_end DaycarePrintMonInfo
 
-	thumb_func_start sub_80469FC
-sub_80469FC: @ 80469FC
+	thumb_func_start Task_HandleDaycareLevelMenuInput
+Task_HandleDaycareLevelMenuInput: @ 80469FC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3013,7 +3013,7 @@ _08046A46:
 	movs r1, 0x1
 	bl sub_80F6F9C
 	ldrb r0, [r4, 0xA]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r5, 0
 	bl DestroyTask
 	bl EnableBothScriptContexts
@@ -3037,7 +3037,7 @@ _08046A7C:
 	movs r1, 0x1
 	bl sub_80F6F9C
 	ldrb r0, [r4, 0xA]
-	bl sub_8003E3C
+	bl RemoveWindow
 	adds r0, r5, 0
 	bl DestroyTask
 	bl EnableBothScriptContexts
@@ -3047,10 +3047,10 @@ _08046AAC:
 	bx r0
 	.align 2, 0
 _08046AB4: .4byte gUnknown_20370D0
-	thumb_func_end sub_80469FC
+	thumb_func_end Task_HandleDaycareLevelMenuInput
 
-	thumb_func_start sub_8046AB8
-sub_8046AB8: @ 8046AB8
+	thumb_func_start ShowDaycareLevelMenu
+ShowDaycareLevelMenu: @ 8046AB8
 	push {r4,r5,lr}
 	sub sp, 0x18
 	ldr r0, _08046B18 @ =gUnknown_825F7F4
@@ -3077,8 +3077,8 @@ sub_8046AB8: @ 8046AB8
 	lsrs r5, 24
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
-	ldr r0, _08046B20 @ =sub_80469FC
+	bl CopyWindowToVram
+	ldr r0, _08046B20 @ =Task_HandleDaycareLevelMenuInput
 	movs r1, 0x3
 	bl CreateTask
 	lsls r0, 24
@@ -3097,12 +3097,12 @@ sub_8046AB8: @ 8046AB8
 	.align 2, 0
 _08046B18: .4byte gUnknown_825F7F4
 _08046B1C: .4byte gUnknown_825F814
-_08046B20: .4byte sub_80469FC
+_08046B20: .4byte Task_HandleDaycareLevelMenuInput
 _08046B24: .4byte gUnknown_3005090
-	thumb_func_end sub_8046AB8
+	thumb_func_end ShowDaycareLevelMenu
 
-	thumb_func_start sub_8046B28
-sub_8046B28: @ 8046B28
+	thumb_func_start ChooseSendDaycareMon
+ChooseSendDaycareMon: @ 8046B28
 	push {lr}
 	bl sub_8128370
 	ldr r1, _08046B38 @ =gUnknown_30030F0
@@ -3113,12 +3113,12 @@ sub_8046B28: @ 8046B28
 	.align 2, 0
 _08046B38: .4byte gUnknown_30030F0
 _08046B3C: .4byte c2_exit_to_overworld_2_switch
-	thumb_func_end sub_8046B28
+	thumb_func_end ChooseSendDaycareMon
 
 	thumb_func_start sub_8046B40
 sub_8046B40: @ 8046B40
 	push {lr}
-	bl sub_811FB0C
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64

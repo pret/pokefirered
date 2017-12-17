@@ -864,7 +864,7 @@ _0809E06C:
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
@@ -893,7 +893,7 @@ pokemon_transfer_to_pc_with_message: @ 809E0B4
 	bne _0809E104
 	ldr r4, _0809E0F0 @ =gUnknown_2021CD0
 	ldr r0, _0809E0F4 @ =0x00004037
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBoxNamePtr
@@ -917,7 +917,7 @@ _0809E100: .4byte 0x00001e30
 _0809E104:
 	ldr r4, _0809E1AC @ =gUnknown_2021CD0
 	ldr r0, _0809E1B0 @ =0x00004037
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBoxNamePtr
@@ -942,7 +942,7 @@ _0809E104:
 	movs r5, 0x2
 _0809E144:
 	ldr r0, _0809E1C4 @ =0x00000834
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809E156
@@ -980,10 +980,10 @@ _0809E156:
 	movs r0, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_80F6CD0
+	bl AddTextPrinterParametrized
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -2789,7 +2789,7 @@ sub_809EF54: @ 809EF54
 	str r2, [sp]
 	movs r2, 0x38
 	movs r3, 0x25
-	bl sub_805E978
+	bl AddPseudoFieldObject
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3498,7 +3498,7 @@ sub_809F49C: @ 809F49C
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -3553,7 +3553,7 @@ sub_809F4F0: @ 809F4F0
 	movs r1, 0x1
 	add r2, sp, 0xC
 	movs r3, 0x1
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -4123,7 +4123,7 @@ _0809F97A:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	add r2, sp, 0xC
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4137,7 +4137,7 @@ _0809F9AA:
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -4326,7 +4326,7 @@ sub_809FAE4: @ 809FAE4
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3

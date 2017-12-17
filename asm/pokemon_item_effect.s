@@ -238,7 +238,7 @@ _08041598:
 	mov r0, r8
 	movs r2, 0
 	ldr r3, [sp, 0xC]
-	bl sub_80CDDA8
+	bl BeginEvolutionScene
 	movs r0, 0
 	bl _08042394
 _080415A8:

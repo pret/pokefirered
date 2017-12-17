@@ -11,7 +11,7 @@ sub_8098110: @ 8098110
 	adds r6, r0, 0
 	movs r0, 0x80
 	lsls r0, 7
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -173,7 +173,7 @@ _0809824C:
 	bl sub_8098400
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	strh r0, [r4, 0x8]
 	movs r0, 0
@@ -196,7 +196,7 @@ _0809827E:
 	bl rbox_fill_rectangle
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0x1
 	strh r0, [r4, 0x14]
 _080982A0:
@@ -214,7 +214,7 @@ _080982A6:
 	cmp r0, 0
 	beq _080982C6
 	ldrb r0, [r4, 0x10]
-	bl sub_8003E3C
+	bl RemoveWindow
 	strh r5, [r4, 0x12]
 	movs r0, 0x1
 	strh r0, [r4, 0x16]
@@ -367,7 +367,7 @@ _080983C6:
 	bl sub_8098400
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	adds r0, r5, 0
 	add sp, 0x8
 	pop {r4-r6}
@@ -429,7 +429,7 @@ _08098434:
 	movs r1, 0x2
 	add r2, sp, 0xC
 	adds r3, r4, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0x28
 	pop {r4-r6}
 	pop {r0}

@@ -3330,8 +3330,8 @@ _08043C7A:
 _08043C80: .4byte gUnknown_8252BC8
 	thumb_func_end sub_8043C2C
 
-	thumb_func_start sub_8043C84
-sub_8043C84: @ 8043C84
+	thumb_func_start GetMoveRelearnerMoves
+GetMoveRelearnerMoves: @ 8043C84
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3502,10 +3502,10 @@ _08043DB4:
 _08043DC8: .4byte gUnknown_825D7B4
 _08043DCC: .4byte 0x0000ffff
 _08043DD0: .4byte 0x000001ff
-	thumb_func_end sub_8043C84
+	thumb_func_end GetMoveRelearnerMoves
 
-	thumb_func_start sub_8043DD4
-sub_8043DD4: @ 8043DD4
+	thumb_func_start GetLevelUpMovesBySpecies
+GetLevelUpMovesBySpecies: @ 8043DD4
 	push {r4-r7,lr}
 	adds r6, r1, 0
 	lsls r0, 16
@@ -3550,10 +3550,10 @@ _08043E18:
 _08043E20: .4byte gUnknown_825D7B4
 _08043E24: .4byte 0x0000ffff
 _08043E28: .4byte 0x000001ff
-	thumb_func_end sub_8043DD4
+	thumb_func_end GetLevelUpMovesBySpecies
 
-	thumb_func_start sub_8043E2C
-sub_8043E2C: @ 8043E2C
+	thumb_func_start GetNumberOfRelearnableMoves
+GetNumberOfRelearnableMoves: @ 8043E2C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3736,7 +3736,7 @@ _08043F72:
 _08043F84: .4byte gUnknown_825D7B4
 _08043F88: .4byte 0x0000ffff
 _08043F8C: .4byte 0x000001ff
-	thumb_func_end sub_8043E2C
+	thumb_func_end GetNumberOfRelearnableMoves
 
 	thumb_func_start sub_8043F90
 sub_8043F90: @ 8043F90
@@ -4662,8 +4662,8 @@ _0804466C: .4byte gUnknown_30030F0
 _08044670: .4byte 0x00000439
 	thumb_func_end sub_804455C
 
-	thumb_func_start sub_8044674
-sub_8044674: @ 8044674
+	thumb_func_start GetDeoxysStat
+GetDeoxysStat: @ 8044674
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
@@ -4736,7 +4736,7 @@ _080446FE:
 	bx r1
 	.align 2, 0
 _08044704: .4byte gUnknown_825E026
-	thumb_func_end sub_8044674
+	thumb_func_end GetDeoxysStat
 
 	thumb_func_start sub_8044708
 sub_8044708: @ 8044708

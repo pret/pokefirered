@@ -20,7 +20,7 @@ _0813F680:
 	ldr r0, _0813F6CC @ =gUnknown_846483C
 	bl sub_8003B24
 _0813F686:
-	bl sub_8002C28
+	bl DeactivateAllTextPrinters
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
@@ -153,7 +153,7 @@ sub_813F75C: @ 813F75C
 	movs r1, 0x2
 	movs r2, 0x13
 	movs r3, 0xE
-	bl sub_80BF474
+	bl DisplayMessageAndContinueTask
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x10

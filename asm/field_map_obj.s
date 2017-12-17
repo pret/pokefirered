@@ -757,7 +757,7 @@ sub_805E384: @ 805E384
 	cmp r0, 0xE
 	bhi _0805E39A
 	ldrh r0, [r1, 0x14]
-	bl sub_806E680
+	bl FlagSet
 _0805E39A:
 	pop {r0}
 	bx r0
@@ -806,7 +806,7 @@ _0805E3D8:
 	cmp r0, r8
 	bne _0805E3FA
 	ldrh r0, [r4, 0x14]
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E3BC
@@ -952,7 +952,7 @@ RemoveFieldObjectByLocalIdAndMap: @ 805E4C8
 	bl GetFieldObjectFlagIdByFieldObjectId
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E680
+	bl FlagSet
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -1271,7 +1271,7 @@ SpawnFieldObject: @ 805E72C
 	add r2, sp, 0x20
 	mov r0, r9
 	add r1, sp, 0x8
-	bl sub_805E960
+	bl MakeObjectTemplateFromFieldObjectTemplate
 	ldrh r3, [r7, 0x6]
 	ldr r2, _0805E7A4 @ =0xffff0000
 	add r1, sp, 0x24
@@ -1517,8 +1517,8 @@ _0805E936:
 	bx r0
 	thumb_func_end sub_805E8E8
 
-	thumb_func_start sub_805E940
-sub_805E940: @ 805E940
+	thumb_func_start MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
+MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex: @ 805E940
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1533,10 +1533,10 @@ sub_805E940: @ 805E940
 	bx r0
 	.align 2, 0
 _0805E95C: .4byte gUnknown_839FBC8
-	thumb_func_end sub_805E940
+	thumb_func_end MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
 
-	thumb_func_start sub_805E960
-sub_805E960: @ 805E960
+	thumb_func_start MakeObjectTemplateFromFieldObjectTemplate
+MakeObjectTemplateFromFieldObjectTemplate: @ 805E960
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1544,14 +1544,14 @@ sub_805E960: @ 805E960
 	ldrb r0, [r4, 0x1]
 	ldrb r1, [r4, 0x9]
 	adds r2, r5, 0
-	bl sub_805E940
+	bl MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805E960
+	thumb_func_end MakeObjectTemplateFromFieldObjectTemplate
 
-	thumb_func_start sub_805E978
-sub_805E978: @ 805E978
+	thumb_func_start AddPseudoFieldObject
+AddPseudoFieldObject: @ 805E978
 	push {r4-r6,lr}
 	sub sp, 0x1C
 	ldr r4, [sp, 0x2C]
@@ -1612,7 +1612,7 @@ _0805E9E4:
 	.align 2, 0
 _0805E9F0: .4byte 0x0000ffff
 _0805E9F4: .4byte gUnknown_202063C
-	thumb_func_end sub_805E978
+	thumb_func_end AddPseudoFieldObject
 
 	thumb_func_start sub_805E9F8
 sub_805E9F8: @ 805E9F8
@@ -1968,7 +1968,7 @@ _0805EC86:
 	cmp r0, r1
 	blt _0805ECEC
 	ldrh r0, [r4, 0x14]
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805ECEC
@@ -2005,8 +2005,8 @@ _0805ED08: .4byte gUnknown_2036DFC
 _0805ED0C: .4byte gUnknown_3005008
 	thumb_func_end sub_805EC30
 
-	thumb_func_start sub_805ED10
-sub_805ED10: @ 805ED10
+	thumb_func_start RemoveFieldObjectsOutsideView
+RemoveFieldObjectsOutsideView: @ 805ED10
 	push {r4-r6,lr}
 	movs r3, 0
 	ldr r6, _0805ED64 @ =gUnknown_2031DEC
@@ -2043,7 +2043,7 @@ _0805ED2E:
 	cmp r0, 0x1
 	bne _0805ED56
 	adds r0, r2, 0
-	bl sub_805ED70
+	bl RemoveFieldObjectIfOutsideView
 _0805ED56:
 	lsls r0, r5, 24
 	lsrs r3, r0, 24
@@ -2056,10 +2056,10 @@ _0805ED56:
 _0805ED64: .4byte gUnknown_2031DEC
 _0805ED68: .4byte gUnknown_2036E38
 _0805ED6C: .4byte 0x00010001
-	thumb_func_end sub_805ED10
+	thumb_func_end RemoveFieldObjectsOutsideView
 
-	thumb_func_start sub_805ED70
-sub_805ED70: @ 805ED70
+	thumb_func_start RemoveFieldObjectIfOutsideView
+RemoveFieldObjectIfOutsideView: @ 805ED70
 	push {r4-r7,lr}
 	adds r3, r0, 0
 	ldr r0, _0805EDEC @ =gUnknown_3005008
@@ -2125,7 +2125,7 @@ _0805EDE4:
 	bx r0
 	.align 2, 0
 _0805EDEC: .4byte gUnknown_3005008
-	thumb_func_end sub_805ED70
+	thumb_func_end RemoveFieldObjectIfOutsideView
 
 	thumb_func_start sub_805EDF0
 sub_805EDF0: @ 805EDF0
@@ -2225,7 +2225,7 @@ _0805EE70:
 	ldrb r1, [r6, 0x6]
 	add r3, sp, 0x20
 	mov r2, sp
-	bl sub_805E940
+	bl MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
 	str r4, [sp, 0xC]
 	mov r0, sp
 	ldr r2, _0805EFEC @ =0x0000ffff
@@ -2767,7 +2767,7 @@ sub_805F2C8: @ 805F2C8
 	adds r0, 0x10
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_806E5A4
+	bl VarGetFieldObjectGraphicsId
 	adds r1, r0, 0
 _0805F2E0:
 	cmp r1, 0x97
@@ -2794,7 +2794,7 @@ FieldObjectHandleDynamicGraphicsId: @ 805F2F8
 	adds r0, 0x10
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_806E5A4
+	bl VarGetFieldObjectGraphicsId
 	strb r0, [r4, 0x5]
 _0805F30E:
 	pop {r4}
@@ -3669,7 +3669,7 @@ UpdateFieldObjectsForCameraUpdate: @ 805F924
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_805EC30
-	bl sub_805ED10
+	bl RemoveFieldObjectsOutsideView
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13278,8 +13278,8 @@ _08063D96:
 	bx r1
 	thumb_func_end FieldObjectClearAnimIfSpecialAnimFinished
 
-	thumb_func_start sub_8063DA0
-sub_8063DA0: @ 8063DA0
+	thumb_func_start FieldObjectGetSpecialAnim
+FieldObjectGetSpecialAnim: @ 8063DA0
 	push {lr}
 	adds r1, r0, 0
 	ldrb r0, [r1]
@@ -13293,7 +13293,7 @@ _08063DB0:
 _08063DB2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8063DA0
+	thumb_func_end FieldObjectGetSpecialAnim
 
 	thumb_func_start FieldObjectStep
 FieldObjectStep: @ 8063DB8
@@ -13335,7 +13335,7 @@ _08063DF8:
 	bl DoGroundEffects_OnFinishStep
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80679AC
+	bl npc_obj_transfer_image_anim_pause_flag
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80679F8
@@ -13404,7 +13404,7 @@ _08063E88:
 	bl DoGroundEffects_OnFinishStep
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80679AC
+	bl npc_obj_transfer_image_anim_pause_flag
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80679F8
@@ -14609,8 +14609,8 @@ sub_8064678: @ 8064678
 	bx r0
 	thumb_func_end sub_8064678
 
-	thumb_func_start sub_80646FC
-sub_80646FC: @ 80646FC
+	thumb_func_start do_go_anim
+do_go_anim: @ 80646FC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -14654,10 +14654,10 @@ sub_80646FC: @ 80646FC
 	bx r0
 	.align 2, 0
 _08064754: .4byte gUnknown_83A6884
-	thumb_func_end sub_80646FC
+	thumb_func_end do_go_anim
 
-	thumb_func_start sub_8064758
-sub_8064758: @ 8064758
+	thumb_func_start do_run_anim
+do_run_anim: @ 8064758
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -14678,10 +14678,10 @@ sub_8064758: @ 8064758
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8064758
+	thumb_func_end do_run_anim
 
-	thumb_func_start sub_8064788
-sub_8064788: @ 8064788
+	thumb_func_start npc_obj_ministep_stop_on_arrival
+npc_obj_ministep_stop_on_arrival: @ 8064788
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -14710,7 +14710,7 @@ _080647BA:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064788
+	thumb_func_end npc_obj_ministep_stop_on_arrival
 
 	thumb_func_start sub_80647C0
 sub_80647C0: @ 80647C0
@@ -15496,7 +15496,7 @@ sub_8064D3C: @ 8064D3C
 	adds r5, r1, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8064D5C
@@ -15511,7 +15511,7 @@ sub_8064D3C: @ 8064D3C
 sub_8064D5C: @ 8064D5C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064D6E
@@ -15534,7 +15534,7 @@ sub_8064D7C: @ 8064D7C
 	adds r5, r1, 0
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8064D9C
@@ -15549,7 +15549,7 @@ sub_8064D7C: @ 8064D7C
 sub_8064D9C: @ 8064D9C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064DAE
@@ -15572,7 +15572,7 @@ sub_8064DBC: @ 8064DBC
 	adds r5, r1, 0
 	movs r2, 0x3
 	movs r3, 0
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8064DDC
@@ -15587,7 +15587,7 @@ sub_8064DBC: @ 8064DBC
 sub_8064DDC: @ 8064DDC
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064DEE
@@ -15610,7 +15610,7 @@ sub_8064DFC: @ 8064DFC
 	adds r5, r1, 0
 	movs r2, 0x4
 	movs r3, 0
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8064E1C
@@ -15625,7 +15625,7 @@ sub_8064DFC: @ 8064DFC
 sub_8064E1C: @ 8064E1C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064E2E
@@ -16287,7 +16287,7 @@ sub_80652CC: @ 80652CC
 	adds r5, r1, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80652EC
@@ -16302,7 +16302,7 @@ sub_80652CC: @ 80652CC
 sub_80652EC: @ 80652EC
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _080652FE
@@ -16325,7 +16325,7 @@ sub_806530C: @ 806530C
 	adds r5, r1, 0
 	movs r2, 0x2
 	movs r3, 0x1
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_806532C
@@ -16340,7 +16340,7 @@ sub_806530C: @ 806530C
 sub_806532C: @ 806532C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806533E
@@ -16363,7 +16363,7 @@ sub_806534C: @ 806534C
 	adds r5, r1, 0
 	movs r2, 0x3
 	movs r3, 0x1
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_806536C
@@ -16378,7 +16378,7 @@ sub_806534C: @ 806534C
 sub_806536C: @ 806536C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806537E
@@ -16401,7 +16401,7 @@ sub_806538C: @ 806538C
 	adds r5, r1, 0
 	movs r2, 0x4
 	movs r3, 0x1
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80653AC
@@ -16416,7 +16416,7 @@ sub_806538C: @ 806538C
 sub_80653AC: @ 80653AC
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _080653BE
@@ -17386,7 +17386,7 @@ sub_8065AF0: @ 8065AF0
 	adds r5, r1, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065B10
@@ -17401,7 +17401,7 @@ sub_8065AF0: @ 8065AF0
 sub_8065B10: @ 8065B10
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065B22
@@ -17424,7 +17424,7 @@ sub_8065B30: @ 8065B30
 	adds r5, r1, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065B50
@@ -17439,7 +17439,7 @@ sub_8065B30: @ 8065B30
 sub_8065B50: @ 8065B50
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065B62
@@ -17462,7 +17462,7 @@ sub_8065B70: @ 8065B70
 	adds r5, r1, 0
 	movs r2, 0x3
 	movs r3, 0x2
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065B90
@@ -17477,7 +17477,7 @@ sub_8065B70: @ 8065B70
 sub_8065B90: @ 8065B90
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065BA2
@@ -17500,7 +17500,7 @@ sub_8065BB0: @ 8065BB0
 	adds r5, r1, 0
 	movs r2, 0x4
 	movs r3, 0x2
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065BD0
@@ -17515,7 +17515,7 @@ sub_8065BB0: @ 8065BB0
 sub_8065BD0: @ 8065BD0
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065BE2
@@ -17538,7 +17538,7 @@ sub_8065BF0: @ 8065BF0
 	adds r5, r1, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065C10
@@ -17553,7 +17553,7 @@ sub_8065BF0: @ 8065BF0
 sub_8065C10: @ 8065C10
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065C22
@@ -17576,7 +17576,7 @@ sub_8065C30: @ 8065C30
 	adds r5, r1, 0
 	movs r2, 0x2
 	movs r3, 0x3
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065C50
@@ -17591,7 +17591,7 @@ sub_8065C30: @ 8065C30
 sub_8065C50: @ 8065C50
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065C62
@@ -17614,7 +17614,7 @@ sub_8065C70: @ 8065C70
 	adds r5, r1, 0
 	movs r2, 0x3
 	movs r3, 0x3
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065C90
@@ -17629,7 +17629,7 @@ sub_8065C70: @ 8065C70
 sub_8065C90: @ 8065C90
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065CA2
@@ -17652,7 +17652,7 @@ sub_8065CB0: @ 8065CB0
 	adds r5, r1, 0
 	movs r2, 0x4
 	movs r3, 0x3
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065CD0
@@ -17667,7 +17667,7 @@ sub_8065CB0: @ 8065CB0
 sub_8065CD0: @ 8065CD0
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065CE2
@@ -17690,7 +17690,7 @@ sub_8065CF0: @ 8065CF0
 	adds r5, r1, 0
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065D10
@@ -17705,7 +17705,7 @@ sub_8065CF0: @ 8065CF0
 sub_8065D10: @ 8065D10
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065D22
@@ -17728,7 +17728,7 @@ sub_8065D30: @ 8065D30
 	adds r5, r1, 0
 	movs r2, 0x2
 	movs r3, 0x4
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065D50
@@ -17743,7 +17743,7 @@ sub_8065D30: @ 8065D30
 sub_8065D50: @ 8065D50
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065D62
@@ -17766,7 +17766,7 @@ sub_8065D70: @ 8065D70
 	adds r5, r1, 0
 	movs r2, 0x3
 	movs r3, 0x4
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065D90
@@ -17781,7 +17781,7 @@ sub_8065D70: @ 8065D70
 sub_8065D90: @ 8065D90
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065DA2
@@ -17804,7 +17804,7 @@ sub_8065DB0: @ 8065DB0
 	adds r5, r1, 0
 	movs r2, 0x4
 	movs r3, 0x4
-	bl sub_80646FC
+	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065DD0
@@ -17819,7 +17819,7 @@ sub_8065DB0: @ 8065DB0
 sub_8065DD0: @ 8065DD0
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065DE2
@@ -17841,7 +17841,7 @@ sub_8065DF0: @ 8065DF0
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r2, 0x1
-	bl sub_8064758
+	bl do_run_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065E10
@@ -17856,7 +17856,7 @@ sub_8065DF0: @ 8065DF0
 sub_8065E10: @ 8065E10
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065E22
@@ -17878,7 +17878,7 @@ sub_8065E30: @ 8065E30
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r2, 0x2
-	bl sub_8064758
+	bl do_run_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065E50
@@ -17893,7 +17893,7 @@ sub_8065E30: @ 8065E30
 sub_8065E50: @ 8065E50
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065E62
@@ -17915,7 +17915,7 @@ sub_8065E70: @ 8065E70
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r2, 0x3
-	bl sub_8064758
+	bl do_run_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065E90
@@ -17930,7 +17930,7 @@ sub_8065E70: @ 8065E70
 sub_8065E90: @ 8065E90
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065EA2
@@ -17952,7 +17952,7 @@ sub_8065EB0: @ 8065EB0
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r2, 0x4
-	bl sub_8064758
+	bl do_run_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065ED0
@@ -17967,7 +17967,7 @@ sub_8065EB0: @ 8065EB0
 sub_8065ED0: @ 8065ED0
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08065EE2
@@ -21029,7 +21029,7 @@ sub_806741C: @ 806741C
 sub_806743C: @ 806743C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806744E
@@ -21067,7 +21067,7 @@ sub_806745C: @ 806745C
 sub_806747C: @ 806747C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806748E
@@ -21105,7 +21105,7 @@ sub_806749C: @ 806749C
 sub_80674BC: @ 80674BC
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _080674CE
@@ -21143,7 +21143,7 @@ sub_80674DC: @ 80674DC
 sub_80674FC: @ 80674FC
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806750E
@@ -21206,7 +21206,7 @@ sub_806754C: @ 806754C
 sub_806756C: @ 806756C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806757E
@@ -21244,7 +21244,7 @@ sub_806758C: @ 806758C
 sub_80675AC: @ 80675AC
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _080675BE
@@ -21282,7 +21282,7 @@ sub_80675CC: @ 80675CC
 sub_80675EC: @ 80675EC
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _080675FE
@@ -21320,7 +21320,7 @@ sub_806760C: @ 806760C
 sub_806762C: @ 806762C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806763E
@@ -21386,7 +21386,7 @@ sub_8067684: @ 8067684
 sub_80676A4: @ 80676A4
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _080676B6
@@ -21424,7 +21424,7 @@ sub_80676C4: @ 80676C4
 sub_80676E4: @ 80676E4
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _080676F6
@@ -21462,7 +21462,7 @@ sub_8067704: @ 8067704
 sub_8067724: @ 8067724
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08067736
@@ -21500,7 +21500,7 @@ sub_8067744: @ 8067744
 sub_8067764: @ 8067764
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064788
+	bl npc_obj_ministep_stop_on_arrival
 	lsls r0, 24
 	cmp r0, 0
 	bne _08067776
@@ -21842,8 +21842,8 @@ sub_80679A8: @ 80679A8
 	bx lr
 	thumb_func_end sub_80679A8
 
-	thumb_func_start sub_80679AC
-sub_80679AC: @ 80679AC
+	thumb_func_start npc_obj_transfer_image_anim_pause_flag
+npc_obj_transfer_image_anim_pause_flag: @ 80679AC
 	push {lr}
 	ldrb r0, [r0, 0x1]
 	lsls r0, 29
@@ -21858,7 +21858,7 @@ sub_80679AC: @ 80679AC
 _080679C2:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80679AC
+	thumb_func_end npc_obj_transfer_image_anim_pause_flag
 
 	thumb_func_start sub_80679C8
 sub_80679C8: @ 80679C8

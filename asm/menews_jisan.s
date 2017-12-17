@@ -60,7 +60,7 @@ sub_8146C88: @ 8146C88
 	strb r1, [r0]
 	strb r1, [r0, 0x1]
 	ldr r0, _08146CA0 @ =0x00004028
-	bl sub_806E584
+	bl VarSet
 	pop {r0}
 	bx r0
 	.align 2, 0

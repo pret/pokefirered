@@ -2108,7 +2108,7 @@ _08048B98: .4byte 0x05000040
 _08048B9C: .4byte gUnknown_2024284
 _08048BA0:
 	ldrb r0, [r6]
-	bl sub_8049934
+	bl UpdateStatusIconInHealthbox
 	ldrb r0, [r6]
 	mov r2, r8
 	ldrh r1, [r2]
@@ -2218,7 +2218,7 @@ _08048C8C: .4byte 0x05000040
 _08048C90: .4byte gUnknown_202402C
 _08048C94:
 	ldrb r0, [r6]
-	bl sub_8049934
+	bl UpdateStatusIconInHealthbox
 	ldrb r0, [r6]
 	mov r2, r8
 	ldrh r1, [r2]
@@ -3838,8 +3838,8 @@ _0804992C: .4byte 0x06010000
 _08049930: .4byte 0x05000008
 	thumb_func_end sub_804981C
 
-	thumb_func_start sub_8049934
-sub_8049934: @ 8049934
+	thumb_func_start UpdateStatusIconInHealthbox
+UpdateStatusIconInHealthbox: @ 8049934
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3911,7 +3911,7 @@ _080499C0:
 	beq _080499E8
 	movs r0, 0x1B
 	adds r1, r7, 0
-	bl sub_8049BE4
+	bl GetStatusIconForBankId
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetHealthboxElementGfxPtr
@@ -3928,7 +3928,7 @@ _080499E8:
 	beq _08049A06
 	movs r0, 0x15
 	adds r1, r7, 0
-	bl sub_8049BE4
+	bl GetStatusIconForBankId
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetHealthboxElementGfxPtr
@@ -3942,7 +3942,7 @@ _08049A06:
 	beq _08049A24
 	movs r0, 0x21
 	adds r1, r7, 0
-	bl sub_8049BE4
+	bl GetStatusIconForBankId
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetHealthboxElementGfxPtr
@@ -3956,7 +3956,7 @@ _08049A24:
 	beq _08049A42
 	movs r0, 0x1E
 	adds r1, r7, 0
-	bl sub_8049BE4
+	bl GetStatusIconForBankId
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetHealthboxElementGfxPtr
@@ -3970,7 +3970,7 @@ _08049A42:
 	beq _08049A60
 	movs r0, 0x18
 	adds r1, r7, 0
-	bl sub_8049BE4
+	bl GetStatusIconForBankId
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetHealthboxElementGfxPtr
@@ -4151,10 +4151,10 @@ _08049BD4: .4byte 0x06010000
 _08049BD8: .4byte 0x04000018
 _08049BDC: .4byte gUnknown_2024018
 _08049BE0: .4byte 0x04000008
-	thumb_func_end sub_8049934
+	thumb_func_end UpdateStatusIconInHealthbox
 
-	thumb_func_start sub_8049BE4
-sub_8049BE4: @ 8049BE4
+	thumb_func_start GetStatusIconForBankId
+GetStatusIconForBankId: @ 8049BE4
 	push {lr}
 	lsls r0, 24
 	lsls r1, 24
@@ -4249,10 +4249,10 @@ _08049CA4:
 	adds r0, r2, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8049BE4
+	thumb_func_end GetStatusIconForBankId
 
-	thumb_func_start sub_8049CAC
-sub_8049CAC: @ 8049CAC
+	thumb_func_start UpdateSafariBallsTextOnHealthbox
+UpdateSafariBallsTextOnHealthbox: @ 8049CAC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -4295,7 +4295,7 @@ _08049D00: .4byte gUnknown_83FE80C
 _08049D04: .4byte gUnknown_202063C
 _08049D08: .4byte 0x06010040
 _08049D0C: .4byte 0x06010800
-	thumb_func_end sub_8049CAC
+	thumb_func_end UpdateSafariBallsTextOnHealthbox
 
 	thumb_func_start UpdateLeftNoOfBallsTextOnHealthbox
 UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
@@ -4547,12 +4547,12 @@ _08049F16:
 	bne _08049F24
 _08049F1E:
 	adds r0, r6, 0
-	bl sub_8049934
+	bl UpdateStatusIconInHealthbox
 _08049F24:
 	cmp r7, 0xA
 	bne _08049F2E
 	adds r0, r6, 0
-	bl sub_8049CAC
+	bl UpdateSafariBallsTextOnHealthbox
 _08049F2E:
 	adds r0, r7, 0
 	subs r0, 0xA
@@ -4624,7 +4624,7 @@ _08049FB8:
 	bne _08049FC6
 _08049FC0:
 	adds r0, r6, 0
-	bl sub_8049934
+	bl UpdateStatusIconInHealthbox
 _08049FC6:
 	add sp, 0x4
 	pop {r3-r5}
@@ -5582,7 +5582,7 @@ sub_804A6D8: @ 804A6D8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r0}
 	bx r0
 	thumb_func_end sub_804A6D8

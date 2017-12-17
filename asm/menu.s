@@ -29,7 +29,7 @@ sub_810EDC4: @ 810EDC4
 	bne _0810EDFA
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810EDFA:
 	pop {r4,r5}
 	pop {r0}
@@ -67,7 +67,7 @@ sub_810EE0C: @ 810EE0C
 	bne _0810EE4A
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810EE4A:
 	pop {r4-r6}
 	pop {r0}
@@ -576,7 +576,7 @@ sub_810F260: @ 810F260
 	bne _0810F28E
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810F28E:
 	pop {r4,r5}
 	pop {r0}
@@ -651,7 +651,7 @@ SetWindowBorderStyle: @ 810F2E8
 	bne _0810F31E
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810F31E:
 	pop {r4,r5}
 	pop {r0}
@@ -689,7 +689,7 @@ sub_810F330: @ 810F330
 	bne _0810F36E
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810F36E:
 	pop {r4-r6}
 	pop {r0}
@@ -886,7 +886,7 @@ sub_810F4D8: @ 810F4D8
 	bne _0810F506
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810F506:
 	pop {r4,r5}
 	pop {r0}
@@ -1046,7 +1046,7 @@ sub_810F5E8: @ 810F5E8
 	beq _0810F63E
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810F63E:
 	add sp, 0xC
 	pop {r4-r6}
@@ -1137,7 +1137,7 @@ _0810F6CE:
 	beq _0810F6F6
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810F6F6:
 	add sp, 0x18
 	pop {r3}
@@ -1155,7 +1155,7 @@ sub_810F704: @ 810F704
 	cmp r0, 0xFF
 	beq _0810F714
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810F714:
 	pop {r0}
 	bx r0
@@ -1174,7 +1174,7 @@ sub_810F71C: @ 810F71C
 	bl FillWindowPixelBuffer
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 _0810F734:
 	pop {r4}
 	pop {r0}
@@ -1196,9 +1196,9 @@ sub_810F740: @ 810F740
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_8003F20
+	bl CopyWindowToVram
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0xFF
 	strb r0, [r4]
 _0810F768:
@@ -1326,7 +1326,7 @@ sub_810F818: @ 810F818
 	movs r1, 0x1
 	str r2, [sp, 0xC]
 	str r3, [sp, 0x10]
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -1365,13 +1365,13 @@ RedrawMenuCursor: @ 810F874
 	ldr r5, _0810F8FC @ =gUnknown_203ADE4
 	ldrb r0, [r5, 0x6]
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5, 0x6]
 	movs r1, 0x1
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r5, 0x5]
@@ -1405,7 +1405,7 @@ RedrawMenuCursor: @ 810F874
 	movs r4, 0
 	str r4, [sp, 0x4]
 	str r4, [sp, 0x8]
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -1496,14 +1496,14 @@ _0810F97A:
 	bx r1
 	thumb_func_end MoveMenuCursorNoWrapAround
 
-	thumb_func_start sub_810F98C
-sub_810F98C: @ 810F98C
+	thumb_func_start GetMenuCursorPos
+GetMenuCursorPos: @ 810F98C
 	ldr r0, _0810F994 @ =gUnknown_203ADE4
 	ldrb r0, [r0, 0x2]
 	bx lr
 	.align 2, 0
 _0810F994: .4byte gUnknown_203ADE4
-	thumb_func_end sub_810F98C
+	thumb_func_end GetMenuCursorPos
 
 	thumb_func_start ProcessMenuInput
 ProcessMenuInput: @ 810F998
@@ -1803,7 +1803,7 @@ _0810FBA0:
 	adds r0, r6, 0
 	mov r1, r10
 	mov r3, r9
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1812,7 +1812,7 @@ _0810FBA0:
 _0810FBD0:
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -1892,7 +1892,7 @@ _0810FC30:
 _0810FC68:
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3
@@ -1925,7 +1925,7 @@ sub_810FC80: @ 810FC80
 	lsrs r5, 24
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -1944,8 +1944,8 @@ sub_810FC80: @ 810FC80
 	bx r0
 	thumb_func_end sub_810FC80
 
-	thumb_func_start sub_810FCD0
-sub_810FCD0: @ 810FCD0
+	thumb_func_start AddItemMenuActionTextPrinters
+AddItemMenuActionTextPrinters: @ 810FCD0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1985,7 +1985,7 @@ sub_810FCD0: @ 810FCD0
 	strb r6, [r0, 0x5]
 	adds r0, r6, 0
 	movs r1, 0x5
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r3, sp
 	lsls r0, 4
 	ldrb r2, [r3, 0xC]
@@ -1996,7 +1996,7 @@ sub_810FCD0: @ 810FCD0
 	strb r1, [r3, 0xC]
 	adds r0, r6, 0
 	movs r1, 0x6
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r3, sp
 	adds r1, r5, 0
 	ands r1, r0
@@ -2009,7 +2009,7 @@ sub_810FCD0: @ 810FCD0
 	strb r0, [r3, 0xD]
 	adds r0, r6, 0
 	movs r1, 0x7
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r3, sp
 	lsls r0, 4
 	ldrb r2, [r3, 0xD]
@@ -2019,7 +2019,7 @@ sub_810FCD0: @ 810FCD0
 	strb r1, [r3, 0xD]
 	adds r0, r6, 0
 	movs r1, 0x4
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r1, sp
 	ands r5, r0
 	ldrb r0, [r1, 0xC]
@@ -2031,7 +2031,7 @@ sub_810FCD0: @ 810FCD0
 	strb r2, [r0, 0xA]
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl sub_80F79D8
+	bl GetFontAttribute
 	mov r1, sp
 	strb r0, [r1, 0xB]
 	mov r0, sp
@@ -2060,7 +2060,7 @@ _0810FD9A:
 	mov r0, sp
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2069,7 +2069,7 @@ _0810FD9A:
 _0810FDCA:
 	ldr r0, [sp, 0x10]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -2078,7 +2078,7 @@ _0810FDCA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810FCD0
+	thumb_func_end AddItemMenuActionTextPrinters
 
 	thumb_func_start sub_810FDE4
 sub_810FDE4: @ 810FDE4
@@ -2105,13 +2105,13 @@ sub_810FDE4: @ 810FDE4
 	mov r8, r0
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80F79D8
+	bl GetFontAttribute
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -2125,7 +2125,7 @@ sub_810FDE4: @ 810FDE4
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_810FCD0
+	bl AddItemMenuActionTextPrinters
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -2135,8 +2135,8 @@ sub_810FDE4: @ 810FDE4
 	bx r0
 	thumb_func_end sub_810FDE4
 
-	thumb_func_start sub_810FE50
-sub_810FE50: @ 810FE50
+	thumb_func_start SetWindowTemplateFields
+SetWindowTemplateFields: @ 810FE50
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2223,7 +2223,7 @@ _0810FEF4: .4byte 0xffff00ff
 _0810FEF8: .4byte 0xff00ffff
 _0810FEFC: .4byte 0x00ffffff
 _0810FF00: .4byte 0x0000ffff
-	thumb_func_end sub_810FE50
+	thumb_func_end SetWindowTemplateFields
 
 	thumb_func_start sub_810FF04
 sub_810FF04: @ 810FF04
@@ -2257,7 +2257,7 @@ sub_810FF04: @ 810FF04
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_810FE50
+	bl SetWindowTemplateFields
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]
@@ -2322,7 +2322,7 @@ sub_810FF60: @ 810FF60
 	strb r6, [r0, 0x5]
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	add r1, sp, 0xC
 	add r0, r8
 	strb r0, [r1, 0x6]
@@ -2337,7 +2337,7 @@ sub_810FF60: @ 810FF60
 	strb r0, [r1, 0x9]
 	adds r0, r6, 0
 	movs r1, 0x5
-	bl sub_80F79D8
+	bl GetFontAttribute
 	add r3, sp, 0xC
 	lsls r0, 4
 	ldrb r2, [r3, 0xC]
@@ -2348,7 +2348,7 @@ sub_810FF60: @ 810FF60
 	strb r1, [r3, 0xC]
 	adds r0, r6, 0
 	movs r1, 0x6
-	bl sub_80F79D8
+	bl GetFontAttribute
 	add r3, sp, 0xC
 	adds r1, r5, 0
 	ands r1, r0
@@ -2361,7 +2361,7 @@ sub_810FF60: @ 810FF60
 	strb r0, [r3, 0xD]
 	adds r0, r6, 0
 	movs r1, 0x7
-	bl sub_80F79D8
+	bl GetFontAttribute
 	add r3, sp, 0xC
 	lsls r0, 4
 	ldrb r2, [r3, 0xD]
@@ -2371,7 +2371,7 @@ sub_810FF60: @ 810FF60
 	strb r1, [r3, 0xD]
 	adds r0, r6, 0
 	movs r1, 0x4
-	bl sub_80F79D8
+	bl GetFontAttribute
 	add r1, sp, 0xC
 	ands r5, r0
 	ldrb r0, [r1, 0xC]
@@ -2380,21 +2380,21 @@ sub_810FF60: @ 810FF60
 	strb r4, [r1, 0xC]
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_80F79D8
+	bl GetFontAttribute
 	add r1, sp, 0xC
 	strb r0, [r1, 0xA]
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl sub_80F79D8
+	bl GetFontAttribute
 	add r1, sp, 0xC
 	strb r0, [r1, 0xB]
 	adds r0, r1, 0
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_8002CF4
+	bl AddTextPrinter
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	add r1, sp, 0xC
 	ldrb r1, [r1, 0xB]
 	adds r0, r1
@@ -2471,7 +2471,7 @@ sub_81100E8: @ 81100E8
 	movs r1, 0x1
 	bl sub_810F4D8
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2508,13 +2508,13 @@ sub_8110104: @ 8110104
 	str r5, [sp, 0x18]
 	mov r0, r9
 	movs r1, 0
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
 	mov r0, r9
 	movs r1, 0x1
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x10
@@ -2561,7 +2561,7 @@ _0811017C:
 	str r0, [sp, 0x8]
 	ldr r0, [sp, 0xC]
 	mov r1, r9
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2577,7 +2577,7 @@ _081101B8:
 	bcc _08110164
 	ldr r0, [sp, 0xC]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3
@@ -2617,7 +2617,7 @@ sub_81101D8: @ 81101D8
 	str r5, [sp, 0x18]
 	mov r0, r10
 	movs r1, 0
-	bl sub_80F79D8
+	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -2658,7 +2658,7 @@ _08110230:
 	str r0, [sp, 0x8]
 	ldr r0, [sp, 0xC]
 	mov r1, r10
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2674,7 +2674,7 @@ _08110272:
 	bcc _0811021C
 	ldr r0, [sp, 0xC]
 	movs r1, 0x2
-	bl sub_8003F20
+	bl CopyWindowToVram
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -2829,7 +2829,7 @@ sub_811037C: @ 811037C
 	ldr r5, _08110448 @ =gUnknown_203ADE4
 	ldrb r0, [r5, 0x6]
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	mov r9, r0
 	mov r1, r9
 	lsls r1, 24
@@ -2837,7 +2837,7 @@ sub_811037C: @ 811037C
 	mov r9, r1
 	ldrb r0, [r5, 0x6]
 	movs r1, 0x1
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -2899,7 +2899,7 @@ sub_811037C: @ 811037C
 	str r3, [sp, 0x4]
 	str r3, [sp, 0x8]
 	adds r3, r4, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -3145,7 +3145,7 @@ _08110600:
 	ands r0, r1
 	cmp r0, 0
 	bne _08110614
-	bl sub_80BF630
+	bl GetLRKeysState
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3162,7 +3162,7 @@ _08110620:
 	ands r0, r1
 	cmp r0, 0
 	bne _08110636
-	bl sub_80BF630
+	bl GetLRKeysState
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -3233,7 +3233,7 @@ _081106A4:
 	ands r0, r1
 	cmp r0, 0
 	bne _081106B8
-	bl sub_80BF630
+	bl GetLRKeysState
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3248,7 +3248,7 @@ _081106BE:
 	ands r0, r1
 	cmp r0, 0
 	bne _081106D4
-	bl sub_80BF630
+	bl GetLRKeysState
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

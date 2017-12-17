@@ -119,7 +119,7 @@ _08003BCC:
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _08003C0C
-	bl sub_8003ECC
+	bl FreeAllWindowBuffers
 	b _08003BB4
 	.align 2, 0
 _08003C04: .4byte gUnknown_3003E40
@@ -405,8 +405,8 @@ _08003E34: .4byte gUnknown_20204B4
 _08003E38: .4byte gUnknown_3003D8C
 	thumb_func_end sub_8003CE4
 
-	thumb_func_start sub_8003E3C
-sub_8003E3C: @ 8003E3C
+	thumb_func_start RemoveWindow
+RemoveWindow: @ 8003E3C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -473,10 +473,10 @@ _08003EBC: .4byte gUnknown_3003D8C
 _08003EC0: .4byte gUnknown_81EA144
 _08003EC4: .4byte gUnknown_3003E40
 _08003EC8: .4byte nullsub_6
-	thumb_func_end sub_8003E3C
+	thumb_func_end RemoveWindow
 
-	thumb_func_start sub_8003ECC
-sub_8003ECC: @ 8003ECC
+	thumb_func_start FreeAllWindowBuffers
+FreeAllWindowBuffers: @ 8003ECC
 	push {r4-r6,lr}
 	ldr r4, _08003F14 @ =gUnknown_3003E40
 	movs r5, 0x3
@@ -519,10 +519,10 @@ _08003F06:
 _08003F14: .4byte gUnknown_3003E40
 _08003F18: .4byte nullsub_6
 _08003F1C: .4byte gUnknown_20204B4
-	thumb_func_end sub_8003ECC
+	thumb_func_end FreeAllWindowBuffers
 
-	thumb_func_start sub_8003F20
-sub_8003F20: @ 8003F20
+	thumb_func_start CopyWindowToVram
+CopyWindowToVram: @ 8003F20
 	push {r4-r6,lr}
 	sub sp, 0xC
 	lsls r0, 24
@@ -587,7 +587,7 @@ _08003F96:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8003F20
+	thumb_func_end CopyWindowToVram
 
 	thumb_func_start PutWindowTilemap
 PutWindowTilemap: @ 8003FA0
@@ -978,7 +978,7 @@ BlitBitmapRectToWindow: @ 80041F0
 	movs r0, 0
 	str r0, [sp, 0x10]
 	add r0, sp, 0x14
-	bl sub_8004AA4
+	bl BlitBitmapRect4Bit
 	add sp, 0x24
 	pop {r3-r5}
 	mov r8, r3
@@ -1078,7 +1078,7 @@ BlitBitmapRectToWindowWithColorKey: @ 80042B0
 	ldr r6, [sp, 0x24]
 	str r6, [sp, 0x10]
 	add r0, sp, 0x14
-	bl sub_8004AA4
+	bl BlitBitmapRect4Bit
 	add sp, 0x28
 	pop {r3-r5}
 	mov r8, r3
@@ -1149,7 +1149,7 @@ FillWindowPixelRect: @ 8004378
 	add r0, sp, 0x8
 	adds r1, r2, 0
 	mov r2, r9
-	bl sub_8004C84
+	bl FillBitmapRect4Bit
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3

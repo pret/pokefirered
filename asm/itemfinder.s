@@ -251,7 +251,7 @@ _0813EE4E:
 	bl sub_80CC44C
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813EEF2
@@ -499,7 +499,7 @@ _0813F020:
 	cmp r0, 0x1
 	beq _0813F066
 	adds r0, r5, 0
-	bl sub_806E6D0
+	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F066

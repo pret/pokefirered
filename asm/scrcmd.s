@@ -738,7 +738,7 @@ ScrCmd_setorcopyvar: @ 806A3E0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	strh r0, [r5]
 	movs r0, 0
 	pop {r4,r5}
@@ -983,7 +983,7 @@ ScrCmd_subvar: @ 806A5AC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldrh r1, [r5]
 	subs r1, r0
 	strh r1, [r5]
@@ -999,7 +999,7 @@ ScrCmd_random: @ 806A5DC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1025,7 +1025,7 @@ sub_806A610: @ 806A610
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1033,7 +1033,7 @@ sub_806A610: @ 806A610
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	ldr r5, _0806A658 @ =gUnknown_20370D0
 	lsls r1, 24
@@ -1060,7 +1060,7 @@ sub_806A65C: @ 806A65C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1068,7 +1068,7 @@ sub_806A65C: @ 806A65C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	ldr r5, _0806A69C @ =gUnknown_20370D0
 	lsls r1, 24
@@ -1093,7 +1093,7 @@ sub_806A6A0: @ 806A6A0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1101,7 +1101,7 @@ sub_806A6A0: @ 806A6A0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	ldr r5, _0806A6E0 @ =gUnknown_20370D0
 	lsls r1, 24
@@ -1126,7 +1126,7 @@ sub_806A6E4: @ 806A6E4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1134,7 +1134,7 @@ sub_806A6E4: @ 806A6E4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	ldr r5, _0806A724 @ =gUnknown_20370D0
 	lsls r1, 24
@@ -1152,13 +1152,13 @@ sub_806A6E4: @ 806A6E4
 _0806A724: .4byte gUnknown_20370D0
 	thumb_func_end sub_806A6E4
 
-	thumb_func_start sub_806A728
-sub_806A728: @ 806A728
+	thumb_func_start ScrCmd_checkitemtype
+ScrCmd_checkitemtype: @ 806A728
 	push {r4,lr}
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0806A750 @ =gUnknown_20370D0
@@ -1172,16 +1172,16 @@ sub_806A728: @ 806A728
 	bx r1
 	.align 2, 0
 _0806A750: .4byte gUnknown_20370D0
-	thumb_func_end sub_806A728
+	thumb_func_end ScrCmd_checkitemtype
 
-	thumb_func_start sub_806A754
-sub_806A754: @ 806A754
+	thumb_func_start ScrCmd_givepcitem
+ScrCmd_givepcitem: @ 806A754
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1189,7 +1189,7 @@ sub_806A754: @ 806A754
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -1205,16 +1205,16 @@ sub_806A754: @ 806A754
 	bx r1
 	.align 2, 0
 _0806A794: .4byte gUnknown_20370D0
-	thumb_func_end sub_806A754
+	thumb_func_end ScrCmd_givepcitem
 
-	thumb_func_start sub_806A798
-sub_806A798: @ 806A798
+	thumb_func_start ScrCmd_checkpcitem
+ScrCmd_checkpcitem: @ 806A798
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1222,7 +1222,7 @@ sub_806A798: @ 806A798
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -1238,7 +1238,7 @@ sub_806A798: @ 806A798
 	bx r1
 	.align 2, 0
 _0806A7D8: .4byte gUnknown_20370D0
-	thumb_func_end sub_806A798
+	thumb_func_end ScrCmd_checkpcitem
 
 	thumb_func_start sub_806A7DC
 sub_806A7DC: @ 806A7DC
@@ -1246,7 +1246,7 @@ sub_806A7DC: @ 806A7DC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1258,7 +1258,7 @@ sub_806A7F0: @ 806A7F0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1270,7 +1270,7 @@ sub_806A804: @ 806A804
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1282,7 +1282,7 @@ sub_806A818: @ 806A818
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1294,7 +1294,7 @@ ScrCmd_setflag: @ 806A82C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E680
+	bl FlagSet
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1306,7 +1306,7 @@ ScrCmd_clearflag: @ 806A840
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E6A8
+	bl FlagClear
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1319,7 +1319,7 @@ ScrCmd_checkflag: @ 806A854
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E6D0
+	bl FlagGet
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4}
@@ -1411,10 +1411,10 @@ ScrCmd_setflashradius: @ 806A8FC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8055D08
+	bl Overworld_SetFlashLevel
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1561,10 +1561,10 @@ ScrCmd_setweather: @ 806A9FC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_807B100
+	bl SetSav1Weather
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1608,7 +1608,7 @@ ScrCmd_setmaplayoutindex: @ 806AA48
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8055D40
@@ -1641,7 +1641,7 @@ ScrCmd_warp: @ 806AA64
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1649,7 +1649,7 @@ ScrCmd_warp: @ 806AA64
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -1705,7 +1705,7 @@ ScrCmd_warpsilent: @ 806AAEC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1713,7 +1713,7 @@ ScrCmd_warpsilent: @ 806AAEC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -1745,8 +1745,8 @@ ScrCmd_warpsilent: @ 806AAEC
 	bx r1
 	thumb_func_end ScrCmd_warpsilent
 
-	thumb_func_start sub_806AB74
-sub_806AB74: @ 806AB74
+	thumb_func_start ScrCmd_warpdoor
+ScrCmd_warpdoor: @ 806AB74
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -1769,7 +1769,7 @@ sub_806AB74: @ 806AB74
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1777,7 +1777,7 @@ sub_806AB74: @ 806AB74
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -1807,7 +1807,7 @@ sub_806AB74: @ 806AB74
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AB74
+	thumb_func_end ScrCmd_warpdoor
 
 	thumb_func_start ScrCmd_warphole
 ScrCmd_warphole: @ 806ABFC
@@ -1892,7 +1892,7 @@ sub_806AC70: @ 806AC70
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1900,7 +1900,7 @@ sub_806AC70: @ 806AC70
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -1956,7 +1956,7 @@ sub_806ACF8: @ 806ACF8
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1964,7 +1964,7 @@ sub_806ACF8: @ 806ACF8
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -2024,7 +2024,7 @@ ScrCmd_setwarp: @ 806AD8C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2032,7 +2032,7 @@ ScrCmd_setwarp: @ 806AD8C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -2086,7 +2086,7 @@ ScrCmd_setdynamicwarp: @ 806AE0C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2094,7 +2094,7 @@ ScrCmd_setdynamicwarp: @ 806AE0C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -2150,7 +2150,7 @@ sub_806AE90: @ 806AE90
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2158,7 +2158,7 @@ sub_806AE90: @ 806AE90
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -2212,7 +2212,7 @@ sub_806AF10: @ 806AF10
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2220,7 +2220,7 @@ sub_806AF10: @ 806AF10
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -2274,7 +2274,7 @@ ScrCmd_setescapewarp: @ 806AF90
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2282,7 +2282,7 @@ ScrCmd_setescapewarp: @ 806AF90
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	mov r1, r9
 	lsls r1, 24
 	asrs r1, 24
@@ -2357,8 +2357,8 @@ ScrCmd_getpartysize: @ 806B04C
 _0806B064: .4byte gUnknown_20370D0
 	thumb_func_end ScrCmd_getpartysize
 
-	thumb_func_start sub_806B068
-sub_806B068: @ 806B068
+	thumb_func_start ScrCmd_playse
+ScrCmd_playse: @ 806B068
 	push {lr}
 	bl ScriptReadHalfword
 	lsls r0, 16
@@ -2367,7 +2367,7 @@ sub_806B068: @ 806B068
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B068
+	thumb_func_end ScrCmd_playse
 
 	thumb_func_start WaitForSoundEffectFinish
 WaitForSoundEffectFinish: @ 806B07C
@@ -2600,7 +2600,7 @@ ScrCmd_applymovement: @ 806B200
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2632,7 +2632,7 @@ ScrCmd_applymovement_at: @ 806B244
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2686,7 +2686,7 @@ ScrCmd_waitmovement: @ 806B2B0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -2726,7 +2726,7 @@ ScrCmd_waitmovement_at: @ 806B304
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -2765,7 +2765,7 @@ ScrCmd_removeobject: @ 806B358
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806B37C @ =gUnknown_3005008
@@ -2787,7 +2787,7 @@ ScrCmd_removeobject_at: @ 806B380
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r3, [r4, 0x8]
 	ldrb r2, [r3]
 	adds r3, 0x1
@@ -2810,7 +2810,7 @@ ScrCmd_addobject: @ 806B3B0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806B3D4 @ =gUnknown_3005008
@@ -2832,7 +2832,7 @@ ScrCmd_addobject_at: @ 806B3D8
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r3, [r4, 0x8]
 	ldrb r2, [r3]
 	adds r3, 0x1
@@ -2857,7 +2857,7 @@ ScrCmd_setobjectxy: @ 806B408
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -2865,7 +2865,7 @@ ScrCmd_setobjectxy: @ 806B408
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2873,7 +2873,7 @@ ScrCmd_setobjectxy: @ 806B408
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r1, _0806B46C @ =gUnknown_3005008
@@ -2904,7 +2904,7 @@ ScrCmd_setobjectxyperm: @ 806B470
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -2912,7 +2912,7 @@ ScrCmd_setobjectxyperm: @ 806B470
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2920,7 +2920,7 @@ ScrCmd_setobjectxyperm: @ 806B470
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r2, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -2943,7 +2943,7 @@ ScrCmd_moveobjectoffscreen: @ 806B4C8
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806B4EC @ =gUnknown_3005008
@@ -2965,7 +2965,7 @@ ScrCmd_showobject_at: @ 806B4F0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r3, [r4, 0x8]
 	ldrb r2, [r3]
 	adds r3, 0x1
@@ -2990,7 +2990,7 @@ ScrCmd_hideobject_at: @ 806B520
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r3, [r4, 0x8]
 	ldrb r2, [r3]
 	adds r3, 0x1
@@ -3015,7 +3015,7 @@ ScrCmd_setobjectpriority: @ 806B550
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r3, [r5, 0x8]
 	ldrb r2, [r3]
 	adds r3, 0x1
@@ -3045,7 +3045,7 @@ ScrCmd_resetobjectpriority: @ 806B58C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r3, [r4, 0x8]
 	ldrb r2, [r3]
 	adds r3, 0x1
@@ -3099,7 +3099,7 @@ ScrCmd_turnobject: @ 806B5F4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r1, [r4, 0x8]
 	ldrb r3, [r1]
 	adds r1, 0x1
@@ -3126,7 +3126,7 @@ ScrCmd_setobjectmovementtype: @ 806B628
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r2, [r4, 0x8]
 	ldrb r1, [r2]
 	adds r2, 0x1
@@ -3159,7 +3159,7 @@ ScrCmd_createvobject: @ 806B650
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -3167,7 +3167,7 @@ ScrCmd_createvobject: @ 806B650
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r3, r0, 0
 	ldr r0, [r5, 0x8]
 	ldrb r2, [r0]
@@ -3374,7 +3374,7 @@ sub_806B80C: @ 806B80C
 	bne _0806B81A
 	ldr r0, [r4, 0x64]
 _0806B81A:
-	bl sub_806943C
+	bl ShowFieldMessage
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -3395,7 +3395,7 @@ _0806B836:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_8003F20
+	bl CopyWindowToVram
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -3882,7 +3882,7 @@ sub_806BB9C: @ 806BB9C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -3956,7 +3956,7 @@ _0806BC16:
 	movs r1, 0x6
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_8002C48
+	bl PrintTextOnWindow
 	movs r0, 0
 	add sp, 0xC
 	pop {r4,r5}
@@ -3995,7 +3995,7 @@ ScrCmd_vmessage: @ 806BC6C
 	ldr r1, _0806BC84 @ =gUnknown_20370A8
 	ldr r1, [r1]
 	subs r0, r1
-	bl sub_806943C
+	bl ShowFieldMessage
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -4013,7 +4013,7 @@ ScrCmd_bufferspeciesname: @ 806BC88
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _0806BCC0 @ =gUnknown_83A7294
@@ -4082,7 +4082,7 @@ ScrCmd_bufferpartymonnick: @ 806BD14
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -4117,7 +4117,7 @@ ScrCmd_bufferitemname: @ 806BD5C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _0806BD8C @ =gUnknown_83A7294
@@ -4145,14 +4145,14 @@ sub_806BD90: @ 806BD90
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r1, _0806BDE4 @ =gUnknown_83A7294
@@ -4218,14 +4218,14 @@ sub_806BE34: @ 806BE34
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	movs r0, 0
 	pop {r1}
 	bx r1
 	thumb_func_end sub_806BE34
 
-	thumb_func_start sub_806BE50
-sub_806BE50: @ 806BE50
+	thumb_func_start ScrCmd_buffermovename
+ScrCmd_buffermovename: @ 806BE50
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4234,7 +4234,7 @@ sub_806BE50: @ 806BE50
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _0806BE88 @ =gUnknown_83A7294
@@ -4254,10 +4254,10 @@ sub_806BE50: @ 806BE50
 	.align 2, 0
 _0806BE88: .4byte gUnknown_83A7294
 _0806BE8C: .4byte gUnknown_8247094
-	thumb_func_end sub_806BE50
+	thumb_func_end ScrCmd_buffermovename
 
-	thumb_func_start sub_806BE90
-sub_806BE90: @ 806BE90
+	thumb_func_start ScrCmd_buffernumberstring
+ScrCmd_buffernumberstring: @ 806BE90
 	push {r4,r5,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r5, [r1]
@@ -4266,7 +4266,7 @@ sub_806BE90: @ 806BE90
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -4288,10 +4288,10 @@ sub_806BE90: @ 806BE90
 	bx r1
 	.align 2, 0
 _0806BED0: .4byte gUnknown_83A7294
-	thumb_func_end sub_806BE90
+	thumb_func_end ScrCmd_buffernumberstring
 
-	thumb_func_start sub_806BED4
-sub_806BED4: @ 806BED4
+	thumb_func_start ScrCmd_bufferstdstring
+ScrCmd_bufferstdstring: @ 806BED4
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4300,7 +4300,7 @@ sub_806BED4: @ 806BED4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	ldr r1, _0806BF0C @ =gUnknown_83A7294
 	lsls r4, 2
@@ -4319,7 +4319,7 @@ sub_806BED4: @ 806BED4
 	.align 2, 0
 _0806BF0C: .4byte gUnknown_83A7294
 _0806BF10: .4byte gUnknown_83E06B8
-	thumb_func_end sub_806BED4
+	thumb_func_end ScrCmd_bufferstdstring
 
 	thumb_func_start ScrCmd_bufferstring
 ScrCmd_bufferstring: @ 806BF14
@@ -4397,7 +4397,7 @@ ScrCmd_bufferboxname: @ 806BF94
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r1, _0806BFCC @ =gUnknown_83A7294
 	lsls r4, 2
 	adds r4, r1
@@ -4427,7 +4427,7 @@ ScrCmd_givemon: @ 806BFD0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
@@ -4440,7 +4440,7 @@ ScrCmd_givemon: @ 806BFD0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -4482,7 +4482,7 @@ ScrCmd_giveegg: @ 806C050
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0806C078 @ =gUnknown_20370D0
@@ -4860,7 +4860,7 @@ ScrCmd_checktrainerflag: @ 806C30C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl HasTrainerAlreadyBeenFought
@@ -4877,7 +4877,7 @@ ScrCmd_settrainerflag: @ 806C330
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl trainer_flag_set
@@ -4892,7 +4892,7 @@ ScrCmd_cleartrainerflag: @ 806C34C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl trainer_flag_clear
@@ -4976,7 +4976,7 @@ sub_806C3E8: @ 806C3E8
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806C40C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
@@ -5034,7 +5034,7 @@ ScrCmd_dofieldeffect: @ 806C430
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _0806C454 @ =gUnknown_20370B6
@@ -5059,7 +5059,7 @@ ScrCmd_setfieldeffectarg: @ 806C458
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r1, _0806C484 @ =gUnknown_20386E0
 	lsls r4, 2
 	adds r4, r1
@@ -5101,7 +5101,7 @@ ScrCmd_waitfieldeffect: @ 806C4A8
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	ldr r1, _0806C4CC @ =gUnknown_20370B6
 	strh r0, [r1]
 	ldr r1, _0806C4D0 @ =WaitForFieldEffectFinish
@@ -5122,7 +5122,7 @@ ScrCmd_setrespawn: @ 806C4D4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80554CC
@@ -5152,7 +5152,7 @@ ScrCmd_playmoncry: @ 806C508
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -5160,7 +5160,7 @@ ScrCmd_playmoncry: @ 806C508
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5191,28 +5191,28 @@ ScrCmd_setmetatile: @ 806C554
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	adds r1, r6, 0x7
 	lsls r1, 16
@@ -5250,7 +5250,7 @@ ScrCmd_opendoor: @ 806C5D4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -5258,7 +5258,7 @@ ScrCmd_opendoor: @ 806C5D4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	adds r5, 0x7
@@ -5283,14 +5283,14 @@ ScrCmd_opendoor: @ 806C5D4
 	bx r1
 	thumb_func_end ScrCmd_opendoor
 
-	thumb_func_start sub_806C62C
-sub_806C62C: @ 806C62C
+	thumb_func_start ScrCmd_closedoor
+ScrCmd_closedoor: @ 806C62C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -5298,7 +5298,7 @@ sub_806C62C: @ 806C62C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	lsls r1, 16
 	adds r4, 0x7
@@ -5314,7 +5314,7 @@ sub_806C62C: @ 806C62C
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C62C
+	thumb_func_end ScrCmd_closedoor
 
 	thumb_func_start sub_806C670
 sub_806C670: @ 806C670
@@ -5351,7 +5351,7 @@ sub_806C69C: @ 806C69C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -5359,7 +5359,7 @@ sub_806C69C: @ 806C69C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	lsls r1, 16
 	adds r4, 0x7
@@ -5384,7 +5384,7 @@ sub_806C6E0: @ 806C6E0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -5392,7 +5392,7 @@ sub_806C6E0: @ 806C6E0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	adds r1, r0, 0
 	lsls r1, 16
 	adds r4, 0x7
@@ -5422,8 +5422,8 @@ sub_806C728: @ 806C728
 	bx lr
 	thumb_func_end sub_806C728
 
-	thumb_func_start sub_806C72C
-sub_806C72C: @ 806C72C
+	thumb_func_start ScrCmd_checkcoins
+ScrCmd_checkcoins: @ 806C72C
 	push {r4,lr}
 	bl ScriptReadHalfword
 	lsls r0, 16
@@ -5436,15 +5436,15 @@ sub_806C72C: @ 806C72C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C72C
+	thumb_func_end ScrCmd_checkcoins
 
-	thumb_func_start sub_806C74C
-sub_806C74C: @ 806C74C
+	thumb_func_start ScrCmd_givecoins
+ScrCmd_givecoins: @ 806C74C
 	push {lr}
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80D05A4
@@ -5467,15 +5467,15 @@ _0806C778:
 	bx r1
 	.align 2, 0
 _0806C780: .4byte gUnknown_20370D0
-	thumb_func_end sub_806C74C
+	thumb_func_end ScrCmd_givecoins
 
-	thumb_func_start sub_806C784
-sub_806C784: @ 806C784
+	thumb_func_start ScrCmd_takecoins
+ScrCmd_takecoins: @ 806C784
 	push {lr}
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80D05E4
@@ -5498,7 +5498,7 @@ _0806C7B0:
 	bx r1
 	.align 2, 0
 _0806C7B8: .4byte gUnknown_20370D0
-	thumb_func_end sub_806C784
+	thumb_func_end ScrCmd_takecoins
 
 	thumb_func_start sub_806C7BC
 sub_806C7BC: @ 806C7BC
@@ -5528,7 +5528,7 @@ sub_806C7D4: @ 806C7D4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -5552,7 +5552,7 @@ sub_806C80C: @ 806C80C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0806C83C @ =gUnknown_20370D0
@@ -5581,7 +5581,7 @@ sub_806C844: @ 806C844
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E568
+	bl VarGet
 	lsls r0, 16
 	lsrs r3, r0, 16
 	ldr r0, [r4, 0x8]

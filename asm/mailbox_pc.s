@@ -85,7 +85,7 @@ sub_810EBE0: @ 810EBE0
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
-	bl sub_8003E3C
+	bl RemoveWindow
 	movs r0, 0xFF
 	strb r0, [r4]
 	pop {r4}
@@ -216,7 +216,7 @@ _0810ECCE:
 	strb r4, [r5, 0x11]
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_80F7AC0
+	bl GetMenuCursorDimensionByFont
 	strb r0, [r5, 0x12]
 	strb r4, [r5, 0x13]
 	ldrb r0, [r5, 0x16]

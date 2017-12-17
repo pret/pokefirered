@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8097C84
-sub_8097C84: @ 8097C84
+	thumb_func_start ClearMailData
+ClearMailData: @ 8097C84
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _08097CAC @ =gUnknown_3005008
@@ -18,7 +18,7 @@ _08097C8A:
 	adds r1, r0
 	ldr r0, [r5]
 	adds r0, r1
-	bl sub_8097CB4
+	bl ClearMailStruct
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -30,10 +30,10 @@ _08097C8A:
 	.align 2, 0
 _08097CAC: .4byte gUnknown_3005008
 _08097CB0: .4byte 0x00002cd0
-	thumb_func_end sub_8097C84
+	thumb_func_end ClearMailData
 
-	thumb_func_start sub_8097CB4
-sub_8097CB4: @ 8097CB4
+	thumb_func_start ClearMailStruct
+ClearMailStruct: @ 8097CB4
 	push {r4-r6,lr}
 	adds r3, r0, 0
 	ldr r0, _08097D04 @ =0x0000ffff
@@ -79,10 +79,10 @@ _08097CEE:
 	bx r0
 	.align 2, 0
 _08097D04: .4byte 0x0000ffff
-	thumb_func_end sub_8097CB4
+	thumb_func_end ClearMailStruct
 
-	thumb_func_start sub_8097D08
-sub_8097D08: @ 8097D08
+	thumb_func_start MonHasMail
+MonHasMail: @ 8097D08
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0xC
@@ -106,7 +106,7 @@ _08097D32:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8097D08
+	thumb_func_end MonHasMail
 
 	thumb_func_start sub_8097D38
 sub_8097D38: @ 8097D38
@@ -448,7 +448,7 @@ TakeMailFromMon: @ 8097FB8
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
-	bl sub_8097D08
+	bl MonHasMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08098008

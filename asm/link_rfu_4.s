@@ -37,7 +37,7 @@ sub_8142420: @ 8142420
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r4, 0x1
 	movs r1, 0x11
 	mov r10, r1
@@ -65,7 +65,7 @@ _0814245E:
 	movs r0, 0x3
 	movs r1, 0x1
 	lsrs r3, r5, 24
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	b _08142494
 _08142480:
 	lsrs r2, r6, 24
@@ -76,7 +76,7 @@ _08142480:
 	movs r0, 0x3
 	movs r1, 0x2
 	lsrs r3, r5, 24
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 _08142494:
 	movs r0, 0x80
 	lsls r0, 17
@@ -117,7 +117,7 @@ _081424C6:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	b _081424F6
 _081424DE:
 	movs r0, 0x20
@@ -130,10 +130,10 @@ _081424DE:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 _081424F6:
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -149,7 +149,7 @@ sub_8142504: @ 8142504
 	bl sub_8008FCC
 	movs r0, 0x1
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r1, 0
 	str r1, [sp]
 	movs r0, 0x2
@@ -168,7 +168,7 @@ sub_8142504: @ 8142504
 	movs r2, 0xF
 	bl sub_8150048
 	movs r0, 0x1
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x3
 	bl sub_8003F20
@@ -185,9 +185,9 @@ _0814255C: .4byte gUnknown_8466EF0
 sub_8142560: @ 8142560
 	push {lr}
 	movs r0, 0x1
-	bl sub_815036C
+	bl rbox_fill_rectangle
 	movs r0, 0x1
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x1
 	bl sub_8003F20
@@ -195,8 +195,8 @@ sub_8142560: @ 8142560
 	bx r0
 	thumb_func_end sub_8142560
 
-	thumb_func_start sub_814257C
-sub_814257C: @ 814257C
+	thumb_func_start mevent_0814257C
+mevent_0814257C: @ 814257C
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -273,7 +273,7 @@ _08142606:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_814257C
+	thumb_func_end mevent_0814257C
 
 	thumb_func_start sub_8142610
 sub_8142610: @ 8142610
@@ -468,14 +468,14 @@ _0814273A:
 	add r1, sp, 0x4
 	movs r2, 0x1
 	movs r3, 0xA
-	bl sub_8106ED0
+	bl DoMysteryGiftListMenu
 	adds r4, r0, 0
 	movs r0, 0x1
 	negs r0, r0
 	cmp r4, r0
 	beq _0814278A
 	movs r0, 0x2
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	movs r0, 0x2
 	movs r1, 0x1
 	bl sub_8003F20
@@ -533,7 +533,7 @@ _081427E2:
 	strh r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r4]
 	movs r2, 0
 	str r2, [sp]
@@ -555,7 +555,7 @@ _081427E2:
 	movs r1, 0x2
 	bl sub_8003F20
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	b _0814287E
 	.align 2, 0
 _08142828: .4byte gUnknown_8466D98
@@ -618,9 +618,9 @@ _0814288C:
 	movs r0, 0
 	strb r0, [r5]
 	ldrb r0, [r4]
-	bl sub_815036C
+	bl rbox_fill_rectangle
 	ldrb r0, [r4]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_8003F20
@@ -632,9 +632,9 @@ _081428C2:
 	movs r0, 0
 	strb r0, [r5]
 	ldrb r0, [r4]
-	bl sub_815036C
+	bl rbox_fill_rectangle
 	ldrb r0, [r4]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_8003F20
@@ -694,7 +694,7 @@ _08142934:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r5]
 	movs r2, 0
 	str r2, [sp]
@@ -716,7 +716,7 @@ _08142934:
 	movs r1, 0x2
 	bl sub_8003F20
 	ldrb r0, [r5]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r6]
 	adds r0, 0x1
 	strb r0, [r6]
@@ -761,7 +761,7 @@ _081429D4:
 	str r2, [sp]
 	movs r2, 0x1
 	movs r3, 0xA
-	bl sub_8106ED0
+	bl DoMysteryGiftListMenu
 	adds r4, r0, 0
 	movs r0, 0x1
 	negs r0, r0
@@ -770,9 +770,9 @@ _081429D4:
 	movs r0, 0
 	strb r0, [r6]
 	ldrb r0, [r5]
-	bl sub_815036C
+	bl rbox_fill_rectangle
 	ldrb r0, [r5]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl sub_8003F20
@@ -787,9 +787,9 @@ _08142A14:
 	movs r0, 0
 	strb r0, [r6]
 	ldrb r0, [r5]
-	bl sub_815036C
+	bl rbox_fill_rectangle
 	ldrb r0, [r5]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl sub_8003F20
@@ -835,9 +835,9 @@ sub_8142A58: @ 8142A58
 _08142A68:
 	cmp r1, 0
 	bne _08142A80
-	bl sub_8143D6C
+	bl sav1_get_mevent_buffer_1
 	adds r4, r0, 0
-	bl sub_8143D80
+	bl sav1_get_mevent_buffer_2
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl sub_8145654
@@ -939,8 +939,8 @@ _08142B0E:
 _08142B1C: .4byte gUnknown_841EC99
 	thumb_func_end sub_8142AFC
 
-	thumb_func_start sub_8142B20
-sub_8142B20: @ 8142B20
+	thumb_func_start mevent_message_was_thrown_away
+mevent_message_was_thrown_away: @ 8142B20
 	push {lr}
 	cmp r1, 0
 	beq _08142B30
@@ -951,15 +951,15 @@ _08142B2C: .4byte gUnknown_841ED9C
 _08142B30:
 	ldr r1, _08142B3C @ =gUnknown_841ED7B
 _08142B32:
-	bl sub_814257C
+	bl mevent_0814257C
 	pop {r1}
 	bx r1
 	.align 2, 0
 _08142B3C: .4byte gUnknown_841ED7B
-	thumb_func_end sub_8142B20
+	thumb_func_end mevent_message_was_thrown_away
 
-	thumb_func_start sub_8142B40
-sub_8142B40: @ 8142B40
+	thumb_func_start mevent_save_game
+mevent_save_game: @ 8142B40
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4]
@@ -987,7 +987,7 @@ _08142B6C:
 _08142B74: .4byte gUnknown_841ED2F
 _08142B78:
 	movs r0, 0
-	bl sub_80DA364
+	bl TrySavingData
 	b _08142B98
 _08142B80:
 	ldr r0, _08142B88 @ =gUnknown_841ED50
@@ -1021,10 +1021,10 @@ _08142BB2:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8142B40
+	thumb_func_end mevent_save_game
 
-	thumb_func_start sub_8142BB8
-sub_8142BB8: @ 8142BB8
+	thumb_func_start mevent_message
+mevent_message: @ 8142BB8
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -1176,10 +1176,10 @@ _08142CE0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8142BB8
+	thumb_func_end mevent_message
 
-	thumb_func_start sub_8142CE8
-sub_8142CE8: @ 8142CE8
+	thumb_func_start mevent_08142CE8
+mevent_08142CE8: @ 8142CE8
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r0, r1, 0
@@ -1203,7 +1203,7 @@ _08142D06:
 _08142D0E:
 	movs r0, 0x81
 	lsls r0, 1
-	bl sub_8071C60
+	bl PlayFanfare
 	strh r4, [r5]
 	b _08142D28
 _08142D1A:
@@ -1220,7 +1220,7 @@ _08142D28:
 	strb r0, [r6]
 	b _08142D46
 _08142D30:
-	bl sub_8071C9C
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08142D46
@@ -1235,10 +1235,10 @@ _08142D48:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8142CE8
+	thumb_func_end mevent_08142CE8
 
-	thumb_func_start sub_8142D50
-sub_8142D50: @ 8142D50
+	thumb_func_start mevent_message_stamp_card_etc_send_status
+mevent_message_stamp_card_etc_send_status: @ 8142D50
 	push {r4,lr}
 	adds r3, r0, 0
 	ldr r1, _08142D6C @ =gUnknown_841E7BC
@@ -1342,7 +1342,7 @@ _08142E12:
 	bx r1
 	.align 2, 0
 _08142E1C: .4byte gUnknown_841EC6A
-	thumb_func_end sub_8142D50
+	thumb_func_end mevent_message_stamp_card_etc_send_status
 
 	thumb_func_start sub_8142E20
 sub_8142E20: @ 8142E20
@@ -1355,18 +1355,18 @@ sub_8142E20: @ 8142E20
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, sp
-	bl sub_8142D50
+	bl mevent_message_stamp_card_etc_send_status
 	adds r1, r0, 0
 	ldr r0, [sp]
 	cmp r0, 0
 	bne _08142E46
 	adds r0, r4, 0
-	bl sub_814257C
+	bl mevent_0814257C
 	b _08142E4E
 _08142E46:
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_8142CE8
+	bl mevent_08142CE8
 _08142E4E:
 	add sp, 0x4
 	pop {r4,r5}
@@ -1374,12 +1374,12 @@ _08142E4E:
 	bx r1
 	thumb_func_end sub_8142E20
 
-	thumb_func_start sub_8142E58
-sub_8142E58: @ 8142E58
+	thumb_func_start task_add_00_mystery_gift
+task_add_00_mystery_gift: @ 8142E58
 	push {r4,lr}
 	ldr r0, _08142E98 @ =sub_8142EA0
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
@@ -1401,7 +1401,7 @@ sub_8142E58: @ 8142E58
 	strh r0, [r4, 0x6]
 	strb r1, [r4, 0xE]
 	movs r0, 0x40
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x10]
 	pop {r4}
 	pop {r0}
@@ -1409,7 +1409,7 @@ sub_8142E58: @ 8142E58
 	.align 2, 0
 _08142E98: .4byte sub_8142EA0
 _08142E9C: .4byte gUnknown_3005098
-	thumb_func_end sub_8142E58
+	thumb_func_end task_add_00_mystery_gift
 
 	thumb_func_start sub_8142EA0
 sub_8142EA0: @ 8142EA0
@@ -1530,7 +1530,7 @@ _08142FC0:
 	adds r0, 0x9
 	ldr r1, _08142FE0 @ =gUnknown_841E6DC
 _08142FC6:
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	bne _08142FD0
 	b _081435C6
@@ -1704,7 +1704,7 @@ _08143118:
 	.4byte _0814313A
 	.4byte _0814312C
 _0814312C:
-	bl sub_80FA28C
+	bl task_add_05_task_del_08FA224_when_no_RfuFunc
 	ldrh r0, [r5]
 	strb r0, [r5, 0xE]
 	movs r0, 0xD
@@ -1732,7 +1732,7 @@ _0814315C:
 	strb r0, [r5, 0x8]
 	ldr r0, _0814316C @ =gUnknown_2021CD0
 	ldr r1, _08143170 @ =gUnknown_2022744
-	bl sub_8008D84
+	bl StringCopy
 	b _081435C6
 	.align 2, 0
 _0814316C: .4byte gUnknown_2021CD0
@@ -1760,7 +1760,7 @@ _08143198:
 	bl sub_8144B58
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	bne _081431AE
 	b _081435C6
@@ -1848,7 +1848,7 @@ _08143242:
 	bne _08143250
 	ldr r0, _0814325C @ =gUnknown_2021CD0
 	ldr r1, _08143260 @ =gUnknown_2022744
-	bl sub_8008D84
+	bl StringCopy
 _08143250:
 	movs r0, 0xF
 	strb r0, [r5, 0x8]
@@ -1862,7 +1862,7 @@ _08143264:
 	ldrb r2, [r5, 0xD]
 	ldrb r3, [r5, 0xE]
 	mov r0, sp
-	bl sub_8142BB8
+	bl mevent_message
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _08143278
@@ -1874,12 +1874,12 @@ _08143278:
 	adds r0, r5, 0
 	adds r0, 0x9
 	adds r2, r5, 0
-	bl sub_8142CE8
+	bl mevent_08142CE8
 	b _08143292
 _0814328A:
 	adds r0, r5, 0
 	adds r0, 0x9
-	bl sub_814257C
+	bl mevent_0814257C
 _08143292:
 	adds r1, r0, 0
 	cmp r1, 0
@@ -1910,7 +1910,7 @@ _081432BC:
 _081432C2:
 	adds r0, r5, 0
 	adds r0, 0x9
-	bl sub_8142B40
+	bl mevent_save_game
 	b _08143596
 _081432CC:
 	adds r0, r5, 0
@@ -2096,7 +2096,7 @@ _08143416:
 _08143422:
 	adds r0, r5, 0
 	adds r0, 0x9
-	bl sub_8142B40
+	bl mevent_save_game
 	cmp r0, 0
 	bne _08143430
 	b _081435C6
@@ -2108,7 +2108,7 @@ _08143436:
 	adds r0, r5, 0
 	adds r0, 0x9
 	ldrb r1, [r5, 0xC]
-	bl sub_8142B20
+	bl mevent_message_was_thrown_away
 	b _08143596
 _08143442:
 	ldrb r0, [r5, 0xC]
@@ -2227,10 +2227,10 @@ _08143514:
 	strb r0, [r5, 0x8]
 	b _081435C6
 _08143528:
-	bl sub_80FA28C
+	bl task_add_05_task_del_08FA224_when_no_RfuFunc
 	ldr r0, _0814353C @ =gUnknown_2021CD0
 	ldr r1, _08143540 @ =gUnknown_2022760
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x22
 	strb r0, [r5, 0x8]
 	b _081435C6
@@ -2274,7 +2274,7 @@ _0814358C:
 	adds r0, r5, 0
 	adds r0, 0x9
 	ldr r1, _081435A8 @ =gUnknown_841E7BC
-	bl sub_814257C
+	bl mevent_0814257C
 _08143596:
 	cmp r0, 0
 	beq _081435C6
@@ -2291,11 +2291,11 @@ _081435AC:
 	bl sub_80098B8
 	bl sub_812B484
 	ldr r0, [r5, 0x10]
-	bl sub_8002BC4
+	bl Free
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _081435D0 @ =sub_81422FC
-	bl sub_8000544
+	bl SetMainCallback2
 _081435C6:
 	add sp, 0x4
 	pop {r4,r5}

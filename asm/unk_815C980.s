@@ -16,7 +16,7 @@ sub_815C980: @ 815C980
 	bl sub_815C9F4
 _0815C990:
 	movs r0, 0x8
-	bl sub_8002B9C
+	bl Alloc
 	str r0, [r5]
 	cmp r0, 0
 	bne _0815C9A4
@@ -28,13 +28,13 @@ _0815C9A4:
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
-	bl sub_8002B9C
+	bl Alloc
 	ldr r1, [r5]
 	str r0, [r1, 0x4]
 	cmp r0, 0
 	bne _0815C9C0
 	adds r0, r1, 0
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	b _0815C9EC
 _0815C9C0:
@@ -95,11 +95,11 @@ _0815CA1E:
 	ldr r0, _0815CA3C @ =gUnknown_203F454
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
-	bl sub_8002BC4
+	bl Free
 _0815CA28:
 	ldr r4, _0815CA3C @ =gUnknown_203F454
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _0815CA34:
@@ -149,7 +149,7 @@ sub_815CA40: @ 815CA40
 	beq _0815CB00
 	ldr r0, [r5, 0x8]
 	ldrh r0, [r0, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	ldr r2, [r6]
 	ldr r1, [r2, 0x4]
 	adds r1, r4, r1
@@ -167,7 +167,7 @@ sub_815CA40: @ 815CA40
 	cmp r0, 0
 	beq _0815CAC0
 	adds r0, r1, 0
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	b _0815CAE0
 	.align 2, 0
 _0815CAB8: .4byte gUnknown_203F454
@@ -186,7 +186,7 @@ _0815CAC0:
 	orrs r1, r0
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl sub_800EBCC
+	bl LoadCompressedObjectPic
 _0815CAE0:
 	ldr r1, [r6]
 	ldr r1, [r1, 0x4]
@@ -213,7 +213,7 @@ _0815CB08: .4byte 0x0000ffff
 _0815CB0C:
 	ldr r0, [r5, 0xC]
 	ldrh r0, [r0, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	ldr r6, _0815CC24 @ =gUnknown_203F454
 	ldr r1, [r6]
 	ldr r1, [r1, 0x4]
@@ -230,7 +230,7 @@ _0815CB0C:
 	cmp r0, 0xFF
 	bne _0815CB40
 	ldr r0, [r5, 0xC]
-	bl sub_8008928
+	bl LoadSpritePalette
 	ldr r1, [r6]
 	ldr r1, [r1, 0x4]
 	adds r1, r4, r1
@@ -1045,7 +1045,7 @@ _0815D152:
 	lsls r0, 2
 	adds r0, r1
 	ldrh r0, [r0, 0x10]
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 _0815D16E:
 	adds r0, r4, 0
 	bl sub_815D2E0
@@ -1058,7 +1058,7 @@ _0815D16E:
 	lsls r0, 2
 	adds r0, r1
 	ldrh r0, [r0, 0x12]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 _0815D18A:
 	ldr r0, _0815D1A0 @ =gUnknown_203F454
 	ldr r0, [r0]

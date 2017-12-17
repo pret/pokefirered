@@ -105,7 +105,7 @@ sub_80F8180: @ 80F8180
 	movs r2, 0x1
 	bl sub_8001658
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -123,7 +123,7 @@ sub_80F819C: @ 80F819C
 	lsrs r5, r0, 24
 	cmp r5, 0x1C
 	beq _080F8224
-	bl sub_80F6808
+	bl reset_temp_tile_data_buffers
 	ldr r4, _080F8200 @ =gUnknown_843E9E8
 	lsls r5, 4
 	adds r0, r4, 0
@@ -132,7 +132,7 @@ sub_80F819C: @ 80F819C
 	ldr r0, [r0]
 	movs r1, 0xD0
 	movs r2, 0x60
-	bl sub_80703EC
+	bl LoadPalette
 	adds r4, 0x4
 	adds r4, r5, r4
 	ldr r1, [r4]
@@ -141,17 +141,17 @@ sub_80F819C: @ 80F819C
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F6878
+	bl decompress_and_copy_tile_data_to_vram
 	movs r0, 0
-	bl sub_8002008
+	bl GetBgTilemapBuffer
 	cmp r0, 0
 	bne _080F8208
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_8002B9C
+	bl Alloc
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	ldr r1, _080F8204 @ =gUnknown_203ABED
 	movs r0, 0x1
 	strb r0, [r1]
@@ -170,9 +170,9 @@ _080F820C:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _080F8224:
 	add sp, 0x4
 	pop {r4,r5}
@@ -194,8 +194,8 @@ sub_80F8234: @ 80F8234
 	cmp r0, 0
 	beq _080F8250
 	movs r0, 0
-	bl sub_8002008
-	bl sub_8002BC4
+	bl GetBgTilemapBuffer
+	bl Free
 _080F8250:
 	pop {r0}
 	bx r0
@@ -206,7 +206,7 @@ _080F8254: .4byte gUnknown_203ABED
 	thumb_func_start sub_80F8258
 sub_80F8258: @ 80F8258
 	push {lr}
-	bl sub_80F682C
+	bl free_temp_tile_data_buffers_if_possible
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -221,13 +221,13 @@ sub_80F8268: @ 80F8268
 	lsrs r6, 24
 	ldr r0, _080F8308 @ =sub_80F83D0
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0
 	movs r1, 0x7
-	bl sub_8001AA8
+	bl GetBgAttribute
 	ldr r1, _080F830C @ =gUnknown_3005090
 	lsls r5, r4, 2
 	adds r5, r4
@@ -236,19 +236,19 @@ sub_80F8268: @ 80F8268
 	movs r4, 0
 	strh r0, [r5, 0xC]
 	movs r0, 0x50
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r5, 0x10]
 	movs r0, 0x52
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r5, 0x12]
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r5, 0xE]
 	movs r0, 0x48
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r5, 0x14]
 	movs r0, 0x4A
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r5, 0x16]
 	adds r0, r6, 0
 	bl sub_80F856C
@@ -259,23 +259,23 @@ sub_80F8268: @ 80F8268
 	movs r0, 0
 	movs r1, 0x7
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	ldr r1, _080F8310 @ =0x00003e41
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080F8314 @ =0x00002020
 	movs r0, 0x48
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	movs r0, 0x4A
 	movs r1, 0x20
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	adds r0, r6, 0
 	bl sub_80F8318
 	strh r0, [r5, 0x1E]
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -307,9 +307,9 @@ sub_80F8318: @ 80F8318
 	lsrs r6, 24
 	adds r0, r6, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r6, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	add r1, sp, 0x14
 	movs r0, 0
 	mov r9, r0
@@ -363,7 +363,7 @@ _080F83AC: .4byte gUnknown_2021D18
 sub_80F83B0: @ 80F83B0
 	push {lr}
 	ldr r0, _080F83C4 @ =sub_80F83D0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -418,7 +418,7 @@ _080F8418:
 	beq _080F8422
 	b _080F853C
 _080F8422:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F842E
@@ -429,7 +429,7 @@ _080F842E:
 	bl sub_8003F20
 	b _080F84EA
 _080F8438:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	bne _080F853C
@@ -497,7 +497,7 @@ _080F84A2:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -513,16 +513,16 @@ _080F84A2:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _080F84EA:
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
 	b _080F853C
 _080F84F2:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	bne _080F853C
@@ -532,24 +532,24 @@ _080F84F2:
 	ldrb r2, [r4, 0x4]
 	movs r0, 0
 	movs r1, 0x7
-	bl sub_80019E4
+	bl SetBgAttribute
 	ldrh r1, [r4, 0x6]
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x8]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xE]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080F853C:
 	add sp, 0x8
 	pop {r4,r5}

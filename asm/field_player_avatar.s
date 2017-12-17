@@ -17,7 +17,7 @@ sub_805B3B8: @ 805B3B8
 	ldr r2, _0805B3D4 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _0805B3D8 @ =sub_805B3DC
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -94,12 +94,12 @@ sub_805B45C: @ 805B45C
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r5, r1, 24
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805B4A6
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805B4A6
@@ -119,7 +119,7 @@ sub_805B45C: @ 805B45C
 	cmp r0, r5
 	beq _0805B4A2
 	adds r0, r4, 0
-	bl sub_8063D34
+	bl FieldObjectClearAnim
 	b _0805B4A6
 _0805B4A2:
 	movs r0, 0x1
@@ -245,7 +245,7 @@ sub_805B528: @ 805B528
 	strh r0, [r5, 0x1C]
 _0805B57A:
 	ldr r0, [r4]
-	bl sub_8063D34
+	bl FieldObjectClearAnim
 	ldrb r0, [r5, 0x1C]
 	bl sub_805C2CC
 _0805B586:
@@ -349,8 +349,8 @@ _0805B62E:
 _0805B640: .4byte gUnknown_835B764
 	thumb_func_end sub_805B5A0
 
-	thumb_func_start sub_805B644
-sub_805B644: @ 805B644
+	thumb_func_start ForcedMovement_None
+ForcedMovement_None: @ 805B644
 	push {r4,lr}
 	ldr r4, _0805B688 @ =gUnknown_2037078
 	ldrb r1, [r4]
@@ -374,7 +374,7 @@ sub_805B644: @ 805B644
 	ldrb r1, [r0, 0x18]
 	lsls r1, 28
 	lsrs r1, 28
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	ldrb r1, [r4]
 	movs r0, 0xBF
 	ands r0, r1
@@ -387,10 +387,10 @@ _0805B67E:
 	.align 2, 0
 _0805B688: .4byte gUnknown_2037078
 _0805B68C: .4byte gUnknown_2036E38
-	thumb_func_end sub_805B644
+	thumb_func_end ForcedMovement_None
 
-	thumb_func_start sub_805B690
-sub_805B690: @ 805B690
+	thumb_func_start DoForcedMovement
+DoForcedMovement: @ 805B690
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -415,7 +415,7 @@ sub_805B690: @ 805B690
 	strb r0, [r6]
 	cmp r4, 0
 	beq _0805B6EC
-	bl sub_805B644
+	bl ForcedMovement_None
 	cmp r4, 0x4
 	bhi _0805B6D4
 	movs r0, 0
@@ -450,10 +450,10 @@ _0805B6F8:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805B690
+	thumb_func_end DoForcedMovement
 
-	thumb_func_start sub_805B708
-sub_805B708: @ 805B708
+	thumb_func_start DoForcedMovementInCurrentDirection
+DoForcedMovementInCurrentDirection: @ 805B708
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _0805B734 @ =gUnknown_2037078
@@ -469,7 +469,7 @@ sub_805B708: @ 805B708
 	strb r2, [r0, 0x1]
 	ldrb r0, [r0, 0x18]
 	lsrs r0, 4
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -477,27 +477,27 @@ sub_805B708: @ 805B708
 	.align 2, 0
 _0805B734: .4byte gUnknown_2037078
 _0805B738: .4byte gUnknown_2036E38
-	thumb_func_end sub_805B708
+	thumb_func_end DoForcedMovementInCurrentDirection
 
-	thumb_func_start sub_805B73C
-sub_805B73C: @ 805B73C
+	thumb_func_start ForcedMovement_Slip
+ForcedMovement_Slip: @ 805B73C
 	push {lr}
 	ldr r0, _0805B74C @ =sub_805C11C
-	bl sub_805B708
+	bl DoForcedMovementInCurrentDirection
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0805B74C: .4byte sub_805C11C
-	thumb_func_end sub_805B73C
+	thumb_func_end ForcedMovement_Slip
 
 	thumb_func_start sub_805B750
 sub_805B750: @ 805B750
 	push {lr}
 	ldr r1, _0805B764 @ =sub_805C104
 	movs r0, 0x1
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -511,7 +511,7 @@ sub_805B768: @ 805B768
 	push {lr}
 	ldr r1, _0805B77C @ =sub_805C104
 	movs r0, 0x2
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -525,7 +525,7 @@ sub_805B780: @ 805B780
 	push {lr}
 	ldr r1, _0805B794 @ =sub_805C104
 	movs r0, 0x3
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -539,7 +539,7 @@ sub_805B798: @ 805B798
 	push {lr}
 	ldr r1, _0805B7AC @ =sub_805C104
 	movs r0, 0x4
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -554,7 +554,7 @@ sub_805B7B0: @ 805B7B0
 	bl sub_805B820
 	ldr r1, _0805B7C8 @ =sub_805C2B4
 	movs r0, 0x4
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -569,7 +569,7 @@ sub_805B7CC: @ 805B7CC
 	bl sub_805B820
 	ldr r1, _0805B7E4 @ =sub_805C2B4
 	movs r0, 0x3
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -584,7 +584,7 @@ sub_805B7E8: @ 805B7E8
 	bl sub_805B820
 	ldr r1, _0805B800 @ =sub_805C2B4
 	movs r0, 0x2
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -599,7 +599,7 @@ sub_805B804: @ 805B804
 	bl sub_805B820
 	ldr r1, _0805B81C @ =sub_805C2B4
 	movs r0, 0x1
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -622,7 +622,7 @@ sub_805B82C: @ 805B82C
 	push {lr}
 	ldr r1, _0805B840 @ =sub_805C14C
 	movs r0, 0x1
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -636,7 +636,7 @@ sub_805B844: @ 805B844
 	push {lr}
 	ldr r1, _0805B858 @ =sub_805C14C
 	movs r0, 0x2
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -650,7 +650,7 @@ sub_805B85C: @ 805B85C
 	push {lr}
 	ldr r1, _0805B870 @ =sub_805C14C
 	movs r0, 0x3
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -664,7 +664,7 @@ sub_805B874: @ 805B874
 	push {lr}
 	ldr r1, _0805B888 @ =sub_805C14C
 	movs r0, 0x4
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -673,8 +673,8 @@ sub_805B874: @ 805B874
 _0805B888: .4byte sub_805C14C
 	thumb_func_end sub_805B874
 
-	thumb_func_start sub_805B88C
-sub_805B88C: @ 805B88C
+	thumb_func_start ForcedMovement_Slide
+ForcedMovement_Slide: @ 805B88C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -691,7 +691,7 @@ sub_805B88C: @ 805B88C
 	movs r4, 0x2
 	orrs r3, r4
 	strb r3, [r2, 0x1]
-	bl sub_805B690
+	bl DoForcedMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4}
@@ -700,63 +700,63 @@ sub_805B88C: @ 805B88C
 	.align 2, 0
 _0805B8BC: .4byte gUnknown_2037078
 _0805B8C0: .4byte gUnknown_2036E38
-	thumb_func_end sub_805B88C
+	thumb_func_end ForcedMovement_Slide
 
-	thumb_func_start sub_805B8C4
-sub_805B8C4: @ 805B8C4
+	thumb_func_start ForcedMovement_SlideSouth
+ForcedMovement_SlideSouth: @ 805B8C4
 	push {lr}
 	ldr r1, _0805B8D8 @ =sub_805C11C
 	movs r0, 0x1
-	bl sub_805B88C
+	bl ForcedMovement_Slide
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0805B8D8: .4byte sub_805C11C
-	thumb_func_end sub_805B8C4
+	thumb_func_end ForcedMovement_SlideSouth
 
-	thumb_func_start sub_805B8DC
-sub_805B8DC: @ 805B8DC
+	thumb_func_start ForcedMovement_SlideNorth
+ForcedMovement_SlideNorth: @ 805B8DC
 	push {lr}
 	ldr r1, _0805B8F0 @ =sub_805C11C
 	movs r0, 0x2
-	bl sub_805B88C
+	bl ForcedMovement_Slide
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0805B8F0: .4byte sub_805C11C
-	thumb_func_end sub_805B8DC
+	thumb_func_end ForcedMovement_SlideNorth
 
-	thumb_func_start sub_805B8F4
-sub_805B8F4: @ 805B8F4
+	thumb_func_start ForcedMovement_SlideWest
+ForcedMovement_SlideWest: @ 805B8F4
 	push {lr}
 	ldr r1, _0805B908 @ =sub_805C11C
 	movs r0, 0x3
-	bl sub_805B88C
+	bl ForcedMovement_Slide
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0805B908: .4byte sub_805C11C
-	thumb_func_end sub_805B8F4
+	thumb_func_end ForcedMovement_SlideWest
 
-	thumb_func_start sub_805B90C
-sub_805B90C: @ 805B90C
+	thumb_func_start ForcedMovement_SlideEast
+ForcedMovement_SlideEast: @ 805B90C
 	push {lr}
 	ldr r1, _0805B920 @ =sub_805C11C
 	movs r0, 0x4
-	bl sub_805B88C
+	bl ForcedMovement_Slide
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0805B920: .4byte sub_805C11C
-	thumb_func_end sub_805B90C
+	thumb_func_end ForcedMovement_SlideEast
 
 	thumb_func_start sub_805B924
 sub_805B924: @ 805B924
@@ -816,7 +816,7 @@ sub_805B96C: @ 805B96C
 	.align 2, 0
 _0805B980: .4byte gUnknown_2037078
 _0805B984:
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -845,7 +845,7 @@ _0805B9AC: .4byte gUnknown_2037078
 	thumb_func_start sub_805B9B0
 sub_805B9B0: @ 805B9B0
 	push {lr}
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_805C1F4
@@ -1005,7 +1005,7 @@ _0805BAEC:
 	movs r0, 0x1
 	mov r1, sp
 	adds r2, r4, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -1063,7 +1063,7 @@ sub_805BB1C: @ 805BB1C
 	adds r0, r6, 0
 	add r1, sp, 0x4
 	adds r2, r4, 0
-	bl sub_8063A20
+	bl MoveCoords
 	add r0, sp, 0x4
 	movs r3, 0
 	ldrsh r0, [r0, r3]
@@ -1120,7 +1120,7 @@ sub_805BBA8: @ 805BBA8
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -1210,7 +1210,7 @@ sub_805BC60: @ 805BC60
 	asrs r0, r5, 16
 	lsls r4, 16
 	asrs r1, r4, 16
-	bl sub_8058D44
+	bl MapGridGetZCoordAt
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -1218,7 +1218,7 @@ sub_805BC60: @ 805BC60
 	lsrs r0, r5, 16
 	lsrs r1, r4, 16
 	movs r2, 0x3
-	bl sub_805F894
+	bl GetFieldObjectIdByXYZ
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x10
@@ -1252,7 +1252,7 @@ sub_805BCC8: @ 805BCC8
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80680F8
+	bl GetLedgeJumpDirection
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805BCE4
@@ -1286,7 +1286,7 @@ sub_805BCEC: @ 805BCEC
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_805DFB0
+	bl GetFieldObjectIdByXY
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x10
@@ -1307,7 +1307,7 @@ sub_805BCEC: @ 805BCEC
 	adds r0, r7, 0
 	mov r1, sp
 	adds r2, r5, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -1323,7 +1323,7 @@ sub_805BCEC: @ 805BCEC
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r7, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805BDA0
@@ -1501,8 +1501,8 @@ nullsub_23: @ 805BEA4
 	bx lr
 	thumb_func_end nullsub_23
 
-	thumb_func_start sub_805BEA8
-sub_805BEA8: @ 805BEA8
+	thumb_func_start PlayerAvatarTransition_ReturnToField
+PlayerAvatarTransition_ReturnToField: @ 805BEA8
 	ldr r2, _0805BEB4 @ =gUnknown_2037078
 	ldrb r1, [r2]
 	movs r0, 0x20
@@ -1511,7 +1511,7 @@ sub_805BEA8: @ 805BEA8
 	bx lr
 	.align 2, 0
 _0805BEB4: .4byte gUnknown_2037078
-	thumb_func_end sub_805BEA8
+	thumb_func_end PlayerAvatarTransition_ReturnToField
 
 	thumb_func_start sub_805BEB8
 sub_805BEB8: @ 805BEB8
@@ -1519,15 +1519,15 @@ sub_805BEB8: @ 805BEB8
 	ldr r4, _0805BEE4 @ =gUnknown_2037078
 	movs r0, 0
 	strb r0, [r4, 0x3]
-	bl sub_805BF7C
+	bl PlayerIsAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805BEF6
-	bl sub_805BFA0
+	bl PlayerCheckIfAnimFinishedOrInactive
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805BEE8
-	bl sub_805BEFC
+	bl player_is_anim_in_certain_ranges
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805BEF6
@@ -1549,8 +1549,8 @@ _0805BEF6:
 	bx r0
 	thumb_func_end sub_805BEB8
 
-	thumb_func_start sub_805BEFC
-sub_805BEFC: @ 805BEFC
+	thumb_func_start player_is_anim_in_certain_ranges
+player_is_anim_in_certain_ranges: @ 805BEFC
 	push {lr}
 	ldr r2, _0805BF48 @ =gUnknown_2036E38
 	ldr r0, _0805BF4C @ =gUnknown_2037078
@@ -1597,12 +1597,12 @@ _0805BF50:
 _0805BF52:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805BEFC
+	thumb_func_end player_is_anim_in_certain_ranges
 
 	thumb_func_start sub_805BF58
 sub_805BF58: @ 805BF58
 	push {lr}
-	bl sub_805BEFC
+	bl player_is_anim_in_certain_ranges
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805BF74
@@ -1621,8 +1621,8 @@ _0805BF76:
 	bx r1
 	thumb_func_end sub_805BF58
 
-	thumb_func_start sub_805BF7C
-sub_805BF7C: @ 805BF7C
+	thumb_func_start PlayerIsAnimActive
+PlayerIsAnimActive: @ 805BF7C
 	push {lr}
 	ldr r0, _0805BF98 @ =gUnknown_2037078
 	ldrb r1, [r0, 0x5]
@@ -1631,7 +1631,7 @@ sub_805BF7C: @ 805BF7C
 	lsls r0, 2
 	ldr r1, _0805BF9C @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1639,10 +1639,10 @@ sub_805BF7C: @ 805BF7C
 	.align 2, 0
 _0805BF98: .4byte gUnknown_2037078
 _0805BF9C: .4byte gUnknown_2036E38
-	thumb_func_end sub_805BF7C
+	thumb_func_end PlayerIsAnimActive
 
-	thumb_func_start sub_805BFA0
-sub_805BFA0: @ 805BFA0
+	thumb_func_start PlayerCheckIfAnimFinishedOrInactive
+PlayerCheckIfAnimFinishedOrInactive: @ 805BFA0
 	push {lr}
 	ldr r0, _0805BFBC @ =gUnknown_2037078
 	ldrb r1, [r0, 0x5]
@@ -1651,7 +1651,7 @@ sub_805BFA0: @ 805BFA0
 	lsls r0, 2
 	ldr r1, _0805BFC0 @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1659,10 +1659,10 @@ sub_805BFA0: @ 805BFA0
 	.align 2, 0
 _0805BFBC: .4byte gUnknown_2037078
 _0805BFC0: .4byte gUnknown_2036E38
-	thumb_func_end sub_805BFA0
+	thumb_func_end PlayerCheckIfAnimFinishedOrInactive
 
-	thumb_func_start sub_805BFC4
-sub_805BFC4: @ 805BFC4
+	thumb_func_start player_set_x22
+player_set_x22: @ 805BFC4
 	ldr r3, _0805BFD8 @ =gUnknown_2036E38
 	ldr r1, _0805BFDC @ =gUnknown_2037078
 	ldrb r2, [r1, 0x5]
@@ -1676,10 +1676,10 @@ sub_805BFC4: @ 805BFC4
 	.align 2, 0
 _0805BFD8: .4byte gUnknown_2036E38
 _0805BFDC: .4byte gUnknown_2037078
-	thumb_func_end sub_805BFC4
+	thumb_func_end player_set_x22
 
-	thumb_func_start sub_805BFE0
-sub_805BFE0: @ 805BFE0
+	thumb_func_start player_get_x22
+player_get_x22: @ 805BFE0
 	ldr r2, _0805BFF4 @ =gUnknown_2036E38
 	ldr r0, _0805BFF8 @ =gUnknown_2037078
 	ldrb r1, [r0, 0x5]
@@ -1693,7 +1693,7 @@ sub_805BFE0: @ 805BFE0
 	.align 2, 0
 _0805BFF4: .4byte gUnknown_2036E38
 _0805BFF8: .4byte gUnknown_2037078
-	thumb_func_end sub_805BFE0
+	thumb_func_end player_get_x22
 
 	thumb_func_start sub_805BFFC
 sub_805BFFC: @ 805BFFC
@@ -1708,7 +1708,7 @@ sub_805BFFC: @ 805BFFC
 	lsls r0, 2
 	ldr r2, _0805C020 @ =gUnknown_2036E38
 	adds r0, r2
-	bl sub_8063D00
+	bl FieldObjectForceSetSpecialAnim
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1723,12 +1723,12 @@ sub_805C024: @ 805C024
 	lsrs r5, r0, 24
 	lsls r1, 24
 	lsrs r4, r1, 24
-	bl sub_805BF7C
+	bl PlayerIsAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805C05E
 	adds r0, r4, 0
-	bl sub_805BFC4
+	bl player_set_x22
 	ldr r0, _0805C064 @ =gUnknown_2037078
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -1942,7 +1942,7 @@ sub_805C1AC: @ 805C1AC
 	adds r0, r4, 0
 	bl sub_805C438
 	adds r0, r4, 0
-	bl sub_8064244
+	bl GetStepInPlaceDelay16AnimId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1961,7 +1961,7 @@ sub_805C1D0: @ 805C1D0
 	adds r0, r4, 0
 	bl sub_805C438
 	adds r0, r4, 0
-	bl sub_8064218
+	bl GetStepInPlaceDelay32AnimId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2351,11 +2351,11 @@ _0805C4A0:
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	movs r0, 0x2
 	mov r1, sp
 	adds r2, r4, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -2383,8 +2383,8 @@ _0805C4EC: .4byte gUnknown_2037078
 _0805C4F0: .4byte gUnknown_835B864
 	thumb_func_end sub_805C438
 
-	thumb_func_start sub_805C4F4
-sub_805C4F4: @ 805C4F4
+	thumb_func_start GetXYCoordsOneStepInFrontOfPlayer
+GetXYCoordsOneStepInFrontOfPlayer: @ 805C4F4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -2404,22 +2404,22 @@ sub_805C4F4: @ 805C4F4
 	adds r0, r3
 	ldrh r0, [r0, 0x12]
 	strh r0, [r5]
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_8063A20
+	bl MoveCoords
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805C530: .4byte gUnknown_2036E38
 _0805C534: .4byte gUnknown_2037078
-	thumb_func_end sub_805C4F4
+	thumb_func_end GetXYCoordsOneStepInFrontOfPlayer
 
-	thumb_func_start sub_805C538
-sub_805C538: @ 805C538
+	thumb_func_start PlayerGetDestCoords
+PlayerGetDestCoords: @ 805C538
 	push {r4,r5,lr}
 	ldr r5, _0805C560 @ =gUnknown_2036E38
 	ldr r4, _0805C564 @ =gUnknown_2037078
@@ -2443,10 +2443,10 @@ sub_805C538: @ 805C538
 	.align 2, 0
 _0805C560: .4byte gUnknown_2036E38
 _0805C564: .4byte gUnknown_2037078
-	thumb_func_end sub_805C538
+	thumb_func_end PlayerGetDestCoords
 
-	thumb_func_start sub_805C568
-sub_805C568: @ 805C568
+	thumb_func_start plaer_get_pos_including_state_based_drift
+plaer_get_pos_including_state_based_drift: @ 805C568
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -2580,10 +2580,10 @@ _0805C6BC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C568
+	thumb_func_end plaer_get_pos_including_state_based_drift
 
-	thumb_func_start sub_805C6C4
-sub_805C6C4: @ 805C6C4
+	thumb_func_start player_get_direction_lower_nybble
+player_get_direction_lower_nybble: @ 805C6C4
 	ldr r2, _0805C6DC @ =gUnknown_2036E38
 	ldr r0, _0805C6E0 @ =gUnknown_2037078
 	ldrb r1, [r0, 0x5]
@@ -2598,10 +2598,10 @@ sub_805C6C4: @ 805C6C4
 	.align 2, 0
 _0805C6DC: .4byte gUnknown_2036E38
 _0805C6E0: .4byte gUnknown_2037078
-	thumb_func_end sub_805C6C4
+	thumb_func_end player_get_direction_lower_nybble
 
-	thumb_func_start sub_805C6E4
-sub_805C6E4: @ 805C6E4
+	thumb_func_start player_get_direction_upper_nybble
+player_get_direction_upper_nybble: @ 805C6E4
 	ldr r2, _0805C6F8 @ =gUnknown_2036E38
 	ldr r0, _0805C6FC @ =gUnknown_2037078
 	ldrb r1, [r0, 0x5]
@@ -2615,10 +2615,10 @@ sub_805C6E4: @ 805C6E4
 	.align 2, 0
 _0805C6F8: .4byte gUnknown_2036E38
 _0805C6FC: .4byte gUnknown_2037078
-	thumb_func_end sub_805C6E4
+	thumb_func_end player_get_direction_upper_nybble
 
-	thumb_func_start sub_805C700
-sub_805C700: @ 805C700
+	thumb_func_start PlayerGetZCoord
+PlayerGetZCoord: @ 805C700
 	ldr r2, _0805C714 @ =gUnknown_2036E38
 	ldr r0, _0805C718 @ =gUnknown_2037078
 	ldrb r1, [r0, 0x5]
@@ -2632,7 +2632,7 @@ sub_805C700: @ 805C700
 	.align 2, 0
 _0805C714: .4byte gUnknown_2036E38
 _0805C718: .4byte gUnknown_2037078
-	thumb_func_end sub_805C700
+	thumb_func_end PlayerGetZCoord
 
 	thumb_func_start sub_805C71C
 sub_805C71C: @ 805C71C
@@ -2659,8 +2659,8 @@ _0805C744: .4byte gUnknown_2037078
 _0805C748: .4byte gUnknown_2036E38
 	thumb_func_end sub_805C71C
 
-	thumb_func_start sub_805C74C
-sub_805C74C: @ 805C74C
+	thumb_func_start TestPlayerAvatarFlags
+TestPlayerAvatarFlags: @ 805C74C
 	ldr r1, _0805C758 @ =gUnknown_2037078
 	ldrb r1, [r1]
 	ands r1, r0
@@ -2668,7 +2668,7 @@ sub_805C74C: @ 805C74C
 	bx lr
 	.align 2, 0
 _0805C758: .4byte gUnknown_2037078
-	thumb_func_end sub_805C74C
+	thumb_func_end TestPlayerAvatarFlags
 
 	thumb_func_start sub_805C75C
 sub_805C75C: @ 805C75C
@@ -2679,19 +2679,19 @@ sub_805C75C: @ 805C75C
 _0805C764: .4byte gUnknown_2037078
 	thumb_func_end sub_805C75C
 
-	thumb_func_start sub_805C768
-sub_805C768: @ 805C768
+	thumb_func_start GetPlayerAvatarObjectId
+GetPlayerAvatarObjectId: @ 805C768
 	ldr r0, _0805C770 @ =gUnknown_2037078
 	ldrb r0, [r0, 0x4]
 	bx lr
 	.align 2, 0
 _0805C770: .4byte gUnknown_2037078
-	thumb_func_end sub_805C768
+	thumb_func_end GetPlayerAvatarObjectId
 
 	thumb_func_start sub_805C774
 sub_805C774: @ 805C774
 	push {lr}
-	bl sub_805B644
+	bl ForcedMovement_None
 	pop {r0}
 	bx r0
 	thumb_func_end sub_805C774
@@ -2712,9 +2712,9 @@ sub_805C780: @ 805C780
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x6
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C7B8
@@ -2737,15 +2737,15 @@ sub_805C7C8: @ 805C7C8
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_805C7E0
+	bl GetPlayerAvatarGraphicsIdByStateIdAndGender
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	thumb_func_end sub_805C7C8
 
-	thumb_func_start sub_805C7E0
-sub_805C7E0: @ 805C7E0
+	thumb_func_start GetPlayerAvatarGraphicsIdByStateIdAndGender
+GetPlayerAvatarGraphicsIdByStateIdAndGender: @ 805C7E0
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
@@ -2757,7 +2757,7 @@ sub_805C7E0: @ 805C7E0
 	bx lr
 	.align 2, 0
 _0805C7F4: .4byte gUnknown_835B874
-	thumb_func_end sub_805C7E0
+	thumb_func_end GetPlayerAvatarGraphicsIdByStateIdAndGender
 
 	thumb_func_start sub_805C7F8
 sub_805C7F8: @ 805C7F8
@@ -2778,7 +2778,7 @@ sub_805C808: @ 805C808
 	lsrs r0, 24
 	ldr r1, _0805C820 @ =gUnknown_2037078
 	ldrb r1, [r1, 0x7]
-	bl sub_805C7E0
+	bl GetPlayerAvatarGraphicsIdByStateIdAndGender
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -2809,7 +2809,7 @@ _0805C838:
 sub_805C83C: @ 805C83C
 	push {r4,r5,lr}
 	movs r0, 0x8
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805C880
@@ -2818,7 +2818,7 @@ sub_805C83C: @ 805C83C
 _0805C84E:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_8125AC0
+	bl pokemon_has_move
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C860
@@ -2838,7 +2838,7 @@ _0805C866:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0805C84E
 _0805C880:
@@ -2854,13 +2854,13 @@ _0805C888: .4byte gUnknown_2024284
 	thumb_func_start sub_805C88C
 sub_805C88C: @ 805C88C
 	push {lr}
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _0805C8AA
 	movs r0, 0x8
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C8AA
@@ -2896,7 +2896,7 @@ sub_805C8B0: @ 805C8B0
 	lsrs r0, 28
 	mov r1, sp
 	adds r2, r5, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
@@ -2906,12 +2906,12 @@ sub_805C8B0: @ 805C8B0
 	lsls r3, 28
 	lsrs r3, 28
 	adds r0, r4, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	bne _0805C92C
-	bl sub_805C700
+	bl PlayerGetZCoord
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -2959,8 +2959,8 @@ sub_805C938: @ 805C938
 	bx r1
 	thumb_func_end sub_805C938
 
-	thumb_func_start sub_805C95C
-sub_805C95C: @ 805C95C
+	thumb_func_start ClearPlayerAvatarInfo
+ClearPlayerAvatarInfo: @ 805C95C
 	push {lr}
 	ldr r0, _0805C96C @ =gUnknown_2037078
 	movs r1, 0
@@ -2970,10 +2970,10 @@ sub_805C95C: @ 805C95C
 	bx r0
 	.align 2, 0
 _0805C96C: .4byte gUnknown_2037078
-	thumb_func_end sub_805C95C
+	thumb_func_end ClearPlayerAvatarInfo
 
-	thumb_func_start sub_805C970
-sub_805C970: @ 805C970
+	thumb_func_start SetPlayerAvatarStateMask
+SetPlayerAvatarStateMask: @ 805C970
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _0805C984 @ =gUnknown_2037078
@@ -2985,10 +2985,10 @@ sub_805C970: @ 805C970
 	bx lr
 	.align 2, 0
 _0805C984: .4byte gUnknown_2037078
-	thumb_func_end sub_805C970
+	thumb_func_end SetPlayerAvatarStateMask
 
-	thumb_func_start sub_805C988
-sub_805C988: @ 805C988
+	thumb_func_start GetPlayerAvatarStateTransitionByGraphicsId
+GetPlayerAvatarStateTransitionByGraphicsId: @ 805C988
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3023,10 +3023,10 @@ _0805C9C0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C988
+	thumb_func_end GetPlayerAvatarStateTransitionByGraphicsId
 
-	thumb_func_start sub_805C9C8
-sub_805C9C8: @ 805C9C8
+	thumb_func_start GetPlayerAvatarGraphicsIdByCurrentState
+GetPlayerAvatarGraphicsIdByCurrentState: @ 805C9C8
 	push {r4-r6,lr}
 	ldr r0, _0805C9F0 @ =gUnknown_2037078
 	ldrb r5, [r0]
@@ -3062,10 +3062,10 @@ _0805CA04:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C9C8
+	thumb_func_end GetPlayerAvatarGraphicsIdByCurrentState
 
-	thumb_func_start sub_805CA0C
-sub_805CA0C: @ 805CA0C
+	thumb_func_start SetPlayerAvatarExtraStateTransition
+SetPlayerAvatarExtraStateTransition: @ 805CA0C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3074,7 +3074,7 @@ sub_805CA0C: @ 805CA0C
 	lsrs r4, 24
 	ldr r5, _0805CA38 @ =gUnknown_2037078
 	ldrb r1, [r5, 0x7]
-	bl sub_805C988
+	bl GetPlayerAvatarStateTransitionByGraphicsId
 	lsls r0, 24
 	lsrs r0, 24
 	orrs r0, r4
@@ -3087,10 +3087,10 @@ sub_805CA0C: @ 805CA0C
 	bx r0
 	.align 2, 0
 _0805CA38: .4byte gUnknown_2037078
-	thumb_func_end sub_805CA0C
+	thumb_func_end SetPlayerAvatarExtraStateTransition
 
-	thumb_func_start sub_805CA3C
-sub_805CA3C: @ 805CA3C
+	thumb_func_start InitPlayerAvatar
+InitPlayerAvatar: @ 805CA3C
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -3117,7 +3117,7 @@ sub_805CA3C: @ 805CA3C
 	strb r0, [r1]
 	movs r0, 0
 	mov r1, r8
-	bl sub_805C7E0
+	bl GetPlayerAvatarGraphicsIdByStateIdAndGender
 	mov r1, sp
 	movs r3, 0
 	strb r0, [r1, 0x1]
@@ -3145,7 +3145,7 @@ sub_805CA3C: @ 805CA3C
 	strh r3, [r0, 0xE]
 	str r3, [sp, 0x10]
 	strh r3, [r0, 0x14]
-	bl sub_805E7F4
+	bl SpawnSpecialFieldObject
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -3162,8 +3162,8 @@ sub_805CA3C: @ 805CA3C
 	strb r0, [r4, 0x1B]
 	adds r0, r4, 0
 	mov r1, r9
-	bl sub_805F218
-	bl sub_805C95C
+	bl FieldObjectTurn
+	bl ClearPlayerAvatarInfo
 	ldr r0, _0805CB00 @ =gUnknown_2037078
 	strb r6, [r0, 0x2]
 	strb r6, [r0, 0x3]
@@ -3173,7 +3173,7 @@ sub_805CA3C: @ 805CA3C
 	mov r1, r8
 	strb r1, [r0, 0x7]
 	movs r0, 0x21
-	bl sub_805C970
+	bl SetPlayerAvatarStateMask
 	add sp, 0x18
 	pop {r3,r4}
 	mov r8, r3
@@ -3184,7 +3184,7 @@ sub_805CA3C: @ 805CA3C
 	.align 2, 0
 _0805CAFC: .4byte gUnknown_2036E38
 _0805CB00: .4byte gUnknown_2037078
-	thumb_func_end sub_805CA3C
+	thumb_func_end InitPlayerAvatar
 
 	thumb_func_start sub_805CB04
 sub_805CB04: @ 805CB04
@@ -3208,7 +3208,7 @@ sub_805CB04: @ 805CB04
 	orrs r0, r3
 	strb r0, [r1, 0x1]
 	movs r0, 0x8
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CB5C
@@ -3265,7 +3265,7 @@ sub_805CB70: @ 805CB70
 	ldr r1, _0805CBB4 @ =gUnknown_202063C
 	adds r0, r1
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3326,7 +3326,7 @@ sub_805CBE8: @ 805CBE8
 	ldr r1, _0805CC28 @ =gUnknown_202063C
 	adds r0, r1
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3396,7 +3396,7 @@ _0805CC62:
 	adds r0, r6, 0
 	mov r1, sp
 	adds r2, r7, 0
-	bl sub_8063A20
+	bl MoveCoords
 	ldrb r0, [r5, 0x1B]
 	movs r1, 0
 	ldrsh r2, [r4, r1]
@@ -3419,7 +3419,7 @@ _0805CCA8:
 	cmp r1, 0x3
 	ble _0805CC62
 	ldrb r0, [r5, 0x1B]
-	bl sub_80DB114
+	bl objid_set_invisible
 _0805CCC2:
 	add sp, 0x4
 	pop {r3,r4}
@@ -3442,7 +3442,7 @@ sub_805CCD0: @ 805CCD0
 	ldr r6, _0805CD04 @ =sub_805CD0C
 	adds r0, r6, 0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0805CD08 @ =gUnknown_3005090
@@ -3510,7 +3510,7 @@ _0805CD60: .4byte gUnknown_2037078
 sub_805CD64: @ 805CD64
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _0805CD80 @ =gUnknown_2037078
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -3532,21 +3532,21 @@ sub_805CD84: @ 805CD84
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r5, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805CE0E
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805CE0E
 	adds r0, r5, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	ldrb r0, [r6, 0xC]
-	bl sub_8064244
+	bl GetStepInPlaceDelay16AnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3580,7 +3580,7 @@ sub_805CD84: @ 805CD84
 	lsrs r0, 30
 	str r0, [r2, 0xC]
 	movs r0, 0xA
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0xCF
 	bl sub_80722CC
 	ldrh r0, [r6, 0x8]
@@ -3602,19 +3602,19 @@ sub_805CE20: @ 805CE20
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r5, 0
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE70
 	adds r0, r4, 0
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE70
 	adds r0, r5, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	adds r0, r4, 0
 	bl sub_806DE28
 	ldrh r0, [r4, 0x10]
@@ -3623,12 +3623,12 @@ sub_805CE20: @ 805CE20
 	ldr r1, _0805CE78 @ =gUnknown_2037078
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	ldr r0, _0805CE7C @ =sub_805CD0C
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _0805CE70:
 	movs r0, 0
 	pop {r4,r5}
@@ -3645,7 +3645,7 @@ sub_805CE80: @ 805CE80
 	ldr r4, _0805CE9C @ =sub_805CEA0
 	adds r0, r4, 0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r4
@@ -3704,7 +3704,7 @@ sub_805CEEC: @ 805CEEC
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CF48
@@ -3733,10 +3733,10 @@ sub_805CEEC: @ 805CEEC
 	orrs r0, r1
 	strb r0, [r5, 0x1]
 	ldr r0, _0805CF54 @ =sub_805CEA0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _0805CF48:
 	movs r0, 0
 	pop {r4-r6}
@@ -3753,7 +3753,7 @@ sub_805CF58: @ 805CF58
 	ldr r4, _0805CF74 @ =sub_805CF78
 	adds r0, r4, 0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r4
@@ -3815,7 +3815,7 @@ sub_805CFC4: @ 805CFC4
 	ldr r1, _0805CFE8 @ =gUnknown_2037078
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	movs r0, 0x27
 	bl sub_80722CC
 	movs r0, 0x1
@@ -3836,7 +3836,7 @@ sub_805CFEC: @ 805CFEC
 	movs r2, 0x4
 	bl memcpy
 	adds r0, r5, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D054
@@ -3867,7 +3867,7 @@ _0805D032:
 	cmp r0, 0x3
 	ble _0805D054
 	ldrb r0, [r4, 0xA]
-	bl sub_8064480
+	bl GetOppositeDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
@@ -3896,7 +3896,7 @@ sub_805D064: @ 805D064
 	movs r2, 0x5
 	bl memcpy
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D094
@@ -3924,12 +3924,12 @@ sub_805D0A4: @ 805D0A4
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D0E8
 	ldrb r0, [r4, 0xA]
-	bl sub_8064480
+	bl GetOppositeDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063F2C
@@ -3938,15 +3938,15 @@ sub_805D0A4: @ 805D0A4
 	lsrs r1, 24
 	adds r0, r5, 0
 	bl sub_805C06C
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	ldr r1, _0805D0F0 @ =gUnknown_2037078
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	ldr r0, _0805D0F4 @ =sub_805CF78
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _0805D0E8:
 	movs r0, 0
 	pop {r4,r5}
@@ -3963,8 +3963,8 @@ sub_805D0F8: @ 805D0F8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	bl sub_8055E84
 	bl sub_8055F1C
 	ldr r2, _0805D148 @ =gUnknown_2037078
@@ -3979,7 +3979,7 @@ sub_805D0F8: @ 805D0F8
 	ldr r5, _0805D14C @ =sub_805D1D4
 	adds r0, r5, 0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0805D150 @ =gUnknown_3005090
@@ -4004,8 +4004,8 @@ sub_805D154: @ 805D154
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r2, _0805D19C @ =gUnknown_2037078
 	ldrb r1, [r2]
 	movs r0, 0xF7
@@ -4018,7 +4018,7 @@ sub_805D154: @ 805D154
 	ldr r5, _0805D1A0 @ =sub_805D1D4
 	adds r0, r5, 0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0805D1A4 @ =gUnknown_3005090
@@ -4073,12 +4073,12 @@ sub_805D1D4: @ 805D1D4
 	ldr r1, _0805D234 @ =gUnknown_2036E38
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D200
 	adds r0, r5, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D228
@@ -4124,7 +4124,7 @@ sub_805D240: @ 805D240
 	ldr r1, _0805D2B8 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D2AE
@@ -4146,17 +4146,17 @@ sub_805D240: @ 805D240
 	bl sub_805C06C
 	movs r0, 0
 	strb r0, [r6, 0x6]
-	bl sub_806994C
-	bl sub_8068A5C
+	bl ScriptContext2_Disable
+	bl UnfreezeMapObjects
 	ldrb r1, [r4, 0x1A]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	ldr r1, _0805D2BC @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_812B35C
 _0805D2AE:
 	pop {r4-r6}
@@ -4177,7 +4177,7 @@ sub_805D2C0: @ 805D2C0
 	ldr r5, _0805D2FC @ =sub_805D304
 	adds r0, r5, 0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0805D300 @ =gUnknown_3005090
@@ -4235,7 +4235,7 @@ _0805D338: .4byte gUnknown_3005090
 sub_805D33C: @ 805D33C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _0805D358 @ =gUnknown_2037078
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -4266,7 +4266,7 @@ sub_805D35C: @ 805D35C
 	bl memcpy
 	movs r0, 0
 	strh r0, [r5, 0x20]
-	bl sub_8044EC8
+	bl Random
 	movs r2, 0x26
 	ldrsh r1, [r5, r2]
 	lsls r1, 1
@@ -4296,7 +4296,7 @@ sub_805D35C: @ 805D35C
 	lsls r4, 2
 	adds r4, r3
 	adds r0, r4, 0
-	bl sub_8063D1C
+	bl FieldObjectClearAnimIfSpecialAnimActive
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x8
 	orrs r0, r1
@@ -4365,7 +4365,7 @@ sub_805D430: @ 805D430
 	strh r0, [r4, 0x8]
 	strh r1, [r4, 0xA]
 	strh r1, [r4, 0xC]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -4485,7 +4485,7 @@ sub_805D508: @ 805D508
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D53A
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -4503,7 +4503,7 @@ _0805D548:
 	adds r4, r0
 	lsls r4, 2
 	adds r4, r5
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063510
@@ -4511,7 +4511,7 @@ _0805D548:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0805D56A:
 	movs r0, 0x1
 	pop {r4-r6}
@@ -4613,7 +4613,7 @@ sub_805D5EC: @ 805D5EC
 	blt _0805D650
 	cmp r1, 0x1
 	bgt _0805D654
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -4663,7 +4663,7 @@ sub_805D66C: @ 805D66C
 	bl sub_805D9C4
 	movs r0, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r2, _0805D6C4 @ =gUnknown_841D14E
 	movs r5, 0
 	str r5, [sp]
@@ -4738,7 +4738,7 @@ _0805D6EA:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 	ldrb r1, [r7]
 	movs r0, 0x8
 	ands r0, r1
@@ -4787,16 +4787,16 @@ _0805D788:
 	ldr r1, _0805D7B8 @ =gUnknown_2037078
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8082FB0
 	ldr r0, _0805D7BC @ =sub_805D304
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _0805D7AA:
 	movs r0, 0
 	pop {r3}
@@ -4827,7 +4827,7 @@ sub_805D7C0: @ 805D7C0
 	adds r4, r0
 	lsls r4, 2
 	adds r4, r5
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063500
@@ -4835,10 +4835,10 @@ sub_805D7C0: @ 805D7C0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r2, _0805D834 @ =gUnknown_841D169
 	movs r0, 0
 	str r0, [sp]
@@ -4883,7 +4883,7 @@ sub_805D838: @ 805D838
 	adds r4, r0
 	lsls r4, 2
 	adds r4, r5
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063500
@@ -4891,7 +4891,7 @@ sub_805D838: @ 805D838
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r2, _0805D8A8 @ =gUnknown_841D17E
 	movs r0, 0
 	str r0, [sp]
@@ -4982,7 +4982,7 @@ sub_805D8D8: @ 805D8D8
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 	ldrb r1, [r5]
 	movs r0, 0x8
 	ands r0, r1
@@ -5039,16 +5039,16 @@ sub_805D980: @ 805D980
 	bne _0805D9B6
 	ldr r0, _0805D9BC @ =gUnknown_2037078
 	strb r1, [r0, 0x6]
-	bl sub_806994C
-	bl sub_8068A5C
+	bl ScriptContext2_Disable
+	bl UnfreezeMapObjects
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_80F6F54
 	ldr r0, _0805D9C0 @ =sub_805D304
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _0805D9B6:
 	movs r0, 0
 	pop {r1}
@@ -5062,7 +5062,7 @@ _0805D9C0: .4byte sub_805D304
 sub_805D9C4: @ 805D9C4
 	push {r4-r7,lr}
 	adds r4, r0, 0
-	bl sub_8007824
+	bl AnimateSprite
 	movs r0, 0
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]
@@ -5131,7 +5131,7 @@ _0805DA2E:
 	bhi _0805DA60
 	movs r0, 0x8
 	strh r0, [r4, 0x24]
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -5186,7 +5186,7 @@ sub_805DAB0: @ 805DAB0
 	ldr r4, _0805DACC @ =sub_805DB04
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r4
@@ -5201,7 +5201,7 @@ _0805DACC: .4byte sub_805DB04
 sub_805DAD0: @ 805DAD0
 	push {lr}
 	ldr r0, _0805DAE0 @ =sub_805DB04
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -5280,7 +5280,7 @@ _0805DB58:
 	b _0805DBFA
 _0805DB5E:
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805DBFA
@@ -5299,7 +5299,7 @@ _0805DB5E:
 	lsls r0, 4
 	strh r0, [r5, 0x6]
 	strh r6, [r7, 0x26]
-	bl sub_805FAF8
+	bl CameraObjectReset2
 	ldrb r0, [r4, 0x3]
 	movs r1, 0x4
 	orrs r0, r1
@@ -5353,7 +5353,7 @@ _0805DBBA:
 _0805DBF0: .4byte gUnknown_3005068
 _0805DBF4:
 	adds r0, r2, 0
-	bl sub_8077508
+	bl DestroyTask
 _0805DBFA:
 	pop {r3}
 	mov r8, r3
@@ -5368,7 +5368,7 @@ sub_805DC04: @ 805DC04
 	ldr r4, _0805DC20 @ =sub_805DC38
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r4
@@ -5383,7 +5383,7 @@ _0805DC20: .4byte sub_805DC38
 sub_805DC24: @ 805DC24
 	push {lr}
 	ldr r0, _0805DC34 @ =sub_805DC38
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -5455,7 +5455,7 @@ _0805DC9A:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063D00
+	bl FieldObjectForceSetSpecialAnim
 	movs r0, 0
 	mov r9, r0
 	strh r6, [r5, 0x2]
@@ -5478,7 +5478,7 @@ _0805DC9A:
 	lsls r0, 4
 	strh r0, [r5, 0x6]
 	strh r6, [r7, 0x26]
-	bl sub_805FAF8
+	bl CameraObjectReset2
 	ldrb r0, [r4, 0x3]
 	movs r2, 0x4
 	orrs r0, r2
@@ -5578,9 +5578,9 @@ _0805DD76:
 	adds r0, r7, 0
 	adds r0, 0x43
 	strb r1, [r0]
-	bl sub_805FAA8
+	bl CameraObjectReset1
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _0805DDBA:
 	pop {r3,r4}
 	mov r8, r3
@@ -5608,7 +5608,7 @@ sub_805DDC8: @ 805DDC8
 	ble _0805DE20
 _0805DDE4:
 	adds r0, r5, 0
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805DE20
@@ -5623,7 +5623,7 @@ _0805DDE4:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_8063D00
+	bl FieldObjectForceSetSpecialAnim
 	movs r0, 0
 	strh r0, [r6]
 	ldrb r0, [r5, 0x18]

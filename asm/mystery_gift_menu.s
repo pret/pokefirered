@@ -8,9 +8,9 @@
 	thumb_func_start sub_8142078
 sub_8142078: @ 8142078
 	push {lr}
-	bl sub_8007610
-	bl sub_8007320
-	bl sub_8070474
+	bl ProcessSpriteCopyRequests
+	bl LoadOam
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8142078
@@ -18,10 +18,10 @@ sub_8142078: @ 8142078
 	thumb_func_start sub_814208C
 sub_814208C: @ 814208C
 	push {lr}
-	bl sub_8077578
+	bl RunTasks
 	bl sub_8002DE8
-	bl sub_8006B5C
-	bl sub_8006BA8
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814208C
@@ -59,12 +59,12 @@ _081420D4:
 	b _081422A0
 _081420D6:
 	movs r0, 0
-	bl sub_80006F4
-	bl sub_8070528
-	bl sub_8006B10
-	bl sub_80088F0
-	bl sub_80773BC
-	bl sub_8087E64
+	bl SetVBlankCallback
+	bl ResetPaletteFade
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
+	bl ResetTasks
+	bl remove_some_task
 	movs r0, 0x1
 	bl sub_8001618
 	ldr r1, _081421E0 @ =gUnknown_8466D60
@@ -74,57 +74,57 @@ _081420D6:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r4, 0x80
 	lsls r4, 4
 	adds r0, r4, 0
-	bl sub_8002B9C
+	bl Alloc
 	adds r1, r0, 0
 	movs r0, 0x3
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	adds r0, r4, 0
-	bl sub_8002B9C
+	bl Alloc
 	adds r1, r0, 0
 	movs r0, 0x2
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	adds r0, r4, 0
-	bl sub_8002B9C
+	bl Alloc
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	adds r0, r4, 0
-	bl sub_8002B9C
+	bl Alloc
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xE0
@@ -146,16 +146,16 @@ _081420D6:
 	movs r1, 0xC0
 	lsls r1, 7
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _0814226C
 	.align 2, 0
 _081421E0: .4byte gUnknown_8466D60
@@ -165,12 +165,12 @@ _081421EC:
 	ldr r0, _08142250 @ =gUnknown_8466D10
 	movs r1, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	movs r0, 0x2
-	bl sub_8150408
+	bl stdpal_get
 	movs r1, 0xD0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	movs r4, 0x20
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -180,7 +180,7 @@ _081421EC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -188,7 +188,7 @@ _081421EC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -196,7 +196,7 @@ _081421EC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	bl sub_8142420
 	lsls r0, r7, 24
 	lsrs r0, 24
@@ -207,13 +207,13 @@ _081421EC:
 _08142250: .4byte gUnknown_8466D10
 _08142254:
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _0814226C:
 	ldrb r0, [r6]
 	adds r0, 0x1
@@ -221,15 +221,15 @@ _0814226C:
 	b _081422A0
 _08142274:
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x3
-	bl sub_80019BC
+	bl ShowBg
 	ldr r0, _08142298 @ =0x00000149
-	bl sub_80722A0
+	bl PlayBGM
 	ldr r0, _0814229C @ =sub_8142078
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0xC5
-	bl sub_8000B68
+	bl EnableInterrupts
 	movs r0, 0x1
 	b _081422A2
 	.align 2, 0
@@ -252,11 +252,11 @@ sub_81422AC: @ 81422AC
 	cmp r0, 0
 	beq _081422C8
 	ldr r0, _081422CC @ =sub_814208C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r1, _081422D0 @ =gUnknown_203F3B8
 	movs r0, 0
 	strb r0, [r1]
-	bl sub_8142E58
+	bl task_add_00_mystery_gift
 _081422C8:
 	pop {r0}
 	bx r0
@@ -273,7 +273,7 @@ sub_81422D4: @ 81422D4
 	cmp r0, 0
 	beq _081422F0
 	ldr r0, _081422F4 @ =sub_814208C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r1, _081422F8 @ =gUnknown_203F3B8
 	movs r0, 0x1
 	strb r0, [r1]
@@ -294,19 +294,19 @@ sub_81422FC: @ 81422FC
 	strb r0, [r1]
 	bl sub_8003ECC
 	movs r0, 0
-	bl sub_8002008
-	bl sub_8002BC4
+	bl GetBgTilemapBuffer
+	bl Free
 	movs r0, 0x1
-	bl sub_8002008
-	bl sub_8002BC4
+	bl GetBgTilemapBuffer
+	bl Free
 	movs r0, 0x2
-	bl sub_8002008
-	bl sub_8002BC4
+	bl GetBgTilemapBuffer
+	bl Free
 	movs r0, 0x3
-	bl sub_8002008
-	bl sub_8002BC4
+	bl GetBgTilemapBuffer
+	bl Free
 	ldr r0, _08142340 @ =sub_8078914
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -323,7 +323,7 @@ sub_8142344: @ 8142344
 	lsrs r5, r0, 24
 	movs r0, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	cmp r5, 0
 	bne _081423B4
 	ldr r6, _081423A4 @ =gUnknown_841EDCA
@@ -396,7 +396,7 @@ _081423E8:
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	add sp, 0x14
 	pop {r4-r6}
 	pop {r0}

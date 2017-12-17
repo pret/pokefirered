@@ -79,7 +79,7 @@ sub_80BD100: @ 80BD100
 	lsls r4, 2
 	ldr r0, _080BD160 @ =gUnknown_2036E38
 	adds r4, r0
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r0, 0
@@ -195,7 +195,7 @@ sub_80BD1E8: @ 80BD1E8
 	lsls r2, 16
 	lsrs r2, 16
 	mov r8, r2
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r7, r5, 0
@@ -437,7 +437,7 @@ sub_80BD3A0: @ 80BD3A0
 	adds r0, r6, 0
 	add r1, sp, 0x4
 	adds r2, r5, 0
-	bl sub_8063A20
+	bl MoveCoords
 	add r0, sp, 0x4
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -581,7 +581,7 @@ sub_80BD4B8: @ 80BD4B8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BD4E6
-	bl sub_805C700
+	bl PlayerGetZCoord
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -655,7 +655,7 @@ sub_80BD540: @ 80BD540
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -685,7 +685,7 @@ _080BD582:
 sub_80BD58C: @ 80BD58C
 	push {lr}
 	movs r0, 0x4
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BD5C0
@@ -866,7 +866,7 @@ sub_80BD6C4: @ 80BD6C4
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -881,7 +881,7 @@ sub_80BD6C4: @ 80BD6C4
 	beq _080BD70C
 	movs r0, 0x2
 	strb r0, [r5, 0x8]
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	bl nullsub_24

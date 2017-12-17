@@ -15,7 +15,7 @@ sub_80423A4: @ 80423A4
 	lsrs r6, r3, 24
 	movs r1, 0x37
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	str r1, [sp]
 	ands r0, r4
@@ -90,12 +90,12 @@ sub_8042414: @ 8042414
 	str r0, [sp, 0x1C]
 	mov r0, r8
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xAF
 	beq _08042458
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 _08042458:
 	ldr r1, _080424B0 @ =gUnknown_2023D6F
 	ldr r0, _080424B4 @ =gUnknown_2024004
@@ -114,7 +114,7 @@ _08042458:
 	ldr r0, _080424C0 @ =gUnknown_2023BC4
 	strb r2, [r0]
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -454,7 +454,7 @@ _08042708:
 	ldr r4, _08042838 @ =gUnknown_2023DE4
 	ldr r0, _0804283C @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -475,7 +475,7 @@ _0804273A:
 	mov r0, r8
 	movs r1, 0x38
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x64
 	beq _08042756
 	movs r0, 0
@@ -619,7 +619,7 @@ _08042850:
 	mov r0, r8
 	movs r1, 0x15
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	ldr r0, _080428DC @ =gUnknown_825DEA1
 	ldr r1, [sp, 0x8]
@@ -631,20 +631,20 @@ _08042850:
 	adds r1, 0xD
 	mov r0, r8
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r8
 	movs r1, 0x15
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x8]
-	bl sub_804101C
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, 0x2
@@ -703,7 +703,7 @@ _08042914:
 	ldrb r1, [r0]
 	mov r0, r8
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	cmp r5, 0x63
 	bls _0804292A
@@ -721,7 +721,7 @@ _08042934:
 	mov r0, r8
 	movs r1, 0x39
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08042968
 	mov r0, r10
@@ -732,7 +732,7 @@ _08042952:
 	mov r0, r8
 	movs r1, 0x39
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08042968
 	mov r0, r10
@@ -743,12 +743,12 @@ _08042968:
 	mov r0, r8
 	movs r1, 0x3A
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	mov r0, r8
 	movs r1, 0x39
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r4, r0
 	beq _08042986
 	movs r0, 0
@@ -775,27 +775,27 @@ _080429A4:
 	adds r1, 0x11
 	mov r0, r8
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r8
 	movs r1, 0x15
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r2, r6, 24
 	lsrs r2, 24
 	adds r0, r4, 0
-	bl sub_804101C
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -817,26 +817,26 @@ _080429FA:
 	adds r1, 0x11
 	mov r0, r8
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	ldr r1, [sp, 0x8]
 	adds r1, 0xD
 	mov r0, r8
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r8
 	movs r1, 0x15
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x8]
-	bl sub_804101C
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -923,7 +923,7 @@ _08042ACC:
 	ldrb r1, [r1]
 	mov r0, r8
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	cmp r5, 0x63
 	bhi _08042BBE
@@ -937,7 +937,7 @@ _08042AF4:
 	mov r0, r8
 	movs r1, 0x15
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	ldr r0, _08042B48 @ =gUnknown_825DEA1
 	ldr r1, [sp, 0x8]
@@ -949,20 +949,20 @@ _08042AF4:
 	adds r1, 0xD
 	mov r0, r8
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r8
 	movs r1, 0x15
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x8]
-	bl sub_804101C
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r5, 0x2
@@ -978,7 +978,7 @@ _08042B4C:
 	mov r0, r8
 	movs r1, 0x20
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x63
 	bhi _08042BB4
 	ldr r0, [sp, 0x10]
@@ -992,13 +992,13 @@ _08042B68:
 	mov r0, r8
 	movs r1, 0x20
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x63
 	bls _08042BB4
 	mov r0, r8
 	movs r1, 0x20
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0xC7
 	bhi _08042BB4
 	ldr r2, [sp, 0x10]
@@ -1012,7 +1012,7 @@ _08042B92:
 	mov r0, r8
 	movs r1, 0x20
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0xC7
 	bls _08042BB4
 	ldr r1, [sp, 0x10]
@@ -1065,7 +1065,7 @@ sub_8042BE8: @ 8042BE8
 	adds r4, r2, 0
 	movs r1, 0x37
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	ands r0, r4
 	cmp r0, 0
 	bne _08042BFE
@@ -1079,8 +1079,8 @@ _08042C00:
 	bx r1
 	thumb_func_end sub_8042BE8
 
-	thumb_func_start sub_8042C08
-sub_8042C08: @ 8042C08
+	thumb_func_start GetItemEffectParamOffset
+GetItemEffectParamOffset: @ 8042C08
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -1260,7 +1260,7 @@ _08042D48:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8042C08
+	thumb_func_end GetItemEffectParamOffset
 
 	thumb_func_start sub_8042D50
 sub_8042D50: @ 8042D50
@@ -1278,10 +1278,10 @@ sub_8042D50: @ 8042D50
 	adds r0, r2
 	ldr r1, [r0]
 	adds r0, r3, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, _08042D98 @ =gUnknown_2022AC8
 	ldr r1, _08042D9C @ =gUnknown_83FCB4A
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, _08042DA0 @ =gUnknown_83FCB6A
 	bl sub_80D77F4
 	pop {r0}
@@ -1415,22 +1415,22 @@ _08042E94: .4byte gUnknown_83FBBB4
 _08042E98: .4byte gUnknown_202298C
 	thumb_func_end sub_8042DA4
 
-	thumb_func_start sub_8042E9C
-sub_8042E9C: @ 8042E9C
+	thumb_func_start GetNature
+GetNature: @ 8042E9C
 	push {lr}
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0x19
 	bl __umodsi3
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8042E9C
+	thumb_func_end GetNature
 
-	thumb_func_start sub_8042EB4
-sub_8042EB4: @ 8042EB4
+	thumb_func_start GetNatureFromPersonality
+GetNatureFromPersonality: @ 8042EB4
 	push {lr}
 	movs r1, 0x19
 	bl __umodsi3
@@ -1438,7 +1438,7 @@ sub_8042EB4: @ 8042EB4
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8042EB4
+	thumb_func_end GetNatureFromPersonality
 
 	thumb_func_start sub_8042EC4
 sub_8042EC4: @ 8042EC4
@@ -1459,24 +1459,24 @@ sub_8042EC4: @ 8042EC4
 	mov r0, r8
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	mov r0, r8
 	movs r1, 0xC
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	mov r0, r8
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	mov r0, r8
 	movs r1, 0x17
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0xC]
@@ -1496,7 +1496,7 @@ sub_8042EC4: @ 8042EC4
 _08042F30: .4byte gUnknown_3005008
 _08042F34: .4byte 0x0000311a
 _08042F38:
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _08042F40:
@@ -1532,14 +1532,14 @@ _08042F70:
 	mov r0, r8
 	movs r1, 0x38
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
 	mov r0, r8
 	movs r1, 0x20
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x8]
@@ -1619,12 +1619,12 @@ _08043026:
 	mov r0, r8
 	movs r1, 0x3B
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	mov r0, r8
 	movs r1, 0x3C
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r4, r0
 	bls _08043110
 	b _080430A2
@@ -1639,12 +1639,12 @@ _08043050:
 	mov r0, r8
 	movs r1, 0x3B
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	mov r0, r8
 	movs r1, 0x3C
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r4, r0
 	bne _08043110
 	b _080430A2
@@ -1659,12 +1659,12 @@ _0804307A:
 	mov r0, r8
 	movs r1, 0x3B
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	mov r0, r8
 	movs r1, 0x3C
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r4, r0
 	bcs _08043110
 _080430A2:
@@ -1866,8 +1866,8 @@ _080431FA:
 	bx r1
 	thumb_func_end sub_80431B4
 
-	thumb_func_start sub_8043200
-sub_8043200: @ 8043200
+	thumb_func_start NationalPokedexNumToSpecies
+NationalPokedexNumToSpecies: @ 8043200
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -1908,7 +1908,7 @@ _08043246:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8043200
+	thumb_func_end NationalPokedexNumToSpecies
 
 	thumb_func_start sub_804324C
 sub_804324C: @ 804324C
@@ -1954,8 +1954,8 @@ _08043292:
 	bx r1
 	thumb_func_end sub_804324C
 
-	thumb_func_start sub_8043298
-sub_8043298: @ 8043298
+	thumb_func_start SpeciesToNationalPokedexNum
+SpeciesToNationalPokedexNum: @ 8043298
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -1974,10 +1974,10 @@ _080432B4:
 _080432B6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8043298
+	thumb_func_end SpeciesToNationalPokedexNum
 
-	thumb_func_start sub_80432BC
-sub_80432BC: @ 80432BC
+	thumb_func_start SpeciesToHoennPokedexNum
+SpeciesToHoennPokedexNum: @ 80432BC
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -1996,10 +1996,10 @@ _080432D8:
 _080432DA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80432BC
+	thumb_func_end SpeciesToHoennPokedexNum
 
-	thumb_func_start sub_80432E0
-sub_80432E0: @ 80432E0
+	thumb_func_start HoennToNationalOrder
+HoennToNationalOrder: @ 80432E0
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -2018,10 +2018,10 @@ _080432FC:
 _080432FE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80432E0
+	thumb_func_end HoennToNationalOrder
 
-	thumb_func_start sub_8043304
-sub_8043304: @ 8043304
+	thumb_func_start SpeciesToCryId
+SpeciesToCryId: @ 8043304
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -2047,7 +2047,7 @@ _08043330:
 _08043332:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8043304
+	thumb_func_end SpeciesToCryId
 
 	thumb_func_start sub_8043338
 sub_8043338: @ 8043338
@@ -2202,8 +2202,8 @@ _08043446:
 	bx r0
 	thumb_func_end sub_8043338
 
-	thumb_func_start sub_8043458
-sub_8043458: @ 8043458
+	thumb_func_start DrawSpindaSpots
+DrawSpindaSpots: @ 8043458
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2349,10 +2349,10 @@ _0804355A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8043458
+	thumb_func_end DrawSpindaSpots
 
-	thumb_func_start sub_804356C
-sub_804356C: @ 804356C
+	thumb_func_start EvolutionRenameMon
+EvolutionRenameMon: @ 804356C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2369,12 +2369,12 @@ sub_804356C: @ 804356C
 	adds r0, r5, 0
 	movs r1, 0x2
 	mov r2, r9
-	bl sub_803FBE8
+	bl GetMonData
 	mov r4, sp
 	adds r0, r5, 0
 	movs r1, 0x3
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -2386,7 +2386,7 @@ sub_804356C: @ 804356C
 	ldr r4, _080435DC @ =gUnknown_8245EE0
 	adds r0, r4
 	mov r1, r9
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	bne _080435C8
 	mov r2, r8
@@ -2406,14 +2406,14 @@ _080435C8:
 	.align 2, 0
 _080435D8: .4byte gUnknown_2021CD0
 _080435DC: .4byte gUnknown_8245EE0
-	thumb_func_end sub_804356C
+	thumb_func_end EvolutionRenameMon
 
 	thumb_func_start sub_80435E0
 sub_80435E0: @ 80435E0
 	push {r4,r5,lr}
 	movs r5, 0
 	ldr r4, _08043608 @ =gUnknown_202273C
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -2480,8 +2480,8 @@ _08043652:
 	bx r1
 	thumb_func_end sub_8043620
 
-	thumb_func_start sub_8043658
-sub_8043658: @ 8043658
+	thumb_func_start GetBankMultiplayerId
+GetBankMultiplayerId: @ 8043658
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -2503,7 +2503,7 @@ _08043676:
 	adds r0, r2, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8043658
+	thumb_func_end GetBankMultiplayerId
 
 	thumb_func_start sub_804367C
 sub_804367C: @ 804367C
@@ -2587,13 +2587,13 @@ sub_80436F8: @ 80436F8
 	lsrs r5, r1, 24
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r7, 0
 	movs r1, 0xC
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xAF
@@ -2624,7 +2624,7 @@ _08043744:
 _08043750: .4byte gUnknown_3005008
 _08043754: .4byte 0x0000311a
 _08043758:
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08043760:
@@ -2642,7 +2642,7 @@ _08043770:
 	adds r0, r7, 0
 	movs r1, 0x20
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, sp
@@ -2661,7 +2661,7 @@ _0804378E:
 _08043798:
 	cmp r5, 0x5
 	bne _080437A8
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -2722,7 +2722,7 @@ _080437FA:
 	adds r0, r7, 0
 	movs r1, 0x26
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0xB
 	bne _08043828
 	mov r0, sp
@@ -2735,9 +2735,9 @@ _08043828:
 	adds r0, r7, 0
 	movs r1, 0x23
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
-	bl sub_8056260
+	bl sav1_map_get_name
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -2800,7 +2800,7 @@ _080438A4:
 	adds r1, 0x1A
 	mov r0, r8
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, sp
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -2912,7 +2912,7 @@ _0804397C:
 	mov r0, r8
 	movs r1, 0xC
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xAF
@@ -2944,7 +2944,7 @@ _080439B4:
 _080439C0: .4byte gUnknown_3005008
 _080439C4: .4byte 0x0000311a
 _080439C8:
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _080439D0:
@@ -3020,7 +3020,7 @@ _08043A48:
 	adds r1, 0x1A
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r5, r0
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -3063,7 +3063,7 @@ _08043A84:
 	movs r1, 0x22
 	movs r2, 0
 	str r3, [sp]
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xF
 	ands r1, r0
 	ldr r3, [sp]
@@ -3083,7 +3083,7 @@ _08043AB8:
 	adds r0, r7, 0
 	movs r1, 0x22
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0
@@ -3120,7 +3120,7 @@ _08043AEC:
 	movs r1, 0x22
 	movs r2, 0
 	str r3, [sp]
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r3, [sp]
 	cmp r0, 0
 	beq _08043B10
@@ -3138,7 +3138,7 @@ _08043B1C:
 	adds r0, r7, 0
 	movs r1, 0x22
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08043B2C
 	movs r5, 0x1
@@ -3210,13 +3210,13 @@ sub_8043B90: @ 8043B90
 	adds r4, r0, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x38
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r1, 0x80
@@ -3228,7 +3228,7 @@ sub_8043B90: @ 8043B90
 	adds r0, r4, 0
 	movs r1, 0x19
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	cmp r7, 0x63
 	bhi _08043C14
@@ -3288,7 +3288,7 @@ sub_8043C2C: @ 8043C2C
 	adds r5, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	adds r3, r1, 0
@@ -3345,13 +3345,13 @@ sub_8043C84: @ 8043C84
 	adds r0, r6, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r6, 0
 	movs r1, 0x38
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0xC]
@@ -3362,7 +3362,7 @@ _08043CBA:
 	adds r1, 0xD
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4]
 	adds r4, 0x2
 	adds r5, 0x1
@@ -3566,13 +3566,13 @@ sub_8043E2C: @ 8043E2C
 	adds r0, r6, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r6, 0
 	movs r1, 0x38
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x30]
@@ -3592,7 +3592,7 @@ _08043E70:
 	adds r1, 0xD
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4]
 	adds r4, 0x2
 	adds r5, 0x1
@@ -3744,7 +3744,7 @@ sub_8043F90: @ 8043F90
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	adds r4, r0, 0
 	bl sub_806E25C
 	cmp r0, 0
@@ -3865,12 +3865,12 @@ _08044070:
 	thumb_func_start sub_8044074
 sub_8044074: @ 8044074
 	push {lr}
-	bl sub_8071A44
+	bl ResetMapMusic
 	bl m4aMPlayAllStop
 	bl sub_8043FD4
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80722A0
+	bl PlayBGM
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8044074
@@ -3880,54 +3880,54 @@ sub_8044090: @ 8044090
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_8071A44
+	bl ResetMapMusic
 	bl m4aMPlayAllStop
 	cmp r4, 0
 	beq _080440AA
 	adds r0, r4, 0
-	bl sub_8071A74
+	bl PlayNewMapMusic
 	b _080440B6
 _080440AA:
 	bl sub_8043FD4
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8071A74
+	bl PlayNewMapMusic
 _080440B6:
 	pop {r4}
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8044090
 
-	thumb_func_start sub_80440BC
-sub_80440BC: @ 80440BC
+	thumb_func_start GetMonFrontSpritePal
+GetMonFrontSpritePal: @ 80440BC
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r6, r0, 0
 	adds r0, r5, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r2, r0, 0
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_80440F4
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80440BC
+	thumb_func_end GetMonFrontSpritePal
 
-	thumb_func_start sub_80440F4
-sub_80440F4: @ 80440F4
+	thumb_func_start GetFrontSpritePalFromSpeciesAndPersonality
+GetFrontSpritePalFromSpeciesAndPersonality: @ 80440F4
 	push {r4,r5,lr}
 	adds r3, r2, 0
 	lsls r0, 16
@@ -3971,7 +3971,7 @@ _0804413C:
 	bx r1
 	.align 2, 0
 _08044144: .4byte gUnknown_82380CC
-	thumb_func_end sub_80440F4
+	thumb_func_end GetFrontSpritePalFromSpeciesAndPersonality
 
 	thumb_func_start sub_8044148
 sub_8044148: @ 8044148
@@ -3979,30 +3979,30 @@ sub_8044148: @ 8044148
 	adds r5, r0, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r6, r0, 0
 	adds r0, r5, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r2, r0, 0
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_8044180
+	bl GetMonSpritePalStructFromOtIdPersonality
 	pop {r4-r6}
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8044148
 
-	thumb_func_start sub_8044180
-sub_8044180: @ 8044180
+	thumb_func_start GetMonSpritePalStructFromOtIdPersonality
+GetMonSpritePalStructFromOtIdPersonality: @ 8044180
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -4032,10 +4032,10 @@ _080441AC:
 	bx r1
 	.align 2, 0
 _080441B4: .4byte gUnknown_82380CC
-	thumb_func_end sub_8044180
+	thumb_func_end GetMonSpritePalStructFromOtIdPersonality
 
-	thumb_func_start sub_80441B8
-sub_80441B8: @ 80441B8
+	thumb_func_start IsHMMove2
+IsHMMove2: @ 80441B8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -4067,10 +4067,10 @@ _080441EC:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80441B8
+	thumb_func_end IsHMMove2
 
-	thumb_func_start sub_80441F4
-sub_80441F4: @ 80441F4
+	thumb_func_start IsPokeSpriteNotFlipped
+IsPokeSpriteNotFlipped: @ 80441F4
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, _08044208 @ =gUnknown_8254784
@@ -4083,14 +4083,14 @@ sub_80441F4: @ 80441F4
 	bx lr
 	.align 2, 0
 _08044208: .4byte gUnknown_8254784
-	thumb_func_end sub_80441F4
+	thumb_func_end IsPokeSpriteNotFlipped
 
-	thumb_func_start sub_804420C
-sub_804420C: @ 804420C
+	thumb_func_start GetMonFlavorRelation
+GetMonFlavorRelation: @ 804420C
 	push {r4,lr}
 	lsls r4, r1, 24
 	lsrs r4, 24
-	bl sub_8042E9C
+	bl GetNature
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08044230 @ =gUnknown_825DE24
@@ -4105,14 +4105,14 @@ sub_804420C: @ 804420C
 	bx r1
 	.align 2, 0
 _08044230: .4byte gUnknown_825DE24
-	thumb_func_end sub_804420C
+	thumb_func_end GetMonFlavorRelation
 
-	thumb_func_start sub_8044234
-sub_8044234: @ 8044234
+	thumb_func_start GetFlavorRelationByPersonality
+GetFlavorRelationByPersonality: @ 8044234
 	push {r4,lr}
 	lsls r4, r1, 24
 	lsrs r4, 24
-	bl sub_8042EB4
+	bl GetNatureFromPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08044258 @ =gUnknown_825DE24
@@ -4127,32 +4127,32 @@ sub_8044234: @ 8044234
 	bx r1
 	.align 2, 0
 _08044258: .4byte gUnknown_825DE24
-	thumb_func_end sub_8044234
+	thumb_func_end GetFlavorRelationByPersonality
 
-	thumb_func_start sub_804425C
-sub_804425C: @ 804425C
+	thumb_func_start IsTradedMon
+IsTradedMon: @ 804425C
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
 	movs r1, 0x7
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
-	bl sub_8044288
+	bl IsOtherTrainer
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x8
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804425C
+	thumb_func_end IsTradedMon
 
-	thumb_func_start sub_8044288
-sub_8044288: @ 8044288
+	thumb_func_start IsOtherTrainer
+IsOtherTrainer: @ 8044288
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	ldr r1, _080442CC @ =gUnknown_300500C
@@ -4196,18 +4196,18 @@ _080442D2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8044288
+	thumb_func_end IsOtherTrainer
 
-	thumb_func_start sub_80442D8
-sub_80442D8: @ 80442D8
+	thumb_func_start MonRestorePP
+MonRestorePP: @ 80442D8
 	push {lr}
-	bl sub_80442E4
+	bl BoxMonRestorePP
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80442D8
+	thumb_func_end MonRestorePP
 
-	thumb_func_start sub_80442E4
-sub_80442E4: @ 80442E4
+	thumb_func_start BoxMonRestorePP
+BoxMonRestorePP: @ 80442E4
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -4218,27 +4218,27 @@ _080442EC:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08044338
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x15
 	movs r2, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r2, r6, 24
 	lsrs r2, 24
 	adds r0, r4, 0
-	bl sub_804101C
+	bl CalculatePPWithBonus
 	mov r1, sp
 	strb r0, [r1]
 	adds r1, r6, 0
@@ -4254,7 +4254,7 @@ _08044338:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80442E4
+	thumb_func_end BoxMonRestorePP
 
 	thumb_func_start sub_8044348
 sub_8044348: @ 8044348
@@ -4277,7 +4277,7 @@ sub_8044348: @ 8044348
 	movs r0, 0xFF
 	strb r0, [r4, 0x4]
 	ldrb r0, [r1]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804439C
@@ -4288,7 +4288,7 @@ sub_8044348: @ 8044348
 	lsls r0, 1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8128030
+	bl pokemon_order_func
 	b _080443AA
 	.align 2, 0
 _0804438C: .4byte gUnknown_2023D6A
@@ -4318,7 +4318,7 @@ _080443AA:
 	lsls r0, 1
 	adds r0, r2
 	ldrb r0, [r0]
-	bl sub_8128030
+	bl pokemon_order_func
 	strb r0, [r4, 0x3]
 	movs r0, 0xFF
 	strb r0, [r4, 0x4]
@@ -4345,7 +4345,7 @@ sub_80443F4: @ 80443F4
 	ands r0, r1
 	cmp r0, 0
 	bne _08044468
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -4356,7 +4356,7 @@ sub_80443F4: @ 80443F4
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, _08044458 @ =gUnknown_8254784
@@ -4402,12 +4402,12 @@ sub_8044470: @ 8044470
 	adds r4, r0, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	adds r0, r5, 0
 	bl sub_804449C
@@ -4445,7 +4445,7 @@ _080444C0: .4byte 0x0000ffff
 	thumb_func_start sub_80444C4
 sub_80444C4: @ 80444C4
 	push {r4,lr}
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, _080444F4 @ =gUnknown_202273C
@@ -4456,7 +4456,7 @@ sub_80444C4: @ 80444C4
 	ldrh r1, [r1, 0x18]
 	movs r0, 0x2
 	eors r0, r1
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	adds r1, r0, 0
 	lsls r0, r1, 3
 	subs r0, r1
@@ -4484,19 +4484,19 @@ _080444FE:
 	adds r0, r4, 0
 	movs r1, 0x5
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	bne _08044538
 	adds r0, r4, 0
 	movs r1, 0x6
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08044538
 	adds r0, r4, 0
 	movs r1, 0x38
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r6
@@ -4618,7 +4618,7 @@ _080445F4:
 	beq _08044658
 _0804461A:
 	ldr r4, _08044644 @ =gUnknown_202273C
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -4647,7 +4647,7 @@ _08044648:
 	beq _08044632
 _08044658:
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044632
@@ -4676,7 +4676,7 @@ sub_8044674: @ 8044674
 	adds r0, r5, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCD
 	lsls r1, 1
 	cmp r0, r1
@@ -4691,13 +4691,13 @@ _080446A0:
 	adds r1, 0x27
 	adds r0, r5, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	adds r1, r6, 0
 	adds r1, 0x1A
 	adds r0, r5, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, _08044704 @ =gUnknown_825E026
 	lsls r1, r6, 1
 	adds r1, r2
@@ -4720,7 +4720,7 @@ _080446CC:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r5, 0
-	bl sub_8042E9C
+	bl GetNature
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r6, 24
@@ -4752,7 +4752,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCD
 	lsls r1, 1
 	cmp r0, r1
@@ -4760,7 +4760,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3B
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3B
@@ -4769,7 +4769,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3C
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3C
@@ -4778,7 +4778,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3D
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3D
@@ -4787,7 +4787,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3E
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3E
@@ -4796,7 +4796,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3F
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3F
@@ -4817,7 +4817,7 @@ _080447A8: .4byte gUnknown_2024284
 	thumb_func_start sub_80447AC
 sub_80447AC: @ 80447AC
 	push {lr}
-	bl sub_800A404
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -4852,7 +4852,7 @@ _080447EC: .4byte gUnknown_825E032
 	thumb_func_start sub_80447F0
 sub_80447F0: @ 80447F0
 	push {lr}
-	bl sub_800A404
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -4895,7 +4895,7 @@ sub_8044838: @ 8044838
 	ldrh r4, [r0]
 	ldr r0, _08044890 @ =gUnknown_20370C4
 	ldrh r6, [r0]
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	ldr r7, _08044894 @ =gUnknown_202402C
 	lsls r4, 24
 	lsrs r4, 24
@@ -4955,7 +4955,7 @@ sub_8044898: @ 8044898
 	adds r1, r5, 0
 	bl sub_8088E74
 	adds r0, r4, 0
-	bl sub_8043200
+	bl NationalPokedexNumToSpecies
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xC9
@@ -4965,7 +4965,7 @@ sub_8044898: @ 8044898
 	str r7, [r0, 0x1C]
 _080448D8:
 	adds r0, r6, 0
-	bl sub_8043200
+	bl NationalPokedexNumToSpecies
 	lsls r0, 16
 	movs r1, 0x9A
 	lsls r1, 17
@@ -4997,19 +4997,19 @@ sub_80448F8: @ 80448F8
 	cmp r0, 0
 	beq _08044944
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044944
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	mov r0, sp
-	bl sub_8008D28
+	bl StringGetEnd10
 	ldr r1, _08044940 @ =gUnknown_841D148
 	mov r0, sp
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	bne _08044944
 	movs r0, 0x1
@@ -5277,7 +5277,7 @@ sub_8044AF0: @ 8044AF0
 _08044B1E:
 	ldr r4, _08044B34 @ =gUnknown_20244F4
 	movs r0, 0x18
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r2, r0, 0
 	str r2, [r4]
 	cmp r2, 0
@@ -5380,13 +5380,13 @@ _08044BD0:
 	lsls r0, 28
 	lsrs r0, 28
 	muls r0, r1
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, [r5]
 	str r0, [r1, 0x8]
 	ldrb r0, [r1]
 	lsls r0, 28
 	lsrs r0, 23
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r2, r0, 0
 	ldr r1, [r5]
 	str r2, [r1, 0xC]
@@ -5438,7 +5438,7 @@ _08044C44:
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 3
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r2, [r5]
 	str r0, [r2, 0x10]
 	ldrb r1, [r2]
@@ -5447,7 +5447,7 @@ _08044C44:
 	ldrb r0, [r2, 0x1]
 	lsls r0, 3
 	muls r0, r1
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r2, r0, 0
 	ldr r1, [r5]
 	str r2, [r1, 0x14]
@@ -5520,7 +5520,7 @@ _08044CE2:
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
 	beq _08044D00
-	bl sub_8002BC4
+	bl Free
 	ldr r1, [r4]
 	movs r0, 0
 	str r0, [r1, 0x14]
@@ -5529,7 +5529,7 @@ _08044D00:
 	ldr r0, [r0, 0x10]
 	cmp r0, 0
 	beq _08044D12
-	bl sub_8002BC4
+	bl Free
 	ldr r1, [r4]
 	movs r0, 0
 	str r0, [r1, 0x10]
@@ -5544,7 +5544,7 @@ _08044D12:
 	ldr r0, [r0, 0xC]
 	cmp r0, 0
 	beq _08044D30
-	bl sub_8002BC4
+	bl Free
 	ldr r1, [r4]
 	movs r0, 0
 	str r0, [r1, 0xC]
@@ -5553,7 +5553,7 @@ _08044D30:
 	ldr r0, [r0, 0x8]
 	cmp r0, 0
 	beq _08044D42
-	bl sub_8002BC4
+	bl Free
 	ldr r1, [r4]
 	movs r0, 0
 	str r0, [r1, 0x8]
@@ -5567,7 +5567,7 @@ _08044D42:
 	movs r2, 0x18
 	bl memset
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 	b _08044D6C
@@ -5612,7 +5612,7 @@ _08044DA0:
 	ldr r0, [r1, 0x14]
 	cmp r0, 0
 	beq _08044DB0
-	bl sub_8002BC4
+	bl Free
 	ldr r1, [r4]
 	movs r0, 0
 	str r0, [r1, 0x14]
@@ -5621,7 +5621,7 @@ _08044DB0:
 	ldr r0, [r0, 0x10]
 	cmp r0, 0
 	beq _08044DC2
-	bl sub_8002BC4
+	bl Free
 	ldr r1, [r4]
 	movs r0, 0
 	str r0, [r1, 0x10]
@@ -5630,7 +5630,7 @@ _08044DC2:
 	ldr r0, [r0, 0xC]
 	cmp r0, 0
 	beq _08044DD4
-	bl sub_8002BC4
+	bl Free
 	ldr r1, [r4]
 	movs r0, 0
 	str r0, [r1, 0xC]
@@ -5639,7 +5639,7 @@ _08044DD4:
 	ldr r0, [r0, 0x8]
 	cmp r0, 0
 	beq _08044DE6
-	bl sub_8002BC4
+	bl Free
 	ldr r1, [r4]
 	movs r0, 0
 	str r0, [r1, 0x8]
@@ -5649,7 +5649,7 @@ _08044DE6:
 	movs r2, 0x18
 	bl memset
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 _08044DF6:
 	movs r0, 0
 	str r0, [r4]

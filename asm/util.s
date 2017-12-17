@@ -5,15 +5,15 @@
 
 	.text
 
-	thumb_func_start sub_8044EF8
-sub_8044EF8: @ 8044EF8
+	thumb_func_start CreateInvisibleSpriteWithCallback
+CreateInvisibleSpriteWithCallback: @ 8044EF8
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r0, _08044F2C @ =gUnknown_825E4DC
 	movs r1, 0xF8
 	movs r2, 0xA8
 	movs r3, 0xE
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _08044F30 @ =gUnknown_202063C
@@ -35,18 +35,18 @@ sub_8044EF8: @ 8044EF8
 	.align 2, 0
 _08044F2C: .4byte gUnknown_825E4DC
 _08044F30: .4byte gUnknown_202063C
-	thumb_func_end sub_8044EF8
+	thumb_func_end CreateInvisibleSpriteWithCallback
 
-	thumb_func_start sub_8044F34
-sub_8044F34: @ 8044F34
+	thumb_func_start StoreWordInTwoHalfwords
+StoreWordInTwoHalfwords: @ 8044F34
 	strh r1, [r0]
 	lsrs r1, 16
 	strh r1, [r0, 0x2]
 	bx lr
-	thumb_func_end sub_8044F34
+	thumb_func_end StoreWordInTwoHalfwords
 
-	thumb_func_start sub_8044F3C
-sub_8044F3C: @ 8044F3C
+	thumb_func_start LoadWordFromTwoHalfwords
+LoadWordFromTwoHalfwords: @ 8044F3C
 	ldrh r2, [r0]
 	movs r3, 0x2
 	ldrsh r0, [r0, r3]
@@ -54,10 +54,10 @@ sub_8044F3C: @ 8044F3C
 	orrs r2, r0
 	str r2, [r1]
 	bx lr
-	thumb_func_end sub_8044F3C
+	thumb_func_end LoadWordFromTwoHalfwords
 
-	thumb_func_start sub_8044F4C
-sub_8044F4C: @ 8044F4C
+	thumb_func_start SetBgAffineStruct
+SetBgAffineStruct: @ 8044F4C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -79,10 +79,10 @@ sub_8044F4C: @ 8044F4C
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8044F4C
+	thumb_func_end SetBgAffineStruct
 
-	thumb_func_start sub_8044F78
-sub_8044F78: @ 8044F78
+	thumb_func_start DoBgAffineSet
+DoBgAffineSet: @ 8044F78
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -107,7 +107,7 @@ sub_8044F78: @ 8044F78
 	str r5, [sp, 0x8]
 	str r6, [sp, 0xC]
 	add r0, sp, 0x10
-	bl sub_8044F4C
+	bl SetBgAffineStruct
 	add r0, sp, 0x10
 	mov r1, r8
 	movs r2, 0x1
@@ -118,7 +118,7 @@ sub_8044F78: @ 8044F78
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8044F78
+	thumb_func_end DoBgAffineSet
 
 	thumb_func_start sub_8044FC4
 sub_8044FC4: @ 8044FC4
@@ -359,8 +359,8 @@ _0804517A:
 _0804518C: .4byte 0x84000008
 	thumb_func_end sub_8044FC4
 
-	thumb_func_start sub_8045190
-sub_8045190: @ 8045190
+	thumb_func_start CountTrailingZeroBits
+CountTrailingZeroBits: @ 8045190
 	push {lr}
 	adds r2, r0, 0
 	movs r1, 0
@@ -383,10 +383,10 @@ _080451A4:
 _080451B2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045190
+	thumb_func_end CountTrailingZeroBits
 
-	thumb_func_start sub_80451B8
-sub_80451B8: @ 80451B8
+	thumb_func_start CalcCRC16
+CalcCRC16: @ 80451B8
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	adds r4, r1, 0
@@ -435,10 +435,10 @@ _08045204:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80451B8
+	thumb_func_end CalcCRC16
 
-	thumb_func_start sub_8045210
-sub_8045210: @ 8045210
+	thumb_func_start CalcCRC16WithTable
+CalcCRC16WithTable: @ 8045210
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -473,10 +473,10 @@ _0804523E:
 	.align 2, 0
 _0804524C: .4byte 0x00001121
 _08045250: .4byte gUnknown_825E50C
-	thumb_func_end sub_8045210
+	thumb_func_end CalcCRC16WithTable
 
-	thumb_func_start sub_8045254
-sub_8045254: @ 8045254
+	thumb_func_start CalcByteArraySum
+CalcByteArraySum: @ 8045254
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r3, 0
@@ -495,6 +495,6 @@ _0804526C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045254
+	thumb_func_end CalcByteArraySum
 
 	.align 2, 0 @ Don't pad with nop.

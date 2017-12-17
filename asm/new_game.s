@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80548FC
-sub_80548FC: @ 80548FC
+	thumb_func_start WriteUnalignedWord
+WriteUnalignedWord: @ 80548FC
 	strb r0, [r1]
 	lsrs r2, r0, 8
 	strb r2, [r1, 0x1]
@@ -15,7 +15,7 @@ sub_80548FC: @ 80548FC
 	lsrs r0, 24
 	strb r0, [r1, 0x3]
 	bx lr
-	thumb_func_end sub_80548FC
+	thumb_func_end WriteUnalignedWord
 
 	thumb_func_start sub_805490C
 sub_805490C: @ 805490C
@@ -39,9 +39,9 @@ _08054914:
 	thumb_func_start sub_8054928
 sub_8054928: @ 8054928
 	push {r4,lr}
-	bl sub_8044EC8
+	bl Random
 	adds r4, r0, 0
-	bl sub_800058C
+	bl GetGeneratedTrainerIdLower
 	lsls r4, 16
 	lsls r0, 16
 	lsrs r0, 16
@@ -50,7 +50,7 @@ sub_8054928: @ 8054928
 	ldr r1, [r0]
 	adds r1, 0xA
 	adds r0, r4, 0
-	bl sub_80548FC
+	bl WriteUnalignedWord
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -158,8 +158,8 @@ sub_80549F8: @ 80549F8
 	movs r0, 0x4
 	movs r1, 0x1
 	movs r3, 0x6
-	bl sub_805538C
-	bl sub_8055378
+	bl Overworld_SetWarpDestination
+	bl warp_in
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -168,7 +168,7 @@ sub_80549F8: @ 80549F8
 	thumb_func_start sub_8054A18
 sub_8054A18: @ 8054A18
 	push {lr}
-	bl sub_804C010
+	bl ClearSav2
 	bl sub_8054954
 	pop {r0}
 	bx r0
@@ -181,12 +181,12 @@ sub_8054A28: @ 8054A28
 	movs r0, 0
 	strb r0, [r1]
 	bl sub_803DA14
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	bl sub_81089BC
 	bl sub_81320AC
 	bl sub_813D6E4
 	bl sub_811089C
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8083214
@@ -209,7 +209,7 @@ sub_8054A60: @ 8054A60
 	mov r8, r0
 	add r1, r8
 	mov r0, sp
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _08054B58 @ =gUnknown_2031DB0
 	movs r0, 0x1
 	strb r0, [r1]
@@ -221,9 +221,9 @@ sub_8054A60: @ 8054A60
 	movs r5, 0
 	str r5, [r0]
 	bl sub_803DA14
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	bl sub_80549D4
-	bl sub_804C034
+	bl ClearSav1
 	bl sub_8097C84
 	ldr r0, [r4]
 	strb r5, [r0, 0x9]
@@ -238,7 +238,7 @@ sub_8054A60: @ 8054A60
 	adds r0, 0xAD
 	strb r5, [r0]
 	bl sub_8054928
-	bl sub_8054814
+	bl PlayTimeCounter_Reset
 	bl sub_80549AC
 	bl sub_806E0D0
 	bl sub_812D304
@@ -267,17 +267,17 @@ sub_8054A60: @ 8054A60
 	bl sub_809C794
 	bl sub_80BDD34
 	bl sub_8113044
-	bl sub_8129820
+	bl copy_strings_to_sav1
 	bl sub_8054B70
 	bl sub_8143D24
 	bl sub_815D838
 	bl sub_80549F8
 	ldr r0, _08054B6C @ =gUnknown_81A6481
-	bl sub_8069B48
+	bl ScriptContext2_RunNewScript
 	ldr r0, [r6]
 	add r0, r8
 	mov r1, sp
-	bl sub_8008D84
+	bl StringCopy
 	bl sub_815EE0C
 	add sp, 0x8
 	pop {r3}
@@ -317,7 +317,7 @@ sub_8054B70: @ 8054B70
 	adds r0, r1
 	movs r1, 0
 	bl sub_815EE54
-	bl sub_814B47C
+	bl ResetPokeJumpResults
 	mov r0, sp
 	adds r0, 0x2
 	strh r5, [r0]

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_804A938
-sub_804A938: @ 804A938
+	thumb_func_start DoPokeballSendOutAnimation
+DoPokeballSendOutAnimation: @ 804A938
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -32,7 +32,7 @@ sub_804A938: @ 804A938
 	strb r1, [r0]
 	ldr r0, _0804A998 @ =sub_804A9A0
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0804A99C @ =gUnknown_3005090
@@ -54,7 +54,7 @@ _0804A990: .4byte gUnknown_2024018
 _0804A994: .4byte gUnknown_2023BC4
 _0804A998: .4byte sub_804A9A0
 _0804A99C: .4byte gUnknown_3005090
-	thumb_func_end sub_804A938
+	thumb_func_end DoPokeballSendOutAnimation
 
 	thumb_func_start sub_804A9A0
 sub_804A9A0: @ 804A9A0
@@ -90,7 +90,7 @@ _0804A9D8:
 	mov r9, r0
 	ldrb r6, [r1, 0xE]
 	adds r0, r6, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804AA04
@@ -116,14 +116,14 @@ _0804AA04:
 _0804AA12:
 	adds r0, r1
 	movs r1, 0x26
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80EF52C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
-	bl sub_804BEF4
+	bl LoadBallGfx
 	ldr r0, _0804AA58 @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x2
@@ -132,7 +132,7 @@ _0804AA12:
 	beq _0804AA60
 	ldr r4, _0804AA5C @ =gUnknown_202273C
 	adds r0, r6, 0
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -159,7 +159,7 @@ _0804AA68:
 	movs r1, 0x20
 	movs r2, 0x50
 	movs r3, 0x1D
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r5, r7, 4
@@ -210,13 +210,13 @@ _0804AACE:
 	strh r4, [r0, 0x22]
 	adds r2, 0x1C
 	adds r1, r2
-	ldr r0, _0804AAF4 @ =sub_804B684
+	ldr r0, _0804AAF4 @ =SpriteCB_PlayerMonSendOut_1
 	str r0, [r1]
 	b _0804AB48
 	.align 2, 0
 _0804AAEC: .4byte gUnknown_2023D6C
 _0804AAF0: .4byte gUnknown_202063C
-_0804AAF4: .4byte sub_804B684
+_0804AAF4: .4byte SpriteCB_PlayerMonSendOut_1
 _0804AAF8:
 	adds r0, r6, 0
 	movs r1, 0
@@ -238,16 +238,16 @@ _0804AAF8:
 	ldr r0, _0804AB30 @ =gUnknown_202063C
 	adds r0, 0x1C
 	add r0, r8
-	ldr r1, _0804AB34 @ =sub_804B868
+	ldr r1, _0804AB34 @ =SpriteCB_OpponentMonSendOut
 	str r1, [r0]
 	b _0804AB46
 	.align 2, 0
 _0804AB2C: .4byte gUnknown_2023D6C
 _0804AB30: .4byte gUnknown_202063C
-_0804AB34: .4byte sub_804B868
+_0804AB34: .4byte SpriteCB_OpponentMonSendOut
 _0804AB38:
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _0804AB64 @ =gUnknown_2023D6C
 	strb r0, [r1]
 	movs r2, 0x1
@@ -266,7 +266,7 @@ _0804AB48:
 	cmp r3, 0
 	bne _0804AB6C
 	ldr r0, [sp]
-	bl sub_8077508
+	bl DestroyTask
 	b _0804ABB8
 	.align 2, 0
 _0804AB64: .4byte gUnknown_2023D6C
@@ -321,14 +321,14 @@ _0804ABCC: .4byte gUnknown_3005090
 _0804ABD0: .4byte nullsub_43
 	thumb_func_end sub_804A9A0
 
-	thumb_func_start sub_804ABD4
-sub_804ABD4: @ 804ABD4
+	thumb_func_start SpriteCB_TestBallThrow
+SpriteCB_TestBallThrow: @ 804ABD4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	sub sp, 0x4
 	adds r7, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804AC74
@@ -343,7 +343,7 @@ sub_804ABD4: @ 804ABD4
 	mov r8, r0
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r2, r7, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -363,7 +363,7 @@ sub_804ABD4: @ 804ABD4
 	strh r1, [r7, 0x26]
 	strh r1, [r7, 0x38]
 	adds r0, r5, 0
-	bl sub_804BF90
+	bl GetBankPokeballItemId
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80EF52C
@@ -380,12 +380,12 @@ sub_804ABD4: @ 804ABD4
 	str r4, [sp]
 	movs r2, 0x1
 	movs r3, 0x1C
-	bl sub_80F05EC
+	bl LaunchBallStarsTask
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0xE
 	adds r3, r4, 0
-	bl sub_80F1218
+	bl LaunchBallFadeMonTask
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x2E]
@@ -393,7 +393,7 @@ sub_804ABD4: @ 804ABD4
 	mov r0, r8
 	strh r0, [r7, 0x3C]
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _0804AC84 @ =sub_804AC88
 	str r0, [r7, 0x1C]
 _0804AC74:
@@ -406,7 +406,7 @@ _0804AC74:
 	.align 2, 0
 _0804AC80: .4byte gUnknown_3005090
 _0804AC84: .4byte sub_804AC88
-	thumb_func_end sub_804ABD4
+	thumb_func_end SpriteCB_TestBallThrow
 
 	thumb_func_start sub_804AC88
 sub_804AC88: @ 804AC88
@@ -443,7 +443,7 @@ sub_804AC94: @ 804AC94
 	ldr r4, _0804ACFC @ =gUnknown_202063C
 	adds r0, r4
 	movs r1, 0x2
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -452,7 +452,7 @@ sub_804AC94: @ 804AC94
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007824
+	bl AnimateSprite
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -504,7 +504,7 @@ _0804AD18:
 	bge _0804AD70
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r2, 0x3A
 	ldrsh r0, [r4, r2]
 	adds r0, r5
@@ -574,14 +574,14 @@ sub_804AD98: @ 804AD98
 	strh r1, [r4, 0x38]
 	movs r0, 0
 	movs r1, 0x20
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
 	strh r0, [r4, 0x22]
 	movs r0, 0x36
 	ldrsh r1, [r4, r0]
 	movs r0, 0
-	bl sub_8044E4C
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldr r0, _0804ADE8 @ =sub_804ADEC
@@ -612,7 +612,7 @@ _0804AE02:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl sub_8044E4C
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x38]
@@ -672,7 +672,7 @@ _0804AE76:
 	ldrsh r0, [r4, r2]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl sub_8044E4C
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x38]
@@ -696,7 +696,7 @@ _0804AEA2:
 	strh r5, [r4, 0x34]
 	movs r0, 0x40
 	movs r1, 0x20
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
 	strh r0, [r4, 0x22]
@@ -746,7 +746,7 @@ sub_804AEE4: @ 804AEE4
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r0, _0804AF20 @ =sub_804AF24
 	str r0, [r4, 0x1C]
 	movs r0, 0x17
@@ -836,12 +836,12 @@ _0804AF86:
 	bge _0804AFC2
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_800849C
+	bl ChangeSpriteAffineAnim
 	b _0804B06A
 _0804AFC2:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800849C
+	bl ChangeSpriteAffineAnim
 	b _0804B06A
 _0804AFCC:
 	adds r0, r4, 0
@@ -907,21 +907,21 @@ _0804B024:
 	strh r0, [r4, 0x34]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r1, 0x36
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bge _0804B05C
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _0804B064
 	.align 2, 0
 _0804B058: .4byte 0xffffff00
 _0804B05C:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _0804B064:
 	movs r0, 0x17
 	bl sub_80722CC
@@ -931,8 +931,8 @@ _0804B06A:
 	bx r0
 	thumb_func_end sub_804AF24
 
-	thumb_func_start sub_804B070
-sub_804B070: @ 804B070
+	thumb_func_start Task_PlayCryWhenReleasedFromBall
+Task_PlayCryWhenReleasedFromBall: @ 804B070
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1015,24 +1015,24 @@ _0804B148:
 	b _0804B262
 _0804B14E:
 	adds r0, r3, 0
-	bl sub_8035A28
+	bl ShouldPlayNormalPokeCry
 	cmp r0, 0x1
 	bne _0804B166
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_8071E60
+	bl PlayCry3
 	b _0804B1C6
 _0804B166:
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xB
-	bl sub_8071E60
+	bl PlayCry3
 	b _0804B1C6
 _0804B174:
-	bl sub_80721C4
+	bl StopCryAndClearCrySongs
 	ldr r1, _0804B18C @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1056,24 +1056,24 @@ _0804B190:
 	cmp r0, 0
 	bne _0804B232
 	adds r0, r3, 0
-	bl sub_8035A28
+	bl ShouldPlayNormalPokeCry
 	cmp r0, 0x1
 	bne _0804B1BA
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0x1
-	bl sub_8071EC0
+	bl PlayCry4
 	b _0804B1C6
 _0804B1BA:
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xC
-	bl sub_8071EC0
+	bl PlayCry4
 _0804B1C6:
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _0804B262
 _0804B1CE:
 	lsls r0, r4, 2
@@ -1099,11 +1099,11 @@ _0804B1E0:
 	adds r0, 0x1
 	strh r0, [r1, 0x26]
 _0804B1F8:
-	bl sub_80721F0
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804B262
-	bl sub_80721C4
+	bl StopCryAndClearCrySongs
 	ldr r0, _0804B21C @ =gUnknown_3005090
 	lsls r1, r4, 2
 	adds r1, r4
@@ -1133,29 +1133,29 @@ _0804B232:
 	b _0804B262
 _0804B238:
 	adds r0, r3, 0
-	bl sub_8035A28
+	bl ShouldPlayNormalPokeCry
 	cmp r0, 0x1
 	bne _0804B250
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_8071EC0
+	bl PlayCry4
 	b _0804B25C
 _0804B250:
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xB
-	bl sub_8071EC0
+	bl PlayCry4
 _0804B25C:
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _0804B262:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804B070
+	thumb_func_end Task_PlayCryWhenReleasedFromBall
 
 	thumb_func_start sub_804B268
 sub_804B268: @ 804B268
@@ -1170,9 +1170,9 @@ sub_804B268: @ 804B268
 	lsrs r5, r0, 24
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r5, 0
-	bl sub_804BF90
+	bl GetBankPokeballItemId
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80EF52C
@@ -1189,18 +1189,18 @@ sub_804B268: @ 804B268
 	str r4, [sp]
 	movs r2, 0x1
 	movs r3, 0x1C
-	bl sub_80F05EC
+	bl LaunchBallStarsTask
 	ldrh r1, [r6, 0x3A]
 	lsls r1, 24
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0xE
 	adds r3, r4, 0
-	bl sub_80F1218
+	bl LaunchBallFadeMonTask
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x2E]
-	ldr r0, _0804B2FC @ =sub_804B4A4
+	ldr r0, _0804B2FC @ =HandleBallAnimEnd
 	str r0, [r6, 0x1C]
 	ldr r0, _0804B300 @ =gUnknown_30030F0
 	ldr r1, _0804B304 @ =0x00000439
@@ -1213,7 +1213,7 @@ sub_804B268: @ 804B268
 	b _0804B420
 _0804B2DA:
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B310
@@ -1229,7 +1229,7 @@ _0804B2DA:
 	mov r9, r3
 	b _0804B324
 	.align 2, 0
-_0804B2FC: .4byte sub_804B4A4
+_0804B2FC: .4byte HandleBallAnimEnd
 _0804B300: .4byte gUnknown_30030F0
 _0804B304: .4byte 0x00000439
 _0804B308: .4byte gUnknown_2023BCE
@@ -1248,18 +1248,18 @@ _0804B310:
 _0804B324:
 	adds r0, r7, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _0804B34E
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1283,7 +1283,7 @@ _0804B34E:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804B39C
-	bl sub_8072424
+	bl IsBGMPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B3A6
@@ -1323,13 +1323,13 @@ _0804B3C8: .4byte 0x0000ffff
 _0804B3CC: .4byte gUnknown_2024018
 _0804B3D0:
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _0804B3EC
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1340,9 +1340,9 @@ _0804B3EC:
 _0804B3F0:
 	movs r4, 0x2
 _0804B3F2:
-	ldr r0, _0804B474 @ =sub_804B070
+	ldr r0, _0804B474 @ =Task_PlayCryWhenReleasedFromBall
 	movs r1, 0x3
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0804B478 @ =gUnknown_3005090
@@ -1374,7 +1374,7 @@ _0804B420:
 	ldr r4, _0804B480 @ =gUnknown_202063C
 	adds r0, r4
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r3, 0x3A
 	ldrsh r0, [r6, r3]
 	adds r0, r5
@@ -1383,7 +1383,7 @@ _0804B420:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007824
+	bl AnimateSprite
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -1403,7 +1403,7 @@ _0804B420:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804B474: .4byte sub_804B070
+_0804B474: .4byte Task_PlayCryWhenReleasedFromBall
 _0804B478: .4byte gUnknown_3005090
 _0804B47C: .4byte gUnknown_2023D44
 _0804B480: .4byte gUnknown_202063C
@@ -1428,8 +1428,8 @@ sub_804B484: @ 804B484
 _0804B4A0: .4byte sub_804B5C8
 	thumb_func_end sub_804B484
 
-	thumb_func_start sub_804B4A4
-sub_804B4A4: @ 804B4A4
+	thumb_func_start HandleBallAnimEnd
+HandleBallAnimEnd: @ 804B4A4
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	movs r7, 0
@@ -1477,7 +1477,7 @@ _0804B4E6:
 	bge _0804B510
 	adds r0, r1, 0
 	movs r1, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r7, 0x1
 	b _0804B52C
 	.align 2, 0
@@ -1534,9 +1534,9 @@ _0804B52C:
 	ands r0, r2
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	adds r0, r5, 0
-	bl sub_8007280
+	bl DestroySprite
 	movs r3, 0
 	ldr r0, [r4]
 	ldr r2, [r0, 0x4]
@@ -1560,7 +1560,7 @@ _0804B592:
 _0804B5A0:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_804BF64
+	bl FreeBallGfx
 	adds r4, 0x1
 	cmp r4, 0xB
 	ble _0804B5A0
@@ -1574,7 +1574,7 @@ _0804B5B8: .4byte gUnknown_202063C
 _0804B5BC: .4byte gUnknown_2023D44
 _0804B5C0: .4byte gUnknown_2024005
 _0804B5C4: .4byte gUnknown_2024018
-	thumb_func_end sub_804B4A4
+	thumb_func_end HandleBallAnimEnd
 
 	thumb_func_start sub_804B5C8
 sub_804B5C8: @ 804B5C8
@@ -1619,7 +1619,7 @@ _0804B600:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r4
@@ -1628,9 +1628,9 @@ _0804B600:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r6, 0
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	ldr r0, _0804B678 @ =gUnknown_30030F0
 	ldr r1, _0804B67C @ =0x00000439
 	adds r0, r1
@@ -1664,8 +1664,8 @@ _0804B67C: .4byte 0x00000439
 _0804B680: .4byte gUnknown_2024018
 	thumb_func_end sub_804B5C8
 
-	thumb_func_start sub_804B684
-sub_804B684: @ 804B684
+	thumb_func_start SpriteCB_PlayerMonSendOut_1
+SpriteCB_PlayerMonSendOut_1: @ 804B684
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x19
@@ -1693,18 +1693,18 @@ sub_804B684: @ 804B684
 	strh r0, [r4, 0x6]
 	adds r0, r4, 0
 	bl sub_8075068
-	ldr r0, _0804B6D0 @ =sub_804B6D4
+	ldr r0, _0804B6D0 @ =SpriteCB_PlayerMonSendOut_2
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0804B6CC: .4byte 0x0000ffe2
-_0804B6D0: .4byte sub_804B6D4
-	thumb_func_end sub_804B684
+_0804B6D0: .4byte SpriteCB_PlayerMonSendOut_2
+	thumb_func_end SpriteCB_PlayerMonSendOut_1
 
-	thumb_func_start sub_804B6D4
-sub_804B6D4: @ 804B6D4
+	thumb_func_start SpriteCB_PlayerMonSendOut_2
+SpriteCB_PlayerMonSendOut_2: @ 804B6D4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1750,7 +1750,7 @@ sub_804B6D4: @ 804B6D4
 	strh r7, [r5, 0x32]
 	adds r0, r5, 0
 	movs r1, 0x4
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _0804B736:
 	ldrh r4, [r5, 0x2E]
 	adds r0, r5, 0
@@ -1769,7 +1769,7 @@ _0804B736:
 	ands r0, r2
 	movs r2, 0x38
 	ldrsh r1, [r5, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r5, 0x26]
 	adds r0, r1
 	strh r0, [r5, 0x26]
@@ -1825,7 +1825,7 @@ _0804B78E:
 	b _0804B834
 _0804B7C8:
 	adds r0, r5, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B834
@@ -1858,23 +1858,23 @@ _0804B7C8:
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	bne _0804B828
-	ldr r0, _0804B824 @ =sub_804B844
+	ldr r0, _0804B824 @ =SpriteCB_ReleaseMon2FromBall
 	b _0804B82A
 	.align 2, 0
 _0804B820: .4byte gUnknown_2024018
-_0804B824: .4byte sub_804B844
+_0804B824: .4byte SpriteCB_ReleaseMon2FromBall
 _0804B828:
 	ldr r0, _0804B840 @ =sub_804B268
 _0804B82A:
 	str r0, [r5, 0x1C]
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _0804B834:
 	pop {r3}
 	mov r8, r3
@@ -1883,10 +1883,10 @@ _0804B834:
 	bx r0
 	.align 2, 0
 _0804B840: .4byte sub_804B268
-	thumb_func_end sub_804B6D4
+	thumb_func_end SpriteCB_PlayerMonSendOut_2
 
-	thumb_func_start sub_804B844
-sub_804B844: @ 804B844
+	thumb_func_start SpriteCB_ReleaseMon2FromBall
+SpriteCB_ReleaseMon2FromBall: @ 804B844
 	push {lr}
 	adds r2, r0, 0
 	ldrh r0, [r2, 0x2E]
@@ -1905,10 +1905,10 @@ _0804B85E:
 	bx r0
 	.align 2, 0
 _0804B864: .4byte sub_804B268
-	thumb_func_end sub_804B844
+	thumb_func_end SpriteCB_ReleaseMon2FromBall
 
-	thumb_func_start sub_804B868
-sub_804B868: @ 804B868
+	thumb_func_start SpriteCB_OpponentMonSendOut
+SpriteCB_OpponentMonSendOut: @ 804B868
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x2E]
@@ -1935,16 +1935,16 @@ sub_804B868: @ 804B868
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	bne _0804B8B8
-	ldr r0, _0804B8B4 @ =sub_804B844
+	ldr r0, _0804B8B4 @ =SpriteCB_ReleaseMon2FromBall
 	b _0804B8BA
 	.align 2, 0
 _0804B8B0: .4byte gUnknown_2024018
-_0804B8B4: .4byte sub_804B844
+_0804B8B4: .4byte SpriteCB_ReleaseMon2FromBall
 _0804B8B8:
 	ldr r0, _0804B8C4 @ =sub_804B268
 _0804B8BA:
@@ -1955,10 +1955,10 @@ _0804B8BC:
 	bx r0
 	.align 2, 0
 _0804B8C4: .4byte sub_804B268
-	thumb_func_end sub_804B868
+	thumb_func_end SpriteCB_OpponentMonSendOut
 
-	thumb_func_start sub_804B8C8
-sub_804B8C8: @ 804B8C8
+	thumb_func_start LaunchBallStarsTaskForPokeball
+LaunchBallStarsTaskForPokeball: @ 804B8C8
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1971,32 +1971,32 @@ sub_804B8C8: @ 804B8C8
 	lsrs r3, 24
 	movs r4, 0
 	str r4, [sp]
-	bl sub_80F05EC
+	bl LaunchBallStarsTask
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804B8C8
+	thumb_func_end LaunchBallStarsTaskForPokeball
 
-	thumb_func_start sub_804B8F0
-sub_804B8F0: @ 804B8F0
+	thumb_func_start LaunchBallFadeMonTaskForPokeball
+LaunchBallFadeMonTaskForPokeball: @ 804B8F0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
 	movs r3, 0
-	bl sub_80F1218
+	bl LaunchBallFadeMonTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804B8F0
+	thumb_func_end LaunchBallFadeMonTaskForPokeball
 
-	thumb_func_start sub_804B908
-sub_804B908: @ 804B908
+	thumb_func_start CreatePokeballSpriteToReleaseMon
+CreatePokeballSpriteToReleaseMon: @ 804B908
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2036,7 +2036,7 @@ sub_804B908: @ 804B908
 	mov r1, r9
 	mov r2, r10
 	adds r3, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _0804B9E0 @ =gUnknown_202063C
@@ -2101,7 +2101,7 @@ _0804B9D8: .4byte gUnknown_82605CC
 _0804B9DC: .4byte gUnknown_82606F4
 _0804B9E0: .4byte gUnknown_202063C
 _0804B9E4: .4byte sub_804B9E8
-	thumb_func_end sub_804B908
+	thumb_func_end CreatePokeballSpriteToReleaseMon
 
 	thumb_func_start sub_804B9E8
 sub_804B9E8: @ 804B9E8
@@ -2139,7 +2139,7 @@ _0804BA22:
 _0804BA24:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r6, 0x20]
 	lsls r0, 24
 	lsrs r0, 24
@@ -2151,11 +2151,11 @@ _0804BA24:
 	lsls r2, 28
 	lsrs r2, 30
 	adds r3, r5, 0
-	bl sub_804B8C8
+	bl LaunchBallStarsTaskForPokeball
 	movs r0, 0x1
 	mov r1, r8
 	adds r2, r4, 0
-	bl sub_804B8F0
+	bl LaunchBallFadeMonTaskForPokeball
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -2176,9 +2176,9 @@ _0804BA24:
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	adds r0, r4, 0
-	bl sub_8007824
+	bl AnimateSprite
 	movs r0, 0x80
 	lsls r0, 5
 	strh r0, [r4, 0x30]
@@ -2235,7 +2235,7 @@ _0804BACE:
 	bge _0804BAF0
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r1, 0x1
 	mov r12, r1
 _0804BAF0:
@@ -2320,7 +2320,7 @@ _0804BB72:
 	cmp r6, 0
 	beq _0804BB90
 	adds r0, r4, 0
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 _0804BB90:
 	pop {r4-r7}
 	pop {r0}
@@ -2369,7 +2369,7 @@ sub_804BB98: @ 804BB98
 	adds r1, r6, 0
 	mov r2, r8
 	adds r3, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r6, _0804BC48 @ =gUnknown_202063C
@@ -2452,7 +2452,7 @@ _0804BC8A:
 _0804BC8C:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x20]
 	lsls r0, 24
 	lsrs r0, 24
@@ -2464,11 +2464,11 @@ _0804BC8C:
 	lsls r2, 28
 	lsrs r2, 30
 	adds r3, r6, 0
-	bl sub_804B8C8
+	bl LaunchBallStarsTaskForPokeball
 	movs r0, 0x1
 	mov r1, r8
 	adds r2, r5, 0
-	bl sub_804B8F0
+	bl LaunchBallFadeMonTaskForPokeball
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -2482,9 +2482,9 @@ _0804BC8C:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	adds r0, r4, 0
-	bl sub_8007824
+	bl AnimateSprite
 	strh r5, [r4, 0x30]
 	b _0804BCEC
 	.align 2, 0
@@ -2531,7 +2531,7 @@ _0804BD10:
 	bge _0804BD54
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r2, r4, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]
@@ -2580,13 +2580,13 @@ _0804BD80:
 _0804BD84: .4byte nullsub_8
 	thumb_func_end sub_804BD6C
 
-	thumb_func_start sub_804BD88
-sub_804BD88: @ 804BD88
+	thumb_func_start DestroySpriteAndFreeResources_
+DestroySpriteAndFreeResources_: @ 804BD88
 	push {lr}
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804BD88
+	thumb_func_end DestroySpriteAndFreeResources_
 
 	thumb_func_start sub_804BD94
 sub_804BD94: @ 804BD94
@@ -2612,7 +2612,7 @@ sub_804BD94: @ 804BD94
 	ldr r0, _0804BE1C @ =sub_804BE48
 	str r0, [r4, 0x1C]
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804BDE2
@@ -2641,7 +2641,7 @@ _0804BDE2:
 	ldr r1, [r1]
 	bl _call_via_r1
 	adds r0, r5, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -2705,15 +2705,15 @@ _0804BE66:
 _0804BE6C: .4byte nullsub_8
 	thumb_func_end sub_804BE48
 
-	thumb_func_start sub_804BE70
-sub_804BE70: @ 804BE70
+	thumb_func_start DoHitAnimHealthboxEffect
+DoHitAnimHealthboxEffect: @ 804BE70
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, _0804BEA8 @ =sub_804BEB4
+	ldr r5, _0804BEA8 @ =SpriteCB_HitAnimHealthoxEffect
 	adds r0, r5, 0
-	bl sub_8044EF8
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0804BEAC @ =gUnknown_202063C
@@ -2734,13 +2734,13 @@ sub_804BE70: @ 804BE70
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804BEA8: .4byte sub_804BEB4
+_0804BEA8: .4byte SpriteCB_HitAnimHealthoxEffect
 _0804BEAC: .4byte gUnknown_202063C
 _0804BEB0: .4byte gUnknown_3004FF0
-	thumb_func_end sub_804BE70
+	thumb_func_end DoHitAnimHealthboxEffect
 
-	thumb_func_start sub_804BEB4
-sub_804BEB4: @ 804BEB4
+	thumb_func_start SpriteCB_HitAnimHealthoxEffect
+SpriteCB_HitAnimHealthoxEffect: @ 804BEB4
 	push {lr}
 	adds r3, r0, 0
 	ldrh r1, [r3, 0x30]
@@ -2767,16 +2767,16 @@ sub_804BEB4: @ 804BEB4
 	strh r2, [r1, 0x24]
 	strh r2, [r1, 0x26]
 	adds r0, r3, 0
-	bl sub_8007280
+	bl DestroySprite
 _0804BEEC:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0804BEF0: .4byte gUnknown_202063C
-	thumb_func_end sub_804BEB4
+	thumb_func_end SpriteCB_HitAnimHealthoxEffect
 
-	thumb_func_start sub_804BEF4
-sub_804BEF4: @ 804BEF4
+	thumb_func_start LoadBallGfx
+LoadBallGfx: @ 804BEF4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2784,7 +2784,7 @@ sub_804BEF4: @ 804BEF4
 	lsls r6, r4, 3
 	adds r5, r6, r0
 	ldrh r0, [r5, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	ldr r1, _0804BF54 @ =0xffff0000
 	cmp r0, r1
@@ -2808,14 +2808,14 @@ _0804BF2C:
 	lsls r0, r4, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	adds r1, r0, 0
 	lsls r1, 16
 	ldr r0, _0804BF5C @ =gUnknown_8D022E8
 	lsrs r1, 11
 	ldr r2, _0804BF60 @ =0x06010100
 	adds r1, r2
-	bl sub_800EBC0
+	bl LZDecompressVram
 _0804BF48:
 	pop {r4-r6}
 	pop {r0}
@@ -2826,10 +2826,10 @@ _0804BF54: .4byte 0xffff0000
 _0804BF58: .4byte gUnknown_82605CC
 _0804BF5C: .4byte gUnknown_8D022E8
 _0804BF60: .4byte 0x06010100
-	thumb_func_end sub_804BEF4
+	thumb_func_end LoadBallGfx
 
-	thumb_func_start sub_804BF64
-sub_804BF64: @ 804BF64
+	thumb_func_start FreeBallGfx
+FreeBallGfx: @ 804BF64
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2837,26 +2837,26 @@ sub_804BF64: @ 804BF64
 	lsrs r4, 21
 	adds r0, r4, r0
 	ldrh r0, [r0, 0x6]
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldr r0, _0804BF8C @ =gUnknown_82605CC
 	adds r4, r0
 	ldrh r0, [r4, 0x4]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0804BF88: .4byte gUnknown_826056C
 _0804BF8C: .4byte gUnknown_82605CC
-	thumb_func_end sub_804BF64
+	thumb_func_end FreeBallGfx
 
-	thumb_func_start sub_804BF90
-sub_804BF90: @ 804BF90
+	thumb_func_start GetBankPokeballItemId
+GetBankPokeballItemId: @ 804BF90
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804BFBC
@@ -2882,7 +2882,7 @@ _0804BFBC:
 _0804BFCA:
 	adds r0, r1
 	movs r1, 0x26
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r4}
@@ -2891,6 +2891,6 @@ _0804BFCA:
 	.align 2, 0
 _0804BFDC: .4byte gUnknown_2023BCE
 _0804BFE0: .4byte gUnknown_2024284
-	thumb_func_end sub_804BF90
+	thumb_func_end GetBankPokeballItemId
 
 	.align 2, 0 @ Don't pad with nop.

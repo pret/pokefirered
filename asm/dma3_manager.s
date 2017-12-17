@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8000BFC
-sub_8000BFC: @ 8000BFC
+	thumb_func_start ClearDma3Requests
+ClearDma3Requests: @ 8000BFC
 	push {lr}
 	ldr r2, _08000C28 @ =gUnknown_30008C8
 	movs r0, 0x1
@@ -33,10 +33,10 @@ _08000C10:
 _08000C28: .4byte gUnknown_30008C8
 _08000C2C: .4byte gUnknown_30008C9
 _08000C30: .4byte gUnknown_30000C8
-	thumb_func_end sub_8000BFC
+	thumb_func_end ClearDma3Requests
 
-	thumb_func_start sub_8000C34
-sub_8000C34: @ 8000C34
+	thumb_func_start ProcessDma3Requests
+ProcessDma3Requests: @ 8000C34
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -360,10 +360,10 @@ _08000E9C: .4byte gUnknown_30000D4
 _08000EA0: .4byte 0x040000d4
 _08000EA4: .4byte 0x81000800
 _08000EA8: .4byte gUnknown_30000C8
-	thumb_func_end sub_8000C34
+	thumb_func_end ProcessDma3Requests
 
-	thumb_func_start sub_8000EAC
-sub_8000EAC: @ 8000EAC
+	thumb_func_start RequestDma3Copy
+RequestDma3Copy: @ 8000EAC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -443,10 +443,10 @@ _08000F34:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8000EAC
+	thumb_func_end RequestDma3Copy
 
-	thumb_func_start sub_8000F44
-sub_8000F44: @ 8000F44
+	thumb_func_start RequestDma3Fill
+RequestDma3Fill: @ 8000F44
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -532,10 +532,10 @@ _08000FDA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8000F44
+	thumb_func_end RequestDma3Fill
 
-	thumb_func_start sub_8000FE8
-sub_8000FE8: @ 8000FE8
+	thumb_func_start CheckForSpaceForDma3Request
+CheckForSpaceForDma3Request: @ 8000FE8
 	push {lr}
 	movs r2, 0
 	lsls r0, 16
@@ -573,6 +573,6 @@ _08001020:
 	bx r1
 	.align 2, 0
 _08001024: .4byte gUnknown_30000C8
-	thumb_func_end sub_8000FE8
+	thumb_func_end CheckForSpaceForDma3Request
 
 	.align 2, 0 @ Don't pad with nop.

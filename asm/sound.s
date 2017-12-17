@@ -5,21 +5,21 @@
 
 	.text
 
-	thumb_func_start sub_8071938
-sub_8071938: @ 8071938
+	thumb_func_start InitMapMusic
+InitMapMusic: @ 8071938
 	push {lr}
 	ldr r1, _08071948 @ =gUnknown_3005080
 	movs r0, 0
 	strb r0, [r1]
-	bl sub_8071A44
+	bl ResetMapMusic
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08071948: .4byte gUnknown_3005080
-	thumb_func_end sub_8071938
+	thumb_func_end InitMapMusic
 
-	thumb_func_start sub_807194C
-sub_807194C: @ 807194C
+	thumb_func_start MapMusicMain
+MapMusicMain: @ 807194C
 	push {r4,r5,lr}
 	ldr r0, _08071964 @ =gUnknown_3000FC4
 	ldrb r1, [r0]
@@ -49,12 +49,12 @@ _0807198C:
 	strb r0, [r2]
 	ldr r0, _0807199C @ =gUnknown_3000FC0
 	ldrh r0, [r0]
-	bl sub_80722A0
+	bl PlayBGM
 	b _08071A2E
 	.align 2, 0
 _0807199C: .4byte gUnknown_3000FC0
 _080719A0:
-	bl sub_8071DD4
+	bl IsBGMStopped
 	lsls r0, 24
 	cmp r0, 0
 	beq _08071A2E
@@ -68,11 +68,11 @@ _080719A0:
 _080719B8: .4byte gUnknown_3000FC2
 _080719BC: .4byte gUnknown_3000FC4
 _080719C0:
-	bl sub_8071DD4
+	bl IsBGMStopped
 	lsls r0, 24
 	cmp r0, 0
 	beq _08071A2E
-	bl sub_8071C9C
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08071A2E
@@ -86,18 +86,18 @@ _080719C0:
 	movs r0, 0x2
 	strb r0, [r1]
 	ldrh r0, [r2]
-	bl sub_80722A0
+	bl PlayBGM
 	b _08071A2E
 	.align 2, 0
 _080719F0: .4byte gUnknown_3000FC0
 _080719F4: .4byte gUnknown_3000FC2
 _080719F8: .4byte gUnknown_3000FC4
 _080719FC:
-	bl sub_8071DD4
+	bl IsBGMStopped
 	lsls r0, 24
 	cmp r0, 0
 	beq _08071A2E
-	bl sub_8071C9C
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08071A2E
@@ -105,7 +105,7 @@ _080719FC:
 	ldrh r0, [r4]
 	ldr r5, _08071A38 @ =gUnknown_3000FC5
 	ldrb r1, [r5]
-	bl sub_8071D10
+	bl FadeInNewBGM
 	ldr r1, _08071A3C @ =gUnknown_3000FC0
 	ldrh r0, [r4]
 	strh r0, [r1]
@@ -124,10 +124,10 @@ _08071A34: .4byte gUnknown_3000FC2
 _08071A38: .4byte gUnknown_3000FC5
 _08071A3C: .4byte gUnknown_3000FC0
 _08071A40: .4byte gUnknown_3000FC4
-	thumb_func_end sub_807194C
+	thumb_func_end MapMusicMain
 
-	thumb_func_start sub_8071A44
-sub_8071A44: @ 8071A44
+	thumb_func_start ResetMapMusic
+ResetMapMusic: @ 8071A44
 	ldr r0, _08071A58 @ =gUnknown_3000FC0
 	movs r1, 0
 	strh r1, [r0]
@@ -143,19 +143,19 @@ _08071A58: .4byte gUnknown_3000FC0
 _08071A5C: .4byte gUnknown_3000FC2
 _08071A60: .4byte gUnknown_3000FC4
 _08071A64: .4byte gUnknown_3000FC5
-	thumb_func_end sub_8071A44
+	thumb_func_end ResetMapMusic
 
-	thumb_func_start sub_8071A68
-sub_8071A68: @ 8071A68
+	thumb_func_start GetCurrentMapMusic
+GetCurrentMapMusic: @ 8071A68
 	ldr r0, _08071A70 @ =gUnknown_3000FC0
 	ldrh r0, [r0]
 	bx lr
 	.align 2, 0
 _08071A70: .4byte gUnknown_3000FC0
-	thumb_func_end sub_8071A68
+	thumb_func_end GetCurrentMapMusic
 
-	thumb_func_start sub_8071A74
-sub_8071A74: @ 8071A74
+	thumb_func_start PlayNewMapMusic
+PlayNewMapMusic: @ 8071A74
 	ldr r1, _08071A88 @ =gUnknown_3000FC0
 	strh r0, [r1]
 	ldr r1, _08071A8C @ =gUnknown_3000FC2
@@ -169,10 +169,10 @@ sub_8071A74: @ 8071A74
 _08071A88: .4byte gUnknown_3000FC0
 _08071A8C: .4byte gUnknown_3000FC2
 _08071A90: .4byte gUnknown_3000FC4
-	thumb_func_end sub_8071A74
+	thumb_func_end PlayNewMapMusic
 
-	thumb_func_start sub_8071A94
-sub_8071A94: @ 8071A94
+	thumb_func_start StopMapMusic
+StopMapMusic: @ 8071A94
 	ldr r0, _08071AA8 @ =gUnknown_3000FC0
 	movs r1, 0
 	strh r1, [r0]
@@ -186,19 +186,19 @@ sub_8071A94: @ 8071A94
 _08071AA8: .4byte gUnknown_3000FC0
 _08071AAC: .4byte gUnknown_3000FC2
 _08071AB0: .4byte gUnknown_3000FC4
-	thumb_func_end sub_8071A94
+	thumb_func_end StopMapMusic
 
-	thumb_func_start sub_8071AB4
-sub_8071AB4: @ 8071AB4
+	thumb_func_start FadeOutMapMusic
+FadeOutMapMusic: @ 8071AB4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8071BA0
+	bl IsNotWaitingForBGMStop
 	lsls r0, 24
 	cmp r0, 0
 	beq _08071ACA
 	adds r0, r4, 0
-	bl sub_8071DBC
+	bl FadeOutBGM
 _08071ACA:
 	ldr r0, _08071AE0 @ =gUnknown_3000FC0
 	movs r1, 0
@@ -215,10 +215,10 @@ _08071ACA:
 _08071AE0: .4byte gUnknown_3000FC0
 _08071AE4: .4byte gUnknown_3000FC2
 _08071AE8: .4byte gUnknown_3000FC4
-	thumb_func_end sub_8071AB4
+	thumb_func_end FadeOutMapMusic
 
-	thumb_func_start sub_8071AEC
-sub_8071AEC: @ 8071AEC
+	thumb_func_start FadeOutAndPlayNewMapMusic
+FadeOutAndPlayNewMapMusic: @ 8071AEC
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
@@ -226,7 +226,7 @@ sub_8071AEC: @ 8071AEC
 	lsrs r4, 16
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8071AB4
+	bl FadeOutMapMusic
 	ldr r1, _08071B14 @ =gUnknown_3000FC0
 	movs r0, 0
 	strh r0, [r1]
@@ -242,10 +242,10 @@ sub_8071AEC: @ 8071AEC
 _08071B14: .4byte gUnknown_3000FC0
 _08071B18: .4byte gUnknown_3000FC2
 _08071B1C: .4byte gUnknown_3000FC4
-	thumb_func_end sub_8071AEC
+	thumb_func_end FadeOutAndPlayNewMapMusic
 
-	thumb_func_start sub_8071B20
-sub_8071B20: @ 8071B20
+	thumb_func_start FadeOutAndFadeInNewMapMusic
+FadeOutAndFadeInNewMapMusic: @ 8071B20
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
@@ -256,7 +256,7 @@ sub_8071B20: @ 8071B20
 	lsrs r0, 24
 	lsls r5, 24
 	lsrs r5, 24
-	bl sub_8071AB4
+	bl FadeOutMapMusic
 	ldr r1, _08071B54 @ =gUnknown_3000FC0
 	movs r0, 0
 	strh r0, [r1]
@@ -275,10 +275,10 @@ _08071B54: .4byte gUnknown_3000FC0
 _08071B58: .4byte gUnknown_3000FC2
 _08071B5C: .4byte gUnknown_3000FC4
 _08071B60: .4byte gUnknown_3000FC5
-	thumb_func_end sub_8071B20
+	thumb_func_end FadeOutAndFadeInNewMapMusic
 
-	thumb_func_start sub_8071B64
-sub_8071B64: @ 8071B64
+	thumb_func_start FadeInNewMapMusic
+FadeInNewMapMusic: @ 8071B64
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -286,7 +286,7 @@ sub_8071B64: @ 8071B64
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8071D10
+	bl FadeInNewBGM
 	ldr r0, _08071B90 @ =gUnknown_3000FC0
 	strh r4, [r0]
 	ldr r0, _08071B94 @ =gUnknown_3000FC2
@@ -305,10 +305,10 @@ _08071B90: .4byte gUnknown_3000FC0
 _08071B94: .4byte gUnknown_3000FC2
 _08071B98: .4byte gUnknown_3000FC4
 _08071B9C: .4byte gUnknown_3000FC5
-	thumb_func_end sub_8071B64
+	thumb_func_end FadeInNewMapMusic
 
-	thumb_func_start sub_8071BA0
-sub_8071BA0: @ 8071BA0
+	thumb_func_start IsNotWaitingForBGMStop
+IsNotWaitingForBGMStop: @ 8071BA0
 	push {lr}
 	ldr r0, _08071BB8 @ =gUnknown_3000FC4
 	ldrb r0, [r0]
@@ -327,7 +327,7 @@ _08071BBC:
 _08071BBE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071BA0
+	thumb_func_end IsNotWaitingForBGMStop
 
 	thumb_func_start sub_8071BC4
 sub_8071BC4: @ 8071BC4
@@ -366,8 +366,8 @@ _08071C08: .4byte gUnknown_83AC990
 _08071C0C: .4byte gUnknown_3000FC6
 	thumb_func_end sub_8071BC4
 
-	thumb_func_start sub_8071C10
-sub_8071C10: @ 8071C10
+	thumb_func_start WaitFanfare
+WaitFanfare: @ 8071C10
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -397,10 +397,10 @@ _08071C42:
 _08071C44:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071C10
+	thumb_func_end WaitFanfare
 
-	thumb_func_start sub_8071C48
-sub_8071C48: @ 8071C48
+	thumb_func_start StopFanfareByFanfareNum
+StopFanfareByFanfareNum: @ 8071C48
 	push {lr}
 	lsls r0, 24
 	ldr r1, _08071C5C @ =gUnknown_83AC990
@@ -412,10 +412,10 @@ sub_8071C48: @ 8071C48
 	bx r0
 	.align 2, 0
 _08071C5C: .4byte gUnknown_83AC990
-	thumb_func_end sub_8071C48
+	thumb_func_end StopFanfareByFanfareNum
 
-	thumb_func_start sub_8071C60
-sub_8071C60: @ 8071C60
+	thumb_func_start PlayFanfare
+PlayFanfare: @ 8071C60
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -428,7 +428,7 @@ _08071C6A:
 	lsls r0, r1, 24
 	lsrs r0, 24
 	bl sub_8071BC4
-	bl sub_8071CEC
+	bl CreateFanfareTask
 	b _08071C96
 	.align 2, 0
 _08071C80: .4byte gUnknown_83AC990
@@ -439,17 +439,17 @@ _08071C84:
 	bls _08071C6A
 	movs r0, 0
 	bl sub_8071BC4
-	bl sub_8071CEC
+	bl CreateFanfareTask
 _08071C96:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8071C60
+	thumb_func_end PlayFanfare
 
-	thumb_func_start sub_8071C9C
-sub_8071C9C: @ 8071C9C
+	thumb_func_start IsFanfareTaskInactive
+IsFanfareTaskInactive: @ 8071C9C
 	push {lr}
-	ldr r0, _08071CB0 @ =sub_8071CBC
-	bl sub_8077650
+	ldr r0, _08071CB0 @ =Task_Fanfare
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -457,16 +457,16 @@ sub_8071C9C: @ 8071C9C
 	movs r0, 0x1
 	b _08071CB6
 	.align 2, 0
-_08071CB0: .4byte sub_8071CBC
+_08071CB0: .4byte Task_Fanfare
 _08071CB4:
 	movs r0, 0
 _08071CB6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071C9C
+	thumb_func_end IsFanfareTaskInactive
 
-	thumb_func_start sub_8071CBC
-sub_8071CBC: @ 8071CBC
+	thumb_func_start Task_Fanfare
+Task_Fanfare: @ 8071CBC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -483,38 +483,38 @@ _08071CD4:
 	ldr r0, _08071CE8 @ =gMPlay_BGM
 	bl m4aMPlayContinue
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08071CE0:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08071CE8: .4byte gMPlay_BGM
-	thumb_func_end sub_8071CBC
+	thumb_func_end Task_Fanfare
 
-	thumb_func_start sub_8071CEC
-sub_8071CEC: @ 8071CEC
+	thumb_func_start CreateFanfareTask
+CreateFanfareTask: @ 8071CEC
 	push {r4,lr}
-	ldr r4, _08071D0C @ =sub_8071CBC
+	ldr r4, _08071D0C @ =Task_Fanfare
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08071D06
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 _08071D06:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08071D0C: .4byte sub_8071CBC
-	thumb_func_end sub_8071CEC
+_08071D0C: .4byte Task_Fanfare
+	thumb_func_end CreateFanfareTask
 
-	thumb_func_start sub_8071D10
-sub_8071D10: @ 8071D10
+	thumb_func_start FadeInNewBGM
+FadeInNewBGM: @ 8071D10
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -552,10 +552,10 @@ _08071D2C:
 _08071D58: .4byte gUnknown_3005080
 _08071D5C: .4byte 0x0000ffff
 _08071D60: .4byte gMPlay_BGM
-	thumb_func_end sub_8071D10
+	thumb_func_end FadeInNewBGM
 
-	thumb_func_start sub_8071D64
-sub_8071D64: @ 8071D64
+	thumb_func_start FadeOutBGMTemporarily
+FadeOutBGMTemporarily: @ 8071D64
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 24
@@ -566,10 +566,10 @@ sub_8071D64: @ 8071D64
 	bx r0
 	.align 2, 0
 _08071D78: .4byte gMPlay_BGM
-	thumb_func_end sub_8071D64
+	thumb_func_end FadeOutBGMTemporarily
 
-	thumb_func_start sub_8071D7C
-sub_8071D7C: @ 8071D7C
+	thumb_func_start IsBGMPausedOrStopped
+IsBGMPausedOrStopped: @ 8071D7C
 	push {lr}
 	ldr r0, _08071D94 @ =gMPlay_BGM
 	ldr r1, [r0, 0x4]
@@ -589,10 +589,10 @@ _08071D9C:
 _08071D9E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071D7C
+	thumb_func_end IsBGMPausedOrStopped
 
-	thumb_func_start sub_8071DA4
-sub_8071DA4: @ 8071DA4
+	thumb_func_start FadeInBGM
+FadeInBGM: @ 8071DA4
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 24
@@ -603,10 +603,10 @@ sub_8071DA4: @ 8071DA4
 	bx r0
 	.align 2, 0
 _08071DB8: .4byte gMPlay_BGM
-	thumb_func_end sub_8071DA4
+	thumb_func_end FadeInBGM
 
-	thumb_func_start sub_8071DBC
-sub_8071DBC: @ 8071DBC
+	thumb_func_start FadeOutBGM
+FadeOutBGM: @ 8071DBC
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 24
@@ -617,10 +617,10 @@ sub_8071DBC: @ 8071DBC
 	bx r0
 	.align 2, 0
 _08071DD0: .4byte gMPlay_BGM
-	thumb_func_end sub_8071DBC
+	thumb_func_end FadeOutBGM
 
-	thumb_func_start sub_8071DD4
-sub_8071DD4: @ 8071DD4
+	thumb_func_start IsBGMStopped
+IsBGMStopped: @ 8071DD4
 	push {lr}
 	ldr r0, _08071DE4 @ =gMPlay_BGM
 	ldrh r0, [r0, 0x4]
@@ -635,10 +635,10 @@ _08071DE8:
 _08071DEA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071DD4
+	thumb_func_end IsBGMStopped
 
-	thumb_func_start sub_8071DF0
-sub_8071DF0: @ 8071DF0
+	thumb_func_start PlayCry1
+PlayCry1: @ 8071DF0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -663,7 +663,7 @@ sub_8071DF0: @ 8071DF0
 	ldr r1, _08071E38 @ =gUnknown_2037ED0
 	movs r0, 0x2
 	strb r0, [r1]
-	bl sub_807227C
+	bl RestoreBGMVolumeAfterPokemonCry
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -672,10 +672,10 @@ sub_8071DF0: @ 8071DF0
 _08071E30: .4byte gMPlay_BGM
 _08071E34: .4byte 0x0000ffff
 _08071E38: .4byte gUnknown_2037ED0
-	thumb_func_end sub_8071DF0
+	thumb_func_end PlayCry1
 
-	thumb_func_start sub_8071E3C
-sub_8071E3C: @ 8071E3C
+	thumb_func_start PlayCry2
+PlayCry2: @ 8071E3C
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 16
@@ -693,10 +693,10 @@ sub_8071E3C: @ 8071E3C
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8071E3C
+	thumb_func_end PlayCry2
 
-	thumb_func_start sub_8071E60
-sub_8071E60: @ 8071E60
+	thumb_func_start PlayCry3
+PlayCry3: @ 8071E60
 	push {r4-r6,lr}
 	sub sp, 0x4
 	lsls r0, 16
@@ -730,7 +730,7 @@ _08071E86:
 	ldr r1, _08071EBC @ =gUnknown_2037ED0
 	movs r0, 0x2
 	strb r0, [r1]
-	bl sub_807227C
+	bl RestoreBGMVolumeAfterPokemonCry
 _08071EAA:
 	add sp, 0x4
 	pop {r4-r6}
@@ -740,10 +740,10 @@ _08071EAA:
 _08071EB4: .4byte gMPlay_BGM
 _08071EB8: .4byte 0x0000ffff
 _08071EBC: .4byte gUnknown_2037ED0
-	thumb_func_end sub_8071E60
+	thumb_func_end PlayCry3
 
-	thumb_func_start sub_8071EC0
-sub_8071EC0: @ 8071EC0
+	thumb_func_start PlayCry4
+PlayCry4: @ 8071EC0
 	push {r4-r6,lr}
 	sub sp, 0x4
 	lsls r0, 16
@@ -792,7 +792,7 @@ _08071F10:
 _08071F18: .4byte gUnknown_2022B4C
 _08071F1C: .4byte gMPlay_BGM
 _08071F20: .4byte 0x0000ffff
-	thumb_func_end sub_8071EC0
+	thumb_func_end PlayCry4
 
 	thumb_func_start sub_8071F24
 sub_8071F24: @ 8071F24
@@ -823,7 +823,7 @@ _08071F56:
 	ldr r1, _08071F74 @ =gUnknown_2037ED0
 	movs r0, 0x2
 	strb r0, [r1]
-	bl sub_807227C
+	bl RestoreBGMVolumeAfterPokemonCry
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -993,7 +993,7 @@ _0807208A:
 	ldr r0, [sp]
 	bl SetPokemonCryPriority
 	adds r0, r7, 0
-	bl sub_8043304
+	bl SpeciesToCryId
 	adds r7, r0, 0
 	movs r1, 0x7F
 	ands r1, r7
@@ -1108,11 +1108,11 @@ _08072198: .4byte gUnknown_848DB14
 _0807219C: .4byte gUnknown_2037ECC
 	thumb_func_end sub_8071F78
 
-	thumb_func_start sub_80721A0
-sub_80721A0: @ 80721A0
+	thumb_func_start IsCryFinished
+IsCryFinished: @ 80721A0
 	push {lr}
-	ldr r0, _080721B8 @ =sub_8072234
-	bl sub_8077650
+	ldr r0, _080721B8 @ =Task_DuckBGMForPokemonCry
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1121,16 +1121,16 @@ sub_80721A0: @ 80721A0
 	movs r0, 0x1
 	b _080721BE
 	.align 2, 0
-_080721B8: .4byte sub_8072234
+_080721B8: .4byte Task_DuckBGMForPokemonCry
 _080721BC:
 	movs r0, 0
 _080721BE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80721A0
+	thumb_func_end IsCryFinished
 
-	thumb_func_start sub_80721C4
-sub_80721C4: @ 80721C4
+	thumb_func_start StopCryAndClearCrySongs
+StopCryAndClearCrySongs: @ 80721C4
 	push {lr}
 	ldr r0, _080721D8 @ =gUnknown_2037ECC
 	ldr r0, [r0]
@@ -1140,10 +1140,10 @@ sub_80721C4: @ 80721C4
 	bx r0
 	.align 2, 0
 _080721D8: .4byte gUnknown_2037ECC
-	thumb_func_end sub_80721C4
+	thumb_func_end StopCryAndClearCrySongs
 
-	thumb_func_start sub_80721DC
-sub_80721DC: @ 80721DC
+	thumb_func_start StopCry
+StopCry: @ 80721DC
 	push {lr}
 	ldr r0, _080721EC @ =gUnknown_2037ECC
 	ldr r0, [r0]
@@ -1152,10 +1152,10 @@ sub_80721DC: @ 80721DC
 	bx r0
 	.align 2, 0
 _080721EC: .4byte gUnknown_2037ECC
-	thumb_func_end sub_80721DC
+	thumb_func_end StopCry
 
-	thumb_func_start sub_80721F0
-sub_80721F0: @ 80721F0
+	thumb_func_start IsCryPlayingOrClearCrySongs
+IsCryPlayingOrClearCrySongs: @ 80721F0
 	push {lr}
 	ldr r0, _08072208 @ =gUnknown_2037ECC
 	ldr r0, [r0]
@@ -1172,10 +1172,10 @@ _0807220C:
 _0807220E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80721F0
+	thumb_func_end IsCryPlayingOrClearCrySongs
 
-	thumb_func_start sub_8072214
-sub_8072214: @ 8072214
+	thumb_func_start IsCryPlaying
+IsCryPlaying: @ 8072214
 	push {lr}
 	ldr r0, _08072228 @ =gUnknown_2037ECC
 	ldr r0, [r0]
@@ -1191,10 +1191,10 @@ _0807222C:
 _0807222E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8072214
+	thumb_func_end IsCryPlaying
 
-	thumb_func_start sub_8072234
-sub_8072234: @ 8072234
+	thumb_func_start Task_DuckBGMForPokemonCry
+Task_DuckBGMForPokemonCry: @ 8072234
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1219,7 +1219,7 @@ _0807224C:
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _0807226A:
 	pop {r4}
 	pop {r0}
@@ -1228,31 +1228,31 @@ _0807226A:
 _08072270: .4byte gUnknown_2037ECC
 _08072274: .4byte gMPlay_BGM
 _08072278: .4byte 0x0000ffff
-	thumb_func_end sub_8072234
+	thumb_func_end Task_DuckBGMForPokemonCry
 
-	thumb_func_start sub_807227C
-sub_807227C: @ 807227C
+	thumb_func_start RestoreBGMVolumeAfterPokemonCry
+RestoreBGMVolumeAfterPokemonCry: @ 807227C
 	push {r4,lr}
-	ldr r4, _0807229C @ =sub_8072234
+	ldr r4, _0807229C @ =Task_DuckBGMForPokemonCry
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08072296
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 _08072296:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807229C: .4byte sub_8072234
-	thumb_func_end sub_807227C
+_0807229C: .4byte Task_DuckBGMForPokemonCry
+	thumb_func_end RestoreBGMVolumeAfterPokemonCry
 
-	thumb_func_start sub_80722A0
-sub_80722A0: @ 80722A0
+	thumb_func_start PlayBGM
+PlayBGM: @ 80722A0
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -1274,7 +1274,7 @@ _080722B8:
 	.align 2, 0
 _080722C4: .4byte gUnknown_3005080
 _080722C8: .4byte 0x0000ffff
-	thumb_func_end sub_80722A0
+	thumb_func_end PlayBGM
 
 	thumb_func_start sub_80722CC
 sub_80722CC: @ 80722CC
@@ -1299,8 +1299,8 @@ _080722EC: .4byte gUnknown_2031DD8
 _080722F0: .4byte gUnknown_203ADFA
 	thumb_func_end sub_80722CC
 
-	thumb_func_start sub_80722F4
-sub_80722F4: @ 80722F4
+	thumb_func_start PlaySE12WithPanning
+PlaySE12WithPanning: @ 80722F4
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1336,10 +1336,10 @@ sub_80722F4: @ 80722F4
 _0807233C: .4byte gMPlay_SE1
 _08072340: .4byte gMPlay_SE2
 _08072344: .4byte 0x0000ffff
-	thumb_func_end sub_80722F4
+	thumb_func_end PlaySE12WithPanning
 
-	thumb_func_start sub_8072348
-sub_8072348: @ 8072348
+	thumb_func_start PlaySE1WithPanning
+PlaySE1WithPanning: @ 8072348
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 16
@@ -1362,10 +1362,10 @@ sub_8072348: @ 8072348
 	.align 2, 0
 _08072374: .4byte gMPlay_SE1
 _08072378: .4byte 0x0000ffff
-	thumb_func_end sub_8072348
+	thumb_func_end PlaySE1WithPanning
 
-	thumb_func_start sub_807237C
-sub_807237C: @ 807237C
+	thumb_func_start PlaySE2WithPanning
+PlaySE2WithPanning: @ 807237C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 16
@@ -1388,10 +1388,10 @@ sub_807237C: @ 807237C
 	.align 2, 0
 _080723A8: .4byte gMPlay_SE2
 _080723AC: .4byte 0x0000ffff
-	thumb_func_end sub_807237C
+	thumb_func_end PlaySE2WithPanning
 
-	thumb_func_start sub_80723B0
-sub_80723B0: @ 80723B0
+	thumb_func_start SE12PanpotControl
+SE12PanpotControl: @ 80723B0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, _080723D4 @ =gMPlay_SE1
@@ -1412,10 +1412,10 @@ sub_80723B0: @ 80723B0
 _080723D4: .4byte gMPlay_SE1
 _080723D8: .4byte 0x0000ffff
 _080723DC: .4byte gMPlay_SE2
-	thumb_func_end sub_80723B0
+	thumb_func_end SE12PanpotControl
 
-	thumb_func_start sub_80723E0
-sub_80723E0: @ 80723E0
+	thumb_func_start IsSEPlaying
+IsSEPlaying: @ 80723E0
 	push {lr}
 	ldr r0, _08072410 @ =gMPlay_SE1
 	ldr r1, [r0, 0x4]
@@ -1451,10 +1451,10 @@ _0807241C:
 _0807241E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80723E0
+	thumb_func_end IsSEPlaying
 
-	thumb_func_start sub_8072424
-sub_8072424: @ 8072424
+	thumb_func_start IsBGMPlaying
+IsBGMPlaying: @ 8072424
 	push {lr}
 	ldr r0, _0807243C @ =gMPlay_BGM
 	ldr r1, [r0, 0x4]
@@ -1474,10 +1474,10 @@ _08072444:
 _08072446:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8072424
+	thumb_func_end IsBGMPlaying
 
-	thumb_func_start sub_807244C
-sub_807244C: @ 807244C
+	thumb_func_start IsSpecialSEPlaying
+IsSpecialSEPlaying: @ 807244C
 	push {lr}
 	ldr r0, _08072464 @ =gMPlay_SE3
 	ldr r1, [r0, 0x4]
@@ -1497,7 +1497,7 @@ _0807246C:
 _0807246E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807244C
+	thumb_func_end IsSpecialSEPlaying
 
 	thumb_func_start sub_8072474
 sub_8072474: @ 8072474

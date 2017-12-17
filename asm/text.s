@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_800537C
-sub_800537C: @ 800537C
+	thumb_func_start Font0Func
+Font0Func: @ 800537C
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -32,10 +32,10 @@ _080053A0:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800537C
+	thumb_func_end Font0Func
 
-	thumb_func_start sub_80053B0
-sub_80053B0: @ 80053B0
+	thumb_func_start Font1Func
+Font1Func: @ 80053B0
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -63,10 +63,10 @@ _080053D8:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80053B0
+	thumb_func_end Font1Func
 
-	thumb_func_start sub_80053E8
-sub_80053E8: @ 80053E8
+	thumb_func_start Font2Func
+Font2Func: @ 80053E8
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -94,10 +94,10 @@ _08005410:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80053E8
+	thumb_func_end Font2Func
 
-	thumb_func_start sub_8005420
-sub_8005420: @ 8005420
+	thumb_func_start Font3Func
+Font3Func: @ 8005420
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -125,10 +125,10 @@ _08005448:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8005420
+	thumb_func_end Font3Func
 
-	thumb_func_start sub_8005458
-sub_8005458: @ 8005458
+	thumb_func_start Font4Func
+Font4Func: @ 8005458
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -156,10 +156,10 @@ _08005480:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8005458
+	thumb_func_end Font4Func
 
-	thumb_func_start sub_8005490
-sub_8005490: @ 8005490
+	thumb_func_start Font5Func
+Font5Func: @ 8005490
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -187,7 +187,7 @@ _080054B8:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8005490
+	thumb_func_end Font5Func
 
 	thumb_func_start sub_80054C8
 sub_80054C8: @ 80054C8
@@ -261,7 +261,7 @@ _08005530:
 	str r4, [sp]
 	movs r4, 0xC
 	str r4, [sp, 0x4]
-	bl sub_8004378
+	bl FillWindowPixelRect
 	ldr r0, [r7]
 	lsls r0, 30
 	lsrs r0, 31
@@ -298,7 +298,7 @@ _08005566:
 	str r1, [sp, 0x14]
 	adds r1, r3, 0
 	movs r3, 0
-	bl sub_80041F0
+	bl BlitBitmapRectToWindow
 	ldrb r0, [r5, 0x4]
 	movs r1, 0x2
 	bl sub_8003F20
@@ -349,7 +349,7 @@ sub_80055D4: @ 80055D4
 	str r4, [sp]
 	movs r4, 0xC
 	str r4, [sp, 0x4]
-	bl sub_8004378
+	bl FillWindowPixelRect
 	ldrb r0, [r5, 0x4]
 	movs r1, 0x2
 	bl sub_8003F20
@@ -504,7 +504,7 @@ _080056FA:
 	adds r0, r5, 0
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl sub_8004378
+	bl FillWindowPixelRect
 	cmp r4, 0
 	bne _08005778
 	ldr r0, _0800572C @ =gUnknown_3003E50
@@ -544,7 +544,7 @@ _08005736:
 	adds r0, r5, 0
 	adds r1, r3, 0
 	movs r3, 0
-	bl sub_80041F0
+	bl BlitBitmapRectToWindow
 	adds r0, r5, 0
 	movs r1, 0x2
 	bl sub_8003F20
@@ -904,7 +904,7 @@ _08005A1E:
 	b _0800589E
 _08005A40:
 	adds r0, r3, 0
-	bl sub_80722A0
+	bl PlayBGM
 	b _0800589E
 	.align 2, 0
 _08005A48: .4byte gUnknown_203ADFA
@@ -946,7 +946,7 @@ _08005A84:
 	lsrs r1, r2, 4
 	orrs r1, r2
 	lsrs r1, 24
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	b _0800589E
 _08005A96:
 	ldr r0, _08005AA0 @ =gMPlay_BGM
@@ -1058,7 +1058,7 @@ _08005B46:
 	adds r1, r3, 0
 	ldrb r2, [r6, 0x8]
 	ldrb r3, [r6, 0x9]
-	bl sub_80063C8
+	bl DrawKeypadIcon
 	ldr r1, _08005B68 @ =gUnknown_3003DA0
 	adds r1, 0x80
 	strb r0, [r1]
@@ -1211,7 +1211,7 @@ _08005C7A:
 	lsrs r1, r2, 4
 	orrs r1, r2
 	lsrs r1, 24
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r6, 0x6]
 	movs r1, 0
 	strb r0, [r6, 0x8]
@@ -1268,7 +1268,7 @@ _08005CD0:
 	orrs r3, r1
 	lsrs r3, 24
 	movs r1, 0
-	bl sub_80044A8
+	bl ScrollWindow
 	movs r0, 0
 	strb r0, [r6, 0x1F]
 	b _08005D36
@@ -1286,7 +1286,7 @@ _08005D0C:
 	orrs r3, r1
 	lsrs r3, 24
 	movs r1, 0
-	bl sub_80044A8
+	bl ScrollWindow
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x14]
 	lsls r0, 29
@@ -1305,7 +1305,7 @@ _08005D40:
 	strb r2, [r6, 0x1C]
 	b _08005B30
 _08005D44:
-	bl sub_80723E0
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -1755,7 +1755,7 @@ _080060AE:
 _080060C8:
 	adds r4, 0x1
 	ldrb r0, [r4]
-	bl sub_8006428
+	bl GetKeypadIconWidth
 	lsls r0, 24
 	lsrs r0, 24
 _080060D4:
@@ -1948,7 +1948,7 @@ _08006256:
 	b _08006280
 _0800625A:
 	adds r0, r6, 0
-	bl sub_8006AC4
+	bl DecompressGlyphFont9
 	ldr r4, _080062A8 @ =gUnknown_3003DA0
 	ldr r5, _080062AC @ =0x04000008
 	adds r0, r4, 0
@@ -2063,9 +2063,9 @@ sub_8006300: @ 8006300
 	lsls r0, 3
 	ldr r1, _08006388 @ =gUnknown_81EA68C
 	adds r0, r1
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	ldr r0, _0800638C @ =gUnknown_81EA6A4
-	bl sub_8008928
+	bl LoadSpritePalette
 	ldr r0, _08006390 @ =gUnknown_81EA6B4
 	adds r4, 0x3
 	lsls r4, 16
@@ -2076,7 +2076,7 @@ sub_8006300: @ 8006300
 	adds r1, r4, 0
 	adds r2, r5, 0
 	mov r3, r8
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08006394 @ =gUnknown_202063C
@@ -2122,13 +2122,13 @@ sub_8006398: @ 8006398
 	lsls r0, 2
 	ldr r1, _080063C4 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	movs r4, 0x80
 	lsls r4, 8
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2136,8 +2136,8 @@ sub_8006398: @ 8006398
 _080063C4: .4byte gUnknown_202063C
 	thumb_func_end sub_8006398
 
-	thumb_func_start sub_80063C8
-sub_80063C8: @ 80063C8
+	thumb_func_start DrawKeypadIcon
+DrawKeypadIcon: @ 80063C8
 	push {r4,r5,lr}
 	sub sp, 0x18
 	lsls r0, 24
@@ -2166,7 +2166,7 @@ sub_80063C8: @ 80063C8
 	adds r1, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_80041F0
+	bl BlitBitmapRectToWindow
 	adds r0, r4, 0
 	add sp, 0x18
 	pop {r4,r5}
@@ -2175,10 +2175,10 @@ sub_80063C8: @ 80063C8
 	.align 2, 0
 _08006410: .4byte gUnknown_81EA6CC
 _08006414: .4byte gUnknown_81EA700
-	thumb_func_end sub_80063C8
+	thumb_func_end DrawKeypadIcon
 
-	thumb_func_start sub_8006418
-sub_8006418: @ 8006418
+	thumb_func_start GetKeypadIconTileOffset
+GetKeypadIconTileOffset: @ 8006418
 	lsls r0, 24
 	ldr r1, _08006424 @ =gUnknown_81EA6CC
 	lsrs r0, 22
@@ -2187,10 +2187,10 @@ sub_8006418: @ 8006418
 	bx lr
 	.align 2, 0
 _08006424: .4byte gUnknown_81EA6CC
-	thumb_func_end sub_8006418
+	thumb_func_end GetKeypadIconTileOffset
 
-	thumb_func_start sub_8006428
-sub_8006428: @ 8006428
+	thumb_func_start GetKeypadIconWidth
+GetKeypadIconWidth: @ 8006428
 	lsls r0, 24
 	ldr r1, _08006434 @ =gUnknown_81EA6CC
 	lsrs r0, 22
@@ -2199,10 +2199,10 @@ sub_8006428: @ 8006428
 	bx lr
 	.align 2, 0
 _08006434: .4byte gUnknown_81EA6CC
-	thumb_func_end sub_8006428
+	thumb_func_end GetKeypadIconWidth
 
-	thumb_func_start sub_8006438
-sub_8006438: @ 8006438
+	thumb_func_start GetKeypadIconHeight
+GetKeypadIconHeight: @ 8006438
 	lsls r0, 24
 	ldr r1, _08006444 @ =gUnknown_81EA6CC
 	lsrs r0, 22
@@ -2211,7 +2211,7 @@ sub_8006438: @ 8006438
 	bx lr
 	.align 2, 0
 _08006444: .4byte gUnknown_81EA6CC
-	thumb_func_end sub_8006438
+	thumb_func_end GetKeypadIconHeight
 
 	thumb_func_start sub_8006448
 sub_8006448: @ 8006448
@@ -3049,8 +3049,8 @@ _08006ABA:
 _08006AC0: .4byte gUnknown_8227930
 	thumb_func_end sub_8006A98
 
-	thumb_func_start sub_8006AC4
-sub_8006AC4: @ 8006AC4
+	thumb_func_start DecompressGlyphFont9
+DecompressGlyphFont9: @ 8006AC4
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 20
@@ -3086,6 +3086,6 @@ sub_8006AC4: @ 8006AC4
 	.align 2, 0
 _08006B08: .4byte gUnknown_822FC48
 _08006B0C: .4byte gUnknown_3003DA0
-	thumb_func_end sub_8006AC4
+	thumb_func_end DecompressGlyphFont9
 
 	.align 2, 0 @ Don't pad with nop.

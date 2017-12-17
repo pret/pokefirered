@@ -11,8 +11,8 @@ sub_8059AF0: @ 8059AF0
 	bx lr
 	thumb_func_end sub_8059AF0
 
-	thumb_func_start sub_8059AF4
-sub_8059AF4: @ 8059AF4
+	thumb_func_start MetatileBehavior_IsJumpEast
+MetatileBehavior_IsJumpEast: @ 8059AF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -25,10 +25,10 @@ _08059B02:
 _08059B04:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059AF4
+	thumb_func_end MetatileBehavior_IsJumpEast
 
-	thumb_func_start sub_8059B08
-sub_8059B08: @ 8059B08
+	thumb_func_start MetatileBehavior_IsJumpWest
+MetatileBehavior_IsJumpWest: @ 8059B08
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -41,10 +41,10 @@ _08059B16:
 _08059B18:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059B08
+	thumb_func_end MetatileBehavior_IsJumpWest
 
-	thumb_func_start sub_8059B1C
-sub_8059B1C: @ 8059B1C
+	thumb_func_start MetatileBehavior_IsJumpNorth
+MetatileBehavior_IsJumpNorth: @ 8059B1C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -57,10 +57,10 @@ _08059B2A:
 _08059B2C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059B1C
+	thumb_func_end MetatileBehavior_IsJumpNorth
 
-	thumb_func_start sub_8059B30
-sub_8059B30: @ 8059B30
+	thumb_func_start MetatileBehavior_IsJumpSouth
+MetatileBehavior_IsJumpSouth: @ 8059B30
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -73,7 +73,7 @@ _08059B3E:
 _08059B40:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059B30
+	thumb_func_end MetatileBehavior_IsJumpSouth
 
 	thumb_func_start sub_8059B44
 sub_8059B44: @ 8059B44
@@ -553,8 +553,8 @@ _08059DD0:
 	bx r1
 	thumb_func_end sub_8059DC0
 
-	thumb_func_start sub_8059DD4
-sub_8059DD4: @ 8059DD4
+	thumb_func_start MetatileBehavior_IsWalkNorth
+MetatileBehavior_IsWalkNorth: @ 8059DD4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -567,10 +567,10 @@ _08059DE2:
 _08059DE4:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059DD4
+	thumb_func_end MetatileBehavior_IsWalkNorth
 
-	thumb_func_start sub_8059DE8
-sub_8059DE8: @ 8059DE8
+	thumb_func_start MetatileBehavior_IsWalkSouth
+MetatileBehavior_IsWalkSouth: @ 8059DE8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -583,10 +583,10 @@ _08059DF6:
 _08059DF8:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059DE8
+	thumb_func_end MetatileBehavior_IsWalkSouth
 
-	thumb_func_start sub_8059DFC
-sub_8059DFC: @ 8059DFC
+	thumb_func_start MetatileBehavior_IsWalkWest
+MetatileBehavior_IsWalkWest: @ 8059DFC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -599,10 +599,10 @@ _08059E0A:
 _08059E0C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059DFC
+	thumb_func_end MetatileBehavior_IsWalkWest
 
-	thumb_func_start sub_8059E10
-sub_8059E10: @ 8059E10
+	thumb_func_start MetatileBehavior_IsWalkEast
+MetatileBehavior_IsWalkEast: @ 8059E10
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -615,10 +615,10 @@ _08059E1E:
 _08059E20:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059E10
+	thumb_func_end MetatileBehavior_IsWalkEast
 
-	thumb_func_start sub_8059E24
-sub_8059E24: @ 8059E24
+	thumb_func_start MetatileBehavior_IsNorthwardCurrent
+MetatileBehavior_IsNorthwardCurrent: @ 8059E24
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -631,10 +631,10 @@ _08059E32:
 _08059E34:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059E24
+	thumb_func_end MetatileBehavior_IsNorthwardCurrent
 
-	thumb_func_start sub_8059E38
-sub_8059E38: @ 8059E38
+	thumb_func_start MetatileBehavior_IsSouthwardCurrent
+MetatileBehavior_IsSouthwardCurrent: @ 8059E38
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -647,10 +647,10 @@ _08059E46:
 _08059E48:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059E38
+	thumb_func_end MetatileBehavior_IsSouthwardCurrent
 
-	thumb_func_start sub_8059E4C
-sub_8059E4C: @ 8059E4C
+	thumb_func_start MetatileBehavior_IsWestwardCurrent
+MetatileBehavior_IsWestwardCurrent: @ 8059E4C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -663,10 +663,10 @@ _08059E5A:
 _08059E5C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059E4C
+	thumb_func_end MetatileBehavior_IsWestwardCurrent
 
-	thumb_func_start sub_8059E60
-sub_8059E60: @ 8059E60
+	thumb_func_start MetatileBehavior_IsEastwardCurrent
+MetatileBehavior_IsEastwardCurrent: @ 8059E60
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -679,10 +679,10 @@ _08059E6E:
 _08059E70:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059E60
+	thumb_func_end MetatileBehavior_IsEastwardCurrent
 
-	thumb_func_start sub_8059E74
-sub_8059E74: @ 8059E74
+	thumb_func_start MetatileBehavior_IsSlideNorth
+MetatileBehavior_IsSlideNorth: @ 8059E74
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -695,10 +695,10 @@ _08059E82:
 _08059E84:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059E74
+	thumb_func_end MetatileBehavior_IsSlideNorth
 
-	thumb_func_start sub_8059E88
-sub_8059E88: @ 8059E88
+	thumb_func_start MetatileBehavior_IsSlideSouth
+MetatileBehavior_IsSlideSouth: @ 8059E88
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -711,10 +711,10 @@ _08059E96:
 _08059E98:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059E88
+	thumb_func_end MetatileBehavior_IsSlideSouth
 
-	thumb_func_start sub_8059E9C
-sub_8059E9C: @ 8059E9C
+	thumb_func_start MetatileBehavior_IsSlideWest
+MetatileBehavior_IsSlideWest: @ 8059E9C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -727,10 +727,10 @@ _08059EAA:
 _08059EAC:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059E9C
+	thumb_func_end MetatileBehavior_IsSlideWest
 
-	thumb_func_start sub_8059EB0
-sub_8059EB0: @ 8059EB0
+	thumb_func_start MetatileBehavior_IsSlideEast
+MetatileBehavior_IsSlideEast: @ 8059EB0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -743,10 +743,10 @@ _08059EBE:
 _08059EC0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059EB0
+	thumb_func_end MetatileBehavior_IsSlideEast
 
-	thumb_func_start sub_8059EC4
-sub_8059EC4: @ 8059EC4
+	thumb_func_start MetatileBehavior_IsCounter
+MetatileBehavior_IsCounter: @ 8059EC4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -759,10 +759,10 @@ _08059ED2:
 _08059ED4:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059EC4
+	thumb_func_end MetatileBehavior_IsCounter
 
-	thumb_func_start sub_8059ED8
-sub_8059ED8: @ 8059ED8
+	thumb_func_start MetatileBehavior_IsPlayerFacingTVScreen
+MetatileBehavior_IsPlayerFacingTVScreen: @ 8059ED8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -780,10 +780,10 @@ _08059EEE:
 _08059EF0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059ED8
+	thumb_func_end MetatileBehavior_IsPlayerFacingTVScreen
 
-	thumb_func_start sub_8059EF4
-sub_8059EF4: @ 8059EF4
+	thumb_func_start MetatileBehavior_IsPC
+MetatileBehavior_IsPC: @ 8059EF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -796,7 +796,7 @@ _08059F02:
 _08059F04:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059EF4
+	thumb_func_end MetatileBehavior_IsPC
 
 	thumb_func_start sub_8059F08
 sub_8059F08: @ 8059F08

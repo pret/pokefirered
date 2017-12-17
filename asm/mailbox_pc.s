@@ -12,7 +12,7 @@ sub_810EB6C: @ 810EB6C
 	ldr r4, _0810EB84 @ =gUnknown_203ADE0
 	lsrs r0, 21
 	adds r0, 0x8
-	bl sub_8002B9C
+	bl Alloc
 	str r0, [r4]
 	cmp r0, 0
 	bne _0810EB88
@@ -83,7 +83,7 @@ sub_810EBE0: @ 810EBE0
 	movs r1, 0
 	bl sub_810F4D8
 	ldrb r0, [r4]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	bl sub_8003E3C
 	movs r0, 0xFF
@@ -129,16 +129,16 @@ sub_810EC20: @ 810EC20
 	ldr r0, _0810EC90 @ =0x00002dba
 	adds r1, r0
 	add r0, sp, 0x14
-	bl sub_8008D84
+	bl StringCopy
 	add r0, sp, 0x14
-	bl sub_8008E08
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x5
 	bhi _0810EC62
 	add r0, sp, 0x14
 	movs r1, 0x1
-	bl sub_80093BC
+	bl ConvertInternationalString
 _0810EC62:
 	movs r0, 0
 	str r0, [sp]
@@ -252,7 +252,7 @@ _0810ECCE:
 	ldrh r1, [r6, 0x2]
 	ldrh r2, [r6]
 	adds r0, r5, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r3}
@@ -303,7 +303,7 @@ sub_810ED80: @ 810ED80
 	movs r1, 0xC2
 	movs r2, 0xC
 	movs r3, 0x94
-	bl sub_8133B40
+	bl AddScrollIndicatorArrowPairParametrized
 	strb r0, [r4, 0xA]
 	add sp, 0x10
 	pop {r4}
@@ -316,7 +316,7 @@ sub_810EDB0: @ 810EDB0
 	push {lr}
 	ldr r0, _0810EDC0 @ =gUnknown_203ADE0
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	pop {r0}
 	bx r0
 	.align 2, 0

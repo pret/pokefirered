@@ -140,8 +140,8 @@ _0806987C:
 	bx r1
 	thumb_func_end sub_8069804
 
-	thumb_func_start sub_8069884
-sub_8069884: @ 8069884
+	thumb_func_start ScriptPush
+ScriptPush: @ 8069884
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r1, 0
@@ -164,10 +164,10 @@ _080698A6:
 _080698A8:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069884
+	thumb_func_end ScriptPush
 
-	thumb_func_start sub_80698AC
-sub_80698AC: @ 80698AC
+	thumb_func_start ScriptPop
+ScriptPop: @ 80698AC
 	push {lr}
 	adds r2, r0, 0
 	ldrb r0, [r2]
@@ -187,40 +187,40 @@ _080698C8:
 _080698CA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80698AC
+	thumb_func_end ScriptPop
 
-	thumb_func_start sub_80698D0
-sub_80698D0: @ 80698D0
+	thumb_func_start ScriptJump
+ScriptJump: @ 80698D0
 	str r1, [r0, 0x8]
 	bx lr
-	thumb_func_end sub_80698D0
+	thumb_func_end ScriptJump
 
-	thumb_func_start sub_80698D4
-sub_80698D4: @ 80698D4
+	thumb_func_start ScriptCall
+ScriptCall: @ 80698D4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	ldr r1, [r4, 0x8]
-	bl sub_8069884
+	bl ScriptPush
 	str r5, [r4, 0x8]
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80698D4
+	thumb_func_end ScriptCall
 
-	thumb_func_start sub_80698E8
-sub_80698E8: @ 80698E8
+	thumb_func_start ScriptReturn
+ScriptReturn: @ 80698E8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698AC
+	bl ScriptPop
 	str r0, [r4, 0x8]
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80698E8
+	thumb_func_end ScriptReturn
 
-	thumb_func_start sub_80698F8
-sub_80698F8: @ 80698F8
+	thumb_func_start ScriptReadHalfword
+ScriptReadHalfword: @ 80698F8
 	adds r3, r0, 0
 	ldr r2, [r3, 0x8]
 	ldrb r0, [r2]
@@ -232,10 +232,10 @@ sub_80698F8: @ 80698F8
 	adds r2, 0x1
 	str r2, [r3, 0x8]
 	bx lr
-	thumb_func_end sub_80698F8
+	thumb_func_end ScriptReadHalfword
 
-	thumb_func_start sub_8069910
-sub_8069910: @ 8069910
+	thumb_func_start ScriptReadWord
+ScriptReadWord: @ 8069910
 	push {r4-r6,lr}
 	adds r3, r0, 0
 	ldr r0, [r3, 0x8]
@@ -260,36 +260,36 @@ sub_8069910: @ 8069910
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069910
+	thumb_func_end ScriptReadWord
 
-	thumb_func_start sub_8069940
-sub_8069940: @ 8069940
+	thumb_func_start ScriptContext2_Enable
+ScriptContext2_Enable: @ 8069940
 	ldr r1, _08069948 @ =gUnknown_3000F9C
 	movs r0, 0x1
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
 _08069948: .4byte gUnknown_3000F9C
-	thumb_func_end sub_8069940
+	thumb_func_end ScriptContext2_Enable
 
-	thumb_func_start sub_806994C
-sub_806994C: @ 806994C
+	thumb_func_start ScriptContext2_Disable
+ScriptContext2_Disable: @ 806994C
 	ldr r1, _08069954 @ =gUnknown_3000F9C
 	movs r0, 0
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
 _08069954: .4byte gUnknown_3000F9C
-	thumb_func_end sub_806994C
+	thumb_func_end ScriptContext2_Disable
 
-	thumb_func_start sub_8069958
-sub_8069958: @ 8069958
+	thumb_func_start ScriptContext2_IsEnabled
+ScriptContext2_IsEnabled: @ 8069958
 	ldr r0, _08069960 @ =gUnknown_3000F9C
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _08069960: .4byte gUnknown_3000F9C
-	thumb_func_end sub_8069958
+	thumb_func_end ScriptContext2_IsEnabled
 
 	thumb_func_start sub_8069964
 sub_8069964: @ 8069964
@@ -475,8 +475,8 @@ sub_8069A54: @ 8069A54
 	bx r0
 	thumb_func_end sub_8069A54
 
-	thumb_func_start sub_8069A64
-sub_8069A64: @ 8069A64
+	thumb_func_start ScriptContext1_IsScriptSetUp
+ScriptContext1_IsScriptSetUp: @ 8069A64
 	push {lr}
 	ldr r0, _08069A74 @ =gUnknown_3000EA8
 	ldrb r0, [r0]
@@ -491,10 +491,10 @@ _08069A78:
 _08069A7A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069A64
+	thumb_func_end ScriptContext1_IsScriptSetUp
 
-	thumb_func_start sub_8069A80
-sub_8069A80: @ 8069A80
+	thumb_func_start ScriptContext1_Init
+ScriptContext1_Init: @ 8069A80
 	push {lr}
 	ldr r0, _08069A98 @ =gUnknown_3000EB0
 	ldr r1, _08069A9C @ =gUnknown_815F9B4
@@ -510,10 +510,10 @@ _08069A98: .4byte gUnknown_3000EB0
 _08069A9C: .4byte gUnknown_815F9B4
 _08069AA0: .4byte gUnknown_815FD08
 _08069AA4: .4byte gUnknown_3000EA8
-	thumb_func_end sub_8069A80
+	thumb_func_end ScriptContext1_Init
 
-	thumb_func_start sub_8069AA8
-sub_8069AA8: @ 8069AA8
+	thumb_func_start ScriptContext2_RunScript
+ScriptContext2_RunScript: @ 8069AA8
 	push {r4,lr}
 	ldr r4, _08069ACC @ =gUnknown_3000EA8
 	ldrb r0, [r4]
@@ -521,7 +521,7 @@ sub_8069AA8: @ 8069AA8
 	beq _08069ADC
 	cmp r0, 0x1
 	beq _08069ADC
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r0, _08069AD0 @ =gUnknown_3000EB0
 	bl sub_8069804
 	lsls r0, 24
@@ -535,17 +535,17 @@ _08069AD0: .4byte gUnknown_3000EB0
 _08069AD4:
 	movs r0, 0x2
 	strb r0, [r4]
-	bl sub_806994C
+	bl ScriptContext2_Disable
 _08069ADC:
 	movs r0, 0
 _08069ADE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069AA8
+	thumb_func_end ScriptContext2_RunScript
 
-	thumb_func_start sub_8069AE4
-sub_8069AE4: @ 8069AE4
+	thumb_func_start ScriptContext1_SetupScript
+ScriptContext1_SetupScript: @ 8069AE4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80699F8
@@ -559,7 +559,7 @@ sub_8069AE4: @ 8069AE4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80697E8
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _08069B24 @ =gUnknown_3000EA8
 	movs r0, 0
 	strb r0, [r1]
@@ -571,33 +571,33 @@ _08069B18: .4byte gUnknown_3000EB0
 _08069B1C: .4byte gUnknown_815F9B4
 _08069B20: .4byte gUnknown_815FD08
 _08069B24: .4byte gUnknown_3000EA8
-	thumb_func_end sub_8069AE4
+	thumb_func_end ScriptContext1_SetupScript
 
-	thumb_func_start sub_8069B28
-sub_8069B28: @ 8069B28
+	thumb_func_start ScriptContext1_Stop
+ScriptContext1_Stop: @ 8069B28
 	ldr r1, _08069B30 @ =gUnknown_3000EA8
 	movs r0, 0x1
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
 _08069B30: .4byte gUnknown_3000EA8
-	thumb_func_end sub_8069B28
+	thumb_func_end ScriptContext1_Stop
 
-	thumb_func_start sub_8069B34
-sub_8069B34: @ 8069B34
+	thumb_func_start EnableBothScriptContexts
+EnableBothScriptContexts: @ 8069B34
 	push {lr}
 	ldr r1, _08069B44 @ =gUnknown_3000EA8
 	movs r0, 0
 	strb r0, [r1]
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08069B44: .4byte gUnknown_3000EA8
-	thumb_func_end sub_8069B34
+	thumb_func_end EnableBothScriptContexts
 
-	thumb_func_start sub_8069B48
-sub_8069B48: @ 8069B48
+	thumb_func_start ScriptContext2_RunNewScript
+ScriptContext2_RunNewScript: @ 8069B48
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r4, _08069B74 @ =gUnknown_3000F28
@@ -622,10 +622,10 @@ _08069B60:
 _08069B74: .4byte gUnknown_3000F28
 _08069B78: .4byte gUnknown_815F9B4
 _08069B7C: .4byte gUnknown_815FD08
-	thumb_func_end sub_8069B48
+	thumb_func_end ScriptContext2_RunNewScript
 
-	thumb_func_start sub_8069B80
-sub_8069B80: @ 8069B80
+	thumb_func_start mapheader_get_tagged_pointer
+mapheader_get_tagged_pointer: @ 8069B80
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -662,28 +662,28 @@ _08069BA4:
 _08069BBA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069B80
+	thumb_func_end mapheader_get_tagged_pointer
 
-	thumb_func_start sub_8069BC0
-sub_8069BC0: @ 8069BC0
+	thumb_func_start mapheader_run_script_by_tag
+mapheader_run_script_by_tag: @ 8069BC0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8069B80
+	bl mapheader_get_tagged_pointer
 	cmp r0, 0
 	beq _08069BD2
-	bl sub_8069B48
+	bl ScriptContext2_RunNewScript
 _08069BD2:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069BC0
+	thumb_func_end mapheader_run_script_by_tag
 
-	thumb_func_start sub_8069BD8
-sub_8069BD8: @ 8069BD8
+	thumb_func_start mapheader_get_first_match_from_tagged_ptr_list
+mapheader_get_first_match_from_tagged_ptr_list: @ 8069BD8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8069B80
+	bl mapheader_get_tagged_pointer
 	adds r6, r0, 0
 	cmp r6, 0
 	beq _08069BF4
@@ -730,52 +730,52 @@ _08069C32:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069BD8
+	thumb_func_end mapheader_get_first_match_from_tagged_ptr_list
 
-	thumb_func_start sub_8069C38
-sub_8069C38: @ 8069C38
+	thumb_func_start mapheader_run_script_with_tag_x1
+mapheader_run_script_with_tag_x1: @ 8069C38
 	push {lr}
 	movs r0, 0x1
-	bl sub_8069BC0
+	bl mapheader_run_script_by_tag
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069C38
+	thumb_func_end mapheader_run_script_with_tag_x1
 
-	thumb_func_start sub_8069C44
-sub_8069C44: @ 8069C44
+	thumb_func_start mapheader_run_script_with_tag_x3
+mapheader_run_script_with_tag_x3: @ 8069C44
 	push {lr}
 	movs r0, 0x3
-	bl sub_8069BC0
+	bl mapheader_run_script_by_tag
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069C44
+	thumb_func_end mapheader_run_script_with_tag_x3
 
-	thumb_func_start sub_8069C50
-sub_8069C50: @ 8069C50
+	thumb_func_start mapheader_run_script_with_tag_x5
+mapheader_run_script_with_tag_x5: @ 8069C50
 	push {lr}
 	movs r0, 0x5
-	bl sub_8069BC0
+	bl mapheader_run_script_by_tag
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069C50
+	thumb_func_end mapheader_run_script_with_tag_x5
 
-	thumb_func_start sub_8069C5C
-sub_8069C5C: @ 8069C5C
+	thumb_func_start mapheader_run_script_with_tag_x7
+mapheader_run_script_with_tag_x7: @ 8069C5C
 	push {lr}
 	movs r0, 0x7
-	bl sub_8069BC0
+	bl mapheader_run_script_by_tag
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069C5C
+	thumb_func_end mapheader_run_script_with_tag_x7
 
-	thumb_func_start sub_8069C68
-sub_8069C68: @ 8069C68
+	thumb_func_start mapheader_run_script_with_tag_x6
+mapheader_run_script_with_tag_x6: @ 8069C68
 	push {lr}
 	movs r0, 0x6
-	bl sub_8069BC0
+	bl mapheader_run_script_by_tag
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069C68
+	thumb_func_end mapheader_run_script_with_tag_x6
 
 	thumb_func_start sub_8069C74
 sub_8069C74: @ 8069C74
@@ -785,10 +785,10 @@ sub_8069C74: @ 8069C74
 	cmp r0, 0x3
 	beq _08069C94
 	movs r0, 0x2
-	bl sub_8069BD8
+	bl mapheader_get_first_match_from_tagged_ptr_list
 	cmp r0, 0
 	beq _08069C94
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _08069C96
 	.align 2, 0
@@ -800,21 +800,21 @@ _08069C96:
 	bx r1
 	thumb_func_end sub_8069C74
 
-	thumb_func_start sub_8069C9C
-sub_8069C9C: @ 8069C9C
+	thumb_func_start mapheader_run_first_tag4_script_list_match
+mapheader_run_first_tag4_script_list_match: @ 8069C9C
 	push {lr}
 	movs r0, 0x4
-	bl sub_8069BD8
+	bl mapheader_get_first_match_from_tagged_ptr_list
 	cmp r0, 0
 	beq _08069CAC
-	bl sub_8069B48
+	bl ScriptContext2_RunNewScript
 _08069CAC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069C9C
+	thumb_func_end mapheader_run_first_tag4_script_list_match
 
-	thumb_func_start sub_8069CB0
-sub_8069CB0: @ 8069CB0
+	thumb_func_start CalculateRamScriptChecksum
+CalculateRamScriptChecksum: @ 8069CB0
 	push {lr}
 	ldr r0, _08069CCC @ =gUnknown_3005008
 	ldr r0, [r0]
@@ -822,7 +822,7 @@ sub_8069CB0: @ 8069CB0
 	adds r0, r1
 	movs r1, 0xFA
 	lsls r1, 2
-	bl sub_8045210
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -830,10 +830,10 @@ sub_8069CB0: @ 8069CB0
 	.align 2, 0
 _08069CCC: .4byte gUnknown_3005008
 _08069CD0: .4byte 0x00003620
-	thumb_func_end sub_8069CB0
+	thumb_func_end CalculateRamScriptChecksum
 
-	thumb_func_start sub_8069CD4
-sub_8069CD4: @ 8069CD4
+	thumb_func_start ClearRamScript
+ClearRamScript: @ 8069CD4
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0
@@ -852,10 +852,10 @@ sub_8069CD4: @ 8069CD4
 _08069CF4: .4byte gUnknown_3005008
 _08069CF8: .4byte 0x0000361c
 _08069CFC: .4byte 0x050000fb
-	thumb_func_end sub_8069CD4
+	thumb_func_end ClearRamScript
 
-	thumb_func_start sub_8069D00
-sub_8069D00: @ 8069D00
+	thumb_func_start InitRamScript
+InitRamScript: @ 8069D00
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -879,7 +879,7 @@ sub_8069D00: @ 8069D00
 	ldr r5, [r0]
 	ldr r1, _08069D68 @ =0x00003620
 	adds r4, r5, r1
-	bl sub_8069CD4
+	bl ClearRamScript
 	ldr r0, _08069D6C @ =0x000003e3
 	cmp r8, r0
 	bhi _08069D78
@@ -894,7 +894,7 @@ sub_8069D00: @ 8069D00
 	ldr r1, [sp]
 	mov r2, r8
 	bl memcpy
-	bl sub_8069CB0
+	bl CalculateRamScriptChecksum
 	mov r2, r10
 	ldr r1, [r2]
 	ldr r2, _08069D74 @ =0x0000361c
@@ -919,10 +919,10 @@ _08069D7A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069D00
+	thumb_func_end InitRamScript
 
-	thumb_func_start sub_8069D8C
-sub_8069D8C: @ 8069D8C
+	thumb_func_start GetRamScript
+GetRamScript: @ 8069D8C
 	push {r4-r7,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -950,7 +950,7 @@ sub_8069D8C: @ 8069D8C
 	ldrb r0, [r2, 0x3]
 	cmp r0, r3
 	bne _08069DF4
-	bl sub_8069CB0
+	bl CalculateRamScriptChecksum
 	ldr r1, [r6]
 	ldr r2, _08069DE8 @ =0x0000361c
 	adds r1, r2
@@ -968,14 +968,14 @@ _08069DE4: .4byte gUnknown_20370A4
 _08069DE8: .4byte 0x0000361c
 _08069DEC: .4byte 0x00003624
 _08069DF0:
-	bl sub_8069CD4
+	bl ClearRamScript
 _08069DF4:
 	adds r0, r4, 0
 _08069DF6:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069D8C
+	thumb_func_end GetRamScript
 
 	thumb_func_start sub_8069DFC
 sub_8069DFC: @ 8069DFC
@@ -996,7 +996,7 @@ sub_8069DFC: @ 8069DFC
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0xFF
 	bne _08069E40
-	bl sub_8069CB0
+	bl CalculateRamScriptChecksum
 	ldr r1, [r4]
 	ldr r2, _08069E3C @ =0x0000361c
 	adds r1, r2
@@ -1039,7 +1039,7 @@ sub_8069E48: @ 8069E48
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0xFF
 	bne _08069E9C
-	bl sub_8069CB0
+	bl CalculateRamScriptChecksum
 	ldr r1, [r6]
 	ldr r2, _08069E90 @ =0x0000361c
 	adds r1, r2
@@ -1055,7 +1055,7 @@ _08069E8C: .4byte 0x00003620
 _08069E90: .4byte 0x0000361c
 _08069E94: .4byte 0x00003624
 _08069E98:
-	bl sub_8069CD4
+	bl ClearRamScript
 _08069E9C:
 	movs r0, 0
 _08069E9E:
@@ -1081,7 +1081,7 @@ _08069EB6:
 	adds r0, r2, 0
 	movs r2, 0xFF
 	movs r3, 0xFF
-	bl sub_8069D00
+	bl InitRamScript
 	add sp, 0x4
 	pop {r0}
 	bx r0

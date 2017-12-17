@@ -63,7 +63,7 @@ _0813ECFC:
 	ldr r3, _0813ED14 @ =sub_813ED18
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 _0813ED08:
 	pop {r4-r7}
 	pop {r0}
@@ -83,9 +83,9 @@ sub_813ED18: @ 813ED18
 	movs r1, 0x1
 	bl sub_80F6F54
 	bl sub_80696C0
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -219,7 +219,7 @@ sub_813EE14: @ 813EE14
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	ldr r1, _0813EEC8 @ =gUnknown_3005090
 	mov r2, r9
 	lsls r0, r2, 2
@@ -633,7 +633,7 @@ sub_813F108: @ 813F108
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	ldrh r0, [r0]
 	subs r0, 0x7
@@ -953,7 +953,7 @@ sub_813F364: @ 813F364
 	ldr r2, _0813F378 @ =gUnknown_8416476
 	ldr r3, _0813F37C @ =sub_813F380
 	movs r1, 0x2
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -972,9 +972,9 @@ sub_813F380: @ 813F380
 	movs r1, 0x1
 	bl sub_80F6F54
 	bl sub_80696C0
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -988,7 +988,7 @@ sub_813F3A8: @ 813F3A8
 	ldr r2, _0813F3BC @ =gUnknown_84164BE
 	ldr r3, _0813F3C0 @ =sub_813F3C4
 	movs r1, 0x2
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1004,10 +1004,10 @@ sub_813F3C4: @ 813F3C4
 	lsrs r4, 24
 	bl sub_813F3FC
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _0813F3E8 @ =gUnknown_81A8D49
-	bl sub_8069AE4
-	bl sub_8069940
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1019,7 +1019,7 @@ _0813F3E8: .4byte gUnknown_81A8D49
 sub_813F3EC: @ 813F3EC
 	push {lr}
 	ldr r0, _0813F3F8 @ =gUnknown_84647FC
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1031,7 +1031,7 @@ sub_813F3FC: @ 813F3FC
 	push {lr}
 	movs r0, 0xFA
 	lsls r0, 3
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813F3FC
@@ -1048,7 +1048,7 @@ sub_813F40C: @ 813F40C
 	movs r1, 0x78
 	movs r2, 0x4C
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, _0813F468 @ =gUnknown_202063C
@@ -1062,7 +1062,7 @@ sub_813F40C: @ 813F40C
 	strb r0, [r4, 0x5]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0
 	strh r5, [r4, 0x3C]
 	strh r0, [r4, 0x2E]
@@ -1091,7 +1091,7 @@ _0813F470:
 	.4byte _0813F50C
 	.4byte _0813F52C
 _0813F484:
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1118,7 +1118,7 @@ _0813F4A4:
 	strh r1, [r0, 0x30]
 	strh r2, [r0, 0x32]
 	movs r1, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _0813F53E
 	.align 2, 0
 _0813F4C0: .4byte gUnknown_202063C
@@ -1134,7 +1134,7 @@ _0813F4C8:
 	ldr r1, _0813F4E8 @ =0x0000ff9c
 	strh r1, [r0, 0x32]
 	movs r1, 0x3
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _0813F53E
 	.align 2, 0
 _0813F4E4: .4byte gUnknown_202063C
@@ -1150,7 +1150,7 @@ _0813F4EC:
 	strh r1, [r0, 0x30]
 	strh r2, [r0, 0x32]
 	movs r1, 0x2
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _0813F53E
 	.align 2, 0
 _0813F508: .4byte gUnknown_202063C
@@ -1165,7 +1165,7 @@ _0813F50C:
 	movs r1, 0x64
 	strh r1, [r0, 0x32]
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _0813F53E
 	.align 2, 0
 _0813F528: .4byte gUnknown_202063C
@@ -1235,9 +1235,9 @@ _0813F594: .4byte sub_813F598
 sub_813F598: @ 813F598
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1250,7 +1250,7 @@ sub_813F5AC: @ 813F5AC
 	movs r1, 0x78
 	movs r2, 0x4C
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -1269,7 +1269,7 @@ sub_813F5AC: @ 813F5AC
 	str r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r1, 0
 	strh r1, [r4, 0x3C]
 	strh r1, [r4, 0x2E]
@@ -1339,7 +1339,7 @@ _0813F65C: .4byte sub_813F660
 	thumb_func_start sub_813F660
 sub_813F660: @ 813F660
 	push {lr}
-	bl sub_8007280
+	bl DestroySprite
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813F660

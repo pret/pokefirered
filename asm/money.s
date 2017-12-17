@@ -35,8 +35,8 @@ sub_809FD70: @ 809FD70
 _0809FD84: .4byte gUnknown_300500C
 	thumb_func_end sub_809FD70
 
-	thumb_func_start sub_809FD88
-sub_809FD88: @ 809FD88
+	thumb_func_start IsEnoughMoney
+IsEnoughMoney: @ 809FD88
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_809FD58
@@ -50,10 +50,10 @@ _0809FD9A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809FD88
+	thumb_func_end IsEnoughMoney
 
-	thumb_func_start sub_809FDA0
-sub_809FDA0: @ 809FDA0
+	thumb_func_start AddMoney
+AddMoney: @ 809FDA0
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r1, 0
@@ -79,10 +79,10 @@ _0809FDC4:
 	bx r0
 	.align 2, 0
 _0809FDD4: .4byte 0x000f423f
-	thumb_func_end sub_809FDA0
+	thumb_func_end AddMoney
 
-	thumb_func_start sub_809FDD8
-sub_809FDD8: @ 809FDD8
+	thumb_func_start RemoveMoney
+RemoveMoney: @ 809FDD8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -100,10 +100,10 @@ _0809FDEE:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809FDD8
+	thumb_func_end RemoveMoney
 
-	thumb_func_start sub_809FDFC
-sub_809FDFC: @ 809FDFC
+	thumb_func_start IsEnoughForCostInVar0x8005
+IsEnoughForCostInVar0x8005: @ 809FDFC
 	push {lr}
 	ldr r0, _0809FE18 @ =gUnknown_3005008
 	ldr r0, [r0]
@@ -112,7 +112,7 @@ sub_809FDFC: @ 809FDFC
 	adds r0, r1
 	ldr r1, _0809FE1C @ =gUnknown_20370C2
 	ldrh r1, [r1]
-	bl sub_809FD88
+	bl IsEnoughMoney
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -120,7 +120,7 @@ sub_809FDFC: @ 809FDFC
 	.align 2, 0
 _0809FE18: .4byte gUnknown_3005008
 _0809FE1C: .4byte gUnknown_20370C2
-	thumb_func_end sub_809FDFC
+	thumb_func_end IsEnoughForCostInVar0x8005
 
 	thumb_func_start sub_809FE20
 sub_809FE20: @ 809FE20
@@ -132,7 +132,7 @@ sub_809FE20: @ 809FE20
 	adds r0, r1
 	ldr r1, _0809FE3C @ =gUnknown_20370C2
 	ldrh r1, [r1]
-	bl sub_809FDD8
+	bl RemoveMoney
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -154,7 +154,7 @@ sub_809FE40: @ 809FE40
 	movs r3, 0x6
 	bl sub_8008E78
 	adds r0, r4, 0
-	bl sub_8008E08
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -227,7 +227,7 @@ sub_809FEC4: @ 809FEC4
 	movs r3, 0x6
 	bl sub_8008E78
 	adds r0, r4, 0
-	bl sub_8008E08
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -290,7 +290,7 @@ sub_809FF48: @ 809FF48
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	ldr r2, _0809FF9C @ =gUnknown_8419CE7
 	movs r1, 0
 	str r1, [sp]
@@ -365,9 +365,9 @@ sub_809FFB8: @ 809FFB8
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r4]
 	ldr r5, _080A0030 @ =0x0000021d
 	adds r1, r5, 0

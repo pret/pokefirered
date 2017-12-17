@@ -186,7 +186,7 @@ _0807EF14:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
 	bne _0807EF64
-	bl sub_8087E64
+	bl remove_some_task
 	movs r0, 0x2
 	strh r0, [r4]
 	b _0807EF76
@@ -195,12 +195,12 @@ _0807EF5C: .4byte gUnknown_2039600
 _0807EF60: .4byte gUnknown_2038700
 _0807EF64:
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _0807EF76
 _0807EF6C:
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _0807EF76:
 	pop {r4-r6}
 	pop {r0}
@@ -213,13 +213,13 @@ sub_807EF7C: @ 807EF7C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _0807EFA0 @ =sub_807EEB8
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807EF98
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _0807EF98:
 	pop {r4}
 	pop {r0}
@@ -233,13 +233,13 @@ sub_807EFA4: @ 807EFA4
 	push {r4,lr}
 	ldr r4, _0807EFC4 @ =sub_807EF7C
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807EFBC
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 _0807EFBC:
 	pop {r4}
 	pop {r0}
@@ -264,7 +264,7 @@ sub_807EFC8: @ 807EFC8
 	lsrs r7, r0, 24
 	ldr r0, _0807F00C @ =sub_807EEB8
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r0, r2, 2
@@ -328,7 +328,7 @@ _0807F042:
 	movs r1, 0x50
 	bl sub_807EFC8
 	bl sub_807EFA4
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -375,7 +375,7 @@ sub_807F0B0: @ 807F0B0
 	bl sub_8055FD4
 	ldr r0, _0807F0C4 @ =sub_807F0C8
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -393,8 +393,8 @@ sub_807F0C8: @ 807F0C8
 	cmp r0, 0x1
 	bne _0807F0E4
 	adds r0, r4, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 _0807F0E4:
 	pop {r4}
 	pop {r0}
@@ -406,7 +406,7 @@ sub_807F0EC: @ 807F0EC
 	push {lr}
 	ldr r0, _0807F10C @ =sub_807F204
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0807F110 @ =gUnknown_3005090
@@ -428,7 +428,7 @@ sub_807F114: @ 807F114
 	push {lr}
 	ldr r0, _0807F134 @ =sub_807F204
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0807F138 @ =gUnknown_3005090
@@ -456,31 +456,31 @@ sub_807F13C: @ 807F13C
 	ldr r0, _0807F19C @ =gUnknown_3005098
 	adds r4, r0
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4]
 	movs r0, 0x48
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x2]
 	movs r0, 0x4A
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x4]
 	movs r0, 0x50
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x6]
 	movs r0, 0x52
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x8]
 	movs r0, 0x40
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0xA]
 	movs r0, 0x44
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0xC]
 	movs r0, 0x42
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0xE]
 	movs r0, 0x46
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x10]
 	pop {r4}
 	pop {r0}
@@ -501,31 +501,31 @@ sub_807F1A0: @ 807F1A0
 	adds r4, r0
 	ldrh r1, [r4]
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x6]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x8]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xE]
 	movs r0, 0x42
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x10]
 	movs r0, 0x46
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -566,50 +566,50 @@ _0807F236:
 	movs r1, 0x80
 	lsls r1, 6
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	movs r1, 0x80
 	lsls r1, 7
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	movs r1, 0x14
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0807F280
 	movs r0, 0x40
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _0807F27C @ =0x0000f0ff
 	movs r0, 0x42
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0xFF
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x46
 	movs r1, 0xFF
-	bl sub_8000A38
+	bl SetGpuReg
 	b _0807F2A0
 	.align 2, 0
 _0807F27C: .4byte 0x0000f0ff
 _0807F280:
 	movs r0, 0x40
 	movs r1, 0x78
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0xFF
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _0807F2B8 @ =0x000078ff
 	movs r0, 0x42
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x46
 	movs r1, 0xFF
-	bl sub_8000A38
+	bl SetGpuReg
 _0807F2A0:
 	movs r0, 0x48
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0x3F
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	strh r0, [r5, 0x12]
 	b _0807F2F4
@@ -618,7 +618,7 @@ _0807F2B8: .4byte 0x000078ff
 _0807F2BC:
 	ldr r0, _0807F2CC @ =sub_807F2FC
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0x2
 	strh r0, [r5, 0x12]
 	b _0807F2F4
@@ -626,7 +626,7 @@ _0807F2BC:
 _0807F2CC: .4byte sub_807F2FC
 _0807F2D0:
 	ldr r0, _0807F2E4 @ =sub_807F2FC
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F2F4
@@ -639,7 +639,7 @@ _0807F2E8:
 	adds r0, r4, 0
 	bl sub_807F1A0
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _0807F2F4:
 	pop {r4,r5}
 	pop {r0}
@@ -660,7 +660,7 @@ sub_807F2FC: @ 807F2FC
 	ldr r4, _0807F348 @ =gUnknown_3005098
 	adds r6, r0, r4
 	ldr r0, _0807F34C @ =sub_807F204
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -681,7 +681,7 @@ sub_807F2FC: @ 807F2FC
 	cmp r0, 0x78
 	ble _0807F36C
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _0807F39A
 	.align 2, 0
 _0807F348: .4byte gUnknown_3005098
@@ -698,13 +698,13 @@ _0807F350:
 	cmp r1, 0
 	bge _0807F36C
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 	b _0807F39A
 _0807F36C:
 	lsls r4, 16
 	lsrs r1, r4, 16
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	lsls r1, r7, 16
 	asrs r1, 8
 	movs r0, 0xF0
@@ -712,7 +712,7 @@ _0807F36C:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x42
-	bl sub_8000A38
+	bl SetGpuReg
 	asrs r4, 16
 	cmp r4, 0x59
 	bgt _0807F394
@@ -767,7 +767,7 @@ _0807F3DC: .4byte gUnknown_3005090
 _0807F3E0:
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r5, _0807F424 @ =gUnknown_2021D18
 	adds r0, r5, 0
 	mov r1, r8
@@ -872,9 +872,9 @@ _0807F4A8:
 	bl sub_80F77CC
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl sub_8003F20
@@ -945,7 +945,7 @@ _0807F542:
 	ldr r1, _0807F580 @ =gUnknown_2036E38
 	adds r0, r1
 	movs r1, 0x2
-	bl sub_805F218
+	bl FieldObjectTurn
 	ldr r1, _0807F584 @ =gUnknown_3005090
 	lsls r0, r6, 2
 	adds r0, r6
@@ -967,7 +967,7 @@ _0807F588:
 	adds r4, r2
 	ldrb r5, [r4, 0xA]
 	adds r0, r5, 0
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_8003F20
@@ -984,9 +984,9 @@ _0807F5B6:
 	cmp r0, 0x1
 	bne _0807F5E4
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _0807F5CC @ =gUnknown_81A8D97
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	b _0807F5E4
 	.align 2, 0
 _0807F5CC: .4byte gUnknown_81A8D97
@@ -995,9 +995,9 @@ _0807F5D0:
 	cmp r0, 0x1
 	bne _0807F5E4
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _0807F5EC @ =gUnknown_81A8DD8
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 _0807F5E4:
 	pop {r4-r7}
 	pop {r0}
@@ -1009,11 +1009,11 @@ _0807F5EC: .4byte gUnknown_81A8DD8
 	thumb_func_start sub_807F5F0
 sub_807F5F0: @ 807F5F0
 	push {lr}
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	bl sub_807DB38
 	ldr r0, _0807F618 @ =sub_807F45C
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0807F61C @ =gUnknown_3005090

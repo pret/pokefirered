@@ -49,7 +49,7 @@ sub_80094D4: @ 80094D4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80094D4
@@ -75,7 +75,7 @@ sub_80094E4: @ 80094E4
 	ldr r0, _08009540 @ =gUnknown_8232578
 	lsls r1, r5, 4
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r3, _08009544 @ =0x040000d4
 	ldr r0, _08009548 @ =gUnknown_8232598
 	str r0, [r3]
@@ -119,7 +119,7 @@ _0800955C:
 	lsls r0, r7, 2
 	orrs r1, r0
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08009590
 _0800956E:
 	lsls r1, r6, 8
@@ -128,7 +128,7 @@ _0800956E:
 	lsls r0, r7, 2
 	orrs r1, r0
 	movs r0, 0xC
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08009590
 _08009580:
 	lsls r1, r6, 8
@@ -137,7 +137,7 @@ _08009580:
 	lsls r0, r7, 2
 	orrs r1, r0
 	movs r0, 0xE
-	bl sub_8000A38
+	bl SetGpuReg
 _08009590:
 	mov r0, r8
 	lsls r4, r0, 2
@@ -146,13 +146,13 @@ _08009590:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r4, 0x12
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -182,7 +182,7 @@ sub_80095BC: @ 80095BC
 	mov r2, r8
 	lsls r1, r2, 4
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r2, _0800962C @ =0x040000d4
 	ldr r0, _08009630 @ =gUnknown_8232598
 	str r0, [r2]
@@ -207,7 +207,7 @@ sub_80095BC: @ 80095BC
 	lsls r5, 2
 	orrs r4, r5
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -226,11 +226,11 @@ _0800963C: .4byte gUnknown_8231E20
 sub_8009640: @ 8009640
 	push {r4,lr}
 	sub sp, 0x4
-	bl sub_8006B10
-	bl sub_80088F0
-	bl sub_80773BC
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
+	bl ResetTasks
 	ldr r0, _080096D4 @ =sub_800978C
-	bl sub_80006F4
+	bl SetVBlankCallback
 	bl sub_800A294
 	ldr r1, _080096D8 @ =gUnknown_202271A
 	ldr r2, _080096DC @ =0x00001111
@@ -242,7 +242,7 @@ sub_8009640: @ 8009640
 	bl sub_8044EE8
 	movs r4, 0
 _08009670:
-	bl sub_8044EC8
+	bl Random
 	ldr r1, _080096E4 @ =gUnknown_300500C
 	ldr r1, [r1]
 	adds r1, 0xA
@@ -261,22 +261,22 @@ _08009670:
 	movs r1, 0xAA
 	lsls r1, 5
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080096E8 @ =sub_80094D4
 	movs r1, 0
-	bl sub_807741C
-	bl sub_8077578
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl CreateTask
+	bl RunTasks
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 	ldr r0, _080096EC @ =gUnknown_3000E58
 	str r4, [r0]
 	bl sub_8009708
-	ldr r0, _080096F0 @ =sub_800A74C
+	ldr r0, _080096F0 @ =task00_link_test
 	movs r1, 0
-	bl sub_807741C
-	ldr r0, _080096F4 @ =sub_8009A8C
-	bl sub_8000544
+	bl CreateTask
+	ldr r0, _080096F4 @ =c2_08009A8C
+	bl SetMainCallback2
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -289,8 +289,8 @@ _080096E0: .4byte gUnknown_30030F0
 _080096E4: .4byte gUnknown_300500C
 _080096E8: .4byte sub_80094D4
 _080096EC: .4byte gUnknown_3000E58
-_080096F0: .4byte sub_800A74C
-_080096F4: .4byte sub_8009A8C
+_080096F0: .4byte task00_link_test
+_080096F4: .4byte c2_08009A8C
 	thumb_func_end sub_8009640
 
 	thumb_func_start sub_80096F8
@@ -323,7 +323,7 @@ sub_8009708: @ 8009708
 	str r2, [r5, 0x4]
 	adds r0, r5, 0
 	adds r0, 0x8
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
 	strb r0, [r5, 0x13]
@@ -370,9 +370,9 @@ _08009788: .4byte 0x00000844
 	thumb_func_start sub_800978C
 sub_800978C: @ 800978C
 	push {lr}
-	bl sub_8007320
-	bl sub_8007610
-	bl sub_8070474
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_800978C
@@ -401,8 +401,8 @@ _080097C4: .4byte gUnknown_3003F50
 _080097C8: .4byte 0x0000efff
 	thumb_func_end sub_80097A0
 
-	thumb_func_start sub_80097CC
-sub_80097CC: @ 80097CC
+	thumb_func_start task02_080097CC
+task02_080097CC: @ 80097CC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -422,14 +422,14 @@ sub_80097CC: @ 80097CC
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r2, 0
-	bl sub_8077508
+	bl DestroyTask
 _080097F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080097FC: .4byte gUnknown_3005090
 _08009800: .4byte gUnknown_3003F84
-	thumb_func_end sub_80097CC
+	thumb_func_end task02_080097CC
 
 	thumb_func_start sub_8009804
 sub_8009804: @ 8009804
@@ -449,7 +449,7 @@ sub_8009804: @ 8009804
 	strb r4, [r0]
 	ldr r0, _08009860 @ =gUnknown_3003F38
 	strb r4, [r0]
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	bl sub_800A294
 	ldr r0, _08009864 @ =gUnknown_3000E4C
 	str r4, [r0]
@@ -459,9 +459,9 @@ sub_8009804: @ 8009804
 	strb r4, [r0]
 	ldr r0, _08009870 @ =gUnknown_3003F34
 	strh r4, [r0]
-	ldr r0, _08009874 @ =sub_80097CC
+	ldr r0, _08009874 @ =task02_080097CC
 	movs r1, 0x2
-	bl sub_807741C
+	bl CreateTask
 	b _0800987C
 	.align 2, 0
 _0800984C: .4byte gUnknown_3003F3C
@@ -474,7 +474,7 @@ _08009864: .4byte gUnknown_3000E4C
 _08009868: .4byte gUnknown_3003F28
 _0800986C: .4byte gUnknown_3003F24
 _08009870: .4byte gUnknown_3003F34
-_08009874: .4byte sub_80097CC
+_08009874: .4byte task02_080097CC
 _08009878:
 	bl sub_80F86F4
 _0800987C:
@@ -579,7 +579,7 @@ _08009938:
 	lsrs r5, r0, 24
 	cmp r5, 0x3
 	bls _08009910
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0xF
@@ -610,7 +610,7 @@ _08009958:
 	movs r6, 0
 	strh r0, [r4]
 	adds r0, r5, 0
-	bl sub_800A588
+	bl ResetBlockReceivedFlag
 	ldrh r0, [r4]
 	cmp r0, r8
 	beq _08009994
@@ -679,7 +679,7 @@ _080099FA:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _08009A16:
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x8
@@ -696,7 +696,7 @@ _08009A26:
 	cmp r0, 0
 	beq _08009A38
 	movs r0, 0x1
-	bl sub_80DA364
+	bl TrySavingData
 _08009A38:
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x4
@@ -720,7 +720,7 @@ _08009A46:
 	orrs r1, r0
 _08009A60:
 	adds r0, r2, 0
-	bl sub_800A890
+	bl SetLinkDebugValues
 _08009A66:
 	add sp, 0x4
 	pop {r4,r5}
@@ -736,21 +736,21 @@ _08009A84: .4byte gUnknown_300357C
 _08009A88: .4byte gUnknown_3003F80
 	thumb_func_end sub_80099D0
 
-	thumb_func_start sub_8009A8C
-sub_8009A8C: @ 8009A8C
+	thumb_func_start c2_08009A8C
+c2_08009A8C: @ 8009A8C
 	push {lr}
 	bl sub_80099D0
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
 	bl sub_80098E8
-	bl sub_8077578
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl RunTasks
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8009A8C
+	thumb_func_end c2_08009A8C
 
 	thumb_func_start sub_8009AB0
 sub_8009AB0: @ 8009AB0
@@ -1148,8 +1148,8 @@ _08009D9A:
 	cmp r0, 0
 	beq _08009DDC
 _08009DBC:
-	ldr r0, _08009DD8 @ =sub_800ACD4
-	bl sub_8000544
+	ldr r0, _08009DD8 @ =c2_800ACD4
+	bl SetMainCallback2
 	b _08009E3E
 	.align 2, 0
 _08009DC4: .4byte gUnknown_2022118
@@ -1157,7 +1157,7 @@ _08009DC8: .4byte gUnknown_3003ED0
 _08009DCC: .4byte gUnknown_3003EB8
 _08009DD0: .4byte gUnknown_202273C
 _08009DD4: .4byte gUnknown_82345C0
-_08009DD8: .4byte sub_800ACD4
+_08009DD8: .4byte c2_800ACD4
 _08009DDC:
 	lsls r0, r6, 24
 	lsrs r0, 24
@@ -1198,7 +1198,7 @@ _08009E0E:
 	adds r2, r3
 	ldrh r2, [r2]
 	movs r0, 0
-	bl sub_800A448
+	bl SendBlock
 	b _08009E3E
 	.align 2, 0
 _08009E2C: .4byte gUnknown_8234598
@@ -1768,8 +1768,8 @@ _0800A24C:
 _0800A254: .4byte gUnknown_3000E54
 	thumb_func_end sub_800A1F0
 
-	thumb_func_start sub_800A258
-sub_800A258: @ 800A258
+	thumb_func_start GetLinkPlayerTrainerId
+GetLinkPlayerTrainerId: @ 800A258
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0800A26C @ =gUnknown_202273C
@@ -1782,7 +1782,7 @@ sub_800A258: @ 800A258
 	bx lr
 	.align 2, 0
 _0800A26C: .4byte gUnknown_202273C
-	thumb_func_end sub_800A258
+	thumb_func_end GetLinkPlayerTrainerId
 
 	thumb_func_start sub_800A270
 sub_800A270: @ 800A270
@@ -1832,7 +1832,7 @@ sub_800A2A8: @ 800A2A8
 	.align 2, 0
 _0800A2BC: .4byte gUnknown_3000E08
 _0800A2C0:
-	bl sub_800A404
+	bl GetMultiplayerId
 	strb r0, [r4, 0x9]
 	movs r0, 0x1
 	strb r0, [r4, 0x8]
@@ -1960,7 +1960,7 @@ _0800A3A8: .4byte gUnknown_3003F80
 	thumb_func_start sub_800A3AC
 sub_800A3AC: @ 800A3AC
 	push {lr}
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r0, _0800A3C4 @ =0x00004444
 	bl sub_8009E60
 	ldr r1, _0800A3C8 @ =gUnknown_2022114
@@ -2009,8 +2009,8 @@ sub_800A3F4: @ 800A3F4
 _0800A400: .4byte 0x0000aaaa
 	thumb_func_end sub_800A3F4
 
-	thumb_func_start sub_800A404
-sub_800A404: @ 800A404
+	thumb_func_start GetMultiplayerId
+GetMultiplayerId: @ 800A404
 	push {lr}
 	ldr r0, _0800A418 @ =gUnknown_3003F3C
 	ldrb r0, [r0]
@@ -2025,18 +2025,18 @@ sub_800A404: @ 800A404
 _0800A418: .4byte gUnknown_3003F3C
 _0800A41C: .4byte 0x04000128
 _0800A420:
-	bl sub_80FA4C8
+	bl rfu_get_multiplayer_id
 	lsls r0, 24
 	lsrs r0, 24
 _0800A428:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A404
+	thumb_func_end GetMultiplayerId
 
-	thumb_func_start sub_800A42C
-sub_800A42C: @ 800A42C
+	thumb_func_start bitmask_all_link_players_but_self
+bitmask_all_link_players_but_self: @ 800A42C
 	push {lr}
-	bl sub_800A404
+	bl GetMultiplayerId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2048,10 +2048,10 @@ sub_800A42C: @ 800A42C
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A42C
+	thumb_func_end bitmask_all_link_players_but_self
 
-	thumb_func_start sub_800A448
-sub_800A448: @ 800A448
+	thumb_func_start SendBlock
+SendBlock: @ 800A448
 	push {lr}
 	adds r3, r1, 0
 	lsls r2, 16
@@ -2073,7 +2073,7 @@ _0800A46A:
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A448
+	thumb_func_end SendBlock
 
 	thumb_func_start sub_800A474
 sub_800A474: @ 800A474
@@ -2144,8 +2144,8 @@ _0800A4E2:
 _0800A4E8: .4byte gUnknown_3003F80
 	thumb_func_end sub_800A4BC
 
-	thumb_func_start sub_800A4EC
-sub_800A4EC: @ 800A4EC
+	thumb_func_start GetBlockReceivedStatus
+GetBlockReceivedStatus: @ 800A4EC
 	push {lr}
 	ldr r0, _0800A510 @ =gUnknown_3003F3C
 	ldrb r0, [r0]
@@ -2173,7 +2173,7 @@ _0800A51C:
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A4EC
+	thumb_func_end GetBlockReceivedStatus
 
 	thumb_func_start sub_800A524
 sub_800A524: @ 800A524
@@ -2201,8 +2201,8 @@ _0800A548:
 _0800A54C: .4byte gUnknown_3003EBC
 	thumb_func_end sub_800A524
 
-	thumb_func_start sub_800A550
-sub_800A550: @ 800A550
+	thumb_func_start ResetBlockReceivedFlags
+ResetBlockReceivedFlags: @ 800A550
 	push {r4,lr}
 	ldr r0, _0800A56C @ =gUnknown_3003F3C
 	ldrb r0, [r0]
@@ -2234,10 +2234,10 @@ _0800A57E:
 	bx r0
 	.align 2, 0
 _0800A584: .4byte gUnknown_3003EBC
-	thumb_func_end sub_800A550
+	thumb_func_end ResetBlockReceivedFlags
 
-	thumb_func_start sub_800A588
-sub_800A588: @ 800A588
+	thumb_func_start ResetBlockReceivedFlag
+ResetBlockReceivedFlag: @ 800A588
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -2263,7 +2263,7 @@ _0800A5B2:
 	bx r0
 	.align 2, 0
 _0800A5B8: .4byte gUnknown_3003EBC
-	thumb_func_end sub_800A588
+	thumb_func_end ResetBlockReceivedFlag
 
 	thumb_func_start sub_800A5BC
 sub_800A5BC: @ 800A5BC
@@ -2495,8 +2495,8 @@ _0800A744: .4byte 0x00002222
 _0800A748: .4byte gUnknown_3003F80
 	thumb_func_end sub_800A720
 
-	thumb_func_start sub_800A74C
-sub_800A74C: @ 800A74C
+	thumb_func_start task00_link_test
+task00_link_test: @ 800A74C
 	push {r4-r6,lr}
 	sub sp, 0x20
 	ldr r1, _0800A86C @ =gUnknown_82345D0
@@ -2532,7 +2532,7 @@ sub_800A74C: @ 800A74C
 	movs r2, 0xA
 	movs r3, 0x2
 	bl sub_800A684
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0xF
@@ -2551,7 +2551,7 @@ sub_800A74C: @ 800A74C
 	movs r2, 0x2
 	movs r3, 0x2
 	bl sub_800A684
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0xF
@@ -2629,10 +2629,10 @@ _0800A880: .4byte gUnknown_3004F70
 _0800A884: .4byte gUnknown_3003E6C
 _0800A888: .4byte gUnknown_3003EB0
 _0800A88C: .4byte gUnknown_3003F88
-	thumb_func_end sub_800A74C
+	thumb_func_end task00_link_test
 
-	thumb_func_start sub_800A890
-sub_800A890: @ 800A890
+	thumb_func_start SetLinkDebugValues
+SetLinkDebugValues: @ 800A890
 	ldr r2, _0800A89C @ =gUnknown_3003E6C
 	str r0, [r2]
 	ldr r0, _0800A8A0 @ =gUnknown_3003EB0
@@ -2641,7 +2641,7 @@ sub_800A890: @ 800A890
 	.align 2, 0
 _0800A89C: .4byte gUnknown_3003E6C
 _0800A8A0: .4byte gUnknown_3003EB0
-	thumb_func_end sub_800A890
+	thumb_func_end SetLinkDebugValues
 
 	thumb_func_start sub_800A8A4
 sub_800A8A4: @ 800A8A4
@@ -2703,7 +2703,7 @@ sub_800A900: @ 800A900
 	push {r4-r7,lr}
 	ldr r1, _0800A934 @ =gUnknown_3003F40
 	strb r0, [r1]
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r1, _0800A938 @ =gUnknown_3003F60
 	strb r0, [r1]
 	ldr r4, _0800A93C @ =gUnknown_202273C
@@ -2826,7 +2826,7 @@ _0800A9C2:
 	mov r1, r8
 	adds r0, r2, r1
 	adds r1, r2, r7
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	beq _0800A9F6
 _0800A9E6:
@@ -2834,8 +2834,8 @@ _0800A9E6:
 	movs r0, 0x1
 	strb r0, [r1]
 	bl sub_80098B8
-	ldr r0, _0800AA20 @ =sub_800ACD4
-	bl sub_8000544
+	ldr r0, _0800AA20 @ =c2_800ACD4
+	bl SetMainCallback2
 _0800A9F6:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -2855,7 +2855,7 @@ _0800AA10: .4byte gUnknown_3003F40
 _0800AA14: .4byte gUnknown_20227C8
 _0800AA18: .4byte gUnknown_202273C
 _0800AA1C: .4byte gUnknown_3003EAC
-_0800AA20: .4byte sub_800ACD4
+_0800AA20: .4byte c2_800ACD4
 	thumb_func_end sub_800A9A4
 
 	thumb_func_start sub_800AA24
@@ -2926,7 +2926,7 @@ sub_800AA80: @ 800AA80
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AA98
-	bl sub_80FA28C
+	bl task_add_05_task_del_08FA224_when_no_RfuFunc
 	b _0800AAAC
 	.align 2, 0
 _0800AA94: .4byte gUnknown_3003F3C
@@ -2958,7 +2958,7 @@ sub_800AAC0: @ 800AAC0
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AAD4
-	bl sub_80FA28C
+	bl task_add_05_task_del_08FA224_when_no_RfuFunc
 	b _0800AAFC
 	.align 2, 0
 _0800AAD0: .4byte gUnknown_3003F3C
@@ -3192,8 +3192,8 @@ sub_800AC58: @ 800AC58
 	ldr r0, _0800ACB0 @ =gUnknown_3003FA0
 	ldrb r0, [r0]
 	strb r0, [r1, 0x5]
-	ldr r0, _0800ACB4 @ =sub_800ACD4
-	bl sub_8000544
+	ldr r0, _0800ACB4 @ =c2_800ACD4
+	bl SetMainCallback2
 _0800AC8E:
 	ldr r1, _0800ACB8 @ =gUnknown_3003EAC
 	movs r0, 0x1
@@ -3209,7 +3209,7 @@ _0800ACA4: .4byte gUnknown_3003F38
 _0800ACA8: .4byte gUnknown_2022854
 _0800ACAC: .4byte gUnknown_3004F70
 _0800ACB0: .4byte gUnknown_3003FA0
-_0800ACB4: .4byte sub_800ACD4
+_0800ACB4: .4byte c2_800ACD4
 _0800ACB8: .4byte gUnknown_3003EAC
 	thumb_func_end sub_800AC58
 
@@ -3228,12 +3228,12 @@ sub_800ACBC: @ 800ACBC
 _0800ACD0: .4byte gUnknown_2022854
 	thumb_func_end sub_800ACBC
 
-	thumb_func_start sub_800ACD4
-sub_800ACD4: @ 800ACD4
+	thumb_func_start c2_800ACD4
+c2_800ACD4: @ 800ACD4
 	push {r4,lr}
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _0800ADE0 @ =gMPlay_SE1
 	bl m4aMPlayStop
 	ldr r0, _0800ADE4 @ =gMPlay_SE2
@@ -3243,16 +3243,16 @@ sub_800ACD4: @ 800ACD4
 	ldr r0, _0800ADEC @ =gHeap
 	movs r1, 0xE0
 	lsls r1, 9
-	bl sub_8002B80
-	bl sub_8006B10
-	bl sub_80088F0
-	bl sub_8070A84
+	bl InitHeap
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
+	bl ResetPaletteFadeControl
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x2
-	bl sub_8070424
-	bl sub_80773BC
-	bl sub_8087E64
+	bl FillPalette
+	bl ResetTasks
+	bl remove_some_task
 	ldr r1, _0800ADF0 @ =gUnknown_3003F3C
 	ldrb r0, [r1]
 	cmp r0, 0
@@ -3267,7 +3267,7 @@ _0800AD2C:
 	bl sub_80F85F8
 _0800AD30:
 	ldr r0, _0800ADF8 @ =sub_800978C
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0
 	bl sub_8001618
 	ldr r1, _0800ADFC @ =gUnknown_82345E8
@@ -3277,57 +3277,57 @@ _0800AD30:
 	ldr r4, _0800AE00 @ =gUnknown_2022860
 	movs r0, 0x80
 	lsls r0, 4
-	bl sub_8002B9C
+	bl Alloc
 	adds r1, r0, 0
 	str r1, [r4]
 	movs r0, 0x1
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	ldr r0, _0800AE04 @ =gUnknown_82345F0
 	bl sub_8003B24
 	lsls r0, 16
 	cmp r0, 0
 	beq _0800ADD8
 	bl sub_8002C28
-	bl sub_80F6808
+	bl reset_temp_tile_data_buffers
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x10
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x12
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x14
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x16
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xE0
 	lsls r1, 8
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	ldr r0, _0800AE08 @ =gUnknown_841F408
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r1, _0800AE0C @ =gUnknown_3003530
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0800AE10 @ =sub_80094D4
 	movs r1, 0
-	bl sub_807741C
-	bl sub_8071A94
+	bl CreateTask
+	bl StopMapMusic
 	ldr r1, _0800AE14 @ =gUnknown_30030F0
 	movs r0, 0
 	str r0, [r1]
-	bl sub_8077578
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl RunTasks
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 	ldr r0, _0800AE18 @ =sub_800AF2C
-	bl sub_8000544
+	bl SetMainCallback2
 _0800ADD8:
 	pop {r4}
 	pop {r0}
@@ -3348,7 +3348,7 @@ _0800AE0C: .4byte gUnknown_3003530
 _0800AE10: .4byte sub_80094D4
 _0800AE14: .4byte gUnknown_30030F0
 _0800AE18: .4byte sub_800AF2C
-	thumb_func_end sub_800ACD4
+	thumb_func_end c2_800ACD4
 
 	thumb_func_start sub_800AE1C
 sub_800AE1C: @ 800AE1C
@@ -3365,19 +3365,19 @@ sub_800AE1C: @ 800AE1C
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldr r0, _0800AEC0 @ =gUnknown_8231EC4
 	movs r1, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	movs r0, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r4, _0800AEC4 @ =gUnknown_8234610
 	str r4, [sp]
 	str r5, [sp, 0x4]
@@ -3398,9 +3398,9 @@ sub_800AE1C: @ 800AE1C
 	movs r3, 0x2
 	bl sub_812E51C
 	movs r0, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0x2
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0
 	bl sub_8003F20
@@ -3408,9 +3408,9 @@ sub_800AE1C: @ 800AE1C
 	movs r1, 0x3
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -3430,10 +3430,10 @@ sub_800AED0: @ 800AED0
 	sub sp, 0xC
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r0, _0800AF24 @ =gUnknown_8234610
 	str r0, [sp]
 	movs r0, 0
@@ -3446,9 +3446,9 @@ sub_800AED0: @ 800AED0
 	movs r3, 0
 	bl sub_812E51C
 	movs r0, 0x1
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0x2
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0
 	bl sub_8003F20
@@ -3456,7 +3456,7 @@ sub_800AED0: @ 800AED0
 	movs r1, 0x3
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -3757,8 +3757,8 @@ sub_800B110: @ 800B110
 	cmp r0, 0
 	beq _0800B160
 _0800B15A:
-	ldr r0, _0800B174 @ =sub_800ACD4
-	bl sub_8000544
+	ldr r0, _0800B174 @ =c2_800ACD4
+	bl SetMainCallback2
 _0800B160:
 	pop {r4-r6}
 	pop {r0}
@@ -3767,11 +3767,11 @@ _0800B160:
 _0800B168: .4byte gUnknown_2022118
 _0800B16C: .4byte gUnknown_202273C
 _0800B170: .4byte gUnknown_82345C0
-_0800B174: .4byte sub_800ACD4
+_0800B174: .4byte c2_800ACD4
 	thumb_func_end sub_800B110
 
-	thumb_func_start sub_800B178
-sub_800B178: @ 800B178
+	thumb_func_start HandleLinkConnection
+HandleLinkConnection: @ 800B178
 	push {r4,r5,lr}
 	ldr r0, _0800B1B0 @ =gUnknown_3003F3C
 	ldrb r0, [r0]
@@ -3825,7 +3825,7 @@ _0800B1EE:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800B178
+	thumb_func_end HandleLinkConnection
 
 	thumb_func_start sub_800B1F4
 sub_800B1F4: @ 800B1F4
@@ -3926,7 +3926,7 @@ sub_800B284: @ 800B284
 	adds r2, 0x8
 	ldrb r1, [r0, 0x1A]
 	adds r0, r2, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	pop {r0}
 	bx r0
 	thumb_func_end sub_800B284
@@ -3992,7 +3992,7 @@ sub_800B2F4: @ 800B2F4
 	orrs r0, r1
 	strh r0, [r2]
 	movs r0, 0x80
-	bl sub_8000B68
+	bl EnableInterrupts
 	ldr r0, _0800B360 @ =0x0400012a
 	strh r4, [r0]
 	movs r5, 0
@@ -4238,7 +4238,7 @@ sub_800B4F0: @ 800B4F0
 	movs r0, 0x41
 	strh r0, [r1]
 	movs r0, 0x40
-	bl sub_8000B68
+	bl EnableInterrupts
 _0800B50E:
 	pop {r0}
 	bx r0
@@ -4570,14 +4570,14 @@ _0800B77E:
 _0800B784: .4byte gUnknown_3000E64
 	thumb_func_end sub_800B718
 
-	thumb_func_start sub_800B788
-sub_800B788: @ 800B788
+	thumb_func_start Timer3Intr
+Timer3Intr: @ 800B788
 	push {lr}
 	bl sub_800BAF8
 	bl sub_800B820
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800B788
+	thumb_func_end Timer3Intr
 
 	thumb_func_start sub_800B798
 sub_800B798: @ 800B798

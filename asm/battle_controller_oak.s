@@ -75,7 +75,7 @@ _080E7628: .4byte gUnknown_2023BC4
 _080E762C: .4byte gUnknown_2022BC4
 _080E7630: .4byte gUnknown_84020F8
 _080E7634:
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E7638:
 	pop {r0}
 	bx r0
@@ -101,12 +101,12 @@ sub_80E763C: @ 80E763C
 	movs r1, 0x1
 	movs r2, 0x7
 	movs r3, 0x1
-	bl sub_8012138
+	bl dp11b_obj_instanciate
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0x7
 	movs r3, 0x1
-	bl sub_8012138
+	bl dp11b_obj_instanciate
 	ldr r0, _080E76A4 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
@@ -154,7 +154,7 @@ _080E76C8:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	b _080E781A
 _080E76D4:
 	movs r0, 0x20
@@ -275,13 +275,13 @@ _080E77AC:
 	cmp r0, 0
 	beq _080E7838
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _080E7838
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080E7824 @ =gUnknown_2023D70
 	ldrb r1, [r1]
 	ldr r2, _080E7828 @ =gUnknown_825E45C
@@ -316,9 +316,9 @@ _080E780A:
 	movs r1, 0xC
 _080E7814:
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 _080E781A:
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	b _080E7838
 	.align 2, 0
 _080E7820: .4byte gUnknown_2022B4C
@@ -410,8 +410,8 @@ _080E78B4:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_800E848
-	bl sub_80E8A9C
+	bl EmitTwoReturnValues
+	bl WallyBufferExecCompleted
 _080E78D8:
 	pop {r4}
 	pop {r0}
@@ -436,7 +436,7 @@ sub_80E78E0: @ 80E78E0
 	ldr r0, _080E7914 @ =nullsub_8
 	cmp r1, r0
 	bne _080E7904
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E7904:
 	pop {r0}
 	bx r0
@@ -455,7 +455,7 @@ sub_80E7918: @ 80E7918
 	lsls r0, 16
 	cmp r0, 0
 	bne _080E792A
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E792A:
 	pop {r0}
 	bx r0
@@ -482,7 +482,7 @@ sub_80E7930: @ 80E7930
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r0, [r2, 0x8]
-	bl sub_8000544
+	bl SetMainCallback2
 _080E795A:
 	pop {r0}
 	bx r0
@@ -500,7 +500,7 @@ sub_80E7970: @ 80E7970
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080E797E
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E797E:
 	pop {r0}
 	bx r0
@@ -523,7 +523,7 @@ sub_80E7988: @ 80E7988
 	ands r1, r0
 	cmp r1, 0
 	bne _080E79A8
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E79A8:
 	pop {r0}
 	bx r0
@@ -559,7 +559,7 @@ sub_80E79B8: @ 80E79B8
 	lsls r1, 3
 	adds r1, r3
 	ldrb r4, [r1, 0x8]
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_8003ECC
 	adds r0, r4, 0
 	bl sub_81278DC
@@ -598,7 +598,7 @@ sub_80E7A14: @ 80E7A14
 	ldrb r1, [r0]
 	ldr r2, _080E7A58 @ =gUnknown_203B0DC
 	movs r0, 0x1
-	bl sub_800E874
+	bl EmitChosenMonReturnValue
 	b _080E7A66
 	.align 2, 0
 _080E7A44: .4byte gUnknown_30030F0
@@ -611,9 +611,9 @@ _080E7A5C:
 	movs r0, 0x1
 	movs r1, 0x6
 	movs r2, 0
-	bl sub_800E874
+	bl EmitChosenMonReturnValue
 _080E7A66:
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E7A6A:
 	pop {r0}
 	bx r0
@@ -710,8 +710,8 @@ _080E7B34:
 	ldr r0, _080E7B48 @ =gUnknown_203AD30
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl sub_800E8AC
-	bl sub_80E8A9C
+	bl EmitOneReturnValue
+	bl WallyBufferExecCompleted
 _080E7B42:
 	pop {r0}
 	bx r0
@@ -816,7 +816,7 @@ _080E7BB2:
 	lsls r0, 2
 	ldr r1, _080E7CC8 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r4, _080E7CCC @ =gUnknown_3004FF0
 	ldrb r0, [r5]
 	adds r1, r6, 0
@@ -832,7 +832,7 @@ _080E7BB2:
 	ldr r2, _080E7CBC @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	eors r0, r6
 	bl sub_804BD94
@@ -840,7 +840,7 @@ _080E7BB2:
 	eors r0, r6
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 _080E7C46:
 	ldr r1, _080E7CC4 @ =gUnknown_3004FFC
 	ldr r4, _080E7CB4 @ =gUnknown_2023BC4
@@ -852,7 +852,7 @@ _080E7C46:
 	lsls r0, 2
 	ldr r1, _080E7CC8 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r5, _080E7CCC @ =gUnknown_3004FF0
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -866,13 +866,13 @@ _080E7C46:
 	ldr r2, _080E7CBC @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_804BD94
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldr r0, _080E7CB0 @ =gUnknown_2024018
 	ldr r0, [r0]
 	ldr r2, [r0, 0x8]
@@ -1002,12 +1002,12 @@ _080E7D02:
 	strb r4, [r0, 0x1]
 	ldr r4, _080E7DEC @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldr r0, _080E7DF0 @ =sub_802FDF4
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	ldr r2, _080E7DF4 @ =gUnknown_2023BCE
 	mov r0, r8
 	ldrb r1, [r0]
@@ -1018,7 +1018,7 @@ _080E7D02:
 	muls r0, r2
 	ldr r2, _080E7DF8 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	ldr r1, _080E7DFC @ =gUnknown_3004FE0
 	mov r2, r8
 	ldrb r0, [r2]
@@ -1090,19 +1090,19 @@ _080E7E4A:
 	adds r6, r1, r0
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4]
 	ldr r3, _080E7F10 @ =gUnknown_8253AE4
 	adds r4, 0x1
@@ -1131,7 +1131,7 @@ _080E7E4A:
 	mov r2, sp
 	bl sub_804037C
 	adds r0, r6, 0
-	bl sub_803E47C
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]
@@ -1145,7 +1145,7 @@ _080E7E4A:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	strb r5, [r4]
 	bl sub_8075290
 	lsls r0, 24
@@ -1202,7 +1202,7 @@ _080E7F38:
 	ldr r1, _080E7F5C @ =sub_80E8930
 	str r1, [r0]
 	mov r0, r9
-	bl sub_8077508
+	bl DestroyTask
 	b _080E7F66
 	.align 2, 0
 _080E7F58: .4byte gUnknown_3004FE0
@@ -1259,19 +1259,19 @@ sub_80E7F7C: @ 80E7F7C
 	adds r6, r0
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	ldr r6, _080E803C @ =gUnknown_8253AE4
 	lsls r1, r4, 2
@@ -1301,7 +1301,7 @@ sub_80E7F7C: @ 80E7F7C
 	negs r0, r0
 	str r0, [sp]
 	mov r0, r10
-	bl sub_8048150
+	bl SetBattleBarStruct
 	movs r0, 0x1B
 	bl sub_80722CC
 	ldr r0, _080E8048 @ =sub_80E804C
@@ -1367,7 +1367,7 @@ _080E807C:
 	lsls r4, 16
 	lsrs r4, 16
 	ldrb r0, [r5]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r4, 16
 	movs r0, 0x1
@@ -1383,17 +1383,17 @@ _080E807C:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r3, _080E814C @ =gUnknown_8253AE4
@@ -1424,7 +1424,7 @@ _080E807C:
 	mov r2, sp
 	bl sub_804037C
 	adds r0, r5, 0
-	bl sub_803E47C
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]
@@ -1437,7 +1437,7 @@ _080E807C:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	strb r5, [r4]
 	ldr r0, _080E8158 @ =sub_80E8190
 	str r0, [r6]
@@ -1461,7 +1461,7 @@ _080E815C:
 	ldr r1, _080E818C @ =sub_80E8930
 	str r1, [r0]
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _080E8178:
 	add sp, 0x8
 	pop {r3-r5}
@@ -1508,7 +1508,7 @@ _080E81C4:
 	adds r1, r4, 0
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r0, _080E81E4 @ =gUnknown_3005090
 	lsls r1, r5, 2
 	adds r1, r5
@@ -1556,7 +1556,7 @@ sub_80E81F0: @ 80E81F0
 	adds r7, r1, r0
 	adds r0, r7, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	bl sub_8075290
 	lsls r0, 24
 	lsrs r0, 24
@@ -1576,7 +1576,7 @@ sub_80E81F0: @ 80E81F0
 	ldrb r0, [r0]
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	b _080E8284
 	.align 2, 0
 _080E825C: .4byte gUnknown_3005090
@@ -1593,7 +1593,7 @@ _080E8270:
 	ldr r2, _080E829C @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 _080E8284:
 	ldr r0, _080E82A0 @ =gUnknown_3005090
 	lsls r1, r6, 2
@@ -1630,7 +1630,7 @@ sub_80E82A8: @ 80E82A8
 	ldr r1, _080E82E8 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	ldrb r0, [r4, 0xC]
 	ldr r1, _080E82EC @ =gUnknown_3004FE0
 	lsls r0, 2
@@ -1638,7 +1638,7 @@ sub_80E82A8: @ 80E82A8
 	ldr r1, _080E82F0 @ =sub_80E8930
 	str r1, [r0]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1672,7 +1672,7 @@ sub_80E82F4: @ 80E82F4
 	ldrb r0, [r2, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -1680,13 +1680,13 @@ sub_80E82F4: @ 80E82F4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080E8358 @ =gUnknown_3004FF0
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
-	bl sub_80E8A9C
+	bl SetHealthboxSpriteInvisible
+	bl WallyBufferExecCompleted
 _080E8344:
 	pop {r4-r6}
 	pop {r0}
@@ -1746,7 +1746,7 @@ _080E83BA:
 	adds r5, 0x95
 	adds r4, 0x97
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -1759,7 +1759,7 @@ _080E83BA:
 	movs r1, 0x4
 	movs r2, 0
 	movs r3, 0x8
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, [r7]
 	b _080E8522
 	.align 2, 0
@@ -1816,7 +1816,7 @@ _080E8430:
 	movs r1, 0x4
 	movs r2, 0x8
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, [r4]
 	b _080E8522
 	.align 2, 0
@@ -1866,7 +1866,7 @@ _080E8490:
 	movs r1, 0x4
 	movs r2, 0
 	movs r3, 0x8
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, [r4]
 	b _080E8522
 	.align 2, 0
@@ -1902,7 +1902,7 @@ _080E8500:
 	movs r1, 0x4
 	movs r2, 0x8
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _080E851E:
 	ldr r0, _080E852C @ =gUnknown_2023FE8
 	ldr r1, [r0]
@@ -1924,7 +1924,7 @@ _080E8530:
 	cmp r4, 0
 	bne _080E855E
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80EF0E0
@@ -1933,7 +1933,7 @@ _080E8530:
 	ldr r0, [r0]
 	adds r0, 0x94
 	strb r4, [r0]
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E855E:
 	add sp, 0x4
 	pop {r4-r7}
@@ -2066,7 +2066,7 @@ _080E8634:
 	movs r1, 0x4
 	movs r2, 0
 	movs r3, 0x8
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, [r5]
 	b _080E86A6
 _080E865A:
@@ -2102,7 +2102,7 @@ _080E8684:
 	movs r1, 0x4
 	movs r2, 0x8
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _080E86A2:
 	ldr r0, _080E86B0 @ =gUnknown_2023FE8
 	ldr r1, [r0]
@@ -2124,11 +2124,11 @@ _080E86B4:
 	bl sub_80EB524
 	ldr r0, _080E86DC @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E86E0
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	b _080E86E4
 	.align 2, 0
 _080E86D8: .4byte gUnknown_2037AB8
@@ -2207,7 +2207,7 @@ _080E875A:
 	movs r1, 0x4
 	movs r2, 0
 	movs r3, 0x8
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, [r5]
 	b _080E886C
 	.align 2, 0
@@ -2243,7 +2243,7 @@ _080E879A:
 	movs r1, 0x4
 	movs r2, 0x8
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, [r5]
 	b _080E886C
 	.align 2, 0
@@ -2297,7 +2297,7 @@ _080E8800:
 	movs r1, 0x4
 	movs r2, 0
 	movs r3, 0x8
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, [r4]
 	b _080E886C
 	.align 2, 0
@@ -2318,7 +2318,7 @@ _080E8848:
 	movs r1, 0x4
 	movs r2, 0x8
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _080E8868:
 	ldr r0, _080E887C @ =gUnknown_2023FE8
 	ldr r1, [r0]
@@ -2344,8 +2344,8 @@ _080E8880:
 	ldr r0, _080E88B8 @ =gUnknown_203AD30
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl sub_800E8AC
-	bl sub_80E8A9C
+	bl EmitOneReturnValue
+	bl WallyBufferExecCompleted
 	ldr r0, _080E88BC @ =gUnknown_2023FE8
 	ldr r0, [r0]
 	adds r0, 0x94
@@ -2378,7 +2378,7 @@ sub_80E88C0: @ 80E88C0
 	ldrb r0, [r5]
 	adds r0, r6
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r1, r4, 16
 	movs r0, 0x1
@@ -2404,8 +2404,8 @@ _080E8908:
 	muls r0, r2
 	ldr r2, _080E892C @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
-	bl sub_80E8A9C
+	bl HandleLowHpMusicChange
+	bl WallyBufferExecCompleted
 _080E8922:
 	pop {r4-r6}
 	pop {r0}
@@ -2423,14 +2423,14 @@ sub_80E8930: @ 80E8930
 	lsls r0, 16
 	cmp r0, 0
 	bne _080E8942
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E8942:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80E8930
 
-	thumb_func_start sub_80E8948
-sub_80E8948: @ 80E8948
+	thumb_func_start DoHitAnimBlinkSpriteEffect_3
+DoHitAnimBlinkSpriteEffect_3: @ 80E8948
 	push {r4,lr}
 	ldr r1, _080E8984 @ =gUnknown_2023D44
 	ldr r0, _080E8988 @ =gUnknown_2023BC4
@@ -2457,7 +2457,7 @@ sub_80E8948: @ 80E8948
 	strb r0, [r2]
 	ldr r0, _080E8990 @ =gUnknown_2024005
 	strb r3, [r0]
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	b _080E89BE
 	.align 2, 0
 _080E8984: .4byte gUnknown_2023D44
@@ -2491,7 +2491,7 @@ _080E89BE:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E8948
+	thumb_func_end DoHitAnimBlinkSpriteEffect_3
 
 	thumb_func_start sub_80E89C4
 sub_80E89C4: @ 80E89C4
@@ -2518,7 +2518,7 @@ sub_80E89C4: @ 80E89C4
 	lsls r0, 2
 	ldr r4, _080E8A2C @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2526,13 +2526,13 @@ sub_80E89C4: @ 80E89C4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080E8A30 @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
-	bl sub_80E8A9C
+	bl SetHealthboxSpriteInvisible
+	bl WallyBufferExecCompleted
 _080E8A18:
 	pop {r4-r6}
 	pop {r0}
@@ -2563,7 +2563,7 @@ sub_80E8A34: @ 80E8A34
 	ldr r0, _080E8A68 @ =nullsub_8
 	cmp r1, r0
 	bne _080E8A58
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E8A58:
 	pop {r0}
 	bx r0
@@ -2574,8 +2574,8 @@ _080E8A64: .4byte gUnknown_2023BC4
 _080E8A68: .4byte nullsub_8
 	thumb_func_end sub_80E8A34
 
-	thumb_func_start sub_80E8A6C
-sub_80E8A6C: @ 80E8A6C
+	thumb_func_start CompleteOnFinishedBattleAnimation_4
+CompleteOnFinishedBattleAnimation_4: @ 80E8A6C
 	push {lr}
 	ldr r0, _080E8A94 @ =gUnknown_2024018
 	ldr r2, [r0]
@@ -2591,17 +2591,17 @@ sub_80E8A6C: @ 80E8A6C
 	ands r0, r1
 	cmp r0, 0
 	bne _080E8A8E
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E8A8E:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080E8A94: .4byte gUnknown_2024018
 _080E8A98: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80E8A6C
+	thumb_func_end CompleteOnFinishedBattleAnimation_4
 
-	thumb_func_start sub_80E8A9C
-sub_80E8A9C: @ 80E8A9C
+	thumb_func_start WallyBufferExecCompleted
+WallyBufferExecCompleted: @ 80E8A9C
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, _080E8ADC @ =gUnknown_3004FE0
@@ -2617,7 +2617,7 @@ sub_80E8A9C: @ 80E8A9C
 	ands r0, r1
 	cmp r0, 0
 	beq _080E8AF0
-	bl sub_800A404
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2655,10 +2655,10 @@ _080E8B02:
 	.align 2, 0
 _080E8B0C: .4byte gUnknown_2023BC8
 _080E8B10: .4byte gUnknown_825E45C
-	thumb_func_end sub_80E8A9C
+	thumb_func_end WallyBufferExecCompleted
 
-	thumb_func_start sub_80E8B14
-sub_80E8B14: @ 80E8B14
+	thumb_func_start CompleteOnFinishedStatusAnimation_4
+CompleteOnFinishedStatusAnimation_4: @ 80E8B14
 	push {lr}
 	ldr r0, _080E8B3C @ =gUnknown_2024018
 	ldr r2, [r0]
@@ -2674,17 +2674,17 @@ sub_80E8B14: @ 80E8B14
 	ands r0, r1
 	cmp r0, 0
 	bne _080E8B36
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080E8B36:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080E8B3C: .4byte gUnknown_2024018
 _080E8B40: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80E8B14
+	thumb_func_end CompleteOnFinishedStatusAnimation_4
 
-	thumb_func_start sub_80E8B44
-sub_80E8B44: @ 80E8B44
+	thumb_func_start WallyHandleGetMonData
+WallyHandleGetMonData: @ 80E8B44
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -2702,7 +2702,7 @@ sub_80E8B44: @ 80E8B44
 	adds r1, r0
 	ldrb r0, [r1]
 	mov r1, sp
-	bl sub_80E8BB8
+	bl CopyWallyMonData
 	adds r6, r0, 0
 	b _080E8B9E
 	.align 2, 0
@@ -2721,7 +2721,7 @@ _080E8B80:
 	lsrs r0, 24
 	mov r2, sp
 	adds r1, r2, r6
-	bl sub_80E8BB8
+	bl CopyWallyMonData
 	adds r6, r0
 _080E8B96:
 	lsrs r4, 1
@@ -2733,16 +2733,16 @@ _080E8B9E:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl sub_800E708
-	bl sub_80E8A9C
+	bl EmitDataTransfer
+	bl WallyBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E8B44
+	thumb_func_end WallyHandleGetMonData
 
-	thumb_func_start sub_80E8BB8
-sub_80E8BB8: @ 80E8BB8
+	thumb_func_start CopyWallyMonData
+CopyWallyMonData: @ 80E8BB8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2843,12 +2843,12 @@ _080E8CE8:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2E]
 	movs r6, 0
@@ -2876,12 +2876,12 @@ _080E8D34:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4]
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r0, r8
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r9
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -2896,21 +2896,21 @@ _080E8D34:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r10
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, [sp, 0x80]
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x44]
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r5, 0x1F
 	ands r0, r5
@@ -2922,7 +2922,7 @@ _080E8D34:
 	strb r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r6, 0x1F
 	ands r0, r6
@@ -2934,7 +2934,7 @@ _080E8D34:
 	strh r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 2
@@ -2946,7 +2946,7 @@ _080E8D34:
 	strb r1, [r3, 0x15]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -2957,7 +2957,7 @@ _080E8D34:
 	str r0, [sp, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r6
 	lsls r0, 4
@@ -2968,7 +2968,7 @@ _080E8D34:
 	strh r1, [r3, 0x16]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 1
@@ -2980,55 +2980,55 @@ _080E8D34:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x48]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4C]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [sp, 0x7C]
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0x3B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x3C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x3E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x3F
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r1, 0x1
 	ands r0, r1
@@ -3041,7 +3041,7 @@ _080E8D34:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	lsls r0, 7
 	ldrb r2, [r3, 0x17]
@@ -3051,19 +3051,19 @@ _080E8D34:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x54]
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, [sp, 0x8C]
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
-	bl sub_8008CF4
+	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, sp
 	movs r6, 0
 _080E8EEC:
@@ -3114,13 +3114,13 @@ _080E8F42:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	adds r1, r6, 0
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r10
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -3134,7 +3134,7 @@ _080E8F42:
 	ldr r1, _080E8F90 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1, 0xC]
 	mov r2, r9
@@ -3176,7 +3176,7 @@ _080E8FBC:
 	adds r1, 0x11
 	mov r2, r8
 	adds r0, r4, r2
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -3187,7 +3187,7 @@ _080E8FBC:
 	ldr r1, _080E8FE8 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -3224,7 +3224,7 @@ _080E9018:
 	adds r0, r1
 	movs r1, 0x19
 _080E9022:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -3357,27 +3357,27 @@ _080E9108:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x3]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r6, 0x6
 	b _080E934E
@@ -3462,7 +3462,7 @@ _080E91D8:
 	adds r0, r1
 	movs r1, 0x37
 _080E91E2:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -3551,7 +3551,7 @@ _080E927C:
 	adds r0, r1
 	movs r1, 0x3F
 _080E9286:
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	strb r0, [r7]
@@ -3658,7 +3658,7 @@ _080E933C:
 	adds r0, r1
 	movs r1, 0x36
 _080E9346:
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	movs r6, 0x1
 _080E934E:
@@ -3673,18 +3673,18 @@ _080E934E:
 	bx r1
 	.align 2, 0
 _080E9360: .4byte gUnknown_2024284
-	thumb_func_end sub_80E8BB8
+	thumb_func_end CopyWallyMonData
 
-	thumb_func_start sub_80E9364
-sub_80E9364: @ 80E9364
+	thumb_func_start WallyHandleGetRawMonData
+WallyHandleGetRawMonData: @ 80E9364
 	push {lr}
-	bl sub_80313B0
+	bl PlayerHandleGetRawMonData
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E9364
+	thumb_func_end WallyHandleGetRawMonData
 
-	thumb_func_start sub_80E9370
-sub_80E9370: @ 80E9370
+	thumb_func_start WallyHandleSetMonData
+WallyHandleSetMonData: @ 80E9370
 	push {r4,r5,lr}
 	ldr r1, _080E9394 @ =gUnknown_2022BC4
 	ldr r0, _080E9398 @ =gUnknown_2023BC4
@@ -3699,7 +3699,7 @@ sub_80E9370: @ 80E9370
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
-	bl sub_80E93C8
+	bl SetWallyMonData
 	b _080E93BE
 	.align 2, 0
 _080E9394: .4byte gUnknown_2022BC4
@@ -3714,7 +3714,7 @@ _080E93A4:
 	cmp r0, 0
 	beq _080E93B2
 	adds r0, r5, 0
-	bl sub_80E93C8
+	bl SetWallyMonData
 _080E93B2:
 	lsrs r4, 1
 	adds r0, r5, 0x1
@@ -3723,14 +3723,14 @@ _080E93B2:
 	cmp r5, 0x5
 	bls _080E93A4
 _080E93BE:
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E9370
+	thumb_func_end WallyHandleSetMonData
 
-	thumb_func_start sub_80E93C8
-sub_80E93C8: @ 80E93C8
+	thumb_func_start SetWallyMonData
+SetWallyMonData: @ 80E93C8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4851,7 +4851,7 @@ _080E9D8E:
 	muls r0, r2
 	ldr r2, _080E9DB8 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	add sp, 0x34
 	pop {r3-r5}
 	mov r8, r3
@@ -4864,12 +4864,12 @@ _080E9D8E:
 _080E9DB8: .4byte gUnknown_2024284
 _080E9DBC: .4byte gUnknown_2023BC4
 _080E9DC0: .4byte gUnknown_2023BCE
-	thumb_func_end sub_80E93C8
+	thumb_func_end SetWallyMonData
 
 	thumb_func_start sub_80E9DC4
 sub_80E9DC4: @ 80E9DC4
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80E9DC4
@@ -4877,7 +4877,7 @@ sub_80E9DC4: @ 80E9DC4
 	thumb_func_start sub_80E9DD0
 sub_80E9DD0: @ 80E9DD0
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80E9DD0
@@ -4885,13 +4885,13 @@ sub_80E9DD0: @ 80E9DD0
 	thumb_func_start sub_80E9DDC
 sub_80E9DDC: @ 80E9DDC
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80E9DDC
 
-	thumb_func_start sub_80E9DE8
-sub_80E9DE8: @ 80E9DE8
+	thumb_func_start WallyHandleReturnMonToBall
+WallyHandleReturnMonToBall: @ 80E9DE8
 	push {r4-r6,lr}
 	ldr r0, _080E9E14 @ =gUnknown_2022BC4
 	ldr r6, _080E9E18 @ =gUnknown_2023BC4
@@ -4905,7 +4905,7 @@ sub_80E9DE8: @ 80E9DE8
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x1
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r0, _080E9E1C @ =gUnknown_3004FE0
 	ldrb r1, [r6]
 	lsls r1, 2
@@ -4927,7 +4927,7 @@ _080E9E24:
 	lsls r0, 2
 	ldr r4, _080E9E64 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -4935,13 +4935,13 @@ _080E9E24:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080E9E68 @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
-	bl sub_80E8A9C
+	bl SetHealthboxSpriteInvisible
+	bl WallyBufferExecCompleted
 _080E9E5A:
 	pop {r4-r6}
 	pop {r0}
@@ -4950,7 +4950,7 @@ _080E9E5A:
 _080E9E60: .4byte gUnknown_2023D44
 _080E9E64: .4byte gUnknown_202063C
 _080E9E68: .4byte gUnknown_3004FF0
-	thumb_func_end sub_80E9DE8
+	thumb_func_end WallyHandleReturnMonToBall
 
 	thumb_func_start sub_80E9E6C
 sub_80E9E6C: @ 80E9E6C
@@ -4970,7 +4970,7 @@ sub_80E9E6C: @ 80E9E6C
 	ldr r0, [r4]
 	ldrb r5, [r0, 0x8]
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4992,7 +4992,7 @@ sub_80E9E6C: @ 80E9E6C
 	asrs r2, 16
 	movs r1, 0x50
 	movs r3, 0x1E
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r2, _080E9EDC @ =gUnknown_2023D44
 	ldrb r1, [r6]
 	b _080E9F1C
@@ -5009,7 +5009,7 @@ _080E9EE0:
 	movs r0, 0x5
 	bl sub_8034750
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5027,7 +5027,7 @@ _080E9EE0:
 	asrs r2, 16
 	movs r1, 0x50
 	movs r3, 0x1E
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r2, _080E9F98 @ =gUnknown_2023D44
 	ldrb r1, [r4]
 _080E9F1C:
@@ -5116,7 +5116,7 @@ sub_80E9FB0: @ 80E9FB0
 	ldr r0, [r4]
 	ldrb r5, [r0, 0x8]
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5138,7 +5138,7 @@ sub_80E9FB0: @ 80E9FB0
 	asrs r2, 16
 	movs r1, 0x50
 	movs r3, 0x1E
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r2, _080EA020 @ =gUnknown_2023D44
 	ldrb r1, [r6]
 	b _080EA060
@@ -5155,7 +5155,7 @@ _080EA024:
 	movs r0, 0x5
 	bl sub_8034750
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5173,7 +5173,7 @@ _080EA024:
 	asrs r2, 16
 	movs r1, 0x50
 	movs r3, 0x1E
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r2, _080EA0DC @ =gUnknown_2023D44
 	ldrb r1, [r4]
 _080EA060:
@@ -5247,7 +5247,7 @@ _080EA0F0: .4byte sub_80E8A34
 	thumb_func_start sub_80EA0F4
 sub_80EA0F4: @ 80EA0F4
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EA0F4
@@ -5278,7 +5278,7 @@ sub_80EA100: @ 80EA100
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _080EA134:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -5312,11 +5312,11 @@ _080EA154:
 	muls r0, r2
 	ldr r2, _080EA1D4 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	movs r1, 0x40
 	negs r1, r1
 	movs r0, 0x10
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r2, _080EA1D8 @ =gUnknown_202063C
 	ldr r3, _080EA1DC @ =gUnknown_2023D44
 	ldrb r0, [r5]
@@ -5369,7 +5369,7 @@ _080EA1E8: .4byte sub_80E82F4
 	thumb_func_start sub_80EA1EC
 sub_80EA1EC: @ 80EA1EC
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EA1EC
@@ -5388,14 +5388,14 @@ sub_80EA1F8: @ 80EA1F8
 	ldr r5, _080EA240 @ =gUnknown_2023BC4
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x4
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _080EA244 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -5432,14 +5432,14 @@ sub_80EA24C: @ 80EA24C
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x4
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _080EA2A4 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -5461,7 +5461,7 @@ _080EA2A8: .4byte sub_80E7970
 	thumb_func_start sub_80EA2AC
 sub_80EA2AC: @ 80EA2AC
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EA2AC
@@ -5565,12 +5565,12 @@ sub_80EA2B8: @ 80EA2B8
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_80342A0
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
 	beq _080EA3B0
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	b _080EA3CE
 	.align 2, 0
 _080EA38C: .4byte gUnknown_2022BC4
@@ -5666,7 +5666,7 @@ _080EA43A:
 	adds r1, r3, 0
 	adds r2, r3, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _080EA456:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -5721,7 +5721,7 @@ _080EA494:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _080EA4C8:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -5744,7 +5744,7 @@ _080EA4E4:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _080EA520
-	bl sub_8034B40
+	bl CopyAllBattleSpritesInvisibilities
 	ldrb r0, [r6]
 	lsls r2, r0, 9
 	mov r3, r9
@@ -5754,7 +5754,7 @@ _080EA4E4:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_8035200
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -5763,7 +5763,7 @@ _080EA4E4:
 	lsls r0, 2
 	adds r0, r2
 	strb r4, [r0, 0x4]
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080EA520:
 	pop {r3,r4}
 	mov r8, r3
@@ -5796,7 +5796,7 @@ sub_80EA52C: @ 80EA52C
 	ldrh r0, [r4]
 	cmp r0, 0x1
 	bne _080EA570
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	b _080EA65A
 	.align 2, 0
 _080EA55C: .4byte gUnknown_2022974
@@ -5928,7 +5928,7 @@ sub_80EA66C: @ 80EA66C
 	push {lr}
 	ldr r0, _080EA684 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EA688
@@ -5937,7 +5937,7 @@ sub_80EA66C: @ 80EA66C
 	.align 2, 0
 _080EA684: .4byte gUnknown_2023BC4
 _080EA688:
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080EA68C:
 	pop {r0}
 	bx r0
@@ -5946,7 +5946,7 @@ _080EA68C:
 	thumb_func_start sub_80EA690
 sub_80EA690: @ 80EA690
 	push {lr}
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -6061,7 +6061,7 @@ _080EA788: .4byte gUnknown_202298C
 	thumb_func_start sub_80EA78C
 sub_80EA78C: @ 80EA78C
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EA78C
@@ -6069,7 +6069,7 @@ sub_80EA78C: @ 80EA78C
 	thumb_func_start sub_80EA798
 sub_80EA798: @ 80EA798
 	push {lr}
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -6161,8 +6161,8 @@ _080EA83E:
 	lsls r2, 1
 	movs r0, 0x1
 	movs r1, 0xA
-	bl sub_800E848
-	bl sub_80E8A9C
+	bl EmitTwoReturnValues
+	bl WallyBufferExecCompleted
 _080EA866:
 	pop {r4}
 	pop {r0}
@@ -6181,7 +6181,7 @@ sub_80EA870: @ 80EA870
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, _080EA8BC @ =gUnknown_3004FE0
 	ldr r2, _080EA8C0 @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -6226,7 +6226,7 @@ sub_80EA8D4: @ 80EA8D4
 	sub sp, 0x4
 	ldr r0, _080EA984 @ =nullsub_43
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	ldr r3, _080EA988 @ =gUnknown_3004FFC
 	ldr r4, _080EA98C @ =gUnknown_2023BC4
 	ldrb r1, [r4]
@@ -6293,7 +6293,7 @@ _080EA940:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, _080EA9A0 @ =gUnknown_3004FE0
 	ldr r2, _080EA98C @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -6324,7 +6324,7 @@ _080EA9A8: .4byte gUnknown_2024004
 	thumb_func_start sub_80EA9AC
 sub_80EA9AC: @ 80EA9AC
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EA9AC
@@ -6337,7 +6337,7 @@ sub_80EA9B8: @ 80EA9B8
 	push {r6,r7}
 	sub sp, 0x4
 	movs r0, 0
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	ldr r3, _080EAA30 @ =gUnknown_2022BC4
 	ldr r0, _080EAA34 @ =gUnknown_2023BC4
 	mov r9, r0
@@ -6365,7 +6365,7 @@ sub_80EA9B8: @ 80EA9B8
 	ldr r4, _080EAA40 @ =gUnknown_2024284
 	adds r0, r4
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -6375,7 +6375,7 @@ sub_80EA9B8: @ 80EA9B8
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -6384,7 +6384,7 @@ sub_80EA9B8: @ 80EA9B8
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_8048150
+	bl SetBattleBarStruct
 	b _080EAA82
 	.align 2, 0
 _080EAA30: .4byte gUnknown_2022BC4
@@ -6403,7 +6403,7 @@ _080EAA48:
 	ldr r1, _080EAAA4 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -6412,7 +6412,7 @@ _080EAA48:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_8048150
+	bl SetBattleBarStruct
 	mov r1, r9
 	ldrb r0, [r1]
 	adds r0, r4
@@ -6461,10 +6461,10 @@ sub_80EAAB8: @ 80EAAB8
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x63
 	bls _080EAAF0
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	b _080EAB3C
 	.align 2, 0
 _080EAAE4: .4byte gUnknown_2022BC4
@@ -6472,10 +6472,10 @@ _080EAAE8: .4byte gUnknown_2023BC4
 _080EAAEC: .4byte gUnknown_2024284
 _080EAAF0:
 	movs r0, 0x1
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	ldrb r1, [r6]
 	lsls r1, 9
 	adds r0, r5, 0x2
@@ -6488,7 +6488,7 @@ _080EAAF0:
 	orrs r4, r0
 	ldr r0, _080EAB44 @ =sub_80E7E04
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080EAB48 @ =gUnknown_3005090
@@ -6520,7 +6520,7 @@ _080EAB50: .4byte nullsub_81
 	thumb_func_start sub_80EAB54
 sub_80EAB54: @ 80EAB54
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EAB54
@@ -6528,7 +6528,7 @@ sub_80EAB54: @ 80EAB54
 	thumb_func_start sub_80EAB60
 sub_80EAB60: @ 80EAB60
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EAB60
@@ -6536,7 +6536,7 @@ sub_80EAB60: @ 80EAB60
 	thumb_func_start sub_80EAB6C
 sub_80EAB6C: @ 80EAB6C
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EAB6C
@@ -6544,7 +6544,7 @@ sub_80EAB6C: @ 80EAB6C
 	thumb_func_start sub_80EAB78
 sub_80EAB78: @ 80EAB78
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EAB78
@@ -6552,7 +6552,7 @@ sub_80EAB78: @ 80EAB78
 	thumb_func_start sub_80EAB84
 sub_80EAB84: @ 80EAB84
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EAB84
@@ -6560,7 +6560,7 @@ sub_80EAB84: @ 80EAB84
 	thumb_func_start sub_80EAB90
 sub_80EAB90: @ 80EAB90
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EAB90
@@ -6568,7 +6568,7 @@ sub_80EAB90: @ 80EAB90
 	thumb_func_start sub_80EAB9C
 sub_80EAB9C: @ 80EAB9C
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EAB9C
@@ -6576,7 +6576,7 @@ sub_80EAB9C: @ 80EAB9C
 	thumb_func_start sub_80EABA8
 sub_80EABA8: @ 80EABA8
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EABA8
@@ -6584,7 +6584,7 @@ sub_80EABA8: @ 80EABA8
 	thumb_func_start sub_80EABB4
 sub_80EABB4: @ 80EABB4
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EABB4
@@ -6592,7 +6592,7 @@ sub_80EABB4: @ 80EABB4
 	thumb_func_start sub_80EABC0
 sub_80EABC0: @ 80EABC0
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EABC0
@@ -6600,7 +6600,7 @@ sub_80EABC0: @ 80EABC0
 	thumb_func_start sub_80EABCC
 sub_80EABCC: @ 80EABCC
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EABCC
@@ -6608,7 +6608,7 @@ sub_80EABCC: @ 80EABCC
 	thumb_func_start sub_80EABD8
 sub_80EABD8: @ 80EABD8
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EABD8
@@ -6616,7 +6616,7 @@ sub_80EABD8: @ 80EABD8
 	thumb_func_start sub_80EABE4
 sub_80EABE4: @ 80EABE4
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EABE4
@@ -6624,7 +6624,7 @@ sub_80EABE4: @ 80EABE4
 	thumb_func_start sub_80EABF0
 sub_80EABF0: @ 80EABF0
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EABF0
@@ -6632,7 +6632,7 @@ sub_80EABF0: @ 80EABF0
 	thumb_func_start sub_80EABFC
 sub_80EABFC: @ 80EABFC
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EABFC
@@ -6655,7 +6655,7 @@ sub_80EAC08: @ 80EAC08
 	lsls r0, 29
 	cmp r0, 0
 	bge _080EAC3C
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	b _080EAC66
 	.align 2, 0
 _080EAC30: .4byte gUnknown_202063C
@@ -6675,12 +6675,12 @@ _080EAC3C:
 	movs r1, 0
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
-	bl sub_804BE70
+	bl DoHitAnimHealthboxEffect
 	ldr r1, _080EAC70 @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080EAC74 @ =sub_80E8948
+	ldr r1, _080EAC74 @ =DoHitAnimBlinkSpriteEffect_3
 	str r1, [r0]
 _080EAC66:
 	pop {r4}
@@ -6689,13 +6689,13 @@ _080EAC66:
 	.align 2, 0
 _080EAC6C: .4byte gUnknown_2024005
 _080EAC70: .4byte gUnknown_3004FE0
-_080EAC74: .4byte sub_80E8948
+_080EAC74: .4byte DoHitAnimBlinkSpriteEffect_3
 	thumb_func_end sub_80EAC08
 
 	thumb_func_start sub_80EAC78
 sub_80EAC78: @ 80EAC78
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EAC78
@@ -6716,7 +6716,7 @@ sub_80EAC84: @ 80EAC84
 	lsls r1, 8
 	orrs r0, r1
 	bl sub_80722CC
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6739,8 +6739,8 @@ sub_80EACB4: @ 80EACB4
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_8071C60
-	bl sub_80E8A9C
+	bl PlayFanfare
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6762,12 +6762,12 @@ sub_80EACE4: @ 80EACE4
 	ldr r1, _080EAD1C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
-	bl sub_8071DF0
-	bl sub_80E8A9C
+	bl PlayCry1
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6792,7 +6792,7 @@ sub_80EAD20: @ 80EAD20
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6822,7 +6822,7 @@ _080EAD64:
 	lsls r0, 2
 	ldr r5, _080EAEAC @ =gUnknown_202063C
 	adds r0, r5
-	bl sub_80750FC
+	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -6877,7 +6877,7 @@ _080EAD64:
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, _080EAEB8 @ =sub_80335F8
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -6886,9 +6886,9 @@ _080EAD64:
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080EAEBC @ =0x0000d6f8
-	bl sub_80089B8
+	bl AllocSpritePalette
 	adds r4, r0, 0
 	lsls r4, 24
 	ldr r1, _080EAEC0 @ =gUnknown_8239FD4
@@ -6903,7 +6903,7 @@ _080EAD64:
 	lsls r2, 1
 	adds r1, r4, r2
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r0, [r0]
@@ -6918,7 +6918,7 @@ _080EAD64:
 	strb r0, [r1, 0x5]
 	ldr r0, _080EAEC8 @ =sub_80EB0A8
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, _080EAECC @ =gUnknown_3005090
@@ -7008,7 +7008,7 @@ _080EAEE4:
 	ldr r1, _080EAF30 @ =sub_80491B0
 	str r1, [r0]
 _080EAF14:
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080EAF18:
 	pop {r4-r7}
 	pop {r0}
@@ -7053,20 +7053,20 @@ sub_80EAF34: @ 80EAF34
 	ldr r1, _080EB088 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _080EB08C @ =sub_8033E3C
-	bl sub_8044EF8
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _080EB090 @ =gUnknown_3004FFC
 	mov r9, r1
 	add r9, r6
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7093,7 +7093,7 @@ sub_80EAF34: @ 80EAF34
 	mov r0, r10
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _080EB098 @ =gUnknown_2023D44
 	adds r4, r6, r4
 	strb r0, [r4]
@@ -7138,7 +7138,7 @@ sub_80EAF34: @ 80EAF34
 	ldr r1, _080EB0A0 @ =gUnknown_2024024
 	adds r6, r1
 	ldrb r1, [r6]
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -7160,7 +7160,7 @@ sub_80EAF34: @ 80EAF34
 	str r1, [r0]
 	movs r0, 0
 	movs r1, 0xFF
-	bl sub_804A938
+	bl DoPokeballSendOutAnimation
 	mov r1, r9
 	ldrb r2, [r1]
 	lsls r1, r2, 4
@@ -7236,7 +7236,7 @@ _080EB0CC:
 	str r1, [r0]
 	strb r5, [r4]
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 _080EB102:
 	pop {r4-r6}
 	pop {r0}
@@ -7262,11 +7262,11 @@ sub_80EB11C: @ 80EB11C
 	cmp r0, 0
 	beq _080EB14C
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EB14C
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	b _080EB18A
 	.align 2, 0
 _080EB144: .4byte gUnknown_2022BC4
@@ -7300,7 +7300,7 @@ _080EB14C:
 	ldrb r1, [r5]
 	adds r1, r2
 	strb r0, [r1]
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 _080EB18A:
 	pop {r4,r5}
 	pop {r0}
@@ -7315,7 +7315,7 @@ _080EB19C: .4byte gUnknown_2024000
 	thumb_func_start sub_80EB1A0
 sub_80EB1A0: @ 80EB1A0
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EB1A0
@@ -7326,11 +7326,11 @@ sub_80EB1AC: @ 80EB1AC
 	ldr r4, _080EB1CC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8012258
-	bl sub_80E8A9C
+	bl dp11b_obj_free
+	bl WallyBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -7341,7 +7341,7 @@ _080EB1CC: .4byte gUnknown_2023BC4
 	thumb_func_start sub_80EB1D0
 sub_80EB1D0: @ 80EB1D0
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EB1D0
@@ -7368,11 +7368,11 @@ sub_80EB1DC: @ 80EB1DC
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl sub_803401C
+	bl TryHandleLaunchBattleTableAnimation
 	lsls r0, 24
 	cmp r0, 0
 	beq _080EB21C
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	b _080EB228
 	.align 2, 0
 _080EB214: .4byte gUnknown_2022BC4
@@ -7382,7 +7382,7 @@ _080EB21C:
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, _080EB234 @ =sub_80E8A6C
+	ldr r0, _080EB234 @ =CompleteOnFinishedBattleAnimation_4
 	str r0, [r1]
 _080EB228:
 	add sp, 0x4
@@ -7391,7 +7391,7 @@ _080EB228:
 	bx r0
 	.align 2, 0
 _080EB230: .4byte gUnknown_3004FE0
-_080EB234: .4byte sub_80E8A6C
+_080EB234: .4byte CompleteOnFinishedBattleAnimation_4
 	thumb_func_end sub_80EB1DC
 
 	thumb_func_start sub_80EB238
@@ -7410,12 +7410,12 @@ sub_80EB238: @ 80EB238
 	bgt _080EB260
 	adds r0, r2, 0
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8012258
+	bl dp11b_obj_free
 _080EB260:
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -7427,7 +7427,7 @@ _080EB270: .4byte gUnknown_2023BC4
 	thumb_func_start sub_80EB274
 sub_80EB274: @ 80EB274
 	push {lr}
-	bl sub_80E8A9C
+	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EB274
@@ -7445,10 +7445,10 @@ sub_80EB280: @ 80EB280
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x5
-	bl sub_8071AB4
+	bl FadeOutMapMusic
 	movs r0, 0x3
-	bl sub_8070E44
-	bl sub_80E8A9C
+	bl BeginFastPaletteFade
+	bl WallyBufferExecCompleted
 	ldr r0, _080EB2D0 @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x6
@@ -7521,7 +7521,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x30
 	movs r2, 0
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7529,7 +7529,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x31
 	movs r2, 0x1
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r6, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7537,7 +7537,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x32
 	movs r2, 0x2
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7545,7 +7545,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x33
 	movs r2, 0x1C
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7553,7 +7553,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x34
 	movs r2, 0x1D
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7561,7 +7561,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x35
 	movs r2, 0
 	movs r3, 0xF
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7569,7 +7569,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x36
 	movs r2, 0x1
 	movs r3, 0xF
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7577,7 +7577,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x38
 	movs r2, 0x1C
 	movs r3, 0xF
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7585,7 +7585,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x39
 	movs r2, 0x1D
 	movs r3, 0xF
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7593,7 +7593,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x3A
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7601,7 +7601,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x3B
 	movs r2, 0x1
 	movs r3, 0x10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7609,7 +7609,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x3C
 	movs r2, 0x1C
 	movs r3, 0x10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7617,7 +7617,7 @@ sub_80EB30C: @ 80EB30C
 	movs r1, 0x3D
 	movs r2, 0x1D
 	movs r3, 0x10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB4F4 @ =0x0000083a
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7625,7 +7625,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x11
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB4F8 @ =0x0000083b
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7633,7 +7633,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x1
 	movs r3, 0x11
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB4FC @ =0x0000083c
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7641,7 +7641,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x1C
 	movs r3, 0x11
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB500 @ =0x0000083d
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7649,7 +7649,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x1D
 	movs r3, 0x11
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB504 @ =0x00000835
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7657,7 +7657,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x12
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB508 @ =0x00000836
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7665,7 +7665,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x1
 	movs r3, 0x12
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB50C @ =0x00000838
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7673,7 +7673,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x1C
 	movs r3, 0x12
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB510 @ =0x00000839
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7681,7 +7681,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x1D
 	movs r3, 0x12
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0x83
 	lsls r1, 4
 	str r4, [sp]
@@ -7690,7 +7690,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB514 @ =0x00000831
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7698,7 +7698,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x1
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB518 @ =0x00000832
 	str r6, [sp]
 	str r4, [sp, 0x4]
@@ -7706,7 +7706,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x2
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB51C @ =0x00000833
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7714,7 +7714,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x1C
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080EB520 @ =0x00000834
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7722,7 +7722,7 @@ sub_80EB30C: @ 80EB30C
 	movs r0, 0
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -7759,7 +7759,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r6, 0x4
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7768,7 +7768,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0x4
 	movs r2, 0x1
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r0, r8
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -7777,7 +7777,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0x5
 	movs r2, 0x2
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7785,7 +7785,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0x6
 	movs r2, 0x1C
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7793,7 +7793,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0x7
 	movs r2, 0x1D
 	movs r3, 0xE
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r6, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7801,7 +7801,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0x8
 	movs r2, 0
 	movs r3, 0xF
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r6, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7809,7 +7809,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0x9
 	movs r2, 0x1
 	movs r3, 0xF
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r0, r8
 	str r0, [sp]
 	str r6, [sp, 0x4]
@@ -7818,7 +7818,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0xA
 	movs r2, 0x2
 	movs r3, 0xF
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r6, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7826,7 +7826,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0xB
 	movs r2, 0x1C
 	movs r3, 0xF
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r6, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7834,7 +7834,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0xC
 	movs r2, 0x1D
 	movs r3, 0xF
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7842,7 +7842,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0xD
 	movs r2, 0
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7850,7 +7850,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0xE
 	movs r2, 0x1
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r0, r8
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -7859,7 +7859,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0xF
 	movs r2, 0x2
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7867,7 +7867,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0x10
 	movs r2, 0x1C
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -7875,7 +7875,7 @@ sub_80EB524: @ 80EB524
 	movs r1, 0x11
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3

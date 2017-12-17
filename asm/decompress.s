@@ -5,24 +5,24 @@
 
 	.text
 
-	thumb_func_start sub_800EBB4
-sub_800EBB4: @ 800EBB4
+	thumb_func_start LZDecompressWram
+LZDecompressWram: @ 800EBB4
 	push {lr}
 	bl LZ77UnCompWram
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800EBB4
+	thumb_func_end LZDecompressWram
 
-	thumb_func_start sub_800EBC0
-sub_800EBC0: @ 800EBC0
+	thumb_func_start LZDecompressVram
+LZDecompressVram: @ 800EBC0
 	push {lr}
 	bl LZ77UnCompVram
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800EBC0
+	thumb_func_end LZDecompressVram
 
-	thumb_func_start sub_800EBCC
-sub_800EBCC: @ 800EBCC
+	thumb_func_start LoadCompressedObjectPic
+LoadCompressedObjectPic: @ 800EBCC
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -37,7 +37,7 @@ sub_800EBCC: @ 800EBCC
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	lsls r0, 16
 	lsrs r0, 16
 	add sp, 0x8
@@ -46,10 +46,10 @@ sub_800EBCC: @ 800EBCC
 	bx r1
 	.align 2, 0
 _0800EBFC: .4byte gUnknown_201C000
-	thumb_func_end sub_800EBCC
+	thumb_func_end LoadCompressedObjectPic
 
-	thumb_func_start sub_800EC00
-sub_800EC00: @ 800EC00
+	thumb_func_start LoadCompressedObjectPicOverrideBuffer
+LoadCompressedObjectPicOverrideBuffer: @ 800EC00
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -63,15 +63,15 @@ sub_800EC00: @ 800EC00
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800EC00
+	thumb_func_end LoadCompressedObjectPicOverrideBuffer
 
-	thumb_func_start sub_800EC28
-sub_800EC28: @ 800EC28
+	thumb_func_start LoadCompressedObjectPalette
+LoadCompressedObjectPalette: @ 800EC28
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -87,7 +87,7 @@ sub_800EC28: @ 800EC28
 	orrs r0, r2
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_8008928
+	bl LoadSpritePalette
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -95,10 +95,10 @@ sub_800EC28: @ 800EC28
 	.align 2, 0
 _0800EC54: .4byte gUnknown_201C000
 _0800EC58: .4byte 0xffff0000
-	thumb_func_end sub_800EC28
+	thumb_func_end LoadCompressedObjectPalette
 
-	thumb_func_start sub_800EC5C
-sub_800EC5C: @ 800EC5C
+	thumb_func_start LoadCompressedObjectPaletteOverrideBuffer
+LoadCompressedObjectPaletteOverrideBuffer: @ 800EC5C
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -113,14 +113,14 @@ sub_800EC5C: @ 800EC5C
 	orrs r0, r2
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_8008928
+	bl LoadSpritePalette
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0800EC88: .4byte 0xffff0000
-	thumb_func_end sub_800EC5C
+	thumb_func_end LoadCompressedObjectPaletteOverrideBuffer
 
 	thumb_func_start sub_800EC8C
 sub_800EC8C: @ 800EC8C
@@ -268,7 +268,7 @@ _0800ED8C:
 	adds r1, r5, 0
 	adds r2, r4, 0
 	mov r3, r8
-	bl sub_8043458
+	bl DrawSpindaSpots
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -655,7 +655,7 @@ sub_800F034: @ 800F034
 	ldr r0, [r4]
 	ldr r0, [r0]
 	lsrs r0, 8
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0800F06E
@@ -669,9 +669,9 @@ sub_800F034: @ 800F034
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	b _0800F070
 _0800F06E:
@@ -691,7 +691,7 @@ sub_800F078: @ 800F078
 	ldr r0, [r4]
 	ldr r0, [r0]
 	lsrs r0, 8
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0800F0B8
@@ -706,9 +706,9 @@ sub_800F078: @ 800F078
 	orrs r0, r2
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_8008928
+	bl LoadSpritePalette
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	b _0800F0BA
 	.align 2, 0
@@ -876,7 +876,7 @@ _0800F1D0:
 	adds r1, r4, 0
 	adds r2, r5, 0
 	mov r3, r8
-	bl sub_8043458
+	bl DrawSpindaSpots
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}

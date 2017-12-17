@@ -336,7 +336,7 @@ sub_813CC44: @ 813CC44
 	ldrb r2, [r0]
 	ldrb r1, [r0, 0x1]
 	adds r0, r2, 0
-	bl sub_8055238
+	bl get_mapheader_by_bank_and_number
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1

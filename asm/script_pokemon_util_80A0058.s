@@ -29,7 +29,7 @@ _080A0076:
 	add r4, r10
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r1, r0, 16
 	strb r0, [r6]
 	lsrs r1, 24
@@ -40,7 +40,7 @@ _080A0076:
 	bl sub_804037C
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r5, 0
@@ -51,12 +51,12 @@ _080A00AC:
 	adds r1, r5, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r7, 0
 	adds r2, r5, 0
-	bl sub_804101C
+	bl CalculatePPWithBonus
 	strb r0, [r6]
 	adds r1, r5, 0
 	adds r1, 0x11
@@ -119,7 +119,7 @@ sub_80A011C: @ 80A011C
 	lsrs r0, r5, 16
 	mov r8, r0
 	movs r0, 0x64
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r7, r0, 0
 	movs r0, 0
 	str r0, [sp]
@@ -130,7 +130,7 @@ sub_80A011C: @ 80A011C
 	adds r1, r6, 0
 	adds r2, r4, 0
 	movs r3, 0x20
-	bl sub_803DA54
+	bl CreateMon
 	add r0, sp, 0x10
 	mov r1, r8
 	strb r1, [r0]
@@ -141,11 +141,11 @@ sub_80A011C: @ 80A011C
 	add r2, sp, 0x10
 	bl sub_804037C
 	adds r0, r7, 0
-	bl sub_8040B14
+	bl GiveMonToPlayer
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r6, 0
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r4, 0x1
@@ -160,7 +160,7 @@ sub_80A011C: @ 80A011C
 	bl sub_8088E74
 _080A0196:
 	adds r0, r7, 0
-	bl sub_8002BC4
+	bl Free
 	adds r0, r4, 0
 	add sp, 0x14
 	pop {r3}
@@ -178,7 +178,7 @@ sub_80A01AC: @ 80A01AC
 	lsls r4, 16
 	lsrs r4, 16
 	movs r0, 0x64
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -191,12 +191,12 @@ sub_80A01AC: @ 80A01AC
 	mov r2, sp
 	bl sub_804037C
 	adds r0, r5, 0
-	bl sub_8040B14
+	bl GiveMonToPlayer
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 	adds r0, r4, 0
 	add sp, 0x4
 	pop {r4,r5}
@@ -207,7 +207,7 @@ sub_80A01AC: @ 80A01AC
 	thumb_func_start sub_80A01F4
 sub_80A01F4: @ 80A01F4
 	push {lr}
-	bl sub_8040CC4
+	bl GetMonsStateToDoubles
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -246,7 +246,7 @@ _080A0228:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -255,7 +255,7 @@ _080A0228:
 	beq _080A025C
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, r6
 	bne _080A025C
 	movs r0, 0x1
@@ -298,8 +298,8 @@ _080A028E:
 _080A0298: .4byte gUnknown_2021CD0
 	thumb_func_end sub_80A026C
 
-	thumb_func_start sub_80A029C
-sub_80A029C: @ 80A029C
+	thumb_func_start CreateScriptedWildMon
+CreateScriptedWildMon: @ 80A029C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -312,7 +312,7 @@ sub_80A029C: @ 80A029C
 	lsrs r5, 24
 	lsls r7, r2, 16
 	lsrs r6, r7, 16
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	ldr r0, _080A02F8 @ =gUnknown_202402C
 	mov r8, r0
 	movs r0, 0
@@ -324,7 +324,7 @@ sub_80A029C: @ 80A029C
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x20
-	bl sub_803DA54
+	bl CreateMon
 	cmp r6, 0
 	beq _080A02EA
 	add r0, sp, 0x10
@@ -345,10 +345,10 @@ _080A02EA:
 	bx r0
 	.align 2, 0
 _080A02F8: .4byte gUnknown_202402C
-	thumb_func_end sub_80A029C
+	thumb_func_end CreateScriptedWildMon
 
-	thumb_func_start sub_80A02FC
-sub_80A02FC: @ 80A02FC
+	thumb_func_start ScriptSetMonMoveSlot
+ScriptSetMonMoveSlot: @ 80A02FC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -369,14 +369,14 @@ _080A0318:
 	ldr r1, _080A0330 @ =gUnknown_2024284
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_803E964
+	bl SetMonMoveSlot
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A032C: .4byte gUnknown_2024029
 _080A0330: .4byte gUnknown_2024284
-	thumb_func_end sub_80A02FC
+	thumb_func_end ScriptSetMonMoveSlot
 
 	thumb_func_start sub_80A0334
 sub_80A0334: @ 80A0334
@@ -411,13 +411,13 @@ _080A0368:
 	movs r0, 0x1
 	strh r0, [r1]
 _080A036E:
-	ldr r0, _080A037C @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _080A037C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A0378: .4byte gUnknown_20370D0
-_080A037C: .4byte sub_80568E0
+_080A037C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_80A0350
 
 	thumb_func_start sub_80A0380
@@ -455,14 +455,14 @@ _080A03B8:
 	movs r0, 0x1
 	strh r0, [r1]
 _080A03C2:
-	ldr r0, _080A03D4 @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _080A03D4 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A03D0: .4byte gUnknown_20370D0
-_080A03D4: .4byte sub_80568E0
+_080A03D4: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_80A039C
 
 	thumb_func_start sub_80A03D8
@@ -473,7 +473,7 @@ sub_80A03D8: @ 80A03D8
 	sub sp, 0x4
 	movs r0, 0x96
 	lsls r0, 1
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r7, r0, 0
 	movs r5, 0
 	movs r0, 0x64
@@ -517,9 +517,9 @@ _080A042C:
 	adds r4, 0x64
 	cmp r5, r6
 	ble _080A042C
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	adds r0, r7, 0
-	bl sub_8002BC4
+	bl Free
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3

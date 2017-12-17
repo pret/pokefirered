@@ -11,7 +11,7 @@ sub_80589C4: @ 80589C4
 	ldrb r2, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
 	adds r0, r2, 0
-	bl sub_8055238
+	bl get_mapheader_by_bank_and_number
 	pop {r1}
 	bx r1
 	thumb_func_end sub_80589C4
@@ -21,7 +21,7 @@ sub_80589D4: @ 80589D4
 	push {lr}
 	ldr r0, _080589E4 @ =gUnknown_2036DFC
 	bl sub_8058A00
-	bl sub_8069C38
+	bl mapheader_run_script_with_tag_x1
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -34,7 +34,7 @@ sub_80589E8: @ 80589E8
 	ldr r0, _080589FC @ =gUnknown_2036DFC
 	bl sub_8058A00
 	bl sub_80591C4
-	bl sub_8069C38
+	bl mapheader_run_script_with_tag_x1
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -76,9 +76,9 @@ _08058A3E:
 	ldr r0, [r5, 0xC]
 	ldrh r1, [r5]
 	ldrh r2, [r5, 0x4]
-	bl sub_8058A70
+	bl map_copy_with_padding
 	adds r0, r6, 0
-	bl sub_8058AC8
+	bl mapheader_copy_mapdata_of_adjacent_maps
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -92,8 +92,8 @@ _08058A68: .4byte gUnknown_8352F18
 _08058A6C: .4byte gUnknown_8352F4C
 	thumb_func_end sub_8058A00
 
-	thumb_func_start sub_8058A70
-sub_8058A70: @ 8058A70
+	thumb_func_start map_copy_with_padding
+map_copy_with_padding: @ 8058A70
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -139,10 +139,10 @@ _08058AB8:
 	bx r0
 	.align 2, 0
 _08058AC4: .4byte gUnknown_3005040
-	thumb_func_end sub_8058A70
+	thumb_func_end map_copy_with_padding
 
-	thumb_func_start sub_8058AC8
-sub_8058AC8: @ 8058AC8
+	thumb_func_start mapheader_copy_mapdata_of_adjacent_maps
+mapheader_copy_mapdata_of_adjacent_maps: @ 8058AC8
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	ldr r2, _08058B00 @ =gUnknown_2036E24
@@ -215,7 +215,7 @@ _08058B4C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8058AC8
+	thumb_func_end mapheader_copy_mapdata_of_adjacent_maps
 
 	thumb_func_start sub_8058B54
 sub_8058B54: @ 8058B54
@@ -492,8 +492,8 @@ _08058D38:
 _08058D40: .4byte gUnknown_3005040
 	thumb_func_end sub_8058CE0
 
-	thumb_func_start sub_8058D44
-sub_8058D44: @ 8058D44
+	thumb_func_start MapGridGetZCoordAt
+MapGridGetZCoordAt: @ 8058D44
 	push {r4-r7,lr}
 	adds r2, r0, 0
 	adds r7, r1, 0
@@ -558,7 +558,7 @@ _08058DBE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8058D44
+	thumb_func_end MapGridGetZCoordAt
 
 	thumb_func_start sub_8058DC4
 sub_8058DC4: @ 8058DC4
@@ -1450,8 +1450,8 @@ _08059432:
 	bx r1
 	thumb_func_end sub_8059334
 
-	thumb_func_start sub_805943C
-sub_805943C: @ 805943C
+	thumb_func_start GetPostCameraMoveMapBorderId
+GetPostCameraMoveMapBorderId: @ 805943C
 	push {r4,lr}
 	adds r3, r1, 0
 	ldr r1, _08059460 @ =gUnknown_3005008
@@ -1471,10 +1471,10 @@ sub_805943C: @ 805943C
 	bx r1
 	.align 2, 0
 _08059460: .4byte gUnknown_3005008
-	thumb_func_end sub_805943C
+	thumb_func_end GetPostCameraMoveMapBorderId
 
-	thumb_func_start sub_8059464
-sub_8059464: @ 8059464
+	thumb_func_start CanCameraMoveInDirection
+CanCameraMoveInDirection: @ 8059464
 	push {r4,r5,lr}
 	ldr r1, _0805949C @ =gUnknown_3005008
 	ldr r4, [r1]
@@ -1510,7 +1510,7 @@ _080594A6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059464
+	thumb_func_end CanCameraMoveInDirection
 
 	thumb_func_start sub_80594AC
 sub_80594AC: @ 80594AC
@@ -1585,8 +1585,8 @@ _08059526:
 _0805952C: .4byte gUnknown_3005008
 	thumb_func_end sub_80594AC
 
-	thumb_func_start sub_8059530
-sub_8059530: @ 8059530
+	thumb_func_start CameraMove
+CameraMove: @ 8059530
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1603,7 +1603,7 @@ sub_8059530: @ 8059530
 	strb r1, [r2]
 	mov r0, r10
 	mov r1, r9
-	bl sub_805943C
+	bl GetPostCameraMoveMapBorderId
 	adds r7, r0, 0
 	adds r0, r7, 0x1
 	cmp r0, 0x1
@@ -1684,7 +1684,7 @@ _080595E2:
 	.align 2, 0
 _080595F8: .4byte gUnknown_3005008
 _080595FC: .4byte gUnknown_2036E18
-	thumb_func_end sub_8059530
+	thumb_func_end CameraMove
 
 	thumb_func_start sub_8059600
 sub_8059600: @ 8059600
@@ -1988,8 +1988,8 @@ sub_80597EC: @ 80597EC
 _08059804: .4byte gUnknown_3005008
 	thumb_func_end sub_80597EC
 
-	thumb_func_start sub_8059808
-sub_8059808: @ 8059808
+	thumb_func_start sav1_camera_get_focus_coords
+sav1_camera_get_focus_coords: @ 8059808
 	ldr r2, _0805981C @ =gUnknown_3005008
 	ldr r3, [r2]
 	ldrh r2, [r3]
@@ -2001,10 +2001,10 @@ sub_8059808: @ 8059808
 	bx lr
 	.align 2, 0
 _0805981C: .4byte gUnknown_3005008
-	thumb_func_end sub_8059808
+	thumb_func_end sav1_camera_get_focus_coords
 
-	thumb_func_start sub_8059820
-sub_8059820: @ 8059820
+	thumb_func_start SetCameraCoords
+SetCameraCoords: @ 8059820
 	ldr r2, _0805982C @ =gUnknown_3005008
 	ldr r2, [r2]
 	strh r0, [r2]
@@ -2012,10 +2012,10 @@ sub_8059820: @ 8059820
 	bx lr
 	.align 2, 0
 _0805982C: .4byte gUnknown_3005008
-	thumb_func_end sub_8059820
+	thumb_func_end SetCameraCoords
 
-	thumb_func_start sub_8059830
-sub_8059830: @ 8059830
+	thumb_func_start GetCameraCoords
+GetCameraCoords: @ 8059830
 	ldr r2, _08059840 @ =gUnknown_3005008
 	ldr r3, [r2]
 	ldrh r2, [r3]
@@ -2025,7 +2025,7 @@ sub_8059830: @ 8059830
 	bx lr
 	.align 2, 0
 _08059840: .4byte gUnknown_3005008
-	thumb_func_end sub_8059830
+	thumb_func_end GetCameraCoords
 
 	thumb_func_start sub_8059844
 sub_8059844: @ 8059844
@@ -2048,7 +2048,7 @@ sub_8059844: @ 8059844
 	lsrs r2, 16
 	movs r0, 0x2
 	adds r3, r5, 0
-	bl sub_80017D0
+	bl LoadBgTiles
 	b _08059880
 _08059870:
 	ldr r1, [r3, 0x4]
@@ -2086,7 +2086,7 @@ sub_8059888: @ 8059888
 	lsrs r2, 16
 	movs r0, 0x2
 	adds r3, r5, 0
-	bl sub_80017D0
+	bl LoadBgTiles
 	b _080598C4
 _080598B4:
 	ldr r1, [r3, 0x4]
@@ -2128,7 +2128,7 @@ _080598F0:
 	ldr r0, _08059900 @ =gUnknown_20371F8
 	adds r0, r4, r0
 	adds r1, r5, 0
-	bl sub_8071544
+	bl TintPalette_GrayScale
 	b _0805992C
 	.align 2, 0
 _08059900: .4byte gUnknown_20371F8
@@ -2137,7 +2137,7 @@ _08059904:
 	ldr r0, _08059914 @ =gUnknown_20371F8
 	adds r0, r4, r0
 	adds r1, r5, 0
-	bl sub_80715F4
+	bl TintPalette_SepiaTone
 	b _0805992C
 	.align 2, 0
 _08059914: .4byte gUnknown_20371F8
@@ -2149,7 +2149,7 @@ _08059918:
 	ldr r0, _08059940 @ =gUnknown_20371F8
 	adds r0, r4, r0
 	adds r1, r5, 0
-	bl sub_8071544
+	bl TintPalette_GrayScale
 _0805992C:
 	ldr r0, _08059940 @ =gUnknown_20371F8
 	adds r0, r4, r0
@@ -2191,7 +2191,7 @@ _0805996C:
 	ldr r0, _0805997C @ =gUnknown_20371F8
 	adds r0, r4, r0
 	lsls r1, r6, 4
-	bl sub_8071544
+	bl TintPalette_GrayScale
 	b _080599AA
 	.align 2, 0
 _0805997C: .4byte gUnknown_20371F8
@@ -2200,7 +2200,7 @@ _08059980:
 	ldr r0, _08059990 @ =gUnknown_20371F8
 	adds r0, r4, r0
 	lsls r1, r6, 4
-	bl sub_80715F4
+	bl TintPalette_SepiaTone
 	b _080599AA
 	.align 2, 0
 _08059990: .4byte gUnknown_20371F8
@@ -2213,7 +2213,7 @@ _08059994:
 	ldr r0, _080599C0 @ =gUnknown_20371F8
 	adds r0, r4, r0
 	adds r1, r5, 0
-	bl sub_8071544
+	bl TintPalette_GrayScale
 _080599AA:
 	ldr r0, _080599C0 @ =gUnknown_20371F8
 	adds r0, r4, r0
@@ -2230,8 +2230,8 @@ _080599C0: .4byte gUnknown_20371F8
 _080599C4: .4byte gUnknown_20375F8
 	thumb_func_end sub_8059948
 
-	thumb_func_start sub_80599C8
-sub_80599C8: @ 80599C8
+	thumb_func_start apply_map_tileset_palette
+apply_map_tileset_palette: @ 80599C8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2254,7 +2254,7 @@ sub_80599C8: @ 80599C8
 	mov r0, sp
 	adds r1, r5, 0
 	movs r2, 0x2
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r0, [r4, 0x8]
 	adds r0, 0x2
 	adds r5, 0x1
@@ -2264,7 +2264,7 @@ sub_80599C8: @ 80599C8
 	lsls r2, r4, 16
 	lsrs r2, 16
 	adds r1, r5, 0
-	bl sub_80703EC
+	bl LoadPalette
 	lsls r4, 15
 	lsrs r4, 16
 	adds r0, r5, 0
@@ -2278,7 +2278,7 @@ _08059A1C:
 	adds r0, 0xE0
 	adds r1, r5, 0
 	adds r2, r7, 0
-	bl sub_80703EC
+	bl LoadPalette
 	lsrs r1, r6, 17
 	adds r0, r5, 0
 	bl sub_80598CC
@@ -2286,7 +2286,7 @@ _08059A1C:
 _08059A36:
 	ldr r0, [r4, 0x8]
 	mov r1, r8
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	lsrs r1, r6, 17
 	mov r0, r8
 	bl sub_80598CC
@@ -2297,7 +2297,7 @@ _08059A46:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80599C8
+	thumb_func_end apply_map_tileset_palette
 
 	thumb_func_start sub_8059A54
 sub_8059A54: @ 8059A54
@@ -2324,8 +2324,8 @@ sub_8059A68: @ 8059A68
 	bx r0
 	thumb_func_end sub_8059A68
 
-	thumb_func_start sub_8059A7C
-sub_8059A7C: @ 8059A7C
+	thumb_func_start copy_map_tileset2_to_vram_2
+copy_map_tileset2_to_vram_2: @ 8059A7C
 	push {lr}
 	ldr r0, [r0, 0x14]
 	movs r1, 0xC0
@@ -2335,7 +2335,7 @@ sub_8059A7C: @ 8059A7C
 	bl sub_8059888
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8059A7C
+	thumb_func_end copy_map_tileset2_to_vram_2
 
 	thumb_func_start sub_8059A90
 sub_8059A90: @ 8059A90
@@ -2343,7 +2343,7 @@ sub_8059A90: @ 8059A90
 	ldr r0, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0xE0
-	bl sub_80599C8
+	bl apply_map_tileset_palette
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8059A90
@@ -2354,13 +2354,13 @@ sub_8059AA0: @ 8059AA0
 	ldr r0, [r0, 0x14]
 	movs r1, 0x70
 	movs r2, 0xC0
-	bl sub_80599C8
+	bl apply_map_tileset_palette
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8059AA0
 
-	thumb_func_start sub_8059AB0
-sub_8059AB0: @ 8059AB0
+	thumb_func_start copy_map_tileset1_tileset2_to_vram
+copy_map_tileset1_tileset2_to_vram: @ 8059AB0
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	cmp r5, 0
@@ -2380,10 +2380,10 @@ _08059AD2:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8059AB0
+	thumb_func_end copy_map_tileset1_tileset2_to_vram
 
-	thumb_func_start sub_8059AD8
-sub_8059AD8: @ 8059AD8
+	thumb_func_start apply_map_tileset1_tileset2_palette
+apply_map_tileset1_tileset2_palette: @ 8059AD8
 	push {r4,lr}
 	adds r4, r0, 0
 	cmp r4, 0
@@ -2395,6 +2395,6 @@ _08059AEA:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8059AD8
+	thumb_func_end apply_map_tileset1_tileset2_palette
 
 	.align 2, 0 @ Don't pad with nop.

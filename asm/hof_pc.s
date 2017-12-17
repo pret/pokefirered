@@ -20,9 +20,9 @@ sub_80CA53C: @ 80CA53C
 	movs r0, 0
 	bl sub_8001618
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _080CA570 @ =sub_80F2978
-	bl sub_8000544
+	bl SetMainCallback2
 _080CA564:
 	pop {r4}
 	pop {r0}
@@ -42,11 +42,11 @@ sub_80CA574: @ 80CA574
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
-	bl sub_8069940
+	bl BeginNormalPaletteFade
+	bl ScriptContext2_Enable
 	ldr r0, _080CA59C @ =sub_80CA53C
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -57,15 +57,15 @@ _080CA59C: .4byte sub_80CA53C
 	thumb_func_start sub_80CA5A0
 sub_80CA5A0: @ 80CA5A0
 	push {lr}
-	ldr r0, _080CA5B4 @ =sub_80567DC
-	bl sub_8000544
+	ldr r0, _080CA5B4 @ =c2_exit_to_overworld_2_switch
+	bl SetMainCallback2
 	ldr r1, _080CA5B8 @ =gUnknown_3005020
 	ldr r0, _080CA5BC @ =sub_80CA5C0
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA5B4: .4byte sub_80567DC
+_080CA5B4: .4byte c2_exit_to_overworld_2_switch
 _080CA5B8: .4byte gUnknown_3005020
 _080CA5BC: .4byte sub_80CA5C0
 	thumb_func_end sub_80CA5A0
@@ -74,7 +74,7 @@ _080CA5BC: .4byte sub_80CA5C0
 sub_80CA5C0: @ 80CA5C0
 	push {lr}
 	sub sp, 0x4
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	bl sub_8055DC4
 	bl sub_809D040
 	bl sub_809D254
@@ -84,10 +84,10 @@ sub_80CA5C0: @ 80CA5C0
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _080CA5F4 @ =sub_80CA5F8
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -107,7 +107,7 @@ sub_80CA5F8: @ 80CA5F8
 	cmp r0, 0
 	bne _080CA610
 	adds r0, r2, 0
-	bl sub_8077508
+	bl DestroyTask
 _080CA610:
 	pop {r0}
 	bx r0

@@ -53,7 +53,7 @@ _080A0E22:
 	b _080A0E32
 _080A0E2A:
 	adds r0, r2, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080A0E42
 _080A0E32:
 	ldrb r1, [r1, 0x2]
@@ -62,7 +62,7 @@ _080A0E32:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_8001EC0
+	bl Unused_AdjustBgMosaic
 _080A0E42:
 	pop {r0}
 	bx r0
@@ -75,7 +75,7 @@ sub_80A0E48: @ 80A0E48
 	bl sub_80722CC
 	ldr r0, _080A0E5C @ =sub_80A0DD8
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -86,7 +86,7 @@ _080A0E5C: .4byte sub_80A0DD8
 sub_80A0E60: @ 80A0E60
 	push {lr}
 	ldr r0, _080A0E70 @ =sub_80A0DD8
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}

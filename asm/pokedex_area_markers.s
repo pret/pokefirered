@@ -66,7 +66,7 @@ sub_8134230: @ 8134230
 	ands r2, r5
 	orrs r2, r1
 	str r2, [r0, 0x4]
-	bl sub_800EBCC
+	bl LoadCompressedObjectPic
 	ldr r0, _081343D0 @ =gUnknown_846341C
 	mov r3, r8
 	lsls r3, 4
@@ -75,10 +75,10 @@ sub_8134230: @ 8134230
 	lsls r1, 1
 	add r1, r8
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r0, _081343D4 @ =sub_8134200
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	mov r10, r0
 	mov r0, r10
 	lsls r0, 24
@@ -97,7 +97,7 @@ sub_8134230: @ 8134230
 	strh r5, [r4, 0x10]
 	movs r0, 0xF0
 	lsls r0, 1
-	bl sub_8002B9C
+	bl Alloc
 	adds r1, r0, 0
 	str r1, [r4, 0x8]
 	str r1, [r4, 0x4]
@@ -107,22 +107,22 @@ sub_8134230: @ 8134230
 	movs r1, 0x80
 	lsls r1, 8
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	ldr r1, _081343DC @ =0x00002f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _081343E0 @ =0x0000080c
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _081343E4 @ =0x00001f1f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _081343E8 @ =0x00002f3d
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	add r1, sp, 0x8
 	ldr r0, _081343EC @ =gUnknown_8231D00
 	ldm r0!, {r2,r3,r5}
@@ -135,7 +135,7 @@ sub_8134230: @ 8134230
 	movs r1, 0x68
 	adds r2, r6, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	strb r0, [r4, 0xD]
 	ldrb r1, [r4, 0xD]
 	lsls r0, r1, 4
@@ -144,7 +144,7 @@ sub_8134230: @ 8134230
 	ldr r5, _081343F0 @ =gUnknown_202063C
 	adds r0, r5
 	adds r1, r4, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 	ldrb r1, [r4, 0xD]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -190,11 +190,11 @@ sub_8134230: @ 8134230
 	orrs r1, r2
 	strb r1, [r0]
 	movs r0, 0x1
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x1E
 	str r0, [sp]
 	movs r0, 0x14
@@ -203,11 +203,11 @@ sub_8134230: @ 8134230
 	movs r1, 0xF
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	mov r0, r10
 	add sp, 0x28
 	pop {r3-r5}
@@ -245,42 +245,42 @@ sub_81343F4: @ 81343F4
 	ldr r0, _08134498 @ =gUnknown_3005098
 	adds r4, r0
 	ldrh r0, [r4, 0xE]
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldrb r1, [r4, 0xD]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	ldr r1, _0813449C @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r0, [r4, 0x8]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _081344A0 @ =0x00001f1f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 8
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	movs r0, 0x1
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0x2
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x1E
 	str r0, [sp]
 	movs r0, 0x14
@@ -289,13 +289,13 @@ sub_81343F4: @ 81343F4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8044EC8
-sub_8044EC8: @ 8044EC8
+	thumb_func_start Random
+Random: @ 8044EC8
 	ldr r2, _08044EDC @ =gUnknown_3005000
 	ldr r1, [r2]
 	ldr r0, _08044EE0 @ =0x41c64e6d
@@ -20,7 +20,7 @@ sub_8044EC8: @ 8044EC8
 _08044EDC: .4byte gUnknown_3005000
 _08044EE0: .4byte 0x41c64e6d
 _08044EE4: .4byte 0x00006073
-	thumb_func_end sub_8044EC8
+	thumb_func_end Random
 
 	thumb_func_start sub_8044EE8
 sub_8044EE8: @ 8044EE8

@@ -148,7 +148,7 @@ sub_80725D4: @ 80725D4
 	mov r9, r2
 	bl sub_80767F0
 	movs r0, 0
-	bl sub_804828C
+	bl UpdateOamPriorityInAllHealthboxes
 	movs r4, 0
 	ldr r6, _08072618 @ =gUnknown_2023BCE
 	movs r7, 0x64
@@ -156,7 +156,7 @@ sub_80725D4: @ 80725D4
 _08072600:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072624
@@ -175,7 +175,7 @@ _08072624:
 _0807262A:
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r5]
 	adds r6, 0x2
 	adds r5, 0x2
@@ -205,7 +205,7 @@ _08072658:
 	mov r12, r1
 	ldr r0, _080726D4 @ =gUnknown_2037EDC
 	mov r10, r0
-	ldr r7, _080726D8 @ =sub_8072828
+	ldr r7, _080726D8 @ =RunAnimScriptCommand
 	ldr r1, _080726DC @ =gUnknown_2037F02
 	movs r2, 0
 	adds r0, r1, 0
@@ -256,7 +256,7 @@ _080726C8: .4byte gUnknown_2037ED4
 _080726CC: .4byte gUnknown_2037EE1
 _080726D0: .4byte gUnknown_2037EE0
 _080726D4: .4byte gUnknown_2037EDC
-_080726D8: .4byte sub_8072828
+_080726D8: .4byte RunAnimScriptCommand
 _080726DC: .4byte gUnknown_2037F02
 _080726E0: .4byte 0x0000ffff
 _080726E4: .4byte gUnknown_2037EEE
@@ -302,13 +302,13 @@ _08072738: .4byte gUnknown_2022988
 _0807273C: .4byte gUnknown_202298A
 	thumb_func_end sub_80725D4
 
-	thumb_func_start sub_8072740
-sub_8072740: @ 8072740
+	thumb_func_start DestroyAnimSprite
+DestroyAnimSprite: @ 8072740
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _0807275C @ =gUnknown_2037EE2
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -318,14 +318,14 @@ sub_8072740: @ 8072740
 	bx r0
 	.align 2, 0
 _0807275C: .4byte gUnknown_2037EE2
-	thumb_func_end sub_8072740
+	thumb_func_end DestroyAnimSprite
 
-	thumb_func_start sub_8072760
-sub_8072760: @ 8072760
+	thumb_func_start DestroyAnimVisualTask
+DestroyAnimVisualTask: @ 8072760
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _08072778 @ =gUnknown_2037EE2
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -334,14 +334,14 @@ sub_8072760: @ 8072760
 	bx r0
 	.align 2, 0
 _08072778: .4byte gUnknown_2037EE2
-	thumb_func_end sub_8072760
+	thumb_func_end DestroyAnimVisualTask
 
-	thumb_func_start sub_807277C
-sub_807277C: @ 807277C
+	thumb_func_start DestroyAnimSoundTask
+DestroyAnimSoundTask: @ 807277C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _08072794 @ =gUnknown_2037EE3
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -350,10 +350,10 @@ sub_807277C: @ 807277C
 	bx r0
 	.align 2, 0
 _08072794: .4byte gUnknown_2037EE3
-	thumb_func_end sub_807277C
+	thumb_func_end DestroyAnimSoundTask
 
-	thumb_func_start sub_8072798
-sub_8072798: @ 8072798
+	thumb_func_start AddSpriteIndex
+AddSpriteIndex: @ 8072798
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -378,10 +378,10 @@ _080727C0:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8072798
+	thumb_func_end AddSpriteIndex
 
-	thumb_func_start sub_80727C8
-sub_80727C8: @ 80727C8
+	thumb_func_start ClearSpriteIndex
+ClearSpriteIndex: @ 80727C8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -408,10 +408,10 @@ _080727F4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80727C8
+	thumb_func_end ClearSpriteIndex
 
-	thumb_func_start sub_80727FC
-sub_80727FC: @ 80727FC
+	thumb_func_start WaitAnimFrameCount
+WaitAnimFrameCount: @ 80727FC
 	push {lr}
 	ldr r2, _08072814 @ =gUnknown_2037EE0
 	ldrb r1, [r2]
@@ -420,24 +420,24 @@ sub_80727FC: @ 80727FC
 	cmp r0, 0
 	bgt _08072820
 	ldr r0, _08072818 @ =gUnknown_2037EDC
-	ldr r1, _0807281C @ =sub_8072828
+	ldr r1, _0807281C @ =RunAnimScriptCommand
 	str r1, [r0]
 	movs r0, 0
 	b _08072822
 	.align 2, 0
 _08072814: .4byte gUnknown_2037EE0
 _08072818: .4byte gUnknown_2037EDC
-_0807281C: .4byte sub_8072828
+_0807281C: .4byte RunAnimScriptCommand
 _08072820:
 	subs r0, r1, 0x1
 _08072822:
 	strb r0, [r2]
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80727FC
+	thumb_func_end WaitAnimFrameCount
 
-	thumb_func_start sub_8072828
-sub_8072828: @ 8072828
+	thumb_func_start RunAnimScriptCommand
+RunAnimScriptCommand: @ 8072828
 	push {r4,lr}
 	ldr r4, _08072858 @ =gUnknown_83ADF5C
 _0807282C:
@@ -467,10 +467,10 @@ _08072858: .4byte gUnknown_83ADF5C
 _0807285C: .4byte gUnknown_2037ED4
 _08072860: .4byte gUnknown_2037EE0
 _08072864: .4byte gUnknown_2037EE1
-	thumb_func_end sub_8072828
+	thumb_func_end RunAnimScriptCommand
 
-	thumb_func_start sub_8072868
-sub_8072868: @ 8072868
+	thumb_func_start ScriptCmd_loadspritegfx
+ScriptCmd_loadspritegfx: @ 8072868
 	push {r4-r6,lr}
 	ldr r6, _080728B4 @ =gUnknown_2037ED4
 	ldr r0, [r6]
@@ -496,12 +496,12 @@ sub_8072868: @ 8072868
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r4, 0
-	bl sub_8072798
+	bl AddSpriteIndex
 	ldr r1, _080728C4 @ =gUnknown_2037EE0
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r1, _080728C8 @ =gUnknown_2037EDC
-	ldr r0, _080728CC @ =sub_80727FC
+	ldr r0, _080728CC @ =WaitAnimFrameCount
 	str r0, [r1]
 	pop {r4-r6}
 	pop {r0}
@@ -513,11 +513,11 @@ _080728BC: .4byte gUnknown_8399C90
 _080728C0: .4byte 0xffffd8f0
 _080728C4: .4byte gUnknown_2037EE0
 _080728C8: .4byte gUnknown_2037EDC
-_080728CC: .4byte sub_80727FC
-	thumb_func_end sub_8072868
+_080728CC: .4byte WaitAnimFrameCount
+	thumb_func_end ScriptCmd_loadspritegfx
 
-	thumb_func_start sub_80728D0
-sub_80728D0: @ 80728D0
+	thumb_func_start ScriptCmd_unloadspritegfx
+ScriptCmd_unloadspritegfx: @ 80728D0
 	push {r4-r6,lr}
 	ldr r6, _08072910 @ =gUnknown_2037ED4
 	ldr r0, [r6]
@@ -534,16 +534,16 @@ sub_80728D0: @ 80728D0
 	adds r0, r1
 	ldrh r5, [r0, 0x6]
 	adds r0, r5, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r5, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldr r0, [r6]
 	adds r0, 0x2
 	str r0, [r6]
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r4, 0
-	bl sub_80727C8
+	bl ClearSpriteIndex
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -551,10 +551,10 @@ sub_80728D0: @ 80728D0
 _08072910: .4byte gUnknown_2037ED4
 _08072914: .4byte gUnknown_83ACC08
 _08072918: .4byte 0xffffd8f0
-	thumb_func_end sub_80728D0
+	thumb_func_end ScriptCmd_unloadspritegfx
 
-	thumb_func_start sub_807291C
-sub_807291C: @ 807291C
+	thumb_func_start ScriptCmd_createsprite
+ScriptCmd_createsprite: @ 807291C
 	push {r4-r7,lr}
 	ldr r5, _08072984 @ =gUnknown_2037ED4
 	ldr r1, [r5]
@@ -665,7 +665,7 @@ _080729CC:
 	lsrs r3, 24
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_80071EC
+	bl CreateSpriteAndAnimate
 	ldr r1, _08072A0C @ =gUnknown_2037EE2
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -677,10 +677,10 @@ _080729CC:
 _08072A04: .4byte gUnknown_2037F1A
 _08072A08: .4byte gUnknown_2037F1B
 _08072A0C: .4byte gUnknown_2037EE2
-	thumb_func_end sub_807291C
+	thumb_func_end ScriptCmd_createsprite
 
-	thumb_func_start sub_8072A10
-sub_8072A10: @ 8072A10
+	thumb_func_start ScriptCmd_createvisualtask
+ScriptCmd_createvisualtask: @ 8072A10
 	push {r4-r7,lr}
 	ldr r4, _08072A80 @ =gUnknown_2037ED4
 	ldr r1, [r4]
@@ -725,7 +725,7 @@ _08072A48:
 _08072A60:
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r6
@@ -740,10 +740,10 @@ _08072A60:
 _08072A80: .4byte gUnknown_2037ED4
 _08072A84: .4byte gUnknown_2037F02
 _08072A88: .4byte gUnknown_2037EE2
-	thumb_func_end sub_8072A10
+	thumb_func_end ScriptCmd_createvisualtask
 
-	thumb_func_start sub_8072A8C
-sub_8072A8C: @ 8072A8C
+	thumb_func_start ScriptCmd_delay
+ScriptCmd_delay: @ 8072A8C
 	push {r4,lr}
 	ldr r1, _08072ABC @ =gUnknown_2037ED4
 	ldr r0, [r1]
@@ -763,7 +763,7 @@ _08072AAA:
 	adds r0, r2, 0x1
 	str r0, [r1]
 	ldr r1, _08072AC4 @ =gUnknown_2037EDC
-	ldr r0, _08072AC8 @ =sub_80727FC
+	ldr r0, _08072AC8 @ =WaitAnimFrameCount
 	str r0, [r1]
 	pop {r4}
 	pop {r0}
@@ -772,8 +772,8 @@ _08072AAA:
 _08072ABC: .4byte gUnknown_2037ED4
 _08072AC0: .4byte gUnknown_2037EE0
 _08072AC4: .4byte gUnknown_2037EDC
-_08072AC8: .4byte sub_80727FC
-	thumb_func_end sub_8072A8C
+_08072AC8: .4byte WaitAnimFrameCount
+	thumb_func_end ScriptCmd_delay
 
 	thumb_func_start sub_8072ACC
 sub_8072ACC: @ 8072ACC
@@ -847,7 +847,7 @@ _08072B3C: .4byte gUnknown_2037EE3
 _08072B40: .4byte gUnknown_2037F14
 _08072B44: .4byte gUnknown_2037F12
 _08072B48:
-	bl sub_80723E0
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072B80
@@ -887,12 +887,12 @@ _08072B8E:
 	lsls r0, 3
 	adds r0, r6
 	ldrh r0, [r0, 0x6]
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldrh r0, [r4]
 	lsls r0, 3
 	adds r0, r6
 	ldrh r0, [r0, 0x6]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldrh r1, [r4]
 	adds r0, r7, 0
 	orrs r0, r1
@@ -912,7 +912,7 @@ _08072BB2:
 	bl m4aMPlayVolumeControl
 	bl sub_80767F0
 	movs r0, 0x1
-	bl sub_804828C
+	bl UpdateOamPriorityInAllHealthboxes
 	ldr r0, _08072C04 @ =gUnknown_2037EE1
 	mov r1, r8
 	strb r1, [r0]
@@ -994,7 +994,7 @@ _08072C62:
 	cmp r0, 0
 	beq _08072D12
 	adds r0, r5, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1013,7 +1013,7 @@ _08072C88:
 	ldrb r4, [r0]
 	ldr r0, _08072CE0 @ =sub_8073174
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r1, _08072CE4 @ =gUnknown_3005090
@@ -1078,7 +1078,7 @@ _08072D12:
 	cmp r0, 0
 	beq _08072DCE
 	adds r0, r5, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1097,7 +1097,7 @@ _08072D3E:
 	ldrb r4, [r0]
 	ldr r0, _08072DA0 @ =sub_8073174
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r1, _08072D94 @ =gUnknown_3005090
@@ -1236,13 +1236,13 @@ _08072E5E:
 	lsls r2, 6
 	movs r0, 0
 	movs r3, 0x1
-	bl sub_8000F44
+	bl RequestDma3Fill
 	ldr r1, _08072F60 @ =0x0600e000
 	movs r2, 0x80
 	lsls r2, 5
 	movs r0, 0
 	movs r3, 0x1
-	bl sub_8000F44
+	bl RequestDma3Fill
 	add r0, sp, 0x10
 	bl sub_80752A0
 	add r0, sp, 0x20
@@ -1259,15 +1259,15 @@ _08072E5E:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x2
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	ldr r2, _08072F6C @ =gUnknown_2023D44
 	adds r2, r7, r2
 	ldrb r0, [r2]
@@ -1302,10 +1302,10 @@ _08072E5E:
 	strb r1, [r0]
 	ldrh r1, [r5]
 	movs r0, 0x14
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	lsls r4, r7, 5
 	ldr r0, _08072F7C @ =gUnknown_20373F8
 	adds r4, r0
@@ -1314,7 +1314,7 @@ _08072E5E:
 	lsls r1, 4
 	adds r0, r4, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	add r0, sp, 0x10
 	ldrb r1, [r0, 0x8]
 	lsls r1, 5
@@ -1325,7 +1325,7 @@ _08072E5E:
 	adds r0, r4, 0
 	bl CpuSet
 	adds r0, r7, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -1361,14 +1361,14 @@ _08072F84:
 	lsls r2, 6
 	movs r0, 0
 	movs r3, 0x1
-	bl sub_8000F44
+	bl RequestDma3Fill
 	ldr r1, _08073098 @ =0x0600f000
 	movs r6, 0x80
 	lsls r6, 5
 	movs r0, 0
 	adds r2, r6, 0
 	movs r3, 0x1
-	bl sub_8000F44
+	bl RequestDma3Fill
 	add r0, sp, 0x10
 	movs r1, 0x2
 	bl sub_80752C8
@@ -1392,15 +1392,15 @@ _08072F84:
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x2
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	ldr r2, _080730A4 @ =gUnknown_2023D44
 	adds r2, r7, r2
 	ldrb r0, [r2]
@@ -1435,23 +1435,23 @@ _08072F84:
 	strb r1, [r0]
 	ldrh r1, [r5]
 	movs r0, 0x18
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x1A
-	bl sub_8000A38
+	bl SetGpuReg
 	lsls r4, r7, 5
 	ldr r0, _080730B4 @ =gUnknown_20373F8
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x90
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r1, _080730B8 @ =0x05000120
 	ldr r2, _080730BC @ =0x04000008
 	adds r0, r4, 0
 	bl CpuSet
 	adds r0, r7, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -1775,7 +1775,7 @@ _080732E4:
 _080732E6:
 	ldr r0, _08073310 @ =sub_807331C
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08073314 @ =gUnknown_3005090
@@ -1817,7 +1817,7 @@ sub_807331C: @ 807331C
 	cmp r0, 0x1
 	beq _0807338E
 	ldrb r0, [r4, 0xC]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1835,7 +1835,7 @@ _08073354:
 	adds r0, r5, 0
 	bl sub_8073128
 	ldrb r0, [r6]
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0xFF
 	strb r0, [r6]
 _0807336C:
@@ -1848,12 +1848,12 @@ _0807336C:
 	adds r0, r5, 0
 	bl sub_8073128
 	ldrb r0, [r6, 0x1]
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0xFF
 	strb r0, [r6, 0x1]
 _08073388:
 	adds r0, r7, 0
-	bl sub_8077508
+	bl DestroyTask
 _0807338E:
 	pop {r4-r7}
 	pop {r0}
@@ -1902,7 +1902,7 @@ _080733CE:
 	cmp r0, 0
 	beq _08073416
 	adds r0, r4, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1940,7 +1940,7 @@ _08073416:
 	cmp r0, 0
 	beq _08073464
 	adds r0, r4, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -2069,7 +2069,7 @@ _08073520:
 _08073522:
 	ldr r0, _0807354C @ =sub_8073558
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08073550 @ =gUnknown_3005090
@@ -2115,7 +2115,7 @@ sub_8073558: @ 8073558
 	ldrb r4, [r5, 0xC]
 	adds r6, r4, 0
 	adds r0, r4, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -2151,7 +2151,7 @@ _080735AA:
 	bl sub_8073128
 _080735CC:
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _080735D2:
 	pop {r3}
 	mov r8, r3
@@ -2162,8 +2162,8 @@ _080735D2:
 _080735DC: .4byte gUnknown_3005090
 	thumb_func_end sub_8073558
 
-	thumb_func_start sub_80735E0
-sub_80735E0: @ 80735E0
+	thumb_func_start ScriptCmd_setalpha
+ScriptCmd_setalpha: @ 80735E0
 	push {r4,r5,lr}
 	ldr r2, _08073614 @ =gUnknown_2037ED4
 	ldr r0, [r2]
@@ -2179,20 +2179,20 @@ sub_80735E0: @ 80735E0
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	orrs r5, r4
 	movs r0, 0x52
 	adds r1, r5, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08073614: .4byte gUnknown_2037ED4
-	thumb_func_end sub_80735E0
+	thumb_func_end ScriptCmd_setalpha
 
-	thumb_func_start sub_8073618
-sub_8073618: @ 8073618
+	thumb_func_start ScriptCmd_setbldcnt
+ScriptCmd_setbldcnt: @ 8073618
 	push {lr}
 	ldr r3, _0807363C @ =gUnknown_2037ED4
 	ldr r0, [r3]
@@ -2207,15 +2207,15 @@ sub_8073618: @ 8073618
 	str r0, [r3]
 	orrs r1, r2
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0807363C: .4byte gUnknown_2037ED4
-	thumb_func_end sub_8073618
+	thumb_func_end ScriptCmd_setbldcnt
 
-	thumb_func_start sub_8073640
-sub_8073640: @ 8073640
+	thumb_func_start ScriptCmd_blendoff
+ScriptCmd_blendoff: @ 8073640
 	push {lr}
 	ldr r1, _08073660 @ =gUnknown_2037ED4
 	ldr r0, [r1]
@@ -2223,18 +2223,18 @@ sub_8073640: @ 8073640
 	str r0, [r1]
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08073660: .4byte gUnknown_2037ED4
-	thumb_func_end sub_8073640
+	thumb_func_end ScriptCmd_blendoff
 
-	thumb_func_start sub_8073664
-sub_8073664: @ 8073664
+	thumb_func_start ScriptCmd_call
+ScriptCmd_call: @ 8073664
 	push {r4,lr}
 	ldr r4, _08073690 @ =gUnknown_2037ED4
 	ldr r1, [r4]
@@ -2260,7 +2260,7 @@ sub_8073664: @ 8073664
 	.align 2, 0
 _08073690: .4byte gUnknown_2037ED4
 _08073694: .4byte gUnknown_2037ED8
-	thumb_func_end sub_8073664
+	thumb_func_end ScriptCmd_call
 
 	thumb_func_start sub_8073698
 sub_8073698: @ 8073698
@@ -2274,8 +2274,8 @@ _080736A4: .4byte gUnknown_2037ED4
 _080736A8: .4byte gUnknown_2037ED8
 	thumb_func_end sub_8073698
 
-	thumb_func_start sub_80736AC
-sub_80736AC: @ 80736AC
+	thumb_func_start ScriptCmd_setarg
+ScriptCmd_setarg: @ 80736AC
 	push {r4,r5,lr}
 	ldr r5, _080736D8 @ =gUnknown_2037ED4
 	ldr r1, [r5]
@@ -2300,10 +2300,10 @@ sub_80736AC: @ 80736AC
 	.align 2, 0
 _080736D8: .4byte gUnknown_2037ED4
 _080736DC: .4byte gUnknown_2037F02
-	thumb_func_end sub_80736AC
+	thumb_func_end ScriptCmd_setarg
 
-	thumb_func_start sub_80736E0
-sub_80736E0: @ 80736E0
+	thumb_func_start ScriptCmd_choosetwoturnanim
+ScriptCmd_choosetwoturnanim: @ 80736E0
 	push {lr}
 	ldr r3, _08073718 @ =gUnknown_2037ED4
 	ldr r2, [r3]
@@ -2335,10 +2335,10 @@ _080736FA:
 	.align 2, 0
 _08073718: .4byte gUnknown_2037ED4
 _0807371C: .4byte gUnknown_2037F16
-	thumb_func_end sub_80736E0
+	thumb_func_end ScriptCmd_choosetwoturnanim
 
-	thumb_func_start sub_8073720
-sub_8073720: @ 8073720
+	thumb_func_start ScriptCmd_jumpifmoveturn
+ScriptCmd_jumpifmoveturn: @ 8073720
 	push {r4,r5,lr}
 	ldr r5, _08073750 @ =gUnknown_2037ED4
 	ldr r4, [r5]
@@ -2373,10 +2373,10 @@ _0807375C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8073720
+	thumb_func_end ScriptCmd_jumpifmoveturn
 
-	thumb_func_start sub_8073764
-sub_8073764: @ 8073764
+	thumb_func_start ScriptCmd_jump
+ScriptCmd_jump: @ 8073764
 	ldr r3, _08073784 @ =gUnknown_2037ED4
 	ldr r0, [r3]
 	adds r2, r0, 0x1
@@ -2395,7 +2395,7 @@ sub_8073764: @ 8073764
 	bx lr
 	.align 2, 0
 _08073784: .4byte gUnknown_2037ED4
-	thumb_func_end sub_8073764
+	thumb_func_end ScriptCmd_jump
 
 	thumb_func_start sub_8073788
 sub_8073788: @ 8073788
@@ -2431,7 +2431,7 @@ sub_80737A0: @ 80737A0
 	str r0, [r1]
 	ldr r0, _080737D8 @ =sub_8073850
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080737DC @ =gUnknown_3005090
@@ -2466,12 +2466,12 @@ sub_80737E4: @ 80737E4
 	str r0, [r1]
 	ldr r0, _08073824 @ =sub_8073850
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _08073828 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073830
@@ -2528,7 +2528,7 @@ sub_8073850: @ 8073850
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8071264
+	bl BeginHardwarePaletteFade
 	ldrh r0, [r4, 0x1C]
 	adds r0, 0x1
 	strh r0, [r4, 0x1C]
@@ -2575,7 +2575,7 @@ _080738CA:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8071264
+	bl BeginHardwarePaletteFade
 	ldr r1, _080738EC @ =gUnknown_3005090
 	lsls r0, r5, 2
 	adds r0, r5
@@ -2604,7 +2604,7 @@ _080738F0:
 	cmp r0, 0x3
 	bne _08073918
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _08073920 @ =gUnknown_2037F17
 	strb r4, [r0]
 _08073918:
@@ -2630,17 +2630,17 @@ sub_8073924: @ 8073924
 	adds r0, r4, r0
 	ldr r0, [r0]
 	ldr r1, _08073964 @ =0x0600d000
-	bl sub_800EBC0
+	bl LZDecompressVram
 	adds r0, r4, r5
 	ldr r0, [r0]
 	ldr r1, _08073968 @ =0x06008000
-	bl sub_800EBC0
+	bl LZDecompressVram
 	adds r5, 0x4
 	adds r4, r5
 	ldr r0, [r4]
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2667,7 +2667,7 @@ sub_8073978: @ 8073978
 	str r0, [r1]
 	ldr r0, _080739AC @ =sub_8073850
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080739B0 @ =gUnknown_3005090
@@ -2787,7 +2787,7 @@ sub_8073A44: @ 8073A44
 	cmp r0, 0
 	beq _08073A80
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r4, 0xC0
 	cmp r0, 0
@@ -2799,13 +2799,13 @@ _08073A78: .4byte gUnknown_2024018
 _08073A7C: .4byte gUnknown_2037F1A
 _08073A80:
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073ABA
 	ldr r0, _08073AA8 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073AE6
@@ -2828,7 +2828,7 @@ _08073AAC:
 _08073ABA:
 	ldr r0, _08073ADC @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2889,7 +2889,7 @@ sub_8073B08: @ 8073B08
 	cmp r0, 0
 	beq _08073B44
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r4, 0xC0
 	cmp r0, 0
@@ -2901,7 +2901,7 @@ _08073B3C: .4byte gUnknown_2024018
 _08073B40: .4byte gUnknown_2037F1A
 _08073B44:
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073B56
@@ -2941,8 +2941,8 @@ _08073B7A:
 _08073B84: .4byte 0x0000ffc0
 	thumb_func_end sub_8073B60
 
-	thumb_func_start sub_8073B88
-sub_8073B88: @ 8073B88
+	thumb_func_start CalculatePanIncrement
+CalculatePanIncrement: @ 8073B88
 	push {lr}
 	lsls r2, 16
 	lsrs r2, 16
@@ -2979,10 +2979,10 @@ _08073BBE:
 	asrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8073B88
+	thumb_func_end CalculatePanIncrement
 
-	thumb_func_start sub_8073BC8
-sub_8073BC8: @ 8073BC8
+	thumb_func_start ScriptCmd_playsewithpan
+ScriptCmd_playsewithpan: @ 8073BC8
 	push {r4,r5,lr}
 	ldr r5, _08073BFC @ =gUnknown_2037ED4
 	ldr r0, [r5]
@@ -2999,7 +2999,7 @@ sub_8073BC8: @ 8073BC8
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r4, 0
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r0, [r5]
 	adds r0, 0x3
 	str r0, [r5]
@@ -3008,10 +3008,10 @@ sub_8073BC8: @ 8073BC8
 	bx r0
 	.align 2, 0
 _08073BFC: .4byte gUnknown_2037ED4
-	thumb_func_end sub_8073BC8
+	thumb_func_end ScriptCmd_playsewithpan
 
-	thumb_func_start sub_8073C00
-sub_8073C00: @ 8073C00
+	thumb_func_start ScriptCmd_setpan
+ScriptCmd_setpan: @ 8073C00
 	push {r4,lr}
 	ldr r4, _08073C28 @ =gUnknown_2037ED4
 	ldr r1, [r4]
@@ -3022,7 +3022,7 @@ sub_8073C00: @ 8073C00
 	bl sub_8073A44
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_80723B0
+	bl SE12PanpotControl
 	ldr r0, [r4]
 	adds r0, 0x1
 	str r0, [r4]
@@ -3031,10 +3031,10 @@ sub_8073C00: @ 8073C00
 	bx r0
 	.align 2, 0
 _08073C28: .4byte gUnknown_2037ED4
-	thumb_func_end sub_8073C00
+	thumb_func_end ScriptCmd_setpan
 
-	thumb_func_start sub_8073C2C
-sub_8073C2C: @ 8073C2C
+	thumb_func_start ScriptCmd_panse_1B
+ScriptCmd_panse_1B: @ 8073C2C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3078,13 +3078,13 @@ sub_8073C2C: @ 8073C2C
 	adds r0, r5, 0
 	mov r1, r8
 	adds r2, r6, 0
-	bl sub_8073B88
+	bl CalculatePanIncrement
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _08073CE0 @ =sub_8073CEC
+	ldr r0, _08073CE0 @ =Task_PanFromInitialToTarget
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08073CE4 @ =gUnknown_3005090
@@ -3102,7 +3102,7 @@ sub_8073C2C: @ 8073C2C
 	strh r5, [r1, 0x10]
 	mov r0, r9
 	adds r1, r5, 0
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r1, _08073CE8 @ =gUnknown_2037EE3
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -3120,13 +3120,13 @@ sub_8073C2C: @ 8073C2C
 	bx r0
 	.align 2, 0
 _08073CDC: .4byte gUnknown_2037ED4
-_08073CE0: .4byte sub_8073CEC
+_08073CE0: .4byte Task_PanFromInitialToTarget
 _08073CE4: .4byte gUnknown_3005090
 _08073CE8: .4byte gUnknown_2037EE3
-	thumb_func_end sub_8073C2C
+	thumb_func_end ScriptCmd_panse_1B
 
-	thumb_func_start sub_8073CEC
-sub_8073CEC: @ 8073CEC
+	thumb_func_start Task_PanFromInitialToTarget
+Task_PanFromInitialToTarget: @ 8073CEC
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3186,7 +3186,7 @@ _08073D54:
 _08073D58:
 	lsrs r4, r2, 16
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _08073D78 @ =gUnknown_2037EE3
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -3194,17 +3194,17 @@ _08073D58:
 _08073D68:
 	lsls r0, r4, 24
 	asrs r0, 24
-	bl sub_80723B0
+	bl SE12PanpotControl
 _08073D70:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08073D78: .4byte gUnknown_2037EE3
-	thumb_func_end sub_8073CEC
+	thumb_func_end Task_PanFromInitialToTarget
 
-	thumb_func_start sub_8073D7C
-sub_8073D7C: @ 8073D7C
+	thumb_func_start ScriptCmd_panse_26
+ScriptCmd_panse_26: @ 8073D7C
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -3228,9 +3228,9 @@ sub_8073D7C: @ 8073D7C
 	ldrb r6, [r1, 0x4]
 	ldrb r1, [r1, 0x5]
 	mov r10, r1
-	ldr r0, _08073E04 @ =sub_8073CEC
+	ldr r0, _08073E04 @ =Task_PanFromInitialToTarget
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08073E08 @ =gUnknown_3005090
@@ -3252,7 +3252,7 @@ sub_8073D7C: @ 8073D7C
 	strh r4, [r1, 0x10]
 	mov r0, r8
 	adds r1, r4, 0
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r1, _08073E0C @ =gUnknown_2037EE3
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -3270,13 +3270,13 @@ sub_8073D7C: @ 8073D7C
 	bx r0
 	.align 2, 0
 _08073E00: .4byte gUnknown_2037ED4
-_08073E04: .4byte sub_8073CEC
+_08073E04: .4byte Task_PanFromInitialToTarget
 _08073E08: .4byte gUnknown_3005090
 _08073E0C: .4byte gUnknown_2037EE3
-	thumb_func_end sub_8073D7C
+	thumb_func_end ScriptCmd_panse_26
 
-	thumb_func_start sub_8073E10
-sub_8073E10: @ 8073E10
+	thumb_func_start ScriptCmd_panse_27
+ScriptCmd_panse_27: @ 8073E10
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3321,9 +3321,9 @@ sub_8073E10: @ 8073E10
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _08073EC4 @ =sub_8073CEC
+	ldr r0, _08073EC4 @ =Task_PanFromInitialToTarget
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08073EC8 @ =gUnknown_3005090
@@ -3344,7 +3344,7 @@ sub_8073E10: @ 8073E10
 	strh r6, [r1, 0x10]
 	mov r0, r9
 	adds r1, r6, 0
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r1, _08073ECC @ =gUnknown_2037EE3
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -3362,13 +3362,13 @@ sub_8073E10: @ 8073E10
 	bx r0
 	.align 2, 0
 _08073EC0: .4byte gUnknown_2037ED4
-_08073EC4: .4byte sub_8073CEC
+_08073EC4: .4byte Task_PanFromInitialToTarget
 _08073EC8: .4byte gUnknown_3005090
 _08073ECC: .4byte gUnknown_2037EE3
-	thumb_func_end sub_8073E10
+	thumb_func_end ScriptCmd_panse_27
 
-	thumb_func_start sub_8073ED0
-sub_8073ED0: @ 8073ED0
+	thumb_func_start ScriptCmd_loopsewithpan
+ScriptCmd_loopsewithpan: @ 8073ED0
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -3391,9 +3391,9 @@ sub_8073ED0: @ 8073ED0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _08073F4C @ =sub_8073F58
+	ldr r0, _08073F4C @ =Task_LoopAndPlaySE
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08073F50 @ =gUnknown_3005090
@@ -3428,13 +3428,13 @@ sub_8073ED0: @ 8073ED0
 	bx r0
 	.align 2, 0
 _08073F48: .4byte gUnknown_2037ED4
-_08073F4C: .4byte sub_8073F58
+_08073F4C: .4byte Task_LoopAndPlaySE
 _08073F50: .4byte gUnknown_3005090
 _08073F54: .4byte gUnknown_2037EE3
-	thumb_func_end sub_8073ED0
+	thumb_func_end ScriptCmd_loopsewithpan
 
-	thumb_func_start sub_8073F58
-sub_8073F58: @ 8073F58
+	thumb_func_start Task_LoopAndPlaySE
+Task_LoopAndPlaySE: @ 8073F58
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3463,11 +3463,11 @@ sub_8073F58: @ 8073F58
 	lsrs r4, 24
 	lsls r1, 24
 	asrs r1, 24
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	cmp r4, 0
 	bne _08073FA6
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _08073FB0 @ =gUnknown_2037EE3
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -3479,10 +3479,10 @@ _08073FA6:
 	.align 2, 0
 _08073FAC: .4byte gUnknown_3005090
 _08073FB0: .4byte gUnknown_2037EE3
-	thumb_func_end sub_8073F58
+	thumb_func_end Task_LoopAndPlaySE
 
-	thumb_func_start sub_8073FB4
-sub_8073FB4: @ 8073FB4
+	thumb_func_start ScriptCmd_waitplaysewithpan
+ScriptCmd_waitplaysewithpan: @ 8073FB4
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3502,9 +3502,9 @@ sub_8073FB4: @ 8073FB4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0807401C @ =sub_8074028
+	ldr r0, _0807401C @ =Task_WaitAndPlaySE
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08074020 @ =gUnknown_3005090
@@ -3532,13 +3532,13 @@ sub_8073FB4: @ 8073FB4
 	bx r0
 	.align 2, 0
 _08074018: .4byte gUnknown_2037ED4
-_0807401C: .4byte sub_8074028
+_0807401C: .4byte Task_WaitAndPlaySE
 _08074020: .4byte gUnknown_3005090
 _08074024: .4byte gUnknown_2037EE3
-	thumb_func_end sub_8073FB4
+	thumb_func_end ScriptCmd_waitplaysewithpan
 
-	thumb_func_start sub_8074028
-sub_8074028: @ 8074028
+	thumb_func_start Task_WaitAndPlaySE
+Task_WaitAndPlaySE: @ 8074028
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3556,9 +3556,9 @@ sub_8074028: @ 8074028
 	ldrh r0, [r2, 0x8]
 	movs r1, 0xA
 	ldrsb r1, [r2, r1]
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _08074068 @ =gUnknown_2037EE3
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -3570,10 +3570,10 @@ _0807405C:
 	.align 2, 0
 _08074064: .4byte gUnknown_3005090
 _08074068: .4byte gUnknown_2037EE3
-	thumb_func_end sub_8074028
+	thumb_func_end Task_WaitAndPlaySE
 
-	thumb_func_start sub_807406C
-sub_807406C: @ 807406C
+	thumb_func_start ScriptCmd_createsoundtask
+ScriptCmd_createsoundtask: @ 807406C
 	push {r4-r6,lr}
 	ldr r4, _080740D4 @ =gUnknown_2037ED4
 	ldr r1, [r4]
@@ -3615,7 +3615,7 @@ _0807409E:
 _080740B6:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r6
@@ -3630,16 +3630,16 @@ _080740B6:
 _080740D4: .4byte gUnknown_2037ED4
 _080740D8: .4byte gUnknown_2037F02
 _080740DC: .4byte gUnknown_2037EE3
-	thumb_func_end sub_807406C
+	thumb_func_end ScriptCmd_createsoundtask
 
-	thumb_func_start sub_80740E0
-sub_80740E0: @ 80740E0
+	thumb_func_start ScriptCmd_waitsound
+ScriptCmd_waitsound: @ 80740E0
 	push {r4,r5,lr}
 	ldr r0, _08074118 @ =gUnknown_2037EE3
 	ldrb r5, [r0]
 	cmp r5, 0
 	bne _08074128
-	bl sub_80723E0
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -3693,10 +3693,10 @@ _08074152:
 _08074158: .4byte gUnknown_2037F12
 _0807415C: .4byte gUnknown_2037ED4
 _08074160: .4byte gUnknown_2037EE0
-	thumb_func_end sub_80740E0
+	thumb_func_end ScriptCmd_waitsound
 
-	thumb_func_start sub_8074164
-sub_8074164: @ 8074164
+	thumb_func_start ScriptCmd_jumpargeq
+ScriptCmd_jumpargeq: @ 8074164
 	push {r4-r6,lr}
 	ldr r5, _080741A4 @ =gUnknown_2037ED4
 	ldr r4, [r5]
@@ -3739,7 +3739,7 @@ _080741B2:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8074164
+	thumb_func_end ScriptCmd_jumpargeq
 
 	thumb_func_start sub_80741B8
 sub_80741B8: @ 80741B8
@@ -3771,7 +3771,7 @@ _080741E4:
 	ldr r0, _08074210 @ =gUnknown_2037F1A
 _080741E6:
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -3782,11 +3782,11 @@ _080741F8:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x2
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _0807420C:
 	pop {r0}
 	bx r0
@@ -3804,11 +3804,11 @@ sub_8074214: @ 8074214
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x2
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3825,11 +3825,11 @@ sub_807423C: @ 807423C
 	str r0, [r1]
 	ldr r7, _08074270 @ =gUnknown_2037F1A
 	ldrb r0, [r7]
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, _08074274 @ =gUnknown_2037F1B
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -3845,7 +3845,7 @@ _08074274: .4byte gUnknown_2037F1B
 _08074278:
 	ldrb r0, [r7]
 _0807427A:
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -3856,11 +3856,11 @@ _0807428A:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x2
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _0807429E:
 	pop {r4-r7}
 	pop {r0}
@@ -3873,7 +3873,7 @@ sub_80742A4: @ 80742A4
 	ldr r4, _080742D8 @ =gUnknown_2037ED4
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -3906,7 +3906,7 @@ sub_80742E0: @ 80742E0
 	ldr r4, _08074318 @ =gUnknown_2037ED4
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -3948,11 +3948,11 @@ sub_8074320: @ 8074320
 	beq _080743C2
 	ldr r6, _08074368 @ =gUnknown_2037F1A
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, _0807436C @ =gUnknown_2037F1B
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -3976,7 +3976,7 @@ _08074370:
 	lsrs r4, r0, 24
 	movs r0, 0x1
 _0807437C:
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -4030,11 +4030,11 @@ sub_80743C8: @ 80743C8
 	beq _0807444C
 	ldr r6, _08074410 @ =gUnknown_2037F1A
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, _08074414 @ =gUnknown_2037F1B
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -4058,7 +4058,7 @@ _08074418:
 	lsrs r4, r0, 24
 	movs r0, 0x1
 _08074424:
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF

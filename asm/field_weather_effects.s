@@ -211,7 +211,7 @@ sub_807B438: @ 807B438
 	cmp r0, 0x1
 	beq _0807B4F4
 	ldr r0, _0807B4B8 @ =gUnknown_83C65D4
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	ldr r0, _0807B4BC @ =gUnknown_83C2D00
 	bl sub_807ABC0
 	movs r5, 0
@@ -220,7 +220,7 @@ _0807B456:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -318,7 +318,7 @@ _0807B51C:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0807B52A
-	bl sub_8007280
+	bl DestroySprite
 _0807B52A:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -327,7 +327,7 @@ _0807B52A:
 	bls _0807B51C
 	movs r0, 0x90
 	lsls r0, 5
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldr r0, _0807B550 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
 	ldr r1, _0807B554 @ =0x000006de
@@ -529,17 +529,17 @@ sub_807B6BC: @ 807B6BC
 	thumb_func_start sub_807B6C0
 sub_807B6C0: @ 807B6C0
 	push {lr}
-	ldr r0, _0807B6D0 @ =sub_807B6D4
+	ldr r0, _0807B6D0 @ =task50_0807B6D4
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B6D0: .4byte sub_807B6D4
+_0807B6D0: .4byte task50_0807B6D4
 	thumb_func_end sub_807B6C0
 
-	thumb_func_start sub_807B6D4
-sub_807B6D4: @ 807B6D4
+	thumb_func_start task50_0807B6D4
+task50_0807B6D4: @ 807B6D4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -572,17 +572,17 @@ _0807B714:
 	strh r0, [r4, 0xA]
 	strh r0, [r4, 0xC]
 	movs r0, 0x48
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0xE]
 	ldr r1, _0807B764 @ =0x00003f3f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0x9E
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -599,7 +599,7 @@ _0807B740:
 _0807B752:
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x54
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
 	cmp r0, 0xF
@@ -630,32 +630,32 @@ _0807B768:
 _0807B78E:
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x54
-	bl sub_8000A38
+	bl SetGpuReg
 	b _0807B7C2
 _0807B798:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xE]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 _0807B7B0:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 	b _0807B7C2
 _0807B7B8:
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _0807B7C2:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807B6D4
+	thumb_func_end task50_0807B6D4
 
 	thumb_func_start sub_807B7C8
 sub_807B7C8: @ 807B7C8
@@ -932,7 +932,7 @@ _0807B964:
 	strh r0, [r7, 0x34]
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	mov r3, r8
 	strh r3, [r7, 0x36]
 	adds r2, r7, 0
@@ -1045,7 +1045,7 @@ _0807BAAE:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0x1
 	strh r0, [r5, 0x36]
 	ldr r1, _0807BAF8 @ =gUnknown_2021BC8
@@ -1211,7 +1211,7 @@ _0807BBFC:
 sub_807BC08: @ 807BC08
 	push {lr}
 	ldr r0, _0807BC14 @ =gUnknown_83C66CC
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1244,7 +1244,7 @@ _0807BC32:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	movs r3, 0x4E
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -1469,7 +1469,7 @@ _0807BDF0:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0807BDFE
-	bl sub_8007280
+	bl DestroySprite
 _0807BDFE:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -1484,7 +1484,7 @@ _0807BE0A:
 	movs r1, 0
 	strb r1, [r0]
 	ldr r0, _0807BE28 @ =0x00001206
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -1550,7 +1550,7 @@ sub_807BE7C: @ 807BE7C
 	mov r8, r2
 	adds r7, r1, r3
 _0807BE98:
-	bl sub_807BEE8
+	bl snowflakes_progress2
 	movs r4, 0
 	mov r1, r8
 	ldr r0, [r1]
@@ -1591,8 +1591,8 @@ _0807BEE0: .4byte 0x000006d2
 _0807BEE4: .4byte 0x000006e4
 	thumb_func_end sub_807BE7C
 
-	thumb_func_start sub_807BEE8
-sub_807BEE8: @ 807BEE8
+	thumb_func_start snowflakes_progress2
+snowflakes_progress2: @ 807BEE8
 	push {r4,r5,lr}
 	ldr r0, _0807BF18 @ =gUnknown_83C2BBC
 	ldr r5, [r0]
@@ -1601,7 +1601,7 @@ sub_807BEE8: @ 807BEE8
 	ldrh r0, [r4]
 	cmp r0, 0
 	bne _0807BF10
-	bl sub_807BF88
+	bl snowflakes_progress
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807BF10
@@ -1620,7 +1620,7 @@ _0807BF10:
 _0807BF18: .4byte gUnknown_83C2BBC
 _0807BF1C: .4byte 0x000006cc
 _0807BF20: .4byte 0x000006d2
-	thumb_func_end sub_807BEE8
+	thumb_func_end snowflakes_progress2
 
 	thumb_func_start sub_807BF24
 sub_807BF24: @ 807BF24
@@ -1650,7 +1650,7 @@ _0807BF44:
 	adds r0, 0x1
 	strh r0, [r3]
 _0807BF56:
-	bl sub_807BF88
+	bl snowflakes_progress
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807BF80
@@ -1675,8 +1675,8 @@ _0807BF82:
 	bx r1
 	thumb_func_end sub_807BF24
 
-	thumb_func_start sub_807BF88
-sub_807BF88: @ 807BF88
+	thumb_func_start snowflakes_progress
+snowflakes_progress: @ 807BF88
 	push {r4,lr}
 	ldr r0, _0807BFA4 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -1711,10 +1711,10 @@ _0807BFB0:
 	ldrb r2, [r2]
 	cmp r0, r2
 	bcs _0807BFD6
-	bl sub_807C004
+	bl snowflake_add
 	b _0807BFDA
 _0807BFD6:
-	bl sub_807C070
+	bl snowflake_remove
 _0807BFDA:
 	ldr r0, _0807BFF8 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
@@ -1736,16 +1736,16 @@ _0807BFF2:
 _0807BFF8: .4byte gUnknown_83C2BBC
 _0807BFFC: .4byte 0x000006e4
 _0807C000: .4byte 0x000006e5
-	thumb_func_end sub_807BF88
+	thumb_func_end snowflakes_progress
 
-	thumb_func_start sub_807C004
-sub_807C004: @ 807C004
+	thumb_func_start snowflake_add
+snowflake_add: @ 807C004
 	push {r4-r6,lr}
 	ldr r0, _0807C058 @ =gUnknown_83C6704
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4E
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1790,10 +1790,10 @@ _0807C06A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807C004
+	thumb_func_end snowflake_add
 
-	thumb_func_start sub_807C070
-sub_807C070: @ 807C070
+	thumb_func_start snowflake_remove
+snowflake_remove: @ 807C070
 	push {lr}
 	ldr r0, _0807C084 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -1815,18 +1815,18 @@ _0807C08C:
 	adds r1, 0x60
 	adds r1, r0
 	ldr r0, [r1]
-	bl sub_8007280
+	bl DestroySprite
 	movs r0, 0x1
 _0807C0A0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807C070
+	thumb_func_end snowflake_remove
 
 	thumb_func_start sub_807C0A4
 sub_807C0A4: @ 807C0A4
 	push {r4-r7,lr}
 	adds r5, r0, 0
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x36
 	ldrsh r2, [r5, r1]
 	lsls r1, r2, 2
@@ -1872,7 +1872,7 @@ sub_807C0A4: @ 807C0A4
 	lsls r0, 7
 	strh r0, [r5, 0x2E]
 	strh r7, [r5, 0x24]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r6, r0, 0
@@ -1886,7 +1886,7 @@ sub_807C0A4: @ 807C0A4
 	movs r1, 0x1
 	bics r1, r6
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	strh r7, [r5, 0x34]
 	movs r0, 0x1
 	cmp r4, 0
@@ -2389,7 +2389,7 @@ _0807C520:
 	adds r1, r4, r2
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r5, 0xB4
@@ -2435,7 +2435,7 @@ _0807C580:
 	adds r0, r4, r1
 	movs r5, 0x1
 	strb r5, [r0]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ands r0, r5
@@ -2448,7 +2448,7 @@ _0807C5A0: .4byte gUnknown_83C2BBC
 _0807C5A4: .4byte 0x000006ea
 _0807C5A8: .4byte 0x000006eb
 _0807C5AC:
-	bl sub_8044EC8
+	bl Random
 	ldr r1, _0807C614 @ =gUnknown_83C2BBC
 	ldr r2, [r1]
 	movs r1, 0x1
@@ -2480,7 +2480,7 @@ _0807C5CA:
 	movs r0, 0x14
 	bl sub_807C85C
 _0807C5EE:
-	bl sub_8044EC8
+	bl Random
 	ldr r1, _0807C614 @ =gUnknown_83C2BBC
 	ldr r4, [r1]
 	lsls r0, 16
@@ -2531,7 +2531,7 @@ _0807C63E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807C688
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF
@@ -2587,7 +2587,7 @@ _0807C6C8: .4byte gUnknown_83C2BBC
 _0807C6CC: .4byte 0x000006e6
 _0807C6D0: .4byte 0x000006cc
 _0807C6D4:
-	bl sub_8044EC8
+	bl Random
 	ldr r1, _0807C6F8 @ =gUnknown_83C2BBC
 	ldr r2, [r1]
 	lsls r0, 16
@@ -2623,7 +2623,7 @@ _0807C704:
 	bl sub_807C85C
 	movs r0, 0x13
 	bl sub_807A790
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0xF
 	ands r1, r0
 	adds r1, 0x1E
@@ -2790,7 +2790,7 @@ sub_807C85C: @ 807C85C
 	ldrb r0, [r5]
 	cmp r0, 0
 	bne _0807C88A
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -2826,11 +2826,11 @@ sub_807C898: @ 807C898
 	ldrh r0, [r1]
 	cmp r0, 0
 	bne _0807C8F4
-	bl sub_80723E0
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807C8F8
-	bl sub_8044EC8
+	bl Random
 	ands r4, r0
 	cmp r4, 0
 	beq _0807C8D8
@@ -3179,14 +3179,14 @@ sub_807CB4C: @ 807CB4C
 	str r0, [sp]
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	movs r5, 0
 _0807CB70:
 	ldr r0, _0807CBCC @ =gUnknown_83C6790
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3272,7 +3272,7 @@ _0807CC1E:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0807CC2C
-	bl sub_8007280
+	bl DestroySprite
 _0807CC2C:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -3280,7 +3280,7 @@ _0807CC2C:
 	cmp r4, 0x13
 	bls _0807CC1E
 	ldr r0, _0807CC58 @ =0x00001201
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldr r0, _0807CC50 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
 	ldr r1, _0807CC54 @ =0x000006fb
@@ -3332,7 +3332,7 @@ sub_807CC5C: @ 807CC5C
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 _0807CCA4:
 	pop {r0}
 	bx r0
@@ -3499,7 +3499,7 @@ _0807CDD8:
 _0807CDE0:
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
@@ -3518,7 +3518,7 @@ _0807CDF4:
 sub_807CDFC: @ 807CDFC
 	push {lr}
 	ldr r0, _0807CE08 @ =gUnknown_83C67B0
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3542,7 +3542,7 @@ _0807CE20:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4E
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3630,7 +3630,7 @@ _0807CECC:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0807CEDA
-	bl sub_8007280
+	bl DestroySprite
 _0807CEDA:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -3638,7 +3638,7 @@ _0807CEDA:
 	cmp r4, 0x13
 	bls _0807CECC
 	ldr r0, _0807CF04 @ =0x00001202
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldr r0, _0807CF00 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
 	movs r1, 0xE0
@@ -4007,7 +4007,7 @@ sub_807D190: @ 807D190
 	str r0, [sp]
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	movs r6, 0
 _0807D1B4:
 	adds r0, r6, 0
@@ -4019,7 +4019,7 @@ _0807D1B4:
 	ldr r0, _0807D208 @ =gUnknown_83C6804
 	movs r1, 0
 	movs r3, 0xFF
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -4100,7 +4100,7 @@ _0807D260:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0807D26E
-	bl sub_8007280
+	bl DestroySprite
 _0807D26E:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -4108,7 +4108,7 @@ _0807D26E:
 	cmp r4, 0x13
 	bls _0807D260
 	ldr r0, _0807D298 @ =0x00001203
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldr r0, _0807D290 @ =gUnknown_83C2BBC
 	ldr r0, [r0]
 	ldr r1, _0807D294 @ =0x00000724
@@ -4492,7 +4492,7 @@ _0807D55C:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0807D56A
-	bl sub_8007280
+	bl DestroySprite
 _0807D56A:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -4506,7 +4506,7 @@ _0807D56A:
 	movs r1, 0
 	strb r1, [r0]
 	ldr r0, _0807D5D0 @ =0x00001204
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 _0807D586:
 	ldr r0, _0807D5C8 @ =gUnknown_83C2BBC
 	ldr r1, [r0]
@@ -4525,7 +4525,7 @@ _0807D59C:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0807D5AA
-	bl sub_8007280
+	bl DestroySprite
 _0807D5AA:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -4561,7 +4561,7 @@ sub_807D5D8: @ 807D5D8
 	cmp r0, 0
 	bne _0807D686
 	ldr r0, _0807D650 @ =gUnknown_83C6854
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	ldr r0, _0807D654 @ =gUnknown_83C2D20
 	bl sub_807ABC0
 	movs r7, 0
@@ -4575,7 +4575,7 @@ _0807D5F8:
 	ldr r0, _0807D658 @ =gUnknown_83C683C
 	movs r1, 0
 	movs r3, 0x1
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -4670,7 +4670,7 @@ _0807D6B8:
 	ldr r0, _0807D748 @ =gUnknown_83C683C
 	movs r2, 0xD0
 	movs r3, 0x1
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -4713,12 +4713,12 @@ _0807D6B8:
 	strh r0, [r1, 0x34]
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, [r4]
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 	ldr r1, [r4]
 	ldr r0, _0807D758 @ =sub_807D7F8
 	str r0, [r1, 0x1C]
@@ -4955,7 +4955,7 @@ sub_807D8D4: @ 807D8D4
 	cmp r5, 0
 	bne _0807D90C
 	ldr r0, _0807D91C @ =gUnknown_83C6870
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	movs r2, 0xE5
 	lsls r2, 3
 	adds r0, r4, r2
@@ -5102,7 +5102,7 @@ sub_807D9E8: @ 807D9E8
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -5166,7 +5166,7 @@ _0807DA76:
 	cmp r1, r0
 	bne _0807DA90
 	adds r0, r2, r5
-	bl sub_8007280
+	bl DestroySprite
 _0807DA90:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -5174,7 +5174,7 @@ _0807DA90:
 	cmp r4, 0x3F
 	bls _0807DA76
 	ldr r0, _0807DAB0 @ =0x00001205
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -5231,7 +5231,7 @@ _0807DAF4:
 	cmp r0, 0x77
 	ble _0807DB0E
 	adds r0, r1, 0
-	bl sub_8007280
+	bl DestroySprite
 _0807DB0E:
 	pop {r0}
 	bx r0

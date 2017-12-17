@@ -487,8 +487,8 @@ _080D8F40: .4byte gUnknown_20375F8
 _080D8F44: .4byte gUnknown_20371F8
 	thumb_func_end sub_80D8EB8
 
-	thumb_func_start sub_80D8F48
-sub_80D8F48: @ 80D8F48
+	thumb_func_start task_tutorial_controls_fadein
+task_tutorial_controls_fadein: @ 80D8F48
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r5, 0
@@ -545,7 +545,7 @@ _080D8FAC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D8F48
+	thumb_func_end task_tutorial_controls_fadein
 
 	thumb_func_start sub_80D8FB4
 sub_80D8FB4: @ 80D8FB4
@@ -1179,7 +1179,7 @@ _080D9424:
 	lsls r2, 28
 	lsrs r2, 28
 	ldrh r3, [r4, 0x4]
-	bl sub_8045274
+	bl BlendPalette
 	ldrb r5, [r4, 0xB]
 	lsls r0, r5, 26
 	asrs r0, 30

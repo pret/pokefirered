@@ -8,9 +8,9 @@
 	thumb_func_start sub_80F1DAC
 sub_80F1DAC: @ 80F1DAC
 	push {lr}
-	bl sub_8007320
-	bl sub_8007610
-	bl sub_8070474
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F1DAC
@@ -18,11 +18,11 @@ sub_80F1DAC: @ 80F1DAC
 	thumb_func_start sub_80F1DC0
 sub_80F1DC0: @ 80F1DC0
 	push {lr}
-	bl sub_8077578
+	bl RunTasks
 	bl sub_8002DE8
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F1DC0
@@ -60,11 +60,11 @@ _080F1E18:
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0
-	bl sub_80006F4
-	bl sub_80F3610
+	bl SetVBlankCallback
+	bl ClearVramOamPltt_LoadHofPal
 	ldr r4, _080F1E44 @ =gUnknown_203AB3C
 	ldr r0, _080F1E48 @ =0x00002008
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r0, _080F1E4C @ =gUnknown_30030F0
 	movs r1, 0x87
@@ -84,14 +84,14 @@ _080F1E50:
 _080F1E56:
 	ldr r1, _080F1E80 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xE2
 	lsls r1, 3
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_80F36F8
 	ldr r0, _080F1E84 @ =gUnknown_203AB3C
 	ldr r1, [r0]
@@ -108,14 +108,14 @@ _080F1E88:
 	cmp r4, 0
 	bne _080F1EF0
 	ldr r0, _080F1EBC @ =sub_80F1DAC
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0x1
 	negs r0, r0
 	str r4, [sp]
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _080F1EAA:
 	ldr r1, _080F1EC0 @ =gUnknown_30030F0
 	movs r0, 0x87
@@ -129,7 +129,7 @@ _080F1EAA:
 _080F1EBC: .4byte sub_80F1DAC
 _080F1EC0: .4byte gUnknown_30030F0
 _080F1EC4:
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	ldr r0, _080F1EE8 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
@@ -137,10 +137,10 @@ _080F1EC4:
 	cmp r0, 0
 	bne _080F1EF0
 	ldr r0, _080F1EEC @ =sub_80F1DC0
-	bl sub_8000544
+	bl SetMainCallback2
 	movs r0, 0x8F
 	lsls r0, 1
-	bl sub_80722A0
+	bl PlayBGM
 	movs r0, 0
 	b _080F1EF2
 	.align 2, 0
@@ -165,7 +165,7 @@ sub_80F1EFC: @ 80F1EFC
 	bne _080F1F2C
 	ldr r0, _080F1F34 @ =sub_80F1F74
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080F1F38 @ =gUnknown_3005090
@@ -176,7 +176,7 @@ sub_80F1EFC: @ 80F1EFC
 	strh r4, [r1, 0x8]
 	ldr r4, _080F1F3C @ =gUnknown_203AB38
 	movs r0, 0x78
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 _080F1F2C:
 	pop {r4}
@@ -197,7 +197,7 @@ sub_80F1F40: @ 80F1F40
 	bne _080F1F66
 	ldr r0, _080F1F6C @ =sub_80F1F74
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080F1F70 @ =gUnknown_3005090
@@ -243,13 +243,13 @@ _080F1F98:
 	adds r6, r1, r0
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _080F2064
 	adds r0, r6, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	ldr r3, [r1]
 	lsls r4, r7, 2
@@ -267,14 +267,14 @@ _080F1F98:
 	strh r1, [r3, 0x8]
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r9
 	ldr r1, [r2]
 	adds r1, r4
 	str r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r5, r9
 	ldr r1, [r5]
 	adds r1, 0x4
@@ -282,7 +282,7 @@ _080F1F98:
 	str r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, [r5]
 	adds r2, r4
 	lsls r0, 1
@@ -294,7 +294,7 @@ _080F1F98:
 	adds r0, r6, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	movs r2, 0
 	mov r6, r8
 	lsls r5, r6, 2
@@ -558,7 +558,7 @@ sub_80F2220: @ 80F2220
 	ldr r0, _080F2258 @ =sub_80F1F40
 	str r0, [r1]
 	movs r0, 0x3
-	bl sub_80DA364
+	bl TrySavingData
 	movs r0, 0x30
 	bl sub_80722CC
 	ldr r1, _080F225C @ =gUnknown_3005090
@@ -786,7 +786,7 @@ sub_80F23A0: @ 80F23A0
 	lsls r0, r2, 23
 	lsrs r0, 23
 	movs r1, 0
-	bl sub_8071DF0
+	bl PlayCry1
 _080F23F6:
 	adds r0, r6, 0
 	movs r1, 0
@@ -794,7 +794,7 @@ _080F23F6:
 	bl sub_80F3194
 	movs r0, 0x78
 	strh r0, [r5, 0xE]
-	ldr r0, _080F2420 @ =sub_80F2424
+	ldr r0, _080F2420 @ =Task_Hof_TryDisplayAnotherMon
 	str r0, [r5]
 _080F2408:
 	pop {r4-r6}
@@ -805,11 +805,11 @@ _080F2410: .4byte gUnknown_3005090
 _080F2414: .4byte gUnknown_203AB38
 _080F2418: .4byte gUnknown_202063C
 _080F241C: .4byte 0x000001ff
-_080F2420: .4byte sub_80F2424
+_080F2420: .4byte Task_Hof_TryDisplayAnotherMon
 	thumb_func_end sub_80F23A0
 
-	thumb_func_start sub_80F2424
-sub_80F2424: @ 80F2424
+	thumb_func_start Task_Hof_TryDisplayAnotherMon
+Task_Hof_TryDisplayAnotherMon: @ 80F2424
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -885,7 +885,7 @@ _080F2468:
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0xC
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	movs r0, 0
 	ldrsh r1, [r6, r0]
 	lsls r0, r1, 4
@@ -913,7 +913,7 @@ _080F24F4:
 	adds r0, r5
 	lsls r0, 3
 	add r0, r12
-	ldr r1, _080F2510 @ =sub_80F2514
+	ldr r1, _080F2510 @ =Task_Hof_PaletteFadeAndPrintWelcomeText
 	str r1, [r0]
 _080F2500:
 	add sp, 0x4
@@ -924,11 +924,11 @@ _080F2500:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2510: .4byte sub_80F2514
-	thumb_func_end sub_80F2424
+_080F2510: .4byte Task_Hof_PaletteFadeAndPrintWelcomeText
+	thumb_func_end Task_Hof_TryDisplayAnotherMon
 
-	thumb_func_start sub_80F2514
-sub_80F2514: @ 80F2514
+	thumb_func_start Task_Hof_PaletteFadeAndPrintWelcomeText
+Task_Hof_PaletteFadeAndPrintWelcomeText: @ 80F2514
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -940,7 +940,7 @@ sub_80F2514: @ 80F2514
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	movs r3, 0
 	lsls r1, r4, 2
 	adds r0, r1, r4
@@ -1002,7 +1002,7 @@ _080F25A0: .4byte gUnknown_3005098
 _080F25A4: .4byte gUnknown_202063C
 _080F25A8: .4byte gUnknown_3005090
 _080F25AC: .4byte sub_80F25B0
-	thumb_func_end sub_80F2514
+	thumb_func_end Task_Hof_PaletteFadeAndPrintWelcomeText
 
 	thumb_func_start sub_80F25B0
 sub_80F25B0: @ 80F25B0
@@ -1083,10 +1083,10 @@ _080F2630:
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0xC
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	movs r0, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0
 	movs r1, 0x3
 	bl sub_8003F20
@@ -1145,7 +1145,7 @@ _080F26BC:
 	lsls r1, 24
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 _080F26CE:
 	pop {r0}
 	bx r0
@@ -1161,13 +1161,13 @@ sub_80F26D4: @ 80F26D4
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x3
-	bl sub_80019BC
+	bl ShowBg
 	ldr r0, _080F2748 @ =gUnknown_300500C
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -1197,7 +1197,7 @@ sub_80F26D4: @ 80F26D4
 	bl sub_814FF2C
 	movs r0, 0x78
 	strh r0, [r4, 0xE]
-	ldr r0, _080F275C @ =sub_80F2760
+	ldr r0, _080F275C @ =Task_Hof_WaitAndPrintPlayerInfo
 	str r0, [r4]
 	add sp, 0x8
 	pop {r4,r5}
@@ -1209,11 +1209,11 @@ _080F274C: .4byte 0x0000ffff
 _080F2750: .4byte gUnknown_3005090
 _080F2754: .4byte gUnknown_840C234
 _080F2758: .4byte 0x0000021d
-_080F275C: .4byte sub_80F2760
+_080F275C: .4byte Task_Hof_WaitAndPrintPlayerInfo
 	thumb_func_end sub_80F26D4
 
-	thumb_func_start sub_80F2760
-sub_80F2760: @ 80F2760
+	thumb_func_start Task_Hof_WaitAndPrintPlayerInfo
+Task_Hof_WaitAndPrintPlayerInfo: @ 80F2760
 	push {r4,r5,lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -1259,7 +1259,7 @@ _080F27AC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0x1
 	movs r1, 0x2
 	bl sub_80F33DC
@@ -1281,7 +1281,7 @@ _080F27AC:
 	movs r0, 0
 	movs r1, 0x3
 	bl sub_8003F20
-	ldr r0, _080F2800 @ =sub_80F2804
+	ldr r0, _080F2800 @ =Task_Hof_ExitOnKeyPressed
 	str r0, [r4]
 _080F27F4:
 	add sp, 0x10
@@ -1290,11 +1290,11 @@ _080F27F4:
 	bx r0
 	.align 2, 0
 _080F27FC: .4byte gUnknown_84160C8
-_080F2800: .4byte sub_80F2804
-	thumb_func_end sub_80F2760
+_080F2800: .4byte Task_Hof_ExitOnKeyPressed
+	thumb_func_end Task_Hof_WaitAndPrintPlayerInfo
 
-	thumb_func_start sub_80F2804
-sub_80F2804: @ 80F2804
+	thumb_func_start Task_Hof_ExitOnKeyPressed
+Task_Hof_ExitOnKeyPressed: @ 80F2804
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1305,13 +1305,13 @@ sub_80F2804: @ 80F2804
 	cmp r0, 0
 	beq _080F282A
 	movs r0, 0x4
-	bl sub_8071DBC
+	bl FadeOutBGM
 	ldr r0, _080F2834 @ =gUnknown_3005090
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _080F2838 @ =sub_80F283C
+	ldr r0, _080F2838 @ =Task_Hof_HandlePaletteOnExit
 	str r0, [r1]
 _080F282A:
 	pop {r4}
@@ -1320,11 +1320,11 @@ _080F282A:
 	.align 2, 0
 _080F2830: .4byte gUnknown_30030F0
 _080F2834: .4byte gUnknown_3005090
-_080F2838: .4byte sub_80F283C
-	thumb_func_end sub_80F2804
+_080F2838: .4byte Task_Hof_HandlePaletteOnExit
+	thumb_func_end Task_Hof_ExitOnKeyPressed
 
-	thumb_func_start sub_80F283C
-sub_80F283C: @ 80F283C
+	thumb_func_start Task_Hof_HandlePaletteOnExit
+Task_Hof_HandlePaletteOnExit: @ 80F283C
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1342,13 +1342,13 @@ sub_80F283C: @ 80F283C
 	movs r1, 0x8
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, _080F2884 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _080F2888 @ =sub_80F288C
+	ldr r1, _080F2888 @ =Task_Hof_HandleExit
 	str r1, [r0]
 	add sp, 0x4
 	pop {r4}
@@ -1358,11 +1358,11 @@ sub_80F283C: @ 80F283C
 _080F287C: .4byte gUnknown_20375F8
 _080F2880: .4byte gUnknown_20371F8
 _080F2884: .4byte gUnknown_3005090
-_080F2888: .4byte sub_80F288C
-	thumb_func_end sub_80F283C
+_080F2888: .4byte Task_Hof_HandleExit
+	thumb_func_end Task_Hof_HandlePaletteOnExit
 
-	thumb_func_start sub_80F288C
-sub_80F288C: @ 80F288C
+	thumb_func_start Task_Hof_HandleExit
+Task_Hof_HandleExit: @ 80F288C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -1396,25 +1396,25 @@ _080F28B6:
 	ldrh r0, [r1, 0x10]
 	bl sub_810C2E8
 	movs r0, 0
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0x1
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0x3
-	bl sub_80019D0
+	bl HideBg
 	bl sub_8003ECC
 	movs r0, 0x1
-	bl sub_8001FD4
+	bl UnsetBgTilemapBuffer
 	movs r0, 0x3
-	bl sub_8001FD4
+	bl UnsetBgTilemapBuffer
 	movs r0, 0
 	bl sub_8001618
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r4, _080F292C @ =gUnknown_203AB3C
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _080F290A
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _080F290A:
@@ -1422,7 +1422,7 @@ _080F290A:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _080F291A
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _080F291A:
@@ -1436,7 +1436,7 @@ _080F2924: .4byte gUnknown_2037AB8
 _080F2928: .4byte gUnknown_3005090
 _080F292C: .4byte gUnknown_203AB3C
 _080F2930: .4byte gUnknown_203AB38
-	thumb_func_end sub_80F288C
+	thumb_func_end Task_Hof_HandleExit
 
 	thumb_func_start sub_80F2934
 sub_80F2934: @ 80F2934
@@ -1458,7 +1458,7 @@ sub_80F2934: @ 80F2934
 	movs r0, 0x3
 	movs r1, 0x9
 	movs r3, 0xB
-	bl sub_805538C
+	bl Overworld_SetWarpDestination
 	bl sub_807E438
 	bl sub_80559E4
 	add sp, 0x4
@@ -1497,11 +1497,11 @@ _080F299C:
 	.4byte _080F2A58
 _080F29B4:
 	movs r0, 0
-	bl sub_80006F4
-	bl sub_80F3610
+	bl SetVBlankCallback
+	bl ClearVramOamPltt_LoadHofPal
 	ldr r4, _080F29D8 @ =gUnknown_203AB3C
 	ldr r0, _080F29DC @ =0x00002008
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r0, _080F29E0 @ =gUnknown_30030F0
 	movs r1, 0x87
@@ -1520,13 +1520,13 @@ _080F29E4:
 _080F29EA:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_80F36F8
 	b _080F2A42
 _080F2A08:
@@ -1539,15 +1539,15 @@ _080F2A08:
 	movs r2, 0
 	bl sub_80A0A48
 	ldr r0, _080F2A24 @ =sub_80F1DAC
-	bl sub_80006F4
+	bl SetVBlankCallback
 	b _080F2A42
 	.align 2, 0
 _080F2A24: .4byte sub_80F1DAC
 _080F2A28:
-	bl sub_8077578
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl RunTasks
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 	bl sub_80A0A98
 	lsls r0, 24
 	cmp r0, 0
@@ -1566,24 +1566,24 @@ _080F2A54: .4byte gUnknown_30030F0
 _080F2A58:
 	ldr r1, _080F2A94 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xE2
 	lsls r1, 3
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080F2A98 @ =sub_80F2AA4
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r4, _080F2A9C @ =gUnknown_203AB38
 	movs r0, 0x80
 	lsls r0, 6
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r0, _080F2AA0 @ =sub_80F1DC0
-	bl sub_8000544
+	bl SetMainCallback2
 _080F2A8C:
 	pop {r4}
 	pop {r0}
@@ -1868,7 +1868,7 @@ _080F2CB4:
 	ldr r0, _080F2D08 @ =0xffff0000
 	ldr r2, _080F2D0C @ =0x00007716
 	movs r1, 0xC
-	bl sub_80714D4
+	bl BlendPalettes
 	ldr r0, _080F2D10 @ =gUnknown_2021CD0
 	ldr r1, _080F2D14 @ =gUnknown_3005090
 	ldr r4, [sp, 0x14]
@@ -2034,7 +2034,7 @@ _080F2DD0:
 	str r0, [r2]
 	ldr r2, _080F2E80 @ =0x00007716
 	movs r1, 0xC
-	bl sub_8071510
+	bl BlendPalettesUnfaded
 	movs r0, 0xC
 	ldrsh r1, [r6, r0]
 	lsls r0, r1, 2
@@ -2048,12 +2048,12 @@ _080F2DD0:
 	lsls r1, 1
 	cmp r0, r1
 	beq _080F2E4A
-	bl sub_80721C4
+	bl StopCryAndClearCrySongs
 	ldrh r0, [r4, 0x8]
 	lsls r0, 23
 	lsrs r0, 23
 	movs r1, 0
-	bl sub_8071DF0
+	bl PlayCry1
 _080F2E4A:
 	adds r0, r4, 0
 	movs r1, 0
@@ -2146,11 +2146,11 @@ _080F2F00: .4byte gUnknown_30030F0
 _080F2F04: .4byte gUnknown_3005090
 _080F2F08: .4byte sub_80F2B6C
 _080F2F0C:
-	bl sub_80721F0
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F2F26
-	bl sub_80721C4
+	bl StopCryAndClearCrySongs
 	ldr r0, _080F2F2C @ =gMPlay_BGM
 	ldr r1, _080F2F30 @ =0x0000ffff
 	movs r2, 0x80
@@ -2169,11 +2169,11 @@ _080F2F38:
 	ands r0, r2
 	cmp r0, 0
 	beq _080F2F7C
-	bl sub_80721F0
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F2F5A
-	bl sub_80721C4
+	bl StopCryAndClearCrySongs
 	ldr r0, _080F2F6C @ =gMPlay_BGM
 	ldr r1, _080F2F70 @ =0x0000ffff
 	movs r2, 0x80
@@ -2293,33 +2293,33 @@ sub_80F3030: @ 80F3030
 	cmp r4, 0
 	bne _080F3094
 	movs r0, 0
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0x1
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0x3
-	bl sub_80019D0
+	bl HideBg
 	bl sub_810F740
 	bl sub_8003ECC
 	movs r0, 0x1
-	bl sub_8001FD4
+	bl UnsetBgTilemapBuffer
 	movs r0, 0x3
-	bl sub_8001FD4
+	bl UnsetBgTilemapBuffer
 	movs r0, 0
 	bl sub_8001618
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r5, _080F309C @ =gUnknown_203AB3C
 	ldr r0, [r5]
 	cmp r0, 0
 	beq _080F3082
-	bl sub_8002BC4
+	bl Free
 	str r4, [r5]
 _080F3082:
 	ldr r5, _080F30A0 @ =gUnknown_203AB38
 	ldr r0, [r5]
 	cmp r0, 0
 	beq _080F3090
-	bl sub_8002BC4
+	bl Free
 	str r4, [r5]
 _080F3090:
 	bl sub_80CA5A0
@@ -2425,9 +2425,9 @@ sub_80F313C: @ 80F313C
 	lsrs r4, 24
 	movs r0, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldr r0, _080F3190 @ =gUnknown_840C23C
 	str r0, [sp]
 	movs r0, 0
@@ -2458,9 +2458,9 @@ sub_80F3194: @ 80F3194
 	adds r7, r0, 0
 	movs r0, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrh r0, [r7, 0x8]
 	ldr r1, _080F3214 @ =0x000001ff
 	ands r1, r0
@@ -2471,7 +2471,7 @@ sub_80F3194: @ 80F3194
 	add r4, sp, 0x1C
 	ldr r1, _080F3218 @ =gUnknown_84160EC
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldrh r0, [r7, 0x8]
 	lsls r0, 23
 	lsrs r0, 23
@@ -2524,7 +2524,7 @@ _080F322E:
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
 	mov r0, r8
-	bl sub_8008DA4
+	bl StringAppend
 	ldr r0, _080F32B8 @ =gUnknown_840C23C
 	str r0, [sp]
 	movs r0, 0
@@ -2626,7 +2626,7 @@ _080F32C4:
 	muls r1, r2
 	ldr r2, _080F3324 @ =gUnknown_8245EE0
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	adds r6, r0, 0
 	ldrh r1, [r7, 0x8]
 	adds r0, r4, 0
@@ -2646,7 +2646,7 @@ _080F3328:
 	lsls r0, r1, 23
 	lsrs r0, 23
 	ldr r1, [r7, 0x4]
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2679,7 +2679,7 @@ _080F3348:
 	bl sub_812E51C
 	ldr r1, _080F33D4 @ =gUnknown_84160F4
 	add r0, sp, 0xC
-	bl sub_8008D84
+	bl StringCopy
 	adds r6, r0, 0
 	ldrb r1, [r7, 0x9]
 	lsrs r1, 1
@@ -2697,7 +2697,7 @@ _080F3348:
 	bl sub_812E51C
 	ldr r1, _080F33D8 @ =gUnknown_8416104
 	add r0, sp, 0xC
-	bl sub_8008D84
+	bl StringCopy
 	adds r6, r0, 0
 	ldrh r1, [r7]
 	movs r2, 0x2
@@ -2743,14 +2743,14 @@ sub_80F33DC: @ 80F33DC
 	str r0, [sp, 0x28]
 	movs r0, 0x1
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0x1
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldr r2, _080F35F0 @ =0x0000021d
 	movs r0, 0x1
 	movs r1, 0
 	movs r3, 0xD
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	movs r7, 0
 	str r7, [sp]
 	str r7, [sp, 0x4]
@@ -2981,8 +2981,8 @@ _080F3608: .4byte 0x00002710
 _080F360C: .4byte gUnknown_8415CE8
 	thumb_func_end sub_80F33DC
 
-	thumb_func_start sub_80F3610
-sub_80F3610: @ 80F3610
+	thumb_func_start ClearVramOamPltt_LoadHofPal
+ClearVramOamPltt_LoadHofPal: @ 80F3610
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3050,11 +3050,11 @@ _080F3636:
 	orrs r3, r0
 	str r3, [r2, 0x8]
 	ldr r0, [r2, 0x8]
-	bl sub_8070528
+	bl ResetPaletteFade
 	ldr r0, _080F36B8 @ =gUnknown_840C39C
 	movs r1, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -3065,24 +3065,24 @@ _080F3636:
 _080F36B0: .4byte 0x040000d4
 _080F36B4: .4byte 0x81000800
 _080F36B8: .4byte gUnknown_840C39C
-	thumb_func_end sub_80F3610
+	thumb_func_end ClearVramOamPltt_LoadHofPal
 
 	thumb_func_start sub_80F36BC
 sub_80F36BC: @ 80F36BC
 	push {lr}
-	bl sub_8087E64
-	bl sub_80773BC
-	bl sub_8006B10
-	bl sub_80F6808
-	bl sub_810BB8C
-	bl sub_80088F0
+	bl remove_some_task
+	bl ResetTasks
+	bl ResetSpriteData
+	bl reset_temp_tile_data_buffers
+	bl dp13_810BB8C
+	bl FreeAllSpritePalettes
 	ldr r1, _080F36EC @ =gUnknown_3003E58
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, _080F36F0 @ =gUnknown_840C248
-	bl sub_800EBCC
+	bl LoadCompressedObjectPic
 	ldr r0, _080F36F4 @ =gUnknown_840C258
-	bl sub_800EC28
+	bl LoadCompressedObjectPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3104,36 +3104,36 @@ sub_80F36F8: @ 80F36F8
 	ldr r1, [r4]
 	adds r1, 0x6
 	movs r0, 0x1
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	ldr r1, [r4]
 	ldr r0, _080F376C @ =0x00001006
 	adds r1, r0
 	movs r0, 0x3
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3174,12 +3174,12 @@ _080F37A4:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F6878
+	bl decompress_and_copy_tile_data_to_vram
 	b _080F3854
 	.align 2, 0
 _080F37B8: .4byte gUnknown_840C3BC
 _080F37BC:
-	bl sub_80F682C
+	bl free_temp_tile_data_buffers_if_possible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F3854
@@ -3193,7 +3193,7 @@ _080F37C8:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	movs r0, 0xB
 	str r0, [sp, 0x4]
@@ -3201,7 +3201,7 @@ _080F37C8:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	movs r0, 0x6
 	str r0, [sp, 0x4]
@@ -3209,18 +3209,18 @@ _080F37C8:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0xE
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	movs r0, 0x3
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _080F3854
 _080F381E:
 	bl sub_80F6C6C
@@ -3230,13 +3230,13 @@ _080F3828:
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x3
-	bl sub_80019BC
+	bl ShowBg
 	ldr r0, _080F3850 @ =gUnknown_203AB3C
 	ldr r1, [r0]
 	movs r0, 0
@@ -3337,7 +3337,7 @@ sub_80F38D8: @ 80F38D8
 	cmp r0, 0x78
 	ble _080F38EE
 	adds r0, r5, 0
-	bl sub_8007280
+	bl DestroySprite
 	b _080F3926
 _080F38EE:
 	adds r0, r1, 0x1
@@ -3347,7 +3347,7 @@ _080F38EE:
 	ldrh r4, [r5, 0x2E]
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -3379,7 +3379,7 @@ _080F392C: .4byte gUnknown_825E074
 	thumb_func_start sub_80F3930
 sub_80F3930: @ 80F3930
 	push {r4,lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF0
@@ -3387,7 +3387,7 @@ sub_80F3930: @ 80F3930
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl sub_8044EC8
+	bl Random
 	adds r2, r0, 0
 	lsls r2, 16
 	lsrs r2, 16
@@ -3401,7 +3401,7 @@ sub_80F3930: @ 80F3930
 	asrs r2, 16
 	adds r1, r4, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -3409,7 +3409,7 @@ sub_80F3930: @ 80F3930
 	lsls r1, 2
 	ldr r0, _080F39A4 @ =gUnknown_202063C
 	adds r4, r1, r0
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x11
@@ -3418,8 +3418,8 @@ sub_80F3930: @ 80F3930
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
-	bl sub_8044EC8
+	bl StartSpriteAnim
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0

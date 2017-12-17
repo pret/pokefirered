@@ -372,7 +372,7 @@ sub_81438A0: @ 81438A0
 	push {r4,lr}
 	ldr r0, _081438E0 @ =sub_8143910
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
@@ -394,7 +394,7 @@ sub_81438A0: @ 81438A0
 	strh r0, [r4, 0x6]
 	strb r1, [r4, 0xE]
 	movs r0, 0x40
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x10]
 	pop {r4}
 	pop {r0}
@@ -489,7 +489,7 @@ _081439A8:
 	adds r0, r4, 0
 	adds r0, 0x9
 	ldr r1, _081439C0 @ =gUnknown_841DE52
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	bne _081439B8
 	b _08143D1A
@@ -529,7 +529,7 @@ _081439F8:
 	adds r0, r4, 0
 	adds r0, 0x9
 	ldr r1, _08143A1C @ =gUnknown_841DE53
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	bne _08143A08
 	b _08143D1A
@@ -626,7 +626,7 @@ _08143AD8:
 	adds r0, r4, 0
 	adds r0, 0x9
 	ldr r1, _08143AF0 @ =gUnknown_841DE7C
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	bne _08143AE8
 	b _08143D1A
@@ -764,13 +764,13 @@ _08143C00:
 	bl sub_80098B8
 	b _08143C4C
 _08143C06:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08143C12
 	b _08143D1A
 _08143C12:
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	movs r0, 0xF
 	strb r0, [r4, 0x8]
 	b _08143D1A
@@ -831,14 +831,14 @@ _08143C7E:
 	bl sub_8142504
 	movs r0, 0x81
 	lsls r0, 1
-	bl sub_8071C60
+	bl PlayFanfare
 	movs r0, 0x13
 	strb r0, [r4, 0x8]
 	b _08143D1A
 	.align 2, 0
 _08143CA0: .4byte gUnknown_841DE9A
 _08143CA4:
-	bl sub_8071C9C
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08143D1A
@@ -853,7 +853,7 @@ _08143CBC:
 	adds r0, r4, 0
 	adds r0, 0x9
 	ldr r1, _08143CD0 @ =gUnknown_841DE7D
-	bl sub_814257C
+	bl mevent_0814257C
 _08143CC6:
 	cmp r0, 0
 	beq _08143D1A
@@ -881,7 +881,7 @@ _08143CEC:
 	adds r0, 0x9
 	ldr r1, _08143D00 @ =gUnknown_841DE9C
 _08143CF2:
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	beq _08143D1A
 _08143CFA:
@@ -893,11 +893,11 @@ _08143D00: .4byte gUnknown_841DE9C
 _08143D04:
 	bl sub_812B484
 	ldr r0, [r4, 0x10]
-	bl sub_8002BC4
+	bl Free
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _08143D20 @ =sub_81422FC
-	bl sub_8000544
+	bl SetMainCallback2
 _08143D1A:
 	pop {r4,r5}
 	pop {r0}
@@ -942,8 +942,8 @@ _08143D64: .4byte gUnknown_3005008
 _08143D68: .4byte 0x00003124
 	thumb_func_end sub_8143D58
 
-	thumb_func_start sub_8143D6C
-sub_8143D6C: @ 8143D6C
+	thumb_func_start sav1_get_mevent_buffer_1
+sav1_get_mevent_buffer_1: @ 8143D6C
 	ldr r0, _08143D78 @ =gUnknown_3005008
 	ldr r0, [r0]
 	ldr r1, _08143D7C @ =0x000032e4
@@ -952,10 +952,10 @@ sub_8143D6C: @ 8143D6C
 	.align 2, 0
 _08143D78: .4byte gUnknown_3005008
 _08143D7C: .4byte 0x000032e4
-	thumb_func_end sub_8143D6C
+	thumb_func_end sav1_get_mevent_buffer_1
 
-	thumb_func_start sub_8143D80
-sub_8143D80: @ 8143D80
+	thumb_func_start sav1_get_mevent_buffer_2
+sav1_get_mevent_buffer_2: @ 8143D80
 	ldr r0, _08143D8C @ =gUnknown_3005008
 	ldr r0, [r0]
 	ldr r1, _08143D90 @ =0x00003434
@@ -964,7 +964,7 @@ sub_8143D80: @ 8143D80
 	.align 2, 0
 _08143D8C: .4byte gUnknown_3005008
 _08143D90: .4byte 0x00003434
-	thumb_func_end sub_8143D80
+	thumb_func_end sav1_get_mevent_buffer_2
 
 	thumb_func_start sub_8143D94
 sub_8143D94: @ 8143D94
@@ -1018,7 +1018,7 @@ sub_8143DC8: @ 8143DC8
 	ldr r0, [r4]
 	adds r0, r5
 	adds r1, r6, 0
-	bl sub_8045210
+	bl CalcCRC16WithTable
 	ldr r1, [r4]
 	ldr r2, _08143E10 @ =0x00003120
 	adds r1, r2
@@ -1048,7 +1048,7 @@ sub_8143E1C: @ 8143E1C
 	adds r0, r1
 	movs r1, 0xDE
 	lsls r1, 1
-	bl sub_8045210
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, [r4]
@@ -1203,7 +1203,7 @@ sub_8143F38: @ 8143F38
 	bl sub_814407C
 	bl sub_81440B4
 	bl sub_8144790
-	bl sub_8069CD4
+	bl ClearRamScript
 	bl sub_806E2D0
 	bl sub_806E370
 	ldr r0, _08143F64 @ =gUnknown_300500C
@@ -1238,7 +1238,7 @@ sub_8143F68: @ 8143F68
 	ldr r0, [r4]
 	adds r0, r5
 	adds r1, r6, 0
-	bl sub_8045210
+	bl CalcCRC16WithTable
 	ldr r1, [r4]
 	ldr r3, _08143FB8 @ =0x000032e0
 	adds r2, r1, r3
@@ -1276,7 +1276,7 @@ sub_8143FC8: @ 8143FC8
 	adds r0, r1
 	movs r1, 0xA6
 	lsls r1, 1
-	bl sub_8045210
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, [r4]
@@ -1400,7 +1400,7 @@ sub_81440B4: @ 81440B4
 	sub sp, 0x4
 	movs r4, 0
 	str r4, [sp]
-	bl sub_8143D80
+	bl sav1_get_mevent_buffer_2
 	adds r1, r0, 0
 	ldr r2, _081440DC @ =0x05000009
 	mov r0, sp
@@ -1727,10 +1727,10 @@ sub_81442CC: @ 81442CC
 	bl sub_8143FC8
 	cmp r0, 0
 	beq _08144330
-	bl sub_8143D6C
+	bl sav1_get_mevent_buffer_1
 	ldrh r0, [r0]
 	strh r0, [r4, 0x14]
-	bl sub_8143D80
+	bl sav1_get_mevent_buffer_2
 	adds r1, r4, 0
 	adds r1, 0x20
 	ldm r0!, {r2,r3,r5}
@@ -1739,7 +1739,7 @@ sub_81442CC: @ 81442CC
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
-	bl sub_8143D6C
+	bl sav1_get_mevent_buffer_1
 	ldrb r1, [r0, 0x9]
 	adds r0, r4, 0
 	adds r0, 0x44
@@ -1788,7 +1788,7 @@ _0814435C:
 	mov r2, r8
 	ldr r1, [r2]
 	adds r0, r6, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, _081443C0 @ =gUnknown_3005008
 	ldr r0, [r0]
 	ldr r3, _081443C8 @ =0x00002ca0

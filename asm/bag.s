@@ -38,21 +38,21 @@ _0810B87A:
 	ldr r0, _0810B8E8 @ =gUnknown_8453098
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	movs r4, 0
 _0810B8A8:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r4, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x2
 	bls _0810B8A8
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	movs r4, 0
 	ldr r3, _0810B8EC @ =gUnknown_203AD34
 	movs r2, 0xFF
@@ -169,7 +169,7 @@ sub_810B994: @ 810B994
 	movs r1, 0
 	movs r2, 0x81
 	movs r3, 0xC
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	ldr r4, _0810B9D8 @ =gUnknown_84162E8
 	movs r0, 0
 	adds r1, r4, 0
@@ -221,7 +221,7 @@ sub_810B9DC: @ 810B9DC
 	movs r1, 0
 	movs r2, 0x64
 	movs r3, 0xE
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	b _0810BA24
 	.align 2, 0
 _0810BA10: .4byte gUnknown_203AD34
@@ -231,10 +231,10 @@ _0810BA18:
 	movs r1, 0
 	movs r2, 0x81
 	movs r3, 0xC
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 _0810BA24:
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 _0810BA2A:
 	ldr r0, _0810BA38 @ =gUnknown_203AD34
 	adds r0, r5, r0
@@ -258,11 +258,11 @@ sub_810BA3C: @ 810BA3C
 	movs r1, 0
 	bl sub_810F4D8
 	ldrb r0, [r4]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	bl sub_8003E3C
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0xFF
 	strb r0, [r4]
 	pop {r4}
@@ -310,13 +310,13 @@ sub_810BA9C: @ 810BA9C
 	movs r1, 0
 	bl sub_810F260
 	ldrb r0, [r4]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	bl sub_8003E3C
 	movs r0, 0x1
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0xFF
 	strb r0, [r4]
 _0810BACE:

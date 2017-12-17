@@ -131,7 +131,7 @@ _080C6DE0:
 	movs r1, 0
 	strb r1, [r0]
 _080C6DFA:
-	bl sub_8044EC8
+	bl Random
 	ldr r1, [r5]
 	ldr r2, [r1, 0x14]
 	adds r2, 0x18
@@ -163,7 +163,7 @@ _080C6DFA:
 	cmp r0, 0
 	beq _080C6E7C
 	ldr r4, _080C6E74 @ =gUnknown_2023D6C
-	bl sub_8044EC8
+	bl Random
 	movs r3, 0x2
 	ands r0, r3
 	strb r0, [r4]
@@ -401,7 +401,7 @@ _080C7012:
 	adds r3, 0x1
 	cmp r3, 0x3
 	ble _080C6FD2
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
@@ -644,12 +644,12 @@ sub_80C71D0: @ 80C71D0
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C71FC
 	adds r0, r4, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r1, _080C7204 @ =gUnknown_2023FF4
 	ldr r1, [r1]
 	ldr r2, [r1, 0x18]
@@ -674,12 +674,12 @@ sub_80C7208: @ 80C7208
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C7234
 	adds r0, r4, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r1, _080C723C @ =gUnknown_2023FF4
 	ldr r1, [r1]
 	ldr r2, [r1, 0x18]
@@ -699,7 +699,7 @@ _080C723C: .4byte gUnknown_2023FF4
 	thumb_func_start sub_80C7240
 sub_80C7240: @ 80C7240
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
@@ -735,7 +735,7 @@ _080C727C:
 	thumb_func_start sub_80C7280
 sub_80C7280: @ 80C7280
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
@@ -771,7 +771,7 @@ _080C72BC:
 	thumb_func_start sub_80C72C0
 sub_80C72C0: @ 80C72C0
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
@@ -807,7 +807,7 @@ _080C72FC:
 	thumb_func_start sub_80C7300
 sub_80C7300: @ 80C7300
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
@@ -840,8 +840,8 @@ _080C733C:
 	bx r0
 	thumb_func_end sub_80C7300
 
-	thumb_func_start sub_80C7340
-sub_80C7340: @ 80C7340
+	thumb_func_start BattleAICmd_score
+BattleAICmd_score: @ 80C7340
 	push {r4,lr}
 	ldr r2, _080C737C @ =gUnknown_2023FF4
 	ldr r0, [r2]
@@ -876,7 +876,7 @@ _080C7370:
 	.align 2, 0
 _080C737C: .4byte gUnknown_2023FF4
 _080C7380: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C7340
+	thumb_func_end BattleAICmd_score
 
 	thumb_func_start sub_80C7384
 sub_80C7384: @ 80C7384
@@ -1489,7 +1489,7 @@ _080C77EC:
 	ldr r0, _080C7838 @ =gUnknown_2023D6C
 _080C77EE:
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r2, 0x1
 	ands r2, r0
 	ldr r4, _080C783C @ =gUnknown_2039A00
@@ -1554,7 +1554,7 @@ _080C7868:
 	ldr r0, _080C78B4 @ =gUnknown_2023D6C
 _080C786A:
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r2, 0x1
 	ands r2, r0
 	ldr r4, _080C78B8 @ =gUnknown_2039A00
@@ -2002,8 +2002,8 @@ _080C7B90:
 	bx r0
 	thumb_func_end sub_80C7B50
 
-	thumb_func_start sub_80C7B94
-sub_80C7B94: @ 80C7B94
+	thumb_func_start BattleAICmd_if_in_bytes
+BattleAICmd_if_in_bytes: @ 80C7B94
 	push {r4,lr}
 	ldr r2, _080C7BE0 @ =gUnknown_2039A00
 	ldr r1, [r2]
@@ -2058,10 +2058,10 @@ _080C7BF6:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C7B94
+	thumb_func_end BattleAICmd_if_in_bytes
 
-	thumb_func_start sub_80C7BFC
-sub_80C7BFC: @ 80C7BFC
+	thumb_func_start BattleAICmd_if_not_in_bytes
+BattleAICmd_if_not_in_bytes: @ 80C7BFC
 	push {r4,lr}
 	ldr r2, _080C7C38 @ =gUnknown_2039A00
 	ldr r1, [r2]
@@ -2117,10 +2117,10 @@ _080C7C60:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C7BFC
+	thumb_func_end BattleAICmd_if_not_in_bytes
 
-	thumb_func_start sub_80C7C68
-sub_80C7C68: @ 80C7C68
+	thumb_func_start BattleAICmd_if_in_hwords
+BattleAICmd_if_in_hwords: @ 80C7C68
 	push {r4,r5,lr}
 	ldr r2, _080C7CB4 @ =gUnknown_2039A00
 	ldr r1, [r2]
@@ -2177,10 +2177,10 @@ _080C7CCE:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C7C68
+	thumb_func_end BattleAICmd_if_in_hwords
 
-	thumb_func_start sub_80C7CD4
-sub_80C7CD4: @ 80C7CD4
+	thumb_func_start BattleAICmd_if_not_in_hwords
+BattleAICmd_if_not_in_hwords: @ 80C7CD4
 	push {r4,r5,lr}
 	ldr r2, _080C7D10 @ =gUnknown_2039A00
 	ldr r1, [r2]
@@ -2238,7 +2238,7 @@ _080C7D3C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C7CD4
+	thumb_func_end BattleAICmd_if_not_in_hwords
 
 	thumb_func_start sub_80C7D44
 sub_80C7D44: @ 80C7D44
@@ -2360,8 +2360,8 @@ _080C7E1C:
 	bx r0
 	thumb_func_end sub_80C7DB4
 
-	thumb_func_start sub_80C7E24
-sub_80C7E24: @ 80C7E24
+	thumb_func_start BattleAICmd_get_turn_count
+BattleAICmd_get_turn_count: @ 80C7E24
 	ldr r0, _080C7E3C @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r1, [r0, 0x14]
@@ -2377,10 +2377,10 @@ sub_80C7E24: @ 80C7E24
 _080C7E3C: .4byte gUnknown_2023FF4
 _080C7E40: .4byte gUnknown_3004F90
 _080C7E44: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C7E24
+	thumb_func_end BattleAICmd_get_turn_count
 
-	thumb_func_start sub_80C7E48
-sub_80C7E48: @ 80C7E48
+	thumb_func_start BattleAICmd_get_type
+BattleAICmd_get_type: @ 80C7E48
 	push {r4,lr}
 	ldr r1, _080C7E60 @ =gUnknown_2039A00
 	ldr r0, [r1]
@@ -2494,10 +2494,10 @@ _080C7F22:
 	.align 2, 0
 _080C7F30: .4byte gUnknown_2023FF4
 _080C7F34: .4byte gUnknown_8250C04
-	thumb_func_end sub_80C7E48
+	thumb_func_end BattleAICmd_get_type
 
-	thumb_func_start sub_80C7F38
-sub_80C7F38: @ 80C7F38
+	thumb_func_start BattleAICmd_get_last_used_bank_move_power
+BattleAICmd_get_last_used_bank_move_power: @ 80C7F38
 	ldr r0, _080C7F58 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r3, [r0, 0x14]
@@ -2518,10 +2518,10 @@ sub_80C7F38: @ 80C7F38
 _080C7F58: .4byte gUnknown_2023FF4
 _080C7F5C: .4byte gUnknown_8250C04
 _080C7F60: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C7F38
+	thumb_func_end BattleAICmd_get_last_used_bank_move_power
 
-	thumb_func_start sub_80C7F64
-sub_80C7F64: @ 80C7F64
+	thumb_func_start BattleAICmd_is_most_powerful_move
+BattleAICmd_is_most_powerful_move: @ 80C7F64
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2661,11 +2661,11 @@ _080C8030:
 	ldrb r0, [r7]
 	ldr r4, _080C80D4 @ =gUnknown_2023D6C
 	ldrb r1, [r4]
-	bl sub_801E68C
+	bl AI_CalcDmg
 	ldrh r0, [r5]
 	ldrb r1, [r7]
 	ldrb r2, [r4]
-	bl sub_801EDF4
+	bl TypeCalc
 	mov r4, sp
 	add r4, r8
 	ldr r2, _080C80D8 @ =gUnknown_2023D50
@@ -2776,10 +2776,10 @@ _080C814C:
 	bx r0
 	.align 2, 0
 _080C8164: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C7F64
+	thumb_func_end BattleAICmd_is_most_powerful_move
 
-	thumb_func_start sub_80C8168
-sub_80C8168: @ 80C8168
+	thumb_func_start BattleAICmd_get_last_used_bank_move
+BattleAICmd_get_last_used_bank_move: @ 80C8168
 	push {lr}
 	ldr r0, _080C8184 @ =gUnknown_2039A00
 	ldr r1, [r0]
@@ -2819,7 +2819,7 @@ _080C819E:
 _080C81B4: .4byte gUnknown_2023FF4
 _080C81B8: .4byte gUnknown_2023D98
 _080C81BC: .4byte gUnknown_2023D6C
-	thumb_func_end sub_80C8168
+	thumb_func_end BattleAICmd_get_last_used_bank_move
 
 	thumb_func_start sub_80C81C0
 sub_80C81C0: @ 80C81C0
@@ -2981,8 +2981,8 @@ nullsub_65: @ 80C82D4
 	bx lr
 	thumb_func_end nullsub_65
 
-	thumb_func_start sub_80C82D8
-sub_80C82D8: @ 80C82D8
+	thumb_func_start BattleAICmd_count_alive_pokemon
+BattleAICmd_count_alive_pokemon: @ 80C82D8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3007,7 +3007,7 @@ _080C8304:
 _080C8306:
 	ldrb r5, [r0]
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, _080C8350 @ =gUnknown_202402C
 	mov r8, r1
@@ -3027,12 +3027,12 @@ _080C831C:
 	adds r0, r4
 	ldrb r7, [r0]
 	adds r0, r5, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -3063,17 +3063,17 @@ _080C836C:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080C83B0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080C83B0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -3101,10 +3101,10 @@ _080C83B0:
 _080C83C8: .4byte gUnknown_2023BCE
 _080C83CC: .4byte gUnknown_2023FF4
 _080C83D0: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C82D8
+	thumb_func_end BattleAICmd_count_alive_pokemon
 
-	thumb_func_start sub_80C83D4
-sub_80C83D4: @ 80C83D4
+	thumb_func_start BattleAICmd_get_considered_move
+BattleAICmd_get_considered_move: @ 80C83D4
 	ldr r0, _080C83E8 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r1, [r0, 0x14]
@@ -3118,10 +3118,10 @@ sub_80C83D4: @ 80C83D4
 	.align 2, 0
 _080C83E8: .4byte gUnknown_2023FF4
 _080C83EC: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C83D4
+	thumb_func_end BattleAICmd_get_considered_move
 
-	thumb_func_start sub_80C83F0
-sub_80C83F0: @ 80C83F0
+	thumb_func_start BattleAICmd_get_considered_move_effect
+BattleAICmd_get_considered_move_effect: @ 80C83F0
 	ldr r0, _080C8410 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r3, [r0, 0x14]
@@ -3142,7 +3142,7 @@ sub_80C83F0: @ 80C83F0
 _080C8410: .4byte gUnknown_2023FF4
 _080C8414: .4byte gUnknown_8250C04
 _080C8418: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C83F0
+	thumb_func_end BattleAICmd_get_considered_move_effect
 
 	thumb_func_start sub_80C841C
 sub_80C841C: @ 80C841C
@@ -3162,12 +3162,12 @@ _080C8434:
 _080C8436:
 	ldrb r4, [r0]
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8506
 	adds r0, r4, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r7, 0x1
 	adds r1, r7, 0
 	ands r1, r0
@@ -3227,7 +3227,7 @@ _080C84A8:
 	ldrb r0, [r2, 0x17]
 	cmp r0, 0
 	beq _080C84F6
-	bl sub_8044EC8
+	bl Random
 	adds r1, r7, 0
 	ands r1, r0
 	cmp r1, 0
@@ -3336,7 +3336,7 @@ _080C856A:
 	ldrb r1, [r6]
 	ldr r2, _080C8618 @ =gUnknown_2023D6C
 	ldrb r2, [r2]
-	bl sub_801EDF4
+	bl TypeCalc
 	ldr r0, [r4]
 	cmp r0, 0x78
 	bne _080C859A
@@ -3436,7 +3436,7 @@ sub_80C8620: @ 80C8620
 	ldrb r1, [r1]
 	ldr r2, _080C86DC @ =gUnknown_2023D6C
 	ldrb r2, [r2]
-	bl sub_801EDF4
+	bl TypeCalc
 	ldr r0, [r4]
 	cmp r0, 0x78
 	bne _080C8666
@@ -3579,17 +3579,17 @@ _080C875C:
 	add r4, r9
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r5, 0
 	beq _080C8794
 	cmp r5, r10
@@ -3665,17 +3665,17 @@ _080C8800:
 	add r4, r10
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r5, 0
 	beq _080C8844
 	movs r1, 0xCE
@@ -4134,11 +4134,11 @@ sub_80C8B24: @ 80C8B24
 	ldrb r0, [r4]
 	ldr r6, _080C8BF8 @ =gUnknown_2023D6C
 	ldrb r1, [r6]
-	bl sub_801E68C
+	bl AI_CalcDmg
 	ldrh r0, [r5]
 	ldrb r1, [r4]
 	ldrb r2, [r6]
-	bl sub_801EDF4
+	bl TypeCalc
 	ldr r4, _080C8BFC @ =gUnknown_2023D50
 	mov r1, r8
 	ldr r0, [r1]
@@ -4246,11 +4246,11 @@ sub_80C8C20: @ 80C8C20
 	ldrb r0, [r4]
 	ldr r5, _080C8CE0 @ =gUnknown_2023D6C
 	ldrb r1, [r5]
-	bl sub_801E68C
+	bl AI_CalcDmg
 	ldrh r0, [r6]
 	ldrb r1, [r4]
 	ldrb r2, [r5]
-	bl sub_801EDF4
+	bl TypeCalc
 	ldr r4, _080C8CE4 @ =gUnknown_2023D50
 	ldr r0, [r7]
 	ldr r1, [r0, 0x14]
@@ -5004,7 +5004,7 @@ _080C91FC:
 	adds r0, r4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -5074,12 +5074,12 @@ _080C927C:
 _080C927E:
 	ldrb r4, [r0]
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C92B0
 	adds r0, r4, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	ldr r0, _080C92AC @ =gUnknown_2023FF4
@@ -5100,7 +5100,7 @@ _080C92B0:
 	muls r0, r4
 	adds r0, r1
 	ldrh r0, [r0, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	ldr r1, _080C92DC @ =gUnknown_2023FF4
 	ldr r1, [r1]
 	ldr r1, [r1, 0x14]
@@ -5121,8 +5121,8 @@ _080C92DC: .4byte gUnknown_2023FF4
 _080C92E0: .4byte gUnknown_2039A00
 	thumb_func_end sub_80C9264
 
-	thumb_func_start sub_80C92E4
-sub_80C92E4: @ 80C92E4
+	thumb_func_start BattleAICmd_get_gender
+BattleAICmd_get_gender: @ 80C92E4
 	push {lr}
 	ldr r0, _080C92F4 @ =gUnknown_2039A00
 	ldr r0, [r0]
@@ -5146,7 +5146,7 @@ _080C92FE:
 	adds r2, 0x48
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	ldr r1, _080C9334 @ =gUnknown_2023FF4
 	ldr r1, [r1]
 	ldr r1, [r1, 0x14]
@@ -5164,10 +5164,10 @@ _080C932C: .4byte gUnknown_2023D6C
 _080C9330: .4byte gUnknown_2023BE4
 _080C9334: .4byte gUnknown_2023FF4
 _080C9338: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C92E4
+	thumb_func_end BattleAICmd_get_gender
 
-	thumb_func_start sub_80C933C
-sub_80C933C: @ 80C933C
+	thumb_func_start BattleAICmd_is_first_turn
+BattleAICmd_is_first_turn: @ 80C933C
 	push {r4,lr}
 	ldr r0, _080C9350 @ =gUnknown_2039A00
 	ldr r1, [r0]
@@ -5204,10 +5204,10 @@ _080C935A:
 _080C937C: .4byte gUnknown_2023D6C
 _080C9380: .4byte gUnknown_2023FF4
 _080C9384: .4byte gUnknown_2023E0C
-	thumb_func_end sub_80C933C
+	thumb_func_end BattleAICmd_is_first_turn
 
-	thumb_func_start sub_80C9388
-sub_80C9388: @ 80C9388
+	thumb_func_start BattleAICmd_get_stockpile_count
+BattleAICmd_get_stockpile_count: @ 80C9388
 	push {r4,lr}
 	ldr r0, _080C939C @ =gUnknown_2039A00
 	ldr r1, [r0]
@@ -5244,10 +5244,10 @@ _080C93A6:
 _080C93C8: .4byte gUnknown_2023D6C
 _080C93CC: .4byte gUnknown_2023FF4
 _080C93D0: .4byte gUnknown_2023E0C
-	thumb_func_end sub_80C9388
+	thumb_func_end BattleAICmd_get_stockpile_count
 
-	thumb_func_start sub_80C93D4
-sub_80C93D4: @ 80C93D4
+	thumb_func_start BattleAICmd_is_double_battle
+BattleAICmd_is_double_battle: @ 80C93D4
 	ldr r0, _080C93F0 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r2, [r0, 0x14]
@@ -5265,10 +5265,10 @@ sub_80C93D4: @ 80C93D4
 _080C93F0: .4byte gUnknown_2023FF4
 _080C93F4: .4byte gUnknown_2022B4C
 _080C93F8: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C93D4
+	thumb_func_end BattleAICmd_is_double_battle
 
-	thumb_func_start sub_80C93FC
-sub_80C93FC: @ 80C93FC
+	thumb_func_start BattleAICmd_get_used_held_item
+BattleAICmd_get_used_held_item: @ 80C93FC
 	push {r4,lr}
 	ldr r0, _080C9410 @ =gUnknown_2039A00
 	ldr r1, [r0]
@@ -5305,10 +5305,10 @@ _080C941A:
 _080C943C: .4byte gUnknown_2023D6C
 _080C9440: .4byte gUnknown_2023FF4
 _080C9444: .4byte gUnknown_2023FE8
-	thumb_func_end sub_80C93FC
+	thumb_func_end BattleAICmd_get_used_held_item
 
-	thumb_func_start sub_80C9448
-sub_80C9448: @ 80C9448
+	thumb_func_start BattleAICmd_get_move_type_from_result
+BattleAICmd_get_move_type_from_result: @ 80C9448
 	ldr r0, _080C9468 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r3, [r0, 0x14]
@@ -5329,10 +5329,10 @@ sub_80C9448: @ 80C9448
 _080C9468: .4byte gUnknown_2023FF4
 _080C946C: .4byte gUnknown_8250C04
 _080C9470: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C9448
+	thumb_func_end BattleAICmd_get_move_type_from_result
 
-	thumb_func_start sub_80C9474
-sub_80C9474: @ 80C9474
+	thumb_func_start BattleAICmd_get_move_power_from_result
+BattleAICmd_get_move_power_from_result: @ 80C9474
 	ldr r0, _080C9494 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r3, [r0, 0x14]
@@ -5353,10 +5353,10 @@ sub_80C9474: @ 80C9474
 _080C9494: .4byte gUnknown_2023FF4
 _080C9498: .4byte gUnknown_8250C04
 _080C949C: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C9474
+	thumb_func_end BattleAICmd_get_move_power_from_result
 
-	thumb_func_start sub_80C94A0
-sub_80C94A0: @ 80C94A0
+	thumb_func_start BattleAICmd_get_move_effect_from_result
+BattleAICmd_get_move_effect_from_result: @ 80C94A0
 	ldr r0, _080C94C0 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r3, [r0, 0x14]
@@ -5377,10 +5377,10 @@ sub_80C94A0: @ 80C94A0
 _080C94C0: .4byte gUnknown_2023FF4
 _080C94C4: .4byte gUnknown_8250C04
 _080C94C8: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C94A0
+	thumb_func_end BattleAICmd_get_move_effect_from_result
 
-	thumb_func_start sub_80C94CC
-sub_80C94CC: @ 80C94CC
+	thumb_func_start BattleAICmd_get_protect_count
+BattleAICmd_get_protect_count: @ 80C94CC
 	push {r4,lr}
 	ldr r0, _080C94E0 @ =gUnknown_2039A00
 	ldr r1, [r0]
@@ -5417,7 +5417,7 @@ _080C94EA:
 _080C950C: .4byte gUnknown_2023D6C
 _080C9510: .4byte gUnknown_2023FF4
 _080C9514: .4byte gUnknown_2023E0C
-	thumb_func_end sub_80C94CC
+	thumb_func_end BattleAICmd_get_protect_count
 
 	thumb_func_start nullsub_68
 nullsub_68: @ 80C9518
@@ -5449,8 +5449,8 @@ nullsub_73: @ 80C952C
 	bx lr
 	thumb_func_end nullsub_73
 
-	thumb_func_start sub_80C9530
-sub_80C9530: @ 80C9530
+	thumb_func_start BattleAICmd_call
+BattleAICmd_call: @ 80C9530
 	push {r4,lr}
 	ldr r4, _080C955C @ =gUnknown_2039A00
 	ldr r0, [r4]
@@ -5473,7 +5473,7 @@ sub_80C9530: @ 80C9530
 	bx r0
 	.align 2, 0
 _080C955C: .4byte gUnknown_2039A00
-	thumb_func_end sub_80C9530
+	thumb_func_end BattleAICmd_call
 
 	thumb_func_start sub_80C9560
 sub_80C9560: @ 80C9560
@@ -5495,8 +5495,8 @@ sub_80C9560: @ 80C9560
 _080C957C: .4byte gUnknown_2039A00
 	thumb_func_end sub_80C9560
 
-	thumb_func_start sub_80C9580
-sub_80C9580: @ 80C9580
+	thumb_func_start BattleAICmd_end
+BattleAICmd_end: @ 80C9580
 	push {lr}
 	bl sub_80C9768
 	lsls r0, 24
@@ -5514,10 +5514,10 @@ _080C959A:
 	bx r0
 	.align 2, 0
 _080C95A0: .4byte gUnknown_2023FF4
-	thumb_func_end sub_80C9580
+	thumb_func_end BattleAICmd_end
 
-	thumb_func_start sub_80C95A4
-sub_80C95A4: @ 80C95A4
+	thumb_func_start BattleAICmd_if_level_cond
+BattleAICmd_if_level_cond: @ 80C95A4
 	push {r4,r5,lr}
 	ldr r5, _080C95BC @ =gUnknown_2039A00
 	ldr r4, [r5]
@@ -5623,7 +5623,7 @@ _080C9674:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C95A4
+	thumb_func_end BattleAICmd_if_level_cond
 
 	thumb_func_start sub_80C967C
 sub_80C967C: @ 80C967C

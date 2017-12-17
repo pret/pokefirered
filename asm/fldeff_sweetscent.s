@@ -21,7 +21,7 @@ _080DE0C4: .4byte gUnknown_203B0A0
 	thumb_func_start sub_80DE0C8
 sub_80DE0C8: @ 80DE0C8
 	ldr r1, _080DE0D8 @ =gUnknown_3005024
-	ldr r0, _080DE0DC @ =sub_81248B0
+	ldr r0, _080DE0DC @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _080DE0E0 @ =gUnknown_203B0C4
 	ldr r0, _080DE0E4 @ =sub_80DE0E8
@@ -30,7 +30,7 @@ sub_80DE0C8: @ 80DE0C8
 	bx lr
 	.align 2, 0
 _080DE0D8: .4byte gUnknown_3005024
-_080DE0DC: .4byte sub_81248B0
+_080DE0DC: .4byte hm_add_c3_launch_phase_2
 _080DE0E0: .4byte gUnknown_203B0C4
 _080DE0E4: .4byte sub_80DE0E8
 	thumb_func_end sub_80DE0C8
@@ -39,7 +39,7 @@ _080DE0E4: .4byte sub_80DE0E8
 sub_80DE0E8: @ 80DE0E8
 	push {lr}
 	movs r0, 0x33
-	bl sub_8083444
+	bl FieldEffectStart
 	bl sub_811FB0C
 	ldr r1, _080DE100 @ =gUnknown_20386E0
 	lsls r0, 24
@@ -55,7 +55,7 @@ _080DE100: .4byte gUnknown_20386E0
 sub_80DE104: @ 80DE104
 	push {lr}
 	bl sub_807B05C
-	bl sub_80C97FC
+	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080DE12C @ =gUnknown_3005090
@@ -84,7 +84,7 @@ sub_80DE134: @ 80DE134
 	ldr r4, _080DE1B8 @ =gUnknown_203AAB0
 	movs r0, 0x80
 	lsls r0, 3
-	bl sub_8002B9C
+	bl Alloc
 	adds r1, r0, 0
 	str r1, [r4]
 	ldr r4, _080DE1BC @ =gUnknown_20371F8
@@ -97,7 +97,7 @@ sub_80DE134: @ 80DE134
 	adds r1, r4, 0
 	adds r2, r5, 0
 	bl CpuFastSet
-	bl sub_805C768
+	bl GetPlayerAvatarObjectId
 	ldr r2, _080DE1C4 @ =gUnknown_202063C
 	lsls r0, 24
 	lsrs r0, 24
@@ -116,10 +116,10 @@ sub_80DE134: @ 80DE134
 	movs r1, 0x4
 	movs r2, 0
 	movs r3, 0x8
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _080DE1C8 @ =sub_80DE1D0
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080DE1CC @ =gUnknown_3005090
@@ -130,7 +130,7 @@ sub_80DE134: @ 80DE134
 	movs r0, 0
 	strh r0, [r1, 0x8]
 	movs r0, 0x33
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -176,9 +176,9 @@ sub_80DE1D0: @ 80DE1D0
 	bne _080DE228
 	ldr r0, _080DE224 @ =gUnknown_203AAB0
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080DE26C
 	.align 2, 0
 _080DE21C: .4byte gUnknown_3005098
@@ -190,7 +190,7 @@ _080DE228:
 	adds r0, r5, r0
 	ldr r1, _080DE260 @ =sub_80DE274
 	str r1, [r0]
-	bl sub_805C768
+	bl GetPlayerAvatarObjectId
 	ldr r2, _080DE264 @ =gUnknown_202063C
 	lsls r0, 24
 	lsrs r0, 24
@@ -209,7 +209,7 @@ _080DE228:
 	movs r1, 0x4
 	movs r2, 0x8
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	b _080DE26C
 	.align 2, 0
 _080DE260: .4byte sub_80DE274
@@ -243,11 +243,11 @@ sub_80DE274: @ 80DE274
 	bl CpuFastSet
 	bl sub_807B070
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, _080DE2BC @ =gUnknown_81BE564
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080DE2AA:
 	pop {r4,r5}
 	pop {r0}

@@ -26,7 +26,7 @@ _08003B38:
 	mov r1, r8
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_8002008
+	bl GetBgTilemapBuffer
 	cmp r0, 0
 	beq _08003B48
 	ldr r0, _08003BBC @ =nullsub_6
@@ -108,14 +108,14 @@ _08003BCC:
 	bne _08003C2E
 	adds r0, r7, 0
 	movs r1, 0x8
-	bl sub_8001AA8
+	bl GetBgAttribute
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _08003C08 @ =0x0000ffff
 	cmp r5, r0
 	beq _08003C2E
 	adds r0, r5, 0
-	bl sub_8002B9C
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _08003C0C
@@ -142,14 +142,14 @@ _08003C20:
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 _08003C2E:
 	ldrb r1, [r6, 0x3]
 	ldrb r0, [r6, 0x4]
 	muls r0, r1
 	lsls r0, 21
 	lsrs r0, 16
-	bl sub_8002B9C
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _08003C70
@@ -166,7 +166,7 @@ _08003C2E:
 	cmp r1, r0
 	beq _08003BB4
 	adds r0, r1, 0
-	bl sub_8002BC4
+	bl Free
 	str r4, [r5]
 	b _08003BB4
 	.align 2, 0
@@ -296,14 +296,14 @@ _08003D46:
 	bne _08003D96
 	adds r0, r7, 0
 	movs r1, 0x8
-	bl sub_8001AA8
+	bl GetBgAttribute
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _08003DE0 @ =0x0000ffff
 	cmp r5, r0
 	beq _08003D96
 	adds r0, r5, 0
-	bl sub_8002B9C
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _08003DCE
@@ -324,7 +324,7 @@ _08003D88:
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 _08003D96:
 	mov r2, r8
 	ldrb r1, [r2, 0x3]
@@ -332,7 +332,7 @@ _08003D96:
 	muls r0, r1
 	lsls r0, 21
 	lsrs r0, 16
-	bl sub_8002B9C
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _08003DE8
@@ -349,7 +349,7 @@ _08003D96:
 	cmp r1, r0
 	beq _08003DCE
 	adds r0, r1, 0
-	bl sub_8002BC4
+	bl Free
 	str r4, [r5]
 _08003DCE:
 	movs r0, 0xFF
@@ -448,7 +448,7 @@ _08003E68:
 	cmp r1, r0
 	beq _08003E96
 	adds r0, r1, 0
-	bl sub_8002BC4
+	bl Free
 	str r5, [r4]
 _08003E96:
 	ldr r1, _08003EB8 @ =gUnknown_20204B4
@@ -460,7 +460,7 @@ _08003E96:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _08003EB0
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _08003EB0:
@@ -488,7 +488,7 @@ _08003ED2:
 	cmp r1, r0
 	beq _08003EE8
 	adds r0, r1, 0
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _08003EE8:
@@ -505,7 +505,7 @@ _08003EFA:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _08003F06
-	bl sub_8002BC4
+	bl Free
 	str r6, [r4]
 _08003F06:
 	adds r4, 0xC
@@ -560,7 +560,7 @@ _08003F5C:
 _08003F62:
 	mov r0, sp
 	ldrb r0, [r0]
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _08003F96
 _08003F6C:
 	mov r0, sp
@@ -569,7 +569,7 @@ _08003F6C:
 	mov r2, sp
 	ldrh r3, [r2, 0x6]
 	adds r2, r4, 0
-	bl sub_80017D0
+	bl LoadBgTiles
 	b _08003F96
 _08003F7E:
 	mov r0, sp
@@ -578,10 +578,10 @@ _08003F7E:
 	mov r2, sp
 	ldrh r3, [r2, 0x6]
 	adds r2, r4, 0
-	bl sub_80017D0
+	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0]
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _08003F96:
 	add sp, 0xC
 	pop {r4-r6}
@@ -589,8 +589,8 @@ _08003F96:
 	bx r0
 	thumb_func_end sub_8003F20
 
-	thumb_func_start sub_8003FA0
-sub_8003FA0: @ 8003FA0
+	thumb_func_start PutWindowTilemap
+PutWindowTilemap: @ 8003FA0
 	push {r4,lr}
 	sub sp, 0x1C
 	lsls r0, 24
@@ -606,7 +606,7 @@ sub_8003FA0: @ 8003FA0
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	movs r1, 0xA
-	bl sub_8001AA8
+	bl GetBgAttribute
 	adds r1, r0, 0
 	add r0, sp, 0x10
 	ldrh r0, [r0, 0x6]
@@ -630,17 +630,17 @@ sub_8003FA0: @ 8003FA0
 	str r4, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl sub_8002590
+	bl WriteSequenceToBgTilemapBuffer
 	add sp, 0x1C
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08003FFC: .4byte gUnknown_20204B4
-	thumb_func_end sub_8003FA0
+	thumb_func_end PutWindowTilemap
 
-	thumb_func_start sub_8004000
-sub_8004000: @ 8004000
+	thumb_func_start PutWindowRectTilemapOverridePalette
+PutWindowRectTilemapOverridePalette: @ 8004000
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -677,7 +677,7 @@ sub_8004000: @ 8004000
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	movs r1, 0xA
-	bl sub_8001AA8
+	bl GetBgAttribute
 	add r2, sp, 0x10
 	adds r1, r2, 0
 	ldrb r1, [r1, 0x3]
@@ -713,7 +713,7 @@ _0800406E:
 	str r1, [sp, 0x8]
 	str r7, [sp, 0xC]
 	adds r1, r6, 0
-	bl sub_8002590
+	bl WriteSequenceToBgTilemapBuffer
 	ldrb r0, [r4, 0x3]
 	adds r0, r6, r0
 	lsls r0, 16
@@ -732,10 +732,10 @@ _080040A2:
 	bx r0
 	.align 2, 0
 _080040B4: .4byte gUnknown_20204B4
-	thumb_func_end sub_8004000
+	thumb_func_end PutWindowRectTilemapOverridePalette
 
-	thumb_func_start sub_80040B8
-sub_80040B8: @ 80040B8
+	thumb_func_start ClearWindowTilemap
+ClearWindowTilemap: @ 80040B8
 	push {r4,lr}
 	sub sp, 0x18
 	lsls r0, 24
@@ -765,7 +765,7 @@ sub_80040B8: @ 80040B8
 	add r4, sp, 0xC
 	ldrb r4, [r4, 0x5]
 	str r4, [sp, 0x8]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0x18
 	pop {r4}
 	pop {r0}
@@ -773,10 +773,10 @@ sub_80040B8: @ 80040B8
 	.align 2, 0
 _08004100: .4byte gUnknown_20204B4
 _08004104: .4byte gUnknown_3003E30
-	thumb_func_end sub_80040B8
+	thumb_func_end ClearWindowTilemap
 
-	thumb_func_start sub_8004108
-sub_8004108: @ 8004108
+	thumb_func_start PutWindowRectTilemap
+PutWindowRectTilemap: @ 8004108
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -809,7 +809,7 @@ sub_8004108: @ 8004108
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	movs r1, 0xA
-	bl sub_8001AA8
+	bl GetBgAttribute
 	add r2, sp, 0x10
 	adds r1, r2, 0
 	ldrb r1, [r1, 0x3]
@@ -845,7 +845,7 @@ _0800416E:
 	str r1, [sp, 0x8]
 	str r7, [sp, 0xC]
 	adds r1, r6, 0
-	bl sub_8002590
+	bl WriteSequenceToBgTilemapBuffer
 	ldrb r0, [r4, 0x3]
 	adds r0, r6, r0
 	lsls r0, 16
@@ -864,10 +864,10 @@ _080041A2:
 	bx r0
 	.align 2, 0
 _080041B4: .4byte gUnknown_20204B4
-	thumb_func_end sub_8004108
+	thumb_func_end PutWindowRectTilemap
 
-	thumb_func_start sub_80041B8
-sub_80041B8: @ 80041B8
+	thumb_func_start BlitBitmapToWindow
+BlitBitmapToWindow: @ 80041B8
 	push {r4,r5,lr}
 	sub sp, 0x18
 	ldr r4, [sp, 0x24]
@@ -890,15 +890,15 @@ sub_80041B8: @ 80041B8
 	str r5, [sp, 0x14]
 	movs r2, 0
 	movs r3, 0
-	bl sub_80041F0
+	bl BlitBitmapRectToWindow
 	add sp, 0x18
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80041B8
+	thumb_func_end BlitBitmapToWindow
 
-	thumb_func_start sub_80041F0
-sub_80041F0: @ 80041F0
+	thumb_func_start BlitBitmapRectToWindow
+BlitBitmapRectToWindow: @ 80041F0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -991,10 +991,10 @@ sub_80041F0: @ 80041F0
 _080042A4: .4byte 0xffff0000
 _080042A8: .4byte 0x0000ffff
 _080042AC: .4byte gUnknown_20204B4
-	thumb_func_end sub_80041F0
+	thumb_func_end BlitBitmapRectToWindow
 
-	thumb_func_start sub_80042B0
-sub_80042B0: @ 80042B0
+	thumb_func_start BlitBitmapRectToWindowWithColorKey
+BlitBitmapRectToWindowWithColorKey: @ 80042B0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1091,10 +1091,10 @@ sub_80042B0: @ 80042B0
 _0800436C: .4byte 0x0000ffff
 _08004370: .4byte gUnknown_20204B4
 _08004374: .4byte 0xffff0000
-	thumb_func_end sub_80042B0
+	thumb_func_end BlitBitmapRectToWindowWithColorKey
 
-	thumb_func_start sub_8004378
-sub_8004378: @ 8004378
+	thumb_func_start FillWindowPixelRect
+FillWindowPixelRect: @ 8004378
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -1161,10 +1161,10 @@ sub_8004378: @ 8004378
 _080043F8: .4byte gUnknown_20204B4
 _080043FC: .4byte 0xffff0000
 _08004400: .4byte 0x0000ffff
-	thumb_func_end sub_8004378
+	thumb_func_end FillWindowPixelRect
 
-	thumb_func_start sub_8004404
-sub_8004404: @ 8004404
+	thumb_func_start CopyToWindowPixelBuffer
+CopyToWindowPixelBuffer: @ 8004404
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1207,10 +1207,10 @@ _08004450:
 	bx r0
 	.align 2, 0
 _08004458: .4byte gUnknown_20204B4
-	thumb_func_end sub_8004404
+	thumb_func_end CopyToWindowPixelBuffer
 
-	thumb_func_start sub_800445C
-sub_800445C: @ 800445C
+	thumb_func_start FillWindowPixelBuffer
+FillWindowPixelBuffer: @ 800445C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1247,10 +1247,10 @@ sub_800445C: @ 800445C
 	bx r0
 	.align 2, 0
 _080044A4: .4byte gUnknown_20204B4
-	thumb_func_end sub_800445C
+	thumb_func_end FillWindowPixelBuffer
 
-	thumb_func_start sub_80044A8
-sub_80044A8: @ 80044A8
+	thumb_func_start ScrollWindow
+ScrollWindow: @ 80044A8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1773,10 +1773,10 @@ _0800485A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80044A8
+	thumb_func_end ScrollWindow
 
-	thumb_func_start sub_800486C
-sub_800486C: @ 800486C
+	thumb_func_start CallWindowFunction
+CallWindowFunction: @ 800486C
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1815,7 +1815,7 @@ sub_800486C: @ 800486C
 	bx r0
 	.align 2, 0
 _080048B8: .4byte gUnknown_20204B4
-	thumb_func_end sub_800486C
+	thumb_func_end CallWindowFunction
 
 	thumb_func_start sub_80048BC
 sub_80048BC: @ 80048BC

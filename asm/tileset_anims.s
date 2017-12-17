@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_806FED8
-sub_806FED8: @ 806FED8
+	thumb_func_start ResetTilesetAnimBuffer
+ResetTilesetAnimBuffer: @ 806FED8
 	push {lr}
 	sub sp, 0x4
 	ldr r1, _0806FEF8 @ =gUnknown_3000FAC
@@ -25,10 +25,10 @@ sub_806FED8: @ 806FED8
 _0806FEF8: .4byte gUnknown_3000FAC
 _0806FEFC: .4byte gUnknown_2037108
 _0806FF00: .4byte 0x0500003c
-	thumb_func_end sub_806FED8
+	thumb_func_end ResetTilesetAnimBuffer
 
-	thumb_func_start sub_806FF04
-sub_806FF04: @ 806FF04
+	thumb_func_start AppendTilesetAnimToBuffer
+AppendTilesetAnimToBuffer: @ 806FF04
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -68,10 +68,10 @@ _0806FF44:
 	.align 2, 0
 _0806FF4C: .4byte gUnknown_3000FAC
 _0806FF50: .4byte gUnknown_2037108
-	thumb_func_end sub_806FF04
+	thumb_func_end AppendTilesetAnimToBuffer
 
-	thumb_func_start sub_806FF54
-sub_806FF54: @ 806FF54
+	thumb_func_start TransferTilesetAnimsBuffer
+TransferTilesetAnimsBuffer: @ 806FF54
 	push {r4-r6,lr}
 	movs r3, 0
 	ldr r4, _0806FF90 @ =gUnknown_3000FAC
@@ -108,17 +108,17 @@ _0806FF86:
 _0806FF90: .4byte gUnknown_3000FAC
 _0806FF94: .4byte 0x040000d4
 _0806FF98: .4byte gUnknown_2037108
-	thumb_func_end sub_806FF54
+	thumb_func_end TransferTilesetAnimsBuffer
 
-	thumb_func_start sub_806FF9C
-sub_806FF9C: @ 806FF9C
+	thumb_func_start cur_mapheader_run_tileset_funcs_after_some_cpuset
+cur_mapheader_run_tileset_funcs_after_some_cpuset: @ 806FF9C
 	push {lr}
-	bl sub_806FED8
+	bl ResetTilesetAnimBuffer
 	bl sub_807002C
 	bl sub_8070068
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806FF9C
+	thumb_func_end cur_mapheader_run_tileset_funcs_after_some_cpuset
 
 	thumb_func_start sub_806FFB0
 sub_806FFB0: @ 806FFB0
@@ -131,7 +131,7 @@ sub_806FFB0: @ 806FFB0
 	thumb_func_start sub_806FFBC
 sub_806FFBC: @ 806FFBC
 	push {r4,lr}
-	bl sub_806FED8
+	bl ResetTilesetAnimBuffer
 	ldr r2, _08070014 @ =gUnknown_3000FAE
 	ldrh r0, [r2]
 	adds r0, 0x1
@@ -258,7 +258,7 @@ sub_80700A4: @ 80700A4
 	ldr r0, [r0]
 	ldr r1, _080700CC @ =0x06003f80
 	movs r2, 0x80
-	bl sub_806FF04
+	bl AppendTilesetAnimToBuffer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -281,7 +281,7 @@ sub_80700D0: @ 80700D0
 	ldr r1, _080700F4 @ =0x06003400
 	movs r2, 0xC0
 	lsls r2, 3
-	bl sub_806FF04
+	bl AppendTilesetAnimToBuffer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -303,7 +303,7 @@ sub_80700F8: @ 80700F8
 	ldr r1, _0807011C @ =0x06003a00
 	movs r2, 0x90
 	lsls r2, 2
-	bl sub_806FF04
+	bl AppendTilesetAnimToBuffer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -376,7 +376,7 @@ sub_807017C: @ 807017C
 	ldr r1, _080701A8 @ =0x06005d00
 	movs r2, 0x80
 	lsls r2, 1
-	bl sub_806FF04
+	bl AppendTilesetAnimToBuffer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -441,7 +441,7 @@ sub_80701FC: @ 80701FC
 	ldr r1, _08070220 @ =0x06007a00
 	movs r2, 0x80
 	lsls r2, 1
-	bl sub_806FF04
+	bl AppendTilesetAnimToBuffer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -505,7 +505,7 @@ sub_8070274: @ 8070274
 	ldr r1, _08070298 @ =0x06007000
 	movs r2, 0x80
 	lsls r2, 1
-	bl sub_806FF04
+	bl AppendTilesetAnimToBuffer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -563,7 +563,7 @@ sub_80702DC: @ 80702DC
 	ldr r0, [r0]
 	ldr r1, _08070300 @ =0x06006e00
 	movs r2, 0xE0
-	bl sub_806FF04
+	bl AppendTilesetAnimToBuffer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -619,7 +619,7 @@ sub_8070340: @ 8070340
 	ldr r0, [r1]
 	ldr r1, _08070364 @ =0x06005c60
 	movs r2, 0x80
-	bl sub_806FF04
+	bl AppendTilesetAnimToBuffer
 	pop {r0}
 	bx r0
 	.align 2, 0

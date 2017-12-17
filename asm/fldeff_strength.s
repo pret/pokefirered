@@ -9,12 +9,12 @@
 sub_80D07EC: @ 80D07EC
 	push {r4,lr}
 	movs r0, 0x8
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D0808
 	movs r0, 0x61
-	bl sub_80C97A8
+	bl npc_before_player_of_type
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -29,7 +29,7 @@ _080D080C:
 	lsrs r0, 24
 	strh r0, [r4]
 	ldr r1, _080D0830 @ =gUnknown_3005024
-	ldr r0, _080D0834 @ =sub_81248B0
+	ldr r0, _080D0834 @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _080D0838 @ =gUnknown_203B0C4
 	ldr r0, _080D083C @ =sub_80D0840
@@ -42,7 +42,7 @@ _080D0826:
 	.align 2, 0
 _080D082C: .4byte gUnknown_20370D0
 _080D0830: .4byte gUnknown_3005024
-_080D0834: .4byte sub_81248B0
+_080D0834: .4byte hm_add_c3_launch_phase_2
 _080D0838: .4byte gUnknown_203B0C4
 _080D083C: .4byte sub_80D0840
 	thumb_func_end sub_80D07EC
@@ -56,7 +56,7 @@ sub_80D0840: @ 80D0840
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, _080D085C @ =gUnknown_81BE16E
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -67,7 +67,7 @@ _080D085C: .4byte gUnknown_81BE16E
 	thumb_func_start sub_80D0860
 sub_80D0860: @ 80D0860
 	push {lr}
-	bl sub_80C97FC
+	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080D0894 @ =gUnknown_3005090
@@ -86,7 +86,7 @@ sub_80D0860: @ 80D0860
 	ldr r1, _080D08A0 @ =gUnknown_2024284
 	adds r0, r1
 	ldr r1, _080D08A4 @ =gUnknown_2021CD0
-	bl sub_81202E0
+	bl GetMonNickname
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -102,8 +102,8 @@ _080D08A4: .4byte gUnknown_2021CD0
 sub_80D08A8: @ 80D08A8
 	push {lr}
 	movs r0, 0x28
-	bl sub_80837FC
-	bl sub_8069B34
+	bl FieldEffectActiveListRemove
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80D08A8

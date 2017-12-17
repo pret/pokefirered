@@ -73,7 +73,7 @@ sub_809C9B4: @ 809C9B4
 	lsls r3, 24
 	lsrs r4, r3, 24
 	ldr r0, _0809C9F0 @ =sub_809CC98
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -121,7 +121,7 @@ sub_809CA04: @ 809CA04
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _0809CA4C @ =sub_809CC98
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -308,7 +308,7 @@ _0809CB7A:
 	mov r3, r10
 	bl sub_809CC18
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 _0809CBA2:
 	add sp, 0x20
 	pop {r3-r5}
@@ -406,7 +406,7 @@ _0809CC44:
 	strb r0, [r1]
 	ldr r0, _0809CC6C @ =sub_809CC98
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, _0809CC70 @ =gUnknown_3005090
@@ -475,10 +475,10 @@ _0809CCD0:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0809CCDE
-	bl sub_810FA04
+	bl ProcessMenuInputNoWrapAround
 	b _0809CCE2
 _0809CCDE:
-	bl sub_810F998
+	bl ProcessMenuInput
 _0809CCE2:
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -520,8 +520,8 @@ _0809CD2C:
 	ldrb r0, [r5, 0xC]
 	bl sub_809D6B0
 	adds r0, r6, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 _0809CD3C:
 	pop {r4-r6}
 	pop {r0}
@@ -551,7 +551,7 @@ _0809CD60:
 _0809CD66:
 	movs r0, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r4, _0809CD74 @ =gUnknown_83E072C
 	b _0809CD82
 	.align 2, 0
@@ -559,7 +559,7 @@ _0809CD74: .4byte gUnknown_83E072C
 _0809CD78:
 	movs r0, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r4, _0809CDAC @ =gUnknown_83E0738
 _0809CD82:
 	bl sub_810F98C
@@ -585,7 +585,7 @@ _0809CDAC: .4byte gUnknown_83E0738
 _0809CDB0:
 	movs r0, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r4, _0809CDE8 @ =gUnknown_83E0748
 	bl sub_810F98C
 	lsls r0, 24
@@ -618,7 +618,7 @@ sub_809CDEC: @ 809CDEC
 	push {r4,lr}
 	ldr r4, _0809CE04 @ =sub_809CE54
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -639,7 +639,7 @@ _0809CE08:
 	bl sub_80F7858
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 _0809CE26:
 	movs r0, 0x1
 _0809CE28:
@@ -723,8 +723,8 @@ _0809CEB0:
 	strh r0, [r1]
 _0809CEB2:
 	adds r0, r4, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 _0809CEBC:
 	pop {r4}
 	pop {r0}
@@ -757,7 +757,7 @@ sub_809CEC8: @ 809CEC8
 	lsrs r7, r4, 24
 	ldr r0, _0809CF04 @ =sub_809CFDC
 	mov r9, r0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -797,7 +797,7 @@ _0809CF08:
 	lsrs r6, 24
 	mov r0, r9
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0809CFD8 @ =gUnknown_3005090
@@ -845,7 +845,7 @@ _0809CF08:
 	movs r3, 0x1
 	bl sub_811030C
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 _0809CFB8:
 	movs r0, 0x1
 _0809CFBA:
@@ -904,8 +904,8 @@ _0809D024:
 	ldrb r0, [r5, 0xC]
 	bl sub_809D6B0
 	adds r0, r4, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 _0809D034:
 	pop {r4,r5}
 	pop {r0}
@@ -918,7 +918,7 @@ _0809D03C: .4byte gUnknown_20370D0
 sub_809D040: @ 809D040
 	push {lr}
 	ldr r0, _0809D060 @ =sub_809CC98
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1145,7 +1145,7 @@ _0809D1FA:
 	movs r3, 0xFF
 	bl sub_809CC18
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -1234,7 +1234,7 @@ _0809D2DC:
 	ldrb r0, [r4, 0x12]
 	bl sub_809D6B0
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _0809D2E8:
 	pop {r4,r5}
 	pop {r0}
@@ -1266,7 +1266,7 @@ _0809D318: .4byte sub_809D6D4
 _0809D31C:
 	ldr r4, _0809D3B0 @ =sub_809D288
 	adds r0, r4, 0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -1287,7 +1287,7 @@ _0809D31C:
 	lsrs r5, 24
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1328,7 +1328,7 @@ _0809D31C:
 	movs r1, 0x1
 	bl sub_80F7750
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
 	b _0809D3C2
 	.align 2, 0
@@ -1350,7 +1350,7 @@ _0809D3C2:
 sub_809D3CC: @ 809D3CC
 	push {lr}
 	ldr r0, _0809D3F0 @ =sub_809D288
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -1380,7 +1380,7 @@ _0809D3FE:
 sub_809D404: @ 809D404
 	push {lr}
 	ldr r0, _0809D418 @ =sub_809D288
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -1400,7 +1400,7 @@ _0809D41E:
 sub_809D424: @ 809D424
 	push {r4,r5,lr}
 	ldr r0, _0809D450 @ =sub_809D288
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0xFF
@@ -1435,7 +1435,7 @@ _0809D458:
 	ldrb r0, [r4, 0x12]
 	bl sub_809D6B0
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _0809D48C
 	.align 2, 0
 _0809D47C: .4byte gUnknown_202063C
@@ -1443,7 +1443,7 @@ _0809D480:
 	ldrb r0, [r4, 0x12]
 	bl sub_809D6B0
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _0809D48C:
 	pop {r4,r5}
 	pop {r0}
@@ -1485,9 +1485,9 @@ _0809D4C6:
 	lsls r0, 2
 	ldr r1, _0809D4E8 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r0, _0809D4EC @ =0x00001b58
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 _0809D4DE:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -1500,7 +1500,7 @@ _0809D4F0:
 	ldrb r0, [r4, 0x12]
 	bl sub_809D6B0
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _0809D4FC:
 	pop {r4,r5}
 	pop {r0}
@@ -1519,7 +1519,7 @@ sub_809D504: @ 809D504
 	cmp r0, 0x1
 	beq _0809D5F2
 	ldr r0, _0809D548 @ =sub_809D494
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -1529,12 +1529,12 @@ sub_809D504: @ 809D504
 	cmp r0, 0x8D
 	bne _0809D558
 	ldr r0, _0809D550 @ =gUnknown_83E17C0
-	bl sub_8008720
+	bl LoadSpriteSheets
 	ldr r0, _0809D554 @ =gUnknown_83E17A0
 	movs r1, 0xE8
 	lsls r1, 1
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	b _0809D572
 	.align 2, 0
 _0809D544: .4byte sub_809D6D4
@@ -1550,12 +1550,12 @@ _0809D55C:
 	b _0809D5F4
 _0809D560:
 	ldr r0, _0809D600 @ =gUnknown_83E17D0
-	bl sub_8008720
+	bl LoadSpriteSheets
 	ldr r0, _0809D604 @ =gUnknown_83E0F80
 	movs r1, 0xE8
 	lsls r1, 1
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 _0809D572:
 	ldr r0, _0809D608 @ =gUnknown_83E0768
 	ldr r1, _0809D60C @ =gUnknown_20370C2
@@ -1574,7 +1574,7 @@ _0809D572:
 	adds r2, r3
 	asrs r2, 16
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -1591,7 +1591,7 @@ _0809D572:
 	strb r1, [r0, 0x5]
 	ldr r0, _0809D618 @ =sub_809D494
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1615,7 +1615,7 @@ _0809D572:
 	movs r1, 0x1
 	bl sub_80F7750
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 _0809D5F2:
 	movs r0, 0x1
 _0809D5F4:
@@ -1639,7 +1639,7 @@ _0809D61C: .4byte gUnknown_3005090
 sub_809D620: @ 809D620
 	push {lr}
 	ldr r0, _0809D644 @ =sub_809D494
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -1703,7 +1703,7 @@ sub_809D654: @ 809D654
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	adds r0, r4, 0
 	add sp, 0x20
 	pop {r4,r5}
@@ -1718,7 +1718,7 @@ sub_809D6B0: @ 809D6B0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_810F4D8
@@ -1733,9 +1733,9 @@ sub_809D6B0: @ 809D6B0
 sub_809D6D4: @ 809D6D4
 	push {lr}
 	ldr r0, _0809D74C @ =gUnknown_81A7AE0
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	ldr r0, _0809D750 @ =sub_809D288
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -1760,7 +1760,7 @@ sub_809D6D4: @ 809D6D4
 	bl sub_8083A5C
 _0809D710:
 	ldr r0, _0809D75C @ =sub_809D494
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -1781,9 +1781,9 @@ _0809D710:
 	lsls r0, 2
 	ldr r1, _0809D758 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r0, _0809D760 @ =0x00001b58
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 _0809D748:
 	pop {r0}
 	bx r0
@@ -1953,7 +1953,7 @@ _0809D844:
 	movs r3, 0xFF
 	bl sub_809CC18
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 _0809D8A8:
 	add sp, 0xC
 	pop {r3,r4}

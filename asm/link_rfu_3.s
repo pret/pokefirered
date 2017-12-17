@@ -18,7 +18,7 @@ sub_811586C: @ 811586C
 	lsrs r5, r2, 24
 	adds r0, r6, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	lsls r4, 8
 	movs r0, 0x80
 	lsls r0, 3
@@ -125,7 +125,7 @@ sub_8115924: @ 8115924
 	add r5, sp, 0x14
 	ldr r1, _08115998 @ =gUnknown_84571B4
 	adds r0, r5, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r6]
 	adds r0, 0xA
 	bl sub_8118658
@@ -138,7 +138,7 @@ sub_8115924: @ 8115924
 	bl sub_8008E78
 	adds r0, r5, 0
 	add r1, sp, 0x8
-	bl sub_8008DA4
+	bl StringAppend
 	movs r0, 0x10
 	str r0, [sp]
 	mov r0, r8
@@ -215,7 +215,7 @@ sub_8115A24: @ 8115A24
 	push {lr}
 	ldr r0, _08115A54 @ =sub_8115A68
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08115A58 @ =gUnknown_203B05C
@@ -332,13 +332,13 @@ _08115B54: .4byte gUnknown_20370C0
 _08115B58: .4byte gUnknown_203B059
 _08115B5C:
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5, 0x4]
 	movs r0, 0xA0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5]
 	movs r0, 0xA0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5, 0x8]
 	ldr r0, [r5, 0x4]
 	movs r1, 0x4
@@ -384,7 +384,7 @@ _08115B5C:
 	strb r0, [r5, 0x11]
 	ldrb r0, [r5, 0x10]
 	movs r1, 0x22
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r5, 0x10]
 	ldr r2, _08115C54 @ =gUnknown_845747C
 	movs r1, 0x2
@@ -395,7 +395,7 @@ _08115B5C:
 	movs r3, 0x8
 	bl sub_811A444
 	ldrb r0, [r5, 0x10]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r5, 0x10]
 	movs r1, 0x2
 	bl sub_8003F20
@@ -413,18 +413,18 @@ _08115B5C:
 	strb r1, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	strb r0, [r5, 0x12]
 	ldrb r0, [r5, 0x11]
 	movs r1, 0
 	bl sub_80F6F1C
 	ldrb r0, [r5, 0x11]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r5, 0x11]
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
 	strb r0, [r5, 0x13]
 	strb r4, [r5, 0xC]
@@ -444,7 +444,7 @@ _08115C60:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, _08115CA4 @ =gUnknown_203B059
 	ldrb r2, [r0]
 	lsrs r0, r2, 4
@@ -815,7 +815,7 @@ _08115F5C:
 	adds r1, r0
 	subs r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D54
+	bl StringCopy7
 	ldr r1, [r5]
 	ldrb r0, [r5, 0x13]
 	subs r0, 0x1
@@ -825,7 +825,7 @@ _08115F5C:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r0, _08115FA8 @ =gUnknown_2021D18
 	ldr r1, _08115FAC @ =gUnknown_8457554
 	bl sub_8008FCC
@@ -1080,9 +1080,9 @@ _08116168:
 	strb r0, [r5, 0xC]
 	b _081161D8
 _0811617E:
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _08116190 @ =gUnknown_20370D0
 	movs r0, 0x5
 	strh r0, [r1]
@@ -1090,9 +1090,9 @@ _0811617E:
 	.align 2, 0
 _08116190: .4byte gUnknown_20370D0
 _08116194:
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _081161A8 @ =gUnknown_20370D0
 	movs r0, 0x8
 	strh r0, [r1]
@@ -1117,7 +1117,7 @@ _081161BA:
 	adds r0, r5, 0
 	bl sub_81161E4
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _081161D8:
 	add sp, 0x8
 	pop {r4-r7}
@@ -1132,7 +1132,7 @@ sub_81161E4: @ 81161E4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x11]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x11]
 	movs r1, 0
 	bl sub_80F6F9C
@@ -1141,12 +1141,12 @@ sub_81161E4: @ 81161E4
 	movs r2, 0
 	bl sub_810713C
 	ldrb r0, [r4, 0x10]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4, 0xF]
 	movs r1, 0
 	bl sub_80F6F9C
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r4, 0x11]
 	bl sub_8003E3C
 	ldrb r0, [r4, 0xF]
@@ -1154,13 +1154,13 @@ sub_81161E4: @ 81161E4
 	ldrb r0, [r4, 0x10]
 	bl sub_8003E3C
 	ldrb r0, [r4, 0x17]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, [r4, 0x8]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r4, 0x4]
-	bl sub_8002BC4
+	bl Free
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1408,7 +1408,7 @@ _08116460:
 	adds r1, r0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D54
+	bl StringCopy7
 	ldr r1, [r5]
 	ldrb r0, [r5, 0x13]
 	lsls r0, 5
@@ -1417,7 +1417,7 @@ _08116460:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r0, _081164A4 @ =gUnknown_2021D18
 	ldr r1, _081164A8 @ =gUnknown_203B058
 	ldrb r1, [r1]
@@ -1747,12 +1747,12 @@ _081166E4:
 	bx r1
 	thumb_func_end sub_81165E8
 
-	thumb_func_start sub_81166F4
-sub_81166F4: @ 81166F4
+	thumb_func_start BerryBlenderLinkJoinGroup
+BerryBlenderLinkJoinGroup: @ 81166F4
 	push {lr}
 	ldr r0, _08116724 @ =sub_8116738
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08116728 @ =gUnknown_203B05C
@@ -1777,7 +1777,7 @@ _08116728: .4byte gUnknown_203B05C
 _0811672C: .4byte gUnknown_3005098
 _08116730: .4byte gUnknown_3002028
 _08116734: .4byte gUnknown_20370D0
-	thumb_func_end sub_81166F4
+	thumb_func_end BerryBlenderLinkJoinGroup
 
 	thumb_func_start sub_8116738
 sub_8116738: @ 8116738
@@ -1844,11 +1844,11 @@ _081167C0:
 	bl sub_8009804
 	bl sub_80FBBD8
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r6, 0x4]
 	movs r0, 0x80
 	lsls r0, 2
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r6]
 	movs r0, 0x1
 	strb r0, [r6, 0x8]
@@ -1902,7 +1902,7 @@ _08116838:
 	strb r0, [r6, 0xD]
 	ldrb r0, [r6, 0xC]
 	movs r1, 0x22
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r6, 0xC]
 	ldr r2, _081168F8 @ =gUnknown_8458FC8
 	movs r1, 0x2
@@ -1913,7 +1913,7 @@ _08116838:
 	movs r3, 0x8
 	bl sub_811A444
 	ldrb r0, [r6, 0xC]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r6, 0xC]
 	movs r1, 0x2
 	bl sub_8003F20
@@ -1931,20 +1931,20 @@ _08116838:
 	strb r1, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	strb r0, [r6, 0xE]
 	ldrb r0, [r6, 0xD]
 	movs r1, 0
 	bl sub_80F6F1C
 	ldrb r0, [r6, 0xD]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r6, 0xD]
 	bl sub_8115924
 	ldrb r0, [r6, 0xD]
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	strb r4, [r6, 0xF]
 	movs r0, 0x3
 	strb r0, [r6, 0x8]
@@ -1972,7 +1972,7 @@ _08116916:
 	b _08116BF6
 _0811691E:
 	ldrb r0, [r6, 0xE]
-	bl sub_8107078
+	bl ListMenuHandleInput
 	adds r4, r0, 0
 	ldr r0, _0811696C @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -2016,7 +2016,7 @@ _08116970:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x12
 _08116982:
 	strb r0, [r6, 0x8]
@@ -2066,7 +2066,7 @@ _081169D2:
 	adds r1, r0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D54
+	bl StringCopy7
 	ldr r1, [r6]
 	ldrb r0, [r6, 0xF]
 	lsls r0, 5
@@ -2075,7 +2075,7 @@ _081169D2:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	b _08116C0A
 	.align 2, 0
 _081169FC: .4byte gUnknown_2021D18
@@ -2193,7 +2193,7 @@ _08116AF0:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _08116B40 @ =gUnknown_8457700
 	adds r0, r4, 0
 	bl sub_8008FCC
@@ -2315,7 +2315,7 @@ _08116C0A:
 	b _08116D06
 _08116C10:
 	ldrb r0, [r6, 0xD]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r6, 0xD]
 	movs r1, 0
 	bl sub_80F6F9C
@@ -2324,12 +2324,12 @@ _08116C10:
 	movs r2, 0
 	bl sub_810713C
 	ldrb r0, [r6, 0xC]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r6, 0xB]
 	movs r1, 0
 	bl sub_80F6F9C
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r6, 0xD]
 	bl sub_8003E3C
 	ldrb r0, [r6, 0xB]
@@ -2337,11 +2337,11 @@ _08116C10:
 	ldrb r0, [r6, 0xC]
 	bl sub_8003E3C
 	ldrb r0, [r6, 0x11]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, [r6]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6, 0x4]
-	bl sub_8002BC4
+	bl Free
 	ldrb r0, [r6, 0x8]
 	adds r0, 0x1
 	strb r0, [r6, 0x8]
@@ -2409,14 +2409,14 @@ _08116CE4: .4byte gUnknown_2021D18
 _08116CE8: .4byte gUnknown_20370D0
 _08116CEC:
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_811A41C
 	bl sub_80F8DC0
 	b _08116D06
 _08116CFC:
 	bl sub_8117990
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08116D06:
 	add sp, 0x8
 	pop {r4-r7}
@@ -2488,7 +2488,7 @@ sub_8116D60: @ 8116D60
 	adds r1, r0
 	adds r1, 0x10
 	adds r0, r5, 0
-	bl sub_8008D54
+	bl StringCopy7
 	ldr r1, [r4]
 	ldrb r0, [r4, 0xF]
 	lsls r0, 5
@@ -2497,7 +2497,7 @@ sub_8116D60: @ 8116D60
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r5, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r1, _08116DD8 @ =gUnknown_84570C8
 	ldr r0, _08116DDC @ =gUnknown_20370C0
 	ldrh r0, [r0]
@@ -2533,7 +2533,7 @@ sub_8116DE0: @ 8116DE0
 	push {lr}
 	ldr r0, _08116E0C @ =sub_8116E1C
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _08116E10 @ =gUnknown_203B05C
@@ -2600,11 +2600,11 @@ _08116E70:
 	movs r0, 0x1
 	bl sub_80FB128
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x4]
 	movs r0, 0x80
 	lsls r0, 2
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	movs r0, 0x2
 	strb r0, [r4, 0x8]
@@ -2650,11 +2650,11 @@ _08116EDA:
 _08116EF4: .4byte gUnknown_3005090
 _08116EF8:
 	ldrb r0, [r4, 0x11]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r4, 0x4]
-	bl sub_8002BC4
+	bl Free
 	bl sub_80F8DC0
 	ldrb r0, [r4, 0x8]
 	adds r0, 0x1
@@ -2663,7 +2663,7 @@ _08116EF8:
 _08116F16:
 	bl sub_80F8DC0
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _08116F20:
 	pop {r4,r5}
 	pop {r0}
@@ -2941,7 +2941,7 @@ sub_8117100: @ 8117100
 	lsrs r4, 24
 	bl sub_804C718
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2952,7 +2952,7 @@ sub_8117118: @ 8117118
 	push {lr}
 	ldr r0, _0811712C @ =sub_8117100
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -2970,7 +2970,7 @@ sub_8117130: @ 8117130
 	lsrs r6, r0, 24
 	ldr r0, _0811716C @ =gUnknown_203B06C
 	mov r8, r0
-	bl sub_800A404
+	bl GetMultiplayerId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3011,17 +3011,17 @@ _0811717E:
 	adds r1, r0
 	movs r0, 0
 	movs r2, 0x64
-	bl sub_800A448
+	bl SendBlock
 	b _0811725C
 	.align 2, 0
 _08117198: .4byte gUnknown_2024284
 _0811719C:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	bne _0811725C
-	bl sub_800A404
+	bl GetMultiplayerId
 	adds r1, r0, 0
 	ldr r0, _081171D0 @ =gUnknown_202402C
 	movs r2, 0x1
@@ -3034,7 +3034,7 @@ _0811719C:
 	bl memcpy
 	movs r0, 0x32
 	bl sub_8054E90
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	b _081171FA
 	.align 2, 0
 _081171D0: .4byte gUnknown_202402C
@@ -3051,7 +3051,7 @@ _081171D8:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0xDC
-	bl sub_800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811725C
@@ -3065,13 +3065,13 @@ _08117204: .4byte gUnknown_2022618
 _08117208: .4byte gUnknown_3005008
 _0811720C: .4byte 0x00002cd0
 _08117210:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	bne _0811725C
 	ldr r4, _08117268 @ =gUnknown_2031CCC
-	bl sub_800A404
+	bl GetMultiplayerId
 	adds r1, r0, 0
 	movs r0, 0x1
 	eors r1, r0
@@ -3082,20 +3082,20 @@ _08117210:
 	adds r0, r4, 0
 	movs r2, 0xD8
 	bl memcpy
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	ldr r1, _08117270 @ =gUnknown_2031DA4
 	strb r7, [r1]
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
 	ldr r1, _08117274 @ =gUnknown_30030F0
-	ldr r0, _08117278 @ =sub_80567DC
+	ldr r0, _08117278 @ =c2_exit_to_overworld_2_switch
 	str r0, [r1, 0x8]
 	ldr r0, _0811727C @ =sub_8050138
-	bl sub_8000544
+	bl SetMainCallback2
 	mov r0, r8
 	bl sub_811B148
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 _0811725C:
 	pop {r3}
 	mov r8, r3
@@ -3107,7 +3107,7 @@ _08117268: .4byte gUnknown_2031CCC
 _0811726C: .4byte gUnknown_2022118
 _08117270: .4byte gUnknown_2031DA4
 _08117274: .4byte gUnknown_30030F0
-_08117278: .4byte sub_80567DC
+_08117278: .4byte c2_exit_to_overworld_2_switch
 _0811727C: .4byte sub_8050138
 	thumb_func_end sub_8117130
 
@@ -3134,7 +3134,7 @@ sub_8117280: @ 8117280
 	.align 2, 0
 _081172A4: .4byte gUnknown_3005090
 _081172A8:
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _081172B8
@@ -3146,7 +3146,7 @@ _081172B8:
 	strh r0, [r4, 0x8]
 	b _0811734A
 _081172C0:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_800A8D4
 	lsls r4, 24
@@ -3187,7 +3187,7 @@ _08117302:
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _0811733C
-	bl sub_800A404
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -3204,9 +3204,9 @@ _08117338: .4byte gUnknown_2022118
 _0811733C:
 	bl sub_81446C4
 _08117340:
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _0811734A:
 	pop {r3}
 	mov r8, r3
@@ -3233,7 +3233,7 @@ _0811736C: .4byte gUnknown_30030F0
 _08117370:
 	ldr r0, _08117380 @ =sub_8117280
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -3242,28 +3242,28 @@ _08117370:
 _08117380: .4byte sub_8117280
 _08117384:
 	ldr r0, _081173B8 @ =sub_8117280
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _081173A2
-	bl sub_800A404
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _081173BC @ =sub_80567DC
+	ldr r1, _081173BC @ =c2_exit_to_overworld_2_switch
 	bl sub_808B700
 _081173A2:
-	bl sub_8077578
+	bl RunTasks
 	bl sub_8002DE8
-	bl sub_8006B5C
-	bl sub_8006BA8
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _081173B8: .4byte sub_8117280
-_081173BC: .4byte sub_80567DC
+_081173BC: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8117354
 
 	thumb_func_start sub_81173C0
@@ -3273,14 +3273,14 @@ sub_81173C0: @ 81173C0
 	lsls r6, 16
 	lsrs r6, 16
 	bl sub_80A0058
-	bl sub_804C1F0
+	bl copy_player_party_to_sav1
 	bl sub_804C320
 	ldr r5, _0811742C @ =gUnknown_202273C
 	ldr r0, _08117430 @ =0x00002211
 	str r0, [r5, 0x14]
-	bl sub_800A404
+	bl GetMultiplayerId
 	adds r4, r0, 0
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r4, 24
 	lsrs r4, 24
 	lsls r1, r4, 3
@@ -3290,9 +3290,9 @@ sub_81173C0: @ 81173C0
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r1, 0x18]
-	bl sub_800A404
+	bl GetMultiplayerId
 	adds r4, r0, 0
-	bl sub_800A404
+	bl GetMultiplayerId
 	movs r2, 0x1
 	eors r4, r2
 	lsls r4, 24
@@ -3356,7 +3356,7 @@ sub_8117440: @ 8117440
 	asrs r5, 24
 	str r5, [sp]
 	adds r3, r4, 0
-	bl sub_805538C
+	bl Overworld_SetWarpDestination
 	ldr r0, [r6]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -3366,8 +3366,8 @@ sub_8117440: @ 8117440
 	str r5, [sp, 0x4]
 	movs r0, 0
 	mov r3, r8
-	bl sub_805541C
-	bl sub_8055378
+	bl saved_warp2_set_2
+	bl warp_in
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -3403,7 +3403,7 @@ sub_81174B4: @ 81174B4
 	bl sub_800A088
 	ldr r1, _0811752C @ =gUnknown_3005030
 	strb r0, [r1]
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r1, _08117530 @ =gUnknown_300502C
 	strb r0, [r1]
 	bl sub_806E08C
@@ -3423,8 +3423,8 @@ sub_81174B4: @ 81174B4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r3, r8
-	bl sub_805538C
-	bl sub_8055378
+	bl Overworld_SetWarpDestination
+	bl warp_in
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -3456,7 +3456,7 @@ _0811754C: .4byte gUnknown_30030F0
 _08117550:
 	ldr r0, _08117560 @ =sub_8117280
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -3465,17 +3465,17 @@ _08117550:
 _08117560: .4byte sub_8117280
 _08117564:
 	ldr r0, _0811758C @ =sub_8117280
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _08117576
 	ldr r0, _08117590 @ =sub_8056788
-	bl sub_8000544
+	bl SetMainCallback2
 _08117576:
-	bl sub_8077578
+	bl RunTasks
 	bl sub_8002DE8
-	bl sub_8006B5C
-	bl sub_8006BA8
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3661,7 +3661,7 @@ _081177A0:
 	movs r1, 0x1
 	bl sub_8117594
 	bl sub_80A0058
-	bl sub_804C1F0
+	bl copy_player_party_to_sav1
 	bl sub_804C320
 	movs r0, 0x1
 	str r0, [sp]
@@ -3674,7 +3674,7 @@ _081177C4: .4byte gUnknown_2022618
 _081177C8:
 	bl sub_80563F0
 	bl sub_80A0058
-	bl sub_804C1F0
+	bl copy_player_party_to_sav1
 	bl sub_804C320
 	ldr r0, _081177EC @ =gUnknown_2022618
 	movs r1, 0x1
@@ -3690,7 +3690,7 @@ _081177EC: .4byte gUnknown_2022618
 _081177F0:
 	bl sub_80563F0
 	bl sub_80A0058
-	bl sub_804C1F0
+	bl copy_player_party_to_sav1
 	bl sub_804C320
 	ldr r0, _08117814 @ =gUnknown_2022618
 	movs r1, 0x1
@@ -3717,7 +3717,7 @@ _0811782E:
 	movs r3, 0x8
 	bl sub_81174B4
 	ldr r0, _08117840 @ =sub_8117534
-	bl sub_8000544
+	bl SetMainCallback2
 	b _081178E0
 	.align 2, 0
 _0811783C: .4byte gUnknown_2022618
@@ -3725,12 +3725,12 @@ _08117840: .4byte sub_8117534
 _08117844:
 	ldr r0, _08117850 @ =sub_8117130
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	b _081178E0
 	.align 2, 0
 _08117850: .4byte sub_8117130
 _08117854:
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _08117864
@@ -3750,7 +3750,7 @@ _08117878:
 	movs r1, 0
 	bl sub_8117594
 	ldr r0, _0811788C @ =sub_8117354
-	bl sub_8000544
+	bl SetMainCallback2
 	b _081178E0
 	.align 2, 0
 _08117888: .4byte gUnknown_2022618
@@ -3790,11 +3790,11 @@ _081178C8:
 	bl sub_81507FC
 _081178E0:
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _081178FC @ =gUnknown_20370D0
 	movs r0, 0x1
 	strh r0, [r1]
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -3835,18 +3835,18 @@ _08117932:
 	ldr r1, _08117940 @ =gUnknown_20370D0
 	movs r0, 0x1
 	strh r0, [r1]
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	b _08117968
 	.align 2, 0
 _08117940: .4byte gUnknown_20370D0
 _08117944:
-	bl sub_8069A64
+	bl ScriptContext1_IsScriptSetUp
 	lsls r0, 24
 	cmp r0, 0
 	bne _08117988
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	b _08117968
 _08117958:
 	ldr r0, _08117970 @ =gUnknown_2037AB8
@@ -3869,7 +3869,7 @@ _08117974:
 	cmp r0, 0
 	beq _08117988
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_81179A4
 _08117988:
 	pop {r4,r5}
@@ -3882,7 +3882,7 @@ sub_8117990: @ 8117990
 	push {lr}
 	ldr r0, _081179A0 @ =sub_8117900
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3894,7 +3894,7 @@ sub_81179A4: @ 81179A4
 	push {lr}
 	ldr r0, _081179C4 @ =sub_81175BC
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _081179C8 @ =gUnknown_3005090
@@ -3917,7 +3917,7 @@ sub_81179CC: @ 81179CC
 	adds r4, r0, 0
 	ldr r0, _081179FC @ =sub_8117A0C
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08117A00 @ =gUnknown_203B05C
@@ -4010,13 +4010,13 @@ _08117AB0: .4byte gUnknown_203B058
 _08117AB4: .4byte gUnknown_203B059
 _08117AB8:
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5, 0x4]
 	movs r0, 0xA0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5]
 	movs r0, 0xA0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5, 0x8]
 	ldr r0, [r5, 0x4]
 	movs r1, 0x4
@@ -4079,10 +4079,10 @@ _08117AB8:
 	strb r1, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	strb r0, [r5, 0x12]
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
 	strb r0, [r5, 0x13]
 	b _08117C02
@@ -4099,7 +4099,7 @@ _08117B7C:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, _08117BA8 @ =gUnknown_2021D18
 	ldrb r1, [r4]
 	bl sub_811599C
@@ -4142,7 +4142,7 @@ _08117BE4:
 	adds r0, r5, 0
 	adds r0, 0xD
 	ldr r1, _08117C08 @ =gUnknown_84577F8
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	bne _08117BF4
 	b _08117ECA
@@ -4279,7 +4279,7 @@ _08117CB2:
 	adds r1, r0
 	subs r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D54
+	bl StringCopy7
 	ldr r1, [r5]
 	ldrb r0, [r5, 0x13]
 	subs r0, 0x1
@@ -4289,7 +4289,7 @@ _08117CB2:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r0, _08117D34 @ =gUnknown_2021D18
 	ldr r1, _08117D38 @ =gUnknown_8457554
 	bl sub_8008FCC
@@ -4400,27 +4400,27 @@ _08117DEE:
 	movs r2, 0
 	bl sub_810713C
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xF]
 	bl sub_8003E3C
 	ldrb r0, [r5, 0x17]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, [r5, 0x8]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5, 0x4]
-	bl sub_8002BC4
+	bl Free
 	b _08117EB2
 _08117E26:
 	adds r0, r5, 0
 	adds r0, 0xD
 	ldr r1, _08117E44 @ =gUnknown_84571B8
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	beq _08117ECA
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _08117E48 @ =gUnknown_20370D0
 	movs r0, 0x5
 	strh r0, [r1]
@@ -4459,17 +4459,17 @@ _08117E80:
 	movs r2, 0
 	bl sub_810713C
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xF]
 	bl sub_8003E3C
 	ldrb r0, [r5, 0x17]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, [r5, 0x8]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5, 0x4]
-	bl sub_8002BC4
+	bl Free
 	bl sub_800AB9C
 _08117EB2:
 	ldrb r0, [r5, 0xC]
@@ -4482,7 +4482,7 @@ _08117EBA:
 	cmp r0, 0
 	beq _08117ECA
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08117ECA:
 	add sp, 0x8
 	pop {r4-r6}
@@ -4496,7 +4496,7 @@ sub_8117ED4: @ 8117ED4
 	adds r4, r0, 0
 	ldr r0, _08117F0C @ =sub_8117F20
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08117F10 @ =gUnknown_203B05C
@@ -4574,11 +4574,11 @@ _08117F7C:
 	bl sub_8009804
 	bl sub_80FBBD8
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5, 0x4]
 	movs r0, 0x80
 	lsls r0, 2
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5]
 	movs r0, 0x1
 	strb r0, [r5, 0x8]
@@ -4635,22 +4635,22 @@ _08117FC0:
 	strb r1, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	strb r0, [r5, 0xE]
 	ldrb r0, [r5, 0xD]
 	bl sub_814240C
 	ldrb r0, [r5, 0xD]
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r5, 0xD]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r5, 0xD]
 	bl sub_8115924
 	ldrb r0, [r5, 0xD]
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	strb r4, [r5, 0xF]
 	movs r0, 0x3
 	strb r0, [r5, 0x8]
@@ -4677,7 +4677,7 @@ _08118086:
 	b _08118288
 _0811808E:
 	ldrb r0, [r5, 0xE]
-	bl sub_8107078
+	bl ListMenuHandleInput
 	adds r2, r0, 0
 	ldr r0, _08118128 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -4715,7 +4715,7 @@ _0811808E:
 	adds r1, r0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, [r5]
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -4724,7 +4724,7 @@ _0811808E:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldrb r1, [r5, 0xF]
 	lsls r1, 5
 	ldr r0, [r5]
@@ -4774,7 +4774,7 @@ _08118150:
 	adds r1, r0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, [r5]
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -4783,7 +4783,7 @@ _08118150:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	movs r0, 0x5
 	strb r0, [r5, 0x8]
 	b _08118288
@@ -4844,17 +4844,17 @@ _081181EC:
 	movs r2, 0
 	bl sub_810713C
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xD]
 	bl sub_8003E3C
 	ldrb r0, [r5, 0xB]
 	bl sub_8003E3C
 	ldrb r0, [r5, 0x11]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5, 0x4]
-	bl sub_8002BC4
+	bl Free
 	ldrb r0, [r5, 0x8]
 	adds r0, 0x1
 	strb r0, [r5, 0x8]
@@ -4868,7 +4868,7 @@ _08118222:
 	adds r0, r4
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	beq _08118288
 	bl sub_80FCE44
@@ -4881,7 +4881,7 @@ _08118248:
 	bl sub_8142504
 _08118252:
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_80F8DC0
 	ldr r1, _08118268 @ =gUnknown_20370D0
 	movs r0, 0x5
@@ -4902,7 +4902,7 @@ _08118278:
 	cmp r0, 0
 	beq _08118288
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 _08118288:
 	add sp, 0x8
 	pop {r4-r7}
@@ -4916,7 +4916,7 @@ sub_8118290: @ 8118290
 	adds r4, r0, 0
 	ldr r0, _081182C8 @ =sub_81182DC
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _081182CC @ =gUnknown_203B05C
@@ -4993,11 +4993,11 @@ _08118340:
 	bl sub_8009804
 	bl sub_80FBBD8
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5, 0x4]
 	movs r0, 0x80
 	lsls r0, 2
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5]
 	movs r0, 0x1
 	strb r0, [r5, 0x8]
@@ -5053,10 +5053,10 @@ _08118380:
 	strb r1, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	strb r0, [r5, 0xE]
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _081183EC:
 	movs r0, 0
 	strb r0, [r5, 0xF]
@@ -5092,7 +5092,7 @@ _0811842E:
 	cmp r0, 0
 	beq _0811843A
 	ldrb r0, [r5, 0xE]
-	bl sub_8107078
+	bl ListMenuHandleInput
 _0811843A:
 	ldrb r0, [r5, 0x14]
 	cmp r0, 0x78
@@ -5171,7 +5171,7 @@ _081184C8:
 	adds r1, r0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, [r5]
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -5180,7 +5180,7 @@ _081184C8:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	movs r0, 0x5
 	strb r0, [r5, 0x8]
 	b _08118604
@@ -5244,16 +5244,16 @@ _08118564:
 	movs r2, 0
 	bl sub_810713C
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xB]
 	bl sub_8003E3C
 _08118580:
 	ldrb r0, [r5, 0x11]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5, 0x4]
-	bl sub_8002BC4
+	bl Free
 	ldrb r0, [r5, 0x8]
 	adds r0, 0x1
 	strb r0, [r5, 0x8]
@@ -5281,12 +5281,12 @@ _081185B4:
 	adds r1, r2
 	ldr r1, [r1]
 _081185C2:
-	bl sub_814257C
+	bl mevent_0814257C
 	cmp r0, 0
 	beq _08118604
 	bl sub_80FCE44
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_80F8DC0
 	ldr r1, _081185E4 @ =gUnknown_20370D0
 	movs r0, 0x5
@@ -5307,7 +5307,7 @@ _081185F4:
 	cmp r0, 0
 	beq _08118604
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08118604:
 	add sp, 0x8
 	pop {r4-r6}
@@ -5315,17 +5315,17 @@ _08118604:
 	bx r0
 	thumb_func_end sub_81182DC
 
-	thumb_func_start sub_811860C
-sub_811860C: @ 811860C
+	thumb_func_start UnionRoomSpecial
+UnionRoomSpecial: @ 811860C
 	push {r4,lr}
 	bl sub_80FAF34
 	ldr r0, _08118648 @ =sub_81186E0
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	ldr r4, _0811864C @ =gUnknown_203B05C
 	movs r0, 0x96
 	lsls r0, 2
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r1, _08118650 @ =gUnknown_300202C
 	str r0, [r1]
@@ -5347,7 +5347,7 @@ _08118648: .4byte sub_81186E0
 _0811864C: .4byte gUnknown_203B05C
 _08118650: .4byte gUnknown_300202C
 _08118654: .4byte gUnknown_20370D0
-	thumb_func_end sub_811860C
+	thumb_func_end UnionRoomSpecial
 
 	thumb_func_start sub_8118658
 sub_8118658: @ 8118658
@@ -5521,17 +5521,17 @@ _0811871C:
 	.4byte _081195EC
 _08118800:
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r6, 0x4]
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r6, 0xC]
 	movs r0, 0x80
 	lsls r0, 1
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r6]
 	movs r0, 0x20
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r6, 0x8]
 	ldr r0, [r6]
 	movs r1, 0x8
@@ -5718,7 +5718,7 @@ _081189AA:
 	ldr r0, _081189DC @ =gUnknown_2021CD0
 	ldr r1, _081189E0 @ =gUnknown_300500C
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	movs r1, 0
 	movs r0, 0x2A
 	b _08118A06
@@ -5749,7 +5749,7 @@ _08118A06:
 	strh r1, [r4]
 	bl _081198DC
 _08118A0E:
-	bl sub_8069958
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5791,7 +5791,7 @@ _08118A50:
 	ldr r0, _08118A7C @ =gUnknown_2021CD0
 	ldr r1, _08118A80 @ =gUnknown_300500C
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x2D
 	bl _081198DA
 	.align 2, 0
@@ -5841,7 +5841,7 @@ _08118AD4:
 	bl _081198DC
 _08118ADE:
 	ldr r0, _08118B00 @ =sub_806F1F0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08118AEE
@@ -5952,7 +5952,7 @@ _08118BCE:
 	bl sub_8117594
 	ldr r0, _08118BF4 @ =sub_8117280
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0x26
 	bl _081198DA
 	.align 2, 0
@@ -5963,7 +5963,7 @@ _08118BF0: .4byte gUnknown_2022618
 _08118BF4: .4byte sub_8117280
 _08118BF8:
 	ldr r0, _08118C1C @ =sub_8117280
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08118C08
@@ -6059,7 +6059,7 @@ _08118CB6:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x20
 	bl _081198DA
 	.align 2, 0
@@ -6103,7 +6103,7 @@ _08118D34: .4byte gUnknown_203B058
 _08118D38:
 	ldr r0, _08118D48 @ =gUnknown_2021D18
 	ldr r1, _08118D4C @ =gUnknown_8458434
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x24
 	bl _081198DA
 	.align 2, 0
@@ -6174,7 +6174,7 @@ _08118DD4:
 	bne _08118DF8
 	ldr r0, _08118DF0 @ =gUnknown_2021D18
 	ldr r1, _08118DF4 @ =gUnknown_8458434
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x1C
 	bl _081198DA
 	.align 2, 0
@@ -6280,12 +6280,12 @@ _08118EC8:
 	bne _08118ED6
 	bl _081198DC
 _08118ED6:
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _08118F30
 	ldr r5, _08118F20 @ =gUnknown_2021CD0
-	bl sub_800A404
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -6296,7 +6296,7 @@ _08118ED6:
 	ldr r4, _08118F24 @ =gUnknown_2022744
 	adds r1, r4
 	adds r0, r5, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldrh r0, [r4, 0x18]
 	adds r4, 0x1C
 	adds r1, r4, 0
@@ -6340,7 +6340,7 @@ _08118F58:
 	bl _081198DC
 _08118F60:
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldr r4, _08118F98 @ =gUnknown_203B058
 	movs r0, 0x45
 	strb r0, [r4]
@@ -6523,7 +6523,7 @@ _081190EA:
 	bl sub_8117594
 	ldr r0, _08119108 @ =sub_8117280
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0x27
 	bl _081198DA
 	.align 2, 0
@@ -6534,7 +6534,7 @@ _0811910C:
 	adds r0, r6, 0
 	bl sub_8119904
 	ldr r0, _08119150 @ =sub_8117280
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08119122
@@ -6545,7 +6545,7 @@ _08119122:
 	ldr r0, _08119154 @ =gUnknown_2021CD0
 	ldr r4, _08119158 @ =gUnknown_2022760
 	adds r1, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	adds r0, r4, 0
 	subs r0, 0x24
 	ldrh r0, [r0, 0x20]
@@ -6602,7 +6602,7 @@ _081191A4:
 	bl sub_80FBD6C
 	ldr r0, _081191BC @ =gUnknown_2021D18
 	ldr r1, _081191C0 @ =gUnknown_8457E60
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x24
 	b _081198DA
 	.align 2, 0
@@ -6693,7 +6693,7 @@ _0811924A:
 	strb r0, [r6, 0x14]
 	ldr r0, _08119280 @ =gUnknown_2021D18
 	ldr r1, _08119284 @ =gUnknown_84584C0
-	bl sub_8008D84
+	bl StringCopy
 	b _081198DC
 	.align 2, 0
 _0811927C: .4byte gUnknown_203B058
@@ -6806,17 +6806,17 @@ _08119368:
 	b _081198DA
 _0811936C:
 	ldr r0, [r6, 0x8]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6, 0xC]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6, 0x4]
-	bl sub_8002BC4
+	bl Free
 	adds r0, r6, 0
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl sub_8077508
+	bl DestroyTask
 	adds r0, r6, 0
 	adds r0, 0x21
 	bl sub_811BB40
@@ -6829,11 +6829,11 @@ _0811939A:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	movs r0, 0x12
 	b _081198DA
 _081193AE:
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	beq _081193BA
@@ -6841,10 +6841,10 @@ _081193AE:
 _081193BA:
 	bl sub_811BA78
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _081193D4 @ =gUnknown_203B05C
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	bl sub_81179A4
 	b _081198DC
 	.align 2, 0
@@ -6872,7 +6872,7 @@ _081193F0:
 	bne _08119414
 	ldr r0, _0811940C @ =gUnknown_2021D18
 	ldr r1, _08119410 @ =gUnknown_8458DE8
-	bl sub_8008D84
+	bl StringCopy
 	b _0811944A
 	.align 2, 0
 _0811940C: .4byte gUnknown_2021D18
@@ -6888,7 +6888,7 @@ _08119414:
 	ldr r0, _08119458 @ =gUnknown_8245EE0
 	adds r1, r0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r4, _0811945C @ =gUnknown_2021CF0
 	bl sub_80F9800
 	ldrb r1, [r0, 0xB]
@@ -6986,7 +6986,7 @@ _081194F0:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	movs r0, 0x36
 	b _081198DA
 _08119504:
@@ -7004,7 +7004,7 @@ _08119512:
 	ldr r1, _08119530 @ =gUnknown_3005020
 	ldr r0, _08119534 @ =sub_807DCE4
 	str r0, [r1]
-	ldr r1, _08119538 @ =sub_80567DC
+	ldr r1, _08119538 @ =c2_exit_to_overworld_2_switch
 	movs r0, 0x8
 	bl sub_81277F4
 	b _081198DC
@@ -7013,7 +7013,7 @@ _08119528: .4byte gUnknown_2037AB8
 _0811952C: .4byte gUnknown_203B06C
 _08119530: .4byte gUnknown_3005020
 _08119534: .4byte sub_807DCE4
-_08119538: .4byte sub_80567DC
+_08119538: .4byte c2_exit_to_overworld_2_switch
 _0811953C:
 	adds r0, r6, 0
 	adds r0, 0x16
@@ -7205,14 +7205,14 @@ _081196BA:
 	add r1, r8
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r6]
 	add r0, r8
 	ldrb r1, [r0]
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r1, _081196E8 @ =gUnknown_8458E70
 	movs r0, 0x31
 	bl sub_8118664
@@ -7227,14 +7227,14 @@ _081196EC:
 	add r1, r8
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r6]
 	add r0, r8
 	ldrb r1, [r0]
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r0, _08119728 @ =gUnknown_2021CF0
 	ldr r1, [r6]
 	add r1, r8
@@ -7244,7 +7244,7 @@ _081196EC:
 	subs r1, r2
 	ldr r2, _0811972C @ =gUnknown_824F1A0
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _08119730 @ =gUnknown_8458ED0
 	b _0811976A
 	.align 2, 0
@@ -7258,14 +7258,14 @@ _08119734:
 	add r1, r8
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r6]
 	add r0, r8
 	ldrb r1, [r0]
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r0, _08119778 @ =gUnknown_2021CF0
 	ldr r1, [r6]
 	add r1, r8
@@ -7275,7 +7275,7 @@ _08119734:
 	subs r1, r2
 	ldr r2, _0811977C @ =gUnknown_824F1A0
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _08119780 @ =gUnknown_8458F04
 _0811976A:
 	movs r0, 0x2E
@@ -7357,7 +7357,7 @@ _081197CA:
 	ldr r1, _08119834 @ =gUnknown_3005020
 	ldr r0, _08119838 @ =sub_807DCE4
 	str r0, [r1]
-	ldr r1, _0811983C @ =sub_80567DC
+	ldr r1, _0811983C @ =c2_exit_to_overworld_2_switch
 	movs r0, 0x9
 	bl sub_81277F4
 	adds r0, r6, 0
@@ -7373,7 +7373,7 @@ _0811982C: .4byte gUnknown_203B06A
 _08119830: .4byte gUnknown_203B068
 _08119834: .4byte gUnknown_3005020
 _08119838: .4byte sub_807DCE4
-_0811983C: .4byte sub_80567DC
+_0811983C: .4byte c2_exit_to_overworld_2_switch
 _08119840:
 	ldr r1, _08119890 @ =gUnknown_203B058
 	movs r0, 0x44
@@ -7395,7 +7395,7 @@ _08119840:
 	adds r1, r0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, [r6]
 	movs r3, 0x2
 	ldrsh r0, [r7, r3]
@@ -7405,7 +7405,7 @@ _08119840:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r0, _08119898 @ =gUnknown_8457A34
 	ldr r0, [r0, 0x8]
 	bl sub_811A0B4
@@ -7574,11 +7574,11 @@ sub_811999C: @ 811999C
 	bls _081199E0
 	ldr r0, _081199F0 @ =sub_81199FC
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r4, _081199F4 @ =gUnknown_203B05C
 	movs r0, 0x96
 	lsls r0, 2
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r1, _081199F8 @ =gUnknown_300202C
 	str r0, [r1]
@@ -7649,23 +7649,23 @@ _08119A3E:
 	b _08119B5C
 _08119A60:
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5, 0x4]
 	movs r1, 0x4
 	bl sub_811A650
 	movs r0, 0x70
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5, 0xC]
 	movs r1, 0x4
 	bl sub_811A650
 	movs r0, 0x80
 	lsls r0, 1
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5]
 	movs r1, 0x8
 	bl sub_811A5E4
 	movs r0, 0x20
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5, 0x8]
 	movs r1, 0x1
 	bl sub_811A5E4
@@ -7703,14 +7703,14 @@ _08119ACA:
 	bne _08119B0A
 	adds r1, 0x10
 	mov r0, sp
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r1, [r0]
 	lsls r1, 28
 	lsrs r1, 28
 	mov r0, sp
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r0, [r5]
 	adds r0, r4
 	adds r0, 0x2
@@ -7731,29 +7731,29 @@ _08119B14: .4byte gUnknown_203B04C
 _08119B18:
 	ldr r0, _08119B24 @ =gUnknown_203B04C
 	mov r1, sp
-	bl sub_8008D84
+	bl StringCopy
 	b _08119B5C
 	.align 2, 0
 _08119B24: .4byte gUnknown_203B04C
 _08119B28:
 	ldr r0, [r5, 0x8]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5, 0xC]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5, 0x4]
-	bl sub_8002BC4
+	bl Free
 	adds r0, r5, 0
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _08119B64 @ =gUnknown_203B05C
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	bl sub_80F8DC0
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08119B5C:
 	add sp, 0x20
 	pop {r4-r6}
@@ -7763,8 +7763,8 @@ _08119B5C:
 _08119B64: .4byte gUnknown_203B05C
 	thumb_func_end sub_81199FC
 
-	thumb_func_start sub_8119B68
-sub_8119B68: @ 8119B68
+	thumb_func_start sp182_move_string
+sp182_move_string: @ 8119B68
 	push {r4,lr}
 	ldr r4, _08119B78 @ =gUnknown_203B04C
 	ldrb r0, [r4]
@@ -7777,7 +7777,7 @@ _08119B78: .4byte gUnknown_203B04C
 _08119B7C:
 	ldr r0, _08119B90 @ =gUnknown_2021CD0
 	adds r1, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0xFF
 	strb r0, [r4]
 	movs r0, 0x1
@@ -7787,7 +7787,7 @@ _08119B8A:
 	bx r1
 	.align 2, 0
 _08119B90: .4byte gUnknown_2021CD0
-	thumb_func_end sub_8119B68
+	thumb_func_end sp182_move_string
 
 	thumb_func_start sub_8119B94
 sub_8119B94: @ 8119B94
@@ -8188,7 +8188,7 @@ sub_8119E84: @ 8119E84
 	adds r6, r2, 0
 	ldr r0, _08119EB0 @ =sub_8119D34
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -8433,7 +8433,7 @@ sub_811A054: @ 811A054
 	adds r5, r1, 0
 	ldr r0, _0811A07C @ =sub_8119EB8
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 2
@@ -8459,7 +8459,7 @@ sub_811A084: @ 811A084
 	adds r5, r1, 0
 	ldr r0, _0811A0AC @ =sub_8119FD8
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 2
@@ -8627,7 +8627,7 @@ sub_811A1AC: @ 811A1AC
 	bl sub_80F6F1C
 	adds r0, r4, 0
 	movs r1, 0xFF
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r2, _0811A1F8 @ =gUnknown_8459378
 	movs r0, 0x1
 	str r0, [sp]
@@ -8638,7 +8638,7 @@ sub_811A1AC: @ 811A1AC
 	movs r3, 0x8
 	bl sub_811A444
 	adds r0, r4, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl sub_8003F20
@@ -8700,7 +8700,7 @@ _0811A234:
 	strb r1, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	mov r1, r9
 	strb r0, [r1]
 	ldrb r0, [r5]
@@ -8715,7 +8715,7 @@ _0811A270: .4byte gUnknown_3005E70
 _0811A274:
 	mov r3, r9
 	ldrb r0, [r3]
-	bl sub_8107078
+	bl ListMenuHandleInput
 	mov r8, r0
 	ldr r0, _0811A2AC @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -8806,7 +8806,7 @@ _0811A308:
 	strb r1, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8106FF8
+	bl ListMenuInit
 	strb r0, [r5]
 	ldrb r0, [r4]
 	movs r1, 0x1
@@ -8821,7 +8821,7 @@ _0811A350: .4byte gUnknown_8456F1C
 _0811A354: .4byte gUnknown_3005E70
 _0811A358:
 	ldrb r0, [r5]
-	bl sub_8107078
+	bl ListMenuHandleInput
 	adds r1, r0, 0
 	ldr r0, _0811A3A8 @ =gUnknown_30030F0
 	ldrh r2, [r0, 0x2E]
@@ -8907,9 +8907,9 @@ sub_811A3F8: @ 811A3F8
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -8927,10 +8927,10 @@ sub_811A41C: @ 811A41C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r0, 0
-	bl sub_80020BC
-	bl sub_8069B34
+	bl CopyBgTilemapBufferToVram
+	bl EnableBothScriptContexts
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -9503,7 +9503,7 @@ sub_811A81C: @ 811A81C
 	bl sub_8008E78
 	ldr r1, _0811A908 @ =gUnknown_84571B0
 	mov r0, r8
-	bl sub_8008DA4
+	bl StringAppend
 	str r6, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -9532,12 +9532,12 @@ sub_811A81C: @ 811A81C
 	adds r1, r5, 0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldrb r1, [r5]
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	str r6, [sp]
 	mov r0, r10
 	str r0, [sp, 0x4]
@@ -9556,10 +9556,10 @@ sub_811A81C: @ 811A81C
 	bl sub_8008E78
 	ldr r1, _0811A90C @ =gUnknown_84571B4
 	mov r0, r8
-	bl sub_8008D84
+	bl StringCopy
 	mov r0, r8
 	add r1, sp, 0x8
-	bl sub_8008DA4
+	bl StringAppend
 	mov r3, r9
 	adds r3, 0x4D
 	lsls r3, 24
@@ -9614,12 +9614,12 @@ sub_811A910: @ 811A910
 	adds r1, r5, 0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldrb r1, [r5]
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	mov r0, r8
 	str r0, [sp]
 	str r7, [sp, 0x4]
@@ -9639,10 +9639,10 @@ sub_811A910: @ 811A910
 	ldr r4, _0811A9B0 @ =gUnknown_2021D18
 	ldr r1, _0811A9B4 @ =gUnknown_84571B4
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	adds r0, r4, 0
 	add r1, sp, 0x8
-	bl sub_8008DA4
+	bl StringAppend
 	adds r3, r6, 0
 	adds r3, 0x47
 	lsls r3, 24
@@ -9675,7 +9675,7 @@ sub_811A9B8: @ 811A9B8
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C4F4
+	bl GetXYCoordsOneStepInFrontOfPlayer
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -9741,12 +9741,12 @@ sub_811AA24: @ 811AA24
 	adds r1, r4, 0
 	adds r1, 0x10
 	mov r0, sp
-	bl sub_8008D84
+	bl StringCopy
 	ldrb r1, [r4]
 	lsls r1, 28
 	lsrs r1, 28
 	mov r0, sp
-	bl sub_80093BC
+	bl ConvertInternationalString
 	adds r4, 0x2
 	adds r0, r4, 0
 	bl sub_8118658
@@ -9780,12 +9780,12 @@ sub_811AA5C: @ 811AA5C
 	adds r1, r5, 0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldrb r1, [r5]
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	adds r0, r5, 0x2
 	bl sub_8118658
 	lsls r0, 16
@@ -9827,12 +9827,12 @@ _0811AAE4:
 	adds r1, r5, 0
 	adds r1, 0x10
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldrb r1, [r5]
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	cmp r6, 0
 	beq _0811AB0A
 	adds r0, r5, r6
@@ -9864,7 +9864,7 @@ _0811AB28:
 _0811AB32:
 	ldr r5, _0811AB50 @ =gUnknown_2021D18
 	ldr r4, _0811AB54 @ =gUnknown_8458758
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10
@@ -9881,7 +9881,7 @@ _0811AB54: .4byte gUnknown_8458758
 _0811AB58:
 	ldr r5, _0811AB70 @ =gUnknown_2021D18
 	ldr r4, _0811AB74 @ =gUnknown_8458A78
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -9895,7 +9895,7 @@ _0811AB74: .4byte gUnknown_8458A78
 _0811AB78:
 	ldr r5, _0811AB94 @ =gUnknown_2021D18
 	ldr r4, _0811AB98 @ =gUnknown_84588BC
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10
@@ -9912,7 +9912,7 @@ _0811AB98: .4byte gUnknown_84588BC
 _0811AB9C:
 	ldr r5, _0811ABC0 @ =gUnknown_2021D18
 	ldr r4, _0811ABC4 @ =gUnknown_84589AC
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -10095,14 +10095,14 @@ _0811AD08:
 	adds r1, r0, r4
 	adds r1, 0x10
 	add r0, sp, 0x4
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r6]
 	adds r0, r4
 	ldrb r1, [r0]
 	lsls r1, 28
 	lsrs r1, 28
 	add r0, sp, 0x4
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r2, [r6]
 	adds r2, r4
 	movs r0, 0x6
@@ -10219,7 +10219,7 @@ _0811ADE0:
 	ldr r1, _0811AE08 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	movs r0, 0xCE
 	lsls r0, 1
@@ -10249,7 +10249,7 @@ _0811AE1C:
 	ldr r1, _0811AE4C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r0, r1, 3
 	subs r0, r1
@@ -10346,7 +10346,7 @@ sub_811AECC: @ 811AECC
 	lsls r1, 24
 	lsrs r4, r1, 24
 	adds r6, r4, 0
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, _0811AF00 @ =gUnknown_202273C
@@ -10397,7 +10397,7 @@ _0811AF32:
 	adds r1, r2
 	ldr r1, [r1]
 	adds r0, r5, 0
-	bl sub_8008D84
+	bl StringCopy
 	b _0811AF60
 	.align 2, 0
 _0811AF40: .4byte gUnknown_8458230
@@ -10414,7 +10414,7 @@ _0811AF44:
 	adds r1, r2
 	ldr r1, [r1]
 	adds r0, r5, 0
-	bl sub_8008D84
+	bl StringCopy
 _0811AF60:
 	pop {r4-r6}
 	pop {r0}
@@ -10482,7 +10482,7 @@ _0811AFC8:
 	muls r1, r2
 	ldr r2, _0811AFF4 @ =gUnknown_8245EE0
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	movs r4, 0
 	b _0811AFFA
 	.align 2, 0
@@ -10513,7 +10513,7 @@ _0811AFFA:
 	adds r1, r0
 	adds r0, r6, 0
 	adds r0, 0x79
-	bl sub_8008D84
+	bl StringCopy
 	ldrh r5, [r5, 0x2]
 	mov r8, r5
 _0811B030:
@@ -10523,7 +10523,7 @@ _0811B030:
 	bne _0811B050
 	ldr r1, _0811B04C @ =gUnknown_8457DB8
 	adds r0, r7, 0
-	bl sub_8008D84
+	bl StringCopy
 	b _0811B080
 	.align 2, 0
 _0811B044: .4byte gUnknown_3007460
@@ -10638,12 +10638,12 @@ _0811B0FE:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1E
 	bhi _0811B126
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -10707,15 +10707,15 @@ sub_811B16C: @ 811B16C
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r5, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r5, 0xC]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [r5, 0x4]
 	ldrh r1, [r5, 0xA]
 	movs r0, 0xCE
@@ -10745,15 +10745,15 @@ sub_811B1B4: @ 811B1B4
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r5, 0xE]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r5, 0x10]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [r5, 0x14]
 	pop {r4,r5}
 	pop {r0}
@@ -10794,12 +10794,12 @@ _0811B212:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, r6
 	bne _0811B238
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r7
@@ -10828,7 +10828,7 @@ sub_811B258: @ 811B258
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_811A3F8
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	bl sub_80696F0
 	ldr r1, _0811B290 @ =gUnknown_203B058
 	movs r0, 0
@@ -10856,8 +10856,8 @@ _0811B294: .4byte gUnknown_203B06C
 	thumb_func_start sub_811B298
 sub_811B298: @ 811B298
 	push {lr}
-	bl sub_8069940
-	bl sub_80695B4
+	bl ScriptContext2_Enable
+	bl ScriptFreezeMapObjects
 	pop {r0}
 	bx r0
 	thumb_func_end sub_811B298
@@ -10941,7 +10941,7 @@ sub_811B31C: @ 811B31C
 	lsls r2, 24
 	lsrs r2, 24
 	str r2, [sp]
-	bl sub_800A404
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -10963,7 +10963,7 @@ sub_811B31C: @ 811B31C
 	ldr r0, _0811B4B4 @ =gUnknown_823E558
 	adds r1, r0
 	adds r0, r6, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0
 	adds r1, r6, 0
 	bl sub_813CCAC
@@ -10981,7 +10981,7 @@ sub_811B31C: @ 811B31C
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x2
 	adds r1, r4, 0
 	bl sub_813CCAC
@@ -11027,7 +11027,7 @@ sub_811B31C: @ 811B31C
 	bl sub_813CCC8
 	ldr r0, _0811B4C0 @ =gUnknown_2021D18
 	adds r1, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	mov r0, r8
 	ldrh r1, [r0, 0x14]
 	ldr r4, _0811B4C4 @ =0x0000270f
@@ -11096,7 +11096,7 @@ _0811B45E:
 	ldr r5, _0811B4C0 @ =gUnknown_2021D18
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 	ldr r0, [sp]
 	cmp r0, 0x1
 	bne _0811B4D0
@@ -11105,7 +11105,7 @@ _0811B45E:
 	bl sub_813CCC8
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 	b _0811B4F0
 	.align 2, 0
 _0811B4B0: .4byte gUnknown_2039624
@@ -11130,7 +11130,7 @@ _0811B4D0:
 	bl sub_813CCC8
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 _0811B4F0:
 	add sp, 0x4
 	pop {r3-r5}
@@ -11144,8 +11144,8 @@ _0811B4F0:
 _0811B500: .4byte gUnknown_8459580
 	thumb_func_end sub_811B31C
 
-	thumb_func_start sub_811B504
-sub_811B504: @ 811B504
+	thumb_func_start is_walking_or_running
+is_walking_or_running: @ 811B504
 	push {lr}
 	ldr r0, _0811B518 @ =gUnknown_2037078
 	ldrb r0, [r0, 0x3]
@@ -11163,7 +11163,7 @@ _0811B51C:
 _0811B51E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_811B504
+	thumb_func_end is_walking_or_running
 
 	thumb_func_start sub_811B524
 sub_811B524: @ 811B524
@@ -11330,7 +11330,7 @@ sub_811B62C: @ 811B62C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl sub_805E898
+	bl show_sprite
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11348,7 +11348,7 @@ sub_811B64C: @ 811B64C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl sub_805E4C8
+	bl RemoveFieldObjectByLocalIdAndMap
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11369,7 +11369,7 @@ sub_811B66C: @ 811B66C
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B6D0
@@ -11381,7 +11381,7 @@ sub_811B66C: @ 811B66C
 	ldr r1, _0811B6C0 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B6D0
@@ -11428,7 +11428,7 @@ sub_811B6E8: @ 811B6E8
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B748
@@ -11440,7 +11440,7 @@ sub_811B6E8: @ 811B6E8
 	ldr r1, _0811B72C @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B730
@@ -11451,12 +11451,12 @@ _0811B724: .4byte gUnknown_8457120
 _0811B728: .4byte gUnknown_3005008
 _0811B72C: .4byte gUnknown_2036E38
 _0811B730:
-	bl sub_8069958
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B742
 	adds r0, r4, 0
-	bl sub_80689F4
+	bl npc_sync_anim_pause_bits
 	b _0811B748
 _0811B742:
 	adds r0, r4, 0
@@ -11581,14 +11581,14 @@ _0811B820:
 	beq _0811B888
 	b _0811B8B2
 _0811B826:
-	bl sub_811B504
+	bl is_walking_or_running
 	cmp r0, 0
 	beq _0811B8B2
 	mov r4, sp
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r2, [r0, r1]
@@ -11601,7 +11601,7 @@ _0811B826:
 	beq _0811B8B2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C568
+	bl plaer_get_pos_including_state_based_drift
 	mov r0, sp
 	movs r1, 0
 	ldrsh r2, [r0, r1]
@@ -11843,14 +11843,14 @@ sub_811BA18: @ 811BA18
 	push {r4,lr}
 	ldr r4, _0811BA38 @ =sub_811B9D8
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0811BA3C
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	b _0811BA4A
@@ -11877,12 +11877,12 @@ _0811BA58: .4byte gUnknown_8457174
 sub_811BA5C: @ 811BA5C
 	push {lr}
 	ldr r0, _0811BA74 @ =sub_811B9D8
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xF
 	bhi _0811BA70
-	bl sub_8077508
+	bl DestroyTask
 _0811BA70:
 	pop {r0}
 	bx r0
@@ -12006,7 +12006,7 @@ _0811BB48:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl sub_8007280
+	bl DestroySprite
 	adds r4, 0x1
 	cmp r4, 0x27
 	ble _0811BB48
@@ -12198,13 +12198,13 @@ sub_811BCA0: @ 811BCA0
 	adds r6, 0x2
 	mov r0, sp
 	adds r1, r6, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	add r4, sp, 0x4
 	mov r5, sp
 	adds r5, 0x6
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805C568
+	bl plaer_get_pos_including_state_based_drift
 	lsls r0, r7, 2
 	adds r0, r7
 	subs r0, 0x38
@@ -12490,13 +12490,13 @@ sub_811BF00: @ 811BF00
 	adds r5, r0, 0
 	str r1, [sp, 0x4]
 	str r2, [sp, 0x8]
-	bl sub_811B504
+	bl is_walking_or_running
 	cmp r0, 0
 	bne _0811BF48
 	b _0811BFEE
 _0811BF1C:
 	ldr r4, _0811BF44 @ =gUnknown_8457116
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -12519,7 +12519,7 @@ _0811BF48:
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C4F4
+	bl GetXYCoordsOneStepInFrontOfPlayer
 	movs r0, 0
 	str r0, [sp, 0xC]
 	ldr r0, _0811C000 @ =gUnknown_84570EC
@@ -12683,7 +12683,7 @@ _0811C05C:
 	adds r5, r4, r0
 _0811C082:
 	adds r0, r4, 0
-	bl sub_803D994
+	bl ZeroMonData
 	adds r4, 0x64
 	cmp r4, r5
 	ble _0811C082
@@ -12703,14 +12703,14 @@ _0811C096:
 	ble _0811C096
 	movs r0, 0x32
 	bl sub_8054E90
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	ldr r0, _0811C0D8 @ =gUnknown_20386AE
 	movs r2, 0xC0
 	lsls r2, 4
 	adds r1, r2, 0
 	strh r1, [r0]
 	ldr r0, _0811C0DC @ =sub_800FD9C
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -12751,7 +12751,7 @@ sub_811C0E0: @ 811C0E0
 	lsrs r1, 24
 	adds r0, r5, 0
 	str r3, [sp, 0x14]
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	mov r0, r8
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -12805,7 +12805,7 @@ _0811C168:
 	movs r3, 0x2
 	bl sub_811C0E0
 	movs r0, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
 	bl sub_8003F20
@@ -12835,9 +12835,9 @@ _0811C1AC:
 	thumb_func_start sub_811C1B4
 sub_811C1B4: @ 811C1B4
 	push {lr}
-	bl sub_8007320
-	bl sub_8007610
-	bl sub_8070474
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_811C1B4
@@ -12921,21 +12921,21 @@ _0811C1F0:
 _0811C2C0:
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _0811C350 @ =gUnknown_203B08C
 	movs r0, 0x4
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
-	bl sub_8006B10
-	bl sub_80088F0
-	bl sub_80773BC
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
+	bl ResetTasks
 	movs r0, 0
 	bl sub_8001618
 	ldr r1, _0811C354 @ =gUnknown_8457194
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8001658
-	bl sub_80F6808
+	bl reset_temp_tile_data_buffers
 	ldr r0, _0811C358 @ =gUnknown_8457198
 	bl sub_8003B24
 	lsls r0, 16
@@ -12945,13 +12945,13 @@ _0811C2C0:
 _0811C300:
 	bl sub_8002C28
 	movs r0, 0
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	movs r0, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0x1E
 	str r0, [sp]
 	movs r0, 0x14
@@ -12962,14 +12962,14 @@ _0811C300:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
 	bl sub_814FF2C
 	bl sub_80F77B8
 	ldr r0, _0811C35C @ =sub_811C1B4
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldr r1, _0811C360 @ =gUnknown_30030F0
 	movs r0, 0x87
 	lsls r0, 3
@@ -13007,9 +13007,9 @@ _0811C38C:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	ldr r1, _0811C3AC @ =gUnknown_30030F0
 	movs r0, 0x87
 	lsls r0, 3
@@ -13018,7 +13018,7 @@ _0811C38C:
 	.align 2, 0
 _0811C3AC: .4byte gUnknown_30030F0
 _0811C3B0:
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811C3BC
@@ -13046,7 +13046,7 @@ _0811C3E2:
 	ldr r1, _0811C3F8 @ =gUnknown_2022618
 	movs r0, 0
 	movs r2, 0x20
-	bl sub_800A448
+	bl SendBlock
 	ldr r1, _0811C3FC @ =gUnknown_30030F0
 	movs r2, 0x87
 	lsls r2, 3
@@ -13056,7 +13056,7 @@ _0811C3E2:
 _0811C3F8: .4byte gUnknown_2022618
 _0811C3FC: .4byte gUnknown_30030F0
 _0811C400:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -13079,7 +13079,7 @@ _0811C40E:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _0811C444 @ =gUnknown_30030F0
 	movs r1, 0x87
 	lsls r1, 3
@@ -13092,7 +13092,7 @@ _0811C444: .4byte gUnknown_30030F0
 _0811C448:
 	bl sub_800AAC0
 	ldr r4, _0811C46C @ =gUnknown_2022118
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 16
 	adds r0, r4
@@ -13116,12 +13116,12 @@ _0811C474:
 	movs r1, 0x8
 _0811C47E:
 	strb r1, [r0]
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	b _0811C516
 	.align 2, 0
 _0811C488: .4byte gUnknown_30030F0
 _0811C48C:
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811C516
@@ -13139,7 +13139,7 @@ _0811C4A8:
 	cmp r0, 0
 	beq _0811C516
 	ldr r0, _0811C4BC @ =sub_811C04C
-	bl sub_8000544
+	bl SetMainCallback2
 	b _0811C516
 	.align 2, 0
 _0811C4BC: .4byte sub_811C04C
@@ -13151,13 +13151,13 @@ _0811C4C0:
 	bl sub_811C150
 	cmp r0, 0
 	beq _0811C516
-	ldr r0, _0811C4E0 @ =sub_80567DC
-	bl sub_8000544
+	ldr r0, _0811C4E0 @ =c2_exit_to_overworld_2_switch
+	bl SetMainCallback2
 	b _0811C516
 	.align 2, 0
 _0811C4D8: .4byte gUnknown_203B08C
 _0811C4DC: .4byte gUnknown_841E58D
-_0811C4E0: .4byte sub_80567DC
+_0811C4E0: .4byte c2_exit_to_overworld_2_switch
 _0811C4E4:
 	ldr r0, _0811C4FC @ =gUnknown_3003F64
 	ldrb r0, [r0]
@@ -13181,14 +13181,14 @@ _0811C500:
 	bl sub_811C150
 	cmp r0, 0
 	beq _0811C516
-	ldr r0, _0811C53C @ =sub_80567DC
-	bl sub_8000544
+	ldr r0, _0811C53C @ =c2_exit_to_overworld_2_switch
+	bl SetMainCallback2
 _0811C516:
-	bl sub_8077578
+	bl RunTasks
 	bl sub_8002DE8
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 _0811C52A:
 	add sp, 0xC
 	pop {r4}
@@ -13197,7 +13197,7 @@ _0811C52A:
 	.align 2, 0
 _0811C534: .4byte gUnknown_203B08C
 _0811C538: .4byte gUnknown_841E572
-_0811C53C: .4byte sub_80567DC
+_0811C53C: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_811C1C8
 
 	.align 2, 0 @ Don't pad with nop.

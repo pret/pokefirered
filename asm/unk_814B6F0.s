@@ -32,18 +32,18 @@ _0814B710:
 	ldr r4, [r0]
 _0814B716:
 	ldrb r0, [r0, 0xA]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r5]
 	adds r0, r4, 0
-	bl sub_8000544
-	ldr r0, _0814B748 @ =sub_80567DC
+	bl SetMainCallback2
+	ldr r0, _0814B748 @ =c2_exit_to_overworld_2_switch
 	cmp r4, r0
 	bne _0814B73E
 	ldr r0, _0814B74C @ =0x0000012f
-	bl sub_8071A74
+	bl PlayNewMapMusic
 	ldr r0, _0814B750 @ =sub_8056534
 	bl sub_80565E0
 _0814B73E:
@@ -53,7 +53,7 @@ _0814B740:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0814B748: .4byte sub_80567DC
+_0814B748: .4byte c2_exit_to_overworld_2_switch
 _0814B74C: .4byte 0x0000012f
 _0814B750: .4byte sub_8056534
 	thumb_func_end sub_814B6FC
@@ -77,7 +77,7 @@ sub_814B754: @ 814B754
 	bne _0814B790
 _0814B772:
 	adds r0, r4, 0
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r0, _0814B78C @ =gUnknown_3005450
 	mov r1, r8
 	strh r1, [r0, 0x10]
@@ -92,7 +92,7 @@ _0814B790:
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	mov r0, r8
@@ -102,7 +102,7 @@ _0814B790:
 	bcc _0814B7C0
 _0814B7AC:
 	adds r0, r4, 0
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r0, _0814B7BC @ =gUnknown_3005450
 	movs r1, 0
 	strh r1, [r0, 0x10]
@@ -113,13 +113,13 @@ _0814B7BC: .4byte gUnknown_3005450
 _0814B7C0:
 	ldr r6, _0814B7E8 @ =gUnknown_203F3DC
 	ldr r0, _0814B7EC @ =0x000041c0
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	str r5, [r6]
 	cmp r5, 0
 	bne _0814B7F4
 	adds r0, r4, 0
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r0, _0814B7F0 @ =gUnknown_3005450
 	strh r5, [r0, 0x10]
 	strh r5, [r0, 0x12]
@@ -167,10 +167,10 @@ _0814B7F4:
 	movs r1, 0x1
 	bl sub_814BB4C
 	ldr r0, _0814B858 @ =sub_814BA80
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r0, _0814B85C @ =sub_814BA98
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, [r6]
 	strb r0, [r1, 0xA]
 _0814B84C:
@@ -239,11 +239,11 @@ _0814B884:
 	bl sub_814BB4C
 	ldr r0, _0814B8E8 @ =sub_814BA98
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, [r4]
 	strb r0, [r1, 0xA]
 	ldr r0, _0814B8EC @ =sub_814BA80
-	bl sub_8000544
+	bl SetMainCallback2
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -261,7 +261,7 @@ sub_814B8F0: @ 814B8F0
 	ldr r0, _0814B90C @ =gUnknown_203F3DC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xA]
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _0814B910 @ =sub_814B860
 	movs r0, 0x5
 	movs r2, 0
@@ -277,7 +277,7 @@ _0814B910: .4byte sub_814B860
 sub_814B914: @ 814B914
 	push {lr}
 	ldr r0, _0814B920 @ =sub_814BA6C
-	bl sub_80006F4
+	bl SetVBlankCallback
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -288,7 +288,7 @@ _0814B920: .4byte sub_814BA6C
 sub_814B924: @ 814B924
 	push {lr}
 	movs r0, 0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814B924
@@ -455,9 +455,9 @@ _0814BA68: .4byte gUnknown_203F3DC
 	thumb_func_start sub_814BA6C
 sub_814BA6C: @ 814BA6C
 	push {lr}
-	bl sub_8070474
-	bl sub_8007320
-	bl sub_8007610
+	bl TransferPlttBuffer
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814BA6C
@@ -465,10 +465,10 @@ sub_814BA6C: @ 814BA6C
 	thumb_func_start sub_814BA80
 sub_814BA80: @ 814BA80
 	push {lr}
-	bl sub_8077578
+	bl RunTasks
 	bl sub_8002DE8
-	bl sub_8006B5C
-	bl sub_8006BA8
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814BA80
@@ -510,7 +510,7 @@ _0814BAC4:
 	lsls r1, 2
 	ldr r2, _0814BB2C @ =gUnknown_2022744
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	adds r4, r6, r4
 	adds r4, 0x9F
 	movs r0, 0xFF

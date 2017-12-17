@@ -14,7 +14,7 @@ sub_80F7AD8: @ 80F7AD8
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 4
-	bl sub_8002B9C
+	bl Alloc
 	str r0, [r6]
 	ldr r5, _080F7B28 @ =gUnknown_203ABE8
 	movs r1, 0
@@ -57,7 +57,7 @@ sub_80F7B2C: @ 80F7B2C
 	push {lr}
 	ldr r0, _080F7B3C @ =gUnknown_203ABE4
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -147,13 +147,13 @@ sub_80F7B80: @ 80F7B80
 	strh r1, [r0, 0x26]
 	adds r0, r7, 0
 	movs r1, 0x3
-	bl sub_8001AA8
+	bl GetBgAttribute
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
 	movs r1, 0x9
-	bl sub_8001AA8
+	bl GetBgAttribute
 	lsls r0, 16
 	lsrs r0, 16
 	mov r2, r9
@@ -584,7 +584,7 @@ _080F7EE6:
 	movs r1, 0x1
 	str r1, [sp, 0x4]
 	adds r1, r7, 0
-	bl sub_8002124
+	bl CopyToBgTilemapBufferRect
 	add r7, r9
 	adds r6, 0x1
 	mov r1, r10
@@ -665,7 +665,7 @@ _080F7F7E:
 	movs r1, 0x1
 	str r1, [sp, 0x4]
 	adds r1, r7, 0
-	bl sub_8002124
+	bl CopyToBgTilemapBufferRect
 	add r7, r9
 	adds r6, 0x1
 	mov r1, r10

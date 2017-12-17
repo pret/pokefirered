@@ -148,36 +148,36 @@ sub_80DA8E8: @ 80DA8E8
 _080DA8F0: .4byte gUnknown_203AA3C
 	thumb_func_end sub_80DA8E8
 
-	thumb_func_start sub_80DA8F4
-sub_80DA8F4: @ 80DA8F4
+	thumb_func_start script_status_stop_and_ret_1
+script_status_stop_and_ret_1: @ 80DA8F4
 	push {lr}
 	bl sub_80697FC
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DA8F4
+	thumb_func_end script_status_stop_and_ret_1
 
 	thumb_func_start sub_80DA900
 sub_80DA900: @ 80DA900
 	push {r4-r7,lr}
 	adds r7, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	str r0, [r7, 0x68]
 	adds r0, r7, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r7, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r6, r0, 0
 	adds r0, r7, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r3, r0, 0
 	adds r0, r5, 0
 	adds r1, r6, 0
@@ -222,7 +222,7 @@ sub_80DA964: @ 80DA964
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldr r1, [r4, 0x68]
 	subs r0, r1
 	ldr r1, [r4, 0x64]
@@ -248,12 +248,12 @@ _080DA998: .4byte gUnknown_2021D18
 sub_80DA99C: @ 80DA99C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldr r1, [r4, 0x68]
 	subs r0, r1
 	ldr r1, [r4, 0x64]
 	adds r0, r1
-	bl sub_8069B48
+	bl ScriptContext2_RunNewScript
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -270,7 +270,7 @@ sub_80DA9B8: @ 80DA9B8
 	bl sub_809C854
 	mov r8, r0
 	adds r0, r7, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r4, r0, 0
 	ldr r0, [r7, 0x68]
 	subs r4, r0
@@ -283,7 +283,7 @@ sub_80DA9B8: @ 80DA9B8
 	ldr r5, _080DAA14 @ =0x000030ec
 	adds r1, r5
 	movs r2, 0x7
-	bl sub_8008DBC
+	bl StringCopyN
 	adds r0, r4, 0
 	bl sub_809C7C4
 	ldr r4, _080DAA18 @ =gUnknown_2021CF0
@@ -291,7 +291,7 @@ sub_80DA9B8: @ 80DA9B8
 	adds r1, r5
 	adds r0, r4, 0
 	movs r2, 0x7
-	bl sub_8008DBC
+	bl StringCopyN
 	mov r0, r8
 	cmp r0, 0
 	bne _080DAA24
@@ -308,7 +308,7 @@ _080DAA20: .4byte gUnknown_8488C70
 _080DAA24:
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	beq _080DAA40
 	ldr r0, _080DAA38 @ =gUnknown_2021D18
@@ -359,7 +359,7 @@ sub_80DAA80: @ 80DAA80
 	ldrb r1, [r2]
 	adds r2, 0x1
 	str r2, [r4, 0x8]
-	bl sub_80A09AC
+	bl GiveGiftRibbonToParty
 	ldr r0, _080DAAAC @ =gUnknown_2021D18
 	ldr r1, _080DAAB0 @ =gUnknown_8488CF6
 	bl sub_8008FCC
@@ -395,14 +395,14 @@ sub_80DAAB4: @ 80DAAB4
 	adds r1, 0x1
 	str r1, [r4, 0x8]
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r5, r0, 0
 	ldr r0, [r4, 0x68]
 	subs r5, r0
 	ldr r0, [r4, 0x64]
 	adds r5, r0
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, [r4, 0x68]
 	subs r1, r0
@@ -415,7 +415,7 @@ sub_80DAAB4: @ 80DAAB4
 	adds r0, r5, 0
 	mov r2, r9
 	mov r3, r8
-	bl sub_8069D00
+	bl InitRamScript
 	movs r0, 0
 	add sp, 0x4
 	pop {r3,r4}
@@ -488,7 +488,7 @@ sub_80DAB80: @ 80DAB80
 	push {r7}
 	sub sp, 0x88
 	adds r6, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldr r1, [r6, 0x68]
 	subs r0, r1
 	ldr r1, [r6, 0x64]
@@ -503,7 +503,7 @@ sub_80DAB80: @ 80DAB80
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0xCE
@@ -513,7 +513,7 @@ sub_80DAB80: @ 80DAB80
 	ldr r0, _080DABC8 @ =gUnknown_2021CD0
 	ldr r1, _080DABCC @ =gUnknown_8415A62
 	movs r2, 0xB
-	bl sub_8008DBC
+	bl StringCopyN
 	b _080DABDA
 	.align 2, 0
 _080DABC8: .4byte gUnknown_2021CD0
@@ -522,7 +522,7 @@ _080DABD0:
 	ldr r0, _080DABF0 @ =gUnknown_2021CD0
 	ldr r1, _080DABF4 @ =gUnknown_8415A66
 	movs r2, 0xB
-	bl sub_8008DBC
+	bl StringCopyN
 _080DABDA:
 	ldr r0, _080DABF8 @ =gUnknown_2024029
 	ldrb r0, [r0]
@@ -554,7 +554,7 @@ _080DAC04:
 	cmp r4, r0
 	beq _080DAC3E
 	adds r0, r4, 0
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -567,7 +567,7 @@ _080DAC04:
 _080DAC3E:
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80980F8
@@ -576,10 +576,10 @@ _080DAC3E:
 	beq _080DAC5C
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8097F44
+	bl GiveMailToMon2
 _080DAC5C:
-	bl sub_80937DC
-	bl sub_8040C3C
+	bl CompactPartySlots
+	bl CalculatePlayerPartyCount
 	ldr r0, _080DAC84 @ =gUnknown_2021D18
 	ldr r1, _080DAC88 @ =gUnknown_8488D7C
 	bl sub_8008FCC
@@ -603,7 +603,7 @@ _080DAC88: .4byte gUnknown_8488D7C
 sub_80DAC8C: @ 80DAC8C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, [r4, 0x68]
 	subs r1, r0
@@ -649,17 +649,17 @@ sub_80DACD4: @ 80DACD4
 sub_80DACE8: @ 80DACE8
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r5, r0, 0
 	adds r0, r6, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r4, r0, 0
 	ldr r0, [r6, 0x68]
 	subs r4, r0
 	ldr r0, [r6, 0x64]
 	adds r4, r0
 	adds r0, r6, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, [r6, 0x68]
 	subs r1, r0
@@ -667,7 +667,7 @@ sub_80DACE8: @ 80DACE8
 	adds r1, r0
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_8045254
+	bl CalcByteArraySum
 	cmp r5, r0
 	beq _080DAD26
 	movs r0, 0
@@ -685,17 +685,17 @@ _080DAD26:
 sub_80DAD30: @ 80DAD30
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r5, r0, 0
 	adds r0, r6, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r4, r0, 0
 	ldr r0, [r6, 0x68]
 	subs r4, r0
 	ldr r0, [r6, 0x64]
 	adds r4, r0
 	adds r0, r6, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, [r6, 0x68]
 	subs r1, r0
@@ -703,7 +703,7 @@ sub_80DAD30: @ 80DAD30
 	adds r1, r0
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_80451B8
+	bl CalcCRC16
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r5, r0

@@ -151,7 +151,7 @@ _080CA4D8:
 	cmp r2, 0x96
 	bne _080CA508
 	movs r0, 0x97
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1

@@ -9,14 +9,14 @@
 sub_8079C08: @ 8079C08
 	push {r4-r6,lr}
 	ldr r0, _08079CCC @ =sub_8079E0C
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0
 	bne _08079CC4
 	movs r0, 0x90
 	lsls r0, 5
-	bl sub_80089B8
+	bl AllocSpritePalette
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -90,7 +90,7 @@ sub_8079C08: @ 8079C08
 	strb r0, [r1]
 	ldr r0, _08079CEC @ =sub_8079DBC
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, _08079CF0 @ =0x000006c9
 	adds r4, r1
 	strb r0, [r4]
@@ -111,8 +111,8 @@ _08079CEC: .4byte sub_8079DBC
 _08079CF0: .4byte 0x000006c9
 	thumb_func_end sub_8079C08
 
-	thumb_func_start sub_8079CF4
-sub_8079CF4: @ 8079CF4
+	thumb_func_start weather_set
+weather_set: @ 8079CF4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -122,7 +122,7 @@ sub_8079CF4: @ 8079CF4
 	beq _08079D0A
 	cmp r4, 0xD
 	beq _08079D0A
-	bl sub_807B004
+	bl play_some_sound
 _08079D0A:
 	ldr r1, _08079D4C @ =gUnknown_2037F34
 	ldr r2, _08079D50 @ =0x000006d1
@@ -162,7 +162,7 @@ _08079D50: .4byte 0x000006d1
 _08079D54: .4byte gUnknown_83C2BC0
 _08079D58: .4byte 0x000006d3
 _08079D5C: .4byte 0x000006ce
-	thumb_func_end sub_8079CF4
+	thumb_func_end weather_set
 
 	thumb_func_start sub_8079D60
 sub_8079D60: @ 8079D60
@@ -170,7 +170,7 @@ sub_8079D60: @ 8079D60
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_807B004
+	bl play_some_sound
 	ldr r0, _08079D84 @ =gUnknown_2037F34
 	movs r2, 0xDA
 	lsls r2, 3
@@ -193,7 +193,7 @@ sub_8079D8C: @ 8079D8C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_807B004
+	bl play_some_sound
 	ldr r1, _08079DB8 @ =gUnknown_2037F34
 	movs r2, 0xDA
 	lsls r2, 3
@@ -1068,7 +1068,7 @@ _0807A428:
 	adds r0, r6, 0
 	movs r1, 0x10
 	mov r2, r8
-	bl sub_8045274
+	bl BlendPalette
 	adds r0, r6, 0
 	adds r0, 0x10
 	lsls r0, 16
@@ -1217,7 +1217,7 @@ _0807A544:
 	adds r0, r5, 0
 	movs r1, 0x10
 	adds r2, r6, 0
-	bl sub_8045274
+	bl BlendPalette
 	adds r0, r5, 0
 	adds r0, 0x10
 	lsls r0, 16
@@ -1317,7 +1317,7 @@ sub_807A5F8: @ 807A5F8
 	lsls r1, 1
 	movs r0, 0
 	adds r2, r7, 0
-	bl sub_8045274
+	bl BlendPalette
 	ldr r0, [sp]
 	lsls r1, r0, 27
 	lsrs r1, 27
@@ -1424,7 +1424,7 @@ _0807A6E4:
 	ldrh r3, [r1]
 	movs r1, 0x10
 	adds r2, r7, 0
-	bl sub_8045274
+	bl BlendPalette
 	adds r4, 0x1
 	mov r9, r4
 _0807A6F8:
@@ -1584,8 +1584,8 @@ _0807A810: .4byte 0x000006c6
 _0807A814: .4byte 0x000006c2
 	thumb_func_end sub_807A7C4
 
-	thumb_func_start sub_807A818
-sub_807A818: @ 807A818
+	thumb_func_start fade_screen
+fade_screen: @ 807A818
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1663,7 +1663,7 @@ _0807A896:
 	str r4, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _0807A8BC @ =gUnknown_2037F34
 	ldr r3, _0807A8C0 @ =0x000006c6
 	adds r0, r3
@@ -1699,7 +1699,7 @@ _0807A8E8:
 	str r4, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _0807A8FA:
 	ldr r4, _0807A934 @ =gUnknown_2037F34
 	ldr r1, _0807A938 @ =0x000006c6
@@ -1735,7 +1735,7 @@ _0807A934: .4byte gUnknown_2037F34
 _0807A938: .4byte 0x000006c6
 _0807A93C: .4byte 0x000006ca
 _0807A940: .4byte 0x000006cb
-	thumb_func_end sub_807A818
+	thumb_func_end fade_screen
 
 	thumb_func_start sub_807A944
 sub_807A944: @ 807A944
@@ -1816,7 +1816,7 @@ _0807A9C2:
 	adds r0, r6, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _0807A9E8 @ =gUnknown_2037F34
 	ldr r3, _0807A9EC @ =0x000006c6
 	adds r0, r3
@@ -1851,7 +1851,7 @@ _0807AA14:
 	adds r0, r6, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _0807AA24:
 	ldr r4, _0807AA60 @ =gUnknown_2037F34
 	ldr r1, _0807AA64 @ =0x000006c6
@@ -1997,7 +1997,7 @@ _0807AB20:
 	lsrs r3, 17
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl sub_8045274
+	bl BlendPalette
 	b _0807AB68
 	.align 2, 0
 _0807AB4C: .4byte gUnknown_20375F8
@@ -2010,7 +2010,7 @@ _0807AB58:
 	adds r0, r4, 0
 	movs r1, 0x10
 	movs r2, 0xC
-	bl sub_8045274
+	bl BlendPalette
 _0807AB68:
 	pop {r4-r6}
 	pop {r0}
@@ -2076,7 +2076,7 @@ sub_807ABC0: @ 807ABC0
 	adds r1, r2
 	lsrs r1, 16
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldrb r0, [r4]
 	bl sub_807AA8C
 	pop {r4}
@@ -2342,7 +2342,7 @@ sub_807ADB0: @ 807ADB0
 	lsls r1, 8
 	orrs r1, r0
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2470,7 +2470,7 @@ _0807AEC4:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, [r4]
 	ldr r2, _0807AEF4 @ =0x00000734
 	adds r0, r5, r2
@@ -2561,8 +2561,8 @@ _0807AF92:
 	bx r0
 	thumb_func_end sub_807AF00
 
-	thumb_func_start sub_807AF98
-sub_807AF98: @ 807AF98
+	thumb_func_start weather_get_current
+weather_get_current: @ 807AF98
 	ldr r0, _0807AFA4 @ =gUnknown_2037F34
 	movs r1, 0xDA
 	lsls r1, 3
@@ -2571,7 +2571,7 @@ sub_807AF98: @ 807AF98
 	bx lr
 	.align 2, 0
 _0807AFA4: .4byte gUnknown_2037F34
-	thumb_func_end sub_807AF98
+	thumb_func_end weather_get_current
 
 	thumb_func_start sub_807AFA8
 sub_807AFA8: @ 807AFA8
@@ -2625,10 +2625,10 @@ _0807AFFA:
 _0807B000: .4byte 0x000006dd
 	thumb_func_end sub_807AFA8
 
-	thumb_func_start sub_807B004
-sub_807B004: @ 807B004
+	thumb_func_start play_some_sound
+play_some_sound: @ 807B004
 	push {lr}
-	bl sub_807244C
+	bl IsSpecialSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807B042
@@ -2658,7 +2658,7 @@ _0807B03C:
 _0807B042:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807B004
+	thumb_func_end play_some_sound
 
 	thumb_func_start sub_807B048
 sub_807B048: @ 807B048
@@ -2837,7 +2837,7 @@ sub_807B174: @ 807B174
 	bl sub_807B130
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8079CF4
+	bl weather_set
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807B174
@@ -2860,7 +2860,7 @@ sub_807B1A4: @ 807B1A4
 	bl sub_807B130
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8079CF4
+	bl weather_set
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807B1A4

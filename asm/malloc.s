@@ -237,8 +237,8 @@ _08002AE0: .4byte gUnknown_81E9FEC
 _08002AE4: .4byte gUnknown_81EA018
 	thumb_func_end sub_8002A08
 
-	thumb_func_start sub_8002AE8
-sub_8002AE8: @ 8002AE8
+	thumb_func_start AllocZeroedInternal
+AllocZeroedInternal: @ 8002AE8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r1, 0
@@ -270,10 +270,10 @@ _08002B1C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002AE8
+	thumb_func_end AllocZeroedInternal
 
-	thumb_func_start sub_8002B28
-sub_8002B28: @ 8002B28
+	thumb_func_start CheckMemBlockInternal
+CheckMemBlockInternal: @ 8002B28
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r3, r1, 0
@@ -322,10 +322,10 @@ _08002B7A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002B28
+	thumb_func_end CheckMemBlockInternal
 
-	thumb_func_start sub_8002B80
-sub_8002B80: @ 8002B80
+	thumb_func_start InitHeap
+InitHeap: @ 8002B80
 	push {lr}
 	ldr r2, _08002B94 @ =gUnknown_3000A38
 	str r0, [r2]
@@ -337,10 +337,10 @@ sub_8002B80: @ 8002B80
 	.align 2, 0
 _08002B94: .4byte gUnknown_3000A38
 _08002B98: .4byte gUnknown_3000A3C
-	thumb_func_end sub_8002B80
+	thumb_func_end InitHeap
 
-	thumb_func_start sub_8002B9C
-sub_8002B9C: @ 8002B9C
+	thumb_func_start Alloc
+Alloc: @ 8002B9C
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _08002BAC @ =gUnknown_3000A38
@@ -350,23 +350,23 @@ sub_8002B9C: @ 8002B9C
 	bx r1
 	.align 2, 0
 _08002BAC: .4byte gUnknown_3000A38
-	thumb_func_end sub_8002B9C
+	thumb_func_end Alloc
 
-	thumb_func_start sub_8002BB0
-sub_8002BB0: @ 8002BB0
+	thumb_func_start AllocZeroed
+AllocZeroed: @ 8002BB0
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _08002BC0 @ =gUnknown_3000A38
 	ldr r0, [r0]
-	bl sub_8002AE8
+	bl AllocZeroedInternal
 	pop {r1}
 	bx r1
 	.align 2, 0
 _08002BC0: .4byte gUnknown_3000A38
-	thumb_func_end sub_8002BB0
+	thumb_func_end AllocZeroed
 
-	thumb_func_start sub_8002BC4
-sub_8002BC4: @ 8002BC4
+	thumb_func_start Free
+Free: @ 8002BC4
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _08002BD4 @ =gUnknown_3000A38
@@ -376,23 +376,23 @@ sub_8002BC4: @ 8002BC4
 	bx r0
 	.align 2, 0
 _08002BD4: .4byte gUnknown_3000A38
-	thumb_func_end sub_8002BC4
+	thumb_func_end Free
 
-	thumb_func_start sub_8002BD8
-sub_8002BD8: @ 8002BD8
+	thumb_func_start CheckMemBlock
+CheckMemBlock: @ 8002BD8
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _08002BE8 @ =gUnknown_3000A38
 	ldr r0, [r0]
-	bl sub_8002B28
+	bl CheckMemBlockInternal
 	pop {r1}
 	bx r1
 	.align 2, 0
 _08002BE8: .4byte gUnknown_3000A38
-	thumb_func_end sub_8002BD8
+	thumb_func_end CheckMemBlock
 
-	thumb_func_start sub_8002BEC
-sub_8002BEC: @ 8002BEC
+	thumb_func_start CheckHeap
+CheckHeap: @ 8002BEC
 	push {r4,r5,lr}
 	ldr r0, _08002C10 @ =gUnknown_3000A38
 	ldr r4, [r0]
@@ -401,7 +401,7 @@ _08002BF4:
 	ldr r0, [r5]
 	adds r1, r4, 0
 	adds r1, 0x10
-	bl sub_8002B28
+	bl CheckMemBlockInternal
 	cmp r0, 0
 	beq _08002C14
 	ldr r4, [r4, 0xC]
@@ -418,6 +418,6 @@ _08002C16:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002BEC
+	thumb_func_end CheckHeap
 
 	.align 2, 0 @ Don't pad with nop.

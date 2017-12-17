@@ -30,7 +30,7 @@ _08146C56:
 	beq _08146C6E
 	b _08146C80
 _08146C5C:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF
@@ -38,7 +38,7 @@ _08146C5C:
 	adds r0, 0x10
 	b _08146C7E
 _08146C6E:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8099DA0
-sub_8099DA0: @ 8099DA0
+	thumb_func_start GetBagItemQuantity
+GetBagItemQuantity: @ 8099DA0
 	adds r1, r0, 0
 	ldr r0, _08099DB8 @ =gUnknown_300500C
 	ldr r0, [r0]
@@ -21,7 +21,7 @@ sub_8099DA0: @ 8099DA0
 	bx lr
 	.align 2, 0
 _08099DB8: .4byte gUnknown_300500C
-	thumb_func_end sub_8099DA0
+	thumb_func_end GetBagItemQuantity
 
 	thumb_func_start sub_8099DBC
 sub_8099DBC: @ 8099DBC
@@ -161,18 +161,18 @@ sub_8099E90: @ 8099E90
 	bl sub_809C8A0
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _08099EB4 @ =gUnknown_84162BD
 	adds r0, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 	b _08099EC4
 	.align 2, 0
 _08099EB4: .4byte gUnknown_84162BD
 _08099EB8:
-	bl sub_809A8BC
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 _08099EC4:
 	pop {r4}
 	pop {r0}
@@ -260,7 +260,7 @@ sub_8099F40: @ 8099F40
 	lsls r1, 16
 	lsrs r5, r1, 16
 	adds r0, r4, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	lsls r0, 24
 	cmp r0, 0
 	bne _08099F5C
@@ -270,7 +270,7 @@ _08099F58:
 	b _08099FA6
 _08099F5C:
 	adds r0, r4, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	subs r0, 0x1
 	lsls r0, 24
 	movs r2, 0
@@ -289,7 +289,7 @@ _08099F76:
 	cmp r0, r4
 	bne _08099F98
 	adds r0, r1, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r5
@@ -368,12 +368,12 @@ sub_809A000: @ 809A000
 	lsls r1, 16
 	lsrs r6, r1, 16
 	adds r0, r4, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809A050
 	adds r0, r4, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -393,7 +393,7 @@ _0809A032:
 	cmp r0, r4
 	bne _0809A05C
 	adds r0, r1, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r0, 16
 	adds r0, r6
@@ -441,14 +441,14 @@ sub_809A084: @ 809A084
 	lsrs r1, 16
 	mov r8, r1
 	adds r0, r6, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809A0A2
 	b _0809A1CA
 _0809A0A2:
 	adds r0, r6, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r7, r0, 24
@@ -468,7 +468,7 @@ _0809A0BE:
 	cmp r0, r6
 	bne _0809A0E8
 	adds r0, r1, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r0, 16
 	mov r2, r8
@@ -605,14 +605,14 @@ sub_809A1D8: @ 809A1D8
 	lsls r1, 16
 	lsrs r7, r1, 16
 	adds r0, r4, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809A258
 	cmp r4, 0
 	beq _0809A258
 	adds r0, r4, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	subs r0, 0x1
 	lsls r0, 24
 	movs r2, 0
@@ -631,7 +631,7 @@ _0809A20C:
 	cmp r0, r4
 	bne _0809A24C
 	adds r0, r1, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r7
@@ -674,7 +674,7 @@ sub_809A260: @ 809A260
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1149,7 +1149,7 @@ _0809A59E:
 	adds r5, r1, r0
 _0809A5B0:
 	adds r0, r5, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	cmp r0, 0
 	bne _0809A5C6
@@ -1204,7 +1204,7 @@ _0809A604:
 	bne _0809A622
 	adds r0, r2, 0x2
 	str r3, [sp]
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	ldr r3, [sp]
 	cmp r0, 0
@@ -1217,7 +1217,7 @@ _0809A622:
 	bls _0809A66A
 	adds r0, r1, 0x2
 	str r3, [sp]
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	ldr r3, [sp]
 	cmp r0, 0
@@ -1240,7 +1240,7 @@ _0809A642:
 	bne _0809A640
 	adds r0, r1, 0x2
 	str r3, [sp]
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	ldr r3, [sp]
 	cmp r0, 0
@@ -1268,7 +1268,7 @@ _0809A688:
 	ldr r0, [r5]
 	adds r0, r4
 	adds r0, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	ldr r1, [r5]
 	adds r4, r1
 	strh r0, [r4, 0x2]
@@ -1281,7 +1281,7 @@ _0809A688:
 _0809A6A6:
 	ldrb r0, [r5, 0x4]
 	lsls r0, 2
-	bl sub_8002BB0
+	bl AllocZeroed
 	mov r8, r0
 	ldr r0, [r5]
 	adds r0, r7
@@ -1324,7 +1324,7 @@ _0809A6EA:
 	bcc _0809A6EA
 _0809A704:
 	mov r0, r8
-	bl sub_8002BC4
+	bl Free
 _0809A70A:
 	add sp, 0x4
 	pop {r3-r5}
@@ -1358,7 +1358,7 @@ _0809A73A:
 	ldr r0, [r6]
 	adds r0, r7
 	adds r0, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsls r4, r5, 2
 	cmp r0, 0
@@ -1366,7 +1366,7 @@ _0809A73A:
 	ldr r0, [r6]
 	adds r0, r4
 	adds r0, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	cmp r0, 0
 	beq _0809A774
@@ -1434,7 +1434,7 @@ sub_809A7B4: @ 809A7B4
 	ldr r0, [r0]
 	adds r0, r1
 	adds r0, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -1449,7 +1449,7 @@ sub_809A7DC: @ 809A7DC
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 21
 	ldr r1, _0809A7F4 @ =gUnknown_2039884
@@ -1466,7 +1466,7 @@ _0809A7F8:
 	cmp r0, r4
 	bne _0809A810
 	adds r0, r1, 0x2
-	bl sub_8099DA0
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r0, 16
 	b _0809A81E
@@ -1527,7 +1527,7 @@ _0809A85A:
 	bne _0809A88C
 _0809A86E:
 	movs r0, 0x4
-	bl sub_8002B9C
+	bl Alloc
 	adds r4, r0, 0
 	strh r5, [r4]
 	ldr r0, _0809A8A0 @ =gUnknown_2036DFC
@@ -1537,7 +1537,7 @@ _0809A86E:
 	adds r1, r4, 0
 	bl sub_8113550
 	adds r0, r4, 0
-	bl sub_8002BC4
+	bl Free
 _0809A88C:
 	pop {r4,r5}
 	pop {r0}
@@ -1549,8 +1549,8 @@ _0809A89C: .4byte gUnknown_3005008
 _0809A8A0: .4byte gUnknown_2036DFC
 	thumb_func_end sub_809A824
 
-	thumb_func_start sub_809A8A4
-sub_809A8A4: @ 809A8A4
+	thumb_func_start SanitizeItemId
+SanitizeItemId: @ 809A8A4
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -1565,14 +1565,14 @@ _0809A8B6:
 _0809A8B8:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809A8A4
+	thumb_func_end SanitizeItemId
 
-	thumb_func_start sub_809A8BC
-sub_809A8BC: @ 809A8BC
+	thumb_func_start ItemId_GetItem
+ItemId_GetItem: @ 809A8BC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1583,15 +1583,15 @@ sub_809A8BC: @ 809A8BC
 	bx r1
 	.align 2, 0
 _0809A8D8: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A8BC
+	thumb_func_end ItemId_GetItem
 
-	thumb_func_start sub_809A8DC
-sub_809A8DC: @ 809A8DC
+	thumb_func_start itemid_get_number
+itemid_get_number: @ 809A8DC
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809A8FC @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1603,15 +1603,15 @@ sub_809A8DC: @ 809A8DC
 	bx r1
 	.align 2, 0
 _0809A8FC: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A8DC
+	thumb_func_end itemid_get_number
 
-	thumb_func_start sub_809A900
-sub_809A900: @ 809A900
+	thumb_func_start itemid_get_market_price
+itemid_get_market_price: @ 809A900
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809A920 @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1623,15 +1623,15 @@ sub_809A900: @ 809A900
 	bx r1
 	.align 2, 0
 _0809A920: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A900
+	thumb_func_end itemid_get_market_price
 
-	thumb_func_start sub_809A924
-sub_809A924: @ 809A924
+	thumb_func_start ItemId_GetHoldEffect
+ItemId_GetHoldEffect: @ 809A924
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809A944 @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1643,15 +1643,15 @@ sub_809A924: @ 809A924
 	bx r1
 	.align 2, 0
 _0809A944: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A924
+	thumb_func_end ItemId_GetHoldEffect
 
-	thumb_func_start sub_809A948
-sub_809A948: @ 809A948
+	thumb_func_start ItemId_GetHoldEffectParam
+ItemId_GetHoldEffectParam: @ 809A948
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809A968 @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1663,15 +1663,15 @@ sub_809A948: @ 809A948
 	bx r1
 	.align 2, 0
 _0809A968: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A948
+	thumb_func_end ItemId_GetHoldEffectParam
 
-	thumb_func_start sub_809A96C
-sub_809A96C: @ 809A96C
+	thumb_func_start ItemId_GetDescription
+ItemId_GetDescription: @ 809A96C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809A98C @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1684,15 +1684,15 @@ sub_809A96C: @ 809A96C
 	bx r1
 	.align 2, 0
 _0809A98C: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A96C
+	thumb_func_end ItemId_GetDescription
 
-	thumb_func_start sub_809A990
-sub_809A990: @ 809A990
+	thumb_func_start itemid_is_unique
+itemid_is_unique: @ 809A990
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809A9B0 @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1704,15 +1704,15 @@ sub_809A990: @ 809A990
 	bx r1
 	.align 2, 0
 _0809A9B0: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A990
+	thumb_func_end itemid_is_unique
 
-	thumb_func_start sub_809A9B4
-sub_809A9B4: @ 809A9B4
+	thumb_func_start itemid_get_x19
+itemid_get_x19: @ 809A9B4
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809A9D4 @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1724,15 +1724,15 @@ sub_809A9B4: @ 809A9B4
 	bx r1
 	.align 2, 0
 _0809A9D4: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A9B4
+	thumb_func_end itemid_get_x19
 
-	thumb_func_start sub_809A9D8
-sub_809A9D8: @ 809A9D8
+	thumb_func_start ItemId_GetPocket
+ItemId_GetPocket: @ 809A9D8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809A9F8 @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1744,15 +1744,15 @@ sub_809A9D8: @ 809A9D8
 	bx r1
 	.align 2, 0
 _0809A9F8: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A9D8
+	thumb_func_end ItemId_GetPocket
 
-	thumb_func_start sub_809A9FC
-sub_809A9FC: @ 809A9FC
+	thumb_func_start ItemId_GetType
+ItemId_GetType: @ 809A9FC
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809AA1C @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1764,15 +1764,15 @@ sub_809A9FC: @ 809A9FC
 	bx r1
 	.align 2, 0
 _0809AA1C: .4byte gUnknown_83DB028
-	thumb_func_end sub_809A9FC
+	thumb_func_end ItemId_GetType
 
-	thumb_func_start sub_809AA20
-sub_809AA20: @ 809AA20
+	thumb_func_start ItemId_GetFieldFunc
+ItemId_GetFieldFunc: @ 809AA20
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809AA40 @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1785,15 +1785,15 @@ sub_809AA20: @ 809AA20
 	bx r1
 	.align 2, 0
 _0809AA40: .4byte gUnknown_83DB028
-	thumb_func_end sub_809AA20
+	thumb_func_end ItemId_GetFieldFunc
 
-	thumb_func_start sub_809AA44
-sub_809AA44: @ 809AA44
+	thumb_func_start ItemId_GetBattleUsage
+ItemId_GetBattleUsage: @ 809AA44
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809AA64 @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1806,15 +1806,15 @@ sub_809AA44: @ 809AA44
 	bx r1
 	.align 2, 0
 _0809AA64: .4byte gUnknown_83DB028
-	thumb_func_end sub_809AA44
+	thumb_func_end ItemId_GetBattleUsage
 
-	thumb_func_start sub_809AA68
-sub_809AA68: @ 809AA68
+	thumb_func_start ItemId_GetBattleFunc
+ItemId_GetBattleFunc: @ 809AA68
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809AA88 @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1827,15 +1827,15 @@ sub_809AA68: @ 809AA68
 	bx r1
 	.align 2, 0
 _0809AA88: .4byte gUnknown_83DB028
-	thumb_func_end sub_809AA68
+	thumb_func_end ItemId_GetBattleFunc
 
-	thumb_func_start sub_809AA8C
-sub_809AA8C: @ 809AA8C
+	thumb_func_start ItemId_GetSecondaryId
+ItemId_GetSecondaryId: @ 809AA8C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0809AAAC @ =gUnknown_83DB028
-	bl sub_809A8A4
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -1848,6 +1848,6 @@ sub_809AA8C: @ 809AA8C
 	bx r1
 	.align 2, 0
 _0809AAAC: .4byte gUnknown_83DB028
-	thumb_func_end sub_809AA8C
+	thumb_func_end ItemId_GetSecondaryId
 
 	.align 2, 0 @ Don't pad with nop.

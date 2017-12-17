@@ -20,7 +20,7 @@ sub_804A76C: @ 804A76C
 	lsrs r4, r2, 24
 	ldr r5, _0804A8A4 @ =gUnknown_825098C
 	ldrh r0, [r5, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	ldr r1, _0804A8A8 @ =0xffff0000
 	cmp r0, r1
@@ -31,7 +31,7 @@ sub_804A76C: @ 804A76C
 	bl sub_800F078
 _0804A79E:
 	ldr r0, _0804A8B0 @ =sub_804A8C0
-	bl sub_8044EF8
+	bl CreateInvisibleSpriteWithCallback
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24
@@ -59,7 +59,7 @@ _0804A79E:
 	adds r1, r6, 0
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -73,12 +73,12 @@ _0804A79E:
 	adds r0, 0x1
 	strh r0, [r5, 0x2E]
 	adds r0, r1, 0
-	bl sub_8007824
+	bl AnimateSprite
 	mov r0, r9
 	mov r1, r10
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -93,14 +93,14 @@ _0804A79E:
 	strh r0, [r5, 0x2E]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl sub_8007824
+	bl AnimateSprite
 	mov r0, r9
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x2
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -115,14 +115,14 @@ _0804A79E:
 	strh r0, [r5, 0x2E]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl sub_8007824
+	bl AnimateSprite
 	mov r0, r9
 	mov r1, r10
 	adds r2, r7, 0
 	movs r3, 0x2
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -137,9 +137,9 @@ _0804A79E:
 	strh r0, [r5, 0x2E]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl sub_8007824
+	bl AnimateSprite
 	mov r0, r8
 	pop {r3-r5}
 	mov r8, r3
@@ -168,16 +168,16 @@ sub_804A8C0: @ 804A8C0
 	bne _0804A8F8
 	ldr r0, _0804A8EC @ =gUnknown_825098C
 	ldrh r0, [r0, 0x6]
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldr r0, _0804A8F0 @ =gUnknown_8250994
 	ldrh r0, [r0, 0x4]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _0804A8F4
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	b _0804A8F8
 	.align 2, 0
 _0804A8EC: .4byte gUnknown_825098C
@@ -214,7 +214,7 @@ sub_804A904: @ 804A904
 	subs r1, 0x1
 	strh r1, [r0, 0x2E]
 	adds r0, r3, 0
-	bl sub_8007280
+	bl DestroySprite
 _0804A92E:
 	pop {r0}
 	bx r0

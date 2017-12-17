@@ -214,7 +214,7 @@ _080BD86C:
 	adds r1, r0, 0
 _080BD87E:
 	adds r0, r5, 0
-	bl sub_8008D84
+	bl StringCopy
 	b _080BD896
 	.align 2, 0
 _080BD888: .4byte 0x0000ffff
@@ -335,7 +335,7 @@ _080BD95C: .4byte 0x000001ff
 _080BD960:
 	ldr r0, _080BD970 @ =gUnknown_841E093
 _080BD962:
-	bl sub_8008E08
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 _080BD96A:
@@ -418,7 +418,7 @@ sub_80BD9E8: @ 80BD9E8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_8044EC8
+	bl Random
 	ldr r2, _080BDA38 @ =gUnknown_83ECED4
 	lsls r1, r4, 3
 	adds r1, r2
@@ -565,7 +565,7 @@ _080BDAF8:
 	adds r1, r5, 0
 	bl sub_80BD89C
 	adds r0, r4, 0
-	bl sub_8069464
+	bl ShowFieldAutoScrollMessage
 _080BDB08:
 	pop {r4,r5}
 	pop {r0}
@@ -579,7 +579,7 @@ _080BDB18: .4byte gUnknown_2021D18
 	thumb_func_start sub_80BDB1C
 sub_80BDB1C: @ 80BDB1C
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	movs r0, 0xC
@@ -699,7 +699,7 @@ _080BDBDC:
 	.align 2, 0
 _080BDBF4: .4byte 0x000001ff
 _080BDBF8:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x21
@@ -758,7 +758,7 @@ _080BDC50:
 	.align 2, 0
 _080BDC60: .4byte 0x000001ff
 _080BDC64:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
@@ -822,7 +822,7 @@ _080BDCCA:
 	.align 2, 0
 _080BDCD4: .4byte 0x000001ff
 _080BDCD8:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -837,7 +837,7 @@ _080BDCD8:
 	bcs _080BDD22
 _080BDCF6:
 	ldrh r0, [r5]
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
@@ -1013,7 +1013,7 @@ sub_80BDE44: @ 80BDE44
 	push {r4,lr}
 	ldr r4, _080BDE60 @ =gUnknown_20399BC
 	ldr r0, _080BDE64 @ =0x00003ba4
-	bl sub_8002B9C
+	bl Alloc
 	str r0, [r4]
 	cmp r0, 0
 	beq _080BDE68
@@ -1039,7 +1039,7 @@ sub_80BDE70: @ 80BDE70
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080BDE7E
-	bl sub_8002BC4
+	bl Free
 _080BDE7E:
 	pop {r0}
 	bx r0
@@ -1185,7 +1185,7 @@ sub_80BDF6C: @ 80BDF6C
 	adds r1, r0
 	ldr r1, [r1]
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	adds r1, r0, 0
 	subs r4, r1, r4
 	lsls r4, 16
@@ -1224,8 +1224,8 @@ sub_80BDFB0: @ 80BDFB0
 _080BDFBC: .4byte gUnknown_83EDF98
 	thumb_func_end sub_80BDFB0
 
-	thumb_func_start sub_80BDFC0
-sub_80BDFC0: @ 80BDFC0
+	thumb_func_start CopyEasyChatWordPadded
+CopyEasyChatWordPadded: @ 80BDFC0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -1255,7 +1255,7 @@ _080BDFEC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BDFC0
+	thumb_func_end CopyEasyChatWordPadded
 
 	thumb_func_start sub_80BDFF8
 sub_80BDFF8: @ 80BDFF8
@@ -1765,7 +1765,7 @@ _080BE3BC:
 	cmp r0, 0x15
 	bne _080BE3FA
 	adds r0, r4, 0
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
@@ -1779,7 +1779,7 @@ _080BE3D6:
 	cmp r0, 0
 	beq _080BE3F6
 	adds r0, r4, 0
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0

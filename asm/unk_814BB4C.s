@@ -100,8 +100,8 @@ sub_814BBB8: @ 814BBB8
 	ldrb r3, [r1, 0x6]
 	str r4, [sp]
 	adds r1, r5, 0
-	bl sub_8070588
-	bl sub_80704D0
+	bl BeginNormalPaletteFade
+	bl UpdatePaletteFade
 	movs r0, 0x2
 	strb r0, [r6, 0xE]
 	movs r0, 0
@@ -133,7 +133,7 @@ _0814BC26:
 	beq _0814BC56
 	b _0814BC66
 _0814BC30:
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814BC6C
@@ -367,7 +367,7 @@ _0814BDD2:
 	cmp r0, 0
 	beq _0814BE02
 	ldr r0, _0814BDF8 @ =0x00000111
-	bl sub_8071A74
+	bl PlayNewMapMusic
 	movs r0, 0x7
 	movs r1, 0x1
 	movs r2, 0
@@ -444,7 +444,7 @@ sub_814BE64: @ 814BE64
 	movs r1, 0
 	str r1, [r0, 0x4]
 	ldr r0, _0814BE78 @ =sub_814B8F0
-	bl sub_8000544
+	bl SetMainCallback2
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -516,7 +516,7 @@ _0814BEDA:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x2
-	bl sub_800A448
+	bl SendBlock
 	b _0814BFC0
 _0814BF0A:
 	bl sub_800A4BC
@@ -527,7 +527,7 @@ _0814BF0A:
 	strh r0, [r5, 0x10]
 	b _0814BFC0
 _0814BF1A:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	ldr r2, _0814BF98 @ =gUnknown_846E3C8
 	ldrb r4, [r5, 0x9]
 	subs r1, r4, 0x2
@@ -581,7 +581,7 @@ _0814BF56:
 _0814BF7E:
 	movs r0, 0
 	strh r0, [r5, 0x10]
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	movs r1, 0x18
 	ldrsh r0, [r5, r1]
 	lsls r0, 8
@@ -851,19 +851,19 @@ _0814C17C:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2C]
 	negs r1, r1
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2C]
 	negs r1, r1
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1E
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrb r0, [r6]
 	adds r0, 0x1
 	strb r0, [r6]
@@ -897,13 +897,13 @@ _0814C1FC:
 	strh r0, [r4, 0x2C]
 	movs r0, 0x12
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1A
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1E
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_80FA42C
 	b _0814C23C
 _0814C21E:
@@ -1767,19 +1767,19 @@ sub_814C850: @ 814C850
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2C]
 	negs r1, r1
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2C]
 	negs r1, r1
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1E
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
 	adds r0, 0x25
 	ldrb r1, [r0]
@@ -1848,19 +1848,19 @@ sub_814C8F8: @ 814C8F8
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2C]
 	negs r1, r1
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2C]
 	negs r1, r1
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1E
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
 	adds r0, 0x25
 	ldrb r1, [r0]
@@ -1935,7 +1935,7 @@ _0814C9C4:
 	negs r0, r0
 	ldr r2, _0814C9E8 @ =0x000003ff
 	movs r1, 0x8
-	bl sub_80714D4
+	bl BlendPalettes
 	movs r0, 0x9C
 	lsls r0, 1
 	adds r1, r4, r0
@@ -1961,7 +1961,7 @@ _0814CA02:
 	negs r0, r0
 	ldr r2, _0814CA30 @ =0x000003ff
 	movs r1, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	ldr r2, _0814CA34 @ =0x00000139
 	adds r1, r4, r2
 	movs r0, 0x4
@@ -2003,19 +2003,19 @@ _0814CA3C:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2C]
 	negs r1, r1
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2C]
 	negs r1, r1
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1E
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrb r0, [r6]
 	adds r0, 0x1
 	strb r0, [r6]
@@ -2049,13 +2049,13 @@ _0814CABC:
 	strh r0, [r4, 0x2C]
 	movs r0, 0x12
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1A
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1E
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _0814CB12
 _0814CADA:
 	movs r2, 0x9C
@@ -2124,7 +2124,7 @@ _0814CB42:
 	negs r0, r0
 	movs r1, 0x8
 	movs r2, 0x1F
-	bl sub_80714D4
+	bl BlendPalettes
 	movs r0, 0x9C
 	lsls r0, 1
 	adds r1, r5, r0
@@ -2146,7 +2146,7 @@ _0814CB64:
 	negs r0, r0
 	movs r1, 0
 	movs r2, 0x1F
-	bl sub_80714D4
+	bl BlendPalettes
 	movs r0, 0
 	strb r0, [r4]
 	b _0814CBFC
@@ -2163,13 +2163,13 @@ _0814CB8A:
 	strh r0, [r5, 0x10]
 	movs r0, 0x12
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1A
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1E
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _0814CBFC
 _0814CBBC:
 	bl sub_800A4BC
@@ -2270,7 +2270,7 @@ _0814CC72:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x2
-	bl sub_800A448
+	bl SendBlock
 	b _0814CF8E
 _0814CC8A:
 	bl sub_800A4BC
@@ -2281,7 +2281,7 @@ _0814CC8A:
 _0814CC96:
 	b _0814CF64
 _0814CC98:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	ldr r2, _0814CCF4 @ =gUnknown_846E3C8
 	ldrb r3, [r7, 0x9]
 	subs r1, r3, 0x2
@@ -2321,7 +2321,7 @@ _0814CCDE:
 	movs r0, 0
 	strh r0, [r7, 0x10]
 	strh r0, [r4]
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	ldrb r0, [r7, 0x8]
 	cmp r0, 0
 	bne _0814CCFC
@@ -2392,7 +2392,7 @@ _0814CD00:
 	adds r4, r0, 0
 	asrs r0, r4, 8
 	str r0, [r7, 0x68]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -2615,7 +2615,7 @@ _0814CF24:
 	movs r0, 0
 	ldr r1, [sp, 0xC]
 	movs r2, 0x30
-	bl sub_800A448
+	bl SendBlock
 	b _0814CF8E
 _0814CF30:
 	bl sub_800A4BC
@@ -2624,7 +2624,7 @@ _0814CF30:
 	beq _0814CF94
 	b _0814CF64
 _0814CF3C:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2639,7 +2639,7 @@ _0814CF3C:
 	adds r0, r4, 0
 	movs r2, 0x30
 	bl memcpy
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 _0814CF64:
 	movs r0, 0
 	strh r0, [r7, 0x10]
@@ -2711,7 +2711,7 @@ _0814CFD8:
 	b _0814D08A
 _0814CFEA:
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x9C
 	lsls r0, 1
 	adds r1, r5, r0
@@ -2874,14 +2874,14 @@ _0814D106:
 	bl sub_8003F20
 	ldr r0, _0814D14C @ =sub_80DA634
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	b _0814D178
 	.align 2, 0
 _0814D148: .4byte gUnknown_8419F54
 _0814D14C: .4byte sub_80DA634
 _0814D150:
 	ldr r0, _0814D160 @ =sub_80DA634
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D178
@@ -3044,7 +3044,7 @@ _0814D266:
 	strh r5, [r0]
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_800A448
+	bl SendBlock
 	b _0814D30C
 _0814D288:
 	bl sub_800A4BC
@@ -3054,7 +3054,7 @@ _0814D288:
 	strh r5, [r4, 0x10]
 	b _0814D30C
 _0814D296:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	ldr r2, _0814D2E8 @ =gUnknown_846E3C8
 	ldrb r3, [r4, 0x9]
 	subs r1, r3, 0x2
@@ -3103,7 +3103,7 @@ _0814D2F0:
 	movs r2, 0
 	bl sub_814BB4C
 _0814D2FA:
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	movs r1, 0
 	movs r0, 0
 	strh r0, [r7]
@@ -3151,7 +3151,7 @@ _0814D33C:
 	movs r3, 0x10
 	b _0814D370
 _0814D34A:
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D394
@@ -3169,11 +3169,11 @@ _0814D356:
 	movs r2, 0x10
 	movs r3, 0
 _0814D370:
-	bl sub_8070588
-	bl sub_80704D0
+	bl BeginNormalPaletteFade
+	bl UpdatePaletteFade
 	b _0814D394
 _0814D37A:
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814D39A

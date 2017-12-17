@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80E5684
-sub_80E5684: @ 80E5684
+	thumb_func_start hm_prepare_dive_probably
+hm_prepare_dive_probably: @ 80E5684
 	push {r4-r6,lr}
 	bl sub_811FB0C
 	lsls r0, 24
@@ -16,7 +16,7 @@ sub_80E5684: @ 80E5684
 	ldr r4, _080E56D0 @ =gUnknown_2024284
 	adds r0, r4
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -26,7 +26,7 @@ sub_80E5684: @ 80E5684
 	muls r0, r6
 	adds r0, r4
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -47,7 +47,7 @@ _080E56D6:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80E5684
+	thumb_func_end hm_prepare_dive_probably
 
 	thumb_func_start sub_80E56DC
 sub_80E56DC: @ 80E56DC
@@ -126,7 +126,7 @@ _080E5768:
 	adds r6, r0, r1
 	adds r0, r6, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -135,7 +135,7 @@ _080E5768:
 	beq _080E5796
 	adds r0, r6, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, r4
 	bne _080E57A4
 _080E5796:
@@ -152,7 +152,7 @@ _080E57A4:
 	muls r0, r1
 	add r0, r9
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0x5
 	bl __udivsi3
 	adds r3, r0, 0
@@ -195,7 +195,7 @@ sub_80E57E8: @ 80E57E8
 	ldr r1, _080E5834 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0x5
 	bl __udivsi3
 	adds r3, r0, 0
@@ -231,7 +231,7 @@ sub_80E583C: @ 80E583C
 	ldr r1, _080E5888 @ =gUnknown_2024284
 	adds r0, r1
 	ldr r1, _080E588C @ =gUnknown_2021CD0
-	bl sub_81202E0
+	bl GetMonNickname
 	ldr r4, _080E5890 @ =gUnknown_2021D18
 	ldr r1, _080E5894 @ =gUnknown_8416F27
 	adds r0, r4, 0
@@ -240,7 +240,7 @@ sub_80E583C: @ 80E583C
 	movs r1, 0
 	bl sub_81202F8
 	movs r0, 0x2
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	ldr r1, _080E5898 @ =gUnknown_3005090
 	lsls r0, r5, 2
 	adds r0, r5
@@ -286,7 +286,7 @@ sub_80E58A0: @ 80E58A0
 	movs r1, 0
 	bl sub_810F4D8
 	movs r0, 0x6
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	movs r0, 0
 	bl sub_8121D0C
 	ldr r1, _080E58F8 @ =gUnknown_3005090
@@ -346,7 +346,7 @@ sub_80E5934: @ 80E5934
 	movs r1, 0
 	bl sub_81202F8
 	movs r0, 0x2
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	ldr r1, _080E5968 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8045274
-sub_8045274: @ 8045274
+	thumb_func_start BlendPalette
+BlendPalette: @ 8045274
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -87,7 +87,7 @@ _080452FA:
 	.align 2, 0
 _0804530C: .4byte gUnknown_20371F8
 _08045310: .4byte gUnknown_20375F8
-	thumb_func_end sub_8045274
+	thumb_func_end BlendPalette
 
 	thumb_func_start sub_8045314
 sub_8045314: @ 8045314

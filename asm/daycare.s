@@ -5,42 +5,42 @@
 
 	.text
 
-	thumb_func_start sub_80453C0
-sub_80453C0: @ 80453C0
+	thumb_func_start GetMonNick
+GetMonNick: @ 80453C0
 	push {r4,lr}
 	sub sp, 0x14
 	adds r4, r1, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_8008CF4
+	bl StringCopy10
 	add sp, 0x14
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80453C0
+	thumb_func_end GetMonNick
 
-	thumb_func_start sub_80453E0
-sub_80453E0: @ 80453E0
+	thumb_func_start GetBoxMonNick
+GetBoxMonNick: @ 80453E0
 	push {r4,lr}
 	sub sp, 0x14
 	adds r4, r1, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_8008CF4
+	bl StringCopy10
 	add sp, 0x14
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80453E0
+	thumb_func_end GetBoxMonNick
 
-	thumb_func_start sub_8045400
-sub_8045400: @ 8045400
+	thumb_func_start CountPokemonInDaycare
+CountPokemonInDaycare: @ 8045400
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r5, 0
@@ -50,7 +50,7 @@ _08045408:
 	muls r0, r4
 	adds r0, r6, r0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _0804541E
 	adds r0, r5, 0x1
@@ -66,10 +66,10 @@ _0804541E:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045400
+	thumb_func_end CountPokemonInDaycare
 
-	thumb_func_start sub_8045430
-sub_8045430: @ 8045430
+	thumb_func_start InitDaycareMailRecordMixing
+InitDaycareMailRecordMixing: @ 8045430
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -90,7 +90,7 @@ _0804544A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08045478
 	adds r0, r7, 0x1
@@ -98,7 +98,7 @@ _0804544A:
 	lsrs r7, r0, 24
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _08045478
@@ -125,10 +125,10 @@ _0804547E:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8045430
+	thumb_func_end InitDaycareMailRecordMixing
 
-	thumb_func_start sub_804549C
-sub_804549C: @ 804549C
+	thumb_func_start Daycare_FindEmptySpot
+Daycare_FindEmptySpot: @ 804549C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -137,7 +137,7 @@ _080454A2:
 	muls r0, r4
 	adds r0, r5, r0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080454B8
 	lsls r0, r4, 24
@@ -155,10 +155,10 @@ _080454C6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804549C
+	thumb_func_end Daycare_FindEmptySpot
 
-	thumb_func_start sub_80454CC
-sub_80454CC: @ 80454CC
+	thumb_func_start StorePokemonInDaycare
+StorePokemonInDaycare: @ 80454CC
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -170,14 +170,14 @@ sub_80454CC: @ 80454CC
 	adds r0, 0x74
 	ldr r1, _08045550 @ =gUnknown_300500C
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	adds r1, r4, 0
 	adds r1, 0x7C
 	adds r0, r5, 0
-	bl sub_80453C0
+	bl GetMonNick
 	adds r0, r5, 0
 	movs r1, 0x40
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08045554 @ =gUnknown_3005008
@@ -197,22 +197,22 @@ sub_80454CC: @ 80454CC
 	ldm r1!, {r2,r3,r6}
 	stm r0!, {r2,r3,r6}
 	adds r0, r5, 0
-	bl sub_8097FB8
+	bl TakeMailFromMon
 _08045524:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x50
 	bl memcpy
 	adds r0, r4, 0
-	bl sub_80442E4
+	bl BoxMonRestorePP
 	adds r1, r4, 0
 	adds r1, 0x88
 	movs r0, 0
 	str r0, [r1]
 	adds r0, r5, 0
-	bl sub_803D994
-	bl sub_80937DC
-	bl sub_8040C3C
+	bl ZeroMonData
+	bl CompactPartySlots
+	bl CalculatePlayerPartyCount
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -220,7 +220,7 @@ _08045524:
 _08045550: .4byte gUnknown_300500C
 _08045554: .4byte gUnknown_3005008
 _08045558: .4byte 0x00002cd0
-	thumb_func_end sub_80454CC
+	thumb_func_end StorePokemonInDaycare
 
 	thumb_func_start sub_804555C
 sub_804555C: @ 804555C
@@ -228,7 +228,7 @@ sub_804555C: @ 804555C
 	adds r5, r0, 0
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_804549C
+	bl Daycare_FindEmptySpot
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x8C
@@ -236,7 +236,7 @@ sub_804555C: @ 804555C
 	adds r4, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80454CC
+	bl StorePokemonInDaycare
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -265,20 +265,20 @@ _080455A4: .4byte gUnknown_2024284
 _080455A8: .4byte gUnknown_3005008
 	thumb_func_end sub_8045580
 
-	thumb_func_start sub_80455AC
-sub_80455AC: @ 80455AC
+	thumb_func_start ShiftDaycareSlots
+ShiftDaycareSlots: @ 80455AC
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r5, 0
 	adds r4, 0x8C
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08045602
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r6, r0, 0
 	cmp r6, 0
 	bne _08045602
@@ -287,7 +287,7 @@ sub_80455AC: @ 80455AC
 	movs r2, 0x50
 	bl memcpy
 	adds r0, r4, 0
-	bl sub_803D97C
+	bl ZeroBoxMonData
 	adds r4, 0x50
 	adds r0, r5, 0
 	adds r0, 0x50
@@ -303,15 +303,15 @@ sub_80455AC: @ 80455AC
 	str r0, [r2]
 	str r6, [r1]
 	adds r0, r4, 0
-	bl sub_80458E8
+	bl ClearDaycareMonMisc
 _08045602:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80455AC
+	thumb_func_end ShiftDaycareSlots
 
-	thumb_func_start sub_8045608
-sub_8045608: @ 8045608
+	thumb_func_start ApplyDaycareExperience
+ApplyDaycareExperience: @ 8045608
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	movs r5, 0
@@ -334,11 +334,11 @@ _08045628:
 	ldr r0, _08045658 @ =gUnknown_2024022
 	ldrh r1, [r0]
 	adds r0, r4, 0
-	bl sub_803EB94
+	bl DeleteFirstMoveAndGiveMoveToMon
 _08045638:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_803EA88
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -347,37 +347,37 @@ _08045638:
 	ble _08045610
 _0804564C:
 	adds r0, r4, 0
-	bl sub_803E47C
+	bl CalculateMonStats
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08045658: .4byte gUnknown_2024022
-	thumb_func_end sub_8045608
+	thumb_func_end ApplyDaycareExperience
 
-	thumb_func_start sub_804565C
-sub_804565C: @ 804565C
+	thumb_func_start TakeSelectedPokemonFromDaycare
+TakeSelectedPokemonFromDaycare: @ 804565C
 	push {r4-r7,lr}
 	sub sp, 0x68
 	adds r5, r0, 0
 	ldr r1, _080456F8 @ =gUnknown_2021CD0
-	bl sub_80453E0
+	bl GetBoxMonNick
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r5, 0
 	mov r1, sp
-	bl sub_803E774
+	bl BoxMonToMon
 	mov r0, sp
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x64
 	beq _080456AA
 	mov r0, sp
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r5, 0
 	adds r1, 0x88
 	ldr r1, [r1]
@@ -388,7 +388,7 @@ sub_804565C: @ 804565C
 	movs r1, 0x19
 	bl sub_804037C
 	mov r0, sp
-	bl sub_8045608
+	bl ApplyDaycareExperience
 _080456AA:
 	ldr r0, _080456FC @ =gUnknown_2024284
 	movs r1, 0xFA
@@ -407,18 +407,18 @@ _080456AA:
 	adds r4, 0x50
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8097F44
+	bl GiveMailToMon2
 	adds r0, r4, 0
-	bl sub_80458E8
+	bl ClearDaycareMonMisc
 _080456D8:
 	adds r0, r5, 0
-	bl sub_803D97C
+	bl ZeroBoxMonData
 	adds r1, r5, 0
 	adds r1, 0x88
 	movs r0, 0
 	str r0, [r1]
-	bl sub_80937DC
-	bl sub_8040C3C
+	bl CompactPartySlots
+	bl CalculatePlayerPartyCount
 	adds r0, r7, 0
 	add sp, 0x68
 	pop {r4-r7}
@@ -427,10 +427,10 @@ _080456D8:
 	.align 2, 0
 _080456F8: .4byte gUnknown_2021CD0
 _080456FC: .4byte gUnknown_2024284
-	thumb_func_end sub_804565C
+	thumb_func_end TakeSelectedPokemonFromDaycare
 
-	thumb_func_start sub_8045700
-sub_8045700: @ 8045700
+	thumb_func_start TakeSelectedPokemonMonFromDaycareShiftSlots
+TakeSelectedPokemonMonFromDaycareShiftSlots: @ 8045700
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r1, 24
@@ -438,20 +438,20 @@ sub_8045700: @ 8045700
 	movs r0, 0x8C
 	muls r0, r1
 	adds r0, r5, r0
-	bl sub_804565C
+	bl TakeSelectedPokemonFromDaycare
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80455AC
+	bl ShiftDaycareSlots
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045700
+	thumb_func_end TakeSelectedPokemonMonFromDaycareShiftSlots
 
-	thumb_func_start sub_8045728
-sub_8045728: @ 8045728
+	thumb_func_start TakePokemonFromDaycare
+TakePokemonFromDaycare: @ 8045728
 	push {lr}
 	ldr r0, _08045744 @ =gUnknown_3005008
 	ldr r0, [r0]
@@ -460,7 +460,7 @@ sub_8045728: @ 8045728
 	adds r0, r1
 	ldr r1, _08045748 @ =gUnknown_20370C0
 	ldrb r1, [r1]
-	bl sub_8045700
+	bl TakeSelectedPokemonMonFromDaycareShiftSlots
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -468,10 +468,10 @@ sub_8045728: @ 8045728
 	.align 2, 0
 _08045744: .4byte gUnknown_3005008
 _08045748: .4byte gUnknown_20370C0
-	thumb_func_end sub_8045728
+	thumb_func_end TakePokemonFromDaycare
 
-	thumb_func_start sub_804574C
-sub_804574C: @ 804574C
+	thumb_func_start GetLevelAfterDaycareSteps
+GetLevelAfterDaycareSteps: @ 804574C
 	push {r4,r5,lr}
 	sub sp, 0x54
 	adds r4, r0, 0
@@ -482,7 +482,7 @@ sub_804574C: @ 804574C
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r0, r5
 	str r0, [sp, 0x50]
 	add r2, sp, 0x50
@@ -490,20 +490,20 @@ sub_804574C: @ 804574C
 	movs r1, 0x19
 	bl sub_80404D0
 	mov r0, sp
-	bl sub_803E830
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x54
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804574C
+	thumb_func_end GetLevelAfterDaycareSteps
 
-	thumb_func_start sub_8045788
-sub_8045788: @ 8045788
+	thumb_func_start GetNumLevelsGainedFromSteps
+GetNumLevelsGainedFromSteps: @ 8045788
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_803E830
+	bl GetLevelFromBoxMonExp
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -511,7 +511,7 @@ sub_8045788: @ 8045788
 	adds r0, 0x88
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_804574C
+	bl GetLevelAfterDaycareSteps
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, r4
@@ -520,13 +520,13 @@ sub_8045788: @ 8045788
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045788
+	thumb_func_end GetNumLevelsGainedFromSteps
 
-	thumb_func_start sub_80457B4
-sub_80457B4: @ 80457B4
+	thumb_func_start GetNumLevelsGainedForDaycareMon
+GetNumLevelsGainedForDaycareMon: @ 80457B4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_8045788
+	bl GetNumLevelsGainedFromSteps
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -537,7 +537,7 @@ sub_80457B4: @ 80457B4
 	bl sub_8008E78
 	ldr r1, _080457E4 @ =gUnknown_2021CD0
 	adds r0, r5, 0
-	bl sub_80453E0
+	bl GetBoxMonNick
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
@@ -545,19 +545,19 @@ sub_80457B4: @ 80457B4
 	.align 2, 0
 _080457E0: .4byte gUnknown_2021CF0
 _080457E4: .4byte gUnknown_2021CD0
-	thumb_func_end sub_80457B4
+	thumb_func_end GetNumLevelsGainedForDaycareMon
 
-	thumb_func_start sub_80457E8
-sub_80457E8: @ 80457E8
+	thumb_func_start GetDaycareCostForSelectedMon
+GetDaycareCostForSelectedMon: @ 80457E8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_8045788
+	bl GetNumLevelsGainedFromSteps
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r1, _08045818 @ =gUnknown_2021CD0
 	adds r0, r5, 0
-	bl sub_80453E0
+	bl GetBoxMonNick
 	movs r0, 0x64
 	muls r4, r0
 	adds r4, 0x64
@@ -573,25 +573,25 @@ sub_80457E8: @ 80457E8
 	.align 2, 0
 _08045818: .4byte gUnknown_2021CD0
 _0804581C: .4byte gUnknown_2021CF0
-	thumb_func_end sub_80457E8
+	thumb_func_end GetDaycareCostForSelectedMon
 
-	thumb_func_start sub_8045820
-sub_8045820: @ 8045820
+	thumb_func_start GetDaycareCostForMon
+GetDaycareCostForMon: @ 8045820
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
 	movs r2, 0x8C
 	muls r1, r2
 	adds r0, r1
-	bl sub_80457E8
+	bl GetDaycareCostForSelectedMon
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045820
+	thumb_func_end GetDaycareCostForMon
 
-	thumb_func_start sub_8045838
-sub_8045838: @ 8045838
+	thumb_func_start GetDaycareCost
+GetDaycareCost: @ 8045838
 	push {lr}
 	ldr r0, _08045854 @ =gUnknown_3005008
 	ldr r0, [r0]
@@ -600,7 +600,7 @@ sub_8045838: @ 8045838
 	adds r0, r1
 	ldr r1, _08045858 @ =gUnknown_20370C0
 	ldrb r1, [r1]
-	bl sub_8045820
+	bl GetDaycareCostForMon
 	ldr r1, _0804585C @ =gUnknown_20370C2
 	strh r0, [r1]
 	pop {r0}
@@ -609,7 +609,7 @@ sub_8045838: @ 8045838
 _08045854: .4byte gUnknown_3005008
 _08045858: .4byte gUnknown_20370C0
 _0804585C: .4byte gUnknown_20370C2
-	thumb_func_end sub_8045838
+	thumb_func_end GetDaycareCost
 
 	thumb_func_start sub_8045860
 sub_8045860: @ 8045860
@@ -640,8 +640,8 @@ _08045890: .4byte 0x00003094
 _08045894: .4byte 0x00003d20
 	thumb_func_end sub_8045860
 
-	thumb_func_start sub_8045898
-sub_8045898: @ 8045898
+	thumb_func_start GetNumLevelsGainedFromDaycare
+GetNumLevelsGainedFromDaycare: @ 8045898
 	push {r4-r6,lr}
 	ldr r6, _080458C0 @ =gUnknown_3005008
 	ldr r5, _080458C4 @ =gUnknown_20370C0
@@ -655,7 +655,7 @@ sub_8045898: @ 8045898
 	ldr r0, [r6]
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080458C8
 	movs r0, 0
@@ -672,17 +672,17 @@ _080458C8:
 	adds r1, r0
 	ldr r0, [r6]
 	adds r0, r1
-	bl sub_80457B4
+	bl GetNumLevelsGainedForDaycareMon
 	lsls r0, 24
 	lsrs r0, 24
 _080458E0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8045898
+	thumb_func_end GetNumLevelsGainedFromDaycare
 
-	thumb_func_start sub_80458E8
-sub_80458E8: @ 80458E8
+	thumb_func_start ClearDaycareMonMisc
+ClearDaycareMonMisc: @ 80458E8
 	push {lr}
 	movs r3, 0
 	movs r2, 0x7
@@ -707,27 +707,27 @@ _08045906:
 	bl sub_8097CB4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80458E8
+	thumb_func_end ClearDaycareMonMisc
 
-	thumb_func_start sub_8045918
-sub_8045918: @ 8045918
+	thumb_func_start ClearDaycareMon
+ClearDaycareMon: @ 8045918
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_803D97C
+	bl ZeroBoxMonData
 	adds r1, r4, 0
 	adds r1, 0x88
 	movs r0, 0
 	str r0, [r1]
 	adds r4, 0x50
 	adds r0, r4, 0
-	bl sub_80458E8
+	bl ClearDaycareMonMisc
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8045918
+	thumb_func_end ClearDaycareMon
 
-	thumb_func_start sub_8045938
-sub_8045938: @ 8045938
+	thumb_func_start ClearAllDaycareData
+ClearAllDaycareData: @ 8045938
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -736,7 +736,7 @@ _08045940:
 	adds r0, r4, 0
 	muls r0, r6
 	adds r0, r5, r0
-	bl sub_8045918
+	bl ClearDaycareMon
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -755,7 +755,7 @@ _08045940:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8045938
+	thumb_func_end ClearAllDaycareData
 
 	thumb_func_start sub_8045970
 sub_8045970: @ 8045970
@@ -834,7 +834,7 @@ _080459EC: .4byte 0x0000019b
 sub_80459F0: @ 80459F0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08045A18 @ =0x0000fffe
@@ -858,7 +858,7 @@ _08045A1C: .4byte 0x00000266
 sub_8045A20: @ 8045A20
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8044EC8
+	bl Random
 	movs r2, 0x80
 	lsls r2, 8
 	adds r1, r2, 0
@@ -906,8 +906,8 @@ sub_8045A60: @ 8045A60
 _08045A74: .4byte gUnknown_3005008
 	thumb_func_end sub_8045A60
 
-	thumb_func_start sub_8045A78
-sub_8045A78: @ 8045A78
+	thumb_func_start RemoveIVIndexFromList
+RemoveIVIndexFromList: @ 8045A78
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -946,10 +946,10 @@ _08045AB0:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8045A78
+	thumb_func_end RemoveIVIndexFromList
 
-	thumb_func_start sub_8045AC0
-sub_8045AC0: @ 8045AC0
+	thumb_func_start InheritIVs
+InheritIVs: @ 8045AC0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -972,7 +972,7 @@ _08045AD6:
 	movs r5, 0
 	adds r6, r1, 0
 _08045AE8:
-	bl sub_8044EC8
+	bl Random
 	mov r1, sp
 	adds r4, r1, r5
 	lsls r0, 16
@@ -985,7 +985,7 @@ _08045AE8:
 	strb r0, [r4]
 	ldrb r1, [r4]
 	adds r0, r6, 0
-	bl sub_8045A78
+	bl RemoveIVIndexFromList
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -994,7 +994,7 @@ _08045AE8:
 	movs r5, 0
 	movs r4, 0x1
 _08045B18:
-	bl sub_8044EC8
+	bl Random
 	adds r1, r7, r5
 	lsls r0, 16
 	lsrs r0, 16
@@ -1034,7 +1034,7 @@ _08045B64:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x27
-	bl sub_803FD44
+	bl GetBoxMonData
 	add r2, sp, 0x10
 	strb r0, [r2]
 	mov r0, r9
@@ -1049,7 +1049,7 @@ _08045B82:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x28
-	bl sub_803FD44
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x28
@@ -1062,7 +1062,7 @@ _08045B9C:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x29
-	bl sub_803FD44
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x29
@@ -1075,7 +1075,7 @@ _08045BB6:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x2A
-	bl sub_803FD44
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2A
@@ -1088,7 +1088,7 @@ _08045BD0:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x2B
-	bl sub_803FD44
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2B
@@ -1104,7 +1104,7 @@ _08045BF0:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x2C
-	bl sub_803FD44
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2C
@@ -1123,10 +1123,10 @@ _08045C0E:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8045AC0
+	thumb_func_end InheritIVs
 
-	thumb_func_start sub_8045C28
-sub_8045C28: @ 8045C28
+	thumb_func_start GetEggMoves
+GetEggMoves: @ 8045C28
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1134,7 +1134,7 @@ sub_8045C28: @ 8045C28
 	movs r6, 0
 	movs r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r3, r0, 16
 	movs r2, 0
@@ -1211,10 +1211,10 @@ _08045CB6:
 _08045CC4: .4byte 0x00000471
 _08045CC8: .4byte gUnknown_825EF0C
 _08045CCC: .4byte 0x00004e20
-	thumb_func_end sub_8045C28
+	thumb_func_end GetEggMoves
 
-	thumb_func_start sub_8045CD0
-sub_8045CD0: @ 8045CD0
+	thumb_func_start BuildEggMoveset
+BuildEggMoveset: @ 8045CD0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1270,7 +1270,7 @@ _08045D24:
 	bls _08045D24
 	adds r0, r7, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08045DE4 @ =gUnknown_20244F8
@@ -1286,14 +1286,14 @@ _08045D52:
 	adds r5, 0xD
 	mov r0, r10
 	adds r1, r5, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	lsls r4, r6, 1
 	mov r2, r8
 	adds r1, r4, r2
 	strh r0, [r1]
 	mov r0, r9
 	adds r1, r5, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	ldr r1, _08045DD4 @ =gUnknown_2024580
 	adds r4, r1
 	strh r0, [r4]
@@ -1304,7 +1304,7 @@ _08045D52:
 	bls _08045D52
 	ldr r1, _08045DE0 @ =gUnknown_202456C
 	adds r0, r7, 0
-	bl sub_8045C28
+	bl GetEggMoves
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -1333,7 +1333,7 @@ _08045DA6:
 	adds r1, r0, 0
 	adds r0, r7, 0
 	str r2, [sp, 0x8]
-	bl sub_803E89C
+	bl GiveMoveToMon
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, [sp, 0x8]
@@ -1341,7 +1341,7 @@ _08045DA6:
 	bne _08045DF6
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_803EB94
+	bl DeleteFirstMoveAndGiveMoveToMon
 	b _08045DF6
 	.align 2, 0
 _08045DD4: .4byte gUnknown_2024580
@@ -1386,7 +1386,7 @@ _08045E22:
 	adds r0, r5, r3
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8125A78
+	bl ItemIdToBattleMoveId
 	ldrh r1, [r4]
 	lsls r0, 16
 	lsrs r0, 16
@@ -1400,14 +1400,14 @@ _08045E22:
 	beq _08045E5E
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_803E89C
+	bl GiveMoveToMon
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r6
 	bne _08045E5E
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_803EB94
+	bl DeleteFirstMoveAndGiveMoveToMon
 _08045E5E:
 	adds r0, r5, 0x1
 	lsls r0, 16
@@ -1501,7 +1501,7 @@ _08045EEA:
 	adds r1, r0, 0
 	adds r0, r7, 0
 	str r2, [sp, 0x8]
-	bl sub_803E89C
+	bl GiveMoveToMon
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, [sp, 0x8]
@@ -1509,7 +1509,7 @@ _08045EEA:
 	bne _08045F44
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_803EB94
+	bl DeleteFirstMoveAndGiveMoveToMon
 	b _08045F44
 	.align 2, 0
 _08045F20: .4byte gUnknown_202455C
@@ -1549,10 +1549,10 @@ _08045F5C:
 	bx r0
 	.align 2, 0
 _08045F6C: .4byte gUnknown_2024564
-	thumb_func_end sub_8045CD0
+	thumb_func_end BuildEggMoveset
 
-	thumb_func_start sub_8045F70
-sub_8045F70: @ 8045F70
+	thumb_func_start RemoveEggFromDayCare
+RemoveEggFromDayCare: @ 8045F70
 	adds r3, r0, 0
 	movs r1, 0x8C
 	lsls r1, 1
@@ -1565,22 +1565,22 @@ sub_8045F70: @ 8045F70
 	adds r0, r3, r1
 	strb r2, [r0]
 	bx lr
-	thumb_func_end sub_8045F70
+	thumb_func_end RemoveEggFromDayCare
 
-	thumb_func_start sub_8045F88
-sub_8045F88: @ 8045F88
+	thumb_func_start RejectEggFromDayCare
+RejectEggFromDayCare: @ 8045F88
 	push {lr}
 	ldr r0, _08045F9C @ =gUnknown_3005008
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
 	adds r0, r1
-	bl sub_8045F70
+	bl RemoveEggFromDayCare
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08045F9C: .4byte gUnknown_3005008
-	thumb_func_end sub_8045F88
+	thumb_func_end RejectEggFromDayCare
 
 	thumb_func_start sub_8045FA0
 sub_8045FA0: @ 8045FA0
@@ -1599,13 +1599,13 @@ sub_8045FA0: @ 8045FA0
 _08045FB8:
 	adds r0, r5, 0
 	movs r1, 0xC
-	bl sub_803FD44
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r5, 0
 	adds r0, 0x8C
 	movs r1, 0xC
-	bl sub_803FD44
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldrh r0, [r4]
@@ -1652,7 +1652,7 @@ _08046010:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	lsls r1, r4, 1
 	add r1, sp
 	strh r0, [r1]
@@ -1667,7 +1667,7 @@ _08046010:
 	b _0804604E
 _08046038:
 	adds r0, r5, 0
-	bl sub_803F730
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFE
@@ -1726,7 +1726,7 @@ _0804609A:
 	movs r0, 0x8C
 	muls r0, r1
 	add r0, r8
-	bl sub_803F730
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFE
@@ -1766,7 +1766,7 @@ sub_80460D4: @ 80460D4
 	bl sub_8046208
 	mov r0, sp
 	adds r1, r5, 0
-	bl sub_8045AC0
+	bl InheritIVs
 	ldrb r0, [r6, 0x1]
 	movs r2, 0x8C
 	adds r1, r0, 0
@@ -1776,7 +1776,7 @@ sub_80460D4: @ 80460D4
 	muls r2, r0
 	adds r2, r5, r2
 	mov r0, sp
-	bl sub_8045CD0
+	bl BuildEggMoveset
 	mov r2, sp
 	adds r2, 0x6A
 	movs r0, 0x1
@@ -1791,10 +1791,10 @@ sub_80460D4: @ 80460D4
 	mov r1, sp
 	movs r2, 0x64
 	bl memcpy
-	bl sub_80937DC
-	bl sub_8040C3C
+	bl CompactPartySlots
+	bl CalculatePlayerPartyCount
 	adds r0, r5, 0
-	bl sub_8045F70
+	bl RemoveEggFromDayCare
 	add sp, 0x6C
 	pop {r4-r6}
 	pop {r0}
@@ -1825,7 +1825,7 @@ sub_8046150: @ 8046150
 	adds r1, r5, 0
 	movs r2, 0x5
 	movs r3, 0x20
-	bl sub_803DA54
+	bl CreateMon
 	movs r0, 0x12
 	add r0, sp
 	mov r8, r0
@@ -1903,7 +1903,7 @@ sub_8046208: @ 8046208
 	adds r4, r2, 0
 	lsls r5, 16
 	lsrs r5, 16
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x8C
 	lsls r1, 1
 	adds r4, r1
@@ -1921,7 +1921,7 @@ sub_8046208: @ 8046208
 	adds r1, r5, 0
 	movs r2, 0x5
 	movs r3, 0x20
-	bl sub_803DA54
+	bl CreateMon
 	movs r1, 0x12
 	add r1, sp
 	mov r9, r1
@@ -1997,7 +1997,7 @@ _080462CE:
 	muls r4, r0
 	adds r0, r6, r4
 	movs r1, 0x5
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080462EE
 	adds r1, r6, 0
@@ -2025,11 +2025,11 @@ _080462EE:
 	cmp r0, 0xFF
 	bne _08046334
 	adds r0, r6, 0
-	bl sub_804654C
+	bl GetDaycareCompatibilityScore
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -2062,17 +2062,17 @@ _08046350:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0804639E
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0804639E
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp]
 	cmp r0, 0
 	bne _08046390
@@ -2116,7 +2116,7 @@ sub_80463B8: @ 80463B8
 	ldr r1, _080463F4 @ =0x00003c98
 	adds r0, r1
 	movs r1, 0x5
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080463D8
 	ldr r1, [r4]
@@ -2160,29 +2160,29 @@ sub_804640C: @ 804640C
 	sub sp, 0xC
 	adds r4, r0, 0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08046436
 	ldr r1, _08046454 @ =gUnknown_2021CD0
 	adds r0, r4, 0
-	bl sub_80453E0
+	bl GetBoxMonNick
 	adds r0, r4, 0
 	movs r1, 0x7
 	mov r2, sp
-	bl sub_803FD44
+	bl GetBoxMonData
 	ldr r0, _08046458 @ =gUnknown_2021D04
 	mov r1, sp
-	bl sub_8008D84
+	bl StringCopy
 _08046436:
 	adds r4, 0x8C
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _0804644C
 	ldr r1, _0804645C @ =gUnknown_2021CF0
 	adds r0, r4, 0
-	bl sub_80453E0
+	bl GetBoxMonNick
 _0804644C:
 	add sp, 0xC
 	pop {r4}
@@ -2205,14 +2205,14 @@ sub_8046460: @ 8046460
 	ldr r4, _08046494 @ =gUnknown_2024284
 	adds r0, r4
 	ldr r1, _08046498 @ =gUnknown_2021CD0
-	bl sub_80453E0
+	bl GetBoxMonNick
 	bl sub_811FB0C
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r4,r5}
@@ -2259,7 +2259,7 @@ _080464D4:
 	movs r1, 0xBE
 	lsls r1, 6
 	adds r0, r1
-	bl sub_8045400
+	bl CountPokemonInDaycare
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2276,15 +2276,15 @@ _080464F2:
 	bx r1
 	thumb_func_end sub_80464B4
 
-	thumb_func_start sub_80464F8
-sub_80464F8: @ 80464F8
+	thumb_func_start GetDaycarePokemonCount
+GetDaycarePokemonCount: @ 80464F8
 	push {lr}
 	ldr r0, _08046518 @ =gUnknown_3005008
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
 	adds r0, r1
-	bl sub_8045400
+	bl CountPokemonInDaycare
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2295,10 +2295,10 @@ _08046512:
 	bx r1
 	.align 2, 0
 _08046518: .4byte gUnknown_3005008
-	thumb_func_end sub_80464F8
+	thumb_func_end GetDaycarePokemonCount
 
-	thumb_func_start sub_804651C
-sub_804651C: @ 804651C
+	thumb_func_start EggGroupsOverlap
+EggGroupsOverlap: @ 804651C
 	push {r4-r6,lr}
 	adds r5, r1, 0
 	movs r4, 0
@@ -2327,10 +2327,10 @@ _08046546:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804651C
+	thumb_func_end EggGroupsOverlap
 
-	thumb_func_start sub_804654C
-sub_804654C: @ 804654C
+	thumb_func_start GetDaycareCompatibilityScore
+GetDaycareCompatibilityScore: @ 804654C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2364,20 +2364,20 @@ _0804657E:
 	adds r4, r0, r4
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_803FD44
+	bl GetBoxMonData
 	ldr r1, [sp, 0x2C]
 	stm r1!, {r0}
 	str r1, [sp, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r1, r0, 0
 	ldrh r0, [r5]
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [sp, 0x28]
@@ -2443,7 +2443,7 @@ _08046614:
 	beq _080465FC
 	add r1, sp, 0x4
 	mov r0, sp
-	bl sub_804651C
+	bl EggGroupsOverlap
 	lsls r0, 24
 	cmp r0, 0
 	beq _080465FC
@@ -2479,29 +2479,29 @@ _0804665C:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804654C
+	thumb_func_end GetDaycareCompatibilityScore
 
-	thumb_func_start sub_804666C
-sub_804666C: @ 804666C
+	thumb_func_start GetDaycareCompatibilityScoreFromSave
+GetDaycareCompatibilityScoreFromSave: @ 804666C
 	push {lr}
 	ldr r0, _08046684 @ =gUnknown_3005008
 	ldr r0, [r0]
 	movs r1, 0xBE
 	lsls r1, 6
 	adds r0, r1
-	bl sub_804654C
+	bl GetDaycareCompatibilityScore
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
 _08046684: .4byte gUnknown_3005008
-	thumb_func_end sub_804666C
+	thumb_func_end GetDaycareCompatibilityScoreFromSave
 
-	thumb_func_start sub_8046688
-sub_8046688: @ 8046688
+	thumb_func_start SetDaycareCompatibilityString
+SetDaycareCompatibilityString: @ 8046688
 	push {lr}
-	bl sub_804666C
+	bl GetDaycareCompatibilityScoreFromSave
 	lsls r0, 24
 	lsrs r0, 24
 	adds r2, r0, 0
@@ -2527,16 +2527,16 @@ _080466AE:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080466C0: .4byte gUnknown_2021D18
 _080466C4: .4byte gUnknown_825F82C
-	thumb_func_end sub_8046688
+	thumb_func_end SetDaycareCompatibilityString
 
-	thumb_func_start sub_80466C8
-sub_80466C8: @ 80466C8
+	thumb_func_start NameHasGenderSymbol
+NameHasGenderSymbol: @ 80466C8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -2606,10 +2606,10 @@ _0804673A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80466C8
+	thumb_func_end NameHasGenderSymbol
 
-	thumb_func_start sub_8046744
-sub_8046744: @ 8046744
+	thumb_func_start AppendGenderSymbol
+AppendGenderSymbol: @ 8046744
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -2617,7 +2617,7 @@ sub_8046744: @ 8046744
 	cmp r1, 0
 	bne _08046764
 	movs r1, 0
-	bl sub_80466C8
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	cmp r0, 0
 	bne _08046780
@@ -2630,7 +2630,7 @@ _08046764:
 	bne _08046780
 	adds r0, r4, 0
 	movs r1, 0xFE
-	bl sub_80466C8
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	cmp r0, 0
 	bne _08046780
@@ -2642,32 +2642,32 @@ _08046780:
 	ldr r1, _08046790 @ =gUnknown_8261EC5
 _08046782:
 	adds r0, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _08046790: .4byte gUnknown_8261EC5
-	thumb_func_end sub_8046744
+	thumb_func_end AppendGenderSymbol
 
-	thumb_func_start sub_8046794
-sub_8046794: @ 8046794
+	thumb_func_start AppendMonGenderSymbol
+AppendMonGenderSymbol: @ 8046794
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
-	bl sub_803F730
+	bl GetBoxMonGender
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8046744
+	bl AppendGenderSymbol
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8046794
+	thumb_func_end AppendMonGenderSymbol
 
-	thumb_func_start sub_80467B0
-sub_80467B0: @ 80467B0
+	thumb_func_start GetDaycareLevelMenuText
+GetDaycareLevelMenuText: @ 80467B0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2692,10 +2692,10 @@ _080467C8:
 	adds r5, r1, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80453E0
+	bl GetBoxMonNick
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8046794
+	bl AppendMonGenderSymbol
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2703,20 +2703,20 @@ _080467C8:
 	bls _080467C8
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_8008D84
+	bl StringCopy
 	ldr r4, _0804682C @ =gUnknown_825F83C
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 	adds r0, r7, 0
 	mov r1, r9
-	bl sub_8008DA4
+	bl StringAppend
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 	ldr r1, _08046830 @ =gUnknown_84161C8
 	adds r0, r7, 0
-	bl sub_8008DA4
+	bl StringAppend
 	add sp, 0x28
 	pop {r3,r4}
 	mov r8, r3
@@ -2727,10 +2727,10 @@ _080467C8:
 	.align 2, 0
 _0804682C: .4byte gUnknown_825F83C
 _08046830: .4byte gUnknown_84161C8
-	thumb_func_end sub_80467B0
+	thumb_func_end GetDaycareLevelMenuText
 
-	thumb_func_start sub_8046834
-sub_8046834: @ 8046834
+	thumb_func_start GetDaycareLevelMenuLevelText
+GetDaycareLevelMenuLevelText: @ 8046834
 	push {r4-r6,lr}
 	sub sp, 0x14
 	adds r6, r0, 0
@@ -2741,7 +2741,7 @@ sub_8046834: @ 8046834
 _08046842:
 	adds r0, r4, 0
 	ldr r1, _08046890 @ =gUnknown_8416223
-	bl sub_8008DA4
+	bl StringAppend
 	movs r0, 0x8C
 	adds r2, r5, 0
 	muls r2, r0
@@ -2750,7 +2750,7 @@ _08046842:
 	adds r1, 0x88
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_804574C
+	bl GetLevelAfterDaycareSteps
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2760,10 +2760,10 @@ _08046842:
 	bl sub_8008E78
 	adds r0, r4, 0
 	mov r1, sp
-	bl sub_8008DA4
+	bl StringAppend
 	adds r0, r4, 0
 	ldr r1, _08046894 @ =gUnknown_825F83C
-	bl sub_8008DA4
+	bl StringAppend
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2776,10 +2776,10 @@ _08046842:
 	.align 2, 0
 _08046890: .4byte gUnknown_8416223
 _08046894: .4byte gUnknown_825F83C
-	thumb_func_end sub_8046834
+	thumb_func_end GetDaycareLevelMenuLevelText
 
-	thumb_func_start sub_8046898
-sub_8046898: @ 8046898
+	thumb_func_start DaycareAddTextPrinter
+DaycareAddTextPrinter: @ 8046898
 	push {r4,r5,lr}
 	sub sp, 0x10
 	str r1, [sp]
@@ -2837,10 +2837,10 @@ sub_8046898: @ 8046898
 	bx r0
 	.align 2, 0
 _08046908: .4byte gUnknown_3003E50
-	thumb_func_end sub_8046898
+	thumb_func_end DaycareAddTextPrinter
 
-	thumb_func_start sub_804690C
-sub_804690C: @ 804690C
+	thumb_func_start DaycarePrintMonNick
+DaycarePrintMonNick: @ 804690C
 	push {r4-r6,lr}
 	sub sp, 0x14
 	adds r5, r0, 0
@@ -2853,23 +2853,23 @@ sub_804690C: @ 804690C
 	adds r5, r0
 	adds r0, r5, 0
 	mov r1, sp
-	bl sub_80453E0
+	bl GetBoxMonNick
 	mov r0, sp
 	adds r1, r5, 0
-	bl sub_8046794
+	bl AppendMonGenderSymbol
 	adds r0, r4, 0
 	mov r1, sp
 	movs r2, 0x8
 	adds r3, r6, 0
-	bl sub_8046898
+	bl DaycareAddTextPrinter
 	add sp, 0x14
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804690C
+	thumb_func_end DaycarePrintMonNick
 
-	thumb_func_start sub_8046944
-sub_8046944: @ 8046944
+	thumb_func_start DaycarePrintMonLvl
+DaycarePrintMonLvl: @ 8046944
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -2890,7 +2890,7 @@ sub_8046944: @ 8046944
 	adds r4, 0x88
 	adds r4, r1
 	ldr r1, [r4]
-	bl sub_804574C
+	bl GetLevelAfterDaycareSteps
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2901,7 +2901,7 @@ sub_8046944: @ 8046944
 	bl sub_8008E78
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 	movs r0, 0x3
 	mov r1, sp
 	movs r2, 0
@@ -2911,7 +2911,7 @@ sub_8046944: @ 8046944
 	adds r0, r5, 0
 	mov r1, sp
 	mov r3, r8
-	bl sub_8046898
+	bl DaycareAddTextPrinter
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
@@ -2920,10 +2920,10 @@ sub_8046944: @ 8046944
 	bx r0
 	.align 2, 0
 _080469B0: .4byte gUnknown_8416223
-	thumb_func_end sub_8046944
+	thumb_func_end DaycarePrintMonLvl
 
-	thumb_func_start sub_80469B4
-sub_80469B4: @ 80469B4
+	thumb_func_start DaycarePrintMonInfo
+DaycarePrintMonInfo: @ 80469B4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2943,14 +2943,14 @@ sub_80469B4: @ 80469B4
 	adds r1, r7, 0
 	adds r2, r6, 0
 	adds r3, r5, 0
-	bl sub_804690C
+	bl DaycarePrintMonNick
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r4
 	adds r1, r7, 0
 	adds r2, r6, 0
 	adds r3, r5, 0
-	bl sub_8046944
+	bl DaycarePrintMonLvl
 _080469EE:
 	pop {r3}
 	mov r8, r3
@@ -2959,7 +2959,7 @@ _080469EE:
 	bx r0
 	.align 2, 0
 _080469F8: .4byte gUnknown_3005008
-	thumb_func_end sub_80469B4
+	thumb_func_end DaycarePrintMonInfo
 
 	thumb_func_start sub_80469FC
 sub_80469FC: @ 80469FC
@@ -2973,7 +2973,7 @@ sub_80469FC: @ 80469FC
 	lsls r0, 3
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x8]
-	bl sub_8107078
+	bl ListMenuHandleInput
 	adds r1, r0, 0
 	ldr r0, _08046A30 @ =gUnknown_30030F0
 	ldrh r2, [r0, 0x2E]
@@ -3015,8 +3015,8 @@ _08046A46:
 	ldrb r0, [r4, 0xA]
 	bl sub_8003E3C
 	adds r0, r5, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 	b _08046AAC
 	.align 2, 0
 _08046A74: .4byte gUnknown_20370D0
@@ -3039,8 +3039,8 @@ _08046A7C:
 	ldrb r0, [r4, 0xA]
 	bl sub_8003E3C
 	adds r0, r5, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 _08046AAC:
 	pop {r4,r5}
 	pop {r0}
@@ -3071,7 +3071,7 @@ sub_8046AB8: @ 8046AB8
 	strb r4, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -3080,7 +3080,7 @@ sub_8046AB8: @ 8046AB8
 	bl sub_8003F20
 	ldr r0, _08046B20 @ =sub_80469FC
 	movs r1, 0x3
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08046B24 @ =gUnknown_3005090
@@ -3106,13 +3106,13 @@ sub_8046B28: @ 8046B28
 	push {lr}
 	bl sub_8128370
 	ldr r1, _08046B38 @ =gUnknown_30030F0
-	ldr r0, _08046B3C @ =sub_80567DC
+	ldr r0, _08046B3C @ =c2_exit_to_overworld_2_switch
 	str r0, [r1, 0x8]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08046B38: .4byte gUnknown_30030F0
-_08046B3C: .4byte sub_80567DC
+_08046B3C: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8046B28
 
 	thumb_func_start sub_8046B40
@@ -3129,7 +3129,7 @@ sub_8046B40: @ 8046B40
 	ldr r1, [r1]
 	ldr r2, _08046B6C @ =0x00003c98
 	adds r1, r2
-	bl sub_80454CC
+	bl StorePokemonInDaycare
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3145,7 +3145,7 @@ sub_8046B70: @ 8046B70
 	ldr r0, [r0]
 	ldr r1, _08046B8C @ =0x00003c98
 	adds r0, r1
-	bl sub_80457E8
+	bl GetDaycareCostForSelectedMon
 	ldr r1, _08046B90 @ =gUnknown_20370C2
 	strh r0, [r1]
 	pop {r0}
@@ -3164,7 +3164,7 @@ sub_8046B94: @ 8046B94
 	ldr r1, _08046BB0 @ =0x00003c98
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _08046BB4
 	movs r0, 0
@@ -3186,7 +3186,7 @@ sub_8046BBC: @ 8046BBC
 	ldr r0, [r0]
 	ldr r1, _08046BD8 @ =0x00003c98
 	adds r0, r1
-	bl sub_80457B4
+	bl GetNumLevelsGainedForDaycareMon
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -3203,7 +3203,7 @@ sub_8046BDC: @ 8046BDC
 	ldr r0, [r0]
 	ldr r1, _08046BF8 @ =0x00003c98
 	adds r0, r1
-	bl sub_804565C
+	bl TakeSelectedPokemonFromDaycare
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}

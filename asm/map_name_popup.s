@@ -25,24 +25,24 @@ sub_8098110: @ 8098110
 	bls _080981A2
 	ldr r5, _0809817C @ =sub_80981AC
 	adds r0, r5, 0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
 	bne _08098188
 	adds r0, r5, 0
 	movs r1, 0x5A
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	ldr r1, _08098180 @ =0xffffef7f
 	movs r0, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	ldr r1, _08098184 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -126,7 +126,7 @@ _080981FC:
 	strh r0, [r4, 0x8]
 	b _080982DE
 _0809820E:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	bne _080982DE
@@ -193,7 +193,7 @@ _0809827E:
 	cmp r0, 0
 	bne _080982A0
 	ldrb r0, [r4, 0x10]
-	bl sub_815036C
+	bl rbox_fill_rectangle
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x1
 	bl sub_8003F20
@@ -204,7 +204,7 @@ _080982A0:
 	strh r0, [r4, 0x8]
 	b _080982E6
 _080982A6:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -224,16 +224,16 @@ _080982C6:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	b _080982E6
 _080982D6:
 	adds r0, r2, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080982E6
 _080982DE:
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 _080982E6:
 	pop {r4,r5}
 	pop {r0}
@@ -244,7 +244,7 @@ _080982E6:
 sub_80982EC: @ 80982EC
 	push {lr}
 	ldr r0, _08098318 @ =sub_80981AC
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -272,7 +272,7 @@ _0809831C: .4byte gUnknown_3005098
 sub_8098320: @ 8098320
 	push {lr}
 	ldr r0, _0809833C @ =sub_80981AC
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0xFF
@@ -338,16 +338,16 @@ _08098396:
 	cmp r4, 0
 	beq _080983B8
 	movs r0, 0x3
-	bl sub_8150408
+	bl stdpal_get
 	movs r1, 0xD0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	b _080983C6
 	.align 2, 0
 _080983B4: .4byte 0x00ffffff
 _080983B8:
 	movs r0, 0x3
-	bl sub_8150408
+	bl stdpal_get
 	ldr r1, _080983FC @ =gUnknown_2037398
 	movs r2, 0x10
 	bl CpuSet
@@ -362,7 +362,7 @@ _080983C6:
 	movs r2, 0xD
 	bl sub_8150048
 	adds r0, r4, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	adds r0, r5, 0
 	bl sub_8098400
 	adds r0, r4, 0
@@ -416,7 +416,7 @@ _08098434:
 	lsrs r5, 24
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
@@ -454,7 +454,7 @@ sub_809847C: @ 809847C
 	bne _080984A4
 	ldr r1, _080984A0 @ =gUnknown_841D18D
 	adds r0, r2, 0
-	bl sub_8008D84
+	bl StringCopy
 	b _080984D2
 	.align 2, 0
 _080984A0: .4byte gUnknown_841D18D

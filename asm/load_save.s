@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_804BFE4
-sub_804BFE4: @ 804BFE4
+	thumb_func_start CheckForFlashMemory
+CheckForFlashMemory: @ 804BFE4
 	push {lr}
 	bl IdentifyFlash
 	lsls r0, 16
@@ -28,10 +28,10 @@ _0804C006:
 	bx r0
 	.align 2, 0
 _0804C00C: .4byte gUnknown_3005004
-	thumb_func_end sub_804BFE4
+	thumb_func_end CheckForFlashMemory
 
-	thumb_func_start sub_804C010
-sub_804C010: @ 804C010
+	thumb_func_start ClearSav2
+ClearSav2: @ 804C010
 	push {lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -47,10 +47,10 @@ sub_804C010: @ 804C010
 	.align 2, 0
 _0804C02C: .4byte gUnknown_2024588
 _0804C030: .4byte 0x010007d2
-	thumb_func_end sub_804C010
+	thumb_func_end ClearSav2
 
-	thumb_func_start sub_804C034
-sub_804C034: @ 804C034
+	thumb_func_start ClearSav1
+ClearSav1: @ 804C034
 	push {lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -66,14 +66,14 @@ sub_804C034: @ 804C034
 	.align 2, 0
 _0804C050: .4byte gUnknown_202552C
 _0804C054: .4byte 0x01001ef4
-	thumb_func_end sub_804C034
+	thumb_func_end ClearSav1
 
 	thumb_func_start sub_804C058
 sub_804C058: @ 804C058
 	push {r4,r5,lr}
 	ldr r4, _0804C08C @ =gUnknown_3005008
 	ldr r5, [r4]
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x7C
 	ands r1, r0
 	ldr r2, _0804C090 @ =gUnknown_300500C
@@ -159,14 +159,14 @@ sub_804C0A4: @ 804C0A4
 	movs r1, 0xE0
 	lsls r1, 9
 	adds r0, r5, 0
-	bl sub_8002B80
+	bl InitHeap
 	ldr r0, [sp, 0x4]
 	str r0, [r4, 0x10]
 	ldr r1, [sp]
 	str r1, [r4, 0xC]
-	bl sub_8044EC8
+	bl Random
 	adds r4, r0, 0
-	bl sub_8044EC8
+	bl Random
 	lsls r4, 16
 	lsls r0, 16
 	lsrs r0, 16
@@ -200,8 +200,8 @@ _0804C180: .4byte 0x000083d0
 _0804C184: .4byte gHeap + 0x4c8c
 	thumb_func_end sub_804C0A4
 
-	thumb_func_start sub_804C188
-sub_804C188: @ 804C188
+	thumb_func_start sav2_x1_query_bit1
+sav2_x1_query_bit1: @ 804C188
 	ldr r0, _0804C194 @ =gUnknown_300500C
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x9]
@@ -210,10 +210,10 @@ sub_804C188: @ 804C188
 	bx lr
 	.align 2, 0
 _0804C194: .4byte gUnknown_300500C
-	thumb_func_end sub_804C188
+	thumb_func_end sav2_x1_query_bit1
 
-	thumb_func_start sub_804C198
-sub_804C198: @ 804C198
+	thumb_func_start sav2_x9_clear_bit1
+sav2_x9_clear_bit1: @ 804C198
 	ldr r0, _0804C1A8 @ =gUnknown_300500C
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
@@ -223,7 +223,7 @@ sub_804C198: @ 804C198
 	bx lr
 	.align 2, 0
 _0804C1A8: .4byte gUnknown_300500C
-	thumb_func_end sub_804C198
+	thumb_func_end sav2_x9_clear_bit1
 
 	thumb_func_start sub_804C1AC
 sub_804C1AC: @ 804C1AC
@@ -255,8 +255,8 @@ sub_804C1C0: @ 804C1C0
 _0804C1D8: .4byte gUnknown_300500C
 	thumb_func_end sub_804C1C0
 
-	thumb_func_start sub_804C1DC
-sub_804C1DC: @ 804C1DC
+	thumb_func_start sav2_gender2_inplace_and_xFE
+sav2_gender2_inplace_and_xFE: @ 804C1DC
 	ldr r0, _0804C1EC @ =gUnknown_300500C
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
@@ -266,10 +266,10 @@ sub_804C1DC: @ 804C1DC
 	bx lr
 	.align 2, 0
 _0804C1EC: .4byte gUnknown_300500C
-	thumb_func_end sub_804C1DC
+	thumb_func_end sav2_gender2_inplace_and_xFE
 
-	thumb_func_start sub_804C1F0
-sub_804C1F0: @ 804C1F0
+	thumb_func_start copy_player_party_to_sav1
+copy_player_party_to_sav1: @ 804C1F0
 	push {r4,lr}
 	ldr r0, _0804C224 @ =gUnknown_3005008
 	ldr r0, [r0]
@@ -299,7 +299,7 @@ _0804C200:
 _0804C224: .4byte gUnknown_3005008
 _0804C228: .4byte gUnknown_2024029
 _0804C22C: .4byte gUnknown_2024284
-	thumb_func_end sub_804C1F0
+	thumb_func_end copy_player_party_to_sav1
 
 	thumb_func_start sub_804C230
 sub_804C230: @ 804C230
@@ -418,7 +418,7 @@ _0804C2FC: .4byte gUnknown_2036E38
 	thumb_func_start sub_804C300
 sub_804C300: @ 804C300
 	push {lr}
-	bl sub_804C1F0
+	bl copy_player_party_to_sav1
 	bl sub_804C270
 	pop {r0}
 	bx r0

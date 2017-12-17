@@ -335,7 +335,7 @@ sub_815F014: @ 815F014
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	ldr r2, _0815F06C @ =gUnknown_8416655
 	movs r4, 0
 	str r4, [sp]
@@ -415,9 +415,9 @@ sub_815F094: @ 815F094
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r4]
 	ldr r5, _0815F110 @ =0x0000021d
 	adds r1, r5, 0
@@ -446,7 +446,7 @@ sub_815F114: @ 815F114
 	push {r4,lr}
 	ldr r4, _0815F134 @ =gUnknown_203F464
 	ldrb r0, [r4]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_810F4D8

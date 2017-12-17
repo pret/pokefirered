@@ -86,7 +86,7 @@ sub_8097D08: @ 8097D08
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80980F8
@@ -95,7 +95,7 @@ sub_8097D08: @ 8097D08
 	beq _08097D30
 	adds r0, r4, 0
 	movs r1, 0x40
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0xFF
 	beq _08097D30
 	movs r0, 0x1
@@ -267,13 +267,13 @@ _08097E36:
 	bls _08097E36
 	mov r0, r8
 	movs r1, 0xB
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r8
 	movs r1, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl sub_8097F00
@@ -381,8 +381,8 @@ _08097F3E:
 	bx r1
 	thumb_func_end sub_8097F20
 
-	thumb_func_start sub_8097F44
-sub_8097F44: @ 8097F44
+	thumb_func_start GiveMailToMon2
+GiveMailToMon2: @ 8097F44
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r6, r0, 0
@@ -435,7 +435,7 @@ _08097FAA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8097F44
+	thumb_func_end GiveMailToMon2
 
 	thumb_func_start sub_8097FB4
 sub_8097FB4: @ 8097FB4
@@ -443,8 +443,8 @@ sub_8097FB4: @ 8097FB4
 	bx lr
 	thumb_func_end sub_8097FB4
 
-	thumb_func_start sub_8097FB8
-sub_8097FB8: @ 8097FB8
+	thumb_func_start TakeMailFromMon
+TakeMailFromMon: @ 8097FB8
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -454,7 +454,7 @@ sub_8097FB8: @ 8097FB8
 	beq _08098008
 	adds r0, r4, 0
 	movs r1, 0x40
-	bl sub_803FBE8
+	bl GetMonData
 	add r2, sp, 0x4
 	strb r0, [r2]
 	ldr r0, _08098010 @ =gUnknown_3005008
@@ -489,7 +489,7 @@ _08098008:
 	.align 2, 0
 _08098010: .4byte gUnknown_3005008
 _08098014: .4byte 0x00002cf0
-	thumb_func_end sub_8097FB8
+	thumb_func_end TakeMailFromMon
 
 	thumb_func_start sub_8098018
 sub_8098018: @ 8098018
@@ -547,7 +547,7 @@ _08098060:
 	adds r0, r5, 0
 	movs r1, 0x40
 	str r3, [sp, 0x8]
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r1, r0, 3
@@ -564,7 +564,7 @@ _08098060:
 	stm r4!, {r0,r2,r3}
 	adds r0, r5, 0
 	movs r1, 0x40
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r1, r0, 3

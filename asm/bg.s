@@ -5,22 +5,22 @@
 
 	.text
 
-	thumb_func_start sub_8001028
-sub_8001028: @ 8001028
+	thumb_func_start ResetBgs
+ResetBgs: @ 8001028
 	push {lr}
-	bl sub_800106C
+	bl ResetBgControlStructs
 	ldr r1, _0800103C @ =gUnknown_30008D0
 	movs r0, 0
 	strh r0, [r1, 0x10]
-	bl sub_80013F4
+	bl SetTextModeAndHideBgs
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0800103C: .4byte gUnknown_30008D0
-	thumb_func_end sub_8001028
+	thumb_func_end ResetBgs
 
-	thumb_func_start sub_8001040
-sub_8001040: @ 8001040
+	thumb_func_start SetBgModeInternal
+SetBgModeInternal: @ 8001040
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _08001054 @ =gUnknown_30008D0
@@ -33,10 +33,10 @@ sub_8001040: @ 8001040
 	.align 2, 0
 _08001054: .4byte gUnknown_30008D0
 _08001058: .4byte 0x0000fff8
-	thumb_func_end sub_8001040
+	thumb_func_end SetBgModeInternal
 
-	thumb_func_start sub_800105C
-sub_800105C: @ 800105C
+	thumb_func_start GetBgMode
+GetBgMode: @ 800105C
 	ldr r0, _08001068 @ =gUnknown_30008D0
 	ldrb r1, [r0, 0x10]
 	movs r0, 0x7
@@ -44,10 +44,10 @@ sub_800105C: @ 800105C
 	bx lr
 	.align 2, 0
 _08001068: .4byte gUnknown_30008D0
-	thumb_func_end sub_800105C
+	thumb_func_end GetBgMode
 
-	thumb_func_start sub_800106C
-sub_800106C: @ 800106C
+	thumb_func_start ResetBgControlStructs
+ResetBgControlStructs: @ 800106C
 	push {lr}
 	ldr r2, _08001084 @ =gUnknown_30008D0
 	ldr r0, _08001088 @ =gUnknown_81E9F64
@@ -64,15 +64,15 @@ _08001078:
 	.align 2, 0
 _08001084: .4byte gUnknown_30008D0
 _08001088: .4byte gUnknown_81E9F64
-	thumb_func_end sub_800106C
+	thumb_func_end ResetBgControlStructs
 
-	thumb_func_start sub_800108C
-sub_800108C: @ 800108C
+	thumb_func_start Unused_ResetBgControlStruct
+Unused_ResetBgControlStruct: @ 800108C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80014DC
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne _080010AA
@@ -89,10 +89,10 @@ _080010AA:
 	.align 2, 0
 _080010B0: .4byte gUnknown_30008D0
 _080010B4: .4byte gUnknown_81E9F64
-	thumb_func_end sub_800108C
+	thumb_func_end Unused_ResetBgControlStruct
 
-	thumb_func_start sub_80010B8
-sub_80010B8: @ 80010B8
+	thumb_func_start SetBgControlAttributes
+SetBgControlAttributes: @ 80010B8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -129,7 +129,7 @@ sub_80010B8: @ 80010B8
 	lsrs r1, 24
 	str r1, [sp, 0xC]
 	adds r0, r7, 0
-	bl sub_80014DC
+	bl IsInvalidBg
 	lsls r0, 24
 	lsrs r0, 24
 	mov r12, r0
@@ -250,17 +250,17 @@ _080011D0:
 	bx r0
 	.align 2, 0
 _080011E0: .4byte gUnknown_30008D0
-	thumb_func_end sub_80010B8
+	thumb_func_end SetBgControlAttributes
 
-	thumb_func_start sub_80011E4
-sub_80011E4: @ 80011E4
+	thumb_func_start GetBgControlAttribute
+GetBgControlAttribute: @ 80011E4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r0, r4, 0
-	bl sub_80014DC
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne _08001290
@@ -345,10 +345,10 @@ _08001292:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80011E4
+	thumb_func_end GetBgControlAttribute
 
-	thumb_func_start sub_8001298
-sub_8001298: @ 8001298
+	thumb_func_start LoadBgVram
+LoadBgVram: @ 8001298
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -363,7 +363,7 @@ sub_8001298: @ 8001298
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r0, r4, 0
-	bl sub_80014DC
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne _08001310
@@ -402,7 +402,7 @@ _080012EC:
 	mov r0, r8
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	lsls r0, 24
 	lsrs r2, r0, 24
 	asrs r0, 24
@@ -421,15 +421,15 @@ _08001316:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8001298
+	thumb_func_end LoadBgVram
 
-	thumb_func_start sub_8001320
-sub_8001320: @ 8001320
+	thumb_func_start ShowBgInternal
+ShowBgInternal: @ 8001320
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80014DC
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800138E
@@ -468,7 +468,7 @@ sub_8001320: @ 8001320
 	lsls r2, 20
 	adds r0, r2
 	lsrs r0, 24
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r1, r4, 0
 	adds r1, 0x8
 	movs r0, 0x1
@@ -485,15 +485,15 @@ _0800138E:
 	.align 2, 0
 _08001394: .4byte gUnknown_30008D0
 _08001398: .4byte 0x00000f07
-	thumb_func_end sub_8001320
+	thumb_func_end ShowBgInternal
 
-	thumb_func_start sub_800139C
-sub_800139C: @ 800139C
+	thumb_func_start HideBgInternal
+HideBgInternal: @ 800139C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80014DC
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne _080013C2
@@ -514,44 +514,44 @@ _080013C2:
 	.align 2, 0
 _080013C8: .4byte gUnknown_30008D0
 _080013CC: .4byte 0x00000f07
-	thumb_func_end sub_800139C
+	thumb_func_end HideBgInternal
 
-	thumb_func_start sub_80013D0
-sub_80013D0: @ 80013D0
+	thumb_func_start SyncBgVisibilityAndMode
+SyncBgVisibilityAndMode: @ 80013D0
 	push {lr}
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	ldr r1, _080013EC @ =0x0000f0f8
 	ands r1, r0
 	ldr r0, _080013F0 @ =gUnknown_30008D0
 	ldrh r0, [r0, 0x10]
 	orrs r1, r0
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080013EC: .4byte 0x0000f0f8
 _080013F0: .4byte gUnknown_30008D0
-	thumb_func_end sub_80013D0
+	thumb_func_end SyncBgVisibilityAndMode
 
-	thumb_func_start sub_80013F4
-sub_80013F4: @ 80013F4
+	thumb_func_start SetTextModeAndHideBgs
+SetTextModeAndHideBgs: @ 80013F4
 	push {lr}
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	ldr r1, _0800140C @ =0x0000f0f8
 	ands r1, r0
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0800140C: .4byte 0x0000f0f8
-	thumb_func_end sub_80013F4
+	thumb_func_end SetTextModeAndHideBgs
 
-	thumb_func_start sub_8001410
-sub_8001410: @ 8001410
+	thumb_func_start SetBgAffineInternal
+SetBgAffineInternal: @ 8001410
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -614,31 +614,31 @@ _08001468:
 	bl BgAffineSet
 	ldrh r1, [r4]
 	movs r0, 0x20
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x22
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x24
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x6]
 	movs r0, 0x26
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x20
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x8]
 	movs r0, 0x28
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x2A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x2C
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xE]
 	movs r0, 0x2E
-	bl sub_8000A38
+	bl SetGpuReg
 _080014CE:
 	add sp, 0x24
 	pop {r3}
@@ -646,10 +646,10 @@ _080014CE:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8001410
+	thumb_func_end SetBgAffineInternal
 
-	thumb_func_start sub_80014DC
-sub_80014DC: @ 80014DC
+	thumb_func_start IsInvalidBg
+IsInvalidBg: @ 80014DC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -662,7 +662,7 @@ _080014EA:
 _080014EC:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80014DC
+	thumb_func_end IsInvalidBg
 
 	thumb_func_start sub_80014F0
 sub_80014F0: @ 80014F0
@@ -686,7 +686,7 @@ _0800150E:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	lsrs r0, 7
 	movs r1, 0x80
@@ -751,7 +751,7 @@ _08001582:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	lsrs r0, 7
 	adds r0, r5
@@ -787,7 +787,7 @@ _080015C8:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	lsrs r0, 7
 	adds r0, r5
@@ -832,7 +832,7 @@ _08001614: .4byte gUnknown_3000938
 sub_8001618: @ 8001618
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8001028
+	bl ResetBgs
 	ldr r1, _0800164C @ =gUnknown_3000928
 	movs r2, 0
 	adds r0, r1, 0
@@ -875,8 +875,8 @@ sub_8001658: @ 8001658
 	lsrs r0, 24
 	lsls r2, 24
 	lsrs r4, r2, 24
-	bl sub_8001040
-	bl sub_800106C
+	bl SetBgModeInternal
+	bl ResetBgControlStructs
 	cmp r4, 0
 	beq _08001712
 	movs r7, 0
@@ -907,7 +907,7 @@ _08001688:
 	str r7, [sp, 0x8]
 	str r7, [sp, 0xC]
 	adds r0, r5, 0
-	bl sub_80010B8
+	bl SetBgControlAttributes
 	lsls r4, r5, 4
 	mov r5, r9
 	adds r3, r4, r5
@@ -999,7 +999,7 @@ sub_8001738: @ 8001738
 	str r6, [sp, 0x8]
 	str r6, [sp, 0xC]
 	adds r0, r5, 0
-	bl sub_80010B8
+	bl SetBgControlAttributes
 	ldr r4, _080017C0 @ =gUnknown_30008E8
 	lsls r5, 4
 	adds r3, r5, r4
@@ -1050,8 +1050,8 @@ _080017C8: .4byte 0x00003fff
 _080017CC: .4byte gUnknown_3000938
 	thumb_func_end sub_8001738
 
-	thumb_func_start sub_80017D0
-sub_80017D0: @ 80017D0
+	thumb_func_start LoadBgTiles
+LoadBgTiles: @ 80017D0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1066,7 +1066,7 @@ sub_80017D0: @ 80017D0
 	lsrs r4, r3, 16
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	bne _0800180C
@@ -1098,7 +1098,7 @@ _0800181C:
 	adds r1, r7, 0
 	mov r2, r8
 	adds r3, r4, 0
-	bl sub_8001298
+	bl LoadBgVram
 	lsls r2, r0, 24
 	lsrs r1, r2, 24
 	adds r7, r1, 0
@@ -1143,10 +1143,10 @@ _08001872:
 	.align 2, 0
 _08001880: .4byte gUnknown_3000928
 _08001884: .4byte gUnknown_3003D8C
-	thumb_func_end sub_80017D0
+	thumb_func_end LoadBgTiles
 
-	thumb_func_start sub_8001888
-sub_8001888: @ 8001888
+	thumb_func_start LoadBgTilemap
+LoadBgTilemap: @ 8001888
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1157,7 +1157,7 @@ sub_8001888: @ 8001888
 	lsrs r3, 16
 	movs r4, 0x2
 	str r4, [sp]
-	bl sub_8001298
+	bl LoadBgVram
 	lsls r2, r0, 24
 	lsrs r3, r2, 24
 	cmp r3, 0xFF
@@ -1186,10 +1186,10 @@ _080018CA:
 	bx r1
 	.align 2, 0
 _080018D4: .4byte 0x0000ffff
-	thumb_func_end sub_8001888
+	thumb_func_end LoadBgTilemap
 
-	thumb_func_start sub_80018D8
-sub_80018D8: @ 80018D8
+	thumb_func_start Unused_LoadBgPalette
+Unused_LoadBgPalette: @ 80018D8
 	push {r4-r7,lr}
 	adds r7, r1, 0
 	lsls r0, 24
@@ -1199,7 +1199,7 @@ sub_80018D8: @ 80018D8
 	lsls r3, 16
 	lsrs r5, r3, 16
 	adds r0, r4, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08001924
 	ldr r1, _08001928 @ =gUnknown_30008E8
@@ -1219,7 +1219,7 @@ sub_80018D8: @ 80018D8
 	adds r0, r7, 0
 	adds r2, r6, 0
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	lsls r3, r0, 24
 	asrs r1, r3, 24
 	movs r0, 0x1
@@ -1258,10 +1258,10 @@ _08001954:
 	bx r1
 	.align 2, 0
 _0800195C: .4byte gUnknown_3000928
-	thumb_func_end sub_80018D8
+	thumb_func_end Unused_LoadBgPalette
 
-	thumb_func_start sub_8001960
-sub_8001960: @ 8001960
+	thumb_func_start IsDma3ManagerBusyWithBgCopy
+IsDma3ManagerBusyWithBgCopy: @ 8001960
 	push {r4-r7,lr}
 	movs r5, 0
 	movs r7, 0x1
@@ -1289,7 +1289,7 @@ _08001970:
 	beq _080019AE
 	lsls r0, r5, 16
 	asrs r0, 16
-	bl sub_8000FE8
+	bl CheckForSpaceForDma3Request
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, r7
@@ -1311,32 +1311,32 @@ _080019B6:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8001960
+	thumb_func_end IsDma3ManagerBusyWithBgCopy
 
-	thumb_func_start sub_80019BC
-sub_80019BC: @ 80019BC
+	thumb_func_start ShowBg
+ShowBg: @ 80019BC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8001320
-	bl sub_80013D0
+	bl ShowBgInternal
+	bl SyncBgVisibilityAndMode
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80019BC
+	thumb_func_end ShowBg
 
-	thumb_func_start sub_80019D0
-sub_80019D0: @ 80019D0
+	thumb_func_start HideBg
+HideBg: @ 80019D0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_800139C
-	bl sub_80013D0
+	bl HideBgInternal
+	bl SyncBgVisibilityAndMode
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80019D0
+	thumb_func_end HideBg
 
-	thumb_func_start sub_80019E4
-sub_80019E4: @ 80019E4
+	thumb_func_start SetBgAttribute
+SetBgAttribute: @ 80019E4
 	push {r4,lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -1392,7 +1392,7 @@ _08001A46:
 	adds r0, r4, 0
 	movs r1, 0xFF
 	movs r2, 0xFF
-	bl sub_80010B8
+	bl SetBgControlAttributes
 	b _08001A9E
 _08001A5C:
 	str r3, [sp]
@@ -1419,7 +1419,7 @@ _08001A7E:
 	movs r2, 0xFF
 _08001A80:
 	movs r3, 0xFF
-	bl sub_80010B8
+	bl SetBgControlAttributes
 	b _08001A9E
 _08001A88:
 	movs r0, 0xFF
@@ -1431,16 +1431,16 @@ _08001A88:
 	movs r1, 0xFF
 	movs r2, 0xFF
 	movs r3, 0xFF
-	bl sub_80010B8
+	bl SetBgControlAttributes
 _08001A9E:
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80019E4
+	thumb_func_end SetBgAttribute
 
-	thumb_func_start sub_8001AA8
-sub_8001AA8: @ 8001AA8
+	thumb_func_start GetBgAttribute
+GetBgAttribute: @ 8001AA8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1471,41 +1471,41 @@ _08001AC8:
 _08001AF0:
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	b _08001B6A
 _08001AFA:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	b _08001B6A
 _08001B04:
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	b _08001B6A
 _08001B0E:
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	b _08001B6A
 _08001B18:
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	b _08001B6A
 _08001B22:
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	b _08001B6A
 _08001B2C:
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	b _08001B6A
 _08001B36:
 	adds r0, r4, 0
-	bl sub_8002898
+	bl GetBgType
 	cmp r0, 0
 	beq _08001B48
 	cmp r0, 0x1
@@ -1515,20 +1515,20 @@ _08001B36:
 _08001B48:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800273C
+	bl GetBgMetricTextMode
 	lsls r0, 27
 	lsrs r0, 16
 	b _08001B86
 _08001B56:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80027AC
+	bl GetBgMetricAffineMode
 	lsls r0, 24
 	lsrs r0, 16
 	b _08001B86
 _08001B64:
 	adds r0, r4, 0
-	bl sub_8002898
+	bl GetBgType
 _08001B6A:
 	lsls r0, 16
 	lsrs r0, 16
@@ -1551,10 +1551,10 @@ _08001B86:
 	bx r1
 	.align 2, 0
 _08001B8C: .4byte 0x0000ffff
-	thumb_func_end sub_8001AA8
+	thumb_func_end GetBgAttribute
 
-	thumb_func_start sub_8001B90
-sub_8001B90: @ 8001B90
+	thumb_func_start ChangeBgX
+ChangeBgX: @ 8001B90
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1562,12 +1562,12 @@ sub_8001B90: @ 8001B90
 	lsls r2, 24
 	lsrs r5, r2, 24
 	adds r0, r4, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08001BB4
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	bne _08001BBA
@@ -1613,7 +1613,7 @@ _08001BF8:
 	str r1, [r0]
 	adds r5, r2, 0
 _08001BFC:
-	bl sub_800105C
+	bl GetBgMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x1
@@ -1637,7 +1637,7 @@ _08001C22:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001CB8
 	.align 2, 0
 _08001C34: .4byte gUnknown_30008E8
@@ -1647,7 +1647,7 @@ _08001C38:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x14
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001CB8
 	.align 2, 0
 _08001C48: .4byte gUnknown_30008E8
@@ -1659,7 +1659,7 @@ _08001C4C:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x18
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001CB8
 	.align 2, 0
 _08001C60: .4byte gUnknown_30008E8
@@ -1670,10 +1670,10 @@ _08001C64:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x2A
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x28
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001CB8
 	.align 2, 0
 _08001C80: .4byte gUnknown_30008E8
@@ -1685,7 +1685,7 @@ _08001C84:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1C
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001CB8
 	.align 2, 0
 _08001C98: .4byte gUnknown_30008E8
@@ -1698,10 +1698,10 @@ _08001C9C:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x3A
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x38
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 _08001CB8:
 	ldr r0, _08001CC8 @ =gUnknown_30008E8
 	adds r0, 0x8
@@ -1713,20 +1713,20 @@ _08001CC0:
 	bx r1
 	.align 2, 0
 _08001CC8: .4byte gUnknown_30008E8
-	thumb_func_end sub_8001B90
+	thumb_func_end ChangeBgX
 
-	thumb_func_start sub_8001CCC
-sub_8001CCC: @ 8001CCC
+	thumb_func_start GetBgX
+GetBgX: @ 8001CCC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08001CFC
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq _08001CFC
@@ -1745,10 +1745,10 @@ _08001D00:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8001CCC
+	thumb_func_end GetBgX
 
-	thumb_func_start sub_8001D08
-sub_8001D08: @ 8001D08
+	thumb_func_start ChangeBgY
+ChangeBgY: @ 8001D08
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1756,12 +1756,12 @@ sub_8001D08: @ 8001D08
 	lsls r2, 24
 	lsrs r5, r2, 24
 	adds r0, r4, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08001D2C
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	bne _08001D32
@@ -1807,7 +1807,7 @@ _08001D70:
 	str r1, [r0]
 	adds r5, r2, 0
 _08001D74:
-	bl sub_800105C
+	bl GetBgMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x1
@@ -1831,7 +1831,7 @@ _08001D9A:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001E30
 	.align 2, 0
 _08001DAC: .4byte gUnknown_30008E8
@@ -1841,7 +1841,7 @@ _08001DB0:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001E30
 	.align 2, 0
 _08001DC0: .4byte gUnknown_30008E8
@@ -1853,7 +1853,7 @@ _08001DC4:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1A
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001E30
 	.align 2, 0
 _08001DD8: .4byte gUnknown_30008E8
@@ -1864,10 +1864,10 @@ _08001DDC:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x2E
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x2C
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001E30
 	.align 2, 0
 _08001DF8: .4byte gUnknown_30008E8
@@ -1879,7 +1879,7 @@ _08001DFC:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1E
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08001E30
 	.align 2, 0
 _08001E10: .4byte gUnknown_30008E8
@@ -1892,10 +1892,10 @@ _08001E14:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x3E
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x3C
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 _08001E30:
 	ldr r0, _08001E40 @ =gUnknown_30008E8
 	adds r0, 0xC
@@ -1907,20 +1907,20 @@ _08001E38:
 	bx r1
 	.align 2, 0
 _08001E40: .4byte gUnknown_30008E8
-	thumb_func_end sub_8001D08
+	thumb_func_end ChangeBgY
 
-	thumb_func_start sub_8001E44
-sub_8001E44: @ 8001E44
+	thumb_func_start GetBgY
+GetBgY: @ 8001E44
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08001E74
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq _08001E74
@@ -1939,10 +1939,10 @@ _08001E78:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8001E44
+	thumb_func_end GetBgY
 
-	thumb_func_start sub_8001E80
-sub_8001E80: @ 8001E80
+	thumb_func_start SetBgAffine
+SetBgAffine: @ 8001E80
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1967,24 +1967,24 @@ sub_8001E80: @ 8001E80
 	asrs r6, 16
 	str r6, [sp, 0x8]
 	str r7, [sp, 0xC]
-	bl sub_8001410
+	bl SetBgAffineInternal
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8001E80
+	thumb_func_end SetBgAffine
 
-	thumb_func_start sub_8001EC0
-sub_8001EC0: @ 8001EC0
+	thumb_func_start Unused_AdjustBgMosaic
+Unused_AdjustBgMosaic: @ 8001EC0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r1, 24
 	lsrs r6, r1, 24
 	movs r0, 0x4C
-	bl sub_8000AC4
+	bl GetGpuReg
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r1, 0xF
@@ -2090,27 +2090,27 @@ _08001F76:
 	lsrs r5, r0, 16
 	movs r0, 0x4C
 	adds r1, r5, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	lsls r0, r5, 24
 	lsrs r0, 24
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8001EC0
+	thumb_func_end Unused_AdjustBgMosaic
 
-	thumb_func_start sub_8001FA0
-sub_8001FA0: @ 8001FA0
+	thumb_func_start SetBgTilemapBuffer
+SetBgTilemapBuffer: @ 8001FA0
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08001FCA
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq _08001FCA
@@ -2125,21 +2125,21 @@ _08001FCA:
 	bx r0
 	.align 2, 0
 _08001FD0: .4byte gUnknown_30008E8
-	thumb_func_end sub_8001FA0
+	thumb_func_end SetBgTilemapBuffer
 
-	thumb_func_start sub_8001FD4
-sub_8001FD4: @ 8001FD4
+	thumb_func_start UnsetBgTilemapBuffer
+UnsetBgTilemapBuffer: @ 8001FD4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	adds r5, r0, 0
 	cmp r5, 0
 	bne _08001FFE
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq _08001FFE
@@ -2154,20 +2154,20 @@ _08001FFE:
 	bx r0
 	.align 2, 0
 _08002004: .4byte gUnknown_30008E8
-	thumb_func_end sub_8001FD4
+	thumb_func_end UnsetBgTilemapBuffer
 
-	thumb_func_start sub_8002008
-sub_8002008: @ 8002008
+	thumb_func_start GetBgTilemapBuffer
+GetBgTilemapBuffer: @ 8002008
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08002038
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq _08002038
@@ -2185,10 +2185,10 @@ _0800203A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002008
+	thumb_func_end GetBgTilemapBuffer
 
-	thumb_func_start sub_8002040
-sub_8002040: @ 8002040
+	thumb_func_start CopyToBgTilemapBuffer
+CopyToBgTilemapBuffer: @ 8002040
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2204,11 +2204,11 @@ sub_8002040: @ 8002040
 	lsrs r5, r3, 16
 	mov r8, r5
 	adds r0, r4, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _080020A8
 	adds r0, r4, 0
-	bl sub_8002900
+	bl IsTileMapOutsideWram
 	cmp r0, 0
 	bne _080020A8
 	cmp r6, 0
@@ -2248,24 +2248,24 @@ _080020A8:
 	bx r0
 	.align 2, 0
 _080020B8: .4byte gUnknown_30008E8
-	thumb_func_end sub_8002040
+	thumb_func_end CopyToBgTilemapBuffer
 
-	thumb_func_start sub_80020BC
-sub_80020BC: @ 80020BC
+	thumb_func_start CopyBgTilemapBufferToVram
+CopyBgTilemapBufferToVram: @ 80020BC
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08002118
 	adds r0, r4, 0
-	bl sub_8002900
+	bl IsTileMapOutsideWram
 	cmp r0, 0
 	bne _08002118
 	adds r0, r4, 0
-	bl sub_8002898
+	bl GetBgType
 	cmp r0, 0
 	beq _080020EA
 	cmp r0, 0x1
@@ -2275,13 +2275,13 @@ sub_80020BC: @ 80020BC
 _080020EA:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800273C
+	bl GetBgMetricTextMode
 	lsls r0, 27
 	b _08002100
 _080020F6:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80027AC
+	bl GetBgMetricAffineMode
 	lsls r0, 24
 _08002100:
 	lsrs r2, r0, 16
@@ -2295,7 +2295,7 @@ _08002102:
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_8001298
+	bl LoadBgVram
 _08002118:
 	add sp, 0x4
 	pop {r4}
@@ -2303,10 +2303,10 @@ _08002118:
 	bx r0
 	.align 2, 0
 _08002120: .4byte gUnknown_30008E8
-	thumb_func_end sub_80020BC
+	thumb_func_end CopyBgTilemapBufferToVram
 
-	thumb_func_start sub_8002124
-sub_8002124: @ 8002124
+	thumb_func_start CopyToBgTilemapBufferRect
+CopyToBgTilemapBufferRect: @ 8002124
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2329,15 +2329,15 @@ sub_8002124: @ 8002124
 	lsls r4, 24
 	lsrs r6, r4, 24
 	adds r0, r5, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08002214
 	adds r0, r5, 0
-	bl sub_8002900
+	bl IsTileMapOutsideWram
 	cmp r0, 0
 	bne _08002214
 	adds r0, r5, 0
-	bl sub_8002898
+	bl GetBgType
 	cmp r0, 0
 	beq _08002172
 	cmp r0, 0x1
@@ -2389,7 +2389,7 @@ _080021C0:
 	mov r4, r8
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80027AC
+	bl GetBgMetricAffineMode
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp]
@@ -2441,10 +2441,10 @@ _08002214:
 	bx r0
 	.align 2, 0
 _08002224: .4byte gUnknown_30008EC
-	thumb_func_end sub_8002124
+	thumb_func_end CopyToBgTilemapBufferRect
 
-	thumb_func_start sub_8002228
-sub_8002228: @ 8002228
+	thumb_func_start CopyToBgTilemapBufferRect_ChangePalette
+CopyToBgTilemapBufferRect_ChangePalette: @ 8002228
 	push {r4-r6,lr}
 	sub sp, 0x24
 	ldr r4, [sp, 0x34]
@@ -2473,15 +2473,15 @@ sub_8002228: @ 8002228
 	str r2, [sp, 0x1C]
 	str r2, [sp, 0x20]
 	movs r3, 0
-	bl sub_800226C
+	bl CopyRectToBgTilemapBufferRect
 	add sp, 0x24
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8002228
+	thumb_func_end CopyToBgTilemapBufferRect_ChangePalette
 
-	thumb_func_start sub_800226C
-sub_800226C: @ 800226C
+	thumb_func_start CopyRectToBgTilemapBufferRect
+CopyRectToBgTilemapBufferRect: @ 800226C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2536,37 +2536,37 @@ sub_800226C: @ 800226C
 	lsrs r0, 16
 	str r0, [sp, 0x24]
 	ldr r0, [sp, 0x4]
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	beq _080022E2
 	b _0800243E
 _080022E2:
 	ldr r0, [sp, 0x4]
-	bl sub_8002900
+	bl IsTileMapOutsideWram
 	cmp r0, 0
 	beq _080022EE
 	b _0800243E
 _080022EE:
 	ldr r0, [sp, 0x4]
 	movs r1, 0x4
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x30]
 	ldr r0, [sp, 0x4]
 	movs r1, 0x1
-	bl sub_800273C
+	bl GetBgMetricTextMode
 	lsls r0, 21
 	lsrs r0, 16
 	str r0, [sp, 0x28]
 	ldr r0, [sp, 0x4]
 	movs r1, 0x2
-	bl sub_800273C
+	bl GetBgMetricTextMode
 	lsls r0, 21
 	lsrs r0, 16
 	str r0, [sp, 0x2C]
 	ldr r0, [sp, 0x4]
-	bl sub_8002898
+	bl GetBgType
 	cmp r0, 0
 	beq _08002328
 	cmp r0, 0x1
@@ -2617,7 +2617,7 @@ _0800236E:
 	adds r1, r5, 0
 	ldr r2, [sp, 0x30]
 	ldr r3, [sp, 0x28]
-	bl sub_8002804
+	bl GetTileMapIndexFromCoords
 	lsls r0, 16
 	lsrs r0, 15
 	mov r7, r10
@@ -2629,7 +2629,7 @@ _0800236E:
 	ldr r2, [sp, 0x1C]
 	mov r7, r9
 	asrs r3, r7, 16
-	bl sub_800283C
+	bl CopyTileMapEntry
 	adds r6, 0x2
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -2662,7 +2662,7 @@ _080023C4:
 	adds r6, r1, r0
 	ldr r0, [sp, 0x4]
 	movs r1, 0x1
-	bl sub_80027AC
+	bl GetBgMetricAffineMode
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
@@ -2727,10 +2727,10 @@ _0800243E:
 	bx r0
 	.align 2, 0
 _08002450: .4byte gUnknown_30008EC
-	thumb_func_end sub_800226C
+	thumb_func_end CopyRectToBgTilemapBufferRect
 
-	thumb_func_start sub_8002454
-sub_8002454: @ 8002454
+	thumb_func_start FillBgTilemapBufferRect_Palette0
+FillBgTilemapBufferRect_Palette0: @ 8002454
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2755,15 +2755,15 @@ sub_8002454: @ 8002454
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	bne _08002540
 	adds r0, r6, 0
-	bl sub_8002900
+	bl IsTileMapOutsideWram
 	cmp r0, 0
 	bne _08002540
 	adds r0, r6, 0
-	bl sub_8002898
+	bl GetBgType
 	cmp r0, 0
 	beq _080024A6
 	cmp r0, 0x1
@@ -2812,7 +2812,7 @@ _080024EC: .4byte gUnknown_30008EC
 _080024F0:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_80027AC
+	bl GetBgMetricAffineMode
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp]
@@ -2863,10 +2863,10 @@ _08002540:
 	bx r0
 	.align 2, 0
 _08002550: .4byte gUnknown_30008EC
-	thumb_func_end sub_8002454
+	thumb_func_end FillBgTilemapBufferRect_Palette0
 
-	thumb_func_start sub_8002554
-sub_8002554: @ 8002554
+	thumb_func_start FillBgTilemapBufferRect
+FillBgTilemapBufferRect: @ 8002554
 	push {r4-r6,lr}
 	sub sp, 0x10
 	ldr r4, [sp, 0x20]
@@ -2891,15 +2891,15 @@ sub_8002554: @ 8002554
 	str r6, [sp, 0x8]
 	movs r4, 0
 	str r4, [sp, 0xC]
-	bl sub_8002590
+	bl WriteSequenceToBgTilemapBuffer
 	add sp, 0x10
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8002554
+	thumb_func_end FillBgTilemapBufferRect
 
-	thumb_func_start sub_8002590
-sub_8002590: @ 8002590
+	thumb_func_start WriteSequenceToBgTilemapBuffer
+WriteSequenceToBgTilemapBuffer: @ 8002590
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2934,37 +2934,37 @@ sub_8002590: @ 8002590
 	lsrs r0, 16
 	str r0, [sp, 0x10]
 	mov r0, r9
-	bl sub_80028EC
+	bl IsInvalidBg32
 	cmp r0, 0
 	beq _080025DE
 	b _08002724
 _080025DE:
 	mov r0, r9
-	bl sub_8002900
+	bl IsTileMapOutsideWram
 	cmp r0, 0
 	beq _080025EA
 	b _08002724
 _080025EA:
 	mov r0, r9
 	movs r1, 0x4
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x1C]
 	mov r0, r9
 	movs r1, 0x1
-	bl sub_800273C
+	bl GetBgMetricTextMode
 	lsls r0, 21
 	lsrs r0, 16
 	str r0, [sp, 0x14]
 	mov r0, r9
 	movs r1, 0x2
-	bl sub_800273C
+	bl GetBgMetricTextMode
 	lsls r0, 21
 	lsrs r0, 16
 	str r0, [sp, 0x18]
 	mov r0, r9
-	bl sub_8002898
+	bl GetBgType
 	cmp r0, 0
 	beq _08002624
 	cmp r0, 0x1
@@ -2996,7 +2996,7 @@ _08002646:
 	adds r1, r5, 0
 	ldr r2, [sp, 0x1C]
 	ldr r3, [sp, 0x14]
-	bl sub_8002804
+	bl GetTileMapIndexFromCoords
 	lsls r0, 16
 	lsrs r0, 15
 	ldr r1, [r6]
@@ -3006,7 +3006,7 @@ _08002646:
 	add r0, sp, 0x4
 	ldr r2, [sp, 0xC]
 	movs r3, 0
-	bl sub_800283C
+	bl CopyTileMapEntry
 	ldrh r0, [r7]
 	movs r2, 0xFC
 	lsls r2, 8
@@ -3041,7 +3041,7 @@ _080026A8: .4byte 0x000003ff
 _080026AC:
 	mov r0, r9
 	movs r1, 0x1
-	bl sub_80027AC
+	bl GetBgMetricAffineMode
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x20]
@@ -3113,10 +3113,10 @@ _08002724:
 	.align 2, 0
 _08002734: .4byte gUnknown_30008EC
 _08002738: .4byte 0x000003ff
-	thumb_func_end sub_8002590
+	thumb_func_end WriteSequenceToBgTilemapBuffer
 
-	thumb_func_start sub_800273C
-sub_800273C: @ 800273C
+	thumb_func_start GetBgMetricTextMode
+GetBgMetricTextMode: @ 800273C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3124,7 +3124,7 @@ sub_800273C: @ 800273C
 	lsrs r4, r1, 24
 	adds r5, r4, 0
 	movs r1, 0x4
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x1
@@ -3182,17 +3182,17 @@ _080027A4:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800273C
+	thumb_func_end GetBgMetricTextMode
 
-	thumb_func_start sub_80027AC
-sub_80027AC: @ 80027AC
+	thumb_func_start GetBgMetricAffineMode
+GetBgMetricAffineMode: @ 80027AC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r4, r1, 24
 	movs r1, 0x4
-	bl sub_80011E4
+	bl GetBgControlAttribute
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r0, r1, 0
@@ -3237,10 +3237,10 @@ _080027FE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80027AC
+	thumb_func_end GetBgMetricAffineMode
 
-	thumb_func_start sub_8002804
-sub_8002804: @ 8002804
+	thumb_func_start GetTileMapIndexFromCoords
+GetTileMapIndexFromCoords: @ 8002804
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [sp, 0x8]
@@ -3270,10 +3270,10 @@ _08002830:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002804
+	thumb_func_end GetTileMapIndexFromCoords
 
-	thumb_func_start sub_800283C
-sub_800283C: @ 800283C
+	thumb_func_start CopyTileMapEntry
+CopyTileMapEntry: @ 800283C
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -3323,15 +3323,15 @@ _0800288C:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800283C
+	thumb_func_end CopyTileMapEntry
 
-	thumb_func_start sub_8002898
-sub_8002898: @ 8002898
+	thumb_func_start GetBgType
+GetBgType: @ 8002898
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_800105C
+	bl GetBgMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x2
@@ -3374,10 +3374,10 @@ _080028E0:
 	bx r1
 	.align 2, 0
 _080028E8: .4byte 0x0000ffff
-	thumb_func_end sub_8002898
+	thumb_func_end GetBgType
 
-	thumb_func_start sub_80028EC
-sub_80028EC: @ 80028EC
+	thumb_func_start IsInvalidBg32
+IsInvalidBg32: @ 80028EC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3390,10 +3390,10 @@ _080028FA:
 _080028FC:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80028EC
+	thumb_func_end IsInvalidBg32
 
-	thumb_func_start sub_8002900
-sub_8002900: @ 8002900
+	thumb_func_start IsTileMapOutsideWram
+IsTileMapOutsideWram: @ 8002900
 	push {lr}
 	lsls r0, 24
 	ldr r1, _0800291C @ =gUnknown_30008E8
@@ -3416,6 +3416,6 @@ _08002924:
 _08002926:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8002900
+	thumb_func_end IsTileMapOutsideWram
 
 	.align 2, 0 @ Don't pad with nop.

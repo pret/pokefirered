@@ -47,7 +47,7 @@ sub_802E33C: @ 802E33C
 	ands r0, r1
 	cmp r0, 0
 	beq _0802E390
-	bl sub_800A404
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -174,12 +174,12 @@ sub_802E438: @ 802E438
 	movs r1, 0x1
 	movs r2, 0x7
 	movs r3, 0x1
-	bl sub_8012138
+	bl dp11b_obj_instanciate
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0x7
 	movs r3, 0x1
-	bl sub_8012138
+	bl dp11b_obj_instanciate
 	ldr r0, _0802E4A0 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
@@ -227,7 +227,7 @@ _0802E4C4:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	b _0802E616
 _0802E4D0:
 	movs r0, 0x20
@@ -348,13 +348,13 @@ _0802E5A8:
 	cmp r0, 0
 	beq _0802E634
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _0802E634
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _0802E620 @ =gUnknown_2023D70
 	ldrb r1, [r1]
 	ldr r2, _0802E624 @ =gUnknown_825E45C
@@ -389,7 +389,7 @@ _0802E606:
 	movs r1, 0xC
 _0802E610:
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 _0802E616:
 	bl sub_802E33C
 	b _0802E634
@@ -417,10 +417,10 @@ sub_802E640: @ 802E640
 	ldr r4, _0802E668 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8012258
+	bl dp11b_obj_free
 	ldr r1, _0802E66C @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -449,7 +449,7 @@ sub_802E674: @ 802E674
 	movs r1, 0x1
 	movs r2, 0xF
 	movs r3, 0x1
-	bl sub_8012138
+	bl dp11b_obj_instanciate
 	movs r4, 0
 	ldr r0, _0802E710 @ =gUnknown_2023BCC
 	ldrb r0, [r0]
@@ -463,7 +463,7 @@ _0802E69A:
 	lsls r0, r4, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 _0802E6AC:
 	adds r4, 0x1
 	ldr r0, _0802E710 @ =gUnknown_2023BCC
@@ -502,10 +502,10 @@ _0802E6B6:
 	orrs r2, r0
 	movs r0, 0x1
 	movs r1, 0xA
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 	bl sub_802E33C
 	b _0802E9DC
 	.align 2, 0
@@ -549,15 +549,15 @@ _0802E72C:
 	movs r1, 0x1
 	movs r2, 0x7
 	movs r3, 0x1
-	bl sub_8012138
+	bl dp11b_obj_instanciate
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0x7
 	movs r3, 0x1
-	bl sub_8012138
+	bl dp11b_obj_instanciate
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 	b _0802E9DC
 	.align 2, 0
 _0802E784: .4byte gUnknown_202063C
@@ -592,7 +592,7 @@ _0802E7AA:
 	adds r5, r3, 0
 _0802E7CC:
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r4, 0
@@ -622,7 +622,7 @@ _0802E804:
 	mov r1, sp
 	adds r0, r1, r4
 	ldrb r0, [r0]
-	bl sub_80751E8
+	bl GetBankByIdentity
 	strb r0, [r5]
 	ldr r1, _0802E838 @ =gUnknown_2023BCC
 	lsls r0, 24
@@ -632,7 +632,7 @@ _0802E804:
 	beq _0802E7FC
 	movs r4, 0
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -669,7 +669,7 @@ _0802E846:
 	adds r2, r1
 	ldrb r1, [r2]
 	adds r1, 0xD
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, _0802E8B4 @ =gUnknown_8250C04
 	lsls r1, r0, 1
 	adds r1, r0
@@ -733,7 +733,7 @@ _0802E8CE:
 	adds r5, r3, 0
 _0802E8F0:
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r4, 0
@@ -763,7 +763,7 @@ _0802E928:
 	mov r1, sp
 	adds r0, r1, r4
 	ldrb r0, [r0]
-	bl sub_80751E8
+	bl GetBankByIdentity
 	strb r0, [r5]
 	ldr r1, _0802E95C @ =gUnknown_2023BCC
 	lsls r0, 24
@@ -773,7 +773,7 @@ _0802E928:
 	beq _0802E920
 	movs r4, 0
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -810,7 +810,7 @@ _0802E96A:
 	adds r2, r1
 	ldrb r1, [r2]
 	adds r1, 0xD
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, _0802E9F4 @ =gUnknown_8250C04
 	lsls r1, r0, 1
 	adds r1, r0
@@ -948,13 +948,13 @@ _0802EAA4: .4byte gUnknown_2023BC4
 _0802EAA8:
 	ldr r0, _0802EAEC @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r2, 0x1
 	movs r0, 0x1
 	ands r0, r1
 	eors r0, r2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _0802EAF0 @ =gUnknown_3004FF4
 	strb r0, [r1]
 _0802EAC2:
@@ -1011,14 +1011,14 @@ _0802EB04:
 	cmp r0, 0x1
 	bhi _0802EB3A
 	ldrb r0, [r5]
-	bl sub_803F6A0
+	bl GetDefaultMoveTarget
 	ldr r1, _0802EB7C @ =gUnknown_3004FF4
 	strb r0, [r1]
 _0802EB36:
 	movs r0, 0
 	mov r8, r0
 _0802EB3A:
-	bl sub_8070A84
+	bl ResetPaletteFadeControl
 	movs r0, 0xF0
 	lsls r0, 12
 	ldr r1, _0802EB80 @ =0x00007fff
@@ -1026,7 +1026,7 @@ _0802EB3A:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	mov r0, r8
 	cmp r0, 0
 	bne _0802EB88
@@ -1041,7 +1041,7 @@ _0802EB3A:
 	orrs r2, r0
 	movs r0, 0x1
 	movs r1, 0xA
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	bl sub_802E33C
 	b _0802EDBA
 	.align 2, 0
@@ -1071,7 +1071,7 @@ _0802EBAC: .4byte sub_802E674
 _0802EBB0: .4byte gUnknown_3004FF4
 _0802EBB4:
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _0802EBD4 @ =gUnknown_2023D70
 	ldrb r1, [r1]
 	ldr r2, _0802EBD8 @ =gUnknown_825E45C
@@ -1090,7 +1090,7 @@ _0802EBD8: .4byte gUnknown_825E45C
 _0802EBDC:
 	movs r0, 0x1
 _0802EBDE:
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _0802EC00 @ =gUnknown_3004FF4
 _0802EBE4:
 	strb r0, [r1]
@@ -1123,9 +1123,9 @@ _0802EC10:
 	ldr r2, _0802EC34 @ =0x0000ffff
 	movs r0, 0x1
 	movs r1, 0xA
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	bl sub_802E33C
-	bl sub_8070A84
+	bl ResetPaletteFadeControl
 	b _0802ED2C
 	.align 2, 0
 _0802EC34: .4byte 0x0000ffff
@@ -1258,7 +1258,7 @@ _0802ED2C:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	b _0802EDBA
 	.align 2, 0
 _0802ED40: .4byte gUnknown_2023FFC
@@ -1782,7 +1782,7 @@ _0802F152:
 	adds r0, r5
 	adds r1, r6, 0
 	adds r1, 0xD
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4]
 	mov r2, r8
 	ldrb r0, [r2]
@@ -1793,7 +1793,7 @@ _0802F152:
 	adds r0, r5
 	adds r1, r6, 0
 	adds r1, 0x11
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, r10
 	adds r1, r3, r6
 	strb r0, [r1]
@@ -1812,7 +1812,7 @@ _0802F152:
 	ldr r1, _0802F308 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r5, [sp, 0x1C]
 	strb r0, [r5]
 	movs r6, 0
@@ -2352,7 +2352,7 @@ sub_802F610: @ 802F610
 	ldr r0, [r0]
 	str r0, [r3]
 	ldr r0, _0802F660 @ =sub_8011A1C
-	bl sub_8000544
+	bl SetMainCallback2
 	bl sub_8003ECC
 	b _0802F694
 	.align 2, 0
@@ -2381,7 +2381,7 @@ _0802F664:
 	ldr r0, [r0]
 	str r0, [r3]
 	ldr r0, _0802F6A4 @ =sub_8011A1C
-	bl sub_8000544
+	bl SetMainCallback2
 	bl sub_8003ECC
 _0802F694:
 	pop {r0}
@@ -2448,7 +2448,7 @@ _0802F6FC:
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r0, [r2, 0x8]
-	bl sub_8000544
+	bl SetMainCallback2
 _0802F71E:
 	pop {r0}
 	bx r0
@@ -2546,7 +2546,7 @@ sub_802F7A0: @ 802F7A0
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2554,7 +2554,7 @@ sub_802F7A0: @ 802F7A0
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl sub_8007280
+	bl DestroySprite
 	bl sub_802E33C
 _0802F7F4:
 	pop {r4-r6}
@@ -2677,7 +2677,7 @@ _0802F8B0:
 _0802F8E4:
 	movs r6, 0x1
 _0802F8E6:
-	bl sub_80721F0
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802F8F2
@@ -2766,9 +2766,9 @@ _0802F934:
 	strb r4, [r0, 0x1]
 	ldr r4, _0802F9C4 @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldr r0, _0802F9C8 @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x40
@@ -2804,7 +2804,7 @@ _0802F9DC:
 	muls r0, r6
 	ldr r5, _0802FA48 @ =gUnknown_2024284
 	adds r0, r5
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	bl sub_8075290
 	lsls r0, 24
 	cmp r0, 0
@@ -2817,7 +2817,7 @@ _0802F9DC:
 	ldrh r0, [r0]
 	muls r0, r6
 	adds r0, r5
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 _0802FA12:
 	ldr r0, _0802FA4C @ =gUnknown_2024018
 	ldr r0, [r0]
@@ -2951,7 +2951,7 @@ _0802FAF0:
 	lsls r0, 2
 	ldr r1, _0802FBE4 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r4, _0802FBE8 @ =gUnknown_3004FF0
 	mov r1, r8
 	ldrb r0, [r1]
@@ -2968,7 +2968,7 @@ _0802FAF0:
 	ldr r2, _0802FBD8 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	mov r2, r8
 	ldrb r0, [r2]
 	eors r0, r7
@@ -2978,7 +2978,7 @@ _0802FAF0:
 	eors r0, r7
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 _0802FB5C:
 	ldr r1, _0802FBE0 @ =gUnknown_3004FFC
 	ldr r4, _0802FBD0 @ =gUnknown_2023BC4
@@ -2990,7 +2990,7 @@ _0802FB5C:
 	lsls r0, 2
 	ldr r1, _0802FBE4 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r5, _0802FBE8 @ =gUnknown_3004FF0
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -3004,13 +3004,13 @@ _0802FB5C:
 	ldr r2, _0802FBD8 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_804BD94
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldr r0, _0802FBCC @ =gUnknown_2024018
 	ldr r0, [r0]
 	ldr r2, [r0, 0x8]
@@ -3093,9 +3093,9 @@ sub_802FBF4: @ 802FBF4
 	strb r0, [r1, 0x1]
 	ldr r4, _0802FCA0 @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldr r0, [r5]
 	ldrb r2, [r6]
 	ldr r1, [r0]
@@ -3109,7 +3109,7 @@ sub_802FBF4: @ 802FBF4
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _0802FC78:
 	ldr r0, _0802FCA4 @ =gUnknown_3004FE0
 	ldrb r1, [r6]
@@ -3149,7 +3149,7 @@ sub_802FCAC: @ 802FCAC
 	ands r0, r1
 	cmp r0, 0
 	bne _0802FCFA
-	bl sub_80721F0
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802FCFA
@@ -3167,7 +3167,7 @@ sub_802FCAC: @ 802FCAC
 	muls r0, r2
 	ldr r2, _0802FD14 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	bl sub_802E33C
 _0802FCFA:
 	pop {r4}
@@ -3236,7 +3236,7 @@ _0802FD4A:
 	cmp r0, 0
 	bne _0802FDC4
 	adds r0, r3, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r4, _0802FDE8 @ =gUnknown_3004FF0
 	ldrb r1, [r5]
 	adds r0, r1, r4
@@ -3250,15 +3250,15 @@ _0802FD4A:
 	ldr r2, _0802FDD8 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	bl sub_804BD94
 	ldrb r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldrb r0, [r5]
-	bl sub_8034BB4
+	bl CopyBattleSpriteInvisibility
 	ldr r1, _0802FDEC @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -3287,7 +3287,7 @@ sub_802FDF4: @ 802FDF4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80721F0
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802FE16
@@ -3297,7 +3297,7 @@ sub_802FDF4: @ 802FDF4
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _0802FE16:
 	pop {r4}
 	pop {r0}
@@ -3324,7 +3324,7 @@ sub_802FE24: @ 802FE24
 	ldrb r0, [r5]
 	adds r0, r6
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r1, r4, 16
 	movs r0, 0x1
@@ -3350,7 +3350,7 @@ _0802FE6C:
 	muls r0, r2
 	ldr r2, _0802FE90 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	bl sub_802E33C
 _0802FE86:
 	pop {r4-r6}
@@ -3419,19 +3419,19 @@ _0802FEF2:
 	adds r6, r1, r0
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4]
 	ldr r3, _0802FFB8 @ =gUnknown_8253AE4
 	adds r4, 0x1
@@ -3460,7 +3460,7 @@ _0802FEF2:
 	mov r2, sp
 	bl sub_804037C
 	adds r0, r6, 0
-	bl sub_803E47C
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]
@@ -3474,7 +3474,7 @@ _0802FEF2:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	strb r5, [r4]
 	bl sub_8075290
 	lsls r0, 24
@@ -3531,7 +3531,7 @@ _0802FFE0:
 	ldr r1, _08030004 @ =sub_802FE94
 	str r1, [r0]
 	mov r0, r9
-	bl sub_8077508
+	bl DestroyTask
 	b _0803000E
 	.align 2, 0
 _08030000: .4byte gUnknown_3004FE0
@@ -3588,19 +3588,19 @@ sub_8030024: @ 8030024
 	adds r6, r0
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	ldr r6, _080300E4 @ =gUnknown_8253AE4
 	lsls r1, r4, 2
@@ -3630,7 +3630,7 @@ sub_8030024: @ 8030024
 	negs r0, r0
 	str r0, [sp]
 	mov r0, r10
-	bl sub_8048150
+	bl SetBattleBarStruct
 	movs r0, 0x1B
 	bl sub_80722CC
 	ldr r0, _080300F0 @ =sub_80300F4
@@ -3696,7 +3696,7 @@ _08030124:
 	lsls r4, 16
 	lsrs r4, 16
 	ldrb r0, [r5]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r4, 16
 	movs r0, 0x1
@@ -3712,17 +3712,17 @@ _08030124:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r3, _080301F4 @ =gUnknown_8253AE4
@@ -3753,7 +3753,7 @@ _08030124:
 	mov r2, sp
 	bl sub_804037C
 	adds r0, r5, 0
-	bl sub_803E47C
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]
@@ -3766,7 +3766,7 @@ _08030124:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	strb r5, [r4]
 	ldr r0, _08030200 @ =sub_8030238
 	str r0, [r6]
@@ -3790,7 +3790,7 @@ _08030204:
 	ldr r1, _08030234 @ =sub_802FE94
 	str r1, [r0]
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _08030220:
 	add sp, 0x8
 	pop {r3-r5}
@@ -3837,7 +3837,7 @@ _0803026C:
 	adds r1, r4, 0
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r0, _0803028C @ =gUnknown_3005090
 	lsls r1, r5, 2
 	adds r1, r5
@@ -3885,7 +3885,7 @@ sub_8030298: @ 8030298
 	adds r7, r1, r0
 	adds r0, r7, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	bl sub_8075290
 	lsls r0, 24
 	lsrs r0, 24
@@ -3905,7 +3905,7 @@ sub_8030298: @ 8030298
 	ldrb r0, [r0]
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	b _0803032C
 	.align 2, 0
 _08030304: .4byte gUnknown_3005090
@@ -3922,7 +3922,7 @@ _08030318:
 	ldr r2, _08030344 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 _0803032C:
 	ldr r0, _08030348 @ =gUnknown_3005090
 	lsls r1, r6, 2
@@ -3976,7 +3976,7 @@ _08030388:
 	ldr r0, _080303A4 @ =sub_802FE94
 	str r0, [r1]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _08030398:
 	pop {r4-r6}
 	pop {r0}
@@ -4091,7 +4091,7 @@ _0803047C:
 _08030486:
 	movs r0, 0x58
 	bl sub_80722CC
-	bl sub_802679C
+	bl IsMonGettingExpSentOut
 	cmp r0, 0
 	beq _080304E0
 	ldrh r0, [r4, 0x24]
@@ -4160,7 +4160,7 @@ _08030508:
 	ldr r0, _08030534 @ =sub_802FE94
 	str r0, [r1]
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _0803051C:
 	add sp, 0x8
 	pop {r3}
@@ -4198,7 +4198,7 @@ sub_8030538: @ 8030538
 	ldrb r0, [r2, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -4206,12 +4206,12 @@ sub_8030538: @ 8030538
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _0803059C @ =gUnknown_3004FF0
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_802E33C
 _08030588:
 	pop {r4-r6}
@@ -4249,7 +4249,7 @@ sub_80305A0: @ 80305A0
 	lsls r0, 2
 	ldr r4, _08030608 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -4257,12 +4257,12 @@ sub_80305A0: @ 80305A0
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _0803060C @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_802E33C
 _080305F4:
 	pop {r4-r6}
@@ -4316,7 +4316,7 @@ sub_8030628: @ 8030628
 	lsls r1, 3
 	adds r1, r3
 	ldrb r4, [r1, 0x8]
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_8003ECC
 	adds r0, r4, 0
 	bl sub_81278DC
@@ -4355,7 +4355,7 @@ sub_8030684: @ 8030684
 	ldrb r1, [r0]
 	ldr r2, _080306C8 @ =gUnknown_203B0DC
 	movs r0, 0x1
-	bl sub_800E874
+	bl EmitChosenMonReturnValue
 	b _080306D6
 	.align 2, 0
 _080306B4: .4byte gUnknown_30030F0
@@ -4368,7 +4368,7 @@ _080306CC:
 	movs r0, 0x1
 	movs r1, 0x6
 	movs r2, 0
-	bl sub_800E874
+	bl EmitChosenMonReturnValue
 _080306D6:
 	ldr r1, _080306F8 @ =gUnknown_2022BC4
 	ldr r0, _080306FC @ =gUnknown_2023BC4
@@ -4381,7 +4381,7 @@ _080306D6:
 	ands r0, r1
 	cmp r0, 0x1
 	bne _080306F0
-	bl sub_8030B5C
+	bl PrintLinkStandbyMsg
 _080306F0:
 	bl sub_802E33C
 _080306F4:
@@ -4406,7 +4406,7 @@ sub_8030700: @ 8030700
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08030738 @ =sub_803073C
+	ldr r1, _08030738 @ =CompleteWhenChoseItem
 	str r1, [r0]
 	bl nullsub_44
 	bl sub_8003ECC
@@ -4418,11 +4418,11 @@ _08030728:
 _0803072C: .4byte gUnknown_2037AB8
 _08030730: .4byte gUnknown_3004FE0
 _08030734: .4byte gUnknown_2023BC4
-_08030738: .4byte sub_803073C
+_08030738: .4byte CompleteWhenChoseItem
 	thumb_func_end sub_8030700
 
-	thumb_func_start sub_803073C
-sub_803073C: @ 803073C
+	thumb_func_start CompleteWhenChoseItem
+CompleteWhenChoseItem: @ 803073C
 	push {lr}
 	ldr r0, _08030768 @ =gUnknown_30030F0
 	ldr r1, [r0, 0x4]
@@ -4438,7 +4438,7 @@ sub_803073C: @ 803073C
 	ldr r0, _08030774 @ =gUnknown_203AD30
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl sub_800E8AC
+	bl EmitOneReturnValue
 	bl sub_802E33C
 _08030762:
 	pop {r0}
@@ -4448,10 +4448,10 @@ _08030768: .4byte gUnknown_30030F0
 _0803076C: .4byte sub_8011100
 _08030770: .4byte gUnknown_2037AB8
 _08030774: .4byte gUnknown_203AD30
-	thumb_func_end sub_803073C
+	thumb_func_end CompleteWhenChoseItem
 
-	thumb_func_start sub_8030778
-sub_8030778: @ 8030778
+	thumb_func_start CompleteOnSpecialAnimDone
+CompleteOnSpecialAnimDone: @ 8030778
 	push {lr}
 	ldr r0, _080307A8 @ =gUnknown_2024005
 	ldrb r0, [r0]
@@ -4480,10 +4480,10 @@ _080307A2:
 _080307A8: .4byte gUnknown_2024005
 _080307AC: .4byte gUnknown_2024018
 _080307B0: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8030778
+	thumb_func_end CompleteOnSpecialAnimDone
 
-	thumb_func_start sub_80307B4
-sub_80307B4: @ 80307B4
+	thumb_func_start DoHitAnimBlinkSpriteEffect
+DoHitAnimBlinkSpriteEffect: @ 80307B4
 	push {r4,lr}
 	ldr r1, _080307F0 @ =gUnknown_2023D44
 	ldr r0, _080307F4 @ =gUnknown_2023BC4
@@ -4544,7 +4544,7 @@ _0803082A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80307B4
+	thumb_func_end DoHitAnimBlinkSpriteEffect
 
 	thumb_func_start sub_8030830
 sub_8030830: @ 8030830
@@ -4566,14 +4566,14 @@ _08030848:
 	bl sub_8030A14
 	adds r0, r6, 0
 	ldr r1, _080308A0 @ =gUnknown_83FE770
-	bl sub_8008D84
+	bl StringCopy
 	ldrh r1, [r4]
 	movs r0, 0xD
 	muls r1, r0
 	ldr r0, _080308A4 @ =gUnknown_8247094
 	adds r1, r0
 	adds r0, r6, 0
-	bl sub_8008DA4
+	bl StringAppend
 	adds r1, r5, 0x3
 	lsls r1, 24
 	lsrs r1, 24
@@ -4608,7 +4608,7 @@ sub_80308A8: @ 80308A8
 	ldr r4, _080308C4 @ =gUnknown_202298C
 	ldr r1, _080308C8 @ =gUnknown_83FE766
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0x7
 	bl sub_80D87BC
@@ -4686,7 +4686,7 @@ sub_8030940: @ 8030940
 	ldr r6, _080309B4 @ =gUnknown_202298C
 	ldr r1, _080309B8 @ =gUnknown_83FE76A
 	adds r0, r6, 0
-	bl sub_8008D84
+	bl StringCopy
 	adds r3, r0, 0
 	movs r0, 0xFC
 	strb r0, [r3]
@@ -4699,7 +4699,7 @@ sub_8030940: @ 8030940
 	adds r3, 0x1
 	ldr r1, _080309BC @ =gUnknown_83FE770
 	adds r0, r3, 0
-	bl sub_8008D84
+	bl StringCopy
 	adds r3, r0, 0
 	ldr r2, _080309C0 @ =gUnknown_8250C04
 	ldr r1, _080309C4 @ =gUnknown_2023FFC
@@ -4719,7 +4719,7 @@ sub_8030940: @ 8030940
 	ldr r0, _080309C8 @ =gUnknown_824F1A0
 	adds r1, r0
 	adds r0, r3, 0
-	bl sub_8008D84
+	bl StringCopy
 	adds r0, r6, 0
 	movs r1, 0x8
 	bl sub_80D87BC
@@ -4767,9 +4767,9 @@ sub_80309CC: @ 80309CC
 	str r0, [sp, 0x8]
 	movs r0, 0
 	add r1, sp, 0xC
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -4801,9 +4801,9 @@ sub_8030A14: @ 8030A14
 	str r0, [sp, 0x8]
 	movs r0, 0
 	add r1, sp, 0xC
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -4836,9 +4836,9 @@ sub_8030A54: @ 8030A54
 	str r0, [sp, 0x8]
 	movs r0, 0
 	add r1, sp, 0xC
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -4873,9 +4873,9 @@ sub_8030A98: @ 8030A98
 	str r0, [sp, 0x8]
 	movs r0, 0
 	add r1, sp, 0xC
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -4885,7 +4885,7 @@ sub_8030A98: @ 8030A98
 sub_8030ADC: @ 8030ADC
 	push {lr}
 	ldr r0, _08030AE8 @ =sub_8077764
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4896,15 +4896,15 @@ _08030AE8: .4byte sub_8077764
 sub_8030AEC: @ 8030AEC
 	push {lr}
 	ldr r0, _08030AF8 @ =sub_8077764
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08030AF8: .4byte sub_8077764
 	thumb_func_end sub_8030AEC
 
-	thumb_func_start sub_8030AFC
-sub_8030AFC: @ 8030AFC
+	thumb_func_start CompleteOnFinishedStatusAnimation
+CompleteOnFinishedStatusAnimation: @ 8030AFC
 	push {lr}
 	ldr r0, _08030B24 @ =gUnknown_2024018
 	ldr r2, [r0]
@@ -4927,10 +4927,10 @@ _08030B1E:
 	.align 2, 0
 _08030B24: .4byte gUnknown_2024018
 _08030B28: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8030AFC
+	thumb_func_end CompleteOnFinishedStatusAnimation
 
-	thumb_func_start sub_8030B2C
-sub_8030B2C: @ 8030B2C
+	thumb_func_start CompleteOnFinishedBattleAnimation
+CompleteOnFinishedBattleAnimation: @ 8030B2C
 	push {lr}
 	ldr r0, _08030B54 @ =gUnknown_2024018
 	ldr r2, [r0]
@@ -4953,10 +4953,10 @@ _08030B4E:
 	.align 2, 0
 _08030B54: .4byte gUnknown_2024018
 _08030B58: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8030B2C
+	thumb_func_end CompleteOnFinishedBattleAnimation
 
-	thumb_func_start sub_8030B5C
-sub_8030B5C: @ 8030B5C
+	thumb_func_start PrintLinkStandbyMsg
+PrintLinkStandbyMsg: @ 8030B5C
 	push {lr}
 	ldr r0, _08030B80 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -4980,10 +4980,10 @@ _08030B80: .4byte gUnknown_2022B4C
 _08030B84: .4byte gUnknown_2022974
 _08030B88: .4byte gUnknown_2022976
 _08030B8C: .4byte gUnknown_83FE714
-	thumb_func_end sub_8030B5C
+	thumb_func_end PrintLinkStandbyMsg
 
-	thumb_func_start sub_8030B90
-sub_8030B90: @ 8030B90
+	thumb_func_start PlayerHandleGetMonData
+PlayerHandleGetMonData: @ 8030B90
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -5001,7 +5001,7 @@ sub_8030B90: @ 8030B90
 	adds r1, r0
 	ldrb r0, [r1]
 	mov r1, sp
-	bl sub_8030C04
+	bl CopyPlayerMonData
 	adds r6, r0, 0
 	b _08030BEA
 	.align 2, 0
@@ -5020,7 +5020,7 @@ _08030BCC:
 	lsrs r0, 24
 	mov r2, sp
 	adds r1, r2, r6
-	bl sub_8030C04
+	bl CopyPlayerMonData
 	adds r6, r0
 _08030BE2:
 	lsrs r4, 1
@@ -5032,16 +5032,16 @@ _08030BEA:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl sub_800E708
+	bl EmitDataTransfer
 	bl sub_802E33C
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8030B90
+	thumb_func_end PlayerHandleGetMonData
 
-	thumb_func_start sub_8030C04
-sub_8030C04: @ 8030C04
+	thumb_func_start CopyPlayerMonData
+CopyPlayerMonData: @ 8030C04
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -5142,12 +5142,12 @@ _08030D34:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2E]
 	movs r6, 0
@@ -5175,12 +5175,12 @@ _08030D80:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4]
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r0, r8
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r9
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -5195,21 +5195,21 @@ _08030D80:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r10
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, [sp, 0x80]
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x44]
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r5, 0x1F
 	ands r0, r5
@@ -5221,7 +5221,7 @@ _08030D80:
 	strb r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r6, 0x1F
 	ands r0, r6
@@ -5233,7 +5233,7 @@ _08030D80:
 	strh r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 2
@@ -5245,7 +5245,7 @@ _08030D80:
 	strb r1, [r3, 0x15]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -5256,7 +5256,7 @@ _08030D80:
 	str r0, [sp, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r6
 	lsls r0, 4
@@ -5267,7 +5267,7 @@ _08030D80:
 	strh r1, [r3, 0x16]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 1
@@ -5279,55 +5279,55 @@ _08030D80:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x48]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4C]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [sp, 0x7C]
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0x3B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x3C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x3E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x3F
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r1, 0x1
 	ands r0, r1
@@ -5340,7 +5340,7 @@ _08030D80:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	lsls r0, 7
 	ldrb r2, [r3, 0x17]
@@ -5350,19 +5350,19 @@ _08030D80:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x54]
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, [sp, 0x8C]
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
-	bl sub_8008CF4
+	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, sp
 	movs r6, 0
 _08030F38:
@@ -5413,13 +5413,13 @@ _08030F8E:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	adds r1, r6, 0
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r10
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -5433,7 +5433,7 @@ _08030F8E:
 	ldr r1, _08030FDC @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1, 0xC]
 	mov r2, r9
@@ -5475,7 +5475,7 @@ _08031008:
 	adds r1, 0x11
 	mov r2, r8
 	adds r0, r4, r2
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -5486,7 +5486,7 @@ _08031008:
 	ldr r1, _08031034 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -5523,7 +5523,7 @@ _08031064:
 	adds r0, r1
 	movs r1, 0x19
 _0803106E:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -5656,27 +5656,27 @@ _08031154:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x3]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r6, 0x6
 	b _0803139A
@@ -5761,7 +5761,7 @@ _08031224:
 	adds r0, r1
 	movs r1, 0x37
 _0803122E:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -5850,7 +5850,7 @@ _080312C8:
 	adds r0, r1
 	movs r1, 0x3F
 _080312D2:
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	strb r0, [r7]
@@ -5957,7 +5957,7 @@ _08031388:
 	adds r0, r1
 	movs r1, 0x36
 _08031392:
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	movs r6, 0x1
 _0803139A:
@@ -5972,10 +5972,10 @@ _0803139A:
 	bx r1
 	.align 2, 0
 _080313AC: .4byte gUnknown_2024284
-	thumb_func_end sub_8030C04
+	thumb_func_end CopyPlayerMonData
 
-	thumb_func_start sub_80313B0
-sub_80313B0: @ 80313B0
+	thumb_func_start PlayerHandleGetRawMonData
+PlayerHandleGetRawMonData: @ 80313B0
 	push {r4-r7,lr}
 	sub sp, 0x58
 	ldr r2, _08031428 @ =gUnknown_2023BCE
@@ -6029,7 +6029,7 @@ _08031406:
 	ldrb r1, [r0]
 	movs r0, 0x1
 	adds r2, r4, 0
-	bl sub_800E708
+	bl EmitDataTransfer
 	bl sub_802E33C
 	add sp, 0x58
 	pop {r4-r7}
@@ -6040,10 +6040,10 @@ _08031428: .4byte gUnknown_2023BCE
 _0803142C: .4byte gUnknown_2023BC4
 _08031430: .4byte gUnknown_2022BC4
 _08031434: .4byte gUnknown_2024284
-	thumb_func_end sub_80313B0
+	thumb_func_end PlayerHandleGetRawMonData
 
-	thumb_func_start sub_8031438
-sub_8031438: @ 8031438
+	thumb_func_start PlayerHandleSetMonData
+PlayerHandleSetMonData: @ 8031438
 	push {r4,r5,lr}
 	ldr r1, _0803145C @ =gUnknown_2022BC4
 	ldr r0, _08031460 @ =gUnknown_2023BC4
@@ -6058,7 +6058,7 @@ sub_8031438: @ 8031438
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
-	bl sub_8031490
+	bl SetPlayerMonData
 	b _08031486
 	.align 2, 0
 _0803145C: .4byte gUnknown_2022BC4
@@ -6073,7 +6073,7 @@ _0803146C:
 	cmp r0, 0
 	beq _0803147A
 	adds r0, r5, 0
-	bl sub_8031490
+	bl SetPlayerMonData
 _0803147A:
 	lsrs r4, 1
 	adds r0, r5, 0x1
@@ -6086,10 +6086,10 @@ _08031486:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8031438
+	thumb_func_end PlayerHandleSetMonData
 
-	thumb_func_start sub_8031490
-sub_8031490: @ 8031490
+	thumb_func_start SetPlayerMonData
+SetPlayerMonData: @ 8031490
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7210,7 +7210,7 @@ _08031E56:
 	muls r0, r2
 	ldr r2, _08031E80 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	add sp, 0x34
 	pop {r3-r5}
 	mov r8, r3
@@ -7223,10 +7223,10 @@ _08031E56:
 _08031E80: .4byte gUnknown_2024284
 _08031E84: .4byte gUnknown_2023BC4
 _08031E88: .4byte gUnknown_2023BCE
-	thumb_func_end sub_8031490
+	thumb_func_end SetPlayerMonData
 
-	thumb_func_start sub_8031E8C
-sub_8031E8C: @ 8031E8C
+	thumb_func_start PlayerHandleSetRawMonData
+PlayerHandleSetRawMonData: @ 8031E8C
 	push {r4-r7,lr}
 	ldr r1, _08031EF0 @ =gUnknown_2023BCE
 	ldr r7, _08031EF4 @ =gUnknown_2023BC4
@@ -7282,10 +7282,10 @@ _08031EF0: .4byte gUnknown_2023BCE
 _08031EF4: .4byte gUnknown_2023BC4
 _08031EF8: .4byte gUnknown_2022BC4
 _08031EFC: .4byte gUnknown_2024284
-	thumb_func_end sub_8031E8C
+	thumb_func_end PlayerHandleSetRawMonData
 
-	thumb_func_start sub_8031F00
-sub_8031F00: @ 8031F00
+	thumb_func_start PlayerHandleLoadMonSprite
+PlayerHandleLoadMonSprite: @ 8031F00
 	push {r4,lr}
 	ldr r2, _08031F4C @ =gUnknown_2023BCE
 	ldr r4, _08031F50 @ =gUnknown_2023BC4
@@ -7330,10 +7330,10 @@ _08031F58: .4byte gUnknown_202063C
 _08031F5C: .4byte gUnknown_2023D44
 _08031F60: .4byte gUnknown_3004FE0
 _08031F64: .4byte sub_802E404
-	thumb_func_end sub_8031F00
+	thumb_func_end PlayerHandleLoadMonSprite
 
-	thumb_func_start sub_8031F68
-sub_8031F68: @ 8031F68
+	thumb_func_start PlayerHandleSwitchInAnim
+PlayerHandleSwitchInAnim: @ 8031F68
 	push {r4-r6,lr}
 	ldr r5, _08031FD4 @ =gUnknown_2023BC4
 	ldrb r0, [r5]
@@ -7342,7 +7342,7 @@ sub_8031F68: @ 8031F68
 	adds r6, r4, 0x2
 	adds r1, r6
 	ldrb r1, [r1]
-	bl sub_803589C
+	bl ClearTemporarySpeciesSpriteData
 	ldr r2, _08031FDC @ =gUnknown_2023BCE
 	ldrb r0, [r5]
 	lsls r1, r0, 1
@@ -7393,7 +7393,7 @@ _08031FE4: .4byte gUnknown_2023FF8
 _08031FE8: .4byte gUnknown_2023FFC
 _08031FEC: .4byte gUnknown_3004FE0
 _08031FF0: .4byte sub_802FD18
-	thumb_func_end sub_8031F68
+	thumb_func_end PlayerHandleSwitchInAnim
 
 	thumb_func_start sub_8031FF4
 sub_8031FF4: @ 8031FF4
@@ -7408,7 +7408,7 @@ sub_8031FF4: @ 8031FF4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_803589C
+	bl ClearTemporarySpeciesSpriteData
 	ldr r0, _08032138 @ =gUnknown_2023BCE
 	lsls r2, r6, 1
 	adds r2, r0
@@ -7424,20 +7424,20 @@ sub_8031FF4: @ 8031FF4
 	ldr r1, _08032140 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _08032144 @ =sub_8033E3C
-	bl sub_8044EF8
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _08032148 @ =gUnknown_3004FFC
 	mov r9, r1
 	add r9, r6
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7464,7 +7464,7 @@ sub_8031FF4: @ 8031FF4
 	mov r0, r10
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _08032150 @ =gUnknown_2023D44
 	adds r4, r6, r4
 	strb r0, [r4]
@@ -7509,7 +7509,7 @@ sub_8031FF4: @ 8031FF4
 	ldr r1, _08032158 @ =gUnknown_2024024
 	adds r6, r1
 	ldrb r1, [r6]
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -7531,7 +7531,7 @@ sub_8031FF4: @ 8031FF4
 	str r1, [r0]
 	movs r0, 0
 	movs r1, 0xFF
-	bl sub_804A938
+	bl DoPokeballSendOutAnimation
 	mov r1, r9
 	ldrb r2, [r1]
 	lsls r1, r2, 4
@@ -7603,7 +7603,7 @@ _080321A8:
 	lsls r0, 2
 	ldr r4, _080321E8 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -7611,12 +7611,12 @@ _080321A8:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080321EC @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_802E33C
 _080321DE:
 	pop {r4-r6}
@@ -7661,7 +7661,7 @@ _08032218:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _08032232:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -7686,7 +7686,7 @@ _08032246:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x1
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _08032274 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -7715,7 +7715,7 @@ sub_803227C: @ 803227C
 	beq _080322AC
 	ldr r0, _080322A8 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r7, 0x20
@@ -7735,7 +7735,7 @@ _080322AE:
 	ands r0, r1
 	cmp r0, 0
 	beq _0803233C
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r5, _08032324 @ =gUnknown_202273C
 	lsls r0, 24
 	lsrs r0, 24
@@ -7747,7 +7747,7 @@ _080322AE:
 	ldrb r0, [r1]
 	cmp r0, 0x2
 	beq _08032306
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7759,7 +7759,7 @@ _080322AE:
 	ands r0, r1
 	cmp r0, 0x1
 	beq _08032306
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7771,7 +7771,7 @@ _080322AE:
 	cmp r4, 0x3
 	bne _08032328
 _08032306:
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r2, _08032324 @ =gUnknown_202273C
 	lsls r0, 24
 	lsrs r0, 24
@@ -7786,7 +7786,7 @@ _08032306:
 _08032320: .4byte gUnknown_2022B4C
 _08032324: .4byte gUnknown_202273C
 _08032328:
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7805,7 +7805,7 @@ _08032342:
 	adds r0, r4, 0
 	bl sub_8034750
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7832,7 +7832,7 @@ _08032342:
 	adds r0, r6, 0
 	mov r1, r8
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r6, _08032410 @ =gUnknown_2023D44
 	ldrb r1, [r5]
 	adds r1, r6
@@ -7912,7 +7912,7 @@ sub_8032428: @ 8032428
 	ands r0, r1
 	cmp r0, 0
 	beq _080324B8
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r5, _080324A0 @ =gUnknown_202273C
 	lsls r0, 24
 	lsrs r0, 24
@@ -7924,7 +7924,7 @@ sub_8032428: @ 8032428
 	ldrb r0, [r1]
 	cmp r0, 0x2
 	beq _08032482
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7936,7 +7936,7 @@ sub_8032428: @ 8032428
 	ands r0, r1
 	cmp r0, 0x1
 	beq _08032482
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7948,7 +7948,7 @@ sub_8032428: @ 8032428
 	cmp r4, 0x3
 	bne _080324A4
 _08032482:
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r2, _080324A0 @ =gUnknown_202273C
 	lsls r0, 24
 	lsrs r0, 24
@@ -7963,7 +7963,7 @@ _08032482:
 _0803249C: .4byte gUnknown_2022B4C
 _080324A0: .4byte gUnknown_202273C
 _080324A4:
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7982,7 +7982,7 @@ _080324BE:
 	adds r0, r4, 0
 	bl sub_8034750
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -8002,7 +8002,7 @@ _080324BE:
 	asrs r2, 16
 	movs r1, 0x50
 	movs r3, 0x1E
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r6, _08032578 @ =gUnknown_2023D44
 	ldrb r1, [r5]
 	adds r1, r6
@@ -8071,8 +8071,8 @@ _08032588: .4byte gUnknown_3004FE0
 _0803258C: .4byte sub_802F768
 	thumb_func_end sub_8032428
 
-	thumb_func_start sub_8032590
-sub_8032590: @ 8032590
+	thumb_func_start PlayerHandleTrainerSlideBack
+PlayerHandleTrainerSlideBack: @ 8032590
 	push {r4-r6,lr}
 	ldr r5, _08032630 @ =gUnknown_2023D44
 	ldr r6, _08032634 @ =gUnknown_2023BC4
@@ -8084,7 +8084,7 @@ sub_8032590: @ 8032590
 	lsls r0, 2
 	ldr r4, _08032638 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80750FC
+	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -8131,7 +8131,7 @@ sub_8032590: @ 8032590
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, _08032644 @ =nullsub_8
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -8140,7 +8140,7 @@ sub_8032590: @ 8032590
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r1, _08032648 @ =gUnknown_3004FE0
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -8159,7 +8159,7 @@ _08032640: .4byte sub_8075590
 _08032644: .4byte nullsub_8
 _08032648: .4byte gUnknown_3004FE0
 _0803264C: .4byte sub_802F7A0
-	thumb_func_end sub_8032590
+	thumb_func_end PlayerHandleTrainerSlideBack
 
 	thumb_func_start sub_8032650
 sub_8032650: @ 8032650
@@ -8187,7 +8187,7 @@ sub_8032650: @ 8032650
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _08032684:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -8221,11 +8221,11 @@ _080326A4:
 	muls r0, r2
 	ldr r2, _08032724 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	movs r1, 0x40
 	negs r1, r1
 	movs r0, 0x10
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r2, _08032728 @ =gUnknown_202063C
 	ldr r3, _0803272C @ =gUnknown_2023D44
 	ldrb r0, [r5]
@@ -8275,8 +8275,8 @@ _08032734: .4byte gUnknown_3004FE0
 _08032738: .4byte sub_8030538
 	thumb_func_end sub_8032650
 
-	thumb_func_start sub_803273C
-sub_803273C: @ 803273C
+	thumb_func_start PlayerHandlePaletteFade
+PlayerHandlePaletteFade: @ 803273C
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0x1
@@ -8286,12 +8286,12 @@ sub_803273C: @ 803273C
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	bl sub_802E33C
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803273C
+	thumb_func_end PlayerHandlePaletteFade
 
 	thumb_func_start sub_803275C
 sub_803275C: @ 803275C
@@ -8307,19 +8307,19 @@ sub_803275C: @ 803275C
 	ldr r5, _080327A4 @ =gUnknown_2023BC4
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x3
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _080327A8 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080327AC @ =sub_8030778
+	ldr r1, _080327AC @ =CompleteOnSpecialAnimDone
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -8329,11 +8329,11 @@ _0803279C: .4byte gUnknown_2024018
 _080327A0: .4byte gUnknown_2024005
 _080327A4: .4byte gUnknown_2023BC4
 _080327A8: .4byte gUnknown_3004FE0
-_080327AC: .4byte sub_8030778
+_080327AC: .4byte CompleteOnSpecialAnimDone
 	thumb_func_end sub_803275C
 
-	thumb_func_start sub_80327B0
-sub_80327B0: @ 80327B0
+	thumb_func_start PlayerHandleBallThrowAnim
+PlayerHandleBallThrowAnim: @ 80327B0
 	push {r4,r5,lr}
 	ldr r1, _080327F8 @ =gUnknown_2022BC4
 	ldr r5, _080327FC @ =gUnknown_2023BC4
@@ -8351,19 +8351,19 @@ sub_80327B0: @ 80327B0
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x3
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _08032808 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0803280C @ =sub_8030778
+	ldr r1, _0803280C @ =CompleteOnSpecialAnimDone
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -8374,11 +8374,11 @@ _080327FC: .4byte gUnknown_2023BC4
 _08032800: .4byte gUnknown_2024018
 _08032804: .4byte gUnknown_2024005
 _08032808: .4byte gUnknown_3004FE0
-_0803280C: .4byte sub_8030778
-	thumb_func_end sub_80327B0
+_0803280C: .4byte CompleteOnSpecialAnimDone
+	thumb_func_end PlayerHandleBallThrowAnim
 
-	thumb_func_start sub_8032810
-sub_8032810: @ 8032810
+	thumb_func_start PlayerHandlePause
+PlayerHandlePause: @ 8032810
 	push {lr}
 	ldr r1, _08032838 @ =gUnknown_2022BC4
 	ldr r0, _0803283C @ =gUnknown_2023BC4
@@ -8402,14 +8402,14 @@ _0803282E:
 	.align 2, 0
 _08032838: .4byte gUnknown_2022BC4
 _0803283C: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8032810
+	thumb_func_end PlayerHandlePause
 
-	thumb_func_start sub_8032840
-sub_8032840: @ 8032840
+	thumb_func_start PlayerHandleMoveAnimation
+PlayerHandleMoveAnimation: @ 8032840
 	push {r4-r6,lr}
 	ldr r6, _08032924 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	beq _08032852
@@ -8510,7 +8510,7 @@ _08032852:
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_80342A0
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -8551,7 +8551,7 @@ _08032966:
 _0803296C: .4byte gUnknown_2024018
 _08032970: .4byte gUnknown_3004FE0
 _08032974: .4byte sub_8032978
-	thumb_func_end sub_8032840
+	thumb_func_end PlayerHandleMoveAnimation
 
 	thumb_func_start sub_8032978
 sub_8032978: @ 8032978
@@ -8619,7 +8619,7 @@ _080329DA:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _080329FC:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -8677,7 +8677,7 @@ _08032A3A:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r0, [r0]
@@ -8714,7 +8714,7 @@ _08032AB0:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _08032AEC
-	bl sub_8034B40
+	bl CopyAllBattleSpritesInvisibilities
 	ldrb r0, [r6]
 	lsls r2, r0, 9
 	mov r3, r10
@@ -8724,7 +8724,7 @@ _08032AB0:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_8035200
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -8801,7 +8801,7 @@ sub_8032B70: @ 8032B70
 	push {lr}
 	ldr r0, _08032B88 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08032B8C
@@ -8819,7 +8819,7 @@ _08032B90:
 	thumb_func_start sub_8032B94
 sub_8032B94: @ 8032B94
 	push {lr}
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -8905,7 +8905,7 @@ nullsub_14: @ 8032C48
 	thumb_func_start sub_8032C4C
 sub_8032C4C: @ 8032C4C
 	push {lr}
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -8989,7 +8989,7 @@ sub_8032CEC: @ 8032CEC
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, _08032D38 @ =gUnknown_3004FE0
 	ldr r2, _08032D3C @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -9034,7 +9034,7 @@ sub_8032D50: @ 8032D50
 	sub sp, 0x4
 	ldr r0, _08032E00 @ =nullsub_43
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	ldr r3, _08032E04 @ =gUnknown_3004FFC
 	ldr r4, _08032E08 @ =gUnknown_2023BC4
 	ldrb r1, [r4]
@@ -9101,7 +9101,7 @@ _08032DBC:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, _08032E1C @ =gUnknown_3004FE0
 	ldr r2, _08032E08 @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -9133,7 +9133,7 @@ _08032E24: .4byte gUnknown_2024004
 sub_8032E28: @ 8032E28
 	push {lr}
 	sub sp, 0x4
-	bl sub_8035314
+	bl BattleStopLowHpSound
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -9141,7 +9141,7 @@ sub_8032E28: @ 8032E28
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	bl sub_802E33C
 	add sp, 0x4
 	pop {r0}
@@ -9156,7 +9156,7 @@ sub_8032E4C: @ 8032E4C
 	push {r6,r7}
 	sub sp, 0x4
 	movs r0, 0
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	ldr r3, _08032EC4 @ =gUnknown_2022BC4
 	ldr r0, _08032EC8 @ =gUnknown_2023BC4
 	mov r9, r0
@@ -9184,7 +9184,7 @@ sub_8032E4C: @ 8032E4C
 	ldr r4, _08032ED4 @ =gUnknown_2024284
 	adds r0, r4
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -9194,7 +9194,7 @@ sub_8032E4C: @ 8032E4C
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -9203,7 +9203,7 @@ sub_8032E4C: @ 8032E4C
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_8048150
+	bl SetBattleBarStruct
 	b _08032F16
 	.align 2, 0
 _08032EC4: .4byte gUnknown_2022BC4
@@ -9222,7 +9222,7 @@ _08032EDC:
 	ldr r1, _08032F38 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -9231,7 +9231,7 @@ _08032EDC:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_8048150
+	bl SetBattleBarStruct
 	mov r1, r9
 	ldrb r0, [r1]
 	adds r0, r4
@@ -9263,8 +9263,8 @@ _08032F44: .4byte gUnknown_2023BC4
 _08032F48: .4byte sub_802FE24
 	thumb_func_end sub_8032E4C
 
-	thumb_func_start sub_8032F4C
-sub_8032F4C: @ 8032F4C
+	thumb_func_start PlayerHandleExpUpdate
+PlayerHandleExpUpdate: @ 8032F4C
 	push {r4-r7,lr}
 	ldr r5, _08032F78 @ =gUnknown_2022BC4
 	ldr r6, _08032F7C @ =gUnknown_2023BC4
@@ -9280,7 +9280,7 @@ sub_8032F4C: @ 8032F4C
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x63
 	bls _08032F84
 	bl sub_802E33C
@@ -9291,10 +9291,10 @@ _08032F7C: .4byte gUnknown_2023BC4
 _08032F80: .4byte gUnknown_2024284
 _08032F84:
 	movs r0, 0x1
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	ldrb r1, [r6]
 	lsls r1, 9
 	adds r0, r5, 0x2
@@ -9307,7 +9307,7 @@ _08032F84:
 	orrs r4, r0
 	ldr r0, _08032FD8 @ =sub_802FEAC
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08032FDC @ =gUnknown_3005090
@@ -9334,14 +9334,14 @@ _08032FD8: .4byte sub_802FEAC
 _08032FDC: .4byte gUnknown_3005090
 _08032FE0: .4byte gUnknown_3004FE0
 _08032FE4: .4byte nullsub_13
-	thumb_func_end sub_8032F4C
+	thumb_func_end PlayerHandleExpUpdate
 
 	thumb_func_start sub_8032FE8
 sub_8032FE8: @ 8032FE8
 	push {r4,lr}
 	ldr r4, _08033044 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803303C
@@ -9358,7 +9358,7 @@ sub_8032FE8: @ 8032FE8
 	ldr r2, _08033050 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0x9
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r2, [r4]
 	ldr r0, _08033054 @ =gUnknown_2024018
 	ldr r0, [r0]
@@ -9376,7 +9376,7 @@ sub_8032FE8: @ 8032FE8
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0803305C @ =sub_8030AFC
+	ldr r1, _0803305C @ =CompleteOnFinishedStatusAnimation
 	str r1, [r0]
 _0803303C:
 	pop {r4}
@@ -9389,7 +9389,7 @@ _0803304C: .4byte gUnknown_2023BCE
 _08033050: .4byte gUnknown_2024284
 _08033054: .4byte gUnknown_2024018
 _08033058: .4byte gUnknown_3004FE0
-_0803305C: .4byte sub_8030AFC
+_0803305C: .4byte CompleteOnFinishedStatusAnimation
 	thumb_func_end sub_8032FE8
 
 	thumb_func_start sub_8033060
@@ -9397,7 +9397,7 @@ sub_8033060: @ 8033060
 	push {r4,r5,lr}
 	ldr r5, _080330B8 @ =gUnknown_2023BC4
 	ldrb r0, [r5]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080330B0
@@ -9425,12 +9425,12 @@ sub_8033060: @ 8033060
 	ldrb r2, [r3]
 	lsls r2, 24
 	orrs r1, r2
-	bl sub_8033F1C
+	bl InitAndLaunchChosenStatusAnimation
 	ldr r1, _080330C0 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080330C4 @ =sub_8030AFC
+	ldr r1, _080330C4 @ =CompleteOnFinishedStatusAnimation
 	str r1, [r0]
 _080330B0:
 	pop {r4,r5}
@@ -9440,11 +9440,11 @@ _080330B0:
 _080330B8: .4byte gUnknown_2023BC4
 _080330BC: .4byte gUnknown_2022BC4
 _080330C0: .4byte gUnknown_3004FE0
-_080330C4: .4byte sub_8030AFC
+_080330C4: .4byte CompleteOnFinishedStatusAnimation
 	thumb_func_end sub_8033060
 
-	thumb_func_start sub_80330C8
-sub_80330C8: @ 80330C8
+	thumb_func_start PlayerHandleStatusXor
+PlayerHandleStatusXor: @ 80330C8
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -9461,7 +9461,7 @@ sub_80330C8: @ 80330C8
 	ldr r5, _0803312C @ =gUnknown_2024284
 	adds r0, r5
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, _08033130 @ =gUnknown_2022BC4
 	ldrb r1, [r4]
 	lsls r1, 9
@@ -9492,7 +9492,7 @@ _08033124: .4byte gUnknown_2023BCE
 _08033128: .4byte gUnknown_2023BC4
 _0803312C: .4byte gUnknown_2024284
 _08033130: .4byte gUnknown_2022BC4
-	thumb_func_end sub_80330C8
+	thumb_func_end PlayerHandleStatusXor
 
 	thumb_func_start sub_8033134
 sub_8033134: @ 8033134
@@ -9502,8 +9502,8 @@ sub_8033134: @ 8033134
 	bx r0
 	thumb_func_end sub_8033134
 
-	thumb_func_start sub_8033140
-sub_8033140: @ 8033140
+	thumb_func_start PlayerHandleDMA3Transfer
+PlayerHandleDMA3Transfer: @ 8033140
 	push {r4,r5,lr}
 	ldr r3, _080331A4 @ =gUnknown_2022BC4
 	ldr r0, _080331A8 @ =gUnknown_2023BC4
@@ -9589,10 +9589,10 @@ _080331DC:
 _080331E8: .4byte 0x040000d4
 _080331EC: .4byte 0x80000800
 _080331F0: .4byte 0xfffff000
-	thumb_func_end sub_8033140
+	thumb_func_end PlayerHandleDMA3Transfer
 
-	thumb_func_start sub_80331F4
-sub_80331F4: @ 80331F4
+	thumb_func_start PlayerHandlePlayBGM
+PlayerHandlePlayBGM: @ 80331F4
 	push {lr}
 	ldr r2, _0803321C @ =gUnknown_2022BC4
 	ldr r0, _08033220 @ =gUnknown_2023BC4
@@ -9606,14 +9606,14 @@ sub_80331F4: @ 80331F4
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_80722A0
+	bl PlayBGM
 	bl sub_802E33C
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0803321C: .4byte gUnknown_2022BC4
 _08033220: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80331F4
+	thumb_func_end PlayerHandlePlayBGM
 
 	thumb_func_start sub_8033224
 sub_8033224: @ 8033224
@@ -9623,54 +9623,54 @@ sub_8033224: @ 8033224
 	bx r0
 	thumb_func_end sub_8033224
 
-	thumb_func_start sub_8033230
-sub_8033230: @ 8033230
+	thumb_func_start PlayerHandleTwoReturnValues
+PlayerHandleTwoReturnValues: @ 8033230
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	bl sub_802E33C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8033230
+	thumb_func_end PlayerHandleTwoReturnValues
 
-	thumb_func_start sub_8033244
-sub_8033244: @ 8033244
+	thumb_func_start PlayerHandleChosenMonReturnValue
+PlayerHandleChosenMonReturnValue: @ 8033244
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_800E874
+	bl EmitChosenMonReturnValue
 	bl sub_802E33C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8033244
+	thumb_func_end PlayerHandleChosenMonReturnValue
 
-	thumb_func_start sub_8033258
-sub_8033258: @ 8033258
+	thumb_func_start PlayerHandleOneReturnValue
+PlayerHandleOneReturnValue: @ 8033258
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_800E8AC
+	bl EmitOneReturnValue
 	bl sub_802E33C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8033258
+	thumb_func_end PlayerHandleOneReturnValue
 
-	thumb_func_start sub_803326C
-sub_803326C: @ 803326C
+	thumb_func_start PlayerHandleOneReturnValue_Duplicate
+PlayerHandleOneReturnValue_Duplicate: @ 803326C
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_800E8D8
+	bl EmitOneReturnValue_Duplicate
 	bl sub_802E33C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803326C
+	thumb_func_end PlayerHandleOneReturnValue_Duplicate
 
-	thumb_func_start sub_8033280
-sub_8033280: @ 8033280
+	thumb_func_start PlayerHandleCmd37
+PlayerHandleCmd37: @ 8033280
 	push {lr}
 	ldr r2, _08033298 @ =gUnknown_2022870
 	ldrb r1, [r2]
@@ -9683,10 +9683,10 @@ sub_8033280: @ 8033280
 	bx r0
 	.align 2, 0
 _08033298: .4byte gUnknown_2022870
-	thumb_func_end sub_8033280
+	thumb_func_end PlayerHandleCmd37
 
-	thumb_func_start sub_803329C
-sub_803329C: @ 803329C
+	thumb_func_start PlayerHandleCmd38
+PlayerHandleCmd38: @ 803329C
 	push {lr}
 	ldr r3, _080332C8 @ =gUnknown_2022870
 	ldr r1, _080332CC @ =gUnknown_2022BC4
@@ -9711,10 +9711,10 @@ sub_803329C: @ 803329C
 _080332C8: .4byte gUnknown_2022870
 _080332CC: .4byte gUnknown_2022BC4
 _080332D0: .4byte gUnknown_2023BC4
-	thumb_func_end sub_803329C
+	thumb_func_end PlayerHandleCmd38
 
-	thumb_func_start sub_80332D4
-sub_80332D4: @ 80332D4
+	thumb_func_start PlayerHandleCmd39
+PlayerHandleCmd39: @ 80332D4
 	push {lr}
 	ldr r2, _080332E8 @ =gUnknown_2022870
 	ldrb r1, [r2]
@@ -9726,10 +9726,10 @@ sub_80332D4: @ 80332D4
 	bx r0
 	.align 2, 0
 _080332E8: .4byte gUnknown_2022870
-	thumb_func_end sub_80332D4
+	thumb_func_end PlayerHandleCmd39
 
-	thumb_func_start sub_80332EC
-sub_80332EC: @ 80332EC
+	thumb_func_start PlayerHandleCmd40
+PlayerHandleCmd40: @ 80332EC
 	push {lr}
 	ldr r3, _08033310 @ =gUnknown_2022870
 	ldr r1, [r3]
@@ -9748,10 +9748,10 @@ sub_80332EC: @ 80332EC
 	bx r0
 	.align 2, 0
 _08033310: .4byte gUnknown_2022870
-	thumb_func_end sub_80332EC
+	thumb_func_end PlayerHandleCmd40
 
-	thumb_func_start sub_8033314
-sub_8033314: @ 8033314
+	thumb_func_start PlayerHandleHitAnimation
+PlayerHandleHitAnimation: @ 8033314
 	push {r4,lr}
 	ldr r3, _0803333C @ =gUnknown_202063C
 	ldr r2, _08033340 @ =gUnknown_2023D44
@@ -9788,12 +9788,12 @@ _08033348:
 	movs r1, 0
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
-	bl sub_804BE70
+	bl DoHitAnimHealthboxEffect
 	ldr r1, _0803337C @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08033380 @ =sub_80307B4
+	ldr r1, _08033380 @ =DoHitAnimBlinkSpriteEffect
 	str r1, [r0]
 _08033372:
 	pop {r4}
@@ -9802,8 +9802,8 @@ _08033372:
 	.align 2, 0
 _08033378: .4byte gUnknown_2024005
 _0803337C: .4byte gUnknown_3004FE0
-_08033380: .4byte sub_80307B4
-	thumb_func_end sub_8033314
+_08033380: .4byte DoHitAnimBlinkSpriteEffect
+	thumb_func_end PlayerHandleHitAnimation
 
 	thumb_func_start sub_8033384
 sub_8033384: @ 8033384
@@ -9813,12 +9813,12 @@ sub_8033384: @ 8033384
 	bx r0
 	thumb_func_end sub_8033384
 
-	thumb_func_start sub_8033390
-sub_8033390: @ 8033390
+	thumb_func_start PlayerHandlePlaySE
+PlayerHandlePlaySE: @ 8033390
 	push {r4,lr}
 	ldr r4, _080333CC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -9838,7 +9838,7 @@ _080333A4:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	bl sub_802E33C
 	pop {r4}
 	pop {r0}
@@ -9846,7 +9846,7 @@ _080333A4:
 	.align 2, 0
 _080333CC: .4byte gUnknown_2023BC4
 _080333D0: .4byte gUnknown_2022BC4
-	thumb_func_end sub_8033390
+	thumb_func_end PlayerHandlePlaySE
 
 	thumb_func_start sub_80333D4
 sub_80333D4: @ 80333D4
@@ -9863,7 +9863,7 @@ sub_80333D4: @ 80333D4
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_8071C60
+	bl PlayFanfare
 	bl sub_802E33C
 	pop {r0}
 	bx r0
@@ -9872,8 +9872,8 @@ _080333FC: .4byte gUnknown_2022BC4
 _08033400: .4byte gUnknown_2023BC4
 	thumb_func_end sub_80333D4
 
-	thumb_func_start sub_8033404
-sub_8033404: @ 8033404
+	thumb_func_start PlayerHandleFaintingCry
+PlayerHandleFaintingCry: @ 8033404
 	push {lr}
 	ldr r1, _08033438 @ =gUnknown_2023BCE
 	ldr r0, _0803343C @ =gUnknown_2023BC4
@@ -9886,13 +9886,13 @@ sub_8033404: @ 8033404
 	ldr r1, _08033440 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
 	negs r1, r1
 	movs r2, 0x5
-	bl sub_8071E60
+	bl PlayCry3
 	bl sub_802E33C
 	pop {r0}
 	bx r0
@@ -9900,10 +9900,10 @@ sub_8033404: @ 8033404
 _08033438: .4byte gUnknown_2023BCE
 _0803343C: .4byte gUnknown_2023BC4
 _08033440: .4byte gUnknown_2024284
-	thumb_func_end sub_8033404
+	thumb_func_end PlayerHandleFaintingCry
 
-	thumb_func_start sub_8033444
-sub_8033444: @ 8033444
+	thumb_func_start PlayerHandleIntroSlide
+PlayerHandleIntroSlide: @ 8033444
 	push {lr}
 	ldr r1, _0803346C @ =gUnknown_2022BC4
 	ldr r0, _08033470 @ =gUnknown_2023BC4
@@ -9925,10 +9925,10 @@ sub_8033444: @ 8033444
 _0803346C: .4byte gUnknown_2022BC4
 _08033470: .4byte gUnknown_2023BC4
 _08033474: .4byte gUnknown_2023F4C
-	thumb_func_end sub_8033444
+	thumb_func_end PlayerHandleIntroSlide
 
-	thumb_func_start sub_8033478
-sub_8033478: @ 8033478
+	thumb_func_start PlayerHandleIntroTrainerBallThrow
+PlayerHandleIntroTrainerBallThrow: @ 8033478
 	push {r4-r7,lr}
 	ldr r6, _080335B8 @ =gUnknown_2023D44
 	ldr r7, _080335BC @ =gUnknown_2023BC4
@@ -9940,7 +9940,7 @@ sub_8033478: @ 8033478
 	lsls r0, 2
 	ldr r5, _080335C0 @ =gUnknown_202063C
 	adds r0, r5
-	bl sub_80750FC
+	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -9995,7 +9995,7 @@ sub_8033478: @ 8033478
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, _080335CC @ =sub_80335F8
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -10004,9 +10004,9 @@ sub_8033478: @ 8033478
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080335D0 @ =0x0000d6f8
-	bl sub_80089B8
+	bl AllocSpritePalette
 	adds r4, r0, 0
 	lsls r4, 24
 	ldr r1, _080335D4 @ =gUnknown_8239FD4
@@ -10021,7 +10021,7 @@ sub_8033478: @ 8033478
 	lsls r2, 1
 	adds r1, r4, r2
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r0, [r0]
@@ -10034,9 +10034,9 @@ sub_8033478: @ 8033478
 	ands r0, r2
 	orrs r0, r4
 	strb r0, [r1, 0x5]
-	ldr r0, _080335DC @ =sub_8033660
+	ldr r0, _080335DC @ =task05_08033660
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, _080335E0 @ =gUnknown_3005090
@@ -10094,14 +10094,14 @@ _080335CC: .4byte sub_80335F8
 _080335D0: .4byte 0x0000d6f8
 _080335D4: .4byte gUnknown_8239FD4
 _080335D8: .4byte gUnknown_300500C
-_080335DC: .4byte sub_8033660
+_080335DC: .4byte task05_08033660
 _080335E0: .4byte gUnknown_3005090
 _080335E4: .4byte gUnknown_2024018
 _080335E8: .4byte gUnknown_2024000
 _080335EC: .4byte sub_80491B0
 _080335F0: .4byte gUnknown_3004FE0
 _080335F4: .4byte nullsub_13
-	thumb_func_end sub_8033478
+	thumb_func_end PlayerHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_80335F8
 sub_80335F8: @ 80335F8
@@ -10110,15 +10110,15 @@ sub_80335F8: @ 80335F8
 	ldrh r4, [r5, 0x38]
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r5, 0x5]
 	lsrs r0, 4
-	bl sub_8008A20
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	adds r0, r5, 0
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _08033650 @ =gUnknown_2023BCE
 	lsls r0, r4, 1
 	adds r0, r1
@@ -10138,7 +10138,7 @@ sub_80335F8: @ 80335F8
 	ldr r1, _0803365C @ =gUnknown_202063C
 	adds r0, r1
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -10149,8 +10149,8 @@ _08033658: .4byte gUnknown_2023D44
 _0803365C: .4byte gUnknown_202063C
 	thumb_func_end sub_80335F8
 
-	thumb_func_start sub_8033660
-sub_8033660: @ 8033660
+	thumb_func_start task05_08033660
+task05_08033660: @ 8033660
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -10260,7 +10260,7 @@ _08033730:
 	mov r3, r9
 	strb r3, [r2]
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _08033748:
 	pop {r3,r4}
 	mov r8, r3
@@ -10275,10 +10275,10 @@ _0803375C: .4byte gUnknown_2024284
 _08033760: .4byte gUnknown_3004FE0
 _08033764: .4byte gUnknown_2023BC4
 _08033768: .4byte sub_802FA58
-	thumb_func_end sub_8033660
+	thumb_func_end task05_08033660
 
-	thumb_func_start sub_803376C
-sub_803376C: @ 803376C
+	thumb_func_start PlayerHandleDrawPartyStatusSummary
+PlayerHandleDrawPartyStatusSummary: @ 803376C
 	push {r4-r6,lr}
 	ldr r1, _08033794 @ =gUnknown_2022BC4
 	ldr r0, _08033798 @ =gUnknown_2023BC4
@@ -10290,7 +10290,7 @@ sub_803376C: @ 803376C
 	cmp r0, 0
 	beq _0803379C
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803379C
@@ -10369,7 +10369,7 @@ _08033820: .4byte gUnknown_2022BC8
 _08033824: .4byte gUnknown_2024000
 _08033828: .4byte gUnknown_3004FE0
 _0803382C: .4byte sub_8033830
-	thumb_func_end sub_803376C
+	thumb_func_end PlayerHandleDrawPartyStatusSummary
 
 	thumb_func_start sub_8033830
 sub_8033830: @ 8033830
@@ -10409,8 +10409,8 @@ _08033870: .4byte gUnknown_2024018
 _08033874: .4byte gUnknown_2023BC4
 	thumb_func_end sub_8033830
 
-	thumb_func_start sub_8033878
-sub_8033878: @ 8033878
+	thumb_func_start PlayerHandleCmd49
+PlayerHandleCmd49: @ 8033878
 	push {lr}
 	ldr r0, _080338B4 @ =gUnknown_2024018
 	ldr r1, [r0]
@@ -10446,7 +10446,7 @@ _080338B8: .4byte gUnknown_2023BC4
 _080338BC: .4byte gUnknown_3005090
 _080338C0: .4byte gUnknown_2024000
 _080338C4: .4byte sub_80491B0
-	thumb_func_end sub_8033878
+	thumb_func_end PlayerHandleCmd49
 
 	thumb_func_start sub_80338C8
 sub_80338C8: @ 80338C8
@@ -10454,10 +10454,10 @@ sub_80338C8: @ 80338C8
 	ldr r4, _080338E8 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8012258
+	bl dp11b_obj_free
 	bl sub_802E33C
 	pop {r4}
 	pop {r0}
@@ -10466,8 +10466,8 @@ sub_80338C8: @ 80338C8
 _080338E8: .4byte gUnknown_2023BC4
 	thumb_func_end sub_80338C8
 
-	thumb_func_start sub_80338EC
-sub_80338EC: @ 80338EC
+	thumb_func_start PlayerHandleSpriteInvisibility
+PlayerHandleSpriteInvisibility: @ 80338EC
 	push {r4,lr}
 	ldr r4, _0803393C @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -10500,7 +10500,7 @@ sub_80338EC: @ 80338EC
 	orrs r0, r1
 	strb r0, [r2]
 	ldrb r0, [r4]
-	bl sub_8034BB4
+	bl CopyBattleSpriteInvisibility
 _08033932:
 	bl sub_802E33C
 	pop {r4}
@@ -10511,7 +10511,7 @@ _0803393C: .4byte gUnknown_2023BC4
 _08033940: .4byte gUnknown_202063C
 _08033944: .4byte gUnknown_2023D44
 _08033948: .4byte gUnknown_2022BC4
-	thumb_func_end sub_80338EC
+	thumb_func_end PlayerHandleSpriteInvisibility
 
 	thumb_func_start sub_803394C
 sub_803394C: @ 803394C
@@ -10519,7 +10519,7 @@ sub_803394C: @ 803394C
 	sub sp, 0x4
 	ldr r6, _08033990 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080339A4
@@ -10540,7 +10540,7 @@ sub_803394C: @ 803394C
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl sub_803401C
+	bl TryHandleLaunchBattleTableAnimation
 	lsls r0, 24
 	cmp r0, 0
 	beq _08033998
@@ -10554,7 +10554,7 @@ _08033998:
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, _080339B0 @ =sub_8030B2C
+	ldr r0, _080339B0 @ =CompleteOnFinishedBattleAnimation
 	str r0, [r1]
 _080339A4:
 	add sp, 0x4
@@ -10563,7 +10563,7 @@ _080339A4:
 	bx r0
 	.align 2, 0
 _080339AC: .4byte gUnknown_3004FE0
-_080339B0: .4byte sub_8030B2C
+_080339B0: .4byte CompleteOnFinishedBattleAnimation
 	thumb_func_end sub_803394C
 
 	thumb_func_start sub_80339B4
@@ -10591,20 +10591,20 @@ _080339DC:
 	beq _08033A00
 	b _08033A04
 _080339E2:
-	bl sub_8030B5C
+	bl PrintLinkStandbyMsg
 _080339E6:
 	ldr r4, _080339FC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8012258
+	bl dp11b_obj_free
 	b _08033A04
 	.align 2, 0
 _080339FC: .4byte gUnknown_2023BC4
 _08033A00:
-	bl sub_8030B5C
+	bl PrintLinkStandbyMsg
 _08033A04:
 	bl sub_802E33C
 	pop {r4}
@@ -10681,9 +10681,9 @@ sub_8033A78: @ 8033A78
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x5
-	bl sub_8071AB4
+	bl FadeOutMapMusic
 	movs r0, 0x3
-	bl sub_8070E44
+	bl BeginFastPaletteFade
 	bl sub_802E33C
 	ldr r1, _08033ABC @ =gUnknown_3004FE0
 	ldrb r0, [r4]
@@ -10846,10 +10846,10 @@ _08033C4C:
 	b _08033D92
 _08033C54:
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r4, r0, 0
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08033C7C @ =gUnknown_825E45C
 	lsls r4, 24
 	lsrs r4, 22
@@ -10927,10 +10927,10 @@ _08033CE4:
 	b _08033D90
 _08033CEA:
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08033D10 @ =gUnknown_825E45C
 	lsls r4, 24
 	lsrs r4, 22
@@ -10947,12 +10947,12 @@ _08033CEA:
 _08033D10: .4byte gUnknown_825E45C
 _08033D14:
 	ldrb r0, [r3]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08033D34 @ =gUnknown_825E45C
 	lsls r0, 24
 	lsrs r0, 22
@@ -10974,19 +10974,19 @@ _08033D42:
 _08033D48: .4byte gUnknown_825E45C
 _08033D4C:
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r5, r0, 0
 	ldr r0, _08033DAC @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r4, r0, 0
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r3, _08033DB0 @ =gUnknown_825E45C
 	lsls r5, 24
 	lsrs r5, 22
@@ -11012,7 +11012,7 @@ _08033D92:
 	movs r1, 0x8
 	adds r2, r6, 0
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _08033DA2:
 	add sp, 0x4
 	pop {r4-r6}

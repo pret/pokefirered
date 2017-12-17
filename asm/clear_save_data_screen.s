@@ -8,10 +8,10 @@
 	thumb_func_start sub_80F5574
 sub_80F5574: @ 80F5574
 	push {lr}
-	bl sub_8077578
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl RunTasks
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F5574
@@ -19,9 +19,9 @@ sub_80F5574: @ 80F5574
 	thumb_func_start sub_80F558C
 sub_80F558C: @ 80F558C
 	push {lr}
-	bl sub_8007320
-	bl sub_8007610
-	bl sub_8070474
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F558C
@@ -31,7 +31,7 @@ sub_80F55A0: @ 80F55A0
 	push {r4,lr}
 	ldr r4, _080F55D0 @ =gUnknown_203AB54
 	movs r0, 0x4
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	movs r1, 0
 	strb r1, [r0, 0x1]
@@ -42,9 +42,9 @@ sub_80F55A0: @ 80F55A0
 	bl sub_80F580C
 	ldr r0, _080F55D4 @ =sub_80F55DC
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r0, _080F55D8 @ =sub_80F5574
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -88,7 +88,7 @@ _080F5618:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	b _080F56E2
 _080F562A:
 	ldr r0, _080F5640 @ =gUnknown_2037AB8
@@ -98,7 +98,7 @@ _080F562A:
 	cmp r0, 0
 	bne _080F56EC
 	movs r0, 0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	b _080F56E2
 	.align 2, 0
 _080F5640: .4byte gUnknown_2037AB8
@@ -120,7 +120,7 @@ _080F5660:
 	movs r1, 0x1
 	movs r2, 0x1
 	movs r3, 0xF
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	movs r0, 0x1
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -154,7 +154,7 @@ _080F569C:
 	movs r3, 0x2
 	bl sub_810FF60
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _080F56E2
 	.align 2, 0
 _080F56BC: .4byte gUnknown_841EE68
@@ -164,9 +164,9 @@ _080F56C0:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _080F56F8 @ =sub_80F558C
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldr r1, _080F56FC @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -228,7 +228,7 @@ _080F5744:
 	bl sub_80722CC
 	movs r0, 0x1
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0x1
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -287,7 +287,7 @@ _080F57B8:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x2]
 	adds r0, 0x1
@@ -306,10 +306,10 @@ _080F57D4:
 	bne _080F57FE
 	bl sub_81100E8
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_8003ECC
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	str r4, [r5]
 	bl sub_80008D8
 _080F57FE:
@@ -324,9 +324,9 @@ _080F5808: .4byte gUnknown_2037AB8
 	thumb_func_start sub_80F580C
 sub_80F580C: @ 80F580C
 	push {lr}
-	bl sub_8006B10
-	bl sub_8070528
-	bl sub_80773BC
+	bl ResetSpriteData
+	bl ResetPaletteFade
+	bl ResetTasks
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F580C
@@ -402,10 +402,10 @@ _080F5846:
 	ldr r0, [r2, 0x8]
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
 	bl sub_8001618
 	ldr r1, _080F5944 @ =gUnknown_841EE64
@@ -415,44 +415,44 @@ _080F5846:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	ldr r0, _080F5948 @ =gUnknown_841EE68
 	bl sub_8003B24
 	bl sub_8002C28
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3

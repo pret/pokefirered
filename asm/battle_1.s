@@ -8,12 +8,12 @@
 	thumb_func_start sub_800F1E8
 sub_800F1E8: @ 800F1E8
 	push {lr}
-	bl sub_8006B10
+	bl ResetSpriteData
 	ldr r0, _0800F21C @ =gUnknown_824EFF0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0800F220 @ =gUnknown_202063C
@@ -27,7 +27,7 @@ sub_800F1E8: @ 800F1E8
 	orrs r0, r2
 	strb r0, [r1]
 	ldr r0, _0800F224 @ =sub_800F228
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -39,8 +39,8 @@ _0800F224: .4byte sub_800F228
 	thumb_func_start sub_800F228
 sub_800F228: @ 800F228
 	push {lr}
-	bl sub_8006B5C
-	bl sub_8006BA8
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_800F228
@@ -87,18 +87,18 @@ _0800F26C:
 	adds r0, r4, r5
 	ldr r0, [r0]
 	ldr r1, _0800F2A4 @ =0x06008000
-	bl sub_800EBC0
+	bl LZDecompressVram
 	adds r0, r5, 0x4
 	adds r0, r4, r0
 	ldr r0, [r0]
 	ldr r1, _0800F2A8 @ =0x0600d000
-	bl sub_800EBC0
+	bl LZDecompressVram
 	adds r5, 0x10
 	adds r4, r5
 	ldr r0, [r4]
 	movs r1, 0x20
 	movs r2, 0x60
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -126,12 +126,12 @@ _0800F2B8:
 	adds r0, r4, r0
 	ldr r0, [r0]
 	ldr r1, _0800F2E4 @ =0x06004000
-	bl sub_800EBC0
+	bl LZDecompressVram
 	adds r5, 0xC
 	adds r4, r5
 	ldr r0, [r4]
 	ldr r1, _0800F2E8 @ =0x0600e000
-	bl sub_800EBC0
+	bl LZDecompressVram
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -197,20 +197,20 @@ _0800F348: .4byte gUnknown_8248330
 sub_800F34C: @ 800F34C
 	push {lr}
 	movs r0, 0xC5
-	bl sub_8000B68
+	bl EnableInterrupts
 	bl sub_800F324
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _0800F37C @ =0x0000b040
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -297,18 +297,18 @@ sub_800F420: @ 800F420
 	ldr r0, _0800F454 @ =gUnknown_8D00000
 	movs r1, 0xC0
 	lsls r1, 19
-	bl sub_800EBC0
+	bl LZDecompressVram
 	ldr r1, _0800F458 @ =gUnknown_8D0051C
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldr r0, _0800F45C @ =gUnknown_8D004D8
 	movs r1, 0
 	movs r2, 0x40
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	bl sub_800F380
 	bl sub_800F40C
 	pop {r0}
@@ -440,9 +440,9 @@ _0800F50E:
 	add r1, sp, 0xC
 	mov r2, r12
 	mov r3, r9
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	mov r0, r8
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _0800F5B6
 	.align 2, 0
 _0800F544: .4byte 0x00006001
@@ -498,9 +498,9 @@ _0800F582:
 	add r1, sp, 0xC
 	mov r2, r12
 	mov r3, r9
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	mov r0, r8
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _0800F5B6:
 	add sp, 0x18
 	pop {r3,r4}
@@ -836,7 +836,7 @@ _0800F848: .4byte gUnknown_202273C
 _0800F84C: .4byte gUnknown_3005090
 _0800F850:
 	ldr r0, _0800F8CC @ =0x00002710
-	bl sub_80089B8
+	bl AllocSpritePalette
 	lsls r0, 24
 	ldr r2, _0800F8D0 @ =gUnknown_20371F8
 	lsrs r0, 19
@@ -852,7 +852,7 @@ _0800F850:
 	movs r1, 0x6C
 	movs r2, 0x50
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _0800F8E4 @ =gUnknown_2023FE8
 	ldr r1, [r4]
 	adds r1, 0x7D
@@ -861,7 +861,7 @@ _0800F850:
 	movs r1, 0x84
 	movs r2, 0x50
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r1, [r4]
 	adds r1, 0x7E
 	strb r0, [r1]
@@ -910,7 +910,7 @@ _0800F8F0:
 	beq _0800F958
 	ldr r4, _0800F944 @ =gUnknown_2022978
 	ldrh r0, [r5, 0xA]
-	bl sub_8044E6C
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -925,7 +925,7 @@ _0800F90A:
 	strh r0, [r4]
 	ldr r4, _0800F948 @ =gUnknown_202297C
 	ldrh r0, [r5, 0xC]
-	bl sub_8044E6C
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -954,7 +954,7 @@ _0800F954: .4byte gUnknown_202297E
 _0800F958:
 	ldr r4, _0800F9E8 @ =gUnknown_2022978
 	ldrh r0, [r5, 0xA]
-	bl sub_8044E6C
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -969,7 +969,7 @@ _0800F96A:
 	strh r0, [r4]
 	ldr r4, _0800F9EC @ =gUnknown_202297A
 	ldrh r0, [r5, 0xA]
-	bl sub_8044EB0
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -981,7 +981,7 @@ _0800F988:
 	strh r0, [r4]
 	ldr r4, _0800F9F0 @ =gUnknown_202297C
 	ldrh r0, [r5, 0xC]
-	bl sub_8044E6C
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -996,7 +996,7 @@ _0800F9A0:
 	strh r0, [r4]
 	ldr r4, _0800F9F4 @ =gUnknown_202297E
 	ldrh r0, [r5, 0xC]
-	bl sub_8044EB0
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1040,7 +1040,7 @@ _0800FA08:
 	movs r0, 0x71
 	bl sub_80722CC
 	adds r0, r7, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r4, _0800FAD0 @ =gUnknown_202063C
 	ldr r5, _0800FAD4 @ =gUnknown_2023FE8
 	ldr r0, [r5]
@@ -1154,42 +1154,42 @@ sub_800FAE0: @ 800FAE0
 	beq _0800FB94
 	ldr r0, _0800FB68 @ =gUnknown_8E7737C
 	ldr r1, _0800FB6C @ =0x06004000
-	bl sub_800EBC0
+	bl LZDecompressVram
 	ldr r0, _0800FB70 @ =gUnknown_8E77598
 	ldr r1, _0800FB74 @ =0x06010000
-	bl sub_800EBC0
+	bl LZDecompressVram
 	ldr r0, _0800FB78 @ =gUnknown_8E77570
 	movs r1, 0x60
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80019E4
+	bl SetBgAttribute
 	ldr r1, _0800FB7C @ =0x00005c04
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _0800FB80 @ =gUnknown_8E77464
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	movs r0, 0x2
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x48
 	movs r1, 0x36
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0x36
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _0800FB84 @ =gUnknown_202297A
 	ldr r2, _0800FB88 @ =0x0000ff5c
 	adds r1, r2, 0
@@ -1270,7 +1270,7 @@ _0800FBF8:
 _0800FC00: .4byte gUnknown_823EAC8
 _0800FC04: .4byte gUnknown_20386AE
 _0800FC08:
-	bl sub_8056288
+	bl sav1_map_get_battletype
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800FC20
@@ -1341,7 +1341,7 @@ _0800FC88:
 	movs r0, 0x13
 	b _0800FCAA
 _0800FC90:
-	bl sub_8056288
+	bl sav1_map_get_battletype
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -1388,7 +1388,7 @@ _0800FCEC:
 	ldr r0, _0800FCF8 @ =gUnknown_8D00000
 	movs r1, 0xC0
 	lsls r1, 19
-	bl sub_800EBC0
+	bl LZDecompressVram
 	b _0800FD94
 	.align 2, 0
 _0800FCF8: .4byte gUnknown_8D00000
@@ -1397,9 +1397,9 @@ _0800FCFC:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _0800FD94
 	.align 2, 0
 _0800FD10: .4byte gUnknown_8D0051C
@@ -1407,7 +1407,7 @@ _0800FD14:
 	ldr r0, _0800FD20 @ =gUnknown_8D004D8
 	movs r1, 0
 	movs r2, 0x40
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	b _0800FD94
 	.align 2, 0
 _0800FD20: .4byte gUnknown_8D004D8
@@ -1422,7 +1422,7 @@ _0800FD24:
 	adds r0, r1
 	ldr r0, [r0]
 	ldr r1, _0800FD60 @ =0x06008000
-	bl sub_800EBC0
+	bl LZDecompressVram
 _0800FD3E:
 	bl sub_800FC2C
 	lsls r0, 24
@@ -1435,7 +1435,7 @@ _0800FD3E:
 	adds r0, r1
 	ldr r0, [r0]
 	ldr r1, _0800FD64 @ =0x0600d000
-	bl sub_800EBC0
+	bl LZDecompressVram
 	b _0800FD94
 	.align 2, 0
 _0800FD5C: .4byte gUnknown_824EE34
@@ -1454,7 +1454,7 @@ _0800FD68:
 	ldr r0, [r0]
 	movs r1, 0x20
 	movs r2, 0x60
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	b _0800FD94
 	.align 2, 0
 _0800FD88: .4byte gUnknown_824EE34

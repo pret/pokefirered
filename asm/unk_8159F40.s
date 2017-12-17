@@ -21,7 +21,7 @@ sub_8159F40: @ 8159F40
 	lsls r0, 9
 	str r0, [r1]
 	bl sub_803DA14
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	ldr r1, _08159F94 @ =gUnknown_84792D0
 	ldr r0, _08159F98 @ =gUnknown_20370C0
 	ldrh r0, [r0]
@@ -72,7 +72,7 @@ _08159FAE:
 	str r0, [sp, 0x8]
 	adds r0, r6, 0
 	movs r3, 0
-	bl sub_803DE00
+	bl CreateMonWithGenderNatureLetter
 	movs r5, 0
 	adds r7, 0x1
 	mov r0, r8
@@ -83,7 +83,7 @@ _08159FD4:
 	lsls r2, r5, 24
 	lsrs r2, 24
 	adds r0, r6, 0
-	bl sub_803E964
+	bl SetMonMoveSlot
 	adds r4, 0x2
 	adds r5, 0x1
 	cmp r5, 0x3
@@ -792,7 +792,7 @@ sub_815A540: @ 815A540
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -806,7 +806,7 @@ sub_815A540: @ 815A540
 	cmp r0, 0
 	bne _0815A5A4
 	movs r0, 0x8
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815A5A4
@@ -825,7 +825,7 @@ sub_815A540: @ 815A540
 	lsls r0, 2
 	ldr r1, _0815A5B8 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 _0815A5A4:
 	add sp, 0x4
 	pop {r4}

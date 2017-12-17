@@ -60,17 +60,17 @@ _080CA34A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080CA388
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _080CA388
 	adds r0, r4, 0
 	movs r1, 0x43
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _080CA388
 	movs r0, 0x1
@@ -92,7 +92,7 @@ _080CA388:
 	bl sub_806E680
 _080CA39E:
 	ldr r0, _080CA3C0 @ =sub_80F1EFC
-	bl sub_8000544
+	bl SetMainCallback2
 	movs r0, 0
 	add sp, 0x4
 	pop {r4-r7}
@@ -110,7 +110,7 @@ _080CA3C0: .4byte sub_80F1EFC
 sub_80CA3C4: @ 80CA3C4
 	push {lr}
 	ldr r0, _080CA3D4 @ =sub_80566A4
-	bl sub_8000544
+	bl SetMainCallback2
 	movs r0, 0
 	pop {r1}
 	bx r1

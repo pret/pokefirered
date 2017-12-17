@@ -30,7 +30,7 @@ _0810C686:
 	bls _0810C686
 	adds r5, r7, 0
 	ldr r0, _0810C6C8 @ =0x00000434
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5]
 	bl sub_810C808
 	bl sub_810C96C
@@ -40,7 +40,7 @@ _0810C686:
 	cmp r0, 0
 	bne _0810C6D0
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	ldr r2, _0810C6CC @ =gUnknown_81C137C
 	b _0810C6DC
 	.align 2, 0
@@ -52,13 +52,13 @@ _0810C6D0:
 	cmp r0, 0x1
 	bne _0810C6F0
 	ldr r0, [r7]
-	bl sub_8002BC4
+	bl Free
 	ldr r2, _0810C6E8 @ =gUnknown_81C13D6
 _0810C6DC:
 	ldr r3, _0810C6EC @ =sub_80A1E0C
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 	b _0810C718
 	.align 2, 0
 _0810C6E8: .4byte gUnknown_81C13D6
@@ -73,7 +73,7 @@ _0810C6F0:
 	movs r1, 0
 	bl sub_80A2294
 	movs r0, 0x41
-	bl sub_8083444
+	bl FieldEffectStart
 	ldr r1, _0810C728 @ =gUnknown_3005090
 	adds r0, r6, r4
 	lsls r0, 3
@@ -150,7 +150,7 @@ sub_810C760: @ 810C760
 	strh r0, [r4, 0x4]
 _0810C794:
 	movs r0, 0x41
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -176,7 +176,7 @@ _0810C794:
 	ldrb r2, [r0, 0x4]
 	ldr r3, _0810C7FC @ =gUnknown_8453F5C
 	movs r0, 0xFF
-	bl sub_8097434
+	bl ScriptMovement_StartObjectMovementScript
 	ldr r1, _0810C800 @ =gUnknown_3005090
 	lsls r0, r5, 2
 	adds r0, r5
@@ -253,7 +253,7 @@ _0810C846:
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	ldr r0, [r7]
 	adds r0, r4
 	ldrb r1, [r6]
@@ -326,7 +326,7 @@ sub_810C8EC: @ 810C8EC
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
 	movs r0, 0xFF
-	bl sub_809748C
+	bl ScriptMovement_IsObjectMovementFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810C962
@@ -343,7 +343,7 @@ sub_810C8EC: @ 810C8EC
 	ldr r3, _0810C938 @ =sub_80A1E0C
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 	b _0810C95A
 	.align 2, 0
 _0810C928: .4byte gUnknown_3005008
@@ -360,13 +360,13 @@ _0810C944:
 	movs r1, 0x1
 	bl sub_80F6F54
 	bl sub_80696C0
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _0810C95A:
 	ldr r0, _0810C968 @ =gUnknown_203ADB8
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 _0810C962:
 	pop {r4,r5}
 	pop {r0}
@@ -451,7 +451,7 @@ _0810C9EC:
 	adds r0, r5
 	ldrh r0, [r0, 0x4]
 	mov r8, r0
-	bl sub_8080424
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810CA20
@@ -492,7 +492,7 @@ _0810CA20:
 _0810CA48: .4byte gUnknown_8453F62
 _0810CA4C: .4byte 0x00000431
 _0810CA50:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -546,7 +546,7 @@ _0810CAA0:
 	lsls r0, 2
 	ldr r1, _0810CB5C @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldr r0, [r6]
 	adds r0, r5
 	ldr r1, _0810CB60 @ =gUnknown_8453F64
@@ -700,7 +700,7 @@ _0810CBDE:
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -943,7 +943,7 @@ sub_810CDB4: @ 810CDB4
 	lsls r0, r1, 4
 	adds r0, r4
 	ldrh r0, [r0]
-	bl sub_8080424
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810CDDE
@@ -1161,7 +1161,7 @@ _0810CF4E:
 	thumb_func_start sub_810CF54
 sub_810CF54: @ 810CF54
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10
@@ -1366,7 +1366,7 @@ sub_810D0FC: @ 810D0FC
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r1, sp
 	mov r0, sp
 	ldrh r0, [r0]
@@ -1441,7 +1441,7 @@ _0810D18C:
 	cmp r0, r7
 	beq _0810D1A2
 	ldrh r0, [r4]
-	bl sub_8080424
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810D1A2
@@ -1497,7 +1497,7 @@ _0810D1DE:
 	ldr r0, [r6]
 	adds r0, r4
 	ldrh r0, [r0, 0x4]
-	bl sub_8080424
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1552,14 +1552,14 @@ sub_810D24C: @ 810D24C
 	lsls r0, 2
 	ldr r1, _0810D278 @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_80689F4
+	bl npc_sync_anim_pause_bits
 	ldrb r0, [r4, 0x6]
 	ldr r1, _0810D27C @ =gUnknown_3005008
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	adds r3, r5, 0
-	bl sub_8097434
+	bl ScriptMovement_StartObjectMovementScript
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1705,7 +1705,7 @@ _0810D340:
 	adds r0, r7
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl sub_8063610
+	bl npc_set_running_behaviour_etc
 _0810D380:
 	ldr r0, [r5]
 	movs r3, 0x84

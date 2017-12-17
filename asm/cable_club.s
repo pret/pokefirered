@@ -14,14 +14,14 @@ sub_8080748: @ 8080748
 	lsrs r5, r1, 24
 	ldr r4, _08080784 @ =sub_80809F8
 	adds r0, r4, 0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	bne _0808077C
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08080788 @ =gUnknown_3005090
@@ -361,7 +361,7 @@ sub_80809C4: @ 80809C4
 	movs r0, 0x2
 	bl sub_800A474
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080809EE:
 	pop {r4}
 	pop {r0}
@@ -447,7 +447,7 @@ sub_8080A4C: @ 8080A4C
 	movs r0, 0x15
 	bl sub_80722CC
 	ldr r0, _08080AA8 @ =gUnknown_81BC4CE
-	bl sub_8069464
+	bl ShowFieldAutoScrollMessage
 	ldr r0, _08080AAC @ =sub_8080AD0
 	b _08080ABE
 	.align 2, 0
@@ -458,7 +458,7 @@ _08080AB0:
 	movs r0, 0x16
 	bl sub_80722CC
 	ldr r0, _08080AC8 @ =gUnknown_81BC54C
-	bl sub_8069464
+	bl ShowFieldAutoScrollMessage
 	ldr r0, _08080ACC @ =sub_8080CDC
 _08080ABE:
 	str r0, [r4]
@@ -488,7 +488,7 @@ sub_8080AD0: @ 8080AD0
 	bl sub_80808BC
 	cmp r0, 0x1
 	beq _08080B10
-	bl sub_8069510
+	bl textbox_any_visible
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -565,7 +565,7 @@ sub_8080B20: @ 8080B20
 	movs r3, 0x1
 	bl sub_8008E78
 	ldr r0, _08080BC0 @ =gUnknown_81BC50D
-	bl sub_8069464
+	bl ShowFieldAutoScrollMessage
 	mov r0, r9
 	subs r0, 0x8
 	add r0, r8
@@ -604,7 +604,7 @@ sub_8080BC8: @ 8080BC8
 	bl sub_80808BC
 	cmp r0, 0x1
 	beq _08080C5C
-	bl sub_8069510
+	bl textbox_any_visible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08080C5C
@@ -623,7 +623,7 @@ sub_8080BC8: @ 8080BC8
 	beq _08080C3C
 _08080C16:
 	ldr r0, _08080C30 @ =gUnknown_81BC4CE
-	bl sub_8069464
+	bl ShowFieldAutoScrollMessage
 	ldr r1, _08080C34 @ =gUnknown_3005090
 	lsls r0, r5, 2
 	adds r0, r5
@@ -752,7 +752,7 @@ sub_8080CDC: @ 8080CDC
 	cmp r0, 0x1
 	bhi _08080D3C
 	bl sub_800AAC0
-	bl sub_80694F4
+	bl HideFieldMessageBox
 	ldr r0, _08080D38 @ =sub_8080F78
 	b _08080D72
 	.align 2, 0
@@ -766,7 +766,7 @@ _08080D3C:
 	bne _08080D54
 _08080D44:
 	bl sub_80098B8
-	bl sub_80694F4
+	bl HideFieldMessageBox
 	ldr r0, _08080D50 @ =sub_8080F78
 	b _08080D72
 	.align 2, 0
@@ -775,7 +775,7 @@ _08080D54:
 	bl sub_800AA38
 	ldr r4, _08080D7C @ =gUnknown_3005030
 	strb r0, [r4]
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r1, _08080D80 @ =gUnknown_300502C
 	strb r0, [r1]
 	ldrb r0, [r4]
@@ -862,7 +862,7 @@ _08080DF6:
 _08080DFE:
 	bl sub_80098B8
 _08080E02:
-	bl sub_80694F4
+	bl HideFieldMessageBox
 	ldr r0, _08080E18 @ =gUnknown_3005090
 	lsls r1, r5, 2
 	adds r1, r5
@@ -878,7 +878,7 @@ _08080E20:
 	bl sub_800AA38
 	ldr r4, _08080E58 @ =gUnknown_3005030
 	strb r0, [r4]
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r1, _08080E5C @ =gUnknown_300502C
 	strb r0, [r1]
 	ldrb r0, [r4]
@@ -917,7 +917,7 @@ sub_8080E6C: @ 8080E6C
 	bl sub_80808BC
 	cmp r0, 0x1
 	beq _08080F66
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_800A8A4
 	lsls r4, 24
@@ -982,8 +982,8 @@ _08080EF8:
 	bcc _08080E9A
 	movs r0, 0
 	bl sub_800B09C
-	bl sub_800A550
-	bl sub_80694F4
+	bl ResetBlockReceivedFlags
+	bl HideFieldMessageBox
 	ldr r0, _08080F44 @ =gUnknown_20370D0
 	ldrh r0, [r0]
 	cmp r0, 0x1
@@ -998,9 +998,9 @@ _08080EF8:
 	adds r1, r0
 	ldrh r0, [r1, 0x12]
 	bl sub_80807E8
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	adds r0, r7, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _08080F66
 	.align 2, 0
 _08080F3C: .4byte gUnknown_2022118
@@ -1045,11 +1045,11 @@ sub_8080F78: @ 8080F78
 	adds r4, r0
 	ldrh r0, [r4, 0x12]
 	bl sub_80807E8
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	ldrb r0, [r4, 0x12]
 	bl sub_8003E3C
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _08080FA6:
 	pop {r4,r5}
 	pop {r0}
@@ -1075,10 +1075,10 @@ sub_8080FB4: @ 8080FB4
 	adds r0, r1
 	ldrh r0, [r0, 0x12]
 	bl sub_80807E8
-	bl sub_80694F4
-	bl sub_8069B34
+	bl HideFieldMessageBox
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1103,10 +1103,10 @@ sub_8080FF0: @ 8080FF0
 	adds r0, r1
 	ldrh r0, [r0, 0x12]
 	bl sub_80807E8
-	bl sub_80694F4
-	bl sub_8069B34
+	bl HideFieldMessageBox
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1275,7 +1275,7 @@ _0808114C: .4byte gUnknown_2022B4C
 sub_8081150: @ 8081150
 	push {lr}
 	ldr r0, _08081164 @ =sub_80811FC
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08081168
@@ -1341,7 +1341,7 @@ _080811DC:
 _080811E0:
 	ldr r0, _080811F8 @ =sub_80811FC
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 _080811EC:
@@ -1371,7 +1371,7 @@ sub_80811FC: @ 80811FC
 	bl sub_800A270
 	ldr r0, _0808122C @ =sub_8081A90
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	b _0808123C
 	.align 2, 0
 _08081228: .4byte gUnknown_3005098
@@ -1484,7 +1484,7 @@ sub_80812D8: @ 80812D8
 	bl sub_800A9A4
 	bl sub_8009FE8
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08081300:
 	pop {r4}
 	pop {r0}
@@ -1536,7 +1536,7 @@ _08081344:
 _0808135C:
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	ldr r1, _08081374 @ =gUnknown_202271A
 	ldr r2, _08081378 @ =0x00002211
 	adds r0, r2, 0
@@ -1638,12 +1638,12 @@ _0808141A:
 	adds r0, r2, 0
 	strh r0, [r1]
 	ldr r0, _08081448 @ =sub_800FD9C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r1, _0808144C @ =gUnknown_30030F0
 	ldr r0, _08081450 @ =sub_8081668
 	str r0, [r1, 0x8]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _0808143A:
 	pop {r4,r5}
 	pop {r0}
@@ -1693,7 +1693,7 @@ _08081480:
 _080814A0:
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	ldr r0, _080814BC @ =gUnknown_202271A
 	ldr r2, _080814C0 @ =0x00002211
 	adds r1, r2, 0
@@ -1723,14 +1723,14 @@ _080814DC:
 	ldr r1, _080814EC @ =gUnknown_2022720
 	movs r0, 0
 	movs r2, 0x1C
-	bl sub_800A448
+	bl SendBlock
 	movs r0, 0x3
 	strh r0, [r6]
 	b _0808160A
 	.align 2, 0
 _080814EC: .4byte gUnknown_2022720
 _080814F0:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_800A8D4
 	lsls r4, 24
@@ -1759,7 +1759,7 @@ _08081510:
 	bl sub_800B284
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_800A588
+	bl ResetBlockReceivedFlag
 	adds r5, 0x1C
 	adds r4, 0x1
 _08081536:
@@ -1861,12 +1861,12 @@ _080815EA:
 	adds r0, r3, 0
 	strh r0, [r1]
 	ldr r0, _08081618 @ =sub_800FD9C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r1, _0808161C @ =gUnknown_30030F0
 	ldr r0, _08081620 @ =sub_8081668
 	str r0, [r1, 0x8]
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _0808160A:
 	pop {r4-r7}
 	pop {r0}
@@ -1905,14 +1905,14 @@ _0808164C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808165C
-	ldr r0, _08081664 @ =sub_80567DC
-	bl sub_8000544
+	ldr r0, _08081664 @ =c2_exit_to_overworld_2_switch
+	bl SetMainCallback2
 _0808165C:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081664: .4byte sub_80567DC
+_08081664: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8081624
 
 	thumb_func_start sub_8081668
@@ -1956,7 +1956,7 @@ _080816C0: .4byte gUnknown_3003F3C
 _080816C4: .4byte gUnknown_2023E8A
 _080816C8:
 	ldr r4, _080816E8 @ =gUnknown_202273C
-	bl sub_800A404
+	bl GetMultiplayerId
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -1973,7 +1973,7 @@ _080816C8:
 _080816E8: .4byte gUnknown_202273C
 _080816EC:
 	ldr r4, _08081718 @ =gUnknown_202273C
-	bl sub_800A404
+	bl GetMultiplayerId
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -1998,17 +1998,17 @@ _0808171C: .4byte gUnknown_30030F0
 _08081720: .4byte sub_8081624
 _08081724:
 	ldr r1, _08081738 @ =gUnknown_30030F0
-	ldr r0, _0808173C @ =sub_8056854
+	ldr r0, _0808173C @ =c2_8056854
 _08081728:
 	str r0, [r1, 0x8]
 	ldr r0, _08081740 @ =sub_806FB7C
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08081738: .4byte gUnknown_30030F0
-_0808173C: .4byte sub_8056854
+_0808173C: .4byte c2_8056854
 _08081740: .4byte sub_806FB7C
 	thumb_func_end sub_8081668
 
@@ -2029,7 +2029,7 @@ _08081758:
 	bl sub_804C440
 _08081760:
 	movs r0, 0x7F
-	bl sub_8055454
+	bl copy_saved_warp2_bank_and_enter_x_to_warp1
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2080,7 +2080,7 @@ _080817AE:
 	.align 2, 0
 _080817BC: .4byte gUnknown_81BC4AC
 _080817C0:
-	bl sub_806951C
+	bl IsFieldMessageBoxHidden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08081820
@@ -2103,12 +2103,12 @@ _080817E0:
 	beq _08081806
 	b _08081820
 _080817F2:
-	bl sub_80694F4
+	bl HideFieldMessageBox
 	movs r0, 0
 	strh r0, [r5, 0x8]
 	bl sub_8057F70
 	adds r0, r4, 0
-	bl sub_807761C
+	bl SwitchTaskToFollowupFunc
 	b _08081820
 _08081806:
 	movs r0, 0x3
@@ -2119,8 +2119,8 @@ _0808180C:
 	movs r0, 0x1
 	bl sub_80F771C
 	adds r0, r4, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 _08081820:
 	pop {r4,r5}
 	pop {r0}
@@ -2134,13 +2134,13 @@ sub_8081828: @ 8081828
 	ldr r4, _0808184C @ =sub_808177C
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80775E8
-	bl sub_8069B28
+	bl SetTaskFuncWithFollowupFunc
+	bl ScriptContext1_Stop
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2176,10 +2176,10 @@ _08081878:
 	beq _080818C4
 	b _080818D8
 _08081882:
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	bl sub_800A068
 	b _080818B8
 _08081894:
@@ -2212,9 +2212,9 @@ _080818C4:
 	cmp r0, 0
 	bne _080818D8
 	ldr r0, _080818E4 @ =sub_804C718
-	bl sub_8000544
+	bl SetMainCallback2
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080818D8:
 	pop {r4,r5}
 	pop {r0}
@@ -2252,10 +2252,10 @@ _08081910:
 	beq _0808195C
 	b _08081970
 _0808191A:
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	bl sub_80F985C
 	b _08081950
 _0808192C:
@@ -2289,7 +2289,7 @@ _0808195C:
 	beq _08081970
 	bl sub_8117118
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _08081970:
 	pop {r4,r5}
 	pop {r0}
@@ -2324,7 +2324,7 @@ sub_80819A4: @ 80819A4
 	push {lr}
 	ldr r0, _080819B4 @ =sub_8081850
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2335,7 +2335,7 @@ _080819B4: .4byte sub_8081850
 sub_80819B8: @ 80819B8
 	push {lr}
 	bl sub_80819A4
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80819B8
@@ -2374,8 +2374,8 @@ sub_8081A04: @ 8081A04
 	push {lr}
 	ldr r0, _08081A18 @ =sub_808177C
 	movs r1, 0x50
-	bl sub_807741C
-	bl sub_8069B28
+	bl CreateTask
+	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2387,13 +2387,13 @@ sub_8081A1C: @ 8081A1C
 	push {lr}
 	ldr r0, _08081A2C @ =gUnknown_20370C4
 	ldrb r0, [r0]
-	ldr r1, _08081A30 @ =sub_80568E0
+	ldr r1, _08081A30 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl sub_808B700
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08081A2C: .4byte gUnknown_20370C4
-_08081A30: .4byte sub_80568E0
+_08081A30: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_8081A1C
 
 	thumb_func_start sub_8081A34
@@ -2410,7 +2410,7 @@ sub_8081A34: @ 8081A34
 	lsls r1, 2
 	ldr r2, _08081A7C @ =gUnknown_2022744
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_808B1BC
 	lsls r0, 24
@@ -2423,7 +2423,7 @@ sub_8081A34: @ 8081A34
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x1
 	b _08081A8A
 	.align 2, 0
@@ -2460,24 +2460,24 @@ sub_8081A90: @ 8081A90
 	cmp r1, r0
 	ble _08081AC2
 	bl sub_80098B8
-	ldr r0, _08081ADC @ =sub_800ACD4
-	bl sub_8000544
+	ldr r0, _08081ADC @ =c2_800ACD4
+	bl SetMainCallback2
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08081AC2:
 	ldr r0, _08081AE0 @ =gUnknown_3003F64
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08081AD0
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _08081AD0:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08081AD8: .4byte gUnknown_3005090
-_08081ADC: .4byte sub_800ACD4
+_08081ADC: .4byte c2_800ACD4
 _08081AE0: .4byte gUnknown_3003F64
 	thumb_func_end sub_8081A90
 
@@ -2490,9 +2490,9 @@ sub_8081AE4: @ 8081AE4
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08081AFC
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08081AFC:
 	pop {r4}
 	pop {r0}

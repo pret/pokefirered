@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8054814
-sub_8054814: @ 8054814
+	thumb_func_start PlayTimeCounter_Reset
+PlayTimeCounter_Reset: @ 8054814
 	ldr r1, _08054830 @ =gUnknown_3000E7C
 	movs r0, 0
 	strb r0, [r1]
@@ -24,10 +24,10 @@ sub_8054814: @ 8054814
 	.align 2, 0
 _08054830: .4byte gUnknown_3000E7C
 _08054834: .4byte gUnknown_300500C
-	thumb_func_end sub_8054814
+	thumb_func_end PlayTimeCounter_Reset
 
-	thumb_func_start sub_8054838
-sub_8054838: @ 8054838
+	thumb_func_start PlayTimeCounter_Start
+PlayTimeCounter_Start: @ 8054838
 	push {lr}
 	ldr r1, _08054854 @ =gUnknown_3000E7C
 	movs r0, 0x1
@@ -38,7 +38,7 @@ sub_8054838: @ 8054838
 	ldr r0, _0805485C @ =0x000003e7
 	cmp r1, r0
 	bls _08054850
-	bl sub_80548D4
+	bl PlayTimeCounter_SetToMax
 _08054850:
 	pop {r0}
 	bx r0
@@ -46,7 +46,7 @@ _08054850:
 _08054854: .4byte gUnknown_3000E7C
 _08054858: .4byte gUnknown_300500C
 _0805485C: .4byte 0x000003e7
-	thumb_func_end sub_8054838
+	thumb_func_end PlayTimeCounter_Start
 
 	thumb_func_start sub_8054860
 sub_8054860: @ 8054860
@@ -58,8 +58,8 @@ sub_8054860: @ 8054860
 _08054868: .4byte gUnknown_3000E7C
 	thumb_func_end sub_8054860
 
-	thumb_func_start sub_805486C
-sub_805486C: @ 805486C
+	thumb_func_start PlayTimeCounter_Update
+PlayTimeCounter_Update: @ 805486C
 	push {lr}
 	ldr r0, _080548C8 @ =gUnknown_3000E7C
 	ldrb r0, [r0]
@@ -102,7 +102,7 @@ sub_805486C: @ 805486C
 	ldr r0, _080548D0 @ =0x03e70000
 	cmp r1, r0
 	bls _080548C4
-	bl sub_80548D4
+	bl PlayTimeCounter_SetToMax
 _080548C4:
 	pop {r0}
 	bx r0
@@ -110,10 +110,10 @@ _080548C4:
 _080548C8: .4byte gUnknown_3000E7C
 _080548CC: .4byte gUnknown_300500C
 _080548D0: .4byte 0x03e70000
-	thumb_func_end sub_805486C
+	thumb_func_end PlayTimeCounter_Update
 
-	thumb_func_start sub_80548D4
-sub_80548D4: @ 80548D4
+	thumb_func_start PlayTimeCounter_SetToMax
+PlayTimeCounter_SetToMax: @ 80548D4
 	ldr r1, _080548F0 @ =gUnknown_3000E7C
 	movs r0, 0x2
 	strb r0, [r1]
@@ -132,6 +132,6 @@ sub_80548D4: @ 80548D4
 _080548F0: .4byte gUnknown_3000E7C
 _080548F4: .4byte gUnknown_300500C
 _080548F8: .4byte 0x000003e7
-	thumb_func_end sub_80548D4
+	thumb_func_end PlayTimeCounter_SetToMax
 
 	.align 2, 0 @ Don't pad with nop.

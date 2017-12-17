@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_800BC20
-sub_800BC20: @ 800BC20
+	thumb_func_start MultiBootInit
+MultiBootInit: @ 800BC20
 	adds r2, r0, 0
 	movs r1, 0
 	strb r1, [r2, 0x1E]
@@ -34,17 +34,17 @@ _0800BC4C: .4byte 0x04000134
 _0800BC50: .4byte 0x04000128
 _0800BC54: .4byte 0x00002003
 _0800BC58: .4byte 0x0400012a
-	thumb_func_end sub_800BC20
+	thumb_func_end MultiBootInit
 
-	thumb_func_start sub_800BC5C
-sub_800BC5C: @ 800BC5C
+	thumb_func_start MultiBootMain
+MultiBootMain: @ 800BC5C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
 	adds r7, r0, 0
-	bl sub_800C180
+	bl MultiBootCheckComplete
 	cmp r0, 0
 	beq _0800BC72
 	b _0800C03A
@@ -74,7 +74,7 @@ _0800BC86:
 	cmp r5, 0x8
 	beq _0800BCB0
 	adds r0, r7, 0
-	bl sub_800BC20
+	bl MultiBootInit
 	movs r0, 0x8
 	eors r0, r5
 	b _0800C03C
@@ -85,7 +85,7 @@ _0800BCB0:
 	cmp r0, 0xDF
 	bls _0800BD02
 	adds r0, r7, 0
-	bl sub_800C194
+	bl MultiBootHandShake
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0800BCC4
@@ -100,13 +100,13 @@ _0800BCC4:
 	cmp r0, 0xE1
 	bls _0800BCE0
 	adds r0, r7, 0
-	bl sub_800C180
+	bl MultiBootCheckComplete
 	cmp r0, 0
 	bne _0800BCE0
 	b _0800C02A
 _0800BCE0:
 	adds r0, r7, 0
-	bl sub_800C180
+	bl MultiBootCheckComplete
 	cmp r0, 0
 	beq _0800BCEC
 	b _0800C03A
@@ -115,7 +115,7 @@ _0800BCEC:
 	cmp r0, 0
 	bne _0800BCFC
 	adds r0, r7, 0
-	bl sub_800BC20
+	bl MultiBootInit
 	movs r0, 0x71
 	b _0800C03C
 _0800BCFC:
@@ -230,7 +230,7 @@ _0800BDB8:
 	cmp r0, r2
 	beq _0800BDDA
 	adds r0, r7, 0
-	bl sub_800C098
+	bl MultiBootStartProbe
 	b _0800BDE2
 	.align 2, 0
 _0800BDD0: .4byte 0x04000120
@@ -382,7 +382,7 @@ _0800BEE2:
 	adds r0, r2, 0
 	orrs r1, r0
 	adds r0, r7, 0
-	bl sub_800C04C
+	bl MultiBootSend
 	b _0800C03C
 	.align 2, 0
 _0800BEF0: .4byte gUnknown_3000E6C
@@ -409,7 +409,7 @@ _0800BF02:
 	orrs r3, r0
 	adds r0, r7, 0
 	adds r1, r3, 0
-	bl sub_800C04C
+	bl MultiBootSend
 	b _0800C03C
 _0800BF26:
 	movs r5, 0x3
@@ -447,7 +447,7 @@ _0800BF44:
 _0800BF64: .4byte 0x04000126
 _0800BF68:
 	adds r0, r7, 0
-	bl sub_800BC20
+	bl MultiBootInit
 	movs r0, 0x1E
 	mov r1, r10
 	strb r0, [r1]
@@ -514,7 +514,7 @@ _0800BFE0:
 	cmp r0, 0
 	bne _0800BFF2
 	adds r0, r7, 0
-	bl sub_800BC20
+	bl MultiBootInit
 	movs r0, 0x50
 	b _0800C03C
 _0800BFF2:
@@ -537,7 +537,7 @@ _0800C002:
 	ldrb r1, [r0]
 	orrs r1, r2
 	adds r0, r7, 0
-	bl sub_800C04C
+	bl MultiBootSend
 	adds r5, r0, 0
 	cmp r5, 0
 	bne _0800C03C
@@ -547,11 +547,11 @@ _0800C002:
 	cmp r0, 0x1
 	bne _0800C03A
 _0800C02A:
-	bl sub_800C298
+	bl MultiBootWaitSendDone
 	b _0800BC86
 _0800C030:
 	adds r0, r7, 0
-	bl sub_800BC20
+	bl MultiBootInit
 	movs r0, 0x60
 	b _0800C03C
 _0800C03A:
@@ -564,10 +564,10 @@ _0800C03C:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800BC5C
+	thumb_func_end MultiBootMain
 
-	thumb_func_start sub_800C04C
-sub_800C04C: @ 800C04C
+	thumb_func_start MultiBootSend
+MultiBootSend: @ 800C04C
 	push {r4,lr}
 	adds r2, r0, 0
 	lsls r1, 16
@@ -595,7 +595,7 @@ _0800C07C: .4byte 0x0400012a
 _0800C080: .4byte 0x00002083
 _0800C084:
 	adds r0, r2, 0
-	bl sub_800BC20
+	bl MultiBootInit
 	movs r0, 0x8
 	eors r4, r0
 	adds r0, r4, 0
@@ -603,17 +603,17 @@ _0800C090:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800C04C
+	thumb_func_end MultiBootSend
 
-	thumb_func_start sub_800C098
-sub_800C098: @ 800C098
+	thumb_func_start MultiBootStartProbe
+MultiBootStartProbe: @ 800C098
 	push {lr}
 	adds r1, r0, 0
 	ldrb r0, [r1, 0x18]
 	cmp r0, 0
 	beq _0800C0AA
 	adds r0, r1, 0
-	bl sub_800BC20
+	bl MultiBootInit
 	b _0800C0B6
 _0800C0AA:
 	adds r2, r1, 0
@@ -625,10 +625,10 @@ _0800C0AA:
 _0800C0B6:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800C098
+	thumb_func_end MultiBootStartProbe
 
-	thumb_func_start sub_800C0BC
-sub_800C0BC: @ 800C0BC
+	thumb_func_start MultiBootStartMaster
+MultiBootStartMaster: @ 800C0BC
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -661,7 +661,7 @@ sub_800C0BC: @ 800C0BC
 	bls _0800C104
 _0800C0F8:
 	adds r0, r4, 0
-	bl sub_800BC20
+	bl MultiBootInit
 	b _0800C178
 	.align 2, 0
 _0800C100: .4byte 0x0003ff00
@@ -725,10 +725,10 @@ _0800C178:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800C0BC
+	thumb_func_end MultiBootStartMaster
 
-	thumb_func_start sub_800C180
-sub_800C180: @ 800C180
+	thumb_func_start MultiBootCheckComplete
+MultiBootCheckComplete: @ 800C180
 	push {lr}
 	ldrb r0, [r0, 0x18]
 	cmp r0, 0xE9
@@ -740,10 +740,10 @@ _0800C18C:
 _0800C18E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800C180
+	thumb_func_end MultiBootCheckComplete
 
-	thumb_func_start sub_800C194
-sub_800C194: @ 800C194
+	thumb_func_start MultiBootHandShake
+MultiBootHandShake: @ 800C194
 	push {r4-r6,lr}
 	adds r3, r0, 0
 	ldrb r0, [r3, 0x18]
@@ -815,7 +815,7 @@ _0800C210:
 	ldrh r1, [r3]
 _0800C212:
 	adds r0, r3, 0
-	bl sub_800C04C
+	bl MultiBootSend
 	b _0800C278
 	.align 2, 0
 _0800C21C: .4byte 0x04000126
@@ -860,7 +860,7 @@ _0800C23C:
 _0800C268: .4byte 0x04000120
 _0800C26C:
 	adds r0, r3, 0
-	bl sub_800BC20
+	bl MultiBootInit
 	movs r0, 0x71
 	b _0800C278
 _0800C276:
@@ -869,10 +869,10 @@ _0800C278:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800C194
+	thumb_func_end MultiBootHandShake
 
-	thumb_func_start sub_800C280
-sub_800C280: @ 800C280
+	thumb_func_start MultiBootWaitCycles
+MultiBootWaitCycles: @ 800C280
 	mov r2, pc
 	lsrs r2, 24
 	movs r1, 0xC
@@ -886,10 +886,10 @@ _0800C292:
 	subs r0, r1
 	bgt _0800C292
 	bx lr
-	thumb_func_end sub_800C280
+	thumb_func_end MultiBootWaitCycles
 
-	thumb_func_start sub_800C298
-sub_800C298: @ 800C298
+	thumb_func_start MultiBootWaitSendDone
+MultiBootWaitSendDone: @ 800C298
 	push {r4,r5,lr}
 	movs r2, 0
 	ldr r3, _0800C2CC @ =0x04000128
@@ -912,13 +912,13 @@ _0800C2AC:
 _0800C2BC:
 	movs r0, 0x96
 	lsls r0, 2
-	bl sub_800C280
+	bl MultiBootWaitCycles
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0800C2CC: .4byte 0x04000128
 _0800C2D0: .4byte 0x0000795c
-	thumb_func_end sub_800C298
+	thumb_func_end MultiBootWaitSendDone
 
 	.align 2, 0 @ Don't pad with nop.

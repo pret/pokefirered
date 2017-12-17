@@ -12,7 +12,7 @@ sub_815D334: @ 815D334
 	bl sub_80722CC
 	ldr r0, _0815D35C @ =sub_815D364
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0815D360 @ =gUnknown_3005090
@@ -46,7 +46,7 @@ sub_815D364: @ 815D364
 	cmp r0, 0
 	bne _0815D394
 	ldr r0, _0815D3A0 @ =gUnknown_8479C58
-	bl sub_8008720
+	bl LoadSpriteSheets
 	bl sub_815D498
 	adds r0, r5, 0
 	subs r0, 0x8
@@ -94,7 +94,7 @@ _0815D3D6:
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x1
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -166,12 +166,12 @@ sub_815D454: @ 815D454
 	bne _0815D48A
 	movs r0, 0xFA
 	lsls r0, 4
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldr r0, _0815D494 @ =0x00000fa1
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 _0815D48A:
 	pop {r4}
 	pop {r0}
@@ -191,7 +191,7 @@ sub_815D498: @ 815D498
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x1
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -214,7 +214,7 @@ sub_815D498: @ 815D498
 	asrs r1, 16
 	movs r2, 0x6D
 	movs r3, 0xFF
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -254,7 +254,7 @@ sub_815D518: @ 815D518
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x1
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -300,7 +300,7 @@ _0815D56A:
 	cmp r0, r1
 	bge _0815D58E
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _0815D58E:
 	add sp, 0x4
 	pop {r4}
@@ -322,7 +322,7 @@ sub_815D5A4: @ 815D5A4
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x1
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -349,7 +349,7 @@ sub_815D5A4: @ 815D5A4
 	ldr r0, _0815D620 @ =gUnknown_8479CC0
 	movs r2, 0x4E
 	movs r3, 0x8
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -399,7 +399,7 @@ _0815D638:
 	cmp r0, 0
 	beq _0815D650
 	adds r0, r2, 0
-	bl sub_8007280
+	bl DestroySprite
 _0815D650:
 	pop {r0}
 	bx r0

@@ -89,7 +89,7 @@ _080F5190:
 	bl sub_80F52EC
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080F51B0 @ =gUnknown_203AB50
 	movs r0, 0x2
 	strb r0, [r1]
@@ -102,13 +102,13 @@ _080F51B4:
 	lsls r2, 7
 	movs r0, 0
 	movs r3, 0
-	bl sub_8000F44
+	bl RequestDma3Fill
 	ldr r0, _080F51DC @ =gUnknown_841EE44
 	movs r1, 0xA0
 	lsls r1, 19
 	movs r2, 0x20
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	ldr r1, _080F51E0 @ =gUnknown_203AB50
 	movs r0, 0x3
 	strb r0, [r1]
@@ -132,20 +132,20 @@ _080F5200: .4byte gUnknown_203AB50
 _080F5204:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x10
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x12
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080F5238 @ =0x00001f0c
 	movs r0, 0x8
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 1
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080F523C @ =gUnknown_203AB50
 	movs r0, 0x5
 	strb r0, [r1]
@@ -196,7 +196,7 @@ _080F5294: .4byte gUnknown_30030F0
 _080F5298:
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_813BC2C
 	bl sub_80F52EC
 	ldr r1, _080F52B0 @ =gUnknown_203AB50
@@ -264,7 +264,7 @@ sub_80F5318: @ 80F5318
 	movs r2, 0xA0
 	lsls r2, 3
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -280,7 +280,7 @@ sub_80F5334: @ 80F5334
 	movs r2, 0x8C
 	lsls r2, 6
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	pop {r0}
 	bx r0
 	.align 2, 0

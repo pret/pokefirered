@@ -45,7 +45,7 @@ sub_806ED94: @ 806ED94
 	lsrs r2, 24
 	ldr r0, _0806EDA8 @ =gUnknown_20370F6
 	ldr r1, _0806EDAC @ =gUnknown_20370F5
-	bl sub_806FEC8
+	bl AppendToList
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -155,7 +155,7 @@ sub_806EE7C: @ 806EE7C
 	bl sub_8003CE4
 	strb r0, [r4]
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_80F6F1C
@@ -513,7 +513,7 @@ sub_806F168: @ 806F168
 	cmp r0, 0x1
 	bne _0806F180
 	adds r0, r4, 0
-	bl sub_807761C
+	bl SwitchTaskToFollowupFunc
 _0806F180:
 	pop {r4}
 	pop {r0}
@@ -531,12 +531,12 @@ sub_806F188: @ 806F188
 	ldr r4, _0806F1B4 @ =sub_806F168
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80775E8
+	bl SetTaskFuncWithFollowupFunc
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -622,7 +622,7 @@ _0806F238:
 	cmp r0, 0x1
 	bne _0806F24E
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _0806F24E:
 	pop {r4,r5}
 	pop {r0}
@@ -637,13 +637,13 @@ sub_806F258: @ 806F258
 	bl sub_805642C
 	cmp r0, 0
 	bne _0806F26E
-	bl sub_8068974
+	bl player_bitmagic
 	bl sub_805C270
 	bl sub_805C780
 _0806F26E:
 	ldr r0, _0806F27C @ =sub_806F1F0
 	bl sub_806F188
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -663,7 +663,7 @@ sub_806F280: @ 806F280
 	bl sub_80722CC
 	movs r0, 0x1
 	negs r0, r0
-	bl sub_810F904
+	bl MoveMenuCursor
 	ldr r4, _0806F360 @ =gUnknown_20370F4
 	strb r0, [r4]
 	bl sub_80BF708
@@ -698,7 +698,7 @@ _0806F2D2:
 	movs r0, 0x5
 	bl sub_80722CC
 	movs r0, 0x1
-	bl sub_810F904
+	bl MoveMenuCursor
 	ldr r4, _0806F360 @ =gUnknown_20370F4
 	strb r0, [r4]
 	bl sub_80BF708
@@ -792,7 +792,7 @@ sub_806F394: @ 806F394
 	bl sub_80CCB68
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 _0806F3B8:
 	pop {r0}
 	bx r0
@@ -854,11 +854,11 @@ _0806F424: .4byte gUnknown_2037AB8
 _0806F428:
 	movs r0, 0x29
 	bl sub_8054E90
-	bl sub_807B004
+	bl play_some_sound
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F448 @ =sub_810275C
-	bl sub_8000544
+	bl SetMainCallback2
 	movs r0, 0x1
 _0806F442:
 	pop {r1}
@@ -881,11 +881,11 @@ sub_806F44C: @ 806F44C
 	.align 2, 0
 _0806F460: .4byte gUnknown_2037AB8
 _0806F464:
-	bl sub_807B004
+	bl play_some_sound
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F47C @ =sub_8126EB0
-	bl sub_8000544
+	bl SetMainCallback2
 	movs r0, 0x1
 _0806F478:
 	pop {r1}
@@ -908,11 +908,11 @@ sub_806F480: @ 806F480
 	.align 2, 0
 _0806F494: .4byte gUnknown_2037AB8
 _0806F498:
-	bl sub_807B004
+	bl play_some_sound
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F4B0 @ =sub_8107EB8
-	bl sub_8000544
+	bl SetMainCallback2
 	movs r0, 0x1
 _0806F4AC:
 	pop {r1}
@@ -935,7 +935,7 @@ sub_806F4B4: @ 806F4B4
 	.align 2, 0
 _0806F4C8: .4byte gUnknown_2037AB8
 _0806F4CC:
-	bl sub_807B004
+	bl play_some_sound
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F4E4 @ =sub_80568A8
@@ -974,11 +974,11 @@ sub_806F4FC: @ 806F4FC
 	.align 2, 0
 _0806F510: .4byte gUnknown_2037AB8
 _0806F514:
-	bl sub_807B004
+	bl play_some_sound
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F534 @ =sub_8088388
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r1, _0806F538 @ =gUnknown_30030F0
 	ldr r0, _0806F53C @ =sub_80568A8
 	str r0, [r1, 0x8]
@@ -1029,7 +1029,7 @@ sub_806F56C: @ 806F56C
 	.align 2, 0
 _0806F580: .4byte gUnknown_2037AB8
 _0806F584:
-	bl sub_807B004
+	bl play_some_sound
 	bl sub_80563F0
 	ldr r0, _0806F59C @ =gUnknown_300502C
 	ldrb r0, [r0]
@@ -1095,7 +1095,7 @@ _0806F604:
 	movs r1, 0x1
 	bl sub_810F260
 	bl sub_80696C0
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	bl sub_812B248
 	movs r0, 0x1
 	b _0806F61E
@@ -1160,7 +1160,7 @@ sub_806F67C: @ 806F67C
 	bl sub_806F624
 	ldr r0, _0806F698 @ =sub_806F6D4
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1223,8 +1223,8 @@ _0806F700:
 	strh r1, [r0]
 _0806F704:
 	adds r0, r4, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 	bl sub_812B248
 _0806F712:
 	pop {r4}
@@ -1542,7 +1542,7 @@ sub_806F940: @ 806F940
 	cmp r0, 0x1
 	bne _0806F960
 	movs r0, 0x4
-	bl sub_80DA364
+	bl TrySavingData
 	movs r0, 0
 	strb r0, [r4]
 	b _0806F966
@@ -1550,7 +1550,7 @@ sub_806F940: @ 806F940
 _0806F95C: .4byte gUnknown_2031DB0
 _0806F960:
 	movs r0, 0
-	bl sub_80DA364
+	bl TrySavingData
 _0806F966:
 	ldr r1, _0806F974 @ =gUnknown_3000FA4
 	ldr r0, _0806F978 @ =sub_806F97C
@@ -1617,7 +1617,7 @@ _0806F9DC: .4byte sub_806F9E0
 	thumb_func_start sub_806F9E0
 sub_806F9E0: @ 806F9E0
 	push {lr}
-	bl sub_80723E0
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F9FE
@@ -1676,7 +1676,7 @@ _0806FA42:
 	thumb_func_start sub_806FA48
 sub_806FA48: @ 806FA48
 	push {lr}
-	bl sub_8070474
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806FA48
@@ -1710,10 +1710,10 @@ _0806FA74:
 _0806FA88:
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
-	bl sub_80006F4
-	bl sub_8087E64
+	bl SetVBlankCallback
+	bl remove_some_task
 	movs r2, 0xA0
 	lsls r2, 19
 	mov r1, sp
@@ -1764,10 +1764,10 @@ _0806FAF4: .4byte 0x040000d4
 _0806FAF8: .4byte 0x81000200
 _0806FAFC: .4byte 0x81000800
 _0806FB00:
-	bl sub_8006B10
-	bl sub_80773BC
-	bl sub_8070528
-	bl sub_8087EA4
+	bl ResetSpriteData
+	bl ResetTasks
+	bl ResetPaletteFade
+	bl dp12_8087EA4
 	b _0806FB64
 _0806FB12:
 	movs r0, 0
@@ -1788,16 +1788,16 @@ _0806FB34: .4byte gUnknown_83A73B8
 _0806FB38: .4byte gUnknown_83A73BC
 _0806FB3C:
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	ldr r0, _0806FB5C @ =sub_806FA48
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0x1
-	bl sub_8000B68
+	bl EnableInterrupts
 	b _0806FB64
 	.align 2, 0
 _0806FB5C: .4byte sub_806FA48
@@ -1828,9 +1828,9 @@ sub_806FB7C: @ 806FB7C
 	beq _0806FB96
 	ldr r0, _0806FBA0 @ =sub_806FBB8
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	ldr r0, _0806FBA4 @ =sub_806FBA8
-	bl sub_8000544
+	bl SetMainCallback2
 _0806FB96:
 	pop {r0}
 	bx r0
@@ -1843,8 +1843,8 @@ _0806FBA4: .4byte sub_806FBA8
 	thumb_func_start sub_806FBA8
 sub_806FBA8: @ 806FBA8
 	push {lr}
-	bl sub_8077578
-	bl sub_80704D0
+	bl RunTasks
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806FBA8
@@ -1895,7 +1895,7 @@ _0806FBF8:
 _0806FC14:
 	movs r0, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r2, _0806FC74 @ =gUnknown_8419F54
 	movs r4, 0
 	str r4, [sp]
@@ -1914,7 +1914,7 @@ _0806FC14:
 	movs r2, 0xF
 	bl sub_8150048
 	movs r0, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
 	bl sub_8003F20
@@ -1924,7 +1924,7 @@ _0806FC14:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _0806FC78 @ =gUnknown_3003F3C
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -1950,7 +1950,7 @@ _0806FC8C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806FCE8
-	bl sub_804C1DC
+	bl sav2_gender2_inplace_and_xFE
 	b _0806FCE4
 _0806FC9C:
 	movs r0, 0x1
@@ -1959,30 +1959,30 @@ _0806FC9C:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	movs r0, 0x4
 	b _0806FCE6
 _0806FCB0:
 	bl sub_8003ECC
 	ldr r0, _0806FCC4 @ =gUnknown_30030F0
 	ldr r0, [r0, 0x8]
-	bl sub_8000544
+	bl SetMainCallback2
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _0806FCE8
 	.align 2, 0
 _0806FCC4: .4byte gUnknown_30030F0
 _0806FCC8:
 	ldr r0, _0806FCD4 @ =sub_80DA634
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0x6
 	b _0806FCE6
 	.align 2, 0
 _0806FCD4: .4byte sub_80DA634
 _0806FCD8:
 	ldr r0, _0806FCF0 @ =sub_80DA634
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806FCE8
@@ -2019,7 +2019,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xD
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	ldr r4, _0806FE60 @ =gUnknown_2021D18
 	movs r0, 0x3
 	adds r1, r4, 0
@@ -2200,13 +2200,13 @@ sub_806FEA0: @ 806FEA0
 	bl sub_80F6F9C
 	bl sub_80F7948
 	bl sub_80696C0
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806FEA0
 
-	thumb_func_start sub_806FEC8
-sub_806FEC8: @ 806FEC8
+	thumb_func_start AppendToList
+AppendToList: @ 806FEC8
 	ldrb r3, [r1]
 	adds r0, r3
 	strb r2, [r0]
@@ -2214,6 +2214,6 @@ sub_806FEC8: @ 806FEC8
 	adds r0, 0x1
 	strb r0, [r1]
 	bx lr
-	thumb_func_end sub_806FEC8
+	thumb_func_end AppendToList
 
 	.align 2, 0 @ Don't pad with nop.

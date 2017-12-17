@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8008CF4
-sub_8008CF4: @ 8008CF4
+	thumb_func_start StringCopy10
+StringCopy10: @ 8008CF4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0xA
@@ -35,10 +35,10 @@ _08008D20:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008CF4
+	thumb_func_end StringCopy10
 
-	thumb_func_start sub_8008D28
-sub_8008D28: @ 8008D28
+	thumb_func_start StringGetEnd10
+StringGetEnd10: @ 8008D28
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r4, 0xA
@@ -63,10 +63,10 @@ _08008D4C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008D28
+	thumb_func_end StringGetEnd10
 
-	thumb_func_start sub_8008D54
-sub_8008D54: @ 8008D54
+	thumb_func_start StringCopy7
+StringCopy7: @ 8008D54
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0x7
@@ -93,10 +93,10 @@ _08008D7C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008D54
+	thumb_func_end StringCopy7
 
-	thumb_func_start sub_8008D84
-sub_8008D84: @ 8008D84
+	thumb_func_start StringCopy
+StringCopy: @ 8008D84
 	push {lr}
 	adds r3, r0, 0
 	b _08008D90
@@ -114,10 +114,10 @@ _08008D90:
 	adds r0, r3, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008D84
+	thumb_func_end StringCopy
 
-	thumb_func_start sub_8008DA4
-sub_8008DA4: @ 8008DA4
+	thumb_func_start StringAppend
+StringAppend: @ 8008DA4
 	push {lr}
 	adds r2, r0, 0
 	b _08008DAC
@@ -128,13 +128,13 @@ _08008DAC:
 	cmp r0, 0xFF
 	bne _08008DAA
 	adds r0, r2, 0
-	bl sub_8008D84
+	bl StringCopy
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008DA4
+	thumb_func_end StringAppend
 
-	thumb_func_start sub_8008DBC
-sub_8008DBC: @ 8008DBC
+	thumb_func_start StringCopyN
+StringCopyN: @ 8008DBC
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -160,10 +160,10 @@ _08008DE2:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008DBC
+	thumb_func_end StringCopyN
 
-	thumb_func_start sub_8008DEC
-sub_8008DEC: @ 8008DEC
+	thumb_func_start StringAppendN
+StringAppendN: @ 8008DEC
 	push {lr}
 	adds r3, r0, 0
 	lsls r2, 24
@@ -176,13 +176,13 @@ _08008DF8:
 	cmp r0, 0xFF
 	bne _08008DF6
 	adds r0, r3, 0
-	bl sub_8008DBC
+	bl StringCopyN
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008DEC
+	thumb_func_end StringAppendN
 
-	thumb_func_start sub_8008E08
-sub_8008E08: @ 8008E08
+	thumb_func_start StringLength
+StringLength: @ 8008E08
 	push {lr}
 	adds r2, r0, 0
 	movs r1, 0
@@ -201,10 +201,10 @@ _08008E22:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008E08
+	thumb_func_end StringLength
 
-	thumb_func_start sub_8008E28
-sub_8008E28: @ 8008E28
+	thumb_func_start StringCompare
+StringCompare: @ 8008E28
 	push {lr}
 	adds r2, r0, 0
 	b _08008E3A
@@ -227,10 +227,10 @@ _08008E3A:
 _08008E48:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008E28
+	thumb_func_end StringCompare
 
-	thumb_func_start sub_8008E4C
-sub_8008E4C: @ 8008E4C
+	thumb_func_start StringCompareN
+StringCompareN: @ 8008E4C
 	push {r4,lr}
 	adds r3, r0, 0
 	b _08008E64
@@ -257,7 +257,7 @@ _08008E72:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8008E4C
+	thumb_func_end StringCompareN
 
 	thumb_func_start sub_8008E78
 sub_8008E78: @ 8008E78
@@ -484,7 +484,7 @@ _08008FEC:
 _08009004:
 	ldrb r0, [r5]
 	adds r5, 0x1
-	bl sub_80091E0
+	bl GetExpandedPlaceholder
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl sub_8008FCC
@@ -577,7 +577,7 @@ sub_80090B8: @ 80090B8
 	adds r0, r5, 0
 	mov r1, sp
 _080090DA:
-	bl sub_8008D84
+	bl StringCopy
 	adds r5, r0, 0
 _080090E0:
 	ldrb r0, [r6]
@@ -763,8 +763,8 @@ sub_80091D8: @ 80091D8
 _080091DC: .4byte gUnknown_8415A49
 	thumb_func_end sub_80091D8
 
-	thumb_func_start sub_80091E0
-sub_80091E0: @ 80091E0
+	thumb_func_start GetExpandedPlaceholder
+GetExpandedPlaceholder: @ 80091E0
 	push {lr}
 	cmp r0, 0xD
 	bhi _080091F8
@@ -783,10 +783,10 @@ _080091FA:
 	bx r1
 	.align 2, 0
 _08009200: .4byte gUnknown_8415A20
-	thumb_func_end sub_80091E0
+	thumb_func_end GetExpandedPlaceholder
 
-	thumb_func_start sub_8009204
-sub_8009204: @ 8009204
+	thumb_func_start StringFill
+StringFill: @ 8009204
 	push {lr}
 	adds r3, r0, 0
 	lsls r1, 24
@@ -810,10 +810,10 @@ _08009224:
 	adds r0, r3, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8009204
+	thumb_func_end StringFill
 
-	thumb_func_start sub_8009230
-sub_8009230: @ 8009230
+	thumb_func_start StringCopyPadded
+StringCopyPadded: @ 8009230
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -860,21 +860,21 @@ _08009274:
 	bx r1
 	.align 2, 0
 _08009280: .4byte 0x0000ffff
-	thumb_func_end sub_8009230
+	thumb_func_end StringCopyPadded
 
-	thumb_func_start sub_8009284
-sub_8009284: @ 8009284
+	thumb_func_start StringFillWithTerminator
+StringFillWithTerminator: @ 8009284
 	push {lr}
 	lsls r2, r1, 16
 	lsrs r2, 16
 	movs r1, 0xFF
-	bl sub_8009204
+	bl StringFill
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8009284
+	thumb_func_end StringFillWithTerminator
 
-	thumb_func_start sub_8009294
-sub_8009294: @ 8009294
+	thumb_func_start StringCopyN_Multibyte
+StringCopyN_Multibyte: @ 8009294
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r3, r1, 0
@@ -910,10 +910,10 @@ _080092C6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8009294
+	thumb_func_end StringCopyN_Multibyte
 
-	thumb_func_start sub_80092D4
-sub_80092D4: @ 80092D4
+	thumb_func_start StringLength_Multibyte
+StringLength_Multibyte: @ 80092D4
 	push {lr}
 	adds r2, r0, 0
 	movs r3, 0
@@ -933,10 +933,10 @@ _080092E6:
 	adds r0, r3, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80092D4
+	thumb_func_end StringLength_Multibyte
 
-	thumb_func_start sub_80092F4
-sub_80092F4: @ 80092F4
+	thumb_func_start WriteColorChangeControlCode
+WriteColorChangeControlCode: @ 80092F4
 	push {lr}
 	adds r3, r0, 0
 	lsls r2, 24
@@ -971,10 +971,10 @@ _08009320:
 	adds r0, r3, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80092F4
+	thumb_func_end WriteColorChangeControlCode
 
-	thumb_func_start sub_8009330
-sub_8009330: @ 8009330
+	thumb_func_start GetExtCtrlCodeLength
+GetExtCtrlCodeLength: @ 8009330
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -989,17 +989,17 @@ _08009342:
 	bx r1
 	.align 2, 0
 _08009348: .4byte gUnknown_8231EA8
-	thumb_func_end sub_8009330
+	thumb_func_end GetExtCtrlCodeLength
 
-	thumb_func_start sub_800934C
-sub_800934C: @ 800934C
+	thumb_func_start SkipExtCtrlCode
+SkipExtCtrlCode: @ 800934C
 	push {r4,lr}
 	adds r4, r0, 0
 	b _08009360
 _08009352:
 	adds r4, 0x1
 	ldrb r0, [r4]
-	bl sub_8009330
+	bl GetExtCtrlCodeLength
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0
@@ -1011,10 +1011,10 @@ _08009360:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800934C
+	thumb_func_end SkipExtCtrlCode
 
-	thumb_func_start sub_8009370
-sub_8009370: @ 8009370
+	thumb_func_start StringCompareWithoutExtCtrlCodes
+StringCompareWithoutExtCtrlCodes: @ 8009370
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1036,10 +1036,10 @@ _08009388:
 	adds r5, 0x1
 _08009392:
 	adds r0, r4, 0
-	bl sub_800934C
+	bl SkipExtCtrlCode
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_800934C
+	bl SkipExtCtrlCode
 	adds r5, r0, 0
 	ldrb r1, [r4]
 	ldrb r0, [r5]
@@ -1054,19 +1054,19 @@ _080093B2:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8009370
+	thumb_func_end StringCompareWithoutExtCtrlCodes
 
-	thumb_func_start sub_80093BC
-sub_80093BC: @ 80093BC
+	thumb_func_start ConvertInternationalString
+ConvertInternationalString: @ 80093BC
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	cmp r1, 0x1
 	bne _0800941C
-	bl sub_8009424
+	bl StripExtCtrlCodes
 	adds r0, r4, 0
-	bl sub_8008E08
+	bl StringLength
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r1, r2, 0
@@ -1110,10 +1110,10 @@ _0800941C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80093BC
+	thumb_func_end ConvertInternationalString
 
-	thumb_func_start sub_8009424
-sub_8009424: @ 8009424
+	thumb_func_start StripExtCtrlCodes
+StripExtCtrlCodes: @ 8009424
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -1131,7 +1131,7 @@ _08009432:
 	lsrs r4, r0, 16
 	adds r0, r5, r4
 	ldrb r0, [r0]
-	bl sub_8009330
+	bl GetExtCtrlCodeLength
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4, r0
@@ -1163,6 +1163,6 @@ _08009474:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8009424
+	thumb_func_end StripExtCtrlCodes
 
 	.align 2, 0 @ Don't pad with nop.

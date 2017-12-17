@@ -70,7 +70,7 @@ _0813CCE8:
 	cmp r1, 0
 	beq _0813CCFE
 	adds r0, r2, 0
-	bl sub_8008D84
+	bl StringCopy
 	adds r2, r0, 0
 _0813CCFE:
 	adds r4, 0x1

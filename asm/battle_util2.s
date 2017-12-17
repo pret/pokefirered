@@ -27,7 +27,7 @@ _0802E050:
 	movs r4, 0x3
 _0802E060:
 	movs r0, 0x8
-	bl sub_8002BB0
+	bl AllocZeroed
 	stm r5!, {r0}
 	subs r4, 0x1
 	cmp r4, 0
@@ -36,69 +36,69 @@ _0802E06E:
 	ldr r4, _0802E120 @ =gUnknown_2023FE8
 	movs r0, 0x80
 	lsls r0, 2
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r4, _0802E124 @ =gUnknown_2023FF4
 	movs r0, 0x20
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	movs r0, 0xA0
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1]
 	movs r0, 0x10
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1, 0x4]
 	movs r0, 0x24
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1, 0x8]
 	movs r0, 0x24
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1, 0xC]
 	movs r0, 0xC
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1, 0x10]
 	movs r0, 0x1C
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1, 0x14]
 	movs r0, 0x30
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1, 0x18]
 	movs r0, 0x24
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1, 0x1C]
 	ldr r4, _0802E128 @ =gUnknown_2023FEC
 	movs r5, 0x80
 	lsls r5, 5
 	adds r0, r5, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r4, _0802E12C @ =gUnknown_2023FF0
 	adds r0, r5, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r4, _0802E130 @ =gUnknown_2022BB8
 	movs r0, 0x80
 	lsls r0, 6
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r4, _0802E134 @ =gUnknown_2022BBC
 	adds r0, r5, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r1, r0, 0
 	str r1, [r4]
 	movs r0, 0x1
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	ldr r1, [r4]
 	movs r0, 0x2
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -136,7 +136,7 @@ _0802E14C:
 	movs r4, 0x3
 _0802E15E:
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	stm r5!, {r6}
 	subs r4, 0x1
 	cmp r4, 0
@@ -148,59 +148,59 @@ _0802E16C:
 	beq _0802E200
 	ldr r4, _0802E214 @ =gUnknown_2023FE8
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r5, 0
 	str r5, [r4]
 	ldr r0, [r6]
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
 	str r5, [r0]
 	ldr r0, [r0, 0x4]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
 	str r5, [r0, 0x4]
 	ldr r0, [r0, 0x8]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
 	str r5, [r0, 0x8]
 	ldr r0, [r0, 0xC]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
 	str r5, [r0, 0xC]
 	ldr r0, [r0, 0x10]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
 	str r5, [r0, 0x10]
 	ldr r0, [r0, 0x14]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
 	str r5, [r0, 0x14]
 	ldr r0, [r0, 0x18]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
 	str r5, [r0, 0x18]
 	ldr r0, [r0, 0x1C]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
 	str r5, [r0, 0x1C]
-	bl sub_8002BC4
+	bl Free
 	str r5, [r6]
 	ldr r4, _0802E218 @ =gUnknown_2023FEC
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	str r5, [r4]
 	ldr r4, _0802E21C @ =gUnknown_2023FF0
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	str r5, [r4]
 	ldr r4, _0802E220 @ =gUnknown_2022BB8
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	str r5, [r4]
 	ldr r4, _0802E224 @ =gUnknown_2022BBC
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	str r5, [r4]
 _0802E200:
 	pop {r4-r6}
@@ -229,11 +229,11 @@ sub_802E228: @ 802E228
 	cmp r0, 0
 	beq _0802E274
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, _0802E270 @ =gUnknown_2023BE4
@@ -256,7 +256,7 @@ _0802E26C: .4byte gUnknown_2022B4C
 _0802E270: .4byte gUnknown_2023BE4
 _0802E274:
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0802E27E:

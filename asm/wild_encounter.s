@@ -17,7 +17,7 @@ _08082748: .4byte gUnknown_20386DC
 	thumb_func_start sub_808274C
 sub_808274C: @ 808274C
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -124,7 +124,7 @@ _08082802:
 	thumb_func_start sub_8082808
 sub_8082808: @ 8082808
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -177,7 +177,7 @@ sub_808285C: @ 808285C
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	movs r5, 0
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -279,7 +279,7 @@ _0808290C:
 	adds r4, 0x1
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -410,10 +410,10 @@ sub_80829FC: @ 80829FC
 	lsrs r6, r1, 24
 	lsls r2, 24
 	lsrs r5, r2, 24
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	cmp r4, 0xC9
 	beq _08082A3C
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
@@ -426,7 +426,7 @@ sub_80829FC: @ 80829FC
 	adds r1, r4, 0
 	adds r2, r6, 0
 	movs r3, 0x20
-	bl sub_803DD98
+	bl CreateMonWithNature
 	b _08082A74
 	.align 2, 0
 _08082A38: .4byte gUnknown_202402C
@@ -456,7 +456,7 @@ _08082A3C:
 	movs r1, 0xC9
 	adds r2, r6, 0
 	movs r3, 0x20
-	bl sub_803DA54
+	bl CreateMon
 _08082A74:
 	add sp, 0x10
 	pop {r4-r6}
@@ -474,9 +474,9 @@ sub_8082A88: @ 8082A88
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08082A8E:
-	bl sub_8044EC8
+	bl Random
 	adds r4, r0, 0
-	bl sub_8044EC8
+	bl Random
 	lsls r4, 16
 	lsls r0, 16
 	lsrs r0, 16
@@ -653,7 +653,7 @@ sub_8082BCC: @ 8082BCC
 	lsls r0, 4
 	str r0, [sp]
 	movs r0, 0x6
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082BF6
@@ -725,7 +725,7 @@ sub_8082C58: @ 8082C58
 	ldr r4, _08082C94 @ =gUnknown_2024284
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08082C84
 	adds r0, r4, 0
@@ -753,7 +753,7 @@ _08082C94: .4byte gUnknown_2024284
 	thumb_func_start sub_8082C98
 sub_8082C98: @ 8082C98
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -845,7 +845,7 @@ _08082D44: .4byte gUnknown_20386DC
 _08082D48: .4byte 0x0000ffff
 _08082D4C: .4byte gUnknown_83C9CB8
 _08082D50:
-	bl sub_8141FAC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -869,7 +869,7 @@ _08082D78:
 	cmp r0, 0x2
 	beq _08082DA8
 	movs r0, 0x8
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082E46
@@ -917,7 +917,7 @@ _08082DD2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08082D3A
-	bl sub_8141FAC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1028,7 +1028,7 @@ sub_8082EC0: @ 8082EC0
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	bl sub_8082934
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -1044,7 +1044,7 @@ sub_8082EC0: @ 8082EC0
 	bl sub_8058F48
 	cmp r0, 0x1
 	bne _08082F1C
-	bl sub_8141FAC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1073,7 +1073,7 @@ _08082F1C:
 	bl sub_8058F48
 	cmp r0, 0x2
 	bne _08082F6C
-	bl sub_8141FAC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1212,7 +1212,7 @@ _0808302E:
 	ldr r1, [r4, 0x4]
 	b _08083068
 _0808303C:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -1303,7 +1303,7 @@ sub_80830B8: @ 80830B8
 	cmp r4, 0
 	bne _08083104
 	ldr r0, _08083100 @ =gUnknown_81BFB65
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _08083106
 	.align 2, 0
@@ -1337,17 +1337,17 @@ _08083120:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08083160
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08083160
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
@@ -1626,7 +1626,7 @@ _08083326:
 _0808332A:
 	ldr r0, _08083368 @ =gUnknown_2024284
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, _0808336C @ =gUnknown_20386D0
 	strh r0, [r1, 0xA]
 	bl sub_80831F8
@@ -1670,7 +1670,7 @@ _0808337A:
 	bcs _080833A8
 	adds r0, 0x1
 	strb r0, [r1, 0x8]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64

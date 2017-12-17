@@ -36,7 +36,7 @@ sub_80DCE10: @ 80DCE10
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x2
-	bl sub_8073B88
+	bl CalculatePanIncrement
 	strh r4, [r6, 0xC]
 	strh r5, [r6, 0xE]
 	lsls r0, 24
@@ -96,7 +96,7 @@ _080DCEB0:
 	ldrh r0, [r4, 0x8]
 	lsls r1, r5, 24
 	asrs r1, 24
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080DCECA:
 	lsls r1, r6, 24
 	asrs r1, 24
@@ -138,7 +138,7 @@ sub_80DCEE4: @ 80DCEE4
 	ldrh r0, [r4, 0xA]
 	lsls r1, 24
 	asrs r1, 24
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x1E]
 	adds r0, 0x1
 	strh r0, [r4, 0x1E]
@@ -147,7 +147,7 @@ sub_80DCEE4: @ 80DCEE4
 	cmp r0, 0x2
 	bne _080DCF2C
 	adds r0, r5, 0
-	bl sub_807277C
+	bl DestroyAnimSoundTask
 _080DCF2C:
 	pop {r4,r5}
 	pop {r0}
@@ -156,8 +156,8 @@ _080DCF2C:
 _080DCF34: .4byte gUnknown_3005090
 	thumb_func_end sub_80DCEE4
 
-	thumb_func_start sub_80DCF38
-sub_80DCF38: @ 80DCF38
+	thumb_func_start mas_80DCF38
+mas_80DCF38: @ 80DCF38
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -199,7 +199,7 @@ sub_80DCF38: @ 80DCF38
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_8073B88
+	bl CalculatePanIncrement
 	ldr r2, _080DCFE0 @ =gUnknown_3005090
 	mov r3, r8
 	lsls r1, r3, 2
@@ -239,7 +239,7 @@ sub_80DCF38: @ 80DCF38
 _080DCFDC: .4byte gUnknown_2037F02
 _080DCFE0: .4byte gUnknown_3005090
 _080DCFE4: .4byte sub_80DCFE8
-	thumb_func_end sub_80DCF38
+	thumb_func_end mas_80DCF38
 
 	thumb_func_start sub_80DCFE8
 sub_80DCFE8: @ 80DCFE8
@@ -265,7 +265,7 @@ sub_80DCFE8: @ 80DCFE8
 	ldrh r0, [r4, 0x8]
 	movs r1, 0x1E
 	ldrsb r1, [r4, r1]
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x10]
 	subs r0, 0x1
 	strh r0, [r4, 0x10]
@@ -273,7 +273,7 @@ sub_80DCFE8: @ 80DCFE8
 	cmp r0, 0
 	bne _080DD030
 	adds r0, r5, 0
-	bl sub_807277C
+	bl DestroyAnimSoundTask
 	b _080DD062
 	.align 2, 0
 _080DD02C: .4byte gUnknown_3005090
@@ -368,14 +368,14 @@ _080DD0CC:
 	cmp r0, 0
 	bne _080DD0E8
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080DD13A
 	.align 2, 0
 _080DD0E0: .4byte gUnknown_2037F1B
 _080DD0E4: .4byte gUnknown_2037F02
 _080DD0E8:
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DD10C
@@ -401,7 +401,7 @@ _080DD10C:
 _080DD11A:
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -409,10 +409,10 @@ _080DD11A:
 	lsls r1, r6, 24
 	asrs r1, 24
 	movs r2, 0x3
-	bl sub_8071E60
+	bl PlayCry3
 _080DD134:
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080DD13A:
 	pop {r4-r6}
 	pop {r0}
@@ -480,14 +480,14 @@ _080DD1A8:
 	cmp r0, 0
 	bne _080DD1C4
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080DD26A
 	.align 2, 0
 _080DD1BC: .4byte gUnknown_2037F1B
 _080DD1C0: .4byte gUnknown_2037F02
 _080DD1C4:
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DD1E8
@@ -513,7 +513,7 @@ _080DD1E8:
 _080DD1F6:
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r3, r0, 16
 	ldr r1, _080DD23C @ =gUnknown_3005090
@@ -537,7 +537,7 @@ _080DD1F6:
 	bne _080DD244
 	adds r0, r3, 0
 	movs r2, 0x9
-	bl sub_8071E60
+	bl PlayCry3
 	b _080DD24C
 	.align 2, 0
 _080DD234: .4byte gUnknown_2023BCE
@@ -547,7 +547,7 @@ _080DD240: .4byte gUnknown_2037F02
 _080DD244:
 	adds r0, r3, 0
 	movs r2, 0x7
-	bl sub_8071E60
+	bl PlayCry3
 _080DD24C:
 	ldr r0, _080DD25C @ =gUnknown_3005090
 	adds r1, r5, r6
@@ -561,7 +561,7 @@ _080DD25C: .4byte gUnknown_3005090
 _080DD260: .4byte sub_80DD270
 _080DD264:
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080DD26A:
 	pop {r4-r6}
 	pop {r0}
@@ -601,7 +601,7 @@ _080DD2A4:
 	ldrsh r0, [r1, r2]
 	cmp r0, 0xFF
 	bne _080DD2CA
-	bl sub_8072214
+	bl IsCryPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DD2E6
@@ -609,12 +609,12 @@ _080DD2A4:
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xA
-	bl sub_8071E60
+	bl PlayCry3
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080DD2E6
 _080DD2CA:
-	bl sub_8072214
+	bl IsCryPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DD2E6
@@ -622,9 +622,9 @@ _080DD2CA:
 	asrs r1, 24
 	mov r0, r8
 	movs r2, 0x8
-	bl sub_8071E60
+	bl PlayCry3
 	mov r0, r9
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080DD2E6:
 	pop {r3,r4}
 	mov r8, r3
@@ -656,12 +656,12 @@ sub_80DD2F4: @ 80DD2F4
 	.align 2, 0
 _080DD318: .4byte gUnknown_3005090
 _080DD31C:
-	bl sub_8072214
+	bl IsCryPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DD32C
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080DD32C:
 	pop {r4}
 	pop {r0}
@@ -695,7 +695,7 @@ sub_80DD334: @ 80DD334
 	beq _080DD384
 	adds r0, r3, 0
 	movs r2, 0x4
-	bl sub_8071E60
+	bl PlayCry3
 	ldr r0, _080DD380 @ =sub_80DD390
 	str r0, [r4]
 	b _080DD38A
@@ -706,7 +706,7 @@ _080DD37C: .4byte gUnknown_3005090
 _080DD380: .4byte sub_80DD390
 _080DD384:
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080DD38A:
 	pop {r4,r5}
 	pop {r0}
@@ -735,7 +735,7 @@ sub_80DD390: @ 80DD390
 	.align 2, 0
 _080DD3B4: .4byte gUnknown_3005090
 _080DD3B8:
-	bl sub_8072214
+	bl IsCryPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DD3D4
@@ -743,9 +743,9 @@ _080DD3B8:
 	movs r1, 0xC
 	ldrsb r1, [r4, r1]
 	movs r2, 0x6
-	bl sub_8071E60
+	bl PlayCry3
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080DD3D4:
 	pop {r4,r5}
 	pop {r0}
@@ -768,9 +768,9 @@ sub_80DD3DC: @ 80DD3DC
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r5, 0
-	bl sub_8072348
+	bl PlaySE1WithPanning
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -794,9 +794,9 @@ sub_80DD410: @ 80DD410
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r5, 0
-	bl sub_807237C
+	bl PlaySE2WithPanning
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -840,7 +840,7 @@ sub_80DD444: @ 80DD444
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_8073B88
+	bl CalculatePanIncrement
 	ldr r2, _080DD4CC @ =gUnknown_3005090
 	mov r3, r8
 	lsls r1, r3, 2
@@ -914,7 +914,7 @@ _080DD50E:
 	cmp r1, r0
 	bne _080DD526
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080DD526:
 	pop {r4,r5}
 	pop {r0}

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8044E30
-sub_8044E30: @ 8044E30
+	thumb_func_start Sin
+Sin: @ 8044E30
 	lsls r1, 16
 	asrs r1, 16
 	ldr r2, _08044E48 @ =gUnknown_825E074
@@ -21,10 +21,10 @@ sub_8044E30: @ 8044E30
 	bx lr
 	.align 2, 0
 _08044E48: .4byte gUnknown_825E074
-	thumb_func_end sub_8044E30
+	thumb_func_end Sin
 
-	thumb_func_start sub_8044E4C
-sub_8044E4C: @ 8044E4C
+	thumb_func_start Cos
+Cos: @ 8044E4C
 	lsls r1, 16
 	asrs r1, 16
 	ldr r2, _08044E68 @ =gUnknown_825E074
@@ -40,10 +40,10 @@ sub_8044E4C: @ 8044E4C
 	bx lr
 	.align 2, 0
 _08044E68: .4byte gUnknown_825E074
-	thumb_func_end sub_8044E4C
+	thumb_func_end Cos
 
-	thumb_func_start sub_8044E6C
-sub_8044E6C: @ 8044E6C
+	thumb_func_start Sin2
+Sin2: @ 8044E6C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 16
@@ -77,21 +77,21 @@ _08044EA8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8044E6C
+	thumb_func_end Sin2
 
-	thumb_func_start sub_8044EB0
-sub_8044EB0: @ 8044EB0
+	thumb_func_start Cos2
+Cos2: @ 8044EB0
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xB4
 	lsls r1, 15
 	adds r0, r1
 	lsrs r0, 16
-	bl sub_8044E6C
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8044EB0
+	thumb_func_end Cos2
 
 	.align 2, 0 @ Don't pad with nop.

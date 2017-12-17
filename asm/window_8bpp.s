@@ -10,8 +10,8 @@ nullsub_7: @ 8005034
 	bx lr
 	thumb_func_end nullsub_7
 
-	thumb_func_start sub_8005038
-sub_8005038: @ 8005038
+	thumb_func_start AddWindow8Bit
+AddWindow8Bit: @ 8005038
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -52,14 +52,14 @@ _08005066:
 	bne _080050C2
 	adds r0, r7, 0
 	movs r1, 0x8
-	bl sub_8001AA8
+	bl GetBgAttribute
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _08005108 @ =0x0000ffff
 	cmp r5, r0
 	beq _080050C2
 	adds r0, r5, 0
-	bl sub_8002B9C
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _080050FA
@@ -81,7 +81,7 @@ _080050B4:
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 _080050C2:
 	mov r2, r9
 	ldrb r1, [r2, 0x3]
@@ -89,12 +89,12 @@ _080050C2:
 	muls r0, r1
 	lsls r0, 22
 	lsrs r0, 16
-	bl sub_8002B9C
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _08005110
 	adds r0, r7, 0
-	bl sub_8005350
+	bl GetNumActiveWindowsOnBg8Bit
 	lsls r0, 24
 	cmp r0, 0
 	bne _080050FA
@@ -106,7 +106,7 @@ _080050C2:
 	cmp r1, r0
 	beq _080050FA
 	adds r0, r1, 0
-	bl sub_8002BC4
+	bl Free
 	str r4, [r5]
 _080050FA:
 	movs r0, 0xFF
@@ -142,10 +142,10 @@ _0800512E:
 	bx r1
 	.align 2, 0
 _0800513C: .4byte gUnknown_20204B4
-	thumb_func_end sub_8005038
+	thumb_func_end AddWindow8Bit
 
-	thumb_func_start sub_8005140
-sub_8005140: @ 8005140
+	thumb_func_start FillWindowPixelBuffer8Bit
+FillWindowPixelBuffer8Bit: @ 8005140
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -180,10 +180,10 @@ _08005176:
 	bx r0
 	.align 2, 0
 _0800517C: .4byte gUnknown_20204B4
-	thumb_func_end sub_8005140
+	thumb_func_end FillWindowPixelBuffer8Bit
 
-	thumb_func_start sub_8005180
-sub_8005180: @ 8005180
+	thumb_func_start FillWindowPixelRect8Bit
+FillWindowPixelRect8Bit: @ 8005180
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -250,10 +250,10 @@ sub_8005180: @ 8005180
 _08005200: .4byte gUnknown_20204B4
 _08005204: .4byte 0xffff0000
 _08005208: .4byte 0x0000ffff
-	thumb_func_end sub_8005180
+	thumb_func_end FillWindowPixelRect8Bit
 
-	thumb_func_start sub_800520C
-sub_800520C: @ 800520C
+	thumb_func_start BlitBitmapRectToWindow4BitTo8Bit
+BlitBitmapRectToWindow4BitTo8Bit: @ 800520C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -352,10 +352,10 @@ sub_800520C: @ 800520C
 _080052CC: .4byte 0x0000ffff
 _080052D0: .4byte gUnknown_20204B4
 _080052D4: .4byte 0xffff0000
-	thumb_func_end sub_800520C
+	thumb_func_end BlitBitmapRectToWindow4BitTo8Bit
 
-	thumb_func_start sub_80052D8
-sub_80052D8: @ 80052D8
+	thumb_func_start CopyWindowToVram8Bit
+CopyWindowToVram8Bit: @ 80052D8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -392,32 +392,32 @@ _08005318:
 	b _08005348
 _0800531E:
 	ldrb r0, [r3]
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _08005348
 _08005326:
 	ldrb r0, [r3]
 	ldr r1, [r3, 0x8]
 	ldrh r2, [r4]
 	ldrh r3, [r3, 0x6]
-	bl sub_80017D0
+	bl LoadBgTiles
 	b _08005348
 _08005334:
 	ldrb r0, [r3]
 	ldr r1, [r3, 0x8]
 	ldrh r2, [r4]
 	ldrh r3, [r3, 0x6]
-	bl sub_80017D0
+	bl LoadBgTiles
 	ldr r0, [r6]
 	ldrb r0, [r0]
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _08005348:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80052D8
+	thumb_func_end CopyWindowToVram8Bit
 
-	thumb_func_start sub_8005350
-sub_8005350: @ 8005350
+	thumb_func_start GetNumActiveWindowsOnBg8Bit
+GetNumActiveWindowsOnBg8Bit: @ 8005350
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -442,6 +442,6 @@ _08005368:
 	bx r1
 	.align 2, 0
 _08005378: .4byte gUnknown_20204B4
-	thumb_func_end sub_8005350
+	thumb_func_end GetNumActiveWindowsOnBg8Bit
 
 	.align 2, 0 @ Don't pad with nop.

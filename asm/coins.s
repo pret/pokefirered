@@ -184,7 +184,7 @@ sub_80D0674: @ 80D0674
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	ldr r2, _080D06CC @ =gUnknown_8417C2D
 	movs r4, 0
 	str r4, [sp]
@@ -291,9 +291,9 @@ sub_80D072C: @ 80D072C
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r4]
 	ldr r5, _080D07C0 @ =0x0000021d
 	adds r1, r5, 0
@@ -303,7 +303,7 @@ sub_80D072C: @ 80D072C
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0xD
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	ldrb r0, [r4]
 	ldr r2, _080D07C4 @ =gUnknown_8417C2D
 	movs r3, 0
@@ -330,7 +330,7 @@ sub_80D07C8: @ 80D07C8
 	push {r4,lr}
 	ldr r4, _080D07E8 @ =gUnknown_2039A28
 	ldrb r0, [r4]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_810F4D8

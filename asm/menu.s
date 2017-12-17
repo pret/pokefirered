@@ -19,12 +19,12 @@ sub_810EDC4: @ 810EDC4
 	strb r3, [r0]
 	ldr r1, _0810EE08 @ =sub_810EE5C
 	adds r0, r5, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	cmp r4, 0x1
 	bne _0810EDFA
 	adds r0, r5, 0
@@ -57,12 +57,12 @@ sub_810EE0C: @ 810EE0C
 	strb r0, [r5]
 	ldr r1, _0810EE58 @ =sub_810EE5C
 	adds r0, r6, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r6, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r6, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	cmp r4, 0x1
 	bne _0810EE4A
 	adds r0, r6, 0
@@ -121,7 +121,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x14]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r0, r9
 	ldrh r1, [r0]
 	adds r1, 0x1
@@ -140,7 +140,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x18]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0x2
@@ -155,7 +155,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0xC]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0x3
@@ -174,7 +174,7 @@ sub_810EE5C: @ 810EE5C
 	str r0, [sp, 0x8]
 	adds r0, r6, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r0, r9
 	ldrh r1, [r0]
 	adds r1, 0x4
@@ -191,7 +191,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	adds r2, r7, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0x5
@@ -205,7 +205,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x14]
 	mov r3, r10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0x6
@@ -219,7 +219,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x18]
 	mov r3, r10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0x8
@@ -233,7 +233,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x1C]
 	mov r3, r10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0x9
@@ -247,7 +247,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	adds r2, r7, 0
 	mov r3, r10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0xA
@@ -265,7 +265,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x14]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0xB
@@ -279,7 +279,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x18]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0xC
@@ -293,7 +293,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x1C]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r3, r9
 	ldrh r1, [r3]
 	adds r1, 0xD
@@ -307,7 +307,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	adds r2, r7, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F230 @ =0x0000080a
 	adds r1, r3, 0
 	mov r0, r9
@@ -327,7 +327,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x14]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F234 @ =0x0000080b
 	adds r1, r3, 0
 	mov r0, r9
@@ -343,7 +343,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x18]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F238 @ =0x0000080c
 	adds r1, r3, 0
 	mov r0, r9
@@ -359,7 +359,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x1C]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F23C @ =0x0000080d
 	adds r1, r3, 0
 	mov r0, r9
@@ -375,7 +375,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	adds r2, r7, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F240 @ =0x00000805
 	adds r1, r3, 0
 	mov r0, r9
@@ -395,7 +395,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x14]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F244 @ =0x00000806
 	adds r1, r3, 0
 	mov r0, r9
@@ -411,7 +411,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x18]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F248 @ =0x00000808
 	adds r1, r3, 0
 	mov r0, r9
@@ -427,7 +427,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x1C]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F24C @ =0x00000809
 	adds r1, r3, 0
 	mov r0, r9
@@ -443,7 +443,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	adds r2, r7, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r3, 0x80
 	lsls r3, 4
 	adds r1, r3, 0
@@ -465,7 +465,7 @@ sub_810EE5C: @ 810EE5C
 	str r0, [sp, 0x8]
 	adds r0, r6, 0
 	ldr r2, [sp, 0x14]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F250 @ =0x00000801
 	adds r1, r3, 0
 	mov r0, r9
@@ -481,7 +481,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x18]
 	mov r3, r10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r3, _0810F254 @ =0x00000802
 	adds r1, r3, 0
 	mov r0, r9
@@ -498,7 +498,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0xC]
 	mov r3, r10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r0, _0810F258 @ =0x00000803
 	adds r1, r0, 0
 	mov r2, r9
@@ -514,7 +514,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	ldr r2, [sp, 0x1C]
 	mov r3, r10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r0, _0810F25C @ =0x00000804
 	adds r1, r0, 0
 	mov r2, r9
@@ -530,7 +530,7 @@ sub_810EE5C: @ 810EE5C
 	adds r0, r6, 0
 	adds r2, r7, 0
 	mov r3, r10
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3
@@ -566,12 +566,12 @@ sub_810F260: @ 810F260
 	lsrs r4, 24
 	ldr r1, _0810F294 @ =sub_810F298
 	adds r0, r5, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	cmp r4, 0x1
 	bne _0810F28E
 	adds r0, r5, 0
@@ -620,15 +620,15 @@ sub_810F298: @ 810F298
 	str r1, [sp, 0x8]
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	thumb_func_end sub_810F298
 
-	thumb_func_start sub_810F2E8
-sub_810F2E8: @ 810F2E8
+	thumb_func_start SetWindowBorderStyle
+SetWindowBorderStyle: @ 810F2E8
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -639,14 +639,14 @@ sub_810F2E8: @ 810F2E8
 	strh r2, [r0]
 	ldr r0, _0810F328 @ =gUnknown_203ADF2
 	strb r3, [r0]
-	ldr r1, _0810F32C @ =sub_810F380
+	ldr r1, _0810F32C @ =DrawWindowBorder
 	adds r0, r5, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	cmp r4, 0x1
 	bne _0810F31E
 	adds r0, r5, 0
@@ -659,8 +659,8 @@ _0810F31E:
 	.align 2, 0
 _0810F324: .4byte gUnknown_203ADF0
 _0810F328: .4byte gUnknown_203ADF2
-_0810F32C: .4byte sub_810F380
-	thumb_func_end sub_810F2E8
+_0810F32C: .4byte DrawWindowBorder
+	thumb_func_end SetWindowBorderStyle
 
 	thumb_func_start sub_810F330
 sub_810F330: @ 810F330
@@ -677,14 +677,14 @@ sub_810F330: @ 810F330
 	movs r1, 0x5
 	bl sub_8004950
 	strb r0, [r5]
-	ldr r1, _0810F37C @ =sub_810F380
+	ldr r1, _0810F37C @ =DrawWindowBorder
 	adds r0, r6, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r6, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r6, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	cmp r4, 0x1
 	bne _0810F36E
 	adds r0, r6, 0
@@ -697,11 +697,11 @@ _0810F36E:
 	.align 2, 0
 _0810F374: .4byte gUnknown_203ADF0
 _0810F378: .4byte gUnknown_203ADF2
-_0810F37C: .4byte sub_810F380
+_0810F37C: .4byte DrawWindowBorder
 	thumb_func_end sub_810F330
 
-	thumb_func_start sub_810F380
-sub_810F380: @ 810F380
+	thumb_func_start DrawWindowBorder
+DrawWindowBorder: @ 810F380
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -745,7 +745,7 @@ sub_810F380: @ 810F380
 	mov r0, r9
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r2, _0810F4D0 @ =gUnknown_203ADF0
 	ldrh r1, [r2]
 	adds r1, 0x1
@@ -759,7 +759,7 @@ sub_810F380: @ 810F380
 	mov r0, r9
 	ldr r2, [sp, 0xC]
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r2, _0810F4D0 @ =gUnknown_203ADF0
 	ldrh r1, [r2]
 	adds r1, 0x2
@@ -778,7 +778,7 @@ sub_810F380: @ 810F380
 	mov r0, r9
 	mov r2, r10
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r0, _0810F4D0 @ =gUnknown_203ADF0
 	ldrh r1, [r0]
 	adds r1, 0x3
@@ -792,7 +792,7 @@ sub_810F380: @ 810F380
 	mov r0, r9
 	adds r2, r6, 0
 	mov r3, r8
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r0, _0810F4D0 @ =gUnknown_203ADF0
 	ldrh r1, [r0]
 	adds r1, 0x5
@@ -806,7 +806,7 @@ sub_810F380: @ 810F380
 	mov r0, r9
 	mov r2, r10
 	mov r3, r8
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r0, _0810F4D0 @ =gUnknown_203ADF0
 	ldrh r1, [r0]
 	adds r1, 0x6
@@ -825,7 +825,7 @@ sub_810F380: @ 810F380
 	mov r0, r9
 	adds r2, r6, 0
 	mov r3, r8
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r2, _0810F4D0 @ =gUnknown_203ADF0
 	ldrh r1, [r2]
 	adds r1, 0x7
@@ -839,7 +839,7 @@ sub_810F380: @ 810F380
 	mov r0, r9
 	ldr r2, [sp, 0xC]
 	mov r3, r8
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r2, _0810F4D0 @ =gUnknown_203ADF0
 	ldrh r1, [r2]
 	adds r1, 0x8
@@ -852,7 +852,7 @@ sub_810F380: @ 810F380
 	mov r0, r9
 	mov r2, r10
 	mov r3, r8
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -864,7 +864,7 @@ sub_810F380: @ 810F380
 	.align 2, 0
 _0810F4D0: .4byte gUnknown_203ADF0
 _0810F4D4: .4byte gUnknown_203ADF2
-	thumb_func_end sub_810F380
+	thumb_func_end DrawWindowBorder
 
 	thumb_func_start sub_810F4D8
 sub_810F4D8: @ 810F4D8
@@ -876,12 +876,12 @@ sub_810F4D8: @ 810F4D8
 	lsrs r4, 24
 	ldr r1, _0810F50C @ =sub_810F510
 	adds r0, r5, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	cmp r4, 0x1
 	bne _0810F506
 	adds r0, r5, 0
@@ -926,7 +926,7 @@ sub_810F510: @ 810F510
 	str r1, [sp, 0x8]
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -991,10 +991,10 @@ _0810F5C0:
 	lsrs r5, r0, 24
 _0810F5C4:
 	movs r0, 0x2
-	bl sub_8150408
+	bl stdpal_get
 	adds r1, r5, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r0, _0810F5E4 @ =gUnknown_203ADF4
 	ldrb r0, [r0]
 	add sp, 0x8
@@ -1018,10 +1018,10 @@ sub_810F5E8: @ 810F5E8
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq _0810F63E
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0xFF
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0
@@ -1093,10 +1093,10 @@ _0810F684:
 	strb r0, [r1, 0x2]
 	adds r4, r6, 0
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0xFF
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	cmp r5, 0
 	beq _0810F6CE
 	movs r0, 0
@@ -1171,7 +1171,7 @@ sub_810F71C: @ 810F71C
 	cmp r0, 0xFF
 	beq _0810F734
 	movs r1, 0xFF
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl sub_8003F20
@@ -1191,9 +1191,9 @@ sub_810F740: @ 810F740
 	cmp r0, 0xFF
 	beq _0810F768
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r4]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl sub_8003F20
@@ -1252,7 +1252,7 @@ _0810F7BC:
 	strb r7, [r5, 0x2]
 _0810F7BE:
 	movs r0, 0
-	bl sub_810F904
+	bl MoveMenuCursor
 	ldr r0, _0810F7D4 @ =gUnknown_203ADE4
 	ldrb r0, [r0, 0x2]
 	pop {r3}
@@ -1347,8 +1347,8 @@ sub_810F818: @ 810F818
 	bx r1
 	thumb_func_end sub_810F818
 
-	thumb_func_start sub_810F874
-sub_810F874: @ 810F874
+	thumb_func_start RedrawMenuCursor
+RedrawMenuCursor: @ 810F874
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -1388,7 +1388,7 @@ sub_810F874: @ 810F874
 	str r0, [sp, 0x4]
 	mov r0, r9
 	movs r1, 0x1
-	bl sub_8004378
+	bl FillWindowPixelRect
 	ldrb r0, [r5, 0x5]
 	ldrb r1, [r5, 0x6]
 	ldr r2, _0810F900 @ =gUnknown_841623B
@@ -1416,10 +1416,10 @@ sub_810F874: @ 810F874
 	.align 2, 0
 _0810F8FC: .4byte gUnknown_203ADE4
 _0810F900: .4byte gUnknown_841623B
-	thumb_func_end sub_810F874
+	thumb_func_end RedrawMenuCursor
 
-	thumb_func_start sub_810F904
-sub_810F904: @ 810F904
+	thumb_func_start MoveMenuCursor
+MoveMenuCursor: @ 810F904
 	push {r4,r5,lr}
 	ldr r1, _0810F924 @ =gUnknown_203ADE4
 	ldrb r5, [r1, 0x2]
@@ -1450,15 +1450,15 @@ _0810F936:
 	strb r0, [r4, 0x2]
 	ldrb r1, [r4, 0x2]
 	adds r0, r5, 0
-	bl sub_810F874
+	bl RedrawMenuCursor
 	ldrb r0, [r4, 0x2]
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F904
+	thumb_func_end MoveMenuCursor
 
-	thumb_func_start sub_810F948
-sub_810F948: @ 810F948
+	thumb_func_start MoveMenuCursorNoWrapAround
+MoveMenuCursorNoWrapAround: @ 810F948
 	push {r4,r5,lr}
 	ldr r1, _0810F968 @ =gUnknown_203ADE4
 	ldrb r5, [r1, 0x2]
@@ -1489,12 +1489,12 @@ _0810F97A:
 	strb r0, [r4, 0x2]
 	ldrb r1, [r4, 0x2]
 	adds r0, r5, 0
-	bl sub_810F874
+	bl RedrawMenuCursor
 	ldrb r0, [r4, 0x2]
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F948
+	thumb_func_end MoveMenuCursorNoWrapAround
 
 	thumb_func_start sub_810F98C
 sub_810F98C: @ 810F98C
@@ -1505,8 +1505,8 @@ sub_810F98C: @ 810F98C
 _0810F994: .4byte gUnknown_203ADE4
 	thumb_func_end sub_810F98C
 
-	thumb_func_start sub_810F998
-sub_810F998: @ 810F998
+	thumb_func_start ProcessMenuInput
+ProcessMenuInput: @ 810F998
 	push {r4,lr}
 	ldr r0, _0810F9BC @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -1554,7 +1554,7 @@ _0810F9E6:
 	bl sub_80722CC
 	movs r0, 0x1
 _0810F9F6:
-	bl sub_810F904
+	bl MoveMenuCursor
 _0810F9FA:
 	movs r0, 0x2
 	negs r0, r0
@@ -1562,10 +1562,10 @@ _0810F9FE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F998
+	thumb_func_end ProcessMenuInput
 
-	thumb_func_start sub_810FA04
-sub_810FA04: @ 810FA04
+	thumb_func_start ProcessMenuInputNoWrapAround
+ProcessMenuInputNoWrapAround: @ 810FA04
 	push {r4-r6,lr}
 	ldr r4, _0810FA2C @ =gUnknown_203ADE4
 	ldrb r5, [r4, 0x2]
@@ -1603,7 +1603,7 @@ _0810FA42:
 	beq _0810FA5C
 	movs r0, 0x1
 	negs r0, r0
-	bl sub_810F948
+	bl MoveMenuCursorNoWrapAround
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1615,7 +1615,7 @@ _0810FA5C:
 	cmp r0, 0
 	beq _0810FA78
 	movs r0, 0x1
-	bl sub_810F948
+	bl MoveMenuCursorNoWrapAround
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
@@ -1630,10 +1630,10 @@ _0810FA7C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810FA04
+	thumb_func_end ProcessMenuInputNoWrapAround
 
-	thumb_func_start sub_810FA84
-sub_810FA84: @ 810FA84
+	thumb_func_start ProcessMenuInput_other
+ProcessMenuInput_other: @ 810FA84
 	push {r4,lr}
 	ldr r2, _0810FAA8 @ =gUnknown_30030F0
 	ldrh r1, [r2, 0x2E]
@@ -1680,7 +1680,7 @@ _0810FAD4:
 	bl sub_80722CC
 	movs r0, 0x1
 _0810FAE0:
-	bl sub_810F904
+	bl MoveMenuCursor
 _0810FAE4:
 	movs r0, 0x2
 	negs r0, r0
@@ -1688,10 +1688,10 @@ _0810FAE8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810FA84
+	thumb_func_end ProcessMenuInput_other
 
-	thumb_func_start sub_810FAF0
-sub_810FAF0: @ 810FAF0
+	thumb_func_start ProcessMenuInputNoWrapAround_other
+ProcessMenuInputNoWrapAround_other: @ 810FAF0
 	push {r4-r6,lr}
 	ldr r4, _0810FB18 @ =gUnknown_203ADE4
 	ldrb r5, [r4, 0x2]
@@ -1730,7 +1730,7 @@ _0810FB2E:
 	bne _0810FB4A
 	movs r0, 0x1
 	negs r0, r0
-	bl sub_810F948
+	bl MoveMenuCursorNoWrapAround
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1740,7 +1740,7 @@ _0810FB4A:
 	cmp r1, 0x80
 	bne _0810FB62
 	movs r0, 0x1
-	bl sub_810F948
+	bl MoveMenuCursorNoWrapAround
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
@@ -1755,10 +1755,10 @@ _0810FB66:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810FAF0
+	thumb_func_end ProcessMenuInputNoWrapAround_other
 
-	thumb_func_start sub_810FB6C
-sub_810FB6C: @ 810FB6C
+	thumb_func_start PrintTextArray
+PrintTextArray: @ 810FB6C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1821,7 +1821,7 @@ _0810FBD0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810FB6C
+	thumb_func_end PrintTextArray
 
 	thumb_func_start sub_810FBE8
 sub_810FBE8: @ 810FBE8
@@ -1935,7 +1935,7 @@ sub_810FC80: @ 810FC80
 	mov r0, r8
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_810FB6C
+	bl PrintTextArray
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -2312,7 +2312,7 @@ sub_810FF60: @ 810FF60
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	ldr r0, _081100A0 @ =gUnknown_841623D
 	str r0, [sp, 0xC]
 	add r1, sp, 0xC
@@ -2448,7 +2448,7 @@ sub_81100A4: @ 81100A4
 	thumb_func_start sub_81100C8
 sub_81100C8: @ 81100C8
 	push {r4,lr}
-	bl sub_810FA04
+	bl ProcessMenuInputNoWrapAround
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -2869,7 +2869,7 @@ sub_811037C: @ 811037C
 	str r6, [sp, 0x4]
 	movs r1, 0x11
 	adds r2, r4, 0
-	bl sub_8004378
+	bl FillWindowPixelRect
 	ldrb r6, [r5, 0x9]
 	adds r0, r7, 0
 	adds r1, r6, 0

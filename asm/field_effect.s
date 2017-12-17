@@ -5,15 +5,15 @@
 
 	.text
 
-	thumb_func_start sub_8083444
-sub_8083444: @ 8083444
+	thumb_func_start FieldEffectStart
+FieldEffectStart: @ 8083444
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_80837D0
+	bl FieldEffectActiveListAdd
 	ldr r0, _08083484 @ =gUnknown_81D96AC
 	lsls r4, 2
 	adds r4, r0
@@ -41,22 +41,22 @@ _08083462:
 	.align 2, 0
 _08083484: .4byte gUnknown_81D96AC
 _08083488: .4byte gUnknown_83CBE30
-	thumb_func_end sub_8083444
+	thumb_func_end FieldEffectStart
 
-	thumb_func_start sub_808348C
-sub_808348C: @ 808348C
+	thumb_func_start FieldEffectCmd_loadtiles
+FieldEffectCmd_loadtiles: @ 808348C
 	push {lr}
 	ldr r1, [r0]
 	adds r1, 0x1
 	str r1, [r0]
-	bl sub_8083568
+	bl FieldEffectScript_LoadTiles
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808348C
+	thumb_func_end FieldEffectCmd_loadtiles
 
-	thumb_func_start sub_80834A0
-sub_80834A0: @ 80834A0
+	thumb_func_start FieldEffectCmd_loadfadedpal
+FieldEffectCmd_loadfadedpal: @ 80834A0
 	push {lr}
 	ldr r1, [r0]
 	adds r1, 0x1
@@ -65,10 +65,10 @@ sub_80834A0: @ 80834A0
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80834A0
+	thumb_func_end FieldEffectCmd_loadfadedpal
 
-	thumb_func_start sub_80834B4
-sub_80834B4: @ 80834B4
+	thumb_func_start FieldEffectCmd_loadpal
+FieldEffectCmd_loadpal: @ 80834B4
 	push {lr}
 	ldr r1, [r0]
 	adds r1, 0x1
@@ -77,19 +77,19 @@ sub_80834B4: @ 80834B4
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80834B4
+	thumb_func_end FieldEffectCmd_loadpal
 
-	thumb_func_start sub_80834C8
-sub_80834C8: @ 80834C8
+	thumb_func_start FieldEffectCmd_callnative
+FieldEffectCmd_callnative: @ 80834C8
 	push {lr}
 	ldr r2, [r0]
 	adds r2, 0x1
 	str r2, [r0]
-	bl sub_8083698
+	bl FieldEffectScript_CallNative
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80834C8
+	thumb_func_end FieldEffectCmd_callnative
 
 	thumb_func_start sub_80834DC
 sub_80834DC: @ 80834DC
@@ -97,8 +97,8 @@ sub_80834DC: @ 80834DC
 	bx lr
 	thumb_func_end sub_80834DC
 
-	thumb_func_start sub_80834E0
-sub_80834E0: @ 80834E0
+	thumb_func_start FieldEffectCmd_loadgfx_callnative
+FieldEffectCmd_loadgfx_callnative: @ 80834E0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -106,20 +106,20 @@ sub_80834E0: @ 80834E0
 	adds r0, 0x1
 	str r0, [r4]
 	adds r0, r4, 0
-	bl sub_8083568
+	bl FieldEffectScript_LoadTiles
 	adds r0, r4, 0
 	bl sub_8083614
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8083698
+	bl FieldEffectScript_CallNative
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80834E0
+	thumb_func_end FieldEffectCmd_loadgfx_callnative
 
-	thumb_func_start sub_8083508
-sub_8083508: @ 8083508
+	thumb_func_start FieldEffectCmd_loadtiles_callnative
+FieldEffectCmd_loadtiles_callnative: @ 8083508
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -127,18 +127,18 @@ sub_8083508: @ 8083508
 	adds r0, 0x1
 	str r0, [r4]
 	adds r0, r4, 0
-	bl sub_8083568
+	bl FieldEffectScript_LoadTiles
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8083698
+	bl FieldEffectScript_CallNative
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8083508
+	thumb_func_end FieldEffectCmd_loadtiles_callnative
 
-	thumb_func_start sub_808352C
-sub_808352C: @ 808352C
+	thumb_func_start FieldEffectCmd_loadfadedpal_callnative
+FieldEffectCmd_loadfadedpal_callnative: @ 808352C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -149,15 +149,15 @@ sub_808352C: @ 808352C
 	bl sub_8083614
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8083698
+	bl FieldEffectScript_CallNative
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808352C
+	thumb_func_end FieldEffectCmd_loadfadedpal_callnative
 
-	thumb_func_start sub_8083550
-sub_8083550: @ 8083550
+	thumb_func_start FieldEffectScript_ReadWord
+FieldEffectScript_ReadWord: @ 8083550
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	ldrb r1, [r2, 0x1]
@@ -170,22 +170,22 @@ sub_8083550: @ 8083550
 	lsls r1, 24
 	adds r0, r1
 	bx lr
-	thumb_func_end sub_8083550
+	thumb_func_end FieldEffectScript_ReadWord
 
-	thumb_func_start sub_8083568
-sub_8083568: @ 8083568
+	thumb_func_start FieldEffectScript_LoadTiles
+FieldEffectScript_LoadTiles: @ 8083568
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_8083550
+	bl FieldEffectScript_ReadWord
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	ldr r1, _08083594 @ =0xffff0000
 	cmp r0, r1
 	bne _08083586
 	adds r0, r5, 0
-	bl sub_80086DC
+	bl LoadSpriteSheet
 _08083586:
 	ldr r0, [r4]
 	adds r0, 0x4
@@ -195,7 +195,7 @@ _08083586:
 	bx r0
 	.align 2, 0
 _08083594: .4byte 0xffff0000
-	thumb_func_end sub_8083568
+	thumb_func_end FieldEffectScript_LoadTiles
 
 	thumb_func_start sub_8083598
 sub_8083598: @ 8083598
@@ -221,7 +221,7 @@ _080835B8:
 	ldr r1, _080835C8 @ =gUnknown_20371F8
 	adds r0, r1
 	movs r1, 0x10
-	bl sub_8071544
+	bl TintPalette_GrayScale
 	b _080835F6
 	.align 2, 0
 _080835C8: .4byte gUnknown_20371F8
@@ -231,7 +231,7 @@ _080835CC:
 	ldr r1, _080835DC @ =gUnknown_20371F8
 	adds r0, r1
 	movs r1, 0x10
-	bl sub_80715F4
+	bl TintPalette_SepiaTone
 	b _080835F6
 	.align 2, 0
 _080835DC: .4byte gUnknown_20371F8
@@ -244,7 +244,7 @@ _080835E0:
 	ldr r1, _0808360C @ =gUnknown_20371F8
 	adds r0, r1
 	movs r1, 0x10
-	bl sub_8071544
+	bl TintPalette_GrayScale
 _080835F6:
 	lsls r1, r4, 5
 	ldr r0, _0808360C @ =gUnknown_20371F8
@@ -266,25 +266,25 @@ _08083610: .4byte gUnknown_20375F8
 sub_8083614: @ 8083614
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8083550
+	bl FieldEffectScript_ReadWord
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	cmp r4, 0xFF
 	bne _08083642
 	ldrh r0, [r5, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8083598
 _08083642:
 	ldrh r0, [r5, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_807AA8C
@@ -300,19 +300,19 @@ _08083642:
 sub_808365C: @ 808365C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8083550
+	bl FieldEffectScript_ReadWord
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	cmp r4, 0xFF
 	beq _0808368A
 	ldrh r0, [r5, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8083598
@@ -325,12 +325,12 @@ _0808368A:
 	bx r0
 	thumb_func_end sub_808365C
 
-	thumb_func_start sub_8083698
-sub_8083698: @ 8083698
+	thumb_func_start FieldEffectScript_CallNative
+FieldEffectScript_CallNative: @ 8083698
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8083550
+	bl FieldEffectScript_ReadWord
 	bl _call_via_r0
 	str r0, [r5]
 	ldr r0, [r4]
@@ -339,46 +339,46 @@ sub_8083698: @ 8083698
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8083698
+	thumb_func_end FieldEffectScript_CallNative
 
-	thumb_func_start sub_80836B4
-sub_80836B4: @ 80836B4
+	thumb_func_start FieldEffectFreeGraphicsResources
+FieldEffectFreeGraphicsResources: @ 80836B4
 	push {r4,r5,lr}
 	adds r1, r0, 0
 	adds r1, 0x40
 	ldrh r5, [r1]
 	ldrb r4, [r0, 0x5]
 	lsrs r4, 4
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r5, 0
-	bl sub_80836F0
+	bl FieldEffectFreeTilesIfUnused
 	adds r0, r4, 0
-	bl sub_8083754
+	bl FieldEffectFreePaletteIfUnused
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80836B4
+	thumb_func_end FieldEffectFreeGraphicsResources
 
-	thumb_func_start sub_80836D8
-sub_80836D8: @ 80836D8
+	thumb_func_start FieldEffectStop
+FieldEffectStop: @ 80836D8
 	push {r4,lr}
 	lsls r4, r1, 24
 	lsrs r4, 24
-	bl sub_80836B4
+	bl FieldEffectFreeGraphicsResources
 	adds r0, r4, 0
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80836D8
+	thumb_func_end FieldEffectStop
 
-	thumb_func_start sub_80836F0
-sub_80836F0: @ 80836F0
+	thumb_func_start FieldEffectFreeTilesIfUnused
+FieldEffectFreeTilesIfUnused: @ 80836F0
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_800885C
+	bl GetSpriteTileTagByTileStart
 	lsls r0, 16
 	lsrs r3, r0, 16
 	ldr r0, _0808374C @ =0x0000ffff
@@ -415,7 +415,7 @@ _08083734:
 	cmp r2, 0x3F
 	bls _0808370A
 	adds r0, r3, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 _08083744:
 	pop {r4,r5}
 	pop {r0}
@@ -423,15 +423,15 @@ _08083744:
 	.align 2, 0
 _0808374C: .4byte 0x0000ffff
 _08083750: .4byte gUnknown_202063C
-	thumb_func_end sub_80836F0
+	thumb_func_end FieldEffectFreeTilesIfUnused
 
-	thumb_func_start sub_8083754
-sub_8083754: @ 8083754
+	thumb_func_start FieldEffectFreePaletteIfUnused
+FieldEffectFreePaletteIfUnused: @ 8083754
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8008A20
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _080837A4 @ =0x0000ffff
@@ -462,7 +462,7 @@ _0808378C:
 	cmp r2, 0x3F
 	bls _08083770
 	adds r0, r5, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 _0808379C:
 	pop {r4-r6}
 	pop {r0}
@@ -470,10 +470,10 @@ _0808379C:
 	.align 2, 0
 _080837A4: .4byte 0x0000ffff
 _080837A8: .4byte gUnknown_202063C
-	thumb_func_end sub_8083754
+	thumb_func_end FieldEffectFreePaletteIfUnused
 
-	thumb_func_start sub_80837AC
-sub_80837AC: @ 80837AC
+	thumb_func_start FieldEffectActiveListClear
+FieldEffectActiveListClear: @ 80837AC
 	push {r4,lr}
 	movs r2, 0
 	ldr r4, _080837CC @ =gUnknown_3000FC8
@@ -493,10 +493,10 @@ _080837B4:
 	bx r0
 	.align 2, 0
 _080837CC: .4byte gUnknown_3000FC8
-	thumb_func_end sub_80837AC
+	thumb_func_end FieldEffectActiveListClear
 
-	thumb_func_start sub_80837D0
-sub_80837D0: @ 80837D0
+	thumb_func_start FieldEffectActiveListAdd
+FieldEffectActiveListAdd: @ 80837D0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -521,10 +521,10 @@ _080837F6:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80837D0
+	thumb_func_end FieldEffectActiveListAdd
 
-	thumb_func_start sub_80837FC
-sub_80837FC: @ 80837FC
+	thumb_func_start FieldEffectActiveListRemove
+FieldEffectActiveListRemove: @ 80837FC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -551,10 +551,10 @@ _08083826:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80837FC
+	thumb_func_end FieldEffectActiveListRemove
 
-	thumb_func_start sub_808382C
-sub_808382C: @ 808382C
+	thumb_func_start FieldEffectActiveListContains
+FieldEffectActiveListContains: @ 808382C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -579,7 +579,7 @@ _08083848:
 _08083854:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808382C
+	thumb_func_end FieldEffectActiveListContains
 
 	thumb_func_start sub_8083858
 sub_8083858: @ 8083858
@@ -608,12 +608,12 @@ sub_8083858: @ 8083858
 	add r8, r4
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_800EC5C
+	bl LoadCompressedObjectPaletteOverrideBuffer
 	ldr r0, _080838E4 @ =gUnknown_823957C
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_800EC00
+	bl LoadCompressedObjectPicOverrideBuffer
 	mov r1, sp
 	ldrh r0, [r4, 0x6]
 	movs r2, 0
@@ -638,7 +638,7 @@ sub_8083858: @ 8083858
 	adds r1, r5, 0
 	adds r2, r6, 0
 	mov r3, r9
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x18
@@ -670,13 +670,13 @@ sub_80838F8: @ 80838F8
 	lsrs r4, 21
 	adds r0, r4, r0
 	ldr r0, [r0]
-	bl sub_800EBC0
+	bl LZDecompressVram
 	ldr r0, _0808392C @ =gUnknown_8239A1C
 	adds r4, r0
 	ldr r0, [r4]
 	adds r1, r5, 0
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -685,8 +685,8 @@ _08083928: .4byte gUnknown_823957C
 _0808392C: .4byte gUnknown_8239A1C
 	thumb_func_end sub_80838F8
 
-	thumb_func_start sub_8083930
-sub_8083930: @ 8083930
+	thumb_func_start AddNewGameBirchObject
+AddNewGameBirchObject: @ 8083930
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -698,7 +698,7 @@ sub_8083930: @ 8083930
 	lsls r6, 24
 	lsrs r6, 24
 	ldr r0, _08083968 @ =gUnknown_83CBE70
-	bl sub_8008928
+	bl LoadSpritePalette
 	ldr r0, _0808396C @ =gUnknown_83CBE84
 	lsls r4, 16
 	asrs r4, 16
@@ -707,7 +707,7 @@ sub_8083930: @ 8083930
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4-r6}
@@ -716,7 +716,7 @@ sub_8083930: @ 8083930
 	.align 2, 0
 _08083968: .4byte gUnknown_83CBE70
 _0808396C: .4byte gUnknown_83CBE84
-	thumb_func_end sub_8083930
+	thumb_func_end AddNewGameBirchObject
 
 	thumb_func_start sub_8083970
 sub_8083970: @ 8083970
@@ -746,7 +746,7 @@ sub_8083970: @ 8083970
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldrh r0, [r4, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	adds r0, 0x10
 	lsls r0, 24
 	lsrs r0, 24
@@ -789,7 +789,7 @@ sub_80839D4: @ 80839D4
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl sub_8044180
+	bl GetMonSpritePalStructFromOtIdPersonality
 	mov r8, r0
 	lsls r4, 16
 	asrs r4, 16
@@ -811,7 +811,7 @@ sub_80839D4: @ 80839D4
 	lsrs r4, r0, 16
 	mov r1, r8
 	ldrh r0, [r1, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	adds r0, 0x10
 	lsls r0, 24
 	lsrs r0, 24
@@ -851,7 +851,7 @@ sub_8083A5C: @ 8083A5C
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 _08083A7A:
 	adds r0, r5, 0
 	bl sub_810C214
@@ -997,13 +997,13 @@ _08083B88: .4byte gUnknown_20375F8
 	thumb_func_start sub_8083B8C
 sub_8083B8C: @ 8083B8C
 	push {r4,lr}
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _08083BC8 @ =sub_8083BD0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -1160,14 +1160,14 @@ sub_8083CA0: @ 8083CA0
 	cmp r0, 0x6
 	ble _08083CD2
 	adds r0, r1, 0
-	bl sub_8007280
+	bl DestroySprite
 	movs r0, 0x19
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _08083CDC @ =sub_8083BD0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _08083CD2:
 	pop {r0}
 	bx r0
@@ -1179,13 +1179,13 @@ _08083CDC: .4byte sub_8083BD0
 	thumb_func_start sub_8083CE0
 sub_8083CE0: @ 8083CE0
 	push {r4,lr}
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _08083D14 @ =sub_8083D1C
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -1327,14 +1327,14 @@ sub_8083DD4: @ 8083DD4
 	cmp r0, 0x6
 	ble _08083E06
 	adds r0, r1, 0
-	bl sub_8007280
+	bl DestroySprite
 	movs r0, 0x3E
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _08083E10 @ =sub_8083D1C
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _08083E06:
 	pop {r0}
 	bx r0
@@ -1362,7 +1362,7 @@ sub_8083E14: @ 8083E14
 	lsls r6, 16
 	lsrs r6, 16
 	ldr r0, _08083E68 @ =sub_8083E70
-	bl sub_800704C
+	bl CreateInvisibleSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -1440,7 +1440,7 @@ _08083EA4:
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0xFF
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08083F20 @ =gUnknown_202063C
@@ -1509,7 +1509,7 @@ sub_8083F24: @ 8083F24
 	beq _08083F54
 	movs r0, 0x80
 	lsls r0, 1
-	bl sub_8071C60
+	bl PlayFanfare
 _08083F54:
 	pop {r0}
 	bx r0
@@ -1551,7 +1551,7 @@ _08083F88:
 	ldr r3, _08084080 @ =0x00001007
 	mov r10, r3
 	mov r0, r10
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	movs r1, 0x84
@@ -1574,7 +1574,7 @@ _08083F88:
 	mov r0, r8
 	ands r4, r0
 	mov r0, r10
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	movs r1, 0x83
@@ -1593,7 +1593,7 @@ _08083F88:
 	mov r3, r8
 	ands r4, r3
 	mov r0, r10
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	movs r1, 0x81
@@ -1611,7 +1611,7 @@ _08083F88:
 	lsls r4, 24
 	lsrs r4, 24
 	mov r0, r10
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	ldr r3, _08084090 @ =0x01050000
@@ -1628,7 +1628,7 @@ _08083F88:
 	adds r3, r4, 0
 	bl sub_8083A88
 	mov r0, r10
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	ldr r1, _08084094 @ =0x01030000
@@ -1698,7 +1698,7 @@ _080840C8:
 	lsrs r4, 24
 	ldr r0, _08084174 @ =0x00001007
 	mov r8, r0
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	movs r1, 0x84
@@ -1719,7 +1719,7 @@ _080840C8:
 	adds r3, r4, 0
 	bl sub_8083A88
 	mov r0, r8
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	movs r1, 0x83
@@ -1731,7 +1731,7 @@ _080840C8:
 	adds r3, r4, 0
 	bl sub_8083A88
 	mov r0, r8
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	movs r1, 0x81
@@ -1743,7 +1743,7 @@ _080840C8:
 	adds r3, r4, 0
 	bl sub_8083A88
 	mov r0, r8
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	ldr r1, _08084184 @ =0x01050000
@@ -1754,7 +1754,7 @@ _080840C8:
 	adds r3, r4, 0
 	bl sub_8083A88
 	mov r0, r8
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	ldr r1, _08084188 @ =0x01030000
@@ -1812,7 +1812,7 @@ sub_80841B0: @ 80841B0
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _080841C6
-	bl sub_8071C9C
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080841CC
@@ -1847,7 +1847,7 @@ sub_80841D8: @ 80841D8
 	cmp r0, 0x4
 	ble _080841F8
 	adds r0, r3, 0
-	bl sub_80836B4
+	bl FieldEffectFreeGraphicsResources
 _080841F8:
 	pop {r0}
 	bx r0
@@ -1867,7 +1867,7 @@ sub_8084200: @ 8084200
 	asrs r2, 16
 	adds r1, r3, 0
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -1912,7 +1912,7 @@ sub_808424C: @ 808424C
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _08084270:
 	adds r0, r4, 0
 	adds r0, 0x3F
@@ -1922,7 +1922,7 @@ _08084270:
 	cmp r0, 0
 	beq _08084284
 	adds r0, r4, 0
-	bl sub_80836B4
+	bl FieldEffectFreeGraphicsResources
 _08084284:
 	pop {r4}
 	pop {r0}
@@ -1941,7 +1941,7 @@ sub_808428C: @ 808428C
 	asrs r2, 16
 	adds r1, r3, 0
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1959,7 +1959,7 @@ sub_80842AC: @ 80842AC
 	cmp r0, 0
 	beq _080842C2
 	adds r0, r2, 0
-	bl sub_80836B4
+	bl FieldEffectFreeGraphicsResources
 _080842C2:
 	pop {r0}
 	bx r0
@@ -1968,40 +1968,40 @@ _080842C2:
 	thumb_func_start sub_80842C8
 sub_80842C8: @ 80842C8
 	push {lr}
-	ldr r0, _080842DC @ =sub_80567DC
-	bl sub_8000544
+	ldr r0, _080842DC @ =c2_exit_to_overworld_2_switch
+	bl SetMainCallback2
 	ldr r1, _080842E0 @ =gUnknown_3005020
-	ldr r0, _080842E4 @ =sub_80842E8
+	ldr r0, _080842E4 @ =mapldr_080842E8
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080842DC: .4byte sub_80567DC
+_080842DC: .4byte c2_exit_to_overworld_2_switch
 _080842E0: .4byte gUnknown_3005020
-_080842E4: .4byte sub_80842E8
+_080842E4: .4byte mapldr_080842E8
 	thumb_func_end sub_80842C8
 
-	thumb_func_start sub_80842E8
-sub_80842E8: @ 80842E8
+	thumb_func_start mapldr_080842E8
+mapldr_080842E8: @ 80842E8
 	push {lr}
 	bl sub_807DC00
-	ldr r0, _08084308 @ =sub_8084310
+	ldr r0, _08084308 @ =task00_8084310
 	movs r1, 0
-	bl sub_807741C
-	bl sub_8069940
-	bl sub_8068974
+	bl CreateTask
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r1, _0808430C @ =gUnknown_3005020
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08084308: .4byte sub_8084310
+_08084308: .4byte task00_8084310
 _0808430C: .4byte gUnknown_3005020
-	thumb_func_end sub_80842E8
+	thumb_func_end mapldr_080842E8
 
-	thumb_func_start sub_8084310
-sub_8084310: @ 8084310
+	thumb_func_start task00_8084310
+task00_8084310: @ 8084310
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2028,25 +2028,25 @@ sub_8084310: @ 8084310
 	str r6, [r1]
 _08084344:
 	movs r0, 0x1F
-	bl sub_8083444
+	bl FieldEffectStart
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 _08084350:
 	movs r0, 0x1F
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084376
 	bl sub_8054CA0
-	bl sub_8055378
+	bl warp_in
 	ldr r0, _08084384 @ =sub_805671C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r1, _08084388 @ =gUnknown_3005020
-	ldr r0, _0808438C @ =sub_8084390
+	ldr r0, _0808438C @ =mapldr_08084390
 	str r0, [r1]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _08084376:
 	pop {r4-r6}
 	pop {r0}
@@ -2056,17 +2056,17 @@ _0808437C: .4byte gUnknown_3005090
 _08084380: .4byte gUnknown_20386E0
 _08084384: .4byte sub_805671C
 _08084388: .4byte gUnknown_3005020
-_0808438C: .4byte sub_8084390
-	thumb_func_end sub_8084310
+_0808438C: .4byte mapldr_08084390
+	thumb_func_end task00_8084310
 
-	thumb_func_start sub_8084390
-sub_8084390: @ 8084390
+	thumb_func_start mapldr_08084390
+mapldr_08084390: @ 8084390
 	push {r4,lr}
 	bl sub_8055DC4
 	bl sub_807DC00
-	ldr r0, _080843E8 @ =sub_80843F8
+	ldr r0, _080843E8 @ =c3_080843F8
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r4, _080843EC @ =gUnknown_2036E38
 	ldr r3, _080843F0 @ =gUnknown_2037078
 	ldrb r1, [r3, 0x5]
@@ -2089,10 +2089,10 @@ sub_8084390: @ 8084390
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x3
-	bl sub_805F218
+	bl FieldObjectTurn
 _080843D2:
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r1, _080843F4 @ =gUnknown_3005020
 	movs r0, 0
 	str r0, [r1]
@@ -2100,14 +2100,14 @@ _080843D2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080843E8: .4byte sub_80843F8
+_080843E8: .4byte c3_080843F8
 _080843EC: .4byte gUnknown_2036E38
 _080843F0: .4byte gUnknown_2037078
 _080843F4: .4byte gUnknown_3005020
-	thumb_func_end sub_8084390
+	thumb_func_end mapldr_08084390
 
-	thumb_func_start sub_80843F8
-sub_80843F8: @ 80843F8
+	thumb_func_start c3_080843F8
+c3_080843F8: @ 80843F8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2128,20 +2128,20 @@ sub_80843F8: @ 80843F8
 	cmp r0, 0
 	bne _08084444
 	movs r0, 0x20
-	bl sub_8083444
+	bl FieldEffectStart
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 _0808442A:
 	movs r0, 0x20
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084444
-	bl sub_806994C
-	bl sub_8068A5C
+	bl ScriptContext2_Disable
+	bl UnfreezeMapObjects
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _08084444:
 	pop {r4,r5}
 	pop {r0}
@@ -2149,7 +2149,7 @@ _08084444:
 	.align 2, 0
 _0808444C: .4byte gUnknown_3005090
 _08084450: .4byte gUnknown_2037AB8
-	thumb_func_end sub_80843F8
+	thumb_func_end c3_080843F8
 
 	thumb_func_start sub_8084454
 sub_8084454: @ 8084454
@@ -2157,11 +2157,11 @@ sub_8084454: @ 8084454
 	bl sub_8055DC4
 	bl sub_807DB58
 	bl sub_8111CF0
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r0, _0808447C @ =sub_8084484
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, _08084480 @ =gUnknown_3005020
 	movs r0, 0
 	str r0, [r1]
@@ -2223,7 +2223,7 @@ sub_80844BC: @ 80844BC
 	lsls r4, 2
 	ldr r0, _08084560 @ =gUnknown_202063C
 	adds r4, r0
-	bl sub_805FAF8
+	bl CameraObjectReset2
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2235,7 +2235,7 @@ sub_80844BC: @ 80844BC
 	strb r1, [r0, 0x1]
 	movs r0, 0x1
 	strb r0, [r6, 0x6]
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063EB8
@@ -2465,7 +2465,7 @@ sub_80846AC: @ 80846AC
 	strh r1, [r0, 0xA]
 	strh r2, [r0, 0xC]
 	movs r0, 0
-	bl sub_805ADD4
+	bl SetCameraPanningCallback
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -2478,7 +2478,7 @@ sub_80846C8: @ 80846C8
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0
-	bl sub_805ADE0
+	bl SetCameraPanning
 	ldrh r0, [r4, 0xA]
 	negs r2, r0
 	strh r2, [r4, 0xA]
@@ -2514,15 +2514,15 @@ sub_8084708: @ 8084708
 	ldr r1, _08084778 @ =gUnknown_2037078
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl sub_806994C
-	bl sub_805FAA8
-	bl sub_8068A5C
-	bl sub_805ADF8
+	bl ScriptContext2_Disable
+	bl CameraObjectReset1
+	bl UnfreezeMapObjects
+	bl InstallCameraPanAheadCallback
 	mov r4, sp
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -2545,10 +2545,10 @@ sub_8084708: @ 8084708
 	bl sub_812B1F0
 _08084760:
 	ldr r0, _08084780 @ =sub_8084484
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0
 	add sp, 0x4
 	pop {r4}
@@ -2569,7 +2569,7 @@ sub_8084784: @ 8084784
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r0, _080847B8 @ =sub_80847C0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080847BC @ =gUnknown_3005090
@@ -2626,8 +2626,8 @@ _080847F4: .4byte gUnknown_83CC050
 sub_80847F8: @ 80847F8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8068974
-	bl sub_805FAF8
+	bl player_bitmagic
+	bl CameraObjectReset2
 	ldrb r0, [r4, 0xA]
 	bl sub_809C448
 	movs r0, 0x1
@@ -2653,17 +2653,17 @@ sub_8084820: @ 8084820
 	ldr r1, _0808488C @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808484A
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808487E
 _0808484A:
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063EB8
@@ -2770,12 +2770,12 @@ sub_80848F8: @ 80848F8
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	movs r0, 0x84
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	movs r0, 0x94
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0xE]
 	adds r0, 0x1
@@ -2810,12 +2810,12 @@ sub_8084944: @ 8084944
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	movs r0, 0x7C
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	movs r0, 0x76
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0xE]
 	adds r0, 0x1
@@ -2860,17 +2860,17 @@ sub_80849A0: @ 80849A0
 	cmp r0, 0x1
 	bne _080849DC
 	bl sub_809C460
-	bl sub_8055378
+	bl warp_in
 	ldr r1, _080849E4 @ =gUnknown_3005020
 	ldr r0, _080849E8 @ =sub_80849F4
 	str r0, [r1]
 	ldr r0, _080849EC @ =sub_805671C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r0, _080849F0 @ =sub_80847C0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080849DC:
 	pop {r0}
 	bx r0
@@ -2888,11 +2888,11 @@ sub_80849F4: @ 80849F4
 	bl sub_8055DC4
 	bl sub_807DB58
 	bl sub_8111CF0
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r0, _08084A1C @ =sub_8084A24
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, _08084A20 @ =gUnknown_3005020
 	movs r0, 0
 	str r0, [r1]
@@ -2938,7 +2938,7 @@ sub_8084A5C: @ 8084A5C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
-	bl sub_805FAF8
+	bl CameraObjectReset2
 	ldr r0, _08084ABC @ =gUnknown_2037078
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
@@ -2957,7 +2957,7 @@ sub_8084A5C: @ 8084A5C
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -3006,12 +3006,12 @@ sub_8084AD8: @ 8084AD8
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
 	movs r0, 0x84
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
 	movs r0, 0x94
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -3039,12 +3039,12 @@ sub_8084B18: @ 8084B18
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0x84
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r5, 0x24]
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0x94
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x26]
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
@@ -3089,12 +3089,12 @@ sub_8084B78: @ 8084B78
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
 	movs r0, 0x7C
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
 	movs r0, 0x76
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -3122,12 +3122,12 @@ sub_8084BB8: @ 8084BB8
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0x7C
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r5, 0x24]
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0x76
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x26]
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
@@ -3192,13 +3192,13 @@ sub_8084C3C: @ 8084C3C
 	ldr r1, _08084C98 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08084C8A
-	bl sub_805FAA8
-	bl sub_806994C
-	bl sub_8068A5C
+	bl CameraObjectReset1
+	bl ScriptContext2_Disable
+	bl UnfreezeMapObjects
 	movs r0, 0x4
 	bl sub_8063F84
 	adds r1, r0, 0
@@ -3207,10 +3207,10 @@ sub_8084C3C: @ 8084C3C
 	adds r0, r4, 0
 	bl sub_8063CA4
 	ldr r0, _08084C9C @ =sub_8084A24
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0x2
 	bl sub_81128BC
 _08084C8A:
@@ -3224,13 +3224,13 @@ _08084C98: .4byte gUnknown_2036E38
 _08084C9C: .4byte sub_8084A24
 	thumb_func_end sub_8084C3C
 
-	thumb_func_start sub_8084CA0
-sub_8084CA0: @ 8084CA0
+	thumb_func_start oei_waterfall
+oei_waterfall: @ 8084CA0
 	push {r4,lr}
 	ldr r4, _08084CCC @ =sub_8084CD8
 	adds r0, r4, 0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08084CD0 @ =gUnknown_3005090
@@ -3250,7 +3250,7 @@ sub_8084CA0: @ 8084CA0
 _08084CCC: .4byte sub_8084CD8
 _08084CD0: .4byte gUnknown_3005090
 _08084CD4: .4byte gUnknown_20386E0
-	thumb_func_end sub_8084CA0
+	thumb_func_end oei_waterfall
 
 	thumb_func_start sub_8084CD8
 sub_8084CD8: @ 8084CD8
@@ -3295,7 +3295,7 @@ _08084D20: .4byte gUnknown_2036E38
 sub_8084D24: @ 8084D24
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _08084D40 @ =gUnknown_2037078
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -3310,25 +3310,25 @@ sub_8084D24: @ 8084D24
 _08084D40: .4byte gUnknown_2037078
 	thumb_func_end sub_8084D24
 
-	thumb_func_start sub_8084D44
-sub_8084D44: @ 8084D44
+	thumb_func_start waterfall_1_do_anim_probably
+waterfall_1_do_anim_probably: @ 8084D44
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	adds r0, r5, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084D74
 	adds r0, r5, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	ldr r1, _08084D7C @ =gUnknown_20386E0
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
 	movs r0, 0x3B
-	bl sub_8083444
+	bl FieldEffectStart
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -3339,14 +3339,14 @@ _08084D74:
 	bx r1
 	.align 2, 0
 _08084D7C: .4byte gUnknown_20386E0
-	thumb_func_end sub_8084D44
+	thumb_func_end waterfall_1_do_anim_probably
 
-	thumb_func_start sub_8084D80
-sub_8084D80: @ 8084D80
+	thumb_func_start waterfall_2_wait_anim_finish_probably
+waterfall_2_wait_anim_finish_probably: @ 8084D80
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084D9A
@@ -3361,7 +3361,7 @@ _08084D9C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8084D80
+	thumb_func_end waterfall_2_wait_anim_finish_probably
 
 	thumb_func_start sub_8084DA4
 sub_8084DA4: @ 8084DA4
@@ -3390,7 +3390,7 @@ sub_8084DCC: @ 8084DCC
 	adds r5, r0, 0
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084DE2
@@ -3403,16 +3403,16 @@ _08084DE2:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _08084E18
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	ldr r0, _08084E10 @ =gUnknown_2037078
 	strb r4, [r0, 0x6]
 	ldr r0, _08084E14 @ =sub_8084CD8
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0x2B
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	movs r0, 0
 	b _08084E1E
 	.align 2, 0
@@ -3434,7 +3434,7 @@ sub_8084E24: @ 8084E24
 	ldr r4, _08084E54 @ =sub_8084E60
 	adds r0, r4, 0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08084E58 @ =gUnknown_3005090
@@ -3488,8 +3488,8 @@ _08084E90: .4byte gUnknown_83CC098
 _08084E94: .4byte gUnknown_3005090
 	thumb_func_end sub_8084E60
 
-	thumb_func_start sub_8084E98
-sub_8084E98: @ 8084E98
+	thumb_func_start dive_1_lock
+dive_1_lock: @ 8084E98
 	ldr r2, _08084EA8 @ =gUnknown_2037078
 	movs r1, 0x1
 	strb r1, [r2, 0x6]
@@ -3500,19 +3500,19 @@ sub_8084E98: @ 8084E98
 	bx lr
 	.align 2, 0
 _08084EA8: .4byte gUnknown_2037078
-	thumb_func_end sub_8084E98
+	thumb_func_end dive_1_lock
 
-	thumb_func_start sub_8084EAC
-sub_8084EAC: @ 8084EAC
+	thumb_func_start dive_2_unknown
+dive_2_unknown: @ 8084EAC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _08084ED0 @ =gUnknown_20386E0
 	movs r2, 0x26
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
 	movs r0, 0x3B
-	bl sub_8083444
+	bl FieldEffectStart
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -3522,18 +3522,18 @@ sub_8084EAC: @ 8084EAC
 	bx r1
 	.align 2, 0
 _08084ED0: .4byte gUnknown_20386E0
-	thumb_func_end sub_8084EAC
+	thumb_func_end dive_2_unknown
 
-	thumb_func_start sub_8084ED4
-sub_8084ED4: @ 8084ED4
+	thumb_func_start dive_3_unknown
+dive_3_unknown: @ 8084ED4
 	push {lr}
 	sub sp, 0x8
 	mov r1, sp
 	adds r1, 0x2
 	mov r0, sp
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	movs r0, 0x6
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084F18
@@ -3546,14 +3546,14 @@ sub_8084ED4: @ 8084ED4
 	adds r0, r2
 	ldrb r1, [r0, 0x1E]
 	mov r0, sp
-	bl sub_806DF3C
+	bl dive_warp
 	ldr r0, _08084F28 @ =sub_8084E60
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0x2C
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 _08084F18:
 	movs r0, 0
 	add sp, 0x8
@@ -3563,7 +3563,7 @@ _08084F18:
 _08084F20: .4byte gUnknown_2036E38
 _08084F24: .4byte gUnknown_2037078
 _08084F28: .4byte sub_8084E60
-	thumb_func_end sub_8084ED4
+	thumb_func_end dive_3_unknown
 
 	thumb_func_start sub_8084F2C
 sub_8084F2C: @ 8084F2C
@@ -3572,7 +3572,7 @@ sub_8084F2C: @ 8084F2C
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r0, _08084F40 @ =sub_8084F44
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3630,10 +3630,10 @@ sub_8084FA0: @ 8084FA0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8068974
-	bl sub_805FAF8
+	bl player_bitmagic
+	bl CameraObjectReset2
 	movs r0, 0
-	bl sub_805ADD4
+	bl SetCameraPanningCallback
 	ldr r0, _08084FD4 @ =gUnknown_2037078
 	movs r2, 0x1
 	strb r2, [r0, 0x6]
@@ -3660,7 +3660,7 @@ sub_8084FD8: @ 8084FD8
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0
-	bl sub_805ADE0
+	bl SetCameraPanning
 	ldrh r0, [r4, 0xA]
 	negs r0, r0
 	strh r0, [r4, 0xA]
@@ -3708,7 +3708,7 @@ sub_808500C: @ 808500C
 	lsrs r0, 30
 	str r0, [r3, 0xC]
 	movs r0, 0x32
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0xAB
 	bl sub_80722CC
 	ldrh r0, [r4, 0x8]
@@ -3731,7 +3731,7 @@ sub_8085058: @ 8085058
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0
-	bl sub_805ADE0
+	bl SetCameraPanning
 	ldrh r0, [r4, 0xA]
 	negs r2, r0
 	strh r2, [r4, 0xA]
@@ -3883,17 +3883,17 @@ sub_8085168: @ 8085168
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080851A0
-	bl sub_8055378
+	bl warp_in
 	ldr r1, _080851AC @ =gUnknown_3005020
-	ldr r0, _080851B0 @ =sub_80851BC
+	ldr r0, _080851B0 @ =mapldr_080851BC
 	str r0, [r1]
 	ldr r0, _080851B4 @ =sub_805671C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r0, _080851B8 @ =sub_8084F44
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080851A0:
 	movs r0, 0
 	pop {r1}
@@ -3901,29 +3901,29 @@ _080851A0:
 	.align 2, 0
 _080851A8: .4byte gUnknown_2037AB8
 _080851AC: .4byte gUnknown_3005020
-_080851B0: .4byte sub_80851BC
+_080851B0: .4byte mapldr_080851BC
 _080851B4: .4byte sub_805671C
 _080851B8: .4byte sub_8084F44
 	thumb_func_end sub_8085168
 
-	thumb_func_start sub_80851BC
-sub_80851BC: @ 80851BC
+	thumb_func_start mapldr_080851BC
+mapldr_080851BC: @ 80851BC
 	push {lr}
 	bl sub_8055DC4
 	bl sub_807DB58
 	bl sub_8111CF0
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r0, _080851E0 @ =gUnknown_3005020
 	movs r1, 0
 	str r1, [r0]
 	ldr r0, _080851E4 @ =sub_80851E8
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080851E0: .4byte gUnknown_3005020
 _080851E4: .4byte sub_80851E8
-	thumb_func_end sub_80851BC
+	thumb_func_end mapldr_080851BC
 
 	thumb_func_start sub_80851E8
 sub_80851E8: @ 80851E8
@@ -3976,8 +3976,8 @@ sub_8085244: @ 8085244
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl sub_805FAF8
-	bl sub_8068974
+	bl CameraObjectReset2
+	bl player_bitmagic
 	ldr r1, _08085270 @ =gUnknown_2037078
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -4023,7 +4023,7 @@ sub_8085274: @ 8085274
 	lsrs r0, 30
 	str r0, [r1, 0xC]
 	movs r0, 0x31
-	bl sub_8083444
+	bl FieldEffectStart
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -4061,7 +4061,7 @@ sub_80852C0: @ 80852C0
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r4, 0x1]
-	bl sub_805FAA8
+	bl CameraObjectReset1
 	movs r0, 0xA8
 	bl sub_80722CC
 	movs r0, 0x4
@@ -4084,20 +4084,20 @@ _08085310: .4byte gUnknown_202063C
 sub_8085314: @ 8085314
 	push {lr}
 	adds r0, r1, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808533E
 	ldr r1, _08085344 @ =gUnknown_2037078
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl sub_806994C
-	bl sub_8068A5C
+	bl ScriptContext2_Disable
+	bl UnfreezeMapObjects
 	ldr r0, _08085348 @ =sub_80851E8
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _0808533E:
 	movs r0, 0
 	pop {r1}
@@ -4124,7 +4124,7 @@ sub_808534C: @ 808534C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _080853AC @ =gUnknown_202063C
@@ -4168,7 +4168,7 @@ sub_80853B0: @ 80853B0
 	beq _080853C8
 	adds r0, r2, 0
 	movs r1, 0x32
-	bl sub_80836D8
+	bl FieldEffectStop
 _080853C8:
 	pop {r0}
 	bx r0
@@ -4181,7 +4181,7 @@ sub_80853CC: @ 80853CC
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r0, _080853E0 @ =sub_80853E4
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4239,8 +4239,8 @@ sub_8085440: @ 8085440
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl sub_8068974
-	bl sub_805FAF8
+	bl player_bitmagic
+	bl CameraObjectReset2
 	ldr r1, _0808546C @ =gUnknown_2037078
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -4266,7 +4266,7 @@ sub_8085470: @ 8085470
 	adds r4, r1, 0
 	adds r6, r2, 0
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080854E4
@@ -4292,7 +4292,7 @@ sub_8085470: @ 8085470
 	lsrs r0, 30
 	str r0, [r1, 0xC]
 	movs r0, 0x31
-	bl sub_8083444
+	bl FieldEffectStart
 	strh r0, [r5, 0xA]
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -4306,7 +4306,7 @@ _080854C4:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806429C
+	bl GetStepInPlaceDelay4AnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4358,7 +4358,7 @@ sub_8085524: @ 8085524
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x31
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _08085542
@@ -4388,17 +4388,17 @@ sub_808554C: @ 808554C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08085584
-	bl sub_8055378
+	bl warp_in
 	ldr r1, _08085590 @ =gUnknown_3005020
 	ldr r0, _08085594 @ =sub_8084454
 	str r0, [r1]
 	ldr r0, _08085598 @ =sub_805671C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r0, _0808559C @ =sub_80853E4
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _08085584:
 	movs r0, 0
 	pop {r1}
@@ -4428,7 +4428,7 @@ sub_80855A0: @ 80855A0
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08085600 @ =gUnknown_202063C
@@ -4472,7 +4472,7 @@ sub_8085604: @ 8085604
 	beq _0808561C
 	adds r0, r2, 0
 	movs r1, 0x31
-	bl sub_80836D8
+	bl FieldEffectStop
 _0808561C:
 	pop {r0}
 	bx r0
@@ -4481,11 +4481,11 @@ _0808561C:
 	thumb_func_start sub_8085620
 sub_8085620: @ 8085620
 	push {lr}
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r0, _08085638 @ =sub_808563C
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4527,7 +4527,7 @@ sub_808566C: @ 808566C
 	strh r0, [r4, 0x8]
 	movs r0, 0x40
 	strh r0, [r4, 0x22]
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
@@ -4610,19 +4610,19 @@ _08085702:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	bl sub_80555E0
-	bl sub_8055378
+	bl warp_in
 	ldr r1, _0808575C @ =gUnknown_3005020
 	ldr r0, _08085760 @ =sub_80859D4
 	str r0, [r1]
 	ldr r0, _08085764 @ =sub_805671C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r0, _08085768 @ =sub_808563C
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _08085750:
 	pop {r4-r6}
 	pop {r0}
@@ -4641,12 +4641,12 @@ sub_808576C: @ 808576C
 	adds r4, r0, 0
 	adds r6, r1, 0
 	adds r5, r2, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808578A
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080857E4
@@ -4735,7 +4735,7 @@ _0808581C:
 	beq _08085896
 	b _0808589A
 _08085826:
-	bl sub_805FAF8
+	bl CameraObjectReset2
 	ldrh r0, [r5]
 	adds r0, 0x1
 	strh r0, [r5]
@@ -4840,7 +4840,7 @@ _080858DC:
 	beq _080859BE
 	b _080859C2
 _080858E6:
-	bl sub_805FAF8
+	bl CameraObjectReset2
 	movs r2, 0x58
 	negs r2, r2
 	adds r0, r2, 0
@@ -4943,7 +4943,7 @@ _0808599C:
 	blt _080859C2
 	movs r0, 0x1E
 	bl sub_80722CC
-	bl sub_805FAA8
+	bl CameraObjectReset1
 	ldrh r0, [r5]
 	adds r0, 0x1
 	strh r0, [r5]
@@ -4968,8 +4968,8 @@ sub_80859D4: @ 80859D4
 	bl sub_8055DC4
 	bl sub_807DB58
 	bl sub_8111CF0
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r1, _08085A14 @ =gUnknown_3005020
 	movs r0, 0
 	str r0, [r1]
@@ -4986,7 +4986,7 @@ sub_80859D4: @ 80859D4
 	strb r1, [r0, 0x1]
 	ldr r0, _08085A20 @ =sub_8085A24
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5031,7 +5031,7 @@ sub_8085A54: @ 8085A54
 	beq _08085A78
 	movs r0, 0x28
 	bl sub_80722CC
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -5125,7 +5125,7 @@ _08085B10:
 	cmp r1, r0
 	bne _08085B58
 	adds r0, r6, 0
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5140,13 +5140,13 @@ _08085B10:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r6, 0x3]
-	bl sub_806994C
-	bl sub_8068A5C
+	bl ScriptContext2_Disable
+	bl UnfreezeMapObjects
 	ldr r0, _08085B60 @ =sub_8085A24
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _08085B58:
 	add sp, 0x8
 	pop {r4-r7}
@@ -5161,7 +5161,7 @@ sub_8085B64: @ 8085B64
 	push {lr}
 	ldr r0, _08085B74 @ =sub_8085B78
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5197,10 +5197,10 @@ _08085BA4: .4byte gUnknown_3005090
 sub_8085BA8: @ 8085BA8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069940
-	bl sub_8068974
-	bl sub_805FAF8
-	bl sub_805C6C4
+	bl ScriptContext2_Enable
+	bl player_bitmagic
+	bl CameraObjectReset2
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -5245,7 +5245,7 @@ _08085C02:
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 	movs r0, 0x8
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xC]
@@ -5321,7 +5321,7 @@ sub_8085C60: @ 8085C60
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r3, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 _08085CAA:
 	ldrh r0, [r5, 0x22]
 	ldrh r1, [r4, 0xE]
@@ -5405,18 +5405,18 @@ sub_8085D34: @ 8085D34
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08085D70
-	bl sub_80554A4
-	bl sub_8055378
+	bl copy_saved_warp3_bank_and_enter_x_to_warp1
+	bl warp_in
 	ldr r0, _08085D78 @ =sub_805671C
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r1, _08085D7C @ =gUnknown_3005020
 	ldr r0, _08085D80 @ =sub_8085D88
 	str r0, [r1]
 	ldr r0, _08085D84 @ =sub_8085B78
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _08085D70:
 	pop {r0}
 	bx r0
@@ -5434,8 +5434,8 @@ sub_8085D88: @ 8085D88
 	bl sub_8055DC4
 	bl sub_807DB58
 	bl sub_8111CF0
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r1, _08085DCC @ =gUnknown_3005020
 	movs r0, 0
 	str r0, [r1]
@@ -5450,10 +5450,10 @@ sub_8085D88: @ 8085D88
 	movs r2, 0x20
 	orrs r1, r2
 	strb r1, [r0, 0x1]
-	bl sub_805FAF8
+	bl CameraObjectReset2
 	ldr r0, _08085DD8 @ =sub_8085DDC
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5540,7 +5540,7 @@ sub_8085E0C: @ 8085E0C
 	ldrb r0, [r2]
 	lsrs r0, 6
 	strh r0, [r6, 0x24]
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
@@ -5670,7 +5670,7 @@ _08085F5A:
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r6, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 _08085F7C:
 	movs r1, 0x26
 	ldrsh r0, [r5, r1]
@@ -5718,7 +5718,7 @@ sub_8085F9C: @ 8085F9C
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 	movs r0, 0x8
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xC]
@@ -5735,14 +5735,14 @@ sub_8085F9C: @ 8085F9C
 	lsrs r0, 28
 	cmp r1, r0
 	bne _08086010
-	bl sub_806994C
-	bl sub_805FAA8
-	bl sub_8068A5C
+	bl ScriptContext2_Disable
+	bl CameraObjectReset1
+	bl UnfreezeMapObjects
 	ldr r0, _08086024 @ =sub_8085DDC
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _08086010:
 	add sp, 0x8
 	pop {r4,r5}
@@ -5758,10 +5758,10 @@ _08086024: .4byte sub_8085DDC
 	thumb_func_start sub_8086028
 sub_8086028: @ 8086028
 	push {r4,lr}
-	bl sub_8056188
+	bl sav1_map_get_light_level
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80561D8
+	bl is_light_level_1_2_3_5_or_6
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5774,7 +5774,7 @@ _08086048:
 	ldr r0, _08086078 @ =sub_8086468
 _0808604A:
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r2, _0808607C @ =gUnknown_20386E0
@@ -5817,23 +5817,23 @@ sub_8086084: @ 8086084
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [r5, 0x4]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [r5, 0x8]
 	ldr r0, [r5]
 	orrs r0, r6
 	str r0, [r5]
 	movs r0, 0x6
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0x3B
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	movs r0, 0
 	pop {r4-r6}
 	pop {r1}
@@ -5873,16 +5873,16 @@ sub_8086110: @ 8086110
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x48
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x1E]
 	movs r0, 0x4A
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x20]
 	adds r0, r4, 0
 	adds r0, 0x22
 	ldr r1, _08086170 @ =gUnknown_30030F0
 	ldr r1, [r1, 0xC]
-	bl sub_8044F34
+	bl StoreWordInTwoHalfwords
 	ldr r1, _08086174 @ =0x0000f0f1
 	strh r1, [r4, 0xA]
 	ldr r0, _08086178 @ =0x00005051
@@ -5892,18 +5892,18 @@ sub_8086110: @ 8086110
 	movs r0, 0x3E
 	strh r0, [r4, 0x10]
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xE]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x10]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _0808617C @ =sub_80863C0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -5925,14 +5925,14 @@ sub_8086180: @ 8086180
 	sub sp, 0x4
 	mov r8, r0
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 18
 	lsls r4, 30
 	lsrs r4, 16
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 24
@@ -5956,7 +5956,7 @@ sub_8086180: @ 8086180
 	ldr r0, _080861F8 @ =gUnknown_83CB7F0
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	adds r0, r5, 0
 	bl sub_8086428
 	mov r1, r8
@@ -6134,7 +6134,7 @@ sub_808630C: @ 808630C
 	sub sp, 0x4
 	adds r4, r0, 0
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 24
@@ -6174,17 +6174,17 @@ sub_8086358: @ 8086358
 	adds r4, r0, 0
 	adds r0, 0x22
 	mov r1, sp
-	bl sub_8044F3C
+	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	bl sub_80F77B8
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
@@ -6198,12 +6198,12 @@ sub_8086358: @ 8086358
 	lsrs r1, 24
 	bl sub_8083A5C
 	movs r0, 0x6
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _080863BC @ =sub_80860E0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -6218,7 +6218,7 @@ sub_80863C0: @ 80863C0
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _08086420 @ =sub_80860E0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
@@ -6229,27 +6229,27 @@ sub_80863C0: @ 80863C0
 	adds r0, r4, 0
 	adds r0, 0x22
 	mov r1, sp
-	bl sub_8044F3C
+	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
 	bl _call_via_r0
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xE]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x10]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x12]
 	movs r0, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x14]
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -6324,17 +6324,17 @@ sub_8086498: @ 8086498
 	adds r4, r0, 0
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
 	adds r0, 0x22
 	ldr r1, _080864CC @ =gUnknown_30030F0
 	ldr r1, [r1, 0xC]
-	bl sub_8044F34
+	bl StoreWordInTwoHalfwords
 	ldr r0, _080864D0 @ =sub_80866E0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -6355,14 +6355,14 @@ sub_80864D4: @ 80864D4
 	sub sp, 0x4
 	mov r9, r0
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 18
 	lsls r5, 30
 	lsrs r5, 16
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 24
@@ -6389,7 +6389,7 @@ sub_80864D4: @ 80864D4
 	ldr r0, _08086550 @ =gUnknown_83CBB10
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	mov r1, r9
 	ldrh r0, [r1, 0x8]
 	adds r0, 0x1
@@ -6416,7 +6416,7 @@ sub_8086554: @ 8086554
 	cmp r0, 0
 	beq _080865A6
 	movs r0, 0x48
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x12]
 	movs r1, 0xFF
 	ands r1, r0
@@ -6425,13 +6425,13 @@ sub_8086554: @ 8086554
 	adds r0, r2, 0
 	orrs r1, r0
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x42
 	movs r1, 0xF0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080865B4 @ =0x00002878
 	movs r0, 0x46
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r2, _080865B8 @ =gUnknown_202063C
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
@@ -6498,13 +6498,13 @@ sub_80865F0: @ 80865F0
 	ldr r5, _0808662C @ =0x0000ffff
 	movs r0, 0x42
 	adds r1, r5, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x46
 	adds r1, r5, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x12]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -6540,7 +6540,7 @@ sub_8086650: @ 8086650
 	sub sp, 0x8
 	adds r4, r0, 0
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 24
@@ -6557,17 +6557,17 @@ sub_8086650: @ 8086650
 	adds r0, r4, 0
 	adds r0, 0x22
 	add r1, sp, 0x4
-	bl sub_8044F3C
+	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp, 0x4]
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	bl sub_80F77B8
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
@@ -6581,12 +6581,12 @@ sub_8086650: @ 8086650
 	lsrs r1, 24
 	bl sub_8083A5C
 	movs r0, 0x6
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _080866DC @ =sub_8086468
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -6602,7 +6602,7 @@ sub_80866E0: @ 80866E0
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _08086720 @ =sub_8086468
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
@@ -6613,15 +6613,15 @@ sub_80866E0: @ 80866E0
 	adds r0, r4, 0
 	adds r0, 0x22
 	mov r1, sp
-	bl sub_8044F3C
+	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
 	bl _call_via_r0
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -6877,14 +6877,14 @@ sub_80868C0: @ 80868C0
 	movs r1, 0
 	movs r2, 0x7D
 	movs r3, 0xA
-	bl sub_8071E3C
+	bl PlayCry2
 	b _08086900
 	.align 2, 0
 _080868F4: .4byte sub_8086904
 _080868F8:
 	ldrh r0, [r1, 0x2E]
 	movs r1, 0
-	bl sub_8071DF0
+	bl PlayCry1
 _08086900:
 	pop {r0}
 	bx r0
@@ -6937,7 +6937,7 @@ sub_8086944: @ 8086944
 	push {r4,lr}
 	ldr r0, _08086980 @ =sub_8086990
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08086984 @ =gUnknown_3005090
@@ -6999,13 +6999,13 @@ sub_80869C0: @ 80869C0
 	mov r6, r8
 	push {r6}
 	adds r4, r0, 0
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r5, _08086A18 @ =gUnknown_2037078
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
 	movs r0, 0x8
-	bl sub_805C970
+	bl SetPlayerAvatarStateMask
 	adds r6, r4, 0
 	adds r6, 0xA
 	movs r0, 0xC
@@ -7013,7 +7013,7 @@ sub_80869C0: @ 80869C0
 	mov r8, r0
 	adds r0, r6, 0
 	mov r1, r8
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	ldr r2, _08086A1C @ =gUnknown_2036E38
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
@@ -7024,7 +7024,7 @@ sub_80869C0: @ 80869C0
 	lsrs r0, 4
 	adds r1, r6, 0
 	mov r2, r8
-	bl sub_8063A20
+	bl MoveCoords
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -7050,12 +7050,12 @@ sub_8086A20: @ 8086A20
 	ldr r1, _08086A68 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086A4A
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086A5C
@@ -7087,7 +7087,7 @@ sub_8086A6C: @ 8086A6C
 	lsls r0, 2
 	ldr r1, _08086AAC @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086AA2
@@ -7099,7 +7099,7 @@ sub_8086A6C: @ 8086A6C
 	orrs r0, r1
 	str r0, [r2]
 	movs r0, 0x3B
-	bl sub_8083444
+	bl FieldEffectStart
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -7118,7 +7118,7 @@ sub_8086AB4: @ 8086AB4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r0, 0x6
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _08086B1E
@@ -7137,7 +7137,7 @@ sub_8086AB4: @ 8086AB4
 	adds r0, r4, 0
 	bl sub_805F060
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
 	bl sub_80641C0
@@ -7156,7 +7156,7 @@ sub_8086AB4: @ 8086AB4
 	ldrb r0, [r5, 0x5]
 	str r0, [r1, 0x8]
 	movs r0, 0x8
-	bl sub_8083444
+	bl FieldEffectStart
 	strb r0, [r4, 0x1A]
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
@@ -7182,7 +7182,7 @@ sub_8086B30: @ 8086B30
 	ldr r1, _08086BA0 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086B96
@@ -7203,15 +7203,15 @@ sub_8086B30: @ 8086B30
 	ldrb r0, [r4, 0x1A]
 	movs r1, 0x1
 	bl sub_80DC44C
-	bl sub_8068A5C
-	bl sub_806994C
+	bl UnfreezeMapObjects
+	bl ScriptContext2_Disable
 	movs r0, 0x9
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _08086BA4 @ =sub_8086990
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0x16
 	bl sub_812B1F0
 _08086B96:
@@ -7237,7 +7237,7 @@ sub_8086BA8: @ 8086BA8
 _08086BBA:
 	ldr r0, _08086BCC @ =sub_8086BD0
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -7275,8 +7275,8 @@ _08086BFC: .4byte gUnknown_3005090
 sub_8086C00: @ 8086C00
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	ldr r1, _08086C20 @ =gUnknown_2037078
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -7302,12 +7302,12 @@ sub_8086C24: @ 8086C24
 	ldr r1, _08086C6C @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086C4E
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086C60
@@ -7340,7 +7340,7 @@ sub_8086C70: @ 8086C70
 	ldr r1, _08086CA0 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086CEE
@@ -7385,7 +7385,7 @@ _08086CD2:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063D00
+	bl FieldObjectForceSetSpecialAnim
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -7405,19 +7405,19 @@ sub_8086CF4: @ 8086CF4
 	lsls r0, 2
 	ldr r1, _08086D30 @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086D26
 	movs r0, 0
 	strb r0, [r4, 0x6]
 	movs r0, 0x41
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _08086D34 @ =sub_8086BD0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _08086D26:
 	pop {r4}
 	pop {r0}
@@ -7436,7 +7436,7 @@ sub_8086D38: @ 8086D38
 	movs r1, 0x78
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8006F8C
+	bl CreateSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -7479,13 +7479,13 @@ sub_8086D94: @ 8086D94
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8C
-	bl sub_8044E4C
+	bl Cos
 	movs r5, 0
 	strh r0, [r4, 0x24]
 	movs r2, 0x32
 	ldrsh r0, [r4, r2]
 	movs r1, 0x48
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x4
@@ -7528,7 +7528,7 @@ _08086DF6:
 	ble _08086E06
 	adds r0, r4, 0
 	movs r1, 0x1E
-	bl sub_80836D8
+	bl FieldEffectStop
 _08086E06:
 	pop {r4,r5}
 	pop {r0}
@@ -7542,7 +7542,7 @@ sub_8086E10: @ 8086E10
 	push {lr}
 	ldr r0, _08086E34 @ =sub_8086E40
 	movs r1, 0xFE
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08086E38 @ =gUnknown_3005090
@@ -7599,12 +7599,12 @@ sub_8086E70: @ 8086E70
 	ldr r1, _08086EC4 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086E9A
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086EB8
@@ -7613,7 +7613,7 @@ _08086E9A:
 	strh r0, [r5, 0x26]
 	movs r0, 0x1
 	strb r0, [r6, 0x6]
-	bl sub_805C970
+	bl SetPlayerAvatarStateMask
 	bl sub_805CB70
 	adds r0, r4, 0
 	movs r1, 0x45
@@ -7641,7 +7641,7 @@ sub_8086EC8: @ 8086EC8
 	lsls r0, 2
 	ldr r1, _08086F04 @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086EF8
@@ -7653,7 +7653,7 @@ sub_8086EC8: @ 8086EC8
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
 	movs r0, 0x3B
-	bl sub_8083444
+	bl FieldEffectStart
 _08086EF8:
 	pop {r4}
 	pop {r0}
@@ -7669,7 +7669,7 @@ sub_8086F0C: @ 8086F0C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _08086F54
@@ -7765,7 +7765,7 @@ sub_8086FA8: @ 8086FA8
 	bne _08086FEC
 _08086FCE:
 	adds r0, r2, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086FEC
@@ -7817,7 +7817,7 @@ sub_8086FFC: @ 8086FFC
 	ldr r1, _08087068 @ =gUnknown_202063C
 	adds r0, r1
 	movs r1, 0x16
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x10
 	orrs r0, r1
@@ -7859,7 +7859,7 @@ sub_808706C: @ 808706C
 	ldr r0, _08087108 @ =gUnknown_2036E38
 	adds r4, r0
 	adds r0, r4, 0
-	bl sub_8063D1C
+	bl FieldObjectClearAnimIfSpecialAnimActive
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x11
 	negs r0, r0
@@ -7887,7 +7887,7 @@ sub_808706C: @ 808706C
 	adds r1, 0x1
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
@@ -7905,7 +7905,7 @@ sub_808706C: @ 808706C
 	adds r0, r4
 	ldr r1, _08087114 @ =sub_8087828
 	str r1, [r0]
-	bl sub_805FAF8
+	bl CameraObjectReset2
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -7950,12 +7950,12 @@ sub_8087138: @ 8087138
 	cmp r0, 0
 	bne _0808715A
 	movs r0, 0x1F
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _08087164 @ =sub_8086E40
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _0808715A:
 	pop {r0}
 	bx r0
@@ -7972,7 +7972,7 @@ sub_8087168: @ 8087168
 	movs r1, 0xFF
 	movs r2, 0xB4
 	movs r3, 0x1
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -8084,10 +8084,10 @@ sub_8087220: @ 8087220
 	ldr r0, _0808725C @ =gUnknown_83CC1CC
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
-	bl sub_800860C
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r0, _08087260 @ =gUnknown_300500C
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -8121,12 +8121,12 @@ _0808727A:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x78
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x78
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r2, [r4, 0x32]
 	movs r0, 0x32
@@ -8153,14 +8153,14 @@ _080872B0:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	lsrs r1, 6
 	ldrb r2, [r4, 0x3]
 	lsrs r2, 6
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 _080872E2:
 	pop {r4}
 	pop {r0}
@@ -8177,13 +8177,13 @@ sub_80872F0: @ 80872F0
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8C
-	bl sub_8044E4C
+	bl Cos
 	movs r5, 0
 	strh r0, [r4, 0x24]
 	movs r2, 0x32
 	ldrsh r0, [r4, r2]
 	movs r1, 0x48
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x4
@@ -8251,10 +8251,10 @@ sub_8087364: @ 8087364
 	ldr r0, _080873A0 @ =gUnknown_83CC1CC
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
-	bl sub_800860C
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r0, _080873A4 @ =gUnknown_300500C
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -8296,12 +8296,12 @@ _080873C4:
 	movs r3, 0x30
 	ldrsh r0, [r4, r3]
 	movs r1, 0x20
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x78
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x32]
 	movs r2, 0x32
@@ -8344,7 +8344,7 @@ _08087420:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	adds r2, r4, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]
@@ -8388,7 +8388,7 @@ sub_8087484: @ 8087484
 	push {lr}
 	ldr r0, _08087494 @ =sub_8087498
 	movs r1, 0xFE
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -8433,12 +8433,12 @@ sub_80874C8: @ 80874C8
 	ldr r1, _080875B8 @ =gUnknown_2036E38
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080874F2
 	adds r0, r5, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080875AE
@@ -8452,7 +8452,7 @@ _080874F2:
 	strh r0, [r6, 0x26]
 	movs r0, 0x1
 	strb r0, [r4, 0x6]
-	bl sub_805C970
+	bl SetPlayerAvatarStateMask
 	ldrh r1, [r6, 0x26]
 	movs r0, 0x8
 	ands r0, r1
@@ -8469,10 +8469,10 @@ _0808751A:
 	lsrs r1, 24
 	adds r0, r5, 0
 	bl sub_805F060
-	bl sub_805FAF8
+	bl CameraObjectReset2
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_805F218
+	bl FieldObjectTurn
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -8480,7 +8480,7 @@ _0808751A:
 	ldr r4, _080875BC @ =gUnknown_202063C
 	adds r0, r4
 	movs r1, 0x16
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r1, [r5, 0x1]
 	movs r0, 0x21
 	negs r0, r0
@@ -8508,7 +8508,7 @@ _0808751A:
 	lsls r2, 18
 	adds r1, r2
 	lsrs r1, 24
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0xA
 	ldrsh r1, [r6, r0]
 	lsls r0, r1, 4
@@ -8713,7 +8713,7 @@ sub_8087710: @ 8087710
 	lsls r0, 2
 	ldr r1, _08087744 @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08087738
@@ -8747,7 +8747,7 @@ sub_8087748: @ 8087748
 	lsls r0, 2
 	ldr r1, _0808777C @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -8798,18 +8798,18 @@ _080877B4:
 	bl sub_805F060
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_805F218
+	bl FieldObjectTurn
 	ldrh r0, [r5, 0x26]
 	strb r0, [r6]
 	movs r0, 0
 	strb r0, [r6, 0x6]
 	movs r0, 0x20
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _080877F8 @ =sub_8087498
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080877EA:
 	pop {r4-r7}
 	pop {r0}
@@ -8833,10 +8833,10 @@ sub_80877FC: @ 80877FC
 	ldr r0, _08087824 @ =gUnknown_83CC23C
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
-	bl sub_800860C
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -8851,13 +8851,13 @@ sub_8087828: @ 8087828
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	movs r1, 0xB4
-	bl sub_8044E4C
+	bl Cos
 	movs r5, 0
 	strh r0, [r4, 0x24]
 	movs r2, 0x32
 	ldrsh r0, [r4, r2]
 	movs r1, 0x48
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x2
@@ -8905,14 +8905,14 @@ _08087886:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	lsrs r1, 6
 	ldrb r2, [r4, 0x3]
 	lsrs r2, 6
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 _080878B4:
 	pop {r4,r5}
 	pop {r0}
@@ -8951,17 +8951,17 @@ _080878EC:
 	ands r0, r5
 	strb r0, [r4, 0x1]
 	adds r0, r3, 0
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	lsrs r1, 6
 	ldrb r2, [r4, 0x3]
 	lsrs r2, 6
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _08087920 @ =sub_80872F0
 	str r0, [r4, 0x1C]
 _08087916:
@@ -8982,7 +8982,7 @@ sub_8087924: @ 8087924
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080879BA
@@ -9012,10 +9012,10 @@ sub_8087924: @ 8087924
 	lsls r2, 16
 	asrs r2, 16
 	adds r0, r4, 0
-	bl sub_805F700
+	bl npc_coords_shift
 	ldr r0, _080879CC @ =sub_80879D8
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _080879D0 @ =gUnknown_3005090
@@ -9155,15 +9155,15 @@ _08087A78:
 	ldrh r0, [r5, 0x6]
 	strh r0, [r6, 0x22]
 	adds r0, r4, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldrb r0, [r4]
 	movs r1, 0x8
 	orrs r0, r1
 	strb r0, [r4]
 	movs r0, 0x43
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	adds r0, r7, 0
-	bl sub_8077508
+	bl DestroyTask
 _08087AA8:
 	pop {r4-r7}
 	pop {r0}
@@ -9181,13 +9181,13 @@ sub_8087AB4: @ 8087AB4
 	ldrb r1, [r4, 0x4]
 	ldrb r2, [r4, 0x8]
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _08087B04
 	ldr r0, _08087AFC @ =sub_8087BC0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08087B00 @ =gUnknown_3005090
@@ -9211,7 +9211,7 @@ _08087AFC: .4byte sub_8087BC0
 _08087B00: .4byte gUnknown_3005090
 _08087B04:
 	movs r0, 0x44
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 _08087B0A:
 	movs r0, 0
 	add sp, 0x4
@@ -9278,21 +9278,21 @@ _08087B54:
 	lsls r1, 16
 	asrs r1, 16
 	movs r0, 0
-	bl sub_805ADE0
+	bl SetCameraPanning
 	b _08087B8E
 _08087B84:
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0
-	bl sub_805ADE0
+	bl SetCameraPanning
 _08087B8E:
-	bl sub_805AE28
+	bl UpdateCameraPanning
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _08087BA0
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _08087BA0:
 	pop {r4,r5}
 	pop {r0}
@@ -9326,9 +9326,9 @@ sub_8087BC0: @ 8087BC0
 	lsls r4, 3
 	ldr r0, _08087BF8 @ =gUnknown_3005098
 	adds r4, r0
-	bl sub_805ADF8
+	bl InstallCameraPanAheadCallback
 	movs r0, 0
-	bl sub_805ADD4
+	bl SetCameraPanningCallback
 	ldr r1, _08087BFC @ =gUnknown_83CC244
 	movs r2, 0x2
 	ldrsh r0, [r4, r2]
@@ -9352,7 +9352,7 @@ sub_8087C00: @ 8087C00
 	adds r5, r0, 0
 	ldr r0, _08087C28 @ =sub_8087B14
 	movs r1, 0x5A
-	bl sub_807741C
+	bl CreateTask
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -9403,13 +9403,13 @@ sub_8087C2C: @ 8087C2C
 	adds r0, r6, 0
 	movs r1, 0x10
 	adds r2, r5, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	str r5, [sp]
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	adds r0, r4, 0
 	bl sub_8087CFC
 	movs r0, 0x50
@@ -9446,19 +9446,19 @@ sub_8087CB4: @ 8087CB4
 	cmp r0, 0
 	bne _08087CEE
 	ldr r0, _08087CF8 @ =sub_8087B14
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _08087CEE
-	bl sub_805ADF8
+	bl InstallCameraPanAheadCallback
 	ldrb r0, [r4, 0xC]
 	ldrb r1, [r4, 0xE]
 	ldrb r2, [r4, 0x10]
-	bl sub_805E4C8
+	bl RemoveFieldObjectByLocalIdAndMap
 	movs r0, 0x44
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _08087CEE:
 	pop {r4,r5}
 	pop {r0}
@@ -9503,7 +9503,7 @@ _08087D32:
 	asrs r1, r2, 16
 	asrs r2, r7, 16
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -9516,7 +9516,7 @@ _08087D32:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	strh r5, [r4, 0x2E]
 	ldrb r1, [r6, 0x5]
 	lsrs r1, 4
@@ -9605,7 +9605,7 @@ _08087DDA:
 	ble _08087DFC
 _08087DF6:
 	adds r0, r1, 0
-	bl sub_8007280
+	bl DestroySprite
 _08087DFC:
 	pop {r0}
 	bx r0
@@ -9623,9 +9623,9 @@ sub_8087E00: @ 8087E00
 	cmp r0, 0
 	bne _08087E1E
 	movs r0, 0x45
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08087E1E:
 	pop {r4}
 	pop {r0}
@@ -9644,16 +9644,16 @@ sub_8087E28: @ 8087E28
 	adds r0, r4, 0
 	movs r1, 0x10
 	adds r2, r5, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	str r5, [sp]
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0xF
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _08087E60 @ =sub_8087E00
 	movs r1, 0x5A
-	bl sub_807741C
+	bl CreateTask
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8097434
-sub_8097434: @ 8097434
+	thumb_func_start ScriptMovement_StartObjectMovementScript
+ScriptMovement_StartObjectMovementScript: @ 8097434
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r3, 0
@@ -17,7 +17,7 @@ sub_8097434: @ 8097434
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _08097456
@@ -25,7 +25,7 @@ sub_8097434: @ 8097434
 	b _0809747E
 _08097456:
 	ldr r0, _08097488 @ =sub_80977AC
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _08097468
@@ -48,10 +48,10 @@ _0809747E:
 	bx r1
 	.align 2, 0
 _08097488: .4byte sub_80977AC
-	thumb_func_end sub_8097434
+	thumb_func_end ScriptMovement_StartObjectMovementScript
 
-	thumb_func_start sub_809748C
-sub_809748C: @ 809748C
+	thumb_func_start ScriptMovement_IsObjectMovementFinished
+ScriptMovement_IsObjectMovementFinished: @ 809748C
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -61,7 +61,7 @@ sub_809748C: @ 809748C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080974CE
@@ -88,7 +88,7 @@ _080974D0:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809748C
+	thumb_func_end ScriptMovement_IsObjectMovementFinished
 
 	thumb_func_start sub_80974D8
 sub_80974D8: @ 80974D8
@@ -101,7 +101,7 @@ sub_80974D8: @ 80974D8
 	adds r0, r4, 0
 	bl sub_8097768
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080974F2:
 	pop {r4}
 	pop {r0}
@@ -115,7 +115,7 @@ sub_80974F8: @ 80974F8
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r0, _08097534 @ =sub_80977AC
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0x1
@@ -150,7 +150,7 @@ _0809753C: .4byte 0x0000ffff
 sub_8097540: @ 8097540
 	push {lr}
 	ldr r0, _08097550 @ =sub_80977AC
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -404,8 +404,8 @@ _08097702:
 	bx r1
 	thumb_func_end sub_80976D0
 
-	thumb_func_start sub_8097708
-sub_8097708: @ 8097708
+	thumb_func_start npc_obj_offscreen_culling_and_flag_update
+npc_obj_offscreen_culling_and_flag_update: @ 8097708
 	lsls r0, 24
 	ldr r2, _08097714 @ =gUnknown_2039830
 	lsrs r0, 22
@@ -414,7 +414,7 @@ sub_8097708: @ 8097708
 	bx lr
 	.align 2, 0
 _08097714: .4byte gUnknown_2039830
-	thumb_func_end sub_8097708
+	thumb_func_end npc_obj_offscreen_culling_and_flag_update
 
 	thumb_func_start sub_8097718
 sub_8097718: @ 8097718
@@ -448,7 +448,7 @@ sub_8097728: @ 8097728
 	bl sub_8097678
 	adds r0, r4, 0
 	mov r1, r8
-	bl sub_8097708
+	bl npc_obj_offscreen_culling_and_flag_update
 	adds r0, r5, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -482,7 +482,7 @@ _0809777C:
 	lsls r0, 2
 	ldr r1, _080977A8 @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_80689F4
+	bl npc_sync_anim_pause_bits
 _08097792:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -560,12 +560,12 @@ sub_80977F0: @ 80977F0
 	ldr r1, _08097850 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063C88
+	bl FieldObjectIsSpecialAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08097838
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809786A
@@ -590,7 +590,7 @@ _08097854:
 	adds r6, 0x1
 	mov r0, r8
 	adds r1, r6, 0
-	bl sub_8097708
+	bl npc_obj_offscreen_culling_and_flag_update
 _0809786A:
 	pop {r3}
 	mov r8, r3

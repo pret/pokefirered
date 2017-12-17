@@ -235,7 +235,7 @@ sub_812B35C: @ 812B35C
 	push {lr}
 	bl sub_812B4B8
 	movs r0, 0x8
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B376
@@ -253,7 +253,7 @@ _0812B376:
 _0812B388:
 	ldr r0, _0812B3B0 @ =gUnknown_2036DFC
 	ldrb r0, [r0, 0x17]
-	bl sub_805621C
+	bl is_light_level_8_or_9
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B400
@@ -282,7 +282,7 @@ _0812B3B8:
 	bl sub_812B1F0
 	b _0812B406
 _0812B3C8:
-	bl sub_810B73C
+	bl IsCurMapPokeCenter
 	cmp r0, 0x1
 	bne _0812B3D8
 	movs r0, 0x10

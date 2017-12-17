@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80773BC
-sub_80773BC: @ 80773BC
+	thumb_func_start ResetTasks
+ResetTasks: @ 80773BC
 	push {r4-r7,lr}
 	movs r4, 0
 	ldr r6, _08077410 @ =gUnknown_3005090
@@ -52,10 +52,10 @@ _080773C6:
 _08077410: .4byte gUnknown_3005090
 _08077414: .4byte nullsub_43
 _08077418: .4byte 0x0000025e
-	thumb_func_end sub_80773BC
+	thumb_func_end ResetTasks
 
-	thumb_func_start sub_807741C
-sub_807741C: @ 807741C
+	thumb_func_start CreateTask
+CreateTask: @ 807741C
 	push {r4-r7,lr}
 	adds r2, r0, 0
 	lsls r1, 24
@@ -73,7 +73,7 @@ _08077428:
 	str r2, [r4]
 	strb r1, [r4, 0x7]
 	adds r0, r6, 0
-	bl sub_8077470
+	bl InsertTask
 	adds r0, r7, 0
 	adds r0, 0x8
 	adds r0, r5, r0
@@ -97,16 +97,16 @@ _08077468:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807741C
+	thumb_func_end CreateTask
 
-	thumb_func_start sub_8077470
-sub_8077470: @ 8077470
+	thumb_func_start InsertTask
+InsertTask: @ 8077470
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80775A8
+	bl FindFirstActiveTask
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x10
@@ -180,10 +180,10 @@ _080774FC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8077470
+	thumb_func_end InsertTask
 
-	thumb_func_start sub_8077508
-sub_8077508: @ 8077508
+	thumb_func_start DestroyTask
+DestroyTask: @ 8077508
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -243,12 +243,12 @@ _08077572:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8077508
+	thumb_func_end DestroyTask
 
-	thumb_func_start sub_8077578
-sub_8077578: @ 8077578
+	thumb_func_start RunTasks
+RunTasks: @ 8077578
 	push {r4,r5,lr}
-	bl sub_80775A8
+	bl FindFirstActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x10
@@ -270,10 +270,10 @@ _0807759C:
 	bx r0
 	.align 2, 0
 _080775A4: .4byte gUnknown_3005090
-	thumb_func_end sub_8077578
+	thumb_func_end RunTasks
 
-	thumb_func_start sub_80775A8
-sub_80775A8: @ 80775A8
+	thumb_func_start FindFirstActiveTask
+FindFirstActiveTask: @ 80775A8
 	push {lr}
 	movs r2, 0
 	ldr r0, _080775E0 @ =gUnknown_3005090
@@ -306,15 +306,15 @@ _080775DA:
 	bx r1
 	.align 2, 0
 _080775E0: .4byte gUnknown_3005090
-	thumb_func_end sub_80775A8
+	thumb_func_end FindFirstActiveTask
 
 	thumb_func_start nullsub_43
 nullsub_43: @ 80775E4
 	bx lr
 	thumb_func_end nullsub_43
 
-	thumb_func_start sub_80775E8
-sub_80775E8: @ 80775E8
+	thumb_func_start SetTaskFuncWithFollowupFunc
+SetTaskFuncWithFollowupFunc: @ 80775E8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -340,10 +340,10 @@ sub_80775E8: @ 80775E8
 	bx r0
 	.align 2, 0
 _08077618: .4byte gUnknown_3005090
-	thumb_func_end sub_80775E8
+	thumb_func_end SetTaskFuncWithFollowupFunc
 
-	thumb_func_start sub_807761C
-sub_807761C: @ 807761C
+	thumb_func_start SwitchTaskToFollowupFunc
+SwitchTaskToFollowupFunc: @ 807761C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -369,10 +369,10 @@ sub_807761C: @ 807761C
 	bx r0
 	.align 2, 0
 _0807764C: .4byte gUnknown_3005090
-	thumb_func_end sub_807761C
+	thumb_func_end SwitchTaskToFollowupFunc
 
-	thumb_func_start sub_8077650
-sub_8077650: @ 8077650
+	thumb_func_start FuncIsActiveTask
+FuncIsActiveTask: @ 8077650
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r2, 0
@@ -403,10 +403,10 @@ _08077680:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8077650
+	thumb_func_end FuncIsActiveTask
 
-	thumb_func_start sub_8077688
-sub_8077688: @ 8077688
+	thumb_func_start FindTaskIdByFunc
+FindTaskIdByFunc: @ 8077688
 	push {lr}
 	adds r3, r0, 0
 	movs r2, 0
@@ -432,10 +432,10 @@ _080776A8:
 _080776B2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8077688
+	thumb_func_end FindTaskIdByFunc
 
-	thumb_func_start sub_80776B8
-sub_80776B8: @ 80776B8
+	thumb_func_start GetTaskCount
+GetTaskCount: @ 80776B8
 	push {lr}
 	movs r2, 0
 	movs r1, 0
@@ -462,10 +462,10 @@ _080776D4:
 	bx r1
 	.align 2, 0
 _080776E4: .4byte gUnknown_3005090
-	thumb_func_end sub_80776B8
+	thumb_func_end GetTaskCount
 
-	thumb_func_start sub_80776E8
-sub_80776E8: @ 80776E8
+	thumb_func_start SetWordTaskArg
+SetWordTaskArg: @ 80776E8
 	push {r4,r5,lr}
 	adds r5, r2, 0
 	lsls r0, 24
@@ -495,10 +495,10 @@ _08077716:
 	bx r0
 	.align 2, 0
 _0807771C: .4byte gUnknown_3005090
-	thumb_func_end sub_80776E8
+	thumb_func_end SetWordTaskArg
 
-	thumb_func_start sub_8077720
-sub_8077720: @ 8077720
+	thumb_func_start GetWordTaskArg
+GetWordTaskArg: @ 8077720
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -532,6 +532,6 @@ _08077754:
 	bx r1
 	.align 2, 0
 _0807775C: .4byte gUnknown_3005090
-	thumb_func_end sub_8077720
+	thumb_func_end GetWordTaskArg
 
 	.align 2, 0 @ Don't pad with nop.

@@ -39,13 +39,13 @@ sub_8097898: @ 8097898
 	cmp r0, 0x1
 	beq _080978E0
 	movs r0, 0x5F
-	bl sub_80C97A8
+	bl npc_before_player_of_type
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08097904
 	ldr r1, _080978D0 @ =gUnknown_3005024
-	ldr r0, _080978D4 @ =sub_81248B0
+	ldr r0, _080978D4 @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _080978D8 @ =gUnknown_203B0C4
 	ldr r0, _080978DC @ =sub_80979D0
@@ -53,14 +53,14 @@ sub_8097898: @ 8097898
 	.align 2, 0
 _080978CC: .4byte gUnknown_2039874
 _080978D0: .4byte gUnknown_3005024
-_080978D4: .4byte sub_81248B0
+_080978D4: .4byte hm_add_c3_launch_phase_2
 _080978D8: .4byte gUnknown_203B0C4
 _080978DC: .4byte sub_80979D0
 _080978E0:
 	strb r0, [r4]
 _080978E2:
 	ldr r1, _080978F4 @ =gUnknown_3005024
-	ldr r0, _080978F8 @ =sub_81248B0
+	ldr r0, _080978F8 @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _080978FC @ =gUnknown_203B0C4
 	ldr r0, _08097900 @ =sub_8097984
@@ -70,14 +70,14 @@ _080978EC:
 	b _08097970
 	.align 2, 0
 _080978F4: .4byte gUnknown_3005024
-_080978F8: .4byte sub_81248B0
+_080978F8: .4byte hm_add_c3_launch_phase_2
 _080978FC: .4byte gUnknown_203B0C4
 _08097900: .4byte sub_8097984
 _08097904:
 	ldr r4, _0809797C @ =gUnknown_2039A04
 	adds r1, r4, 0x2
 	adds r0, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	movs r7, 0
 	adds r2, r4, 0
 	ldr r0, _08097980 @ =0x0000ffff
@@ -100,7 +100,7 @@ _08097924:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r2, [sp]
-	bl sub_8058D44
+	bl MapGridGetZCoordAt
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [sp]
@@ -144,7 +144,7 @@ _08097980: .4byte 0x0000ffff
 sub_8097984: @ 8097984
 	push {lr}
 	movs r0, 0x1
-	bl sub_8083444
+	bl FieldEffectStart
 	bl sub_811FB0C
 	ldr r1, _0809799C @ =gUnknown_20386E0
 	lsls r0, 24
@@ -159,7 +159,7 @@ _0809799C: .4byte gUnknown_20386E0
 	thumb_func_start sub_80979A0
 sub_80979A0: @ 80979A0
 	push {lr}
-	bl sub_80C97FC
+	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080979C8 @ =gUnknown_3005090
@@ -190,7 +190,7 @@ sub_80979D0: @ 80979D0
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, _080979EC @ =gUnknown_81BDF6B
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -201,7 +201,7 @@ _080979EC: .4byte gUnknown_81BDF6B
 	thumb_func_start sub_80979F0
 sub_80979F0: @ 80979F0
 	push {lr}
-	bl sub_80C97FC
+	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08097A18 @ =gUnknown_3005090
@@ -227,7 +227,7 @@ _08097A1C: .4byte sub_8097C6C
 sub_8097A20: @ 8097A20
 	push {lr}
 	movs r0, 0x1
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _08097A38 @ =gUnknown_2039874
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -238,7 +238,7 @@ sub_8097A20: @ 8097A20
 _08097A38: .4byte gUnknown_2039874
 _08097A3C:
 	movs r0, 0x3A
-	bl sub_8083444
+	bl FieldEffectStart
 _08097A42:
 	pop {r0}
 	bx r0
@@ -256,7 +256,7 @@ sub_8097A48: @ 8097A48
 	ldr r4, _08097B38 @ =gUnknown_2039A04
 	adds r1, r4, 0x2
 	adds r0, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r8, r4
 	ldr r0, _08097B3C @ =0x0000ffff
 	mov r9, r0
@@ -279,7 +279,7 @@ _08097A78:
 	asrs r4, r0, 16
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8058D44
+	bl MapGridGetZCoordAt
 	lsls r0, 24
 	lsrs r0, 24
 	mov r2, r8
@@ -311,10 +311,10 @@ _08097ABC:
 	lsrs r7, r0, 24
 	cmp r7, 0x2
 	bls _08097A68
-	bl sub_805A684
+	bl DrawWholeMapView
 	ldr r4, _08097B40 @ =gUnknown_2039870
 	movs r0, 0x8
-	bl sub_8002B9C
+	bl Alloc
 	str r0, [r4]
 	movs r7, 0
 	ldr r5, _08097B44 @ =gUnknown_202063C
@@ -336,7 +336,7 @@ _08097AE2:
 	adds r2, 0x14
 	ldr r0, _08097B4C @ =gUnknown_83D414C
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r1, [r4]
 	adds r1, r7
 	strb r0, [r1]
@@ -439,13 +439,13 @@ sub_8097BBC: @ 8097BBC
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2E
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2E
 	ldrsh r1, [r4, r2]
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x8
@@ -494,7 +494,7 @@ _08097C1C:
 	lsls r0, 2
 	ldr r5, _08097C68 @ =gUnknown_202063C
 	adds r0, r5
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -507,11 +507,11 @@ _08097C1C:
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x3A
-	bl sub_80836D8
+	bl FieldEffectStop
 	ldr r0, [r6]
-	bl sub_8002BC4
+	bl Free
 	bl sub_80696C0
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -526,8 +526,8 @@ sub_8097C6C: @ 8097C6C
 	movs r0, 0x79
 	bl sub_80722CC
 	movs r0, 0x2
-	bl sub_80837FC
-	bl sub_8069B34
+	bl FieldEffectActiveListRemove
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8097C6C

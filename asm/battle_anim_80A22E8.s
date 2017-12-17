@@ -24,7 +24,7 @@ sub_80A22E8: @ 80A22E8
 	strh r0, [r4, 0x30]
 	ldr r0, _080A2320 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2324
@@ -73,7 +73,7 @@ sub_80A2340: @ 80A2340
 	ldrsh r0, [r4, r1]
 	movs r2, 0x34
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x36]
 	ldrh r1, [r4, 0x38]
@@ -84,7 +84,7 @@ sub_80A2340: @ 80A2340
 	b _080A2382
 _080A237C:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A2382:
 	pop {r4}
 	pop {r0}
@@ -115,9 +115,9 @@ sub_80A2388: @ 80A2388
 	strh r0, [r4, 0x36]
 	ldr r0, _080A23D0 @ =sub_8075590
 	str r0, [r4, 0x1C]
-	ldr r1, _080A23D4 @ =sub_8074EE0
+	ldr r1, _080A23D4 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -125,7 +125,7 @@ sub_80A2388: @ 80A2388
 _080A23C8: .4byte gUnknown_2037F02
 _080A23CC: .4byte gUnknown_2037F1A
 _080A23D0: .4byte sub_8075590
-_080A23D4: .4byte sub_8074EE0
+_080A23D4: .4byte move_anim_8074EE0
 	thumb_func_end sub_80A2388
 
 	thumb_func_start sub_80A23D8
@@ -137,7 +137,7 @@ sub_80A23D8: @ 80A23D8
 	ldr r5, _080A2420 @ =gUnknown_2037F02
 	ldrb r1, [r5, 0x6]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r5, 0x4]
 	strh r0, [r4, 0x2E]
 	ldr r5, _080A2424 @ =gUnknown_2037F1B
@@ -155,9 +155,9 @@ sub_80A23D8: @ 80A23D8
 	strh r0, [r4, 0x36]
 	ldr r0, _080A2428 @ =sub_8075590
 	str r0, [r4, 0x1C]
-	ldr r1, _080A242C @ =sub_8072740
+	ldr r1, _080A242C @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -165,7 +165,7 @@ sub_80A23D8: @ 80A23D8
 _080A2420: .4byte gUnknown_2037F02
 _080A2424: .4byte gUnknown_2037F1B
 _080A2428: .4byte sub_8075590
-_080A242C: .4byte sub_8072740
+_080A242C: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A23D8
 
 	thumb_func_start sub_80A2430
@@ -195,7 +195,7 @@ sub_80A2430: @ 80A2430
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldrh r0, [r6, 0x6]
 	strh r0, [r4, 0x38]
 	ldr r1, _080A2488 @ =sub_80A248C
@@ -220,7 +220,7 @@ sub_80A248C: @ 80A248C
 	cmp r0, 0
 	beq _080A24A2
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	b _080A24F6
 _080A24A2:
 	movs r1, 0x38
@@ -246,14 +246,14 @@ _080A24C6:
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0x5
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xE
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -314,14 +314,14 @@ sub_80A2500: @ 80A2500
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_80071EC
+	bl CreateSpriteAndAnimate
 _080A255A:
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
 	cmp r0, 0xF
 	bne _080A2568
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A2568:
 	pop {r4-r6}
 	pop {r0}
@@ -374,12 +374,12 @@ _080A25CC: .4byte sub_80A25D0
 sub_80A25D0: @ 80A25D0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A25E4
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A25E4:
 	pop {r4}
 	pop {r0}
@@ -390,14 +390,14 @@ _080A25E4:
 sub_80A25EC: @ 80A25EC
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_8044EC8
+	bl Random
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x7
 	ands r1, r0
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r4, _080A2634 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -412,7 +412,7 @@ sub_80A25EC: @ 80A25EC
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2638
@@ -426,7 +426,7 @@ _080A2638:
 	adds r0, 0x14
 _080A263C:
 	strh r0, [r5, 0x20]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1F
@@ -452,7 +452,7 @@ _080A263C:
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
 	bl sub_8075804
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0xFF
 	ands r1, r0
 	strh r1, [r5, 0x38]
@@ -481,13 +481,13 @@ sub_80A26A4: @ 80A26A4
 	cmp r0, 0
 	beq _080A26BA
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080A26EA
 _080A26BA:
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xC
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -523,7 +523,7 @@ sub_80A26F0: @ 80A26F0
 	bl sub_8075160
 	ldr r0, _080A2750 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2710
@@ -572,7 +572,7 @@ _080A275C: .4byte sub_80A2760
 sub_80A2760: @ 80A2760
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A278A
@@ -588,7 +588,7 @@ sub_80A2760: @ 80A2760
 	str r0, [r4, 0x1C]
 	ldr r1, _080A2794 @ =sub_80A2798
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 _080A278A:
 	pop {r4}
 	pop {r0}
@@ -611,20 +611,20 @@ sub_80A2798: @ 80A2798
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0x3C
 	strh r0, [r4, 0x2E]
 	ldr r0, _080A27C8 @ =sub_8074C44
 	str r0, [r4, 0x1C]
-	ldr r1, _080A27CC @ =sub_8072740
+	ldr r1, _080A27CC @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A27C8: .4byte sub_8074C44
-_080A27CC: .4byte sub_8072740
+_080A27CC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A2798
 
 	thumb_func_start sub_80A27D0
@@ -636,7 +636,7 @@ sub_80A27D0: @ 80A27D0
 	ldr r5, _080A2814 @ =gUnknown_2037F02
 	ldrb r1, [r5, 0x8]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x1
@@ -672,13 +672,13 @@ sub_80A281C: @ 80A281C
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x20
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x3
 	negs r1, r1
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x32]
 	adds r1, 0x18
 	strh r1, [r4, 0x32]
@@ -742,7 +742,7 @@ _080A2894:
 	cmp r0, r1
 	bne _080A28B8
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A28B8:
 	pop {r4}
 	pop {r0}
@@ -766,7 +766,7 @@ sub_80A28C4: @ 80A28C4
 	bne _080A28E6
 _080A28DE:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080A2918
 _080A28E6:
 	ldr r0, _080A2904 @ =gUnknown_2037F1B
@@ -779,7 +779,7 @@ _080A28E6:
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x3
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	b _080A2912
 	.align 2, 0
 _080A2904: .4byte gUnknown_2037F1B
@@ -787,10 +787,10 @@ _080A2908:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080A2912:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A2918:
 	pop {r4}
 	pop {r0}
@@ -821,7 +821,7 @@ sub_80A2920: @ 80A2920
 	adds r0, r5
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	movs r0, 0x40
 	strh r0, [r4, 0x38]
 	ldr r1, _080A2970 @ =sub_80A2974
@@ -848,7 +848,7 @@ sub_80A2974: @ 80A2974
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0x20
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
@@ -856,7 +856,7 @@ sub_80A2974: @ 80A2974
 	ldrsh r0, [r4, r1]
 	movs r1, 0x5
 	negs r1, r1
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -892,7 +892,7 @@ _080A29CA:
 _080A29DC: .4byte gUnknown_2037F1A
 _080A29E0:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A29E6:
 	pop {r4}
 	pop {r0}
@@ -923,7 +923,7 @@ sub_80A29EC: @ 80A29EC
 	adds r0, r5
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	movs r0, 0x40
 	strh r0, [r4, 0x38]
 	ldr r1, _080A2A3C @ =sub_80A2A40
@@ -950,7 +950,7 @@ sub_80A2A40: @ 80A2A40
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
@@ -987,7 +987,7 @@ _080A2A8C:
 	b _080A2A9E
 _080A2A98:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A2A9E:
 	pop {r4}
 	pop {r0}
@@ -1080,14 +1080,14 @@ sub_80A2B38: @ 80A2B38
 	adds r4, r0, 0
 	ldr r0, _080A2B58 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2B5C
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x19
-	bl sub_8044E30
+	bl Sin
 	negs r0, r0
 	b _080A2B66
 	.align 2, 0
@@ -1096,7 +1096,7 @@ _080A2B5C:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x19
-	bl sub_8044E30
+	bl Sin
 _080A2B66:
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x2E]
@@ -1120,7 +1120,7 @@ _080A2B86:
 	cmp r0, 0x50
 	ble _080A2B94
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A2B94:
 	pop {r4}
 	pop {r0}
@@ -1135,7 +1135,7 @@ sub_80A2B9C: @ 80A2B9C
 	bl sub_8075160
 	ldr r0, _080A2BF0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2BBC
@@ -1197,11 +1197,11 @@ _080A2C1C:
 	bl sub_8075068
 	ldr r0, _080A2C50 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r0, _080A2C48 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -1235,7 +1235,7 @@ sub_80A2C68: @ 80A2C68
 	movs r0, 0x1
 	strh r0, [r6, 0x2E]
 	adds r0, r6, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	ldrh r0, [r6, 0x3C]
 	strh r5, [r6, 0x2E]
 	lsls r4, 16
@@ -1309,7 +1309,7 @@ _080A2CFE:
 	cmp r7, 0
 	beq _080A2D08
 	adds r0, r6, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A2D08:
 	pop {r4-r7}
 	pop {r0}
@@ -1406,12 +1406,12 @@ _080A2DAC:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x34
 	ldrsh r1, [r4, r2]
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r5, 0x38
 	ldrsh r0, [r4, r5]
 	movs r1, 0x5
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
@@ -1450,7 +1450,7 @@ _080A2DFA:
 	cmp r0, 0
 	bne _080A2E1E
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A2E1E:
 	pop {r4,r5}
 	pop {r0}
@@ -1474,7 +1474,7 @@ sub_80A2E28: @ 80A2E28
 	ldr r4, _080A2E5C @ =gUnknown_2037F02
 	ldrb r1, [r4, 0x4]
 	adds r0, r5, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldrh r0, [r4, 0x4]
 	strh r0, [r5, 0x3A]
 	ldrh r0, [r4, 0x6]
@@ -1505,7 +1505,7 @@ sub_80A2E64: @ 80A2E64
 	ands r0, r1
 	strb r0, [r2]
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	movs r0, 0x80
 	lsls r0, 1
 	strh r0, [r4, 0x2E]
@@ -1526,7 +1526,7 @@ sub_80A2EA0: @ 80A2EA0
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -1570,11 +1570,11 @@ _080A2ED8:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _080A2F06
 _080A2F00:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A2F06:
 	pop {r4}
 	pop {r0}
@@ -1587,7 +1587,7 @@ sub_80A2F0C: @ 80A2F0C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, _080A2F38 @ =gUnknown_202063C
@@ -1601,7 +1601,7 @@ sub_80A2F0C: @ 80A2F0C
 	cmp r0, 0
 	bge _080A2F3C
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080A2F62
 	.align 2, 0
 _080A2F38: .4byte gUnknown_202063C
@@ -1641,7 +1641,7 @@ sub_80A2F74: @ 80A2F74
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r6, r0, 0
@@ -1664,7 +1664,7 @@ sub_80A2F74: @ 80A2F74
 	strh r1, [r5, 0x24]
 	ldr r0, _080A2FFC @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2FBE
@@ -1680,7 +1680,7 @@ _080A2FBE:
 	adds r0, r6, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	adds r0, r6, 0
 	bl sub_8076440
 	ldrh r0, [r4, 0xA]
@@ -1725,7 +1725,7 @@ sub_80A3004: @ 80A3004
 	cmp r5, 0
 	bne _080A3074
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1770,7 +1770,7 @@ _080A3074:
 	cmp r0, 0x3
 	bne _080A308E
 	adds r0, r3, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A308E:
 	pop {r4-r6}
 	pop {r0}
@@ -1793,7 +1793,7 @@ sub_80A3098: @ 80A3098
 _080A30AA:
 	ldr r6, _080A30FC @ =gUnknown_2037F1B
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A30C2
@@ -1850,7 +1850,7 @@ _080A3104:
 	beq _080A3156
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800849C
+	bl ChangeSpriteAffineAnim
 	movs r0, 0x19
 	strh r0, [r5, 0x2E]
 	ldr r4, _080A315C @ =gUnknown_2037F1A
@@ -1868,9 +1868,9 @@ _080A3104:
 	strh r0, [r5, 0x36]
 	ldr r0, _080A3160 @ =sub_8075764
 	str r0, [r5, 0x1C]
-	ldr r1, _080A3164 @ =sub_8072740
+	ldr r1, _080A3164 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 _080A3156:
 	pop {r4-r6}
 	pop {r0}
@@ -1878,7 +1878,7 @@ _080A3156:
 	.align 2, 0
 _080A315C: .4byte gUnknown_2037F1A
 _080A3160: .4byte sub_8075764
-_080A3164: .4byte sub_8072740
+_080A3164: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A3098
 
 	thumb_func_start sub_80A3168
@@ -1914,7 +1914,7 @@ sub_80A3168: @ 80A3168
 	strb r0, [r1]
 	ldrb r1, [r4, 0x6]
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x8]
 	strh r0, [r5, 0x32]
 	ldrh r0, [r5, 0x2E]
@@ -2026,7 +2026,7 @@ sub_80A31EC: @ 80A31EC
 	strb r0, [r1]
 	ldrb r1, [r6, 0x8]
 	mov r0, r9
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r6, 0xA]
 	mov r1, r9
 	strh r0, [r1, 0x32]
@@ -2100,7 +2100,7 @@ _080A331C:
 	cmp r1, r0
 	ble _080A332E
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A332E:
 	pop {r0}
 	bx r0
@@ -2154,7 +2154,7 @@ _080A3374:
 	ands r0, r1
 	movs r2, 0x32
 	ldrsh r1, [r6, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r6, 0x26]
 	movs r0, 0x2E
 	ldrsh r1, [r6, r0]
@@ -2163,7 +2163,7 @@ _080A3374:
 	cmp r1, r0
 	ble _080A33AA
 	adds r0, r6, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A33AA:
 	pop {r4-r6}
 	pop {r0}
@@ -2295,7 +2295,7 @@ sub_80A3484: @ 80A3484
 	bne _080A3498
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _080A3498:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -2305,7 +2305,7 @@ _080A3498:
 	cmp r0, 0x32
 	ble _080A34AC
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A34AC:
 	pop {r4}
 	pop {r0}
@@ -2346,7 +2346,7 @@ _080A34DE:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	adds r0, r4, 0
 	bl sub_80A33E0
@@ -2457,7 +2457,7 @@ _080A35BA:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	adds r0, r4, 0
 	bl sub_80A33E0
@@ -2467,7 +2467,7 @@ _080A35BA:
 	strh r5, [r4, 0x26]
 	strh r5, [r4, 0x2E]
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A35EC:
 	pop {r4,r5}
 	pop {r0}
@@ -2485,7 +2485,7 @@ sub_80A35F4: @ 80A35F4
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2565,7 +2565,7 @@ _080A368A:
 	cmp r0, 0
 	beq _080A36AA
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A36AA:
 	pop {r4}
 	pop {r0}
@@ -2666,7 +2666,7 @@ _080A3756:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	lsls r0, 16
 	cmp r0, 0
@@ -2677,7 +2677,7 @@ _080A3756:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x76
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080A378A:
 	adds r0, r4, 0
 	bl sub_80A33E0
@@ -2695,7 +2695,7 @@ _080A378A:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x76
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080A37B2:
 	pop {r4,r5}
 	pop {r0}
@@ -2753,12 +2753,12 @@ _080A3806:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x3C
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x14
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldr r0, _080A3844 @ =sub_80A3858
 	str r0, [r4, 0x1C]
@@ -2808,7 +2808,7 @@ _080A386A:
 	strh r0, [r4, 0x34]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _080A38BA
 _080A3882:
 	movs r1, 0x36
@@ -2932,12 +2932,12 @@ _080A395E:
 	movs r6, 0x30
 	ldrsh r0, [r4, r6]
 	movs r1, 0x3C
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x14
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 _080A3976:
 	pop {r4-r6}
@@ -2954,7 +2954,7 @@ sub_80A397C: @ 80A397C
 	cmp r0, 0x14
 	ble _080A398E
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A398E:
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
@@ -3021,7 +3021,7 @@ sub_80A39C0: @ 80A39C0
 	bl sub_8076B2C
 	strh r0, [r5, 0x1E]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0x1
@@ -3049,14 +3049,14 @@ _080A3A28:
 	movs r3, 0x1A
 	ldrsh r2, [r5, r3]
 	ldrb r3, [r5, 0x10]
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xC]
 	cmp r0, 0x40
 	bne _080A3A60
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A3A60:
 	ldr r4, _080A3B20 @ =gUnknown_202063C
 	movs r0, 0xC
@@ -3207,7 +3207,7 @@ _080A3B80:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3B96
@@ -3236,7 +3236,7 @@ _080A3BB4:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3BCA
@@ -3265,7 +3265,7 @@ _080A3BE6:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3BFC
@@ -3307,7 +3307,7 @@ _080A3C04:
 	strb r0, [r1]
 	ldrb r1, [r6, 0xE]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	bl sub_8075068
 	ldrh r0, [r6, 0x8]
@@ -3318,7 +3318,7 @@ _080A3C54:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3C6A
@@ -3379,7 +3379,7 @@ _080A3C72:
 	strb r0, [r1]
 	ldrb r1, [r6, 0xE]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	bl sub_8075068
 	ldrh r0, [r6, 0x8]
@@ -3438,7 +3438,7 @@ _080A3CE8:
 	strb r1, [r0]
 	ldrb r1, [r6, 0xE]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	bl sub_8075068
 	ldrh r0, [r6, 0x8]
@@ -3449,7 +3449,7 @@ _080A3D62:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3D78
@@ -3492,7 +3492,7 @@ _080A3D80:
 	strb r1, [r0]
 	ldrb r1, [r6, 0xE]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	bl sub_8075068
 	ldrh r0, [r6, 0x8]
@@ -3549,7 +3549,7 @@ _080A3DD2:
 	strb r0, [r1]
 	ldrb r1, [r6, 0xE]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	bl sub_8075068
 	ldrh r0, [r6, 0x8]
@@ -3560,7 +3560,7 @@ _080A3E48:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A3EFC
@@ -3601,7 +3601,7 @@ _080A3E64:
 	strb r1, [r0]
 	ldrb r1, [r6, 0xE]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	bl sub_8075068
 	ldrh r0, [r6, 0x8]
@@ -3612,12 +3612,12 @@ _080A3EB6:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A3EFC
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	b _080A3EFA
@@ -3627,7 +3627,7 @@ _080A3ED6:
 	cmp r0, 0
 	bne _080A3EFC
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080A3EFC
 _080A3EE6:
 	ldrh r0, [r6, 0xA]
@@ -3704,7 +3704,7 @@ sub_80A3F24: @ 80A3F24
 	lsls r2, 16
 	asrs r2, 16
 	ldrb r3, [r6, 0x10]
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3734,7 +3734,7 @@ sub_80A3F24: @ 80A3F24
 	strh r0, [r1, 0x22]
 	ldrb r1, [r6, 0xE]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r6, 0x10]
 	adds r4, 0x43
 	strb r0, [r4]
@@ -3805,7 +3805,7 @@ sub_80A3FD4: @ 80A3FD4
 	subs r0, 0x1
 	strh r0, [r1]
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080A4036:
 	pop {r4}
 	pop {r0}
@@ -3833,7 +3833,7 @@ _080A405C:
 _080A405E:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4088
@@ -3924,7 +3924,7 @@ _080A4100:
 	adds r0, r7
 	strh r0, [r4, 0x22]
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 _080A411A:
 	adds r0, r6, 0
 	bl sub_8076884
@@ -4008,7 +4008,7 @@ _080A41A4:
 	bgt _080A41BC
 _080A41B6:
 	adds r0, r4, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080A41BC:
 	pop {r4,r5}
 	pop {r0}
@@ -4036,7 +4036,7 @@ sub_80A41C4: @ 80A41C4
 _080A41E4: .4byte gUnknown_3005090
 _080A41E8:
 	ldr r0, _080A4214 @ =0x0000274f
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	movs r2, 0x80
@@ -4045,7 +4045,7 @@ _080A41E8:
 	adds r0, r4
 	strh r0, [r5, 0x18]
 	ldr r0, _080A4218 @ =0x000027b0
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	adds r0, r4
@@ -4075,7 +4075,7 @@ _080A421C:
 	adds r1, r4
 	ldrh r3, [r1]
 	movs r1, 0x10
-	bl sub_8045274
+	bl BlendPalette
 	ldrh r0, [r5, 0x20]
 	ldrb r2, [r5, 0x1C]
 	movs r3, 0x1E
@@ -4084,7 +4084,7 @@ _080A421C:
 	adds r1, r4
 	ldrh r3, [r1]
 	movs r1, 0x10
-	bl sub_8045274
+	bl BlendPalette
 	ldrh r0, [r5, 0x1C]
 	adds r0, 0x1
 	strh r0, [r5, 0x1C]
@@ -4110,7 +4110,7 @@ _080A4276:
 	cmp r1, r0
 	bne _080A428A
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A428A:
 	pop {r4-r7}
 	pop {r0}
@@ -4131,7 +4131,7 @@ sub_80A4298: @ 80A4298
 	cmp r0, 0
 	bne _080A42B4
 	adds r0, r6, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080A438E
 	.align 2, 0
 _080A42B0: .4byte gUnknown_2037F02
@@ -4280,7 +4280,7 @@ sub_80A43A0: @ 80A43A0
 	b _080A43D6
 _080A43D0:
 	adds r0, r2, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080A43D6:
 	pop {r4}
 	pop {r0}
@@ -4298,7 +4298,7 @@ sub_80A43DC: @ 80A43DC
 	cmp r0, 0
 	beq _080A43F2
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A43F2:
 	pop {r0}
 	bx r0
@@ -4310,7 +4310,7 @@ sub_80A43F8: @ 80A43F8
 	adds r4, r0, 0
 	ldr r0, _080A4418 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4420
@@ -4337,16 +4337,16 @@ _080A442C:
 	strh r0, [r4, 0x22]
 	ldr r0, _080A4448 @ =sub_8074F6C
 	str r0, [r4, 0x1C]
-	ldr r1, _080A444C @ =sub_8072740
+	ldr r1, _080A444C @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A4444: .4byte gUnknown_2037F02
 _080A4448: .4byte sub_8074F6C
-_080A444C: .4byte sub_8072740
+_080A444C: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A43F8
 
 	thumb_func_start sub_80A4450
@@ -4355,13 +4355,13 @@ sub_80A4450: @ 80A4450
 	adds r5, r0, 0
 	ldr r0, _080A4488 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A446A
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _080A446A:
 	ldr r0, _080A448C @ =sub_80A43DC
 	str r0, [r5, 0x1C]
@@ -4406,10 +4406,10 @@ sub_80A4494: @ 80A4494
 	strh r0, [r4, 0x38]
 	ldrb r1, [r1, 0xC]
 	adds r0, r4, 0
-	bl sub_800843C
-	ldr r1, _080A44D8 @ =sub_8074EE0
+	bl StartSpriteAffineAnim
+	ldr r1, _080A44D8 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A44DC @ =sub_8074E70
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -4417,7 +4417,7 @@ sub_80A4494: @ 80A4494
 	bx r0
 	.align 2, 0
 _080A44D4: .4byte gUnknown_2037F02
-_080A44D8: .4byte sub_8074EE0
+_080A44D8: .4byte move_anim_8074EE0
 _080A44DC: .4byte sub_8074E70
 	thumb_func_end sub_80A4494
 
@@ -4439,7 +4439,7 @@ sub_80A44E0: @ 80A44E0
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4514
@@ -4600,7 +4600,7 @@ _080A463E:
 	strh r4, [r6, 0x22]
 	ldr r0, _080A4670 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4656
@@ -4712,9 +4712,9 @@ _080A46F2:
 	asrs r0, 16
 	cmp r0, 0x14
 	bne _080A4728
-	ldr r1, _080A4730 @ =sub_8072740
+	ldr r1, _080A4730 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	movs r0, 0x3
 	strh r0, [r4, 0x2E]
 	ldr r0, _080A4734 @ =sub_8074C44
@@ -4724,7 +4724,7 @@ _080A4728:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A4730: .4byte sub_8072740
+_080A4730: .4byte DestroyAnimSprite
 _080A4734: .4byte sub_8074C44
 	thumb_func_end sub_80A46CC
 
@@ -4827,16 +4827,16 @@ _080A47E0:
 	lsls r0, 2
 	ldr r4, _080A4818 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	movs r0, 0x30
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r5, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A4810:
 	pop {r4,r5}
 	pop {r0}
@@ -4854,7 +4854,7 @@ sub_80A481C: @ 80A481C
 	strh r0, [r5, 0x2E]
 	ldr r0, _080A4840 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4844
@@ -4874,7 +4874,7 @@ _080A484A:
 	ldr r4, _080A4878 @ =gUnknown_2037F02
 	ldrb r1, [r4, 0xA]
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x6]
 	negs r0, r0
 	strh r0, [r5, 0x30]
@@ -4903,12 +4903,12 @@ sub_80A4880: @ 80A4880
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x64
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r2, 0x2E
 	ldrsh r0, [r4, r2]
 	movs r1, 0x14
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -4948,7 +4948,7 @@ _080A48B2:
 	cmp r0, r1
 	bne _080A48E8
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A48E8:
 	pop {r4}
 	pop {r0}
@@ -4987,7 +4987,7 @@ _080A4906:
 	adds r0, r4
 	strh r0, [r5, 0x22]
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4944
@@ -5031,7 +5031,7 @@ _080A4984:
 	ldrh r0, [r0, 0x4]
 	strh r0, [r5, 0x2E]
 	ldr r0, _080A49CC @ =0x00002828
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	movs r1, 0x80
@@ -5044,7 +5044,7 @@ _080A4984:
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r5, 0x3C]
 	lsls r1, r0, 8
 	subs r4, r0
@@ -5052,7 +5052,7 @@ _080A4984:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080A49D0 @ =sub_80A49D4
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
@@ -5142,7 +5142,7 @@ _080A4A32:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 _080A4A6C:
 	ldrh r1, [r4, 0x2E]
 	movs r2, 0x2E
@@ -5174,7 +5174,7 @@ _080A4A80:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x3C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x10
@@ -5226,7 +5226,7 @@ sub_80A4ACC: @ 80A4ACC
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x3C]
 	lsls r1, 8
 	ldrh r0, [r4, 0x3A]
@@ -5234,7 +5234,7 @@ sub_80A4ACC: @ 80A4ACC
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080A4B34 @ =sub_80A4B38
 	str r0, [r4, 0x1C]
 	pop {r4-r6}
@@ -5312,7 +5312,7 @@ _080A4BA6:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x10
@@ -5335,7 +5335,7 @@ _080A4BCC:
 	strh r0, [r4, 0x30]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _080A4C72
 _080A4BE8:
 	adds r0, r4, 0
@@ -5390,7 +5390,7 @@ _080A4C3E:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x3A
 	ldrsh r1, [r4, r0]
 	cmp r1, 0
@@ -5417,12 +5417,12 @@ _080A4C72:
 _080A4C7A:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A4C90:
 	pop {r4}
 	pop {r0}
@@ -5519,9 +5519,9 @@ _080A4D20:
 	strh r0, [r4, 0x30]
 	ldrh r0, [r5, 0x8]
 	strh r0, [r4, 0x32]
-	ldr r1, _080A4D54 @ =sub_8072740
+	ldr r1, _080A4D54 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A4D58 @ =sub_8074D00
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -5529,7 +5529,7 @@ _080A4D20:
 	bx r0
 	.align 2, 0
 _080A4D50: .4byte gUnknown_2037F02
-_080A4D54: .4byte sub_8072740
+_080A4D54: .4byte DestroyAnimSprite
 _080A4D58: .4byte sub_8074D00
 	thumb_func_end sub_80A4D0C
 
@@ -5628,9 +5628,9 @@ _080A4E14:
 	strh r0, [r5, 0x30]
 	ldrh r0, [r1, 0x8]
 	strh r0, [r5, 0x32]
-	ldr r1, _080A4E38 @ =sub_8072740
+	ldr r1, _080A4E38 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A4E3C @ =sub_8074D00
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
@@ -5638,7 +5638,7 @@ _080A4E14:
 	bx r0
 	.align 2, 0
 _080A4E34: .4byte gUnknown_2037F02
-_080A4E38: .4byte sub_8072740
+_080A4E38: .4byte DestroyAnimSprite
 _080A4E3C: .4byte sub_8074D00
 	thumb_func_end sub_80A4D5C
 
@@ -5649,7 +5649,7 @@ sub_80A4E40: @ 80A4E40
 	bl sub_8074FCC
 	ldr r0, _080A4E6C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4E74
@@ -5678,7 +5678,7 @@ _080A4E74:
 	strh r0, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _080A4E8E:
 	ldr r0, _080A4E9C @ =sub_80A4EA0
 	str r0, [r4, 0x1C]
@@ -5713,7 +5713,7 @@ sub_80A4EA0: @ 80A4EA0
 	lsls r0, 18
 	asrs r0, 16
 	movs r1, 0x3
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x1
@@ -5727,7 +5727,7 @@ _080A4ED8:
 	cmp r0, 0
 	beq _080A4EEC
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A4EEC:
 	pop {r4}
 	pop {r0}
@@ -5741,7 +5741,7 @@ sub_80A4EF4: @ 80A4EF4
 	bl sub_8074FCC
 	ldr r0, _080A4F24 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4F2C
@@ -5774,7 +5774,7 @@ _080A4F2C:
 	strh r0, [r4, 0x34]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _080A4F4A:
 	ldr r0, _080A4F5C @ =sub_80A4F60
 	str r0, [r4, 0x1C]
@@ -5819,7 +5819,7 @@ sub_80A4F60: @ 80A4F60
 	cmp r0, 0x3C
 	ble _080A4FA4
 	adds r0, r4, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080A4FA4:
 	pop {r4}
 	pop {r0}
@@ -5840,7 +5840,7 @@ sub_80A4FAC: @ 80A4FAC
 	ldr r1, _080A4FCC @ =sub_8074C44
 	str r1, [r0, 0x1C]
 	ldr r1, _080A4FD0 @ =sub_80A4FD4
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5867,7 +5867,7 @@ _080A4FEA:
 	str r0, [r5, 0x1C]
 	ldr r1, _080A5000 @ =sub_80A4FD4
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	b _080A506A
 	.align 2, 0
 _080A4FFC: .4byte sub_8074C44
@@ -5907,7 +5907,7 @@ _080A5004:
 	str r0, [r5, 0x1C]
 	ldr r1, _080A5080 @ =sub_80A5084
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r1, 0
@@ -5920,7 +5920,7 @@ _080A5004:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xCB
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080A506A:
 	ldrh r0, [r5, 0x38]
 	movs r1, 0x1
@@ -5950,7 +5950,7 @@ sub_80A5084: @ 80A5084
 	str r0, [r2, 0x1C]
 	ldr r1, _080A50A8 @ =sub_80A50B8
 	adds r0, r2, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	b _080A50B0
 	.align 2, 0
 _080A50A4: .4byte sub_8074C44
@@ -5980,7 +5980,7 @@ sub_80A50B8: @ 80A50B8
 	str r0, [r5, 0x1C]
 	ldr r1, _080A50DC @ =sub_80A5174
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	b _080A5160
 	.align 2, 0
 _080A50D8: .4byte sub_8074C44
@@ -6052,7 +6052,7 @@ _080A5118:
 	str r0, [r5, 0x1C]
 	ldr r1, _080A5170 @ =sub_80A5220
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 _080A5160:
 	pop {r4-r7}
 	pop {r0}
@@ -6106,7 +6106,7 @@ _080A51A4:
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r2, _080A5200 @ =0x00007fff
-	bl sub_80714D4
+	bl BlendPalettes
 	movs r3, 0x30
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x10
@@ -6124,14 +6124,14 @@ _080A51A4:
 	adds r2, r3, 0
 	orrs r1, r2
 	movs r2, 0x4
-	bl sub_80703EC
+	bl LoadPalette
 	movs r0, 0x3F
 	bl sub_8073A44
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xB9
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	b _080A5214
 	.align 2, 0
 _080A5200: .4byte 0x00007fff
@@ -6210,7 +6210,7 @@ _080A527C:
 	cmp r0, 0x8
 	bne _080A5290
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A5290:
 	pop {r4}
 	pop {r0}
@@ -6368,7 +6368,7 @@ sub_80A5398: @ 80A5398
 	strh r0, [r4, 0x2E]
 	ldr r5, _080A53D8 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r2, 0x2
 	negs r2, r2
@@ -6387,7 +6387,7 @@ _080A53B6:
 	strh r0, [r4, 0x34]
 	ldr r1, _080A53E0 @ =sub_80A53E8
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A53E4 @ =sub_8074DC4
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -6417,7 +6417,7 @@ sub_80A53E8: @ 80A53E8
 	movs r1, 0
 	bl sub_80758E0
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3A]
@@ -6443,7 +6443,7 @@ _080A5424:
 	lsls r2, 1
 	ldrh r3, [r5, 0x38]
 	adds r1, r2, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrh r0, [r5, 0x34]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6478,7 +6478,7 @@ sub_80A5474: @ 80A5474
 	strh r0, [r4, 0x2E]
 	ldr r5, _080A54B4 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r1, 0x3
 	cmp r0, 0
@@ -6497,7 +6497,7 @@ _080A5492:
 	strh r0, [r4, 0x34]
 	ldr r1, _080A54BC @ =sub_80A5584
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A54C0 @ =sub_8074DC4
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -6547,12 +6547,12 @@ sub_80A54E8: @ 80A54E8
 	ldrb r0, [r0]
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3A]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A552C
@@ -6585,7 +6585,7 @@ _080A5538:
 	lsls r2, 1
 	ldrh r3, [r5, 0x38]
 	adds r1, r2, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrh r0, [r5, 0x34]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6614,7 +6614,7 @@ _080A5580: .4byte sub_80A5584
 	thumb_func_start sub_80A5584
 sub_80A5584: @ 80A5584
 	push {lr}
-	bl sub_8072740
+	bl DestroyAnimSprite
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A5584
@@ -6656,7 +6656,7 @@ _080A55BC:
 	ldrb r0, [r0]
 	strh r0, [r4, 0x32]
 	ldrb r0, [r2]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x34]
@@ -6690,7 +6690,7 @@ _080A55FA:
 	lsls r2, 1
 	ldrh r3, [r4, 0x38]
 	adds r1, r2, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrh r0, [r4, 0x32]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6728,7 +6728,7 @@ _080A564C:
 	lsls r2, 1
 	ldrh r3, [r4, 0x38]
 	adds r1, r2, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrh r0, [r4, 0x32]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6745,7 +6745,7 @@ _080A564C:
 	lsrs r0, 24
 	bl sub_8075980
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A568E:
 	pop {r4,r5}
 	pop {r0}
@@ -6770,7 +6770,7 @@ sub_80A5694: @ 80A5694
 	movs r4, 0
 	strh r0, [r5, 0x8]
 	ldrb r0, [r2]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	strh r2, [r5, 0xA]
@@ -6783,7 +6783,7 @@ sub_80A5694: @ 80A5694
 	cmp r1, 0x1
 	beq _080A5704
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080A5722
 	.align 2, 0
 _080A56D8: .4byte gUnknown_3005090
@@ -6904,7 +6904,7 @@ _080A579E:
 	lsls r2, 1
 	ldrh r3, [r4, 0x10]
 	adds r1, r2, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrb r0, [r4, 0x8]
 	bl sub_80759DC
 	b _080A58D4
@@ -7065,7 +7065,7 @@ _080A58D4:
 _080A58DC: .4byte gUnknown_202063C
 _080A58E0:
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A58E6:
 	pop {r4}
 	pop {r0}
@@ -7095,7 +7095,7 @@ sub_80A58EC: @ 80A58EC
 	lsls r2, 1
 	ldrh r3, [r4, 0x10]
 	adds r1, r2, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrb r0, [r4, 0x8]
 	bl sub_80759DC
 	ldrh r0, [r4, 0xE]
@@ -7108,7 +7108,7 @@ _080A592C:
 	ldrb r0, [r4, 0x8]
 	bl sub_8075980
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A5938:
 	pop {r4,r5}
 	pop {r0}
@@ -7153,7 +7153,7 @@ _080A595E:
 	strh r0, [r5, 0x30]
 	ldr r1, _080A59A0 @ =sub_80A5A8C
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A59A4 @ =sub_8074F6C
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
@@ -7186,7 +7186,7 @@ sub_80A59A8: @ 80A59A8
 	strh r0, [r4, 0x22]
 	ldr r1, _080A59E8 @ =sub_80A5A44
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A59EC @ =sub_8074F6C
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -7224,7 +7224,7 @@ sub_80A59F0: @ 80A59F0
 	strh r0, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	strh r6, [r4, 0x2E]
 	strh r6, [r4, 0x30]
 	ldr r0, _080A5A40 @ =sub_80A5A8C
@@ -7258,7 +7258,7 @@ sub_80A5A44: @ 80A5A44
 	strh r0, [r4, 0x32]
 	ldr r1, _080A5A74 @ =sub_80A5A7C
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A5A78 @ =sub_8074CD0
 	str r0, [r4, 0x1C]
 _080A5A6E:
@@ -7318,7 +7318,7 @@ sub_80A5A8C: @ 80A5A8C
 	cmp r0, 0x8
 	ble _080A5AD4
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A5AD4:
 	pop {r0}
 	bx r0
@@ -7404,7 +7404,7 @@ _080A5B5C:
 	cmp r0, 0
 	beq _080A5B78
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A5B78:
 	pop {r0}
 	bx r0
@@ -7491,7 +7491,7 @@ sub_80A5BCC: @ 80A5BCC
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xBB
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080A5C1E:
 	movs r1, 0
 	strh r1, [r4, 0x2E]
@@ -7526,7 +7526,7 @@ _080A5C38:
 	cmp r0, 0
 	beq _080A5C62
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A5C62:
 	pop {r4}
 	pop {r0}
@@ -7577,7 +7577,7 @@ _080A5CB2:
 	cmp r1, r0
 	bne _080A5CC2
 	adds r0, r6, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A5CC2:
 	pop {r4-r6}
 	pop {r0}
@@ -7614,7 +7614,7 @@ _080A5D00:
 	cmp r0, 0x2
 	bne _080A5D0C
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080A5D44
 _080A5D0C:
 	ldrh r0, [r4, 0x8]
@@ -7636,7 +7636,7 @@ _080A5D0C:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x10
@@ -7713,9 +7713,9 @@ _080A5D90:
 	strh r0, [r5, 0x36]
 	ldr r0, _080A5DD8 @ =sub_8075590
 	str r0, [r5, 0x1C]
-	ldr r1, _080A5DDC @ =sub_8072740
+	ldr r1, _080A5DDC @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 _080A5DCC:
 	pop {r4,r5}
 	pop {r0}
@@ -7723,7 +7723,7 @@ _080A5DCC:
 	.align 2, 0
 _080A5DD4: .4byte gUnknown_2037F1A
 _080A5DD8: .4byte sub_8075590
-_080A5DDC: .4byte sub_8072740
+_080A5DDC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A5D7C
 
 	thumb_func_start sub_80A5DE0
@@ -7755,13 +7755,13 @@ sub_80A5DE0: @ 80A5DE0
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x10
 	bne _080A5E28
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A5E28:
 	pop {r4,r5}
 	pop {r0}
@@ -7788,27 +7788,27 @@ _080A5E48:
 	cmp r0, 0x1
 	bne _080A5E64
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5E64
 	adds r0, r4, r5
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 _080A5E64:
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
 	cmp r0, 0x1
 	bne _080A5E82
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080A5E82
 	adds r0, r4, r5
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 _080A5E82:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -7819,7 +7819,7 @@ _080A5E82:
 	bcc _080A5E48
 _080A5E90:
 	adds r0, r7, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -7840,7 +7840,7 @@ _080A5EB2:
 	ldr r0, _080A5ED8 @ =gUnknown_3004FF0
 	adds r0, r4, r0
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -7850,7 +7850,7 @@ _080A5EC2:
 	cmp r4, r0
 	bcc _080A5EB2
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -7907,7 +7907,7 @@ sub_80A5F28: @ 80A5F28
 	cmp r0, 0
 	beq _080A5F3A
 	adds r0, r1, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A5F3A:
 	pop {r0}
 	bx r0
@@ -7976,7 +7976,7 @@ _080A5FAE:
 	cmp r0, 0
 	beq _080A5FBC
 	adds r0, r1, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A5FBC:
 	pop {r0}
 	bx r0
@@ -8044,7 +8044,7 @@ sub_80A5FC0: @ 80A5FC0
 	mov r2, r8
 	bl sub_80765C0
 	ldr r0, _080A6098 @ =0x000027d2
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	movs r4, 0x80
@@ -8055,7 +8055,7 @@ sub_80A5FC0: @ 80A5FC0
 	orrs r0, r1
 	mov r10, r0
 	ldr r0, _080A609C @ =0x000027d3
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0
@@ -8067,7 +8067,7 @@ sub_80A5FC0: @ 80A5FC0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, _080A60A4 @ =sub_80A60A8
 	str r1, [r6]
 	adds r0, r7, 0
@@ -8279,7 +8279,7 @@ _080A61EC:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _080A6214:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -8295,7 +8295,7 @@ _080A6220:
 	cmp r0, 0
 	bne _080A6232
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A6232:
 	add sp, 0x4
 	pop {r3}
@@ -8380,7 +8380,7 @@ _080A62D0: .4byte 0xffffec00
 _080A62D4:
 	ldr r0, _080A6314 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A631C
@@ -8485,7 +8485,7 @@ _080A63A2:
 	cmp r0, 0
 	bne _080A63B0
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A63B0:
 	pop {r0}
 	bx r0
@@ -8506,12 +8506,12 @@ sub_80A63B4: @ 80A63B4
 	ldr r1, _080A6444 @ =gUnknown_3005090
 	adds r6, r0, r1
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x8]
 	ldr r0, _080A6448 @ =0x00002771
-	bl sub_80089B8
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0xA]
@@ -8553,7 +8553,7 @@ _080A640C:
 	movs r1, 0x10
 	movs r2, 0xB
 	movs r3, 0
-	bl sub_8045274
+	bl BlendPalette
 	movs r0, 0
 	strh r0, [r6, 0xE]
 	movs r5, 0
@@ -8598,7 +8598,7 @@ _080A6488:
 	cmp r5, 0x1
 	bhi _080A649A
 	movs r0, 0
-	bl sub_8075FBC
+	bl duplicate_obj_of_side_rel2move_in_transparent_mode
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -8616,7 +8616,7 @@ _080A649A:
 	movs r1, 0x80
 	lsls r1, 2
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	b _080A64D2
 	.align 2, 0
 _080A64BC: .4byte sub_80A653C
@@ -8626,7 +8626,7 @@ _080A64C8:
 	movs r1, 0x80
 	lsls r1, 3
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 _080A64D2:
 	pop {r3,r4}
 	mov r8, r3
@@ -8660,7 +8660,7 @@ sub_80A64E0: @ 80A64E0
 	movs r1, 0x80
 	lsls r1, 2
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	b _080A6526
 	.align 2, 0
 _080A6514: .4byte gUnknown_3005090
@@ -8669,12 +8669,12 @@ _080A651C:
 	movs r1, 0x80
 	lsls r1, 3
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 _080A6526:
 	ldr r0, _080A6538 @ =0x00002771
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A6532:
 	pop {r4}
 	pop {r0}
@@ -8715,7 +8715,7 @@ _080A6558:
 	subs r1, 0x1
 	strh r1, [r0, 0xE]
 	adds r0, r5, 0
-	bl sub_8076030
+	bl obj_delete_but_dont_free_vram
 	b _080A65C2
 	.align 2, 0
 _080A657C: .4byte gUnknown_3005090
@@ -8748,7 +8748,7 @@ _080A6580:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x36
 	ldrsh r1, [r5, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x24]
 _080A65C2:
 	pop {r4,r5}
@@ -8762,15 +8762,15 @@ _080A65C8: .4byte gUnknown_825E074
 sub_80A65CC: @ 80A65CC
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r1, _080A65E0 @ =sub_8072740
-	bl sub_8074A68
+	ldr r1, _080A65E0 @ =DestroyAnimSprite
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A65E4 @ =sub_8074F6C
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A65E0: .4byte sub_8072740
+_080A65E0: .4byte DestroyAnimSprite
 _080A65E4: .4byte sub_8074F6C
 	thumb_func_end sub_80A65CC
 
@@ -8785,7 +8785,7 @@ sub_80A65E8: @ 80A65E8
 	mov r9, r0
 	ldr r4, _080A6698 @ =gUnknown_83E3898
 	ldrh r0, [r4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -8821,7 +8821,7 @@ _080A6632:
 	mov r1, r8
 	adds r0, r5, r1
 	ldrh r0, [r0]
-	bl sub_80089B8
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r3, r0, 24
 	adds r4, 0x1
@@ -8858,7 +8858,7 @@ _080A667A:
 	cmp r4, 0x3
 	bls _080A6632
 	mov r0, r9
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -8883,14 +8883,14 @@ _080A66AA:
 	lsls r0, 2
 	adds r0, r6
 	ldrh r0, [r0]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0x3
 	bls _080A66AA
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -8907,7 +8907,7 @@ sub_80A66D4: @ 80A66D4
 	ldr r4, _080A672C @ =gUnknown_2037F02
 	ldrb r1, [r4]
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r2, _080A6730 @ =gUnknown_83E3898
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
@@ -8916,7 +8916,7 @@ sub_80A66D4: @ 80A66D4
 	lsls r0, 2
 	adds r0, r2
 	ldrh r0, [r0]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -9071,7 +9071,7 @@ _080A6800:
 	lsls r0, 16
 	asrs r0, 16
 	movs r1, 0xF
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r2, [r4, 0x22]
 	ldrh r0, [r4, 0x20]
@@ -9091,7 +9091,7 @@ _080A6800:
 	ble _080A6856
 _080A684E:
 	adds r0, r4, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 	b _080A68A6
 _080A6856:
 	movs r0, 0x34
@@ -9123,7 +9123,7 @@ _080A687E:
 	lsls r0, 2
 	adds r0, r2
 	ldrh r0, [r0]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -9148,7 +9148,7 @@ sub_80A68B0: @ 80A68B0
 	adds r6, r0, 0
 	ldr r7, _080A6934 @ =gUnknown_2037F1A
 	ldrb r0, [r7]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9179,7 +9179,7 @@ _080A68CE:
 	strh r0, [r6, 0x22]
 	ldrb r1, [r4]
 	adds r0, r6, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	strh r5, [r6, 0x32]
 	strh r5, [r6, 0x34]
 	ldrh r0, [r6, 0x20]
@@ -9245,12 +9245,12 @@ sub_80A6940: @ 80A6940
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	movs r1, 0x12
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r2, 0x32
 	ldrsh r0, [r4, r2]
 	movs r1, 0x12
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
@@ -9267,7 +9267,7 @@ _080A699E:
 	cmp r0, 0x30
 	bne _080A69B2
 	adds r0, r4, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080A69B2:
 	pop {r4}
 	pop {r0}
@@ -9316,9 +9316,9 @@ _080A69DE:
 	strh r0, [r5, 0x2E]
 	ldr r0, _080A6A20 @ =sub_8074C44
 	str r0, [r5, 0x1C]
-	ldr r1, _080A6A24 @ =sub_8072740
+	ldr r1, _080A6A24 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -9326,7 +9326,7 @@ _080A69DE:
 _080A6A18: .4byte 0x0000fff0
 _080A6A1C: .4byte gUnknown_2037F1A
 _080A6A20: .4byte sub_8074C44
-_080A6A24: .4byte sub_8072740
+_080A6A24: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A69B8
 
 	thumb_func_start sub_80A6A28
@@ -9340,7 +9340,7 @@ sub_80A6A28: @ 80A6A28
 	ldr r5, _080A6AA0 @ =gUnknown_2037F02
 	ldrb r1, [r5, 0x2]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r2, _080A6AA4 @ =gUnknown_83E3898
 	movs r0, 0x4
 	ldrsh r1, [r5, r0]
@@ -9349,7 +9349,7 @@ sub_80A6A28: @ 80A6A28
 	lsls r0, 2
 	adds r0, r2
 	ldrh r0, [r0]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -9381,7 +9381,7 @@ _080A6A74:
 	subs r0, 0x28
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x38]
 	ldr r0, _080A6AAC @ =sub_80A6AB0
@@ -9407,7 +9407,7 @@ sub_80A6AB0: @ 80A6AB0
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
-	bl sub_8044E30
+	bl Sin
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldrh r2, [r4, 0x24]
@@ -9426,7 +9426,7 @@ _080A6ADC:
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl sub_8044E30
+	bl Sin
 	ldrh r3, [r4, 0x26]
 	adds r0, r3
 	strh r0, [r4, 0x26]
@@ -9438,7 +9438,7 @@ _080A6ADC:
 	b _080A6B06
 _080A6B00:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A6B06:
 	pop {r4}
 	pop {r0}
@@ -9452,7 +9452,7 @@ sub_80A6B0C: @ 80A6B0C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A6B2C
@@ -9513,7 +9513,7 @@ _080A6B82:
 	adds r1, r5, 0
 	bl sub_80A6B0C
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -9525,10 +9525,10 @@ _080A6B82:
 	adds r0, r1, 0x2
 	strh r0, [r5, 0x30]
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r1, _080A6BC8 @ =sub_80A6BD0
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A6BCC @ =sub_8074F6C
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -9551,14 +9551,14 @@ sub_80A6BD0: @ 80A6BD0
 	lsls r0, 16
 	cmp r0, 0
 	bne _080A6BF8
-	ldr r1, _080A6C00 @ =sub_8072740
+	ldr r1, _080A6C00 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldrh r1, [r4, 0x30]
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080A6C04 @ =sub_8074F6C
 	str r0, [r4, 0x1C]
 _080A6BF8:
@@ -9566,7 +9566,7 @@ _080A6BF8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A6C00: .4byte sub_8072740
+_080A6C00: .4byte DestroyAnimSprite
 _080A6C04: .4byte sub_8074F6C
 	thumb_func_end sub_80A6BD0
 
@@ -9594,7 +9594,7 @@ _080A6C26:
 	strh r0, [r4, 0x2E]
 	ldr r1, _080A6C48 @ =sub_80A6C50
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A6C4C @ =sub_8074F50
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -9619,10 +9619,10 @@ sub_80A6C50: @ 80A6C50
 	ble _080A6C76
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
-	ldr r1, _080A6C7C @ =sub_8074EE0
+	bl StartSpriteAffineAnim
+	ldr r1, _080A6C7C @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A6C80 @ =sub_8074F50
 	str r0, [r4, 0x1C]
 _080A6C76:
@@ -9630,7 +9630,7 @@ _080A6C76:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A6C7C: .4byte sub_8074EE0
+_080A6C7C: .4byte move_anim_8074EE0
 _080A6C80: .4byte sub_8074F50
 	thumb_func_end sub_80A6C50
 
@@ -9683,7 +9683,7 @@ _080A6CCA:
 	strh r6, [r4, 0x36]
 	ldr r1, _080A6CF8 @ =sub_80A6D00
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A6CFC @ =sub_8074F50
 	str r0, [r4, 0x1C]
 	pop {r4-r6}
@@ -9802,13 +9802,13 @@ _080A6DAE:
 	adds r1, r5, 0
 	bl sub_80A6B0C
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A6DD4
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0x2
 	b _080A6DDE
 	.align 2, 0
@@ -9816,7 +9816,7 @@ _080A6DD0: .4byte gUnknown_2037F1B
 _080A6DD4:
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0x3
 _080A6DDE:
 	strh r0, [r5, 0x2E]
@@ -9846,10 +9846,10 @@ sub_80A6DF0: @ 80A6DF0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r1, _080A6E24 @ =sub_80A6E2C
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A6E28 @ =sub_8074F6C
 	str r0, [r4, 0x1C]
 _080A6E1E:
@@ -9873,7 +9873,7 @@ sub_80A6E2C: @ 80A6E2C
 	cmp r0, 0x5
 	ble _080A6E44
 	adds r0, r1, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A6E44:
 	pop {r0}
 	bx r0
@@ -9901,9 +9901,9 @@ sub_80A6E48: @ 80A6E48
 	strh r0, [r4, 0x34]
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x36]
-	ldr r1, _080A6E90 @ =sub_8074EE0
+	ldr r1, _080A6E90 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r1, _080A6E94 @ =sub_8074BE4
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -9913,7 +9913,7 @@ sub_80A6E48: @ 80A6E48
 	bx r0
 	.align 2, 0
 _080A6E8C: .4byte gUnknown_2037F02
-_080A6E90: .4byte sub_8074EE0
+_080A6E90: .4byte move_anim_8074EE0
 _080A6E94: .4byte sub_8074BE4
 	thumb_func_end sub_80A6E48
 
@@ -10003,7 +10003,7 @@ _080A6F24:
 	cmp r0, 0x40
 	bne _080A6F38
 	adds r0, r1, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A6F38:
 	pop {r0}
 	bx r0
@@ -10040,7 +10040,7 @@ sub_80A6F3C: @ 80A6F3C
 	adds r0, r3
 	strh r2, [r0, 0x24]
 	adds r0, r4, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080A6F7A:
 	ldrh r0, [r4, 0x2E]
 	subs r0, 0x1
@@ -10075,7 +10075,7 @@ sub_80A6F8C: @ 80A6F8C
 	adds r0, r1
 	ldrb r6, [r0]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6FE4
@@ -10140,7 +10140,7 @@ sub_80A7020: @ 80A7020
 	str r0, [r4, 0x1C]
 	ldr r1, _080A7054 @ =sub_80A7058
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -10163,7 +10163,7 @@ sub_80A7058: @ 80A7058
 	ldr r1, _080A7078 @ =sub_8075590
 	str r1, [r0, 0x1C]
 	ldr r1, _080A707C @ =sub_80A7080
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -10181,7 +10181,7 @@ sub_80A7080: @ 80A7080
 	cmp r0, 0
 	bne _080A7096
 	adds r0, r1, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080A709A
 _080A7096:
 	subs r0, r2, 0x1
@@ -10231,7 +10231,7 @@ sub_80A70DC: @ 80A70DC
 	ldrb r0, [r0]
 	adds r1, r0, r1
 	ldrb r4, [r1]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A7118
@@ -10263,7 +10263,7 @@ _080A7126:
 	lsls r2, 1
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldr r1, _080A7158 @ =gUnknown_3005090
 	adds r0, r6, r5
 	lsls r0, 3
@@ -10334,7 +10334,7 @@ _080A71AA:
 	adds r0, r4, 0
 	bl sub_8075980
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080A71D0
 	.align 2, 0
 _080A71C4: .4byte gUnknown_202063C
@@ -10356,7 +10356,7 @@ sub_80A71D8: @ 80A71D8
 	bl sub_8074FCC
 	ldr r0, _080A71FC @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A7204
@@ -10384,7 +10384,7 @@ _080A7210:
 	strh r0, [r4, 0x22]
 	ldr r0, _080A7248 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A724C
@@ -10420,15 +10420,15 @@ _080A724C:
 _080A7260:
 	ldr r0, _080A7274 @ =sub_8074F6C
 	str r0, [r4, 0x1C]
-	ldr r1, _080A7278 @ =sub_8072740
+	ldr r1, _080A7278 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A7274: .4byte sub_8074F6C
-_080A7278: .4byte sub_8072740
+_080A7278: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A71D8
 
 	thumb_func_start sub_80A727C
@@ -10441,7 +10441,7 @@ sub_80A727C: @ 80A727C
 	str r0, [r4, 0x1C]
 	ldr r1, _080A729C @ =sub_80A72A0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -10462,13 +10462,13 @@ sub_80A72A0: @ 80A72A0
 	strh r1, [r0, 0x36]
 	ldr r1, _080A72C0 @ =sub_8075590
 	str r1, [r0, 0x1C]
-	ldr r1, _080A72C4 @ =sub_8072740
-	bl sub_8074A68
+	ldr r1, _080A72C4 @ =DestroyAnimSprite
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A72C0: .4byte sub_8075590
-_080A72C4: .4byte sub_8072740
+_080A72C4: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A72A0
 
 	thumb_func_start sub_80A72C8
@@ -10492,7 +10492,7 @@ _080A72E8: .4byte gUnknown_2037F02
 _080A72EC:
 	ldr r0, _080A73B4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A730E
@@ -10574,9 +10574,9 @@ _080A7380:
 	strh r7, [r5, 0x36]
 	ldr r0, _080A73C4 @ =sub_8075590
 	str r0, [r5, 0x1C]
-	ldr r1, _080A73C8 @ =sub_8072740
+	ldr r1, _080A73C8 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -10589,7 +10589,7 @@ _080A73B8: .4byte gUnknown_2037F02
 _080A73BC: .4byte gUnknown_2037F1B
 _080A73C0: .4byte 0xffffa000
 _080A73C4: .4byte sub_8075590
-_080A73C8: .4byte sub_8072740
+_080A73C8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A72C8
 
 	thumb_func_start sub_80A73CC
@@ -10613,7 +10613,7 @@ sub_80A73CC: @ 80A73CC
 	subs r1, 0x1
 	strh r1, [r0, 0xA]
 	adds r0, r3, 0
-	bl sub_8007280
+	bl DestroySprite
 _080A73F6:
 	pop {r0}
 	bx r0
@@ -10834,7 +10834,7 @@ _080A756E:
 	lsls r5, 16
 	asrs r5, 16
 	adds r1, r5, 0
-	bl sub_80D8AA0
+	bl .gcc2_compiled._3
 	adds r4, r0, 0
 	lsls r4, 16
 	asrs r4, 16
@@ -10846,13 +10846,13 @@ _080A756E:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_80D8AA0
+	bl .gcc2_compiled._3
 	strh r0, [r7, 0x34]
 	mov r1, r8
 	lsls r0, r1, 16
 	asrs r0, 16
 	adds r1, r5, 0
-	bl sub_80D8AA0
+	bl .gcc2_compiled._3
 	adds r4, r0, 0
 	lsls r4, 16
 	asrs r4, 16
@@ -10862,7 +10862,7 @@ _080A756E:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_80D8AA0
+	bl .gcc2_compiled._3
 	strh r0, [r7, 0x36]
 	ldr r0, _080A75E0 @ =sub_80A7400
 	str r0, [r7, 0x1C]
@@ -10891,7 +10891,7 @@ sub_80A75E4: @ 80A75E4
 	cmp r0, 0
 	bne _080A7602
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A7602:
 	pop {r0}
 	bx r0
@@ -10925,7 +10925,7 @@ sub_80A760C: @ 80A760C
 	subs r3, r4
 	lsls r3, 24
 	lsrs r3, 24
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r12, r0
@@ -10997,7 +10997,7 @@ _080A7690:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x93
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	movs r3, 0xA
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x2
@@ -11226,7 +11226,7 @@ _080A788A:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_80D8AA0
+	bl .gcc2_compiled._3
 	ldr r2, _080A7904 @ =gUnknown_3005090
 	mov r3, r8
 	adds r1, r3, r7
@@ -11236,7 +11236,7 @@ _080A788A:
 	movs r1, 0x12
 	ldrsh r0, [r6, r1]
 	movs r1, 0x80
-	bl sub_80D8AA0
+	bl .gcc2_compiled._3
 	strh r0, [r6, 0x14]
 	ldrh r0, [r5, 0x4]
 	strh r0, [r6, 0x16]
@@ -11257,7 +11257,7 @@ _080A788A:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_80D8AA0
+	bl .gcc2_compiled._3
 	movs r1, 0x2
 	negs r1, r1
 	ands r1, r0
@@ -11277,7 +11277,7 @@ _080A7908:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_80D8AA0
+	bl .gcc2_compiled._3
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r6, 0x18]
@@ -11383,7 +11383,7 @@ sub_80A79E8: @ 80A79E8
 	bl sub_8075160
 	ldr r0, _080A7A10 @ =gUnknown_83E3D18
 	ldrh r0, [r0, 0x2]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	movs r1, 0x80
@@ -11451,7 +11451,7 @@ _080A7A50:
 	cmp r0, 0x18
 	bne _080A7A7C
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A7A7C:
 	pop {r4-r7}
 	pop {r0}
@@ -11485,7 +11485,7 @@ sub_80A7A88: @ 80A7A88
 	lsrs r7, r0, 16
 	ldr r0, _080A7B30 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A7ACC
@@ -11529,9 +11529,9 @@ _080A7ACC:
 	strh r7, [r5, 0x36]
 	ldr r0, _080A7B34 @ =sub_80756A4
 	str r0, [r5, 0x1C]
-	ldr r1, _080A7B38 @ =sub_8072740
+	ldr r1, _080A7B38 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -11541,7 +11541,7 @@ _080A7B28: .4byte gUnknown_2037F1B
 _080A7B2C: .4byte gUnknown_2037F02
 _080A7B30: .4byte gUnknown_2037F1A
 _080A7B34: .4byte sub_80756A4
-_080A7B38: .4byte sub_8072740
+_080A7B38: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A7A88
 
 	thumb_func_start sub_80A7B3C
@@ -11571,7 +11571,7 @@ sub_80A7B54: @ 80A7B54
 	strh r0, [r4, 0x24]
 	ldr r0, _080A7BC0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A7B78
@@ -11583,7 +11583,7 @@ _080A7B78:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x5
@@ -11608,7 +11608,7 @@ _080A7B78:
 	cmp r0, 0x2
 	bne _080A7BB8
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A7BB8:
 	pop {r4}
 	pop {r0}
@@ -11648,7 +11648,7 @@ sub_80A7BC4: @ 80A7BC4
 	strb r0, [r2]
 	ldr r1, _080A7C18 @ =sub_80A7C1C
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -11668,7 +11668,7 @@ sub_80A7C1C: @ 80A7C1C
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x9F
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x24]
 	ldrh r1, [r4, 0x20]
 	adds r0, r1
@@ -11690,7 +11690,7 @@ _080A7C50:
 	subs r1, 0x1
 	cmp r1, 0
 	bge _080A7C50
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x7
@@ -11699,7 +11699,7 @@ _080A7C50:
 	adds r1, r2, 0
 	subs r1, r0
 	strh r1, [r4, 0x3A]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA0
@@ -11744,7 +11744,7 @@ _080A7CBE:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x3A
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x8
@@ -11769,7 +11769,7 @@ _080A7CBE:
 	cmp r0, 0x1
 	bne _080A7CFE
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A7CFE:
 	pop {r4}
 	pop {r0}
@@ -11784,7 +11784,7 @@ sub_80A7D04: @ 80A7D04
 	bl sub_8075160
 	ldr r0, _080A7D54 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A7D22
@@ -11805,9 +11805,9 @@ _080A7D22:
 	strh r0, [r4, 0x36]
 	ldr r0, _080A7D5C @ =sub_8074A80
 	str r0, [r4, 0x1C]
-	ldr r1, _080A7D60 @ =sub_8072740
+	ldr r1, _080A7D60 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r1, [r4, 0x1C]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -11818,7 +11818,7 @@ _080A7D22:
 _080A7D54: .4byte gUnknown_2037F1A
 _080A7D58: .4byte gUnknown_2037F02
 _080A7D5C: .4byte sub_8074A80
-_080A7D60: .4byte sub_8072740
+_080A7D60: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A7D04
 
 	thumb_func_start sub_80A7D64
@@ -11843,7 +11843,7 @@ sub_80A7D64: @ 80A7D64
 	movs r6, 0x10
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _080A7D90:
 	lsls r0, r7, 16
 	asrs r0, 16
@@ -11876,7 +11876,7 @@ _080A7D90:
 	str r0, [r5, 0x1C]
 	ldr r1, _080A7DF4 @ =sub_80A7DF8
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -11902,7 +11902,7 @@ sub_80A7DF8: @ 80A7DF8
 	cmp r0, 0
 	beq _080A7E0E
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A7E0E:
 	pop {r0}
 	bx r0
@@ -11934,7 +11934,7 @@ sub_80A7E14: @ 80A7E14
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _080A7E48:
 	mov r0, r8
 	lsls r1, r0, 16
@@ -11968,7 +11968,7 @@ _080A7E48:
 	adds r0, r6
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldrh r0, [r7]
 	strh r0, [r5, 0x38]
 	ldrh r0, [r5, 0x2E]
@@ -12006,7 +12006,7 @@ sub_80A7EBC: @ 80A7EBC
 	beq _080A7F20
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80083C0
+	bl SeekSpriteAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -12092,7 +12092,7 @@ _080A7F48:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080A7F90 @ =sub_80A7F94
 	str r0, [r4, 0x1C]
 _080A7F8A:
@@ -12112,7 +12112,7 @@ sub_80A7F94: @ 80A7F94
 	cmp r0, 0
 	beq _080A7FA8
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A7FA8:
 	pop {r4}
 	pop {r0}
@@ -12126,7 +12126,7 @@ sub_80A7FB0: @ 80A7FB0
 	lsls r5, 24
 	lsrs r5, 24
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -12137,7 +12137,7 @@ sub_80A7FB0: @ 80A7FB0
 	movs r1, 0xD0
 	movs r2, 0xD0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldr r1, _080A8008 @ =gUnknown_202063C
 	lsls r0, r4, 4
 	adds r0, r4
@@ -12186,7 +12186,7 @@ sub_80A8014: @ 80A8014
 	cmp r1, r0
 	bne _080A8064
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -12203,7 +12203,7 @@ sub_80A8014: @ 80A8014
 	movs r1, 0x1
 	bl sub_8075B48
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A8064:
 	pop {r4,r5}
 	pop {r0}
@@ -12224,7 +12224,7 @@ sub_80A8074: @ 80A8074
 	ldr r0, _080A80C0 @ =gUnknown_3005090
 	adds r4, r0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -12313,7 +12313,7 @@ _080A8128:
 	ldrsh r2, [r4, r1]
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrb r0, [r4, 0x8]
 	bl sub_8076440
 	movs r2, 0xC
@@ -12345,7 +12345,7 @@ _080A816E:
 	ldrb r0, [r4, 0x8]
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrb r0, [r4, 0x8]
 	bl sub_8076440
 	movs r0, 0x2
@@ -12376,7 +12376,7 @@ _080A81A4:
 	ldrsh r2, [r4, r1]
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrb r0, [r4, 0x8]
 	bl sub_8076440
 	movs r2, 0xC
@@ -12404,7 +12404,7 @@ _080A81D8:
 	movs r1, 0
 	strh r1, [r0, 0x26]
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A81F6:
 	pop {r4,r5}
 	pop {r0}
@@ -12424,7 +12424,7 @@ sub_80A8200: @ 80A8200
 	lsrs r1, 24
 	mov r9, r1
 	movs r0, 0
-	bl sub_8075FBC
+	bl duplicate_obj_of_side_rel2move_in_transparent_mode
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
@@ -12432,7 +12432,7 @@ sub_80A8200: @ 80A8200
 	asrs r4, r0, 16
 	cmp r4, 0
 	blt _080A82DA
-	bl sub_8008594
+	bl AllocOamMatrix
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0xFF
@@ -12442,7 +12442,7 @@ sub_80A8200: @ 80A8200
 	lsls r0, 2
 	ldr r1, _080A8240 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8076030
+	bl obj_delete_but_dont_free_vram
 	b _080A82DA
 	.align 2, 0
 _080A8240: .4byte gUnknown_202063C
@@ -12505,7 +12505,7 @@ _080A8244:
 	ldrsh r2, [r7, r1]
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrb r0, [r4, 0x1]
 	movs r3, 0x4
 	negs r3, r3
@@ -12519,7 +12519,7 @@ _080A8244:
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 _080A82DA:
 	pop {r3,r4}
 	mov r8, r3
@@ -12560,9 +12560,9 @@ sub_80A82F0: @ 80A82F0
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	adds r0, r4, 0
-	bl sub_8076030
+	bl obj_delete_but_dont_free_vram
 _080A832E:
 	pop {r4}
 	pop {r0}
@@ -12587,14 +12587,14 @@ sub_80A8338: @ 80A8338
 	cmp r0, 0
 	bne _080A8364
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080A838A
 	.align 2, 0
 _080A835C: .4byte gUnknown_3005090
 _080A8360: .4byte gUnknown_2037F02
 _080A8364:
 	ldrb r0, [r5]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12747,7 +12747,7 @@ _080A8464:
 	adds r0, r2
 	strh r5, [r0, 0x26]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080A84A8
 	.align 2, 0
 _080A8498: .4byte gUnknown_202063C
@@ -12776,7 +12776,7 @@ sub_80A84B4: @ 80A84B4
 	ldr r0, _080A84E4 @ =gUnknown_3005090
 	adds r4, r0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12809,7 +12809,7 @@ sub_80A84F0: @ 80A84F0
 	cmp r0, 0
 	bne _080A8510
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A8510:
 	pop {r4}
 	pop {r0}
@@ -12824,13 +12824,13 @@ sub_80A851C: @ 80A851C
 	adds r4, r0, 0
 	ldr r5, _080A854C @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A8550
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl sub_8074480
@@ -12845,7 +12845,7 @@ _080A854C: .4byte gUnknown_2037F1A
 _080A8550:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl sub_8074480
@@ -12869,9 +12869,9 @@ _080A856A:
 	strh r1, [r4, 0x32]
 	strh r1, [r4, 0x34]
 	strh r1, [r4, 0x36]
-	ldr r1, _080A85A4 @ =sub_8072740
+	ldr r1, _080A85A4 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A85A8 @ =sub_8074D00
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -12880,7 +12880,7 @@ _080A856A:
 	.align 2, 0
 _080A859C: .4byte 0x0000ffc0
 _080A85A0: .4byte gUnknown_2037F1A
-_080A85A4: .4byte sub_8072740
+_080A85A4: .4byte DestroyAnimSprite
 _080A85A8: .4byte sub_8074D00
 	thumb_func_end sub_80A851C
 
@@ -12903,7 +12903,7 @@ _080A85C8:
 _080A85CA:
 	ldrb r5, [r0]
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12938,9 +12938,9 @@ _080A85E4:
 	movs r0, 0x8
 	strh r0, [r6, 0x22]
 _080A8616:
-	ldr r1, _080A8630 @ =sub_8074EE0
+	ldr r1, _080A8630 @ =move_anim_8074EE0
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080A8634 @ =sub_8074F50
 	str r0, [r6, 0x1C]
 	pop {r4-r6}
@@ -12949,7 +12949,7 @@ _080A8616:
 	.align 2, 0
 _080A8628: .4byte gUnknown_2037F1B
 _080A862C: .4byte gUnknown_2037F02
-_080A8630: .4byte sub_8074EE0
+_080A8630: .4byte move_anim_8074EE0
 _080A8634: .4byte sub_8074F50
 	thumb_func_end sub_80A85AC
 
@@ -12964,7 +12964,7 @@ sub_80A8638: @ 80A8638
 	ldr r0, _080A866C @ =gUnknown_3005090
 	adds r4, r0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -13000,7 +13000,7 @@ sub_80A8678: @ 80A8678
 	cmp r0, 0
 	bne _080A8698
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A8698:
 	pop {r4}
 	pop {r0}
@@ -13020,7 +13020,7 @@ sub_80A86A4: @ 80A86A4
 	ldr r0, _080A8718 @ =gUnknown_3005090
 	adds r4, r1, r0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0
@@ -13053,7 +13053,7 @@ sub_80A86A4: @ 80A86A4
 	strh r0, [r4, 0x1A]
 	ldr r0, _080A8720 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13243,7 +13243,7 @@ _080A8848:
 	strh r1, [r0, 0x22]
 _080A8866:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A886C:
 	pop {r4,r5}
 	pop {r0}
@@ -13459,7 +13459,7 @@ _080A89F0:
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A8A0E:
 	pop {r4}
 	pop {r0}
@@ -13602,7 +13602,7 @@ _080A8ADC:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xC6
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080A8B22:
 	ldrh r0, [r4, 0x34]
 	ldrh r2, [r4, 0x36]
@@ -13685,7 +13685,7 @@ _080A8B9A:
 	ands r0, r1
 	strb r0, [r2]
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A8BBC:
 	pop {r4}
 	pop {r0}
@@ -13754,7 +13754,7 @@ _080A8C34:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8C60
@@ -13798,9 +13798,9 @@ sub_80A8C84: @ 80A8C84
 	cmp r0, 0
 	beq _080A8C9E
 	adds r0, r4, 0
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A8C9E:
 	pop {r4}
 	pop {r0}
@@ -13863,7 +13863,7 @@ _080A8D08:
 	str r3, [sp, 0x4]
 _080A8D10:
 	adds r0, r7, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8D6C
@@ -14025,7 +14025,7 @@ _080A8E4C:
 	strh r0, [r2, 0x2]
 _080A8E6C:
 	mov r0, r8
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8E90
@@ -14066,7 +14066,7 @@ _080A8E9E:
 	ldrh r0, [r2]
 	strh r0, [r5, 0x2E]
 	adds r0, r5, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldr r1, _080A8EE4 @ =sub_80A8C84
 	str r1, [r5, 0x1C]
 	adds r0, r5, 0
@@ -14089,7 +14089,7 @@ sub_80A8EE8: @ 80A8EE8
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _080A8F28 @ =0x000027db
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -14102,11 +14102,11 @@ sub_80A8EE8: @ 80A8EE8
 	ldrb r2, [r1, 0xA]
 	ldrh r3, [r1, 0x8]
 	movs r1, 0xF
-	bl sub_8045274
+	bl BlendPalette
 _080A8F0E:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r1, _080A8F34 @ =sub_8075D9C
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -14129,7 +14129,7 @@ sub_80A8F38: @ 80A8F38
 	bl sub_8075160
 	ldr r0, _080A8F6C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r1, 0xA0
 	cmp r0, 0
@@ -14174,7 +14174,7 @@ sub_80A8F7C: @ 80A8F7C
 	strh r2, [r4, 0x2E]
 	ldr r0, _080A8FE8 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r1, 0xA0
 	cmp r0, 0
@@ -14203,7 +14203,7 @@ _080A8FAC:
 	strh r5, [r4, 0x2E]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r0, _080A8FF0 @ =sub_80A8FF4
 	str r0, [r4, 0x1C]
 _080A8FE0:
@@ -14229,7 +14229,7 @@ sub_80A8FF4: @ 80A8FF4
 	ble _080A9012
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r0, _080A9018 @ =sub_80A901C
 	str r0, [r4, 0x1C]
 _080A9012:
@@ -14252,7 +14252,7 @@ sub_80A901C: @ 80A901C
 	beq _080A9082
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 	movs r1, 0x3C
@@ -14322,10 +14322,10 @@ sub_80A9094: @ 80A9094
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080A90D0 @ =sub_80A90D4
 	str r0, [r4, 0x1C]
 _080A90CA:
@@ -14360,7 +14360,7 @@ sub_80A90D4: @ 80A90D4
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -14401,14 +14401,14 @@ _080A9144: .4byte gUnknown_2037F02
 _080A9148: .4byte 0x0000ffff
 _080A914C: .4byte sub_80A915C
 _080A9150:
-	ldr r0, _080A9158 @ =sub_8072740
+	ldr r0, _080A9158 @ =DestroyAnimSprite
 _080A9152:
 	str r0, [r3, 0x1C]
 _080A9154:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A9158: .4byte sub_8072740
+_080A9158: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A911C
 
 	thumb_func_start sub_80A915C
@@ -14417,12 +14417,12 @@ sub_80A915C: @ 80A915C
 	adds r4, r0, 0
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -14439,7 +14439,7 @@ sub_80A917C: @ 80A917C
 	ldr r0, _080A91AC @ =gUnknown_3005090
 	adds r4, r0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -14494,7 +14494,7 @@ sub_80A91B8: @ 80A91B8
 	orrs r1, r2
 	strb r1, [r0]
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A9202:
 	pop {r4,r5}
 	pop {r0}
@@ -14523,7 +14523,7 @@ sub_80A9210: @ 80A9210
 	strh r0, [r4, 0x20]
 	ldr r0, _080A9248 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A9250
@@ -14542,7 +14542,7 @@ _080A9250:
 _080A9256:
 	strh r0, [r4, 0x24]
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -14704,7 +14704,7 @@ _080A9362:
 	cmp r0, 0
 	bne _080A9392
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A9392:
 	pop {r4,r5}
 	pop {r0}
@@ -14735,7 +14735,7 @@ sub_80A939C: @ 80A939C
 	movs r0, 0x2
 	strh r0, [r4, 0x24]
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -14849,7 +14849,7 @@ _080A9488:
 	ands r1, r2
 	strb r1, [r0]
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A94A6:
 	pop {r4-r6}
 	pop {r0}
@@ -14999,7 +14999,7 @@ _080A959E:
 	movs r3, 0x26
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -15062,7 +15062,7 @@ _080A9634:
 	cmp r0, 0
 	bne _080A9642
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A9642:
 	pop {r4-r6}
 	pop {r0}
@@ -15118,7 +15118,7 @@ sub_80A9648: @ 80A9648
 	subs r0, 0x1
 	strh r0, [r1]
 	adds r0, r3, 0
-	bl sub_8007280
+	bl DestroySprite
 _080A96AA:
 	pop {r4}
 	pop {r0}
@@ -15134,7 +15134,7 @@ sub_80A96B4: @ 80A96B4
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, _080A9750 @ =0x000027de
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	mov r1, sp
 	strb r0, [r1]
 	movs r4, 0x1
@@ -15144,7 +15144,7 @@ _080A96CC:
 	subs r0, r5, r4
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80089B8
+	bl AllocSpritePalette
 	mov r2, sp
 	adds r1, r2, r4
 	strb r0, [r1]
@@ -15153,7 +15153,7 @@ _080A96CC:
 	ble _080A96CC
 	movs r0, 0x80
 	lsls r0, 6
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r1, r0, 0
 	ldr r0, _080A9758 @ =gUnknown_202401C
 	ldr r0, [r0]
@@ -15162,7 +15162,7 @@ _080A96CC:
 	adds r0, r2
 	str r1, [r0]
 	ldr r0, _080A975C @ =gUnknown_8D227E4
-	bl sub_800EBB4
+	bl LZDecompressWram
 	movs r4, 0
 _080A9700:
 	ldr r5, _080A9758 @ =gUnknown_202401C
@@ -15182,7 +15182,7 @@ _080A9700:
 	adds r1, r2
 	lsrs r1, 16
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	adds r4, 0x1
 	cmp r4, 0x2
 	ble _080A9700
@@ -15191,13 +15191,13 @@ _080A9700:
 	lsls r4, 1
 	adds r0, r4
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0
 	str r1, [r0]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -15218,13 +15218,13 @@ sub_80A9760: @ 80A9760
 	movs r4, 0x2
 _080A976A:
 	ldrh r0, [r5]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	adds r5, 0x2
 	subs r4, 0x1
 	cmp r4, 0
 	bge _080A976A
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -15264,7 +15264,7 @@ sub_80A9788: @ 80A9788
 	lsls r2, 1
 	adds r2, r0
 	ldrh r0, [r2]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 4
 	ldrb r2, [r5, 0x5]
 	movs r1, 0xF
@@ -15288,7 +15288,7 @@ sub_80A97E8: @ 80A97E8
 	bl sub_8075160
 	ldr r6, _080A9850 @ =gUnknown_2037F1A
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9808
@@ -15318,9 +15318,9 @@ _080A9808:
 	strh r0, [r5, 0x36]
 	ldr r0, _080A9858 @ =sub_8075590
 	str r0, [r5, 0x1C]
-	ldr r1, _080A985C @ =sub_8072740
+	ldr r1, _080A985C @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldrb r1, [r4, 0xA]
 	ldrb r2, [r4, 0xC]
 	adds r0, r5, 0
@@ -15332,7 +15332,7 @@ _080A9808:
 _080A9850: .4byte gUnknown_2037F1A
 _080A9854: .4byte gUnknown_2037F02
 _080A9858: .4byte sub_8075590
-_080A985C: .4byte sub_8072740
+_080A985C: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A97E8
 
 	thumb_func_start sub_80A9860
@@ -15353,7 +15353,7 @@ _080A987A:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r2, [r4, 0x32]
 	lsls r0, r2, 16
@@ -15371,7 +15371,7 @@ _080A987A:
 	cmp r0, 0x3C
 	bne _080A98AA
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A98AA:
 	pop {r4}
 	pop {r0}
@@ -15398,22 +15398,22 @@ _080A98C4:
 	strh r0, [r4]
 	ldrh r1, [r1]
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080A9920 @ =0x00003f1f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080A9924 @ =0x00003f3f
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0xC8
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080A9928 @ =gUnknown_3005090
 	lsls r0, r7, 2
 	adds r0, r7
@@ -15504,7 +15504,7 @@ sub_80A9984: @ 80A9984
 	strh r0, [r1, 0x1E]
 	movs r0, 0x50
 	movs r1, 0x88
-	bl sub_8000A38
+	bl SetGpuReg
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r4, [sp, 0x8]
@@ -15515,7 +15515,7 @@ sub_80A9984: @ 80A9984
 	bl sub_8075BE8
 	ldr r2, _080A99D4 @ =0x00007fff
 	movs r1, 0x10
-	bl sub_80714D4
+	bl BlendPalettes
 	b _080A9A0C
 	.align 2, 0
 _080A99D0: .4byte gUnknown_3005090
@@ -15530,18 +15530,18 @@ _080A99D8:
 	ldr r4, _080A9A1C @ =0x00003f3f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A9A0C:
 	add sp, 0xC
 	pop {r4,r5}
@@ -15560,7 +15560,7 @@ sub_80A9A20: @ 80A9A20
 	lsrs r0, 24
 	adds r6, r0, 0
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, _080A9A70 @ =gUnknown_3005090
@@ -15576,7 +15576,7 @@ sub_80A9A20: @ 80A9A20
 	cmp r0, 0x1
 	bne _080A9A7C
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -15613,7 +15613,7 @@ _080A9A7C:
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A9AA4:
 	pop {r4-r6}
 	pop {r0}
@@ -15629,7 +15629,7 @@ sub_80A9AB0: @ 80A9AB0
 	lsrs r0, 24
 	adds r6, r0, 0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, _080A9B00 @ =gUnknown_3005090
@@ -15645,7 +15645,7 @@ sub_80A9AB0: @ 80A9AB0
 	cmp r0, 0x1
 	bne _080A9B0C
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -15682,7 +15682,7 @@ _080A9B0C:
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A9B34:
 	pop {r4-r6}
 	pop {r0}
@@ -15717,7 +15717,7 @@ sub_80A9B40: @ 80A9B40
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldr r0, _080A9B88 @ =sub_80A9B8C
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -15739,7 +15739,7 @@ sub_80A9B8C: @ 80A9B8C
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xE
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -15751,7 +15751,7 @@ sub_80A9B8C: @ 80A9B8C
 	b _080A9BBC
 _080A9BB6:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A9BBC:
 	pop {r4}
 	pop {r0}
@@ -15789,7 +15789,7 @@ _080A9BE8:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x34]
 	adds r0, 0x3
@@ -15822,7 +15822,7 @@ _080A9C36:
 	cmp r0, 0x78
 	ble _080A9C44
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A9C44:
 	pop {r4}
 	pop {r0}
@@ -15844,7 +15844,7 @@ sub_80A9C4C: @ 80A9C4C
 	ldr r1, _080A9C74 @ =sub_8074C44
 	str r1, [r0, 0x1C]
 	ldr r1, _080A9C78 @ =sub_80A9C7C
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -15868,7 +15868,7 @@ sub_80A9C7C: @ 80A9C7C
 	movs r1, 0x34
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x34]
 	adds r0, 0x3
@@ -15903,7 +15903,7 @@ sub_80A9C7C: @ 80A9C7C
 	cmp r5, 0x40
 	bgt _080A9CE2
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080A9CE2:
 	pop {r4,r5}
 	pop {r0}
@@ -15918,19 +15918,19 @@ sub_80A9CE8: @ 80A9CE8
 	lsrs r5, r0, 24
 	ldr r1, _080A9DA0 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x3
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -15938,7 +15938,7 @@ sub_80A9CE8: @ 80A9CE8
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080A9D2A:
 	ldr r0, _080A9DA4 @ =gUnknown_2022978
 	movs r1, 0
@@ -15947,10 +15947,10 @@ _080A9D2A:
 	strh r1, [r4]
 	movs r0, 0x14
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	mov r0, sp
 	bl sub_80752A0
 	mov r0, sp
@@ -15968,7 +15968,7 @@ _080A9D2A:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -16059,7 +16059,7 @@ _080A9E04:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x1E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x10
@@ -16111,7 +16111,7 @@ _080A9E6A:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0x1E
 	ldrsh r1, [r4, r2]
 	cmp r1, 0
@@ -16146,20 +16146,20 @@ _080A9ED4:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080A9EE8:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080A9F08:
 	add sp, 0x10
 	pop {r4,r5}
@@ -16175,19 +16175,19 @@ sub_80A9F10: @ 80A9F10
 	lsrs r5, r0, 24
 	ldr r1, _080A9F88 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -16195,7 +16195,7 @@ sub_80A9F10: @ 80A9F10
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080A9F52:
 	ldr r0, _080A9F8C @ =gUnknown_2022978
 	movs r1, 0
@@ -16204,10 +16204,10 @@ _080A9F52:
 	strh r1, [r4]
 	movs r0, 0x14
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	mov r0, sp
 	bl sub_80752A0
 	bl sub_8073788
@@ -16216,7 +16216,7 @@ _080A9F52:
 	beq _080A9F98
 	ldr r0, _080A9F94 @ =gUnknown_8E7F874
 	ldr r1, [sp, 0x4]
-	bl sub_800EBC0
+	bl LZDecompressVram
 	b _080A9FC6
 	.align 2, 0
 _080A9F88: .4byte 0x00003f42
@@ -16226,7 +16226,7 @@ _080A9F94: .4byte gUnknown_8E7F874
 _080A9F98:
 	ldr r0, _080A9FB4 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -16256,7 +16256,7 @@ _080A9FC6:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -16344,7 +16344,7 @@ _080AA068:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x1E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0xE
@@ -16396,7 +16396,7 @@ _080AA0CE:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0x1E
 	ldrsh r1, [r4, r2]
 	cmp r1, 0
@@ -16429,20 +16429,20 @@ _080AA134:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080AA148:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AA168:
 	add sp, 0x10
 	pop {r4,r5}
@@ -16523,14 +16523,14 @@ _080AA1EE:
 	ldrh r1, [r4, 0x32]
 	lsls r1, 16
 	asrs r1, 24
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r2, 0x30
 	ldrsh r0, [r4, r2]
 	ldrh r1, [r4, 0x34]
 	lsls r1, 16
 	asrs r1, 24
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x9
@@ -16600,7 +16600,7 @@ _080AA290:
 	cmp r1, r0
 	bne _080AA2A0
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA2A0:
 	pop {r4}
 	pop {r0}
@@ -16631,12 +16631,12 @@ sub_80AA2B0: @ 80AA2B0
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r1, 0xA
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x2E]
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r1, 0x7
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r5, 0x30]
 	ldr r0, _080AA300 @ =sub_80AA304
 	str r0, [r5, 0x1C]
@@ -16684,7 +16684,7 @@ sub_80AA304: @ 80AA304
 	bge _080AA348
 _080AA342:
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA348:
 	pop {r0}
 	bx r0
@@ -16712,7 +16712,7 @@ sub_80AA34C: @ 80AA34C
 	cmp r0, r1
 	blt _080AA378
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA378:
 	pop {r0}
 	bx r0
@@ -16739,12 +16739,12 @@ sub_80AA37C: @ 80AA37C
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r1, 0xA
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x2E]
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r1, 0x7
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r5, 0x30]
 	ldrh r0, [r4, 0x2]
 	strh r0, [r5, 0x32]
@@ -16770,7 +16770,7 @@ sub_80AA3D4: @ 80AA3D4
 	cmp r0, 0
 	beq _080AA3EA
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA3EA:
 	pop {r0}
 	bx r0
@@ -16821,7 +16821,7 @@ _080AA426:
 	ands r5, r0
 	adds r0, r5, 0
 	movs r1, 0x50
-	bl sub_8044E30
+	bl Sin
 	lsls r0, 16
 	asrs r0, 24
 	strh r0, [r4, 0x24]
@@ -16831,7 +16831,7 @@ _080AA426:
 	bgt _080AA46A
 	adds r0, r5, 0
 	movs r1, 0x50
-	bl sub_8044E4C
+	bl Cos
 	movs r2, 0x2E
 	ldrsh r1, [r4, r2]
 	lsrs r2, r1, 31
@@ -16861,7 +16861,7 @@ _080AA488:
 	cmp r2, 0x64
 	ble _080AA492
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA492:
 	pop {r4,r5}
 	pop {r0}
@@ -16880,7 +16880,7 @@ sub_80AA49C: @ 80AA49C
 	movs r1, 0x34
 	ldrsh r0, [r4, r1]
 	movs r1, 0x5
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
@@ -16920,7 +16920,7 @@ _080AA4F2:
 	cmp r0, 0x1E
 	ble _080AA500
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA500:
 	pop {r4}
 	pop {r0}
@@ -16959,7 +16959,7 @@ _080AA52C:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	adds r2, r0, 0
 	strh r2, [r4, 0x26]
 	ldrh r0, [r4, 0x34]
@@ -16980,7 +16980,7 @@ _080AA52C:
 	strh r0, [r4, 0x22]
 	strh r5, [r4, 0x24]
 	strh r5, [r4, 0x26]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xB4
@@ -17013,7 +17013,7 @@ sub_80AA58C: @ 80AA58C
 	strh r0, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080AA68C @ =gUnknown_2037F1B
 	ldrb r0, [r0]
 	bl sub_807685C
@@ -17058,7 +17058,7 @@ _080AA5FC:
 	movs r1, 0x1E
 	subs r1, r0
 	adds r0, r2, 0
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r0, 0x30
 	ldrsh r2, [r4, r0]
@@ -17072,7 +17072,7 @@ _080AA618:
 	movs r1, 0xA
 	subs r1, r0
 	adds r0, r2, 0
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	movs r2, 0x30
 	ldrsh r0, [r4, r2]
@@ -17142,7 +17142,7 @@ _080AA6A2:
 	cmp r0, 0x5A
 	ble _080AA6B0
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA6B0:
 	pop {r4}
 	pop {r0}
@@ -17168,7 +17168,7 @@ sub_80AA6B8: @ 80AA6B8
 	strh r0, [r4, 0x22]
 	ldrb r1, [r1, 0x4]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
@@ -17184,7 +17184,7 @@ _080AA6EC:
 	cmp r0, 0
 	beq _080AA700
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA700:
 	pop {r4}
 	pop {r0}
@@ -17201,7 +17201,7 @@ sub_80AA708: @ 80AA708
 	cmp r0, 0
 	bne _080AA724
 	adds r0, r5, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080AA788
 	.align 2, 0
 _080AA720: .4byte gUnknown_2037F02
@@ -17253,7 +17253,7 @@ _080AA770:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080AA790 @ =sub_80AA794
 	str r0, [r5, 0x1C]
 _080AA788:
@@ -17284,11 +17284,11 @@ sub_80AA794: @ 80AA794
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	b _080AA7C4
 _080AA7BE:
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA7C4:
 	pop {r0}
 	bx r0
@@ -17302,7 +17302,7 @@ sub_80AA7C8: @ 80AA7C8
 	lsrs r5, 24
 	ldr r0, _080AA7FC @ =gUnknown_2037F02
 	ldrb r0, [r0]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -17341,7 +17341,7 @@ sub_80AA80C: @ 80AA80C
 	cmp r0, 0
 	bne _080AA82C
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AA82C:
 	pop {r4}
 	pop {r0}
@@ -17369,7 +17369,7 @@ _080AA854:
 _080AA856:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -17475,7 +17475,7 @@ sub_80AA900: @ 80AA900
 	cmp r0, 0x10
 	ble _080AA934
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA934:
 	pop {r0}
 	bx r0
@@ -17524,7 +17524,7 @@ _080AA978:
 	cmp r1, r0
 	bne _080AA98C
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AA98C:
 	pop {r4}
 	pop {r0}
@@ -17553,7 +17553,7 @@ sub_80AA998: @ 80AA998
 	strh r0, [r6, 0x22]
 	ldrb r1, [r4, 0x2]
 	adds r0, r6, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	strh r5, [r6, 0x38]
 	ldrh r0, [r4, 0x4]
 	strh r0, [r6, 0x34]
@@ -17583,16 +17583,16 @@ _080AA9C6:
 	ands r4, r2
 	adds r0, r4, 0
 	movs r1, 0x64
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r6, 0x24]
 	adds r0, r4, 0
 	movs r1, 0xA
-	bl sub_8044E30
+	bl Sin
 	adds r4, r0, 0
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	movs r1, 0x4
-	bl sub_8044E4C
+	bl Cos
 	ldrh r2, [r6, 0x30]
 	adds r4, r2
 	adds r0, r4
@@ -17607,14 +17607,14 @@ _080AA9C6:
 	str r0, [r6, 0x1C]
 	strh r5, [r6, 0x2E]
 	adds r0, r6, 0
-	bl sub_80750FC
+	bl oamt_add_pos2_onto_pos1
 	movs r0, 0x5
 	strh r0, [r6, 0x32]
 	strh r5, [r6, 0x36]
 	strh r5, [r6, 0x34]
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _080AAA42:
 	pop {r4-r6}
 	pop {r0}
@@ -17693,14 +17693,14 @@ _080AAA9E:
 	orrs r0, r1
 	strb r0, [r3]
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AAAD0:
 	movs r1, 0x36
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x4
 	bne _080AAADE
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AAADE:
 	pop {r4}
 	pop {r0}
@@ -17737,7 +17737,7 @@ sub_80AAAE4: @ 80AAAE4
 	strh r0, [r5, 0x22]
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _080AAB50
 	.align 2, 0
 _080AAB28: .4byte gUnknown_2022B4C
@@ -17767,16 +17767,16 @@ _080AAB50:
 	strh r0, [r5, 0x36]
 	ldr r0, _080AAB74 @ =sub_8075590
 	str r0, [r5, 0x1C]
-	ldr r1, _080AAB78 @ =sub_8072740
+	ldr r1, _080AAB78 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080AAB70: .4byte gUnknown_2037F1A
 _080AAB74: .4byte sub_8075590
-_080AAB78: .4byte sub_8072740
+_080AAB78: .4byte DestroyAnimSprite
 	thumb_func_end sub_80AAAE4
 
 	thumb_func_start sub_80AAB7C
@@ -17791,7 +17791,7 @@ sub_80AAB7C: @ 80AAB7C
 	movs r1, 0x1
 	ands r1, r2
 	strh r1, [r3, 0xE]
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -17799,8 +17799,8 @@ _080AAB98: .4byte gUnknown_2037F02
 _080AAB9C: .4byte gUnknown_2037EE4
 	thumb_func_end sub_80AAB7C
 
-	thumb_func_start sub_80AABA0
-sub_80AABA0: @ 80AABA0
+	thumb_func_start update_fury_cutter_counter_copy
+update_fury_cutter_counter_copy: @ 80AABA0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -17809,13 +17809,13 @@ sub_80AABA0: @ 80AABA0
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x10]
 	strh r1, [r2, 0xE]
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080AABB8: .4byte gUnknown_2037F02
 _080AABBC: .4byte gUnknown_2037EE4
-	thumb_func_end sub_80AABA0
+	thumb_func_end update_fury_cutter_counter_copy
 
 	thumb_func_start sub_80AABC0
 sub_80AABC0: @ 80AABC0
@@ -17850,7 +17850,7 @@ _080AABE8:
 	bl __modsi3
 	cmp r0, 0x1
 	bne _080AAC30
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF0
@@ -17858,7 +17858,7 @@ _080AABE8:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x50
@@ -17869,7 +17869,7 @@ _080AABE8:
 	ldr r0, _080AAC50 @ =gUnknown_83E5898
 	adds r1, r4, 0
 	movs r3, 0x4
-	bl sub_8006F8C
+	bl CreateSprite
 _080AAC30:
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]
@@ -17878,7 +17878,7 @@ _080AAC30:
 	cmp r1, r0
 	bne _080AAC42
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AAC42:
 	pop {r4-r6}
 	pop {r0}
@@ -17924,7 +17924,7 @@ _080AAC7E:
 	cmp r0, 0
 	beq _080AAC92
 	adds r0, r2, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AAC92:
 	pop {r0}
 	bx r0
@@ -17936,7 +17936,7 @@ sub_80AAC98: @ 80AAC98
 	adds r6, r0, 0
 	ldr r5, _080AACC0 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AACC8
@@ -17979,7 +17979,7 @@ _080AACDA:
 	strb r0, [r2]
 	ldr r0, _080AADA4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AAD10
@@ -18009,9 +18009,9 @@ _080AAD10:
 	lsrs r0, 24
 	strh r0, [r6, 0x36]
 	adds r0, r6, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldr r0, _080AADAC @ =nullsub_8
-	bl sub_8044EF8
+	bl CreateInvisibleSpriteWithCallback
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -18019,14 +18019,14 @@ _080AAD10:
 	ldrb r0, [r5, 0x8]
 	movs r2, 0x4
 	ldrsh r1, [r5, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r6, 0x20]
 	subs r1, r0
 	strh r1, [r6, 0x20]
 	ldrb r0, [r5, 0x8]
 	movs r2, 0x6
 	ldrsh r1, [r5, r2]
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r6, 0x22]
 	subs r1, r0
 	strh r1, [r6, 0x22]
@@ -18091,14 +18091,14 @@ sub_80AADB8: @ 80AADB8
 	movs r0, 0x2E
 	ldrsh r1, [r7, r0]
 	adds r0, r6, 0
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r5, 0x24]
 	adds r0, r1
 	strh r0, [r5, 0x24]
 	movs r0, 0x30
 	ldrsh r1, [r7, r0]
 	adds r0, r6, 0
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r5, 0x26]
 	adds r0, r1
 	strh r0, [r5, 0x26]
@@ -18119,7 +18119,7 @@ _080AAE24:
 	ldr r0, _080AAE3C @ =sub_80AAE40
 	str r0, [r5, 0x1C]
 	adds r0, r7, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AAE2E:
 	add sp, 0x4
 	pop {r3}
@@ -18144,7 +18144,7 @@ sub_80AAE40: @ 80AAE40
 	ldr r1, _080AAE60 @ =sub_8074F6C
 	str r1, [r0, 0x1C]
 	ldr r1, _080AAE64 @ =sub_80AAE68
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -18159,13 +18159,13 @@ sub_80AAE68: @ 80AAE68
 	strh r1, [r0, 0x2E]
 	ldr r1, _080AAE7C @ =sub_8074C44
 	str r1, [r0, 0x1C]
-	ldr r1, _080AAE80 @ =sub_8074EE0
-	bl sub_8074A68
+	ldr r1, _080AAE80 @ =move_anim_8074EE0
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080AAE7C: .4byte sub_8074C44
-_080AAE80: .4byte sub_8074EE0
+_080AAE80: .4byte move_anim_8074EE0
 	thumb_func_end sub_80AAE68
 
 	thumb_func_start sub_80AAE84
@@ -18176,7 +18176,7 @@ sub_80AAE84: @ 80AAE84
 	bl sub_8075160
 	ldr r0, _080AAEAC @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AAEB4
@@ -18218,7 +18218,7 @@ _080AAEBA:
 	adds r0, r7
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldr r0, _080AAF18 @ =sub_80AAF1C
 	str r0, [r5, 0x1C]
 	adds r2, r5, 0
@@ -18250,7 +18250,7 @@ sub_80AAF1C: @ 80AAF1C
 	bne _080AAF3E
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r1, [r2]
@@ -18264,7 +18264,7 @@ _080AAF3E:
 	cmp r0, 0
 	beq _080AAF50
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AAF50:
 	pop {r4}
 	pop {r0}
@@ -18288,7 +18288,7 @@ sub_80AAF60: @ 80AAF60
 	ldrh r0, [r0]
 	strh r0, [r4, 0x8]
 	ldr r0, _080AAF9C @ =0x0000279c
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	movs r1, 0x80
@@ -18366,7 +18366,7 @@ _080AAFF6:
 	cmp r1, r0
 	bne _080AB016
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AB016:
 	pop {r4-r7}
 	pop {r0}
@@ -18402,7 +18402,7 @@ sub_80AB024: @ 80AB024
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	movs r0, 0x2E
 	ldrsh r1, [r5, r0]
 	movs r0, 0xD2
@@ -18451,14 +18451,14 @@ sub_80AB0AC: @ 80AB0AC
 	cmp r0, 0
 	beq _080AB0C0
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AB0C0:
 	ldrh r0, [r4, 0x3A]
 	lsls r0, 16
 	asrs r0, 24
 	movs r2, 0x3C
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -18533,7 +18533,7 @@ sub_80AB12C: @ 80AB12C
 	cmp r1, 0
 	bne _080AB15A
 	adds r0, r3, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AB15A:
 	pop {r0}
 	bx r0
@@ -18570,7 +18570,7 @@ sub_80AB168: @ 80AB168
 	cmp r0, 0
 	bne _080AB1C2
 	ldrb r0, [r7]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AB1BC
@@ -18612,7 +18612,7 @@ sub_80AB1DC: @ 80AB1DC
 	cmp r0, 0
 	beq _080AB1F2
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AB1F2:
 	pop {r0}
 	bx r0
@@ -18624,11 +18624,11 @@ sub_80AB1F8: @ 80AB1F8
 	adds r6, r0, 0
 	ldr r5, _080AB2B8 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r0, _080AB2BC @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -18639,12 +18639,12 @@ sub_80AB1F8: @ 80AB1F8
 	negs r0, r0
 	strh r0, [r4]
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AB23A
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18676,7 +18676,7 @@ _080AB260:
 	bl sub_8075160
 	ldr r0, _080AB2B8 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AB27A
@@ -18705,9 +18705,9 @@ _080AB27A:
 	strh r0, [r6, 0x36]
 	ldr r0, _080AB2C4 @ =sub_8075590
 	str r0, [r6, 0x1C]
-	ldr r1, _080AB2C8 @ =sub_8072740
+	ldr r1, _080AB2C8 @ =DestroyAnimSprite
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -18716,7 +18716,7 @@ _080AB2B8: .4byte gUnknown_2037F1A
 _080AB2BC: .4byte gUnknown_2037F1B
 _080AB2C0: .4byte gUnknown_2037F02
 _080AB2C4: .4byte sub_8075590
-_080AB2C8: .4byte sub_8072740
+_080AB2C8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80AB1F8
 
 	thumb_func_start sub_80AB2CC
@@ -18737,16 +18737,16 @@ sub_80AB2CC: @ 80AB2CC
 	strh r1, [r4, 0x36]
 	ldr r0, _080AB300 @ =sub_8075590
 	str r0, [r4, 0x1C]
-	ldr r1, _080AB304 @ =sub_8072740
+	ldr r1, _080AB304 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080AB2FC: .4byte gUnknown_2037F02
 _080AB300: .4byte sub_8075590
-_080AB304: .4byte sub_8072740
+_080AB304: .4byte DestroyAnimSprite
 	thumb_func_end sub_80AB2CC
 
 	thumb_func_start sub_80AB308
@@ -18794,7 +18794,7 @@ sub_80AB344: @ 80AB344
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x30
@@ -18813,7 +18813,7 @@ sub_80AB344: @ 80AB344
 	cmp r0, r1
 	bne _080AB384
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AB384:
 	pop {r4}
 	pop {r0}
@@ -18833,19 +18833,19 @@ sub_80AB38C: @ 80AB38C
 	mov r10, r0
 	ldr r1, _080AB3FC @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	mov r0, sp
 	bl sub_80752A0
 	bl sub_8073788
@@ -18855,10 +18855,10 @@ sub_80AB38C: @ 80AB38C
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	ldr r0, _080AB400 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18883,7 +18883,7 @@ _080AB414: .4byte gUnknown_8E81FE4
 _080AB418:
 	ldr r0, _080AB458 @ =gUnknown_8E822B8
 	ldr r1, [sp, 0x4]
-	bl sub_800EBC0
+	bl LZDecompressVram
 	mov r0, sp
 	ldrb r0, [r0, 0x8]
 	ldr r1, [sp, 0x4]
@@ -18907,7 +18907,7 @@ _080AB42E:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	b _080AB476
 	.align 2, 0
 _080AB458: .4byte gUnknown_8E822B8
@@ -18920,7 +18920,7 @@ _080AB468:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 _080AB476:
 	ldr r0, _080AB4E4 @ =sub_80AB79C
 	ldr r4, _080AB4E8 @ =gUnknown_3005090
@@ -18933,7 +18933,7 @@ _080AB476:
 	adds r1, 0x1
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -18982,7 +18982,7 @@ _080AB4F4: .4byte gUnknown_202297A
 _080AB4F8:
 	ldr r0, _080AB528 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -19024,11 +19024,11 @@ _080AB552:
 	ldr r0, _080AB584 @ =gUnknown_2022978
 	ldrh r1, [r0]
 	movs r0, 0x14
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r2, _080AB58C @ =gUnknown_202297A
 	ldrh r1, [r2]
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080AB594 @ =gUnknown_3005090
 	mov r2, r8
 	lsls r0, r2, 2
@@ -19280,7 +19280,7 @@ _080AB74C:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080AB760:
 	movs r0, 0
 	strh r0, [r7]
@@ -19288,10 +19288,10 @@ _080AB760:
 	strh r0, [r1]
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 2
@@ -19301,7 +19301,7 @@ _080AB760:
 	ldr r1, _080AB798 @ =0x0000ffff
 	strh r1, [r0, 0x26]
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AB78E:
 	pop {r3}
 	mov r8, r3
@@ -19686,9 +19686,9 @@ _080ABA50:
 	negs r0, r0
 	cmp r1, r0
 	bne _080ABA66
-	bl sub_8087E64
+	bl remove_some_task
 	adds r0, r7, 0
-	bl sub_8077508
+	bl DestroyTask
 _080ABA66:
 	add sp, 0xC
 	pop {r4-r7}
@@ -19717,14 +19717,14 @@ sub_80ABA78: @ 80ABA78
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8075114
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0xFF
 	ands r5, r0
 	movs r0, 0x80
 	lsls r0, 1
 	adds r6, r0, 0
 	orrs r5, r6
-	bl sub_8044EC8
+	bl Random
 	ldr r1, _080ABAD4 @ =0x000001ff
 	ands r1, r0
 	adds r0, r1, 0
@@ -19785,7 +19785,7 @@ _080ABB04:
 	cmp r0, 0x15
 	bne _080ABB22
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080ABB22:
 	pop {r4}
 	pop {r0}
@@ -19803,7 +19803,7 @@ sub_80ABB28: @ 80ABB28
 	ldr r0, _080ABB78 @ =gUnknown_3005090
 	adds r4, r0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -20118,7 +20118,7 @@ _080ABDB0:
 	cmp r0, 0
 	bne _080ABDBE
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080ABDBE:
 	add sp, 0xC
 	pop {r4-r6}
@@ -20131,7 +20131,7 @@ sub_80ABDC8: @ 80ABDC8
 	push {r4,r5,lr}
 	ldr r4, _080ABDEC @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ABDFC
@@ -20164,12 +20164,12 @@ _080ABE0C:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r3, r0, 16
 	lsrs r4, 18
@@ -20252,7 +20252,7 @@ _080ABEB6:
 	mov r1, r10
 	mov r2, r9
 	ldr r3, [sp, 0x8]
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r6, r5, 16
@@ -20275,11 +20275,11 @@ _080ABEB6:
 	asrs r4, r6, 16
 	adds r0, r4, 0
 	movs r1, 0x40
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r5, 0x36]
 	adds r0, r4, 0
 	movs r1, 0x40
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x38]
 	mov r1, sp
 	ldrh r1, [r1]
@@ -20413,7 +20413,7 @@ _080ABFDE:
 	subs r0, 0x1
 	strh r0, [r1]
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AC002:
 	pop {r4}
 	pop {r0}
@@ -20438,7 +20438,7 @@ sub_80AC00C: @ 80AC00C
 	strh r0, [r4, 0xA]
 	ldr r0, _080AC040 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AC044
@@ -20527,7 +20527,7 @@ _080AC0AE:
 	ldr r6, _080AC140 @ =sub_80B94B4
 	adds r0, r6, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -20548,7 +20548,7 @@ _080AC0F8:
 	strh r0, [r5]
 	adds r0, r6, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -20588,7 +20588,7 @@ _080AC148:
 	cmp r0, 0
 	bne _080AC156
 	adds r0, r1, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AC156:
 	pop {r3}
 	mov r8, r3
@@ -20621,7 +20621,7 @@ sub_80AC160: @ 80AC160
 	ldrsh r1, [r4, r2]
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -20708,7 +20708,7 @@ sub_80AC204: @ 80AC204
 	movs r3, 0x22
 	ldrsh r2, [r5, r3]
 	movs r3, 0x1
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x30]
@@ -20722,7 +20722,7 @@ sub_80AC204: @ 80AC204
 	ldr r4, _080AC2A8 @ =gUnknown_202063C
 	adds r0, r4
 	movs r1, 0x3
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r2, 0x30
 	ldrsh r1, [r5, r2]
 	lsls r0, r1, 4
@@ -20750,7 +20750,7 @@ sub_80AC204: @ 80AC204
 	str r1, [r0]
 _080AC294:
 	adds r0, r5, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AC29A:
 	pop {r4,r5}
 	pop {r0}
@@ -20813,9 +20813,9 @@ sub_80AC2B0: @ 80AC2B0
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AC31C:
 	pop {r4}
 	pop {r0}
@@ -20849,7 +20849,7 @@ sub_80AC328: @ 80AC328
 	lsrs r0, 24
 	strh r0, [r5, 0x10]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2
@@ -21055,7 +21055,7 @@ _080AC4EE:
 	b _080AC4FC
 _080AC4F6:
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AC4FC:
 	pop {r4}
 	pop {r0}
@@ -21081,7 +21081,7 @@ sub_80AC504: @ 80AC504
 	movs r3, 0x10
 	ldrsh r2, [r6, r3]
 	movs r3, 0xA
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -21121,7 +21121,7 @@ _080AC56C: .4byte sub_80AC570
 sub_80AC570: @ 80AC570
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AC5CA
@@ -21135,7 +21135,7 @@ sub_80AC570: @ 80AC570
 	strh r0, [r6, 0x22]
 	movs r0, 0x6
 	strh r0, [r6, 0x2E]
-	bl sub_8044EC8
+	bl Random
 	movs r4, 0x1F
 	adds r1, r4, 0
 	ands r1, r0
@@ -21144,13 +21144,13 @@ sub_80AC570: @ 80AC570
 	ldrh r0, [r6, 0x20]
 	adds r1, r0
 	strh r1, [r6, 0x32]
-	bl sub_8044EC8
+	bl Random
 	ands r4, r0
 	adds r4, r5
 	ldrh r1, [r6, 0x22]
 	adds r4, r1
 	strh r4, [r6, 0x36]
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x7
 	ands r1, r0
 	mvns r1, r1
@@ -21172,7 +21172,7 @@ _080AC5D4: .4byte sub_80AC5D8
 sub_80AC5D8: @ 80AC5D8
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AC614
@@ -21193,7 +21193,7 @@ _080AC5EA:
 	subs r0, 0x1
 	strh r0, [r2, 0x18]
 	adds r0, r5, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AC60A:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -21255,7 +21255,7 @@ sub_80AC64C: @ 80AC64C
 	ldrsh r0, [r4, r1]
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x34]
 	subs r0, 0x1
@@ -21264,7 +21264,7 @@ sub_80AC64C: @ 80AC64C
 	cmp r0, 0
 	bne _080AC690
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AC690:
 	pop {r4}
 	pop {r0}
@@ -21296,9 +21296,9 @@ sub_80AC698: @ 80AC698
 	cmp r0, 0
 	bne _080AC6D0
 	adds r0, r4, 0
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AC6D0:
 	pop {r4}
 	pop {r0}
@@ -21391,7 +21391,7 @@ _080AC778:
 	cmp r1, r0
 	bne _080AC78A
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AC78A:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -21430,7 +21430,7 @@ sub_80AC798: @ 80AC798
 	lsls r1, 16
 	lsrs r1, 16
 	mov r10, r1
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -21440,7 +21440,7 @@ sub_80AC798: @ 80AC798
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
-	bl sub_8044EC8
+	bl Random
 	negs r4, r4
 	lsls r0, 16
 	lsrs r0, 16
@@ -21477,7 +21477,7 @@ _080AC826:
 	mov r3, r10
 	asrs r2, r3, 16
 	movs r3, 0x82
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, _080AC86C @ =gUnknown_202063C
@@ -21535,7 +21535,7 @@ _080AC89C:
 	mov r3, r10
 	asrs r2, r3, 16
 	movs r3, 0x82
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, _080AC8E4 @ =gUnknown_202063C
@@ -21600,9 +21600,9 @@ sub_80AC90C: @ 80AC90C
 	movs r0, 0xFE
 	lsls r0, 8
 	strh r0, [r4, 0x36]
-	ldr r1, _080AC944 @ =sub_8072740
+	ldr r1, _080AC944 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r1, _080AC948 @ =sub_8074AE0
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -21612,7 +21612,7 @@ sub_80AC90C: @ 80AC90C
 	bx r0
 	.align 2, 0
 _080AC940: .4byte gUnknown_2037F02
-_080AC944: .4byte sub_8072740
+_080AC944: .4byte DestroyAnimSprite
 _080AC948: .4byte sub_8074AE0
 	thumb_func_end sub_80AC90C
 
@@ -21637,16 +21637,16 @@ sub_80AC94C: @ 80AC94C
 	strh r0, [r4, 0x32]
 	ldr r0, _080AC988 @ =sub_8074D00
 	str r0, [r4, 0x1C]
-	ldr r1, _080AC98C @ =sub_8072740
+	ldr r1, _080AC98C @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080AC984: .4byte gUnknown_2037F02
 _080AC988: .4byte sub_8074D00
-_080AC98C: .4byte sub_8072740
+_080AC98C: .4byte DestroyAnimSprite
 	thumb_func_end sub_80AC94C
 
 	thumb_func_start sub_80AC990
@@ -21656,7 +21656,7 @@ sub_80AC990: @ 80AC990
 	bl sub_8074FCC
 	ldr r0, _080AC9C4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AC9CC
@@ -21712,7 +21712,7 @@ sub_80ACA00: @ 80ACA00
 	adds r4, r0, 0
 	ldr r0, _080ACA2C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ACA34
@@ -21791,7 +21791,7 @@ _080ACA92:
 	cmp r1, r0
 	bne _080ACAA4
 	adds r0, r2, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080ACAA4:
 	pop {r0}
 	bx r0
@@ -21804,7 +21804,7 @@ sub_80ACAA8: @ 80ACAA8
 	bl sub_8074FCC
 	ldr r0, _080ACACC @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ACAD4
@@ -21882,7 +21882,7 @@ _080ACB3A:
 	adds r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -21893,7 +21893,7 @@ _080ACB3A:
 	adds r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	ldrh r2, [r4, 0x2E]
@@ -21927,7 +21927,7 @@ _080ACB9C:
 	b _080ACBAA
 _080ACBA4:
 	adds r0, r4, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080ACBAA:
 	pop {r4}
 	pop {r0}
@@ -21948,13 +21948,13 @@ sub_80ACBB0: @ 80ACBB0
 	strh r1, [r0, 0x36]
 	ldr r1, _080ACBD4 @ =sub_8075590
 	str r1, [r0, 0x1C]
-	ldr r1, _080ACBD8 @ =sub_8072740
-	bl sub_8074A68
+	ldr r1, _080ACBD8 @ =DestroyAnimSprite
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080ACBD4: .4byte sub_8075590
-_080ACBD8: .4byte sub_8072740
+_080ACBD8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80ACBB0
 
 	thumb_func_start sub_80ACBDC
@@ -21963,24 +21963,24 @@ sub_80ACBDC: @ 80ACBDC
 	adds r6, r0, 0
 	ldr r5, _080ACC34 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r0, _080ACC38 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _080ACC22
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldrb r1, [r5]
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r1, r0
 	beq _080ACC1A
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldrb r1, [r5]
 	lsls r0, 24
 	lsrs r0, 24
@@ -22076,7 +22076,7 @@ sub_80ACC88: @ 80ACC88
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldr r0, _080ACCDC @ =sub_80ACCE0
 	str r0, [r5, 0x1C]
 _080ACCD2:
@@ -22125,14 +22125,14 @@ _080ACD28:
 	movs r1, 0x3C
 	ldrsh r0, [r6, r1]
 	movs r1, 0x1C
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r6, 0x24]
 	adds r0, r1
 	strh r0, [r6, 0x24]
 	movs r1, 0x3C
 	ldrsh r0, [r6, r1]
 	movs r1, 0x1C
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r6, 0x26]
 	adds r0, r1
 	strh r0, [r6, 0x26]
@@ -22160,7 +22160,7 @@ sub_80ACD58: @ 80ACD58
 	cmp r0, 0x1F
 	bne _080ACD74
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080ACD74:
 	pop {r4}
 	pop {r0}
@@ -22174,12 +22174,12 @@ sub_80ACD7C: @ 80ACD7C
 	movs r1, 0x3C
 	ldrsh r0, [r4, r1]
 	movs r1, 0x1C
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x3C
 	ldrsh r0, [r4, r1]
 	movs r1, 0x1C
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x3C]
 	adds r0, 0x14
@@ -22210,9 +22210,9 @@ sub_80ACDA8: @ 80ACDA8
 	strh r0, [r4, 0x30]
 	ldrh r0, [r1, 0x8]
 	strh r0, [r4, 0x32]
-	ldr r1, _080ACDE0 @ =sub_8072740
+	ldr r1, _080ACDE0 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080ACDE4 @ =sub_8074CD0
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -22220,7 +22220,7 @@ sub_80ACDA8: @ 80ACDA8
 	bx r0
 	.align 2, 0
 _080ACDDC: .4byte gUnknown_2037F02
-_080ACDE0: .4byte sub_8072740
+_080ACDE0: .4byte DestroyAnimSprite
 _080ACDE4: .4byte sub_8074CD0
 	thumb_func_end sub_80ACDA8
 
@@ -22245,7 +22245,7 @@ sub_80ACDE8: @ 80ACDE8
 	str r0, [r4, 0x1C]
 	ldr r1, _080ACE24 @ =sub_80ACE28
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -22287,14 +22287,14 @@ sub_80ACE50: @ 80ACE50
 	ldrh r1, [r4, 0x32]
 	lsls r1, 16
 	asrs r1, 24
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	ldrh r1, [r4, 0x32]
 	lsls r1, 16
 	asrs r1, 24
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0xA
@@ -22314,7 +22314,7 @@ sub_80ACE50: @ 80ACE50
 	cmp r0, r1
 	bne _080ACE9C
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080ACE9C:
 	pop {r4}
 	pop {r0}
@@ -22332,7 +22332,7 @@ sub_80ACEA4: @ 80ACEA4
 	ldr r0, _080ACF04 @ =gUnknown_3005090
 	adds r4, r0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -22352,7 +22352,7 @@ sub_80ACEA4: @ 80ACEA4
 	strh r0, [r4, 0x10]
 	ldr r0, _080ACF0C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x12]
@@ -22741,7 +22741,7 @@ _080AD1E0:
 	cmp r0, 0
 	bne _080AD1EE
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AD1EE:
 	add sp, 0xC
 	pop {r4,r5}
@@ -22778,7 +22778,7 @@ sub_80AD1F8: @ 80AD1F8
 	ldrh r4, [r0, 0x20]
 	ldr r0, _080AD24C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AD250
@@ -22820,7 +22820,7 @@ _080AD278:
 	ldr r3, [sp, 0x4]
 	asrs r2, r3, 16
 	movs r3, 0x2
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -22930,7 +22930,7 @@ sub_80AD330: @ 80AD330
 	subs r0, 0x1
 	strh r0, [r1]
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AD36A:
 	pop {r4}
 	pop {r0}
@@ -22960,7 +22960,7 @@ sub_80AD374: @ 80AD374
 	lsrs r4, r0, 16
 	ldr r0, _080AD3B0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AD3B4
@@ -23187,7 +23187,7 @@ _080AD524:
 	cmp r0, 0x10
 	ble _080AD538
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AD538:
 	pop {r4}
 	pop {r0}
@@ -23218,12 +23218,12 @@ _080AD55C:
 	ldr r4, _080AD584 @ =gUnknown_2037F02
 	ldrb r1, [r4, 0x4]
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x4]
 	strh r0, [r5, 0x3C]
 	ldr r0, _080AD588 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AD58C
@@ -23258,7 +23258,7 @@ _080AD5B4:
 	strh r0, [r5, 0x30]
 	ldr r0, _080AD5D4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AD5D8
@@ -23279,7 +23279,7 @@ _080AD5DE:
 	ldrsh r0, [r5, r2]
 	movs r2, 0x36
 	ldrsh r1, [r5, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x24]
 	ldrh r0, [r5, 0x32]
 	adds r0, 0x4
@@ -23305,7 +23305,7 @@ _080AD612:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x36
 	ldrsh r1, [r5, r2]
-	bl sub_8044E30
+	bl Sin
 	adds r2, r0, 0
 	movs r3, 0
 	strh r2, [r5, 0x24]
@@ -23373,7 +23373,7 @@ sub_80AD690: @ 80AD690
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0x10
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
@@ -23401,13 +23401,13 @@ _080AD6C6:
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	movs r0, 0x89
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	b _080AD6EE
 	.align 2, 0
 _080AD6E4: .4byte gUnknown_2037F24
 _080AD6E8:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AD6EE:
 	pop {r4}
 	pop {r0}
@@ -23442,14 +23442,14 @@ _080AD70C:
 	ldrsh r0, [r4, r2]
 	lsls r1, 16
 	asrs r1, 24
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	ldrh r1, [r4, 0x36]
 	lsls r1, 16
 	asrs r1, 24
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x7
@@ -23545,7 +23545,7 @@ _080AD7EC:
 	cmp r0, 0x1E
 	bne _080AD7FA
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AD7FA:
 	pop {r4}
 	pop {r0}
@@ -23564,7 +23564,7 @@ sub_80AD800: @ 80AD800
 	adds r4, r1, r0
 	ldr r0, _080AD864 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2
@@ -23584,12 +23584,12 @@ _080AD826:
 	adds r0, 0x1
 	strh r0, [r4, 0x22]
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
 	movs r0, 0x3
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -23901,7 +23901,7 @@ _080ADA68:
 	blt _080ADA68
 _080ADA92:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080ADA98:
 	pop {r4-r7}
 	pop {r0}
@@ -23926,9 +23926,9 @@ sub_80ADAA4: @ 80ADAA4
 	ldrb r2, [r1]
 	ldrh r3, [r1, 0x2]
 	movs r1, 0x10
-	bl sub_8045274
+	bl BlendPalette
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -24063,7 +24063,7 @@ _080ADBB2:
 	strh r1, [r0, 0x24]
 	strh r1, [r0, 0x26]
 	adds r0, r7, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080ADBD8:
 	pop {r3-r5}
 	mov r8, r3
@@ -24082,7 +24082,7 @@ sub_80ADBEC: @ 80ADBEC
 	adds r4, r0, 0
 	ldr r0, _080ADC0C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ADC14
@@ -24128,7 +24128,7 @@ sub_80ADC3C: @ 80ADC3C
 	cmp r0, 0
 	beq _080ADC52
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080ADC52:
 	pop {r0}
 	bx r0
@@ -24140,7 +24140,7 @@ sub_80ADC58: @ 80ADC58
 	adds r4, r0, 0
 	ldr r0, _080ADC78 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ADC80
@@ -24181,7 +24181,7 @@ sub_80ADC9C: @ 80ADC9C
 	cmp r0, 0
 	beq _080ADCB2
 	adds r0, r2, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080ADCB2:
 	pop {r0}
 	bx r0
@@ -24206,7 +24206,7 @@ sub_80ADCB8: @ 80ADCB8
 	strh r0, [r5, 0x22]
 	ldr r0, _080ADD00 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ADD08
@@ -24244,9 +24244,9 @@ _080ADD1C:
 	strh r0, [r5, 0x32]
 	ldrh r0, [r2, 0x8]
 	strh r0, [r5, 0x34]
-	ldr r1, _080ADD44 @ =sub_8074EE0
+	ldr r1, _080ADD44 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080ADD48 @ =sub_8074A80
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -24254,7 +24254,7 @@ _080ADD1C:
 	bx r0
 	.align 2, 0
 _080ADD40: .4byte gUnknown_2037F02
-_080ADD44: .4byte sub_8074EE0
+_080ADD44: .4byte move_anim_8074EE0
 _080ADD48: .4byte sub_8074A80
 	thumb_func_end sub_80ADCB8
 
@@ -24463,7 +24463,7 @@ sub_80ADEB0: @ 80ADEB0
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldrh r0, [r5, 0x4]
 	strh r0, [r4, 0x38]
 	ldrh r0, [r5, 0xA]
@@ -24511,7 +24511,7 @@ sub_80ADF38: @ 80ADF38
 	ldrsh r0, [r4, r1]
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
@@ -24519,7 +24519,7 @@ sub_80ADF38: @ 80ADF38
 	ldrsh r0, [r4, r2]
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -24552,7 +24552,7 @@ sub_80ADF38: @ 80ADF38
 	b _080ADFA8
 _080ADFA2:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080ADFA8:
 	pop {r4}
 	pop {r0}
@@ -24597,7 +24597,7 @@ _080ADFE8:
 	cmp r0, 0
 	bgt _080ADFFA
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080ADFFA:
 	pop {r0}
 	bx r0
@@ -24613,7 +24613,7 @@ sub_80AE000: @ 80AE000
 	bne _080AE01C
 	ldr r0, _080AE060 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AE024
@@ -24685,7 +24685,7 @@ _080AE092:
 	cmp r0, 0
 	bne _080AE0AA
 	adds r0, r6, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AE0B2
@@ -24760,13 +24760,13 @@ sub_80AE130: @ 80AE130
 	ldrsh r0, [r4, r1]
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x3C
 	ldrsh r0, [r4, r1]
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x3A]
 	ldrh r1, [r4, 0x3C]
@@ -24802,7 +24802,7 @@ _080AE186:
 	cmp r0, 0
 	bgt _080AE198
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AE198:
 	pop {r4}
 	pop {r0}
@@ -24861,16 +24861,16 @@ _080AE1FA:
 	strh r0, [r4, 0x2E]
 	ldr r0, _080AE218 @ =sub_8074C44
 	str r0, [r4, 0x1C]
-	ldr r1, _080AE21C @ =sub_8072740
+	ldr r1, _080AE21C @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080AE214: .4byte gUnknown_2037F02
 _080AE218: .4byte sub_8074C44
-_080AE21C: .4byte sub_8072740
+_080AE21C: .4byte DestroyAnimSprite
 	thumb_func_end sub_80AE1A0
 
 	thumb_func_start sub_80AE220
@@ -25063,7 +25063,7 @@ _080AE396:
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0x2
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r7, 0x1
@@ -25074,7 +25074,7 @@ _080AE396:
 _080AE3B0: .4byte gUnknown_83E60A0
 _080AE3B4:
 	mov r0, r9
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080AE400
 _080AE3BC:
 	cmp r7, 0
@@ -25166,7 +25166,7 @@ _080AE456:
 	cmp r0, 0xF
 	bne _080AE46A
 	adds r0, r3, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AE46A:
 	pop {r0}
 	bx r0
@@ -25194,7 +25194,7 @@ sub_80AE470: @ 80AE470
 	adds r3, r4, 0
 	adds r3, 0x43
 	ldrb r3, [r3]
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _080AE4E0 @ =gUnknown_202063C
@@ -25272,7 +25272,7 @@ _080AE528:
 	cmp r0, 0x33
 	bne _080AE53C
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AE53C:
 	pop {r0}
 	bx r0
@@ -25370,7 +25370,7 @@ sub_80AE5BC: @ 80AE5BC
 	movs r3, 0x26
 	ldrsh r2, [r5, r3]
 	movs r3, 0x2
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -25415,10 +25415,10 @@ sub_80AE5BC: @ 80AE5BC
 	strh r0, [r4, 0x36]
 	strh r6, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldr r1, _080AE6B4 @ =sub_80AE704
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080AE6B8 @ =sub_8074F6C
 	str r0, [r4, 0x1C]
 	ldrh r0, [r5, 0x1A]
@@ -25468,7 +25468,7 @@ _080AE6BC:
 	cmp r0, 0
 	bne _080AE6CA
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AE6CA:
 	pop {r4-r7}
 	pop {r0}
@@ -25494,7 +25494,7 @@ sub_80AE6D0: @ 80AE6D0
 	subs r1, 0x1
 	strh r1, [r0, 0x16]
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AE6F8:
 	pop {r4}
 	pop {r0}
@@ -25508,7 +25508,7 @@ sub_80AE704: @ 80AE704
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080AE718 @ =sub_80AE6D0
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -25547,9 +25547,9 @@ _080AE73A:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
-	ldr r1, _080AE76C @ =sub_8074EE0
+	ldr r1, _080AE76C @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080AE770 @ =sub_8074F50
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -25557,7 +25557,7 @@ _080AE73A:
 	bx r0
 	.align 2, 0
 _080AE768: .4byte gUnknown_2037F1B
-_080AE76C: .4byte sub_8074EE0
+_080AE76C: .4byte move_anim_8074EE0
 _080AE770: .4byte sub_8074F50
 	thumb_func_end sub_80AE71C
 
@@ -25595,9 +25595,9 @@ _080AE792:
 	strh r0, [r5, 0x24]
 	ldrh r0, [r1, 0x4]
 	strh r0, [r5, 0x26]
-	ldr r1, _080AE7D4 @ =sub_8072740
+	ldr r1, _080AE7D4 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080AE7D8 @ =sub_8074F6C
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -25606,7 +25606,7 @@ _080AE792:
 	.align 2, 0
 _080AE7CC: .4byte gUnknown_2037F1B
 _080AE7D0: .4byte gUnknown_2037F02
-_080AE7D4: .4byte sub_8072740
+_080AE7D4: .4byte DestroyAnimSprite
 _080AE7D8: .4byte sub_8074F6C
 	thumb_func_end sub_80AE774
 
@@ -25615,7 +25615,7 @@ sub_80AE7DC: @ 80AE7DC
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r4, _080AE834 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -25630,14 +25630,14 @@ sub_80AE7DC: @ 80AE7DC
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3A]
 	movs r0, 0x10
 	strh r0, [r5, 0x3C]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -25703,7 +25703,7 @@ _080AE864:
 	cmp r0, r1
 	bls _080AE894
 	adds r0, r4, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080AE894:
 	pop {r4}
 	pop {r0}
@@ -25743,7 +25743,7 @@ _080AE8D2:
 	b _080AEA04
 _080AE8D4:
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
@@ -25756,7 +25756,7 @@ _080AE8D4:
 	lsrs r0, 24
 	strh r0, [r5, 0x24]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AE910
@@ -25891,7 +25891,7 @@ _080AE9E4:
 	ands r1, r2
 	strb r1, [r0]
 	adds r0, r3, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AEA04:
 	pop {r4-r6}
 	pop {r0}
@@ -25932,7 +25932,7 @@ _080AEA3E:
 _080AEA40:
 	ldr r4, _080AEA80 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2
@@ -26097,7 +26097,7 @@ _080AEB84:
 	cmp r0, 0
 	bne _080AEB92
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AEB92:
 	pop {r4-r6}
 	pop {r0}
@@ -26116,7 +26116,7 @@ sub_80AEB98: @ 80AEB98
 	movs r3, 0x12
 	ldrsh r2, [r4, r3]
 	movs r3, 0x23
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -26220,9 +26220,9 @@ sub_80AEC34: @ 80AEC34
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AEC74:
 	pop {r4}
 	pop {r0}
@@ -26258,7 +26258,7 @@ _080AEC92:
 	strh r0, [r5, 0x22]
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
 	strh r0, [r5, 0x2E]
@@ -26274,7 +26274,7 @@ _080AECC4:
 	cmp r0, 0
 	beq _080AECD8
 	adds r0, r5, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080AECD8:
 	pop {r4,r5}
 	pop {r0}
@@ -26464,7 +26464,7 @@ _080AEE48:
 	cmp r0, 0
 	bne _080AEE6C
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080AEE6C
 _080AEE58:
 	ldrh r1, [r5, 0x1E]
@@ -26498,7 +26498,7 @@ sub_80AEE74: @ 80AEE74
 	movs r3, 0x16
 	ldrsh r2, [r4, r3]
 	movs r3, 0x23
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -26559,7 +26559,7 @@ _080AEEE0:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x6F
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080AEF02:
 	movs r0, 0x12
 	ldrsh r3, [r4, r0]
@@ -26636,7 +26636,7 @@ sub_80AEF60: @ 80AEF60
 	subs r0, 0x1
 	strh r0, [r1]
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AEF96:
 	pop {r4}
 	pop {r0}
@@ -26736,7 +26736,7 @@ _080AF044:
 	cmp r0, 0
 	bne _080AF052
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AF052:
 	pop {r4,r5}
 	pop {r0}
@@ -26757,7 +26757,7 @@ sub_80AF058: @ 80AF058
 	ldrh r3, [r4, 0x20]
 	lsls r3, 24
 	lsrs r3, 24
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -26829,7 +26829,7 @@ sub_80AF0C8: @ 80AF0C8
 	subs r0, 0x1
 	strh r0, [r1]
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080AF0FC:
 	pop {r4}
 	pop {r0}
@@ -27053,7 +27053,7 @@ sub_80AF28C: @ 80AF28C
 	ldrsh r0, [r4, r1]
 	movs r2, 0x34
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
@@ -27061,7 +27061,7 @@ sub_80AF28C: @ 80AF28C
 	ldrsh r0, [r4, r2]
 	movs r2, 0x34
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -27077,7 +27077,7 @@ sub_80AF28C: @ 80AF28C
 	b _080AF2EA
 _080AF2E4:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AF2EA:
 	pop {r4}
 	pop {r0}
@@ -27100,9 +27100,9 @@ sub_80AF2F0: @ 80AF2F0
 	movs r0, 0xFE
 	lsls r0, 8
 	strh r0, [r4, 0x36]
-	ldr r1, _080AF328 @ =sub_8072740
+	ldr r1, _080AF328 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r1, _080AF32C @ =sub_8074AE0
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -27112,7 +27112,7 @@ sub_80AF2F0: @ 80AF2F0
 	bx r0
 	.align 2, 0
 _080AF324: .4byte gUnknown_2037F02
-_080AF328: .4byte sub_8072740
+_080AF328: .4byte DestroyAnimSprite
 _080AF32C: .4byte sub_8074AE0
 	thumb_func_end sub_80AF2F0
 
@@ -27131,7 +27131,7 @@ sub_80AF330: @ 80AF330
 	strh r0, [r4, 0x32]
 	ldr r0, _080AF368 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF370
@@ -27164,9 +27164,9 @@ _080AF37A:
 	strh r0, [r4, 0x36]
 	ldrh r0, [r1, 0x8]
 	strh r0, [r4, 0x2E]
-	ldr r1, _080AF3B0 @ =sub_8072740
+	ldr r1, _080AF3B0 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080AF3B4 @ =sub_8075590
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -27175,7 +27175,7 @@ _080AF37A:
 	.align 2, 0
 _080AF3A8: .4byte gUnknown_2037F02
 _080AF3AC: .4byte gUnknown_2037F1B
-_080AF3B0: .4byte sub_8072740
+_080AF3B0: .4byte DestroyAnimSprite
 _080AF3B4: .4byte sub_8075590
 	thumb_func_end sub_80AF330
 
@@ -27205,7 +27205,7 @@ _080AF3D4:
 	bl sub_8076D9C
 	ldr r0, _080AF420 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF3FA
@@ -27224,7 +27224,7 @@ _080AF3FA:
 _080AF40A:
 	ldr r1, _080AF424 @ =sub_80AF42C
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080AF428 @ =sub_8074F50
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -27264,7 +27264,7 @@ sub_80AF42C: @ 80AF42C
 	cmp r0, 0x14
 	bne _080AF462
 	adds r0, r3, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080AF462:
 	pop {r0}
 	bx r0
@@ -27319,7 +27319,7 @@ _080AF4B8:
 _080AF4CA:
 	ldr r0, _080AF4E8 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF4F0
@@ -27415,7 +27415,7 @@ _080AF57A:
 	bge _080AF57A
 	str r6, [r5, 0x1C]
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	add sp, 0x10
 	pop {r4-r7}
 	pop {r0}
@@ -27445,7 +27445,7 @@ sub_80AF5A4: @ 80AF5A4
 	strh r0, [r4, 0x2E]
 	ldr r0, _080AF600 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, _080AF604 @ =0x0000ffec
 	cmp r0, 0
@@ -27456,12 +27456,12 @@ _080AF5D4:
 	ldrsh r0, [r4, r2]
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x34]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0xF
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x36]
 	strh r5, [r4, 0x38]
 	ldr r1, _080AF608 @ =sub_80AF60C
@@ -27483,7 +27483,7 @@ sub_80AF60C: @ 80AF60C
 	adds r4, r0, 0
 	ldr r0, _080AF660 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, _080AF664 @ =0x0000ffec
 	cmp r0, 0
@@ -27498,14 +27498,14 @@ _080AF622:
 	ldrsh r0, [r4, r2]
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x34]
 	subs r0, r1
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0xF
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x36]
 	subs r0, r1
 	strh r0, [r4, 0x26]
@@ -27578,7 +27578,7 @@ sub_80AF690: @ 80AF690
 	bge _080AF6D2
 _080AF6CC:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AF6D2:
 	pop {r4}
 	pop {r0}
@@ -27632,7 +27632,7 @@ _080AF724:
 _080AF736:
 	ldr r0, _080AF758 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF760
@@ -27761,7 +27761,7 @@ _080AF830:
 	ldrsh r0, [r4, r2]
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -27798,7 +27798,7 @@ _080AF830:
 	bge _080AF886
 _080AF880:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AF886:
 	pop {r4}
 	pop {r0}
@@ -27835,7 +27835,7 @@ _080AF8B0:
 	bl sub_8076D9C
 	ldr r0, _080AF8F4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF8D6
@@ -27868,7 +27868,7 @@ _080AF8F8:
 	cmp r0, 0
 	beq _080AF90C
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AF90C:
 	pop {r4,r5}
 	pop {r0}
@@ -27904,7 +27904,7 @@ _080AF938:
 	movs r1, 0
 	bl sub_8076D9C
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF964
@@ -27950,7 +27950,7 @@ _080AF996:
 	movs r1, 0
 	bl sub_8076D9C
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF9C0
@@ -27997,7 +27997,7 @@ _080AF9FA:
 	strh r0, [r5, 0x3A]
 	ldr r0, _080AFA40 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AFA10
@@ -28017,7 +28017,7 @@ _080AFA10:
 	adds r0, r1
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	movs r0, 0x40
 	strh r0, [r5, 0x38]
 	ldr r1, _080AFA48 @ =sub_80AFA4C
@@ -28045,7 +28045,7 @@ sub_80AFA4C: @ 80AFA4C
 	ldrsh r0, [r4, r1]
 	movs r2, 0x3A
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
@@ -28053,7 +28053,7 @@ sub_80AFA4C: @ 80AFA4C
 	ldrsh r0, [r4, r2]
 	movs r1, 0x6
 	negs r1, r1
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -28103,7 +28103,7 @@ _080AFACA:
 	b _080AFADC
 _080AFAD6:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080AFADC:
 	pop {r4}
 	pop {r0}
@@ -28118,19 +28118,19 @@ sub_80AFAE4: @ 80AFAE4
 	lsrs r5, r0, 24
 	ldr r1, _080AFBA0 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -28138,7 +28138,7 @@ sub_80AFAE4: @ 80AFAE4
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080AFB26:
 	ldr r0, _080AFBA4 @ =gUnknown_2022978
 	movs r1, 0
@@ -28147,10 +28147,10 @@ _080AFB26:
 	strh r1, [r4]
 	movs r0, 0x14
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	mov r0, sp
 	bl sub_80752A0
 	mov r0, sp
@@ -28160,7 +28160,7 @@ _080AFB26:
 	lsls r2, 4
 	mov r3, sp
 	ldrh r3, [r3, 0xA]
-	bl sub_80017D0
+	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	ldr r1, _080AFBB0 @ =gUnknown_8E7F1F4
@@ -28170,7 +28170,7 @@ _080AFB26:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -28277,7 +28277,7 @@ _080AFC32:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x1E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x9
@@ -28331,7 +28331,7 @@ _080AFC92:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0x1E
 	ldrsh r1, [r4, r2]
 	cmp r1, 0
@@ -28364,7 +28364,7 @@ _080AFCF8:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080AFD0C:
 	ldr r0, _080AFD44 @ =gUnknown_2022978
 	movs r1, 0
@@ -28373,16 +28373,16 @@ _080AFD0C:
 	strh r1, [r0]
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AFD36:
 	add sp, 0x10
 	pop {r4,r5}
@@ -28429,19 +28429,19 @@ sub_80AFD80: @ 80AFD80
 	lsrs r5, r0, 24
 	ldr r1, _080AFE40 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -28449,7 +28449,7 @@ sub_80AFD80: @ 80AFD80
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080AFDC2:
 	ldr r0, _080AFE44 @ =gUnknown_2022978
 	movs r1, 0
@@ -28458,10 +28458,10 @@ _080AFDC2:
 	strh r1, [r4]
 	movs r0, 0x14
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	mov r0, sp
 	bl sub_80752A0
 	mov r0, sp
@@ -28471,7 +28471,7 @@ _080AFDC2:
 	lsls r2, 4
 	mov r3, sp
 	ldrh r3, [r3, 0xA]
-	bl sub_80017D0
+	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	ldr r1, _080AFE50 @ =gUnknown_8E7F1F4
@@ -28481,7 +28481,7 @@ _080AFDC2:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -28577,7 +28577,7 @@ _080AFEB4:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x1E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x5
@@ -28632,7 +28632,7 @@ _080AFF1A:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0x1E
 	ldrsh r1, [r4, r2]
 	cmp r1, 0
@@ -28665,7 +28665,7 @@ _080AFF80:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080AFF94:
 	ldr r0, _080AFFCC @ =gUnknown_2022978
 	movs r1, 0
@@ -28674,16 +28674,16 @@ _080AFF94:
 	strh r1, [r0]
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080AFFBE:
 	add sp, 0x10
 	pop {r4,r5}
@@ -28753,7 +28753,7 @@ _080B0008:
 	cmp r0, 0
 	bne _080B0064
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	ldr r2, _080B00CC @ =gUnknown_202063C
 	lsls r0, 24
 	lsrs r0, 24
@@ -28861,7 +28861,7 @@ _080B00F8:
 	strb r0, [r1]
 _080B012C:
 	adds r0, r5, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldr r0, _080B0144 @ =sub_80B0148
 	str r0, [r5, 0x1C]
 	pop {r3}
@@ -28989,7 +28989,7 @@ _080B0202:
 	ands r0, r1
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	b _080B0380
 	.align 2, 0
 _080B022C: .4byte gUnknown_825E074
@@ -29149,7 +29149,7 @@ _080B0344:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x4
 	negs r0, r0
@@ -29157,7 +29157,7 @@ _080B0344:
 	strb r0, [r4, 0x1]
 _080B0372:
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080B0388 @ =gUnknown_2037EE2
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -29278,7 +29278,7 @@ _080B0442:
 	cmp r0, 0
 	bne _080B0450
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B0450:
 	pop {r4,r5}
 	pop {r0}
@@ -29317,7 +29317,7 @@ sub_80B0458: @ 80B0458
 	ldrh r0, [r4, 0x2]
 	lsls r0, 20
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
@@ -29422,7 +29422,7 @@ _080B0556:
 	movs r2, 0x8
 	negs r2, r2
 	movs r3, 0x12
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -29434,7 +29434,7 @@ _080B0556:
 	adds r4, r0
 	adds r0, r4, 0
 	mov r1, r9
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	mov r0, sp
 	ldrh r0, [r0, 0x4]
 	strh r0, [r4, 0x2E]
@@ -29505,7 +29505,7 @@ _080B05F6:
 	adds r3, r4, 0
 	adds r3, 0x43
 	ldrb r3, [r3]
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
@@ -29542,9 +29542,9 @@ _080B065A:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	b _080B06A6
 	.align 2, 0
 _080B066C: .4byte gUnknown_83E63E0
@@ -29569,9 +29569,9 @@ _080B0678:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080B06A6:
 	pop {r4}
 	pop {r0}
@@ -29609,9 +29609,9 @@ sub_80B06B0: @ 80B06B0
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080B06F0:
 	pop {r4}
 	pop {r0}
@@ -29620,8 +29620,8 @@ _080B06F0:
 _080B06F8: .4byte gUnknown_3005090
 	thumb_func_end sub_80B06B0
 
-	thumb_func_start sub_80B06FC
-sub_80B06FC: @ 80B06FC
+	thumb_func_start unc_080B06FC
+unc_080B06FC: @ 80B06FC
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	ldr r0, _080B077C @ =gUnknown_2037EE4
@@ -29639,7 +29639,7 @@ sub_80B06FC: @ 80B06FC
 	movs r1, 0x4
 _080B071A:
 	adds r0, r5, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_8075160
@@ -29648,7 +29648,7 @@ _080B071A:
 	strh r0, [r5, 0x2E]
 	ldr r0, _080B0784 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0742
@@ -29688,31 +29688,31 @@ _080B0780: .4byte gUnknown_2037F02
 _080B0784: .4byte gUnknown_2037F1A
 _080B0788: .4byte gUnknown_2037F1B
 _080B078C: .4byte sub_80B0790
-	thumb_func_end sub_80B06FC
+	thumb_func_end unc_080B06FC
 
 	thumb_func_start sub_80B0790
 sub_80B0790: @ 80B0790
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B07B2
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080B07B8 @ =sub_8074F6C
 	str r0, [r4, 0x1C]
-	ldr r1, _080B07BC @ =sub_8072740
+	ldr r1, _080B07BC @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 _080B07B2:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B07B8: .4byte sub_8074F6C
-_080B07BC: .4byte sub_8072740
+_080B07BC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B0790
 
 	thumb_func_start sub_80B07C0
@@ -29733,14 +29733,14 @@ sub_80B07C0: @ 80B07C0
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8075114
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0xFF
 	ands r5, r0
 	movs r0, 0x80
 	lsls r0, 1
 	adds r6, r0, 0
 	orrs r5, r6
-	bl sub_8044EC8
+	bl Random
 	ldr r1, _080B081C @ =0x000001ff
 	ands r1, r0
 	adds r0, r1, 0
@@ -29801,7 +29801,7 @@ _080B084C:
 	cmp r0, 0x15
 	bne _080B086A
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B086A:
 	pop {r4}
 	pop {r0}
@@ -29826,7 +29826,7 @@ sub_80B0870: @ 80B0870
 	subs r2, r1
 	subs r2, 0x1
 	strh r2, [r3]
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -29834,8 +29834,8 @@ _080B0898: .4byte gUnknown_2037F02
 _080B089C: .4byte gUnknown_2037EE4
 	thumb_func_end sub_80B0870
 
-	thumb_func_start sub_80B08A0
-sub_80B08A0: @ 80B08A0
+	thumb_func_start unc_080B08A0
+unc_080B08A0: @ 80B08A0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r5, _080B08D0 @ =gUnknown_2037F02
@@ -29851,17 +29851,17 @@ sub_80B08A0: @ 80B08A0
 	strh r0, [r4, 0x2E]
 	ldr r0, _080B08D4 @ =sub_8074C44
 	str r0, [r4, 0x1C]
-	ldr r1, _080B08D8 @ =sub_8072740
+	ldr r1, _080B08D8 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B08D0: .4byte gUnknown_2037F02
 _080B08D4: .4byte sub_8074C44
-_080B08D8: .4byte sub_8072740
-	thumb_func_end sub_80B08A0
+_080B08D8: .4byte DestroyAnimSprite
+	thumb_func_end unc_080B08A0
 
 	thumb_func_start sub_80B08DC
 sub_80B08DC: @ 80B08DC
@@ -29874,7 +29874,7 @@ sub_80B08DC: @ 80B08DC
 	bne _080B0904
 	ldr r0, _080B0924 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0904
@@ -29888,7 +29888,7 @@ _080B0904:
 	ldr r4, _080B0920 @ =gUnknown_2037F02
 	ldrb r1, [r4, 0xC]
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0
 	strh r0, [r4, 0xC]
 	adds r0, r5, 0
@@ -29932,7 +29932,7 @@ sub_80B0954: @ 80B0954
 	adds r5, r0, 0
 	ldr r4, _080B0974 @ =gUnknown_2037F02
 	ldrb r1, [r4, 0x8]
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r1, 0x6
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -29953,16 +29953,16 @@ _080B0980:
 	strh r0, [r5, 0x2E]
 	ldr r0, _080B099C @ =sub_8074C44
 	str r0, [r5, 0x1C]
-	ldr r1, _080B09A0 @ =sub_8072740
+	ldr r1, _080B09A0 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B0998: .4byte gUnknown_2037F02
 _080B099C: .4byte sub_8074C44
-_080B09A0: .4byte sub_8072740
+_080B09A0: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B0954
 
 	thumb_func_start sub_80B09A4
@@ -29993,7 +29993,7 @@ _080B09CA:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0
 	bge _080B09E8
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x5
@@ -30002,7 +30002,7 @@ _080B09CA:
 _080B09E8:
 	ldrb r1, [r4, 0x4]
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	mov r0, r8
 	movs r1, 0x2
 	bl sub_8074480
@@ -30035,7 +30035,7 @@ _080B09E8:
 _080B0A32:
 	lsls r4, r0, 14
 	lsrs r4, 16
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, r6, 16
@@ -30043,7 +30043,7 @@ _080B0A32:
 	bl __modsi3
 	lsls r0, 16
 	lsrs r6, r0, 16
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r4, 16
@@ -30052,7 +30052,7 @@ _080B0A32:
 	bl __modsi3
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_8044EC8
+	bl Random
 	movs r7, 0x1
 	adds r1, r7, 0
 	ands r1, r0
@@ -30062,7 +30062,7 @@ _080B0A32:
 	negs r0, r0
 	lsrs r6, r0, 16
 _080B0A74:
-	bl sub_8044EC8
+	bl Random
 	adds r1, r7, 0
 	ands r1, r0
 	cmp r1, 0
@@ -30107,7 +30107,7 @@ _080B0A9C:
 	adds r3, 0x1
 	lsls r3, 24
 	lsrs r3, 24
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3C]
@@ -30121,7 +30121,7 @@ _080B0A9C:
 	ldr r4, _080B0B20 @ =gUnknown_202063C
 	adds r0, r4
 	movs r1, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r2, 0x3C
 	ldrsh r1, [r5, r2]
 	lsls r0, r1, 4
@@ -30172,17 +30172,17 @@ sub_80B0B2C: @ 80B0B2C
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	movs r0, 0x3C
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 _080B0B68:
 	adds r0, r5, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080B0B78
 	.align 2, 0
 _080B0B70: .4byte gUnknown_202063C
@@ -30232,7 +30232,7 @@ _080B0BB6:
 	str r0, [r4, 0x1C]
 	ldr r1, _080B0BD4 @ =sub_80B0BD8
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -30271,16 +30271,16 @@ sub_80B0BD8: @ 80B0BD8
 	strh r6, [r5, 0x24]
 	ldr r0, _080B0C20 @ =sub_8075590
 	str r0, [r5, 0x1C]
-	ldr r1, _080B0C24 @ =sub_8072740
+	ldr r1, _080B0C24 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 _080B0C18:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B0C20: .4byte sub_8075590
-_080B0C24: .4byte sub_8072740
+_080B0C24: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B0BD8
 
 	thumb_func_start sub_80B0C28
@@ -30296,7 +30296,7 @@ sub_80B0C28: @ 80B0C28
 	cmp r0, r1
 	bne _080B0C54
 	ldrb r0, [r2]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -30312,7 +30312,7 @@ _080B0C54:
 	bl sub_8075114
 	ldr r0, _080B0CA4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0C72
@@ -30334,7 +30334,7 @@ _080B0C72:
 	strh r0, [r6, 0x34]
 	strh r0, [r6, 0x36]
 	adds r0, r6, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldrh r0, [r4, 0xA]
 	strh r0, [r6, 0x38]
 	ldrh r0, [r4, 0x8]
@@ -30365,7 +30365,7 @@ sub_80B0CB4: @ 80B0CB4
 	asrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -30376,7 +30376,7 @@ sub_80B0CB4: @ 80B0CB4
 	b _080B0CE6
 _080B0CE0:
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B0CE6:
 	pop {r4}
 	pop {r0}
@@ -30392,14 +30392,14 @@ sub_80B0CEC: @ 80B0CEC
 	ldr r5, _080B0D18 @ =gUnknown_2037F02
 	ldrb r1, [r5, 0x4]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2E]
 	ldr r0, _080B0D1C @ =sub_8074C44
 	str r0, [r4, 0x1C]
 	ldr r1, _080B0D20 @ =sub_80B0D24
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -30414,7 +30414,7 @@ sub_80B0D24: @ 80B0D24
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -30425,15 +30425,15 @@ sub_80B0D24: @ 80B0D24
 	strh r0, [r4, 0x2E]
 	ldr r0, _080B0D50 @ =sub_8074C44
 	str r0, [r4, 0x1C]
-	ldr r1, _080B0D54 @ =sub_8072740
+	ldr r1, _080B0D54 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B0D50: .4byte sub_8074C44
-_080B0D54: .4byte sub_8072740
+_080B0D54: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B0D24
 
 	thumb_func_start sub_80B0D58
@@ -30487,7 +30487,7 @@ sub_80B0D7C: @ 80B0D7C
 	str r0, [r5, 0x1C]
 	ldr r1, _080B0DD0 @ =sub_80B0DD4
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 _080B0DC0:
 	pop {r4,r5}
 	pop {r0}
@@ -30505,13 +30505,13 @@ sub_80B0DD4: @ 80B0DD4
 	strh r1, [r0, 0x2E]
 	ldr r1, _080B0DE8 @ =sub_8074C44
 	str r1, [r0, 0x1C]
-	ldr r1, _080B0DEC @ =sub_8072740
-	bl sub_8074A68
+	ldr r1, _080B0DEC @ =DestroyAnimSprite
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B0DE8: .4byte sub_8074C44
-_080B0DEC: .4byte sub_8072740
+_080B0DEC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B0DD4
 
 	thumb_func_start sub_80B0DF0
@@ -30548,7 +30548,7 @@ _080B0E1C:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x34]
 	adds r0, 0x3
@@ -30581,7 +30581,7 @@ _080B0E6A:
 	cmp r0, 0x78
 	ble _080B0E78
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B0E78:
 	pop {r4}
 	pop {r0}
@@ -30667,7 +30667,7 @@ _080B0F02:
 	cmp r0, 0
 	bne _080B0F1E
 	adds r0, r1, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080B0F60
 _080B0F1E:
 	ldrh r0, [r1, 0x2E]
@@ -30705,7 +30705,7 @@ _080B0F4E:
 	cmp r0, 0
 	bne _080B0F60
 	adds r0, r1, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B0F60:
 	pop {r0}
 	bx r0
@@ -30818,7 +30818,7 @@ _080B1034:
 	b _080B1042
 _080B103A:
 	adds r0, r5, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080B1046
 _080B1042:
 	ldr r0, _080B104C @ =sub_80B1050
@@ -30851,7 +30851,7 @@ sub_80B1050: @ 80B1050
 	cmp r0, 0x28
 	ble _080B1078
 	adds r0, r1, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B1078:
 	pop {r0}
 	bx r0
@@ -30945,7 +30945,7 @@ sub_80B111C: @ 80B111C
 	bne _080B1178
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x10
 	strh r0, [r4, 0x2E]
 	ldrh r0, [r4, 0x20]
@@ -30969,10 +30969,10 @@ sub_80B111C: @ 80B111C
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl sub_80754F8
-	ldr r1, _080B1180 @ =sub_8074EE0
+	bl obj_translate_based_on_private_1_2_3_4
+	ldr r1, _080B1180 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080B1184 @ =sub_807563C
 	str r0, [r4, 0x1C]
 _080B1178:
@@ -30980,7 +30980,7 @@ _080B1178:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B1180: .4byte sub_8074EE0
+_080B1180: .4byte move_anim_8074EE0
 _080B1184: .4byte sub_807563C
 	thumb_func_end sub_80B111C
 
@@ -31063,7 +31063,7 @@ sub_80B11E4: @ 80B11E4
 	cmp r4, r0
 	bge _080B122E
 	adds r0, r7, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080B128C
 _080B122E:
 	ldrh r0, [r7, 0x2E]
@@ -31155,7 +31155,7 @@ sub_80B12A4: @ 80B12A4
 	ble _080B12E4
 _080B12DE:
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B12E4:
 	pop {r0}
 	bx r0
@@ -31225,7 +31225,7 @@ _080B1364: .4byte gUnknown_2037F1A
 _080B1368: .4byte gUnknown_2037F1B
 _080B136C:
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B138C
@@ -31260,17 +31260,17 @@ _080B138C:
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl sub_80754F8
-	ldr r1, _080B13CC @ =sub_8072740
+	bl obj_translate_based_on_private_1_2_3_4
+	ldr r1, _080B13CC @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080B13D0 @ =sub_807563C
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B13CC: .4byte sub_8072740
+_080B13CC: .4byte DestroyAnimSprite
 _080B13D0: .4byte sub_807563C
 	thumb_func_end sub_80B12E8
 
@@ -31285,7 +31285,7 @@ sub_80B13D4: @ 80B13D4
 	cmp r1, r0
 	bne _080B13EA
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B13EA:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -31324,7 +31324,7 @@ sub_80B13F8: @ 80B13F8
 	ldr r0, _080B147C @ =gUnknown_2037F16
 	ldrb r6, [r0]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B1442
@@ -31347,7 +31347,7 @@ _080B1456:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r5, 0x32]
 	strh r0, [r5, 0x24]
 	ldrh r0, [r5, 0x34]
@@ -31390,31 +31390,31 @@ _080B14A8:
 	beq _080B14BC
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_800838C
+	bl StartSpriteAnim
 	b _080B14D2
 _080B14BC:
 	ldr r0, _080B14E4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B14D2
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _080B14D2:
 	ldr r0, _080B14E8 @ =sub_8074F6C
 	str r0, [r4, 0x1C]
-	ldr r1, _080B14EC @ =sub_8072740
+	ldr r1, _080B14EC @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B14E4: .4byte gUnknown_2037F1A
 _080B14E8: .4byte sub_8074F6C
-_080B14EC: .4byte sub_8072740
+_080B14EC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B1484
 
 	thumb_func_start sub_80B14F0
@@ -31435,7 +31435,7 @@ sub_80B14F0: @ 80B14F0
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x2
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -31445,7 +31445,7 @@ sub_80B14F0: @ 80B14F0
 	cmp r0, 0x28
 	ble _080B152A
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B152A:
 	pop {r4}
 	pop {r0}
@@ -31510,7 +31510,7 @@ _080B158E:
 	strh r0, [r4, 0x1C]
 	ldr r0, _080B15BC @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B15C4
@@ -31561,7 +31561,7 @@ _080B15D4:
 	movs r0, 0x1
 	bl sub_8075458
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B160C:
 	pop {r4-r7}
 	pop {r0}
@@ -31583,7 +31583,7 @@ sub_80B1620: @ 80B1620
 	bne _080B1636
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_800838C
+	bl StartSpriteAnim
 _080B1636:
 	adds r0, r5, 0
 	movs r1, 0x1
@@ -31623,12 +31623,12 @@ _080B1680: .4byte sub_80B1684
 sub_80B1684: @ 80B1684
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1698
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B1698:
 	pop {r4}
 	pop {r0}
@@ -31647,7 +31647,7 @@ sub_80B16A0: @ 80B16A0
 	bne _080B16B8
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_800838C
+	bl StartSpriteAnim
 _080B16B8:
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -31662,7 +31662,7 @@ _080B16B8:
 	bl sub_8076D9C
 	ldr r0, _080B171C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B16E6
@@ -31703,12 +31703,12 @@ _080B1724: .4byte sub_80B1728
 sub_80B1728: @ 80B1728
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B173C
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B173C:
 	pop {r4}
 	pop {r0}
@@ -31774,7 +31774,7 @@ sub_80B1798: @ 80B1798
 	cmp r0, 0
 	bne _080B17BE
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B17BE:
 	pop {r4}
 	pop {r0}
@@ -31795,7 +31795,7 @@ sub_80B17C4: @ 80B17C4
 	bl sub_8076D9C
 	ldr r0, _080B1828 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B17F0
@@ -31822,9 +31822,9 @@ _080B17F0:
 	strh r1, [r4, 0x36]
 	ldr r0, _080B1830 @ =sub_8075590
 	str r0, [r4, 0x1C]
-	ldr r1, _080B1834 @ =sub_8072740
+	ldr r1, _080B1834 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -31833,7 +31833,7 @@ _080B1824: .4byte gUnknown_2037F1B
 _080B1828: .4byte gUnknown_2037F1A
 _080B182C: .4byte gUnknown_2037F02
 _080B1830: .4byte sub_8075590
-_080B1834: .4byte sub_8072740
+_080B1834: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B17C4
 
 	thumb_func_start sub_80B1838
@@ -31862,7 +31862,7 @@ _080B1854:
 	bl sub_8076D9C
 	ldr r0, _080B1898 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B187A
@@ -31902,7 +31902,7 @@ sub_80B18A0: @ 80B18A0
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x30
@@ -31919,7 +31919,7 @@ sub_80B18A0: @ 80B18A0
 	cmp r0, 0
 	beq _080B18DC
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B18DC:
 	pop {r4}
 	pop {r0}
@@ -31955,12 +31955,12 @@ sub_80B190C: @ 80B190C
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x20
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x5
@@ -31975,7 +31975,7 @@ sub_80B190C: @ 80B190C
 	cmp r0, 0x47
 	bne _080B1946
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B1946:
 	pop {r4}
 	pop {r0}
@@ -31998,7 +31998,7 @@ sub_80B194C: @ 80B194C
 	ldrh r0, [r1]
 	strh r0, [r4, 0xA]
 	ldr r0, _080B1984 @ =0x00002719
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0xC]
@@ -32076,7 +32076,7 @@ _080B19EA:
 	cmp r1, 0
 	bne _080B1A04
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B1A04:
 	pop {r4-r7}
 	pop {r0}
@@ -32096,7 +32096,7 @@ sub_80B1A1C: @ 80B1A1C
 	bl sub_8075160
 	ldr r0, _080B1A88 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1A3C
@@ -32130,12 +32130,12 @@ _080B1A3C:
 	adds r0, r4
 	strh r0, [r6, 0x36]
 	adds r0, r6, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldr r0, _080B1A94 @ =sub_8074F50
 	str r0, [r6, 0x1C]
 	ldr r1, _080B1A98 @ =sub_80B1A9C
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -32156,7 +32156,7 @@ sub_80B1A9C: @ 80B1A9C
 	cmp r0, 0
 	beq _080B1AB0
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B1AB0:
 	pop {r4}
 	pop {r0}
@@ -32169,7 +32169,7 @@ sub_80B1AB8: @ 80B1AB8
 	adds r5, r0, 0
 	ldr r4, _080B1B54 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1AE4
@@ -32263,12 +32263,12 @@ _080B1B72:
 	strh r0, [r5, 0x36]
 	ldr r0, _080B1BA8 @ =sub_8075590
 	str r0, [r5, 0x1C]
-	ldr r1, _080B1BAC @ =sub_8072740
+	ldr r1, _080B1BAC @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldrb r1, [r4, 0xA]
 	adds r0, r5, 0
-	bl sub_80083C0
+	bl SeekSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -32276,7 +32276,7 @@ _080B1B72:
 _080B1BA0: .4byte gUnknown_2037F1B
 _080B1BA4: .4byte gUnknown_2037F02
 _080B1BA8: .4byte sub_8075590
-_080B1BAC: .4byte sub_8072740
+_080B1BAC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B1AB8
 
 	thumb_func_start sub_80B1BB0
@@ -32293,7 +32293,7 @@ sub_80B1BB0: @ 80B1BB0
 	ldr r0, _080B1BF0 @ =sub_80B1BF8
 	str r0, [r4, 0x1C]
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	ldr r2, _080B1BF4 @ =gUnknown_202063C
 	lsls r0, 24
 	lsrs r0, 24
@@ -32348,7 +32348,7 @@ _080B1C1E:
 	cmp r0, r1
 	bge _080B1C36
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B1C36:
 	pop {r0}
 	bx r0
@@ -32360,7 +32360,7 @@ sub_80B1C3C: @ 80B1C3C
 	adds r5, r0, 0
 	ldr r0, _080B1C64 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1C6C
@@ -32371,7 +32371,7 @@ sub_80B1C3C: @ 80B1C3C
 	strh r0, [r5, 0x22]
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _080B1C72
 	.align 2, 0
 _080B1C64: .4byte gUnknown_2037F1A
@@ -32402,7 +32402,7 @@ _080B1C72:
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl sub_80754F8
+	bl obj_translate_based_on_private_1_2_3_4
 	ldr r0, _080B1CBC @ =sub_80B1CC0
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -32456,7 +32456,7 @@ _080B1CE8:
 	ble _080B1D30
 _080B1D0A:
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	ldr r2, _080B1D38 @ =gUnknown_202063C
 	lsls r0, 24
 	lsrs r0, 24
@@ -32471,7 +32471,7 @@ _080B1D0A:
 	ands r0, r2
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B1D30:
 	pop {r4}
 	pop {r0}
@@ -32500,7 +32500,7 @@ sub_80B1D3C: @ 80B1D3C
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x4
 	negs r0, r0
@@ -32508,7 +32508,7 @@ sub_80B1D3C: @ 80B1D3C
 	strb r0, [r4, 0x1]
 _080B1D6E:
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080B1D84 @ =gUnknown_2037EE2
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -32546,7 +32546,7 @@ _080B1DB0:
 _080B1DB2:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B1DC8
@@ -33653,7 +33653,7 @@ _080B25D8:
 	lsls r3, 16
 	lsrs r3, 24
 	strh r3, [r4, 0x30]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	asrs r7, r0, 16
 	movs r0, 0x80
@@ -33875,7 +33875,7 @@ _080B27A4:
 	bne _080B27BC
 	ldr r0, _080B2810 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B27D2
@@ -33886,7 +33886,7 @@ _080B27BC:
 	bne _080B27D8
 	ldr r0, _080B2814 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B27D8
@@ -33898,7 +33898,7 @@ _080B27D8:
 	ldr r4, _080B280C @ =gUnknown_2037F02
 	ldrb r1, [r4, 0x8]
 	adds r0, r5, 0
-	bl sub_80083C0
+	bl SeekSpriteAnim
 	ldrh r0, [r5, 0x20]
 	subs r0, 0x20
 	strh r0, [r5, 0x20]
@@ -33949,7 +33949,7 @@ sub_80B2820: @ 80B2820
 	strh r1, [r4, 0x2E]
 	strh r1, [r4, 0x24]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _080B284A:
 	ldrh r0, [r4, 0x3C]
 	subs r0, 0x1
@@ -33961,7 +33961,7 @@ _080B284A:
 	cmp r0, r1
 	bne _080B2862
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B2862:
 	pop {r4}
 	pop {r0}
@@ -33995,13 +33995,13 @@ sub_80B2868: @ 80B2868
 	movs r5, 0xD
 	negs r5, r5
 	adds r1, r5, 0
-	bl sub_8044E30
+	bl Sin
 	ldr r4, _080B2908 @ =gUnknown_2037F02
 	strh r0, [r4]
 	movs r1, 0x8
 	ldrsh r0, [r7, r1]
 	adds r1, r5, 0
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x2]
 	movs r0, 0x1
 	strh r0, [r4, 0x4]
@@ -34025,7 +34025,7 @@ sub_80B2868: @ 80B2868
 	mov r0, r8
 	adds r1, r4, 0
 	movs r3, 0x3
-	bl sub_80071EC
+	bl CreateSpriteAndAnimate
 _080B28E2:
 	ldrh r0, [r7, 0x8]
 	adds r0, 0x8
@@ -34035,7 +34035,7 @@ _080B28E2:
 	cmp r0, 0xFF
 	ble _080B28F6
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B28F6:
 	pop {r3}
 	mov r8, r3
@@ -34066,7 +34066,7 @@ _080B2926:
 	movs r1, 0x1
 	bl sub_8075160
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	ldr r2, _080B2954 @ =gUnknown_202063C
 	lsls r0, 24
 	lsrs r0, 24
@@ -34094,7 +34094,7 @@ _080B2958:
 	cmp r0, 0
 	beq _080B296C
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B296C:
 	pop {r4}
 	pop {r0}
@@ -34158,7 +34158,7 @@ _080B29C0:
 	cmp r0, r1
 	bge _080B29FE
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	ldr r2, _080B2A04 @ =gUnknown_202063C
 	lsls r0, 24
 	lsrs r0, 24
@@ -34173,7 +34173,7 @@ _080B29C0:
 	ands r0, r2
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B29FE:
 	pop {r4}
 	pop {r0}
@@ -34196,7 +34196,7 @@ sub_80B2A08: @ 80B2A08
 	ldr r0, _080B2A48 @ =sub_80B2A50
 	str r0, [r4, 0x1C]
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	ldr r2, _080B2A4C @ =gUnknown_202063C
 	lsls r0, 24
 	lsrs r0, 24
@@ -34305,7 +34305,7 @@ _080B2AE0:
 	cmp r0, 0
 	ble _080B2AEE
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B2AEE:
 	pop {r0}
 	bx r0
@@ -34418,7 +34418,7 @@ _080B2BAC:
 	adds r0, r5, 0
 	bl sub_8075AD8
 	adds r0, r5, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B2BCC:
 	add sp, 0x4
 	pop {r4,r5}
@@ -34432,10 +34432,10 @@ _080B2BD4: .4byte gUnknown_2021BCC
 sub_80B2BD8: @ 80B2BD8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_8044EC8
+	bl Random
 	ldr r4, _080B2BFC @ =0x000001ff
 	ands r4, r0
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x7F
 	ands r1, r0
 	movs r0, 0x1
@@ -34566,7 +34566,7 @@ _080B2CCA:
 	cmp r0, 0x1F
 	bne _080B2CDE
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B2CDE:
 	pop {r4}
 	pop {r0}
@@ -34639,7 +34639,7 @@ _080B2D0A:
 	b _080B2D5E
 _080B2D58:
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B2D5E:
 	pop {r0}
 	bx r0
@@ -34768,7 +34768,7 @@ sub_80B2E20: @ 80B2E20
 	bge _080B2E60
 _080B2E5A:
 	adds r0, r2, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080B2E60:
 	pop {r0}
 	bx r0
@@ -34785,7 +34785,7 @@ sub_80B2E64: @ 80B2E64
 	cmp r0, 0
 	bne _080B2E9C
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080B2E98 @ =gUnknown_202063C
@@ -34803,7 +34803,7 @@ _080B2E94: .4byte gUnknown_2037F02
 _080B2E98: .4byte gUnknown_202063C
 _080B2E9C:
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080B2EC8 @ =gUnknown_202063C
@@ -34819,7 +34819,7 @@ _080B2E9C:
 _080B2EBA:
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -34833,7 +34833,7 @@ sub_80B2ECC: @ 80B2ECC
 	adds r6, r0, 0
 	ldr r0, _080B2F84 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B2EE8
@@ -34859,7 +34859,7 @@ _080B2EFE:
 	cmp r0, 0
 	bne _080B2F5A
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r7, r4, 0
@@ -34905,7 +34905,7 @@ _080B2F5A:
 	beq _080B2F90
 	ldr r0, _080B2F84 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B2F88
@@ -34923,7 +34923,7 @@ _080B2F88:
 _080B2F90:
 	ldr r5, _080B3000 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B2FA6
@@ -34960,7 +34960,7 @@ _080B2FCA:
 _080B2FDC:
 	ldr r0, _080B3004 @ =gUnknown_2037F02
 	ldrh r0, [r0, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	movs r1, 0x80
@@ -34992,7 +34992,7 @@ sub_80B300C: @ 80B300C
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x34]
 	movs r2, 0x34
 	ldrsh r0, [r4, r2]
@@ -35083,7 +35083,7 @@ sub_80B30B0: @ 80B30B0
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r5, 0x34]
 	subs r0, 0x1
 	strh r0, [r5, 0x34]
@@ -35098,7 +35098,7 @@ sub_80B30B0: @ 80B30B0
 	cmp r0, 0
 	bne _080B3146
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
@@ -35172,7 +35172,7 @@ sub_80B3168: @ 80B3168
 	cmp r0, 0
 	bne _080B31C0
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
@@ -35204,13 +35204,13 @@ _080B31A6:
 	adds r0, r5, 0
 	bl sub_8073128
 _080B31C0:
-	ldr r0, _080B31CC @ =sub_8072740
+	ldr r0, _080B31CC @ =DestroyAnimSprite
 	str r0, [r6, 0x1C]
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B31CC: .4byte sub_8072740
+_080B31CC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B3168
 
 	thumb_func_start sub_80B31D0
@@ -35239,7 +35239,7 @@ _080B31EA:
 	beq _080B3232
 	ldr r0, _080B3220 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B3224
@@ -35292,7 +35292,7 @@ _080B325C:
 	cmp r0, 0
 	beq _080B3270
 	adds r0, r4, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080B3270:
 	pop {r4-r6}
 	pop {r0}
@@ -35317,13 +35317,13 @@ sub_80B3278: @ 80B3278
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B32C8
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r5, 0x20]
 	subs r0, 0x28
 	strh r0, [r5, 0x20]
@@ -35345,16 +35345,16 @@ _080B32C8:
 	movs r0, 0x1
 _080B32D6:
 	strh r0, [r5, 0x30]
-	ldr r1, _080B32EC @ =sub_8072740
+	ldr r1, _080B32EC @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080B32F0 @ =sub_8074F6C
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B32EC: .4byte sub_8072740
+_080B32EC: .4byte DestroyAnimSprite
 _080B32F0: .4byte sub_8074F6C
 	thumb_func_end sub_80B3278
 
@@ -35384,7 +35384,7 @@ sub_80B32F4: @ 80B32F4
 	lsls r1, 16
 	lsrs r7, r1, 16
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -35416,7 +35416,7 @@ _080B333A:
 _080B3366:
 	ldr r1, _080B337C @ =sub_80B3384
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080B3380 @ =sub_8074F6C
 	str r0, [r5, 0x1C]
 	pop {r4-r7}
@@ -35444,7 +35444,7 @@ sub_80B3384: @ 80B3384
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
-	bl sub_800860C
+	bl InitSpriteAffineAnim
 	ldr r0, _080B33B4 @ =sub_80B33B8
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -35477,7 +35477,7 @@ _080B33CA:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x4
 	negs r0, r0
@@ -35500,7 +35500,7 @@ _080B33F8:
 	cmp r0, r1
 	bne _080B3410
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B3410:
 	pop {r4}
 	pop {r0}
@@ -35518,7 +35518,7 @@ sub_80B3418: @ 80B3418
 	ldr r0, _080B3448 @ =gUnknown_3005090
 	adds r4, r0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -35552,7 +35552,7 @@ sub_80B3454: @ 80B3454
 	cmp r0, 0
 	bne _080B3474
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B3474:
 	pop {r4}
 	pop {r0}
@@ -35572,7 +35572,7 @@ sub_80B3480: @ 80B3480
 	ldr r0, _080B34CC @ =gUnknown_3005090
 	adds r4, r1, r0
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -35581,7 +35581,7 @@ sub_80B3480: @ 80B3480
 	strh r1, [r4, 0xC]
 	ldr r0, _080B34D0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r1, 0x8
 	cmp r0, 0
@@ -35684,7 +35684,7 @@ _080B3544:
 	ldrb r0, [r4, 0x8]
 	bl sub_8075980
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B357A:
 	pop {r4,r5}
 	pop {r0}
@@ -35747,10 +35747,10 @@ _080B35EE:
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080B3614 @ =sub_80B3618
 	str r0, [r5]
 	pop {r4-r6}
@@ -35810,7 +35810,7 @@ _080B365E:
 	movs r3, 0x24
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r0, 0xC
@@ -35922,7 +35922,7 @@ _080B372E:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r4, 0xA]
 	adds r0, 0x1
 	strh r0, [r4, 0xA]
@@ -35946,7 +35946,7 @@ _080B3754:
 	lsls r0, 2
 	ldr r1, _080B3784 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 _080B3770:
 	adds r0, r5, 0x1
 	lsls r0, 16
@@ -35963,12 +35963,12 @@ _080B3784: .4byte gUnknown_202063C
 _080B3788:
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B379E:
 	pop {r4-r6}
 	pop {r0}
@@ -36006,7 +36006,7 @@ _080B37CE:
 	cmp r1, r0
 	bne _080B37E0
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B37E0:
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x1
@@ -36233,7 +36233,7 @@ _080B39A4:
 	movs r3, 0x20
 	ldrsh r2, [r5, r3]
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -36257,7 +36257,7 @@ _080B39A4:
 	movs r1, 0x3
 	ands r1, r0
 	adds r0, r4, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _080B39F8:
 	ldrh r0, [r5, 0xC]
 	adds r0, 0x1
@@ -36282,7 +36282,7 @@ _080B3A18:
 	cmp r0, 0x11
 	ble _080B3A2C
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B3A2C:
 	pop {r4,r5}
 	pop {r0}
@@ -36293,16 +36293,16 @@ _080B3A2C:
 sub_80B3A34: @ 80B3A34
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B3A52
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080B3A52:
 	pop {r4}
 	pop {r0}
@@ -36586,7 +36586,7 @@ _080B3C58:
 _080B3C60: .4byte gUnknown_2039600
 _080B3C64:
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B3C6A:
 	pop {r3,r4}
 	mov r8, r3
@@ -36611,7 +36611,7 @@ sub_80B3C78: @ 80B3C78
 	lsls r0, 3
 	ldr r1, _080B3CAC @ =gUnknown_3005090
 	adds r7, r0, r1
-	bl sub_8008594
+	bl AllocOamMatrix
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r10, r5
@@ -36619,14 +36619,14 @@ sub_80B3C78: @ 80B3C78
 	cmp r6, 0xFF
 	bne _080B3CB0
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080B3D5A
 	.align 2, 0
 _080B3CAC: .4byte gUnknown_3005090
 _080B3CB0:
 	ldr r1, _080B3CD4 @ =gUnknown_2037F02
 	ldrb r0, [r1]
-	bl sub_8075FBC
+	bl duplicate_obj_of_side_rel2move_in_transparent_mode
 	lsls r0, 16
 	lsrs r1, r0, 16
 	mov r9, r1
@@ -36634,9 +36634,9 @@ _080B3CB0:
 	cmp r0, 0
 	bge _080B3CD8
 	adds r0, r5, 0
-	bl sub_80085CC
+	bl FreeOamMatrix
 	mov r0, r8
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080B3D5A
 	.align 2, 0
 _080B3CD4: .4byte gUnknown_2037F02
@@ -36682,7 +36682,7 @@ _080B3CD8:
 	lsls r2, 1
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrb r3, [r4, 0x1]
 	lsrs r1, r3, 6
 	ldrb r2, [r4, 0x3]
@@ -36690,10 +36690,10 @@ _080B3CD8:
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 	ldr r1, _080B3D70 @ =gUnknown_2037F02
 	ldrb r0, [r1]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x22]
@@ -36769,7 +36769,7 @@ _080B3DAA:
 	ldrsh r2, [r4, r1]
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
@@ -36808,7 +36808,7 @@ _080B3DFC:
 	ldrsh r2, [r4, r1]
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
@@ -36831,7 +36831,7 @@ _080B3E4C:
 	lsls r0, 2
 	ldr r1, _080B3E68 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8076030
+	bl obj_delete_but_dont_free_vram
 _080B3E5E:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -36843,9 +36843,9 @@ _080B3E6C:
 	ldrh r0, [r4, 0x24]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80085CC
+	bl FreeOamMatrix
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B3E7C:
 	pop {r4,r5}
 	pop {r0}
@@ -36898,7 +36898,7 @@ _080B3ED2:
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r5, 0x30]
 	movs r1, 0x10
 	subs r1, r0
@@ -36907,7 +36907,7 @@ _080B3ED2:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B3F26
 	.align 2, 0
 _080B3EF8: .4byte gUnknown_2037F1A
@@ -36926,10 +36926,10 @@ _080B3EFC:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xC4
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800849C
+	bl ChangeSpriteAffineAnim
 _080B3F26:
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
@@ -36955,7 +36955,7 @@ _080B3F2E:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x30
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
@@ -36987,12 +36987,12 @@ _080B3F72:
 _080B3F8E:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r5, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B3FA4:
 	pop {r4,r5}
 	pop {r0}
@@ -37009,7 +37009,7 @@ sub_80B3FAC: @ 80B3FAC
 	beq _080B3FD8
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r0, _080B3FD4 @ =gUnknown_2037F02
 	ldrh r1, [r0, 0x4]
 	negs r1, r1
@@ -37023,13 +37023,13 @@ _080B3FD4: .4byte gUnknown_2037F02
 _080B3FD8:
 	ldr r0, _080B406C @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B4008
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r1, _080B4070 @ =gUnknown_2037F02
 	ldrh r0, [r1, 0x2]
 	negs r0, r0
@@ -37082,9 +37082,9 @@ _080B4008:
 	strh r0, [r6, 0x36]
 	ldr r0, _080B4074 @ =sub_8075590
 	str r0, [r6, 0x1C]
-	ldr r1, _080B4078 @ =sub_8072740
+	ldr r1, _080B4078 @ =DestroyAnimSprite
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -37092,7 +37092,7 @@ _080B4008:
 _080B406C: .4byte gUnknown_2037F1B
 _080B4070: .4byte gUnknown_2037F02
 _080B4074: .4byte sub_8075590
-_080B4078: .4byte sub_8072740
+_080B4078: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B3FAC
 
 	thumb_func_start sub_80B407C
@@ -37109,14 +37109,14 @@ sub_80B407C: @ 80B407C
 	strh r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _080B40BC
 	.align 2, 0
 _080B409C: .4byte gUnknown_2037F02
 _080B40A0:
 	ldr r0, _080B4118 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B40BC
@@ -37162,9 +37162,9 @@ _080B40BC:
 	strh r0, [r6, 0x36]
 	ldr r0, _080B4120 @ =sub_8075590
 	str r0, [r6, 0x1C]
-	ldr r1, _080B4124 @ =sub_8072740
+	ldr r1, _080B4124 @ =DestroyAnimSprite
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -37172,7 +37172,7 @@ _080B40BC:
 _080B4118: .4byte gUnknown_2037F1B
 _080B411C: .4byte gUnknown_2037F02
 _080B4120: .4byte sub_8075590
-_080B4124: .4byte sub_8072740
+_080B4124: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B407C
 
 	thumb_func_start sub_80B4128
@@ -37257,14 +37257,14 @@ sub_80B41C0: @ 80B41C0
 	cmp r0, 0
 	beq _080B41D6
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080B41F2
 _080B41D6:
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
@@ -37293,7 +37293,7 @@ sub_80B41F8: @ 80B41F8
 	bl sub_8076D9C
 	ldr r0, _080B422C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4234
@@ -37321,7 +37321,7 @@ _080B4240:
 	strh r0, [r4, 0x22]
 	ldr r0, _080B426C @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B425C
@@ -37377,7 +37377,7 @@ _080B42A8:
 	cmp r0, 0x33
 	bne _080B42BC
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B42BC:
 	pop {r0}
 	bx r0
@@ -37390,10 +37390,10 @@ sub_80B42C0: @ 80B42C0
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x10
 	strh r0, [r4, 0x2E]
 	ldr r0, _080B42E4 @ =sub_80B42E8
@@ -37435,7 +37435,7 @@ _080B42FC:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -37462,12 +37462,12 @@ sub_80B4344: @ 80B4344
 	adds r4, r0, 0
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -37492,7 +37492,7 @@ _080B4380: .4byte gUnknown_2037F02
 _080B4384:
 	ldr r0, _080B4480 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B43A6
@@ -37513,22 +37513,22 @@ _080B43A6:
 	bne _080B43F6
 	ldr r0, _080B4480 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, _080B4488 @ =gUnknown_2037F1B
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _080B43F6
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B43E4
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -37599,9 +37599,9 @@ _080B43F6:
 	strh r5, [r7, 0x36]
 	ldr r0, _080B448C @ =sub_8075590
 	str r0, [r7, 0x1C]
-	ldr r1, _080B4490 @ =sub_8072740
+	ldr r1, _080B4490 @ =DestroyAnimSprite
 	adds r0, r7, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -37611,7 +37611,7 @@ _080B4480: .4byte gUnknown_2037F1A
 _080B4484: .4byte gUnknown_2037F02
 _080B4488: .4byte gUnknown_2037F1B
 _080B448C: .4byte sub_8075590
-_080B4490: .4byte sub_8072740
+_080B4490: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B4364
 
 	thumb_func_start sub_80B4494
@@ -37622,7 +37622,7 @@ sub_80B4494: @ 80B4494
 	bl sub_8075160
 	ldr r0, _080B4500 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B44B4
@@ -37688,12 +37688,12 @@ sub_80B4510: @ 80B4510
 	ands r1, r0
 	strb r1, [r2]
 	adds r0, r4, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B453C
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080B45CC
 _080B453C:
 	movs r0, 0x2E
@@ -37723,7 +37723,7 @@ _080B4552:
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B45CC
@@ -37806,9 +37806,9 @@ _080B45F6:
 	lsrs r0, 24
 	adds r0, 0x12
 	strh r0, [r5, 0x22]
-	ldr r1, _080B462C @ =sub_8074EE0
+	ldr r1, _080B462C @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080B4630 @ =sub_8074F50
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -37816,7 +37816,7 @@ _080B45F6:
 	bx r0
 	.align 2, 0
 _080B4628: .4byte gUnknown_2037F1B
-_080B462C: .4byte sub_8074EE0
+_080B462C: .4byte move_anim_8074EE0
 _080B4630: .4byte sub_8074F50
 	thumb_func_end sub_80B45D8
 
@@ -37848,9 +37848,9 @@ _080B4654:
 	strh r0, [r5, 0x22]
 	ldrb r1, [r6, 0x2]
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r5, 0
-	bl sub_8007824
+	bl AnimateSprite
 	strh r4, [r5, 0x2E]
 	strh r4, [r5, 0x30]
 	movs r0, 0x4
@@ -37863,7 +37863,7 @@ _080B4654:
 	strh r0, [r5, 0x38]
 	ldr r1, _080B46AC @ =sub_80B46B4
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r1, _080B46B0 @ =sub_8074BE4
 	str r1, [r5, 0x1C]
 	adds r0, r5, 0
@@ -37896,9 +37896,9 @@ sub_80B46B4: @ 80B46B4
 	strh r0, [r4, 0x34]
 	ldr r0, _080B46EC @ =0x0000ffe8
 	strh r0, [r4, 0x36]
-	ldr r1, _080B46F0 @ =sub_8074EE0
+	ldr r1, _080B46F0 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r1, _080B46F4 @ =sub_8074BE4
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -37908,7 +37908,7 @@ sub_80B46B4: @ 80B46B4
 	bx r0
 	.align 2, 0
 _080B46EC: .4byte 0x0000ffe8
-_080B46F0: .4byte sub_8074EE0
+_080B46F0: .4byte move_anim_8074EE0
 _080B46F4: .4byte sub_8074BE4
 	thumb_func_end sub_80B46B4
 
@@ -37918,12 +37918,12 @@ sub_80B46F8: @ 80B46F8
 	adds r5, r0, 0
 	ldr r4, _080B4720 @ =gUnknown_2037F02
 	ldrb r1, [r4, 0xA]
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r5, 0
-	bl sub_8007824
+	bl AnimateSprite
 	ldr r0, _080B4724 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4728
@@ -37963,16 +37963,16 @@ _080B472E:
 	strh r4, [r5, 0x36]
 	ldr r0, _080B4774 @ =sub_8074D00
 	str r0, [r5, 0x1C]
-	ldr r1, _080B4778 @ =sub_8074EE0
+	ldr r1, _080B4778 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B4770: .4byte gUnknown_2037F02
 _080B4774: .4byte sub_8074D00
-_080B4778: .4byte sub_8074EE0
+_080B4778: .4byte move_anim_8074EE0
 	thumb_func_end sub_80B46F8
 
 	thumb_func_start sub_80B477C
@@ -38030,7 +38030,7 @@ sub_80B47C4: @ 80B47C4
 	ldrsh r0, [r4, r2]
 	movs r2, 0x34
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x32]
 	ldrh r1, [r4, 0x38]
@@ -38048,7 +38048,7 @@ sub_80B47C4: @ 80B47C4
 	cmp r0, r1
 	bne _080B480A
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B480A:
 	pop {r4}
 	pop {r0}
@@ -38064,19 +38064,19 @@ sub_80B4810: @ 80B4810
 	movs r5, 0
 	ldr r1, _080B48E4 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -38084,7 +38084,7 @@ sub_80B4810: @ 80B4810
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080B4854:
 	ldr r0, _080B48E8 @ =gUnknown_2022978
 	strh r5, [r0]
@@ -38092,10 +38092,10 @@ _080B4854:
 	strh r5, [r4]
 	movs r0, 0x14
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	mov r0, sp
 	bl sub_80752A0
 	mov r0, sp
@@ -38113,7 +38113,7 @@ _080B4854:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -38132,7 +38132,7 @@ _080B48B0:
 	beq _080B48CA
 	ldr r0, _080B4900 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B48CA
@@ -38252,7 +38252,7 @@ _080B4998:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x1E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x7
@@ -38299,7 +38299,7 @@ _080B49F4:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0x1E
 	ldrsh r1, [r4, r2]
 	cmp r1, 0
@@ -38334,7 +38334,7 @@ _080B4A58:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080B4A6C:
 	ldr r0, _080B4AA0 @ =gUnknown_2022978
 	movs r1, 0
@@ -38343,16 +38343,16 @@ _080B4A6C:
 	strh r1, [r0]
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B4A96:
 	add sp, 0x10
 	pop {r4,r5}
@@ -38378,7 +38378,7 @@ sub_80B4AA8: @ 80B4AA8
 	beq _080B4AF4
 	ldr r0, _080B4AF0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4AF4
@@ -38409,7 +38409,7 @@ _080B4AF8:
 	strh r0, [r5, 0x22]
 	ldr r1, _080B4B20 @ =gUnknown_83E7470
 	adds r0, r5, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 	ldrh r0, [r4, 0x2]
 	strh r0, [r5, 0x30]
 	ldrh r0, [r4, 0x4]
@@ -38469,14 +38469,14 @@ _080B4B6A:
 	cmp r0, r1
 	bge _080B4B80
 _080B4B7C:
-	ldr r0, _080B4B88 @ =sub_8072740
+	ldr r0, _080B4B88 @ =DestroyAnimSprite
 	str r0, [r5, 0x1C]
 _080B4B80:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B4B88: .4byte sub_8072740
+_080B4B88: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B4AA8
 
 	thumb_func_start sub_80B4B8C
@@ -38485,7 +38485,7 @@ sub_80B4B8C: @ 80B4B8C
 	adds r4, r0, 0
 	ldr r5, _080B4BC4 @ =gUnknown_2037F02
 	ldrb r1, [r5, 0x8]
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_8075160
@@ -38499,16 +38499,16 @@ sub_80B4B8C: @ 80B4B8C
 	strh r0, [r4, 0x36]
 	ldr r0, _080B4BC8 @ =sub_8075590
 	str r0, [r4, 0x1C]
-	ldr r1, _080B4BCC @ =sub_8072740
+	ldr r1, _080B4BCC @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B4BC4: .4byte gUnknown_2037F02
 _080B4BC8: .4byte sub_8075590
-_080B4BCC: .4byte sub_8072740
+_080B4BCC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B4B8C
 
 	thumb_func_start sub_80B4BD0
@@ -38640,7 +38640,7 @@ _080B4C7A:
 	strh r0, [r6, 0x24]
 	strh r5, [r6, 0xA]
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
@@ -38734,7 +38734,7 @@ _080B4D90:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x9B
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	b _080B4E68
 	.align 2, 0
 _080B4DA0: .4byte gUnknown_202063C
@@ -38820,7 +38820,7 @@ _080B4E08:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xA8
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080B4E46:
 	ldrh r0, [r4, 0x18]
 	subs r0, 0x1
@@ -38839,7 +38839,7 @@ _080B4E5A:
 	cmp r0, 0
 	bne _080B4E68
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B4E68:
 	pop {r4}
 	pop {r0}
@@ -38912,7 +38912,7 @@ _080B4ECC:
 	asrs r2, 16
 	adds r0, r3, 0
 	movs r3, 0x23
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -38980,12 +38980,12 @@ _080B4F74: .4byte 0xfffffc00
 sub_80B4F78: @ 80B4F78
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4FAA
 	ldr r0, _080B4FB0 @ =sub_80B4D00
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -39000,7 +39000,7 @@ sub_80B4F78: @ 80B4F78
 	strh r0, [r1, 0x1E]
 _080B4FA4:
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080B4FAA:
 	pop {r4}
 	pop {r0}
@@ -39043,7 +39043,7 @@ sub_80B4FE4: @ 80B4FE4
 	adds r4, r0, 0
 	ldr r5, _080B501C @ =gUnknown_2037F02
 	ldrb r1, [r5, 0x8]
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r5]
 	strh r0, [r4, 0x24]
 	ldrh r0, [r5, 0x2]
@@ -39109,7 +39109,7 @@ _080B505C:
 	cmp r0, 0
 	bne _080B506E
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B506E:
 	pop {r0}
 	bx r0
@@ -39121,14 +39121,14 @@ sub_80B5074: @ 80B5074
 	adds r4, r0, 0
 	ldr r0, _080B509C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B5090
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _080B5090:
 	adds r0, r4, 0
 	bl sub_8075DF4
@@ -39169,7 +39169,7 @@ sub_80B50A0: @ 80B50A0
 	strh r0, [r4, 0x38]
 	ldrb r1, [r2, 0x6]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080B50F4 @ =sub_80B50F8
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -39207,7 +39207,7 @@ sub_80B50F8: @ 80B50F8
 	ldrsh r0, [r4, r2]
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x26]
 	subs r1, r0
 	strh r1, [r4, 0x26]
@@ -39216,7 +39216,7 @@ sub_80B50F8: @ 80B50F8
 	cmp r0, 0x8C
 	ble _080B5142
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B5142:
 	pop {r4}
 	pop {r0}
@@ -39252,7 +39252,7 @@ _080B516C:
 	strh r0, [r1, 0xE]
 _080B5176:
 	adds r0, r3, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -39297,7 +39297,7 @@ _080B51AA:
 	movs r0, 0x1
 	bl sub_8075458
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B51D6:
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -39343,7 +39343,7 @@ _080B5218:
 	movs r2, 0xA
 	ldrsh r1, [r4, r2]
 	movs r0, 0x4
-	bl sub_8044E4C
+	bl Cos
 	ldrh r4, [r4, 0xC]
 	adds r0, r4
 	strh r0, [r6]
@@ -39358,7 +39358,7 @@ _080B5218:
 	movs r0, 0x1
 	bl sub_8075458
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B5250:
 	pop {r4-r6}
 	pop {r0}
@@ -39405,10 +39405,10 @@ sub_80B5268: @ 80B5268
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x3A]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -39437,14 +39437,14 @@ _080B52F0:
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xA
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xF
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -39468,7 +39468,7 @@ _080B5328:
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	movs r0, 0xBD
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080B533A:
 	pop {r4}
 	pop {r0}
@@ -39488,14 +39488,14 @@ sub_80B5344: @ 80B5344
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xA
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xF
-	bl sub_8044E4C
+	bl Cos
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -39593,7 +39593,7 @@ _080B540E:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0x3A
 	ldrsh r0, [r4, r2]
 	cmp r0, 0
@@ -39646,12 +39646,12 @@ sub_80B5470: @ 80B5470
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x20
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x2E]
 	subs r0, 0x41
@@ -39695,7 +39695,7 @@ _080B54AE:
 	cmp r0, 0x3D
 	bne _080B54E0
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B54E0:
 	pop {r4}
 	pop {r0}
@@ -39711,13 +39711,13 @@ sub_80B54E8: @ 80B54E8
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -39728,7 +39728,7 @@ sub_80B54E8: @ 80B54E8
 	movs r1, 0x80
 	movs r2, 0x80
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldr r1, _080B5560 @ =gUnknown_202063C
 	lsls r0, r4, 4
 	adds r0, r4
@@ -39796,7 +39796,7 @@ sub_80B5570: @ 80B5570
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xC
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x9
@@ -39835,7 +39835,7 @@ sub_80B55C8: @ 80B55C8
 _080B55EC: .4byte gUnknown_3005090
 _080B55F0:
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldrh r0, [r4, 0x8]
@@ -39850,19 +39850,19 @@ _080B55F0:
 	adds r0, r1, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	b _080B5634
 _080B5618:
 	adds r0, r1, 0
 	bl sub_8075980
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 _080B5634:
 	pop {r4,r5}
 	pop {r0}
@@ -40084,7 +40084,7 @@ _080B57DE:
 _080B57E8: .4byte gUnknown_2037F1B
 _080B57EC:
 	adds r0, r5, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080B57F2:
 	pop {r4,r5}
 	pop {r0}
@@ -40183,7 +40183,7 @@ _080B5894:
 	cmp r6, 0
 	beq _080B58A0
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080B58A6
 _080B58A0:
 	ldrh r0, [r3, 0x30]
@@ -40206,7 +40206,7 @@ sub_80B58AC: @ 80B58AC
 	ldr r1, _080B58D8 @ =gUnknown_3005090
 	adds r5, r0, r1
 	movs r0, 0x1
-	bl sub_8075FBC
+	bl duplicate_obj_of_side_rel2move_in_transparent_mode
 	movs r6, 0
 	movs r1, 0
 	strh r0, [r5, 0x8]
@@ -40214,7 +40214,7 @@ sub_80B58AC: @ 80B58AC
 	cmp r0, 0
 	bge _080B58DC
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080B59B8
 	.align 2, 0
 _080B58D8: .4byte gUnknown_3005090
@@ -40228,7 +40228,7 @@ _080B58DC:
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r5, 0xE]
 	lsls r1, 8
 	ldrh r0, [r5, 0xC]
@@ -40236,7 +40236,7 @@ _080B58DC:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _080B5944 @ =gUnknown_202063C
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]
@@ -40248,7 +40248,7 @@ _080B58DC:
 	strh r1, [r0, 0x2E]
 	ldr r0, _080B5948 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B5950
@@ -40313,7 +40313,7 @@ _080B596E:
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, _080B59C8 @ =nullsub_8
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
@@ -40398,7 +40398,7 @@ _080B5A36:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, [r4, 0xC]
 	movs r0, 0x80
 	lsls r0, 13
@@ -40415,7 +40415,7 @@ _080B5A36:
 	lsls r0, 2
 	ldr r1, _080B5A74 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8076030
+	bl obj_delete_but_dont_free_vram
 	movs r0, 0x1
 	strh r0, [r4, 0x10]
 	b _080B5AA4
@@ -40431,17 +40431,17 @@ _080B5A78:
 	ble _080B5AA4
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r4, 0x10]
 	adds r0, 0x1
 	strh r0, [r4, 0x10]
 	b _080B5AA4
 _080B5A9E:
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B5AA4:
 	pop {r4}
 	pop {r0}
@@ -40513,7 +40513,7 @@ _080B5B18:
 _080B5B2C:
 	ldr r7, _080B5B64 @ =0x00002771
 	adds r0, r7, 0
-	bl sub_80089B8
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0
@@ -40524,16 +40524,16 @@ _080B5B2C:
 	cmp r0, 0xF
 	beq _080B5B5A
 	movs r0, 0x1
-	bl sub_8075FBC
+	bl duplicate_obj_of_side_rel2move_in_transparent_mode
 	strh r0, [r5, 0x8]
 	lsls r0, 16
 	cmp r0, 0
 	bge _080B5B68
 	adds r0, r7, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 _080B5B5A:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080B5D28
 	.align 2, 0
 _080B5B64: .4byte 0x00002771
@@ -40603,7 +40603,7 @@ _080B5B68:
 	movs r0, 0x10
 	strh r0, [r5, 0xE]
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -40632,7 +40632,7 @@ _080B5C20:
 	lsls r1, 3
 _080B5C24:
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	b _080B5D22
 _080B5C2C:
 	movs r1, 0x24
@@ -40656,7 +40656,7 @@ _080B5C2C:
 	ldr r3, _080B5C6C @ =0x00003c0d
 	movs r1, 0x10
 	movs r2, 0xA
-	bl sub_8045274
+	bl BlendPalette
 	b _080B5D22
 	.align 2, 0
 _080B5C60: .4byte gUnknown_20371F8
@@ -40723,19 +40723,19 @@ _080B5CD8:
 	bne _080B5CEC
 	ldr r1, _080B5CE8 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B5CF4
 	.align 2, 0
 _080B5CE8: .4byte 0x00003f42
 _080B5CEC:
 	ldr r1, _080B5D00 @ =0x00003f44
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 _080B5CF4:
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B5D22
 	.align 2, 0
 _080B5D00: .4byte 0x00003f44
@@ -40745,13 +40745,13 @@ _080B5D04:
 	movs r1, 0x80
 	lsls r1, 2
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	b _080B5D1E
 _080B5D14:
 	movs r1, 0x80
 	lsls r1, 3
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 _080B5D1E:
 	ldr r0, _080B5D34 @ =sub_80B5D38
 	str r0, [r5]
@@ -40824,7 +40824,7 @@ _080B5D92:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x80
@@ -40881,7 +40881,7 @@ _080B5E0A:
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
@@ -40897,14 +40897,14 @@ _080B5E2C:
 	lsls r1, 3
 _080B5E30:
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	b _080B5EB4
 _080B5E38:
 	ldrh r0, [r4, 0x10]
 	ldr r3, _080B5E48 @ =0x00003c0d
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_8045274
+	bl BlendPalette
 	b _080B5EB4
 	.align 2, 0
 _080B5E48: .4byte 0x00003c0d
@@ -40927,21 +40927,21 @@ _080B5E4C:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r3
-	bl sub_8076030
+	bl obj_delete_but_dont_free_vram
 	ldr r0, _080B5EA0 @ =0x00002771
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	cmp r6, 0x1
 	bne _080B5EA4
 	movs r1, 0x80
 	lsls r1, 2
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	b _080B5EAE
 	.align 2, 0
 _080B5E9C: .4byte gUnknown_202063C
@@ -40950,10 +40950,10 @@ _080B5EA4:
 	movs r1, 0x80
 	lsls r1, 3
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 _080B5EAE:
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B5EB4:
 	ldrh r0, [r4, 0x26]
 	adds r0, 0x1
@@ -41154,11 +41154,11 @@ sub_80B6020: @ 80B6020
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
 	ldr r1, [sp]
 	strh r0, [r1, 0x12]
@@ -41217,7 +41217,7 @@ _080B6092:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x37
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -41315,7 +41315,7 @@ _080B618C:
 	adds r1, r7, 0
 	ldr r2, [sp, 0xC]
 	movs r3, 0x37
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -41464,7 +41464,7 @@ _080B62B6:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x16
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x17
@@ -41529,7 +41529,7 @@ _080B6330:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, [r4, 0x18]
 	movs r0, 0x80
 	lsls r0, 13
@@ -41551,7 +41551,7 @@ _080B6350:
 	lsls r0, 2
 	ldr r1, _080B6380 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r5, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -41578,12 +41578,12 @@ _080B6390:
 _080B6398:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B63AE:
 	pop {r4,r5}
 	pop {r0}
@@ -41602,19 +41602,19 @@ sub_80B63B4: @ 80B63B4
 	strh r1, [r0]
 	ldr r1, _080B6408 @ =0x00003f3f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080B640C @ =0x00003f1f
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0xC8
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080B6410 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B63FC
@@ -41819,7 +41819,7 @@ _080B6594:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _080B65E4 @ =sub_80B65F0
 	str r0, [r4]
 _080B65C2:
@@ -41866,18 +41866,18 @@ sub_80B65F0: @ 80B65F0
 	ldr r4, _080B6648 @ =0x00003f3f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B6636:
 	pop {r4,r5}
 	pop {r0}
@@ -41897,7 +41897,7 @@ sub_80B664C: @ 80B664C
 	bl sub_8075160
 	ldr r0, _080B6678 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B6680
@@ -41986,7 +41986,7 @@ _080B66BA:
 	str r0, [r3, 0x1C]
 	ldr r1, _080B6718 @ =sub_80B6728
 	adds r0, r3, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	b _080B6720
 	.align 2, 0
 _080B670C: .4byte 0x000003ff
@@ -42014,10 +42014,10 @@ sub_80B6728: @ 80B6728
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
@@ -42046,7 +42046,7 @@ _080B6762:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x10
@@ -42073,17 +42073,17 @@ sub_80B67A0: @ 80B67A0
 	adds r4, r0, 0
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080B67CC @ =gUnknown_2022984
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, _080B67D0 @ =gUnknown_2022986
 	strh r1, [r0]
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -42099,11 +42099,11 @@ sub_80B67D4: @ 80B67D4
 	movs r1, 0x2E
 	ldrsh r0, [r5, r1]
 	movs r1, 0xC
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x24]
 	ldr r0, _080B683C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B67F8
@@ -42138,10 +42138,10 @@ _080B67F8:
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r5, 0x3A]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B689C
 	.align 2, 0
 _080B683C: .4byte gUnknown_2037F1A
@@ -42178,7 +42178,7 @@ _080B6874:
 	lsls r1, r4, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	strh r4, [r5, 0x3A]
 	cmp r7, 0x10
 	bne _080B689C
@@ -42206,12 +42206,12 @@ sub_80B68A8: @ 80B68A8
 	adds r4, r0, 0
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -42275,11 +42275,11 @@ sub_80B68C8: @ 80B68C8
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	strh r6, [r4, 0x18]
 	ldr r0, _080B6968 @ =sub_80B696C
 	str r0, [r4]
@@ -42335,7 +42335,7 @@ _080B69B2:
 	ldrsh r2, [r4, r0]
 	ldrb r3, [r4, 0x14]
 	ldr r0, _080B6A14 @ =gUnknown_83E76E0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -42348,7 +42348,7 @@ _080B69B2:
 	strh r7, [r5, 0x2E]
 	ldr r0, _080B6A1C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0
@@ -42473,7 +42473,7 @@ _080B6ABC:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B6AF2
 _080B6ACC:
 	movs r2, 0x16
@@ -42488,12 +42488,12 @@ _080B6AD4:
 _080B6ADC:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r7, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B6AF2:
 	pop {r4-r7}
 	pop {r0}
@@ -42524,7 +42524,7 @@ _080B6B0E:
 	ldrsh r0, [r4, r2]
 	movs r2, 0x34
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x32]
 	subs r0, 0x41
@@ -42577,7 +42577,7 @@ _080B6B64:
 	movs r2, 0x3A
 	ldrsh r0, [r4, r2]
 	movs r1, 0x7
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldr r2, _080B6BB8 @ =gUnknown_3005090
 	movs r0, 0x2E
@@ -42594,7 +42594,7 @@ _080B6B64:
 	subs r0, 0x1
 	strh r0, [r1, 0x16]
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080B6BB2:
 	pop {r4}
 	pop {r0}
@@ -42670,18 +42670,18 @@ _080B6C44:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x2
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0
 	strh r0, [r6, 0xA]
 	strh r0, [r6, 0xC]
 	movs r0, 0x10
 	strh r0, [r6, 0xE]
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x10]
@@ -42746,12 +42746,12 @@ _080B6CDC:
 	ldr r4, _080B6D08 @ =0x000066e0
 	movs r1, 0x10
 	adds r3, r4, 0
-	bl sub_8045274
+	bl BlendPalette
 	ldrh r0, [r6, 0x16]
 	ldrb r2, [r6, 0xC]
 	movs r1, 0x10
 	adds r3, r4, 0
-	bl sub_8045274
+	bl BlendPalette
 	ldrh r1, [r6, 0xC]
 	movs r2, 0xC
 	ldrsh r0, [r6, r2]
@@ -42767,11 +42767,11 @@ _080B6D0C:
 	strh r5, [r6, 0xC]
 	ldr r1, _080B6D24 @ =0x00003f44
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B6F1E
 	.align 2, 0
 _080B6D24: .4byte 0x00003f44
@@ -42779,11 +42779,11 @@ _080B6D28:
 	movs r0, 0x2
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	ldr r0, _080B6D7C @ =gUnknown_202297C
 	movs r1, 0
 	strh r1, [r0]
@@ -42791,10 +42791,10 @@ _080B6D28:
 	strh r1, [r4]
 	movs r0, 0x18
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x1A
-	bl sub_8000A38
+	bl SetGpuReg
 	add r0, sp, 0xC
 	movs r1, 0x2
 	bl sub_80752C8
@@ -42809,7 +42809,7 @@ _080B6D28:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	b _080B6F1E
 	.align 2, 0
 _080B6D7C: .4byte gUnknown_202297C
@@ -42822,7 +42822,7 @@ _080B6D8C:
 	bl sub_80752C8
 	movs r0, 0x80
 	lsls r0, 6
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r1, r0, 0
 	ldr r5, _080B6DFC @ =gUnknown_202401C
 	ldr r0, [r5]
@@ -42831,7 +42831,7 @@ _080B6D8C:
 	adds r0, r4
 	str r1, [r0]
 	ldr r0, _080B6E00 @ =gUnknown_8E7F4AC
-	bl sub_800EBB4
+	bl LZDecompressWram
 	add r0, sp, 0xC
 	ldrb r0, [r0, 0x8]
 	ldr r1, [r5]
@@ -42853,13 +42853,13 @@ _080B6D8C:
 	str r2, [sp, 0x8]
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldr r0, [r5]
 	adds r0, r4
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0
@@ -42889,7 +42889,7 @@ _080B6E14:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xE
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
@@ -42900,19 +42900,19 @@ _080B6E14:
 	strh r0, [r6, 0xE]
 	ldr r1, _080B6E68 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x2
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	b _080B6F1E
 	.align 2, 0
 _080B6E68: .4byte 0x00003f42
@@ -42927,7 +42927,7 @@ _080B6E76:
 	lsls r1, 3
 _080B6E7A:
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	b _080B6F1E
 _080B6E82:
 	ldr r2, _080B6EC0 @ =gUnknown_202063C
@@ -42989,13 +42989,13 @@ _080B6EEC:
 	ldr r3, _080B6F08 @ =0x000077ff
 	movs r1, 0x10
 	movs r2, 0xC
-	bl sub_8045274
+	bl BlendPalette
 	cmp r4, 0x1
 	bne _080B6F0C
 	movs r1, 0x80
 	lsls r1, 2
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	b _080B6F16
 	.align 2, 0
 _080B6F08: .4byte 0x000077ff
@@ -43003,7 +43003,7 @@ _080B6F0C:
 	movs r1, 0x80
 	lsls r1, 3
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 _080B6F16:
 	ldr r0, _080B6F2C @ =sub_80B6F30
 	str r0, [r6]
@@ -43076,7 +43076,7 @@ _080B6F8A:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x80
@@ -43137,7 +43137,7 @@ _080B7008:
 	ldr r3, _080B7020 @ =0x000066e0
 	movs r1, 0x10
 	movs r2, 0xC
-	bl sub_8045274
+	bl BlendPalette
 	b _080B7148
 	.align 2, 0
 _080B701C: .4byte gUnknown_2039600
@@ -43145,10 +43145,10 @@ _080B7020: .4byte 0x000066e0
 _080B7024:
 	ldr r1, _080B7040 @ =0x00003f44
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0
 	movs r0, 0x10
 	strh r0, [r6, 0xC]
@@ -43168,7 +43168,7 @@ _080B7044:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0xE
 	ldrsh r0, [r6, r2]
 	cmp r0, 0xF
@@ -43176,11 +43176,11 @@ _080B7044:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x2
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x2
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	b _080B7148
 _080B707C:
 	movs r0, 0x2
@@ -43188,11 +43188,11 @@ _080B707C:
 	movs r0, 0
 	movs r1, 0x90
 	movs r2, 0x20
-	bl sub_8070424
+	bl FillPalette
 	movs r0, 0x2
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0xC
 	strh r0, [r6, 0xA]
 	b _080B7148
@@ -43202,12 +43202,12 @@ _080B709C:
 	ldr r4, _080B70C8 @ =0x000066e0
 	movs r1, 0x10
 	adds r3, r4, 0
-	bl sub_8045274
+	bl BlendPalette
 	ldrh r0, [r6, 0x16]
 	ldrb r2, [r6, 0xA]
 	movs r1, 0x10
 	adds r3, r4, 0
-	bl sub_8045274
+	bl BlendPalette
 	ldrh r0, [r6, 0xA]
 	movs r2, 0xA
 	ldrsh r1, [r6, r2]
@@ -43222,11 +43222,11 @@ _080B70CC:
 	strh r1, [r6, 0xA]
 	ldr r1, _080B70E4 @ =0x00003f44
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B7148
 	.align 2, 0
 _080B70E4: .4byte 0x00003f44
@@ -43261,19 +43261,19 @@ _080B70E8:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r7, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B7148:
 	ldrh r0, [r6, 0x26]
 	adds r0, 0x1
@@ -43345,7 +43345,7 @@ sub_80B71B0: @ 80B71B0
 	ldrsh r0, [r5, r2]
 	movs r2, 0x30
 	ldrsh r1, [r5, r2]
-	bl sub_8044E30
+	bl Sin
 	ldr r4, _080B7210 @ =gUnknown_202063C
 	movs r1, 0x38
 	ldrsh r2, [r5, r1]
@@ -43358,7 +43358,7 @@ sub_80B71B0: @ 80B71B0
 	ldrsh r0, [r5, r2]
 	movs r2, 0x30
 	ldrsh r1, [r5, r2]
-	bl sub_8044E4C
+	bl Cos
 	movs r1, 0x38
 	ldrsh r2, [r5, r1]
 	lsls r1, r2, 4
@@ -43406,7 +43406,7 @@ _080B7218:
 	ldrh r1, [r0, 0x22]
 	subs r1, 0x8
 	strh r1, [r0, 0x22]
-	ldr r0, _080B7258 @ =sub_8074EE0
+	ldr r0, _080B7258 @ =move_anim_8074EE0
 	str r0, [r5, 0x1C]
 _080B724C:
 	pop {r4,r5}
@@ -43414,7 +43414,7 @@ _080B724C:
 	bx r0
 	.align 2, 0
 _080B7254: .4byte gUnknown_202063C
-_080B7258: .4byte sub_8074EE0
+_080B7258: .4byte move_anim_8074EE0
 	thumb_func_end sub_80B71B0
 
 	thumb_func_start sub_80B725C
@@ -43435,7 +43435,7 @@ sub_80B725C: @ 80B725C
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B72AC
@@ -43480,9 +43480,9 @@ _080B72B6:
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, _080B72F0 @ =sub_8074EE0
+	ldr r1, _080B72F0 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080B72F4 @ =sub_8074E70
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -43490,7 +43490,7 @@ _080B72B6:
 	bx r0
 	.align 2, 0
 _080B72EC: .4byte gUnknown_2037F02
-_080B72F0: .4byte sub_8074EE0
+_080B72F0: .4byte move_anim_8074EE0
 _080B72F4: .4byte sub_8074E70
 	thumb_func_end sub_80B725C
 
@@ -43514,7 +43514,7 @@ sub_80B72F8: @ 80B72F8
 	strh r0, [r5, 0x36]
 	ldr r0, _080B7354 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B735C
@@ -43559,23 +43559,23 @@ _080B735C:
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _080B7386:
 	ldr r0, _080B73A0 @ =gUnknown_2037F02
 	ldrh r0, [r0, 0x8]
 	strh r0, [r5, 0x2E]
 	ldr r0, _080B73A4 @ =sub_8075590
 	str r0, [r5, 0x1C]
-	ldr r1, _080B73A8 @ =sub_8074EE0
+	ldr r1, _080B73A8 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B73A0: .4byte gUnknown_2037F02
 _080B73A4: .4byte sub_8075590
-_080B73A8: .4byte sub_8074EE0
+_080B73A8: .4byte move_anim_8074EE0
 	thumb_func_end sub_80B72F8
 
 	thumb_func_start sub_80B73AC
@@ -43618,9 +43618,9 @@ _080B73CA:
 	strh r0, [r5, 0x22]
 	ldr r0, _080B7414 @ =sub_8074F6C
 	str r0, [r5, 0x1C]
-	ldr r1, _080B7418 @ =sub_8074EE0
+	ldr r1, _080B7418 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -43628,7 +43628,7 @@ _080B73CA:
 _080B740C: .4byte gUnknown_2037F1B
 _080B7410: .4byte gUnknown_2037F02
 _080B7414: .4byte sub_8074F6C
-_080B7418: .4byte sub_8074EE0
+_080B7418: .4byte move_anim_8074EE0
 	thumb_func_end sub_80B73AC
 
 	thumb_func_start sub_80B741C
@@ -43637,13 +43637,13 @@ sub_80B741C: @ 80B741C
 	adds r4, r0, 0
 	ldr r0, _080B7444 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B7436
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _080B7436:
 	adds r0, r4, 0
 	bl sub_80B72F8
@@ -43705,13 +43705,13 @@ _080B74AA:
 	ldrsh r0, [r6, r1]
 	movs r2, 0x3C
 	ldrsh r1, [r6, r2]
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r6, 0x24]
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	movs r2, 0x3C
 	ldrsh r1, [r6, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r6, 0x26]
 	ldr r0, _080B74D4 @ =sub_80B74D8
 	str r0, [r6, 0x1C]
@@ -43744,13 +43744,13 @@ _080B74EA:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x3C
 	ldrsh r1, [r4, r2]
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
 	movs r2, 0x3C
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x36]
 	adds r0, 0x1
@@ -43813,13 +43813,13 @@ _080B757E:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x3C
 	ldrsh r1, [r4, r2]
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
 	movs r2, 0x3C
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x36]
 	adds r0, 0x1
@@ -43852,7 +43852,7 @@ _080B75C6:
 	cmp r0, 0x14
 	ble _080B75DA
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B75DA:
 	pop {r4,r5}
 	pop {r0}
@@ -44051,7 +44051,7 @@ _080B774E:
 _080B775C: .4byte gUnknown_2039600
 _080B7760:
 	adds r0, r3, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B7766:
 	pop {r0}
 	bx r0
@@ -44155,14 +44155,14 @@ sub_80B77E4: @ 80B77E4
 	ldrsh r0, [r5, r1]
 	movs r2, 0x4
 	ldrsh r1, [r5, r2]
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x30]
 	movs r3, 0x2
 	ldrsh r0, [r5, r3]
 	lsls r6, 16
 	asrs r6, 16
 	adds r1, r6, 0
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x32]
 	ldrh r1, [r4, 0x30]
 	ldrh r2, [r5]
@@ -44237,7 +44237,7 @@ sub_80B7894: @ 80B7894
 	cmp r0, r1
 	ble _080B78D8
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B78D8:
 	pop {r4}
 	pop {r0}
@@ -44262,7 +44262,7 @@ sub_80B78E0: @ 80B78E0
 	movs r1, 0x10
 	strh r1, [r0, 0xA]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
 	bl sub_80768B0
 	lsls r0, 24
@@ -44271,7 +44271,7 @@ sub_80B78E0: @ 80B78E0
 	bne _080B792C
 	ldr r1, _080B7928 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B7934
 	.align 2, 0
 _080B791C: .4byte gUnknown_3005090
@@ -44281,7 +44281,7 @@ _080B7928: .4byte 0x00003f42
 _080B792C:
 	ldr r1, _080B7948 @ =0x00003f44
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 _080B7934:
 	ldr r0, _080B794C @ =gUnknown_3005090
 	lsls r1, r5, 2
@@ -44330,7 +44330,7 @@ sub_80B7954: @ 80B7954
 	strh r1, [r6, 0xA]
 	ldrh r1, [r6, 0xA]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	strh r5, [r6, 0xC]
 	cmp r4, 0x10
 	bne _080B79D6
@@ -44350,7 +44350,7 @@ sub_80B7954: @ 80B7954
 	orrs r1, r2
 	strb r1, [r0]
 	adds r0, r7, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080B79D6
 	.align 2, 0
 _080B79C0: .4byte gUnknown_3005090
@@ -44386,7 +44386,7 @@ sub_80B79DC: @ 80B79DC
 	ldr r0, _080B7A10 @ =sub_80B7A14
 	str r0, [r2]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -44426,18 +44426,18 @@ sub_80B7A14: @ 80B7A14
 	strh r1, [r6, 0xA]
 	ldrh r1, [r6, 0xA]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	strh r5, [r6, 0xC]
 	cmp r4, 0
 	bne _080B7A7A
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r7, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080B7A7A
 	.align 2, 0
 _080B7A70: .4byte gUnknown_3005090
@@ -44459,7 +44459,7 @@ sub_80B7A80: @ 80B7A80
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080B7AAC @ =gUnknown_2037F1A
 	ldrb r0, [r0]
 	bl sub_80768B0
@@ -44469,7 +44469,7 @@ sub_80B7A80: @ 80B7A80
 	bne _080B7AB4
 	ldr r1, _080B7AB0 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B7ABC
 	.align 2, 0
 _080B7AAC: .4byte gUnknown_2037F1A
@@ -44477,10 +44477,10 @@ _080B7AB0: .4byte 0x00003f42
 _080B7AB4:
 	ldr r1, _080B7AC8 @ =0x00003f44
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 _080B7ABC:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -44584,7 +44584,7 @@ _080B7B8A:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x3A
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	ldrh r6, [r4, 0x26]
 	adds r0, r6
 	strh r0, [r4, 0x26]
@@ -44611,7 +44611,7 @@ _080B7BBA:
 	cmp r0, 0
 	bne _080B7BCC
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B7BCC:
 	pop {r4-r6}
 	pop {r0}
@@ -44633,7 +44633,7 @@ sub_80B7BD4: @ 80B7BD4
 	strh r0, [r4, 0x22]
 	ldrb r1, [r5, 0x4]
 	adds r0, r4, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2E]
 	ldrh r0, [r5, 0x8]
@@ -44711,7 +44711,7 @@ sub_80B7C50: @ 80B7C50
 	cmp r0, 0
 	bne _080B7C82
 	adds r0, r3, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080B7C82:
 	pop {r0}
 	bx r0
@@ -44816,7 +44816,7 @@ _080B7D4C:
 	strh r0, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r6, 0xEC
 _080B7D58:
 	movs r0, 0x20
@@ -44847,12 +44847,12 @@ _080B7D84: .4byte sub_80B7D88
 sub_80B7D88: @ 80B7D88
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B7D9C
 	adds r0, r4, 0
-	bl sub_8074EE0
+	bl move_anim_8074EE0
 _080B7D9C:
 	pop {r4}
 	pop {r0}
@@ -44901,7 +44901,7 @@ sub_80B7DA4: @ 80B7DA4
 	adds r0, 0x20
 	strh r0, [r5, 0x26]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B7E14
@@ -44931,12 +44931,12 @@ _080B7E16:
 	strh r0, [r5, 0x1C]
 	ldr r1, _080B7E6C @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrb r1, [r4, 0x8]
 	lsls r1, 4
 	movs r0, 0
 	movs r2, 0x20
-	bl sub_8070424
+	bl FillPalette
 	ldr r0, _080B7E70 @ =0x04000016
 	str r0, [sp]
 	movs r7, 0x2
@@ -44959,11 +44959,11 @@ _080B7E78:
 	strh r0, [r5, 0x1C]
 	ldr r1, _080B7F34 @ =0x00003f44
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
 	movs r1, 0x90
 	movs r2, 0x20
-	bl sub_8070424
+	bl FillPalette
 	ldr r0, _080B7F38 @ =0x0400001a
 	str r0, [sp]
 	movs r7, 0x4
@@ -45023,10 +45023,10 @@ _080B7ED4:
 	orrs r7, r0
 	movs r0, 0x4A
 	adds r1, r7, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080B7F48 @ =0x00003f3f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r2, _080B7F4C @ =gUnknown_2022984
 	ldrh r0, [r5, 0x24]
 	lsls r0, 8
@@ -45127,7 +45127,7 @@ _080B7FD6:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x1E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0xC
@@ -45194,7 +45194,7 @@ _080B8056:
 _080B8060: .4byte gUnknown_2039600
 _080B8064:
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B806A:
 	pop {r4}
 	pop {r0}
@@ -45247,12 +45247,12 @@ _080B80B4:
 	ldr r4, _080B80EC @ =0x00003f3f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080B829E
 	.align 2, 0
 _080B80E4: .4byte gUnknown_2022984
@@ -45269,7 +45269,7 @@ _080B80F0:
 	bne _080B811C
 	ldr r1, _080B8114 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080B8118 @ =gUnknown_202297C
 	b _080B8126
 	.align 2, 0
@@ -45279,7 +45279,7 @@ _080B8118: .4byte gUnknown_202297C
 _080B811C:
 	ldr r1, _080B8130 @ =0x00003f44
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080B8134 @ =gUnknown_2022978
 _080B8126:
 	ldrh r0, [r1]
@@ -45304,7 +45304,7 @@ _080B8138:
 	lsls r1, 4
 	movs r0, 0
 	movs r2, 0x20
-	bl sub_8070424
+	bl FillPalette
 	b _080B8170
 	.align 2, 0
 _080B815C: .4byte gUnknown_202297A
@@ -45315,7 +45315,7 @@ _080B8160:
 	movs r0, 0
 	movs r1, 0x90
 	movs r2, 0x20
-	bl sub_8070424
+	bl FillPalette
 _080B8170:
 	movs r0, 0x3
 	bl sub_80B856C
@@ -45351,7 +45351,7 @@ _080B817C:
 	adds r0, 0x4
 	strh r0, [r5, 0x26]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B81D0
@@ -45435,18 +45435,18 @@ _080B8250:
 	bne _080B8268
 	ldr r1, _080B8264 @ =0x00003f3d
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080B8270
 	.align 2, 0
 _080B8264: .4byte 0x00003f3d
 _080B8268:
 	ldr r1, _080B82A8 @ =0x00003f3b
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 _080B8270:
 	ldr r1, _080B82AC @ =0x00003f3f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r2, _080B82B0 @ =gUnknown_2022984
 	ldrh r0, [r5, 0x24]
 	lsls r0, 8
@@ -45462,7 +45462,7 @@ _080B8270:
 	strh r0, [r5, 0xC]
 	ldr r1, _080B82B8 @ =0x0000080c
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080B82BC @ =sub_80B82C0
 	str r0, [r5]
 _080B829E:
@@ -45629,7 +45629,7 @@ _080B83D2:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x1E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -45659,12 +45659,12 @@ _080B8408:
 	ldr r4, _080B8438 @ =0x00003f3f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B842A:
 	pop {r4,r5}
 	pop {r0}
@@ -45854,7 +45854,7 @@ sub_80B856C: @ 80B856C
 _080B8582:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -45949,7 +45949,7 @@ sub_80B85B8: @ 80B85B8
 	strb r1, [r0]
 _080B8642:
 	mov r0, r10
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -45993,7 +45993,7 @@ sub_80B8664: @ 80B8664
 	bl sub_8073128
 _080B86A0:
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -46016,19 +46016,19 @@ sub_80B86B0: @ 80B86B0
 	strh r0, [r4, 0x22]
 	ldrb r1, [r1, 0x4]
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080B86E4 @ =sub_8074F6C
 	str r0, [r4, 0x1C]
-	ldr r1, _080B86E8 @ =sub_8072740
+	ldr r1, _080B86E8 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B86E0: .4byte gUnknown_2037F02
 _080B86E4: .4byte sub_8074F6C
-_080B86E8: .4byte sub_8072740
+_080B86E8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B86B0
 
 	thumb_func_start sub_80B86EC
@@ -46044,28 +46044,28 @@ sub_80B86EC: @ 80B86EC
 	strh r6, [r0]
 	ldr r1, _080B87F4 @ =0x00003f3f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080B87F8 @ =0x00003f3d
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 8
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	ldr r1, _080B87FC @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080B8800 @ =0x00000c08
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -46073,7 +46073,7 @@ sub_80B86EC: @ 80B86EC
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080B8750:
 	bl sub_8075290
 	lsls r0, 24
@@ -46085,13 +46085,13 @@ _080B8750:
 	bne _080B87CA
 	ldr r4, _080B8804 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080B8780
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B87CA
@@ -46129,12 +46129,12 @@ _080B8780:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r6, 0x1
 _080B87CA:
 	ldr r4, _080B8804 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8818
@@ -46171,11 +46171,11 @@ _080B8818:
 _080B8828:
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -46203,7 +46203,7 @@ _080B8828:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	ldr r2, _080B88D0 @ =gUnknown_2022978
 	ldr r0, _080B88D4 @ =gUnknown_202063C
 	lsls r1, r4, 4
@@ -46248,7 +46248,7 @@ _080B88E0:
 	ldrh r3, [r2, 0x4]
 	movs r1, 0x10
 	movs r2, 0xB
-	bl sub_8045274
+	bl BlendPalette
 _080B88EC:
 	ldr r1, _080B8914 @ =gUnknown_3005090
 	lsls r0, r7, 2
@@ -46314,7 +46314,7 @@ _080B894E:
 	cmp r0, 0x2
 	bne _080B89FC
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080B89F0 @ =gUnknown_202063C
@@ -46340,7 +46340,7 @@ _080B8990:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl sub_8007280
+	bl DestroySprite
 	mov r0, sp
 	bl sub_80752A0
 	mov r0, sp
@@ -46390,10 +46390,10 @@ _080B89FC:
 	ldr r4, _080B8A70 @ =0x00003f3f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -46401,10 +46401,10 @@ _080B89FC:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080B8A2E:
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r1, r0, 0
 	movs r2, 0x80
 	lsls r2, 8
@@ -46413,15 +46413,15 @@ _080B8A2E:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B8A5E:
 	add sp, 0x10
 	pop {r4-r6}
@@ -46465,7 +46465,7 @@ _080B8A9C:
 	.4byte _080B8AD4
 _080B8ABC:
 	ldrb r0, [r2]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	b _080B8ADA
@@ -46489,7 +46489,7 @@ _080B8ADA:
 	beq _080B8B06
 _080B8AE0:
 	adds r0, r4, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
@@ -46521,7 +46521,7 @@ _080B8B06:
 	bl sub_8075B48
 _080B8B22:
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -46551,7 +46551,7 @@ _080B8B4C:
 	strh r0, [r1, 0xE]
 _080B8B58:
 	adds r0, r3, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -46611,7 +46611,7 @@ _080B8BD0: .4byte sub_80B8BD4
 sub_80B8BD4: @ 80B8BD4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8C28
@@ -46660,12 +46660,12 @@ _080B8C34: .4byte sub_80B8C38
 sub_80B8C38: @ 80B8C38
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8C4C
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B8C4C:
 	pop {r4}
 	pop {r0}
@@ -46680,7 +46680,7 @@ sub_80B8C54: @ 80B8C54
 	bl sub_8075114
 	ldr r0, _080B8CB4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8C74
@@ -46711,9 +46711,9 @@ _080B8C74:
 	strh r0, [r6, 0x36]
 	ldr r0, _080B8CC0 @ =sub_8075590
 	str r0, [r6, 0x1C]
-	ldr r1, _080B8CC4 @ =sub_8072740
+	ldr r1, _080B8CC4 @ =DestroyAnimSprite
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -46722,7 +46722,7 @@ _080B8CB4: .4byte gUnknown_2037F1A
 _080B8CB8: .4byte gUnknown_2037F02
 _080B8CBC: .4byte gUnknown_2037F1B
 _080B8CC0: .4byte sub_8075590
-_080B8CC4: .4byte sub_8072740
+_080B8CC4: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B8C54
 
 	thumb_func_start sub_80B8CC8
@@ -46745,11 +46745,11 @@ sub_80B8CC8: @ 80B8CC8
 	bl sub_8074844
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl sub_8044EC8
+	bl Random
 	movs r4, 0x1F
 	adds r5, r4, 0
 	ands r5, r0
-	bl sub_8044EC8
+	bl Random
 	ands r4, r0
 	adds r1, r5, 0
 	cmp r1, 0x10
@@ -46778,9 +46778,9 @@ _080B8D20:
 	strh r0, [r6, 0x36]
 	ldr r0, _080B8D50 @ =sub_8075590
 	str r0, [r6, 0x1C]
-	ldr r1, _080B8D54 @ =sub_8074EE0
+	ldr r1, _080B8D54 @ =move_anim_8074EE0
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -46790,7 +46790,7 @@ _080B8D20:
 _080B8D48: .4byte gUnknown_2037F1B
 _080B8D4C: .4byte gUnknown_2037F02
 _080B8D50: .4byte sub_8075590
-_080B8D54: .4byte sub_8074EE0
+_080B8D54: .4byte move_anim_8074EE0
 	thumb_func_end sub_80B8CC8
 
 	thumb_func_start sub_80B8D58
@@ -46893,7 +46893,7 @@ _080B8E06:
 	cmp r0, r1
 	bge _080B8E1E
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B8E1E:
 	pop {r0}
 	bx r0
@@ -46954,7 +46954,7 @@ _080B8E4C:
 	cmp r0, 0xA
 	bne _080B8E8E
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B8E8E:
 	pop {r0}
 	bx r0
@@ -47027,7 +47027,7 @@ _080B8F00:
 	.4byte _080B9064
 _080B8F14:
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -47195,7 +47195,7 @@ _080B9056:
 _080B9060: .4byte gUnknown_2039600
 _080B9064:
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	ldr r2, _080B9088 @ =gUnknown_202063C
 	movs r0, 0x1C
 	ldrsh r1, [r4, r0]
@@ -47222,7 +47222,7 @@ sub_80B908C: @ 80B908C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080B90CC @ =gUnknown_202063C
@@ -47257,7 +47257,7 @@ _080B90D8:
 _080B90DA:
 	strh r4, [r0]
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -47320,7 +47320,7 @@ sub_80B912C: @ 80B912C
 _080B914C: .4byte gUnknown_3005090
 _080B9150:
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -47362,7 +47362,7 @@ _080B9150:
 _080B91A0: .4byte gUnknown_202063C
 _080B91A4:
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B91AA:
 	pop {r4,r5}
 	pop {r0}
@@ -47400,7 +47400,7 @@ _080B91DC:
 	.4byte _080B92AC
 _080B91F0:
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -47490,7 +47490,7 @@ _080B92A4: .4byte gUnknown_202063C
 _080B92A8: .4byte gUnknown_2039600
 _080B92AC:
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B92B2:
 	pop {r4}
 	pop {r0}
@@ -47672,12 +47672,12 @@ _080B93FC: .4byte sub_80B9400
 sub_80B9400: @ 80B9400
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8075094
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B9414
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B9414:
 	pop {r4}
 	pop {r0}
@@ -47735,9 +47735,9 @@ _080B943A:
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r6, 0x4]
-	ldr r1, _080B94AC @ =sub_8072740
+	ldr r1, _080B94AC @ =DestroyAnimSprite
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldrh r0, [r4, 0x4]
 	strh r0, [r6, 0x2E]
 	ldr r0, _080B94B0 @ =sub_8074C44
@@ -47751,7 +47751,7 @@ _080B949C: .4byte 0x0000fff0
 _080B94A0: .4byte gUnknown_2037F02
 _080B94A4: .4byte 0x000003ff
 _080B94A8: .4byte 0xfffffc00
-_080B94AC: .4byte sub_8072740
+_080B94AC: .4byte DestroyAnimSprite
 _080B94B0: .4byte sub_8074C44
 	thumb_func_end sub_80B941C
 
@@ -47840,14 +47840,14 @@ _080B9548:
 _080B9554: .4byte gUnknown_2023D44
 _080B9558:
 	ldrb r0, [r6]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1A]
 	cmp r0, 0xFF
 	bne _080B9570
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080B9578
 _080B9570:
 	movs r0, 0x1
@@ -47991,7 +47991,7 @@ _080B9668:
 	ldrh r0, [r3, 0x22]
 	strh r0, [r1]
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B9674:
 	pop {r0}
 	bx r0
@@ -48112,7 +48112,7 @@ _080B972C:
 	blt _080B972C
 _080B9750:
 	adds r0, r3, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B9756:
 	pop {r4-r7}
 	pop {r0}
@@ -48203,7 +48203,7 @@ sub_80B97D8: @ 80B97D8
 _080B97EC:
 	strh r2, [r3, 0x1E]
 	adds r0, r1, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -48242,7 +48242,7 @@ _080B9822:
 _080B9832:
 	ldr r0, _080B9894 @ =sub_80B98A8
 	ldrb r1, [r6, 0x2]
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
@@ -48279,7 +48279,7 @@ _080B9832:
 	ldrh r0, [r6, 0x4]
 	strh r0, [r4, 0xE]
 	adds r0, r7, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -48315,7 +48315,7 @@ sub_80B98A8: @ 80B98A8
 	ldr r0, _080B98E4 @ =gUnknown_2022982
 	strh r1, [r0]
 	adds r0, r3, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080B98F4
 	.align 2, 0
 _080B98D8: .4byte gUnknown_3005090
@@ -48355,7 +48355,7 @@ sub_80B9904: @ 80B9904
 	strh r0, [r4, 0x2E]
 	ldr r0, _080B9940 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -48375,7 +48375,7 @@ _080B9944:
 	strh r1, [r4, 0x36]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _080B9952:
 	ldr r0, _080B9968 @ =gUnknown_2037F02
 	ldrh r0, [r0, 0x8]
@@ -48399,12 +48399,12 @@ sub_80B9970: @ 80B9970
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x1E
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r2, 0x2E
 	ldrsh r0, [r4, r2]
 	movs r1, 0xA
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x2E]
 	cmp r0, 0x7F
@@ -48439,7 +48439,7 @@ _080B99AA:
 	cmp r0, r1
 	bne _080B99CE
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B99CE:
 	pop {r4}
 	pop {r0}
@@ -48461,7 +48461,7 @@ sub_80B99D4: @ 80B99D4
 	ldrb r3, [r4, 0x6]
 	ldrh r4, [r4, 0x8]
 	str r4, [sp]
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	adds r2, r5, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]
@@ -48529,7 +48529,7 @@ sub_80B9A5C: @ 80B9A5C
 	cmp r0, 0
 	bne _080B9A72
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B9A72:
 	pop {r0}
 	bx r0
@@ -48562,7 +48562,7 @@ sub_80B9A7C: @ 80B9A7C
 	bl sub_80B9A14
 	ldrb r1, [r4, 0x8]
 	ldrh r2, [r4, 0x6]
-	bl sub_80714D4
+	bl BlendPalettes
 	adds r2, r5, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]
@@ -48624,7 +48624,7 @@ _080B9B08:
 	lsrs r1, 24
 	ldrh r2, [r4, 0x34]
 	adds r0, r3, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	b _080B9B3C
 _080B9B2E:
 	ldrh r1, [r4, 0x3A]
@@ -48632,7 +48632,7 @@ _080B9B2E:
 	lsrs r1, 24
 	ldrh r2, [r4, 0x38]
 	adds r0, r3, 0
-	bl sub_80714D4
+	bl BlendPalettes
 _080B9B3C:
 	ldrh r0, [r4, 0x30]
 	movs r2, 0x80
@@ -48667,9 +48667,9 @@ sub_80B9B5C: @ 80B9B5C
 	bl sub_80B9A14
 	movs r1, 0
 	movs r2, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	adds r0, r4, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080B9B82:
 	pop {r4}
 	pop {r0}
@@ -48702,9 +48702,9 @@ sub_80B9B8C: @ 80B9B8C
 	movs r0, 0x70
 	strh r0, [r4, 0x36]
 	strh r2, [r4, 0x38]
-	ldr r1, _080B9BD4 @ =sub_8074EE0
+	ldr r1, _080B9BD4 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r1, _080B9BD8 @ =sub_8074AE0
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -48714,7 +48714,7 @@ sub_80B9B8C: @ 80B9B8C
 	bx r0
 	.align 2, 0
 _080B9BD0: .4byte gUnknown_2037F02
-_080B9BD4: .4byte sub_8074EE0
+_080B9BD4: .4byte move_anim_8074EE0
 _080B9BD8: .4byte sub_8074AE0
 	thumb_func_end sub_80B9B8C
 
@@ -48784,7 +48784,7 @@ sub_80B9C2C: @ 80B9C2C
 	str r2, [sp]
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldrh r0, [r4, 0xC]
 	subs r0, 0x1
 	strh r0, [r4, 0xC]
@@ -48851,7 +48851,7 @@ _080B9CD0:
 	b _080B9CDE
 _080B9CD8:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B9CDE:
 	pop {r4-r6}
 	pop {r0}
@@ -48979,7 +48979,7 @@ sub_80B9DA0: @ 80B9DA0
 	ldrh r2, [r4, 0x12]
 	str r2, [sp]
 	adds r2, r5, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldrh r0, [r4, 0xC]
 	subs r0, 0x1
 	strh r0, [r4, 0xC]
@@ -49046,7 +49046,7 @@ _080B9E44:
 	b _080B9E52
 _080B9E4C:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B9E52:
 	pop {r4-r6}
 	pop {r0}
@@ -49111,7 +49111,7 @@ sub_80B9EA8: @ 80B9EA8
 	lsls r4, 3
 	adds r4, r1
 	ldrh r0, [r4, 0x8]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -49124,7 +49124,7 @@ sub_80B9EA8: @ 80B9EA8
 	adds r0, r2, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldrh r0, [r4, 0xC]
 	subs r0, 0x1
 	strh r0, [r4, 0xC]
@@ -49191,7 +49191,7 @@ _080B9F58:
 	b _080B9F66
 _080B9F60:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080B9F66:
 	pop {r4-r6}
 	pop {r0}
@@ -49227,7 +49227,7 @@ sub_80B9F6C: @ 80B9F6C
 	ldrh r0, [r5]
 	strh r0, [r4, 0x16]
 	ldrh r0, [r5]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -49239,7 +49239,7 @@ sub_80B9F6C: @ 80B9F6C
 	adds r0, r1, 0
 	movs r1, 0
 	adds r2, r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _080B9FD4 @ =sub_80B9FD8
 	str r0, [r4]
 	add sp, 0x4
@@ -49292,7 +49292,7 @@ _080BA01C: .4byte gUnknown_2037AB8
 _080BA020: .4byte sub_80BA090
 _080BA024:
 	ldrh r0, [r4, 0x16]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -49310,7 +49310,7 @@ _080BA024:
 	adds r0, r2, 0
 	movs r1, 0
 	adds r2, r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	b _080BA062
 _080BA052:
 	ldrb r3, [r4, 0x14]
@@ -49319,7 +49319,7 @@ _080BA052:
 	adds r0, r2, 0
 	movs r1, 0
 	adds r2, r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _080BA062:
 	ldr r0, _080BA08C @ =gUnknown_3005090
 	lsls r1, r5, 2
@@ -49367,7 +49367,7 @@ sub_80BA090: @ 80BA090
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x16]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -49378,9 +49378,9 @@ sub_80BA090: @ 80BA090
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080BA0D6:
 	add sp, 0x4
 	pop {r4,r5}
@@ -49443,9 +49443,9 @@ _080BA134:
 	orrs r2, r0
 _080BA146:
 	adds r0, r2, 0
-	bl sub_8070CCC
+	bl InvertPlttBuffer
 	mov r0, r8
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -49528,7 +49528,7 @@ _080BA1D0:
 	adds r0, r2
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x2]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r6, 0
@@ -49565,7 +49565,7 @@ _080BA228:
 	movs r3, 0x16
 	ldrsb r3, [r4, r3]
 	adds r0, r5, 0
-	bl sub_8070D14
+	bl TintPlttBuffer
 	movs r2, 0x8
 	ldrsh r1, [r4, r2]
 	movs r2, 0xA
@@ -49573,9 +49573,9 @@ _080BA228:
 	cmp r1, r0
 	bne _080BA252
 	adds r0, r5, 0
-	bl sub_8070DE8
+	bl UnfadePlttBuffer
 	mov r0, r8
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080BA252:
 	pop {r3-r5}
 	mov r8, r3
@@ -49642,14 +49642,14 @@ _080BA2CC:
 	ldr r1, _080BA2D8 @ =gUnknown_2021BC8
 _080BA2CE:
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	b _080BA2E4
 	.align 2, 0
 _080BA2D8: .4byte gUnknown_2021BC8
 _080BA2DC:
 	ldr r1, _080BA314 @ =gUnknown_2021BCA
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 _080BA2E4:
 	movs r0, 0x3A
 	ldrsh r1, [r4, r0]
@@ -49761,7 +49761,7 @@ _080BA392:
 	bcc _080BA392
 _080BA3B4:
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080BA3BA:
 	pop {r4-r7}
 	pop {r0}
@@ -49971,7 +49971,7 @@ _080BA530:
 	strh r1, [r6]
 	strh r1, [r2]
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080BA55A
 _080BA556:
 	subs r0, r2, 0x1
@@ -49988,7 +49988,7 @@ sub_80BA560: @ 80BA560
 	adds r5, r0, 0
 	ldr r4, _080BA580 @ =gUnknown_2037F02
 	ldrb r1, [r4, 0x6]
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -50006,15 +50006,15 @@ _080BA584:
 _080BA58C:
 	ldr r0, _080BA5A0 @ =sub_8074F50
 	str r0, [r5, 0x1C]
-	ldr r1, _080BA5A4 @ =sub_8072740
+	ldr r1, _080BA5A4 @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080BA5A0: .4byte sub_8074F50
-_080BA5A4: .4byte sub_8072740
+_080BA5A4: .4byte DestroyAnimSprite
 	thumb_func_end sub_80BA560
 
 	thumb_func_start sub_80BA5A8
@@ -50023,7 +50023,7 @@ sub_80BA5A8: @ 80BA5A8
 	adds r5, r0, 0
 	ldr r4, _080BA5C8 @ =gUnknown_2037F02
 	ldrb r1, [r4, 0x6]
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -50046,7 +50046,7 @@ _080BA5D4:
 	str r0, [r5, 0x1C]
 	ldr r1, _080BA5F4 @ =sub_80B1D3C
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -50062,7 +50062,7 @@ sub_80BA5F8: @ 80BA5F8
 	adds r4, r0, 0
 	ldr r0, _080BA628 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BA61C
@@ -50096,14 +50096,14 @@ sub_80BA630: @ 80BA630
 	negs r0, r0
 	cmp r1, r0
 	bne _080BA64C
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	strh r1, [r5, 0x2]
 _080BA64C:
 	ldrb r1, [r5, 0x2]
 	adds r0, r4, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r1, 0
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
@@ -50119,7 +50119,7 @@ _080BA66C:
 	movs r1, 0
 	bl sub_8075114
 _080BA674:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x30
@@ -50129,7 +50129,7 @@ _080BA674:
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x18
@@ -50139,9 +50139,9 @@ _080BA674:
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
-	ldr r1, _080BA6C0 @ =sub_8074EE0
+	ldr r1, _080BA6C0 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080BA6C4 @ =sub_8074F50
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -50150,7 +50150,7 @@ _080BA674:
 	.align 2, 0
 _080BA6B8: .4byte 0x0000ffe8
 _080BA6BC: .4byte 0x0000fff4
-_080BA6C0: .4byte sub_8074EE0
+_080BA6C0: .4byte move_anim_8074EE0
 _080BA6C4: .4byte sub_8074F50
 	thumb_func_end sub_80BA630
 
@@ -50160,7 +50160,7 @@ sub_80BA6C8: @ 80BA6C8
 	adds r4, r0, 0
 	ldr r5, _080BA728 @ =gUnknown_2037F02
 	ldrb r0, [r5]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
@@ -50191,10 +50191,10 @@ sub_80BA6C8: @ 80BA6C8
 	strh r0, [r4, 0x26]
 	ldrb r1, [r5, 0x6]
 	adds r0, r4, 0
-	bl sub_800843C
-	ldr r1, _080BA730 @ =sub_8074EE0
+	bl StartSpriteAffineAnim
+	ldr r1, _080BA730 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080BA734 @ =sub_8074F50
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -50203,7 +50203,7 @@ sub_80BA6C8: @ 80BA6C8
 	.align 2, 0
 _080BA728: .4byte gUnknown_2037F02
 _080BA72C: .4byte gUnknown_202063C
-_080BA730: .4byte sub_8074EE0
+_080BA730: .4byte move_anim_8074EE0
 _080BA734: .4byte sub_8074F50
 	thumb_func_end sub_80BA6C8
 
@@ -50230,9 +50230,9 @@ _080BA75C:
 	ldr r0, _080BA774 @ =gUnknown_2037F02
 	ldrh r0, [r0, 0x6]
 	strh r0, [r4, 0x2E]
-	ldr r1, _080BA778 @ =sub_8072740
+	ldr r1, _080BA778 @ =DestroyAnimSprite
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _080BA77C @ =sub_8074C44
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -50240,7 +50240,7 @@ _080BA75C:
 	bx r0
 	.align 2, 0
 _080BA774: .4byte gUnknown_2037F02
-_080BA778: .4byte sub_8072740
+_080BA778: .4byte DestroyAnimSprite
 _080BA77C: .4byte sub_8074C44
 	thumb_func_end sub_80BA738
 
@@ -50250,7 +50250,7 @@ sub_80BA780: @ 80BA780
 	adds r5, r0, 0
 	ldr r4, _080BA7A0 @ =gUnknown_2037F02
 	ldrb r1, [r4, 0x6]
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -50302,7 +50302,7 @@ sub_80BA7BC: @ 80BA7BC
 	cmp r0, 0xC
 	ble _080BA7F2
 	adds r0, r3, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 _080BA7F2:
 	pop {r0}
 	bx r0
@@ -50585,7 +50585,7 @@ sub_80BAA20: @ 80BAA20
 	lsrs r4, 24
 	ldr r0, _080BAA48 @ =gUnknown_2037F02
 	ldrh r0, [r0]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -50678,7 +50678,7 @@ _080BAAD0:
 	ldrh r3, [r5, 0x12]
 	adds r0, r6, 0
 	movs r1, 0x10
-	bl sub_8045274
+	bl BlendPalette
 _080BAAE4:
 	adds r0, r6, 0
 	adds r0, 0x10
@@ -50713,7 +50713,7 @@ _080BAB14:
 	b _080BAB2C
 _080BAB1E:
 	adds r0, r7, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080BAB2C
 _080BAB26:
 	mov r0, r8
@@ -50742,7 +50742,7 @@ sub_80BAB38: @ 80BAB38
 	ldrb r3, [r4, 0x6]
 	ldrb r4, [r4, 0x8]
 	str r4, [sp]
-	bl sub_8071264
+	bl BeginHardwarePaletteFade
 	ldr r1, _080BAB70 @ =gUnknown_3005090
 	lsls r0, r5, 2
 	adds r0, r5
@@ -50772,7 +50772,7 @@ sub_80BAB78: @ 80BAB78
 	cmp r0, 0
 	bne _080BAB90
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080BAB90:
 	pop {r0}
 	bx r0
@@ -50837,7 +50837,7 @@ sub_80BABD0: @ 80BABD0
 _080BABFC: .4byte gUnknown_3005090
 _080BAC00:
 	ldrb r0, [r4, 0x8]
-	bl sub_8075FBC
+	bl duplicate_obj_of_side_rel2move_in_transparent_mode
 	strh r0, [r4, 0x14]
 	lsls r0, 16
 	cmp r0, 0
@@ -50915,7 +50915,7 @@ _080BAC94:
 	cmp r0, 0
 	bne _080BACA2
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080BACA2:
 	pop {r4-r6}
 	pop {r0}
@@ -50951,7 +50951,7 @@ _080BACBC:
 	subs r0, 0x1
 	strh r0, [r1]
 	adds r0, r4, 0
-	bl sub_8076030
+	bl obj_delete_but_dont_free_vram
 _080BACE0:
 	pop {r4}
 	pop {r0}
@@ -50977,22 +50977,22 @@ sub_80BACEC: @ 80BACEC
 	strh r7, [r0]
 	ldr r1, _080BAE28 @ =0x00003f3f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080BAE2C @ =0x00003f3d
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 8
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	ldr r1, _080BAE30 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080BAE34 @ =0x00000c08
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0xA
-	bl sub_8000AC4
+	bl GetGpuReg
 	add r4, sp, 0x10
 	strh r0, [r4]
 	ldrb r1, [r4]
@@ -51009,7 +51009,7 @@ sub_80BACEC: @ 80BACEC
 	strb r0, [r2]
 	ldrh r1, [r4]
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -51023,7 +51023,7 @@ sub_80BACEC: @ 80BACEC
 	strb r0, [r4]
 	ldrh r1, [r4]
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 _080BAD7A:
 	bl sub_8075290
 	lsls r0, 24
@@ -51035,13 +51035,13 @@ _080BAD7A:
 	bne _080BADFE
 	ldr r5, _080BAE38 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080BADAA
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BADFE
@@ -51084,12 +51084,12 @@ _080BADAA:
 	strb r0, [r4]
 	ldrh r1, [r4]
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r7, 0x1
 _080BADFE:
 	ldr r4, _080BAE38 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BAE4C
@@ -51126,11 +51126,11 @@ _080BAE4C:
 _080BAE5C:
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
@@ -51170,7 +51170,7 @@ _080BAEAC:
 	lsls r1, 4
 	adds r1, 0x1
 	movs r2, 0x2
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r2, _080BAF24 @ =gUnknown_2022978
 	ldr r0, _080BAF28 @ =gUnknown_202063C
 	lsls r1, r5, 4
@@ -51266,16 +51266,16 @@ sub_80BAF38: @ 80BAF38
 	ldr r4, _080BB078 @ =0x00003f3f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BAFCA
 	movs r0, 0xA
-	bl sub_8000AC4
+	bl GetGpuReg
 	add r1, sp, 0x10
 	strh r0, [r1]
 	ldrb r2, [r1]
@@ -51285,10 +51285,10 @@ sub_80BAF38: @ 80BAF38
 	strb r0, [r1]
 	ldrh r1, [r1]
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 _080BAFCA:
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r1, r0, 0
 	movs r2, 0x80
 	lsls r2, 8
@@ -51297,15 +51297,15 @@ _080BAFCA:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	ldr r4, _080BB07C @ =gUnknown_202063C
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]
@@ -51313,7 +51313,7 @@ _080BAFCA:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	mov r0, sp
 	bl sub_80752A0
 	mov r0, sp
@@ -51350,7 +51350,7 @@ _080BB050:
 	mov r2, r8
 	strh r2, [r7]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080BB05A:
 	add sp, 0x14
 	pop {r3}
@@ -51376,7 +51376,7 @@ sub_80BB088: @ 80BB088
 	lsrs r5, r0, 24
 	ldr r4, _080BB0C8 @ =gUnknown_20399B4
 	movs r0, 0x18
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	movs r2, 0
 	ldr r3, _080BB0CC @ =gUnknown_2037F02
@@ -51463,29 +51463,29 @@ _080BB130:
 	strh r1, [r0]
 	ldr r1, _080BB240 @ =0x00003f3f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080BB244 @ =0x00003f3d
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 8
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	ldr r1, _080BB248 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -51493,7 +51493,7 @@ _080BB130:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080BB18E:
 	bl sub_8075290
 	lsls r0, 24
@@ -51506,14 +51506,14 @@ _080BB18E:
 	cmp r0, 0
 	bne _080BB20A
 	ldrb r0, [r1]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080BB1C0
 	ldr r0, [r4]
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BB20A
@@ -51550,14 +51550,14 @@ _080BB1C0:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 	ldr r0, [r4]
 	strb r5, [r0, 0x2]
 _080BB20A:
 	ldr r4, _080BB234 @ =gUnknown_20399B4
 	ldr r0, [r4]
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB25C
@@ -51596,7 +51596,7 @@ _080BB25C:
 _080BB26E:
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r4]
 	strh r0, [r1, 0x14]
 	ldr r0, _080BB298 @ =gUnknown_3005090
@@ -51751,7 +51751,7 @@ _080BB3B2:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	b _080BB3D2
 	.align 2, 0
 _080BB3C0: .4byte gUnknown_8D2DE1C
@@ -51761,7 +51761,7 @@ _080BB3C4:
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 _080BB3D2:
 	ldr r3, _080BB400 @ =gUnknown_2022978
 	movs r2, 0
@@ -51852,7 +51852,7 @@ _080BB44C:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xE8
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	b _080BB4AC
 	.align 2, 0
 _080BB490: .4byte gUnknown_2023D44
@@ -51865,7 +51865,7 @@ _080BB498:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xEE
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 _080BB4AC:
 	add sp, 0x10
 	pop {r3}
@@ -51928,7 +51928,7 @@ _080BB504:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r2, 0x20
 	ldrsh r1, [r5, r2]
 	movs r2, 0x10
@@ -51970,7 +51970,7 @@ _080BB544:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x20
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
@@ -51991,10 +51991,10 @@ _080BB582:
 	ldr r4, _080BB654 @ =0x00003f3f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
@@ -52002,10 +52002,10 @@ _080BB582:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_80BC1F8
+	bl SetAnimBgAttribute
 _080BB5B2:
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r1, r0, 0
 	movs r2, 0x80
 	lsls r2, 8
@@ -52014,13 +52014,13 @@ _080BB5B2:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
@@ -52028,7 +52028,7 @@ _080BB5B2:
 	lsls r0, 2
 	ldr r4, _080BB658 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	movs r1, 0xC
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
@@ -52039,7 +52039,7 @@ _080BB5B2:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 _080BB606:
 	movs r1, 0x14
 	ldrsh r0, [r5, r1]
@@ -52066,11 +52066,11 @@ _080BB606:
 _080BB632:
 	ldr r4, _080BB65C @ =gUnknown_20399B4
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080BB644:
 	pop {r4-r6}
 	pop {r0}
@@ -52198,7 +52198,7 @@ _080BB72C:
 	ldrb r2, [r4, 0xC]
 	movs r1, 0x10
 	ldr r3, _080BB780 @ =0x0000ffff
-	bl sub_8045274
+	bl BlendPalette
 _080BB746:
 	movs r1, 0x24
 	ldrsh r0, [r4, r1]
@@ -52214,7 +52214,7 @@ _080BB746:
 	ldrb r2, [r4, 0xC]
 	movs r1, 0x10
 	movs r3, 0
-	bl sub_8045274
+	bl BlendPalette
 _080BB766:
 	adds r0, r5, 0x1
 	lsls r0, 16
@@ -52234,7 +52234,7 @@ _080BB778:
 _080BB780: .4byte 0x0000ffff
 _080BB784:
 	adds r0, r2, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080BB78A:
 	pop {r4-r6}
 	pop {r0}
@@ -52338,7 +52338,7 @@ sub_80BB82C: @ 80BB82C
 	bl sub_8075458
 	ldr r0, _080BB894 @ =sub_80BB8A4
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r4, _080BB898 @ =gUnknown_2037F02
@@ -52348,7 +52348,7 @@ sub_80BB82C: @ 80BB82C
 	beq _080BB868
 	ldr r0, _080BB89C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB868
@@ -52375,7 +52375,7 @@ _080BB868:
 	adds r0, 0x1
 	strh r0, [r1, 0x8]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -52436,7 +52436,7 @@ sub_80BB8A4: @ 80BB8A4
 	movs r0, 0x1
 	bl sub_8075458
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080BB90A:
 	pop {r4-r7}
 	pop {r0}
@@ -52456,13 +52456,13 @@ sub_80BB920: @ 80BB920
 	lsrs r4, 24
 	ldr r0, _080BB944 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	ldr r1, _080BB948 @ =gUnknown_2037F02
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r1, 0xE]
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -52479,13 +52479,13 @@ sub_80BB94C: @ 80BB94C
 	lsrs r4, 24
 	ldr r0, _080BB970 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	ldr r1, _080BB974 @ =gUnknown_2037F02
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r1, 0xE]
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -52513,7 +52513,7 @@ sub_80BB978: @ 80BB978
 _080BB994:
 	strh r4, [r5, 0xE]
 	adds r0, r3, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -52568,7 +52568,7 @@ _080BB9F8:
 	cmp r4, 0x3
 	bls _080BB9BA
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -52639,23 +52639,23 @@ _080BBA86:
 	strh r1, [r0]
 	ldr r1, _080BBB28 @ =0x00003f3f
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080BBB2C @ =0x00003f3d
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 8
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	ldr r1, _080BBB30 @ =0x00003f42
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0xA
-	bl sub_8000AC4
+	bl GetGpuReg
 	add r4, sp, 0x10
 	strh r0, [r4]
 	ldrb r1, [r4]
@@ -52687,9 +52687,9 @@ _080BBA86:
 _080BBAFC:
 	ldrh r1, [r4]
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r7, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BBB3C
@@ -52720,7 +52720,7 @@ _080BBB3C:
 _080BBB4A:
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r5, _080BBC18 @ =gUnknown_2023D44
@@ -52771,7 +52771,7 @@ _080BBBA8:
 	lsls r1, 4
 	ldr r0, [sp, 0x5C]
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	ldr r0, _080BBC1C @ =gUnknown_2022978
 	movs r1, 0
 	strh r1, [r0]
@@ -52910,7 +52910,7 @@ _080BBCBE:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x20
 	ldrsh r1, [r5, r0]
 	movs r2, 0x10
@@ -52954,7 +52954,7 @@ _080BBD00:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x20
 	ldrsh r4, [r5, r0]
 	cmp r4, 0
@@ -52968,16 +52968,16 @@ _080BBD00:
 	ldr r4, _080BBDE8 @ =0x00003f3f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_8073788
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BBD7E
 	movs r0, 0xA
-	bl sub_8000AC4
+	bl GetGpuReg
 	mov r1, sp
 	strh r0, [r1]
 	mov r2, sp
@@ -52989,10 +52989,10 @@ _080BBD00:
 	mov r0, sp
 	ldrh r1, [r0]
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 _080BBD7E:
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r1, r0, 0
 	movs r2, 0x80
 	lsls r2, 8
@@ -53001,13 +53001,13 @@ _080BBD7E:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r3, 0x8
 	ldrsh r1, [r5, r3]
 	lsls r0, r1, 4
@@ -53015,7 +53015,7 @@ _080BBD7E:
 	lsls r0, 2
 	ldr r4, _080BBDEC @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	movs r1, 0xC
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
@@ -53026,10 +53026,10 @@ _080BBD7E:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 _080BBDD2:
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080BBDD8:
 	add sp, 0x4
 	pop {r4-r6}
@@ -53051,7 +53051,7 @@ sub_80BBDF0: @ 80BBDF0
 	ldr r1, _080BBE0C @ =gUnknown_2022B50
 	ldrb r1, [r1]
 	strh r1, [r2]
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -53067,7 +53067,7 @@ sub_80BBE10: @ 80BBE10
 	lsrs r4, 24
 	movs r0, 0x80
 	lsls r0, 6
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r1, _080BBE38 @ =gUnknown_202401C
 	ldr r1, [r1]
 	movs r2, 0xBE
@@ -53075,7 +53075,7 @@ sub_80BBE10: @ 80BBE10
 	adds r1, r2
 	str r0, [r1]
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -53095,13 +53095,13 @@ sub_80BBE3C: @ 80BBE3C
 	lsls r5, 1
 	adds r0, r5
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r6]
 	adds r0, r5
 	movs r1, 0
 	str r1, [r0]
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -53178,7 +53178,7 @@ _080BBEC8:
 	movs r2, 0x20
 	bl memcpy
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -53259,7 +53259,7 @@ _080BBF64:
 	movs r2, 0x20
 	bl memcpy
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -53331,7 +53331,7 @@ _080BC000:
 	movs r2, 0x20
 	bl memcpy
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -53363,7 +53363,7 @@ _080BC04C:
 	strh r1, [r0, 0xE]
 _080BC050:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -53384,7 +53384,7 @@ sub_80BC060: @ 80BC060
 	ldr r1, _080BC08C @ =gUnknown_2023D6E
 	ldrb r1, [r1]
 	strb r1, [r2]
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -53401,11 +53401,11 @@ sub_80BC090: @ 80BC090
 	lsrs r5, r0, 24
 	ldr r0, _080BC0B8 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r0, _080BC0BC @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -53423,7 +53423,7 @@ _080BC0C4:
 _080BC0C8:
 	strh r0, [r1, 0xE]
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -53440,7 +53440,7 @@ sub_80BC0DC: @ 80BC0DC
 	ldr r1, _080BC0F8 @ =gUnknown_2023D6C
 	ldrb r1, [r1]
 	strb r1, [r2]
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -53461,7 +53461,7 @@ sub_80BC0FC: @ 80BC0FC
 	ldr r1, _080BC128 @ =gUnknown_2023D6E
 	ldrb r1, [r1]
 	strb r1, [r2]
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -53481,7 +53481,7 @@ sub_80BC12C: @ 80BC12C
 	cmp r0, 0
 	beq _080BC144
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080BC180
 _080BC144:
 	ldr r0, _080BC188 @ =gUnknown_3005090
@@ -53560,7 +53560,7 @@ sub_80BC19C: @ 80BC19C
 	orrs r0, r1
 	strb r0, [r3]
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080BC1E0:
 	pop {r4}
 	pop {r0}
@@ -53572,8 +53572,8 @@ _080BC1F0: .4byte gUnknown_2037F1A
 _080BC1F4: .4byte gUnknown_3005090
 	thumb_func_end sub_80BC19C
 
-	thumb_func_start sub_80BC1F8
-sub_80BC1F8: @ 80BC1F8
+	thumb_func_start SetAnimBgAttribute
+SetAnimBgAttribute: @ 80BC1F8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -53588,7 +53588,7 @@ _080BC20C:
 	ldr r0, _080BC228 @ =gUnknown_83E7CCA
 	adds r0, r6, r0
 	ldrb r0, [r0]
-	bl sub_8000AC4
+	bl GetGpuReg
 	ldr r1, _080BC22C @ =gUnknown_20399B8
 	strh r0, [r1]
 	cmp r5, 0x6
@@ -53702,7 +53702,7 @@ _080BC2F0:
 	ldrb r0, [r0]
 	ldr r1, _080BC304 @ =gUnknown_20399B8
 	ldrh r1, [r1]
-	bl sub_8000A38
+	bl SetGpuReg
 _080BC2FE:
 	pop {r4-r6}
 	pop {r0}
@@ -53710,7 +53710,7 @@ _080BC2FE:
 	.align 2, 0
 _080BC304: .4byte gUnknown_20399B8
 _080BC308: .4byte gUnknown_83E7CCA
-	thumb_func_end sub_80BC1F8
+	thumb_func_end SetAnimBgAttribute
 
 	thumb_func_start sub_80BC30C
 sub_80BC30C: @ 80BC30C
@@ -53725,7 +53725,7 @@ sub_80BC30C: @ 80BC30C
 	ldr r0, _080BC338 @ =gUnknown_83E7CCE
 	adds r0, r2, r0
 	ldrb r0, [r0]
-	bl sub_8000AC4
+	bl GetGpuReg
 	mov r1, sp
 	strh r0, [r1]
 	cmp r4, 0x6
@@ -53818,11 +53818,11 @@ _080BC3C0:
 	cmp r0, 0x2
 	beq _080BC3E0
 	movs r4, 0x3
-	ldr r0, _080BC3DC @ =sub_80BC6C8
+	ldr r0, _080BC3DC @ =task00_battle_intro_80BC6C8
 	b _080BC3E8
 	.align 2, 0
 _080BC3D8: .4byte gUnknown_81E9F10
-_080BC3DC: .4byte sub_80BC6C8
+_080BC3DC: .4byte task00_battle_intro_80BC6C8
 _080BC3E0:
 	ldr r1, _080BC414 @ =gUnknown_83E7CD4
 	lsls r0, r4, 2
@@ -53830,7 +53830,7 @@ _080BC3E0:
 	ldr r0, [r0]
 _080BC3E8:
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, _080BC418 @ =gUnknown_3005090
@@ -53859,7 +53859,7 @@ sub_80BC41C: @ 80BC41C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _080BC468 @ =gUnknown_2022978
 	movs r1, 0
 	strh r1, [r0]
@@ -53871,20 +53871,20 @@ sub_80BC41C: @ 80BC41C
 	strh r1, [r0]
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _080BC478 @ =0x00003f3f
 	movs r0, 0x48
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -53896,8 +53896,8 @@ _080BC474: .4byte gUnknown_202297E
 _080BC478: .4byte 0x00003f3f
 	thumb_func_end sub_80BC41C
 
-	thumb_func_start sub_80BC47C
-sub_80BC47C: @ 80BC47C
+	thumb_func_start task_battle_intro_80BC47C
+task_battle_intro_80BC47C: @ 80BC47C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -53983,7 +53983,7 @@ _080BC51C:
 	strh r0, [r1, 0x8]
 	movs r0, 0x48
 	movs r1, 0x3F
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080BC6BA
 _080BC52C:
 	ldr r1, _080BC568 @ =gUnknown_2022986
@@ -54150,19 +54150,19 @@ _080BC63A:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r1, 0x9C
 	lsls r1, 8
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xBC
 	lsls r1, 7
 	movs r0, 0xC
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080BC6BA
 	.align 2, 0
 _080BC690: .4byte gUnknown_202297A
@@ -54185,10 +54185,10 @@ _080BC6BA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80BC47C
+	thumb_func_end task_battle_intro_80BC47C
 
-	thumb_func_start sub_80BC6C8
-sub_80BC6C8: @ 80BC6C8
+	thumb_func_start task00_battle_intro_80BC6C8
+task00_battle_intro_80BC6C8: @ 80BC6C8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -54240,7 +54240,7 @@ _080BC710:
 	bne _080BC774
 	ldr r7, _080BC750 @ =gUnknown_202297A
 	ldrh r0, [r4, 0x14]
-	bl sub_8044EB0
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -54347,7 +54347,7 @@ _080BC7F2:
 	strh r0, [r1, 0x8]
 	movs r0, 0x48
 	movs r1, 0x3F
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080BC9AA
 	.align 2, 0
 _080BC804: .4byte gUnknown_3005090
@@ -54406,13 +54406,13 @@ _080BC858:
 	bne _080BC8B8
 	ldr r1, _080BC894 @ =0x00001842
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0xF
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080BC8B8
 	.align 2, 0
 _080BC890: .4byte gUnknown_3005090
@@ -54524,19 +54524,19 @@ _080BC934:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r1, 0x9C
 	lsls r1, 8
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xBC
 	lsls r1, 7
 	movs r0, 0xC
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080BC9AA
 	.align 2, 0
 _080BC988: .4byte gUnknown_2022986
@@ -54560,7 +54560,7 @@ _080BC9AA:
 	beq _080BC9C2
 	ldrh r1, [r1, 0x10]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 _080BC9C2:
 	add sp, 0x4
 	pop {r3}
@@ -54570,10 +54570,10 @@ _080BC9C2:
 	bx r0
 	.align 2, 0
 _080BC9D0: .4byte gUnknown_3005090
-	thumb_func_end sub_80BC6C8
+	thumb_func_end task00_battle_intro_80BC6C8
 
-	thumb_func_start sub_80BC9D4
-sub_80BC9D4: @ 80BC9D4
+	thumb_func_start task_battle_intro_anim
+task_battle_intro_anim: @ 80BC9D4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -54615,14 +54615,14 @@ _080BCA14:
 _080BCA28:
 	ldr r1, _080BCA60 @ =0x00001842
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _080BCA64 @ =0x00000808
 	movs r0, 0x52
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080BCA68 @ =gUnknown_3005090
 	lsls r0, r5, 2
 	adds r0, r5
@@ -54669,7 +54669,7 @@ _080BCA94:
 	strh r0, [r1, 0x8]
 	movs r0, 0x48
 	movs r1, 0x3F
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080BCC22
 	.align 2, 0
 _080BCAA4: .4byte gUnknown_3005090
@@ -54832,19 +54832,19 @@ _080BCBAA:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r1, 0x9C
 	lsls r1, 8
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xBC
 	lsls r1, 7
 	movs r0, 0xC
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080BCC22
 	.align 2, 0
 _080BCC00: .4byte gUnknown_2022986
@@ -54869,7 +54869,7 @@ _080BCC22:
 	beq _080BCC3C
 	ldrh r1, [r1, 0x10]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 _080BCC3C:
 	add sp, 0x4
 	pop {r3}
@@ -54879,7 +54879,7 @@ _080BCC3C:
 	bx r0
 	.align 2, 0
 _080BCC48: .4byte gUnknown_3005090
-	thumb_func_end sub_80BC9D4
+	thumb_func_end task_battle_intro_anim
 
 	thumb_func_start sub_80BCC4C
 sub_80BCC4C: @ 80BCC4C
@@ -55051,10 +55051,10 @@ _080BCD34:
 	str r6, [r0]
 	movs r0, 0x48
 	movs r1, 0x3F
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080BCDC0 @ =0x00003f06
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080BCEE6
 	.align 2, 0
 _080BCDB4: .4byte gUnknown_202063C
@@ -55180,19 +55180,19 @@ _080BCE84:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r1, 0x9C
 	lsls r1, 8
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xBC
 	lsls r1, 7
 	movs r0, 0xC
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080BCEE6
 	.align 2, 0
 _080BCECC: .4byte gUnknown_2022986
@@ -55242,7 +55242,7 @@ sub_80BCEF4: @ 80BCEF4
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _080BCFC4 @ =gUnknown_202401C
@@ -55267,7 +55267,7 @@ sub_80BCEF4: @ 80BCEF4
 	lsls r2, 5
 	adds r1, r7, 0
 	adds r3, r5, 0
-	bl sub_80017D0
+	bl LoadBgTiles
 	adds r0, r6, 0
 	adds r0, 0x8
 	cmp r6, r0
@@ -55309,7 +55309,7 @@ _080BCFA0:
 	lsls r2, 4
 	mov r1, r9
 	movs r3, 0
-	bl sub_8001888
+	bl LoadBgTilemap
 	add sp, 0x4
 	pop {r3-r5}
 	mov r8, r3

@@ -99,7 +99,7 @@ _080693EA:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08069402:
 	pop {r4,r5}
 	pop {r0}
@@ -113,7 +113,7 @@ sub_806940C: @ 806940C
 	push {lr}
 	ldr r0, _0806941C @ =sub_8069370
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -124,12 +124,12 @@ _0806941C: .4byte sub_8069370
 sub_8069420: @ 8069420
 	push {lr}
 	ldr r0, _08069438 @ =sub_8069370
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	beq _08069434
-	bl sub_8077508
+	bl DestroyTask
 _08069434:
 	pop {r0}
 	bx r0
@@ -146,7 +146,7 @@ sub_806943C: @ 806943C
 	cmp r0, 0
 	bne _0806945C
 	adds r0, r1, 0
-	bl sub_80694C8
+	bl textbox_fdecode_auto_and_task_add
 	movs r0, 0x2
 	strb r0, [r4]
 	movs r0, 0x1
@@ -161,8 +161,8 @@ _0806945E:
 	bx r1
 	thumb_func_end sub_806943C
 
-	thumb_func_start sub_8069464
-sub_8069464: @ 8069464
+	thumb_func_start ShowFieldAutoScrollMessage
+ShowFieldAutoScrollMessage: @ 8069464
 	push {lr}
 	adds r1, r0, 0
 	ldr r2, _08069480 @ =gUnknown_203709C
@@ -172,7 +172,7 @@ sub_8069464: @ 8069464
 	movs r0, 0x3
 	strb r0, [r2]
 	adds r0, r1, 0
-	bl sub_80694C8
+	bl textbox_fdecode_auto_and_task_add
 	movs r0, 0x1
 	b _08069486
 	.align 2, 0
@@ -182,7 +182,7 @@ _08069484:
 _08069486:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069464
+	thumb_func_end ShowFieldAutoScrollMessage
 
 	thumb_func_start sub_806948C
 sub_806948C: @ 806948C
@@ -190,7 +190,7 @@ sub_806948C: @ 806948C
 	ldr r2, _080694A0 @ =gUnknown_203709C
 	movs r1, 0x3
 	strb r1, [r2]
-	bl sub_80694C8
+	bl textbox_fdecode_auto_and_task_add
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -207,7 +207,7 @@ sub_80694A4: @ 80694A4
 	bne _080694C0
 	movs r0, 0x2
 	strb r0, [r1]
-	bl sub_80694E4
+	bl textbox_auto_and_task_add
 	movs r0, 0x1
 	b _080694C2
 	.align 2, 0
@@ -219,8 +219,8 @@ _080694C2:
 	bx r1
 	thumb_func_end sub_80694A4
 
-	thumb_func_start sub_80694C8
-sub_80694C8: @ 80694C8
+	thumb_func_start textbox_fdecode_auto_and_task_add
+textbox_fdecode_auto_and_task_add: @ 80694C8
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _080694E0 @ =gUnknown_2021D18
@@ -232,20 +232,20 @@ sub_80694C8: @ 80694C8
 	bx r0
 	.align 2, 0
 _080694E0: .4byte gUnknown_2021D18
-	thumb_func_end sub_80694C8
+	thumb_func_end textbox_fdecode_auto_and_task_add
 
-	thumb_func_start sub_80694E4
-sub_80694E4: @ 80694E4
+	thumb_func_start textbox_auto_and_task_add
+textbox_auto_and_task_add: @ 80694E4
 	push {lr}
 	movs r0, 0x1
 	bl sub_80F6D5C
 	bl sub_806940C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80694E4
+	thumb_func_end textbox_auto_and_task_add
 
-	thumb_func_start sub_80694F4
-sub_80694F4: @ 80694F4
+	thumb_func_start HideFieldMessageBox
+HideFieldMessageBox: @ 80694F4
 	push {lr}
 	bl sub_8069420
 	movs r0, 0
@@ -258,19 +258,19 @@ sub_80694F4: @ 80694F4
 	bx r0
 	.align 2, 0
 _0806950C: .4byte gUnknown_203709C
-	thumb_func_end sub_80694F4
+	thumb_func_end HideFieldMessageBox
 
-	thumb_func_start sub_8069510
-sub_8069510: @ 8069510
+	thumb_func_start textbox_any_visible
+textbox_any_visible: @ 8069510
 	ldr r0, _08069518 @ =gUnknown_203709C
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _08069518: .4byte gUnknown_203709C
-	thumb_func_end sub_8069510
+	thumb_func_end textbox_any_visible
 
-	thumb_func_start sub_806951C
-sub_806951C: @ 806951C
+	thumb_func_start IsFieldMessageBoxHidden
+IsFieldMessageBoxHidden: @ 806951C
 	push {lr}
 	ldr r0, _0806952C @ =gUnknown_203709C
 	ldrb r0, [r0]
@@ -285,7 +285,7 @@ _08069530:
 _08069532:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806951C
+	thumb_func_end IsFieldMessageBoxHidden
 
 	thumb_func_start sub_8069538
 sub_8069538: @ 8069538

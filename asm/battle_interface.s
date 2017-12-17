@@ -255,8 +255,8 @@ sub_8047CAC: @ 8047CAC
 	bx r0
 	thumb_func_end sub_8047CAC
 
-	thumb_func_start sub_8047CE0
-sub_8047CE0: @ 8047CE0
+	thumb_func_start CreateBankHealthboxSprites
+CreateBankHealthboxSprites: @ 8047CE0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -273,7 +273,7 @@ sub_8047CE0: @ 8047CE0
 	cmp r0, 0
 	bne _08047DF4
 	mov r0, r10
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08047D78
@@ -282,14 +282,14 @@ sub_8047CE0: @ 8047CE0
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r4, _08047D6C @ =gUnknown_202063C
@@ -332,14 +332,14 @@ _08047D78:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, _08047DE4 @ =gUnknown_202063C
@@ -385,12 +385,12 @@ _08047DEC: .4byte 0xfffffc00
 _08047DF0: .4byte sub_8048128
 _08047DF4:
 	mov r0, r10
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08047E98
 	mov r0, r10
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -402,11 +402,11 @@ _08047DF4:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r10
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -417,7 +417,7 @@ _08047DF4:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r4, _08047E88 @ =gUnknown_202063C
@@ -459,7 +459,7 @@ _08047E90: .4byte 0xfffffc00
 _08047E94: .4byte sub_8048128
 _08047E98:
 	mov r0, r10
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -471,11 +471,11 @@ _08047E98:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r10
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -486,7 +486,7 @@ _08047E98:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r4, _08047FE4 @ =gUnknown_202063C
@@ -533,7 +533,7 @@ _08047F1C:
 	movs r1, 0x8C
 	movs r2, 0x3C
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -544,14 +544,14 @@ _08047F1C:
 	mov r8, r1
 	add r4, r8
 	mov r0, r10
-	bl sub_80751C4
+	bl GetBankSide
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 21
 	ldr r0, _08047FFC @ =gUnknown_82603C4
 	adds r1, r0
 	adds r0, r4, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 	adds r2, r4, 0
 	adds r2, 0x42
 	ldrb r1, [r2]
@@ -570,7 +570,7 @@ _08047F1C:
 	orrs r0, r1
 	strb r0, [r4, 0x5]
 	movs r0, 0x1
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	ldrh r1, [r4, 0x4]
 	lsls r1, 22
 	lsrs r1, 17
@@ -626,10 +626,10 @@ _08047FF8: .4byte gUnknown_82602F8
 _08047FFC: .4byte gUnknown_82603C4
 _08048000: .4byte 0x06010000
 _08048004: .4byte 0x04000010
-	thumb_func_end sub_8047CE0
+	thumb_func_end CreateBankHealthboxSprites
 
-	thumb_func_start sub_8048008
-sub_8048008: @ 8048008
+	thumb_func_start CreateSafariPlayerHealthboxSprites
+CreateSafariPlayerHealthboxSprites: @ 8048008
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -639,7 +639,7 @@ sub_8048008: @ 8048008
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006F8C
+	bl CreateSprite
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -647,7 +647,7 @@ sub_8048008: @ 8048008
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08048098 @ =gUnknown_202063C
@@ -703,10 +703,10 @@ _08048098: .4byte gUnknown_202063C
 _0804809C: .4byte 0x000003ff
 _080480A0: .4byte 0xfffffc00
 _080480A4: .4byte sub_8048128
-	thumb_func_end sub_8048008
+	thumb_func_end CreateSafariPlayerHealthboxSprites
 
-	thumb_func_start sub_80480A8
-sub_80480A8: @ 80480A8
+	thumb_func_start GetHealthboxElementGfxPtr
+GetHealthboxElementGfxPtr: @ 80480A8
 	lsls r0, 24
 	lsrs r0, 19
 	ldr r1, _080480B4 @ =gUnknown_8D11BC4
@@ -714,7 +714,7 @@ sub_80480A8: @ 80480A8
 	bx lr
 	.align 2, 0
 _080480B4: .4byte gUnknown_8D11BC4
-	thumb_func_end sub_80480A8
+	thumb_func_end GetHealthboxElementGfxPtr
 
 	thumb_func_start sub_80480B8
 sub_80480B8: @ 80480B8
@@ -802,8 +802,8 @@ sub_8048128: @ 8048128
 _0804814C: .4byte gUnknown_202063C
 	thumb_func_end sub_8048128
 
-	thumb_func_start sub_8048150
-sub_8048150: @ 8048150
+	thumb_func_start SetBattleBarStruct
+SetBattleBarStruct: @ 8048150
 	push {r4-r7,lr}
 	ldr r7, [sp, 0x14]
 	lsls r0, 24
@@ -830,10 +830,10 @@ sub_8048150: @ 8048150
 	.align 2, 0
 _08048180: .4byte gUnknown_2024018
 _08048184: .4byte 0xffff8000
-	thumb_func_end sub_8048150
+	thumb_func_end SetBattleBarStruct
 
-	thumb_func_start sub_8048188
-sub_8048188: @ 8048188
+	thumb_func_start SetHealthboxSpriteInvisible
+SetHealthboxSpriteInvisible: @ 8048188
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -872,10 +872,10 @@ sub_8048188: @ 8048188
 	bx r0
 	.align 2, 0
 _080481D0: .4byte gUnknown_202063C
-	thumb_func_end sub_8048188
+	thumb_func_end SetHealthboxSpriteInvisible
 
-	thumb_func_start sub_80481D4
-sub_80481D4: @ 80481D4
+	thumb_func_start SetHealthboxSpriteVisible
+SetHealthboxSpriteVisible: @ 80481D4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -917,10 +917,10 @@ sub_80481D4: @ 80481D4
 	bx r0
 	.align 2, 0
 _08048224: .4byte gUnknown_202063C
-	thumb_func_end sub_80481D4
+	thumb_func_end SetHealthboxSpriteVisible
 
-	thumb_func_start sub_8048228
-sub_8048228: @ 8048228
+	thumb_func_start UpdateSpritePos
+UpdateSpritePos: @ 8048228
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -936,10 +936,10 @@ sub_8048228: @ 8048228
 	bx r0
 	.align 2, 0
 _08048244: .4byte gUnknown_202063C
-	thumb_func_end sub_8048228
+	thumb_func_end UpdateSpritePos
 
-	thumb_func_start sub_8048248
-sub_8048248: @ 8048248
+	thumb_func_start DestoryHealthboxSprite
+DestoryHealthboxSprite: @ 8048248
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -953,30 +953,30 @@ sub_8048248: @ 8048248
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl sub_8007280
+	bl DestroySprite
 	movs r0, 0x38
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08048284: .4byte gUnknown_202063C
-	thumb_func_end sub_8048248
+	thumb_func_end DestoryHealthboxSprite
 
 	thumb_func_start nullsub_21
 nullsub_21: @ 8048288
 	bx lr
 	thumb_func_end nullsub_21
 
-	thumb_func_start sub_804828C
-sub_804828C: @ 804828C
+	thumb_func_start UpdateOamPriorityInAllHealthboxes
+UpdateOamPriorityInAllHealthboxes: @ 804828C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1049,10 +1049,10 @@ _08048304:
 _08048310: .4byte gUnknown_2023BCC
 _08048314: .4byte gUnknown_202063C
 _08048318: .4byte gUnknown_3004FF0
-	thumb_func_end sub_804828C
+	thumb_func_end UpdateOamPriorityInAllHealthboxes
 
-	thumb_func_start sub_804831C
-sub_804831C: @ 804831C
+	thumb_func_start SetBankHealthboxSpritePos
+SetBankHealthboxSpritePos: @ 804831C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -1063,7 +1063,7 @@ sub_804831C: @ 804831C
 	cmp r0, 0
 	bne _08048348
 	adds r0, r6, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048342
@@ -1076,7 +1076,7 @@ _08048342:
 	b _08048380
 _08048348:
 	adds r0, r6, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1113,16 +1113,16 @@ _08048380:
 	ldrb r0, [r0]
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8048228
+	bl UpdateSpritePos
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08048394: .4byte gUnknown_3004FF0
-	thumb_func_end sub_804831C
+	thumb_func_end SetBankHealthboxSpritePos
 
-	thumb_func_start sub_8048398
-sub_8048398: @ 8048398
+	thumb_func_start UpdateLvlInHealthbox
+UpdateLvlInHealthbox: @ 8048398
 	push {r4-r6,lr}
 	sub sp, 0x14
 	adds r5, r0, 0
@@ -1152,7 +1152,7 @@ sub_8048398: @ 8048398
 	add r3, sp, 0x10
 	mov r0, sp
 	movs r2, 0x3
-	bl sub_804A648
+	bl AddTextPrinterAndCreateWindowOnHealthbox
 	adds r6, r0, 0
 	ldr r0, _08048414 @ =gUnknown_202063C
 	lsls r1, r5, 4
@@ -1165,7 +1165,7 @@ sub_8048398: @ 8048398
 	ldrh r0, [r1, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048420
@@ -1199,7 +1199,7 @@ _08048424:
 	bx r0
 	.align 2, 0
 _0804843C: .4byte 0x06010400
-	thumb_func_end sub_8048398
+	thumb_func_end UpdateLvlInHealthbox
 
 	thumb_func_start sub_8048440
 sub_8048440: @ 8048440
@@ -1226,7 +1226,7 @@ sub_8048440: @ 8048440
 	ldrh r0, [r4, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048514
@@ -1248,7 +1248,7 @@ sub_8048440: @ 8048440
 	add r0, sp, 0x10
 	movs r1, 0
 	movs r2, 0x5
-	bl sub_804A648
+	bl AddTextPrinterAndCreateWindowOnHealthbox
 	adds r5, r0, 0
 	ldrh r0, [r4, 0x4]
 	lsls r0, 22
@@ -1276,7 +1276,7 @@ _080484BC:
 	add r0, sp, 0x10
 	movs r1, 0x4
 	movs r2, 0x5
-	bl sub_804A648
+	bl AddTextPrinterAndCreateWindowOnHealthbox
 	adds r5, r0, 0
 	ldrh r4, [r4, 0x4]
 	lsls r4, 22
@@ -1321,7 +1321,7 @@ _08048514:
 	cmp r0, 0x1
 	beq _0804854C
 	adds r0, r6, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1341,7 +1341,7 @@ _08048564:
 	ldrh r0, [r7, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048580
@@ -1490,7 +1490,7 @@ _0804866A:
 	cmp r2, 0
 	bne _08048698
 	ldr r1, _08048704 @ =gUnknown_8260540
-	bl sub_8008D84
+	bl StringCopy
 _08048698:
 	ldr r0, _08048708 @ =gUnknown_202401C
 	ldr r0, [r0]
@@ -1616,12 +1616,12 @@ _080487A0: .4byte 0x06010000
 _080487A4: .4byte 0x05000008
 _080487A8:
 	mov r0, r10
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080487DC
 	movs r0, 0x74
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	ldr r2, _080487EC @ =gUnknown_202063C
 	mov r3, r9
 	lsls r1, r3, 4
@@ -1678,7 +1678,7 @@ sub_80487F8: @ 80487F8
 	ldrh r0, [r0, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r1, _080488B4 @ =gUnknown_202401C
 	ldr r2, [r1]
 	movs r3, 0xBA
@@ -1697,7 +1697,7 @@ sub_80487F8: @ 80487F8
 	movs r1, 0x5
 	mov r8, r1
 	adds r0, r4, 0
-	bl sub_8042E9C
+	bl GetNature
 	lsls r0, 24
 	mov r4, sp
 	adds r4, 0x16
@@ -1706,7 +1706,7 @@ sub_80487F8: @ 80487F8
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -1766,7 +1766,7 @@ _080488D4:
 _080488D8:
 	movs r0, 0x2B
 _080488DA:
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	lsls r1, r5, 6
 	adds r1, r6, r1
 	ldr r2, _080489F8 @ =0x04000008
@@ -1986,7 +1986,7 @@ _08048A8C:
 	lsls r0, r2, 24
 	lsrs r7, r0, 24
 	adds r0, r7, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1998,7 +1998,7 @@ _08048AA2:
 	cmp r0, 0
 	bne _08048ABA
 	adds r0, r7, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048ABA
@@ -2032,7 +2032,7 @@ _08048ABA:
 	lsls r0, 27
 	lsrs r4, r0, 31
 	adds r0, r7, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048BE8
@@ -2081,7 +2081,7 @@ _08048B16:
 	ldr r1, _08048B9C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -2117,9 +2117,9 @@ _08048BA0:
 	ldr r2, _08048BDC @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0x5
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	movs r0, 0x75
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	ldrb r2, [r6]
 	lsls r1, r2, 4
 	adds r1, r2
@@ -2188,7 +2188,7 @@ _08048C14:
 	ldr r1, _08048C90 @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -2204,7 +2204,7 @@ _08048C14:
 _08048C6E:
 	adds r0, r2
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -2227,7 +2227,7 @@ _08048C94:
 	ldr r4, _08048D04 @ =gUnknown_202402C
 	adds r1, r4
 	movs r2, 0x5
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldr r0, _08048D08 @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x80
@@ -2240,7 +2240,7 @@ _08048C94:
 	muls r1, r5
 	adds r1, r4
 	movs r2, 0x4
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 _08048CCA:
 	ldr r0, _08048D0C @ =gUnknown_3004FF0
 	add r0, r9
@@ -2299,14 +2299,14 @@ sub_8048D14: @ 8048D14
 	str r3, [sp, 0x10]
 	cmp r4, 0
 	beq _08048D44
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _08048D88
 _08048D44:
 	ldr r0, [sp, 0x8]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048D64
@@ -2384,13 +2384,13 @@ _08048DC4:
 	bl sub_800F034
 	ldr r0, _08048E4C @ =gUnknown_826049C
 	adds r0, r4, r0
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	ldr r0, _08048E50 @ =gUnknown_826047C
 	adds r0, r4, r0
-	bl sub_8008928
+	bl LoadSpritePalette
 	ldr r0, _08048E54 @ =gUnknown_826048C
 	adds r0, r4, r0
-	bl sub_8008928
+	bl LoadSpritePalette
 	mov r1, r9
 	adds r0, r1, r7
 	lsls r0, 3
@@ -2401,7 +2401,7 @@ _08048DC4:
 	ldr r3, [sp, 0x24]
 	asrs r2, r3, 16
 	movs r3, 0xA
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x18]
@@ -2413,7 +2413,7 @@ _08048DC4:
 	adds r4, r0, r1
 	ldr r1, _08048E60 @ =gUnknown_82603FC
 	adds r0, r4, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 	mov r0, r8
 	strh r0, [r4, 0x24]
 	strh r5, [r4, 0x2E]
@@ -2467,7 +2467,7 @@ _08048E80:
 	asrs r1, r5, 16
 	asrs r2, 16
 	movs r3, 0x9
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	strb r0, [r4]
 	ldr r0, [sp, 0x10]
 	cmp r0, 0
@@ -2478,7 +2478,7 @@ _08048E80:
 	lsls r1, 2
 	ldr r2, _08048F20 @ =gUnknown_2020658
 	adds r1, r2
-	ldr r0, _08048F24 @ =sub_80496A0
+	ldr r0, _08048F24 @ =SpriteCB_StatusSummaryBallsOnSwitchout
 	str r0, [r1]
 _08048EB0:
 	ldr r5, _08048F14 @ =gUnknown_202063C
@@ -2536,7 +2536,7 @@ _08048F14: .4byte gUnknown_202063C
 _08048F18: .4byte gUnknown_82604EC
 _08048F1C: .4byte 0xfffc0000
 _08048F20: .4byte gUnknown_2020658
-_08048F24: .4byte sub_80496A0
+_08048F24: .4byte SpriteCB_StatusSummaryBallsOnSwitchout
 _08048F28:
 	ldrb r0, [r4]
 	lsls r2, r0, 4
@@ -2588,7 +2588,7 @@ _08048F66:
 	b _08048E80
 _08048F86:
 	ldr r0, [sp, 0x8]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804906E
@@ -2819,7 +2819,7 @@ _0804913E:
 _08049148:
 	ldr r0, _080491A8 @ =nullsub_43
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r2, _080491AC @ =gUnknown_3005090
@@ -2853,7 +2853,7 @@ _08049172:
 	strh r6, [r0, 0x1C]
 	movs r0, 0x6B
 	movs r1, 0
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	adds r0, r4, 0
 	add sp, 0x28
 	pop {r3-r5}
@@ -2905,10 +2905,10 @@ _080491DE:
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _080492C0 @ =gUnknown_3005090
 	ldr r0, [sp, 0xC]
 	add r0, r8
@@ -2966,7 +2966,7 @@ _0804925A:
 _08049268:
 	ldr r0, [sp, 0x8]
 	str r3, [sp, 0x14]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r3, [sp, 0x14]
@@ -3063,7 +3063,7 @@ _08049302:
 	ldr r1, _08049350 @ =sub_8049568
 	str r1, [r3]
 	ldr r1, _08049354 @ =gUnknown_8260404
-	bl sub_8008A58
+	bl SetSubspriteTables
 	ldr r1, _08049358 @ =gUnknown_3005090
 	ldr r0, [sp, 0xC]
 	add r0, r8
@@ -3133,7 +3133,7 @@ sub_8049388: @ 8049388
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 _080493C8:
 	movs r1, 0x26
 	ldrsh r0, [r4, r1]
@@ -3189,14 +3189,14 @@ _08049412:
 	lsls r0, 2
 	ldr r4, _08049460 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	movs r5, 0x1
 _08049442:
 	mov r1, sp
@@ -3206,7 +3206,7 @@ _08049442:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _08049442
@@ -3221,12 +3221,12 @@ _08049464:
 	bne _08049482
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08049482:
 	add sp, 0x8
 	pop {r4-r7}
@@ -3260,7 +3260,7 @@ sub_804948C: @ 804948C
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08049546
 	.align 2, 0
 _080494C4: .4byte gUnknown_3005090
@@ -3288,14 +3288,14 @@ _080494DA:
 	lsls r0, 2
 	ldr r4, _08049524 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	movs r5, 0x1
 _0804950A:
 	mov r1, sp
@@ -3305,7 +3305,7 @@ _0804950A:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _0804950A
@@ -3319,12 +3319,12 @@ _08049528:
 	bne _08049546
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _08049546:
 	add sp, 0x8
 	pop {r4-r7}
@@ -3332,8 +3332,8 @@ _08049546:
 	bx r0
 	thumb_func_end sub_804948C
 
-	thumb_func_start sub_8049550
-sub_8049550: @ 8049550
+	thumb_func_start SpriteCB_StatusSummaryBar
+SpriteCB_StatusSummaryBar: @ 8049550
 	push {lr}
 	adds r1, r0, 0
 	ldrh r2, [r1, 0x24]
@@ -3347,7 +3347,7 @@ sub_8049550: @ 8049550
 _08049564:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8049550
+	thumb_func_end SpriteCB_StatusSummaryBar
 
 	thumb_func_start sub_8049568
 sub_8049568: @ 8049568
@@ -3381,8 +3381,8 @@ _0804958E:
 	bx r0
 	thumb_func_end sub_8049568
 
-	thumb_func_start sub_804959C
-sub_804959C: @ 804959C
+	thumb_func_start SpriteCB_StatusSummaryBallsOnBattleStart
+SpriteCB_StatusSummaryBallsOnBattleStart: @ 804959C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x30]
@@ -3445,13 +3445,13 @@ _08049604:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x6D
-	bl sub_807237C
+	bl PlaySE2WithPanning
 	b _08049622
 _08049618:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x6C
-	bl sub_8072348
+	bl PlaySE1WithPanning
 _08049622:
 	ldr r0, _0804962C @ =nullsub_8
 	str r0, [r4, 0x1C]
@@ -3461,7 +3461,7 @@ _08049626:
 	bx r0
 	.align 2, 0
 _0804962C: .4byte nullsub_8
-	thumb_func_end sub_804959C
+	thumb_func_end SpriteCB_StatusSummaryBallsOnBattleStart
 
 	thumb_func_start sub_8049630
 sub_8049630: @ 8049630
@@ -3526,8 +3526,8 @@ _08049694:
 _0804969C: .4byte nullsub_8
 	thumb_func_end sub_8049630
 
-	thumb_func_start sub_80496A0
-sub_80496A0: @ 80496A0
+	thumb_func_start SpriteCB_StatusSummaryBallsOnSwitchout
+SpriteCB_StatusSummaryBallsOnSwitchout: @ 80496A0
 	ldrh r2, [r0, 0x2E]
 	lsls r2, 24
 	lsrs r2, 24
@@ -3543,7 +3543,7 @@ sub_80496A0: @ 80496A0
 	bx lr
 	.align 2, 0
 _080496BC: .4byte gUnknown_202063C
-	thumb_func_end sub_80496A0
+	thumb_func_end SpriteCB_StatusSummaryBallsOnSwitchout
 
 	thumb_func_start sub_80496C0
 sub_80496C0: @ 80496C0
@@ -3557,17 +3557,17 @@ sub_80496C0: @ 80496C0
 	mov r8, r0
 	ldr r0, _08049760 @ =gUnknown_202298C
 	ldr r1, _08049764 @ =gUnknown_8260556
-	bl sub_8008D84
+	bl StringCopy
 	adds r5, r0, 0
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	mov r0, sp
-	bl sub_8008D28
+	bl StringGetEnd10
 	adds r0, r5, 0
 	mov r1, sp
-	bl sub_8008D84
+	bl StringCopy
 	adds r5, r0, 0
 	movs r0, 0xFC
 	strb r0, [r5]
@@ -3576,12 +3576,12 @@ sub_80496C0: @ 80496C0
 	strb r0, [r5]
 	adds r5, 0x1
 	adds r0, r7, 0
-	bl sub_803F720
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r7, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r0, 0
@@ -3595,7 +3595,7 @@ _08049720:
 	ldr r0, _08049768 @ =gUnknown_8245EE0
 	adds r1, r0
 	mov r0, sp
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	bne _08049734
 	movs r6, 0x64
@@ -3646,7 +3646,7 @@ _08049782:
 	add r3, sp, 0xC
 	movs r1, 0
 	movs r2, 0x3
-	bl sub_804A648
+	bl AddTextPrinterAndCreateWindowOnHealthbox
 	adds r6, r0, 0
 	ldr r0, _080497E8 @ =gUnknown_202063C
 	mov r2, r8
@@ -3659,7 +3659,7 @@ _08049782:
 	ldrh r0, [r1, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080497F8
@@ -3742,7 +3742,7 @@ sub_804981C: @ 804981C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804991C
@@ -3763,10 +3763,10 @@ sub_804981C: @ 804981C
 	muls r0, r7
 	adds r0, r6
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -3782,7 +3782,7 @@ sub_804981C: @ 804981C
 	cmp r2, 0
 	beq _080498F8
 	movs r0, 0x46
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -3862,7 +3862,7 @@ sub_8049934: @ 8049934
 	lsrs r0, 24
 	mov r10, r0
 	adds r0, r7, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080499A4
@@ -3875,7 +3875,7 @@ sub_8049934: @ 8049934
 	ldr r1, _080499A0 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	bl sub_8075290
 	lsls r0, 24
@@ -3900,7 +3900,7 @@ _080499A4:
 	ldr r1, _080499E4 @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	movs r1, 0x11
 	mov r8, r1
@@ -3914,7 +3914,7 @@ _080499C0:
 	bl sub_8049BE4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0x2
 	b _08049AF4
@@ -3931,7 +3931,7 @@ _080499E8:
 	bl sub_8049BE4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0
 	b _08049AF4
@@ -3945,7 +3945,7 @@ _08049A06:
 	bl sub_8049BE4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0x4
 	b _08049AF4
@@ -3959,7 +3959,7 @@ _08049A24:
 	bl sub_8049BE4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0x3
 	b _08049AF4
@@ -3973,13 +3973,13 @@ _08049A42:
 	bl sub_8049BE4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0x1
 	b _08049AF4
 _08049A60:
 	movs r0, 0x27
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r4, 0
 	mov r2, r9
@@ -4019,7 +4019,7 @@ _08049A7E:
 	cmp r0, 0
 	bne _08049AD4
 	movs r0, 0x1
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	ldr r2, _08049AE0 @ =gUnknown_202063C
 	mov r3, r10
 	lsls r1, r3, 4
@@ -4064,7 +4064,7 @@ _08049AF4:
 	lsls r3, 1
 	adds r1, r4, r3
 	movs r2, 0x2
-	bl sub_8070424
+	bl FillPalette
 	lsls r4, 1
 	ldr r0, _08049BCC @ =gUnknown_20373F8
 	adds r0, r4, r0
@@ -4090,7 +4090,7 @@ _08049AF4:
 	cmp r0, 0x1
 	beq _08049B62
 	adds r0, r7, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4107,7 +4107,7 @@ _08049B62:
 	cmp r0, 0
 	bne _08049BAE
 	movs r0, 0
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	mov r3, r10
 	lsls r4, r3, 4
 	add r4, r10
@@ -4122,7 +4122,7 @@ _08049B62:
 	adds r2, r5, 0
 	bl CpuSet
 	movs r0, 0x41
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	ldrh r1, [r4, 0x4]
 	lsls r1, 22
 	lsrs r1, 17
@@ -4262,7 +4262,7 @@ sub_8049CAC: @ 8049CAC
 	movs r1, 0
 	movs r2, 0x3
 	mov r3, sp
-	bl sub_804A648
+	bl AddTextPrinterAndCreateWindowOnHealthbox
 	adds r5, r0, 0
 	ldr r1, _08049D04 @ =gUnknown_202063C
 	lsls r0, r4, 4
@@ -4297,8 +4297,8 @@ _08049D08: .4byte 0x06010040
 _08049D0C: .4byte 0x06010800
 	thumb_func_end sub_8049CAC
 
-	thumb_func_start sub_8049D10
-sub_8049D10: @ 8049D10
+	thumb_func_start UpdateLeftNoOfBallsTextOnHealthbox
+UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	push {r4,r5,lr}
 	sub sp, 0x14
 	adds r4, r0, 0
@@ -4306,7 +4306,7 @@ sub_8049D10: @ 8049D10
 	lsrs r4, 24
 	ldr r1, _08049D84 @ =gUnknown_83FE81C
 	mov r0, sp
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _08049D88 @ =gUnknown_2039994
 	ldrb r1, [r1]
 	movs r2, 0
@@ -4321,7 +4321,7 @@ sub_8049D10: @ 8049D10
 	add r3, sp, 0x10
 	mov r0, sp
 	movs r2, 0x3
-	bl sub_804A648
+	bl AddTextPrinterAndCreateWindowOnHealthbox
 	adds r5, r0, 0
 	ldr r1, _08049D8C @ =gUnknown_202063C
 	lsls r0, r4, 4
@@ -4355,10 +4355,10 @@ _08049D88: .4byte gUnknown_2039994
 _08049D8C: .4byte gUnknown_202063C
 _08049D90: .4byte 0x060102c0
 _08049D94: .4byte 0x06010a00
-	thumb_func_end sub_8049D10
+	thumb_func_end UpdateLeftNoOfBallsTextOnHealthbox
 
-	thumb_func_start sub_8049D98
-sub_8049D98: @ 8049D98
+	thumb_func_start UpdateHealthboxAttribute
+UpdateHealthboxAttribute: @ 8049D98
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4386,7 +4386,7 @@ sub_8049D98: @ 8049D98
 	cmp r0, 0
 	bne _08049DD4
 	mov r0, r9
-	bl sub_80751C4
+	bl GetBankSide
 _08049DD4:
 	ldr r1, _08049F44 @ =gUnknown_202063C
 	lsls r0, r6, 4
@@ -4396,7 +4396,7 @@ _08049DD4:
 	ldrh r0, [r0, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08049DF0
@@ -4409,18 +4409,18 @@ _08049DF0:
 _08049DF8:
 	mov r0, r8
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_8048398
+	bl UpdateLvlInHealthbox
 _08049E0C:
 	cmp r7, 0x1
 	bhi _08049E26
 	mov r0, r8
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -4435,7 +4435,7 @@ _08049E26:
 _08049E2E:
 	mov r0, r8
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -4449,21 +4449,21 @@ _08049E44:
 	bne _08049E80
 _08049E4C:
 	movs r0, 0
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	mov r0, r8
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	mov r0, r8
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	movs r0, 0
 	str r0, [sp]
 	mov r0, r9
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_8048150
+	bl SetBattleBarStruct
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0
@@ -4482,22 +4482,22 @@ _08049E80:
 	bne _08049F06
 _08049E96:
 	movs r0, 0x3
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	mov r0, r8
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	mov r0, r8
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	mov r0, r8
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	ldr r0, _08049F48 @ =gUnknown_8253AE4
 	mov r12, r0
@@ -4525,7 +4525,7 @@ _08049E96:
 	str r0, [sp]
 	mov r0, r9
 	adds r1, r6, 0
-	bl sub_8048150
+	bl SetBattleBarStruct
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0x1
@@ -4561,7 +4561,7 @@ _08049F2E:
 	cmp r0, 0x1
 	bhi _08049FC6
 	adds r0, r6, 0
-	bl sub_8049D10
+	bl UpdateLeftNoOfBallsTextOnHealthbox
 	b _08049FC6
 	.align 2, 0
 _08049F44: .4byte gUnknown_202063C
@@ -4575,12 +4575,12 @@ _08049F50:
 _08049F58:
 	mov r0, r8
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_8048398
+	bl UpdateLvlInHealthbox
 _08049F6C:
 	cmp r7, 0x5
 	beq _08049F74
@@ -4588,21 +4588,21 @@ _08049F6C:
 	bne _08049FA8
 _08049F74:
 	movs r0, 0
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	mov r0, r8
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	mov r0, r8
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	movs r0, 0
 	str r0, [sp]
 	mov r0, r9
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_8048150
+	bl SetBattleBarStruct
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0
@@ -4634,7 +4634,7 @@ _08049FC6:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8049D98
+	thumb_func_end UpdateHealthboxAttribute
 
 	thumb_func_start sub_8049FD8
 sub_8049FD8: @ 8049FD8
@@ -4688,7 +4688,7 @@ _0804A024:
 	ldr r1, [r2, 0xC]
 	ldr r2, [r2, 0x4]
 	movs r3, 0x8
-	bl sub_804A59C
+	bl GetScaledExpFraction
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r7, r4, 0
@@ -4835,7 +4835,7 @@ _0804A132:
 	cmp r5, 0x1
 	bhi _0804A194
 	mov r0, r9
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	mov r1, sp
 	adds r1, r5
 	adds r1, 0x8
@@ -4864,7 +4864,7 @@ _0804A18C: .4byte 0x06010000
 _0804A190: .4byte 0x04000008
 _0804A194:
 	mov r0, r9
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	mov r1, sp
 	adds r1, r5
 	adds r1, 0x8
@@ -4920,7 +4920,7 @@ _0804A1D8:
 	ldr r1, _0804A284 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	adds r7, r5, 0
@@ -4948,7 +4948,7 @@ _0804A23A:
 	cmp r5, 0x3
 	bhi _0804A294
 	movs r0, 0xC
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	mov r1, sp
 	adds r1, r5
 	adds r1, 0x8
@@ -4985,7 +4985,7 @@ _0804A28C: .4byte 0x06010000
 _0804A290: .4byte 0x04000008
 _0804A294:
 	movs r0, 0xC
-	bl sub_80480A8
+	bl GetHealthboxElementGfxPtr
 	mov r1, sp
 	adds r1, r5
 	adds r1, 0x8
@@ -5398,7 +5398,7 @@ _0804A554:
 	adds r1, r6, 0
 	mov r2, r10
 	mov r3, r8
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3
@@ -5409,8 +5409,8 @@ _0804A554:
 	bx r0
 	thumb_func_end sub_804A510
 
-	thumb_func_start sub_804A59C
-sub_804A59C: @ 804A59C
+	thumb_func_start GetScaledExpFraction
+GetScaledExpFraction: @ 804A59C
 	push {r4-r7,lr}
 	adds r6, r2, 0
 	lsls r3, 27
@@ -5449,10 +5449,10 @@ _0804A5DC:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804A59C
+	thumb_func_end GetScaledExpFraction
 
-	thumb_func_start sub_804A5E8
-sub_804A5E8: @ 804A5E8
+	thumb_func_start GetScaledHPFraction
+GetScaledHPFraction: @ 804A5E8
 	push {r4,lr}
 	lsls r2, 24
 	lsrs r2, 24
@@ -5474,10 +5474,10 @@ _0804A60C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804A5E8
+	thumb_func_end GetScaledHPFraction
 
-	thumb_func_start sub_804A614
-sub_804A614: @ 804A614
+	thumb_func_start GetHPBarLevel
+GetHPBarLevel: @ 804A614
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
@@ -5489,7 +5489,7 @@ sub_804A614: @ 804A614
 	b _0804A642
 _0804A626:
 	movs r2, 0x30
-	bl sub_804A5E8
+	bl GetScaledHPFraction
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x3
@@ -5504,10 +5504,10 @@ _0804A626:
 _0804A642:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_804A614
+	thumb_func_end GetHPBarLevel
 
-	thumb_func_start sub_804A648
-sub_804A648: @ 804A648
+	thumb_func_start AddTextPrinterAndCreateWindowOnHealthbox
+AddTextPrinterAndCreateWindowOnHealthbox: @ 804A648
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -5532,7 +5532,7 @@ sub_804A648: @ 804A648
 	lsrs r5, 24
 	adds r0, r5, 0
 	movs r1, 0x22
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	add r1, sp, 0x14
 	movs r2, 0
 	movs r0, 0x2
@@ -5575,7 +5575,7 @@ sub_804A648: @ 804A648
 	bx r1
 	.align 2, 0
 _0804A6D4: .4byte gUnknown_8260564
-	thumb_func_end sub_804A648
+	thumb_func_end AddTextPrinterAndCreateWindowOnHealthbox
 
 	thumb_func_start sub_804A6D8
 sub_804A6D8: @ 804A6D8

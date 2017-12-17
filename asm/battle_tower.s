@@ -328,7 +328,7 @@ _080E5BD8:
 	.align 2, 0
 _080E5BE8: .4byte gUnknown_300500C
 _080E5BEC:
-	bl sub_8044EC8
+	bl Random
 	ldr r1, _080E5C20 @ =gUnknown_300500C
 	ldr r4, [r1]
 	lsls r0, 16
@@ -418,7 +418,7 @@ _080E5C90:
 	adds r7, r6, 0
 	mov r8, r5
 _080E5CA2:
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0xFF
 	ands r1, r0
 	lsls r2, r1, 2
@@ -488,7 +488,7 @@ _080E5D2C:
 	adds r7, r6, 0
 	mov r8, r5
 _080E5D30:
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0xFF
 	ands r1, r0
 	lsls r0, r1, 2
@@ -556,7 +556,7 @@ _080E5DB4: .4byte 0x0000056c
 _080E5DB8:
 	adds r7, r5, 0
 _080E5DBA:
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0xFF
 	ands r1, r0
 	lsls r0, r1, 4
@@ -895,7 +895,7 @@ _080E602C:
 	adds r5, r7, 0
 	cmp r5, 0x4
 	ble _080E5FC2
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, r8
@@ -1133,7 +1133,7 @@ sub_80E61DC: @ 80E61DC
 	add r4, sp, 0xC
 	movs r0, 0xFF
 	strb r0, [r4]
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	ldr r1, _080E6210 @ =gUnknown_300500C
 	ldr r0, [r1]
 	ldr r2, _080E6214 @ =0x0000056c
@@ -1300,7 +1300,7 @@ _080E6328:
 	str r0, [sp, 0x20]
 	movs r6, 0
 _080E6340:
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0xFF
 	ands r1, r0
 	ldr r2, [sp, 0x1C]
@@ -1342,7 +1342,7 @@ _080E6388:
 	movs r1, 0xB
 	movs r2, 0
 	str r3, [sp, 0x24]
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r3, [sp, 0x24]
 	ldrh r2, [r3]
 	cmp r0, r2
@@ -1366,14 +1366,14 @@ _080E63B8:
 	movs r1, 0xC
 	movs r2, 0
 	str r3, [sp, 0x24]
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r3, [sp, 0x24]
 	cmp r0, 0
 	beq _080E63E8
 	adds r0, r4, 0
 	movs r1, 0xC
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r8
 	ldrb r1, [r2, 0x2]
 	lsls r1, 1
@@ -1426,7 +1426,7 @@ _080E6412:
 	str r2, [sp]
 	ldr r2, [sp, 0x10]
 	ldr r3, [sp, 0x14]
-	bl sub_803E01C
+	bl CreateMonWithEVSpread
 	movs r5, 0
 	adds r0, r6, 0x1
 	mov r9, r0
@@ -1444,7 +1444,7 @@ _080E6452:
 	lsrs r2, 24
 	adds r0, r7, r3
 	str r3, [sp, 0x24]
-	bl sub_803E964
+	bl SetMonMoveSlot
 	ldrh r0, [r4]
 	ldr r3, [sp, 0x24]
 	cmp r0, 0xDA
@@ -1502,7 +1502,7 @@ sub_80E64C0: @ 80E64C0
 	adds r5, r0, 0
 	lsls r1, 24
 	lsrs r4, r1, 24
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -1514,7 +1514,7 @@ sub_80E64C0: @ 80E64C0
 	bne _080E64EC
 	ldr r0, _080E6514 @ =gUnknown_2021CD0
 	ldr r1, _080E6518 @ =gUnknown_83FE859
-	bl sub_8008DA4
+	bl StringAppend
 _080E64EC:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -1526,7 +1526,7 @@ _080E64EC:
 	ldr r0, _080E651C @ =gUnknown_8245EE0
 	adds r1, r0
 	adds r0, r6, 0
-	bl sub_8008DA4
+	bl StringAppend
 	cmp r4, 0x5
 	beq _080E6538
 	cmp r4, 0x5
@@ -1547,14 +1547,14 @@ _080E6520:
 _080E652A:
 	ldr r1, _080E6534 @ =gUnknown_83FE85E
 	adds r0, r6, 0
-	bl sub_8008DA4
+	bl StringAppend
 	b _080E6554
 	.align 2, 0
 _080E6534: .4byte gUnknown_83FE85E
 _080E6538:
 	ldr r0, _080E6544 @ =gUnknown_2021CD0
 	ldr r1, _080E6548 @ =gUnknown_83FE85C
-	bl sub_8008DA4
+	bl StringAppend
 	b _080E6554
 	.align 2, 0
 _080E6544: .4byte gUnknown_2021CD0
@@ -1562,7 +1562,7 @@ _080E6548: .4byte gUnknown_83FE85C
 _080E654C:
 	ldr r0, _080E655C @ =gUnknown_2021CD0
 	ldr r1, _080E6560 @ =gUnknown_83FE859
-	bl sub_8008DA4
+	bl StringAppend
 _080E6554:
 	adds r0, r4, 0
 	pop {r4-r6}
@@ -1723,7 +1723,7 @@ _080E6662:
 	adds r5, r0
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	mov r1, r8
 	lsls r1, 16
@@ -1731,19 +1731,19 @@ _080E6662:
 	mov r8, r1
 	adds r0, r5, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
 	adds r0, r5, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r2, r0, 0
 	lsls r2, 16
 	lsrs r2, 16
@@ -1795,7 +1795,7 @@ _080E66F2:
 _080E6704:
 	ldr r4, _080E672C @ =gUnknown_2021CD0
 	adds r0, r4, 0
-	bl sub_8008E08
+	bl StringLength
 	lsls r0, 16
 	lsrs r7, r0, 16
 	subs r0, r7, 0x1
@@ -1820,7 +1820,7 @@ _080E6740:
 	ldr r1, _080E674C @ =gUnknown_83FE864
 _080E6742:
 	adds r0, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 	b _080E6770
 	.align 2, 0
 _080E674C: .4byte gUnknown_83FE864
@@ -1991,7 +1991,7 @@ _080E6874:
 	ldr r0, [r6]
 	adds r0, r1
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	ldr r0, _080E68A8 @ =gUnknown_2024284
@@ -2010,14 +2010,14 @@ _080E68A8: .4byte gUnknown_2024284
 _080E68AC:
 	bl sub_80E7550
 _080E68B0:
-	ldr r0, _080E68C0 @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _080E68C0 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E68C0: .4byte sub_80568E0
+_080E68C0: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_80E6854
 
 	thumb_func_start sub_80E68C4
@@ -2035,9 +2035,9 @@ sub_80E68C4: @ 80E68C4
 	str r1, [r0, 0x8]
 	bl sub_80563F0
 	ldr r0, _080E68FC @ =sub_800FD9C
-	bl sub_8000544
+	bl SetMainCallback2
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080E68EC:
 	pop {r4}
 	pop {r0}
@@ -2093,7 +2093,7 @@ _080E6948:
 	ldr r0, _080E6990 @ =gUnknown_2024284
 	adds r0, r4, r0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r4, 0x38
@@ -2108,7 +2108,7 @@ _080E6948:
 _080E6970:
 	ldr r0, _080E6994 @ =sub_80E68C4
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0
 	bl sub_8044090
 	bl sub_8080060
@@ -2121,7 +2121,7 @@ _080E698C: .4byte gUnknown_3005008
 _080E6990: .4byte gUnknown_2024284
 _080E6994: .4byte sub_80E68C4
 _080E6998:
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	movs r5, 0
 	ldr r4, _080E69F0 @ =gUnknown_300500C
 _080E69A0:
@@ -2148,7 +2148,7 @@ _080E69A0:
 	strh r0, [r1]
 	ldr r0, _080E6A08 @ =sub_80E68C4
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0
 	bl sub_8044090
 	bl sub_8080060
@@ -2802,7 +2802,7 @@ _080E6F0E:
 	bl sub_805490C
 	adds r0, r5, 0x4
 	ldr r1, [r4]
-	bl sub_8008D54
+	bl StringCopy7
 	adds r0, r6, 0
 	bl sub_80E7188
 	strh r0, [r5, 0x2]
@@ -2921,7 +2921,7 @@ _080E7016:
 	orrs r0, r2
 	strb r0, [r1]
 	movs r0, 0x2
-	bl sub_80DA364
+	bl TrySavingData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3160,7 +3160,7 @@ sub_80E71D0: @ 80E71D0
 	subs r0, 0x1
 	cmp r0, 0x5
 	ble _080E7220
-	bl sub_8044EC8
+	bl Random
 	ldr r4, [r4]
 	ldr r5, _080E721C @ =gUnknown_84020E6
 	lsls r0, 16
@@ -3180,7 +3180,7 @@ _080E7214: .4byte gUnknown_300500C
 _080E7218: .4byte 0x0000055c
 _080E721C: .4byte gUnknown_84020E6
 _080E7220:
-	bl sub_8044EC8
+	bl Random
 	ldr r4, [r4]
 	ldr r5, _080E7248 @ =gUnknown_84020DA
 	lsls r0, 16
@@ -3298,7 +3298,7 @@ _080E72EA:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _080E731A
 	movs r0, 0x1
@@ -3372,7 +3372,7 @@ _080E7372:
 	bl sub_805490C
 	adds r0, r7, 0x4
 	ldr r1, [r5]
-	bl sub_8008D54
+	bl StringCopy7
 	movs r0, 0x1
 	strh r0, [r7, 0x2]
 	movs r6, 0x7

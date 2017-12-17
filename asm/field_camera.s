@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_805A5A8
-sub_805A5A8: @ 805A5A8
+	thumb_func_start move_tilemap_camera_to_upper_left_corner_
+move_tilemap_camera_to_upper_left_corner_: @ 805A5A8
 	movs r1, 0
 	strb r1, [r0, 0x2]
 	strb r1, [r0, 0x3]
@@ -15,10 +15,10 @@ sub_805A5A8: @ 805A5A8
 	movs r1, 0x1
 	strb r1, [r0, 0x4]
 	bx lr
-	thumb_func_end sub_805A5A8
+	thumb_func_end move_tilemap_camera_to_upper_left_corner_
 
-	thumb_func_start sub_805A5B8
-sub_805A5B8: @ 805A5B8
+	thumb_func_start tilemap_move_something
+tilemap_move_something: @ 805A5B8
 	ldrb r3, [r0, 0x2]
 	adds r3, r1
 	strb r3, [r0, 0x2]
@@ -33,10 +33,10 @@ sub_805A5B8: @ 805A5B8
 	ands r1, r3
 	strb r1, [r0, 0x3]
 	bx lr
-	thumb_func_end sub_805A5B8
+	thumb_func_end tilemap_move_something
 
-	thumb_func_start sub_805A5D4
-sub_805A5D4: @ 805A5D4
+	thumb_func_start coords8_add
+coords8_add: @ 805A5D4
 	ldrb r3, [r0]
 	adds r3, r1
 	strb r3, [r0]
@@ -44,21 +44,21 @@ sub_805A5D4: @ 805A5D4
 	adds r1, r2
 	strb r1, [r0, 0x1]
 	bx lr
-	thumb_func_end sub_805A5D4
+	thumb_func_end coords8_add
 
-	thumb_func_start sub_805A5E4
-sub_805A5E4: @ 805A5E4
+	thumb_func_start move_tilemap_camera_to_upper_left_corner
+move_tilemap_camera_to_upper_left_corner: @ 805A5E4
 	push {lr}
 	ldr r0, _0805A5F0 @ =gUnknown_3000E90
-	bl sub_805A5A8
+	bl move_tilemap_camera_to_upper_left_corner_
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805A5F0: .4byte gUnknown_3000E90
-	thumb_func_end sub_805A5E4
+	thumb_func_end move_tilemap_camera_to_upper_left_corner
 
-	thumb_func_start sub_805A5F4
-sub_805A5F4: @ 805A5F4
+	thumb_func_start FieldUpdateBgTilemapScroll
+FieldUpdateBgTilemapScroll: @ 805A5F4
 	push {r4,r5,lr}
 	ldr r1, _0805A64C @ =gUnknown_3000E90
 	ldr r0, _0805A650 @ =gUnknown_3000E98
@@ -76,24 +76,24 @@ sub_805A5F4: @ 805A5F4
 	lsrs r5, 16
 	movs r0, 0x14
 	adds r1, r5, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	lsls r4, 16
 	lsrs r4, 16
 	movs r0, 0x16
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x18
 	adds r1, r5, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1A
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1C
 	adds r1, r5, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1E
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -101,7 +101,7 @@ sub_805A5F4: @ 805A5F4
 _0805A64C: .4byte gUnknown_3000E90
 _0805A650: .4byte gUnknown_3000E98
 _0805A654: .4byte gUnknown_3000E9A
-	thumb_func_end sub_805A5F4
+	thumb_func_end FieldUpdateBgTilemapScroll
 
 	thumb_func_start sub_805A658
 sub_805A658: @ 805A658
@@ -127,8 +127,8 @@ _0805A67C: .4byte gUnknown_3000E98
 _0805A680: .4byte gUnknown_3000E9A
 	thumb_func_end sub_805A658
 
-	thumb_func_start sub_805A684
-sub_805A684: @ 805A684
+	thumb_func_start DrawWholeMapView
+DrawWholeMapView: @ 805A684
 	push {lr}
 	ldr r0, _0805A6A0 @ =gUnknown_3005008
 	ldr r1, [r0]
@@ -138,16 +138,16 @@ sub_805A684: @ 805A684
 	ldrsh r1, [r1, r2]
 	ldr r2, _0805A6A4 @ =gUnknown_2036DFC
 	ldr r2, [r2]
-	bl sub_805A6A8
+	bl DrawWholeMapViewInternal
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805A6A0: .4byte gUnknown_3005008
 _0805A6A4: .4byte gUnknown_2036DFC
-	thumb_func_end sub_805A684
+	thumb_func_end DrawWholeMapView
 
-	thumb_func_start sub_805A6A8
-sub_805A6A8: @ 805A6A8
+	thumb_func_start DrawWholeMapViewInternal
+DrawWholeMapViewInternal: @ 805A6A8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -216,10 +216,10 @@ _0805A6EE:
 	bx r0
 	.align 2, 0
 _0805A728: .4byte gUnknown_3000E90
-	thumb_func_end sub_805A6A8
+	thumb_func_end DrawWholeMapViewInternal
 
-	thumb_func_start sub_805A72C
-sub_805A72C: @ 805A72C
+	thumb_func_start RedrawMapSlicesForCameraUpdate
+RedrawMapSlicesForCameraUpdate: @ 805A72C
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
@@ -230,25 +230,25 @@ sub_805A72C: @ 805A72C
 	ble _0805A744
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805A87C
+	bl RedrawMapSliceWest
 _0805A744:
 	cmp r6, 0
 	bge _0805A750
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805A824
+	bl RedrawMapSliceEast
 _0805A750:
 	cmp r7, 0
 	ble _0805A75C
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805A778
+	bl RedrawMapSliceNorth
 _0805A75C:
 	cmp r7, 0
 	bge _0805A768
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805A7D8
+	bl RedrawMapSliceSouth
 _0805A768:
 	movs r0, 0x1
 	strb r0, [r5, 0x4]
@@ -257,10 +257,10 @@ _0805A768:
 	bx r0
 	.align 2, 0
 _0805A774: .4byte gUnknown_2036DFC
-	thumb_func_end sub_805A72C
+	thumb_func_end RedrawMapSlicesForCameraUpdate
 
-	thumb_func_start sub_805A778
-sub_805A778: @ 805A778
+	thumb_func_start RedrawMapSliceNorth
+RedrawMapSliceNorth: @ 805A778
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	adds r7, r1, 0
@@ -311,10 +311,10 @@ _0805A7A6:
 	bx r0
 	.align 2, 0
 _0805A7D4: .4byte gUnknown_3005008
-	thumb_func_end sub_805A778
+	thumb_func_end RedrawMapSliceNorth
 
-	thumb_func_start sub_805A7D8
-sub_805A7D8: @ 805A7D8
+	thumb_func_start RedrawMapSliceSouth
+RedrawMapSliceSouth: @ 805A7D8
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	adds r7, r1, 0
@@ -353,10 +353,10 @@ _0805A7F6:
 	bx r0
 	.align 2, 0
 _0805A820: .4byte gUnknown_3005008
-	thumb_func_end sub_805A7D8
+	thumb_func_end RedrawMapSliceSouth
 
-	thumb_func_start sub_805A824
-sub_805A824: @ 805A824
+	thumb_func_start RedrawMapSliceEast
+RedrawMapSliceEast: @ 805A824
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -401,10 +401,10 @@ _0805A844:
 	bx r0
 	.align 2, 0
 _0805A878: .4byte gUnknown_3005008
-	thumb_func_end sub_805A824
+	thumb_func_end RedrawMapSliceEast
 
-	thumb_func_start sub_805A87C
-sub_805A87C: @ 805A87C
+	thumb_func_start RedrawMapSliceWest
+RedrawMapSliceWest: @ 805A87C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -460,17 +460,17 @@ _0805A8AE:
 	bx r0
 	.align 2, 0
 _0805A8E4: .4byte gUnknown_3005008
-	thumb_func_end sub_805A87C
+	thumb_func_end RedrawMapSliceWest
 
-	thumb_func_start sub_805A8E8
-sub_805A8E8: @ 805A8E8
+	thumb_func_start CurrentMapDrawMetatileAt
+CurrentMapDrawMetatileAt: @ 805A8E8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	ldr r0, _0805A914 @ =gUnknown_3000E90
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_805AAE8
+	bl MapPosToBgTilemapOffset
 	adds r1, r0, 0
 	cmp r1, 0
 	blt _0805A90E
@@ -488,7 +488,7 @@ _0805A90E:
 	.align 2, 0
 _0805A914: .4byte gUnknown_3000E90
 _0805A918: .4byte gUnknown_2036DFC
-	thumb_func_end sub_805A8E8
+	thumb_func_end CurrentMapDrawMetatileAt
 
 	thumb_func_start sub_805A91C
 sub_805A91C: @ 805A91C
@@ -499,14 +499,14 @@ sub_805A91C: @ 805A91C
 	ldr r0, _0805A944 @ =gUnknown_3000E90
 	adds r1, r3, 0
 	adds r2, r4, 0
-	bl sub_805AAE8
+	bl MapPosToBgTilemapOffset
 	cmp r0, 0
 	blt _0805A93E
 	lsls r2, r0, 16
 	lsrs r2, 16
 	movs r0, 0x1
 	adds r1, r5, 0
-	bl sub_805A9B4
+	bl DrawMetatile
 _0805A93E:
 	pop {r4,r5}
 	pop {r0}
@@ -563,7 +563,7 @@ _0805A98C:
 	lsls r1, r4, 4
 	adds r1, r5, r1
 	mov r2, r8
-	bl sub_805A9B4
+	bl DrawMetatile
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -573,8 +573,8 @@ _0805A98C:
 _0805A9B0: .4byte 0xfffffd80
 	thumb_func_end sub_805A948
 
-	thumb_func_start sub_805A9B4
-sub_805A9B4: @ 805A9B4
+	thumb_func_start DrawMetatile
+DrawMetatile: @ 805A9B4
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r2, 16
@@ -710,11 +710,11 @@ _0805AAA2:
 	strh r0, [r3]
 _0805AABE:
 	movs r0, 0x1
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x2
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x3
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -723,10 +723,10 @@ _0805AAD8: .4byte gUnknown_300501C
 _0805AADC: .4byte 0x00003014
 _0805AAE0: .4byte gUnknown_3005014
 _0805AAE4: .4byte gUnknown_3005018
-	thumb_func_end sub_805A9B4
+	thumb_func_end DrawMetatile
 
-	thumb_func_start sub_805AAE8
-sub_805AAE8: @ 805AAE8
+	thumb_func_start MapPosToBgTilemapOffset
+MapPosToBgTilemapOffset: @ 805AAE8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, _0805AB18 @ =gUnknown_3005008
@@ -768,10 +768,10 @@ _0805AB2A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805AAE8
+	thumb_func_end MapPosToBgTilemapOffset
 
-	thumb_func_start sub_805AB30
-sub_805AB30: @ 805AB30
+	thumb_func_start CameraUpdateCallback
+CameraUpdateCallback: @ 805AB30
 	push {lr}
 	adds r3, r0, 0
 	ldr r2, [r3, 0x4]
@@ -793,10 +793,10 @@ _0805AB50:
 	bx r0
 	.align 2, 0
 _0805AB54: .4byte gUnknown_202063C
-	thumb_func_end sub_805AB30
+	thumb_func_end CameraUpdateCallback
 
-	thumb_func_start sub_805AB58
-sub_805AB58: @ 805AB58
+	thumb_func_start ResetCameraUpdateInfo
+ResetCameraUpdateInfo: @ 805AB58
 	ldr r1, _0805AB6C @ =gUnknown_3005050
 	movs r0, 0
 	str r0, [r1, 0x8]
@@ -808,10 +808,10 @@ sub_805AB58: @ 805AB58
 	bx lr
 	.align 2, 0
 _0805AB6C: .4byte gUnknown_3005050
-	thumb_func_end sub_805AB58
+	thumb_func_end ResetCameraUpdateInfo
 
-	thumb_func_start sub_805AB70
-sub_805AB70: @ 805AB70
+	thumb_func_start InitCameraUpdateCallback
+InitCameraUpdateCallback: @ 805AB70
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -824,14 +824,14 @@ sub_805AB70: @ 805AB70
 	lsls r0, 2
 	ldr r1, _0805ABA8 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 _0805AB8C:
 	adds r0, r5, 0
-	bl sub_805F950
+	bl AddCameraObject
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r4, 0x4]
-	ldr r0, _0805ABAC @ =sub_805AB30
+	ldr r0, _0805ABAC @ =CameraUpdateCallback
 	str r0, [r4]
 	movs r0, 0
 	pop {r4,r5}
@@ -840,11 +840,11 @@ _0805AB8C:
 	.align 2, 0
 _0805ABA4: .4byte gUnknown_3005050
 _0805ABA8: .4byte gUnknown_202063C
-_0805ABAC: .4byte sub_805AB30
-	thumb_func_end sub_805AB70
+_0805ABAC: .4byte CameraUpdateCallback
+	thumb_func_end InitCameraUpdateCallback
 
-	thumb_func_start sub_805ABB0
-sub_805ABB0: @ 805ABB0
+	thumb_func_start CameraUpdate
+CameraUpdate: @ 805ABB0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -936,26 +936,26 @@ _0805AC44:
 _0805AC54:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8059530
+	bl CameraMove
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805F924
+	bl UpdateFieldObjectsForCameraUpdate
 	ldr r6, _0805ACA8 @ =gUnknown_3000E90
 	lsls r4, 1
 	lsls r5, 1
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_805A5B8
+	bl tilemap_move_something
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_805A72C
+	bl RedrawMapSlicesForCameraUpdate
 _0805AC7E:
 	ldr r0, _0805ACA8 @ =gUnknown_3000E90
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_805A5D4
+	bl coords8_add
 	ldr r1, _0805ACAC @ =gUnknown_300506C
 	ldrh r0, [r1]
 	subs r0, r7
@@ -975,20 +975,20 @@ _0805ACA4: .4byte gUnknown_3005050
 _0805ACA8: .4byte gUnknown_3000E90
 _0805ACAC: .4byte gUnknown_300506C
 _0805ACB0: .4byte gUnknown_3005068
-	thumb_func_end sub_805ABB0
+	thumb_func_end CameraUpdate
 
 	thumb_func_start sub_805ACB4
 sub_805ACB4: @ 805ACB4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8059530
+	bl CameraMove
 	lsls r0, r4, 16
 	asrs r0, 16
 	lsls r1, r5, 16
 	asrs r1, 16
-	bl sub_805F924
-	bl sub_805A684
+	bl UpdateFieldObjectsForCameraUpdate
+	bl DrawWholeMapView
 	ldr r1, _0805ACE8 @ =gUnknown_300506C
 	lsls r4, 4
 	ldrh r0, [r1]
@@ -1100,23 +1100,23 @@ _0805AD84:
 _0805AD94:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8059530
+	bl CameraMove
 	ldr r4, _0805ADD0 @ =gUnknown_3000E90
 	lsls r5, 1
 	lsls r6, 1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_805A5B8
+	bl tilemap_move_something
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_805A72C
+	bl RedrawMapSlicesForCameraUpdate
 _0805ADB6:
 	ldr r0, _0805ADD0 @ =gUnknown_3000E90
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_805A5D4
+	bl coords8_add
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -1127,17 +1127,17 @@ _0805ADCC: .4byte gUnknown_3005050
 _0805ADD0: .4byte gUnknown_3000E90
 	thumb_func_end sub_805ACF0
 
-	thumb_func_start sub_805ADD4
-sub_805ADD4: @ 805ADD4
+	thumb_func_start SetCameraPanningCallback
+SetCameraPanningCallback: @ 805ADD4
 	ldr r1, _0805ADDC @ =gUnknown_3000EA0
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _0805ADDC: .4byte gUnknown_3000EA0
-	thumb_func_end sub_805ADD4
+	thumb_func_end SetCameraPanningCallback
 
-	thumb_func_start sub_805ADE0
-sub_805ADE0: @ 805ADE0
+	thumb_func_start SetCameraPanning
+SetCameraPanning: @ 805ADE0
 	ldr r2, _0805ADF0 @ =gUnknown_3000E98
 	strh r0, [r2]
 	ldr r0, _0805ADF4 @ =gUnknown_3000E9A
@@ -1149,12 +1149,12 @@ sub_805ADE0: @ 805ADE0
 	.align 2, 0
 _0805ADF0: .4byte gUnknown_3000E98
 _0805ADF4: .4byte gUnknown_3000E9A
-	thumb_func_end sub_805ADE0
+	thumb_func_end SetCameraPanning
 
-	thumb_func_start sub_805ADF8
-sub_805ADF8: @ 805ADF8
+	thumb_func_start InstallCameraPanAheadCallback
+InstallCameraPanAheadCallback: @ 805ADF8
 	ldr r1, _0805AE14 @ =gUnknown_3000EA0
-	ldr r0, _0805AE18 @ =sub_805AE74
+	ldr r0, _0805AE18 @ =CameraPanningCB_PanAhead
 	str r0, [r1]
 	ldr r1, _0805AE1C @ =gUnknown_3000E9C
 	movs r0, 0
@@ -1168,14 +1168,14 @@ sub_805ADF8: @ 805ADF8
 	bx lr
 	.align 2, 0
 _0805AE14: .4byte gUnknown_3000EA0
-_0805AE18: .4byte sub_805AE74
+_0805AE18: .4byte CameraPanningCB_PanAhead
 _0805AE1C: .4byte gUnknown_3000E9C
 _0805AE20: .4byte gUnknown_3000E98
 _0805AE24: .4byte gUnknown_3000E9A
-	thumb_func_end sub_805ADF8
+	thumb_func_end InstallCameraPanAheadCallback
 
-	thumb_func_start sub_805AE28
-sub_805AE28: @ 805AE28
+	thumb_func_start UpdateCameraPanning
+UpdateCameraPanning: @ 805AE28
 	push {lr}
 	ldr r0, _0805AE58 @ =gUnknown_3000EA0
 	ldr r0, [r0]
@@ -1208,16 +1208,16 @@ _0805AE64: .4byte gUnknown_3000E98
 _0805AE68: .4byte gUnknown_2021BCA
 _0805AE6C: .4byte gUnknown_3005068
 _0805AE70: .4byte gUnknown_3000E9A
-	thumb_func_end sub_805AE28
+	thumb_func_end UpdateCameraPanning
 
-	thumb_func_start sub_805AE74
-sub_805AE74: @ 805AE74
+	thumb_func_start CameraPanningCB_PanAhead
+CameraPanningCB_PanAhead: @ 805AE74
 	push {lr}
 	ldr r0, _0805AE84 @ =gUnknown_2036E2C
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805AE88
-	bl sub_805ADF8
+	bl InstallCameraPanAheadCallback
 	b _0805AF10
 	.align 2, 0
 _0805AE84: .4byte gUnknown_2036E2C
@@ -1242,7 +1242,7 @@ _0805AEA8:
 	movs r0, 0
 	strb r0, [r1]
 _0805AEAE:
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1294,6 +1294,6 @@ _0805AF0E:
 _0805AF10:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805AE74
+	thumb_func_end CameraPanningCB_PanAhead
 
 	.align 2, 0 @ Don't pad with nop.

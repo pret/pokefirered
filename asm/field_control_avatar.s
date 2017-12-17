@@ -56,7 +56,7 @@ sub_806C8BC: @ 806C8BC
 	bl sub_8059D70
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl sub_8069A64
+	bl ScriptContext1_IsScriptSetUp
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806C908
@@ -320,7 +320,7 @@ sub_806CAC8: @ 806CAC8
 	sub sp, 0x8
 	adds r5, r0, 0
 	bl sub_8069A54
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r4, sp
@@ -606,7 +606,7 @@ _0806CD22:
 sub_806CD30: @ 806CD30
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069A64
+	bl ScriptContext1_IsScriptSetUp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -629,7 +629,7 @@ _0806CD54:
 	ldrb r0, [r4, 0x2]
 	cmp r0, 0
 	beq _0806CDC0
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4, 0x2]
@@ -665,8 +665,8 @@ _0806CDA6:
 	bl sub_8069998
 _0806CDB0:
 	ldr r0, _0806CDBC @ =gUnknown_81A7ADB
-	bl sub_8069AE4
-	bl sub_8069940
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	b _0806CDEA
 	.align 2, 0
 _0806CDBC: .4byte gUnknown_81A7ADB
@@ -677,17 +677,17 @@ _0806CDC0:
 	cmp r0, 0
 	beq _0806CDEA
 	ldr r0, _0806CDF0 @ =gUnknown_81A7ADB
-	bl sub_8069AE4
-	bl sub_8069940
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	ldr r4, _0806CDF4 @ =sub_806CDF8
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806CDEA
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 _0806CDEA:
 	pop {r4}
 	pop {r0}
@@ -702,7 +702,7 @@ sub_806CDF8: @ 806CDF8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8069958
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806CE18
@@ -710,7 +710,7 @@ sub_806CDF8: @ 806CDF8
 	bl sub_80722CC
 	bl sub_806F258
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _0806CE18:
 	pop {r4}
 	pop {r0}
@@ -722,8 +722,8 @@ sub_806CE20: @ 806CE20
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r1, r4, 0x2
-	bl sub_805C538
-	bl sub_805C700
+	bl PlayerGetDestCoords
+	bl PlayerGetZCoord
 	strb r0, [r4, 0x4]
 	pop {r4}
 	pop {r0}
@@ -736,23 +736,23 @@ sub_806CE38: @ 806CE38
 	sub sp, 0x4
 	adds r5, r0, 0
 	adds r1, r5, 0x2
-	bl sub_805C4F4
+	bl GetXYCoordsOneStepInFrontOfPlayer
 	mov r4, sp
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058D44
+	bl MapGridGetZCoordAt
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
 	beq _0806CE6A
-	bl sub_805C700
+	bl PlayerGetZCoord
 _0806CE6A:
 	strb r0, [r5, 0x4]
 	add sp, 0x4
@@ -769,7 +769,7 @@ sub_806CE74: @ 806CE74
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -808,7 +808,7 @@ _0806CEB8:
 	bl sub_80722CC
 _0806CECA:
 	adds r0, r4, 0
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 _0806CED2:
 	pop {r4}
@@ -876,7 +876,7 @@ sub_806CF38: @ 806CF38
 	bl sub_8058F78
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059EC4
+	bl MetatileBehavior_IsCounter
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806CF60
@@ -901,7 +901,7 @@ _0806CF60:
 	lsrs r1, 16
 _0806CF7E:
 	ldrb r2, [r4, 0x4]
-	bl sub_805F894
+	bl GetFieldObjectIdByXYZ
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x10
@@ -947,7 +947,7 @@ _0806CFBC:
 	ldr r0, _0806CFF0 @ =gUnknown_20370D4
 	strh r6, [r0]
 	adds r0, r3, 0
-	bl sub_805FC38
+	bl GetFieldObjectScriptPointerByFieldObjectId
 _0806CFDE:
 	pop {r4-r6}
 	pop {r1}
@@ -973,7 +973,7 @@ sub_806CFF4: @ 806CFF4
 	ldrh r0, [r4]
 	ldrh r1, [r4, 0x2]
 	ldrb r2, [r4, 0x4]
-	bl sub_805F894
+	bl GetFieldObjectIdByXYZ
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x10
@@ -989,7 +989,7 @@ sub_806CFF4: @ 806CFF4
 	bne _0806D078
 _0806D02A:
 	adds r0, r7, 0
-	bl sub_8059EC4
+	bl MetatileBehavior_IsCounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1011,7 +1011,7 @@ _0806D02A:
 	lsls r1, 16
 	lsrs r1, 16
 	ldrb r2, [r4, 0x4]
-	bl sub_805F894
+	bl GetFieldObjectIdByXYZ
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x10
@@ -1033,7 +1033,7 @@ _0806D078:
 	lsls r0, 2
 	ldr r1, _0806D098 @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D0A0
@@ -1057,10 +1057,10 @@ _0806D0A0:
 	mov r1, r8
 	strh r1, [r0]
 	adds r0, r5, 0
-	bl sub_805FC38
+	bl GetFieldObjectScriptPointerByFieldObjectId
 	adds r1, r0, 0
 	ldrb r0, [r4]
-	bl sub_8069D8C
+	bl GetRamScript
 	adds r1, r0, 0
 _0806D0C8:
 	pop {r3}
@@ -1093,7 +1093,7 @@ sub_806D0E4: @ 806D0E4
 	lsrs r2, 16
 	ldrb r3, [r0, 0x4]
 	adds r0, r4, 0
-	bl sub_806DEEC
+	bl FindInvisibleMapObjectByPosition
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0806D164
@@ -1214,7 +1214,7 @@ sub_806D1F0: @ 806D1F0
 	ldr r0, _0806D210 @ =gUnknown_20370D4
 	strh r5, [r0]
 	adds r0, r4, 0
-	bl sub_8059EF4
+	bl MetatileBehavior_IsPC
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1337,7 +1337,7 @@ _0806D304: .4byte gUnknown_81C549C
 _0806D308:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8059ED8
+	bl MetatileBehavior_IsPlayerFacingTVScreen
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1760,7 +1760,7 @@ sub_806D660: @ 806D660
 	bl sub_806DDC0
 	cmp r0, 0
 	beq _0806D68C
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0806D68E
 	.align 2, 0
@@ -1810,7 +1810,7 @@ sub_806D698: @ 806D698
 	cmp r0, 0x1
 	bne _0806D6EC
 	ldr r0, _0806D6E8 @ =gUnknown_81A8CED
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	b _0806D730
 	.align 2, 0
 _0806D6E0: .4byte gUnknown_203ADFA
@@ -1823,7 +1823,7 @@ _0806D6EC:
 	cmp r0, 0x1
 	bne _0806D704
 	ldr r0, _0806D700 @ =gUnknown_81A8DFD
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	b _0806D730
 	.align 2, 0
 _0806D700: .4byte gUnknown_81A8DFD
@@ -1835,7 +1835,7 @@ _0806D704:
 	movs r0, 0xD
 	bl sub_8054E90
 	ldr r0, _0806D71C @ =gUnknown_81BF546
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	b _0806D730
 	.align 2, 0
 _0806D71C: .4byte gUnknown_81BF546
@@ -1933,7 +1933,7 @@ sub_806D79C: @ 806D79C
 	lsls r0, 16
 	cmp r0, 0
 	bne _0806D7E0
-	bl sub_80A0618
+	bl overworld_poison
 	cmp r0, 0x1
 	beq _0806D7E0
 	cmp r0, 0x1
@@ -2116,7 +2116,7 @@ sub_806D908: @ 806D908
 	lsrs r1, 24
 	ldr r2, _0806D924 @ =gUnknown_20370D4
 	strh r1, [r2]
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	bl sub_80699E0
 	bl sub_8069A20
 	pop {r0}
@@ -2139,7 +2139,7 @@ sub_806D928: @ 806D928
 	lsrs r2, 16
 	ldrb r3, [r0, 0x4]
 	adds r0, r4, 0
-	bl sub_806DEEC
+	bl FindInvisibleMapObjectByPosition
 	cmp r0, 0
 	bne _0806D950
 	movs r0, 0
@@ -2333,7 +2333,7 @@ _0806DAC4:
 	bne _0806DAE4
 	bl sub_80559E4
 	ldr r0, _0806DAE0 @ =gUnknown_81C1361
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0806DAEE
 	.align 2, 0
@@ -2553,7 +2553,7 @@ sub_806DC54: @ 806DC54
 	cmp r0, 0x7F
 	bne _0806DC78
 	ldrb r0, [r4, 0x5]
-	bl sub_8055454
+	bl copy_saved_warp2_bank_and_enter_x_to_warp1
 	b _0806DCC4
 	.align 2, 0
 _0806DC74: .4byte gUnknown_2036DFC
@@ -2564,7 +2564,7 @@ _0806DC78:
 	ldrsb r1, [r4, r1]
 	movs r2, 0x5
 	ldrsb r2, [r4, r2]
-	bl sub_80553C8
+	bl warp1_set_2
 	movs r1, 0
 	ldrsh r0, [r5, r1]
 	movs r2, 0x2
@@ -2572,7 +2572,7 @@ _0806DC78:
 	bl sub_805550C
 	ldrb r0, [r4, 0x7]
 	ldrb r1, [r4, 0x6]
-	bl sub_8055238
+	bl get_mapheader_by_bank_and_number
 	ldr r1, [r0, 0x4]
 	ldrb r0, [r4, 0x5]
 	ldr r1, [r1, 0x8]
@@ -2591,7 +2591,7 @@ _0806DC78:
 	lsls r2, 24
 	asrs r2, 24
 	adds r3, r7, 0
-	bl sub_80553E8
+	bl saved_warp2_set
 _0806DCC4:
 	pop {r4-r7}
 	pop {r0}
@@ -2723,7 +2723,7 @@ _0806DD96:
 	b _0806DDB8
 _0806DDB0:
 	adds r0, r1, 0
-	bl sub_8069B48
+	bl ScriptContext2_RunNewScript
 _0806DDB6:
 	movs r0, 0
 _0806DDB8:
@@ -2809,7 +2809,7 @@ sub_806DE28: @ 806DE28
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl sub_805E4C8
+	bl RemoveFieldObjectByLocalIdAndMap
 	ldrb r0, [r5, 0x8]
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x5]
@@ -2855,8 +2855,8 @@ _0806DE92:
 	bne _0806DEB0
 	bl sub_8112364
 	ldr r0, [r4, 0xC]
-	bl sub_8069AE4
-	bl sub_8069940
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 _0806DEB0:
 	adds r4, 0x10
 	subs r5, 0x1
@@ -2892,8 +2892,8 @@ sub_806DEC4: @ 806DEC4
 _0806DEE8: .4byte gUnknown_2036DFC
 	thumb_func_end sub_806DEC4
 
-	thumb_func_start sub_806DEEC
-sub_806DEEC: @ 806DEEC
+	thumb_func_start FindInvisibleMapObjectByPosition
+FindInvisibleMapObjectByPosition: @ 806DEEC
 	push {r4-r7,lr}
 	lsls r1, 16
 	lsrs r7, r1, 16
@@ -2938,10 +2938,10 @@ _0806DF34:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DEEC
+	thumb_func_end FindInvisibleMapObjectByPosition
 
-	thumb_func_start sub_806DF3C
-sub_806DF3C: @ 806DF3C
+	thumb_func_start dive_warp
+dive_warp: @ 806DF3C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -3001,7 +3001,7 @@ _0806DFB2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DF3C
+	thumb_func_end dive_warp
 
 	thumb_func_start sub_806DFB8
 sub_806DFB8: @ 806DFB8
@@ -3011,7 +3011,7 @@ sub_806DFB8: @ 806DFB8
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -3079,11 +3079,11 @@ _0806E046:
 	bx r1
 	thumb_func_end sub_806DFB8
 
-	thumb_func_start sub_806E050
-sub_806E050: @ 806E050
+	thumb_func_start GetFieldObjectScriptPointerForComparison
+GetFieldObjectScriptPointerForComparison: @ 806E050
 	push {r4,r5,lr}
 	sub sp, 0x8
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3106,13 +3106,13 @@ sub_806E050: @ 806E050
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E050
+	thumb_func_end GetFieldObjectScriptPointerForComparison
 
 	thumb_func_start sub_806E08C
 sub_806E08C: @ 806E08C
 	push {r4,lr}
 	sub sp, 0x8
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	mov r4, sp
 	mov r0, sp
 	bl sub_806CE20

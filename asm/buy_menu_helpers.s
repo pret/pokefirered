@@ -34,15 +34,15 @@ _0813F686:
 	movs r2, 0xF0
 	bl sub_814FF2C
 	movs r0, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0x4
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0x5
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	cmp r4, 0x1
 	bne _0813F6C4
 	movs r0, 0x6
-	bl sub_8003FA0
+	bl PutWindowTilemap
 _0813F6C4:
 	pop {r4}
 	pop {r0}
@@ -155,7 +155,7 @@ sub_813F75C: @ 813F75C
 	movs r3, 0xE
 	bl sub_80BF474
 	movs r0, 0
-	bl sub_80F67A4
+	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
@@ -173,7 +173,7 @@ sub_813F7A8: @ 813F7A8
 	lsrs r1, 24
 	movs r2, 0x1
 	movs r3, 0xD
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813F7A8
@@ -187,7 +187,7 @@ sub_813F7C0: @ 813F7C0
 	lsrs r1, 24
 	movs r2, 0xA
 	movs r3, 0xF
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813F7C0

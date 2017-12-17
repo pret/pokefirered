@@ -29,7 +29,7 @@ sub_815F138: @ 815F138
 	ldr r0, _0815F190 @ =sub_815F1AC
 	movs r1, 0x50
 	str r3, [sp]
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0815F194 @ =gUnknown_3005090
@@ -59,7 +59,7 @@ _0815F194: .4byte gUnknown_3005090
 sub_815F198: @ 815F198
 	push {lr}
 	ldr r0, _0815F1A8 @ =sub_815F1AC
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -141,14 +141,14 @@ _0815F21C:
 	lsls r0, 2
 	ldr r4, _0815F25C @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	movs r3, 0xE
 	ldrsh r1, [r5, r3]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 _0815F252:
 	ldrh r0, [r5]
 	adds r0, 0x1
@@ -168,20 +168,20 @@ _0815F260:
 	lsls r0, 2
 	ldr r4, _0815F2A8 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	movs r0, 0x12
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldrh r0, [r5, 0x4]
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldrh r0, [r5, 0x6]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 _0815F29E:
 	add sp, 0xC
 	pop {r4-r6}
@@ -278,7 +278,7 @@ _0815F340:
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	b _0815F3D8
 _0815F362:
 	ldrh r0, [r4, 0x22]
@@ -300,7 +300,7 @@ _0815F362:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0
 	strh r0, [r4, 0x32]
 	b _0815F3BA
@@ -326,7 +326,7 @@ _0815F39A:
 	adds r0, r4, 0
 	movs r1, 0x3
 _0815F3B6:
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _0815F3BA:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -588,9 +588,9 @@ sub_815F564: @ 815F564
 	orrs r0, r1
 	str r0, [r4, 0x4]
 	mov r0, sp
-	bl sub_800EBCC
+	bl LoadCompressedObjectPic
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -634,7 +634,7 @@ sub_815F5BC: @ 815F5BC
 	adds r1, r2, 0
 	adds r2, r6, 0
 	mov r3, r8
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x18
@@ -688,7 +688,7 @@ sub_815F610: @ 815F610
 	adds r1, r2, 0
 	adds r2, r5, 0
 	mov r3, r10
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r3, r9
@@ -700,7 +700,7 @@ sub_815F610: @ 815F610
 	adds r1, r4, 0
 	adds r2, r5, 0
 	mov r3, r10
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r4, r8
@@ -735,7 +735,7 @@ sub_815F610: @ 815F610
 	lsls r0, 2
 	adds r0, r2
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3

@@ -99,12 +99,12 @@ _0803ED6E:
 _0803ED9C: .4byte gUnknown_2023F54
 _0803EDA0:
 	ldrh r0, [r6, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
 	ldrh r0, [r6, 0x2E]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r0, 24
 _0803EDB6:
@@ -135,13 +135,13 @@ _0803EDD4:
 _0803EDE6:
 	ldr r2, [sp, 0x4]
 	ldrh r0, [r2, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x1C]
 	ldr r3, [sp, 0x4]
 	ldrh r0, [r3, 0x2E]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 _0803EDFC:
 	adds r0, r6, 0
 	adds r0, 0x20
@@ -168,7 +168,7 @@ _0803EE10:
 	cmp r0, 0
 	beq _0803EE44
 	ldr r0, [sp, 0x10]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803EE44
@@ -191,7 +191,7 @@ _0803EE44:
 	cmp r0, 0
 	beq _0803EE7A
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803EE7A
@@ -216,7 +216,7 @@ _0803EE7A:
 	cmp r0, 0
 	beq _0803EEB2
 	ldr r0, [sp, 0x10]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803EEB2
@@ -242,7 +242,7 @@ _0803EEB2:
 	cmp r0, 0
 	beq _0803EEE8
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803EEE8

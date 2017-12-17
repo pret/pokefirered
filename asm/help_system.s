@@ -124,7 +124,7 @@ _0813B968:
 	strh r0, [r1]
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _0813B990 @ =gUnknown_203F178
 	movs r0, 0x2
 	b _0813BB22
@@ -137,19 +137,19 @@ _0813B994:
 	lsls r2, 7
 	movs r0, 0
 	movs r3, 0
-	bl sub_8000F44
+	bl RequestDma3Fill
 	ldr r0, _0813B9C8 @ =gUnknown_8464128
 	movs r1, 0xA0
 	lsls r1, 19
 	movs r2, 0x20
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	ldr r0, _0813B9CC @ =gUnknown_8464008
 	ldr r1, _0813B9D0 @ =gUnknown_201FEE0
 	movs r2, 0x90
 	lsls r2, 1
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	ldr r1, _0813B9D4 @ =gUnknown_203F178
 	movs r0, 0x3
 	b _0813BB22
@@ -200,20 +200,20 @@ _0813BA3C: .4byte gUnknown_203F178
 _0813BA40:
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x10
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x12
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _0813BA70 @ =0x00001f0c
 	movs r0, 0x8
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 1
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _0813BA74 @ =gUnknown_203F178
 	movs r0, 0x5
 	b _0813BB22
@@ -239,7 +239,7 @@ _0813BA9C: .4byte gUnknown_203F178
 _0813BAA0:
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	bl sub_813BC2C
 	movs r1, 0
 	ldr r5, _0813BAD0 @ =0x000001ff
@@ -340,20 +340,20 @@ _0813BB70: .4byte 0x00007fff
 sub_813BB74: @ 813BB74
 	push {r4,lr}
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	ldr r4, _0813BBA8 @ =gUnknown_203F178
 	strh r0, [r4, 0x8]
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0xA]
 	movs r0, 0x10
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0xC]
 	movs r0, 0x12
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0xE]
 	movs r0, 0x50
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x10]
 	pop {r4}
 	pop {r0}
@@ -370,7 +370,7 @@ sub_813BBAC: @ 813BBAC
 	movs r2, 0x80
 	lsls r2, 7
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -411,19 +411,19 @@ sub_813BBF4: @ 813BBF4
 	ldr r4, _0813BC28 @ =gUnknown_203F178
 	ldrh r1, [r4, 0x10]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xE]
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x8
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x8]
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -439,7 +439,7 @@ sub_813BC2C: @ 813BC2C
 	movs r2, 0x80
 	lsls r2, 7
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -468,7 +468,7 @@ sub_813BC5C: @ 813BC5C
 	movs r2, 0x80
 	lsls r2, 7
 	movs r3, 0
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1319,7 +1319,7 @@ _0813C2D4:
 	add r9, r0
 	adds r6, r1, 0
 	adds r0, r6, 0
-	bl sub_8006418
+	bl GetKeypadIconTileOffset
 	lsls r0, 24
 	lsrs r0, 19
 	ldr r1, _0813C344 @ =gUnknown_81EA700
@@ -1341,12 +1341,12 @@ _0813C2D4:
 	lsls r0, r2, 3
 	strh r0, [r5, 0x6]
 	adds r0, r6, 0
-	bl sub_8006428
+	bl GetKeypadIconWidth
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
-	bl sub_8006438
+	bl GetKeypadIconHeight
 	lsls r0, 24
 	lsrs r0, 24
 	str r7, [sp]
@@ -1362,7 +1362,7 @@ _0813C2D4:
 	movs r3, 0
 	bl sub_8004AA4
 	adds r0, r6, 0
-	bl sub_8006428
+	bl GetKeypadIconWidth
 	b _0813C38E
 	.align 2, 0
 _0813C344: .4byte gUnknown_81EA700

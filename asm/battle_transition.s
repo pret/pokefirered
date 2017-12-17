@@ -13,7 +13,7 @@ sub_80D08B8: @ 80D08B8
 	lsrs r4, 24
 	ldr r5, _080D08DC @ =gUnknown_2039A2C
 	movs r0, 0x3C
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5]
 	ldr r1, _080D08E0 @ =gUnknown_30030F0
 	ldr r0, _080D08E4 @ =sub_80565A8
@@ -43,7 +43,7 @@ sub_80D08E8: @ 80D08E8
 sub_80D08F8: @ 80D08F8
 	push {r4,r5,lr}
 	ldr r0, _080D091C @ =sub_80D0978
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, _080D0920 @ =gUnknown_3005090
@@ -64,11 +64,11 @@ _080D0924:
 	bl sub_80D3DD0
 	ldr r4, _080D0944 @ =gUnknown_2039A2C
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0x1
 _080D093C:
 	pop {r4,r5}
@@ -86,7 +86,7 @@ sub_80D0948: @ 80D0948
 	lsrs r4, 24
 	ldr r0, _080D0970 @ =sub_80D0978
 	movs r1, 0x2
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080D0974 @ =gUnknown_3005090
@@ -161,7 +161,7 @@ _080D09E4: .4byte 0x04000100
 _080D09E8: .4byte gUnknown_83FA320
 _080D09EC:
 	movs r1, 0x4
-	bl sub_807741C
+	bl CreateTask
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -182,7 +182,7 @@ sub_80D0A00: @ 80D0A00
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -213,7 +213,7 @@ sub_80D0A34: @ 80D0A34
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -237,7 +237,7 @@ sub_80D0A5C: @ 80D0A5C
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -288,7 +288,7 @@ _080D0AC4:
 	cmp r0, 0
 	beq _080D0AD4
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080D0AD4:
 	add sp, 0x4
 	pop {r4}
@@ -332,16 +332,16 @@ sub_80D0B14: @ 80D0B14
 	adds r4, r0, 0
 	movs r0, 0x4C
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0xA
 	movs r1, 0x40
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	movs r0, 0xC
 	movs r1, 0x40
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	movs r0, 0xE
 	movs r1, 0x40
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -380,7 +380,7 @@ _080D0B5E:
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _080D0B80:
 	ldrh r1, [r4, 0xC]
 	movs r0, 0xF
@@ -388,7 +388,7 @@ _080D0B80:
 	lsls r1, r0, 4
 	orrs r1, r0
 	movs r0, 0x4C
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xC
 	ldrsh r0, [r4, r1]
 	cmp r0, 0xE
@@ -414,10 +414,10 @@ sub_80D0BA8: @ 80D0BA8
 	cmp r0, 0
 	bne _080D0BC4
 	ldr r0, _080D0BD0 @ =sub_80D0ADC
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080D0BC4:
 	movs r0, 0
 	pop {r1}
@@ -463,7 +463,7 @@ sub_80D0C0C: @ 80D0C0C
 	sub sp, 0x8
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	movs r0, 0x1
 	negs r0, r0
 	movs r4, 0
@@ -471,7 +471,7 @@ sub_80D0C0C: @ 80D0C0C
 	movs r1, 0x4
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _080D0C68 @ =gUnknown_2038E80
 	ldr r1, _080D0C6C @ =gUnknown_2039A2C
 	ldr r1, [r1]
@@ -484,11 +484,11 @@ sub_80D0C0C: @ 80D0C0C
 	movs r3, 0x2
 	bl sub_80D3E74
 	ldr r0, _080D0C70 @ =sub_80D0CF0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldr r0, _080D0C74 @ =sub_80D0D28
-	bl sub_8000700
+	bl SetHBlankCallback
 	movs r0, 0x3
-	bl sub_8000B68
+	bl EnableInterrupts
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -540,10 +540,10 @@ sub_80D0C78: @ 80D0C78
 	cmp r0, 0
 	bne _080D0CCA
 	ldr r0, _080D0CEC @ =sub_80D0BD4
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080D0CCA:
 	ldr r0, [r4]
 	ldrb r1, [r0]
@@ -651,7 +651,7 @@ sub_80D0D8C: @ 80D0D8C
 	sub sp, 0x4
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -659,7 +659,7 @@ sub_80D0D8C: @ 80D0D8C
 	movs r1, 0x4
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _080D0DE0 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	ldr r0, _080D0DE4 @ =gUnknown_2038E80
@@ -669,11 +669,11 @@ sub_80D0D8C: @ 80D0D8C
 	lsls r2, 1
 	bl memset
 	ldr r0, _080D0DE8 @ =sub_80D0E80
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldr r0, _080D0DEC @ =sub_80D0EB8
-	bl sub_8000700
+	bl SetHBlankCallback
 	movs r0, 0x3
-	bl sub_8000B68
+	bl EnableInterrupts
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -714,7 +714,7 @@ sub_80D0DF0: @ 80D0DF0
 _080D0E18:
 	lsrs r0, r4, 8
 	asrs r1, r7, 16
-	bl sub_8044E30
+	bl Sin
 	ldr r1, _080D0E74 @ =gUnknown_2038700
 	lsls r2, r5, 1
 	adds r2, r1
@@ -740,10 +740,10 @@ _080D0E18:
 	cmp r0, 0
 	bne _080D0E5E
 	ldr r0, _080D0E7C @ =sub_80D0D54
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080D0E5E:
 	ldr r0, [r6]
 	ldrb r1, [r0]
@@ -850,7 +850,7 @@ sub_80D0F1C: @ 80D0F1C
 	sub sp, 0xC
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	movs r1, 0
 	movs r0, 0x10
 	strh r0, [r4, 0xA]
@@ -890,7 +890,7 @@ _080D0F64:
 	cmp r1, 0x9F
 	bls _080D0F64
 	ldr r0, _080D0FC4 @ =sub_80D1370
-	bl sub_80006F4
+	bl SetVBlankCallback
 	adds r0, r5, 0
 	adds r1, r6, 0
 	bl sub_80D3E28
@@ -909,7 +909,7 @@ _080D0F64:
 	ldr r0, _080D0FD0 @ =gUnknown_83FA638
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -1294,10 +1294,10 @@ _080D125E:
 	ldrh r0, [r1, 0xA]
 	bl sub_80D3E60
 	ldr r0, _080D12DC @ =sub_80D0EE4
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080D129A:
 	ldrh r1, [r4, 0xE]
 	movs r2, 0xE
@@ -1307,7 +1307,7 @@ _080D129A:
 	adds r0, r1, 0x1
 	strh r0, [r4, 0xE]
 	ldr r0, _080D12E0 @ =sub_80D139C
-	bl sub_80006F4
+	bl SetVBlankCallback
 _080D12AE:
 	ldr r0, _080D12C4 @ =gUnknown_2039A2C
 	ldr r1, [r0]
@@ -1363,23 +1363,23 @@ _080D131C:
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x10]
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1486,7 +1486,7 @@ sub_80D1400: @ 80D1400
 	ldr r0, _080D1448 @ =gUnknown_83FA638
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -1517,7 +1517,7 @@ sub_80D144C: @ 80D144C
 	adds r0, r4, 0
 	movs r2, 0xA
 	bl memcpy
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x1
 	ands r5, r0
 	movs r1, 0
@@ -1543,7 +1543,7 @@ _080D147A:
 	ldrsh r0, [r0, r1]
 	str r0, [r6, 0xC]
 	movs r0, 0x2D
-	bl sub_8083444
+	bl FieldEffectStart
 	adds r4, 0x1
 	lsls r4, 16
 	movs r0, 0x1
@@ -1574,16 +1574,16 @@ _080D14D4: .4byte gUnknown_20386E0
 sub_80D14D8: @ 80D14D8
 	push {lr}
 	movs r0, 0x2D
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D14F8
 	bl sub_80D3E60
 	ldr r0, _080D1500 @ =sub_80D13C8
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080D14F8:
 	movs r0, 0
 	pop {r1}
@@ -1602,7 +1602,7 @@ sub_80D1504: @ 80D1504
 	movs r3, 0x4
 	ldrsh r2, [r5, r3]
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _080D1568 @ =gUnknown_202063C
@@ -1629,10 +1629,10 @@ sub_80D1504: @ 80D1504
 	ldr r0, _080D156C @ =0x0000ffff
 	strh r0, [r4, 0x32]
 	adds r0, r4, 0
-	bl sub_800860C
+	bl InitSpriteAffineAnim
 	ldrb r1, [r5, 0x8]
 	adds r0, r4, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -1684,7 +1684,7 @@ _080D1594:
 	beq _080D1606
 	strh r1, [r4, 0x32]
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	lsls r0, 16
 	lsrs r0, 24
 	movs r1, 0x1F
@@ -1737,7 +1737,7 @@ _080D1606:
 	bls _080D162A
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_80836D8
+	bl FieldEffectStop
 _080D162A:
 	add sp, 0x4
 	pop {r4-r6}
@@ -1782,7 +1782,7 @@ sub_80D1670: @ 80D1670
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	ldr r0, _080D16C4 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r0, 0
@@ -1806,7 +1806,7 @@ _080D1696:
 	cmp r1, 0x9F
 	bls _080D1696
 	ldr r0, _080D16D4 @ =sub_80D1ABC
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldr r0, _080D16C4 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r0, 0x78
@@ -2326,10 +2326,10 @@ sub_80D1A7C: @ 80D1A7C
 	ldrh r0, [r1, 0xA]
 	bl sub_80D3E60
 	ldr r0, _080D1AB8 @ =sub_80D1638
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -2373,22 +2373,22 @@ _080D1AF4:
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _080D1B48 @ =gUnknown_2038700
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r4, r0
 	ldrh r1, [r4]
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	str r4, [r5]
 	ldr r0, _080D1B50 @ =0x04000040
 	str r0, [r5, 0x4]
@@ -2445,7 +2445,7 @@ sub_80D1B90: @ 80D1B90
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	movs r2, 0
 	ldr r4, _080D1BD8 @ =gUnknown_2038E80
 	ldr r3, _080D1BDC @ =gUnknown_2039A2C
@@ -2461,11 +2461,11 @@ _080D1BA2:
 	cmp r2, 0x9F
 	bls _080D1BA2
 	ldr r0, _080D1BE0 @ =sub_80D1CC8
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldr r0, _080D1BE4 @ =sub_80D1D00
-	bl sub_8000700
+	bl SetHBlankCallback
 	movs r0, 0x2
-	bl sub_8000B68
+	bl EnableInterrupts
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -2518,7 +2518,7 @@ _080D1C24:
 _080D1C28:
 	lsrs r0, r4, 8
 	asrs r1, r7, 16
-	bl sub_8044E30
+	bl Sin
 	ldr r1, _080D1CBC @ =gUnknown_2038700
 	lsls r2, r5, 1
 	adds r2, r1
@@ -2553,7 +2553,7 @@ _080D1C28:
 	movs r2, 0
 	str r2, [sp]
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _080D1C78:
 	movs r5, 0x10
 	ldrsh r0, [r6, r5]
@@ -2566,10 +2566,10 @@ _080D1C78:
 	cmp r0, 0
 	bne _080D1C9A
 	ldr r0, _080D1CC4 @ =sub_80D1B58
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080D1C9A:
 	ldr r0, _080D1CB4 @ =gUnknown_2039A2C
 	ldr r1, [r0]
@@ -2680,7 +2680,7 @@ sub_80D1D64: @ 80D1D64
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	ldr r0, _080D1DB0 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r2, 0
@@ -2704,7 +2704,7 @@ _080D1D8A:
 	cmp r1, 0x9F
 	bls _080D1D8A
 	ldr r0, _080D1DB8 @ =sub_80D1E98
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -2743,7 +2743,7 @@ sub_80D1DBC: @ 80D1DBC
 _080D1DE4:
 	adds r0, r5, 0
 	movs r1, 0x28
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0xA]
 	adds r0, r1
 	lsls r0, 16
@@ -2817,10 +2817,10 @@ sub_80D1E58: @ 80D1E58
 	ldrh r0, [r1, 0xA]
 	bl sub_80D3E60
 	ldr r0, _080D1E94 @ =sub_80D1D2C
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -2864,15 +2864,15 @@ _080D1ED0:
 	ldr r0, [r5]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r5]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r5]
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080D1F20 @ =gUnknown_2038E80
 	str r0, [r4]
 	ldr r0, _080D1F24 @ =0x04000040
@@ -2998,7 +2998,7 @@ _080D1FE6:
 	asrs r4, r0, 16
 	mov r0, r10
 	adds r1, r4, 0
-	bl sub_8044E30
+	bl Sin
 	movs r5, 0x50
 	subs r0, r5, r0
 	lsls r0, 16
@@ -3006,7 +3006,7 @@ _080D1FE6:
 	mov r0, r10
 	adds r1, r4, 0
 	str r2, [sp, 0x10]
-	bl sub_8044E4C
+	bl Cos
 	adds r0, 0x78
 	lsls r0, 16
 	lsrs r7, r0, 16
@@ -3016,13 +3016,13 @@ _080D1FE6:
 	asrs r4, 16
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8044E30
+	bl Sin
 	subs r5, r0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8044E4C
+	bl Cos
 	adds r0, 0x78
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -3354,7 +3354,7 @@ _080D2274:
 	adds r1, r5
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8044E30
+	bl Sin
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r4, 0
@@ -3718,7 +3718,7 @@ sub_80D253C: @ 80D253C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	ldr r0, _080D25A0 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r4, 0
@@ -3750,7 +3750,7 @@ sub_80D253C: @ 80D253C
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
 	ldr r0, _080D25C0 @ =sub_80D2698
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -3903,10 +3903,10 @@ sub_80D2698: @ 80D2698
 	cmp r3, 0
 	beq _080D26E4
 	ldr r0, _080D26E0 @ =sub_80D1F2C
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	b _080D2746
 	.align 2, 0
 _080D26D0: .4byte 0x040000b0
@@ -3933,26 +3933,26 @@ _080D2700:
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xC]
 	movs r0, 0x46
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _080D275C @ =gUnknown_2038700
 	ldrh r1, [r4]
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x42
-	bl sub_8000A38
+	bl SetGpuReg
 	str r4, [r5]
 	ldr r0, _080D2760 @ =0x04000040
 	str r0, [r5, 0x4]
@@ -4103,7 +4103,7 @@ sub_80D2840: @ 80D2840
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	adds r0, r4, 0
 	bl sub_80D2EA4
 	movs r0, 0
@@ -4133,7 +4133,7 @@ _080D2874:
 	cmp r1, 0x9F
 	bls _080D2874
 	ldr r0, _080D28A4 @ =sub_80D2D50
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -4172,7 +4172,7 @@ sub_80D28A8: @ 80D28A8
 	ldr r0, [r0]
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r1, _080D295C @ =gUnknown_83FA754
 	ldr r0, _080D2960 @ =gUnknown_300500C
 	ldr r0, [r0]
@@ -4182,7 +4182,7 @@ sub_80D28A8: @ 80D28A8
 	ldr r0, [r0]
 	movs r1, 0xFA
 	movs r2, 0xC
-	bl sub_80703EC
+	bl LoadPalette
 	movs r1, 0
 	ldr r5, [sp]
 	movs r0, 0xF0
@@ -4216,9 +4216,9 @@ _080D2902:
 	cmp r0, 0x13
 	ble _080D28FC
 	movs r0, 0x2
-	bl sub_8000B68
+	bl EnableInterrupts
 	ldr r0, _080D2964 @ =sub_80D2E6C
-	bl sub_8000700
+	bl SetHBlankCallback
 	mov r2, r8
 	ldrh r0, [r2, 0x8]
 	adds r0, 0x1
@@ -4257,7 +4257,7 @@ sub_80D2968: @ 80D2968
 _080D2982:
 	adds r0, r5, 0
 	movs r1, 0x10
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0xC]
 	adds r0, r1
 	lsls r0, 16
@@ -4288,7 +4288,7 @@ _080D29A2:
 _080D29BC:
 	adds r0, r5, 0
 	movs r1, 0x10
-	bl sub_8044E30
+	bl Sin
 	ldrh r1, [r4, 0xE]
 	subs r1, r0
 	lsls r1, 16
@@ -4488,7 +4488,7 @@ sub_80D2B0C: @ 80D2B0C
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldr r1, _080D2BB0 @ =0x040000b0
 	ldrh r2, [r1, 0xA]
 	ldr r0, _080D2BB4 @ =0x0000c5ff
@@ -4515,10 +4515,10 @@ sub_80D2B0C: @ 80D2B0C
 	bl memset
 	movs r0, 0x40
 	movs r1, 0xF0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -4529,7 +4529,7 @@ sub_80D2B0C: @ 80D2B0C
 	movs r0, 0xBF
 	strh r0, [r1, 0xE]
 	ldr r0, _080D2BC0 @ =sub_80D2DEC
-	bl sub_80006F4
+	bl SetVBlankCallback
 _080D2BA0:
 	movs r0, 0
 	pop {r3}
@@ -4668,7 +4668,7 @@ sub_80D2C8C: @ 80D2C8C
 	negs r0, r0
 	ldr r2, _080D2CC0 @ =0x00007fff
 	movs r1, 0x10
-	bl sub_80714D4
+	bl BlendPalettes
 	ldr r1, [r5]
 	movs r0, 0xFF
 	strh r0, [r1, 0xE]
@@ -4741,10 +4741,10 @@ sub_80D2D10: @ 80D2D10
 	ldrh r0, [r1, 0xA]
 	bl sub_80D3E60
 	ldr r0, [r4]
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -4788,19 +4788,19 @@ _080D2D88:
 	ldr r0, [r5]
 	ldrh r1, [r0, 0x1C]
 	movs r0, 0x12
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r5]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r5]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r5]
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080D2DE0 @ =gUnknown_2038E80
 	str r0, [r4]
 	ldr r0, _080D2DE4 @ =0x04000040
@@ -4857,7 +4857,7 @@ _080D2E24:
 	ldr r0, [r2]
 	ldrh r1, [r0, 0xE]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080D2E60 @ =gUnknown_2038E80
 	str r0, [r4]
 	ldr r0, _080D2E64 @ =0x04000054
@@ -4990,7 +4990,7 @@ sub_80D2EA4: @ 80D2EA4
 	ldrb r0, [r6, 0x1]
 	orrs r0, r1
 	strb r0, [r6, 0x1]
-	bl sub_8008594
+	bl AllocOamMatrix
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0x1F
@@ -5005,7 +5005,7 @@ sub_80D2EA4: @ 80D2EA4
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r5, 0x3]
-	bl sub_8008594
+	bl AllocOamMatrix
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -5037,12 +5037,12 @@ sub_80D2EA4: @ 80D2EA4
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x3
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 	adds r0, r6, 0
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x3
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 	ldrb r0, [r5, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
@@ -5057,7 +5057,7 @@ sub_80D2EA4: @ 80D2EA4
 	movs r4, 0
 	ldrsh r2, [r3, r4]
 	movs r3, 0
-	bl sub_800865C
+	bl SetOamMatrixRotationScaling
 	ldrb r0, [r6, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
@@ -5065,7 +5065,7 @@ sub_80D2EA4: @ 80D2EA4
 	movs r2, 0x80
 	lsls r2, 2
 	movs r3, 0
-	bl sub_800865C
+	bl SetOamMatrixRotationScaling
 	add sp, 0x4
 	pop {r3,r4}
 	mov r8, r3
@@ -5321,7 +5321,7 @@ sub_80D31A4: @ 80D31A4
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	movs r3, 0
 	movs r0, 0x80
 	lsls r0, 1
@@ -5355,11 +5355,11 @@ _080D31D0:
 	cmp r3, 0x9F
 	bls _080D31D0
 	movs r0, 0x2
-	bl sub_8000B68
+	bl EnableInterrupts
 	ldr r0, _080D3218 @ =sub_80D332C
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldr r0, _080D321C @ =sub_80D33C0
-	bl sub_8000700
+	bl SetHBlankCallback
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -5499,10 +5499,10 @@ sub_80D32EC: @ 80D32EC
 	ldrh r0, [r1, 0xA]
 	bl sub_80D3E60
 	ldr r0, _080D3328 @ =sub_80D316C
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -5531,15 +5531,15 @@ sub_80D332C: @ 80D332C
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -5637,7 +5637,7 @@ sub_80D3424: @ 80D3424
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	ldr r0, _080D348C @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r2, 0
@@ -5669,11 +5669,11 @@ _080D3450:
 	cmp r1, 0x9F
 	bls _080D3450
 	movs r0, 0x2
-	bl sub_8000B68
+	bl EnableInterrupts
 	ldr r0, _080D3494 @ =sub_80D36E0
-	bl sub_8000700
+	bl SetHBlankCallback
 	ldr r0, _080D3498 @ =sub_80D35F4
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -5701,7 +5701,7 @@ sub_80D349C: @ 80D349C
 	movs r4, 0
 _080D34B0:
 	ldr r0, _080D3508 @ =sub_80D3720
-	bl sub_800704C
+	bl CreateInvisibleSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -5764,7 +5764,7 @@ sub_80D3510: @ 80D3510
 	negs r0, r0
 	ldr r2, _080D3548 @ =0x00007fff
 	movs r1, 0x10
-	bl sub_80714D4
+	bl BlendPalettes
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -5798,9 +5798,9 @@ sub_80D354C: @ 80D354C
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	movs r0, 0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0
-	bl sub_8000700
+	bl SetHBlankCallback
 	ldr r1, [r5]
 	movs r0, 0xF0
 	strh r0, [r1, 0x6]
@@ -5811,7 +5811,7 @@ sub_80D354C: @ 80D354C
 	strh r0, [r1, 0x2]
 	strh r4, [r1, 0x20]
 	ldr r0, _080D35B0 @ =sub_80D3690
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -5847,10 +5847,10 @@ sub_80D35B4: @ 80D35B4
 	bls _080D35E6
 	bl sub_80D3E60
 	ldr r0, _080D35F0 @ =sub_80D33EC
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080D35E6:
 	movs r0, 0
 	pop {r1}
@@ -5878,19 +5878,19 @@ sub_80D35F4: @ 80D35F4
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x6]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -5937,27 +5937,27 @@ sub_80D3690: @ 80D3690
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x12]
 	movs r0, 0x54
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x6]
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6125,7 +6125,7 @@ _080D37FC:
 	adds r0, 0x1
 	strh r0, [r1, 0x20]
 	adds r0, r3, 0
-	bl sub_8007280
+	bl DestroySprite
 _080D380A:
 	pop {r4-r7}
 	pop {r0}
@@ -6189,7 +6189,7 @@ sub_80D3850: @ 80D3850
 	ldr r0, _080D38A0 @ =gUnknown_83FA638
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -6261,10 +6261,10 @@ sub_80D38FC: @ 80D38FC
 	bne _080D391C
 	bl sub_80D3E60
 	ldr r0, _080D3924 @ =sub_80D3818
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080D391C:
 	movs r0, 0
 	pop {r1}
@@ -6308,7 +6308,7 @@ sub_80D3960: @ 80D3960
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	ldr r0, _080D39B8 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r2, 0
@@ -6337,7 +6337,7 @@ _080D3984:
 	movs r2, 0xA0
 	bl CpuSet
 	ldr r0, _080D39C0 @ =sub_80D3BA4
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -6555,10 +6555,10 @@ sub_80D3B1C: @ 80D3B1C
 	ldrh r0, [r1, 0xA]
 	bl sub_80D3E60
 	ldr r0, _080D3B64 @ =sub_80D3928
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0
 	b _080D3B80
 	.align 2, 0
@@ -6639,22 +6639,22 @@ _080D3BDC:
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x4A
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _080D3C30 @ =gUnknown_2038700
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r4, r0
 	ldrh r1, [r4]
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	str r4, [r5]
 	ldr r0, _080D3C38 @ =0x04000040
 	str r0, [r5, 0x4]
@@ -6701,7 +6701,7 @@ sub_80D3C40: @ 80D3C40
 	ldr r0, _080D3C9C @ =sub_80D3CC4
 	movs r1, 0x3
 	str r3, [sp]
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080D3CA0 @ =gUnknown_3005090
@@ -6732,7 +6732,7 @@ _080D3CA0: .4byte gUnknown_3005090
 sub_80D3CA4: @ 80D3CA4
 	push {lr}
 	ldr r0, _080D3CB8 @ =sub_80D3CC4
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -6810,7 +6810,7 @@ _080D3D2C:
 	negs r0, r0
 	ldrb r1, [r4, 0x16]
 	ldr r2, _080D3D54 @ =0x00002d6b
-	bl sub_80714D4
+	bl BlendPalettes
 _080D3D38:
 	movs r2, 0x16
 	ldrsh r0, [r4, r2]
@@ -6861,7 +6861,7 @@ _080D3D86:
 	negs r0, r0
 	ldrb r1, [r4, 0x16]
 	ldr r2, _080D3DB8 @ =0x00002d6b
-	bl sub_80714D4
+	bl BlendPalettes
 _080D3D92:
 	movs r0, 0x16
 	ldrsh r1, [r4, r0]
@@ -6874,10 +6874,10 @@ _080D3D92:
 	cmp r0, 0
 	bne _080D3DC0
 	ldr r0, _080D3DBC @ =sub_80D3CC4
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 	b _080D3DC6
 	.align 2, 0
 _080D3DB8: .4byte 0x00002d6b
@@ -6916,9 +6916,9 @@ _080D3DF0: .4byte gUnknown_2039A2C
 	thumb_func_start sub_80D3DF4
 sub_80D3DF4: @ 80D3DF4
 	push {lr}
-	bl sub_8007320
-	bl sub_8007610
-	bl sub_8070474
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80D3DF4
@@ -6928,7 +6928,7 @@ sub_80D3E08: @ 80D3E08
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	lsls r0, 16
 	lsrs r0, 18
 	lsls r0, 30
@@ -6948,14 +6948,14 @@ sub_80D3E28: @ 80D3E28
 	adds r5, r0, 0
 	adds r6, r1, 0
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 24
 	movs r0, 0x1F
 	ands r4, r0
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	lsls r0, 16
 	lsrs r0, 18
 	lsls r4, 11
@@ -6979,7 +6979,7 @@ sub_80D3E60: @ 80D3E60
 	negs r0, r0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80D3E60
@@ -7021,7 +7021,7 @@ _080D3EAC:
 	ands r0, r4
 	mov r2, r8
 	asrs r1, r2, 16
-	bl sub_8044E30
+	bl Sin
 	lsls r1, r6, 1
 	add r1, r10
 	add r0, r9
@@ -7084,13 +7084,13 @@ _080D3F28:
 	asrs r0, r5, 16
 	mov r10, r0
 	ldr r1, [sp, 0x4]
-	bl sub_8044E30
+	bl Sin
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r10
 	ldr r1, [sp, 0x4]
-	bl sub_8044E4C
+	bl Cos
 	ldr r2, [sp]
 	lsls r1, r2, 16
 	asrs r1, 16
@@ -7155,7 +7155,7 @@ _080D3F94:
 	lsls r0, 16
 	asrs r0, 16
 	ldr r1, [sp, 0x4]
-	bl sub_8044E4C
+	bl Cos
 	lsls r0, 16
 	asrs r0, 16
 	ldr r2, [sp, 0x8]

@@ -350,7 +350,7 @@ _0814FB22:
 	lsrs r1, r2, 4
 	orrs r1, r2
 	lsrs r1, 24
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	b _0814F992
 _0814FB34:
 	movs r0, 0x2
@@ -418,7 +418,7 @@ _0814FB9A:
 	lsrs r1, r2, 4
 	orrs r1, r2
 	lsrs r1, 24
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r6, 0x6]
 	movs r1, 0
 	strb r0, [r6, 0x8]
@@ -473,7 +473,7 @@ _0814FBFC:
 	orrs r3, r1
 	lsrs r3, 24
 	movs r1, 0
-	bl sub_80044A8
+	bl ScrollWindow
 	movs r0, 0
 	strb r0, [r6, 0x1F]
 	b _0814FC62
@@ -491,7 +491,7 @@ _0814FC38:
 	orrs r3, r1
 	lsrs r3, 24
 	movs r1, 0
-	bl sub_80044A8
+	bl ScrollWindow
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x14]
 	lsls r0, 29
@@ -510,7 +510,7 @@ _0814FC6C:
 	strb r2, [r6, 0x1C]
 	b _0814FB42
 _0814FC70:
-	bl sub_80723E0
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0

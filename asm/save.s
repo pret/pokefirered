@@ -26,8 +26,8 @@ _080D9732:
 _080D974C: .4byte EraseFlashSector
 	thumb_func_end sub_80D972C
 
-	thumb_func_start sub_80D9750
-sub_80D9750: @ 80D9750
+	thumb_func_start ResetSaveCounters
+ResetSaveCounters: @ 80D9750
 	ldr r0, _080D9760 @ =gUnknown_3005390
 	movs r1, 0
 	str r1, [r0]
@@ -40,10 +40,10 @@ sub_80D9750: @ 80D9750
 _080D9760: .4byte gUnknown_3005390
 _080D9764: .4byte gUnknown_3005380
 _080D9768: .4byte gUnknown_300538C
-	thumb_func_end sub_80D9750
+	thumb_func_end ResetSaveCounters
 
-	thumb_func_start sub_80D976C
-sub_80D976C: @ 80D976C
+	thumb_func_start SetDamagedSectorBits
+SetDamagedSectorBits: @ 80D976C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -97,10 +97,10 @@ _080D97C4:
 	bx r1
 	.align 2, 0
 _080D97CC: .4byte gUnknown_300538C
-	thumb_func_end sub_80D976C
+	thumb_func_end SetDamagedSectorBits
 
-	thumb_func_start sub_80D97D0
-sub_80D97D0: @ 80D97D0
+	thumb_func_start save_write_to_flash
+save_write_to_flash: @ 80D97D0
 	push {r4-r7,lr}
 	adds r7, r1, 0
 	lsls r0, 16
@@ -113,7 +113,7 @@ sub_80D97D0: @ 80D97D0
 	beq _080D9800
 	adds r0, r2, 0
 	adds r1, r7, 0
-	bl sub_80D9870
+	bl HandleWriteSector
 	lsls r0, 24
 	lsrs r5, r0, 24
 	b _080D9852
@@ -143,7 +143,7 @@ _080D9800:
 _080D9826:
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80D9870
+	bl HandleWriteSector
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -173,10 +173,10 @@ _080D9860: .4byte gUnknown_3005380
 _080D9864: .4byte gUnknown_3005384
 _080D9868: .4byte gUnknown_3005390
 _080D986C: .4byte gUnknown_300538C
-	thumb_func_end sub_80D97D0
+	thumb_func_end save_write_to_flash
 
-	thumb_func_start sub_80D9870
-sub_80D9870: @ 80D9870
+	thumb_func_start HandleWriteSector
+HandleWriteSector: @ 80D9870
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -261,14 +261,14 @@ _080D98FA:
 _080D9910:
 	mov r0, r10
 	adds r1, r4, 0
-	bl sub_80DA1A8
+	bl CalculateChecksum
 	ldr r1, _080D9944 @ =gUnknown_3005394
 	ldr r1, [r1]
 	ldr r7, _080D995C @ =0x00000ff6
 	adds r2, r1, r7
 	strh r0, [r2]
 	lsrs r0, r5, 24
-	bl sub_80D99D8
+	bl TryWriteSector
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r3-r5}
@@ -288,10 +288,10 @@ _080D9950: .4byte 0x00000ff8
 _080D9954: .4byte 0x08012025
 _080D9958: .4byte 0x00000ffc
 _080D995C: .4byte 0x00000ff6
-	thumb_func_end sub_80D9870
+	thumb_func_end HandleWriteSector
 
-	thumb_func_start sub_80D9960
-sub_80D9960: @ 80D9960
+	thumb_func_start HandleWriteSectorNBytes
+HandleWriteSectorNBytes: @ 80D9960
 	push {r4-r7,lr}
 	adds r5, r1, 0
 	lsls r0, 24
@@ -330,13 +330,13 @@ _080D9990:
 _080D99A2:
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl sub_80DA1A8
+	bl CalculateChecksum
 	ldr r2, _080D99D4 @ =0x00000ff4
 	adds r1, r4, r2
 	strh r0, [r1]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_80D99D8
+	bl TryWriteSector
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4-r7}
@@ -348,10 +348,10 @@ _080D99C8: .4byte 0x00000fff
 _080D99CC: .4byte 0x00000ff8
 _080D99D0: .4byte 0x08012025
 _080D99D4: .4byte 0x00000ff4
-	thumb_func_end sub_80D9960
+	thumb_func_end HandleWriteSectorNBytes
 
-	thumb_func_start sub_80D99D8
-sub_80D99D8: @ 80D99D8
+	thumb_func_start TryWriteSector
+TryWriteSector: @ 80D99D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -361,22 +361,22 @@ sub_80D99D8: @ 80D99D8
 	bne _080D99F4
 	movs r0, 0x1
 	adds r1, r4, 0
-	bl sub_80D976C
+	bl SetDamagedSectorBits
 	movs r0, 0x1
 	b _080D99FE
 _080D99F4:
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_80D976C
+	bl SetDamagedSectorBits
 	movs r0, 0xFF
 _080D99FE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D99D8
+	thumb_func_end TryWriteSector
 
-	thumb_func_start sub_80D9A04
-sub_80D9A04: @ 80D9A04
+	thumb_func_start RestoreSaveBackupVarsAndIncrement
+RestoreSaveBackupVarsAndIncrement: @ 80D9A04
 	push {r4-r6,lr}
 	ldr r1, _080D9A40 @ =gUnknown_3005394
 	ldr r0, _080D9A44 @ =gUnknown_2039A38
@@ -415,10 +415,10 @@ _080D9A50: .4byte gUnknown_3005384
 _080D9A54: .4byte gUnknown_3005390
 _080D9A58: .4byte gUnknown_3005398
 _080D9A5C: .4byte gUnknown_300538C
-	thumb_func_end sub_80D9A04
+	thumb_func_end RestoreSaveBackupVarsAndIncrement
 
-	thumb_func_start sub_80D9A60
-sub_80D9A60: @ 80D9A60
+	thumb_func_start RestoreSaveBackupVars
+RestoreSaveBackupVars: @ 80D9A60
 	ldr r1, _080D9A84 @ =gUnknown_3005394
 	ldr r0, _080D9A88 @ =gUnknown_2039A38
 	str r0, [r1]
@@ -446,7 +446,7 @@ _080D9A94: .4byte gUnknown_3005384
 _080D9A98: .4byte gUnknown_3005390
 _080D9A9C: .4byte gUnknown_3005398
 _080D9AA0: .4byte gUnknown_300538C
-	thumb_func_end sub_80D9A60
+	thumb_func_end RestoreSaveBackupVars
 
 	thumb_func_start sub_80D9AA4
 sub_80D9AA4: @ 80D9AA4
@@ -460,7 +460,7 @@ sub_80D9AA4: @ 80D9AA4
 	bge _080D9AF8
 	movs r5, 0x1
 	adds r0, r2, 0
-	bl sub_80D9870
+	bl HandleWriteSector
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
@@ -502,7 +502,7 @@ sub_80D9B04: @ 80D9B04
 	ldr r2, _080D9B38 @ =0xffff0000
 	adds r0, r2
 	lsrs r0, 16
-	bl sub_80D9B50
+	bl ClearSaveData_2
 	ldr r0, _080D9B3C @ =gUnknown_300538C
 	ldr r0, [r0]
 	cmp r0, 0
@@ -530,8 +530,8 @@ _080D9B48: .4byte gUnknown_3005390
 _080D9B4C: .4byte gUnknown_3005384
 	thumb_func_end sub_80D9B04
 
-	thumb_func_start sub_80D9B50
-sub_80D9B50: @ 80D9B50
+	thumb_func_start ClearSaveData_2
+ClearSaveData_2: @ 80D9B50
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -617,7 +617,7 @@ _080D9BDC:
 _080D9BF2:
 	mov r0, r10
 	adds r1, r3, 0
-	bl sub_80DA1A8
+	bl CalculateChecksum
 	ldr r1, _080D9C24 @ =gUnknown_3005394
 	ldr r1, [r1]
 	ldr r2, _080D9C3C @ =0x00000ff6
@@ -710,7 +710,7 @@ _080D9CBC:
 	mov r2, r8
 	lsrs r1, r2, 24
 	movs r0, 0x1
-	bl sub_80D976C
+	bl SetDamagedSectorBits
 	movs r0, 0x1
 	b _080D9CE0
 	.align 2, 0
@@ -720,7 +720,7 @@ _080D9CD4:
 	lsrs r1, r6, 24
 _080D9CD8:
 	movs r0, 0
-	bl sub_80D976C
+	bl SetDamagedSectorBits
 	movs r0, 0xFF
 _080D9CE0:
 	pop {r3-r5}
@@ -730,7 +730,7 @@ _080D9CE0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D9B50
+	thumb_func_end ClearSaveData_2
 
 	thumb_func_start sub_80D9CF0
 sub_80D9CF0: @ 80D9CF0
@@ -773,7 +773,7 @@ sub_80D9CF0: @ 80D9CF0
 	lsls r1, r4, 24
 	lsrs r1, 24
 	movs r0, 0x1
-	bl sub_80D976C
+	bl SetDamagedSectorBits
 	movs r0, 0x1
 	b _080D9D78
 	.align 2, 0
@@ -786,7 +786,7 @@ _080D9D60:
 	lsls r1, r4, 24
 	lsrs r1, 24
 	movs r0, 0
-	bl sub_80D976C
+	bl SetDamagedSectorBits
 	ldr r0, _080D9D80 @ =gUnknown_3005388
 	ldrh r0, [r0]
 	strh r0, [r6]
@@ -841,7 +841,7 @@ sub_80D9D88: @ 80D9D88
 	lsls r1, r4, 24
 	lsrs r1, 24
 	movs r0, 0x1
-	bl sub_80D976C
+	bl SetDamagedSectorBits
 	movs r0, 0x1
 	b _080D9E04
 	.align 2, 0
@@ -853,7 +853,7 @@ _080D9DEC:
 	lsls r1, r4, 24
 	lsrs r1, 24
 	movs r0, 0
-	bl sub_80D976C
+	bl SetDamagedSectorBits
 	ldr r0, _080D9E0C @ =gUnknown_3005388
 	ldrh r0, [r0]
 	strh r0, [r6]
@@ -890,7 +890,7 @@ _080D9E30: .4byte gUnknown_2039A38
 _080D9E34: .4byte 0x0000ffff
 _080D9E38:
 	adds r0, r6, 0
-	bl sub_80D9F0C
+	bl GetSaveValidStatus
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -924,7 +924,7 @@ _080D9E70:
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [r6]
-	bl sub_80DA190
+	bl DoReadFlashWholeSection
 	ldr r0, [r6]
 	ldr r1, _080D9EF8 @ =0x00000ff4
 	adds r0, r1
@@ -939,7 +939,7 @@ _080D9E8C:
 	mov r2, r8
 	adds r4, r1, r2
 	ldrh r1, [r4, 0x4]
-	bl sub_80DA1A8
+	bl CalculateChecksum
 	lsls r0, 16
 	lsrs r3, r0, 16
 	ldr r2, [r6]
@@ -995,8 +995,8 @@ _080D9F04: .4byte 0x08012025
 _080D9F08: .4byte 0x00000ff6
 	thumb_func_end sub_80D9E54
 
-	thumb_func_start sub_80D9F0C
-sub_80D9F0C: @ 80D9F0C
+	thumb_func_start GetSaveValidStatus
+GetSaveValidStatus: @ 80D9F0C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1015,7 +1015,7 @@ _080D9F28:
 	lsls r0, r4, 24
 	lsrs r0, 24
 	ldr r1, [r7]
-	bl sub_80DA190
+	bl DoReadFlashWholeSection
 	ldr r2, [r7]
 	ldr r1, _080D9F9C @ =0x00000ff8
 	adds r0, r2, r1
@@ -1031,7 +1031,7 @@ _080D9F28:
 	add r0, r10
 	ldrh r1, [r0, 0x4]
 	adds r0, r2, 0
-	bl sub_80DA1A8
+	bl CalculateChecksum
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r1, [r7]
@@ -1088,7 +1088,7 @@ _080D9FC0:
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [r7]
-	bl sub_80DA190
+	bl DoReadFlashWholeSection
 	ldr r2, [r7]
 	ldr r1, _080DA034 @ =0x00000ff8
 	adds r0, r2, r1
@@ -1104,7 +1104,7 @@ _080D9FC0:
 	add r0, r10
 	ldrh r1, [r0, 0x4]
 	adds r0, r2, 0
-	bl sub_80DA1A8
+	bl CalculateChecksum
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r1, [r7]
@@ -1262,7 +1262,7 @@ _080DA108:
 	.align 2, 0
 _080DA118: .4byte gUnknown_3005390
 _080DA11C: .4byte gUnknown_3005380
-	thumb_func_end sub_80D9F0C
+	thumb_func_end GetSaveValidStatus
 
 	thumb_func_start sub_80DA120
 sub_80DA120: @ 80DA120
@@ -1274,7 +1274,7 @@ sub_80DA120: @ 80DA120
 	lsrs r4, r2, 16
 	ldr r5, _080DA174 @ =gUnknown_2039A38
 	adds r1, r5, 0
-	bl sub_80DA190
+	bl DoReadFlashWholeSection
 	ldr r1, _080DA178 @ =0x00000ff8
 	adds r0, r5, r1
 	ldr r1, [r0]
@@ -1283,7 +1283,7 @@ sub_80DA120: @ 80DA120
 	bne _080DA188
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80DA1A8
+	bl CalculateChecksum
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, _080DA180 @ =0x00000ff4
@@ -1323,8 +1323,8 @@ _080DA18A:
 	bx r1
 	thumb_func_end sub_80DA120
 
-	thumb_func_start sub_80DA190
-sub_80DA190: @ 80DA190
+	thumb_func_start DoReadFlashWholeSection
+DoReadFlashWholeSection: @ 80DA190
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -1336,10 +1336,10 @@ sub_80DA190: @ 80DA190
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DA190
+	thumb_func_end DoReadFlashWholeSection
 
-	thumb_func_start sub_80DA1A8
-sub_80DA1A8: @ 80DA1A8
+	thumb_func_start CalculateChecksum
+CalculateChecksum: @ 80DA1A8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -1364,10 +1364,10 @@ _080DA1C6:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DA1A8
+	thumb_func_end CalculateChecksum
 
-	thumb_func_start sub_80DA1D4
-sub_80DA1D4: @ 80DA1D4
+	thumb_func_start UpdateSaveAddresses
+UpdateSaveAddresses: @ 80DA1D4
 	push {r4,r5,lr}
 	ldr r3, _080DA234 @ =gUnknown_30053B0
 	ldr r0, _080DA238 @ =gUnknown_300500C
@@ -1423,7 +1423,7 @@ _080DA238: .4byte gUnknown_300500C
 _080DA23C: .4byte gUnknown_83FEC94
 _080DA240: .4byte gUnknown_3005008
 _080DA244: .4byte gUnknown_3005010
-	thumb_func_end sub_80DA1D4
+	thumb_func_end UpdateSaveAddresses
 
 	thumb_func_start sub_80DA248
 sub_80DA248: @ 80DA248
@@ -1434,7 +1434,7 @@ sub_80DA248: @ 80DA248
 	ldr r6, [r1, 0x20]
 	movs r0, 0
 	str r0, [r1, 0x20]
-	bl sub_80DA1D4
+	bl UpdateSaveAddresses
 	cmp r4, 0x5
 	bhi _080DA2CC
 	lsls r0, r4, 2
@@ -1480,17 +1480,17 @@ _080DA2B0:
 	movs r0, 0x1C
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80D9960
+	bl HandleWriteSectorNBytes
 	adds r4, r5
 	movs r0, 0x1D
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80D9960
+	bl HandleWriteSectorNBytes
 _080DA2CC:
 	bl sub_804C300
 	ldr r0, _080DA2E8 @ =0x0000ffff
 	ldr r1, _080DA2EC @ =gUnknown_30053B0
-	bl sub_80D97D0
+	bl save_write_to_flash
 	b _080DA346
 	.align 2, 0
 _080DA2DC: .4byte EraseFlashSector
@@ -1504,7 +1504,7 @@ _080DA2F0:
 _080DA2F6:
 	adds r0, r4, 0
 	ldr r1, _080DA30C @ =gUnknown_30053B0
-	bl sub_80D97D0
+	bl save_write_to_flash
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1517,7 +1517,7 @@ _080DA310:
 	bl sub_804C300
 	ldr r1, _080DA320 @ =gUnknown_30053B0
 	movs r0, 0
-	bl sub_80D97D0
+	bl save_write_to_flash
 	b _080DA346
 	.align 2, 0
 _080DA320: .4byte gUnknown_30053B0
@@ -1536,7 +1536,7 @@ _080DA328:
 	bl sub_804C300
 	ldr r0, _080DA358 @ =0x0000ffff
 	ldr r1, _080DA35C @ =gUnknown_30053B0
-	bl sub_80D97D0
+	bl save_write_to_flash
 _080DA346:
 	ldr r0, _080DA360 @ =gUnknown_30030F0
 	str r6, [r0, 0x20]
@@ -1551,8 +1551,8 @@ _080DA35C: .4byte gUnknown_30053B0
 _080DA360: .4byte gUnknown_30030F0
 	thumb_func_end sub_80DA248
 
-	thumb_func_start sub_80DA364
-sub_80DA364: @ 80DA364
+	thumb_func_start TrySavingData
+TrySavingData: @ 80DA364
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1588,7 +1588,7 @@ _080DA3A2:
 	bx r1
 	.align 2, 0
 _080DA3A8: .4byte gUnknown_3005420
-	thumb_func_end sub_80DA364
+	thumb_func_end TrySavingData
 
 	thumb_func_start sub_80DA3AC
 sub_80DA3AC: @ 80DA3AC
@@ -1597,10 +1597,10 @@ sub_80DA3AC: @ 80DA3AC
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _080DA3D0
-	bl sub_80DA1D4
+	bl UpdateSaveAddresses
 	bl sub_804C300
 	ldr r0, _080DA3CC @ =gUnknown_30053B0
-	bl sub_80D9A04
+	bl RestoreSaveBackupVarsAndIncrement
 	movs r0, 0
 	b _080DA3D2
 	.align 2, 0
@@ -1692,11 +1692,11 @@ sub_80DA45C: @ 80DA45C
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _080DA498
-	bl sub_80DA1D4
+	bl UpdateSaveAddresses
 	bl sub_804C300
 	ldr r4, _080DA490 @ =gUnknown_30053B0
 	adds r0, r4, 0
-	bl sub_80D9A60
+	bl RestoreSaveBackupVars
 	ldr r0, _080DA494 @ =gUnknown_3005398
 	ldrh r0, [r0]
 	adds r0, 0x1
@@ -1783,7 +1783,7 @@ sub_80DA4FC: @ 80DA4FC
 _080DA514: .4byte gUnknown_3005004
 _080DA518: .4byte gUnknown_30053A0
 _080DA51C:
-	bl sub_80DA1D4
+	bl UpdateSaveAddresses
 	cmp r4, 0
 	beq _080DA528
 	cmp r4, 0x3
@@ -2072,7 +2072,7 @@ _080DA744:
 	.align 2, 0
 _080DA758: .4byte gUnknown_3005090
 _080DA75C:
-	bl sub_804C1DC
+	bl sav2_gender2_inplace_and_xFE
 	bl sub_800AB9C
 	ldr r0, _080DA774 @ =gUnknown_3005090
 	lsls r1, r4, 2
@@ -2144,7 +2144,7 @@ _080DA7D4:
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080DA7F6:
 	pop {r4}
 	pop {r0}

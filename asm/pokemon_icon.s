@@ -31,7 +31,7 @@ sub_8096E18: @ 8096E18
 	str r0, [sp, 0x18]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_8097054
+	bl GetMonIconPtr
 	str r0, [sp, 0x1C]
 	ldr r0, _08096EB8 @ =gUnknown_83D40AC
 	str r0, [sp, 0x20]
@@ -158,8 +158,8 @@ _08096F54: .4byte 0x0000dac0
 _08096F58: .4byte gUnknown_202063C
 	thumb_func_end sub_8096ECC
 
-	thumb_func_start sub_8096F5C
-sub_8096F5C: @ 8096F5C
+	thumb_func_start mon_icon_convert_unown_species_id
+mon_icon_convert_unown_species_id: @ 8096F5C
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -193,7 +193,7 @@ _08096F92:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8096F5C
+	thumb_func_end mon_icon_convert_unown_species_id
 
 	thumb_func_start sub_8096F98
 sub_8096F98: @ 8096F98
@@ -269,7 +269,7 @@ _0809700A:
 _08097014:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8096F5C
+	bl mon_icon_convert_unown_species_id
 	lsls r0, 16
 	lsrs r0, 16
 _08097020:
@@ -306,13 +306,13 @@ _0809704A:
 _08097050: .4byte gUnknown_83D37A0
 	thumb_func_end sub_8097028
 
-	thumb_func_start sub_8097054
-sub_8097054: @ 8097054
+	thumb_func_start GetMonIconPtr
+GetMonIconPtr: @ 8097054
 	push {r4,lr}
 	adds r4, r2, 0
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096F5C
+	bl mon_icon_convert_unown_species_id
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -320,7 +320,7 @@ sub_8097054: @ 8097054
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8097054
+	thumb_func_end GetMonIconPtr
 
 	thumb_func_start sub_8097070
 sub_8097070: @ 8097070
@@ -338,7 +338,7 @@ sub_809707C: @ 809707C
 _08097082:
 	lsls r0, r4, 3
 	adds r0, r5
-	bl sub_8008928
+	bl LoadSpritePalette
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -369,13 +369,13 @@ _080970B0:
 	lsls r0, 3
 	adds r4, r0, r1
 	ldrh r0, [r4, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	bne _080970D0
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 _080970D0:
 	pop {r4}
 	pop {r0}
@@ -397,13 +397,13 @@ sub_80970E0: @ 80970E0
 	lsls r0, 3
 	adds r4, r0, r1
 	ldrh r0, [r4, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	bne _08097106
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 _08097106:
 	pop {r4}
 	pop {r0}
@@ -422,7 +422,7 @@ _0809711A:
 	lsls r0, r4, 3
 	adds r0, r5
 	ldrh r0, [r0, 0x4]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -453,7 +453,7 @@ _08097148:
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x4]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -473,7 +473,7 @@ sub_8097168: @ 8097168
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x4]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -502,7 +502,7 @@ _080971A6:
 	ldr r0, [r6]
 	adds r1, r4, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	adds r0, r4, 0
 	adds r0, 0x10
 	lsls r0, 16
@@ -638,7 +638,7 @@ _08097276:
 	lsrs r1, 17
 	ldr r3, _080972D8 @ =0x06010000
 	adds r1, r3
-	bl sub_80076D0
+	bl RequestSpriteCopy
 	mov r0, r8
 	ldrb r1, [r0]
 	ldr r0, [r4, 0x8]
@@ -755,7 +755,7 @@ sub_8097300: @ 8097300
 	adds r1, r4, 0
 	adds r2, r5, 0
 	mov r3, r8
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r6, _080973D4 @ =gUnknown_202063C
@@ -817,7 +817,7 @@ sub_80973D8: @ 80973D8
 	str r1, [sp, 0x4]
 	mov r1, sp
 	str r1, [r0, 0xC]
-	bl sub_8007280
+	bl DestroySprite
 	add sp, 0x8
 	pop {r0}
 	bx r0

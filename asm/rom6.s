@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80C97A8
-sub_80C97A8: @ 80C97A8
+	thumb_func_start npc_before_player_of_type
+npc_before_player_of_type: @ 80C97A8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 24
@@ -14,13 +14,13 @@ sub_80C97A8: @ 80C97A8
 	ldr r4, _080C97E8 @ =gUnknown_2039A04
 	adds r1, r4, 0x2
 	adds r0, r4, 0
-	bl sub_805C4F4
-	bl sub_805C700
+	bl GetXYCoordsOneStepInFrontOfPlayer
+	bl PlayerGetZCoord
 	strb r0, [r4, 0x4]
 	ldrh r0, [r4]
 	ldrh r1, [r4, 0x2]
 	ldrb r2, [r4, 0x4]
-	bl sub_805F894
+	bl GetFieldObjectIdByXYZ
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C97EC @ =gUnknown_2036E38
@@ -46,33 +46,33 @@ _080C97F6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C97A8
+	thumb_func_end npc_before_player_of_type
 
-	thumb_func_start sub_80C97FC
-sub_80C97FC: @ 80C97FC
+	thumb_func_start oei_task_add
+oei_task_add: @ 80C97FC
 	push {lr}
 	ldr r0, _080C9818 @ =gUnknown_2039A04
 	adds r1, r0, 0x2
-	bl sub_805C4F4
-	ldr r0, _080C981C @ =sub_80C9820
+	bl GetXYCoordsOneStepInFrontOfPlayer
+	ldr r0, _080C981C @ =task08_080C9820
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
 _080C9818: .4byte gUnknown_2039A04
-_080C981C: .4byte sub_80C9820
-	thumb_func_end sub_80C97FC
+_080C981C: .4byte task08_080C9820
+	thumb_func_end oei_task_add
 
-	thumb_func_start sub_80C9820
-sub_80C9820: @ 80C9820
+	thumb_func_start task08_080C9820
+task08_080C9820: @ 80C9820
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _080C9874 @ =gUnknown_2037078
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -83,12 +83,12 @@ sub_80C9820: @ 80C9820
 	ldr r1, _080C9878 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C9856
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C98A2
@@ -98,7 +98,7 @@ _080C9856:
 	cmp r0, 0x5
 	bne _080C9888
 	movs r0, 0x3B
-	bl sub_8083444
+	bl FieldEffectStart
 	ldr r0, _080C9880 @ =gUnknown_3005090
 	lsls r1, r5, 2
 	adds r1, r5
@@ -132,7 +132,7 @@ _080C98A2:
 	.align 2, 0
 _080C98A8: .4byte gUnknown_3005090
 _080C98AC: .4byte sub_80C98B0
-	thumb_func_end sub_80C9820
+	thumb_func_end task08_080C9820
 
 	thumb_func_start sub_80C98B0
 sub_80C98B0: @ 80C98B0
@@ -146,13 +146,13 @@ sub_80C98B0: @ 80C98B0
 	lsls r0, 2
 	ldr r1, _080C98F0 @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080C98E4
 	movs r0, 0x3B
-	bl sub_8083444
+	bl FieldEffectStart
 	ldr r0, _080C98F4 @ =gUnknown_3005090
 	lsls r1, r4, 2
 	adds r1, r4
@@ -177,12 +177,12 @@ sub_80C98FC: @ 80C98FC
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r0, 0x6
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _080C9980
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	ldr r6, _080C9988 @ =gUnknown_20386E0
 	lsls r0, 24
 	lsrs r0, 24
@@ -214,7 +214,7 @@ _080C993C:
 	lsls r4, 2
 	ldr r0, _080C9990 @ =gUnknown_2036E38
 	adds r4, r0
-	bl sub_805C9C8
+	bl GetPlayerAvatarGraphicsIdByCurrentState
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -227,9 +227,9 @@ _080C993C:
 	ldr r1, _080C9994 @ =gUnknown_202063C
 	adds r0, r1
 	ldrb r1, [r6, 0x8]
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0x6
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r1, _080C9998 @ =gUnknown_3005090
 	lsls r0, r7, 2
 	adds r0, r7
@@ -270,7 +270,7 @@ sub_80C99A0: @ 80C99A0
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -283,7 +283,7 @@ _080C99D4: .4byte gUnknown_2037078
 sub_80C99D8: @ 80C99D8
 	push {lr}
 	movs r0, 0x60
-	bl sub_80C97A8
+	bl npc_before_player_of_type
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -292,7 +292,7 @@ sub_80C99D8: @ 80C99D8
 	b _080C99FA
 _080C99EC:
 	ldr r1, _080C9A00 @ =gUnknown_3005024
-	ldr r0, _080C9A04 @ =sub_81248B0
+	ldr r0, _080C9A04 @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _080C9A08 @ =gUnknown_203B0C4
 	ldr r0, _080C9A0C @ =sub_80C9A10
@@ -303,7 +303,7 @@ _080C99FA:
 	bx r1
 	.align 2, 0
 _080C9A00: .4byte gUnknown_3005024
-_080C9A04: .4byte sub_81248B0
+_080C9A04: .4byte hm_add_c3_launch_phase_2
 _080C9A08: .4byte gUnknown_203B0C4
 _080C9A0C: .4byte sub_80C9A10
 	thumb_func_end sub_80C99D8
@@ -317,7 +317,7 @@ sub_80C9A10: @ 80C9A10
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, _080C9A2C @ =gUnknown_81BE064
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -328,7 +328,7 @@ _080C9A2C: .4byte gUnknown_81BE064
 	thumb_func_start sub_80C9A30
 sub_80C9A30: @ 80C9A30
 	push {lr}
-	bl sub_80C97FC
+	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C9A58 @ =gUnknown_3005090
@@ -356,8 +356,8 @@ sub_80C9A60: @ 80C9A60
 	movs r0, 0x7C
 	bl sub_80722CC
 	movs r0, 0x25
-	bl sub_80837FC
-	bl sub_8069B34
+	bl FieldEffectActiveListRemove
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80C9A60
@@ -374,7 +374,7 @@ sub_80C9A78: @ 80C9A78
 	b _080C9A98
 _080C9A8A:
 	ldr r1, _080C9A9C @ =gUnknown_3005024
-	ldr r0, _080C9AA0 @ =sub_81248B0
+	ldr r0, _080C9AA0 @ =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, _080C9AA4 @ =gUnknown_203B0C4
 	ldr r0, _080C9AA8 @ =sub_80C9AAC
@@ -385,7 +385,7 @@ _080C9A98:
 	bx r1
 	.align 2, 0
 _080C9A9C: .4byte gUnknown_3005024
-_080C9AA0: .4byte sub_81248B0
+_080C9AA0: .4byte hm_add_c3_launch_phase_2
 _080C9AA4: .4byte gUnknown_203B0C4
 _080C9AA8: .4byte sub_80C9AAC
 	thumb_func_end sub_80C9A78
@@ -395,7 +395,7 @@ sub_80C9AAC: @ 80C9AAC
 	push {lr}
 	bl sub_8054D70
 	movs r0, 0x26
-	bl sub_8083444
+	bl FieldEffectStart
 	bl sub_811FB0C
 	ldr r1, _080C9AC8 @ =gUnknown_20386E0
 	lsls r0, 24
@@ -410,7 +410,7 @@ _080C9AC8: .4byte gUnknown_20386E0
 	thumb_func_start sub_80C9ACC
 sub_80C9ACC: @ 80C9ACC
 	push {lr}
-	bl sub_80C97FC
+	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C9AF4 @ =gUnknown_3005090
@@ -436,10 +436,10 @@ _080C9AF8: .4byte sub_80C9AFC
 sub_80C9AFC: @ 80C9AFC
 	push {lr}
 	movs r0, 0x26
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	ldr r0, _080C9B24 @ =sub_80A1C44
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C9B28 @ =gUnknown_3005090

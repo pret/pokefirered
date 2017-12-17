@@ -43,14 +43,14 @@ _0814D5F4:
 	.4byte _0814D830
 _0814D61C:
 	movs r0, 0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0
-	bl sub_8000700
+	bl SetHBlankCallback
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
-	bl sub_8087E64
-	bl sub_80F6808
+	bl SetGpuReg
+	bl remove_some_task
+	bl reset_temp_tile_data_buffers
 	b _0814D878
 _0814D63A:
 	add r0, sp, 0x8
@@ -69,9 +69,9 @@ _0814D63A:
 _0814D658: .4byte 0x01000200
 _0814D65C: .4byte gUnknown_3003E58
 _0814D660:
-	bl sub_8070528
-	bl sub_8006B10
-	bl sub_80088F0
+	bl ResetPaletteFade
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	b _0814D878
 _0814D66E:
 	movs r0, 0
@@ -84,47 +84,47 @@ _0814D66E:
 	lsls r0, 1
 	adds r1, r5, r0
 	movs r0, 0x1
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	movs r0, 0x87
 	lsls r0, 6
 	adds r1, r5, r0
 	movs r0, 0x2
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	movs r0, 0xC7
 	lsls r0, 6
 	adds r1, r5, r0
 	movs r0, 0x3
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _0814D878
 	.align 2, 0
 _0814D6F0: .4byte gUnknown_846E3CC
@@ -136,7 +136,7 @@ _0814D6F4:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	movs r0, 0x40
 	str r0, [sp, 0x4]
@@ -144,43 +144,43 @@ _0814D6F4:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	b _0814D878
 _0814D73A:
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldr r1, _0814D764 @ =gUnknown_8EAFFC0
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F6878
+	bl decompress_and_copy_tile_data_to_vram
 	b _0814D878
 	.align 2, 0
 _0814D764: .4byte gUnknown_8EAFFC0
 _0814D768:
-	bl sub_80F682C
+	bl free_temp_tile_data_buffers_if_possible
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D774
@@ -205,30 +205,30 @@ _0814D798:
 	movs r2, 0xC0
 	lsls r2, 1
 	movs r1, 0
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r1, _0814D7E8 @ =gUnknown_846ED90
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	ldr r1, _0814D7EC @ =gUnknown_846EEC0
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	ldr r1, _0814D7F0 @ =gUnknown_846F058
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	adds r0, r5, 0
 	bl sub_814EC80
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _0814D878
 	.align 2, 0
 _0814D7E4: .4byte gUnknown_8EAFEA0
@@ -248,15 +248,15 @@ _0814D7F4:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	b _0814D878
 	.align 2, 0
 _0814D82C: .4byte gUnknown_2021BCA
@@ -270,19 +270,19 @@ _0814D830:
 	negs r0, r0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x2
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x3
-	bl sub_80019BC
+	bl ShowBg
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	bl sub_814B914
 	movs r0, 0
 	strb r0, [r5, 0xC]
@@ -352,11 +352,11 @@ _0814D8E4:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
-	bl sub_80704D0
+	bl BeginNormalPaletteFade
+	bl UpdatePaletteFade
 	b _0814D9BA
 _0814D8FA:
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D9BA
@@ -369,59 +369,59 @@ _0814D906:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _0814D9BA
 _0814D962:
 	bl sub_8003ECC
 	movs r0, 0
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0
-	bl sub_8001FD4
+	bl UnsetBgTilemapBuffer
 	movs r0, 0x1
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0x1
-	bl sub_8001FD4
+	bl UnsetBgTilemapBuffer
 	movs r0, 0x2
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0x2
-	bl sub_8001FD4
+	bl UnsetBgTilemapBuffer
 	movs r0, 0x3
-	bl sub_80019D0
+	bl HideBg
 	movs r0, 0x3
-	bl sub_8001FD4
+	bl UnsetBgTilemapBuffer
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	b _0814D9BA
 _0814D9A2:
 	bl sub_80FCE44
@@ -460,7 +460,7 @@ sub_814D9CC: @ 814D9CC
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x16
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r0, [r4, 0x12]
 	cmp r0, 0x7
 	bne _0814D9F8
@@ -640,7 +640,7 @@ _0814DAD4:
 	bge _0814DB4C
 	ldr r0, [r6]
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 _0814DB4C:
 	mov r0, r9
 	adds r0, 0x1
@@ -703,7 +703,7 @@ sub_814DB84: @ 814DB84
 	asrs r0, 23
 	movs r2, 0xC
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x24]
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]
@@ -739,9 +739,9 @@ _0814DBEA:
 	ldr r0, _0814DC20 @ =nullsub_8
 	str r0, [r5, 0x1C]
 	adds r0, r5, 0
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	adds r0, r5, 0
-	bl sub_8007280
+	bl DestroySprite
 _0814DC16:
 	pop {r4-r6}
 	pop {r0}
@@ -765,9 +765,9 @@ _0814DC32:
 	adds r0, r7
 	ldrh r4, [r0]
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -832,7 +832,7 @@ _0814DC80:
 	adds r0, r5, r4
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	b _0814DCD6
 	.align 2, 0
 _0814DCC0: .4byte gUnknown_846F2D0
@@ -844,7 +844,7 @@ _0814DCC4:
 	adds r0, r5, r4
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0814DCD6:
 	adds r3, r5, r4
 	ldr r2, [r3]
@@ -970,7 +970,7 @@ _0814DD64:
 	beq _0814DDDC
 	ldr r0, [r7]
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	b _0814DDE4
 	.align 2, 0
 _0814DDD0: .4byte sub_814F0D8
@@ -979,7 +979,7 @@ _0814DDD8: .4byte gUnknown_846F2D7
 _0814DDDC:
 	ldr r0, [r7]
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0814DDE4:
 	mov r0, r8
 	adds r0, 0x1
@@ -1135,7 +1135,7 @@ sub_814DEC0: @ 814DEC0
 	lsls r0, 24
 	asrs r0, 16
 	movs r1, 0x4
-	bl sub_80D8AA0
+	bl .gcc2_compiled._3
 	adds r2, r7, 0
 	lsls r0, 16
 	asrs r3, r0, 16
@@ -1540,7 +1540,7 @@ _0814E21A:
 	ldr r0, _0814E294 @ =gUnknown_83DF7E8
 	adds r1, r0
 	ldr r0, _0814E298 @ =gUnknown_2021CD0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, _0814E29C @ =gUnknown_846F4B8
 	ldr r1, [r0, 0x8]
 	ldr r0, _0814E2A0 @ =gUnknown_2021D18
@@ -1588,7 +1588,7 @@ _0814E27E:
 	bne _0814E2B0
 	ldr r0, _0814E2A8 @ =gUnknown_2021D04
 	ldr r1, _0814E2AC @ =gUnknown_841D020
-	bl sub_8008D84
+	bl StringCopy
 	b _0814E2B8
 	.align 2, 0
 _0814E294: .4byte gUnknown_83DF7E8
@@ -1601,7 +1601,7 @@ _0814E2AC: .4byte gUnknown_841D020
 _0814E2B0:
 	ldr r0, _0814E31C @ =gUnknown_2021D04
 	ldr r1, _0814E320 @ =gUnknown_841D02C
-	bl sub_8008D84
+	bl StringCopy
 _0814E2B8:
 	ldr r4, _0814E31C @ =gUnknown_2021D04
 	strb r6, [r4]
@@ -2085,10 +2085,10 @@ _0814E6CC:
 	adds r4, r6, 0
 	adds r4, 0x82
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	b _0814E7F8
 _0814E6E0:
 	adds r5, r6, 0
@@ -2102,7 +2102,7 @@ _0814E6E0:
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xD
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	b _0814E7F8
 	.align 2, 0
 _0814E700: .4byte 0x0000021d
@@ -2301,10 +2301,10 @@ _0814E876:
 	strh r0, [r7, 0x2]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r7, 0x2]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrb r0, [r7, 0x2]
 	ldr r4, _0814E8AC @ =0x0000021d
 	adds r1, r4, 0
@@ -2314,7 +2314,7 @@ _0814E876:
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xD
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	b _0814EA66
 	.align 2, 0
 _0814E8A8: .4byte gUnknown_846E3F0
@@ -2438,7 +2438,7 @@ _0814E96E:
 	strb r1, [r0]
 	adds r0, 0x1
 	ldr r1, _0814EA28 @ =gUnknown_841D098
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x3
 	mov r1, r8
 	movs r2, 0
@@ -2501,13 +2501,13 @@ _0814EA40:
 	movs r1, 0x1
 	bl sub_810F4D8
 	ldrb r0, [r7, 0x2]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrb r0, [r7, 0x2]
 	bl sub_8003E3C
 	adds r0, r4, 0
-	bl sub_8077508
-	bl sub_8069B34
-	bl sub_806994C
+	bl DestroyTask
+	bl EnableBothScriptContexts
+	bl ScriptContext2_Disable
 	mov r0, r9
 	b _0814EA6A
 _0814EA66:
@@ -2529,10 +2529,10 @@ _0814EA6C:
 	thumb_func_start sub_814EA7C
 sub_814EA7C: @ 814EA7C
 	push {lr}
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r0, _0814EAC4 @ =sub_814E830
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0814EAC8 @ =gUnknown_3005090
@@ -2657,10 +2657,10 @@ _0814EB46:
 	adds r4, r6
 	strb r0, [r4]
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2696,7 +2696,7 @@ _0814EBC6:
 	adds r0, r6, r1
 	adds r5, r0, r7
 	ldrb r0, [r5]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r6, 0x8]
 	cmp r7, r0
 	bne _0814EC18
@@ -2768,7 +2768,7 @@ _0814EC4C:
 	bcc _0814EBC6
 _0814EC66:
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
@@ -2813,7 +2813,7 @@ _0814EC9C:
 	movs r0, 0x2
 	str r0, [sp, 0x4]
 	movs r0, 0x3
-	bl sub_8002124
+	bl CopyToBgTilemapBufferRect
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2822,7 +2822,7 @@ _0814ECCA:
 	cmp r5, r0
 	bcc _0814EC9C
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -2845,19 +2845,19 @@ sub_814ECE0: @ 814ECE0
 _0814ECF6:
 	lsls r0, r5, 3
 	adds r0, r4
-	bl sub_800EBCC
+	bl LoadCompressedObjectPic
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x3
 	bls _0814ECF6
 	ldr r0, _0814EEF0 @ =gUnknown_846F320
-	bl sub_8008974
+	bl LoadSpritePalettes
 	ldr r0, _0814EEF4 @ =gUnknown_846F410
 	movs r1, 0x78
 	movs r2, 0x58
 	movs r3, 0x5
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r0, 0xAC
@@ -2907,7 +2907,7 @@ _0814ED5A:
 	asrs r2, 16
 	ldr r0, _0814EEFC @ =gUnknown_846F428
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r0, 0xAE
@@ -2967,7 +2967,7 @@ _0814EDD8:
 	adds r2, 0x88
 	ldr r0, _0814EF04 @ =gUnknown_846F440
 	movs r3, 0x6
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r0, r5, 2
@@ -3016,7 +3016,7 @@ _0814EE3E:
 	ldr r0, _0814EF08 @ =gUnknown_846F458
 	movs r2, 0x8
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r0, r5, 2
@@ -3103,19 +3103,19 @@ sub_814EF10: @ 814EF10
 	adds r5, r0, 0
 	movs r4, 0
 	movs r0, 0x4
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	movs r0, 0x3
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	movs r0, 0x2
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	movs r0, 0x1
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	movs r0, 0x4
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	movs r0, 0x2
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	movs r0, 0x1
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	movs r0, 0xD8
 	lsls r0, 1
 	adds r6, r5, r0
@@ -3123,7 +3123,7 @@ _0814EF46:
 	lsls r0, r4, 2
 	adds r0, r6, r0
 	ldr r0, [r0]
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3143,7 +3143,7 @@ _0814EF74:
 	lsls r0, r4, 2
 	adds r0, r6, r0
 	ldr r0, [r0]
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3160,7 +3160,7 @@ _0814EF90:
 	adds r0, r5, r2
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3180,7 +3180,7 @@ _0814EFAC:
 	cmp r0, 0
 	beq _0814EFC8
 	adds r0, r2, 0
-	bl sub_8007280
+	bl DestroySprite
 _0814EFC8:
 	pop {r4-r6}
 	pop {r0}
@@ -3287,7 +3287,7 @@ sub_814F044: @ 814F044
 	asrs r0, 23
 	movs r2, 0xC
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r5, 0x24]
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]

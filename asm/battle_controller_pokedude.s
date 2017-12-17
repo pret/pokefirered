@@ -198,9 +198,9 @@ _081561F8:
 	strb r0, [r1, 0x1]
 	ldr r4, _08156238 @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	bl sub_8157084
 _08156230:
 	pop {r4-r7}
@@ -245,7 +245,7 @@ sub_8156254: @ 8156254
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r0, [r2, 0x8]
-	bl sub_8000544
+	bl SetMainCallback2
 _0815627E:
 	pop {r0}
 	bx r0
@@ -275,7 +275,7 @@ sub_8156294: @ 8156294
 	bne _081562D4
 	ldr r0, _081562E4 @ =sub_802FDF4
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	ldr r2, _081562E8 @ =gUnknown_2023BCE
 	ldrb r1, [r4]
 	lsls r0, r1, 1
@@ -285,7 +285,7 @@ sub_8156294: @ 8156294
 	muls r0, r2
 	ldr r2, _081562EC @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	bl sub_8157084
 _081562D4:
 	pop {r4}
@@ -347,9 +347,9 @@ sub_81562F0: @ 81562F0
 	strb r0, [r1, 0x1]
 	ldr r4, _0815639C @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldr r0, [r5]
 	ldrb r2, [r6]
 	ldr r1, [r0]
@@ -363,7 +363,7 @@ sub_81562F0: @ 81562F0
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _08156374:
 	ldr r0, _081563A0 @ =gUnknown_3004FE0
 	ldrb r1, [r6]
@@ -440,7 +440,7 @@ _081563DA:
 	cmp r0, 0
 	bne _08156454
 	adds r0, r3, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r4, _08156478 @ =gUnknown_3004FF0
 	ldrb r1, [r5]
 	adds r0, r1, r4
@@ -454,15 +454,15 @@ _081563DA:
 	ldr r2, _08156468 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	bl sub_804BD94
 	ldrb r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldrb r0, [r5]
-	bl sub_8034BB4
+	bl CopyBattleSpriteInvisibility
 	ldr r1, _0815647C @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -567,7 +567,7 @@ sub_81564F0: @ 81564F0
 	ldrb r0, [r2]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_8003ECC
 	bl sub_8127968
 _08156520:
@@ -603,7 +603,7 @@ sub_8156538: @ 8156538
 	ldrb r1, [r0]
 	ldr r2, _0815657C @ =gUnknown_203B0DC
 	movs r0, 0x1
-	bl sub_800E874
+	bl EmitChosenMonReturnValue
 	b _0815658A
 	.align 2, 0
 _08156568: .4byte gUnknown_30030F0
@@ -616,7 +616,7 @@ _08156580:
 	movs r0, 0x1
 	movs r1, 0x6
 	movs r2, 0
-	bl sub_800E874
+	bl EmitChosenMonReturnValue
 _0815658A:
 	bl sub_8157084
 _0815658E:
@@ -683,7 +683,7 @@ sub_81565E8: @ 81565E8
 	ldr r0, _08156620 @ =gUnknown_203AD30
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl sub_800E8AC
+	bl EmitOneReturnValue
 	bl sub_8157084
 _0815660E:
 	pop {r0}
@@ -792,7 +792,7 @@ _0815668A:
 	lsls r0, 2
 	ldr r1, _081567A0 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r4, _081567A4 @ =gUnknown_3004FF0
 	ldrb r0, [r5]
 	adds r1, r6, 0
@@ -808,7 +808,7 @@ _0815668A:
 	ldr r2, _08156794 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	eors r0, r6
 	bl sub_804BD94
@@ -816,7 +816,7 @@ _0815668A:
 	eors r0, r6
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 _0815671E:
 	ldr r1, _0815679C @ =gUnknown_3004FFC
 	ldr r4, _0815678C @ =gUnknown_2023BC4
@@ -828,7 +828,7 @@ _0815671E:
 	lsls r0, 2
 	ldr r1, _081567A0 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r5, _081567A4 @ =gUnknown_3004FF0
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -842,13 +842,13 @@ _0815671E:
 	ldr r2, _08156794 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_804BD94
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldr r0, _08156788 @ =gUnknown_2024018
 	ldr r0, [r0]
 	ldr r2, [r0, 0x8]
@@ -978,12 +978,12 @@ _081567DA:
 	strb r4, [r0, 0x1]
 	ldr r4, _081568C4 @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldr r0, _081568C8 @ =sub_802FDF4
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	ldr r2, _081568CC @ =gUnknown_2023BCE
 	mov r0, r8
 	ldrb r1, [r0]
@@ -994,7 +994,7 @@ _081567DA:
 	muls r0, r2
 	ldr r2, _081568D0 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	ldr r1, _081568D4 @ =gUnknown_3004FE0
 	mov r2, r8
 	ldrb r0, [r2]
@@ -1066,19 +1066,19 @@ _08156922:
 	adds r6, r1, r0
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4]
 	ldr r3, _081569E8 @ =gUnknown_8253AE4
 	adds r4, 0x1
@@ -1107,7 +1107,7 @@ _08156922:
 	mov r2, sp
 	bl sub_804037C
 	adds r0, r6, 0
-	bl sub_803E47C
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]
@@ -1121,7 +1121,7 @@ _08156922:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	strb r5, [r4]
 	bl sub_8075290
 	lsls r0, 24
@@ -1178,7 +1178,7 @@ _08156A10:
 	ldr r1, _08156A34 @ =sub_8156EE8
 	str r1, [r0]
 	mov r0, r9
-	bl sub_8077508
+	bl DestroyTask
 	b _08156A3E
 	.align 2, 0
 _08156A30: .4byte gUnknown_3004FE0
@@ -1235,19 +1235,19 @@ sub_8156A54: @ 8156A54
 	adds r6, r0
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	ldr r6, _08156B14 @ =gUnknown_8253AE4
 	lsls r1, r4, 2
@@ -1277,7 +1277,7 @@ sub_8156A54: @ 8156A54
 	negs r0, r0
 	str r0, [sp]
 	mov r0, r10
-	bl sub_8048150
+	bl SetBattleBarStruct
 	movs r0, 0x1B
 	bl sub_80722CC
 	ldr r0, _08156B20 @ =sub_8156B24
@@ -1343,7 +1343,7 @@ _08156B54:
 	lsls r4, 16
 	lsrs r4, 16
 	ldrb r0, [r5]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r4, 16
 	movs r0, 0x1
@@ -1359,17 +1359,17 @@ _08156B54:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r3, _08156C24 @ =gUnknown_8253AE4
@@ -1400,7 +1400,7 @@ _08156B54:
 	mov r2, sp
 	bl sub_804037C
 	adds r0, r5, 0
-	bl sub_803E47C
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]
@@ -1413,7 +1413,7 @@ _08156B54:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	strb r5, [r4]
 	ldr r0, _08156C30 @ =sub_8156C68
 	str r0, [r6]
@@ -1437,7 +1437,7 @@ _08156C34:
 	ldr r1, _08156C64 @ =sub_8156EE8
 	str r1, [r0]
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _08156C50:
 	add sp, 0x8
 	pop {r3-r5}
@@ -1484,7 +1484,7 @@ _08156C9C:
 	adds r1, r4, 0
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r0, _08156CBC @ =gUnknown_3005090
 	lsls r1, r5, 2
 	adds r1, r5
@@ -1532,7 +1532,7 @@ sub_8156CC8: @ 8156CC8
 	adds r7, r1, r0
 	adds r0, r7, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	bl sub_8075290
 	lsls r0, 24
 	lsrs r0, 24
@@ -1552,7 +1552,7 @@ sub_8156CC8: @ 8156CC8
 	ldrb r0, [r0]
 	adds r1, r7, 0
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	b _08156D5C
 	.align 2, 0
 _08156D34: .4byte gUnknown_3005090
@@ -1569,7 +1569,7 @@ _08156D48:
 	ldr r2, _08156D74 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 _08156D5C:
 	ldr r0, _08156D78 @ =gUnknown_3005090
 	lsls r1, r6, 2
@@ -1606,7 +1606,7 @@ sub_8156D80: @ 8156D80
 	ldr r1, _08156DC0 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	ldrb r0, [r4, 0xC]
 	ldr r1, _08156DC4 @ =gUnknown_3004FE0
 	lsls r0, 2
@@ -1614,7 +1614,7 @@ sub_8156D80: @ 8156D80
 	ldr r1, _08156DC8 @ =sub_8156EE8
 	str r1, [r0]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1630,7 +1630,7 @@ sub_8156DCC: @ 8156DCC
 	push {r4-r6,lr}
 	ldr r4, _08156E2C @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08156E3C
@@ -1653,7 +1653,7 @@ sub_8156DCC: @ 8156DCC
 	ldrb r0, [r2, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -1661,12 +1661,12 @@ sub_8156DCC: @ 8156DCC
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _08156E38 @ =gUnknown_3004FF0
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_8157084
 	b _08156E66
 	.align 2, 0
@@ -1692,7 +1692,7 @@ _08156E3C:
 	ldr r0, _08156E74 @ =gUnknown_3004FF0
 	adds r0, r3, r0
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_8157084
 _08156E66:
 	pop {r4-r6}
@@ -1721,7 +1721,7 @@ sub_8156E78: @ 8156E78
 	ldrb r0, [r5]
 	adds r0, r6
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r1, r4, 16
 	movs r0, 0x1
@@ -1747,7 +1747,7 @@ _08156EC0:
 	muls r0, r2
 	ldr r2, _08156EE4 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	bl sub_8157084
 _08156EDA:
 	pop {r4-r6}
@@ -1861,7 +1861,7 @@ sub_8156F7C: @ 8156F7C
 	lsls r0, 2
 	ldr r4, _08156FE4 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -1869,12 +1869,12 @@ sub_8156F7C: @ 8156F7C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _08156FE8 @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_8157084
 _08156FD0:
 	pop {r4-r6}
@@ -1986,7 +1986,7 @@ sub_8157084: @ 8157084
 	ands r0, r1
 	cmp r0, 0
 	beq _081570D8
-	bl sub_800A404
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2102,7 +2102,7 @@ _08157186:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl sub_800E708
+	bl EmitDataTransfer
 	bl sub_8157084
 	add sp, 0x100
 	pop {r4-r6}
@@ -2124,7 +2124,7 @@ sub_81571A0: @ 81571A0
 	movs r4, 0
 	ldr r0, _081571CC @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081571D4
@@ -2229,12 +2229,12 @@ _0815720C:
 _081572FC:
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2E]
 	movs r4, 0
@@ -2262,12 +2262,12 @@ _0815733E:
 	adds r1, r4, 0
 	adds r1, 0xD
 	adds r0, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r5]
 	adds r1, r4, 0
 	adds r1, 0x11
 	adds r0, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r8
 	adds r1, r2, r4
 	strb r0, [r1]
@@ -2277,21 +2277,21 @@ _0815733E:
 	ble _0815733E
 	adds r0, r6, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r10
 	strb r0, [r2]
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x44]
 	adds r0, r6, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r4, 0x1F
 	ands r0, r4
@@ -2303,7 +2303,7 @@ _0815733E:
 	strb r1, [r3, 0x14]
 	adds r0, r6, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r5, 0x1F
 	ands r0, r5
@@ -2315,7 +2315,7 @@ _0815733E:
 	strh r1, [r3, 0x14]
 	adds r0, r6, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r4
 	lsls r0, 2
@@ -2327,7 +2327,7 @@ _0815733E:
 	strb r1, [r3, 0x15]
 	adds r0, r6, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -2338,7 +2338,7 @@ _0815733E:
 	str r0, [sp, 0x14]
 	adds r0, r6, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 4
@@ -2349,7 +2349,7 @@ _0815733E:
 	strh r1, [r3, 0x16]
 	adds r0, r6, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r4
 	lsls r0, 1
@@ -2361,55 +2361,55 @@ _0815733E:
 	strb r1, [r3, 0x17]
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x48]
 	adds r0, r6, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4C]
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [sp, 0x7C]
 	strb r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r6, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2C]
 	adds r0, r6, 0
 	movs r1, 0x3B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r6, 0
 	movs r1, 0x3C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x4]
 	adds r0, r6, 0
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x6]
 	adds r0, r6, 0
 	movs r1, 0x3E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x8]
 	adds r0, r6, 0
 	movs r1, 0x3F
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0xA]
 	adds r0, r6, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r1, 0x1
 	ands r0, r1
@@ -2422,7 +2422,7 @@ _0815733E:
 	strb r1, [r3, 0x17]
 	adds r0, r6, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	lsls r0, 7
 	ldrb r2, [r3, 0x17]
@@ -2432,19 +2432,19 @@ _0815733E:
 	strb r1, [r3, 0x17]
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x54]
 	adds r0, r6, 0
 	movs r1, 0x2
 	ldr r2, [sp, 0x88]
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r0, [sp, 0x80]
 	ldr r1, [sp, 0x88]
-	bl sub_8008CF4
+	bl StringCopy10
 	adds r0, r6, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x84]
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, sp
 	movs r4, 0
 _081574EC:
@@ -2479,12 +2479,12 @@ _08157520:
 	adds r1, r4, 0
 	adds r1, 0xD
 	adds r0, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r5]
 	adds r1, r4, 0
 	adds r1, 0x11
 	adds r0, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r9
 	adds r1, r2, r4
 	strb r0, [r1]
@@ -2494,7 +2494,7 @@ _08157520:
 	ble _08157520
 	adds r0, r6, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r8
 	strb r0, [r1, 0xC]
 	mov r2, r8
@@ -2523,7 +2523,7 @@ _08157576:
 	adds r1, r4, 0
 	adds r1, 0x11
 	adds r0, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r4
 	strb r0, [r1]
 	adds r4, 0x1
@@ -2531,7 +2531,7 @@ _08157576:
 	ble _08157576
 	adds r0, r6, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r4
 	strb r0, [r1]
 	adds r4, 0x1
@@ -2553,7 +2553,7 @@ _081575B0:
 	adds r0, r6, 0
 	movs r1, 0x19
 _081575B4:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -2619,27 +2619,27 @@ _08157616:
 _0815761C:
 	adds r0, r6, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	adds r0, r6, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x1]
 	adds r0, r6, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x2]
 	adds r0, r6, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x3]
 	adds r0, r6, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x4]
 	adds r0, r6, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r4, 0x6
 	b _0815773C
@@ -2679,7 +2679,7 @@ _0815768C:
 	adds r0, r6, 0
 	movs r1, 0x37
 _08157690:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -2728,7 +2728,7 @@ _081576DE:
 	adds r0, r6, 0
 	movs r1, 0x3F
 _081576E2:
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	strb r0, [r7]
@@ -2780,7 +2780,7 @@ _08157730:
 	adds r0, r6, 0
 	movs r1, 0x36
 _08157734:
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	movs r4, 0x1
 _0815773C:
@@ -2798,7 +2798,7 @@ _0815773C:
 	thumb_func_start sub_8157750
 sub_8157750: @ 8157750
 	push {lr}
-	bl sub_80313B0
+	bl PlayerHandleGetRawMonData
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8157750
@@ -2865,7 +2865,7 @@ sub_81577B4: @ 81577B4
 	ldr r1, _081577E8 @ =gUnknown_2022BC7
 	adds r5, r2, r1
 	mov r8, r5
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081577F0
@@ -3865,7 +3865,7 @@ _0815809A:
 	muls r0, r2
 	ldr r2, _081580D0 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	add sp, 0x30
 	pop {r3-r5}
 	mov r8, r3
@@ -3908,7 +3908,7 @@ sub_81580E0: @ 81580E0
 	mov r10, r2
 	add r0, r10
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
@@ -3920,14 +3920,14 @@ sub_81580E0: @ 81580E0
 	ldrh r0, [r0]
 	muls r0, r7
 	add r0, r10
-	bl sub_8034320
+	bl BattleLoadOpponentMonSpriteGfx
 	ldrb r0, [r6]
 	bl sub_80748A8
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3949,7 +3949,7 @@ sub_81580E0: @ 81580E0
 	mov r0, r9
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _08158224 @ =gUnknown_2023D44
 	ldrb r1, [r6]
 	adds r1, r4
@@ -4004,7 +4004,7 @@ sub_81580E0: @ 81580E0
 	ldr r1, _08158230 @ =gUnknown_2024024
 	adds r2, r1
 	ldrb r1, [r2]
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r4, [r6]
 	lsls r0, r4, 1
 	ldr r2, _08158218 @ =gUnknown_2023BCE
@@ -4013,12 +4013,12 @@ sub_81580E0: @ 81580E0
 	muls r0, r7
 	add r0, r10
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_8035708
+	bl SetBankEnemyShadowSpriteCallback
 	ldr r1, _08158234 @ =gUnknown_3004FE0
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -4056,7 +4056,7 @@ sub_815823C: @ 815823C
 	adds r2, r4, 0x2
 	adds r1, r2
 	ldrb r1, [r1]
-	bl sub_803589C
+	bl ClearTemporarySpeciesSpriteData
 	ldr r2, _081582A8 @ =gUnknown_2023BCE
 	ldrb r0, [r5]
 	lsls r1, r0, 1
@@ -4121,7 +4121,7 @@ sub_81582C0: @ 81582C0
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x1
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r0, _081582F4 @ =gUnknown_3004FE0
 	ldrb r1, [r6]
 	lsls r1, 2
@@ -4143,7 +4143,7 @@ _081582FC:
 	lsls r0, 2
 	ldr r4, _0815833C @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -4151,12 +4151,12 @@ _081582FC:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _08158340 @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_8157084
 _08158332:
 	pop {r4-r6}
@@ -4175,7 +4175,7 @@ sub_8158344: @ 8158344
 	push {r7}
 	ldr r7, _081583D8 @ =gUnknown_2023BC4
 	ldrb r0, [r7]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081583F0
@@ -4183,7 +4183,7 @@ sub_8158344: @ 8158344
 	movs r0, 0x4
 	bl sub_8034750
 	ldrb r0, [r7]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4201,7 +4201,7 @@ sub_8158344: @ 8158344
 	asrs r2, 16
 	movs r1, 0x50
 	movs r3, 0x1E
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r5, _081583E4 @ =gUnknown_2023D44
 	ldrb r1, [r7]
 	adds r1, r5
@@ -4251,7 +4251,7 @@ _081583F0:
 	movs r0, 0x84
 	bl sub_80346C4
 	ldrb r0, [r7]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4280,7 +4280,7 @@ _081583F0:
 	adds r0, r5, 0
 	movs r1, 0xB0
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r5, _08158518 @ =gUnknown_2023D44
 	ldrb r1, [r7]
 	adds r1, r5
@@ -4309,7 +4309,7 @@ _081583F0:
 	lsls r6, r1, 3
 	adds r0, r6
 	ldrh r0, [r0, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	ldrb r1, [r7]
 	adds r1, r5
 	ldrb r1, [r1]
@@ -4337,7 +4337,7 @@ _081583F0:
 	ldr r0, _08158528 @ =gUnknown_823957C
 	adds r0, r6
 	ldrh r0, [r0, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	ldrb r1, [r7]
 	adds r1, r5
 	ldrb r2, [r1]
@@ -4408,7 +4408,7 @@ sub_8158544: @ 8158544
 	movs r0, 0x4
 	bl sub_8034750
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4426,7 +4426,7 @@ sub_8158544: @ 8158544
 	asrs r2, 16
 	movs r1, 0x50
 	movs r3, 0x1E
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r6, _081585F8 @ =gUnknown_2023D44
 	ldrb r1, [r4]
 	adds r1, r6
@@ -4528,7 +4528,7 @@ sub_815861C: @ 815861C
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _08158650:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -4554,7 +4554,7 @@ _08158670:
 	bne _0815872A
 	strb r0, [r3, 0x4]
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -4568,11 +4568,11 @@ _08158670:
 	muls r0, r2
 	ldr r2, _081586EC @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	movs r1, 0x40
 	negs r1, r1
 	movs r0, 0x10
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r2, _081586F0 @ =gUnknown_202063C
 	ldr r3, _081586F4 @ =gUnknown_2023D44
 	ldrb r0, [r5]
@@ -4611,7 +4611,7 @@ _081586F8: .4byte sub_8012110
 _081586FC:
 	movs r0, 0x10
 	movs r1, 0x3F
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r2, _08158730 @ =gUnknown_202063C
 	ldr r1, _08158734 @ =gUnknown_2023D44
 	ldrb r0, [r5]
@@ -4667,14 +4667,14 @@ sub_8158754: @ 8158754
 	ldr r5, _0815879C @ =gUnknown_2023BC4
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x3
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _081587A0 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -4711,14 +4711,14 @@ sub_81587A8: @ 81587A8
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x3
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _08158800 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -4844,7 +4844,7 @@ sub_8158814: @ 8158814
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_80342A0
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -4945,7 +4945,7 @@ _08158996:
 	adds r1, r3, 0
 	adds r2, r3, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _081589B2:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -5000,7 +5000,7 @@ _081589F0:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _08158A24:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -5023,7 +5023,7 @@ _08158A40:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _08158A7C
-	bl sub_8034B40
+	bl CopyAllBattleSpritesInvisibilities
 	ldrb r0, [r6]
 	lsls r2, r0, 9
 	mov r3, r9
@@ -5033,7 +5033,7 @@ _08158A40:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_8035200
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -5109,7 +5109,7 @@ sub_8158AFC: @ 8158AFC
 	push {lr}
 	ldr r0, _08158B14 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158B18
@@ -5127,7 +5127,7 @@ _08158B1C:
 	thumb_func_start sub_8158B20
 sub_8158B20: @ 8158B20
 	push {lr}
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -5160,7 +5160,7 @@ sub_8158B60: @ 8158B60
 	push {r4,lr}
 	ldr r4, _08158BBC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158BDC
@@ -5233,7 +5233,7 @@ sub_8158BF8: @ 8158BF8
 	thumb_func_start sub_8158C04
 sub_8158C04: @ 8158C04
 	push {lr}
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -5268,7 +5268,7 @@ sub_8158C48: @ 8158C48
 	push {r4,lr}
 	ldr r4, _08158C68 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158C74
@@ -5309,7 +5309,7 @@ sub_8158C90: @ 8158C90
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, _08158CDC @ =gUnknown_3004FE0
 	ldr r2, _08158CE0 @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -5354,7 +5354,7 @@ sub_8158CF4: @ 8158CF4
 	sub sp, 0x4
 	ldr r0, _08158DA4 @ =nullsub_43
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	ldr r3, _08158DA8 @ =gUnknown_3004FFC
 	ldr r4, _08158DAC @ =gUnknown_2023BC4
 	ldrb r1, [r4]
@@ -5421,7 +5421,7 @@ _08158D60:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, _08158DC0 @ =gUnknown_3004FE0
 	ldr r2, _08158DAC @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -5463,7 +5463,7 @@ sub_8158DD8: @ 8158DD8
 	sub sp, 0x4
 	ldr r4, _08158DFC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158E08
@@ -5492,7 +5492,7 @@ _08158E08:
 _08158E18:
 	adds r5, r1, r0
 	movs r0, 0
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	ldr r3, _08158E70 @ =gUnknown_2022BC4
 	ldr r7, _08158E74 @ =gUnknown_2023BC4
 	ldrb r1, [r7]
@@ -5512,11 +5512,11 @@ _08158E18:
 	beq _08158E80
 	adds r0, r5, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	ldrb r0, [r7]
 	ldr r1, _08158E7C @ =gUnknown_3004FF0
@@ -5524,7 +5524,7 @@ _08158E18:
 	ldrb r1, [r1]
 	str r6, [sp]
 	adds r2, r4, 0
-	bl sub_8048150
+	bl SetBattleBarStruct
 	b _08158EA8
 	.align 2, 0
 _08158E68: .4byte gUnknown_2023BCE
@@ -5536,7 +5536,7 @@ _08158E7C: .4byte gUnknown_3004FF0
 _08158E80:
 	adds r0, r5, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r2, r0, 0
 	ldrb r0, [r7]
 	ldr r4, _08158EC0 @ =gUnknown_3004FF0
@@ -5544,7 +5544,7 @@ _08158E80:
 	ldrb r1, [r1]
 	str r6, [sp]
 	movs r3, 0
-	bl sub_8048150
+	bl SetBattleBarStruct
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -5587,7 +5587,7 @@ sub_8158ED0: @ 8158ED0
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x63
 	bls _08158F08
 	bl sub_8157084
@@ -5598,10 +5598,10 @@ _08158F00: .4byte gUnknown_2023BC4
 _08158F04: .4byte gUnknown_2024284
 _08158F08:
 	movs r0, 0x1
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	ldrb r1, [r6]
 	lsls r1, 9
 	adds r0, r5, 0x2
@@ -5614,7 +5614,7 @@ _08158F08:
 	orrs r4, r0
 	ldr r0, _08158F5C @ =sub_81568DC
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08158F60 @ =gUnknown_3005090
@@ -5648,12 +5648,12 @@ sub_8158F6C: @ 8158F6C
 	push {r4,lr}
 	ldr r4, _08158F9C @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158FF2
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158FA8
@@ -5688,7 +5688,7 @@ _08158FB8:
 	ldrb r0, [r0]
 	adds r1, r2, 0
 	movs r2, 0x9
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r2, [r4]
 	ldr r0, _08159008 @ =gUnknown_2024018
 	ldr r0, [r0]
@@ -5727,7 +5727,7 @@ sub_8159014: @ 8159014
 	push {r4,r5,lr}
 	ldr r5, _0815906C @ =gUnknown_2023BC4
 	ldrb r0, [r5]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _08159064
@@ -5755,7 +5755,7 @@ sub_8159014: @ 8159014
 	ldrb r2, [r3]
 	lsls r2, 24
 	orrs r1, r2
-	bl sub_8033F1C
+	bl InitAndLaunchChosenStatusAnimation
 	ldr r1, _08159074 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -5779,7 +5779,7 @@ sub_815907C: @ 815907C
 	sub sp, 0x4
 	ldr r4, _081590A0 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081590AC
@@ -5809,7 +5809,7 @@ _081590BC:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, _081590F8 @ =gUnknown_2022BC4
 	ldr r1, _081590FC @ =gUnknown_2023BC4
 	ldrb r1, [r1]
@@ -5970,7 +5970,7 @@ _081591C4:
 	movs r1, 0
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
-	bl sub_804BE70
+	bl DoHitAnimHealthboxEffect
 	ldr r1, _081591F8 @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -6034,7 +6034,7 @@ sub_815923C: @ 815923C
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_8071C60
+	bl PlayFanfare
 	bl sub_8157084
 	pop {r0}
 	bx r0
@@ -6048,7 +6048,7 @@ sub_815926C: @ 815926C
 	push {r4,lr}
 	ldr r4, _08159290 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815929C
@@ -6077,11 +6077,11 @@ _0815929C:
 _081592AC:
 	adds r0, r1, r0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
-	bl sub_8071DF0
+	bl PlayCry1
 	bl sub_8157084
 	pop {r4}
 	pop {r0}
@@ -6129,7 +6129,7 @@ sub_8159304: @ 8159304
 	lsls r0, 2
 	ldr r5, _08159444 @ =gUnknown_202063C
 	adds r0, r5
-	bl sub_80750FC
+	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -6184,7 +6184,7 @@ sub_8159304: @ 8159304
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, _08159450 @ =sub_80335F8
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -6193,9 +6193,9 @@ sub_8159304: @ 8159304
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _08159454 @ =0x0000d6f8
-	bl sub_80089B8
+	bl AllocSpritePalette
 	adds r4, r0, 0
 	lsls r4, 24
 	ldr r0, _08159458 @ =gUnknown_8239FD4
@@ -6205,7 +6205,7 @@ sub_8159304: @ 8159304
 	lsls r2, 1
 	adds r1, r4, r2
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r0, [r0]
@@ -6220,7 +6220,7 @@ sub_8159304: @ 8159304
 	strb r0, [r1, 0x5]
 	ldr r0, _0815945C @ =sub_81595EC
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, _08159460 @ =gUnknown_3005090
@@ -6318,20 +6318,20 @@ sub_8159478: @ 8159478
 	ldr r1, _081595CC @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _081595D0 @ =sub_8033E3C
-	bl sub_8044EF8
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _081595D4 @ =gUnknown_3004FFC
 	mov r9, r1
 	add r9, r6
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -6358,7 +6358,7 @@ sub_8159478: @ 8159478
 	mov r0, r10
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _081595DC @ =gUnknown_2023D44
 	adds r4, r6, r4
 	strb r0, [r4]
@@ -6403,7 +6403,7 @@ sub_8159478: @ 8159478
 	ldr r1, _081595E4 @ =gUnknown_2024024
 	adds r6, r1
 	ldrb r1, [r6]
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -6425,7 +6425,7 @@ sub_8159478: @ 8159478
 	str r1, [r0]
 	movs r0, 0
 	movs r1, 0xFF
-	bl sub_804A938
+	bl DoPokeballSendOutAnimation
 	mov r1, r9
 	ldrb r2, [r1]
 	lsls r1, r2, 4
@@ -6501,7 +6501,7 @@ _08159610:
 	str r1, [r0]
 	strb r5, [r4]
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 _08159646:
 	pop {r4-r6}
 	pop {r0}
@@ -6527,7 +6527,7 @@ sub_8159660: @ 8159660
 	cmp r0, 0
 	beq _08159690
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08159690
@@ -6591,10 +6591,10 @@ sub_81596F0: @ 81596F0
 	ldr r4, _08159710 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8012258
+	bl dp11b_obj_free
 	bl sub_8157084
 	pop {r4}
 	pop {r0}
@@ -6633,7 +6633,7 @@ sub_8159720: @ 8159720
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl sub_803401C
+	bl TryHandleLaunchBattleTableAnimation
 	lsls r0, 24
 	cmp r0, 0
 	beq _08159760
@@ -6675,10 +6675,10 @@ sub_815977C: @ 815977C
 	bgt _081597A4
 	adds r0, r2, 0
 	movs r1, 0x1
-	bl sub_8012258
+	bl dp11b_obj_free
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8012258
+	bl dp11b_obj_free
 _081597A4:
 	bl sub_8157084
 	pop {r4}
@@ -6710,9 +6710,9 @@ sub_81597C4: @ 81597C4
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x5
-	bl sub_8071AB4
+	bl FadeOutMapMusic
 	movs r0, 0x3
-	bl sub_8070E44
+	bl BeginFastPaletteFade
 	bl sub_8157084
 	ldr r0, _08159814 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -6757,7 +6757,7 @@ sub_8159824: @ 8159824
 	ldr r7, [r0]
 	ldr r4, _081598BC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815985C
@@ -6765,12 +6765,12 @@ sub_8159824: @ 8159824
 	movs r1, 0x1
 	movs r2, 0x7
 	movs r3, 0x1
-	bl sub_8012138
+	bl dp11b_obj_instanciate
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0x7
 	movs r3, 0x1
-	bl sub_8012138
+	bl dp11b_obj_instanciate
 _0815985C:
 	ldr r6, _081598C0 @ =gUnknown_3005EE0
 	ldrb r2, [r4]
@@ -6786,7 +6786,7 @@ _0815985C:
 	cmp r0, r1
 	bne _0815992C
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08159888
@@ -6839,13 +6839,13 @@ _081598DA:
 	movs r1, 0x2
 _081598DE:
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	b _081598F0
 _081598E6:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 _081598F0:
 	bl sub_8157084
 	ldr r3, _08159924 @ =gUnknown_3005EE0
@@ -6956,7 +6956,7 @@ sub_8159998: @ 8159998
 	cmp r0, r4
 	bne _08159A48
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081599DE
@@ -6984,7 +6984,7 @@ _081599DE:
 	orrs r2, r1
 	movs r0, 0x1
 	movs r1, 0xA
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	bl sub_8157084
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -7296,7 +7296,7 @@ _08159C64:
 	movs r2, 0x8
 	movs r3, 0
 _08159C90:
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _08159C94:
 	ldr r1, _08159CAC @ =gUnknown_3005EE0
 	ldr r0, _08159CB0 @ =gUnknown_2023BC4
@@ -7327,9 +7327,9 @@ _08159CB4:
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0xD
 	bne _08159CD8
-	bl sub_8035314
+	bl BattleStopLowHpSound
 	ldr r0, _08159CFC @ =0x00000137
-	bl sub_80722A0
+	bl PlayBGM
 _08159CD8:
 	ldr r1, _08159D00 @ =gUnknown_2022976
 	ldrb r0, [r4]
@@ -7402,7 +7402,7 @@ _08159D62:
 	adds r5, 0x95
 	adds r4, 0x94
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -7531,7 +7531,7 @@ _08159E7A:
 	movs r2, 0x8
 	movs r3, 0
 _08159E80:
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 _08159E84:
 	ldr r1, _08159E9C @ =gUnknown_3005EE0
 	ldr r0, _08159EA0 @ =gUnknown_2023BC4
@@ -7561,12 +7561,12 @@ _08159EA4:
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0xD
 	bne _08159EC8
-	bl sub_8035314
+	bl BattleStopLowHpSound
 	ldr r0, _08159EEC @ =0x00000137
-	bl sub_80722A0
+	bl PlayBGM
 _08159EC8:
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80EF0E0

@@ -74,7 +74,7 @@ _08016EB4:
 _08016EB8:
 	movs r0, 0x1
 _08016EBA:
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r2, r0, 24
 _08016EC2:
@@ -83,8 +83,8 @@ _08016EC2:
 	bx r1
 	thumb_func_end sub_8016E24
 
-	thumb_func_start sub_8016EC8
-sub_8016EC8: @ 8016EC8
+	thumb_func_start PressurePPLose
+PressurePPLose: @ 8016EC8
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -172,9 +172,9 @@ _08016F26:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08016F7A:
 	add sp, 0x4
 	pop {r4-r7}
@@ -184,10 +184,10 @@ _08016F7A:
 _08016F84: .4byte gUnknown_2023E0C
 _08016F88: .4byte gUnknown_825E45C
 _08016F8C: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8016EC8
+	thumb_func_end PressurePPLose
 
-	thumb_func_start sub_8016F90
-sub_8016F90: @ 8016F90
+	thumb_func_start PressurePPLoseOnUsingImprision
+PressurePPLoseOnUsingImprision: @ 8016F90
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -199,7 +199,7 @@ sub_8016F90: @ 8016F90
 	movs r0, 0x4
 	mov r8, r0
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -217,7 +217,7 @@ sub_8016F90: @ 8016F90
 _08016FC6:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	adds r6, r4, 0x1
@@ -322,9 +322,9 @@ _08017038:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _080170A0:
 	add sp, 0x4
 	pop {r3-r5}
@@ -340,10 +340,10 @@ _080170B4: .4byte gUnknown_2023BE4
 _080170B8: .4byte gUnknown_2023E0C
 _080170BC: .4byte gUnknown_825E45C
 _080170C0: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8016F90
+	thumb_func_end PressurePPLoseOnUsingImprision
 
-	thumb_func_start sub_80170C4
-sub_80170C4: @ 80170C4
+	thumb_func_start PressurePPLoseOnUsingPerishSong
+PressurePPLoseOnUsingPerishSong: @ 80170C4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -459,9 +459,9 @@ _08017146:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _080171AA:
 	add sp, 0x4
 	pop {r3-r5}
@@ -479,10 +479,10 @@ _080171C8: .4byte gUnknown_2023C08
 _080171CC: .4byte gUnknown_2023E0C
 _080171D0: .4byte gUnknown_825E45C
 _080171D4: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80170C4
+	thumb_func_end PressurePPLoseOnUsingPerishSong
 
-	thumb_func_start sub_80171D8
-sub_80171D8: @ 80171D8
+	thumb_func_start MarkAllBufferBanksForExecution
+MarkAllBufferBanksForExecution: @ 80171D8
 	push {r4,r5,lr}
 	ldr r0, _08017208 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -538,10 +538,10 @@ _08017236:
 _0801723C: .4byte gUnknown_2023BCC
 _08017240: .4byte gUnknown_2023BC8
 _08017244: .4byte gUnknown_825E45C
-	thumb_func_end sub_80171D8
+	thumb_func_end MarkAllBufferBanksForExecution
 
-	thumb_func_start sub_8017248
-sub_8017248: @ 8017248
+	thumb_func_start MarkBufferBankForExecution
+MarkBufferBankForExecution: @ 8017248
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -580,7 +580,7 @@ _0801728C:
 	.align 2, 0
 _08017290: .4byte gUnknown_2023BC8
 _08017294: .4byte gUnknown_825E45C
-	thumb_func_end sub_8017248
+	thumb_func_end MarkBufferBankForExecution
 
 	thumb_func_start sub_8017298
 sub_8017298: @ 8017298
@@ -624,8 +624,8 @@ _080172C2:
 _080172E4: .4byte gUnknown_2023BC8
 	thumb_func_end sub_8017298
 
-	thumb_func_start sub_80172E8
-sub_80172E8: @ 80172E8
+	thumb_func_start CancelMultiTurnMoves
+CancelMultiTurnMoves: @ 80172E8
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08017338 @ =gUnknown_2023BE4
@@ -673,10 +673,10 @@ _08017344: .4byte 0xfffffcff
 _08017348: .4byte gUnknown_2023DFC
 _0801734C: .4byte 0xfffbff3f
 _08017350: .4byte gUnknown_2023E0C
-	thumb_func_end sub_80172E8
+	thumb_func_end CancelMultiTurnMoves
 
-	thumb_func_start sub_8017354
-sub_8017354: @ 8017354
+	thumb_func_start WasUnableToUseMove
+WasUnableToUseMove: @ 8017354
 	push {lr}
 	lsls r0, 24
 	ldr r1, _080173A0 @ =gUnknown_2023E8C
@@ -722,10 +722,10 @@ _080173A4:
 _080173A6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8017354
+	thumb_func_end WasUnableToUseMove
 
-	thumb_func_start sub_80173AC
-sub_80173AC: @ 80173AC
+	thumb_func_start PrepareStringBattle
+PrepareStringBattle: @ 80173AC
 	push {r4,lr}
 	adds r2, r0, 0
 	lsls r2, 16
@@ -734,18 +734,18 @@ sub_80173AC: @ 80173AC
 	strb r1, [r4]
 	movs r0, 0
 	adds r1, r2, 0
-	bl sub_800E2D4
+	bl EmitPrintString
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080173CC: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80173AC
+	thumb_func_end PrepareStringBattle
 
-	thumb_func_start sub_80173D0
-sub_80173D0: @ 80173D0
+	thumb_func_start ResetSentPokesToOpponentValue
+ResetSentPokesToOpponentValue: @ 80173D0
 	push {r4-r6,lr}
 	movs r3, 0
 	ldr r0, _08017424 @ =gUnknown_2023F4E
@@ -797,7 +797,7 @@ _08017424: .4byte gUnknown_2023F4E
 _08017428: .4byte gUnknown_2023BCC
 _0801742C: .4byte gUnknown_825E45C
 _08017430: .4byte gUnknown_2023BCE
-	thumb_func_end sub_80173D0
+	thumb_func_end ResetSentPokesToOpponentValue
 
 	thumb_func_start sub_8017434
 sub_8017434: @ 8017434
@@ -808,7 +808,7 @@ sub_8017434: @ 8017434
 	lsrs r5, r0, 24
 	movs r4, 0
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -873,7 +873,7 @@ sub_80174B8: @ 80174B8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -921,8 +921,8 @@ _08017518: .4byte gUnknown_825E45C
 _0801751C: .4byte gUnknown_2023BCE
 	thumb_func_end sub_80174B8
 
-	thumb_func_start sub_8017520
-sub_8017520: @ 8017520
+	thumb_func_start BattleScriptPush
+BattleScriptPush: @ 8017520
 	push {r4,lr}
 	ldr r1, _08017540 @ =gUnknown_2023FF4
 	ldr r1, [r1]
@@ -941,10 +941,10 @@ sub_8017520: @ 8017520
 	bx r0
 	.align 2, 0
 _08017540: .4byte gUnknown_2023FF4
-	thumb_func_end sub_8017520
+	thumb_func_end BattleScriptPush
 
-	thumb_func_start sub_8017544
-sub_8017544: @ 8017544
+	thumb_func_start BattleScriptPushCursor
+BattleScriptPushCursor: @ 8017544
 	ldr r0, _08017564 @ =gUnknown_2023FF4
 	ldr r0, [r0]
 	ldr r2, [r0, 0x8]
@@ -963,10 +963,10 @@ sub_8017544: @ 8017544
 	.align 2, 0
 _08017564: .4byte gUnknown_2023FF4
 _08017568: .4byte gUnknown_2023D74
-	thumb_func_end sub_8017544
+	thumb_func_end BattleScriptPushCursor
 
-	thumb_func_start sub_801756C
-sub_801756C: @ 801756C
+	thumb_func_start BattleScriptPop
+BattleScriptPop: @ 801756C
 	ldr r3, _0801758C @ =gUnknown_2023D74
 	ldr r0, _08017590 @ =gUnknown_2023FF4
 	ldr r0, [r0]
@@ -985,7 +985,7 @@ sub_801756C: @ 801756C
 	.align 2, 0
 _0801758C: .4byte gUnknown_2023D74
 _08017590: .4byte gUnknown_2023FF4
-	thumb_func_end sub_801756C
+	thumb_func_end BattleScriptPop
 
 	thumb_func_start sub_8017594
 sub_8017594: @ 8017594
@@ -1055,7 +1055,7 @@ _080175F0:
 	cmp r0, 0
 	bge _0801762C
 	adds r0, r2, 0
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r1, _080176C8 @ =gUnknown_2023D80
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -1149,7 +1149,7 @@ _080176E0: .4byte gUnknown_81D8F9F
 _080176E4: .4byte gUnknown_2023F54
 _080176E8:
 	ldrh r0, [r1, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r3, r0, 24
 _080176F2:
@@ -1275,7 +1275,7 @@ _080177E8: .4byte gUnknown_2023F54
 _080177EC:
 	ldrh r0, [r1, 0x2E]
 	str r3, [sp, 0x14]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -1524,9 +1524,9 @@ sub_8017998: @ 8017998
 	cmp r0, 0
 	beq _08017A1C
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r4, r0, 0
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	eors r4, r1
 	movs r1, 0x2
@@ -1535,7 +1535,7 @@ sub_8017998: @ 8017998
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r2, _08017A18 @ =gUnknown_20233C4
 	ldrb r1, [r5]
 	lsls r1, 9
@@ -1551,12 +1551,12 @@ _08017A14: .4byte gUnknown_2022B4C
 _08017A18: .4byte gUnknown_20233C4
 _08017A1C:
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r2, _08017A3C @ =gUnknown_20233C4
 	ldrb r1, [r5]
 	lsls r1, 9
@@ -1599,7 +1599,7 @@ sub_8017A64: @ 8017A64
 	lsls r1, 16
 	lsrs r5, r1, 16
 	movs r6, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -1613,7 +1613,7 @@ sub_8017A64: @ 8017A64
 _08017A8E:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	adds r3, r4, 0x1
@@ -3204,9 +3204,9 @@ _08018734:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _080187FC
 	.align 2, 0
 _08018784: .4byte 0xf7ffffff
@@ -3298,13 +3298,13 @@ _0801881C:
 	subs r0, 0x10
 	str r0, [r1]
 	ldrb r0, [r5]
-	bl sub_8017354
+	bl WasUnableToUseMove
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _08018860
 	ldrb r0, [r5]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r1, _0801885C @ =gUnknown_2023E82
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
@@ -3338,7 +3338,7 @@ _08018888:
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	adds r0, r3, 0
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 _08018894:
 	ldr r0, _080188AC @ =gUnknown_81D90BC
 	bl sub_801BBE4
@@ -3375,12 +3375,12 @@ _080188CE:
 	adds r0, r1, r3
 	str r0, [r2]
 	ldrb r0, [r6]
-	bl sub_8017354
+	bl WasUnableToUseMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _080188F0
 	ldrb r0, [r6]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	b _08018C12
 	.align 2, 0
 _080188E8: .4byte gUnknown_2023BE4
@@ -3752,13 +3752,13 @@ _08018B6C:
 	cmp r0, 0xF
 	beq _08018C12
 	adds r0, r2, 0
-	bl sub_8027830
+	bl UproarWakeUpCheck
 	lsls r0, 24
 	cmp r0, 0
 	bne _08018C12
 	ldrb r0, [r6]
-	bl sub_80172E8
-	bl sub_8044EC8
+	bl CancelMultiTurnMoves
+	bl Random
 	ldrb r1, [r6]
 	adds r2, r1, 0
 	muls r2, r5
@@ -3777,9 +3777,9 @@ _08018B6C:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r6]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08018C2C @ =gUnknown_2023D6E
 	ldrb r0, [r6]
 	strb r0, [r1]
@@ -4752,7 +4752,7 @@ _080193A4:
 	b _08019946
 _080193C4:
 	adds r0, r1, 0
-	bl sub_8027830
+	bl UproarWakeUpCheck
 	lsls r0, 24
 	cmp r0, 0
 	beq _08019424
@@ -4775,7 +4775,7 @@ _080193C4:
 	ldr r1, _08019414 @ =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _08019418 @ =gUnknown_2023E82
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
@@ -4869,7 +4869,7 @@ _080194B0:
 	ldr r1, _080194D0 @ =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r0, _080194D4 @ =gUnknown_2023E82
 	strb r4, [r0, 0x5]
 	ldr r1, _080194D8 @ =gUnknown_2023D74
@@ -4897,7 +4897,7 @@ _080194E0:
 	ands r0, r1
 	cmp r0, 0
 	beq _08019580
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x5
@@ -4946,7 +4946,7 @@ _08019558:
 	negs r1, r1
 	ands r0, r1
 	str r0, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _08019588 @ =gUnknown_2023D74
 	ldr r0, _0801958C @ =gUnknown_81D908D
 	str r0, [r1]
@@ -4991,7 +4991,7 @@ _080195AE:
 	b _08019946
 _080195C2:
 	adds r0, r2, 0
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r2, _080195F8 @ =gUnknown_2023DD0
 	ldr r0, [r2]
 	movs r1, 0x80
@@ -5047,7 +5047,7 @@ _08019628:
 	movs r1, 0
 	strb r1, [r0, 0x19]
 	ldrb r0, [r3]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r1, _0801966C @ =gUnknown_2023D74
 	ldr r0, _08019670 @ =gUnknown_81D7342
 	str r0, [r1]
@@ -5096,7 +5096,7 @@ _08019692:
 	orrs r0, r1
 	strb r0, [r2, 0x2]
 	ldrb r0, [r3]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r1, _080196D4 @ =gUnknown_2023D74
 	ldr r0, _080196D8 @ =gUnknown_81D90B1
 	str r0, [r1]
@@ -5146,7 +5146,7 @@ _08019700:
 	ldrb r0, [r3]
 	strb r0, [r1, 0x17]
 	ldrb r0, [r3]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r1, _08019748 @ =gUnknown_2023D74
 	ldr r0, _0801974C @ =gUnknown_81D8C4F
 	str r0, [r1]
@@ -5202,7 +5202,7 @@ _08019782:
 	orrs r0, r1
 	strb r0, [r2, 0x2]
 	ldrb r0, [r4]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r1, _080197B0 @ =gUnknown_2023D74
 	ldr r0, _080197B4 @ =gUnknown_81D8ECA
 	b _08019934
@@ -5234,7 +5234,7 @@ _080197CC:
 	orrs r0, r1
 	strb r0, [r2, 0x1]
 	ldrb r0, [r4]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r1, _08019808 @ =gUnknown_2023D74
 	ldr r0, _0801980C @ =gUnknown_81D8F94
 	str r0, [r1]
@@ -5279,7 +5279,7 @@ _08019814:
 	ands r0, r3
 	cmp r0, 0
 	beq _080198D4
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	movs r2, 0x1
 	ands r2, r0
@@ -5288,7 +5288,7 @@ _08019814:
 	ldr r1, _08019864 @ =gUnknown_2023E82
 	movs r0, 0
 	strb r0, [r1, 0x5]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	b _080198B2
 	.align 2, 0
 _0801985C: .4byte gUnknown_2023BE4
@@ -5344,7 +5344,7 @@ _080198C8: .4byte gUnknown_2023DD0
 _080198CC: .4byte gUnknown_2023D74
 _080198D0: .4byte gUnknown_81D90D3
 _080198D4:
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _080198EC @ =gUnknown_2023D74
 	ldr r0, _080198F0 @ =gUnknown_81D9116
 _080198DC:
@@ -5374,7 +5374,7 @@ _080198F8:
 	ands r0, r1
 	cmp r0, 0
 	beq _08019946
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10
@@ -5432,7 +5432,7 @@ _08019974:
 _08019988:
 	ldr r0, _080199A0 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080199AC
@@ -5473,15 +5473,15 @@ _080199C8:
 	cmp r1, 0
 	beq _08019A42
 	lsrs r0, r1, 16
-	bl sub_8045190
+	bl CountTrailingZeroBits
 	ldr r1, _08019A08 @ =gUnknown_2023FC4
 	strb r0, [r1, 0x17]
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
 	beq _08019A0C
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	b _08019A34
 	.align 2, 0
 _08019A00: .4byte gUnknown_2023BE4
@@ -5489,7 +5489,7 @@ _08019A04: .4byte gUnknown_2023D6B
 _08019A08: .4byte gUnknown_2023FC4
 _08019A0C:
 	ldr r0, _08019A48 @ =gUnknown_81D914A
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r2, _08019A4C @ =gUnknown_2023DD0
 	ldr r0, [r2]
 	movs r1, 0x80
@@ -5505,7 +5505,7 @@ _08019A0C:
 	orrs r0, r1
 	strb r0, [r2, 0x1]
 	ldrb r0, [r4]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 _08019A34:
 	ldr r1, _08019A54 @ =gUnknown_2023D74
 	ldr r0, _08019A58 @ =gUnknown_81D913D
@@ -5656,7 +5656,7 @@ _08019B40:
 	negs r0, r0
 	ands r3, r0
 	str r3, [r4]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _08019BF8 @ =gUnknown_2023D74
 	ldr r0, _08019BFC @ =gUnknown_81D908D
 	str r0, [r1]
@@ -5703,9 +5703,9 @@ _08019BA8:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08019BD4:
 	mov r0, r9
 	add sp, 0x10
@@ -5761,11 +5761,11 @@ _08019C40:
 	cmp r1, 0
 	beq _08019CCC
 	adds r0, r4, 0
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, _08019CC4 @ =gUnknown_202402C
 	mov r8, r1
@@ -5791,17 +5791,17 @@ _08019C7C:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08019CAC
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08019CAC
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -5826,17 +5826,17 @@ _08019CC4: .4byte gUnknown_202402C
 _08019CC8: .4byte gUnknown_2024284
 _08019CCC:
 	adds r0, r3, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08019CF8
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, _08019CF4 @ =gUnknown_202402C
@@ -5846,11 +5846,11 @@ _08019CCC:
 _08019CF4: .4byte gUnknown_202402C
 _08019CF8:
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r1, _08019DA0 @ =gUnknown_2024284
@@ -5882,17 +5882,17 @@ _08019D32:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08019D82
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08019D82
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -6158,7 +6158,7 @@ sub_8019F18: @ 8019F18
 	strb r1, [r5]
 _08019F54:
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019F84
@@ -6197,7 +6197,7 @@ _08019F94:
 	strb r2, [r5]
 _08019FA6:
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019FD8
@@ -6229,23 +6229,23 @@ _08019FE8:
 	adds r5, r1, r0
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x8]
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x10]
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0xC]
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x14]
 	ldr r0, _0801A040 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -6426,7 +6426,7 @@ _0801A192:
 	beq _0801A19A
 	bl _0801BBAA
 _0801A19A:
-	bl sub_807AF98
+	bl weather_get_current
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x3
@@ -6514,7 +6514,7 @@ _0801A250:
 	bne _0801A25A
 	bl _0801BBC6
 _0801A25A:
-	bl sub_807AF98
+	bl weather_get_current
 	ldr r1, _0801A274 @ =gUnknown_2023E82
 	strb r0, [r1, 0x5]
 	ldr r0, _0801A278 @ =gUnknown_81D8B1F
@@ -6793,7 +6793,7 @@ _0801A4A8:
 	bne _0801A4B8
 	bl _0801BBAA
 _0801A4B8:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -6811,7 +6811,7 @@ _0801A4D2:
 	beq _0801A4E4
 	ldr r0, _0801A564 @ =gUnknown_2022AB8
 	ldr r1, _0801A568 @ =gUnknown_8250094
-	bl sub_8008D84
+	bl StringCopy
 _0801A4E4:
 	ldr r0, [r5]
 	movs r1, 0x7
@@ -6820,7 +6820,7 @@ _0801A4E4:
 	beq _0801A4F6
 	ldr r0, _0801A564 @ =gUnknown_2022AB8
 	ldr r1, _0801A56C @ =gUnknown_825009C
-	bl sub_8008D84
+	bl StringCopy
 _0801A4F6:
 	ldr r0, [r5]
 	movs r1, 0x40
@@ -6829,7 +6829,7 @@ _0801A4F6:
 	beq _0801A508
 	ldr r0, _0801A564 @ =gUnknown_2022AB8
 	ldr r1, _0801A570 @ =gUnknown_82500A4
-	bl sub_8008D84
+	bl StringCopy
 _0801A508:
 	ldr r0, [r5]
 	movs r1, 0x10
@@ -6838,7 +6838,7 @@ _0801A508:
 	beq _0801A51A
 	ldr r0, _0801A564 @ =gUnknown_2022AB8
 	ldr r1, _0801A574 @ =gUnknown_82500AC
-	bl sub_8008D84
+	bl StringCopy
 _0801A51A:
 	ldr r0, [r5]
 	movs r1, 0x20
@@ -6847,7 +6847,7 @@ _0801A51A:
 	beq _0801A52C
 	ldr r0, _0801A564 @ =gUnknown_2022AB8
 	ldr r1, _0801A578 @ =gUnknown_82500B4
-	bl sub_8008D84
+	bl StringCopy
 _0801A52C:
 	str r4, [r5]
 	adds r1, r7, 0
@@ -6869,9 +6869,9 @@ _0801A52C:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	bl _0801BB5A
 	.align 2, 0
 _0801A564: .4byte gUnknown_2022AB8
@@ -7415,7 +7415,7 @@ _0801AA1A:
 	strb r5, [r1, 0x2]
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801AA54 @ =gUnknown_2023D74
 	ldr r0, _0801AA58 @ =gUnknown_81D949C
 	str r0, [r1]
@@ -7499,7 +7499,7 @@ _0801AAD6:
 	bne _0801AAE4
 	str r2, [r1]
 _0801AAE4:
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801AB14 @ =gUnknown_2023D74
 	ldr r0, _0801AB18 @ =gUnknown_81D94A3
 	str r0, [r1]
@@ -7576,7 +7576,7 @@ _0801AB7C:
 	bne _0801AB94
 	bl _0801BBAA
 _0801AB94:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -7589,7 +7589,7 @@ _0801ABAC:
 	ldr r5, _0801AC04 @ =gUnknown_2023E82
 	movs r4, 0x3
 _0801ABB0:
-	bl sub_8044EC8
+	bl Random
 	ands r0, r4
 	strb r0, [r5, 0x3]
 	cmp r0, 0
@@ -7604,7 +7604,7 @@ _0801ABC8:
 	ldrb r0, [r1, 0x3]
 	adds r0, 0x40
 	strb r0, [r1, 0x3]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801AC08 @ =gUnknown_2023D74
 	ldr r0, _0801AC0C @ =gUnknown_81D94CB
 	str r0, [r1]
@@ -7688,7 +7688,7 @@ _0801AC74:
 	bne _0801AC8C
 	bl _0801BBAA
 _0801AC8C:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -7701,7 +7701,7 @@ _0801ACA4:
 	ldr r1, _0801ACE0 @ =gUnknown_2023E82
 	movs r0, 0x42
 	strb r0, [r1, 0x3]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801ACE4 @ =gUnknown_2023D74
 	ldr r0, _0801ACE8 @ =gUnknown_81D94CB
 	str r0, [r1]
@@ -7785,7 +7785,7 @@ _0801AD50:
 	bne _0801AD68
 	bl _0801BBAA
 _0801AD68:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -7798,7 +7798,7 @@ _0801AD80:
 	ldr r1, _0801ADBC @ =gUnknown_2023E82
 	movs r0, 0x45
 	strb r0, [r1, 0x3]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801ADC0 @ =gUnknown_2023D74
 	ldr r0, _0801ADC4 @ =gUnknown_81D94CB
 	str r0, [r1]
@@ -7882,7 +7882,7 @@ _0801AE1C:
 	bne _0801AE44
 	bl _0801BBAA
 _0801AE44:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -7895,7 +7895,7 @@ _0801AE5C:
 	ldr r1, _0801AE98 @ =gUnknown_2023E82
 	movs r0, 0x43
 	strb r0, [r1, 0x3]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801AE9C @ =gUnknown_2023D74
 	ldr r0, _0801AEA0 @ =gUnknown_81D94CB
 	str r0, [r1]
@@ -7989,7 +7989,7 @@ _0801AF24:
 	bne _0801AF34
 	bl _0801BBAA
 _0801AF34:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -8010,11 +8010,11 @@ _0801AF4C:
 _0801AF5E:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	adds r4, r0, 0
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -8036,7 +8036,7 @@ _0801AF7C:
 _0801AF96:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -8045,7 +8045,7 @@ _0801AF96:
 _0801AFAA:
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -8066,7 +8066,7 @@ _0801AFBE:
 	ldr r0, [r2]
 	orrs r0, r1
 	str r0, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801B008 @ =gUnknown_2023D74
 	ldr r0, _0801B00C @ =gUnknown_81D94BE
 	str r0, [r1]
@@ -8221,7 +8221,7 @@ _0801B184:
 _0801B19E:
 	ldr r0, _0801B1AC @ =gUnknown_2022AB8
 	ldr r1, _0801B1B0 @ =gUnknown_82500BC
-	bl sub_8008D84
+	bl StringCopy
 	movs r2, 0x2
 	mov r9, r2
 	b _0801B2A4
@@ -8267,7 +8267,7 @@ _0801B1DC:
 	str r0, [r2]
 	ldr r0, _0801B210 @ =gUnknown_2022AB8
 	ldr r1, _0801B214 @ =gUnknown_825009C
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x1
 	mov r9, r0
 	b _0801B2A4
@@ -8290,7 +8290,7 @@ _0801B218:
 	beq _0801B29E
 	ldr r0, _0801B240 @ =gUnknown_2022AB8
 	ldr r1, _0801B244 @ =gUnknown_82500AC
-	bl sub_8008D84
+	bl StringCopy
 	movs r2, 0x1
 	mov r9, r2
 	b _0801B2A4
@@ -8313,7 +8313,7 @@ _0801B248:
 	ldr r0, _0801B270 @ =gUnknown_2022AB8
 	ldr r1, _0801B274 @ =gUnknown_82500B4
 _0801B264:
-	bl sub_8008D84
+	bl StringCopy
 	movs r4, 0x1
 	mov r9, r4
 	b _0801B2A4
@@ -8336,7 +8336,7 @@ _0801B278:
 	beq _0801B29E
 	ldr r0, _0801B2B4 @ =gUnknown_2022AB8
 	ldr r1, _0801B2B8 @ =gUnknown_82500C4
-	bl sub_8008D84
+	bl StringCopy
 	movs r2, 0x3
 	mov r9, r2
 _0801B29E:
@@ -8398,7 +8398,7 @@ _0801B300:
 _0801B302:
 	str r0, [r2]
 _0801B304:
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801B344 @ =gUnknown_2023D74
 	ldr r0, _0801B348 @ =gUnknown_81D94D1
 	str r0, [r1]
@@ -8417,9 +8417,9 @@ _0801B304:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	bl _0801BBC6
 	.align 2, 0
 _0801B33C: .4byte gUnknown_2023BE4
@@ -8530,7 +8530,7 @@ _0801B408:
 	ldr r0, _0801B444 @ =gUnknown_2023D6C
 	ldrb r0, [r0]
 	strb r0, [r1, 0x17]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801B448 @ =gUnknown_2023D74
 	ldr r0, _0801B44C @ =gUnknown_81D94CE
 	str r0, [r1]
@@ -8592,7 +8592,7 @@ _0801B48E:
 	ldr r0, _0801B4C8 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
 	strb r0, [r1, 0x17]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801B4CC @ =gUnknown_2023D74
 	ldr r0, _0801B4D0 @ =gUnknown_81D94CE
 	str r0, [r1]
@@ -8681,17 +8681,17 @@ _0801B53C:
 _0801B552:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	adds r6, r0, 0
 	eors r6, r1
 	ands r6, r1
 	adds r0, r6, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r6, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, _0801B604 @ =gUnknown_2022B4C
@@ -8728,14 +8728,14 @@ _0801B584:
 	cmp r0, 0
 	beq _0801B60C
 	str r2, [sp, 0x24]
-	bl sub_8044EC8
+	bl Random
 	ldr r2, [sp, 0x24]
 	adds r1, r2, 0
 	ands r1, r0
 	lsls r1, 1
 	orrs r6, r1
 	adds r0, r6, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	mov r2, r8
 	strb r0, [r2]
 	ldrb r0, [r2]
@@ -8923,7 +8923,7 @@ _0801B738: .4byte gUnknown_2023BE4
 _0801B73C: .4byte gUnknown_2023DFC
 _0801B740:
 	mov r0, r10
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -8938,7 +8938,7 @@ _0801B756:
 _0801B75A:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r5, 0x1
@@ -8969,7 +8969,7 @@ _0801B794: .4byte gUnknown_2023BE4
 _0801B798: .4byte gUnknown_2023D6A
 _0801B79C:
 	mov r0, r10
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -8984,7 +8984,7 @@ _0801B7B2:
 _0801B7B6:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r5, 0x1
@@ -9164,7 +9164,7 @@ _0801B8F8:
 _0801B908: .4byte gUnknown_2023D6A
 _0801B90C:
 	mov r0, r10
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -9176,7 +9176,7 @@ _0801B90C:
 _0801B922:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r6
@@ -9220,7 +9220,7 @@ _0801B962:
 	bne _0801B990
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r6
@@ -9245,7 +9245,7 @@ _0801B9A0: .4byte gUnknown_2023BE4
 _0801B9A4: .4byte gUnknown_2023D6A
 _0801B9A8:
 	mov r0, r10
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -9259,7 +9259,7 @@ _0801B9BE:
 _0801B9C0:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r6
@@ -9291,7 +9291,7 @@ _0801B9FC: .4byte gUnknown_2023BE4
 _0801BA00: .4byte gUnknown_2023D6A
 _0801BA04:
 	mov r0, r10
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -9305,7 +9305,7 @@ _0801BA1A:
 _0801BA1C:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r6
@@ -9438,7 +9438,7 @@ _0801BB3C:
 	ldr r1, _0801BB68 @ =0xfff7ffff
 	ands r0, r1
 	str r0, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801BB6C @ =gUnknown_2023D74
 	ldr r0, _0801BB70 @ =gUnknown_81D9310
 	str r0, [r1]
@@ -9554,7 +9554,7 @@ _0801BC20: .4byte gUnknown_2023BE3
 sub_801BC24: @ 801BC24
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r0, _0801BC58 @ =gUnknown_2023D74
 	str r4, [r0]
 	ldr r0, _0801BC5C @ =gUnknown_2023FF4
@@ -9629,11 +9629,11 @@ _0801BCB8: .4byte gUnknown_2023BE4
 _0801BCBC: .4byte gUnknown_2023F54
 _0801BCC0:
 	ldrh r0, [r4]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrh r0, [r4]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r0, 24
 _0801BCD4:
@@ -9663,12 +9663,12 @@ _0801BD00: .4byte gUnknown_2023D6B
 _0801BD04: .4byte gUnknown_2023F54
 _0801BD08:
 	ldr r0, [sp, 0x14]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	ldr r0, [sp, 0x14]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r0, 24
 _0801BD1E:
@@ -9683,9 +9683,9 @@ _0801BD1E:
 	cmp r4, 0xAF
 	beq _0801BD3E
 	adds r0, r4, 0
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	adds r0, r4, 0
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 _0801BD3E:
 	ldr r0, [sp, 0x8]
 	cmp r0, 0x4
@@ -9886,7 +9886,7 @@ _0801BF2C:
 	bl _0801C952
 _0801BF34:
 	adds r0, r7, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801BF58
@@ -9918,17 +9918,17 @@ _0801BF6E:
 	mov r1, r10
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	mov r1, r10
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r6, 0
@@ -9951,7 +9951,7 @@ _0801BFB2:
 	lsls r2, r5, 24
 	lsrs r2, 24
 	adds r0, r6, 0
-	bl sub_804101C
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r2, r0, 24
 	add r0, sp, 0x4
@@ -9991,10 +9991,10 @@ _0801BFE0:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldr r0, _0801C028 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	movs r0, 0x3
 	str r0, [sp, 0xC]
 	bl _0801C95A
@@ -10153,7 +10153,7 @@ _0801C14E:
 	adds r0, r2, r0
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_8044234
+	bl GetFlavorRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _0801C16C
@@ -10216,7 +10216,7 @@ _0801C1CC:
 	adds r0, r1, r0
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl sub_8044234
+	bl GetFlavorRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _0801C1EA
@@ -10281,7 +10281,7 @@ _0801C248:
 	adds r0, r5, r0
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl sub_8044234
+	bl GetFlavorRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _0801C278
@@ -10356,7 +10356,7 @@ _0801C2DC:
 	adds r0, r2, r0
 	ldr r0, [r0]
 	movs r1, 0x3
-	bl sub_8044234
+	bl GetFlavorRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _0801C30C
@@ -10431,7 +10431,7 @@ _0801C36E:
 	adds r0, r1, r0
 	ldr r0, [r0]
 	movs r1, 0x4
-	bl sub_8044234
+	bl GetFlavorRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _0801C3A0
@@ -10784,7 +10784,7 @@ _0801C630:
 	adds r4, r0, 0x1
 	ldr r5, _0801C6A8 @ =gUnknown_2023BFC
 _0801C638:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x5
@@ -11027,7 +11027,7 @@ _0801C816:
 	beq _0801C82E
 	ldr r0, _0801C8BC @ =gUnknown_2022AB8
 	ldr r1, _0801C8C0 @ =gUnknown_8250094
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x1
 	mov r10, r0
 _0801C82E:
@@ -11046,7 +11046,7 @@ _0801C82E:
 	str r0, [r2]
 	ldr r0, _0801C8BC @ =gUnknown_2022AB8
 	ldr r1, _0801C8C8 @ =gUnknown_825009C
-	bl sub_8008D84
+	bl StringCopy
 	movs r2, 0x1
 	add r10, r2
 _0801C854:
@@ -11057,7 +11057,7 @@ _0801C854:
 	beq _0801C86A
 	ldr r0, _0801C8BC @ =gUnknown_2022AB8
 	ldr r1, _0801C8CC @ =gUnknown_82500A4
-	bl sub_8008D84
+	bl StringCopy
 	movs r3, 0x1
 	add r10, r3
 _0801C86A:
@@ -11068,7 +11068,7 @@ _0801C86A:
 	beq _0801C880
 	ldr r0, _0801C8BC @ =gUnknown_2022AB8
 	ldr r1, _0801C8D0 @ =gUnknown_82500AC
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x1
 	add r10, r0
 _0801C880:
@@ -11079,7 +11079,7 @@ _0801C880:
 	beq _0801C896
 	ldr r0, _0801C8BC @ =gUnknown_2022AB8
 	ldr r1, _0801C8D4 @ =gUnknown_82500B4
-	bl sub_8008D84
+	bl StringCopy
 	movs r1, 0x1
 	add r10, r1
 _0801C896:
@@ -11091,7 +11091,7 @@ _0801C896:
 	beq _0801C8AE
 	ldr r0, _0801C8BC @ =gUnknown_2022AB8
 	ldr r1, _0801C8D8 @ =gUnknown_82500BC
-	bl sub_8008D84
+	bl StringCopy
 	movs r3, 0x1
 	add r10, r3
 _0801C8AE:
@@ -11159,7 +11159,7 @@ _0801C91C:
 	str r2, [r1]
 	ldr r0, _0801C97C @ =gUnknown_2022AB8
 	ldr r1, _0801C980 @ =gUnknown_82500C4
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, _0801C984 @ =gUnknown_81D95BF
 	bl sub_801BBE4
 	ldr r1, _0801C988 @ =gUnknown_2023E82
@@ -11279,11 +11279,11 @@ _0801CA34: .4byte gUnknown_2023BE4
 _0801CA38: .4byte gUnknown_2023F54
 _0801CA3C:
 	ldrh r0, [r4]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrh r0, [r4]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 _0801CA4C:
 	subs r0, r5, 0x2
 	cmp r0, 0x1A
@@ -11343,7 +11343,7 @@ _0801CAE6:
 	negs r0, r0
 	ands r1, r0
 	str r1, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801CB04 @ =gUnknown_2023D74
 	ldr r0, _0801CB08 @ =gUnknown_81D9537
 	str r0, [r1]
@@ -11370,7 +11370,7 @@ _0801CB22:
 	ldr r0, _0801CB3C @ =0xfffff077
 	ands r1, r0
 	str r1, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801CB40 @ =gUnknown_2023D74
 	ldr r0, _0801CB44 @ =gUnknown_81D954F
 	str r0, [r1]
@@ -11399,7 +11399,7 @@ _0801CB5E:
 	negs r0, r0
 	ands r1, r0
 	str r1, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801CB7C @ =gUnknown_2023D74
 	ldr r0, _0801CB80 @ =gUnknown_81D9567
 	str r0, [r1]
@@ -11427,7 +11427,7 @@ _0801CB9A:
 	negs r0, r0
 	ands r1, r0
 	str r1, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801CBB8 @ =gUnknown_2023D74
 	ldr r0, _0801CBBC @ =gUnknown_81D957F
 	str r0, [r1]
@@ -11463,7 +11463,7 @@ _0801CBDA:
 	ldr r1, _0801CBFC @ =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801CC00 @ =gUnknown_2023D74
 	ldr r0, _0801CC04 @ =gUnknown_81D9597
 	b _0801CD58
@@ -11489,7 +11489,7 @@ _0801CC1E:
 	negs r0, r0
 	ands r1, r0
 	str r1, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801CC3C @ =gUnknown_2023D74
 	ldr r0, _0801CC40 @ =gUnknown_81D95AF
 	str r0, [r1]
@@ -11519,8 +11519,8 @@ _0801CC5C:
 	str r1, [r2]
 	ldr r0, _0801CC88 @ =gUnknown_2022AB8
 	ldr r1, _0801CC8C @ =gUnknown_82500C4
-	bl sub_8008D84
-	bl sub_8017544
+	bl StringCopy
+	bl BattleScriptPushCursor
 	ldr r1, _0801CC90 @ =gUnknown_2023E82
 	movs r0, 0
 	strb r0, [r1, 0x5]
@@ -11566,7 +11566,7 @@ _0801CCC4:
 	beq _0801CCD4
 	ldr r0, _0801CD64 @ =gUnknown_2022AB8
 	ldr r1, _0801CD68 @ =gUnknown_8250094
-	bl sub_8008D84
+	bl StringCopy
 _0801CCD4:
 	ldr r0, [r6]
 	movs r2, 0x7
@@ -11582,7 +11582,7 @@ _0801CCD4:
 	str r0, [r2]
 	ldr r0, _0801CD64 @ =gUnknown_2022AB8
 	ldr r1, _0801CD70 @ =gUnknown_825009C
-	bl sub_8008D84
+	bl StringCopy
 _0801CCF4:
 	ldr r0, [r6]
 	movs r1, 0x40
@@ -11591,7 +11591,7 @@ _0801CCF4:
 	beq _0801CD06
 	ldr r0, _0801CD64 @ =gUnknown_2022AB8
 	ldr r1, _0801CD74 @ =gUnknown_82500A4
-	bl sub_8008D84
+	bl StringCopy
 _0801CD06:
 	ldr r0, [r6]
 	movs r1, 0x10
@@ -11600,7 +11600,7 @@ _0801CD06:
 	beq _0801CD18
 	ldr r0, _0801CD64 @ =gUnknown_2022AB8
 	ldr r1, _0801CD78 @ =gUnknown_82500AC
-	bl sub_8008D84
+	bl StringCopy
 _0801CD18:
 	ldr r0, [r6]
 	movs r1, 0x20
@@ -11609,7 +11609,7 @@ _0801CD18:
 	beq _0801CD2A
 	ldr r0, _0801CD64 @ =gUnknown_2022AB8
 	ldr r1, _0801CD7C @ =gUnknown_82500B4
-	bl sub_8008D84
+	bl StringCopy
 _0801CD2A:
 	adds r5, r4
 	ldr r0, [r5]
@@ -11619,7 +11619,7 @@ _0801CD2A:
 	beq _0801CD3E
 	ldr r0, _0801CD64 @ =gUnknown_2022AB8
 	ldr r1, _0801CD80 @ =gUnknown_82500BC
-	bl sub_8008D84
+	bl StringCopy
 _0801CD3E:
 	movs r4, 0
 	str r4, [r6]
@@ -11628,7 +11628,7 @@ _0801CD3E:
 	negs r1, r1
 	ands r0, r1
 	str r0, [r5]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r0, _0801CD84 @ =gUnknown_2023E82
 	strb r4, [r0, 0x5]
 	ldr r1, _0801CD88 @ =gUnknown_2023D74
@@ -11686,7 +11686,7 @@ _0801CDB4:
 	strb r7, [r0, 0x17]
 	ldr r0, _0801CDE4 @ =gUnknown_2023D6F
 	strb r7, [r0]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801CDE8 @ =gUnknown_2023D74
 	ldr r0, _0801CDEC @ =gUnknown_81D95DF
 	str r0, [r1]
@@ -11719,9 +11719,9 @@ _0801CE08:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _0801CFA6
 	.align 2, 0
 _0801CE24: .4byte gUnknown_2023FC4
@@ -11785,7 +11785,7 @@ _0801CE76:
 	bne _0801CE9C
 	b _0801CFA6
 _0801CE9C:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -11817,11 +11817,11 @@ _0801CE9C:
 	ldr r1, _0801CF0C @ =gUnknown_2023E82
 	movs r0, 0x8
 	strb r0, [r1, 0x3]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	movs r0, 0
 	movs r1, 0
 	bl sub_801FF20
-	bl sub_801756C
+	bl BattleScriptPop
 	b _0801CFA6
 	.align 2, 0
 _0801CEF4: .4byte gUnknown_2023DCC
@@ -11897,7 +11897,7 @@ _0801CF88:
 	lsls r0, 2
 	adds r0, r6
 	str r5, [r0]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801CFDC @ =gUnknown_2023D74
 	ldr r0, _0801CFE0 @ =gUnknown_81D9622
 	str r0, [r1]
@@ -12098,7 +12098,7 @@ _0801D0A0:
 _0801D1A4:
 	ldr r0, _0801D284 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -12123,13 +12123,13 @@ _0801D1A4:
 _0801D1D6:
 	ldr r0, _0801D284 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r0, r7, 1
 	mov r8, r0
 _0801D1E6:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _0801D290 @ =gUnknown_2023BCC
@@ -12142,7 +12142,7 @@ _0801D1E6:
 	cmp r5, r3
 	beq _0801D1E6
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -12218,7 +12218,7 @@ _0801D2A0: .4byte gUnknown_2023ECC
 _0801D2A4:
 	ldr r0, _0801D2B8 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r2, 0x1
 	movs r0, 0x1
@@ -12230,7 +12230,7 @@ _0801D2B8: .4byte gUnknown_2023D6B
 _0801D2BC:
 	ldr r0, _0801D2F0 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -12271,11 +12271,11 @@ _0801D2FC:
 	beq _0801D378
 	ldr r0, _0801D334 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801D33C
-	bl sub_8044EC8
+	bl Random
 	adds r1, r4, 0
 	ands r1, r0
 	cmp r1, 0
@@ -12289,7 +12289,7 @@ _0801D338:
 	movs r0, 0x3
 	b _0801D34E
 _0801D33C:
-	bl sub_8044EC8
+	bl Random
 	adds r1, r4, 0
 	ands r1, r0
 	cmp r1, 0
@@ -12299,7 +12299,7 @@ _0801D33C:
 _0801D34C:
 	movs r0, 0x2
 _0801D34E:
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _0801D370 @ =gUnknown_2023D70
@@ -12320,13 +12320,13 @@ _0801D374: .4byte gUnknown_825E45C
 _0801D378:
 	ldr r0, _0801D394 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r2, 0x1
 	movs r0, 0x1
 	ands r0, r1
 	eors r0, r2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 	b _0801D39C
@@ -12360,7 +12360,7 @@ sub_801D3C0: @ 801D3C0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12375,7 +12375,7 @@ sub_801D3C0: @ 801D3C0
 	adds r0, r6
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCD
 	lsls r1, 1
 	cmp r0, r1
@@ -12385,7 +12385,7 @@ sub_801D3C0: @ 801D3C0
 	adds r0, r6
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x97
 	beq _0801D414
 _0801D406:
@@ -12404,7 +12404,7 @@ _0801D414:
 	adds r0, r1
 	movs r1, 0x50
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 _0801D42A:
 	pop {r4-r7}
 	pop {r1}
@@ -12429,7 +12429,7 @@ sub_801D438: @ 801D438
 	bne _0801D4F4
 	ldr r4, _0801D500 @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12448,7 +12448,7 @@ sub_801D438: @ 801D438
 	ldr r0, [r0]
 	adds r2, 0x3C
 	adds r1, r2
-	bl sub_8044288
+	bl IsOtherTrainer
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801D4F4
@@ -12490,7 +12490,7 @@ _0801D4BE:
 	ldrb r0, [r0]
 	cmp r0, r6
 	bls _0801D4F4
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0xFF
 	ands r1, r0
 	mov r2, r8
@@ -12556,7 +12556,7 @@ _0801D558: .4byte 0xff7fffff
 _0801D55C: .4byte gUnknown_2023D74
 _0801D560: .4byte gUnknown_81D94DA
 _0801D564:
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0xFF
 	ands r1, r0
 	ldr r2, _0801D608 @ =gUnknown_2023BE4
@@ -12597,7 +12597,7 @@ _0801D5B0:
 	mov r8, r2
 	movs r7, 0x3
 _0801D5B6:
-	bl sub_8044EC8
+	bl Random
 	ands r0, r7
 	mov r1, r8
 	strb r0, [r1]
@@ -12661,7 +12661,7 @@ _0801D634:
 	subs r0, r6
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_8044EC8
+	bl Random
 	movs r2, 0xFF
 	adds r4, r2, 0
 	ands r4, r0
@@ -12726,7 +12726,7 @@ _0801D6CC:
 	cmp r4, r6
 	blt _0801D6F4
 _0801D6D2:
-	bl sub_8044EC8
+	bl Random
 	ldr r2, _0801D6E8 @ =gUnknown_2023E82
 	movs r1, 0x3
 	ands r1, r0

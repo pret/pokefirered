@@ -126,7 +126,7 @@ sub_81475C0: @ 81475C0
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r0, _08147600 @ =sub_8147654
-	bl sub_807741C
+	bl CreateTask
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -158,7 +158,7 @@ _08147608: .4byte gUnknown_846B4AC
 sub_814760C: @ 814760C
 	push {lr}
 	ldr r0, _08147630 @ =sub_8147654
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -186,7 +186,7 @@ _0814763A:
 sub_8147640: @ 8147640
 	push {lr}
 	ldr r0, _08147650 @ =sub_8147654
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -259,7 +259,7 @@ _081476BC:
 	adds r0, r5, 0
 	bl _call_via_r1
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _081476D6:
 	pop {r4,r5}
 	pop {r0}
@@ -282,13 +282,13 @@ sub_81476E0: @ 81476E0
 	lsls r0, 3
 	ldr r1, _081477B0 @ =gUnknown_846B42C
 	adds r0, r1
-	bl sub_800EBCC
+	bl LoadCompressedObjectPic
 	movs r2, 0x8
 	ldrsh r0, [r4, r2]
 	lsls r0, 3
 	ldr r1, _081477B4 @ =gUnknown_846B43C
 	adds r0, r1
-	bl sub_8008928
+	bl LoadSpritePalette
 	movs r5, 0
 	movs r3, 0x10
 	ldrsh r0, [r4, r3]
@@ -307,7 +307,7 @@ _08147714:
 	movs r3, 0x14
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0xE]
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r1, r5, 1
 	adds r1, r4
 	lsls r0, 24
@@ -415,7 +415,7 @@ sub_81477C0: @ 81477C0
 	ldr r5, _08147844 @ =gUnknown_202063C
 	adds r0, r5
 	movs r1, 0x4
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0x1C
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -431,7 +431,7 @@ sub_81477C0: @ 81477C0
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x5
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0x1E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -473,7 +473,7 @@ _08147864:
 	lsls r0, 2
 	ldr r1, _081478B0 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -488,14 +488,14 @@ _08147880:
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x6]
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	ldr r1, _081478B8 @ =gUnknown_846B43C
 	movs r2, 0x8
 	ldrsh r0, [r4, r2]
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x4]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -565,7 +565,7 @@ _0814792A:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	b _081479C8
 _0814793E:
 	movs r0, 0x15
@@ -574,7 +574,7 @@ _0814793E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r4, _08147984 @ =gUnknown_202063C
 	movs r2, 0x1C
 	ldrsh r0, [r5, r2]
@@ -716,7 +716,7 @@ sub_8147A34: @ 8147A34
 	ldrh r0, [r1, 0x4]
 	strh r0, [r4, 0x16]
 _08147A5C:
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _08147A9E

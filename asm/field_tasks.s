@@ -39,7 +39,7 @@ sub_806E83C: @ 806E83C
 	lsls r1, 3
 	ldr r0, _0806E874 @ =gUnknown_3005098
 	adds r4, r1, r0
-	bl sub_8069958
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806E86C
@@ -67,14 +67,14 @@ sub_806E87C: @ 806E87C
 	push {r4,r5,lr}
 	ldr r5, _0806E8C4 @ =sub_806E810
 	adds r0, r5, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _0806E8A6
 	adds r0, r5, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0806E8C8 @ =gUnknown_3005090
@@ -86,13 +86,13 @@ sub_806E87C: @ 806E87C
 _0806E8A6:
 	ldr r4, _0806E8CC @ =sub_806E83C
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806E8BC
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 _0806E8BC:
 	pop {r4,r5}
 	pop {r0}
@@ -109,7 +109,7 @@ sub_806E8D0: @ 806E8D0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _0806E908 @ =sub_806E810
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -147,11 +147,11 @@ _0806E912:
 sub_806E918: @ 806E918
 	push {lr}
 	ldr r0, _0806E948 @ =sub_806E810
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r0, _0806E94C @ =sub_806E83C
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -286,7 +286,7 @@ _0806EA12:
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	ldrh r0, [r0]
 	strh r0, [r5, 0x4]
@@ -298,7 +298,7 @@ _0806EA2A:
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	ldrh r2, [r0]
 	movs r3, 0
@@ -386,7 +386,7 @@ _0806EAB0:
 	ldrsh r0, [r0, r3]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_805A8E8
+	bl CurrentMapDrawMetatileAt
 	b _0806EB3E
 	.align 2, 0
 _0806EAF0: .4byte 0x0000035a
@@ -422,7 +422,7 @@ _0806EB04:
 	ldrsh r0, [r0, r3]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_805A8E8
+	bl CurrentMapDrawMetatileAt
 	ldr r0, _0806EB50 @ =0x00004001
 	movs r1, 0x1
 	bl sub_806E584
@@ -454,7 +454,7 @@ sub_806EB54: @ 806EB54
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	ldrh r2, [r0]
 	movs r3, 0
@@ -501,7 +501,7 @@ _0806EB8E:
 	ldrsh r1, [r4, r2]
 	ldr r2, _0806EBE0 @ =0x00000212
 	movs r3, 0x4
-	bl sub_80DC23C
+	bl ash
 	b _0806EBF6
 	.align 2, 0
 _0806EBD8: .4byte gUnknown_3005098
@@ -515,7 +515,7 @@ _0806EBE4:
 	ldrsh r1, [r4, r2]
 	ldr r2, _0806EC00 @ =0x00000206
 	movs r3, 0x4
-	bl sub_80DC23C
+	bl ash
 _0806EBF6:
 	add sp, 0x4
 	pop {r4,r5}
@@ -546,7 +546,7 @@ _0806EC20:
 	bl sub_8058FA4
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805A8E8
+	bl CurrentMapDrawMetatileAt
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -570,7 +570,7 @@ sub_806EC40: @ 806EC40
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]

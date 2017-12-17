@@ -271,9 +271,9 @@ _080F8818:
 	strh r1, [r0, 0xA]
 	ldr r0, _080F8868 @ =sub_80FA834
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080F8852:
 	pop {r4,r5}
 	pop {r0}
@@ -512,7 +512,7 @@ _080F8A0C:
 	movs r1, 0x2
 	strb r1, [r0]
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080F8A8A
 	.align 2, 0
 _080F8A24: .4byte gUnknown_3005450
@@ -547,7 +547,7 @@ _080F8A2C:
 	movs r1, 0x8
 	strh r1, [r0, 0xA]
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r4, _080F8A9C @ =gUnknown_203AC08
 	ldrb r0, [r4, 0xF]
 	cmp r0, 0
@@ -559,7 +559,7 @@ _080F8A2C:
 _080F8A82:
 	ldr r0, _080F8AA0 @ =sub_80FA834
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 _080F8A8A:
 	pop {r4-r7}
 	pop {r0}
@@ -756,7 +756,7 @@ _080F8C28:
 	bne _080F8CE6
 	strb r0, [r6, 0xC]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, _080F8C70 @ =gUnknown_3005090
 	lsls r1, r5, 2
 	adds r1, r5
@@ -768,7 +768,7 @@ _080F8C28:
 	beq _080F8C78
 	ldr r0, _080F8C74 @ =sub_80FACF0
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	b _080F8CE6
 	.align 2, 0
 _080F8C6C: .4byte 0x000008f6
@@ -777,7 +777,7 @@ _080F8C74: .4byte sub_80FACF0
 _080F8C78:
 	ldr r0, _080F8C84 @ =sub_80FA834
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	b _080F8CE6
 	.align 2, 0
 _080F8C84: .4byte sub_80FA834
@@ -815,13 +815,13 @@ _080F8C9C:
 	strb r4, [r6, 0xC]
 	ldr r0, _080F8CF8 @ =sub_80FA834
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	movs r1, 0x9A
 	lsls r1, 4
 	adds r0, r6, r1
 	strb r4, [r0]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080F8CE6:
 	pop {r4-r6}
 	pop {r0}
@@ -905,7 +905,7 @@ _080F8D2A:
 	bl rfu_UNI_clearRecvNewDataFlag
 _080F8D84:
 	movs r0, 0x1
-	bl sub_80FD3F0
+	bl rfu_REQ_sendData_wrapper
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -958,7 +958,7 @@ _080F8DEC:
 	bne _080F8E14
 	ldr r0, _080F8E10 @ =sub_80F893C
 _080F8DF2:
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -966,7 +966,7 @@ _080F8DF2:
 	adds r0, r4, 0
 	adds r0, 0x67
 	ldrb r0, [r0]
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_80F85F8
 	b _080F8E34
 	.align 2, 0
@@ -975,7 +975,7 @@ _080F8E14:
 	cmp r0, 0x2
 	bne _080F8E34
 	ldr r0, _080F8E6C @ =sub_80F8B34
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -983,7 +983,7 @@ _080F8E14:
 	adds r0, r4, 0
 	adds r0, 0x67
 	ldrb r0, [r0]
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_80F85F8
 _080F8E34:
 	movs r5, 0
@@ -993,16 +993,16 @@ _080F8E38:
 	adds r0, r6
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080F8E5A
 	adds r0, r4, 0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080F8E5A:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1030,7 +1030,7 @@ sub_80F8E74: @ 80F8E74
 	bls _080F8E92
 	ldr r0, _080F8E9C @ =sub_80F8738
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, _080F8EA0 @ =gUnknown_3005450
 	adds r1, 0x67
 	strb r0, [r1]
@@ -1115,7 +1115,7 @@ sub_80F8F10: @ 80F8F10
 	bls _080F8F2E
 	ldr r0, _080F8F38 @ =sub_80F893C
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, _080F8F3C @ =gUnknown_3005450
 	adds r1, 0x67
 	strb r0, [r1]
@@ -1410,7 +1410,7 @@ sub_80F911C: @ 80F911C
 	bl rfu_REQ_recvData
 	bl rfu_waitREQComplete
 	movs r0, 0
-	bl sub_80FD3F0
+	bl rfu_REQ_sendData_wrapper
 	b _080F91F6
 	.align 2, 0
 _080F9138: .4byte gUnknown_3005450
@@ -1484,7 +1484,7 @@ _080F91CC:
 	ldrb r0, [r0]
 	bl rfu_UNI_readySendData
 	movs r0, 0x1
-	bl sub_80FD3F0
+	bl rfu_REQ_sendData_wrapper
 	b _080F91F0
 	.align 2, 0
 _080F91E4: .4byte gUnknown_3005450
@@ -1785,7 +1785,7 @@ _080F93FA:
 	strb r0, [r1]
 	ldr r0, _080F9464 @ =sub_80FAA94
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	b _080F9476
 	.align 2, 0
 _080F9444: .4byte gUnknown_3005450
@@ -2237,8 +2237,8 @@ _080F97B0: .4byte 0x00000996
 _080F97B4: .4byte 0x000008f6
 	thumb_func_end sub_80F9770
 
-	thumb_func_start sub_80F97B8
-sub_80F97B8: @ 80F97B8
+	thumb_func_start rfu_func_080F97B8
+rfu_func_080F97B8: @ 80F97B8
 	push {lr}
 	ldr r0, _080F97F0 @ =gUnknown_3003F64
 	ldrb r0, [r0]
@@ -2271,7 +2271,7 @@ _080F97F0: .4byte gUnknown_3003F64
 _080F97F4: .4byte gUnknown_3005028
 _080F97F8: .4byte gUnknown_30030E4
 _080F97FC: .4byte gUnknown_3001188
-	thumb_func_end sub_80F97B8
+	thumb_func_end rfu_func_080F97B8
 
 	thumb_func_start sub_80F9800
 sub_80F9800: @ 80F9800
@@ -2287,7 +2287,7 @@ sub_80F9808: @ 80F9808
 	movs r2, 0
 	ldr r0, _080F9820 @ =gUnknown_3005450
 	ldr r1, [r0]
-	ldr r0, _080F9824 @ =sub_80F97B8
+	ldr r0, _080F9824 @ =rfu_func_080F97B8
 	cmp r1, r0
 	bne _080F9818
 	movs r2, 0x1
@@ -2297,7 +2297,7 @@ _080F9818:
 	bx r1
 	.align 2, 0
 _080F9820: .4byte gUnknown_3005450
-_080F9824: .4byte sub_80F97B8
+_080F9824: .4byte rfu_func_080F97B8
 	thumb_func_end sub_80F9808
 
 	thumb_func_start sub_80F9828
@@ -2313,7 +2313,7 @@ sub_80F9828: @ 80F9828
 	movs r3, 0x1
 	bl AGBAssert
 _080F983E:
-	ldr r0, _080F9858 @ =sub_80F97B8
+	ldr r0, _080F9858 @ =rfu_func_080F97B8
 	str r0, [r4]
 	pop {r4}
 	pop {r0}
@@ -2323,7 +2323,7 @@ _080F9848: .4byte gUnknown_3005450
 _080F984C: .4byte gUnknown_843ED94
 _080F9850: .4byte 0x000005c1
 _080F9854: .4byte gUnknown_843EDC4
-_080F9858: .4byte sub_80F97B8
+_080F9858: .4byte rfu_func_080F97B8
 	thumb_func_end sub_80F9828
 
 	thumb_func_start sub_80F985C
@@ -3179,7 +3179,7 @@ _080F9EC0:
 	negs r4, r0
 	orrs r4, r0
 	lsrs r4, 31
-	bl sub_800A404
+	bl GetMultiplayerId
 	adds r1, r5, 0
 	adds r1, 0x7D
 	strb r0, [r1]
@@ -3218,7 +3218,7 @@ _080F9F14:
 	lsls r0, 8
 	bl sub_80F9D04
 	ldr r0, _080F9F3C @ =gUnknown_3005450
-	ldr r1, _080F9F40 @ =sub_80F9F44
+	ldr r1, _080F9F40 @ =rfufunc_80F9F44
 	str r1, [r0]
 	adds r0, 0x5B
 	movs r1, 0
@@ -3234,11 +3234,11 @@ _080F9F2A:
 	.align 2, 0
 _080F9F38: .4byte gUnknown_2022618
 _080F9F3C: .4byte gUnknown_3005450
-_080F9F40: .4byte sub_80F9F44
+_080F9F40: .4byte rfufunc_80F9F44
 	thumb_func_end sub_80F9E60
 
-	thumb_func_start sub_80F9F44
-sub_80F9F44: @ 80F9F44
+	thumb_func_start rfufunc_80F9F44
+rfufunc_80F9F44: @ 80F9F44
 	push {r4,r5,lr}
 	ldr r0, _080F9F74 @ =gUnknown_3003F50
 	ldrh r0, [r0]
@@ -3266,7 +3266,7 @@ sub_80F9F44: @ 80F9F44
 _080F9F74: .4byte gUnknown_3003F50
 _080F9F78: .4byte gUnknown_3005450
 _080F9F7C:
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r1, _080F9FA0 @ =gUnknown_3003ED0
 	lsls r0, 24
 	lsrs r0, 20
@@ -3287,7 +3287,7 @@ _080F9F98:
 	.align 2, 0
 _080F9FA0: .4byte gUnknown_3003ED0
 _080F9FA4: .4byte sub_80F9FA8
-	thumb_func_end sub_80F9F44
+	thumb_func_end rfufunc_80F9F44
 
 	thumb_func_start sub_80F9FA8
 sub_80F9FA8: @ 80F9FA8
@@ -3339,7 +3339,7 @@ _080F9FC8:
 	adds r0, 0x7C
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, _080FA01C @ =sub_80FA020
+	ldr r0, _080FA01C @ =rfufunc_80FA020
 	mov r1, r12
 	str r0, [r1]
 _080FA00C:
@@ -3349,11 +3349,11 @@ _080FA00C:
 	.align 2, 0
 _080FA014: .4byte gUnknown_3005450
 _080FA018: .4byte gUnknown_3003F50
-_080FA01C: .4byte sub_80FA020
+_080FA01C: .4byte rfufunc_80FA020
 	thumb_func_end sub_80F9FA8
 
-	thumb_func_start sub_80FA020
-sub_80FA020: @ 80FA020
+	thumb_func_start rfufunc_80FA020
+rfufunc_80FA020: @ 80FA020
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3361,7 +3361,7 @@ sub_80FA020: @ 80FA020
 	ldr r5, _080FA0C8 @ =gUnknown_3005450
 	ldr r0, [r5, 0x70]
 	mov r8, r0
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r5, 0xC]
@@ -3459,7 +3459,7 @@ _080FA0EC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80FA020
+	thumb_func_end rfufunc_80FA020
 
 	thumb_func_start sub_80FA0F8
 sub_80FA0F8: @ 80FA0F8
@@ -3666,7 +3666,7 @@ sub_80FA25C: @ 80FA25C
 	ldr r0, _080FA288 @ =sub_80FA224
 	str r0, [r2]
 	adds r0, r3, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FA27C:
 	pop {r0}
 	bx r0
@@ -3676,30 +3676,30 @@ _080FA284: .4byte 0x00000991
 _080FA288: .4byte sub_80FA224
 	thumb_func_end sub_80FA25C
 
-	thumb_func_start sub_80FA28C
-sub_80FA28C: @ 80FA28C
+	thumb_func_start task_add_05_task_del_08FA224_when_no_RfuFunc
+task_add_05_task_del_08FA224_when_no_RfuFunc: @ 80FA28C
 	push {r4,lr}
 	ldr r4, _080FA2AC @ =sub_80FA25C
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FA2A4
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 _080FA2A4:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080FA2AC: .4byte sub_80FA25C
-	thumb_func_end sub_80FA28C
+	thumb_func_end task_add_05_task_del_08FA224_when_no_RfuFunc
 
 	thumb_func_start sub_80FA2B0
 sub_80FA2B0: @ 80FA2B0
 	push {r4,r5,lr}
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FA2DE
@@ -3812,7 +3812,7 @@ _080FA384: .4byte sub_80FA2B0
 	thumb_func_start sub_80FA388
 sub_80FA388: @ 80FA388
 	push {r4,lr}
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FA3C4
@@ -3982,8 +3982,8 @@ _080FA4C0: .4byte gUnknown_3005450
 _080FA4C4: .4byte 0x00000991
 	thumb_func_end sub_80FA4A8
 
-	thumb_func_start sub_80FA4C8
-sub_80FA4C8: @ 80FA4C8
+	thumb_func_start rfu_get_multiplayer_id
+rfu_get_multiplayer_id: @ 80FA4C8
 	push {lr}
 	ldr r1, _080FA4DC @ =gUnknown_3005450
 	ldrb r0, [r1, 0xC]
@@ -4001,7 +4001,7 @@ _080FA4E4:
 _080FA4E6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80FA4C8
+	thumb_func_end rfu_get_multiplayer_id
 
 	thumb_func_start sub_80FA4EC
 sub_80FA4EC: @ 80FA4EC
@@ -4467,7 +4467,7 @@ sub_80FA834: @ 80FA834
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FA85C:
 	ldr r2, _080FA888 @ =gUnknown_3005090
 	lsls r1, r6, 2
@@ -4508,7 +4508,7 @@ _080FA89E:
 	bne _080FA8AA
 	b _080FA9BC
 _080FA8AA:
-	bl sub_800A550
+	bl ResetBlockReceivedFlags
 	bl sub_800B0B4
 	b _080FA930
 _080FA8B4:
@@ -4608,7 +4608,7 @@ _080FA956:
 _080FA968: .4byte gUnknown_3005090
 _080FA96C:
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _080FA9C4 @ =gUnknown_3003F64
 	movs r0, 0x1
 	strb r0, [r1]
@@ -4753,7 +4753,7 @@ sub_80FAA58: @ 80FAA58
 	adds r1, r4, 0
 	bl CpuSet
 	movs r0, 0
-	bl sub_800A588
+	bl ResetBlockReceivedFlag
 _080FAA84:
 	add sp, 0x4
 	pop {r4,r5}
@@ -4795,7 +4795,7 @@ sub_80FAA94: @ 80FAA94
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FAAD2:
 	ldr r0, _080FAB04 @ =gUnknown_3005090
 	lsls r2, r6, 2
@@ -4838,7 +4838,7 @@ _080FAB24:
 	b _080FACD6
 _080FAB2E:
 	adds r0, r4, 0
-	bl sub_800A588
+	bl ResetBlockReceivedFlag
 	movs r0, 0xF0
 	lsls r0, 7
 	bl sub_80F9D04
@@ -4859,7 +4859,7 @@ _080FAB4E:
 	.align 2, 0
 _080FAB58: .4byte gUnknown_3003F50
 _080FAB5C:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	asrs r0, r4
@@ -4870,7 +4870,7 @@ _080FAB5C:
 	b _080FACD6
 _080FAB70:
 	adds r0, r4, 0
-	bl sub_800A588
+	bl ResetBlockReceivedFlag
 	lsls r2, r4, 8
 	ldr r0, _080FAB9C @ =gUnknown_2022118
 	adds r2, r0
@@ -4958,7 +4958,7 @@ _080FAC04:
 	ldr r1, _080FAC40 @ =gUnknown_2022618
 	movs r0, 0
 	movs r2, 0xA0
-	bl sub_800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FACD6
@@ -5000,7 +5000,7 @@ _080FAC78:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FACD6
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -5012,7 +5012,7 @@ _080FAC78:
 	ldr r2, _080FACE4 @ =0x0100007e
 	bl CpuSet
 	movs r0, 0
-	bl sub_800A588
+	bl ResetBlockReceivedFlag
 	ldr r1, _080FACE8 @ =gUnknown_3005450
 	movs r5, 0x9A
 	lsls r5, 4
@@ -5039,7 +5039,7 @@ _080FACC0:
 	ble _080FACC0
 _080FACD0:
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FACD6:
 	add sp, 0x4
 	pop {r4-r7}
@@ -5067,7 +5067,7 @@ sub_80FACF0: @ 80FACF0
 	cmp r0, 0x1
 	bhi _080FAD0E
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FAD0E:
 	ldr r1, _080FAD30 @ =gUnknown_3005090
 	lsls r0, r5, 2
@@ -5098,7 +5098,7 @@ _080FAD3A:
 	ldr r1, _080FAD50 @ =gUnknown_2022618
 	movs r0, 0
 	movs r2, 0x3C
-	bl sub_800A448
+	bl SendBlock
 	b _080FAD5E
 	.align 2, 0
 _080FAD50: .4byte gUnknown_2022618
@@ -5113,7 +5113,7 @@ _080FAD5E:
 	strh r0, [r4, 0x8]
 	b _080FAD8A
 _080FAD66:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	movs r4, 0x1
 	adds r1, r4, 0
 	ands r1, r0
@@ -5122,11 +5122,11 @@ _080FAD66:
 	ldr r0, _080FAD90 @ =gUnknown_2022118
 	bl sub_80FA9FC
 	movs r0, 0
-	bl sub_800A588
+	bl ResetBlockReceivedFlag
 	ldr r0, _080FAD94 @ =gUnknown_3003F64
 	strb r4, [r0]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FAD8A:
 	pop {r4-r6}
 	pop {r0}
@@ -5159,9 +5159,9 @@ sub_80FAD98: @ 80FAD98
 	movs r0, 0x2
 	strb r0, [r1]
 _080FADC0:
-	ldr r4, _080FAE24 @ =sub_800ACD4
+	ldr r4, _080FAE24 @ =c2_800ACD4
 	adds r0, r4, 0
-	bl sub_8000544
+	bl SetMainCallback2
 	str r4, [r6, 0x8]
 	ldrh r0, [r5, 0xA]
 	lsls r4, r0, 16
@@ -5201,7 +5201,7 @@ _080FAE14: .4byte gUnknown_3005E10
 _080FAE18: .4byte gUnknown_30030F0
 _080FAE1C: .4byte sub_814208C
 _080FAE20: .4byte gUnknown_3003F3C
-_080FAE24: .4byte sub_800ACD4
+_080FAE24: .4byte c2_800ACD4
 _080FAE28: .4byte 0x0000069e
 _080FAE2C: .4byte 0x000008d2
 _080FAE30:
@@ -5239,8 +5239,8 @@ _080FAE6C: .4byte 0x0000069f
 _080FAE70: .4byte gUnknown_3005E10
 	thumb_func_end sub_80FAD98
 
-	thumb_func_start sub_80FAE74
-sub_80FAE74: @ 80FAE74
+	thumb_func_start rfu_REQ_recvData_then_sendData
+rfu_REQ_recvData_then_sendData: @ 80FAE74
 	push {lr}
 	ldr r0, _080FAE90 @ =gUnknown_3005E10
 	ldrb r0, [r0, 0x6]
@@ -5249,13 +5249,13 @@ sub_80FAE74: @ 80FAE74
 	bl rfu_REQ_recvData
 	bl rfu_waitREQComplete
 	movs r0, 0
-	bl sub_80FD3F0
+	bl rfu_REQ_sendData_wrapper
 _080FAE8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080FAE90: .4byte gUnknown_3005E10
-	thumb_func_end sub_80FAE74
+	thumb_func_end rfu_REQ_recvData_then_sendData
 
 	thumb_func_start sub_80FAE94
 sub_80FAE94: @ 80FAE94
@@ -5265,7 +5265,7 @@ sub_80FAE94: @ 80FAE94
 	ldr r1, _080FAECC @ =0x00000985
 	adds r0, r4, r1
 	strb r5, [r0]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80FDA30
@@ -5297,7 +5297,7 @@ _080FAEDC:
 	adds r5, r0, 0
 	b _080FAEE8
 _080FAEE4:
-	bl sub_80FAE74
+	bl rfu_REQ_recvData_then_sendData
 _080FAEE8:
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -5337,7 +5337,7 @@ sub_80FAF1C: @ 80FAF1C
 	ldr r0, _080FAF2C @ =gUnknown_3005E00
 	ldr r1, _080FAF30 @ =gUnknown_300500C
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6542,7 +6542,7 @@ _080FB804:
 	strb r0, [r1]
 	ldr r0, _080FB82C @ =sub_80FC028
 	movs r1, 0x2
-	bl sub_807741C
+	bl CreateTask
 	b _080FB9C2
 	.align 2, 0
 _080FB824: .4byte gUnknown_3005450
@@ -6684,7 +6684,7 @@ _080FB934:
 	cmp r0, 0
 	bne _080FB95A
 	ldr r0, _080FB974 @ =sub_80F8B34
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6821,13 +6821,13 @@ sub_80FBA2C: @ 80FBA2C
 _080FBA34: .4byte gUnknown_3005450
 	thumb_func_end sub_80FBA2C
 
-	thumb_func_start sub_80FBA38
-sub_80FBA38: @ 80FBA38
+	thumb_func_start LinkVSync
+LinkVSync: @ 80FBA38
 	push {lr}
-	bl sub_80FDA14
+	bl rfu_syncVBlank_
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80FBA38
+	thumb_func_end LinkVSync
 
 	thumb_func_start sub_80FBA44
 sub_80FBA44: @ 80FBA44
@@ -6850,9 +6850,9 @@ _080FBA60: .4byte 0x05000014
 	thumb_func_start sub_80FBA64
 sub_80FBA64: @ 80FBA64
 	push {lr}
-	bl sub_8007320
-	bl sub_8007610
-	bl sub_8070474
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80FBA64
@@ -6860,12 +6860,12 @@ sub_80FBA64: @ 80FBA64
 	thumb_func_start sub_80FBA78
 sub_80FBA78: @ 80FBA78
 	push {r4,lr}
-	bl sub_8006B10
-	bl sub_80088F0
-	bl sub_80773BC
-	bl sub_8070528
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
+	bl ResetTasks
+	bl ResetPaletteFade
 	ldr r0, _080FBAF4 @ =sub_80FBA64
-	bl sub_80006F4
+	bl SetVBlankCallback
 	bl sub_8009480
 	lsls r0, 24
 	cmp r0, 0
@@ -6881,7 +6881,7 @@ sub_80FBA78: @ 80FBA78
 	bl sub_8044EE8
 	movs r4, 0
 _080FBAB4:
-	bl sub_8044EC8
+	bl Random
 	ldr r1, _080FBB04 @ =gUnknown_300500C
 	ldr r1, [r1]
 	adds r1, 0xA
@@ -6893,14 +6893,14 @@ _080FBAB4:
 	movs r1, 0xAA
 	lsls r1, 5
 	movs r0, 0
-	bl sub_8000A38
-	bl sub_8077578
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl SetGpuReg
+	bl RunTasks
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 	bl sub_80FBB20
 	ldr r0, _080FBB08 @ =sub_80FBB74
-	bl sub_8000544
+	bl SetMainCallback2
 _080FBAEC:
 	pop {r4}
 	pop {r0}
@@ -6918,7 +6918,7 @@ _080FBB08: .4byte sub_80FBB74
 sub_80FBB0C: @ 80FBB0C
 	push {lr}
 	ldr r0, _080FBB1C @ =sub_80F8B34
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -6932,13 +6932,13 @@ sub_80FBB20: @ 80FBB20
 	push {r4,lr}
 	ldr r4, _080FBB44 @ =nullsub_89
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FBB3E
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, _080FBB48 @ =gUnknown_3005450
 	adds r1, 0x66
 	strb r0, [r1]
@@ -6955,7 +6955,7 @@ _080FBB48: .4byte gUnknown_3005450
 sub_80FBB4C: @ 80FBB4C
 	push {lr}
 	ldr r0, _080FBB6C @ =nullsub_89
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6963,7 +6963,7 @@ sub_80FBB4C: @ 80FBB4C
 	ldr r0, _080FBB70 @ =gUnknown_3005450
 	adds r0, 0x66
 	ldrb r0, [r0]
-	bl sub_8077508
+	bl DestroyTask
 _080FBB66:
 	pop {r0}
 	bx r0
@@ -6975,10 +6975,10 @@ _080FBB70: .4byte gUnknown_3005450
 	thumb_func_start sub_80FBB74
 sub_80FBB74: @ 80FBB74
 	push {lr}
-	bl sub_8077578
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl RunTasks
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80FBB74
@@ -7068,7 +7068,7 @@ sub_80FBC00: @ 80FBC00
 	strh r0, [r2, 0x12]
 	ldr r0, _080FBC60 @ =sub_80F8B34
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	adds r4, 0x67
 	strb r0, [r4]
 _080FBC46:
@@ -7133,7 +7133,7 @@ _080FBC8E:
 	adds r1, r5
 	adds r1, 0x15
 	ldr r0, [sp]
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	bne _080FBCD8
 	cmp r10, r6
@@ -7303,7 +7303,7 @@ sub_80FBDB8: @ 80FBDB8
 	ldrb r0, [r5, 0xD]
 	strh r0, [r6, 0x6]
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FBE08:
 	pop {r4-r6}
 	pop {r0}
@@ -7322,14 +7322,14 @@ sub_80FBE20: @ 80FBE20
 	adds r6, r1, 0
 	ldr r5, _080FBE50 @ =sub_80FBDB8
 	adds r0, r5, 0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	bne _080FBE58
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, _080FBE54 @ =gUnknown_3005090
@@ -7431,7 +7431,7 @@ _080FBEE8:
 	bl sub_80FB9E4
 _080FBF10:
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080FBF36
 _080FBF18:
 	ldrh r0, [r4, 0x1E]
@@ -7459,7 +7459,7 @@ _080FBF36:
 	movs r0, 0x2
 	bl sub_80FB9E4
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FBF4E:
 	pop {r4-r6}
 	pop {r0}
@@ -7478,7 +7478,7 @@ sub_80FBF54: @ 80FBF54
 	strb r1, [r0]
 	ldr r0, _080FBF90 @ =sub_80FBE80
 	movs r1, 0x3
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
@@ -7488,7 +7488,7 @@ sub_80FBF54: @ 80FBF54
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_8008D84
+	bl StringCopy
 	strh r5, [r4, 0x10]
 	pop {r4-r6}
 	pop {r0}
@@ -7591,7 +7591,7 @@ sub_80FC028: @ 80FC028
 	cmp r0, 0x4
 	bne _080FC046
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FC046:
 	ldr r1, _080FC0E4 @ =gUnknown_3005090
 	lsls r0, r5, 2
@@ -7611,7 +7611,7 @@ _080FC046:
 	movs r0, 0x2
 	bl sub_80FB9E4
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080FC070:
 	ldr r1, _080FC0E8 @ =0x00000985
 	adds r0, r6, r1
@@ -7662,7 +7662,7 @@ _080FC070:
 	movs r0, 0xA
 	strh r0, [r6, 0x4]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080FC108
 	.align 2, 0
 _080FC0E0: .4byte gUnknown_3005450
@@ -7677,7 +7677,7 @@ _080FC0F8:
 	movs r0, 0x2
 	bl sub_80FB9E4
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _080FC108:
 	pop {r3}
 	mov r8, r3
@@ -7704,7 +7704,7 @@ sub_80FC114: @ 80FC114
 	ldr r1, _080FC18C @ =0x00000119
 	adds r0, r6, r1
 	adds r1, r3, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r1, 0x85
 	lsls r1, 1
 	adds r0, r6, r1
@@ -7714,7 +7714,7 @@ sub_80FC114: @ 80FC114
 	bl sub_80FEB3C
 	ldr r0, _080FC190 @ =sub_80FC028
 	movs r1, 0x2
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080FC194 @ =gUnknown_3005090
@@ -7724,7 +7724,7 @@ sub_80FC114: @ 80FC114
 	adds r1, r5
 	strh r4, [r1, 0xA]
 	ldr r0, _080FC198 @ =sub_80F8B34
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r2, r1, 0
@@ -7838,7 +7838,7 @@ sub_80FC228: @ 80FC228
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1C
@@ -8911,7 +8911,7 @@ _080FC9FC:
 _080FCA16:
 	movs r4, 0
 _080FCA18:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r6, r4
@@ -9390,7 +9390,7 @@ _080FCD8A:
 	ldr r0, _080FCDD0 @ =gUnknown_843F284
 	adds r1, r3, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -9403,7 +9403,7 @@ _080FCD8A:
 	strh r0, [r4, 0x3C]
 	ldr r0, _080FCDDC @ =gUnknown_843F274
 	ldrh r0, [r0, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	strh r0, [r4, 0x3A]
 	adds r4, 0x3E
 	ldrb r0, [r4]
@@ -9424,7 +9424,7 @@ _080FCDE4:
 	ldr r0, _080FCE30 @ =gUnknown_843F284
 	adds r1, r3, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _080FCE34 @ =gUnknown_203ACE4
 	strb r0, [r4]
 	ldr r5, _080FCE38 @ =gUnknown_202063C
@@ -9437,7 +9437,7 @@ _080FCDE4:
 	strh r1, [r0, 0x3C]
 	ldr r0, _080FCE40 @ =gUnknown_843F274
 	ldrh r0, [r0, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	ldrb r2, [r4]
 	lsls r1, r2, 4
 	adds r1, r2
@@ -9488,7 +9488,7 @@ sub_80FCE44: @ 80FCE44
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r3, _080FCE9C @ =gUnknown_30030F0
 	movs r0, 0x84
 	lsls r0, 3
@@ -9519,16 +9519,16 @@ sub_80FCEA8: @ 80FCEA8
 	push {r4,lr}
 	ldr r4, _080FCED4 @ =gUnknown_843F274
 	ldrh r0, [r4, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	ldr r1, _080FCED8 @ =0xffff0000
 	cmp r0, r1
 	bne _080FCEC0
 	adds r0, r4, 0
-	bl sub_800EBCC
+	bl LoadCompressedObjectPic
 _080FCEC0:
 	ldr r0, _080FCEDC @ =gUnknown_843F27C
-	bl sub_8008928
+	bl LoadSpritePalette
 	ldr r1, _080FCEE0 @ =gUnknown_203ACE4
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -9933,7 +9933,7 @@ sub_80FD1A0: @ 80FD1A0
 	b _080FD318
 _080FD1B6:
 	movs r0, 0xF0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [sp, 0x14]
 	movs r4, 0
 	b _080FD22C
@@ -9977,7 +9977,7 @@ _080FD1F4:
 	ldr r0, [sp, 0x1C]
 	add r0, r10
 	str r3, [sp, 0x18]
-	bl sub_8008E28
+	bl StringCompare
 	ldr r3, [sp, 0x18]
 	cmp r0, 0
 	bne _080FD220
@@ -10011,7 +10011,7 @@ _080FD24C: .4byte gUnknown_2022744
 _080FD250: .4byte 0x00003ba8
 _080FD254: .4byte gUnknown_3005008
 _080FD258:
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -10104,7 +10104,7 @@ _080FD302:
 	movs r2, 0xF0
 	bl memcpy
 	ldr r0, [sp, 0x14]
-	bl sub_8002BC4
+	bl Free
 _080FD318:
 	add sp, 0x20
 	pop {r3-r5}
@@ -10141,7 +10141,7 @@ _080FD350:
 	adds r0, 0x4
 	mov r1, r9
 	movs r2, 0x7
-	bl sub_8008E4C
+	bl StringCompareN
 	cmp r0, 0
 	bne _080FD37C
 	ldr r0, [r6]

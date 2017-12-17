@@ -103,7 +103,7 @@ _081448D4: .4byte gUnknown_2022118
 sub_81448D8: @ 81448D8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	asrs r0, r4
@@ -126,7 +126,7 @@ sub_81448FC: @ 81448FC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_800A588
+	bl ResetBlockReceivedFlag
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81448FC
@@ -223,7 +223,7 @@ _081449B4:
 _081449BC:
 	ldr r0, [r5, 0x18]
 	ldrh r1, [r5, 0xC]
-	bl sub_8045210
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r5, 0xA]
@@ -278,7 +278,7 @@ _08144A00:
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	ldr r0, [r4, 0x1C]
-	bl sub_8045210
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	ldr r2, _08144A48 @ =0x0000ffff
 	ldr r1, [sp]
@@ -291,7 +291,7 @@ _08144A00:
 	movs r0, 0
 	mov r1, sp
 	movs r2, 0x8
-	bl sub_800A448
+	bl SendBlock
 	b _08144AC2
 	.align 2, 0
 _08144A44: .4byte 0xffff0000
@@ -320,7 +320,7 @@ _08144A4C:
 	lsls r2, r0, 16
 	lsrs r2, 16
 	movs r0, 0
-	bl sub_800A448
+	bl SendBlock
 	ldrh r0, [r4, 0x10]
 	adds r0, 0x1
 	strh r0, [r4, 0x10]
@@ -330,7 +330,7 @@ _08144A8C:
 	adds r1, r3
 	movs r0, 0
 	movs r2, 0xFC
-	bl sub_800A448
+	bl SendBlock
 	ldrh r0, [r4, 0x10]
 	adds r0, 0x1
 	strh r0, [r4, 0x10]
@@ -342,7 +342,7 @@ _08144AA0:
 	beq _08144AE2
 	ldr r0, [r4, 0x1C]
 	ldrh r1, [r4, 0x14]
-	bl sub_8045210
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r4, 0x12]
@@ -380,11 +380,11 @@ sub_8144AEC: @ 8144AEC
 	push {r4,lr}
 	ldr r4, _08144B08 @ =gUnknown_203F3C0
 	movs r0, 0x4C
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_8144B70
+	bl mevent_srv_ish_init
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -405,7 +405,7 @@ sub_8144B0C: @ 8144B0C
 	.align 2, 0
 _08144B1C: .4byte gUnknown_203F3C0
 _08144B20:
-	bl sub_8144EF0
+	bl mevent_srv_ish_exec
 	adds r5, r0, 0
 	cmp r5, 0x6
 	bne _08144B3E
@@ -414,7 +414,7 @@ _08144B20:
 	strh r1, [r6]
 	bl sub_8144BC0
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _08144B3E:
@@ -457,8 +457,8 @@ sub_8144B64: @ 8144B64
 _08144B6C: .4byte gUnknown_203F3C0
 	thumb_func_end sub_8144B64
 
-	thumb_func_start sub_8144B70
-sub_8144B70: @ 8144B70
+	thumb_func_start mevent_srv_ish_init
+mevent_srv_ish_init: @ 8144B70
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -472,16 +472,16 @@ sub_8144B70: @ 8144B70
 	movs r5, 0x80
 	lsls r5, 3
 	adds r0, r5, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x14]
 	adds r0, r5, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x18]
 	adds r0, r5, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x1C]
 	movs r0, 0x40
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x20]
 	adds r4, 0x24
 	adds r0, r4, 0
@@ -493,20 +493,20 @@ sub_8144B70: @ 8144B70
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8144B70
+	thumb_func_end mevent_srv_ish_init
 
 	thumb_func_start sub_8144BC0
 sub_8144BC0: @ 8144BC0
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x14]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r4, 0x18]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r4, 0x1C]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r4, 0x20]
-	bl sub_8002BC4
+	bl Free
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -918,8 +918,8 @@ _08144EE8: .4byte gUnknown_300500C
 _08144EEC: .4byte gUnknown_3005008
 	thumb_func_end sub_8144EBC
 
-	thumb_func_start sub_8144EF0
-sub_8144EF0: @ 8144EF0
+	thumb_func_start mevent_srv_ish_exec
+mevent_srv_ish_exec: @ 8144EF0
 	push {r4,r5,lr}
 	sub sp, 0x20
 	mov r2, sp
@@ -941,14 +941,14 @@ sub_8144EF0: @ 8144EF0
 	bx r1
 	.align 2, 0
 _08144F18: .4byte gUnknown_8466F60
-	thumb_func_end sub_8144EF0
+	thumb_func_end mevent_srv_ish_exec
 
 	thumb_func_start sub_8144F1C
 sub_8144F1C: @ 8144F1C
 	push {r4,lr}
 	ldr r4, _08144F38 @ =gUnknown_203F3C4
 	movs r0, 0x60
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r1, _08144F3C @ =gUnknown_8468B6C
 	movs r2, 0
@@ -967,7 +967,7 @@ sub_8144F40: @ 8144F40
 	push {r4,lr}
 	ldr r4, _08144F5C @ =gUnknown_203F3C4
 	movs r0, 0x60
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r1, _08144F60 @ =gUnknown_8468BCC
 	movs r2, 0
@@ -1003,7 +1003,7 @@ _08144F78:
 	strh r1, [r6]
 	bl sub_8144FF8
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _08144F96:
@@ -1029,18 +1029,18 @@ sub_8144FA0: @ 8144FA0
 	str r5, [r4, 0x8]
 	movs r0, 0xA6
 	lsls r0, 1
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x18]
 	movs r0, 0xDE
 	lsls r0, 1
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x1C]
 	movs r0, 0x80
 	lsls r0, 3
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x14]
 	movs r0, 0x64
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x20]
 	str r6, [r4, 0x10]
 	str r5, [r4, 0xC]
@@ -1062,13 +1062,13 @@ sub_8144FF8: @ 8144FF8
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x18]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r4, 0x1C]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r4, 0x14]
-	bl sub_8002BC4
+	bl Free
 	ldr r0, [r4, 0x20]
-	bl sub_8002BC4
+	bl Free
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1724,7 +1724,7 @@ _08145558:
 	bl AGBAssert
 _08145566:
 	ldr r4, [r5, 0x18]
-	bl sub_8143D6C
+	bl sav1_get_mevent_buffer_1
 	adds r1, r0, 0
 	movs r2, 0xA6
 	lsls r2, 1

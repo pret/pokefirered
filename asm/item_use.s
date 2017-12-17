@@ -26,7 +26,7 @@ _080A0FD8: .4byte gUnknown_203AD30
 _080A0FDC: .4byte gUnknown_3005090
 _080A0FE0:
 	ldrh r0, [r1]
-	bl sub_809A9FC
+	bl ItemId_GetType
 _080A0FE6:
 	subs r0, 0x1
 	lsls r0, 24
@@ -111,7 +111,7 @@ sub_80A1084: @ 80A1084
 	bl sub_807DC00
 	ldr r0, _080A1098 @ =sub_80A109C
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -170,7 +170,7 @@ _080A10F8:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 _080A1104:
 	pop {r4-r7}
 	pop {r0}
@@ -205,9 +205,9 @@ sub_80A112C: @ 80A112C
 	movs r1, 0x1
 	bl sub_80F6F54
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_80696C0
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -219,7 +219,7 @@ sub_80A1150: @ 80A1150
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -228,7 +228,7 @@ sub_80A1150: @ 80A1150
 	b _080A117E
 _080A1168:
 	adds r0, r4, 0
-	bl sub_809AA20
+	bl ItemId_GetFieldFunc
 	ldr r1, _080A1178 @ =sub_80A1750
 	cmp r0, r1
 	beq _080A117C
@@ -258,12 +258,12 @@ _080A1190: .4byte sub_80A1194
 	thumb_func_start sub_80A1194
 sub_80A1194: @ 80A1194
 	push {lr}
-	bl sub_8068974
-	bl sub_8069940
+	bl player_bitmagic
+	bl ScriptContext2_Enable
 	bl sub_807DC00
 	ldr r0, _080A11B8 @ =sub_80A11C0
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, _080A11BC @ =gUnknown_2031DE0
 	movs r0, 0
 	strb r0, [r1]
@@ -285,10 +285,10 @@ sub_80A11C0: @ 80A11C0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080A11E0
-	bl sub_8068A5C
-	bl sub_806994C
+	bl UnfreezeMapObjects
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080A11E0:
 	pop {r4}
 	pop {r0}
@@ -342,7 +342,7 @@ sub_80A122C: @ 80A122C
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -438,7 +438,7 @@ sub_80A1304: @ 80A1304
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x6
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A131C
@@ -448,9 +448,9 @@ _080A131C:
 	movs r0, 0x6
 	bl sub_80BD5C8
 	bl sub_80696C0
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -500,7 +500,7 @@ sub_80A137C: @ 80A137C
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C4F4
+	bl GetXYCoordsOneStepInFrontOfPlayer
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -517,12 +517,12 @@ sub_80A137C: @ 80A137C
 	cmp r0, 0
 	bne _080A1404
 	movs r0, 0x10
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1404
 	movs r0, 0x8
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A13D4
@@ -573,12 +573,12 @@ sub_80A1410: @ 80A1410
 	lsrs r4, 24
 	ldr r0, _080A1434 @ =gUnknown_203AD30
 	ldrh r0, [r0]
-	bl sub_809AA8C
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_805D2C0
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -659,7 +659,7 @@ _080A14D0:
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 _080A14DC:
 	pop {r4,r5}
 	pop {r0}
@@ -718,7 +718,7 @@ _080A1554:
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 _080A1560:
 	pop {r4,r5}
 	pop {r0}
@@ -743,7 +743,7 @@ _080A1578:
 	movs r1, 0x11
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_80413C0
+	bl ExecuteTableBasedItemEffect_
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1592
@@ -753,7 +753,7 @@ _080A1592:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _080A1598:
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -790,7 +790,7 @@ _080A15E8:
 	ldr r3, _080A15FC @ =sub_80A1648
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 	b _080A1638
 	.align 2, 0
 _080A15F8: .4byte gUnknown_8416690
@@ -821,7 +821,7 @@ _080A162C:
 	ldr r3, _080A1644 @ =sub_80A112C
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 _080A1638:
 	pop {r4-r6}
 	pop {r0}
@@ -861,7 +861,7 @@ sub_80A1674: @ 80A1674
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	movs r0, 0
-	bl sub_8071C10
+	bl WaitFanfare
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A16C0
@@ -889,7 +889,7 @@ _080A16B4:
 	ldr r3, _080A16CC @ =sub_80A112C
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 _080A16C0:
 	pop {r4,r5}
 	pop {r0}
@@ -947,14 +947,14 @@ sub_80A1718: @ 80A1718
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080A172C @ =gUnknown_3005E98
-	ldr r1, _080A1730 @ =sub_8125A3C
+	ldr r1, _080A1730 @ =dp05_pp_up
 	str r1, [r2]
 	bl sub_80A16D0
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A172C: .4byte gUnknown_3005E98
-_080A1730: .4byte sub_8125A3C
+_080A1730: .4byte dp05_pp_up
 	thumb_func_end sub_80A1718
 
 	thumb_func_start sub_80A1734
@@ -1031,7 +1031,7 @@ _080A17B8:
 	bl sub_80CCB68
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	ldr r0, _080A17D0 @ =sub_80A17E8
 	str r0, [r5]
 _080A17C8:
@@ -1068,19 +1068,19 @@ sub_80A17E8: @ 80A17E8
 	bne _080A1812
 	bl sub_80563F0
 	bl sub_80A1184
-	ldr r1, _080A181C @ =sub_80567DC
+	ldr r1, _080A181C @ =c2_exit_to_overworld_2_switch
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_81317F8
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080A1812:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A1818: .4byte gUnknown_2037AB8
-_080A181C: .4byte sub_80567DC
+_080A181C: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A17E8
 
 	thumb_func_start sub_80A1820
@@ -1109,7 +1109,7 @@ _080A1850:
 	bl sub_80CCB68
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	ldr r0, _080A1868 @ =sub_80A1880
 	str r0, [r5]
 _080A1860:
@@ -1146,19 +1146,19 @@ sub_80A1880: @ 80A1880
 	bne _080A18AA
 	bl sub_80563F0
 	bl sub_80A1184
-	ldr r1, _080A18B4 @ =sub_80567DC
+	ldr r1, _080A18B4 @ =c2_exit_to_overworld_2_switch
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_813CD50
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080A18AA:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A18B0: .4byte gUnknown_2037AB8
-_080A18B4: .4byte sub_80567DC
+_080A18B4: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A1880
 
 	thumb_func_start sub_80A18B8
@@ -1225,7 +1225,7 @@ _080A1930:
 	bl sub_80CCB68
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	ldr r0, _080A1948 @ =sub_80A1960
 	str r0, [r5]
 _080A1940:
@@ -1261,18 +1261,18 @@ sub_80A1960: @ 80A1960
 	bne _080A1988
 	bl sub_80563F0
 	bl sub_80A1184
-	ldr r1, _080A1994 @ =sub_80567DC
+	ldr r1, _080A1994 @ =c2_exit_to_overworld_2_switch
 	movs r0, 0
 	bl sub_815ABC4
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080A1988:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A1990: .4byte gUnknown_2037AB8
-_080A1994: .4byte sub_80567DC
+_080A1994: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A1960
 
 	thumb_func_start sub_80A1998
@@ -1319,7 +1319,7 @@ sub_80A19E8: @ 80A19E8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_80723E0
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1A2A
@@ -1331,7 +1331,7 @@ sub_80A19E8: @ 80A19E8
 	bl sub_80A2294
 	ldr r5, _080A1A38 @ =0x00004020
 	ldrh r0, [r4]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1363,12 +1363,12 @@ sub_80A1A44: @ 80A1A44
 	movs r1, 0x1
 	bl sub_809A1D8
 	ldrh r0, [r4]
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8108DC8
 	ldrh r0, [r4]
-	bl sub_809A9D8
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81089F4
@@ -1581,7 +1581,7 @@ sub_80A1C08: @ 80A1C08
 	ldr r3, _080A1C40 @ =sub_80A1C44
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80F7808
+	bl DisplayItemMessageOnField
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1600,7 +1600,7 @@ sub_80A1C44: @ 80A1C44
 	bl sub_80559E4
 	bl sub_8085620
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1632,7 +1632,7 @@ _080A1C90:
 	bl sub_80CCB68
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	ldr r0, _080A1CA8 @ =sub_80A1CC0
 	str r0, [r5]
 _080A1CA0:
@@ -1668,18 +1668,18 @@ sub_80A1CC0: @ 80A1CC0
 	bne _080A1CE8
 	bl sub_80563F0
 	bl sub_80A1184
-	ldr r1, _080A1CF4 @ =sub_80567DC
+	ldr r1, _080A1CF4 @ =c2_exit_to_overworld_2_switch
 	movs r0, 0
 	bl sub_80BFF50
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080A1CE8:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A1CF0: .4byte gUnknown_2037AB8
-_080A1CF4: .4byte sub_80567DC
+_080A1CF4: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A1CC0
 
 	thumb_func_start sub_80A1CF8
@@ -1716,7 +1716,7 @@ _080A1D3C:
 	bl sub_80CCB68
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	ldr r0, _080A1D54 @ =sub_80A1D68
 	str r0, [r5]
 _080A1D4C:
@@ -1751,17 +1751,17 @@ sub_80A1D68: @ 80A1D68
 	bne _080A1D8E
 	bl sub_80563F0
 	bl sub_80A1184
-	ldr r0, _080A1D98 @ =sub_80567DC
+	ldr r0, _080A1D98 @ =c2_exit_to_overworld_2_switch
 	bl sub_812C3AC
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080A1D8E:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A1D94: .4byte gUnknown_2037AB8
-_080A1D98: .4byte sub_80567DC
+_080A1D98: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A1D68
 
 	thumb_func_start sub_80A1D9C
@@ -1837,7 +1837,7 @@ sub_80A1E1C: @ 80A1E1C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8040F6C
+	bl IsPlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1E48
@@ -1900,7 +1900,7 @@ sub_80A1E7C: @ 80A1E7C
 	lsls r2, 24
 	lsrs r2, 24
 	movs r3, 0
-	bl sub_80413C0
+	bl ExecuteTableBasedItemEffect_
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -2379,7 +2379,7 @@ sub_80A2294: @ 80A2294
 	lsls r5, 16
 	lsrs r5, 16
 	movs r0, 0x8
-	bl sub_8002B9C
+	bl Alloc
 	adds r6, r0, 0
 	strh r4, [r6]
 	strh r5, [r6, 0x6]
@@ -2387,7 +2387,7 @@ sub_80A2294: @ 80A2294
 	beq _080A22C8
 	adds r0, r7, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	b _080A22CA
 _080A22C8:
 	ldr r0, _080A22E4 @ =0x0000ffff
@@ -2397,7 +2397,7 @@ _080A22CA:
 	adds r1, r6, 0
 	bl sub_8113550
 	adds r0, r6, 0
-	bl sub_8002BC4
+	bl Free
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}

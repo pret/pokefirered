@@ -172,7 +172,7 @@ _08088F28:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_80432E0
+	bl HoennToNationalOrder
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1

@@ -62,7 +62,7 @@ sub_8081B84: @ 8081B84
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
-	bl sub_805FC38
+	bl GetFieldObjectScriptPointerByFieldObjectId
 	adds r6, r0, 0
 	bl sub_8080378
 	cmp r0, 0
@@ -80,7 +80,7 @@ sub_8081B84: @ 8081B84
 	ldrb r0, [r6, 0x1]
 	cmp r0, 0x4
 	bne _08081BC0
-	bl sub_8040CC4
+	bl GetMonsStateToDoubles
 	lsls r0, 24
 	cmp r0, 0
 	bne _08081BE4
@@ -119,7 +119,7 @@ sub_8081BEC: @ 8081BEC
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	ldrb r0, [r7, 0x7]
 	mov r8, r4
 	cmp r0, 0x1
@@ -146,7 +146,7 @@ sub_8081BEC: @ 8081BEC
 	lsrs r2, 28
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_8081DB8
+	bl CheckPathBetweenTrainerAndPlayer
 	lsls r0, 24
 	lsrs r0, 24
 	b _08081C8C
@@ -179,7 +179,7 @@ _08081C4E:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_8081DB8
+	bl CheckPathBetweenTrainerAndPlayer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08081C48
@@ -244,8 +244,8 @@ _08081CE6:
 	bx r1
 	thumb_func_end sub_8081C9C
 
-	thumb_func_start sub_8081CEC
-sub_8081CEC: @ 8081CEC
+	thumb_func_start IsTrainerInRangeNorth
+IsTrainerInRangeNorth: @ 8081CEC
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -281,10 +281,10 @@ _08081D28:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8081CEC
+	thumb_func_end IsTrainerInRangeNorth
 
-	thumb_func_start sub_8081D30
-sub_8081D30: @ 8081D30
+	thumb_func_start IsTrainerInRangeWest
+IsTrainerInRangeWest: @ 8081D30
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -320,10 +320,10 @@ _08081D6C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8081D30
+	thumb_func_end IsTrainerInRangeWest
 
-	thumb_func_start sub_8081D74
-sub_8081D74: @ 8081D74
+	thumb_func_start IsTrainerInRangeEast
+IsTrainerInRangeEast: @ 8081D74
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -359,10 +359,10 @@ _08081DB0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8081D74
+	thumb_func_end IsTrainerInRangeEast
 
-	thumb_func_start sub_8081DB8
-sub_8081DB8: @ 8081DB8
+	thumb_func_start CheckPathBetweenTrainerAndPlayer
+CheckPathBetweenTrainerAndPlayer: @ 8081DB8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -415,7 +415,7 @@ _08081E12:
 	adds r0, r7, 0
 	mov r1, sp
 	mov r2, r8
-	bl sub_8063A20
+	bl MoveCoords
 	cmp r4, r5
 	ble _08081DEC
 _08081E26:
@@ -433,7 +433,7 @@ _08081E26:
 	ldrsh r2, [r3, r0]
 	adds r0, r6, 0
 	adds r3, r7, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r4, 4
@@ -454,7 +454,7 @@ _08081E5A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8081DB8
+	thumb_func_end CheckPathBetweenTrainerAndPlayer
 
 	thumb_func_start sub_8081E68
 sub_8081E68: @ 8081E68
@@ -464,7 +464,7 @@ sub_8081E68: @ 8081E68
 	lsrs r4, 24
 	ldr r0, _08081E94 @ =sub_8081EDC
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -490,14 +490,14 @@ sub_8081E9C: @ 8081E9C
 	adds r6, r0, 0
 	ldr r5, _08081ED4 @ =sub_8081EDC
 	adds r0, r5, 0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80775E8
+	bl SetTaskFuncWithFollowupFunc
 	ldr r1, _08081ED8 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -535,7 +535,7 @@ sub_8081EDC: @ 8081EDC
 	cmp r0, 0
 	bne _08081F0C
 	adds r0, r6, 0
-	bl sub_807761C
+	bl SwitchTaskToFollowupFunc
 	b _08081F28
 	.align 2, 0
 _08081F08: .4byte gUnknown_3005090
@@ -590,9 +590,9 @@ _08081F54:
 	adds r3, r1, 0
 	adds r3, 0x8
 	adds r0, r4, 0
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	movs r0, 0
-	bl sub_8083444
+	bl FieldEffectStart
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -620,7 +620,7 @@ sub_8081F90: @ 8081F90
 	adds r4, r1, 0
 	adds r5, r2, 0
 	movs r0, 0
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	beq _08081FA6
@@ -658,12 +658,12 @@ sub_8081FD0: @ 8081FD0
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08081FEE
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082022
@@ -705,12 +705,12 @@ sub_808202C: @ 808202C
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808204A
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820AC
@@ -718,16 +718,16 @@ _0808204A:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806365C
+	bl npc_running_behaviour_by_direction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063610
+	bl npc_set_running_behaviour_etc
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806365C
+	bl npc_running_behaviour_by_direction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -743,12 +743,12 @@ _0808204A:
 	ldr r1, _080820B8 @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820A2
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820AC
@@ -780,18 +780,18 @@ sub_80820BC: @ 80820BC
 	ldr r1, _080820FC @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820E8
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820EE
 _080820E8:
 	adds r0, r5, 0
-	bl sub_807761C
+	bl SwitchTaskToFollowupFunc
 _080820EE:
 	movs r0, 0
 	pop {r4,r5}
@@ -808,12 +808,12 @@ sub_8082100: @ 8082100
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808211E
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808212C
@@ -836,7 +836,7 @@ sub_8082134: @ 8082134
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r2, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082148
@@ -855,12 +855,12 @@ sub_8082150: @ 8082150
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808216E
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808217C
@@ -884,7 +884,7 @@ sub_8082184: @ 8082184
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080821CA
@@ -908,7 +908,7 @@ sub_8082184: @ 8082184
 	movs r0, 0x2
 	str r0, [r2, 0xC]
 	movs r0, 0x31
-	bl sub_8083444
+	bl FieldEffectStart
 	strh r0, [r5, 0x10]
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -961,7 +961,7 @@ sub_80821DC: @ 80821DC
 	orrs r1, r2
 	strb r1, [r0, 0x5]
 	adds r0, r4, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -988,7 +988,7 @@ sub_8082250: @ 8082250
 	push {r4,lr}
 	adds r4, r1, 0
 	movs r0, 0x31
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _08082264
@@ -1024,7 +1024,7 @@ sub_808226C: @ 808226C
 	movs r0, 0x12
 	movs r1, 0x7
 	movs r2, 0x7F
-	bl sub_805E830
+	bl SpawnSpecialFieldObjectParametrized
 	ldr r2, _080822C8 @ =gUnknown_2036E38
 	lsls r1, r0, 3
 	adds r1, r0
@@ -1035,7 +1035,7 @@ sub_808226C: @ 808226C
 	orrs r0, r2
 	strb r0, [r1, 0x1]
 	ldrb r0, [r1, 0x4]
-	bl sub_805FAC4
+	bl CameraObjectSetFollowedObjectId
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -1061,7 +1061,7 @@ sub_80822CC: @ 80822CC
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x7F
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -1069,7 +1069,7 @@ sub_80822CC: @ 80822CC
 	lsls r0, 2
 	ldr r4, _0808234C @ =gUnknown_2036E38
 	adds r0, r4
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082312
@@ -1079,7 +1079,7 @@ sub_80822CC: @ 80822CC
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808236E
@@ -1118,9 +1118,9 @@ _08082350:
 	adds r3, r1, 0
 	adds r3, 0x8
 	adds r0, r6, 0
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	movs r0, 0
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0
 	strh r0, [r5, 0x12]
 	ldrh r0, [r5, 0x8]
@@ -1147,9 +1147,9 @@ sub_808237C: @ 808237C
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x7F
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	movs r0, 0
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808242E
@@ -1160,7 +1160,7 @@ sub_808237C: @ 808237C
 	lsls r0, 2
 	ldr r4, _08082408 @ =gUnknown_2036E38
 	adds r0, r4
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080823CC
@@ -1170,7 +1170,7 @@ sub_808237C: @ 808237C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808242E
@@ -1204,16 +1204,16 @@ _080823CC:
 _08082404: .4byte gUnknown_3005008
 _08082408: .4byte gUnknown_2036E38
 _0808240C:
-	bl sub_805C768
+	bl GetPlayerAvatarObjectId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805FAC4
+	bl CameraObjectSetFollowedObjectId
 	ldr r0, _08082438 @ =gUnknown_3005008
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x7F
-	bl sub_805E4C8
+	bl RemoveFieldObjectByLocalIdAndMap
 	movs r0, 0
 	strh r0, [r5, 0x12]
 	movs r0, 0x2
@@ -1243,13 +1243,13 @@ sub_808243C: @ 808243C
 	adds r0, r4, 0
 	adds r0, 0xA
 	mov r1, sp
-	bl sub_8044F3C
+	bl LoadWordFromTwoHalfwords
 	movs r1, 0x16
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _0808246E
 	ldr r0, [sp]
-	bl sub_8063D34
+	bl FieldObjectClearAnim
 	ldrh r0, [r4, 0x16]
 	adds r0, 0x1
 	strh r0, [r4, 0x16]
@@ -1269,7 +1269,7 @@ _0808246E:
 	cmp r0, 0x3
 	bne _080824D8
 	movs r0, 0x31
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _080824D8
@@ -1277,24 +1277,24 @@ _0808246E:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806365C
+	bl npc_running_behaviour_by_direction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063610
+	bl npc_set_running_behaviour_etc
 	ldr r4, [sp]
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806365C
+	bl npc_running_behaviour_by_direction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl sub_805FE7C
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080824E2
 	.align 2, 0
 _080824D0: .4byte gUnknown_3005090
@@ -1318,7 +1318,7 @@ sub_80824EC: @ 80824EC
 	adds r4, r0, 0
 	ldr r0, _08082518 @ =sub_808243C
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1329,7 +1329,7 @@ sub_80824EC: @ 80824EC
 	adds r0, r1
 	adds r0, 0x2
 	adds r1, r4, 0
-	bl sub_8044F34
+	bl StoreWordInTwoHalfwords
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1354,8 +1354,8 @@ sub_8082530: @ 8082530
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8082530
@@ -1367,7 +1367,7 @@ sub_8082544: @ 8082544
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x53
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1396,7 +1396,7 @@ sub_808257C: @ 808257C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1425,7 +1425,7 @@ sub_80825B4: @ 80825B4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1454,7 +1454,7 @@ sub_80825EC: @ 80825EC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1483,7 +1483,7 @@ sub_8082624: @ 8082624
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1536,7 +1536,7 @@ sub_808265C: @ 808265C
 	strh r3, [r0, 0x34]
 	strh r1, [r0, 0x3C]
 	adds r1, r2, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1560,7 +1560,7 @@ sub_80826A8: @ 80826A8
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080826DA
@@ -1576,7 +1576,7 @@ _080826DA:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _08082736
 _080826E8:
 	ldr r2, _0808272C @ =gUnknown_2036E38

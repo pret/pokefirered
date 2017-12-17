@@ -10,8 +10,8 @@ nullsub_91: @ 810BB88
 	bx lr
 	thumb_func_end nullsub_91
 
-	thumb_func_start sub_810BB8C
-sub_810BB8C: @ 810BB8C
+	thumb_func_start dp13_810BB8C
+dp13_810BB8C: @ 810BB8C
 	push {r4-r7,lr}
 	ldr r4, _0810BBAC @ =gUnknown_8453178
 	ldr r3, _0810BBB0 @ =gUnknown_203AD58
@@ -32,10 +32,10 @@ _0810BB94:
 	.align 2, 0
 _0810BBAC: .4byte gUnknown_8453178
 _0810BBB0: .4byte gUnknown_203AD58
-	thumb_func_end sub_810BB8C
+	thumb_func_end dp13_810BB8C
 
-	thumb_func_start sub_810BBB4
-sub_810BBB4: @ 810BBB4
+	thumb_func_start load_pokemon_image_TODO
+load_pokemon_image_TODO: @ 810BBB4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r6, r1, 0
@@ -123,7 +123,7 @@ _0810BC4E:
 	bx r1
 	.align 2, 0
 _0810BC58: .4byte gUnknown_8239FA4
-	thumb_func_end sub_810BBB4
+	thumb_func_end load_pokemon_image_TODO
 
 	thumb_func_start sub_810BC5C
 sub_810BC5C: @ 810BC5C
@@ -139,7 +139,7 @@ sub_810BC5C: @ 810BC5C
 	str r4, [sp]
 	movs r4, 0
 	str r4, [sp, 0x4]
-	bl sub_810BBB4
+	bl load_pokemon_image_TODO
 	lsls r0, 16
 	lsrs r0, 16
 	add sp, 0x8
@@ -180,7 +180,7 @@ sub_810BC84: @ 810BC84
 	adds r0, r4, 0
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_80440F4
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	lsls r1, r5, 20
 	b _0810BD04
 	.align 2, 0
@@ -192,8 +192,8 @@ _0810BCD0:
 	adds r0, r4, 0
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_8044180
-	bl sub_800EC28
+	bl GetMonSpritePalStructFromOtIdPersonality
+	bl LoadCompressedObjectPalette
 	b _0810BD2E
 	.align 2, 0
 _0810BCE4: .4byte gUnknown_203AD40
@@ -218,7 +218,7 @@ _0810BD04:
 	adds r1, r2
 	lsrs r1, 16
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	b _0810BD2E
 	.align 2, 0
 _0810BD14: .4byte 0x0000ffff
@@ -230,7 +230,7 @@ _0810BD20:
 	lsls r0, r6, 3
 	ldr r1, _0810BD3C @ =gUnknown_8239A1C
 	adds r0, r1
-	bl sub_800EC28
+	bl LoadCompressedObjectPalette
 _0810BD2E:
 	pop {r3}
 	mov r8, r3
@@ -255,10 +255,10 @@ sub_810BD40: @ 810BD40
 	cmp r1, 0
 	bne _0810BD64
 	adds r1, r5, 0
-	bl sub_80440F4
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	lsls r1, r4, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	b _0810BD74
 _0810BD64:
 	ldr r1, _0810BD7C @ =gUnknown_8239A1C
@@ -267,7 +267,7 @@ _0810BD64:
 	ldr r0, [r0]
 	lsls r1, r4, 4
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 _0810BD74:
 	pop {r4,r5}
 	pop {r0}
@@ -276,8 +276,8 @@ _0810BD74:
 _0810BD7C: .4byte gUnknown_8239A1C
 	thumb_func_end sub_810BD40
 
-	thumb_func_start sub_810BD80
-sub_810BD80: @ 810BD80
+	thumb_func_start uns_builder_assign_animtable1
+uns_builder_assign_animtable1: @ 810BD80
 	push {lr}
 	lsls r0, 24
 	cmp r0, 0
@@ -300,10 +300,10 @@ _0810BDA0:
 	.align 2, 0
 _0810BDA4: .4byte gUnknown_203AD40
 _0810BDA8: .4byte gUnknown_82390DC
-	thumb_func_end sub_810BD80
+	thumb_func_end uns_builder_assign_animtable1
 
-	thumb_func_start sub_810BDAC
-sub_810BDAC: @ 810BDAC
+	thumb_func_start oamt_spawn_poke_or_trainer_picture
+oamt_spawn_poke_or_trainer_picture: @ 810BDAC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -366,17 +366,17 @@ _0810BE1C:
 	beq _0810BE40
 	movs r0, 0x80
 	lsls r0, 6
-	bl sub_8002B9C
+	bl Alloc
 	adds r7, r0, 0
 	cmp r7, 0
 	beq _0810BE40
 	movs r0, 0x20
-	bl sub_8002B9C
+	bl Alloc
 	mov r8, r0
 	cmp r0, 0
 	bne _0810BE4C
 	adds r0, r7, 0
-	bl sub_8002BC4
+	bl Free
 _0810BE40:
 	ldr r0, _0810BE48 @ =0x0000ffff
 	b _0810BF16
@@ -391,7 +391,7 @@ _0810BE4C:
 	ldr r1, [sp, 0x10]
 	ldr r2, [sp, 0x14]
 	adds r3, r7, 0
-	bl sub_810BBB4
+	bl load_pokemon_image_TODO
 	lsls r0, 16
 	cmp r0, 0
 	bne _0810BE40
@@ -425,7 +425,7 @@ _0810BE86:
 	mov r0, r12
 	str r0, [r5, 0x4]
 	mov r0, r9
-	bl sub_810BD80
+	bl uns_builder_assign_animtable1
 	mov r1, r8
 	str r1, [r5, 0xC]
 	ldr r0, _0810BF34 @ =gUnknown_8231CFC
@@ -447,7 +447,7 @@ _0810BE86:
 	asrs r2, r0, 16
 	adds r0, r5, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r6, r2, 0
@@ -500,7 +500,7 @@ _0810BF34: .4byte gUnknown_8231CFC
 _0810BF38: .4byte nullsub_91
 _0810BF3C: .4byte gUnknown_202063C
 _0810BF40: .4byte gUnknown_203AD58
-	thumb_func_end sub_810BDAC
+	thumb_func_end oamt_spawn_poke_or_trainer_picture
 
 	thumb_func_start sub_810BF44
 sub_810BF44: @ 810BF44
@@ -541,7 +541,7 @@ sub_810BF44: @ 810BF44
 	str r7, [sp, 0x10]
 	movs r4, 0
 	str r4, [sp, 0x14]
-	bl sub_810BDAC
+	bl oamt_spawn_poke_or_trainer_picture
 	lsls r0, 16
 	lsrs r0, 16
 	add sp, 0x18
@@ -609,20 +609,20 @@ _0810BFE4:
 	adds r0, r1
 	ldrb r0, [r0, 0x5]
 	lsrs r0, 4
-	bl sub_8008A20
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 _0810C018:
 	adds r0, r6, r4
 	lsls r0, 2
 	ldr r1, _0810C048 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	mov r0, r8
-	bl sub_8002BC4
+	bl Free
 	adds r0, r7, 0
-	bl sub_8002BC4
+	bl Free
 	adds r1, r5, 0
 	ldr r0, _0810C04C @ =gUnknown_8453178
 	ldm r0!, {r2-r4}
@@ -734,7 +734,7 @@ sub_810C0C0: @ 810C0C0
 	lsrs r6, 24
 	movs r0, 0x80
 	lsls r0, 6
-	bl sub_8002B9C
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _0810C156
@@ -760,7 +760,7 @@ sub_810C0C0: @ 810C0C0
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_80041F0
+	bl BlitBitmapRectToWindow
 	str r6, [sp]
 	mov r0, r9
 	ldr r1, [sp, 0x18]
@@ -768,7 +768,7 @@ sub_810C0C0: @ 810C0C0
 	ldr r3, [sp, 0x20]
 	bl sub_810BD40
 	adds r0, r4, 0
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	b _0810C158
 _0810C156:
@@ -825,7 +825,7 @@ sub_810C16C: @ 810C16C
 	movs r4, 0
 	str r4, [sp, 0x10]
 	str r7, [sp, 0x14]
-	bl sub_810BDAC
+	bl oamt_spawn_poke_or_trainer_picture
 	lsls r0, 16
 	lsrs r0, 16
 	add sp, 0x18

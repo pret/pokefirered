@@ -16,7 +16,7 @@ sub_8079B7C: @ 8079B7C
 	bl RegisterRamReset
 	movs r0, 0
 	movs r1, 0x80
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	strh r4, [r5]
 	ldr r1, _08079BF0 @ =gUnknown_30030F0
 	ldr r0, _08079BF4 @ =0x00000439
@@ -28,7 +28,7 @@ sub_8079B7C: @ 8079B7C
 	strb r0, [r1]
 	bl sub_804C058
 	bl sub_8054A28
-	bl sub_80D9750
+	bl ResetSaveCounters
 	movs r0, 0
 	bl sub_80DA4FC
 	ldr r0, _08079BF8 @ =gUnknown_30053A0
@@ -49,9 +49,9 @@ _08079BC8:
 	ldr r0, _08079C00 @ =gHeap
 	movs r1, 0xE0
 	lsls r1, 9
-	bl sub_8002B80
+	bl InitHeap
 	ldr r0, _08079C04 @ =sub_8056938
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r4,r5}
 	pop {r0}
 	bx r0

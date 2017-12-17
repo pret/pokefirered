@@ -10,8 +10,8 @@ nullsub_90: @ 8106ECC
 	bx lr
 	thumb_func_end nullsub_90
 
-	thumb_func_start sub_8106ED0
-sub_8106ED0: @ 8106ED0
+	thumb_func_start DoMysteryGiftListMenu
+DoMysteryGiftListMenu: @ 8106ED0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -74,7 +74,7 @@ _08106F34:
 	strb r1, [r0, 0x10]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	strb r0, [r4, 0x6]
 	ldrb r0, [r4, 0x5]
 	movs r1, 0x1
@@ -87,7 +87,7 @@ _08106F60: .4byte gUnknown_203ACF4
 _08106F64: .4byte gUnknown_3005E70
 _08106F68:
 	ldrb r0, [r5, 0x6]
-	bl sub_8107078
+	bl ListMenuHandleInput
 	str r0, [r5]
 	ldr r1, _08106FA4 @ =gUnknown_30030F0
 	ldrh r0, [r1, 0x2E]
@@ -114,7 +114,7 @@ _08106F92:
 	cmp r6, 0
 	bne _08106FA8
 	ldrb r0, [r5, 0x5]
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	b _08106FBA
 	.align 2, 0
 _08106FA4: .4byte gUnknown_30030F0
@@ -158,22 +158,22 @@ _08106FE8:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8106ED0
+	thumb_func_end DoMysteryGiftListMenu
 
-	thumb_func_start sub_8106FF8
-sub_8106FF8: @ 8106FF8
+	thumb_func_start ListMenuInit
+ListMenuInit: @ 8106FF8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	lsls r2, 16
 	lsrs r2, 16
-	bl sub_8107348
+	bl ListMenuInitInternal
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5, 0x10]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r5, 0x10]
 	movs r1, 0x2
 	bl sub_8003F20
@@ -181,10 +181,10 @@ sub_8106FF8: @ 8106FF8
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8106FF8
+	thumb_func_end ListMenuInit
 
-	thumb_func_start sub_8107024
-sub_8107024: @ 8107024
+	thumb_func_start Unused_ListMenuInit2
+Unused_ListMenuInit2: @ 8107024
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r6, r0, 0
@@ -195,7 +195,7 @@ sub_8107024: @ 8107024
 	lsrs r1, 16
 	lsls r2, 16
 	lsrs r2, 16
-	bl sub_8107348
+	bl ListMenuInitInternal
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r4, 0x4]
@@ -211,7 +211,7 @@ _08107048:
 	str r4, [sp]
 	ldrb r4, [r5, 0x4]
 	str r4, [sp, 0x4]
-	bl sub_8004000
+	bl PutWindowRectTilemapOverridePalette
 	adds r5, 0x8
 	ldrb r0, [r5, 0x4]
 	cmp r0, 0xFF
@@ -225,10 +225,10 @@ _08107064:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8107024
+	thumb_func_end Unused_ListMenuInit2
 
-	thumb_func_start sub_8107078
-sub_8107078: @ 8107078
+	thumb_func_start ListMenuHandleInput
+ListMenuHandleInput: @ 8107078
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -331,14 +331,14 @@ _08107122:
 _0810712C:
 	movs r3, 0x1
 _0810712E:
-	bl sub_810799C
+	bl ListMenuChangeSelection
 _08107132:
 	movs r0, 0x1
 	negs r0, r0
 _08107136:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8107078
+	thumb_func_end ListMenuHandleInput
 
 	thumb_func_start sub_810713C
 sub_810713C: @ 810713C
@@ -368,10 +368,10 @@ _08107160:
 	ldrb r1, [r1, 0x17]
 	lsrs r1, 6
 	subs r1, 0x2
-	bl sub_8133CD4
+	bl ListMenuRemoveCursorObject
 _08107170:
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -395,14 +395,14 @@ sub_8107180: @ 8107180
 	lsrs r1, r2, 4
 	orrs r1, r2
 	lsrs r1, 24
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrh r1, [r4, 0x18]
 	ldrh r3, [r4, 0xE]
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_81074DC
+	bl ListMenuPrintEntries
 	adds r0, r4, 0
-	bl sub_8107594
+	bl ListMenuDrawCursor
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x2
 	bl sub_8003F20
@@ -508,7 +508,7 @@ sub_8107244: @ 8107244
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_810799C
+	bl ListMenuChangeSelection
 _08107278:
 	cmp r4, 0x80
 	bne _08107288
@@ -516,7 +516,7 @@ _08107278:
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_810799C
+	bl ListMenuChangeSelection
 _08107288:
 	cmp r5, 0
 	beq _08107292
@@ -563,8 +563,8 @@ _081072CA:
 _081072D0: .4byte gUnknown_3005098
 	thumb_func_end sub_81072AC
 
-	thumb_func_start sub_81072D4
-sub_81072D4: @ 81072D4
+	thumb_func_start get_coro_args_x18_x1A
+get_coro_args_x18_x1A: @ 81072D4
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -588,10 +588,10 @@ _081072F6:
 	bx r0
 	.align 2, 0
 _081072FC: .4byte gUnknown_3005098
-	thumb_func_end sub_81072D4
+	thumb_func_end get_coro_args_x18_x1A
 
-	thumb_func_start sub_8107300
-sub_8107300: @ 8107300
+	thumb_func_start ListMenuGetYCoordForPrintingArrowCursor
+ListMenuGetYCoordForPrintingArrowCursor: @ 8107300
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -626,10 +626,10 @@ sub_8107300: @ 8107300
 	bx r1
 	.align 2, 0
 _08107344: .4byte gUnknown_3005098
-	thumb_func_end sub_8107300
+	thumb_func_end ListMenuGetYCoordForPrintingArrowCursor
 
-	thumb_func_start sub_8107348
-sub_8107348: @ 8107348
+	thumb_func_start ListMenuInitInternal
+ListMenuInitInternal: @ 8107348
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -642,7 +642,7 @@ sub_8107348: @ 8107348
 	lsrs r6, 16
 	ldr r0, _08107418 @ =nullsub_90
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -712,17 +712,17 @@ _081073E0:
 	lsrs r1, r2, 4
 	orrs r1, r2
 	lsrs r1, 24
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrh r1, [r7, 0x18]
 	ldrh r3, [r7, 0xE]
 	adds r0, r7, 0
 	movs r2, 0
-	bl sub_81074DC
+	bl ListMenuPrintEntries
 	adds r0, r7, 0
-	bl sub_8107594
+	bl ListMenuDrawCursor
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl sub_8107A74
+	bl ListMenuCallSelectionChangedCallback
 	mov r0, r8
 	pop {r3}
 	mov r8, r3
@@ -734,10 +734,10 @@ _08107418: .4byte nullsub_90
 _0810741C: .4byte gUnknown_3005098
 _08107420: .4byte gUnknown_3005E60
 _08107424: .4byte 0xfffc0fff
-	thumb_func_end sub_8107348
+	thumb_func_end ListMenuInitInternal
 
-	thumb_func_start sub_8107428
-sub_8107428: @ 8107428
+	thumb_func_start ListMenuPrint
+ListMenuPrint: @ 8107428
 	push {r4-r7,lr}
 	sub sp, 0x18
 	adds r4, r0, 0
@@ -826,10 +826,10 @@ _081074D2:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107428
+	thumb_func_end ListMenuPrint
 
-	thumb_func_start sub_81074DC
-sub_81074DC: @ 81074DC
+	thumb_func_start ListMenuPrintEntries
+ListMenuPrintEntries: @ 81074DC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -905,7 +905,7 @@ _08107562:
 	adds r0, r4, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8107428
+	bl ListMenuPrint
 	mov r0, r9
 	adds r0, 0x1
 	lsls r0, 16
@@ -924,10 +924,10 @@ _08107584:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81074DC
+	thumb_func_end ListMenuPrintEntries
 
-	thumb_func_start sub_8107594
-sub_8107594: @ 8107594
+	thumb_func_start ListMenuDrawCursor
+ListMenuDrawCursor: @ 8107594
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -973,7 +973,7 @@ _081075E4:
 	adds r0, r6, 0
 	mov r2, r8
 	adds r3, r7, 0
-	bl sub_8107428
+	bl ListMenuPrint
 	b _08107680
 	.align 2, 0
 _081075F4: .4byte gUnknown_841623B
@@ -983,7 +983,7 @@ _081075F8:
 	bne _08107608
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_810768C
+	bl ListMenuAddCursorObject
 	strb r0, [r6, 0x1E]
 _08107608:
 	ldrb r5, [r6, 0x1E]
@@ -1007,7 +1007,7 @@ _08107608:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0
-	bl sub_8133CAC
+	bl ListMenuUpdateCursorObject
 	b _08107680
 	.align 2, 0
 _0810763C: .4byte 0xffff0000
@@ -1017,7 +1017,7 @@ _08107640:
 	bne _08107650
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_810768C
+	bl ListMenuAddCursorObject
 	strb r0, [r6, 0x1E]
 _08107650:
 	ldrb r5, [r6, 0x1E]
@@ -1040,17 +1040,17 @@ _08107650:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_8133CAC
+	bl ListMenuUpdateCursorObject
 _08107680:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107594
+	thumb_func_end ListMenuDrawCursor
 
-	thumb_func_start sub_810768C
-sub_810768C: @ 810768C
+	thumb_func_start ListMenuAddCursorObject
+ListMenuAddCursorObject: @ 810768C
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -1086,7 +1086,7 @@ sub_810768C: @ 810768C
 	strb r0, [r1, 0xA]
 	mov r0, sp
 	adds r1, r5, 0
-	bl sub_8133C90
+	bl ListMenuAddCursorObjectInternal
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0xC
@@ -1095,10 +1095,10 @@ sub_810768C: @ 810768C
 	bx r1
 	.align 2, 0
 _081076E8: .4byte 0x0000ffff
-	thumb_func_end sub_810768C
+	thumb_func_end ListMenuAddCursorObject
 
-	thumb_func_start sub_81076EC
-sub_81076EC: @ 81076EC
+	thumb_func_start ListMenuErasePrintedCursor
+ListMenuErasePrintedCursor: @ 81076EC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1156,7 +1156,7 @@ sub_81076EC: @ 81076EC
 	str r5, [sp]
 	str r0, [sp, 0x4]
 	adds r0, r6, 0
-	bl sub_8004378
+	bl FillWindowPixelRect
 _08107768:
 	add sp, 0x8
 	pop {r3}
@@ -1164,10 +1164,10 @@ _08107768:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81076EC
+	thumb_func_end ListMenuErasePrintedCursor
 
-	thumb_func_start sub_8107774
-sub_8107774: @ 8107774
+	thumb_func_start ListMenuUpdateSelectedRowIndexAndScrollOffset
+ListMenuUpdateSelectedRowIndexAndScrollOffset: @ 8107774
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -1304,10 +1304,10 @@ _0810785C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8107774
+	thumb_func_end ListMenuUpdateSelectedRowIndexAndScrollOffset
 
-	thumb_func_start sub_8107864
-sub_8107864: @ 8107864
+	thumb_func_start ListMenuScroll
+ListMenuScroll: @ 8107864
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1328,12 +1328,12 @@ sub_8107864: @ 8107864
 	lsrs r1, r2, 4
 	orrs r1, r2
 	lsrs r1, 24
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrh r1, [r6, 0x18]
 	ldrh r3, [r6, 0xE]
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_81074DC
+	bl ListMenuPrintEntries
 	b _0810798E
 _0810789E:
 	ldrb r0, [r6, 0x17]
@@ -1361,12 +1361,12 @@ _0810789E:
 	orrs r3, r1
 	lsrs r3, 24
 	movs r1, 0x1
-	bl sub_80044A8
+	bl ScrollWindow
 	ldrh r1, [r6, 0x18]
 	adds r0, r6, 0
 	movs r2, 0
 	adds r3, r5, 0
-	bl sub_81074DC
+	bl ListMenuPrintEntries
 	ldrh r0, [r6, 0xE]
 	adds r1, r0, 0
 	muls r1, r4
@@ -1401,7 +1401,7 @@ _0810789E:
 	adds r0, r3, 0
 	movs r2, 0
 	adds r3, r4, 0
-	bl sub_8004378
+	bl FillWindowPixelRect
 	b _0810798E
 _08107930:
 	ldrb r0, [r6, 0x10]
@@ -1415,7 +1415,7 @@ _08107930:
 	orrs r3, r1
 	lsrs r3, 24
 	movs r1, 0
-	bl sub_80044A8
+	bl ScrollWindow
 	ldrh r2, [r6, 0xE]
 	subs r2, r7
 	ldrh r1, [r6, 0x18]
@@ -1426,7 +1426,7 @@ _08107930:
 	lsrs r2, 16
 	adds r0, r6, 0
 	adds r3, r7, 0
-	bl sub_81074DC
+	bl ListMenuPrintEntries
 	ldrb r0, [r6, 0x10]
 	movs r1, 0x3
 	bl sub_8004950
@@ -1446,7 +1446,7 @@ _08107930:
 	adds r0, r3, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8004378
+	bl FillWindowPixelRect
 _0810798E:
 	add sp, 0x8
 	pop {r3}
@@ -1454,10 +1454,10 @@ _0810798E:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107864
+	thumb_func_end ListMenuScroll
 
-	thumb_func_start sub_810799C
-sub_810799C: @ 810799C
+	thumb_func_start ListMenuChangeSelection
+ListMenuChangeSelection: @ 810799C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1502,7 +1502,7 @@ _081079CE:
 _081079EA:
 	adds r0, r4, 0
 	mov r1, r9
-	bl sub_8107774
+	bl ListMenuUpdateSelectedRowIndexAndScrollOffset
 	lsls r0, 24
 	lsrs r0, 24
 	orrs r5, r0
@@ -1529,12 +1529,12 @@ _08107A16:
 _08107A1A:
 	adds r0, r4, 0
 	mov r1, r10
-	bl sub_81076EC
+	bl ListMenuErasePrintedCursor
 	adds r0, r4, 0
-	bl sub_8107594
+	bl ListMenuDrawCursor
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8107A74
+	bl ListMenuCallSelectionChangedCallback
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x2
 	bl sub_8003F20
@@ -1542,16 +1542,16 @@ _08107A1A:
 _08107A3A:
 	adds r0, r4, 0
 	mov r1, r10
-	bl sub_81076EC
+	bl ListMenuErasePrintedCursor
 	adds r0, r4, 0
 	adds r1, r7, 0
 	mov r2, r9
-	bl sub_8107864
+	bl ListMenuScroll
 	adds r0, r4, 0
-	bl sub_8107594
+	bl ListMenuDrawCursor
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8107A74
+	bl ListMenuCallSelectionChangedCallback
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x2
 	bl sub_8003F20
@@ -1566,10 +1566,10 @@ _08107A64:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810799C
+	thumb_func_end ListMenuChangeSelection
 
-	thumb_func_start sub_8107A74
-sub_8107A74: @ 8107A74
+	thumb_func_start ListMenuCallSelectionChangedCallback
+ListMenuCallSelectionChangedCallback: @ 8107A74
 	push {r4,lr}
 	adds r2, r0, 0
 	lsls r1, 24
@@ -1590,7 +1590,7 @@ _08107A96:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107A74
+	thumb_func_end ListMenuCallSelectionChangedCallback
 
 	thumb_func_start sub_8107A9C
 sub_8107A9C: @ 8107A9C
@@ -1909,7 +1909,7 @@ sub_8107CD8: @ 8107CD8
 	bl sub_80971CC
 	adds r1, r4, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1933,7 +1933,7 @@ sub_8107CF8: @ 8107CF8
 	lsls r5, 16
 	lsrs r5, 16
 	movs r2, 0x1
-	bl sub_8097054
+	bl GetMonIconPtr
 	adds r1, r0, 0
 	movs r0, 0x20
 	str r0, [sp]
@@ -1941,7 +1941,7 @@ sub_8107CF8: @ 8107CF8
 	adds r0, r6, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_80041B8
+	bl BlitBitmapToWindow
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -1969,7 +1969,7 @@ _08107D54:
 _08107D56:
 	adds r1, r2, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2006,7 +2006,7 @@ sub_8107D68: @ 8107D68
 	adds r1, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_80041F0
+	bl BlitBitmapRectToWindow
 	add sp, 0x18
 	pop {r4,r5}
 	pop {r0}

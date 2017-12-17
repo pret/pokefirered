@@ -69,7 +69,7 @@ _08141CBA:
 	adds r1, r6, 0
 	movs r2, 0x32
 	movs r3, 0x20
-	bl sub_803DA54
+	bl CreateMon
 	ldr r5, _08141D8C @ =gUnknown_3005008
 	ldr r1, [r5]
 	ldr r4, _08141D90 @ =0x000030d0
@@ -87,56 +87,56 @@ _08141CBA:
 	strb r1, [r0, 0x13]
 	adds r0, r7, 0
 	movs r1, 0x42
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	adds r1, r4
 	str r0, [r1]
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	adds r1, r4
 	str r0, [r1, 0x4]
 	adds r0, r7, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	adds r1, r4
 	strh r0, [r1, 0xA]
 	adds r0, r7, 0
 	movs r1, 0x16
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1, 0xE]
 	adds r0, r7, 0
 	movs r1, 0x17
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1, 0xF]
 	adds r0, r7, 0
 	movs r1, 0x18
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1, 0x10]
 	adds r0, r7, 0
 	movs r1, 0x21
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1, 0x11]
 	adds r0, r7, 0
 	movs r1, 0x2F
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1, 0x12]
 	ldr r5, _08141D94 @ =gUnknown_203F3AE
 	movs r0, 0x3
 	strb r0, [r5]
-	bl sub_8044EC8
+	bl Random
 	ldr r4, _08141D98 @ =gUnknown_8466C58
 	lsls r0, 16
 	lsrs r0, 16
@@ -208,7 +208,7 @@ sub_8141DD4: @ 8141DD4
 	ldr r5, _08141E24 @ =gUnknown_8466C58
 	adds r4, r1, 0
 _08141DEE:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
@@ -238,7 +238,7 @@ _08141E24: .4byte gUnknown_8466C58
 sub_8141E28: @ 8141E28
 	push {r4-r7,lr}
 	movs r4, 0
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xF0
 	lsls r1, 12
@@ -269,7 +269,7 @@ _08141E52:
 	adds r5, r2, 0x1
 	ldr r4, _08141EA4 @ =gUnknown_203F3A8
 _08141E68:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -308,8 +308,8 @@ _08141EB2:
 	bx r0
 	thumb_func_end sub_8141E28
 
-	thumb_func_start sub_8141EB8
-sub_8141EB8: @ 8141EB8
+	thumb_func_start IsRoamerAt
+IsRoamerAt: @ 8141EB8
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -340,14 +340,14 @@ _08141EF0:
 _08141EF2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8141EB8
+	thumb_func_end IsRoamerAt
 
-	thumb_func_start sub_8141EF8
-sub_8141EF8: @ 8141EF8
+	thumb_func_start CreateRoamerMonInstance
+CreateRoamerMonInstance: @ 8141EF8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _08141F84 @ =gUnknown_202402C
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	ldr r4, _08141F88 @ =gUnknown_3005008
 	ldr r0, [r4]
 	ldr r1, _08141F8C @ =0x000030d0
@@ -358,7 +358,7 @@ sub_8141EF8: @ 8141EF8
 	ldr r0, [r0, 0x4]
 	str r0, [sp]
 	adds r0, r5, 0
-	bl sub_803DF68
+	bl CreateMonWithIVsPersonality
 	ldr r2, [r4]
 	ldr r0, _08141F90 @ =0x000030dd
 	adds r2, r0
@@ -416,28 +416,28 @@ _08141F9C: .4byte 0x000030df
 _08141FA0: .4byte 0x000030e0
 _08141FA4: .4byte 0x000030e1
 _08141FA8: .4byte 0x000030e2
-	thumb_func_end sub_8141EF8
+	thumb_func_end CreateRoamerMonInstance
 
-	thumb_func_start sub_8141FAC
-sub_8141FAC: @ 8141FAC
+	thumb_func_start TryStartRoamerEncounter
+TryStartRoamerEncounter: @ 8141FAC
 	push {lr}
 	ldr r0, _08141FDC @ =gUnknown_3005008
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x4]
 	ldrb r1, [r1, 0x5]
-	bl sub_8141EB8
+	bl IsRoamerAt
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08141FE0
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10
 	ands r1, r0
 	cmp r1, 0
 	bne _08141FE0
-	bl sub_8141EF8
+	bl CreateRoamerMonInstance
 	movs r0, 0x1
 	b _08141FE2
 	.align 2, 0
@@ -447,14 +447,14 @@ _08141FE0:
 _08141FE2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8141FAC
+	thumb_func_end TryStartRoamerEncounter
 
-	thumb_func_start sub_8141FE8
-sub_8141FE8: @ 8141FE8
+	thumb_func_start UpdateRoamerHPStatus
+UpdateRoamerHPStatus: @ 8141FE8
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r5, _08142014 @ =gUnknown_3005008
 	ldr r1, [r5]
 	ldr r4, _08142018 @ =0x000030d0
@@ -462,7 +462,7 @@ sub_8141FE8: @ 8141FE8
 	strh r0, [r1, 0xA]
 	adds r0, r6, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1, 0xD]
@@ -473,10 +473,10 @@ sub_8141FE8: @ 8141FE8
 	.align 2, 0
 _08142014: .4byte gUnknown_3005008
 _08142018: .4byte 0x000030d0
-	thumb_func_end sub_8141FE8
+	thumb_func_end UpdateRoamerHPStatus
 
-	thumb_func_start sub_814201C
-sub_814201C: @ 814201C
+	thumb_func_start SetRoamerInactive
+SetRoamerInactive: @ 814201C
 	ldr r0, _0814202C @ =gUnknown_3005008
 	ldr r0, [r0]
 	ldr r1, _08142030 @ =0x000030d0
@@ -487,10 +487,10 @@ sub_814201C: @ 814201C
 	.align 2, 0
 _0814202C: .4byte gUnknown_3005008
 _08142030: .4byte 0x000030d0
-	thumb_func_end sub_814201C
+	thumb_func_end SetRoamerInactive
 
-	thumb_func_start sub_8142034
-sub_8142034: @ 8142034
+	thumb_func_start GetRoamerLocation
+GetRoamerLocation: @ 8142034
 	ldr r3, _08142040 @ =gUnknown_203F3AE
 	ldrb r2, [r3]
 	strb r2, [r0]
@@ -499,7 +499,7 @@ sub_8142034: @ 8142034
 	bx lr
 	.align 2, 0
 _08142040: .4byte gUnknown_203F3AE
-	thumb_func_end sub_8142034
+	thumb_func_end GetRoamerLocation
 
 	thumb_func_start sub_8142044
 sub_8142044: @ 8142044
@@ -514,7 +514,7 @@ sub_8142044: @ 8142044
 	ldr r1, _0814206C @ =gUnknown_203F3AE
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
-	bl sub_8055238
+	bl get_mapheader_by_bank_and_number
 	ldrb r0, [r0, 0x14]
 	b _08142072
 	.align 2, 0

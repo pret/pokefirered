@@ -5,11 +5,11 @@
 
 	.text
 
-	thumb_func_start sub_80A0460
-sub_80A0460: @ 80A0460
+	thumb_func_start .gcc2_compiled._0
+.gcc2_compiled._0: @ 80A0460
 	push {lr}
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -26,7 +26,7 @@ _080A047C:
 _080A047E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A0460
+	thumb_func_end .gcc2_compiled._0
 
 	thumb_func_start sub_80A0484
 sub_80A0484: @ 80A0484
@@ -35,12 +35,12 @@ sub_80A0484: @ 80A0484
 	movs r5, 0
 _080A048A:
 	adds r0, r4, 0
-	bl sub_80A0460
+	bl .gcc2_compiled._0
 	cmp r0, 0
 	beq _080A04A8
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080A04A8
 	movs r0, 0
@@ -83,9 +83,9 @@ sub_80A04B8: @ 80A04B8
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r5, 0
-	bl sub_8008D28
+	bl StringGetEnd10
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -105,18 +105,18 @@ sub_80A0504: @ 80A0504
 	ldr r0, _080A0540 @ =gUnknown_2024284
 	adds r4, r1, r0
 	adds r0, r4, 0
-	bl sub_80A0460
+	bl .gcc2_compiled._0
 	cmp r0, 0
 	beq _080A0544
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _080A0544
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
-	bl sub_812085C
+	bl GetMonData
+	bl pokemon_ailments_get_primary
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -183,7 +183,7 @@ _080A05A0:
 	strh r0, [r4]
 	b _080A05F6
 _080A05A6:
-	bl sub_806951C
+	bl IsFieldMessageBoxHidden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A05F6
@@ -217,9 +217,9 @@ _080A05E8:
 	ldr r0, _080A05FC @ =gUnknown_20370D0
 	strh r1, [r0]
 _080A05EC:
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080A05F6:
 	pop {r4,r5}
 	pop {r0}
@@ -233,16 +233,16 @@ sub_80A0600: @ 80A0600
 	push {lr}
 	ldr r0, _080A0614 @ =sub_80A054C
 	movs r1, 0x50
-	bl sub_807741C
-	bl sub_8069B28
+	bl CreateTask
+	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A0614: .4byte sub_80A054C
 	thumb_func_end sub_80A0600
 
-	thumb_func_start sub_80A0618
-sub_80A0618: @ 80A0618
+	thumb_func_start overworld_poison
+overworld_poison: @ 80A0618
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r4, _080A0684 @ =gUnknown_2024284
@@ -252,20 +252,20 @@ sub_80A0618: @ 80A0618
 _080A0624:
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080A0668
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
-	bl sub_812085C
+	bl GetMonData
+	bl pokemon_ailments_get_primary
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080A0668
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp]
 	cmp r0, 0
 	beq _080A065A
@@ -311,6 +311,6 @@ _080A0692:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A0618
+	thumb_func_end overworld_poison
 
 	.align 2, 0 @ Don't pad with nop.

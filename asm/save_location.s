@@ -48,8 +48,8 @@ _0810B736:
 	bx r1
 	thumb_func_end sub_810B6F4
 
-	thumb_func_start sub_810B73C
-sub_810B73C: @ 810B73C
+	thumb_func_start IsCurMapPokeCenter
+IsCurMapPokeCenter: @ 810B73C
 	push {lr}
 	ldr r0, _0810B748 @ =gUnknown_845303C
 	bl sub_810B6F4
@@ -57,10 +57,10 @@ sub_810B73C: @ 810B73C
 	bx r1
 	.align 2, 0
 _0810B748: .4byte gUnknown_845303C
-	thumb_func_end sub_810B73C
+	thumb_func_end IsCurMapPokeCenter
 
-	thumb_func_start sub_810B74C
-sub_810B74C: @ 810B74C
+	thumb_func_start IsCurMapReloadLocation
+IsCurMapReloadLocation: @ 810B74C
 	push {lr}
 	ldr r0, _0810B758 @ =gUnknown_8453092
 	bl sub_810B6F4
@@ -68,7 +68,7 @@ sub_810B74C: @ 810B74C
 	bx r1
 	.align 2, 0
 _0810B758: .4byte gUnknown_8453092
-	thumb_func_end sub_810B74C
+	thumb_func_end IsCurMapReloadLocation
 
 	thumb_func_start sub_810B75C
 sub_810B75C: @ 810B75C
@@ -81,10 +81,10 @@ sub_810B75C: @ 810B75C
 _0810B768: .4byte gUnknown_8453094
 	thumb_func_end sub_810B75C
 
-	thumb_func_start sub_810B76C
-sub_810B76C: @ 810B76C
+	thumb_func_start TrySetPokeCenterWarpStatus
+TrySetPokeCenterWarpStatus: @ 810B76C
 	push {lr}
-	bl sub_810B73C
+	bl IsCurMapPokeCenter
 	cmp r0, 0
 	bne _0810B788
 	ldr r0, _0810B784 @ =gUnknown_300500C
@@ -107,12 +107,12 @@ _0810B792:
 	bx r0
 	.align 2, 0
 _0810B798: .4byte gUnknown_300500C
-	thumb_func_end sub_810B76C
+	thumb_func_end TrySetPokeCenterWarpStatus
 
-	thumb_func_start sub_810B79C
-sub_810B79C: @ 810B79C
+	thumb_func_start TrySetReloadWarpStatus
+TrySetReloadWarpStatus: @ 810B79C
 	push {lr}
-	bl sub_810B74C
+	bl IsCurMapReloadLocation
 	cmp r0, 0
 	bne _0810B7B8
 	ldr r0, _0810B7B4 @ =gUnknown_300500C
@@ -135,7 +135,7 @@ _0810B7C2:
 	bx r0
 	.align 2, 0
 _0810B7C8: .4byte gUnknown_300500C
-	thumb_func_end sub_810B79C
+	thumb_func_end TrySetReloadWarpStatus
 
 	thumb_func_start sub_810B7CC
 sub_810B7CC: @ 810B7CC
@@ -165,15 +165,15 @@ _0810B7F2:
 _0810B7F8: .4byte gUnknown_300500C
 	thumb_func_end sub_810B7CC
 
-	thumb_func_start sub_810B7FC
-sub_810B7FC: @ 810B7FC
+	thumb_func_start TrySetMapSaveWarpStatus
+TrySetMapSaveWarpStatus: @ 810B7FC
 	push {lr}
-	bl sub_810B76C
-	bl sub_810B79C
+	bl TrySetPokeCenterWarpStatus
+	bl TrySetReloadWarpStatus
 	bl sub_810B7CC
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810B7FC
+	thumb_func_end TrySetMapSaveWarpStatus
 
 	thumb_func_start sub_810B810
 sub_810B810: @ 810B810

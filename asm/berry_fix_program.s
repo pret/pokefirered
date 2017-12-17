@@ -64,10 +64,10 @@ sub_815F74C: @ 815F74C
 	ldr r0, _0815F7C4 @ =0x0000ffff
 	bl sub_8000B94
 	movs r0, 0x1
-	bl sub_8000B68
+	bl EnableInterrupts
 	bl m4aSoundVSyncOff
 	movs r0, 0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r4, 0
 	str r4, [sp]
 	ldr r0, _0815F7C8 @ =0x040000d4
@@ -88,14 +88,14 @@ sub_815F74C: @ 815F74C
 	ldr r1, _0815F7D0 @ =0x85000100
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl sub_8006B10
-	bl sub_80773BC
-	bl sub_8087E64
+	bl ResetSpriteData
+	bl ResetTasks
+	bl remove_some_task
 	ldr r0, _0815F7D4 @ =gUnknown_3005ECC
 	strb r4, [r0]
 	ldr r0, _0815F7D8 @ =sub_815F7F0
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0815F7DC @ =gUnknown_3005090
@@ -105,7 +105,7 @@ sub_815F74C: @ 815F74C
 	adds r1, r2
 	strh r4, [r1, 0x8]
 	ldr r0, _0815F7E0 @ =sub_815F7E4
-	bl sub_8000544
+	bl SetMainCallback2
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -124,7 +124,7 @@ _0815F7E0: .4byte sub_815F7E4
 	thumb_func_start sub_815F7E4
 sub_815F7E4: @ 815F7E4
 	push {lr}
-	bl sub_8077578
+	bl RunTasks
 	pop {r0}
 	bx r0
 	thumb_func_end sub_815F7E4
@@ -216,7 +216,7 @@ _0815F890:
 	adds r1, 0x4B
 	movs r4, 0
 	strb r4, [r1]
-	bl sub_800BC20
+	bl MultiBootInit
 	strh r4, [r5, 0x2]
 	movs r0, 0x5
 	b _0815F9A4
@@ -256,7 +256,7 @@ _0815F8C8:
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x4
-	bl sub_800C0BC
+	bl MultiBootStartMaster
 	strh r6, [r5, 0x2]
 	movs r0, 0x6
 	b _0815F9A4
@@ -270,7 +270,7 @@ _0815F920:
 	strh r0, [r5, 0x2]
 _0815F924:
 	adds r0, r4, 0
-	bl sub_800BC5C
+	bl MultiBootMain
 	ldr r1, _0815F930 @ =gUnknown_3005EF4
 	str r0, [r1]
 	b _0815F9A6
@@ -279,11 +279,11 @@ _0815F930: .4byte gUnknown_3005EF4
 _0815F934:
 	ldr r4, _0815F954 @ =gUnknown_3005F00
 	adds r0, r4, 0
-	bl sub_800BC5C
+	bl MultiBootMain
 	ldr r1, _0815F958 @ =gUnknown_3005EF4
 	str r0, [r1]
 	adds r0, r4, 0
-	bl sub_800C180
+	bl MultiBootCheckComplete
 	cmp r0, 0
 	beq _0815F95C
 	movs r0, 0x3
@@ -312,7 +312,7 @@ _0815F96E:
 	cmp r0, 0
 	beq _0815F9A6
 	adds r0, r2, 0
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_80008D8
 	b _0815F9A6
 	.align 2, 0

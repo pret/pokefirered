@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80DAD7C
-sub_80DAD7C: @ 80DAD7C
+	thumb_func_start SetUpReflection
+SetUpReflection: @ 80DAD7C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -20,7 +20,7 @@ sub_80DAD7C: @ 80DAD7C
 	ldrsh r2, [r4, r0]
 	adds r0, r4, 0
 	movs r3, 0x98
-	bl sub_805FB6C
+	bl obj_unfreeze
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -55,7 +55,7 @@ sub_80DAD7C: @ 80DAD7C
 	str r0, [r7, 0x8]
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080DAE3C @ =gUnknown_8231CFC
 	str r0, [r7, 0x10]
 	mov r1, r8
@@ -77,7 +77,7 @@ sub_80DAD7C: @ 80DAD7C
 	strh r5, [r7, 0x3C]
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_80DAE54
+	bl npc_pal_op
 	cmp r5, 0
 	bne _080DAE22
 	ldrb r0, [r7, 0x1]
@@ -99,7 +99,7 @@ _080DAE30: .4byte sub_80DAF50
 _080DAE34: .4byte gUnknown_835B934
 _080DAE38: .4byte gUnknown_8231CF0
 _080DAE3C: .4byte gUnknown_8231CFC
-	thumb_func_end sub_80DAD7C
+	thumb_func_end SetUpReflection
 
 	thumb_func_start sub_80DAE40
 sub_80DAE40: @ 80DAE40
@@ -114,8 +114,8 @@ sub_80DAE40: @ 80DAE40
 	bx r1
 	thumb_func_end sub_80DAE40
 
-	thumb_func_start sub_80DAE54
-sub_80DAE54: @ 80DAE54
+	thumb_func_start npc_pal_op
+npc_pal_op: @ 80DAE54
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -154,7 +154,7 @@ _080DAE96:
 	ldrb r1, [r4, 0x5]
 	lsrs r1, 4
 	adds r0, r5, 0
-	bl sub_80DAF20
+	bl npc_pal_op_A
 	b _080DAEBA
 	.align 2, 0
 _080DAEAC: .4byte gUnknown_83FECCC
@@ -162,16 +162,16 @@ _080DAEB0:
 	ldrb r1, [r4, 0x5]
 	lsrs r1, 4
 	adds r0, r5, 0
-	bl sub_80DAEC4
+	bl npc_pal_op_B
 _080DAEBA:
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DAE54
+	thumb_func_end npc_pal_op
 
-	thumb_func_start sub_80DAEC4
-sub_80DAEC4: @ 80DAEC4
+	thumb_func_start npc_pal_op_B
+npc_pal_op_B: @ 80DAEC4
 	push {r4,lr}
 	lsls r1, 24
 	lsrs r4, r1, 24
@@ -189,7 +189,7 @@ sub_80DAEC4: @ 80DAEC4
 	bne _080DAEF4
 	ldrh r0, [r2, 0x2]
 	adds r1, r4, 0
-	bl sub_805F5E8
+	bl npc_load_two_palettes__no_record
 	b _080DAF12
 	.align 2, 0
 _080DAEF0: .4byte 0x000011ff
@@ -198,7 +198,7 @@ _080DAEF4:
 	bne _080DAF02
 	ldrh r0, [r2, 0x2]
 	adds r1, r4, 0
-	bl sub_805F658
+	bl npc_load_two_palettes__and_record
 	b _080DAF12
 _080DAF02:
 	adds r0, r4, 0
@@ -206,7 +206,7 @@ _080DAF02:
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
-	bl sub_805F538
+	bl pal_patch_for_npc
 _080DAF12:
 	adds r0, r4, 0
 	bl sub_807AA8C
@@ -214,10 +214,10 @@ _080DAF18:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DAEC4
+	thumb_func_end npc_pal_op_B
 
-	thumb_func_start sub_80DAF20
-sub_80DAF20: @ 80DAF20
+	thumb_func_start npc_pal_op_A
+npc_pal_op_A: @ 80DAF20
 	push {r4,lr}
 	lsls r1, 24
 	lsrs r4, r1, 24
@@ -230,7 +230,7 @@ sub_80DAF20: @ 80DAF20
 	beq _080DAF44
 	adds r0, r1, 0
 	adds r1, r4, 0
-	bl sub_805F538
+	bl pal_patch_for_npc
 	adds r0, r4, 0
 	bl sub_807AA8C
 _080DAF44:
@@ -239,7 +239,7 @@ _080DAF44:
 	bx r0
 	.align 2, 0
 _080DAF4C: .4byte 0x000011ff
-	thumb_func_end sub_80DAF20
+	thumb_func_end npc_pal_op_A
 
 	thumb_func_start sub_80DAF50
 sub_80DAF50: @ 80DAF50
@@ -437,7 +437,7 @@ sub_80DB0C4: @ 80DB0C4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
@@ -471,8 +471,8 @@ _080DB10C: .4byte gUnknown_83A0010
 _080DB110: .4byte gUnknown_202063C
 	thumb_func_end sub_80DB0C4
 
-	thumb_func_start sub_80DB114
-sub_80DB114: @ 80DB114
+	thumb_func_start objid_set_invisible
+objid_set_invisible: @ 80DB114
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080DB130 @ =gUnknown_202063C
@@ -488,7 +488,7 @@ sub_80DB114: @ 80DB114
 	bx lr
 	.align 2, 0
 _080DB130: .4byte gUnknown_202063C
-	thumb_func_end sub_80DB114
+	thumb_func_end objid_set_invisible
 
 	thumb_func_start sub_80DB134
 sub_80DB134: @ 80DB134
@@ -565,7 +565,7 @@ _080DB17E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _080DB1CA:
 	add sp, 0x4
 	pop {r3}
@@ -577,14 +577,14 @@ _080DB1CA:
 _080DB1D8: .4byte gUnknown_202063C
 	thumb_func_end sub_80DB134
 
-	thumb_func_start sub_80DB1DC
-sub_80DB1DC: @ 80DB1DC
+	thumb_func_start oei_shadow
+oei_shadow: @ 80DB1DC
 	push {r4,r5,lr}
 	ldr r5, _080DB268 @ =gUnknown_20386E0
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080DB26C @ =gUnknown_2036E38
@@ -608,7 +608,7 @@ sub_80DB1DC: @ 80DB1DC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x94
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -654,10 +654,10 @@ _080DB270: .4byte gUnknown_83A0010
 _080DB274: .4byte gUnknown_83FECD2
 _080DB278: .4byte gUnknown_202063C
 _080DB27C: .4byte gUnknown_83FECD6
-	thumb_func_end sub_80DB1DC
+	thumb_func_end oei_shadow
 
-	thumb_func_start sub_80DB280
-sub_80DB280: @ 80DB280
+	thumb_func_start oamc_shadow
+oamc_shadow: @ 80DB280
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -671,13 +671,13 @@ sub_80DB280: @ 80DB280
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB2AE
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DB334
 _080DB2AE:
 	mov r0, sp
@@ -741,7 +741,7 @@ _080DB2AE:
 _080DB32C:
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_80836D8
+	bl FieldEffectStop
 _080DB334:
 	add sp, 0x4
 	pop {r4,r5}
@@ -751,10 +751,10 @@ _080DB334:
 _080DB33C: .4byte gUnknown_2036E38
 _080DB340: .4byte gUnknown_202063C
 _080DB344: .4byte 0x00400001
-	thumb_func_end sub_80DB280
+	thumb_func_end oamc_shadow
 
-	thumb_func_start sub_80DB348
-sub_80DB348: @ 80DB348
+	thumb_func_start oei_grass_normal
+oei_grass_normal: @ 80DB348
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _080DB3E0 @ =gUnknown_20386E0
@@ -778,7 +778,7 @@ sub_80DB348: @ 80DB348
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -821,7 +821,7 @@ sub_80DB348: @ 80DB348
 	beq _080DB3D4
 	adds r0, r3, 0
 	movs r1, 0x4
-	bl sub_80083C0
+	bl SeekSpriteAnim
 _080DB3D4:
 	movs r0, 0
 	add sp, 0x4
@@ -832,10 +832,10 @@ _080DB3D4:
 _080DB3E0: .4byte gUnknown_20386E0
 _080DB3E4: .4byte gUnknown_83A0010
 _080DB3E8: .4byte gUnknown_202063C
-	thumb_func_end sub_80DB348
+	thumb_func_end oei_grass_normal
 
-	thumb_func_start sub_80DB3EC
-sub_80DB3EC: @ 80DB3EC
+	thumb_func_start unc_grass_normal
+unc_grass_normal: @ 80DB3EC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -895,7 +895,7 @@ _080DB438:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB48C
@@ -918,7 +918,7 @@ _080DB438:
 _080DB48C:
 	adds r0, r5, 0
 	movs r1, 0x4
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DB4E4
 	.align 2, 0
 _080DB498: .4byte gUnknown_2036E18
@@ -967,7 +967,7 @@ _080DB4E4:
 	bx r0
 	.align 2, 0
 _080DB4F0: .4byte gUnknown_2036E38
-	thumb_func_end sub_80DB3EC
+	thumb_func_end unc_grass_normal
 
 	thumb_func_start sub_80DB4F4
 sub_80DB4F4: @ 80DB4F4
@@ -985,7 +985,7 @@ sub_80DB4F4: @ 80DB4F4
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1059,7 +1059,7 @@ _080DB588:
 	cmp r0, 0
 	beq _080DB5DC
 	ldr r1, [r2, 0x1C]
-	ldr r0, _080DB5D8 @ =sub_80DB3EC
+	ldr r0, _080DB5D8 @ =unc_grass_normal
 	cmp r1, r0
 	bne _080DB5DC
 	movs r1, 0x30
@@ -1087,7 +1087,7 @@ _080DB588:
 	b _080DB5E8
 	.align 2, 0
 _080DB5D4: .4byte gUnknown_202063C
-_080DB5D8: .4byte sub_80DB3EC
+_080DB5D8: .4byte unc_grass_normal
 _080DB5DC:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1128,7 +1128,7 @@ sub_80DB5F4: @ 80DB5F4
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1145,7 +1145,7 @@ sub_80DB5F4: @ 80DB5F4
 	orrs r0, r1
 	strb r0, [r2]
 	ldrb r0, [r5, 0x8]
-	bl sub_8068294
+	bl ZCoordToPriority
 	movs r1, 0x3
 	ands r1, r0
 	lsls r1, 2
@@ -1172,7 +1172,7 @@ sub_80DB5F4: @ 80DB5F4
 	beq _080DB684
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl sub_80083C0
+	bl SeekSpriteAnim
 _080DB684:
 	movs r0, 0
 	add sp, 0x4
@@ -1185,8 +1185,8 @@ _080DB694: .4byte gUnknown_83A0010
 _080DB698: .4byte gUnknown_202063C
 	thumb_func_end sub_80DB5F4
 
-	thumb_func_start sub_80DB69C
-sub_80DB69C: @ 80DB69C
+	thumb_func_start unc_grass_tall
+unc_grass_tall: @ 80DB69C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1246,7 +1246,7 @@ _080DB6E8:
 	adds r1, r7, 0
 	adds r2, r6, 0
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB73C
@@ -1269,7 +1269,7 @@ _080DB6E8:
 _080DB73C:
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DB786
 	.align 2, 0
 _080DB748: .4byte gUnknown_2036E18
@@ -1310,7 +1310,7 @@ _080DB786:
 	bx r0
 	.align 2, 0
 _080DB794: .4byte gUnknown_2036E38
-	thumb_func_end sub_80DB69C
+	thumb_func_end unc_grass_tall
 
 	thumb_func_start sub_80DB798
 sub_80DB798: @ 80DB798
@@ -1328,7 +1328,7 @@ sub_80DB798: @ 80DB798
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1376,7 +1376,7 @@ sub_80DB808: @ 80DB808
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -1389,7 +1389,7 @@ sub_80DB808: @ 80DB808
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1468,7 +1468,7 @@ sub_80DB8AC: @ 80DB8AC
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB8EA
@@ -1486,7 +1486,7 @@ sub_80DB8AC: @ 80DB8AC
 _080DB8EA:
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DB98E
 	.align 2, 0
 _080DB8F4: .4byte gUnknown_2036E38
@@ -1532,7 +1532,7 @@ _080DB934:
 	beq _080DB94E
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _080DB94E:
 	strh r7, [r4, 0x20]
 	strh r5, [r4, 0x22]
@@ -1592,7 +1592,7 @@ sub_80DB9A0: @ 80DB9A0
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1621,7 +1621,7 @@ sub_80DB9A0: @ 80DB9A0
 	movs r1, 0xD
 	strh r1, [r0, 0x3C]
 	ldrb r1, [r4, 0x10]
-	bl sub_800838C
+	bl StartSpriteAnim
 _080DB9FE:
 	movs r0, 0
 	pop {r4}
@@ -1649,7 +1649,7 @@ sub_80DBA14: @ 80DBA14
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r5, r1, 0
@@ -1679,7 +1679,7 @@ sub_80DBA14: @ 80DBA14
 	movs r1, 0x18
 	strh r1, [r0, 0x3C]
 	ldrb r1, [r4, 0x10]
-	bl sub_800838C
+	bl StartSpriteAnim
 _080DBA74:
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -1707,7 +1707,7 @@ sub_80DBA88: @ 80DBA88
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r5, r1, 0
@@ -1737,7 +1737,7 @@ sub_80DBA88: @ 80DBA88
 	movs r1, 0x23
 	strh r1, [r0, 0x3C]
 	ldrb r1, [r4, 0x10]
-	bl sub_800838C
+	bl StartSpriteAnim
 _080DBAE8:
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -1819,7 +1819,7 @@ sub_80DBB3C: @ 80DBB3C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80836D8
+	bl FieldEffectStop
 _080DBB80:
 	pop {r4}
 	pop {r0}
@@ -1833,7 +1833,7 @@ sub_80DBB88: @ 80DBB88
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -1846,7 +1846,7 @@ sub_80DBB88: @ 80DBB88
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x40
@@ -1926,14 +1926,14 @@ sub_80DBC2C: @ 80DBC2C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DBC66
 _080DBC5C:
 	adds r0, r4, 0
 	movs r1, 0xF
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DBCA6
 _080DBC66:
 	ldr r3, _080DBCB0 @ =gUnknown_202063C
@@ -1993,7 +1993,7 @@ sub_80DBCB8: @ 80DBCB8
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2034,8 +2034,8 @@ _080DBD20: .4byte gUnknown_83A0010
 _080DBD24: .4byte gUnknown_202063C
 	thumb_func_end sub_80DBCB8
 
-	thumb_func_start sub_80DBD28
-sub_80DBD28: @ 80DBD28
+	thumb_func_start oei_water_drop_tall
+oei_water_drop_tall: @ 80DBD28
 	push {r4,lr}
 	ldr r4, _080DBD8C @ =gUnknown_20386E0
 	adds r1, r4, 0x4
@@ -2050,7 +2050,7 @@ sub_80DBD28: @ 80DBD28
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2089,7 +2089,7 @@ _080DBD84:
 _080DBD8C: .4byte gUnknown_20386E0
 _080DBD90: .4byte gUnknown_83A0010
 _080DBD94: .4byte gUnknown_202063C
-	thumb_func_end sub_80DBD28
+	thumb_func_end oei_water_drop_tall
 
 	thumb_func_start sub_80DBD98
 sub_80DBD98: @ 80DBD98
@@ -2098,7 +2098,7 @@ sub_80DBD98: @ 80DBD98
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -2111,7 +2111,7 @@ sub_80DBD98: @ 80DBD98
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -2163,7 +2163,7 @@ sub_80DBD98: @ 80DBD98
 	subs r1, 0x4
 	strh r1, [r0, 0x26]
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _080DBE2E:
 	movs r0, 0
 	pop {r4-r7}
@@ -2193,7 +2193,7 @@ sub_80DBE50: @ 80DBE50
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DBE8A
@@ -2211,7 +2211,7 @@ sub_80DBE50: @ 80DBE50
 _080DBE8A:
 	adds r0, r4, 0
 	movs r1, 0x22
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DBEE2
 	.align 2, 0
 _080DBE94: .4byte gUnknown_2036E38
@@ -2260,8 +2260,8 @@ _080DBEE2:
 _080DBEEC: .4byte gUnknown_202063C
 	thumb_func_end sub_80DBE50
 
-	thumb_func_start sub_80DBEF0
-sub_80DBEF0: @ 80DBEF0
+	thumb_func_start oei_ripples
+oei_ripples: @ 80DBEF0
 	push {r4,lr}
 	ldr r0, _080DBF44 @ =gUnknown_83A0010
 	ldr r0, [r0, 0x14]
@@ -2271,7 +2271,7 @@ sub_80DBEF0: @ 80DBEF0
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2308,7 +2308,7 @@ _080DBF3C:
 _080DBF44: .4byte gUnknown_83A0010
 _080DBF48: .4byte gUnknown_20386E0
 _080DBF4C: .4byte gUnknown_202063C
-	thumb_func_end sub_80DBEF0
+	thumb_func_end oei_ripples
 
 	thumb_func_start sub_80DBF50
 sub_80DBF50: @ 80DBF50
@@ -2317,7 +2317,7 @@ sub_80DBF50: @ 80DBF50
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -2330,7 +2330,7 @@ sub_80DBF50: @ 80DBF50
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2407,7 +2407,7 @@ sub_80DBFF4: @ 80DBFF4
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DC02E
@@ -2425,7 +2425,7 @@ sub_80DBFF4: @ 80DBFF4
 _080DC02E:
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DC080
 	.align 2, 0
 _080DC038: .4byte gUnknown_2036E38
@@ -2487,7 +2487,7 @@ sub_80DC08C: @ 80DC08C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2542,7 +2542,7 @@ sub_80DC0F8: @ 80DC0F8
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2597,7 +2597,7 @@ sub_80DC164: @ 80DC164
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2652,7 +2652,7 @@ sub_80DC1D0: @ 80DC1D0
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2691,8 +2691,8 @@ _080DC234: .4byte gUnknown_83A0010
 _080DC238: .4byte gUnknown_202063C
 	thumb_func_end sub_80DC1D0
 
-	thumb_func_start sub_80DC23C
-sub_80DC23C: @ 80DC23C
+	thumb_func_start ash
+ash: @ 80DC23C
 	push {r4,lr}
 	lsls r2, 16
 	lsrs r2, 16
@@ -2712,16 +2712,16 @@ sub_80DC23C: @ 80DC23C
 	asrs r3, 16
 	str r3, [r4, 0x14]
 	movs r0, 0x7
-	bl sub_8083444
+	bl FieldEffectStart
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080DC26C: .4byte gUnknown_20386E0
-	thumb_func_end sub_80DC23C
+	thumb_func_end ash
 
-	thumb_func_start sub_80DC270
-sub_80DC270: @ 80DC270
+	thumb_func_start oei_ash
+oei_ash: @ 80DC270
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _080DC2F0 @ =gUnknown_20386E0
@@ -2745,7 +2745,7 @@ sub_80DC270: @ 80DC270
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r5, 0x8]
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2789,7 +2789,7 @@ _080DC2E6:
 _080DC2F0: .4byte gUnknown_20386E0
 _080DC2F4: .4byte gUnknown_83A0010
 _080DC2F8: .4byte gUnknown_202063C
-	thumb_func_end sub_80DC270
+	thumb_func_end oei_ash
 
 	thumb_func_start sub_80DC2FC
 sub_80DC2FC: @ 80DC2FC
@@ -2862,7 +2862,7 @@ sub_80DC348: @ 80DC348
 	ldrsh r0, [r4, r1]
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
-	bl sub_805A8E8
+	bl CurrentMapDrawMetatileAt
 	ldr r2, _080DC3A0 @ =gUnknown_2036E38
 	ldr r0, _080DC3A4 @ =gUnknown_2037078
 	ldrb r1, [r0, 0x5]
@@ -2899,7 +2899,7 @@ sub_80DC3A8: @ 80DC3A8
 	beq _080DC3C8
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl sub_80836D8
+	bl FieldEffectStop
 _080DC3C8:
 	pop {r4}
 	pop {r0}
@@ -2922,7 +2922,7 @@ sub_80DC3D0: @ 80DC3D0
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0x96
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
@@ -2954,7 +2954,7 @@ sub_80DC3D0: @ 80DC3D0
 	strh r0, [r1, 0x3C]
 _080DC42C:
 	movs r0, 0x8
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	adds r0, r5, 0
 	pop {r4,r5}
 	pop {r1}
@@ -3136,7 +3136,7 @@ sub_80DC550: @ 80DC550
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl sub_80083A4
+	bl StartSpriteAnimIfDifferent
 _080DC57C:
 	add sp, 0x8
 	pop {r4,r5}
@@ -3192,12 +3192,12 @@ _080DC5D6:
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r7, 0
-	bl sub_8063A20
+	bl MoveCoords
 	movs r1, 0
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_8058D44
+	bl MapGridGetZCoordAt
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -3316,7 +3316,7 @@ sub_80DC6B0: @ 80DC6B0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -3400,7 +3400,7 @@ sub_80DC740: @ 80DC740
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3448,7 +3448,7 @@ sub_80DC7B0: @ 80DC7B0
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -3461,7 +3461,7 @@ sub_80DC7B0: @ 80DC7B0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x40
@@ -3520,7 +3520,7 @@ sub_80DC7B0: @ 80DC7B0
 	subs r1, 0x2
 	strh r1, [r0, 0x26]
 	movs r1, 0x2
-	bl sub_80083C0
+	bl SeekSpriteAnim
 _080DC854:
 	movs r0, 0
 	pop {r4-r7}
@@ -3548,7 +3548,7 @@ sub_80DC86C: @ 80DC86C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DC8A6
@@ -3566,7 +3566,7 @@ sub_80DC86C: @ 80DC86C
 _080DC8A6:
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DC926
 	.align 2, 0
 _080DC8B0: .4byte gUnknown_2036E38
@@ -3603,7 +3603,7 @@ _080DC8DC:
 	beq _080DC8F6
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _080DC8F6:
 	strh r6, [r4, 0x20]
 	strh r5, [r4, 0x22]
@@ -3655,7 +3655,7 @@ sub_80DC938: @ 80DC938
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0x52
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3714,7 +3714,7 @@ sub_80DC99C: @ 80DC99C
 	beq _080DC9D0
 	adds r0, r4, 0
 	movs r1, 0x35
-	bl sub_80836D8
+	bl FieldEffectStop
 _080DC9D0:
 	pop {r4}
 	pop {r0}
@@ -3729,41 +3729,41 @@ sub_80DC9DC: @ 80DC9DC
 	bx lr
 	thumb_func_end sub_80DC9DC
 
-	thumb_func_start sub_80DC9E0
-sub_80DC9E0: @ 80DC9E0
+	thumb_func_start ShowTreeDisguiseFieldEffect
+ShowTreeDisguiseFieldEffect: @ 80DC9E0
 	push {lr}
 	movs r0, 0x1C
 	movs r1, 0x18
 	movs r2, 0x4
-	bl sub_80DCA10
+	bl ShowDisguiseFieldEffect
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DC9E0
+	thumb_func_end ShowTreeDisguiseFieldEffect
 
-	thumb_func_start sub_80DC9F0
-sub_80DC9F0: @ 80DC9F0
+	thumb_func_start ShowMountainDisguiseFieldEffect
+ShowMountainDisguiseFieldEffect: @ 80DC9F0
 	push {lr}
 	movs r0, 0x1D
 	movs r1, 0x19
 	movs r2, 0x3
-	bl sub_80DCA10
+	bl ShowDisguiseFieldEffect
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DC9F0
+	thumb_func_end ShowMountainDisguiseFieldEffect
 
-	thumb_func_start sub_80DCA00
-sub_80DCA00: @ 80DCA00
+	thumb_func_start ShowSandDisguiseFieldEffect
+ShowSandDisguiseFieldEffect: @ 80DCA00
 	push {lr}
 	movs r0, 0x24
 	movs r1, 0x1C
 	movs r2, 0x2
-	bl sub_80DCA10
+	bl ShowDisguiseFieldEffect
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DCA00
+	thumb_func_end ShowSandDisguiseFieldEffect
 
-	thumb_func_start sub_80DCA10
-sub_80DCA10: @ 80DCA10
+	thumb_func_start ShowDisguiseFieldEffect
+ShowDisguiseFieldEffect: @ 80DCA10
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3780,12 +3780,12 @@ sub_80DCA10: @ 80DCA10
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DCA48
 	adds r0, r4, 0
-	bl sub_80837FC
+	bl FieldEffectActiveListRemove
 	movs r0, 0x40
 	b _080DCAB4
 	.align 2, 0
@@ -3798,7 +3798,7 @@ _080DCA48:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	mov r1, sp
 	strb r0, [r1]
 	lsls r0, 24
@@ -3855,7 +3855,7 @@ _080DCAB4:
 	.align 2, 0
 _080DCAC0: .4byte gUnknown_83A0010
 _080DCAC4: .4byte gUnknown_202063C
-	thumb_func_end sub_80DCA10
+	thumb_func_end ShowDisguiseFieldEffect
 
 	thumb_func_start sub_80DCAC8
 sub_80DCAC8: @ 80DCAC8
@@ -3872,7 +3872,7 @@ sub_80DCAC8: @ 80DCAC8
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DCAF8
@@ -3880,7 +3880,7 @@ sub_80DCAC8: @ 80DCAC8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_80836D8
+	bl FieldEffectStop
 _080DCAF8:
 	ldr r4, _080DCBB0 @ =gUnknown_2036E38
 	mov r0, sp
@@ -3943,7 +3943,7 @@ _080DCAF8:
 	strh r0, [r5, 0x2E]
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _080DCB78:
 	movs r3, 0x2E
 	ldrsh r0, [r5, r3]
@@ -3968,7 +3968,7 @@ _080DCB94:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_80836D8
+	bl FieldEffectStop
 _080DCBA8:
 	add sp, 0x4
 	pop {r4,r5}
@@ -4063,7 +4063,7 @@ sub_80DCC1C: @ 80DCC1C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0x52
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -4138,7 +4138,7 @@ _080DCCC4:
 	ble _080DCCDA
 	adds r0, r2, 0
 	movs r1, 0x36
-	bl sub_80836D8
+	bl FieldEffectStop
 _080DCCDA:
 	pop {r0}
 	bx r0
@@ -4158,7 +4158,7 @@ sub_80DCCE0: @ 80DCCE0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DCD14
 _080DCCFE:
 	adds r0, r4, 0
@@ -4169,7 +4169,7 @@ _080DCCFE:
 	lsrs r0, 24
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_80682F8
+	bl SetObjectSubpriorityByZCoord
 _080DCD14:
 	pop {r4}
 	pop {r0}
@@ -4190,7 +4190,7 @@ sub_80DCD1C: @ 80DCD1C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl sub_80836D8
+	bl FieldEffectStop
 	b _080DCD42
 _080DCD3A:
 	adds r0, r2, 0
@@ -4211,7 +4211,7 @@ sub_80DCD48: @ 80DCD48
 	lsls r2, 24
 	lsrs r2, 24
 	adds r1, r6, 0
-	bl sub_80682F8
+	bl SetObjectSubpriorityByZCoord
 	movs r7, 0
 _080DCD5E:
 	lsls r0, r7, 3

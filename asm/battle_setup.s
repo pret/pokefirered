@@ -44,11 +44,11 @@ _0807F65E:
 	bl sub_812B484
 	bl sub_80563F0
 	ldr r0, _0807F68C @ =sub_800FD9C
-	bl sub_8000544
+	bl SetMainCallback2
 	bl sub_806D7E8
 	bl sub_806D788
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _0807F686:
 	pop {r4,r5}
 	pop {r0}
@@ -68,7 +68,7 @@ sub_807F690: @ 807F690
 	lsrs r5, 16
 	ldr r0, _0807F6C4 @ =sub_807F620
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0807F6C8 @ =gUnknown_3005090
@@ -157,8 +157,8 @@ _0807F744:
 	thumb_func_start sub_807F748
 sub_807F748: @ 807F748
 	push {lr}
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	bl sub_805C780
 	ldr r1, _0807F780 @ =gUnknown_30030F0
 	ldr r0, _0807F784 @ =sub_807FB40
@@ -186,8 +186,8 @@ _0807F788: .4byte gUnknown_2022B4C
 	thumb_func_start sub_807F78C
 sub_807F78C: @ 807F78C
 	push {lr}
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	bl sub_805C780
 	ldr r1, _0807F7C8 @ =gUnknown_30030F0
 	ldr r0, _0807F7CC @ =sub_807FB40
@@ -217,8 +217,8 @@ _0807F7D4: .4byte 0x00000155
 	thumb_func_start sub_807F7D8
 sub_807F7D8: @ 807F7D8
 	push {lr}
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	bl sub_805C780
 	ldr r1, _0807F804 @ =gUnknown_30030F0
 	ldr r0, _0807F808 @ =sub_80A0F4C
@@ -242,8 +242,8 @@ _0807F80C: .4byte gUnknown_2022B4C
 	thumb_func_start sub_807F810
 sub_807F810: @ 807F810
 	push {lr}
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	bl sub_805C780
 	ldr r1, _0807F854 @ =gUnknown_30030F0
 	ldr r0, _0807F858 @ =sub_807FB40
@@ -297,10 +297,10 @@ sub_807F888: @ 807F888
 	ldr r0, _0807F8B4 @ =gUnknown_202402C
 	movs r1, 0xD
 	movs r2, 0x5
-	bl sub_803DF00
-	bl sub_8069940
+	bl CreateMaleMon
+	bl ScriptContext2_Enable
 	ldr r1, _0807F8B8 @ =gUnknown_30030F0
-	ldr r0, _0807F8BC @ =sub_80568E0
+	ldr r0, _0807F8BC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	str r0, [r1, 0x8]
 	ldr r1, _0807F8C0 @ =gUnknown_2022B4C
 	movs r0, 0x80
@@ -314,14 +314,14 @@ sub_807F888: @ 807F888
 	.align 2, 0
 _0807F8B4: .4byte gUnknown_202402C
 _0807F8B8: .4byte gUnknown_30030F0
-_0807F8BC: .4byte sub_80568E0
+_0807F8BC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _0807F8C0: .4byte gUnknown_2022B4C
 	thumb_func_end sub_807F888
 
 	thumb_func_start sub_807F8C4
 sub_807F8C4: @ 807F8C4
 	push {lr}
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _0807F8F8 @ =gUnknown_30030F0
 	ldr r0, _0807F8FC @ =sub_807FBA0
 	str r0, [r1, 0x8]
@@ -350,7 +350,7 @@ _0807F900: .4byte gUnknown_2022B4C
 sub_807F904: @ 807F904
 	push {lr}
 	sub sp, 0xC
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _0807F944 @ =gUnknown_30030F0
 	ldr r0, _0807F948 @ =sub_807FBF0
 	str r0, [r1, 0x8]
@@ -374,7 +374,7 @@ sub_807F904: @ 807F904
 	movs r1, 0x69
 	movs r2, 0x1E
 	movs r3, 0x1F
-	bl sub_803DE00
+	bl CreateMonWithGenderNatureLetter
 	b _0807F960
 	.align 2, 0
 _0807F944: .4byte gUnknown_30030F0
@@ -413,7 +413,7 @@ _0807F994: .4byte gUnknown_841D148
 	thumb_func_start sub_807F998
 sub_807F998: @ 807F998
 	push {lr}
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _0807F9CC @ =gUnknown_30030F0
 	ldr r0, _0807F9D0 @ =sub_807FBA0
 	str r0, [r1, 0x8]
@@ -441,7 +441,7 @@ _0807F9D4: .4byte gUnknown_2022B4C
 	thumb_func_start sub_807F9D8
 sub_807F9D8: @ 807F9D8
 	push {lr}
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _0807FA0C @ =gUnknown_30030F0
 	ldr r0, _0807FA10 @ =sub_807FBA0
 	str r0, [r1, 0x8]
@@ -451,7 +451,7 @@ sub_807F9D8: @ 807F9D8
 	str r0, [r1]
 	ldr r0, _0807FA18 @ =gUnknown_202402C
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r0, 0
@@ -513,7 +513,7 @@ _0807FA56:
 	thumb_func_start sub_807FA68
 sub_807FA68: @ 807FA68
 	push {lr}
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _0807FA90 @ =gUnknown_30030F0
 	ldr r0, _0807FA94 @ =sub_807FBA0
 	str r0, [r1, 0x8]
@@ -552,7 +552,7 @@ _0807FAAA:
 	thumb_func_start sub_807FABC
 sub_807FABC: @ 807FABC
 	push {lr}
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r1, _0807FAEC @ =gUnknown_30030F0
 	ldr r0, _0807FAF0 @ =sub_807FBA0
 	str r0, [r1, 0x8]
@@ -588,13 +588,13 @@ sub_807FAF8: @ 807FAF8
 	thumb_func_start sub_807FB08
 sub_807FB08: @ 807FB08
 	push {lr}
-	bl sub_8069940
-	bl sub_8068974
+	bl ScriptContext2_Enable
+	bl player_bitmagic
 	bl sub_805C780
 	ldr r1, _0807FB38 @ =gUnknown_30030F0
 	ldr r0, _0807FB3C @ =sub_807FAF8
 	str r0, [r1, 0x8]
-	bl sub_804C1F0
+	bl copy_player_party_to_sav1
 	bl sub_8159F40
 	bl sub_807FF34
 	lsls r0, 24
@@ -622,22 +622,22 @@ sub_807FB40: @ 807FB40
 	bl CpuSet
 	movs r0, 0
 	movs r1, 0x80
-	bl sub_80072E8
+	bl ResetOamRange
 	ldr r0, _0807FB78 @ =gUnknown_2023E8A
 	ldrb r0, [r0]
 	bl sub_80800D0
 	cmp r0, 0x1
 	bne _0807FB80
 	ldr r0, _0807FB7C @ =sub_80566A4
-	bl sub_8000544
+	bl SetMainCallback2
 	b _0807FB8C
 	.align 2, 0
 _0807FB74: .4byte 0x01000100
 _0807FB78: .4byte gUnknown_2023E8A
 _0807FB7C: .4byte sub_80566A4
 _0807FB80:
-	ldr r0, _0807FB94 @ =sub_80567DC
-	bl sub_8000544
+	ldr r0, _0807FB94 @ =c2_exit_to_overworld_2_switch
+	bl SetMainCallback2
 	ldr r1, _0807FB98 @ =gUnknown_3005020
 	ldr r0, _0807FB9C @ =sub_807E3EC
 	str r0, [r1]
@@ -646,7 +646,7 @@ _0807FB8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807FB94: .4byte sub_80567DC
+_0807FB94: .4byte c2_exit_to_overworld_2_switch
 _0807FB98: .4byte gUnknown_3005020
 _0807FB9C: .4byte sub_807E3EC
 	thumb_func_end sub_807FB40
@@ -665,28 +665,28 @@ sub_807FBA0: @ 807FBA0
 	bl CpuSet
 	movs r0, 0
 	movs r1, 0x80
-	bl sub_80072E8
+	bl ResetOamRange
 	ldr r0, _0807FBD8 @ =gUnknown_2023E8A
 	ldrb r0, [r0]
 	bl sub_80800D0
 	cmp r0, 0x1
 	bne _0807FBE0
 	ldr r0, _0807FBDC @ =sub_80566A4
-	bl sub_8000544
+	bl SetMainCallback2
 	b _0807FBE6
 	.align 2, 0
 _0807FBD4: .4byte 0x01000100
 _0807FBD8: .4byte gUnknown_2023E8A
 _0807FBDC: .4byte sub_80566A4
 _0807FBE0:
-	ldr r0, _0807FBEC @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _0807FBEC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 _0807FBE6:
 	add sp, 0x4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807FBEC: .4byte sub_80568E0
+_0807FBEC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_807FBA0
 
 	thumb_func_start sub_807FBF0
@@ -703,7 +703,7 @@ sub_807FBF0: @ 807FBF0
 	bl CpuSet
 	movs r0, 0
 	movs r1, 0x80
-	bl sub_80072E8
+	bl ResetOamRange
 	ldr r4, _0807FC28 @ =gUnknown_2023E8A
 	ldrb r0, [r4]
 	bl sub_80800D0
@@ -711,7 +711,7 @@ sub_807FBF0: @ 807FBF0
 	cmp r1, 0
 	beq _0807FC30
 	ldr r0, _0807FC2C @ =sub_80566A4
-	bl sub_8000544
+	bl SetMainCallback2
 	b _0807FC4C
 	.align 2, 0
 _0807FC24: .4byte 0x01000100
@@ -731,8 +731,8 @@ _0807FC40:
 	movs r0, 0x1
 	strh r0, [r1]
 _0807FC46:
-	ldr r0, _0807FC58 @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _0807FC58 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 _0807FC4C:
 	add sp, 0x4
 	pop {r4}
@@ -740,7 +740,7 @@ _0807FC4C:
 	bx r0
 	.align 2, 0
 _0807FC54: .4byte gUnknown_20370D0
-_0807FC58: .4byte sub_80568E0
+_0807FC58: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_807FBF0
 
 	thumb_func_start sub_807FC5C
@@ -751,7 +751,7 @@ sub_807FC5C: @ 807FC5C
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -862,7 +862,7 @@ _0807FD2C:
 	b _0807FD88
 _0807FD58:
 	movs r0, 0x8
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FD86
@@ -901,7 +901,7 @@ sub_807FD90: @ 807FD90
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -960,7 +960,7 @@ _0807FDFE:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	movs r0, 0xCE
 	lsls r0, 1
@@ -970,12 +970,12 @@ _0807FDFE:
 	beq _0807FE42
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0807FE42
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r7, r0
 	lsls r0, 24
 	lsrs r7, r0, 24
@@ -1131,7 +1131,7 @@ sub_807FF34: @ 807FF34
 	lsrs r5, r0, 24
 	ldr r0, _0807FF64 @ =gUnknown_202402C
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1286,7 +1286,7 @@ sub_8080060: @ 8080060
 	push {r4,lr}
 	ldr r0, _08080084 @ =gUnknown_202402C
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1511,7 +1511,7 @@ sub_80801F0: @ 80801F0
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	ldr r1, _08080224 @ =gUnknown_3005074
 	strb r0, [r1]
 _08080212:
@@ -1661,8 +1661,8 @@ sub_8080334: @ 8080334
 	adds r0, r1, 0
 	bl sub_8080228
 	ldr r0, _08080374 @ =gUnknown_81A4EB4
-	bl sub_8069AE4
-	bl sub_8069940
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1703,12 +1703,12 @@ sub_8080398: @ 8080398
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806365C
+	bl npc_running_behaviour_by_direction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063610
+	bl npc_set_running_behaviour_etc
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1770,8 +1770,8 @@ sub_8080410: @ 8080410
 	bx r0
 	thumb_func_end sub_8080410
 
-	thumb_func_start sub_8080424
-sub_8080424: @ 8080424
+	thumb_func_start HasTrainerAlreadyBeenFought
+HasTrainerAlreadyBeenFought: @ 8080424
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xA0
@@ -1783,10 +1783,10 @@ sub_8080424: @ 8080424
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8080424
+	thumb_func_end HasTrainerAlreadyBeenFought
 
-	thumb_func_start sub_808043C
-sub_808043C: @ 808043C
+	thumb_func_start trainer_flag_set
+trainer_flag_set: @ 808043C
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xA0
@@ -1796,10 +1796,10 @@ sub_808043C: @ 808043C
 	bl sub_806E680
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808043C
+	thumb_func_end trainer_flag_set
 
-	thumb_func_start sub_8080450
-sub_8080450: @ 8080450
+	thumb_func_start trainer_flag_clear
+trainer_flag_clear: @ 8080450
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xA0
@@ -1809,7 +1809,7 @@ sub_8080450: @ 8080450
 	bl sub_806E6A8
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080450
+	thumb_func_end trainer_flag_clear
 
 	thumb_func_start sub_8080464
 sub_8080464: @ 8080464
@@ -1836,7 +1836,7 @@ _0808048C:
 	ldr r0, _080804A8 @ =sub_80804AC
 	str r0, [r1, 0x8]
 	bl sub_807F868
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1878,14 +1878,14 @@ _080804E8:
 	movs r1, 0
 	strh r1, [r0]
 _080804EE:
-	ldr r0, _08080504 @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _08080504 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 	bl sub_80803FC
 	bl sub_81139BC
 	b _0808054E
 	.align 2, 0
 _08080500: .4byte gUnknown_20370D0
-_08080504: .4byte sub_80568E0
+_08080504: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _08080508:
 	ldr r0, _0808051C @ =gUnknown_20386AE
 	ldrh r1, [r0]
@@ -1893,12 +1893,12 @@ _08080508:
 	lsls r0, 3
 	cmp r1, r0
 	bne _08080524
-	ldr r0, _08080520 @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _08080520 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 	b _0808054E
 	.align 2, 0
 _0808051C: .4byte gUnknown_20386AE
-_08080520: .4byte sub_80568E0
+_08080520: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _08080524:
 	ldr r0, _08080538 @ =gUnknown_2023E8A
 	ldrb r0, [r0]
@@ -1907,21 +1907,21 @@ _08080524:
 	bne _08080540
 _08080530:
 	ldr r0, _0808053C @ =sub_80566A4
-	bl sub_8000544
+	bl SetMainCallback2
 	b _0808054E
 	.align 2, 0
 _08080538: .4byte gUnknown_2023E8A
 _0808053C: .4byte sub_80566A4
 _08080540:
-	ldr r0, _08080554 @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _08080554 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 	bl sub_80803FC
 	bl sub_81139BC
 _0808054E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080554: .4byte sub_80568E0
+_08080554: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_80804AC
 
 	thumb_func_start sub_8080558
@@ -1933,12 +1933,12 @@ sub_8080558: @ 8080558
 	lsls r0, 3
 	cmp r1, r0
 	bne _08080578
-	ldr r0, _08080574 @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _08080574 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 	b _080805A6
 	.align 2, 0
 _08080570: .4byte gUnknown_20386AE
-_08080574: .4byte sub_80568E0
+_08080574: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _08080578:
 	ldr r0, _0808058C @ =gUnknown_2023E8A
 	ldrb r0, [r0]
@@ -1946,14 +1946,14 @@ _08080578:
 	cmp r0, 0x1
 	bne _08080594
 	ldr r0, _08080590 @ =sub_80566A4
-	bl sub_8000544
+	bl SetMainCallback2
 	b _080805A6
 	.align 2, 0
 _0808058C: .4byte gUnknown_2023E8A
 _08080590: .4byte sub_80566A4
 _08080594:
-	ldr r0, _080805AC @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _080805AC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 	bl sub_80803FC
 	bl sub_810CDE8
 	bl sub_81138F8
@@ -1961,7 +1961,7 @@ _080805A6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080805AC: .4byte sub_80568E0
+_080805AC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_8080558
 
 	thumb_func_start sub_80805B0
@@ -1974,7 +1974,7 @@ sub_80805B0: @ 80805B0
 	ldr r0, _080805D4 @ =sub_8080558
 	str r0, [r1, 0x8]
 	bl sub_807F868
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2094,7 +2094,7 @@ _080806B4: .4byte 0x0000011d
 _080806B8:
 	ldr r0, _080806C4 @ =0x0000011b
 _080806BA:
-	bl sub_8071A74
+	bl PlayNewMapMusic
 _080806BE:
 	pop {r0}
 	bx r0

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80703A8
-sub_80703A8: @ 80703A8
+	thumb_func_start LoadCompressedPalette
+LoadCompressedPalette: @ 80703A8
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -15,7 +15,7 @@ sub_80703A8: @ 80703A8
 	lsls r5, 16
 	ldr r6, _080703E0 @ =gUnknown_2037ACC
 	adds r1, r6, 0
-	bl sub_800EBB4
+	bl LZDecompressWram
 	lsls r4, 1
 	ldr r1, _080703E4 @ =gUnknown_20371F8
 	adds r1, r4, r1
@@ -36,10 +36,10 @@ sub_80703A8: @ 80703A8
 _080703E0: .4byte gUnknown_2037ACC
 _080703E4: .4byte gUnknown_20371F8
 _080703E8: .4byte gUnknown_20375F8
-	thumb_func_end sub_80703A8
+	thumb_func_end LoadCompressedPalette
 
-	thumb_func_start sub_80703EC
-sub_80703EC: @ 80703EC
+	thumb_func_start LoadPalette
+LoadPalette: @ 80703EC
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r1, 0
@@ -64,10 +64,10 @@ sub_80703EC: @ 80703EC
 	.align 2, 0
 _0807041C: .4byte gUnknown_20371F8
 _08070420: .4byte gUnknown_20375F8
-	thumb_func_end sub_80703EC
+	thumb_func_end LoadPalette
 
-	thumb_func_start sub_8070424
-sub_8070424: @ 8070424
+	thumb_func_start FillPalette
+FillPalette: @ 8070424
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
@@ -104,10 +104,10 @@ sub_8070424: @ 8070424
 	.align 2, 0
 _0807046C: .4byte gUnknown_20371F8
 _08070470: .4byte gUnknown_20375F8
-	thumb_func_end sub_8070424
+	thumb_func_end FillPalette
 
-	thumb_func_start sub_8070474
-sub_8070474: @ 8070474
+	thumb_func_start TransferPlttBuffer
+TransferPlttBuffer: @ 8070474
 	push {r4,r5,lr}
 	ldr r4, _080704BC @ =gUnknown_2037AB8
 	ldrb r1, [r4, 0x8]
@@ -139,7 +139,7 @@ sub_8070474: @ 8070474
 	ands r0, r1
 	cmp r0, 0
 	beq _080704B6
-	bl sub_807141C
+	bl UpdateBlendRegisters
 _080704B6:
 	pop {r4,r5}
 	pop {r0}
@@ -150,10 +150,10 @@ _080704C0: .4byte gUnknown_20375F8
 _080704C4: .4byte 0x040000d4
 _080704C8: .4byte 0x80000200
 _080704CC: .4byte gUnknown_2037AC8
-	thumb_func_end sub_8070474
+	thumb_func_end TransferPlttBuffer
 
-	thumb_func_start sub_80704D0
-sub_80704D0: @ 80704D0
+	thumb_func_start UpdatePaletteFade
+UpdatePaletteFade: @ 80704D0
 	push {lr}
 	ldr r0, _080704E0 @ =gUnknown_2037AC8
 	ldr r0, [r0]
@@ -170,17 +170,17 @@ _080704E4:
 	ands r1, r0
 	cmp r1, 0
 	bne _080704FC
-	bl sub_8070B8C
+	bl UpdateNormalPaletteFade
 	b _0807050A
 	.align 2, 0
 _080704F8: .4byte gUnknown_2037AB8
 _080704FC:
 	cmp r1, 0x1
 	bne _08070506
-	bl sub_8070EEC
+	bl UpdateFastPaletteFade
 	b _0807050A
 _08070506:
-	bl sub_8071300
+	bl UpdateHardwarePaletteFade
 _0807050A:
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -197,28 +197,28 @@ _0807051C:
 	.align 2, 0
 _08070520: .4byte gUnknown_2037AC8
 _08070524: .4byte gUnknown_2037AB8
-	thumb_func_end sub_80704D0
+	thumb_func_end UpdatePaletteFade
 
-	thumb_func_start sub_8070528
-sub_8070528: @ 8070528
+	thumb_func_start ResetPaletteFade
+ResetPaletteFade: @ 8070528
 	push {r4,lr}
 	movs r4, 0
 _0807052C:
 	adds r0, r4, 0
-	bl sub_8070A28
+	bl ResetPaletteStruct
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xF
 	bls _0807052C
-	bl sub_8070A84
+	bl ResetPaletteFadeControl
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8070528
+	thumb_func_end ResetPaletteFade
 
-	thumb_func_start sub_8070548
-sub_8070548: @ 8070548
+	thumb_func_start ReadPlttIntoBuffers
+ReadPlttIntoBuffers: @ 8070548
 	push {r4-r7,lr}
 	movs r0, 0xA0
 	lsls r0, 19
@@ -249,10 +249,10 @@ _08070558:
 _0807057C: .4byte gUnknown_20371F8
 _08070580: .4byte gUnknown_20375F8
 _08070584: .4byte 0x000001ff
-	thumb_func_end sub_8070548
+	thumb_func_end ReadPlttIntoBuffers
 
-	thumb_func_start sub_8070588
-sub_8070588: @ 8070588
+	thumb_func_start BeginNormalPaletteFade
+BeginNormalPaletteFade: @ 8070588
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -366,7 +366,7 @@ _08070664:
 	orrs r3, r0
 _08070668:
 	strb r3, [r5, 0x8]
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	ldr r4, _080706C0 @ =gUnknown_2037AB8
 	ldrb r1, [r4, 0x8]
 	lsrs r5, r1, 7
@@ -391,7 +391,7 @@ _08070668:
 	ands r0, r1
 	cmp r0, 0
 	beq _080706A4
-	bl sub_807141C
+	bl UpdateBlendRegisters
 _080706A4:
 	ldr r2, _080706C0 @ =gUnknown_2037AB8
 	lsls r3, r5, 7
@@ -412,10 +412,10 @@ _080706C0: .4byte gUnknown_2037AB8
 _080706C4: .4byte gUnknown_20375F8
 _080706C8: .4byte 0x04000100
 _080706CC: .4byte gUnknown_2037AC8
-	thumb_func_end sub_8070588
+	thumb_func_end BeginNormalPaletteFade
 
-	thumb_func_start sub_80706D0
-sub_80706D0: @ 80706D0
+	thumb_func_start unref_sub_80A1C1C
+unref_sub_80A1C1C: @ 80706D0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -433,7 +433,7 @@ sub_80706D0: @ 80706D0
 	lsls r5, 16
 	lsrs r5, 16
 	str r3, [sp, 0x4]
-	bl sub_8070548
+	bl ReadPlttIntoBuffers
 	lsls r4, 24
 	asrs r4, 24
 	str r5, [sp]
@@ -441,7 +441,7 @@ sub_80706D0: @ 80706D0
 	adds r1, r4, 0
 	adds r2, r6, 0
 	ldr r3, [sp, 0x4]
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x8
@@ -450,10 +450,10 @@ sub_80706D0: @ 80706D0
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80706D0
+	thumb_func_end unref_sub_80A1C1C
 
-	thumb_func_start sub_8070718
-sub_8070718: @ 8070718
+	thumb_func_start unref_sub_80A1C64
+unref_sub_80A1C64: @ 8070718
 	push {r4-r7,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -484,7 +484,7 @@ _08070722:
 	cmp r1, r0
 	bne _0807075E
 	adds r0, r4, 0
-	bl sub_80709B4
+	bl unused_sub_80A1F00
 	ldrb r0, [r4, 0x4]
 	lsls r0, 31
 	cmp r0, 0
@@ -495,7 +495,7 @@ _0807075E:
 	bne _08070774
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_8070790
+	bl unused_sub_80A1CDC
 	b _08070778
 	.align 2, 0
 _08070770: .4byte gUnknown_20379F8
@@ -505,7 +505,7 @@ _08070774:
 _08070778:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_80708F4
+	bl unused_sub_80A1E40
 _08070780:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -515,10 +515,10 @@ _08070780:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8070718
+	thumb_func_end unref_sub_80A1C64
 
-	thumb_func_start sub_8070790
-sub_8070790: @ 8070790
+	thumb_func_start unused_sub_80A1CDC
+unused_sub_80A1CDC: @ 8070790
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -697,10 +697,10 @@ _080708E4: .4byte gUnknown_20375F8
 _080708E8: .4byte 0x000003ff
 _080708EC: .4byte 0xffe007ff
 _080708F0: .4byte 0xfffff01f
-	thumb_func_end sub_8070790
+	thumb_func_end unused_sub_80A1CDC
 
-	thumb_func_start sub_80708F4
-sub_80708F4: @ 80708F4
+	thumb_func_start unused_sub_80A1E40
+unused_sub_80A1E40: @ 80708F4
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	ldr r3, _0807094C @ =gUnknown_2037AB8
@@ -742,7 +742,7 @@ sub_80708F4: @ 80708F4
 	ldrh r3, [r3, 0x6]
 	lsls r3, 17
 	lsrs r3, 17
-	bl sub_8045274
+	bl BlendPalette
 	b _080709A8
 	.align 2, 0
 _0807094C: .4byte gUnknown_2037AB8
@@ -798,10 +798,10 @@ _080709A8:
 	bx r0
 	.align 2, 0
 _080709B0: .4byte gUnknown_20375F8
-	thumb_func_end sub_80708F4
+	thumb_func_end unused_sub_80A1E40
 
-	thumb_func_start sub_80709B4
-sub_80709B4: @ 80709B4
+	thumb_func_start unused_sub_80A1F00
+unused_sub_80A1F00: @ 80709B4
 	push {lr}
 	adds r3, r0, 0
 	ldrb r0, [r3, 0x9]
@@ -839,7 +839,7 @@ _080709F4:
 	cmp r0, 0x2
 	bgt _08070A08
 	ldrh r0, [r2]
-	bl sub_8070A0C
+	bl ResetPaletteStructByUid
 	b _08070A08
 _08070A04:
 	subs r0, 0x1
@@ -847,26 +847,26 @@ _08070A04:
 _08070A08:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80709B4
+	thumb_func_end unused_sub_80A1F00
 
-	thumb_func_start sub_8070A0C
-sub_8070A0C: @ 8070A0C
+	thumb_func_start ResetPaletteStructByUid
+ResetPaletteStructByUid: @ 8070A0C
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8070B58
+	bl GetPaletteNumByUid
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x10
 	beq _08070A22
-	bl sub_8070A28
+	bl ResetPaletteStruct
 _08070A22:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8070A0C
+	thumb_func_end ResetPaletteStructByUid
 
-	thumb_func_start sub_8070A28
-sub_8070A28: @ 8070A28
+	thumb_func_start ResetPaletteStruct
+ResetPaletteStruct: @ 8070A28
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08070A70 @ =gUnknown_20379F8
@@ -908,10 +908,10 @@ _08070A74: .4byte gUnknown_83AC960
 _08070A78: .4byte 0xfffff803
 _08070A7C: .4byte 0xffe007ff
 _08070A80: .4byte 0xfffff01f
-	thumb_func_end sub_8070A28
+	thumb_func_end ResetPaletteStruct
 
-	thumb_func_start sub_8070A84
-sub_8070A84: @ 8070A84
+	thumb_func_start ResetPaletteFadeControl
+ResetPaletteFadeControl: @ 8070A84
 	ldr r2, _08070AEC @ =gUnknown_2037AB8
 	movs r0, 0
 	str r0, [r2]
@@ -969,14 +969,14 @@ _08070AEC: .4byte gUnknown_2037AB8
 _08070AF0: .4byte 0xfffff83f
 _08070AF4: .4byte 0xffff8000
 _08070AF8: .4byte 0xfffe0fff
-	thumb_func_end sub_8070A84
+	thumb_func_end ResetPaletteFadeControl
 
-	thumb_func_start sub_8070AFC
-sub_8070AFC: @ 8070AFC
+	thumb_func_start unref_sub_80A2048
+unref_sub_80A2048: @ 8070AFC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8070B58
+	bl GetPaletteNumByUid
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x10
@@ -995,14 +995,14 @@ _08070B20:
 	bx r0
 	.align 2, 0
 _08070B24: .4byte gUnknown_20379F8
-	thumb_func_end sub_8070AFC
+	thumb_func_end unref_sub_80A2048
 
-	thumb_func_start sub_8070B28
-sub_8070B28: @ 8070B28
+	thumb_func_start unref_sub_80A2074
+unref_sub_80A2074: @ 8070B28
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8070B58
+	bl GetPaletteNumByUid
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x10
@@ -1022,10 +1022,10 @@ _08070B4E:
 	bx r0
 	.align 2, 0
 _08070B54: .4byte gUnknown_20379F8
-	thumb_func_end sub_8070B28
+	thumb_func_end unref_sub_80A2074
 
-	thumb_func_start sub_8070B58
-sub_8070B58: @ 8070B58
+	thumb_func_start GetPaletteNumByUid
+GetPaletteNumByUid: @ 8070B58
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -1054,10 +1054,10 @@ _08070B7C:
 _08070B88:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8070B58
+	thumb_func_end GetPaletteNumByUid
 
-	thumb_func_start sub_8070B8C
-sub_8070B8C: @ 8070B8C
+	thumb_func_start UpdateNormalPaletteFade
+UpdateNormalPaletteFade: @ 8070B8C
 	push {r4-r7,lr}
 	ldr r4, _08070BA0 @ =gUnknown_2037AB8
 	ldrb r1, [r4, 0x7]
@@ -1070,7 +1070,7 @@ sub_8070B8C: @ 8070B8C
 	.align 2, 0
 _08070BA0: .4byte gUnknown_2037AB8
 _08070BA4:
-	bl sub_8071470
+	bl IsSoftwarePaletteFadeFinishing
 	lsls r0, 24
 	cmp r0, 0
 	beq _08070BB2
@@ -1139,7 +1139,7 @@ _08070C0E:
 	lsrs r3, 17
 	adds r0, r5, 0
 	movs r1, 0x10
-	bl sub_8045274
+	bl BlendPalette
 _08070C2A:
 	lsrs r4, 1
 	adds r0, r5, 0
@@ -1228,10 +1228,10 @@ _08070CC0:
 	bx r1
 	.align 2, 0
 _08070CC8: .4byte 0xfffff83f
-	thumb_func_end sub_8070B8C
+	thumb_func_end UpdateNormalPaletteFade
 
-	thumb_func_start sub_8070CCC
-sub_8070CCC: @ 8070CCC
+	thumb_func_start InvertPlttBuffer
+InvertPlttBuffer: @ 8070CCC
 	push {r4-r7,lr}
 	adds r1, r0, 0
 	movs r3, 0
@@ -1272,10 +1272,10 @@ _08070D0A:
 	bx r0
 	.align 2, 0
 _08070D10: .4byte gUnknown_20375F8
-	thumb_func_end sub_8070CCC
+	thumb_func_end InvertPlttBuffer
 
-	thumb_func_start sub_8070D14
-sub_8070D14: @ 8070D14
+	thumb_func_start TintPlttBuffer
+TintPlttBuffer: @ 8070D14
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1385,10 +1385,10 @@ _08070DD0:
 	.align 2, 0
 _08070DE0: .4byte gUnknown_20375F8
 _08070DE4: .4byte 0xfffffc1f
-	thumb_func_end sub_8070D14
+	thumb_func_end TintPlttBuffer
 
-	thumb_func_start sub_8070DE8
-sub_8070DE8: @ 8070DE8
+	thumb_func_start UnfadePlttBuffer
+UnfadePlttBuffer: @ 8070DE8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1438,10 +1438,10 @@ _08070E32:
 	.align 2, 0
 _08070E3C: .4byte gUnknown_20375F8
 _08070E40: .4byte gUnknown_20371F8
-	thumb_func_end sub_8070DE8
+	thumb_func_end UnfadePlttBuffer
 
-	thumb_func_start sub_8070E44
-sub_8070E44: @ 8070E44
+	thumb_func_start BeginFastPaletteFade
+BeginFastPaletteFade: @ 8070E44
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1453,15 +1453,15 @@ sub_8070E44: @ 8070E44
 	movs r2, 0x10
 	orrs r1, r2
 	strb r1, [r3, 0xA]
-	bl sub_8070E68
+	bl BeginFastPaletteFadeInternal
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08070E64: .4byte gUnknown_2037AB8
-	thumb_func_end sub_8070E44
+	thumb_func_end BeginFastPaletteFade
 
-	thumb_func_start sub_8070E68
-sub_8070E68: @ 8070E68
+	thumb_func_start BeginFastPaletteFadeInternal
+BeginFastPaletteFadeInternal: @ 8070E68
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1514,7 +1514,7 @@ _08070EBA:
 	ldr r2, _08070EE4 @ =0x01000200
 	bl CpuSet
 _08070ED0:
-	bl sub_80704D0
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -1524,10 +1524,10 @@ _08070EDC: .4byte gUnknown_2037AB8
 _08070EE0: .4byte gUnknown_20375F8
 _08070EE4: .4byte 0x01000200
 _08070EE8: .4byte 0x00007fff
-	thumb_func_end sub_8070E68
+	thumb_func_end BeginFastPaletteFadeInternal
 
-	thumb_func_start sub_8070EEC
-sub_8070EEC: @ 8070EEC
+	thumb_func_start UpdateFastPaletteFade
+UpdateFastPaletteFade: @ 8070EEC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1545,7 +1545,7 @@ sub_8070EEC: @ 8070EEC
 	.align 2, 0
 _08070F08: .4byte gUnknown_2037AB8
 _08070F0C:
-	bl sub_8071470
+	bl IsSoftwarePaletteFadeFinishing
 	lsls r0, 24
 	cmp r0, 0
 	beq _08070F1A
@@ -1990,10 +1990,10 @@ _08071246:
 _08071258: .4byte gUnknown_20375F8
 _0807125C: .4byte 0x05000100
 _08071260: .4byte gUnknown_2037AB8
-	thumb_func_end sub_8070EEC
+	thumb_func_end UpdateFastPaletteFade
 
-	thumb_func_start sub_8071264
-sub_8071264: @ 8071264
+	thumb_func_start BeginHardwarePaletteFade
+BeginHardwarePaletteFade: @ 8071264
 	push {r4-r7,lr}
 	ldr r5, [sp, 0x14]
 	lsls r0, 24
@@ -2072,10 +2072,10 @@ _080712F8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8071264
+	thumb_func_end BeginHardwarePaletteFade
 
-	thumb_func_start sub_8071300
-sub_8071300: @ 8071300
+	thumb_func_start UpdateHardwarePaletteFade
+UpdateHardwarePaletteFade: @ 8071300
 	push {r4-r7,lr}
 	ldr r2, _08071314 @ =gUnknown_2037AB8
 	ldrb r1, [r2, 0x7]
@@ -2224,20 +2224,20 @@ _08071410:
 	bx r1
 	.align 2, 0
 _08071418: .4byte 0xfffff83f
-	thumb_func_end sub_8071300
+	thumb_func_end UpdateHardwarePaletteFade
 
-	thumb_func_start sub_807141C
-sub_807141C: @ 807141C
+	thumb_func_start UpdateBlendRegisters
+UpdateBlendRegisters: @ 807141C
 	push {r4,lr}
 	ldr r4, _08071468 @ =gUnknown_2037AB8
 	ldrh r1, [r4]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x4]
 	lsls r1, 21
 	lsrs r1, 27
 	movs r0, 0x54
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrb r1, [r4, 0x9]
 	movs r0, 0x8
 	ands r0, r1
@@ -2267,10 +2267,10 @@ _08071460:
 	.align 2, 0
 _08071468: .4byte gUnknown_2037AB8
 _0807146C: .4byte 0xfffff83f
-	thumb_func_end sub_807141C
+	thumb_func_end UpdateBlendRegisters
 
-	thumb_func_start sub_8071470
-sub_8071470: @ 8071470
+	thumb_func_start IsSoftwarePaletteFadeFinishing
+IsSoftwarePaletteFadeFinishing: @ 8071470
 	push {r4,lr}
 	ldr r3, _080714A8 @ =gUnknown_2037AB8
 	ldrb r4, [r3, 0xA]
@@ -2324,10 +2324,10 @@ _080714CE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8071470
+	thumb_func_end IsSoftwarePaletteFadeFinishing
 
-	thumb_func_start sub_80714D4
-sub_80714D4: @ 80714D4
+	thumb_func_start BlendPalettes
+BlendPalettes: @ 80714D4
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -2346,7 +2346,7 @@ _080714E6:
 	movs r1, 0x10
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl sub_8045274
+	bl BlendPalette
 _080714FA:
 	lsrs r4, 1
 	adds r0, r5, 0
@@ -2359,10 +2359,10 @@ _08071508:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80714D4
+	thumb_func_end BlendPalettes
 
-	thumb_func_start sub_8071510
-sub_8071510: @ 8071510
+	thumb_func_start BlendPalettesUnfaded
+BlendPalettesUnfaded: @ 8071510
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r1, 0
@@ -2379,17 +2379,17 @@ sub_8071510: @ 8071510
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0807153C: .4byte gUnknown_20371F8
 _08071540: .4byte gUnknown_20375F8
-	thumb_func_end sub_8071510
+	thumb_func_end BlendPalettesUnfaded
 
-	thumb_func_start sub_8071544
-sub_8071544: @ 8071544
+	thumb_func_start TintPalette_GrayScale
+TintPalette_GrayScale: @ 8071544
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -2431,10 +2431,10 @@ _0807158C:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8071544
+	thumb_func_end TintPalette_GrayScale
 
-	thumb_func_start sub_8071594
-sub_8071594: @ 8071594
+	thumb_func_start TintPalette_GrayScale2
+TintPalette_GrayScale2: @ 8071594
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -2485,10 +2485,10 @@ _080715E8:
 	bx r0
 	.align 2, 0
 _080715F0: .4byte gUnknown_83AC970
-	thumb_func_end sub_8071594
+	thumb_func_end TintPalette_GrayScale2
 
-	thumb_func_start sub_80715F4
-sub_80715F4: @ 80715F4
+	thumb_func_start TintPalette_SepiaTone
+TintPalette_SepiaTone: @ 80715F4
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	lsls r1, 16
@@ -2546,7 +2546,7 @@ _08071656:
 	bx r0
 	.align 2, 0
 _0807165C: .4byte 0x00000133
-	thumb_func_end sub_80715F4
+	thumb_func_end TintPalette_SepiaTone
 
 	thumb_func_start sub_8071660
 sub_8071660: @ 8071660
@@ -2755,7 +2755,7 @@ sub_80717A8: @ 80717A8
 	lsrs r5, 24
 	mov r8, r5
 	ldr r0, _08071800 @ =sub_80718B8
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, _08071804 @ =gUnknown_3005090
@@ -2797,7 +2797,7 @@ _08071828:
 	adds r0, r5, 0
 	movs r1, 0x5
 	mov r2, r10
-	bl sub_80776E8
+	bl SetWordTaskArg
 	ldr r0, _08071858 @ =gUnknown_3005090
 	adds r1, r4, r5
 	lsls r1, 3
@@ -2861,10 +2861,10 @@ sub_8071898: @ 8071898
 	push {lr}
 	b _080718A0
 _0807189C:
-	bl sub_8077508
+	bl DestroyTask
 _080718A0:
 	ldr r0, _080718B4 @ =sub_80718B8
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -2887,7 +2887,7 @@ sub_80718B8: @ 80718B8
 	adds r4, r0, r1
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_8077720
+	bl GetWordTaskArg
 	adds r3, r0, 0
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -2903,7 +2903,7 @@ sub_80718B8: @ 80718B8
 	ldrb r1, [r4]
 	ldrh r2, [r4, 0xE]
 	adds r0, r3, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	ldrh r1, [r4]
 	movs r6, 0
 	ldrsh r0, [r4, r6]
@@ -2913,7 +2913,7 @@ sub_80718B8: @ 80718B8
 	cmp r0, r2
 	bne _08071910
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _08071930
 	.align 2, 0
 _0807190C: .4byte gUnknown_3005098

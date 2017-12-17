@@ -17,20 +17,20 @@ sub_8069ED4: @ 8069ED4
 	bx lr
 	thumb_func_end sub_8069ED4
 
-	thumb_func_start sub_8069ED8
-sub_8069ED8: @ 8069ED8
+	thumb_func_start ScrCmd_end
+ScrCmd_end: @ 8069ED8
 	push {lr}
 	bl sub_80697FC
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069ED8
+	thumb_func_end ScrCmd_end
 
-	thumb_func_start sub_8069EE4
-sub_8069EE4: @ 8069EE4
+	thumb_func_start ScrCmd_gotonative
+ScrCmd_gotonative: @ 8069EE4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl sub_80697F4
@@ -38,12 +38,12 @@ sub_8069EE4: @ 8069EE4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069EE4
+	thumb_func_end ScrCmd_gotonative
 
 	thumb_func_start sub_8069EFC
 sub_8069EFC: @ 8069EFC
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 14
 	ldr r1, _08069F18 @ =gUnknown_815FD60
@@ -76,13 +76,13 @@ _08069F38: .4byte gUnknown_83A7290
 sub_8069F3C: @ 8069F3C
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 14
 	ldr r1, _08069F6C @ =gUnknown_815FD60
@@ -114,64 +114,64 @@ _08069F8C: .4byte 0x00000107
 _08069F90: .4byte gUnknown_83A7290
 	thumb_func_end sub_8069F3C
 
-	thumb_func_start sub_8069F94
-sub_8069F94: @ 8069F94
+	thumb_func_start ScrCmd_callnative
+ScrCmd_callnative: @ 8069F94
 	push {lr}
-	bl sub_8069910
+	bl ScriptReadWord
 	bl _call_via_r0
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069F94
+	thumb_func_end ScrCmd_callnative
 
 	thumb_func_start sub_8069FA4
 sub_8069FA4: @ 8069FA4
 	push {lr}
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8069FA4
 
-	thumb_func_start sub_8069FB0
-sub_8069FB0: @ 8069FB0
+	thumb_func_start ScrCmd_goto
+ScrCmd_goto: @ 8069FB0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_80698D0
+	bl ScriptJump
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069FB0
+	thumb_func_end ScrCmd_goto
 
-	thumb_func_start sub_8069FC8
-sub_8069FC8: @ 8069FC8
+	thumb_func_start ScrCmd_return
+ScrCmd_return: @ 8069FC8
 	push {lr}
-	bl sub_80698E8
+	bl ScriptReturn
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069FC8
+	thumb_func_end ScrCmd_return
 
-	thumb_func_start sub_8069FD4
-sub_8069FD4: @ 8069FD4
+	thumb_func_start ScrCmd_call
+ScrCmd_call: @ 8069FD4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_80698D4
+	bl ScriptCall
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069FD4
+	thumb_func_end ScrCmd_call
 
-	thumb_func_start sub_8069FEC
-sub_8069FEC: @ 8069FEC
+	thumb_func_start ScrCmd_goto_if
+ScrCmd_goto_if: @ 8069FEC
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, [r5, 0x8]
@@ -179,7 +179,7 @@ sub_8069FEC: @ 8069FEC
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r1, _0806A024 @ =gUnknown_83A7248
 	lsls r0, r4, 1
@@ -192,7 +192,7 @@ sub_8069FEC: @ 8069FEC
 	bne _0806A01A
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl sub_80698D0
+	bl ScriptJump
 _0806A01A:
 	movs r0, 0
 	pop {r4,r5}
@@ -200,10 +200,10 @@ _0806A01A:
 	bx r1
 	.align 2, 0
 _0806A024: .4byte gUnknown_83A7248
-	thumb_func_end sub_8069FEC
+	thumb_func_end ScrCmd_goto_if
 
-	thumb_func_start sub_806A028
-sub_806A028: @ 806A028
+	thumb_func_start ScrCmd_call_if
+ScrCmd_call_if: @ 806A028
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, [r5, 0x8]
@@ -211,7 +211,7 @@ sub_806A028: @ 806A028
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r1, _0806A060 @ =gUnknown_83A7248
 	lsls r0, r4, 1
@@ -224,7 +224,7 @@ sub_806A028: @ 806A028
 	bne _0806A056
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl sub_80698D4
+	bl ScriptCall
 _0806A056:
 	movs r0, 0
 	pop {r4,r5}
@@ -232,14 +232,14 @@ _0806A056:
 	bx r1
 	.align 2, 0
 _0806A060: .4byte gUnknown_83A7248
-	thumb_func_end sub_806A028
+	thumb_func_end ScrCmd_call_if
 
-	thumb_func_start sub_806A064
-sub_806A064: @ 806A064
+	thumb_func_start ScrCmd_setvaddress
+ScrCmd_setvaddress: @ 806A064
 	push {r4,lr}
 	ldr r4, [r0, 0x8]
 	subs r4, 0x1
-	bl sub_8069910
+	bl ScriptReadWord
 	ldr r1, _0806A07C @ =gUnknown_20370A8
 	subs r0, r4
 	str r0, [r1]
@@ -249,48 +249,48 @@ sub_806A064: @ 806A064
 	bx r1
 	.align 2, 0
 _0806A07C: .4byte gUnknown_20370A8
-	thumb_func_end sub_806A064
+	thumb_func_end ScrCmd_setvaddress
 
-	thumb_func_start sub_806A080
-sub_806A080: @ 806A080
+	thumb_func_start ScrCmd_vgoto
+ScrCmd_vgoto: @ 806A080
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, _0806A0A0 @ =gUnknown_20370A8
 	ldr r0, [r0]
 	subs r1, r0
 	adds r0, r4, 0
-	bl sub_80698D0
+	bl ScriptJump
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806A0A0: .4byte gUnknown_20370A8
-	thumb_func_end sub_806A080
+	thumb_func_end ScrCmd_vgoto
 
-	thumb_func_start sub_806A0A4
-sub_806A0A4: @ 806A0A4
+	thumb_func_start ScrCmd_vcall
+ScrCmd_vcall: @ 806A0A4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, _0806A0C4 @ =gUnknown_20370A8
 	ldr r0, [r0]
 	subs r1, r0
 	adds r0, r4, 0
-	bl sub_80698D4
+	bl ScriptCall
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806A0C4: .4byte gUnknown_20370A8
-	thumb_func_end sub_806A0A4
+	thumb_func_end ScrCmd_vcall
 
-	thumb_func_start sub_806A0C8
-sub_806A0C8: @ 806A0C8
+	thumb_func_start ScrCmd_vgoto_if
+ScrCmd_vgoto_if: @ 806A0C8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, [r5, 0x8]
@@ -298,7 +298,7 @@ sub_806A0C8: @ 806A0C8
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldr r1, _0806A104 @ =gUnknown_20370A8
 	ldr r1, [r1]
 	subs r2, r0, r1
@@ -313,7 +313,7 @@ sub_806A0C8: @ 806A0C8
 	bne _0806A0FA
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl sub_80698D0
+	bl ScriptJump
 _0806A0FA:
 	movs r0, 0
 	pop {r4,r5}
@@ -322,10 +322,10 @@ _0806A0FA:
 	.align 2, 0
 _0806A104: .4byte gUnknown_20370A8
 _0806A108: .4byte gUnknown_83A7248
-	thumb_func_end sub_806A0C8
+	thumb_func_end ScrCmd_vgoto_if
 
-	thumb_func_start sub_806A10C
-sub_806A10C: @ 806A10C
+	thumb_func_start ScrCmd_vcall_if
+ScrCmd_vcall_if: @ 806A10C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, [r5, 0x8]
@@ -333,7 +333,7 @@ sub_806A10C: @ 806A10C
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldr r1, _0806A148 @ =gUnknown_20370A8
 	ldr r1, [r1]
 	subs r2, r0, r1
@@ -348,7 +348,7 @@ sub_806A10C: @ 806A10C
 	bne _0806A13E
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl sub_80698D4
+	bl ScriptCall
 _0806A13E:
 	movs r0, 0
 	pop {r4,r5}
@@ -357,10 +357,10 @@ _0806A13E:
 	.align 2, 0
 _0806A148: .4byte gUnknown_20370A8
 _0806A14C: .4byte gUnknown_83A7248
-	thumb_func_end sub_806A10C
+	thumb_func_end ScrCmd_vcall_if
 
-	thumb_func_start sub_806A150
-sub_806A150: @ 806A150
+	thumb_func_start ScrCmd_gotostd
+ScrCmd_gotostd: @ 806A150
 	push {lr}
 	adds r2, r0, 0
 	ldr r0, [r2, 0x8]
@@ -375,7 +375,7 @@ sub_806A150: @ 806A150
 	bcs _0806A170
 	ldr r1, [r1]
 	adds r0, r2, 0
-	bl sub_80698D0
+	bl ScriptJump
 _0806A170:
 	movs r0, 0
 	pop {r1}
@@ -383,10 +383,10 @@ _0806A170:
 	.align 2, 0
 _0806A178: .4byte gUnknown_8160450
 _0806A17C: .4byte gUnknown_8160478
-	thumb_func_end sub_806A150
+	thumb_func_end ScrCmd_gotostd
 
-	thumb_func_start sub_806A180
-sub_806A180: @ 806A180
+	thumb_func_start ScrCmd_callstd
+ScrCmd_callstd: @ 806A180
 	push {lr}
 	adds r2, r0, 0
 	ldr r0, [r2, 0x8]
@@ -401,7 +401,7 @@ sub_806A180: @ 806A180
 	bcs _0806A1A0
 	ldr r1, [r1]
 	adds r0, r2, 0
-	bl sub_80698D4
+	bl ScriptCall
 _0806A1A0:
 	movs r0, 0
 	pop {r1}
@@ -409,10 +409,10 @@ _0806A1A0:
 	.align 2, 0
 _0806A1A8: .4byte gUnknown_8160450
 _0806A1AC: .4byte gUnknown_8160478
-	thumb_func_end sub_806A180
+	thumb_func_end ScrCmd_callstd
 
-	thumb_func_start sub_806A1B0
-sub_806A1B0: @ 806A1B0
+	thumb_func_start ScrCmd_gotostd_if
+ScrCmd_gotostd_if: @ 806A1B0
 	push {r4,lr}
 	adds r3, r0, 0
 	ldr r0, [r3, 0x8]
@@ -439,7 +439,7 @@ sub_806A1B0: @ 806A1B0
 	bcs _0806A1E8
 	ldr r1, [r1]
 	adds r0, r3, 0
-	bl sub_80698D0
+	bl ScriptJump
 _0806A1E8:
 	movs r0, 0
 	pop {r4}
@@ -449,10 +449,10 @@ _0806A1E8:
 _0806A1F0: .4byte gUnknown_83A7248
 _0806A1F4: .4byte gUnknown_8160450
 _0806A1F8: .4byte gUnknown_8160478
-	thumb_func_end sub_806A1B0
+	thumb_func_end ScrCmd_gotostd_if
 
-	thumb_func_start sub_806A1FC
-sub_806A1FC: @ 806A1FC
+	thumb_func_start ScrCmd_callstd_if
+ScrCmd_callstd_if: @ 806A1FC
 	push {r4,lr}
 	adds r3, r0, 0
 	ldr r0, [r3, 0x8]
@@ -479,7 +479,7 @@ sub_806A1FC: @ 806A1FC
 	bcs _0806A234
 	ldr r1, [r1]
 	adds r0, r3, 0
-	bl sub_80698D4
+	bl ScriptCall
 _0806A234:
 	movs r0, 0
 	pop {r4}
@@ -489,36 +489,36 @@ _0806A234:
 _0806A23C: .4byte gUnknown_83A7248
 _0806A240: .4byte gUnknown_8160450
 _0806A244: .4byte gUnknown_8160478
-	thumb_func_end sub_806A1FC
+	thumb_func_end ScrCmd_callstd_if
 
-	thumb_func_start sub_806A248
-sub_806A248: @ 806A248
+	thumb_func_start ScrCmd_gotoram
+ScrCmd_gotoram: @ 806A248
 	push {lr}
 	ldr r1, _0806A258 @ =gUnknown_20370A4
 	ldr r1, [r1]
-	bl sub_80698D0
+	bl ScriptJump
 	movs r0, 0
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806A258: .4byte gUnknown_20370A4
-	thumb_func_end sub_806A248
+	thumb_func_end ScrCmd_gotoram
 
-	thumb_func_start sub_806A25C
-sub_806A25C: @ 806A25C
+	thumb_func_start ScrCmd_killscript
+ScrCmd_killscript: @ 806A25C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069CD4
+	bl ClearRamScript
 	adds r0, r4, 0
 	bl sub_80697FC
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A25C
+	thumb_func_end ScrCmd_killscript
 
-	thumb_func_start sub_806A274
-sub_806A274: @ 806A274
+	thumb_func_start ScrCmd_setmysteryeventstatus
+ScrCmd_setmysteryeventstatus: @ 806A274
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -529,7 +529,7 @@ sub_806A274: @ 806A274
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A274
+	thumb_func_end ScrCmd_setmysteryeventstatus
 
 	thumb_func_start sub_806A28C
 sub_806A28C: @ 806A28C
@@ -544,7 +544,7 @@ sub_806A28C: @ 806A28C
 	str r0, [r1]
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_80698D0
+	bl ScriptJump
 _0806A2A8:
 	movs r0, 0
 	pop {r4}
@@ -554,8 +554,8 @@ _0806A2A8:
 _0806A2B0: .4byte gUnknown_20370A4
 	thumb_func_end sub_806A28C
 
-	thumb_func_start sub_806A2B4
-sub_806A2B4: @ 806A2B4
+	thumb_func_start ScrCmd_loadword
+ScrCmd_loadword: @ 806A2B4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x8]
@@ -563,7 +563,7 @@ sub_806A2B4: @ 806A2B4
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	lsls r5, 2
 	adds r4, 0x64
 	adds r4, r5
@@ -572,10 +572,10 @@ sub_806A2B4: @ 806A2B4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A2B4
+	thumb_func_end ScrCmd_loadword
 
-	thumb_func_start sub_806A2D8
-sub_806A2D8: @ 806A2D8
+	thumb_func_start ScrCmd_loadbytefromaddr
+ScrCmd_loadbytefromaddr: @ 806A2D8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x8]
@@ -583,7 +583,7 @@ sub_806A2D8: @ 806A2D8
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	lsls r5, 2
 	adds r4, 0x64
 	adds r4, r5
@@ -593,25 +593,25 @@ sub_806A2D8: @ 806A2D8
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A2D8
+	thumb_func_end ScrCmd_loadbytefromaddr
 
-	thumb_func_start sub_806A2FC
-sub_806A2FC: @ 806A2FC
+	thumb_func_start ScrCmd_writebytetoaddr
+ScrCmd_writebytetoaddr: @ 806A2FC
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_8069910
+	bl ScriptReadWord
 	strb r4, [r0]
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A2FC
+	thumb_func_end ScrCmd_writebytetoaddr
 
-	thumb_func_start sub_806A314
-sub_806A314: @ 806A314
+	thumb_func_start ScrCmd_loadbyte
+ScrCmd_loadbyte: @ 806A314
 	ldr r1, [r0, 0x8]
 	ldrb r3, [r1]
 	adds r1, 0x1
@@ -626,10 +626,10 @@ sub_806A314: @ 806A314
 	str r1, [r0, 0x8]
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_806A314
+	thumb_func_end ScrCmd_loadbyte
 
-	thumb_func_start sub_806A330
-sub_806A330: @ 806A330
+	thumb_func_start ScrCmd_setptrbyte
+ScrCmd_setptrbyte: @ 806A330
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x8]
@@ -637,7 +637,7 @@ sub_806A330: @ 806A330
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	lsls r5, 2
 	adds r4, 0x64
 	adds r4, r5
@@ -647,10 +647,10 @@ sub_806A330: @ 806A330
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A330
+	thumb_func_end ScrCmd_setptrbyte
 
-	thumb_func_start sub_806A354
-sub_806A354: @ 806A354
+	thumb_func_start ScrCmd_copylocal
+ScrCmd_copylocal: @ 806A354
 	ldr r1, [r0, 0x8]
 	ldrb r3, [r1]
 	adds r1, 0x1
@@ -667,53 +667,53 @@ sub_806A354: @ 806A354
 	str r0, [r3]
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_806A354
+	thumb_func_end ScrCmd_copylocal
 
-	thumb_func_start sub_806A374
-sub_806A374: @ 806A374
+	thumb_func_start ScrCmd_copybyte
+ScrCmd_copybyte: @ 806A374
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldrb r0, [r0]
 	strb r0, [r5]
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A374
+	thumb_func_end ScrCmd_copybyte
 
-	thumb_func_start sub_806A390
-sub_806A390: @ 806A390
+	thumb_func_start ScrCmd_setvar
+ScrCmd_setvar: @ 806A390
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	strh r0, [r4]
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A390
+	thumb_func_end ScrCmd_setvar
 
-	thumb_func_start sub_806A3B4
-sub_806A3B4: @ 806A3B4
+	thumb_func_start ScrCmd_copyvar
+ScrCmd_copyvar: @ 806A3B4
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
@@ -723,19 +723,19 @@ sub_806A3B4: @ 806A3B4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A3B4
+	thumb_func_end ScrCmd_copyvar
 
-	thumb_func_start sub_806A3E0
-sub_806A3E0: @ 806A3E0
+	thumb_func_start ScrCmd_setorcopyvar
+ScrCmd_setorcopyvar: @ 806A3E0
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -744,10 +744,10 @@ sub_806A3E0: @ 806A3E0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A3E0
+	thumb_func_end ScrCmd_setorcopyvar
 
-	thumb_func_start sub_806A40C
-sub_806A40C: @ 806A40C
+	thumb_func_start compare_012
+compare_012: @ 806A40C
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -767,10 +767,10 @@ _0806A426:
 _0806A428:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A40C
+	thumb_func_end compare_012
 
-	thumb_func_start sub_806A42C
-sub_806A42C: @ 806A42C
+	thumb_func_start ScrCmd_compare_local_to_local
+ScrCmd_compare_local_to_local: @ 806A42C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r2, [r4, 0x8]
@@ -788,16 +788,16 @@ sub_806A42C: @ 806A42C
 	ldrb r1, [r3]
 	adds r2, 0x1
 	str r2, [r4, 0x8]
-	bl sub_806A40C
+	bl compare_012
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A42C
+	thumb_func_end ScrCmd_compare_local_to_local
 
-	thumb_func_start sub_806A45C
-sub_806A45C: @ 806A45C
+	thumb_func_start ScrCmd_compare_local_to_value
+ScrCmd_compare_local_to_value: @ 806A45C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r2, [r4, 0x8]
@@ -811,16 +811,16 @@ sub_806A45C: @ 806A45C
 	ldrb r1, [r2]
 	adds r2, 0x1
 	str r2, [r4, 0x8]
-	bl sub_806A40C
+	bl compare_012
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A45C
+	thumb_func_end ScrCmd_compare_local_to_value
 
-	thumb_func_start sub_806A484
-sub_806A484: @ 806A484
+	thumb_func_start ScrCmd_compare_local_to_addr
+ScrCmd_compare_local_to_addr: @ 806A484
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r2, [r4, 0x8]
@@ -832,22 +832,22 @@ sub_806A484: @ 806A484
 	adds r2, 0x1
 	str r2, [r4, 0x8]
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl sub_806A40C
+	bl compare_012
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A484
+	thumb_func_end ScrCmd_compare_local_to_addr
 
-	thumb_func_start sub_806A4B0
-sub_806A4B0: @ 806A4B0
+	thumb_func_start ScrCmd_compare_addr_to_local
+ScrCmd_compare_addr_to_local: @ 806A4B0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldrb r0, [r0]
 	ldr r3, [r4, 0x8]
 	ldrb r2, [r3]
@@ -858,109 +858,109 @@ sub_806A4B0: @ 806A4B0
 	ldrb r1, [r1]
 	adds r3, 0x1
 	str r3, [r4, 0x8]
-	bl sub_806A40C
+	bl compare_012
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A4B0
+	thumb_func_end ScrCmd_compare_addr_to_local
 
-	thumb_func_start sub_806A4DC
-sub_806A4DC: @ 806A4DC
+	thumb_func_start ScrCmd_compare_addr_to_value
+ScrCmd_compare_addr_to_value: @ 806A4DC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldrb r0, [r0]
 	ldr r2, [r4, 0x8]
 	ldrb r1, [r2]
 	adds r2, 0x1
 	str r2, [r4, 0x8]
-	bl sub_806A40C
+	bl compare_012
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A4DC
+	thumb_func_end ScrCmd_compare_addr_to_value
 
-	thumb_func_start sub_806A4FC
-sub_806A4FC: @ 806A4FC
+	thumb_func_start ScrCmd_compare_addr_to_addr
+ScrCmd_compare_addr_to_addr: @ 806A4FC
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldrb r5, [r0]
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl sub_806A40C
+	bl compare_012
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A4FC
+	thumb_func_end ScrCmd_compare_addr_to_addr
 
-	thumb_func_start sub_806A520
-sub_806A520: @ 806A520
+	thumb_func_start ScrCmd_compare_var_to_value
+ScrCmd_compare_var_to_value: @ 806A520
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	ldrh r5, [r0]
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r5, 0
-	bl sub_806A40C
+	bl compare_012
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A520
+	thumb_func_end ScrCmd_compare_var_to_value
 
-	thumb_func_start sub_806A550
-sub_806A550: @ 806A550
+	thumb_func_start ScrCmd_compare_var_to_var
+ScrCmd_compare_var_to_var: @ 806A550
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	ldrh r2, [r5]
 	ldrh r1, [r0]
 	adds r0, r2, 0
-	bl sub_806A40C
+	bl compare_012
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A550
+	thumb_func_end ScrCmd_compare_var_to_var
 
-	thumb_func_start sub_806A584
-sub_806A584: @ 806A584
+	thumb_func_start ScrCmd_addvar
+ScrCmd_addvar: @ 806A584
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	ldrh r1, [r4]
 	adds r0, r1
 	strh r0, [r4]
@@ -968,19 +968,19 @@ sub_806A584: @ 806A584
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A584
+	thumb_func_end ScrCmd_addvar
 
-	thumb_func_start sub_806A5AC
-sub_806A5AC: @ 806A5AC
+	thumb_func_start ScrCmd_subvar
+ScrCmd_subvar: @ 806A5AC
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -991,12 +991,12 @@ sub_806A5AC: @ 806A5AC
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A5AC
+	thumb_func_end ScrCmd_subvar
 
-	thumb_func_start sub_806A5DC
-sub_806A5DC: @ 806A5DC
+	thumb_func_start ScrCmd_random
+ScrCmd_random: @ 806A5DC
 	push {r4,r5,lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1004,7 +1004,7 @@ sub_806A5DC: @ 806A5DC
 	lsls r4, 16
 	lsrs r4, 16
 	ldr r5, _0806A60C @ =gUnknown_20370D0
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -1016,13 +1016,13 @@ sub_806A5DC: @ 806A5DC
 	bx r1
 	.align 2, 0
 _0806A60C: .4byte gUnknown_20370D0
-	thumb_func_end sub_806A5DC
+	thumb_func_end ScrCmd_random
 
 	thumb_func_start sub_806A610
 sub_806A610: @ 806A610
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1030,7 +1030,7 @@ sub_806A610: @ 806A610
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1057,7 +1057,7 @@ _0806A658: .4byte gUnknown_20370D0
 sub_806A65C: @ 806A65C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1065,7 +1065,7 @@ sub_806A65C: @ 806A65C
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1090,7 +1090,7 @@ _0806A69C: .4byte gUnknown_20370D0
 sub_806A6A0: @ 806A6A0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1098,7 +1098,7 @@ sub_806A6A0: @ 806A6A0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1123,7 +1123,7 @@ _0806A6E0: .4byte gUnknown_20370D0
 sub_806A6E4: @ 806A6E4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1131,7 +1131,7 @@ sub_806A6E4: @ 806A6E4
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1155,7 +1155,7 @@ _0806A724: .4byte gUnknown_20370D0
 	thumb_func_start sub_806A728
 sub_806A728: @ 806A728
 	push {r4,lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1178,7 +1178,7 @@ _0806A750: .4byte gUnknown_20370D0
 sub_806A754: @ 806A754
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1186,7 +1186,7 @@ sub_806A754: @ 806A754
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1211,7 +1211,7 @@ _0806A794: .4byte gUnknown_20370D0
 sub_806A798: @ 806A798
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1219,7 +1219,7 @@ sub_806A798: @ 806A798
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1243,7 +1243,7 @@ _0806A7D8: .4byte gUnknown_20370D0
 	thumb_func_start sub_806A7DC
 sub_806A7DC: @ 806A7DC
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1255,7 +1255,7 @@ sub_806A7DC: @ 806A7DC
 	thumb_func_start sub_806A7F0
 sub_806A7F0: @ 806A7F0
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1267,7 +1267,7 @@ sub_806A7F0: @ 806A7F0
 	thumb_func_start sub_806A804
 sub_806A804: @ 806A804
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1279,7 +1279,7 @@ sub_806A804: @ 806A804
 	thumb_func_start sub_806A818
 sub_806A818: @ 806A818
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1288,35 +1288,35 @@ sub_806A818: @ 806A818
 	bx r1
 	thumb_func_end sub_806A818
 
-	thumb_func_start sub_806A82C
-sub_806A82C: @ 806A82C
+	thumb_func_start ScrCmd_setflag
+ScrCmd_setflag: @ 806A82C
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E680
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A82C
+	thumb_func_end ScrCmd_setflag
 
-	thumb_func_start sub_806A840
-sub_806A840: @ 806A840
+	thumb_func_start ScrCmd_clearflag
+ScrCmd_clearflag: @ 806A840
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E6A8
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A840
+	thumb_func_end ScrCmd_clearflag
 
-	thumb_func_start sub_806A854
-sub_806A854: @ 806A854
+	thumb_func_start ScrCmd_checkflag
+ScrCmd_checkflag: @ 806A854
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E6D0
@@ -1325,10 +1325,10 @@ sub_806A854: @ 806A854
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A854
+	thumb_func_end ScrCmd_checkflag
 
-	thumb_func_start sub_806A870
-sub_806A870: @ 806A870
+	thumb_func_start ScrCmd_incrementgamestat
+ScrCmd_incrementgamestat: @ 806A870
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -1339,7 +1339,7 @@ sub_806A870: @ 806A870
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A870
+	thumb_func_end ScrCmd_incrementgamestat
 
 	thumb_func_start sub_806A888
 sub_806A888: @ 806A888
@@ -1350,7 +1350,7 @@ sub_806A888: @ 806A888
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r6, r0, 0
 	adds r0, r4, 0
 	bl sub_8054EC4
@@ -1376,7 +1376,7 @@ _0806A8B4:
 	thumb_func_start sub_806A8C0
 sub_806A8C0: @ 806A8C0
 	push {r4,lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1390,8 +1390,8 @@ sub_806A8C0: @ 806A8C0
 	bx r1
 	thumb_func_end sub_806A8C0
 
-	thumb_func_start sub_806A8E0
-sub_806A8E0: @ 806A8E0
+	thumb_func_start ScrCmd_animateflash
+ScrCmd_animateflash: @ 806A8E0
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -1399,16 +1399,16 @@ sub_806A8E0: @ 806A8E0
 	str r1, [r0, 0x8]
 	adds r0, r2, 0
 	bl sub_807F028
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A8E0
+	thumb_func_end ScrCmd_animateflash
 
-	thumb_func_start sub_806A8FC
-sub_806A8FC: @ 806A8FC
+	thumb_func_start ScrCmd_setflashradius
+ScrCmd_setflashradius: @ 806A8FC
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1418,7 +1418,7 @@ sub_806A8FC: @ 806A8FC
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A8FC
+	thumb_func_end ScrCmd_setflashradius
 
 	thumb_func_start sub_806A918
 sub_806A918: @ 806A918
@@ -1440,8 +1440,8 @@ _0806A932:
 	bx r1
 	thumb_func_end sub_806A918
 
-	thumb_func_start sub_806A938
-sub_806A938: @ 806A938
+	thumb_func_start ScrCmd_fadescreen
+ScrCmd_fadescreen: @ 806A938
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, [r4, 0x8]
@@ -1449,7 +1449,7 @@ sub_806A938: @ 806A938
 	adds r1, 0x1
 	str r1, [r4, 0x8]
 	movs r1, 0
-	bl sub_807A818
+	bl fade_screen
 	ldr r1, _0806A95C @ =sub_806A918
 	adds r0, r4, 0
 	bl sub_80697F4
@@ -1459,10 +1459,10 @@ sub_806A938: @ 806A938
 	bx r1
 	.align 2, 0
 _0806A95C: .4byte sub_806A918
-	thumb_func_end sub_806A938
+	thumb_func_end ScrCmd_fadescreen
 
-	thumb_func_start sub_806A960
-sub_806A960: @ 806A960
+	thumb_func_start ScrCmd_fadescreenspeed
+ScrCmd_fadescreenspeed: @ 806A960
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r2, [r4, 0x8]
@@ -1474,7 +1474,7 @@ sub_806A960: @ 806A960
 	str r2, [r4, 0x8]
 	lsls r1, 24
 	asrs r1, 24
-	bl sub_807A818
+	bl fade_screen
 	ldr r1, _0806A98C @ =sub_806A918
 	adds r0, r4, 0
 	bl sub_80697F4
@@ -1484,7 +1484,7 @@ sub_806A960: @ 806A960
 	bx r1
 	.align 2, 0
 _0806A98C: .4byte sub_806A918
-	thumb_func_end sub_806A960
+	thumb_func_end ScrCmd_fadescreenspeed
 
 	thumb_func_start sub_806A990
 sub_806A990: @ 806A990
@@ -1511,7 +1511,7 @@ _0806A9AA:
 sub_806A9B0: @ 806A9B0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	ldr r1, _0806A9CC @ =gUnknown_20370AE
 	strh r0, [r1]
 	ldr r1, _0806A9D0 @ =sub_806A990
@@ -1555,10 +1555,10 @@ _0806A9F4: .4byte gUnknown_20370BA
 _0806A9F8: .4byte gUnknown_20370BC
 	thumb_func_end sub_806A9DC
 
-	thumb_func_start sub_806A9FC
-sub_806A9FC: @ 806A9FC
+	thumb_func_start ScrCmd_setweather
+ScrCmd_setweather: @ 806A9FC
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1568,16 +1568,16 @@ sub_806A9FC: @ 806A9FC
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806A9FC
+	thumb_func_end ScrCmd_setweather
 
-	thumb_func_start sub_806AA18
-sub_806AA18: @ 806AA18
+	thumb_func_start ScrCmd_resetweather
+ScrCmd_resetweather: @ 806AA18
 	push {lr}
 	bl sub_807B140
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AA18
+	thumb_func_end ScrCmd_resetweather
 
 	thumb_func_start sub_806AA24
 sub_806AA24: @ 806AA24
@@ -1588,8 +1588,8 @@ sub_806AA24: @ 806AA24
 	bx r1
 	thumb_func_end sub_806AA24
 
-	thumb_func_start sub_806AA30
-sub_806AA30: @ 806AA30
+	thumb_func_start ScrCmd_setstepcallback
+ScrCmd_setstepcallback: @ 806AA30
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -1600,12 +1600,12 @@ sub_806AA30: @ 806AA30
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AA30
+	thumb_func_end ScrCmd_setstepcallback
 
-	thumb_func_start sub_806AA48
-sub_806AA48: @ 806AA48
+	thumb_func_start ScrCmd_setmaplayoutindex
+ScrCmd_setmaplayoutindex: @ 806AA48
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1615,10 +1615,10 @@ sub_806AA48: @ 806AA48
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AA48
+	thumb_func_end ScrCmd_setmaplayoutindex
 
-	thumb_func_start sub_806AA64
-sub_806AA64: @ 806AA64
+	thumb_func_start ScrCmd_warp
+ScrCmd_warp: @ 806AA64
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -1638,7 +1638,7 @@ sub_806AA64: @ 806AA64
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1646,7 +1646,7 @@ sub_806AA64: @ 806AA64
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1668,7 +1668,7 @@ sub_806AA64: @ 806AA64
 	mov r0, r9
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_805538C
+	bl Overworld_SetWarpDestination
 	bl sub_807E438
 	bl sub_80559E4
 	movs r0, 0x1
@@ -1679,10 +1679,10 @@ sub_806AA64: @ 806AA64
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AA64
+	thumb_func_end ScrCmd_warp
 
-	thumb_func_start sub_806AAEC
-sub_806AAEC: @ 806AAEC
+	thumb_func_start ScrCmd_warpsilent
+ScrCmd_warpsilent: @ 806AAEC
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -1702,7 +1702,7 @@ sub_806AAEC: @ 806AAEC
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1710,7 +1710,7 @@ sub_806AAEC: @ 806AAEC
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1732,7 +1732,7 @@ sub_806AAEC: @ 806AAEC
 	mov r0, r9
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_805538C
+	bl Overworld_SetWarpDestination
 	bl sub_807E470
 	bl sub_80559E4
 	movs r0, 0x1
@@ -1743,7 +1743,7 @@ sub_806AAEC: @ 806AAEC
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AAEC
+	thumb_func_end ScrCmd_warpsilent
 
 	thumb_func_start sub_806AB74
 sub_806AB74: @ 806AB74
@@ -1766,7 +1766,7 @@ sub_806AB74: @ 806AB74
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1774,7 +1774,7 @@ sub_806AB74: @ 806AB74
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1796,7 +1796,7 @@ sub_806AB74: @ 806AB74
 	mov r0, r9
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_805538C
+	bl Overworld_SetWarpDestination
 	bl sub_807E4DC
 	bl sub_80559E4
 	movs r0, 0x1
@@ -1809,8 +1809,8 @@ sub_806AB74: @ 806AB74
 	bx r1
 	thumb_func_end sub_806AB74
 
-	thumb_func_start sub_806ABFC
-sub_806ABFC: @ 806ABFC
+	thumb_func_start ScrCmd_warphole
+ScrCmd_warphole: @ 806ABFC
 	push {r4-r6,lr}
 	sub sp, 0x8
 	ldr r1, [r0, 0x8]
@@ -1824,7 +1824,7 @@ sub_806ABFC: @ 806ABFC
 	adds r4, 0x6
 	add r0, sp, 0x4
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	cmp r6, 0xFF
 	bne _0806AC3A
 	cmp r5, 0xFF
@@ -1857,7 +1857,7 @@ _0806AC3A:
 	lsls r4, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl sub_805538C
+	bl Overworld_SetWarpDestination
 _0806AC5E:
 	bl sub_807E548
 	bl sub_80559E4
@@ -1866,7 +1866,7 @@ _0806AC5E:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806ABFC
+	thumb_func_end ScrCmd_warphole
 
 	thumb_func_start sub_806AC70
 sub_806AC70: @ 806AC70
@@ -1889,7 +1889,7 @@ sub_806AC70: @ 806AC70
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1897,7 +1897,7 @@ sub_806AC70: @ 806AC70
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1919,7 +1919,7 @@ sub_806AC70: @ 806AC70
 	mov r0, r9
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_805538C
+	bl Overworld_SetWarpDestination
 	bl sub_807E59C
 	bl sub_80559E4
 	movs r0, 0x1
@@ -1953,7 +1953,7 @@ sub_806ACF8: @ 806ACF8
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1961,7 +1961,7 @@ sub_806ACF8: @ 806ACF8
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -1983,8 +1983,8 @@ sub_806ACF8: @ 806ACF8
 	mov r0, r9
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_805538C
-	bl sub_805C6C4
+	bl Overworld_SetWarpDestination
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_805DAE4
@@ -2000,8 +2000,8 @@ sub_806ACF8: @ 806ACF8
 	bx r1
 	thumb_func_end sub_806ACF8
 
-	thumb_func_start sub_806AD8C
-sub_806AD8C: @ 806AD8C
+	thumb_func_start ScrCmd_setwarp
+ScrCmd_setwarp: @ 806AD8C
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2021,7 +2021,7 @@ sub_806AD8C: @ 806AD8C
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2029,7 +2029,7 @@ sub_806AD8C: @ 806AD8C
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2051,7 +2051,7 @@ sub_806AD8C: @ 806AD8C
 	mov r0, r9
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_805538C
+	bl Overworld_SetWarpDestination
 	movs r0, 0
 	add sp, 0x4
 	pop {r3,r4}
@@ -2060,10 +2060,10 @@ sub_806AD8C: @ 806AD8C
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AD8C
+	thumb_func_end ScrCmd_setwarp
 
-	thumb_func_start sub_806AE0C
-sub_806AE0C: @ 806AE0C
+	thumb_func_start ScrCmd_setdynamicwarp
+ScrCmd_setdynamicwarp: @ 806AE0C
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2083,7 +2083,7 @@ sub_806AE0C: @ 806AE0C
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2091,7 +2091,7 @@ sub_806AE0C: @ 806AE0C
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2115,7 +2115,7 @@ sub_806AE0C: @ 806AE0C
 	mov r1, r9
 	mov r2, r8
 	adds r3, r6, 0
-	bl sub_805541C
+	bl saved_warp2_set_2
 	movs r0, 0
 	add sp, 0x8
 	pop {r3,r4}
@@ -2124,7 +2124,7 @@ sub_806AE0C: @ 806AE0C
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AE0C
+	thumb_func_end ScrCmd_setdynamicwarp
 
 	thumb_func_start sub_806AE90
 sub_806AE90: @ 806AE90
@@ -2147,7 +2147,7 @@ sub_806AE90: @ 806AE90
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2155,7 +2155,7 @@ sub_806AE90: @ 806AE90
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2209,7 +2209,7 @@ sub_806AF10: @ 806AF10
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2217,7 +2217,7 @@ sub_806AF10: @ 806AF10
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2250,8 +2250,8 @@ sub_806AF10: @ 806AF10
 	bx r1
 	thumb_func_end sub_806AF10
 
-	thumb_func_start sub_806AF90
-sub_806AF90: @ 806AF90
+	thumb_func_start ScrCmd_setescapewarp
+ScrCmd_setescapewarp: @ 806AF90
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2271,7 +2271,7 @@ sub_806AF90: @ 806AF90
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2279,7 +2279,7 @@ sub_806AF90: @ 806AF90
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2310,19 +2310,19 @@ sub_806AF90: @ 806AF90
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806AF90
+	thumb_func_end ScrCmd_setescapewarp
 
-	thumb_func_start sub_806B010
-sub_806B010: @ 806B010
+	thumb_func_start ScrCmd_getplayerxy
+ScrCmd_getplayerxy: @ 806B010
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
@@ -2339,13 +2339,13 @@ sub_806B010: @ 806B010
 	bx r1
 	.align 2, 0
 _0806B048: .4byte gUnknown_3005008
-	thumb_func_end sub_806B010
+	thumb_func_end ScrCmd_getplayerxy
 
-	thumb_func_start sub_806B04C
-sub_806B04C: @ 806B04C
+	thumb_func_start ScrCmd_getpartysize
+ScrCmd_getpartysize: @ 806B04C
 	push {r4,lr}
 	ldr r4, _0806B064 @ =gUnknown_20370D0
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -2355,12 +2355,12 @@ sub_806B04C: @ 806B04C
 	bx r1
 	.align 2, 0
 _0806B064: .4byte gUnknown_20370D0
-	thumb_func_end sub_806B04C
+	thumb_func_end ScrCmd_getpartysize
 
 	thumb_func_start sub_806B068
 sub_806B068: @ 806B068
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80722CC
@@ -2369,10 +2369,10 @@ sub_806B068: @ 806B068
 	bx r1
 	thumb_func_end sub_806B068
 
-	thumb_func_start sub_806B07C
-sub_806B07C: @ 806B07C
+	thumb_func_start WaitForSoundEffectFinish
+WaitForSoundEffectFinish: @ 806B07C
 	push {lr}
-	bl sub_80723E0
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806B08C
@@ -2383,59 +2383,59 @@ _0806B08C:
 _0806B08E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B07C
+	thumb_func_end WaitForSoundEffectFinish
 
 	thumb_func_start sub_806B094
 sub_806B094: @ 806B094
 	push {lr}
-	ldr r1, _0806B0A4 @ =sub_806B07C
+	ldr r1, _0806B0A4 @ =WaitForSoundEffectFinish
 	bl sub_80697F4
 	movs r0, 0x1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B0A4: .4byte sub_806B07C
+_0806B0A4: .4byte WaitForSoundEffectFinish
 	thumb_func_end sub_806B094
 
-	thumb_func_start sub_806B0A8
-sub_806B0A8: @ 806B0A8
+	thumb_func_start ScrCmd_playfanfare
+ScrCmd_playfanfare: @ 806B0A8
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8071C60
+	bl PlayFanfare
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B0A8
+	thumb_func_end ScrCmd_playfanfare
 
-	thumb_func_start sub_806B0BC
-sub_806B0BC: @ 806B0BC
+	thumb_func_start WaitForFanfareFinish
+WaitForFanfareFinish: @ 806B0BC
 	push {lr}
-	bl sub_8071C9C
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B0BC
+	thumb_func_end WaitForFanfareFinish
 
 	thumb_func_start sub_806B0CC
 sub_806B0CC: @ 806B0CC
 	push {lr}
-	ldr r1, _0806B0DC @ =sub_806B0BC
+	ldr r1, _0806B0DC @ =WaitForFanfareFinish
 	bl sub_80697F4
 	movs r0, 0x1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B0DC: .4byte sub_806B0BC
+_0806B0DC: .4byte WaitForFanfareFinish
 	thumb_func_end sub_806B0CC
 
 	thumb_func_start sub_806B0E0
 sub_806B0E0: @ 806B0E0
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r1, r0, 16
 	adds r5, r1, 0
@@ -2456,7 +2456,7 @@ sub_806B0E0: @ 806B0E0
 	bl sub_8055E78
 _0806B10E:
 	adds r0, r5, 0
-	bl sub_8071A74
+	bl PlayNewMapMusic
 _0806B114:
 	movs r0, 0
 	pop {r4,r5}
@@ -2469,7 +2469,7 @@ _0806B11C: .4byte gUnknown_203ADFA
 	thumb_func_start sub_806B120
 sub_806B120: @ 806B120
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8055E78
@@ -2500,7 +2500,7 @@ _0806B150: .4byte gUnknown_203ADFA
 	thumb_func_start sub_806B154
 sub_806B154: @ 806B154
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, _0806B178 @ =gUnknown_203ADFA
@@ -2544,13 +2544,13 @@ _0806B1A0:
 	beq _0806B1AE
 	lsls r0, r1, 26
 	lsrs r0, 24
-	bl sub_8071D64
+	bl FadeOutBGMTemporarily
 	b _0806B1B4
 _0806B1AE:
 	movs r0, 0x4
-	bl sub_8071D64
+	bl FadeOutBGMTemporarily
 _0806B1B4:
-	ldr r1, _0806B1C4 @ =sub_8071D7C
+	ldr r1, _0806B1C4 @ =IsBGMPausedOrStopped
 	adds r0, r4, 0
 	bl sub_80697F4
 	movs r0, 0x1
@@ -2559,7 +2559,7 @@ _0806B1BE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B1C4: .4byte sub_8071D7C
+_0806B1C4: .4byte IsBGMPausedOrStopped
 	thumb_func_end sub_806B17C
 
 	thumb_func_start sub_806B1C8
@@ -2580,24 +2580,24 @@ sub_806B1C8: @ 806B1C8
 	beq _0806B1F4
 	lsls r0, r2, 26
 	lsrs r0, 24
-	bl sub_8071DA4
+	bl FadeInBGM
 	b _0806B1FA
 	.align 2, 0
 _0806B1F0: .4byte gUnknown_203ADFA
 _0806B1F4:
 	movs r0, 0x4
-	bl sub_8071DA4
+	bl FadeInBGM
 _0806B1FA:
 	movs r0, 0
 	pop {r1}
 	bx r1
 	thumb_func_end sub_806B1C8
 
-	thumb_func_start sub_806B200
-sub_806B200: @ 806B200
+	thumb_func_start ScrCmd_applymovement
+ScrCmd_applymovement: @ 806B200
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2605,7 +2605,7 @@ sub_806B200: @ 806B200
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r3, r0, 0
 	lsls r0, r4, 24
 	lsrs r0, 24
@@ -2613,7 +2613,7 @@ sub_806B200: @ 806B200
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl sub_8097434
+	bl ScriptMovement_StartObjectMovementScript
 	ldr r0, _0806B240 @ =gUnknown_20370B0
 	strh r4, [r0]
 	movs r0, 0
@@ -2623,13 +2623,13 @@ sub_806B200: @ 806B200
 	.align 2, 0
 _0806B23C: .4byte gUnknown_3005008
 _0806B240: .4byte gUnknown_20370B0
-	thumb_func_end sub_806B200
+	thumb_func_end ScrCmd_applymovement
 
-	thumb_func_start sub_806B244
-sub_806B244: @ 806B244
+	thumb_func_start ScrCmd_applymovement_at
+ScrCmd_applymovement_at: @ 806B244
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2637,7 +2637,7 @@ sub_806B244: @ 806B244
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r3, r0, 0
 	ldr r0, [r5, 0x8]
 	ldrb r2, [r0]
@@ -2648,7 +2648,7 @@ sub_806B244: @ 806B244
 	str r0, [r5, 0x8]
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8097434
+	bl ScriptMovement_StartObjectMovementScript
 	ldr r0, _0806B284 @ =gUnknown_20370B0
 	strh r4, [r0]
 	movs r0, 0
@@ -2657,10 +2657,10 @@ sub_806B244: @ 806B244
 	bx r1
 	.align 2, 0
 _0806B284: .4byte gUnknown_20370B0
-	thumb_func_end sub_806B244
+	thumb_func_end ScrCmd_applymovement_at
 
-	thumb_func_start sub_806B288
-sub_806B288: @ 806B288
+	thumb_func_start WaitForMovementFinish
+WaitForMovementFinish: @ 806B288
 	push {lr}
 	ldr r0, _0806B2A4 @ =gUnknown_20370B0
 	ldrb r0, [r0]
@@ -2668,7 +2668,7 @@ sub_806B288: @ 806B288
 	ldrb r1, [r1]
 	ldr r2, _0806B2AC @ =gUnknown_20370B2
 	ldrb r2, [r2]
-	bl sub_809748C
+	bl ScriptMovement_IsObjectMovementFinished
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -2677,13 +2677,13 @@ sub_806B288: @ 806B288
 _0806B2A4: .4byte gUnknown_20370B0
 _0806B2A8: .4byte gUnknown_20370B4
 _0806B2AC: .4byte gUnknown_20370B2
-	thumb_func_end sub_806B288
+	thumb_func_end WaitForMovementFinish
 
-	thumb_func_start sub_806B2B0
-sub_806B2B0: @ 806B2B0
+	thumb_func_start ScrCmd_waitmovement
+ScrCmd_waitmovement: @ 806B2B0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2704,7 +2704,7 @@ _0806B2CC:
 	movs r0, 0x5
 	ldrsb r0, [r2, r0]
 	strh r0, [r1]
-	ldr r1, _0806B300 @ =sub_806B288
+	ldr r1, _0806B300 @ =WaitForMovementFinish
 	adds r0, r4, 0
 	bl sub_80697F4
 	movs r0, 0x1
@@ -2716,14 +2716,14 @@ _0806B2F0: .4byte gUnknown_20370B0
 _0806B2F4: .4byte gUnknown_20370B2
 _0806B2F8: .4byte gUnknown_3005008
 _0806B2FC: .4byte gUnknown_20370B4
-_0806B300: .4byte sub_806B288
-	thumb_func_end sub_806B2B0
+_0806B300: .4byte WaitForMovementFinish
+	thumb_func_end ScrCmd_waitmovement
 
-	thumb_func_start sub_806B304
-sub_806B304: @ 806B304
+	thumb_func_start ScrCmd_waitmovement_at
+ScrCmd_waitmovement_at: @ 806B304
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2745,7 +2745,7 @@ _0806B320:
 	strh r2, [r0]
 	ldr r0, _0806B350 @ =gUnknown_20370B4
 	strh r1, [r0]
-	ldr r1, _0806B354 @ =sub_806B288
+	ldr r1, _0806B354 @ =WaitForMovementFinish
 	adds r0, r4, 0
 	bl sub_80697F4
 	movs r0, 0x1
@@ -2756,13 +2756,13 @@ _0806B320:
 _0806B348: .4byte gUnknown_20370B0
 _0806B34C: .4byte gUnknown_20370B2
 _0806B350: .4byte gUnknown_20370B4
-_0806B354: .4byte sub_806B288
-	thumb_func_end sub_806B304
+_0806B354: .4byte WaitForMovementFinish
+	thumb_func_end ScrCmd_waitmovement_at
 
-	thumb_func_start sub_806B358
-sub_806B358: @ 806B358
+	thumb_func_start ScrCmd_removeobject
+ScrCmd_removeobject: @ 806B358
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2772,19 +2772,19 @@ sub_806B358: @ 806B358
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl sub_805E4C8
+	bl RemoveFieldObjectByLocalIdAndMap
 	movs r0, 0
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806B37C: .4byte gUnknown_3005008
-	thumb_func_end sub_806B358
+	thumb_func_end ScrCmd_removeobject
 
-	thumb_func_start sub_806B380
-sub_806B380: @ 806B380
+	thumb_func_start ScrCmd_removeobject_at
+ScrCmd_removeobject_at: @ 806B380
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2797,17 +2797,17 @@ sub_806B380: @ 806B380
 	str r3, [r4, 0x8]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805E4C8
+	bl RemoveFieldObjectByLocalIdAndMap
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B380
+	thumb_func_end ScrCmd_removeobject_at
 
-	thumb_func_start sub_806B3B0
-sub_806B3B0: @ 806B3B0
+	thumb_func_start ScrCmd_addobject
+ScrCmd_addobject: @ 806B3B0
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2817,19 +2817,19 @@ sub_806B3B0: @ 806B3B0
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl sub_805E898
+	bl show_sprite
 	movs r0, 0
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806B3D4: .4byte gUnknown_3005008
-	thumb_func_end sub_806B3B0
+	thumb_func_end ScrCmd_addobject
 
-	thumb_func_start sub_806B3D8
-sub_806B3D8: @ 806B3D8
+	thumb_func_start ScrCmd_addobject_at
+ScrCmd_addobject_at: @ 806B3D8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2842,19 +2842,19 @@ sub_806B3D8: @ 806B3D8
 	str r3, [r4, 0x8]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805E898
+	bl show_sprite
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B3D8
+	thumb_func_end ScrCmd_addobject_at
 
-	thumb_func_start sub_806B408
-sub_806B408: @ 806B408
+	thumb_func_start ScrCmd_setobjectxy
+ScrCmd_setobjectxy: @ 806B408
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2862,7 +2862,7 @@ sub_806B408: @ 806B408
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2870,7 +2870,7 @@ sub_806B408: @ 806B408
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r6, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2895,13 +2895,13 @@ sub_806B408: @ 806B408
 	bx r1
 	.align 2, 0
 _0806B46C: .4byte gUnknown_3005008
-	thumb_func_end sub_806B408
+	thumb_func_end ScrCmd_setobjectxy
 
-	thumb_func_start sub_806B470
-sub_806B470: @ 806B470
+	thumb_func_start ScrCmd_setobjectxyperm
+ScrCmd_setobjectxyperm: @ 806B470
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2909,7 +2909,7 @@ sub_806B470: @ 806B470
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2917,7 +2917,7 @@ sub_806B470: @ 806B470
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r6, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2930,17 +2930,17 @@ sub_806B470: @ 806B470
 	asrs r2, 16
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80550D8
+	bl Overworld_SetMapObjTemplateCoords
 	movs r0, 0
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B470
+	thumb_func_end ScrCmd_setobjectxyperm
 
-	thumb_func_start sub_806B4C8
-sub_806B4C8: @ 806B4C8
+	thumb_func_start ScrCmd_moveobjectoffscreen
+ScrCmd_moveobjectoffscreen: @ 806B4C8
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2956,13 +2956,13 @@ sub_806B4C8: @ 806B4C8
 	bx r1
 	.align 2, 0
 _0806B4EC: .4byte gUnknown_3005008
-	thumb_func_end sub_806B4C8
+	thumb_func_end ScrCmd_moveobjectoffscreen
 
-	thumb_func_start sub_806B4F0
-sub_806B4F0: @ 806B4F0
+	thumb_func_start ScrCmd_showobject_at
+ScrCmd_showobject_at: @ 806B4F0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -2976,18 +2976,18 @@ sub_806B4F0: @ 806B4F0
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	bl sub_805F314
+	bl npc_by_local_id_and_map_set_field_1_bit_x20
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B4F0
+	thumb_func_end ScrCmd_showobject_at
 
-	thumb_func_start sub_806B520
-sub_806B520: @ 806B520
+	thumb_func_start ScrCmd_hideobject_at
+ScrCmd_hideobject_at: @ 806B520
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -3001,18 +3001,18 @@ sub_806B520: @ 806B520
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0x1
-	bl sub_805F314
+	bl npc_by_local_id_and_map_set_field_1_bit_x20
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B520
+	thumb_func_end ScrCmd_hideobject_at
 
-	thumb_func_start sub_806B550
-sub_806B550: @ 806B550
+	thumb_func_start ScrCmd_setobjectpriority
+ScrCmd_setobjectpriority: @ 806B550
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -3036,13 +3036,13 @@ sub_806B550: @ 806B550
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B550
+	thumb_func_end ScrCmd_setobjectpriority
 
-	thumb_func_start sub_806B58C
-sub_806B58C: @ 806B58C
+	thumb_func_start ScrCmd_resetobjectpriority
+ScrCmd_resetobjectpriority: @ 806B58C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -3060,10 +3060,10 @@ sub_806B58C: @ 806B58C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B58C
+	thumb_func_end ScrCmd_resetobjectpriority
 
-	thumb_func_start sub_806B5BC
-sub_806B5BC: @ 806B5BC
+	thumb_func_start ScrCmd_faceplayer
+ScrCmd_faceplayer: @ 806B5BC
 	push {r4,lr}
 	ldr r2, _0806B5EC @ =gUnknown_2036E38
 	ldr r0, _0806B5F0 @ =gUnknown_3005074
@@ -3076,12 +3076,12 @@ sub_806B5BC: @ 806B5BC
 	lsls r0, 31
 	cmp r0, 0
 	beq _0806B5E4
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80642C8
+	bl FieldObjectFaceOppositeDirection
 _0806B5E4:
 	movs r0, 0
 	pop {r4}
@@ -3090,13 +3090,13 @@ _0806B5E4:
 	.align 2, 0
 _0806B5EC: .4byte gUnknown_2036E38
 _0806B5F0: .4byte gUnknown_3005074
-	thumb_func_end sub_806B5BC
+	thumb_func_end ScrCmd_faceplayer
 
-	thumb_func_start sub_806B5F4
-sub_806B5F4: @ 806B5F4
+	thumb_func_start ScrCmd_turnobject
+ScrCmd_turnobject: @ 806B5F4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -3110,20 +3110,20 @@ sub_806B5F4: @ 806B5F4
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl sub_805F268
+	bl FieldObjectTurnByLocalIdAndMap
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806B624: .4byte gUnknown_3005008
-	thumb_func_end sub_806B5F4
+	thumb_func_end ScrCmd_turnobject
 
-	thumb_func_start sub_806B628
-sub_806B628: @ 806B628
+	thumb_func_start ScrCmd_setobjectmovementtype
+ScrCmd_setobjectmovementtype: @ 806B628
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -3133,15 +3133,15 @@ sub_806B628: @ 806B628
 	str r2, [r4, 0x8]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8055114
+	bl Overworld_SetMapObjTemplateMovementType
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B628
+	thumb_func_end ScrCmd_setobjectmovementtype
 
-	thumb_func_start sub_806B650
-sub_806B650: @ 806B650
+	thumb_func_start ScrCmd_createvobject
+ScrCmd_createvobject: @ 806B650
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3156,7 +3156,7 @@ sub_806B650: @ 806B650
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -3164,7 +3164,7 @@ sub_806B650: @ 806B650
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -3193,10 +3193,10 @@ sub_806B650: @ 806B650
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B650
+	thumb_func_end ScrCmd_createvobject
 
-	thumb_func_start sub_806B6C0
-sub_806B6C0: @ 806B6C0
+	thumb_func_start ScrCmd_turnvobject
+ScrCmd_turnvobject: @ 806B6C0
 	push {lr}
 	ldr r2, [r0, 0x8]
 	ldrb r3, [r2]
@@ -3210,16 +3210,16 @@ sub_806B6C0: @ 806B6C0
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B6C0
+	thumb_func_end ScrCmd_turnvobject
 
-	thumb_func_start sub_806B6DC
-sub_806B6DC: @ 806B6DC
+	thumb_func_start ScrCmd_lockall
+ScrCmd_lockall: @ 806B6DC
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_805642C
 	cmp r0, 0
 	bne _0806B6FC
-	bl sub_80695B4
+	bl ScriptFreezeMapObjects
 	ldr r1, _0806B6F8 @ =sub_8069590
 	adds r0, r4, 0
 	bl sub_80697F4
@@ -3233,10 +3233,10 @@ _0806B6FE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B6DC
+	thumb_func_end ScrCmd_lockall
 
-	thumb_func_start sub_806B704
-sub_806B704: @ 806B704
+	thumb_func_start ScrCmd_lock
+ScrCmd_lock: @ 806B704
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_805642C
@@ -3256,7 +3256,7 @@ _0806B714:
 	lsls r0, 31
 	cmp r0, 0
 	beq _0806B744
-	bl sub_806966C
+	bl LockSelectedMapObject
 	ldr r1, _0806B740 @ =sub_8069648
 	adds r0, r4, 0
 	bl sub_80697F4
@@ -3266,7 +3266,7 @@ _0806B738: .4byte gUnknown_2036E38
 _0806B73C: .4byte gUnknown_3005074
 _0806B740: .4byte sub_8069648
 _0806B744:
-	bl sub_80695B4
+	bl ScriptFreezeMapObjects
 	ldr r1, _0806B758 @ =sub_8069590
 	adds r0, r4, 0
 	bl sub_80697F4
@@ -3278,16 +3278,16 @@ _0806B752:
 	bx r1
 	.align 2, 0
 _0806B758: .4byte sub_8069590
-	thumb_func_end sub_806B704
+	thumb_func_end ScrCmd_lock
 
-	thumb_func_start sub_806B75C
-sub_806B75C: @ 806B75C
+	thumb_func_start ScrCmd_releaseall
+ScrCmd_releaseall: @ 806B75C
 	push {lr}
-	bl sub_80694F4
+	bl HideFieldMessageBox
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3296,20 +3296,20 @@ sub_806B75C: @ 806B75C
 	lsls r0, 2
 	ldr r1, _0806B790 @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80974D8
-	bl sub_8068A5C
+	bl UnfreezeMapObjects
 	movs r0, 0
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806B790: .4byte gUnknown_2036E38
-	thumb_func_end sub_806B75C
+	thumb_func_end ScrCmd_releaseall
 
-	thumb_func_start sub_806B794
-sub_806B794: @ 806B794
+	thumb_func_start ScrCmd_release
+ScrCmd_release: @ 806B794
 	push {r4,lr}
-	bl sub_80694F4
+	bl HideFieldMessageBox
 	ldr r4, _0806B7E4 @ =gUnknown_2036E38
 	ldr r0, _0806B7E8 @ =gUnknown_3005074
 	ldrb r1, [r0]
@@ -3322,12 +3322,12 @@ sub_806B794: @ 806B794
 	cmp r0, 0
 	beq _0806B7B6
 	adds r0, r1, 0
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 _0806B7B6:
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3335,9 +3335,9 @@ _0806B7B6:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8063D7C
+	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80974D8
-	bl sub_8068A5C
+	bl UnfreezeMapObjects
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -3345,7 +3345,7 @@ _0806B7B6:
 	.align 2, 0
 _0806B7E4: .4byte gUnknown_2036E38
 _0806B7E8: .4byte gUnknown_3005074
-	thumb_func_end sub_806B794
+	thumb_func_end ScrCmd_release
 
 	thumb_func_start sub_806B7EC
 sub_806B7EC: @ 806B7EC
@@ -3369,7 +3369,7 @@ _0806B808: .4byte gUnknown_20370DA
 sub_806B80C: @ 806B80C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	cmp r0, 0
 	bne _0806B81A
 	ldr r0, [r4, 0x64]
@@ -3385,7 +3385,7 @@ _0806B81A:
 sub_806B828: @ 806B828
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	cmp r0, 0
 	bne _0806B836
 	ldr r0, [r4, 0x64]
@@ -3415,12 +3415,12 @@ sub_806B850: @ 806B850
 sub_806B85C: @ 806B85C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	cmp r0, 0
 	bne _0806B86A
 	ldr r0, [r4, 0x64]
 _0806B86A:
-	bl sub_8069464
+	bl ShowFieldAutoScrollMessage
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -3430,19 +3430,19 @@ _0806B86A:
 	thumb_func_start sub_806B878
 sub_806B878: @ 806B878
 	push {lr}
-	ldr r1, _0806B888 @ =sub_806951C
+	ldr r1, _0806B888 @ =IsFieldMessageBoxHidden
 	bl sub_80697F4
 	movs r0, 0x1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B888: .4byte sub_806951C
+_0806B888: .4byte IsFieldMessageBoxHidden
 	thumb_func_end sub_806B878
 
 	thumb_func_start sub_806B88C
 sub_806B88C: @ 806B88C
 	push {lr}
-	bl sub_80694F4
+	bl HideFieldMessageBox
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -3707,8 +3707,8 @@ _0806BA78: .4byte gUnknown_20370AC
 _0806BA7C: .4byte sub_806B898
 	thumb_func_end sub_806BA3C
 
-	thumb_func_start sub_806BA80
-sub_806BA80: @ 806BA80
+	thumb_func_start ScrCmd_yesnobox
+ScrCmd_yesnobox: @ 806BA80
 	push {lr}
 	ldr r2, [r0, 0x8]
 	ldrb r3, [r2]
@@ -3726,15 +3726,15 @@ sub_806BA80: @ 806BA80
 	movs r0, 0
 	b _0806BAA8
 _0806BAA2:
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 _0806BAA8:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806BA80
+	thumb_func_end ScrCmd_yesnobox
 
-	thumb_func_start sub_806BAAC
-sub_806BAAC: @ 806BAAC
+	thumb_func_start ScrCmd_multichoice
+ScrCmd_multichoice: @ 806BAAC
 	push {r4,r5,lr}
 	ldr r2, [r0, 0x8]
 	ldrb r5, [r2]
@@ -3758,16 +3758,16 @@ sub_806BAAC: @ 806BAAC
 	movs r0, 0
 	b _0806BAE0
 _0806BADA:
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 _0806BAE0:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806BAAC
+	thumb_func_end ScrCmd_multichoice
 
-	thumb_func_start sub_806BAE8
-sub_806BAE8: @ 806BAE8
+	thumb_func_start ScrCmd_multichoicedefault
+ScrCmd_multichoicedefault: @ 806BAE8
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3799,7 +3799,7 @@ sub_806BAE8: @ 806BAE8
 	movs r0, 0
 	b _0806BB2C
 _0806BB26:
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 _0806BB2C:
 	add sp, 0x4
@@ -3808,7 +3808,7 @@ _0806BB2C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806BAE8
+	thumb_func_end ScrCmd_multichoicedefault
 
 	thumb_func_start sub_806BB38
 sub_806BB38: @ 806BB38
@@ -3816,8 +3816,8 @@ sub_806BB38: @ 806BB38
 	bx lr
 	thumb_func_end sub_806BB38
 
-	thumb_func_start sub_806BB3C
-sub_806BB3C: @ 806BB3C
+	thumb_func_start ScrCmd_multichoicegrid
+ScrCmd_multichoicegrid: @ 806BB3C
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3849,7 +3849,7 @@ sub_806BB3C: @ 806BB3C
 	movs r0, 0
 	b _0806BB80
 _0806BB7A:
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 _0806BB80:
 	add sp, 0x4
@@ -3858,7 +3858,7 @@ _0806BB80:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806BB3C
+	thumb_func_end ScrCmd_multichoicegrid
 
 	thumb_func_start sub_806BB8C
 sub_806BB8C: @ 806BB8C
@@ -3879,7 +3879,7 @@ sub_806BB98: @ 806BB98
 sub_806BB9C: @ 806BB9C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -3938,7 +3938,7 @@ sub_806BC04: @ 806BC04
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r5, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _0806BC16
@@ -3968,7 +3968,7 @@ _0806BC16:
 sub_806BC40: @ 806BC40
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0806BC50
@@ -3988,10 +3988,10 @@ _0806BC50:
 _0806BC68: .4byte gUnknown_20370C0
 	thumb_func_end sub_806BC40
 
-	thumb_func_start sub_806BC6C
-sub_806BC6C: @ 806BC6C
+	thumb_func_start ScrCmd_vmessage
+ScrCmd_vmessage: @ 806BC6C
 	push {lr}
-	bl sub_8069910
+	bl ScriptReadWord
 	ldr r1, _0806BC84 @ =gUnknown_20370A8
 	ldr r1, [r1]
 	subs r0, r1
@@ -4001,16 +4001,16 @@ sub_806BC6C: @ 806BC6C
 	bx r1
 	.align 2, 0
 _0806BC84: .4byte gUnknown_20370A8
-	thumb_func_end sub_806BC6C
+	thumb_func_end ScrCmd_vmessage
 
-	thumb_func_start sub_806BC88
-sub_806BC88: @ 806BC88
+	thumb_func_start ScrCmd_bufferspeciesname
+ScrCmd_bufferspeciesname: @ 806BC88
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4025,7 +4025,7 @@ sub_806BC88: @ 806BC88
 	ldr r0, _0806BCC4 @ =gUnknown_8245EE0
 	adds r1, r0
 	adds r0, r2, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -4033,10 +4033,10 @@ sub_806BC88: @ 806BC88
 	.align 2, 0
 _0806BCC0: .4byte gUnknown_83A7294
 _0806BCC4: .4byte gUnknown_8245EE0
-	thumb_func_end sub_806BC88
+	thumb_func_end ScrCmd_bufferspeciesname
 
-	thumb_func_start sub_806BCC8
-sub_806BCC8: @ 806BCC8
+	thumb_func_start ScrCmd_bufferleadmonspeciesname
+ScrCmd_bufferleadmonspeciesname: @ 806BCC8
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -4055,13 +4055,13 @@ sub_806BCC8: @ 806BCC8
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xB
 	muls r1, r0
 	ldr r0, _0806BD10 @ =gUnknown_8245EE0
 	adds r1, r0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -4070,16 +4070,16 @@ sub_806BCC8: @ 806BCC8
 _0806BD08: .4byte gUnknown_83A7294
 _0806BD0C: .4byte gUnknown_2024284
 _0806BD10: .4byte gUnknown_8245EE0
-	thumb_func_end sub_806BCC8
+	thumb_func_end ScrCmd_bufferleadmonspeciesname
 
-	thumb_func_start sub_806BD14
-sub_806BD14: @ 806BD14
+	thumb_func_start ScrCmd_bufferpartymonnick
+ScrCmd_bufferpartymonnick: @ 806BD14
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4095,9 +4095,9 @@ sub_806BD14: @ 806BD14
 	ldr r4, [r4]
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r4, 0
-	bl sub_8008D28
+	bl StringGetEnd10
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -4105,16 +4105,16 @@ sub_806BD14: @ 806BD14
 	.align 2, 0
 _0806BD54: .4byte gUnknown_2024284
 _0806BD58: .4byte gUnknown_83A7294
-	thumb_func_end sub_806BD14
+	thumb_func_end ScrCmd_bufferpartymonnick
 
-	thumb_func_start sub_806BD5C
-sub_806BD5C: @ 806BD5C
+	thumb_func_start ScrCmd_bufferitemname
+ScrCmd_bufferitemname: @ 806BD5C
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4131,7 +4131,7 @@ sub_806BD5C: @ 806BD5C
 	bx r1
 	.align 2, 0
 _0806BD8C: .4byte gUnknown_83A7294
-	thumb_func_end sub_806BD5C
+	thumb_func_end ScrCmd_bufferitemname
 
 	thumb_func_start sub_806BD90
 sub_806BD90: @ 806BD90
@@ -4142,14 +4142,14 @@ sub_806BD90: @ 806BD90
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4168,7 +4168,7 @@ sub_806BD90: @ 806BD90
 	bls _0806BDEC
 	ldr r1, _0806BDE8 @ =gUnknown_83A72A0
 	adds r0, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 	b _0806BE22
 	.align 2, 0
 _0806BDE4: .4byte gUnknown_83A7294
@@ -4187,7 +4187,7 @@ _0806BDEC:
 	adds r1, r0
 	ldr r4, [r1]
 	adds r0, r4, 0
-	bl sub_8008E08
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -4198,7 +4198,7 @@ _0806BDEC:
 	strb r1, [r0]
 	ldr r1, _0806BE30 @ =gUnknown_83A72A2
 	adds r0, r4, 0
-	bl sub_8008DA4
+	bl StringAppend
 _0806BE22:
 	movs r0, 0
 	pop {r4-r7}
@@ -4215,7 +4215,7 @@ sub_806BE34: @ 806BE34
 	ldr r1, [r0, 0x8]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4231,7 +4231,7 @@ sub_806BE50: @ 806BE50
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4246,7 +4246,7 @@ sub_806BE50: @ 806BE50
 	ldr r0, _0806BE8C @ =gUnknown_8247094
 	adds r1, r0
 	adds r0, r2, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -4263,7 +4263,7 @@ sub_806BE90: @ 806BE90
 	ldrb r5, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4297,7 +4297,7 @@ sub_806BED4: @ 806BED4
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4311,7 +4311,7 @@ sub_806BED4: @ 806BED4
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r2, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -4321,32 +4321,32 @@ _0806BF0C: .4byte gUnknown_83A7294
 _0806BF10: .4byte gUnknown_83E06B8
 	thumb_func_end sub_806BED4
 
-	thumb_func_start sub_806BF14
-sub_806BF14: @ 806BF14
+	thumb_func_start ScrCmd_bufferstring
+ScrCmd_bufferstring: @ 806BF14
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, _0806BF38 @ =gUnknown_83A7294
 	lsls r4, 2
 	adds r4, r0
 	ldr r0, [r4]
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806BF38: .4byte gUnknown_83A7294
-	thumb_func_end sub_806BF14
+	thumb_func_end ScrCmd_bufferstring
 
-	thumb_func_start sub_806BF3C
-sub_806BF3C: @ 806BF3C
+	thumb_func_start ScrCmd_vloadword
+ScrCmd_vloadword: @ 806BF3C
 	push {lr}
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, _0806BF58 @ =gUnknown_20370A8
 	ldr r0, [r0]
@@ -4359,16 +4359,16 @@ sub_806BF3C: @ 806BF3C
 	.align 2, 0
 _0806BF58: .4byte gUnknown_20370A8
 _0806BF5C: .4byte gUnknown_2021D18
-	thumb_func_end sub_806BF3C
+	thumb_func_end ScrCmd_vloadword
 
-	thumb_func_start sub_806BF60
-sub_806BF60: @ 806BF60
+	thumb_func_start ScrCmd_vbufferstring
+ScrCmd_vbufferstring: @ 806BF60
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, _0806BF8C @ =gUnknown_20370A8
 	ldr r0, [r0]
@@ -4377,7 +4377,7 @@ sub_806BF60: @ 806BF60
 	lsls r4, 2
 	adds r4, r0
 	ldr r0, [r4]
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -4385,16 +4385,16 @@ sub_806BF60: @ 806BF60
 	.align 2, 0
 _0806BF8C: .4byte gUnknown_20370A8
 _0806BF90: .4byte gUnknown_83A7294
-	thumb_func_end sub_806BF60
+	thumb_func_end ScrCmd_vbufferstring
 
-	thumb_func_start sub_806BF94
-sub_806BF94: @ 806BF94
+	thumb_func_start ScrCmd_bufferboxname
+ScrCmd_bufferboxname: @ 806BF94
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4404,27 +4404,27 @@ sub_806BF94: @ 806BF94
 	ldr r4, [r4]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_808BD6C
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806BFCC: .4byte gUnknown_83A7294
-	thumb_func_end sub_806BF94
+	thumb_func_end ScrCmd_bufferboxname
 
-	thumb_func_start sub_806BFD0
-sub_806BFD0: @ 806BFD0
+	thumb_func_start ScrCmd_givemon
+ScrCmd_givemon: @ 806BFD0
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
 	push {r5,r6}
 	sub sp, 0x8
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4437,7 +4437,7 @@ sub_806BFD0: @ 806BFD0
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4445,10 +4445,10 @@ sub_806BFD0: @ 806BFD0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	mov r8, r0
 	adds r0, r4, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	ldr r1, [r4, 0x8]
 	ldrb r2, [r1]
 	adds r1, 0x1
@@ -4474,12 +4474,12 @@ sub_806BFD0: @ 806BFD0
 	bx r1
 	.align 2, 0
 _0806C04C: .4byte gUnknown_20370D0
-	thumb_func_end sub_806BFD0
+	thumb_func_end ScrCmd_givemon
 
-	thumb_func_start sub_806C050
-sub_806C050: @ 806C050
+	thumb_func_start ScrCmd_giveegg
+ScrCmd_giveegg: @ 806C050
 	push {r4,lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -4496,10 +4496,10 @@ sub_806C050: @ 806C050
 	bx r1
 	.align 2, 0
 _0806C078: .4byte gUnknown_20370D0
-	thumb_func_end sub_806C050
+	thumb_func_end ScrCmd_giveegg
 
-	thumb_func_start sub_806C07C
-sub_806C07C: @ 806C07C
+	thumb_func_start ScrCmd_setmonmove
+ScrCmd_setmonmove: @ 806C07C
 	push {r4,r5,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r5, [r1]
@@ -4508,23 +4508,23 @@ sub_806C07C: @ 806C07C
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_80A02FC
+	bl ScriptSetMonMoveSlot
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C07C
+	thumb_func_end ScrCmd_setmonmove
 
-	thumb_func_start sub_806C0A8
-sub_806C0A8: @ 806C0A8
+	thumb_func_start ScrCmd_checkpartymove
+ScrCmd_checkpartymove: @ 806C0A8
 	push {r4-r7,lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldr r1, _0806C0BC @ =gUnknown_20370D0
@@ -4537,12 +4537,12 @@ _0806C0BC: .4byte gUnknown_20370D0
 _0806C0C0:
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0806C0F0
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_8125AC0
+	bl pokemon_has_move
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4570,7 +4570,7 @@ _0806C0F6:
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0
@@ -4582,13 +4582,13 @@ _0806C116:
 	bx r1
 	.align 2, 0
 _0806C120: .4byte gUnknown_2024284
-	thumb_func_end sub_806C0A8
+	thumb_func_end ScrCmd_checkpartymove
 
 	thumb_func_start sub_806C124
 sub_806C124: @ 806C124
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r0, [r4, 0x8]
 	ldrb r1, [r0]
@@ -4602,7 +4602,7 @@ sub_806C124: @ 806C124
 	lsls r1, 2
 	adds r0, r1
 	adds r1, r2, 0
-	bl sub_809FDA0
+	bl AddMoney
 _0806C14A:
 	movs r0, 0
 	pop {r4}
@@ -4612,11 +4612,11 @@ _0806C14A:
 _0806C154: .4byte gUnknown_3005008
 	thumb_func_end sub_806C124
 
-	thumb_func_start sub_806C158
-sub_806C158: @ 806C158
+	thumb_func_start ScrCmd_takemoney
+ScrCmd_takemoney: @ 806C158
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r0, [r4, 0x8]
 	ldrb r1, [r0]
@@ -4630,7 +4630,7 @@ sub_806C158: @ 806C158
 	lsls r1, 2
 	adds r0, r1
 	adds r1, r2, 0
-	bl sub_809FDD8
+	bl RemoveMoney
 _0806C17E:
 	movs r0, 0
 	pop {r4}
@@ -4638,13 +4638,13 @@ _0806C17E:
 	bx r1
 	.align 2, 0
 _0806C188: .4byte gUnknown_3005008
-	thumb_func_end sub_806C158
+	thumb_func_end ScrCmd_takemoney
 
-	thumb_func_start sub_806C18C
-sub_806C18C: @ 806C18C
+	thumb_func_start ScrCmd_checkmoney
+ScrCmd_checkmoney: @ 806C18C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069910
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r0, [r4, 0x8]
 	ldrb r1, [r0]
@@ -4659,7 +4659,7 @@ sub_806C18C: @ 806C18C
 	lsls r1, 2
 	adds r0, r1
 	adds r1, r2, 0
-	bl sub_809FD88
+	bl IsEnoughMoney
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -4671,7 +4671,7 @@ _0806C1BA:
 	.align 2, 0
 _0806C1C4: .4byte gUnknown_20370D0
 _0806C1C8: .4byte gUnknown_3005008
-	thumb_func_end sub_806C18C
+	thumb_func_end ScrCmd_checkmoney
 
 	thumb_func_start sub_806C1CC
 sub_806C1CC: @ 806C1CC
@@ -4780,8 +4780,8 @@ _0806C286:
 _0806C290: .4byte sub_809D6D4
 	thumb_func_end sub_806C258
 
-	thumb_func_start sub_806C294
-sub_806C294: @ 806C294
+	thumb_func_start ScrCmd_hidecoinsbox
+ScrCmd_hidecoinsbox: @ 806C294
 	push {lr}
 	ldr r1, [r0, 0x8]
 	adds r1, 0x2
@@ -4790,10 +4790,10 @@ sub_806C294: @ 806C294
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C294
+	thumb_func_end ScrCmd_hidecoinsbox
 
-	thumb_func_start sub_806C2A8
-sub_806C2A8: @ 806C2A8
+	thumb_func_start ScrCmd_updatecoinsbox
+ScrCmd_updatecoinsbox: @ 806C2A8
 	push {lr}
 	ldr r1, [r0, 0x8]
 	adds r1, 0x2
@@ -4805,10 +4805,10 @@ sub_806C2A8: @ 806C2A8
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C2A8
+	thumb_func_end ScrCmd_updatecoinsbox
 
-	thumb_func_start sub_806C2C4
-sub_806C2C4: @ 806C2C4
+	thumb_func_start ScrCmd_trainerbattle
+ScrCmd_trainerbattle: @ 806C2C4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x8]
@@ -4818,7 +4818,7 @@ sub_806C2C4: @ 806C2C4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C2C4
+	thumb_func_end ScrCmd_trainerbattle
 
 	thumb_func_start sub_806C2D8
 sub_806C2D8: @ 806C2D8
@@ -4829,8 +4829,8 @@ sub_806C2D8: @ 806C2D8
 	bx r1
 	thumb_func_end sub_806C2D8
 
-	thumb_func_start sub_806C2E4
-sub_806C2E4: @ 806C2E4
+	thumb_func_start ScrCmd_ontrainerbattleend
+ScrCmd_ontrainerbattleend: @ 806C2E4
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80805E8
@@ -4839,10 +4839,10 @@ sub_806C2E4: @ 806C2E4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C2E4
+	thumb_func_end ScrCmd_ontrainerbattleend
 
-	thumb_func_start sub_806C2F8
-sub_806C2F8: @ 806C2F8
+	thumb_func_start ScrCmd_ontrainerbattleendgoto
+ScrCmd_ontrainerbattleendgoto: @ 806C2F8
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_8080600
@@ -4851,61 +4851,61 @@ sub_806C2F8: @ 806C2F8
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C2F8
+	thumb_func_end ScrCmd_ontrainerbattleendgoto
 
-	thumb_func_start sub_806C30C
-sub_806C30C: @ 806C30C
+	thumb_func_start ScrCmd_checktrainerflag
+ScrCmd_checktrainerflag: @ 806C30C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8080424
+	bl HasTrainerAlreadyBeenFought
 	strb r0, [r4, 0x2]
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C30C
+	thumb_func_end ScrCmd_checktrainerflag
 
-	thumb_func_start sub_806C330
-sub_806C330: @ 806C330
+	thumb_func_start ScrCmd_settrainerflag
+ScrCmd_settrainerflag: @ 806C330
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_808043C
+	bl trainer_flag_set
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C330
+	thumb_func_end ScrCmd_settrainerflag
 
-	thumb_func_start sub_806C34C
-sub_806C34C: @ 806C34C
+	thumb_func_start ScrCmd_cleartrainerflag
+ScrCmd_cleartrainerflag: @ 806C34C
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8080450
+	bl trainer_flag_clear
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C34C
+	thumb_func_end ScrCmd_cleartrainerflag
 
-	thumb_func_start sub_806C368
-sub_806C368: @ 806C368
+	thumb_func_start ScrCmd_setwildbattle
+ScrCmd_setwildbattle: @ 806C368
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -4914,24 +4914,24 @@ sub_806C368: @ 806C368
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	adds r2, r0, 0
 	lsls r2, 16
 	lsrs r2, 16
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_80A029C
+	bl CreateScriptedWildMon
 	movs r0, 0
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C368
+	thumb_func_end ScrCmd_setwildbattle
 
 	thumb_func_start sub_806C39C
 sub_806C39C: @ 806C39C
 	push {lr}
 	bl sub_807F8C4
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4940,9 +4940,9 @@ sub_806C39C: @ 806C39C
 	thumb_func_start sub_806C3AC
 sub_806C3AC: @ 806C3AC
 	push {lr}
-	bl sub_8069910
+	bl ScriptReadWord
 	bl sub_809C164
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4951,9 +4951,9 @@ sub_806C3AC: @ 806C3AC
 	thumb_func_start sub_806C3C0
 sub_806C3C0: @ 806C3C0
 	push {lr}
-	bl sub_8069910
+	bl ScriptReadWord
 	bl sub_809C1A0
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4962,9 +4962,9 @@ sub_806C3C0: @ 806C3C0
 	thumb_func_start sub_806C3D4
 sub_806C3D4: @ 806C3D4
 	push {lr}
-	bl sub_8069910
+	bl ScriptReadWord
 	bl sub_809C1BC
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4973,20 +4973,20 @@ sub_806C3D4: @ 806C3D4
 	thumb_func_start sub_806C3E8
 sub_806C3E8: @ 806C3E8
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0806C40C @ =sub_80568E0
+	ldr r1, _0806C40C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl sub_813F804
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C40C: .4byte sub_80568E0
+_0806C40C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_806C3E8
 
 	thumb_func_start sub_806C410
@@ -5004,7 +5004,7 @@ sub_806C414: @ 806C414
 	thumb_func_start sub_806C418
 sub_806C418: @ 806C418
 	push {lr}
-	bl sub_8069B28
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -5028,10 +5028,10 @@ sub_806C42C: @ 806C42C
 	bx lr
 	thumb_func_end sub_806C42C
 
-	thumb_func_start sub_806C430
-sub_806C430: @ 806C430
+	thumb_func_start ScrCmd_dofieldeffect
+ScrCmd_dofieldeffect: @ 806C430
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5041,22 +5041,22 @@ sub_806C430: @ 806C430
 	strh r0, [r1]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806C454: .4byte gUnknown_20370B6
-	thumb_func_end sub_806C430
+	thumb_func_end ScrCmd_dofieldeffect
 
-	thumb_func_start sub_806C458
-sub_806C458: @ 806C458
+	thumb_func_start ScrCmd_setfieldeffectarg
+ScrCmd_setfieldeffectarg: @ 806C458
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5072,14 +5072,14 @@ sub_806C458: @ 806C458
 	bx r1
 	.align 2, 0
 _0806C484: .4byte gUnknown_20386E0
-	thumb_func_end sub_806C458
+	thumb_func_end ScrCmd_setfieldeffectarg
 
-	thumb_func_start sub_806C488
-sub_806C488: @ 806C488
+	thumb_func_start WaitForFieldEffectFinish
+WaitForFieldEffectFinish: @ 806C488
 	push {lr}
 	ldr r0, _0806C49C @ =gUnknown_20370B6
 	ldrb r0, [r0]
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806C4A0
@@ -5092,19 +5092,19 @@ _0806C4A0:
 _0806C4A2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C488
+	thumb_func_end WaitForFieldEffectFinish
 
-	thumb_func_start sub_806C4A8
-sub_806C4A8: @ 806C4A8
+	thumb_func_start ScrCmd_waitfieldeffect
+ScrCmd_waitfieldeffect: @ 806C4A8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
 	ldr r1, _0806C4CC @ =gUnknown_20370B6
 	strh r0, [r1]
-	ldr r1, _0806C4D0 @ =sub_806C488
+	ldr r1, _0806C4D0 @ =WaitForFieldEffectFinish
 	adds r0, r4, 0
 	bl sub_80697F4
 	movs r0, 0x1
@@ -5113,13 +5113,13 @@ sub_806C4A8: @ 806C4A8
 	bx r1
 	.align 2, 0
 _0806C4CC: .4byte gUnknown_20370B6
-_0806C4D0: .4byte sub_806C488
-	thumb_func_end sub_806C4A8
+_0806C4D0: .4byte WaitForFieldEffectFinish
+	thumb_func_end ScrCmd_waitfieldeffect
 
-	thumb_func_start sub_806C4D4
-sub_806C4D4: @ 806C4D4
+	thumb_func_start ScrCmd_setrespawn
+ScrCmd_setrespawn: @ 806C4D4
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5129,10 +5129,10 @@ sub_806C4D4: @ 806C4D4
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C4D4
+	thumb_func_end ScrCmd_setrespawn
 
-	thumb_func_start sub_806C4F0
-sub_806C4F0: @ 806C4F0
+	thumb_func_start ScrCmd_checkplayergender
+ScrCmd_checkplayergender: @ 806C4F0
 	ldr r1, _0806C500 @ =gUnknown_20370D0
 	ldr r0, _0806C504 @ =gUnknown_300500C
 	ldr r0, [r0]
@@ -5143,13 +5143,13 @@ sub_806C4F0: @ 806C4F0
 	.align 2, 0
 _0806C500: .4byte gUnknown_20370D0
 _0806C504: .4byte gUnknown_300500C
-	thumb_func_end sub_806C4F0
+	thumb_func_end ScrCmd_checkplayergender
 
-	thumb_func_start sub_806C508
-sub_806C508: @ 806C508
+	thumb_func_start ScrCmd_playmoncry
+ScrCmd_playmoncry: @ 806C508
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5157,7 +5157,7 @@ sub_806C508: @ 806C508
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5170,46 +5170,46 @@ sub_806C508: @ 806C508
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C508
+	thumb_func_end ScrCmd_playmoncry
 
 	thumb_func_start sub_806C540
 sub_806C540: @ 806C540
 	push {lr}
-	ldr r1, _0806C550 @ =sub_80721A0
+	ldr r1, _0806C550 @ =IsCryFinished
 	bl sub_80697F4
 	movs r0, 0x1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C550: .4byte sub_80721A0
+_0806C550: .4byte IsCryFinished
 	thumb_func_end sub_806C540
 
-	thumb_func_start sub_806C554
-sub_806C554: @ 806C554
+	thumb_func_start ScrCmd_setmetatile
+ScrCmd_setmetatile: @ 806C554
 	push {r4-r7,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5241,13 +5241,13 @@ _0806C5CA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C554
+	thumb_func_end ScrCmd_setmetatile
 
-	thumb_func_start sub_806C5D4
-sub_806C5D4: @ 806C5D4
+	thumb_func_start ScrCmd_opendoor
+ScrCmd_opendoor: @ 806C5D4
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5255,7 +5255,7 @@ sub_806C5D4: @ 806C5D4
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5281,13 +5281,13 @@ sub_806C5D4: @ 806C5D4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806C5D4
+	thumb_func_end ScrCmd_opendoor
 
 	thumb_func_start sub_806C62C
 sub_806C62C: @ 806C62C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5295,7 +5295,7 @@ sub_806C62C: @ 806C62C
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5348,7 +5348,7 @@ _0806C698: .4byte sub_806C670
 sub_806C69C: @ 806C69C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5356,7 +5356,7 @@ sub_806C69C: @ 806C69C
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5381,7 +5381,7 @@ sub_806C69C: @ 806C69C
 sub_806C6E0: @ 806C6E0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5389,7 +5389,7 @@ sub_806C6E0: @ 806C6E0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5425,7 +5425,7 @@ sub_806C728: @ 806C728
 	thumb_func_start sub_806C72C
 sub_806C72C: @ 806C72C
 	push {r4,lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E454
@@ -5441,7 +5441,7 @@ sub_806C72C: @ 806C72C
 	thumb_func_start sub_806C74C
 sub_806C74C: @ 806C74C
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5472,7 +5472,7 @@ _0806C780: .4byte gUnknown_20370D0
 	thumb_func_start sub_806C784
 sub_806C784: @ 806C784
 	push {lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5525,7 +5525,7 @@ sub_806C7D4: @ 806C7D4
 	movs r2, 0x1
 	mov r1, sp
 	strb r2, [r1]
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5549,7 +5549,7 @@ _0806C808: .4byte gUnknown_2024284
 	thumb_func_start sub_806C80C
 sub_806C80C: @ 806C80C
 	push {r4,lr}
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568
@@ -5562,7 +5562,7 @@ sub_806C80C: @ 806C80C
 	adds r0, r1
 	movs r1, 0x50
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4]
 	movs r0, 0
 	pop {r4}
@@ -5578,7 +5578,7 @@ sub_806C844: @ 806C844
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl sub_80698F8
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E568

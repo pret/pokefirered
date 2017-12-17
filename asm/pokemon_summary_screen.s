@@ -25,17 +25,17 @@ sub_81344F8: @ 81344F8
 	mov r10, r0
 	ldr r5, _0813453C @ =gUnknown_203B140
 	ldr r0, _08134540 @ =0x00003308
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5]
 	ldr r4, _08134544 @ =gUnknown_203B144
 	movs r0, 0x28
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r5, [r5]
 	cmp r5, 0
 	bne _08134548
 	adds r0, r7, 0
-	bl sub_8000544
+	bl SetMainCallback2
 	b _08134702
 	.align 2, 0
 _0813453C: .4byte gUnknown_203B140
@@ -217,7 +217,7 @@ _08134656:
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	movs r3, 0xC8
 	lsls r3, 6
@@ -226,7 +226,7 @@ _08134656:
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x4
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	ldr r2, _08134730 @ =0x00003204
 	adds r1, r2
@@ -248,7 +248,7 @@ _081346F0:
 	movs r1, 0xFF
 	strb r1, [r0]
 	ldr r0, _08134734 @ =sub_8135C34
-	bl sub_8000544
+	bl SetMainCallback2
 _08134702:
 	pop {r3-r5}
 	mov r8, r3
@@ -456,7 +456,7 @@ _08134890:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _081348A8 @ =gUnknown_203B140
 	ldr r0, [r0]
 	b _081348D6
@@ -503,7 +503,7 @@ _081348F2:
 	b _08134B9A
 _081348FC:
 	ldr r0, _08134940 @ =sub_813B3F0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0
@@ -523,7 +523,7 @@ _0813490C:
 	cmp r4, 0x1
 	bne _0813498C
 	ldr r0, _0813494C @ =sub_8134BAC
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08134950
@@ -549,7 +549,7 @@ _0813495C:
 	movs r0, 0x5
 	bl sub_80722CC
 	movs r0, 0
-	bl sub_80019D0
+	bl HideBg
 	ldr r0, [r5]
 	ldr r1, _08134988 @ =0x00003224
 	adds r0, r1
@@ -573,7 +573,7 @@ _0813498C:
 	cmp r0, 0x1
 	bne _081349F8
 	ldr r0, _081349B0 @ =sub_8134BAC
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -597,7 +597,7 @@ _081349C0:
 	movs r0, 0x5
 	bl sub_80722CC
 	movs r0, 0
-	bl sub_80019D0
+	bl HideBg
 	ldr r0, [r5]
 	ldr r2, _081349F0 @ =0x00003224
 	adds r0, r2
@@ -620,12 +620,12 @@ _081349F0: .4byte 0x00003224
 _081349F4: .4byte 0x00003270
 _081349F8:
 	ldr r0, _08134A2C @ =sub_8134BAC
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08134A12
 	ldr r0, _08134A30 @ =sub_813B3F0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _08134A12
@@ -734,7 +734,7 @@ _08134ADC:
 	beq _08134B08
 	ldr r0, _08134B00 @ =sub_8134BAC
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r0, [r4]
 	ldr r1, _08134B04 @ =0x00003270
 	adds r0, r1
@@ -774,7 +774,7 @@ _08134B38:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _08134B58 @ =gUnknown_203B140
 	ldr r0, [r0]
 	ldr r1, _08134B5C @ =0x00003270
@@ -912,9 +912,9 @@ _08134C64:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _08134C7E:
 	movs r4, 0x1E
 	str r4, [sp]
@@ -924,7 +924,7 @@ _08134C7E:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r6, 0xF
 	str r6, [sp]
 	str r5, [sp, 0x4]
@@ -932,21 +932,21 @@ _08134C7E:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	b _08134E74
 	.align 2, 0
 _08134CC8: .4byte gUnknown_203B140
@@ -990,18 +990,18 @@ _08134D20: .4byte gUnknown_203B140
 _08134D24: .4byte 0x00003001
 _08134D28: .4byte 0x00003002
 _08134D2C:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	beq _08134D38
 	b _08134E7A
 _08134D38:
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _08134E74
 _08134D4C:
 	bl sub_8135514
@@ -1083,14 +1083,14 @@ _08134DF4: .4byte 0x00003004
 _08134DF8: .4byte 0x00003005
 _08134DFC: .4byte 0x00003006
 _08134E00:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	bne _08134E7A
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	b _08134E74
 _08134E18:
 	bl sub_8138440
@@ -1114,7 +1114,7 @@ _08134E18:
 	str r1, [r0]
 _08134E40:
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0
 	strh r0, [r7]
 	ldr r1, [r5]
@@ -1227,9 +1227,9 @@ _08134F30:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _08134F4A:
 	movs r4, 0x1E
 	str r4, [sp]
@@ -1239,7 +1239,7 @@ _08134F4A:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r6, 0xF
 	str r6, [sp]
 	str r5, [sp, 0x4]
@@ -1247,21 +1247,21 @@ _08134F4A:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	b _08135180
 	.align 2, 0
 _08134F94: .4byte gUnknown_203B140
@@ -1329,18 +1329,18 @@ _08135010:
 _0813502C: .4byte gUnknown_203B140
 _08135030: .4byte 0x00003001
 _08135034:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	beq _08135040
 	b _0813518E
 _08135040:
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _08135180
 _08135054:
 	bl sub_8136F4C
@@ -1361,14 +1361,14 @@ _08135074: .4byte gUnknown_203B140
 _08135078: .4byte 0x00003003
 _0813507C: .4byte 0x00003005
 _08135080:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813508C
 	b _0813518E
 _0813508C:
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	bl sub_8135514
 	ldr r0, _081350A4 @ =gUnknown_203B140
 	ldr r0, [r0]
@@ -1426,16 +1426,16 @@ _08135108: .4byte gUnknown_203B140
 _0813510C: .4byte 0x00003006
 _08135110: .4byte 0x00003002
 _08135114:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813518E
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _08135180
 _08135132:
 	bl sub_8138440
@@ -1570,9 +1570,9 @@ _08135248:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _08135262:
 	movs r4, 0x1E
 	str r4, [sp]
@@ -1582,7 +1582,7 @@ _08135262:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	movs r6, 0xF
 	str r6, [sp]
 	str r5, [sp, 0x4]
@@ -1590,21 +1590,21 @@ _08135262:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	b _0813544C
 	.align 2, 0
 _081352AC: .4byte gUnknown_203B140
@@ -1637,7 +1637,7 @@ _081352BE:
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _0813544C
 	.align 2, 0
 _08135300: .4byte gUnknown_203B140
@@ -1722,12 +1722,12 @@ _081353AC:
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _081353D0:
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _0813544C
 	.align 2, 0
 _081353E0: .4byte gUnknown_203B140
@@ -1737,7 +1737,7 @@ _081353EC:
 	bl sub_8135B90
 	bl sub_8138538
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	bl sub_81356EC
 	b _0813544C
 _08135400:
@@ -1929,10 +1929,10 @@ _0813554C:
 	movs r1, 0
 	strh r1, [r0]
 	movs r0, 0x14
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x18
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08135632
 	.align 2, 0
 _0813557C: .4byte 0x0000324c
@@ -1945,13 +1945,13 @@ _08135580:
 	strh r0, [r1]
 	movs r0, 0x10
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x14
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x18
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0x1
 	bl sub_81358DC
@@ -1960,12 +1960,12 @@ _08135580:
 _081355B0: .4byte 0x0000324c
 _081355B4:
 	movs r0, 0xA
-	bl sub_8000AC4
+	bl GetGpuReg
 	movs r4, 0x3
 	adds r5, r4, 0
 	ands r5, r0
 	movs r0, 0xC
-	bl sub_8000AC4
+	bl GetGpuReg
 	ands r4, r0
 	ldr r0, [r6]
 	ldr r1, _081355E0 @ =0x0000324c
@@ -1975,18 +1975,18 @@ _081355B4:
 	cmp r5, r4
 	bls _081355E4
 	movs r0, 0x14
-	bl sub_8000A38
+	bl SetGpuReg
 	b _081355EC
 	.align 2, 0
 _081355E0: .4byte 0x0000324c
 _081355E4:
 	movs r0, 0x18
 	movs r1, 0xF0
-	bl sub_8000A38
+	bl SetGpuReg
 _081355EC:
 	movs r0, 0x10
 	movs r1, 0xF0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	movs r1, 0
 	bl sub_81358DC
@@ -2357,18 +2357,18 @@ sub_81358DC: @ 81358DC
 	lsrs r1, 24
 	mov r9, r1
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	movs r4, 0x3
 	mov r8, r4
 	mov r1, r8
 	ands r1, r0
 	mov r8, r1
 	movs r0, 0xA
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r5, r4, 0
 	ands r5, r0
 	movs r0, 0xC
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r6, r4, 0
 	ands r6, r0
 	ldr r0, _08135938 @ =gUnknown_203B140
@@ -2540,28 +2540,28 @@ _08135A48:
 	cmp r4, 0xA
 	bls _081359AC
 	movs r0, 0x8
-	bl sub_8000AC4
+	bl GetGpuReg
 	ldr r4, _08135AA0 @ =0x0000fffc
 	adds r1, r4, 0
 	ands r1, r0
 	mov r2, r8
 	orrs r1, r2
 	movs r0, 0x8
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0xA
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r1, r4, 0
 	ands r1, r0
 	orrs r1, r5
 	movs r0, 0xA
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0xC
-	bl sub_8000AC4
+	bl GetGpuReg
 	ands r4, r0
 	orrs r4, r6
 	movs r0, 0xC
 	adds r1, r4, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -2674,7 +2674,7 @@ _08135B5E:
 _08135B62:
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	b _08135B82
 	.align 2, 0
 _08135B6C: .4byte gUnknown_8E9B750
@@ -2686,7 +2686,7 @@ _08135B70:
 	ldr r1, _08135B8C @ =gUnknown_8E9B950
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 _08135B82:
 	pop {r0}
 	bx r0
@@ -2767,7 +2767,7 @@ _08135C0E:
 _08135C10:
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	b _08135C2C
 	.align 2, 0
 _08135C1C: .4byte gUnknown_8463B88
@@ -2776,7 +2776,7 @@ _08135C20:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 _08135C2C:
 	pop {r0}
 	bx r0
@@ -2876,7 +2876,7 @@ _08135CE8:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	b _08135D24
 	.align 2, 0
 _08135D0C: .4byte gUnknown_203B140
@@ -2887,7 +2887,7 @@ _08135D18:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 _08135D24:
 	bl sub_8138538
 	b _08135F00
@@ -2925,7 +2925,7 @@ _08135D54:
 	ldr r1, _08135D88 @ =gUnknown_8E9B950
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	ldr r0, [r4]
 	movs r1, 0xC9
 	lsls r1, 6
@@ -2944,7 +2944,7 @@ _08135D90:
 	ldr r1, _08135DBC @ =gUnknown_8E9B598
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	ldr r0, [r4]
 	movs r1, 0xC9
 	lsls r1, 6
@@ -2954,7 +2954,7 @@ _08135D90:
 _08135DAC:
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	b _08135F00
 	.align 2, 0
 _08135DB8: .4byte 0x0000323c
@@ -2965,7 +2965,7 @@ _08135DC4:
 	negs r0, r0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	ldr r0, _08135DE4 @ =gUnknown_203B140
 	ldr r0, [r0]
 	ldr r2, _08135DE8 @ =0x00003214
@@ -2984,7 +2984,7 @@ _08135DEC:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r4, _08135E64 @ =gUnknown_203B140
 	ldr r0, [r4]
 	movs r1, 0xC0
@@ -3040,13 +3040,13 @@ _08135E78: .4byte 0x00003004
 _08135E7C: .4byte 0x00003005
 _08135E80:
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	b _08135F00
 _08135E9A:
 	ldr r0, _08135EBC @ =gUnknown_203B140
@@ -3142,7 +3142,7 @@ _08135F64:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0xA0
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r5, _08135FAC @ =gUnknown_203B140
 	ldr r0, [r5]
 	ldr r1, _08135FB0 @ =0x00003290
@@ -3163,7 +3163,7 @@ _08135F64:
 	adds r0, 0xC0
 	movs r1, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	adds r0, r4, 0
 	adds r0, 0xA0
 	movs r1, 0x10
@@ -3177,7 +3177,7 @@ _08135FB4:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	adds r4, 0x20
 	adds r0, r4, 0
 	movs r1, 0x10
@@ -3192,12 +3192,12 @@ _08135FCC:
 	movs r1, 0x70
 _08135FD8:
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	b _08136020
 	.align 2, 0
 _08135FE0: .4byte gUnknown_84636C0
 _08135FE4:
-	bl sub_80F6808
+	bl reset_temp_tile_data_buffers
 	b _08136020
 _08135FEA:
 	ldr r1, _08135FFC @ =gUnknown_8E9A460
@@ -3206,12 +3206,12 @@ _08135FEA:
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F6878
+	bl decompress_and_copy_tile_data_to_vram
 	b _08136020
 	.align 2, 0
 _08135FFC: .4byte gUnknown_8E9A460
 _08136000:
-	bl sub_80F682C
+	bl free_temp_tile_data_buffers_if_possible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3221,7 +3221,7 @@ _0813600E:
 	ldr r0, _0813601C @ =gUnknown_8463700
 	movs r1, 0x80
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	movs r0, 0x1
 	b _08136030
 	.align 2, 0
@@ -3336,7 +3336,7 @@ sub_81360D4: @ 81360D4
 	ldr r1, _0813610C @ =0x00003290
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8043F90
@@ -3349,7 +3349,7 @@ sub_81360D4: @ 81360D4
 	ldr r2, _08136114 @ =0x00003064
 	adds r0, r2
 	ldr r1, _08136118 @ =gUnknown_8416202
-	bl sub_8008D84
+	bl StringCopy
 	b _0813612C
 	.align 2, 0
 _08136108: .4byte gUnknown_203B140
@@ -3383,7 +3383,7 @@ _0813612C:
 	ldr r1, _08136164 @ =0x00003028
 	adds r2, r1
 	movs r1, 0x2
-	bl sub_803FBE8
+	bl GetMonData
 	b _08136342
 	.align 2, 0
 _08136154: .4byte 0x00003064
@@ -3395,14 +3395,14 @@ _08136168:
 	ldr r5, _081361F0 @ =0x00003290
 	adds r0, r2, r5
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, [r6]
 	ldr r2, _081361F4 @ =0x00003028
 	adds r0, r2
 	adds r1, r4, 0
-	bl sub_8040FD0
+	bl GetSpeciesName
 	ldr r1, [r6]
 	ldr r2, _081361F8 @ =gUnknown_8254784
 	lsls r0, r4, 3
@@ -3422,25 +3422,25 @@ _08136168:
 	adds r0, r5
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r0, [r6]
 	ldr r4, _08136204 @ =0x00003034
 	adds r0, r4
 	mov r1, sp
 	movs r2, 0xA
-	bl sub_8009294
+	bl StringCopyN_Multibyte
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_8008D28
+	bl StringGetEnd10
 	ldr r0, [r6]
 	adds r0, r5
-	bl sub_803F720
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, [r6]
 	adds r0, r5
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r7, 0xFE
@@ -3449,7 +3449,7 @@ _08136168:
 	ldr r3, _08136208 @ =0x00003084
 	adds r0, r3
 	ldr r1, _0813620C @ =gUnknown_8416221
-	bl sub_8008D84
+	bl StringCopy
 	b _08136238
 	.align 2, 0
 _081361F0: .4byte 0x00003290
@@ -3467,7 +3467,7 @@ _08136210:
 	ldr r1, _08136224 @ =0x00003084
 	adds r0, r1
 	ldr r1, _08136228 @ =gUnknown_841621F
-	bl sub_8008D84
+	bl StringCopy
 	b _08136238
 	.align 2, 0
 _08136224: .4byte 0x00003084
@@ -3477,7 +3477,7 @@ _0813622C:
 	ldr r2, _08136308 @ =0x00003084
 	adds r0, r2
 	ldr r1, _0813630C @ =gUnknown_84161CD
-	bl sub_8008D84
+	bl StringCopy
 _08136238:
 	cmp r4, 0x20
 	beq _08136240
@@ -3492,14 +3492,14 @@ _08136240:
 	muls r1, r4
 	ldr r2, _08136318 @ =gUnknown_8245EE0
 	adds r1, r2
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	bne _08136264
 	ldr r0, [r5]
 	ldr r1, _08136308 @ =0x00003084
 	adds r0, r1
 	ldr r1, _0813630C @ =gUnknown_84161CD
-	bl sub_8008D84
+	bl StringCopy
 _08136264:
 	ldr r6, _08136310 @ =gUnknown_203B140
 	ldr r0, [r6]
@@ -3507,28 +3507,28 @@ _08136264:
 	adds r0, r5
 	movs r1, 0x7
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r0, [r6]
 	movs r4, 0xC1
 	lsls r4, 6
 	adds r0, r4
 	mov r1, sp
 	movs r2, 0x7
-	bl sub_8009294
+	bl StringCopyN_Multibyte
 	ldr r0, [r6]
 	adds r4, r0, r4
 	adds r0, r5
 	movs r1, 0x3
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80093BC
+	bl ConvertInternationalString
 	ldr r0, [r6]
 	adds r0, r5
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, _08136320 @ =0x0000ffff
 	ands r1, r0
 	ldr r0, [r6]
@@ -3540,7 +3540,7 @@ _08136264:
 	ldr r0, [r6]
 	adds r0, r5
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	mov r0, sp
 	movs r2, 0
@@ -3550,16 +3550,16 @@ _08136264:
 	ldr r4, _08136328 @ =0x00003088
 	adds r0, r4
 	ldr r1, _0813632C @ =gUnknown_8416223
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r6]
 	adds r0, r4
 	mov r1, sp
 	movs r2, 0x4
-	bl sub_8008DEC
+	bl StringAppendN
 	ldr r0, [r6]
 	adds r0, r5
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -3568,7 +3568,7 @@ _08136264:
 	ldr r3, _08136330 @ =0x00003074
 	adds r0, r3
 	ldr r1, _08136334 @ =gUnknown_84161EF
-	bl sub_8008D84
+	bl StringCopy
 	b _08136342
 	.align 2, 0
 _08136308: .4byte 0x00003084
@@ -3610,7 +3610,7 @@ sub_8136350: @ 8136350
 	ldr r7, _081364FC @ =0x00003290
 	adds r0, r7
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -3623,11 +3623,11 @@ sub_8136350: @ 8136350
 	ldr r0, [r6]
 	adds r0, r4
 	ldr r1, _08136504 @ =gUnknown_841620C
-	bl sub_8008DA4
+	bl StringAppend
 	ldr r0, [r6]
 	adds r0, r7
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -3638,10 +3638,10 @@ sub_8136350: @ 8136350
 	ldr r0, [r6]
 	adds r0, r4
 	mov r1, sp
-	bl sub_8008DA4
+	bl StringAppend
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_8008E08
+	bl StringLength
 	ldr r1, _08136508 @ =gUnknown_203B144
 	mov r8, r1
 	ldr r2, [r1]
@@ -3671,7 +3671,7 @@ _081363DA:
 _081363E6:
 	adds r0, r2, r7
 	movs r1, 0x54
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r6]
@@ -3682,7 +3682,7 @@ _081363E6:
 	bl sub_8008E78
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r0, 16
@@ -3696,7 +3696,7 @@ _081363E6:
 	ldr r0, [r6]
 	adds r0, r7
 	movs r1, 0x55
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r6]
@@ -3707,7 +3707,7 @@ _081363E6:
 	bl sub_8008E78
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r0, 16
@@ -3720,7 +3720,7 @@ _081363E6:
 	ldr r0, [r6]
 	adds r0, r7
 	movs r1, 0x57
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r6]
@@ -3731,7 +3731,7 @@ _081363E6:
 	bl sub_8008E78
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r0, 16
@@ -3744,7 +3744,7 @@ _081363E6:
 	ldr r0, [r6]
 	adds r0, r7
 	movs r1, 0x58
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r6]
@@ -3755,7 +3755,7 @@ _081363E6:
 	bl sub_8008E78
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r0, 16
@@ -3768,7 +3768,7 @@ _081363E6:
 	ldr r0, [r6]
 	adds r0, r7
 	movs r1, 0x56
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r6]
@@ -3779,7 +3779,7 @@ _081363E6:
 	bl sub_8008E78
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r0, 16
@@ -3806,7 +3806,7 @@ _08136518:
 	mov r9, r2
 	add r0, r9
 	movs r1, 0x3B
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r4]
@@ -3817,7 +3817,7 @@ _08136518:
 	bl sub_8008E78
 	ldr r0, [r4]
 	adds r0, r5
-	bl sub_8008E08
+	bl StringLength
 	ldr r1, _08136788 @ =gUnknown_203B144
 	mov r8, r1
 	ldr r2, [r1]
@@ -3832,7 +3832,7 @@ _08136518:
 	ldr r0, [r4]
 	add r0, r9
 	movs r1, 0x3C
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r4]
@@ -3843,7 +3843,7 @@ _08136518:
 	bl sub_8008E78
 	ldr r0, [r4]
 	adds r0, r5
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r0, 16
@@ -3856,7 +3856,7 @@ _08136518:
 	ldr r0, [r4]
 	add r0, r9
 	movs r1, 0x3E
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r4]
@@ -3867,7 +3867,7 @@ _08136518:
 	bl sub_8008E78
 	ldr r0, [r4]
 	adds r0, r5
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r0, 16
@@ -3880,7 +3880,7 @@ _08136518:
 	ldr r0, [r4]
 	add r0, r9
 	movs r1, 0x3F
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r4]
@@ -3891,7 +3891,7 @@ _08136518:
 	bl sub_8008E78
 	ldr r0, [r4]
 	adds r0, r5
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r0, 16
@@ -3904,7 +3904,7 @@ _08136518:
 	ldr r0, [r4]
 	add r0, r9
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, [r4]
@@ -3915,7 +3915,7 @@ _08136518:
 	bl sub_8008E78
 	ldr r0, [r4]
 	adds r0, r5
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	lsls r0, 16
@@ -3932,7 +3932,7 @@ _08136630:
 	mov r8, r2
 	add r0, r8
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	adds r7, r0, 0
 	ldr r0, [r6]
 	ldr r4, _0813678C @ =0x000031a4
@@ -3943,7 +3943,7 @@ _08136630:
 	bl sub_8008E78
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_8008E08
+	bl StringLength
 	ldr r1, _08136788 @ =gUnknown_203B144
 	mov r10, r1
 	ldr r2, [r1]
@@ -3960,7 +3960,7 @@ _08136630:
 	ldr r0, [r6]
 	add r0, r8
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r1, 0
@@ -3970,7 +3970,7 @@ _08136630:
 	ldr r1, _08136780 @ =0x00003290
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _08136790 @ =gUnknown_8253AE4
@@ -3998,7 +3998,7 @@ _081366B8:
 	bl sub_8008E78
 	ldr r0, [r6]
 	adds r0, r4
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r10
 	ldr r2, [r1]
 	lsls r0, 16
@@ -4012,14 +4012,14 @@ _081366B8:
 	ldr r0, [r6]
 	add r0, r8
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	ldr r0, [r6]
 	add r0, r8
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4035,7 +4035,7 @@ _081366B8:
 	muls r1, r4
 	ldr r2, _081367A0 @ =gUnknown_824FC40
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r6]
 	ldr r2, _081367A4 @ =0x000031cc
 	adds r0, r2
@@ -4043,11 +4043,11 @@ _081366B8:
 	lsls r4, 2
 	adds r4, r1
 	ldr r1, [r4]
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, [r6]
 	add r0, r8
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	bl sub_8138C5C
 	ldr r1, [r6]
 	ldr r4, _081367AC @ =0x0000326c
@@ -4164,7 +4164,7 @@ _08136812:
 	adds r0, r1
 	adds r0, r2, r0
 	ldr r1, _08136894 @ =gUnknown_841620E
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0xB
 	adds r1, r7, 0
 	muls r1, r0
@@ -4173,7 +4173,7 @@ _08136812:
 	ldr r0, [r6]
 	adds r0, r1
 	ldr r1, _0813689C @ =gUnknown_8416210
-	bl sub_8008D84
+	bl StringCopy
 	lsls r4, r7, 2
 	adds r4, r7
 	ldr r3, _081368A0 @ =0x0000316c
@@ -4182,13 +4182,13 @@ _08136812:
 	adds r0, r1
 	ldr r5, _081368A4 @ =gUnknown_8416213
 	adds r1, r5, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, _081368A8 @ =0x00003188
 	adds r4, r0
 	ldr r0, [r6]
 	adds r0, r4
 	adds r1, r5, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r0, _081368AC @ =gUnknown_203B144
 	ldr r1, [r0]
 	adds r0, r1, 0
@@ -4243,7 +4243,7 @@ _081368B0:
 	muls r1, r2
 	ldr r2, _0813695C @ =gUnknown_8247094
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	cmp r7, 0x3
 	bls _0813696C
 	ldr r1, [r6]
@@ -4328,13 +4328,13 @@ _0813696C:
 	ldrh r4, [r1]
 	adds r0, r6
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	adds r2, r7, 0
-	bl sub_804101C
+	bl CalculatePPWithBonus
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4351,7 +4351,7 @@ _081369D0:
 	adds r1, r5, r3
 	ldr r0, [r6]
 	adds r0, r1
-	bl sub_8008E08
+	bl StringLength
 	ldr r4, _08136A60 @ =gUnknown_203B144
 	mov r8, r4
 	ldr r2, [r4]
@@ -4369,7 +4369,7 @@ _081369D0:
 	adds r5, r0
 	ldr r0, [r6]
 	adds r0, r5
-	bl sub_8008E08
+	bl StringLength
 	mov r1, r8
 	ldr r2, [r1]
 	adds r2, 0x1C
@@ -4400,7 +4400,7 @@ _081369D0:
 	adds r0, r1
 	adds r0, r6, r0
 	ldr r1, _08136A6C @ =gUnknown_8416213
-	bl sub_8008D84
+	bl StringCopy
 	b _08136A84
 	.align 2, 0
 _08136A4C: .4byte gUnknown_203B140
@@ -4442,7 +4442,7 @@ _08136A84:
 	adds r0, r2
 	adds r0, r3, r0
 	ldr r1, _08136AC4 @ =gUnknown_8416213
-	bl sub_8008D84
+	bl StringCopy
 	b _08136ADA
 	.align 2, 0
 _08136AB0: .4byte 0x0000316c
@@ -4564,10 +4564,10 @@ _08136BA8: .4byte 0x0000327c
 	thumb_func_start sub_8136BAC
 sub_8136BAC: @ 8136BAC
 	push {lr}
-	bl sub_8006B10
-	bl sub_8070528
-	bl sub_80088F0
-	bl sub_8087E64
+	bl ResetSpriteData
+	bl ResetPaletteFade
+	bl FreeAllSpritePalettes
+	bl remove_some_task
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8136BAC
@@ -4643,7 +4643,7 @@ _08136BEA:
 	ldr r0, [r2, 0x8]
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
 	bl sub_8001618
 	ldr r1, _08136D40 @ =gUnknown_8463EFC
@@ -4653,39 +4653,39 @@ _08136BEA:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	bl sub_8002C28
 	ldr r1, _08136D44 @ =0x00005040
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r4, _08136D48 @ =gUnknown_203B140
 	ldr r0, [r4]
 	ldr r2, _08136D4C @ =0x00003214
@@ -4695,40 +4695,40 @@ _08136BEA:
 	movs r1, 0xF8
 	lsls r1, 5
 	movs r0, 0x48
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0xF
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _08136D50 @ =0x00002087
 	movs r0, 0x46
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xBC
 	lsls r1, 2
 	movs r0, 0x42
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, [r4]
 	movs r0, 0x1
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	ldr r1, [r4]
 	movs r0, 0x80
 	lsls r0, 5
 	adds r1, r0
 	movs r0, 0x2
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	ldr r1, [r4]
 	movs r2, 0x80
 	lsls r2, 6
 	adds r1, r2
 	movs r0, 0x3
-	bl sub_8001FA0
+	bl SetBgTilemapBuffer
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x2
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x3
-	bl sub_80019BC
+	bl ShowBg
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -4768,13 +4768,13 @@ _08136D7C:
 	ldr r0, _08136D98 @ =sub_8134840
 _08136D7E:
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r1, [r4]
 	ldr r2, _08136D9C @ =0x00003018
 	adds r1, r2
 	strb r0, [r1]
 	ldr r0, _08136DA0 @ =sub_8137EE8
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4796,7 +4796,7 @@ sub_8136DA4: @ 8136DA4
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -4812,7 +4812,7 @@ sub_8136DA4: @ 8136DA4
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -4833,7 +4833,7 @@ sub_8136DF0: @ 8136DF0
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r0, 0
 	adds r1, r6, 0
 	movs r2, 0
@@ -4857,7 +4857,7 @@ sub_8136DF0: @ 8136DF0
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -4878,7 +4878,7 @@ sub_8136E50: @ 8136E50
 	adds r0, r7
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r2, [r6]
 	movs r1, 0xC8
 	lsls r1, 6
@@ -4924,7 +4924,7 @@ _08136E9A:
 	ldr r0, [r6]
 	ldr r3, _08136F04 @ =0x00003290
 	adds r0, r3
-	bl sub_803F720
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFE
@@ -4972,7 +4972,7 @@ _08136F28:
 	ldr r1, _08136F48 @ =0x00003002
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	add sp, 0xC
 	pop {r4-r7}
 	pop {r0}
@@ -4992,7 +4992,7 @@ sub_8136F4C: @ 8136F4C
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r0, [r4]
 	ldr r1, _08136F7C @ =0x00003214
 	adds r0, r1
@@ -5024,7 +5024,7 @@ _08136F94:
 	ldr r1, _08136FAC @ =0x00003003
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5128,7 +5128,7 @@ _08137074:
 	ldr r1, _081370D4 @ =0x00003290
 	adds r0, r3, r1
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0x3
@@ -5449,13 +5449,13 @@ sub_81372E4: @ 81372E4
 	ldrh r4, [r1]
 	adds r0, r5
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	adds r2, r7, 0
-	bl sub_804101C
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	mov r8, r0
 	lsrs r5, r0, 24
@@ -5676,7 +5676,7 @@ sub_81374E8: @ 81374E8
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r0, [r4]
 	ldr r1, _08137518 @ =0x00003214
 	adds r0, r1
@@ -5712,7 +5712,7 @@ _08137536:
 	ldr r1, _08137550 @ =0x00003004
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5752,7 +5752,7 @@ sub_8137578: @ 8137578
 	ldr r0, [r7]
 	ldr r4, _081375EC @ =0x00003290
 	adds r0, r4
-	bl sub_8042E9C
+	bl GetNature
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r1, _081375F0 @ =gUnknown_8463E60
@@ -5764,7 +5764,7 @@ sub_8137578: @ 8137578
 	ldr r0, [r7]
 	adds r0, r4
 	movs r1, 0x24
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -5781,7 +5781,7 @@ _081375B2:
 	ldr r0, [r7]
 	adds r0, r4
 	movs r1, 0x23
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
@@ -5811,7 +5811,7 @@ _08137608:
 	add r4, sp, 0x1C
 	ldr r1, _08137618 @ =gUnknown_8419C13
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	b _08137626
 	.align 2, 0
 _08137614: .4byte 0x00003024
@@ -5820,7 +5820,7 @@ _0813761C:
 	add r4, sp, 0x1C
 	ldr r1, _08137660 @ =gUnknown_8419C0B
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 _08137626:
 	adds r1, r4, 0
 	movs r0, 0x2
@@ -5830,14 +5830,14 @@ _08137626:
 	ldr r1, _08137668 @ =0x00003290
 	adds r0, r1
 	movs r1, 0x24
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0813769C
 	ldr r0, [r4]
 	ldr r1, _08137668 @ =0x00003290
 	adds r0, r1
 	movs r1, 0x50
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	bne _0813767C
 	adds r0, r6, 0
@@ -5949,7 +5949,7 @@ sub_8137724: @ 8137724
 	ldr r0, [r5]
 	ldr r4, _081377A4 @ =0x00003290
 	adds r0, r4
-	bl sub_8042E9C
+	bl GetNature
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r1, _081377A8 @ =gUnknown_8463E60
@@ -5961,7 +5961,7 @@ sub_8137724: @ 8137724
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x24
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -5978,7 +5978,7 @@ _0813775E:
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x23
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
@@ -6073,7 +6073,7 @@ _08137846:
 	add r4, sp, 0x1C
 	ldr r1, _0813788C @ =gUnknown_8419C0B
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 _08137850:
 	adds r1, r4, 0
 	movs r0, 0x2
@@ -6083,14 +6083,14 @@ _08137850:
 	ldr r1, _08137894 @ =0x00003290
 	adds r0, r1
 	movs r1, 0x24
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _081378BC
 	ldr r0, [r4]
 	ldr r1, _08137894 @ =0x00003290
 	adds r0, r1
 	movs r1, 0x50
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	bne _081378A8
 	adds r0, r6, 0
@@ -6223,7 +6223,7 @@ sub_8137970: @ 8137970
 	ldr r6, _081379C8 @ =0x00003290
 	adds r0, r6
 	movs r1, 0x23
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r2, [r7]
@@ -6237,13 +6237,13 @@ sub_8137970: @ 8137970
 	beq _081379F4
 	adds r0, r2, r6
 	movs r1, 0x50
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	beq _081379F4
 	ldr r0, [r7]
 	adds r0, r6
 	movs r1, 0x25
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	movs r2, 0xFC
 	lsls r2, 24
@@ -6274,7 +6274,7 @@ _081379E4:
 	beq _081379F4
 	adds r0, r2, r6
 	movs r1, 0x50
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	bne _081379F8
 _081379F4:
@@ -6284,7 +6284,7 @@ _081379F8:
 	ldr r0, [r7]
 	adds r0, r6
 	movs r1, 0x25
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	movs r2, 0xFC
 	lsls r2, 24
@@ -6533,7 +6533,7 @@ _08137BFC:
 	ldr r1, _08137C14 @ =0x00003005
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6553,7 +6553,7 @@ sub_8137C18: @ 8137C18
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r1, [r5]
 	adds r0, r1, r4
 	ldrb r0, [r0]
@@ -6606,7 +6606,7 @@ sub_8137C90: @ 8137C90
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	movs r4, 0
 _08137CA4:
 	ldr r5, _08137D14 @ =gUnknown_203B140
@@ -6791,17 +6791,17 @@ sub_8137E28: @ 8137E28
 	lsls r1, 6
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldr r0, [r4]
 	ldr r1, _08137E5C @ =0x00003001
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldr r0, [r4]
 	ldr r1, _08137E60 @ =0x00003002
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6817,13 +6817,13 @@ sub_8137E64: @ 8137E64
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl sub_813AF90
-	bl sub_80088F0
-	bl sub_80721F0
+	bl FreeAllSpritePalettes
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08137E82
-	bl sub_80721C4
+	bl StopCryAndClearCrySongs
 _08137E82:
 	ldr r4, _08137ED4 @ =gUnknown_203B140
 	ldr r0, [r4]
@@ -6833,19 +6833,19 @@ _08137E82:
 	bl sub_8138414
 	bl sub_8003ECC
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	ldr r0, [r4]
 	ldr r1, _08137EDC @ =0x000032f8
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_8000544
+	bl SetMainCallback2
 	bl sub_8138B20
 	ldr r1, _08137EE0 @ =gUnknown_203B16C
 	strb r0, [r1]
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _08137EBC
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _08137EBC:
@@ -6853,7 +6853,7 @@ _08137EBC:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _08137ECC
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _08137ECC:
@@ -6871,10 +6871,10 @@ _08137EE4: .4byte gUnknown_203B144
 	thumb_func_start sub_8137EE8
 sub_8137EE8: @ 8137EE8
 	push {lr}
-	bl sub_8077578
-	bl sub_8006B5C
-	bl sub_8006BA8
-	bl sub_80704D0
+	bl RunTasks
+	bl AnimateSprites
+	bl BuildOamBuffer
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8137EE8
@@ -7048,7 +7048,7 @@ _0813801A:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x18
-	bl sub_8000A38
+	bl SetGpuReg
 	b _08138054
 	.align 2, 0
 _08138038: .4byte gUnknown_203B140
@@ -7061,7 +7061,7 @@ _08138044:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x14
-	bl sub_8000A38
+	bl SetGpuReg
 _08138054:
 	pop {r4,r5}
 	pop {r0}
@@ -7101,7 +7101,7 @@ _08138080:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x14
-	bl sub_8000A38
+	bl SetGpuReg
 	b _081380BC
 	.align 2, 0
 _081380A0: .4byte gUnknown_203B140
@@ -7114,7 +7114,7 @@ _081380AC:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x18
-	bl sub_8000A38
+	bl SetGpuReg
 _081380BC:
 	ldr r0, _081380E4 @ =gUnknown_203B140
 	ldr r1, [r0]
@@ -7130,7 +7130,7 @@ _081380BC:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 _081380DC:
 	pop {r4,r5}
 	pop {r0}
@@ -7220,9 +7220,9 @@ _08138178: .4byte 0x00003214
 	thumb_func_start sub_813817C
 sub_813817C: @ 813817C
 	push {lr}
-	bl sub_8007320
-	bl sub_8007610
-	bl sub_8070474
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
+	bl TransferPlttBuffer
 	ldr r0, _081381A4 @ =gUnknown_203B140
 	ldr r0, [r0]
 	ldr r1, _081381A8 @ =0x00003244
@@ -7244,9 +7244,9 @@ _081381A8: .4byte 0x00003244
 sub_81381AC: @ 81381AC
 	push {lr}
 	movs r0, 0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0
-	bl sub_8000700
+	bl SetHBlankCallback
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81381AC
@@ -7255,7 +7255,7 @@ sub_81381AC: @ 81381AC
 sub_81381C0: @ 81381C0
 	push {lr}
 	ldr r0, _081381CC @ =sub_813817C
-	bl sub_80006F4
+	bl SetVBlankCallback
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -7359,12 +7359,12 @@ sub_8138280: @ 8138280
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0xA
-	bl sub_8000AC4
+	bl GetGpuReg
 	movs r4, 0x3
 	adds r5, r4, 0
 	ands r5, r0
 	movs r0, 0xC
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r3, r4, 0
 	ands r3, r0
 	movs r4, 0
@@ -7626,7 +7626,7 @@ sub_813847C: @ 813847C
 	ldr r0, _081384C4 @ =gUnknown_202402C
 	cmp r1, r0
 	bne _081384D0
-	bl sub_800A404
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -7643,7 +7643,7 @@ sub_813847C: @ 813847C
 	adds r0, r3
 	adds r2, 0x8
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	b _081384E8
 	.align 2, 0
 _081384BC: .4byte gUnknown_203B140
@@ -7661,11 +7661,11 @@ _081384D0:
 	adds r0, r1
 	ldr r1, _08138524 @ =gUnknown_300500C
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 _081384E8:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, _0813851C @ =0x0000ffff
 	ands r1, r0
 	cmp r4, r1
@@ -7676,12 +7676,12 @@ _081384E8:
 	adds r2, r5
 	adds r0, r6, 0
 	movs r1, 0x7
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r4]
 	ldr r2, _08138520 @ =0x0000304c
 	adds r0, r1, r2
 	adds r1, r5
-	bl sub_8009370
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	beq _08138530
 _08138518:
@@ -7752,7 +7752,7 @@ _08138576:
 	movs r0, 0x3
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xBD
 	lsls r1, 1
 	str r4, [sp]
@@ -7761,7 +7761,7 @@ _08138576:
 	movs r0, 0x3
 	movs r2, 0xD
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _08138660 @ =0x00000169
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7769,7 +7769,7 @@ _08138576:
 	movs r0, 0x3
 	movs r2, 0xE
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _08138664 @ =0x00000179
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7777,7 +7777,7 @@ _08138576:
 	movs r0, 0x3
 	movs r2, 0xE
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r6, _08138668 @ =0x0000016b
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7786,7 +7786,7 @@ _08138576:
 	adds r1, r6, 0
 	movs r2, 0xF
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r5, _0813866C @ =0x0000017b
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7795,7 +7795,7 @@ _08138576:
 	adds r1, r5, 0
 	movs r2, 0xF
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _08138670 @ =0x0000016d
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7803,7 +7803,7 @@ _08138576:
 	movs r0, 0x3
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _08138674 @ =0x0000017d
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7811,7 +7811,7 @@ _08138576:
 	movs r0, 0x3
 	movs r2, 0x10
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r7, [sp, 0x8]
@@ -7819,7 +7819,7 @@ _08138576:
 	adds r1, r6, 0
 	movs r2, 0x11
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r7, [sp, 0x8]
@@ -7827,7 +7827,7 @@ _08138576:
 	adds r1, r5, 0
 	movs r2, 0x11
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xB7
 	lsls r1, 1
 	str r4, [sp]
@@ -7836,7 +7836,7 @@ _08138576:
 	movs r0, 0x3
 	movs r2, 0x12
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xBF
 	lsls r1, 1
 	str r4, [sp]
@@ -7860,7 +7860,7 @@ _08138678:
 	movs r0, 0x3
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xBD
 	lsls r1, 1
 	str r4, [sp]
@@ -7869,7 +7869,7 @@ _08138678:
 	movs r0, 0x3
 	movs r2, 0xD
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _081386E0 @ =0x00000189
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7877,7 +7877,7 @@ _08138678:
 	movs r0, 0x3
 	movs r2, 0xE
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _081386E4 @ =0x00000199
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -7885,7 +7885,7 @@ _08138678:
 	movs r0, 0x3
 	movs r2, 0xE
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _081386E8 @ =0x0000015b
 	movs r0, 0x4
 	str r0, [sp]
@@ -7895,7 +7895,7 @@ _08138678:
 	movs r0, 0x3
 	movs r2, 0xF
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	b _08138A16
 	.align 2, 0
 _081386E0: .4byte 0x00000189
@@ -7911,7 +7911,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xCD
 	lsls r1, 1
 	str r7, [sp]
@@ -7920,7 +7920,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0xD
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xAD
 	lsls r1, 1
 	str r7, [sp]
@@ -7929,7 +7929,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0xE
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xB6
 	lsls r1, 1
 	str r7, [sp]
@@ -7938,7 +7938,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0xE
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xB5
 	lsls r1, 1
 	str r7, [sp]
@@ -7947,7 +7947,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0xF
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xBD
 	lsls r1, 1
 	str r7, [sp]
@@ -7956,7 +7956,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0xF
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _081387D0 @ =0x00000169
 	str r7, [sp]
 	str r7, [sp, 0x4]
@@ -7964,7 +7964,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _081387D4 @ =0x00000179
 	str r7, [sp]
 	str r7, [sp, 0x4]
@@ -7972,7 +7972,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0x10
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _081387D8 @ =0x0000016b
 	str r7, [sp]
 	str r7, [sp, 0x4]
@@ -7980,7 +7980,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0x11
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _081387DC @ =0x0000017b
 	str r7, [sp]
 	str r7, [sp, 0x4]
@@ -7988,7 +7988,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0x11
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xB7
 	lsls r1, 1
 	str r7, [sp]
@@ -7997,7 +7997,7 @@ _081386EC:
 	movs r0, 0x3
 	movs r2, 0x12
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xBF
 	lsls r1, 1
 	str r7, [sp]
@@ -8022,7 +8022,7 @@ _081387E0:
 	mov r1, r10
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r2, 0xCD
 	lsls r2, 1
 	mov r9, r2
@@ -8033,7 +8033,7 @@ _081387E0:
 	mov r1, r9
 	movs r2, 0xD
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r0, 0xAD
 	lsls r0, 1
 	mov r8, r0
@@ -8044,7 +8044,7 @@ _081387E0:
 	mov r1, r8
 	movs r2, 0xE
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r6, 0xB6
 	lsls r6, 1
 	str r4, [sp]
@@ -8054,7 +8054,7 @@ _081387E0:
 	adds r1, r6, 0
 	movs r2, 0xE
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8062,7 +8062,7 @@ _081387E0:
 	mov r1, r10
 	movs r2, 0xF
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8070,7 +8070,7 @@ _081387E0:
 	mov r1, r9
 	movs r2, 0xF
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8078,7 +8078,7 @@ _081387E0:
 	mov r1, r8
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8086,7 +8086,7 @@ _081387E0:
 	adds r1, r6, 0
 	movs r2, 0x10
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xB5
 	lsls r1, 1
 	str r4, [sp]
@@ -8095,7 +8095,7 @@ _081387E0:
 	movs r0, 0x3
 	movs r2, 0x11
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xBD
 	lsls r1, 1
 	str r4, [sp]
@@ -8104,7 +8104,7 @@ _081387E0:
 	movs r0, 0x3
 	movs r2, 0x11
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _081388D8 @ =0x00000189
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -8112,7 +8112,7 @@ _081387E0:
 	movs r0, 0x3
 	movs r2, 0x12
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _081388DC @ =0x00000199
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -8121,7 +8121,7 @@ _081388CC:
 	movs r0, 0x3
 	movs r2, 0x12
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	b _08138A16
 	.align 2, 0
 _081388D8: .4byte 0x00000189
@@ -8143,7 +8143,7 @@ _081388E0:
 	movs r0, 0x3
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xB6
 	lsls r1, 1
 	str r6, [sp]
@@ -8152,7 +8152,7 @@ _081388E0:
 	movs r0, 0x3
 	movs r2, 0xD
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	b _081389CA
 	.align 2, 0
 _0813891C: .4byte 0x00003208
@@ -8169,7 +8169,7 @@ _08138920:
 	mov r1, r10
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r2, 0xCD
 	lsls r2, 1
 	mov r9, r2
@@ -8180,7 +8180,7 @@ _08138920:
 	mov r1, r9
 	movs r2, 0xD
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r0, 0xAD
 	lsls r0, 1
 	mov r8, r0
@@ -8191,7 +8191,7 @@ _08138920:
 	mov r1, r8
 	movs r2, 0xE
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r6, 0xB6
 	lsls r6, 1
 	str r4, [sp]
@@ -8201,7 +8201,7 @@ _08138920:
 	adds r1, r6, 0
 	movs r2, 0xE
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8209,7 +8209,7 @@ _08138920:
 	mov r1, r10
 	movs r2, 0xF
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8217,7 +8217,7 @@ _08138920:
 	mov r1, r9
 	movs r2, 0xF
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8225,7 +8225,7 @@ _08138920:
 	mov r1, r8
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r4, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -8233,7 +8233,7 @@ _08138920:
 	adds r1, r6, 0
 	movs r2, 0x10
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 _081389CA:
 	ldr r1, _08138A28 @ =0x0000018b
 	movs r4, 0x1
@@ -8244,7 +8244,7 @@ _081389CA:
 	movs r0, 0x3
 	movs r2, 0x11
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _08138A2C @ =0x0000019b
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -8252,7 +8252,7 @@ _081389CA:
 	movs r0, 0x3
 	movs r2, 0x11
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _08138A30 @ =0x00000189
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -8260,7 +8260,7 @@ _081389CA:
 	movs r0, 0x3
 	movs r2, 0x12
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _08138A34 @ =0x00000199
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -8268,7 +8268,7 @@ _081389CA:
 	movs r0, 0x3
 	movs r2, 0x12
 	movs r3, 0x1
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 _08138A16:
 	add sp, 0xC
 	pop {r3-r5}
@@ -8353,7 +8353,7 @@ _08138ABC:
 	adds r0, r1, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r1, [r6]
 	adds r0, r1, r5
 	ldrb r0, [r0]
@@ -8386,7 +8386,7 @@ _08138B04:
 	ldr r0, [r6]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 _08138B0E:
 	pop {r4-r6}
 	pop {r0}
@@ -8502,7 +8502,7 @@ _08138BC4:
 	adds r4, r1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_803E774
+	bl BoxMonToMon
 _08138BE2:
 	pop {r4,r5}
 	pop {r0}
@@ -8540,7 +8540,7 @@ _08138C10:
 _08138C14:
 	movs r1, 0x10
 _08138C16:
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -8576,7 +8576,7 @@ _08138C48:
 _08138C4C:
 	movs r1, 0x14
 _08138C4E:
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -8592,7 +8592,7 @@ sub_8138C5C: @ 8138C5C
 	ldr r5, _08138C7C @ =0x00003290
 	adds r0, r5
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08138C80
 	movs r0, 0x7
@@ -9113,9 +9113,9 @@ _08139034:
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldr r0, [r6]
 	adds r0, r7
 	movs r1, 0
@@ -9158,7 +9158,7 @@ sub_81390B0: @ 81390B0
 	ldrb r1, [r3]
 	adds r1, 0xD
 	adds r0, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	adds r1, 0x2
 	str r1, [sp, 0x8]
@@ -9168,14 +9168,14 @@ sub_81390B0: @ 81390B0
 	ldrb r1, [r3]
 	adds r1, 0xD
 	adds r0, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	ldr r0, _081391E0 @ =gUnknown_203B16D
 	ldrb r1, [r0]
 	adds r1, 0x11
 	adds r0, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0x5
 	add r1, sp
 	mov r10, r1
@@ -9184,12 +9184,12 @@ sub_81390B0: @ 81390B0
 	ldrb r1, [r3]
 	adds r1, 0x11
 	adds r0, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	add r7, sp, 0x4
 	strb r0, [r7]
 	adds r0, r6, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r4, sp
 	adds r4, 0x6
 	strb r0, [r4]
@@ -9305,7 +9305,7 @@ sub_81391EC: @ 81391EC
 	ldrb r1, [r3]
 	adds r1, 0xD
 	adds r0, r6, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	mov r1, sp
 	adds r1, 0x2
 	str r1, [sp, 0x8]
@@ -9315,14 +9315,14 @@ sub_81391EC: @ 81391EC
 	ldrb r1, [r3]
 	adds r1, 0xD
 	adds r0, r6, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	mov r1, sp
 	strh r0, [r1]
 	ldr r0, _0813931C @ =gUnknown_203B16D
 	ldrb r1, [r0]
 	adds r1, 0x11
 	adds r0, r6, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	movs r1, 0x5
 	add r1, sp
 	mov r10, r1
@@ -9331,12 +9331,12 @@ sub_81391EC: @ 81391EC
 	ldrb r1, [r3]
 	adds r1, 0x11
 	adds r0, r6, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	add r7, sp, 0x4
 	strb r0, [r7]
 	adds r0, r6, 0
 	movs r1, 0x15
-	bl sub_803FD44
+	bl GetBoxMonData
 	mov r4, sp
 	adds r4, 0x6
 	strb r0, [r4]
@@ -9468,7 +9468,7 @@ _08139360:
 	adds r4, r1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_803E774
+	bl BoxMonToMon
 _0813937E:
 	pop {r4,r5}
 	pop {r0}
@@ -9556,7 +9556,7 @@ _08139420:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _0813943C @ =gUnknown_203B140
 	ldr r1, [r0]
 	ldr r4, _08139440 @ =0x00003288
@@ -9838,9 +9838,9 @@ _08139640:
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldr r0, [r4]
 	ldr r4, _081396A4 @ =0x00003288
 	adds r0, r4
@@ -9858,7 +9858,7 @@ _081396A8:
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -9882,9 +9882,9 @@ _081396A8:
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldr r0, [r5]
 	ldr r1, _0813970C @ =0x00003288
 	adds r0, r1
@@ -9904,7 +9904,7 @@ _08139710:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r0, _08139730 @ =gUnknown_203B140
 	ldr r1, [r0]
 	ldr r2, _08139734 @ =0x00003288
@@ -10213,25 +10213,25 @@ sub_813995C: @ 813995C
 	sub sp, 0x14
 	ldr r4, _081399CC @ =gUnknown_203B170
 	movs r0, 0xC
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r5, _081399D0 @ =gUnknown_203B140
 	ldr r0, [r5]
 	ldr r4, _081399D4 @ =0x00003290
 	adds r0, r4
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r6, r0, 0
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	ldr r5, [r5]
 	ldr r1, _081399D8 @ =0x000032f8
@@ -10318,9 +10318,9 @@ _08139A40:
 	ldr r1, _08139A74 @ =gUnknown_202063C
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	adds r0, r7, 0
-	bl sub_80441F4
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _08139A78
@@ -10387,7 +10387,7 @@ sub_8139AAC: @ 8139AAC
 	ldr r1, _08139AFC @ =0x00003290
 	adds r0, r2, r1
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -10460,13 +10460,13 @@ _08139B6C:
 	ldr r4, _08139B98 @ =0x00003290
 	adds r0, r4
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r0, [r7]
 	adds r0, r4
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r6, r0
@@ -10596,7 +10596,7 @@ sub_8139C80: @ 8139C80
 	bl sub_810C214
 	ldr r4, _08139CAC @ =gUnknown_203B170
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 	pop {r4}
@@ -10622,7 +10622,7 @@ sub_8139CB0: @ 8139CB0
 	adds r2, 0x90
 	adds r0, r1, r2
 	movs r1, 0x26
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	b _08139CDA
@@ -10636,7 +10636,7 @@ _08139CDA:
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_804BEF4
+	bl LoadBallGfx
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 3
@@ -10645,7 +10645,7 @@ _08139CDA:
 	movs r1, 0x6A
 	movs r2, 0x58
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r2, _08139D44 @ =gUnknown_203B140
 	ldr r1, [r2]
 	ldr r3, _08139D48 @ =0x0000300c
@@ -10730,7 +10730,7 @@ sub_8139D90: @ 8139D90
 	lsls r0, 2
 	ldr r1, _08139DB8 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_804BD88
+	bl DestroySpriteAndFreeResources_
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -10748,13 +10748,13 @@ sub_8139DBC: @ 8139DBC
 	ldr r4, _08139E0C @ =0x00003290
 	adds r0, r4
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, [r6]
 	adds r0, r4
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r5, 0
 	bl sub_80970A0
@@ -10822,7 +10822,7 @@ _08139E58:
 	adds r1, r2
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80441F4
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _08139EA8
@@ -10915,7 +10915,7 @@ sub_8139F20: @ 8139F20
 	ldr r1, _08139F58 @ =0x00003290
 	adds r0, r1
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8097138
@@ -10956,24 +10956,24 @@ sub_8139F64: @ 8139F64
 	movs r6, 0x80
 	lsls r6, 4
 	adds r0, r6, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [sp, 0x18]
 	adds r0, r6, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	add r5, sp, 0x18
 	str r0, [r5, 0x4]
 	movs r0, 0xC
-	bl sub_8002BB0
+	bl AllocZeroed
 	ldr r4, _0813A0BC @ =gUnknown_203B148
 	str r0, [r4]
 	movs r0, 0xC
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x4]
 	movs r0, 0xC
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0x8]
 	movs r0, 0xC
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4, 0xC]
 	ldr r0, _0813A0C0 @ =gUnknown_8463740
 	ldr r1, [sp, 0x18]
@@ -11026,9 +11026,9 @@ _08139FCC:
 	ldr r0, _0813A0DC @ =sub_813A124
 	str r0, [sp, 0x14]
 	mov r0, r8
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r6, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	lsls r1, r4, 6
 	adds r1, 0x98
 	ldr r0, _0813A0E0 @ =gUnknown_203B16D
@@ -11042,7 +11042,7 @@ _08139FCC:
 	asrs r2, 16
 	mov r0, sp
 	adds r3, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0813A0BC @ =gUnknown_203B148
@@ -11070,7 +11070,7 @@ _08139FCC:
 	ldr r0, [r3]
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _0813A07E:
 	adds r0, r7, 0x1
 	lsls r0, 24
@@ -11082,14 +11082,14 @@ _0813A07E:
 	ldr r0, [sp, 0x18]
 	cmp r0, 0
 	beq _0813A09C
-	bl sub_8002BC4
+	bl Free
 	mov r0, r10
 	str r0, [sp, 0x18]
 _0813A09C:
 	ldr r0, [sp, 0x1C]
 	cmp r0, 0
 	beq _0813A0AA
-	bl sub_8002BC4
+	bl Free
 	mov r1, r10
 	str r1, [sp, 0x1C]
 _0813A0AA:
@@ -11293,12 +11293,12 @@ _0813A222:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0813A232
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 _0813A232:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _0813A240
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _0813A240:
@@ -11327,13 +11327,13 @@ sub_813A254: @ 813A254
 	ldr r0, _0813A310 @ =gUnknown_203B158
 	mov r8, r0
 	movs r0, 0x8
-	bl sub_8002BB0
+	bl AllocZeroed
 	mov r1, r8
 	str r0, [r1]
 	movs r4, 0x80
 	lsls r4, 3
 	adds r0, r4, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	ldr r0, _0813A314 @ =gUnknown_8E9BF48
 	adds r1, r5, 0
@@ -11368,14 +11368,14 @@ sub_813A254: @ 813A254
 	str r1, [sp, 0x10]
 	ldr r1, _0813A32C @ =nullsub_8
 	str r1, [sp, 0x14]
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	mov r0, sp
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -11395,7 +11395,7 @@ _0813A2F0:
 	cmp r5, 0
 	beq _0813A304
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 _0813A304:
 	add sp, 0x28
 	pop {r3}
@@ -11423,12 +11423,12 @@ sub_813A334: @ 813A334
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0813A344
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 _0813A344:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _0813A352
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _0813A352:
@@ -11447,7 +11447,7 @@ sub_813A35C: @ 813A35C
 	ldr r1, _0813A390 @ =0x00003290
 	adds r0, r1
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	bl sub_8138C5C
 	ldr r1, [r4]
 	ldr r2, _0813A394 @ =0x0000326c
@@ -11472,7 +11472,7 @@ _0813A398:
 	subs r1, 0x1
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0
 	bl sub_813A3B8
 _0813A3AE:
@@ -11589,11 +11589,11 @@ sub_813A45C: @ 813A45C
 	str r0, [sp, 0x38]
 	ldr r4, _0813A4BC @ =gUnknown_203B15C
 	movs r0, 0x40
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	movs r0, 0xC0
 	lsls r0, 1
-	bl sub_8002BB0
+	bl AllocZeroed
 	mov r9, r0
 	ldr r0, _0813A4C0 @ =gUnknown_8E9B4B8
 	mov r1, r9
@@ -11603,12 +11603,12 @@ sub_813A45C: @ 813A45C
 	ldr r4, _0813A4C8 @ =0x00003290
 	adds r0, r4
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r6, r0, 0
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsrs r0, r1, 2
 	cmp r0, r6
@@ -11670,13 +11670,13 @@ _0813A4D6:
 	ands r1, r6
 	orrs r1, r2
 	str r1, [r4, 0x4]
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	mov r0, r8
-	bl sub_8008928
+	bl LoadSpritePalette
 	adds r0, r5, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 _0813A540:
 	movs r4, 0
 	ldr r3, [sp, 0x38]
@@ -11712,7 +11712,7 @@ _0813A54C:
 	mov r0, sp
 	movs r2, 0x24
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [r5]
@@ -11748,7 +11748,7 @@ _0813A54C:
 	adds r0, r3
 	ldr r0, [r0]
 	movs r1, 0x8
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -11761,7 +11761,7 @@ _0813A54C:
 	cmp r2, 0
 	beq _0813A5F0
 	mov r0, r9
-	bl sub_8002BC4
+	bl Free
 _0813A5F0:
 	add sp, 0x40
 	pop {r3-r5}
@@ -11805,12 +11805,12 @@ _0813A642:
 	ldr r4, _0813A68C @ =0x00003290
 	adds r0, r1, r4
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	mov r9, r0
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	movs r1, 0x5
 	bl __udivsi3
@@ -11823,7 +11823,7 @@ _0813A666:
 	asrs r0, 16
 	lsls r1, r4, 16
 	asrs r1, 16
-	bl sub_804A614
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -11848,7 +11848,7 @@ _0813A696:
 	mov r8, r0
 _0813A69A:
 	movs r0, 0x78
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	ldr r5, _0813A6FC @ =gUnknown_203B15C
 	ldr r1, [r5]
 	mov r3, r8
@@ -11887,7 +11887,7 @@ _0813A6DC:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x8
-	bl sub_800838C
+	bl StartSpriteAnim
 	mov r0, r8
 	adds r0, 0x1
 	lsls r0, 24
@@ -11948,7 +11948,7 @@ _0813A74E:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x8
-	bl sub_800838C
+	bl StartSpriteAnim
 	mov r0, r8
 	adds r0, 0x1
 	lsls r0, 24
@@ -11981,7 +11981,7 @@ _0813A76E:
 	lsls r3, r2, 2
 	adds r0, r3
 	ldr r0, [r0]
-	bl sub_800838C
+	bl StartSpriteAnim
 	mov r0, r10
 	b _0813A7BE
 	.align 2, 0
@@ -11993,7 +11993,7 @@ _0813A7AC:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	mov r0, r8
 _0813A7BE:
 	adds r0, 0x1
@@ -12007,15 +12007,15 @@ _0813A7CA:
 	ldr r0, [r4]
 	ldr r0, [r0]
 	movs r1, 0x9
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4]
 	movs r1, 0xA
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, [r4]
 	ldr r0, [r0, 0x20]
 	movs r1, 0xB
-	bl sub_800838C
+	bl StartSpriteAnim
 _0813A7EA:
 	add sp, 0x8
 	pop {r3-r5}
@@ -12041,7 +12041,7 @@ _0813A804:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0813A816
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 _0813A816:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -12051,7 +12051,7 @@ _0813A816:
 	ldr r0, [r5]
 	cmp r0, 0
 	beq _0813A82E
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r5]
 _0813A82E:
@@ -12111,13 +12111,13 @@ sub_813A874: @ 813A874
 	ldr r0, _0813A970 @ =gUnknown_203B160
 	mov r8, r0
 	movs r0, 0x48
-	bl sub_8002BB0
+	bl AllocZeroed
 	mov r1, r8
 	str r0, [r1]
 	movs r4, 0xC0
 	lsls r4, 1
 	adds r0, r4, 0
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	ldr r0, _0813A974 @ =gUnknown_8E9B3F0
 	adds r1, r5, 0
@@ -12137,9 +12137,9 @@ sub_813A874: @ 813A874
 	ands r1, r2
 	orrs r1, r6
 	str r1, [r4, 0x4]
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 _0813A8D0:
 	movs r4, 0
 	mov r9, r4
@@ -12170,7 +12170,7 @@ _0813A8D4:
 	mov r0, sp
 	movs r2, 0x84
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -12209,7 +12209,7 @@ _0813A8D4:
 	cmp r5, 0
 	beq _0813A960
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 _0813A960:
 	add sp, 0x28
 	pop {r3,r4}
@@ -12252,18 +12252,18 @@ _0813A9B4:
 	ldr r4, _0813AAD8 @ =0x00003290
 	adds r0, r1, r4
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	ldr r0, [r6]
 	adds r0, r4
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, [r6]
 	adds r0, r4
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r5, 0x63
@@ -12339,7 +12339,7 @@ _0813AA58:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x8
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -12354,7 +12354,7 @@ _0813AA72:
 	ldr r0, [r0]
 	ldr r0, [r0, 0x24]
 	movs r1, 0x7
-	bl sub_800838C
+	bl StartSpriteAnim
 _0813AA86:
 	lsrs r3, r4, 29
 	lsls r2, r5, 3
@@ -12373,7 +12373,7 @@ _0813AA86:
 	lsls r3, r7, 2
 	adds r0, r3
 	ldr r0, [r0]
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r7, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -12385,7 +12385,7 @@ _0813AAB8:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -12407,7 +12407,7 @@ _0813AAEC:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -12418,15 +12418,15 @@ _0813AB04:
 	ldr r0, [r4]
 	ldr r0, [r0]
 	movs r1, 0x9
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4]
 	movs r1, 0xA
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, [r4]
 	ldr r0, [r0, 0x28]
 	movs r1, 0xB
-	bl sub_800838C
+	bl StartSpriteAnim
 _0813AB24:
 	add sp, 0x8
 	pop {r3-r5}
@@ -12452,7 +12452,7 @@ _0813AB3C:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0813AB4E
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 _0813AB4E:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -12462,7 +12462,7 @@ _0813AB4E:
 	ldr r0, [r5]
 	cmp r0, 0
 	beq _0813AB66
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r5]
 _0813AB66:
@@ -12521,11 +12521,11 @@ sub_813ABAC: @ 813ABAC
 	ldr r0, _0813AC68 @ =gUnknown_203B164
 	mov r8, r0
 	movs r0, 0x8
-	bl sub_8002BB0
+	bl AllocZeroed
 	mov r1, r8
 	str r0, [r1]
 	movs r0, 0x20
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	ldr r0, _0813AC6C @ =gUnknown_8463B20
 	adds r1, r5, 0
@@ -12561,14 +12561,14 @@ sub_813ABAC: @ 813ABAC
 	str r1, [sp, 0x10]
 	ldr r1, _0813AC84 @ =nullsub_8
 	str r1, [sp, 0x14]
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	mov r0, sp
 	movs r1, 0x72
 	movs r2, 0x5C
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -12588,7 +12588,7 @@ _0813AC46:
 	cmp r5, 0
 	beq _0813AC5A
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 _0813AC5A:
 	add sp, 0x28
 	pop {r3}
@@ -12616,12 +12616,12 @@ sub_813AC8C: @ 813AC8C
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0813AC9C
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 _0813AC9C:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _0813ACAA
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _0813ACAA:
@@ -12769,11 +12769,11 @@ sub_813ADA8: @ 813ADA8
 	ldr r0, _0813AE64 @ =gUnknown_203B168
 	mov r8, r0
 	movs r0, 0x8
-	bl sub_8002BB0
+	bl AllocZeroed
 	mov r1, r8
 	str r0, [r1]
 	movs r0, 0x40
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	ldr r0, _0813AE68 @ =gUnknown_8463B64
 	adds r1, r5, 0
@@ -12809,14 +12809,14 @@ sub_813ADA8: @ 813ADA8
 	str r1, [sp, 0x10]
 	ldr r1, _0813AE80 @ =nullsub_8
 	str r1, [sp, 0x14]
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	mov r0, sp
 	movs r1, 0x6A
 	movs r2, 0x28
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -12836,7 +12836,7 @@ _0813AE42:
 	cmp r5, 0
 	beq _0813AE56
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 _0813AE56:
 	add sp, 0x28
 	pop {r3}
@@ -12864,12 +12864,12 @@ sub_813AE88: @ 813AE88
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0813AE98
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 _0813AE98:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _0813AEA6
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 _0813AEA6:
@@ -13010,7 +13010,7 @@ sub_813AF90: @ 813AF90
 	bl sub_813A334
 	bl sub_813AC8C
 	bl sub_813AE88
-	bl sub_8006B10
+	bl ResetSpriteData
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813AF90
@@ -13043,13 +13043,13 @@ sub_813AFFC: @ 813AFFC
 	ldr r1, _0813B05C @ =0x00003290
 	adds r0, r1
 	movs r1, 0x8
-	bl sub_803FBE8
+	bl GetMonData
 	adds r6, r0, 0
 	ldr r0, [r5]
 	ldr r4, _0813B060 @ =0x000032fc
 	adds r0, r4
 	ldr r0, [r0]
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	ldr r2, _0813B064 @ =gUnknown_84636E0
 	movs r0, 0x8C
 	movs r1, 0x8C
@@ -13063,7 +13063,7 @@ sub_813AFFC: @ 813AFFC
 	lsls r1, r6, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, [r5]
 	adds r0, r4
 	ldr r2, [r0]
@@ -13093,7 +13093,7 @@ sub_813B068: @ 813B068
 	ldr r1, _0813B080 @ =0x000032fc
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -13111,7 +13111,7 @@ sub_813B084: @ 813B084
 	ldr r1, _0813B0B4 @ =0x00003290
 	adds r0, r1
 	movs r1, 0x8
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0813B0BC
 	ldr r0, [r4]
@@ -13160,7 +13160,7 @@ sub_813B0E4: @ 813B0E4
 	ldr r1, _0813B118 @ =0x00003290
 	adds r0, r1
 	movs r1, 0x8
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	ldr r0, [r4]
 	ldr r2, _0813B11C @ =0x000032fc
@@ -13168,7 +13168,7 @@ sub_813B0E4: @ 813B0E4
 	ldr r0, [r0]
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_800838C
+	bl StartSpriteAnim
 	movs r0, 0
 	bl sub_813B084
 	pop {r4}
@@ -13274,7 +13274,7 @@ _0813B1CC:
 	strb r2, [r0]
 	ldr r0, _0813B200 @ =sub_813B3F0
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r0, _0813B204 @ =gUnknown_203B140
 	ldr r0, [r0]
 	ldr r1, _0813B208 @ =0x0000328c
@@ -13375,7 +13375,7 @@ _0813B2A8:
 	muls r0, r1
 	adds r0, r7, r0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0813B26E
 	ldrb r0, [r4]
@@ -13394,7 +13394,7 @@ sub_813B2C8: @ 813B2C8
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0813B2FC
 	ldr r0, _0813B2F4 @ =gUnknown_203B140
@@ -13406,7 +13406,7 @@ sub_813B2C8: @ 813B2C8
 	bne _0813B2F0
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0813B2FC
 _0813B2F0:
@@ -13599,7 +13599,7 @@ _0813B420:
 	.4byte _0813B678
 	.4byte _0813B70C
 _0813B450:
-	bl sub_80721C4
+	bl StopCryAndClearCrySongs
 	ldr r0, _0813B468 @ =gUnknown_203B16D
 	movs r1, 0
 	strb r1, [r0]
@@ -13628,7 +13628,7 @@ _0813B486:
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	movs r2, 0xC8
 	lsls r2, 6
@@ -13637,7 +13637,7 @@ _0813B486:
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x4
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r5]
 	ldr r2, _0813B4D4 @ =0x00003204
 	adds r1, r2
@@ -13668,7 +13668,7 @@ _0813B4DC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002454
+	bl FillBgTilemapBufferRect_Palette0
 	ldr r4, _0813B52C @ =gUnknown_203B140
 	ldr r0, [r4]
 	ldr r1, _0813B530 @ =0x00003290
@@ -13689,12 +13689,12 @@ _0813B4DC:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	subs r4, 0x20
 	adds r0, r4, 0
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	b _0813B550
 	.align 2, 0
 _0813B52C: .4byte gUnknown_203B140
@@ -13705,12 +13705,12 @@ _0813B538:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	adds r4, 0x20
 	adds r0, r4, 0
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 _0813B550:
 	ldr r0, _0813B560 @ =gUnknown_203B140
 	ldr r1, [r0]
@@ -13740,7 +13740,7 @@ _0813B568:
 	ldr r1, _0813B5B0 @ =gUnknown_8E9BBCC
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	ldr r0, [r4]
 	movs r4, 0xC9
 	lsls r4, 6
@@ -13749,7 +13749,7 @@ _0813B568:
 	ldr r1, _0813B5B4 @ =gUnknown_8E9B750
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	b _0813B5DC
 	.align 2, 0
 _0813B5A8: .4byte gUnknown_203B140
@@ -13763,7 +13763,7 @@ _0813B5B8:
 	ldr r1, _0813B5EC @ =gUnknown_8E9B598
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 	ldr r0, [r4]
 	movs r4, 0xC9
 	lsls r4, 6
@@ -13772,7 +13772,7 @@ _0813B5B8:
 	ldr r1, _0813B5F0 @ =gUnknown_8E9B750
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002040
+	bl CopyToBgTilemapBuffer
 _0813B5DC:
 	ldr r0, _0813B5F4 @ =gUnknown_203B140
 	ldr r1, [r0]
@@ -13887,11 +13887,11 @@ _0813B678:
 	movs r1, 0x2
 	bl sub_8003F20
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	ldr r1, [r5]
 	ldr r0, _0813B708 @ =0x0000328c
 	adds r1, r0
@@ -13929,7 +13929,7 @@ _0813B73C:
 	movs r0, 0
 	strb r0, [r2]
 	adds r0, r3, 0
-	bl sub_8077508
+	bl DestroyTask
 _0813B746:
 	add sp, 0x8
 	pop {r4,r5}
@@ -13946,19 +13946,19 @@ sub_813B750: @ 813B750
 	lsls r5, 7
 	movs r0, 0
 	adds r1, r5, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	cmp r4, 0x2
 	bgt _0813B77E
 	cmp r4, 0
 	blt _0813B77E
 	movs r0, 0
-	bl sub_8000AC4
+	bl GetGpuReg
 	adds r1, r5, 0
 	orrs r1, r0
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0
-	bl sub_8000A38
+	bl SetGpuReg
 _0813B77E:
 	pop {r4,r5}
 	pop {r0}
@@ -13973,23 +13973,23 @@ sub_813B784: @ 813B784
 	ldr r5, _0813B7C0 @ =0x00003290
 	adds r0, r5
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0813B7DA
 	ldr r0, [r4]
 	adds r0, r5
-	bl sub_8035A28
+	bl ShouldPlayNormalPokeCry
 	cmp r0, 0x1
 	bne _0813B7C4
 	ldr r0, [r4]
 	adds r0, r5
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
 	movs r2, 0
-	bl sub_8071E60
+	bl PlayCry3
 	b _0813B7DA
 	.align 2, 0
 _0813B7BC: .4byte gUnknown_203B140
@@ -13998,12 +13998,12 @@ _0813B7C4:
 	ldr r0, [r4]
 	adds r0, r5
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
 	movs r2, 0xB
-	bl sub_8071E60
+	bl PlayCry3
 _0813B7DA:
 	pop {r4,r5}
 	pop {r0}
@@ -14037,7 +14037,7 @@ sub_813B7F8: @ 813B7F8
 	ldr r1, _0813B82C @ =0x00003290
 	adds r0, r1
 	movs r1, 0x25
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r2, 0xFC
@@ -14088,7 +14088,7 @@ _0813B84E:
 sub_813B854: @ 813B854
 	push {lr}
 	sub sp, 0x4
-	ldr r3, _0813B86C @ =sub_80567DC
+	ldr r3, _0813B86C @ =c2_exit_to_overworld_2_switch
 	movs r0, 0
 	str r0, [sp]
 	movs r1, 0
@@ -14098,7 +14098,7 @@ sub_813B854: @ 813B854
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813B86C: .4byte sub_80567DC
+_0813B86C: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_813B854
 
 	.align 2, 0 @ Don't pad with nop.

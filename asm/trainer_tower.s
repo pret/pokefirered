@@ -51,14 +51,14 @@ sub_815D80C: @ 815D80C
 	adds r4, r0, 0
 	movs r0, 0x80
 	lsls r0, 5
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_815D7BC
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
@@ -235,7 +235,7 @@ sub_815D96C: @ 815D96C
 	push {r4-r6,lr}
 	movs r6, 0
 _0815D970:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -338,7 +338,7 @@ sub_815DA28: @ 815DA28
 	ldr r1, _0815DA38 @ =gUnknown_203F45C
 	ldr r1, [r1]
 	movs r2, 0xB
-	bl sub_8008DBC
+	bl StringCopyN
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -371,7 +371,7 @@ sub_815DA54: @ 815DA54
 	bl sub_815DC8C
 	ldr r5, _0815DBC4 @ =gUnknown_203F45C
 	movs r0, 0x40
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r5]
 	ldr r0, _0815DBC8 @ =0x00004001
 	bl sub_806E568
@@ -396,7 +396,7 @@ sub_815DA54: @ 815DA54
 	adds r2, r4, 0x4
 	adds r1, r2
 	movs r2, 0xB
-	bl sub_8008DBC
+	bl StringCopyN
 	movs r0, 0
 	mov r9, r0
 	str r6, [sp]
@@ -555,7 +555,7 @@ sub_815DBDC: @ 815DBDC
 	push {r4,lr}
 	ldr r4, _0815DBF0 @ =gUnknown_203F45C
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 	pop {r4}
@@ -651,7 +651,7 @@ sub_815DC8C: @ 815DC8C
 	ldr r5, [r0]
 	ldr r4, _0815DCC4 @ =gUnknown_203F458
 	ldr r0, _0815DCC8 @ =0x00001f0c
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	ldr r1, _0815DCCC @ =gUnknown_2036DFC
 	ldrb r1, [r1, 0x12]
@@ -700,7 +700,7 @@ _0815DCE6:
 	adds r0, 0xC
 	movs r1, 0xF8
 	lsls r1, 5
-	bl sub_8045254
+	bl CalcByteArraySum
 	ldr r1, [r6]
 	str r0, [r1, 0x8]
 	bl sub_815EC0C
@@ -719,7 +719,7 @@ sub_815DD2C: @ 815DD2C
 	push {r4,lr}
 	ldr r4, _0815DD40 @ =gUnknown_203F458
 	ldr r0, [r4]
-	bl sub_8002BC4
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 	pop {r4}
@@ -1249,12 +1249,12 @@ _0815E110: .4byte gUnknown_20370DA
 	thumb_func_start sub_815E114
 sub_815E114: @ 815E114
 	push {lr}
-	ldr r0, _0815E120 @ =sub_80568E0
-	bl sub_8000544
+	ldr r0, _0815E120 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E120: .4byte sub_80568E0
+_0815E120: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_815E114
 
 	thumb_func_start sub_815E124
@@ -1272,9 +1272,9 @@ sub_815E124: @ 815E124
 	str r1, [r0, 0x8]
 	bl sub_80563F0
 	ldr r0, _0815E15C @ =sub_800FD9C
-	bl sub_8000544
+	bl SetMainCallback2
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _0815E14C:
 	pop {r4}
 	pop {r0}
@@ -1310,7 +1310,7 @@ _0815E180:
 	bl sub_815E9FC
 	ldr r0, _0815E1BC @ =sub_815E124
 	movs r1, 0x1
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0
 	bl sub_8044090
 	bl sub_8080060
@@ -2134,7 +2134,7 @@ _0815E76C:
 	cmp r0, 0x3
 	ble _0815E76C
 	adds r0, r7, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	adds r0, r7, 0
 	movs r1, 0x3
 	bl sub_8003F20
@@ -2188,7 +2188,7 @@ _0815E8B0: .4byte 0x00004001
 sub_815E8B4: @ 815E8B4
 	push {r4,lr}
 	ldr r4, _0815E8C8 @ =gUnknown_20370D0
-	bl sub_8040CC4
+	bl GetMonsStateToDoubles
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -2322,7 +2322,7 @@ _0815E9B2:
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrh r0, [r1]
-	bl sub_8071A74
+	bl PlayNewMapMusic
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2383,7 +2383,7 @@ sub_815E9FC: @ 815E9FC
 	lsls r0, 6
 	adds r1, r0
 	ldrb r5, [r1]
-	bl sub_803DA34
+	bl ZeroEnemyPartyMons
 	ldr r1, _0815EAC8 @ =gUnknown_203F458
 	mov r10, r1
 	ldr r6, [r1]
@@ -2585,13 +2585,13 @@ _0815EBBE:
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0815EBF8
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -2599,7 +2599,7 @@ _0815EBBE:
 	adds r0, r4, 0
 	movs r1, 0x38
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, r6
 	ble _0815EBF8
 	adds r6, r0, 0
@@ -2696,7 +2696,7 @@ sub_815EC8C: @ 815EC8C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8004378
+	bl FillWindowPixelRect
 	bl sub_815EC0C
 	ldr r4, _0815EDB4 @ =gUnknown_847A22C
 	str r4, [sp]
@@ -2796,7 +2796,7 @@ _0815ECDC:
 	cmp r7, 0x3
 	ble _0815ECDC
 	mov r0, r8
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	mov r0, r8
 	movs r1, 0x3
 	bl sub_8003F20

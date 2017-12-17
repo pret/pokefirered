@@ -28,7 +28,7 @@ _0800D24A:
 _0800D256:
 	ldr r0, _0800D274 @ =sub_8081A90
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	bl sub_800D93C
 _0800D262:
 	pop {r0}
@@ -415,7 +415,7 @@ _0800D598: .4byte gUnknown_2023BD6
 _0800D59C: .4byte sub_803A668
 _0800D5A0: .4byte gUnknown_2023BCC
 _0800D5A4:
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, [r4]
@@ -707,24 +707,24 @@ _0800D7C2:
 	adds r4, r7, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0800D888
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0800D888
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
 	beq _0800D888
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0800D888
 	ldr r0, _0800D804 @ =gUnknown_2023BCE
@@ -745,7 +745,7 @@ _0800D808:
 	adds r4, r7, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0800D888
 	adds r0, r4, 0
@@ -758,25 +758,25 @@ _0800D830:
 	adds r4, r7, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0800D888
 	adds r0, r4, 0
 	movs r1, 0x41
 _0800D844:
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0800D888
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
 	beq _0800D888
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0800D888
 	ldr r1, _0800D884 @ =gUnknown_2023BCE
@@ -898,7 +898,7 @@ sub_800D93C: @ 800D93C
 	push {r4-r6,lr}
 	ldr r0, _0800D9D4 @ =sub_800DB6C
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r2, _0800D9D8 @ =gUnknown_202286C
 	strb r0, [r2]
 	ldr r5, _0800D9DC @ =gUnknown_3005090
@@ -934,9 +934,9 @@ sub_800D93C: @ 800D93C
 	lsls r0, 3
 	adds r0, r5
 	strh r4, [r0, 0x26]
-	ldr r0, _0800D9E0 @ =sub_800DE4C
+	ldr r0, _0800D9E0 @ =Task_HandleCopyReceivedLinkBuffersData
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	ldr r2, _0800D9E4 @ =gUnknown_202286D
 	strb r0, [r2]
 	ldrb r1, [r2]
@@ -972,7 +972,7 @@ sub_800D93C: @ 800D93C
 _0800D9D4: .4byte sub_800DB6C
 _0800D9D8: .4byte gUnknown_202286C
 _0800D9DC: .4byte gUnknown_3005090
-_0800D9E0: .4byte sub_800DE4C
+_0800D9E0: .4byte Task_HandleCopyReceivedLinkBuffersData
 _0800D9E4: .4byte gUnknown_202286D
 _0800D9E8: .4byte gUnknown_202286E
 	thumb_func_end sub_800D93C
@@ -1325,7 +1325,7 @@ _0800DC80:
 	adds r0, 0x8
 	lsls r0, 16
 	lsrs r6, r0, 16
-	bl sub_800A42C
+	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x26
@@ -1333,7 +1333,7 @@ _0800DC80:
 	ldr r1, [r5]
 	adds r1, r2
 	adds r2, r6, 0
-	bl sub_800A448
+	bl SendBlock
 	ldrh r0, [r4, 0x1E]
 	adds r0, 0x1
 	strh r0, [r4, 0x1E]
@@ -1430,7 +1430,7 @@ _0800DD64: .4byte gUnknown_202273C
 _0800DD68: .4byte 0x00002211
 _0800DD6C: .4byte gUnknown_2022118
 _0800DD70:
-	bl sub_800A4EC
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0800DE38 @ =gUnknown_825E45C
@@ -1443,7 +1443,7 @@ _0800DD70:
 	cmp r0, 0
 	beq _0800DE16
 	adds r0, r4, 0
-	bl sub_800A588
+	bl ResetBlockReceivedFlag
 	lsls r0, r4, 8
 	mov r4, r10
 	adds r3, r0, r4
@@ -1540,8 +1540,8 @@ _0800DE44: .4byte gUnknown_202286D
 _0800DE48: .4byte gUnknown_2023FF0
 	thumb_func_end sub_800DD28
 
-	thumb_func_start sub_800DE4C
-sub_800DE4C: @ 800DE4C
+	thumb_func_start Task_HandleCopyReceivedLinkBuffersData
+Task_HandleCopyReceivedLinkBuffersData: @ 800DE4C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1707,10 +1707,10 @@ _0800DF8C:
 _0800DF98: .4byte gUnknown_2023BC8
 _0800DF9C: .4byte gUnknown_825E45C
 _0800DFA0: .4byte gUnknown_3005090
-	thumb_func_end sub_800DE4C
+	thumb_func_end Task_HandleCopyReceivedLinkBuffersData
 
-	thumb_func_start sub_800DFA4
-sub_800DFA4: @ 800DFA4
+	thumb_func_start EmitGetMonData
+EmitGetMonData: @ 800DFA4
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1728,10 +1728,10 @@ sub_800DFA4: @ 800DFA4
 	bx r0
 	.align 2, 0
 _0800DFC4: .4byte gUnknown_2022874
-	thumb_func_end sub_800DFA4
+	thumb_func_end EmitGetMonData
 
-	thumb_func_start sub_800DFC8
-sub_800DFC8: @ 800DFC8
+	thumb_func_start EmitGetRawMonData
+EmitGetRawMonData: @ 800DFC8
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	lsls r0, 24
@@ -1750,10 +1750,10 @@ sub_800DFC8: @ 800DFC8
 	bx r0
 	.align 2, 0
 _0800DFEC: .4byte gUnknown_2022874
-	thumb_func_end sub_800DFC8
+	thumb_func_end EmitGetRawMonData
 
-	thumb_func_start sub_800DFF0
-sub_800DFF0: @ 800DFF0
+	thumb_func_start EmitSetMonData
+EmitSetMonData: @ 800DFF0
 	push {r4-r6,lr}
 	ldr r4, [sp, 0x10]
 	lsls r0, 24
@@ -1787,10 +1787,10 @@ _0800E01E:
 	bx r0
 	.align 2, 0
 _0800E02C: .4byte gUnknown_2022874
-	thumb_func_end sub_800DFF0
+	thumb_func_end EmitSetMonData
 
-	thumb_func_start sub_800E030
-sub_800E030: @ 800E030
+	thumb_func_start EmitSetRawMonData
+EmitSetRawMonData: @ 800E030
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -1824,10 +1824,10 @@ _0800E05C:
 	bx r0
 	.align 2, 0
 _0800E06C: .4byte gUnknown_2022874
-	thumb_func_end sub_800E030
+	thumb_func_end EmitSetRawMonData
 
-	thumb_func_start sub_800E070
-sub_800E070: @ 800E070
+	thumb_func_start EmitLoadMonSprite
+EmitLoadMonSprite: @ 800E070
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1842,10 +1842,10 @@ sub_800E070: @ 800E070
 	bx r0
 	.align 2, 0
 _0800E08C: .4byte gUnknown_2022874
-	thumb_func_end sub_800E070
+	thumb_func_end EmitLoadMonSprite
 
-	thumb_func_start sub_800E090
-sub_800E090: @ 800E090
+	thumb_func_start EmitSwitchInAnim
+EmitSwitchInAnim: @ 800E090
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1863,10 +1863,10 @@ sub_800E090: @ 800E090
 	bx r0
 	.align 2, 0
 _0800E0B0: .4byte gUnknown_2022874
-	thumb_func_end sub_800E090
+	thumb_func_end EmitSwitchInAnim
 
-	thumb_func_start sub_800E0B4
-sub_800E0B4: @ 800E0B4
+	thumb_func_start EmitReturnMonToBall
+EmitReturnMonToBall: @ 800E0B4
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -1881,10 +1881,10 @@ sub_800E0B4: @ 800E0B4
 	bx r0
 	.align 2, 0
 _0800E0D0: .4byte gUnknown_2022874
-	thumb_func_end sub_800E0B4
+	thumb_func_end EmitReturnMonToBall
 
-	thumb_func_start sub_800E0D4
-sub_800E0D4: @ 800E0D4
+	thumb_func_start EmitDrawTrainerPic
+EmitDrawTrainerPic: @ 800E0D4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1900,10 +1900,10 @@ sub_800E0D4: @ 800E0D4
 	bx r0
 	.align 2, 0
 _0800E0F0: .4byte gUnknown_2022874
-	thumb_func_end sub_800E0D4
+	thumb_func_end EmitDrawTrainerPic
 
-	thumb_func_start sub_800E0F4
-sub_800E0F4: @ 800E0F4
+	thumb_func_start EmitTrainerSlide
+EmitTrainerSlide: @ 800E0F4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1919,10 +1919,10 @@ sub_800E0F4: @ 800E0F4
 	bx r0
 	.align 2, 0
 _0800E110: .4byte gUnknown_2022874
-	thumb_func_end sub_800E0F4
+	thumb_func_end EmitTrainerSlide
 
-	thumb_func_start sub_800E114
-sub_800E114: @ 800E114
+	thumb_func_start EmitTrainerSlideBack
+EmitTrainerSlideBack: @ 800E114
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1938,10 +1938,10 @@ sub_800E114: @ 800E114
 	bx r0
 	.align 2, 0
 _0800E130: .4byte gUnknown_2022874
-	thumb_func_end sub_800E114
+	thumb_func_end EmitTrainerSlideBack
 
-	thumb_func_start sub_800E134
-sub_800E134: @ 800E134
+	thumb_func_start EmitFaintAnimation
+EmitFaintAnimation: @ 800E134
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1957,10 +1957,10 @@ sub_800E134: @ 800E134
 	bx r0
 	.align 2, 0
 _0800E150: .4byte gUnknown_2022874
-	thumb_func_end sub_800E134
+	thumb_func_end EmitFaintAnimation
 
-	thumb_func_start sub_800E154
-sub_800E154: @ 800E154
+	thumb_func_start EmitPaletteFade
+EmitPaletteFade: @ 800E154
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1976,10 +1976,10 @@ sub_800E154: @ 800E154
 	bx r0
 	.align 2, 0
 _0800E170: .4byte gUnknown_2022874
-	thumb_func_end sub_800E154
+	thumb_func_end EmitPaletteFade
 
-	thumb_func_start sub_800E174
-sub_800E174: @ 800E174
+	thumb_func_start EmitSuccessBallThrowAnim
+EmitSuccessBallThrowAnim: @ 800E174
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1995,10 +1995,10 @@ sub_800E174: @ 800E174
 	bx r0
 	.align 2, 0
 _0800E190: .4byte gUnknown_2022874
-	thumb_func_end sub_800E174
+	thumb_func_end EmitSuccessBallThrowAnim
 
-	thumb_func_start sub_800E194
-sub_800E194: @ 800E194
+	thumb_func_start EmitBallThrowAnim
+EmitBallThrowAnim: @ 800E194
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -2013,10 +2013,10 @@ sub_800E194: @ 800E194
 	bx r0
 	.align 2, 0
 _0800E1B0: .4byte gUnknown_2022874
-	thumb_func_end sub_800E194
+	thumb_func_end EmitBallThrowAnim
 
-	thumb_func_start sub_800E1B4
-sub_800E1B4: @ 800E1B4
+	thumb_func_start EmitPause
+EmitPause: @ 800E1B4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2053,10 +2053,10 @@ _0800E1E2:
 	bx r0
 	.align 2, 0
 _0800E1F8: .4byte gUnknown_2022874
-	thumb_func_end sub_800E1B4
+	thumb_func_end EmitPause
 
-	thumb_func_start sub_800E1FC
-sub_800E1FC: @ 800E1FC
+	thumb_func_start EmitMoveAnimation
+EmitMoveAnimation: @ 800E1FC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2159,10 +2159,10 @@ _0800E2A6:
 	bx r0
 	.align 2, 0
 _0800E2D0: .4byte gUnknown_2022874
-	thumb_func_end sub_800E1FC
+	thumb_func_end EmitMoveAnimation
 
-	thumb_func_start sub_800E2D4
-sub_800E2D4: @ 800E2D4
+	thumb_func_start EmitPrintString
+EmitPrintString: @ 800E2D4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2290,10 +2290,10 @@ _0800E3DC: .4byte gUnknown_2022AD8
 _0800E3E0: .4byte gUnknown_2023BE4
 _0800E3E4: .4byte gUnknown_2022AC8
 _0800E3E8: .4byte gUnknown_2022AB8
-	thumb_func_end sub_800E2D4
+	thumb_func_end EmitPrintString
 
-	thumb_func_start sub_800E3EC
-sub_800E3EC: @ 800E3EC
+	thumb_func_start EmitPrintSelectionString
+EmitPrintSelectionString: @ 800E3EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2400,10 +2400,10 @@ _0800E4C4: .4byte gUnknown_2022AD8
 _0800E4C8: .4byte gUnknown_2023BE4
 _0800E4CC: .4byte gUnknown_2022AC8
 _0800E4D0: .4byte gUnknown_2022AB8
-	thumb_func_end sub_800E3EC
+	thumb_func_end EmitPrintSelectionString
 
-	thumb_func_start sub_800E4D4
-sub_800E4D4: @ 800E4D4
+	thumb_func_start EmitChooseAction
+EmitChooseAction: @ 800E4D4
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2424,7 +2424,7 @@ sub_800E4D4: @ 800E4D4
 	bx r0
 	.align 2, 0
 _0800E4FC: .4byte gUnknown_2022874
-	thumb_func_end sub_800E4D4
+	thumb_func_end EmitChooseAction
 
 	thumb_func_start sub_800E500
 sub_800E500: @ 800E500
@@ -2444,8 +2444,8 @@ sub_800E500: @ 800E500
 _0800E51C: .4byte gUnknown_2022874
 	thumb_func_end sub_800E500
 
-	thumb_func_start sub_800E520
-sub_800E520: @ 800E520
+	thumb_func_start EmitChooseMove
+EmitChooseMove: @ 800E520
 	push {r4-r6,lr}
 	adds r5, r3, 0
 	lsls r0, 24
@@ -2476,10 +2476,10 @@ _0800E53C:
 	bx r0
 	.align 2, 0
 _0800E558: .4byte gUnknown_2022874
-	thumb_func_end sub_800E520
+	thumb_func_end EmitChooseMove
 
-	thumb_func_start sub_800E55C
-sub_800E55C: @ 800E55C
+	thumb_func_start EmitChooseItem
+EmitChooseItem: @ 800E55C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2505,10 +2505,10 @@ _0800E56E:
 	bx r0
 	.align 2, 0
 _0800E58C: .4byte gUnknown_2022874
-	thumb_func_end sub_800E55C
+	thumb_func_end EmitChooseItem
 
-	thumb_func_start sub_800E590
-sub_800E590: @ 800E590
+	thumb_func_start EmitChoosePokemon
+EmitChoosePokemon: @ 800E590
 	push {r4-r6,lr}
 	ldr r6, [sp, 0x10]
 	lsls r0, 24
@@ -2538,10 +2538,10 @@ _0800E5AA:
 	bx r0
 	.align 2, 0
 _0800E5C8: .4byte gUnknown_2022874
-	thumb_func_end sub_800E590
+	thumb_func_end EmitChoosePokemon
 
-	thumb_func_start sub_800E5CC
-sub_800E5CC: @ 800E5CC
+	thumb_func_start EmitCmd23
+EmitCmd23: @ 800E5CC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2557,10 +2557,10 @@ sub_800E5CC: @ 800E5CC
 	bx r0
 	.align 2, 0
 _0800E5E8: .4byte gUnknown_2022874
-	thumb_func_end sub_800E5CC
+	thumb_func_end EmitCmd23
 
-	thumb_func_start sub_800E5EC
-sub_800E5EC: @ 800E5EC
+	thumb_func_start EmitHealthBarUpdate
+EmitHealthBarUpdate: @ 800E5EC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2587,10 +2587,10 @@ sub_800E5EC: @ 800E5EC
 	bx r0
 	.align 2, 0
 _0800E620: .4byte gUnknown_2022874
-	thumb_func_end sub_800E5EC
+	thumb_func_end EmitHealthBarUpdate
 
-	thumb_func_start sub_800E624
-sub_800E624: @ 800E624
+	thumb_func_start EmitExpUpdate
+EmitExpUpdate: @ 800E624
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2616,10 +2616,10 @@ sub_800E624: @ 800E624
 	bx r0
 	.align 2, 0
 _0800E654: .4byte gUnknown_2022874
-	thumb_func_end sub_800E624
+	thumb_func_end EmitExpUpdate
 
-	thumb_func_start sub_800E658
-sub_800E658: @ 800E658
+	thumb_func_start EmitStatusIconUpdate
+EmitStatusIconUpdate: @ 800E658
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2660,10 +2660,10 @@ sub_800E658: @ 800E658
 	bx r0
 	.align 2, 0
 _0800E6A8: .4byte gUnknown_2022874
-	thumb_func_end sub_800E658
+	thumb_func_end EmitStatusIconUpdate
 
-	thumb_func_start sub_800E6AC
-sub_800E6AC: @ 800E6AC
+	thumb_func_start EmitStatusAnimation
+EmitStatusAnimation: @ 800E6AC
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2692,10 +2692,10 @@ sub_800E6AC: @ 800E6AC
 	bx r0
 	.align 2, 0
 _0800E6E4: .4byte gUnknown_2022874
-	thumb_func_end sub_800E6AC
+	thumb_func_end EmitStatusAnimation
 
-	thumb_func_start sub_800E6E8
-sub_800E6E8: @ 800E6E8
+	thumb_func_start EmitStatusXor
+EmitStatusXor: @ 800E6E8
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -2710,10 +2710,10 @@ sub_800E6E8: @ 800E6E8
 	bx r0
 	.align 2, 0
 _0800E704: .4byte gUnknown_2022874
-	thumb_func_end sub_800E6E8
+	thumb_func_end EmitStatusXor
 
-	thumb_func_start sub_800E708
-sub_800E708: @ 800E708
+	thumb_func_start EmitDataTransfer
+EmitDataTransfer: @ 800E708
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2751,10 +2751,10 @@ _0800E738:
 	bx r0
 	.align 2, 0
 _0800E74C: .4byte gUnknown_2022874
-	thumb_func_end sub_800E708
+	thumb_func_end EmitDataTransfer
 
-	thumb_func_start sub_800E750
-sub_800E750: @ 800E750
+	thumb_func_start EmitDMA3Transfer
+EmitDMA3Transfer: @ 800E750
 	push {r4-r6,lr}
 	adds r4, r3, 0
 	lsls r0, 24
@@ -2807,10 +2807,10 @@ _0800E7A0:
 	bx r0
 	.align 2, 0
 _0800E7B4: .4byte gUnknown_2022874
-	thumb_func_end sub_800E750
+	thumb_func_end EmitDMA3Transfer
 
-	thumb_func_start sub_800E7B8
-sub_800E7B8: @ 800E7B8
+	thumb_func_start EmitPlayBGM
+EmitPlayBGM: @ 800E7B8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2847,10 +2847,10 @@ _0800E7E6:
 	bx r0
 	.align 2, 0
 _0800E7FC: .4byte gUnknown_2022874
-	thumb_func_end sub_800E7B8
+	thumb_func_end EmitPlayBGM
 
-	thumb_func_start sub_800E800
-sub_800E800: @ 800E800
+	thumb_func_start EmitCmd32
+EmitCmd32: @ 800E800
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2887,10 +2887,10 @@ _0800E82E:
 	bx r0
 	.align 2, 0
 _0800E844: .4byte gUnknown_2022874
-	thumb_func_end sub_800E800
+	thumb_func_end EmitCmd32
 
-	thumb_func_start sub_800E848
-sub_800E848: @ 800E848
+	thumb_func_start EmitTwoReturnValues
+EmitTwoReturnValues: @ 800E848
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2911,10 +2911,10 @@ sub_800E848: @ 800E848
 	bx r0
 	.align 2, 0
 _0800E870: .4byte gUnknown_2022874
-	thumb_func_end sub_800E848
+	thumb_func_end EmitTwoReturnValues
 
-	thumb_func_start sub_800E874
-sub_800E874: @ 800E874
+	thumb_func_start EmitChosenMonReturnValue
+EmitChosenMonReturnValue: @ 800E874
 	push {r4,r5,lr}
 	adds r4, r2, 0
 	lsls r0, 24
@@ -2942,10 +2942,10 @@ _0800E888:
 	bx r0
 	.align 2, 0
 _0800E8A8: .4byte gUnknown_2022874
-	thumb_func_end sub_800E874
+	thumb_func_end EmitChosenMonReturnValue
 
-	thumb_func_start sub_800E8AC
-sub_800E8AC: @ 800E8AC
+	thumb_func_start EmitOneReturnValue
+EmitOneReturnValue: @ 800E8AC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2967,10 +2967,10 @@ sub_800E8AC: @ 800E8AC
 	bx r0
 	.align 2, 0
 _0800E8D4: .4byte gUnknown_2022874
-	thumb_func_end sub_800E8AC
+	thumb_func_end EmitOneReturnValue
 
-	thumb_func_start sub_800E8D8
-sub_800E8D8: @ 800E8D8
+	thumb_func_start EmitOneReturnValue_Duplicate
+EmitOneReturnValue_Duplicate: @ 800E8D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2992,10 +2992,10 @@ sub_800E8D8: @ 800E8D8
 	bx r0
 	.align 2, 0
 _0800E900: .4byte gUnknown_2022874
-	thumb_func_end sub_800E8D8
+	thumb_func_end EmitOneReturnValue_Duplicate
 
-	thumb_func_start sub_800E904
-sub_800E904: @ 800E904
+	thumb_func_start EmitCmd37
+EmitCmd37: @ 800E904
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3011,10 +3011,10 @@ sub_800E904: @ 800E904
 	bx r0
 	.align 2, 0
 _0800E920: .4byte gUnknown_2022874
-	thumb_func_end sub_800E904
+	thumb_func_end EmitCmd37
 
-	thumb_func_start sub_800E924
-sub_800E924: @ 800E924
+	thumb_func_start EmitCmd38
+EmitCmd38: @ 800E924
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3029,10 +3029,10 @@ sub_800E924: @ 800E924
 	bx r0
 	.align 2, 0
 _0800E940: .4byte gUnknown_2022874
-	thumb_func_end sub_800E924
+	thumb_func_end EmitCmd38
 
-	thumb_func_start sub_800E944
-sub_800E944: @ 800E944
+	thumb_func_start EmitCmd39
+EmitCmd39: @ 800E944
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3048,10 +3048,10 @@ sub_800E944: @ 800E944
 	bx r0
 	.align 2, 0
 _0800E960: .4byte gUnknown_2022874
-	thumb_func_end sub_800E944
+	thumb_func_end EmitCmd39
 
-	thumb_func_start sub_800E964
-sub_800E964: @ 800E964
+	thumb_func_start EmitCmd40
+EmitCmd40: @ 800E964
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3067,10 +3067,10 @@ sub_800E964: @ 800E964
 	bx r0
 	.align 2, 0
 _0800E980: .4byte gUnknown_2022874
-	thumb_func_end sub_800E964
+	thumb_func_end EmitCmd40
 
-	thumb_func_start sub_800E984
-sub_800E984: @ 800E984
+	thumb_func_start EmitHitAnimation
+EmitHitAnimation: @ 800E984
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3086,10 +3086,10 @@ sub_800E984: @ 800E984
 	bx r0
 	.align 2, 0
 _0800E9A0: .4byte gUnknown_2022874
-	thumb_func_end sub_800E984
+	thumb_func_end EmitHitAnimation
 
-	thumb_func_start sub_800E9A4
-sub_800E9A4: @ 800E9A4
+	thumb_func_start EmitCmd42
+EmitCmd42: @ 800E9A4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3105,10 +3105,10 @@ sub_800E9A4: @ 800E9A4
 	bx r0
 	.align 2, 0
 _0800E9C0: .4byte gUnknown_2022874
-	thumb_func_end sub_800E9A4
+	thumb_func_end EmitCmd42
 
-	thumb_func_start sub_800E9C4
-sub_800E9C4: @ 800E9C4
+	thumb_func_start EmitPlaySE
+EmitPlaySE: @ 800E9C4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3130,7 +3130,7 @@ sub_800E9C4: @ 800E9C4
 	bx r0
 	.align 2, 0
 _0800E9EC: .4byte gUnknown_2022874
-	thumb_func_end sub_800E9C4
+	thumb_func_end EmitPlaySE
 
 	thumb_func_start sub_800E9F0
 sub_800E9F0: @ 800E9F0
@@ -3157,8 +3157,8 @@ sub_800E9F0: @ 800E9F0
 _0800EA18: .4byte gUnknown_2022874
 	thumb_func_end sub_800E9F0
 
-	thumb_func_start sub_800EA1C
-sub_800EA1C: @ 800EA1C
+	thumb_func_start EmitFaintingCry
+EmitFaintingCry: @ 800EA1C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3174,10 +3174,10 @@ sub_800EA1C: @ 800EA1C
 	bx r0
 	.align 2, 0
 _0800EA38: .4byte gUnknown_2022874
-	thumb_func_end sub_800EA1C
+	thumb_func_end EmitFaintingCry
 
-	thumb_func_start sub_800EA3C
-sub_800EA3C: @ 800EA3C
+	thumb_func_start EmitIntroSlide
+EmitIntroSlide: @ 800EA3C
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3192,10 +3192,10 @@ sub_800EA3C: @ 800EA3C
 	bx r0
 	.align 2, 0
 _0800EA58: .4byte gUnknown_2022874
-	thumb_func_end sub_800EA3C
+	thumb_func_end EmitIntroSlide
 
-	thumb_func_start sub_800EA5C
-sub_800EA5C: @ 800EA5C
+	thumb_func_start EmitIntroTrainerBallThrow
+EmitIntroTrainerBallThrow: @ 800EA5C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3211,10 +3211,10 @@ sub_800EA5C: @ 800EA5C
 	bx r0
 	.align 2, 0
 _0800EA78: .4byte gUnknown_2022874
-	thumb_func_end sub_800EA5C
+	thumb_func_end EmitIntroTrainerBallThrow
 
-	thumb_func_start sub_800EA7C
-sub_800EA7C: @ 800EA7C
+	thumb_func_start EmitDrawPartyStatusSummary
+EmitDrawPartyStatusSummary: @ 800EA7C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3251,10 +3251,10 @@ _0800EAA4:
 	bx r0
 	.align 2, 0
 _0800EAC0: .4byte gUnknown_2022874
-	thumb_func_end sub_800EA7C
+	thumb_func_end EmitDrawPartyStatusSummary
 
-	thumb_func_start sub_800EAC4
-sub_800EAC4: @ 800EAC4
+	thumb_func_start EmitCmd49
+EmitCmd49: @ 800EAC4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3270,10 +3270,10 @@ sub_800EAC4: @ 800EAC4
 	bx r0
 	.align 2, 0
 _0800EAE0: .4byte gUnknown_2022874
-	thumb_func_end sub_800EAC4
+	thumb_func_end EmitCmd49
 
-	thumb_func_start sub_800EAE4
-sub_800EAE4: @ 800EAE4
+	thumb_func_start EmitCmd50
+EmitCmd50: @ 800EAE4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3289,10 +3289,10 @@ sub_800EAE4: @ 800EAE4
 	bx r0
 	.align 2, 0
 _0800EB00: .4byte gUnknown_2022874
-	thumb_func_end sub_800EAE4
+	thumb_func_end EmitCmd50
 
-	thumb_func_start sub_800EB04
-sub_800EB04: @ 800EB04
+	thumb_func_start EmitSpriteInvisibility
+EmitSpriteInvisibility: @ 800EB04
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3309,10 +3309,10 @@ sub_800EB04: @ 800EB04
 	bx r0
 	.align 2, 0
 _0800EB24: .4byte gUnknown_2022874
-	thumb_func_end sub_800EB04
+	thumb_func_end EmitSpriteInvisibility
 
-	thumb_func_start sub_800EB28
-sub_800EB28: @ 800EB28
+	thumb_func_start EmitBattleAnimation
+EmitBattleAnimation: @ 800EB28
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3333,7 +3333,7 @@ sub_800EB28: @ 800EB28
 	bx r0
 	.align 2, 0
 _0800EB50: .4byte gUnknown_2022874
-	thumb_func_end sub_800EB28
+	thumb_func_end EmitBattleAnimation
 
 	thumb_func_start sub_800EB54
 sub_800EB54: @ 800EB54

@@ -38,7 +38,7 @@ sub_80984FC: @ 80984FC
 	movs r1, 0x28
 	movs r2, 0x44
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r1, _08098524 @ =gUnknown_2039878
 	strb r0, [r1]
 	adds r0, r4, 0
@@ -68,7 +68,7 @@ sub_8098528: @ 8098528
 	strh r2, [r0, 0x26]
 	ldr r2, _0809855C @ =sub_8098560
 	str r2, [r0, 0x1C]
-	bl sub_800838C
+	bl StartSpriteAnim
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -119,7 +119,7 @@ sub_8098580: @ 8098580
 	beq _080985AA
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r0, _080985B8 @ =sub_80985BC
 	str r0, [r4, 0x1C]
 _080985AA:
@@ -144,7 +144,7 @@ sub_80985BC: @ 80985BC
 	beq _080985D8
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	ldr r0, _080985E0 @ =nullsub_8
 	str r0, [r4, 0x1C]
 _080985D8:
@@ -170,7 +170,7 @@ _080985EC:
 	ldr r0, _08098628 @ =gUnknown_83D4250
 	movs r2, 0x7
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	adds r1, r7, r5
 	strb r0, [r1]
 	adds r4, r1, 0
@@ -184,7 +184,7 @@ _080985EC:
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0x2
-	bl sub_800838C
+	bl StartSpriteAnim
 	b _0809863C
 	.align 2, 0
 _08098620: .4byte gUnknown_2039879
@@ -197,7 +197,7 @@ _0809862C:
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 _0809863C:
 	ldrb r1, [r4]
 	lsls r0, r1, 4
@@ -302,14 +302,14 @@ sub_80986EC: @ 80986EC
 	ldr r5, _08098714 @ =gUnknown_2039884
 	movs r0, 0x90
 	lsls r0, 1
-	bl sub_8002B9C
+	bl Alloc
 	str r0, [r5]
 	cmp r0, 0
 	beq _08098722
 	ldr r4, _08098718 @ =gUnknown_2039888
 	movs r0, 0x80
 	lsls r0, 2
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	cmp r0, 0
 	beq _0809871C
@@ -320,7 +320,7 @@ _08098714: .4byte gUnknown_2039884
 _08098718: .4byte gUnknown_2039888
 _0809871C:
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 _08098722:
 	movs r0, 0
 _08098724:
@@ -373,7 +373,7 @@ sub_8098758: @ 8098758
 	bl sub_8098974
 	ldr r2, _080987FC @ =gUnknown_2039884
 	ldr r1, [r2]
-	bl sub_800EBB4
+	bl LZDecompressWram
 	ldr r1, _080987FC @ =gUnknown_2039884
 	ldr r0, [r1]
 	ldr r2, _08098800 @ =gUnknown_2039888
@@ -394,7 +394,7 @@ sub_8098758: @ 8098758
 	ands r1, r2
 	orrs r1, r3
 	str r1, [r0, 0x4]
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r7, 0
 	movs r1, 0x1
 	bl sub_8098974
@@ -404,7 +404,7 @@ sub_8098758: @ 8098758
 	ands r1, r4
 	orrs r1, r5
 	str r1, [r0, 0x4]
-	bl sub_800EC28
+	bl LoadCompressedObjectPalette
 	ldr r0, _0809880C @ =gUnknown_83D427C
 	mov r1, sp
 	movs r2, 0xC
@@ -415,16 +415,16 @@ sub_8098758: @ 8098758
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r2, _080987FC @ =gUnknown_2039884
 	ldr r0, [r2]
-	bl sub_8002BC4
+	bl Free
 	ldr r1, _08098800 @ =gUnknown_2039888
 	ldr r0, [r1]
-	bl sub_8002BC4
+	bl Free
 	adds r0, r4, 0
 	b _08098812
 	.align 2, 0
@@ -464,7 +464,7 @@ sub_809881C: @ 809881C
 	bl sub_8098974
 	ldr r2, _080988C8 @ =gUnknown_2039884
 	ldr r1, [r2]
-	bl sub_800EBB4
+	bl LZDecompressWram
 	ldr r1, _080988C8 @ =gUnknown_2039884
 	ldr r0, [r1]
 	ldr r2, _080988CC @ =gUnknown_2039888
@@ -485,7 +485,7 @@ sub_809881C: @ 809881C
 	ands r1, r2
 	orrs r1, r3
 	str r1, [r0, 0x4]
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r7, 0
 	movs r1, 0x1
 	bl sub_8098974
@@ -495,7 +495,7 @@ sub_809881C: @ 809881C
 	ands r1, r4
 	orrs r1, r5
 	str r1, [r0, 0x4]
-	bl sub_800EC28
+	bl LoadCompressedObjectPalette
 	mov r0, r8
 	mov r1, sp
 	movs r2, 0xC
@@ -506,16 +506,16 @@ sub_809881C: @ 809881C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r2, _080988C8 @ =gUnknown_2039884
 	ldr r0, [r2]
-	bl sub_8002BC4
+	bl Free
 	ldr r1, _080988CC @ =gUnknown_2039888
 	ldr r0, [r1]
-	bl sub_8002BC4
+	bl Free
 	adds r0, r4, 0
 	b _080988DA
 	.align 2, 0
@@ -549,9 +549,9 @@ sub_80988E8: @ 80988E8
 	adds r4, r1, 0
 	adds r4, 0x66
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -595,7 +595,7 @@ sub_8098940: @ 8098940
 	lsls r0, 2
 	ldr r1, _08098970 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	movs r0, 0xFF
 	strb r0, [r4]
 _08098964:
@@ -647,9 +647,9 @@ sub_80989A0: @ 80989A0
 	adds r4, r1, 0
 	adds r4, 0x66
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0

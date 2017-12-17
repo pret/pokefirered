@@ -329,8 +329,8 @@ _080BF6D2:
 	bx r1
 	thumb_func_end sub_80BF6A8
 
-	thumb_func_start sub_80BF6D8
-sub_80BF6D8: @ 80BF6D8
+	thumb_func_start itemid_80BF6D8_mail_related
+itemid_80BF6D8_mail_related: @ 80BF6D8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -355,7 +355,7 @@ _080BF702:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BF6D8
+	thumb_func_end itemid_80BF6D8_mail_related
 
 	thumb_func_start sub_80BF708
 sub_80BF708: @ 80BF708
@@ -422,9 +422,9 @@ _080BF764:
 sub_80BF768: @ 80BF768
 	push {lr}
 	movs r0, 0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0
-	bl sub_8000700
+	bl SetHBlankCallback
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80BF768
@@ -470,51 +470,51 @@ sub_80BF7C8: @ 80BF7C8
 	push {lr}
 	movs r0, 0
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0xE
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0xC
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0xA
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x8
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80BF7C8

@@ -17,17 +17,17 @@ sub_80DD538: @ 80DD538
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080DD550 @ =sub_80DD554
+	ldr r1, _080DD550 @ =SafariBufferRunCommand
 	str r1, [r0]
 	bx lr
 	.align 2, 0
 _080DD548: .4byte gUnknown_3004FE0
 _080DD54C: .4byte gUnknown_2023BC4
-_080DD550: .4byte sub_80DD554
+_080DD550: .4byte SafariBufferRunCommand
 	thumb_func_end sub_80DD538
 
-	thumb_func_start sub_80DD554
-sub_80DD554: @ 80DD554
+	thumb_func_start SafariBufferRunCommand
+SafariBufferRunCommand: @ 80DD554
 	push {lr}
 	ldr r2, _080DD588 @ =gUnknown_2023BC8
 	ldr r1, _080DD58C @ =gUnknown_825E45C
@@ -60,14 +60,14 @@ _080DD590: .4byte gUnknown_2023BC4
 _080DD594: .4byte gUnknown_2022BC4
 _080DD598: .4byte gUnknown_83FED00
 _080DD59C:
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 _080DD5A0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DD554
+	thumb_func_end SafariBufferRunCommand
 
-	thumb_func_start sub_80DD5A4
-sub_80DD5A4: @ 80DD5A4
+	thumb_func_start HandleInputChooseAction_0
+HandleInputChooseAction_0: @ 80DD5A4
 	push {r4,r5,lr}
 	ldr r0, _080DD5D4 @ =gUnknown_30030F0
 	ldrh r1, [r0, 0x2E]
@@ -113,15 +113,15 @@ _080DD5F6:
 	movs r1, 0x7
 _080DD5FA:
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	b _080DD60C
 _080DD602:
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 _080DD60C:
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	b _080DD71A
 _080DD612:
 	movs r0, 0x20
@@ -253,7 +253,7 @@ _080DD71A:
 	.align 2, 0
 _080DD720: .4byte gUnknown_2023FF8
 _080DD724: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80DD5A4
+	thumb_func_end HandleInputChooseAction_0
 
 	thumb_func_start sub_80DD728
 sub_80DD728: @ 80DD728
@@ -273,7 +273,7 @@ sub_80DD728: @ 80DD728
 	ldr r0, _080DD75C @ =nullsub_8
 	cmp r1, r0
 	bne _080DD74C
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 _080DD74C:
 	pop {r0}
 	bx r0
@@ -284,19 +284,19 @@ _080DD758: .4byte gUnknown_2023BC4
 _080DD75C: .4byte nullsub_8
 	thumb_func_end sub_80DD728
 
-	thumb_func_start sub_80DD760
-sub_80DD760: @ 80DD760
+	thumb_func_start CompleteOnInactiveTextPrinter_3
+CompleteOnInactiveTextPrinter_3: @ 80DD760
 	push {lr}
 	movs r0, 0
 	bl sub_8002E64
 	lsls r0, 16
 	cmp r0, 0
 	bne _080DD772
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 _080DD772:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DD760
+	thumb_func_end CompleteOnInactiveTextPrinter_3
 
 	thumb_func_start sub_80DD778
 sub_80DD778: @ 80DD778
@@ -316,7 +316,7 @@ sub_80DD778: @ 80DD778
 	ldr r0, _080DD7AC @ =nullsub_8
 	cmp r1, r0
 	bne _080DD79C
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 _080DD79C:
 	pop {r0}
 	bx r0
@@ -348,7 +348,7 @@ sub_80DD7B0: @ 80DD7B0
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r0, [r2, 0x8]
-	bl sub_8000544
+	bl SetMainCallback2
 _080DD7DA:
 	pop {r0}
 	bx r0
@@ -359,8 +359,8 @@ _080DD7E8: .4byte 0x00000439
 _080DD7EC: .4byte gUnknown_3004F80
 	thumb_func_end sub_80DD7B0
 
-	thumb_func_start sub_80DD7F0
-sub_80DD7F0: @ 80DD7F0
+	thumb_func_start CompleteOnSpecialAnimDone_0
+CompleteOnSpecialAnimDone_0: @ 80DD7F0
 	push {lr}
 	ldr r0, _080DD820 @ =gUnknown_2024005
 	ldrb r0, [r0]
@@ -381,7 +381,7 @@ sub_80DD7F0: @ 80DD7F0
 	cmp r0, 0
 	bne _080DD81A
 _080DD816:
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 _080DD81A:
 	pop {r0}
 	bx r0
@@ -389,7 +389,7 @@ _080DD81A:
 _080DD820: .4byte gUnknown_2024005
 _080DD824: .4byte gUnknown_2024018
 _080DD828: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80DD7F0
+	thumb_func_end CompleteOnSpecialAnimDone_0
 
 	thumb_func_start sub_80DD82C
 sub_80DD82C: @ 80DD82C
@@ -405,7 +405,7 @@ sub_80DD82C: @ 80DD82C
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080DD858 @ =sub_80DD85C
+	ldr r1, _080DD858 @ =CompleteWhenChosePokeblock
 	str r1, [r0]
 _080DD848:
 	pop {r0}
@@ -414,11 +414,11 @@ _080DD848:
 _080DD84C: .4byte gUnknown_2037AB8
 _080DD850: .4byte gUnknown_3004FE0
 _080DD854: .4byte gUnknown_2023BC4
-_080DD858: .4byte sub_80DD85C
+_080DD858: .4byte CompleteWhenChosePokeblock
 	thumb_func_end sub_80DD82C
 
-	thumb_func_start sub_80DD85C
-sub_80DD85C: @ 80DD85C
+	thumb_func_start CompleteWhenChosePokeblock
+CompleteWhenChosePokeblock: @ 80DD85C
 	push {lr}
 	ldr r0, _080DD888 @ =gUnknown_30030F0
 	ldr r1, [r0, 0x4]
@@ -434,8 +434,8 @@ sub_80DD85C: @ 80DD85C
 	ldr r0, _080DD894 @ =gUnknown_203AD30
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl sub_800E8AC
-	bl sub_80DD8C8
+	bl EmitOneReturnValue
+	bl SafariBufferExecCompleted
 _080DD882:
 	pop {r0}
 	bx r0
@@ -444,10 +444,10 @@ _080DD888: .4byte gUnknown_30030F0
 _080DD88C: .4byte sub_8011100
 _080DD890: .4byte gUnknown_2037AB8
 _080DD894: .4byte gUnknown_203AD30
-	thumb_func_end sub_80DD85C
+	thumb_func_end CompleteWhenChosePokeblock
 
-	thumb_func_start sub_80DD898
-sub_80DD898: @ 80DD898
+	thumb_func_start CompleteOnFinishedBattleAnimation_3
+CompleteOnFinishedBattleAnimation_3: @ 80DD898
 	push {lr}
 	ldr r0, _080DD8C0 @ =gUnknown_2024018
 	ldr r2, [r0]
@@ -463,17 +463,17 @@ sub_80DD898: @ 80DD898
 	ands r0, r1
 	cmp r0, 0
 	bne _080DD8BA
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 _080DD8BA:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080DD8C0: .4byte gUnknown_2024018
 _080DD8C4: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80DD898
+	thumb_func_end CompleteOnFinishedBattleAnimation_3
 
-	thumb_func_start sub_80DD8C8
-sub_80DD8C8: @ 80DD8C8
+	thumb_func_start SafariBufferExecCompleted
+SafariBufferExecCompleted: @ 80DD8C8
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, _080DD908 @ =gUnknown_3004FE0
@@ -481,7 +481,7 @@ sub_80DD8C8: @ 80DD8C8
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080DD910 @ =sub_80DD554
+	ldr r1, _080DD910 @ =SafariBufferRunCommand
 	str r1, [r0]
 	ldr r0, _080DD914 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -489,7 +489,7 @@ sub_80DD8C8: @ 80DD8C8
 	ands r0, r1
 	cmp r0, 0
 	beq _080DD91C
-	bl sub_800A404
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -506,7 +506,7 @@ sub_80DD8C8: @ 80DD8C8
 	.align 2, 0
 _080DD908: .4byte gUnknown_3004FE0
 _080DD90C: .4byte gUnknown_2023BC4
-_080DD910: .4byte sub_80DD554
+_080DD910: .4byte SafariBufferRunCommand
 _080DD914: .4byte gUnknown_2022B4C
 _080DD918: .4byte gUnknown_2022BC4
 _080DD91C:
@@ -527,10 +527,10 @@ _080DD92E:
 	.align 2, 0
 _080DD938: .4byte gUnknown_2023BC8
 _080DD93C: .4byte gUnknown_825E45C
-	thumb_func_end sub_80DD8C8
+	thumb_func_end SafariBufferExecCompleted
 
-	thumb_func_start sub_80DD940
-sub_80DD940: @ 80DD940
+	thumb_func_start CompleteOnFinishedStatusAnimation_3
+CompleteOnFinishedStatusAnimation_3: @ 80DD940
 	push {lr}
 	ldr r0, _080DD968 @ =gUnknown_2024018
 	ldr r2, [r0]
@@ -546,19 +546,19 @@ sub_80DD940: @ 80DD940
 	ands r0, r1
 	cmp r0, 0
 	bne _080DD962
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 _080DD962:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080DD968: .4byte gUnknown_2024018
 _080DD96C: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80DD940
+	thumb_func_end CompleteOnFinishedStatusAnimation_3
 
 	thumb_func_start sub_80DD970
 sub_80DD970: @ 80DD970
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DD970
@@ -566,7 +566,7 @@ sub_80DD970: @ 80DD970
 	thumb_func_start sub_80DD97C
 sub_80DD97C: @ 80DD97C
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DD97C
@@ -574,7 +574,7 @@ sub_80DD97C: @ 80DD97C
 	thumb_func_start sub_80DD988
 sub_80DD988: @ 80DD988
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DD988
@@ -582,7 +582,7 @@ sub_80DD988: @ 80DD988
 	thumb_func_start sub_80DD994
 sub_80DD994: @ 80DD994
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DD994
@@ -590,7 +590,7 @@ sub_80DD994: @ 80DD994
 	thumb_func_start sub_80DD9A0
 sub_80DD9A0: @ 80DD9A0
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DD9A0
@@ -598,7 +598,7 @@ sub_80DD9A0: @ 80DD9A0
 	thumb_func_start sub_80DD9AC
 sub_80DD9AC: @ 80DD9AC
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DD9AC
@@ -606,13 +606,13 @@ sub_80DD9AC: @ 80DD9AC
 	thumb_func_start sub_80DD9B8
 sub_80DD9B8: @ 80DD9B8
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DD9B8
 
-	thumb_func_start sub_80DD9C4
-sub_80DD9C4: @ 80DD9C4
+	thumb_func_start SafariHandleDrawTrainerPic
+SafariHandleDrawTrainerPic: @ 80DD9C4
 	push {r4-r6,lr}
 	ldr r4, _080DDA7C @ =gUnknown_300500C
 	ldr r0, [r4]
@@ -623,7 +623,7 @@ sub_80DD9C4: @ 80DD9C4
 	ldr r0, [r4]
 	ldrb r6, [r0, 0x8]
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -645,7 +645,7 @@ sub_80DD9C4: @ 80DD9C4
 	asrs r2, 16
 	movs r1, 0x50
 	movs r3, 0x1E
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r6, _080DDA8C @ =gUnknown_2023D44
 	ldrb r1, [r5]
 	adds r1, r6
@@ -712,12 +712,12 @@ _080DDA94: .4byte 0x0000fffe
 _080DDA98: .4byte sub_8033EEC
 _080DDA9C: .4byte gUnknown_3004FE0
 _080DDAA0: .4byte sub_80DD728
-	thumb_func_end sub_80DD9C4
+	thumb_func_end SafariHandleDrawTrainerPic
 
 	thumb_func_start sub_80DDAA4
 sub_80DDAA4: @ 80DDAA4
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDAA4
@@ -725,7 +725,7 @@ sub_80DDAA4: @ 80DDAA4
 	thumb_func_start sub_80DDAB0
 sub_80DDAB0: @ 80DDAB0
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDAB0
@@ -733,7 +733,7 @@ sub_80DDAB0: @ 80DDAB0
 	thumb_func_start sub_80DDABC
 sub_80DDABC: @ 80DDABC
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDABC
@@ -741,7 +741,7 @@ sub_80DDABC: @ 80DDABC
 	thumb_func_start sub_80DDAC8
 sub_80DDAC8: @ 80DDAC8
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDAC8
@@ -760,19 +760,19 @@ sub_80DDAD4: @ 80DDAD4
 	ldr r5, _080DDB1C @ =gUnknown_2023BC4
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x4
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _080DDB20 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080DDB24 @ =sub_80DD7F0
+	ldr r1, _080DDB24 @ =CompleteOnSpecialAnimDone_0
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -782,7 +782,7 @@ _080DDB14: .4byte gUnknown_2024018
 _080DDB18: .4byte gUnknown_2024005
 _080DDB1C: .4byte gUnknown_2023BC4
 _080DDB20: .4byte gUnknown_3004FE0
-_080DDB24: .4byte sub_80DD7F0
+_080DDB24: .4byte CompleteOnSpecialAnimDone_0
 	thumb_func_end sub_80DDAD4
 
 	thumb_func_start sub_80DDB28
@@ -804,19 +804,19 @@ sub_80DDB28: @ 80DDB28
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x4
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _080DDB80 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080DDB84 @ =sub_80DD7F0
+	ldr r1, _080DDB84 @ =CompleteOnSpecialAnimDone_0
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -827,13 +827,13 @@ _080DDB74: .4byte gUnknown_2023BC4
 _080DDB78: .4byte gUnknown_2024018
 _080DDB7C: .4byte gUnknown_2024005
 _080DDB80: .4byte gUnknown_3004FE0
-_080DDB84: .4byte sub_80DD7F0
+_080DDB84: .4byte CompleteOnSpecialAnimDone_0
 	thumb_func_end sub_80DDB28
 
 	thumb_func_start sub_80DDB88
 sub_80DDB88: @ 80DDB88
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDB88
@@ -841,7 +841,7 @@ sub_80DDB88: @ 80DDB88
 	thumb_func_start sub_80DDB94
 sub_80DDB94: @ 80DDB94
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDB94
@@ -886,7 +886,7 @@ _080DDBF0:
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080DDC10 @ =sub_80DD760
+	ldr r1, _080DDC10 @ =CompleteOnInactiveTextPrinter_3
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -895,7 +895,7 @@ _080DDBF0:
 _080DDC04: .4byte gUnknown_202298C
 _080DDC08: .4byte gUnknown_3004FE0
 _080DDC0C: .4byte gUnknown_2023BC4
-_080DDC10: .4byte sub_80DD760
+_080DDC10: .4byte CompleteOnInactiveTextPrinter_3
 	thumb_func_end sub_80DDBA0
 
 	thumb_func_start sub_80DDC14
@@ -903,7 +903,7 @@ sub_80DDC14: @ 80DDC14
 	push {lr}
 	ldr r0, _080DDC2C @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DDC30
@@ -912,7 +912,7 @@ sub_80DDC14: @ 80DDC14
 	.align 2, 0
 _080DDC2C: .4byte gUnknown_2023BC4
 _080DDC30:
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 _080DDC34:
 	pop {r0}
 	bx r0
@@ -921,7 +921,7 @@ _080DDC34:
 	thumb_func_start sub_80DDC38
 sub_80DDC38: @ 80DDC38
 	push {lr}
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -936,7 +936,7 @@ sub_80DDC38: @ 80DDC38
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080DDC74 @ =sub_80DD5A4
+	ldr r1, _080DDC74 @ =HandleInputChooseAction_0
 	str r1, [r0]
 _080DDC5E:
 	pop {r0}
@@ -946,7 +946,7 @@ _080DDC64: .4byte gUnknown_2022974
 _080DDC68: .4byte gUnknown_2022976
 _080DDC6C: .4byte gUnknown_3004FE0
 _080DDC70: .4byte gUnknown_2023BC4
-_080DDC74: .4byte sub_80DD5A4
+_080DDC74: .4byte HandleInputChooseAction_0
 	thumb_func_end sub_80DDC38
 
 	thumb_func_start sub_80DDC78
@@ -1002,7 +1002,7 @@ _080DDCE8: .4byte gUnknown_202298C
 	thumb_func_start sub_80DDCEC
 sub_80DDCEC: @ 80DDCEC
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDCEC
@@ -1010,7 +1010,7 @@ sub_80DDCEC: @ 80DDCEC
 	thumb_func_start sub_80DDCF8
 sub_80DDCF8: @ 80DDCF8
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDCF8
@@ -1025,7 +1025,7 @@ sub_80DDD04: @ 80DDD04
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	ldr r1, _080DDD34 @ =gUnknown_3004FE0
 	ldr r2, _080DDD38 @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -1049,7 +1049,7 @@ _080DDD40: .4byte gUnknown_2024004
 	thumb_func_start sub_80DDD44
 sub_80DDD44: @ 80DDD44
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDD44
@@ -1057,7 +1057,7 @@ sub_80DDD44: @ 80DDD44
 	thumb_func_start sub_80DDD50
 sub_80DDD50: @ 80DDD50
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDD50
@@ -1065,7 +1065,7 @@ sub_80DDD50: @ 80DDD50
 	thumb_func_start sub_80DDD5C
 sub_80DDD5C: @ 80DDD5C
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDD5C
@@ -1073,7 +1073,7 @@ sub_80DDD5C: @ 80DDD5C
 	thumb_func_start sub_80DDD68
 sub_80DDD68: @ 80DDD68
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDD68
@@ -1095,8 +1095,8 @@ sub_80DDD74: @ 80DDD74
 	ldr r2, _080DDDAC @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0xB
-	bl sub_8049D98
-	bl sub_80DD8C8
+	bl UpdateHealthboxAttribute
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1109,7 +1109,7 @@ _080DDDAC: .4byte gUnknown_2024284
 	thumb_func_start sub_80DDDB0
 sub_80DDDB0: @ 80DDDB0
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDDB0
@@ -1117,7 +1117,7 @@ sub_80DDDB0: @ 80DDDB0
 	thumb_func_start sub_80DDDBC
 sub_80DDDBC: @ 80DDDBC
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDDBC
@@ -1125,7 +1125,7 @@ sub_80DDDBC: @ 80DDDBC
 	thumb_func_start sub_80DDDC8
 sub_80DDDC8: @ 80DDDC8
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDDC8
@@ -1133,7 +1133,7 @@ sub_80DDDC8: @ 80DDDC8
 	thumb_func_start sub_80DDDD4
 sub_80DDDD4: @ 80DDDD4
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDDD4
@@ -1141,7 +1141,7 @@ sub_80DDDD4: @ 80DDDD4
 	thumb_func_start sub_80DDDE0
 sub_80DDDE0: @ 80DDDE0
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDDE0
@@ -1149,7 +1149,7 @@ sub_80DDDE0: @ 80DDDE0
 	thumb_func_start sub_80DDDEC
 sub_80DDDEC: @ 80DDDEC
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDDEC
@@ -1157,7 +1157,7 @@ sub_80DDDEC: @ 80DDDEC
 	thumb_func_start sub_80DDDF8
 sub_80DDDF8: @ 80DDDF8
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDDF8
@@ -1165,7 +1165,7 @@ sub_80DDDF8: @ 80DDDF8
 	thumb_func_start sub_80DDE04
 sub_80DDE04: @ 80DDE04
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDE04
@@ -1173,7 +1173,7 @@ sub_80DDE04: @ 80DDE04
 	thumb_func_start sub_80DDE10
 sub_80DDE10: @ 80DDE10
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDE10
@@ -1181,7 +1181,7 @@ sub_80DDE10: @ 80DDE10
 	thumb_func_start sub_80DDE1C
 sub_80DDE1C: @ 80DDE1C
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDE1C
@@ -1189,7 +1189,7 @@ sub_80DDE1C: @ 80DDE1C
 	thumb_func_start sub_80DDE28
 sub_80DDE28: @ 80DDE28
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDE28
@@ -1197,7 +1197,7 @@ sub_80DDE28: @ 80DDE28
 	thumb_func_start sub_80DDE34
 sub_80DDE34: @ 80DDE34
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDE34
@@ -1205,7 +1205,7 @@ sub_80DDE34: @ 80DDE34
 	thumb_func_start sub_80DDE40
 sub_80DDE40: @ 80DDE40
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDE40
@@ -1213,7 +1213,7 @@ sub_80DDE40: @ 80DDE40
 	thumb_func_start sub_80DDE4C
 sub_80DDE4C: @ 80DDE4C
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDE4C
@@ -1221,7 +1221,7 @@ sub_80DDE4C: @ 80DDE4C
 	thumb_func_start sub_80DDE58
 sub_80DDE58: @ 80DDE58
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDE58
@@ -1229,7 +1229,7 @@ sub_80DDE58: @ 80DDE58
 	thumb_func_start sub_80DDE64
 sub_80DDE64: @ 80DDE64
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDE64
@@ -1239,7 +1239,7 @@ sub_80DDE70: @ 80DDE70
 	push {r4,lr}
 	ldr r4, _080DDEAC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -1259,8 +1259,8 @@ _080DDE84:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl sub_80722F4
-	bl sub_80DD8C8
+	bl PlaySE12WithPanning
+	bl SafariBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1284,8 +1284,8 @@ sub_80DDEB4: @ 80DDEB4
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_8071C60
-	bl sub_80DD8C8
+	bl PlayFanfare
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1293,8 +1293,8 @@ _080DDEDC: .4byte gUnknown_2022BC4
 _080DDEE0: .4byte gUnknown_2023BC4
 	thumb_func_end sub_80DDEB4
 
-	thumb_func_start sub_80DDEE4
-sub_80DDEE4: @ 80DDEE4
+	thumb_func_start SafariHandleFaintingCry
+SafariHandleFaintingCry: @ 80DDEE4
 	push {lr}
 	ldr r1, _080DDF14 @ =gUnknown_2023BCE
 	ldr r0, _080DDF18 @ =gUnknown_2023BC4
@@ -1307,22 +1307,22 @@ sub_80DDEE4: @ 80DDEE4
 	ldr r1, _080DDF1C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
-	bl sub_8071DF0
-	bl sub_80DD8C8
+	bl PlayCry1
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080DDF14: .4byte gUnknown_2023BCE
 _080DDF18: .4byte gUnknown_2023BC4
 _080DDF1C: .4byte gUnknown_2024284
-	thumb_func_end sub_80DDEE4
+	thumb_func_end SafariHandleFaintingCry
 
-	thumb_func_start sub_80DDF20
-sub_80DDF20: @ 80DDF20
+	thumb_func_start SafariHandleIntroSlide
+SafariHandleIntroSlide: @ 80DDF20
 	push {lr}
 	ldr r1, _080DDF48 @ =gUnknown_2022BC4
 	ldr r0, _080DDF4C @ =gUnknown_2023BC4
@@ -1337,17 +1337,17 @@ sub_80DDF20: @ 80DDF20
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080DDF48: .4byte gUnknown_2022BC4
 _080DDF4C: .4byte gUnknown_2023BC4
 _080DDF50: .4byte gUnknown_2023F4C
-	thumb_func_end sub_80DDF20
+	thumb_func_end SafariHandleIntroSlide
 
-	thumb_func_start sub_80DDF54
-sub_80DDF54: @ 80DDF54
+	thumb_func_start SafariHandleIntroTrainerBallThrow
+SafariHandleIntroTrainerBallThrow: @ 80DDF54
 	push {r4,r5,lr}
 	ldr r5, _080DDF98 @ =gUnknown_3004FF0
 	ldr r4, _080DDF9C @ =gUnknown_2023BC4
@@ -1363,13 +1363,13 @@ sub_80DDF54: @ 80DDF54
 	ldr r2, _080DDFA4 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0xA
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_804BD94
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldr r1, _080DDFA8 @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -1386,12 +1386,12 @@ _080DDFA0: .4byte gUnknown_2023BCE
 _080DDFA4: .4byte gUnknown_2024284
 _080DDFA8: .4byte gUnknown_3004FE0
 _080DDFAC: .4byte sub_80DD778
-	thumb_func_end sub_80DDF54
+	thumb_func_end SafariHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_80DDFB0
 sub_80DDFB0: @ 80DDFB0
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDFB0
@@ -1399,7 +1399,7 @@ sub_80DDFB0: @ 80DDFB0
 	thumb_func_start sub_80DDFBC
 sub_80DDFBC: @ 80DDFBC
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDFBC
@@ -1407,7 +1407,7 @@ sub_80DDFBC: @ 80DDFBC
 	thumb_func_start sub_80DDFC8
 sub_80DDFC8: @ 80DDFC8
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDFC8
@@ -1415,13 +1415,13 @@ sub_80DDFC8: @ 80DDFC8
 	thumb_func_start sub_80DDFD4
 sub_80DDFD4: @ 80DDFD4
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DDFD4
 
-	thumb_func_start sub_80DDFE0
-sub_80DDFE0: @ 80DDFE0
+	thumb_func_start SafariHandleBattleAnimation
+SafariHandleBattleAnimation: @ 80DDFE0
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, _080DE018 @ =gUnknown_2022BC4
@@ -1442,11 +1442,11 @@ sub_80DDFE0: @ 80DDFE0
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl sub_803401C
+	bl TryHandleLaunchBattleTableAnimation
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DE020
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	b _080DE02C
 	.align 2, 0
 _080DE018: .4byte gUnknown_2022BC4
@@ -1456,7 +1456,7 @@ _080DE020:
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, _080DE038 @ =sub_80DD898
+	ldr r0, _080DE038 @ =CompleteOnFinishedBattleAnimation_3
 	str r0, [r1]
 _080DE02C:
 	add sp, 0x4
@@ -1465,13 +1465,13 @@ _080DE02C:
 	bx r0
 	.align 2, 0
 _080DE034: .4byte gUnknown_3004FE0
-_080DE038: .4byte sub_80DD898
-	thumb_func_end sub_80DDFE0
+_080DE038: .4byte CompleteOnFinishedBattleAnimation_3
+	thumb_func_end SafariHandleBattleAnimation
 
 	thumb_func_start sub_80DE03C
 sub_80DE03C: @ 80DE03C
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DE03C
@@ -1479,13 +1479,13 @@ sub_80DE03C: @ 80DE03C
 	thumb_func_start sub_80DE048
 sub_80DE048: @ 80DE048
 	push {lr}
-	bl sub_80DD8C8
+	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DE048
 
-	thumb_func_start sub_80DE054
-sub_80DE054: @ 80DE054
+	thumb_func_start SafariHandleCmd55
+SafariHandleCmd55: @ 80DE054
 	push {r4,lr}
 	ldr r2, _080DE098 @ =gUnknown_2023E8A
 	ldr r1, _080DE09C @ =gUnknown_2022BC4
@@ -1497,10 +1497,10 @@ sub_80DE054: @ 80DE054
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x5
-	bl sub_8071AB4
+	bl FadeOutMapMusic
 	movs r0, 0x3
-	bl sub_8070E44
-	bl sub_80DD8C8
+	bl BeginFastPaletteFade
+	bl SafariBufferExecCompleted
 	ldr r0, _080DE0A4 @ =gUnknown_2022B4C
 	ldr r0, [r0]
 	movs r1, 0x6
@@ -1524,7 +1524,7 @@ _080DE0A0: .4byte gUnknown_2023BC4
 _080DE0A4: .4byte gUnknown_2022B4C
 _080DE0A8: .4byte gUnknown_3004FE0
 _080DE0AC: .4byte sub_80DD7B0
-	thumb_func_end sub_80DE054
+	thumb_func_end SafariHandleCmd55
 
 	thumb_func_start nullsub_80
 nullsub_80: @ 80DE0B0

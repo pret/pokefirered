@@ -44,7 +44,7 @@ sub_815D67C: @ 815D67C
 	lsls r4, 2
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8045254
+	bl CalcByteArraySum
 	adds r4, r5, r4
 	ldr r1, [r4]
 	cmp r0, r1
@@ -89,7 +89,7 @@ _0815D6E0:
 	lsls r1, r6, 5
 	subs r1, r6
 	lsls r1, 5
-	bl sub_8045254
+	bl CalcByteArraySum
 	ldr r1, [r7, 0x4]
 	cmp r0, r1
 	bne _0815D6F8
@@ -179,14 +179,14 @@ sub_815D794: @ 815D794
 	adds r4, r0, 0
 	movs r0, 0x80
 	lsls r0, 5
-	bl sub_8002BB0
+	bl AllocZeroed
 	adds r5, r0, 0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_815D700
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}

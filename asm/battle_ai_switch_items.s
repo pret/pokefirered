@@ -28,7 +28,7 @@ sub_8039188: @ 8039188
 	cmp r0, 0
 	bne _080391E4
 	adds r0, r2, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _080391E0 @ =gUnknown_2023FE8
@@ -40,7 +40,7 @@ sub_8039188: @ 8039188
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	movs r0, 0x1
 	b _080391E6
 	.align 2, 0
@@ -73,7 +73,7 @@ _08039204: .4byte gUnknown_2022B4C
 _08039208:
 	ldr r0, _0803922C @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039230 @ =gUnknown_2023FE8
@@ -84,7 +84,7 @@ _08039208:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	movs r0, 0x1
 	b _0803935E
 	.align 2, 0
@@ -93,7 +93,7 @@ _08039230: .4byte gUnknown_2023FE8
 _08039234:
 	ldr r4, _0803936C @ =gUnknown_2023BE4
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x58
@@ -106,7 +106,7 @@ _08039234:
 	b _0803935C
 _08039250:
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r6, 0
@@ -133,7 +133,7 @@ _0803926C:
 	ldrh r1, [r4]
 	mov r3, r8
 	ldrb r2, [r3]
-	bl sub_801EFCC
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -155,17 +155,17 @@ _080392A4:
 	adds r4, r5, r3
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08039356
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08039356
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -180,12 +180,12 @@ _080392A4:
 	beq _08039356
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r4, 0
@@ -201,21 +201,21 @@ _08039310:
 	adds r1, 0xD
 	mov r0, r8
 	add r0, r9
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
 	beq _08039350
 	ldrh r1, [r5]
 	ldrb r2, [r7]
-	bl sub_801EFCC
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
 	ands r1, r0
 	cmp r1, 0
 	beq _08039350
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -261,7 +261,7 @@ sub_803937C: @ 803937C
 	lsls r0, 24
 	cmp r0, 0
 	beq _080393A8
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -305,12 +305,12 @@ _080393D6:
 	beq _08039442
 	mov r8, r3
 	mov r0, r8
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r4, 0x2
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08039424 @ =gUnknown_2023D70
 	ldrb r1, [r1]
 	ldr r2, _08039428 @ =gUnknown_825E45C
@@ -333,11 +333,11 @@ _08039424: .4byte gUnknown_2023D70
 _08039428: .4byte gUnknown_825E45C
 _0803942C:
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	b _08039446
@@ -396,7 +396,7 @@ _0803949C: .4byte gUnknown_2023BE4
 _080394A0:
 	ldr r0, _080394C4 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _080394C8 @ =gUnknown_2023FE8
@@ -407,7 +407,7 @@ _080394A0:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	movs r0, 0x1
 	b _0803958A
 	.align 2, 0
@@ -425,17 +425,17 @@ _080394D2:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08039582
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08039582
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -466,12 +466,12 @@ _080394D2:
 	beq _08039582
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r5, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08039568
 	lsls r0, r4, 3
@@ -494,7 +494,7 @@ _08039568:
 _08039572:
 	cmp r10, r0
 	bne _08039582
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -553,7 +553,7 @@ sub_8039598: @ 8039598
 	cmp r1, r0
 	bne _08039600
 _080395DE:
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -580,7 +580,7 @@ _08039600:
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
 	bne _08039638
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -604,7 +604,7 @@ _08039638:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08039686
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -616,7 +616,7 @@ _08039664:
 	ldr r0, _08039690 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
 _08039668:
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039694 @ =gUnknown_2023FE8
@@ -628,7 +628,7 @@ _08039668:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 _08039686:
 	movs r0, 0x1
 _08039688:
@@ -650,7 +650,7 @@ sub_8039698: @ 8039698
 	lsrs r0, 24
 	mov r8, r0
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, _08039730 @ =gUnknown_2023D70
@@ -686,7 +686,7 @@ _080396D4:
 	ldrh r1, [r5]
 	mov r3, r9
 	ldrb r2, [r3]
-	bl sub_801EFCC
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -696,7 +696,7 @@ _080396D4:
 	mov r0, r8
 	cmp r0, 0
 	bne _08039744
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -727,7 +727,7 @@ _08039744:
 	b _080397C4
 _08039748:
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, _080397D0 @ =gUnknown_2023D70
@@ -763,7 +763,7 @@ _08039776:
 	ldrh r1, [r5]
 	mov r3, r9
 	ldrb r2, [r3]
-	bl sub_801EFCC
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -773,7 +773,7 @@ _08039776:
 	mov r0, r8
 	cmp r0, 0
 	bne _08039744
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -898,12 +898,12 @@ _0803987A:
 	beq _08039918
 	mov r9, r3
 	mov r0, r9
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r4, 0x2
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080398CC @ =gUnknown_2023D70
 	ldrb r1, [r1]
 	ldr r2, _080398D0 @ =gUnknown_825E45C
@@ -928,11 +928,11 @@ _080398CC: .4byte gUnknown_2023D70
 _080398D0: .4byte gUnknown_825E45C
 _080398D4:
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -940,7 +940,7 @@ _080398D4:
 _080398EC:
 	ldr r0, _08039910 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039914 @ =gUnknown_2023FE8
@@ -951,7 +951,7 @@ _080398EC:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	movs r0, 0x1
 	b _08039A56
 	.align 2, 0
@@ -970,21 +970,21 @@ _0803991E:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08039936
 	b _08039A4C
 _08039936:
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08039944
 	b _08039A4C
 _08039944:
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -1018,12 +1018,12 @@ _08039944:
 	beq _08039A4C
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r5, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080399C0
 	lsls r0, r4, 3
@@ -1053,7 +1053,7 @@ _080399CC:
 	adds r0, r1
 	ldrh r0, [r0]
 	adds r1, r4, 0
-	bl sub_801EFCC
+	bl AI_TypeCalc
 	ldr r1, [sp]
 	ands r1, r0
 	cmp r1, 0
@@ -1081,21 +1081,21 @@ _08039A0A:
 	adds r1, r4, 0
 	adds r1, 0xD
 	add r0, r8
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
 	beq _08039A46
 	ldrh r1, [r5]
 	ldrb r2, [r6]
-	bl sub_801EFCC
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
 	ands r1, r0
 	cmp r1, 0
 	beq _08039A46
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, [sp, 0x4]
@@ -1226,12 +1226,12 @@ _08039B1C:
 	ldr r4, _08039B60 @ =gUnknown_2023BC4
 	ldrb r7, [r4]
 	adds r0, r7, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r5, 0x2
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08039B70 @ =gUnknown_2023D70
 	ldrb r1, [r1]
 	ldr r2, _08039B74 @ =gUnknown_825E45C
@@ -1254,11 +1254,11 @@ _08039B70: .4byte gUnknown_2023D70
 _08039B74: .4byte gUnknown_825E45C
 _08039B78:
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _08039B94
@@ -1276,17 +1276,17 @@ _08039B96:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08039BFA
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08039BFA
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -1396,7 +1396,7 @@ _08039C94:
 	beq _08039D8C
 	ldr r0, _08039CE0 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039CE4 @ =gUnknown_2023FE8
@@ -1417,7 +1417,7 @@ _08039C94:
 	cmp r0, 0
 	bne _08039CE8
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
@@ -1428,11 +1428,11 @@ _08039CE0: .4byte gUnknown_2023BC4
 _08039CE4: .4byte gUnknown_2023FE8
 _08039CE8:
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08039CFC:
@@ -1443,7 +1443,7 @@ _08039CFE:
 	ldr r1, _08039D7C @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08039D3E
 	ldr r1, _08039D80 @ =gUnknown_2023BCE
@@ -1476,7 +1476,7 @@ _08039D3E:
 _08039D44:
 	ldr r0, _08039D88 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039D84 @ =gUnknown_2023FE8
@@ -1487,7 +1487,7 @@ _08039D44:
 _08039D5A:
 	ldr r4, _08039D88 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldrb r2, [r4]
 	ldr r1, _08039D84 @ =gUnknown_2023FE8
 	ldr r1, [r1]
@@ -1518,7 +1518,7 @@ _08039D96:
 	lsls r2, 8
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 _08039DA8:
 	pop {r4-r6}
 	pop {r0}
@@ -1628,12 +1628,12 @@ _08039E5E:
 	beq _08039EF8
 	str r2, [sp, 0xC]
 	adds r0, r2, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r5, 0x2
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08039EA4 @ =gUnknown_2023D70
 	ldrb r1, [r1]
 	ldr r2, _08039EA8 @ =gUnknown_825E45C
@@ -1655,16 +1655,16 @@ _08039EA4: .4byte gUnknown_2023D70
 _08039EA8: .4byte gUnknown_825E45C
 _08039EAC:
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x10]
 _08039EC2:
-	bl sub_8044EC8
+	bl Random
 	movs r3, 0x2
 	ands r0, r3
 	lsls r0, 24
@@ -1690,7 +1690,7 @@ _08039EF0: .4byte gUnknown_2023D70
 _08039EF4: .4byte gUnknown_825E45C
 _08039EF8:
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -1718,14 +1718,14 @@ _08039F20:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0
 	beq _08039FF0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08039FF0
 	mov r1, r8
@@ -1832,7 +1832,7 @@ _0803A018:
 	adds r1, r7, 0
 	adds r1, 0xD
 	adds r0, r5, r6
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -1841,7 +1841,7 @@ _0803A018:
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	mov r2, r10
-	bl sub_801EDF4
+	bl TypeCalc
 	movs r1, 0x2
 	ands r1, r0
 	cmp r1, 0
@@ -1904,7 +1904,7 @@ _0803A09C:
 	adds r4, r6, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	adds r1, r7, 0x1
 	str r1, [sp, 0x18]
@@ -1912,7 +1912,7 @@ _0803A09C:
 	beq _0803A158
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0803A158
 	ldr r1, _0803A188 @ =gUnknown_2023BCE
@@ -1950,7 +1950,7 @@ _0803A100:
 	adds r1, 0xD
 	ldr r0, _0803A184 @ =gUnknown_202402C
 	add r0, r9
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0
@@ -1968,11 +1968,11 @@ _0803A100:
 	beq _0803A13C
 	ldrb r0, [r6]
 	mov r1, r10
-	bl sub_801E68C
+	bl AI_CalcDmg
 	ldrb r1, [r6]
 	adds r0, r4, 0
 	mov r2, r10
-	bl sub_801EDF4
+	bl TypeCalc
 _0803A13C:
 	mov r2, r8
 	ldr r0, [r2]
@@ -2095,17 +2095,17 @@ _0803A20A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0803A246
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0803A246
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -2245,7 +2245,7 @@ _0803A348:
 	mov r0, r9
 	movs r1, 0x4
 	movs r2, 0x4
-	bl sub_8042C08
+	bl GetItemEffectParamOffset
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -2576,7 +2576,7 @@ _0803A5C4: .4byte gUnknown_2023E0C
 _0803A5C8:
 	ldr r4, _0803A630 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, _0803A634 @ =gUnknown_2023E0C
@@ -2604,7 +2604,7 @@ _0803A5FC:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_800E848
+	bl EmitTwoReturnValues
 	ldr r0, _0803A630 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
 	lsrs r0, 1

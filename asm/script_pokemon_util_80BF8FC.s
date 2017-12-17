@@ -9,10 +9,10 @@
 sub_80BF8FC: @ 80BF8FC
 	push {lr}
 	sub sp, 0x4
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r0, _080BF934 @ =sub_80BF97C
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BF938 @ =gUnknown_3005090
@@ -27,7 +27,7 @@ sub_80BF8FC: @ 80BF8FC
 	str r2, [sp]
 	movs r1, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -40,10 +40,10 @@ _080BF938: .4byte gUnknown_3005090
 sub_80BF93C: @ 80BF93C
 	push {lr}
 	sub sp, 0x4
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r0, _080BF974 @ =sub_80BF97C
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BF978 @ =gUnknown_3005090
@@ -58,7 +58,7 @@ sub_80BF93C: @ 80BF93C
 	str r2, [sp]
 	movs r1, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -90,7 +90,7 @@ sub_80BF97C: @ 80BF97C
 	ldrb r0, [r0, 0x8]
 	bl sub_81283A8
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080BF9AC:
 	pop {r4}
 	pop {r0}
@@ -112,7 +112,7 @@ sub_80BF9BC: @ 80BF9BC
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _080BF9FC @ =sub_80567DC
+	ldr r3, _080BF9FC @ =c2_exit_to_overworld_2_switch
 	movs r4, 0
 	str r4, [sp]
 	bl sub_8134738
@@ -129,7 +129,7 @@ sub_80BF9BC: @ 80BF9BC
 _080BF9F0: .4byte gUnknown_2024284
 _080BF9F4: .4byte gUnknown_20370C0
 _080BF9F8: .4byte gUnknown_2024029
-_080BF9FC: .4byte sub_80567DC
+_080BF9FC: .4byte c2_exit_to_overworld_2_switch
 _080BFA00: .4byte gUnknown_3005020
 _080BFA04: .4byte sub_807DD24
 	thumb_func_end sub_80BF9BC
@@ -151,7 +151,7 @@ _080BFA14:
 	adds r0, r1
 	adds r1, r4, 0
 	adds r1, 0xD
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080BFA32
 	ldrh r0, [r5]
@@ -186,19 +186,19 @@ sub_80BFA50: @ 80BFA50
 	ldrh r1, [r0]
 	adds r1, 0xD
 	adds r0, r5, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	ldr r1, _080BFA9C @ =gUnknown_2021CD0
 	adds r0, r5, 0
-	bl sub_81202E0
+	bl GetMonNickname
 	ldr r0, _080BFAA0 @ =gUnknown_2021CF0
 	movs r1, 0xD
 	muls r1, r4
 	ldr r2, _080BFAA4 @ =gUnknown_8247094
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -231,7 +231,7 @@ sub_80BFAA8: @ 80BFAA8
 	str r0, [sp, 0x8]
 	mov r0, r8
 	ldr r1, [sp, 0x8]
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	adds r1, 0x2
 	str r1, [sp, 0x14]
@@ -241,7 +241,7 @@ sub_80BFAA8: @ 80BFAA8
 	str r3, [sp, 0xC]
 	mov r0, r8
 	adds r1, r3, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r7, r5, 0
@@ -249,7 +249,7 @@ sub_80BFAA8: @ 80BFAA8
 	str r7, [sp, 0x10]
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	adds r1, 0x5
 	str r1, [sp, 0x18]
@@ -259,13 +259,13 @@ sub_80BFAA8: @ 80BFAA8
 	str r3, [sp, 0x1C]
 	mov r0, r8
 	adds r1, r3, 0
-	bl sub_803FBE8
+	bl GetMonData
 	add r7, sp, 0x4
 	mov r10, r7
 	strb r0, [r7]
 	mov r0, r8
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r6, sp
 	adds r6, 0x6
 	strb r0, [r6]
@@ -348,13 +348,13 @@ sub_80BFBA8: @ 80BFBA8
 	ldr r4, _080BFC10 @ =gUnknown_20370C2
 	ldrb r2, [r4]
 	movs r1, 0
-	bl sub_803E964
+	bl SetMonMoveSlot
 	mov r1, r8
 	ldrh r0, [r1]
 	muls r0, r6
 	adds r0, r5
 	ldrb r1, [r4]
-	bl sub_8041064
+	bl RemoveMonPPBonus
 	ldrh r4, [r4]
 	cmp r4, 0x2
 	bhi _080BFBFC
@@ -397,7 +397,7 @@ sub_80BFC14: @ 80BFC14
 	ldr r1, _080BFC3C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _080BFC44

@@ -271,7 +271,7 @@ _080BE65E:
 	adds r0, r4, r0
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -280,13 +280,13 @@ _080BE65E:
 	ldr r4, _080BE6EC @ =gUnknown_20399C0
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x2]
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x2]
 	adds r0, 0x1
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	movs r4, 0
 _080BE690:
 	ldr r0, _080BE6EC @ =gUnknown_20399C0
@@ -297,7 +297,7 @@ _080BE690:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080BE6E6
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -313,7 +313,7 @@ _080BE6B0:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080BE6E6
-	bl sub_8007280
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -323,13 +323,13 @@ _080BE6B0:
 	ldr r0, [r0, 0x24]
 	cmp r0, 0
 	beq _080BE6DA
-	bl sub_8007280
+	bl DestroySprite
 _080BE6DA:
 	ldr r0, [r5]
 	ldr r0, [r0, 0x28]
 	cmp r0, 0
 	beq _080BE6E6
-	bl sub_8007280
+	bl DestroySprite
 _080BE6E6:
 	pop {r4,r5}
 	pop {r0}
@@ -536,9 +536,9 @@ sub_80BE7CC: @ 80BE7CC
 	ldr r0, _080BE9DC @ =nullsub_62
 	str r0, [r4, 0x14]
 	mov r0, sp
-	bl sub_8008720
+	bl LoadSpriteSheets
 	mov r0, r10
-	bl sub_8008974
+	bl LoadSpritePalettes
 	movs r5, 0
 	mov r3, r8
 	lsls r3, 16
@@ -563,7 +563,7 @@ _080BE8A4:
 	asrs r1, r2, 16
 	asrs r2, r7, 16
 	movs r3, 0x1
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -583,7 +583,7 @@ _080BE8BC:
 	str r0, [r2]
 	lsls r1, r5, 24
 	lsrs r1, 24
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r5, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -626,7 +626,7 @@ _080BE914:
 	mov r3, r9
 	asrs r1, r3, 16
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -656,7 +656,7 @@ _080BE93A:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -682,7 +682,7 @@ _080BE93A:
 	ldr r0, [r6]
 	ldr r0, [r0, 0x28]
 	movs r1, 0x9
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r1, [r6]
 	ldr r2, [r1, 0x28]
 	ldr r3, [sp, 0x48]
@@ -697,7 +697,7 @@ _080BE93A:
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 	b _080BE9FA
 	.align 2, 0
 _080BE9C4: .4byte gUnknown_20399C0
@@ -727,7 +727,7 @@ _080BE9FA:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -746,7 +746,7 @@ _080BE9FA:
 	strh r0, [r1, 0x2E]
 	ldr r0, [r2, 0x24]
 	movs r1, 0x8
-	bl sub_800838C
+	bl StartSpriteAnim
 	b _080BEA74
 	.align 2, 0
 _080BEA3C: .4byte sub_80BEAC8
@@ -813,7 +813,7 @@ sub_80BEA8C: @ 80BEA8C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	b _080BEAC2
 	.align 2, 0
 _080BEAB4: .4byte gUnknown_20399C0
@@ -821,7 +821,7 @@ _080BEAB8:
 	lsls r1, 25
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _080BEAC2:
 	pop {r0}
 	bx r0
@@ -927,14 +927,14 @@ sub_80BEB20: @ 80BEB20
 	orrs r0, r3
 	str r0, [r5, 0x4]
 	adds r0, r5, 0
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	mov r0, sp
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -974,7 +974,7 @@ sub_80BEBD0: @ 80BEBD0
 	adds r0, r2
 	movs r2, 0x80
 	movs r3, 0x1
-	bl sub_8000EAC
+	bl RequestDma3Copy
 	pop {r0}
 	bx r0
 	.align 2, 0

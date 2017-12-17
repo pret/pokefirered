@@ -17,25 +17,25 @@ AgbMain: @ 80003A4
 	ldr r2, _08000458 @ =0x00007fff
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_8000968
+	bl InitGpuRegManager
 	ldr r1, _0800045C @ =0x04000204
 	ldr r2, _08000460 @ =0x00004014
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_80005C0
-	bl sub_8000688
+	bl InitKeys
+	bl InitIntrHandlers
 	bl m4aSoundInit
-	bl sub_8000598
+	bl EnableVCountIntrAtLine150
 	bl sub_80F86C4
-	bl sub_804BFE4
+	bl CheckForFlashMemory
 	bl sub_80004C4
-	bl sub_8071938
-	bl sub_8000BFC
-	bl sub_8001028
+	bl InitMapMusic
+	bl ClearDma3Requests
+	bl ResetBgs
 	ldr r0, _08000464 @ =gHeap
 	movs r1, 0xE0
 	lsls r1, 9
-	bl sub_8002B80
+	bl InitHeap
 	bl sub_80F79C8
 	ldr r0, _08000468 @ =gUnknown_3003530
 	movs r4, 0
@@ -51,7 +51,7 @@ AgbMain: @ 80003A4
 	mov r8, r1
 	adds r6, r0, 0
 _0800041A:
-	bl sub_80005E8
+	bl ReadKeys
 	ldr r0, _08000468 @ =gUnknown_3003530
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -97,14 +97,14 @@ _08000478:
 	bne _0800049E
 	movs r0, 0
 	strh r0, [r7, 0x2E]
-	bl sub_8007350
+	bl ClearSpriteCopyRequests
 	strb r4, [r5]
 	bl sub_80004B0
 	mov r2, r8
 	strb r2, [r5]
 _0800049E:
-	bl sub_805486C
-	bl sub_807194C
+	bl PlayTimeCounter_Update
+	bl MapMusicMain
 	bl sub_8000890
 	b _0800041A
 	.align 2, 0
@@ -114,7 +114,7 @@ _080004AC: .4byte gUnknown_30030E4
 	thumb_func_start sub_80004B0
 sub_80004B0: @ 80004B0
 	push {lr}
-	bl sub_800B178
+	bl HandleLinkConnection
 	lsls r0, 24
 	cmp r0, 0
 	bne _080004C0
@@ -133,7 +133,7 @@ sub_80004C4: @ 80004C4
 	str r4, [r0, 0x24]
 	str r4, [r0]
 	ldr r0, _080004F8 @ =sub_80EC820
-	bl sub_8000544
+	bl SetMainCallback2
 	ldr r0, _080004FC @ =gUnknown_300500C
 	ldr r1, _08000500 @ =gUnknown_2024588
 	str r1, [r0]
@@ -187,8 +187,8 @@ _0800053A:
 _08000540: .4byte gUnknown_30030F0
 	thumb_func_end sub_8000510
 
-	thumb_func_start sub_8000544
-sub_8000544: @ 8000544
+	thumb_func_start SetMainCallback2
+SetMainCallback2: @ 8000544
 	ldr r1, _08000554 @ =gUnknown_30030F0
 	str r0, [r1, 0x4]
 	movs r0, 0x87
@@ -199,20 +199,20 @@ sub_8000544: @ 8000544
 	bx lr
 	.align 2, 0
 _08000554: .4byte gUnknown_30030F0
-	thumb_func_end sub_8000544
+	thumb_func_end SetMainCallback2
 
-	thumb_func_start sub_8000558
-sub_8000558: @ 8000558
+	thumb_func_start StartTimer1
+StartTimer1: @ 8000558
 	ldr r1, _08000560 @ =0x04000106
 	movs r0, 0x80
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
 _08000560: .4byte 0x04000106
-	thumb_func_end sub_8000558
+	thumb_func_end StartTimer1
 
-	thumb_func_start sub_8000564
-sub_8000564: @ 8000564
+	thumb_func_start SeedRngAndSetTrainerId
+SeedRngAndSetTrainerId: @ 8000564
 	push {r4,lr}
 	ldr r0, _08000580 @ =0x04000104
 	ldrh r4, [r0]
@@ -230,22 +230,22 @@ sub_8000564: @ 8000564
 _08000580: .4byte 0x04000104
 _08000584: .4byte 0x04000106
 _08000588: .4byte gUnknown_2020000
-	thumb_func_end sub_8000564
+	thumb_func_end SeedRngAndSetTrainerId
 
-	thumb_func_start sub_800058C
-sub_800058C: @ 800058C
+	thumb_func_start GetGeneratedTrainerIdLower
+GetGeneratedTrainerIdLower: @ 800058C
 	ldr r0, _08000594 @ =gUnknown_2020000
 	ldrh r0, [r0]
 	bx lr
 	.align 2, 0
 _08000594: .4byte gUnknown_2020000
-	thumb_func_end sub_800058C
+	thumb_func_end GetGeneratedTrainerIdLower
 
-	thumb_func_start sub_8000598
-sub_8000598: @ 8000598
+	thumb_func_start EnableVCountIntrAtLine150
+EnableVCountIntrAtLine150: @ 8000598
 	push {lr}
 	movs r0, 0x4
-	bl sub_8000AC4
+	bl GetGpuReg
 	movs r1, 0xFF
 	ands r1, r0
 	movs r2, 0x96
@@ -255,15 +255,15 @@ sub_8000598: @ 8000598
 	movs r0, 0x20
 	orrs r1, r0
 	movs r0, 0x4
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4
-	bl sub_8000B68
+	bl EnableInterrupts
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8000598
+	thumb_func_end EnableVCountIntrAtLine150
 
-	thumb_func_start sub_80005C0
-sub_80005C0: @ 80005C0
+	thumb_func_start InitKeys
+InitKeys: @ 80005C0
 	ldr r1, _080005DC @ =gUnknown_300352C
 	movs r0, 0x5
 	strh r0, [r1]
@@ -282,10 +282,10 @@ sub_80005C0: @ 80005C0
 _080005DC: .4byte gUnknown_300352C
 _080005E0: .4byte gUnknown_30030E0
 _080005E4: .4byte gUnknown_30030F0
-	thumb_func_end sub_80005C0
+	thumb_func_end InitKeys
 
-	thumb_func_start sub_80005E8
-sub_80005E8: @ 80005E8
+	thumb_func_start ReadKeys
+ReadKeys: @ 80005E8
 	push {lr}
 	ldr r0, _08000624 @ =0x04000130
 	ldrh r1, [r0]
@@ -366,10 +366,10 @@ _0800067A:
 	.align 2, 0
 _08000680: .4byte gUnknown_30030E0
 _08000684: .4byte gUnknown_300500C
-	thumb_func_end sub_80005E8
+	thumb_func_end ReadKeys
 
-	thumb_func_start sub_8000688
-sub_8000688: @ 8000688
+	thumb_func_start InitIntrHandlers
+InitIntrHandlers: @ 8000688
 	push {r4,r5,lr}
 	ldr r5, _080006D4 @ =IntrMain
 	ldr r4, _080006D8 @ =gUnknown_3003580
@@ -391,16 +391,16 @@ _08000694:
 	ldr r0, _080006EC @ =INTR_VECTOR
 	str r4, [r0]
 	movs r0, 0
-	bl sub_80006F4
+	bl SetVBlankCallback
 	movs r0, 0
-	bl sub_8000700
+	bl SetHBlankCallback
 	movs r0, 0
 	bl sub_8000718
 	ldr r1, _080006F0 @ =0x04000208
 	movs r0, 0x1
 	strh r0, [r1]
 	movs r0, 0x1
-	bl sub_8000B68
+	bl EnableInterrupts
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -413,25 +413,25 @@ _080006E4: .4byte 0x040000d4
 _080006E8: .4byte 0x84000200
 _080006EC: .4byte INTR_VECTOR
 _080006F0: .4byte 0x04000208
-	thumb_func_end sub_8000688
+	thumb_func_end InitIntrHandlers
 
-	thumb_func_start sub_80006F4
-sub_80006F4: @ 80006F4
+	thumb_func_start SetVBlankCallback
+SetVBlankCallback: @ 80006F4
 	ldr r1, _080006FC @ =gUnknown_30030F0
 	str r0, [r1, 0xC]
 	bx lr
 	.align 2, 0
 _080006FC: .4byte gUnknown_30030F0
-	thumb_func_end sub_80006F4
+	thumb_func_end SetVBlankCallback
 
-	thumb_func_start sub_8000700
-sub_8000700: @ 8000700
+	thumb_func_start SetHBlankCallback
+SetHBlankCallback: @ 8000700
 	ldr r1, _08000708 @ =gUnknown_30030F0
 	str r0, [r1, 0x10]
 	bx lr
 	.align 2, 0
 _08000708: .4byte gUnknown_30030F0
-	thumb_func_end sub_8000700
+	thumb_func_end SetHBlankCallback
 
 	thumb_func_start sub_800070C
 sub_800070C: @ 800070C
@@ -458,7 +458,7 @@ sub_8000724: @ 8000724
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08000738
-	bl sub_80FBA38
+	bl LinkVSync
 	b _08000744
 	.align 2, 0
 _08000734: .4byte gUnknown_3003F3C
@@ -485,8 +485,8 @@ _0800075C:
 	ldr r0, [r5, 0x24]
 	adds r0, 0x1
 	str r0, [r5, 0x24]
-	bl sub_8000A04
-	bl sub_8000C34
+	bl CopyBufferedValuesToGpuRegs
+	bl ProcessDma3Requests
 	ldr r1, _080007B0 @ =gUnknown_3003D88
 	ldr r0, _080007B4 @ =gSoundInfo
 	ldrb r0, [r0, 0x4]
@@ -500,7 +500,7 @@ _0800075C:
 	ldrh r0, [r4]
 	strb r0, [r1]
 	bl sub_800DD28
-	bl sub_8044EC8
+	bl Random
 	bl sub_80FCF34
 	ldr r2, _080007C4 @ =INTR_CHECK
 	ldrh r0, [r2]
@@ -622,13 +622,13 @@ sub_8000874: @ 8000874
 	ldr r0, _08000880 @ =gIntrTable
 	ldr r1, _08000884 @ =sub_8000844
 	str r1, [r0, 0x4]
-	ldr r1, _08000888 @ =sub_800B788
+	ldr r1, _08000888 @ =Timer3Intr
 	str r1, [r0, 0x8]
 	bx lr
 	.align 2, 0
 _08000880: .4byte gIntrTable
 _08000884: .4byte sub_8000844
-_08000888: .4byte sub_800B788
+_08000888: .4byte Timer3Intr
 	thumb_func_end sub_8000874
 
 	thumb_func_start nullsub_4
@@ -691,7 +691,7 @@ sub_80008D8: @ 80008D8
 	movs r0, 0
 	strh r0, [r1]
 	bl m4aSoundVSyncOff
-	bl sub_8087E64
+	bl remove_some_task
 	ldr r1, _08000934 @ =0x040000bc
 	ldrh r2, [r1, 0xA]
 	ldr r3, _08000938 @ =0x0000c5ff

@@ -50,7 +50,7 @@ _080F8024:
 	ldr r0, _080F8030 @ =gUnknown_300500C
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl sub_8008D84
+	bl StringCopy
 	b _080F80D8
 	.align 2, 0
 _080F8030: .4byte gUnknown_300500C

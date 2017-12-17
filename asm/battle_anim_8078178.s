@@ -21,7 +21,7 @@ sub_8078178: @ 8078178
 	ldrb r6, [r0]
 	ldr r0, _08078220 @ =sub_80782BC
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -55,7 +55,7 @@ _080781CC:
 	asrs r2, 16
 	ldr r0, _08078234 @ =gUnknown_83BF574
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r0, r4, 4
@@ -114,7 +114,7 @@ _0807824A:
 	asrs r2, 16
 	ldr r0, _080782B8 @ =gUnknown_83BF574
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r0, r4, 4
@@ -191,7 +191,7 @@ sub_80782BC: @ 80782BC
 	ldrb r2, [r4, 0x10]
 	ldrh r3, [r4, 0xA]
 	movs r1, 0x10
-	bl sub_8045274
+	bl BlendPalette
 	ldrh r2, [r4, 0x12]
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
@@ -229,7 +229,7 @@ _08078318:
 	cmp r0, 0x2
 	bne _08078346
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _08078346
 _08078342:
 	adds r0, r1, 0x1
@@ -278,12 +278,12 @@ sub_8078380: @ 8078380
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x20
-	bl sub_8044E4C
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -325,11 +325,11 @@ _080783B2:
 	cmp r0, 0
 	beq _080783EE
 	adds r0, r4, 0
-	bl sub_8007804
+	bl DestroySpriteAndFreeResources
 	b _080783F4
 _080783EE:
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 _080783F4:
 	pop {r4}
 	pop {r0}
@@ -370,22 +370,22 @@ _0807843A:
 	movs r1, 0xFD
 	lsls r1, 6
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080784BC @ =gUnknown_83BF55C
 	lsls r1, r5, 16
 	asrs r1, 16
 	lsls r2, r4, 16
 	asrs r2, 16
 	movs r3, 0x4
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _080784C0 @ =0x0000271a
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	ldr r1, _080784C4 @ =0xffff0000
 	cmp r0, r1
@@ -407,7 +407,7 @@ _08078484:
 	ldr r1, _080784C8 @ =gUnknown_202063C
 	adds r0, r1
 	ldr r1, _080784CC @ =gUnknown_83BF554
-	bl sub_8008A58
+	bl SetSubspriteTables
 	ldr r1, _080784D0 @ =gUnknown_3005090
 	lsls r0, r6, 2
 	adds r0, r6
@@ -469,7 +469,7 @@ _0807850C:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 _08078522:
 	pop {r0}
 	bx r0
@@ -482,7 +482,7 @@ sub_8078528: @ 8078528
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _080785C0 @ =0x0000271a
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, _080785C4 @ =gUnknown_3005090
@@ -599,7 +599,7 @@ _08078610:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl sub_8000A38
+	bl SetGpuReg
 _08078626:
 	pop {r0}
 	bx r0
@@ -632,9 +632,9 @@ sub_807862C: @ 807862C
 	ldr r0, _08078670 @ =gUnknown_202063C
 	adds r4, r0
 	adds r0, r4, 0
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	b _0807868E
 	.align 2, 0
 _0807866C: .4byte gUnknown_3005090
@@ -644,12 +644,12 @@ _08078674:
 	bne _0807868E
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _0807868E:
 	pop {r4}
 	pop {r0}
@@ -864,7 +864,7 @@ _0807882A:
 	b _08078838
 _08078830:
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _0807885A
 _08078838:
 	ldr r0, _08078860 @ =gUnknown_2037F02
@@ -893,8 +893,8 @@ _08078864: .4byte gUnknown_3005090
 _08078868: .4byte sub_80BB088
 	thumb_func_end sub_8078694
 
-	thumb_func_start sub_807886C
-sub_807886C: @ 807886C
+	thumb_func_start LaunchStatusAnimation
+LaunchStatusAnimation: @ 807886C
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -908,9 +908,9 @@ sub_807886C: @ 807886C
 	ldr r0, _080788B0 @ =gUnknown_81C6E84
 	movs r2, 0
 	bl sub_80725D4
-	ldr r0, _080788B4 @ =sub_80788BC
+	ldr r0, _080788B4 @ =task0A_80788BC
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080788B8 @ =gUnknown_3005090
@@ -926,12 +926,12 @@ sub_807886C: @ 807886C
 _080788A8: .4byte gUnknown_2037F1A
 _080788AC: .4byte gUnknown_2037F1B
 _080788B0: .4byte gUnknown_81C6E84
-_080788B4: .4byte sub_80788BC
+_080788B4: .4byte task0A_80788BC
 _080788B8: .4byte gUnknown_3005090
-	thumb_func_end sub_807886C
+	thumb_func_end LaunchStatusAnimation
 
-	thumb_func_start sub_80788BC
-sub_80788BC: @ 80788BC
+	thumb_func_start task0A_80788BC
+task0A_80788BC: @ 80788BC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -962,7 +962,7 @@ sub_80788BC: @ 80788BC
 	ands r0, r2
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080788FE:
 	pop {r4}
 	pop {r0}
@@ -972,6 +972,6 @@ _08078904: .4byte gUnknown_2037EDC
 _08078908: .4byte gUnknown_2037EE1
 _0807890C: .4byte gUnknown_2024018
 _08078910: .4byte gUnknown_3005090
-	thumb_func_end sub_80788BC
+	thumb_func_end task0A_80788BC
 
 	.align 2, 0 @ Don't pad with nop.

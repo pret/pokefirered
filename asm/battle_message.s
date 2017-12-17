@@ -217,7 +217,7 @@ _080D7424: .4byte gUnknown_83FD2AA
 _080D7428:
 	mov r1, r12
 	ldrb r0, [r1]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D7468
@@ -297,7 +297,7 @@ _080D74C4: .4byte gUnknown_83FD3B1
 _080D74C8:
 	mov r1, r12
 	ldrb r0, [r1]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D7520
@@ -369,7 +369,7 @@ _080D7554: .4byte gUnknown_83FD522
 _080D7558:
 	mov r1, r10
 	ldrb r0, [r1, 0x17]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D75B0
@@ -461,7 +461,7 @@ _080D75F0:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_8008D84
+	bl StringCopy
 	b _080D763C
 	.align 2, 0
 _080D761C: .4byte gUnknown_2039A34
@@ -475,7 +475,7 @@ _080D762C:
 	muls r1, r2
 	ldr r2, _080D764C @ =gUnknown_8247094
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 _080D763C:
 	ldr r0, _080D7648 @ =gUnknown_2022AC8
 	bl sub_80D8720
@@ -497,7 +497,7 @@ _080D7654:
 	strb r0, [r4]
 	mov r1, r12
 	ldrb r0, [r1]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -552,7 +552,7 @@ _080D76D0: .4byte gUnknown_83FE9D4
 _080D76D4:
 	mov r1, r12
 	ldrb r0, [r1]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -781,7 +781,7 @@ sub_80D7868: @ 80D7868
 	mov r8, r1
 	movs r6, 0
 	movs r4, 0
-	bl sub_800A404
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	mov r0, r9
@@ -924,7 +924,7 @@ _080D79F4:
 _080D79FC: .4byte gUnknown_2021D04
 _080D7A00:
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080D7A1C @ =gUnknown_2023BCE
 	lsls r0, 24
 	lsrs r0, 23
@@ -940,7 +940,7 @@ _080D7A1C: .4byte gUnknown_2023BCE
 _080D7A20: .4byte gUnknown_2024284
 _080D7A24:
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080D7A40 @ =gUnknown_2023BCE
 	lsls r0, 24
 	lsrs r0, 23
@@ -956,7 +956,7 @@ _080D7A40: .4byte gUnknown_2023BCE
 _080D7A44: .4byte gUnknown_202402C
 _080D7A48:
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080D7A64 @ =gUnknown_2023BCE
 	lsls r0, 24
 	lsrs r0, 23
@@ -972,7 +972,7 @@ _080D7A64: .4byte gUnknown_2023BCE
 _080D7A68: .4byte gUnknown_2024284
 _080D7A6C:
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080D7A88 @ =gUnknown_2023BCE
 	lsls r0, 24
 	lsrs r0, 23
@@ -1075,7 +1075,7 @@ _080D7B48: .4byte gUnknown_202402C
 _080D7B4C:
 	ldr r4, _080D7B70 @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	adds r2, r4, 0
 	cmp r0, 0
@@ -1106,11 +1106,11 @@ _080D7B8A:
 	cmp r0, 0xFF
 	bne _080D7B80
 	ldrb r0, [r2]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080D7BB8 @ =gUnknown_2023BCE
 	lsls r0, 24
 	lsrs r0, 23
@@ -1126,11 +1126,11 @@ _080D7BB8: .4byte gUnknown_2023BCE
 _080D7BBC: .4byte gUnknown_202402C
 _080D7BC0:
 	ldrb r0, [r2]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080D7BDC @ =gUnknown_2023BCE
 	lsls r0, 24
 	lsrs r0, 23
@@ -1142,16 +1142,16 @@ _080D7BDC: .4byte gUnknown_2023BCE
 _080D7BE0:
 	ldr r4, _080D7C14 @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D7C20
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080D7C18 @ =gUnknown_2023BCE
 	lsls r0, 24
 	lsrs r0, 23
@@ -1169,11 +1169,11 @@ _080D7C18: .4byte gUnknown_2023BCE
 _080D7C1C: .4byte gUnknown_2024284
 _080D7C20:
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _080D7C44 @ =gUnknown_2023BCE
 	lsls r0, 24
 	lsrs r0, 23
@@ -1190,7 +1190,7 @@ _080D7C48: .4byte gUnknown_202402C
 _080D7C4C:
 	ldr r5, _080D7C98 @ =gUnknown_2023D6B
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7CB0
@@ -1246,7 +1246,7 @@ _080D7CBC: .4byte gUnknown_2023BCE
 _080D7CC0:
 	ldr r5, _080D7D0C @ =gUnknown_2023D6C
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7D24
@@ -1302,7 +1302,7 @@ _080D7D30: .4byte gUnknown_2023BCE
 _080D7D34:
 	ldr r5, _080D7D80 @ =gUnknown_2023D6E
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7D98
@@ -1358,7 +1358,7 @@ _080D7DA4: .4byte gUnknown_2023BCE
 _080D7DA8:
 	ldr r5, _080D7DF4 @ =gUnknown_2023BC4
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7E0C
@@ -1414,7 +1414,7 @@ _080D7E18: .4byte gUnknown_2023BCE
 _080D7E1C:
 	ldr r5, _080D7E68 @ =gUnknown_2023FC4
 	ldrb r0, [r5, 0x17]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7E80
@@ -1579,10 +1579,10 @@ _080D7F64:
 	ldr r0, _080D7F88 @ =gUnknown_2023F54
 	adds r1, r0
 	mov r0, sp
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _080D7F8C @ =gUnknown_83FD8AF
 	mov r0, sp
-	bl sub_8008DA4
+	bl StringAppend
 	mov r4, sp
 	b _080D8382
 	.align 2, 0
@@ -1661,7 +1661,7 @@ _080D8008:
 	lsls r0, 3
 	cmp r1, r0
 	bne _080D8024
-	bl sub_8040F2C
+	bl GetSecretBaseTrainerNameIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0xD
@@ -1821,7 +1821,7 @@ _080D8134:
 	bne _080D815C
 _080D814E:
 	movs r0, 0x6
-	bl sub_80091E0
+	bl GetExpandedPlaceholder
 	adds r4, r0, 0
 	b _080D8382
 	.align 2, 0
@@ -1871,7 +1871,7 @@ _080D819C:
 	movs r0, 0x3
 _080D81AA:
 	eors r0, r1
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -1883,7 +1883,7 @@ _080D81BC: .4byte gUnknown_202273C
 _080D81C0:
 	ldr r0, _080D81D4 @ =gUnknown_2023FC4
 	ldrb r0, [r0, 0x17]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 _080D81C8:
 	lsls r1, r0, 3
 	subs r1, r0
@@ -1959,7 +1959,7 @@ _080D825C: .4byte gUnknown_2021D18
 _080D8260:
 	ldr r0, _080D82B4 @ =gUnknown_2023FC4
 	ldrb r0, [r0, 0x17]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D82CC
@@ -2000,7 +2000,7 @@ _080D82A4:
 _080D82AA:
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	b _080D82E4
 	.align 2, 0
 _080D82B4: .4byte gUnknown_2023FC4
@@ -2022,10 +2022,10 @@ _080D82DA:
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 _080D82E4:
 	mov r0, sp
-	bl sub_8008D28
+	bl StringGetEnd10
 	mov r4, sp
 	b _080D8382
 	.align 2, 0
@@ -2053,7 +2053,7 @@ _080D8320:
 	ldr r0, _080D8334 @ =gUnknown_2023D6C
 _080D8322:
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r4, _080D8338 @ =gUnknown_83FD569
 	cmp r0, 0
@@ -2073,7 +2073,7 @@ _080D8348:
 	ldr r0, _080D835C @ =gUnknown_2023D6C
 _080D834A:
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r4, _080D8360 @ =gUnknown_83FD560
 	cmp r0, 0
@@ -2093,7 +2093,7 @@ _080D8370:
 	ldr r0, _080D83D4 @ =gUnknown_2023D6C
 _080D8372:
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r4, _080D83D8 @ =gUnknown_83FD572
 	cmp r0, 0
@@ -2310,7 +2310,7 @@ _080D8504:
 _080D8510: .4byte gUnknown_824F1A0
 _080D8514:
 	ldrb r0, [r4, 0x1]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D8538
@@ -2321,7 +2321,7 @@ _080D8514:
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	b _080D8574
 	.align 2, 0
 _080D8534: .4byte gUnknown_2024284
@@ -2334,7 +2334,7 @@ _080D8538:
 	beq _080D8558
 	ldr r1, _080D8554 @ =gUnknown_83FD55B
 	adds r0, r6, 0
-	bl sub_8008DA4
+	bl StringAppend
 	b _080D8560
 	.align 2, 0
 _080D8550: .4byte gUnknown_2022B4C
@@ -2342,7 +2342,7 @@ _080D8554: .4byte gUnknown_83FD55B
 _080D8558:
 	ldr r1, _080D8584 @ =gUnknown_83FD555
 	adds r0, r6, 0
-	bl sub_8008DA4
+	bl StringAppend
 _080D8560:
 	adds r0, r5, r7
 	ldrb r1, [r0, 0x2]
@@ -2352,13 +2352,13 @@ _080D8560:
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 _080D8574:
 	mov r0, sp
-	bl sub_8008D28
+	bl StringGetEnd10
 	adds r0, r6, 0
 	mov r1, sp
-	bl sub_8008DA4
+	bl StringAppend
 	b _080D86AE
 	.align 2, 0
 _080D8584: .4byte gUnknown_83FD555
@@ -2380,12 +2380,12 @@ _080D85A0:
 	lsls r0, 8
 	orrs r1, r0
 	adds r0, r6, 0
-	bl sub_8040FD0
+	bl GetSpeciesName
 	b _080D86AE
 _080D85B2:
 	adds r4, r5, r7
 	ldrb r0, [r4, 0x1]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D85D8
@@ -2396,7 +2396,7 @@ _080D85B2:
 	adds r0, r1
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	b _080D85EA
 	.align 2, 0
 _080D85D4: .4byte gUnknown_2024284
@@ -2408,10 +2408,10 @@ _080D85D8:
 	adds r0, r1
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 _080D85EA:
 	adds r0, r6, 0
-	bl sub_8008D28
+	bl StringGetEnd10
 	b _080D86AE
 	.align 2, 0
 _080D85F4: .4byte gUnknown_202402C
@@ -2435,7 +2435,7 @@ _080D8616:
 	adds r1, r0
 _080D8618:
 	adds r0, r6, 0
-	bl sub_8008DA4
+	bl StringAppend
 	adds r5, 0x2
 	b _080D86B0
 	.align 2, 0
@@ -2474,7 +2474,7 @@ _080D8628:
 	ldr r0, _080D8684 @ =gUnknown_2023F54
 	adds r1, r0
 	adds r0, r6, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _080D8688 @ =gUnknown_83FD8AF
 	b _080D868E
 	.align 2, 0
@@ -2488,7 +2488,7 @@ _080D868C:
 	ldr r1, _080D8698 @ =gUnknown_83FD8A2
 _080D868E:
 	adds r0, r6, 0
-	bl sub_8008DA4
+	bl StringAppend
 	b _080D86AE
 	.align 2, 0
 _080D8698: .4byte gUnknown_83FD8A2
@@ -2545,7 +2545,7 @@ _080D86E8:
 	bgt _080D8708
 	ldr r1, _080D8704 @ =gUnknown_83FE88B
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	b _080D8714
 	.align 2, 0
 _080D86FC: .4byte gUnknown_2039A34
@@ -2556,7 +2556,7 @@ _080D8708:
 	bgt _080D8714
 	ldr r1, _080D871C @ =gUnknown_83FE88F
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 _080D8714:
 	pop {r4,r5}
 	pop {r0}
@@ -2633,14 +2633,14 @@ _080D8798:
 	ldr r1, _080D87A4 @ =gUnknown_83FD58C
 _080D879A:
 	adds r0, r3, 0
-	bl sub_8008D84
+	bl StringCopy
 	b _080D87B0
 	.align 2, 0
 _080D87A4: .4byte gUnknown_83FD58C
 _080D87A8:
 	ldr r1, _080D87B8 @ =gUnknown_83FD58E
 	adds r0, r3, 0
-	bl sub_8008D84
+	bl StringCopy
 _080D87B0:
 	pop {r4,r5}
 	pop {r0}
@@ -2676,7 +2676,7 @@ sub_80D87BC: @ 80D87BC
 	adds r1, r0
 	ldrb r1, [r1]
 	adds r0, r7, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 _080D87F2:
 	movs r0, 0x40
 	mov r1, r8
@@ -2896,7 +2896,7 @@ _080D8982:
 	cmp r1, 0
 	bne _080D89A4
 	adds r0, r7, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	adds r0, r7, 0
 	movs r1, 0x3
 	bl sub_8003F20

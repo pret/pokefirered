@@ -304,7 +304,7 @@ _081DD044:
 	ldrb r0, [r4, o_SoundChannel_type]
 	tst r0, 0x30
 	beq _081DD068
-	bl sub_81DD264
+	bl sub_81DC460
 	b _081DD228
 _081DD068:
 	mov r10, r10, lsl 16
@@ -467,8 +467,8 @@ _081DD25E:
 	.pool
 	thumb_func_end SoundMainRAM
 
-	arm_func_start sub_81DD264
-sub_81DD264:
+	arm_func_start sub_81DC460
+sub_81DC460:
 	ldr r6, [r4, o_SoundChannel_wav]
 	ldrb r0, [r4, o_SoundChannel_status]
 	tst r0, 0x20
@@ -507,10 +507,10 @@ _081DD2B4:
 	ldrb r0, [r4, o_SoundChannel_type]
 	tst r0, 0x10
 	bne _081DD3C0
-	bl sub_81DD520
+	bl sub_81DC71C
 	mov r0, r1
 	add r3, r3, 0x1
-	bl sub_81DD520
+	bl sub_81DC71C
 	sub r1, r1, r0
 _081DD308:
 	ldr r6, [r5]
@@ -536,11 +536,11 @@ _081DD310:
 	b _081DD364
 _081DD358:
 	add r3, r3, lr
-	bl sub_81DD520
+	bl sub_81DC71C
 	mov r0, r1
 _081DD364:
 	add r3, r3, 0x1
-	bl sub_81DD520
+	bl sub_81DC71C
 	sub r1, r1, r0
 _081DD370:
 	adds r5, r5, 0x40000000
@@ -567,10 +567,10 @@ _081DD3B0:
 	b _081DD3B0
 _081DD3C0:
 	sub r3, r3, 0x1
-	bl sub_81DD520
+	bl sub_81DC71C
 	mov r0, r1
 	sub r3, r3, 0x1
-	bl sub_81DD520
+	bl sub_81DC71C
 	sub r1, r1, r0
 _081DD3D8:
 	ldr r6, [r5]
@@ -596,11 +596,11 @@ _081DD3E0:
 	b _081DD434
 _081DD428:
 	sub r3, r3, lr
-	bl sub_81DD520
+	bl sub_81DC71C
 	mov r0, r1
 _081DD434:
 	sub r3, r3, 0x1
-	bl sub_81DD520
+	bl sub_81DC71C
 	sub r1, r1, r0
 _081DD440:
 	adds r5, r5, 0x40000000
@@ -665,10 +665,10 @@ _081DD4F4:
 	str r7, [r5, 0x630]
 	str r6, [r5], 0x4
 	pop {r8,r12,pc}
-	arm_func_end sub_81DD264
+	arm_func_end sub_81DC460
 
-	arm_func_start sub_81DD520
-sub_81DD520:
+	arm_func_start sub_81DC71C
+sub_81DC71C:
 	push {r0,r2,r5-r7,lr}
 	mov r0, r3, lsr 6
 	ldr r1, [r4, o_SoundChannel_xpi]
@@ -706,7 +706,7 @@ _081DD594:
 	ldrsb r1, [r5, r0]
 	pop {r0,r2,r5-r7,pc}
 	.pool
-	arm_func_end sub_81DD520
+	arm_func_end sub_81DC71C
 
 	thumb_func_start SoundMainBTM
 SoundMainBTM:

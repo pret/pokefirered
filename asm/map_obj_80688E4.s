@@ -82,8 +82,8 @@ _0806896E:
 	bx r1
 	thumb_func_end sub_80688E4
 
-	thumb_func_start sub_8068974
-sub_8068974: @ 8068974
+	thumb_func_start player_bitmagic
+player_bitmagic: @ 8068974
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _080689A8 @ =gUnknown_2036E38
@@ -114,7 +114,7 @@ _08068998:
 	.align 2, 0
 _080689A8: .4byte gUnknown_2036E38
 _080689AC: .4byte gUnknown_2037078
-	thumb_func_end sub_8068974
+	thumb_func_end player_bitmagic
 
 	thumb_func_start sub_80689B0
 sub_80689B0: @ 80689B0
@@ -154,8 +154,8 @@ _080689EC: .4byte gUnknown_2036E38
 _080689F0: .4byte gUnknown_2037078
 	thumb_func_end sub_80689B0
 
-	thumb_func_start sub_80689F4
-sub_80689F4: @ 80689F4
+	thumb_func_start npc_sync_anim_pause_bits
+npc_sync_anim_pause_bits: @ 80689F4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r2, [r5]
@@ -207,10 +207,10 @@ _08068A4C:
 	.align 2, 0
 _08068A54: .4byte 0x00000101
 _08068A58: .4byte gUnknown_202063C
-	thumb_func_end sub_80689F4
+	thumb_func_end npc_sync_anim_pause_bits
 
-	thumb_func_start sub_8068A5C
-sub_8068A5C: @ 8068A5C
+	thumb_func_start UnfreezeMapObjects
+UnfreezeMapObjects: @ 8068A5C
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _08068A88 @ =gUnknown_2036E38
@@ -224,7 +224,7 @@ _08068A62:
 	cmp r0, 0
 	beq _08068A78
 	adds r0, r1, 0
-	bl sub_80689F4
+	bl npc_sync_anim_pause_bits
 _08068A78:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -236,10 +236,10 @@ _08068A78:
 	bx r0
 	.align 2, 0
 _08068A88: .4byte gUnknown_2036E38
-	thumb_func_end sub_8068A5C
+	thumb_func_end UnfreezeMapObjects
 
-	thumb_func_start sub_8068A8C
-sub_8068A8C: @ 8068A8C
+	thumb_func_start little_step
+little_step: @ 8068A8C
 	lsls r1, 24
 	ldr r2, _08068AA8 @ =gUnknown_83A64C8
 	lsrs r1, 22
@@ -255,10 +255,10 @@ sub_8068A8C: @ 8068A8C
 	bx lr
 	.align 2, 0
 _08068AA8: .4byte gUnknown_83A64C8
-	thumb_func_end sub_8068A8C
+	thumb_func_end little_step
 
-	thumb_func_start sub_8068AAC
-sub_8068AAC: @ 8068AAC
+	thumb_func_start double_little_steps
+double_little_steps: @ 8068AAC
 	lsls r1, 24
 	ldr r2, _08068ACC @ =gUnknown_83A64C8
 	lsrs r1, 22
@@ -276,10 +276,10 @@ sub_8068AAC: @ 8068AAC
 	bx lr
 	.align 2, 0
 _08068ACC: .4byte gUnknown_83A64C8
-	thumb_func_end sub_8068AAC
+	thumb_func_end double_little_steps
 
-	thumb_func_start sub_8068AD0
-sub_8068AD0: @ 8068AD0
+	thumb_func_start triple_little_steps
+triple_little_steps: @ 8068AD0
 	lsls r1, 24
 	ldr r2, _08068AF4 @ =gUnknown_83A64C8
 	lsrs r1, 22
@@ -299,10 +299,10 @@ sub_8068AD0: @ 8068AD0
 	bx lr
 	.align 2, 0
 _08068AF4: .4byte gUnknown_83A64C8
-	thumb_func_end sub_8068AD0
+	thumb_func_end triple_little_steps
 
-	thumb_func_start sub_8068AF8
-sub_8068AF8: @ 8068AF8
+	thumb_func_start quad_little_steps
+quad_little_steps: @ 8068AF8
 	lsls r1, 24
 	ldr r2, _08068B18 @ =gUnknown_83A64C8
 	lsrs r1, 22
@@ -320,10 +320,10 @@ sub_8068AF8: @ 8068AF8
 	bx lr
 	.align 2, 0
 _08068B18: .4byte gUnknown_83A64C8
-	thumb_func_end sub_8068AF8
+	thumb_func_end quad_little_steps
 
-	thumb_func_start sub_8068B1C
-sub_8068B1C: @ 8068B1C
+	thumb_func_start oct_little_steps
+oct_little_steps: @ 8068B1C
 	lsls r1, 24
 	ldr r2, _08068B3C @ =gUnknown_83A64C8
 	lsrs r1, 22
@@ -341,10 +341,10 @@ sub_8068B1C: @ 8068B1C
 	bx lr
 	.align 2, 0
 _08068B3C: .4byte gUnknown_83A64C8
-	thumb_func_end sub_8068B1C
+	thumb_func_end oct_little_steps
 
-	thumb_func_start sub_8068B40
-sub_8068B40: @ 8068B40
+	thumb_func_start oamt_npc_ministep_reset
+oamt_npc_ministep_reset: @ 8068B40
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r2, 24
@@ -354,10 +354,10 @@ sub_8068B40: @ 8068B40
 	strh r2, [r0, 0x36]
 	strh r3, [r0, 0x38]
 	bx lr
-	thumb_func_end sub_8068B40
+	thumb_func_end oamt_npc_ministep_reset
 
-	thumb_func_start sub_8068B54
-sub_8068B54: @ 8068B54
+	thumb_func_start obj_npc_ministep
+obj_npc_ministep: @ 8068B54
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r5, _08068BAC @ =gUnknown_83A71B0
@@ -409,7 +409,7 @@ _08068BB6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8068B54
+	thumb_func_end obj_npc_ministep
 
 	thumb_func_start sub_8068BBC
 sub_8068BBC: @ 8068BBC
@@ -435,7 +435,7 @@ sub_8068BCC: @ 8068BCC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8068A8C
+	bl little_step
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x1
 	strh r0, [r4, 0x38]
@@ -483,7 +483,7 @@ sub_8068C18: @ 8068C18
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8068A8C
+	bl little_step
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x1
 	strh r0, [r4, 0x38]
@@ -534,7 +534,7 @@ sub_8068C68: @ 8068C68
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8068A8C
+	bl little_step
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x1
 	strh r0, [r4, 0x38]
@@ -579,7 +579,7 @@ sub_8068CB4: @ 8068CB4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8068A8C
+	bl little_step
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x1
 	b _08068CE8
@@ -588,7 +588,7 @@ _08068CD8:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8068AAC
+	bl double_little_steps
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x2
 _08068CE8:
@@ -666,7 +666,7 @@ sub_8068D3C: @ 8068D3C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8068A8C
+	bl little_step
 _08068D6E:
 	movs r2, 0x3A
 	ldrsh r0, [r4, r2]
@@ -741,7 +741,7 @@ sub_8068DC4: @ 8068DC4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_8068A8C
+	bl little_step
 _08068E00:
 	movs r2, 0x3A
 	ldrsh r0, [r5, r2]
@@ -788,14 +788,14 @@ _08068E50: .4byte gUnknown_83A7202
 _08068E54: .4byte gUnknown_83A7208
 	thumb_func_end sub_8068DC4
 
-	thumb_func_start sub_8068E58
-sub_8068E58: @ 8068E58
+	thumb_func_start SetFieldObjectStepTimer
+SetFieldObjectStepTimer: @ 8068E58
 	strh r1, [r0, 0x34]
 	bx lr
-	thumb_func_end sub_8068E58
+	thumb_func_end SetFieldObjectStepTimer
 
-	thumb_func_start sub_8068E5C
-sub_8068E5C: @ 8068E5C
+	thumb_func_start RunFieldObjectStepTimer
+RunFieldObjectStepTimer: @ 8068E5C
 	push {lr}
 	ldrh r1, [r0, 0x34]
 	subs r1, 0x1
@@ -810,10 +810,10 @@ _08068E6E:
 _08068E70:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8068E5C
+	thumb_func_end RunFieldObjectStepTimer
 
-	thumb_func_start sub_8068E74
-sub_8068E74: @ 8068E74
+	thumb_func_start obj_anim_image_set_and_seek
+obj_anim_image_set_and_seek: @ 8068E74
 	push {r4,lr}
 	lsls r2, 24
 	lsrs r2, 24
@@ -828,11 +828,11 @@ sub_8068E74: @ 8068E74
 	ands r1, r3
 	strb r1, [r4]
 	adds r1, r2, 0
-	bl sub_80083C0
+	bl SeekSpriteAnim
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8068E74
+	thumb_func_end obj_anim_image_set_and_seek
 
 	thumb_func_start sub_8068E9C
 sub_8068E9C: @ 8068E9C
@@ -993,7 +993,7 @@ sub_8068FA8: @ 8068FA8
 	lsrs r0, 24
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_80682F8
+	bl SetObjectSubpriorityByZCoord
 	ldrh r1, [r4, 0x32]
 	lsls r1, 24
 	lsrs r1, 24
@@ -1024,7 +1024,7 @@ _08068FD6:
 	cmp r1, r0
 	bne _08068FF6
 	adds r0, r2, 0
-	bl sub_8007280
+	bl DestroySprite
 _08068FF6:
 	adds r5, 0x44
 	subs r4, 0x1
@@ -1099,12 +1099,12 @@ sub_8069058: @ 8069058
 	ldr r0, _08069090 @ =gUnknown_202063C
 	adds r4, r0
 	adds r0, r5, 0
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0806908A:
 	pop {r4,r5}
 	pop {r0}
@@ -1167,7 +1167,7 @@ _080690F8: .4byte gUnknown_202063C
 _080690FC: .4byte 0xfffffc00
 _08069100:
 	adds r0, r4, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 	adds r2, r4, 0
 	adds r2, 0x42
 	ldrb r0, [r2]
@@ -1179,7 +1179,7 @@ _08069100:
 _08069116:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0806911E:
 	pop {r4,r5}
 	pop {r0}
@@ -1430,8 +1430,8 @@ _080692C2:
 	bx r1
 	thumb_func_end sub_8069294
 
-	thumb_func_start sub_80692C8
-sub_80692C8: @ 80692C8
+	thumb_func_start oe_exec_and_other_stuff
+oe_exec_and_other_stuff: @ 80692C8
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
@@ -1441,18 +1441,18 @@ sub_80692C8: @ 80692C8
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	adds r0, r4, 0
-	bl sub_8083444
+	bl FieldEffectStart
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _080692EC: .4byte gUnknown_20386E0
-	thumb_func_end sub_80692C8
+	thumb_func_end oe_exec_and_other_stuff
 
-	thumb_func_start sub_80692F0
-sub_80692F0: @ 80692F0
+	thumb_func_start DoShadowFieldEffect
+DoShadowFieldEffect: @ 80692F0
 	push {lr}
 	adds r1, r0, 0
 	ldrb r2, [r1, 0x2]
@@ -1463,14 +1463,14 @@ sub_80692F0: @ 80692F0
 	orrs r0, r2
 	strb r0, [r1, 0x2]
 	movs r0, 0x3
-	bl sub_80692C8
+	bl oe_exec_and_other_stuff
 _08069308:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80692F0
+	thumb_func_end DoShadowFieldEffect
 
-	thumb_func_start sub_806930C
-sub_806930C: @ 806930C
+	thumb_func_start DoRippleFieldEffect
+DoRippleFieldEffect: @ 806930C
 	push {r4,lr}
 	adds r4, r1, 0
 	ldrb r0, [r0, 0x5]
@@ -1492,12 +1492,12 @@ sub_806930C: @ 806930C
 	movs r0, 0x3
 	str r0, [r2, 0xC]
 	movs r0, 0x5
-	bl sub_8083444
+	bl FieldEffectStart
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08069344: .4byte gUnknown_20386E0
-	thumb_func_end sub_806930C
+	thumb_func_end DoRippleFieldEffect
 
 	.align 2, 0 @ Don't pad with nop.

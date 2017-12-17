@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80A069C
-sub_80A069C: @ 80A069C
+	thumb_func_start GetMonSizeHash
+GetMonSizeHash: @ 80A069C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -15,45 +15,45 @@ sub_80A069C: @ 80A069C
 	sub sp, 0x8
 	adds r5, r0, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	str r0, [sp, 0x4]
 	lsrs r0, 16
 	str r0, [sp]
 	adds r0, r5, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	adds r7, r0, 0
 	movs r6, 0xF
 	ands r7, r6
 	adds r0, r5, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	mov r1, r8
 	ands r1, r6
 	mov r8, r1
 	adds r0, r5, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	mov r9, r0
 	mov r3, r9
 	ands r3, r6
 	mov r9, r3
 	adds r0, r5, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r10, r0
 	ands r0, r6
 	mov r10, r0
 	adds r0, r5, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	ands r4, r6
 	adds r0, r5, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	adds r2, r0, 0
 	ands r2, r6
 	mov r1, r8
@@ -82,10 +82,10 @@ sub_80A069C: @ 80A069C
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A069C
+	thumb_func_end GetMonSizeHash
 
-	thumb_func_start sub_80A0740
-sub_80A0740: @ 80A0740
+	thumb_func_start TranslateBigMonSizeTableIndex
+TranslateBigMonSizeTableIndex: @ 80A0740
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -113,10 +113,10 @@ _080A0760:
 _080A076C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A0740
+	thumb_func_end TranslateBigMonSizeTableIndex
 
-	thumb_func_start sub_80A0770
-sub_80A0770: @ 80A0770
+	thumb_func_start GetMonSize
+GetMonSize: @ 80A0770
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r6, r1, 0
@@ -124,7 +124,7 @@ sub_80A0770: @ 80A0770
 	lsrs r0, 16
 	lsls r6, 16
 	lsrs r6, 16
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
@@ -132,7 +132,7 @@ sub_80A0770: @ 80A0770
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r6, 0
-	bl sub_80A0740
+	bl TranslateBigMonSizeTableIndex
 	lsls r0, 24
 	ldr r1, _080A07E0 @ =gUnknown_83E272C
 	lsrs r0, 21
@@ -168,7 +168,7 @@ sub_80A0770: @ 80A0770
 	bx r1
 	.align 2, 0
 _080A07E0: .4byte gUnknown_83E272C
-	thumb_func_end sub_80A0770
+	thumb_func_end GetMonSize
 
 	thumb_func_start sub_80A07E4
 sub_80A07E4: @ 80A07E4
@@ -187,7 +187,7 @@ sub_80A07E4: @ 80A07E4
 	movs r3, 0x8
 	bl sub_8008E78
 	ldr r1, _080A0828 @ =gUnknown_8417FB9
-	bl sub_8008DA4
+	bl StringAppend
 	adds r4, r0, 0
 	adds r0, r5, 0
 	movs r1, 0xA
@@ -227,12 +227,12 @@ _080A0848:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	beq _080A086A
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, r6
 	beq _080A0874
 _080A086A:
@@ -243,16 +243,16 @@ _080A0870: .4byte gUnknown_2024284
 _080A0874:
 	mov r4, sp
 	adds r0, r5, 0
-	bl sub_80A069C
+	bl GetMonSizeHash
 	strh r0, [r4]
 	mov r0, sp
 	ldrh r1, [r0]
 	adds r0, r6, 0
-	bl sub_80A0770
+	bl GetMonSize
 	adds r5, r0, 0
 	ldrh r1, [r7]
 	adds r0, r6, 0
-	bl sub_80A0770
+	bl GetMonSize
 	adds r4, r0, 0
 	ldr r0, _080A08AC @ =gUnknown_2021D04
 	adds r1, r4, 0
@@ -292,7 +292,7 @@ sub_80A08CC: @ 80A08CC
 	lsrs r4, 16
 	ldrh r1, [r1]
 	adds r0, r4, 0
-	bl sub_80A0770
+	bl GetMonSize
 	adds r1, r0, 0
 	ldr r0, _080A08F8 @ =gUnknown_2021D04
 	bl sub_80A07E4
@@ -301,7 +301,7 @@ sub_80A08CC: @ 80A08CC
 	muls r1, r4
 	ldr r2, _080A0900 @ =gUnknown_8245EE0
 	adds r1, r2
-	bl sub_8008D84
+	bl StringCopy
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -403,8 +403,8 @@ _080A09A4: .4byte 0x00004040
 _080A09A8: .4byte gUnknown_20370D0
 	thumb_func_end sub_80A0984
 
-	thumb_func_start sub_80A09AC
-sub_80A09AC: @ 80A09AC
+	thumb_func_start GiveGiftRibbonToParty
+GiveGiftRibbonToParty: @ 80A09AC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -441,12 +441,12 @@ _080A09E6:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080A0A18
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _080A0A18
 	mov r1, sp
@@ -477,6 +477,6 @@ _080A0A38: .4byte gUnknown_3005008
 _080A0A3C: .4byte 0x0000309c
 _080A0A40: .4byte gUnknown_2024284
 _080A0A44: .4byte 0x0000083b
-	thumb_func_end sub_80A09AC
+	thumb_func_end GiveGiftRibbonToParty
 
 	.align 2, 0 @ Don't pad with nop.

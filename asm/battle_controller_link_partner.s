@@ -123,7 +123,7 @@ sub_80D42A8: @ 80D42A8
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -131,7 +131,7 @@ sub_80D42A8: @ 80D42A8
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl sub_8007280
+	bl DestroySprite
 	bl sub_80D49E8
 _080D42F8:
 	pop {r4-r6}
@@ -254,7 +254,7 @@ _080D43B0:
 _080D43E6:
 	movs r6, 0x1
 _080D43E8:
-	bl sub_80721F0
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D43F4
@@ -364,7 +364,7 @@ _080D4460:
 	lsls r0, 2
 	ldr r1, _080D4578 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r4, _080D457C @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r1, r7, 0
@@ -380,7 +380,7 @@ _080D4460:
 	ldr r2, _080D4584 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r6]
 	eors r0, r7
 	bl sub_804BD94
@@ -388,7 +388,7 @@ _080D4460:
 	eors r0, r7
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 _080D4500:
 	ldr r1, _080D4574 @ =gUnknown_3004FFC
 	ldr r4, _080D456C @ =gUnknown_2023BC4
@@ -400,7 +400,7 @@ _080D4500:
 	lsls r0, 2
 	ldr r1, _080D4578 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r5, _080D457C @ =gUnknown_3004FF0
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -414,13 +414,13 @@ _080D4500:
 	ldr r2, _080D4584 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_804BD94
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldr r0, _080D4568 @ =gUnknown_2024018
 	ldr r0, [r0]
 	ldr r2, [r0, 0x8]
@@ -502,7 +502,7 @@ sub_80D45D0: @ 80D45D0
 	ldrb r0, [r5]
 	adds r0, r6
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r1, r4, 16
 	movs r0, 0x1
@@ -528,7 +528,7 @@ _080D4618:
 	muls r0, r2
 	ldr r2, _080D463C @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	bl sub_80D49E8
 _080D4632:
 	pop {r4-r6}
@@ -562,7 +562,7 @@ sub_80D4640: @ 80D4640
 	ldrb r0, [r2, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -570,12 +570,12 @@ sub_80D4640: @ 80D4640
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080D46A4 @ =gUnknown_3004FF0
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_80D49E8
 _080D4690:
 	pop {r4-r6}
@@ -613,7 +613,7 @@ sub_80D46A8: @ 80D46A8
 	lsls r0, 2
 	ldr r4, _080D4710 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -621,12 +621,12 @@ sub_80D46A8: @ 80D46A8
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080D4714 @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_80D49E8
 _080D46FC:
 	pop {r4-r6}
@@ -750,7 +750,7 @@ sub_80D47AC: @ 80D47AC
 	adds r1, r3, 0
 	adds r2, r3, 0
 	movs r3, 0x6
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _080D47EC:
 	ldr r0, _080D4814 @ =gUnknown_3004FE0
 	ldrb r1, [r4]
@@ -835,12 +835,12 @@ sub_80D484C: @ 80D484C
 	strb r0, [r1, 0x1]
 	ldr r4, _080D4920 @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldr r0, _080D4924 @ =sub_802FDF4
 	movs r1, 0xA
-	bl sub_807741C
+	bl CreateTask
 	ldr r0, _080D4928 @ =gUnknown_2023BCE
 	mov r8, r0
 	ldrb r1, [r7]
@@ -851,7 +851,7 @@ sub_80D484C: @ 80D484C
 	muls r0, r6
 	ldr r5, _080D492C @ =gUnknown_2024284
 	adds r0, r5
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	ldr r1, _080D4930 @ =gUnknown_2023D44
 	ldrb r0, [r7]
 	adds r0, r1
@@ -862,7 +862,7 @@ sub_80D484C: @ 80D484C
 	ldr r1, _080D4934 @ =gUnknown_202063C
 	adds r0, r1
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r4, _080D4938 @ =gUnknown_3004FF0
 	ldrb r1, [r7]
 	adds r0, r1, r4
@@ -873,15 +873,15 @@ sub_80D484C: @ 80D484C
 	muls r1, r6
 	adds r1, r5
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r7]
 	bl sub_804BD94
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldrb r0, [r7]
-	bl sub_8034BB4
+	bl CopyBattleSpriteInvisibility
 	ldr r1, _080D493C @ =gUnknown_3004FE0
 	ldrb r0, [r7]
 	lsls r0, 2
@@ -962,7 +962,7 @@ _080D4976:
 	cmp r0, 0
 	bne _080D49BC
 	adds r0, r3, r5
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080D49E0 @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -1002,7 +1002,7 @@ sub_80D49E8: @ 80D49E8
 	ands r0, r1
 	cmp r0, 0
 	beq _080D4A3C
-	bl sub_800A404
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -1144,7 +1144,7 @@ _080D4B1A:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl sub_800E708
+	bl EmitDataTransfer
 	bl sub_80D49E8
 	add sp, 0x100
 	pop {r4-r6}
@@ -1254,12 +1254,12 @@ _080D4C64:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2E]
 	movs r6, 0
@@ -1287,12 +1287,12 @@ _080D4CB0:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4]
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r0, r8
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r9
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -1307,21 +1307,21 @@ _080D4CB0:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r10
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, [sp, 0x80]
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x44]
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r5, 0x1F
 	ands r0, r5
@@ -1333,7 +1333,7 @@ _080D4CB0:
 	strb r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r6, 0x1F
 	ands r0, r6
@@ -1345,7 +1345,7 @@ _080D4CB0:
 	strh r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 2
@@ -1357,7 +1357,7 @@ _080D4CB0:
 	strb r1, [r3, 0x15]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -1368,7 +1368,7 @@ _080D4CB0:
 	str r0, [sp, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r6
 	lsls r0, 4
@@ -1379,7 +1379,7 @@ _080D4CB0:
 	strh r1, [r3, 0x16]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 1
@@ -1391,55 +1391,55 @@ _080D4CB0:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x48]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4C]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [sp, 0x7C]
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0x3B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x3C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x3E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x3F
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r1, 0x1
 	ands r0, r1
@@ -1452,7 +1452,7 @@ _080D4CB0:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	lsls r0, 7
 	ldrb r2, [r3, 0x17]
@@ -1462,19 +1462,19 @@ _080D4CB0:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x54]
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, [sp, 0x8C]
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
-	bl sub_8008CF4
+	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, sp
 	movs r6, 0
 _080D4E68:
@@ -1525,13 +1525,13 @@ _080D4EBE:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	adds r1, r6, 0
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r10
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -1545,7 +1545,7 @@ _080D4EBE:
 	ldr r1, _080D4F0C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1, 0xC]
 	mov r2, r9
@@ -1587,7 +1587,7 @@ _080D4F38:
 	adds r1, 0x11
 	mov r2, r8
 	adds r0, r4, r2
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -1598,7 +1598,7 @@ _080D4F38:
 	ldr r1, _080D4F64 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -1635,7 +1635,7 @@ _080D4F94:
 	adds r0, r1
 	movs r1, 0x19
 _080D4F9E:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -1768,27 +1768,27 @@ _080D5084:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x3]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r6, 0x6
 	b _080D52CA
@@ -1873,7 +1873,7 @@ _080D5154:
 	adds r0, r1
 	movs r1, 0x37
 _080D515E:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -1962,7 +1962,7 @@ _080D51F8:
 	adds r0, r1
 	movs r1, 0x3F
 _080D5202:
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	strb r0, [r7]
@@ -2069,7 +2069,7 @@ _080D52B8:
 	adds r0, r1
 	movs r1, 0x36
 _080D52C2:
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	movs r6, 0x1
 _080D52CA:
@@ -3262,7 +3262,7 @@ _080D5D0A:
 	muls r0, r2
 	ldr r2, _080D5D34 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	add sp, 0x34
 	pop {r3-r5}
 	mov r8, r3
@@ -3360,12 +3360,12 @@ sub_80D5DB4: @ 80D5DB4
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3392,7 +3392,7 @@ sub_80D5DB4: @ 80D5DB4
 	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _080D5EB8 @ =gUnknown_2023D44
 	ldrb r1, [r6]
 	adds r1, r4
@@ -3438,7 +3438,7 @@ sub_80D5DB4: @ 80D5DB4
 	ldr r1, _080D5EC4 @ =gUnknown_2024024
 	adds r2, r1
 	ldrb r1, [r2]
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r1, _080D5EC8 @ =gUnknown_3004FE0
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -3473,7 +3473,7 @@ sub_80D5ED0: @ 80D5ED0
 	adds r6, r4, 0x2
 	adds r1, r6
 	ldrb r1, [r1]
-	bl sub_803589C
+	bl ClearTemporarySpeciesSpriteData
 	ldr r2, _080D5F30 @ =gUnknown_2023BCE
 	ldrb r0, [r5]
 	lsls r1, r0, 1
@@ -3528,7 +3528,7 @@ sub_80D5F40: @ 80D5F40
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_803589C
+	bl ClearTemporarySpeciesSpriteData
 	ldr r0, _080D6084 @ =gUnknown_2023BCE
 	lsls r2, r6, 1
 	adds r2, r0
@@ -3544,20 +3544,20 @@ sub_80D5F40: @ 80D5F40
 	ldr r1, _080D608C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _080D6090 @ =sub_8033E3C
-	bl sub_8044EF8
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _080D6094 @ =gUnknown_3004FFC
 	mov r9, r1
 	add r9, r6
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3584,7 +3584,7 @@ sub_80D5F40: @ 80D5F40
 	mov r0, r10
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _080D609C @ =gUnknown_2023D44
 	adds r4, r6, r4
 	strb r0, [r4]
@@ -3629,7 +3629,7 @@ sub_80D5F40: @ 80D5F40
 	ldr r1, _080D60A4 @ =gUnknown_2024024
 	adds r6, r1
 	ldrb r1, [r6]
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3651,7 +3651,7 @@ sub_80D5F40: @ 80D5F40
 	str r1, [r0]
 	movs r0, 0
 	movs r1, 0xFF
-	bl sub_804A938
+	bl DoPokeballSendOutAnimation
 	mov r1, r9
 	ldrb r2, [r1]
 	lsls r1, r2, 4
@@ -3723,7 +3723,7 @@ _080D60F4:
 	lsls r0, 2
 	ldr r4, _080D6134 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -3731,12 +3731,12 @@ _080D60F4:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldr r1, _080D6138 @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	bl sub_80D49E8
 _080D612A:
 	pop {r4-r6}
@@ -3781,7 +3781,7 @@ _080D6164:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _080D617E:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -3806,7 +3806,7 @@ _080D6192:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x1
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _080D61C0 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -3829,7 +3829,7 @@ sub_80D61C8: @ 80D61C8
 	push {r7}
 	ldr r6, _080D6240 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r7, 0x20
@@ -3838,7 +3838,7 @@ sub_80D61C8: @ 80D61C8
 	movs r7, 0x5A
 _080D61E2:
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	ldr r5, _080D6244 @ =gUnknown_202273C
 	lsls r1, r0, 3
 	subs r1, r0
@@ -3849,7 +3849,7 @@ _080D61E2:
 	cmp r0, 0x2
 	beq _080D6228
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3860,7 +3860,7 @@ _080D61E2:
 	cmp r0, 0x1
 	beq _080D6228
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3872,7 +3872,7 @@ _080D61E2:
 _080D6228:
 	ldr r0, _080D6240 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	ldr r2, _080D6244 @ =gUnknown_202273C
 	lsls r1, r0, 3
 	subs r1, r0
@@ -3886,7 +3886,7 @@ _080D6240: .4byte gUnknown_2023BC4
 _080D6244: .4byte gUnknown_202273C
 _080D6248:
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3898,7 +3898,7 @@ _080D6258:
 	adds r0, r4, 0
 	bl sub_8034750
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3925,7 +3925,7 @@ _080D6258:
 	adds r0, r6, 0
 	mov r1, r8
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r6, _080D6324 @ =gUnknown_2023D44
 	ldrb r1, [r5]
 	adds r1, r6
@@ -4016,7 +4016,7 @@ sub_80D6348: @ 80D6348
 	lsls r0, 2
 	ldr r5, _080D63DC @ =gUnknown_202063C
 	adds r0, r5
-	bl sub_80750FC
+	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r4]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -4063,7 +4063,7 @@ sub_80D6348: @ 80D6348
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, _080D63E8 @ =nullsub_8
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r1, _080D63EC @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -4110,7 +4110,7 @@ sub_80D63F4: @ 80D63F4
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _080D6428:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -4144,11 +4144,11 @@ _080D6448:
 	muls r0, r2
 	ldr r2, _080D64C8 @ =gUnknown_2024284
 	adds r0, r2
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 	movs r1, 0x40
 	negs r1, r1
 	movs r0, 0x10
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r2, _080D64CC @ =gUnknown_202063C
 	ldr r3, _080D64D0 @ =gUnknown_2023D44
 	ldrb r0, [r5]
@@ -4235,7 +4235,7 @@ sub_80D6510: @ 80D6510
 	push {r4-r6,lr}
 	ldr r6, _080D65F4 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D6522
@@ -4336,7 +4336,7 @@ _080D6522:
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_80342A0
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -4445,7 +4445,7 @@ _080D66AA:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _080D66CC:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -4503,7 +4503,7 @@ _080D670A:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r0, [r0]
@@ -4540,7 +4540,7 @@ _080D6780:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _080D67BC
-	bl sub_8034B40
+	bl CopyAllBattleSpritesInvisibilities
 	ldrb r0, [r6]
 	lsls r2, r0, 9
 	mov r3, r10
@@ -4550,7 +4550,7 @@ _080D6780:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_8035200
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -4686,7 +4686,7 @@ sub_80D6894: @ 80D6894
 	push {r6,r7}
 	sub sp, 0x4
 	movs r0, 0
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	ldr r3, _080D690C @ =gUnknown_2022BC4
 	ldr r0, _080D6910 @ =gUnknown_2023BC4
 	mov r9, r0
@@ -4714,7 +4714,7 @@ sub_80D6894: @ 80D6894
 	ldr r4, _080D691C @ =gUnknown_2024284
 	adds r0, r4
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -4724,7 +4724,7 @@ sub_80D6894: @ 80D6894
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -4733,7 +4733,7 @@ sub_80D6894: @ 80D6894
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_8048150
+	bl SetBattleBarStruct
 	b _080D694E
 	.align 2, 0
 _080D690C: .4byte gUnknown_2022BC4
@@ -4752,7 +4752,7 @@ _080D6924:
 	ldr r1, _080D6970 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -4761,7 +4761,7 @@ _080D6924:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_8048150
+	bl SetBattleBarStruct
 _080D694E:
 	ldr r1, _080D6978 @ =gUnknown_3004FE0
 	ldr r0, _080D697C @ =gUnknown_2023BC4
@@ -4799,7 +4799,7 @@ sub_80D6990: @ 80D6990
 	push {r4,lr}
 	ldr r4, _080D69EC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D69E4
@@ -4816,7 +4816,7 @@ sub_80D6990: @ 80D6990
 	ldr r2, _080D69F8 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0x9
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r2, [r4]
 	ldr r0, _080D69FC @ =gUnknown_2024018
 	ldr r0, [r0]
@@ -4855,7 +4855,7 @@ sub_80D6A08: @ 80D6A08
 	push {r4,r5,lr}
 	ldr r5, _080D6A60 @ =gUnknown_2023BC4
 	ldrb r0, [r5]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D6A58
@@ -4883,7 +4883,7 @@ sub_80D6A08: @ 80D6A08
 	ldrb r2, [r3]
 	lsls r2, 24
 	orrs r1, r2
-	bl sub_8033F1C
+	bl InitAndLaunchChosenStatusAnimation
 	ldr r1, _080D6A68 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -5092,7 +5092,7 @@ _080D6BA4:
 	movs r1, 0
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
-	bl sub_804BE70
+	bl DoHitAnimHealthboxEffect
 	ldr r1, _080D6BD8 @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -5122,7 +5122,7 @@ sub_80D6BEC: @ 80D6BEC
 	push {r4,lr}
 	ldr r4, _080D6C28 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -5142,7 +5142,7 @@ _080D6C00:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	bl sub_80D49E8
 	pop {r4}
 	pop {r0}
@@ -5167,7 +5167,7 @@ sub_80D6C30: @ 80D6C30
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_8071C60
+	bl PlayFanfare
 	bl sub_80D49E8
 	pop {r0}
 	bx r0
@@ -5190,13 +5190,13 @@ sub_80D6C60: @ 80D6C60
 	ldr r1, _080D6C9C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
 	negs r1, r1
 	movs r2, 0x5
-	bl sub_8071E60
+	bl PlayCry3
 	bl sub_80D49E8
 	pop {r0}
 	bx r0
@@ -5244,7 +5244,7 @@ sub_80D6CD4: @ 80D6CD4
 	lsls r0, 2
 	ldr r4, _080D6DE4 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80750FC
+	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -5299,7 +5299,7 @@ sub_80D6CD4: @ 80D6CD4
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, _080D6DF0 @ =sub_80335F8
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -5308,13 +5308,13 @@ sub_80D6CD4: @ 80D6CD4
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x1
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r0, _080D6DF4 @ =0x0000d6f9
-	bl sub_80089B8
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	ldr r4, _080D6DF8 @ =gUnknown_202273C
 	lsls r1, r0, 3
 	subs r1, r0
@@ -5325,7 +5325,7 @@ sub_80D6CD4: @ 80D6CD4
 	cmp r0, 0x2
 	beq _080D6DC2
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5336,7 +5336,7 @@ sub_80D6CD4: @ 80D6CD4
 	cmp r0, 0x1
 	beq _080D6DC2
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5348,7 +5348,7 @@ sub_80D6CD4: @ 80D6CD4
 _080D6DC2:
 	ldr r0, _080D6DE0 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	ldr r2, _080D6DF8 @ =gUnknown_202273C
 	lsls r1, r0, 3
 	subs r1, r0
@@ -5368,7 +5368,7 @@ _080D6DF4: .4byte 0x0000d6f9
 _080D6DF8: .4byte gUnknown_202273C
 _080D6DFC:
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5384,7 +5384,7 @@ _080D6E0C:
 	lsls r2, 1
 	adds r1, r4, r2
 	movs r2, 0x20
-	bl sub_80703A8
+	bl LoadCompressedPalette
 	ldr r2, _080D6EA8 @ =gUnknown_202063C
 	ldr r1, _080D6EAC @ =gUnknown_2023D44
 	ldr r5, _080D6EB0 @ =gUnknown_2023BC4
@@ -5402,7 +5402,7 @@ _080D6E0C:
 	strb r0, [r1, 0x5]
 	ldr r0, _080D6EB4 @ =sub_80D6ED0
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, _080D6EB8 @ =gUnknown_3005090
@@ -5575,7 +5575,7 @@ _080D6FA0:
 	mov r3, r9
 	strb r3, [r2]
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _080D6FB8:
 	pop {r3,r4}
 	mov r8, r3
@@ -5605,7 +5605,7 @@ sub_80D6FDC: @ 80D6FDC
 	cmp r0, 0
 	beq _080D700C
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D700C
@@ -5805,7 +5805,7 @@ sub_80D7144: @ 80D7144
 	orrs r0, r1
 	strb r0, [r2]
 	ldrb r0, [r4]
-	bl sub_8034BB4
+	bl CopyBattleSpriteInvisibility
 _080D718A:
 	bl sub_80D49E8
 	pop {r4}
@@ -5824,7 +5824,7 @@ sub_80D71A4: @ 80D71A4
 	sub sp, 0x4
 	ldr r6, _080D71E8 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D71FC
@@ -5845,7 +5845,7 @@ sub_80D71A4: @ 80D71A4
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl sub_803401C
+	bl TryHandleLaunchBattleTableAnimation
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D71F0
@@ -5900,9 +5900,9 @@ sub_80D7224: @ 80D7224
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x5
-	bl sub_8071AB4
+	bl FadeOutMapMusic
 	movs r0, 0x3
-	bl sub_8070E44
+	bl BeginFastPaletteFade
 	bl sub_80D49E8
 	ldr r1, _080D7268 @ =gUnknown_3004FE0
 	ldrb r0, [r4]

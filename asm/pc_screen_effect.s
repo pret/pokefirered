@@ -55,7 +55,7 @@ _080A0A94: .4byte sub_80A0C78
 sub_80A0A98: @ 80A0A98
 	push {lr}
 	ldr r0, _080A0AA8 @ =sub_80A0B0C
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -68,7 +68,7 @@ _080A0AA8: .4byte sub_80A0B0C
 sub_80A0AAC: @ 80A0AAC
 	push {lr}
 	ldr r0, _080A0ABC @ =sub_80A0C78
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -86,7 +86,7 @@ sub_80A0AC0: @ 80A0AC0
 	lsls r3, 24
 	lsrs r3, 24
 	adds r1, r3, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	adds r2, r0, 0
@@ -157,7 +157,7 @@ _080A0B3E:
 	movs r1, 0x80
 	lsls r1, 6
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	ldrh r1, [r4, 0xE]
 	lsls r1, 8
 	ldrh r0, [r4, 0x10]
@@ -165,7 +165,7 @@ _080A0B3E:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x12]
 	lsls r1, 8
 	ldrh r0, [r4, 0x14]
@@ -173,27 +173,27 @@ _080A0B3E:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x48
 	movs r1, 0x3F
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080A0C6A
 _080A0B8C:
 	movs r0, 0x50
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x16]
 	movs r0, 0x54
-	bl sub_8000AC4
+	bl GetGpuReg
 	strh r0, [r4, 0x18]
 	movs r0, 0x50
 	movs r1, 0xBF
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080A0C6A
 _080A0BAE:
 	ldrh r0, [r4, 0xE]
@@ -217,15 +217,15 @@ _080A0BCC:
 	strh r0, [r4, 0x10]
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x16]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
 	movs r2, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	ldr r0, _080A0C0C @ =gUnknown_20375F8
 	strh r5, [r0]
 _080A0BF2:
@@ -236,7 +236,7 @@ _080A0BF2:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]
 	b _080A0C54
@@ -265,7 +265,7 @@ _080A0C2C:
 	movs r1, 0x80
 	lsls r1, 6
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 _080A0C3E:
 	ldrh r1, [r4, 0x12]
 	lsls r1, 8
@@ -274,7 +274,7 @@ _080A0C3E:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
 _080A0C54:
@@ -284,9 +284,9 @@ _080A0C54:
 _080A0C5A:
 	ldrh r1, [r4, 0x16]
 	movs r0, 0x50
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080A0C70
 _080A0C6A:
 	ldrh r0, [r4, 0x8]
@@ -342,7 +342,7 @@ _080A0CB4:
 	movs r1, 0x80
 	lsls r1, 6
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	ldrh r1, [r4, 0xE]
 	lsls r1, 8
 	ldrh r0, [r4, 0x10]
@@ -350,7 +350,7 @@ _080A0CB4:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	ldrh r1, [r4, 0x12]
 	lsls r1, 8
 	ldrh r0, [r4, 0x14]
@@ -358,13 +358,13 @@ _080A0CB4:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x48
 	movs r1, 0x3F
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	b _080A0DCA
 _080A0D02:
 	ldrh r0, [r4, 0xC]
@@ -389,10 +389,10 @@ _080A0D20:
 	strh r0, [r4, 0x14]
 	movs r0, 0x50
 	movs r1, 0xBF
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0x10
-	bl sub_8000A38
+	bl SetGpuReg
 _080A0D38:
 	ldrh r1, [r4, 0x12]
 	lsls r1, 8
@@ -401,7 +401,7 @@ _080A0D38:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x44
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x50
@@ -430,7 +430,7 @@ _080A0D72:
 	subs r0, 0x79
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80714D4
+	bl BlendPalettes
 	ldr r1, _080A0DA4 @ =gUnknown_20375F8
 	movs r0, 0
 	strh r0, [r1]
@@ -442,7 +442,7 @@ _080A0D88:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x40
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x78
@@ -454,15 +454,15 @@ _080A0DA8:
 	movs r1, 0x80
 	lsls r1, 6
 	movs r0, 0
-	bl sub_8000B14
+	bl ClearGpuRegBits
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080A0DD0
 _080A0DCA:
 	ldrh r0, [r4, 0x8]

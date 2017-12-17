@@ -29,10 +29,10 @@ _0812BFF4:
 	b _0812C212
 _0812C002:
 	movs r0, 0x8
-	bl sub_8002B9C
+	bl Alloc
 	adds r7, r0, 0
 	movs r0, 0x8
-	bl sub_8002B9C
+	bl Alloc
 	mov r9, r0
 	ldr r4, [r4]
 	movs r0, 0x8
@@ -99,7 +99,7 @@ _0812C06A:
 	lsls r1, 1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812C0BC
@@ -121,7 +121,7 @@ _0812C0B8: .4byte gUnknown_2023BE4
 _0812C0BC:
 	ldr r5, _0812C0D8 @ =gUnknown_2023BE4
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	movs r4, 0x58
@@ -137,7 +137,7 @@ _0812C0D8: .4byte gUnknown_2023BE4
 _0812C0DC:
 	movs r0, 0x2
 _0812C0DE:
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r4
@@ -146,10 +146,10 @@ _0812C0EA:
 	ldrh r0, [r0]
 	strh r0, [r7, 0x4]
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r6, _0812C14C @ =gUnknown_2023BE4
 	lsls r4, 24
 	lsrs r4, 24
@@ -168,10 +168,10 @@ _0812C0EA:
 	lsrs r0, 16
 	mov r8, r0
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r4, 24
 	lsrs r4, 24
 	adds r1, r4, 0
@@ -194,7 +194,7 @@ _0812C150:
 	ldrh r0, [r0, 0x20]
 	strh r0, [r7, 0x2]
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r5, _0812C1C8 @ =gUnknown_2023BE4
 	lsls r0, 24
 	lsrs r0, 24
@@ -204,7 +204,7 @@ _0812C150:
 	ldrh r0, [r0]
 	strh r0, [r7, 0x4]
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r4
@@ -212,14 +212,14 @@ _0812C150:
 	ldrh r0, [r0, 0x28]
 	mov r8, r0
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r4
 	adds r0, r5
 	ldrh r4, [r0, 0x2C]
 _0812C18E:
-	bl sub_8056260
+	bl sav1_map_get_name
 	movs r1, 0
 	strb r0, [r7, 0x7]
 	strb r1, [r7, 0x6]
@@ -253,7 +253,7 @@ _0812C1CC:
 	bne _0812C1E8
 	ldr r0, _0812C1E4 @ =gUnknown_202402C
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	strh r0, [r1]
 	strh r4, [r1, 0x2]
@@ -265,20 +265,20 @@ _0812C1E8:
 	strh r4, [r0]
 	ldr r0, _0812C220 @ =gUnknown_202402C
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	strh r0, [r1, 0x2]
 _0812C1F8:
-	bl sub_8056260
+	bl sav1_map_get_name
 	mov r1, r9
 	strb r0, [r1, 0x4]
 	movs r0, 0x1F
 	bl sub_8113550
 _0812C206:
 	adds r0, r7, 0
-	bl sub_8002BC4
+	bl Free
 	mov r0, r9
-	bl sub_8002BC4
+	bl Free
 _0812C212:
 	pop {r3-r5}
 	mov r8, r3
@@ -305,7 +305,7 @@ sub_812C224: @ 812C224
 	cmp r0, 0
 	beq _0812C31C
 	movs r0, 0x18
-	bl sub_8002B9C
+	bl Alloc
 	adds r5, r0, 0
 	ldr r0, _0812C2BC @ =gUnknown_2023E8A
 	ldrb r0, [r0]
@@ -414,7 +414,7 @@ _0812C30E:
 	adds r1, r5, 0
 	bl sub_8113550
 	adds r0, r5, 0
-	bl sub_8002BC4
+	bl Free
 _0812C31C:
 	add sp, 0xC
 	pop {r3,r4}

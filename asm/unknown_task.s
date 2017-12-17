@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8087E64
-sub_8087E64: @ 8087E64
+	thumb_func_start remove_some_task
+remove_some_task: @ 8087E64
 	push {r4,lr}
 	ldr r4, _08087E94 @ =gUnknown_2039600
 	movs r0, 0
@@ -24,7 +24,7 @@ sub_8087E64: @ 8087E64
 	ldrb r0, [r4, 0x18]
 	cmp r0, 0xFF
 	beq _08087E8E
-	bl sub_8077508
+	bl DestroyTask
 	movs r0, 0xFF
 	strb r0, [r4, 0x18]
 _08087E8E:
@@ -36,10 +36,10 @@ _08087E94: .4byte gUnknown_2039600
 _08087E98: .4byte 0x040000b0
 _08087E9C: .4byte 0x0000c5ff
 _08087EA0: .4byte 0x00007fff
-	thumb_func_end sub_8087E64
+	thumb_func_end remove_some_task
 
-	thumb_func_start sub_8087EA4
-sub_8087EA4: @ 8087EA4
+	thumb_func_start dp12_8087EA4
+dp12_8087EA4: @ 8087EA4
 	push {r4,lr}
 	sub sp, 0x4
 	mov r0, sp
@@ -68,7 +68,7 @@ sub_8087EA4: @ 8087EA4
 _08087ED8: .4byte gUnknown_2038700
 _08087EDC: .4byte 0x01000780
 _08087EE0: .4byte gUnknown_2039600
-	thumb_func_end sub_8087EA4
+	thumb_func_end dp12_8087EA4
 
 	thumb_func_start sub_8087EE4
 sub_8087EE4: @ 8087EE4
@@ -230,8 +230,8 @@ _08088018: .4byte gUnknown_2039600
 _0808801C: .4byte gUnknown_2038700
 	thumb_func_end sub_8088000
 
-	thumb_func_start sub_8088020
-sub_8088020: @ 8088020
+	thumb_func_start task00_for_dp12
+task00_for_dp12: @ 8088020
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -246,7 +246,7 @@ sub_8088020: @ 8088020
 	cmp r0, 0
 	beq _08088050
 	mov r0, r12
-	bl sub_8077508
+	bl DestroyTask
 	ldr r1, _0808804C @ =gUnknown_2039600
 	movs r0, 0xFF
 	strb r0, [r1, 0x18]
@@ -454,7 +454,7 @@ _080881D0:
 	.align 2, 0
 _080881E0: .4byte gUnknown_2038700
 _080881E4: .4byte gUnknown_2039600
-	thumb_func_end sub_8088020
+	thumb_func_end task00_for_dp12
 
 	thumb_func_start sub_80881E8
 sub_80881E8: @ 80881E8
@@ -538,7 +538,7 @@ sub_8088230: @ 8088230
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	bl sub_8087EA4
+	bl dp12_8087EA4
 	ldr r0, _0808833C @ =0x04000010
 	add r0, r9
 	str r0, [sp]
@@ -554,9 +554,9 @@ sub_8088230: @ 8088230
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
 	bl sub_8087EE4
-	ldr r0, _08088344 @ =sub_8088020
+	ldr r0, _08088344 @ =task00_for_dp12
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, _08088348 @ =gUnknown_3005090
@@ -633,7 +633,7 @@ _0808832A:
 	.align 2, 0
 _0808833C: .4byte 0x04000010
 _08088340: .4byte 0xa2600001
-_08088344: .4byte sub_8088020
+_08088344: .4byte task00_for_dp12
 _08088348: .4byte gUnknown_3005090
 _0808834C: .4byte gUnknown_2039600
 _08088350: .4byte gUnknown_203961C

@@ -10,8 +10,8 @@ sub_80CA618: @ 80CA618
 	push {lr}
 	bl sub_8112364
 	ldr r0, _080CA62C @ =sub_80F4C10
-	bl sub_8000544
-	bl sub_8069940
+	bl SetMainCallback2
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -52,7 +52,7 @@ nullsub_74: @ 80CA660
 sub_80CA664: @ 80CA664
 	push {lr}
 	movs r0, 0x4
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CA676
@@ -60,7 +60,7 @@ sub_80CA664: @ 80CA664
 	b _080CA688
 _080CA676:
 	movs r0, 0x2
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CA686
@@ -130,7 +130,7 @@ sub_80CA6DC: @ 80CA6DC
 	bne _080CA700
 	ldr r0, _080CA6F8 @ =gUnknown_2021CD0
 	ldr r1, _080CA6FC @ =gUnknown_8417FBB
-	bl sub_8008D84
+	bl StringCopy
 	b _080CA708
 	.align 2, 0
 _080CA6F4: .4byte gUnknown_300500C
@@ -139,7 +139,7 @@ _080CA6FC: .4byte gUnknown_8417FBB
 _080CA700:
 	ldr r0, _080CA70C @ =gUnknown_2021CD0
 	ldr r1, _080CA710 @ =gUnknown_8417FC3
-	bl sub_8008D84
+	bl StringCopy
 _080CA708:
 	pop {r0}
 	bx r0
@@ -158,7 +158,7 @@ sub_80CA714: @ 80CA714
 	bne _080CA738
 	ldr r0, _080CA730 @ =gUnknown_2021CD0
 	ldr r1, _080CA734 @ =gUnknown_8417FD0
-	bl sub_8008D84
+	bl StringCopy
 	b _080CA740
 	.align 2, 0
 _080CA72C: .4byte gUnknown_300500C
@@ -167,7 +167,7 @@ _080CA734: .4byte gUnknown_8417FD0
 _080CA738:
 	ldr r0, _080CA744 @ =gUnknown_2021CD0
 	ldr r1, _080CA748 @ =gUnknown_8417FCC
-	bl sub_8008D84
+	bl StringCopy
 _080CA740:
 	pop {r0}
 	bx r0
@@ -209,7 +209,7 @@ sub_80CA76C: @ 80CA76C
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0xFF
 	bne _080CA794
 	movs r0, 0x6
@@ -219,7 +219,7 @@ _080CA790: .4byte gUnknown_2024284
 _080CA794:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0xC7
 	bls _080CA7A4
 	movs r0, 0x5
@@ -227,7 +227,7 @@ _080CA794:
 _080CA7A4:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x95
 	bls _080CA7B4
 	movs r0, 0x4
@@ -235,7 +235,7 @@ _080CA7A4:
 _080CA7B4:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x63
 	bls _080CA7C4
 	movs r0, 0x3
@@ -243,7 +243,7 @@ _080CA7B4:
 _080CA7C4:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x31
 	bls _080CA7D4
 	movs r0, 0x2
@@ -251,7 +251,7 @@ _080CA7C4:
 _080CA7D4:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _080CA7E4
 	movs r0, 0
@@ -268,13 +268,13 @@ _080CA7E6:
 sub_80CA7EC: @ 80CA7EC
 	push {lr}
 	bl sub_8112364
-	ldr r1, _080CA800 @ =sub_80568E0
+	ldr r1, _080CA800 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	movs r0, 0x1
 	bl sub_80BFF50
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA800: .4byte sub_80568E0
+_080CA800: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_80CA7EC
 
 	thumb_func_start sub_80CA804
@@ -290,17 +290,17 @@ _080CA80A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080CA858
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _080CA858
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, r0, 3
@@ -337,14 +337,14 @@ sub_80CA86C: @ 80CA86C
 	push {r4,lr}
 	ldr r4, _080CA8A0 @ =sub_80CA8A8
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080CA89A
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CA8A4 @ =gUnknown_3005090
@@ -382,7 +382,7 @@ sub_80CA8A8: @ 80CA8A8
 	movs r0, 0x1
 	ands r0, r1
 	bl sub_80CA8F8
-	bl sub_805A684
+	bl DrawWholeMapView
 	movs r0, 0
 	strh r0, [r4, 0x2]
 	ldrh r0, [r4]
@@ -393,7 +393,7 @@ sub_80CA8A8: @ 80CA8A8
 	cmp r0, 0x5
 	bne _080CA8E6
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080CA8E6:
 	ldrh r0, [r4, 0x2]
 	adds r0, 0x1
@@ -413,7 +413,7 @@ sub_80CA8F8: @ 80CA8F8
 	movs r4, 0
 	movs r7, 0
 	movs r5, 0
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -510,7 +510,7 @@ sub_80CA9A8: @ 80CA9A8
 	movs r4, 0
 	movs r6, 0
 	movs r5, 0
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -572,7 +572,7 @@ _080CA9F6:
 	orrs r4, r2
 	adds r2, r4, 0
 	bl sub_8058FA4
-	bl sub_805A684
+	bl DrawWholeMapView
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -601,7 +601,7 @@ sub_80CAA34: @ 80CAA34
 	movs r0, 0x12
 	movs r1, 0x8
 	movs r2, 0x7F
-	bl sub_805E830
+	bl SpawnSpecialFieldObjectParametrized
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CAA84 @ =gUnknown_2036E38
@@ -614,7 +614,7 @@ sub_80CAA34: @ 80CAA34
 	orrs r0, r2
 	strb r0, [r1, 0x1]
 	ldrb r0, [r1, 0x4]
-	bl sub_805FAC4
+	bl CameraObjectSetFollowedObjectId
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -626,16 +626,16 @@ _080CAA84: .4byte gUnknown_2036E38
 	thumb_func_start sub_80CAA88
 sub_80CAA88: @ 80CAA88
 	push {lr}
-	bl sub_805C768
+	bl GetPlayerAvatarObjectId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805FAC4
+	bl CameraObjectSetFollowedObjectId
 	ldr r0, _080CAAA8 @ =gUnknown_3005008
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x7F
-	bl sub_805E4C8
+	bl RemoveFieldObjectByLocalIdAndMap
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -656,7 +656,7 @@ _080CAAB8: .4byte gUnknown_2021CD0
 	thumb_func_start sub_80CAABC
 sub_80CAABC: @ 80CAABC
 	push {lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x16
@@ -684,7 +684,7 @@ sub_80CAAE0: @ 80CAAE0
 	adds r0, r1
 	movs r1, 0x47
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -759,7 +759,7 @@ sub_80CAB78: @ 80CAB78
 	bl sub_80CBD94
 	lsls r0, 16
 	lsrs r6, r0, 16
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -772,7 +772,7 @@ _080CAB9A:
 	adds r0, r1
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, r6
 	bne _080CABBC
 	movs r0, 0x1
@@ -806,7 +806,7 @@ _080CABD8:
 	lsrs r1, 24
 	lsrs r0, r5, 24
 	movs r2, 0xB
-	bl sub_808BA18
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	bne _080CABEC
 	movs r0, 0x1
@@ -854,7 +854,7 @@ sub_80CAC28: @ 80CAC28
 	push {lr}
 	ldr r0, _080CAC6C @ =sub_80CAC84
 	movs r1, 0x9
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CAC70 @ =gUnknown_3005090
@@ -877,7 +877,7 @@ sub_80CAC28: @ 80CAC28
 	ldrh r0, [r0]
 	strh r0, [r1, 0x10]
 	movs r0, 0
-	bl sub_805ADD4
+	bl SetCameraPanningCallback
 	movs r0, 0xCF
 	bl sub_80722CC
 	pop {r0}
@@ -925,14 +925,14 @@ sub_80CAC84: @ 80CAC84
 	ldrsh r0, [r4, r1]
 	movs r2, 0x8
 	ldrsh r1, [r4, r2]
-	bl sub_805ADE0
+	bl SetCameraPanning
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080CACDC
 	adds r0, r5, 0
 	bl sub_80CACE8
-	bl sub_805ADF8
+	bl InstallCameraPanAheadCallback
 _080CACDC:
 	pop {r4,r5}
 	pop {r0}
@@ -946,8 +946,8 @@ sub_80CACE8: @ 80CACE8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80CACE8
@@ -955,7 +955,7 @@ sub_80CACE8: @ 80CACE8
 	thumb_func_start sub_80CACFC
 sub_80CACFC: @ 80CACFC
 	push {r4-r6,lr}
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -970,7 +970,7 @@ _080CAD0C:
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -978,7 +978,7 @@ _080CAD0C:
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080CAD40
 	adds r0, r5, 0
@@ -1010,7 +1010,7 @@ sub_80CAD54: @ 80CAD54
 	adds r0, r1
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -1032,11 +1032,11 @@ sub_80CAD7C: @ 80CAD7C
 	ldr r4, _080CADB0 @ =gUnknown_2021CD0
 	movs r1, 0x7
 	adds r2, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r0, _080CADB4 @ =gUnknown_300500C
 	ldr r0, [r0]
 	adds r1, r4, 0
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	beq _080CADB8
 	movs r0, 0x1
@@ -1084,7 +1084,7 @@ sub_80CADC4: @ 80CADC4
 	thumb_func_start sub_80CADEC
 sub_80CADEC: @ 80CADEC
 	push {r4,r5,lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF
@@ -1129,7 +1129,7 @@ _080CAE2C:
 	.4byte _080CAFC4
 	.4byte _080CAFF8
 _080CAE68:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -1150,7 +1150,7 @@ _080CAE84:
 	.align 2, 0
 _080CAE8C: .4byte gUnknown_20370C2
 _080CAE90:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -1177,7 +1177,7 @@ _080CAEBA:
 	.align 2, 0
 _080CAEC4: .4byte gUnknown_20370C2
 _080CAEC8:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -1193,7 +1193,7 @@ _080CAEDA:
 	.align 2, 0
 _080CAEE4: .4byte gUnknown_20370C2
 _080CAEE8:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -1225,7 +1225,7 @@ _080CAF1C:
 	.align 2, 0
 _080CAF24: .4byte gUnknown_20370C2
 _080CAF28:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10
@@ -1258,7 +1258,7 @@ _080CAF58:
 	.align 2, 0
 _080CAF64: .4byte gUnknown_20370C2
 _080CAF68:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -1283,7 +1283,7 @@ _080CAF8C:
 	.align 2, 0
 _080CAF98: .4byte gUnknown_20370C2
 _080CAF9C:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -1304,7 +1304,7 @@ _080CAFB8:
 	.align 2, 0
 _080CAFC0: .4byte gUnknown_20370C2
 _080CAFC4:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -1329,7 +1329,7 @@ _080CAFE8:
 	.align 2, 0
 _080CAFF4: .4byte gUnknown_20370C2
 _080CAFF8:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -1460,7 +1460,7 @@ _080CB0EA:
 	ldr r0, _080CB120 @ =gUnknown_8245EE0
 	adds r1, r0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1478,7 +1478,7 @@ sub_80CB124: @ 80CB124
 	push {r4,r5,lr}
 	movs r5, 0
 _080CB128:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _080CB160 @ =0x0000019b
@@ -1487,7 +1487,7 @@ _080CB128:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
@@ -1517,7 +1517,7 @@ _080CB170:
 	lsrs r4, r0, 16
 _080CB176:
 	adds r0, r4, 0
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
@@ -1536,7 +1536,7 @@ _080CB18E:
 	thumb_func_start sub_80CB198
 sub_80CB198: @ 80CB198
 	push {r4,lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -1546,7 +1546,7 @@ sub_80CB198: @ 80CB198
 	cmp r0, 0x1D
 	bhi _080CB1D0
 	ldr r4, _080CB1CC @ =gUnknown_83F5B30
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -1942,7 +1942,7 @@ sub_80CB498: @ 80CB498
 	push {r4-r6,lr}
 	ldr r0, _080CB4D0 @ =sub_80CB514
 	movs r1, 0x9
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -1986,7 +1986,7 @@ _080CB4EE:
 	ldrb r0, [r0]
 	strh r0, [r4, 0xA]
 	movs r0, 0
-	bl sub_805ADD4
+	bl SetCameraPanningCallback
 	ldrb r1, [r4, 0xC]
 	adds r0, r5, 0
 	bl sub_80CB658
@@ -2030,7 +2030,7 @@ sub_80CB514: @ 80CB514
 	movs r2, 0x8
 	ldrsh r1, [r4, r2]
 	movs r0, 0
-	bl sub_805ADE0
+	bl SetCameraPanning
 	movs r0, 0x4
 	ldrsh r1, [r4, r0]
 	movs r2, 0xA
@@ -2040,9 +2040,9 @@ sub_80CB514: @ 80CB514
 	movs r0, 0x42
 	bl sub_80722CC
 	adds r0, r5, 0
-	bl sub_8077508
-	bl sub_8069B34
-	bl sub_805ADF8
+	bl DestroyTask
+	bl EnableBothScriptContexts
+	bl InstallCameraPanAheadCallback
 _080CB574:
 	pop {r4,r5}
 	pop {r0}
@@ -2076,7 +2076,7 @@ sub_80CB580: @ 80CB580
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0xD
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	ldrb r0, [r4]
 	ldr r2, _080CB630 @ =gUnknown_8418075
 	movs r1, 0x2
@@ -2114,7 +2114,7 @@ sub_80CB580: @ 80CB580
 	adds r2, r5, 0
 	bl sub_8002C48
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl sub_8003F20
@@ -2160,14 +2160,14 @@ sub_80CB658: @ 80CB658
 	lsrs r5, r1, 24
 	ldr r4, _080CB6A0 @ =sub_80CB6AC
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080CB698
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CB6A4 @ =gUnknown_3005090
@@ -2309,7 +2309,7 @@ _080CB752:
 	cmp r1, 0x2
 	bls _080CB742
 _080CB78E:
-	bl sub_805A684
+	bl DrawWholeMapView
 	movs r0, 0
 	strh r0, [r6, 0x2]
 	movs r0, 0
@@ -2319,7 +2319,7 @@ _080CB78E:
 	cmp r1, r0
 	bne _080CB7A8
 	ldr r0, [sp]
-	bl sub_8077508
+	bl DestroyTask
 _080CB7A8:
 	ldrh r0, [r6, 0x2]
 	adds r0, 0x1
@@ -2349,7 +2349,7 @@ sub_80CB7C4: @ 80CB7C4
 _080CB7D6:
 	ldr r0, _080CB80C @ =sub_80CB904
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
 	lsls r0, r5, 2
@@ -2494,7 +2494,7 @@ _080CB8EC:
 	movs r0, 0x7F
 	strh r0, [r1]
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080CB8F8:
 	pop {r4,r5}
 	pop {r0}
@@ -2518,7 +2518,7 @@ sub_80CB904: @ 80CB904
 	lsls r0, 3
 	ldr r1, _080CB934 @ =gUnknown_3005090
 	adds r5, r0, r1
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	ldr r0, _080CB938 @ =gUnknown_20370C0
 	ldrh r0, [r0]
 	cmp r0, 0x1
@@ -2542,7 +2542,7 @@ _080CB94A:
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
 	lsls r0, 3
-	bl sub_8002BB0
+	bl AllocZeroed
 	str r0, [r4]
 	bl sub_80CBA7C
 	movs r6, 0
@@ -2644,14 +2644,14 @@ _080CB9D2:
 	ldrh r1, [r5, 0x16]
 	ldrh r2, [r5, 0x18]
 	adds r0, r4, 0
-	bl sub_8106FF8
+	bl ListMenuInit
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x24]
 	ldrh r0, [r5, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	ldrh r0, [r5, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
@@ -2737,7 +2737,7 @@ sub_80CBADC: @ 80CBADC
 	movs r0, 0x5
 	bl sub_80722CC
 	ldr r0, _080CBB18 @ =sub_80CBB28
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -2753,7 +2753,7 @@ sub_80CBADC: @ 80CBADC
 	ldr r4, _080CBB20 @ =gUnknown_3005378
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_81072D4
+	bl get_coro_args_x18_x1A
 	ldr r1, _080CBB24 @ =gUnknown_2039A18
 	ldrh r0, [r4]
 	strh r0, [r1]
@@ -2781,7 +2781,7 @@ sub_80CBB28: @ 80CBB28
 	ldrh r0, [r6, 0x24]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8107078
+	bl ListMenuHandleInput
 	adds r4, r0, 0
 	movs r0, 0x2
 	negs r0, r0
@@ -2827,7 +2827,7 @@ _080CBB94:
 	bl sub_80CBD50
 	ldr r0, _080CBBA8 @ =sub_80CBC2C
 	str r0, [r6]
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 _080CBBA2:
 	pop {r4-r6}
 	pop {r0}
@@ -2857,7 +2857,7 @@ sub_80CBBAC: @ 80CBBAC
 	bl sub_810713C
 	ldr r0, _080CBC28 @ =gUnknown_2039A14
 	ldr r0, [r0]
-	bl sub_8002BC4
+	bl Free
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
@@ -2867,11 +2867,11 @@ sub_80CBBAC: @ 80CBBAC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
@@ -2882,8 +2882,8 @@ sub_80CBBAC: @ 80CBBAC
 	lsrs r0, 24
 	bl sub_8003E3C
 	adds r0, r5, 0
-	bl sub_8077508
-	bl sub_8069B34
+	bl DestroyTask
+	bl EnableBothScriptContexts
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2924,12 +2924,12 @@ _080CBC58: .4byte sub_80CBC90
 sub_80CBC5C: @ 80CBC5C
 	push {lr}
 	ldr r0, _080CBC74 @ =sub_80CBC2C
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	bne _080CBC78
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	b _080CBC88
 	.align 2, 0
 _080CBC74: .4byte sub_80CBC2C
@@ -2955,7 +2955,7 @@ sub_80CBC90: @ 80CBC90
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	adds r0, r4, 0
 	bl sub_80CBCC0
 	ldr r1, _080CBCB8 @ =gUnknown_3005090
@@ -3032,7 +3032,7 @@ sub_80CBCC0: @ 80CBCC0
 	strh r0, [r2, 0x8]
 	ldr r1, _080CBD4C @ =gUnknown_2039A18
 	mov r0, sp
-	bl sub_8133A20
+	bl AddScrollIndicatorArrowPair
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
@@ -3066,7 +3066,7 @@ sub_80CBD50: @ 80CBD50
 	ldrh r0, [r2, 0x20]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8133C30
+	bl RemoveScrollIndicatorArrowPair
 _080CBD76:
 	pop {r0}
 	bx r0
@@ -3125,7 +3125,7 @@ sub_80CBDCC: @ 80CBDCC
 	push {lr}
 	ldr r0, _080CBDE4 @ =gUnknown_20370C0
 	ldrh r0, [r0]
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
@@ -3208,12 +3208,12 @@ sub_80CBE50: @ 80CBE50
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r4, sp
 	adds r0, r5, 0
 	movs r1, 0x3
 	mov r2, sp
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -3222,13 +3222,13 @@ sub_80CBE50: @ 80CBE50
 	adds r0, r5, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xB
 	muls r0, r1
 	ldr r1, _080CBEAC @ =gUnknown_8245EE0
 	adds r0, r1
 	adds r1, r6, 0
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	bne _080CBEB0
 	movs r0, 0
@@ -3380,10 +3380,10 @@ sub_80CBFA0: @ 80CBFA0
 	ldr r4, _080CBFD0 @ =gUnknown_2021CD0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r0, _080CBFD4 @ =gUnknown_2021D04
 	adds r1, r4, 0
-	bl sub_8008E28
+	bl StringCompare
 	cmp r0, 0
 	beq _080CBFD8
 	movs r0, 0x1
@@ -3411,33 +3411,33 @@ sub_80CBFE0: @ 80CBFE0
 	ldrb r0, [r0]
 	ldr r1, _080CC054 @ =gUnknown_20370D8
 	ldrb r1, [r1]
-	bl sub_808BD30
+	bl GetBoxedMonPtr
 	adds r6, r0, 0
 	ldr r2, _080CC058 @ =gUnknown_2021D04
 	movs r1, 0x2
-	bl sub_803FD44
+	bl GetBoxMonData
 	ldr r0, _080CC05C @ =gUnknown_2021CF0
 	mov r8, r0
 	adds r0, r6, 0
 	movs r1, 0x2
 	mov r2, r8
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r0, r6, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl sub_803F730
+	bl GetBoxMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	str r0, [sp]
 	ldr r0, _080CC060 @ =sub_80CC064
 	str r0, [sp, 0x4]
@@ -3468,8 +3468,8 @@ sub_80CC064: @ 80CC064
 	ldr r1, _080CC080 @ =gUnknown_20370D8
 	ldrb r1, [r1]
 	ldr r2, _080CC084 @ =gUnknown_2021CF0
-	bl sub_808BB2C
-	bl sub_80568E0
+	bl SetBoxMonNickFromAnyBox
+	bl c2_exit_to_overworld_1_continue_scripts_restart_music
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3498,7 +3498,7 @@ sub_80CC088: @ 80CC088
 	adds r0, r6
 	ldr r2, _080CC138 @ =gUnknown_2021D04
 	movs r1, 0x2
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	ldrh r0, [r1]
 	mov r1, r8
@@ -3509,7 +3509,7 @@ sub_80CC088: @ 80CC088
 	mov r10, r1
 	movs r1, 0x2
 	mov r2, r10
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	ldrh r0, [r1]
 	mov r1, r8
@@ -3518,7 +3518,7 @@ sub_80CC088: @ 80CC088
 	adds r0, r6
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -3528,7 +3528,7 @@ sub_80CC088: @ 80CC088
 	muls r1, r0
 	adds r0, r1, 0
 	adds r0, r6
-	bl sub_803F720
+	bl GetMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3540,7 +3540,7 @@ sub_80CC088: @ 80CC088
 	adds r0, r6
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp]
 	ldr r0, _080CC140 @ =sub_80CC144
 	str r0, [sp, 0x4]
@@ -3577,7 +3577,7 @@ sub_80CC144: @ 80CC144
 	ldr r2, _080CC16C @ =gUnknown_2021CF0
 	movs r1, 0x2
 	bl sub_804037C
-	bl sub_80568E0
+	bl c2_exit_to_overworld_1_continue_scripts_restart_music
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3598,9 +3598,9 @@ sub_80CC170: @ 80CC170
 	ldr r4, _080CC19C @ =gUnknown_2021CD0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r4, 0
-	bl sub_8008D28
+	bl StringGetEnd10
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3623,7 +3623,7 @@ sub_80CC1A0: @ 80CC1A0
 	adds r0, r1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r4, r0
 	bne _080CC1D4
 	ldr r1, _080CC1D0 @ =gUnknown_20370D0
@@ -3770,7 +3770,7 @@ _080CC2C6:
 	lsrs r5, r0, 24
 	cmp r5, 0x5
 	bls _080CC2C6
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -3785,14 +3785,14 @@ _080CC2E4:
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r1, r5, 1
 	add r1, sp
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r1, r5, 2
 	adds r1, r7, r1
 	str r0, [r1]
@@ -3985,7 +3985,7 @@ _080CC486:
 	thumb_func_start sub_80CC48C
 sub_80CC48C: @ 80CC48C
 	push {r4,r5,lr}
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -3998,7 +3998,7 @@ _080CC49C:
 	adds r0, r1
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, _080CC4BC @ =gUnknown_20370C0
 	ldrh r1, [r1]
 	cmp r0, r1
@@ -4212,7 +4212,7 @@ _080CC61C:
 	ldr r1, _080CC660 @ =gUnknown_83F5D58
 	ldrh r0, [r1, 0x18]
 	ldrh r1, [r1, 0x1A]
-	bl sub_8055238
+	bl get_mapheader_by_bank_and_number
 	ldrb r0, [r0, 0x14]
 	add r1, sp, 0x4
 	strb r0, [r1]
@@ -4258,7 +4258,7 @@ _080CC67C:
 	bne _080CC71E
 	ldrh r0, [r1]
 	ldrh r1, [r1, 0x2]
-	bl sub_8055238
+	bl get_mapheader_by_bank_and_number
 	ldrb r1, [r0, 0x14]
 	add r0, sp, 0x4
 	strb r1, [r0]
@@ -4270,7 +4270,7 @@ _080CC67C:
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -4290,7 +4290,7 @@ _080CC6D4:
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -4412,7 +4412,7 @@ sub_80CC7B4: @ 80CC7B4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CC7F0
-	bl sub_808B9F4
+	bl StorageGetCurrentBox
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4445,7 +4445,7 @@ sub_80CC7F8: @ 80CC7F8
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80CC79C
-	bl sub_808B9F4
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r4, r0, 24
 _080CC810:
@@ -4456,10 +4456,10 @@ _080CC816:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	lsrs r0, r6, 24
-	bl sub_808BD30
+	bl GetBoxedMonPtr
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FD44
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080CC858
 	bl sub_80CC7A8
@@ -4489,7 +4489,7 @@ _080CC858:
 	bne _080CC866
 	movs r4, 0
 _080CC866:
-	bl sub_808B9F4
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -4565,7 +4565,7 @@ _080CC8E8: .4byte 0xfffffedf
 _080CC8EC:
 	ldr r4, _080CC910 @ =gUnknown_2021CD0
 	ldrh r0, [r1]
-	bl sub_8125A78
+	bl ItemIdToBattleMoveId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xD
@@ -4573,7 +4573,7 @@ _080CC8EC:
 	ldr r0, _080CC914 @ =gUnknown_8247094
 	adds r1, r0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	movs r0, 0x1
 _080CC908:
 	pop {r4}
@@ -4636,7 +4636,7 @@ sub_80CC974: @ 80CC974
 	push {r4-r6,lr}
 	ldr r0, _080CC9A8 @ =sub_80CCA18
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -4675,7 +4675,7 @@ _080CC9B4:
 	ldr r0, _080CC9E4 @ =gUnknown_83F60D0
 	movs r1, 0x70
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	b _080CC9FC
 	.align 2, 0
 _080CC9D8: .4byte gUnknown_3005008
@@ -4691,7 +4691,7 @@ _080CC9E8:
 	ldr r0, _080CCA14 @ =gUnknown_83F5F50
 	movs r1, 0x70
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 _080CC9FC:
 	movs r0, 0
 	strh r0, [r4, 0x2]
@@ -4775,7 +4775,7 @@ _080CCA78:
 	adds r0, r1
 	movs r1, 0x70
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	b _080CCADE
 	.align 2, 0
 _080CCAA4: .4byte gUnknown_3005098
@@ -4799,7 +4799,7 @@ _080CCAC0:
 	adds r0, r1
 	movs r1, 0x70
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 _080CCADE:
 	movs r0, 0x7
 	movs r1, 0x1
@@ -4832,7 +4832,7 @@ sub_80CCAF4: @ 80CCAF4
 	ldr r0, _080CCB28 @ =gUnknown_83F61D0
 	movs r1, 0x70
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	b _080CCB36
 	.align 2, 0
 _080CCB20: .4byte gUnknown_3005008
@@ -4842,7 +4842,7 @@ _080CCB2C:
 	ldr r0, _080CCB60 @ =gUnknown_83F60B0
 	movs r1, 0x70
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 _080CCB36:
 	movs r0, 0x7
 	movs r1, 0x1
@@ -4856,10 +4856,10 @@ _080CCB36:
 	movs r0, 0x80
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80714D4
+	bl BlendPalettes
 _080CCB54:
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080CCB5A:
 	pop {r4}
 	pop {r0}
@@ -4874,16 +4874,16 @@ sub_80CCB68: @ 80CCB68
 	push {r4,lr}
 	ldr r4, _080CCB90 @ =sub_80CCA18
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080CCB88
 	adds r0, r4, 0
-	bl sub_8077688
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8077508
+	bl DestroyTask
 _080CCB88:
 	pop {r4}
 	pop {r0}
@@ -4928,7 +4928,7 @@ _080CCBCE:
 	adds r0, r5, r1
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, _080CCC1C @ =gUnknown_83F6203
 	adds r1, r4, r1
 	ldrb r1, [r1]
@@ -4945,14 +4945,14 @@ _080CCBEA:
 	ldr r1, _080CCC20 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0xFF
 	bne _080CCC7A
 	cmp r7, 0
 	bne _080CCC34
 	ldr r0, _080CCC24 @ =gUnknown_2021CF0
 	ldr r1, _080CCC28 @ =gUnknown_82481BE
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _080CCC2C @ =gUnknown_20370C2
 	movs r0, 0xF
 	strh r0, [r1]
@@ -4970,7 +4970,7 @@ _080CCC34:
 	bne _080CCC5C
 	ldr r0, _080CCC4C @ =gUnknown_2021CF0
 	ldr r1, _080CCC50 @ =gUnknown_824802B
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _080CCC54 @ =gUnknown_20370C2
 	movs r0, 0x10
 	strh r0, [r1]
@@ -4984,7 +4984,7 @@ _080CCC58: .4byte 0x000002df
 _080CCC5C:
 	ldr r0, _080CCC80 @ =gUnknown_2021CF0
 	ldr r1, _080CCC84 @ =gUnknown_8248038
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _080CCC88 @ =gUnknown_20370C2
 	movs r0, 0x11
 	strh r0, [r1]
@@ -5011,7 +5011,7 @@ _080CCC8C:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xD
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080CCCA8
 	adds r0, r6, 0x1
@@ -5020,7 +5020,7 @@ _080CCC8C:
 _080CCCA8:
 	adds r0, r4, 0
 	movs r1, 0xE
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080CCCBA
 	adds r0, r6, 0x1
@@ -5029,7 +5029,7 @@ _080CCCA8:
 _080CCCBA:
 	adds r0, r4, 0
 	movs r1, 0xF
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080CCCCC
 	adds r0, r6, 0x1
@@ -5038,7 +5038,7 @@ _080CCCBA:
 _080CCCCC:
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080CCCDE
 	adds r0, r6, 0x1
@@ -5152,7 +5152,7 @@ sub_80CCD84: @ 80CCD84
 	ldr r0, _080CCDC4 @ =0x00190018
 	cmp r1, r0
 	bne _080CCDC8
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -5179,12 +5179,12 @@ sub_80CCDD0: @ 80CCDD0
 	movs r0, 0x1F
 	movs r1, 0x1F
 	bl sub_8058FA4
-	bl sub_805A684
+	bl DrawWholeMapView
 	movs r0, 0x14
 	bl sub_80722CC
 	ldr r0, _080CCDF8 @ =0x000002e3
 	bl sub_806E680
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5196,7 +5196,7 @@ sub_80CCDFC: @ 80CCDFC
 	push {lr}
 	ldr r0, _080CCE0C @ =sub_80CCE10
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5267,10 +5267,10 @@ _080CCE90:
 	movs r0, 0x2
 _080CCE9E:
 	strh r0, [r1]
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 _080CCEA4:
 	adds r0, r7, 0
-	bl sub_8077508
+	bl DestroyTask
 	b _080CCED6
 	.align 2, 0
 _080CCEAC: .4byte 0x00000848
@@ -5289,7 +5289,7 @@ _080CCEB4:
 	movs r0, 0x1
 	strh r0, [r1]
 	adds r0, r7, 0
-	bl sub_8077508
+	bl DestroyTask
 _080CCED6:
 	pop {r3}
 	mov r8, r3
@@ -5313,7 +5313,7 @@ sub_80CCEE8: @ 80CCEE8
 	movs r1, 0xD0
 	lsls r1, 1
 	movs r2, 0x8
-	bl sub_80703EC
+	bl LoadPalette
 	movs r0, 0xA
 	bl sub_8083598
 	ldr r0, _080CCF28 @ =gUnknown_3005008
@@ -5322,7 +5322,7 @@ sub_80CCEE8: @ 80CCEE8
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x1
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	cmp r4, 0
 	bne _080CCF2C
 	movs r0, 0xBD
@@ -5337,7 +5337,7 @@ _080CCF2C:
 _080CCF32:
 	ldr r0, _080CCF64 @ =sub_80CCF98
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	ldr r3, _080CCF68 @ =gUnknown_20386E0
 	movs r0, 0x1
 	str r0, [r3]
@@ -5368,7 +5368,7 @@ _080CCF70:
 _080CCF72:
 	str r0, [r3, 0x14]
 	movs r0, 0x43
-	bl sub_8083444
+	bl FieldEffectStart
 	ldr r0, _080CCF94 @ =gUnknown_83F6366
 	adds r1, r5, r0
 	ldrb r1, [r1]
@@ -5376,7 +5376,7 @@ _080CCF72:
 	adds r0, r5, r0
 	ldrb r2, [r0]
 	movs r0, 0x1
-	bl sub_80550D8
+	bl Overworld_SetMapObjTemplateCoords
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -5391,13 +5391,13 @@ sub_80CCF98: @ 80CCF98
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x43
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CCFB4
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080CCFB4:
 	pop {r4}
 	pop {r0}
@@ -5453,7 +5453,7 @@ sub_80CD008: @ 80CD008
 	movs r1, 0xD0
 	lsls r1, 1
 	movs r2, 0x8
-	bl sub_80703EC
+	bl LoadPalette
 	movs r0, 0xA
 	bl sub_8083598
 	pop {r0}
@@ -5466,7 +5466,7 @@ _080CD030: .4byte gUnknown_83F6206
 	thumb_func_start sub_80CD034
 sub_80CD034: @ 80CD034
 	push {r4,r5,lr}
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -5478,7 +5478,7 @@ _080CD044:
 	ldr r1, _080CD05C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x4
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	bne _080CD060
 	movs r0, 0x1
@@ -5567,7 +5567,7 @@ _080CD0F0: .4byte gUnknown_2039A1B
 	thumb_func_start sub_80CD0F4
 sub_80CD0F4: @ 80CD0F4
 	push {r4-r7,lr}
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r6, 0
@@ -5582,7 +5582,7 @@ _080CD104:
 	adds r0, r5, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, _080CD13C @ =gUnknown_20370C0
 	ldrh r1, [r1]
 	cmp r0, r1
@@ -5592,7 +5592,7 @@ _080CD104:
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r4, r0
 	bne _080CD140
 	movs r0, 0x1
@@ -5669,7 +5669,7 @@ sub_80CD1B4: @ 80CD1B4
 	push {lr}
 	ldr r0, _080CD1C8 @ =sub_80CD1CC
 	movs r1, 0x8
-	bl sub_807741C
+	bl CreateTask
 	movs r0, 0x96
 	bl sub_80722CC
 	pop {r0}
@@ -5714,7 +5714,7 @@ _080CD200:
 	cmp r1, r0
 	bne _080CD214
 	adds r0, r5, 0
-	bl sub_8077508
+	bl DestroyTask
 _080CD214:
 	pop {r4,r5}
 	pop {r0}

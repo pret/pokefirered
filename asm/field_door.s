@@ -49,15 +49,15 @@ sub_805AF54: @ 805AF54
 	bne _0805AF6A
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805A8E8
+	bl CurrentMapDrawMetatileAt
 	b _0805AF7A
 _0805AF6A:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805A8E8
+	bl CurrentMapDrawMetatileAt
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl sub_805A8E8
+	bl CurrentMapDrawMetatileAt
 _0805AF7A:
 	pop {r4,r5}
 	pop {r0}
@@ -179,7 +179,7 @@ sub_805B028: @ 805B028
 	cmp r0, 0
 	bne _0805B056
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _0805B056:
 	pop {r4}
 	pop {r0}
@@ -280,14 +280,14 @@ sub_805B0E8: @ 805B0E8
 	mov r8, r3
 	ldr r4, _0805B134 @ =sub_805B028
 	adds r0, r4, 0
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0805B13C
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -606,7 +606,7 @@ _0805B348:
 sub_805B350: @ 805B350
 	push {lr}
 	ldr r0, _0805B360 @ =sub_805B028
-	bl sub_8077650
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}

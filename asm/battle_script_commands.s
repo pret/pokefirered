@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_801D760
-sub_801D760: @ 801D760
+	thumb_func_start atk00_attackcanceler
+atk00_attackcanceler: @ 801D760
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -204,7 +204,7 @@ _0801D8C4:
 	ldrb r0, [r0]
 	ldr r2, _0801D940 @ =0x00000115
 	adds r1, r3, 0
-	bl sub_8016EC8
+	bl PressurePPLose
 	mov r0, r8
 	ldrb r1, [r0]
 	lsls r1, 4
@@ -214,7 +214,7 @@ _0801D8C4:
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801D944 @ =gUnknown_2023D74
 	ldr r0, _0801D948 @ =gUnknown_81D8FAA
 	b _0801DAFA
@@ -283,7 +283,7 @@ _0801D98E:
 	ldr r4, _0801D9E0 @ =gUnknown_2023D6A
 	movs r0, 0x1F
 	strb r0, [r4]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801D9E4 @ =gUnknown_2023D74
 	ldr r0, _0801D9E8 @ =gUnknown_81D938D
 	str r0, [r1]
@@ -344,7 +344,7 @@ _0801D9FA:
 	bne _0801DAF4
 _0801DA38:
 	ldrh r0, [r4]
-	bl sub_802A1C0
+	bl IsTwoTurnsMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801DA5E
@@ -364,7 +364,7 @@ _0801DA38:
 _0801DA5E:
 	ldr r0, _0801DA9C @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r2, _0801DAA0 @ =gUnknown_2023DCC
 	ldrb r0, [r2]
 	movs r1, 0x1
@@ -401,7 +401,7 @@ _0801DAB4:
 	ldrb r0, [r0]
 	ldr r2, _0801DAE4 @ =0x00000121
 	adds r1, r3, 0
-	bl sub_8016EC8
+	bl PressurePPLose
 	ldrb r1, [r4]
 	lsls r1, 4
 	adds r1, r6
@@ -413,7 +413,7 @@ _0801DAB4:
 	ldr r1, _0801DAE8 @ =gUnknown_2023FC4
 	ldrb r0, [r4]
 	strb r0, [r1, 0x17]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801DAEC @ =gUnknown_2023D74
 	ldr r0, _0801DAF0 @ =gUnknown_81D8FC2
 	b _0801DAFA
@@ -439,10 +439,10 @@ _0801DAFC:
 	bx r0
 	.align 2, 0
 _0801DB0C: .4byte gUnknown_2023D74
-	thumb_func_end sub_801D760
+	thumb_func_end atk00_attackcanceler
 
-	thumb_func_start sub_801DB10
-sub_801DB10: @ 801DB10
+	thumb_func_start JumpIfMoveFailed
+JumpIfMoveFailed: @ 801DB10
 	push {r4-r6,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -488,7 +488,7 @@ _0801DB64: .4byte gUnknown_2023DA0
 _0801DB68: .4byte gUnknown_2023D6C
 _0801DB6C: .4byte gUnknown_2023DA8
 _0801DB70:
-	bl sub_802A3F8
+	bl TrySetDestinyBondToHappen
 	ldr r0, _0801DB98 @ =gUnknown_2023D6C
 	ldrb r1, [r0]
 	str r6, [sp]
@@ -510,10 +510,10 @@ _0801DB8E:
 	.align 2, 0
 _0801DB98: .4byte gUnknown_2023D6C
 _0801DB9C: .4byte gUnknown_2023D74
-	thumb_func_end sub_801DB10
+	thumb_func_end JumpIfMoveFailed
 
-	thumb_func_start sub_801DBA0
-sub_801DBA0: @ 801DBA0
+	thumb_func_start atk40_jumpifaffectedbyprotect
+atk40_jumpifaffectedbyprotect: @ 801DBA0
 	push {lr}
 	ldr r1, _0801DBE8 @ =gUnknown_2023E8C
 	ldr r0, _0801DBEC @ =gUnknown_2023D6C
@@ -543,7 +543,7 @@ sub_801DBA0: @ 801DBA0
 	strb r0, [r2]
 	movs r0, 0x5
 	movs r1, 0
-	bl sub_801DB10
+	bl JumpIfMoveFailed
 	ldr r1, _0801DBFC @ =gUnknown_2023E82
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -565,10 +565,10 @@ _0801DC08:
 	bx r0
 	.align 2, 0
 _0801DC0C: .4byte gUnknown_2023D74
-	thumb_func_end sub_801DBA0
+	thumb_func_end atk40_jumpifaffectedbyprotect
 
-	thumb_func_start sub_801DC10
-sub_801DC10: @ 801DC10
+	thumb_func_start JumpIfMoveAffectedByProtect
+JumpIfMoveAffectedByProtect: @ 801DC10
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -601,7 +601,7 @@ sub_801DC10: @ 801DC10
 	strb r0, [r2]
 	movs r0, 0x7
 	adds r1, r3, 0
-	bl sub_801DB10
+	bl JumpIfMoveFailed
 	ldr r1, _0801DC78 @ =gUnknown_2023E82
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -618,10 +618,10 @@ _0801DC6C: .4byte gUnknown_8250C04
 _0801DC70: .4byte gUnknown_2023D4A
 _0801DC74: .4byte gUnknown_2023DCC
 _0801DC78: .4byte gUnknown_2023E82
-	thumb_func_end sub_801DC10
+	thumb_func_end JumpIfMoveAffectedByProtect
 
-	thumb_func_start sub_801DC7C
-sub_801DC7C: @ 801DC7C
+	thumb_func_start AccuracyCalcHelper
+AccuracyCalcHelper: @ 801DC7C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	lsls r0, 16
@@ -765,7 +765,7 @@ _0801DD86:
 _0801DD98:
 	movs r0, 0x7
 	adds r1, r5, 0
-	bl sub_801DB10
+	bl JumpIfMoveFailed
 	movs r0, 0x1
 	b _0801DDBA
 	.align 2, 0
@@ -781,7 +781,7 @@ _0801DDBA:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_801DC7C
+	thumb_func_end AccuracyCalcHelper
 
 	thumb_func_start sub_801DDC4
 sub_801DDC4: @ 801DDC4
@@ -818,7 +818,7 @@ sub_801DDC4: @ 801DDC4
 	beq _0801DE12
 	ldr r0, _0801DE6C @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801DE56
@@ -844,7 +844,7 @@ _0801DE12:
 	bne _0801DE48
 	ldr r0, _0801DE6C @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801DE56
@@ -859,7 +859,7 @@ _0801DE48:
 _0801DE56:
 	movs r0, 0x7
 	adds r1, r6, 0
-	bl sub_801DB10
+	bl JumpIfMoveFailed
 	b _0801E1C2
 	.align 2, 0
 _0801DE60: .4byte gUnknown_2023D74
@@ -928,7 +928,7 @@ _0801DEE8: .4byte 0x000400c0
 _0801DEEC: .4byte gUnknown_2023D74
 _0801DEF0:
 	movs r0, 0
-	bl sub_801DC10
+	bl JumpIfMoveAffectedByProtect
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801DEFE
@@ -971,14 +971,14 @@ _0801DF34:
 	mov r10, r0
 _0801DF42:
 	adds r0, r6, 0
-	bl sub_801DC10
+	bl JumpIfMoveAffectedByProtect
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801DF50
 	b _0801E1C2
 _0801DF50:
 	adds r0, r6, 0
-	bl sub_801DC7C
+	bl AccuracyCalcHelper
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801DF5E
@@ -1197,7 +1197,7 @@ _0801E110: .4byte gUnknown_2023D6C
 _0801E114: .4byte gUnknown_2023F54
 _0801E118:
 	ldrh r0, [r1, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r1, r8
@@ -1205,7 +1205,7 @@ _0801E118:
 	muls r0, r7
 	add r0, r9
 	ldrh r0, [r0, 0x2E]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r2, r0, 24
 _0801E134:
@@ -1223,7 +1223,7 @@ _0801E134:
 	lsls r0, 16
 	lsrs r4, r0, 16
 _0801E150:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -1270,11 +1270,11 @@ _0801E1B0:
 	movs r0, 0
 _0801E1B4:
 	strb r0, [r1, 0x6]
-	bl sub_801EAB8
+	bl CheckWonderGuardAndLevitate
 _0801E1BA:
 	movs r0, 0x7
 	adds r1, r6, 0
-	bl sub_801DB10
+	bl JumpIfMoveFailed
 _0801E1C2:
 	add sp, 0x8
 	pop {r3-r5}
@@ -1305,7 +1305,7 @@ sub_801E1D8: @ 801E1D8
 	ldr r0, _0801E220 @ =gUnknown_2023D6B
 	ldrb r1, [r0]
 	movs r0, 0x4
-	bl sub_80173AC
+	bl PrepareStringBattle
 	ldr r0, [r4]
 	movs r1, 0x80
 	lsls r1, 3
@@ -1531,10 +1531,10 @@ _0801E362:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_800DFF0
+	bl EmitSetMonData
 	mov r7, r9
 	ldrb r0, [r7]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _0801E3CC:
 	ldr r2, _0801E3FC @ =gUnknown_2023DD0
 	ldr r0, [r2]
@@ -1587,7 +1587,7 @@ _0801E42C: .4byte gUnknown_2023BE4
 _0801E430: .4byte gUnknown_2023D6B
 _0801E434: .4byte gUnknown_2023F54
 _0801E438:
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0801E440:
@@ -1713,7 +1713,7 @@ _0801E4F0:
 	ands r0, r1
 	cmp r0, 0
 	bne _0801E580
-	bl sub_8044EC8
+	bl Random
 	ldr r2, _0801E578 @ =gUnknown_8250530
 	lsls r1, r5, 1
 	adds r1, r2
@@ -1767,14 +1767,14 @@ _0801E594: .4byte gUnknown_2023D71
 _0801E598: .4byte gUnknown_2023D74
 	thumb_func_end sub_801E408
 
-	thumb_func_start sub_801E59C
-sub_801E59C: @ 801E59C
+	thumb_func_start atk05_damagecalc
+atk05_damagecalc: @ 801E59C
 	push {r4-r7,lr}
 	sub sp, 0x10
 	ldr r4, _0801E654 @ =gUnknown_2023DDE
 	ldr r5, _0801E658 @ =gUnknown_2023D6C
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 1
@@ -1874,10 +1874,10 @@ _0801E67C: .4byte gUnknown_2023DFC
 _0801E680: .4byte gUnknown_8250C04
 _0801E684: .4byte gUnknown_2023E8C
 _0801E688: .4byte gUnknown_2023D74
-	thumb_func_end sub_801E59C
+	thumb_func_end atk05_damagecalc
 
-	thumb_func_start sub_801E68C
-sub_801E68C: @ 801E68C
+	thumb_func_start AI_CalcDmg
+AI_CalcDmg: @ 801E68C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1889,7 +1889,7 @@ sub_801E68C: @ 801E68C
 	lsrs r5, 24
 	ldr r4, _0801E744 @ =gUnknown_2023DDE
 	adds r0, r5, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 1
@@ -1981,10 +1981,10 @@ _0801E760: .4byte gUnknown_2023FC4
 _0801E764: .4byte gUnknown_2023DFC
 _0801E768: .4byte gUnknown_8250C04
 _0801E76C: .4byte gUnknown_2023E8C
-	thumb_func_end sub_801E68C
+	thumb_func_end AI_CalcDmg
 
-	thumb_func_start sub_801E770
-sub_801E770: @ 801E770
+	thumb_func_start ModulateDmgByType
+ModulateDmgByType: @ 801E770
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2095,10 +2095,10 @@ _0801E842:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_801E770
+	thumb_func_end ModulateDmgByType
 
-	thumb_func_start sub_801E848
-sub_801E848: @ 801E848
+	thumb_func_start atk06_typecalc
+atk06_typecalc: @ 801E848
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2246,7 +2246,7 @@ _0801E94C:
 	ldrb r0, [r0]
 	str r2, [sp]
 	str r3, [sp, 0x4]
-	bl sub_801E770
+	bl ModulateDmgByType
 	ldr r3, [sp, 0x4]
 	ldr r2, [sp]
 _0801E982:
@@ -2266,7 +2266,7 @@ _0801E982:
 	adds r0, r5
 	ldrb r0, [r0]
 	str r3, [sp, 0x4]
-	bl sub_801E770
+	bl ModulateDmgByType
 	ldr r3, [sp, 0x4]
 _0801E9A8:
 	adds r3, 0x3
@@ -2308,7 +2308,7 @@ _0801E9D4:
 	ldrb r0, [r0]
 	ldr r7, _0801EA94 @ =gUnknown_2023D4A
 	ldrh r1, [r7]
-	bl sub_802A224
+	bl AttacksThisTurn
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -2397,10 +2397,10 @@ _0801EAA8: .4byte gUnknown_2023DA8
 _0801EAAC: .4byte gUnknown_2023E82
 _0801EAB0: .4byte gUnknown_2023E8C
 _0801EAB4: .4byte gUnknown_2023D74
-	thumb_func_end sub_801E848
+	thumb_func_end atk06_typecalc
 
-	thumb_func_start sub_801EAB8
-sub_801EAB8: @ 801EAB8
+	thumb_func_start CheckWonderGuardAndLevitate
+CheckWonderGuardAndLevitate: @ 801EAB8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2683,7 +2683,7 @@ _0801ECC2:
 	ldrb r0, [r0]
 	mov r2, r9
 	ldrh r1, [r2]
-	bl sub_802A224
+	bl AttacksThisTurn
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -2725,10 +2725,10 @@ _0801ED2C: .4byte gUnknown_2023D6B
 _0801ED30: .4byte gUnknown_8250C04
 _0801ED34: .4byte gUnknown_2023D6A
 _0801ED38: .4byte gUnknown_2023E82
-	thumb_func_end sub_801EAB8
+	thumb_func_end CheckWonderGuardAndLevitate
 
-	thumb_func_start sub_801ED3C
-sub_801ED3C: @ 801ED3C
+	thumb_func_start ModulateDmgByType2
+ModulateDmgByType2: @ 801ED3C
 	push {r4-r7,lr}
 	adds r6, r2, 0
 	lsls r0, 24
@@ -2829,10 +2829,10 @@ _0801EDEE:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_801ED3C
+	thumb_func_end ModulateDmgByType2
 
-	thumb_func_start sub_801EDF4
-sub_801EDF4: @ 801EDF4
+	thumb_func_start TypeCalc
+TypeCalc: @ 801EDF4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2967,7 +2967,7 @@ _0801EEC6:
 	ldrb r0, [r0]
 	mov r1, r10
 	mov r2, sp
-	bl sub_801ED3C
+	bl ModulateDmgByType2
 _0801EF00:
 	adds r0, r5, 0
 	adds r0, 0x22
@@ -2983,7 +2983,7 @@ _0801EF00:
 	ldrb r0, [r0]
 	mov r1, r10
 	mov r2, sp
-	bl sub_801ED3C
+	bl ModulateDmgByType2
 _0801EF20:
 	movs r1, 0x3
 	add r8, r1
@@ -3029,7 +3029,7 @@ _0801EF50:
 	bne _0801EFAA
 	ldr r0, [sp, 0x4]
 	mov r1, r10
-	bl sub_802A224
+	bl AttacksThisTurn
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x2
@@ -3073,10 +3073,10 @@ _0801EFAE:
 _0801EFC0: .4byte gUnknown_824F050
 _0801EFC4: .4byte gUnknown_2023BE4
 _0801EFC8: .4byte gUnknown_8250C04
-	thumb_func_end sub_801EDF4
+	thumb_func_end TypeCalc
 
-	thumb_func_start sub_801EFCC
-sub_801EFCC: @ 801EFCC
+	thumb_func_start AI_TypeCalc
+AI_TypeCalc: @ 801EFCC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3147,7 +3147,7 @@ _0801F040:
 	ldrb r0, [r4, 0x2]
 	adds r1, r6, 0
 	mov r2, sp
-	bl sub_801ED3C
+	bl ModulateDmgByType2
 _0801F05A:
 	cmp r5, r8
 	bne _0801F06C
@@ -3156,7 +3156,7 @@ _0801F05A:
 	ldrb r0, [r4, 0x2]
 	adds r1, r6, 0
 	mov r2, sp
-	bl sub_801ED3C
+	bl ModulateDmgByType2
 _0801F06C:
 	adds r4, 0x3
 	adds r7, 0x3
@@ -3207,12 +3207,12 @@ _0801F0B0:
 	.align 2, 0
 _0801F0C0: .4byte gUnknown_824F050
 _0801F0C4: .4byte gUnknown_8250C04
-	thumb_func_end sub_801EFCC
+	thumb_func_end AI_TypeCalc
 
-	thumb_func_start sub_801F0C8
-sub_801F0C8: @ 801F0C8
+	thumb_func_start Unused_ApplyRandomDmgMultiplier
+Unused_ApplyRandomDmgMultiplier: @ 801F0C8
 	push {r4,lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF
@@ -3240,12 +3240,12 @@ _0801F0FA:
 	bx r0
 	.align 2, 0
 _0801F100: .4byte gUnknown_2023D50
-	thumb_func_end sub_801F0C8
+	thumb_func_end Unused_ApplyRandomDmgMultiplier
 
-	thumb_func_start sub_801F104
-sub_801F104: @ 801F104
+	thumb_func_start atk07_adjustnormaldamage
+atk07_adjustnormaldamage: @ 801F104
 	push {r4-r7,lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF
@@ -3293,14 +3293,14 @@ _0801F164: .4byte gUnknown_2023D6C
 _0801F168: .4byte gUnknown_2023F54
 _0801F16C:
 	ldrh r0, [r1, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7
 	ldrh r0, [r0, 0x2E]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0801F186:
@@ -3310,7 +3310,7 @@ _0801F186:
 	strb r0, [r1]
 	cmp r4, 0x27
 	bne _0801F1C4
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -3444,12 +3444,12 @@ _0801F2A4: .4byte gUnknown_2023ECC
 _0801F2A8: .4byte gUnknown_2023DCC
 _0801F2AC: .4byte gUnknown_2023D68
 _0801F2B0: .4byte gUnknown_2023D74
-	thumb_func_end sub_801F104
+	thumb_func_end atk07_adjustnormaldamage
 
-	thumb_func_start sub_801F2B4
-sub_801F2B4: @ 801F2B4
+	thumb_func_start atk08_adjustnormaldamage2
+atk08_adjustnormaldamage2: @ 801F2B4
 	push {r4-r7,lr}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF
@@ -3497,14 +3497,14 @@ _0801F314: .4byte gUnknown_2023D6C
 _0801F318: .4byte gUnknown_2023F54
 _0801F31C:
 	ldrh r0, [r1, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7
 	ldrh r0, [r0, 0x2E]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0801F336:
@@ -3514,7 +3514,7 @@ _0801F336:
 	strb r0, [r1]
 	cmp r4, 0x27
 	bne _0801F374
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -3632,7 +3632,7 @@ _0801F430: .4byte gUnknown_2023ECC
 _0801F434: .4byte gUnknown_2023DCC
 _0801F438: .4byte gUnknown_2023D68
 _0801F43C: .4byte gUnknown_2023D74
-	thumb_func_end sub_801F2B4
+	thumb_func_end atk08_adjustnormaldamage2
 
 	thumb_func_start sub_801F440
 sub_801F440: @ 801F440
@@ -3661,7 +3661,7 @@ _0801F452:
 	ldr r4, _0801F494 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _0801F498 @ =gUnknown_81D89F1
 	str r0, [r4]
 	ldr r1, _0801F49C @ =gUnknown_2023FC4
@@ -3742,7 +3742,7 @@ _0801F4CE:
 	adds r0, r4
 	str r0, [sp, 0x8]
 	movs r0, 0
-	bl sub_800E1FC
+	bl EmitMoveAnimation
 	ldrb r0, [r6, 0x18]
 	adds r0, 0x1
 	strb r0, [r6, 0x18]
@@ -3751,7 +3751,7 @@ _0801F4CE:
 	strb r0, [r6, 0x19]
 	mov r1, r8
 	ldrb r0, [r1]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _0801F530:
 	ldr r1, _0801F560 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -3773,7 +3773,7 @@ _0801F564:
 	ldr r4, _0801F580 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _0801F584 @ =gUnknown_81D89F1
 	str r0, [r4]
 _0801F572:
@@ -3807,8 +3807,8 @@ _0801F5A0: .4byte gUnknown_2023BC8
 _0801F5A4: .4byte gUnknown_2023D74
 	thumb_func_end sub_801F588
 
-	thumb_func_start sub_801F5A8
-sub_801F5A8: @ 801F5A8
+	thumb_func_start atk0B_healthbarupdate
+atk0B_healthbarupdate: @ 801F5A8
 	push {r4,lr}
 	ldr r0, _0801F60C @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -3855,7 +3855,7 @@ sub_801F5A8: @ 801F5A8
 	bne _0801F628
 	movs r0, 0x80
 	adds r1, r2, 0
-	bl sub_80173AC
+	bl PrepareStringBattle
 	b _0801F662
 	.align 2, 0
 _0801F60C: .4byte gUnknown_2023BC8
@@ -3875,12 +3875,12 @@ _0801F628:
 	lsrs r1, r0, 16
 _0801F636:
 	movs r0, 0
-	bl sub_800E5EC
+	bl EmitHealthBarUpdate
 	ldr r4, _0801F678 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801F662
@@ -3908,10 +3908,10 @@ _0801F674: .4byte 0x00002710
 _0801F678: .4byte gUnknown_2023BC4
 _0801F67C: .4byte gUnknown_3004F90
 _0801F680: .4byte gUnknown_2023D74
-	thumb_func_end sub_801F5A8
+	thumb_func_end atk0B_healthbarupdate
 
-	thumb_func_start sub_801F684
-sub_801F684: @ 801F684
+	thumb_func_start atk0C_datahpupdate
+atk0C_datahpupdate: @ 801F684
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r0, _0801F6AC @ =gUnknown_2023BC8
@@ -4070,7 +4070,7 @@ _0801F7C0:
 	ldr r0, [r4]
 	adds r0, 0x2
 	str r0, [r4]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r0, _0801F7E4 @ =gUnknown_81D9526
 	str r0, [r4]
 	b _0801FA62
@@ -4356,9 +4356,9 @@ _0801F9FA:
 	movs r1, 0x2A
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _0801FA5A
 	.align 2, 0
 _0801FA28: .4byte gUnknown_2023D6C
@@ -4398,10 +4398,10 @@ _0801FA6C: .4byte gUnknown_2023D74
 _0801FA70: .4byte gUnknown_2023BC4
 _0801FA74: .4byte gUnknown_2023ECC
 _0801FA78: .4byte 0x0000ffff
-	thumb_func_end sub_801F684
+	thumb_func_end atk0C_datahpupdate
 
-	thumb_func_start sub_801FA7C
-sub_801FA7C: @ 801FA7C
+	thumb_func_start atk0D_critmessage
+atk0D_critmessage: @ 801FA7C
 	push {lr}
 	ldr r0, _0801FAB8 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -4420,7 +4420,7 @@ sub_801FA7C: @ 801FA7C
 	ldr r0, _0801FAC4 @ =gUnknown_2023D6B
 	ldrb r1, [r0]
 	movs r0, 0xD9
-	bl sub_80173AC
+	bl PrepareStringBattle
 	ldr r1, _0801FAC8 @ =gUnknown_2023E82
 	movs r0, 0x1
 	strb r0, [r1, 0x7]
@@ -4439,10 +4439,10 @@ _0801FAC0: .4byte gUnknown_2023DCC
 _0801FAC4: .4byte gUnknown_2023D6B
 _0801FAC8: .4byte gUnknown_2023E82
 _0801FACC: .4byte gUnknown_2023D74
-	thumb_func_end sub_801FA7C
+	thumb_func_end atk0D_critmessage
 
-	thumb_func_start sub_801FAD0
-sub_801FAD0: @ 801FAD0
+	thumb_func_start atk0E_effectivenesssound
+atk0E_effectivenesssound: @ 801FAD0
 	push {r4,lr}
 	ldr r0, _0801FB08 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -4496,9 +4496,9 @@ _0801FB32:
 	movs r0, 0
 	movs r1, 0xC
 _0801FB36:
-	bl sub_800E9C4
+	bl EmitPlaySE
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _0801FB88
 _0801FB42:
 	ldrb r1, [r1]
@@ -4517,10 +4517,10 @@ _0801FB52:
 	movs r0, 0
 	movs r1, 0xC
 _0801FB5E:
-	bl sub_800E9C4
+	bl EmitPlaySE
 	ldr r0, _0801FB6C @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _0801FB88
 	.align 2, 0
 _0801FB6C: .4byte gUnknown_2023BC4
@@ -4531,10 +4531,10 @@ _0801FB70:
 	bne _0801FB88
 	movs r0, 0
 	movs r1, 0xD
-	bl sub_800E9C4
+	bl EmitPlaySE
 	ldr r0, _0801FB98 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _0801FB88:
 	ldr r1, _0801FB9C @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -4547,10 +4547,10 @@ _0801FB90:
 	.align 2, 0
 _0801FB98: .4byte gUnknown_2023BC4
 _0801FB9C: .4byte gUnknown_2023D74
-	thumb_func_end sub_801FAD0
+	thumb_func_end atk0E_effectivenesssound
 
-	thumb_func_start sub_801FBA0
-sub_801FBA0: @ 801FBA0
+	thumb_func_start atk0F_resultmessage
+atk0F_resultmessage: @ 801FBA0
 	push {r4-r7,lr}
 	movs r3, 0
 	ldr r0, _0801FBDC @ =gUnknown_2023BC8
@@ -4651,7 +4651,7 @@ _0801FC38:
 	movs r0, 0x3F
 	ands r0, r5
 	strb r0, [r6]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801FC70 @ =gUnknown_2023D74
 	ldr r0, _0801FC74 @ =gUnknown_81D9641
 	b _0801FD3E
@@ -4684,7 +4684,7 @@ _0801FC88:
 	movs r1, 0xFB
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801FCA8 @ =gUnknown_2023D74
 	ldr r0, _0801FCAC @ =gUnknown_81D8FE4
 	b _0801FD3E
@@ -4699,7 +4699,7 @@ _0801FCB0:
 	movs r0, 0x3F
 	ands r0, r5
 	strb r0, [r2]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801FCC8 @ =gUnknown_2023D74
 	ldr r0, _0801FCCC @ =gUnknown_81D8FDD
 	b _0801FD3E
@@ -4726,7 +4726,7 @@ _0801FCD0:
 	movs r0, 0x3F
 	ands r0, r5
 	strb r0, [r6]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0801FD10 @ =gUnknown_2023D74
 	ldr r0, _0801FD14 @ =gUnknown_81D9641
 	b _0801FD3E
@@ -4756,7 +4756,7 @@ _0801FD2E:
 	adds r0, r3, 0
 	ldr r1, _0801FD48 @ =gUnknown_2023D6B
 	ldrb r1, [r1]
-	bl sub_80173AC
+	bl PrepareStringBattle
 _0801FD38:
 	ldr r1, _0801FD4C @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -4770,10 +4770,10 @@ _0801FD40:
 	.align 2, 0
 _0801FD48: .4byte gUnknown_2023D6B
 _0801FD4C: .4byte gUnknown_2023D74
-	thumb_func_end sub_801FBA0
+	thumb_func_end atk0F_resultmessage
 
-	thumb_func_start sub_801FD50
-sub_801FD50: @ 801FD50
+	thumb_func_start atk10_printstring
+atk10_printstring: @ 801FD50
 	push {r4,lr}
 	ldr r0, _0801FD80 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -4787,7 +4787,7 @@ sub_801FD50: @ 801FD50
 	orrs r0, r1
 	ldr r1, _0801FD88 @ =gUnknown_2023D6B
 	ldrb r1, [r1]
-	bl sub_80173AC
+	bl PrepareStringBattle
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
@@ -4803,10 +4803,10 @@ _0801FD80: .4byte gUnknown_2023BC8
 _0801FD84: .4byte gUnknown_2023D74
 _0801FD88: .4byte gUnknown_2023D6B
 _0801FD8C: .4byte gUnknown_2023E82
-	thumb_func_end sub_801FD50
+	thumb_func_end atk10_printstring
 
-	thumb_func_start sub_801FD90
-sub_801FD90: @ 801FD90
+	thumb_func_start atk11_printselectionstring
+atk11_printselectionstring: @ 801FD90
 	push {r4,r5,lr}
 	ldr r5, _0801FDC4 @ =gUnknown_2023BC4
 	ldr r0, _0801FDC8 @ =gUnknown_2023D6B
@@ -4819,9 +4819,9 @@ sub_801FD90: @ 801FD90
 	lsls r0, 8
 	orrs r1, r0
 	movs r0, 0
-	bl sub_800E3EC
+	bl EmitPrintSelectionString
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
@@ -4836,10 +4836,10 @@ _0801FDC4: .4byte gUnknown_2023BC4
 _0801FDC8: .4byte gUnknown_2023D6B
 _0801FDCC: .4byte gUnknown_2023D74
 _0801FDD0: .4byte gUnknown_2023E82
-	thumb_func_end sub_801FD90
+	thumb_func_end atk11_printselectionstring
 
-	thumb_func_start sub_801FDD4
-sub_801FDD4: @ 801FDD4
+	thumb_func_start atk12_waitmessage
+atk12_waitmessage: @ 801FDD4
 	push {r4-r6,lr}
 	ldr r0, _0801FDF0 @ =gUnknown_2023BC8
 	ldr r4, [r0]
@@ -4885,10 +4885,10 @@ _0801FE22:
 	.align 2, 0
 _0801FE28: .4byte gUnknown_2023D74
 _0801FE2C: .4byte gUnknown_2023E7C
-	thumb_func_end sub_801FDD4
+	thumb_func_end atk12_waitmessage
 
-	thumb_func_start sub_801FE30
-sub_801FE30: @ 801FE30
+	thumb_func_start atk13_printfromtable
+atk13_printfromtable: @ 801FE30
 	push {r4,r5,lr}
 	ldr r0, _0801FE74 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -4913,7 +4913,7 @@ sub_801FE30: @ 801FE30
 	ldrh r0, [r1]
 	ldr r1, _0801FE80 @ =gUnknown_2023D6B
 	ldrb r1, [r1]
-	bl sub_80173AC
+	bl PrepareStringBattle
 	ldr r0, [r4]
 	adds r0, 0x5
 	str r0, [r4]
@@ -4928,10 +4928,10 @@ _0801FE74: .4byte gUnknown_2023BC8
 _0801FE78: .4byte gUnknown_2023D74
 _0801FE7C: .4byte gUnknown_2023E82
 _0801FE80: .4byte gUnknown_2023D6B
-	thumb_func_end sub_801FE30
+	thumb_func_end atk13_printfromtable
 
-	thumb_func_start sub_801FE84
-sub_801FE84: @ 801FE84
+	thumb_func_start atk14_printselectionstringfromtable
+atk14_printselectionstringfromtable: @ 801FE84
 	push {r4-r6,lr}
 	ldr r0, _0801FED4 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -4959,9 +4959,9 @@ sub_801FE84: @ 801FE84
 	strb r0, [r4]
 	ldrh r1, [r1]
 	movs r0, 0
-	bl sub_800E3EC
+	bl EmitPrintSelectionString
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x5
 	str r0, [r5]
@@ -4977,10 +4977,10 @@ _0801FED8: .4byte gUnknown_2023D74
 _0801FEDC: .4byte gUnknown_2023E82
 _0801FEE0: .4byte gUnknown_2023BC4
 _0801FEE4: .4byte gUnknown_2023D6B
-	thumb_func_end sub_801FE84
+	thumb_func_end atk14_printselectionstringfromtable
 
-	thumb_func_start sub_801FEE8
-sub_801FEE8: @ 801FEE8
+	thumb_func_start BankGetTurnOrder
+BankGetTurnOrder: @ 801FEE8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -5010,7 +5010,7 @@ _0801FF0E:
 	.align 2, 0
 _0801FF18: .4byte gUnknown_2023BCC
 _0801FF1C: .4byte gUnknown_2023BDE
-	thumb_func_end sub_801FEE8
+	thumb_func_end BankGetTurnOrder
 
 	thumb_func_start sub_801FF20
 sub_801FF20: @ 801FF20
@@ -5076,7 +5076,7 @@ _0801FF84:
 	beq _0801FFB2
 	mov r2, r9
 	ldrb r0, [r2]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5111,7 +5111,7 @@ _0801FFB2:
 _0801FFE6:
 	mov r3, r9
 	ldrb r0, [r3]
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r2, _080200B4 @ =gUnknown_2023DDE
 	movs r1, 0x1
 	ands r1, r0
@@ -5317,7 +5317,7 @@ _08020176:
 	b _08020570
 _0802017C:
 	adds r0, r2, 0
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	b _08020560
 	.align 2, 0
 _08020184: .4byte gUnknown_2023BC4
@@ -5346,7 +5346,7 @@ _080201A6:
 	ldr r4, _080201D8 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _080201DC @ =gUnknown_81D9438
 _080201C0:
 	str r0, [r4]
@@ -5469,7 +5469,7 @@ _0802028A:
 	ldr r4, _080202AC @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _080202B0 @ =gUnknown_81D9420
 	b _080201C0
 	.align 2, 0
@@ -5509,7 +5509,7 @@ _080202EA:
 	ldr r4, _080202FC @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020300 @ =gUnknown_81D9420
 	b _080204F4
 	.align 2, 0
@@ -5626,7 +5626,7 @@ _080203BE:
 	b _08020570
 _080203CA:
 	adds r0, r3, 0
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	movs r3, 0x1
 	mov r10, r3
 	b _08020570
@@ -5660,7 +5660,7 @@ _08020402:
 	ldr r4, _08020424 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020428 @ =gUnknown_81D942C
 	b _080201C0
 	.align 2, 0
@@ -5703,7 +5703,7 @@ _0802045A:
 	ldr r4, _08020498 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _0802049C @ =gUnknown_81D9438
 	str r0, [r4]
 	ldr r2, _080204A0 @ =gUnknown_2023DD0
@@ -5764,7 +5764,7 @@ _080204E8:
 	ldr r4, _08020504 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020508 @ =gUnknown_81D9438
 _080204F4:
 	str r0, [r4]
@@ -5837,7 +5837,7 @@ _08020578:
 	ldr r0, _080205B8 @ =gUnknown_2023D74
 	ldr r0, [r0]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _080205BC @ =gUnknown_825053C
 	ldr r0, _080205C0 @ =gUnknown_2023E82
 	ldrb r0, [r0, 0x3]
@@ -5846,7 +5846,7 @@ _08020578:
 	ldr r3, [r0]
 	cmp r3, 0x7
 	bne _080205CC
-	bl sub_8044EC8
+	bl Random
 	ldr r2, _080205C4 @ =gUnknown_2023BE4
 	ldr r1, _080205C8 @ =gUnknown_2023D6E
 	ldrb r3, [r1]
@@ -5902,9 +5902,9 @@ _080205E0:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r2, _0802064C @ =gUnknown_2023DD0
 	ldr r1, [r2]
 	movs r0, 0x80
@@ -6076,7 +6076,7 @@ _080207D2:
 	beq _080207E6
 	bl _080210EC
 _080207E6:
-	bl sub_8044EC8
+	bl Random
 	mov r3, r9
 	ldrb r1, [r3]
 	adds r2, r1, 0
@@ -6094,7 +6094,7 @@ _080207E6:
 	ldr r4, _08020820 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _08020824 @ =gUnknown_825062C
 	ldr r0, _08020828 @ =gUnknown_2023E82
 	ldrb r0, [r0, 0x3]
@@ -6139,7 +6139,7 @@ _08020868: .4byte gUnknown_2023D74
 _0802086C: .4byte gUnknown_81D9452
 _08020870:
 	adds r0, r2, 0
-	bl sub_801FEE8
+	bl BankGetTurnOrder
 	ldr r1, _080208AC @ =gUnknown_2023BE2
 	lsls r0, 24
 	lsrs r0, 24
@@ -6195,7 +6195,7 @@ _080208D4:
 	ldr r1, _08020924 @ =gUnknown_2023D4A
 	ldrh r1, [r1]
 	strh r1, [r0]
-	bl sub_8044EC8
+	bl Random
 	mov r2, r9
 	ldrb r1, [r2]
 	adds r2, r1, 0
@@ -6211,7 +6211,7 @@ _080208D4:
 	ldr r4, _08020928 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _0802092C @ =gUnknown_825062C
 	ldr r0, _08020930 @ =gUnknown_2023E82
 	ldrb r0, [r0, 0x3]
@@ -6228,7 +6228,7 @@ _08020930: .4byte gUnknown_2023E82
 _08020934:
 	ldr r5, _08020984 @ =gUnknown_2023D6B
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -6257,7 +6257,7 @@ _0802096C:
 	ldr r4, _08020994 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _08020998 @ =gUnknown_825062C
 	ldr r0, _0802099C @ =gUnknown_2023E82
 	ldrb r0, [r0, 0x3]
@@ -6286,7 +6286,7 @@ _080209A0:
 	beq _080209B6
 	b _080210EC
 _080209B6:
-	bl sub_8044EC8
+	bl Random
 	ldr r4, _080209D4 @ =gUnknown_2023E82
 	lsls r0, 16
 	lsrs r0, 16
@@ -6351,7 +6351,7 @@ _08020A20:
 	beq _08020A3C
 	b _080210EC
 _08020A3C:
-	bl sub_8044EC8
+	bl Random
 	mov r2, r9
 	ldrb r1, [r2]
 	adds r2, r1, 0
@@ -6389,7 +6389,7 @@ _08020A3C:
 	ldr r4, _08020ADC @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _08020AE0 @ =gUnknown_825062C
 	ldr r2, _08020AE4 @ =gUnknown_2023E82
 	ldrb r0, [r2, 0x3]
@@ -6451,7 +6451,7 @@ _08020B04:
 	ldr r4, _08020B24 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _08020B28 @ =gUnknown_825062C
 	ldr r0, _08020B2C @ =gUnknown_2023E82
 	ldrb r0, [r0, 0x3]
@@ -6473,7 +6473,7 @@ _08020B30:
 	movs r0, 0x10
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_8027BFC
+	bl ChangeStatBuffs
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -6489,7 +6489,7 @@ _08020B4C:
 	ldr r4, _08020B6C @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020B70 @ =gUnknown_81D6BD1
 	b _08021108
 	.align 2, 0
@@ -6505,7 +6505,7 @@ _08020B74:
 	lsrs r1, 24
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_8027BFC
+	bl ChangeStatBuffs
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -6521,7 +6521,7 @@ _08020B92:
 	ldr r4, _08020BB0 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020BB4 @ =gUnknown_81D6C62
 	b _08021108
 	.align 2, 0
@@ -6536,7 +6536,7 @@ _08020BB8:
 	movs r0, 0x20
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_8027BFC
+	bl ChangeStatBuffs
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -6552,7 +6552,7 @@ _08020BD4:
 	ldr r4, _08020BF4 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020BF8 @ =gUnknown_81D6BD1
 	b _08021108
 	.align 2, 0
@@ -6568,7 +6568,7 @@ _08020BFC:
 	lsrs r1, 24
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_8027BFC
+	bl ChangeStatBuffs
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -6584,7 +6584,7 @@ _08020C1A:
 	ldr r4, _08020C38 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020C3C @ =gUnknown_81D6C62
 	b _08021108
 	.align 2, 0
@@ -6656,11 +6656,11 @@ _08020CA8:
 _08020CB8:
 	ldr r4, _08020D68 @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6813,10 +6813,10 @@ _08020DD4:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_800DFF0
+	bl EmitSetMonData
 	mov r2, r10
 	ldrb r0, [r2]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldrb r0, [r7]
 	strb r0, [r4]
 	ldrb r0, [r7]
@@ -6831,13 +6831,13 @@ _08020DD4:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r7]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r4, _08020E70 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020E74 @ =gUnknown_81D9271
 	str r0, [r4]
 	ldrb r0, [r7]
@@ -6907,7 +6907,7 @@ _08020ED0:
 	ldr r4, _08020EE0 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020EE4 @ =gUnknown_81D8D55
 	b _08021108
 	.align 2, 0
@@ -6917,7 +6917,7 @@ _08020EE8:
 	ldr r4, _08020EF8 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020EFC @ =gUnknown_81D8DF1
 	b _08021108
 	.align 2, 0
@@ -6953,13 +6953,13 @@ _08020F1A:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r4, _08020F58 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020F5C @ =gUnknown_81D9177
 	b _08021108
 	.align 2, 0
@@ -6971,7 +6971,7 @@ _08020F60:
 	ldr r4, _08020F70 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08020F74 @ =gUnknown_81D8F35
 	b _08021108
 	.align 2, 0
@@ -6992,7 +6992,7 @@ _08020F8E:
 	ldr r4, _08020FB0 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _08020FB4 @ =gUnknown_825062C
 	ldr r0, _08020FB8 @ =gUnknown_2023E82
 	ldrb r0, [r0, 0x3]
@@ -7034,7 +7034,7 @@ _08020FD8:
 	ldr r1, _08021014 @ =gUnknown_2023D4A
 	ldrh r1, [r1]
 	strh r1, [r0]
-	bl sub_8044EC8
+	bl Random
 	mov r3, r9
 	ldrb r1, [r3]
 	adds r2, r1, 0
@@ -7086,7 +7086,7 @@ _08021058:
 	cmp r0, 0
 	beq _080210EC
 	adds r0, r3, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r1, _080210D0 @ =gUnknown_2023D68
@@ -7121,7 +7121,7 @@ _08021058:
 	ldr r4, _080210E0 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _080210E4 @ =gUnknown_81D8F86
 	str r0, [r4]
 	mov r1, r9
@@ -7160,7 +7160,7 @@ _080210FC:
 	ldr r4, _0802111C @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08021120 @ =gUnknown_81D8FEB
 _08021108:
 	str r0, [r4]
@@ -7178,8 +7178,8 @@ _0802111C: .4byte gUnknown_2023D74
 _08021120: .4byte gUnknown_81D8FEB
 	thumb_func_end sub_801FF20
 
-	thumb_func_start sub_8021124
-sub_8021124: @ 8021124
+	thumb_func_start atk15_seteffectwithchance
+atk15_seteffectwithchance: @ 8021124
 	push {r4,lr}
 	ldr r2, _08021150 @ =gUnknown_2023BE4
 	ldr r0, _08021154 @ =gUnknown_2023D6B
@@ -7238,7 +7238,7 @@ _08021194: .4byte gUnknown_2023D4A
 _08021198: .4byte gUnknown_2023E82
 _0802119C: .4byte gUnknown_2023DCC
 _080211A0:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -7290,30 +7290,30 @@ _080211F2:
 _08021204: .4byte gUnknown_2023D74
 _08021208: .4byte gUnknown_2023E82
 _0802120C: .4byte gUnknown_2023FC4
-	thumb_func_end sub_8021124
+	thumb_func_end atk15_seteffectwithchance
 
-	thumb_func_start sub_8021210
-sub_8021210: @ 8021210
+	thumb_func_start atk16_seteffectprimary
+atk16_seteffectprimary: @ 8021210
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
 	bl sub_801FF20
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8021210
+	thumb_func_end atk16_seteffectprimary
 
-	thumb_func_start sub_8021220
-sub_8021220: @ 8021220
+	thumb_func_start atk17_seteffectsecondary
+atk17_seteffectsecondary: @ 8021220
 	push {lr}
 	movs r0, 0
 	movs r1, 0
 	bl sub_801FF20
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8021220
+	thumb_func_end atk17_seteffectsecondary
 
-	thumb_func_start sub_8021230
-sub_8021230: @ 8021230
+	thumb_func_start atk18_clearstatusfromeffect
+atk18_clearstatusfromeffect: @ 8021230
 	push {lr}
 	ldr r0, _08021254 @ =gUnknown_2023D74
 	ldr r0, [r0]
@@ -7369,10 +7369,10 @@ _0802129C: .4byte gUnknown_825053C
 _080212A0: .4byte gUnknown_2023E82
 _080212A4: .4byte gUnknown_2023D74
 _080212A8: .4byte gUnknown_2023FC4
-	thumb_func_end sub_8021230
+	thumb_func_end atk18_clearstatusfromeffect
 
-	thumb_func_start sub_80212AC
-sub_80212AC: @ 80212AC
+	thumb_func_start atk19_tryfaintmon
+atk19_tryfaintmon: @ 80212AC
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -7412,10 +7412,10 @@ _080212E4:
 	ldrb r0, [r1, 0x6]
 	lsls r0, 24
 	orrs r4, r0
-	bl sub_801756C
+	bl BattleScriptPop
 	str r4, [r6]
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	ldr r1, _08021328 @ =gUnknown_2023DDE
 	lsls r0, 24
 	lsrs r0, 23
@@ -7490,10 +7490,10 @@ _08021392:
 	str r0, [r5]
 	ldr r0, [r6]
 	adds r0, 0x7
-	bl sub_8017520
+	bl BattleScriptPush
 	str r4, [r6]
 	ldrb r0, [r7]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080213F4
@@ -7541,7 +7541,7 @@ _08021400:
 	ldr r1, _08021554 @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4, 0x20]
 	ldr r0, _08021558 @ =gUnknown_2023FE8
 	ldr r0, [r0]
@@ -7573,7 +7573,7 @@ _0802142C:
 	str r1, [r2]
 	ldr r4, _08021568 @ =gUnknown_2023D74
 	ldr r0, [r4]
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _0802156C @ =gUnknown_2023D50
 	mov r0, r9
 	muls r0, r5
@@ -7608,10 +7608,10 @@ _08021492:
 	ldr r0, _0802155C @ =gUnknown_2023D6B
 	mov r8, r0
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -7644,7 +7644,7 @@ _08021492:
 	strb r5, [r0]
 	ldr r5, _08021568 @ =gUnknown_2023D74
 	ldr r0, [r5]
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08021580 @ =gUnknown_81D8FA3
 	str r0, [r5]
 	ldr r5, _08021584 @ =gUnknown_2023BC4
@@ -7663,9 +7663,9 @@ _08021492:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08021588 @ =gUnknown_2022AB8
 	movs r0, 0xFD
 	strb r0, [r1]
@@ -7721,7 +7721,7 @@ _08021592:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80212AC
+	thumb_func_end atk19_tryfaintmon
 
 	thumb_func_start sub_80215A0
 sub_80215A0: @ 80215A0
@@ -7737,9 +7737,9 @@ sub_80215A0: @ 80215A0
 	ldr r4, _080215D8 @ =gUnknown_2023BC4
 	strb r0, [r4]
 	movs r0, 0
-	bl sub_800E134
+	bl EmitFaintAnimation
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -7782,9 +7782,9 @@ sub_80215DC: @ 80215DC
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	bl sub_8012BC8
 	ldr r0, [r5]
 	adds r0, 0x2
@@ -7801,8 +7801,8 @@ _08021638: .4byte gUnknown_2023BC4
 _0802163C: .4byte gUnknown_2023BE4
 	thumb_func_end sub_80215DC
 
-	thumb_func_start sub_8021640
-sub_8021640: @ 8021640
+	thumb_func_start atk1C_jumpifstatus
+atk1C_jumpifstatus: @ 8021640
 	push {r4,r5,lr}
 	ldr r5, _0802169C @ =gUnknown_2023D74
 	ldr r0, [r5]
@@ -7861,10 +7861,10 @@ _080216AC:
 	bx r0
 	.align 2, 0
 _080216B4: .4byte gUnknown_2023D74
-	thumb_func_end sub_8021640
+	thumb_func_end atk1C_jumpifstatus
 
-	thumb_func_start sub_80216B8
-sub_80216B8: @ 80216B8
+	thumb_func_start atk1D_jumpifstatus2
+atk1D_jumpifstatus2: @ 80216B8
 	push {r4,r5,lr}
 	ldr r5, _08021714 @ =gUnknown_2023D74
 	ldr r0, [r5]
@@ -7923,10 +7923,10 @@ _08021724:
 	bx r0
 	.align 2, 0
 _0802172C: .4byte gUnknown_2023D74
-	thumb_func_end sub_80216B8
+	thumb_func_end atk1D_jumpifstatus2
 
-	thumb_func_start sub_8021730
-sub_8021730: @ 8021730
+	thumb_func_start atk1E_jumpifability
+atk1E_jumpifability: @ 8021730
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -8036,10 +8036,10 @@ _0802180A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8021730
+	thumb_func_end atk1E_jumpifability
 
-	thumb_func_start sub_8021818
-sub_8021818: @ 8021818
+	thumb_func_start atk1F_jumpifsideaffecting
+atk1F_jumpifsideaffecting: @ 8021818
 	push {r4-r6,lr}
 	ldr r0, _08021830 @ =gUnknown_2023D74
 	ldr r0, [r0]
@@ -8048,7 +8048,7 @@ sub_8021818: @ 8021818
 	bne _08021838
 	ldr r0, _08021834 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	b _08021842
 	.align 2, 0
 _08021830: .4byte gUnknown_2023D74
@@ -8056,7 +8056,7 @@ _08021834: .4byte gUnknown_2023D6B
 _08021838:
 	ldr r0, _08021878 @ =gUnknown_2023D6C
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r4, 0x1
 _08021842:
 	ands r4, r0
@@ -8097,10 +8097,10 @@ _0802188A:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8021818
+	thumb_func_end atk1F_jumpifsideaffecting
 
-	thumb_func_start sub_8021890
-sub_8021890: @ 8021890
+	thumb_func_start atk20_jumpifstat
+atk20_jumpifstat: @ 8021890
 	push {r4,r5,lr}
 	movs r5, 0
 	ldr r4, _080218C4 @ =gUnknown_2023D74
@@ -8225,10 +8225,10 @@ _0802197C:
 	bx r0
 	.align 2, 0
 _08021984: .4byte gUnknown_2023D74
-	thumb_func_end sub_8021890
+	thumb_func_end atk20_jumpifstat
 
-	thumb_func_start sub_8021988
-sub_8021988: @ 8021988
+	thumb_func_start atk21_jumpifstatus3condition
+atk21_jumpifstatus3condition: @ 8021988
 	push {r4-r6,lr}
 	ldr r4, _080219DC @ =gUnknown_2023D74
 	ldr r0, [r4]
@@ -8295,10 +8295,10 @@ _08021A06:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8021988
+	thumb_func_end atk21_jumpifstatus3condition
 
-	thumb_func_start sub_8021A0C
-sub_8021A0C: @ 8021A0C
+	thumb_func_start atk22_jumpiftype
+atk22_jumpiftype: @ 8021A0C
 	push {r4-r6,lr}
 	ldr r4, _08021A54 @ =gUnknown_2023D74
 	ldr r0, [r4]
@@ -8345,7 +8345,7 @@ _08021A60:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8021A0C
+	thumb_func_end atk22_jumpiftype
 
 	thumb_func_start sub_8021A68
 sub_8021A68: @ 8021A68
@@ -8402,7 +8402,7 @@ _08021AC8:
 _08021AE4:
 	ldr r4, _08021B34 @ =gUnknown_2023D6D
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8456,12 +8456,12 @@ _08021B54:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08021BC2
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08021BC2
 	ldr r0, _08021BA8 @ =gUnknown_825E45C
@@ -8476,7 +8476,7 @@ _08021B54:
 _08021B88:
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xAF
@@ -8493,7 +8493,7 @@ _08021BA8: .4byte gUnknown_825E45C
 _08021BAC: .4byte gUnknown_3005008
 _08021BB0: .4byte 0x0000311a
 _08021BB4:
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08021BBC:
@@ -8596,7 +8596,7 @@ _08021C74:
 	ldr r1, _08021CAC @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xAF
@@ -8616,7 +8616,7 @@ _08021CAC: .4byte gUnknown_2024284
 _08021CB0: .4byte gUnknown_3005008
 _08021CB4: .4byte 0x0000311a
 _08021CB8:
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08021CC0:
@@ -8646,7 +8646,7 @@ _08021CE8:
 	ldr r1, _08021D18 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x64
 	bne _08021D24
 	ldr r1, [r5]
@@ -8681,9 +8681,9 @@ _08021D24:
 	ldrb r0, [r0, 0x12]
 	cmp r0, 0
 	bne _08021D52
-	bl sub_8035314
+	bl BattleStopLowHpSound
 	ldr r0, _08021D94 @ =0x00000137
-	bl sub_80722A0
+	bl PlayBGM
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x12]
 	adds r0, 0x1
@@ -8697,7 +8697,7 @@ _08021D52:
 	ldr r1, _08021D9C @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08021D6C
 	b _08021F4C
@@ -8768,7 +8768,7 @@ _08021DEA:
 	muls r0, r1
 	ldr r1, _08021E38 @ =gUnknown_2024284
 	adds r0, r1
-	bl sub_804425C
+	bl IsTradedMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _08021E3C
@@ -8914,7 +8914,7 @@ _08021EB6:
 	mov r2, r8
 	ldrb r1, [r2]
 	movs r0, 0xD
-	bl sub_80173AC
+	bl PrepareStringBattle
 	ldr r0, [r6]
 	ldrb r1, [r0, 0x10]
 	movs r0, 0x64
@@ -8967,7 +8967,7 @@ _08021F82:
 	ldr r5, _08022068 @ =gUnknown_2024284
 	adds r0, r5
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08022052
 	ldr r0, [r7]
@@ -8975,7 +8975,7 @@ _08021F82:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x64
 	beq _08022052
 	ldr r0, [r7]
@@ -8983,7 +8983,7 @@ _08021F82:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r4, _0802206C @ =gUnknown_2023FF4
 	ldr r1, [r4]
 	ldr r1, [r1, 0x10]
@@ -8993,7 +8993,7 @@ _08021F82:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3B
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r4]
 	ldr r1, [r1, 0x10]
 	strh r0, [r1, 0x2]
@@ -9002,7 +9002,7 @@ _08021F82:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3C
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r4]
 	ldr r1, [r1, 0x10]
 	strh r0, [r1, 0x4]
@@ -9011,7 +9011,7 @@ _08021F82:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r4]
 	ldr r1, [r1, 0x10]
 	strh r0, [r1, 0x6]
@@ -9020,7 +9020,7 @@ _08021F82:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3E
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r4]
 	ldr r1, [r1, 0x10]
 	strh r0, [r1, 0x8]
@@ -9029,7 +9029,7 @@ _08021F82:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3F
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [r4]
 	ldr r1, [r1, 0x10]
 	strh r0, [r1, 0xA]
@@ -9043,9 +9043,9 @@ _08021F82:
 	ldr r0, _08022074 @ =gUnknown_2023D50
 	ldrh r2, [r0]
 	movs r0, 0
-	bl sub_800E624
+	bl EmitExpUpdate
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08022052:
 	ldr r1, _08022078 @ =gUnknown_2023FC4
 	ldrb r0, [r1, 0x1C]
@@ -9110,7 +9110,7 @@ _080220B0:
 	ldr r1, _0802232C @ =gUnknown_2024284
 	adds r0, r1
 	adds r1, r2, 0
-	bl sub_8035244
+	bl HandleLowHpMusicChange
 _080220DA:
 	ldr r1, _08022330 @ =gUnknown_2022AB8
 	movs r3, 0xFD
@@ -9143,12 +9143,12 @@ _080220DA:
 	ldr r7, _0802232C @ =gUnknown_2024284
 	adds r0, r7
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r4, 0x4]
 	movs r0, 0x1
 	negs r0, r0
 	strb r0, [r4, 0x5]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r2, _08022338 @ =gUnknown_3004FD4
 	ldr r1, _0802233C @ =gUnknown_825E45C
 	mov r4, r9
@@ -9198,7 +9198,7 @@ _080220DA:
 	muls r0, r2
 	adds r0, r7
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r4, 0
 	adds r1, 0x2A
 	strb r0, [r1]
@@ -9210,7 +9210,7 @@ _080220DA:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4, 0x28]
 	mov r1, r9
 	ldr r0, [r1]
@@ -9220,7 +9220,7 @@ _080220DA:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4, 0x2C]
 	mov r1, r9
 	ldr r0, [r1]
@@ -9230,7 +9230,7 @@ _080220DA:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3B
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4, 0x2]
 	mov r1, r9
 	ldr r0, [r1]
@@ -9240,7 +9240,7 @@ _080220DA:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3C
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4, 0x4]
 	mov r1, r9
 	ldr r0, [r1]
@@ -9250,7 +9250,7 @@ _080220DA:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4, 0x6]
 	mov r1, r9
 	ldr r0, [r1]
@@ -9260,7 +9260,7 @@ _080220DA:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4, 0x6]
 	mov r1, r9
 	ldr r0, [r1]
@@ -9270,7 +9270,7 @@ _080220DA:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3E
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4, 0x8]
 	mov r1, r9
 	ldr r0, [r1]
@@ -9280,7 +9280,7 @@ _080220DA:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3F
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4, 0xA]
 _08022246:
 	ldr r0, _08022328 @ =gUnknown_2023BCE
@@ -9311,7 +9311,7 @@ _08022256:
 	ldr r4, _0802232C @ =gUnknown_2024284
 	adds r0, r4
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xDA
 	strb r0, [r1]
@@ -9320,7 +9320,7 @@ _08022256:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	ldr r0, [r7]
@@ -9328,7 +9328,7 @@ _08022256:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xDC
 	strh r0, [r1]
@@ -9337,7 +9337,7 @@ _08022256:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3B
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xB2
 	strh r0, [r1]
@@ -9346,7 +9346,7 @@ _08022256:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3C
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xB4
 	strh r0, [r1]
@@ -9355,7 +9355,7 @@ _08022256:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	movs r2, 0xB6
 	adds r2, r6
 	mov r8, r2
@@ -9365,7 +9365,7 @@ _08022256:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	ldr r0, [r7]
@@ -9373,7 +9373,7 @@ _08022256:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3E
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xB8
 	strh r0, [r1]
@@ -9499,17 +9499,17 @@ _0802240C:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0802243C
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0802243C
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r6, r0
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -9535,17 +9535,17 @@ _08022454:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08022484
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08022484
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r0, r6, r0
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -9693,8 +9693,8 @@ _0802258A:
 _08022594: .4byte gUnknown_2023D74
 	thumb_func_end sub_80223F8
 
-	thumb_func_start sub_8022598
-sub_8022598: @ 8022598
+	thumb_func_start MoveValuesCleanUp
+MoveValuesCleanUp: @ 8022598
 	ldr r1, _080225C0 @ =gUnknown_2023DCC
 	movs r0, 0
 	strb r0, [r1]
@@ -9722,12 +9722,12 @@ _080225C8: .4byte gUnknown_2023D71
 _080225CC: .4byte gUnknown_2023E82
 _080225D0: .4byte gUnknown_2023DD0
 _080225D4: .4byte 0xffffbfff
-	thumb_func_end sub_8022598
+	thumb_func_end MoveValuesCleanUp
 
-	thumb_func_start sub_80225D8
-sub_80225D8: @ 80225D8
+	thumb_func_start atk25_movevaluescleanup
+atk25_movevaluescleanup: @ 80225D8
 	push {lr}
-	bl sub_8022598
+	bl MoveValuesCleanUp
 	ldr r1, _080225EC @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -9736,10 +9736,10 @@ sub_80225D8: @ 80225D8
 	bx r0
 	.align 2, 0
 _080225EC: .4byte gUnknown_2023D74
-	thumb_func_end sub_80225D8
+	thumb_func_end atk25_movevaluescleanup
 
-	thumb_func_start sub_80225F0
-sub_80225F0: @ 80225F0
+	thumb_func_start atk26_setmultihit
+atk26_setmultihit: @ 80225F0
 	ldr r3, _08022600 @ =gUnknown_2023D72
 	ldr r2, _08022604 @ =gUnknown_2023D74
 	ldr r0, [r2]
@@ -9751,10 +9751,10 @@ sub_80225F0: @ 80225F0
 	.align 2, 0
 _08022600: .4byte gUnknown_2023D72
 _08022604: .4byte gUnknown_2023D74
-	thumb_func_end sub_80225F0
+	thumb_func_end atk26_setmultihit
 
-	thumb_func_start sub_8022608
-sub_8022608: @ 8022608
+	thumb_func_start atk27_decrementmultihit
+atk27_decrementmultihit: @ 8022608
 	push {lr}
 	ldr r1, _08022624 @ =gUnknown_2023D72
 	ldrb r0, [r1]
@@ -9790,10 +9790,10 @@ _08022646:
 	bx r0
 	.align 2, 0
 _0802264C: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022608
+	thumb_func_end atk27_decrementmultihit
 
-	thumb_func_start sub_8022650
-sub_8022650: @ 8022650
+	thumb_func_start atk28_goto
+atk28_goto: @ 8022650
 	ldr r3, _0802266C @ =gUnknown_2023D74
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -9810,10 +9810,10 @@ sub_8022650: @ 8022650
 	bx lr
 	.align 2, 0
 _0802266C: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022650
+	thumb_func_end atk28_goto
 
-	thumb_func_start sub_8022670
-sub_8022670: @ 8022670
+	thumb_func_start atk29_jumpifbyte
+atk29_jumpifbyte: @ 8022670
 	push {r4-r6,lr}
 	ldr r3, _080226B4 @ =gUnknown_2023D74
 	ldr r1, [r3]
@@ -9896,10 +9896,10 @@ _08022708:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8022670
+	thumb_func_end atk29_jumpifbyte
 
-	thumb_func_start sub_8022710
-sub_8022710: @ 8022710
+	thumb_func_start atk2A_jumpifhalfword
+atk2A_jumpifhalfword: @ 8022710
 	push {r4-r6,lr}
 	ldr r3, _0802275C @ =gUnknown_2023D74
 	ldr r1, [r3]
@@ -9985,10 +9985,10 @@ _080227B0:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8022710
+	thumb_func_end atk2A_jumpifhalfword
 
-	thumb_func_start sub_80227B8
-sub_80227B8: @ 80227B8
+	thumb_func_start atk2B_jumpifword
+atk2B_jumpifword: @ 80227B8
 	push {r4-r6,lr}
 	ldr r3, _08022810 @ =gUnknown_2023D74
 	ldr r1, [r3]
@@ -10080,10 +10080,10 @@ _08022864:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80227B8
+	thumb_func_end atk2B_jumpifword
 
-	thumb_func_start sub_802286C
-sub_802286C: @ 802286C
+	thumb_func_start atk2C_jumpifarrayequal
+atk2C_jumpifarrayequal: @ 802286C
 	push {r4-r7,lr}
 	ldr r2, _080228C4 @ =gUnknown_2023D74
 	ldr r3, [r2]
@@ -10155,10 +10155,10 @@ _080228EC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802286C
+	thumb_func_end atk2C_jumpifarrayequal
 
-	thumb_func_start sub_80228F4
-sub_80228F4: @ 80228F4
+	thumb_func_start atk2D_jumpifarraynotequal
+atk2D_jumpifarraynotequal: @ 80228F4
 	push {r4-r7,lr}
 	movs r7, 0
 	ldr r3, _08022968 @ =gUnknown_2023D74
@@ -10229,10 +10229,10 @@ _08022970:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80228F4
+	thumb_func_end atk2D_jumpifarraynotequal
 
-	thumb_func_start sub_8022978
-sub_8022978: @ 8022978
+	thumb_func_start atk2E_setbyte
+atk2E_setbyte: @ 8022978
 	ldr r3, _0802299C @ =gUnknown_2023D74
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -10253,10 +10253,10 @@ sub_8022978: @ 8022978
 	bx lr
 	.align 2, 0
 _0802299C: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022978
+	thumb_func_end atk2E_setbyte
 
-	thumb_func_start sub_80229A0
-sub_80229A0: @ 80229A0
+	thumb_func_start atk2F_addbyte
+atk2F_addbyte: @ 80229A0
 	ldr r3, _080229C8 @ =gUnknown_2023D74
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -10279,10 +10279,10 @@ sub_80229A0: @ 80229A0
 	bx lr
 	.align 2, 0
 _080229C8: .4byte gUnknown_2023D74
-	thumb_func_end sub_80229A0
+	thumb_func_end atk2F_addbyte
 
-	thumb_func_start sub_80229CC
-sub_80229CC: @ 80229CC
+	thumb_func_start atk30_subbyte
+atk30_subbyte: @ 80229CC
 	ldr r3, _080229F4 @ =gUnknown_2023D74
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -10305,10 +10305,10 @@ sub_80229CC: @ 80229CC
 	bx lr
 	.align 2, 0
 _080229F4: .4byte gUnknown_2023D74
-	thumb_func_end sub_80229CC
+	thumb_func_end atk30_subbyte
 
-	thumb_func_start sub_80229F8
-sub_80229F8: @ 80229F8
+	thumb_func_start atk31_copyarray
+atk31_copyarray: @ 80229F8
 	push {r4-r6,lr}
 	ldr r3, _08022A48 @ =gUnknown_2023D74
 	ldr r1, [r3]
@@ -10353,10 +10353,10 @@ _08022A3C:
 	bx r0
 	.align 2, 0
 _08022A48: .4byte gUnknown_2023D74
-	thumb_func_end sub_80229F8
+	thumb_func_end atk31_copyarray
 
-	thumb_func_start sub_8022A4C
-sub_8022A4C: @ 8022A4C
+	thumb_func_start atk32_copyarraywithindex
+atk32_copyarraywithindex: @ 8022A4C
 	push {r4-r7,lr}
 	ldr r3, _08022AB4 @ =gUnknown_2023D74
 	ldr r1, [r3]
@@ -10413,10 +10413,10 @@ _08022AA8:
 	bx r0
 	.align 2, 0
 _08022AB4: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022A4C
+	thumb_func_end atk32_copyarraywithindex
 
-	thumb_func_start sub_8022AB8
-sub_8022AB8: @ 8022AB8
+	thumb_func_start atk33_orbyte
+atk33_orbyte: @ 8022AB8
 	ldr r3, _08022AE0 @ =gUnknown_2023D74
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -10439,10 +10439,10 @@ sub_8022AB8: @ 8022AB8
 	bx lr
 	.align 2, 0
 _08022AE0: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022AB8
+	thumb_func_end atk33_orbyte
 
-	thumb_func_start sub_8022AE4
-sub_8022AE4: @ 8022AE4
+	thumb_func_start atk34_orhalfword
+atk34_orhalfword: @ 8022AE4
 	push {r4,lr}
 	ldr r4, _08022B18 @ =gUnknown_2023D74
 	ldr r3, [r4]
@@ -10471,10 +10471,10 @@ sub_8022AE4: @ 8022AE4
 	bx r0
 	.align 2, 0
 _08022B18: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022AE4
+	thumb_func_end atk34_orhalfword
 
-	thumb_func_start sub_8022B1C
-sub_8022B1C: @ 8022B1C
+	thumb_func_start atk35_orword
+atk35_orword: @ 8022B1C
 	push {r4,lr}
 	ldr r4, _08022B5C @ =gUnknown_2023D74
 	ldr r2, [r4]
@@ -10509,10 +10509,10 @@ sub_8022B1C: @ 8022B1C
 	bx r0
 	.align 2, 0
 _08022B5C: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022B1C
+	thumb_func_end atk35_orword
 
-	thumb_func_start sub_8022B60
-sub_8022B60: @ 8022B60
+	thumb_func_start atk36_bicbyte
+atk36_bicbyte: @ 8022B60
 	ldr r3, _08022B88 @ =gUnknown_2023D74
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -10535,10 +10535,10 @@ sub_8022B60: @ 8022B60
 	bx lr
 	.align 2, 0
 _08022B88: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022B60
+	thumb_func_end atk36_bicbyte
 
-	thumb_func_start sub_8022B8C
-sub_8022B8C: @ 8022B8C
+	thumb_func_start atk37_bichalfword
+atk37_bichalfword: @ 8022B8C
 	push {r4,lr}
 	ldr r4, _08022BC0 @ =gUnknown_2023D74
 	ldr r3, [r4]
@@ -10567,10 +10567,10 @@ sub_8022B8C: @ 8022B8C
 	bx r0
 	.align 2, 0
 _08022BC0: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022B8C
+	thumb_func_end atk37_bichalfword
 
-	thumb_func_start sub_8022BC4
-sub_8022BC4: @ 8022BC4
+	thumb_func_start atk38_bicword
+atk38_bicword: @ 8022BC4
 	push {r4,lr}
 	ldr r4, _08022C04 @ =gUnknown_2023D74
 	ldr r2, [r4]
@@ -10605,10 +10605,10 @@ sub_8022BC4: @ 8022BC4
 	bx r0
 	.align 2, 0
 _08022C04: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022BC4
+	thumb_func_end atk38_bicword
 
-	thumb_func_start sub_8022C08
-sub_8022C08: @ 8022C08
+	thumb_func_start atk39_pause
+atk39_pause: @ 8022C08
 	push {r4,r5,lr}
 	ldr r0, _08022C3C @ =gUnknown_2023BC8
 	ldr r4, [r0]
@@ -10639,7 +10639,7 @@ _08022C34:
 _08022C3C: .4byte gUnknown_2023BC8
 _08022C40: .4byte gUnknown_2023D74
 _08022C44: .4byte gUnknown_2023E7C
-	thumb_func_end sub_8022C08
+	thumb_func_end atk39_pause
 
 	thumb_func_start sub_8022C48
 sub_8022C48: @ 8022C48
@@ -10660,8 +10660,8 @@ _08022C60: .4byte gUnknown_2023BC8
 _08022C64: .4byte gUnknown_2023D74
 	thumb_func_end sub_8022C48
 
-	thumb_func_start sub_8022C68
-sub_8022C68: @ 8022C68
+	thumb_func_start atk3B_healthbar_update
+atk3B_healthbar_update: @ 8022C68
 	push {lr}
 	ldr r0, _08022C7C @ =gUnknown_2023D74
 	ldr r0, [r0]
@@ -10684,10 +10684,10 @@ _08022C8C:
 	ldr r0, _08022CB8 @ =gUnknown_2023D50
 	ldrh r1, [r0]
 	movs r0, 0
-	bl sub_800E5EC
+	bl EmitHealthBarUpdate
 	ldr r0, _08022CB0 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08022CBC @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x2
@@ -10699,15 +10699,15 @@ _08022CB0: .4byte gUnknown_2023BC4
 _08022CB4: .4byte gUnknown_2023D6B
 _08022CB8: .4byte gUnknown_2023D50
 _08022CBC: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022C68
+	thumb_func_end atk3B_healthbar_update
 
-	thumb_func_start sub_8022CC0
-sub_8022CC0: @ 8022CC0
+	thumb_func_start atk3C_return
+atk3C_return: @ 8022CC0
 	push {lr}
-	bl sub_801756C
+	bl BattleScriptPop
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8022CC0
+	thumb_func_end atk3C_return
 
 	thumb_func_start sub_8022CCC
 sub_8022CCC: @ 8022CCC
@@ -10726,8 +10726,8 @@ _08022CE4: .4byte gUnknown_2023BC4
 _08022CE8: .4byte gUnknown_2023BE3
 	thumb_func_end sub_8022CCC
 
-	thumb_func_start sub_8022CEC
-sub_8022CEC: @ 8022CEC
+	thumb_func_start atk3E_end2
+atk3E_end2: @ 8022CEC
 	ldr r1, _08022CFC @ =gUnknown_2023BC4
 	movs r0, 0
 	strb r0, [r1]
@@ -10738,12 +10738,12 @@ sub_8022CEC: @ 8022CEC
 	.align 2, 0
 _08022CFC: .4byte gUnknown_2023BC4
 _08022D00: .4byte gUnknown_2023BE3
-	thumb_func_end sub_8022CEC
+	thumb_func_end atk3E_end2
 
-	thumb_func_start sub_8022D04
-sub_8022D04: @ 8022D04
+	thumb_func_start atk3F_end3
+atk3F_end3: @ 8022D04
 	push {lr}
-	bl sub_801756C
+	bl BattleScriptPop
 	ldr r3, _08022D38 @ =gUnknown_2023FF4
 	ldr r0, [r3]
 	ldr r0, [r0, 0xC]
@@ -10770,15 +10770,15 @@ _08022D1E:
 	.align 2, 0
 _08022D38: .4byte gUnknown_2023FF4
 _08022D3C: .4byte gUnknown_3004F84
-	thumb_func_end sub_8022D04
+	thumb_func_end atk3F_end3
 
-	thumb_func_start sub_8022D40
-sub_8022D40: @ 8022D40
+	thumb_func_start atk41_call
+atk41_call: @ 8022D40
 	push {r4,lr}
 	ldr r4, _08022D6C @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x5
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -10796,10 +10796,10 @@ sub_8022D40: @ 8022D40
 	bx r0
 	.align 2, 0
 _08022D6C: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022D40
+	thumb_func_end atk41_call
 
-	thumb_func_start sub_8022D70
-sub_8022D70: @ 8022D70
+	thumb_func_start atk42_jumpiftype2
+atk42_jumpiftype2: @ 8022D70
 	push {r4,lr}
 	ldr r4, _08022DB8 @ =gUnknown_2023D74
 	ldr r0, [r4]
@@ -10845,10 +10845,10 @@ _08022DC4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8022D70
+	thumb_func_end atk42_jumpiftype2
 
-	thumb_func_start sub_8022DCC
-sub_8022DCC: @ 8022DCC
+	thumb_func_start atk43_jumpifabilitypresent
+atk43_jumpifabilitypresent: @ 8022DCC
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r4, _08022E04 @ =gUnknown_2023D74
@@ -10887,10 +10887,10 @@ _08022E0E:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8022DCC
+	thumb_func_end atk43_jumpifabilitypresent
 
-	thumb_func_start sub_8022E18
-sub_8022E18: @ 8022E18
+	thumb_func_start atk44_endselectionscript
+atk44_endselectionscript: @ 8022E18
 	ldr r0, _08022E2C @ =gUnknown_2023D6B
 	ldrb r0, [r0]
 	ldr r1, _08022E30 @ =gUnknown_2023FE8
@@ -10903,7 +10903,7 @@ sub_8022E18: @ 8022E18
 	.align 2, 0
 _08022E2C: .4byte gUnknown_2023D6B
 _08022E30: .4byte gUnknown_2023FE8
-	thumb_func_end sub_8022E18
+	thumb_func_end atk44_endselectionscript
 
 	thumb_func_start sub_8022E34
 sub_8022E34: @ 8022E34
@@ -10941,7 +10941,7 @@ _08022E6E:
 	ldrb r1, [r0, 0x2]
 	ldrh r2, [r3]
 	movs r0, 0
-	bl sub_800EB28
+	bl EmitBattleAnimation
 	ldr r0, _08022E88 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
 	b _08022EE4
@@ -10956,7 +10956,7 @@ _08022E8C:
 	cmp r0, 0
 	beq _08022EAC
 	adds r0, r2, 0x7
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08022EA8 @ =gUnknown_81D89F1
 	b _08022EEC
 	.align 2, 0
@@ -10987,10 +10987,10 @@ _08022ED8:
 	ldrb r1, [r2, 0x2]
 	ldrh r2, [r3]
 	movs r0, 0
-	bl sub_800EB28
+	bl EmitBattleAnimation
 	ldrb r0, [r6]
 _08022EE4:
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x7
 _08022EEC:
@@ -11000,8 +11000,8 @@ _08022EEC:
 	bx r0
 	thumb_func_end sub_8022E34
 
-	thumb_func_start sub_8022EF4
-sub_8022EF4: @ 8022EF4
+	thumb_func_start atk46_playanimation2
+atk46_playanimation2: @ 8022EF4
 	push {r4-r7,lr}
 	ldr r6, _08022F5C @ =gUnknown_2023D74
 	ldr r0, [r6]
@@ -11042,10 +11042,10 @@ _08022F3E:
 	ldrb r1, [r3]
 	ldrh r2, [r4]
 	movs r0, 0
-	bl sub_800EB28
+	bl EmitBattleAnimation
 	ldr r0, _08022F60 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08022F5C @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0xA
@@ -11090,9 +11090,9 @@ _08022FA4:
 	ldrb r1, [r3]
 	ldrh r2, [r4]
 	movs r0, 0
-	bl sub_800EB28
+	bl EmitBattleAnimation
 	ldrb r0, [r7]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r6]
 _08022FB6:
 	adds r0, 0xA
@@ -11101,10 +11101,10 @@ _08022FBA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8022EF4
+	thumb_func_end atk46_playanimation2
 
-	thumb_func_start sub_8022FC0
-sub_8022FC0: @ 8022FC0
+	thumb_func_start atk47_setgraphicalstatchangevalues
+atk47_setgraphicalstatchangevalues: @ 8022FC0
 	push {r4,lr}
 	movs r3, 0
 	ldr r1, _08022FDC @ =gUnknown_2023FC4
@@ -11156,10 +11156,10 @@ _08022FF8:
 	bx r0
 	.align 2, 0
 _08023018: .4byte gUnknown_2023D74
-	thumb_func_end sub_8022FC0
+	thumb_func_end atk47_setgraphicalstatchangevalues
 
-	thumb_func_start sub_802301C
-sub_802301C: @ 802301C
+	thumb_func_start atk48_playstatchangeanimation
+atk48_playstatchangeanimation: @ 802301C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -11226,7 +11226,7 @@ _0802309C:
 	ldr r6, _08023120 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
 	str r3, [sp]
-	bl sub_80751D8
+	bl GetBankIdentity
 	mov r1, r10
 	ands r1, r0
 	lsls r0, r1, 1
@@ -11379,10 +11379,10 @@ _080231B0:
 	movs r1, 0x1
 	mov r2, r8
 	str r3, [sp]
-	bl sub_800EB28
+	bl EmitBattleAnimation
 	ldr r0, _080231F0 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, _080231F4 @ =gUnknown_2023D74
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x3]
@@ -11417,10 +11417,10 @@ _080231FE:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802301C
+	thumb_func_end atk48_playstatchangeanimation
 
-	thumb_func_start sub_8023210
-sub_8023210: @ 8023210
+	thumb_func_start atk49_moveend
+atk49_moveend: @ 8023210
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -11470,7 +11470,7 @@ _08023270: .4byte gUnknown_2023D6B
 _08023274: .4byte gUnknown_2023F54
 _08023278:
 	ldrh r0, [r1, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _08023282:
@@ -11498,9 +11498,9 @@ _080232AC:
 	strb r2, [r4]
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_800EB04
+	bl EmitSpriteInvisibility
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _0802379E
 	.align 2, 0
 _080232C0: .4byte gUnknown_2023BC4
@@ -11509,9 +11509,9 @@ _080232C4:
 	strb r2, [r4]
 	movs r0, 0
 	movs r1, 0
-	bl sub_800EB04
+	bl EmitSpriteInvisibility
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r5
@@ -11530,7 +11530,7 @@ _080232F0:
 	str r0, [r5]
 	ldr r0, _08023324 @ =gUnknown_2023FC4
 	strb r4, [r0, 0x14]
-	bl sub_8022598
+	bl MoveValuesCleanUp
 	ldr r2, _08023328 @ =gUnknown_81D65A8
 	mov r0, r8
 	ldrh r1, [r0]
@@ -11542,7 +11542,7 @@ _080232F0:
 	lsls r0, 2
 	adds r0, r2
 	ldr r0, [r0]
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _0802332C @ =gUnknown_2023D74
 	ldr r0, _08023330 @ =gUnknown_81D96A8
 	bl _08023BFC
@@ -11639,10 +11639,10 @@ _080233EE:
 	b _080237C8
 _080233F8:
 	adds r0, r1, 0
-	bl sub_80751C4
+	bl GetBankSide
 	adds r4, r0, 0
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -11700,7 +11700,7 @@ _08023458:
 _0802346A:
 	adds r0, r2, 0x1
 	strb r0, [r1, 0x19]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _08023498 @ =gUnknown_2023D74
 	ldr r0, _0802349C @ =gUnknown_81D8C48
 	str r0, [r1]
@@ -11786,10 +11786,10 @@ _080234FE:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
-	bl sub_8017544
+	bl MarkBufferBankForExecution
+	bl BattleScriptPushCursor
 	ldr r1, _08023554 @ =gUnknown_2023D74
 	ldr r0, _08023558 @ =gUnknown_81D9098
 	str r0, [r1]
@@ -12067,7 +12067,7 @@ _08023738:
 	cmp r0, 0
 	beq _08023764
 	adds r0, r2, 0
-	bl sub_8017354
+	bl WasUnableToUseMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _080237C8
@@ -12078,9 +12078,9 @@ _08023764:
 	strb r0, [r4]
 	movs r0, 0
 	movs r1, 0
-	bl sub_800EB04
+	bl EmitSpriteInvisibility
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, _080237AC @ =gUnknown_2023DFC
 	ldrb r2, [r5]
 	lsls r2, 2
@@ -12571,12 +12571,12 @@ _08023B28:
 	bne _08023BAC
 	ldr r7, _08023C28 @ =gUnknown_2023D6C
 	ldrb r0, [r7]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, _08023C2C @ =gUnknown_2023BE4
@@ -12659,10 +12659,10 @@ _08023C28: .4byte gUnknown_2023D6C
 _08023C2C: .4byte gUnknown_2023BE4
 _08023C30: .4byte gUnknown_2023FC4
 _08023C34: .4byte gUnknown_2023D74
-	thumb_func_end sub_8023210
+	thumb_func_end atk49_moveend
 
-	thumb_func_start sub_8023C38
-sub_8023C38: @ 8023C38
+	thumb_func_start atk4A_typecalc2
+atk4A_typecalc2: @ 8023C38
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -12869,7 +12869,7 @@ _08023DAE:
 	ldrb r0, [r0]
 	ldr r7, _08023E68 @ =gUnknown_2023D4A
 	ldrh r1, [r7]
-	bl sub_802A224
+	bl AttacksThisTurn
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x2
@@ -12949,10 +12949,10 @@ _08023E78: .4byte gUnknown_2023DA0
 _08023E7C: .4byte gUnknown_2023E82
 _08023E80: .4byte gUnknown_2023E8C
 _08023E84: .4byte gUnknown_2023D74
-	thumb_func_end sub_8023C38
+	thumb_func_end atk4A_typecalc2
 
-	thumb_func_start sub_8023E88
-sub_8023E88: @ 8023E88
+	thumb_func_start atk4B_returnatktoball
+atk4B_returnatktoball: @ 8023E88
 	push {r4,lr}
 	ldr r4, _08023EC4 @ =gUnknown_2023BC4
 	ldr r0, _08023EC8 @ =gUnknown_2023D6B
@@ -12971,9 +12971,9 @@ sub_8023E88: @ 8023E88
 	bne _08023EB6
 	movs r0, 0
 	movs r1, 0
-	bl sub_800E0B4
+	bl EmitReturnMonToBall
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08023EB6:
 	ldr r1, _08023ED4 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -12988,10 +12988,10 @@ _08023EC8: .4byte gUnknown_2023D6B
 _08023ECC: .4byte gUnknown_2023DD0
 _08023ED0: .4byte gUnknown_825E45C
 _08023ED4: .4byte gUnknown_2023D74
-	thumb_func_end sub_8023E88
+	thumb_func_end atk4B_returnatktoball
 
-	thumb_func_start sub_8023ED8
-sub_8023ED8: @ 8023ED8
+	thumb_func_start atk4C_getswitchedmondata
+atk4C_getswitchedmondata: @ 8023ED8
 	push {r4,r5,lr}
 	ldr r0, _08023F30 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -13023,9 +13023,9 @@ sub_8023ED8: @ 8023ED8
 	ldrb r2, [r0]
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFA4
+	bl EmitGetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -13040,7 +13040,7 @@ _08023F38: .4byte gUnknown_2023BC4
 _08023F3C: .4byte gUnknown_2023BCE
 _08023F40: .4byte gUnknown_2023FE8
 _08023F44: .4byte gUnknown_825E45C
-	thumb_func_end sub_8023ED8
+	thumb_func_end atk4C_getswitchedmondata
 
 	thumb_func_start sub_8023F48
 sub_8023F48: @ 8023F48
@@ -13126,7 +13126,7 @@ _08023F84:
 	adds r1, 0x20
 	strb r0, [r1]
 	ldrb r0, [r7]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, _080240B8 @ =gUnknown_2023F20
@@ -13247,7 +13247,7 @@ sub_80240D4: @ 80240D4
 	ldr r6, _08024170 @ =gUnknown_2023BC4
 	strb r0, [r6]
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13264,7 +13264,7 @@ sub_80240D4: @ 80240D4
 	muls r0, r5
 	adds r0, r4
 	ldrh r0, [r0]
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	ldrb r1, [r6]
@@ -13294,9 +13294,9 @@ _0802412A:
 	ldr r0, [r4]
 	ldrb r2, [r0, 0x2]
 	movs r0, 0
-	bl sub_800E090
+	bl EmitSwitchInAnim
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
@@ -13383,7 +13383,7 @@ _08024204:
 	beq _080242A4
 	ldr r4, _08024294 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08024298 @ =gUnknown_2024284
@@ -13395,7 +13395,7 @@ _08024204:
 _08024228:
 	movs r5, 0
 	ldrb r0, [r4]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8043620
@@ -13416,17 +13416,17 @@ _0802424A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08024284
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08024284
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08024284
 	ldr r0, _08024294 @ =gUnknown_2023BC4
@@ -13453,13 +13453,13 @@ _080242A0: .4byte gUnknown_2023BCE
 _080242A4:
 	ldr r0, _080242D4 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
 	bne _080242E4
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, [r5]
@@ -13467,7 +13467,7 @@ _080242A4:
 	cmp r0, 0
 	beq _080242D8
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _080242DA
@@ -13483,7 +13483,7 @@ _080242DA:
 _080242E0: .4byte gUnknown_202402C
 _080242E4:
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, [r5]
@@ -13492,7 +13492,7 @@ _080242E4:
 	cmp r0, 0
 	beq _08024304
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _08024306
@@ -13510,17 +13510,17 @@ _0802430C:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0802434E
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0802434E
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _0802434E
 	ldr r1, _08024378 @ =gUnknown_2023BCE
@@ -13603,9 +13603,9 @@ sub_8024398: @ 8024398
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl sub_800E590
+	bl EmitChoosePokemon
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -13702,7 +13702,7 @@ _08024446:
 	movs r1, 0x2
 	bl sub_800EB54
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _080244F6
 	.align 2, 0
 _08024498: .4byte gUnknown_2023D74
@@ -13742,7 +13742,7 @@ _080244E8:
 	movs r1, 0x2
 	bl sub_800EB54
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _080244F6:
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -13798,9 +13798,9 @@ _08024518:
 	bics r0, r1
 	str r0, [r2]
 	movs r0, 0
-	bl sub_800E9A4
+	bl EmitCmd42
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _080245CE
 	.align 2, 0
 _08024570: .4byte gUnknown_2023DD0
@@ -13841,7 +13841,7 @@ _080245BC:
 	movs r1, 0x2
 	bl sub_800EB54
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	movs r0, 0x1
 	mov r9, r0
 _080245CE:
@@ -13882,9 +13882,9 @@ _080245CE:
 	bics r0, r1
 	str r0, [r2]
 	movs r0, 0
-	bl sub_800E9A4
+	bl EmitCmd42
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _0802468C
 	.align 2, 0
 _08024628: .4byte gUnknown_825E45C
@@ -13930,7 +13930,7 @@ _08024674:
 	movs r1, 0x2
 	bl sub_800EB54
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _0802468C:
 	ldr r6, _080246DC @ =gUnknown_825E45C
 	ldr r0, [r6, 0x4]
@@ -13965,9 +13965,9 @@ _0802468C:
 	bics r0, r1
 	str r0, [r2]
 	movs r0, 0
-	bl sub_800E9A4
+	bl EmitCmd42
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _0802473E
 	.align 2, 0
 _080246DC: .4byte gUnknown_825E45C
@@ -14008,7 +14008,7 @@ _08024728:
 	movs r1, 0x2
 	bl sub_800EB54
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	movs r0, 0x2
 	mov r2, r9
 	orrs r2, r0
@@ -14051,9 +14051,9 @@ _0802473E:
 	bics r0, r1
 	str r0, [r2]
 	movs r0, 0
-	bl sub_800E9A4
+	bl EmitCmd42
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _080247FC
 	.align 2, 0
 _08024798: .4byte gUnknown_825E45C
@@ -14099,7 +14099,7 @@ _080247E4:
 	movs r1, 0x2
 	bl sub_800EB54
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _080247FC:
 	ldr r1, _0802482C @ =gUnknown_2023ECC
 	ldrb r0, [r1]
@@ -14139,7 +14139,7 @@ _08024840:
 	bl sub_800EB54
 	ldr r0, _08024880 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08024850:
 	ldr r1, _08024884 @ =gUnknown_2023ECC
 	ldrb r0, [r1, 0x14]
@@ -14179,7 +14179,7 @@ _08024894:
 	bl sub_800EB54
 	ldr r0, _080248B0 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _080248A6:
 	ldr r1, _080248B4 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -14248,9 +14248,9 @@ _080248D6:
 	bics r0, r1
 	str r0, [r7]
 	movs r0, 0
-	bl sub_800E9A4
+	bl EmitCmd42
 	ldrb r0, [r6]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _0802497E
 	.align 2, 0
 _08024934: .4byte gUnknown_2022B4C
@@ -14325,9 +14325,9 @@ _0802497E:
 	bics r0, r1
 	str r0, [r2]
 	movs r0, 0
-	bl sub_800E9A4
+	bl EmitCmd42
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _08024A2E
 	.align 2, 0
 _080249DC: .4byte gUnknown_2023ECC
@@ -14518,14 +14518,14 @@ _08024B34:
 	movs r0, 0
 	adds r1, r5, 0
 	movs r3, 0
-	bl sub_800E590
+	bl EmitChoosePokemon
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r6]
 	adds r0, 0x6
 	str r0, [r6]
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _08024B94
@@ -14558,7 +14558,7 @@ _08024BB0:
 	movs r1, 0x2
 	bl sub_800EB54
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08024BC4:
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -14579,12 +14579,12 @@ _08024BE8: .4byte gUnknown_2022B4C
 _08024BEC: .4byte gUnknown_2023BCC
 _08024BF0:
 	adds r0, r7, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r4, _08024C3C @ =gUnknown_2023BC4
 	strb r0, [r4]
 	ldr r0, _08024C40 @ =gUnknown_2023D70
@@ -14605,7 +14605,7 @@ _08024C20:
 	movs r1, 0x2
 	bl sub_800EB54
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08024C2E:
 	add sp, 0x4
 	pop {r3,r4}
@@ -14905,7 +14905,7 @@ sub_8024E38: @ 8024E38
 	ands r0, r2
 	strb r0, [r1]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	ldr r5, _08024F54 @ =gUnknown_2023DDE
 	lsls r0, 24
 	lsrs r0, 23
@@ -14918,7 +14918,7 @@ sub_8024E38: @ 8024E38
 	cmp r0, 0
 	bne _08024F88
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r5
@@ -14950,7 +14950,7 @@ sub_8024E38: @ 8024E38
 	cmp r0, 0x1A
 	beq _08024F88
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r5
@@ -14959,7 +14959,7 @@ sub_8024E38: @ 8024E38
 	orrs r1, r2
 	strh r1, [r0]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	ldr r2, _08024F5C @ =gUnknown_2023DE4
 	lsls r0, 24
 	lsrs r0, 24
@@ -14987,7 +14987,7 @@ _08024F28:
 	ldr r0, _08024F64 @ =gUnknown_2023FC4
 	ldrb r1, [r4]
 	strb r1, [r0, 0x17]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
@@ -15061,7 +15061,7 @@ _08024FC4:
 	cmp r0, 0
 	bne _080250C6
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	ldr r1, _08025070 @ =gUnknown_2023DDE
 	lsls r0, 24
 	lsrs r0, 23
@@ -15103,7 +15103,7 @@ _08025012:
 _08025020:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, 0xA8
@@ -15203,14 +15203,14 @@ _080250EC: .4byte gUnknown_2023D74
 _080250F0:
 	movs r0, 0x1
 _080250F2:
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08025114 @ =gUnknown_2023BC4
 	strb r0, [r1]
 	movs r0, 0
-	bl sub_800E0F4
+	bl EmitTrainerSlide
 	ldr r0, _08025114 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08025118 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x2
@@ -15222,8 +15222,8 @@ _08025114: .4byte gUnknown_2023BC4
 _08025118: .4byte gUnknown_2023D74
 	thumb_func_end sub_80250DC
 
-	thumb_func_start sub_802511C
-sub_802511C: @ 802511C
+	thumb_func_start atk54_playse
+atk54_playse: @ 802511C
 	push {r4,r5,lr}
 	ldr r5, _0802514C @ =gUnknown_2023BC4
 	ldr r0, _08025150 @ =gUnknown_2023D6B
@@ -15236,9 +15236,9 @@ sub_802511C: @ 802511C
 	lsls r0, 8
 	orrs r1, r0
 	movs r0, 0
-	bl sub_800E9C4
+	bl EmitPlaySE
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
@@ -15249,7 +15249,7 @@ sub_802511C: @ 802511C
 _0802514C: .4byte gUnknown_2023BC4
 _08025150: .4byte gUnknown_2023D6B
 _08025154: .4byte gUnknown_2023D74
-	thumb_func_end sub_802511C
+	thumb_func_end atk54_playse
 
 	thumb_func_start sub_8025158
 sub_8025158: @ 8025158
@@ -15267,7 +15267,7 @@ sub_8025158: @ 8025158
 	movs r0, 0
 	bl sub_800E9F0
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
@@ -15280,8 +15280,8 @@ _0802518C: .4byte gUnknown_2023D6B
 _08025190: .4byte gUnknown_2023D74
 	thumb_func_end sub_8025158
 
-	thumb_func_start sub_8025194
-sub_8025194: @ 8025194
+	thumb_func_start atk56_playfaintcry
+atk56_playfaintcry: @ 8025194
 	push {r4,r5,lr}
 	ldr r5, _080251BC @ =gUnknown_2023D74
 	ldr r0, [r5]
@@ -15290,9 +15290,9 @@ sub_8025194: @ 8025194
 	ldr r4, _080251C0 @ =gUnknown_2023BC4
 	strb r0, [r4]
 	movs r0, 0
-	bl sub_800EA1C
+	bl EmitFaintingCry
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -15302,13 +15302,13 @@ sub_8025194: @ 8025194
 	.align 2, 0
 _080251BC: .4byte gUnknown_2023D74
 _080251C0: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8025194
+	thumb_func_end atk56_playfaintcry
 
-	thumb_func_start sub_80251C4
-sub_80251C4: @ 80251C4
+	thumb_func_start atk57
+atk57: @ 80251C4
 	push {r4,lr}
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r4, _080251F0 @ =gUnknown_2023BC4
 	strb r0, [r4]
 	ldr r0, _080251F4 @ =gUnknown_2023E8A
@@ -15316,7 +15316,7 @@ sub_80251C4: @ 80251C4
 	movs r0, 0
 	bl sub_800EB94
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _080251F8 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -15328,10 +15328,10 @@ sub_80251C4: @ 80251C4
 _080251F0: .4byte gUnknown_2023BC4
 _080251F4: .4byte gUnknown_2023E8A
 _080251F8: .4byte gUnknown_2023D74
-	thumb_func_end sub_80251C4
+	thumb_func_end atk57
 
-	thumb_func_start sub_80251FC
-sub_80251FC: @ 80251FC
+	thumb_func_start atk58_returntoball
+atk58_returntoball: @ 80251FC
 	push {r4,r5,lr}
 	ldr r5, _08025228 @ =gUnknown_2023D74
 	ldr r0, [r5]
@@ -15341,9 +15341,9 @@ sub_80251FC: @ 80251FC
 	strb r0, [r4]
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_800E0B4
+	bl EmitReturnMonToBall
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -15353,10 +15353,10 @@ sub_80251FC: @ 80251FC
 	.align 2, 0
 _08025228: .4byte gUnknown_2023D74
 _0802522C: .4byte gUnknown_2023BC4
-	thumb_func_end sub_80251FC
+	thumb_func_end atk58_returntoball
 
-	thumb_func_start sub_8025230
-sub_8025230: @ 8025230
+	thumb_func_start atk59_handlelearnnewmove
+atk59_handlelearnnewmove: @ 8025230
 	push {r4-r7,lr}
 	ldr r0, _080252A4 @ =gUnknown_2023D74
 	ldr r2, [r0]
@@ -15388,7 +15388,7 @@ sub_8025230: @ 8025230
 	ldr r1, _080252AC @ =gUnknown_2024284
 	adds r0, r1
 	ldrb r1, [r2, 0x9]
-	bl sub_803EA88
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _080252B0 @ =0x0000fffe
@@ -15404,7 +15404,7 @@ _0802527E:
 	ldr r1, _080252AC @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0
-	bl sub_803EA88
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, r7
@@ -15434,7 +15434,7 @@ _080252C4: .4byte 0x0000ffff
 _080252C8: .4byte gUnknown_2023D74
 _080252CC:
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08025364 @ =gUnknown_2023BC4
 	strb r0, [r1]
 	ldr r2, _08025368 @ =gUnknown_2023BCE
@@ -15462,7 +15462,7 @@ _080252CC:
 	bne _0802530C
 	adds r0, r2, r4
 	adds r1, r5, 0
-	bl sub_803E920
+	bl GiveMoveToBattleMon
 _0802530C:
 	ldr r0, _08025374 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -15471,7 +15471,7 @@ _0802530C:
 	cmp r0, 0
 	beq _08025358
 	movs r0, 0x2
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08025364 @ =gUnknown_2023BC4
 	strb r0, [r1]
 	ldr r2, _08025368 @ =gUnknown_2023BCE
@@ -15499,7 +15499,7 @@ _0802530C:
 	bne _08025358
 	adds r0, r2, r4
 	adds r1, r5, 0
-	bl sub_803E920
+	bl GiveMoveToBattleMon
 _08025358:
 	ldr r0, _08025378 @ =gUnknown_2023D74
 	str r6, [r0]
@@ -15514,7 +15514,7 @@ _0802536C: .4byte gUnknown_2023FE8
 _08025370: .4byte gUnknown_2023BE4
 _08025374: .4byte gUnknown_2022B4C
 _08025378: .4byte gUnknown_2023D74
-	thumb_func_end sub_8025230
+	thumb_func_end atk59_handlelearnnewmove
 
 	thumb_func_start sub_802537C
 sub_802537C: @ 802537C
@@ -15632,7 +15632,7 @@ _08025448:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	b _080254D8
 	.align 2, 0
 _08025484: .4byte gUnknown_30030F0
@@ -15733,17 +15733,17 @@ _0802553C:
 	adds r0, r7
 	adds r1, r5, 0
 	adds r1, 0xD
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_80441B8
+	bl IsHMMove2
 	cmp r0, 0
 	beq _0802558C
 	ldr r0, _08025580 @ =0x0000013f
 	ldr r1, _08025584 @ =gUnknown_2023BC4
 	ldrb r1, [r1]
-	bl sub_80173AC
+	bl PrepareStringBattle
 	ldr r1, _08025588 @ =gUnknown_2023FC4
 	movs r0, 0x5
 	strb r0, [r1, 0x1F]
@@ -15785,7 +15785,7 @@ _0802558C:
 	adds r0, r1, 0
 	adds r0, r7
 	adds r1, r5, 0
-	bl sub_8041064
+	bl RemoveMonPPBonus
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x10]
 	mov r1, r8
@@ -15795,7 +15795,7 @@ _0802558C:
 	ldr r7, _08025688 @ =gUnknown_2024022
 	ldrh r1, [r7]
 	adds r2, r5, 0
-	bl sub_803E964
+	bl SetMonMoveSlot
 	ldr r0, _0802568C @ =gUnknown_2023BCE
 	ldr r1, [r6]
 	ldrh r0, [r0]
@@ -15821,11 +15821,11 @@ _0802558C:
 	bne _08025622
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80410A0
+	bl RemoveBattleMonPPBonus
 	ldrh r1, [r7]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_803E9A4
+	bl SetBattleMonMoveSlot
 _08025622:
 	ldr r0, _0802569C @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -15864,12 +15864,12 @@ _08025622:
 	adds r4, 0xB0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80410A0
+	bl RemoveBattleMonPPBonus
 	ldr r0, _08025688 @ =gUnknown_2024022
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_803E9A4
+	bl SetBattleMonMoveSlot
 	b _080256D0
 	.align 2, 0
 _08025680: .4byte gUnknown_2023D74
@@ -16108,10 +16108,10 @@ sub_802581C: @ 802581C
 	bne _080258A0
 _0802586E:
 	movs r0, 0
-	bl sub_800E984
+	bl EmitHitAnimation
 	ldr r0, _0802588C @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08025888 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x2
@@ -16302,7 +16302,7 @@ _080259E8:
 	lsls r1, 2
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_809FDA0
+	bl AddMoney
 	b _08025A00
 _080259FA:
 	bl sub_8054C04
@@ -16366,8 +16366,8 @@ _08025A62:
 _08025A6C: .4byte gUnknown_2023D74
 	thumb_func_end sub_80258AC
 
-	thumb_func_start sub_8025A70
-sub_8025A70: @ 8025A70
+	thumb_func_start atk5E
+atk5E: @ 8025A70
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -16393,9 +16393,9 @@ _08025AA0:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_800DFA4
+	bl EmitGetMonData
 	ldrb r0, [r6]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
@@ -16454,10 +16454,10 @@ _08025B0C:
 _08025B18: .4byte gUnknown_2023BC8
 _08025B1C: .4byte gUnknown_20233C8
 _08025B20: .4byte gUnknown_2023C08
-	thumb_func_end sub_8025A70
+	thumb_func_end atk5E
 
-	thumb_func_start sub_8025B24
-sub_8025B24: @ 8025B24
+	thumb_func_start atk5F
+atk5F: @ 8025B24
 	push {lr}
 	ldr r0, _08025B4C @ =gUnknown_2023BC4
 	ldr r2, _08025B50 @ =gUnknown_2023D6B
@@ -16496,14 +16496,14 @@ _08025B62:
 	bx r0
 	.align 2, 0
 _08025B70: .4byte gUnknown_2023D74
-	thumb_func_end sub_8025B24
+	thumb_func_end atk5F
 
-	thumb_func_start sub_8025B74
-sub_8025B74: @ 8025B74
+	thumb_func_start atk60_incrementgamestat
+atk60_incrementgamestat: @ 8025B74
 	push {lr}
 	ldr r0, _08025B9C @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08025B8E
@@ -16521,10 +16521,10 @@ _08025B8E:
 	.align 2, 0
 _08025B9C: .4byte gUnknown_2023D6B
 _08025BA0: .4byte gUnknown_2023D74
-	thumb_func_end sub_8025B74
+	thumb_func_end atk60_incrementgamestat
 
-	thumb_func_start sub_8025BA4
-sub_8025BA4: @ 8025BA4
+	thumb_func_start atk61_drawpartystatussummary
+atk61_drawpartystatussummary: @ 8025BA4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -16540,7 +16540,7 @@ sub_8025BA4: @ 8025BA4
 	ldr r1, _08025C10 @ =gUnknown_2023BC4
 	strb r0, [r1]
 	ldrb r0, [r1]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, _08025C14 @ =gUnknown_202402C
 	mov r8, r1
@@ -16559,12 +16559,12 @@ _08025BDC:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08025C00
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -16584,11 +16584,11 @@ _08025C1C: .4byte 0x0000ffff
 _08025C20:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 _08025C32:
 	str r0, [r6]
 	adds r6, 0x8
@@ -16599,10 +16599,10 @@ _08025C32:
 	movs r0, 0
 	mov r1, sp
 	movs r2, 0x1
-	bl sub_800EA7C
+	bl EmitDrawPartyStatusSummary
 	ldr r0, _08025C64 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08025C68 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x2
@@ -16617,10 +16617,10 @@ _08025C58:
 	.align 2, 0
 _08025C64: .4byte gUnknown_2023BC4
 _08025C68: .4byte gUnknown_2023D74
-	thumb_func_end sub_8025BA4
+	thumb_func_end atk61_drawpartystatussummary
 
-	thumb_func_start sub_8025C6C
-sub_8025C6C: @ 8025C6C
+	thumb_func_start atk62
+atk62: @ 8025C6C
 	push {r4,r5,lr}
 	ldr r5, _08025C94 @ =gUnknown_2023D74
 	ldr r0, [r5]
@@ -16629,9 +16629,9 @@ sub_8025C6C: @ 8025C6C
 	ldr r4, _08025C98 @ =gUnknown_2023BC4
 	strb r0, [r4]
 	movs r0, 0
-	bl sub_800EAC4
+	bl EmitCmd49
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -16641,10 +16641,10 @@ sub_8025C6C: @ 8025C6C
 	.align 2, 0
 _08025C94: .4byte gUnknown_2023D74
 _08025C98: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8025C6C
+	thumb_func_end atk62
 
-	thumb_func_start sub_8025C9C
-sub_8025C9C: @ 8025C9C
+	thumb_func_start atk63_jumptorandomattack
+atk63_jumptorandomattack: @ 8025C9C
 	push {r4,lr}
 	ldr r0, _08025CB4 @ =gUnknown_2023D74
 	ldr r1, [r0]
@@ -16691,10 +16691,10 @@ _08025CF0: .4byte gUnknown_2023D4A
 _08025CF4: .4byte gUnknown_2023D4E
 _08025CF8: .4byte gUnknown_81D65A8
 _08025CFC: .4byte gUnknown_8250C04
-	thumb_func_end sub_8025C9C
+	thumb_func_end atk63_jumptorandomattack
 
-	thumb_func_start sub_8025D00
-sub_8025D00: @ 8025D00
+	thumb_func_start atk64_statusanimation
+atk64_statusanimation: @ 8025D00
 	push {r4,lr}
 	ldr r0, _08025D70 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -16737,9 +16737,9 @@ sub_8025D00: @ 8025D00
 	ldr r2, [r0]
 	movs r0, 0
 	movs r1, 0
-	bl sub_800E6AC
+	bl EmitStatusAnimation
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08025D60:
 	ldr r1, _08025D74 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -16758,10 +16758,10 @@ _08025D80: .4byte 0x000400c0
 _08025D84: .4byte gUnknown_2023E0C
 _08025D88: .4byte gUnknown_2023DD0
 _08025D8C: .4byte gUnknown_2023BE4
-	thumb_func_end sub_8025D00
+	thumb_func_end atk64_statusanimation
 
-	thumb_func_start sub_8025D90
-sub_8025D90: @ 8025D90
+	thumb_func_start atk65_status2animation
+atk65_status2animation: @ 8025D90
 	push {r4,r5,lr}
 	ldr r0, _08025E18 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -16816,9 +16816,9 @@ sub_8025D90: @ 8025D90
 	ands r2, r3
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_800E6AC
+	bl EmitStatusAnimation
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08025E08:
 	ldr r1, _08025E1C @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -16837,10 +16837,10 @@ _08025E28: .4byte 0x000400c0
 _08025E2C: .4byte gUnknown_2023E0C
 _08025E30: .4byte gUnknown_2023DD0
 _08025E34: .4byte gUnknown_2023BE4
-	thumb_func_end sub_8025D90
+	thumb_func_end atk65_status2animation
 
-	thumb_func_start sub_8025E38
-sub_8025E38: @ 8025E38
+	thumb_func_start atk66_chosenstatusanimation
+atk66_chosenstatusanimation: @ 8025E38
 	push {r4,r5,lr}
 	ldr r0, _08025EB0 @ =gUnknown_2023BC8
 	ldr r0, [r0]
@@ -16888,9 +16888,9 @@ sub_8025E38: @ 8025E38
 	bne _08025EA2
 	ldrb r1, [r4, 0x2]
 	movs r0, 0
-	bl sub_800E6AC
+	bl EmitStatusAnimation
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08025EA2:
 	ldr r1, _08025EB4 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -16908,10 +16908,10 @@ _08025EBC: .4byte gUnknown_2023DFC
 _08025EC0: .4byte 0x000400c0
 _08025EC4: .4byte gUnknown_2023E0C
 _08025EC8: .4byte gUnknown_2023DD0
-	thumb_func_end sub_8025E38
+	thumb_func_end atk66_chosenstatusanimation
 
-	thumb_func_start sub_8025ECC
-sub_8025ECC: @ 8025ECC
+	thumb_func_start atk67_yesnobox
+atk67_yesnobox: @ 8025ECC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _08025EE0 @ =gUnknown_2023E82
@@ -17014,10 +17014,10 @@ _08025F9A:
 	bx r0
 	.align 2, 0
 _08025FA4: .4byte gUnknown_2023D74
-	thumb_func_end sub_8025ECC
+	thumb_func_end atk67_yesnobox
 
-	thumb_func_start sub_8025FA8
-sub_8025FA8: @ 8025FA8
+	thumb_func_start atk68_cancelallactions
+atk68_cancelallactions: @ 8025FA8
 	push {r4,r5,lr}
 	movs r1, 0
 	ldr r2, _08025FD4 @ =gUnknown_2023BCC
@@ -17045,10 +17045,10 @@ _08025FC6:
 _08025FD4: .4byte gUnknown_2023BCC
 _08025FD8: .4byte gUnknown_2023D74
 _08025FDC: .4byte gUnknown_2023BDA
-	thumb_func_end sub_8025FA8
+	thumb_func_end atk68_cancelallactions
 
-	thumb_func_start sub_8025FE0
-sub_8025FE0: @ 8025FE0
+	thumb_func_start atk69_adjustsetdamage
+atk69_adjustsetdamage: @ 8025FE0
 	push {r4-r7,lr}
 	ldr r7, _08026008 @ =gUnknown_2023BE4
 	ldr r6, _0802600C @ =gUnknown_2023D6C
@@ -17074,14 +17074,14 @@ _0802600C: .4byte gUnknown_2023D6C
 _08026010: .4byte gUnknown_2023F54
 _08026014:
 	ldrh r0, [r1, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7
 	ldrh r0, [r0, 0x2E]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0802602E:
@@ -17091,7 +17091,7 @@ _0802602E:
 	strb r0, [r1]
 	cmp r4, 0x27
 	bne _0802606C
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -17225,10 +17225,10 @@ _0802614C: .4byte gUnknown_2023ECC
 _08026150: .4byte gUnknown_2023DCC
 _08026154: .4byte gUnknown_2023D68
 _08026158: .4byte gUnknown_2023D74
-	thumb_func_end sub_8025FE0
+	thumb_func_end atk69_adjustsetdamage
 
-	thumb_func_start sub_802615C
-sub_802615C: @ 802615C
+	thumb_func_start atk6A_removeitem
+atk6A_removeitem: @ 802615C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, _080261BC @ =gUnknown_2023D74
@@ -17264,9 +17264,9 @@ sub_802615C: @ 802615C
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r6]
 	adds r0, 0x2
 	str r0, [r6]
@@ -17279,10 +17279,10 @@ _080261BC: .4byte gUnknown_2023D74
 _080261C0: .4byte gUnknown_2023BC4
 _080261C4: .4byte gUnknown_2023FE8
 _080261C8: .4byte gUnknown_2023BE4
-	thumb_func_end sub_802615C
+	thumb_func_end atk6A_removeitem
 
-	thumb_func_start sub_80261CC
-sub_80261CC: @ 80261CC
+	thumb_func_start atk6B_atknameinbuff1
+atk6B_atknameinbuff1: @ 80261CC
 	ldr r1, _080261F8 @ =gUnknown_2022AB8
 	movs r0, 0xFD
 	strb r0, [r1]
@@ -17309,10 +17309,10 @@ _080261F8: .4byte gUnknown_2022AB8
 _080261FC: .4byte gUnknown_2023D6B
 _08026200: .4byte gUnknown_2023BCE
 _08026204: .4byte gUnknown_2023D74
-	thumb_func_end sub_80261CC
+	thumb_func_end atk6B_atknameinbuff1
 
-	thumb_func_start sub_8026208
-sub_8026208: @ 8026208
+	thumb_func_start atk6C_drawlvlupbox
+atk6C_drawlvlupbox: @ 8026208
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _08026224 @ =gUnknown_2023FC4
@@ -17320,7 +17320,7 @@ sub_8026208: @ 8026208
 	adds r4, r0, 0
 	cmp r1, 0
 	bne _0802622C
-	bl sub_802679C
+	bl IsMonGettingExpSentOut
 	cmp r0, 0
 	beq _08026228
 	movs r0, 0x3
@@ -17364,9 +17364,9 @@ _0802626C:
 	movs r0, 0x2
 	movs r1, 0x7
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x2
-	bl sub_80019BC
+	bl ShowBg
 	bl sub_8026480
 	ldr r1, _08026294 @ =gUnknown_2023FC4
 	movs r0, 0x2
@@ -17400,15 +17400,15 @@ _080262B0:
 	movs r0, 0
 	movs r1, 0x7
 	movs r2, 0x1
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x1
 	movs r1, 0x7
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x80
 	str r0, [sp]
 	movs r0, 0x12
@@ -17427,13 +17427,13 @@ _08026300: .4byte gUnknown_2023FC4
 _08026304:
 	bl sub_8026404
 	movs r0, 0xC
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0xC
 	movs r1, 0x3
 	bl sub_8003F20
 	b _0802636E
 _08026318:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -17486,21 +17486,21 @@ _08026380:
 	cmp r0, 0
 	bne _080263F6
 	movs r0, 0xD
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	movs r0, 0xD
 	movs r1, 0x1
 	bl sub_8003F20
 	movs r0, 0xC
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	movs r0, 0xC
 	movs r1, 0x1
 	bl sub_8003F20
 	movs r0, 0x2
 	movs r1, 0x7
 	movs r2, 0x2
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x2
-	bl sub_80019BC
+	bl ShowBg
 	ldr r1, _080263C0 @ =gUnknown_2023FC4
 	movs r0, 0xA
 	strb r0, [r1, 0x1E]
@@ -17508,22 +17508,22 @@ _08026380:
 	.align 2, 0
 _080263C0: .4byte gUnknown_2023FC4
 _080263C4:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	bne _080263F6
 	movs r0, 0
 	movs r1, 0x7
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x1
 	movs r1, 0x7
 	movs r2, 0x1
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	ldr r1, _08026400 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -17535,7 +17535,7 @@ _080263F6:
 	bx r0
 	.align 2, 0
 _08026400: .4byte gUnknown_2023D74
-	thumb_func_end sub_8026208
+	thumb_func_end atk6C_drawlvlupbox
 
 	thumb_func_start sub_8026404
 sub_8026404: @ 8026404
@@ -17612,18 +17612,18 @@ sub_8026480: @ 8026480
 	ldr r0, _080264C8 @ =gUnknown_82506D0
 	movs r1, 0x60
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	ldr r1, _080264CC @ =gUnknown_82506F0
 	movs r0, 0xD
 	movs r2, 0
 	movs r3, 0
-	bl sub_8004404
+	bl CopyToWindowPixelBuffer
 	movs r0, 0xD
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	movs r0, 0xD
 	movs r1, 0x3
 	bl sub_8003F20
-	bl sub_8026688
+	bl PutMonIconOnLvlUpBox
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -17636,7 +17636,7 @@ _080264CC: .4byte gUnknown_82506F0
 	thumb_func_start sub_80264D0
 sub_80264D0: @ 80264D0
 	push {r4,r5,lr}
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	beq _080264E0
@@ -17658,7 +17658,7 @@ _080264F4:
 	lsls r0, 1
 	cmp r1, r0
 	bne _08026500
-	bl sub_8026524
+	bl PutLevelAndGenderOnLvlUpBox
 _08026500:
 	ldrh r0, [r4]
 	adds r0, 0x8
@@ -17682,8 +17682,8 @@ _0802651A:
 _08026520: .4byte 0x01ff0000
 	thumb_func_end sub_80264D0
 
-	thumb_func_start sub_8026524
-sub_8026524: @ 8026524
+	thumb_func_start PutLevelAndGenderOnLvlUpBox
+PutLevelAndGenderOnLvlUpBox: @ 8026524
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -17696,7 +17696,7 @@ sub_8026524: @ 8026524
 	ldr r4, _080265FC @ =gUnknown_2024284
 	adds r0, r4
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
@@ -17705,7 +17705,7 @@ sub_8026524: @ 8026524
 	ldrb r0, [r0, 0x10]
 	muls r0, r5
 	adds r0, r4
-	bl sub_803F720
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, [r6]
@@ -17714,7 +17714,7 @@ sub_8026524: @ 8026524
 	adds r0, r4
 	ldr r6, _08026600 @ =gUnknown_2021D18
 	adds r1, r6, 0
-	bl sub_81202E0
+	bl GetMonNickname
 	str r6, [sp]
 	mov r1, sp
 	movs r4, 0
@@ -17764,7 +17764,7 @@ sub_8026524: @ 8026524
 	adds r6, r0, 0
 	movs r1, 0
 	movs r2, 0x5
-	bl sub_8009204
+	bl StringFill
 	adds r6, r4, 0x4
 	cmp r7, 0xFF
 	beq _08026624
@@ -17773,11 +17773,11 @@ sub_8026524: @ 8026524
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0xC
-	bl sub_80092F4
+	bl WriteColorChangeControlCode
 	adds r6, r0, 0
 	movs r1, 0x1
 	movs r2, 0xD
-	bl sub_80092F4
+	bl WriteColorChangeControlCode
 	adds r6, r0, 0
 	movs r0, 0xB5
 	b _0802661C
@@ -17789,11 +17789,11 @@ _08026604:
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0xE
-	bl sub_80092F4
+	bl WriteColorChangeControlCode
 	adds r6, r0, 0
 	movs r1, 0x1
 	movs r2, 0xF
-	bl sub_80092F4
+	bl WriteColorChangeControlCode
 	adds r6, r0, 0
 	movs r0, 0xB6
 _0802661C:
@@ -17818,7 +17818,7 @@ _08026624:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8026524
+	thumb_func_end PutLevelAndGenderOnLvlUpBox
 
 	thumb_func_start sub_8026648
 sub_8026648: @ 8026648
@@ -17860,8 +17860,8 @@ _08026684:
 	bx r1
 	thumb_func_end sub_8026648
 
-	thumb_func_start sub_8026688
-sub_8026688: @ 8026688
+	thumb_func_start PutMonIconOnLvlUpBox
+PutMonIconOnLvlUpBox: @ 8026688
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -17875,7 +17875,7 @@ sub_8026688: @ 8026688
 	ldr r5, _08026734 @ =gUnknown_2024284
 	adds r0, r5
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -17885,11 +17885,11 @@ sub_8026688: @ 8026688
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_8097054
+	bl GetMonIconPtr
 	str r0, [sp]
 	ldr r5, _08026738 @ =0xffff0000
 	ldr r0, [sp, 0x4]
@@ -17912,15 +17912,15 @@ sub_8026688: @ 8026688
 	orrs r0, r1
 	str r0, [r4, 0x4]
 	mov r0, sp
-	bl sub_80086DC
+	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	ldr r0, _08026748 @ =gUnknown_82507C8
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0xA
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0802674C @ =gUnknown_202063C
@@ -17949,10 +17949,10 @@ _08026744: .4byte 0x0000d75a
 _08026748: .4byte gUnknown_82507C8
 _0802674C: .4byte gUnknown_202063C
 _08026750: .4byte gUnknown_202297C
-	thumb_func_end sub_8026688
+	thumb_func_end PutMonIconOnLvlUpBox
 
-	thumb_func_start sub_8026754
-sub_8026754: @ 8026754
+	thumb_func_start SpriteCB_MonIconOnLvlUpBox
+SpriteCB_MonIconOnLvlUpBox: @ 8026754
 	push {r4,lr}
 	adds r2, r0, 0
 	ldr r0, _08026770 @ =gUnknown_202297C
@@ -17974,22 +17974,22 @@ _08026774:
 	cmp r0, 0
 	beq _08026790
 	adds r0, r2, 0
-	bl sub_8007280
+	bl DestroySprite
 	ldr r4, _08026798 @ =0x0000d75a
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 _08026790:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08026798: .4byte 0x0000d75a
-	thumb_func_end sub_8026754
+	thumb_func_end SpriteCB_MonIconOnLvlUpBox
 
-	thumb_func_start sub_802679C
-sub_802679C: @ 802679C
+	thumb_func_start IsMonGettingExpSentOut
+IsMonGettingExpSentOut: @ 802679C
 	push {lr}
 	ldr r3, _080267C4 @ =gUnknown_2023BCE
 	ldr r0, _080267C8 @ =gUnknown_2023FE8
@@ -18019,12 +18019,12 @@ _080267D0:
 _080267D2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_802679C
+	thumb_func_end IsMonGettingExpSentOut
 
-	thumb_func_start sub_80267D8
-sub_80267D8: @ 80267D8
+	thumb_func_start atk6D_resetsentmonsvalue
+atk6D_resetsentmonsvalue: @ 80267D8
 	push {lr}
-	bl sub_80173D0
+	bl ResetSentPokesToOpponentValue
 	ldr r1, _080267EC @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -18033,13 +18033,13 @@ sub_80267D8: @ 80267D8
 	bx r0
 	.align 2, 0
 _080267EC: .4byte gUnknown_2023D74
-	thumb_func_end sub_80267D8
+	thumb_func_end atk6D_resetsentmonsvalue
 
-	thumb_func_start sub_80267F0
-sub_80267F0: @ 80267F0
+	thumb_func_start atk6E_setatktoplayer0
+atk6E_setatktoplayer0: @ 80267F0
 	push {lr}
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _08026808 @ =gUnknown_2023D6B
 	strb r0, [r1]
 	ldr r1, _0802680C @ =gUnknown_2023D74
@@ -18051,10 +18051,10 @@ sub_80267F0: @ 80267F0
 	.align 2, 0
 _08026808: .4byte gUnknown_2023D6B
 _0802680C: .4byte gUnknown_2023D74
-	thumb_func_end sub_80267F0
+	thumb_func_end atk6E_setatktoplayer0
 
-	thumb_func_start sub_8026810
-sub_8026810: @ 8026810
+	thumb_func_start atk6F_makevisible
+atk6F_makevisible: @ 8026810
 	push {r4,r5,lr}
 	ldr r5, _0802683C @ =gUnknown_2023D74
 	ldr r0, [r5]
@@ -18064,9 +18064,9 @@ sub_8026810: @ 8026810
 	strb r0, [r4]
 	movs r0, 0
 	movs r1, 0
-	bl sub_800EB04
+	bl EmitSpriteInvisibility
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -18076,10 +18076,10 @@ sub_8026810: @ 8026810
 	.align 2, 0
 _0802683C: .4byte gUnknown_2023D74
 _08026840: .4byte gUnknown_2023BC4
-	thumb_func_end sub_8026810
+	thumb_func_end atk6F_makevisible
 
-	thumb_func_start sub_8026844
-sub_8026844: @ 8026844
+	thumb_func_start atk70_recordlastability
+atk70_recordlastability: @ 8026844
 	push {r4,lr}
 	ldr r4, _0802686C @ =gUnknown_2023D74
 	ldr r0, [r4]
@@ -18101,10 +18101,10 @@ sub_8026844: @ 8026844
 _0802686C: .4byte gUnknown_2023D74
 _08026870: .4byte gUnknown_2023BC4
 _08026874: .4byte gUnknown_2023D6A
-	thumb_func_end sub_8026844
+	thumb_func_end atk70_recordlastability
 
-	thumb_func_start sub_8026878
-sub_8026878: @ 8026878
+	thumb_func_start BufferMoveToLearnIntoBattleTextBuff2
+BufferMoveToLearnIntoBattleTextBuff2: @ 8026878
 	ldr r2, _08026898 @ =gUnknown_2022AC8
 	movs r0, 0xFD
 	strb r0, [r2]
@@ -18124,12 +18124,12 @@ sub_8026878: @ 8026878
 	.align 2, 0
 _08026898: .4byte gUnknown_2022AC8
 _0802689C: .4byte gUnknown_2024022
-	thumb_func_end sub_8026878
+	thumb_func_end BufferMoveToLearnIntoBattleTextBuff2
 
-	thumb_func_start sub_80268A0
-sub_80268A0: @ 80268A0
+	thumb_func_start atk71_buffermovetolearn
+atk71_buffermovetolearn: @ 80268A0
 	push {lr}
-	bl sub_8026878
+	bl BufferMoveToLearnIntoBattleTextBuff2
 	ldr r1, _080268B4 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -18138,10 +18138,10 @@ sub_80268A0: @ 80268A0
 	bx r0
 	.align 2, 0
 _080268B4: .4byte gUnknown_2023D74
-	thumb_func_end sub_80268A0
+	thumb_func_end atk71_buffermovetolearn
 
-	thumb_func_start sub_80268B8
-sub_80268B8: @ 80268B8
+	thumb_func_start atk72_jumpifplayerran
+atk72_jumpifplayerran: @ 80268B8
 	push {lr}
 	ldr r0, _080268E4 @ =gUnknown_2023D6D
 	ldrb r0, [r0]
@@ -18176,10 +18176,10 @@ _080268F4:
 	bx r0
 	.align 2, 0
 _080268F8: .4byte gUnknown_2023D74
-	thumb_func_end sub_80268B8
+	thumb_func_end atk72_jumpifplayerran
 
-	thumb_func_start sub_80268FC
-sub_80268FC: @ 80268FC
+	thumb_func_start atk73_hpthresholds
+atk73_hpthresholds: @ 80268FC
 	push {r4-r6,lr}
 	ldr r0, _0802694C @ =gUnknown_2022B4C
 	ldr r4, [r0]
@@ -18264,10 +18264,10 @@ _08026992:
 	.align 2, 0
 _080269A0: .4byte gUnknown_2023FE8
 _080269A4: .4byte gUnknown_2023D74
-	thumb_func_end sub_80268FC
+	thumb_func_end atk73_hpthresholds
 
-	thumb_func_start sub_80269A8
-sub_80269A8: @ 80269A8
+	thumb_func_start atk74_hpthresholds2
+atk74_hpthresholds2: @ 80269A8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -18290,7 +18290,7 @@ sub_80269A8: @ 80269A8
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, _08026A18 @ =gUnknown_2023FE8
 	ldr r6, [r1]
@@ -18354,10 +18354,10 @@ _08026A42:
 	bx r0
 	.align 2, 0
 _08026A54: .4byte gUnknown_2023D74
-	thumb_func_end sub_80269A8
+	thumb_func_end atk74_hpthresholds2
 
-	thumb_func_start sub_8026A58
-sub_8026A58: @ 8026A58
+	thumb_func_start atk75_useitemonopponent
+atk75_useitemonopponent: @ 8026A58
 	push {lr}
 	sub sp, 0x4
 	ldr r2, _08026A98 @ =gUnknown_2024004
@@ -18395,7 +18395,7 @@ _08026AA0: .4byte gUnknown_2023BCE
 _08026AA4: .4byte gUnknown_202402C
 _08026AA8: .4byte gUnknown_2023D68
 _08026AAC: .4byte gUnknown_2023D74
-	thumb_func_end sub_8026A58
+	thumb_func_end atk75_useitemonopponent
 
 	thumb_func_start sub_8026AB0
 sub_8026AB0: @ 8026AB0
@@ -18443,7 +18443,7 @@ _08026AE8:
 _08026B1C:
 	ldr r0, _08026B28 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	b _08026F4E
 	.align 2, 0
 _08026B28: .4byte gUnknown_2023BC4
@@ -18453,7 +18453,7 @@ _08026B2C:
 	ldrb r0, [r4]
 	strb r0, [r1]
 	ldrb r0, [r1]
-	bl sub_80751C4
+	bl GetBankSide
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -18746,9 +18746,9 @@ _08026D7C:
 _08026D84:
 	movs r0, 0
 	movs r1, 0
-	bl sub_800E0B4
+	bl EmitReturnMonToBall
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _08026F4E
 	.align 2, 0
 _08026D94: .4byte gUnknown_2023BCC
@@ -18809,17 +18809,17 @@ _08026DF6:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	str r1, [sp, 0x4]
 	cmp r5, 0
@@ -18850,7 +18850,7 @@ _08026E4E:
 	cmp r0, 0
 	beq _08026E88
 	movs r0, 0
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r4, _08026F3C @ =gUnknown_2023BC4
 	strb r0, [r4]
 	movs r0, 0
@@ -18863,9 +18863,9 @@ _08026E4E:
 	movs r0, 0
 	movs r1, 0x28
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08026F28 @ =gUnknown_2023E82
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
@@ -18884,17 +18884,17 @@ _08026E94:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	str r1, [sp, 0x4]
 	cmp r5, 0
@@ -18925,7 +18925,7 @@ _08026EEC:
 	cmp r2, 0
 	beq _08026F4E
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r4, _08026F3C @ =gUnknown_2023BC4
 	strb r0, [r4]
 	movs r0, 0
@@ -18938,9 +18938,9 @@ _08026EEC:
 	movs r0, 0
 	movs r1, 0x28
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08026F28 @ =gUnknown_2023E82
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
@@ -18954,7 +18954,7 @@ _08026F38: .4byte gUnknown_2024284
 _08026F3C: .4byte gUnknown_2023BC4
 _08026F40: .4byte gUnknown_202402C
 _08026F44:
-	bl sub_8071C9C
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08026F56
@@ -18975,8 +18975,8 @@ _08026F56:
 _08026F64: .4byte gUnknown_2023D74
 	thumb_func_end sub_8026AB0
 
-	thumb_func_start sub_8026F68
-sub_8026F68: @ 8026F68
+	thumb_func_start atk77_setprotectlike
+atk77_setprotectlike: @ 8026F68
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -19021,7 +19021,7 @@ _08026FA8:
 	ldrb r4, [r0, 0x8]
 	lsls r4, 1
 	adds r4, r2
-	bl sub_8044EC8
+	bl Random
 	ldrh r1, [r4]
 	lsls r0, 16
 	lsrs r0, 16
@@ -19126,10 +19126,10 @@ _08027094: .4byte gUnknown_2023D6B
 _08027098: .4byte gUnknown_2023E82
 _0802709C: .4byte gUnknown_2023DCC
 _080270A0: .4byte gUnknown_2023D74
-	thumb_func_end sub_8026F68
+	thumb_func_end atk77_setprotectlike
 
-	thumb_func_start sub_80270A4
-sub_80270A4: @ 80270A4
+	thumb_func_start atk78_faintifabilitynotdamp
+atk78_faintifabilitynotdamp: @ 80270A4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -19188,9 +19188,9 @@ _080270F0:
 	str r0, [r2]
 	ldr r1, _0802717C @ =0x00007fff
 	movs r0, 0
-	bl sub_800E5EC
+	bl EmitHealthBarUpdate
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08027180 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -19262,10 +19262,10 @@ _080271A8:
 _080271B4: .4byte gUnknown_2023D6A
 _080271B8: .4byte gUnknown_2023D74
 _080271BC: .4byte gUnknown_81D93AF
-	thumb_func_end sub_80270A4
+	thumb_func_end atk78_faintifabilitynotdamp
 
-	thumb_func_start sub_80271C0
-sub_80271C0: @ 80271C0
+	thumb_func_start atk79_setatkhptozero
+atk79_setatkhptozero: @ 80271C0
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _0802720C @ =gUnknown_2023BC8
@@ -19291,9 +19291,9 @@ sub_80271C0: @ 80271C0
 	movs r1, 0x2A
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _0802721C @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -19309,10 +19309,10 @@ _08027210: .4byte gUnknown_2023BC4
 _08027214: .4byte gUnknown_2023D6B
 _08027218: .4byte gUnknown_2023BE4
 _0802721C: .4byte gUnknown_2023D74
-	thumb_func_end sub_80271C0
+	thumb_func_end atk79_setatkhptozero
 
-	thumb_func_start sub_8027220
-sub_8027220: @ 8027220
+	thumb_func_start atk7A_jumpifnexttargetvalid
+atk7A_jumpifnexttargetvalid: @ 8027220
 	push {r4-r7,lr}
 	ldr r3, _08027298 @ =gUnknown_2023D74
 	ldr r2, [r3]
@@ -19393,10 +19393,10 @@ _080272BC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8027220
+	thumb_func_end atk7A_jumpifnexttargetvalid
 
-	thumb_func_start sub_80272C4
-sub_80272C4: @ 80272C4
+	thumb_func_start atk7B_tryhealhalfhealth
+atk7B_tryhealhalfhealth: @ 80272C4
 	push {r4-r6,lr}
 	ldr r4, _08027320 @ =gUnknown_2023D74
 	ldr r1, [r4]
@@ -19458,10 +19458,10 @@ _0802733A:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80272C4
+	thumb_func_end atk7B_tryhealhalfhealth
 
-	thumb_func_start sub_8027340
-sub_8027340: @ 8027340
+	thumb_func_start atk7C_trymirrormove
+atk7C_trymirrormove: @ 8027340
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -19563,7 +19563,7 @@ _080273FC:
 	ldr r1, _08027454 @ =0xfffffbff
 	ands r0, r1
 	str r0, [r2]
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, r8
@@ -19631,10 +19631,10 @@ _0802748A:
 _0802749C: .4byte gUnknown_2023ECC
 _080274A0: .4byte gUnknown_2023D6B
 _080274A4: .4byte gUnknown_2023D74
-	thumb_func_end sub_8027340
+	thumb_func_end atk7C_trymirrormove
 
-	thumb_func_start sub_80274A8
-sub_80274A8: @ 80274A8
+	thumb_func_start atk7D_setrain
+atk7D_setrain: @ 80274A8
 	push {lr}
 	ldr r2, _080274C8 @ =gUnknown_2023F1C
 	ldrh r0, [r2]
@@ -19675,14 +19675,14 @@ _080274E4:
 _080274F0: .4byte gUnknown_2023E82
 _080274F4: .4byte gUnknown_2023F20
 _080274F8: .4byte gUnknown_2023D74
-	thumb_func_end sub_80274A8
+	thumb_func_end atk7D_setrain
 
-	thumb_func_start sub_80274FC
-sub_80274FC: @ 80274FC
+	thumb_func_start atk7E_setreflect
+atk7E_setreflect: @ 80274FC
 	push {r4-r6,lr}
 	ldr r6, _0802752C @ =gUnknown_2023D6B
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r4, _08027530 @ =gUnknown_2023DDE
 	movs r5, 0x1
 	adds r1, r5, 0
@@ -19709,7 +19709,7 @@ _08027534: .4byte gUnknown_2023DCC
 _08027538: .4byte gUnknown_2023E82
 _0802753C:
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r1, 1
@@ -19719,7 +19719,7 @@ _0802753C:
 	orrs r0, r2
 	strh r0, [r1]
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r4, _080275A0 @ =gUnknown_2023DE4
 	adds r1, r5, 0
 	ands r1, r0
@@ -19730,7 +19730,7 @@ _0802753C:
 	movs r1, 0x5
 	strb r1, [r0]
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -19773,10 +19773,10 @@ _080275B2:
 	.align 2, 0
 _080275C0: .4byte gUnknown_2023E82
 _080275C4: .4byte gUnknown_2023D74
-	thumb_func_end sub_80274FC
+	thumb_func_end atk7E_setreflect
 
-	thumb_func_start sub_80275C8
-sub_80275C8: @ 80275C8
+	thumb_func_start atk7F_setseeded
+atk7F_setseeded: @ 80275C8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -19871,10 +19871,10 @@ _08027668:
 _0802767C: .4byte gUnknown_2023D6B
 _08027680: .4byte gUnknown_2023E82
 _08027684: .4byte gUnknown_2023D74
-	thumb_func_end sub_80275C8
+	thumb_func_end atk7F_setseeded
 
-	thumb_func_start sub_8027688
-sub_8027688: @ 8027688
+	thumb_func_start atk80_manipulatedamage
+atk80_manipulatedamage: @ 8027688
 	push {r4,lr}
 	ldr r1, _080276A0 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -19943,10 +19943,10 @@ _080276F8:
 	bx r0
 	.align 2, 0
 _08027704: .4byte gUnknown_2023D50
-	thumb_func_end sub_8027688
+	thumb_func_end atk80_manipulatedamage
 
-	thumb_func_start sub_8027708
-sub_8027708: @ 8027708
+	thumb_func_start atk81_trysetrest
+atk81_trysetrest: @ 8027708
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r0, _08027760 @ =gUnknown_2023D74
@@ -20032,9 +20032,9 @@ _08027798:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r7]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _080277D4 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x5
@@ -20047,10 +20047,10 @@ _080277C8:
 	.align 2, 0
 _080277D0: .4byte gUnknown_2023E82
 _080277D4: .4byte gUnknown_2023D74
-	thumb_func_end sub_8027708
+	thumb_func_end atk81_trysetrest
 
-	thumb_func_start sub_80277D8
-sub_80277D8: @ 80277D8
+	thumb_func_start atk82_jumpifnotfirstturn
+atk82_jumpifnotfirstturn: @ 80277D8
 	push {r4,r5,lr}
 	ldr r5, _0802780C @ =gUnknown_2023D74
 	ldr r4, [r5]
@@ -20087,10 +20087,10 @@ _0802781A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80277D8
+	thumb_func_end atk82_jumpifnotfirstturn
 
-	thumb_func_start sub_8027820
-sub_8027820: @ 8027820
+	thumb_func_start atk83_nop
+atk83_nop: @ 8027820
 	ldr r1, _0802782C @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -20098,10 +20098,10 @@ sub_8027820: @ 8027820
 	bx lr
 	.align 2, 0
 _0802782C: .4byte gUnknown_2023D74
-	thumb_func_end sub_8027820
+	thumb_func_end atk83_nop
 
-	thumb_func_start sub_8027830
-sub_8027830: @ 8027830
+	thumb_func_start UproarWakeUpCheck
+UproarWakeUpCheck: @ 8027830
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -20182,10 +20182,10 @@ _080278C2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8027830
+	thumb_func_end UproarWakeUpCheck
 
-	thumb_func_start sub_80278CC
-sub_80278CC: @ 80278CC
+	thumb_func_start atk84_jumpifcantmakeasleep
+atk84_jumpifcantmakeasleep: @ 80278CC
 	push {r4-r6,lr}
 	ldr r5, _080278F8 @ =gUnknown_2023D74
 	ldr r1, [r5]
@@ -20201,7 +20201,7 @@ sub_80278CC: @ 80278CC
 	orrs r4, r0
 	ldr r6, _080278FC @ =gUnknown_2023D6C
 	ldrb r0, [r6]
-	bl sub_8027830
+	bl UproarWakeUpCheck
 	lsls r0, 24
 	cmp r0, 0
 	beq _08027900
@@ -20246,10 +20246,10 @@ _08027942:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80278CC
+	thumb_func_end atk84_jumpifcantmakeasleep
 
-	thumb_func_start sub_8027948
-sub_8027948: @ 8027948
+	thumb_func_start atk85_stockpile
+atk85_stockpile: @ 8027948
 	push {r4,r5,lr}
 	ldr r5, _08027970 @ =gUnknown_2023E0C
 	ldr r4, _08027974 @ =gUnknown_2023D6B
@@ -20309,10 +20309,10 @@ _080279AA:
 _080279B8: .4byte gUnknown_2022AB8
 _080279BC: .4byte gUnknown_2023E82
 _080279C0: .4byte gUnknown_2023D74
-	thumb_func_end sub_8027948
+	thumb_func_end atk85_stockpile
 
-	thumb_func_start sub_80279C4
-sub_80279C4: @ 80279C4
+	thumb_func_start atk86_stockpiletobasedamage
+atk86_stockpiletobasedamage: @ 80279C4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -20355,7 +20355,7 @@ _08027A08:
 	ldr r4, _08027AC0 @ =gUnknown_2023DDE
 	ldr r5, _08027AC4 @ =gUnknown_2023D6C
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 1
@@ -20444,10 +20444,10 @@ _08027AD4: .4byte gUnknown_2023E8C
 _08027AD8: .4byte gUnknown_2023E0C
 _08027ADC: .4byte gUnknown_2023D6B
 _08027AE0: .4byte gUnknown_2023D74
-	thumb_func_end sub_80279C4
+	thumb_func_end atk86_stockpiletobasedamage
 
-	thumb_func_start sub_8027AE4
-sub_8027AE4: @ 8027AE4
+	thumb_func_start atk87_stockpiletohpheal
+atk87_stockpiletohpheal: @ 8027AE4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -20556,10 +20556,10 @@ _08027BB0:
 _08027BBC: .4byte gUnknown_2023D50
 _08027BC0: .4byte gUnknown_2023FC4
 _08027BC4: .4byte gUnknown_2023D6C
-	thumb_func_end sub_8027AE4
+	thumb_func_end atk87_stockpiletohpheal
 
-	thumb_func_start sub_8027BC8
-sub_8027BC8: @ 8027BC8
+	thumb_func_start atk88_negativedamage
+atk88_negativedamage: @ 8027BC8
 	push {lr}
 	ldr r2, _08027BF0 @ =gUnknown_2023D50
 	ldr r0, _08027BF4 @ =gUnknown_2023D54
@@ -20585,10 +20585,10 @@ _08027BE4:
 _08027BF0: .4byte gUnknown_2023D50
 _08027BF4: .4byte gUnknown_2023D54
 _08027BF8: .4byte gUnknown_2023D74
-	thumb_func_end sub_8027BC8
+	thumb_func_end atk88_negativedamage
 
-	thumb_func_start sub_8027BFC
-sub_8027BFC: @ 8027BFC
+	thumb_func_start ChangeStatBuffs
+ChangeStatBuffs: @ 8027BFC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -20666,7 +20666,7 @@ _08027C88:
 	ldr r4, _08027CE0 @ =gUnknown_2023DE4
 	ldr r1, _08027CD4 @ =gUnknown_2023BC4
 	ldrb r0, [r1]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	lsls r0, r1, 1
@@ -20710,7 +20710,7 @@ _08027CE8: .4byte gUnknown_2023ECC
 _08027CEC: .4byte gUnknown_2023D74
 _08027CF0:
 	mov r0, r8
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _08027D18 @ =gUnknown_2023FC4
 	ldr r6, _08027D1C @ =gUnknown_2023BC4
 	ldrb r0, [r6]
@@ -20742,7 +20742,7 @@ _08027D28:
 	cmp r0, 0x1
 	beq _08027D58
 	movs r0, 0
-	bl sub_801DC10
+	bl JumpIfMoveAffectedByProtect
 	lsls r0, 24
 	cmp r0, 0
 	beq _08027D58
@@ -20802,7 +20802,7 @@ _08027DAC: .4byte gUnknown_2023ECC
 _08027DB0: .4byte gUnknown_2023D74
 _08027DB4:
 	mov r0, r8
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _08027DF8 @ =gUnknown_2023FC4
 	ldr r2, _08027DFC @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -20856,7 +20856,7 @@ _08027E0C:
 	cmp r5, 0x1
 	bne _08027D48
 	mov r0, r8
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _08027E5C @ =gUnknown_2023FC4
 	ldr r3, _08027E58 @ =gUnknown_2023BC4
 	ldrb r0, [r3]
@@ -20901,7 +20901,7 @@ _08027E6C:
 	b _08027D48
 _08027E8E:
 	mov r0, r8
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _08027EC0 @ =gUnknown_2023FC4
 	ldr r2, _08027EBC @ =gUnknown_2023BC4
 	ldrb r0, [r2]
@@ -21147,10 +21147,10 @@ _08028070: .4byte gUnknown_2023D6C
 _08028074: .4byte gUnknown_2023E82
 _08028078: .4byte gUnknown_2023BC4
 _0802807C: .4byte gUnknown_2023DCC
-	thumb_func_end sub_8027BFC
+	thumb_func_end ChangeStatBuffs
 
-	thumb_func_start sub_8028080
-sub_8028080: @ 8028080
+	thumb_func_start atk89_statbuffchange
+atk89_statbuffchange: @ 8028080
 	push {r4,r5,lr}
 	ldr r5, _080280C4 @ =gUnknown_2023D74
 	ldr r2, [r5]
@@ -21173,7 +21173,7 @@ sub_8028080: @ 8028080
 	movs r1, 0xF
 	ands r1, r4
 	ldrb r2, [r2, 0x1]
-	bl sub_8027BFC
+	bl ChangeStatBuffs
 	lsls r0, 24
 	cmp r0, 0
 	bne _080280BC
@@ -21187,10 +21187,10 @@ _080280BC:
 	.align 2, 0
 _080280C4: .4byte gUnknown_2023D74
 _080280C8: .4byte gUnknown_2023FC4
-	thumb_func_end sub_8028080
+	thumb_func_end atk89_statbuffchange
 
-	thumb_func_start sub_80280CC
-sub_80280CC: @ 80280CC
+	thumb_func_start atk8A_normalisebuffs
+atk8A_normalisebuffs: @ 80280CC
 	push {r4-r7,lr}
 	movs r2, 0
 	ldr r0, _08028114 @ =gUnknown_2023BCC
@@ -21233,10 +21233,10 @@ _08028104:
 _08028114: .4byte gUnknown_2023BCC
 _08028118: .4byte gUnknown_2023D74
 _0802811C: .4byte gUnknown_2023BE4
-	thumb_func_end sub_80280CC
+	thumb_func_end atk8A_normalisebuffs
 
-	thumb_func_start sub_8028120
-sub_8028120: @ 8028120
+	thumb_func_start atk8B_setbide
+atk8B_setbide: @ 8028120
 	push {r4,r5,lr}
 	ldr r4, _08028178 @ =gUnknown_2023BE4
 	ldr r3, _0802817C @ =gUnknown_2023D6B
@@ -21287,10 +21287,10 @@ _08028180: .4byte gUnknown_2023DB8
 _08028184: .4byte gUnknown_2023D4A
 _08028188: .4byte gUnknown_2023D58
 _0802818C: .4byte gUnknown_2023D74
-	thumb_func_end sub_8028120
+	thumb_func_end atk8B_setbide
 
-	thumb_func_start sub_8028190
-sub_8028190: @ 8028190
+	thumb_func_start atk8C_confuseifrepeatingattackends
+atk8C_confuseifrepeatingattackends: @ 8028190
 	push {lr}
 	ldr r1, _080281C0 @ =gUnknown_2023BE4
 	ldr r0, _080281C4 @ =gUnknown_2023D6B
@@ -21320,10 +21320,10 @@ _080281C0: .4byte gUnknown_2023BE4
 _080281C4: .4byte gUnknown_2023D6B
 _080281C8: .4byte gUnknown_2023E82
 _080281CC: .4byte gUnknown_2023D74
-	thumb_func_end sub_8028190
+	thumb_func_end atk8C_confuseifrepeatingattackends
 
-	thumb_func_start sub_80281D0
-sub_80281D0: @ 80281D0
+	thumb_func_start atk8D_setmultihitcounter
+atk8D_setmultihitcounter: @ 80281D0
 	push {r4,r5,lr}
 	ldr r0, _080281E4 @ =gUnknown_2023D74
 	ldr r0, [r0]
@@ -21338,13 +21338,13 @@ _080281E4: .4byte gUnknown_2023D74
 _080281E8: .4byte gUnknown_2023D72
 _080281EC:
 	ldr r4, _08028214 @ =gUnknown_2023D72
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	ands r0, r5
 	strb r0, [r4]
 	cmp r0, 0x1
 	bls _08028202
-	bl sub_8044EC8
+	bl Random
 	ands r0, r5
 _08028202:
 	adds r0, 0x2
@@ -21360,10 +21360,10 @@ _08028206:
 	.align 2, 0
 _08028214: .4byte gUnknown_2023D72
 _08028218: .4byte gUnknown_2023D74
-	thumb_func_end sub_80281D0
+	thumb_func_end atk8D_setmultihitcounter
 
-	thumb_func_start sub_802821C
-sub_802821C: @ 802821C
+	thumb_func_start atk8E_initmultihitstring
+atk8E_initmultihitstring: @ 802821C
 	ldr r1, _0802823C @ =gUnknown_2023FC4
 	movs r2, 0
 	movs r0, 0xFD
@@ -21383,10 +21383,10 @@ sub_802821C: @ 802821C
 	.align 2, 0
 _0802823C: .4byte gUnknown_2023FC4
 _08028240: .4byte gUnknown_2023D74
-	thumb_func_end sub_802821C
+	thumb_func_end atk8E_initmultihitstring
 
-	thumb_func_start sub_8028244
-sub_8028244: @ 8028244
+	thumb_func_start TryDoForceSwitchOut
+TryDoForceSwitchOut: @ 8028244
 	push {r4-r7,lr}
 	ldr r6, _08028278 @ =gUnknown_2023BE4
 	ldr r7, _0802827C @ =gUnknown_2023D6B
@@ -21420,7 +21420,7 @@ _08028280: .4byte gUnknown_2023D6C
 _08028284: .4byte gUnknown_2023FE8
 _08028288: .4byte gUnknown_2023BCE
 _0802828C:
-	bl sub_8044EC8
+	bl Random
 	movs r3, 0xFF
 	ands r3, r0
 	ldrb r0, [r7]
@@ -21483,7 +21483,7 @@ _080282FC: .4byte gUnknown_2023FE8
 _08028300: .4byte gUnknown_2023BCE
 _08028304: .4byte gUnknown_2023D74
 _08028308: .4byte gUnknown_81D8C10
-	thumb_func_end sub_8028244
+	thumb_func_end TryDoForceSwitchOut
 
 	thumb_func_start sub_802830C
 sub_802830C: @ 802830C
@@ -21500,7 +21500,7 @@ sub_802830C: @ 802830C
 _08028320:
 	ldr r5, _080283A8 @ =gUnknown_2023D6C
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, _080283AC @ =gUnknown_202402C
 	mov r8, r1
@@ -21517,7 +21517,7 @@ _08028336:
 	movs r7, 0
 	movs r6, 0
 	ldrb r0, [r5]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8043620
@@ -21538,17 +21538,17 @@ _08028364:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08028396
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08028396
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08028396
 	adds r0, r7, 0x1
@@ -21577,17 +21577,17 @@ _080283B8:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080283EA
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _080283EA
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080283EA
 	adds r0, r7, 0x1
@@ -21640,7 +21640,7 @@ _0802841C:
 _08028438: .4byte gUnknown_2022B4C
 _0802843C: .4byte gUnknown_2023D74
 _08028440:
-	bl sub_8028244
+	bl TryDoForceSwitchOut
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802844C
@@ -21653,7 +21653,7 @@ _0802844C:
 	cmp r0, 0
 	beq _080284F0
 _08028458:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -21662,7 +21662,7 @@ _08028458:
 	lsrs r6, r0, 24
 	ldr r0, _08028490 @ =gUnknown_2023D6C
 	ldrb r0, [r0]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8043620
@@ -21703,17 +21703,17 @@ _08028496:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08028458
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	beq _08028458
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08028458
 	b _080285AE
@@ -21727,7 +21727,7 @@ _080284F0:
 	beq _08028560
 	ldr r6, _08028558 @ =gUnknown_2023BCE
 _080284FA:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -21755,17 +21755,17 @@ _080284FA:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080284FA
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	beq _080284FA
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _080284FA
 	b _080285AE
@@ -21775,7 +21775,7 @@ _0802855C: .4byte gUnknown_2023D6C
 _08028560:
 	ldr r6, _080285E8 @ =gUnknown_2023BCE
 _08028562:
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -21795,17 +21795,17 @@ _08028562:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08028562
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0x1
 	beq _08028562
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08028562
 _080285AE:
@@ -21839,7 +21839,7 @@ _080285E8: .4byte gUnknown_2023BCE
 _080285EC: .4byte gUnknown_2023D6C
 _080285F0: .4byte gUnknown_2023FE8
 _080285F4:
-	bl sub_8028244
+	bl TryDoForceSwitchOut
 _080285F8:
 	pop {r3}
 	mov r8, r3
@@ -21848,8 +21848,8 @@ _080285F8:
 	bx r0
 	thumb_func_end sub_802830C
 
-	thumb_func_start sub_8028604
-sub_8028604: @ 8028604
+	thumb_func_start atk90_tryconversiontypechange
+atk90_tryconversiontypechange: @ 8028604
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -21976,7 +21976,7 @@ _080286EC:
 	ldr r5, _08028744 @ =gUnknown_8250C04
 	mov r9, r5
 _080286F2:
-	bl sub_8044EC8
+	bl Random
 	adds r3, r0, 0
 	ands r3, r7
 	cmp r3, r6
@@ -22066,10 +22066,10 @@ _08028790:
 	.align 2, 0
 _080287A0: .4byte gUnknown_2022AB8
 _080287A4: .4byte gUnknown_2023D74
-	thumb_func_end sub_8028604
+	thumb_func_end atk90_tryconversiontypechange
 
-	thumb_func_start sub_80287A8
-sub_80287A8: @ 80287A8
+	thumb_func_start atk91_givepaydaymoney
+atk91_givepaydaymoney: @ 80287A8
 	push {r4,r5,lr}
 	ldr r0, _0802880C @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -22094,7 +22094,7 @@ sub_80287A8: @ 80287A8
 	lsls r1, 2
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_809FDA0
+	bl AddMoney
 	ldr r1, _0802881C @ =gUnknown_2022AB8
 	movs r0, 0xFD
 	strb r0, [r1]
@@ -22114,7 +22114,7 @@ sub_80287A8: @ 80287A8
 	ldr r4, _08028820 @ =gUnknown_2023D74
 	ldr r0, [r4]
 	adds r0, 0x1
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r0, _08028824 @ =gUnknown_81D911D
 	str r0, [r4]
 	b _08028830
@@ -22137,14 +22137,14 @@ _08028830:
 	bx r0
 	.align 2, 0
 _08028838: .4byte gUnknown_2023D74
-	thumb_func_end sub_80287A8
+	thumb_func_end atk91_givepaydaymoney
 
-	thumb_func_start sub_802883C
-sub_802883C: @ 802883C
+	thumb_func_start atk92_setlightscreen
+atk92_setlightscreen: @ 802883C
 	push {r4-r6,lr}
 	ldr r5, _0802886C @ =gUnknown_2023D6B
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r4, _08028870 @ =gUnknown_2023DDE
 	movs r6, 0x1
 	adds r1, r6, 0
@@ -22171,7 +22171,7 @@ _08028874: .4byte gUnknown_2023DCC
 _08028878: .4byte gUnknown_2023E82
 _0802887C:
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r1, 1
@@ -22181,7 +22181,7 @@ _0802887C:
 	orrs r0, r2
 	strh r0, [r1]
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r4, _080288E0 @ =gUnknown_2023DE4
 	adds r1, r6, 0
 	ands r1, r0
@@ -22192,7 +22192,7 @@ _0802887C:
 	movs r1, 0x5
 	strb r1, [r0, 0x2]
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -22234,10 +22234,10 @@ _080288F0:
 	.align 2, 0
 _08028900: .4byte gUnknown_2023E82
 _08028904: .4byte gUnknown_2023D74
-	thumb_func_end sub_802883C
+	thumb_func_end atk92_setlightscreen
 
-	thumb_func_start sub_8028908
-sub_8028908: @ 8028908
+	thumb_func_start atk93_tryKO
+atk93_tryKO: @ 8028908
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -22266,14 +22266,14 @@ _08028938: .4byte gUnknown_2023D6C
 _0802893C: .4byte gUnknown_2023F54
 _08028940:
 	ldrh r0, [r1, 0x2E]
-	bl sub_809A924
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7
 	ldrh r0, [r0, 0x2E]
-	bl sub_809A948
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0802895A:
@@ -22283,7 +22283,7 @@ _0802895A:
 	strb r0, [r1]
 	cmp r4, 0x27
 	bne _08028998
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -22374,7 +22374,7 @@ _080289F4:
 	adds r0, r2
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -22456,7 +22456,7 @@ _08028AA2:
 	adds r1, r2
 	lsls r1, 16
 	lsrs r4, r1, 16
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -22640,10 +22640,10 @@ _08028C48:
 	.align 2, 0
 _08028C54: .4byte gUnknown_2023E82
 _08028C58: .4byte gUnknown_2023D74
-	thumb_func_end sub_8028908
+	thumb_func_end atk93_tryKO
 
-	thumb_func_start sub_8028C5C
-sub_8028C5C: @ 8028C5C
+	thumb_func_start atk94_damagetohalftargethp
+atk94_damagetohalftargethp: @ 8028C5C
 	push {lr}
 	ldr r3, _08028C88 @ =gUnknown_2023D50
 	ldr r2, _08028C8C @ =gUnknown_2023BE4
@@ -22671,10 +22671,10 @@ _08028C88: .4byte gUnknown_2023D50
 _08028C8C: .4byte gUnknown_2023BE4
 _08028C90: .4byte gUnknown_2023D6C
 _08028C94: .4byte gUnknown_2023D74
-	thumb_func_end sub_8028C5C
+	thumb_func_end atk94_damagetohalftargethp
 
-	thumb_func_start sub_8028C98
-sub_8028C98: @ 8028C98
+	thumb_func_start atk95_setsandstorm
+atk95_setsandstorm: @ 8028C98
 	push {lr}
 	ldr r2, _08028CB8 @ =gUnknown_2023F1C
 	ldrh r1, [r2]
@@ -22716,7 +22716,7 @@ _08028CD6:
 _08028CE4: .4byte gUnknown_2023E82
 _08028CE8: .4byte gUnknown_2023F20
 _08028CEC: .4byte gUnknown_2023D74
-	thumb_func_end sub_8028C98
+	thumb_func_end atk95_setsandstorm
 
 	thumb_func_start sub_8028CF0
 sub_8028CF0: @ 8028CF0
@@ -22733,7 +22733,7 @@ sub_8028CF0: @ 8028CF0
 	bne _08028D18
 	ldr r0, _08028DC0 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -22934,7 +22934,7 @@ sub_8028E90: @ 8028E90
 	push {r5-r7}
 	ldr r4, _08028EBC @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08028EC8
@@ -22964,7 +22964,7 @@ _08028ED8:
 	adds r5, r1, r0
 	ldr r4, _08028F04 @ =gUnknown_2023D6C
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08028F0C
@@ -22995,23 +22995,23 @@ _08028F1C:
 	adds r4, r1, r0
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r10, r0
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r9, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r7, r0, 0
 	ldr r5, _08028F80 @ =gUnknown_2023D6C
 	ldrb r0, [r5]
@@ -23043,11 +23043,11 @@ _08028F90: .4byte gUnknown_2023D6A
 _08028F94:
 	mov r0, r10
 	mov r1, r9
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	adds r4, r0, 0
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -23065,14 +23065,14 @@ _08028F94:
 	bne _08028FE4
 	mov r0, r10
 	mov r1, r9
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	beq _08028FE4
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_803F78C
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -23172,9 +23172,9 @@ _08029074:
 	adds r2, r6
 	ldr r2, [r2]
 	movs r0, 0
-	bl sub_800E658
+	bl EmitStatusIconUpdate
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _080290A2:
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -23222,9 +23222,9 @@ _080290D4:
 	adds r2, r3
 	ldr r2, [r2]
 	movs r0, 0
-	bl sub_800E658
+	bl EmitStatusIconUpdate
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08029114:
 	ldr r0, _08029184 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -23233,12 +23233,12 @@ _08029114:
 	cmp r0, 0
 	beq _08029164
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	strb r0, [r4]
 	ldrb r1, [r6]
 	ldrb r2, [r4]
@@ -23259,9 +23259,9 @@ _08029114:
 	adds r2, r3
 	ldr r2, [r2]
 	movs r0, 0
-	bl sub_800E658
+	bl EmitStatusIconUpdate
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _08029164:
 	ldr r1, _08029188 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -23294,9 +23294,9 @@ _0802918C:
 	adds r2, r3
 	ldr r2, [r2]
 	movs r0, 0
-	bl sub_800E658
+	bl EmitStatusIconUpdate
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -23309,13 +23309,13 @@ _080291C8: .4byte gUnknown_2023BC4
 _080291CC: .4byte gUnknown_2023BE4
 	thumb_func_end sub_8029048
 
-	thumb_func_start sub_80291D0
-sub_80291D0: @ 80291D0
+	thumb_func_start atk99_setmist
+atk99_setmist: @ 80291D0
 	push {r4-r6,lr}
 	ldr r6, _08029200 @ =gUnknown_2023DE4
 	ldr r4, _08029204 @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r5, 0x1
 	adds r1, r5, 0
 	ands r1, r0
@@ -23341,7 +23341,7 @@ _08029208: .4byte gUnknown_2023DCC
 _0802920C: .4byte gUnknown_2023E82
 _08029210:
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -23351,7 +23351,7 @@ _08029210:
 	movs r1, 0x5
 	strb r1, [r0, 0x4]
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -23361,7 +23361,7 @@ _08029210:
 	ldrb r1, [r4]
 	strb r1, [r0, 0x5]
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r2, _0802926C @ =gUnknown_2023DDE
 	adds r1, r5, 0
 	ands r1, r0
@@ -23388,10 +23388,10 @@ _0802925E:
 _0802926C: .4byte gUnknown_2023DDE
 _08029270: .4byte gUnknown_2023E82
 _08029274: .4byte gUnknown_2023D74
-	thumb_func_end sub_80291D0
+	thumb_func_end atk99_setmist
 
-	thumb_func_start sub_8029278
-sub_8029278: @ 8029278
+	thumb_func_start atk9A_setfocusenergy
+atk9A_setfocusenergy: @ 8029278
 	push {lr}
 	ldr r1, _080292A8 @ =gUnknown_2023BE4
 	ldr r0, _080292AC @ =gUnknown_2023D6B
@@ -23436,10 +23436,10 @@ _080292C0:
 	.align 2, 0
 _080292CC: .4byte gUnknown_2023E82
 _080292D0: .4byte gUnknown_2023D74
-	thumb_func_end sub_8029278
+	thumb_func_end atk9A_setfocusenergy
 
-	thumb_func_start sub_80292D4
-sub_80292D4: @ 80292D4
+	thumb_func_start atk9B_transformdataexecution
+atk9B_transformdataexecution: @ 80292D4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -23626,7 +23626,7 @@ _08029442:
 	bl sub_800EB74
 	mov r2, r8
 	ldrb r0, [r2]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _08029470 @ =gUnknown_2023E82
 	movs r0, 0
 _08029464:
@@ -23638,10 +23638,10 @@ _08029464:
 	bx r0
 	.align 2, 0
 _08029470: .4byte gUnknown_2023E82
-	thumb_func_end sub_80292D4
+	thumb_func_end atk9B_transformdataexecution
 
-	thumb_func_start sub_8029474
-sub_8029474: @ 8029474
+	thumb_func_start atk9C_setsubstitute
+atk9C_setsubstitute: @ 8029474
 	push {r4-r7,lr}
 	ldr r7, _080294A4 @ =gUnknown_2023BE4
 	ldr r6, _080294A8 @ =gUnknown_2023D6B
@@ -23730,10 +23730,10 @@ _08029520: .4byte gUnknown_2023E0C
 _08029524: .4byte gUnknown_2023E82
 _08029528: .4byte gUnknown_2023DD0
 _0802952C: .4byte gUnknown_2023D74
-	thumb_func_end sub_8029474
+	thumb_func_end atk9C_setsubstitute
 
-	thumb_func_start sub_8029530
-sub_8029530: @ 8029530
+	thumb_func_start IsMoveUncopyableByMimic
+IsMoveUncopyableByMimic: @ 8029530
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -23770,10 +23770,10 @@ _08029558:
 	.align 2, 0
 _08029570: .4byte gUnknown_82507E8
 _08029574: .4byte 0x0000fffe
-	thumb_func_end sub_8029530
+	thumb_func_end IsMoveUncopyableByMimic
 
-	thumb_func_start sub_8029578
-sub_8029578: @ 8029578
+	thumb_func_start atk9D_mimicattackcopy
+atk9D_mimicattackcopy: @ 8029578
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -23789,7 +23789,7 @@ sub_8029578: @ 8029578
 	lsls r0, 1
 	adds r0, r5
 	ldrh r0, [r0]
-	bl sub_8029530
+	bl IsMoveUncopyableByMimic
 	lsls r0, 24
 	cmp r0, 0
 	bne _080295D2
@@ -24003,10 +24003,10 @@ _08029744:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8029578
+	thumb_func_end atk9D_mimicattackcopy
 
-	thumb_func_start sub_8029754
-sub_8029754: @ 8029754
+	thumb_func_start atk9E_metronome
+atk9E_metronome: @ 8029754
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -24017,7 +24017,7 @@ sub_8029754: @ 8029754
 	ldr r0, _080297DC @ =gUnknown_2023D74
 	mov r8, r0
 _08029766:
-	bl sub_8044EC8
+	bl Random
 	ldr r2, _080297E0 @ =0x000001ff
 	adds r1, r2, 0
 	ands r0, r1
@@ -24084,10 +24084,10 @@ _080297EC: .4byte 0xfffffbff
 _080297F0: .4byte gUnknown_81D65A8
 _080297F4: .4byte gUnknown_8250C04
 _080297F8: .4byte gUnknown_2023D6C
-	thumb_func_end sub_8029754
+	thumb_func_end atk9E_metronome
 
-	thumb_func_start sub_80297FC
-sub_80297FC: @ 80297FC
+	thumb_func_start atk9F_dmgtolevel
+atk9F_dmgtolevel: @ 80297FC
 	ldr r3, _0802981C @ =gUnknown_2023D50
 	ldr r2, _08029820 @ =gUnknown_2023BE4
 	ldr r0, _08029824 @ =gUnknown_2023D6B
@@ -24108,14 +24108,14 @@ _0802981C: .4byte gUnknown_2023D50
 _08029820: .4byte gUnknown_2023BE4
 _08029824: .4byte gUnknown_2023D6B
 _08029828: .4byte gUnknown_2023D74
-	thumb_func_end sub_80297FC
+	thumb_func_end atk9F_dmgtolevel
 
-	thumb_func_start sub_802982C
-sub_802982C: @ 802982C
+	thumb_func_start atkA0_psywavedamageeffect
+atkA0_psywavedamageeffect: @ 802982C
 	push {r4,lr}
 	movs r4, 0xF
 _08029830:
-	bl sub_8044EC8
+	bl Random
 	adds r3, r4, 0
 	ands r3, r0
 	cmp r3, 0xA
@@ -24150,14 +24150,14 @@ _08029870: .4byte gUnknown_2023D50
 _08029874: .4byte gUnknown_2023BE4
 _08029878: .4byte gUnknown_2023D6B
 _0802987C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802982C
+	thumb_func_end atkA0_psywavedamageeffect
 
-	thumb_func_start sub_8029880
-sub_8029880: @ 8029880
+	thumb_func_start atkA1_counterdamagecalculator
+atkA1_counterdamagecalculator: @ 8029880
 	push {r4-r6,lr}
 	ldr r4, _080298F0 @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r5, _080298F4 @ =gUnknown_2023E8C
@@ -24165,7 +24165,7 @@ sub_8029880: @ 8029880
 	lsls r0, 4
 	adds r0, r5
 	ldrb r0, [r0, 0xC]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldrb r0, [r4]
@@ -24267,14 +24267,14 @@ _08029964:
 _0802996C: .4byte gUnknown_2023ECC
 _08029970: .4byte gUnknown_2023D6B
 _08029974: .4byte gUnknown_2023D74
-	thumb_func_end sub_8029880
+	thumb_func_end atkA1_counterdamagecalculator
 
-	thumb_func_start sub_8029978
-sub_8029978: @ 8029978
+	thumb_func_start atkA2_mirrorcoatdamagecalculator
+atkA2_mirrorcoatdamagecalculator: @ 8029978
 	push {r4-r6,lr}
 	ldr r4, _080299E8 @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r5, _080299EC @ =gUnknown_2023E8C
@@ -24282,7 +24282,7 @@ sub_8029978: @ 8029978
 	lsls r0, 4
 	adds r0, r5
 	ldrb r0, [r0, 0xD]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldrb r0, [r4]
@@ -24385,10 +24385,10 @@ _08029A5C:
 _08029A64: .4byte gUnknown_2023ECC
 _08029A68: .4byte gUnknown_2023D6B
 _08029A6C: .4byte gUnknown_2023D74
-	thumb_func_end sub_8029978
+	thumb_func_end atkA2_mirrorcoatdamagecalculator
 
-	thumb_func_start sub_8029A70
-sub_8029A70: @ 8029A70
+	thumb_func_start atkA3_disablelastusedattack
+atkA3_disablelastusedattack: @ 8029A70
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -24486,7 +24486,7 @@ _08029AC4:
 	adds r2, r3
 	ldrh r1, [r2]
 	strh r1, [r0, 0x4]
-	bl sub_8044EC8
+	bl Random
 	ldrb r2, [r6]
 	lsls r1, r2, 3
 	subs r1, r2
@@ -24548,10 +24548,10 @@ _08029BA2:
 	bx r0
 	.align 2, 0
 _08029BB0: .4byte gUnknown_2023D74
-	thumb_func_end sub_8029A70
+	thumb_func_end atkA3_disablelastusedattack
 
-	thumb_func_start sub_8029BB4
-sub_8029BB4: @ 8029BB4
+	thumb_func_start atkA4_trysetencore
+atkA4_trysetencore: @ 8029BB4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -24645,7 +24645,7 @@ _08029C24:
 	lsls r0, 2
 	add r0, r9
 	strb r5, [r0, 0xC]
-	bl sub_8044EC8
+	bl Random
 	ldrb r2, [r4]
 	lsls r1, r2, 3
 	subs r1, r2
@@ -24707,10 +24707,10 @@ _08029CD6:
 	bx r0
 	.align 2, 0
 _08029CE4: .4byte gUnknown_2023D74
-	thumb_func_end sub_8029BB4
+	thumb_func_end atkA4_trysetencore
 
-	thumb_func_start sub_8029CE8
-sub_8029CE8: @ 8029CE8
+	thumb_func_start atkA5_painsplitdmgcalc
+atkA5_painsplitdmgcalc: @ 8029CE8
 	push {r4-r7,lr}
 	ldr r6, _08029D68 @ =gUnknown_2023BE4
 	ldr r0, _08029D6C @ =gUnknown_2023D6C
@@ -24804,10 +24804,10 @@ _08029DA2:
 	bx r0
 	.align 2, 0
 _08029DA8: .4byte gUnknown_2023D74
-	thumb_func_end sub_8029CE8
+	thumb_func_end atkA5_painsplitdmgcalc
 
-	thumb_func_start sub_8029DAC
-sub_8029DAC: @ 8029DAC
+	thumb_func_start atkA6_settypetorandomresistance
+atkA6_settypetorandomresistance: @ 8029DAC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -24825,7 +24825,7 @@ sub_8029DAC: @ 8029DAC
 	cmp r1, r0
 	beq _08029DF6
 	ldrh r0, [r2]
-	bl sub_802A1C0
+	bl IsTwoTurnsMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _08029E94
@@ -24924,7 +24924,7 @@ _08029E94:
 	movs r7, 0x7F
 	mov r9, r7
 _08029E9C:
-	bl sub_8044EC8
+	bl Random
 	mov r4, r9
 	ands r4, r0
 	cmp r4, 0x70
@@ -25057,10 +25057,10 @@ _08029F9C: .4byte gUnknown_2023BE4
 _08029FA0: .4byte 0x000003e7
 _08029FA4: .4byte gUnknown_2023D74
 _08029FA8: .4byte 0x0000014f
-	thumb_func_end sub_8029DAC
+	thumb_func_end atkA6_settypetorandomresistance
 
-	thumb_func_start sub_8029FAC
-sub_8029FAC: @ 8029FAC
+	thumb_func_start atkA7_setalwayshitflag
+atkA7_setalwayshitflag: @ 8029FAC
 	push {r4,lr}
 	ldr r4, _08029FF0 @ =gUnknown_2023DFC
 	ldr r3, _08029FF4 @ =gUnknown_2023D6C
@@ -25101,10 +25101,10 @@ _08029FF4: .4byte gUnknown_2023D6C
 _08029FF8: .4byte gUnknown_2023E0C
 _08029FFC: .4byte gUnknown_2023D6B
 _0802A000: .4byte gUnknown_2023D74
-	thumb_func_end sub_8029FAC
+	thumb_func_end atkA7_setalwayshitflag
 
-	thumb_func_start sub_802A004
-sub_802A004: @ 802A004
+	thumb_func_start atkA8_copymovepermanently
+atkA8_copymovepermanently: @ 802A004
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -25260,10 +25260,10 @@ _0802A0F2:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldr r0, _0802A184 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _0802A188 @ =gUnknown_2022AB8
 	movs r0, 0xFD
 	strb r0, [r1]
@@ -25326,10 +25326,10 @@ _0802A1AA:
 	bx r0
 	.align 2, 0
 _0802A1BC: .4byte gUnknown_2023D74
-	thumb_func_end sub_802A004
+	thumb_func_end atkA8_copymovepermanently
 
-	thumb_func_start sub_802A1C0
-sub_802A1C0: @ 802A1C0
+	thumb_func_start IsTwoTurnsMove
+IsTwoTurnsMove: @ 802A1C0
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -25361,10 +25361,10 @@ _0802A1F4:
 _0802A1F6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_802A1C0
+	thumb_func_end IsTwoTurnsMove
 
-	thumb_func_start sub_802A1FC
-sub_802A1FC: @ 802A1FC
+	thumb_func_start IsInvalidForSleepTalkOrAssist
+IsInvalidForSleepTalkOrAssist: @ 802A1FC
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -25388,10 +25388,10 @@ _0802A21E:
 _0802A220:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_802A1FC
+	thumb_func_end IsInvalidForSleepTalkOrAssist
 
-	thumb_func_start sub_802A224
-sub_802A224: @ 802A224
+	thumb_func_start AttacksThisTurn
+AttacksThisTurn: @ 802A224
 	push {lr}
 	lsls r1, 16
 	lsrs r2, r1, 16
@@ -25447,10 +25447,10 @@ _0802A288:
 _0802A28A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_802A224
+	thumb_func_end AttacksThisTurn
 
-	thumb_func_start sub_802A290
-sub_802A290: @ 802A290
+	thumb_func_start atkA9_trychoosesleeptalkmove
+atkA9_trychoosesleeptalkmove: @ 802A290
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -25476,7 +25476,7 @@ _0802A2AE:
 	adds r0, r4, r0
 	adds r0, r7
 	ldrh r0, [r0]
-	bl sub_802A1FC
+	bl IsInvalidForSleepTalkOrAssist
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802A2EE
@@ -25493,7 +25493,7 @@ _0802A2AE:
 	cmp r1, 0xFD
 	beq _0802A2EE
 	adds r0, r1, 0
-	bl sub_802A1C0
+	bl IsTwoTurnsMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802A2FC
@@ -25532,7 +25532,7 @@ _0802A330:
 	movs r7, 0x3
 	ldr r4, _0802A3A4 @ =gUnknown_825E45C
 _0802A334:
-	bl sub_8044EC8
+	bl Random
 	adds r5, r7, 0
 	ands r5, r0
 	lsls r0, r5, 2
@@ -25596,10 +25596,10 @@ _0802A3B8: .4byte gUnknown_2023DD0
 _0802A3BC: .4byte 0xfffffbff
 _0802A3C0: .4byte gUnknown_2023D6C
 _0802A3C4: .4byte gUnknown_2023D74
-	thumb_func_end sub_802A290
+	thumb_func_end atkA9_trychoosesleeptalkmove
 
-	thumb_func_start sub_802A3C8
-sub_802A3C8: @ 802A3C8
+	thumb_func_start atkAA_setdestinybond
+atkAA_setdestinybond: @ 802A3C8
 	ldr r1, _0802A3EC @ =gUnknown_2023BE4
 	ldr r0, _0802A3F0 @ =gUnknown_2023D6B
 	ldrb r2, [r0]
@@ -25621,19 +25621,19 @@ sub_802A3C8: @ 802A3C8
 _0802A3EC: .4byte gUnknown_2023BE4
 _0802A3F0: .4byte gUnknown_2023D6B
 _0802A3F4: .4byte gUnknown_2023D74
-	thumb_func_end sub_802A3C8
+	thumb_func_end atkAA_setdestinybond
 
-	thumb_func_start sub_802A3F8
-sub_802A3F8: @ 802A3F8
+	thumb_func_start TrySetDestinyBondToHappen
+TrySetDestinyBondToHappen: @ 802A3F8
 	push {r4,r5,lr}
 	ldr r0, _0802A448 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r4, _0802A44C @ =gUnknown_2023D6C
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r1, _0802A450 @ =gUnknown_2023BE4
@@ -25669,12 +25669,12 @@ _0802A448: .4byte gUnknown_2023D6B
 _0802A44C: .4byte gUnknown_2023D6C
 _0802A450: .4byte gUnknown_2023BE4
 _0802A454: .4byte gUnknown_2023DD0
-	thumb_func_end sub_802A3F8
+	thumb_func_end TrySetDestinyBondToHappen
 
-	thumb_func_start sub_802A458
-sub_802A458: @ 802A458
+	thumb_func_start atkAB_trysetdestinybondtohappen
+atkAB_trysetdestinybondtohappen: @ 802A458
 	push {lr}
-	bl sub_802A3F8
+	bl TrySetDestinyBondToHappen
 	ldr r1, _0802A46C @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -25683,10 +25683,10 @@ sub_802A458: @ 802A458
 	bx r0
 	.align 2, 0
 _0802A46C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802A458
+	thumb_func_end atkAB_trysetdestinybondtohappen
 
-	thumb_func_start sub_802A470
-sub_802A470: @ 802A470
+	thumb_func_start atkAC_remaininghptopower
+atkAC_remaininghptopower: @ 802A470
 	push {lr}
 	ldr r2, _0802A4C4 @ =gUnknown_2023BE4
 	ldr r0, _0802A4C8 @ =gUnknown_2023D6B
@@ -25699,7 +25699,7 @@ sub_802A470: @ 802A470
 	movs r2, 0x2C
 	ldrsh r1, [r1, r2]
 	movs r2, 0x30
-	bl sub_804A5E8
+	bl GetScaledHPFraction
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r3, 0
@@ -25735,10 +25735,10 @@ _0802A4C8: .4byte gUnknown_2023D6B
 _0802A4CC: .4byte gUnknown_8250810
 _0802A4D0: .4byte gUnknown_2023F50
 _0802A4D4: .4byte gUnknown_2023D74
-	thumb_func_end sub_802A470
+	thumb_func_end atkAC_remaininghptopower
 
-	thumb_func_start sub_802A4D8
-sub_802A4D8: @ 802A4D8
+	thumb_func_start atkAD_tryspiteppreduce
+atkAD_tryspiteppreduce: @ 802A4D8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -25812,7 +25812,7 @@ _0802A53E:
 	bhi _0802A55E
 	b _0802A680
 _0802A55E:
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	adds r6, r1, 0x2
@@ -25911,9 +25911,9 @@ _0802A57C:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _0802A630:
 	ldr r1, _0802A67C @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -25931,7 +25931,7 @@ _0802A630:
 	cmp r0, 0
 	bne _0802A69A
 	adds r0, r2, 0
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	b _0802A69A
 	.align 2, 0
 _0802A658: .4byte gUnknown_2023D98
@@ -25969,10 +25969,10 @@ _0802A69A:
 	bx r0
 	.align 2, 0
 _0802A6AC: .4byte gUnknown_2023D74
-	thumb_func_end sub_802A4D8
+	thumb_func_end atkAD_tryspiteppreduce
 
-	thumb_func_start sub_802A6B0
-sub_802A6B0: @ 802A6B0
+	thumb_func_start atkAE_healpartystatus
+atkAE_healpartystatus: @ 802A6B0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -25993,7 +25993,7 @@ _0802A6CC:
 	strb r0, [r6, 0x5]
 	ldr r5, _0802A728 @ =gUnknown_2023D6B
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, _0802A72C @ =gUnknown_202402C
 	mov r10, r1
@@ -26049,14 +26049,14 @@ _0802A74C:
 	ldr r7, _0802A7C0 @ =gUnknown_2023BC4
 	ldr r0, _0802A7C4 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r2, 0x2
 	mov r9, r2
 	mov r1, r9
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _0802A7C8 @ =gUnknown_2023FC4
 	strb r0, [r1, 0x17]
 	strb r0, [r7]
@@ -26129,12 +26129,12 @@ _0802A7F6:
 	add r4, r10
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r5, 0
@@ -26242,12 +26242,12 @@ _0802A8B6:
 	ands r0, r6
 	str r0, [r1]
 	ldrb r0, [r2]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r4, _0802A980 @ =gUnknown_2023BC4
 	strb r0, [r4]
 	ldr r0, _0802A984 @ =gUnknown_2022B4C
@@ -26290,9 +26290,9 @@ _0802A934:
 	movs r0, 0
 	movs r1, 0x28
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _0802A956:
 	ldr r1, _0802A990 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -26316,10 +26316,10 @@ _0802A984: .4byte gUnknown_2022B4C
 _0802A988: .4byte gUnknown_2023D70
 _0802A98C: .4byte gUnknown_825E45C
 _0802A990: .4byte gUnknown_2023D74
-	thumb_func_end sub_802A6B0
+	thumb_func_end atkAE_healpartystatus
 
-	thumb_func_start sub_802A994
-sub_802A994: @ 802A994
+	thumb_func_start atkAF_cursetarget
+atkAF_cursetarget: @ 802A994
 	push {r4,r5,lr}
 	ldr r5, _0802A9D4 @ =gUnknown_2023BE4
 	ldr r0, _0802A9D8 @ =gUnknown_2023D6C
@@ -26383,14 +26383,14 @@ _0802AA04:
 _0802AA0C: .4byte gUnknown_2023D50
 _0802AA10: .4byte gUnknown_2023D6B
 _0802AA14: .4byte gUnknown_2023D74
-	thumb_func_end sub_802A994
+	thumb_func_end atkAF_cursetarget
 
-	thumb_func_start sub_802AA18
-sub_802AA18: @ 802AA18
+	thumb_func_start atkB0_trysetspikes
+atkB0_trysetspikes: @ 802AA18
 	push {r4,lr}
 	ldr r4, _0802AA6C @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -26453,10 +26453,10 @@ _0802AA96:
 	.align 2, 0
 _0802AA9C: .4byte gUnknown_2023DDE
 _0802AAA0: .4byte gUnknown_2023D74
-	thumb_func_end sub_802AA18
+	thumb_func_end atkB0_trysetspikes
 
-	thumb_func_start sub_802AAA4
-sub_802AAA4: @ 802AAA4
+	thumb_func_start atkB1_setforesight
+atkB1_setforesight: @ 802AAA4
 	ldr r1, _0802AAC8 @ =gUnknown_2023BE4
 	ldr r0, _0802AACC @ =gUnknown_2023D6C
 	ldrb r2, [r0]
@@ -26478,10 +26478,10 @@ sub_802AAA4: @ 802AAA4
 _0802AAC8: .4byte gUnknown_2023BE4
 _0802AACC: .4byte gUnknown_2023D6C
 _0802AAD0: .4byte gUnknown_2023D74
-	thumb_func_end sub_802AAA4
+	thumb_func_end atkB1_setforesight
 
-	thumb_func_start sub_802AAD4
-sub_802AAD4: @ 802AAD4
+	thumb_func_start atkB2_trysetperishsong
+atkB2_trysetperishsong: @ 802AAD4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -26539,7 +26539,7 @@ _0802AB34:
 _0802AB40:
 	mov r1, r8
 	ldrb r0, [r1]
-	bl sub_80170C4
+	bl PressurePPLoseOnUsingPerishSong
 	ldr r0, _0802AB6C @ =gUnknown_2023BCC
 	ldrb r0, [r0]
 	cmp r6, r0
@@ -26575,10 +26575,10 @@ _0802AB7C:
 	bx r0
 	.align 2, 0
 _0802AB88: .4byte gUnknown_2023D74
-	thumb_func_end sub_802AAD4
+	thumb_func_end atkB2_trysetperishsong
 
-	thumb_func_start sub_802AB8C
-sub_802AB8C: @ 802AB8C
+	thumb_func_start atkB3_rolloutdamagecalculation
+atkB3_rolloutdamagecalculation: @ 802AB8C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -26591,7 +26591,7 @@ sub_802AB8C: @ 802AB8C
 	beq _0802ABC0
 	ldr r0, _0802ABB4 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80172E8
+	bl CancelMultiTurnMoves
 	ldr r1, _0802ABB8 @ =gUnknown_2023D74
 	ldr r0, _0802ABBC @ =gUnknown_81D6960
 	str r0, [r1]
@@ -26764,10 +26764,10 @@ _0802ACF8: .4byte 0xffffefff
 _0802ACFC: .4byte gUnknown_2023F50
 _0802AD00: .4byte gUnknown_8250C04
 _0802AD04: .4byte gUnknown_2023D74
-	thumb_func_end sub_802AB8C
+	thumb_func_end atkB3_rolloutdamagecalculation
 
-	thumb_func_start sub_802AD08
-sub_802AD08: @ 802AD08
+	thumb_func_start atkB4_jumpifconfusedandstatmaxed
+atkB4_jumpifconfusedandstatmaxed: @ 802AD08
 	push {r4,r5,lr}
 	ldr r5, _0802AD58 @ =gUnknown_2023BE4
 	ldr r0, _0802AD5C @ =gUnknown_2023D6C
@@ -26819,10 +26819,10 @@ _0802AD6A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802AD08
+	thumb_func_end atkB4_jumpifconfusedandstatmaxed
 
-	thumb_func_start sub_802AD70
-sub_802AD70: @ 802AD70
+	thumb_func_start atkB5_furycuttercalc
+atkB5_furycuttercalc: @ 802AD70
 	push {r4,r5,lr}
 	ldr r0, _0802AD98 @ =gUnknown_2023DCC
 	ldrb r1, [r0]
@@ -26908,10 +26908,10 @@ _0802AE14: .4byte gUnknown_2023F50
 _0802AE18: .4byte gUnknown_8250C04
 _0802AE1C: .4byte gUnknown_2023D4A
 _0802AE20: .4byte gUnknown_2023D74
-	thumb_func_end sub_802AD70
+	thumb_func_end atkB5_furycuttercalc
 
-	thumb_func_start sub_802AE24
-sub_802AE24: @ 802AE24
+	thumb_func_start atkB6_happinesstodamagecalculation
+atkB6_happinesstodamagecalculation: @ 802AE24
 	push {r4,lr}
 	ldr r2, _0802AE50 @ =gUnknown_8250C04
 	ldr r0, _0802AE54 @ =gUnknown_2023D4A
@@ -26970,12 +26970,12 @@ _0802AE98: .4byte gUnknown_2023F50
 _0802AE9C: .4byte gUnknown_2023BE4
 _0802AEA0: .4byte gUnknown_2023D6B
 _0802AEA4: .4byte gUnknown_2023D74
-	thumb_func_end sub_802AE24
+	thumb_func_end atkB6_happinesstodamagecalculation
 
-	thumb_func_start sub_802AEA8
-sub_802AEA8: @ 802AEA8
+	thumb_func_start atkB7_presentdamagecalculation
+atkB7_presentdamagecalculation: @ 802AEA8
 	push {r4,lr}
-	bl sub_8044EC8
+	bl Random
 	movs r4, 0xFF
 	ands r4, r0
 	cmp r4, 0x65
@@ -27071,14 +27071,14 @@ _0802AF5E:
 _0802AF68: .4byte gUnknown_2023DCC
 _0802AF6C: .4byte gUnknown_2023D74
 _0802AF70: .4byte gUnknown_81D7DB7
-	thumb_func_end sub_802AEA8
+	thumb_func_end atkB7_presentdamagecalculation
 
-	thumb_func_start sub_802AF74
-sub_802AF74: @ 802AF74
+	thumb_func_start atkB8_setsafeguard
+atkB8_setsafeguard: @ 802AF74
 	push {r4-r7,lr}
 	ldr r7, _0802AFA8 @ =gUnknown_2023D6B
 	ldrb r0, [r7]
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r4, _0802AFAC @ =gUnknown_2023DDE
 	movs r6, 0x1
 	adds r1, r6, 0
@@ -27106,7 +27106,7 @@ _0802AFB0: .4byte gUnknown_2023DCC
 _0802AFB4: .4byte gUnknown_2023E82
 _0802AFB8:
 	ldrb r0, [r7]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r1, 1
@@ -27116,7 +27116,7 @@ _0802AFB8:
 	orrs r0, r2
 	strh r0, [r1]
 	ldrb r0, [r7]
-	bl sub_80751D8
+	bl GetBankIdentity
 	ldr r5, _0802B010 @ =gUnknown_2023DE4
 	adds r1, r6, 0
 	ands r1, r0
@@ -27127,7 +27127,7 @@ _0802AFB8:
 	movs r4, 0x5
 	strb r4, [r0, 0x6]
 	ldrb r0, [r7]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -27150,14 +27150,14 @@ _0802B000:
 _0802B010: .4byte gUnknown_2023DE4
 _0802B014: .4byte gUnknown_2023E82
 _0802B018: .4byte gUnknown_2023D74
-	thumb_func_end sub_802AF74
+	thumb_func_end atkB8_setsafeguard
 
-	thumb_func_start sub_802B01C
-sub_802B01C: @ 802B01C
+	thumb_func_start atkB9_magnitudedamagecalculation
+atkB9_magnitudedamagecalculation: @ 802B01C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -27294,10 +27294,10 @@ _0802B130: .4byte gUnknown_2023D74
 _0802B134: .4byte gUnknown_2023D6B
 _0802B138: .4byte gUnknown_825E45C
 _0802B13C: .4byte gUnknown_2023D70
-	thumb_func_end sub_802B01C
+	thumb_func_end atkB9_magnitudedamagecalculation
 
-	thumb_func_start sub_802B140
-sub_802B140: @ 802B140
+	thumb_func_start atkBA_jumpifnopursuitswitchdmg
+atkBA_jumpifnopursuitswitchdmg: @ 802B140
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -27309,7 +27309,7 @@ sub_802B140: @ 802B140
 	bne _0802B170
 	ldr r0, _0802B168 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802B16C
@@ -27324,7 +27324,7 @@ _0802B16C:
 _0802B170:
 	ldr r0, _0802B184 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802B188
@@ -27335,7 +27335,7 @@ _0802B184: .4byte gUnknown_2023D6B
 _0802B188:
 	movs r0, 0x2
 _0802B18A:
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r1, _0802B264 @ =gUnknown_2023D6C
 	strb r0, [r1]
 	ldr r0, _0802B268 @ =gUnknown_2023D7C
@@ -27489,10 +27489,10 @@ _0802B2C2:
 	bx r0
 	.align 2, 0
 _0802B2D0: .4byte gUnknown_2023D74
-	thumb_func_end sub_802B140
+	thumb_func_end atkBA_jumpifnopursuitswitchdmg
 
-	thumb_func_start sub_802B2D4
-sub_802B2D4: @ 802B2D4
+	thumb_func_start atkBB_setsunny
+atkBB_setsunny: @ 802B2D4
 	push {lr}
 	ldr r2, _0802B2F4 @ =gUnknown_2023F1C
 	ldrh r1, [r2]
@@ -27534,10 +27534,10 @@ _0802B312:
 _0802B320: .4byte gUnknown_2023E82
 _0802B324: .4byte gUnknown_2023F20
 _0802B328: .4byte gUnknown_2023D74
-	thumb_func_end sub_802B2D4
+	thumb_func_end atkBB_setsunny
 
-	thumb_func_start sub_802B32C
-sub_802B32C: @ 802B32C
+	thumb_func_start atkBC_maxattackhalvehp
+atkBC_maxattackhalvehp: @ 802B32C
 	push {r4,r5,lr}
 	ldr r5, _0802B378 @ =gUnknown_2023BE4
 	ldr r4, _0802B37C @ =gUnknown_2023D6B
@@ -27602,10 +27602,10 @@ _0802B3A2:
 	bx r0
 	.align 2, 0
 _0802B3A8: .4byte gUnknown_2023D74
-	thumb_func_end sub_802B32C
+	thumb_func_end atkBC_maxattackhalvehp
 
-	thumb_func_start sub_802B3AC
-sub_802B3AC: @ 802B3AC
+	thumb_func_start atkBD_copyfoestats
+atkBD_copyfoestats: @ 802B3AC
 	push {r4-r7,lr}
 	movs r2, 0
 	ldr r7, _0802B3E4 @ =gUnknown_2023D74
@@ -27639,10 +27639,10 @@ _0802B3E4: .4byte gUnknown_2023D74
 _0802B3E8: .4byte gUnknown_2023D6B
 _0802B3EC: .4byte gUnknown_2023BFC
 _0802B3F0: .4byte gUnknown_2023D6C
-	thumb_func_end sub_802B3AC
+	thumb_func_end atkBD_copyfoestats
 
-	thumb_func_start sub_802B3F4
-sub_802B3F4: @ 802B3F4
+	thumb_func_start atkBE_rapidspinfree
+atkBE_rapidspinfree: @ 802B3F4
 	push {r4-r6,lr}
 	ldr r1, _0802B464 @ =gUnknown_2023BE4
 	ldr r5, _0802B468 @ =gUnknown_2023D6B
@@ -27694,7 +27694,7 @@ sub_802B3F4: @ 802B3F4
 	strb r0, [r1, 0x3]
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0802B480 @ =gUnknown_2023D74
 	ldr r0, _0802B484 @ =gUnknown_81D8DF3
 	b _0802B532
@@ -27729,7 +27729,7 @@ _0802B488:
 	negs r2, r2
 	ands r0, r2
 	str r0, [r1]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0802B4C0 @ =gUnknown_2023D74
 	ldr r0, _0802B4C4 @ =gUnknown_81D8E04
 	b _0802B532
@@ -27739,7 +27739,7 @@ _0802B4C0: .4byte gUnknown_2023D74
 _0802B4C4: .4byte gUnknown_81D8E04
 _0802B4C8:
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	ldr r4, _0802B518 @ =gUnknown_2023DDE
 	lsls r0, 24
 	lsrs r0, 23
@@ -27750,7 +27750,7 @@ _0802B4C8:
 	cmp r0, 0
 	beq _0802B52C
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -27760,7 +27760,7 @@ _0802B4C8:
 	movs r4, 0
 	strh r1, [r0]
 	ldrb r0, [r5]
-	bl sub_80751C4
+	bl GetBankSide
 	ldr r2, _0802B520 @ =gUnknown_2023DE4
 	lsls r0, 24
 	lsrs r0, 24
@@ -27769,7 +27769,7 @@ _0802B4C8:
 	lsls r1, 2
 	adds r1, r2
 	strb r4, [r1, 0xA]
-	bl sub_8017544
+	bl BattleScriptPushCursor
 	ldr r1, _0802B524 @ =gUnknown_2023D74
 	ldr r0, _0802B528 @ =gUnknown_81D8E0B
 	b _0802B532
@@ -27790,10 +27790,10 @@ _0802B532:
 	bx r0
 	.align 2, 0
 _0802B53C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802B3F4
+	thumb_func_end atkBE_rapidspinfree
 
-	thumb_func_start sub_802B540
-sub_802B540: @ 802B540
+	thumb_func_start atkBF_setdefensecurlbit
+atkBF_setdefensecurlbit: @ 802B540
 	ldr r1, _0802B564 @ =gUnknown_2023BE4
 	ldr r0, _0802B568 @ =gUnknown_2023D6B
 	ldrb r2, [r0]
@@ -27815,10 +27815,10 @@ sub_802B540: @ 802B540
 _0802B564: .4byte gUnknown_2023BE4
 _0802B568: .4byte gUnknown_2023D6B
 _0802B56C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802B540
+	thumb_func_end atkBF_setdefensecurlbit
 
-	thumb_func_start sub_802B570
-sub_802B570: @ 802B570
+	thumb_func_start atkC0_recoverbasedonsunlight
+atkC0_recoverbasedonsunlight: @ 802B570
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r1, _0802B5DC @ =gUnknown_2023D6C
@@ -27946,7 +27946,7 @@ _0802B66A:
 	bx r0
 	.align 2, 0
 _0802B674: .4byte gUnknown_2023D74
-	thumb_func_end sub_802B570
+	thumb_func_end atkC0_recoverbasedonsunlight
 
 	thumb_func_start sub_802B678
 sub_802B678: @ 802B678
@@ -28189,7 +28189,7 @@ _0802B82C:
 	strb r1, [r0]
 	ldr r4, _0802B8D4 @ =gUnknown_2023DDE
 	ldrb r0, [r7]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	mov r10, r1
 	ands r1, r0
@@ -28277,15 +28277,15 @@ _0802B908: .4byte gUnknown_2023E82
 _0802B90C: .4byte gUnknown_2023D74
 	thumb_func_end sub_802B7E8
 
-	thumb_func_start sub_802B910
-sub_802B910: @ 802B910
+	thumb_func_start atkC4_trydobeatup
+atkC4_trydobeatup: @ 802B910
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
 	ldr r0, _0802B954 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	ldr r7, _0802B958 @ =gUnknown_202402C
 	cmp r0, 0
@@ -28334,21 +28334,21 @@ _0802B97C:
 	muls r0, r5
 	adds r0, r7, r0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0802B9C0
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7, r0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0802B9C0
 	ldrb r0, [r4]
 	muls r0, r5
 	adds r0, r7, r0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -28357,7 +28357,7 @@ _0802B97C:
 	muls r0, r5
 	adds r0, r7, r0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0802B9D0
 _0802B9C0:
@@ -28399,7 +28399,7 @@ _0802B9D0:
 	muls r0, r4
 	adds r0, r7, r0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -28423,7 +28423,7 @@ _0802B9D0:
 	muls r0, r4
 	adds r0, r7, r0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 1
 	movs r1, 0x5
 	bl __udivsi3
@@ -28525,10 +28525,10 @@ _0802BB0E:
 	bx r0
 	.align 2, 0
 _0802BB1C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802B910
+	thumb_func_end atkC4_trydobeatup
 
-	thumb_func_start sub_802BB20
-sub_802BB20: @ 802BB20
+	thumb_func_start atkC5_setsemiinvulnerablebit
+atkC5_setsemiinvulnerablebit: @ 802BB20
 	push {lr}
 	ldr r0, _0802BB34 @ =gUnknown_2023D4A
 	ldrh r1, [r0]
@@ -28596,10 +28596,10 @@ _0802BB8C:
 _0802BB98: .4byte gUnknown_2023DFC
 _0802BB9C: .4byte gUnknown_2023D6B
 _0802BBA0: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BB20
+	thumb_func_end atkC5_setsemiinvulnerablebit
 
-	thumb_func_start sub_802BBA4
-sub_802BBA4: @ 802BBA4
+	thumb_func_start atkC6_clearsemiinvulnerablebit
+atkC6_clearsemiinvulnerablebit: @ 802BBA4
 	push {lr}
 	ldr r0, _0802BBB8 @ =gUnknown_2023D4A
 	ldrh r1, [r0]
@@ -28669,10 +28669,10 @@ _0802BC24: .4byte gUnknown_2023DFC
 _0802BC28: .4byte gUnknown_2023D6B
 _0802BC2C: .4byte 0xfffbffff
 _0802BC30: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BBA4
+	thumb_func_end atkC6_clearsemiinvulnerablebit
 
-	thumb_func_start sub_802BC34
-sub_802BC34: @ 802BC34
+	thumb_func_start atkC7_setminimize
+atkC7_setminimize: @ 802BC34
 	push {lr}
 	ldr r0, _0802BC64 @ =gUnknown_2023DD0
 	ldr r0, [r0]
@@ -28703,10 +28703,10 @@ _0802BC64: .4byte gUnknown_2023DD0
 _0802BC68: .4byte gUnknown_2023DFC
 _0802BC6C: .4byte gUnknown_2023D6B
 _0802BC70: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BC34
+	thumb_func_end atkC7_setminimize
 
-	thumb_func_start sub_802BC74
-sub_802BC74: @ 802BC74
+	thumb_func_start atkC8_sethail
+atkC8_sethail: @ 802BC74
 	push {lr}
 	ldr r3, _0802BC98 @ =gUnknown_2023F1C
 	ldrh r1, [r3]
@@ -28747,10 +28747,10 @@ _0802BCB2:
 _0802BCC0: .4byte gUnknown_2023E82
 _0802BCC4: .4byte gUnknown_2023F20
 _0802BCC8: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BC74
+	thumb_func_end atkC8_sethail
 
-	thumb_func_start sub_802BCCC
-sub_802BCCC: @ 802BCCC
+	thumb_func_start atkC9_jumpifattackandspecialattackcannotfall
+atkC9_jumpifattackandspecialattackcannotfall: @ 802BCCC
 	push {r4,lr}
 	ldr r2, _0802BD10 @ =gUnknown_2023BE4
 	ldr r0, _0802BD14 @ =gUnknown_2023D6C
@@ -28804,9 +28804,9 @@ _0802BD20:
 	str r0, [r2]
 	ldr r1, _0802BD60 @ =0x00007fff
 	movs r0, 0
-	bl sub_800E5EC
+	bl EmitHealthBarUpdate
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _0802BD64 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x5
@@ -28821,14 +28821,14 @@ _0802BD58: .4byte gUnknown_2023D6B
 _0802BD5C: .4byte gUnknown_2023D50
 _0802BD60: .4byte 0x00007fff
 _0802BD64: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BCCC
+	thumb_func_end atkC9_jumpifattackandspecialattackcannotfall
 
-	thumb_func_start sub_802BD68
-sub_802BD68: @ 802BD68
+	thumb_func_start atkCA_setforcedtarget
+atkCA_setforcedtarget: @ 802BD68
 	push {r4,r5,lr}
 	ldr r4, _0802BDA8 @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	ldr r5, _0802BDAC @ =gUnknown_2023DE4
 	lsls r0, 24
 	lsrs r0, 24
@@ -28839,7 +28839,7 @@ sub_802BD68: @ 802BD68
 	movs r0, 0x1
 	strb r0, [r1, 0x8]
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -28859,10 +28859,10 @@ sub_802BD68: @ 802BD68
 _0802BDA8: .4byte gUnknown_2023D6B
 _0802BDAC: .4byte gUnknown_2023DE4
 _0802BDB0: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BD68
+	thumb_func_end atkCA_setforcedtarget
 
-	thumb_func_start sub_802BDB4
-sub_802BDB4: @ 802BDB4
+	thumb_func_start atkCB_setcharge
+atkCB_setcharge: @ 802BDB4
 	push {r4,lr}
 	ldr r0, _0802BE08 @ =gUnknown_2023DFC
 	ldr r3, _0802BE0C @ =gUnknown_2023D6B
@@ -28910,10 +28910,10 @@ _0802BE08: .4byte gUnknown_2023DFC
 _0802BE0C: .4byte gUnknown_2023D6B
 _0802BE10: .4byte gUnknown_2023E0C
 _0802BE14: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BDB4
+	thumb_func_end atkCB_setcharge
 
-	thumb_func_start sub_802BE18
-sub_802BE18: @ 802BE18
+	thumb_func_start atkCC_callterrainattack
+atkCC_callterrainattack: @ 802BE18
 	push {r4,lr}
 	ldr r2, _0802BE68 @ =gUnknown_2023DD0
 	ldr r0, [r2]
@@ -28944,7 +28944,7 @@ sub_802BE18: @ 802BE18
 	lsls r0, 2
 	adds r0, r3
 	ldr r0, [r0]
-	bl sub_8017520
+	bl BattleScriptPush
 	ldr r1, _0802BE88 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -28962,10 +28962,10 @@ _0802BE7C: .4byte gUnknown_2023D6C
 _0802BE80: .4byte gUnknown_81D65A8
 _0802BE84: .4byte gUnknown_8250C04
 _0802BE88: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BE18
+	thumb_func_end atkCC_callterrainattack
 
-	thumb_func_start sub_802BE8C
-sub_802BE8C: @ 802BE8C
+	thumb_func_start atkCD_cureifburnedparalysedorpoisoned
+atkCD_cureifburnedparalysedorpoisoned: @ 802BE8C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r1, _0802BED8 @ =gUnknown_2023BE4
@@ -28998,9 +28998,9 @@ sub_802BE8C: @ 802BE8C
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	b _0802BF02
 	.align 2, 0
 _0802BED8: .4byte gUnknown_2023BE4
@@ -29028,10 +29028,10 @@ _0802BF02:
 	bx r0
 	.align 2, 0
 _0802BF0C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BE8C
+	thumb_func_end atkCD_cureifburnedparalysedorpoisoned
 
-	thumb_func_start sub_802BF10
-sub_802BF10: @ 802BF10
+	thumb_func_start atkCE_settorment
+atkCE_settorment: @ 802BF10
 	push {lr}
 	ldr r1, _0802BF48 @ =gUnknown_2023BE4
 	ldr r0, _0802BF4C @ =gUnknown_2023D6C
@@ -29075,10 +29075,10 @@ _0802BF60:
 	bx r0
 	.align 2, 0
 _0802BF64: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BF10
+	thumb_func_end atkCE_settorment
 
-	thumb_func_start sub_802BF68
-sub_802BF68: @ 802BF68
+	thumb_func_start atkCF_jumpifnodamage
+atkCF_jumpifnodamage: @ 802BF68
 	push {lr}
 	ldr r2, _0802BF94 @ =gUnknown_2023E8C
 	ldr r0, _0802BF98 @ =gUnknown_2023D6B
@@ -29124,10 +29124,10 @@ _0802BFBA:
 	bx r0
 	.align 2, 0
 _0802BFC0: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BF68
+	thumb_func_end atkCF_jumpifnodamage
 
-	thumb_func_start sub_802BFC4
-sub_802BFC4: @ 802BFC4
+	thumb_func_start atkD0_settaunt
+atkD0_settaunt: @ 802BFC4
 	push {r4,lr}
 	ldr r4, _0802C008 @ =gUnknown_2023E0C
 	ldr r3, _0802C00C @ =gUnknown_2023D6C
@@ -29186,19 +29186,19 @@ _0802C02E:
 	bx r0
 	.align 2, 0
 _0802C034: .4byte gUnknown_2023D74
-	thumb_func_end sub_802BFC4
+	thumb_func_end atkD0_settaunt
 
-	thumb_func_start sub_802C038
-sub_802C038: @ 802C038
+	thumb_func_start atkD1_trysethelpinghand
+atkD1_trysethelpinghand: @ 802C038
 	push {r4,lr}
 	ldr r4, _0802C0A0 @ =gUnknown_2023D6B
 	ldrb r0, [r4]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r3, _0802C0A4 @ =gUnknown_2023D6C
 	strb r0, [r3]
 	ldr r0, _0802C0A8 @ =gUnknown_2022B4C
@@ -29267,7 +29267,7 @@ _0802C0D6:
 	bx r0
 	.align 2, 0
 _0802C0DC: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C038
+	thumb_func_end atkD1_trysethelpinghand
 
 	thumb_func_start sub_802C0E0
 sub_802C0E0: @ 802C0E0
@@ -29286,7 +29286,7 @@ sub_802C0E0: @ 802C0E0
 	bne _0802C1DE
 	ldr r0, _0802C200 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -29305,12 +29305,12 @@ sub_802C0E0: @ 802C0E0
 _0802C120:
 	ldr r6, _0802C200 @ =gUnknown_2023D6B
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r7, _0802C20C @ =gUnknown_2023D6C
 	ldrb r0, [r7]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _0802C1FC @ =gUnknown_2022B4C
@@ -29479,10 +29479,10 @@ _0802C258:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldr r1, _0802C348 @ =gUnknown_2023D6B
 	ldrb r0, [r1]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldrb r0, [r7]
 	strb r0, [r4]
 	ldrb r0, [r7]
@@ -29495,9 +29495,9 @@ _0802C258:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r7]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldrb r0, [r7]
 	mov r2, r10
 	ldr r1, [r2]
@@ -29599,8 +29599,8 @@ _0802C37A:
 _0802C38C: .4byte gUnknown_2023E82
 	thumb_func_end sub_802C0E0
 
-	thumb_func_start sub_802C390
-sub_802C390: @ 802C390
+	thumb_func_start atkD3_trycopyability
+atkD3_trycopyability: @ 802C390
 	push {r4,lr}
 	ldr r3, _0802C3D0 @ =gUnknown_2023BE4
 	ldr r4, _0802C3D4 @ =gUnknown_2023D6C
@@ -29659,10 +29659,10 @@ _0802C3FE:
 	bx r0
 	.align 2, 0
 _0802C404: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C390
+	thumb_func_end atkD3_trycopyability
 
-	thumb_func_start sub_802C408
-sub_802C408: @ 802C408
+	thumb_func_start atkD4_trywish
+atkD4_trywish: @ 802C408
 	push {r4-r7,lr}
 	ldr r7, _0802C41C @ =gUnknown_2023D74
 	ldr r2, [r7]
@@ -29768,10 +29768,10 @@ _0802C4D4:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802C408
+	thumb_func_end atkD4_trywish
 
-	thumb_func_start sub_802C4DC
-sub_802C4DC: @ 802C4DC
+	thumb_func_start atkD5_trysetroots
+atkD5_trysetroots: @ 802C4DC
 	push {lr}
 	ldr r1, _0802C514 @ =gUnknown_2023DFC
 	ldr r0, _0802C518 @ =gUnknown_2023D6B
@@ -29815,10 +29815,10 @@ _0802C52C:
 	bx r0
 	.align 2, 0
 _0802C530: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C4DC
+	thumb_func_end atkD5_trysetroots
 
-	thumb_func_start sub_802C534
-sub_802C534: @ 802C534
+	thumb_func_start atkD6_doubledamagedealtifdamaged
+atkD6_doubledamagedealtifdamaged: @ 802C534
 	push {lr}
 	ldr r3, _0802C580 @ =gUnknown_2023E8C
 	ldr r0, _0802C584 @ =gUnknown_2023D6B
@@ -29865,10 +29865,10 @@ _0802C584: .4byte gUnknown_2023D6B
 _0802C588: .4byte gUnknown_2023D6C
 _0802C58C: .4byte gUnknown_2023FC4
 _0802C590: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C534
+	thumb_func_end atkD6_doubledamagedealtifdamaged
 
-	thumb_func_start sub_802C594
-sub_802C594: @ 802C594
+	thumb_func_start atkD7_setyawn
+atkD7_setyawn: @ 802C594
 	push {r4,lr}
 	ldr r1, _0802C5D8 @ =gUnknown_2023DFC
 	ldr r0, _0802C5DC @ =gUnknown_2023D6C
@@ -29924,10 +29924,10 @@ _0802C5F8:
 	bx r0
 	.align 2, 0
 _0802C600: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C594
+	thumb_func_end atkD7_setyawn
 
-	thumb_func_start sub_802C604
-sub_802C604: @ 802C604
+	thumb_func_start atkD8_setdamagetohealthdifference
+atkD8_setdamagetohealthdifference: @ 802C604
 	push {lr}
 	ldr r2, _0802C640 @ =gUnknown_2023BE4
 	ldr r0, _0802C644 @ =gUnknown_2023D6C
@@ -29978,10 +29978,10 @@ _0802C662:
 	.align 2, 0
 _0802C668: .4byte gUnknown_2023D50
 _0802C66C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C604
+	thumb_func_end atkD8_setdamagetohealthdifference
 
-	thumb_func_start sub_802C670
-sub_802C670: @ 802C670
+	thumb_func_start atkD9_scaledamagebyhealthratio
+atkD9_scaledamagebyhealthratio: @ 802C670
 	push {r4,lr}
 	ldr r4, _0802C6BC @ =gUnknown_2023F50
 	ldrh r0, [r4]
@@ -30026,10 +30026,10 @@ _0802C6C4: .4byte gUnknown_2023D4A
 _0802C6C8: .4byte gUnknown_2023BE4
 _0802C6CC: .4byte gUnknown_2023D6B
 _0802C6D0: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C670
+	thumb_func_end atkD9_scaledamagebyhealthratio
 
-	thumb_func_start sub_802C6D4
-sub_802C6D4: @ 802C6D4
+	thumb_func_start atkDA_tryswapabilities
+atkDA_tryswapabilities: @ 802C6D4
 	push {r4-r6,lr}
 	ldr r5, _0802C738 @ =gUnknown_2023BE4
 	ldr r0, _0802C73C @ =gUnknown_2023D6B
@@ -30106,10 +30106,10 @@ _0802C762:
 	bx r0
 	.align 2, 0
 _0802C768: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C6D4
+	thumb_func_end atkDA_tryswapabilities
 
-	thumb_func_start sub_802C76C
-sub_802C76C: @ 802C76C
+	thumb_func_start atkDB_tryimprision
+atkDB_tryimprision: @ 802C76C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -30150,17 +30150,17 @@ _0802C7B4: .4byte gUnknown_2023DFC
 _0802C7B8: .4byte gUnknown_2023D74
 _0802C7BC:
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	ldrb r0, [r4]
-	bl sub_8016F90
+	bl PressurePPLoseOnUsingImprision
 	movs r6, 0
 	b _0802C82E
 _0802C7D2:
 	adds r0, r6, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
@@ -30246,10 +30246,10 @@ _0802C864: .4byte gUnknown_2023D6B
 _0802C868: .4byte gUnknown_2023BE4
 _0802C86C: .4byte gUnknown_2023BCC
 _0802C870: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C76C
+	thumb_func_end atkDB_tryimprision
 
-	thumb_func_start sub_802C874
-sub_802C874: @ 802C874
+	thumb_func_start atkDC_trysetgrudge
+atkDC_trysetgrudge: @ 802C874
 	push {lr}
 	ldr r1, _0802C8AC @ =gUnknown_2023DFC
 	ldr r0, _0802C8B0 @ =gUnknown_2023D6B
@@ -30293,10 +30293,10 @@ _0802C8C4:
 	bx r0
 	.align 2, 0
 _0802C8C8: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C874
+	thumb_func_end atkDC_trysetgrudge
 
-	thumb_func_start sub_802C8CC
-sub_802C8CC: @ 802C8CC
+	thumb_func_start atkDD_weightdamagecalculation
+atkDD_weightdamagecalculation: @ 802C8CC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -30318,7 +30318,7 @@ _0802C8E8:
 	muls r0, r1
 	add r0, r8
 	ldrh r0, [r0]
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -30370,10 +30370,10 @@ _0802C94A:
 	.align 2, 0
 _0802C95C: .4byte gUnknown_2023F50
 _0802C960: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C8CC
+	thumb_func_end atkDD_weightdamagecalculation
 
-	thumb_func_start sub_802C964
-sub_802C964: @ 802C964
+	thumb_func_start atkDE_asistattackselect
+atkDE_asistattackselect: @ 802C964
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -30388,7 +30388,7 @@ sub_802C964: @ 802C964
 	str r0, [sp, 0x4]
 	ldr r0, _0802CA88 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	ldr r0, _0802CA8C @ =gUnknown_2024284
@@ -30417,12 +30417,12 @@ _0802C996:
 	adds r4, r0, r6
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0802CA3C
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -30441,11 +30441,11 @@ _0802C9E0:
 	adds r1, 0xD
 	ldr r0, [sp]
 	add r0, r9
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_802A1FC
+	bl IsInvalidForSleepTalkOrAssist
 	lsls r0, 24
 	adds r1, r5, 0x1
 	cmp r0, 0
@@ -30497,7 +30497,7 @@ _0802CA3C:
 	ands r0, r1
 	str r0, [r2]
 	ldr r4, _0802CAA8 @ =gUnknown_2023D4E
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0xFF
 	ands r1, r0
 	mov r0, r10
@@ -30556,10 +30556,10 @@ _0802CACE:
 	bx r0
 	.align 2, 0
 _0802CAE0: .4byte gUnknown_2023D74
-	thumb_func_end sub_802C964
+	thumb_func_end atkDE_asistattackselect
 
-	thumb_func_start sub_802CAE4
-sub_802CAE4: @ 802CAE4
+	thumb_func_start atkDF_trysetmagiccoat
+atkDF_trysetmagiccoat: @ 802CAE4
 	push {lr}
 	ldr r1, _0802CB2C @ =gUnknown_2023D6C
 	ldr r3, _0802CB30 @ =gUnknown_2023D6B
@@ -30622,10 +30622,10 @@ _0802CB5C:
 	.align 2, 0
 _0802CB60: .4byte gUnknown_2023E8C
 _0802CB64: .4byte gUnknown_2023D74
-	thumb_func_end sub_802CAE4
+	thumb_func_end atkDF_trysetmagiccoat
 
-	thumb_func_start sub_802CB68
-sub_802CB68: @ 802CB68
+	thumb_func_start atkE0_trysetsnatch
+atkE0_trysetsnatch: @ 802CB68
 	push {lr}
 	ldr r2, _0802CBAC @ =gUnknown_2023ECC
 	ldr r3, _0802CBB0 @ =gUnknown_2023D6B
@@ -30683,10 +30683,10 @@ _0802CBD6:
 	.align 2, 0
 _0802CBDC: .4byte gUnknown_2023E8C
 _0802CBE0: .4byte gUnknown_2023D74
-	thumb_func_end sub_802CB68
+	thumb_func_end atkE0_trysetsnatch
 
-	thumb_func_start sub_802CBE4
-sub_802CBE4: @ 802CBE4
+	thumb_func_start atkE1_trygetintimidatetarget
+atkE1_trygetintimidatetarget: @ 802CBE4
 	push {r4-r6,lr}
 	ldr r4, _0802CC88 @ =gUnknown_2023FC4
 	ldr r0, _0802CC8C @ =gUnknown_2023FE8
@@ -30695,7 +30695,7 @@ sub_802CBE4: @ 802CBE4
 	ldrb r0, [r0]
 	strb r0, [r4, 0x17]
 	ldrb r0, [r4, 0x17]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r2, _0802CC90 @ =gUnknown_2022AB8
@@ -30723,7 +30723,7 @@ sub_802CBE4: @ 802CBE4
 	ldr r6, _0802CCA0 @ =gUnknown_825E45C
 _0802CC2A:
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r5
@@ -30791,10 +30791,10 @@ _0802CCB4:
 	bx r0
 	.align 2, 0
 _0802CCBC: .4byte gUnknown_2023D74
-	thumb_func_end sub_802CBE4
+	thumb_func_end atkE1_trygetintimidatetarget
 
-	thumb_func_start sub_802CCC0
-sub_802CCC0: @ 802CCC0
+	thumb_func_start atkE2_switchoutabilities
+atkE2_switchoutabilities: @ 802CCC0
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, _0802CD28 @ =gUnknown_2023D74
@@ -30834,9 +30834,9 @@ sub_802CCC0: @ 802CCC0
 	movs r0, 0
 	movs r1, 0x28
 	movs r3, 0x4
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 _0802CD1A:
 	ldr r0, [r5]
 	adds r0, 0x2
@@ -30851,10 +30851,10 @@ _0802CD2C: .4byte gUnknown_2023BC4
 _0802CD30: .4byte gUnknown_2023BE4
 _0802CD34: .4byte gUnknown_825E45C
 _0802CD38: .4byte gUnknown_2023FE8
-	thumb_func_end sub_802CCC0
+	thumb_func_end atkE2_switchoutabilities
 
-	thumb_func_start sub_802CD3C
-sub_802CD3C: @ 802CD3C
+	thumb_func_start atkE3_jumpifhasnohp
+atkE3_jumpifhasnohp: @ 802CD3C
 	push {r4,lr}
 	ldr r4, _0802CD78 @ =gUnknown_2023D74
 	ldr r0, [r4]
@@ -30895,10 +30895,10 @@ _0802CD8A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802CD3C
+	thumb_func_end atkE3_jumpifhasnohp
 
-	thumb_func_start sub_802CD90
-sub_802CD90: @ 802CD90
+	thumb_func_start atkE4_getsecretpowereffect
+atkE4_getsecretpowereffect: @ 802CD90
 	push {lr}
 	ldr r0, _0802CDA4 @ =gUnknown_2022B50
 	ldrb r0, [r0]
@@ -30984,7 +30984,7 @@ _0802CE30:
 	.align 2, 0
 _0802CE40: .4byte gUnknown_2023E82
 _0802CE44: .4byte gUnknown_2023D74
-	thumb_func_end sub_802CD90
+	thumb_func_end atkE4_getsecretpowereffect
 
 	thumb_func_start sub_802CE48
 sub_802CE48: @ 802CE48
@@ -31002,17 +31002,17 @@ _0802CE54:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _0802CE98
 	lsls r0, r5, 3
@@ -31042,7 +31042,7 @@ _0802CEA2:
 	beq _0802CF0A
 	cmp r6, 0
 	bne _0802CF0A
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -31050,7 +31050,7 @@ _0802CEA2:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0802CF0A
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -31100,8 +31100,8 @@ _0802CF28: .4byte gUnknown_8250848
 _0802CF2C: .4byte gUnknown_2023D74
 	thumb_func_end sub_802CE48
 
-	thumb_func_start sub_802CF30
-sub_802CF30: @ 802CF30
+	thumb_func_start atkE6_docastformchangeanimation
+atkE6_docastformchangeanimation: @ 802CF30
 	push {r4,lr}
 	ldr r4, _0802CF84 @ =gUnknown_2023BC4
 	ldr r0, _0802CF88 @ =gUnknown_2023FC4
@@ -31132,9 +31132,9 @@ _0802CF60:
 	ldrb r2, [r0]
 	movs r0, 0
 	movs r1, 0
-	bl sub_800EB28
+	bl EmitBattleAnimation
 	ldrb r0, [r4]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _0802CF94 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -31148,10 +31148,10 @@ _0802CF88: .4byte gUnknown_2023FC4
 _0802CF8C: .4byte gUnknown_2023BE4
 _0802CF90: .4byte gUnknown_2023FE8
 _0802CF94: .4byte gUnknown_2023D74
-	thumb_func_end sub_802CF30
+	thumb_func_end atkE6_docastformchangeanimation
 
-	thumb_func_start sub_802CF98
-sub_802CF98: @ 802CF98
+	thumb_func_start atkE7_trycastformdatachange
+atkE7_trycastformdatachange: @ 802CF98
 	push {r4,lr}
 	ldr r1, _0802CFC8 @ =gUnknown_2023D74
 	ldr r0, [r1]
@@ -31180,10 +31180,10 @@ _0802CFC8: .4byte gUnknown_2023D74
 _0802CFCC: .4byte gUnknown_2023FC4
 _0802CFD0: .4byte gUnknown_81D92F8
 _0802CFD4: .4byte gUnknown_2023FE8
-	thumb_func_end sub_802CF98
+	thumb_func_end atkE7_trycastformdatachange
 
-	thumb_func_start sub_802CFD8
-sub_802CFD8: @ 802CFD8
+	thumb_func_start atkE8_settypebasedhalvers
+atkE8_settypebasedhalvers: @ 802CFD8
 	push {r4,lr}
 	movs r4, 0
 	ldr r2, _0802D014 @ =gUnknown_8250C04
@@ -31272,10 +31272,10 @@ _0802D086:
 	bx r0
 	.align 2, 0
 _0802D08C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802CFD8
+	thumb_func_end atkE8_settypebasedhalvers
 
-	thumb_func_start sub_802D090
-sub_802D090: @ 802D090
+	thumb_func_start atkE9_setweatherballtype
+atkE9_setweatherballtype: @ 802D090
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0
@@ -31369,10 +31369,10 @@ _0802D130:
 	.align 2, 0
 _0802D140: .4byte gUnknown_2023FE8
 _0802D144: .4byte gUnknown_2023D74
-	thumb_func_end sub_802D090
+	thumb_func_end atkE9_setweatherballtype
 
-	thumb_func_start sub_802D148
-sub_802D148: @ 802D148
+	thumb_func_start atkEA_tryrecycleitem
+atkEA_tryrecycleitem: @ 802D148
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r7, _0802D1B0 @ =gUnknown_2023BC4
@@ -31414,9 +31414,9 @@ sub_802D148: @ 802D148
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_800DFF0
+	bl EmitSetMonData
 	ldrb r0, [r7]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _0802D1C4 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x5
@@ -31450,10 +31450,10 @@ _0802D1E2:
 	bx r0
 	.align 2, 0
 _0802D1EC: .4byte gUnknown_2023D74
-	thumb_func_end sub_802D148
+	thumb_func_end atkEA_tryrecycleitem
 
-	thumb_func_start sub_802D1F0
-sub_802D1F0: @ 802D1F0
+	thumb_func_start atkEB_settypetoterrain
+atkEB_settypetoterrain: @ 802D1F0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -31539,19 +31539,19 @@ _0802D292:
 	bx r0
 	.align 2, 0
 _0802D29C: .4byte gUnknown_2023D74
-	thumb_func_end sub_802D1F0
+	thumb_func_end atkEB_settypetoterrain
 
-	thumb_func_start sub_802D2A0
-sub_802D2A0: @ 802D2A0
+	thumb_func_start atkEC_pursuitrelated
+atkEC_pursuitrelated: @ 802D2A0
 	push {r4-r6,lr}
 	ldr r5, _0802D314 @ =gUnknown_2023D6B
 	ldrb r0, [r5]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80751E8
+	bl GetBankByIdentity
 	ldr r4, _0802D318 @ =gUnknown_2023BC4
 	strb r0, [r4]
 	ldr r0, _0802D31C @ =gUnknown_2022B4C
@@ -31631,10 +31631,10 @@ _0802D35A:
 	bx r0
 	.align 2, 0
 _0802D360: .4byte gUnknown_2023D74
-	thumb_func_end sub_802D2A0
+	thumb_func_end atkEC_pursuitrelated
 
-	thumb_func_start sub_802D364
-sub_802D364: @ 802D364
+	thumb_func_start atkEF_snatchsetbanks
+atkEF_snatchsetbanks: @ 802D364
 	push {r4,lr}
 	ldr r1, _0802D388 @ =gUnknown_2023D6E
 	ldr r3, _0802D38C @ =gUnknown_2023D6B
@@ -31674,14 +31674,14 @@ _0802D39E:
 	.align 2, 0
 _0802D3B0: .4byte gUnknown_2023FC4
 _0802D3B4: .4byte gUnknown_2023D74
-	thumb_func_end sub_802D364
+	thumb_func_end atkEF_snatchsetbanks
 
-	thumb_func_start sub_802D3B8
-sub_802D3B8: @ 802D3B8
+	thumb_func_start atkEE_removelightscreenreflect
+atkEE_removelightscreenreflect: @ 802D3B8
 	push {r4,lr}
 	ldr r0, _0802D400 @ =gUnknown_2023D6B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -31736,7 +31736,7 @@ _0802D41E:
 	.align 2, 0
 _0802D42C: .4byte gUnknown_2023FC4
 _0802D430: .4byte gUnknown_2023D74
-	thumb_func_end sub_802D3B8
+	thumb_func_end atkEE_removelightscreenreflect
 
 	thumb_func_start sub_802D434
 sub_802D434: @ 802D434
@@ -31765,9 +31765,9 @@ _0802D442:
 	beq _0802D490
 	movs r0, 0
 	movs r1, 0x6
-	bl sub_800E194
+	bl EmitBallThrowAnim
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _0802D488 @ =gUnknown_2023D74
 	ldr r0, _0802D48C @ =gUnknown_81D9AD1
 	b _0802D7EC
@@ -31786,9 +31786,9 @@ _0802D490:
 	beq _0802D4B4
 	movs r0, 0
 	movs r1, 0x5
-	bl sub_800E194
+	bl EmitBallThrowAnim
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _0802D4AC @ =gUnknown_2023D74
 	ldr r0, _0802D4B0 @ =gUnknown_81D9AC1
 	b _0802D7EC
@@ -31803,9 +31803,9 @@ _0802D4B4:
 	beq _0802D4DC
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_800E194
+	bl EmitBallThrowAnim
 	ldrb r0, [r5]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _0802D4D4 @ =gUnknown_2023D74
 	ldr r0, _0802D4D8 @ =gUnknown_81D9A88
 	b _0802D7EC
@@ -31902,7 +31902,7 @@ _0802D568:
 _0802D590: .4byte gUnknown_2023BE4
 _0802D594: .4byte gUnknown_2023D6C
 _0802D598:
-	bl sub_8056188
+	bl sav1_map_get_light_level
 	lsls r0, 24
 	lsrs r0, 24
 	movs r4, 0xA
@@ -31941,7 +31941,7 @@ _0802D5D8:
 	muls r0, r1
 	adds r0, r2
 	ldrh r0, [r0]
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -32048,10 +32048,10 @@ _0802D6BC:
 	bls _0802D720
 	movs r0, 0
 	movs r1, 0x4
-	bl sub_800E194
+	bl EmitBallThrowAnim
 	ldr r0, _0802D704 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	ldr r1, _0802D708 @ =gUnknown_2023D74
 	ldr r0, _0802D70C @ =gUnknown_81D9A42
 	str r0, [r1]
@@ -32068,7 +32068,7 @@ _0802D6BC:
 	ldr r2, _0802D71C @ =gUnknown_2023D68
 	movs r1, 0x26
 	bl sub_804037C
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -32109,7 +32109,7 @@ _0802D74C:
 _0802D752:
 	cmp r4, 0x3
 	bhi _0802D762
-	bl sub_8044EC8
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r6
@@ -32123,10 +32123,10 @@ _0802D762:
 _0802D76C:
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_800E194
+	bl EmitBallThrowAnim
 	ldr r0, _0802D7BC @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8017248
+	bl MarkBufferBankForExecution
 	cmp r4, 0x4
 	bne _0802D7E4
 	ldr r1, _0802D7C0 @ =gUnknown_2023D74
@@ -32145,7 +32145,7 @@ _0802D76C:
 	movs r1, 0x26
 	adds r2, r5, 0
 	bl sub_804037C
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -32208,7 +32208,7 @@ sub_802D800: @ 802D800
 	ldr r1, _0802D878 @ =gUnknown_202402C
 	mov r8, r1
 	add r0, r8
-	bl sub_8040B14
+	bl GiveMonToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802D8EA
@@ -32224,10 +32224,10 @@ sub_802D800: @ 802D800
 	bl sub_806E568
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_808BD6C
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldrb r0, [r5]
 	eors r0, r6
 	lsls r0, 1
@@ -32237,7 +32237,7 @@ sub_802D800: @ 802D800
 	add r0, r8
 	ldr r2, _0802D888 @ =gUnknown_2021CF0
 	movs r1, 0x2
-	bl sub_803FBE8
+	bl GetMonData
 	b _0802D8D6
 	.align 2, 0
 _0802D870: .4byte gUnknown_2023BCE
@@ -32253,10 +32253,10 @@ _0802D88C:
 	bl sub_806E568
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_808BD6C
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldrb r0, [r5]
 	eors r0, r6
 	lsls r0, 1
@@ -32266,15 +32266,15 @@ _0802D88C:
 	add r0, r8
 	ldr r2, _0802D934 @ =gUnknown_2021CF0
 	movs r1, 0x2
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r4, _0802D938 @ =gUnknown_2021D04
 	bl sub_80CC7A8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_808BD6C
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl sub_8008D84
+	bl StringCopy
 	ldr r1, _0802D93C @ =gUnknown_2023E82
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
@@ -32310,7 +32310,7 @@ _0802D8EA:
 	adds r0, r1
 	adds r2, 0x2A
 	movs r1, 0x2
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, _0802D958 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -32343,16 +32343,16 @@ sub_802D95C: @ 802D95C
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -32379,7 +32379,7 @@ _0802D9AC: .4byte gUnknown_202402C
 _0802D9B0: .4byte gUnknown_2023D74
 _0802D9B4:
 	adds r0, r5, 0
-	bl sub_8043298
+	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -32404,7 +32404,7 @@ sub_802D9D8: @ 802D9D8
 	ldr r0, _0802DA00 @ =gUnknown_202402C
 	movs r1, 0xB
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _0802DA04 @ =gUnknown_2023E82
@@ -32438,7 +32438,7 @@ _0802DA24:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	b _0802DB34
 	.align 2, 0
 _0802DA38: .4byte 0x00007fff
@@ -32491,7 +32491,7 @@ _0802DA72:
 	add r0, sp, 0x10
 	bl CpuSet
 	ldr r0, _0802DAC4 @ =sub_80116F4
-	bl sub_80006F4
+	bl SetVBlankCallback
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -32516,7 +32516,7 @@ _0802DAC8:
 	.align 2, 0
 _0802DADC: .4byte gUnknown_2022980
 _0802DAE0:
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -32547,11 +32547,11 @@ _0802DAE0:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8070588
+	bl BeginNormalPaletteFade
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x3
-	bl sub_80019BC
+	bl ShowBg
 _0802DB34:
 	ldr r1, _0802DB54 @ =gUnknown_2023E82
 _0802DB36:
@@ -32716,7 +32716,7 @@ _0802DC4E:
 	add r1, sp, 0xC
 	mov r7, r9
 	lsrs r3, r7, 24
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	b _0802DC90
 	.align 2, 0
 _0802DC74: .4byte 0x00001026
@@ -32731,7 +32731,7 @@ _0802DC78:
 	add r1, sp, 0xC
 	mov r7, r9
 	lsrs r3, r7, 24
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 _0802DC90:
 	adds r4, 0x1
 	ldr r0, [sp, 0x1C]
@@ -32745,7 +32745,7 @@ _0802DC98:
 	b _0802DBB6
 _0802DCA2:
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3
@@ -32779,9 +32779,9 @@ sub_802DCB8: @ 802DCB8
 	movs r0, 0
 	add r1, sp, 0xC
 	movs r2, 0x18
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -32813,9 +32813,9 @@ sub_802DCF8: @ 802DCF8
 	movs r0, 0
 	add r1, sp, 0xC
 	movs r2, 0x18
-	bl sub_8002228
+	bl CopyToBgTilemapBufferRect_ChangePalette
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -32924,7 +32924,7 @@ _0802DDF2:
 	adds r0, 0x1
 	strb r0, [r1]
 	movs r0, 0x3
-	bl sub_8070E44
+	bl BeginFastPaletteFade
 	b _0802DFA6
 	.align 2, 0
 _0802DE1C: .4byte gUnknown_30030F0
@@ -32975,7 +32975,7 @@ _0802DE4E:
 	ldr r2, [r1]
 	adds r2, 0x6D
 	movs r1, 0x2
-	bl sub_803FBE8
+	bl GetMonData
 	bl sub_8003ECC
 	mov r2, r10
 	ldrb r0, [r2]
@@ -32988,7 +32988,7 @@ _0802DE4E:
 	adds r0, r1, 0
 	add r0, r8
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
@@ -33002,7 +33002,7 @@ _0802DE4E:
 	muls r1, r0
 	adds r0, r1, 0
 	add r0, r8
-	bl sub_803F720
+	bl GetMonGender
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -33018,7 +33018,7 @@ _0802DE4E:
 	add r0, r8
 	movs r1, 0
 	movs r2, 0
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, _0802DF0C @ =gUnknown_2023FE8
 	ldr r1, [r2]
 	adds r1, 0x6D
@@ -33081,7 +33081,7 @@ _0802DF64: .4byte gUnknown_2023D6B
 _0802DF68: .4byte gUnknown_202402C
 _0802DF6C: .4byte gUnknown_2023FE8
 _0802DF70:
-	bl sub_8040C3C
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6

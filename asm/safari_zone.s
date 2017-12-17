@@ -95,7 +95,7 @@ _080A0F24:
 _080A0F28: .4byte gUnknown_2039996
 _080A0F2C:
 	ldr r0, _080A0F38 @ =gUnknown_81BFBC5
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 _080A0F34:
 	pop {r1}
@@ -108,7 +108,7 @@ _080A0F38: .4byte gUnknown_81BFBC5
 sub_80A0F3C: @ 80A0F3C
 	push {lr}
 	ldr r0, _080A0F48 @ =gUnknown_81BFBAA
-	bl sub_8069AE4
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -122,25 +122,25 @@ sub_80A0F4C: @ 80A0F4C
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080A0F68
-	ldr r0, _080A0F64 @ =sub_80567DC
-	bl sub_8000544
+	ldr r0, _080A0F64 @ =c2_exit_to_overworld_2_switch
+	bl SetMainCallback2
 	b _080A0FB0
 	.align 2, 0
 _080A0F60: .4byte gUnknown_2039994
-_080A0F64: .4byte sub_80567DC
+_080A0F64: .4byte c2_exit_to_overworld_2_switch
 _080A0F68:
 	ldr r0, _080A0F88 @ =gUnknown_2023E8A
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	bne _080A0F9C
 	ldr r0, _080A0F8C @ =gUnknown_81BFB87
-	bl sub_8069B48
-	bl sub_8055378
+	bl ScriptContext2_RunNewScript
+	bl warp_in
 	ldr r1, _080A0F90 @ =gUnknown_3005020
 	ldr r0, _080A0F94 @ =sub_807E3EC
 	str r0, [r1]
 	ldr r0, _080A0F98 @ =sub_805671C
-	bl sub_8000544
+	bl SetMainCallback2
 	b _080A0FB0
 	.align 2, 0
 _080A0F88: .4byte gUnknown_2023E8A
@@ -152,16 +152,16 @@ _080A0F9C:
 	cmp r0, 0x7
 	bne _080A0FB0
 	ldr r0, _080A0FB4 @ =gUnknown_81BFBD7
-	bl sub_8069AE4
-	bl sub_8069B28
-	ldr r0, _080A0FB8 @ =sub_80568E0
-	bl sub_8000544
+	bl ScriptContext1_SetupScript
+	bl ScriptContext1_Stop
+	ldr r0, _080A0FB8 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl SetMainCallback2
 _080A0FB0:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A0FB4: .4byte gUnknown_81BFBD7
-_080A0FB8: .4byte sub_80568E0
+_080A0FB8: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_80A0F4C
 
 	.align 2, 0 @ Don't pad with nop.

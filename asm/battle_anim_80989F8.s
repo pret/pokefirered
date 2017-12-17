@@ -12,13 +12,13 @@ sub_80989F8: @ 80989F8
 	lsrs r5, r0, 24
 	ldr r4, _08098A18 @ =gUnknown_2037F02
 	ldrb r0, [r4]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	bne _08098A1C
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _08098A58
 	.align 2, 0
 _08098A18: .4byte gUnknown_2037F02
@@ -146,7 +146,7 @@ _08098AD4:
 	adds r0, r6
 	strh r3, [r0, 0x26]
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _08098B16
 _08098B12:
 	subs r0, 0x1
@@ -171,7 +171,7 @@ sub_8098B1C: @ 8098B1C
 	bgt _08098B48
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -207,7 +207,7 @@ _08098B6C:
 _08098B70:
 	movs r0, 0x3
 _08098B72:
-	bl sub_80751E8
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
@@ -234,7 +234,7 @@ _08098B9E:
 	beq _08098BB4
 _08098BA2:
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _08098BF2
 	.align 2, 0
 _08098BAC: .4byte gUnknown_2023D44
@@ -375,7 +375,7 @@ _08098C82:
 	adds r0, r7
 	strh r2, [r0, 0x26]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _08098CC4
 _08098CC0:
 	subs r0, r2, 0x1
@@ -395,13 +395,13 @@ sub_8098CD0: @ 8098CD0
 	lsrs r5, r0, 24
 	ldr r4, _08098CF0 @ =gUnknown_2037F02
 	ldrb r0, [r4]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
 	bne _08098CF4
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _08098D42
 	.align 2, 0
 _08098CF0: .4byte gUnknown_2037F02
@@ -607,7 +607,7 @@ _08098E44:
 	strh r0, [r2, 0x26]
 _08098E7C:
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _08098E88
 _08098E84:
 	subs r0, r2, 0x1
@@ -626,7 +626,7 @@ sub_8098E90: @ 8098E90
 	lsrs r4, 24
 	ldr r5, _08098EE0 @ =gUnknown_2037F02
 	ldrb r0, [r5]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08098EE4 @ =gUnknown_202063C
@@ -732,7 +732,7 @@ _08098F42:
 	cmp r0, 0
 	bne _08098F74
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _08098F74:
 	pop {r4-r7}
 	pop {r0}
@@ -752,7 +752,7 @@ sub_8098F84: @ 8098F84
 	movs r6, 0x1
 	ldr r4, _08098FF8 @ =gUnknown_2037F02
 	ldrb r0, [r4]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r1, 0x8
@@ -825,7 +825,7 @@ sub_8099004: @ 8099004
 	ldrsh r0, [r5, r1]
 	movs r2, 0xA
 	ldrsh r1, [r5, r2]
-	bl sub_8044E30
+	bl Sin
 	ldr r2, _08099078 @ =gUnknown_202063C
 	lsls r1, r4, 4
 	adds r1, r4
@@ -836,7 +836,7 @@ sub_8099004: @ 8099004
 	ldrsh r0, [r5, r1]
 	movs r2, 0xC
 	ldrsh r1, [r5, r2]
-	bl sub_8044E4C
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r5, 0xC]
@@ -861,7 +861,7 @@ _0809905C:
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _0809906E:
 	pop {r4-r6}
 	pop {r0}
@@ -878,7 +878,7 @@ sub_809907C: @ 809907C
 	lsrs r4, r0, 24
 	ldr r0, _080990A4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099098
@@ -909,7 +909,7 @@ sub_80990AC: @ 80990AC
 	strb r0, [r2]
 	ldr r0, _080990D4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080990DC
@@ -938,7 +938,7 @@ _080990E0:
 	strh r2, [r4, 0x36]
 	ldr r1, _08099118 @ =sub_8099120
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _0809911C @ =sub_8074DC4
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -962,13 +962,13 @@ sub_8099120: @ 8099120
 	strh r1, [r0, 0x30]
 	ldr r1, _0809913C @ =sub_8074DC4
 	str r1, [r0, 0x1C]
-	ldr r1, _08099140 @ =sub_8072740
-	bl sub_8074A68
+	ldr r1, _08099140 @ =DestroyAnimSprite
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0809913C: .4byte sub_8074DC4
-_08099140: .4byte sub_8072740
+_08099140: .4byte DestroyAnimSprite
 	thumb_func_end sub_8099120
 
 	thumb_func_start sub_8099144
@@ -983,7 +983,7 @@ sub_8099144: @ 8099144
 	strb r0, [r2]
 	ldr r5, _08099184 @ =gUnknown_2037F02
 	ldrb r0, [r5, 0x4]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r2, [r5]
@@ -996,7 +996,7 @@ sub_8099144: @ 8099144
 	strh r2, [r4, 0x36]
 	ldr r1, _08099188 @ =sub_8099190
 	adds r0, r4, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _0809918C @ =sub_8074DC4
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -1018,13 +1018,13 @@ sub_8099190: @ 8099190
 	strh r1, [r0, 0x32]
 	ldr r1, _080991AC @ =sub_8074DC4
 	str r1, [r0, 0x1C]
-	ldr r1, _080991B0 @ =sub_8072740
-	bl sub_8074A68
+	ldr r1, _080991B0 @ =DestroyAnimSprite
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080991AC: .4byte sub_8074DC4
-_080991B0: .4byte sub_8072740
+_080991B0: .4byte DestroyAnimSprite
 	thumb_func_end sub_8099190
 
 	thumb_func_start sub_80991B4
@@ -1152,7 +1152,7 @@ _080992A2:
 	strh r1, [r3, 0x26]
 _080992A4:
 	adds r0, r2, 0
-	bl sub_8072740
+	bl DestroyAnimSprite
 	b _080992DA
 	.align 2, 0
 _080992AC: .4byte gUnknown_202063C
@@ -1206,7 +1206,7 @@ _080992FE:
 	adds r0, r2, r0
 	ldrb r6, [r0]
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099328
@@ -1254,9 +1254,9 @@ _08099328:
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, _0809938C @ =sub_8072740
+	ldr r1, _0809938C @ =DestroyAnimSprite
 	adds r0, r5, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _08099390 @ =sub_8074E14
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
@@ -1267,7 +1267,7 @@ _0809937C: .4byte gUnknown_2037F1B
 _08099380: .4byte gUnknown_2023D44
 _08099384: .4byte gUnknown_2037F02
 _08099388: .4byte gUnknown_202063C
-_0809938C: .4byte sub_8072740
+_0809938C: .4byte DestroyAnimSprite
 _08099390: .4byte sub_8074E14
 	thumb_func_end sub_80992E0
 
@@ -1299,7 +1299,7 @@ _080993BE:
 	adds r0, r1, r0
 	ldrb r7, [r0]
 	adds r0, r1, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080993E8
@@ -1351,20 +1351,20 @@ _080993E8:
 	lsls r0, 16
 	cmp r0, 0
 	bne _08099450
-	ldr r1, _0809944C @ =sub_8072740
+	ldr r1, _0809944C @ =DestroyAnimSprite
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	b _08099458
 	.align 2, 0
 _0809943C: .4byte gUnknown_2037F1B
 _08099440: .4byte gUnknown_2023D44
 _08099444: .4byte gUnknown_2037F02
 _08099448: .4byte gUnknown_202063C
-_0809944C: .4byte sub_8072740
+_0809944C: .4byte DestroyAnimSprite
 _08099450:
 	ldr r1, _08099464 @ =sub_809946C
 	adds r0, r6, 0
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 _08099458:
 	ldr r0, _08099468 @ =sub_8074E14
 	str r0, [r6, 0x1C]
@@ -1395,7 +1395,7 @@ sub_809946C: @ 809946C
 	lsls r1, 2
 	adds r1, r4
 	strh r3, [r1, 0x26]
-	bl sub_8072740
+	bl DestroyAnimSprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1418,7 +1418,7 @@ sub_809949C: @ 809949C
 	lsrs r7, r0, 16
 	ldr r0, _08099524 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080994CE
@@ -1430,7 +1430,7 @@ sub_809949C: @ 809949C
 	strh r0, [r5, 0xA]
 _080994CE:
 	ldrb r0, [r5]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	ldr r1, _08099528 @ =gUnknown_3005090
 	lsls r4, r6, 2
 	adds r4, r6
@@ -1501,7 +1501,7 @@ sub_8099530: @ 8099530
 	lsrs r0, 8
 	movs r2, 0xC
 	ldrsh r1, [r5, r2]
-	bl sub_8044E30
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0x16]
 	ldrh r1, [r5, 0x1C]
@@ -1571,7 +1571,7 @@ _080995BC:
 	cmp r0, 0
 	bne _080995F0
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080995F0:
 	pop {r4,r5}
 	pop {r0}
@@ -1595,7 +1595,7 @@ sub_80995FC: @ 80995FC
 	cmp r0, 0
 	blt _0809965C
 	ldrb r0, [r1]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	b _08099664
@@ -1631,7 +1631,7 @@ _08099654: .4byte gUnknown_2037F1B
 _08099658: .4byte gUnknown_2023D44
 _0809965C:
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _080996A4
 _08099664:
 	ldr r1, _08099684 @ =gUnknown_3005090
@@ -1642,7 +1642,7 @@ _08099664:
 	strh r2, [r5, 0x8]
 	ldr r0, _08099688 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099690
@@ -1706,7 +1706,7 @@ sub_80996B8: @ 80996B8
 	cmp r1, r0
 	bls _080996F6
 	adds r0, r4, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _080996F6:
 	pop {r4}
 	pop {r0}
@@ -1723,7 +1723,7 @@ sub_8099704: @ 8099704
 	lsrs r5, r0, 24
 	ldr r6, _08099754 @ =gUnknown_2037F1A
 	ldrb r0, [r6]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099720
@@ -1734,7 +1734,7 @@ sub_8099704: @ 8099704
 _08099720:
 	ldr r4, _08099758 @ =gUnknown_2037F02
 	ldrb r0, [r4, 0x8]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0809975C @ =gUnknown_3005090
@@ -1807,7 +1807,7 @@ sub_8099788: @ 8099788
 	mov r0, r8
 	movs r2, 0xA
 	ldrsh r1, [r4, r2]
-	bl sub_8044E30
+	bl Sin
 	lsls r0, 16
 	lsrs r5, r0, 16
 	mov r9, r5
@@ -1829,7 +1829,7 @@ _080997D8: .4byte gUnknown_3005090
 _080997DC: .4byte gUnknown_202063C
 _080997E0:
 	ldrb r0, [r4, 0x12]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08099808
@@ -1925,7 +1925,7 @@ _0809986A:
 	strh r3, [r0, 0x24]
 	strh r3, [r0, 0x26]
 	adds r0, r6, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _0809989C:
 	pop {r3,r4}
 	mov r8, r3
@@ -1946,7 +1946,7 @@ sub_80998B0: @ 80998B0
 	lsrs r4, 24
 	ldr r6, _080998FC @ =gUnknown_2037F02
 	ldrb r0, [r6, 0x6]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -2009,7 +2009,7 @@ sub_8099908: @ 8099908
 	ldrsh r2, [r4, r3]
 	adds r0, r6, 0
 	movs r3, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	ldrh r0, [r4, 0xC]
 	subs r0, 0x1
 	strh r0, [r4, 0xC]
@@ -2037,7 +2037,7 @@ _0809996C:
 	adds r0, r6, 0
 	bl sub_8075980
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _08099978:
 	pop {r4-r6}
 	pop {r0}
@@ -2053,7 +2053,7 @@ sub_8099980: @ 8099980
 	lsrs r7, r0, 24
 	ldr r4, _080999BC @ =gUnknown_2037F02
 	ldrb r0, [r4, 0x4]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -2121,7 +2121,7 @@ _08099A14:
 	ldr r0, _08099A6C @ =gUnknown_2037F1B
 _08099A16:
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0
@@ -2179,7 +2179,7 @@ sub_8099A78: @ 8099A78
 	lsrs r5, r0, 24
 	ldr r4, _08099AB4 @ =gUnknown_2037F02
 	ldrb r0, [r4, 0x4]
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -2208,7 +2208,7 @@ _08099AC0:
 	ldr r0, _08099AF0 @ =gUnknown_2037F1B
 _08099AC2:
 	ldrb r0, [r0]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099AD4
@@ -2299,7 +2299,7 @@ sub_8099B54: @ 8099B54
 	lsls r2, 1
 	ldrh r3, [r4, 0xE]
 	adds r1, r2, 0
-	bl sub_8075858
+	bl obj_id_set_rotscale
 	movs r2, 0x16
 	ldrsh r0, [r4, r2]
 	cmp r0, 0
@@ -2332,7 +2332,7 @@ _08099BB0:
 	bl sub_8075980
 _08099BB6:
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 	b _08099BCE
 _08099BBE:
 	movs r0, 0
@@ -2424,7 +2424,7 @@ _08099C3A:
 	ldrh r0, [r1, 0x8]
 	strh r0, [r4, 0x1E]
 	movs r0, 0x1
-	bl sub_80749D4
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x16]
@@ -2576,7 +2576,7 @@ _08099D64:
 	adds r0, r2
 	strh r4, [r0, 0x26]
 	adds r0, r5, 0
-	bl sub_8072760
+	bl DestroyAnimVisualTask
 _08099D96:
 	pop {r4,r5}
 	pop {r0}

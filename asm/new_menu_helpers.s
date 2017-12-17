@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80F6790
-sub_80F6790: @ 80F6790
+	thumb_func_start clear_scheduled_bg_copies_to_vram
+clear_scheduled_bg_copies_to_vram: @ 80F6790
 	push {lr}
 	ldr r0, _080F67A0 @ =gUnknown_203AB58
 	movs r1, 0
@@ -16,10 +16,10 @@ sub_80F6790: @ 80F6790
 	bx r0
 	.align 2, 0
 _080F67A0: .4byte gUnknown_203AB58
-	thumb_func_end sub_80F6790
+	thumb_func_end clear_scheduled_bg_copies_to_vram
 
-	thumb_func_start sub_80F67A4
-sub_80F67A4: @ 80F67A4
+	thumb_func_start schedule_bg_copy_tilemap_to_vram
+schedule_bg_copy_tilemap_to_vram: @ 80F67A4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _080F67B4 @ =gUnknown_203AB58
@@ -29,17 +29,17 @@ sub_80F67A4: @ 80F67A4
 	bx lr
 	.align 2, 0
 _080F67B4: .4byte gUnknown_203AB58
-	thumb_func_end sub_80F67A4
+	thumb_func_end schedule_bg_copy_tilemap_to_vram
 
-	thumb_func_start sub_80F67B8
-sub_80F67B8: @ 80F67B8
+	thumb_func_start do_scheduled_bg_tilemap_copies_to_vram
+do_scheduled_bg_tilemap_copies_to_vram: @ 80F67B8
 	push {r4,lr}
 	ldr r4, _080F6804 @ =gUnknown_203AB58
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _080F67CC
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0
 	strb r0, [r4]
 _080F67CC:
@@ -47,7 +47,7 @@ _080F67CC:
 	cmp r0, 0x1
 	bne _080F67DC
 	movs r0, 0x1
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0
 	strb r0, [r4, 0x1]
 _080F67DC:
@@ -55,7 +55,7 @@ _080F67DC:
 	cmp r0, 0x1
 	bne _080F67EC
 	movs r0, 0x2
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0
 	strb r0, [r4, 0x2]
 _080F67EC:
@@ -63,7 +63,7 @@ _080F67EC:
 	cmp r0, 0x1
 	bne _080F67FC
 	movs r0, 0x3
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 	movs r0, 0
 	strb r0, [r4, 0x3]
 _080F67FC:
@@ -72,10 +72,10 @@ _080F67FC:
 	bx r0
 	.align 2, 0
 _080F6804: .4byte gUnknown_203AB58
-	thumb_func_end sub_80F67B8
+	thumb_func_end do_scheduled_bg_tilemap_copies_to_vram
 
-	thumb_func_start sub_80F6808
-sub_80F6808: @ 80F6808
+	thumb_func_start reset_temp_tile_data_buffers
+reset_temp_tile_data_buffers: @ 80F6808
 	push {lr}
 	ldr r3, _080F6824 @ =gUnknown_203AB5C
 	ldr r1, _080F6828 @ =gUnknown_203AB60
@@ -94,12 +94,12 @@ _080F6814:
 	.align 2, 0
 _080F6824: .4byte gUnknown_203AB5C
 _080F6828: .4byte gUnknown_203AB60
-	thumb_func_end sub_80F6808
+	thumb_func_end reset_temp_tile_data_buffers
 
-	thumb_func_start sub_80F682C
-sub_80F682C: @ 80F682C
+	thumb_func_start free_temp_tile_data_buffers_if_possible
+free_temp_tile_data_buffers_if_possible: @ 80F682C
 	push {r4-r6,lr}
-	bl sub_8001960
+	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
 	cmp r0, 0
 	bne _080F6870
@@ -115,7 +115,7 @@ sub_80F682C: @ 80F682C
 	movs r6, 0
 _080F684C:
 	ldr r0, [r5]
-	bl sub_8002BC4
+	bl Free
 	stm r5!, {r6}
 	adds r4, 0x1
 	ldr r0, _080F6868 @ =gUnknown_203AB5C
@@ -138,10 +138,10 @@ _080F6872:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80F682C
+	thumb_func_end free_temp_tile_data_buffers_if_possible
 
-	thumb_func_start sub_80F6878
-sub_80F6878: @ 80F6878
+	thumb_func_start decompress_and_copy_tile_data_to_vram
+decompress_and_copy_tile_data_to_vram: @ 80F6878
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -203,7 +203,7 @@ _080F68E2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80F6878
+	thumb_func_end decompress_and_copy_tile_data_to_vram
 
 	thumb_func_start sub_80F68F0
 sub_80F68F0: @ 80F68F0
@@ -301,7 +301,7 @@ _080F699A:
 	beq _080F69D2
 	ldr r0, _080F69E0 @ =sub_80F6A64
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -321,7 +321,7 @@ _080F699A:
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r6, 0
-	bl sub_80776E8
+	bl SetWordTaskArg
 _080F69D2:
 	add sp, 0x8
 	pop {r3,r4}
@@ -363,7 +363,7 @@ _080F6A14:
 	beq _080F6A4E
 	ldr r0, _080F6A5C @ =sub_80F6A64
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -384,7 +384,7 @@ _080F6A14:
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl sub_80776E8
+	bl SetWordTaskArg
 _080F6A4E:
 	add sp, 0x8
 	pop {r3}
@@ -409,16 +409,16 @@ sub_80F6A64: @ 80F6A64
 	adds r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r0, r1]
-	bl sub_8000FE8
+	bl CheckForSpaceForDma3Request
 	lsls r0, 16
 	cmp r0, 0
 	bne _080F6A94
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8077720
-	bl sub_8002BC4
+	bl GetWordTaskArg
+	bl Free
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _080F6A94:
 	pop {r4}
 	pop {r0}
@@ -440,7 +440,7 @@ sub_80F6AA0: @ 80F6AA0
 	movs r0, 0
 	strb r0, [r1, 0x3]
 	ldr r0, [r1]
-	bl sub_8002B9C
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _080F6AC8
@@ -473,11 +473,11 @@ sub_80F6AD0: @ 80F6AD0
 	beq _080F6AF6
 _080F6AEE:
 	adds r1, r4, 0
-	bl sub_80017D0
+	bl LoadBgTiles
 	b _080F6AFC
 _080F6AF6:
 	adds r1, r4, 0
-	bl sub_8001888
+	bl LoadBgTilemap
 _080F6AFC:
 	lsls r0, 16
 	lsrs r0, 16
@@ -512,7 +512,7 @@ sub_80F6B08: @ 80F6B08
 	lsls r2, 24
 	lsrs r2, 24
 	mov r10, r2
-	bl sub_8002008
+	bl GetBgTilemapBuffer
 	mov r8, r0
 	adds r0, r5, r4
 	cmp r5, r0
@@ -587,7 +587,7 @@ sub_80F6B94: @ 80F6B94
 	lsls r4, 24
 	lsrs r4, 24
 	mov r8, r4
-	bl sub_8002008
+	bl GetBgTilemapBuffer
 	adds r7, r0, 0
 	movs r0, 0
 	cmp r0, r8
@@ -639,35 +639,35 @@ sub_80F6C14: @ 80F6C14
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F6C14
@@ -702,11 +702,11 @@ sub_80F6C98: @ 80F6C98
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001B90
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8001D08
+	bl ChangeBgY
 	bl sub_8002C28
 	bl sub_80F6E9C
 	pop {r0}
@@ -1005,12 +1005,12 @@ sub_80F6EE4: @ 80F6EE4
 	lsrs r4, 24
 	ldr r1, _080F6F18 @ =sub_80F7124
 	adds r0, r5, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	cmp r4, 0x1
 	bne _080F6F12
 	adds r0, r5, 0
@@ -1034,12 +1034,12 @@ sub_80F6F1C: @ 80F6F1C
 	lsrs r4, 24
 	ldr r1, _080F6F50 @ =sub_80F6FD4
 	adds r0, r5, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl sub_8003FA0
+	bl PutWindowTilemap
 	cmp r4, 0x1
 	bne _080F6F4A
 	adds r0, r5, 0
@@ -1063,12 +1063,12 @@ sub_80F6F54: @ 80F6F54
 	lsrs r4, 24
 	ldr r1, _080F6F94 @ =sub_80F76CC
 	adds r0, r5, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	cmp r4, 0x1
 	bne _080F6F82
 	adds r0, r5, 0
@@ -1099,12 +1099,12 @@ sub_80F6F9C: @ 80F6F9C
 	lsrs r4, 24
 	ldr r1, _080F6FD0 @ =sub_80F7684
 	adds r0, r5, 0
-	bl sub_800486C
+	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl sub_800445C
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl sub_80040B8
+	bl ClearWindowTilemap
 	cmp r4, 0x1
 	bne _080F6FCA
 	adds r0, r5, 0
@@ -1161,7 +1161,7 @@ sub_80F6FD4: @ 80F6FD4
 	adds r0, r7, 0
 	adds r1, r3, 0
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F710C @ =0x00000215
 	ldr r2, [sp, 0x10]
 	str r2, [sp]
@@ -1170,7 +1170,7 @@ sub_80F6FD4: @ 80F6FD4
 	adds r0, r7, 0
 	ldr r2, [sp, 0xC]
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7110 @ =0x00000216
 	ldr r3, [sp, 0xC]
 	ldr r2, [sp, 0x10]
@@ -1183,7 +1183,7 @@ sub_80F6FD4: @ 80F6FD4
 	str r6, [sp, 0x8]
 	adds r0, r7, 0
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	mov r5, r9
 	ldr r0, [sp, 0x14]
 	add r0, r9
@@ -1206,7 +1206,7 @@ _080F706E:
 	ldr r3, [sp, 0x18]
 	lsrs r2, r3, 24
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	str r6, [sp]
 	str r6, [sp, 0x4]
 	mov r0, r8
@@ -1216,7 +1216,7 @@ _080F706E:
 	mov r3, r10
 	lsrs r2, r3, 24
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	adds r5, 0x1
 	ldr r0, [sp, 0x14]
 	add r0, r9
@@ -1239,7 +1239,7 @@ _080F70A8:
 	str r6, [sp, 0x8]
 	adds r0, r7, 0
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7120 @ =0x0000021b
 	ldr r0, [sp, 0x10]
 	str r0, [sp]
@@ -1248,7 +1248,7 @@ _080F70A8:
 	adds r0, r7, 0
 	ldr r2, [sp, 0xC]
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0x87
 	lsls r1, 2
 	ldr r3, [sp, 0xC]
@@ -1261,7 +1261,7 @@ _080F70A8:
 	str r6, [sp, 0x8]
 	adds r0, r7, 0
 	adds r3, r4, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -1327,7 +1327,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r10
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7394 @ =0x00000201
 	ldr r2, [sp, 0xC]
 	subs r2, 0x1
@@ -1339,7 +1339,7 @@ _080F715A:
 	str r6, [sp, 0x8]
 	adds r0, r7, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7398 @ =0x00000202
 	ldr r0, [sp, 0x14]
 	str r0, [sp]
@@ -1348,7 +1348,7 @@ _080F715A:
 	adds r0, r7, 0
 	ldr r2, [sp, 0xC]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F739C @ =0x00000203
 	ldr r2, [sp, 0xC]
 	ldr r0, [sp, 0x14]
@@ -1362,7 +1362,7 @@ _080F715A:
 	str r6, [sp, 0x8]
 	adds r0, r7, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0x81
 	lsls r1, 2
 	add r8, r4
@@ -1375,7 +1375,7 @@ _080F715A:
 	str r6, [sp, 0x8]
 	adds r0, r7, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73A0 @ =0x00000205
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1383,7 +1383,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r10
 	ldr r3, [sp, 0x10]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73A4 @ =0x00000206
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1391,7 +1391,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r9
 	ldr r3, [sp, 0x10]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0x82
 	lsls r1, 2
 	str r4, [sp]
@@ -1400,7 +1400,7 @@ _080F715A:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x18]
 	ldr r3, [sp, 0x10]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73A8 @ =0x00000209
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1408,7 +1408,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r8
 	ldr r3, [sp, 0x10]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73AC @ =0x0000020a
 	ldr r5, [sp, 0x10]
 	adds r5, 0x1
@@ -1420,7 +1420,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r10
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73B0 @ =0x0000020b
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1428,7 +1428,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r9
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0x83
 	lsls r1, 2
 	str r4, [sp]
@@ -1437,7 +1437,7 @@ _080F715A:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x18]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73B4 @ =0x0000020d
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1445,7 +1445,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r8
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73B8 @ =0x00000a0a
 	ldr r5, [sp, 0x10]
 	adds r5, 0x2
@@ -1457,7 +1457,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r10
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73BC @ =0x00000a0b
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1465,7 +1465,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r9
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73C0 @ =0x00000a0c
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1473,7 +1473,7 @@ _080F715A:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x18]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73C4 @ =0x00000a0d
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1481,7 +1481,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r8
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73C8 @ =0x00000a05
 	ldr r5, [sp, 0x10]
 	adds r5, 0x3
@@ -1493,7 +1493,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r10
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73CC @ =0x00000a06
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1501,7 +1501,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r9
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73D0 @ =0x00000a08
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1509,7 +1509,7 @@ _080F715A:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x18]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73D4 @ =0x00000a09
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1517,7 +1517,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r8
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xA0
 	lsls r1, 4
 	ldr r5, [sp, 0x10]
@@ -1530,7 +1530,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r10
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73D8 @ =0x00000a01
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1538,7 +1538,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r9
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73DC @ =0x00000a02
 	ldr r0, [sp, 0x14]
 	str r0, [sp]
@@ -1547,7 +1547,7 @@ _080F715A:
 	adds r0, r7, 0
 	ldr r2, [sp, 0xC]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73E0 @ =0x00000a03
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1555,7 +1555,7 @@ _080F715A:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x18]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F73E4 @ =0x00000a04
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1563,7 +1563,7 @@ _080F715A:
 	adds r0, r7, 0
 	mov r2, r8
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	b _080F761E
 	.align 2, 0
 _080F7390: .4byte gUnknown_203ADFA
@@ -1607,7 +1607,7 @@ _080F73E8:
 	str r6, [sp, 0x8]
 	adds r0, r7, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7630 @ =0x00000201
 	ldr r0, [sp, 0xC]
 	subs r0, 0x1
@@ -1620,7 +1620,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r9
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7634 @ =0x00000202
 	ldr r2, [sp, 0x14]
 	str r2, [sp]
@@ -1629,7 +1629,7 @@ _080F73E8:
 	adds r0, r7, 0
 	ldr r2, [sp, 0xC]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7638 @ =0x00000203
 	ldr r0, [sp, 0xC]
 	ldr r2, [sp, 0x14]
@@ -1643,7 +1643,7 @@ _080F73E8:
 	str r6, [sp, 0x8]
 	adds r0, r7, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0x81
 	lsls r1, 2
 	add r8, r4
@@ -1657,7 +1657,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r8
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F763C @ =0x00000205
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1665,7 +1665,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r10
 	ldr r3, [sp, 0x10]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7640 @ =0x00000206
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1673,7 +1673,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r9
 	ldr r3, [sp, 0x10]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0x82
 	lsls r1, 2
 	str r4, [sp]
@@ -1682,7 +1682,7 @@ _080F73E8:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x1C]
 	ldr r3, [sp, 0x10]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7644 @ =0x00000209
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1690,7 +1690,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r8
 	ldr r3, [sp, 0x10]
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7648 @ =0x0000020a
 	ldr r5, [sp, 0x10]
 	adds r5, 0x1
@@ -1702,7 +1702,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r10
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F764C @ =0x0000020b
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1710,7 +1710,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r9
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0x83
 	lsls r1, 2
 	str r4, [sp]
@@ -1719,7 +1719,7 @@ _080F73E8:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x1C]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7650 @ =0x0000020d
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1727,7 +1727,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r8
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7654 @ =0x00000a05
 	ldr r5, [sp, 0x10]
 	adds r5, 0x2
@@ -1739,7 +1739,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r10
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7658 @ =0x00000a06
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1747,7 +1747,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r9
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F765C @ =0x00000a08
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1755,7 +1755,7 @@ _080F73E8:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x1C]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7660 @ =0x00000a09
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1763,7 +1763,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r8
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7664 @ =0x00000a0a
 	ldr r5, [sp, 0x10]
 	adds r5, 0x3
@@ -1775,7 +1775,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r10
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7668 @ =0x00000a0b
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1783,7 +1783,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r9
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F766C @ =0x00000a0c
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1791,7 +1791,7 @@ _080F73E8:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x1C]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7670 @ =0x00000a0d
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1799,7 +1799,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r8
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	movs r1, 0xA0
 	lsls r1, 4
 	ldr r5, [sp, 0x10]
@@ -1812,7 +1812,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r10
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7674 @ =0x00000a01
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1820,7 +1820,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r9
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7678 @ =0x00000a02
 	ldr r2, [sp, 0x14]
 	str r2, [sp]
@@ -1829,7 +1829,7 @@ _080F73E8:
 	adds r0, r7, 0
 	ldr r2, [sp, 0xC]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F767C @ =0x00000a03
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1837,7 +1837,7 @@ _080F73E8:
 	adds r0, r7, 0
 	ldr r2, [sp, 0x1C]
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	ldr r1, _080F7680 @ =0x00000a04
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1845,7 +1845,7 @@ _080F73E8:
 	adds r0, r7, 0
 	mov r2, r8
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 _080F761E:
 	add sp, 0x20
 	pop {r3-r5}
@@ -1911,7 +1911,7 @@ sub_80F7684: @ 80F7684
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -1954,7 +1954,7 @@ sub_80F76CC: @ 80F76CC
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -1977,11 +1977,11 @@ sub_80F771C: @ 80F771C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8002554
+	bl FillBgTilemapBufferRect
 	cmp r4, 0x1
 	bne _080F7746
 	movs r0, 0
-	bl sub_80020BC
+	bl CopyBgTilemapBufferToVram
 _080F7746:
 	add sp, 0xC
 	pop {r4}
@@ -1999,7 +1999,7 @@ sub_80F7750: @ 80F7750
 	movs r2, 0x85
 	lsls r2, 2
 	movs r3, 0xE
-	bl sub_810F2E8
+	bl SetWindowBorderStyle
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F7750
@@ -2052,7 +2052,7 @@ sub_80F77B8: @ 80F77B8
 	ldr r0, _080F77C8 @ =gUnknown_841F408
 	movs r1, 0xE0
 	movs r2, 0x14
-	bl sub_80703EC
+	bl LoadPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2067,7 +2067,7 @@ sub_80F77CC: @ 80F77CC
 	lsrs r1, 16
 	ldr r0, _080F77E0 @ =gUnknown_841F408
 	movs r2, 0x14
-	bl sub_80703EC
+	bl LoadPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2101,8 +2101,8 @@ _080F77F8:
 _080F7804: .4byte gUnknown_841F408
 	thumb_func_end sub_80F77EC
 
-	thumb_func_start sub_80F7808
-sub_80F7808: @ 80F7808
+	thumb_func_start DisplayItemMessageOnField
+DisplayItemMessageOnField: @ 80F7808
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -2139,7 +2139,7 @@ sub_80F7808: @ 80F7808
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80F7808
+	thumb_func_end DisplayItemMessageOnField
 
 	thumb_func_start sub_80F7858
 sub_80F7858: @ 80F7858
@@ -2253,7 +2253,7 @@ sub_80F78E0: @ 80F78E0
 	bl sub_8003CE4
 	strb r0, [r4]
 	ldrb r0, [r4]
-	bl sub_8003FA0
+	bl PutWindowTilemap
 _080F792A:
 	ldrb r0, [r4]
 	add sp, 0x20

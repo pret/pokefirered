@@ -76,9 +76,9 @@ sub_81504A8: @ 81504A8
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 	movs r0, 0x1
-	bl sub_805C970
+	bl SetPlayerAvatarStateMask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -107,9 +107,9 @@ sub_81504E8: @ 81504E8
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 	movs r0, 0x2
-	bl sub_805C970
+	bl SetPlayerAvatarStateMask
 	movs r0, 0
 	movs r1, 0
 	bl sub_80BD620
@@ -144,13 +144,13 @@ sub_8150530: @ 8150530
 	cmp r0, 0x3
 	bne _08150594
 _08150558:
-	bl sub_8069940
+	bl ScriptContext2_Enable
 	movs r4, 0
 	movs r0, 0x1
 	strb r0, [r6, 0x6]
 	ldr r0, _0815058C @ =sub_81505C4
 	movs r1, 0xFF
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08150590 @ =gUnknown_3005090
@@ -183,7 +183,7 @@ _08150594:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _081505BC:
 	pop {r4-r6}
 	pop {r0}
@@ -241,7 +241,7 @@ _0815061C:
 	b _081506FC
 _08150626:
 	adds r0, r5, 0
-	bl sub_8063D1C
+	bl FieldObjectClearAnimIfSpecialAnimActive
 	ldrb r0, [r5, 0x1]
 	movs r1, 0x8
 	orrs r0, r1
@@ -261,7 +261,7 @@ _08150626:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r7, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -279,7 +279,7 @@ _08150666:
 	strh r0, [r4, 0xA]
 	b _081506FC
 _0815067C:
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063500
@@ -287,7 +287,7 @@ _0815067C:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r7, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _08150694:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -329,13 +329,13 @@ _081506E2:
 	ldrb r1, [r5, 0x18]
 	lsrs r1, 4
 	adds r0, r5, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 	movs r0, 0
 	strh r0, [r7, 0x24]
 	strh r0, [r7, 0x26]
-	bl sub_806994C
+	bl ScriptContext2_Disable
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 _081506FC:
 	pop {r3,r4}
 	mov r8, r3
@@ -370,9 +370,9 @@ sub_8150708: @ 8150708
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 	movs r0, 0x8
-	bl sub_805C970
+	bl SetPlayerAvatarStateMask
 	ldr r1, _08150778 @ =gUnknown_20386E0
 	movs r2, 0x10
 	ldrsh r0, [r4, r2]
@@ -383,7 +383,7 @@ sub_8150708: @ 8150708
 	ldrb r0, [r5, 0x5]
 	str r0, [r1, 0x8]
 	movs r0, 0x8
-	bl sub_8083444
+	bl FieldEffectStart
 	lsls r0, 24
 	lsrs r0, 24
 	strb r0, [r4, 0x1A]
@@ -403,10 +403,10 @@ _08150778: .4byte gUnknown_20386E0
 sub_815077C: @ 815077C
 	push {lr}
 	movs r0, 0x41
-	bl sub_8083444
+	bl FieldEffectStart
 	ldr r0, _08150790 @ =sub_8150794
 	movs r1, 0
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -419,14 +419,14 @@ sub_8150794: @ 8150794
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x41
-	bl sub_808382C
+	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _081507B4
-	bl sub_8068A5C
-	bl sub_806994C
+	bl UnfreezeMapObjects
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
-	bl sub_8077508
+	bl DestroyTask
 _081507B4:
 	pop {r4}
 	pop {r0}

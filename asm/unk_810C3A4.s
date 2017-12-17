@@ -10,7 +10,7 @@ sub_810C3A4: @ 810C3A4
 	push {lr}
 	ldr r0, _0810C3B4 @ =sub_810C3B8
 	movs r1, 0x50
-	bl sub_807741C
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -31,7 +31,7 @@ sub_810C3B8: @ 810C3B8
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0810C3E2
-	bl sub_8069554
+	bl walkrun_is_standing_still
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
@@ -76,9 +76,9 @@ _0810C41C:
 	cmp r0, 0
 	beq _0810C436
 	adds r0, r6, 0
-	bl sub_8077508
+	bl DestroyTask
 	bl sub_805C780
-	bl sub_8069B34
+	bl EnableBothScriptContexts
 _0810C436:
 	pop {r4-r7}
 	pop {r0}
@@ -134,7 +134,7 @@ _0810C47A:
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	mov r0, sp
 	ldrb r0, [r0]
 	lsls r1, r0, 3
@@ -149,7 +149,7 @@ _0810C47A:
 	bne _0810C4C0
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_8063610
+	bl npc_set_running_behaviour_etc
 _0810C4C0:
 	strb r6, [r5, 0x9]
 	ldr r2, _0810C4E4 @ =gUnknown_2036DFC
@@ -303,7 +303,7 @@ _0810C59A:
 	strh r6, [r0, 0x26]
 	adds r0, r4, 0
 	adds r1, r3, 0
-	bl sub_8063610
+	bl npc_set_running_behaviour_etc
 _0810C5EA:
 	adds r0, r5, 0x1
 	lsls r0, 24

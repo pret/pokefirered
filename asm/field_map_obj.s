@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_805DE2C
-sub_805DE2C: @ 805DE2C
+	thumb_func_start npc_clear_ids_and_state
+npc_clear_ids_and_state: @ 805DE2C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0
@@ -22,10 +22,10 @@ sub_805DE2C: @ 805DE2C
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805DE2C
+	thumb_func_end npc_clear_ids_and_state
 
-	thumb_func_start sub_805DE4C
-sub_805DE4C: @ 805DE4C
+	thumb_func_start npcs_clear_ids_and_state
+npcs_clear_ids_and_state: @ 805DE4C
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _0805DE70 @ =gUnknown_2036E38
@@ -34,7 +34,7 @@ _0805DE52:
 	adds r0, r4
 	lsls r0, 2
 	adds r0, r5
-	bl sub_805DE2C
+	bl npc_clear_ids_and_state
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -45,14 +45,14 @@ _0805DE52:
 	bx r0
 	.align 2, 0
 _0805DE70: .4byte gUnknown_2036E38
-	thumb_func_end sub_805DE4C
+	thumb_func_end npcs_clear_ids_and_state
 
 	thumb_func_start sub_805DE74
 sub_805DE74: @ 805DE74
 	push {lr}
-	bl sub_8058378
-	bl sub_805DE4C
-	bl sub_805C95C
+	bl strange_npc_table_clear
+	bl npcs_clear_ids_and_state
+	bl ClearPlayerAvatarInfo
 	bl sub_805DE8C
 	pop {r0}
 	bx r0
@@ -71,7 +71,7 @@ sub_805DE8C: @ 805DE8C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0805DF2C @ =gUnknown_202063C
@@ -91,10 +91,10 @@ sub_805DE8C: @ 805DE8C
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
-	bl sub_800860C
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	movs r6, 0x4
@@ -104,7 +104,7 @@ sub_805DE8C: @ 805DE8C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -117,10 +117,10 @@ sub_805DE8C: @ 805DE8C
 	orrs r5, r0
 	strb r5, [r4, 0x1]
 	adds r0, r4, 0
-	bl sub_800860C
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_800843C
+	bl StartSpriteAffineAnim
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	orrs r0, r6
@@ -167,8 +167,8 @@ _0805DF5A:
 	bx r1
 	thumb_func_end sub_805DF30
 
-	thumb_func_start sub_805DF60
-sub_805DF60: @ 805DF60
+	thumb_func_start GetFieldObjectIdByLocalIdAndMap
+GetFieldObjectIdByLocalIdAndMap: @ 805DF60
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -178,19 +178,19 @@ sub_805DF60: @ 805DF60
 	lsrs r2, 24
 	cmp r0, 0xFE
 	bls _0805DF78
-	bl sub_805E044
+	bl GetFieldObjectIdByLocalId
 	b _0805DF7C
 _0805DF78:
-	bl sub_805DFF4
+	bl GetFieldObjectIdByLocalIdAndMapInternal
 _0805DF7C:
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805DF60
+	thumb_func_end GetFieldObjectIdByLocalIdAndMap
 
-	thumb_func_start sub_805DF84
-sub_805DF84: @ 805DF84
+	thumb_func_start TryGetFieldObjectIdByLocalIdAndMap
+TryGetFieldObjectIdByLocalIdAndMap: @ 805DF84
 	push {r4,lr}
 	adds r4, r3, 0
 	lsls r0, 24
@@ -199,7 +199,7 @@ sub_805DF84: @ 805DF84
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	bl sub_805DF60
+	bl GetFieldObjectIdByLocalIdAndMap
 	strb r0, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -213,10 +213,10 @@ _0805DFA8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805DF84
+	thumb_func_end TryGetFieldObjectIdByLocalIdAndMap
 
-	thumb_func_start sub_805DFB0
-sub_805DFB0: @ 805DFB0
+	thumb_func_start GetFieldObjectIdByXY
+GetFieldObjectIdByXY: @ 805DFB0
 	push {r4-r6,lr}
 	movs r3, 0
 	ldr r5, _0805DFF0 @ =gUnknown_2036E38
@@ -254,10 +254,10 @@ _0805DFE8:
 	bx r1
 	.align 2, 0
 _0805DFF0: .4byte gUnknown_2036E38
-	thumb_func_end sub_805DFB0
+	thumb_func_end GetFieldObjectIdByXY
 
-	thumb_func_start sub_805DFF4
-sub_805DFF4: @ 805DFF4
+	thumb_func_start GetFieldObjectIdByLocalIdAndMapInternal
+GetFieldObjectIdByLocalIdAndMapInternal: @ 805DFF4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -300,10 +300,10 @@ _0805E03C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805DFF4
+	thumb_func_end GetFieldObjectIdByLocalIdAndMapInternal
 
-	thumb_func_start sub_805E044
-sub_805E044: @ 805E044
+	thumb_func_start GetFieldObjectIdByLocalId
+GetFieldObjectIdByLocalId: @ 805E044
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -336,7 +336,7 @@ _0805E078:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805E044
+	thumb_func_end GetFieldObjectIdByLocalId
 
 	thumb_func_start sub_805E080
 sub_805E080: @ 805E080
@@ -376,7 +376,7 @@ sub_805E080: @ 805E080
 	str r0, [sp, 0x8]
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_8055238
+	bl get_mapheader_by_bank_and_number
 	ldr r1, [r0, 0x4]
 	lsls r0, r4, 1
 	adds r0, r4
@@ -389,7 +389,7 @@ _0805E0DA:
 	adds r1, r7, 0
 	adds r2, r6, 0
 	mov r3, sp
-	bl sub_805E414
+	bl GetAvailableFieldObjectSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805E106
@@ -417,7 +417,7 @@ _0805E10A:
 	ldr r1, _0805E13C @ =gUnknown_2036E38
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl sub_805DE2C
+	bl npc_clear_ids_and_state
 	mov r1, r10
 	cmp r1, 0
 	beq _0805E140
@@ -510,9 +510,9 @@ _0805E14E:
 	strb r1, [r0]
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	adds r0, r4, 0
-	bl sub_805F2F8
+	bl FieldObjectHandleDynamicGraphicsId
 	ldr r1, _0805E234 @ =gUnknown_839FD0C
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
@@ -666,10 +666,10 @@ _0805E2E0:
 sub_805E2E8: @ 805E2E8
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_8056188
+	bl sav1_map_get_light_level
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80561D8
+	bl is_light_level_1_2_3_5_or_6
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E37C
@@ -828,8 +828,8 @@ _0805E406:
 _0805E410: .4byte gUnknown_3005008
 	thumb_func_end sub_805E3A0
 
-	thumb_func_start sub_805E414
-sub_805E414: @ 805E414
+	thumb_func_start GetAvailableFieldObjectSlot
+GetAvailableFieldObjectSlot: @ 805E414
 	push {r4-r7,lr}
 	mov r12, r3
 	lsls r0, 16
@@ -917,23 +917,23 @@ _0805E4A8:
 	bx r1
 	.align 2, 0
 _0805E4B0: .4byte gUnknown_2036E38
-	thumb_func_end sub_805E414
+	thumb_func_end GetAvailableFieldObjectSlot
 
-	thumb_func_start sub_805E4B4
-sub_805E4B4: @ 805E4B4
+	thumb_func_start RemoveFieldObject
+RemoveFieldObject: @ 805E4B4
 	push {lr}
 	ldrb r2, [r0]
 	movs r1, 0x2
 	negs r1, r1
 	ands r1, r2
 	strb r1, [r0]
-	bl sub_805E510
+	bl RemoveFieldObjectInternal
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805E4B4
+	thumb_func_end RemoveFieldObject
 
-	thumb_func_start sub_805E4C8
-sub_805E4C8: @ 805E4C8
+	thumb_func_start RemoveFieldObjectByLocalIdAndMap
+RemoveFieldObjectByLocalIdAndMap: @ 805E4C8
 	push {lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -943,13 +943,13 @@ sub_805E4C8: @ 805E4C8
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805E506
 	mov r0, sp
 	ldrb r0, [r0]
-	bl sub_805FC74
+	bl GetFieldObjectFlagIdByFieldObjectId
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_806E680
@@ -960,17 +960,17 @@ sub_805E4C8: @ 805E4C8
 	lsls r0, 2
 	ldr r1, _0805E50C @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_805E4B4
+	bl RemoveFieldObject
 _0805E506:
 	add sp, 0x4
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805E50C: .4byte gUnknown_2036E38
-	thumb_func_end sub_805E4C8
+	thumb_func_end RemoveFieldObjectByLocalIdAndMap
 
-	thumb_func_start sub_805E510
-sub_805E510: @ 805E510
+	thumb_func_start RemoveFieldObjectInternal
+RemoveFieldObjectInternal: @ 805E510
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -997,7 +997,7 @@ sub_805E510: @ 805E510
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r2
-	bl sub_8007280
+	bl DestroySprite
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -1005,10 +1005,10 @@ sub_805E510: @ 805E510
 	.align 2, 0
 _0805E554: .4byte 0xffff0000
 _0805E558: .4byte gUnknown_202063C
-	thumb_func_end sub_805E510
+	thumb_func_end RemoveFieldObjectInternal
 
-	thumb_func_start sub_805E55C
-sub_805E55C: @ 805E55C
+	thumb_func_start unref_sub_808D958
+unref_sub_808D958: @ 805E55C
 	push {r4,lr}
 	movs r4, 0
 _0805E560:
@@ -1021,7 +1021,7 @@ _0805E560:
 	lsls r0, 2
 	ldr r1, _0805E58C @ =gUnknown_2036E38
 	adds r0, r1
-	bl sub_805E4B4
+	bl RemoveFieldObject
 _0805E576:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -1034,7 +1034,7 @@ _0805E576:
 	.align 2, 0
 _0805E588: .4byte gUnknown_2037078
 _0805E58C: .4byte gUnknown_2036E38
-	thumb_func_end sub_805E55C
+	thumb_func_end unref_sub_808D958
 
 	thumb_func_start sub_805E590
 sub_805E590: @ 805E590
@@ -1084,7 +1084,7 @@ _0805E5CA:
 	ldrh r0, [r6, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl sub_805F5E8
+	bl npc_load_two_palettes__no_record
 	b _0805E606
 	.align 2, 0
 _0805E5F4: .4byte gUnknown_2036E38
@@ -1094,7 +1094,7 @@ _0805E5F8:
 	ldrh r0, [r6, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl sub_805F658
+	bl npc_load_two_palettes__and_record
 _0805E606:
 	ldrb r0, [r5, 0x6]
 	cmp r0, 0x4C
@@ -1111,7 +1111,7 @@ _0805E614:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0x40
@@ -1212,18 +1212,18 @@ _0805E650:
 	ldrb r0, [r5, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0805E702:
 	ldrb r0, [r5, 0xB]
 	lsrs r0, 4
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_80682F8
+	bl SetObjectSubpriorityByZCoord
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_80679F8
@@ -1240,8 +1240,8 @@ _0805E718:
 _0805E728: .4byte gUnknown_202063C
 	thumb_func_end sub_805E590
 
-	thumb_func_start sub_805E72C
-sub_805E72C: @ 805E72C
+	thumb_func_start SpawnFieldObject
+SpawnFieldObject: @ 805E72C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1325,7 +1325,7 @@ _0805E7A8:
 	lsls r0, 2
 	adds r0, r4
 	adds r1, r2, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 _0805E7DC:
 	adds r0, r5, 0
 _0805E7DE:
@@ -1339,10 +1339,10 @@ _0805E7DE:
 	.align 2, 0
 _0805E7EC: .4byte gUnknown_202063C
 _0805E7F0: .4byte gUnknown_2036E38
-	thumb_func_end sub_805E72C
+	thumb_func_end SpawnFieldObject
 
-	thumb_func_start sub_805E7F4
-sub_805E7F4: @ 805E7F4
+	thumb_func_start SpawnSpecialFieldObject
+SpawnSpecialFieldObject: @ 805E7F4
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -1350,7 +1350,7 @@ sub_805E7F4: @ 805E7F4
 	adds r4, 0x6
 	add r0, sp, 0x4
 	adds r1, r4, 0
-	bl sub_8063C10
+	bl GetFieldObjectMovingCameraOffset
 	ldr r0, _0805E82C @ =gUnknown_3005008
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
@@ -1362,7 +1362,7 @@ sub_805E7F4: @ 805E7F4
 	ldrsh r0, [r4, r6]
 	str r0, [sp]
 	adds r0, r5, 0
-	bl sub_805E72C
+	bl SpawnFieldObject
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x8
@@ -1371,10 +1371,10 @@ sub_805E7F4: @ 805E7F4
 	bx r1
 	.align 2, 0
 _0805E82C: .4byte gUnknown_3005008
-	thumb_func_end sub_805E7F4
+	thumb_func_end SpawnSpecialFieldObject
 
-	thumb_func_start sub_805E830
-sub_805E830: @ 805E830
+	thumb_func_start SpawnSpecialFieldObjectParametrized
+SpawnSpecialFieldObjectParametrized: @ 805E830
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1414,7 +1414,7 @@ sub_805E830: @ 805E830
 	strb r5, [r0, 0xA]
 	strh r6, [r0, 0xC]
 	strh r6, [r0, 0xE]
-	bl sub_805E7F4
+	bl SpawnSpecialFieldObject
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x18
@@ -1425,10 +1425,10 @@ sub_805E830: @ 805E830
 	bx r1
 	.align 2, 0
 _0805E894: .4byte 0xfff90000
-	thumb_func_end sub_805E830
+	thumb_func_end SpawnSpecialFieldObjectParametrized
 
-	thumb_func_start sub_805E898
-sub_805E898: @ 805E898
+	thumb_func_start show_sprite
+show_sprite: @ 805E898
 	push {r4-r7,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -1439,7 +1439,7 @@ sub_805E898: @ 805E898
 	lsrs r6, r2, 24
 	adds r1, r7, 0
 	adds r2, r6, 0
-	bl sub_805FD5C
+	bl GetFieldObjectTemplateByLocalIdAndMap
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0805E8DE
@@ -1447,7 +1447,7 @@ sub_805E898: @ 805E898
 	adds r4, 0x6
 	add r0, sp, 0x4
 	adds r1, r4, 0
-	bl sub_8063C10
+	bl GetFieldObjectMovingCameraOffset
 	add r0, sp, 0x4
 	movs r1, 0
 	ldrsh r3, [r0, r1]
@@ -1457,7 +1457,7 @@ sub_805E898: @ 805E898
 	adds r0, r5, 0
 	adds r1, r7, 0
 	adds r2, r6, 0
-	bl sub_805E72C
+	bl SpawnFieldObject
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805E8E0
@@ -1468,7 +1468,7 @@ _0805E8E0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805E898
+	thumb_func_end show_sprite
 
 	thumb_func_start sub_805E8E8
 sub_805E8E8: @ 805E8E8
@@ -1492,7 +1492,7 @@ sub_805E8E8: @ 805E8E8
 	str r0, [r4, 0xC]
 	ldr r0, [r5, 0x20]
 	str r0, [r4, 0x10]
-	bl sub_8069A64
+	bl ScriptContext1_IsScriptSetUp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1581,7 +1581,7 @@ _0805E9A8:
 	asrs r2, 16
 	mov r0, sp
 	adds r3, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -1595,7 +1595,7 @@ _0805E9A8:
 	ldr r0, _0805E9F4 @ =gUnknown_202063C
 	adds r4, r0
 	adds r0, r4, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 	adds r4, 0x42
 	ldrb r1, [r4]
 	movs r0, 0x3F
@@ -1675,7 +1675,7 @@ sub_805E9F8: @ 805E9F8
 	ldrsh r2, [r6, r0]
 	mov r0, sp
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -1728,13 +1728,13 @@ sub_805E9F8: @ 805E9F8
 	ldrh r0, [r4, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl sub_805F658
+	bl npc_load_two_palettes__and_record
 _0805EAE4:
 	ldr r1, [sp, 0x1C]
 	cmp r1, 0
 	beq _0805EB00
 	adds r0, r5, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 	adds r2, r5, 0
 	adds r2, 0x42
 	ldrb r0, [r2]
@@ -1746,18 +1746,18 @@ _0805EAE4:
 _0805EB00:
 	adds r0, r5, 0
 	mov r1, r9
-	bl sub_8068248
+	bl InitObjectPriorityByZCoord
 	mov r0, r9
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_80682F8
+	bl SetObjectSubpriorityByZCoord
 	ldr r0, [sp, 0x20]
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0805EB24:
 	adds r0, r6, 0
 	add sp, 0x24
@@ -1812,7 +1812,7 @@ sub_805EB44: @ 805EB44
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_8006FE0
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -1852,13 +1852,13 @@ sub_805EB44: @ 805EB44
 	ldrh r0, [r7, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl sub_805F658
+	bl npc_load_two_palettes__and_record
 _0805EBE6:
 	ldr r1, [sp, 0x18]
 	cmp r1, 0
 	beq _0805EC02
 	adds r0, r4, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 	adds r2, r4, 0
 	adds r2, 0x42
 	ldrb r0, [r2]
@@ -1869,12 +1869,12 @@ _0805EBE6:
 	strb r1, [r2]
 _0805EC02:
 	movs r0, 0x1
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0805EC14:
 	adds r0, r5, 0
 	add sp, 0x1C
@@ -1983,7 +1983,7 @@ _0805EC86:
 	str r0, [sp]
 	adds r0, r4, 0
 	asrs r3, 16
-	bl sub_805E72C
+	bl SpawnFieldObject
 _0805ECEC:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -2118,7 +2118,7 @@ _0805EDB6:
 	ble _0805EDE4
 _0805EDDE:
 	adds r0, r3, 0
-	bl sub_805E4B4
+	bl RemoveFieldObject
 _0805EDE4:
 	pop {r4-r7}
 	pop {r0}
@@ -2136,7 +2136,7 @@ sub_805EDF0: @ 805EDF0
 	lsrs r4, 16
 	lsls r5, 16
 	lsrs r5, 16
-	bl sub_805C95C
+	bl ClearPlayerAvatarInfo
 	movs r6, 0
 	ldr r7, _0805EE38 @ =gUnknown_2036E38
 	lsls r4, 16
@@ -2239,7 +2239,7 @@ _0805EE70:
 	ldrh r0, [r5, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl sub_805F5E8
+	bl npc_load_two_palettes__no_record
 _0805EECA:
 	ldrb r0, [r5, 0xC]
 	lsls r1, r0, 28
@@ -2248,14 +2248,14 @@ _0805EECA:
 	bls _0805EEDC
 	ldrh r0, [r5, 0x2]
 	lsrs r1, 28
-	bl sub_805F658
+	bl npc_load_two_palettes__and_record
 _0805EEDC:
 	mov r0, sp
 	strh r4, [r0, 0x2]
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0x40
@@ -2322,7 +2322,7 @@ _0805EF6A:
 	cmp r1, 0
 	beq _0805EF76
 	adds r0, r4, 0
-	bl sub_8008A58
+	bl SetSubspriteTables
 _0805EF76:
 	ldrb r1, [r5, 0xC]
 	lsls r1, 28
@@ -2351,12 +2351,12 @@ _0805EF76:
 	ldrb r0, [r6, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0805EFBC:
 	adds r0, r6, 0
 	bl sub_805EFF4
@@ -2364,7 +2364,7 @@ _0805EFBC:
 	lsrs r0, 4
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_80682F8
+	bl SetObjectSubpriorityByZCoord
 _0805EFCE:
 	add sp, 0x24
 	pop {r3-r5}
@@ -2408,7 +2408,7 @@ sub_805EFF4: @ 805EFF4
 	subs r2, 0x10
 	ands r1, r2
 	strb r1, [r0, 0x2]
-	bl sub_8063D34
+	bl FieldObjectClearAnim
 	pop {r0}
 	bx r0
 	thumb_func_end sub_805EFF4
@@ -2431,7 +2431,7 @@ sub_805F02C: @ 805F02C
 	strb r0, [r5, 0x7]
 	ldrb r0, [r4, 0x5]
 	movs r1, 0x20
-	bl sub_805CA0C
+	bl SetPlayerAvatarExtraStateTransition
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2470,7 +2470,7 @@ sub_805F060: @ 805F060
 	ldrh r0, [r5, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl sub_805F538
+	bl pal_patch_for_npc
 _0805F09E:
 	ldrb r1, [r5, 0xC]
 	mov r0, r8
@@ -2480,7 +2480,7 @@ _0805F09E:
 	ldrh r0, [r5, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl sub_805F658
+	bl npc_load_two_palettes__and_record
 _0805F0B2:
 	ldr r0, [r4, 0xC]
 	ldrh r0, [r0, 0x4]
@@ -2541,7 +2541,7 @@ _0805F0D6:
 	lsrs r0, 5
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8007434
+	bl AllocSpriteTiles
 	lsls r0, 16
 	asrs r2, r0, 16
 	movs r0, 0x1
@@ -2549,7 +2549,7 @@ _0805F0D6:
 	cmp r2, r0
 	bne _0805F142
 	mov r0, r10
-	bl sub_8007434
+	bl AllocSpriteTiles
 	lsls r0, 16
 	asrs r2, r0, 16
 _0805F142:
@@ -2611,7 +2611,7 @@ _0805F152:
 	lsrs r0, 7
 	cmp r0, 0
 	beq _0805F1BA
-	bl sub_805FAA8
+	bl CameraObjectReset1
 _0805F1BA:
 	add sp, 0x4
 	pop {r3-r5}
@@ -2627,8 +2627,8 @@ _0805F1D0: .4byte 0x000003ff
 _0805F1D4: .4byte 0xfffffc00
 	thumb_func_end sub_805F060
 
-	thumb_func_start sub_805F1D8
-sub_805F1D8: @ 805F1D8
+	thumb_func_start FieldObjectSetGraphicsIdByLocalIdAndMap
+FieldObjectSetGraphicsIdByLocalIdAndMap: @ 805F1D8
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -2640,7 +2640,7 @@ sub_805F1D8: @ 805F1D8
 	lsls r3, 24
 	lsrs r4, r3, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F20C
@@ -2660,15 +2660,15 @@ _0805F20C:
 	bx r0
 	.align 2, 0
 _0805F214: .4byte gUnknown_2036E38
-	thumb_func_end sub_805F1D8
+	thumb_func_end FieldObjectSetGraphicsIdByLocalIdAndMap
 
-	thumb_func_start sub_805F218
-sub_805F218: @ 805F218
+	thumb_func_start FieldObjectTurn
+FieldObjectTurn: @ 805F218
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	ldrb r0, [r6, 0x1]
 	lsls r0, 27
 	cmp r0, 0
@@ -2682,29 +2682,29 @@ sub_805F218: @ 805F218
 	ldrb r0, [r6, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0
-	bl sub_80083C0
+	bl SeekSpriteAnim
 _0805F25E:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805F264: .4byte gUnknown_202063C
-	thumb_func_end sub_805F218
+	thumb_func_end FieldObjectTurn
 
-	thumb_func_start sub_805F268
-sub_805F268: @ 805F268
+	thumb_func_start FieldObjectTurnByLocalIdAndMap
+FieldObjectTurnByLocalIdAndMap: @ 805F268
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -2716,7 +2716,7 @@ sub_805F268: @ 805F268
 	lsls r3, 24
 	lsrs r4, r3, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F29C
@@ -2728,7 +2728,7 @@ sub_805F268: @ 805F268
 	ldr r1, _0805F2A4 @ =gUnknown_2036E38
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_805F218
+	bl FieldObjectTurn
 _0805F29C:
 	add sp, 0x4
 	pop {r4}
@@ -2736,10 +2736,10 @@ _0805F29C:
 	bx r0
 	.align 2, 0
 _0805F2A4: .4byte gUnknown_2036E38
-	thumb_func_end sub_805F268
+	thumb_func_end FieldObjectTurnByLocalIdAndMap
 
-	thumb_func_start sub_805F2A8
-sub_805F2A8: @ 805F2A8
+	thumb_func_start PlayerObjectTurn
+PlayerObjectTurn: @ 805F2A8
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -2749,12 +2749,12 @@ sub_805F2A8: @ 805F2A8
 	lsls r0, 2
 	ldr r2, _0805F2C4 @ =gUnknown_2036E38
 	adds r0, r2
-	bl sub_805F218
+	bl FieldObjectTurn
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805F2C4: .4byte gUnknown_2036E38
-	thumb_func_end sub_805F2A8
+	thumb_func_end PlayerObjectTurn
 
 	thumb_func_start sub_805F2C8
 sub_805F2C8: @ 805F2C8
@@ -2784,8 +2784,8 @@ _0805F2E6:
 _0805F2F4: .4byte gUnknown_839FDB0
 	thumb_func_end sub_805F2C8
 
-	thumb_func_start sub_805F2F8
-sub_805F2F8: @ 805F2F8
+	thumb_func_start FieldObjectHandleDynamicGraphicsId
+FieldObjectHandleDynamicGraphicsId: @ 805F2F8
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x5]
@@ -2800,10 +2800,10 @@ _0805F30E:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805F2F8
+	thumb_func_end FieldObjectHandleDynamicGraphicsId
 
-	thumb_func_start sub_805F314
-sub_805F314: @ 805F314
+	thumb_func_start npc_by_local_id_and_map_set_field_1_bit_x20
+npc_by_local_id_and_map_set_field_1_bit_x20: @ 805F314
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -2815,7 +2815,7 @@ sub_805F314: @ 805F314
 	lsls r3, 24
 	lsrs r4, r3, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F356
@@ -2843,10 +2843,10 @@ _0805F356:
 	bx r0
 	.align 2, 0
 _0805F360: .4byte gUnknown_2036E38
-	thumb_func_end sub_805F314
+	thumb_func_end npc_by_local_id_and_map_set_field_1_bit_x20
 
-	thumb_func_start sub_805F364
-sub_805F364: @ 805F364
+	thumb_func_start FieldObjectGetLocalIdAndMap
+FieldObjectGetLocalIdAndMap: @ 805F364
 	push {r4,lr}
 	ldrb r4, [r0, 0x8]
 	strb r4, [r1]
@@ -2857,7 +2857,7 @@ sub_805F364: @ 805F364
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805F364
+	thumb_func_end FieldObjectGetLocalIdAndMap
 
 	thumb_func_start sub_805F378
 sub_805F378: @ 805F378
@@ -2866,7 +2866,7 @@ sub_805F378: @ 805F378
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_805DFB0
+	bl GetFieldObjectIdByXY
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x10
@@ -2900,7 +2900,7 @@ sub_805F3A8: @ 805F3A8
 	lsls r3, 24
 	lsrs r4, r3, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F3EE
@@ -2944,7 +2944,7 @@ sub_805F400: @ 805F400
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F43C
@@ -2988,7 +2988,7 @@ sub_805F448: @ 805F448
 	lsls r4, 16
 	lsrs r4, 16
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F48C
@@ -3017,10 +3017,10 @@ _0805F494: .4byte gUnknown_2036E38
 _0805F498: .4byte gUnknown_202063C
 	thumb_func_end sub_805F448
 
-	thumb_func_start sub_805F49C
-sub_805F49C: @ 805F49C
+	thumb_func_start gpu_pal_allocator_reset__manage_upper_four
+gpu_pal_allocator_reset__manage_upper_four: @ 805F49C
 	push {lr}
-	bl sub_80088F0
+	bl FreeAllSpritePalettes
 	ldr r1, _0805F4AC @ =gUnknown_3003E58
 	movs r0, 0xC
 	strb r0, [r1]
@@ -3028,14 +3028,14 @@ sub_805F49C: @ 805F49C
 	bx r0
 	.align 2, 0
 _0805F4AC: .4byte gUnknown_3003E58
-	thumb_func_end sub_805F49C
+	thumb_func_end gpu_pal_allocator_reset__manage_upper_four
 
 	thumb_func_start sub_805F4B0
 sub_805F4B0: @ 805F4B0
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_805F5A0
+	bl FindFieldObjectPaletteIndexByTag
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r0, _0805F4D4 @ =0x000011ff
@@ -3089,13 +3089,13 @@ sub_805F510: @ 805F510
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	bne _0805F52E
 	adds r0, r4, 0
-	bl sub_8008928
+	bl LoadSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805F530
@@ -3107,15 +3107,15 @@ _0805F530:
 	bx r1
 	thumb_func_end sub_805F510
 
-	thumb_func_start sub_805F538
-sub_805F538: @ 805F538
+	thumb_func_start pal_patch_for_npc
+pal_patch_for_npc: @ 805F538
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_805F5A0
+	bl FindFieldObjectPaletteIndexByTag
 	lsls r0, 24
 	ldr r1, _0805F570 @ =gUnknown_83A5158
 	lsrs r0, 21
@@ -3127,7 +3127,7 @@ sub_805F538: @ 805F538
 	adds r1, r2
 	lsrs r1, 16
 	movs r2, 0x20
-	bl sub_80703EC
+	bl LoadPalette
 	adds r0, r4, 0
 	bl sub_8083598
 	pop {r4}
@@ -3135,10 +3135,10 @@ sub_805F538: @ 805F538
 	bx r0
 	.align 2, 0
 _0805F570: .4byte gUnknown_83A5158
-	thumb_func_end sub_805F538
+	thumb_func_end pal_patch_for_npc
 
-	thumb_func_start sub_805F574
-sub_805F574: @ 805F574
+	thumb_func_start pal_patch_for_npc_range
+pal_patch_for_npc_range: @ 805F574
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	lsls r1, 24
@@ -3150,7 +3150,7 @@ sub_805F574: @ 805F574
 _0805F584:
 	ldrh r0, [r5]
 	adds r1, r4, 0
-	bl sub_805F538
+	bl pal_patch_for_npc
 	adds r5, 0x2
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -3161,10 +3161,10 @@ _0805F598:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805F574
+	thumb_func_end pal_patch_for_npc_range
 
-	thumb_func_start sub_805F5A0
-sub_805F5A0: @ 805F5A0
+	thumb_func_start FindFieldObjectPaletteIndexByTag
+FindFieldObjectPaletteIndexByTag: @ 805F5A0
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -3203,10 +3203,10 @@ _0805F5E2:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805F5A0
+	thumb_func_end FindFieldObjectPaletteIndexByTag
 
-	thumb_func_start sub_805F5E8
-sub_805F5E8: @ 805F5E8
+	thumb_func_start npc_load_two_palettes__no_record
+npc_load_two_palettes__no_record: @ 805F5E8
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -3214,7 +3214,7 @@ sub_805F5E8: @ 805F5E8
 	lsrs r5, r1, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805F538
+	bl pal_patch_for_npc
 	movs r3, 0
 	ldr r1, _0805F630 @ =gUnknown_83A5208
 	ldrh r0, [r1]
@@ -3239,7 +3239,7 @@ _0805F60C:
 	adds r0, r1
 	ldrh r0, [r0]
 	ldrb r1, [r5]
-	bl sub_805F538
+	bl pal_patch_for_npc
 	b _0805F650
 	.align 2, 0
 _0805F630: .4byte gUnknown_83A5208
@@ -3259,10 +3259,10 @@ _0805F650:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805F5E8
+	thumb_func_end npc_load_two_palettes__no_record
 
-	thumb_func_start sub_805F658
-sub_805F658: @ 805F658
+	thumb_func_start npc_load_two_palettes__and_record
+npc_load_two_palettes__and_record: @ 805F658
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -3272,7 +3272,7 @@ sub_805F658: @ 805F658
 	strh r4, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805F538
+	bl pal_patch_for_npc
 	movs r3, 0
 	ldr r1, _0805F6A8 @ =gUnknown_83A5278
 	ldrh r0, [r1]
@@ -3297,7 +3297,7 @@ _0805F680:
 	adds r0, r1
 	ldrh r0, [r0]
 	ldrb r1, [r5]
-	bl sub_805F538
+	bl pal_patch_for_npc
 	b _0805F6C8
 	.align 2, 0
 _0805F6A4: .4byte gUnknown_203709A
@@ -3318,7 +3318,7 @@ _0805F6C8:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805F658
+	thumb_func_end npc_load_two_palettes__and_record
 
 	thumb_func_start sub_805F6D0
 sub_805F6D0: @ 805F6D0
@@ -3332,8 +3332,8 @@ sub_805F6D0: @ 805F6D0
 _0805F6DC: .4byte gUnknown_835B934
 	thumb_func_end sub_805F6D0
 
-	thumb_func_start sub_805F6E0
-sub_805F6E0: @ 805F6E0
+	thumb_func_start unref_sub_808EAC4
+unref_sub_808EAC4: @ 805F6E0
 	push {r4,lr}
 	ldrh r3, [r0, 0x10]
 	strh r3, [r0, 0x14]
@@ -3350,10 +3350,10 @@ sub_805F6E0: @ 805F6E0
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805F6E0
+	thumb_func_end unref_sub_808EAC4
 
-	thumb_func_start sub_805F700
-sub_805F700: @ 805F700
+	thumb_func_start npc_coords_shift
+npc_coords_shift: @ 805F700
 	ldrh r3, [r0, 0x10]
 	strh r3, [r0, 0x14]
 	ldrh r3, [r0, 0x12]
@@ -3361,10 +3361,10 @@ sub_805F700: @ 805F700
 	strh r1, [r0, 0x10]
 	strh r2, [r0, 0x12]
 	bx lr
-	thumb_func_end sub_805F700
+	thumb_func_end npc_coords_shift
 
-	thumb_func_start sub_805F710
-sub_805F710: @ 805F710
+	thumb_func_start npc_coords_set
+npc_coords_set: @ 805F710
 	lsls r1, 16
 	lsrs r1, 16
 	lsls r2, 16
@@ -3374,7 +3374,7 @@ sub_805F710: @ 805F710
 	strh r1, [r0, 0x10]
 	strh r2, [r0, 0x12]
 	bx lr
-	thumb_func_end sub_805F710
+	thumb_func_end npc_coords_set
 
 	thumb_func_start sub_805F724
 sub_805F724: @ 805F724
@@ -3404,7 +3404,7 @@ sub_805F724: @ 805F724
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_805F710
+	bl npc_coords_set
 	movs r1, 0x10
 	ldrsh r0, [r6, r1]
 	movs r2, 0x12
@@ -3445,7 +3445,7 @@ sub_805F724: @ 805F724
 	lsrs r0, 7
 	cmp r0, 0
 	beq _0805F7B6
-	bl sub_805FAA8
+	bl CameraObjectReset1
 _0805F7B6:
 	pop {r3}
 	mov r8, r3
@@ -3472,7 +3472,7 @@ sub_805F7C4: @ 805F7C4
 	lsls r4, 16
 	lsrs r4, 16
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F80C
@@ -3501,20 +3501,20 @@ _0805F80C:
 _0805F814: .4byte gUnknown_2036E38
 	thumb_func_end sub_805F7C4
 
-	thumb_func_start sub_805F818
-sub_805F818: @ 805F818
+	thumb_func_start npc_coords_shift_still
+npc_coords_shift_still: @ 805F818
 	push {lr}
 	movs r2, 0x10
 	ldrsh r1, [r0, r2]
 	movs r3, 0x12
 	ldrsh r2, [r0, r3]
-	bl sub_805F700
+	bl npc_coords_shift
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805F818
+	thumb_func_end npc_coords_shift_still
 
-	thumb_func_start sub_805F82C
-sub_805F82C: @ 805F82C
+	thumb_func_start UpdateFieldObjectCoordsForCameraUpdate
+UpdateFieldObjectCoordsForCameraUpdate: @ 805F82C
 	push {r4,r5,lr}
 	ldr r2, _0805F88C @ =gUnknown_2036E18
 	ldrb r1, [r2]
@@ -3568,10 +3568,10 @@ _0805F884:
 	.align 2, 0
 _0805F88C: .4byte gUnknown_2036E18
 _0805F890: .4byte gUnknown_2036E38
-	thumb_func_end sub_805F82C
+	thumb_func_end UpdateFieldObjectCoordsForCameraUpdate
 
-	thumb_func_start sub_805F894
-sub_805F894: @ 805F894
+	thumb_func_start GetFieldObjectIdByXYZ
+GetFieldObjectIdByXYZ: @ 805F894
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3604,7 +3604,7 @@ _0805F8AC:
 	bne _0805F8E4
 	adds r0, r1, 0
 	adds r1, r5, 0
-	bl sub_805F8FC
+	bl FieldObjectDoesZCoordMatch
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F8E4
@@ -3625,10 +3625,10 @@ _0805F8F0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805F894
+	thumb_func_end GetFieldObjectIdByXYZ
 
-	thumb_func_start sub_805F8FC
-sub_805F8FC: @ 805F8FC
+	thumb_func_start FieldObjectDoesZCoordMatch
+FieldObjectDoesZCoordMatch: @ 805F8FC
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -3650,10 +3650,10 @@ _0805F91C:
 _0805F91E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805F8FC
+	thumb_func_end FieldObjectDoesZCoordMatch
 
-	thumb_func_start sub_805F924
-sub_805F924: @ 805F924
+	thumb_func_start UpdateFieldObjectsForCameraUpdate
+UpdateFieldObjectsForCameraUpdate: @ 805F924
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -3661,7 +3661,7 @@ sub_805F924: @ 805F924
 	lsrs r4, 16
 	lsls r5, 16
 	lsrs r5, 16
-	bl sub_805F82C
+	bl UpdateFieldObjectCoordsForCameraUpdate
 	lsls r4, 16
 	asrs r4, 16
 	lsls r5, 16
@@ -3673,10 +3673,10 @@ sub_805F924: @ 805F924
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805F924
+	thumb_func_end UpdateFieldObjectsForCameraUpdate
 
-	thumb_func_start sub_805F950
-sub_805F950: @ 805F950
+	thumb_func_start AddCameraObject
+AddCameraObject: @ 805F950
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3685,7 +3685,7 @@ sub_805F950: @ 805F950
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8006F8C
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0805F990 @ =gUnknown_202063C
@@ -3708,10 +3708,10 @@ sub_805F950: @ 805F950
 	.align 2, 0
 _0805F98C: .4byte gUnknown_835B944
 _0805F990: .4byte gUnknown_202063C
-	thumb_func_end sub_805F950
+	thumb_func_end AddCameraObject
 
-	thumb_func_start sub_805F994
-sub_805F994: @ 805F994
+	thumb_func_start ObjectCB_CameraObject
+ObjectCB_CameraObject: @ 805F994
 	push {r4,r5,lr}
 	sub sp, 0xC
 	mov r2, sp
@@ -3730,10 +3730,10 @@ sub_805F994: @ 805F994
 	bx r0
 	.align 2, 0
 _0805F9B8: .4byte gUnknown_835B95C
-	thumb_func_end sub_805F994
+	thumb_func_end ObjectCB_CameraObject
 
-	thumb_func_start sub_805F9BC
-sub_805F9BC: @ 805F9BC
+	thumb_func_start CameraObject_0
+CameraObject_0: @ 805F9BC
 	push {lr}
 	ldr r3, _0805F9F4 @ =gUnknown_202063C
 	movs r1, 0x2E
@@ -3758,15 +3758,15 @@ sub_805F9BC: @ 805F9BC
 	strb r1, [r3]
 	movs r1, 0x1
 	strh r1, [r0, 0x30]
-	bl sub_805F9F8
+	bl CameraObject_1
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805F9F4: .4byte gUnknown_202063C
-	thumb_func_end sub_805F9BC
+	thumb_func_end CameraObject_0
 
-	thumb_func_start sub_805F9F8
-sub_805F9F8: @ 805F9F8
+	thumb_func_start CameraObject_1
+CameraObject_1: @ 805F9F8
 	push {r4,r5,lr}
 	ldr r3, _0805FA2C @ =gUnknown_202063C
 	movs r1, 0x2E
@@ -3794,10 +3794,10 @@ sub_805F9F8: @ 805F9F8
 	bx r0
 	.align 2, 0
 _0805FA2C: .4byte gUnknown_202063C
-	thumb_func_end sub_805F9F8
+	thumb_func_end CameraObject_1
 
-	thumb_func_start sub_805FA30
-sub_805FA30: @ 805FA30
+	thumb_func_start CameraObject_2
+CameraObject_2: @ 805FA30
 	push {r4,lr}
 	ldr r4, _0805FA5C @ =gUnknown_202063C
 	movs r1, 0x2E
@@ -3822,10 +3822,10 @@ sub_805FA30: @ 805FA30
 	bx r0
 	.align 2, 0
 _0805FA5C: .4byte gUnknown_202063C
-	thumb_func_end sub_805FA30
+	thumb_func_end CameraObject_2
 
-	thumb_func_start sub_805FA60
-sub_805FA60: @ 805FA60
+	thumb_func_start FindCameraObject
+FindCameraObject: @ 805FA60
 	push {r4,r5,lr}
 	movs r3, 0
 	ldr r4, _0805FA8C @ =gUnknown_202063C
@@ -3844,14 +3844,14 @@ _0805FA6A:
 	beq _0805FA94
 	adds r0, r1, r5
 	ldr r1, [r0]
-	ldr r0, _0805FA90 @ =sub_805F994
+	ldr r0, _0805FA90 @ =ObjectCB_CameraObject
 	cmp r1, r0
 	bne _0805FA94
 	adds r0, r2, 0
 	b _0805FAA0
 	.align 2, 0
 _0805FA8C: .4byte gUnknown_202063C
-_0805FA90: .4byte sub_805F994
+_0805FA90: .4byte ObjectCB_CameraObject
 _0805FA94:
 	adds r0, r3, 0x1
 	lsls r0, 24
@@ -3863,12 +3863,12 @@ _0805FAA0:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805FA60
+	thumb_func_end FindCameraObject
 
-	thumb_func_start sub_805FAA8
-sub_805FAA8: @ 805FAA8
+	thumb_func_start CameraObjectReset1
+CameraObjectReset1: @ 805FAA8
 	push {lr}
-	bl sub_805FA60
+	bl FindCameraObject
 	adds r2, r0, 0
 	cmp r2, 0
 	beq _0805FAC0
@@ -3880,28 +3880,28 @@ sub_805FAA8: @ 805FAA8
 _0805FAC0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805FAA8
+	thumb_func_end CameraObjectReset1
 
-	thumb_func_start sub_805FAC4
-sub_805FAC4: @ 805FAC4
+	thumb_func_start CameraObjectSetFollowedObjectId
+CameraObjectSetFollowedObjectId: @ 805FAC4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_805FA60
+	bl FindCameraObject
 	cmp r0, 0
 	beq _0805FAD8
 	strh r4, [r0, 0x2E]
-	bl sub_805FAA8
+	bl CameraObjectReset1
 _0805FAD8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805FAC4
+	thumb_func_end CameraObjectSetFollowedObjectId
 
-	thumb_func_start sub_805FAE0
-sub_805FAE0: @ 805FAE0
+	thumb_func_start CameraObjectGetFollowedObjectId
+CameraObjectGetFollowedObjectId: @ 805FAE0
 	push {lr}
-	bl sub_805FA60
+	bl FindCameraObject
 	cmp r0, 0
 	beq _0805FAF2
 	ldrh r0, [r0, 0x2E]
@@ -3913,20 +3913,20 @@ _0805FAF2:
 _0805FAF4:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805FAE0
+	thumb_func_end CameraObjectGetFollowedObjectId
 
-	thumb_func_start sub_805FAF8
-sub_805FAF8: @ 805FAF8
+	thumb_func_start CameraObjectReset2
+CameraObjectReset2: @ 805FAF8
 	push {lr}
-	bl sub_805FA60
+	bl FindCameraObject
 	movs r1, 0x2
 	strh r1, [r0, 0x30]
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805FAF8
+	thumb_func_end CameraObjectReset2
 
-	thumb_func_start sub_805FB08
-sub_805FB08: @ 805FB08
+	thumb_func_start CopySprite
+CopySprite: @ 805FB08
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3977,10 +3977,10 @@ _0805FB5E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805FB08
+	thumb_func_end CopySprite
 
-	thumb_func_start sub_805FB6C
-sub_805FB6C: @ 805FB6C
+	thumb_func_start obj_unfreeze
+obj_unfreeze: @ 805FB6C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4038,10 +4038,10 @@ _0805FBD2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805FB6C
+	thumb_func_end obj_unfreeze
 
-	thumb_func_start sub_805FBDC
-sub_805FBDC: @ 805FBDC
+	thumb_func_start FieldObjectSetDirection
+FieldObjectSetDirection: @ 805FBDC
 	push {r4,lr}
 	adds r3, r0, 0
 	lsls r1, 24
@@ -4076,10 +4076,10 @@ _0805FC0C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805FBDC
+	thumb_func_end FieldObjectSetDirection
 
-	thumb_func_start sub_805FC20
-sub_805FC20: @ 805FC20
+	thumb_func_start GetFieldObjectScriptPointerByLocalIdAndMap
+GetFieldObjectScriptPointerByLocalIdAndMap: @ 805FC20
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4087,14 +4087,14 @@ sub_805FC20: @ 805FC20
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	bl sub_805FD5C
+	bl GetFieldObjectTemplateByLocalIdAndMap
 	ldr r0, [r0, 0x10]
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805FC20
+	thumb_func_end GetFieldObjectScriptPointerByLocalIdAndMap
 
-	thumb_func_start sub_805FC38
-sub_805FC38: @ 805FC38
+	thumb_func_start GetFieldObjectScriptPointerByFieldObjectId
+GetFieldObjectScriptPointerByFieldObjectId: @ 805FC38
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4106,15 +4106,15 @@ sub_805FC38: @ 805FC38
 	ldrb r0, [r2, 0x8]
 	ldrb r1, [r2, 0x9]
 	ldrb r2, [r2, 0xA]
-	bl sub_805FC20
+	bl GetFieldObjectScriptPointerByLocalIdAndMap
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0805FC58: .4byte gUnknown_2036E38
-	thumb_func_end sub_805FC38
+	thumb_func_end GetFieldObjectScriptPointerByFieldObjectId
 
-	thumb_func_start sub_805FC5C
-sub_805FC5C: @ 805FC5C
+	thumb_func_start GetFieldObjectFlagIdByLocalIdAndMap
+GetFieldObjectFlagIdByLocalIdAndMap: @ 805FC5C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4122,14 +4122,14 @@ sub_805FC5C: @ 805FC5C
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	bl sub_805FD5C
+	bl GetFieldObjectTemplateByLocalIdAndMap
 	ldrh r0, [r0, 0x14]
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805FC5C
+	thumb_func_end GetFieldObjectFlagIdByLocalIdAndMap
 
-	thumb_func_start sub_805FC74
-sub_805FC74: @ 805FC74
+	thumb_func_start GetFieldObjectFlagIdByFieldObjectId
+GetFieldObjectFlagIdByFieldObjectId: @ 805FC74
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4141,14 +4141,14 @@ sub_805FC74: @ 805FC74
 	ldrb r0, [r2, 0x8]
 	ldrb r1, [r2, 0x9]
 	ldrb r2, [r2, 0xA]
-	bl sub_805FC5C
+	bl GetFieldObjectFlagIdByLocalIdAndMap
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0805FC98: .4byte gUnknown_2036E38
-	thumb_func_end sub_805FC74
+	thumb_func_end GetFieldObjectFlagIdByFieldObjectId
 
 	thumb_func_start sub_805FC9C
 sub_805FC9C: @ 805FC9C
@@ -4161,7 +4161,7 @@ sub_805FC9C: @ 805FC9C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805FCD0
@@ -4193,7 +4193,7 @@ sub_805FCD8: @ 805FCD8
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	bl sub_805FD5C
+	bl GetFieldObjectTemplateByLocalIdAndMap
 	ldrh r0, [r0, 0xC]
 	pop {r1}
 	bx r1
@@ -4225,7 +4225,7 @@ sub_805FD08: @ 805FD08
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805FD3C
@@ -4248,8 +4248,8 @@ _0805FD3E:
 	bx r1
 	thumb_func_end sub_805FD08
 
-	thumb_func_start sub_805FD44
-sub_805FD44: @ 805FD44
+	thumb_func_start FieldObjectGetBerryTreeId
+FieldObjectGetBerryTreeId: @ 805FD44
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0805FD58 @ =gUnknown_2036E38
@@ -4261,10 +4261,10 @@ sub_805FD44: @ 805FD44
 	bx lr
 	.align 2, 0
 _0805FD58: .4byte gUnknown_2036E38
-	thumb_func_end sub_805FD44
+	thumb_func_end FieldObjectGetBerryTreeId
 
-	thumb_func_start sub_805FD5C
-sub_805FD5C: @ 805FD5C
+	thumb_func_start GetFieldObjectTemplateByLocalIdAndMap
+GetFieldObjectTemplateByLocalIdAndMap: @ 805FD5C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4294,20 +4294,20 @@ _0805FD90: .4byte gUnknown_2036DFC
 _0805FD94:
 	adds r0, r2, 0
 	adds r1, r3, 0
-	bl sub_8055238
+	bl get_mapheader_by_bank_and_number
 	ldr r0, [r0, 0x4]
 	ldr r1, [r0, 0x4]
 _0805FDA0:
 	ldrb r2, [r0]
 	adds r0, r4, 0
-	bl sub_805FDB0
+	bl FindFieldObjectTemplateInArrayByLocalId
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805FD5C
+	thumb_func_end GetFieldObjectTemplateByLocalIdAndMap
 
-	thumb_func_start sub_805FDB0
-sub_805FDB0: @ 805FDB0
+	thumb_func_start FindFieldObjectTemplateInArrayByLocalId
+FindFieldObjectTemplateInArrayByLocalId: @ 805FDB0
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	lsls r0, 24
@@ -4339,7 +4339,7 @@ _0805FDE0:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805FDB0
+	thumb_func_end FindFieldObjectTemplateInArrayByLocalId
 
 	thumb_func_start sub_805FDE8
 sub_805FDE8: @ 805FDE8
@@ -4454,7 +4454,7 @@ sub_805FE94: @ 805FE94
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805FEC2
@@ -4480,7 +4480,7 @@ sub_805FECC: @ 805FECC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_805F49C
+	bl gpu_pal_allocator_reset__manage_upper_four
 	ldr r1, _0805FF04 @ =gUnknown_203709A
 	ldr r2, _0805FF08 @ =0x000011ff
 	adds r0, r2, 0
@@ -4496,7 +4496,7 @@ sub_805FECC: @ 805FECC
 	ldr r0, [r0]
 	movs r1, 0
 	movs r2, 0x6
-	bl sub_805F574
+	bl pal_patch_for_npc_range
 	ldr r1, _0805FF14 @ =gUnknown_3003E58
 	movs r0, 0x8
 	strb r0, [r1]
@@ -4515,7 +4515,7 @@ _0805FF18:
 	ldr r0, [r1]
 	movs r1, 0
 	movs r2, 0xA
-	bl sub_805F574
+	bl pal_patch_for_npc_range
 _0805FF2A:
 	pop {r4}
 	pop {r0}
@@ -4605,7 +4605,7 @@ sub_805FFB4: @ 805FFB4
 	ldr r2, _0805FFD0 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _0805FFD4 @ =sub_805FFD8
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4631,7 +4631,7 @@ sub_805FFDC: @ 805FFDC
 	ldr r2, _0805FFF8 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _0805FFFC @ =sub_8060000
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4670,7 +4670,7 @@ sub_8060020: @ 8060020
 	ldr r2, _0806003C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08060040 @ =sub_8060044
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4701,7 +4701,7 @@ _08060060: .4byte gUnknown_83A6034
 sub_8060064: @ 8060064
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -4741,7 +4741,7 @@ sub_80600A4: @ 80600A4
 	cmp r0, 0
 	beq _080600D8
 	ldr r5, _080600D4 @ =gUnknown_83A6000
-	bl sub_8044EC8
+	bl Random
 	movs r4, 0x3
 	adds r1, r4, 0
 	ands r1, r0
@@ -4750,7 +4750,7 @@ sub_80600A4: @ 80600A4
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r6, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	strh r4, [r6, 0x30]
 	movs r0, 0x1
 	b _080600DA
@@ -4769,7 +4769,7 @@ sub_80600E0: @ 80600E0
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080600F4
@@ -4795,7 +4795,7 @@ sub_8060100: @ 8060100
 	mov r0, sp
 	movs r2, 0x4
 	bl memcpy
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -4803,12 +4803,12 @@ sub_8060100: @ 8060100
 	ldrb r4, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x5
 	strh r0, [r6, 0x30]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806366C
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806013E
@@ -4899,13 +4899,13 @@ _080601CA:
 	bx r1
 	thumb_func_end sub_80601AC
 
-	thumb_func_start sub_80601D4
-sub_80601D4: @ 80601D4
+	thumb_func_start FieldObjectIsTrainerAndCloseToPlayer
+FieldObjectIsTrainerAndCloseToPlayer: @ 80601D4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
 	movs r0, 0x80
-	bl sub_805C74C
+	bl TestPlayerAvatarFlags
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060240
@@ -4919,7 +4919,7 @@ _080601F0:
 	adds r7, 0x2
 	mov r0, sp
 	adds r1, r7, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	ldrh r2, [r5, 0x10]
 	ldrh r4, [r5, 0x12]
 	ldrb r1, [r5, 0x1D]
@@ -4964,10 +4964,10 @@ _08060246:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80601D4
+	thumb_func_end FieldObjectIsTrainerAndCloseToPlayer
 
-	thumb_func_start sub_8060250
-sub_8060250: @ 8060250
+	thumb_func_start GetRegularRunningPastFacingDirection
+GetRegularRunningPastFacingDirection: @ 8060250
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -4994,10 +4994,10 @@ _08060278:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8060250
+	thumb_func_end GetRegularRunningPastFacingDirection
 
-	thumb_func_start sub_8060280
-sub_8060280: @ 8060280
+	thumb_func_start GetNorthSouthRunningPastFacingDirection
+GetNorthSouthRunningPastFacingDirection: @ 8060280
 	push {lr}
 	movs r0, 0x1
 	lsls r1, 16
@@ -5007,10 +5007,10 @@ sub_8060280: @ 8060280
 _0806028C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8060280
+	thumb_func_end GetNorthSouthRunningPastFacingDirection
 
-	thumb_func_start sub_8060290
-sub_8060290: @ 8060290
+	thumb_func_start GetEastWestRunningPastFacingDirection
+GetEastWestRunningPastFacingDirection: @ 8060290
 	push {lr}
 	movs r1, 0x4
 	lsls r0, 16
@@ -5021,10 +5021,10 @@ _0806029C:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8060290
+	thumb_func_end GetEastWestRunningPastFacingDirection
 
-	thumb_func_start sub_80602A4
-sub_80602A4: @ 80602A4
+	thumb_func_start GetNorthEastRunningPastFacingDirection
+GetNorthEastRunningPastFacingDirection: @ 80602A4
 	push {r4-r7,lr}
 	lsls r0, 16
 	asrs r4, r0, 16
@@ -5038,7 +5038,7 @@ sub_80602A4: @ 80602A4
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060250
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5047,7 +5047,7 @@ sub_80602A4: @ 80602A4
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060290
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -5060,7 +5060,7 @@ _080602E0:
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060280
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5071,10 +5071,10 @@ _080602FA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80602A4
+	thumb_func_end GetNorthEastRunningPastFacingDirection
 
-	thumb_func_start sub_8060300
-sub_8060300: @ 8060300
+	thumb_func_start GetNorthWestRunningPastFacingDirection
+GetNorthWestRunningPastFacingDirection: @ 8060300
 	push {r4-r7,lr}
 	lsls r0, 16
 	asrs r4, r0, 16
@@ -5088,7 +5088,7 @@ sub_8060300: @ 8060300
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060250
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5097,7 +5097,7 @@ sub_8060300: @ 8060300
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060290
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -5110,7 +5110,7 @@ _0806033C:
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060280
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5121,10 +5121,10 @@ _08060356:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8060300
+	thumb_func_end GetNorthWestRunningPastFacingDirection
 
-	thumb_func_start sub_806035C
-sub_806035C: @ 806035C
+	thumb_func_start GetSouthEastRunningPastFacingDirection
+GetSouthEastRunningPastFacingDirection: @ 806035C
 	push {r4-r7,lr}
 	lsls r0, 16
 	asrs r4, r0, 16
@@ -5138,7 +5138,7 @@ sub_806035C: @ 806035C
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060250
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -5147,7 +5147,7 @@ sub_806035C: @ 806035C
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060290
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -5160,7 +5160,7 @@ _08060398:
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060280
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -5171,10 +5171,10 @@ _080603B2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806035C
+	thumb_func_end GetSouthEastRunningPastFacingDirection
 
-	thumb_func_start sub_80603B8
-sub_80603B8: @ 80603B8
+	thumb_func_start GetSouthWestRunningPastFacingDirection
+GetSouthWestRunningPastFacingDirection: @ 80603B8
 	push {r4-r7,lr}
 	lsls r0, 16
 	asrs r4, r0, 16
@@ -5188,7 +5188,7 @@ sub_80603B8: @ 80603B8
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060250
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -5197,7 +5197,7 @@ sub_80603B8: @ 80603B8
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060290
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -5210,7 +5210,7 @@ _080603F4:
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_8060280
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -5221,10 +5221,10 @@ _0806040E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80603B8
+	thumb_func_end GetSouthWestRunningPastFacingDirection
 
-	thumb_func_start sub_8060414
-sub_8060414: @ 8060414
+	thumb_func_start GetNonEastRunningPastFacingDirection
+GetNonEastRunningPastFacingDirection: @ 8060414
 	push {r4-r7,lr}
 	lsls r0, 16
 	asrs r7, r0, 16
@@ -5238,7 +5238,7 @@ sub_8060414: @ 8060414
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8060250
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -5247,17 +5247,17 @@ sub_8060414: @ 8060414
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8060280
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 _0806044A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8060414
+	thumb_func_end GetNonEastRunningPastFacingDirection
 
-	thumb_func_start sub_8060450
-sub_8060450: @ 8060450
+	thumb_func_start GetNonWestRunningPastFacingDirection
+GetNonWestRunningPastFacingDirection: @ 8060450
 	push {r4-r7,lr}
 	lsls r0, 16
 	asrs r7, r0, 16
@@ -5271,7 +5271,7 @@ sub_8060450: @ 8060450
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8060250
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -5280,17 +5280,17 @@ sub_8060450: @ 8060450
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8060280
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 _08060486:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8060450
+	thumb_func_end GetNonWestRunningPastFacingDirection
 
-	thumb_func_start sub_806048C
-sub_806048C: @ 806048C
+	thumb_func_start GetNonSouthRunningPastFacingDirection
+GetNonSouthRunningPastFacingDirection: @ 806048C
 	push {r4-r7,lr}
 	lsls r0, 16
 	asrs r7, r0, 16
@@ -5304,7 +5304,7 @@ sub_806048C: @ 806048C
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8060250
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5313,17 +5313,17 @@ sub_806048C: @ 806048C
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8060290
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 _080604C2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806048C
+	thumb_func_end GetNonSouthRunningPastFacingDirection
 
-	thumb_func_start sub_80604C8
-sub_80604C8: @ 80604C8
+	thumb_func_start GetNonNorthRunningPastFacingDirection
+GetNonNorthRunningPastFacingDirection: @ 80604C8
 	push {r4-r7,lr}
 	lsls r0, 16
 	asrs r7, r0, 16
@@ -5337,7 +5337,7 @@ sub_80604C8: @ 80604C8
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8060250
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -5346,23 +5346,23 @@ sub_80604C8: @ 80604C8
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8060290
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 _080604FE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80604C8
+	thumb_func_end GetNonNorthRunningPastFacingDirection
 
-	thumb_func_start sub_8060504
-sub_8060504: @ 8060504
+	thumb_func_start GetRunningPastFacingDirection
+GetRunningPastFacingDirection: @ 8060504
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r6, r1, 24
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806051C
@@ -5373,7 +5373,7 @@ _0806051C:
 	adds r5, 0x2
 	mov r0, sp
 	adds r1, r5, 0
-	bl sub_805C538
+	bl PlayerGetDestCoords
 	mov r2, sp
 	mov r0, sp
 	ldrh r0, [r0]
@@ -5426,7 +5426,7 @@ _08060580:
 	bx r1
 	.align 2, 0
 _08060588: .4byte gUnknown_83A6054
-	thumb_func_end sub_8060504
+	thumb_func_end GetRunningPastFacingDirection
 
 	thumb_func_start sub_806058C
 sub_806058C: @ 806058C
@@ -5440,7 +5440,7 @@ sub_806058C: @ 806058C
 	ldr r2, _080605A8 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080605AC @ =sub_80605B0
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5471,7 +5471,7 @@ _080605CC: .4byte gUnknown_83A6080
 sub_80605D0: @ 80605D0
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -5512,7 +5512,7 @@ sub_8060610: @ 8060610
 	cmp r0, 0
 	beq _08060646
 	ldr r4, _08060650 @ =gUnknown_83A6000
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -5521,7 +5521,7 @@ sub_8060610: @ 8060610
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -5543,12 +5543,12 @@ sub_8060654: @ 8060654
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060672
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806067A
@@ -5577,12 +5577,12 @@ sub_8060684: @ 8060684
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080606B4
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -5590,7 +5590,7 @@ sub_8060684: @ 8060684
 	ldrb r1, [r0]
 _080606B4:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -5613,7 +5613,7 @@ sub_80606CC: @ 80606CC
 	ldr r2, _080606E8 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080606EC @ =sub_80606F0
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5644,7 +5644,7 @@ _0806070C: .4byte gUnknown_83A6094
 sub_8060710: @ 8060710
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -5684,7 +5684,7 @@ sub_8060750: @ 8060750
 	cmp r0, 0
 	beq _08060784
 	ldr r5, _08060780 @ =gUnknown_83A6000
-	bl sub_8044EC8
+	bl Random
 	movs r4, 0x3
 	adds r1, r4, 0
 	ands r1, r0
@@ -5693,7 +5693,7 @@ sub_8060750: @ 8060750
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r6, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	strh r4, [r6, 0x30]
 	movs r0, 0x1
 	b _08060786
@@ -5712,7 +5712,7 @@ sub_806078C: @ 806078C
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080607A0
@@ -5738,7 +5738,7 @@ sub_80607AC: @ 80607AC
 	mov r0, sp
 	movs r2, 0x2
 	bl memcpy
-	bl sub_8044EC8
+	bl Random
 	movs r7, 0x1
 	adds r1, r7, 0
 	ands r1, r0
@@ -5747,12 +5747,12 @@ sub_80607AC: @ 80607AC
 	ldrb r4, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x5
 	strh r0, [r6, 0x30]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806366C
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	cmp r0, 0
 	beq _080607EA
@@ -5828,7 +5828,7 @@ sub_8060850: @ 8060850
 	ldr r2, _0806086C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08060870 @ =sub_8060874
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5859,7 +5859,7 @@ _08060890: .4byte gUnknown_83A60B4
 sub_8060894: @ 8060894
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -5899,7 +5899,7 @@ sub_80608D4: @ 80608D4
 	cmp r0, 0
 	beq _08060908
 	ldr r5, _08060904 @ =gUnknown_83A6000
-	bl sub_8044EC8
+	bl Random
 	movs r4, 0x3
 	adds r1, r4, 0
 	ands r1, r0
@@ -5908,7 +5908,7 @@ sub_80608D4: @ 80608D4
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r6, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	strh r4, [r6, 0x30]
 	movs r0, 0x1
 	b _0806090A
@@ -5927,7 +5927,7 @@ sub_8060910: @ 8060910
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060924
@@ -5953,7 +5953,7 @@ sub_8060930: @ 8060930
 	mov r0, sp
 	movs r2, 0x2
 	bl memcpy
-	bl sub_8044EC8
+	bl Random
 	movs r7, 0x1
 	adds r1, r7, 0
 	ands r1, r0
@@ -5962,12 +5962,12 @@ sub_8060930: @ 8060930
 	ldrb r4, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x5
 	strh r0, [r6, 0x30]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806366C
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806096E
@@ -6043,7 +6043,7 @@ sub_80609D4: @ 80609D4
 	ldr r2, _080609F0 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080609F4 @ =sub_80609F8
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6075,7 +6075,7 @@ sub_8060A18: @ 8060A18
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -6136,7 +6136,7 @@ sub_8060A74: @ 8060A74
 	ldr r2, _08060A90 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08060A94 @ =sub_8060A98
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6167,7 +6167,7 @@ _08060AB4: .4byte gUnknown_83A60E0
 sub_8060AB8: @ 8060AB8
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -6208,7 +6208,7 @@ sub_8060AF8: @ 8060AF8
 	cmp r0, 0
 	beq _08060B2E
 	ldr r4, _08060B38 @ =gUnknown_83A6000
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6217,7 +6217,7 @@ sub_8060AF8: @ 8060AF8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6239,12 +6239,12 @@ sub_8060B3C: @ 8060B3C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060B5A
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060B62
@@ -6273,12 +6273,12 @@ sub_8060B6C: @ 8060B6C
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08060B9C
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6286,7 +6286,7 @@ sub_8060B6C: @ 8060B6C
 	ldrb r1, [r0]
 _08060B9C:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -6309,7 +6309,7 @@ sub_8060BB4: @ 8060BB4
 	ldr r2, _08060BD0 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08060BD4 @ =sub_8060BD8
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6340,7 +6340,7 @@ _08060BF4: .4byte gUnknown_83A60F4
 sub_8060BF8: @ 8060BF8
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -6381,7 +6381,7 @@ sub_8060C38: @ 8060C38
 	cmp r0, 0
 	beq _08060C6E
 	ldr r4, _08060C78 @ =gUnknown_83A6000
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6390,7 +6390,7 @@ sub_8060C38: @ 8060C38
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6412,12 +6412,12 @@ sub_8060C7C: @ 8060C7C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060C9A
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060CA2
@@ -6446,12 +6446,12 @@ sub_8060CAC: @ 8060CAC
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08060CDC
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6459,7 +6459,7 @@ sub_8060CAC: @ 8060CAC
 	ldrb r1, [r0]
 _08060CDC:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -6482,7 +6482,7 @@ sub_8060CF4: @ 8060CF4
 	ldr r2, _08060D10 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08060D14 @ =sub_8060D18
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6513,7 +6513,7 @@ _08060D34: .4byte gUnknown_83A6108
 sub_8060D38: @ 8060D38
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -6554,7 +6554,7 @@ sub_8060D78: @ 8060D78
 	cmp r0, 0
 	beq _08060DAE
 	ldr r4, _08060DB8 @ =gUnknown_83A6010
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6563,7 +6563,7 @@ sub_8060D78: @ 8060D78
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6585,12 +6585,12 @@ sub_8060DBC: @ 8060DBC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060DDA
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060DE2
@@ -6619,12 +6619,12 @@ sub_8060DEC: @ 8060DEC
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08060E1C
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6632,7 +6632,7 @@ sub_8060DEC: @ 8060DEC
 	ldrb r1, [r0]
 _08060E1C:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -6655,7 +6655,7 @@ sub_8060E34: @ 8060E34
 	ldr r2, _08060E50 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08060E54 @ =sub_8060E58
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6686,7 +6686,7 @@ _08060E74: .4byte gUnknown_83A6120
 sub_8060E78: @ 8060E78
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -6727,7 +6727,7 @@ sub_8060EB8: @ 8060EB8
 	cmp r0, 0
 	beq _08060EEE
 	ldr r4, _08060EF8 @ =gUnknown_83A6010
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6736,7 +6736,7 @@ sub_8060EB8: @ 8060EB8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6758,12 +6758,12 @@ sub_8060EFC: @ 8060EFC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060F1A
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060F22
@@ -6792,12 +6792,12 @@ sub_8060F2C: @ 8060F2C
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08060F5C
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6805,7 +6805,7 @@ sub_8060F2C: @ 8060F2C
 	ldrb r1, [r0]
 _08060F5C:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -6828,7 +6828,7 @@ sub_8060F74: @ 8060F74
 	ldr r2, _08060F90 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08060F94 @ =sub_8060F98
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6859,7 +6859,7 @@ _08060FB4: .4byte gUnknown_83A6138
 sub_8060FB8: @ 8060FB8
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -6900,7 +6900,7 @@ sub_8060FF8: @ 8060FF8
 	cmp r0, 0
 	beq _0806102E
 	ldr r4, _08061038 @ =gUnknown_83A6010
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6909,7 +6909,7 @@ sub_8060FF8: @ 8060FF8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6931,12 +6931,12 @@ sub_806103C: @ 806103C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806105A
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061062
@@ -6965,12 +6965,12 @@ sub_806106C: @ 806106C
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0806109C
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6978,7 +6978,7 @@ sub_806106C: @ 806106C
 	ldrb r1, [r0]
 _0806109C:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7001,7 +7001,7 @@ sub_80610B4: @ 80610B4
 	ldr r2, _080610D0 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080610D4 @ =sub_80610D8
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -7032,7 +7032,7 @@ _080610F4: .4byte gUnknown_83A6150
 sub_80610F8: @ 80610F8
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -7073,7 +7073,7 @@ sub_8061138: @ 8061138
 	cmp r0, 0
 	beq _0806116E
 	ldr r4, _08061178 @ =gUnknown_83A6010
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7082,7 +7082,7 @@ sub_8061138: @ 8061138
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7104,12 +7104,12 @@ sub_806117C: @ 806117C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806119A
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080611A2
@@ -7138,12 +7138,12 @@ sub_80611AC: @ 80611AC
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080611DC
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -7151,7 +7151,7 @@ sub_80611AC: @ 80611AC
 	ldrb r1, [r0]
 _080611DC:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7174,7 +7174,7 @@ sub_80611F4: @ 80611F4
 	ldr r2, _08061210 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061214 @ =sub_8061218
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -7205,7 +7205,7 @@ _08061234: .4byte gUnknown_83A6168
 sub_8061238: @ 8061238
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -7246,7 +7246,7 @@ sub_8061278: @ 8061278
 	cmp r0, 0
 	beq _080612AE
 	ldr r4, _080612B8 @ =gUnknown_83A6010
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7255,7 +7255,7 @@ sub_8061278: @ 8061278
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7277,12 +7277,12 @@ sub_80612BC: @ 80612BC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080612DA
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080612E2
@@ -7311,12 +7311,12 @@ sub_80612EC: @ 80612EC
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0806131C
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -7324,7 +7324,7 @@ sub_80612EC: @ 80612EC
 	ldrb r1, [r0]
 _0806131C:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7347,7 +7347,7 @@ sub_8061334: @ 8061334
 	ldr r2, _08061350 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061354 @ =sub_8061358
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -7378,7 +7378,7 @@ _08061374: .4byte gUnknown_83A6180
 sub_8061378: @ 8061378
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -7419,7 +7419,7 @@ sub_80613B8: @ 80613B8
 	cmp r0, 0
 	beq _080613EE
 	ldr r4, _080613F8 @ =gUnknown_83A6010
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7428,7 +7428,7 @@ sub_80613B8: @ 80613B8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7450,12 +7450,12 @@ sub_80613FC: @ 80613FC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806141A
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061422
@@ -7484,12 +7484,12 @@ sub_806142C: @ 806142C
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0806145C
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -7497,7 +7497,7 @@ sub_806142C: @ 806142C
 	ldrb r1, [r0]
 _0806145C:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7520,7 +7520,7 @@ sub_8061474: @ 8061474
 	ldr r2, _08061490 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061494 @ =sub_8061498
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -7551,7 +7551,7 @@ _080614B4: .4byte gUnknown_83A6198
 sub_80614B8: @ 80614B8
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -7592,7 +7592,7 @@ sub_80614F8: @ 80614F8
 	cmp r0, 0
 	beq _0806152E
 	ldr r4, _08061538 @ =gUnknown_83A6010
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7601,7 +7601,7 @@ sub_80614F8: @ 80614F8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7623,12 +7623,12 @@ sub_806153C: @ 806153C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806155A
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061562
@@ -7657,12 +7657,12 @@ sub_806156C: @ 806156C
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0806159C
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -7670,7 +7670,7 @@ sub_806156C: @ 806156C
 	ldrb r1, [r0]
 _0806159C:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7693,7 +7693,7 @@ sub_80615B4: @ 80615B4
 	ldr r2, _080615D0 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080615D4 @ =sub_80615D8
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -7724,7 +7724,7 @@ _080615F4: .4byte gUnknown_83A61B0
 sub_80615F8: @ 80615F8
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -7765,7 +7765,7 @@ sub_8061638: @ 8061638
 	cmp r0, 0
 	beq _0806166E
 	ldr r4, _08061678 @ =gUnknown_83A6010
-	bl sub_8044EC8
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7774,7 +7774,7 @@ sub_8061638: @ 8061638
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7796,12 +7796,12 @@ sub_806167C: @ 806167C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806169A
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080616A2
@@ -7830,12 +7830,12 @@ sub_80616AC: @ 80616AC
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0xA
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080616DC
-	bl sub_8044EC8
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -7843,7 +7843,7 @@ sub_80616AC: @ 80616AC
 	ldrb r1, [r0]
 _080616DC:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7866,7 +7866,7 @@ sub_80616F4: @ 80616F4
 	ldr r2, _08061710 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061714 @ =sub_8061718
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -7898,7 +7898,7 @@ sub_8061738: @ 8061738
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -7926,7 +7926,7 @@ sub_8061764: @ 8061764
 	beq _0806177E
 	adds r0, r4, 0
 	movs r1, 0x30
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x30]
 _0806177E:
@@ -7942,12 +7942,12 @@ sub_8061788: @ 8061788
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080617A6
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080617AA
@@ -7973,7 +7973,7 @@ sub_80617B4: @ 80617B4
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -7985,7 +7985,7 @@ sub_80617B4: @ 80617B4
 	ldrb r1, [r0]
 _080617E0:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -8009,7 +8009,7 @@ sub_80617F8: @ 80617F8
 	ldr r2, _08061814 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061818 @ =sub_806181C
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8041,7 +8041,7 @@ sub_806183C: @ 806183C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -8069,7 +8069,7 @@ sub_8061868: @ 8061868
 	beq _08061882
 	adds r0, r4, 0
 	movs r1, 0x30
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x30]
 _08061882:
@@ -8085,12 +8085,12 @@ sub_806188C: @ 806188C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080618AA
 	adds r0, r4, 0
-	bl sub_80601D4
+	bl FieldObjectIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080618AE
@@ -8116,7 +8116,7 @@ sub_80618B8: @ 80618B8
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8060504
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -8128,7 +8128,7 @@ sub_80618B8: @ 80618B8
 	ldrb r1, [r0]
 _080618E4:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -8152,7 +8152,7 @@ sub_80618FC: @ 80618FC
 	ldr r2, _08061918 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _0806191C @ =sub_8061920
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8183,7 +8183,7 @@ _0806193C: .4byte gUnknown_83A61F8
 sub_8061940: @ 8061940
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -8206,12 +8206,12 @@ sub_8061954: @ 8061954
 	cmp r0, 0
 	beq _08061976
 	adds r0, r1, 0
-	bl sub_8064480
+	bl GetOppositeDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 _08061976:
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -8240,17 +8240,17 @@ sub_806198C: @ 806198C
 	strb r0, [r2]
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8064480
+	bl GetOppositeDirection
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 _080619BC:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_806366C
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrb r0, [r4, 0x18]
@@ -8267,12 +8267,12 @@ _080619BC:
 	strb r0, [r1]
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8064480
+	bl GetOppositeDirection
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
 	bl sub_8063F84
@@ -8281,7 +8281,7 @@ _080619BC:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_806366C
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08061A12:
@@ -8290,7 +8290,7 @@ _08061A12:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8064244
+	bl GetStepInPlaceDelay16AnimId
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08061A24:
@@ -8337,7 +8337,7 @@ _08061A62:
 sub_8061A6C: @ 8061A6C
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4}
@@ -8345,8 +8345,8 @@ sub_8061A6C: @ 8061A6C
 	bx r1
 	thumb_func_end sub_8061A6C
 
-	thumb_func_start sub_8061A80
-sub_8061A80: @ 8061A80
+	thumb_func_start MoveFieldObjectInNextDirectionInSequence
+MoveFieldObjectInNextDirectionInSequence: @ 8061A80
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -8371,7 +8371,7 @@ _08061AA2:
 	adds r0, r7, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
 	bl sub_8063F84
@@ -8380,7 +8380,7 @@ _08061AA2:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_806366C
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8392,7 +8392,7 @@ _08061AA2:
 	adds r0, r7, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
 	bl sub_8063F84
@@ -8401,7 +8401,7 @@ _08061AA2:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_806366C
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	lsrs r0, 24
 _08061AFC:
@@ -8410,7 +8410,7 @@ _08061AFC:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8064244
+	bl GetStepInPlaceDelay16AnimId
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08061B0E:
@@ -8431,7 +8431,7 @@ _08061B0E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8061A80
+	thumb_func_end MoveFieldObjectInNextDirectionInSequence
 
 	thumb_func_start sub_8061B34
 sub_8061B34: @ 8061B34
@@ -8468,7 +8468,7 @@ sub_8061B5C: @ 8061B5C
 	ldr r2, _08061B78 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061B7C @ =sub_8061B80
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8522,7 +8522,7 @@ _08061BCC:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8545,7 +8545,7 @@ sub_8061BE8: @ 8061BE8
 	ldr r2, _08061C04 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061C08 @ =sub_8061C0C
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8599,7 +8599,7 @@ _08061C58:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8622,7 +8622,7 @@ sub_8061C74: @ 8061C74
 	ldr r2, _08061C90 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061C94 @ =sub_8061C98
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8676,7 +8676,7 @@ _08061CE4:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8699,7 +8699,7 @@ sub_8061D00: @ 8061D00
 	ldr r2, _08061D1C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061D20 @ =sub_8061D24
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8753,7 +8753,7 @@ _08061D70:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8776,7 +8776,7 @@ sub_8061D8C: @ 8061D8C
 	ldr r2, _08061DA8 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061DAC @ =sub_8061DB0
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8830,7 +8830,7 @@ _08061DFC:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8853,7 +8853,7 @@ sub_8061E18: @ 8061E18
 	ldr r2, _08061E34 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061E38 @ =sub_8061E3C
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8907,7 +8907,7 @@ _08061E88:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8930,7 +8930,7 @@ sub_8061EA4: @ 8061EA4
 	ldr r2, _08061EC0 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061EC4 @ =sub_8061EC8
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8984,7 +8984,7 @@ _08061F14:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9007,7 +9007,7 @@ sub_8061F30: @ 8061F30
 	ldr r2, _08061F4C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061F50 @ =sub_8061F54
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9061,7 +9061,7 @@ _08061FA0:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9084,7 +9084,7 @@ sub_8061FBC: @ 8061FBC
 	ldr r2, _08061FD8 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08061FDC @ =sub_8061FE0
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9138,7 +9138,7 @@ _0806202C:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9161,7 +9161,7 @@ sub_8062048: @ 8062048
 	ldr r2, _08062064 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08062068 @ =sub_806206C
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9215,7 +9215,7 @@ _080620B8:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9238,7 +9238,7 @@ sub_80620D4: @ 80620D4
 	ldr r2, _080620F0 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080620F4 @ =sub_80620F8
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9292,7 +9292,7 @@ _08062144:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9315,7 +9315,7 @@ sub_8062160: @ 8062160
 	ldr r2, _0806217C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08062180 @ =sub_8062184
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9369,7 +9369,7 @@ _080621D0:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9392,7 +9392,7 @@ sub_80621EC: @ 80621EC
 	ldr r2, _08062208 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _0806220C @ =sub_8062210
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9446,7 +9446,7 @@ _0806225C:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9469,7 +9469,7 @@ sub_8062278: @ 8062278
 	ldr r2, _08062294 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08062298 @ =sub_806229C
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9523,7 +9523,7 @@ _080622E8:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9546,7 +9546,7 @@ sub_8062304: @ 8062304
 	ldr r2, _08062320 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08062324 @ =sub_8062328
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9600,7 +9600,7 @@ _08062374:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9623,7 +9623,7 @@ sub_8062390: @ 8062390
 	ldr r2, _080623AC @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080623B0 @ =sub_80623B4
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9677,7 +9677,7 @@ _08062400:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9700,7 +9700,7 @@ sub_806241C: @ 806241C
 	ldr r2, _08062438 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _0806243C @ =sub_8062440
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9754,7 +9754,7 @@ _0806248C:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9777,7 +9777,7 @@ sub_80624A8: @ 80624A8
 	ldr r2, _080624C4 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080624C8 @ =sub_80624CC
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9831,7 +9831,7 @@ _08062518:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9854,7 +9854,7 @@ sub_8062534: @ 8062534
 	ldr r2, _08062550 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08062554 @ =sub_8062558
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9908,7 +9908,7 @@ _080625A4:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9931,7 +9931,7 @@ sub_80625C0: @ 80625C0
 	ldr r2, _080625DC @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080625E0 @ =sub_80625E4
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9985,7 +9985,7 @@ _08062630:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10008,7 +10008,7 @@ sub_806264C: @ 806264C
 	ldr r2, _08062668 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _0806266C @ =sub_8062670
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -10062,7 +10062,7 @@ _080626BC:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10085,7 +10085,7 @@ sub_80626D8: @ 80626D8
 	ldr r2, _080626F4 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080626F8 @ =sub_80626FC
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -10139,7 +10139,7 @@ _08062748:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10162,7 +10162,7 @@ sub_8062764: @ 8062764
 	ldr r2, _08062780 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08062784 @ =sub_8062788
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -10216,7 +10216,7 @@ _080627D4:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10239,7 +10239,7 @@ sub_80627F0: @ 80627F0
 	ldr r2, _0806280C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08062810 @ =sub_8062814
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -10293,7 +10293,7 @@ _08062860:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl sub_8061A80
+	bl MoveFieldObjectInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10316,7 +10316,7 @@ sub_806287C: @ 806287C
 	ldr r2, _08062898 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _0806289C @ =sub_80628A0
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -10343,17 +10343,17 @@ sub_80628A0: @ 80628A0
 _080628BC: .4byte gUnknown_83A6384
 	thumb_func_end sub_80628A0
 
-	thumb_func_start sub_80628C0
-sub_80628C0: @ 80628C0
+	thumb_func_start mss_npc_reset_oampriv3_1_unk2_unk3
+mss_npc_reset_oampriv3_1_unk2_unk3: @ 80628C0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	adds r4, 0x21
 	ldrb r0, [r4]
 	cmp r0, 0
 	bne _080628D8
-	bl sub_805C6C4
+	bl player_get_direction_lower_nybble
 	strb r0, [r4]
 _080628D8:
 	movs r0, 0x1
@@ -10361,7 +10361,7 @@ _080628D8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80628C0
+	thumb_func_end mss_npc_reset_oampriv3_1_unk2_unk3
 
 	thumb_func_start sub_80628E4
 sub_80628E4: @ 80628E4
@@ -10389,12 +10389,12 @@ _08062908: .4byte gUnknown_2036E38
 _0806290C: .4byte gUnknown_2037078
 _08062910:
 	ldr r5, _08062940 @ =gUnknown_83A6390
-	bl sub_805BFE0
+	bl player_get_x22
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 22
 	adds r4, r5
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -10456,7 +10456,7 @@ sub_8062970: @ 8062970
 	adds r1, r4, 0
 	adds r1, 0x21
 	ldrb r1, [r1]
-	bl sub_80644CC
+	bl state_to_direction
 	bl sub_8063EB8
 	adds r2, r0, 0
 	lsls r2, 24
@@ -10497,7 +10497,7 @@ sub_80629B8: @ 80629B8
 	adds r1, 0x21
 	ldrb r1, [r1]
 	adds r2, r6, 0
-	bl sub_80644CC
+	bl state_to_direction
 	adds r6, r0, 0
 	mov r5, sp
 	adds r5, 0x2
@@ -10505,7 +10505,7 @@ sub_80629B8: @ 80629B8
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl sub_8063C50
+	bl FieldObjectMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8063F84
 	adds r2, r0, 0
@@ -10521,7 +10521,7 @@ sub_80629B8: @ 80629B8
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062A3E
@@ -10586,7 +10586,7 @@ sub_8062A70: @ 8062A70
 	adds r1, 0x21
 	ldrb r1, [r1]
 	adds r2, r6, 0
-	bl sub_80644CC
+	bl state_to_direction
 	adds r6, r0, 0
 	mov r5, sp
 	adds r5, 0x2
@@ -10594,7 +10594,7 @@ sub_8062A70: @ 8062A70
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl sub_8063C50
+	bl FieldObjectMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8063FB0
 	adds r2, r0, 0
@@ -10610,7 +10610,7 @@ sub_8062A70: @ 8062A70
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062AF6
@@ -10675,7 +10675,7 @@ sub_8062B28: @ 8062B28
 	adds r1, 0x21
 	ldrb r1, [r1]
 	adds r2, r6, 0
-	bl sub_80644CC
+	bl state_to_direction
 	adds r6, r0, 0
 	mov r5, sp
 	adds r5, 0x2
@@ -10683,7 +10683,7 @@ sub_8062B28: @ 8062B28
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl sub_8063C50
+	bl FieldObjectMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8064034
 	adds r2, r0, 0
@@ -10699,7 +10699,7 @@ sub_8062B28: @ 8062B28
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062BAE
@@ -10764,7 +10764,7 @@ sub_8062BE0: @ 8062BE0
 	adds r1, 0x21
 	ldrb r1, [r1]
 	adds r2, r6, 0
-	bl sub_80644CC
+	bl state_to_direction
 	adds r6, r0, 0
 	mov r5, sp
 	adds r5, 0x2
@@ -10772,7 +10772,7 @@ sub_8062BE0: @ 8062BE0
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl sub_8063C50
+	bl FieldObjectMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8064060
 	adds r2, r0, 0
@@ -10788,7 +10788,7 @@ sub_8062BE0: @ 8062BE0
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062C66
@@ -10834,8 +10834,8 @@ _08062C7A:
 _08062C94: .4byte gUnknown_839FD5D
 	thumb_func_end sub_8062BE0
 
-	thumb_func_start sub_8062C98
-sub_8062C98: @ 8062C98
+	thumb_func_start cph_IM_DIFFERENT
+cph_IM_DIFFERENT: @ 8062C98
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -10848,7 +10848,7 @@ sub_8062C98: @ 8062C98
 	adds r1, r4, 0
 	adds r1, 0x21
 	ldrb r1, [r1]
-	bl sub_80644CC
+	bl state_to_direction
 	bl sub_806413C
 	adds r2, r0, 0
 	lsls r2, 24
@@ -10868,7 +10868,7 @@ sub_8062C98: @ 8062C98
 	bx r1
 	.align 2, 0
 _08062CDC: .4byte gUnknown_839FD5D
-	thumb_func_end sub_8062C98
+	thumb_func_end cph_IM_DIFFERENT
 
 	thumb_func_start sub_8062CE0
 sub_8062CE0: @ 8062CE0
@@ -10889,7 +10889,7 @@ sub_8062CE0: @ 8062CE0
 	adds r1, 0x21
 	ldrb r1, [r1]
 	adds r2, r6, 0
-	bl sub_80644CC
+	bl state_to_direction
 	adds r6, r0, 0
 	mov r5, sp
 	adds r5, 0x2
@@ -10897,7 +10897,7 @@ sub_8062CE0: @ 8062CE0
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl sub_8063C50
+	bl FieldObjectMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8064194
 	adds r2, r0, 0
@@ -10913,7 +10913,7 @@ sub_8062CE0: @ 8062CE0
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062D66
@@ -10959,8 +10959,8 @@ _08062D7A:
 _08062D94: .4byte gUnknown_839FD5D
 	thumb_func_end sub_8062CE0
 
-	thumb_func_start sub_8062D98
-sub_8062D98: @ 8062D98
+	thumb_func_start oac_hopping
+oac_hopping: @ 8062D98
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -10978,7 +10978,7 @@ sub_8062D98: @ 8062D98
 	adds r1, 0x21
 	ldrb r1, [r1]
 	adds r2, r6, 0
-	bl sub_80644CC
+	bl state_to_direction
 	adds r6, r0, 0
 	ldrh r1, [r4, 0x10]
 	add r0, sp, 0x4
@@ -11009,7 +11009,7 @@ sub_8062D98: @ 8062D98
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062E2C
@@ -11053,7 +11053,7 @@ _08062E40:
 	bx r1
 	.align 2, 0
 _08062E5C: .4byte gUnknown_839FD5D
-	thumb_func_end sub_8062D98
+	thumb_func_end oac_hopping
 
 	thumb_func_start sub_8062E60
 sub_8062E60: @ 8062E60
@@ -11067,7 +11067,7 @@ sub_8062E60: @ 8062E60
 	ldr r2, _08062E7C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08062E80 @ =sub_8062E84
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11094,8 +11094,8 @@ sub_8062E84: @ 8062E84
 _08062EA0: .4byte gUnknown_83A63BC
 	thumb_func_end sub_8062E84
 
-	thumb_func_start sub_8062EA4
-sub_8062EA4: @ 8062EA4
+	thumb_func_start mss_08062EA4
+mss_08062EA4: @ 8062EA4
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
@@ -11120,12 +11120,12 @@ _08062EC8: .4byte gUnknown_2036E38
 _08062ECC: .4byte gUnknown_2037078
 _08062ED0:
 	ldr r5, _08062F00 @ =gUnknown_83A6390
-	bl sub_805BFE0
+	bl player_get_x22
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 22
 	adds r4, r5
-	bl sub_805C6E4
+	bl player_get_direction_upper_nybble
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -11143,10 +11143,10 @@ _08062EF8:
 	.align 2, 0
 _08062F00: .4byte gUnknown_83A6390
 _08062F04: .4byte sub_8059B44
-	thumb_func_end sub_8062EA4
+	thumb_func_end mss_08062EA4
 
-	thumb_func_start sub_8062F08
-sub_8062F08: @ 8062F08
+	thumb_func_start FieldObjectCB_TreeDisguise
+FieldObjectCB_TreeDisguise: @ 8062F08
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0x2E
@@ -11173,9 +11173,9 @@ _08062F30:
 	adds r3, r1, 0
 	adds r3, 0x8
 	adds r0, r4, 0
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	movs r0, 0x1C
-	bl sub_8083444
+	bl FieldEffectStart
 	strb r0, [r4, 0x1A]
 	movs r0, 0x1
 	strb r0, [r6]
@@ -11192,7 +11192,7 @@ _08062F50:
 	adds r0, r1
 	ldr r2, _08062F74 @ =sub_8062F78
 	adds r1, r5, 0
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -11200,19 +11200,19 @@ _08062F50:
 _08062F6C: .4byte gUnknown_2036E38
 _08062F70: .4byte gUnknown_20386E0
 _08062F74: .4byte sub_8062F78
-	thumb_func_end sub_8062F08
+	thumb_func_end FieldObjectCB_TreeDisguise
 
 	thumb_func_start sub_8062F78
 sub_8062F78: @ 8062F78
 	push {lr}
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8062F78
 
-	thumb_func_start sub_8062F84
-sub_8062F84: @ 8062F84
+	thumb_func_start FieldObjectCB_MountainDisguise
+FieldObjectCB_MountainDisguise: @ 8062F84
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0x2E
@@ -11239,9 +11239,9 @@ _08062FAC:
 	adds r3, r1, 0
 	adds r3, 0x8
 	adds r0, r4, 0
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	movs r0, 0x1D
-	bl sub_8083444
+	bl FieldEffectStart
 	strb r0, [r4, 0x1A]
 	movs r0, 0x1
 	strb r0, [r6]
@@ -11258,7 +11258,7 @@ _08062FCC:
 	adds r0, r1
 	ldr r2, _08062FF0 @ =sub_8062F78
 	adds r1, r5, 0
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -11266,10 +11266,10 @@ _08062FCC:
 _08062FE8: .4byte gUnknown_2036E38
 _08062FEC: .4byte gUnknown_20386E0
 _08062FF0: .4byte sub_8062F78
-	thumb_func_end sub_8062F84
+	thumb_func_end FieldObjectCB_MountainDisguise
 
-	thumb_func_start sub_8062FF4
-sub_8062FF4: @ 8062FF4
+	thumb_func_start FieldObjectCB_Hidden1
+FieldObjectCB_Hidden1: @ 8062FF4
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r1, 0x3C
@@ -11311,14 +11311,14 @@ _08063034:
 	adds r0, r4
 	ldr r2, _08063054 @ =sub_8063058
 	adds r1, r3, 0
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08063050: .4byte gUnknown_2036E38
 _08063054: .4byte sub_8063058
-	thumb_func_end sub_8062FF4
+	thumb_func_end FieldObjectCB_Hidden1
 
 	thumb_func_start sub_8063058
 sub_8063058: @ 8063058
@@ -11342,7 +11342,7 @@ _08063074: .4byte gUnknown_83A63C8
 	thumb_func_start sub_8063078
 sub_8063078: @ 8063078
 	push {lr}
-	bl sub_8063410
+	bl npc_reset
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -11377,7 +11377,7 @@ sub_80630A0: @ 80630A0
 	ldr r2, _080630BC @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080630C0 @ =sub_80630C4
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11409,11 +11409,11 @@ sub_80630E4: @ 80630E4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8064244
+	bl GetStepInPlaceDelay16AnimId
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -11439,7 +11439,7 @@ sub_8063110: @ 8063110
 	ldr r2, _0806312C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08063130 @ =sub_8063134
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11471,7 +11471,7 @@ sub_8063154: @ 8063154
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -11501,7 +11501,7 @@ sub_8063180: @ 8063180
 	ldr r2, _0806319C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080631A0 @ =sub_80631A4
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11533,11 +11533,11 @@ sub_80631C4: @ 80631C4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806429C
+	bl GetStepInPlaceDelay4AnimId
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -11563,7 +11563,7 @@ sub_80631F0: @ 80631F0
 	ldr r2, _0806320C @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08063210 @ =sub_8063214
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11595,7 +11595,7 @@ sub_8063234: @ 8063234
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -11660,7 +11660,7 @@ sub_8063298: @ 8063298
 	ldr r2, _080632B4 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080632B8 @ =sub_8063304
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11680,7 +11680,7 @@ sub_80632BC: @ 80632BC
 	ldr r2, _080632D8 @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _080632DC @ =sub_8063324
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11700,7 +11700,7 @@ sub_80632E0: @ 80632E0
 	ldr r2, _080632FC @ =gUnknown_2036E38
 	adds r0, r2
 	ldr r2, _08063300 @ =sub_8063344
-	bl sub_8063DB8
+	bl FieldObjectStep
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11770,7 +11770,7 @@ sub_8063364: @ 8063364
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x98
@@ -11818,7 +11818,7 @@ sub_80633B4: @ 80633B4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x99
@@ -11836,7 +11836,7 @@ sub_80633D4: @ 80633D4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl sub_8063410
+	bl npc_reset
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x9A
@@ -11866,8 +11866,8 @@ _08063406:
 	bx r1
 	thumb_func_end sub_80633F4
 
-	thumb_func_start sub_8063410
-sub_8063410: @ 8063410
+	thumb_func_start npc_reset
+npc_reset: @ 8063410
 	ldrb r3, [r0]
 	movs r2, 0x3
 	negs r2, r2
@@ -11883,10 +11883,10 @@ sub_8063410: @ 8063410
 	movs r0, 0
 	strh r0, [r1, 0x30]
 	bx lr
-	thumb_func_end sub_8063410
+	thumb_func_end npc_reset
 
-	thumb_func_start sub_8063430
-sub_8063430: @ 8063430
+	thumb_func_start FieldObjectDirectionToImageAnimId
+FieldObjectDirectionToImageAnimId: @ 8063430
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806343C @ =gUnknown_83A640C
@@ -11895,10 +11895,10 @@ sub_8063430: @ 8063430
 	bx lr
 	.align 2, 0
 _0806343C: .4byte gUnknown_83A640C
-	thumb_func_end sub_8063430
+	thumb_func_end FieldObjectDirectionToImageAnimId
 
-	thumb_func_start sub_8063440
-sub_8063440: @ 8063440
+	thumb_func_start get_go_image_anim_num
+get_go_image_anim_num: @ 8063440
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806344C @ =gUnknown_83A6415
@@ -11907,10 +11907,10 @@ sub_8063440: @ 8063440
 	bx lr
 	.align 2, 0
 _0806344C: .4byte gUnknown_83A6415
-	thumb_func_end sub_8063440
+	thumb_func_end get_go_image_anim_num
 
-	thumb_func_start sub_8063450
-sub_8063450: @ 8063450
+	thumb_func_start get_go_fast_image_anim_num
+get_go_fast_image_anim_num: @ 8063450
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806345C @ =gUnknown_83A641E
@@ -11919,10 +11919,10 @@ sub_8063450: @ 8063450
 	bx lr
 	.align 2, 0
 _0806345C: .4byte gUnknown_83A641E
-	thumb_func_end sub_8063450
+	thumb_func_end get_go_fast_image_anim_num
 
-	thumb_func_start sub_8063460
-sub_8063460: @ 8063460
+	thumb_func_start get_go_faster_image_anim_num
+get_go_faster_image_anim_num: @ 8063460
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806346C @ =gUnknown_83A6427
@@ -11931,7 +11931,7 @@ sub_8063460: @ 8063460
 	bx lr
 	.align 2, 0
 _0806346C: .4byte gUnknown_83A6427
-	thumb_func_end sub_8063460
+	thumb_func_end get_go_faster_image_anim_num
 
 	thumb_func_start sub_8063470
 sub_8063470: @ 8063470
@@ -12065,8 +12065,8 @@ sub_8063510: @ 8063510
 _0806351C: .4byte gUnknown_83A648A
 	thumb_func_end sub_8063510
 
-	thumb_func_start sub_8063520
-sub_8063520: @ 8063520
+	thumb_func_start get_run_image_anim_num
+get_run_image_anim_num: @ 8063520
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806352C @ =gUnknown_83A6493
@@ -12075,7 +12075,7 @@ sub_8063520: @ 8063520
 	bx lr
 	.align 2, 0
 _0806352C: .4byte gUnknown_83A6493
-	thumb_func_end sub_8063520
+	thumb_func_end get_run_image_anim_num
 
 	thumb_func_start sub_8063530
 sub_8063530: @ 8063530
@@ -12103,8 +12103,8 @@ _08063550:
 	bx r1
 	thumb_func_end sub_8063530
 
-	thumb_func_start sub_8063554
-sub_8063554: @ 8063554
+	thumb_func_start npc_apply_anim_looping
+npc_apply_anim_looping: @ 8063554
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r2, 24
@@ -12138,15 +12138,15 @@ _0806358C:
 _0806358E:
 	ldrb r1, [r1]
 	adds r0, r4, 0
-	bl sub_80083C0
+	bl SeekSpriteAnim
 _08063596:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8063554
+	thumb_func_end npc_apply_anim_looping
 
-	thumb_func_start sub_806359C
-sub_806359C: @ 806359C
+	thumb_func_start obj_npc_animation_step
+obj_npc_animation_step: @ 806359C
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r2, 24
@@ -12173,12 +12173,12 @@ sub_806359C: @ 806359C
 	ldrb r1, [r2, 0x4]
 _080635CE:
 	adds r0, r4, 0
-	bl sub_80083C0
+	bl SeekSpriteAnim
 _080635D4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806359C
+	thumb_func_end obj_npc_animation_step
 
 	thumb_func_start sub_80635DC
 sub_80635DC: @ 80635DC
@@ -12214,8 +12214,8 @@ _0806360C:
 	bx r1
 	thumb_func_end sub_80635DC
 
-	thumb_func_start sub_8063610
-sub_8063610: @ 8063610
+	thumb_func_start npc_set_running_behaviour_etc
+npc_set_running_behaviour_etc: @ 8063610
 	push {r4,lr}
 	mov r12, r0
 	lsls r1, 24
@@ -12253,10 +12253,10 @@ sub_8063610: @ 8063610
 	.align 2, 0
 _08063654: .4byte gUnknown_202063C
 _08063658: .4byte gUnknown_839FBC8
-	thumb_func_end sub_8063610
+	thumb_func_end npc_set_running_behaviour_etc
 
-	thumb_func_start sub_806365C
-sub_806365C: @ 806365C
+	thumb_func_start npc_running_behaviour_by_direction
+npc_running_behaviour_by_direction: @ 806365C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08063668 @ =gUnknown_83A649C
@@ -12265,10 +12265,10 @@ sub_806365C: @ 806365C
 	bx lr
 	.align 2, 0
 _08063668: .4byte gUnknown_83A649C
-	thumb_func_end sub_806365C
+	thumb_func_end npc_running_behaviour_by_direction
 
-	thumb_func_start sub_806366C
-sub_806366C: @ 806366C
+	thumb_func_start npc_block_way__next_tile
+npc_block_way__next_tile: @ 806366C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
@@ -12284,7 +12284,7 @@ sub_806366C: @ 806366C
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r4, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
@@ -12292,17 +12292,17 @@ sub_806366C: @ 806366C
 	ldrsh r2, [r4, r0]
 	adds r0, r6, 0
 	adds r3, r5, 0
-	bl sub_80636AC
+	bl npc_block_way
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806366C
+	thumb_func_end npc_block_way__next_tile
 
-	thumb_func_start sub_80636AC
-sub_80636AC: @ 80636AC
+	thumb_func_start npc_block_way
+npc_block_way: @ 80636AC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -12323,7 +12323,7 @@ sub_80636AC: @ 80636AC
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_806383C
+	bl IsCoordOutsideFieldObjectMovementRect
 	lsls r0, 24
 	cmp r0, 0
 	beq _080636E2
@@ -12347,7 +12347,7 @@ _080636E2:
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r7, 0
-	bl sub_80638AC
+	bl IsMetatileDirectionallyImpassable
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063724
@@ -12356,7 +12356,7 @@ _080636E2:
 	cmp r0, 0
 	beq _08063728
 	mov r0, r8
-	bl sub_8059464
+	bl CanCameraMoveInDirection
 	cmp r0, 0
 	bne _08063728
 _08063724:
@@ -12374,7 +12374,7 @@ _08063728:
 	asrs r4, r1, 16
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80681B0
+	bl IsZCoordMismatchAt
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806374C
@@ -12384,7 +12384,7 @@ _0806374C:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8063904
+	bl CheckForCollisionBetweenFieldObjects
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063760
@@ -12400,7 +12400,7 @@ _08063762:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80636AC
+	thumb_func_end npc_block_way
 
 	thumb_func_start sub_8063770
 sub_8063770: @ 8063770
@@ -12424,7 +12424,7 @@ sub_8063770: @ 8063770
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_806383C
+	bl IsCoordOutsideFieldObjectMovementRect
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -12447,7 +12447,7 @@ sub_8063770: @ 8063770
 	adds r1, r6, 0
 	adds r2, r5, 0
 	mov r3, r8
-	bl sub_80638AC
+	bl IsMetatileDirectionallyImpassable
 	lsls r0, 24
 	cmp r0, 0
 	bne _080637E8
@@ -12456,7 +12456,7 @@ sub_8063770: @ 8063770
 	cmp r0, 0
 	beq _080637EC
 	mov r0, r8
-	bl sub_8059464
+	bl CanCameraMoveInDirection
 	cmp r0, 0
 	bne _080637EC
 _080637E8:
@@ -12474,7 +12474,7 @@ _080637EC:
 	asrs r5, r1, 16
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_80681B0
+	bl IsZCoordMismatchAt
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063814
@@ -12486,7 +12486,7 @@ _08063814:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_8063904
+	bl CheckForCollisionBetweenFieldObjects
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806382C
@@ -12505,8 +12505,8 @@ _0806382C:
 	bx r1
 	thumb_func_end sub_8063770
 
-	thumb_func_start sub_806383C
-sub_806383C: @ 806383C
+	thumb_func_start IsCoordOutsideFieldObjectMovementRect
+IsCoordOutsideFieldObjectMovementRect: @ 806383C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -12567,10 +12567,10 @@ _080638A6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806383C
+	thumb_func_end IsCoordOutsideFieldObjectMovementRect
 
-	thumb_func_start sub_80638AC
-sub_80638AC: @ 80638AC
+	thumb_func_start IsMetatileDirectionallyImpassable
+IsMetatileDirectionallyImpassable: @ 80638AC
 	push {r4-r7,lr}
 	lsls r1, 16
 	lsrs r6, r1, 16
@@ -12613,10 +12613,10 @@ _080638FE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80638AC
+	thumb_func_end IsMetatileDirectionallyImpassable
 
-	thumb_func_start sub_8063904
-sub_8063904: @ 8063904
+	thumb_func_start CheckForCollisionBetweenFieldObjects
+CheckForCollisionBetweenFieldObjects: @ 8063904
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	lsls r1, 16
@@ -12662,7 +12662,7 @@ _0806394C:
 	ldrb r1, [r2, 0xB]
 	lsls r1, 28
 	lsrs r1, 28
-	bl sub_806835C
+	bl AreZCoordsCompatible
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806396C
@@ -12681,7 +12681,7 @@ _08063978:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8063904
+	thumb_func_end CheckForCollisionBetweenFieldObjects
 
 	thumb_func_start sub_8063980
 sub_8063980: @ 8063980
@@ -12694,7 +12694,7 @@ sub_8063980: @ 8063980
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080639CC
@@ -12740,7 +12740,7 @@ sub_80639D4: @ 80639D4
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063A12
@@ -12770,8 +12770,8 @@ _08063A18: .4byte gUnknown_202063C
 _08063A1C: .4byte gUnknown_2036E38
 	thumb_func_end sub_80639D4
 
-	thumb_func_start sub_8063A20
-sub_8063A20: @ 8063A20
+	thumb_func_start MoveCoords
+MoveCoords: @ 8063A20
 	push {r4,lr}
 	lsls r0, 24
 	ldr r3, _08063A40 @ =gUnknown_83A64C8
@@ -12790,7 +12790,7 @@ sub_8063A20: @ 8063A20
 	bx r0
 	.align 2, 0
 _08063A40: .4byte gUnknown_83A64C8
-	thumb_func_end sub_8063A20
+	thumb_func_end MoveCoords
 
 	thumb_func_start sub_8063A44
 sub_8063A44: @ 8063A44
@@ -13039,8 +13039,8 @@ sub_8063BC4: @ 8063BC4
 	bx r0
 	thumb_func_end sub_8063BC4
 
-	thumb_func_start sub_8063C10
-sub_8063C10: @ 8063C10
+	thumb_func_start GetFieldObjectMovingCameraOffset
+GetFieldObjectMovingCameraOffset: @ 8063C10
 	push {lr}
 	adds r2, r0, 0
 	movs r0, 0
@@ -13077,10 +13077,10 @@ _08063C48:
 	bx r0
 	.align 2, 0
 _08063C4C: .4byte gUnknown_3005050
-	thumb_func_end sub_8063C10
+	thumb_func_end GetFieldObjectMovingCameraOffset
 
-	thumb_func_start sub_8063C50
-sub_8063C50: @ 8063C50
+	thumb_func_start FieldObjectMoveDestCoords
+FieldObjectMoveDestCoords: @ 8063C50
 	push {r4,lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -13091,14 +13091,14 @@ sub_8063C50: @ 8063C50
 	adds r0, r1, 0
 	adds r1, r2, 0
 	adds r2, r3, 0
-	bl sub_8063A20
+	bl MoveCoords
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8063C50
+	thumb_func_end FieldObjectMoveDestCoords
 
-	thumb_func_start sub_8063C70
-sub_8063C70: @ 8063C70
+	thumb_func_start FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive: @ 8063C70
 	push {lr}
 	ldrb r1, [r0]
 	movs r0, 0x42
@@ -13112,10 +13112,10 @@ _08063C80:
 _08063C82:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8063C70
+	thumb_func_end FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 
-	thumb_func_start sub_8063C88
-sub_8063C88: @ 8063C88
+	thumb_func_start FieldObjectIsSpecialAnimActive
+FieldObjectIsSpecialAnimActive: @ 8063C88
 	push {lr}
 	adds r1, r0, 0
 	ldrb r0, [r1]
@@ -13132,7 +13132,7 @@ _08063C9E:
 _08063CA0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8063C88
+	thumb_func_end FieldObjectIsSpecialAnimActive
 
 	thumb_func_start sub_8063CA4
 sub_8063CA4: @ 8063CA4
@@ -13146,7 +13146,7 @@ sub_8063CA4: @ 8063CA4
 	cmp r0, 0x1
 	beq _08063CC8
 	adds r0, r4, 0
-	bl sub_8063C70
+	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063CCE
@@ -13154,10 +13154,10 @@ sub_8063CA4: @ 8063CA4
 	b _08063CF4
 _08063CC8:
 	adds r0, r4, 0
-	bl sub_8063D1C
+	bl FieldObjectClearAnimIfSpecialAnimActive
 _08063CCE:
 	adds r0, r4, 0
-	bl sub_80689F4
+	bl npc_sync_anim_pause_bits
 	movs r3, 0
 	strb r5, [r4, 0x1C]
 	ldrb r0, [r4]
@@ -13182,23 +13182,23 @@ _08063CF4:
 _08063CFC: .4byte gUnknown_202063C
 	thumb_func_end sub_8063CA4
 
-	thumb_func_start sub_8063D00
-sub_8063D00: @ 8063D00
+	thumb_func_start FieldObjectForceSetSpecialAnim
+FieldObjectForceSetSpecialAnim: @ 8063D00
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r1, 24
 	lsrs r4, 24
-	bl sub_8063D1C
+	bl FieldObjectClearAnimIfSpecialAnimActive
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8063CA4
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8063D00
+	thumb_func_end FieldObjectForceSetSpecialAnim
 
-	thumb_func_start sub_8063D1C
-sub_8063D1C: @ 8063D1C
+	thumb_func_start FieldObjectClearAnimIfSpecialAnimActive
+FieldObjectClearAnimIfSpecialAnimActive: @ 8063D1C
 	push {lr}
 	adds r1, r0, 0
 	ldrb r0, [r1]
@@ -13206,14 +13206,14 @@ sub_8063D1C: @ 8063D1C
 	cmp r0, 0
 	bge _08063D2E
 	adds r0, r1, 0
-	bl sub_8063D34
+	bl FieldObjectClearAnim
 _08063D2E:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8063D1C
+	thumb_func_end FieldObjectClearAnimIfSpecialAnimActive
 
-	thumb_func_start sub_8063D34
-sub_8063D34: @ 8063D34
+	thumb_func_start FieldObjectClearAnim
+FieldObjectClearAnim: @ 8063D34
 	movs r1, 0xFF
 	strb r1, [r0, 0x1C]
 	ldrb r2, [r0]
@@ -13240,10 +13240,10 @@ sub_8063D34: @ 8063D34
 	bx lr
 	.align 2, 0
 _08063D64: .4byte gUnknown_202063C
-	thumb_func_end sub_8063D34
+	thumb_func_end FieldObjectClearAnim
 
-	thumb_func_start sub_8063D68
-sub_8063D68: @ 8063D68
+	thumb_func_start FieldObjectCheckIfSpecialAnimFinishedOrInactive
+FieldObjectCheckIfSpecialAnimFinishedOrInactive: @ 8063D68
 	push {lr}
 	ldrb r1, [r0]
 	lsls r0, r1, 25
@@ -13256,13 +13256,13 @@ _08063D76:
 _08063D78:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8063D68
+	thumb_func_end FieldObjectCheckIfSpecialAnimFinishedOrInactive
 
-	thumb_func_start sub_8063D7C
-sub_8063D7C: @ 8063D7C
+	thumb_func_start FieldObjectClearAnimIfSpecialAnimFinished
+FieldObjectClearAnimIfSpecialAnimFinished: @ 8063D7C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_8063D68
+	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -13270,13 +13270,13 @@ sub_8063D7C: @ 8063D7C
 	cmp r4, 0x10
 	beq _08063D96
 	adds r0, r5, 0
-	bl sub_8063D1C
+	bl FieldObjectClearAnimIfSpecialAnimActive
 _08063D96:
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8063D7C
+	thumb_func_end FieldObjectClearAnimIfSpecialAnimFinished
 
 	thumb_func_start sub_8063DA0
 sub_8063DA0: @ 8063DA0
@@ -13295,24 +13295,24 @@ _08063DB2:
 	bx r1
 	thumb_func_end sub_8063DA0
 
-	thumb_func_start sub_8063DB8
-sub_8063DB8: @ 8063DB8
+	thumb_func_start FieldObjectStep
+FieldObjectStep: @ 8063DB8
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r6, r2, 0
-	bl sub_80687F0
+	bl DoGroundEffects_OnSpawn
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80679C8
 	adds r0, r4, 0
-	bl sub_8063C88
+	bl FieldObjectIsSpecialAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063DE2
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806450C
+	bl FieldObjectExecSpecialAnim
 	b _08063DF8
 _08063DE2:
 	ldrb r0, [r4, 0x1]
@@ -13329,10 +13329,10 @@ _08063DEA:
 _08063DF8:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806883C
+	bl DoGroundEffects_OnBeginStep
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8068890
+	bl DoGroundEffects_OnFinishStep
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80679AC
@@ -13341,23 +13341,23 @@ _08063DF8:
 	bl sub_80679F8
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8068340
+	bl FieldObjectUpdateSubpriority
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8063DB8
+	thumb_func_end FieldObjectStep
 
 	thumb_func_start sub_8063E28
 sub_8063E28: @ 8063E28
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_80687F0
+	bl DoGroundEffects_OnSpawn
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80679C8
 	adds r0, r4, 0
-	bl sub_8063C88
+	bl FieldObjectIsSpecialAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063E5C
@@ -13398,10 +13398,10 @@ _08063E88:
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806883C
+	bl DoGroundEffects_OnBeginStep
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8068890
+	bl DoGroundEffects_OnFinishStep
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80679AC
@@ -13410,7 +13410,7 @@ _08063E88:
 	bl sub_80679F8
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8068340
+	bl FieldObjectUpdateSubpriority
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13909,8 +13909,8 @@ _08064204:
 _08064214: .4byte gUnknown_83A654B
 	thumb_func_end sub_80641EC
 
-	thumb_func_start sub_8064218
-sub_8064218: @ 8064218
+	thumb_func_start GetStepInPlaceDelay32AnimId
+GetStepInPlaceDelay32AnimId: @ 8064218
 	push {r4,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -13932,10 +13932,10 @@ _08064230:
 	bx r1
 	.align 2, 0
 _08064240: .4byte gUnknown_83A6550
-	thumb_func_end sub_8064218
+	thumb_func_end GetStepInPlaceDelay32AnimId
 
-	thumb_func_start sub_8064244
-sub_8064244: @ 8064244
+	thumb_func_start GetStepInPlaceDelay16AnimId
+GetStepInPlaceDelay16AnimId: @ 8064244
 	push {r4,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -13957,7 +13957,7 @@ _0806425C:
 	bx r1
 	.align 2, 0
 _0806426C: .4byte gUnknown_83A6555
-	thumb_func_end sub_8064244
+	thumb_func_end GetStepInPlaceDelay16AnimId
 
 	thumb_func_start sub_8064270
 sub_8064270: @ 8064270
@@ -13984,8 +13984,8 @@ _08064288:
 _08064298: .4byte gUnknown_83A655A
 	thumb_func_end sub_8064270
 
-	thumb_func_start sub_806429C
-sub_806429C: @ 806429C
+	thumb_func_start GetStepInPlaceDelay4AnimId
+GetStepInPlaceDelay4AnimId: @ 806429C
 	push {r4,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -14007,15 +14007,15 @@ _080642B4:
 	bx r1
 	.align 2, 0
 _080642C4: .4byte gUnknown_83A655F
-	thumb_func_end sub_806429C
+	thumb_func_end GetStepInPlaceDelay4AnimId
 
-	thumb_func_start sub_80642C8
-sub_80642C8: @ 80642C8
+	thumb_func_start FieldObjectFaceOppositeDirection
+FieldObjectFaceOppositeDirection: @ 80642C8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_8064480
+	bl GetOppositeDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063EB8
@@ -14029,7 +14029,7 @@ sub_80642C8: @ 80642C8
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80642C8
+	thumb_func_end FieldObjectFaceOppositeDirection
 
 	thumb_func_start sub_80642F4
 sub_80642F4: @ 80642F4
@@ -14256,8 +14256,8 @@ _0806446C:
 _0806447C: .4byte gUnknown_83A658C
 	thumb_func_end sub_8064454
 
-	thumb_func_start sub_8064480
-sub_8064480: @ 8064480
+	thumb_func_start GetOppositeDirection
+GetOppositeDirection: @ 8064480
 	push {r4,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -14284,10 +14284,10 @@ _080644AA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064480
+	thumb_func_end GetOppositeDirection
 
-	thumb_func_start sub_80644B4
-sub_80644B4: @ 80644B4
+	thumb_func_start zffu_offset_calc
+zffu_offset_calc: @ 80644B4
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
@@ -14300,10 +14300,10 @@ sub_80644B4: @ 80644B4
 	bx lr
 	.align 2, 0
 _080644C8: .4byte gUnknown_83A6599
-	thumb_func_end sub_80644B4
+	thumb_func_end zffu_offset_calc
 
-	thumb_func_start sub_80644CC
-sub_80644CC: @ 80644CC
+	thumb_func_start state_to_direction
+state_to_direction: @ 80644CC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -14325,7 +14325,7 @@ _080644EC:
 	b _08064502
 _080644F0:
 	adds r1, r2, 0
-	bl sub_80644B4
+	bl zffu_offset_calc
 	ldr r2, _08064508 @ =gUnknown_83A65A9
 	lsls r1, r4, 2
 	subs r1, 0x5
@@ -14338,10 +14338,10 @@ _08064502:
 	bx r1
 	.align 2, 0
 _08064508: .4byte gUnknown_83A65A9
-	thumb_func_end sub_80644CC
+	thumb_func_end state_to_direction
 
-	thumb_func_start sub_806450C
-sub_806450C: @ 806450C
+	thumb_func_start FieldObjectExecSpecialAnim
+FieldObjectExecSpecialAnim: @ 806450C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r2, _08064540 @ =gUnknown_83A65BC
@@ -14369,7 +14369,7 @@ _08064538:
 	bx r0
 	.align 2, 0
 _08064540: .4byte gUnknown_83A65BC
-	thumb_func_end sub_806450C
+	thumb_func_end FieldObjectExecSpecialAnim
 
 	thumb_func_start sub_8064544
 sub_8064544: @ 8064544
@@ -14470,26 +14470,26 @@ _080645EA:
 _080645F0: .4byte gUnknown_3005E88
 	thumb_func_end sub_80645C8
 
-	thumb_func_start sub_80645F4
-sub_80645F4: @ 80645F4
+	thumb_func_start an_look_any
+an_look_any: @ 80645F4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	lsls r1, r2, 24
 	lsrs r1, 24
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	adds r0, r4, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806359C
+	bl obj_npc_animation_step
 	adds r2, r5, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -14501,13 +14501,13 @@ sub_80645F4: @ 80645F4
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80645F4
+	thumb_func_end an_look_any
 
 	thumb_func_start sub_8064638
 sub_8064638: @ 8064638
 	push {lr}
 	movs r2, 0x1
-	bl sub_80645F4
+	bl an_look_any
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -14517,7 +14517,7 @@ sub_8064638: @ 8064638
 sub_8064648: @ 8064648
 	push {lr}
 	movs r2, 0x2
-	bl sub_80645F4
+	bl an_look_any
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -14527,7 +14527,7 @@ sub_8064648: @ 8064648
 sub_8064658: @ 8064658
 	push {lr}
 	movs r2, 0x3
-	bl sub_80645F4
+	bl an_look_any
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -14537,7 +14537,7 @@ sub_8064658: @ 8064658
 sub_8064668: @ 8064668
 	push {lr}
 	movs r2, 0x4
-	bl sub_80645F4
+	bl an_look_any
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -14568,22 +14568,22 @@ sub_8064678: @ 8064678
 	strh r0, [r5]
 	mov r0, r8
 	adds r1, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	adds r0, r4, 0
 	mov r1, sp
 	adds r2, r5, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	movs r0, 0
 	ldrsh r2, [r5, r0]
 	mov r0, r8
-	bl sub_805F700
+	bl npc_coords_shift
 	mov r0, r9
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_8068B40
+	bl oamt_npc_ministep_reset
 	mov r2, r9
 	adds r2, 0x2C
 	ldrb r1, [r2]
@@ -14645,7 +14645,7 @@ sub_80646FC: @ 80646FC
 	lsrs r2, 24
 	adds r0, r5, 0
 	mov r1, r8
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
@@ -14668,13 +14668,13 @@ sub_8064758: @ 8064758
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063520
+	bl get_run_image_anim_num
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -14686,7 +14686,7 @@ sub_8064788: @ 8064788
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8068B54
+	bl obj_npc_ministep
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806479E
@@ -14694,7 +14694,7 @@ sub_8064788: @ 8064788
 	b _080647BA
 _0806479E:
 	adds r0, r4, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldrb r0, [r4]
 	movs r1, 0x8
 	orrs r0, r1
@@ -14731,18 +14731,18 @@ sub_80647C0: @ 80647C0
 	strh r0, [r4]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r4, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	movs r0, 0
 	ldrsh r2, [r4, r0]
 	adds r0, r6, 0
-	bl sub_805F700
+	bl npc_coords_shift
 	mov r0, r8
 	adds r1, r5, 0
 	bl sub_8068BBC
@@ -14779,13 +14779,13 @@ sub_8064830: @ 8064830
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -14805,7 +14805,7 @@ sub_806485C: @ 806485C
 	b _0806488E
 _08064872:
 	adds r0, r4, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldrb r0, [r4]
 	movs r1, 0x8
 	orrs r0, r1
@@ -14842,18 +14842,18 @@ sub_8064894: @ 8064894
 	strh r0, [r4]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r4, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	movs r0, 0
 	ldrsh r2, [r4, r0]
 	adds r0, r6, 0
-	bl sub_805F700
+	bl npc_coords_shift
 	mov r0, r8
 	adds r1, r5, 0
 	bl sub_8068C58
@@ -14890,13 +14890,13 @@ sub_8064904: @ 8064904
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -14916,7 +14916,7 @@ sub_8064930: @ 8064930
 	b _08064962
 _08064946:
 	adds r0, r4, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldrb r0, [r4]
 	movs r1, 0x8
 	orrs r0, r1
@@ -15249,18 +15249,18 @@ sub_8064B68: @ 8064B68
 	strh r0, [r4]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r4, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	movs r0, 0
 	ldrsh r2, [r4, r0]
 	adds r0, r6, 0
-	bl sub_805F700
+	bl npc_coords_shift
 	mov r0, r8
 	adds r1, r5, 0
 	bl sub_8068C08
@@ -15297,13 +15297,13 @@ sub_8064BD8: @ 8064BD8
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -15323,7 +15323,7 @@ sub_8064C04: @ 8064C04
 	b _08064C36
 _08064C1A:
 	adds r0, r4, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldrb r0, [r4]
 	movs r1, 0x8
 	orrs r0, r1
@@ -15675,7 +15675,7 @@ sub_8064E3C: @ 8064E3C
 	strh r0, [r6]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	mov r1, r8
 	lsls r0, r1, 1
 	add r0, sp
@@ -15698,7 +15698,7 @@ sub_8064E3C: @ 8064E3C
 	lsls r2, 16
 	asrs r2, 16
 	adds r0, r7, 0
-	bl sub_805F700
+	bl npc_coords_shift
 	mov r0, r10
 	adds r1, r4, 0
 	mov r2, r8
@@ -15734,8 +15734,8 @@ sub_8064E3C: @ 8064E3C
 _08064EF4: .4byte gUnknown_83A6958
 	thumb_func_end sub_8064E3C
 
-	thumb_func_start sub_8064EF8
-sub_8064EF8: @ 8064EF8
+	thumb_func_start maybe_shadow_1
+maybe_shadow_1: @ 8064EF8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -15753,20 +15753,20 @@ sub_8064EF8: @ 8064EF8
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	adds r0, r4, 0
-	bl sub_80692F0
+	bl DoShadowFieldEffect
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8064EF8
+	thumb_func_end maybe_shadow_1
 
 	thumb_func_start sub_8064F3C
 sub_8064F3C: @ 8064F3C
@@ -15827,7 +15827,7 @@ sub_8064F3C: @ 8064F3C
 	lsls r2, 16
 	asrs r2, 16
 	adds r0, r6, 0
-	bl sub_805F700
+	bl npc_coords_shift
 	ldrb r0, [r6]
 	movs r1, 0x4
 	orrs r0, r1
@@ -15842,7 +15842,7 @@ _08064FCC:
 	cmp r1, 0xFF
 	bne _08064FF0
 	adds r0, r6, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldrb r0, [r6]
 	movs r1, 0x8
 	orrs r0, r1
@@ -15942,22 +15942,22 @@ sub_8065058: @ 8065058
 _08065072:
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8064480
+	bl GetOppositeDirection
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806359C
+	bl obj_npc_animation_step
 _0806509E:
 	movs r0, 0
 _080650A0:
@@ -15977,7 +15977,7 @@ sub_80650A8: @ 80650A8
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80650D4
@@ -16026,7 +16026,7 @@ sub_8065100: @ 8065100
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_806512C
@@ -16075,7 +16075,7 @@ sub_8065158: @ 8065158
 	adds r0, r4, 0
 	movs r2, 0x3
 	movs r3, 0x2
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8065184
@@ -16124,7 +16124,7 @@ sub_80651B0: @ 80651B0
 	adds r0, r4, 0
 	movs r2, 0x4
 	movs r3, 0x2
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80651DC
@@ -16437,7 +16437,7 @@ sub_80653CC: @ 80653CC
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
-	bl sub_8068B54
+	bl obj_npc_ministep
 	lsls r0, 24
 	cmp r0, 0
 	bne _080653E0
@@ -16445,7 +16445,7 @@ sub_80653CC: @ 80653CC
 	b _080653F0
 _080653E0:
 	adds r0, r4, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldrb r0, [r4]
 	movs r1, 0x8
 	orrs r0, r1
@@ -16468,12 +16468,12 @@ sub_80653F8: @ 80653F8
 	cmp r0, 0x1
 	beq _0806541A
 	movs r0, 0x1
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0806541A:
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -16496,7 +16496,7 @@ sub_8065438: @ 8065438
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8007824
+	bl AnimateSprite
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80653CC
@@ -16526,12 +16526,12 @@ sub_8065464: @ 8065464
 	cmp r0, 0x2
 	beq _08065486
 	movs r0, 0x2
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _08065486:
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -16554,7 +16554,7 @@ sub_80654A4: @ 80654A4
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8007824
+	bl AnimateSprite
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80653CC
@@ -16584,12 +16584,12 @@ sub_80654D0: @ 80654D0
 	cmp r0, 0x3
 	beq _080654F2
 	movs r0, 0x3
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _080654F2:
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -16612,7 +16612,7 @@ sub_8065510: @ 8065510
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8007824
+	bl AnimateSprite
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80653CC
@@ -16642,12 +16642,12 @@ sub_806553C: @ 806553C
 	cmp r0, 0x4
 	beq _0806555E
 	movs r0, 0x4
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0806555E:
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -16670,7 +16670,7 @@ sub_806557C: @ 806557C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_8007824
+	bl AnimateSprite
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80653CC
@@ -16696,9 +16696,9 @@ sub_80655A8: @ 80655A8
 	adds r5, r1, 0
 	lsls r1, r2, 24
 	lsrs r1, 24
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	adds r0, r4, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	adds r2, r5, 0
 	adds r2, 0x2C
 	ldrb r1, [r2]
@@ -16724,15 +16724,15 @@ sub_80655D4: @ 80655D4
 	cmp r0, 0x1
 	beq _080655F6
 	movs r0, 0x1
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _080655F6:
 	adds r0, r4, 0
-	bl sub_8007824
+	bl AnimateSprite
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -16754,15 +16754,15 @@ sub_8065610: @ 8065610
 	cmp r0, 0x2
 	beq _08065632
 	movs r0, 0x2
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _08065632:
 	adds r0, r4, 0
-	bl sub_8007824
+	bl AnimateSprite
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -16784,15 +16784,15 @@ sub_806564C: @ 806564C
 	cmp r0, 0x3
 	beq _0806566E
 	movs r0, 0x3
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _0806566E:
 	adds r0, r4, 0
-	bl sub_8007824
+	bl AnimateSprite
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x3
@@ -16814,15 +16814,15 @@ sub_8065688: @ 8065688
 	cmp r0, 0x4
 	beq _080656AA
 	movs r0, 0x4
-	bl sub_8063430
+	bl FieldObjectDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 _080656AA:
 	adds r0, r4, 0
-	bl sub_8007824
+	bl AnimateSprite
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x4
@@ -16849,11 +16849,11 @@ sub_80656C4: @ 80656C4
 	lsrs r4, 24
 	lsls r5, 16
 	lsrs r5, 16
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	mov r0, r8
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	adds r2, r6, 0
 	adds r2, 0x2C
 	ldrb r1, [r2]
@@ -16938,7 +16938,7 @@ sub_8065770: @ 8065770
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x1
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -16966,7 +16966,7 @@ sub_80657A8: @ 80657A8
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x2
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -16994,7 +16994,7 @@ sub_80657E0: @ 80657E0
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x3
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17022,7 +17022,7 @@ sub_8065818: @ 8065818
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x4
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17050,7 +17050,7 @@ sub_8065850: @ 8065850
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x1
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17078,7 +17078,7 @@ sub_8065888: @ 8065888
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x2
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17106,7 +17106,7 @@ sub_80658C0: @ 80658C0
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x3
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17134,7 +17134,7 @@ sub_80658F8: @ 80658F8
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x4
-	bl sub_8063440
+	bl get_go_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17162,7 +17162,7 @@ sub_8065930: @ 8065930
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x1
-	bl sub_8063450
+	bl get_go_fast_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17190,7 +17190,7 @@ sub_8065968: @ 8065968
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x2
-	bl sub_8063450
+	bl get_go_fast_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17218,7 +17218,7 @@ sub_80659A0: @ 80659A0
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x3
-	bl sub_8063450
+	bl get_go_fast_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17246,7 +17246,7 @@ sub_80659D8: @ 80659D8
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x4
-	bl sub_8063450
+	bl get_go_fast_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17274,7 +17274,7 @@ sub_8065A10: @ 8065A10
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x1
-	bl sub_8063460
+	bl get_go_faster_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17302,7 +17302,7 @@ sub_8065A48: @ 8065A48
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x2
-	bl sub_8063460
+	bl get_go_faster_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17330,7 +17330,7 @@ sub_8065A80: @ 8065A80
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x3
-	bl sub_8063460
+	bl get_go_faster_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -17358,7 +17358,7 @@ sub_8065AB8: @ 8065AB8
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x4
-	bl sub_8063460
+	bl get_go_faster_image_anim_num
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -18002,18 +18002,18 @@ sub_8065EF0: @ 8065EF0
 	strh r0, [r4]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r4, 0
-	bl sub_8063A20
+	bl MoveCoords
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	movs r0, 0
 	ldrsh r2, [r4, r0]
 	adds r0, r6, 0
-	bl sub_805F700
+	bl npc_coords_shift
 	mov r0, r8
 	adds r1, r5, 0
 	bl sub_8068CA4
@@ -18050,13 +18050,13 @@ sub_8065F60: @ 8065F60
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063520
+	bl get_run_image_anim_num
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -18076,7 +18076,7 @@ sub_8065F8C: @ 8065F8C
 	b _08065FBE
 _08065FA2:
 	adds r0, r4, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	ldrb r0, [r4]
 	movs r1, 0x8
 	orrs r0, r1
@@ -18242,8 +18242,8 @@ _080660BC:
 	bx r1
 	thumb_func_end sub_80660A4
 
-	thumb_func_start sub_80660C4
-sub_80660C4: @ 80660C4
+	thumb_func_start npc_set_direction_and_anim__an_proceed
+npc_set_direction_and_anim__an_proceed: @ 80660C4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r5, r1, 0
@@ -18255,16 +18255,16 @@ sub_80660C4: @ 80660C4
 	lsrs r1, 24
 	adds r0, r5, 0
 	movs r2, 0
-	bl sub_8068E74
+	bl obj_anim_image_set_and_seek
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x32]
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80660C4
+	thumb_func_end npc_set_direction_and_anim__an_proceed
 
 	thumb_func_start sub_80660F0
 sub_80660F0: @ 80660F0
@@ -18274,7 +18274,7 @@ sub_80660F0: @ 80660F0
 	adds r3, r1, 0
 	adds r3, 0x2A
 	ldrb r3, [r3]
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -18320,7 +18320,7 @@ sub_8066128: @ 8066128
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -18653,7 +18653,7 @@ sub_806637C: @ 806637C
 	movs r1, 0
 	movs r2, 0
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080663C6
@@ -18678,7 +18678,7 @@ sub_806637C: @ 806637C
 	lsrs r2, 24
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_80645F4
+	bl an_look_any
 _080663C6:
 	movs r0, 0x1
 	strh r0, [r6, 0x32]
@@ -18700,7 +18700,7 @@ sub_80663D8: @ 80663D8
 	movs r1, 0
 	movs r2, 0
 	mov r3, sp
-	bl sub_805DF84
+	bl TryGetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806642A
@@ -18722,13 +18722,13 @@ sub_80663D8: @ 80663D8
 	bl sub_80635DC
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8064480
+	bl GetOppositeDirection
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_80645F4
+	bl an_look_any
 _0806642A:
 	movs r0, 0x1
 	strh r0, [r6, 0x32]
@@ -18774,7 +18774,7 @@ sub_806645C: @ 806645C
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8066488
@@ -18823,7 +18823,7 @@ sub_80664B4: @ 80664B4
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0x1
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80664E0
@@ -18872,7 +18872,7 @@ sub_806650C: @ 806650C
 	adds r0, r4, 0
 	movs r2, 0x3
 	movs r3, 0x1
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8066538
@@ -18921,7 +18921,7 @@ sub_8066564: @ 8066564
 	adds r0, r4, 0
 	movs r2, 0x4
 	movs r3, 0x1
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8066590
@@ -18970,7 +18970,7 @@ sub_80665BC: @ 80665BC
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80665E8
@@ -19019,7 +19019,7 @@ sub_8066614: @ 8066614
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8066640
@@ -19068,7 +19068,7 @@ sub_806666C: @ 806666C
 	adds r0, r4, 0
 	movs r2, 0x3
 	movs r3, 0
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8066698
@@ -19117,7 +19117,7 @@ sub_80666C4: @ 80666C4
 	adds r0, r4, 0
 	movs r2, 0x4
 	movs r3, 0
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80666F0
@@ -19166,7 +19166,7 @@ sub_806671C: @ 806671C
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8066748
@@ -19215,7 +19215,7 @@ sub_8066774: @ 8066774
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80667A0
@@ -19264,7 +19264,7 @@ sub_80667CC: @ 80667CC
 	adds r0, r4, 0
 	movs r2, 0x3
 	movs r3, 0
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80667F8
@@ -19313,7 +19313,7 @@ sub_8066824: @ 8066824
 	adds r0, r4, 0
 	movs r2, 0x4
 	movs r3, 0
-	bl sub_8064EF8
+	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8066850
@@ -19358,7 +19358,7 @@ sub_806687C: @ 806687C
 	ldrb r2, [r0, 0x6]
 	adds r2, r3
 	ldrb r2, [r2]
-	bl sub_80645F4
+	bl an_look_any
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -19371,7 +19371,7 @@ sub_8066894: @ 8066894
 	push {lr}
 	movs r2, 0x1
 	movs r3, 0x14
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -19458,17 +19458,17 @@ sub_8066910: @ 8066910
 	bx lr
 	thumb_func_end sub_8066910
 
-	thumb_func_start sub_8066920
-sub_8066920: @ 8066920
+	thumb_func_start do_exclamation_mark_bubble_1
+do_exclamation_mark_bubble_1: @ 8066920
 	push {r4,lr}
 	adds r4, r1, 0
 	ldr r1, _08066940 @ =gUnknown_20386E0
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	movs r0, 0
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	pop {r4}
@@ -19476,19 +19476,19 @@ sub_8066920: @ 8066920
 	bx r1
 	.align 2, 0
 _08066940: .4byte gUnknown_20386E0
-	thumb_func_end sub_8066920
+	thumb_func_end do_exclamation_mark_bubble_1
 
-	thumb_func_start sub_8066944
-sub_8066944: @ 8066944
+	thumb_func_start do_exclamation_mark_bubble_2
+do_exclamation_mark_bubble_2: @ 8066944
 	push {r4,lr}
 	adds r4, r1, 0
 	ldr r1, _08066964 @ =gUnknown_20386E0
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	movs r0, 0x21
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	pop {r4}
@@ -19496,19 +19496,19 @@ sub_8066944: @ 8066944
 	bx r1
 	.align 2, 0
 _08066964: .4byte gUnknown_20386E0
-	thumb_func_end sub_8066944
+	thumb_func_end do_exclamation_mark_bubble_2
 
-	thumb_func_start sub_8066968
-sub_8066968: @ 8066968
+	thumb_func_start do_heart_bubble
+do_heart_bubble: @ 8066968
 	push {r4,lr}
 	adds r4, r1, 0
 	ldr r1, _08066988 @ =gUnknown_20386E0
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	movs r0, 0x2E
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	pop {r4}
@@ -19516,7 +19516,7 @@ sub_8066968: @ 8066968
 	bx r1
 	.align 2, 0
 _08066988: .4byte gUnknown_20386E0
-	thumb_func_end sub_8066968
+	thumb_func_end do_heart_bubble
 
 	thumb_func_start sub_806698C
 sub_806698C: @ 806698C
@@ -19526,9 +19526,9 @@ sub_806698C: @ 806698C
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	movs r0, 0x42
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	pop {r4}
@@ -19546,9 +19546,9 @@ sub_80669B0: @ 80669B0
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl sub_805F364
+	bl FieldObjectGetLocalIdAndMap
 	movs r0, 0x40
-	bl sub_8083444
+	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	pop {r4}
@@ -19623,7 +19623,7 @@ sub_8066A38: @ 8066A38
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_8068E74
+	bl obj_anim_image_set_and_seek
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	movs r0, 0
@@ -19643,7 +19643,7 @@ sub_8066A54: @ 8066A54
 	beq _08066A70
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x32]
 _08066A70:
@@ -19669,7 +19669,7 @@ sub_8066A78: @ 8066A78
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08066AAA
@@ -19693,7 +19693,7 @@ sub_8066AB4: @ 8066AB4
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_8068E74
+	bl obj_anim_image_set_and_seek
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	movs r0, 0
@@ -19713,7 +19713,7 @@ sub_8066AD0: @ 8066AD0
 	beq _08066AEC
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_8068E58
+	bl SetFieldObjectStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x32]
 _08066AEC:
@@ -19739,7 +19739,7 @@ sub_8066AF4: @ 8066AF4
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r5, 0
-	bl sub_8068E5C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08066B26
@@ -19788,7 +19788,7 @@ sub_8066B50: @ 8066B50
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
-	bl sub_800860C
+	bl InitSpriteAffineAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -19813,7 +19813,7 @@ sub_8066B80: @ 8066B80
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl sub_80085CC
+	bl FreeOamMatrix
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x4
 	negs r1, r1
@@ -19824,7 +19824,7 @@ sub_8066B80: @ 8066B80
 	lsrs r2, 6
 	movs r3, 0
 	adds r0, r4, 0
-	bl sub_80073F0
+	bl CalcCenterToCornerVec
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -19846,7 +19846,7 @@ sub_8066BB0: @ 8066BB0
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8008468
+	bl StartSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8066BE4
@@ -19898,7 +19898,7 @@ sub_8066C10: @ 8066C10
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80084D4
+	bl ChangeSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8066C44
@@ -19943,9 +19943,9 @@ sub_8066C70: @ 8066C70
 	lsls r4, r2, 24
 	lsrs r4, 24
 	adds r1, r4, 0
-	bl sub_805FBDC
+	bl FieldObjectSetDirection
 	adds r0, r5, 0
-	bl sub_805F818
+	bl npc_coords_shift_still
 	adds r0, r4, 0
 	bl sub_80634E0
 	adds r2, r0, 0
@@ -19953,7 +19953,7 @@ sub_8066C70: @ 8066C70
 	lsrs r2, 24
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_806359C
+	bl obj_npc_animation_step
 	adds r2, r6, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -20020,7 +20020,7 @@ sub_8066CF0: @ 8066CF0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20040,7 +20040,7 @@ sub_8066D14: @ 8066D14
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x2
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20060,7 +20060,7 @@ sub_8066D38: @ 8066D38
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x3
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20080,7 +20080,7 @@ sub_8066D5C: @ 8066D5C
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x4
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20100,7 +20100,7 @@ sub_8066D80: @ 8066D80
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20120,7 +20120,7 @@ sub_8066DA4: @ 8066DA4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x2
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20140,7 +20140,7 @@ sub_8066DC8: @ 8066DC8
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x3
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20160,7 +20160,7 @@ sub_8066DEC: @ 8066DEC
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x4
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20180,7 +20180,7 @@ sub_8066E10: @ 8066E10
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20200,7 +20200,7 @@ sub_8066E34: @ 8066E34
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x2
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20220,7 +20220,7 @@ sub_8066E58: @ 8066E58
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x3
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20240,7 +20240,7 @@ sub_8066E7C: @ 8066E7C
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x4
-	bl sub_80660C4
+	bl npc_set_direction_and_anim__an_proceed
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -20271,9 +20271,9 @@ sub_8066EA0: @ 8066EA0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_80083A4
+	bl StartSpriteAnimIfDifferent
 	adds r0, r6, 0
-	bl sub_80692F0
+	bl DoShadowFieldEffect
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -20998,10 +20998,10 @@ sub_80673E4: @ 80673E4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80083C0
+	bl SeekSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -21178,7 +21178,7 @@ sub_806751C: @ 806751C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -21355,10 +21355,10 @@ sub_806764C: @ 806764C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8063554
+	bl npc_apply_anim_looping
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80083C0
+	bl SeekSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -21523,7 +21523,7 @@ sub_8067784: @ 8067784
 	adds r4, r1, 0
 	adds r0, r4, 0
 	movs r1, 0x14
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r1, [r2]
@@ -21591,7 +21591,7 @@ _080677EA:
 	strh r0, [r4, 0x3C]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r1, [r2]
@@ -21642,7 +21642,7 @@ _08067854:
 	strh r6, [r4, 0x36]
 	adds r0, r4, 0
 	movs r1, 0x14
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r1, [r2]
@@ -21725,7 +21725,7 @@ sub_80678F0: @ 80678F0
 	adds r4, r1, 0
 	adds r0, r4, 0
 	movs r1, 0x1C
-	bl sub_800838C
+	bl StartSpriteAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r1, [r2]
@@ -21896,7 +21896,7 @@ sub_80679F8: @ 80679F8
 	bl sub_8067A10
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8067B0C
+	bl npc_update_obj_anim_flag
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -22035,8 +22035,8 @@ _08067B04: .4byte 0x00000401
 _08067B08: .4byte 0x0000fff0
 	thumb_func_end sub_8067A10
 
-	thumb_func_start sub_8067B0C
-sub_8067B0C: @ 8067B0C
+	thumb_func_start npc_update_obj_anim_flag
+npc_update_obj_anim_flag: @ 8067B0C
 	push {lr}
 	adds r2, r1, 0
 	adds r2, 0x3E
@@ -22057,6 +22057,6 @@ sub_8067B0C: @ 8067B0C
 _08067B2E:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8067B0C
+	thumb_func_end npc_update_obj_anim_flag
 
 	.align 2, 0 @ Don't pad with nop.

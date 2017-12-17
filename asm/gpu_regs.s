@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8000968
-sub_8000968: @ 8000968
+	thumb_func_start InitGpuRegManager
+InitGpuRegManager: @ 8000968
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -48,10 +48,10 @@ _080009B0: .4byte gUnknown_30000C1
 _080009B4: .4byte gUnknown_30000C2
 _080009B8: .4byte gUnknown_3000000
 _080009BC: .4byte gUnknown_3000060
-	thumb_func_end sub_8000968
+	thumb_func_end InitGpuRegManager
 
-	thumb_func_start sub_80009C0
-sub_80009C0: @ 80009C0
+	thumb_func_start CopyBufferedValueToGpuReg
+CopyBufferedValueToGpuReg: @ 80009C0
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -85,10 +85,10 @@ _080009FA:
 	bx r0
 	.align 2, 0
 _08000A00: .4byte gUnknown_3000000
-	thumb_func_end sub_80009C0
+	thumb_func_end CopyBufferedValueToGpuReg
 
-	thumb_func_start sub_8000A04
-sub_8000A04: @ 8000A04
+	thumb_func_start CopyBufferedValuesToGpuRegs
+CopyBufferedValuesToGpuRegs: @ 8000A04
 	push {r4,r5,lr}
 	ldr r0, _08000A30 @ =gUnknown_30000C0
 	ldrb r0, [r0]
@@ -101,7 +101,7 @@ _08000A10:
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq _08000A28
-	bl sub_80009C0
+	bl CopyBufferedValueToGpuReg
 	movs r0, 0xFF
 	strb r0, [r4]
 	adds r5, 0x1
@@ -114,10 +114,10 @@ _08000A28:
 	.align 2, 0
 _08000A30: .4byte gUnknown_30000C0
 _08000A34: .4byte gUnknown_3000060
-	thumb_func_end sub_8000A04
+	thumb_func_end CopyBufferedValuesToGpuRegs
 
-	thumb_func_start sub_8000A38
-sub_8000A38: @ 8000A38
+	thumb_func_start SetGpuReg
+SetGpuReg: @ 8000A38
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -146,7 +146,7 @@ sub_8000A38: @ 8000A38
 	beq _08000A82
 _08000A6C:
 	adds r0, r4, 0
-	bl sub_80009C0
+	bl CopyBufferedValueToGpuReg
 	b _08000AB4
 	.align 2, 0
 _08000A74: .4byte gUnknown_3000000
@@ -190,10 +190,10 @@ _08000AB4:
 	.align 2, 0
 _08000ABC: .4byte gUnknown_30000C0
 _08000AC0: .4byte gUnknown_3000060
-	thumb_func_end sub_8000A38
+	thumb_func_end SetGpuReg
 
-	thumb_func_start sub_8000AC4
-sub_8000AC4: @ 8000AC4
+	thumb_func_start GetGpuReg
+GetGpuReg: @ 8000AC4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -222,10 +222,10 @@ _08000AEC:
 	bx r1
 	.align 2, 0
 _08000AF0: .4byte 0x04000006
-	thumb_func_end sub_8000AC4
+	thumb_func_end GetGpuReg
 
-	thumb_func_start sub_8000AF4
-sub_8000AF4: @ 8000AF4
+	thumb_func_start SetGpuRegBits
+SetGpuRegBits: @ 8000AF4
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -236,15 +236,15 @@ sub_8000AF4: @ 8000AF4
 	orrs r1, r2
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08000B10: .4byte gUnknown_3000000
-	thumb_func_end sub_8000AF4
+	thumb_func_end SetGpuRegBits
 
-	thumb_func_start sub_8000B14
-sub_8000B14: @ 8000B14
+	thumb_func_start ClearGpuRegBits
+ClearGpuRegBits: @ 8000B14
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -255,15 +255,15 @@ sub_8000B14: @ 8000B14
 	ldrh r1, [r1]
 	lsrs r2, 16
 	bics r1, r2
-	bl sub_8000A38
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08000B30: .4byte gUnknown_3000000
-	thumb_func_end sub_8000B14
+	thumb_func_end ClearGpuRegBits
 
-	thumb_func_start sub_8000B34
-sub_8000B34: @ 8000B34
+	thumb_func_start SyncRegIE
+SyncRegIE: @ 8000B34
 	push {r4,r5,lr}
 	ldr r5, _08000B58 @ =gUnknown_30000C1
 	ldrb r0, [r5]
@@ -288,10 +288,10 @@ _08000B58: .4byte gUnknown_30000C1
 _08000B5C: .4byte 0x04000208
 _08000B60: .4byte 0x04000200
 _08000B64: .4byte gUnknown_30000C2
-	thumb_func_end sub_8000B34
+	thumb_func_end SyncRegIE
 
-	thumb_func_start sub_8000B68
-sub_8000B68: @ 8000B68
+	thumb_func_start EnableInterrupts
+EnableInterrupts: @ 8000B68
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -302,16 +302,16 @@ sub_8000B68: @ 8000B68
 	ldr r1, _08000B90 @ =gUnknown_30000C1
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_8000B34
+	bl SyncRegIE
 	ldrh r0, [r4]
-	bl sub_8000BC0
+	bl UpdateRegDispstatIntrBits
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08000B8C: .4byte gUnknown_30000C2
 _08000B90: .4byte gUnknown_30000C1
-	thumb_func_end sub_8000B68
+	thumb_func_end EnableInterrupts
 
 	thumb_func_start sub_8000B94
 sub_8000B94: @ 8000B94
@@ -325,9 +325,9 @@ sub_8000B94: @ 8000B94
 	ldr r1, _08000BBC @ =gUnknown_30000C1
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_8000B34
+	bl SyncRegIE
 	ldrh r0, [r4]
-	bl sub_8000BC0
+	bl UpdateRegDispstatIntrBits
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -336,14 +336,14 @@ _08000BB8: .4byte gUnknown_30000C2
 _08000BBC: .4byte gUnknown_30000C1
 	thumb_func_end sub_8000B94
 
-	thumb_func_start sub_8000BC0
-sub_8000BC0: @ 8000BC0
+	thumb_func_start UpdateRegDispstatIntrBits
+UpdateRegDispstatIntrBits: @ 8000BC0
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	movs r0, 0x4
-	bl sub_8000AC4
+	bl GetGpuReg
 	movs r2, 0x18
 	ands r2, r0
 	movs r1, 0x1
@@ -363,11 +363,11 @@ _08000BEC:
 	cmp r2, r1
 	beq _08000BF6
 	movs r0, 0x4
-	bl sub_8000A38
+	bl SetGpuReg
 _08000BF6:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8000BC0
+	thumb_func_end UpdateRegDispstatIntrBits
 
 	.align 2, 0 @ Don't pad with nop.

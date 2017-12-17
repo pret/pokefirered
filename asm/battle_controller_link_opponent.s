@@ -60,7 +60,7 @@ _0803A6C0: .4byte gUnknown_2023BC4
 _0803A6C4: .4byte gUnknown_2022BC4
 _0803A6C8: .4byte gUnknown_8250B20
 _0803A6CC:
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803A6D0:
 	pop {r0}
 	bx r0
@@ -84,7 +84,7 @@ sub_803A6D4: @ 803A6D4
 	ldr r0, _0803A708 @ =nullsub_8
 	cmp r1, r0
 	bne _0803A6F8
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803A6F8:
 	pop {r0}
 	bx r0
@@ -139,7 +139,7 @@ sub_803A70C: @ 803A70C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r5]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -147,8 +147,8 @@ sub_803A70C: @ 803A70C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
-	bl sub_803B124
+	bl DestroySprite
+	bl RecordedOpponentBufferExecCompleted
 _0803A77C:
 	pop {r4-r6}
 	pop {r0}
@@ -190,7 +190,7 @@ sub_803A79C: @ 803A79C
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x9]
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803A7D4:
 	pop {r4}
 	pop {r0}
@@ -273,7 +273,7 @@ _0803A840:
 _0803A874:
 	movs r6, 0x1
 _0803A876:
-	bl sub_80721F0
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803A882
@@ -286,7 +286,7 @@ _0803A888:
 	ldr r0, _0803A964 @ =gUnknown_2023BC4
 	mov r8, r0
 	ldrb r0, [r0]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x1
@@ -364,9 +364,9 @@ _0803A888:
 	strb r4, [r0, 0x1]
 	ldr r4, _0803A970 @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 _0803A936:
 	ldr r0, _0803A974 @ =gUnknown_2022B4C
 	ldr r0, [r0]
@@ -376,7 +376,7 @@ _0803A936:
 	beq _0803A97C
 	mov r1, r8
 	ldrb r0, [r1]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -523,7 +523,7 @@ _0803AA6C:
 	cmp r0, 0
 	beq _0803AABA
 	ldrb r0, [r7]
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -578,7 +578,7 @@ _0803AABA:
 	lsls r0, 2
 	ldr r1, _0803AC04 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r2, _0803AC08 @ =gUnknown_3004FF0
 	mov r8, r2
 	ldrb r0, [r5]
@@ -599,7 +599,7 @@ _0803AABA:
 	ldr r6, _0803ABF8 @ =gUnknown_202402C
 	adds r1, r6
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	eors r0, r4
 	bl sub_804BD94
@@ -607,7 +607,7 @@ _0803AABA:
 	eors r0, r4
 	add r0, r8
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldrb r0, [r5]
 	eors r4, r0
 	lsls r0, r4, 1
@@ -618,12 +618,12 @@ _0803AABA:
 	adds r0, r1, 0
 	adds r0, r6
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_8035708
+	bl SetBankEnemyShadowSpriteCallback
 _0803AB50:
 	ldr r1, _0803AC00 @ =gUnknown_3004FFC
 	ldr r5, _0803ABF0 @ =gUnknown_2023BC4
@@ -635,7 +635,7 @@ _0803AB50:
 	lsls r0, 2
 	ldr r1, _0803AC04 @ =gUnknown_202063C
 	adds r0, r1
-	bl sub_8007280
+	bl DestroySprite
 	ldr r4, _0803AC08 @ =gUnknown_3004FF0
 	ldrb r1, [r5]
 	adds r0, r1, r4
@@ -653,13 +653,13 @@ _0803AB50:
 	ldr r6, _0803ABF8 @ =gUnknown_202402C
 	adds r1, r6
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	bl sub_804BD94
 	ldrb r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldrb r4, [r5]
 	lsls r0, r4, 1
 	add r0, r9
@@ -669,12 +669,12 @@ _0803AB50:
 	adds r0, r1, 0
 	adds r0, r6
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_8035708
+	bl SetBankEnemyShadowSpriteCallback
 	ldr r0, _0803ABEC @ =gUnknown_2024018
 	ldr r0, [r0]
 	ldr r2, [r0, 0x8]
@@ -785,10 +785,10 @@ _0803AC88:
 	strb r0, [r1, 0x1]
 	ldr r4, _0803ACC8 @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
-	bl sub_803B124
+	bl FreeSpritePaletteByTag
+	bl RecordedOpponentBufferExecCompleted
 _0803ACC0:
 	pop {r4-r7}
 	pop {r0}
@@ -797,8 +797,8 @@ _0803ACC0:
 _0803ACC8: .4byte 0x000027f9
 	thumb_func_end sub_803AC14
 
-	thumb_func_start sub_803ACCC
-sub_803ACCC: @ 803ACCC
+	thumb_func_start CompleteOnHealthbarDone_4
+CompleteOnHealthbarDone_4: @ 803ACCC
 	push {r4-r6,lr}
 	ldr r6, _0803AD0C @ =gUnknown_2023BC4
 	ldrb r0, [r6]
@@ -814,7 +814,7 @@ sub_803ACCC: @ 803ACCC
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r1, r4, 16
 	movs r0, 0x1
@@ -831,12 +831,12 @@ sub_803ACCC: @ 803ACCC
 _0803AD0C: .4byte gUnknown_2023BC4
 _0803AD10: .4byte gUnknown_3004FF0
 _0803AD14:
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803AD18:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803ACCC
+	thumb_func_end CompleteOnHealthbarDone_4
 
 	thumb_func_start sub_803AD20
 sub_803AD20: @ 803AD20
@@ -859,8 +859,8 @@ sub_803AD20: @ 803AD20
 	ldr r0, _0803AD60 @ =gUnknown_3004FF0
 	adds r0, r3, r0
 	ldrb r0, [r0]
-	bl sub_8048188
-	bl sub_803B124
+	bl SetHealthboxSpriteInvisible
+	bl RecordedOpponentBufferExecCompleted
 _0803AD4E:
 	pop {r0}
 	bx r0
@@ -896,7 +896,7 @@ sub_803AD64: @ 803AD64
 	lsls r0, 2
 	ldr r4, _0803ADD0 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -904,15 +904,15 @@ sub_803AD64: @ 803AD64
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldrb r0, [r6]
-	bl sub_8035794
+	bl EnemyShadowCallbackToSetInvisible
 	ldr r1, _0803ADD4 @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
-	bl sub_803B124
+	bl SetHealthboxSpriteInvisible
+	bl RecordedOpponentBufferExecCompleted
 _0803ADBE:
 	pop {r4-r6}
 	pop {r0}
@@ -925,22 +925,22 @@ _0803ADD0: .4byte gUnknown_202063C
 _0803ADD4: .4byte gUnknown_3004FF0
 	thumb_func_end sub_803AD64
 
-	thumb_func_start sub_803ADD8
-sub_803ADD8: @ 803ADD8
+	thumb_func_start CompleteOnInactiveTextPrinter_5
+CompleteOnInactiveTextPrinter_5: @ 803ADD8
 	push {lr}
 	movs r0, 0
 	bl sub_8002E64
 	lsls r0, 16
 	cmp r0, 0
 	bne _0803ADEA
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803ADEA:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803ADD8
+	thumb_func_end CompleteOnInactiveTextPrinter_5
 
-	thumb_func_start sub_803ADF0
-sub_803ADF0: @ 803ADF0
+	thumb_func_start DoHitAnimBlinkSpriteEffect_4
+DoHitAnimBlinkSpriteEffect_4: @ 803ADF0
 	push {r4,lr}
 	ldr r1, _0803AE2C @ =gUnknown_2023D44
 	ldr r0, _0803AE30 @ =gUnknown_2023BC4
@@ -967,7 +967,7 @@ sub_803ADF0: @ 803ADF0
 	strb r0, [r2]
 	ldr r0, _0803AE38 @ =gUnknown_2024005
 	strb r3, [r0]
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	b _0803AE66
 	.align 2, 0
 _0803AE2C: .4byte gUnknown_2023D44
@@ -1001,7 +1001,7 @@ _0803AE66:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803ADF0
+	thumb_func_end DoHitAnimBlinkSpriteEffect_4
 
 	thumb_func_start sub_803AE6C
 sub_803AE6C: @ 803AE6C
@@ -1035,7 +1035,7 @@ sub_803AE6C: @ 803AE6C
 	adds r1, r3, 0
 	adds r2, r3, 0
 	movs r3, 0x6
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _0803AEAC:
 	ldr r0, _0803AED4 @ =gUnknown_3004FE0
 	ldrb r1, [r4]
@@ -1074,7 +1074,7 @@ sub_803AEDC: @ 803AEDC
 	ands r0, r1
 	cmp r0, 0
 	bne _0803AF14
-	bl sub_80721F0
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803AF14
@@ -1083,7 +1083,7 @@ sub_803AEDC: @ 803AEDC
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803AF14:
 	pop {r0}
 	bx r0
@@ -1129,9 +1129,9 @@ sub_803AF28: @ 803AF28
 	strb r0, [r1, 0x1]
 	ldr r4, _0803AFDC @ =0x000027f9
 	adds r0, r4, 0
-	bl sub_800874C
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl sub_8008A30
+	bl FreeSpritePaletteByTag
 	ldr r1, _0803AFE0 @ =gUnknown_2023D44
 	ldrb r0, [r5]
 	adds r0, r1
@@ -1142,7 +1142,7 @@ sub_803AF28: @ 803AF28
 	ldr r1, _0803AFE4 @ =gUnknown_202063C
 	adds r0, r1
 	movs r1, 0
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldr r4, _0803AFE8 @ =gUnknown_3004FF0
 	ldrb r1, [r5]
 	adds r0, r1, r4
@@ -1156,15 +1156,15 @@ sub_803AF28: @ 803AF28
 	ldr r2, _0803AFF0 @ =gUnknown_202402C
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	bl sub_804BD94
 	ldrb r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	ldrb r0, [r5]
-	bl sub_8034BB4
+	bl CopyBattleSpriteInvisibility
 	ldr r1, _0803AFF4 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -1242,7 +1242,7 @@ _0803B02E:
 	cmp r0, 0
 	bne _0803B098
 	adds r0, r3, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldrb r4, [r5]
 	ldr r1, _0803B0A8 @ =gUnknown_2023BCE
 	lsls r0, r4, 1
@@ -1253,12 +1253,12 @@ _0803B02E:
 	ldr r1, _0803B0AC @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_8035708
+	bl SetBankEnemyShadowSpriteCallback
 	ldr r1, _0803B0BC @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -1281,8 +1281,8 @@ _0803B0BC: .4byte gUnknown_3004FE0
 _0803B0C0: .4byte sub_803AF28
 	thumb_func_end sub_803AFFC
 
-	thumb_func_start sub_803B0C4
-sub_803B0C4: @ 803B0C4
+	thumb_func_start CompleteOnFinishedStatusAnimation_5
+CompleteOnFinishedStatusAnimation_5: @ 803B0C4
 	push {lr}
 	ldr r0, _0803B0EC @ =gUnknown_2024018
 	ldr r2, [r0]
@@ -1298,17 +1298,17 @@ sub_803B0C4: @ 803B0C4
 	ands r0, r1
 	cmp r0, 0
 	bne _0803B0E6
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803B0E6:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0803B0EC: .4byte gUnknown_2024018
 _0803B0F0: .4byte gUnknown_2023BC4
-	thumb_func_end sub_803B0C4
+	thumb_func_end CompleteOnFinishedStatusAnimation_5
 
-	thumb_func_start sub_803B0F4
-sub_803B0F4: @ 803B0F4
+	thumb_func_start CompleteOnFinishedBattleAnimation_5
+CompleteOnFinishedBattleAnimation_5: @ 803B0F4
 	push {lr}
 	ldr r0, _0803B11C @ =gUnknown_2024018
 	ldr r2, [r0]
@@ -1324,17 +1324,17 @@ sub_803B0F4: @ 803B0F4
 	ands r0, r1
 	cmp r0, 0
 	bne _0803B116
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803B116:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0803B11C: .4byte gUnknown_2024018
 _0803B120: .4byte gUnknown_2023BC4
-	thumb_func_end sub_803B0F4
+	thumb_func_end CompleteOnFinishedBattleAnimation_5
 
-	thumb_func_start sub_803B124
-sub_803B124: @ 803B124
+	thumb_func_start RecordedOpponentBufferExecCompleted
+RecordedOpponentBufferExecCompleted: @ 803B124
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, _0803B164 @ =gUnknown_3004FE0
@@ -1350,7 +1350,7 @@ sub_803B124: @ 803B124
 	ands r0, r1
 	cmp r0, 0
 	beq _0803B178
-	bl sub_800A404
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -1388,10 +1388,10 @@ _0803B18A:
 	.align 2, 0
 _0803B194: .4byte gUnknown_2023BC8
 _0803B198: .4byte gUnknown_825E45C
-	thumb_func_end sub_803B124
+	thumb_func_end RecordedOpponentBufferExecCompleted
 
-	thumb_func_start sub_803B19C
-sub_803B19C: @ 803B19C
+	thumb_func_start RecordedOpponentHandleGetMonData
+RecordedOpponentHandleGetMonData: @ 803B19C
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -1409,7 +1409,7 @@ sub_803B19C: @ 803B19C
 	adds r1, r0
 	ldrb r0, [r1]
 	mov r1, sp
-	bl sub_803B210
+	bl CopyRecordedOpponentMonData
 	adds r6, r0, 0
 	b _0803B1F6
 	.align 2, 0
@@ -1428,7 +1428,7 @@ _0803B1D8:
 	lsrs r0, 24
 	mov r2, sp
 	adds r1, r2, r6
-	bl sub_803B210
+	bl CopyRecordedOpponentMonData
 	adds r6, r0
 _0803B1EE:
 	lsrs r4, 1
@@ -1440,16 +1440,16 @@ _0803B1F6:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl sub_800E708
-	bl sub_803B124
+	bl EmitDataTransfer
+	bl RecordedOpponentBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803B19C
+	thumb_func_end RecordedOpponentHandleGetMonData
 
-	thumb_func_start sub_803B210
-sub_803B210: @ 803B210
+	thumb_func_start CopyRecordedOpponentMonData
+CopyRecordedOpponentMonData: @ 803B210
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1550,12 +1550,12 @@ _0803B340:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2E]
 	movs r6, 0
@@ -1583,12 +1583,12 @@ _0803B38C:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
-	bl sub_803FBE8
+	bl GetMonData
 	strh r0, [r4]
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r0, r8
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r9
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -1603,21 +1603,21 @@ _0803B38C:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r10
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r2, [sp, 0x80]
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x44]
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r5, 0x1F
 	ands r0, r5
@@ -1629,7 +1629,7 @@ _0803B38C:
 	strb r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r6, 0x1F
 	ands r0, r6
@@ -1641,7 +1641,7 @@ _0803B38C:
 	strh r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 2
@@ -1653,7 +1653,7 @@ _0803B38C:
 	strb r1, [r3, 0x15]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -1664,7 +1664,7 @@ _0803B38C:
 	str r0, [sp, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r6
 	lsls r0, 4
@@ -1675,7 +1675,7 @@ _0803B38C:
 	strh r1, [r3, 0x16]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 1
@@ -1687,55 +1687,55 @@ _0803B38C:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x48]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x4C]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r1, [sp, 0x7C]
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0x3B
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x3C
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x3D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x3E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x3F
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	movs r1, 0x1
 	ands r0, r1
@@ -1748,7 +1748,7 @@ _0803B38C:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_803FBE8
+	bl GetMonData
 	mov r3, sp
 	lsls r0, 7
 	ldrb r2, [r3, 0x17]
@@ -1758,19 +1758,19 @@ _0803B38C:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_803FBE8
+	bl GetMonData
 	str r0, [sp, 0x54]
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, [sp, 0x8C]
-	bl sub_803FBE8
+	bl GetMonData
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
-	bl sub_8008CF4
+	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, sp
 	movs r6, 0
 _0803B544:
@@ -1821,13 +1821,13 @@ _0803B59A:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	adds r1, r6, 0
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl sub_803FBE8
+	bl GetMonData
 	mov r2, r10
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -1841,7 +1841,7 @@ _0803B59A:
 	ldr r1, _0803B5E8 @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1, 0xC]
 	mov r2, r9
@@ -1883,7 +1883,7 @@ _0803B614:
 	adds r1, 0x11
 	mov r2, r8
 	adds r0, r4, r2
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -1894,7 +1894,7 @@ _0803B614:
 	ldr r1, _0803B640 @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0x15
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -1931,7 +1931,7 @@ _0803B670:
 	adds r0, r1
 	movs r1, 0x19
 _0803B67A:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -2064,27 +2064,27 @@ _0803B760:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x3]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r6, 0x6
 	b _0803B9A6
@@ -2169,7 +2169,7 @@ _0803B830:
 	adds r0, r1
 	movs r1, 0x37
 _0803B83A:
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -2258,7 +2258,7 @@ _0803B8D4:
 	adds r0, r1
 	movs r1, 0x3F
 _0803B8DE:
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	strb r0, [r7]
@@ -2365,7 +2365,7 @@ _0803B994:
 	adds r0, r1
 	movs r1, 0x36
 _0803B99E:
-	bl sub_803FBE8
+	bl GetMonData
 	strb r0, [r7]
 	movs r6, 0x1
 _0803B9A6:
@@ -2380,18 +2380,18 @@ _0803B9A6:
 	bx r1
 	.align 2, 0
 _0803B9B8: .4byte gUnknown_202402C
-	thumb_func_end sub_803B210
+	thumb_func_end CopyRecordedOpponentMonData
 
 	thumb_func_start sub_803B9BC
 sub_803B9BC: @ 803B9BC
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803B9BC
 
-	thumb_func_start sub_803B9C8
-sub_803B9C8: @ 803B9C8
+	thumb_func_start RecordedOpponentHandleSetMonData
+RecordedOpponentHandleSetMonData: @ 803B9C8
 	push {r4,r5,lr}
 	ldr r1, _0803B9EC @ =gUnknown_2022BC4
 	ldr r0, _0803B9F0 @ =gUnknown_2023BC4
@@ -2406,7 +2406,7 @@ sub_803B9C8: @ 803B9C8
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
-	bl sub_803BA20
+	bl SetRecordedOpponentMonData
 	b _0803BA16
 	.align 2, 0
 _0803B9EC: .4byte gUnknown_2022BC4
@@ -2421,7 +2421,7 @@ _0803B9FC:
 	cmp r0, 0
 	beq _0803BA0A
 	adds r0, r5, 0
-	bl sub_803BA20
+	bl SetRecordedOpponentMonData
 _0803BA0A:
 	lsrs r4, 1
 	adds r0, r5, 0x1
@@ -2430,14 +2430,14 @@ _0803BA0A:
 	cmp r5, 0x5
 	bls _0803B9FC
 _0803BA16:
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803B9C8
+	thumb_func_end RecordedOpponentHandleSetMonData
 
-	thumb_func_start sub_803BA20
-sub_803BA20: @ 803BA20
+	thumb_func_start SetRecordedOpponentMonData
+SetRecordedOpponentMonData: @ 803BA20
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3474,10 +3474,10 @@ _0803C32C:
 	bx r0
 	.align 2, 0
 _0803C33C: .4byte gUnknown_202402C
-	thumb_func_end sub_803BA20
+	thumb_func_end SetRecordedOpponentMonData
 
-	thumb_func_start sub_803C340
-sub_803C340: @ 803C340
+	thumb_func_start RecordedOpponentHandleSetRawMonData
+RecordedOpponentHandleSetRawMonData: @ 803C340
 	push {r4-r7,lr}
 	ldr r1, _0803C3A4 @ =gUnknown_2023BCE
 	ldr r7, _0803C3A8 @ =gUnknown_2023BC4
@@ -3524,7 +3524,7 @@ _0803C376:
 	cmp r3, r0
 	bcc _0803C376
 _0803C398:
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3533,7 +3533,7 @@ _0803C3A4: .4byte gUnknown_2023BCE
 _0803C3A8: .4byte gUnknown_2023BC4
 _0803C3AC: .4byte gUnknown_2022BC4
 _0803C3B0: .4byte gUnknown_202402C
-	thumb_func_end sub_803C340
+	thumb_func_end RecordedOpponentHandleSetRawMonData
 
 	thumb_func_start sub_803C3B4
 sub_803C3B4: @ 803C3B4
@@ -3557,7 +3557,7 @@ sub_803C3B4: @ 803C3B4
 	mov r9, r1
 	add r0, r9
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -3569,9 +3569,9 @@ sub_803C3B4: @ 803C3B4
 	muls r2, r0
 	adds r0, r2, 0
 	add r0, r9
-	bl sub_8034320
+	bl BattleLoadOpponentMonSpriteGfx
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3598,7 +3598,7 @@ sub_803C3B4: @ 803C3B4
 	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _0803C4EC @ =gUnknown_2023D44
 	ldrb r1, [r6]
 	adds r1, r4
@@ -3644,7 +3644,7 @@ sub_803C3B4: @ 803C3B4
 	ldr r1, _0803C4F8 @ =gUnknown_2024024
 	adds r2, r1
 	ldrb r1, [r2]
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r4, [r6]
 	lsls r0, r4, 1
 	adds r0, r7
@@ -3654,12 +3654,12 @@ sub_803C3B4: @ 803C3B4
 	adds r0, r1, 0
 	add r0, r9
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_8035708
+	bl SetBankEnemyShadowSpriteCallback
 	ldr r1, _0803C4FC @ =gUnknown_3004FE0
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -3736,7 +3736,7 @@ sub_803C550: @ 803C550
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_803589C
+	bl ClearTemporarySpeciesSpriteData
 	ldr r0, _0803C6AC @ =gUnknown_2023BCE
 	lsls r4, r6, 1
 	adds r4, r0
@@ -3755,13 +3755,13 @@ sub_803C550: @ 803C550
 	ldr r5, _0803C6B4 @ =gUnknown_202402C
 	adds r0, r5
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _0803C6B8 @ =sub_8033E3C
-	bl sub_8044EF8
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _0803C6BC @ =gUnknown_3004FFC
 	mov r10, r1
 	add r10, r6
@@ -3773,9 +3773,9 @@ sub_803C550: @ 803C550
 	adds r0, r1, 0
 	adds r0, r5
 	adds r1, r6, 0
-	bl sub_8034320
+	bl BattleLoadOpponentMonSpriteGfx
 	adds r0, r6, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3802,7 +3802,7 @@ sub_803C550: @ 803C550
 	mov r0, r9
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _0803C6C4 @ =gUnknown_2023D44
 	adds r4, r6, r4
 	strb r0, [r4]
@@ -3847,7 +3847,7 @@ sub_803C550: @ 803C550
 	ldr r1, _0803C6CC @ =gUnknown_2024024
 	adds r6, r1
 	ldrb r1, [r6]
-	bl sub_800838C
+	bl StartSpriteAnim
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3869,7 +3869,7 @@ sub_803C550: @ 803C550
 	str r1, [r0]
 	movs r0, 0
 	movs r1, 0xFE
-	bl sub_804A938
+	bl DoPokeballSendOutAnimation
 	mov r1, r10
 	ldrb r2, [r1]
 	lsls r1, r2, 4
@@ -3941,7 +3941,7 @@ _0803C71C:
 	lsls r0, 2
 	ldr r4, _0803C764 @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -3949,15 +3949,15 @@ _0803C71C:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8007280
+	bl DestroySprite
 	ldrb r0, [r6]
-	bl sub_8035794
+	bl EnemyShadowCallbackToSetInvisible
 	ldr r1, _0803C768 @ =gUnknown_3004FF0
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8048188
-	bl sub_803B124
+	bl SetHealthboxSpriteInvisible
+	bl RecordedOpponentBufferExecCompleted
 _0803C758:
 	pop {r4-r6}
 	pop {r0}
@@ -4001,7 +4001,7 @@ _0803C794:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _0803C7AE:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -4026,7 +4026,7 @@ _0803C7C2:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x2
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r1, _0803C7F0 @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -4056,7 +4056,7 @@ sub_803C7F8: @ 803C7F8
 	beq _0803C8C0
 	ldr r6, _0803C888 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
-	bl sub_80751D8
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r7, 0xC8
@@ -4065,7 +4065,7 @@ sub_803C7F8: @ 803C7F8
 	movs r7, 0x98
 _0803C820:
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	ldr r5, _0803C88C @ =gUnknown_202273C
 	lsls r1, r0, 3
 	subs r1, r0
@@ -4076,7 +4076,7 @@ _0803C820:
 	cmp r0, 0x2
 	beq _0803C866
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4087,7 +4087,7 @@ _0803C820:
 	cmp r0, 0x1
 	beq _0803C866
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4100,7 +4100,7 @@ _0803C866:
 	ldr r4, _0803C88C @ =gUnknown_202273C
 	ldr r0, _0803C888 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4124,7 +4124,7 @@ _0803C894:
 _0803C89C: .4byte gUnknown_82538A8
 _0803C8A0:
 	ldrb r0, [r6]
-	bl sub_8043658
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4152,7 +4152,7 @@ _0803C8C0:
 	.align 2, 0
 _0803C8D8: .4byte gUnknown_20386AE
 _0803C8DC:
-	bl sub_800A404
+	bl GetMultiplayerId
 	ldr r6, _0803C954 @ =gUnknown_202273C
 	movs r5, 0x1
 	eors r0, r5
@@ -4166,7 +4166,7 @@ _0803C8DC:
 	ldrb r0, [r1]
 	cmp r0, 0x2
 	beq _0803C930
-	bl sub_800A404
+	bl GetMultiplayerId
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -4179,7 +4179,7 @@ _0803C8DC:
 	ands r0, r1
 	cmp r0, 0x1
 	beq _0803C930
-	bl sub_800A404
+	bl GetMultiplayerId
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -4193,7 +4193,7 @@ _0803C8DC:
 	bne _0803C968
 _0803C930:
 	ldr r4, _0803C954 @ =gUnknown_202273C
-	bl sub_800A404
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -4218,7 +4218,7 @@ _0803C95C:
 	.align 2, 0
 _0803C964: .4byte gUnknown_82538A8
 _0803C968:
-	bl sub_800A404
+	bl GetMultiplayerId
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -4248,7 +4248,7 @@ _0803C992:
 	bl sub_80346C4
 	mov r1, r8
 	ldrb r0, [r1]
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4277,7 +4277,7 @@ _0803C992:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r5, _0803CAD8 @ =gUnknown_2023D44
 	mov r2, r8
 	ldrb r1, [r2]
@@ -4307,7 +4307,7 @@ _0803C992:
 	lsls r6, r1, 3
 	adds r0, r6, r0
 	ldrh r0, [r0, 0x4]
-	bl sub_80089E8
+	bl IndexOfSpritePaletteTag
 	mov r2, r8
 	ldrb r1, [r2]
 	adds r1, r5
@@ -4337,7 +4337,7 @@ _0803C992:
 	ldr r0, _0803CAE8 @ =gUnknown_823957C
 	adds r6, r0
 	ldrh r0, [r6, 0x6]
-	bl sub_8008804
+	bl GetSpriteTileStartByTag
 	mov r2, r8
 	ldrb r1, [r2]
 	adds r1, r5
@@ -4407,7 +4407,7 @@ _0803CAFC: .4byte sub_803A6D4
 	thumb_func_start sub_803CB00
 sub_803CB00: @ 803CB00
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CB00
@@ -4425,7 +4425,7 @@ sub_803CB0C: @ 803CB0C
 	lsls r0, 2
 	ldr r5, _0803CBA4 @ =gUnknown_202063C
 	adds r0, r5
-	bl sub_80750FC
+	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r4]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -4473,7 +4473,7 @@ sub_803CB0C: @ 803CB0C
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, _0803CBAC @ =nullsub_8
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r1, _0803CBB0 @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -4519,7 +4519,7 @@ sub_803CBB8: @ 803CBB8
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _0803CBEC:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -4546,7 +4546,7 @@ _0803CC0C:
 	strb r0, [r3, 0x4]
 	movs r0, 0x10
 	movs r1, 0x3F
-	bl sub_80722F4
+	bl PlaySE12WithPanning
 	ldr r2, _0803CC50 @ =gUnknown_202063C
 	ldr r1, _0803CC54 @ =gUnknown_2023D44
 	ldrb r0, [r5]
@@ -4580,7 +4580,7 @@ _0803CC60: .4byte sub_803AD20
 	thumb_func_start sub_803CC64
 sub_803CC64: @ 803CC64
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CC64
@@ -4588,7 +4588,7 @@ sub_803CC64: @ 803CC64
 	thumb_func_start sub_803CC70
 sub_803CC70: @ 803CC70
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CC70
@@ -4596,7 +4596,7 @@ sub_803CC70: @ 803CC70
 	thumb_func_start sub_803CC7C
 sub_803CC7C: @ 803CC7C
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CC7C
@@ -4604,7 +4604,7 @@ sub_803CC7C: @ 803CC7C
 	thumb_func_start sub_803CC88
 sub_803CC88: @ 803CC88
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CC88
@@ -4614,7 +4614,7 @@ sub_803CC94: @ 803CC94
 	push {r4-r6,lr}
 	ldr r6, _0803CD78 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803CCA6
@@ -4715,12 +4715,12 @@ _0803CCA6:
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_80342A0
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
 	beq _0803CD9C
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	b _0803CDBA
 	.align 2, 0
 _0803CD78: .4byte gUnknown_2023BC4
@@ -4824,7 +4824,7 @@ _0803CE2E:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 _0803CE50:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -4882,7 +4882,7 @@ _0803CE8E:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl sub_80341D8
+	bl InitAndLaunchSpecialAnimation
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r0, [r0]
@@ -4919,7 +4919,7 @@ _0803CF04:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _0803CF40
-	bl sub_8034B40
+	bl CopyAllBattleSpritesInvisibilities
 	ldrb r0, [r6]
 	lsls r2, r0, 9
 	mov r3, r10
@@ -4929,7 +4929,7 @@ _0803CF04:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_8035200
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -4938,7 +4938,7 @@ _0803CF04:
 	lsls r0, 2
 	adds r0, r2
 	strb r4, [r0, 0x4]
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803CF40:
 	pop {r3-r5}
 	mov r8, r3
@@ -4989,7 +4989,7 @@ _0803CFA0:
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0803CFC0 @ =sub_803ADD8
+	ldr r1, _0803CFC0 @ =CompleteOnInactiveTextPrinter_5
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -4998,13 +4998,13 @@ _0803CFA0:
 _0803CFB4: .4byte gUnknown_202298C
 _0803CFB8: .4byte gUnknown_3004FE0
 _0803CFBC: .4byte gUnknown_2023BC4
-_0803CFC0: .4byte sub_803ADD8
+_0803CFC0: .4byte CompleteOnInactiveTextPrinter_5
 	thumb_func_end sub_803CF50
 
 	thumb_func_start sub_803CFC4
 sub_803CFC4: @ 803CFC4
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CFC4
@@ -5012,7 +5012,7 @@ sub_803CFC4: @ 803CFC4
 	thumb_func_start sub_803CFD0
 sub_803CFD0: @ 803CFD0
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CFD0
@@ -5020,7 +5020,7 @@ sub_803CFD0: @ 803CFD0
 	thumb_func_start sub_803CFDC
 sub_803CFDC: @ 803CFDC
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CFDC
@@ -5028,7 +5028,7 @@ sub_803CFDC: @ 803CFDC
 	thumb_func_start sub_803CFE8
 sub_803CFE8: @ 803CFE8
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CFE8
@@ -5036,7 +5036,7 @@ sub_803CFE8: @ 803CFE8
 	thumb_func_start sub_803CFF4
 sub_803CFF4: @ 803CFF4
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803CFF4
@@ -5044,7 +5044,7 @@ sub_803CFF4: @ 803CFF4
 	thumb_func_start sub_803D000
 sub_803D000: @ 803D000
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D000
@@ -5052,7 +5052,7 @@ sub_803D000: @ 803D000
 	thumb_func_start sub_803D00C
 sub_803D00C: @ 803D00C
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D00C
@@ -5065,7 +5065,7 @@ sub_803D018: @ 803D018
 	push {r6,r7}
 	sub sp, 0x4
 	movs r0, 0
-	bl sub_8034964
+	bl LoadBattleBarGfx
 	ldr r3, _0803D090 @ =gUnknown_2022BC4
 	ldr r0, _0803D094 @ =gUnknown_2023BC4
 	mov r9, r0
@@ -5093,7 +5093,7 @@ sub_803D018: @ 803D018
 	ldr r4, _0803D0A0 @ =gUnknown_202402C
 	adds r0, r4
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	mov r8, r0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -5103,7 +5103,7 @@ sub_803D018: @ 803D018
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -5112,7 +5112,7 @@ sub_803D018: @ 803D018
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_8048150
+	bl SetBattleBarStruct
 	b _0803D0D2
 	.align 2, 0
 _0803D090: .4byte gUnknown_2022BC4
@@ -5131,7 +5131,7 @@ _0803D0A8:
 	ldr r1, _0803D0F4 @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0x3A
-	bl sub_803FBE8
+	bl GetMonData
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -5140,14 +5140,14 @@ _0803D0A8:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_8048150
+	bl SetBattleBarStruct
 _0803D0D2:
 	ldr r1, _0803D0FC @ =gUnknown_3004FE0
 	ldr r0, _0803D100 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0803D104 @ =sub_803ACCC
+	ldr r1, _0803D104 @ =CompleteOnHealthbarDone_4
 	str r1, [r0]
 	add sp, 0x4
 	pop {r3,r4}
@@ -5162,13 +5162,13 @@ _0803D0F4: .4byte gUnknown_202402C
 _0803D0F8: .4byte gUnknown_3004FF0
 _0803D0FC: .4byte gUnknown_3004FE0
 _0803D100: .4byte gUnknown_2023BC4
-_0803D104: .4byte sub_803ACCC
+_0803D104: .4byte CompleteOnHealthbarDone_4
 	thumb_func_end sub_803D018
 
 	thumb_func_start sub_803D108
 sub_803D108: @ 803D108
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D108
@@ -5178,7 +5178,7 @@ sub_803D114: @ 803D114
 	push {r4,lr}
 	ldr r4, _0803D170 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803D168
@@ -5195,7 +5195,7 @@ sub_803D114: @ 803D114
 	ldr r2, _0803D17C @ =gUnknown_202402C
 	adds r1, r2
 	movs r2, 0x9
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	ldrb r2, [r4]
 	ldr r0, _0803D180 @ =gUnknown_2024018
 	ldr r0, [r0]
@@ -5213,7 +5213,7 @@ sub_803D114: @ 803D114
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0803D188 @ =sub_803B0C4
+	ldr r1, _0803D188 @ =CompleteOnFinishedStatusAnimation_5
 	str r1, [r0]
 _0803D168:
 	pop {r4}
@@ -5226,7 +5226,7 @@ _0803D178: .4byte gUnknown_2023BCE
 _0803D17C: .4byte gUnknown_202402C
 _0803D180: .4byte gUnknown_2024018
 _0803D184: .4byte gUnknown_3004FE0
-_0803D188: .4byte sub_803B0C4
+_0803D188: .4byte CompleteOnFinishedStatusAnimation_5
 	thumb_func_end sub_803D114
 
 	thumb_func_start sub_803D18C
@@ -5234,7 +5234,7 @@ sub_803D18C: @ 803D18C
 	push {r4,r5,lr}
 	ldr r5, _0803D1E4 @ =gUnknown_2023BC4
 	ldrb r0, [r5]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803D1DC
@@ -5262,12 +5262,12 @@ sub_803D18C: @ 803D18C
 	ldrb r2, [r3]
 	lsls r2, 24
 	orrs r1, r2
-	bl sub_8033F1C
+	bl InitAndLaunchChosenStatusAnimation
 	ldr r1, _0803D1EC @ =gUnknown_3004FE0
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0803D1F0 @ =sub_803B0C4
+	ldr r1, _0803D1F0 @ =CompleteOnFinishedStatusAnimation_5
 	str r1, [r0]
 _0803D1DC:
 	pop {r4,r5}
@@ -5277,13 +5277,13 @@ _0803D1DC:
 _0803D1E4: .4byte gUnknown_2023BC4
 _0803D1E8: .4byte gUnknown_2022BC4
 _0803D1EC: .4byte gUnknown_3004FE0
-_0803D1F0: .4byte sub_803B0C4
+_0803D1F0: .4byte CompleteOnFinishedStatusAnimation_5
 	thumb_func_end sub_803D18C
 
 	thumb_func_start sub_803D1F4
 sub_803D1F4: @ 803D1F4
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D1F4
@@ -5291,7 +5291,7 @@ sub_803D1F4: @ 803D1F4
 	thumb_func_start sub_803D200
 sub_803D200: @ 803D200
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D200
@@ -5299,7 +5299,7 @@ sub_803D200: @ 803D200
 	thumb_func_start sub_803D20C
 sub_803D20C: @ 803D20C
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D20C
@@ -5307,7 +5307,7 @@ sub_803D20C: @ 803D20C
 	thumb_func_start sub_803D218
 sub_803D218: @ 803D218
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D218
@@ -5315,7 +5315,7 @@ sub_803D218: @ 803D218
 	thumb_func_start sub_803D224
 sub_803D224: @ 803D224
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D224
@@ -5323,7 +5323,7 @@ sub_803D224: @ 803D224
 	thumb_func_start sub_803D230
 sub_803D230: @ 803D230
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D230
@@ -5331,7 +5331,7 @@ sub_803D230: @ 803D230
 	thumb_func_start sub_803D23C
 sub_803D23C: @ 803D23C
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D23C
@@ -5339,7 +5339,7 @@ sub_803D23C: @ 803D23C
 	thumb_func_start sub_803D248
 sub_803D248: @ 803D248
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D248
@@ -5347,13 +5347,13 @@ sub_803D248: @ 803D248
 	thumb_func_start sub_803D254
 sub_803D254: @ 803D254
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D254
 
-	thumb_func_start sub_803D260
-sub_803D260: @ 803D260
+	thumb_func_start RecordedOpponentHandleCmd37
+RecordedOpponentHandleCmd37: @ 803D260
 	push {lr}
 	ldr r2, _0803D278 @ =gUnknown_2022870
 	ldrb r1, [r2]
@@ -5361,15 +5361,15 @@ sub_803D260: @ 803D260
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0803D278: .4byte gUnknown_2022870
-	thumb_func_end sub_803D260
+	thumb_func_end RecordedOpponentHandleCmd37
 
-	thumb_func_start sub_803D27C
-sub_803D27C: @ 803D27C
+	thumb_func_start RecordedOpponentHandleCmd38
+RecordedOpponentHandleCmd38: @ 803D27C
 	push {lr}
 	ldr r3, _0803D2A8 @ =gUnknown_2022870
 	ldr r1, _0803D2AC @ =gUnknown_2022BC4
@@ -5387,32 +5387,32 @@ sub_803D27C: @ 803D27C
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0803D2A8: .4byte gUnknown_2022870
 _0803D2AC: .4byte gUnknown_2022BC4
 _0803D2B0: .4byte gUnknown_2023BC4
-	thumb_func_end sub_803D27C
+	thumb_func_end RecordedOpponentHandleCmd38
 
-	thumb_func_start sub_803D2B4
-sub_803D2B4: @ 803D2B4
+	thumb_func_start RecordedOpponentHandleCmd39
+RecordedOpponentHandleCmd39: @ 803D2B4
 	push {lr}
 	ldr r2, _0803D2C8 @ =gUnknown_2022870
 	ldrb r1, [r2]
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0803D2C8: .4byte gUnknown_2022870
-	thumb_func_end sub_803D2B4
+	thumb_func_end RecordedOpponentHandleCmd39
 
-	thumb_func_start sub_803D2CC
-sub_803D2CC: @ 803D2CC
+	thumb_func_start RecordedOpponentHandleCmd40
+RecordedOpponentHandleCmd40: @ 803D2CC
 	push {lr}
 	ldr r3, _0803D2F0 @ =gUnknown_2022870
 	ldr r1, [r3]
@@ -5426,15 +5426,15 @@ sub_803D2CC: @ 803D2CC
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0803D2F0: .4byte gUnknown_2022870
-	thumb_func_end sub_803D2CC
+	thumb_func_end RecordedOpponentHandleCmd40
 
-	thumb_func_start sub_803D2F4
-sub_803D2F4: @ 803D2F4
+	thumb_func_start RecordedOpponentHandleHitAnimation
+RecordedOpponentHandleHitAnimation: @ 803D2F4
 	push {r4,lr}
 	ldr r3, _0803D31C @ =gUnknown_202063C
 	ldr r2, _0803D320 @ =gUnknown_2023D44
@@ -5451,7 +5451,7 @@ sub_803D2F4: @ 803D2F4
 	lsls r0, 29
 	cmp r0, 0
 	bge _0803D328
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	b _0803D352
 	.align 2, 0
 _0803D31C: .4byte gUnknown_202063C
@@ -5471,12 +5471,12 @@ _0803D328:
 	movs r1, 0
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
-	bl sub_804BE70
+	bl DoHitAnimHealthboxEffect
 	ldr r1, _0803D35C @ =gUnknown_3004FE0
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0803D360 @ =sub_803ADF0
+	ldr r1, _0803D360 @ =DoHitAnimBlinkSpriteEffect_4
 	str r1, [r0]
 _0803D352:
 	pop {r4}
@@ -5485,23 +5485,23 @@ _0803D352:
 	.align 2, 0
 _0803D358: .4byte gUnknown_2024005
 _0803D35C: .4byte gUnknown_3004FE0
-_0803D360: .4byte sub_803ADF0
-	thumb_func_end sub_803D2F4
+_0803D360: .4byte DoHitAnimBlinkSpriteEffect_4
+	thumb_func_end RecordedOpponentHandleHitAnimation
 
 	thumb_func_start sub_803D364
 sub_803D364: @ 803D364
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D364
 
-	thumb_func_start sub_803D370
-sub_803D370: @ 803D370
+	thumb_func_start RecordedOpponentHandlePlaySE
+RecordedOpponentHandlePlaySE: @ 803D370
 	push {r4,lr}
 	ldr r4, _0803D3AC @ =gUnknown_2023BC4
 	ldrb r0, [r4]
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -5521,15 +5521,15 @@ _0803D384:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl sub_80722F4
-	bl sub_803B124
+	bl PlaySE12WithPanning
+	bl RecordedOpponentBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0803D3AC: .4byte gUnknown_2023BC4
 _0803D3B0: .4byte gUnknown_2022BC4
-	thumb_func_end sub_803D370
+	thumb_func_end RecordedOpponentHandlePlaySE
 
 	thumb_func_start sub_803D3B4
 sub_803D3B4: @ 803D3B4
@@ -5546,8 +5546,8 @@ sub_803D3B4: @ 803D3B4
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_8071C60
-	bl sub_803B124
+	bl PlayFanfare
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5569,13 +5569,13 @@ sub_803D3E4: @ 803D3E4
 	ldr r1, _0803D41C @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
 	movs r2, 0x5
-	bl sub_8071E60
-	bl sub_803B124
+	bl PlayCry3
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5600,7 +5600,7 @@ sub_803D420: @ 803D420
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5622,7 +5622,7 @@ sub_803D454: @ 803D454
 	lsls r0, 2
 	ldr r4, _0803D53C @ =gUnknown_202063C
 	adds r0, r4
-	bl sub_80750FC
+	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -5670,10 +5670,10 @@ sub_803D454: @ 803D454
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, _0803D544 @ =sub_803D648
-	bl sub_8074A68
+	bl StoreSpriteCallbackInData6
 	ldr r0, _0803D548 @ =sub_803D564
 	movs r1, 0x5
-	bl sub_807741C
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, _0803D54C @ =gUnknown_3005090
@@ -5829,7 +5829,7 @@ _0803D610:
 	mov r0, r9
 	strb r0, [r2]
 	mov r0, r8
-	bl sub_8077508
+	bl DestroyTask
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -5859,9 +5859,9 @@ sub_803D648: @ 803D648
 	orrs r0, r1
 	strh r0, [r4, 0x4]
 	adds r0, r4, 0
-	bl sub_80077D8
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl sub_8007280
+	bl DestroySprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5870,8 +5870,8 @@ _0803D674: .4byte 0x000003ff
 _0803D678: .4byte 0xfffffc00
 	thumb_func_end sub_803D648
 
-	thumb_func_start sub_803D67C
-sub_803D67C: @ 803D67C
+	thumb_func_start RecordedOpponentHandleDrawPartyStatusSummary
+RecordedOpponentHandleDrawPartyStatusSummary: @ 803D67C
 	push {r4-r7,lr}
 	ldr r1, _0803D6A4 @ =gUnknown_2022BC4
 	ldr r0, _0803D6A8 @ =gUnknown_2023BC4
@@ -5883,11 +5883,11 @@ sub_803D67C: @ 803D67C
 	cmp r0, 0
 	beq _0803D6AC
 	adds r0, r2, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803D6AC
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	b _0803D776
 	.align 2, 0
 _0803D6A4: .4byte gUnknown_2022BC4
@@ -6003,7 +6003,7 @@ _0803D780: .4byte gUnknown_2024000
 _0803D784: .4byte gUnknown_2024018
 _0803D788: .4byte gUnknown_3004FE0
 _0803D78C: .4byte sub_803D790
-	thumb_func_end sub_803D67C
+	thumb_func_end RecordedOpponentHandleDrawPartyStatusSummary
 
 	thumb_func_start sub_803D790
 sub_803D790: @ 803D790
@@ -6033,7 +6033,7 @@ sub_803D790: @ 803D790
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x5]
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 _0803D7C8:
 	pop {r4}
 	pop {r0}
@@ -6043,8 +6043,8 @@ _0803D7D0: .4byte gUnknown_2024018
 _0803D7D4: .4byte gUnknown_2023BC4
 	thumb_func_end sub_803D790
 
-	thumb_func_start sub_803D7D8
-sub_803D7D8: @ 803D7D8
+	thumb_func_start RecordedOpponentHandleCmd49
+RecordedOpponentHandleCmd49: @ 803D7D8
 	push {lr}
 	ldr r0, _0803D814 @ =gUnknown_2024018
 	ldr r1, [r0]
@@ -6071,7 +6071,7 @@ sub_803D7D8: @ 803D7D8
 	ldr r1, _0803D824 @ =sub_80491B0
 	str r1, [r0]
 _0803D80A:
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6080,18 +6080,18 @@ _0803D818: .4byte gUnknown_2023BC4
 _0803D81C: .4byte gUnknown_3005090
 _0803D820: .4byte gUnknown_2024000
 _0803D824: .4byte sub_80491B0
-	thumb_func_end sub_803D7D8
+	thumb_func_end RecordedOpponentHandleCmd49
 
 	thumb_func_start sub_803D828
 sub_803D828: @ 803D828
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D828
 
-	thumb_func_start sub_803D834
-sub_803D834: @ 803D834
+	thumb_func_start RecordedOpponentHandleSpriteInvisibility
+RecordedOpponentHandleSpriteInvisibility: @ 803D834
 	push {r4,lr}
 	ldr r4, _0803D884 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -6124,9 +6124,9 @@ sub_803D834: @ 803D834
 	orrs r0, r1
 	strb r0, [r2]
 	ldrb r0, [r4]
-	bl sub_8034BB4
+	bl CopyBattleSpriteInvisibility
 _0803D87A:
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6135,15 +6135,15 @@ _0803D884: .4byte gUnknown_2023BC4
 _0803D888: .4byte gUnknown_202063C
 _0803D88C: .4byte gUnknown_2023D44
 _0803D890: .4byte gUnknown_2022BC4
-	thumb_func_end sub_803D834
+	thumb_func_end RecordedOpponentHandleSpriteInvisibility
 
-	thumb_func_start sub_803D894
-sub_803D894: @ 803D894
+	thumb_func_start RecordedOpponentHandleBattleAnimation
+RecordedOpponentHandleBattleAnimation: @ 803D894
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, _0803D8D8 @ =gUnknown_2023BC4
 	ldrb r0, [r6]
-	bl sub_80342A4
+	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803D8EC
@@ -6164,11 +6164,11 @@ sub_803D894: @ 803D894
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl sub_803401C
+	bl TryHandleLaunchBattleTableAnimation
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803D8E0
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	b _0803D8EC
 	.align 2, 0
 _0803D8D8: .4byte gUnknown_2023BC4
@@ -6178,7 +6178,7 @@ _0803D8E0:
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, _0803D8F8 @ =sub_803B0F4
+	ldr r0, _0803D8F8 @ =CompleteOnFinishedBattleAnimation_5
 	str r0, [r1]
 _0803D8EC:
 	add sp, 0x4
@@ -6187,13 +6187,13 @@ _0803D8EC:
 	bx r0
 	.align 2, 0
 _0803D8F4: .4byte gUnknown_3004FE0
-_0803D8F8: .4byte sub_803B0F4
-	thumb_func_end sub_803D894
+_0803D8F8: .4byte CompleteOnFinishedBattleAnimation_5
+	thumb_func_end RecordedOpponentHandleBattleAnimation
 
 	thumb_func_start sub_803D8FC
 sub_803D8FC: @ 803D8FC
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D8FC
@@ -6201,13 +6201,13 @@ sub_803D8FC: @ 803D8FC
 	thumb_func_start sub_803D908
 sub_803D908: @ 803D908
 	push {lr}
-	bl sub_803B124
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_803D908
 
-	thumb_func_start sub_803D914
-sub_803D914: @ 803D914
+	thumb_func_start RecordedOpponentHandleCmd55
+RecordedOpponentHandleCmd55: @ 803D914
 	push {lr}
 	ldr r1, _0803D930 @ =gUnknown_2022BC4
 	ldr r0, _0803D934 @ =gUnknown_2023BC4
@@ -6232,10 +6232,10 @@ _0803D93C:
 	strb r1, [r0]
 _0803D944:
 	movs r0, 0x5
-	bl sub_8071AB4
+	bl FadeOutMapMusic
 	movs r0, 0x3
-	bl sub_8070E44
-	bl sub_803B124
+	bl BeginFastPaletteFade
+	bl RecordedOpponentBufferExecCompleted
 	ldr r1, _0803D96C @ =gUnknown_3004FE0
 	ldr r0, _0803D970 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -6250,7 +6250,7 @@ _0803D968: .4byte gUnknown_2023E8A
 _0803D96C: .4byte gUnknown_3004FE0
 _0803D970: .4byte gUnknown_2023BC4
 _0803D974: .4byte sub_802F6A8
-	thumb_func_end sub_803D914
+	thumb_func_end RecordedOpponentHandleCmd55
 
 	thumb_func_start nullsub_20
 nullsub_20: @ 803D978

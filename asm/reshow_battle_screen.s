@@ -19,10 +19,10 @@ sub_8077764: @ 8077764
 	orrs r0, r1
 	strb r0, [r2, 0x8]
 	movs r0, 0
-	bl sub_8000700
+	bl SetHBlankCallback
 	movs r0, 0x4C
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r0, _080777B4 @ =gUnknown_2023FC4
 	adds r2, r0, 0
 	adds r2, 0x21
@@ -68,7 +68,7 @@ _080777D4:
 	bl sub_812B1F0
 _080777DA:
 	ldr r0, _080777E4 @ =sub_80777E8
-	bl sub_8000544
+	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -118,30 +118,30 @@ _0807780C:
 	.4byte _080779B0
 	.4byte _08077A5C
 _08077860:
-	bl sub_8006B10
+	bl ResetSpriteData
 	b _08077A8A
 _08077866:
 	movs r0, 0
-	bl sub_80006F4
-	bl sub_8087EA4
+	bl SetVBlankCallback
+	bl dp12_8087EA4
 	bl sub_800F324
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_80019E4
+	bl SetBgAttribute
 	movs r0, 0
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x1
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x2
-	bl sub_80019BC
+	bl ShowBg
 	movs r0, 0x3
-	bl sub_80019BC
-	bl sub_8070528
+	bl ShowBg
+	bl ResetPaletteFade
 	ldr r0, _080778C8 @ =gUnknown_2022974
 	movs r1, 0
 	strh r1, [r0]
@@ -184,7 +184,7 @@ _08077900:
 	bl sub_800F420
 	b _08077A8A
 _08077906:
-	bl sub_80088F0
+	bl FreeAllSpritePalettes
 	ldr r1, _08077914 @ =gUnknown_3003E58
 	movs r0, 0x4
 	strb r0, [r1]
@@ -192,14 +192,14 @@ _08077906:
 	.align 2, 0
 _08077914: .4byte gUnknown_3003E58
 _08077918:
-	bl sub_8034AFC
+	bl ClearSpritesHealthboxAnimData
 	b _08077A8A
 _0807791E:
 	ldr r5, _08077938 @ =gUnknown_2023FC4
 	adds r4, r5, 0
 	adds r4, 0x22
 	ldrb r0, [r4]
-	bl sub_8034838
+	bl BattleLoadAllHealthBoxesGfx
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807793C
@@ -259,24 +259,24 @@ _08077988:
 	b _08077A8A
 _08077990:
 	movs r0, 0
-	bl sub_8077FE4
+	bl CreateHealthboxSprite
 	b _08077A8A
 _08077998:
 	movs r0, 0x1
-	bl sub_8077FE4
+	bl CreateHealthboxSprite
 	b _08077A8A
 _080779A0:
 	movs r0, 0x2
-	bl sub_8077FE4
+	bl CreateHealthboxSprite
 	b _08077A8A
 _080779A8:
 	movs r0, 0x3
-	bl sub_8077FE4
+	bl CreateHealthboxSprite
 	b _08077A8A
 _080779B0:
-	bl sub_8035538
+	bl LoadAndCreateEnemyShadowSprites
 	movs r0, 0x1
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -289,18 +289,18 @@ _080779B0:
 	ldr r5, _08077A48 @ =gUnknown_202402C
 	adds r0, r5
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_8035708
+	bl SetBankEnemyShadowSpriteCallback
 	bl sub_8075290
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077A14
 	movs r0, 0x3
-	bl sub_80751E8
+	bl GetBankByIdentity
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -310,12 +310,12 @@ _080779B0:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_8035708
+	bl SetBankEnemyShadowSpriteCallback
 _08077A14:
 	ldr r1, _08077A4C @ =gUnknown_2023FF8
 	ldr r0, _08077A50 @ =gUnknown_2024004
@@ -346,7 +346,7 @@ _08077A54: .4byte gUnknown_3003F3C
 _08077A58: .4byte gUnknown_3003F64
 _08077A5C:
 	ldr r0, _08077A9C @ =sub_80116F4
-	bl sub_80006F4
+	bl SetVBlankCallback
 	bl sub_8077AAC
 	movs r0, 0x1
 	str r0, [sp]
@@ -354,14 +354,14 @@ _08077A5C:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_8071264
+	bl BeginHardwarePaletteFade
 	ldr r2, _08077AA0 @ =gUnknown_2037AB8
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2, 0x8]
 	ldr r0, _08077AA4 @ =sub_8011100
-	bl sub_8000544
+	bl SetMainCallback2
 	bl sub_80357C8
 _08077A8A:
 	ldr r1, _08077AA8 @ =gUnknown_2023FC4
@@ -384,37 +384,37 @@ _08077AA8: .4byte gUnknown_2023FC4
 sub_8077AAC: @ 8077AAC
 	push {lr}
 	movs r0, 0x1
-	bl sub_8000B68
+	bl EnableInterrupts
 	movs r0, 0x50
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x48
 	movs r1, 0x3F
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0x3F
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x40
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x42
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	movs r0, 0x46
 	movs r1, 0
-	bl sub_8000A38
+	bl SetGpuReg
 	ldr r1, _08077B08 @ =0x0000b040
 	movs r0, 0
-	bl sub_8000AF4
+	bl SetGpuRegBits
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -433,7 +433,7 @@ sub_8077B0C: @ 8077B0C
 	b _08077C2C
 _08077B1C:
 	adds r0, r4, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077BA6
@@ -482,7 +482,7 @@ _08077B64:
 	ldr r1, _08077B98 @ =gUnknown_202402C
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_8034320
+	bl BattleLoadOpponentMonSpriteGfx
 	b _08077C24
 	.align 2, 0
 _08077B90: .4byte gUnknown_2024018
@@ -621,7 +621,7 @@ _08077C9A:
 	lsrs r0, 24
 	mov r8, r0
 	adds r0, r7, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08077CAE
@@ -640,7 +640,7 @@ _08077CAE:
 	mov r9, r1
 	add r0, r9
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08077CD2
 	b _08077FB4
@@ -651,12 +651,12 @@ _08077CD2:
 	adds r0, r1, 0
 	add r0, r9
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -677,7 +677,7 @@ _08077CD2:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	mov r2, r8
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _08077D9C @ =gUnknown_2023D44
 	adds r4, r7, r4
 	strb r0, [r4]
@@ -714,7 +714,7 @@ _08077CD2:
 	adds r0, r1, 0
 	add r0, r9
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	ldrb r2, [r4]
 	lsls r1, r2, 4
 	adds r1, r2
@@ -729,7 +729,7 @@ _08077CD2:
 	ldr r1, _08077DA8 @ =gUnknown_2024024
 	adds r1, r7, r1
 	ldrb r1, [r1]
-	bl sub_800838C
+	bl StartSpriteAnim
 	b _08077F84
 	.align 2, 0
 _08077D90: .4byte gUnknown_2023BCE
@@ -752,7 +752,7 @@ _08077DAC:
 	ldr r0, [r5]
 	ldrb r4, [r0, 0x8]
 	movs r0, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -794,7 +794,7 @@ _08077E10:
 	cmp r7, 0
 	bne _08077EA8
 	movs r0, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -819,7 +819,7 @@ _08077E10:
 _08077E54:
 	movs r1, 0x50
 	adds r2, r4, 0
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r3, _08077E9C @ =gUnknown_2023D44
 	strb r0, [r3]
 	ldr r4, _08077EA0 @ =gUnknown_202063C
@@ -868,7 +868,7 @@ _08077EA8:
 	mov r9, r1
 	add r0, r9
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	beq _08077FB4
 	ldrh r0, [r6]
@@ -877,12 +877,12 @@ _08077EA8:
 	adds r0, r1, 0
 	add r0, r9
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -903,7 +903,7 @@ _08077EA8:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	mov r2, r8
-	bl sub_8006F8C
+	bl CreateSprite
 	ldr r4, _08077FD0 @ =gUnknown_2023D44
 	adds r4, r7, r4
 	strb r0, [r4]
@@ -940,7 +940,7 @@ _08077EA8:
 	adds r0, r1, 0
 	add r0, r9
 	movs r1, 0xB
-	bl sub_803FBE8
+	bl GetMonData
 	ldrb r2, [r4]
 	lsls r1, r2, 4
 	adds r1, r2
@@ -955,7 +955,7 @@ _08077EA8:
 	ldr r1, _08077FDC @ =gUnknown_2024024
 	adds r1, r7, r1
 	ldrb r1, [r1]
-	bl sub_800838C
+	bl StartSpriteAnim
 _08077F84:
 	ldr r1, _08077FD4 @ =gUnknown_202063C
 	ldr r0, _08077FD0 @ =gUnknown_2023D44
@@ -1000,8 +1000,8 @@ _08077FDC: .4byte gUnknown_2024024
 _08077FE0: .4byte gUnknown_2024018
 	thumb_func_end sub_8077C38
 
-	thumb_func_start sub_8077FE4
-sub_8077FE4: @ 8077FE4
+	thumb_func_start CreateHealthboxSprite
+CreateHealthboxSprite: @ 8077FE4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1019,7 +1019,7 @@ _08077FF4:
 	beq _08078014
 	cmp r5, 0
 	bne _08078014
-	bl sub_8048008
+	bl CreateSafariPlayerHealthboxSprites
 	b _0807802C
 	.align 2, 0
 _0807800C: .4byte gUnknown_2023BCC
@@ -1036,7 +1036,7 @@ _08078014:
 	b _08078166
 _08078026:
 	adds r0, r5, 0
-	bl sub_8047CE0
+	bl CreateBankHealthboxSprites
 _0807802C:
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -1044,11 +1044,11 @@ _0807802C:
 	adds r4, r5, r0
 	strb r6, [r4]
 	adds r0, r5, 0
-	bl sub_804831C
+	bl SetBankHealthboxSpritePos
 	adds r0, r6, 0
-	bl sub_80481D4
+	bl SetHealthboxSpriteVisible
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08078074
@@ -1062,7 +1062,7 @@ _0807802C:
 	ldr r2, _08078070 @ =gUnknown_202402C
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	b _080780C0
 	.align 2, 0
 _08078068: .4byte gUnknown_3004FF0
@@ -1085,7 +1085,7 @@ _08078074:
 	ldr r2, _080780A4 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0xA
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 	b _080780C0
 	.align 2, 0
 _0807809C: .4byte gUnknown_2022B4C
@@ -1102,16 +1102,16 @@ _080780A8:
 	ldr r2, _080780F0 @ =gUnknown_2024284
 	adds r1, r2
 	movs r2, 0
-	bl sub_8049D98
+	bl UpdateHealthboxAttribute
 _080780C0:
 	adds r0, r5, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080780DC
 	adds r0, r5, 0
-	bl sub_80751D8
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1135,7 +1135,7 @@ _080780F8:
 	bl nullsub_21
 _08078104:
 	adds r0, r5, 0
-	bl sub_80751C4
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807813C
@@ -1147,11 +1147,11 @@ _08078104:
 	ldr r1, _08078138 @ =gUnknown_202402C
 	adds r0, r1
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08078166
 	adds r0, r6, 0
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 	b _08078166
 	.align 2, 0
 _08078130: .4byte gUnknown_3004FF0
@@ -1172,11 +1172,11 @@ _0807813C:
 	ldr r1, _08078174 @ =gUnknown_2024284
 	adds r0, r1
 	movs r1, 0x39
-	bl sub_803FBE8
+	bl GetMonData
 	cmp r0, 0
 	bne _08078166
 	adds r0, r6, 0
-	bl sub_8048188
+	bl SetHealthboxSpriteInvisible
 _08078166:
 	pop {r4-r6}
 	pop {r0}
@@ -1185,6 +1185,6 @@ _08078166:
 _0807816C: .4byte gUnknown_2022B4C
 _08078170: .4byte gUnknown_2023BCE
 _08078174: .4byte gUnknown_2024284
-	thumb_func_end sub_8077FE4
+	thumb_func_end CreateHealthboxSprite
 
 	.align 2, 0 @ Don't pad with nop.

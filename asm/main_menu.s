@@ -436,7 +436,7 @@ sub_800C688: @ 800C688
 	ands r0, r1
 	cmp r0, 0
 	bne _0800C6F8
-	bl sub_8002DE8
+	bl RunTextPrinters
 	movs r0, 0x4
 	bl IsTextPrinterActive
 	lsls r0, 16
@@ -1092,7 +1092,7 @@ _0800CC0C:
 	.align 2, 0
 _0800CC18: .4byte gUnknown_2037AB8
 _0800CC1C:
-	bl sub_8002DE8
+	bl RunTextPrinters
 	movs r0, 0x4
 	bl IsTextPrinterActive
 	lsls r0, 16

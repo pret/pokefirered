@@ -90,7 +90,7 @@ sub_80BF518: @ 80BF518
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8002DE8
+	bl RunTextPrinters
 	adds r0, r4, 0
 	bl IsTextPrinterActive
 	lsls r0, 16

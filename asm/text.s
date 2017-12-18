@@ -689,7 +689,7 @@ _08005880:
 	ldrb r0, [r6, 0x6]
 	strb r0, [r6, 0x8]
 	ldrb r1, [r6, 0x5]
-	ldr r0, _080058A4 @ =gUnknown_3003D90
+	ldr r0, _080058A4 @ =gFonts
 	ldr r2, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -705,7 +705,7 @@ _0800589E:
 	movs r0, 0x2
 	b _08005D6A
 	.align 2, 0
-_080058A4: .4byte gUnknown_3003D90
+_080058A4: .4byte gFonts
 _080058A8:
 	ldr r0, [r6]
 	b _08005B0A
@@ -841,7 +841,7 @@ _080059CA:
 	lsls r2, 24
 	lsrs r2, 28
 _080059D2:
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	b _0800589E
 _080059D8:
 	ldr r0, [r6]
@@ -971,7 +971,7 @@ _08005AB0:
 _08005ABE:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl nullsub_5
+	bl ClearTextSpan
 	ldrb r0, [r6, 0x8]
 	adds r0, r4
 	b _08005C4E
@@ -1001,7 +1001,7 @@ _08005ADC:
 _08005AF2:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl nullsub_5
+	bl ClearTextSpan
 	ldrb r0, [r6, 0x8]
 	adds r0, r4
 	b _08005C4E
@@ -1059,14 +1059,14 @@ _08005B46:
 	ldrb r2, [r6, 0x8]
 	ldrb r3, [r6, 0x9]
 	bl DrawKeypadIcon
-	ldr r1, _08005B68 @ =gUnknown_3003DA0
+	ldr r1, _08005B68 @ =gGlyphBuffer1
 	adds r1, 0x80
 	strb r0, [r1]
 	ldrb r3, [r6, 0xA]
 	adds r0, r3
 	b _08005C4A
 	.align 2, 0
-_08005B68: .4byte gUnknown_3003DA0
+_08005B68: .4byte gGlyphBuffer1
 _08005B6C:
 	ldr r0, [r4]
 	lsls r0, 28
@@ -1131,13 +1131,13 @@ _08005BE2:
 	bl sub_8006958
 _08005BEE:
 	adds r0, r6, 0
-	bl sub_8003014
+	bl CopyGlyphToWindow
 	adds r2, r6, 0
 	adds r2, 0x20
 	ldrb r0, [r2]
 	cmp r0, 0
 	beq _08005C28
-	ldr r1, _08005C24 @ =gUnknown_3003DA0
+	ldr r1, _08005C24 @ =gGlyphBuffer1
 	adds r1, 0x80
 	ldrb r0, [r1]
 	ldrb r3, [r6, 0x8]
@@ -1150,19 +1150,19 @@ _08005BEE:
 	ble _08005C50
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl nullsub_5
+	bl ClearTextSpan
 	ldrb r0, [r6, 0x8]
 	adds r0, r4
 	b _08005C4E
 	.align 2, 0
-_08005C24: .4byte gUnknown_3003DA0
+_08005C24: .4byte gGlyphBuffer1
 _08005C28:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08005C44
-	ldr r0, _08005C40 @ =gUnknown_3003DA0
+	ldr r0, _08005C40 @ =gGlyphBuffer1
 	adds r0, 0x80
 	ldrb r1, [r6, 0xA]
 	ldrb r0, [r0]
@@ -1170,9 +1170,9 @@ _08005C28:
 	ldrb r0, [r6, 0x8]
 	b _08005C4C
 	.align 2, 0
-_08005C40: .4byte gUnknown_3003DA0
+_08005C40: .4byte gGlyphBuffer1
 _08005C44:
-	ldr r0, _08005C54 @ =gUnknown_3003DA0
+	ldr r0, _08005C54 @ =gGlyphBuffer1
 	adds r0, 0x80
 	ldrb r0, [r0]
 _08005C4A:
@@ -1185,7 +1185,7 @@ _08005C50:
 	movs r0, 0
 	b _08005D6A
 	.align 2, 0
-_08005C54: .4byte gUnknown_3003DA0
+_08005C54: .4byte gGlyphBuffer1
 _08005C58:
 	adds r0, r6, 0
 	bl TextPrinterWait
@@ -1230,7 +1230,7 @@ _08005CA6:
 	adds r0, r6, 0
 	bl sub_80055D4
 	ldrb r1, [r6, 0x5]
-	ldr r0, _08005CCC @ =gUnknown_3003D90
+	ldr r0, _08005CCC @ =gFonts
 	ldr r2, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1246,7 +1246,7 @@ _08005CA6:
 	strb r0, [r6, 0x1C]
 	b _08005B30
 	.align 2, 0
-_08005CCC: .4byte gUnknown_3003D90
+_08005CCC: .4byte gFonts
 _08005CD0:
 	ldrb r2, [r6, 0x1F]
 	cmp r2, 0
@@ -1834,7 +1834,7 @@ sub_8006124: @ 8006124
 	mov r10, r0
 	movs r0, 0x1
 	movs r2, 0x3
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	mov r8, r4
 	movs r7, 0
 _0800615E:
@@ -1939,7 +1939,7 @@ _08006246:
 _0800624A:
 	ldr r1, [sp, 0x8]
 	mov r2, r10
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	b _08006280
 _08006254:
 	adds r7, 0x1
@@ -1949,7 +1949,7 @@ _08006256:
 _0800625A:
 	adds r0, r6, 0
 	bl DecompressGlyphFont9
-	ldr r4, _080062A8 @ =gUnknown_3003DA0
+	ldr r4, _080062A8 @ =gGlyphBuffer1
 	ldr r5, _080062AC @ =0x04000008
 	adds r0, r4, 0
 	mov r1, r9
@@ -1984,7 +1984,7 @@ _08006286:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080062A8: .4byte gUnknown_3003DA0
+_080062A8: .4byte gGlyphBuffer1
 _080062AC: .4byte 0x04000008
 	thumb_func_end sub_8006124
 
@@ -2228,16 +2228,16 @@ sub_8006448: @ 8006448
 	ldr r1, _08006488 @ =gUnknown_81EF100
 	adds r0, r1
 	adds r5, r2, r0
-	ldr r4, _0800648C @ =gUnknown_3003DA0
+	ldr r4, _0800648C @ =gGlyphBuffer1
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r5, r1
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r1, r4, 0
 	adds r1, 0x80
 	movs r0, 0x8
@@ -2247,20 +2247,20 @@ sub_8006448: @ 8006448
 	b _080064BC
 	.align 2, 0
 _08006488: .4byte gUnknown_81EF100
-_0800648C: .4byte gUnknown_3003DA0
+_0800648C: .4byte gGlyphBuffer1
 _08006490:
 	lsls r1, r6, 5
 	ldr r0, _080064C4 @ =gUnknown_81EAF00
 	adds r5, r1, r0
-	ldr r4, _080064C8 @ =gUnknown_3003DA0
+	ldr r4, _080064C8 @ =gGlyphBuffer1
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x10
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	ldr r0, _080064CC @ =gUnknown_81EEF00
 	adds r0, r6, r0
 	ldrb r1, [r0]
@@ -2276,7 +2276,7 @@ _080064BC:
 	bx r0
 	.align 2, 0
 _080064C4: .4byte gUnknown_81EAF00
-_080064C8: .4byte gUnknown_3003DA0
+_080064C8: .4byte gGlyphBuffer1
 _080064CC: .4byte gUnknown_81EEF00
 	thumb_func_end sub_8006448
 
@@ -2315,16 +2315,16 @@ sub_80064F0: @ 80064F0
 	ldr r1, _08006534 @ =gUnknown_81FB300
 	adds r0, r1
 	adds r5, r2, r0
-	ldr r4, _08006538 @ =gUnknown_3003DA0
+	ldr r4, _08006538 @ =gGlyphBuffer1
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r5, r1
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r1, r4, 0
 	adds r1, 0x80
 	movs r0, 0x8
@@ -2335,30 +2335,30 @@ sub_80064F0: @ 80064F0
 	b _08006584
 	.align 2, 0
 _08006534: .4byte gUnknown_81FB300
-_08006538: .4byte gUnknown_3003DA0
+_08006538: .4byte gGlyphBuffer1
 _0800653C:
 	lsls r1, r6, 6
 	ldr r0, _0800658C @ =gUnknown_81F3100
 	adds r5, r1, r0
-	ldr r4, _08006590 @ =gUnknown_3003DA0
+	ldr r4, _08006590 @ =gGlyphBuffer1
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x10
 	adds r1, r4, 0
 	adds r1, 0x20
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x20
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x30
 	adds r1, r4, 0
 	adds r1, 0x60
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	ldr r0, _08006594 @ =gUnknown_81FB100
 	adds r0, r6, r0
 	ldrb r1, [r0]
@@ -2375,7 +2375,7 @@ _08006584:
 	bx r0
 	.align 2, 0
 _0800658C: .4byte gUnknown_81F3100
-_08006590: .4byte gUnknown_3003DA0
+_08006590: .4byte gGlyphBuffer1
 _08006594: .4byte gUnknown_81FB100
 	thumb_func_end sub_80064F0
 
@@ -2409,11 +2409,11 @@ sub_80065B8: @ 80065B8
 	cmp r6, 0
 	bne _080065F8
 	movs r0, 0x2
-	bl sub_8002FCC
+	bl GetLastTextColor
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	ldr r3, _080065F4 @ =gUnknown_3003DA0
+	ldr r3, _080065F4 @ =gGlyphBuffer1
 	lsls r2, r0, 4
 	orrs r2, r0
 	adds r7, r3, 0
@@ -2432,7 +2432,7 @@ _080065E4:
 	ble _080065E4
 	b _080066E4
 	.align 2, 0
-_080065F4: .4byte gUnknown_3003DA0
+_080065F4: .4byte gGlyphBuffer1
 _080065F8:
 	lsrs r2, r0, 19
 	lsls r2, 9
@@ -2442,27 +2442,27 @@ _080065F8:
 	ldr r1, _08006650 @ =gUnknown_8207500
 	adds r0, r1
 	adds r4, r2, r0
-	ldr r5, _08006654 @ =gUnknown_3003DA0
+	ldr r5, _08006654 @ =gGlyphBuffer1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
 	adds r1, 0x20
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r4, r1
 	adds r1, r5, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x88
 	lsls r1, 1
 	adds r0, r4, r1
 	adds r1, r5, 0
 	adds r1, 0x60
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	ldr r0, _08006658 @ =gUnknown_820F500
 	adds r0, r6, r0
 	ldrb r1, [r0]
@@ -2475,17 +2475,17 @@ _080065F8:
 	b _080066E2
 	.align 2, 0
 _08006650: .4byte gUnknown_8207500
-_08006654: .4byte gUnknown_3003DA0
+_08006654: .4byte gGlyphBuffer1
 _08006658: .4byte gUnknown_820F500
 _0800665C:
 	cmp r6, 0
 	bne _0800669C
 	movs r0, 0x2
-	bl sub_8002FCC
+	bl GetLastTextColor
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	ldr r3, _08006694 @ =gUnknown_3003DA0
+	ldr r3, _08006694 @ =gGlyphBuffer1
 	lsls r2, r0, 4
 	orrs r2, r0
 	ldr r0, _08006698 @ =gUnknown_8207300
@@ -2507,31 +2507,31 @@ _08006682:
 	ble _08006682
 	b _080066E4
 	.align 2, 0
-_08006694: .4byte gUnknown_3003DA0
+_08006694: .4byte gGlyphBuffer1
 _08006698: .4byte gUnknown_8207300
 _0800669C:
 	lsls r1, r6, 6
 	ldr r0, _080066EC @ =gUnknown_81FF300
 	adds r4, r1, r0
-	ldr r5, _080066F0 @ =gUnknown_3003DA0
+	ldr r5, _080066F0 @ =gGlyphBuffer1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
 	adds r1, 0x20
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x20
 	adds r1, r5, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x30
 	adds r1, r5, 0
 	adds r1, 0x60
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	ldr r0, _080066F4 @ =gUnknown_8207300
 	adds r0, r6, r0
 	ldrb r1, [r0]
@@ -2549,7 +2549,7 @@ _080066E4:
 	bx r0
 	.align 2, 0
 _080066EC: .4byte gUnknown_81FF300
-_080066F0: .4byte gUnknown_3003DA0
+_080066F0: .4byte gGlyphBuffer1
 _080066F4: .4byte gUnknown_8207300
 	thumb_func_end sub_80065B8
 
@@ -2591,11 +2591,11 @@ sub_8006724: @ 8006724
 	cmp r3, 0
 	bne _08006764
 	movs r0, 0x2
-	bl sub_8002FCC
+	bl GetLastTextColor
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	ldr r3, _08006760 @ =gUnknown_3003DA0
+	ldr r3, _08006760 @ =gGlyphBuffer1
 	lsls r2, r0, 4
 	orrs r2, r0
 	adds r7, r3, 0
@@ -2614,7 +2614,7 @@ _08006750:
 	ble _08006750
 	b _080067C6
 	.align 2, 0
-_08006760: .4byte gUnknown_3003DA0
+_08006760: .4byte gGlyphBuffer1
 _08006764:
 	lsrs r2, r0, 19
 	lsls r2, 9
@@ -2624,27 +2624,27 @@ _08006764:
 	ldr r1, _080067B8 @ =gUnknown_8207500
 	adds r0, r1
 	adds r5, r2, r0
-	ldr r4, _080067BC @ =gUnknown_3003DA0
+	ldr r4, _080067BC @ =gGlyphBuffer1
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x10
 	adds r1, r4, 0
 	adds r1, 0x20
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r5, r1
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x88
 	lsls r1, 1
 	adds r0, r5, r1
 	adds r1, r4, 0
 	adds r1, 0x60
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r1, r4, 0
 	adds r1, 0x80
 	movs r0, 0xA
@@ -2655,7 +2655,7 @@ _08006764:
 	b _080067C6
 	.align 2, 0
 _080067B8: .4byte gUnknown_8207500
-_080067BC: .4byte gUnknown_3003DA0
+_080067BC: .4byte gGlyphBuffer1
 _080067C0:
 	adds r0, r3, 0
 	bl sub_80065B8
@@ -2695,11 +2695,11 @@ sub_80067EC: @ 80067EC
 	cmp r6, 0
 	bne _0800682C
 	movs r0, 0x2
-	bl sub_8002FCC
+	bl GetLastTextColor
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	ldr r3, _08006828 @ =gUnknown_3003DA0
+	ldr r3, _08006828 @ =gGlyphBuffer1
 	lsls r2, r0, 4
 	orrs r2, r0
 	adds r7, r3, 0
@@ -2718,7 +2718,7 @@ _08006818:
 	ble _08006818
 	b _08006918
 	.align 2, 0
-_08006828: .4byte gUnknown_3003DA0
+_08006828: .4byte gGlyphBuffer1
 _0800682C:
 	lsrs r2, r0, 19
 	lsls r2, 9
@@ -2728,27 +2728,27 @@ _0800682C:
 	ldr r1, _08006884 @ =gUnknown_8217818
 	adds r0, r1
 	adds r4, r2, r0
-	ldr r5, _08006888 @ =gUnknown_3003DA0
+	ldr r5, _08006888 @ =gGlyphBuffer1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
 	adds r1, 0x20
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r4, r1
 	adds r1, r5, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x88
 	lsls r1, 1
 	adds r0, r4, r1
 	adds r1, r5, 0
 	adds r1, 0x60
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	ldr r0, _0800688C @ =gUnknown_821F818
 	adds r0, r6, r0
 	ldrb r1, [r0]
@@ -2761,17 +2761,17 @@ _0800682C:
 	b _08006916
 	.align 2, 0
 _08006884: .4byte gUnknown_8217818
-_08006888: .4byte gUnknown_3003DA0
+_08006888: .4byte gGlyphBuffer1
 _0800688C: .4byte gUnknown_821F818
 _08006890:
 	cmp r6, 0
 	bne _080068D0
 	movs r0, 0x2
-	bl sub_8002FCC
+	bl GetLastTextColor
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	ldr r3, _080068C8 @ =gUnknown_3003DA0
+	ldr r3, _080068C8 @ =gGlyphBuffer1
 	lsls r2, r0, 4
 	orrs r2, r0
 	ldr r0, _080068CC @ =gUnknown_8217618
@@ -2793,31 +2793,31 @@ _080068B6:
 	ble _080068B6
 	b _08006918
 	.align 2, 0
-_080068C8: .4byte gUnknown_3003DA0
+_080068C8: .4byte gGlyphBuffer1
 _080068CC: .4byte gUnknown_8217618
 _080068D0:
 	lsls r1, r6, 6
 	ldr r0, _08006920 @ =gUnknown_820F618
 	adds r4, r1, r0
-	ldr r5, _08006924 @ =gUnknown_3003DA0
+	ldr r5, _08006924 @ =gGlyphBuffer1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
 	adds r1, 0x20
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x20
 	adds r1, r5, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x30
 	adds r1, r5, 0
 	adds r1, 0x60
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	ldr r0, _08006928 @ =gUnknown_8217618
 	adds r0, r6, r0
 	ldrb r1, [r0]
@@ -2835,7 +2835,7 @@ _08006918:
 	bx r0
 	.align 2, 0
 _08006920: .4byte gUnknown_820F618
-_08006924: .4byte gUnknown_3003DA0
+_08006924: .4byte gGlyphBuffer1
 _08006928: .4byte gUnknown_8217618
 	thumb_func_end sub_80067EC
 
@@ -2877,11 +2877,11 @@ sub_8006958: @ 8006958
 	cmp r6, 0
 	bne _08006998
 	movs r0, 0x2
-	bl sub_8002FCC
+	bl GetLastTextColor
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	ldr r3, _08006994 @ =gUnknown_3003DA0
+	ldr r3, _08006994 @ =gGlyphBuffer1
 	lsls r2, r0, 4
 	orrs r2, r0
 	adds r7, r3, 0
@@ -2900,7 +2900,7 @@ _08006984:
 	ble _08006984
 	b _08006A84
 	.align 2, 0
-_08006994: .4byte gUnknown_3003DA0
+_08006994: .4byte gGlyphBuffer1
 _08006998:
 	lsrs r2, r0, 19
 	lsls r2, 9
@@ -2910,27 +2910,27 @@ _08006998:
 	ldr r1, _080069F0 @ =gUnknown_8227B30
 	adds r0, r1
 	adds r4, r2, r0
-	ldr r5, _080069F4 @ =gUnknown_3003DA0
+	ldr r5, _080069F4 @ =gGlyphBuffer1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
 	adds r1, 0x20
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r4, r1
 	adds r1, r5, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x88
 	lsls r1, 1
 	adds r0, r4, r1
 	adds r1, r5, 0
 	adds r1, 0x60
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	ldr r0, _080069F8 @ =gUnknown_822FB30
 	adds r0, r6, r0
 	ldrb r1, [r0]
@@ -2943,17 +2943,17 @@ _08006998:
 	b _08006A82
 	.align 2, 0
 _080069F0: .4byte gUnknown_8227B30
-_080069F4: .4byte gUnknown_3003DA0
+_080069F4: .4byte gGlyphBuffer1
 _080069F8: .4byte gUnknown_822FB30
 _080069FC:
 	cmp r6, 0
 	bne _08006A3C
 	movs r0, 0x2
-	bl sub_8002FCC
+	bl GetLastTextColor
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	ldr r3, _08006A34 @ =gUnknown_3003DA0
+	ldr r3, _08006A34 @ =gGlyphBuffer1
 	lsls r2, r0, 4
 	orrs r2, r0
 	ldr r0, _08006A38 @ =gUnknown_8227930
@@ -2975,31 +2975,31 @@ _08006A22:
 	ble _08006A22
 	b _08006A84
 	.align 2, 0
-_08006A34: .4byte gUnknown_3003DA0
+_08006A34: .4byte gGlyphBuffer1
 _08006A38: .4byte gUnknown_8227930
 _08006A3C:
 	lsls r1, r6, 6
 	ldr r0, _08006A8C @ =gUnknown_821F930
 	adds r4, r1, r0
-	ldr r5, _08006A90 @ =gUnknown_3003DA0
+	ldr r5, _08006A90 @ =gGlyphBuffer1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
 	adds r1, 0x20
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x20
 	adds r1, r5, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x30
 	adds r1, r5, 0
 	adds r1, 0x60
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	ldr r0, _08006A94 @ =gUnknown_8227930
 	adds r0, r6, r0
 	ldrb r1, [r0]
@@ -3017,7 +3017,7 @@ _08006A84:
 	bx r0
 	.align 2, 0
 _08006A8C: .4byte gUnknown_821F930
-_08006A90: .4byte gUnknown_3003DA0
+_08006A90: .4byte gGlyphBuffer1
 _08006A94: .4byte gUnknown_8227930
 	thumb_func_end sub_8006958
 
@@ -3062,17 +3062,17 @@ DecompressGlyphFont9: @ 8006AC4
 	ldr r0, _08006B08 @ =gUnknown_822FC48
 	adds r1, r0
 	adds r4, r1
-	ldr r5, _08006B0C @ =gUnknown_3003DA0
+	ldr r5, _08006B0C @ =gGlyphBuffer1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r0, 0x80
 	lsls r0, 1
 	adds r4, r0
 	adds r1, r5, 0
 	adds r1, 0x40
 	adds r0, r4, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r1, r5, 0
 	adds r1, 0x80
 	movs r0, 0x8
@@ -3085,7 +3085,7 @@ DecompressGlyphFont9: @ 8006AC4
 	bx r0
 	.align 2, 0
 _08006B08: .4byte gUnknown_822FC48
-_08006B0C: .4byte gUnknown_3003DA0
+_08006B0C: .4byte gGlyphBuffer1
 	thumb_func_end DecompressGlyphFont9
 
 	.align 2, 0 @ Don't pad with nop.

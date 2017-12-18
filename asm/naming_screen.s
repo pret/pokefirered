@@ -1004,7 +1004,7 @@ _0809E1D0: .4byte gUnknown_3003E50
 	thumb_func_start sub_809E1D4
 sub_809E1D4: @ 809E1D4
 	push {lr}
-	bl sub_8002DE8
+	bl RunTextPrinters
 	movs r0, 0
 	bl IsTextPrinterActive
 	lsls r0, 16

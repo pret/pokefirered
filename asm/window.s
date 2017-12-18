@@ -41,7 +41,7 @@ _08003B48:
 	ldr r0, _08003BC0 @ =gUnknown_81EA144
 	ldr r2, [r0]
 	ldr r3, [r0, 0x4]
-	ldr r1, _08003BC4 @ =gUnknown_20204B4
+	ldr r1, _08003BC4 @ =gWindows
 	movs r0, 0
 	movs r4, 0x1F
 	mov r8, r4
@@ -94,7 +94,7 @@ _08003BB4:
 _08003BB8: .4byte gUnknown_3003E40
 _08003BBC: .4byte nullsub_6
 _08003BC0: .4byte gUnknown_81EA144
-_08003BC4: .4byte gUnknown_20204B4
+_08003BC4: .4byte gWindows
 _08003BC8: .4byte gUnneededFireRedVariable
 _08003BCC:
 	ldr r0, _08003C04 @ =gUnknown_3003E40
@@ -173,7 +173,7 @@ _08003C2E:
 _08003C68: .4byte gUnknown_3003E40
 _08003C6C: .4byte nullsub_6
 _08003C70:
-	ldr r1, _08003CD8 @ =gUnknown_20204B4
+	ldr r1, _08003CD8 @ =gWindows
 	adds r0, r1, 0
 	adds r0, 0x8
 	ldr r2, [sp, 0x4]
@@ -228,7 +228,7 @@ _08003CC8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08003CD8: .4byte gUnknown_20204B4
+_08003CD8: .4byte gWindows
 _08003CDC: .4byte gUnneededFireRedVariable
 _08003CE0: .4byte gUnknown_3003E30
 	thumb_func_end InitWindows
@@ -243,7 +243,7 @@ AddWindow: @ 8003CE4
 	sub sp, 0x4
 	mov r8, r0
 	movs r6, 0
-	ldr r1, _08003DD4 @ =gUnknown_20204B4
+	ldr r1, _08003DD4 @ =gWindows
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	beq _08003D14
@@ -355,13 +355,13 @@ _08003DCE:
 	movs r0, 0xFF
 	b _08003E24
 	.align 2, 0
-_08003DD4: .4byte gUnknown_20204B4
+_08003DD4: .4byte gWindows
 _08003DD8: .4byte gUnneededFireRedVariable
 _08003DDC: .4byte gUnknown_3003E40
 _08003DE0: .4byte 0x0000ffff
 _08003DE4: .4byte nullsub_6
 _08003DE8:
-	ldr r2, _08003E34 @ =gUnknown_20204B4
+	ldr r2, _08003E34 @ =gWindows
 	lsls r1, r6, 1
 	adds r1, r6
 	lsls r1, 2
@@ -401,7 +401,7 @@ _08003E24:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08003E34: .4byte gUnknown_20204B4
+_08003E34: .4byte gWindows
 _08003E38: .4byte gUnneededFireRedVariable
 	thumb_func_end AddWindow
 
@@ -410,7 +410,7 @@ RemoveWindow: @ 8003E3C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _08003EB8 @ =gUnknown_20204B4
+	ldr r1, _08003EB8 @ =gWindows
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 2
@@ -451,7 +451,7 @@ _08003E68:
 	bl Free
 	str r5, [r4]
 _08003E96:
-	ldr r1, _08003EB8 @ =gUnknown_20204B4
+	ldr r1, _08003EB8 @ =gWindows
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 2
@@ -468,7 +468,7 @@ _08003EB0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08003EB8: .4byte gUnknown_20204B4
+_08003EB8: .4byte gWindows
 _08003EBC: .4byte gUnneededFireRedVariable
 _08003EC0: .4byte gUnknown_81EA144
 _08003EC4: .4byte gUnknown_3003E40
@@ -496,7 +496,7 @@ _08003EE8:
 	subs r5, 0x1
 	cmp r5, 0
 	bge _08003ED2
-	ldr r0, _08003F1C @ =gUnknown_20204B4
+	ldr r0, _08003F1C @ =gWindows
 	adds r4, r0, 0
 	adds r4, 0x8
 	movs r6, 0
@@ -518,7 +518,7 @@ _08003F06:
 	.align 2, 0
 _08003F14: .4byte gUnknown_3003E40
 _08003F18: .4byte nullsub_6
-_08003F1C: .4byte gUnknown_20204B4
+_08003F1C: .4byte gWindows
 	thumb_func_end FreeAllWindowBuffers
 
 	thumb_func_start CopyWindowToVram
@@ -530,7 +530,7 @@ CopyWindowToVram: @ 8003F20
 	lsls r1, 24
 	lsrs r3, r1, 24
 	adds r5, r3, 0
-	ldr r2, _08003F58 @ =gUnknown_20204B4
+	ldr r2, _08003F58 @ =gWindows
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -552,7 +552,7 @@ CopyWindowToVram: @ 8003F20
 	beq _08003F62
 	b _08003F96
 	.align 2, 0
-_08003F58: .4byte gUnknown_20204B4
+_08003F58: .4byte gWindows
 _08003F5C:
 	cmp r5, 0x3
 	beq _08003F7E
@@ -595,7 +595,7 @@ PutWindowTilemap: @ 8003FA0
 	sub sp, 0x1C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08003FFC @ =gUnknown_20204B4
+	ldr r2, _08003FFC @ =gWindows
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -636,7 +636,7 @@ PutWindowTilemap: @ 8003FA0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08003FFC: .4byte gUnknown_20204B4
+_08003FFC: .4byte gWindows
 	thumb_func_end PutWindowTilemap
 
 	thumb_func_start PutWindowRectTilemapOverridePalette
@@ -666,7 +666,7 @@ PutWindowRectTilemapOverridePalette: @ 8004000
 	lsls r5, 24
 	lsrs r5, 24
 	str r5, [sp, 0x20]
-	ldr r2, _080040B4 @ =gUnknown_20204B4
+	ldr r2, _080040B4 @ =gWindows
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -731,7 +731,7 @@ _080040A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080040B4: .4byte gUnknown_20204B4
+_080040B4: .4byte gWindows
 	thumb_func_end PutWindowRectTilemapOverridePalette
 
 	thumb_func_start ClearWindowTilemap
@@ -740,7 +740,7 @@ ClearWindowTilemap: @ 80040B8
 	sub sp, 0x18
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08004100 @ =gUnknown_20204B4
+	ldr r2, _08004100 @ =gWindows
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -771,7 +771,7 @@ ClearWindowTilemap: @ 80040B8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08004100: .4byte gUnknown_20204B4
+_08004100: .4byte gWindows
 _08004104: .4byte gUnknown_3003E30
 	thumb_func_end ClearWindowTilemap
 
@@ -798,7 +798,7 @@ PutWindowRectTilemap: @ 8004108
 	lsls r4, 24
 	lsrs r4, 24
 	mov r8, r4
-	ldr r2, _080041B4 @ =gUnknown_20204B4
+	ldr r2, _080041B4 @ =gWindows
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -863,7 +863,7 @@ _080041A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080041B4: .4byte gUnknown_20204B4
+_080041B4: .4byte gWindows
 	thumb_func_end PutWindowRectTilemap
 
 	thumb_func_start BlitBitmapToWindow
@@ -945,7 +945,7 @@ BlitBitmapRectToWindow: @ 80041F0
 	lsrs r4, 16
 	orrs r4, r5
 	str r4, [sp, 0x18]
-	ldr r1, _080042AC @ =gUnknown_20204B4
+	ldr r1, _080042AC @ =gWindows
 	lsls r5, r0, 1
 	adds r5, r0
 	lsls r5, 2
@@ -990,7 +990,7 @@ BlitBitmapRectToWindow: @ 80041F0
 	.align 2, 0
 _080042A4: .4byte 0xffff0000
 _080042A8: .4byte 0x0000ffff
-_080042AC: .4byte gUnknown_20204B4
+_080042AC: .4byte gWindows
 	thumb_func_end BlitBitmapRectToWindow
 
 	thumb_func_start BlitBitmapRectToWindowWithColorKey
@@ -1044,7 +1044,7 @@ BlitBitmapRectToWindowWithColorKey: @ 80042B0
 	lsrs r4, 16
 	orrs r4, r5
 	str r4, [sp, 0x18]
-	ldr r1, _08004370 @ =gUnknown_20204B4
+	ldr r1, _08004370 @ =gWindows
 	lsls r5, r0, 1
 	adds r5, r0
 	lsls r5, 2
@@ -1089,7 +1089,7 @@ BlitBitmapRectToWindowWithColorKey: @ 80042B0
 	bx r0
 	.align 2, 0
 _0800436C: .4byte 0x0000ffff
-_08004370: .4byte gUnknown_20204B4
+_08004370: .4byte gWindows
 _08004374: .4byte 0xffff0000
 	thumb_func_end BlitBitmapRectToWindowWithColorKey
 
@@ -1120,7 +1120,7 @@ FillWindowPixelRect: @ 8004378
 	lsls r4, 16
 	lsrs r4, 16
 	mov r8, r4
-	ldr r5, _080043F8 @ =gUnknown_20204B4
+	ldr r5, _080043F8 @ =gWindows
 	lsls r4, r0, 1
 	adds r4, r0
 	lsls r4, 2
@@ -1158,7 +1158,7 @@ FillWindowPixelRect: @ 8004378
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080043F8: .4byte gUnknown_20204B4
+_080043F8: .4byte gWindows
 _080043FC: .4byte 0xffff0000
 _08004400: .4byte 0x0000ffff
 	thumb_func_end FillWindowPixelRect
@@ -1174,7 +1174,7 @@ CopyToWindowPixelBuffer: @ 8004404
 	lsrs r2, r3, 16
 	cmp r5, 0
 	beq _08004438
-	ldr r1, _08004434 @ =gUnknown_20204B4
+	ldr r1, _08004434 @ =gWindows
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
@@ -1188,9 +1188,9 @@ CopyToWindowPixelBuffer: @ 8004404
 	bl CpuSet
 	b _08004450
 	.align 2, 0
-_08004434: .4byte gUnknown_20204B4
+_08004434: .4byte gWindows
 _08004438:
-	ldr r1, _08004458 @ =gUnknown_20204B4
+	ldr r1, _08004458 @ =gWindows
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
@@ -1206,7 +1206,7 @@ _08004450:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08004458: .4byte gUnknown_20204B4
+_08004458: .4byte gWindows
 	thumb_func_end CopyToWindowPixelBuffer
 
 	thumb_func_start FillWindowPixelBuffer
@@ -1217,7 +1217,7 @@ FillWindowPixelBuffer: @ 800445C
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r5, _080044A4 @ =gUnknown_20204B4
+	ldr r5, _080044A4 @ =gWindows
 	lsls r4, r0, 1
 	adds r4, r0
 	lsls r4, 2
@@ -1246,7 +1246,7 @@ FillWindowPixelBuffer: @ 800445C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080044A4: .4byte gUnknown_20204B4
+_080044A4: .4byte gWindows
 	thumb_func_end FillWindowPixelBuffer
 
 	thumb_func_start ScrollWindow
@@ -1267,7 +1267,7 @@ ScrollWindow: @ 80044A8
 	str r2, [sp]
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r2, _08004544 @ =gUnknown_20204B4
+	ldr r2, _08004544 @ =gWindows
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -1334,7 +1334,7 @@ _0800451C:
 	str r0, [r1]
 	b _0800454C
 	.align 2, 0
-_08004544: .4byte gUnknown_20204B4
+_08004544: .4byte gWindows
 _08004548:
 	mov r2, r10
 	str r7, [r2]
@@ -1784,7 +1784,7 @@ CallWindowFunction: @ 800486C
 	mov r8, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080048B8 @ =gUnknown_20204B4
+	ldr r2, _080048B8 @ =gWindows
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -1814,7 +1814,7 @@ CallWindowFunction: @ 800486C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080048B8: .4byte gUnknown_20204B4
+_080048B8: .4byte gWindows
 	thumb_func_end CallWindowFunction
 
 	thumb_func_start sub_80048BC
@@ -1844,7 +1844,7 @@ _080048D8:
 	.4byte _08004934
 	.4byte _08004948
 _080048F8:
-	ldr r1, _08004908 @ =gUnknown_20204B4
+	ldr r1, _08004908 @ =gWindows
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -1853,9 +1853,9 @@ _080048F8:
 	movs r0, 0
 	b _0800494A
 	.align 2, 0
-_08004908: .4byte gUnknown_20204B4
+_08004908: .4byte gWindows
 _0800490C:
-	ldr r1, _0800491C @ =gUnknown_20204B4
+	ldr r1, _0800491C @ =gWindows
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -1864,9 +1864,9 @@ _0800490C:
 	movs r0, 0
 	b _0800494A
 	.align 2, 0
-_0800491C: .4byte gUnknown_20204B4
+_0800491C: .4byte gWindows
 _08004920:
-	ldr r1, _08004930 @ =gUnknown_20204B4
+	ldr r1, _08004930 @ =gWindows
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -1875,9 +1875,9 @@ _08004920:
 	movs r0, 0
 	b _0800494A
 	.align 2, 0
-_08004930: .4byte gUnknown_20204B4
+_08004930: .4byte gWindows
 _08004934:
-	ldr r1, _08004944 @ =gUnknown_20204B4
+	ldr r1, _08004944 @ =gWindows
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -1886,7 +1886,7 @@ _08004934:
 	movs r0, 0
 	b _0800494A
 	.align 2, 0
-_08004944: .4byte gUnknown_20204B4
+_08004944: .4byte gWindows
 _08004948:
 	movs r0, 0x1
 _0800494A:
@@ -1921,7 +1921,7 @@ _0800496C:
 	.4byte _08004A04
 	.4byte _08004A18
 _0800498C:
-	ldr r0, _0800499C @ =gUnknown_20204B4
+	ldr r0, _0800499C @ =gWindows
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -1929,9 +1929,9 @@ _0800498C:
 	ldrb r0, [r1]
 	b _08004A2E
 	.align 2, 0
-_0800499C: .4byte gUnknown_20204B4
+_0800499C: .4byte gWindows
 _080049A0:
-	ldr r0, _080049B0 @ =gUnknown_20204B4
+	ldr r0, _080049B0 @ =gWindows
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -1939,9 +1939,9 @@ _080049A0:
 	ldrb r0, [r1, 0x1]
 	b _08004A2E
 	.align 2, 0
-_080049B0: .4byte gUnknown_20204B4
+_080049B0: .4byte gWindows
 _080049B4:
-	ldr r0, _080049C4 @ =gUnknown_20204B4
+	ldr r0, _080049C4 @ =gWindows
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -1949,9 +1949,9 @@ _080049B4:
 	ldrb r0, [r1, 0x2]
 	b _08004A2E
 	.align 2, 0
-_080049C4: .4byte gUnknown_20204B4
+_080049C4: .4byte gWindows
 _080049C8:
-	ldr r0, _080049D8 @ =gUnknown_20204B4
+	ldr r0, _080049D8 @ =gWindows
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -1959,9 +1959,9 @@ _080049C8:
 	ldrb r0, [r1, 0x3]
 	b _08004A2E
 	.align 2, 0
-_080049D8: .4byte gUnknown_20204B4
+_080049D8: .4byte gWindows
 _080049DC:
-	ldr r0, _080049EC @ =gUnknown_20204B4
+	ldr r0, _080049EC @ =gWindows
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -1969,9 +1969,9 @@ _080049DC:
 	ldrb r0, [r1, 0x4]
 	b _08004A2E
 	.align 2, 0
-_080049EC: .4byte gUnknown_20204B4
+_080049EC: .4byte gWindows
 _080049F0:
-	ldr r0, _08004A00 @ =gUnknown_20204B4
+	ldr r0, _08004A00 @ =gWindows
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -1979,9 +1979,9 @@ _080049F0:
 	ldrb r0, [r1, 0x5]
 	b _08004A2E
 	.align 2, 0
-_08004A00: .4byte gUnknown_20204B4
+_08004A00: .4byte gWindows
 _08004A04:
-	ldr r0, _08004A14 @ =gUnknown_20204B4
+	ldr r0, _08004A14 @ =gWindows
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -1989,9 +1989,9 @@ _08004A04:
 	ldrh r0, [r1, 0x6]
 	b _08004A2E
 	.align 2, 0
-_08004A14: .4byte gUnknown_20204B4
+_08004A14: .4byte gWindows
 _08004A18:
-	ldr r0, _08004A28 @ =gUnknown_20204B4
+	ldr r0, _08004A28 @ =gWindows
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -2000,7 +2000,7 @@ _08004A18:
 	ldr r0, [r1]
 	b _08004A2E
 	.align 2, 0
-_08004A28: .4byte gUnknown_20204B4
+_08004A28: .4byte gWindows
 _08004A2C:
 	movs r0, 0
 _08004A2E:
@@ -2014,7 +2014,7 @@ GetNumActiveWindowsOnBg: @ 8004A34
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r2, _08004A5C @ =gUnknown_20204B4
+	ldr r2, _08004A5C @ =gWindows
 	movs r1, 0x1F
 _08004A40:
 	ldrb r0, [r2]
@@ -2033,7 +2033,7 @@ _08004A4C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08004A5C: .4byte gUnknown_20204B4
+_08004A5C: .4byte gWindows
 	thumb_func_end GetNumActiveWindowsOnBg
 
 	.align 2, 0 @ Don't pad with nop.

@@ -368,7 +368,7 @@ sub_812C694: @ 812C694
 	beq _0812C6C0
 	b _0812C8EA
 _0812C6C0:
-	bl sub_8002DE8
+	bl RunTextPrinters
 	ldr r0, _0812C71C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
@@ -879,7 +879,7 @@ sub_812CAD8: @ 812CAD8
 	adds r5, r1, r0
 	adds r0, 0x8
 	adds r6, r1, r0
-	bl sub_8002DE8
+	bl RunTextPrinters
 	ldr r0, _0812CBA0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1

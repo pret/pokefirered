@@ -716,7 +716,7 @@ sub_80F6C98: @ 80F6C98
 	thumb_func_start sub_80F6CBC
 sub_80F6CBC: @ 80F6CBC
 	push {lr}
-	bl sub_8002DE8
+	bl RunTextPrinters
 	movs r0, 0
 	bl IsTextPrinterActive
 	lsls r0, 16

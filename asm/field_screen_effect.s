@@ -800,7 +800,7 @@ _0807F424: .4byte gUnknown_2021D18
 _0807F428: .4byte gUnknown_83C68EC
 _0807F42C: .4byte gUnknown_3003E50
 _0807F430:
-	bl sub_8002DE8
+	bl RunTextPrinters
 	adds r0, r7, 0
 	bl IsTextPrinterActive
 	lsls r0, 16

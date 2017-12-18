@@ -276,7 +276,7 @@ _080E4882:
 	strb r1, [r0]
 _080E489E:
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade

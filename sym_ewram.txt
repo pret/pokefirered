@@ -29,14 +29,9 @@ gTrainerId: @ 2020000
 	.space 0x4
 
 	.include "src/malloc.o"
+	.include "src/text_printer.o"
 
-gUnknown_2020010: @ 2020010
-	.space 0x24
-
-gUnknown_2020034: @ 2020034
-	.space 0x480
-
-gUnknown_20204B4: @ 20204B4
+gWindows: @ 20204B4
 	.space 0x180
 
 gUnknown_2020634: @ 2020634

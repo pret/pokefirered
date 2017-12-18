@@ -30,7 +30,7 @@ sub_81024D4: @ 81024D4
 	beq _08102504
 _081024EC:
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	b _08102508

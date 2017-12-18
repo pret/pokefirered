@@ -4711,7 +4711,7 @@ sub_805D6C8: @ 805D6C8
 	adds r0, r1
 	bl sub_805D9C4
 _0805D6EA:
-	bl sub_8002DE8
+	bl RunTextPrinters
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
@@ -5030,7 +5030,7 @@ _0805D97C: .4byte gUnknown_2036E38
 	thumb_func_start sub_805D980
 sub_805D980: @ 805D980
 	push {lr}
-	bl sub_8002DE8
+	bl RunTextPrinters
 	movs r0, 0
 	bl IsTextPrinterActive
 	lsls r0, 16

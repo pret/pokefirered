@@ -1210,7 +1210,7 @@ _0813C1DC: .4byte 0x00000834
 _0813C1E0: .4byte gUnknown_841CB3C
 _0813C1E4:
 	ldr r7, [sp, 0x34]
-	ldr r1, _0813C1FC @ =gUnknown_3003DA0
+	ldr r1, _0813C1FC @ =gGlyphBuffer1
 	adds r1, 0x81
 	mov r0, r10
 	adds r0, 0x1
@@ -1221,7 +1221,7 @@ _0813C1E4:
 	mov r10, r0
 	b _0813C0AC
 	.align 2, 0
-_0813C1FC: .4byte gUnknown_3003DA0
+_0813C1FC: .4byte gGlyphBuffer1
 _0813C200:
 	mov r2, r9
 	ldrb r1, [r2]
@@ -1401,7 +1401,7 @@ _0813C36A:
 	add r2, sp, 0x14
 	bl sub_813C3AC
 	ldr r1, [sp, 0x24]
-	ldr r0, _0813C398 @ =gUnknown_3003DA0
+	ldr r0, _0813C398 @ =gGlyphBuffer1
 	adds r0, 0x80
 	ldrb r0, [r0]
 _0813C38E:
@@ -1411,7 +1411,7 @@ _0813C390:
 	lsrs r7, r0, 24
 	b _0813C0AC
 	.align 2, 0
-_0813C398: .4byte gUnknown_3003DA0
+_0813C398: .4byte gGlyphBuffer1
 _0813C39C:
 	add sp, 0x38
 	pop {r3-r5}
@@ -1468,7 +1468,7 @@ _0813C3FA:
 	movs r1, 0
 	bl sub_80065B8
 _0813C402:
-	ldr r1, _0813C450 @ =gUnknown_3003DA0
+	ldr r1, _0813C450 @ =gGlyphBuffer1
 	str r1, [r7]
 	movs r2, 0
 	movs r0, 0x10
@@ -1506,7 +1506,7 @@ _0813C402:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813C450: .4byte gUnknown_3003DA0
+_0813C450: .4byte gGlyphBuffer1
 	thumb_func_end sub_813C3AC
 
 	thumb_func_start sub_813C454
@@ -1517,7 +1517,7 @@ sub_813C454: @ 813C454
 	movs r0, 0x1
 	movs r1, 0xF
 	movs r2, 0x2
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	ldr r1, _0813C484 @ =gUnknown_201FD00
 	movs r2, 0x2
 	str r2, [sp]
@@ -1550,7 +1550,7 @@ sub_813C488: @ 813C488
 	movs r0, 0x1
 	movs r1, 0xF
 	movs r2, 0x2
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	ldr r1, _0813C4C8 @ =gUnknown_201F400
 	lsls r4, 24
 	lsrs r4, 24
@@ -1585,7 +1585,7 @@ sub_813C4CC: @ 813C4CC
 	movs r0, 0x1
 	movs r1, 0xF
 	movs r2, 0x2
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	ldr r1, _0813C508 @ =gUnknown_201C000
 	str r4, [sp]
 	movs r0, 0x1A
@@ -1625,7 +1625,7 @@ sub_813C50C: @ 813C50C
 	movs r0, 0x1
 	movs r1, 0xE
 	movs r2, 0x2
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	movs r6, 0
 	str r6, [sp]
 	movs r5, 0x1A
@@ -1679,7 +1679,7 @@ sub_813C584: @ 813C584
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0x3
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	movs r0, 0x6
 	str r0, [sp]
 	movs r0, 0x1A

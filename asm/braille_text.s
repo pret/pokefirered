@@ -126,7 +126,7 @@ _0814F974:
 	ldrb r0, [r6, 0x6]
 	strb r0, [r6, 0x8]
 	ldrb r1, [r6, 0x5]
-	ldr r0, _0814F998 @ =gUnknown_3003D90
+	ldr r0, _0814F998 @ =gFonts
 	ldr r2, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -142,7 +142,7 @@ _0814F992:
 	movs r0, 0x2
 	b _0814FC96
 	.align 2, 0
-_0814F998: .4byte gUnknown_3003D90
+_0814F998: .4byte gFonts
 _0814F99C:
 	ldr r0, [r6]
 	adds r0, 0x1
@@ -271,7 +271,7 @@ _0814FA9E:
 	lsls r2, 24
 	lsrs r2, 28
 _0814FAA6:
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	b _0814F992
 _0814FAAC:
 	ldr r0, [r6]
@@ -384,8 +384,8 @@ _0814FB62:
 	adds r0, r3, 0
 	bl DecompressGlyphFont6
 	adds r0, r6, 0
-	bl sub_8003014
-	ldr r0, _0814FB84 @ =gUnknown_3003DA0
+	bl CopyGlyphToWindow
+	ldr r0, _0814FB84 @ =gGlyphBuffer1
 	adds r0, 0x80
 	ldrb r1, [r6, 0xA]
 	ldrb r0, [r0]
@@ -396,7 +396,7 @@ _0814FB62:
 	movs r0, 0
 	b _0814FC96
 	.align 2, 0
-_0814FB84: .4byte gUnknown_3003DA0
+_0814FB84: .4byte gGlyphBuffer1
 _0814FB88:
 	adds r0, r6, 0
 	bl TextPrinterWait
@@ -435,7 +435,7 @@ _0814FBC4:
 	adds r0, r6, 0
 	bl sub_80055D4
 	ldrb r1, [r6, 0x5]
-	ldr r0, _0814FBF8 @ =gUnknown_3003D90
+	ldr r0, _0814FBF8 @ =gFonts
 	ldr r2, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -451,7 +451,7 @@ _0814FBC4:
 	strb r0, [r6, 0x1C]
 	b _0814FB42
 	.align 2, 0
-_0814FBF8: .4byte gUnknown_3003D90
+_0814FBF8: .4byte gFonts
 _0814FBFC:
 	ldrb r2, [r6, 0x1F]
 	cmp r2, 0
@@ -551,27 +551,27 @@ DecompressGlyphFont6: @ 814FC9C
 	ldr r0, _0814FCF8 @ =gUnknown_846FB0C
 	adds r1, r0
 	adds r5, r2, r1
-	ldr r4, _0814FCFC @ =gUnknown_3003DA0
+	ldr r4, _0814FCFC @ =gGlyphBuffer1
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x10
 	adds r1, r4, 0
 	adds r1, 0x20
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r5, r1
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	movs r1, 0x88
 	lsls r1, 1
 	adds r0, r5, r1
 	adds r1, r4, 0
 	adds r1, 0x60
-	bl sub_8002F8C
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x80
 	movs r1, 0x10
@@ -583,7 +583,7 @@ DecompressGlyphFont6: @ 814FC9C
 	bx r0
 	.align 2, 0
 _0814FCF8: .4byte gUnknown_846FB0C
-_0814FCFC: .4byte gUnknown_3003DA0
+_0814FCFC: .4byte gGlyphBuffer1
 	thumb_func_end DecompressGlyphFont6
 
 	thumb_func_start GetGlyphWidthFont6

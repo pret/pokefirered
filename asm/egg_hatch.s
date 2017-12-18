@@ -754,7 +754,7 @@ _0804726C:
 	strb r0, [r1, 0x2]
 _0804727A:
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
@@ -1225,7 +1225,7 @@ _08047654:
 	bl sub_812B484
 _08047684:
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade

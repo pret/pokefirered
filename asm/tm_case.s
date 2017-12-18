@@ -2969,7 +2969,7 @@ _081330D4: .4byte gUnknown_841C587
 _081330D8: .4byte gUnknown_3005090
 _081330DC: .4byte sub_8132F60
 _081330E0:
-	bl sub_8002DE8
+	bl RunTextPrinters
 	movs r0, 0x6
 	bl IsTextPrinterActive
 	lsls r0, 16

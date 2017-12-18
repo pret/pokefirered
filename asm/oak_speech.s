@@ -259,7 +259,7 @@ sub_812EAFC: @ 812EAFC
 sub_812EB10: @ 812EB10
 	push {lr}
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade

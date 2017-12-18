@@ -1030,7 +1030,7 @@ _0804CED0:
 	ldr r0, _0804CF10 @ =sub_804D638
 	bl SetMainCallback2
 _0804CEE6:
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
@@ -7758,7 +7758,7 @@ _0805046C:
 	bl SetMainCallback2
 _08050472:
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
@@ -8086,7 +8086,7 @@ _08050778:
 	bl SetMainCallback2
 _0805077E:
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
@@ -8309,7 +8309,7 @@ sub_8050948: @ 8050948
 	push {lr}
 	bl sub_8050F14
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
@@ -14174,7 +14174,7 @@ _08053DE6:
 	bl sub_80508F4
 	bl sub_805383C
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade

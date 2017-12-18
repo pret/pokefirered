@@ -485,7 +485,7 @@ _080BF000:
 	cmp r0, 0
 	beq _080BF0F4
 	bl sub_80BF224
-	bl sub_8002DE8
+	bl RunTextPrinters
 	b _080BF0F4
 	.align 2, 0
 _080BF018: .4byte gUnknown_20399C4

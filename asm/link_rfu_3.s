@@ -3255,7 +3255,7 @@ _08117384:
 	bl sub_808B700
 _081173A2:
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	pop {r4}
@@ -3473,7 +3473,7 @@ _08117564:
 	bl SetMainCallback2
 _08117576:
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	pop {r4}
@@ -13185,7 +13185,7 @@ _0811C500:
 	bl SetMainCallback2
 _0811C516:
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade

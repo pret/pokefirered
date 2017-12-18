@@ -53,7 +53,7 @@ void ResetBgs(void)
     SetTextModeAndHideBgs();
 }
 
-static void SetBgModeInternal(u8 bgMode)
+void SetBgModeInternal(u8 bgMode)
 {
     sGpuBgConfigs.bgVisibilityAndMode &= 0xFFF8;
     sGpuBgConfigs.bgVisibilityAndMode |= bgMode;

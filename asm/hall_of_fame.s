@@ -19,7 +19,7 @@ sub_80F1DAC: @ 80F1DAC
 sub_80F1DC0: @ 80F1DC0
 	push {lr}
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade

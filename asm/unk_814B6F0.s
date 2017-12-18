@@ -466,7 +466,7 @@ sub_814BA6C: @ 814BA6C
 sub_814BA80: @ 814BA80
 	push {lr}
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	pop {r0}

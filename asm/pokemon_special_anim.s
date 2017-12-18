@@ -225,7 +225,7 @@ sub_811C6E8: @ 811C6E8
 	thumb_func_start sub_811C6FC
 sub_811C6FC: @ 811C6FC
 	push {lr}
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer

@@ -2359,7 +2359,7 @@ sub_8011100: @ 8011100
 	sub sp, 0x4
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks
 	ldr r0, _08011160 @ =gMain

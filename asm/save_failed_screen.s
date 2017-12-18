@@ -399,7 +399,7 @@ sub_80F5404: @ 80F5404
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0x3
-	bl sub_8002EA8
+	bl GenerateFontHalfRowLookupTable
 	add r1, sp, 0xC
 	ldr r2, _080F544C @ =0x00001111
 	adds r0, r2, 0

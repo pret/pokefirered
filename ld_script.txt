@@ -87,6 +87,7 @@ SECTIONS {
         src/dma3_manager.o(.text);
         src/bg.o(.text);
         src/malloc.o(.text);
+        src/text_printer.o(.text);
         asm/text_printer.o(.text);
         asm/window.o(.text);
         asm/blit.o(.text);
@@ -394,6 +395,7 @@ SECTIONS {
         src/main.o(.rodata);
         src/bg.o(.rodata);
         src/malloc.o(.rodata);
+        src/text_printer.o(.rodata);
         data/data.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

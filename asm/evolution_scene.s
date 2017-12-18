@@ -1095,7 +1095,7 @@ sub_80CE710: @ 80CE710
 	push {lr}
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks
 	pop {r0}
@@ -1107,7 +1107,7 @@ sub_80CE72C: @ 80CE72C
 	push {lr}
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks
 	pop {r0}

@@ -1,8 +1,5 @@
 	.section .rodata
 
-gUnknown_81EA044:: @ 81EA044
-	.incbin "baserom.gba", 0x1EA044, 0x100
-
 gUnknown_81EA144:: @ 81EA144
 	.incbin "baserom.gba", 0x1EA144, 0x8
 

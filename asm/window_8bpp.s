@@ -19,7 +19,7 @@ AddWindow8Bit: @ 8005038
 	push {r5-r7}
 	mov r9, r0
 	movs r6, 0
-	ldr r1, _08005100 @ =gUnknown_20204B4
+	ldr r1, _08005100 @ =gWindows
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	beq _08005066
@@ -112,12 +112,12 @@ _080050FA:
 	movs r0, 0xFF
 	b _0800512E
 	.align 2, 0
-_08005100: .4byte gUnknown_20204B4
+_08005100: .4byte gWindows
 _08005104: .4byte gUnknown_3003E40
 _08005108: .4byte 0x0000ffff
 _0800510C: .4byte nullsub_7
 _08005110:
-	ldr r1, _0800513C @ =gUnknown_20204B4
+	ldr r1, _0800513C @ =gWindows
 	lsls r2, r6, 1
 	adds r2, r6
 	lsls r2, 2
@@ -141,7 +141,7 @@ _0800512E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800513C: .4byte gUnknown_20204B4
+_0800513C: .4byte gWindows
 	thumb_func_end AddWindow8Bit
 
 	thumb_func_start FillWindowPixelBuffer8Bit
@@ -151,7 +151,7 @@ FillWindowPixelBuffer8Bit: @ 8005140
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r6, _0800517C @ =gUnknown_20204B4
+	ldr r6, _0800517C @ =gWindows
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r4, r1, 2
@@ -179,7 +179,7 @@ _08005176:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800517C: .4byte gUnknown_20204B4
+_0800517C: .4byte gWindows
 	thumb_func_end FillWindowPixelBuffer8Bit
 
 	thumb_func_start FillWindowPixelRect8Bit
@@ -209,7 +209,7 @@ FillWindowPixelRect8Bit: @ 8005180
 	lsls r4, 16
 	lsrs r4, 16
 	mov r8, r4
-	ldr r5, _08005200 @ =gUnknown_20204B4
+	ldr r5, _08005200 @ =gWindows
 	lsls r4, r0, 1
 	adds r4, r0
 	lsls r4, 2
@@ -247,7 +247,7 @@ FillWindowPixelRect8Bit: @ 8005180
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08005200: .4byte gUnknown_20204B4
+_08005200: .4byte gWindows
 _08005204: .4byte 0xffff0000
 _08005208: .4byte 0x0000ffff
 	thumb_func_end FillWindowPixelRect8Bit
@@ -303,7 +303,7 @@ BlitBitmapRectToWindow4BitTo8Bit: @ 800520C
 	lsrs r4, 16
 	orrs r4, r5
 	str r4, [sp, 0x1C]
-	ldr r1, _080052D0 @ =gUnknown_20204B4
+	ldr r1, _080052D0 @ =gWindows
 	lsls r5, r0, 1
 	adds r5, r0
 	lsls r5, 2
@@ -350,7 +350,7 @@ BlitBitmapRectToWindow4BitTo8Bit: @ 800520C
 	bx r0
 	.align 2, 0
 _080052CC: .4byte 0x0000ffff
-_080052D0: .4byte gUnknown_20204B4
+_080052D0: .4byte gWindows
 _080052D4: .4byte 0xffff0000
 	thumb_func_end BlitBitmapRectToWindow4BitTo8Bit
 
@@ -366,7 +366,7 @@ CopyWindowToVram8Bit: @ 80052D8
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08005310 @ =gUnknown_20204B4
+	ldr r0, _08005310 @ =gWindows
 	adds r3, r1, r0
 	str r3, [r6]
 	ldr r4, _08005314 @ =gUnknown_2020638
@@ -384,7 +384,7 @@ CopyWindowToVram8Bit: @ 80052D8
 	b _08005348
 	.align 2, 0
 _0800530C: .4byte gUnknown_2020634
-_08005310: .4byte gUnknown_20204B4
+_08005310: .4byte gWindows
 _08005314: .4byte gUnknown_2020638
 _08005318:
 	cmp r5, 0x3
@@ -422,7 +422,7 @@ GetNumActiveWindowsOnBg8Bit: @ 8005350
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r2, _08005378 @ =gUnknown_20204B4
+	ldr r2, _08005378 @ =gWindows
 	movs r1, 0x1F
 _0800535C:
 	ldrb r0, [r2]
@@ -441,7 +441,7 @@ _08005368:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08005378: .4byte gUnknown_20204B4
+_08005378: .4byte gWindows
 	thumb_func_end GetNumActiveWindowsOnBg8Bit
 
 	.align 2, 0 @ Don't pad with nop.

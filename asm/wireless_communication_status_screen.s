@@ -13,7 +13,7 @@ sub_814F19C: @ 814F19C
 	cmp r0, 0
 	bne _0814F1BC
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
@@ -147,7 +147,7 @@ sub_814F1E4: @ 814F1E4
 	ldr r0, _0814F328 @ =sub_814F19C
 	bl SetMainCallback2
 	bl RunTasks
-	bl sub_8002DE8
+	bl RunTextPrinters
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade

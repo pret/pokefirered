@@ -8,20 +8,9 @@
 
 	.include "src/bg.o"
 	.include "src/malloc.o"
+	.include "src/text_printer.o"
 
-	.align 2
-gUnknown_3000A40: @ 3000A40
-	.space 0xA2
-
-gUnknown_3000AE2: @ 3000AE2
-	.space 0x2
-
-gUnknown_3000AE4: @ 3000AE4
-	.space 0x2
-
-gUnknown_3000AE6: @ 3000AE6
-	.space 0x2
-
+    .align 2
 gUnknown_3000AE8: @ 3000AE8
 	.space 0x80
 

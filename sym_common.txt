@@ -1,20 +1,6 @@
 	.include "main.o"
 	.include "bg.o"
-
-gUnknown_3003D90: @ 3003D90
-	.space 0x10
-
-gUnknown_3003DA0: @ 3003DA0
-	.space 0x20
-
-gUnknown_3003DC0: @ 3003DC0
-	.space 0x20
-
-gUnknown_3003DE0: @ 3003DE0
-	.space 0x20
-
-gUnknown_3003E00: @ 3003E00
-	.space 0x20
+	.include "text_printer.o"
 
 gUnknown_3003E20: @ 3003E20
 	.space 0x10

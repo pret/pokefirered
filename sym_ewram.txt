@@ -28,14 +28,7 @@ gUnknown_201FF00: @ 201FF00
 gTrainerId: @ 2020000
 	.space 0x4
 
-gUnknown_2020004: @ 2020004
-	.space 0x4
-
-gUnknown_2020008: @ 2020008
-	.space 0x4
-
-gUnknown_202000C: @ 202000C
-	.space 0x4
+	.include "src/malloc.o"
 
 gUnknown_2020010: @ 2020010
 	.space 0x24

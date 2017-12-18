@@ -7,14 +7,9 @@
 	.space 0x4
 
 	.include "src/bg.o"
+	.include "src/malloc.o"
 
 	.align 2
-gUnknown_3000A38: @ 3000A38
-	.space 0x4
-
-gUnknown_3000A3C: @ 3000A3C
-	.space 0x4
-
 gUnknown_3000A40: @ 3000A40
 	.space 0xA2
 

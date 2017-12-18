@@ -644,11 +644,11 @@ _0809AFCA:
 sub_809AFD0: @ 809AFD0
 	push {lr}
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0809B070 @ =gUnknown_83DF0C4
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r0, _0809B074 @ =gUnknown_2039958
 	ldr r1, [r0]
 	movs r0, 0x1

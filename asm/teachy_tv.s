@@ -239,11 +239,11 @@ sub_815AD88: @ 815AD88
 	push {r4,lr}
 	bl sub_80BF7C8
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0815AE20 @ =gUnknown_84792E0
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r4, _0815AE24 @ =gUnknown_203F450
 	ldr r1, [r4]
 	adds r1, 0x4

@@ -66,11 +66,11 @@ _081420D6:
 	bl ResetTasks
 	bl remove_some_task
 	movs r0, 0x1
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _081421E0 @ =gUnknown_8466D60
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0

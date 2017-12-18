@@ -395,11 +395,11 @@ sub_813D07C: @ 813D07C
 	movs r1, 0
 	bl memset
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0813D0E0 @ =gUnknown_846434C
 	movs r0, 0
 	movs r2, 0x3
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r1, [r4]
 	adds r1, 0xC
 	movs r0, 0x1

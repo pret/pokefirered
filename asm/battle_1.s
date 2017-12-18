@@ -178,11 +178,11 @@ _0800F320: .4byte gUnknown_824EE34
 sub_800F324: @ 800F324
 	push {lr}
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0800F344 @ =gUnknown_8248320
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r0, _0800F348 @ =gUnknown_8248330
 	bl InitWindows
 	bl DeactivateAllTextPrinters

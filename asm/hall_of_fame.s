@@ -1407,7 +1407,7 @@ _080F28B6:
 	movs r0, 0x3
 	bl UnsetBgTilemapBuffer
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	adds r0, r6, 0
 	bl DestroyTask
 	ldr r4, _080F292C @ =gUnknown_203AB3C
@@ -2305,7 +2305,7 @@ sub_80F3030: @ 80F3030
 	movs r0, 0x3
 	bl UnsetBgTilemapBuffer
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	adds r0, r5, 0
 	bl DestroyTask
 	ldr r5, _080F309C @ =gUnknown_203AB3C
@@ -3095,11 +3095,11 @@ _080F36F4: .4byte gUnknown_840C258
 sub_80F36F8: @ 80F36F8
 	push {r4,lr}
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _080F3764 @ =gUnknown_840C228
 	movs r0, 0
 	movs r2, 0x3
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r4, _080F3768 @ =gUnknown_203AB3C
 	ldr r1, [r4]
 	adds r1, 0x6

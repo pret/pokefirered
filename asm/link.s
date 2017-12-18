@@ -3269,11 +3269,11 @@ _0800AD30:
 	ldr r0, _0800ADF8 @ =sub_800978C
 	bl SetVBlankCallback
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0800ADFC @ =gUnknown_82345E8
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r4, _0800AE00 @ =gUnknown_2022860
 	movs r0, 0x80
 	lsls r0, 4

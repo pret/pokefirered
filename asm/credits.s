@@ -1225,11 +1225,11 @@ _080F4374:
 	bl ResetSpriteData
 	bl ResetTasks
 	movs r0, 0x1
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _080F44A8 @ =gUnknown_840C5A4
 	movs r0, 0x1
 	movs r2, 0x3
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0x80
 	lsls r0, 4
 	bl Alloc
@@ -1594,11 +1594,11 @@ _080F46A0:
 	bl ResetSpriteData
 	bl ResetTasks
 	movs r0, 0x1
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _080F4778 @ =gUnknown_840C5A4
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0

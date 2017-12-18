@@ -578,11 +578,11 @@ sub_811EECC: @ 811EECC
 	adds r2, r4, 0
 	bl memset
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0811EF38 @ =gUnknown_8459EB8
 	movs r0, 0
 	movs r2, 0x3
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r1, [r5]
 	movs r0, 0x1
 	bl SetBgTilemapBuffer

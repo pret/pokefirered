@@ -1,8 +1,5 @@
 	.section .rodata
 
-gUnknown_81E9F64:: @ 81E9F64
-	.incbin "baserom.gba", 0x1E9F64, 0x4
-
 gUnknown_81E9F68:: @ 81E9F68
 	.incbin "baserom.gba", 0x1E9F68, 0x38
 

@@ -6,25 +6,9 @@
 
 	.space 0x4
 
+	.include "src/bg.o"
+
 	.align 2
-gUnknown_30008D0: @ 30008D0
-	.space 0x18
-
-gUnknown_30008E8: @ 30008E8
-	.space 0x4
-
-gUnknown_30008EC: @ 30008EC
-	.space 0x8
-
-gUnknown_30008F4: @ 30008F4
-	.space 0x34
-
-gUnknown_3000928: @ 3000928
-	.space 0x10
-
-gUnknown_3000938: @ 3000938
-	.space 0x100
-
 gUnknown_3000A38: @ 3000A38
 	.space 0x4
 

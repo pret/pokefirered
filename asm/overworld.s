@@ -3074,11 +3074,11 @@ sub_80562B0: @ 80562B0
 	bl MoveSaveBlocks_ResetHeap_
 	bl sub_8056E80
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08056344 @ =gUnknown_826D320
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0x1
 	movs r1, 0x5
 	movs r2, 0x1
@@ -3138,11 +3138,11 @@ sub_8056354: @ 8056354
 	mov r6, r8
 	push {r6}
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _080563E0 @ =gUnknown_826D320
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0x1
 	movs r1, 0x5
 	movs r2, 0x1

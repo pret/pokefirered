@@ -274,11 +274,11 @@ _080BEDE6:
 	b _080BF0F4
 _080BEE40:
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _080BEE6C @ =gUnknown_83EE998
 	movs r0, 0
 	movs r2, 0x3
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r4, _080BEE70 @ =gUnknown_20399C4
 	ldr r1, [r4]
 	adds r1, 0xFC

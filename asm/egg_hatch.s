@@ -579,11 +579,11 @@ _08047090:
 	strh r0, [r1]
 	bl reset_temp_tile_data_buffers
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08047158 @ =gUnknown_826019C
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0

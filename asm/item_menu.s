@@ -533,11 +533,11 @@ sub_81081D0: @ 81081D0
 	adds r2, r4, 0
 	bl memset
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08108234 @ =gUnknown_8452CF4
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r1, [r5]
 	movs r0, 0x1
 	bl SetBgTilemapBuffer

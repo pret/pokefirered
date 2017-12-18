@@ -6036,11 +6036,11 @@ _080FFFBC:
 	.4byte _081000B8
 _080FFFD4:
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08100028 @ =gUnknown_843F8A0
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r4, _0810002C @ =gUnknown_203ACEC
 	ldr r1, [r4]
 	movs r0, 0xB0

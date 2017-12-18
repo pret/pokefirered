@@ -79,11 +79,11 @@ _08078946:
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _080789E8 @ =gUnknown_83BFB74
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0

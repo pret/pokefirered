@@ -71,11 +71,11 @@ sub_80E469C: @ 80E469C
 	push {r4,r5,lr}
 	sub sp, 0xC
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _080E4774 @ =gUnknown_83FFA3C
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	bl reset_temp_tile_data_buffers
 	ldr r0, _080E4778 @ =gUnknown_83FFA44
 	bl InitWindows

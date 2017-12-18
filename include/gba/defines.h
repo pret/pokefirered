@@ -15,6 +15,11 @@
 #define INTR_CHECK     (*(u16 *)0x3007FF8)
 #define INTR_VECTOR    (*(void **)0x3007FFC)
 
+#define EWRAM_START 0x02000000
+#define EWRAM_END   (EWRAM_START + 0x40000)
+#define IWRAM_START 0x03000000
+#define IWRAM_END   (IWRAM_START + 0x8000)
+
 #define PLTT      0x5000000
 #define PLTT_SIZE 0x400
 
@@ -29,9 +34,11 @@
 
 #define BG_VRAM           VRAM
 #define BG_VRAM_SIZE      0x10000
-#define BG_CHAR_ADDR(n)   (void *)(BG_VRAM + (0x4000 * (n)))
-#define BG_SCREEN_ADDR(n) (void *)(BG_VRAM + (0x800 * (n)))
-#define BG_TILE_ADDR(n)    (void *)(BG_VRAM + (0x80 * (n)))
+#define BG_CHAR_SIZE      0x4000
+#define BG_SCREEN_SIZE    0x800
+#define BG_CHAR_ADDR(n)   (void *)(BG_VRAM + (BG_CHAR_SIZE * (n)))
+#define BG_SCREEN_ADDR(n) (void *)(BG_VRAM + (BG_SCREEN_SIZE * (n)))
+#define BG_TILE_ADDR(n)   (void *)(BG_VRAM + (0x80 * (n)))
 
 // text-mode BG
 #define OBJ_VRAM0      (void *)(VRAM + 0x10000)
@@ -43,6 +50,8 @@
 
 #define OAM      0x7000000
 #define OAM_SIZE 0x400
+
+#define ROM_HEADER_SIZE   0xC0
 
 #define DISPLAY_WIDTH  240
 #define DISPLAY_HEIGHT 160

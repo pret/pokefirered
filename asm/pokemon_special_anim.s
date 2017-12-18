@@ -1563,11 +1563,11 @@ sub_811D184: @ 811D184
 	movs r1, 0
 	bl SetGpuReg
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0811D270 @ =gUnknown_8459980
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r0, _0811D274 @ =gUnknown_8459988
 	bl InitWindows
 	movs r0, 0

@@ -18,7 +18,7 @@ sub_80CA53C: @ 80CA53C
 	bne _080CA564
 	bl FreeAllWindowBuffers
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r0, _080CA570 @ =sub_80F2978

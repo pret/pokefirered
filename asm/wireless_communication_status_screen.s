@@ -57,11 +57,11 @@ sub_814F1E4: @ 814F1E4
 	movs r0, 0
 	bl SetVBlankCallback
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0814F30C @ =gUnknown_846FA74
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r4, 0x80
 	lsls r4, 4
 	adds r0, r4, 0

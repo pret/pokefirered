@@ -85,7 +85,7 @@ SECTIONS {
         src/main.o(.text);
         src/gpu_regs.o(.text);
         src/dma3_manager.o(.text);
-        asm/bg.o(.text);
+        src/bg.o(.text);
         asm/malloc.o(.text);
         asm/text_printer.o(.text);
         asm/window.o(.text);
@@ -392,6 +392,7 @@ SECTIONS {
     SUBALIGN(4)
     {
         src/main.o(.rodata);
+        src/bg.o(.rodata);
         data/data.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

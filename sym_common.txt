@@ -1,7 +1,5 @@
 	.include "main.o"
-
-gUnknown_3003D8C: @ 3003D8C
-	.space 0x4
+	.include "bg.o"
 
 gUnknown_3003D90: @ 3003D90
 	.space 0x10

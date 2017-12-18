@@ -2992,11 +2992,11 @@ sub_8129B14: @ 8129B14
 	cmp r0, 0
 	beq _08129B70
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08129B68 @ =gUnknown_845AA84
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r0, _08129B6C @ =gUnknown_845AA94
 	bl InitWindows
 	bl reset_temp_tile_data_buffers

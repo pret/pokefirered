@@ -11239,11 +11239,11 @@ _08155EC6:
 	movs r1, 0
 	bl SetGpuReg
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08155FD8 @ =gUnknown_847565C
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0

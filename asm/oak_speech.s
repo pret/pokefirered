@@ -416,11 +416,11 @@ _0812EC44:
 	b _0812EE94
 _0812EC8E:
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0812ECF0 @ =gUnknown_8462E58
 	movs r0, 0x1
 	movs r2, 0x3
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r4, _0812ECF4 @ =gUnknown_203B108
 	ldr r1, [r4]
 	movs r0, 0xE1
@@ -4391,11 +4391,11 @@ _08130D10: .4byte 0x05000002
 _08130D14: .4byte 0x810001ff
 _08130D18:
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08130D70 @ =gUnknown_8462E58
 	movs r0, 0x1
 	movs r2, 0x3
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r4, _08130D74 @ =gUnknown_203B108
 	ldr r1, [r4]
 	movs r0, 0xE1

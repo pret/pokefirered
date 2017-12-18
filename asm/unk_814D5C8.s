@@ -75,11 +75,11 @@ _0814D660:
 	b _0814D878
 _0814D66E:
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0814D6F0 @ =gUnknown_846E3CC
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0xE0
 	lsls r0, 1
 	adds r1, r5, r0

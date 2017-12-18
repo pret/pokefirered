@@ -103,7 +103,7 @@ sub_80F8180: @ 80F8180
 	ldr r1, _080F8198 @ =gUnknown_843EBB0
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0
 	bl ShowBg
 	pop {r0}

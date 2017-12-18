@@ -3474,11 +3474,11 @@ _081411D0:
 	bl SetGpuReg
 	bl sub_80F6C14
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _081413A0 @ =gUnknown_8466B10
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r0, _081413A4 @ =gUnknown_8466B20
 	bl InitWindows
 	ldr r1, _081413A8 @ =0x0000205c

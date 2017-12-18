@@ -1771,11 +1771,11 @@ _0806FB00:
 	b _0806FB64
 _0806FB12:
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0806FB34 @ =gUnknown_83A73B8
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r0, _0806FB38 @ =gUnknown_83A73BC
 	bl InitWindows
 	movs r0, 0

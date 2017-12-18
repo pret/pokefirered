@@ -1594,11 +1594,11 @@ sub_8089D0C: @ 8089D0C
 	bl ResetSpriteData
 	bl ResetPaletteFade
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08089D84 @ =gUnknown_83CD888
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0

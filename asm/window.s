@@ -69,7 +69,7 @@ _08003B88:
 	movs r2, 0
 	str r2, [sp, 0x4]
 _08003B8E:
-	ldr r0, _08003BC8 @ =gUnknown_3003D8C
+	ldr r0, _08003BC8 @ =gUnneededFireRedVariable
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _08003BCC
@@ -80,7 +80,7 @@ _08003B8E:
 	adds r0, r7, 0
 	movs r1, 0
 	movs r3, 0
-	bl sub_80014F0
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 	str r0, [sp]
 	movs r0, 0x1
 	negs r0, r0
@@ -95,7 +95,7 @@ _08003BB8: .4byte gUnknown_3003E40
 _08003BBC: .4byte nullsub_6
 _08003BC0: .4byte gUnknown_81EA144
 _08003BC4: .4byte gUnknown_20204B4
-_08003BC8: .4byte gUnknown_3003D8C
+_08003BC8: .4byte gUnneededFireRedVariable
 _08003BCC:
 	ldr r0, _08003C04 @ =gUnknown_3003E40
 	mov r9, r0
@@ -184,7 +184,7 @@ _08003C70:
 	ldr r1, [r6, 0x4]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r0, _08003CDC @ =gUnknown_3003D8C
+	ldr r0, _08003CDC @ =gUnneededFireRedVariable
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _08003CA6
@@ -198,7 +198,7 @@ _08003C70:
 	adds r0, r7, 0
 	ldr r1, [sp]
 	movs r3, 0x1
-	bl sub_80014F0
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 _08003CA6:
 	adds r6, 0x8
 	ldr r0, [sp, 0x4]
@@ -229,7 +229,7 @@ _08003CC8:
 	bx r1
 	.align 2, 0
 _08003CD8: .4byte gUnknown_20204B4
-_08003CDC: .4byte gUnknown_3003D8C
+_08003CDC: .4byte gUnneededFireRedVariable
 _08003CE0: .4byte gUnknown_3003E30
 	thumb_func_end InitWindows
 
@@ -267,7 +267,7 @@ _08003D14:
 	ldrb r7, [r0]
 	movs r1, 0
 	mov r9, r1
-	ldr r0, _08003DD8 @ =gUnknown_3003D8C
+	ldr r0, _08003DD8 @ =gUnneededFireRedVariable
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _08003D46
@@ -279,7 +279,7 @@ _08003D14:
 	adds r0, r7, 0
 	movs r1, 0
 	movs r3, 0
-	bl sub_80014F0
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 	mov r9, r0
 	movs r0, 0x1
 	negs r0, r0
@@ -356,7 +356,7 @@ _08003DCE:
 	b _08003E24
 	.align 2, 0
 _08003DD4: .4byte gUnknown_20204B4
-_08003DD8: .4byte gUnknown_3003D8C
+_08003DD8: .4byte gUnneededFireRedVariable
 _08003DDC: .4byte gUnknown_3003E40
 _08003DE0: .4byte 0x0000ffff
 _08003DE4: .4byte nullsub_6
@@ -375,7 +375,7 @@ _08003DE8:
 	ldr r1, [r3, 0x4]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r0, _08003E38 @ =gUnknown_3003D8C
+	ldr r0, _08003E38 @ =gUnneededFireRedVariable
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _08003E22
@@ -388,7 +388,7 @@ _08003DE8:
 	adds r0, r7, 0
 	mov r1, r9
 	movs r3, 0x1
-	bl sub_80014F0
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 _08003E22:
 	adds r0, r6, 0
 _08003E24:
@@ -402,7 +402,7 @@ _08003E24:
 	bx r1
 	.align 2, 0
 _08003E34: .4byte gUnknown_20204B4
-_08003E38: .4byte gUnknown_3003D8C
+_08003E38: .4byte gUnneededFireRedVariable
 	thumb_func_end AddWindow
 
 	thumb_func_start RemoveWindow
@@ -417,7 +417,7 @@ RemoveWindow: @ 8003E3C
 	adds r4, r0, r1
 	ldrb r3, [r4]
 	adds r7, r3, 0
-	ldr r0, _08003EBC @ =gUnknown_3003D8C
+	ldr r0, _08003EBC @ =gUnneededFireRedVariable
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _08003E68
@@ -427,7 +427,7 @@ RemoveWindow: @ 8003E3C
 	muls r2, r0
 	adds r0, r3, 0
 	movs r3, 0x2
-	bl sub_80014F0
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 _08003E68:
 	ldr r0, _08003EC0 @ =gUnknown_81EA144
 	ldr r1, [r0, 0x4]
@@ -469,7 +469,7 @@ _08003EB0:
 	bx r0
 	.align 2, 0
 _08003EB8: .4byte gUnknown_20204B4
-_08003EBC: .4byte gUnknown_3003D8C
+_08003EBC: .4byte gUnneededFireRedVariable
 _08003EC0: .4byte gUnknown_81EA144
 _08003EC4: .4byte gUnknown_3003E40
 _08003EC8: .4byte nullsub_6

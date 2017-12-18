@@ -122,11 +122,11 @@ _0812C456:
 	bl AllocZeroed
 	str r0, [r5]
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0812C4BC @ =gUnknown_845FBF4
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r1, [r6]
 	movs r0, 0x3
 	bl SetBgTilemapBuffer

@@ -30,11 +30,11 @@ sub_804C600: @ 804C600
 	movs r2, 0x14
 	bl LoadPalette
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0804C704 @ =gUnknown_8261F1C
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r0, _0804C708 @ =gUnknown_2031DA8
 	ldr r1, [r0]
 	movs r0, 0x8F
@@ -7810,11 +7810,11 @@ sub_80504CC: @ 80504CC
 	movs r1, 0
 	bl SetGpuReg
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _080505B4 @ =gUnknown_826D1D4
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0

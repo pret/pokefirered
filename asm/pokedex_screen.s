@@ -60,11 +60,11 @@ sub_810250C: @ 810250C
 	bl ResetTasks
 	bl remove_some_task
 	movs r0, 0x1
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08102598 @ =gUnknown_8451EBC
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r4, 0x80
 	lsls r4, 4
 	adds r0, r4, 0

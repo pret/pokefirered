@@ -6717,7 +6717,7 @@ sub_808EFE4: @ 808EFE4
 	ldr r1, _0808F030 @ =gUnknown_83CEA50
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r1, _0808F034 @ =gUnknown_8E9C438
 	movs r0, 0
 	str r0, [sp]

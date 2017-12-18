@@ -12930,11 +12930,11 @@ _0811C2C0:
 	bl FreeAllSpritePalettes
 	bl ResetTasks
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0811C354 @ =gUnknown_8457194
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	bl reset_temp_tile_data_buffers
 	ldr r0, _0811C358 @ =gUnknown_8457198
 	bl InitWindows

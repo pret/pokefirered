@@ -4786,11 +4786,11 @@ _08149DEE:
 	b _08149F5A
 _08149DF0:
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08149EE8 @ =gUnknown_846D8D4
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r0, _08149EEC @ =gUnknown_846D8E4
 	bl InitWindows
 	bl sub_80F6C14

@@ -420,11 +420,11 @@ _080EC8A0:
 	movs r1, 0
 	bl FillPalette
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _080EC940 @ =gUnknown_840BB80
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	b _080EC9B8
 	.align 2, 0
 _080EC928: .4byte gMain
@@ -1137,7 +1137,7 @@ _080ECED8:
 	ldr r1, _080ECF54 @ =gUnknown_840BB88
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r1, _080ECF58 @ =gUnknown_84048EC
 	movs r0, 0
 	str r0, [sp]
@@ -1469,7 +1469,7 @@ _080ED1C4:
 	ldr r1, _080ED208 @ =gUnknown_840BB90
 	movs r0, 0
 	movs r2, 0x4
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r1, _080ED20C @ =gUnknown_8405414
 	movs r0, 0
 	str r0, [sp]
@@ -1841,7 +1841,7 @@ _080ED4E4:
 	ldr r1, _080ED590 @ =gUnknown_840BBA0
 	movs r0, 0
 	movs r2, 0x2
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	ldr r1, _080ED594 @ =gUnknown_8407470
 	str r4, [sp]
 	movs r0, 0x1

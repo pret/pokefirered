@@ -119,11 +119,11 @@ sub_800C318: @ 800C318
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	movs r0, 0
-	bl sub_8001618
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _0800C4B4 @ =gUnknown_8234690
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8001658
+	bl InitBgsFromTemplates
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0

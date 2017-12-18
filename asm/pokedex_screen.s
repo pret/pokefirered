@@ -7458,7 +7458,7 @@ _081061F0:
 	add r2, r9
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80048BC
+	bl SetWindowAttribute
 	ldr r0, [r5]
 	adds r0, 0x4A
 	ldrb r0, [r0]
@@ -7508,7 +7508,7 @@ _08106246:
 	add r2, r9
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80048BC
+	bl SetWindowAttribute
 	ldr r0, [r5]
 	adds r0, 0x4A
 	adds r0, r6
@@ -7656,7 +7656,7 @@ _081062B4:
 	add r2, r9
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80048BC
+	bl SetWindowAttribute
 	ldr r0, [r7]
 	adds r0, 0x54
 	ldrb r0, [r0]

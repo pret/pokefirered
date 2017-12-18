@@ -89,7 +89,7 @@ SECTIONS {
         src/malloc.o(.text);
         src/text_printer.o(.text);
         asm/text_printer.o(.text);
-        asm/window.o(.text);
+        src/window.o(.text);
         asm/blit.o(.text);
         asm/window_8bpp.o(.text);
         asm/text.o(.text);
@@ -396,6 +396,7 @@ SECTIONS {
         src/bg.o(.rodata);
         src/malloc.o(.rodata);
         src/text_printer.o(.rodata);
+        src/window.o(.rodata);
         data/data.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

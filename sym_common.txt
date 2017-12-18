@@ -5,10 +5,10 @@
 gUnknown_3003E20: @ 3003E20
 	.space 0x10
 
-gUnknown_3003E30: @ 3003E30
+gWindowClearTile: @ 3003E30
 	.space 0x10
 
-gUnknown_3003E40: @ 3003E40
+gWindowBgTilemapBuffers: @ 3003E40
 	.space 0x10
 
 gUnknown_3003E50: @ 3003E50

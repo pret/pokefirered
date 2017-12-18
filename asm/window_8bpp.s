@@ -41,7 +41,7 @@ _08005066:
 	beq _080050FA
 	mov r0, r9
 	ldrb r7, [r0]
-	ldr r1, _08005104 @ =gUnknown_3003E40
+	ldr r1, _08005104 @ =gWindowBgTilemapBuffers
 	mov r10, r1
 	lsls r2, r7, 2
 	mov r8, r2
@@ -98,7 +98,7 @@ _080050C2:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080050FA
-	ldr r0, _08005104 @ =gUnknown_3003E40
+	ldr r0, _08005104 @ =gWindowBgTilemapBuffers
 	lsls r1, r7, 2
 	adds r5, r1, r0
 	ldr r1, [r5]
@@ -113,7 +113,7 @@ _080050FA:
 	b _0800512E
 	.align 2, 0
 _08005100: .4byte gWindows
-_08005104: .4byte gUnknown_3003E40
+_08005104: .4byte gWindowBgTilemapBuffers
 _08005108: .4byte 0x0000ffff
 _0800510C: .4byte nullsub_7
 _08005110:

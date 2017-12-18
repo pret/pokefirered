@@ -470,11 +470,11 @@ sub_8107208: @ 8107208
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x1
 	adds r2, r3, 0
-	bl sub_80048BC
+	bl SetWindowAttribute
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl sub_80048BC
+	bl SetWindowAttribute
 	pop {r4,r5}
 	pop {r0}
 	bx r0

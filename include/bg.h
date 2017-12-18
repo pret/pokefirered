@@ -23,6 +23,13 @@ enum
     BG_CTRL_ATTR_WRAPAROUND = 8,
 };
 
+enum BgTileAllocMode
+{
+    BG_TILE_FIND_FREE_SPACE,
+    BG_TILE_ALLOC,
+    BG_TILE_FREE,
+};
+
 struct BgTemplate
 {
     u32 bg:2;                   // 0x1, 0x2 -> 0x3
@@ -43,8 +50,8 @@ u16 GetBgControlAttribute(u8 bg, u8 attributeId);
 u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode);
 void SetTextModeAndHideBgs(void);
 bool8 IsInvalidBg(u8 bg);
-int DummiedOutFireRedLeafGreenTileAllocFunc(int bg, int offset, int count, int mode);
-void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable);
+int BgTileAllocOp(int bg, int offset, int count, int mode);
+void ResetBgsAndClearDma3BusyFlags(bool32 enableWindowTileAutoAlloc);
 void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numTemplates);
 void InitBgFromTemplate(const struct BgTemplate *template);
 void SetBgMode(u8 bgMode);

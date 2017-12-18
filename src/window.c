@@ -1,23 +1,16 @@
 #include "global.h"
 #include "window.h"
 #include "malloc.h"
+#include "bg.h"
 
 extern u8 gWindowClearTile;
 extern void* gWindowBgTilemapBuffers[];
-extern u32 gUnneededFireRedVariable;
+extern u32 gWindowTileAutoAllocEnabled;
 
 #define WINDOWS_MAX  32
 
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 
-extern void* GetBgTilemapBuffer(u8 bg);
-extern int DummiedOutFireRedLeafGreenTileAllocFunc(int, int, int, int);
-extern u16 GetBgAttribute(u8 bg, u8 attributeId);
-extern void SetBgTilemapBuffer(u8 bg, void *tilemap);
-extern void CopyBgTilemapBufferToVram(u8 bg);
-extern u8 LoadBgTiles(u8 bg, void *src, u16 size, u16 destOffset);
-extern void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, u16 tileNumDelta);
-extern void FillBgTilemapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette);
 extern void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey);
 extern void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey, u8 paletteNum);
 extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
@@ -59,9 +52,9 @@ bool16 InitWindows(const struct WindowTemplate *templates)
 
     for (i = 0, allocatedBaseBlock = 0, bgLayer = templates[i].priority; bgLayer != 0xFF && i < 0x20; ++i, bgLayer = templates[i].priority)
     {
-        if (gUnneededFireRedVariable == 1)
+        if (gWindowTileAutoAllocEnabled == TRUE)
         {
-            allocatedBaseBlock = DummiedOutFireRedLeafGreenTileAllocFunc(bgLayer, 0, templates[i].width * templates[i].height, 0);
+            allocatedBaseBlock = BgTileAllocOp(bgLayer, 0, templates[i].width * templates[i].height, BG_TILE_FIND_FREE_SPACE);
             if (allocatedBaseBlock == -1)
                 return FALSE;
         }
@@ -104,10 +97,10 @@ bool16 InitWindows(const struct WindowTemplate *templates)
         gWindows[i].tileData = allocatedTilemapBuffer;
         gWindows[i].window = templates[i];
 
-        if (gUnneededFireRedVariable == 1)
+        if (gWindowTileAutoAllocEnabled == TRUE)
         {
             gWindows[i].window.baseBlock = allocatedBaseBlock;
-            DummiedOutFireRedLeafGreenTileAllocFunc(bgLayer, allocatedBaseBlock, templates[i].width * templates[i].height, 1);
+            BgTileAllocOp(bgLayer, allocatedBaseBlock, templates[i].width * templates[i].height, BG_TILE_ALLOC);
         }
     }
 
@@ -136,9 +129,9 @@ u16 AddWindow(const struct WindowTemplate *template)
     bgLayer = template->priority;
     allocatedBaseBlock = 0;
 
-    if (gUnneededFireRedVariable == 1)
+    if (gWindowTileAutoAllocEnabled == TRUE)
     {
-        allocatedBaseBlock = DummiedOutFireRedLeafGreenTileAllocFunc(bgLayer, 0, template->width * template->height, 0);
+        allocatedBaseBlock = BgTileAllocOp(bgLayer, 0, template->width * template->height, BG_TILE_FIND_FREE_SPACE);
 
         if (allocatedBaseBlock == -1)
             return 0xFF;
@@ -178,10 +171,10 @@ u16 AddWindow(const struct WindowTemplate *template)
     gWindows[win].tileData = allocatedTilemapBuffer;
     gWindows[win].window = *template;
 
-    if (gUnneededFireRedVariable == 1)
+    if (gWindowTileAutoAllocEnabled == TRUE)
     {
         gWindows[win].window.baseBlock = allocatedBaseBlock;
-        DummiedOutFireRedLeafGreenTileAllocFunc(bgLayer, allocatedBaseBlock, gWindows[win].window.width * gWindows[win].window.height, 1);
+        BgTileAllocOp(bgLayer, allocatedBaseBlock, gWindows[win].window.width * gWindows[win].window.height, BG_TILE_ALLOC);
     }
 
     return win;
@@ -191,9 +184,9 @@ void RemoveWindow(u8 windowId)
 {
     u8 bgLayer = gWindows[windowId].window.priority;
 
-    if (gUnneededFireRedVariable == 1)
+    if (gWindowTileAutoAllocEnabled == TRUE)
     {
-        DummiedOutFireRedLeafGreenTileAllocFunc(bgLayer, gWindows[windowId].window.baseBlock, gWindows[windowId].window.width * gWindows[windowId].window.height, 2);
+        BgTileAllocOp(bgLayer, gWindows[windowId].window.baseBlock, gWindows[windowId].window.width * gWindows[windowId].window.height, BG_TILE_FREE);
     }
 
     gWindows[windowId].window = sDummyWindowTemplate;

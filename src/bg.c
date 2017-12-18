@@ -42,7 +42,7 @@ static struct BgConfig2 sGpuBgConfigs2[4];
 static u32 sDmaBusyBitfield[4];
 static u8 gpu_tile_allocation_map_bg[0x100];
 
-u32 gUnneededFireRedVariable;
+u32 gWindowTileAutoAllocEnabled;
 
 static const struct BgConfig sZeroedBgControlStruct = { 0 };
 
@@ -283,7 +283,7 @@ bool8 IsInvalidBg(u8 bg)
     return FALSE;
 }
 
-int DummiedOutFireRedLeafGreenTileAllocFunc(int bg, int offset, int count, int mode)
+int BgTileAllocOp(int bg, int offset, int count, int mode)
 {
     int start, end;
     int blockSize;
@@ -292,7 +292,7 @@ int DummiedOutFireRedLeafGreenTileAllocFunc(int bg, int offset, int count, int m
 
     switch (mode)
     {
-    case 0:
+    case BG_TILE_FIND_FREE_SPACE:
         start = GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX) * (BG_CHAR_SIZE / TILE_SIZE_4BPP);
         end = start + 0x400;
         if (end > 0x800)
@@ -321,13 +321,13 @@ int DummiedOutFireRedLeafGreenTileAllocFunc(int bg, int offset, int count, int m
             }
         }
         return -1;
-    case 1:
+    case BG_TILE_ALLOC:
         start = GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX) * (BG_CHAR_SIZE / TILE_SIZE_4BPP) + offset;
         end = start + count;
         for (i = start; i < end; i++)
             gpu_tile_allocation_map_bg[i / 8] |= 1 << (i % 8);
         break;
-    case 2:
+    case BG_TILE_FREE:
         start = GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX) * (BG_CHAR_SIZE / TILE_SIZE_4BPP) + offset;
         end = start + count;
         for (i = start; i < end; i++)
@@ -338,7 +338,7 @@ int DummiedOutFireRedLeafGreenTileAllocFunc(int bg, int offset, int count, int m
     return 0;
 }
 
-void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
+void ResetBgsAndClearDma3BusyFlags(bool32 enableWindowTileAutoAlloc)
 {
     int i;
     ResetBgs();
@@ -348,7 +348,7 @@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
         sDmaBusyBitfield[i] = 0;
     }
 
-    gUnneededFireRedVariable = leftoverFireRedLeafGreenVariable;
+    gWindowTileAutoAllocEnabled = enableWindowTileAutoAlloc;
 
     for (i = 0; i < 0x100; i++)
     {
@@ -556,9 +556,9 @@ u16 LoadBgTiles(u8 bg, const void* src, u16 size, u16 destOffset)
 
     sDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
 
-    if (gUnneededFireRedVariable == 1)
+    if (gWindowTileAutoAllocEnabled == TRUE)
     {
-        DummiedOutFireRedLeafGreenTileAllocFunc(bg, tileOffset / 0x20, size / 0x20, 1);
+        BgTileAllocOp(bg, tileOffset / 0x20, size / 0x20, BG_TILE_ALLOC);
     }
 
     return cursor;

@@ -31,13 +31,9 @@ gTrainerId: @ 2020000
 	.include "src/malloc.o"
 	.include "src/text_printer.o"
 	.include "src/window.o"
+	.include "src/window_8bpp.o"
 
-gUnknown_2020634: @ 2020634
-	.space 0x4
-
-gUnknown_2020638: @ 2020638
-	.space 0x4
-
+	.align 2
 gUnknown_202063C: @ 202063C
 	.space 0x1C
 

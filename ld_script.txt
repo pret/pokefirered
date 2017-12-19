@@ -91,7 +91,7 @@ SECTIONS {
         asm/text_printer.o(.text);
         src/window.o(.text);
         asm/blit.o(.text);
-        asm/window_8bpp.o(.text);
+        src/window_8bpp.o(.text);
         asm/text.o(.text);
         asm/sprite.o(.text);
         asm/string_util.o(.text);

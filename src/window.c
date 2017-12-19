@@ -7,8 +7,6 @@ extern u8 gWindowClearTile;
 extern void* gWindowBgTilemapBuffers[];
 extern u32 gWindowTileAutoAllocEnabled;
 
-#define WINDOWS_MAX  32
-
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 
 extern void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey);

@@ -24,6 +24,8 @@ struct WindowTemplate
     u16 baseBlock;
 };
 
+#define WINDOWS_MAX 32
+
 #define DUMMY_WIN_TEMPLATE          \
 {                                   \
     0xFF,                           \

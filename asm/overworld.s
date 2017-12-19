@@ -71,7 +71,7 @@ sub_8054C48: @ 8054C48
 	push {r4,r5,lr}
 	bl sub_8054C04
 	adds r4, r0, 0
-	ldr r5, _08054C6C @ =gUnknown_2021CD0
+	ldr r5, _08054C6C @ =gStringVar1
 	bl sub_80CBF04
 	adds r3, r0, 0
 	lsls r3, 24
@@ -84,7 +84,7 @@ sub_8054C48: @ 8054C48
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054C6C: .4byte gUnknown_2021CD0
+_08054C6C: .4byte gStringVar1
 	thumb_func_end sub_8054C48
 
 	thumb_func_start sub_8054C70
@@ -6912,7 +6912,7 @@ sub_80581BC: @ 80581BC
 sub_80581C8: @ 80581C8
 	push {lr}
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_806F258
 	bl ScriptContext2_Enable
 	pop {r0}
@@ -6924,7 +6924,7 @@ sub_80581DC: @ 80581DC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -6937,7 +6937,7 @@ sub_80581DC: @ 80581DC
 sub_80581F8: @ 80581F8
 	push {lr}
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _08058210 @ =gUnknown_81BB9D4
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -6952,7 +6952,7 @@ sub_8058214: @ 8058214
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable

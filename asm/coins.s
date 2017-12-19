@@ -134,11 +134,11 @@ sub_80D060C: @ 80D060C
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _080D0668 @ =gUnknown_2021CD0
+	ldr r0, _080D0668 @ =gStringVar1
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r0, _080D066C @ =gUnknown_2021D18
+	ldr r0, _080D066C @ =gStringVar4
 	mov r9, r0
 	ldr r1, _080D0670 @ =gUnknown_84162C4
 	bl StringExpandPlaceholders
@@ -159,8 +159,8 @@ sub_80D060C: @ 80D060C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0668: .4byte gUnknown_2021CD0
-_080D066C: .4byte gUnknown_2021D18
+_080D0668: .4byte gStringVar1
+_080D066C: .4byte gStringVar4
 _080D0670: .4byte gUnknown_84162C4
 	thumb_func_end sub_80D060C
 
@@ -216,18 +216,18 @@ sub_80D06D0: @ 80D06D0
 	push {r4,lr}
 	sub sp, 0xC
 	adds r1, r0, 0
-	ldr r0, _080D071C @ =gUnknown_2021CD0
+	ldr r0, _080D071C @ =gStringVar1
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r4, _080D0720 @ =gUnknown_2021D18
+	ldr r4, _080D0720 @ =gStringVar4
 	ldr r1, _080D0724 @ =gUnknown_84162C4
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	ldr r1, _080D0728 @ =gUnknown_2039A28
 	ldrb r1, [r1]
 	movs r3, 0x40
@@ -248,8 +248,8 @@ sub_80D06D0: @ 80D06D0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D071C: .4byte gUnknown_2021CD0
-_080D0720: .4byte gUnknown_2021D18
+_080D071C: .4byte gStringVar1
+_080D0720: .4byte gStringVar4
 _080D0724: .4byte gUnknown_84162C4
 _080D0728: .4byte gUnknown_2039A28
 	thumb_func_end sub_80D06D0

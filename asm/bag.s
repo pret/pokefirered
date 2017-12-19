@@ -138,7 +138,7 @@ sub_810B958: @ 810B958
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r2, 0x48
 	subs r2, r0
 	lsrs r2, 1
@@ -174,7 +174,7 @@ sub_810B994: @ 810B994
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r3, 0x40
 	subs r3, r0
 	lsrs r3, 1

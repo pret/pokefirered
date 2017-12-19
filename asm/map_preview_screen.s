@@ -319,7 +319,7 @@ sub_80F8318: @ 80F8318
 	strb r0, [r1, 0x1]
 	movs r0, 0x3
 	strb r0, [r1, 0x2]
-	ldr r5, _080F83AC @ =gUnknown_2021D18
+	ldr r5, _080F83AC @ =gStringVar4
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -327,7 +327,7 @@ sub_80F8318: @ 80F8318
 	movs r0, 0x2
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r2, 0x68
 	subs r2, r0
 	lsrs r2, 1
@@ -356,7 +356,7 @@ sub_80F8318: @ 80F8318
 	bx r1
 	.align 2, 0
 _080F83A8: .4byte gUnknown_843EBA8
-_080F83AC: .4byte gUnknown_2021D18
+_080F83AC: .4byte gStringVar4
 	thumb_func_end sub_80F8318
 
 	thumb_func_start sub_80F83B0

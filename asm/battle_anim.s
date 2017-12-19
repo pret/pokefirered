@@ -944,7 +944,7 @@ sub_8072C08: @ 8072C08
 	ldrb r1, [r1, 0x1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, [r4]
 	adds r0, 0x2
 	str r0, [r4]

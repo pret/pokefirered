@@ -350,7 +350,7 @@ sub_80BE6F0: @ 80BE6F0
 	cmp r5, 0
 	beq _080BE728
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _080BE724 @ =gUnknown_20399C0
 	ldr r1, [r2]
 	ldrb r0, [r1, 0x5]
@@ -374,7 +374,7 @@ _080BE728:
 	cmp r4, 0
 	beq _080BE758
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _080BE754 @ =gUnknown_20399C0
 	ldr r1, [r2]
 	ldrb r0, [r1, 0x5]
@@ -395,7 +395,7 @@ _080BE758:
 	cmp r0, 0
 	beq _080BE7B4
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _080BE788 @ =gUnknown_20399C0
 	ldr r0, [r2]
 	movs r1, 0x5
@@ -444,7 +444,7 @@ _080BE7B4:
 	cmp r0, 0
 	beq _080BE7B0
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _080BE7C2:
 	movs r0, 0
 _080BE7C4:

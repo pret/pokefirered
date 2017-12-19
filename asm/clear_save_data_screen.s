@@ -219,13 +219,13 @@ sub_80F5708: @ 80F5708
 	bne _080F5792
 _080F5736:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	b _080F577A
 	.align 2, 0
 _080F5740: .4byte gUnknown_203AB54
 _080F5744:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

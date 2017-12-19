@@ -2363,7 +2363,7 @@ ScrCmd_playse: @ 806B068
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -3978,7 +3978,7 @@ _0806BC50:
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0x6
-	bl sub_8005ED4
+	bl GetStringWidth
 	strh r0, [r4]
 	movs r0, 0
 	pop {r4}
@@ -4351,14 +4351,14 @@ ScrCmd_vloadword: @ 806BF3C
 	ldr r0, _0806BF58 @ =gUnknown_20370A8
 	ldr r0, [r0]
 	subs r1, r0
-	ldr r0, _0806BF5C @ =gUnknown_2021D18
+	ldr r0, _0806BF5C @ =gStringVar4
 	bl StringExpandPlaceholders
 	movs r0, 0
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806BF58: .4byte gUnknown_20370A8
-_0806BF5C: .4byte gUnknown_2021D18
+_0806BF5C: .4byte gStringVar4
 	thumb_func_end ScrCmd_vloadword
 
 	thumb_func_start ScrCmd_vbufferstring
@@ -5273,7 +5273,7 @@ ScrCmd_opendoor: @ 806C5D4
 	bl sub_805B364
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_805B310

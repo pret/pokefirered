@@ -39516,7 +39516,7 @@ _080B538A:
 	cmp r0, 0
 	ble _080B5396
 	movs r0, 0xBD
-	bl sub_80722CC
+	bl PlaySE
 _080B5396:
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]

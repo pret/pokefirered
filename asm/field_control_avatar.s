@@ -566,7 +566,7 @@ _0806CCCC:
 	ldr r0, _0806CCF8 @ =0x0000083e
 	bl FlagSet
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_806F258
 	b _0806CB6C
 	.align 2, 0
@@ -707,7 +707,7 @@ sub_806CDF8: @ 806CDF8
 	cmp r0, 0
 	bne _0806CE18
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_806F258
 	adds r0, r4, 0
 	bl DestroyTask
@@ -805,7 +805,7 @@ _0806CEB8:
 	cmp r4, r0
 	beq _0806CECA
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0806CECA:
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
@@ -2803,7 +2803,7 @@ sub_806DE28: @ 806DE28
 	cmp r0, 0x66
 	bne _0806DE64
 	movs r0, 0x25
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r5, 0x8]
 	ldr r4, _0806DE6C @ =gSaveBlock1Ptr
 	ldr r2, [r4]
@@ -2992,7 +2992,7 @@ _0806DF98:
 	bl sub_8055A08
 	bl sp13E_warp_to_last_warp
 	movs r0, 0xE2
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	b _0806DFB2
 _0806DFB0:

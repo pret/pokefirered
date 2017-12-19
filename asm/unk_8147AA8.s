@@ -3244,7 +3244,7 @@ sub_81492D8: @ 81492D8
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, [r4]
 	adds r0, 0x4D
 	strb r5, [r0]
@@ -3429,7 +3429,7 @@ _0814945C:
 	cmp r0, 0
 	beq _08149470
 	movs r0, 0xFF
-	bl sub_80722CC
+	bl PlaySE
 	b _0814947E
 	.align 2, 0
 _0814946C: .4byte 0x000082f6
@@ -3439,7 +3439,7 @@ _08149470:
 	cmp r6, 0
 	beq _0814947E
 	movs r0, 0xA
-	bl sub_80722CC
+	bl PlaySE
 _0814947E:
 	add sp, 0x4
 	pop {r3-r5}
@@ -6561,7 +6561,7 @@ sub_814AB98: @ 814AB98
 	negs r2, r2
 	mov r9, r2
 	movs r0, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r4, 0x40
 	subs r4, r0
 	lsrs r4, 1
@@ -7377,7 +7377,7 @@ sub_814B1CC: @ 814B1CC
 	b _0814B234
 _0814B1DE:
 	movs r0, 0x1C
-	bl sub_80722CC
+	bl PlaySE
 	strh r4, [r5, 0x30]
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
@@ -7993,7 +7993,7 @@ _0814B63E:
 	movs r0, 0x2
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r3, 0xDE
 	subs r3, r0
 	lsls r3, 24

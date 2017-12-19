@@ -249,7 +249,7 @@ sub_812E6DC: @ 812E6DC
 	ldr r0, _0812E734 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r0, [r2]
-	ldr r7, _0812E738 @ =gUnknown_2021D18
+	ldr r7, _0812E738 @ =gStringVar4
 	cmp r0, 0xFF
 	beq _0812E70A
 _0812E700:
@@ -279,7 +279,7 @@ _0812E70A:
 	b _0812E75C
 	.align 2, 0
 _0812E734: .4byte gSaveBlock2Ptr
-_0812E738: .4byte gUnknown_2021D18
+_0812E738: .4byte gStringVar4
 _0812E73C:
 	lsls r3, r5, 24
 	lsrs r3, 24

@@ -213,10 +213,10 @@ EvolutionScene: @ 80CDDF4
 	movs r1, 0x2
 	mov r2, sp
 	bl GetMonData
-	ldr r0, _080CE0AC @ =gUnknown_2021CD0
+	ldr r0, _080CE0AC @ =gStringVar1
 	mov r1, sp
 	bl StringCopy10
-	ldr r0, _080CE0B0 @ =gUnknown_2021CF0
+	ldr r0, _080CE0B0 @ =gStringVar2
 	movs r1, 0xB
 	mov r2, r10
 	muls r2, r1
@@ -412,8 +412,8 @@ _080CE09C: .4byte gUnknown_2022982
 _080CE0A0: .4byte gUnknown_2022B50
 _080CE0A4: .4byte gUnknown_3003E58
 _080CE0A8: .4byte gUnknown_2039A20
-_080CE0AC: .4byte gUnknown_2021CD0
-_080CE0B0: .4byte gUnknown_2021CF0
+_080CE0AC: .4byte gStringVar1
+_080CE0B0: .4byte gStringVar2
 _080CE0B4: .4byte gUnknown_8245EE0
 _080CE0B8: .4byte gUnknown_82350AC
 _080CE0BC: .4byte gUnknown_202401C
@@ -915,10 +915,10 @@ TradeEvolutionScene: @ 80CE540
 	movs r1, 0x2
 	mov r2, sp
 	bl GetMonData
-	ldr r0, _080CE6B0 @ =gUnknown_2021CD0
+	ldr r0, _080CE6B0 @ =gStringVar1
 	mov r1, sp
 	bl StringCopy10
-	ldr r0, _080CE6B4 @ =gUnknown_2021CF0
+	ldr r0, _080CE6B4 @ =gStringVar2
 	movs r1, 0xB
 	muls r1, r5
 	ldr r2, _080CE6B8 @ =gUnknown_8245EE0
@@ -1046,7 +1046,7 @@ TradeEvolutionScene: @ 80CE540
 	strh r0, [r1]
 	ldr r0, _080CE700 @ =gUnknown_2022982
 	strh r4, [r0]
-	ldr r2, _080CE704 @ =gUnknown_3003E50
+	ldr r2, _080CE704 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x2
 	orrs r0, r1
@@ -1064,8 +1064,8 @@ TradeEvolutionScene: @ 80CE540
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CE6B0: .4byte gUnknown_2021CD0
-_080CE6B4: .4byte gUnknown_2021CF0
+_080CE6B0: .4byte gStringVar1
+_080CE6B4: .4byte gStringVar2
 _080CE6B8: .4byte gUnknown_8245EE0
 _080CE6BC: .4byte gUnknown_2021CCC
 _080CE6C0: .4byte gUnknown_2039A20
@@ -1085,7 +1085,7 @@ _080CE6F4: .4byte gUnknown_202297C
 _080CE6F8: .4byte gUnknown_202297E
 _080CE6FC: .4byte gUnknown_2022980
 _080CE700: .4byte gUnknown_2022982
-_080CE704: .4byte gUnknown_3003E50
+_080CE704: .4byte gTextFlags
 _080CE708: .4byte sub_80D00D8
 _080CE70C: .4byte sub_80CE72C
 	thumb_func_end TradeEvolutionScene
@@ -1491,7 +1491,7 @@ _080CEA90:
 	beq _080CEAA0
 	bl _080CF528
 _080CEAA0:
-	ldr r4, _080CEAC4 @ =gUnknown_2021D18
+	ldr r4, _080CEAC4 @ =gStringVar4
 	ldr r1, _080CEAC8 @ =gUnknown_83FE672
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -1506,7 +1506,7 @@ _080CEAA0:
 	b _080CEFDE
 	.align 2, 0
 _080CEAC0: .4byte gUnknown_2037AB8
-_080CEAC4: .4byte gUnknown_2021D18
+_080CEAC4: .4byte gStringVar4
 _080CEAC8: .4byte gUnknown_83FE672
 _080CEACC: .4byte gUnknown_3005090
 _080CEAD0:
@@ -1533,7 +1533,7 @@ _080CEAF0:
 	bl _080CF528
 _080CEAFE:
 	ldr r0, _080CEB10 @ =0x00000107
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080CEB14 @ =gUnknown_3005090
 	mov r2, r8
 	adds r1, r2, r7
@@ -1732,7 +1732,7 @@ _080CEC94:
 	bl _080CF528
 _080CECAA:
 	movs r0, 0x1B
-	bl sub_80722CC
+	bl PlaySE
 	mov r2, r8
 	adds r1, r2, r7
 	lsls r1, 3
@@ -1796,7 +1796,7 @@ _080CED2C:
 	bne _080CED3A
 	bl _080CF528
 _080CED3A:
-	ldr r4, _080CEDA8 @ =gUnknown_2021D18
+	ldr r4, _080CEDA8 @ =gStringVar4
 	ldr r1, _080CEDAC @ =gUnknown_83FE688
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -1840,7 +1840,7 @@ _080CED3A:
 	bl IncrementGameStat
 	b _080CF528
 	.align 2, 0
-_080CEDA8: .4byte gUnknown_2021D18
+_080CEDA8: .4byte gStringVar4
 _080CEDAC: .4byte gUnknown_83FE688
 _080CEDB0: .4byte 0x00000103
 _080CEDB4: .4byte gUnknown_3005090
@@ -2040,20 +2040,20 @@ _080CEF48:
 	ldrsh r0, [r1, r3]
 	cmp r0, 0
 	beq _080CEF70
-	ldr r0, _080CEF68 @ =gUnknown_2021D18
+	ldr r0, _080CEF68 @ =gStringVar4
 	ldr r1, _080CEF6C @ =gUnknown_83FE6D0
 	bl StringExpandPlaceholders
 	b _080CEF78
 	.align 2, 0
 _080CEF64: .4byte gUnknown_3005090
-_080CEF68: .4byte gUnknown_2021D18
+_080CEF68: .4byte gStringVar4
 _080CEF6C: .4byte gUnknown_83FE6D0
 _080CEF70:
-	ldr r0, _080CEF90 @ =gUnknown_2021D18
+	ldr r0, _080CEF90 @ =gStringVar4
 	ldr r1, _080CEF94 @ =gUnknown_83FE6B5
 	bl StringExpandPlaceholders
 _080CEF78:
-	ldr r0, _080CEF90 @ =gUnknown_2021D18
+	ldr r0, _080CEF90 @ =gStringVar4
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r1, _080CEF98 @ =gUnknown_3005090
@@ -2065,7 +2065,7 @@ _080CEF78:
 	strh r1, [r0, 0x1A]
 	b _080CF4F2
 	.align 2, 0
-_080CEF90: .4byte gUnknown_2021D18
+_080CEF90: .4byte gStringVar4
 _080CEF94: .4byte gUnknown_83FE6B5
 _080CEF98: .4byte gUnknown_3005090
 _080CEF9C:
@@ -2321,7 +2321,7 @@ _080CF1BC:
 	cmp r0, 0
 	beq _080CF1E2
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_802DCF8
 	movs r0, 0
 	strb r0, [r4, 0x1]
@@ -2338,7 +2338,7 @@ _080CF1E2:
 	cmp r0, 0
 	bne _080CF208
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_802DCF8
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
@@ -2358,7 +2358,7 @@ _080CF208:
 	movs r3, 0xD
 	bl sub_802DB7C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080CF248 @ =gUnknown_2023E82
 	ldrb r2, [r0, 0x1]
 	cmp r2, 0
@@ -2411,7 +2411,7 @@ _080CF284:
 	movs r3, 0xD
 	bl sub_802DB7C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _080CF2AC @ =gUnknown_3005090
 	mov r2, r8
 	adds r0, r2, r7
@@ -2810,7 +2810,7 @@ _080CF5CC:
 	.4byte _080CFB34
 	.4byte _080CFB70
 _080CF620:
-	ldr r4, _080CF640 @ =gUnknown_2021D18
+	ldr r4, _080CF640 @ =gStringVar4
 	ldr r1, _080CF644 @ =gUnknown_83FE672
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -2824,7 +2824,7 @@ _080CF620:
 	adds r1, r0
 	b _080CFB1A
 	.align 2, 0
-_080CF640: .4byte gUnknown_2021D18
+_080CF640: .4byte gStringVar4
 _080CF644: .4byte gUnknown_83FE672
 _080CF648: .4byte gUnknown_3005090
 _080CF64C:
@@ -2853,7 +2853,7 @@ _080CF67A:
 	lsls r0, 1
 	bl m4aSongNumStop
 	ldr r0, _080CF694 @ =0x00000107
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080CF698 @ =gUnknown_3005090
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3064,7 +3064,7 @@ _080CF838:
 	bl _080D003A
 _080CF84E:
 	movs r0, 0x1B
-	bl sub_80722CC
+	bl PlaySE
 	adds r1, r7, r6
 	lsls r1, 3
 	adds r1, r5
@@ -3103,7 +3103,7 @@ _080CF89C:
 	bne _080CF8A8
 	b _080D003A
 _080CF8A8:
-	ldr r4, _080CF914 @ =gUnknown_2021D18
+	ldr r4, _080CF914 @ =gStringVar4
 	ldr r1, _080CF918 @ =gUnknown_83FE688
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -3147,7 +3147,7 @@ _080CF8A8:
 	bl IncrementGameStat
 	b _080D003A
 	.align 2, 0
-_080CF914: .4byte gUnknown_2021D18
+_080CF914: .4byte gStringVar4
 _080CF918: .4byte gUnknown_83FE688
 _080CF91C: .4byte 0x00000103
 _080CF920: .4byte gUnknown_3005090
@@ -3246,7 +3246,7 @@ _080CF9E0:
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
-	ldr r2, _080CFA0C @ =gUnknown_3003E50
+	ldr r2, _080CFA0C @ =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x3
 	negs r0, r0
@@ -3258,7 +3258,7 @@ _080CF9E0:
 	b _080D003A
 	.align 2, 0
 _080CFA08: .4byte gUnknown_2039A20
-_080CFA0C: .4byte gUnknown_3003E50
+_080CFA0C: .4byte gTextFlags
 _080CFA10: .4byte gUnknown_300537C
 _080CFA14:
 	ldr r0, _080CFA60 @ =gUnknown_2023E82
@@ -3334,7 +3334,7 @@ _080CFA9C:
 	bne _080CFAA8
 	b _080D003A
 _080CFAA8:
-	ldr r4, _080CFACC @ =gUnknown_2021D18
+	ldr r4, _080CFACC @ =gStringVar4
 	ldr r1, _080CFAD0 @ =gUnknown_83FE6D0
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -3350,7 +3350,7 @@ _080CFAA8:
 	strh r1, [r0, 0x1A]
 	b _080D0006
 	.align 2, 0
-_080CFACC: .4byte gUnknown_2021D18
+_080CFACC: .4byte gStringVar4
 _080CFAD0: .4byte gUnknown_83FE6D0
 _080CFAD4: .4byte gUnknown_3005090
 _080CFAD8:

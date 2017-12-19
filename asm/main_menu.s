@@ -1110,7 +1110,7 @@ _0800CC34:
 	cmp r1, 0
 	beq _0800CC58
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -1226,7 +1226,7 @@ sub_800CCF8: @ 800CCF8
 	cmp r5, 0
 	beq _0800CD44
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_8009480
 	movs r0, 0x1
 	negs r0, r0
@@ -1253,7 +1253,7 @@ _0800CD44:
 	cmp r0, 0
 	beq _0800CD8C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	str r5, [sp]

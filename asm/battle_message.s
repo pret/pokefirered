@@ -863,12 +863,12 @@ _080D7974:
 	ldrb r0, [r5]
 	cmp r0, 0xFD
 	bne _080D798C
-	ldr r4, _080D7988 @ =gUnknown_2021CD0
+	ldr r4, _080D7988 @ =gStringVar1
 	adds r0, r5, 0
 	b _080D79C4
 	.align 2, 0
 _080D7984: .4byte gUnknown_2022AB8
-_080D7988: .4byte gUnknown_2021CD0
+_080D7988: .4byte gStringVar1
 _080D798C:
 	adds r0, r5, 0
 	bl TryGetStatusString
@@ -884,17 +884,17 @@ _080D79A2:
 	ldrb r0, [r1]
 	cmp r0, 0xFD
 	bne _080D79D8
-	ldr r4, _080D79B4 @ =gUnknown_2021CF0
+	ldr r4, _080D79B4 @ =gStringVar2
 	b _080D79C2
 	.align 2, 0
 _080D79B0: .4byte gUnknown_2022AC8
-_080D79B4: .4byte gUnknown_2021CF0
+_080D79B4: .4byte gStringVar2
 _080D79B8:
 	ldr r1, _080D79D0 @ =gUnknown_2022AD8
 	ldrb r0, [r1]
 	cmp r0, 0xFD
 	bne _080D79D8
-	ldr r4, _080D79D4 @ =gUnknown_2021D04
+	ldr r4, _080D79D4 @ =gStringVar3
 _080D79C2:
 	adds r0, r1, 0
 _080D79C4:
@@ -903,25 +903,25 @@ _080D79C4:
 	bl _080D8382
 	.align 2, 0
 _080D79D0: .4byte gUnknown_2022AD8
-_080D79D4: .4byte gUnknown_2021D04
+_080D79D4: .4byte gStringVar3
 _080D79D8:
 	adds r4, r1, 0
 	bl _080D8382
 _080D79DE:
-	ldr r4, _080D79E4 @ =gUnknown_2021CD0
+	ldr r4, _080D79E4 @ =gStringVar1
 	bl _080D8382
 	.align 2, 0
-_080D79E4: .4byte gUnknown_2021CD0
+_080D79E4: .4byte gStringVar1
 _080D79E8:
-	ldr r4, _080D79F0 @ =gUnknown_2021CF0
+	ldr r4, _080D79F0 @ =gStringVar2
 	bl _080D8382
 	.align 2, 0
-_080D79F0: .4byte gUnknown_2021CF0
+_080D79F0: .4byte gStringVar2
 _080D79F4:
-	ldr r4, _080D79FC @ =gUnknown_2021D04
+	ldr r4, _080D79FC @ =gStringVar3
 	bl _080D8382
 	.align 2, 0
-_080D79FC: .4byte gUnknown_2021D04
+_080D79FC: .4byte gStringVar3
 _080D7A00:
 	movs r0, 0
 	bl GetBankByIdentity
@@ -1908,14 +1908,14 @@ _080D81E8:
 	ands r0, r1
 	cmp r0, 0
 	beq _080D820C
-	ldr r4, _080D8208 @ =gUnknown_2021D18
+	ldr r4, _080D8208 @ =gStringVar4
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_815DC40
 	b _080D8382
 	.align 2, 0
 _080D8204: .4byte gUnknown_2022B4C
-_080D8208: .4byte gUnknown_2021D18
+_080D8208: .4byte gStringVar4
 _080D820C:
 	bl sub_80806EC
 	adds r4, r0, 0
@@ -1928,34 +1928,34 @@ _080D8214:
 	ands r0, r1
 	cmp r0, 0
 	beq _080D8238
-	ldr r4, _080D8234 @ =gUnknown_2021D18
+	ldr r4, _080D8234 @ =gStringVar4
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_815DBF4
 	b _080D8382
 	.align 2, 0
 _080D8230: .4byte gUnknown_2022B4C
-_080D8234: .4byte gUnknown_2021D18
+_080D8234: .4byte gStringVar4
 _080D8238:
 	bl sub_8080710
 	adds r4, r0, 0
 	b _080D8382
 _080D8240:
-	ldr r4, _080D824C @ =gUnknown_2021D18
+	ldr r4, _080D824C @ =gStringVar4
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_815DC40
 	b _080D8382
 	.align 2, 0
-_080D824C: .4byte gUnknown_2021D18
+_080D824C: .4byte gStringVar4
 _080D8250:
-	ldr r4, _080D825C @ =gUnknown_2021D18
+	ldr r4, _080D825C @ =gStringVar4
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_815DBF4
 	b _080D8382
 	.align 2, 0
-_080D825C: .4byte gUnknown_2021D18
+_080D825C: .4byte gStringVar4
 _080D8260:
 	ldr r0, _080D82B4 @ =gUnknown_2023FC4
 	ldrb r0, [r0, 0x17]
@@ -2718,7 +2718,7 @@ _080D882E:
 	ldrb r0, [r1, 0x1]
 	ldrb r2, [r1, 0x4]
 	adds r1, r4, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r1, 0x30
 	b _080D8868
 	.align 2, 0
@@ -2733,7 +2733,7 @@ _080D8850:
 	ldrb r0, [r1, 0x1]
 	ldrb r2, [r1, 0x4]
 	adds r1, r4, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r1, 0x40
 _080D8868:
 	subs r1, r0
@@ -2804,7 +2804,7 @@ _080D8888:
 	mov r3, r12
 	cmp r7, 0x18
 	bne _080D8900
-	ldr r0, _080D88FC @ =gUnknown_3003E50
+	ldr r0, _080D88FC @ =gTextFlags
 	ldrb r2, [r0]
 	movs r1, 0x3
 	negs r1, r1
@@ -2812,9 +2812,9 @@ _080D8888:
 	b _080D8908
 	.align 2, 0
 _080D88F8: .4byte gUnknown_83FEB64
-_080D88FC: .4byte gUnknown_3003E50
+_080D88FC: .4byte gTextFlags
 _080D8900:
-	ldr r0, _080D8930 @ =gUnknown_3003E50
+	ldr r0, _080D8930 @ =gTextFlags
 	ldrb r1, [r0]
 	movs r2, 0x2
 	orrs r1, r2
@@ -2841,7 +2841,7 @@ _080D8928:
 	orrs r0, r1
 	b _080D8940
 	.align 2, 0
-_080D8930: .4byte gUnknown_3003E50
+_080D8930: .4byte gTextFlags
 _080D8934: .4byte gUnknown_2022B4C
 _080D8938:
 	ldrb r1, [r4]
@@ -2867,14 +2867,14 @@ _080D8958:
 	lsls r0, 24
 	lsrs r3, r0, 24
 _080D8960:
-	ldr r0, _080D896C @ =gUnknown_3003E50
+	ldr r0, _080D896C @ =gTextFlags
 	ldrb r1, [r0]
 	movs r2, 0x1
 	orrs r1, r2
 	strb r1, [r0]
 	b _080D8982
 	.align 2, 0
-_080D896C: .4byte gUnknown_3003E50
+_080D896C: .4byte gTextFlags
 _080D8970:
 	adds r0, r6, r7
 	lsls r0, 2

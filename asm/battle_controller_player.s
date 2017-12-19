@@ -188,7 +188,7 @@ sub_802E438: @ 802E438
 	cmp r0, 0
 	beq _0802E4D0
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0802E4A4 @ =gUnknown_2023FF8
 	ldrb r0, [r4]
 	adds r0, r1
@@ -245,7 +245,7 @@ _0802E4D0:
 	b _0802E634
 _0802E4EA:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -273,7 +273,7 @@ _0802E508:
 	b _0802E634
 _0802E522:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -317,7 +317,7 @@ _0802E560:
 	bne _0802E634
 _0802E578:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -384,7 +384,7 @@ _0802E5A8:
 	bl sub_809A084
 _0802E606:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	movs r1, 0xC
 _0802E610:
@@ -478,7 +478,7 @@ _0802E6B6:
 	cmp r0, 0
 	beq _0802E72C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _0802E718 @ =gUnknown_202063C
 	ldr r1, _0802E71C @ =gUnknown_2023D44
 	ldr r4, _0802E70C @ =gUnknown_3004FF4
@@ -524,7 +524,7 @@ _0802E72C:
 	cmp r0, 0
 	beq _0802E7A0
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _0802E784 @ =gUnknown_202063C
 	ldr r1, _0802E788 @ =gUnknown_2023D44
 	ldr r5, _0802E78C @ =gUnknown_3004FF4
@@ -575,7 +575,7 @@ _0802E7A0:
 	b _0802E8C4
 _0802E7AA:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _0802E7DC @ =gUnknown_202063C
 	ldr r1, _0802E7E0 @ =gUnknown_2023D44
 	ldr r3, _0802E7E4 @ =gUnknown_3004FF4
@@ -716,7 +716,7 @@ _0802E8C4:
 	b _0802E9DC
 _0802E8CE:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _0802E900 @ =gUnknown_202063C
 	ldr r1, _0802E904 @ =gUnknown_2023D44
 	ldr r3, _0802E908 @ =gUnknown_3004FF4
@@ -895,7 +895,7 @@ sub_802EA10: @ 802EA10
 	b _0802EC10
 _0802EA3A:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0802EA78 @ =gUnknown_2023FFC
 	ldrb r0, [r6]
 	adds r0, r1
@@ -1119,7 +1119,7 @@ _0802EC10:
 	cmp r0, 0
 	beq _0802EC38
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _0802EC34 @ =0x0000ffff
 	movs r0, 0x1
 	movs r1, 0xA
@@ -1242,7 +1242,7 @@ _0802ECDC:
 _0802ED10:
 	strb r0, [r1]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r6]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -1344,7 +1344,7 @@ sub_802EDDC: @ 802EDDC
 	cmp r0, 0
 	beq _0802EDF6
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r7, 0x1
 _0802EDF6:
 	ldrh r1, [r4, 0x2E]
@@ -1353,7 +1353,7 @@ _0802EDF6:
 	cmp r0, 0
 	beq _0802EE18
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0802EF44 @ =gUnknown_2022974
 	movs r0, 0
 	strh r0, [r1]
@@ -1387,7 +1387,7 @@ _0802EE18:
 	eors r0, r2
 	strb r0, [r1]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1424,7 +1424,7 @@ _0802EE58:
 	eors r0, r6
 	strb r0, [r1]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1455,7 +1455,7 @@ _0802EEA6:
 	eors r0, r2
 	strb r0, [r1]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1492,7 +1492,7 @@ _0802EEE8:
 	eors r0, r6
 	strb r0, [r1]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1529,7 +1529,7 @@ sub_802EF58: @ 802EF58
 	b _0802F34C
 _0802EF72:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0802F2E8 @ =gUnknown_2023FFC
 	mov r10, r0
 	ldr r1, _0802F2EC @ =gUnknown_2023BC4
@@ -2017,7 +2017,7 @@ _0802F34C:
 	cmp r0, 0
 	beq _0802F3C8
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0802F3A0 @ =gUnknown_3004FF4
 	ldrb r0, [r0]
 	bl MoveSelectionDestroyCursorAt
@@ -2101,7 +2101,7 @@ _0802F416:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0802F444 @ =gUnknown_2023FFC
 	ldr r0, _0802F448 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -2168,7 +2168,7 @@ _0802F4AA:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0802F4D8 @ =gUnknown_2023FFC
 	ldr r0, _0802F4DC @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -2228,7 +2228,7 @@ _0802F52E:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0802F55C @ =gUnknown_2023FFC
 	ldr r0, _0802F560 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -2295,7 +2295,7 @@ _0802F5C2:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0802F5F0 @ =gUnknown_2023FFC
 	ldr r0, _0802F5F4 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -3632,7 +3632,7 @@ sub_8030024: @ 8030024
 	mov r0, r10
 	bl SetBattleBarStruct
 	movs r0, 0x1B
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080300F0 @ =sub_80300F4
 	mov r1, r8
 	str r0, [r1]
@@ -4090,7 +4090,7 @@ _0803047C:
 	b _080304E0
 _08030486:
 	movs r0, 0x58
-	bl sub_80722CC
+	bl PlaySE
 	bl IsMonGettingExpSentOut
 	cmp r0, 0
 	beq _080304E0

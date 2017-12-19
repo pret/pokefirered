@@ -142,7 +142,7 @@ sub_810C760: @ 810C760
 	cmp r0, 0
 	bne _0810C794
 	movs r0, 0x5E
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0xB
 	strh r0, [r4, 0x2]
 	ldrh r0, [r4, 0x4]
@@ -609,7 +609,7 @@ _0810CB2C:
 	cmp r0, 0
 	beq _0810CB70
 	movs r0, 0x15
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0810CB6C @ =0x00000801
 	bl FlagSet
 	bl sub_810C640

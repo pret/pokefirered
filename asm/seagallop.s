@@ -170,7 +170,7 @@ _08146FE4:
 	ldr r0, _08147044 @ =sub_8147058
 	bl SetVBlankCallback
 	movs r0, 0x13
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_81473C4
 	movs r1, 0x80
 	lsls r1, 6
@@ -364,7 +364,7 @@ _08147150:
 	bl Overworld_SetWarpDestination
 	bl play_some_sound
 	movs r0, 0x9
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _081471B4 @ =gUnknown_3005020
 	ldr r0, _081471B8 @ =sub_807DF64
 	str r0, [r1]

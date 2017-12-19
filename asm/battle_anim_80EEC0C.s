@@ -1759,7 +1759,7 @@ sub_80EFA0C: @ 80EFA0C
 	cmp r0, 0xB
 	bne _080EFA3E
 	movs r0, 0x35
-	bl sub_80722CC
+	bl PlaySE
 _080EFA3E:
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
@@ -1992,19 +1992,19 @@ _080EFC00:
 	b _080EFC1E
 _080EFC06:
 	movs r0, 0x31
-	bl sub_80722CC
+	bl PlaySE
 	b _080EFC52
 _080EFC0E:
 	movs r0, 0x32
-	bl sub_80722CC
+	bl PlaySE
 	b _080EFC52
 _080EFC16:
 	movs r0, 0x33
-	bl sub_80722CC
+	bl PlaySE
 	b _080EFC52
 _080EFC1E:
 	movs r0, 0x34
-	bl sub_80722CC
+	bl PlaySE
 	b _080EFC52
 _080EFC26:
 	movs r2, 0x38
@@ -2097,7 +2097,7 @@ sub_80EFCA0: @ 80EFCA0
 	ldr r0, _080EFCE8 @ =sub_80EFCEC
 	str r0, [r4, 0x1C]
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 _080EFCDC:
 	pop {r4,r5}
 	pop {r0}
@@ -2440,7 +2440,7 @@ _080EFF6C:
 	bl StartSpriteAffineAnim
 _080EFF74:
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 _080EFF7A:
 	pop {r4-r6}
 	pop {r0}
@@ -2506,7 +2506,7 @@ sub_80EFFC4: @ 80EFFC4
 	cmp r1, 0x28
 	bne _080F0008
 	movs r0, 0xF7
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r1, [r6, 0x5]
 	lsrs r1, 4
 	movs r0, 0x80
@@ -2545,7 +2545,7 @@ _080F0026:
 	bl UpdateOamPriorityInAllHealthboxes
 	bl m4aMPlayAllStop
 	ldr r0, _080F0048 @ =0x0000013f
-	bl sub_80722CC
+	bl PlaySE
 	b _080F0088
 	.align 2, 0
 _080F0044: .4byte gUnknown_2024005
@@ -3331,7 +3331,7 @@ LaunchBallStarsTask: @ 80F05EC
 	strh r1, [r0, 0x10]
 	strh r5, [r0, 0x26]
 	movs r0, 0xF
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	pop {r3-r5}
 	mov r8, r3

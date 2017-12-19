@@ -547,7 +547,7 @@ _08134950:
 	b _08134B9A
 _0813495C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	bl HideBg
 	ldr r0, [r5]
@@ -595,7 +595,7 @@ _081349B4:
 	b _08134B9A
 _081349C0:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	bl HideBg
 	ldr r0, [r5]
@@ -668,7 +668,7 @@ _08134A4A:
 	cmp r0, 0
 	bne _08134A7C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, [r4]
 	ldr r2, _08134A78 @ =0x00003270
 	adds r0, r2
@@ -683,7 +683,7 @@ _08134A7C:
 	b _08134B9A
 _08134A82:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, [r4]
 	ldr r1, _08134AB4 @ =0x00003224
 	adds r0, r1
@@ -4837,7 +4837,7 @@ sub_8136DF0: @ 8136DF0
 	movs r0, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	ldr r1, [r5]
 	adds r1, r4
 	ldrb r1, [r1]
@@ -8717,7 +8717,7 @@ _08138D2A:
 	movs r1, 0x2
 	strb r1, [r0]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r4, [r4]
 	cmp r4, 0
 	bne _08138D5A
@@ -8752,7 +8752,7 @@ _08138D84:
 	movs r1, 0x2
 	strb r1, [r0]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, [r6]
 	ldr r3, _08138DC8 @ =0x00003268
 	adds r0, r1, r3
@@ -8852,7 +8852,7 @@ _08138E3C:
 	b _08139024
 _08138E4A:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _08138E64 @ =gUnknown_203B16D
 	movs r0, 0
 	strb r0, [r1]
@@ -8874,7 +8874,7 @@ _08138E6E:
 	strb r1, [r0]
 _08138E78:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	b _08139094
 _08138E80:
 	movs r0, 0x1
@@ -8884,7 +8884,7 @@ _08138E80:
 	cmp r5, 0
 	beq _08138F6C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r3, _08138EB8 @ =gUnknown_203B16D
 	ldrb r5, [r3]
 	cmp r5, 0x4
@@ -9073,7 +9073,7 @@ _08139010:
 	b _08139092
 _08139024:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _08139030 @ =gUnknown_203B16D
 	strb r4, [r0]
 	b _08139094
@@ -9603,7 +9603,7 @@ _0813946C:
 	movs r1, 0x3
 	strb r1, [r0]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r4, [r4]
 	cmp r4, 0
 	bne _0813949C
@@ -9709,7 +9709,7 @@ _08139556:
 	movs r1, 0x3
 	strb r1, [r0]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	b _0813975A
 	.align 2, 0
 _08139564: .4byte 0x00003288
@@ -9729,7 +9729,7 @@ _08139568:
 	bne _081395B8
 _08139584:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _081395A8 @ =gUnknown_203B16E
 	ldr r0, _081395A4 @ =gUnknown_203B16D
 	ldrb r0, [r0]
@@ -9750,7 +9750,7 @@ _081395B0: .4byte gUnknown_203B140
 _081395B4: .4byte 0x00003288
 _081395B8:
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _081395CC @ =gUnknown_203B140
 	ldr r0, [r0]
 	ldr r4, _081395D0 @ =0x00003288
@@ -9919,7 +9919,7 @@ _08139730: .4byte gUnknown_203B140
 _08139734: .4byte 0x00003288
 _08139738:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _08139744 @ =gUnknown_203B16D
 	strb r4, [r0]
 	b _0813975A

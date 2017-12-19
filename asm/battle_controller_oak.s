@@ -115,7 +115,7 @@ sub_80E763C: @ 80E763C
 	cmp r0, 0
 	beq _080E76D4
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _080E76A8 @ =gUnknown_2023FF8
 	ldrb r0, [r4]
 	adds r0, r1
@@ -172,7 +172,7 @@ _080E76D4:
 	b _080E7838
 _080E76EE:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -200,7 +200,7 @@ _080E770C:
 	b _080E7838
 _080E7726:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -244,7 +244,7 @@ _080E7764:
 	bne _080E7838
 _080E777C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -311,7 +311,7 @@ _080E77AC:
 	bl sub_809A084
 _080E780A:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	movs r1, 0xC
 _080E7814:
@@ -380,7 +380,7 @@ _080E787C:
 	cmp r0, 0
 	bne _080E78D8
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	bl ActionSelectionDestroyCursorAt
 	movs r0, 0x1
@@ -406,7 +406,7 @@ _080E78B4:
 	cmp r0, 0
 	bne _080E78D8
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
@@ -1303,7 +1303,7 @@ sub_80E7F7C: @ 80E7F7C
 	mov r0, r10
 	bl SetBattleBarStruct
 	movs r0, 0x1B
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080E8048 @ =sub_80E804C
 	mov r1, r8
 	str r0, [r1]
@@ -6156,7 +6156,7 @@ _080EA83E:
 	cmp r0, 0
 	bne _080EA866
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r2, 0x80
 	lsls r2, 1
 	movs r0, 0x1
@@ -6715,7 +6715,7 @@ sub_80EAC84: @ 80EAC84
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_80722CC
+	bl PlaySE
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0

@@ -788,7 +788,7 @@ _080C0474:
 	beq _080C0494
 _080C048E:
 	movs r0, 0x65
-	bl sub_80722CC
+	bl PlaySE
 _080C0494:
 	bl sub_80C3508
 	lsls r0, 16
@@ -807,7 +807,7 @@ _080C0494:
 	cmp r0, 0x1
 	bne _080C04C2
 	movs r0, 0xE1
-	bl sub_80722CC
+	bl PlaySE
 	b _080C04E0
 _080C04C2:
 	bl sub_80C3508
@@ -821,7 +821,7 @@ _080C04C2:
 	cmp r0, 0xD
 	bne _080C04E0
 	movs r0, 0xE1
-	bl sub_80722CC
+	bl PlaySE
 _080C04E0:
 	pop {r0}
 	bx r0
@@ -2777,7 +2777,7 @@ sub_80C1478: @ 80C1478
 	cmp r0, 0
 	beq _080C150E
 	movs r0, 0xF5
-	bl sub_80722CC
+	bl PlaySE
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, r7
@@ -2803,7 +2803,7 @@ _080C150E:
 	cmp r1, r0
 	bcs _080C1542
 	movs r0, 0xF5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, [r4]
 	ldr r3, _080C1584 @ =0x00001cca
 	adds r1, r3
@@ -2826,7 +2826,7 @@ _080C1542:
 	cmp r0, 0x6
 	bne _080C15A8
 	movs r0, 0xC7
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, [r4]
 	ldr r2, _080C1584 @ =0x00001cca
 	adds r1, r0, r2
@@ -5034,7 +5034,7 @@ _080C2796:
 	adds r0, 0x1
 	strb r0, [r1]
 	movs r0, 0xF4
-	bl sub_80722CC
+	bl PlaySE
 	b _080C299A
 	.align 2, 0
 _080C27AC: .4byte gUnknown_2037AB8
@@ -5189,7 +5189,7 @@ _080C28A4:
 	movs r0, 0xF4
 	bl m4aSongNumStop
 	movs r0, 0x2A
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080C2920 @ =gUnknown_20399E0
 	ldr r1, [r0]
 	ldr r0, _080C2924 @ =0x00000ccc
@@ -5768,7 +5768,7 @@ _080C2DB8:
 	bl sub_80C2B9C
 	bl sub_80C2B48
 	movs r0, 0xF3
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080C2DD0 @ =gUnknown_20399E0
 	ldr r1, [r0]
 	ldr r0, _080C2DD4 @ =0x00000ccf
@@ -6365,7 +6365,7 @@ _080C3236:
 	cmp r1, r0
 	bne _080C3254
 	movs r0, 0xF0
-	bl sub_80722CC
+	bl PlaySE
 	movs r5, 0x6
 _080C3254:
 	ldr r0, [r6]
@@ -6380,7 +6380,7 @@ _080C3254:
 	cmp r0, 0x1
 	bne _080C331A
 	movs r0, 0xF0
-	bl sub_80722CC
+	bl PlaySE
 	movs r5, 0x5
 	b _080C331A
 	.align 2, 0
@@ -10063,7 +10063,7 @@ _080C5070:
 	cmp r0, 0x2
 	bne _080C5086
 	movs r0, 0x66
-	bl sub_80722CC
+	bl PlaySE
 	b _080C508A
 _080C5086:
 	bl sub_80C0450
@@ -10083,7 +10083,7 @@ _080C508A:
 	cmp r0, 0xD
 	bne _080C50C4
 	movs r0, 0xE1
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080C50C0 @ =gUnknown_8418E95
 	bl sub_80C4E74
 	b _080C51DC
@@ -10160,7 +10160,7 @@ _080C514C: .4byte gSaveBlock1Ptr
 _080C5150: .4byte gUnknown_20399FC
 _080C5154:
 	movs r0, 0x1
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _080C5164 @ =gUnknown_20399FC
 	ldr r0, [r1]
 	strb r4, [r0, 0x2]

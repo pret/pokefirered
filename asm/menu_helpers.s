@@ -32,7 +32,7 @@ DisplayMessageAndContinueTask: @ 80BF474
 	adds r0, r6, 0
 	movs r1, 0x1
 	bl sub_810EDC4
-	ldr r4, _080BF504 @ =gUnknown_2021D18
+	ldr r4, _080BF504 @ =gStringVar4
 	ldr r0, [sp, 0x30]
 	cmp r0, r4
 	beq _080BF4B8
@@ -40,7 +40,7 @@ DisplayMessageAndContinueTask: @ 80BF474
 	ldr r1, [sp, 0x30]
 	bl StringExpandPlaceholders
 _080BF4B8:
-	ldr r2, _080BF508 @ =gUnknown_3003E50
+	ldr r2, _080BF508 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
@@ -77,8 +77,8 @@ _080BF4B8:
 	bx r0
 	.align 2, 0
 _080BF500: .4byte gUnknown_20399D0
-_080BF504: .4byte gUnknown_2021D18
-_080BF508: .4byte gUnknown_3003E50
+_080BF504: .4byte gStringVar4
+_080BF508: .4byte gTextFlags
 _080BF50C: .4byte gUnknown_20399CC
 _080BF510: .4byte gUnknown_3005090
 _080BF514: .4byte Task_ContinueTaskAfterMessagePrints
@@ -147,7 +147,7 @@ _080BF580:
 	b _080BF5C0
 _080BF586:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _080BF5A0 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -162,7 +162,7 @@ _080BF5A0: .4byte gUnknown_3005090
 _080BF5A4: .4byte gUnknown_20399C8
 _080BF5A8:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _080BF5C8 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -598,7 +598,7 @@ _080BF8CA:
 	cmp r1, r0
 	beq _080BF8DA
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	b _080BF8DC
 _080BF8DA:

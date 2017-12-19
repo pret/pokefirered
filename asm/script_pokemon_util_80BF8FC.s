@@ -190,10 +190,10 @@ ScrSpecial_GetPokemonNicknameAndMoveName: @ 80BFA50
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r1, _080BFA9C @ =gUnknown_2021CD0
+	ldr r1, _080BFA9C @ =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNickname
-	ldr r0, _080BFAA0 @ =gUnknown_2021CF0
+	ldr r0, _080BFAA0 @ =gStringVar2
 	movs r1, 0xD
 	muls r1, r4
 	ldr r2, _080BFAA4 @ =gUnknown_8247094
@@ -206,8 +206,8 @@ ScrSpecial_GetPokemonNicknameAndMoveName: @ 80BFA50
 _080BFA90: .4byte gUnknown_20370C0
 _080BFA94: .4byte gUnknown_2024284
 _080BFA98: .4byte gUnknown_20370C2
-_080BFA9C: .4byte gUnknown_2021CD0
-_080BFAA0: .4byte gUnknown_2021CF0
+_080BFA9C: .4byte gStringVar1
+_080BFAA0: .4byte gStringVar2
 _080BFAA4: .4byte gUnknown_8247094
 	thumb_func_end ScrSpecial_GetPokemonNicknameAndMoveName
 

@@ -809,7 +809,7 @@ _080ECC50:
 	b _080ECC9C
 _080ECC56:
 	ldr r0, _080ECC64 @ =0x00000141
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_80EDC40
 	strh r5, [r4, 0x12]
 	b _080ECC7E

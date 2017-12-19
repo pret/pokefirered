@@ -241,7 +241,7 @@ _080891E8:
 	b _08089416
 _080891F4:
 	movs r0, 0xF4
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _08089204 @ =gUnknown_20397A4
 	ldr r1, [r0]
 	movs r0, 0xA
@@ -294,7 +294,7 @@ _0808924A:
 	bl sub_812B1F0
 	bl sub_808B1D4
 	movs r0, 0xF2
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808927C @ =gUnknown_20397A4
 	ldr r1, [r0]
 	movs r0, 0xC
@@ -346,7 +346,7 @@ _080892C4:
 	b _08089416
 _080892CE:
 	movs r0, 0xF4
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080892E0 @ =gUnknown_20397A4
 	ldr r1, [r0]
 	movs r0, 0xB
@@ -394,7 +394,7 @@ _08089324:
 	movs r0, 0xD
 	strb r0, [r1]
 	movs r0, 0xF2
-	bl sub_80722CC
+	bl PlaySE
 	b _08089416
 	.align 2, 0
 _08089340: .4byte gUnknown_20397A4
@@ -495,7 +495,7 @@ _080893F6:
 	movs r0, 0xA
 	strb r0, [r1]
 	movs r0, 0xF4
-	bl sub_80722CC
+	bl PlaySE
 _08089416:
 	add sp, 0xC
 	pop {r4,r5}
@@ -2417,7 +2417,7 @@ sub_808A3D0: @ 808A3D0
 	adds r1, 0x19
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r2, r0, 0
 	adds r2, 0x10
 	lsls r2, 24
@@ -2453,7 +2453,7 @@ sub_808A3D0: @ 808A3D0
 	adds r1, 0x33
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r2, r0, 0
 	adds r2, 0x10
 	lsls r2, 24
@@ -2574,7 +2574,7 @@ _0808A550:
 	lsrs r2, 24
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	ldr r2, _0808A5A8 @ =gUnknown_83CD93C
 	ldr r4, [r6]
 	ldr r3, _0808A5AC @ =0x00000457
@@ -4535,7 +4535,7 @@ _0808B50A:
 	movs r0, 0x1
 	strb r0, [r1, 0x9]
 	movs r0, 0xF3
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}

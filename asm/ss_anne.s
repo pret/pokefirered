@@ -9,7 +9,7 @@
 sub_815D334: @ 815D334
 	push {lr}
 	movs r0, 0xF9
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0815D35C @ =sub_815D364
 	movs r1, 0x8
 	bl CreateTask
@@ -118,7 +118,7 @@ _0815D3D6:
 	cmp r0, r1
 	bge _0815D438
 	movs r0, 0xF9
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0

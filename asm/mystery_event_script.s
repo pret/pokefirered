@@ -38,7 +38,7 @@ _080DA82A:
 	thumb_func_start SetIncompatible
 SetIncompatible: @ 80DA830
 	push {lr}
-	ldr r0, _080DA844 @ =gUnknown_2021D18
+	ldr r0, _080DA844 @ =gStringVar4
 	ldr r1, _080DA848 @ =gUnknown_8488DFD
 	bl StringExpandPlaceholders
 	movs r0, 0x3
@@ -46,7 +46,7 @@ SetIncompatible: @ 80DA830
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DA844: .4byte gUnknown_2021D18
+_080DA844: .4byte gStringVar4
 _080DA848: .4byte gUnknown_8488DFD
 	thumb_func_end SetIncompatible
 
@@ -233,7 +233,7 @@ MEScrCmd_setmsg: @ 80DA964
 	cmp r5, r0
 	bne _080DA98E
 _080DA988:
-	ldr r0, _080DA998 @ =gUnknown_2021D18
+	ldr r0, _080DA998 @ =gStringVar4
 	bl StringExpandPlaceholders
 _080DA98E:
 	movs r0, 0
@@ -241,7 +241,7 @@ _080DA98E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DA998: .4byte gUnknown_2021D18
+_080DA998: .4byte gStringVar4
 	thumb_func_end MEScrCmd_setmsg
 
 	thumb_func_start MEScrCmd_runscript
@@ -276,7 +276,7 @@ MEScrCmd_setenigmaberry: @ 80DA9B8
 	subs r4, r0
 	ldr r0, [r7, 0x64]
 	adds r4, r0
-	ldr r0, _080DAA0C @ =gUnknown_2021CD0
+	ldr r0, _080DAA0C @ =gStringVar1
 	mov r9, r0
 	ldr r6, _080DAA10 @ =gSaveBlock1Ptr
 	ldr r1, [r6]
@@ -286,7 +286,7 @@ MEScrCmd_setenigmaberry: @ 80DA9B8
 	bl StringCopyN
 	adds r0, r4, 0
 	bl sub_809C7C4
-	ldr r4, _080DAA18 @ =gUnknown_2021CF0
+	ldr r4, _080DAA18 @ =gStringVar2
 	ldr r1, [r6]
 	adds r1, r5
 	adds r0, r4, 0
@@ -295,15 +295,15 @@ MEScrCmd_setenigmaberry: @ 80DA9B8
 	mov r0, r8
 	cmp r0, 0
 	bne _080DAA24
-	ldr r0, _080DAA1C @ =gUnknown_2021D18
+	ldr r0, _080DAA1C @ =gStringVar4
 	ldr r1, _080DAA20 @ =gUnknown_8488C70
 	b _080DAA44
 	.align 2, 0
-_080DAA0C: .4byte gUnknown_2021CD0
+_080DAA0C: .4byte gStringVar1
 _080DAA10: .4byte gSaveBlock1Ptr
 _080DAA14: .4byte 0x000030ec
-_080DAA18: .4byte gUnknown_2021CF0
-_080DAA1C: .4byte gUnknown_2021D18
+_080DAA18: .4byte gStringVar2
+_080DAA1C: .4byte gStringVar4
 _080DAA20: .4byte gUnknown_8488C70
 _080DAA24:
 	mov r0, r9
@@ -311,14 +311,14 @@ _080DAA24:
 	bl StringCompare
 	cmp r0, 0
 	beq _080DAA40
-	ldr r0, _080DAA38 @ =gUnknown_2021D18
+	ldr r0, _080DAA38 @ =gStringVar4
 	ldr r1, _080DAA3C @ =gUnknown_8488CA2
 	b _080DAA44
 	.align 2, 0
-_080DAA38: .4byte gUnknown_2021D18
+_080DAA38: .4byte gStringVar4
 _080DAA3C: .4byte gUnknown_8488CA2
 _080DAA40:
-	ldr r0, _080DAA60 @ =gUnknown_2021D18
+	ldr r0, _080DAA60 @ =gStringVar4
 	ldr r1, _080DAA64 @ =gUnknown_8488CCE
 _080DAA44:
 	bl StringExpandPlaceholders
@@ -332,7 +332,7 @@ _080DAA44:
 	bl VarSet
 	b _080DAA70
 	.align 2, 0
-_080DAA60: .4byte gUnknown_2021D18
+_080DAA60: .4byte gStringVar4
 _080DAA64: .4byte gUnknown_8488CCE
 _080DAA68: .4byte 0x00004033
 _080DAA6C:
@@ -360,7 +360,7 @@ MEScrCmd_giveribbon: @ 80DAA80
 	adds r2, 0x1
 	str r2, [r4, 0x8]
 	bl GiveGiftRibbonToParty
-	ldr r0, _080DAAAC @ =gUnknown_2021D18
+	ldr r0, _080DAAAC @ =gStringVar4
 	ldr r1, _080DAAB0 @ =gUnknown_8488CF6
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -370,7 +370,7 @@ MEScrCmd_giveribbon: @ 80DAA80
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DAAAC: .4byte gUnknown_2021D18
+_080DAAAC: .4byte gStringVar4
 _080DAAB0: .4byte gUnknown_8488CF6
 	thumb_func_end MEScrCmd_giveribbon
 
@@ -431,7 +431,7 @@ sub_80DAB1C: @ 80DAB1C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_806E22C
-	ldr r0, _080DAB38 @ =gUnknown_2021D18
+	ldr r0, _080DAB38 @ =gStringVar4
 	ldr r1, _080DAB3C @ =gUnknown_8488D2A
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -441,7 +441,7 @@ sub_80DAB1C: @ 80DAB1C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DAB38: .4byte gUnknown_2021D18
+_080DAB38: .4byte gStringVar4
 _080DAB3C: .4byte gUnknown_8488D2A
 	thumb_func_end sub_80DAB1C
 
@@ -454,7 +454,7 @@ MEScrCmd_addrareword: @ 80DAB40
 	adds r1, 0x1
 	str r1, [r4, 0x8]
 	bl sub_80BDB70
-	ldr r0, _080DAB64 @ =gUnknown_2021D18
+	ldr r0, _080DAB64 @ =gStringVar4
 	ldr r1, _080DAB68 @ =gUnknown_8488D60
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -464,7 +464,7 @@ MEScrCmd_addrareword: @ 80DAB40
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DAB64: .4byte gUnknown_2021D18
+_080DAB64: .4byte gStringVar4
 _080DAB68: .4byte gUnknown_8488D60
 	thumb_func_end MEScrCmd_addrareword
 
@@ -510,16 +510,16 @@ sub_80DAB80: @ 80DAB80
 	lsls r0, 1
 	cmp r4, r0
 	bne _080DABD0
-	ldr r0, _080DABC8 @ =gUnknown_2021CD0
+	ldr r0, _080DABC8 @ =gStringVar1
 	ldr r1, _080DABCC @ =gUnknown_8415A62
 	movs r2, 0xB
 	bl StringCopyN
 	b _080DABDA
 	.align 2, 0
-_080DABC8: .4byte gUnknown_2021CD0
+_080DABC8: .4byte gStringVar1
 _080DABCC: .4byte gUnknown_8415A62
 _080DABD0:
-	ldr r0, _080DABF0 @ =gUnknown_2021CD0
+	ldr r0, _080DABF0 @ =gStringVar1
 	ldr r1, _080DABF4 @ =gUnknown_8415A66
 	movs r2, 0xB
 	bl StringCopyN
@@ -528,16 +528,16 @@ _080DABDA:
 	ldrb r0, [r0]
 	cmp r0, 0x6
 	bne _080DAC04
-	ldr r0, _080DABFC @ =gUnknown_2021D18
+	ldr r0, _080DABFC @ =gStringVar4
 	ldr r1, _080DAC00 @ =gUnknown_8488D8E
 	bl StringExpandPlaceholders
 	movs r0, 0x3
 	b _080DAC6E
 	.align 2, 0
-_080DABF0: .4byte gUnknown_2021CD0
+_080DABF0: .4byte gStringVar1
 _080DABF4: .4byte gUnknown_8415A66
 _080DABF8: .4byte gUnknown_2024029
-_080DABFC: .4byte gUnknown_2021D18
+_080DABFC: .4byte gStringVar4
 _080DAC00: .4byte gUnknown_8488D8E
 _080DAC04:
 	ldr r7, _080DAC80 @ =gUnknown_2024478
@@ -580,7 +580,7 @@ _080DAC3E:
 _080DAC5C:
 	bl CompactPartySlots
 	bl CalculatePlayerPartyCount
-	ldr r0, _080DAC84 @ =gUnknown_2021D18
+	ldr r0, _080DAC84 @ =gStringVar4
 	ldr r1, _080DAC88 @ =gUnknown_8488D7C
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -595,7 +595,7 @@ _080DAC6E:
 	bx r1
 	.align 2, 0
 _080DAC80: .4byte gUnknown_2024478
-_080DAC84: .4byte gUnknown_2021D18
+_080DAC84: .4byte gStringVar4
 _080DAC88: .4byte gUnknown_8488D7C
 	thumb_func_end sub_80DAB80
 
@@ -617,7 +617,7 @@ sub_80DAC8C: @ 80DAC8C
 	movs r2, 0xBC
 	bl memcpy
 	bl sub_80E7490
-	ldr r0, _080DACCC @ =gUnknown_2021D18
+	ldr r0, _080DACCC @ =gStringVar4
 	ldr r1, _080DACD0 @ =gUnknown_8488DBD
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -628,7 +628,7 @@ sub_80DAC8C: @ 80DAC8C
 	bx r1
 	.align 2, 0
 _080DACC8: .4byte gSaveBlock2Ptr
-_080DACCC: .4byte gUnknown_2021D18
+_080DACCC: .4byte gStringVar4
 _080DACD0: .4byte gUnknown_8488DBD
 	thumb_func_end sub_80DAC8C
 

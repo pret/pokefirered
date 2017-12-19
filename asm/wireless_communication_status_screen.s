@@ -250,7 +250,7 @@ sub_814F3A8: @ 814F3A8
 	movs r0, 0x3
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r3, 0xC0
 	subs r3, r0
 	lsrs r3, 1
@@ -422,7 +422,7 @@ _0814F514:
 	movs r1, 0
 	bl FillWindowPixelBuffer
 	movs r4, 0
-	ldr r6, _0814F574 @ =gUnknown_2021D18
+	ldr r6, _0814F574 @ =gStringVar4
 	movs r7, 0xA0
 	lsls r7, 20
 _0814F542:
@@ -449,7 +449,7 @@ _0814F542:
 	b _0814F58A
 	.align 2, 0
 _0814F570: .4byte gUnknown_3002040
-_0814F574: .4byte gUnknown_2021D18
+_0814F574: .4byte gStringVar4
 _0814F578:
 	movs r0, 0x64
 	str r0, [sp]
@@ -484,7 +484,7 @@ _0814F5A4:
 	beq _0814F5E2
 _0814F5B8:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _0814F5FC @ =gUnknown_3005090
 	ldr r0, _0814F600 @ =gUnknown_3002040
 	ldr r0, [r0]

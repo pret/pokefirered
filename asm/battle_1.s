@@ -1038,7 +1038,7 @@ _0800F9FC:
 	bl sub_800F5CC
 _0800FA08:
 	movs r0, 0x71
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r7, 0
 	bl DestroyTask
 	ldr r4, _0800FAD0 @ =gUnknown_202063C

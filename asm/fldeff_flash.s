@@ -73,7 +73,7 @@ _080C9BAC: .4byte sub_80C9BB0
 sub_80C9BB0: @ 80C9BB0
 	push {lr}
 	movs r0, 0xC8
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080C9BC8 @ =0x00000806
 	bl FlagSet
 	ldr r0, _080C9BCC @ =gUnknown_81BFB5F

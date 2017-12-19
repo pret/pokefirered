@@ -2132,7 +2132,7 @@ sub_80806EC: @ 80806EC
 	push {r4,lr}
 	ldr r0, _08080708 @ =gUnknown_20386B8
 	ldr r0, [r0]
-	ldr r4, _0808070C @ =gUnknown_2021D18
+	ldr r4, _0808070C @ =gStringVar4
 	bl sub_80806C8
 	adds r1, r0, 0
 	adds r0, r4, 0
@@ -2143,13 +2143,13 @@ sub_80806EC: @ 80806EC
 	bx r1
 	.align 2, 0
 _08080708: .4byte gUnknown_20386B8
-_0808070C: .4byte gUnknown_2021D18
+_0808070C: .4byte gStringVar4
 	thumb_func_end sub_80806EC
 
 	thumb_func_start sub_8080710
 sub_8080710: @ 8080710
 	push {r4,lr}
-	ldr r4, _0808072C @ =gUnknown_2021D18
+	ldr r4, _0808072C @ =gStringVar4
 	ldr r0, _08080730 @ =gUnknown_20386BC
 	ldr r0, [r0]
 	bl sub_80806C8
@@ -2161,7 +2161,7 @@ sub_8080710: @ 8080710
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808072C: .4byte gUnknown_2021D18
+_0808072C: .4byte gStringVar4
 _08080730: .4byte gUnknown_20386BC
 	thumb_func_end sub_8080710
 

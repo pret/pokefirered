@@ -1379,7 +1379,7 @@ _0804858A:
 	str r1, [sp, 0xC]
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_8006124
+	bl RenderTextFont9
 	movs r5, 0
 	ldr r1, _0804860C @ =gUnknown_202063C
 	mov r2, r9
@@ -1505,7 +1505,7 @@ _08048698:
 	str r1, [sp, 0xC]
 	add r2, sp, 0x10
 	movs r3, 0
-	bl sub_8006124
+	bl RenderTextFont9
 	adds r4, r6, 0
 	adds r0, r4, 0x3
 	cmp r4, r0
@@ -1716,7 +1716,7 @@ sub_80487F8: @ 80487F8
 	movs r1, 0
 	add r2, sp, 0x10
 	movs r3, 0
-	bl sub_8006124
+	bl RenderTextFont9
 	movs r7, 0x6
 	movs r5, 0
 	mov r2, sp
@@ -1878,7 +1878,7 @@ _08048966:
 	str r1, [sp, 0xC]
 	add r2, sp, 0x10
 	movs r3, 0
-	bl sub_8006124
+	bl RenderTextFont9
 	movs r7, 0
 	lsls r0, r4, 4
 	adds r0, r4
@@ -4315,7 +4315,7 @@ UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	movs r0, 0
 	mov r1, sp
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r1, 0x2F
 	subs r1, r0
 	add r3, sp, 0x10

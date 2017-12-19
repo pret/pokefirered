@@ -159,25 +159,25 @@ sub_806EE7C: @ 806EE7C
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_80F6F1C
-	ldr r0, _0806EEFC @ =gUnknown_2021CD0
+	ldr r0, _0806EEFC @ =gStringVar1
 	ldr r1, _0806EF00 @ =gUnknown_2039996
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0806EF04 @ =gUnknown_2021CF0
+	ldr r0, _0806EF04 @ =gStringVar2
 	movs r1, 0x96
 	lsls r1, 2
 	movs r2, 0x1
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0806EF08 @ =gUnknown_2021D04
+	ldr r0, _0806EF08 @ =gStringVar3
 	ldr r1, _0806EF0C @ =gUnknown_2039994
 	ldrb r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r5, _0806EF10 @ =gUnknown_2021D18
+	ldr r5, _0806EF10 @ =gStringVar4
 	ldr r1, _0806EF14 @ =gUnknown_84162A9
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
@@ -202,12 +202,12 @@ sub_806EE7C: @ 806EE7C
 	.align 2, 0
 _0806EEF4: .4byte gUnknown_2037101
 _0806EEF8: .4byte gUnknown_83A738C
-_0806EEFC: .4byte gUnknown_2021CD0
+_0806EEFC: .4byte gStringVar1
 _0806EF00: .4byte gUnknown_2039996
-_0806EF04: .4byte gUnknown_2021CF0
-_0806EF08: .4byte gUnknown_2021D04
+_0806EF04: .4byte gStringVar2
+_0806EF08: .4byte gStringVar3
 _0806EF0C: .4byte gUnknown_2039994
-_0806EF10: .4byte gUnknown_2021D18
+_0806EF10: .4byte gStringVar4
 _0806EF14: .4byte gUnknown_84162A9
 	thumb_func_end sub_806EE7C
 
@@ -252,7 +252,7 @@ sub_806EF44: @ 806EF44
 	lsrs r2, r0, 16
 	ldr r0, _0806EF9C @ =gUnknown_83A7344
 	mov r10, r0
-	ldr r1, _0806EFA0 @ =gUnknown_2021D18
+	ldr r1, _0806EFA0 @ =gStringVar4
 	mov r9, r1
 _0806EF68:
 	ldr r1, _0806EFA4 @ =gUnknown_20370F6
@@ -282,7 +282,7 @@ _0806EF7C:
 	b _0806EFDA
 	.align 2, 0
 _0806EF9C: .4byte gUnknown_83A7344
-_0806EFA0: .4byte gUnknown_2021D18
+_0806EFA0: .4byte gStringVar4
 _0806EFA4: .4byte gUnknown_20370F6
 _0806EFA8:
 	ldrb r0, [r4]
@@ -660,7 +660,7 @@ sub_806F280: @ 806F280
 	cmp r0, 0
 	beq _0806F2D2
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -696,7 +696,7 @@ _0806F2D2:
 	cmp r0, 0
 	beq _0806F320
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	ldr r4, _0806F360 @ =gUnknown_20370F4
@@ -731,7 +731,7 @@ _0806F320:
 	cmp r0, 0
 	beq _0806F378
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_806F3CC
 	lsls r0, 24
 	cmp r0, 0
@@ -1172,7 +1172,7 @@ sub_806F69C: @ 806F69C
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r4, r1, 0
-	ldr r0, _0806F6C8 @ =gUnknown_2021D18
+	ldr r0, _0806F6C8 @ =gStringVar4
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -1189,7 +1189,7 @@ sub_806F69C: @ 806F69C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806F6C8: .4byte gUnknown_2021D18
+_0806F6C8: .4byte gStringVar4
 _0806F6CC: .4byte gUnknown_3000FA9
 _0806F6D0: .4byte gUnknown_3000FA4
 	thumb_func_end sub_806F69C
@@ -1285,7 +1285,7 @@ _0806F764: .4byte gUnknown_3000FA8
 _0806F768: .4byte gMain
 _0806F76C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0806F772:
 	movs r0, 0x1
 _0806F774:
@@ -1601,7 +1601,7 @@ sub_806F9B8: @ 806F9B8
 	cmp r0, 0
 	bne _0806F9D0
 	movs r0, 0x30
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0806F9D8 @ =gUnknown_3000FA4
 	ldr r0, _0806F9DC @ =SaveDialogCB_ReturnSuccess
 	str r0, [r1]
@@ -1643,7 +1643,7 @@ sub_806FA04: @ 806FA04
 	cmp r0, 0
 	bne _0806FA1C
 	movs r0, 0x16
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0806FA24 @ =gUnknown_3000FA4
 	ldr r0, _0806FA28 @ =SaveDialogCB_ReturnError
 	str r0, [r1]
@@ -2020,7 +2020,7 @@ sub_806FCF4: @ 806FCF4
 	adds r2, r4, 0
 	movs r3, 0xD
 	bl SetWindowBorderStyle
-	ldr r4, _0806FE60 @ =gUnknown_2021D18
+	ldr r4, _0806FE60 @ =gStringVar4
 	movs r0, 0x3
 	adds r1, r4, 0
 	movs r2, 0x8
@@ -2030,7 +2030,7 @@ sub_806FCF4: @ 806FCF4
 	movs r0, 0x2
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r2, 0x70
 	subs r2, r0
 	lsrs r2, 1
@@ -2047,7 +2047,7 @@ sub_806FCF4: @ 806FCF4
 	movs r0, 0x2
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	ldrb r0, [r5]
 	ldr r1, _0806FE68 @ =gUnknown_83A73D4
 	mov r9, r1
@@ -2161,7 +2161,7 @@ _0806FE0A:
 _0806FE54: .4byte gUnknown_2037104
 _0806FE58: .4byte gUnknown_83A73CC
 _0806FE5C: .4byte 0x0000021d
-_0806FE60: .4byte gUnknown_2021D18
+_0806FE60: .4byte gStringVar4
 _0806FE64: .4byte gUnknown_83A73DC
 _0806FE68: .4byte gUnknown_83A73D4
 _0806FE6C: .4byte gUnknown_841617A
@@ -2192,7 +2192,7 @@ _0806FE9C: .4byte gUnknown_2037104
 sub_806FEA0: @ 806FEA0
 	push {lr}
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24

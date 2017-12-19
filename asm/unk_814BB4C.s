@@ -210,7 +210,7 @@ _0814BCA2:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _0814BCF0
-	ldr r4, _0814BCE8 @ =gUnknown_2021D18
+	ldr r4, _0814BCE8 @ =gStringVar4
 	ldr r1, _0814BCEC @ =gUnknown_846E328
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -232,7 +232,7 @@ _0814BCA2:
 	bl AddTextPrinterParametrized
 	b _0814BD12
 	.align 2, 0
-_0814BCE8: .4byte gUnknown_2021D18
+_0814BCE8: .4byte gStringVar4
 _0814BCEC: .4byte gUnknown_846E328
 _0814BCF0:
 	ldr r1, _0814BD1C @ =gUnknown_846E328
@@ -697,7 +697,7 @@ _0814C048:
 	ands r0, r2
 	strb r0, [r1]
 	movs r0, 0x36
-	bl sub_80722CC
+	bl PlaySE
 	b _0814C108
 	.align 2, 0
 _0814C07C: .4byte sub_814DB84
@@ -756,7 +756,7 @@ _0814C0E4:
 	cmp r0, 0
 	beq _0814C10E
 	movs r0, 0x25
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0xB
 	movs r1, 0x1
 	movs r2, 0
@@ -826,7 +826,7 @@ _0814C144:
 	adds r1, r4, r2
 	strb r0, [r1]
 	movs r0, 0xCF
-	bl sub_80722CC
+	bl PlaySE
 	b _0814C23C
 	.align 2, 0
 _0814C174: .4byte 0x00000139
@@ -1930,7 +1930,7 @@ _0814C9C4:
 	movs r0, 0x8
 	strh r0, [r4, 0x12]
 	movs r0, 0xCF
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	ldr r2, _0814C9E8 @ =0x000003ff
@@ -2119,7 +2119,7 @@ _0814CB42:
 	movs r0, 0x9
 	strh r0, [r5, 0x12]
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0x8
@@ -2176,7 +2176,7 @@ _0814CBBC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814CC02
-	ldr r0, _0814CBF8 @ =gUnknown_2021CD0
+	ldr r0, _0814CBF8 @ =gStringVar1
 	ldr r1, [r5, 0x1C]
 	movs r2, 0
 	movs r3, 0x6
@@ -2198,7 +2198,7 @@ _0814CBBC:
 	strh r4, [r5, 0x10]
 	b _0814CC00
 	.align 2, 0
-_0814CBF8: .4byte gUnknown_2021CD0
+_0814CBF8: .4byte gStringVar1
 _0814CBFC:
 	ldrb r0, [r5, 0xC]
 	adds r0, 0x1
@@ -2736,7 +2736,7 @@ _0814D00E:
 	cmp r0, 0
 	beq _0814D08A
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_814E80C
 	b _0814D084
@@ -2752,12 +2752,12 @@ _0814D02C:
 	strb r1, [r5, 0xC]
 	b _0814D08A
 _0814D03C:
-	ldr r0, _0814D07C @ =gUnknown_2021CD0
+	ldr r0, _0814D07C @ =gStringVar1
 	ldr r1, [r5, 0x1C]
 	movs r2, 0
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
-	ldr r4, _0814D080 @ =gUnknown_2021CF0
+	ldr r4, _0814D080 @ =gStringVar2
 	bl sub_815EFA0
 	adds r1, r0, 0
 	adds r0, r4, 0
@@ -2780,8 +2780,8 @@ _0814D03C:
 	strb r4, [r5, 0xC]
 	b _0814D08A
 	.align 2, 0
-_0814D07C: .4byte gUnknown_2021CD0
-_0814D080: .4byte gUnknown_2021CF0
+_0814D07C: .4byte gStringVar1
+_0814D080: .4byte gStringVar2
 _0814D084:
 	ldrb r0, [r5, 0xC]
 	adds r0, 0x1

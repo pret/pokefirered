@@ -72,7 +72,7 @@ _080A0E42:
 overworld_poison_effect: @ 80A0E48
 	push {lr}
 	movs r0, 0x48
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080A0E5C @ =task50_overworld_poison_effect
 	movs r1, 0x50
 	bl CreateTask

@@ -14,10 +14,7 @@ static u16 sLastTextFgColor;
 static u16 sLastTextShadowColor;
 
 const struct FontInfo *gFonts;
-u32 gGlyphBuffer1[8];
-u32 gGlyphBuffer2[8];
-u32 gGlyphBuffer3[8];
-u32 gGlyphBuffer4[8];
+u8 gGlyphInfo[0x90];
 
 static const u8 sFontHalfRowOffsets[] =
 {

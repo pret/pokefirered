@@ -76,16 +76,16 @@ gUnknown_2021BCC: @ 2021BCC
 gUnknown_2021CCC: @ 2021CCC
 	.space 0x4
 
-gUnknown_2021CD0: @ 2021CD0
+gStringVar1: @ 2021CD0
 	.space 0x20
 
-gUnknown_2021CF0: @ 2021CF0
+gStringVar2: @ 2021CF0
 	.space 0x14
 
-gUnknown_2021D04: @ 2021D04
+gStringVar3: @ 2021D04
 	.space 0x14
 
-gUnknown_2021D18: @ 2021D18
+gStringVar4: @ 2021D18
 	.space 0x3E8
 
 gUnknown_2022100: @ 2022100

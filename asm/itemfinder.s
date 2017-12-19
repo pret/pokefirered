@@ -130,7 +130,7 @@ _0813ED80: .4byte gUnknown_3005098
 _0813ED84: .4byte sub_813F364
 _0813ED88:
 	movs r0, 0x41
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4, 0xA]
 	adds r1, r5, 0
 	bl sub_813F40C
@@ -182,7 +182,7 @@ _0813EDE4: .4byte gUnknown_3005098
 _0813EDE8: .4byte sub_813F3A8
 _0813EDEC:
 	movs r0, 0x41
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_813F5AC
 	lsls r0, 24
 	lsrs r0, 24

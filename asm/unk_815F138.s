@@ -240,7 +240,7 @@ _0815F30A:
 	cmp r0, 0
 	bne _0815F318
 	movs r0, 0x32
-	bl sub_80722CC
+	bl PlaySE
 _0815F318:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
@@ -477,7 +477,7 @@ _0815F4B4:
 	cmp r0, 0
 	blt _0815F55A
 	movs r0, 0x32
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r5, 0x26]
 	ldrh r0, [r4]
@@ -493,7 +493,7 @@ _0815F4DC:
 	cmp r0, 0x7F
 	ble _0815F4FA
 	movs r0, 0x32
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2]
 	ldrh r0, [r4]
@@ -520,7 +520,7 @@ _0815F510:
 	cmp r0, 0x7F
 	ble _0815F52E
 	movs r0, 0x32
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2]
 	ldrh r0, [r4]

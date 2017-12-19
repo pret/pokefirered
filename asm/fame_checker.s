@@ -51,7 +51,7 @@ sub_812C3AC: @ 812C3AC
 	ands r0, r2
 	strb r0, [r1]
 	movs r0, 0xC7
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0812C3F4 @ =sub_812C3F8
 	bl SetMainCallback2
 	pop {r4,r5}
@@ -404,7 +404,7 @@ _0812C6E8:
 	cmp r0, 0x1
 	bne _0812C728
 	movs r0, 0xCB
-	bl sub_80722CC
+	bl PlaySE
 	b _0812C8EA
 	.align 2, 0
 _0812C714: .4byte gUnknown_3005090
@@ -423,7 +423,7 @@ _0812C728:
 	b _0812C8EA
 _0812C738:
 	movs r0, 0xCB
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x58
 	str r0, [sp]
 	movs r0, 0x20
@@ -534,7 +534,7 @@ _0812C828:
 	cmp r0, 0
 	beq _0812C8EA
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r1, 0xA
 	ldrsh r0, [r7, r1]
 	bl sub_812D724
@@ -917,7 +917,7 @@ _0812CB2E:
 	cmp r0, 0
 	beq _0812CBB8
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r4, 0
 	ldr r6, _0812CBA4 @ =gUnknown_203B0FC
 _0812CB44:
@@ -1079,7 +1079,7 @@ sub_812CC68: @ 812CC68
 	ldr r1, _0812CD18 @ =gUnknown_3005098
 	adds r6, r0, r1
 	movs r0, 0xBB
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _0812CD1C @ =gUnknown_202063C
 	movs r0, 0
 	ldrsh r1, [r6, r0]
@@ -1217,7 +1217,7 @@ _0812CD88:
 	movs r0, 0x10
 	mov r8, r0
 _0812CDAC:
-	ldr r4, _0812CDFC @ =gUnknown_2021D18
+	ldr r4, _0812CDFC @ =gStringVar4
 	ldr r1, _0812CE00 @ =gUnknown_845F63C
 	ldr r0, [r7]
 	adds r0, 0xC
@@ -1254,7 +1254,7 @@ _0812CDEE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812CDFC: .4byte gUnknown_2021D18
+_0812CDFC: .4byte gStringVar4
 _0812CE00: .4byte gUnknown_845F63C
 	thumb_func_end sub_812CD3C
 
@@ -1282,7 +1282,7 @@ sub_812CE04: @ 812CE04
 	movs r2, 0
 	movs r3, 0
 	bl FillWindowPixelRect
-	ldr r6, _0812CE90 @ =gUnknown_2021D18
+	ldr r6, _0812CE90 @ =gStringVar4
 	ldr r2, _0812CE94 @ =gUnknown_845F6BC
 	ldr r0, _0812CE98 @ =gUnknown_203B0FC
 	ldr r0, [r0]
@@ -1324,7 +1324,7 @@ sub_812CE04: @ 812CE04
 	bx r0
 	.align 2, 0
 _0812CE8C: .4byte gUnknown_3005098
-_0812CE90: .4byte gUnknown_2021D18
+_0812CE90: .4byte gStringVar4
 _0812CE94: .4byte gUnknown_845F6BC
 _0812CE98: .4byte gUnknown_203B0FC
 	thumb_func_end sub_812CE04
@@ -1426,7 +1426,7 @@ sub_812CF3C: @ 812CF3C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xC7
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -1635,7 +1635,7 @@ _0812D10A:
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r4, r0, 0
 	movs r0, 0xC0
 	str r0, [sp]
@@ -2831,7 +2831,7 @@ sub_812DA14: @ 812DA14
 	movs r0, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r4, 0x54
 	subs r0, r4, r0
 	lsrs r1, r0, 31
@@ -2856,7 +2856,7 @@ sub_812DA14: @ 812DA14
 	movs r1, 0
 	movs r3, 0
 	bl AddTextPrinterParametrized2
-	ldr r6, _0812DB08 @ =gUnknown_2021CD0
+	ldr r6, _0812DB08 @ =gStringVar1
 	ldr r0, _0812DB0C @ =gUnknown_845FA1C
 	adds r5, r0
 	ldr r1, [r5]
@@ -2865,7 +2865,7 @@ sub_812DA14: @ 812DA14
 	movs r0, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	subs r4, r0
 	lsrs r0, r4, 31
 	adds r4, r0
@@ -2899,7 +2899,7 @@ _0812DAF8: .4byte gUnknown_203B0FC
 _0812DAFC: .4byte gUnknown_3005EC8
 _0812DB00: .4byte gUnknown_845F89C
 _0812DB04: .4byte gUnknown_845F5E3
-_0812DB08: .4byte gUnknown_2021CD0
+_0812DB08: .4byte gStringVar1
 _0812DB0C: .4byte gUnknown_845FA1C
 	thumb_func_end sub_812DA14
 
@@ -3032,7 +3032,7 @@ _0812DBFE:
 	ldr r1, _0812DC74 @ =gUnknown_3005090
 	adds r5, r0, r1
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	mov r0, r8
 	strh r0, [r5, 0xA]
 	ldr r0, [r6]

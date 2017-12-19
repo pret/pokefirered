@@ -236,7 +236,7 @@ _0813F9BC:
 	movs r0, 0x1
 	bl sub_80D05E4
 	movs r0, 0x58
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x8
 	movs r1, 0
 	bl sub_8141148
@@ -282,7 +282,7 @@ _0813FA30:
 	bl sub_80D057C
 _0813FA42:
 	movs r0, 0x58
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x8
 	movs r1, 0
 	bl sub_8141148
@@ -385,7 +385,7 @@ _0813FB08:
 	cmp r0, 0
 	beq _0813FBB8
 	movs r0, 0x18
-	bl sub_80722CC
+	bl PlaySE
 	ldr r4, _0813FB44 @ =gUnknown_203F3A0
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x6]
@@ -891,7 +891,7 @@ _0813FF0C:
 	cmp r0, 0
 	beq _0813FF28
 	movs r0, 0x15
-	bl sub_80722CC
+	bl PlaySE
 _0813FF28:
 	ldr r4, _0813FF70 @ =gUnknown_203F3A0
 	ldr r0, [r4]
@@ -3586,7 +3586,7 @@ _081411D0:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r2, 0xEC
 	subs r2, r0
 	add r1, sp, 0x10
@@ -4089,7 +4089,7 @@ _081416E4:
 	movs r0, 0x1
 	bl ShowBg
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	str r4, [r5, 0x24]
 	ldrb r0, [r6]
 	adds r0, 0x1
@@ -4152,7 +4152,7 @@ _0814177A:
 	b _081417DC
 _08141784:
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]

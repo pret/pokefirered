@@ -287,7 +287,7 @@ GetNameOfEnigmaBerryInPlayerParty: @ 80A026C
 	bl ItemIdToBerryType
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080A0298 @ =gUnknown_2021CD0
+	ldr r1, _080A0298 @ =gStringVar1
 	bl GetBerryNameByBerryType
 _080A028E:
 	adds r0, r4, 0
@@ -295,7 +295,7 @@ _080A028E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A0298: .4byte gUnknown_2021CD0
+_080A0298: .4byte gStringVar1
 	thumb_func_end GetNameOfEnigmaBerryInPlayerParty
 
 	thumb_func_start CreateScriptedWildMon

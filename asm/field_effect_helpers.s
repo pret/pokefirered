@@ -1892,7 +1892,7 @@ FldEff_Splash: @ 80DBB88
 	subs r0, 0x4
 	strh r0, [r3, 0x26]
 	movs r0, 0x3F
-	bl sub_80722CC
+	bl PlaySE
 _080DBC12:
 	movs r0, 0
 	pop {r4-r6}
@@ -2250,7 +2250,7 @@ _080DBE98:
 	cmp r0, 0
 	bne _080DBEE2
 	movs r0, 0x3F
-	bl sub_80722CC
+	bl PlaySE
 _080DBEE2:
 	add sp, 0x4
 	pop {r4,r5}

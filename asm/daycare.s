@@ -360,7 +360,7 @@ TakeSelectedPokemonFromDaycare: @ 804565C
 	push {r4-r7,lr}
 	sub sp, 0x68
 	adds r5, r0, 0
-	ldr r1, _080456F8 @ =gUnknown_2021CD0
+	ldr r1, _080456F8 @ =gStringVar1
 	bl GetBoxMonNick
 	adds r0, r5, 0
 	movs r1, 0xB
@@ -425,7 +425,7 @@ _080456D8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080456F8: .4byte gUnknown_2021CD0
+_080456F8: .4byte gStringVar1
 _080456FC: .4byte gUnknown_2024284
 	thumb_func_end TakeSelectedPokemonFromDaycare
 
@@ -530,12 +530,12 @@ GetNumLevelsGainedForDaycareMon: @ 80457B4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080457E0 @ =gUnknown_2021CF0
+	ldr r0, _080457E0 @ =gStringVar2
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r1, _080457E4 @ =gUnknown_2021CD0
+	ldr r1, _080457E4 @ =gStringVar1
 	adds r0, r5, 0
 	bl GetBoxMonNick
 	adds r0, r4, 0
@@ -543,8 +543,8 @@ GetNumLevelsGainedForDaycareMon: @ 80457B4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080457E0: .4byte gUnknown_2021CF0
-_080457E4: .4byte gUnknown_2021CD0
+_080457E0: .4byte gStringVar2
+_080457E4: .4byte gStringVar1
 	thumb_func_end GetNumLevelsGainedForDaycareMon
 
 	thumb_func_start GetDaycareCostForSelectedMon
@@ -555,13 +555,13 @@ GetDaycareCostForSelectedMon: @ 80457E8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _08045818 @ =gUnknown_2021CD0
+	ldr r1, _08045818 @ =gStringVar1
 	adds r0, r5, 0
 	bl GetBoxMonNick
 	movs r0, 0x64
 	muls r4, r0
 	adds r4, 0x64
-	ldr r0, _0804581C @ =gUnknown_2021CF0
+	ldr r0, _0804581C @ =gStringVar2
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x5
@@ -571,8 +571,8 @@ GetDaycareCostForSelectedMon: @ 80457E8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08045818: .4byte gUnknown_2021CD0
-_0804581C: .4byte gUnknown_2021CF0
+_08045818: .4byte gStringVar1
+_0804581C: .4byte gStringVar2
 	thumb_func_end GetDaycareCostForSelectedMon
 
 	thumb_func_start GetDaycareCostForMon
@@ -2163,14 +2163,14 @@ _GetDaycareMonNicknames: @ 804640C
 	bl GetBoxMonData
 	cmp r0, 0
 	beq _08046436
-	ldr r1, _08046454 @ =gUnknown_2021CD0
+	ldr r1, _08046454 @ =gStringVar1
 	adds r0, r4, 0
 	bl GetBoxMonNick
 	adds r0, r4, 0
 	movs r1, 0x7
 	mov r2, sp
 	bl GetBoxMonData
-	ldr r0, _08046458 @ =gUnknown_2021D04
+	ldr r0, _08046458 @ =gStringVar3
 	mov r1, sp
 	bl StringCopy
 _08046436:
@@ -2180,7 +2180,7 @@ _08046436:
 	bl GetBoxMonData
 	cmp r0, 0
 	beq _0804644C
-	ldr r1, _0804645C @ =gUnknown_2021CF0
+	ldr r1, _0804645C @ =gStringVar2
 	adds r0, r4, 0
 	bl GetBoxMonNick
 _0804644C:
@@ -2189,9 +2189,9 @@ _0804644C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046454: .4byte gUnknown_2021CD0
-_08046458: .4byte gUnknown_2021D04
-_0804645C: .4byte gUnknown_2021CF0
+_08046454: .4byte gStringVar1
+_08046458: .4byte gStringVar3
+_0804645C: .4byte gStringVar2
 	thumb_func_end _GetDaycareMonNicknames
 
 	thumb_func_start GetSelectedMonNickAndSpecies
@@ -2204,7 +2204,7 @@ GetSelectedMonNickAndSpecies: @ 8046460
 	muls r0, r5
 	ldr r4, _08046494 @ =gUnknown_2024284
 	adds r0, r4
-	ldr r1, _08046498 @ =gUnknown_2021CD0
+	ldr r1, _08046498 @ =gStringVar1
 	bl GetBoxMonNick
 	bl GetCursorSelectionMonId
 	lsls r0, 24
@@ -2220,7 +2220,7 @@ GetSelectedMonNickAndSpecies: @ 8046460
 	bx r1
 	.align 2, 0
 _08046494: .4byte gUnknown_2024284
-_08046498: .4byte gUnknown_2021CD0
+_08046498: .4byte gStringVar1
 	thumb_func_end GetSelectedMonNickAndSpecies
 
 	thumb_func_start GetDaycareMonNicknames
@@ -2522,7 +2522,7 @@ _080466A8:
 	bne _080466AE
 	movs r1, 0
 _080466AE:
-	ldr r0, _080466C0 @ =gUnknown_2021D18
+	ldr r0, _080466C0 @ =gStringVar4
 	ldr r2, _080466C4 @ =gUnknown_825F82C
 	lsls r1, 2
 	adds r1, r2
@@ -2531,7 +2531,7 @@ _080466AE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080466C0: .4byte gUnknown_2021D18
+_080466C0: .4byte gStringVar4
 _080466C4: .4byte gUnknown_825F82C
 	thumb_func_end SetDaycareCompatibilityString
 
@@ -2799,7 +2799,7 @@ DaycareAddTextPrinter: @ 8046898
 	adds r0, r2, 0
 	ands r0, r1
 	strb r0, [r3, 0xC]
-	ldr r3, _08046908 @ =gUnknown_3003E50
+	ldr r3, _08046908 @ =gTextFlags
 	ldrb r1, [r3]
 	movs r0, 0x3
 	negs r0, r0
@@ -2836,7 +2836,7 @@ DaycareAddTextPrinter: @ 8046898
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046908: .4byte gUnknown_3003E50
+_08046908: .4byte gTextFlags
 	thumb_func_end DaycareAddTextPrinter
 
 	thumb_func_start DaycarePrintMonNick
@@ -2905,7 +2905,7 @@ DaycarePrintMonLvl: @ 8046944
 	movs r0, 0x3
 	mov r1, sp
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r2, 0x84
 	subs r2, r0
 	adds r0, r5, 0

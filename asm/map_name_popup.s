@@ -408,7 +408,7 @@ _08098434:
 	negs r2, r2
 	movs r0, 0x2
 	add r1, sp, 0xC
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r4, r0, 0
 	subs r4, r5, r4
 	lsrs r4, 1

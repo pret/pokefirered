@@ -636,7 +636,7 @@ sub_80F5DD0: @ 80F5DD0
 	ldr r0, _080F5E1C @ =EvoTask_CreatePreEvoSparkleSet1
 	str r0, [r5]
 	movs r0, 0x85
-	bl sub_80722CC
+	bl PlaySE
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -768,7 +768,7 @@ sub_80F5ED8: @ 80F5ED8
 	ldr r1, _080F5F08 @ =EvoTask_CreatePreEvoSparklesSet2
 	str r1, [r0]
 	movs r0, 0xB0
-	bl sub_80722CC
+	bl PlaySE
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -867,7 +867,7 @@ sub_80F5F8C: @ 80F5F8C
 	ldr r1, _080F5FBC @ =EvoTask_CreatePostEvoSparklesSet1
 	str r1, [r0]
 	movs r0, 0x5F
-	bl sub_80722CC
+	bl PlaySE
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1011,7 +1011,7 @@ sub_80F6080: @ 80F6080
 	ldr r0, _080F60E0 @ =sub_80F60E4
 	str r0, [r5]
 	movs r0, 0xC3
-	bl sub_80722CC
+	bl PlaySE
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -1173,7 +1173,7 @@ sub_80F61C0: @ 80F61C0
 	ldr r0, _080F6220 @ =sub_80F6224
 	str r0, [r5]
 	movs r0, 0xC3
-	bl sub_80722CC
+	bl PlaySE
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

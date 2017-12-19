@@ -79,7 +79,7 @@ src/isagbprn.o: CFLAGS := -mthumb-interwork
 
 $(C_OBJS): %.o : %.c
 	@$(CPP) $(CPPFLAGS) $< -o $*.i
-	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) $*.i -o $*.s
+	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 

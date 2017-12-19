@@ -151,7 +151,7 @@ sub_80A10C4: @ 80A10C4
 	lsrs r4, 24
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r5, _080A10F0 @ =gUnknown_2021D18
+	ldr r5, _080A10F0 @ =gStringVar4
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	cmp r4, 0
@@ -163,7 +163,7 @@ sub_80A10C4: @ 80A10C4
 	bl sub_8108E70
 	b _080A1104
 	.align 2, 0
-_080A10F0: .4byte gUnknown_2021D18
+_080A10F0: .4byte gStringVar4
 _080A10F4: .4byte sub_810A1F8
 _080A10F8:
 	ldr r3, _080A110C @ =sub_80A112C
@@ -443,7 +443,7 @@ sub_80A1304: @ 80A1304
 	cmp r0, 0
 	bne _080A131C
 	movs r0, 0xB
-	bl sub_80722CC
+	bl PlaySE
 _080A131C:
 	movs r0, 0x6
 	bl sub_80BD5C8
@@ -612,7 +612,7 @@ sub_80A1460: @ 80A1460
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _080A14B4 @ =gUnknown_2021CD0
+	ldr r4, _080A14B4 @ =gStringVar1
 	bl sub_80D0554
 	adds r1, r0, 0
 	lsls r1, 16
@@ -621,7 +621,7 @@ sub_80A1460: @ 80A1460
 	movs r2, 0
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r4, _080A14B8 @ =gUnknown_2021D18
+	ldr r4, _080A14B8 @ =gStringVar4
 	ldr r1, _080A14BC @ =gUnknown_8416537
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -647,8 +647,8 @@ sub_80A1460: @ 80A1460
 	bl sub_8108E70
 	b _080A14DC
 	.align 2, 0
-_080A14B4: .4byte gUnknown_2021CD0
-_080A14B8: .4byte gUnknown_2021D18
+_080A14B4: .4byte gStringVar1
+_080A14B8: .4byte gStringVar4
 _080A14BC: .4byte gUnknown_8416537
 _080A14C0: .4byte gUnknown_203AD30
 _080A14C4: .4byte 0x0000ffff
@@ -673,14 +673,14 @@ sub_80A14E8: @ 80A14E8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _080A1538 @ =gUnknown_2021CD0
+	ldr r4, _080A1538 @ =gStringVar1
 	bl sub_815EFA0
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x5
 	bl ConvertIntToDecimalStringN
-	ldr r4, _080A153C @ =gUnknown_2021D18
+	ldr r4, _080A153C @ =gStringVar4
 	ldr r1, _080A1540 @ =gUnknown_8416644
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -706,8 +706,8 @@ sub_80A14E8: @ 80A14E8
 	bl sub_8108E70
 	b _080A1560
 	.align 2, 0
-_080A1538: .4byte gUnknown_2021CD0
-_080A153C: .4byte gUnknown_2021D18
+_080A1538: .4byte gStringVar1
+_080A153C: .4byte gStringVar4
 _080A1540: .4byte gUnknown_8416644
 _080A1544: .4byte gUnknown_203AD30
 _080A1548: .4byte 0x0000ffff
@@ -1286,7 +1286,7 @@ sub_80A1998: @ 80A1998
 	cmp r0, 0
 	bne _080A19CC
 	movs r0, 0x29
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080A19C4 @ =gUnknown_3005090
 	lsls r1, r4, 2
 	adds r1, r4
@@ -1338,7 +1338,7 @@ sub_80A19E8: @ 80A19E8
 	adds r0, r5, 0
 	bl VarSet
 	bl sub_80A1A44
-	ldr r2, _080A1A3C @ =gUnknown_2021D18
+	ldr r2, _080A1A3C @ =gStringVar4
 	ldr r3, _080A1A40 @ =sub_810A1F8
 	adds r0, r6, 0
 	movs r1, 0x2
@@ -1351,7 +1351,7 @@ _080A1A2A:
 _080A1A30: .4byte gUnknown_203AD30
 _080A1A34: .4byte 0x0000ffff
 _080A1A38: .4byte 0x00004020
-_080A1A3C: .4byte gUnknown_2021D18
+_080A1A3C: .4byte gStringVar4
 _080A1A40: .4byte sub_810A1F8
 	thumb_func_end sub_80A19E8
 
@@ -1373,9 +1373,9 @@ sub_80A1A44: @ 80A1A44
 	lsrs r0, 24
 	bl sub_81089F4
 	ldrh r0, [r4]
-	ldr r1, _080A1A88 @ =gUnknown_2021CF0
+	ldr r1, _080A1A88 @ =gStringVar2
 	bl sub_8099E90
-	ldr r0, _080A1A8C @ =gUnknown_2021D18
+	ldr r0, _080A1A8C @ =gStringVar4
 	ldr r1, _080A1A90 @ =gUnknown_841658C
 	bl StringExpandPlaceholders
 	pop {r4}
@@ -1383,8 +1383,8 @@ sub_80A1A44: @ 80A1A44
 	bx r0
 	.align 2, 0
 _080A1A84: .4byte gUnknown_203AD30
-_080A1A88: .4byte gUnknown_2021CF0
-_080A1A8C: .4byte gUnknown_2021D18
+_080A1A88: .4byte gStringVar2
+_080A1A8C: .4byte gStringVar4
 _080A1A90: .4byte gUnknown_841658C
 	thumb_func_end sub_80A1A44
 
@@ -1408,9 +1408,9 @@ sub_80A1A94: @ 80A1A94
 	ldr r0, _080A1AE0 @ =0x00000804
 	bl FlagClear
 	ldrh r0, [r5]
-	ldr r1, _080A1AE4 @ =gUnknown_2021CF0
+	ldr r1, _080A1AE4 @ =gStringVar2
 	bl sub_8099E90
-	ldr r0, _080A1AE8 @ =gUnknown_2021D18
+	ldr r0, _080A1AE8 @ =gStringVar4
 	ldr r1, _080A1AEC @ =gUnknown_84165D2
 	bl StringExpandPlaceholders
 	ldr r1, _080A1AF0 @ =gUnknown_3005090
@@ -1422,8 +1422,8 @@ _080A1AD4: .4byte gUnknown_203AD30
 _080A1AD8: .4byte 0x0000ffff
 _080A1ADC: .4byte 0x00000803
 _080A1AE0: .4byte 0x00000804
-_080A1AE4: .4byte gUnknown_2021CF0
-_080A1AE8: .4byte gUnknown_2021D18
+_080A1AE4: .4byte gStringVar2
+_080A1AE8: .4byte gStringVar4
 _080A1AEC: .4byte gUnknown_84165D2
 _080A1AF0: .4byte gUnknown_3005090
 _080A1AF4:
@@ -1434,9 +1434,9 @@ _080A1AF4:
 	ldr r0, _080A1B30 @ =0x00000803
 	bl FlagClear
 	ldrh r0, [r5]
-	ldr r1, _080A1B34 @ =gUnknown_2021CF0
+	ldr r1, _080A1B34 @ =gStringVar2
 	bl sub_8099E90
-	ldr r0, _080A1B38 @ =gUnknown_2021D18
+	ldr r0, _080A1B38 @ =gStringVar4
 	ldr r1, _080A1B3C @ =gUnknown_8416600
 	bl StringExpandPlaceholders
 	ldr r1, _080A1B40 @ =gUnknown_3005090
@@ -1456,8 +1456,8 @@ _080A1B26:
 	.align 2, 0
 _080A1B2C: .4byte 0x00000804
 _080A1B30: .4byte 0x00000803
-_080A1B34: .4byte gUnknown_2021CF0
-_080A1B38: .4byte gUnknown_2021D18
+_080A1B34: .4byte gStringVar2
+_080A1B38: .4byte gStringVar4
 _080A1B3C: .4byte gUnknown_8416600
 _080A1B40: .4byte gUnknown_3005090
 _080A1B44: .4byte sub_80A1B48
@@ -1481,8 +1481,8 @@ sub_80A1B48: @ 80A1B48
 	cmp r0, 0x7
 	ble _080A1B78
 	movs r0, 0x6E
-	bl sub_80722CC
-	ldr r2, _080A1B84 @ =gUnknown_2021D18
+	bl PlaySE
+	ldr r2, _080A1B84 @ =gStringVar4
 	ldr r3, _080A1B88 @ =sub_810A1F8
 	adds r0, r4, 0
 	movs r1, 0x2
@@ -1493,7 +1493,7 @@ _080A1B78:
 	bx r0
 	.align 2, 0
 _080A1B80: .4byte gUnknown_3005090
-_080A1B84: .4byte gUnknown_2021D18
+_080A1B84: .4byte gStringVar4
 _080A1B88: .4byte sub_810A1F8
 	thumb_func_end sub_80A1B48
 
@@ -1577,7 +1577,7 @@ sub_80A1C08: @ 80A1C08
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x8]
-	ldr r2, _080A1C3C @ =gUnknown_2021D18
+	ldr r2, _080A1C3C @ =gStringVar4
 	ldr r3, _080A1C40 @ =sub_80A1C44
 	adds r0, r4, 0
 	movs r1, 0x2
@@ -1587,7 +1587,7 @@ sub_80A1C08: @ 80A1C08
 	bx r0
 	.align 2, 0
 _080A1C38: .4byte gUnknown_3005090
-_080A1C3C: .4byte gUnknown_2021D18
+_080A1C3C: .4byte gStringVar4
 _080A1C40: .4byte sub_80A1C44
 	thumb_func_end sub_80A1C08
 
@@ -1956,7 +1956,7 @@ sub_80A1EF4: @ 80A1EF4
 	ldr r0, _080A1F40 @ =gUnknown_203AD30
 	ldrh r4, [r0]
 	movs r0, 0x1
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_809A1D8
@@ -2103,7 +2103,7 @@ sub_80A2010: @ 80A2010
 	movs r0, 0x4
 	movs r1, 0
 	bl sub_80A2294
-	ldr r2, _080A2050 @ =gUnknown_2021D18
+	ldr r2, _080A2050 @ =gStringVar4
 	ldr r3, _080A2054 @ =sub_8108B50
 	adds r0, r4, 0
 	movs r1, 0x2
@@ -2113,7 +2113,7 @@ sub_80A2010: @ 80A2010
 _080A2044: .4byte gUnknown_2022B4C
 _080A2048: .4byte gUnknown_203AD30
 _080A204C: .4byte 0x0000ffff
-_080A2050: .4byte gUnknown_2021D18
+_080A2050: .4byte gStringVar4
 _080A2054: .4byte sub_8108B50
 _080A2058:
 	adds r0, r4, 0
@@ -2331,7 +2331,7 @@ sub_80A2238: @ 80A2238
 	lsrs r0, 24
 	cmp r0, 0x5
 	bne _080A2278
-	ldr r4, _080A226C @ =gUnknown_2021D18
+	ldr r4, _080A226C @ =gStringVar4
 	ldr r1, _080A2270 @ =gUnknown_8416425
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -2343,7 +2343,7 @@ sub_80A2238: @ 80A2238
 	b _080A228A
 	.align 2, 0
 _080A2268: .4byte gUnknown_203AD30
-_080A226C: .4byte gUnknown_2021D18
+_080A226C: .4byte gStringVar4
 _080A2270: .4byte gUnknown_8416425
 _080A2274: .4byte sub_813E2B8
 _080A2278:

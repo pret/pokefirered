@@ -278,7 +278,7 @@ sub_810ED6C: @ 810ED6C
 	cmp r1, 0x1
 	beq _0810ED7C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0810ED7C:
 	pop {r0}
 	bx r0

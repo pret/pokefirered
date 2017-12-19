@@ -1512,14 +1512,14 @@ sub_80E64C0: @ 80E64C0
 	beq _080E6554
 	cmp r4, 0
 	bne _080E64EC
-	ldr r0, _080E6514 @ =gUnknown_2021CD0
+	ldr r0, _080E6514 @ =gStringVar1
 	ldr r1, _080E6518 @ =gUnknown_83FE859
 	bl StringAppend
 _080E64EC:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r6, _080E6514 @ =gUnknown_2021CD0
+	ldr r6, _080E6514 @ =gStringVar1
 	movs r0, 0xB
 	adds r1, r5, 0
 	muls r1, r0
@@ -1535,7 +1535,7 @@ _080E64EC:
 	beq _080E652A
 	b _080E654C
 	.align 2, 0
-_080E6514: .4byte gUnknown_2021CD0
+_080E6514: .4byte gStringVar1
 _080E6518: .4byte gUnknown_83FE859
 _080E651C: .4byte gUnknown_8245EE0
 _080E6520:
@@ -1552,15 +1552,15 @@ _080E652A:
 	.align 2, 0
 _080E6534: .4byte gUnknown_83FE85E
 _080E6538:
-	ldr r0, _080E6544 @ =gUnknown_2021CD0
+	ldr r0, _080E6544 @ =gStringVar1
 	ldr r1, _080E6548 @ =gUnknown_83FE85C
 	bl StringAppend
 	b _080E6554
 	.align 2, 0
-_080E6544: .4byte gUnknown_2021CD0
+_080E6544: .4byte gStringVar1
 _080E6548: .4byte gUnknown_83FE85C
 _080E654C:
-	ldr r0, _080E655C @ =gUnknown_2021CD0
+	ldr r0, _080E655C @ =gStringVar1
 	ldr r1, _080E6560 @ =gUnknown_83FE859
 	bl StringAppend
 _080E6554:
@@ -1569,7 +1569,7 @@ _080E6554:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080E655C: .4byte gUnknown_2021CD0
+_080E655C: .4byte gStringVar1
 _080E6560: .4byte gUnknown_83FE859
 	thumb_func_end sub_80E64C0
 
@@ -1766,7 +1766,7 @@ _080E6662:
 	ldrb r0, [r1]
 	cmp r0, 0x2
 	bhi _080E6750
-	ldr r1, _080E672C @ =gUnknown_2021CD0
+	ldr r1, _080E672C @ =gStringVar1
 	movs r0, 0xFF
 	strb r0, [r1]
 	ldr r1, _080E6730 @ =gUnknown_20370C0
@@ -1793,7 +1793,7 @@ _080E66F2:
 	cmp r0, r6
 	bne _080E66F2
 _080E6704:
-	ldr r4, _080E672C @ =gUnknown_2021CD0
+	ldr r4, _080E672C @ =gStringVar1
 	adds r0, r4, 0
 	bl StringLength
 	lsls r0, 16
@@ -1811,7 +1811,7 @@ _080E6704:
 	.align 2, 0
 _080E6724: .4byte gUnknown_2024284
 _080E6728: .4byte gUnknown_20370D0
-_080E672C: .4byte gUnknown_2021CD0
+_080E672C: .4byte gStringVar1
 _080E6730: .4byte gUnknown_20370C0
 _080E6734: .4byte gUnknown_84020C4
 _080E6738: .4byte 0x0000ffff
@@ -1867,7 +1867,7 @@ sub_80E678C: @ 80E678C
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E67E4
-	ldr r5, _080E67E0 @ =gUnknown_2021D18
+	ldr r5, _080E67E0 @ =gStringVar4
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -1885,7 +1885,7 @@ _080E67B8:
 	cmp r0, 0xFE
 	bne _080E67B8
 _080E67C2:
-	ldr r2, _080E67E0 @ =gUnknown_2021D18
+	ldr r2, _080E67E0 @ =gStringVar4
 	adds r0, r1, r2
 	ldrb r0, [r0]
 	adds r3, r2, 0
@@ -1903,9 +1903,9 @@ _080E67D8:
 	strb r0, [r1]
 	b _080E67F0
 	.align 2, 0
-_080E67E0: .4byte gUnknown_2021D18
+_080E67E0: .4byte gStringVar4
 _080E67E4:
-	ldr r0, _080E67F8 @ =gUnknown_2021D18
+	ldr r0, _080E67F8 @ =gStringVar4
 	adds r1, r4, 0
 	movs r2, 0x3
 	movs r3, 0x2
@@ -1915,7 +1915,7 @@ _080E67F0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E67F8: .4byte gUnknown_2021D18
+_080E67F8: .4byte gStringVar4
 	thumb_func_end sub_80E678C
 
 	thumb_func_start sub_80E67FC
@@ -2345,7 +2345,7 @@ _080E6B66:
 	adds r0, r5
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, _080E6BA0 @ =gUnknown_2021CD0
+	ldr r1, _080E6BA0 @ =gStringVar1
 	adds r0, 0xA1
 	strb r0, [r1]
 	movs r0, 0xFF
@@ -2355,7 +2355,7 @@ _080E6B66:
 _080E6B94: .4byte 0x0000056c
 _080E6B98: .4byte 0x0000270e
 _080E6B9C: .4byte gUnknown_20370D0
-_080E6BA0: .4byte gUnknown_2021CD0
+_080E6BA0: .4byte gStringVar1
 _080E6BA4:
 	ldr r0, [r6]
 	lsls r5, 1
@@ -3228,7 +3228,7 @@ sub_80E724C: @ 80E724C
 	lsls r1, 3
 	adds r0, r1
 	ldrh r0, [r0]
-	ldr r1, _080E7290 @ =gUnknown_2021CD0
+	ldr r1, _080E7290 @ =gStringVar1
 	bl sub_8099E90
 	ldr r0, _080E7294 @ =gUnknown_20370D0
 	strh r4, [r0]
@@ -3236,7 +3236,7 @@ sub_80E724C: @ 80E724C
 	.align 2, 0
 _080E7288: .4byte gSaveBlock2Ptr
 _080E728C: .4byte 0x0000055c
-_080E7290: .4byte gUnknown_2021CD0
+_080E7290: .4byte gStringVar1
 _080E7294: .4byte gUnknown_20370D0
 _080E7298:
 	ldr r1, _080E72B0 @ =gUnknown_20370D0
@@ -3616,13 +3616,13 @@ sub_80E7550: @ 80E7550
 	ldrb r0, [r0]
 	cmp r0, 0x3
 	bne _080E756C
-	ldr r1, _080E7568 @ =gUnknown_2021D18
+	ldr r1, _080E7568 @ =gStringVar4
 	movs r0, 0xFF
 	strb r0, [r1]
 	b _080E7590
 	.align 2, 0
 _080E7564: .4byte gUnknown_2023E8A
-_080E7568: .4byte gUnknown_2021D18
+_080E7568: .4byte gStringVar4
 _080E756C:
 	cmp r0, 0x1
 	bne _080E7584

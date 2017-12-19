@@ -1,18 +1,18 @@
 	.section .rodata
 
-gUnknown_81EA14C:: @ 81EA14C
+gDownArrowTiles:: @ 81EA14C
 	.incbin "baserom.gba", 0x1EA14C, 0x100
 
-gUnknown_81EA24C:: @ 81EA24C
+gDarkDownArrowTiles:: @ 81EA24C
 	.incbin "baserom.gba", 0x1EA24C, 0x400
 
-gUnknown_81EA64C:: @ 81EA64C
+gDownArrowYCoords:: @ 81EA64C
 	.incbin "baserom.gba", 0x1EA64C, 0x4
 
 gUnknown_81EA650:: @ 81EA650
 	.incbin "baserom.gba", 0x1EA650, 0x4
 
-gUnknown_81EA654:: @ 81EA654
+gGlyphWidthFuncs:: @ 81EA654
 	.incbin "baserom.gba", 0x1EA654, 0x38
 
 gUnknown_81EA68C:: @ 81EA68C
@@ -85,7 +85,9 @@ gUnknown_822FB30:: @ 822FB30
 	.incbin "baserom.gba", 0x22FB30, 0x118
 
 gUnknown_822FC48:: @ 822FC48
-	.incbin "baserom.gba", 0x22FC48, 0x203D
+	.incbin "baserom.gba", 0x22FC48, 0x2000
+
+	.incbin "baserom.gba", 0x231C48, 0x3D
 
 gUnknown_8231C85:: @ 8231C85
 	.incbin "baserom.gba", 0x231C85, 0x1B

@@ -77,7 +77,7 @@ HandleInputChooseAction_0: @ 80DD5A4
 	cmp r0, 0
 	beq _080DD612
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _080DD5D8 @ =gUnknown_2023FF8
 	ldr r0, _080DD5DC @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -138,7 +138,7 @@ _080DD612:
 	cmp r0, 0
 	beq _080DD71A
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -166,7 +166,7 @@ _080DD650:
 	cmp r0, 0
 	bne _080DD71A
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -194,7 +194,7 @@ _080DD68C:
 	cmp r0, 0
 	beq _080DD71A
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -230,7 +230,7 @@ _080DD6D8:
 	cmp r0, 0
 	bne _080DD71A
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]

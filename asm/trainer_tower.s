@@ -977,7 +977,7 @@ sub_815DEFC: @ 815DEFC
 	negs r2, r2
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	cmp r0, 0xC4
 	bls _0815DF4E
 	adds r0, r4, 0
@@ -1119,12 +1119,12 @@ _0815E000:
 	adds r0, r1
 	adds r0, 0x26
 _0815E026:
-	ldr r1, _0815E034 @ =gUnknown_2021D18
+	ldr r1, _0815E034 @ =gStringVar4
 	bl sub_815DEFC
 	b _0815E05C
 	.align 2, 0
 _0815E030: .4byte gUnknown_203F458
-_0815E034: .4byte gUnknown_2021D18
+_0815E034: .4byte gStringVar4
 _0815E038:
 	ldr r0, [r2]
 	ldrb r2, [r0]
@@ -1141,14 +1141,14 @@ _0815E038:
 	adds r1, 0x4
 	adds r0, r1
 	adds r0, 0x32
-	ldr r1, _0815E064 @ =gUnknown_2021D18
+	ldr r1, _0815E064 @ =gStringVar4
 	bl sub_815DEFC
 _0815E05C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E064: .4byte gUnknown_2021D18
+_0815E064: .4byte gStringVar4
 	thumb_func_end sub_815DF54
 
 	thumb_func_start sub_815E068
@@ -1669,7 +1669,7 @@ _0815E45C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0815E49C
-	ldr r1, _0815E494 @ =gUnknown_2021CF0
+	ldr r1, _0815E494 @ =gStringVar2
 	adds r0, r4, 0
 	bl sub_8099E90
 	mov r0, r8
@@ -1689,7 +1689,7 @@ _0815E45C:
 	strh r5, [r0]
 	b _0815E4A2
 	.align 2, 0
-_0815E494: .4byte gUnknown_2021CF0
+_0815E494: .4byte gStringVar2
 _0815E498: .4byte gUnknown_20370D0
 _0815E49C:
 	ldr r1, _0815E4AC @ =gUnknown_20370D0
@@ -1979,17 +1979,17 @@ _0815E690:
 	movs r1, 0x64
 	bl __divsi3
 	adds r4, r0, 0
-	ldr r0, _0815E714 @ =gUnknown_2021CD0
+	ldr r0, _0815E714 @ =gStringVar1
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0815E718 @ =gUnknown_2021CF0
+	ldr r0, _0815E718 @ =gStringVar2
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0815E71C @ =gUnknown_2021D04
+	ldr r0, _0815E71C @ =gStringVar3
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
@@ -2003,9 +2003,9 @@ _0815E704: .4byte 0x00003d34
 _0815E708: .4byte 0x00003d38
 _0815E70C: .4byte 0x00034bbe
 _0815E710: .4byte 0x00034bbf
-_0815E714: .4byte gUnknown_2021CD0
-_0815E718: .4byte gUnknown_2021CF0
-_0815E71C: .4byte gUnknown_2021D04
+_0815E714: .4byte gStringVar1
+_0815E718: .4byte gStringVar2
+_0815E71C: .4byte gStringVar3
 	thumb_func_end sub_815E658
 
 	thumb_func_start sub_815E720
@@ -2077,22 +2077,22 @@ _0815E76C:
 	movs r1, 0x64
 	bl __divsi3
 	adds r4, r0, 0
-	ldr r0, _0815E870 @ =gUnknown_2021CD0
+	ldr r0, _0815E870 @ =gStringVar1
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0815E874 @ =gUnknown_2021CF0
+	ldr r0, _0815E874 @ =gStringVar2
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0815E878 @ =gUnknown_2021D04
+	ldr r0, _0815E878 @ =gStringVar3
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0815E87C @ =gUnknown_2021D18
+	ldr r0, _0815E87C @ =gStringVar4
 	ldr r1, _0815E880 @ =gUnknown_83FE998
 	bl StringExpandPlaceholders
 	ldr r1, _0815E884 @ =gUnknown_83FE9C4
@@ -2121,7 +2121,7 @@ _0815E76C:
 	str r1, [sp, 0x8]
 	adds r0, r7, 0
 	movs r1, 0x2
-	ldr r2, _0815E87C @ =gUnknown_2021D18
+	ldr r2, _0815E87C @ =gStringVar4
 	movs r3, 0x60
 	bl PrintTextOnWindow
 	movs r0, 0xA0
@@ -2155,10 +2155,10 @@ _0815E860: .4byte gUnknown_83FE982
 _0815E864: .4byte gSaveBlock1Ptr
 _0815E868: .4byte 0x00003d34
 _0815E86C: .4byte 0x00003d3c
-_0815E870: .4byte gUnknown_2021CD0
-_0815E874: .4byte gUnknown_2021CF0
-_0815E878: .4byte gUnknown_2021D04
-_0815E87C: .4byte gUnknown_2021D18
+_0815E870: .4byte gStringVar1
+_0815E874: .4byte gStringVar2
+_0815E878: .4byte gStringVar3
+_0815E87C: .4byte gStringVar4
 _0815E880: .4byte gUnknown_83FE998
 _0815E884: .4byte gUnknown_83FE9C4
 _0815E888: .4byte 0x00004001
@@ -2208,7 +2208,7 @@ sub_815E8CC: @ 815E8CC
 	ldrb r2, [r1, 0xD]
 	cmp r0, r2
 	beq _0815E8F8
-	ldr r0, _0815E8F0 @ =gUnknown_2021CD0
+	ldr r0, _0815E8F0 @ =gStringVar1
 	ldrb r1, [r1, 0x4]
 	movs r2, 0
 	movs r3, 0x1
@@ -2218,7 +2218,7 @@ sub_815E8CC: @ 815E8CC
 	b _0815E8FC
 	.align 2, 0
 _0815E8EC: .4byte gUnknown_203F458
-_0815E8F0: .4byte gUnknown_2021CD0
+_0815E8F0: .4byte gStringVar1
 _0815E8F4: .4byte gUnknown_20370D0
 _0815E8F8:
 	ldr r1, _0815E904 @ =gUnknown_20370D0
@@ -2742,22 +2742,22 @@ _0815ECDC:
 	movs r1, 0x64
 	bl __divsi3
 	adds r4, r0, 0
-	ldr r0, _0815EDC4 @ =gUnknown_2021CD0
+	ldr r0, _0815EDC4 @ =gStringVar1
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0815EDC8 @ =gUnknown_2021CF0
+	ldr r0, _0815EDC8 @ =gStringVar2
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0815EDCC @ =gUnknown_2021D04
+	ldr r0, _0815EDCC @ =gStringVar3
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0815EDD0 @ =gUnknown_2021D18
+	ldr r0, _0815EDD0 @ =gStringVar4
 	ldr r1, _0815EDD4 @ =gUnknown_83FE998
 	bl StringExpandPlaceholders
 	lsls r1, r7, 2
@@ -2780,7 +2780,7 @@ _0815ECDC:
 	str r0, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
-	ldr r0, _0815EDD0 @ =gUnknown_2021D18
+	ldr r0, _0815EDD0 @ =gStringVar4
 	str r0, [sp, 0x8]
 	mov r0, r8
 	movs r1, 0x2
@@ -2814,10 +2814,10 @@ _0815EDB4: .4byte gUnknown_847A22C
 _0815EDB8: .4byte gUnknown_83FE982
 _0815EDBC: .4byte 0x00003d38
 _0815EDC0: .4byte gSaveBlock1Ptr
-_0815EDC4: .4byte gUnknown_2021CD0
-_0815EDC8: .4byte gUnknown_2021CF0
-_0815EDCC: .4byte gUnknown_2021D04
-_0815EDD0: .4byte gUnknown_2021D18
+_0815EDC4: .4byte gStringVar1
+_0815EDC8: .4byte gStringVar2
+_0815EDCC: .4byte gStringVar3
+_0815EDD0: .4byte gStringVar4
 _0815EDD4: .4byte gUnknown_83FE998
 _0815EDD8: .4byte gUnknown_83FE9C4
 	thumb_func_end sub_815EC8C

@@ -545,7 +545,7 @@ _080F5050:
 	movs r0, 0x2
 	add r1, sp, 0xC
 	adds r2, r5, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	lsrs r2, r0, 1
 	movs r4, 0x78
 	subs r2, r4, r2
@@ -566,7 +566,7 @@ _080F5050:
 	movs r0, 0x2
 	add r1, sp, 0xC
 	adds r2, r5, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	lsrs r0, 1
 	subs r4, r0
 	lsls r4, 24

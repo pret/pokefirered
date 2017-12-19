@@ -2617,7 +2617,7 @@ _0807AFEC:
 _0807AFF2:
 	strb r0, [r1]
 	adds r0, r2, 0
-	bl sub_80722CC
+	bl PlaySE
 _0807AFFA:
 	pop {r0}
 	bx r0
@@ -2643,18 +2643,18 @@ play_some_sound: @ 807B004
 	cmp r0, 0
 	bne _0807B03C
 	movs r0, 0x4F
-	bl sub_80722CC
+	bl PlaySE
 	b _0807B042
 	.align 2, 0
 _0807B02C: .4byte gUnknown_2037F34
 _0807B030: .4byte 0x000006dd
 _0807B034:
 	movs r0, 0x4D
-	bl sub_80722CC
+	bl PlaySE
 	b _0807B042
 _0807B03C:
 	movs r0, 0x4B
-	bl sub_80722CC
+	bl PlaySE
 _0807B042:
 	pop {r0}
 	bx r0

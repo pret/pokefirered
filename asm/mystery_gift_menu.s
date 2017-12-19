@@ -346,7 +346,7 @@ _08142362:
 	movs r0, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r2, 0xDE
 	subs r2, r0
 	lsls r2, 24

@@ -148,7 +148,7 @@ sub_809FE40: @ 809FE40
 	lsrs r6, r0, 24
 	lsls r2, 24
 	lsrs r5, r2, 24
-	ldr r4, _0809FEB8 @ =gUnknown_2021CD0
+	ldr r4, _0809FEB8 @ =gStringVar1
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x6
@@ -159,7 +159,7 @@ sub_809FE40: @ 809FE40
 	lsrs r0, 16
 	movs r1, 0x6
 	subs r1, r0
-	ldr r2, _0809FEBC @ =gUnknown_2021D18
+	ldr r2, _0809FEBC @ =gStringVar4
 	adds r0, r1, 0
 	subs r1, 0x1
 	cmp r0, 0
@@ -176,11 +176,11 @@ _0809FE7E:
 	ldr r1, _0809FEC0 @ =gUnknown_841697A
 	adds r0, r2, 0
 	bl StringExpandPlaceholders
-	ldr r4, _0809FEBC @ =gUnknown_2021D18
+	ldr r4, _0809FEBC @ =gStringVar4
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r3, 0x40
 	subs r3, r0
 	lsls r3, 24
@@ -199,8 +199,8 @@ _0809FE7E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809FEB8: .4byte gUnknown_2021CD0
-_0809FEBC: .4byte gUnknown_2021D18
+_0809FEB8: .4byte gStringVar1
+_0809FEBC: .4byte gStringVar4
 _0809FEC0: .4byte gUnknown_841697A
 	thumb_func_end sub_809FE40
 
@@ -220,7 +220,7 @@ sub_809FEC4: @ 809FEC4
 	lsrs r6, r2, 24
 	lsls r4, 24
 	lsrs r5, r4, 24
-	ldr r4, _0809FF3C @ =gUnknown_2021CD0
+	ldr r4, _0809FF3C @ =gStringVar1
 	adds r0, r4, 0
 	adds r1, r3, 0
 	movs r2, 0
@@ -232,7 +232,7 @@ sub_809FEC4: @ 809FEC4
 	lsrs r0, 16
 	movs r1, 0x6
 	subs r1, r0
-	ldr r2, _0809FF40 @ =gUnknown_2021D18
+	ldr r2, _0809FF40 @ =gStringVar4
 	adds r0, r1, 0
 	subs r1, 0x1
 	cmp r0, 0
@@ -249,7 +249,7 @@ _0809FF14:
 	ldr r1, _0809FF44 @ =gUnknown_841697A
 	adds r0, r2, 0
 	bl StringExpandPlaceholders
-	ldr r2, _0809FF40 @ =gUnknown_2021D18
+	ldr r2, _0809FF40 @ =gStringVar4
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0
@@ -265,8 +265,8 @@ _0809FF14:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809FF3C: .4byte gUnknown_2021CD0
-_0809FF40: .4byte gUnknown_2021D18
+_0809FF3C: .4byte gStringVar1
+_0809FF40: .4byte gStringVar4
 _0809FF44: .4byte gUnknown_841697A
 	thumb_func_end sub_809FEC4
 

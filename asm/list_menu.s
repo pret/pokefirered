@@ -1642,7 +1642,7 @@ sub_8107AEC: @ 8107AEC
 	cmp r1, 0
 	bne _08107AFA
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _08107AFA:
 	pop {r0}
 	bx r0

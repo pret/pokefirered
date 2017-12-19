@@ -491,7 +491,7 @@ _0812ED3C:
 	ldr r1, [r1]
 	movs r3, 0
 	strb r0, [r1, 0x1F]
-	ldr r2, _0812ED64 @ =gUnknown_3003E50
+	ldr r2, _0812ED64 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
@@ -504,7 +504,7 @@ _0812ED3C:
 	b _0812EE94
 	.align 2, 0
 _0812ED60: .4byte gUnknown_203B108
-_0812ED64: .4byte gUnknown_3003E50
+_0812ED64: .4byte gTextFlags
 _0812ED68: .4byte gUnknown_84605E8
 _0812ED6C:
 	bl free_temp_tile_data_buffers_if_possible
@@ -961,7 +961,7 @@ _0812F120:
 	bl BeginNormalPaletteFade
 _0812F150:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0812F170 @ =gUnknown_3005090
 	adds r1, r4, r5
 	lsls r1, 3
@@ -1461,7 +1461,7 @@ _0812F568:
 _0812F56A:
 	strh r0, [r1, 0x12]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0812F58C @ =gUnknown_203B108
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x12]
@@ -1856,7 +1856,7 @@ _0812F8B8:
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _0812F8F0 @ =gUnknown_81C5C78
-	ldr r5, _0812F8F4 @ =gUnknown_2021D18
+	ldr r5, _0812F8F4 @ =gStringVar4
 	cmp r2, r5
 	beq _0812F8FC
 	adds r0, r5, 0
@@ -1879,7 +1879,7 @@ _0812F8B8:
 	b _0812F918
 	.align 2, 0
 _0812F8F0: .4byte gUnknown_81C5C78
-_0812F8F4: .4byte gUnknown_2021D18
+_0812F8F4: .4byte gStringVar4
 _0812F8F8: .4byte gUnknown_203B108
 _0812F8FC:
 	ldr r0, _0812F938 @ =gUnknown_203B108
@@ -1933,7 +1933,7 @@ sub_812F944: @ 812F944
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _0812F994 @ =gUnknown_81C5D06
-	ldr r5, _0812F998 @ =gUnknown_2021D18
+	ldr r5, _0812F998 @ =gStringVar4
 	cmp r2, r5
 	beq _0812F9A0
 	adds r0, r5, 0
@@ -1956,7 +1956,7 @@ sub_812F944: @ 812F944
 	b _0812F9BC
 	.align 2, 0
 _0812F994: .4byte gUnknown_81C5D06
-_0812F998: .4byte gUnknown_2021D18
+_0812F998: .4byte gStringVar4
 _0812F99C: .4byte gUnknown_203B108
 _0812F9A0:
 	ldr r0, _0812F9E0 @ =gUnknown_203B108
@@ -2110,7 +2110,7 @@ _0812FAA0:
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _0812FB08 @ =gUnknown_81C5D12
-	ldr r4, _0812FB0C @ =gUnknown_2021D18
+	ldr r4, _0812FB0C @ =gStringVar4
 	cmp r2, r4
 	beq _0812FB14
 	adds r0, r4, 0
@@ -2136,7 +2136,7 @@ _0812FAFC: .4byte gUnknown_3005090
 _0812FB00: .4byte sub_812FB4C
 _0812FB04: .4byte 0x00003fff
 _0812FB08: .4byte gUnknown_81C5D12
-_0812FB0C: .4byte gUnknown_2021D18
+_0812FB0C: .4byte gStringVar4
 _0812FB10: .4byte gUnknown_203B108
 _0812FB14:
 	ldr r0, _0812FB48 @ =gUnknown_203B108
@@ -2184,7 +2184,7 @@ sub_812FB4C: @ 812FB4C
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _0812FB9C @ =gUnknown_81C5D4B
-	ldr r5, _0812FBA0 @ =gUnknown_2021D18
+	ldr r5, _0812FBA0 @ =gStringVar4
 	cmp r2, r5
 	beq _0812FBA8
 	adds r0, r5, 0
@@ -2207,7 +2207,7 @@ sub_812FB4C: @ 812FB4C
 	b _0812FBC4
 	.align 2, 0
 _0812FB9C: .4byte gUnknown_81C5D4B
-_0812FBA0: .4byte gUnknown_2021D18
+_0812FBA0: .4byte gStringVar4
 _0812FBA4: .4byte gUnknown_203B108
 _0812FBA8:
 	ldr r0, _0812FBE4 @ =gUnknown_203B108
@@ -2374,7 +2374,7 @@ _0812FCEC:
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _0812FD24 @ =gUnknown_81C5DBD
-	ldr r5, _0812FD28 @ =gUnknown_2021D18
+	ldr r5, _0812FD28 @ =gStringVar4
 	cmp r2, r5
 	beq _0812FD30
 	adds r0, r5, 0
@@ -2397,7 +2397,7 @@ _0812FCEC:
 	b _0812FD4C
 	.align 2, 0
 _0812FD24: .4byte gUnknown_81C5DBD
-_0812FD28: .4byte gUnknown_2021D18
+_0812FD28: .4byte gStringVar4
 _0812FD2C: .4byte gUnknown_203B108
 _0812FD30:
 	ldr r0, _0812FD6C @ =gUnknown_203B108
@@ -2507,7 +2507,7 @@ _0812FDF0:
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _0812FE34 @ =gUnknown_81C59D5
-	ldr r5, _0812FE38 @ =gUnknown_2021D18
+	ldr r5, _0812FE38 @ =gStringVar4
 	cmp r2, r5
 	beq _0812FE40
 	adds r0, r5, 0
@@ -2530,7 +2530,7 @@ _0812FDF0:
 	b _0812FE5C
 	.align 2, 0
 _0812FE34: .4byte gUnknown_81C59D5
-_0812FE38: .4byte gUnknown_2021D18
+_0812FE38: .4byte gStringVar4
 _0812FE3C: .4byte gUnknown_203B108
 _0812FE40:
 	ldr r0, _0812FE7C @ =gUnknown_203B108
@@ -2858,7 +2858,7 @@ _081300D0:
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _0813010C @ =gUnknown_81C5DEA
-	ldr r5, _08130110 @ =gUnknown_2021D18
+	ldr r5, _08130110 @ =gStringVar4
 	cmp r2, r5
 	beq _08130118
 	adds r0, r5, 0
@@ -2881,7 +2881,7 @@ _081300D0:
 	b _08130134
 	.align 2, 0
 _0813010C: .4byte gUnknown_81C5DEA
-_08130110: .4byte gUnknown_2021D18
+_08130110: .4byte gStringVar4
 _08130114: .4byte gUnknown_203B108
 _08130118:
 	ldr r0, _08130154 @ =gUnknown_203B108
@@ -3037,7 +3037,7 @@ sub_8130228: @ 8130228
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _0813027C @ =gUnknown_81C5DEA
-	ldr r5, _08130280 @ =gUnknown_2021D18
+	ldr r5, _08130280 @ =gStringVar4
 	cmp r2, r5
 	beq _08130284
 	adds r0, r5, 0
@@ -3059,7 +3059,7 @@ sub_8130228: @ 8130228
 	.align 2, 0
 _08130278: .4byte gUnknown_203B108
 _0813027C: .4byte gUnknown_81C5DEA
-_08130280: .4byte gUnknown_2021D18
+_08130280: .4byte gStringVar4
 _08130284:
 	str r4, [sp]
 	movs r0, 0x2
@@ -3082,7 +3082,7 @@ _081302A6:
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _081302DC @ =gUnknown_81C5E91
-	ldr r4, _081302E0 @ =gUnknown_2021D18
+	ldr r4, _081302E0 @ =gStringVar4
 	cmp r2, r4
 	beq _081302E4
 	adds r0, r4, 0
@@ -3104,7 +3104,7 @@ _081302A6:
 	b _081302FE
 	.align 2, 0
 _081302DC: .4byte gUnknown_81C5E91
-_081302E0: .4byte gUnknown_2021D18
+_081302E0: .4byte gStringVar4
 _081302E4:
 	movs r0, 0
 	str r0, [sp]
@@ -3160,7 +3160,7 @@ sub_8130324: @ 8130324
 	cmp r4, 0x4
 	bgt _081303A8
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r5, 0x1A]
 	movs r1, 0x1
 	bl sub_810F4D8
@@ -3186,7 +3186,7 @@ _08130380: .4byte gUnknown_203B108
 _08130384: .4byte sub_8130464
 _08130388:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	str r4, [sp]
@@ -3316,7 +3316,7 @@ sub_8130464: @ 8130464
 	ldrh r0, [r0, 0x10]
 	cmp r0, 0
 	bne _081304B4
-	ldr r0, _081304AC @ =gUnknown_2021D18
+	ldr r0, _081304AC @ =gStringVar4
 	ldr r1, _081304B0 @ =gUnknown_81C5E13
 	bl StringExpandPlaceholders
 	b _081304BC
@@ -3324,17 +3324,17 @@ sub_8130464: @ 8130464
 _081304A0: .4byte gUnknown_3005098
 _081304A4: .4byte gUnknown_2037AB8
 _081304A8: .4byte gUnknown_203B108
-_081304AC: .4byte gUnknown_2021D18
+_081304AC: .4byte gStringVar4
 _081304B0: .4byte gUnknown_81C5E13
 _081304B4:
-	ldr r0, _081304F4 @ =gUnknown_2021D18
+	ldr r0, _081304F4 @ =gStringVar4
 	ldr r1, _081304F8 @ =gUnknown_81C5EB5
 	bl StringExpandPlaceholders
 _081304BC:
 	movs r0, 0
 	movs r1, 0
 	bl sub_80F6EE4
-	ldr r2, _081304F4 @ =gUnknown_2021D18
+	ldr r2, _081304F4 @ =gStringVar4
 	ldr r0, _081304FC @ =gUnknown_203B108
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
@@ -3357,7 +3357,7 @@ _081304BC:
 	strh r0, [r5, 0x6]
 	b _08130544
 	.align 2, 0
-_081304F4: .4byte gUnknown_2021D18
+_081304F4: .4byte gStringVar4
 _081304F8: .4byte gUnknown_81C5EB5
 _081304FC: .4byte gUnknown_203B108
 _08130500:
@@ -3427,7 +3427,7 @@ _08130576:
 	b _0813063E
 _0813057C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _081305B0 @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -3454,7 +3454,7 @@ _081305B0: .4byte gUnknown_3005090
 _081305B4: .4byte gUnknown_203B108
 _081305B8: .4byte sub_8130650
 _081305BC:
-	ldr r4, _081305F8 @ =gUnknown_2021D18
+	ldr r4, _081305F8 @ =gStringVar4
 	ldr r1, _081305FC @ =gUnknown_81C5EC5
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -3481,12 +3481,12 @@ _081305BC:
 	str r0, [r6]
 	b _0813063E
 	.align 2, 0
-_081305F8: .4byte gUnknown_2021D18
+_081305F8: .4byte gStringVar4
 _081305FC: .4byte gUnknown_81C5EC5
 _08130600: .4byte sub_8130694
 _08130604:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _08130624 @ =gUnknown_203B108
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x10]
@@ -3647,7 +3647,7 @@ sub_813071C: @ 813071C
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _08130774 @ =gUnknown_81C5E2E
-	ldr r4, _08130778 @ =gUnknown_2021D18
+	ldr r4, _08130778 @ =gStringVar4
 	cmp r2, r4
 	beq _08130780
 	adds r0, r4, 0
@@ -3672,7 +3672,7 @@ sub_813071C: @ 813071C
 	.align 2, 0
 _08130770: .4byte gUnknown_3005098
 _08130774: .4byte gUnknown_81C5E2E
-_08130778: .4byte gUnknown_2021D18
+_08130778: .4byte gStringVar4
 _0813077C: .4byte gUnknown_203B108
 _08130780:
 	ldr r0, _081307C4 @ =gUnknown_203B108
@@ -3799,7 +3799,7 @@ sub_8130858: @ 8130858
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	beq _081308B4
-	ldr r4, _081308C0 @ =gUnknown_2021D18
+	ldr r4, _081308C0 @ =gStringVar4
 	ldr r1, _081308C4 @ =gUnknown_81C5EF4
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -3835,7 +3835,7 @@ _081308B4:
 	bx r0
 	.align 2, 0
 _081308BC: .4byte gUnknown_3005090
-_081308C0: .4byte gUnknown_2021D18
+_081308C0: .4byte gStringVar4
 _081308C4: .4byte gUnknown_81C5EF4
 _081308C8: .4byte gUnknown_203B108
 _081308CC: .4byte sub_81308D0
@@ -3966,7 +3966,7 @@ sub_8130980: @ 8130980
 	cmp r4, 0x28
 	bne _081309BE
 	movs r0, 0x27
-	bl sub_80722CC
+	bl PlaySE
 _081309BE:
 	ldrh r0, [r5, 0x4]
 	adds r1, r0, 0
@@ -4295,7 +4295,7 @@ sub_8130C20: @ 8130C20
 	bl Free
 	movs r0, 0
 	str r0, [r5]
-	ldr r2, _08130C5C @ =gUnknown_3003E50
+	ldr r2, _08130C5C @ =gTextFlags
 	ldrb r1, [r2]
 	subs r0, 0x2
 	ands r0, r1
@@ -4309,7 +4309,7 @@ sub_8130C20: @ 8130C20
 	bx r0
 	.align 2, 0
 _08130C58: .4byte gUnknown_203B108
-_08130C5C: .4byte gUnknown_3003E50
+_08130C5C: .4byte gTextFlags
 _08130C60: .4byte CB2_NewGame
 	thumb_func_end sub_8130C20
 
@@ -4590,7 +4590,7 @@ _08130EB8:
 	bl EnableInterrupts
 	ldr r0, _08130F04 @ =sub_812EAFC
 	bl SetVBlankCallback
-	ldr r2, _08130F08 @ =gUnknown_3003E50
+	ldr r2, _08130F08 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
@@ -4600,7 +4600,7 @@ _08130EB8:
 	b _08130F1E
 	.align 2, 0
 _08130F04: .4byte sub_812EAFC
-_08130F08: .4byte gUnknown_3003E50
+_08130F08: .4byte gTextFlags
 _08130F0C: .4byte sub_812EB10
 _08130F10:
 	ldr r1, _08130F28 @ =gMain

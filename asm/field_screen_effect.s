@@ -768,7 +768,7 @@ _0807F3E0:
 	adds r0, r7, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r5, _0807F424 @ =gUnknown_2021D18
+	ldr r5, _0807F424 @ =gStringVar4
 	adds r0, r5, 0
 	mov r1, r8
 	bl StringExpandPlaceholders
@@ -786,7 +786,7 @@ _0807F3E0:
 	mov r2, r10
 	mov r3, r9
 	bl AddTextPrinterParametrized2
-	ldr r2, _0807F42C @ =gUnknown_3003E50
+	ldr r2, _0807F42C @ =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x2
 	negs r0, r0
@@ -796,9 +796,9 @@ _0807F3E0:
 	strh r0, [r4, 0xC]
 	b _0807F448
 	.align 2, 0
-_0807F424: .4byte gUnknown_2021D18
+_0807F424: .4byte gStringVar4
 _0807F428: .4byte gUnknown_83C68EC
-_0807F42C: .4byte gUnknown_3003E50
+_0807F42C: .4byte gTextFlags
 _0807F430:
 	bl RunTextPrinters
 	adds r0, r7, 0

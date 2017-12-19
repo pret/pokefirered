@@ -55,7 +55,7 @@ _0814F8DA:
 	beq _0814F91C
 	subs r0, r1, 0x1
 	strb r0, [r6, 0x1E]
-	ldr r0, _0814F918 @ =gUnknown_3003E50
+	ldr r0, _0814F918 @ =gTextFlags
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -79,9 +79,9 @@ _0814F904:
 	b _0814FB42
 	.align 2, 0
 _0814F914: .4byte gMain
-_0814F918: .4byte gUnknown_3003E50
+_0814F918: .4byte gTextFlags
 _0814F91C:
-	ldr r2, _0814F92C @ =gUnknown_3003E50
+	ldr r2, _0814F92C @ =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x4
 	ands r0, r1
@@ -90,7 +90,7 @@ _0814F91C:
 	movs r0, 0x1
 	b _0814F932
 	.align 2, 0
-_0814F92C: .4byte gUnknown_3003E50
+_0814F92C: .4byte gTextFlags
 _0814F930:
 	ldrb r0, [r6, 0x1D]
 _0814F932:
@@ -385,7 +385,7 @@ _0814FB62:
 	bl DecompressGlyphFont6
 	adds r0, r6, 0
 	bl CopyGlyphToWindow
-	ldr r0, _0814FB84 @ =gGlyphBuffer1
+	ldr r0, _0814FB84 @ =gGlyphInfo
 	adds r0, 0x80
 	ldrb r1, [r6, 0xA]
 	ldrb r0, [r0]
@@ -396,7 +396,7 @@ _0814FB62:
 	movs r0, 0
 	b _0814FC96
 	.align 2, 0
-_0814FB84: .4byte gGlyphBuffer1
+_0814FB84: .4byte gGlyphInfo
 _0814FB88:
 	adds r0, r6, 0
 	bl TextPrinterWait
@@ -433,7 +433,7 @@ _0814FBC4:
 	cmp r0, 0
 	beq _0814FB42
 	adds r0, r6, 0
-	bl sub_80055D4
+	bl TextPrinterClearDownArrow
 	ldrb r1, [r6, 0x5]
 	ldr r0, _0814FBF8 @ =gFonts
 	ldr r2, [r0]
@@ -551,7 +551,7 @@ DecompressGlyphFont6: @ 814FC9C
 	ldr r0, _0814FCF8 @ =gUnknown_846FB0C
 	adds r1, r0
 	adds r5, r2, r1
-	ldr r4, _0814FCFC @ =gGlyphBuffer1
+	ldr r4, _0814FCFC @ =gGlyphInfo
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl DecompressGlyphTile
@@ -583,7 +583,7 @@ DecompressGlyphFont6: @ 814FC9C
 	bx r0
 	.align 2, 0
 _0814FCF8: .4byte gUnknown_846FB0C
-_0814FCFC: .4byte gGlyphBuffer1
+_0814FCFC: .4byte gGlyphInfo
 	thumb_func_end DecompressGlyphFont6
 
 	thumb_func_start GetGlyphWidthFont6

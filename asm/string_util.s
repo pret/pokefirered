@@ -629,26 +629,26 @@ _08009128: .4byte gSaveBlock2Ptr
 
 	thumb_func_start sub_800912C
 sub_800912C: @ 800912C
-	ldr r0, _08009130 @ =gUnknown_2021CD0
+	ldr r0, _08009130 @ =gStringVar1
 	bx lr
 	.align 2, 0
-_08009130: .4byte gUnknown_2021CD0
+_08009130: .4byte gStringVar1
 	thumb_func_end sub_800912C
 
 	thumb_func_start sub_8009134
 sub_8009134: @ 8009134
-	ldr r0, _08009138 @ =gUnknown_2021CF0
+	ldr r0, _08009138 @ =gStringVar2
 	bx lr
 	.align 2, 0
-_08009138: .4byte gUnknown_2021CF0
+_08009138: .4byte gStringVar2
 	thumb_func_end sub_8009134
 
 	thumb_func_start sub_800913C
 sub_800913C: @ 800913C
-	ldr r0, _08009140 @ =gUnknown_2021D04
+	ldr r0, _08009140 @ =gStringVar3
 	bx lr
 	.align 2, 0
-_08009140: .4byte gUnknown_2021D04
+_08009140: .4byte gStringVar3
 	thumb_func_end sub_800913C
 
 	thumb_func_start sub_8009144

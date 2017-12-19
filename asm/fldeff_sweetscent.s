@@ -80,7 +80,7 @@ sub_80DE134: @ 80DE134
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0xE5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r4, _080DE1B8 @ =gUnknown_203AAB0
 	movs r0, 0x80
 	lsls r0, 3

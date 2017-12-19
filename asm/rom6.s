@@ -354,7 +354,7 @@ _080C9A5C: .4byte sub_80C9A60
 sub_80C9A60: @ 80C9A60
 	push {lr}
 	movs r0, 0x7C
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x25
 	bl FieldEffectActiveListRemove
 	bl EnableBothScriptContexts

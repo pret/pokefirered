@@ -190,12 +190,6 @@ extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
 
-u8 gUnknown_03002F90[0x20];
-u8 gUnknown_03002FB0[0x20];
-u8 gUnknown_03002FD0[0x20];
-u8 gUnknown_03002FF0[0x20];
-u8 gGlyphDimensions[0x2];
-
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
 u16 PrintTextOnWindow(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16));

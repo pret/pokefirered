@@ -776,7 +776,7 @@ AddTextPrinterParametrized: @ 80F6CD0
 	ands r1, r4
 	orrs r1, r6
 	strb r1, [r0, 0xD]
-	ldr r2, _080F6D58 @ =gUnknown_3003E50
+	ldr r2, _080F6D58 @ =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x3
 	negs r0, r0
@@ -795,7 +795,7 @@ AddTextPrinterParametrized: @ 80F6CD0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F6D58: .4byte gUnknown_3003E50
+_080F6D58: .4byte gTextFlags
 	thumb_func_end AddTextPrinterParametrized
 
 	thumb_func_start sub_80F6D5C
@@ -805,7 +805,7 @@ sub_80F6D5C: @ 80F6D5C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
-	ldr r3, _080F6DA8 @ =gUnknown_3003E50
+	ldr r3, _080F6DA8 @ =gTextFlags
 	movs r4, 0x1
 	ands r0, r4
 	ldrb r2, [r3]
@@ -823,7 +823,7 @@ sub_80F6D5C: @ 80F6D5C
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r2, _080F6DAC @ =gUnknown_2021D18
+	ldr r2, _080F6DAC @ =gStringVar4
 	str r5, [sp]
 	movs r0, 0x8
 	str r0, [sp, 0x4]
@@ -835,8 +835,8 @@ sub_80F6D5C: @ 80F6D5C
 	bl AddTextPrinterParametrized
 	b _080F6DFC
 	.align 2, 0
-_080F6DA8: .4byte gUnknown_3003E50
-_080F6DAC: .4byte gUnknown_2021D18
+_080F6DA8: .4byte gTextFlags
+_080F6DAC: .4byte gStringVar4
 _080F6DB0:
 	cmp r0, 0x1
 	bne _080F6DDC
@@ -844,7 +844,7 @@ _080F6DB0:
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r2, _080F6DD8 @ =gUnknown_2021D18
+	ldr r2, _080F6DD8 @ =gStringVar4
 	str r5, [sp]
 	movs r0, 0x4
 	str r0, [sp, 0x4]
@@ -856,13 +856,13 @@ _080F6DB0:
 	bl AddTextPrinterParametrized
 	b _080F6DFC
 	.align 2, 0
-_080F6DD8: .4byte gUnknown_2021D18
+_080F6DD8: .4byte gStringVar4
 _080F6DDC:
 	bl sub_80F78A8
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r2, _080F6E04 @ =gUnknown_2021D18
+	ldr r2, _080F6E04 @ =gStringVar4
 	str r5, [sp]
 	movs r0, 0x2
 	str r0, [sp, 0x4]
@@ -878,7 +878,7 @@ _080F6DFC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6E04: .4byte gUnknown_2021D18
+_080F6E04: .4byte gStringVar4
 	thumb_func_end sub_80F6D5C
 
 	thumb_func_start sub_80F6E08
@@ -887,7 +887,7 @@ sub_80F6E08: @ 80F6E08
 	sub sp, 0x10
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, _080F6E4C @ =gUnknown_3003E50
+	ldr r3, _080F6E4C @ =gTextFlags
 	movs r4, 0x1
 	ands r0, r4
 	ldrb r2, [r3]
@@ -900,7 +900,7 @@ sub_80F6E08: @ 80F6E08
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r2, _080F6E50 @ =gUnknown_2021D18
+	ldr r2, _080F6E50 @ =gStringVar4
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -916,8 +916,8 @@ sub_80F6E08: @ 80F6E08
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6E4C: .4byte gUnknown_3003E50
-_080F6E50: .4byte gUnknown_2021D18
+_080F6E4C: .4byte gTextFlags
+_080F6E50: .4byte gStringVar4
 	thumb_func_end sub_80F6E08
 
 	thumb_func_start sub_80F6E54
@@ -929,7 +929,7 @@ sub_80F6E54: @ 80F6E54
 	lsrs r0, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, _080F6E94 @ =gUnknown_3003E50
+	ldr r4, _080F6E94 @ =gTextFlags
 	movs r5, 0x1
 	ands r0, r5
 	ldrb r2, [r4]
@@ -938,7 +938,7 @@ sub_80F6E54: @ 80F6E54
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r4]
-	ldr r2, _080F6E98 @ =gUnknown_2021D18
+	ldr r2, _080F6E98 @ =gStringVar4
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -954,8 +954,8 @@ sub_80F6E54: @ 80F6E54
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6E94: .4byte gUnknown_3003E50
-_080F6E98: .4byte gUnknown_2021D18
+_080F6E94: .4byte gTextFlags
+_080F6E98: .4byte gStringVar4
 	thumb_func_end sub_80F6E54
 
 	thumb_func_start sub_80F6E9C
@@ -965,7 +965,7 @@ sub_80F6E9C: @ 80F6E9C
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080F6EC4
-	ldr r2, _080F6EC0 @ =gUnknown_3003E50
+	ldr r2, _080F6EC0 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x4
 	orrs r0, r1
@@ -977,7 +977,7 @@ sub_80F6E9C: @ 80F6E9C
 	b _080F6ED4
 	.align 2, 0
 _080F6EBC: .4byte gUnknown_203ADFA
-_080F6EC0: .4byte gUnknown_3003E50
+_080F6EC0: .4byte gTextFlags
 _080F6EC4:
 	bl sub_80F77B8
 	movs r1, 0x80
@@ -2015,7 +2015,7 @@ sub_80F7768: @ 80F7768
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080F7798
-	ldr r2, _080F7794 @ =gUnknown_3003E50
+	ldr r2, _080F7794 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x4
 	orrs r0, r1
@@ -2027,7 +2027,7 @@ sub_80F7768: @ 80F7768
 	b _080F77A4
 	.align 2, 0
 _080F7790: .4byte gUnknown_203ADFA
-_080F7794: .4byte gUnknown_3003E50
+_080F7794: .4byte gTextFlags
 _080F7798:
 	movs r1, 0x80
 	lsls r1, 2

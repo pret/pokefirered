@@ -560,7 +560,7 @@ sub_80F2220: @ 80F2220
 	movs r0, 0x3
 	bl TrySavingData
 	movs r0, 0x30
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _080F225C @ =gUnknown_3005090
 	lsls r0, r4, 2
 	adds r0, r4
@@ -979,7 +979,7 @@ _080F2564:
 	movs r1, 0xF
 	bl HallOfFame_PrintWelcomeText
 	movs r0, 0x62
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _080F25A8 @ =gUnknown_3005090
 	mov r2, r8
 	adds r0, r2, r4
@@ -1869,7 +1869,7 @@ _080F2CB4:
 	ldr r2, _080F2D0C @ =0x00007716
 	movs r1, 0xC
 	bl BlendPalettes
-	ldr r0, _080F2D10 @ =gUnknown_2021CD0
+	ldr r0, _080F2D10 @ =gStringVar1
 	ldr r1, _080F2D14 @ =gUnknown_3005090
 	ldr r4, [sp, 0x14]
 	add r4, r9
@@ -1880,7 +1880,7 @@ _080F2CB4:
 	movs r2, 0
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
-	ldr r5, _080F2D18 @ =gUnknown_2021D18
+	ldr r5, _080F2D18 @ =gStringVar4
 	ldr r1, _080F2D1C @ =gUnknown_84160B4
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
@@ -1899,9 +1899,9 @@ _080F2CB4:
 	.align 2, 0
 _080F2D08: .4byte 0xffff0000
 _080F2D0C: .4byte 0x00007716
-_080F2D10: .4byte gUnknown_2021CD0
+_080F2D10: .4byte gStringVar1
 _080F2D14: .4byte gUnknown_3005090
-_080F2D18: .4byte gUnknown_2021D18
+_080F2D18: .4byte gStringVar4
 _080F2D1C: .4byte gUnknown_84160B4
 _080F2D20: .4byte gUnknown_8415D78
 _080F2D24:
@@ -2415,7 +2415,7 @@ HallOfFame_PrintWelcomeText: @ 80F313C
 	movs r0, 0x2
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r4, 0xD0
 	subs r4, r0
 	lsrs r0, r4, 31
@@ -2573,7 +2573,7 @@ _080F327C:
 	lsrs r2, 24
 	movs r0, 0x2
 	add r1, sp, 0xC
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r2, r0, 0
 	ldrh r1, [r7, 0x8]
 	ldr r0, _080F32BC @ =0x000001ff
@@ -2770,7 +2770,7 @@ sub_80F33DC: @ 80F33DC
 	ldr r1, [r0]
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r2, r0, 0
 	ldr r1, [sp, 0x28]
 	subs r2, r1, r2

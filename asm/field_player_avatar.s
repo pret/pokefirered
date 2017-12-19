@@ -612,7 +612,7 @@ _0805B81C: .4byte sub_805C2B4
 sub_805B820: @ 805B820
 	push {lr}
 	movs r0, 0x99
-	bl sub_80722CC
+	bl PlaySE
 	pop {r0}
 	bx r0
 	thumb_func_end sub_805B820
@@ -2020,7 +2020,7 @@ sub_805C23C: @ 805C23C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xA
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	bl GetJumpLedgeAnimId
 	lsls r0, 24
@@ -2178,7 +2178,7 @@ sub_805C354: @ 805C354
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1C
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8064378
 	lsls r0, 24
@@ -2197,7 +2197,7 @@ sub_805C378: @ 805C378
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1C
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80643A4
 	lsls r0, 24
@@ -2216,7 +2216,7 @@ sub_805C39C: @ 805C39C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1C
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80643D0
 	lsls r0, 24
@@ -2235,7 +2235,7 @@ sub_805C3C0: @ 805C3C0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1C
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8064168
 	lsls r0, 24
@@ -2254,7 +2254,7 @@ sub_805C3E4: @ 805C3E4
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x7
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80643FC
 	lsls r0, 24
@@ -2371,7 +2371,7 @@ _0805C4A0:
 	bne _0805C4DE
 _0805C4D8:
 	movs r0, 0x7
-	bl sub_80722CC
+	bl PlaySE
 _0805C4DE:
 	add sp, 0x4
 	pop {r4-r6}
@@ -3582,7 +3582,7 @@ sub_805CD84: @ 805CD84
 	movs r0, 0xA
 	bl FieldEffectStart
 	movs r0, 0xCF
-	bl sub_80722CC
+	bl PlaySE
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -3709,7 +3709,7 @@ PlayerAvatar_DoSecretBaseMatJump: @ 805CEEC
 	cmp r0, 0
 	beq _0805CF48
 	movs r0, 0xA
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -3817,7 +3817,7 @@ sub_805CFC4: @ 805CFC4
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Enable
 	movs r0, 0x27
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	pop {r1}
 	bx r1

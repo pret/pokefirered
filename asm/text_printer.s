@@ -26,7 +26,7 @@ CopyGlyphToWindow: @ 8003014
 	lsls r0, 3
 	ldrb r1, [r6, 0x8]
 	subs r1, r0, r1
-	ldr r3, _08003088 @ =gGlyphBuffer1
+	ldr r3, _08003088 @ =gGlyphInfo
 	mov r8, r3
 	mov r0, r8
 	adds r0, 0x80
@@ -68,7 +68,7 @@ _08003074:
 	b _080035FC
 	.align 2, 0
 _08003084: .4byte gWindows
-_08003088: .4byte gGlyphBuffer1
+_08003088: .4byte gGlyphInfo
 _0800308C:
 	cmp r1, 0x2
 	bne _08003092
@@ -235,7 +235,7 @@ _080031AC:
 	cmp r2, r10
 	blt _0800313C
 _080031BE:
-	ldr r3, _08003264 @ =gGlyphBuffer2
+	ldr r3, _08003264 @ =gGlyphInfo + 0x20
 	movs r2, 0
 	ldrb r1, [r6, 0x9]
 	cmp r2, r10
@@ -323,7 +323,7 @@ _08003254:
 	b _080035FC
 	.align 2, 0
 _08003260: .4byte gWindows
-_08003264: .4byte gGlyphBuffer2
+_08003264: .4byte gGlyphInfo + 0x20
 _08003268:
 	adds r1, r3, 0
 	movs r2, 0
@@ -403,7 +403,7 @@ _080032F2:
 	ldr r0, [sp, 0x5C]
 	cmp r2, 0x7
 	ble _08003274
-	ldr r2, _0800339C @ =gGlyphBuffer3
+	ldr r2, _0800339C @ =gGlyphInfo + 0x40
 	movs r1, 0
 	ldrb r0, [r6, 0x9]
 	adds r0, 0x8
@@ -487,7 +487,7 @@ _0800338A:
 	b _080035FC
 	.align 2, 0
 _08003398: .4byte gWindows
-_0800339C: .4byte gGlyphBuffer3
+_0800339C: .4byte gGlyphInfo + 0x40
 _080033A0:
 	mov r2, r8
 	movs r3, 0
@@ -563,7 +563,7 @@ _0800341C:
 	mov r1, r12
 	cmp r3, 0x7
 	ble _080033B0
-	ldr r3, _080034D4 @ =gGlyphBuffer2
+	ldr r3, _080034D4 @ =gGlyphInfo + 0x20
 	movs r2, 0
 	ldrb r1, [r6, 0x9]
 	ldr r0, [sp, 0x64]
@@ -641,7 +641,7 @@ _080034B8:
 	ldr r1, [sp, 0x40]
 	cmp r2, 0x7
 	ble _08003438
-	ldr r3, _080034D8 @ =gGlyphBuffer3
+	ldr r3, _080034D8 @ =gGlyphInfo + 0x40
 	movs r2, 0
 	ldrb r0, [r6, 0x9]
 	adds r1, r0, 0
@@ -649,8 +649,8 @@ _080034B8:
 	b _08003556
 	.align 2, 0
 _080034D0: .4byte gWindows
-_080034D4: .4byte gGlyphBuffer2
-_080034D8: .4byte gGlyphBuffer3
+_080034D4: .4byte gGlyphInfo + 0x20
+_080034D8: .4byte gGlyphInfo + 0x40
 _080034DC:
 	ldm r3!, {r0}
 	mov r9, r0
@@ -719,7 +719,7 @@ _08003556:
 	ldr r0, [sp, 0x68]
 	cmp r2, r0
 	blt _080034DC
-	ldr r3, _08003610 @ =gGlyphBuffer4
+	ldr r3, _08003610 @ =gGlyphInfo + 0x60
 	movs r2, 0
 	ldrb r0, [r6, 0x9]
 	adds r1, r0, 0
@@ -814,7 +814,7 @@ _080035FC:
 	bx r0
 	.align 2, 0
 _0800360C: .4byte gWindows
-_08003610: .4byte gGlyphBuffer4
+_08003610: .4byte gGlyphInfo + 0x60
 	thumb_func_end CopyGlyphToWindow
 
 	thumb_func_start sub_8003614
@@ -838,7 +838,7 @@ sub_8003614: @ 8003614
 	lsls r0, 16
 	lsrs r4, r0, 16
 	subs r1, r3, r1
-	ldr r5, _08003688 @ =gGlyphBuffer1
+	ldr r5, _08003688 @ =gGlyphInfo
 	adds r0, r5, 0
 	adds r0, 0x80
 	ldrb r7, [r0]
@@ -881,7 +881,7 @@ _08003678:
 	beq _0800369A
 	b _08003B00
 	.align 2, 0
-_08003688: .4byte gGlyphBuffer1
+_08003688: .4byte gGlyphInfo
 _0800368C:
 	cmp r1, 0x2
 	bne _08003692
@@ -1024,7 +1024,7 @@ _0800377A:
 	cmp r4, r1
 	blt _08003724
 _0800378E:
-	ldr r1, _08003818 @ =gGlyphBuffer2
+	ldr r1, _08003818 @ =gGlyphInfo + 0x20
 	movs r0, 0
 	ldr r2, [sp, 0x8]
 	ldr r3, [sp, 0xC]
@@ -1098,7 +1098,7 @@ _08003808:
 	blt _080037A2
 	b _08003B00
 	.align 2, 0
-_08003818: .4byte gGlyphBuffer2
+_08003818: .4byte gGlyphInfo + 0x20
 _0800381C:
 	adds r0, r2, 0
 	movs r1, 0
@@ -1167,7 +1167,7 @@ _08003890:
 	mov r2, r10
 	cmp r1, 0x7
 	ble _0800382E
-	ldr r2, _08003918 @ =gGlyphBuffer3
+	ldr r2, _08003918 @ =gGlyphInfo + 0x40
 	movs r0, 0
 	ldr r1, [sp, 0x1C]
 	ldr r3, [sp, 0x20]
@@ -1235,7 +1235,7 @@ _0800390A:
 	blt _080038A8
 	b _08003B00
 	.align 2, 0
-_08003918: .4byte gGlyphBuffer3
+_08003918: .4byte gGlyphInfo + 0x40
 _0800391C:
 	movs r2, 0
 	ldr r4, [sp, 0x8]
@@ -1304,7 +1304,7 @@ _0800398A:
 	mov r4, r9
 	cmp r2, 0x7
 	ble _08003936
-	ldr r1, _08003B10 @ =gGlyphBuffer2
+	ldr r1, _08003B10 @ =gGlyphInfo + 0x20
 	movs r0, 0
 	ldr r2, [sp, 0x8]
 	ldr r3, [sp, 0x18]
@@ -1366,7 +1366,7 @@ _08003A06:
 	mov r2, r10
 	cmp r0, 0x7
 	ble _080039A6
-	ldr r6, _08003B14 @ =gGlyphBuffer3
+	ldr r6, _08003B14 @ =gGlyphInfo + 0x40
 	movs r4, 0
 	ldr r2, [sp, 0x1C]
 	ldr r3, [sp, 0x20]
@@ -1428,7 +1428,7 @@ _08003A70:
 	cmp r4, r1
 	blt _08003A1C
 _08003A84:
-	ldr r2, _08003B18 @ =gGlyphBuffer4
+	ldr r2, _08003B18 @ =gGlyphInfo + 0x60
 	movs r0, 0
 	ldr r1, [sp, 0x1C]
 	ldr r3, [sp, 0x20]
@@ -1504,9 +1504,9 @@ _08003B00:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08003B10: .4byte gGlyphBuffer2
-_08003B14: .4byte gGlyphBuffer3
-_08003B18: .4byte gGlyphBuffer4
+_08003B10: .4byte gGlyphInfo + 0x20
+_08003B14: .4byte gGlyphInfo + 0x40
+_08003B18: .4byte gGlyphInfo + 0x60
 	thumb_func_end sub_8003614
 
 	thumb_func_start ClearTextSpan

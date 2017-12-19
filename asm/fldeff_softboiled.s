@@ -146,7 +146,7 @@ _080E5796:
 _080E57A0: .4byte gUnknown_2024284
 _080E57A4:
 	movs r0, 0x1
-	bl sub_80722CC
+	bl PlaySE
 	mov r1, r10
 	mov r0, r8
 	muls r0, r1
@@ -186,7 +186,7 @@ sub_80E57E8: @ 80E57E8
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl sub_80722CC
+	bl PlaySE
 	ldr r5, _080E5830 @ =gUnknown_203B0A0
 	movs r1, 0x9
 	ldrsb r1, [r5, r1]
@@ -230,9 +230,9 @@ sub_80E583C: @ 80E583C
 	muls r0, r1
 	ldr r1, _080E5888 @ =gUnknown_2024284
 	adds r0, r1
-	ldr r1, _080E588C @ =gUnknown_2021CD0
+	ldr r1, _080E588C @ =gStringVar1
 	bl GetMonNickname
-	ldr r4, _080E5890 @ =gUnknown_2021D18
+	ldr r4, _080E5890 @ =gStringVar4
 	ldr r1, _080E5894 @ =gUnknown_8416F27
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -254,8 +254,8 @@ sub_80E583C: @ 80E583C
 	.align 2, 0
 _080E5884: .4byte gUnknown_203B0A0
 _080E5888: .4byte gUnknown_2024284
-_080E588C: .4byte gUnknown_2021CD0
-_080E5890: .4byte gUnknown_2021D18
+_080E588C: .4byte gStringVar1
+_080E5890: .4byte gStringVar4
 _080E5894: .4byte gUnknown_8416F27
 _080E5898: .4byte gUnknown_3005090
 _080E589C: .4byte sub_80E58A0
@@ -341,7 +341,7 @@ sub_80E5934: @ 80E5934
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080E5964 @ =gUnknown_84169F8
 	movs r1, 0
 	bl sub_81202F8

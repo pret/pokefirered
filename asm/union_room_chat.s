@@ -532,7 +532,7 @@ _08128848:
 	cmp r0, 0
 	beq _081288CE
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _081288CE
@@ -1664,7 +1664,7 @@ _08129180:
 	cmp r0, 0
 	bne _08129206
 	movs r0, 0x30
-	bl sub_80722CC
+	bl PlaySE
 	bl sav2_gender2_inplace_and_xFE
 	ldr r0, _081291A0 @ =gUnknown_203B0E0
 	ldr r1, [r0]
@@ -4791,7 +4791,7 @@ _0812A8A8:
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	cmp r0, 0x28
 	bgt _0812A8E6
 	lsls r3, r6, 24
@@ -4841,7 +4841,7 @@ _0812A90C:
 	movs r0, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	cmp r0, 0x23
 	bgt _0812A90C
 	mov r1, r8

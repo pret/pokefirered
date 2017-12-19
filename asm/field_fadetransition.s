@@ -591,7 +591,7 @@ sub_807DF94: @ 807DF94
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	movs r0, 0x28
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0807DFB8 @ =sub_807E31C
 	movs r1, 0xA
 	bl CreateTask
@@ -694,7 +694,7 @@ _0807E074:
 	bl sub_805B364
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80722CC
+	bl PlaySE
 	movs r1, 0
 	ldrsh r0, [r6, r1]
 	movs r2, 0
@@ -1161,7 +1161,7 @@ sub_807E438: @ 807E438
 	bl sub_807DC18
 	bl play_some_sound
 	movs r0, 0x9
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0807E464 @ =gUnknown_3005020
 	ldr r1, _0807E468 @ =sub_807DF64
 	str r1, [r0]
@@ -1431,7 +1431,7 @@ sub_807E654: @ 807E654
 	bl sub_8055F88
 	bl sub_807DC18
 	movs r0, 0x9
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0807E674 @ =sub_807E5EC
 	movs r1, 0xA
 	bl CreateTask
@@ -1473,7 +1473,7 @@ _0807E6A6:
 	bl fade_screen
 	bl sub_8055F88
 	movs r0, 0x9
-	bl sub_80722CC
+	bl PlaySE
 	b _0807E6D4
 _0807E6BE:
 	bl sub_807E40C
@@ -1607,7 +1607,7 @@ _0807E7B6:
 	bl player_bitmagic
 	bl ScriptContext2_Enable
 	movs r0, 0x27
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_805DAB0
 	b _0807E7EA
 _0807E7CA:
@@ -1693,7 +1693,7 @@ _0807E85C:
 	bl sub_805B364
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80722CC
+	bl PlaySE
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r2, 0
@@ -1904,7 +1904,7 @@ _0807EA10:
 	adds r2, r5, 0x6
 	bl sub_807EB64
 	movs r0, 0x9
-	bl sub_80722CC
+	bl PlaySE
 	b _0807EA92
 _0807EA38:
 	movs r1, 0x4

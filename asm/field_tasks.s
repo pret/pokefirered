@@ -373,7 +373,7 @@ _0806EAB0:
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4]
 	movs r0, 0x24
-	bl sub_80722CC
+	bl PlaySE
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -409,7 +409,7 @@ _0806EB04:
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4]
 	movs r0, 0x23
-	bl sub_80722CC
+	bl PlaySE
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]

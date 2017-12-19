@@ -252,7 +252,7 @@ sub_8097A48: @ 8097A48
 	push {r6,r7}
 	movs r7, 0
 	movs r0, 0x79
-	bl sub_80722CC
+	bl PlaySE
 	ldr r4, _08097B38 @ =gUnknown_2039A04
 	adds r1, r4, 0x2
 	adds r0, r4, 0
@@ -524,7 +524,7 @@ _08097C68: .4byte gUnknown_202063C
 sub_8097C6C: @ 8097C6C
 	push {lr}
 	movs r0, 0x79
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x2
 	bl FieldEffectActiveListRemove
 	bl EnableBothScriptContexts

@@ -1025,7 +1025,7 @@ sub_810F5E8: @ 810F5E8
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	ldrb r1, [r4]
 	movs r3, 0x14
 	negs r3, r3
@@ -1102,7 +1102,7 @@ _0810F684:
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	ldrb r1, [r4]
 	movs r3, 0x14
 	negs r3, r3
@@ -1519,7 +1519,7 @@ ProcessMenuInput: @ 810F998
 	cmp r0, 0
 	bne _0810F9B4
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0810F9B4:
 	movs r0, 0x2
 	ldrsb r0, [r4, r0]
@@ -1541,7 +1541,7 @@ _0810F9D2:
 	cmp r0, 0
 	beq _0810F9E6
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _0810F9F6
@@ -1551,7 +1551,7 @@ _0810F9E6:
 	cmp r0, 0
 	beq _0810F9FA
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 _0810F9F6:
 	bl MoveMenuCursor
@@ -1580,7 +1580,7 @@ ProcessMenuInputNoWrapAround: @ 810FA04
 	cmp r0, 0
 	bne _0810FA24
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0810FA24:
 	movs r0, 0x2
 	ldrsb r0, [r4, r0]
@@ -1622,7 +1622,7 @@ _0810FA5C:
 	beq _0810FA78
 _0810FA72:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0810FA78:
 	movs r0, 0x2
 	negs r0, r0
@@ -1646,7 +1646,7 @@ ProcessMenuInput_other: @ 810FA84
 	cmp r0, 0
 	bne _0810FAA0
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0810FAA0:
 	movs r0, 0x2
 	ldrsb r0, [r4, r0]
@@ -1669,7 +1669,7 @@ _0810FABE:
 	cmp r1, 0x40
 	bne _0810FAD4
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _0810FAE0
@@ -1677,7 +1677,7 @@ _0810FAD4:
 	cmp r1, 0x80
 	bne _0810FAE4
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 _0810FAE0:
 	bl MoveMenuCursor
@@ -1706,7 +1706,7 @@ ProcessMenuInputNoWrapAround_other: @ 810FAF0
 	cmp r0, 0
 	bne _0810FB10
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0810FB10:
 	movs r0, 0x2
 	ldrsb r0, [r4, r0]
@@ -1747,7 +1747,7 @@ _0810FB4A:
 	beq _0810FB62
 _0810FB5C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0810FB62:
 	movs r0, 0x2
 	negs r0, r0
@@ -3102,7 +3102,7 @@ sub_81105A0: @ 81105A0
 	cmp r0, 0
 	beq _081105C8
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _081105C4 @ =gUnknown_203ADE4
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
@@ -3125,7 +3125,7 @@ _081105D6:
 	cmp r0, 0
 	beq _081105EC
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r1, 0x1
 	negs r1, r1
 	movs r0, 0
@@ -3136,7 +3136,7 @@ _081105EC:
 	cmp r0, 0
 	beq _08110600
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0x1
 	b _08110640
@@ -3152,7 +3152,7 @@ _08110600:
 	bne _08110620
 _08110614:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _0811063E
@@ -3169,7 +3169,7 @@ _08110620:
 	bne _08110644
 _08110636:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 _0811063E:
 	movs r1, 0
@@ -3196,7 +3196,7 @@ sub_8110650: @ 8110650
 	cmp r0, 0
 	beq _08110678
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x2
 	ldrsb r0, [r5, r0]
 	b _081106EE
@@ -3264,7 +3264,7 @@ _081106D8:
 	cmp r4, r0
 	beq _081106EA
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _081106EA:
 	movs r0, 0x2
 	negs r0, r0
@@ -3284,7 +3284,7 @@ sub_81106F4: @ 81106F4
 	cmp r0, 0
 	beq _0811071C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _08110718 @ =gUnknown_203ADE4
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
@@ -3309,7 +3309,7 @@ _0811072A:
 	cmp r1, 0x40
 	bne _08110744
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r1, 0x1
 	negs r1, r1
 	movs r0, 0
@@ -3318,7 +3318,7 @@ _08110744:
 	cmp r1, 0x80
 	bne _08110754
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0x1
 	b _08110790
@@ -3332,7 +3332,7 @@ _08110754:
 	bne _08110770
 _08110764:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _0811078E
@@ -3349,7 +3349,7 @@ _08110770:
 	bne _08110794
 _08110786:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 _0811078E:
 	movs r1, 0
@@ -3376,7 +3376,7 @@ sub_81107A0: @ 81107A0
 	cmp r0, 0
 	beq _081107C8
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x2
 	ldrsb r0, [r6, r0]
 	b _0811083A
@@ -3442,7 +3442,7 @@ _08110824:
 	cmp r4, r0
 	beq _08110836
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _08110836:
 	movs r0, 0x2
 	negs r0, r0

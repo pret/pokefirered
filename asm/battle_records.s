@@ -233,7 +233,7 @@ sub_80CD3E8: @ 80CD3E8
 	beq _080CD416
 _080CD40C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080CD424 @ =sub_80CD428
 	str r0, [r4]
 _080CD416:
@@ -1028,24 +1028,24 @@ _080CDA1E:
 	bls _080CDA24
 	adds r6, r0, 0
 _080CDA24:
-	ldr r0, _080CDAB4 @ =gUnknown_2021CD0
+	ldr r0, _080CDAB4 @ =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r0, _080CDAB8 @ =gUnknown_2021CF0
+	ldr r0, _080CDAB8 @ =gStringVar2
 	adds r1, r5, 0
 	movs r2, 0
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r0, _080CDABC @ =gUnknown_2021D04
+	ldr r0, _080CDABC @ =gStringVar3
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	movs r3, 0
 	ldr r6, _080CDAC0 @ =gUnknown_83F6C84
-	ldr r7, _080CDAC4 @ =gUnknown_2021D18
+	ldr r7, _080CDAC4 @ =gStringVar4
 	ldr r0, _080CDAC8 @ =gUnknown_8418188
 	mov r12, r0
 	movs r5, 0
@@ -1099,11 +1099,11 @@ _080CDA72:
 	bx r0
 	.align 2, 0
 _080CDAB0: .4byte 0x0000270f
-_080CDAB4: .4byte gUnknown_2021CD0
-_080CDAB8: .4byte gUnknown_2021CF0
-_080CDABC: .4byte gUnknown_2021D04
+_080CDAB4: .4byte gStringVar1
+_080CDAB8: .4byte gStringVar2
+_080CDABC: .4byte gStringVar3
 _080CDAC0: .4byte gUnknown_83F6C84
-_080CDAC4: .4byte gUnknown_2021D18
+_080CDAC4: .4byte gStringVar4
 _080CDAC8: .4byte gUnknown_8418188
 _080CDACC: .4byte gUnknown_83F6C78
 	thumb_func_end sub_80CD9F4
@@ -1174,7 +1174,7 @@ _080CDB48: .4byte gUnknown_84181B6
 _080CDB4C: .4byte gUnknown_84181BE
 _080CDB50:
 	movs r5, 0
-	ldr r7, _080CDB70 @ =gUnknown_2021CD0
+	ldr r7, _080CDB70 @ =gStringVar1
 	mov r9, r5
 _080CDB56:
 	cmp r5, 0
@@ -1189,7 +1189,7 @@ _080CDB56:
 	bl StringCopyN
 	b _080CDBA6
 	.align 2, 0
-_080CDB70: .4byte gUnknown_2021CD0
+_080CDB70: .4byte gStringVar1
 _080CDB74:
 	cmp r5, 0x1
 	bne _080CDB7E
@@ -1202,17 +1202,17 @@ _080CDB7E:
 	movs r4, 0x84
 	ldrh r1, [r6, 0xC]
 _080CDB86:
-	ldr r0, _080CDB94 @ =gUnknown_2021CD0
+	ldr r0, _080CDB94 @ =gStringVar1
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	b _080CDBA6
 	.align 2, 0
-_080CDB94: .4byte gUnknown_2021CD0
+_080CDB94: .4byte gStringVar1
 _080CDB98:
 	movs r4, 0xB4
 	ldrh r1, [r6, 0xE]
-	ldr r0, _080CDBDC @ =gUnknown_2021CD0
+	ldr r0, _080CDBDC @ =gStringVar1
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
@@ -1245,7 +1245,7 @@ _080CDBCE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CDBDC: .4byte gUnknown_2021CD0
+_080CDBDC: .4byte gStringVar1
 _080CDBE0: .4byte gUnknown_83F6C78
 	thumb_func_end sub_80CDAD0
 
@@ -1265,7 +1265,7 @@ sub_80CDBE4: @ 80CDBE4
 	movs r2, 0
 	movs r3, 0
 	bl FillWindowPixelRect
-	ldr r5, _080CDC9C @ =gUnknown_2021D18
+	ldr r5, _080CDC9C @ =gStringVar4
 	ldr r1, _080CDCA0 @ =gUnknown_8418174
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
@@ -1273,7 +1273,7 @@ sub_80CDBE4: @ 80CDBE4
 	negs r2, r2
 	movs r0, 0x2
 	adds r1, r5, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r2, 0xD0
 	subs r2, r0
 	lsrs r2, 1
@@ -1337,7 +1337,7 @@ _080CDC70:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CDC9C: .4byte gUnknown_2021D18
+_080CDC9C: .4byte gStringVar4
 _080CDCA0: .4byte gUnknown_8418174
 _080CDCA4: .4byte gUnknown_83F6C78
 _080CDCA8: .4byte gSaveBlock2Ptr

@@ -10,7 +10,7 @@ sub_8069348: @ 8069348
 	ldr r1, _08069368 @ =gUnknown_203709C
 	movs r0, 0
 	strb r0, [r1]
-	ldr r2, _0806936C @ =gUnknown_3003E50
+	ldr r2, _0806936C @ =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x2
 	negs r0, r0
@@ -24,7 +24,7 @@ sub_8069348: @ 8069348
 	bx lr
 	.align 2, 0
 _08069368: .4byte gUnknown_203709C
-_0806936C: .4byte gUnknown_3003E50
+_0806936C: .4byte gTextFlags
 	thumb_func_end sub_8069348
 
 	thumb_func_start sub_8069370
@@ -57,7 +57,7 @@ _0806939E:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080693C4
-	ldr r2, _080693C0 @ =gUnknown_3003E50
+	ldr r2, _080693C0 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x4
 	orrs r0, r1
@@ -69,7 +69,7 @@ _0806939E:
 	b _080693E2
 	.align 2, 0
 _080693BC: .4byte gUnknown_203ADFA
-_080693C0: .4byte gUnknown_3003E50
+_080693C0: .4byte gTextFlags
 _080693C4:
 	bl sub_8069A38
 	lsls r0, 24
@@ -223,7 +223,7 @@ _080694C2:
 textbox_fdecode_auto_and_task_add: @ 80694C8
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, _080694E0 @ =gUnknown_2021D18
+	ldr r0, _080694E0 @ =gStringVar4
 	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl sub_80F6D5C
@@ -231,7 +231,7 @@ textbox_fdecode_auto_and_task_add: @ 80694C8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080694E0: .4byte gUnknown_2021D18
+_080694E0: .4byte gStringVar4
 	thumb_func_end textbox_fdecode_auto_and_task_add
 
 	thumb_func_start textbox_auto_and_task_add

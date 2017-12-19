@@ -286,7 +286,7 @@ _081437F8:
 	cmp r0, 0x2
 	bne _08143814
 	movs r0, 0x42
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_800A5BC
 	movs r0, 0
 	strh r0, [r5]
@@ -566,7 +566,7 @@ _08143A48:
 	adds r0, r4, 0
 	bl sub_81438E8
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	b _08143BE6
 	.align 2, 0
 _08143A58: .4byte gMain
@@ -578,7 +578,7 @@ _08143A5C:
 	cmp r0, 0
 	beq _08143A80
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_80098B8
 	adds r0, r4, 0
 	bl sub_81438E8
@@ -602,7 +602,7 @@ _08143A9C:
 	cmp r0, 0
 	beq _08143ABA
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_80098B8
 	adds r0, r4, 0
 	bl sub_81438E8
@@ -744,7 +744,7 @@ _08143BCC:
 _08143BD8: .4byte gUnknown_841DE95
 _08143BDC:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_80098B8
 _08143BE6:
 	movs r0, 0x17

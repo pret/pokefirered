@@ -3267,7 +3267,7 @@ sub_801182C: @ 801182C
 	ldr r0, _08011848 @ =sub_80117BC
 	str r0, [r4, 0x1C]
 	movs r0, 0x61
-	bl sub_80722CC
+	bl PlaySE
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -13686,7 +13686,7 @@ HandleAction_SafriZoneRun: @ 8016C60
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x11
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _08016C94 @ =gUnknown_2023BCC
 	ldrb r0, [r0]
 	strb r0, [r4]

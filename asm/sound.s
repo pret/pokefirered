@@ -1276,8 +1276,8 @@ _080722C4: .4byte gUnknown_3005080
 _080722C8: .4byte 0x0000ffff
 	thumb_func_end PlayBGM
 
-	thumb_func_start sub_80722CC
-sub_80722CC: @ 80722CC
+	thumb_func_start PlaySE
+PlaySE: @ 80722CC
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -1297,7 +1297,7 @@ _080722E8:
 	.align 2, 0
 _080722EC: .4byte gUnknown_2031DD8
 _080722F0: .4byte gUnknown_203ADFA
-	thumb_func_end sub_80722CC
+	thumb_func_end PlaySE
 
 	thumb_func_start PlaySE12WithPanning
 PlaySE12WithPanning: @ 80722F4

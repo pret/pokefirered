@@ -79,7 +79,7 @@ MonFaintFromPoisonOnField: @ 80A04B8
 	movs r1, 0x37
 	mov r2, sp
 	bl sub_804037C
-	ldr r5, _080A0500 @ =gUnknown_2021CD0
+	ldr r5, _080A0500 @ =gStringVar1
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
@@ -92,7 +92,7 @@ MonFaintFromPoisonOnField: @ 80A04B8
 	bx r0
 	.align 2, 0
 _080A04FC: .4byte gUnknown_2024284
-_080A0500: .4byte gUnknown_2021CD0
+_080A0500: .4byte gStringVar1
 	thumb_func_end MonFaintFromPoisonOnField
 
 	thumb_func_start CheckMonFaintedFromPoison

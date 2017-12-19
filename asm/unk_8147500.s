@@ -560,7 +560,7 @@ _0814791C:
 	strb r0, [r2]
 _0814792A:
 	movs r0, 0x31
-	bl sub_80722CC
+	bl PlaySE
 	ldrh r1, [r6, 0x32]
 	lsls r1, 24
 	lsrs r1, 24
@@ -569,7 +569,7 @@ _0814792A:
 	b _081479C8
 _0814793E:
 	movs r0, 0x15
-	bl sub_80722CC
+	bl PlaySE
 	ldrh r1, [r6, 0x32]
 	lsls r1, 24
 	lsrs r1, 24
@@ -656,7 +656,7 @@ sub_81479D4: @ 81479D4
 	ldr r5, _08147A28 @ =gUnknown_3005098
 	adds r6, r4, r5
 	movs r0, 0x31
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _08147A2C @ =gUnknown_202063C
 	movs r0, 0x1A
 	ldrsh r1, [r6, r0]

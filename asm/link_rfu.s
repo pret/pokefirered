@@ -3355,7 +3355,7 @@ _080FED10:
 	cmp r4, 0
 	beq _080FED6E
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8100134
 _080FED20:
@@ -6401,7 +6401,7 @@ _081002EE:
 	movs r0, 0x1
 	ldr r1, _0810030C @ =gUnknown_843F8D8
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	lsls r1, r0, 3
 	subs r0, r1, r0
 	b _08100322
@@ -6416,7 +6416,7 @@ _08100310:
 	movs r0, 0x1
 	mov r1, sp
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 _08100322:
 	adds r0, 0x11
 	lsls r1, r6, 16
@@ -7702,7 +7702,7 @@ sub_8100D24: @ 8100D24
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r4, 0x80
 	subs r4, r0
 	lsrs r4, 1

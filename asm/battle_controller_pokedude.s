@@ -1279,7 +1279,7 @@ sub_8156A54: @ 8156A54
 	mov r0, r10
 	bl SetBattleBarStruct
 	movs r0, 0x1B
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _08156B20 @ =sub_8156B24
 	mov r1, r8
 	str r0, [r1]
@@ -6010,7 +6010,7 @@ sub_815920C: @ 815920C
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl sub_80722CC
+	bl PlaySE
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -6791,7 +6791,7 @@ _0815985C:
 	cmp r0, 0
 	bne _08159888
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _08159888:
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -6886,7 +6886,7 @@ _0815992C:
 	cmp r0, r1
 	bne _08159972
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -6961,7 +6961,7 @@ sub_8159998: @ 8159998
 	cmp r0, 0
 	bne _081599DE
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _081599DE:
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -7023,7 +7023,7 @@ _08159A48:
 	cmp r0, r4
 	bne _08159A8E
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -7288,7 +7288,7 @@ _08159C64:
 	cmp r0, 0
 	beq _08159CEE
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x81
 	negs r0, r0
 	str r4, [sp]
@@ -7488,7 +7488,7 @@ _08159E0C:
 	cmp r0, 0
 	beq _08159EDE
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _08159E5C @ =gUnknown_825E45C
 	ldr r0, _08159E60 @ =gUnknown_2023FE8
 	ldr r0, [r0]

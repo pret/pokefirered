@@ -72,7 +72,7 @@ _0813B8E8:
 	bne _0813B918
 _0813B8FA:
 	movs r0, 0xFC
-	bl sub_80722CC
+	bl PlaySE
 _0813B900:
 	movs r0, 0
 	b _0813BB28
@@ -88,7 +88,7 @@ _0813B918:
 	ldr r0, _0813B950 @ =gMPlay_SE2
 	bl m4aMPlayStop
 	movs r0, 0xFA
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0813B954 @ =gUnknown_203F174
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -228,7 +228,7 @@ _0813BA78:
 	cmp r0, 0
 	bne _0813BB24
 	movs r0, 0xFB
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0813BA9C @ =gUnknown_203F178
 	movs r0, 0x6
 	b _0813BB22
@@ -1100,7 +1100,7 @@ _0813C0EC:
 	ldrb r1, [r1]
 	cmp r1, 0xFF
 	beq _0813C0AC
-	ldr r5, _0813C150 @ =gUnknown_3003E20
+	ldr r5, _0813C150 @ =gGlyphInfo + 0x80
 _0813C106:
 	ldr r0, [r0]
 	adds r0, r4
@@ -1137,15 +1137,15 @@ _0813C106:
 	b _0813C0AC
 	.align 2, 0
 _0813C14C: .4byte gSaveBlock2Ptr
-_0813C150: .4byte gUnknown_3003E20
+_0813C150: .4byte gGlyphInfo + 0x80
 _0813C154:
 	cmp r1, 0x2
 	bne _0813C0AC
 	movs r4, 0
-	ldr r5, _0813C160 @ =gUnknown_3003E20
+	ldr r5, _0813C160 @ =gGlyphInfo + 0x80
 	b _0813C1BC
 	.align 2, 0
-_0813C160: .4byte gUnknown_3003E20
+_0813C160: .4byte gGlyphInfo + 0x80
 _0813C164:
 	ldrb r1, [r1]
 	ldr r2, [sp, 0x28]
@@ -1210,7 +1210,7 @@ _0813C1DC: .4byte 0x00000834
 _0813C1E0: .4byte gUnknown_841CB3C
 _0813C1E4:
 	ldr r7, [sp, 0x34]
-	ldr r1, _0813C1FC @ =gGlyphBuffer1
+	ldr r1, _0813C1FC @ =gGlyphInfo
 	adds r1, 0x81
 	mov r0, r10
 	adds r0, 0x1
@@ -1221,7 +1221,7 @@ _0813C1E4:
 	mov r10, r0
 	b _0813C0AC
 	.align 2, 0
-_0813C1FC: .4byte gGlyphBuffer1
+_0813C1FC: .4byte gGlyphInfo
 _0813C200:
 	mov r2, r9
 	ldrb r1, [r2]
@@ -1401,7 +1401,7 @@ _0813C36A:
 	add r2, sp, 0x14
 	bl sub_813C3AC
 	ldr r1, [sp, 0x24]
-	ldr r0, _0813C398 @ =gGlyphBuffer1
+	ldr r0, _0813C398 @ =gGlyphInfo
 	adds r0, 0x80
 	ldrb r0, [r0]
 _0813C38E:
@@ -1411,7 +1411,7 @@ _0813C390:
 	lsrs r7, r0, 24
 	b _0813C0AC
 	.align 2, 0
-_0813C398: .4byte gGlyphBuffer1
+_0813C398: .4byte gGlyphInfo
 _0813C39C:
 	add sp, 0x38
 	pop {r3-r5}
@@ -1455,20 +1455,20 @@ sub_813C3AC: @ 813C3AC
 	cmp r6, 0
 	bne _0813C3EE
 	movs r1, 0
-	bl sub_8006448
+	bl DecompressGlyphFont0
 	b _0813C402
 _0813C3EE:
 	cmp r6, 0x5
 	bne _0813C3FA
 	movs r1, 0
-	bl sub_8006958
+	bl DecompressGlyphFont5
 	b _0813C402
 _0813C3FA:
 	adds r0, r1, 0
 	movs r1, 0
-	bl sub_80065B8
+	bl DecompressGlyphFont2
 _0813C402:
-	ldr r1, _0813C450 @ =gGlyphBuffer1
+	ldr r1, _0813C450 @ =gGlyphInfo
 	str r1, [r7]
 	movs r2, 0
 	movs r0, 0x10
@@ -1506,7 +1506,7 @@ _0813C402:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813C450: .4byte gGlyphBuffer1
+_0813C450: .4byte gGlyphInfo
 	thumb_func_end sub_813C3AC
 
 	thumb_func_start sub_813C454
@@ -1544,7 +1544,7 @@ sub_813C488: @ 813C488
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r4, 0x7C
 	subs r4, r0
 	movs r0, 0x1
@@ -1822,7 +1822,7 @@ _0813C6A4:
 	cmp r0, 0
 	beq _0813C6D0
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0813C6CC @ =gUnknown_203F190
 	ldrb r0, [r1, 0xC]
 	ldrb r2, [r1, 0xD]
@@ -1841,7 +1841,7 @@ _0813C6D0:
 	cmp r0, 0
 	beq _0813C6E4
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x2
 	negs r0, r0
 	b _0813C756
@@ -1882,7 +1882,7 @@ _0813C718:
 	cmp r0, 0
 	bne _0813C72A
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0813C72A:
 	movs r0, 0x4
 	negs r0, r0
@@ -1900,7 +1900,7 @@ _0813C73A:
 	cmp r0, 0
 	bne _0813C74C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0813C74C:
 	movs r0, 0x5
 	negs r0, r0

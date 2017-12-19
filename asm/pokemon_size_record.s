@@ -254,10 +254,10 @@ _080A0874:
 	adds r0, r6, 0
 	bl GetMonSize
 	adds r4, r0, 0
-	ldr r0, _080A08AC @ =gUnknown_2021D04
+	ldr r0, _080A08AC @ =gStringVar3
 	adds r1, r4, 0
 	bl sub_80A07E4
-	ldr r0, _080A08B0 @ =gUnknown_2021CF0
+	ldr r0, _080A08B0 @ =gStringVar2
 	adds r1, r5, 0
 	bl sub_80A07E4
 	cmp r5, r4
@@ -265,8 +265,8 @@ _080A0874:
 	movs r0, 0x4
 	b _080A08C4
 	.align 2, 0
-_080A08AC: .4byte gUnknown_2021D04
-_080A08B0: .4byte gUnknown_2021CF0
+_080A08AC: .4byte gStringVar3
+_080A08B0: .4byte gStringVar2
 _080A08B4:
 	cmp r5, r4
 	bcc _080A08C2
@@ -294,9 +294,9 @@ sub_80A08CC: @ 80A08CC
 	adds r0, r4, 0
 	bl GetMonSize
 	adds r1, r0, 0
-	ldr r0, _080A08F8 @ =gUnknown_2021D04
+	ldr r0, _080A08F8 @ =gStringVar3
 	bl sub_80A07E4
-	ldr r0, _080A08FC @ =gUnknown_2021CD0
+	ldr r0, _080A08FC @ =gStringVar1
 	movs r1, 0xB
 	muls r1, r4
 	ldr r2, _080A0900 @ =gUnknown_8245EE0
@@ -306,8 +306,8 @@ sub_80A08CC: @ 80A08CC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A08F8: .4byte gUnknown_2021D04
-_080A08FC: .4byte gUnknown_2021CD0
+_080A08F8: .4byte gStringVar3
+_080A08FC: .4byte gStringVar1
 _080A0900: .4byte gUnknown_8245EE0
 	thumb_func_end sub_80A08CC
 

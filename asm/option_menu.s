@@ -392,7 +392,7 @@ sub_8088680: @ 8088680
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r4, 0xE4
 	subs r4, r0
 	movs r0, 0x2

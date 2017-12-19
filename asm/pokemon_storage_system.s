@@ -2102,7 +2102,7 @@ sub_808C95C: @ 808C95C
 	cmp r0, 0
 	beq _0808C978
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0xC9
 	b _0808C9C0
 	.align 2, 0
@@ -2113,7 +2113,7 @@ _0808C978:
 	cmp r0, 0
 	beq _0808C998
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808C994 @ =gUnknown_20397AC
 	ldr r0, [r0]
 	movs r1, 0x91
@@ -2129,7 +2129,7 @@ _0808C998:
 	cmp r0, 0
 	beq _0808C9AC
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808CC44
 	b _0808C9BE
 _0808C9AC:
@@ -2138,7 +2138,7 @@ _0808C9AC:
 	cmp r0, 0
 	beq _0808C9BE
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808CC10
 _0808C9BE:
 	movs r0, 0xC8
@@ -3185,7 +3185,7 @@ sub_808D220: @ 808D220
 _0808D234: .4byte gUnknown_20397B0
 _0808D238:
 	movs r0, 0x2
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x14
 	movs r1, 0
 	movs r2, 0x1
@@ -3331,7 +3331,7 @@ _0808D32C:
 	.4byte _0808D608
 _0808D394:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808D3A4 @ =gUnknown_20397B0
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -3411,7 +3411,7 @@ _0808D430:
 _0808D438: .4byte sub_808ECE4
 _0808D43C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808D44C @ =box_related
 	bl add_to_c3_somehow
 	b _0808D7B2
@@ -3425,7 +3425,7 @@ _0808D450:
 _0808D458: .4byte sub_808D878
 _0808D45C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl StorageGetCurrentBox
 	ldr r4, _0808D48C @ =gUnknown_20397B0
 	ldr r1, [r4]
@@ -3451,7 +3451,7 @@ _0808D48C: .4byte gUnknown_20397B0
 _0808D490: .4byte 0x000002ca
 _0808D494:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl StorageGetCurrentBox
 	ldr r4, _0808D4C4 @ =gUnknown_20397B0
 	ldr r1, [r4]
@@ -3505,7 +3505,7 @@ _0808D500: .4byte gUnknown_20397B0
 _0808D504: .4byte 0x00000ce2
 _0808D508:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808D518 @ =sub_808DD88
 	bl add_to_c3_somehow
 	b _0808D7B2
@@ -3517,7 +3517,7 @@ _0808D51C:
 	cmp r0, 0
 	bne _0808D538
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	b _0808D740
 _0808D52E:
 	bl sub_809393C
@@ -3534,7 +3534,7 @@ _0808D538:
 _0808D544: .4byte gUnknown_20397B0
 _0808D548:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808D558 @ =sub_808DC50
 	bl add_to_c3_somehow
 	b _0808D7B2
@@ -3542,7 +3542,7 @@ _0808D548:
 _0808D558: .4byte sub_808DC50
 _0808D55C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808D56C @ =sub_808DC9C
 	bl add_to_c3_somehow
 	b _0808D7B2
@@ -3550,7 +3550,7 @@ _0808D55C:
 _0808D56C: .4byte sub_808DC9C
 _0808D570:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808D580 @ =sub_808DBF0
 	bl add_to_c3_somehow
 	b _0808D7B2
@@ -3558,7 +3558,7 @@ _0808D570:
 _0808D580: .4byte sub_808DBF0
 _0808D584:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808D594 @ =sub_808E140
 	bl add_to_c3_somehow
 	b _0808D7B2
@@ -3566,7 +3566,7 @@ _0808D584:
 _0808D594: .4byte sub_808E140
 _0808D598:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808D5A8 @ =sub_808E1F4
 	bl add_to_c3_somehow
 	b _0808D7B2
@@ -3574,7 +3574,7 @@ _0808D598:
 _0808D5A8: .4byte sub_808E1F4
 _0808D5AC:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808D5BC @ =sub_808E3C8
 	bl add_to_c3_somehow
 	b _0808D7B2
@@ -3582,7 +3582,7 @@ _0808D5AC:
 _0808D5BC: .4byte sub_808E3C8
 _0808D5C0:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	b _0808D616
 _0808D5CA:
@@ -3597,7 +3597,7 @@ _0808D5CA:
 _0808D5DC: .4byte gUnknown_20397B0
 _0808D5E0:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x2
 	b _0808D5F6
 _0808D5EA:
@@ -3605,7 +3605,7 @@ _0808D5EA:
 	b _0808D616
 _0808D5EE:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x4
 _0808D5F6:
 	bl sub_80950BC
@@ -3618,7 +3618,7 @@ _0808D5F6:
 _0808D604: .4byte gUnknown_20397B0
 _0808D608:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x3
 	bl sub_808FE54
 	movs r0, 0x5
@@ -3633,7 +3633,7 @@ _0808D616:
 _0808D624: .4byte gUnknown_20397B0
 _0808D628:
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	b _0808D7B2
 _0808D630:
 	bl sub_80924A8
@@ -3722,12 +3722,12 @@ _0808D6E4: .4byte gMain
 _0808D6E8: .4byte gUnknown_20397B0
 _0808D6EC:
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0xD
 	b _0808D6FE
 _0808D6F6:
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x16
 _0808D6FE:
 	bl sub_808FBA4
@@ -3880,7 +3880,7 @@ _0808D818:
 	b _0808D86A
 _0808D81E:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808F810
 	b _0808D840
 _0808D82A:
@@ -3957,7 +3957,7 @@ _0808D8B4:
 	b _0808DB86
 _0808D8C0:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r4, _0808D8D8 @ =gUnknown_20397B0
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
@@ -4061,7 +4061,7 @@ _0808D9B0:
 	cmp r0, 0
 	bne _0808DA66
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	ldr r0, _0808D9CC @ =sub_808DB94
 	bl add_to_c3_somehow
@@ -4070,7 +4070,7 @@ _0808D9B0:
 _0808D9CC: .4byte sub_808DB94
 _0808D9D0:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	ldr r0, _0808D9E4 @ =sub_808DBF0
 	bl add_to_c3_somehow
@@ -4083,7 +4083,7 @@ _0808D9E8:
 	cmp r0, 0
 	beq _0808DA66
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	ldr r0, _0808DA04 @ =sub_808DC50
 	bl add_to_c3_somehow
@@ -4092,7 +4092,7 @@ _0808D9E8:
 _0808DA04: .4byte sub_808DC50
 _0808DA08:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	ldr r0, _0808DA1C @ =sub_808DC9C
 	bl add_to_c3_somehow
@@ -4114,7 +4114,7 @@ _0808DA20:
 	cmp r0, 0
 	bne _0808DAA0
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	ldr r0, _0808DA58 @ =sub_808DD88
 	bl add_to_c3_somehow
@@ -4167,7 +4167,7 @@ _0808DAA0:
 _0808DAA8: .4byte 0x00000ce2
 _0808DAAC:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808DABC @ =sub_808DECC
 	bl add_to_c3_somehow
 	b _0808DB86
@@ -4175,7 +4175,7 @@ _0808DAAC:
 _0808DABC: .4byte sub_808DECC
 _0808DAC0:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808DAD0 @ =sub_808EAF0
 	bl add_to_c3_somehow
 	b _0808DB86
@@ -4183,7 +4183,7 @@ _0808DAC0:
 _0808DAD0: .4byte sub_808EAF0
 _0808DAD4:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808DAE4 @ =sub_808E0BC
 	bl add_to_c3_somehow
 	b _0808DB86
@@ -4191,7 +4191,7 @@ _0808DAD4:
 _0808DAE4: .4byte sub_808E0BC
 _0808DAE8:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808DAF8 @ =sub_808E140
 	bl add_to_c3_somehow
 	b _0808DB86
@@ -4199,7 +4199,7 @@ _0808DAE8:
 _0808DAF8: .4byte sub_808E140
 _0808DAFC:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808DB0C @ =sub_808E1F4
 	bl add_to_c3_somehow
 	b _0808DB86
@@ -4231,17 +4231,17 @@ _0808DB34:
 _0808DB3C: .4byte sub_808E4B0
 _0808DB40:
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0xD
 	b _0808DB5C
 _0808DB4A:
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x11
 	b _0808DB5C
 _0808DB54:
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x16
 _0808DB5C:
 	bl sub_808FBA4
@@ -5156,7 +5156,7 @@ _0808E2E8:
 	cmp r0, 0
 	bne _0808E314
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1A
 	bl sub_808FBA4
 	ldr r1, [r5]
@@ -5167,7 +5167,7 @@ _0808E2E8:
 _0808E310: .4byte 0x00000ce2
 _0808E314:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808E33C @ =gUnknown_20397B4
 	ldrb r0, [r0]
 	negs r4, r0
@@ -5387,7 +5387,7 @@ _0808E4F2:
 	cmp r0, 0
 	bne _0808E55C
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_8096694
 	bl sub_80966F4
 	b _0808E53A
@@ -5405,7 +5405,7 @@ _0808E518:
 	cmp r0, 0
 	beq _0808E55C
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	b _0808E53A
 	.align 2, 0
 _0808E52C: .4byte gMain
@@ -5466,7 +5466,7 @@ _0808E584:
 	.4byte _0808E66C
 _0808E59C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1B
 	bl sub_808FBA4
 	movs r0, 0
@@ -5753,7 +5753,7 @@ _0808E7DC:
 _0808E7F0: .4byte sub_808D2BC
 _0808E7F4:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0808E804 @ =sub_808EA90
 	bl add_to_c3_somehow
 	b _0808E830
@@ -5761,7 +5761,7 @@ _0808E7F4:
 _0808E804: .4byte sub_808EA90
 _0808E808:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	ldr r0, _0808E81C @ =sub_808E83C
 	bl add_to_c3_somehow
@@ -5770,7 +5770,7 @@ _0808E808:
 _0808E81C: .4byte sub_808E83C
 _0808E820:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	ldr r0, _0808E838 @ =sub_808E9A0
 	bl add_to_c3_somehow
@@ -5860,7 +5860,7 @@ _0808E8D8:
 	cmp r0, 0x12
 	blt _0808E994
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_8095024
 	ldr r1, [r5]
 	adds r2, r1, r4
@@ -5911,7 +5911,7 @@ _0808E924:
 _0808E954: .4byte gUnknown_20397B0
 _0808E958:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	ldr r1, [r4]
 	adds r1, r5
@@ -6239,7 +6239,7 @@ _0808EBE4:
 	cmp r0, 0
 	beq _0808EC08
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0xF
 	bl sub_808FBA4
 	ldr r0, _0808EC04 @ =gUnknown_20397B0
@@ -6261,7 +6261,7 @@ _0808EC08:
 _0808EC1C: .4byte sub_808E564
 _0808EC20:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	bl sub_808FBA4
 	movs r0, 0
@@ -6308,7 +6308,7 @@ _0808EC72:
 _0808EC80: .4byte sub_808D2BC
 _0808EC84:
 	movs r0, 0x3
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	b _0808EC9A
 _0808EC90:
@@ -6381,7 +6381,7 @@ _0808ED18:
 	cmp r0, 0
 	beq _0808ED3C
 	movs r0, 0x1A
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0xF
 	bl sub_808FBA4
 	ldr r0, _0808ED38 @ =gUnknown_20397B0
@@ -6403,7 +6403,7 @@ _0808ED3C:
 _0808ED50: .4byte sub_808E564
 _0808ED54:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x12
 	bl sub_808FBA4
 	movs r0, 0
@@ -6451,7 +6451,7 @@ _0808EDA8:
 _0808EDB4: .4byte sub_808D2BC
 _0808EDB8:
 	movs r0, 0x3
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808FD20
 	b _0808EDCE
 _0808EDC4:
@@ -8084,7 +8084,7 @@ sub_808FAD4: @ 808FAD4
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_808F75C
 	pop {r0}
 	bx r0
@@ -12822,7 +12822,7 @@ sub_8091F60: @ 8091F60
 	adds r1, r0, 0
 	movs r0, 0x1
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r1, r0, 0
 	lsrs r0, r1, 31
 	adds r1, r0
@@ -19011,7 +19011,7 @@ sub_8094F94: @ 8094F94
 	cmp r0, 0
 	beq _08094FB6
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	adds r5, 0x1
 _08094FB6:
 	ldrh r1, [r4, 0x2E]
@@ -19020,7 +19020,7 @@ _08094FB6:
 	cmp r0, 0
 	beq _08094FD4
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -19033,7 +19033,7 @@ _08094FD4:
 	cmp r0, 0
 	beq _08094FF2
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _08094FF2

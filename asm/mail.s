@@ -838,7 +838,7 @@ _080BF2CE:
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	mov r9, r0
 	ldr r5, _080BF348 @ =gUnknown_20399C4
 	ldr r0, [r5]

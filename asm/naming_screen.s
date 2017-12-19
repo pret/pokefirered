@@ -891,7 +891,7 @@ pokemon_transfer_to_pc_with_message: @ 809E0B4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809E104
-	ldr r4, _0809E0F0 @ =gUnknown_2021CD0
+	ldr r4, _0809E0F0 @ =gStringVar1
 	ldr r0, _0809E0F4 @ =0x00004037
 	bl VarGet
 	lsls r0, 24
@@ -900,7 +900,7 @@ pokemon_transfer_to_pc_with_message: @ 809E0B4
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r0, _0809E0F8 @ =gUnknown_2021CF0
+	ldr r0, _0809E0F8 @ =gStringVar2
 	ldr r1, _0809E0FC @ =gUnknown_203998C
 	ldr r1, [r1]
 	ldr r2, _0809E100 @ =0x00001e30
@@ -909,13 +909,13 @@ pokemon_transfer_to_pc_with_message: @ 809E0B4
 	bl StringCopy
 	b _0809E144
 	.align 2, 0
-_0809E0F0: .4byte gUnknown_2021CD0
+_0809E0F0: .4byte gStringVar1
 _0809E0F4: .4byte 0x00004037
-_0809E0F8: .4byte gUnknown_2021CF0
+_0809E0F8: .4byte gStringVar2
 _0809E0FC: .4byte gUnknown_203998C
 _0809E100: .4byte 0x00001e30
 _0809E104:
-	ldr r4, _0809E1AC @ =gUnknown_2021CD0
+	ldr r4, _0809E1AC @ =gStringVar1
 	ldr r0, _0809E1B0 @ =0x00004037
 	bl VarGet
 	lsls r0, 24
@@ -924,14 +924,14 @@ _0809E104:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r0, _0809E1B4 @ =gUnknown_2021CF0
+	ldr r0, _0809E1B4 @ =gStringVar2
 	ldr r1, _0809E1B8 @ =gUnknown_203998C
 	ldr r1, [r1]
 	ldr r2, _0809E1BC @ =0x00001e30
 	adds r1, r2
 	ldr r1, [r1]
 	bl StringCopy
-	ldr r4, _0809E1C0 @ =gUnknown_2021D04
+	ldr r4, _0809E1C0 @ =gStringVar3
 	bl get_unknown_box_id
 	lsls r0, 24
 	lsrs r0, 24
@@ -950,7 +950,7 @@ _0809E144:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _0809E156:
-	ldr r4, _0809E1C8 @ =gUnknown_2021D18
+	ldr r4, _0809E1C8 @ =gStringVar4
 	ldr r1, _0809E1CC @ =gUnknown_83E2280
 	lsls r0, r5, 2
 	adds r0, r1
@@ -960,7 +960,7 @@ _0809E156:
 	movs r0, 0
 	movs r1, 0
 	bl sub_80F6EE4
-	ldr r2, _0809E1D0 @ =gUnknown_3003E50
+	ldr r2, _0809E1D0 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
@@ -989,16 +989,16 @@ _0809E156:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809E1AC: .4byte gUnknown_2021CD0
+_0809E1AC: .4byte gStringVar1
 _0809E1B0: .4byte 0x00004037
-_0809E1B4: .4byte gUnknown_2021CF0
+_0809E1B4: .4byte gStringVar2
 _0809E1B8: .4byte gUnknown_203998C
 _0809E1BC: .4byte 0x00001e30
-_0809E1C0: .4byte gUnknown_2021D04
+_0809E1C0: .4byte gStringVar3
 _0809E1C4: .4byte 0x00000834
-_0809E1C8: .4byte gUnknown_2021D18
+_0809E1C8: .4byte gStringVar4
 _0809E1CC: .4byte gUnknown_83E2280
-_0809E1D0: .4byte gUnknown_3003E50
+_0809E1D0: .4byte gTextFlags
 	thumb_func_end pokemon_transfer_to_pc_with_message
 
 	thumb_func_start sub_809E1D4
@@ -1046,7 +1046,7 @@ sub_809E210: @ 809E210
 	movs r2, 0x1
 	bl sub_809E518
 	movs r0, 0x6
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0809E248 @ =gUnknown_203998C
 	ldr r0, [r0]
 	ldr r1, _0809E24C @ =0x00001e10
@@ -3089,7 +3089,7 @@ KeyboardKeyHandler_OK: @ 809F1B4
 	b _0809F1E2
 _0809F1CE:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0809F1E8 @ =gUnknown_203998C
 	ldr r0, [r0]
 	ldr r1, _0809F1EC @ =0x00001e10
@@ -3825,7 +3825,7 @@ _0809F740:
 	bl sub_809E518
 _0809F74A:
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3855,7 +3855,7 @@ sub_809F75C: @ 809F75C
 	movs r0, 0x3
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	bl sub_809F6BC
 	lsls r0, 24
 	lsrs r0, 24
@@ -4291,7 +4291,7 @@ sub_809FAE4: @ 809FAE4
 	movs r0, 0
 	mov r1, r8
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r6, r0, 0
 	ldr r5, _0809FB68 @ =gUnknown_203998C
 	ldr r0, [r5]

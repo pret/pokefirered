@@ -2581,7 +2581,7 @@ HandleLowHpMusicChange: @ 8035244
 	cmp r0, 0
 	bne _080352AA
 	movs r0, 0x53
-	bl sub_80722CC
+	bl PlaySE
 _080352AA:
 	ldr r0, [r7]
 	ldr r1, [r0]

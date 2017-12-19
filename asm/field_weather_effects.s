@@ -2835,14 +2835,14 @@ UpdateThunderSound: @ 807C898
 	cmp r4, 0
 	beq _0807C8D8
 	movs r0, 0x50
-	bl sub_80722CC
+	bl PlaySE
 	b _0807C8DE
 	.align 2, 0
 _0807C8D0: .4byte gUnknown_83C2BBC
 _0807C8D4: .4byte 0x000006ed
 _0807C8D8:
 	movs r0, 0x51
-	bl sub_80722CC
+	bl PlaySE
 _0807C8DE:
 	ldr r0, _0807C8EC @ =gUnknown_83C2BBC
 	ldr r0, [r0]

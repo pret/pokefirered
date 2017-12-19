@@ -1,5 +1,2 @@
 gFonts
-gGlyphBuffer1
-gGlyphBuffer2
-gGlyphBuffer3
-gGlyphBuffer4
+gGlyphInfo

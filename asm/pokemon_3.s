@@ -2364,7 +2364,7 @@ EvolutionRenameMon: @ 804356C
 	lsls r2, 16
 	lsrs r2, 16
 	mov r8, r2
-	ldr r0, _080435D8 @ =gUnknown_2021CD0
+	ldr r0, _080435D8 @ =gStringVar1
 	mov r9, r0
 	adds r0, r5, 0
 	movs r1, 0x2
@@ -2404,7 +2404,7 @@ _080435C8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080435D8: .4byte gUnknown_2021CD0
+_080435D8: .4byte gStringVar1
 _080435DC: .4byte gUnknown_8245EE0
 	thumb_func_end EvolutionRenameMon
 
@@ -4323,7 +4323,7 @@ _080443AA:
 	movs r0, 0xFF
 	strb r0, [r4, 0x4]
 	ldr r0, _080443EC @ =gUnknown_83FCA2C
-	ldr r1, _080443F0 @ =gUnknown_2021D18
+	ldr r1, _080443F0 @ =gStringVar4
 	bl sub_80D7868
 	pop {r4,r5}
 	pop {r0}
@@ -4333,7 +4333,7 @@ _080443E0: .4byte gUnknown_2023BCE
 _080443E4: .4byte gUnknown_2022AC8
 _080443E8: .4byte gUnknown_2024004
 _080443EC: .4byte gUnknown_83FCA2C
-_080443F0: .4byte gUnknown_2021D18
+_080443F0: .4byte gStringVar4
 	thumb_func_end sub_8044348
 
 	thumb_func_start SetWildMonHeldItem

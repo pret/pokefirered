@@ -218,7 +218,7 @@ AddHatchedMonToParty: @ 8046D60
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl sub_8088E74
-	ldr r1, _08046E1C @ =gUnknown_2021CD0
+	ldr r1, _08046E1C @ =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNick
 	mov r2, sp
@@ -252,7 +252,7 @@ AddHatchedMonToParty: @ 8046D60
 	.align 2, 0
 _08046E14: .4byte gUnknown_2024284
 _08046E18: .4byte gUnknown_202402C
-_08046E1C: .4byte gUnknown_2021CD0
+_08046E1C: .4byte gStringVar1
 	thumb_func_end AddHatchedMonToParty
 
 	thumb_func_start ScriptHatchMon
@@ -299,22 +299,22 @@ sub_8046E34: @ 8046E34
 	cmp r0, 0
 	beq _08046EA0
 _08046E74:
-	ldr r0, _08046E94 @ =gUnknown_2021CD0
+	ldr r0, _08046E94 @ =gStringVar1
 	mov r1, sp
 	bl StringCopy
-	ldr r0, _08046E98 @ =gUnknown_2021CF0
+	ldr r0, _08046E98 @ =gStringVar2
 	adds r1, r4, 0
 	bl StringCopy
-	ldr r0, _08046E9C @ =gUnknown_2021D04
+	ldr r0, _08046E9C @ =gStringVar3
 	adds r1, r5, 0
 	bl StringCopy
 	movs r0, 0x1
 	b _08046EA2
 	.align 2, 0
 _08046E90: .4byte gSaveBlock2Ptr
-_08046E94: .4byte gUnknown_2021CD0
-_08046E98: .4byte gUnknown_2021CF0
-_08046E9C: .4byte gUnknown_2021D04
+_08046E94: .4byte gStringVar1
+_08046E98: .4byte gStringVar2
+_08046E9C: .4byte gStringVar3
 _08046EA0:
 	movs r0, 0
 _08046EA2:
@@ -776,7 +776,7 @@ EggHatchSetMonNickname: @ 80472A0
 	muls r0, r1
 	ldr r1, _080472D4 @ =gUnknown_2024284
 	adds r0, r1
-	ldr r2, _080472D8 @ =gUnknown_2021D04
+	ldr r2, _080472D8 @ =gStringVar3
 	movs r1, 0x2
 	bl sub_804037C
 	bl FreeMonSpritesGfx
@@ -791,7 +791,7 @@ EggHatchSetMonNickname: @ 80472A0
 	.align 2, 0
 _080472D0: .4byte gUnknown_20370C0
 _080472D4: .4byte gUnknown_2024284
-_080472D8: .4byte gUnknown_2021D04
+_080472D8: .4byte gStringVar3
 _080472DC: .4byte gUnknown_3000E74
 _080472E0: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end EggHatchSetMonNickname
@@ -999,9 +999,9 @@ _08047482:
 	muls r0, r1
 	ldr r1, _080474D4 @ =gUnknown_2024284
 	adds r0, r1
-	ldr r1, _080474D8 @ =gUnknown_2021CD0
+	ldr r1, _080474D8 @ =gStringVar1
 	bl GetMonNick
-	ldr r4, _080474DC @ =gUnknown_2021D18
+	ldr r4, _080474DC @ =gStringVar4
 	ldr r1, _080474E0 @ =gUnknown_841B6FD
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -1029,8 +1029,8 @@ _08047482:
 	b _08047684
 	.align 2, 0
 _080474D4: .4byte gUnknown_2024284
-_080474D8: .4byte gUnknown_2021CD0
-_080474DC: .4byte gUnknown_2021D18
+_080474D8: .4byte gStringVar1
+_080474DC: .4byte gStringVar4
 _080474E0: .4byte gUnknown_841B6FD
 _080474E4: .4byte 0x00000103
 _080474E8:
@@ -1056,9 +1056,9 @@ _08047504:
 	muls r0, r1
 	ldr r1, _08047538 @ =gUnknown_2024284
 	adds r0, r1
-	ldr r1, _0804753C @ =gUnknown_2021CD0
+	ldr r1, _0804753C @ =gStringVar1
 	bl GetMonNick
-	ldr r4, _08047540 @ =gUnknown_2021D18
+	ldr r4, _08047540 @ =gStringVar4
 	ldr r1, _08047544 @ =gUnknown_841B716
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -1074,8 +1074,8 @@ _08047504:
 	b _08047648
 	.align 2, 0
 _08047538: .4byte gUnknown_2024284
-_0804753C: .4byte gUnknown_2021CD0
-_08047540: .4byte gUnknown_2021D18
+_0804753C: .4byte gStringVar1
+_08047540: .4byte gStringVar4
 _08047544: .4byte gUnknown_841B716
 _08047548:
 	ldr r0, [r5]
@@ -1136,7 +1136,7 @@ _080475A8:
 	adds r0, r1, 0
 	ldr r6, _08047628 @ =gUnknown_2024284
 	adds r0, r6
-	ldr r1, _0804762C @ =gUnknown_2021D04
+	ldr r1, _0804762C @ =gStringVar3
 	mov r10, r1
 	bl GetMonNick
 	mov r1, r9
@@ -1184,7 +1184,7 @@ _080475A8:
 	.align 2, 0
 _08047624: .4byte gUnknown_3000E74
 _08047628: .4byte gUnknown_2024284
-_0804762C: .4byte gUnknown_2021D04
+_0804762C: .4byte gStringVar3
 _08047630: .4byte EggHatchSetMonNickname
 _08047634:
 	movs r0, 0x1
@@ -1276,7 +1276,7 @@ _080476D0:
 	cmp r0, 0xF
 	bne _08047700
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAnim
@@ -1329,7 +1329,7 @@ _08047738:
 	cmp r0, 0xF
 	bne _08047764
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
@@ -1412,7 +1412,7 @@ _080477E4:
 	cmp r0, 0xF
 	bne _08047818
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
@@ -1424,7 +1424,7 @@ _08047818:
 	cmp r0, 0x1E
 	bne _08047826
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 _08047826:
 	pop {r4-r6}
 	pop {r0}
@@ -1498,7 +1498,7 @@ _0804788C:
 	cmp r4, 0
 	bne _080478BA
 	movs r0, 0x6A
-	bl sub_80722CC
+	bl PlaySE
 	adds r2, r5, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]

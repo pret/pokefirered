@@ -934,7 +934,7 @@ _08145D70:
 	lsrs r2, 24
 	movs r0, 0x3
 	adds r1, r4, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r1, 0xA0
 	subs r1, r0
 	cmp r1, 0
@@ -1187,7 +1187,7 @@ _08145F6E:
 	adds r1, 0x1
 	movs r0, 0x3
 	mov r2, r10
-	bl sub_8005ED4
+	bl GetStringWidth
 	add r8, r0
 	mov r0, r8
 	lsls r2, r0, 24
@@ -1219,7 +1219,7 @@ _08145F6E:
 	adds r1, 0x2A
 	movs r0, 0x3
 	mov r2, r10
-	bl sub_8005ED4
+	bl GetStringWidth
 	ldr r1, [r7]
 	adds r1, r5
 	movs r2, 0xB7
@@ -2517,7 +2517,7 @@ sub_8146A30: @ 8146A30
 	lsrs r2, 24
 	movs r0, 0x3
 	adds r1, r4, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	movs r1, 0xE0
 	subs r1, r0
 	lsrs r0, r1, 31

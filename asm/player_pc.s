@@ -234,7 +234,7 @@ sub_80EB81C: @ 80EB81C
 	cmp r5, r0
 	bne _080EB878
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
 	bl sub_810F4D8
@@ -546,7 +546,7 @@ sub_80EBAB8: @ 80EBAB8
 	cmp r0, 0
 	beq _080EBB64
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _080EBB04
@@ -563,7 +563,7 @@ _080EBAE8:
 	cmp r0, 0x2
 	beq _080EBB64
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x1
 _080EBB04:
 	bl MoveMenuCursor
@@ -584,7 +584,7 @@ _080EBB20:
 	cmp r0, 0
 	beq _080EBB4C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r4, _080EBB48 @ =gUnknown_8402208
 	bl GetMenuCursorPos
 	lsls r0, 24
@@ -603,7 +603,7 @@ _080EBB4C:
 	cmp r0, 0
 	beq _080EBB64
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080EBB6C @ =gUnknown_8402208
 	ldr r1, [r0, 0x14]
 	adds r0, r4, 0
@@ -1063,7 +1063,7 @@ sub_80EBEB0: @ 80EBEB0
 	movs r0, 0x2
 	mov r1, r8
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r5, r0, 0
 	movs r0, 0x1
 	bl sub_810EBAC
@@ -1157,7 +1157,7 @@ _080EBF98: .4byte gUnknown_2037AB8
 _080EBF9C: .4byte gUnknown_203AAC6
 _080EBFA0:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	mov r1, r8
 	ldrb r0, [r1, 0xA]
 	bl RemoveScrollIndicatorArrowPair
@@ -1166,7 +1166,7 @@ _080EBFA0:
 	b _080EBFEA
 _080EBFB6:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	bl sub_810EBE0
 	movs r0, 0x1
@@ -1202,7 +1202,7 @@ sub_80EBFFC: @ 80EBFFC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _080EC054 @ =gUnknown_2021CD0
+	ldr r4, _080EC054 @ =gStringVar1
 	ldr r2, _080EC058 @ =gSaveBlock1Ptr
 	ldr r1, _080EC05C @ =gUnknown_203AAC4
 	ldrh r0, [r1]
@@ -1243,7 +1243,7 @@ _080EC044:
 	beq _080EC044
 	b _080EC06C
 	.align 2, 0
-_080EC054: .4byte gUnknown_2021CD0
+_080EC054: .4byte gStringVar1
 _080EC058: .4byte gSaveBlock1Ptr
 _080EC05C: .4byte gUnknown_203AAC4
 _080EC060: .4byte 0x00002ce2
@@ -1252,7 +1252,7 @@ _080EC064:
 	movs r1, 0x1
 	bl ConvertInternationalString
 _080EC06C:
-	ldr r4, _080EC088 @ =gUnknown_2021D18
+	ldr r4, _080EC088 @ =gStringVar4
 	ldr r1, _080EC08C @ =gUnknown_8417806
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -1265,7 +1265,7 @@ _080EC06C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC088: .4byte gUnknown_2021D18
+_080EC088: .4byte gStringVar4
 _080EC08C: .4byte gUnknown_8417806
 _080EC090: .4byte sub_80EC0D8
 	thumb_func_end sub_80EBFFC
@@ -1380,13 +1380,13 @@ sub_80EC15C: @ 80EC15C
 	cmp r4, r0
 	bne _080EC188
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_80EC574
 	b _080EC19E
 _080EC188:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080EC1A4 @ =gUnknown_8402228
 	lsls r1, r4, 3
 	adds r0, 0x4
@@ -1619,7 +1619,7 @@ _080EC348:
 	b _080EC35C
 _080EC350:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _080EC356:
 	adds r0, r4, 0
 	bl sub_80EC3F8

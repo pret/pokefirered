@@ -3505,7 +3505,7 @@ _0800AF6C:
 	b _0800AFC4
 _0800AF72:
 	movs r0, 0x16
-	bl sub_80722CC
+	bl PlaySE
 	b _0800AFC4
 _0800AF7A:
 	ldr r0, _0800AF9C @ =gUnknown_3003F3C
@@ -3560,7 +3560,7 @@ _0800AFC4:
 	beq _0800B02E
 	bl sub_812B484
 	movs r0, 0x15
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0
 	strb r0, [r4]
 	ldr r1, _0800B00C @ =gUnknown_2022854

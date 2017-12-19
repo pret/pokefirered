@@ -560,7 +560,7 @@ _080BDAF4:
 _080BDAF6:
 	movs r3, 0x2
 _080BDAF8:
-	ldr r4, _080BDB18 @ =gUnknown_2021D18
+	ldr r4, _080BDB18 @ =gStringVar4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl ConvertEasyChatWordsToString
@@ -573,7 +573,7 @@ _080BDB08:
 	.align 2, 0
 _080BDB10: .4byte gSaveBlock1Ptr
 _080BDB14: .4byte 0x00002cc4
-_080BDB18: .4byte gUnknown_2021D18
+_080BDB18: .4byte gStringVar4
 	thumb_func_end sub_80BDA7C
 
 	thumb_func_start sub_80BDB1C
@@ -591,12 +591,12 @@ _080BDB2E:
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _080BDB44 @ =gUnknown_2021CF0
+	ldr r0, _080BDB44 @ =gStringVar2
 	bl CopyEasyChatWord
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BDB44: .4byte gUnknown_2021CF0
+_080BDB44: .4byte gStringVar2
 	thumb_func_end sub_80BDB1C
 
 	thumb_func_start sub_80BDB48

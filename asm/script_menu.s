@@ -11,7 +11,7 @@ sub_809C954: @ 809C954
 	adds r1, r0, 0
 	movs r0, 0x1
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	adds r1, r0, 0
 	adds r0, r1, 0x7
 	cmp r0, 0
@@ -206,7 +206,7 @@ _0809CAC6:
 	ldr r1, [r5]
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	cmp r0, r6
 	ble _0809CAD6
 	adds r6, r0, 0
@@ -505,7 +505,7 @@ _0809CCF8:
 	cmp r0, 0
 	bne _0809CD3C
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0809CD24 @ =gUnknown_20370D0
 	movs r0, 0x7F
 	strh r0, [r1]
@@ -710,7 +710,7 @@ _0809CE94:
 	bne _0809CEB2
 _0809CE9C:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0809CEA8 @ =gUnknown_20370D0
 	movs r0, 0
 	b _0809CEB0
@@ -889,7 +889,7 @@ sub_809CFDC: @ 809CFDC
 	cmp r0, 0
 	bne _0809D034
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, _0809D01C @ =gUnknown_20370D0
 	movs r0, 0x7F
 	strh r0, [r1]
@@ -1119,7 +1119,7 @@ _0809D1E4:
 	adds r3, r7, 0
 	bl PrintTextOnWindow
 _0809D1FA:
-	ldr r4, _0809D24C @ =gUnknown_2021D18
+	ldr r4, _0809D24C @ =gStringVar4
 	ldr r1, _0809D250 @ =gUnknown_8417BB6
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -1155,7 +1155,7 @@ _0809D1FA:
 	bx r0
 	.align 2, 0
 _0809D248: .4byte gUnknown_8417B9F
-_0809D24C: .4byte gUnknown_2021D18
+_0809D24C: .4byte gStringVar4
 _0809D250: .4byte gUnknown_8417BB6
 	thumb_func_end sub_809D070
 

@@ -1464,7 +1464,7 @@ _08083EA4:
 	subs r0, 0x1
 	strh r0, [r4, 0x3A]
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 _08083F00:
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
@@ -2343,7 +2343,7 @@ sub_8084580: @ 8084580
 	ands r0, r2
 	strb r0, [r1, 0x1]
 	movs r0, 0x25
-	bl sub_80722CC
+	bl PlaySE
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -2431,7 +2431,7 @@ _08084674:
 	cmp r0, 0
 	blt _08084698
 	movs r0, 0xCF
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r6]
 	movs r1, 0x8
 	orrs r0, r1
@@ -2685,7 +2685,7 @@ _0808484A:
 	strh r0, [r5, 0x8]
 _08084878:
 	movs r0, 0x49
-	bl sub_80722CC
+	bl PlaySE
 _0808487E:
 	movs r0, 0
 	pop {r4,r5}
@@ -3710,7 +3710,7 @@ sub_808500C: @ 808500C
 	movs r0, 0x32
 	bl FieldEffectStart
 	movs r0, 0xAB
-	bl sub_80722CC
+	bl PlaySE
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -4063,7 +4063,7 @@ sub_80852C0: @ 80852C0
 	strb r0, [r4, 0x1]
 	bl CameraObjectReset1
 	movs r0, 0xA8
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x4
 	bl sub_8064194
 	adds r1, r0, 0
@@ -4313,7 +4313,7 @@ _080854C4:
 	adds r0, r4, 0
 	bl sub_8063CA4
 	movs r0, 0x21
-	bl sub_80722CC
+	bl PlaySE
 _080854E4:
 	movs r0, 0
 	pop {r4-r6}
@@ -4568,7 +4568,7 @@ sub_8085690: @ 8085690
 	cmp r0, 0x14
 	bne _08085702
 	movs r0, 0x27
-	bl sub_80722CC
+	bl PlaySE
 	b _08085702
 	.align 2, 0
 _080856D4: .4byte gUnknown_2037078
@@ -4942,7 +4942,7 @@ _0808599C:
 	cmp r0, 0
 	blt _080859C2
 	movs r0, 0x1E
-	bl sub_80722CC
+	bl PlaySE
 	bl CameraObjectReset1
 	ldrh r0, [r5]
 	adds r0, 0x1
@@ -5030,7 +5030,7 @@ sub_8085A54: @ 8085A54
 	cmp r0, 0
 	beq _08085A78
 	movs r0, 0x28
-	bl sub_80722CC
+	bl PlaySE
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
 	lsrs r0, 24
@@ -5273,7 +5273,7 @@ _08085C1C:
 	movs r0, 0x1
 	strh r0, [r4, 0xE]
 	movs r0, 0x27
-	bl sub_80722CC
+	bl PlaySE
 _08085C4A:
 	add sp, 0x8
 	pop {r4,r5}
@@ -5545,7 +5545,7 @@ sub_8085E0C: @ 8085E0C
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
 	movs r0, 0x27
-	bl sub_80722CC
+	bl PlaySE
 _08085E82:
 	pop {r4-r6}
 	pop {r0}
@@ -7460,7 +7460,7 @@ sub_8086D38: @ 8086D38
 	ldr r0, [r0]
 	strh r0, [r2, 0x30]
 	movs r0, 0x97
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -7773,7 +7773,7 @@ _08086FCE:
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 	movs r0, 0x97
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r4, 0xA]
 	bl sub_80871C8
 _08086FEC:
@@ -9357,7 +9357,7 @@ sub_8087C00: @ 8087C00
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x51
-	bl sub_80722CC
+	bl PlaySE
 	strh r4, [r5, 0xA]
 	ldrh r0, [r5, 0x2]
 	adds r0, 0x1
@@ -9413,7 +9413,7 @@ sub_8087C2C: @ 8087C2C
 	adds r0, r4, 0
 	bl sub_8087CFC
 	movs r0, 0x50
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r0, [r7, 0xA]
 	bl sub_8087BA8
 	movs r0, 0

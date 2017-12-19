@@ -290,7 +290,7 @@ sub_815EFBC: @ 815EFBC
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _0815F010 @ =gUnknown_2021CD0
+	ldr r0, _0815F010 @ =gStringVar1
 	mov r9, r0
 	movs r2, 0x1
 	movs r3, 0x5
@@ -312,7 +312,7 @@ sub_815EFBC: @ 815EFBC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815F010: .4byte gUnknown_2021CD0
+_0815F010: .4byte gStringVar1
 	thumb_func_end sub_815EFBC
 
 	thumb_func_start sub_815F014

@@ -1319,7 +1319,7 @@ sub_812BC80: @ 812BC80
 	cmp r0, 0
 	beq _0812BC9A
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0xA
 	strb r0, [r4, 0xE]
 _0812BC9A:
@@ -1658,7 +1658,7 @@ sub_812BF18: @ 812BF18
 	beq _0812BF44
 _0812BF30:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x5
 	strb r0, [r4, 0xE]
 	movs r0, 0x1

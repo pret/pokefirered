@@ -4413,7 +4413,7 @@ _080D2A68:
 	ldrsh r0, [r4, r1]
 	bl sub_80D3138
 	movs r0, 0x61
-	bl sub_80722CC
+	bl PlaySE
 	ldr r1, [r5]
 	ldrb r0, [r1]
 	adds r0, 0x1

@@ -305,7 +305,7 @@ _0804AB6C:
 	ldr r1, _0804ABD0 @ =nullsub_43
 	str r1, [r0]
 	movs r0, 0x36
-	bl sub_80722CC
+	bl PlaySE
 _0804ABB8:
 	add sp, 0x8
 	pop {r3-r5}
@@ -484,7 +484,7 @@ sub_804AD00: @ 804AD00
 	cmp r0, 0xB
 	bne _0804AD18
 	movs r0, 0x35
-	bl sub_80722CC
+	bl PlaySE
 _0804AD18:
 	ldr r6, _0804AD64 @ =gUnknown_202063C
 	ldr r5, _0804AD68 @ =gUnknown_2023D44
@@ -653,19 +653,19 @@ _0804AE50:
 	b _0804AE6E
 _0804AE56:
 	movs r0, 0x31
-	bl sub_80722CC
+	bl PlaySE
 	b _0804AEA2
 _0804AE5E:
 	movs r0, 0x32
-	bl sub_80722CC
+	bl PlaySE
 	b _0804AEA2
 _0804AE66:
 	movs r0, 0x33
-	bl sub_80722CC
+	bl PlaySE
 	b _0804AEA2
 _0804AE6E:
 	movs r0, 0x34
-	bl sub_80722CC
+	bl PlaySE
 	b _0804AEA2
 _0804AE76:
 	movs r2, 0x38
@@ -750,7 +750,7 @@ sub_804AEE4: @ 804AEE4
 	ldr r0, _0804AF20 @ =sub_804AF24
 	str r0, [r4, 0x1C]
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 _0804AF18:
 	pop {r4}
 	pop {r0}
@@ -924,7 +924,7 @@ _0804B05C:
 	bl StartSpriteAffineAnim
 _0804B064:
 	movs r0, 0x17
-	bl sub_80722CC
+	bl PlaySE
 _0804B06A:
 	pop {r4}
 	pop {r0}
@@ -1597,7 +1597,7 @@ sub_804B5C8: @ 804B5C8
 	strb r1, [r0]
 	bl m4aMPlayAllStop
 	ldr r0, _0804B5FC @ =0x0000013f
-	bl sub_80722CC
+	bl PlaySE
 	b _0804B666
 	.align 2, 0
 _0804B5F8: .4byte gUnknown_2024005
@@ -2513,7 +2513,7 @@ sub_804BCF8: @ 804BCF8
 	cmp r0, 0xB
 	bne _0804BD10
 	movs r0, 0x35
-	bl sub_80722CC
+	bl PlaySE
 _0804BD10:
 	ldrh r1, [r5, 0x2E]
 	lsls r1, 24

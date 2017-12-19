@@ -509,7 +509,7 @@ sub_815AFD8: @ 815AFD8
 	cmp r1, 0x1
 	beq _0815AFE8
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 _0815AFE8:
 	pop {r0}
 	bx r0
@@ -768,7 +768,7 @@ sub_815B1DC: @ 815B1DC
 	push {r4,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
-	ldr r2, _0815B21C @ =gUnknown_3003E50
+	ldr r2, _0815B21C @ =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x5
 	negs r0, r0
@@ -795,7 +795,7 @@ sub_815B1DC: @ 815B1DC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815B21C: .4byte gUnknown_3003E50
+_0815B21C: .4byte gTextFlags
 	thumb_func_end sub_815B1DC
 
 	thumb_func_start sub_815B220
@@ -935,13 +935,13 @@ _0815B328: .4byte gMain
 _0815B32C: .4byte sub_8107EB8
 _0815B330:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r7, 0
 	bl sub_815B23C
 	b _0815B37A
 _0815B33E:
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r2, _0815B380 @ =gUnknown_203F444
 	movs r4, 0
 	strb r5, [r2, 0x5]

@@ -76,12 +76,12 @@ _080CA688:
 	thumb_func_start sub_80CA68C
 sub_80CA68C: @ 80CA68C
 	push {lr}
-	ldr r0, _080CA698 @ =gUnknown_2021D18
+	ldr r0, _080CA698 @ =gStringVar4
 	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA698: .4byte gUnknown_2021D18
+_080CA698: .4byte gStringVar4
 	thumb_func_end sub_80CA68C
 
 	thumb_func_start sub_80CA69C
@@ -128,23 +128,23 @@ sub_80CA6DC: @ 80CA6DC
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _080CA700
-	ldr r0, _080CA6F8 @ =gUnknown_2021CD0
+	ldr r0, _080CA6F8 @ =gStringVar1
 	ldr r1, _080CA6FC @ =gUnknown_8417FBB
 	bl StringCopy
 	b _080CA708
 	.align 2, 0
 _080CA6F4: .4byte gSaveBlock2Ptr
-_080CA6F8: .4byte gUnknown_2021CD0
+_080CA6F8: .4byte gStringVar1
 _080CA6FC: .4byte gUnknown_8417FBB
 _080CA700:
-	ldr r0, _080CA70C @ =gUnknown_2021CD0
+	ldr r0, _080CA70C @ =gStringVar1
 	ldr r1, _080CA710 @ =gUnknown_8417FC3
 	bl StringCopy
 _080CA708:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA70C: .4byte gUnknown_2021CD0
+_080CA70C: .4byte gStringVar1
 _080CA710: .4byte gUnknown_8417FC3
 	thumb_func_end sub_80CA6DC
 
@@ -156,23 +156,23 @@ sub_80CA714: @ 80CA714
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _080CA738
-	ldr r0, _080CA730 @ =gUnknown_2021CD0
+	ldr r0, _080CA730 @ =gStringVar1
 	ldr r1, _080CA734 @ =gUnknown_8417FD0
 	bl StringCopy
 	b _080CA740
 	.align 2, 0
 _080CA72C: .4byte gSaveBlock2Ptr
-_080CA730: .4byte gUnknown_2021CD0
+_080CA730: .4byte gStringVar1
 _080CA734: .4byte gUnknown_8417FD0
 _080CA738:
-	ldr r0, _080CA744 @ =gUnknown_2021CD0
+	ldr r0, _080CA744 @ =gStringVar1
 	ldr r1, _080CA748 @ =gUnknown_8417FCC
 	bl StringCopy
 _080CA740:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA744: .4byte gUnknown_2021CD0
+_080CA744: .4byte gStringVar1
 _080CA748: .4byte gUnknown_8417FCC
 	thumb_func_end sub_80CA714
 
@@ -645,12 +645,12 @@ _080CAAA8: .4byte gSaveBlock1Ptr
 	thumb_func_start sub_80CAAAC
 sub_80CAAAC: @ 80CAAAC
 	push {lr}
-	ldr r0, _080CAAB8 @ =gUnknown_2021CD0
+	ldr r0, _080CAAB8 @ =gStringVar1
 	bl sub_80E7460
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CAAB8: .4byte gUnknown_2021CD0
+_080CAAB8: .4byte gStringVar1
 	thumb_func_end sub_80CAAAC
 
 	thumb_func_start sub_80CAABC
@@ -879,7 +879,7 @@ sub_80CAC28: @ 80CAC28
 	movs r0, 0
 	bl SetCameraPanningCallback
 	movs r0, 0xCF
-	bl sub_80722CC
+	bl PlaySE
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1029,7 +1029,7 @@ sub_80CAD7C: @ 80CAD7C
 	muls r0, r1
 	ldr r1, _080CADAC @ =gUnknown_2024284
 	adds r0, r1
-	ldr r4, _080CADB0 @ =gUnknown_2021CD0
+	ldr r4, _080CADB0 @ =gStringVar1
 	movs r1, 0x7
 	adds r2, r4, 0
 	bl GetMonData
@@ -1044,7 +1044,7 @@ sub_80CAD7C: @ 80CAD7C
 	.align 2, 0
 _080CADA8: .4byte gUnknown_20370C0
 _080CADAC: .4byte gUnknown_2024284
-_080CADB0: .4byte gUnknown_2021CD0
+_080CADB0: .4byte gStringVar1
 _080CADB4: .4byte gSaveBlock2Ptr
 _080CADB8:
 	movs r0, 0
@@ -1450,7 +1450,7 @@ _080CB0C0:
 	movs r1, 0
 	bl VarSet
 _080CB0EA:
-	ldr r4, _080CB11C @ =gUnknown_2021CD0
+	ldr r4, _080CB11C @ =gStringVar1
 	ldr r0, _080CB10C @ =0x00004036
 	bl VarGet
 	lsls r0, 16
@@ -1469,7 +1469,7 @@ _080CB10C: .4byte 0x00004036
 _080CB110: .4byte 0x0000ffff
 _080CB114: .4byte 0x0000403b
 _080CB118: .4byte 0x00004035
-_080CB11C: .4byte gUnknown_2021CD0
+_080CB11C: .4byte gStringVar1
 _080CB120: .4byte gUnknown_8245EE0
 	thumb_func_end sub_80CB0A8
 
@@ -1991,7 +1991,7 @@ _080CB4EE:
 	adds r0, r5, 0
 	bl sub_80CB658
 	movs r0, 0x52
-	bl sub_80722CC
+	bl PlaySE
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2038,7 +2038,7 @@ sub_80CB514: @ 80CB514
 	cmp r1, r0
 	bne _080CB574
 	movs r0, 0x42
-	bl sub_80722CC
+	bl PlaySE
 	adds r0, r5, 0
 	bl DestroyTask
 	bl EnableBothScriptContexts
@@ -2098,7 +2098,7 @@ sub_80CB580: @ 80CB580
 	movs r0, 0x2
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	ldrb r1, [r4]
 	movs r3, 0x38
 	subs r3, r0
@@ -2575,7 +2575,7 @@ _080CB974:
 	str r4, [r3, 0x4]
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_8005ED4
+	bl GetStringWidth
 	cmp r0, r6
 	ble _080CB9A0
 	adds r6, r0, 0
@@ -2735,7 +2735,7 @@ _080CBAD8: .4byte sub_80CBADC
 sub_80CBADC: @ 80CBADC
 	push {r4,lr}
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080CBB18 @ =sub_80CBB28
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -2798,7 +2798,7 @@ _080CBB58:
 	movs r0, 0x7F
 	strh r0, [r1]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	b _080CBB88
 	.align 2, 0
 _080CBB68: .4byte gUnknown_20370D0
@@ -2806,7 +2806,7 @@ _080CBB6C:
 	ldr r0, _080CBB90 @ =gUnknown_20370D0
 	strh r4, [r0]
 	movs r0, 0x5
-	bl sub_80722CC
+	bl PlaySE
 	movs r1, 0x14
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
@@ -3204,7 +3204,7 @@ sub_80CBE50: @ 80CBE50
 	muls r1, r0
 	ldr r0, _080CBEA4 @ =gUnknown_2024284
 	adds r5, r1, r0
-	ldr r6, _080CBEA8 @ =gUnknown_2021CD0
+	ldr r6, _080CBEA8 @ =gStringVar1
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r6, 0
@@ -3235,7 +3235,7 @@ sub_80CBE50: @ 80CBE50
 	b _080CBEB2
 	.align 2, 0
 _080CBEA4: .4byte gUnknown_2024284
-_080CBEA8: .4byte gUnknown_2021CD0
+_080CBEA8: .4byte gStringVar1
 _080CBEAC: .4byte gUnknown_8245EE0
 _080CBEB0:
 	movs r0, 0x1
@@ -3377,11 +3377,11 @@ sub_80CBFA0: @ 80CBFA0
 	muls r0, r1
 	ldr r1, _080CBFCC @ =gUnknown_2024284
 	adds r0, r1
-	ldr r4, _080CBFD0 @ =gUnknown_2021CD0
+	ldr r4, _080CBFD0 @ =gStringVar1
 	movs r1, 0x2
 	adds r2, r4, 0
 	bl GetMonData
-	ldr r0, _080CBFD4 @ =gUnknown_2021D04
+	ldr r0, _080CBFD4 @ =gStringVar3
 	adds r1, r4, 0
 	bl StringCompare
 	cmp r0, 0
@@ -3391,8 +3391,8 @@ sub_80CBFA0: @ 80CBFA0
 	.align 2, 0
 _080CBFC8: .4byte gUnknown_20370C0
 _080CBFCC: .4byte gUnknown_2024284
-_080CBFD0: .4byte gUnknown_2021CD0
-_080CBFD4: .4byte gUnknown_2021D04
+_080CBFD0: .4byte gStringVar1
+_080CBFD4: .4byte gStringVar3
 _080CBFD8:
 	movs r0, 0
 _080CBFDA:
@@ -3413,10 +3413,10 @@ ChangeBoxPokemonNickname: @ 80CBFE0
 	ldrb r1, [r1]
 	bl GetBoxedMonPtr
 	adds r6, r0, 0
-	ldr r2, _080CC058 @ =gUnknown_2021D04
+	ldr r2, _080CC058 @ =gStringVar3
 	movs r1, 0x2
 	bl GetBoxMonData
-	ldr r0, _080CC05C @ =gUnknown_2021CF0
+	ldr r0, _080CC05C @ =gStringVar2
 	mov r8, r0
 	adds r0, r6, 0
 	movs r1, 0x2
@@ -3455,8 +3455,8 @@ ChangeBoxPokemonNickname: @ 80CBFE0
 	.align 2, 0
 _080CC050: .4byte gUnknown_20370D6
 _080CC054: .4byte gUnknown_20370D8
-_080CC058: .4byte gUnknown_2021D04
-_080CC05C: .4byte gUnknown_2021CF0
+_080CC058: .4byte gStringVar3
+_080CC05C: .4byte gStringVar2
 _080CC060: .4byte ChangeBoxPokemonNickname_CB
 	thumb_func_end ChangeBoxPokemonNickname
 
@@ -3467,7 +3467,7 @@ ChangeBoxPokemonNickname_CB: @ 80CC064
 	ldrb r0, [r0]
 	ldr r1, _080CC080 @ =gUnknown_20370D8
 	ldrb r1, [r1]
-	ldr r2, _080CC084 @ =gUnknown_2021CF0
+	ldr r2, _080CC084 @ =gStringVar2
 	bl SetBoxMonNickFromAnyBox
 	bl c2_exit_to_overworld_1_continue_scripts_restart_music
 	pop {r0}
@@ -3475,7 +3475,7 @@ ChangeBoxPokemonNickname_CB: @ 80CC064
 	.align 2, 0
 _080CC07C: .4byte gUnknown_20370D6
 _080CC080: .4byte gUnknown_20370D8
-_080CC084: .4byte gUnknown_2021CF0
+_080CC084: .4byte gStringVar2
 	thumb_func_end ChangeBoxPokemonNickname_CB
 
 	thumb_func_start ChangePokemonNickname
@@ -3496,7 +3496,7 @@ ChangePokemonNickname: @ 80CC088
 	adds r0, r1, 0
 	ldr r6, _080CC134 @ =gUnknown_2024284
 	adds r0, r6
-	ldr r2, _080CC138 @ =gUnknown_2021D04
+	ldr r2, _080CC138 @ =gStringVar3
 	movs r1, 0x2
 	bl GetMonData
 	mov r1, r9
@@ -3505,7 +3505,7 @@ ChangePokemonNickname: @ 80CC088
 	muls r1, r0
 	adds r0, r1, 0
 	adds r0, r6
-	ldr r1, _080CC13C @ =gUnknown_2021CF0
+	ldr r1, _080CC13C @ =gStringVar2
 	mov r10, r1
 	movs r1, 0x2
 	mov r2, r10
@@ -3560,8 +3560,8 @@ ChangePokemonNickname: @ 80CC088
 	.align 2, 0
 _080CC130: .4byte gUnknown_20370C0
 _080CC134: .4byte gUnknown_2024284
-_080CC138: .4byte gUnknown_2021D04
-_080CC13C: .4byte gUnknown_2021CF0
+_080CC138: .4byte gStringVar3
+_080CC13C: .4byte gStringVar2
 _080CC140: .4byte ChangePokemonNickname_CB
 	thumb_func_end ChangePokemonNickname
 
@@ -3574,7 +3574,7 @@ ChangePokemonNickname_CB: @ 80CC144
 	muls r0, r1
 	ldr r1, _080CC168 @ =gUnknown_2024284
 	adds r0, r1
-	ldr r2, _080CC16C @ =gUnknown_2021CF0
+	ldr r2, _080CC16C @ =gStringVar2
 	movs r1, 0x2
 	bl sub_804037C
 	bl c2_exit_to_overworld_1_continue_scripts_restart_music
@@ -3583,7 +3583,7 @@ ChangePokemonNickname_CB: @ 80CC144
 	.align 2, 0
 _080CC164: .4byte gUnknown_20370C0
 _080CC168: .4byte gUnknown_2024284
-_080CC16C: .4byte gUnknown_2021CF0
+_080CC16C: .4byte gStringVar2
 	thumb_func_end ChangePokemonNickname_CB
 
 	thumb_func_start TV_CopyNicknameToStringVar1AndEnsureTerminated
@@ -3595,7 +3595,7 @@ TV_CopyNicknameToStringVar1AndEnsureTerminated: @ 80CC170
 	muls r0, r1
 	ldr r1, _080CC198 @ =gUnknown_2024284
 	adds r0, r1
-	ldr r4, _080CC19C @ =gUnknown_2021CD0
+	ldr r4, _080CC19C @ =gStringVar1
 	movs r1, 0x2
 	adds r2, r4, 0
 	bl GetMonData
@@ -3607,7 +3607,7 @@ TV_CopyNicknameToStringVar1AndEnsureTerminated: @ 80CC170
 	.align 2, 0
 _080CC194: .4byte gUnknown_20370C0
 _080CC198: .4byte gUnknown_2024284
-_080CC19C: .4byte gUnknown_2021CD0
+_080CC19C: .4byte gStringVar1
 	thumb_func_end TV_CopyNicknameToStringVar1AndEnsureTerminated
 
 	thumb_func_start TV_CheckMonOTIDEqualsPlayerID
@@ -4563,7 +4563,7 @@ sub_80CC8CC: @ 80CC8CC
 _080CC8E4: .4byte gUnknown_20370C0
 _080CC8E8: .4byte 0xfffffedf
 _080CC8EC:
-	ldr r4, _080CC910 @ =gUnknown_2021CD0
+	ldr r4, _080CC910 @ =gStringVar1
 	ldrh r0, [r1]
 	bl ItemIdToBattleMoveId
 	lsls r0, 16
@@ -4580,7 +4580,7 @@ _080CC908:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CC910: .4byte gUnknown_2021CD0
+_080CC910: .4byte gStringVar1
 _080CC914: .4byte gUnknown_8247094
 	thumb_func_end sub_80CC8CC
 
@@ -4950,7 +4950,7 @@ _080CCBEA:
 	bne _080CCC7A
 	cmp r7, 0
 	bne _080CCC34
-	ldr r0, _080CCC24 @ =gUnknown_2021CF0
+	ldr r0, _080CCC24 @ =gStringVar2
 	ldr r1, _080CCC28 @ =gUnknown_82481BE
 	bl StringCopy
 	ldr r1, _080CCC2C @ =gUnknown_20370C2
@@ -4961,14 +4961,14 @@ _080CCBEA:
 	.align 2, 0
 _080CCC1C: .4byte gUnknown_83F6203
 _080CCC20: .4byte gUnknown_2024284
-_080CCC24: .4byte gUnknown_2021CF0
+_080CCC24: .4byte gStringVar2
 _080CCC28: .4byte gUnknown_82481BE
 _080CCC2C: .4byte gUnknown_20370C2
 _080CCC30: .4byte 0x000002de
 _080CCC34:
 	cmp r7, 0x1
 	bne _080CCC5C
-	ldr r0, _080CCC4C @ =gUnknown_2021CF0
+	ldr r0, _080CCC4C @ =gStringVar2
 	ldr r1, _080CCC50 @ =gUnknown_824802B
 	bl StringCopy
 	ldr r1, _080CCC54 @ =gUnknown_20370C2
@@ -4977,12 +4977,12 @@ _080CCC34:
 	ldr r0, _080CCC58 @ =0x000002df
 	b _080CCC6E
 	.align 2, 0
-_080CCC4C: .4byte gUnknown_2021CF0
+_080CCC4C: .4byte gStringVar2
 _080CCC50: .4byte gUnknown_824802B
 _080CCC54: .4byte gUnknown_20370C2
 _080CCC58: .4byte 0x000002df
 _080CCC5C:
-	ldr r0, _080CCC80 @ =gUnknown_2021CF0
+	ldr r0, _080CCC80 @ =gStringVar2
 	ldr r1, _080CCC84 @ =gUnknown_8248038
 	bl StringCopy
 	ldr r1, _080CCC88 @ =gUnknown_20370C2
@@ -5000,7 +5000,7 @@ _080CCC7A:
 	movs r0, 0
 	b _080CCCE4
 	.align 2, 0
-_080CCC80: .4byte gUnknown_2021CF0
+_080CCC80: .4byte gStringVar2
 _080CCC84: .4byte gUnknown_8248038
 _080CCC88: .4byte gUnknown_20370C2
 _080CCC8C:
@@ -5181,7 +5181,7 @@ sub_80CCDD0: @ 80CCDD0
 	bl MapGridSetMetatileIdAt
 	bl DrawWholeMapView
 	movs r0, 0x14
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _080CCDF8 @ =0x000002e3
 	bl FlagSet
 	bl ScriptContext2_Disable
@@ -5326,14 +5326,14 @@ sub_80CCEE8: @ 80CCEE8
 	cmp r4, 0
 	bne _080CCF2C
 	movs r0, 0xBD
-	bl sub_80722CC
+	bl PlaySE
 	b _080CCF32
 	.align 2, 0
 _080CCF24: .4byte gUnknown_83F6206
 _080CCF28: .4byte gSaveBlock1Ptr
 _080CCF2C:
 	movs r0, 0xFD
-	bl sub_80722CC
+	bl PlaySE
 _080CCF32:
 	ldr r0, _080CCF64 @ =sub_80CCF98
 	movs r1, 0x8
@@ -5671,7 +5671,7 @@ sub_80CD1B4: @ 80CD1B4
 	movs r1, 0x8
 	bl CreateTask
 	movs r0, 0x96
-	bl sub_80722CC
+	bl PlaySE
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5704,7 +5704,7 @@ sub_80CD1CC: @ 80CD1CC
 	movs r0, 0
 	strh r0, [r4, 0x2]
 	movs r0, 0x96
-	bl sub_80722CC
+	bl PlaySE
 _080CD200:
 	movs r0, 0
 	ldrsh r1, [r4, r0]

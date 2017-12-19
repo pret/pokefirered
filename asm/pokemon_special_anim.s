@@ -763,7 +763,7 @@ _0811CB5A:
 	cmp r0, 0x1E
 	bls _0811CBD6
 	movs r0, 0xE1
-	bl sub_80722CC
+	bl PlaySE
 	movs r0, 0x4
 	bl sub_811D2EC
 	bl sub_811D4FC
@@ -1834,7 +1834,7 @@ _0811D404:
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0x2
-	bl sub_8005ED4
+	bl GetStringWidth
 	add r0, r8
 	lsls r0, 16
 	lsrs r0, 16
@@ -1844,7 +1844,7 @@ _0811D418:
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0x2
-	bl sub_8005ED4
+	bl GetStringWidth
 	add r0, r8
 	lsls r0, 16
 	lsrs r0, 16
@@ -2127,7 +2127,7 @@ _0811D63E:
 	movs r0, 0
 	strh r0, [r4, 0x4]
 	movs r0, 0x85
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, _0811D66C @ =0x00007da8
 	str r0, [sp]
 	movs r0, 0x1
@@ -2186,7 +2186,7 @@ _0811D6BA:
 	b _0811D6D6
 _0811D6CA:
 	movs r0, 0x54
-	bl sub_80722CC
+	bl PlaySE
 	ldr r0, [r4, 0x10]
 	bl DestroySprite
 _0811D6D6:
@@ -2230,7 +2230,7 @@ sub_811D6FC: @ 811D6FC
 _0811D710:
 	bl sub_811E10C
 	movs r0, 0x1D
-	bl sub_80722CC
+	bl PlaySE
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
@@ -2635,7 +2635,7 @@ _0811DA26:
 	cmp r7, 0
 	bne _0811DA90
 	movs r0, 0x6D
-	bl sub_80722CC
+	bl PlaySE
 	ldrb r1, [r4, 0x2]
 	adds r0, r5, 0
 	bl sub_811DB14
@@ -3155,7 +3155,7 @@ _0811DE00:
 	movs r0, 0
 	strh r0, [r4, 0x2]
 	movs r0, 0xBB
-	bl sub_80722CC
+	bl PlaySE
 	adds r2, r5, 0
 	adds r2, 0x3E
 	ldrb r1, [r2]
@@ -3205,7 +3205,7 @@ _0811DE2A:
 	movs r0, 0x2
 	strh r0, [r4]
 	movs r0, 0xDA
-	bl sub_80722CC
+	bl PlaySE
 	b _0811DF0C
 	.align 2, 0
 _0811DE78: .4byte gUnknown_8459AA8
@@ -3254,7 +3254,7 @@ _0811DEC8:
 	cmp r0, 0
 	bne _0811DED6
 	movs r0, 0xD2
-	bl sub_80722CC
+	bl PlaySE
 _0811DED6:
 	ldrh r0, [r4, 0xE]
 	adds r0, 0x1

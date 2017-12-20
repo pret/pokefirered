@@ -95,7 +95,7 @@ SECTIONS {
         src/text.o(.text);
         asm/text.o(.text);
         src/sprite.o(.text);
-        asm/string_util.o(.text);
+        src/string_util.o(.text);
         asm/link.o(.text);
         asm/multiboot.o(.text);
         asm/main_menu.o(.text);
@@ -402,6 +402,7 @@ SECTIONS {
         data/text.o(.rodata);
         src/sprite.o(.rodata);
         src/bg_regs.o(.rodata);
+        src/string_util.o(.rodata);
         data/data.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

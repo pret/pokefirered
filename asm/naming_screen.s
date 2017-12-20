@@ -4084,7 +4084,7 @@ sub_809F914: @ 809F914
 	bcs _0809F9AA
 	add r5, sp, 0xC
 	mov r10, r4
-	ldr r0, _0809F9E4 @ =gUnknown_8415A20
+	ldr r0, _0809F9E4 @ =gExpandedPlaceholder_Empty
 	ldrb r0, [r0]
 	mov r8, r0
 _0809F956:
@@ -4154,7 +4154,7 @@ _0809F9AA:
 _0809F9D8: .4byte gUnknown_203998C
 _0809F9DC: .4byte 0x00001e28
 _0809F9E0: .4byte 0x00001e13
-_0809F9E4: .4byte gUnknown_8415A20
+_0809F9E4: .4byte gExpandedPlaceholder_Empty
 	thumb_func_end sub_809F914
 
 	thumb_func_start sub_809F9E8

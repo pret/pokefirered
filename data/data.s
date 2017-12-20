@@ -1,23 +1,5 @@
 	.section .rodata
 
-gUnknown_8231E2C:: @ 8231E2C
-	.incbin "baserom.gba", 0x231E2C, 0x10
-
-gUnknown_8231E3C:: @ 8231E3C
-	.incbin "baserom.gba", 0x231E3C, 0x28
-
-gUnknown_8231E64:: @ 8231E64
-	.incbin "baserom.gba", 0x231E64, 0x4
-
-gUnknown_8231E68:: @ 8231E68
-	.incbin "baserom.gba", 0x231E68, 0x8
-
-gUnknown_8231E70:: @ 8231E70
-	.incbin "baserom.gba", 0x231E70, 0x38
-
-gUnknown_8231EA8:: @ 8231EA8
-	.incbin "baserom.gba", 0x231EA8, 0x1C
-
 gUnknown_8231EC4:: @ 8231EC4
 	.incbin "baserom.gba", 0x231EC4, 0x20
 
@@ -4188,40 +4170,40 @@ gUnknown_8415A08:: @ 8415A08
 gUnknown_8415A10:: @ 8415A10
 	.incbin "baserom.gba", 0x415A10, 0x10
 
-gUnknown_8415A20:: @ 8415A20
+gExpandedPlaceholder_Empty:: @ 8415A20
 	.incbin "baserom.gba", 0x415A20, 0x1
 
-gUnknown_8415A21:: @ 8415A21
+gExpandedPlaceholder_Kun:: @ 8415A21
 	.incbin "baserom.gba", 0x415A21, 0x1
 
-gUnknown_8415A22:: @ 8415A22
+gExpandedPlaceholder_Chan:: @ 8415A22
 	.incbin "baserom.gba", 0x415A22, 0xA
 
-gUnknown_8415A2C:: @ 8415A2C
+gExpandedPlaceholder_Ruby:: @ 8415A2C
 	.incbin "baserom.gba", 0x415A2C, 0x5
 
-gUnknown_8415A31:: @ 8415A31
+gExpandedPlaceholder_Aqua:: @ 8415A31
 	.incbin "baserom.gba", 0x415A31, 0x5
 
-gUnknown_8415A36:: @ 8415A36
+gExpandedPlaceholder_Magma:: @ 8415A36
 	.incbin "baserom.gba", 0x415A36, 0x6
 
-gUnknown_8415A3C:: @ 8415A3C
+gExpandedPlaceholder_Archie:: @ 8415A3C
 	.incbin "baserom.gba", 0x415A3C, 0x7
 
-gUnknown_8415A43:: @ 8415A43
+gExpandedPlaceholder_Maxie:: @ 8415A43
 	.incbin "baserom.gba", 0x415A43, 0x6
 
-gUnknown_8415A49:: @ 8415A49
+gExpandedPlaceholder_Kyogre:: @ 8415A49
 	.incbin "baserom.gba", 0x415A49, 0x7
 
-gUnknown_8415A50:: @ 8415A50
+gExpandedPlaceholder_Groudon:: @ 8415A50
 	.incbin "baserom.gba", 0x415A50, 0x8
 
-gUnknown_8415A58:: @ 8415A58
+gExpandedPlaceholder_Red:: @ 8415A58
 	.incbin "baserom.gba", 0x415A58, 0x4
 
-gUnknown_8415A5C:: @ 8415A5C
+gExpandedPlaceholder_Green:: @ 8415A5C
 	.incbin "baserom.gba", 0x415A5C, 0x6
 
 gUnknown_8415A62:: @ 8415A62

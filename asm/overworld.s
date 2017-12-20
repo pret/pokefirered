@@ -4547,7 +4547,7 @@ sub_8056F1C: @ 8056F1C
 	movs r0, 0x46
 	adds r1, r4, 0
 	bl SetGpuReg
-	ldr r0, _08057018 @ =gUnknown_8231E10
+	ldr r0, _08057018 @ =gBLDCNTTarget2BGFlags
 	ldrh r1, [r0, 0x2]
 	ldrh r2, [r0, 0x4]
 	orrs r1, r2
@@ -4618,7 +4618,7 @@ sub_8056F1C: @ 8056F1C
 _0805700C: .4byte 0x00001f1f
 _08057010: .4byte 0x00000101
 _08057014: .4byte 0x0000ffff
-_08057018: .4byte gUnknown_8231E10
+_08057018: .4byte gBLDCNTTarget2BGFlags
 _0805701C: .4byte 0x0000070d
 _08057020: .4byte 0x00007060
 	thumb_func_end sub_8056F1C

@@ -612,10 +612,10 @@ _0800910A:
 
 	thumb_func_start sub_8009118
 sub_8009118: @ 8009118
-	ldr r0, _0800911C @ =gUnknown_2022100
+	ldr r0, _0800911C @ =gUnknownStringVar
 	bx lr
 	.align 2, 0
-_0800911C: .4byte gUnknown_2022100
+_0800911C: .4byte gUnknownStringVar
 	thumb_func_end sub_8009118
 
 	thumb_func_start sub_8009120

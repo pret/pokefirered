@@ -47,7 +47,7 @@ gStringVar3: @ 2021D04
 gStringVar4: @ 2021D18
 	.space 0x3E8
 
-gUnknown_2022100: @ 2022100
+gUnknownStringVar: @ 2022100
 	.space 0x10
 
 gUnknown_2022110: @ 2022110

@@ -200,7 +200,7 @@ sub_80095BC: @ 80095BC
 	str r1, [r0, 0x4]
 	movs r1, 0
 	str r1, [r0, 0x8]
-	ldr r0, _0800963C @ =gUnknown_8231E20
+	ldr r0, _0800963C @ =gBGControlRegOffsets
 	adds r6, r0
 	ldrb r0, [r6]
 	lsls r4, 8
@@ -219,7 +219,7 @@ _0800962C: .4byte 0x040000d4
 _08009630: .4byte gUnknown_8232598
 _08009634: .4byte 0x80001000
 _08009638: .4byte gUnknown_3003F70
-_0800963C: .4byte gUnknown_8231E20
+_0800963C: .4byte gBGControlRegOffsets
 	thumb_func_end sub_80095BC
 
 	thumb_func_start sub_8009640

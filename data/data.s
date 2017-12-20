@@ -1,13 +1,5 @@
 	.section .rodata
 
-	.incbin "baserom.gba", 0x231DD8, 0x38
-
-gUnknown_8231E10:: @ 8231E10
-	.incbin "baserom.gba", 0x231E10, 0x10
-
-gUnknown_8231E20:: @ 8231E20
-	.incbin "baserom.gba", 0x231E20, 0xC
-
 gUnknown_8231E2C:: @ 8231E2C
 	.incbin "baserom.gba", 0x231E2C, 0x10
 

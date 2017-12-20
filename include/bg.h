@@ -89,4 +89,6 @@ u32 GetBgType(u8 bg);
 bool32 IsInvalidBg32(u8 bg);
 bool32 IsTileMapOutsideWram(u8 bg);
 
+extern bool32 gWindowTileAutoAllocEnabled;
+
 #endif // GUARD_BG_H

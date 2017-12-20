@@ -1,16 +1,8 @@
 	.include "main.o"
 	.include "bg.o"
 	.include "text_printer.o"
-
-gWindowClearTile: @ 3003E30
-	.space 0x10
-
-gWindowBgTilemapBuffers: @ 3003E40
-	.space 0x10
-
-gTextFlags: @ 3003E50
-	.space 0x4
-
+	.include "window.o"
+	.include "text.o"
 	.include "sprite.o"
 
 	.align 4

@@ -3,8 +3,6 @@
 #include "malloc.h"
 #include "bg.h"
 
-extern void* gWindowBgTilemapBuffers[];
-
 EWRAM_DATA static struct Window* sWindowPtr = NULL;
 EWRAM_DATA static u16 sWindowSize = 0;
 

@@ -69,6 +69,7 @@ void FillWindowPixelRect8Bit(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width,
 void BlitBitmapRectToWindow4BitTo8Bit(u8 windowId, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 paletteNum);
 void CopyWindowToVram8Bit(u8 windowId, u8 mode);
 
+extern void *gWindowBgTilemapBuffers[];
 extern struct Window gWindows[];
 
 #endif // GUARD_WINDOW_H

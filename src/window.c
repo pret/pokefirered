@@ -3,9 +3,8 @@
 #include "malloc.h"
 #include "bg.h"
 
-extern u8 gWindowClearTile;
-extern void* gWindowBgTilemapBuffers[];
-extern u32 gWindowTileAutoAllocEnabled;
+u8 gWindowClearTile;
+void *gWindowBgTilemapBuffers[4];
 
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 

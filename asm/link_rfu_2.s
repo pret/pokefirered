@@ -9394,7 +9394,7 @@ _080FCD8A:
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _080FCDD4 @ =gUnknown_202063C
+	ldr r0, _080FCDD4 @ =gSprites
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
@@ -9416,7 +9416,7 @@ _080FCD8A:
 	.align 2, 0
 _080FCDCC: .4byte gUnknown_3007460
 _080FCDD0: .4byte gUnknown_843F284
-_080FCDD4: .4byte gUnknown_202063C
+_080FCDD4: .4byte gSprites
 _080FCDD8: .4byte 0x00001234
 _080FCDDC: .4byte gUnknown_843F274
 _080FCDE0: .4byte gUnknown_203ACE4
@@ -9427,7 +9427,7 @@ _080FCDE4:
 	bl CreateSprite
 	ldr r4, _080FCE34 @ =gUnknown_203ACE4
 	strb r0, [r4]
-	ldr r5, _080FCE38 @ =gUnknown_202063C
+	ldr r5, _080FCE38 @ =gSprites
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -9461,7 +9461,7 @@ _080FCE2A:
 	.align 2, 0
 _080FCE30: .4byte gUnknown_843F284
 _080FCE34: .4byte gUnknown_203ACE4
-_080FCE38: .4byte gUnknown_202063C
+_080FCE38: .4byte gSprites
 _080FCE3C: .4byte 0x00001234
 _080FCE40: .4byte gUnknown_843F274
 	thumb_func_end sub_80FCD74
@@ -9469,7 +9469,7 @@ _080FCE40: .4byte gUnknown_843F274
 	thumb_func_start sub_80FCE44
 sub_80FCE44: @ 80FCE44
 	push {r4,lr}
-	ldr r4, _080FCE90 @ =gUnknown_202063C
+	ldr r4, _080FCE90 @ =gSprites
 	ldr r3, _080FCE94 @ =gUnknown_203ACE4
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -9493,7 +9493,7 @@ sub_80FCE44: @ 80FCE44
 	movs r0, 0x84
 	lsls r0, 3
 	adds r3, r0
-	ldr r0, _080FCEA0 @ =gUnknown_8231CE4
+	ldr r0, _080FCEA0 @ =gDummyOamData
 	ldr r1, [r0]
 	ldr r2, [r0, 0x4]
 	str r1, [r3]
@@ -9506,11 +9506,11 @@ _080FCE8A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FCE90: .4byte gUnknown_202063C
+_080FCE90: .4byte gSprites
 _080FCE94: .4byte gUnknown_203ACE4
 _080FCE98: .4byte 0x00001234
 _080FCE9C: .4byte gMain
-_080FCEA0: .4byte gUnknown_8231CE4
+_080FCEA0: .4byte gDummyOamData
 _080FCEA4: .4byte 0x070003e8
 	thumb_func_end sub_80FCE44
 
@@ -9604,7 +9604,7 @@ sub_80FCF34: @ 80FCF34
 	bne _080FCF44
 	b _080FD106
 _080FCF44:
-	ldr r2, _080FCF7C @ =gUnknown_202063C
+	ldr r2, _080FCF7C @ =gSprites
 	adds r1, r0, 0
 	lsls r0, r1, 4
 	adds r0, r1
@@ -9633,7 +9633,7 @@ _080FCF5C:
 	b _080FCFA6
 	.align 2, 0
 _080FCF78: .4byte gUnknown_203ACE4
-_080FCF7C: .4byte gUnknown_202063C
+_080FCF7C: .4byte gSprites
 _080FCF80: .4byte 0x00001234
 _080FCF84: .4byte gUnknown_3007460
 _080FCF88:

@@ -777,7 +777,7 @@ CameraUpdateCallback: @ 805AB30
 	ldr r2, [r3, 0x4]
 	cmp r2, 0
 	beq _0805AB50
-	ldr r1, _0805AB54 @ =gUnknown_202063C
+	ldr r1, _0805AB54 @ =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -792,7 +792,7 @@ _0805AB50:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805AB54: .4byte gUnknown_202063C
+_0805AB54: .4byte gSprites
 	thumb_func_end CameraUpdateCallback
 
 	thumb_func_start ResetCameraUpdateInfo
@@ -822,7 +822,7 @@ InitCameraUpdateCallback: @ 805AB70
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805ABA8 @ =gUnknown_202063C
+	ldr r1, _0805ABA8 @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 _0805AB8C:
@@ -839,7 +839,7 @@ _0805AB8C:
 	bx r1
 	.align 2, 0
 _0805ABA4: .4byte gUnknown_3005050
-_0805ABA8: .4byte gUnknown_202063C
+_0805ABA8: .4byte gSprites
 _0805ABAC: .4byte CameraUpdateCallback
 	thumb_func_end InitCameraUpdateCallback
 
@@ -1183,14 +1183,14 @@ UpdateCameraPanning: @ 805AE28
 	beq _0805AE36
 	bl _call_via_r0
 _0805AE36:
-	ldr r2, _0805AE5C @ =gUnknown_2021BC8
+	ldr r2, _0805AE5C @ =gSpriteCoordOffsetX
 	ldr r0, _0805AE60 @ =gUnknown_300506C
 	ldr r1, _0805AE64 @ =gUnknown_3000E98
 	ldrh r0, [r0]
 	ldrh r1, [r1]
 	subs r0, r1
 	strh r0, [r2]
-	ldr r2, _0805AE68 @ =gUnknown_2021BCA
+	ldr r2, _0805AE68 @ =gSpriteCoordOffsetY
 	ldr r0, _0805AE6C @ =gUnknown_3005068
 	ldr r1, _0805AE70 @ =gUnknown_3000E9A
 	ldrh r0, [r0]
@@ -1202,10 +1202,10 @@ _0805AE36:
 	bx r0
 	.align 2, 0
 _0805AE58: .4byte gUnknown_3000EA0
-_0805AE5C: .4byte gUnknown_2021BC8
+_0805AE5C: .4byte gSpriteCoordOffsetX
 _0805AE60: .4byte gUnknown_300506C
 _0805AE64: .4byte gUnknown_3000E98
-_0805AE68: .4byte gUnknown_2021BCA
+_0805AE68: .4byte gSpriteCoordOffsetY
 _0805AE6C: .4byte gUnknown_3005068
 _0805AE70: .4byte gUnknown_3000E9A
 	thumb_func_end UpdateCameraPanning

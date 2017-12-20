@@ -3769,7 +3769,7 @@ sub_813EC28: @ 813EC28
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0813EC5C @ =gUnknown_202063C
+	ldr r1, _0813EC5C @ =gSprites
 	adds r4, r0, r1
 	adds r0, r4, 0
 	adds r0, 0x3F
@@ -3789,7 +3789,7 @@ _0813EC52:
 	bx r0
 	.align 2, 0
 _0813EC58: .4byte gUnknown_203F39C
-_0813EC5C: .4byte gUnknown_202063C
+_0813EC5C: .4byte gSprites
 _0813EC60: .4byte sub_813EC64
 	thumb_func_end sub_813EC28
 
@@ -3806,14 +3806,14 @@ sub_813EC64: @ 813EC64
 	adds r0, r4, 0
 	movs r1, 0
 	bl StartSpriteAffineAnim
-	ldr r0, _0813EC88 @ =nullsub_8
+	ldr r0, _0813EC88 @ =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _0813EC80:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813EC88: .4byte nullsub_8
+_0813EC88: .4byte SpriteCallbackDummy
 	thumb_func_end sub_813EC64
 
 	.align 2, 0 @ Don't pad with nop.

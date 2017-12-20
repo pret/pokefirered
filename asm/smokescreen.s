@@ -40,7 +40,7 @@ _0804A79E:
 	lsls r5, r0, 4
 	add r5, r8
 	lsls r5, 2
-	ldr r0, _0804A8B4 @ =gUnknown_202063C
+	ldr r0, _0804A8B4 @ =gSprites
 	adds r5, r0
 	strh r4, [r5, 0x30]
 	ldr r0, _0804A8B8 @ =gUnknown_82509F4
@@ -65,7 +65,7 @@ _0804A79E:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _0804A8B4 @ =gUnknown_202063C
+	ldr r0, _0804A8B4 @ =gSprites
 	adds r1, r0
 	mov r0, r8
 	strh r0, [r1, 0x2E]
@@ -84,7 +84,7 @@ _0804A79E:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0804A8B4 @ =gUnknown_202063C
+	ldr r0, _0804A8B4 @ =gSprites
 	adds r4, r0
 	mov r0, r8
 	strh r0, [r4, 0x2E]
@@ -106,7 +106,7 @@ _0804A79E:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0804A8B4 @ =gUnknown_202063C
+	ldr r0, _0804A8B4 @ =gSprites
 	adds r4, r0
 	mov r0, r8
 	strh r0, [r4, 0x2E]
@@ -128,7 +128,7 @@ _0804A79E:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0804A8B4 @ =gUnknown_202063C
+	ldr r0, _0804A8B4 @ =gSprites
 	adds r4, r0
 	mov r0, r8
 	strh r0, [r4, 0x2E]
@@ -153,7 +153,7 @@ _0804A8A4: .4byte gUnknown_825098C
 _0804A8A8: .4byte 0xffff0000
 _0804A8AC: .4byte gUnknown_8250994
 _0804A8B0: .4byte sub_804A8C0
-_0804A8B4: .4byte gUnknown_202063C
+_0804A8B4: .4byte gSprites
 _0804A8B8: .4byte gUnknown_82509F4
 _0804A8BC: .4byte 0xfff00000
 	thumb_func_end sub_804A76C
@@ -183,14 +183,14 @@ sub_804A8C0: @ 804A8C0
 _0804A8EC: .4byte gUnknown_825098C
 _0804A8F0: .4byte gUnknown_8250994
 _0804A8F4:
-	ldr r0, _0804A900 @ =nullsub_8
+	ldr r0, _0804A900 @ =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _0804A8F8:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804A900: .4byte nullsub_8
+_0804A900: .4byte SpriteCallbackDummy
 	thumb_func_end sub_804A8C0
 
 	thumb_func_start sub_804A904
@@ -203,7 +203,7 @@ sub_804A904: @ 804A904
 	ands r0, r1
 	cmp r0, 0
 	beq _0804A92E
-	ldr r2, _0804A934 @ =gUnknown_202063C
+	ldr r2, _0804A934 @ =gSprites
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -219,7 +219,7 @@ _0804A92E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804A934: .4byte gUnknown_202063C
+_0804A934: .4byte gSprites
 	thumb_func_end sub_804A904
 
 	.align 2, 0 @ Don't pad with nop.

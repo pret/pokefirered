@@ -433,7 +433,7 @@ _08046F6C:
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, _08046FB8 @ =gUnknown_202063C
+	ldr r4, _08046FB8 @ =gSprites
 	lsls r1, r7, 4
 	adds r1, r7
 	lsls r1, 2
@@ -445,7 +445,7 @@ _08046F6C:
 	strb r0, [r2]
 	adds r4, 0x1C
 	adds r1, r4
-	ldr r0, _08046FBC @ =nullsub_8
+	ldr r0, _08046FBC @ =SpriteCallbackDummy
 	str r0, [r1]
 _08046FA6:
 	adds r0, r7, 0
@@ -457,8 +457,8 @@ _08046FA6:
 	bx r1
 	.align 2, 0
 _08046FB4: .4byte gUnknown_20244DC
-_08046FB8: .4byte gUnknown_202063C
-_08046FBC: .4byte nullsub_8
+_08046FB8: .4byte gSprites
+_08046FBC: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8046ED0
 
 	thumb_func_start sub_8046FC0
@@ -947,7 +947,7 @@ _0804741E:
 	ldrb r0, [r1, 0x2]
 	adds r0, 0x1
 	strb r0, [r1, 0x2]
-	ldr r2, _0804743C @ =gUnknown_202063C
+	ldr r2, _0804743C @ =gSprites
 	ldr r0, [r5]
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -959,10 +959,10 @@ _0804741E:
 	str r1, [r0]
 	b _08047684
 	.align 2, 0
-_0804743C: .4byte gUnknown_202063C
+_0804743C: .4byte gSprites
 _08047440: .4byte SpriteCB_Egg_0
 _08047444:
-	ldr r2, _0804746C @ =gUnknown_202063C
+	ldr r2, _0804746C @ =gSprites
 	ldr r3, [r5]
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -971,7 +971,7 @@ _08047444:
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, _08047470 @ =nullsub_8
+	ldr r0, _08047470 @ =SpriteCallbackDummy
 	cmp r1, r0
 	beq _0804745E
 	b _08047684
@@ -982,8 +982,8 @@ _0804745E:
 	ldr r1, [r5]
 	b _08047648
 	.align 2, 0
-_0804746C: .4byte gUnknown_202063C
-_08047470: .4byte nullsub_8
+_0804746C: .4byte gSprites
+_08047470: .4byte SpriteCallbackDummy
 _08047474:
 	bl IsCryFinished
 	lsls r0, 24
@@ -1371,7 +1371,7 @@ SpriteCB_Egg_2: @ 804776C
 	movs r1, 0xB
 	bl GetMonData
 	lsls r0, 16
-	ldr r4, _080477DC @ =gUnknown_202063C
+	ldr r4, _080477DC @ =gSprites
 	ldr r3, [r5]
 	ldrb r2, [r3, 0x1]
 	lsls r1, r2, 4
@@ -1394,7 +1394,7 @@ SpriteCB_Egg_2: @ 804776C
 _080477D0: .4byte SpriteCB_Egg_3
 _080477D4: .4byte gUnknown_3000E74
 _080477D8: .4byte gUnknown_2024284
-_080477DC: .4byte gUnknown_202063C
+_080477DC: .4byte gSprites
 _080477E0: .4byte gUnknown_82349CC
 _080477E4:
 	ldrh r0, [r4, 0x30]
@@ -1528,7 +1528,7 @@ SpriteCB_Egg_5: @ 80478D0
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0804790C
-	ldr r4, _08047960 @ =gUnknown_202063C
+	ldr r4, _08047960 @ =gSprites
 	ldr r3, _08047964 @ =gUnknown_3000E74
 	ldr r0, [r3]
 	ldrb r1, [r0, 0x1]
@@ -1568,7 +1568,7 @@ _08047926:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x9
 	bgt _08047944
-	ldr r2, _08047960 @ =gUnknown_202063C
+	ldr r2, _08047960 @ =gSprites
 	ldr r0, _08047964 @ =gUnknown_3000E74
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x1]
@@ -1585,7 +1585,7 @@ _08047944:
 	ldrsh r0, [r5, r2]
 	cmp r0, 0x28
 	ble _08047952
-	ldr r0, _0804796C @ =nullsub_8
+	ldr r0, _0804796C @ =SpriteCallbackDummy
 	str r0, [r5, 0x1C]
 _08047952:
 	adds r0, r1, 0x1
@@ -1595,10 +1595,10 @@ _08047952:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047960: .4byte gUnknown_202063C
+_08047960: .4byte gSprites
 _08047964: .4byte gUnknown_3000E74
 _08047968: .4byte 0x0000ffff
-_0804796C: .4byte nullsub_8
+_0804796C: .4byte SpriteCallbackDummy
 	thumb_func_end SpriteCB_Egg_5
 
 	thumb_func_start SpriteCB_EggShard
@@ -1735,7 +1735,7 @@ CreateEggShardSprite: @ 8047A1C
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, _08047A98 @ =gUnknown_202063C
+	ldr r2, _08047A98 @ =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -1756,7 +1756,7 @@ CreateEggShardSprite: @ 8047A1C
 	bx r0
 	.align 2, 0
 _08047A94: .4byte gUnknown_8260184
-_08047A98: .4byte gUnknown_202063C
+_08047A98: .4byte gSprites
 	thumb_func_end CreateEggShardSprite
 
 	thumb_func_start EggHatchPrintMessage

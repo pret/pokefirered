@@ -1051,7 +1051,7 @@ sub_813F40C: @ 813F40C
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, _0813F468 @ =gUnknown_202063C
+	ldr r0, _0813F468 @ =gSprites
 	lsls r4, r6, 4
 	adds r4, r6
 	lsls r4, 2
@@ -1081,7 +1081,7 @@ sub_813F40C: @ 813F40C
 	mov pc, r0
 	.align 2, 0
 _0813F464: .4byte gUnknown_84647E4
-_0813F468: .4byte gUnknown_202063C
+_0813F468: .4byte gSprites
 _0813F46C: .4byte _0813F470
 	.align 2, 0
 _0813F470:
@@ -1108,7 +1108,7 @@ _0813F49A:
 	beq _0813F4EC
 	b _0813F53E
 _0813F4A4:
-	ldr r1, _0813F4C0 @ =gUnknown_202063C
+	ldr r1, _0813F4C0 @ =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -1121,10 +1121,10 @@ _0813F4A4:
 	bl StartSpriteAffineAnim
 	b _0813F53E
 	.align 2, 0
-_0813F4C0: .4byte gUnknown_202063C
+_0813F4C0: .4byte gSprites
 _0813F4C4: .4byte 0x0000ff9c
 _0813F4C8:
-	ldr r1, _0813F4E4 @ =gUnknown_202063C
+	ldr r1, _0813F4E4 @ =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -1137,10 +1137,10 @@ _0813F4C8:
 	bl StartSpriteAffineAnim
 	b _0813F53E
 	.align 2, 0
-_0813F4E4: .4byte gUnknown_202063C
+_0813F4E4: .4byte gSprites
 _0813F4E8: .4byte 0x0000ff9c
 _0813F4EC:
-	ldr r1, _0813F508 @ =gUnknown_202063C
+	ldr r1, _0813F508 @ =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -1153,9 +1153,9 @@ _0813F4EC:
 	bl StartSpriteAffineAnim
 	b _0813F53E
 	.align 2, 0
-_0813F508: .4byte gUnknown_202063C
+_0813F508: .4byte gSprites
 _0813F50C:
-	ldr r1, _0813F528 @ =gUnknown_202063C
+	ldr r1, _0813F528 @ =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -1168,9 +1168,9 @@ _0813F50C:
 	bl StartSpriteAffineAnim
 	b _0813F53E
 	.align 2, 0
-_0813F528: .4byte gUnknown_202063C
+_0813F528: .4byte gSprites
 _0813F52C:
-	ldr r1, _0813F544 @ =gUnknown_202063C
+	ldr r1, _0813F544 @ =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -1184,7 +1184,7 @@ _0813F53E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813F544: .4byte gUnknown_202063C
+_0813F544: .4byte gSprites
 _0813F548: .4byte 0x0000ff9c
 	thumb_func_end sub_813F40C
 
@@ -1254,7 +1254,7 @@ sub_813F5AC: @ 813F5AC
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r2, _0813F608 @ =gUnknown_202063C
+	ldr r2, _0813F608 @ =gSprites
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
@@ -1288,7 +1288,7 @@ sub_813F5AC: @ 813F5AC
 	bx r1
 	.align 2, 0
 _0813F604: .4byte gUnknown_84647E4
-_0813F608: .4byte gUnknown_202063C
+_0813F608: .4byte gSprites
 _0813F60C: .4byte sub_813F614
 _0813F610: .4byte 0x0000ff9c
 	thumb_func_end sub_813F5AC

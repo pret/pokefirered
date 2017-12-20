@@ -14,7 +14,7 @@ sub_8134200: @ 8134200
 	lsls r1, 3
 	ldr r0, _08134228 @ =gUnknown_3005098
 	adds r1, r0
-	ldr r2, _0813422C @ =gUnknown_202063C
+	ldr r2, _0813422C @ =gSprites
 	ldrb r1, [r1, 0xD]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -29,7 +29,7 @@ sub_8134200: @ 8134200
 	bx lr
 	.align 2, 0
 _08134228: .4byte gUnknown_3005098
-_0813422C: .4byte gUnknown_202063C
+_0813422C: .4byte gSprites
 	thumb_func_end sub_8134200
 
 	thumb_func_start sub_8134230
@@ -124,7 +124,7 @@ sub_8134230: @ 8134230
 	movs r0, 0x4A
 	bl SetGpuReg
 	add r1, sp, 0x8
-	ldr r0, _081343EC @ =gUnknown_8231D00
+	ldr r0, _081343EC @ =gDummySpriteTemplate
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
 	ldm r0!, {r2,r3,r5}
@@ -141,7 +141,7 @@ sub_8134230: @ 8134230
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, _081343F0 @ =gUnknown_202063C
+	ldr r5, _081343F0 @ =gSprites
 	adds r0, r5
 	adds r1, r4, 0
 	bl SetSubspriteTables
@@ -228,8 +228,8 @@ _081343DC: .4byte 0x00002f42
 _081343E0: .4byte 0x0000080c
 _081343E4: .4byte 0x00001f1f
 _081343E8: .4byte 0x00002f3d
-_081343EC: .4byte gUnknown_8231D00
-_081343F0: .4byte gUnknown_202063C
+_081343EC: .4byte gDummySpriteTemplate
+_081343F0: .4byte gSprites
 	thumb_func_end sub_8134230
 
 	thumb_func_start sub_81343F4
@@ -250,7 +250,7 @@ sub_81343F4: @ 81343F4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0813449C @ =gUnknown_202063C
+	ldr r1, _0813449C @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 	ldr r0, [r4, 0x8]
@@ -302,7 +302,7 @@ sub_81343F4: @ 81343F4
 	bx r0
 	.align 2, 0
 _08134498: .4byte gUnknown_3005098
-_0813449C: .4byte gUnknown_202063C
+_0813449C: .4byte gSprites
 _081344A0: .4byte 0x00001f1f
 	thumb_func_end sub_81343F4
 

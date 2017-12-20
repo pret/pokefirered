@@ -1605,7 +1605,7 @@ FldEff_Pokeball: @ 80D1504
 	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080D1568 @ =gUnknown_202063C
+	ldr r1, _080D1568 @ =gSprites
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
@@ -1640,7 +1640,7 @@ FldEff_Pokeball: @ 80D1504
 	.align 2, 0
 _080D1560: .4byte gUnknown_83FA5CC
 _080D1564: .4byte gUnknown_20386E0
-_080D1568: .4byte gUnknown_202063C
+_080D1568: .4byte gSprites
 _080D156C: .4byte 0x0000ffff
 	thumb_func_end FldEff_Pokeball
 
@@ -4919,7 +4919,7 @@ sub_80D2EA4: @ 80D2EA4
 	push {r5,r6}
 	sub sp, 0x4
 	adds r4, r0, 0
-	ldr r6, _080D2FF8 @ =gUnknown_3003E58
+	ldr r6, _080D2FF8 @ =gReservedSpritePaletteCount
 	movs r0, 0xA
 	strb r0, [r6]
 	ldr r0, _080D2FFC @ =gUnknown_83FA494
@@ -4972,7 +4972,7 @@ sub_80D2EA4: @ 80D2EA4
 	lsls r5, r0, 4
 	adds r5, r0
 	lsls r5, 2
-	ldr r1, _080D300C @ =gUnknown_202063C
+	ldr r1, _080D300C @ =gSprites
 	adds r5, r1
 	movs r2, 0x24
 	ldrsh r0, [r4, r2]
@@ -5074,12 +5074,12 @@ sub_80D2EA4: @ 80D2EA4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D2FF8: .4byte gUnknown_3003E58
+_080D2FF8: .4byte gReservedSpritePaletteCount
 _080D2FFC: .4byte gUnknown_83FA494
 _080D3000: .4byte gUnknown_83FA4AE
 _080D3004: .4byte gUnknown_201C000
 _080D3008: .4byte gSaveBlock2Ptr
-_080D300C: .4byte gUnknown_202063C
+_080D300C: .4byte gSprites
 _080D3010: .4byte sub_80D301C
 _080D3014: .4byte gUnknown_83FA49A
 _080D3018: .4byte 0xfffffe00
@@ -5240,7 +5240,7 @@ _080D3118:
 
 	thumb_func_start sub_80D3120
 sub_80D3120: @ 80D3120
-	ldr r3, _080D3134 @ =gUnknown_202063C
+	ldr r3, _080D3134 @ =gSprites
 	lsls r0, 16
 	asrs r0, 16
 	lsls r2, r0, 4
@@ -5250,12 +5250,12 @@ sub_80D3120: @ 80D3120
 	strh r1, [r2, 0x3C]
 	bx lr
 	.align 2, 0
-_080D3134: .4byte gUnknown_202063C
+_080D3134: .4byte gSprites
 	thumb_func_end sub_80D3120
 
 	thumb_func_start sub_80D3138
 sub_80D3138: @ 80D3138
-	ldr r2, _080D3150 @ =gUnknown_202063C
+	ldr r2, _080D3150 @ =gSprites
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -5267,12 +5267,12 @@ sub_80D3138: @ 80D3138
 	strh r0, [r1, 0x2E]
 	bx lr
 	.align 2, 0
-_080D3150: .4byte gUnknown_202063C
+_080D3150: .4byte gSprites
 	thumb_func_end sub_80D3138
 
 	thumb_func_start sub_80D3154
 sub_80D3154: @ 80D3154
-	ldr r2, _080D3168 @ =gUnknown_202063C
+	ldr r2, _080D3168 @ =gSprites
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -5283,7 +5283,7 @@ sub_80D3154: @ 80D3154
 	ldrsh r0, [r1, r2]
 	bx lr
 	.align 2, 0
-_080D3168: .4byte gUnknown_202063C
+_080D3168: .4byte gSprites
 	thumb_func_end sub_80D3154
 
 	thumb_func_start sub_80D316C
@@ -5707,7 +5707,7 @@ _080D34B0:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080D350C @ =gUnknown_202063C
+	ldr r0, _080D350C @ =gSprites
 	adds r2, r1, r0
 	movs r0, 0xF0
 	strh r0, [r2, 0x20]
@@ -5743,7 +5743,7 @@ _080D34B0:
 	.align 2, 0
 _080D3504: .4byte gUnknown_83FA508
 _080D3508: .4byte sub_80D3720
-_080D350C: .4byte gUnknown_202063C
+_080D350C: .4byte gSprites
 	thumb_func_end sub_80D349C
 
 	thumb_func_start sub_80D3510

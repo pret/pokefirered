@@ -16,7 +16,7 @@ CreateInvisibleSpriteWithCallback: @ 8044EF8
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _08044F30 @ =gUnknown_202063C
+	ldr r5, _08044F30 @ =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -34,7 +34,7 @@ CreateInvisibleSpriteWithCallback: @ 8044EF8
 	bx r1
 	.align 2, 0
 _08044F2C: .4byte gUnknown_825E4DC
-_08044F30: .4byte gUnknown_202063C
+_08044F30: .4byte gSprites
 	thumb_func_end CreateInvisibleSpriteWithCallback
 
 	thumb_func_start StoreWordInTwoHalfwords

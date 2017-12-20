@@ -166,7 +166,7 @@ _0800FEA6:
 	bl ResetTasks
 	bl sub_800FAE0
 	bl FreeAllSpritePalettes
-	ldr r1, _0800FF68 @ =gUnknown_3003E58
+	ldr r1, _0800FF68 @ =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	ldr r0, _0800FF6C @ =sub_80116F4
@@ -198,7 +198,7 @@ _0800FF58: .4byte gUnknown_202297E
 _0800FF5C: .4byte gUnknown_2022980
 _0800FF60: .4byte gUnknown_2022982
 _0800FF64: .4byte gUnknown_2022B50
-_0800FF68: .4byte gUnknown_3003E58
+_0800FF68: .4byte gReservedSpritePaletteCount
 _0800FF6C: .4byte sub_80116F4
 _0800FF70: .4byte gUnknown_2022B4C
 _0800FF74: .4byte sub_8010BA0
@@ -3609,7 +3609,7 @@ _08011A9C:
 	movs r1, 0x37
 	bl SetGpuReg
 	bl FreeAllSpritePalettes
-	ldr r1, _08011B7C @ =gUnknown_3003E58
+	ldr r1, _08011B7C @ =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	ldr r0, _08011B80 @ =sub_80116F4
@@ -3656,7 +3656,7 @@ _08011B6C: .4byte gUnknown_202297E
 _08011B70: .4byte gUnknown_2022980
 _08011B74: .4byte gUnknown_2022982
 _08011B78: .4byte gUnknown_8D004D8
-_08011B7C: .4byte gUnknown_3003E58
+_08011B7C: .4byte gReservedSpritePaletteCount
 _08011B80: .4byte sub_80116F4
 _08011B84: .4byte sub_800F6FC
 _08011B88: .4byte gUnknown_3005090
@@ -4498,7 +4498,7 @@ _08012186:
 	movs r2, 0x2
 	orrs r0, r2
 	strb r0, [r1]
-	ldr r2, _080121DC @ =gUnknown_202063C
+	ldr r2, _080121DC @ =gSprites
 	lsls r3, r5, 4
 	adds r0, r3, r5
 	lsls r0, 2
@@ -4509,7 +4509,7 @@ _08012186:
 _080121D0: .4byte gUnknown_2024018
 _080121D4: .4byte SpriteCB_HealthBoxBounce
 _080121D8: .4byte gUnknown_3004FF0
-_080121DC: .4byte gUnknown_202063C
+_080121DC: .4byte gSprites
 _080121E0:
 	ldr r0, _0801224C @ =gUnknown_2023D44
 	adds r0, r4, r0
@@ -4528,7 +4528,7 @@ _080121E0:
 	movs r2, 0x4
 	orrs r0, r2
 	strb r0, [r1]
-	ldr r2, _08012254 @ =gUnknown_202063C
+	ldr r2, _08012254 @ =gSprites
 	lsls r3, r5, 4
 	adds r0, r3, r5
 	lsls r0, 2
@@ -4569,7 +4569,7 @@ _0801223C:
 	.align 2, 0
 _0801224C: .4byte gUnknown_2023D44
 _08012250: .4byte gUnknown_2024018
-_08012254: .4byte gUnknown_202063C
+_08012254: .4byte gSprites
 	thumb_func_end dp11b_obj_instanciate
 
 	thumb_func_start dp11b_obj_free
@@ -4593,7 +4593,7 @@ dp11b_obj_free: @ 8012258
 	ands r0, r1
 	cmp r0, 0
 	beq _080122FA
-	ldr r2, _080122A8 @ =gUnknown_202063C
+	ldr r2, _080122A8 @ =gSprites
 	ldrb r1, [r3, 0x2]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -4612,7 +4612,7 @@ dp11b_obj_free: @ 8012258
 	b _080122E6
 	.align 2, 0
 _080122A4: .4byte gUnknown_2024018
-_080122A8: .4byte gUnknown_202063C
+_080122A8: .4byte gSprites
 _080122AC:
 	ldr r6, _08012300 @ =gUnknown_2024018
 	ldr r0, [r6]
@@ -4626,7 +4626,7 @@ _080122AC:
 	ands r0, r1
 	cmp r0, 0
 	beq _080122FA
-	ldr r2, _08012304 @ =gUnknown_202063C
+	ldr r2, _08012304 @ =gSprites
 	ldrb r1, [r3, 0x3]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -4645,7 +4645,7 @@ _080122AC:
 _080122E6:
 	ands r0, r2
 	strb r0, [r1]
-	ldr r0, _08012304 @ =gUnknown_202063C
+	ldr r0, _08012304 @ =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -4659,7 +4659,7 @@ _080122FA:
 	bx r0
 	.align 2, 0
 _08012300: .4byte gUnknown_2024018
-_08012304: .4byte gUnknown_202063C
+_08012304: .4byte gSprites
 	thumb_func_end dp11b_obj_free
 
 	thumb_func_start SpriteCB_HealthBoxBounce
@@ -4683,7 +4683,7 @@ _08012324:
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
 	bl Sin
-	ldr r2, _08012350 @ =gUnknown_202063C
+	ldr r2, _08012350 @ =gSprites
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
@@ -4701,7 +4701,7 @@ _08012324:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08012350: .4byte gUnknown_202063C
+_08012350: .4byte gSprites
 	thumb_func_end SpriteCB_HealthBoxBounce
 
 	thumb_func_start sub_8012354

@@ -139,7 +139,7 @@ _0815F21C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _0815F25C @ =gUnknown_202063C
+	ldr r4, _0815F25C @ =gSprites
 	adds r0, r4
 	bl FreeSpriteOamMatrix
 	movs r3, 0xE
@@ -155,7 +155,7 @@ _0815F252:
 	strh r0, [r5]
 	b _0815F29E
 	.align 2, 0
-_0815F25C: .4byte gUnknown_202063C
+_0815F25C: .4byte gSprites
 _0815F260:
 	ldrb r0, [r5, 0x10]
 	bl sub_815F444
@@ -166,7 +166,7 @@ _0815F260:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _0815F2A8 @ =gUnknown_202063C
+	ldr r4, _0815F2A8 @ =gSprites
 	adds r0, r4
 	bl DestroySprite
 	movs r0, 0x12
@@ -188,7 +188,7 @@ _0815F29E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815F2A8: .4byte gUnknown_202063C
+_0815F2A8: .4byte gSprites
 	thumb_func_end sub_815F1AC
 
 	thumb_func_start sub_815F2AC
@@ -199,7 +199,7 @@ sub_815F2AC: @ 815F2AC
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _0815F2D0 @ =gUnknown_202063C
+	ldr r0, _0815F2D0 @ =gSprites
 	adds r4, r1, r0
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -213,7 +213,7 @@ _0815F2C6:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0815F2D0: .4byte gUnknown_202063C
+_0815F2D0: .4byte gSprites
 _0815F2D4: .4byte _0815F2D8
 	.align 2, 0
 _0815F2D8:
@@ -362,7 +362,7 @@ sub_815F3E0: @ 815F3E0
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, _0815F438 @ =gUnknown_202063C
+	ldr r0, _0815F438 @ =gSprites
 	mov r8, r0
 	lsls r4, r1, 4
 	adds r4, r1
@@ -400,7 +400,7 @@ sub_815F3E0: @ 815F3E0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815F438: .4byte gUnknown_202063C
+_0815F438: .4byte gSprites
 _0815F43C: .4byte 0x0000ffd8
 _0815F440: .4byte sub_815F470
 	thumb_func_end sub_815F3E0
@@ -411,7 +411,7 @@ sub_815F444: @ 815F444
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r2, _0815F468 @ =gUnknown_202063C
+	ldr r2, _0815F468 @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -427,7 +427,7 @@ _0815F462:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0815F468: .4byte gUnknown_202063C
+_0815F468: .4byte gSprites
 _0815F46C: .4byte sub_815F470
 	thumb_func_end sub_815F444
 
@@ -549,14 +549,14 @@ _0815F548:
 	asrs r0, 16
 	cmp r0, 0x28
 	ble _0815F55A
-	ldr r0, _0815F560 @ =nullsub_8
+	ldr r0, _0815F560 @ =SpriteCallbackDummy
 	str r0, [r5, 0x1C]
 _0815F55A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815F560: .4byte nullsub_8
+_0815F560: .4byte SpriteCallbackDummy
 	thumb_func_end sub_815F470
 
 	thumb_func_start sub_815F564
@@ -705,7 +705,7 @@ sub_815F610: @ 815F610
 	lsrs r0, 24
 	mov r4, r8
 	strh r0, [r4]
-	ldr r2, _0815F6DC @ =gUnknown_202063C
+	ldr r2, _0815F6DC @ =gSprites
 	mov r5, r9
 	movs r6, 0
 	ldrsh r1, [r5, r6]
@@ -747,7 +747,7 @@ sub_815F610: @ 815F610
 	.align 2, 0
 _0815F6D4: .4byte gUnknown_847A878
 _0815F6D8: .4byte 0xffe00000
-_0815F6DC: .4byte gUnknown_202063C
+_0815F6DC: .4byte gSprites
 	thumb_func_end sub_815F610
 
 	.align 2, 0 @ Don't pad with nop.

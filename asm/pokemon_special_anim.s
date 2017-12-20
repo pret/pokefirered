@@ -2467,7 +2467,7 @@ _0811D884:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0811D908 @ =gUnknown_202063C
+	ldr r1, _0811D908 @ =gSprites
 	adds r0, r1
 	str r0, [r5, 0xC]
 	ldr r1, [sp]
@@ -2476,7 +2476,7 @@ _0811D884:
 	.align 2, 0
 _0811D900: .4byte gUnknown_82350AC
 _0811D904: .4byte gUnknown_8459A30
-_0811D908: .4byte gUnknown_202063C
+_0811D908: .4byte gSprites
 _0811D90C:
 	movs r0, 0
 	str r0, [r5, 0xC]
@@ -2700,14 +2700,14 @@ sub_811DA9C: @ 811DA9C
 	thumb_func_start sub_811DAAC
 sub_811DAAC: @ 811DAAC
 	ldr r1, [r0, 0x1C]
-	ldr r0, _0811DABC @ =nullsub_8
+	ldr r0, _0811DABC @ =SpriteCallbackDummy
 	eors r1, r0
 	negs r0, r1
 	orrs r0, r1
 	lsrs r0, 31
 	bx lr
 	.align 2, 0
-_0811DABC: .4byte nullsub_8
+_0811DABC: .4byte SpriteCallbackDummy
 	thumb_func_end sub_811DAAC
 
 	thumb_func_start sub_811DAC0
@@ -2843,11 +2843,11 @@ sub_811DBA8: @ 811DBA8
 	movs r1, 0
 	strh r1, [r2, 0x24]
 	ldr r1, [r0, 0xC]
-	ldr r0, _0811DBB8 @ =nullsub_8
+	ldr r0, _0811DBB8 @ =SpriteCallbackDummy
 	str r0, [r1, 0x1C]
 	bx lr
 	.align 2, 0
-_0811DBB8: .4byte nullsub_8
+_0811DBB8: .4byte SpriteCallbackDummy
 	thumb_func_end sub_811DBA8
 
 	thumb_func_start sub_811DBBC
@@ -2877,11 +2877,11 @@ sub_811DBBC: @ 811DBBC
 	cmp r0, r1
 	blt _0811DBF8
 	strh r3, [r2, 0x24]
-	ldr r0, _0811DBF4 @ =nullsub_8
+	ldr r0, _0811DBF4 @ =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 	b _0811DC0C
 	.align 2, 0
-_0811DBF4: .4byte nullsub_8
+_0811DBF4: .4byte SpriteCallbackDummy
 _0811DBF8:
 	ldrh r1, [r2, 0x3A]
 	movs r0, 0x1
@@ -3048,7 +3048,7 @@ sub_811DD20: @ 811DD20
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _0811DD88
-	ldr r3, _0811DD7C @ =gUnknown_202063C
+	ldr r3, _0811DD7C @ =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -3075,16 +3075,16 @@ sub_811DD20: @ 811DD20
 	str r1, [r0]
 	adds r3, 0x1C
 	adds r2, r3
-	ldr r0, _0811DD84 @ =nullsub_8
+	ldr r0, _0811DD84 @ =SpriteCallbackDummy
 	str r0, [r2]
 	adds r0, r4, 0
 	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	b _0811DD8A
 	.align 2, 0
-_0811DD7C: .4byte gUnknown_202063C
+_0811DD7C: .4byte gSprites
 _0811DD80: .4byte gUnknown_8459A20
-_0811DD84: .4byte nullsub_8
+_0811DD84: .4byte SpriteCallbackDummy
 _0811DD88:
 	movs r0, 0
 _0811DD8A:
@@ -3326,7 +3326,7 @@ sub_811DF14: @ 811DF14
 	movs r1, 0x10
 	bl BlendPalettes
 	movs r6, 0
-	ldr r2, _0811DFB4 @ =gUnknown_202063C
+	ldr r2, _0811DFB4 @ =gSprites
 	mov r8, r2
 	movs r0, 0x1C
 	add r0, r8
@@ -3372,7 +3372,7 @@ _0811DFA0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811DFB4: .4byte gUnknown_202063C
+_0811DFB4: .4byte gSprites
 _0811DFB8: .4byte gUnknown_8459B30
 _0811DFBC: .4byte sub_811DFC0
 	thumb_func_end sub_811DF14
@@ -3584,7 +3584,7 @@ sub_811E138: @ 811E138
 	bl sub_811D0A8
 	ldr r0, [r0, 0xC]
 	ldr r1, [r0, 0x1C]
-	ldr r0, _0811E150 @ =nullsub_8
+	ldr r0, _0811E150 @ =SpriteCallbackDummy
 	eors r1, r0
 	negs r0, r1
 	orrs r0, r1
@@ -3592,7 +3592,7 @@ sub_811E138: @ 811E138
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0811E150: .4byte nullsub_8
+_0811E150: .4byte SpriteCallbackDummy
 	thumb_func_end sub_811E138
 
 	thumb_func_start sub_811E154
@@ -3625,13 +3625,13 @@ _0811E174:
 	ldrh r0, [r1, 0x20]
 	subs r0, 0x3
 	strh r0, [r1, 0x20]
-	ldr r0, _0811E190 @ =nullsub_8
+	ldr r0, _0811E190 @ =SpriteCallbackDummy
 	str r0, [r1, 0x1C]
 _0811E18C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811E190: .4byte nullsub_8
+_0811E190: .4byte SpriteCallbackDummy
 	thumb_func_end sub_811E154
 
 	thumb_func_start sub_811E194
@@ -3740,7 +3740,7 @@ _0811E22C:
 	lsrs r5, 16
 	bl sub_811D120
 	adds r6, r0, 0
-	ldr r0, _0811E2F0 @ =gUnknown_202063C
+	ldr r0, _0811E2F0 @ =gSprites
 	lsls r4, r7, 4
 	adds r4, r7
 	lsls r4, 2
@@ -3799,7 +3799,7 @@ _0811E2E0: .4byte gUnknown_84599B8
 _0811E2E4: .4byte gUnknown_84599C0
 _0811E2E8: .4byte gUnknown_84599B2
 _0811E2EC: .4byte gUnknown_8459AEC
-_0811E2F0: .4byte gUnknown_202063C
+_0811E2F0: .4byte gSprites
 	thumb_func_end sub_811E204
 
 	thumb_func_start sub_811E2F4
@@ -3997,7 +3997,7 @@ _0811E3E0:
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _0811E4A4
-	ldr r0, _0811E4C4 @ =gUnknown_202063C
+	ldr r0, _0811E4C4 @ =gSprites
 	lsls r4, r1, 4
 	adds r4, r1
 	lsls r4, 2
@@ -4037,7 +4037,7 @@ _0811E4A4:
 	.align 2, 0
 _0811E4BC: .4byte gUnknown_825E074
 _0811E4C0: .4byte gUnknown_8459B30
-_0811E4C4: .4byte gUnknown_202063C
+_0811E4C4: .4byte gSprites
 _0811E4C8:
 	subs r0, 0x1
 	strh r0, [r5, 0x2]
@@ -4381,7 +4381,7 @@ sub_811E710: @ 811E710
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _0811E79A
-	ldr r0, _0811E7A8 @ =gUnknown_202063C
+	ldr r0, _0811E7A8 @ =gSprites
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
@@ -4418,7 +4418,7 @@ _0811E79A:
 	bx r0
 	.align 2, 0
 _0811E7A4: .4byte gUnknown_8459ACC
-_0811E7A8: .4byte gUnknown_202063C
+_0811E7A8: .4byte gSprites
 _0811E7AC: .4byte 0x41c64e6d
 _0811E7B0: .4byte 0x00006073
 	thumb_func_end sub_811E710

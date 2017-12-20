@@ -538,7 +538,7 @@ sub_815AFEC: @ 815AFEC
 sub_815B014: @ 815B014
 	push {lr}
 	sub sp, 0x4
-	ldr r1, _0815B054 @ =nullsub_8
+	ldr r1, _0815B054 @ =SpriteCallbackDummy
 	movs r0, 0x8
 	str r0, [sp]
 	movs r0, 0x5A
@@ -547,7 +547,7 @@ sub_815B014: @ 815B014
 	bl AddPseudoFieldObject
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0815B058 @ =gUnknown_202063C
+	ldr r1, _0815B058 @ =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -568,8 +568,8 @@ sub_815B014: @ 815B014
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0815B054: .4byte nullsub_8
-_0815B058: .4byte gUnknown_202063C
+_0815B054: .4byte SpriteCallbackDummy
+_0815B058: .4byte gSprites
 	thumb_func_end sub_815B014
 
 	thumb_func_start sub_815B05C
@@ -580,7 +580,7 @@ sub_815B05C: @ 815B05C
 	lsrs r4, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r5, _0815B090 @ =gUnknown_202063C
+	ldr r5, _0815B090 @ =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -600,7 +600,7 @@ sub_815B05C: @ 815B05C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815B090: .4byte gUnknown_202063C
+_0815B090: .4byte gSprites
 	thumb_func_end sub_815B05C
 
 	thumb_func_start sub_815B094
@@ -689,7 +689,7 @@ sub_815B118: @ 815B118
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815B194 @ =gUnknown_202063C
+	ldr r1, _0815B194 @ =gSprites
 	adds r7, r0, r1
 	movs r0, 0x1
 	bl ClearWindowTilemap
@@ -731,7 +731,7 @@ sub_815B118: @ 815B118
 	b _0815B1B8
 	.align 2, 0
 _0815B190: .4byte gUnknown_3005098
-_0815B194: .4byte gUnknown_202063C
+_0815B194: .4byte gSprites
 _0815B198: .4byte gUnknown_203F444
 _0815B19C: .4byte gUnknown_203F450
 _0815B1A0: .4byte 0x00004004
@@ -1090,7 +1090,7 @@ sub_815B454: @ 815B454
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815B488 @ =gUnknown_202063C
+	ldr r1, _0815B488 @ =gSprites
 	adds r1, r0, r1
 	ldrh r2, [r4, 0x4]
 	movs r3, 0x4
@@ -1102,7 +1102,7 @@ sub_815B454: @ 815B454
 	b _0815B4B8
 	.align 2, 0
 _0815B484: .4byte gUnknown_3005098
-_0815B488: .4byte gUnknown_202063C
+_0815B488: .4byte gSprites
 _0815B48C:
 	ldrh r2, [r1, 0x24]
 	movs r3, 0x24
@@ -1362,7 +1362,7 @@ sub_815B664: @ 815B664
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815B6A4 @ =gUnknown_202063C
+	ldr r1, _0815B6A4 @ =gSprites
 	adds r0, r1
 	movs r1, 0x5
 	bl StartSpriteAnim
@@ -1379,7 +1379,7 @@ sub_815B664: @ 815B664
 	bx r0
 	.align 2, 0
 _0815B6A0: .4byte gUnknown_3005098
-_0815B6A4: .4byte gUnknown_202063C
+_0815B6A4: .4byte gSprites
 	thumb_func_end sub_815B664
 
 	thumb_func_start sub_815B6A8
@@ -1398,7 +1398,7 @@ sub_815B6A8: @ 815B6A8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815B734 @ =gUnknown_202063C
+	ldr r1, _0815B734 @ =gSprites
 	adds r6, r0, r1
 	movs r1, 0x80
 	lsls r1, 1
@@ -1452,7 +1452,7 @@ _0815B726:
 	bx r0
 	.align 2, 0
 _0815B730: .4byte gUnknown_3005098
-_0815B734: .4byte gUnknown_202063C
+_0815B734: .4byte gSprites
 _0815B738: .4byte gUnknown_203F450
 _0815B73C: .4byte 0x00004005
 	thumb_func_end sub_815B6A8
@@ -1474,7 +1474,7 @@ sub_815B740: @ 815B740
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815B7D8 @ =gUnknown_202063C
+	ldr r1, _0815B7D8 @ =gSprites
 	adds r6, r0, r1
 	movs r1, 0x80
 	lsls r1, 1
@@ -1534,7 +1534,7 @@ _0815B7CA:
 	bx r0
 	.align 2, 0
 _0815B7D4: .4byte gUnknown_3005098
-_0815B7D8: .4byte gUnknown_202063C
+_0815B7D8: .4byte gSprites
 _0815B7DC: .4byte gUnknown_203F450
 _0815B7E0: .4byte 0x00004004
 	thumb_func_end sub_815B740
@@ -1556,7 +1556,7 @@ sub_815B7E4: @ 815B7E4
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0815B83C @ =gUnknown_202063C
+	ldr r0, _0815B83C @ =gSprites
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x6
@@ -1582,7 +1582,7 @@ sub_815B7E4: @ 815B7E4
 	bx r0
 	.align 2, 0
 _0815B838: .4byte gUnknown_3005098
-_0815B83C: .4byte gUnknown_202063C
+_0815B83C: .4byte gSprites
 	thumb_func_end sub_815B7E4
 
 	thumb_func_start sub_815B840
@@ -1601,7 +1601,7 @@ sub_815B840: @ 815B840
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815B894 @ =gUnknown_202063C
+	ldr r1, _0815B894 @ =gSprites
 	adds r4, r0, r1
 	ldrh r1, [r4, 0x24]
 	movs r0, 0xF
@@ -1629,7 +1629,7 @@ _0815B87E:
 	b _0815B89C
 	.align 2, 0
 _0815B890: .4byte gUnknown_3005098
-_0815B894: .4byte gUnknown_202063C
+_0815B894: .4byte gSprites
 _0815B898:
 	subs r0, r1, 0x1
 	strh r0, [r4, 0x24]
@@ -1941,7 +1941,7 @@ sub_815BAA0: @ 815BAA0
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _0815BB44 @ =gUnknown_202063C
+	ldr r0, _0815BB44 @ =gSprites
 	adds r4, r1, r0
 	strh r6, [r4, 0x24]
 	adds r0, r5, 0
@@ -1970,7 +1970,7 @@ _0815BB34: .4byte gUnknown_203F450
 _0815BB38: .4byte 0x00004006
 _0815BB3C: .4byte 0xfff00000
 _0815BB40: .4byte gUnknown_83A0010
-_0815BB44: .4byte gUnknown_202063C
+_0815BB44: .4byte gSprites
 _0815BB48: .4byte sub_815BB6C
 _0815BB4C:
 	ldr r1, _0815BB68 @ =gUnknown_84795B8
@@ -2007,7 +2007,7 @@ sub_815BB6C: @ 815BB6C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815BBA8 @ =gUnknown_202063C
+	ldr r1, _0815BBA8 @ =gSprites
 	adds r5, r0, r1
 	ldr r0, _0815BBAC @ =gUnknown_203F450
 	ldr r0, [r0]
@@ -2021,7 +2021,7 @@ sub_815BB6C: @ 815BB6C
 	b _0815BC3A
 	.align 2, 0
 _0815BBA4: .4byte gUnknown_3005098
-_0815BBA8: .4byte gUnknown_202063C
+_0815BBA8: .4byte gSprites
 _0815BBAC: .4byte gUnknown_203F450
 _0815BBB0: .4byte 0x00004006
 _0815BBB4:

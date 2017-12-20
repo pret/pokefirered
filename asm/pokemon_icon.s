@@ -71,7 +71,7 @@ _08096E7E:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _08096EC8 @ =gUnknown_202063C
+	ldr r1, _08096EC8 @ =gSprites
 	adds r0, r1
 	bl UpdateMonIconFrame
 	adds r0, r4, 0
@@ -88,7 +88,7 @@ _08096EB8: .4byte gUnknown_83D40AC
 _08096EBC: .4byte gUnknown_83D40E0
 _08096EC0: .4byte gUnknown_83D3E80
 _08096EC4: .4byte 0x0000dac0
-_08096EC8: .4byte gUnknown_202063C
+_08096EC8: .4byte gSprites
 	thumb_func_end sub_8096E18
 
 	thumb_func_start sub_8096ECC
@@ -141,7 +141,7 @@ sub_8096ECC: @ 8096ECC
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _08096F58 @ =gUnknown_202063C
+	ldr r1, _08096F58 @ =gSprites
 	adds r0, r1
 	bl UpdateMonIconFrame
 	adds r0, r4, 0
@@ -155,7 +155,7 @@ _08096F48: .4byte gUnknown_83D40AC
 _08096F4C: .4byte gUnknown_83D40E0
 _08096F50: .4byte gUnknown_83D3E80
 _08096F54: .4byte 0x0000dac0
-_08096F58: .4byte gUnknown_202063C
+_08096F58: .4byte gSprites
 	thumb_func_end sub_8096ECC
 
 	thumb_func_start mon_icon_convert_unown_species_id
@@ -758,7 +758,7 @@ CreateMonIconSprite: @ 8097300
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, _080973D4 @ =gUnknown_202063C
+	ldr r6, _080973D4 @ =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -791,7 +791,7 @@ CreateMonIconSprite: @ 8097300
 _080973C8: .4byte gUnknown_83D40E8
 _080973CC: .4byte 0xffff0000
 _080973D0: .4byte 0x0000ffff
-_080973D4: .4byte gUnknown_202063C
+_080973D4: .4byte gSprites
 	thumb_func_end CreateMonIconSprite
 
 	thumb_func_start sub_80973D8

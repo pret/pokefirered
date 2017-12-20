@@ -11998,7 +11998,7 @@ sub_811BB40: @ 811BB40
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r6, _0811BB64 @ =gUnknown_202063C
+	ldr r6, _0811BB64 @ =gSprites
 _0811BB48:
 	adds r0, r5, r4
 	ldrb r1, [r0]
@@ -12014,7 +12014,7 @@ _0811BB48:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811BB64: .4byte gUnknown_202063C
+_0811BB64: .4byte gSprites
 	thumb_func_end sub_811BB40
 
 	thumb_func_start sub_811BB68

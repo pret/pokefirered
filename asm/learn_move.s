@@ -1178,7 +1178,7 @@ sub_80E5004: @ 80E5004
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _080E50C4 @ =gUnknown_202063C
+	ldr r4, _080E50C4 @ =gSprites
 	adds r0, r4
 	movs r1, 0x1
 	bl StartSpriteAnim
@@ -1246,7 +1246,7 @@ _080E50B4: .4byte gUnknown_83FF9F4
 _080E50B8: .4byte gUnknown_83FF9FC
 _080E50BC: .4byte gUnknown_83FFA24
 _080E50C0: .4byte gUnknown_203AAB4
-_080E50C4: .4byte gUnknown_202063C
+_080E50C4: .4byte gSprites
 _080E50C8: .4byte 0x0000ffff
 	thumb_func_end sub_80E5004
 
@@ -1474,7 +1474,7 @@ _080E529E:
 	ldrb r0, [r4, 0x1A]
 	cmp r0, 0x6
 	bls _080E52FA
-	ldr r2, _080E52E4 @ =gUnknown_202063C
+	ldr r2, _080E52E4 @ =gSprites
 	movs r0, 0x3E
 	adds r0, r2
 	mov r12, r0
@@ -1503,7 +1503,7 @@ _080E529E:
 	.align 2, 0
 _080E52DC: .4byte gUnknown_841E4E2
 _080E52E0: .4byte gUnknown_203AAB4
-_080E52E4: .4byte gUnknown_202063C
+_080E52E4: .4byte gSprites
 _080E52E8:
 	ldrb r1, [r4, 0x19]
 	ldrb r0, [r4, 0x1A]

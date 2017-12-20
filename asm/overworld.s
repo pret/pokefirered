@@ -7331,7 +7331,7 @@ sub_80584B8: @ 80584B8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058500 @ =gUnknown_202063C
+	ldr r1, _08058500 @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 _080584E4:
@@ -7347,7 +7347,7 @@ _080584E4:
 	.align 2, 0
 _080584F8: .4byte gUnknown_2031DEC
 _080584FC: .4byte gUnknown_2036E38
-_08058500: .4byte gUnknown_202063C
+_08058500: .4byte gSprites
 	thumb_func_end sub_80584B8
 
 	thumb_func_start sub_8058504
@@ -7894,7 +7894,7 @@ _080588C6:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058908 @ =gUnknown_202063C
+	ldr r1, _08058908 @ =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -7915,7 +7915,7 @@ _080588FC:
 	bx r0
 	.align 2, 0
 _08058904: .4byte SpriteCB_LinkPlayer
-_08058908: .4byte gUnknown_202063C
+_08058908: .4byte gSprites
 	thumb_func_end sub_8058878
 
 	thumb_func_start SpriteCB_LinkPlayer

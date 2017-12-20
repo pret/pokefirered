@@ -76,7 +76,7 @@ sub_8033E3C: @ 8033E3C
 	ldrh r0, [r6, 0x30]
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r7, _08033E80 @ =gUnknown_202063C
+	ldr r7, _08033E80 @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r5, r1, 2
@@ -105,7 +105,7 @@ sub_8033E3C: @ 8033E3C
 	strb r0, [r1]
 	b _08033EA0
 	.align 2, 0
-_08033E80: .4byte gUnknown_202063C
+_08033E80: .4byte gSprites
 _08033E84:
 	lsls r0, r4, 27
 	cmp r0, 0
@@ -118,7 +118,7 @@ _08033E84:
 	adds r0, r3, 0
 	movs r1, 0
 	bl StartSpriteAffineAnim
-	ldr r0, _08033EAC @ =nullsub_8
+	ldr r0, _08033EAC @ =SpriteCallbackDummy
 	str r0, [r6, 0x1C]
 _08033EA0:
 	pop {r4-r7}
@@ -126,7 +126,7 @@ _08033EA0:
 	bx r0
 	.align 2, 0
 _08033EA8: .4byte sub_8012100
-_08033EAC: .4byte nullsub_8
+_08033EAC: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8033E3C
 
 	thumb_func_start sub_8033EB0
@@ -140,7 +140,7 @@ sub_8033EB0: @ 8033EB0
 	movs r2, 0x40
 	orrs r0, r2
 	strb r0, [r3]
-	ldr r0, _08033ED4 @ =nullsub_8
+	ldr r0, _08033ED4 @ =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 	cmp r1, 0
 	bne _08033ED8
@@ -149,7 +149,7 @@ sub_8033EB0: @ 8033EB0
 	bl StartSpriteAffineAnim
 	b _08033EE0
 	.align 2, 0
-_08033ED4: .4byte nullsub_8
+_08033ED4: .4byte SpriteCallbackDummy
 _08033ED8:
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -179,14 +179,14 @@ sub_8033EEC: @ 8033EEC
 	lsls r0, 16
 	cmp r0, 0
 	bne _08033F0E
-	ldr r0, _08033F18 @ =nullsub_8
+	ldr r0, _08033F18 @ =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 _08033F0E:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08033F14: .4byte gUnknown_2023F4C
-_08033F18: .4byte nullsub_8
+_08033F18: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8033EEC
 
 	thumb_func_start InitAndLaunchChosenStatusAnimation
@@ -393,7 +393,7 @@ _08034094:
 	beq _080340E0
 	cmp r5, 0x2
 	bne _080340E0
-	ldr r1, _080340D8 @ =gUnknown_202063C
+	ldr r1, _080340D8 @ =gSprites
 	ldr r0, _080340DC @ =gUnknown_2023D44
 	adds r0, r6, r0
 	ldrb r2, [r0]
@@ -414,7 +414,7 @@ _08034094:
 	movs r0, 0x1
 	b _08034132
 	.align 2, 0
-_080340D8: .4byte gUnknown_202063C
+_080340D8: .4byte gSprites
 _080340DC: .4byte gUnknown_2023D44
 _080340E0:
 	ldr r0, _08034144 @ =gUnknown_2037F1A
@@ -1710,7 +1710,7 @@ CopyAllBattleSpritesInvisibilities: @ 8034B40
 	ldrb r0, [r5]
 	cmp r4, r0
 	bge _08034B96
-	ldr r0, _08034BA8 @ =gUnknown_202063C
+	ldr r0, _08034BA8 @ =gSprites
 	mov r9, r0
 	movs r0, 0x1
 	mov r12, r0
@@ -1754,7 +1754,7 @@ _08034B96:
 	bx r0
 	.align 2, 0
 _08034BA4: .4byte gUnknown_2023BCC
-_08034BA8: .4byte gUnknown_202063C
+_08034BA8: .4byte gSprites
 _08034BAC: .4byte gUnknown_2024018
 _08034BB0: .4byte gUnknown_2023D44
 	thumb_func_end CopyAllBattleSpritesInvisibilities
@@ -1768,7 +1768,7 @@ CopyBattleSpriteInvisibility: @ 8034BB4
 	ldr r1, [r1]
 	lsls r3, r0, 2
 	adds r3, r1
-	ldr r2, _08034BEC @ =gUnknown_202063C
+	ldr r2, _08034BEC @ =gSprites
 	ldr r1, _08034BF0 @ =gUnknown_2023D44
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1789,7 +1789,7 @@ CopyBattleSpriteInvisibility: @ 8034BB4
 	bx lr
 	.align 2, 0
 _08034BE8: .4byte gUnknown_2024018
-_08034BEC: .4byte gUnknown_202063C
+_08034BEC: .4byte gSprites
 _08034BF0: .4byte gUnknown_2023D44
 	thumb_func_end CopyBattleSpriteInvisibility
 
@@ -1868,7 +1868,7 @@ _08034C16:
 	adds r0, 0x4
 	adds r0, r5
 	ldr r2, [r0]
-	ldr r5, _08034D68 @ =gUnknown_202063C
+	ldr r5, _08034D68 @ =gSprites
 	ldr r4, _08034D6C @ =gUnknown_2023D44
 	add r4, r9
 	ldrb r1, [r4]
@@ -1963,7 +1963,7 @@ _08034D58: .4byte gUnknown_2023BCE
 _08034D5C: .4byte gUnknown_202402C
 _08034D60: .4byte gUnknown_82350AC
 _08034D64: .4byte gUnknown_202401C
-_08034D68: .4byte gUnknown_202063C
+_08034D68: .4byte gSprites
 _08034D6C: .4byte gUnknown_2023D44
 _08034D70: .4byte 0x06010000
 _08034D74: .4byte 0x040000d4
@@ -1981,7 +1981,7 @@ _08034D88:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r6, _08034E2C @ =gUnknown_202063C
+	ldr r6, _08034E2C @ =gSprites
 	adds r0, r6
 	ldr r4, _08034E30 @ =gUnknown_2024018
 	ldr r1, [r4]
@@ -2049,7 +2049,7 @@ _08034E0E:
 	b _08035062
 	.align 2, 0
 _08034E28: .4byte gUnknown_2023D44
-_08034E2C: .4byte gUnknown_202063C
+_08034E2C: .4byte gSprites
 _08034E30: .4byte gUnknown_2024018
 _08034E34: .4byte gUnknown_2023FE8
 _08034E38: .4byte gUnknown_2024024
@@ -2196,7 +2196,7 @@ _08034F5E:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0803508C @ =gUnknown_202063C
+	ldr r1, _0803508C @ =gSprites
 	adds r0, r1
 	ldrh r0, [r0, 0x4]
 	lsls r0, 22
@@ -2290,7 +2290,7 @@ _08034FFC:
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
-	ldr r2, _0803508C @ =gUnknown_202063C
+	ldr r2, _0803508C @ =gSprites
 	adds r1, r2
 	lsls r0, 24
 	lsrs r0, 24
@@ -2319,7 +2319,7 @@ _0803507C: .4byte gUnknown_82350AC
 _08035080: .4byte gUnknown_202401C
 _08035084: .4byte gUnknown_2024008
 _08035088: .4byte gUnknown_2023D44
-_0803508C: .4byte gUnknown_202063C
+_0803508C: .4byte gSprites
 _08035090: .4byte 0x06010000
 _08035094: .4byte 0x040000d4
 _08035098: .4byte 0x84000200
@@ -2463,7 +2463,7 @@ LoadBattleMonGfxAndAnimate: @ 80351A8
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _080351E4 @ =gUnknown_202063C
+	ldr r1, _080351E4 @ =gSprites
 	adds r4, r0, r1
 	ldr r0, _080351E8 @ =gUnknown_2024024
 	adds r0, r6, r0
@@ -2476,7 +2476,7 @@ LoadBattleMonGfxAndAnimate: @ 80351A8
 	bl GetSubstituteSpriteDefault_Y
 	b _080351F2
 	.align 2, 0
-_080351E4: .4byte gUnknown_202063C
+_080351E4: .4byte gSprites
 _080351E8: .4byte gUnknown_2024024
 _080351EC:
 	adds r0, r6, 0
@@ -2819,7 +2819,7 @@ _0803547C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08035514
-	ldr r4, _080354E4 @ =gUnknown_202063C
+	ldr r4, _080354E4 @ =gSprites
 	ldr r0, _080354E8 @ =gUnknown_2023D44
 	adds r3, r5, r0
 	ldrb r1, [r3]
@@ -2863,7 +2863,7 @@ _0803547C:
 	b _08035514
 	.align 2, 0
 _080354E0: .4byte gUnknown_2023BCC
-_080354E4: .4byte gUnknown_202063C
+_080354E4: .4byte gSprites
 _080354E8: .4byte gUnknown_2023D44
 _080354EC: .4byte gUnknown_2024018
 _080354F0:
@@ -2947,7 +2947,7 @@ LoadAndCreateEnemyShadowSprites: @ 8035538
 	lsls r1, 2
 	adds r2, r1, r2
 	strb r0, [r2, 0x7]
-	ldr r7, _08035620 @ =gUnknown_202063C
+	ldr r7, _08035620 @ =gSprites
 	ldr r0, [r6]
 	ldr r0, [r0, 0x4]
 	adds r1, r0
@@ -3012,7 +3012,7 @@ _0803560A:
 _08035614: .4byte gUnknown_8250A0C
 _08035618: .4byte gUnknown_8250A1C
 _0803561C: .4byte gUnknown_2024018
-_08035620: .4byte gUnknown_202063C
+_08035620: .4byte gSprites
 	thumb_func_end LoadAndCreateEnemyShadowSprites
 
 	thumb_func_start SpriteCB_EnemyShadow
@@ -3032,7 +3032,7 @@ SpriteCB_EnemyShadow: @ 8035624
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0803566C @ =gUnknown_202063C
+	ldr r1, _0803566C @ =gSprites
 	adds r7, r0, r1
 	adds r6, r7, 0
 	adds r6, 0x3E
@@ -3052,7 +3052,7 @@ _08035660:
 	b _080356EA
 	.align 2, 0
 _08035668: .4byte gUnknown_2023D44
-_0803566C: .4byte gUnknown_202063C
+_0803566C: .4byte gSprites
 _08035670: .4byte SpriteCB_SetInvisible
 _08035674:
 	ldr r0, _08035690 @ =gUnknown_2037EE1
@@ -3166,7 +3166,7 @@ _08035732:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08035768
-	ldr r2, _08035760 @ =gUnknown_202063C
+	ldr r2, _08035760 @ =gSprites
 	ldr r1, [r3, 0x4]
 	lsls r0, r4, 1
 	adds r0, r4
@@ -3183,10 +3183,10 @@ _08035732:
 	.align 2, 0
 _08035758: .4byte gUnknown_2024018
 _0803575C: .4byte gUnknown_823A004
-_08035760: .4byte gUnknown_202063C
+_08035760: .4byte gSprites
 _08035764: .4byte SpriteCB_EnemyShadow
 _08035768:
-	ldr r2, _0803578C @ =gUnknown_202063C
+	ldr r2, _0803578C @ =gSprites
 	ldr r1, [r3, 0x4]
 	lsls r0, r6, 1
 	adds r0, r6
@@ -3206,7 +3206,7 @@ _08035784:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803578C: .4byte gUnknown_202063C
+_0803578C: .4byte gSprites
 _08035790: .4byte SpriteCB_SetInvisible
 	thumb_func_end SetBankEnemyShadowSpriteCallback
 
@@ -3214,7 +3214,7 @@ _08035790: .4byte SpriteCB_SetInvisible
 EnemyShadowCallbackToSetInvisible: @ 8035794
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080357BC @ =gUnknown_202063C
+	ldr r2, _080357BC @ =gSprites
 	ldr r1, _080357C0 @ =gUnknown_2024018
 	ldr r1, [r1]
 	ldr r3, [r1, 0x4]
@@ -3232,7 +3232,7 @@ EnemyShadowCallbackToSetInvisible: @ 8035794
 	str r1, [r0]
 	bx lr
 	.align 2, 0
-_080357BC: .4byte gUnknown_202063C
+_080357BC: .4byte gSprites
 _080357C0: .4byte gUnknown_2024018
 _080357C4: .4byte SpriteCB_SetInvisible
 	thumb_func_end EnemyShadowCallbackToSetInvisible

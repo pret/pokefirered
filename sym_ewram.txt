@@ -32,50 +32,9 @@ gTrainerId: @ 2020000
 	.include "src/text_printer.o"
 	.include "src/window.o"
 	.include "src/window_8bpp.o"
+	.include "src/sprite.o"
 
 	.align 2
-gUnknown_202063C: @ 202063C
-	.space 0x1C
-
-gUnknown_2020658: @ 2020658
-	.space 0x1128
-
-gUnknown_2021780: @ 2021780
-	.space 0x80
-
-gUnknown_2021800: @ 2021800
-	.space 0x40
-
-gUnknown_2021840: @ 2021840
-	.space 0x1
-
-gUnknown_2021841: @ 2021841
-	.space 0x3
-
-gUnknown_2021844: @ 2021844
-	.space 0x300
-
-gUnknown_2021B44: @ 2021B44
-	.space 0x2
-
-gUnknown_2021B46: @ 2021B46
-	.space 0x2
-
-gUnknown_2021B48: @ 2021B48
-	.space 0x80
-
-gUnknown_2021BC8: @ 2021BC8
-	.space 0x2
-
-gUnknown_2021BCA: @ 2021BCA
-	.space 0x2
-
-gUnknown_2021BCC: @ 2021BCC
-	.space 0x100
-
-gUnknown_2021CCC: @ 2021CCC
-	.space 0x4
-
 gStringVar1: @ 2021CD0
 	.space 0x20
 

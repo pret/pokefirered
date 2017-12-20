@@ -185,12 +185,12 @@ _08077900:
 	b _08077A8A
 _08077906:
 	bl FreeAllSpritePalettes
-	ldr r1, _08077914 @ =gUnknown_3003E58
+	ldr r1, _08077914 @ =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	b _08077A8A
 	.align 2, 0
-_08077914: .4byte gUnknown_3003E58
+_08077914: .4byte gReservedSpritePaletteCount
 _08077918:
 	bl ClearSpritesHealthboxAnimData
 	b _08077A8A
@@ -681,7 +681,7 @@ _08077CD2:
 	ldr r4, _08077D9C @ =gUnknown_2023D44
 	adds r4, r7, r4
 	strb r0, [r4]
-	ldr r5, _08077DA0 @ =gUnknown_202063C
+	ldr r5, _08077DA0 @ =gSprites
 	ldrb r0, [r4]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -700,7 +700,7 @@ _08077CD2:
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _08077DA4 @ =nullsub_8
+	ldr r1, _08077DA4 @ =SpriteCallbackDummy
 	str r1, [r0]
 	ldrb r1, [r4]
 	lsls r0, r1, 4
@@ -736,8 +736,8 @@ _08077D90: .4byte gUnknown_2023BCE
 _08077D94: .4byte gUnknown_202402C
 _08077D98: .4byte gUnknown_20244DC
 _08077D9C: .4byte gUnknown_2023D44
-_08077DA0: .4byte gUnknown_202063C
-_08077DA4: .4byte nullsub_8
+_08077DA0: .4byte gSprites
+_08077DA4: .4byte SpriteCallbackDummy
 _08077DA8: .4byte gUnknown_2024024
 _08077DAC:
 	ldr r0, _08077E00 @ =gUnknown_2022B4C
@@ -822,7 +822,7 @@ _08077E54:
 	bl CreateSprite
 	ldr r3, _08077E9C @ =gUnknown_2023D44
 	strb r0, [r3]
-	ldr r4, _08077EA0 @ =gUnknown_202063C
+	ldr r4, _08077EA0 @ =gSprites
 	ldrb r0, [r3]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -839,7 +839,7 @@ _08077E54:
 	adds r1, r4, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _08077EA4 @ =nullsub_8
+	ldr r1, _08077EA4 @ =SpriteCallbackDummy
 	str r1, [r0]
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -852,8 +852,8 @@ _08077E54:
 _08077E94: .4byte gUnknown_20244DC
 _08077E98: .4byte gUnknown_8239F8C
 _08077E9C: .4byte gUnknown_2023D44
-_08077EA0: .4byte gUnknown_202063C
-_08077EA4: .4byte nullsub_8
+_08077EA0: .4byte gSprites
+_08077EA4: .4byte SpriteCallbackDummy
 _08077EA8:
 	ldr r1, _08077FC4 @ =gUnknown_2023BCE
 	lsls r0, r7, 1
@@ -907,7 +907,7 @@ _08077EA8:
 	ldr r4, _08077FD0 @ =gUnknown_2023D44
 	adds r4, r7, r4
 	strb r0, [r4]
-	ldr r5, _08077FD4 @ =gUnknown_202063C
+	ldr r5, _08077FD4 @ =gSprites
 	ldrb r0, [r4]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -926,7 +926,7 @@ _08077EA8:
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _08077FD8 @ =nullsub_8
+	ldr r1, _08077FD8 @ =SpriteCallbackDummy
 	str r1, [r0]
 	ldrb r1, [r4]
 	lsls r0, r1, 4
@@ -957,7 +957,7 @@ _08077EA8:
 	ldrb r1, [r1]
 	bl StartSpriteAnim
 _08077F84:
-	ldr r1, _08077FD4 @ =gUnknown_202063C
+	ldr r1, _08077FD4 @ =gSprites
 	ldr r0, _08077FD0 @ =gUnknown_2023D44
 	adds r0, r7, r0
 	ldrb r0, [r0]
@@ -994,8 +994,8 @@ _08077FC4: .4byte gUnknown_2023BCE
 _08077FC8: .4byte gUnknown_2024284
 _08077FCC: .4byte gUnknown_20244DC
 _08077FD0: .4byte gUnknown_2023D44
-_08077FD4: .4byte gUnknown_202063C
-_08077FD8: .4byte nullsub_8
+_08077FD4: .4byte gSprites
+_08077FD8: .4byte SpriteCallbackDummy
 _08077FDC: .4byte gUnknown_2024024
 _08077FE0: .4byte gUnknown_2024018
 	thumb_func_end sub_8077C38

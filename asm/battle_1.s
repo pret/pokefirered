@@ -16,7 +16,7 @@ sub_800F1E8: @ 800F1E8
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0800F220 @ =gUnknown_202063C
+	ldr r2, _0800F220 @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -32,7 +32,7 @@ sub_800F1E8: @ 800F1E8
 	bx r0
 	.align 2, 0
 _0800F21C: .4byte gUnknown_824EFF0
-_0800F220: .4byte gUnknown_202063C
+_0800F220: .4byte gSprites
 _0800F224: .4byte sub_800F228
 	thumb_func_end sub_800F1E8
 
@@ -865,7 +865,7 @@ _0800F850:
 	ldr r1, [r4]
 	adds r1, 0x7E
 	strb r0, [r1]
-	ldr r3, _0800F8EC @ =gUnknown_202063C
+	ldr r3, _0800F8EC @ =gSprites
 	ldr r0, [r4]
 	adds r0, 0x7D
 	ldrb r1, [r0]
@@ -902,7 +902,7 @@ _0800F8DC: .4byte 0x00007fff
 _0800F8E0: .4byte gUnknown_82482E8
 _0800F8E4: .4byte gUnknown_2023FE8
 _0800F8E8: .4byte gUnknown_8248300
-_0800F8EC: .4byte gUnknown_202063C
+_0800F8EC: .4byte gSprites
 _0800F8F0:
 	movs r1, 0x12
 	ldrsh r0, [r5, r1]
@@ -1041,7 +1041,7 @@ _0800FA08:
 	bl PlaySE
 	adds r0, r7, 0
 	bl DestroyTask
-	ldr r4, _0800FAD0 @ =gUnknown_202063C
+	ldr r4, _0800FAD0 @ =gSprites
 	ldr r5, _0800FAD4 @ =gUnknown_2023FE8
 	ldr r0, [r5]
 	adds r0, 0x7D
@@ -1137,7 +1137,7 @@ _0800FAC4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800FAD0: .4byte gUnknown_202063C
+_0800FAD0: .4byte gSprites
 _0800FAD4: .4byte gUnknown_2023FE8
 _0800FAD8: .4byte 0x000003ff
 _0800FADC: .4byte 0xfffffc00

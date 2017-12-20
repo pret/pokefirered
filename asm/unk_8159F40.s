@@ -823,7 +823,7 @@ sub_815A540: @ 815A540
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815A5B8 @ =gUnknown_202063C
+	ldr r1, _0815A5B8 @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 _0815A5A4:
@@ -835,7 +835,7 @@ _0815A5A4:
 _0815A5AC: .4byte gUnknown_203ADFA
 _0815A5B0: .4byte gUnknown_2037078
 _0815A5B4: .4byte gUnknown_2036E38
-_0815A5B8: .4byte gUnknown_202063C
+_0815A5B8: .4byte gSprites
 	thumb_func_end sub_815A540
 
 	thumb_func_start sub_815A5BC

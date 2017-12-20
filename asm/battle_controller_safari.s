@@ -258,7 +258,7 @@ _080DD724: .4byte gUnknown_2023BC4
 	thumb_func_start sub_80DD728
 sub_80DD728: @ 80DD728
 	push {lr}
-	ldr r2, _080DD750 @ =gUnknown_202063C
+	ldr r2, _080DD750 @ =gSprites
 	ldr r1, _080DD754 @ =gUnknown_2023D44
 	ldr r0, _080DD758 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -270,7 +270,7 @@ sub_80DD728: @ 80DD728
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, _080DD75C @ =nullsub_8
+	ldr r0, _080DD75C @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _080DD74C
 	bl SafariBufferExecCompleted
@@ -278,10 +278,10 @@ _080DD74C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD750: .4byte gUnknown_202063C
+_080DD750: .4byte gSprites
 _080DD754: .4byte gUnknown_2023D44
 _080DD758: .4byte gUnknown_2023BC4
-_080DD75C: .4byte nullsub_8
+_080DD75C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80DD728
 
 	thumb_func_start CompleteOnInactiveTextPrinter_3
@@ -301,7 +301,7 @@ _080DD772:
 	thumb_func_start sub_80DD778
 sub_80DD778: @ 80DD778
 	push {lr}
-	ldr r2, _080DD7A0 @ =gUnknown_202063C
+	ldr r2, _080DD7A0 @ =gSprites
 	ldr r1, _080DD7A4 @ =gUnknown_3004FF0
 	ldr r0, _080DD7A8 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -313,7 +313,7 @@ sub_80DD778: @ 80DD778
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, _080DD7AC @ =nullsub_8
+	ldr r0, _080DD7AC @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _080DD79C
 	bl SafariBufferExecCompleted
@@ -321,10 +321,10 @@ _080DD79C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD7A0: .4byte gUnknown_202063C
+_080DD7A0: .4byte gSprites
 _080DD7A4: .4byte gUnknown_3004FF0
 _080DD7A8: .4byte gUnknown_2023BC4
-_080DD7AC: .4byte nullsub_8
+_080DD7AC: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80DD778
 
 	thumb_func_start sub_80DD7B0
@@ -650,7 +650,7 @@ SafariHandleDrawTrainerPic: @ 80DD9C4
 	ldrb r1, [r5]
 	adds r1, r6
 	strb r0, [r1]
-	ldr r4, _080DDA90 @ =gUnknown_202063C
+	ldr r4, _080DDA90 @ =gSprites
 	ldrb r3, [r5]
 	adds r0, r3, r6
 	ldrb r0, [r0]
@@ -707,7 +707,7 @@ _080DDA80: .4byte gUnknown_2023BC4
 _080DDA84: .4byte gUnknown_20244DC
 _080DDA88: .4byte gUnknown_8239F8C
 _080DDA8C: .4byte gUnknown_2023D44
-_080DDA90: .4byte gUnknown_202063C
+_080DDA90: .4byte gSprites
 _080DDA94: .4byte 0x0000fffe
 _080DDA98: .4byte sub_8033EEC
 _080DDA9C: .4byte gUnknown_3004FE0

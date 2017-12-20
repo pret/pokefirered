@@ -224,7 +224,7 @@ _080C993C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080C9994 @ =gUnknown_202063C
+	ldr r1, _080C9994 @ =gSprites
 	adds r0, r1
 	ldrb r1, [r6, 0x8]
 	bl StartSpriteAnim
@@ -245,7 +245,7 @@ _080C9980:
 _080C9988: .4byte gUnknown_20386E0
 _080C998C: .4byte gUnknown_2037078
 _080C9990: .4byte gUnknown_2036E38
-_080C9994: .4byte gUnknown_202063C
+_080C9994: .4byte gSprites
 _080C9998: .4byte gUnknown_3005090
 _080C999C: .4byte sub_80C99A0
 	thumb_func_end sub_80C98FC

@@ -69,7 +69,7 @@ _080D426C:
 	thumb_func_start sub_80D4270
 sub_80D4270: @ 80D4270
 	push {lr}
-	ldr r2, _080D4298 @ =gUnknown_202063C
+	ldr r2, _080D4298 @ =gSprites
 	ldr r1, _080D429C @ =gUnknown_2023D44
 	ldr r0, _080D42A0 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -81,7 +81,7 @@ sub_80D4270: @ 80D4270
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, _080D42A4 @ =nullsub_8
+	ldr r0, _080D42A4 @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _080D4294
 	bl sub_80D49E8
@@ -89,16 +89,16 @@ _080D4294:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D4298: .4byte gUnknown_202063C
+_080D4298: .4byte gSprites
 _080D429C: .4byte gUnknown_2023D44
 _080D42A0: .4byte gUnknown_2023BC4
-_080D42A4: .4byte nullsub_8
+_080D42A4: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80D4270
 
 	thumb_func_start sub_80D42A8
 sub_80D42A8: @ 80D42A8
 	push {r4-r6,lr}
-	ldr r6, _080D4300 @ =gUnknown_202063C
+	ldr r6, _080D4300 @ =gSprites
 	ldr r5, _080D4304 @ =gUnknown_2023D44
 	ldr r4, _080D4308 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -111,7 +111,7 @@ sub_80D42A8: @ 80D42A8
 	adds r1, 0x1C
 	adds r0, r1
 	ldr r1, [r0]
-	ldr r0, _080D430C @ =nullsub_8
+	ldr r0, _080D430C @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _080D42F8
 	movs r0, 0
@@ -138,10 +138,10 @@ _080D42F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D4300: .4byte gUnknown_202063C
+_080D4300: .4byte gSprites
 _080D4304: .4byte gUnknown_2023D44
 _080D4308: .4byte gUnknown_2023BC4
-_080D430C: .4byte nullsub_8
+_080D430C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80D42A8
 
 	thumb_func_start sub_80D4310
@@ -201,7 +201,7 @@ sub_80D4358: @ 80D4358
 	cmp r0, 0
 	beq _080D43B0
 _080D437C:
-	ldr r2, _080D43A0 @ =gUnknown_202063C
+	ldr r2, _080D43A0 @ =gSprites
 	ldr r1, _080D43A4 @ =gUnknown_3004FF0
 	ldr r0, _080D43A8 @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -213,18 +213,18 @@ _080D437C:
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, _080D43AC @ =nullsub_8
+	ldr r0, _080D43AC @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _080D43E8
 	b _080D43E6
 	.align 2, 0
 _080D439C: .4byte gUnknown_2022B4C
-_080D43A0: .4byte gUnknown_202063C
+_080D43A0: .4byte gSprites
 _080D43A4: .4byte gUnknown_3004FF0
 _080D43A8: .4byte gUnknown_2023BC4
-_080D43AC: .4byte nullsub_8
+_080D43AC: .4byte SpriteCallbackDummy
 _080D43B0:
-	ldr r2, _080D4420 @ =gUnknown_202063C
+	ldr r2, _080D4420 @ =gSprites
 	ldr r5, _080D4424 @ =gUnknown_3004FF0
 	ldr r0, _080D4428 @ =gUnknown_2023BC4
 	ldrb r3, [r0]
@@ -237,7 +237,7 @@ _080D43B0:
 	adds r4, 0x1C
 	adds r0, r4
 	ldr r2, [r0]
-	ldr r0, _080D442C @ =nullsub_8
+	ldr r0, _080D442C @ =SpriteCallbackDummy
 	cmp r2, r0
 	bne _080D43E8
 	movs r0, 0x2
@@ -284,10 +284,10 @@ _080D441A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D4420: .4byte gUnknown_202063C
+_080D4420: .4byte gSprites
 _080D4424: .4byte gUnknown_3004FF0
 _080D4428: .4byte gUnknown_2023BC4
-_080D442C: .4byte nullsub_8
+_080D442C: .4byte SpriteCallbackDummy
 _080D4430: .4byte gUnknown_2024018
 _080D4434: .4byte gUnknown_3004FE0
 _080D4438: .4byte sub_80D4310
@@ -362,7 +362,7 @@ _080D4460:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080D4578 @ =gUnknown_202063C
+	ldr r1, _080D4578 @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 	ldr r4, _080D457C @ =gUnknown_3004FF0
@@ -398,7 +398,7 @@ _080D4500:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080D4578 @ =gUnknown_202063C
+	ldr r1, _080D4578 @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 	ldr r5, _080D457C @ =gUnknown_3004FF0
@@ -444,7 +444,7 @@ _080D4568: .4byte gUnknown_2024018
 _080D456C: .4byte gUnknown_2023BC4
 _080D4570: .4byte gUnknown_2022B4C
 _080D4574: .4byte gUnknown_3004FFC
-_080D4578: .4byte gUnknown_202063C
+_080D4578: .4byte gSprites
 _080D457C: .4byte gUnknown_3004FF0
 _080D4580: .4byte gUnknown_2023BCE
 _080D4584: .4byte gUnknown_2024284
@@ -455,7 +455,7 @@ _080D458C: .4byte sub_80D4358
 	thumb_func_start sub_80D4590
 sub_80D4590: @ 80D4590
 	push {lr}
-	ldr r2, _080D45C4 @ =gUnknown_202063C
+	ldr r2, _080D45C4 @ =gSprites
 	ldr r1, _080D45C8 @ =gUnknown_2023D44
 	ldr r0, _080D45CC @ =gUnknown_2023BC4
 	ldrb r0, [r0]
@@ -480,7 +480,7 @@ _080D45BE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D45C4: .4byte gUnknown_202063C
+_080D45C4: .4byte gSprites
 _080D45C8: .4byte gUnknown_2023D44
 _080D45CC: .4byte gUnknown_2023BC4
 	thumb_func_end sub_80D4590
@@ -542,7 +542,7 @@ _080D463C: .4byte gUnknown_2024284
 	thumb_func_start sub_80D4640
 sub_80D4640: @ 80D4640
 	push {r4-r6,lr}
-	ldr r6, _080D4698 @ =gUnknown_202063C
+	ldr r6, _080D4698 @ =gSprites
 	ldr r5, _080D469C @ =gUnknown_2023D44
 	ldr r4, _080D46A0 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -582,7 +582,7 @@ _080D4690:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D4698: .4byte gUnknown_202063C
+_080D4698: .4byte gSprites
 _080D469C: .4byte gUnknown_2023D44
 _080D46A0: .4byte gUnknown_2023BC4
 _080D46A4: .4byte gUnknown_3004FF0
@@ -611,7 +611,7 @@ sub_80D46A8: @ 80D46A8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _080D4710 @ =gUnknown_202063C
+	ldr r4, _080D4710 @ =gSprites
 	adds r0, r4
 	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
@@ -636,7 +636,7 @@ _080D46FC:
 _080D4704: .4byte gUnknown_2024018
 _080D4708: .4byte gUnknown_2023BC4
 _080D470C: .4byte gUnknown_2023D44
-_080D4710: .4byte gUnknown_202063C
+_080D4710: .4byte gSprites
 _080D4714: .4byte gUnknown_3004FF0
 	thumb_func_end sub_80D46A8
 
@@ -662,7 +662,7 @@ sub_80D4730: @ 80D4730
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
-	ldr r2, _080D4774 @ =gUnknown_202063C
+	ldr r2, _080D4774 @ =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -687,7 +687,7 @@ sub_80D4730: @ 80D4730
 	.align 2, 0
 _080D476C: .4byte gUnknown_2023D44
 _080D4770: .4byte gUnknown_2023BC4
-_080D4774: .4byte gUnknown_202063C
+_080D4774: .4byte gSprites
 _080D4778: .4byte gUnknown_2024005
 _080D477C:
 	ldrh r0, [r4, 0x30]
@@ -721,7 +721,7 @@ _080D47A6:
 	thumb_func_start sub_80D47AC
 sub_80D47AC: @ 80D47AC
 	push {r4,lr}
-	ldr r2, _080D4800 @ =gUnknown_202063C
+	ldr r2, _080D4800 @ =gSprites
 	ldr r0, _080D4804 @ =gUnknown_3004FF0
 	ldr r4, _080D4808 @ =gUnknown_2023BC4
 	ldrb r3, [r4]
@@ -733,7 +733,7 @@ sub_80D47AC: @ 80D47AC
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, _080D480C @ =nullsub_8
+	ldr r0, _080D480C @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _080D47F8
 	ldr r0, _080D4810 @ =gUnknown_2024018
@@ -763,10 +763,10 @@ _080D47F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D4800: .4byte gUnknown_202063C
+_080D4800: .4byte gSprites
 _080D4804: .4byte gUnknown_3004FF0
 _080D4808: .4byte gUnknown_2023BC4
-_080D480C: .4byte nullsub_8
+_080D480C: .4byte SpriteCallbackDummy
 _080D4810: .4byte gUnknown_2024018
 _080D4814: .4byte gUnknown_3004FE0
 _080D4818: .4byte sub_80D481C
@@ -859,7 +859,7 @@ sub_80D484C: @ 80D484C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080D4934 @ =gUnknown_202063C
+	ldr r1, _080D4934 @ =gSprites
 	adds r0, r1
 	movs r1, 0
 	bl StartSpriteAnim
@@ -902,7 +902,7 @@ _080D4924: .4byte c3_0802FDF4
 _080D4928: .4byte gUnknown_2023BCE
 _080D492C: .4byte gUnknown_2024284
 _080D4930: .4byte gUnknown_2023D44
-_080D4934: .4byte gUnknown_202063C
+_080D4934: .4byte gSprites
 _080D4938: .4byte gUnknown_3004FF0
 _080D493C: .4byte gUnknown_3004FE0
 _080D4940: .4byte sub_80D47AC
@@ -935,7 +935,7 @@ sub_80D4944: @ 80D4944
 	adds r0, r2, 0
 	bl sub_80F1720
 _080D4976:
-	ldr r5, _080D49D4 @ =gUnknown_202063C
+	ldr r5, _080D49D4 @ =gSprites
 	ldr r0, _080D49D8 @ =gUnknown_3004FFC
 	ldrb r2, [r4]
 	adds r0, r2, r0
@@ -947,7 +947,7 @@ _080D4976:
 	adds r0, 0x1C
 	adds r0, r3, r0
 	ldr r1, [r0]
-	ldr r0, _080D49DC @ =nullsub_8
+	ldr r0, _080D49DC @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _080D49BC
 	ldr r0, [r6]
@@ -978,9 +978,9 @@ _080D49C4: .4byte gUnknown_2024018
 _080D49C8: .4byte gUnknown_2023BC4
 _080D49CC: .4byte gUnknown_2023BCE
 _080D49D0: .4byte gUnknown_2024284
-_080D49D4: .4byte gUnknown_202063C
+_080D49D4: .4byte gSprites
 _080D49D8: .4byte gUnknown_3004FFC
-_080D49DC: .4byte nullsub_8
+_080D49DC: .4byte SpriteCallbackDummy
 _080D49E0: .4byte gUnknown_3004FE0
 _080D49E4: .4byte sub_80D484C
 	thumb_func_end sub_80D4944
@@ -3397,7 +3397,7 @@ LinkPartnerHandleLoadPokeSprite: @ 80D5DB4
 	ldrb r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
-	ldr r5, _080D5EBC @ =gUnknown_202063C
+	ldr r5, _080D5EBC @ =gSprites
 	ldrb r0, [r6]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -3456,7 +3456,7 @@ _080D5EAC: .4byte gUnknown_2023BC4
 _080D5EB0: .4byte gUnknown_2024284
 _080D5EB4: .4byte gUnknown_20244DC
 _080D5EB8: .4byte gUnknown_2023D44
-_080D5EBC: .4byte gUnknown_202063C
+_080D5EBC: .4byte gSprites
 _080D5EC0: .4byte 0x0000ff10
 _080D5EC4: .4byte gUnknown_2024024
 _080D5EC8: .4byte gUnknown_3004FE0
@@ -3588,7 +3588,7 @@ sub_80D5F40: @ 80D5F40
 	ldr r4, _080D609C @ =gUnknown_2023D44
 	adds r4, r6, r4
 	strb r0, [r4]
-	ldr r5, _080D60A0 @ =gUnknown_202063C
+	ldr r5, _080D60A0 @ =gSprites
 	mov r0, r9
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3647,7 +3647,7 @@ sub_80D5F40: @ 80D5F40
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _080D60A8 @ =nullsub_8
+	ldr r1, _080D60A8 @ =SpriteCallbackDummy
 	str r1, [r0]
 	movs r0, 0
 	movs r1, 0xFF
@@ -3676,9 +3676,9 @@ _080D6090: .4byte sub_8033E3C
 _080D6094: .4byte gUnknown_3004FFC
 _080D6098: .4byte gUnknown_20244DC
 _080D609C: .4byte gUnknown_2023D44
-_080D60A0: .4byte gUnknown_202063C
+_080D60A0: .4byte gSprites
 _080D60A4: .4byte gUnknown_2024024
-_080D60A8: .4byte nullsub_8
+_080D60A8: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80D5F40
 
 	thumb_func_start LinkPartnerHandleReturnPokeToBall
@@ -3721,7 +3721,7 @@ _080D60F4:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _080D6134 @ =gUnknown_202063C
+	ldr r4, _080D6134 @ =gSprites
 	adds r0, r4
 	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
@@ -3744,7 +3744,7 @@ _080D612A:
 	bx r0
 	.align 2, 0
 _080D6130: .4byte gUnknown_2023D44
-_080D6134: .4byte gUnknown_202063C
+_080D6134: .4byte gSprites
 _080D6138: .4byte gUnknown_3004FF0
 	thumb_func_end LinkPartnerHandleReturnPokeToBall
 
@@ -3930,7 +3930,7 @@ _080D6258:
 	ldrb r1, [r5]
 	adds r1, r6
 	strb r0, [r1]
-	ldr r4, _080D6328 @ =gUnknown_202063C
+	ldr r4, _080D6328 @ =gSprites
 	ldrb r3, [r5]
 	adds r0, r3, r6
 	ldrb r0, [r0]
@@ -3988,7 +3988,7 @@ _080D6318: .4byte gUnknown_2023BC4
 _080D631C: .4byte gUnknown_20244DC
 _080D6320: .4byte gUnknown_8239F8C
 _080D6324: .4byte gUnknown_2023D44
-_080D6328: .4byte gUnknown_202063C
+_080D6328: .4byte gSprites
 _080D632C: .4byte 0x0000fffe
 _080D6330: .4byte sub_8033EEC
 _080D6334: .4byte gUnknown_3004FE0
@@ -4014,7 +4014,7 @@ sub_80D6348: @ 80D6348
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, _080D63DC @ =gUnknown_202063C
+	ldr r5, _080D63DC @ =gSprites
 	adds r0, r5
 	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r4]
@@ -4062,7 +4062,7 @@ sub_80D6348: @ 80D6348
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _080D63E8 @ =nullsub_8
+	ldr r1, _080D63E8 @ =SpriteCallbackDummy
 	bl StoreSpriteCallbackInData6
 	ldr r1, _080D63EC @ =gUnknown_3004FE0
 	ldrb r0, [r4]
@@ -4076,10 +4076,10 @@ sub_80D6348: @ 80D6348
 	.align 2, 0
 _080D63D4: .4byte gUnknown_2023D44
 _080D63D8: .4byte gUnknown_2023BC4
-_080D63DC: .4byte gUnknown_202063C
+_080D63DC: .4byte gSprites
 _080D63E0: .4byte 0x0000ffd8
 _080D63E4: .4byte sub_8075590
-_080D63E8: .4byte nullsub_8
+_080D63E8: .4byte SpriteCallbackDummy
 _080D63EC: .4byte gUnknown_3004FE0
 _080D63F0: .4byte sub_80D42A8
 	thumb_func_end sub_80D6348
@@ -4149,7 +4149,7 @@ _080D6448:
 	negs r1, r1
 	movs r0, 0x10
 	bl PlaySE12WithPanning
-	ldr r2, _080D64CC @ =gUnknown_202063C
+	ldr r2, _080D64CC @ =gSprites
 	ldr r3, _080D64D0 @ =gUnknown_2023D44
 	ldrb r0, [r5]
 	adds r0, r3
@@ -4191,7 +4191,7 @@ _080D64BE:
 	.align 2, 0
 _080D64C4: .4byte gUnknown_2023BCE
 _080D64C8: .4byte gUnknown_2024284
-_080D64CC: .4byte gUnknown_202063C
+_080D64CC: .4byte gSprites
 _080D64D0: .4byte gUnknown_2023D44
 _080D64D4: .4byte sub_8012110
 _080D64D8: .4byte gUnknown_3004FE0
@@ -5057,7 +5057,7 @@ _080D6B6C: .4byte gUnknown_2022870
 	thumb_func_start LinkPartnerHandleHitAnimation
 LinkPartnerHandleHitAnimation: @ 80D6B70
 	push {r4,lr}
-	ldr r3, _080D6B98 @ =gUnknown_202063C
+	ldr r3, _080D6B98 @ =gSprites
 	ldr r2, _080D6B9C @ =gUnknown_2023D44
 	ldr r4, _080D6BA0 @ =gUnknown_2023BC4
 	ldrb r0, [r4]
@@ -5075,7 +5075,7 @@ LinkPartnerHandleHitAnimation: @ 80D6B70
 	bl sub_80D49E8
 	b _080D6BCE
 	.align 2, 0
-_080D6B98: .4byte gUnknown_202063C
+_080D6B98: .4byte gSprites
 _080D6B9C: .4byte gUnknown_2023D44
 _080D6BA0: .4byte gUnknown_2023BC4
 _080D6BA4:
@@ -5242,7 +5242,7 @@ sub_80D6CD4: @ 80D6CD4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _080D6DE4 @ =gUnknown_202063C
+	ldr r4, _080D6DE4 @ =gSprites
 	adds r0, r4
 	bl oamt_add_pos2_onto_pos1
 	ldrb r0, [r6]
@@ -5360,7 +5360,7 @@ _080D6DC2:
 	.align 2, 0
 _080D6DDC: .4byte gUnknown_2023D44
 _080D6DE0: .4byte gUnknown_2023BC4
-_080D6DE4: .4byte gUnknown_202063C
+_080D6DE4: .4byte gSprites
 _080D6DE8: .4byte 0x0000ffd8
 _080D6DEC: .4byte sub_8075590
 _080D6DF0: .4byte sub_80335F8
@@ -5385,7 +5385,7 @@ _080D6E0C:
 	adds r1, r4, r2
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	ldr r2, _080D6EA8 @ =gUnknown_202063C
+	ldr r2, _080D6EA8 @ =gSprites
 	ldr r1, _080D6EAC @ =gUnknown_2023D44
 	ldr r5, _080D6EB0 @ =gUnknown_2023BC4
 	ldrb r0, [r5]
@@ -5452,7 +5452,7 @@ _080D6E86:
 	bx r0
 	.align 2, 0
 _080D6EA4: .4byte gUnknown_8239FD4
-_080D6EA8: .4byte gUnknown_202063C
+_080D6EA8: .4byte gSprites
 _080D6EAC: .4byte gUnknown_2023D44
 _080D6EB0: .4byte gUnknown_2023BC4
 _080D6EB4: .4byte sub_80D6ED0
@@ -5780,7 +5780,7 @@ LinkPartnerHandleSpriteInvisibility: @ 80D7144
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D718A
-	ldr r3, _080D7198 @ =gUnknown_202063C
+	ldr r3, _080D7198 @ =gSprites
 	ldr r0, _080D719C @ =gUnknown_2023D44
 	ldrb r1, [r4]
 	adds r0, r1, r0
@@ -5813,7 +5813,7 @@ _080D718A:
 	bx r0
 	.align 2, 0
 _080D7194: .4byte gUnknown_2023BC4
-_080D7198: .4byte gUnknown_202063C
+_080D7198: .4byte gSprites
 _080D719C: .4byte gUnknown_2023D44
 _080D71A0: .4byte gUnknown_2022BC4
 	thumb_func_end LinkPartnerHandleSpriteInvisibility

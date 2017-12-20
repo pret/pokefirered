@@ -17923,7 +17923,7 @@ PutMonIconOnLvlUpBox: @ 8026688
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0802674C @ =gUnknown_202063C
+	ldr r2, _0802674C @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -17947,7 +17947,7 @@ _0802673C: .4byte 0x0000ffff
 _08026740: .4byte 0xd75a0000
 _08026744: .4byte 0x0000d75a
 _08026748: .4byte gUnknown_82507C8
-_0802674C: .4byte gUnknown_202063C
+_0802674C: .4byte gSprites
 _08026750: .4byte gUnknown_202297C
 	thumb_func_end PutMonIconOnLvlUpBox
 

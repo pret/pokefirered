@@ -201,7 +201,7 @@ EvolutionScene: @ 80CDDF4
 	bl remove_some_task
 	bl ResetTasks
 	bl FreeAllSpritePalettes
-	ldr r0, _080CE0A4 @ =gUnknown_3003E58
+	ldr r0, _080CE0A4 @ =gReservedSpritePaletteCount
 	movs r2, 0x4
 	strb r2, [r0]
 	movs r0, 0x64
@@ -260,7 +260,7 @@ EvolutionScene: @ 80CDDF4
 	bl sub_803F7D4
 	ldr r0, _080CE0C0 @ =gUnknown_20244DC
 	mov r8, r0
-	ldr r1, _080CE0C4 @ =gUnknown_8231CFC
+	ldr r1, _080CE0C4 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
@@ -271,7 +271,7 @@ EvolutionScene: @ 80CDDF4
 	lsls r1, r0, 24
 	lsrs r3, r1, 24
 	strb r0, [r2]
-	ldr r7, _080CE0C8 @ =gUnknown_202063C
+	ldr r7, _080CE0C8 @ =gSprites
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
@@ -314,7 +314,7 @@ EvolutionScene: @ 80CDDF4
 	mov r0, r10
 	movs r1, 0x3
 	bl sub_803F7D4
-	ldr r0, _080CE0C4 @ =gUnknown_8231CFC
+	ldr r0, _080CE0C4 @ =gDummySpriteAffineAnimTable
 	mov r1, r8
 	str r0, [r1, 0x10]
 	mov r0, r8
@@ -410,7 +410,7 @@ _080CE094: .4byte gUnknown_202297E
 _080CE098: .4byte gUnknown_2022980
 _080CE09C: .4byte gUnknown_2022982
 _080CE0A0: .4byte gUnknown_2022B50
-_080CE0A4: .4byte gUnknown_3003E58
+_080CE0A4: .4byte gReservedSpritePaletteCount
 _080CE0A8: .4byte gUnknown_2039A20
 _080CE0AC: .4byte gStringVar1
 _080CE0B0: .4byte gStringVar2
@@ -418,8 +418,8 @@ _080CE0B4: .4byte gUnknown_8245EE0
 _080CE0B8: .4byte gUnknown_82350AC
 _080CE0BC: .4byte gUnknown_202401C
 _080CE0C0: .4byte gUnknown_20244DC
-_080CE0C4: .4byte gUnknown_8231CFC
-_080CE0C8: .4byte gUnknown_202063C
+_080CE0C4: .4byte gDummySpriteAffineAnimTable
+_080CE0C8: .4byte gSprites
 _080CE0CC: .4byte nullsub_10
 _080CE0D0: .4byte sub_80CE8DC
 _080CE0D4: .4byte gUnknown_3005090
@@ -520,7 +520,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
-	ldr r1, _080CE2B4 @ =gUnknown_3003E58
+	ldr r1, _080CE2B4 @ =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	lsls r0, r5, 3
@@ -544,7 +544,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	movs r1, 0x3
 	bl sub_803F7D4
 	ldr r0, _080CE2C0 @ =gUnknown_20244DC
-	ldr r1, _080CE2C4 @ =gUnknown_8231CFC
+	ldr r1, _080CE2C4 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
@@ -555,7 +555,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	lsls r2, r0, 24
 	lsrs r2, 24
 	strb r0, [r1, 0x1]
-	ldr r3, _080CE2C8 @ =gUnknown_202063C
+	ldr r3, _080CE2C8 @ =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -617,12 +617,12 @@ _080CE2A4: .4byte gUnknown_202297E
 _080CE2A8: .4byte gUnknown_2022980
 _080CE2AC: .4byte gUnknown_2022982
 _080CE2B0: .4byte gUnknown_2022B50
-_080CE2B4: .4byte gUnknown_3003E58
+_080CE2B4: .4byte gReservedSpritePaletteCount
 _080CE2B8: .4byte gUnknown_82350AC
 _080CE2BC: .4byte gUnknown_202401C
 _080CE2C0: .4byte gUnknown_20244DC
-_080CE2C4: .4byte gUnknown_8231CFC
-_080CE2C8: .4byte gUnknown_202063C
+_080CE2C4: .4byte gDummySpriteAffineAnimTable
+_080CE2C8: .4byte gSprites
 _080CE2CC: .4byte nullsub_10
 _080CE2D0: .4byte nullsub_76
 _080CE2D4: .4byte sub_80D0050
@@ -688,7 +688,7 @@ _080CE34C:
 	bl SetVBlankCallback
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
-	ldr r1, _080CE398 @ =gUnknown_3003E58
+	ldr r1, _080CE398 @ =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	ldr r0, _080CE39C @ =gUnknown_2022974
@@ -713,7 +713,7 @@ _080CE34C:
 	strh r1, [r0]
 	b _080CE4EC
 	.align 2, 0
-_080CE398: .4byte gUnknown_3003E58
+_080CE398: .4byte gReservedSpritePaletteCount
 _080CE39C: .4byte gUnknown_2022974
 _080CE3A0: .4byte gUnknown_2022976
 _080CE3A4: .4byte gUnknown_2022978
@@ -795,7 +795,7 @@ _080CE45C:
 	movs r1, 0x1
 	bl sub_803F7D4
 	ldr r0, _080CE4B4 @ =gUnknown_20244DC
-	ldr r1, _080CE4B8 @ =gUnknown_8231CFC
+	ldr r1, _080CE4B8 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
@@ -806,7 +806,7 @@ _080CE45C:
 	lsls r2, r0, 24
 	lsrs r2, 24
 	strb r0, [r1, 0x1]
-	ldr r3, _080CE4C0 @ =gUnknown_202063C
+	ldr r3, _080CE4C0 @ =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -833,9 +833,9 @@ _080CE45C:
 	b _080CE534
 	.align 2, 0
 _080CE4B4: .4byte gUnknown_20244DC
-_080CE4B8: .4byte gUnknown_8231CFC
+_080CE4B8: .4byte gDummySpriteAffineAnimTable
 _080CE4BC: .4byte gUnknown_2039A20
-_080CE4C0: .4byte gUnknown_202063C
+_080CE4C0: .4byte gSprites
 _080CE4C4: .4byte nullsub_10
 _080CE4C8: .4byte gMain
 _080CE4CC:
@@ -924,7 +924,7 @@ TradeEvolutionScene: @ 80CE540
 	ldr r2, _080CE6B8 @ =gUnknown_8245EE0
 	adds r1, r2
 	bl StringCopy
-	ldr r1, _080CE6BC @ =gUnknown_2021CCC
+	ldr r1, _080CE6BC @ =gAffineAnimsDisabled
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r4, 0
@@ -971,7 +971,7 @@ TradeEvolutionScene: @ 80CE540
 	movs r1, 0x1
 	bl sub_803F7D4
 	ldr r0, _080CE6CC @ =gUnknown_20244DC
-	ldr r1, _080CE6D0 @ =gUnknown_8231CFC
+	ldr r1, _080CE6D0 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
@@ -982,7 +982,7 @@ TradeEvolutionScene: @ 80CE540
 	lsls r1, r0, 24
 	lsrs r6, r1, 24
 	strb r0, [r2, 0x1]
-	ldr r3, _080CE6D4 @ =gUnknown_202063C
+	ldr r3, _080CE6D4 @ =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -1067,13 +1067,13 @@ TradeEvolutionScene: @ 80CE540
 _080CE6B0: .4byte gStringVar1
 _080CE6B4: .4byte gStringVar2
 _080CE6B8: .4byte gUnknown_8245EE0
-_080CE6BC: .4byte gUnknown_2021CCC
+_080CE6BC: .4byte gAffineAnimsDisabled
 _080CE6C0: .4byte gUnknown_2039A20
 _080CE6C4: .4byte gUnknown_82350AC
 _080CE6C8: .4byte gUnknown_202401C
 _080CE6CC: .4byte gUnknown_20244DC
-_080CE6D0: .4byte gUnknown_8231CFC
-_080CE6D4: .4byte gUnknown_202063C
+_080CE6D0: .4byte gDummySpriteAffineAnimTable
+_080CE6D4: .4byte gSprites
 _080CE6D8: .4byte nullsub_10
 _080CE6DC: .4byte sub_80CF53C
 _080CE6E0: .4byte gUnknown_3005090
@@ -1447,7 +1447,7 @@ _080CEA2C:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r2, _080CEA84 @ =gUnknown_202063C
+	ldr r2, _080CEA84 @ =gSprites
 	ldr r0, _080CEA88 @ =gUnknown_2039A20
 	ldr r0, [r0]
 	ldrb r1, [r0]
@@ -1479,7 +1479,7 @@ _080CEA2C:
 	bl ShowBg
 	bl _080CF528
 	.align 2, 0
-_080CEA84: .4byte gUnknown_202063C
+_080CEA84: .4byte gSprites
 _080CEA88: .4byte gUnknown_2039A20
 _080CEA8C: .4byte gUnknown_3005090
 _080CEA90:
@@ -2897,7 +2897,7 @@ _080CF6D0:
 _080CF6E0:
 	movs r0, 0x1
 	bl InitMovingBackgroundTask
-	ldr r2, _080CF728 @ =gUnknown_202063C
+	ldr r2, _080CF728 @ =gSprites
 	ldr r0, _080CF72C @ =gUnknown_2039A20
 	ldr r0, [r0]
 	ldrb r1, [r0]
@@ -2926,7 +2926,7 @@ _080CF6E0:
 	bl _080D003A
 	.align 2, 0
 _080CF724: .4byte gUnknown_2037AB8
-_080CF728: .4byte gUnknown_202063C
+_080CF728: .4byte gSprites
 _080CF72C: .4byte gUnknown_2039A20
 _080CF730: .4byte gUnknown_2023E82
 _080CF734: .4byte gUnknown_3005090
@@ -3273,7 +3273,7 @@ _080CFA14:
 	b _080D003A
 _080CFA28:
 	bl m4aMPlayAllStop
-	ldr r2, _080CFA64 @ =gUnknown_202063C
+	ldr r2, _080CFA64 @ =gSprites
 	ldr r0, _080CFA68 @ =gUnknown_2039A20
 	ldr r0, [r0]
 	ldrb r1, [r0]
@@ -3300,7 +3300,7 @@ _080CFA28:
 	b _080CFB1A
 	.align 2, 0
 _080CFA60: .4byte gUnknown_2023E82
-_080CFA64: .4byte gUnknown_202063C
+_080CFA64: .4byte gSprites
 _080CFA68: .4byte gUnknown_2039A20
 _080CFA6C: .4byte 0x0004001c
 _080CFA70: .4byte 0x00007fff

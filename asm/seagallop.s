@@ -635,7 +635,7 @@ sub_81473C4: @ 81473C4
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08147400 @ =gUnknown_202063C
+	ldr r2, _08147400 @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -653,7 +653,7 @@ sub_81473C4: @ 81473C4
 	b _08147410
 	.align 2, 0
 _081473FC: .4byte gUnknown_846AF60
-_08147400: .4byte gUnknown_202063C
+_08147400: .4byte gSprites
 _08147404:
 	movs r0, 0xF0
 	strh r0, [r4, 0x20]
@@ -734,7 +734,7 @@ sub_814746C: @ 814746C
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _081474AC @ =gUnknown_202063C
+	ldr r1, _081474AC @ =gSprites
 	adds r0, r1
 	movs r1, 0x1
 	bl StartSpriteAnim
@@ -744,7 +744,7 @@ _081474A2:
 	bx r0
 	.align 2, 0
 _081474A8: .4byte gUnknown_846AFD0
-_081474AC: .4byte gUnknown_202063C
+_081474AC: .4byte gSprites
 	thumb_func_end sub_814746C
 
 	thumb_func_start sub_81474B0

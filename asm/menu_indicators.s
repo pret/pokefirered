@@ -117,7 +117,7 @@ AddScrollIndicatorArrowObject: @ 8133990
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08133A18 @ =gUnknown_202063C
+	ldr r1, _08133A18 @ =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -152,7 +152,7 @@ AddScrollIndicatorArrowObject: @ 8133990
 	bx r1
 	.align 2, 0
 _08133A14: .4byte gUnknown_84632A4
-_08133A18: .4byte gUnknown_202063C
+_08133A18: .4byte gSprites
 _08133A1C: .4byte gUnknown_846325C
 	thumb_func_end AddScrollIndicatorArrowObject
 
@@ -252,7 +252,7 @@ _08133A8E:
 	ldr r0, _08133B38 @ =0x0000ffff
 	cmp r1, r0
 	bne _08133B1C
-	ldr r5, _08133B3C @ =gUnknown_202063C
+	ldr r5, _08133B3C @ =gSprites
 	ldrb r0, [r7, 0xC]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -291,7 +291,7 @@ _08133B2C: .4byte gUnknown_8463308
 _08133B30: .4byte sub_8133BA4
 _08133B34: .4byte gUnknown_3005098
 _08133B38: .4byte 0x0000ffff
-_08133B3C: .4byte gUnknown_202063C
+_08133B3C: .4byte gSprites
 	thumb_func_end AddScrollIndicatorArrowPair
 
 	thumb_func_start AddScrollIndicatorArrowPairParametrized
@@ -362,7 +362,7 @@ sub_8133BA4: @ 8133BA4
 	ldrh r0, [r4, 0x8]
 	cmp r5, r0
 	bne _08133BDC
-	ldr r3, _08133BD8 @ =gUnknown_202063C
+	ldr r3, _08133BD8 @ =gSprites
 	ldrb r1, [r4, 0xC]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -375,9 +375,9 @@ sub_8133BA4: @ 8133BA4
 	b _08133BF2
 	.align 2, 0
 _08133BD4: .4byte gUnknown_3005098
-_08133BD8: .4byte gUnknown_202063C
+_08133BD8: .4byte gSprites
 _08133BDC:
-	ldr r3, _08133C10 @ =gUnknown_202063C
+	ldr r3, _08133C10 @ =gSprites
 	ldrb r1, [r4, 0xC]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -404,7 +404,7 @@ _08133BF2:
 	orrs r1, r2
 	b _08133C28
 	.align 2, 0
-_08133C10: .4byte gUnknown_202063C
+_08133C10: .4byte gSprites
 _08133C14:
 	ldrb r1, [r4, 0xD]
 	lsls r0, r1, 4
@@ -449,7 +449,7 @@ _08133C58:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _08133C8C @ =gUnknown_202063C
+	ldr r4, _08133C8C @ =gSprites
 	adds r0, r4
 	bl DestroySprite
 	ldrb r1, [r5, 0xD]
@@ -466,7 +466,7 @@ _08133C58:
 	.align 2, 0
 _08133C84: .4byte gUnknown_3005098
 _08133C88: .4byte 0x0000ffff
-_08133C8C: .4byte gUnknown_202063C
+_08133C8C: .4byte gSprites
 	thumb_func_end RemoveScrollIndicatorArrowPair
 
 	thumb_func_start ListMenuAddCursorObjectInternal
@@ -788,7 +788,7 @@ _08133EA6:
 	ldrh r1, [r6, 0x4]
 	bl ListMenuSetUpRedOutlineCursorSpriteOamTable
 	mov r1, sp
-	ldr r0, _08133F98 @ =gUnknown_8231D00
+	ldr r0, _08133F98 @ =gDummySpriteTemplate
 	ldm r0!, {r2,r3,r7}
 	stm r1!, {r2,r3,r7}
 	ldm r0!, {r2,r3,r7}
@@ -810,7 +810,7 @@ _08133EA6:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r7, _08133F9C @ =gUnknown_202063C
+	ldr r7, _08133F9C @ =gSprites
 	adds r0, r7
 	adds r1, r5, 0
 	bl SetSubspriteTables
@@ -871,8 +871,8 @@ _08133F7E:
 _08133F8C: .4byte gUnknown_8463308
 _08133F90: .4byte nullsub_94
 _08133F94: .4byte gUnknown_3005098
-_08133F98: .4byte gUnknown_8231D00
-_08133F9C: .4byte gUnknown_202063C
+_08133F98: .4byte gDummySpriteTemplate
+_08133F9C: .4byte gSprites
 _08133FA0: .4byte 0x0000ffff
 	thumb_func_end ListMenuAddRedOutlineCursorObject
 
@@ -890,7 +890,7 @@ ListMenuUpdateRedOutlineCursorObject: @ 8133FA4
 	lsls r3, 3
 	ldr r0, _08133FE0 @ =gUnknown_3005098
 	adds r3, r0
-	ldr r5, _08133FE4 @ =gUnknown_202063C
+	ldr r5, _08133FE4 @ =gSprites
 	ldrb r4, [r3, 0xC]
 	lsls r0, r4, 4
 	adds r0, r4
@@ -910,7 +910,7 @@ ListMenuUpdateRedOutlineCursorObject: @ 8133FA4
 	bx r0
 	.align 2, 0
 _08133FE0: .4byte gUnknown_3005098
-_08133FE4: .4byte gUnknown_202063C
+_08133FE4: .4byte gSprites
 	thumb_func_end ListMenuUpdateRedOutlineCursorObject
 
 	thumb_func_start ListMenuRemoveRedOutlineCursorObject
@@ -941,7 +941,7 @@ _08134016:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0813403C @ =gUnknown_202063C
+	ldr r1, _0813403C @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 	adds r0, r5, 0
@@ -952,7 +952,7 @@ _08134016:
 	.align 2, 0
 _08134034: .4byte gUnknown_3005098
 _08134038: .4byte 0x0000ffff
-_0813403C: .4byte gUnknown_202063C
+_0813403C: .4byte gSprites
 	thumb_func_end ListMenuRemoveRedOutlineCursorObject
 
 	thumb_func_start ObjectCB_RedArrowCursor
@@ -1066,7 +1066,7 @@ _081340D6:
 	movs r3, 0
 	bl CreateSprite
 	strb r0, [r4]
-	ldr r3, _08134170 @ =gUnknown_202063C
+	ldr r3, _08134170 @ =gSprites
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -1107,7 +1107,7 @@ _08134160: .4byte gUnknown_8463308
 _08134164: .4byte nullsub_95
 _08134168: .4byte gUnknown_3005098
 _0813416C: .4byte gUnknown_84632F0
-_08134170: .4byte gUnknown_202063C
+_08134170: .4byte gSprites
 _08134174: .4byte 0x0000ffff
 	thumb_func_end ListMenuAddRedArrowCursorObject
 
@@ -1121,7 +1121,7 @@ ListMenuUpdateRedArrowCursorObject: @ 8134178
 	lsls r3, 3
 	ldr r0, _081341A8 @ =gUnknown_3005098
 	adds r3, r0
-	ldr r5, _081341AC @ =gUnknown_202063C
+	ldr r5, _081341AC @ =gSprites
 	ldrb r4, [r3]
 	lsls r0, r4, 4
 	adds r0, r4
@@ -1139,7 +1139,7 @@ ListMenuUpdateRedArrowCursorObject: @ 8134178
 	bx r0
 	.align 2, 0
 _081341A8: .4byte gUnknown_3005098
-_081341AC: .4byte gUnknown_202063C
+_081341AC: .4byte gSprites
 	thumb_func_end ListMenuUpdateRedArrowCursorObject
 
 	thumb_func_start ListMenuRemoveRedArrowCursorObject
@@ -1168,7 +1168,7 @@ _081341D8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _081341FC @ =gUnknown_202063C
+	ldr r1, _081341FC @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 	adds r0, r5, 0
@@ -1179,7 +1179,7 @@ _081341D8:
 	.align 2, 0
 _081341F4: .4byte gUnknown_3005098
 _081341F8: .4byte 0x0000ffff
-_081341FC: .4byte gUnknown_202063C
+_081341FC: .4byte gSprites
 	thumb_func_end ListMenuRemoveRedArrowCursorObject
 
 	.align 2, 0 @ Don't pad with nop.

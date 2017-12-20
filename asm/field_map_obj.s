@@ -74,7 +74,7 @@ sub_805DE8C: @ 805DE8C
 	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0805DF2C @ =gUnknown_202063C
+	ldr r1, _0805DF2C @ =gSprites
 	mov r10, r1
 	lsls r4, r0, 4
 	adds r4, r0
@@ -134,7 +134,7 @@ sub_805DE8C: @ 805DE8C
 	bx r0
 	.align 2, 0
 _0805DF28: .4byte gUnknown_83A0010
-_0805DF2C: .4byte gUnknown_202063C
+_0805DF2C: .4byte gSprites
 	thumb_func_end sub_805DE8C
 
 	thumb_func_start sub_805DF30
@@ -982,7 +982,7 @@ RemoveFieldObjectInternal: @ 805E510
 	ands r0, r1
 	orrs r0, r2
 	str r0, [sp, 0x4]
-	ldr r2, _0805E558 @ =gUnknown_202063C
+	ldr r2, _0805E558 @ =gSprites
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -1004,7 +1004,7 @@ RemoveFieldObjectInternal: @ 805E510
 	bx r0
 	.align 2, 0
 _0805E554: .4byte 0xffff0000
-_0805E558: .4byte gUnknown_202063C
+_0805E558: .4byte gSprites
 	thumb_func_end RemoveFieldObjectInternal
 
 	thumb_func_start unref_sub_808D958
@@ -1135,7 +1135,7 @@ _0805E650:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, _0805E728 @ =gUnknown_202063C
+	ldr r1, _0805E728 @ =gSprites
 	adds r4, r0, r1
 	mov r1, r9
 	lsls r0, r1, 16
@@ -1237,7 +1237,7 @@ _0805E718:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805E728: .4byte gUnknown_202063C
+_0805E728: .4byte gSprites
 	thumb_func_end sub_805E590
 
 	thumb_func_start SpawnFieldObject
@@ -1301,7 +1301,7 @@ SpawnFieldObject: @ 805E72C
 	.align 2, 0
 _0805E7A4: .4byte 0xffff0000
 _0805E7A8:
-	ldr r4, _0805E7EC @ =gUnknown_202063C
+	ldr r4, _0805E7EC @ =gSprites
 	ldr r1, _0805E7F0 @ =gUnknown_2036E38
 	lsls r0, r2, 3
 	adds r0, r2
@@ -1337,7 +1337,7 @@ _0805E7DE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805E7EC: .4byte gUnknown_202063C
+_0805E7EC: .4byte gSprites
 _0805E7F0: .4byte gUnknown_2036E38
 	thumb_func_end SpawnFieldObject
 
@@ -1592,7 +1592,7 @@ _0805E9A8:
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
-	ldr r0, _0805E9F4 @ =gUnknown_202063C
+	ldr r0, _0805E9F4 @ =gSprites
 	adds r4, r0
 	adds r0, r4, 0
 	bl SetSubspriteTables
@@ -1611,7 +1611,7 @@ _0805E9E4:
 	bx r1
 	.align 2, 0
 _0805E9F0: .4byte 0x0000ffff
-_0805E9F4: .4byte gUnknown_202063C
+_0805E9F4: .4byte gSprites
 	thumb_func_end AddPseudoFieldObject
 
 	thumb_func_start sub_805E9F8
@@ -1683,7 +1683,7 @@ sub_805E9F8: @ 805E9F8
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
-	ldr r1, _0805EB40 @ =gUnknown_202063C
+	ldr r1, _0805EB40 @ =gSprites
 	adds r5, r0, r1
 	ldrh r0, [r4, 0x8]
 	lsls r0, 16
@@ -1771,7 +1771,7 @@ _0805EB24:
 	.align 2, 0
 _0805EB38: .4byte sub_8068FA8
 _0805EB3C: .4byte 0x0000ffff
-_0805EB40: .4byte gUnknown_202063C
+_0805EB40: .4byte gSprites
 	thumb_func_end sub_805E9F8
 
 	thumb_func_start sub_805EB44
@@ -1795,7 +1795,7 @@ sub_805EB44: @ 805EB44
 	adds r0, r6, 0
 	bl GetFieldObjectGraphicsInfo
 	adds r7, r0, 0
-	ldr r1, _0805EC24 @ =nullsub_8
+	ldr r1, _0805EC24 @ =SpriteCallbackDummy
 	add r3, sp, 0x18
 	adds r0, r6, 0
 	mov r2, sp
@@ -1820,7 +1820,7 @@ sub_805EB44: @ 805EB44
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, _0805EC2C @ =gUnknown_202063C
+	ldr r1, _0805EC2C @ =gSprites
 	adds r4, r0, r1
 	ldrh r0, [r7, 0xA]
 	lsls r0, 16
@@ -1884,9 +1884,9 @@ _0805EC14:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805EC24: .4byte nullsub_8
+_0805EC24: .4byte SpriteCallbackDummy
 _0805EC28: .4byte 0x0000ffff
-_0805EC2C: .4byte gUnknown_202063C
+_0805EC2C: .4byte gSprites
 	thumb_func_end sub_805EB44
 
 	thumb_func_start sub_805EC30
@@ -2263,7 +2263,7 @@ _0805EEDC:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, _0805EFF0 @ =gUnknown_202063C
+	ldr r1, _0805EFF0 @ =gSprites
 	adds r4, r0, r1
 	mov r1, r9
 	lsls r0, r1, 16
@@ -2379,7 +2379,7 @@ _0805EFE0: .4byte gUnknown_2031DEC
 _0805EFE4: .4byte gUnknown_2036E38
 _0805EFE8: .4byte 0xffff0000
 _0805EFEC: .4byte 0x0000ffff
-_0805EFF0: .4byte gUnknown_202063C
+_0805EFF0: .4byte gSprites
 	thumb_func_end sub_805EE3C
 
 	thumb_func_start sub_805EFF4
@@ -2459,7 +2459,7 @@ sub_805F060: @ 805F060
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805F1CC @ =gUnknown_202063C
+	ldr r1, _0805F1CC @ =gSprites
 	adds r4, r0, r1
 	ldrb r1, [r5, 0xC]
 	movs r0, 0xF
@@ -2622,7 +2622,7 @@ _0805F1BA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F1CC: .4byte gUnknown_202063C
+_0805F1CC: .4byte gSprites
 _0805F1D0: .4byte 0x000003ff
 _0805F1D4: .4byte 0xfffffc00
 	thumb_func_end sub_805F060
@@ -2677,7 +2677,7 @@ FieldObjectTurn: @ 805F218
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r5, _0805F264 @ =gUnknown_202063C
+	ldr r5, _0805F264 @ =gSprites
 	adds r4, r5
 	ldrb r0, [r6, 0x18]
 	lsls r0, 28
@@ -2700,7 +2700,7 @@ _0805F25E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F264: .4byte gUnknown_202063C
+_0805F264: .4byte gSprites
 	thumb_func_end FieldObjectTurn
 
 	thumb_func_start FieldObjectTurnByLocalIdAndMap
@@ -2915,7 +2915,7 @@ sub_805F3A8: @ 805F3A8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805F3FC @ =gUnknown_202063C
+	ldr r1, _0805F3FC @ =gSprites
 	adds r0, r1
 	ldrb r1, [r2, 0x3]
 	movs r3, 0x4
@@ -2930,7 +2930,7 @@ _0805F3EE:
 	bx r0
 	.align 2, 0
 _0805F3F8: .4byte gUnknown_2036E38
-_0805F3FC: .4byte gUnknown_202063C
+_0805F3FC: .4byte gSprites
 	thumb_func_end sub_805F3A8
 
 	thumb_func_start sub_805F400
@@ -3003,7 +3003,7 @@ sub_805F448: @ 805F448
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805F498 @ =gUnknown_202063C
+	ldr r1, _0805F498 @ =gSprites
 	adds r0, r1
 	strh r5, [r0, 0x24]
 	strh r4, [r0, 0x26]
@@ -3014,20 +3014,20 @@ _0805F48C:
 	bx r0
 	.align 2, 0
 _0805F494: .4byte gUnknown_2036E38
-_0805F498: .4byte gUnknown_202063C
+_0805F498: .4byte gSprites
 	thumb_func_end sub_805F448
 
 	thumb_func_start gpu_pal_allocator_reset__manage_upper_four
 gpu_pal_allocator_reset__manage_upper_four: @ 805F49C
 	push {lr}
 	bl FreeAllSpritePalettes
-	ldr r1, _0805F4AC @ =gUnknown_3003E58
+	ldr r1, _0805F4AC @ =gReservedSpritePaletteCount
 	movs r0, 0xC
 	strb r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F4AC: .4byte gUnknown_3003E58
+_0805F4AC: .4byte gReservedSpritePaletteCount
 	thumb_func_end gpu_pal_allocator_reset__manage_upper_four
 
 	thumb_func_start sub_805F4B0
@@ -3392,7 +3392,7 @@ sub_805F724: @ 805F724
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805F7C0 @ =gUnknown_202063C
+	ldr r1, _0805F7C0 @ =gSprites
 	adds r7, r0, r1
 	ldrb r0, [r6, 0x5]
 	bl GetFieldObjectGraphicsInfo
@@ -3453,7 +3453,7 @@ _0805F7B6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F7C0: .4byte gUnknown_202063C
+_0805F7C0: .4byte gSprites
 	thumb_func_end sub_805F724
 
 	thumb_func_start sub_805F7C4
@@ -3688,7 +3688,7 @@ AddCameraObject: @ 805F950
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0805F990 @ =gUnknown_202063C
+	ldr r2, _0805F990 @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -3707,7 +3707,7 @@ AddCameraObject: @ 805F950
 	bx r1
 	.align 2, 0
 _0805F98C: .4byte gUnknown_835B944
-_0805F990: .4byte gUnknown_202063C
+_0805F990: .4byte gSprites
 	thumb_func_end AddCameraObject
 
 	thumb_func_start ObjectCB_CameraObject
@@ -3735,7 +3735,7 @@ _0805F9B8: .4byte gUnknown_835B95C
 	thumb_func_start CameraObject_0
 CameraObject_0: @ 805F9BC
 	push {lr}
-	ldr r3, _0805F9F4 @ =gUnknown_202063C
+	ldr r3, _0805F9F4 @ =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -3762,13 +3762,13 @@ CameraObject_0: @ 805F9BC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F9F4: .4byte gUnknown_202063C
+_0805F9F4: .4byte gSprites
 	thumb_func_end CameraObject_0
 
 	thumb_func_start CameraObject_1
 CameraObject_1: @ 805F9F8
 	push {r4,r5,lr}
-	ldr r3, _0805FA2C @ =gUnknown_202063C
+	ldr r3, _0805FA2C @ =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -3793,13 +3793,13 @@ CameraObject_1: @ 805F9F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FA2C: .4byte gUnknown_202063C
+_0805FA2C: .4byte gSprites
 	thumb_func_end CameraObject_1
 
 	thumb_func_start CameraObject_2
 CameraObject_2: @ 805FA30
 	push {r4,lr}
-	ldr r4, _0805FA5C @ =gUnknown_202063C
+	ldr r4, _0805FA5C @ =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -3821,14 +3821,14 @@ CameraObject_2: @ 805FA30
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FA5C: .4byte gUnknown_202063C
+_0805FA5C: .4byte gSprites
 	thumb_func_end CameraObject_2
 
 	thumb_func_start FindCameraObject
 FindCameraObject: @ 805FA60
 	push {r4,r5,lr}
 	movs r3, 0
-	ldr r4, _0805FA8C @ =gUnknown_202063C
+	ldr r4, _0805FA8C @ =gSprites
 	adds r5, r4, 0
 	adds r5, 0x1C
 _0805FA6A:
@@ -3850,7 +3850,7 @@ _0805FA6A:
 	adds r0, r2, 0
 	b _0805FAA0
 	.align 2, 0
-_0805FA8C: .4byte gUnknown_202063C
+_0805FA8C: .4byte gSprites
 _0805FA90: .4byte ObjectCB_CameraObject
 _0805FA94:
 	adds r0, r3, 0x1
@@ -3939,7 +3939,7 @@ CopySprite: @ 805FB08
 	lsls r3, 24
 	lsrs r7, r3, 24
 	movs r5, 0
-	ldr r1, _0805FB50 @ =gUnknown_202063C
+	ldr r1, _0805FB50 @ =gSprites
 _0805FB22:
 	lsls r0, r5, 4
 	adds r0, r5
@@ -3963,7 +3963,7 @@ _0805FB22:
 	strb r7, [r0]
 	b _0805FB5E
 	.align 2, 0
-_0805FB50: .4byte gUnknown_202063C
+_0805FB50: .4byte gSprites
 _0805FB54:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -3993,7 +3993,7 @@ obj_unfreeze: @ 805FB6C
 	lsls r3, 24
 	lsrs r7, r3, 24
 	movs r5, 0x3F
-	ldr r3, _0805FBC0 @ =gUnknown_202063C
+	ldr r3, _0805FBC0 @ =gSprites
 	movs r2, 0x1
 	negs r2, r2
 _0805FB8A:
@@ -4023,7 +4023,7 @@ _0805FB8A:
 	lsrs r0, 24
 	b _0805FBD2
 	.align 2, 0
-_0805FBC0: .4byte gUnknown_202063C
+_0805FBC0: .4byte gSprites
 _0805FBC4:
 	subs r0, r1, 0x1
 	lsls r0, 16
@@ -4497,7 +4497,7 @@ npc_paltag_set_load: @ 805FECC
 	movs r1, 0
 	movs r2, 0x6
 	bl pal_patch_for_npc_range
-	ldr r1, _0805FF14 @ =gUnknown_3003E58
+	ldr r1, _0805FF14 @ =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	b _0805FF2A
@@ -4506,7 +4506,7 @@ _0805FF04: .4byte gUnknown_203709A
 _0805FF08: .4byte 0x000011ff
 _0805FF0C: .4byte gUnknown_2037098
 _0805FF10: .4byte gUnknown_83A5330
-_0805FF14: .4byte gUnknown_3003E58
+_0805FF14: .4byte gReservedSpritePaletteCount
 _0805FF18:
 	ldr r0, _0805FF30 @ =gUnknown_83A5330
 	ldrb r1, [r2]
@@ -12226,7 +12226,7 @@ npc_set_running_behaviour_etc: @ 8063610
 	strb r3, [r0]
 	adds r0, 0x1
 	strb r3, [r0]
-	ldr r4, _08063654 @ =gUnknown_202063C
+	ldr r4, _08063654 @ =gSprites
 	mov r0, r12
 	ldrb r2, [r0, 0x4]
 	lsls r0, r2, 4
@@ -12251,7 +12251,7 @@ npc_set_running_behaviour_etc: @ 8063610
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063654: .4byte gUnknown_202063C
+_08063654: .4byte gSprites
 _08063658: .4byte gUnknown_839FBC8
 	thumb_func_end npc_set_running_behaviour_etc
 
@@ -12698,7 +12698,7 @@ IsBerryTreeSparkling: @ 8063980
 	lsls r0, 24
 	cmp r0, 0
 	bne _080639CC
-	ldr r3, _080639C4 @ =gUnknown_202063C
+	ldr r3, _080639C4 @ =gSprites
 	ldr r2, _080639C8 @ =gUnknown_2036E38
 	mov r0, sp
 	ldrb r1, [r0]
@@ -12719,7 +12719,7 @@ IsBerryTreeSparkling: @ 8063980
 	movs r0, 0x1
 	b _080639CE
 	.align 2, 0
-_080639C4: .4byte gUnknown_202063C
+_080639C4: .4byte gSprites
 _080639C8: .4byte gUnknown_2036E38
 _080639CC:
 	movs r0, 0
@@ -12744,7 +12744,7 @@ sub_80639D4: @ 80639D4
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063A12
-	ldr r3, _08063A18 @ =gUnknown_202063C
+	ldr r3, _08063A18 @ =gSprites
 	ldr r2, _08063A1C @ =gUnknown_2036E38
 	mov r0, sp
 	ldrb r1, [r0]
@@ -12766,7 +12766,7 @@ _08063A12:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063A18: .4byte gUnknown_202063C
+_08063A18: .4byte gSprites
 _08063A1C: .4byte gUnknown_2036E38
 	thumb_func_end sub_80639D4
 
@@ -13166,7 +13166,7 @@ _08063CCE:
 	movs r1, 0x7F
 	ands r0, r1
 	strb r0, [r4]
-	ldr r2, _08063CFC @ =gUnknown_202063C
+	ldr r2, _08063CFC @ =gSprites
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -13179,7 +13179,7 @@ _08063CF4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08063CFC: .4byte gUnknown_202063C
+_08063CFC: .4byte gSprites
 	thumb_func_end sub_8063CA4
 
 	thumb_func_start FieldObjectForceSetSpecialAnim
@@ -13223,7 +13223,7 @@ FieldObjectClearAnim: @ 8063D34
 	movs r2, 0x7F
 	ands r1, r2
 	strb r1, [r0]
-	ldr r3, _08063D64 @ =gUnknown_202063C
+	ldr r3, _08063D64 @ =gSprites
 	ldrb r2, [r0, 0x4]
 	lsls r1, r2, 4
 	adds r1, r2
@@ -13239,7 +13239,7 @@ FieldObjectClearAnim: @ 8063D34
 	strh r2, [r0, 0x32]
 	bx lr
 	.align 2, 0
-_08063D64: .4byte gUnknown_202063C
+_08063D64: .4byte gSprites
 	thumb_func_end FieldObjectClearAnim
 
 	thumb_func_start FieldObjectCheckIfSpecialAnimFinishedOrInactive
@@ -21930,7 +21930,7 @@ sub_8067A10: @ 8067A10
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	ldr r2, _08067A6C @ =gUnknown_2021BC8
+	ldr r2, _08067A6C @ =gSpriteCoordOffsetX
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2
@@ -21944,14 +21944,14 @@ sub_8067A10: @ 8067A10
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	ldr r2, _08067A70 @ =gUnknown_2021BCA
+	ldr r2, _08067A70 @ =gSpriteCoordOffsetY
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2
 	b _08067A9C
 	.align 2, 0
-_08067A6C: .4byte gUnknown_2021BC8
-_08067A70: .4byte gUnknown_2021BCA
+_08067A6C: .4byte gSpriteCoordOffsetX
+_08067A70: .4byte gSpriteCoordOffsetY
 _08067A74:
 	ldrh r1, [r4, 0x24]
 	ldrh r0, [r4, 0x20]

@@ -151,7 +151,7 @@ CreatePreEvoSparkleSet1: @ 80F5A44
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _080F5A8E
-	ldr r4, _080F5A98 @ =gUnknown_202063C
+	ldr r4, _080F5A98 @ =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -181,7 +181,7 @@ _080F5A8E:
 	bx r0
 	.align 2, 0
 _080F5A94: .4byte gUnknown_841EEF8
-_080F5A98: .4byte gUnknown_202063C
+_080F5A98: .4byte gSprites
 _080F5A9C: .4byte SpriteCB_PreEvoSparkleSet1
 	thumb_func_end CreatePreEvoSparkleSet1
 
@@ -258,7 +258,7 @@ CreatePreEvoSparkleSet2: @ 80F5B14
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _080F5B6A
-	ldr r4, _080F5B74 @ =gUnknown_202063C
+	ldr r4, _080F5B74 @ =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -294,7 +294,7 @@ _080F5B6A:
 	bx r0
 	.align 2, 0
 _080F5B70: .4byte gUnknown_841EEF8
-_080F5B74: .4byte gUnknown_202063C
+_080F5B74: .4byte gSprites
 _080F5B78: .4byte SpriteCB_PreEvoSparkleSet2
 	thumb_func_end CreatePreEvoSparkleSet2
 
@@ -353,7 +353,7 @@ CreatePostEvoSparkleSet1: @ 80F5BC4
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _080F5C1A
-	ldr r4, _080F5C24 @ =gUnknown_202063C
+	ldr r4, _080F5C24 @ =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -387,7 +387,7 @@ _080F5C1A:
 	bx r0
 	.align 2, 0
 _080F5C20: .4byte gUnknown_841EEF8
-_080F5C24: .4byte gUnknown_202063C
+_080F5C24: .4byte gSprites
 _080F5C28: .4byte SpriteCB_PostEvoSparkleSet1
 	thumb_func_end CreatePostEvoSparkleSet1
 
@@ -518,7 +518,7 @@ CreatePostEvoSparkleSet2: @ 80F5CFC
 	cmp r4, 0x40
 	beq _080F5D6C
 	bl Random
-	ldr r6, _080F5D7C @ =gUnknown_202063C
+	ldr r6, _080F5D7C @ =gSprites
 	lsls r5, r4, 4
 	adds r5, r4
 	lsls r5, 2
@@ -565,7 +565,7 @@ _080F5D6C:
 	bx r0
 	.align 2, 0
 _080F5D78: .4byte gUnknown_841EEF8
-_080F5D7C: .4byte gUnknown_202063C
+_080F5D7C: .4byte gSprites
 _080F5D80: .4byte SpriteCB_PostEvoSparkleSet2
 	thumb_func_end CreatePostEvoSparkleSet2
 
@@ -1330,7 +1330,7 @@ _080F62CE:
 	movs r2, 0
 	movs r3, 0
 	bl SetOamMatrix
-	ldr r1, _080F63F4 @ =gUnknown_202063C
+	ldr r1, _080F63F4 @ =gSprites
 	mov r9, r1
 	lsls r2, r5, 4
 	adds r2, r5
@@ -1420,7 +1420,7 @@ _080F62CE:
 _080F63E8: .4byte sub_80F6400
 _080F63EC: .4byte 0x00007fff
 _080F63F0: .4byte gUnknown_3005090
-_080F63F4: .4byte gUnknown_202063C
+_080F63F4: .4byte gSprites
 _080F63F8: .4byte nullsub_86
 _080F63FC: .4byte gUnknown_20377F8
 	thumb_func_end sub_80F62B4
@@ -1649,7 +1649,7 @@ PreEvoInvisible_PostEvoVisible_KillTask: @ 80F6590
 	push {r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080F6638 @ =gUnknown_202063C
+	ldr r1, _080F6638 @ =gSprites
 	mov r8, r1
 	ldr r1, _080F663C @ =gUnknown_3005090
 	lsls r4, r0, 2
@@ -1728,7 +1728,7 @@ PreEvoInvisible_PostEvoVisible_KillTask: @ 80F6590
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6638: .4byte gUnknown_202063C
+_080F6638: .4byte gSprites
 _080F663C: .4byte gUnknown_3005090
 	thumb_func_end PreEvoInvisible_PostEvoVisible_KillTask
 
@@ -1739,7 +1739,7 @@ PreEvoVisible_PostEvoInvisible_KillTask: @ 80F6640
 	push {r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080F66E8 @ =gUnknown_202063C
+	ldr r1, _080F66E8 @ =gSprites
 	mov r8, r1
 	ldr r1, _080F66EC @ =gUnknown_3005090
 	lsls r4, r0, 2
@@ -1818,7 +1818,7 @@ PreEvoVisible_PostEvoInvisible_KillTask: @ 80F6640
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F66E8: .4byte gUnknown_202063C
+_080F66E8: .4byte gSprites
 _080F66EC: .4byte gUnknown_3005090
 	thumb_func_end PreEvoVisible_PostEvoInvisible_KillTask
 

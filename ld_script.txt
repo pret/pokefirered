@@ -94,7 +94,7 @@ SECTIONS {
         src/window_8bpp.o(.text);
         src/text.o(.text);
         asm/text.o(.text);
-        asm/sprite.o(.text);
+        src/sprite.o(.text);
         asm/string_util.o(.text);
         asm/link.o(.text);
         asm/multiboot.o(.text);
@@ -399,6 +399,8 @@ SECTIONS {
         src/text_printer.o(.rodata);
         src/window.o(.rodata);
         src/text.o(.rodata);
+        data/text.o(.rodata);
+        src/sprite.o(.rodata);
         data/data.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

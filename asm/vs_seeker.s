@@ -1135,7 +1135,7 @@ sub_810CF04: @ 810CF04
 	ldrb r2, [r1, 0x8]
 	cmp r0, r2
 	bcc _0810CF4C
-	ldr r2, _0810CF48 @ =gUnknown_202063C
+	ldr r2, _0810CF48 @ =gSprites
 	ldrb r1, [r1, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -1150,7 +1150,7 @@ sub_810CF04: @ 810CF04
 	.align 2, 0
 _0810CF40: .4byte gUnknown_2036E38
 _0810CF44: .4byte gUnknown_2036DFC
-_0810CF48: .4byte gUnknown_202063C
+_0810CF48: .4byte gSprites
 _0810CF4C:
 	movs r0, 0
 _0810CF4E:

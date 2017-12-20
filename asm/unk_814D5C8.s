@@ -60,14 +60,14 @@ _0814D63A:
 	lsls r1, 19
 	ldr r2, _0814D658 @ =0x01000200
 	bl CpuSet
-	ldr r0, _0814D65C @ =gUnknown_3003E58
+	ldr r0, _0814D65C @ =gReservedSpritePaletteCount
 	strb r4, [r0]
 	movs r0, 0x3
 	bl sub_815C980
 	b _0814D878
 	.align 2, 0
 _0814D658: .4byte 0x01000200
-_0814D65C: .4byte gUnknown_3003E58
+_0814D65C: .4byte gReservedSpritePaletteCount
 _0814D660:
 	bl ResetPaletteFade
 	bl ResetSpriteData
@@ -242,7 +242,7 @@ _0814D7F4:
 	bl sub_80FCD74
 	adds r0, r5, 0
 	bl sub_814ECE0
-	ldr r0, _0814D82C @ =gUnknown_2021BCA
+	ldr r0, _0814D82C @ =gSpriteCoordOffsetY
 	ldrh r1, [r0]
 	negs r1, r1
 	lsls r1, 16
@@ -259,7 +259,7 @@ _0814D7F4:
 	bl ChangeBgY
 	b _0814D878
 	.align 2, 0
-_0814D82C: .4byte gUnknown_2021BCA
+_0814D82C: .4byte gSpriteCoordOffsetY
 _0814D830:
 	ldr r2, _0814D874 @ =gUnknown_2037AB8
 	ldrb r1, [r2, 0x8]
@@ -451,7 +451,7 @@ _0814D9C2:
 sub_814D9CC: @ 814D9CC
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _0814DA00 @ =gUnknown_2021BCA
+	ldr r0, _0814DA00 @ =gSpriteCoordOffsetY
 	ldrh r1, [r4, 0x2C]
 	ldrh r2, [r4, 0x2A]
 	adds r1, r2
@@ -475,7 +475,7 @@ _0814D9F8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0814DA00: .4byte gUnknown_2021BCA
+_0814DA00: .4byte gSpriteCoordOffsetY
 	thumb_func_end sub_814D9CC
 
 	thumb_func_start sub_814DA04
@@ -484,15 +484,15 @@ sub_814DA04: @ 814DA04
 	ldr r2, _0814DA18 @ =0x0000ff98
 	strh r2, [r0, 0x2A]
 	strh r1, [r0, 0x2C]
-	ldr r0, _0814DA1C @ =gUnknown_2021BC8
+	ldr r0, _0814DA1C @ =gSpriteCoordOffsetX
 	strh r1, [r0]
-	ldr r0, _0814DA20 @ =gUnknown_2021BCA
+	ldr r0, _0814DA20 @ =gSpriteCoordOffsetY
 	strh r2, [r0]
 	bx lr
 	.align 2, 0
 _0814DA18: .4byte 0x0000ff98
-_0814DA1C: .4byte gUnknown_2021BC8
-_0814DA20: .4byte gUnknown_2021BCA
+_0814DA1C: .4byte gSpriteCoordOffsetX
+_0814DA20: .4byte gSpriteCoordOffsetY
 	thumb_func_end sub_814DA04
 
 	thumb_func_start sub_814DA24
@@ -539,7 +539,7 @@ _0814DA42:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _0814DB78 @ =gUnknown_202063C
+	ldr r0, _0814DB78 @ =gSprites
 	adds r1, r0
 	str r1, [r6]
 	ldrb r0, [r1, 0x5]
@@ -664,7 +664,7 @@ _0814DB60:
 	.align 2, 0
 _0814DB70: .4byte gUnknown_846F2EC
 _0814DB74: .4byte gUnknown_846F470
-_0814DB78: .4byte gUnknown_202063C
+_0814DB78: .4byte gSprites
 _0814DB7C: .4byte 0x0000fff0
 _0814DB80: .4byte 0xffff8000
 	thumb_func_end sub_814DA24
@@ -736,7 +736,7 @@ _0814DBEA:
 	ands r0, r2
 	cmp r1, r0
 	blt _0814DC16
-	ldr r0, _0814DC20 @ =nullsub_8
+	ldr r0, _0814DC20 @ =SpriteCallbackDummy
 	str r0, [r5, 0x1C]
 	adds r0, r5, 0
 	bl FreeSpriteOamMatrix
@@ -748,7 +748,7 @@ _0814DC16:
 	bx r0
 	.align 2, 0
 _0814DC1C: .4byte 0x00007fff
-_0814DC20: .4byte nullsub_8
+_0814DC20: .4byte SpriteCallbackDummy
 	thumb_func_end sub_814DB84
 
 	thumb_func_start sub_814DC24
@@ -2837,9 +2837,9 @@ sub_814ECE0: @ 814ECE0
 	ldr r0, _0814EEE0 @ =0x0000ff98
 	strh r0, [r6, 0x2A]
 	strh r5, [r6, 0x2C]
-	ldr r1, _0814EEE4 @ =gUnknown_2021BC8
+	ldr r1, _0814EEE4 @ =gSpriteCoordOffsetX
 	strh r5, [r1]
-	ldr r1, _0814EEE8 @ =gUnknown_2021BCA
+	ldr r1, _0814EEE8 @ =gSpriteCoordOffsetY
 	strh r0, [r1]
 	ldr r4, _0814EEEC @ =gUnknown_846F2F8
 _0814ECF6:
@@ -2866,7 +2866,7 @@ _0814ECF6:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, _0814EEF8 @ =gUnknown_202063C
+	ldr r1, _0814EEF8 @ =gSprites
 	adds r0, r1
 	str r0, [r3]
 	ldrb r1, [r0, 0x5]
@@ -2917,7 +2917,7 @@ _0814ED5A:
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
-	ldr r0, _0814EEF8 @ =gUnknown_202063C
+	ldr r0, _0814EEF8 @ =gSprites
 	adds r1, r0
 	str r1, [r3]
 	ldrb r0, [r1, 0x5]
@@ -2978,7 +2978,7 @@ _0814EDD8:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, _0814EEF8 @ =gUnknown_202063C
+	ldr r1, _0814EEF8 @ =gSprites
 	adds r0, r1
 	str r0, [r3]
 	ldrb r1, [r0, 0x5]
@@ -3027,7 +3027,7 @@ _0814EE3E:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, _0814EEF8 @ =gUnknown_202063C
+	ldr r1, _0814EEF8 @ =gSprites
 	adds r0, r1
 	str r0, [r3]
 	ldrb r1, [r0, 0x5]
@@ -3084,12 +3084,12 @@ _0814EED8:
 	bx r0
 	.align 2, 0
 _0814EEE0: .4byte 0x0000ff98
-_0814EEE4: .4byte gUnknown_2021BC8
-_0814EEE8: .4byte gUnknown_2021BCA
+_0814EEE4: .4byte gSpriteCoordOffsetX
+_0814EEE8: .4byte gSpriteCoordOffsetY
 _0814EEEC: .4byte gUnknown_846F2F8
 _0814EEF0: .4byte gUnknown_846F320
 _0814EEF4: .4byte gUnknown_846F410
-_0814EEF8: .4byte gUnknown_202063C
+_0814EEF8: .4byte gSprites
 _0814EEFC: .4byte gUnknown_846F428
 _0814EF00: .4byte gUnknown_846F2D6
 _0814EF04: .4byte gUnknown_846F440
@@ -3218,7 +3218,7 @@ sub_814EFFC: @ 814EFFC
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	movs r1, 0
-	ldr r5, _0814F040 @ =nullsub_8
+	ldr r5, _0814F040 @ =SpriteCallbackDummy
 	adds r2, r3, 0
 	adds r2, 0x2E
 	movs r4, 0
@@ -3250,7 +3250,7 @@ _0814F00A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814F040: .4byte nullsub_8
+_0814F040: .4byte SpriteCallbackDummy
 	thumb_func_end sub_814EFFC
 
 	thumb_func_start sub_814F044

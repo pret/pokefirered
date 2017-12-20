@@ -1285,7 +1285,7 @@ sub_8146060: @ 8146060
 	bl sub_8096FD4
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, _081461C0 @ =nullsub_8
+	ldr r1, _081461C0 @ =SpriteCallbackDummy
 	str r7, [sp]
 	str r7, [sp, 0x4]
 	movs r2, 0xDC
@@ -1296,7 +1296,7 @@ sub_8146060: @ 8146060
 	lsls r3, 1
 	adds r1, r3
 	strb r0, [r1]
-	ldr r2, _081461C4 @ =gUnknown_202063C
+	ldr r2, _081461C4 @ =gSprites
 	ldr r0, [r4]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -1388,7 +1388,7 @@ _0814610E:
 	mov r2, r9
 	str r2, [sp]
 	str r2, [sp, 0x4]
-	ldr r1, _081461C0 @ =nullsub_8
+	ldr r1, _081461C0 @ =SpriteCallbackDummy
 	adds r2, r5, 0
 	movs r3, 0x88
 	bl sub_8096ECC
@@ -1405,7 +1405,7 @@ _0814610E:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _081461C4 @ =gUnknown_202063C
+	ldr r1, _081461C4 @ =gSprites
 	adds r0, r1
 	ldrb r2, [r0, 0x5]
 	movs r3, 0xD
@@ -1434,8 +1434,8 @@ _081461AC:
 	bx r0
 	.align 2, 0
 _081461BC: .4byte gUnknown_203F3C8
-_081461C0: .4byte nullsub_8
-_081461C4: .4byte gUnknown_202063C
+_081461C0: .4byte SpriteCallbackDummy
+_081461C4: .4byte gSprites
 _081461C8: .4byte gUnknown_8467F58
 _081461CC: .4byte gUnknown_8467F60
 _081461D0: .4byte 0x0000017d
@@ -1458,7 +1458,7 @@ sub_81461D8: @ 81461D8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08146280 @ =gUnknown_202063C
+	ldr r1, _08146280 @ =gSprites
 	adds r0, r1
 	bl sub_8097070
 _081461FC:
@@ -1487,7 +1487,7 @@ _08146214:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, _08146280 @ =gUnknown_202063C
+	ldr r5, _08146280 @ =gSprites
 	adds r0, r5
 	bl DestroySprite
 	ldr r1, [r7]
@@ -1527,7 +1527,7 @@ _08146274:
 	bx r0
 	.align 2, 0
 _0814627C: .4byte gUnknown_203F3C8
-_08146280: .4byte gUnknown_202063C
+_08146280: .4byte gSprites
 _08146284: .4byte 0x0000017d
 	thumb_func_end sub_81461D8
 

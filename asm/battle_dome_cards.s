@@ -428,7 +428,7 @@ _0810BE86:
 	bl uns_builder_assign_animtable1
 	mov r1, r8
 	str r1, [r5, 0xC]
-	ldr r0, _0810BF34 @ =gUnknown_8231CFC
+	ldr r0, _0810BF34 @ =gDummySpriteAffineAnimTable
 	str r0, [r5, 0x10]
 	ldr r0, _0810BF38 @ =nullsub_91
 	str r0, [r5, 0x14]
@@ -454,7 +454,7 @@ _0810BE86:
 	ldr r0, _0810BF30 @ =0x0000ffff
 	cmp r10, r0
 	bne _0810BEF6
-	ldr r0, _0810BF3C @ =gUnknown_202063C
+	ldr r0, _0810BF3C @ =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -496,9 +496,9 @@ _0810BF16:
 _0810BF28: .4byte gUnknown_203AD40
 _0810BF2C: .4byte gUnknown_8453184
 _0810BF30: .4byte 0x0000ffff
-_0810BF34: .4byte gUnknown_8231CFC
+_0810BF34: .4byte gDummySpriteAffineAnimTable
 _0810BF38: .4byte nullsub_91
-_0810BF3C: .4byte gUnknown_202063C
+_0810BF3C: .4byte gSprites
 _0810BF40: .4byte gUnknown_203AD58
 	thumb_func_end oamt_spawn_poke_or_trainer_picture
 
@@ -603,7 +603,7 @@ _0810BFE4:
 	lsls r6, r4, 4
 	cmp r1, r0
 	beq _0810C018
-	ldr r1, _0810C048 @ =gUnknown_202063C
+	ldr r1, _0810C048 @ =gSprites
 	adds r0, r6, r4
 	lsls r0, 2
 	adds r0, r1
@@ -616,7 +616,7 @@ _0810BFE4:
 _0810C018:
 	adds r0, r6, r4
 	lsls r0, 2
-	ldr r1, _0810C048 @ =gUnknown_202063C
+	ldr r1, _0810C048 @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 	mov r0, r8
@@ -636,7 +636,7 @@ _0810C03A:
 	bx r1
 	.align 2, 0
 _0810C044: .4byte 0x0000ffff
-_0810C048: .4byte gUnknown_202063C
+_0810C048: .4byte gSprites
 _0810C04C: .4byte gUnknown_8453178
 	thumb_func_end sub_810BFA4
 

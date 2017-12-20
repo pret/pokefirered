@@ -1069,7 +1069,7 @@ SetObjectSubpriorityByZCoord: @ 80682F8
 	movs r5, 0
 	ldrsb r5, [r3, r5]
 	ldrh r4, [r1, 0x22]
-	ldr r3, _08068338 @ =gUnknown_2021BCA
+	ldr r3, _08068338 @ =gSpriteCoordOffsetY
 	subs r4, r5
 	ldrh r3, [r3]
 	adds r4, r3
@@ -1092,7 +1092,7 @@ SetObjectSubpriorityByZCoord: @ 80682F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068338: .4byte gUnknown_2021BCA
+_08068338: .4byte gSpriteCoordOffsetY
 _0806833C: .4byte gUnknown_83A706C
 	thumb_func_end SetObjectSubpriorityByZCoord
 

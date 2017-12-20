@@ -98,7 +98,7 @@ sub_80DE134: @ 80DE134
 	adds r2, r5, 0
 	bl CpuFastSet
 	bl GetPlayerAvatarObjectId
-	ldr r2, _080DE1C4 @ =gUnknown_202063C
+	ldr r2, _080DE1C4 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -139,7 +139,7 @@ sub_80DE134: @ 80DE134
 _080DE1B8: .4byte gUnknown_203AAB0
 _080DE1BC: .4byte gUnknown_20371F8
 _080DE1C0: .4byte gUnknown_20375F8
-_080DE1C4: .4byte gUnknown_202063C
+_080DE1C4: .4byte gSprites
 _080DE1C8: .4byte sub_80DE1D0
 _080DE1CC: .4byte gUnknown_3005090
 	thumb_func_end sub_80DE134
@@ -191,7 +191,7 @@ _080DE228:
 	ldr r1, _080DE260 @ =sub_80DE274
 	str r1, [r0]
 	bl GetPlayerAvatarObjectId
-	ldr r2, _080DE264 @ =gUnknown_202063C
+	ldr r2, _080DE264 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -213,7 +213,7 @@ _080DE228:
 	b _080DE26C
 	.align 2, 0
 _080DE260: .4byte sub_80DE274
-_080DE264: .4byte gUnknown_202063C
+_080DE264: .4byte gSprites
 _080DE268:
 	adds r0, r3, 0x1
 	strh r0, [r2]

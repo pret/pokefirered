@@ -531,7 +531,7 @@ sub_80BE7CC: @ 80BE7CC
 	ldr r0, _080BE9D4 @ =gUnknown_83EE8C8
 	str r0, [r4, 0x8]
 	str r7, [r4, 0xC]
-	ldr r0, _080BE9D8 @ =gUnknown_8231CFC
+	ldr r0, _080BE9D8 @ =gDummySpriteAffineAnimTable
 	str r0, [r4, 0x10]
 	ldr r0, _080BE9DC @ =nullsub_62
 	str r0, [r4, 0x14]
@@ -578,7 +578,7 @@ _080BE8BC:
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r0, 2
-	ldr r1, _080BE9E0 @ =gUnknown_202063C
+	ldr r1, _080BE9E0 @ =gSprites
 	adds r0, r1
 	str r0, [r2]
 	lsls r1, r5, 24
@@ -641,7 +641,7 @@ _080BE93A:
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r0, 2
-	ldr r7, _080BE9E0 @ =gUnknown_202063C
+	ldr r7, _080BE9E0 @ =gSprites
 	adds r0, r7
 	str r0, [r1]
 	strh r5, [r0, 0x2E]
@@ -650,7 +650,7 @@ _080BE93A:
 	lsrs r5, r0, 16
 	cmp r5, 0x3
 	bls _080BE914
-	ldr r0, _080BE9F0 @ =nullsub_8
+	ldr r0, _080BE9F0 @ =SpriteCallbackDummy
 	str r0, [r4, 0x14]
 	adds r0, r4, 0
 	movs r1, 0
@@ -705,13 +705,13 @@ _080BE9C8: .4byte gUnknown_8E9CBBC
 _080BE9CC: .4byte gUnknown_8E9CB9C
 _080BE9D0: .4byte gUnknown_83EE830
 _080BE9D4: .4byte gUnknown_83EE8C8
-_080BE9D8: .4byte gUnknown_8231CFC
+_080BE9D8: .4byte gDummySpriteAffineAnimTable
 _080BE9DC: .4byte nullsub_62
-_080BE9E0: .4byte gUnknown_202063C
+_080BE9E0: .4byte gSprites
 _080BE9E4: .4byte gUnknown_83EE890
 _080BE9E8: .4byte sub_80BEA8C
 _080BE9EC: .4byte gUnknown_83EE838
-_080BE9F0: .4byte nullsub_8
+_080BE9F0: .4byte SpriteCallbackDummy
 _080BE9F4:
 	ldr r1, [r6]
 	movs r0, 0
@@ -737,7 +737,7 @@ _080BE9FA:
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
-	ldr r0, _080BEA44 @ =gUnknown_202063C
+	ldr r0, _080BEA44 @ =gSprites
 	adds r1, r0
 	str r1, [r2, 0x24]
 	ldr r3, [sp, 0x4C]
@@ -751,7 +751,7 @@ _080BE9FA:
 	.align 2, 0
 _080BEA3C: .4byte sub_80BEAC8
 _080BEA40: .4byte gUnknown_20399C0
-_080BEA44: .4byte gUnknown_202063C
+_080BEA44: .4byte gSprites
 _080BEA48:
 	ldr r0, _080BEA54 @ =gUnknown_20399C0
 	ldr r0, [r0]
@@ -915,7 +915,7 @@ sub_80BEB20: @ 80BEB20
 	ldr r0, _080BEBA8 @ =gUnknown_83EE958
 	str r0, [sp, 0x8]
 	str r2, [sp, 0xC]
-	ldr r0, _080BEBAC @ =gUnknown_8231CFC
+	ldr r0, _080BEBAC @ =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x10]
 	ldr r0, _080BEBB0 @ =nullsub_62
 	str r0, [sp, 0x14]
@@ -946,13 +946,13 @@ _080BEB9C: .4byte gUnknown_83EE028
 _080BEBA0: .4byte 0xffff0000
 _080BEBA4: .4byte gUnknown_83EE8D0
 _080BEBA8: .4byte gUnknown_83EE958
-_080BEBAC: .4byte gUnknown_8231CFC
+_080BEBAC: .4byte gDummySpriteAffineAnimTable
 _080BEBB0: .4byte nullsub_62
 _080BEBB4:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080BEBCC @ =gUnknown_202063C
+	ldr r1, _080BEBCC @ =gSprites
 	adds r0, r1
 _080BEBBE:
 	add sp, 0x28
@@ -962,7 +962,7 @@ _080BEBBE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BEBCC: .4byte gUnknown_202063C
+_080BEBCC: .4byte gSprites
 	thumb_func_end sub_80BEB20
 
 	thumb_func_start sub_80BEBD0

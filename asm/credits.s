@@ -1742,7 +1742,7 @@ sub_80F47F8: @ 80F47F8
 	.align 2, 0
 _080F481C: .4byte gUnknown_3005098
 _080F4820:
-	ldr r4, _080F4848 @ =gUnknown_202063C
+	ldr r4, _080F4848 @ =gSprites
 	ldrb r0, [r3, 0x1]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -1762,7 +1762,7 @@ _080F4820:
 	adds r0, r4
 	b _080F48BC
 	.align 2, 0
-_080F4848: .4byte gUnknown_202063C
+_080F4848: .4byte gSprites
 _080F484C:
 	ldr r0, _080F4888 @ =gUnknown_203AB40
 	ldr r0, [r0]
@@ -1771,7 +1771,7 @@ _080F484C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080F48C2
-	ldr r4, _080F488C @ =gUnknown_202063C
+	ldr r4, _080F488C @ =gSprites
 	ldrb r0, [r3, 0x1]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -1795,7 +1795,7 @@ _080F484C:
 	b _080F48C2
 	.align 2, 0
 _080F4888: .4byte gUnknown_203AB40
-_080F488C: .4byte gUnknown_202063C
+_080F488C: .4byte gSprites
 _080F4890:
 	movs r0, 0
 	strb r0, [r3]
@@ -1806,7 +1806,7 @@ _080F4896:
 	ldrb r0, [r0]
 	cmp r0, 0xF
 	bne _080F48C2
-	ldr r2, _080F48CC @ =gUnknown_202063C
+	ldr r2, _080F48CC @ =gSprites
 	ldrb r1, [r3, 0x1]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -1830,7 +1830,7 @@ _080F48C2:
 	bx r0
 	.align 2, 0
 _080F48C8: .4byte gUnknown_203AB40
-_080F48CC: .4byte gUnknown_202063C
+_080F48CC: .4byte gSprites
 	thumb_func_end sub_80F47F8
 
 	thumb_func_start sub_80F48D0
@@ -1852,7 +1852,7 @@ sub_80F48D0: @ 80F48D0
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, _080F492C @ =gUnknown_202063C
+	ldr r5, _080F492C @ =gSprites
 	adds r0, r5
 	bl DestroySprite
 	ldrh r0, [r4, 0x8]
@@ -1876,7 +1876,7 @@ _080F491E:
 	.align 2, 0
 _080F4924: .4byte gUnknown_203AB40
 _080F4928: .4byte gUnknown_3005098
-_080F492C: .4byte gUnknown_202063C
+_080F492C: .4byte gSprites
 	thumb_func_end sub_80F48D0
 
 	thumb_func_start sub_80F4930
@@ -2049,7 +2049,7 @@ _080F4A6C:
 	movs r3, 0
 	bl CreateSprite
 	strb r0, [r6, 0x1]
-	ldr r3, _080F4AE4 @ =gUnknown_202063C
+	ldr r3, _080F4AE4 @ =gSprites
 	ldrb r1, [r6, 0x1]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -2088,7 +2088,7 @@ _080F4A6C:
 _080F4AD8: .4byte gUnknown_84129C0
 _080F4ADC: .4byte gUnknown_84129A0
 _080F4AE0: .4byte gUnknown_8414364
-_080F4AE4: .4byte gUnknown_202063C
+_080F4AE4: .4byte gSprites
 _080F4AE8: .4byte 0x00002001
 _080F4AEC: .4byte 0x0000ffff
 _080F4AF0: .4byte gUnknown_841431C
@@ -2184,7 +2184,7 @@ _080F4BA0:
 	movs r3, 0
 	bl CreateSprite
 	strb r0, [r6, 0x6]
-	ldr r3, _080F4BF8 @ =gUnknown_202063C
+	ldr r3, _080F4BF8 @ =gSprites
 	ldrb r1, [r6, 0x6]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -2216,7 +2216,7 @@ _080F4BDE:
 _080F4BEC: .4byte gUnknown_8413DB8
 _080F4BF0: .4byte gUnknown_8413D98
 _080F4BF4: .4byte gUnknown_84143B8
-_080F4BF8: .4byte gUnknown_202063C
+_080F4BF8: .4byte gSprites
 	thumb_func_end sub_80F4930
 
 	.align 2, 0 @ Don't pad with nop.

@@ -96,7 +96,7 @@ sub_8006300: @ 8006300
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08006394 @ =gUnknown_202063C
+	ldr r1, _08006394 @ =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -125,7 +125,7 @@ sub_8006300: @ 8006300
 _08006388: .4byte gUnknown_81EA68C
 _0800638C: .4byte gUnknown_81EA6A4
 _08006390: .4byte gUnknown_81EA6B4
-_08006394: .4byte gUnknown_202063C
+_08006394: .4byte gSprites
 	thumb_func_end sub_8006300
 
 	thumb_func_start sub_8006398
@@ -137,7 +137,7 @@ sub_8006398: @ 8006398
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080063C4 @ =gUnknown_202063C
+	ldr r1, _080063C4 @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 	movs r4, 0x80
@@ -150,7 +150,7 @@ sub_8006398: @ 8006398
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080063C4: .4byte gUnknown_202063C
+_080063C4: .4byte gSprites
 	thumb_func_end sub_8006398
 
 	thumb_func_start DrawKeypadIcon

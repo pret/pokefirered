@@ -7806,7 +7806,7 @@ _08106534:
 	ldr r1, [r7]
 	adds r1, 0x58
 	strb r0, [r1]
-	ldr r2, _081066C4 @ =gUnknown_202063C
+	ldr r2, _081066C4 @ =gSprites
 	mov r10, r2
 	ldr r0, [r7]
 	adds r0, 0x58
@@ -7978,7 +7978,7 @@ _081066B4: .4byte gUnknown_8254784
 _081066B8: .4byte gUnknown_203ACF0
 _081066BC: .4byte gUnknown_8452368
 _081066C0: .4byte 0x0000ffff
-_081066C4: .4byte gUnknown_202063C
+_081066C4: .4byte gSprites
 _081066C8: .4byte gUnknown_844E850
 _081066CC: .4byte gSaveBlock2Ptr
 _081066D0:

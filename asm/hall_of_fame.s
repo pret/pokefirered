@@ -695,7 +695,7 @@ _080F22F2:
 	bl sub_810C1CC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, _080F2390 @ =gUnknown_202063C
+	ldr r3, _080F2390 @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -737,7 +737,7 @@ _080F22F2:
 	.align 2, 0
 _080F2388: .4byte gUnknown_840C298
 _080F238C: .4byte 0x0000ffff
-_080F2390: .4byte gUnknown_202063C
+_080F2390: .4byte gSprites
 _080F2394: .4byte sub_80F3870
 _080F2398: .4byte gUnknown_3005090
 _080F239C: .4byte sub_80F23A0
@@ -760,7 +760,7 @@ sub_80F23A0: @ 80F23A0
 	lsls r0, 2
 	ldr r2, [r2]
 	adds r6, r2, r0
-	ldr r2, _080F2418 @ =gUnknown_202063C
+	ldr r2, _080F2418 @ =gSprites
 	adds r1, 0x5
 	lsls r1, 1
 	adds r1, r3
@@ -803,7 +803,7 @@ _080F2408:
 	.align 2, 0
 _080F2410: .4byte gUnknown_3005090
 _080F2414: .4byte gUnknown_203AB38
-_080F2418: .4byte gUnknown_202063C
+_080F2418: .4byte gSprites
 _080F241C: .4byte 0x000001ff
 _080F2420: .4byte Task_Hof_TryDisplayAnotherMon
 	thumb_func_end sub_80F23A0
@@ -844,7 +844,7 @@ _080F2460: .4byte gUnknown_3005090
 _080F2464: .4byte gUnknown_203AB38
 _080F2468:
 	ldr r2, _080F24E0 @ =gUnknown_203AB34
-	ldr r0, _080F24E4 @ =gUnknown_202063C
+	ldr r0, _080F24E4 @ =gSprites
 	mov r8, r0
 	adds r0, r3, 0x5
 	lsls r0, 1
@@ -904,7 +904,7 @@ _080F2468:
 	b _080F2500
 	.align 2, 0
 _080F24E0: .4byte gUnknown_203AB34
-_080F24E4: .4byte gUnknown_202063C
+_080F24E4: .4byte gSprites
 _080F24E8: .4byte 0x000001ff
 _080F24EC: .4byte 0x00007716
 _080F24F0: .4byte sub_80F22B0
@@ -948,7 +948,7 @@ Task_Hof_PaletteFadeAndPrintWelcomeText: @ 80F2514
 	ldr r0, _080F25A0 @ =gUnknown_3005098
 	mov r12, r0
 	mov r8, r1
-	ldr r6, _080F25A4 @ =gUnknown_202063C
+	ldr r6, _080F25A4 @ =gSprites
 	movs r7, 0xD
 	negs r7, r7
 _080F2542:
@@ -999,7 +999,7 @@ _080F2564:
 	.align 2, 0
 _080F259C: .4byte 0xffff0000
 _080F25A0: .4byte gUnknown_3005098
-_080F25A4: .4byte gUnknown_202063C
+_080F25A4: .4byte gSprites
 _080F25A8: .4byte gUnknown_3005090
 _080F25AC: .4byte sub_80F25B0
 	thumb_func_end Task_Hof_PaletteFadeAndPrintWelcomeText
@@ -1046,7 +1046,7 @@ _080F25F4:
 	adds r4, r5, 0
 	adds r7, 0x8
 	mov r8, r7
-	ldr r7, _080F2684 @ =gUnknown_202063C
+	ldr r7, _080F2684 @ =gSprites
 	movs r1, 0xD
 	negs r1, r1
 	mov r12, r1
@@ -1110,7 +1110,7 @@ _080F266E:
 	bx r0
 	.align 2, 0
 _080F2680: .4byte gUnknown_203AB34
-_080F2684: .4byte gUnknown_202063C
+_080F2684: .4byte gSprites
 _080F2688: .4byte 0x00007716
 _080F268C: .4byte gUnknown_3005090
 _080F2690: .4byte sub_80F2694
@@ -1234,7 +1234,7 @@ Task_Hof_WaitAndPrintPlayerInfo: @ 80F2760
 	.align 2, 0
 _080F2784: .4byte gUnknown_3005090
 _080F2788:
-	ldr r2, _080F27A8 @ =gUnknown_202063C
+	ldr r2, _080F27A8 @ =gSprites
 	movs r3, 0x10
 	ldrsh r1, [r4, r3]
 	lsls r0, r1, 4
@@ -1250,7 +1250,7 @@ _080F2788:
 	strh r0, [r1, 0x20]
 	b _080F27F4
 	.align 2, 0
-_080F27A8: .4byte gUnknown_202063C
+_080F27A8: .4byte gSprites
 _080F27AC:
 	movs r0, 0x20
 	str r0, [sp]
@@ -1828,7 +1828,7 @@ _080F2C4C:
 	bl sub_810C1CC
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, _080F2CA4 @ =gUnknown_202063C
+	ldr r2, _080F2CA4 @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -1850,7 +1850,7 @@ _080F2C4C:
 	.align 2, 0
 _080F2C9C: .4byte gUnknown_840C298
 _080F2CA0: .4byte 0x0000ffff
-_080F2CA4: .4byte gUnknown_202063C
+_080F2CA4: .4byte gSprites
 _080F2CA8:
 	adds r0, r5, 0x5
 	lsls r0, 1
@@ -1970,7 +1970,7 @@ _080F2D94:
 	lsls r6, r0, 3
 	ldr r0, _080F2E70 @ =gUnknown_3005098
 	mov r10, r0
-	ldr r1, _080F2E74 @ =gUnknown_202063C
+	ldr r1, _080F2E74 @ =gSprites
 	mov r8, r1
 	movs r2, 0xD
 	negs r2, r2
@@ -2017,7 +2017,7 @@ _080F2DD0:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080F2E74 @ =gUnknown_202063C
+	ldr r1, _080F2E74 @ =gSprites
 	adds r0, r1
 	ldrb r2, [r0, 0x5]
 	movs r1, 0xD
@@ -2072,7 +2072,7 @@ _080F2E4A:
 _080F2E68: .4byte gUnknown_203AB38
 _080F2E6C: .4byte gUnknown_3005090
 _080F2E70: .4byte gUnknown_3005098
-_080F2E74: .4byte gUnknown_202063C
+_080F2E74: .4byte gSprites
 _080F2E78: .4byte 0xffff0000
 _080F2E7C: .4byte gUnknown_203AB34
 _080F2E80: .4byte 0x00007716
@@ -3076,7 +3076,7 @@ sub_80F36BC: @ 80F36BC
 	bl reset_temp_tile_data_buffers
 	bl dp13_810BB8C
 	bl FreeAllSpritePalettes
-	ldr r1, _080F36EC @ =gUnknown_3003E58
+	ldr r1, _080F36EC @ =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, _080F36F0 @ =gUnknown_840C248
@@ -3086,7 +3086,7 @@ sub_80F36BC: @ 80F36BC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F36EC: .4byte gUnknown_3003E58
+_080F36EC: .4byte gReservedSpritePaletteCount
 _080F36F0: .4byte gUnknown_840C248
 _080F36F4: .4byte gUnknown_840C258
 	thumb_func_end sub_80F36BC
@@ -3407,7 +3407,7 @@ sub_80F3930: @ 80F3930
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080F39A4 @ =gUnknown_202063C
+	ldr r0, _080F39A4 @ =gSprites
 	adds r4, r1, r0
 	bl Random
 	lsls r0, 16
@@ -3428,7 +3428,7 @@ sub_80F3930: @ 80F3930
 	b _080F39AA
 	.align 2, 0
 _080F39A0: .4byte gUnknown_840C384
-_080F39A4: .4byte gUnknown_202063C
+_080F39A4: .4byte gSprites
 _080F39A8:
 	movs r0, 0x1
 _080F39AA:

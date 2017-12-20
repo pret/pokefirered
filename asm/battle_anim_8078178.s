@@ -42,7 +42,7 @@ sub_8078178: @ 8078178
 	strh r0, [r1, 0xA]
 	movs r5, 0
 	lsls r0, r6, 4
-	ldr r7, _08078230 @ =gUnknown_202063C
+	ldr r7, _08078230 @ =gSprites
 	adds r0, r6
 	lsls r0, 2
 	adds r6, r0, r7
@@ -93,7 +93,7 @@ _08078220: .4byte sub_80782BC
 _08078224: .4byte gUnknown_83AD048
 _08078228: .4byte gUnknown_83AD950
 _0807822C: .4byte gUnknown_3005090
-_08078230: .4byte gUnknown_202063C
+_08078230: .4byte gSprites
 _08078234: .4byte gUnknown_83BF574
 _08078238:
 	movs r0, 0xF8
@@ -101,7 +101,7 @@ _08078238:
 	strh r0, [r1, 0xA]
 	movs r5, 0
 	lsls r0, r6, 4
-	ldr r7, _080782B4 @ =gUnknown_202063C
+	ldr r7, _080782B4 @ =gSprites
 	adds r0, r6
 	lsls r0, 2
 	adds r6, r0, r7
@@ -146,7 +146,7 @@ _0807828E:
 	cmp r5, 0x9
 	bls _0807824A
 _08078298:
-	ldr r0, _080782B4 @ =gUnknown_202063C
+	ldr r0, _080782B4 @ =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -160,7 +160,7 @@ _08078298:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080782B4: .4byte gUnknown_202063C
+_080782B4: .4byte gSprites
 _080782B8: .4byte gUnknown_83BF574
 	thumb_func_end sub_8078178
 
@@ -390,7 +390,7 @@ _0807843A:
 	ldr r1, _080784C4 @ =0xffff0000
 	cmp r0, r1
 	bne _08078484
-	ldr r1, _080784C8 @ =gUnknown_202063C
+	ldr r1, _080784C8 @ =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -404,7 +404,7 @@ _08078484:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _080784C8 @ =gUnknown_202063C
+	ldr r1, _080784C8 @ =gSprites
 	adds r0, r1
 	ldr r1, _080784CC @ =gUnknown_83BF554
 	bl SetSubspriteTables
@@ -427,7 +427,7 @@ _080784B8: .4byte 0xfffa0000
 _080784BC: .4byte gUnknown_83BF55C
 _080784C0: .4byte 0x0000271a
 _080784C4: .4byte 0xffff0000
-_080784C8: .4byte gUnknown_202063C
+_080784C8: .4byte gSprites
 _080784CC: .4byte gUnknown_83BF554
 _080784D0: .4byte gUnknown_3005090
 _080784D4: .4byte sub_80784D8
@@ -629,7 +629,7 @@ sub_807862C: @ 807862C
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08078670 @ =gUnknown_202063C
+	ldr r0, _08078670 @ =gSprites
 	adds r4, r0
 	adds r0, r4, 0
 	bl FreeSpriteOamMatrix
@@ -638,7 +638,7 @@ sub_807862C: @ 807862C
 	b _0807868E
 	.align 2, 0
 _0807866C: .4byte gUnknown_3005090
-_08078670: .4byte gUnknown_202063C
+_08078670: .4byte gSprites
 _08078674:
 	cmp r0, 0x27
 	bne _0807868E

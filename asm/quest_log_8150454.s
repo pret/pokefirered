@@ -135,7 +135,7 @@ sub_8150530: @ 8150530
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08150584 @ =gUnknown_202063C
+	ldr r1, _08150584 @ =gSprites
 	adds r5, r0, r1
 	ldr r0, _08150588 @ =gUnknown_3005E88
 	ldrb r0, [r0]
@@ -163,7 +163,7 @@ _08150558:
 	.align 2, 0
 _0815057C: .4byte gUnknown_2037078
 _08150580: .4byte gUnknown_2036E38
-_08150584: .4byte gUnknown_202063C
+_08150584: .4byte gSprites
 _08150588: .4byte gUnknown_3005E88
 _0815058C: .4byte sub_81505C4
 _08150590: .4byte gUnknown_3005090
@@ -211,7 +211,7 @@ sub_81505C4: @ 81505C4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08150614 @ =gUnknown_202063C
+	ldr r1, _08150614 @ =gSprites
 	adds r7, r0, r1
 	ldr r1, _08150618 @ =gUnknown_3005090
 	mov r2, r8
@@ -231,7 +231,7 @@ sub_81505C4: @ 81505C4
 	.align 2, 0
 _0815060C: .4byte gUnknown_2037078
 _08150610: .4byte gUnknown_2036E38
-_08150614: .4byte gUnknown_202063C
+_08150614: .4byte gSprites
 _08150618: .4byte gUnknown_3005090
 _0815061C:
 	cmp r6, 0x2

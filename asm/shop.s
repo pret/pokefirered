@@ -2016,14 +2016,14 @@ _0809BA56:
 	movs r0, 0x2
 	str r0, [sp]
 	adds r0, r4, 0
-	ldr r1, _0809BAF4 @ =nullsub_8
+	ldr r1, _0809BAF4 @ =SpriteCallbackDummy
 	bl AddPseudoFieldObject
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, _0809BAF8 @ =gUnknown_202063C
+	ldr r0, _0809BAF8 @ =gSprites
 	adds r2, r0
 	mov r1, r9
 	adds r0, r5, r1
@@ -2047,8 +2047,8 @@ _0809BACE:
 _0809BAE8: .4byte gUnknown_20398B4
 _0809BAEC: .4byte gUnknown_2036E38
 _0809BAF0: .4byte 0xfff80000
-_0809BAF4: .4byte nullsub_8
-_0809BAF8: .4byte gUnknown_202063C
+_0809BAF4: .4byte SpriteCallbackDummy
+_0809BAF8: .4byte gSprites
 	thumb_func_end sub_809BA40
 
 	thumb_func_start sub_809BAFC

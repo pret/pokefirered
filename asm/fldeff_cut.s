@@ -317,7 +317,7 @@ _08097ABC:
 	bl Alloc
 	str r0, [r4]
 	movs r7, 0
-	ldr r5, _08097B44 @ =gUnknown_202063C
+	ldr r5, _08097B44 @ =gSprites
 _08097AE2:
 	ldr r0, _08097B48 @ =gUnknown_2037078
 	ldrb r1, [r0, 0x4]
@@ -365,7 +365,7 @@ _08097AE2:
 _08097B38: .4byte gUnknown_2039A04
 _08097B3C: .4byte 0x0000ffff
 _08097B40: .4byte gUnknown_2039870
-_08097B44: .4byte gUnknown_202063C
+_08097B44: .4byte gSprites
 _08097B48: .4byte gUnknown_2037078
 _08097B4C: .4byte gUnknown_83D414C
 	thumb_func_end sub_8097A48
@@ -492,7 +492,7 @@ _08097C1C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, _08097C68 @ =gUnknown_202063C
+	ldr r5, _08097C68 @ =gSprites
 	adds r0, r5
 	bl DestroySprite
 	adds r0, r4, 0x1
@@ -517,7 +517,7 @@ _08097C1C:
 	bx r0
 	.align 2, 0
 _08097C64: .4byte gUnknown_2039870
-_08097C68: .4byte gUnknown_202063C
+_08097C68: .4byte gSprites
 	thumb_func_end sub_8097C18
 
 	thumb_func_start sub_8097C6C

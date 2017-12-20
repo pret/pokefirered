@@ -284,7 +284,7 @@ _0810C59A:
 	lsls r0, 31
 	cmp r0, 0
 	beq _0810C5EA
-	ldr r2, _0810C600 @ =gUnknown_202063C
+	ldr r2, _0810C600 @ =gSprites
 	ldrb r0, [r4, 0x4]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -315,7 +315,7 @@ _0810C5EA:
 	bx r0
 	.align 2, 0
 _0810C5FC: .4byte gUnknown_2036E38
-_0810C600: .4byte gUnknown_202063C
+_0810C600: .4byte gSprites
 	thumb_func_end sub_810C594
 
 	thumb_func_start sub_810C604

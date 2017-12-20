@@ -3120,7 +3120,7 @@ sub_80C176C: @ 80C176C
 	ldr r1, _080C185C @ =gUnknown_83F1B38
 	str r1, [sp, 0x8]
 	str r4, [sp, 0xC]
-	ldr r1, _080C1860 @ =gUnknown_8231CFC
+	ldr r1, _080C1860 @ =gDummySpriteAffineAnimTable
 	str r1, [sp, 0x10]
 	ldr r1, _080C1864 @ =sub_80C16B8
 	str r1, [sp, 0x14]
@@ -3164,7 +3164,7 @@ sub_80C176C: @ 80C176C
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080C187C @ =gUnknown_202063C
+	ldr r0, _080C187C @ =gSprites
 	adds r1, r0
 	str r1, [r2]
 	adds r1, 0x3E
@@ -3187,14 +3187,14 @@ _080C1850: .4byte gUnknown_83EF384
 _080C1854: .4byte 0xffff0000
 _080C1858: .4byte gUnknown_83F1B24
 _080C185C: .4byte gUnknown_83F1B38
-_080C1860: .4byte gUnknown_8231CFC
+_080C1860: .4byte gDummySpriteAffineAnimTable
 _080C1864: .4byte sub_80C16B8
 _080C1868: .4byte 0x000018b4
 _080C186C: .4byte 0x000018b6
 _080C1870: .4byte 0x00001cce
 _080C1874: .4byte 0x00001cca
 _080C1878: .4byte 0x000018b0
-_080C187C: .4byte gUnknown_202063C
+_080C187C: .4byte gSprites
 	thumb_func_end sub_80C176C
 
 	thumb_func_start sub_80C1880
@@ -4291,7 +4291,7 @@ sub_80C210C: @ 80C210C
 	ldr r3, _080C21F0 @ =gUnknown_83F1C30
 	str r3, [sp, 0x8]
 	str r4, [sp, 0xC]
-	ldr r3, _080C21F4 @ =gUnknown_8231CFC
+	ldr r3, _080C21F4 @ =gDummySpriteAffineAnimTable
 	str r3, [sp, 0x10]
 	ldr r3, _080C21F8 @ =nullsub_63
 	str r3, [sp, 0x14]
@@ -4332,7 +4332,7 @@ sub_80C210C: @ 80C210C
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080C2204 @ =gUnknown_202063C
+	ldr r0, _080C2204 @ =gSprites
 	adds r1, r0
 	str r1, [r2]
 	adds r1, 0x3E
@@ -4354,11 +4354,11 @@ _080C21E4: .4byte gUnknown_83EF3A4
 _080C21E8: .4byte 0xffff0000
 _080C21EC: .4byte gUnknown_83F1C20
 _080C21F0: .4byte gUnknown_83F1C30
-_080C21F4: .4byte gUnknown_8231CFC
+_080C21F4: .4byte gDummySpriteAffineAnimTable
 _080C21F8: .4byte nullsub_63
 _080C21FC: .4byte 0x0000040a
 _080C2200: .4byte 0x00000404
-_080C2204: .4byte gUnknown_202063C
+_080C2204: .4byte gSprites
 	thumb_func_end sub_80C210C
 
 	thumb_func_start sub_80C2208
@@ -6180,7 +6180,7 @@ sub_80C309C: @ 80C309C
 	ldr r0, _080C3144 @ =gUnknown_83F1C50
 	str r0, [sp, 0x20]
 	str r3, [sp, 0x24]
-	ldr r0, _080C3148 @ =gUnknown_8231CFC
+	ldr r0, _080C3148 @ =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x28]
 	ldr r0, _080C314C @ =sub_80C2FC0
 	str r0, [sp, 0x2C]
@@ -6205,7 +6205,7 @@ sub_80C309C: @ 80C309C
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080C3150 @ =gUnknown_202063C
+	ldr r0, _080C3150 @ =gSprites
 	adds r1, r0
 	str r1, [r2, 0x1C]
 	movs r0, 0x1
@@ -6220,9 +6220,9 @@ _080C3138: .4byte gUnknown_83EF25C
 _080C313C: .4byte 0xffff0000
 _080C3140: .4byte gUnknown_83F1C3C
 _080C3144: .4byte gUnknown_83F1C50
-_080C3148: .4byte gUnknown_8231CFC
+_080C3148: .4byte gDummySpriteAffineAnimTable
 _080C314C: .4byte sub_80C2FC0
-_080C3150: .4byte gUnknown_202063C
+_080C3150: .4byte gSprites
 	thumb_func_end sub_80C309C
 
 	thumb_func_start sub_80C3154
@@ -8274,9 +8274,9 @@ sub_80C4244: @ 80C4244
 	ldr r0, _080C430C @ =gUnknown_83F1C64
 	str r0, [sp, 0x20]
 	str r3, [sp, 0x24]
-	ldr r0, _080C4310 @ =gUnknown_8231CFC
+	ldr r0, _080C4310 @ =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x28]
-	ldr r0, _080C4314 @ =nullsub_8
+	ldr r0, _080C4314 @ =SpriteCallbackDummy
 	str r0, [sp, 0x2C]
 	mov r0, sp
 	movs r2, 0x18
@@ -8317,7 +8317,7 @@ _080C42AA:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080C4320 @ =gUnknown_202063C
+	ldr r0, _080C4320 @ =gSprites
 	adds r1, r0
 	str r1, [r2, 0x4]
 	movs r0, 0x1
@@ -8332,11 +8332,11 @@ _080C4300: .4byte gUnknown_83EF27C
 _080C4304: .4byte 0xffff0000
 _080C4308: .4byte gUnknown_83F1C54
 _080C430C: .4byte gUnknown_83F1C64
-_080C4310: .4byte gUnknown_8231CFC
-_080C4314: .4byte nullsub_8
+_080C4310: .4byte gDummySpriteAffineAnimTable
+_080C4314: .4byte SpriteCallbackDummy
 _080C4318: .4byte gSaveBlock2Ptr
 _080C431C: .4byte gUnknown_83EF29C
-_080C4320: .4byte gUnknown_202063C
+_080C4320: .4byte gSprites
 	thumb_func_end sub_80C4244
 
 	thumb_func_start sub_80C4324
@@ -8646,9 +8646,9 @@ sub_80C450C: @ 80C450C
 	ldr r1, _080C4604 @ =gUnknown_83F1C94
 	str r1, [sp, 0x8]
 	str r2, [sp, 0xC]
-	ldr r1, _080C4608 @ =gUnknown_8231CFC
+	ldr r1, _080C4608 @ =gDummySpriteAffineAnimTable
 	str r1, [sp, 0x10]
-	ldr r1, _080C460C @ =nullsub_8
+	ldr r1, _080C460C @ =SpriteCallbackDummy
 	str r1, [sp, 0x14]
 	bl LoadSpriteSheet
 	mov r0, r8
@@ -8680,7 +8680,7 @@ sub_80C450C: @ 80C450C
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080C4610 @ =gUnknown_202063C
+	ldr r0, _080C4610 @ =gSprites
 	adds r1, r0
 	str r1, [r2]
 	adds r1, 0x3E
@@ -8709,9 +8709,9 @@ _080C45F8: .4byte gUnknown_83EF2BC
 _080C45FC: .4byte 0xffff0000
 _080C4600: .4byte gUnknown_83F1C68
 _080C4604: .4byte gUnknown_83F1C94
-_080C4608: .4byte gUnknown_8231CFC
-_080C460C: .4byte nullsub_8
-_080C4610: .4byte gUnknown_202063C
+_080C4608: .4byte gDummySpriteAffineAnimTable
+_080C460C: .4byte SpriteCallbackDummy
+_080C4610: .4byte gSprites
 	thumb_func_end sub_80C450C
 
 	thumb_func_start sub_80C4614
@@ -8765,9 +8765,9 @@ sub_80C4614: @ 80C4614
 	ldr r1, _080C4740 @ =gUnknown_83F1C98
 	str r1, [sp, 0x8]
 	str r7, [sp, 0xC]
-	ldr r1, _080C4744 @ =gUnknown_8231CFC
+	ldr r1, _080C4744 @ =gDummySpriteAffineAnimTable
 	str r1, [sp, 0x10]
-	ldr r1, _080C4748 @ =nullsub_8
+	ldr r1, _080C4748 @ =SpriteCallbackDummy
 	str r1, [sp, 0x14]
 	bl LoadSpriteSheet
 	adds r0, r6, 0
@@ -8830,7 +8830,7 @@ _080C46C4:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080C474C @ =gUnknown_202063C
+	ldr r0, _080C474C @ =gSprites
 	adds r1, r0
 	str r1, [r2]
 	adds r1, 0x3E
@@ -8859,9 +8859,9 @@ _080C4734: .4byte gUnknown_83EF2BC
 _080C4738: .4byte 0xffff0000
 _080C473C: .4byte gUnknown_83F1C70
 _080C4740: .4byte gUnknown_83F1C98
-_080C4744: .4byte gUnknown_8231CFC
-_080C4748: .4byte nullsub_8
-_080C474C: .4byte gUnknown_202063C
+_080C4744: .4byte gDummySpriteAffineAnimTable
+_080C4748: .4byte SpriteCallbackDummy
+_080C474C: .4byte gSprites
 	thumb_func_end sub_80C4614
 
 	thumb_func_start sub_80C4750

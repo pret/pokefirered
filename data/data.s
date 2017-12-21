@@ -1,5 +1,6 @@
 	.section .rodata
 
+	.align 2
 gUnknown_8231EC4:: @ 8231EC4
 	.incbin "baserom.gba", 0x231EC4, 0x20
 

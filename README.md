@@ -1,6 +1,6 @@
 # Pokémon Fire Red
 
-This is a disassembly of Pokémon Emerald.
+This is a disassembly of Pokémon Fire Red.
 
 It builds the following rom:
 

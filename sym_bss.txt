@@ -285,6 +285,7 @@ gUnknown_3002080: @ 3002080
 	.space 0x4 @ This isn't needed for Ruby/Sapphire or Emerald.
 
 	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
+	.space 0x4 @ huh?
 	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"
 	.include "tools/agbcc/lib/libc.a:memcpy.o"
 	.include "tools/agbcc/lib/libc.a:memset.o"

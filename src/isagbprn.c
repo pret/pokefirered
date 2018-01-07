@@ -1,5 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
+#include "global.h"
+#include "config.h"
 #include "gba/gba.h"
 
 #define AGB_PRINT_FLUSH_ADDR 0x9FE209D
@@ -16,6 +18,8 @@ struct AGBPrintStruct
 };
 
 typedef void (*LPFN_PRINT_FLUSH)(void);
+
+#ifndef NDEBUG
 
 void AGBPrintFlush1Block(void);
 
@@ -146,3 +150,5 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
         AGBPrintf("WARING FILE=[%s] LINE=[%d]  EXP=[%s] \n", pFile, nLine, pExpression);
     }
 }
+
+#endif

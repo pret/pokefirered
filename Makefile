@@ -30,7 +30,7 @@ REVISION := 0
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
+.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin baserom.gba
 
 .PHONY: all clean tidy
 
@@ -42,6 +42,12 @@ ASM_OBJS := $(ASM_SRCS:%.s=%.o)
 
 DATA_ASM_SRCS := $(wildcard data/*.s)
 DATA_ASM_OBJS := $(DATA_ASM_SRCS:%.s=%.o)
+
+ifeq ($(NODEP),)
+  src/%.o:  C_DEP   = $(shell $(SCANINC) -I include src/$(*F).c)
+  asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
+  data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
+endif
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 
@@ -75,16 +81,16 @@ src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 src/isagbprn.o: CC1 := tools/agbcc/bin/old_agbcc
 src/isagbprn.o: CFLAGS := -mthumb-interwork
 
-$(C_OBJS): %.o : %.c
+$(C_OBJS): %.o : %.c $$(C_DEP)
 	@$(CPP) $(CPPFLAGS) $< -o $*.i
 	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
-$(ASM_OBJS): %.o: %.s
+$(ASM_OBJS): %.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) --defsym REVISION=$(REVISION) -o $@ $<
 
-$(DATA_ASM_OBJS): %.o: %.s
+$(DATA_ASM_OBJS): %.o: %.s $$(ASM_DEP)
 	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) --defsym REVISION=$(REVISION) -o $@
 
 sym_bss.ld: sym_bss.txt

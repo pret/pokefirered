@@ -11,9 +11,7 @@ LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
-LIBGCC := tools/agbcc/lib/libgcc.a
-
-LIBC := tools/agbcc/lib/libc.a
+LIB := -L tools/agbcc/lib -lgcc -lc
 
 SHA1 := sha1sum -c
 
@@ -102,7 +100,7 @@ ld_script.ld: ld_script.txt sym_bss.ld sym_common.ld sym_ewram.ld
 	sed -f ld_script.sed ld_script.txt >ld_script.ld
 
 pokefirered.elf: ld_script.ld $(OBJS)
-	$(LD) -T ld_script.ld -Map pokefirered.map -o $@ $(OBJS) $(LIBGCC) $(LIBC)
+	$(LD) -T ld_script.ld -Map pokefirered.map -o $@ $(OBJS) $(LIB)
 
 pokefirered.gba: pokefirered.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@

@@ -20,10 +20,10 @@ gUnknown_8234598:: @ 8234598
 	.incbin "baserom.gba", 0x234598, 0x28
 
 gUnknown_82345C0:: @ 82345C0
-	.incbin "baserom.gba", 0x2345C0, 0x10
+	.incbin "baserom.gba", 0x2345C0, 0x10 @ GameFreak inc.
 
 gUnknown_82345D0:: @ 82345D0
-	.incbin "baserom.gba", 0x2345D0, 0x18
+	.incbin "baserom.gba", 0x2345D0, 0x18 @ TEST PRINT
 
 gUnknown_82345E8:: @ 82345E8
 	.incbin "baserom.gba", 0x2345E8, 0x8
@@ -3089,7 +3089,7 @@ gUnknown_83F5D58:: @ 83F5D58
 	.incbin "baserom.gba", 0x3F5D58, 0x198
 
 gUnknown_83F5EF0:: @ 83F5EF0
-	.incbin "baserom.gba", 0x3F5EF0, 0x34
+	.incbin "baserom.gba", 0x3F5EF0, 0x34 @ C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scr_tool.c
 
 gUnknown_83F5F24:: @ 83F5F24
 	.incbin "baserom.gba", 0x3F5F24, 0x2
@@ -5957,13 +5957,13 @@ gUnknown_843ED88:: @ 843ED88
 	.incbin "baserom.gba", 0x43ED88, 0xC
 
 gUnknown_843ED94:: @ 843ED94
-	.incbin "baserom.gba", 0x43ED94, 0x30
+	.incbin "baserom.gba", 0x43ED94, 0x30 @ C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu.c
 
 gUnknown_843EDC4:: @ 843EDC4
-	.incbin "baserom.gba", 0x43EDC4, 0x14
+	.incbin "baserom.gba", 0x43EDC4, 0x14 @ Rfu.RfuFunc == NULL
 
 gUnknown_843EDD8:: @ 843EDD8
-	.incbin "baserom.gba", 0x43EDD8, 0xC
+	.incbin "baserom.gba", 0x43EDD8, 0xC @ size<=252
 
 gUnknown_843EDE4:: @ 843EDE4
 	.incbin "baserom.gba", 0x43EDE4, 0x14
@@ -6533,13 +6533,13 @@ gUnknown_8457120:: @ 8457120
 	.incbin "baserom.gba", 0x457120, 0x18
 
 gUnknown_8457138:: @ 8457138
-	.incbin "baserom.gba", 0x457138, 0x3C
+	.incbin "baserom.gba", 0x457138, 0x3C @ C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c
 
 gUnknown_8457174:: @ 8457174
 	.incbin "baserom.gba", 0x457174, 0x4
 
 gUnknown_8457178:: @ 8457178
-	.incbin "baserom.gba", 0x457178, 0x15
+	.incbin "baserom.gba", 0x457178, 0x15 @ UnionObjWork != NULL
 
 gUnknown_845718D:: @ 845718D
 	.incbin "baserom.gba", 0x45718D, 0x2
@@ -7922,7 +7922,7 @@ gUnknown_8466F00:: @ 8466F00
 	.incbin "baserom.gba", 0x466F00, 0x28
 
 gUnknown_8466F28:: @ 8466F28
-	.incbin "baserom.gba", 0x466F28, 0x34
+	.incbin "baserom.gba", 0x466F28, 0x34 @ C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c
 
 gUnknown_8466F5C:: @ 8466F5C
 	.incbin "baserom.gba", 0x466F5C, 0x4
@@ -7931,25 +7931,25 @@ gUnknown_8466F60:: @ 8466F60
 	.incbin "baserom.gba", 0x466F60, 0x20
 
 gUnknown_8466F80:: @ 8466F80
-	.incbin "baserom.gba", 0x466F80, 0x38
+	.incbin "baserom.gba", 0x466F80, 0x38 @ C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c
 
 gUnknown_8466FB8:: @ 8466FB8
-	.incbin "baserom.gba", 0x466FB8, 0x1C
+	.incbin "baserom.gba", 0x466FB8, 0x1C @ size <= ME_SEND_BUF_SIZE
 
 gUnknown_8466FD4:: @ 8466FD4
-	.incbin "baserom.gba", 0x466FD4, 0x18
+	.incbin "baserom.gba", 0x466FD4, 0x18 @ cmd->parameter == NULL
 
 gUnknown_8466FEC:: @ 8466FEC
-	.incbin "baserom.gba", 0x466FEC, 0x14
+	.incbin "baserom.gba", 0x466FEC, 0x14 @ cmd->flag == FALSE
 
 gUnknown_8467000:: @ 8467000
-	.incbin "baserom.gba", 0x467000, 0x30
+	.incbin "baserom.gba", 0x467000, 0x30 @ cmd->flag == FALSE && cmd->parameter == NULL
 
 gUnknown_8467030:: @ 8467030
 	.incbin "baserom.gba", 0x467030, 0x14
 
 gUnknown_8467044:: @ 8467044
-	.incbin "baserom.gba", 0x467044, 0x24
+	.incbin "baserom.gba", 0x467044, 0x24 @ svr->mainseqno < NELEMS(func_tbl)
 
 gUnknown_8467068:: @ 8467068
 	.incbin "baserom.gba", 0x467068, 0x8
@@ -7994,7 +7994,7 @@ gUnknown_8468BCC:: @ 8468BCC
 	.incbin "baserom.gba", 0x468BCC, 0x90
 
 gUnknown_8468C5C:: @ 8468C5C
-	.incbin "baserom.gba", 0x468C5C, 0x38
+	.incbin "baserom.gba", 0x468C5C, 0x38 @ C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/menews_jisan.c
 
 gUnknown_8468C94:: @ 8468C94
 	.incbin "baserom.gba", 0x468C94, 0x4

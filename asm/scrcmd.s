@@ -58,8 +58,8 @@ sub_8069EFC: @ 8069EFC
 _08069F18: .4byte gUnknown_815FD60
 _08069F1C: .4byte gUnknown_8160450
 _08069F20:
-	ldr r0, _08069F34 @ =gUnknown_83A725C
-	ldr r2, _08069F38 @ =gUnknown_83A7290
+	ldr r0, _08069F34 @ =gUnknown_83A725C	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c"
+	ldr r2, _08069F38 @ =gUnknown_83A7290	"0"
 	movs r1, 0xF1
 	movs r3, 0x1
 	bl AGBAssert
@@ -98,9 +98,9 @@ sub_8069F3C: @ 8069F3C
 _08069F6C: .4byte gUnknown_815FD60
 _08069F70: .4byte gUnknown_8160450
 _08069F74:
-	ldr r0, _08069F88 @ =gUnknown_83A725C
+	ldr r0, _08069F88 @ =gUnknown_83A725C	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c"
 	ldr r1, _08069F8C @ =0x00000107
-	ldr r2, _08069F90 @ =gUnknown_83A7290
+	ldr r2, _08069F90 @ =gUnknown_83A7290	"0"
 	movs r3, 0x1
 	bl AGBAssert
 _08069F80:

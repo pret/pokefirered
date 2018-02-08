@@ -2307,9 +2307,9 @@ sub_80F9828: @ 80F9828
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _080F983E
-	ldr r0, _080F984C @ =gUnknown_843ED94
+	ldr r0, _080F984C @ =gUnknown_843ED94	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu.c"
 	ldr r1, _080F9850 @ =0x000005c1
-	ldr r2, _080F9854 @ =gUnknown_843EDC4
+	ldr r2, _080F9854 @ =gUnknown_843EDC4	"Rfu.RfuFunc == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _080F983E:
@@ -3136,9 +3136,9 @@ sub_80F9E60: @ 80F9E60
 	adds r6, r1, 0
 	cmp r6, 0xFC
 	bls _080F9E7C
-	ldr r0, _080F9EA8 @ =gUnknown_843ED94
+	ldr r0, _080F9EA8 @ =gUnknown_843ED94	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu.c"
 	ldr r1, _080F9EAC @ =0x00000701
-	ldr r2, _080F9EB0 @ =gUnknown_843EDD8
+	ldr r2, _080F9EB0 @ =gUnknown_843EDD8	"size<=252"
 	movs r3, 0x1
 	bl AGBAssert
 _080F9E7C:
@@ -4739,7 +4739,7 @@ sub_80FAA58: @ 80FAA58
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	ldr r0, _080FAA8C @ =gUnknown_843EDE4
+	ldr r0, _080FAA8C @ =gUnknown_843EDE4	"PokemonSioInfo"
 	adds r1, r4, 0
 	bl strcmp
 	adds r5, r0, 0
@@ -4895,7 +4895,7 @@ _080FABA0: .4byte gUnknown_202273C
 _080FABA4:
 	ldr r5, _080FAC40 @ =gUnknown_2022618
 	adds r1, r5, 0
-	ldr r0, _080FAC44 @ =gUnknown_843EDE4
+	ldr r0, _080FAC44 @ =gUnknown_843EDE4	"PokemonSioInfo"
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
 	ldrh r2, [r0]
@@ -6097,7 +6097,7 @@ _080FB4AA:
 	adds r1, r4, 0
 	bl sub_80FB9E4
 _080FB4BC:
-	ldr r0, _080FB4E0 @ =gUnknown_843EDF8
+	ldr r0, _080FB4E0 @ =gUnknown_843EDF8	"LINK LOSS DISCONNECT!"
 	movs r1, 0x5
 	movs r2, 0x5
 	bl nullsub_87
@@ -6118,7 +6118,7 @@ _080FB4E8:
 	adds r0, 0xF0
 	movs r1, 0x1
 	strb r1, [r0]
-	ldr r0, _080FB500 @ =gUnknown_843EE10
+	ldr r0, _080FB500 @ =gUnknown_843EE10	"LINK LOSS RECOVERY NOW"
 	movs r1, 0x5
 	movs r2, 0x5
 	bl nullsub_87
@@ -7928,7 +7928,7 @@ _080FC2CE:
 	adds r6, r7, 0
 	cmp r6, 0x3
 	ble _080FC2B8
-	ldr r0, _080FC300 @ =gUnknown_843EE64
+	ldr r0, _080FC300 @ =gUnknown_843EE64	"NOWSLOT"
 	movs r1, 0x1
 	movs r2, 0xF
 	bl nullsub_87

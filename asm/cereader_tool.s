@@ -111,8 +111,8 @@ sub_815D700: @ 815D700
 	ldrh r0, [r5, 0x2]
 	cmp r0, 0
 	beq _0815D718
-	ldr r0, _0815D77C @ =gUnknown_8479CD8
-	ldr r2, _0815D780 @ =gUnknown_8479D10
+	ldr r0, _0815D77C @ =gUnknown_8479CD8	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/cereader_tool.c"
+	ldr r2, _0815D780 @ =gUnknown_8479D10	"ttdata->dummy == 0"
 	movs r1, 0xC6
 	movs r3, 0x1
 	bl AGBAssert
@@ -120,8 +120,8 @@ _0815D718:
 	ldrb r0, [r5, 0x1]
 	cmp r0, 0
 	beq _0815D72A
-	ldr r0, _0815D77C @ =gUnknown_8479CD8
-	ldr r2, _0815D784 @ =gUnknown_8479D24
+	ldr r0, _0815D77C @ =gUnknown_8479CD8	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/cereader_tool.c"
+	ldr r2, _0815D784 @ =gUnknown_8479D24	"ttdata->id == 0"
 	movs r1, 0xC7
 	movs r3, 0x1
 	bl AGBAssert

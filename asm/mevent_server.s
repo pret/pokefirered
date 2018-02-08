@@ -1085,9 +1085,9 @@ sub_814501C: @ 814501C
 	lsls r0, 3
 	cmp r4, r0
 	bls _0814503A
-	ldr r0, _08145050 @ =gUnknown_8466F80
+	ldr r0, _08145050 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	ldr r1, _08145054 @ =0x00000101
-	ldr r2, _08145058 @ =gUnknown_8466FB8
+	ldr r2, _08145058 @ =gUnknown_8466FB8	"size <= ME_SEND_BUF_SIZE"
 	movs r3, 0x1
 	bl AGBAssert
 _0814503A:
@@ -1244,10 +1244,10 @@ _08145168:
 	ldr r0, [r4, 0x8]
 	cmp r0, 0
 	beq _0814517C
-	ldr r0, _08145188 @ =gUnknown_8466F80
+	ldr r0, _08145188 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xB1
 	lsls r1, 1
-	ldr r2, _0814518C @ =gUnknown_8466FD4
+	ldr r2, _0814518C @ =gUnknown_8466FD4	"cmd->parameter == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _0814517C:
@@ -1267,10 +1267,10 @@ _08145196:
 	ldr r0, [r4, 0x8]
 	cmp r0, 0
 	beq _081451AA
-	ldr r0, _081451BC @ =gUnknown_8466F80
+	ldr r0, _081451BC @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xB6
 	lsls r1, 1
-	ldr r2, _081451C0 @ =gUnknown_8466FD4
+	ldr r2, _081451C0 @ =gUnknown_8466FD4	"cmd->parameter == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _081451AA:
@@ -1289,10 +1289,10 @@ _081451C4:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _08145272
-	ldr r0, _081451DC @ =gUnknown_8466F80
+	ldr r0, _081451DC @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xB9
 	lsls r1, 1
-	ldr r2, _081451E0 @ =gUnknown_8466FEC
+	ldr r2, _081451E0 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 	b _08145272
@@ -1303,19 +1303,19 @@ _081451E4:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _081451F8
-	ldr r0, _08145218 @ =gUnknown_8466F80
+	ldr r0, _08145218 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xBC
 	lsls r1, 1
-	ldr r2, _0814521C @ =gUnknown_8466FEC
+	ldr r2, _0814521C @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _081451F8:
 	ldr r0, [r4, 0x8]
 	cmp r0, 0
 	beq _0814520A
-	ldr r0, _08145218 @ =gUnknown_8466F80
+	ldr r0, _08145218 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	ldr r1, _08145220 @ =0x00000179
-	ldr r2, _08145224 @ =gUnknown_8466FD4
+	ldr r2, _08145224 @ =gUnknown_8466FD4	"cmd->parameter == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _0814520A:
@@ -1333,19 +1333,19 @@ _08145228:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _0814523C
-	ldr r0, _08145258 @ =gUnknown_8466F80
+	ldr r0, _08145258 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xBF
 	lsls r1, 1
-	ldr r2, _0814525C @ =gUnknown_8466FEC
+	ldr r2, _0814525C @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _0814523C:
 	ldr r0, [r4, 0x8]
 	cmp r0, 0
 	beq _0814524E
-	ldr r0, _08145258 @ =gUnknown_8466F80
+	ldr r0, _08145258 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	ldr r1, _08145260 @ =0x0000017f
-	ldr r2, _08145264 @ =gUnknown_8466FD4
+	ldr r2, _08145264 @ =gUnknown_8466FD4	"cmd->parameter == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _0814524E:
@@ -1374,10 +1374,10 @@ _0814527C:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _08145290
-	ldr r0, _081452A4 @ =gUnknown_8466F80
+	ldr r0, _081452A4 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xC6
 	lsls r1, 1
-	ldr r2, _081452A8 @ =gUnknown_8466FEC
+	ldr r2, _081452A8 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _08145290:
@@ -1396,19 +1396,19 @@ _081452AC:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _081452C0
-	ldr r0, _081452DC @ =gUnknown_8466F80
+	ldr r0, _081452DC @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xC9
 	lsls r1, 1
-	ldr r2, _081452E0 @ =gUnknown_8466FEC
+	ldr r2, _081452E0 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _081452C0:
 	ldr r0, [r4, 0x8]
 	cmp r0, 0
 	beq _081452D2
-	ldr r0, _081452DC @ =gUnknown_8466F80
+	ldr r0, _081452DC @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	ldr r1, _081452E4 @ =0x00000193
-	ldr r2, _081452E8 @ =gUnknown_8466FD4
+	ldr r2, _081452E8 @ =gUnknown_8466FD4	"cmd->parameter == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _081452D2:
@@ -1425,10 +1425,10 @@ _081452EC:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _08145300
-	ldr r0, _08145318 @ =gUnknown_8466F80
+	ldr r0, _08145318 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xCC
 	lsls r1, 1
-	ldr r2, _0814531C @ =gUnknown_8466FEC
+	ldr r2, _0814531C @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _08145300:
@@ -1448,9 +1448,9 @@ _08145320:
 	ldr r0, [r4, 0x8]
 	cmp r0, 0
 	beq _08145332
-	ldr r0, _08145344 @ =gUnknown_8466F80
+	ldr r0, _08145344 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	ldr r1, _08145348 @ =0x0000019f
-	ldr r2, _0814534C @ =gUnknown_8466FD4
+	ldr r2, _0814534C @ =gUnknown_8466FD4	"cmd->parameter == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _08145332:
@@ -1469,10 +1469,10 @@ _08145350:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _08145364
-	ldr r0, _08145370 @ =gUnknown_8466F80
+	ldr r0, _08145370 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xD2
 	lsls r1, 1
-	ldr r2, _08145374 @ =gUnknown_8466FEC
+	ldr r2, _08145374 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _08145364:
@@ -1488,10 +1488,10 @@ _08145378:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _0814538C
-	ldr r0, _0814539C @ =gUnknown_8466F80
+	ldr r0, _0814539C @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xD5
 	lsls r1, 1
-	ldr r2, _081453A0 @ =gUnknown_8466FEC
+	ldr r2, _081453A0 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _0814538C:
@@ -1508,10 +1508,10 @@ _081453A4:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _081453B8
-	ldr r0, _081453D0 @ =gUnknown_8466F80
+	ldr r0, _081453D0 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xD8
 	lsls r1, 1
-	ldr r2, _081453D4 @ =gUnknown_8466FEC
+	ldr r2, _081453D4 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _081453B8:
@@ -1532,10 +1532,10 @@ _081453D8:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _081453EC
-	ldr r0, _08145404 @ =gUnknown_8466F80
+	ldr r0, _08145404 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xDB
 	lsls r1, 1
-	ldr r2, _08145408 @ =gUnknown_8466FEC
+	ldr r2, _08145408 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _081453EC:
@@ -1556,10 +1556,10 @@ _0814540C:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _08145420
-	ldr r0, _08145438 @ =gUnknown_8466F80
+	ldr r0, _08145438 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xDE
 	lsls r1, 1
-	ldr r2, _0814543C @ =gUnknown_8466FEC
+	ldr r2, _0814543C @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _08145420:
@@ -1608,10 +1608,10 @@ _08145470:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _08145484
-	ldr r0, _08145494 @ =gUnknown_8466F80
+	ldr r0, _08145494 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xE9
 	lsls r1, 1
-	ldr r2, _08145498 @ =gUnknown_8466FEC
+	ldr r2, _08145498 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _08145484:
@@ -1642,9 +1642,9 @@ _081454B8:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _081454CA
-	ldr r0, _081454D8 @ =gUnknown_8466F80
+	ldr r0, _081454D8 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	ldr r1, _081454DC @ =0x000001e1
-	ldr r2, _081454E0 @ =gUnknown_8466FEC
+	ldr r2, _081454E0 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _081454CA:
@@ -1662,10 +1662,10 @@ _081454E4:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _081454F8
-	ldr r0, _08145508 @ =gUnknown_8466F80
+	ldr r0, _08145508 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xF3
 	lsls r1, 1
-	ldr r2, _0814550C @ =gUnknown_8466FEC
+	ldr r2, _0814550C @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _081454F8:
@@ -1682,9 +1682,9 @@ _08145510:
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _08145522
-	ldr r0, _0814552C @ =gUnknown_8466F80
+	ldr r0, _0814552C @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	ldr r1, _08145530 @ =0x000001eb
-	ldr r2, _08145534 @ =gUnknown_8466FEC
+	ldr r2, _08145534 @ =gUnknown_8466FEC	"cmd->flag == FALSE"
 	movs r3, 0x1
 	bl AGBAssert
 _08145522:
@@ -1716,10 +1716,10 @@ _0814554C:
 	cmp r0, 0
 	beq _08145566
 _08145558:
-	ldr r0, _08145580 @ =gUnknown_8466F80
+	ldr r0, _08145580 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0xFD
 	lsls r1, 1
-	ldr r2, _08145584 @ =gUnknown_8467000
+	ldr r2, _08145584 @ =gUnknown_8467000	"cmd->flag == FALSE && cmd->parameter == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _08145566:
@@ -1744,10 +1744,10 @@ _08145588:
 	cmp r0, 0
 	beq _081455A2
 _08145594:
-	ldr r0, _081455B8 @ =gUnknown_8466F80
+	ldr r0, _081455B8 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0x80
 	lsls r1, 2
-	ldr r2, _081455BC @ =gUnknown_8467000
+	ldr r2, _081455BC @ =gUnknown_8467000	"cmd->flag == FALSE && cmd->parameter == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _081455A2:
@@ -1770,9 +1770,9 @@ _081455C0:
 	cmp r0, 0
 	beq _081455D8
 _081455CC:
-	ldr r0, _081455E0 @ =gUnknown_8466F80
+	ldr r0, _081455E0 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	ldr r1, _081455E4 @ =0x00000205
-	ldr r2, _081455E8 @ =gUnknown_8467000
+	ldr r2, _081455E8 @ =gUnknown_8467000	"cmd->flag == FALSE && cmd->parameter == NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _081455D8:
@@ -1803,9 +1803,9 @@ sub_8145600: @ 8145600
 	ldr r0, [r4, 0x8]
 	cmp r0, 0x4
 	bls _08145616
-	ldr r0, _08145644 @ =gUnknown_8466F80
+	ldr r0, _08145644 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	ldr r1, _08145648 @ =0x00000222
-	ldr r2, _0814564C @ =gUnknown_8467044
+	ldr r2, _0814564C @ =gUnknown_8467044	"svr->mainseqno < NELEMS(func_tbl)"
 	movs r3, 0x1
 	bl AGBAssert
 _08145616:
@@ -1820,10 +1820,10 @@ _08145616:
 	ldr r0, [r4, 0x8]
 	cmp r0, 0x4
 	bls _0814563C
-	ldr r0, _08145644 @ =gUnknown_8466F80
+	ldr r0, _08145644 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 	movs r1, 0x89
 	lsls r1, 2
-	ldr r2, _0814564C @ =gUnknown_8467044
+	ldr r2, _0814564C @ =gUnknown_8467044	"svr->mainseqno < NELEMS(func_tbl)"
 	movs r3, 0x1
 	bl AGBAssert
 _0814563C:

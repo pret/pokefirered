@@ -308,9 +308,9 @@ _08146E54:
 	movs r0, 0x5
 	b _08146E66
 _08146E58:
-	ldr r0, _08146E6C @ =gUnknown_8468C5C
+	ldr r0, _08146E6C @ =gUnknown_8468C5C	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/menews_jisan.c"
 	ldr r1, _08146E70 @ =0x0000017f
-	ldr r2, _08146E74 @ =gUnknown_8468C94
+	ldr r2, _08146E74 @ =gUnknown_8468C94	"0"
 	movs r3, 0x1
 	bl AGBAssert
 	movs r0, 0

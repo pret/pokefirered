@@ -67,8 +67,8 @@ sub_8058A00: @ 8058A00
 	lsls r0, 6
 	cmp r1, r0
 	ble _08058A3E
-	ldr r0, _08058A68 @ =gUnknown_8352F18
-	ldr r2, _08058A6C @ =gUnknown_8352F4C
+	ldr r0, _08058A68 @ =gUnknown_8352F18	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/fieldmap.c"
+	ldr r2, _08058A6C @ =gUnknown_8352F4C	"VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE"
 	movs r1, 0x9E
 	movs r3, 0x1
 	bl AGBAssert

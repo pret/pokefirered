@@ -11398,9 +11398,9 @@ _0811B6B8: .4byte gUnknown_8457120
 _0811B6BC: .4byte gSaveBlock1Ptr
 _0811B6C0: .4byte gUnknown_2036E38
 _0811B6C4:
-	ldr r0, _0811B6DC @ =gUnknown_8457138
+	ldr r0, _0811B6DC @ =gUnknown_8457138	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
 	ldr r1, _0811B6E0 @ =0x00000183
-	ldr r2, _0811B6E4 @ =gUnknown_8457174
+	ldr r2, _0811B6E4 @ =gUnknown_8457174	"0"
 	movs r3, 0x1
 	bl AGBAssert
 _0811B6D0:
@@ -11481,10 +11481,10 @@ sub_811B754: @ 811B754
 	str r4, [r0]
 	cmp r4, 0
 	bne _0811B774
-	ldr r0, _0811B7A0 @ =gUnknown_8457138
+	ldr r0, _0811B7A0 @ =gUnknown_8457138	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
 	movs r1, 0xDD
 	lsls r1, 1
-	ldr r2, _0811B7A4 @ =gUnknown_8457178
+	ldr r2, _0811B7A4 @ =gUnknown_8457178	"UnionObjWork != NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _0811B774:
@@ -11663,9 +11663,9 @@ sub_811B8BC: @ 811B8BC
 	adds r4, r1, r0
 	cmp r1, 0
 	bne _0811B8DA
-	ldr r0, _0811B8F8 @ =gUnknown_8457138
+	ldr r0, _0811B8F8 @ =gUnknown_8457138	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
 	ldr r1, _0811B8FC @ =0x00000231
-	ldr r2, _0811B900 @ =gUnknown_8457178
+	ldr r2, _0811B900 @ =gUnknown_8457178	"UnionObjWork != NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _0811B8DA:
@@ -11702,9 +11702,9 @@ sub_811B90C: @ 811B90C
 	adds r4, r1, r0
 	cmp r1, 0
 	bne _0811B926
-	ldr r0, _0811B938 @ =gUnknown_8457138
+	ldr r0, _0811B938 @ =gUnknown_8457138	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
 	ldr r1, _0811B93C @ =0x00000241
-	ldr r2, _0811B940 @ =gUnknown_8457178
+	ldr r2, _0811B940 @ =gUnknown_8457178	"UnionObjWork != NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _0811B926:
@@ -11812,9 +11812,9 @@ sub_811B9D8: @ 811B9D8
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _0811B9EE
-	ldr r0, _0811BA0C @ =gUnknown_8457138
+	ldr r0, _0811BA0C @ =gUnknown_8457138	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
 	ldr r1, _0811BA10 @ =0x00000283
-	ldr r2, _0811BA14 @ =gUnknown_8457178
+	ldr r2, _0811BA14 @ =gUnknown_8457178	"UnionObjWork != NULL"
 	movs r3, 0x1
 	bl AGBAssert
 _0811B9EE:
@@ -11857,9 +11857,9 @@ sub_811BA18: @ 811BA18
 	.align 2, 0
 _0811BA38: .4byte sub_811B9D8
 _0811BA3C:
-	ldr r0, _0811BA50 @ =gUnknown_8457138
+	ldr r0, _0811BA50 @ =gUnknown_8457138	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
 	ldr r1, _0811BA54 @ =0x0000028f
-	ldr r2, _0811BA58 @ =gUnknown_8457174
+	ldr r2, _0811BA58 @ =gUnknown_8457174	"0"
 	movs r3, 0x1
 	bl AGBAssert
 	movs r0, 0x10
@@ -12378,9 +12378,9 @@ _0811BE3C:
 	bl sub_811BCA0
 	b _0811BE58
 _0811BE4C:
-	ldr r0, _0811BE60 @ =gUnknown_8457138
+	ldr r0, _0811BE60 @ =gUnknown_8457138	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
 	ldr r1, _0811BE64 @ =0x000003d3
-	ldr r2, _0811BE68 @ =gUnknown_8457174
+	ldr r2, _0811BE68 @ =gUnknown_8457174	"0"
 	movs r3, 0x1
 	bl AGBAssert
 _0811BE58:

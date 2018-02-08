@@ -1385,9 +1385,9 @@ _0806926C:
 _08069274:
 	movs r0, 0
 	strh r0, [r1, 0x34]
-	ldr r0, _08069288 @ =gUnknown_83A720C
+	ldr r0, _08069288 @ =gUnknown_83A720C	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/evobjmv.c"
 	ldr r1, _0806928C @ =0x00003413
-	ldr r2, _08069290 @ =gUnknown_83A7240
+	ldr r2, _08069290 @ =gUnknown_83A7240	"0"
 	movs r3, 0x1
 	bl AGBAssert
 _08069284:

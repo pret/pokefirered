@@ -4370,9 +4370,9 @@ _080CC772:
 	lsrs r0, 16
 	b _080CC78A
 _080CC77C:
-	ldr r0, _080CC790 @ =gUnknown_83F5EF0
+	ldr r0, _080CC790 @ =gUnknown_83F5EF0	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scr_tool.c"
 	ldr r1, _080CC794 @ =0x00000f21
-	ldr r2, _080CC798 @ =gUnknown_83F5F24
+	ldr r2, _080CC798 @ =gUnknown_83F5F24	"0"
 	movs r3, 0x1
 	bl AGBAssert
 	movs r0, 0

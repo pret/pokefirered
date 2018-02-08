@@ -2006,9 +2006,9 @@ _081444F4:
 	ldrb r0, [r0]
 	b _0814450A
 _081444FC:
-	ldr r0, _08144510 @ =gUnknown_8466F28
+	ldr r0, _08144510 @ =gUnknown_8466F28	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c"
 	ldr r1, _08144514 @ =0x00000339
-	ldr r2, _08144518 @ =gUnknown_8466F5C
+	ldr r2, _08144518 @ =gUnknown_8466F5C	"0"
 	movs r3, 0x1
 	bl AGBAssert
 	movs r0, 0
@@ -2074,10 +2074,10 @@ _08144580:
 _08144582:
 	cmp r2, 0
 	bne _081445A4
-	ldr r0, _0814459C @ =gUnknown_8466F28
+	ldr r0, _0814459C @ =gUnknown_8466F28	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c"
 	movs r1, 0xD9
 	lsls r1, 2
-	ldr r2, _081445A0 @ =gUnknown_8466F5C
+	ldr r2, _081445A0 @ =gUnknown_8466F5C	"0"
 	movs r3, 0x1
 	bl AGBAssert
 	b _081445B6
@@ -2209,9 +2209,9 @@ _08144684:
 _0814469C: .4byte gSaveBlock1Ptr
 _081446A0: .4byte 0x000032e4
 _081446A4:
-	ldr r0, _081446B8 @ =gUnknown_8466F28
+	ldr r0, _081446B8 @ =gUnknown_8466F28	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c"
 	ldr r1, _081446BC @ =0x00000391
-	ldr r2, _081446C0 @ =gUnknown_8466F5C
+	ldr r2, _081446C0 @ =gUnknown_8466F5C	"0"
 	movs r3, 0x1
 	bl AGBAssert
 	movs r0, 0
@@ -2318,10 +2318,10 @@ _08144762:
 _0814476C: .4byte gSaveBlock1Ptr
 _08144770: .4byte 0x00003464
 _08144774:
-	ldr r0, _08144788 @ =gUnknown_8466F28
+	ldr r0, _08144788 @ =gUnknown_8466F28	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c"
 	movs r1, 0xF7
 	lsls r1, 2
-	ldr r2, _0814478C @ =gUnknown_8466F5C
+	ldr r2, _0814478C @ =gUnknown_8466F5C	"0"
 	movs r3, 0x1
 	bl AGBAssert
 _08144782:

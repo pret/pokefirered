@@ -11,13 +11,13 @@ gUnknown_823238C:: @ 823238C
 	.incbin "graphics/23238C.tmap"
 
 gUnknown_8232578:: @ 8232578
-	.incbin "debug_font.gbapal"
+	.incbin "graphics/debug_font.gbapal"
 
 gUnknown_8232598:: @ 8232598
-	.incbin "debug_font.4bpp"
+	.incbin "graphics/debug_font.4bpp"
 
 gUnknown_8234598:: @ 8234598
-	.incbin "234598.bin"
+	.incbin "graphics/234598.bin"
 
 gUnknown_82345C0:: @ 82345C0
 	.ascii "GameFreak inc."

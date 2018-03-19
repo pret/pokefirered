@@ -2,10 +2,10 @@
 
 	.align 2
 gUnknown_8231EC4:: @ 8231EC4
-	.incbin "baserom.gba", 0x231EC4, 0x20
+	.incbin "graphics/wireless_adapter/0.gbapal"
 
 gUnknown_8231EE4:: @ 8231EE4
-	.incbin "baserom.gba", 0x231EE4, 0x4A8
+	.incbin "graphics/wireless_adapter/0.4bpp.lz"
 
 gUnknown_823238C:: @ 823238C
 	.incbin "baserom.gba", 0x23238C, 0x1EC

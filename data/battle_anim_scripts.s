@@ -1,7 +1,7 @@
 	.section script_data, "aw", %progbits
 
 gUnknown_81C68EC:: @ 81C68EC
-	.incbin "baserom.gba", 0x1C68EC, 0x8
+	.4byte 0xc3002f, 0xffff0140
 
 gUnknown_81C68F4:: @ 81C68F4
 	.incbin "baserom.gba", 0x1C68F4, 0x590

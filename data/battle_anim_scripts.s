@@ -13,4 +13,4 @@ gUnknown_81C6EA8:: @ 81C6EA8 - table
 	.incbin "baserom.gba", 0x1C6EA8, 0x70
 
 gUnknown_81C6F18:: @ 81C6F18
-	.incbin "battle_anim_scripts.bin"
+	.incbin "baserom.gba", 0x1C6F18, 0xF690

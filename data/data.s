@@ -20,11 +20,11 @@ gUnknown_8234598:: @ 8234598
 	.incbin "graphics/234598.bin"
 
 gUnknown_82345C0:: @ 82345C0
-	.ascii "GameFreak inc."
+	.asciz "GameFreak inc."
 	.2byte 0
 
 gUnknown_82345D0:: @ 82345D0
-	.ascii "TEST PRINT\nP0\nP1\nP2\nP3"
+	.asciz "TEST PRINT\nP0\nP1\nP2\nP3"
 	.2byte 0
 
 gUnknown_82345E8:: @ 82345E8

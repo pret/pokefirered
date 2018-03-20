@@ -8,7 +8,7 @@ gUnknown_8231EE4:: @ 8231EE4
 	.incbin "graphics/wireless_adapter/0.4bpp.lz"
 
 gUnknown_823238C:: @ 823238C
-	.incbin "graphics/23238C.tmap"
+	.incbin "graphics/23238C.tmap.lz"
 
 gUnknown_8232578:: @ 8232578
 	.incbin "graphics/debug_font.gbapal"
@@ -21,15 +21,14 @@ gUnknown_8234598:: @ 8234598
 
 gUnknown_82345C0:: @ 82345C0
 	.asciz "GameFreak inc."
-	.2byte 0
+	.byte 0
 
 gUnknown_82345D0:: @ 82345D0
 	.asciz "TEST PRINT\nP0\nP1\nP2\nP3"
-	.2byte 0
+	.byte 0
 
 gUnknown_82345E8:: @ 82345E8
-	.4byte 0x1081
-	.4byte 0x1f8
+	.4byte 0x1f8, 0x1081
 
 gUnknown_82345F0:: @ 82345F0
 	.incbin "baserom.gba", 0x2345F0, 0x20

@@ -1,4 +1,5 @@
-	.include asm/macros/battle_ai_script.inc
+	.include "asm/macros/battle_ai_script.inc"
+
 	.section script_data, "aw", %progbits
 
 gUnknown_81D9BF4:: @ 81D9BF4
@@ -11,7 +12,7 @@ gUnknown_81D9BF4:: @ 81D9BF4
 	.4byte gUnknown_81DBB16
 	.4byte gUnknown_81DBB3B
 	.4byte gUnknown_81DBB3C
-	.4byte_gUnknown_81DBC91
+	.4byte gUnknown_81DBC91
 	.4byte gUnknown_81DBCED
 	.4byte gUnknown_81DBCED
 	.4byte gUnknown_81DBCED

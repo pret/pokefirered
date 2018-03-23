@@ -83,7 +83,128 @@ gUnknown_81D9CD8::
 	.4byte gUnknown_81DA433
 
 gUnknown_81D9CE0::
-	.incbin "baserom.gba", 0x1D9CE0, 0x753
+	.byte 0x2F, 0, 0x14, 0x2B
+	.4byte gUnknown_81D9D27
+	.byte 0x19, 0x2D, 0
+	.4byte gUnknown_81DA433
+	.byte 0x19, 0x2E, 0
+	.4byte gUnknown_81DA433
+	.byte 0x19, 0x2F, 0
+	.4byte gUnknown_81DA433
+	.byte 0x19, 0x30, 0
+	.4byte gUnknown_81DA433
+	.byte 0x19, 0x67, 0
+	.4byte gUnknown_81DA433
+	.byte 0x19, 0xAD, 0
+	.4byte gUnknown_81DA433
+	.byte 0x19, 0xFD, 0
+	.4byte gUnknown_81DA433
+	.byte 0x19, 0x3F, 1
+	.4byte gUnknown_81DA433
+	.byte 0x19, 0x40, 1
+	.4byte gUnknown_81DA433
+
+gUnknown_81D9D27::
+	.byte 0x37, 1
+	.4byte gUnknown_81D9FB6
+	.byte 0x37, 7
+	.4byte gUnknown_81D9FCF
+	.byte 0x37, 8
+	.4byte gUnknown_81DA008
+	.byte 0x37, 0xA
+	.4byte gUnknown_81DA020
+	.byte 0x37, 0xB
+	.4byte gUnknown_81DA029
+	.byte 0x37, 0xC
+	.4byte gUnknown_81DA032
+	.byte 0x37, 0xD
+	.4byte gUnknown_81DA03B
+	.byte 0x37, 0xE
+	.4byte gUnknown_81DA044
+	.incbin "baserom.gba", 0x1D9D57, 0x25F
+
+gUnknown_81D9FB6::
+	.byte 0x2F, 0, 0x13, 0xF
+	.4byte gUnknown_81DA433
+	.byte 0x13, 0x48
+	.4byte gUnknown_81DA433
+	.byte 9, 0, 0xFF, 0, 0, 0
+	.4byte gUnknown_81DA433
+	.byte 0x5A
+
+gUnknown_81D9FCF::
+	.byte 0x31, 0
+	.4byte gUnknown_81DA433
+	.byte 0x2F, 0, 0x13, 6
+	.4byte gUnknown_81DA433
+	.byte 0x2C, 1, 0x14, 0
+	.4byte gUnknown_81D9FF2
+	.byte 0x2C, 0, 0x14, 0
+	.4byte gUnknown_81DA433
+	.byte 0x59
+	.4byte gUnknown_81DA424
+
+gUnknown_81D9FF2::
+	.byte 0x5A
+
+gUnknown_81D9FF3::
+	.byte 0xB, 0, 0, 0, 0, 8
+	.4byte gUnknown_81DA433
+	.byte 0xA, 0, 7, 0, 0, 0
+	.4byte 0x81DA430
+	.byte 0x5A
+
+gUnknown_81DA008::
+	.byte 0xA, 0, 7, 0, 0, 0
+	.4byte gUnknown_81DA430
+	.byte 0x31, 0
+	.4byte gUnknown_81DA433
+	.byte 0x5A
+
+gUnknown_81DA019::
+	.byte 5, 1, 0x33
+	.4byte gUnknown_81DA433
+
+gUnknown_81DA020::
+	.byte 0x3B, 1, 1, 0xC
+	.4byte gUnknown_81DA433
+	.byte 0x5A
+
+gUnknown_81DA029::
+	.byte 0x3B, 1, 2, 0xC
+	.4byte gUnknown_81DA433
+	.byte 0x5A
+
+gUnknown_81DA032::
+	.byte 0x3B, 1, 3, 0xC
+	.4byte gUnknown_81DA433
+	.byte 0x5A
+
+gUnknown_81DA03B::
+	.byte 0x3B, 1, 4, 0xC
+	.4byte gUnknown_81DA433
+	.byte 0x5A
+
+gUnknown_81DA044::
+	.byte 0x3B, 1, 5, 0xC
+	.4byte gUnknown_81DA433
+	.byte 0x5A
+	.incbin "baserom.gba", 0x1DA04D, 0x3D7
+	
+gUnknown_81DA424::
+	.byte 4, 0xFF, 0x5A
+
+gUnknown_81DA427::
+	.byte 4, 0xFE, 0x5A
+
+gUnknown_81DA42A::
+	.byte 4, 0xFD, 0x5A
+
+gUnknown_81DA42D::
+	.byte 4, 0xFB, 0x5A
+
+gUnknown_81DA430::
+	.byte 4, 0xF8, 0x5A
 
 gUnknown_81DA433::
 	.byte 0x4, 0xF6, 0x5A

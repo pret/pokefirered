@@ -225,9 +225,6 @@ gUnknown_81DA43C::
 gUnknown_81DA43F::
 	.byte 4, 3, 0x5A
 
-gUnknown_81DA43F::
-	.byte 4, 5, 0x5A
-
 gUnknown_81DA445::
 	.incbin "baserom.gba", 0x1DA445, 0x162A
 
@@ -244,8 +241,10 @@ gUnknown_81DBA7C::
 	.byte 0x38, 0x67
 	.4byte gUnknown_81DBA8A
 	.byte 4, 2
+
 gUnknown_81DA8A::
 	.byte 4, 4
+
 gUnknown_81DA8C::	
 	.byte 0x5A
 

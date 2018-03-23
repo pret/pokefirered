@@ -245,10 +245,10 @@ gUnknown_81DBA7C::
 	.4byte gUnknown_81DBA8A
 	.byte 4, 2
 
-gUnknown_81DA8A::
+gUnknown_81DBA8A::
 	.byte 4, 4
 
-gUnknown_81DA8C::	
+gUnknown_81DBA8C::	
 	.byte 0x5A
 
 gUnknown_81DBA8D::

@@ -55,7 +55,10 @@ gUnknown_81D9C74::
 	.4byte gUnknown_81D9CE0
 
 gUnknown_81D9CA6::
-	.incbin "baserom.gba", 0x1D9CA6, 0xD
+	.byte 0x22, 0x04, 0x26, 0x0D
+	.4byte gUnknown_81DA436
+	.byte 0x59
+	.4byte gUnknown_81D9CE0
 
 gUnknown_81D9CB3::
 	.incbin "baserom.gba", 0x1D9CB3, 0xD
@@ -73,7 +76,10 @@ gUnknown_81D9CE0::
 	.incbin "baserom.gba", 0x1D9CE0, 0x753
 
 gUnknown_81DA433::
-	.incbin "baserom.gba", 0x1DA433, 0x12
+	.byte 0x4, 0xF6, 0x5A
+
+gUnknown_81DA436::
+	.incbin "baserom.gba", 0x1DA436, 0xF
 
 gUnknown_81DA445::
 	.incbin "baserom.gba", 0x1DA445, 0x162A

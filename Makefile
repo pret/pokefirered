@@ -71,13 +71,20 @@ tidy:
 %.png: ;
 %.pal: ;
 
-%.1bpp: %.png  ; $(GFX) $< $@
-%.4bpp: %.png  ; $(GFX) $< $@
-%.8bpp: %.png  ; $(GFX) $< $@
-%.gbapal: %.pal ; $(GFX) $< $@
-%.gbapal: %.png ; $(GFX) $< $@
-%.lz: % ; $(GFX) $< $@
-%.rl: % ; $(GFX) $< $@
+%.1bpp: %.png
+	$(GFX) $< $@
+%.4bpp: %.png
+	$(GFX) $< $@
+%.8bpp: %.png
+	$(GFX) $< $@
+%.gbapal: %.pal
+	$(GFX) $< $@
+%.gbapal: %.png
+	$(GFX) $< $@
+%.lz: %
+	$(GFX) $< $@
+%.rl: %
+	$(GFX) $< $@
 
 src/agb_flash.o: CFLAGS := -O -mthumb-interwork
 src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork

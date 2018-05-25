@@ -282,10 +282,36 @@ gUnknown_81DBAEE::
 	.byte 0x5A
 
 gUnknown_81DBAEF::
-	.incbin "baserom.gba", 0x1DBAEF, 0x27
+	.byte 0x2E, 0x1C
+	.4byte gUnknown_81DBB02, gUnknown_81DBB01
+	.byte 0, 0x80
+	.4byte gUnknown_81DBB01
+	.byte 4, 2
+
+gUnknown_81DBB01::
+	.byte 0x5A
+	
+gUnknown_81DBB02::
+	.byte 1, 7, 9, 0x26, 0x2B, 0x31, 0x53, 0x58, 0x59, 0x62
+	.byte 0x76, 0x78, 0x7A, 0x8C, 0x8E, 0x90, 0xAA, 0xB9, 0xC7, 0xFF
 
 gUnknown_81DBB16::
-	.incbin "baserom.gba", 0x1DBB16, 0x25
+	.byte 0x2C, 0x01, 0x13, 0
+	.4byte gUnknown_81DBB3A
+	.byte 0x24, 0x14, 0
+	.4byte gUnknown_81DBB3A
+	.byte 0x41, 1, 0x7F
+	.4byte gUnknown_81DBB32
+	.byte 0, 0x50
+	.4byte gUnknown_81DBB01
+	
+gUnknown_81DBB32::
+	.byte 0, 0x14
+	.4byte gUnknown_81DBB01
+	.byte 4, 3
+	
+gUnknown_81DBB3A::
+	.byte 0x5A
 
 gUnknown_81DBB3B::
 	.byte 0x5A
@@ -294,10 +320,34 @@ gUnknown_81DBB3C::
 	.incbin "baserom.gba", 0x1DBB3C, 0x155
 
 gUnknown_81DBC91::
-	.incbin "baserom.gba", 0x1DBC91, 0x17
+	.byte 0x38, 0x89
+	.4byte gUnknown_81DBCA7
+	.byte 0x13, 0
+	.4byte gUnknown_81DBCA7
+	.byte 0x4A, 1, 0x13, 0
+	.4byte gUnknown_81DBCA7
+	.byte 4, 5
+	
+gUnknown_81DBCA7::
+	.byte 0x5A
 
 gUnknown_81DBCA8::
-	.incbin "baserom.gba", 0x1DBCA8, 0x2E
+	.byte 0xB, 1, 0, 0xE0, 0, 0
+	.4byte gUnknown_81DBCD5
+	.byte 0xB, 1, 0, 0, 0, 4
+	.4byte gUnknown_81DBCD5
+	.byte 0x2F, 0, 0x13, 0x17
+	.4byte gUnknown_81DBCD5
+	.byte 0x2F, 1, 0x13, 0x1A
+	.4byte gUnknown_81DBCD4
+	.byte 0x2F, 0, 0x13, 0x47
+	.4byte gUnknown_81DBCD5
+	
+gUnknown_81DBCD4::
+	.byte 0x45
+	
+gUnknown_81DBCD5::
+	.byte 0x5A
 
 gUnknown_81DBCD6::
 	.byte 0x46

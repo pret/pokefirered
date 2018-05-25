@@ -17,7 +17,7 @@ gUnknown_8232598:: @ 8232598
 	.incbin "graphics/debug_font.4bpp"
 
 gUnknown_8234598:: @ 8234598
-	.incbin "graphics/234598.bin"
+	.incbin "baserom.gba", 0x234598, 0x28
 
 gUnknown_82345C0:: @ 82345C0
 	.asciz "GameFreak inc."

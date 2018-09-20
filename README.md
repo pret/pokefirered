@@ -1,6 +1,6 @@
-# Pokémon Fire Red
+# Pokémon FireRed and LeafGreen
 
-This is a disassembly of Pokémon Fire Red.
+This is a disassembly of Pokémon FireRed and LeafGreen.
 
 It builds the following rom:
 
@@ -11,13 +11,13 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 
 ## See also
 
-* Disassembly of [**Pokémon Red/Blue**][pokered]
+* Disassembly of [**Pokémon Red and Blue**][pokered]
 * Disassembly of [**Pokémon Yellow**][pokeyellow]
-* Disassembly of [**Pokémon Gold**][pokegold]
+* Disassembly of [**Pokémon Gold and Silver**][pokegold]
 * Disassembly of [**Pokémon Crystal**][pokecrystal]
 * Disassembly of [**Pokémon Pinball**][pokepinball]
 * Disassembly of [**Pokémon TCG**][poketcg]
-* Disassembly of [**Pokémon Ruby**][pokeruby]
+* Disassembly of [**Pokémon Ruby and Sapphire**][pokeruby]
 * Disassembly of [**Pokémon Emerald**][pokeemerald]
 * Discord: [**pret**][Discord]
 * irc: **irc.freenode.net** [**#pret**][irc]

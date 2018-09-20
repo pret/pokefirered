@@ -2,7 +2,7 @@
 
 This is a disassembly of Pokémon FireRed and LeafGreen.
 
-It builds the following rom:
+It builds the following ROM:
 
 * pokefirered.gba `sha1: 41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc`
 

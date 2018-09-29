@@ -2,31 +2,33 @@
 
 	.align 2
 gUnknown_8231EC4:: @ 8231EC4
-	.incbin "baserom.gba", 0x231EC4, 0x20
+	.incbin "graphics/wireless_adapter/0.gbapal"
 
 gUnknown_8231EE4:: @ 8231EE4
-	.incbin "baserom.gba", 0x231EE4, 0x4A8
+	.incbin "graphics/wireless_adapter/0.4bpp.lz"
 
 gUnknown_823238C:: @ 823238C
-	.incbin "baserom.gba", 0x23238C, 0x1EC
+	.incbin "graphics/23238C.tmap.lz"
 
 gUnknown_8232578:: @ 8232578
-	.incbin "baserom.gba", 0x232578, 0x20
+	.incbin "graphics/debug_font.gbapal"
 
 gUnknown_8232598:: @ 8232598
-	.incbin "baserom.gba", 0x232598, 0x2000
+	.incbin "graphics/debug_font.4bpp"
 
 gUnknown_8234598:: @ 8234598
 	.incbin "baserom.gba", 0x234598, 0x28
 
 gUnknown_82345C0:: @ 82345C0
-	.incbin "baserom.gba", 0x2345C0, 0x10
+	.asciz "GameFreak inc."
+	.byte 0
 
 gUnknown_82345D0:: @ 82345D0
-	.incbin "baserom.gba", 0x2345D0, 0x18
+	.asciz "TEST PRINT\nP0\nP1\nP2\nP3"
+	.byte 0
 
 gUnknown_82345E8:: @ 82345E8
-	.incbin "baserom.gba", 0x2345E8, 0x8
+	.4byte 0x1f8, 0x1081
 
 gUnknown_82345F0:: @ 82345F0
 	.incbin "baserom.gba", 0x2345F0, 0x20

@@ -89,18 +89,27 @@ tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
 	rm -r build/*
 
+
 %.s: ;
 %.png: ;
 %.pal: ;
 %.aif: ;
 
-%.1bpp: %.png  ; $(GFX) $< $@
-%.4bpp: %.png  ; $(GFX) $< $@
-%.8bpp: %.png  ; $(GFX) $< $@
-%.gbapal: %.pal ; $(GFX) $< $@
-%.gbapal: %.png ; $(GFX) $< $@
-%.lz: % ; $(GFX) $< $@
-%.rl: % ; $(GFX) $< $@
+%.1bpp: %.png
+	$(GFX) $< $@
+%.4bpp: %.png
+	$(GFX) $< $@
+%.8bpp: %.png
+	$(GFX) $< $@
+%.gbapal: %.pal
+	$(GFX) $< $@
+%.gbapal: %.png
+	$(GFX) $< $@
+%.lz: %
+	$(GFX) $< $@
+%.rl: %
+	$(GFX) $< $@
+
 sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
 sound/%.bin: sound/%.aif ; $(AIF) $< $@
 sound/songs/%.s: sound/songs/%.mid

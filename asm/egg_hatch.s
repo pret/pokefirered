@@ -648,7 +648,7 @@ _08047174:
 	movs r2, 0
 	movs r3, 0
 	bl sub_80F696C
-	ldr r1, _080471A0 @ =gUnknown_8D0051C
+	ldr r1, _080471A0 @ =gMenuMapBin
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
@@ -660,7 +660,7 @@ _08047174:
 	b _0804724A
 	.align 2, 0
 _0804719C: .4byte gUnknown_8D00000
-_080471A0: .4byte gUnknown_8D0051C
+_080471A0: .4byte gMenuMapBin
 _080471A4: .4byte gUnknown_8D004D8
 _080471A8:
 	ldr r0, _080471BC @ =gUnknown_826011C

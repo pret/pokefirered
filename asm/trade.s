@@ -7850,7 +7850,7 @@ sub_80504CC: @ 80504CC
 	movs r2, 0
 	movs r3, 0
 	bl sub_80F696C
-	ldr r0, _080505BC @ =gUnknown_8D0051C
+	ldr r0, _080505BC @ =gMenuMapBin
 	mov r8, r0
 	ldr r4, _080505C0 @ =gUnknown_201C000
 	adds r1, r4, 0
@@ -7897,7 +7897,7 @@ sub_80504CC: @ 80504CC
 	.align 2, 0
 _080505B4: .4byte gUnknown_826D1D4
 _080505B8: .4byte gUnknown_8D00000
-_080505BC: .4byte gUnknown_8D0051C
+_080505BC: .4byte gMenuMapBin
 _080505C0: .4byte gUnknown_201C000
 _080505C4: .4byte gUnknown_8D004D8
 _080505C8: .4byte gUnknown_826D1BC
@@ -8490,7 +8490,7 @@ _08050AC4:
 	ldr r1, _08050AF8 @ =0x00001241
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, _08050AFC @ =gUnknown_826BA5C
+	ldr r0, _08050AFC @ =gUnknown_3379A0Bin
 	ldr r1, _08050B00 @ =0x06002800
 	bl LZ77UnCompVram
 	movs r0, 0x8
@@ -8498,7 +8498,7 @@ _08050AC4:
 	.align 2, 0
 _08050AF4: .4byte gUnknown_2031DAC
 _08050AF8: .4byte 0x00001241
-_08050AFC: .4byte gUnknown_826BA5C
+_08050AFC: .4byte gUnknown_3379A0Bin
 _08050B00: .4byte 0x06002800
 _08050B04:
 	ldr r1, _08050B28 @ =0x00001241
@@ -8529,7 +8529,7 @@ _08050B3C:
 	movs r1, 0x30
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r0, _08050B70 @ =gUnknown_826BF7C
+	ldr r0, _08050B70 @ =gWirelessSignal4bpp
 	ldr r1, _08050B74 @ =0x06004000
 	bl LZ77UnCompVram
 	ldr r0, _08050B78 @ =gUnknown_826C60C
@@ -8548,7 +8548,7 @@ _08050B64:
 	b _08050DB4
 	.align 2, 0
 _08050B6C: .4byte gUnknown_826BF5C
-_08050B70: .4byte gUnknown_826BF7C
+_08050B70: .4byte gWirelessSignal4bpp
 _08050B74: .4byte 0x06004000
 _08050B78: .4byte gUnknown_826C60C
 _08050B7C: .4byte 0x06009000

@@ -6,8 +6,140 @@ gUnknown_8D00000:: @ 8D00000
 gUnknown_8D004D8:: @ 8D004D8
 	.incbin "baserom.gba", 0xD004D8, 0x44
 
-gUnknown_8D0051C:: @ 8D0051C
-	.incbin "baserom.gba", 0xD0051C, 0x1DCC
+	.align 2
+gMenuMapBin:: @ 8D0051C
+	.incbin "graphics/interface/menu_map.bin.lz"
+
+gUnknown_8D00748:: @ 8D00748
+	.incbin "baserom.gba", 0xD00748, 0x488
+
+	@ circled questionmark normal palette, different locations in ruby/emerald
+gUnknown_8D00BD0:: @ 8D00BD0
+	.incbin "baserom.gba", 0xD00BD0, 0x18
+	
+	@ circled questionmark shiny palette, different locations in ruby/emerald
+gUnknown_8D00BE8:: @ 8D00BE8
+	.incbin "baserom.gba", 0xD00BE8, 0x18
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	.align 2
+gOldCharmap4bpp:: @ 8D00C00
+	.incbin "graphics/unused/old_charmap.4bpp.lz" @from ruby
+	
+	.align 2
+gOldCharmapBin:: @ 8D013D8
+	.incbin "graphics/unused/old_charmap.bin.lz" @from ruby
+	
+	.align 2
+gOldCharmapGbapal:: @ 8D01604
+	.incbin "graphics/unused/old_charmap.gbapal.lz" @from ruby
+	
+	.align 2
+gSmokescreenImpact4bpp:: @ 8D0162C
+	.incbin "graphics/battle_anims/sprites/smokescreen_impact.4bpp.lz"
+	
+	.align 2
+gSmokescreenImpactGbapal:: @ 8D0170C
+	.incbin "graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz"
+	
+	.align 2
+gBallPoke4bpp:: @ 8D01724
+	.incbin "graphics/interface/ball/poke.4bpp.lz"
+	
+	.align 2
+gBallPokeGbaPal:: @ 8D017E0
+	.incbin "graphics/interface/ball/poke.gbapal.lz"
+	
+	.align 2
+gBallGreat4bpp:: @ 8D01800
+	.incbin "graphics/interface/ball/great.4bpp.lz"
+	
+	.align 2
+gBallGreatGbapal:: @ 8D018BC
+	.incbin "graphics/interface/ball/great.gbapal.lz"
+	
+	.align 2
+gBallSafari4bpp:: @ 8D018E0
+	.incbin "graphics/interface/ball/safari.4bpp.lz"
+	
+	.align 2
+gBallSafariGbapal:: @ 8D019A4
+	.incbin "graphics/interface/ball/safari.gbapal.lz"
+	
+	.align 2
+gBallUltra4bpp:: @ 8D019C8
+	.incbin "graphics/interface/ball/ultra.4bpp.lz"
+	
+	.align 2
+gBallUltraGbapal:: @ 8D01A7C
+	.incbin "graphics/interface/ball/ultra.gbapal.lz"
+	
+	.align 2
+gBallMaster4bpp:: @ 8D01A9C
+	.incbin "graphics/interface/ball/master.4bpp.lz"
+	
+	.align 2
+gBallMasterGbapal:: @ 8D01B5C
+	.incbin "graphics/interface/ball/master.gbapal.lz"
+	
+	.align 2
+gBallNet4bpp:: @ 8D01B80
+	.incbin "graphics/interface/ball/net.4bpp.lz"
+	
+	.align 2
+gBallNetGbapal:: @ 8D01C40
+	.incbin "graphics/interface/ball/net.gbapal.lz"
+	
+	.align 2
+gBallDive4bpp:: @ 8D01C60
+	.incbin "graphics/interface/ball/dive.4bpp.lz"
+	
+	.align 2
+gBallDiveGbapal:: @ 8D01D74
+	.incbin "graphics/interface/ball/dive.gbapal.lz"
+	
+	.align 2
+gBallNest4bpp:: @ 8D01D9C
+	.incbin "graphics/interface/ball/nest.4bpp.lz"
+	
+	.align 2
+gBallNestGbapal:: @ 8D01E60
+	.incbin "graphics/interface/ball/nest.gbapal.lz"
+	
+	.align 2
+gBallRepeat4bpp:: @ 8D01E84
+	.incbin "graphics/interface/ball/repeat.4bpp.lz"
+	
+	.align 2
+gBallRepeatGbapal:: @ 8D01F44
+	.incbin "graphics/interface/ball/repeat.gbapal.lz"
+	
+	.align 2
+gBallTimer4bpp:: @ 8D01F68
+	.incbin "graphics/interface/ball/timer.4bpp.lz"
+	
+	.align 2
+gBallTimerGbapal:: @ 8D02060
+	.incbin "graphics/interface/ball/timer.gbapal.lz"
+	
+	.align 2
+gBallLuxury4bpp:: @ 8D02084
+	.incbin "graphics/interface/ball/luxury.4bpp.lz"
+	
+	.align 2
+gBallLuxuryGbapal:: @ 8D021B0
+	.incbin "graphics/interface/ball/luxury.gbapal.lz"
+	
+	.align 2
+gBallPremier4bpp:: @ 8D021D8
+	.incbin "graphics/interface/ball/premier.4bpp.lz"
+	
+	.align 2
+gBallPremierGbapal:: @ 8D022C8
+	.incbin "graphics/interface/ball/premier.gbapal.lz"
+	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 gUnknown_8D022E8:: @ 8D022E8
 	.incbin "baserom.gba", 0xD022E8, 0x70F0

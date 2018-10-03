@@ -15,9 +15,9 @@ SECTIONS {
 
 <EWRAM>
 
-        tools/agbcc/lib/libc.a:impure.o(.data);
-        tools/agbcc/lib/libc.a:locale.o(.data);
-        tools/agbcc/lib/libc.a:mallocr.o(.data);
+        *libc.a:impure.o(.data);
+        *libc.a:locale.o(.data);
+        *libc.a:mallocr.o(.data);
         . = 0x40000;
     }
 
@@ -35,7 +35,7 @@ SECTIONS {
         /* COMMON starts at 0x30030E0 */
 <COMMON>
 
-        tools/agbcc/lib/libc.a:sbrkr.o(COMMON);
+        *libc.a:sbrkr.o(COMMON);
         end = .;
 
         . = 0x8000;
@@ -302,57 +302,57 @@ SECTIONS {
         asm/librfu.o(.text);
         src/isagbprn.o(.text);
         asm/libagbsyscall.o(.text);
-        tools/agbcc/lib/libgcc.a:_call_via_rX.o(.text);
-        tools/agbcc/lib/libgcc.a:_divdi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_divsi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_dvmd_tls.o(.text);
-        tools/agbcc/lib/libgcc.a:_fixunsdfsi.o(.text);
-        tools/agbcc/lib/libgcc.a:_modsi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_muldi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_udivdi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_udivsi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_umodsi3.o(.text);
-        tools/agbcc/lib/libgcc.a:dp-bit.o(.text);
-        tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
-        tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
-        tools/agbcc/lib/libc.a:memcpy.o(.text);
-        tools/agbcc/lib/libc.a:memset.o(.text);
-        tools/agbcc/lib/libc.a:strcmp.o(.text);
-        tools/agbcc/lib/libc.a:strcpy.o(.text);
-        tools/agbcc/lib/libc.a:impure.o(.text);
-        tools/agbcc/lib/libc.a:vsprintf.o(.text);
-        tools/agbcc/lib/libc.a:vfprintf.o(.text);
-        tools/agbcc/lib/libc.a:wsetup.o(.text);
-        tools/agbcc/lib/libc.a:dtoa.o(.text);
-        tools/agbcc/lib/libc.a:fflush.o(.text);
-        tools/agbcc/lib/libc.a:findfp.o(.text);
-        tools/agbcc/lib/libc.a:freer.o(.text);
-        tools/agbcc/lib/libc.a:mtrim.o(.text);
-        tools/agbcc/lib/libc.a:fvwrite.o(.text);
-        tools/agbcc/lib/libc.a:fwalk.o(.text);
-        tools/agbcc/lib/libc.a:locale.o(.text);
-        tools/agbcc/lib/libc.a:makebuf.o(.text);
-        tools/agbcc/lib/libc.a:mallocr.o(.text);
-        tools/agbcc/lib/libc.a:mbtowc_r.o(.text);
-        tools/agbcc/lib/libc.a:memchr.o(.text);
-        tools/agbcc/lib/libc.a:memmove.o(.text);
-        tools/agbcc/lib/libc.a:mlock.o(.text);
-        tools/agbcc/lib/libc.a:mprec.o(.text);
-        tools/agbcc/lib/libc.a:s_isinf.o(.text);
-        tools/agbcc/lib/libc.a:s_isnan.o(.text);
-        tools/agbcc/lib/libc.a:sbrkr.o(.text);
-        tools/agbcc/lib/libc.a:stdio.o(.text);
-        tools/agbcc/lib/libc.a:strlen.o(.text);
-        tools/agbcc/lib/libc.a:syscalls.o(.text);
-        tools/agbcc/lib/libc.a:writer.o(.text);
-        tools/agbcc/lib/libc.a:callocr.o(.text);
-        tools/agbcc/lib/libc.a:closer.o(.text);
-        tools/agbcc/lib/libc.a:errno.o(.text);
-        tools/agbcc/lib/libc.a:fstatr.o(.text);
-        tools/agbcc/lib/libc.a:libcfunc.o(.text);
-        tools/agbcc/lib/libc.a:lseekr.o(.text);
-        tools/agbcc/lib/libc.a:readr.o(.text);
+        *libgcc.a:_call_via_rX.o(.text);
+        *libgcc.a:_divdi3.o(.text);
+        *libgcc.a:_divsi3.o(.text);
+        *libgcc.a:_dvmd_tls.o(.text);
+        *libgcc.a:_fixunsdfsi.o(.text);
+        *libgcc.a:_modsi3.o(.text);
+        *libgcc.a:_muldi3.o(.text);
+        *libgcc.a:_udivdi3.o(.text);
+        *libgcc.a:_udivsi3.o(.text);
+        *libgcc.a:_umodsi3.o(.text);
+        *libgcc.a:dp-bit.o(.text);
+        *libgcc.a:fp-bit.o(.text);
+        *libgcc.a:_lshrdi3.o(.text);
+        *libgcc.a:_negdi2.o(.text);
+        *libc.a:memcpy.o(.text);
+        *libc.a:memset.o(.text);
+        *libc.a:strcmp.o(.text);
+        *libc.a:strcpy.o(.text);
+        *libc.a:impure.o(.text);
+        *libc.a:vsprintf.o(.text);
+        *libc.a:vfprintf.o(.text);
+        *libc.a:wsetup.o(.text);
+        *libc.a:dtoa.o(.text);
+        *libc.a:fflush.o(.text);
+        *libc.a:findfp.o(.text);
+        *libc.a:freer.o(.text);
+        *libc.a:mtrim.o(.text);
+        *libc.a:fvwrite.o(.text);
+        *libc.a:fwalk.o(.text);
+        *libc.a:locale.o(.text);
+        *libc.a:makebuf.o(.text);
+        *libc.a:mallocr.o(.text);
+        *libc.a:mbtowc_r.o(.text);
+        *libc.a:memchr.o(.text);
+        *libc.a:memmove.o(.text);
+        *libc.a:mlock.o(.text);
+        *libc.a:mprec.o(.text);
+        *libc.a:s_isinf.o(.text);
+        *libc.a:s_isnan.o(.text);
+        *libc.a:sbrkr.o(.text);
+        *libc.a:stdio.o(.text);
+        *libc.a:strlen.o(.text);
+        *libc.a:syscalls.o(.text);
+        *libc.a:writer.o(.text);
+        *libc.a:callocr.o(.text);
+        *libc.a:closer.o(.text);
+        *libc.a:errno.o(.text);
+        *libc.a:fstatr.o(.text);
+        *libc.a:libcfunc.o(.text);
+        *libc.a:lseekr.o(.text);
+        *libc.a:readr.o(.text);
     } =0
 
     .rodata :
@@ -382,45 +382,45 @@ SECTIONS {
         src/agb_flash_le.o(.rodata);
         data/librfu_rodata.o(.rodata);
         src/isagbprn.o(.rodata);
-        tools/agbcc/lib/libgcc.a:_divdi3.o(.rodata);
-        tools/agbcc/lib/libgcc.a:_udivdi3.o(.rodata);
-        tools/agbcc/lib/libc.a:memcpy.o(.rodata);
-        tools/agbcc/lib/libc.a:memset.o(.rodata);
-        tools/agbcc/lib/libc.a:strcmp.o(.rodata);
-        tools/agbcc/lib/libc.a:strcpy.o(.rodata);
-        tools/agbcc/lib/libc.a:impure.o(.rodata);
-        tools/agbcc/lib/libc.a:vsprintf.o(.rodata);
-        tools/agbcc/lib/libc.a:vfprintf.o(.rodata);
-        tools/agbcc/lib/libc.a:wsetup.o(.rodata);
-        tools/agbcc/lib/libc.a:dtoa.o(.rodata);
-        tools/agbcc/lib/libc.a:fflush.o(.rodata);
-        tools/agbcc/lib/libc.a:findfp.o(.rodata);
-        tools/agbcc/lib/libc.a:freer.o(.rodata);
-        tools/agbcc/lib/libc.a:mtrim.o(.rodata);
-        tools/agbcc/lib/libc.a:fvwrite.o(.rodata);
-        tools/agbcc/lib/libc.a:fwalk.o(.rodata);
-        tools/agbcc/lib/libc.a:locale.o(.rodata);
-        tools/agbcc/lib/libc.a:makebuf.o(.rodata);
-        tools/agbcc/lib/libc.a:mallocr.o(.rodata);
-        tools/agbcc/lib/libc.a:mbtowc_r.o(.rodata);
-        tools/agbcc/lib/libc.a:memchr.o(.rodata);
-        tools/agbcc/lib/libc.a:memmove.o(.rodata);
-        tools/agbcc/lib/libc.a:mlock.o(.rodata);
-        tools/agbcc/lib/libc.a:mprec.o(.rodata);
-        tools/agbcc/lib/libc.a:s_isinf.o(.rodata);
-        tools/agbcc/lib/libc.a:s_isnan.o(.rodata);
-        tools/agbcc/lib/libc.a:sbrkr.o(.rodata);
-        tools/agbcc/lib/libc.a:stdio.o(.rodata);
-        tools/agbcc/lib/libc.a:strlen.o(.rodata);
-        tools/agbcc/lib/libc.a:syscalls.o(.rodata);
-        tools/agbcc/lib/libc.a:writer.o(.rodata);
-        tools/agbcc/lib/libc.a:callocr.o(.rodata);
-        tools/agbcc/lib/libc.a:closer.o(.rodata);
-        tools/agbcc/lib/libc.a:errno.o(.rodata);
-        tools/agbcc/lib/libc.a:fstatr.o(.rodata);
-        tools/agbcc/lib/libc.a:libcfunc.o(.rodata);
-        tools/agbcc/lib/libc.a:lseekr.o(.rodata);
-        tools/agbcc/lib/libc.a:readr.o(.rodata);
+        *libgcc.a:_divdi3.o(.rodata);
+        *libgcc.a:_udivdi3.o(.rodata);
+        *libc.a:memcpy.o(.rodata);
+        *libc.a:memset.o(.rodata);
+        *libc.a:strcmp.o(.rodata);
+        *libc.a:strcpy.o(.rodata);
+        *libc.a:impure.o(.rodata);
+        *libc.a:vsprintf.o(.rodata);
+        *libc.a:vfprintf.o(.rodata);
+        *libc.a:wsetup.o(.rodata);
+        *libc.a:dtoa.o(.rodata);
+        *libc.a:fflush.o(.rodata);
+        *libc.a:findfp.o(.rodata);
+        *libc.a:freer.o(.rodata);
+        *libc.a:mtrim.o(.rodata);
+        *libc.a:fvwrite.o(.rodata);
+        *libc.a:fwalk.o(.rodata);
+        *libc.a:locale.o(.rodata);
+        *libc.a:makebuf.o(.rodata);
+        *libc.a:mallocr.o(.rodata);
+        *libc.a:mbtowc_r.o(.rodata);
+        *libc.a:memchr.o(.rodata);
+        *libc.a:memmove.o(.rodata);
+        *libc.a:mlock.o(.rodata);
+        *libc.a:mprec.o(.rodata);
+        *libc.a:s_isinf.o(.rodata);
+        *libc.a:s_isnan.o(.rodata);
+        *libc.a:sbrkr.o(.rodata);
+        *libc.a:stdio.o(.rodata);
+        *libc.a:strlen.o(.rodata);
+        *libc.a:syscalls.o(.rodata);
+        *libc.a:writer.o(.rodata);
+        *libc.a:callocr.o(.rodata);
+        *libc.a:closer.o(.rodata);
+        *libc.a:errno.o(.rodata);
+        *libc.a:fstatr.o(.rodata);
+        *libc.a:libcfunc.o(.rodata);
+        *libc.a:lseekr.o(.rodata);
+        *libc.a:readr.o(.rodata);
 
         . = ALIGN(4);
     } =0
@@ -433,7 +433,12 @@ SECTIONS {
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0
 
-    . = 0x8D00000;
+    gap1 :
+    {
+        gap1_start = ABSOLUTE(.);
+        BYTE(0xFF)
+        . = 0x8D00000 - gap1_start;
+    } =0xFF
 
     gfx_data :
     ALIGN(4)

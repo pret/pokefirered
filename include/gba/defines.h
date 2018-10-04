@@ -68,4 +68,6 @@
 
 #define WIN_RANGE(a, b) (((a) << 8) | (b))
 
+#define NAKED __attribute__((naked))
+
 #endif // GUARD_GBA_DEFINES

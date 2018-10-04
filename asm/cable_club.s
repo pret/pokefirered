@@ -1211,7 +1211,7 @@ sub_80810CC: @ 80810CC
 	ldr r2, _080810EC @ =0x00001133
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _080810F0 @ =gUnknown_2022B4C
+	ldr r1, _080810F0 @ =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x2
@@ -1222,7 +1222,7 @@ sub_80810CC: @ 80810CC
 	.align 2, 0
 _080810E8: .4byte gUnknown_202271A
 _080810EC: .4byte 0x00001133
-_080810F0: .4byte gUnknown_2022B4C
+_080810F0: .4byte gBattleTypeFlags
 	thumb_func_end sub_80810CC
 
 	thumb_func_start sub_80810F4
@@ -1235,7 +1235,7 @@ sub_80810F4: @ 80810F4
 	ldr r2, _08081120 @ =0x00003311
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _08081124 @ =gUnknown_2022B4C
+	ldr r1, _08081124 @ =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x2
@@ -1247,7 +1247,7 @@ sub_80810F4: @ 80810F4
 _08081118: .4byte gUnknown_20370D0
 _0808111C: .4byte gUnknown_202271A
 _08081120: .4byte 0x00003311
-_08081124: .4byte gUnknown_2022B4C
+_08081124: .4byte gBattleTypeFlags
 	thumb_func_end sub_80810F4
 
 	thumb_func_start sub_8081128
@@ -1257,7 +1257,7 @@ sub_8081128: @ 8081128
 	ldr r2, _08081148 @ =0x00006601
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _0808114C @ =gUnknown_2022B4C
+	ldr r1, _0808114C @ =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x4
@@ -1268,7 +1268,7 @@ sub_8081128: @ 8081128
 	.align 2, 0
 _08081144: .4byte gUnknown_202271A
 _08081148: .4byte 0x00006601
-_0808114C: .4byte gUnknown_2022B4C
+_0808114C: .4byte gBattleTypeFlags
 	thumb_func_end sub_8081128
 
 	thumb_func_start sub_8081150
@@ -1613,26 +1613,26 @@ _080813F4:
 	beq _08081410
 	b _0808141A
 _080813FA:
-	ldr r1, _08081400 @ =gUnknown_2022B4C
+	ldr r1, _08081400 @ =gBattleTypeFlags
 	movs r0, 0xA
 	b _08081418
 	.align 2, 0
-_08081400: .4byte gUnknown_2022B4C
+_08081400: .4byte gBattleTypeFlags
 _08081404:
-	ldr r1, _0808140C @ =gUnknown_2022B4C
+	ldr r1, _0808140C @ =gBattleTypeFlags
 	movs r0, 0xB
 	b _08081418
 	.align 2, 0
-_0808140C: .4byte gUnknown_2022B4C
+_0808140C: .4byte gBattleTypeFlags
 _08081410:
 	bl sub_80A03D8
-	ldr r1, _08081440 @ =gUnknown_2022B4C
+	ldr r1, _08081440 @ =gBattleTypeFlags
 	movs r0, 0x4B
 _08081418:
 	str r0, [r1]
 _0808141A:
 	bl sub_80563F0
-	ldr r1, _08081444 @ =gUnknown_20386AE
+	ldr r1, _08081444 @ =gTrainerBattleOpponent_A
 	movs r2, 0x80
 	lsls r2, 4
 	adds r0, r2, 0
@@ -1649,8 +1649,8 @@ _0808143A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081440: .4byte gUnknown_2022B4C
-_08081444: .4byte gUnknown_20386AE
+_08081440: .4byte gBattleTypeFlags
+_08081444: .4byte gTrainerBattleOpponent_A
 _08081448: .4byte sub_800FD9C
 _0808144C: .4byte gMain
 _08081450: .4byte sub_8081668
@@ -1836,26 +1836,26 @@ _080815C4:
 	beq _080815E0
 	b _080815EA
 _080815CA:
-	ldr r1, _080815D0 @ =gUnknown_2022B4C
+	ldr r1, _080815D0 @ =gBattleTypeFlags
 	movs r0, 0xA
 	b _080815E8
 	.align 2, 0
-_080815D0: .4byte gUnknown_2022B4C
+_080815D0: .4byte gBattleTypeFlags
 _080815D4:
-	ldr r1, _080815DC @ =gUnknown_2022B4C
+	ldr r1, _080815DC @ =gBattleTypeFlags
 	movs r0, 0xB
 	b _080815E8
 	.align 2, 0
-_080815DC: .4byte gUnknown_2022B4C
+_080815DC: .4byte gBattleTypeFlags
 _080815E0:
 	bl sub_80A03D8
-	ldr r1, _08081610 @ =gUnknown_2022B4C
+	ldr r1, _08081610 @ =gBattleTypeFlags
 	movs r0, 0x4B
 _080815E8:
 	str r0, [r1]
 _080815EA:
 	bl sub_80563F0
-	ldr r1, _08081614 @ =gUnknown_20386AE
+	ldr r1, _08081614 @ =gTrainerBattleOpponent_A
 	movs r3, 0x80
 	lsls r3, 4
 	adds r0, r3, 0
@@ -1872,8 +1872,8 @@ _0808160A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081610: .4byte gUnknown_2022B4C
-_08081614: .4byte gUnknown_20386AE
+_08081610: .4byte gBattleTypeFlags
+_08081614: .4byte gTrainerBattleOpponent_A
 _08081618: .4byte sub_800FD9C
 _0808161C: .4byte gMain
 _08081620: .4byte sub_8081668
@@ -1918,7 +1918,7 @@ _08081664: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_start sub_8081668
 sub_8081668: @ 8081668
 	push {r4,r5,lr}
-	ldr r2, _080816B0 @ =gUnknown_2022B4C
+	ldr r2, _080816B0 @ =gBattleTypeFlags
 	ldr r0, [r2]
 	ldr r1, _080816B4 @ =0x0000ffdf
 	ands r0, r1
@@ -1948,7 +1948,7 @@ sub_8081668: @ 8081668
 	beq _080816EC
 	b _0808170A
 	.align 2, 0
-_080816B0: .4byte gUnknown_2022B4C
+_080816B0: .4byte gBattleTypeFlags
 _080816B4: .4byte 0x0000ffdf
 _080816B8: .4byte gUnknown_20370C0
 _080816BC: .4byte gUnknown_300502C

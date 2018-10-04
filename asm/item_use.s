@@ -738,7 +738,7 @@ sub_80A156C: @ 80A156C
 _080A1578:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, _080A15D0 @ =gUnknown_2024284
+	ldr r1, _080A15D0 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x11
 	adds r2, r4, 0
@@ -779,7 +779,7 @@ _080A1598:
 	ldr r3, _080A15E4 @ =sub_80A1648
 	b _080A1616
 	.align 2, 0
-_080A15D0: .4byte gUnknown_2024284
+_080A15D0: .4byte gPlayerParty
 _080A15D4: .4byte gUnknown_203AD30
 _080A15D8: .4byte 0x0000ffff
 _080A15DC: .4byte gUnknown_3005090
@@ -1885,7 +1885,7 @@ sub_80A1E7C: @ 80A1E7C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _080A1EBC @ =gUnknown_2023BCE
+	ldr r1, _080A1EBC @ =gBattlerPartyIndexes
 	ldr r0, _080A1EC0 @ =gUnknown_2024004
 	ldrb r0, [r0]
 	lsls r0, 1
@@ -1893,7 +1893,7 @@ sub_80A1E7C: @ 80A1E7C
 	ldrh r2, [r0]
 	movs r0, 0x64
 	muls r0, r2
-	ldr r1, _080A1EC4 @ =gUnknown_2024284
+	ldr r1, _080A1EC4 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _080A1EC8 @ =gUnknown_203AD30
 	ldrh r1, [r1]
@@ -1912,9 +1912,9 @@ sub_80A1E7C: @ 80A1E7C
 	bl sub_8108E70
 	b _080A1EE4
 	.align 2, 0
-_080A1EBC: .4byte gUnknown_2023BCE
+_080A1EBC: .4byte gBattlerPartyIndexes
 _080A1EC0: .4byte gUnknown_2024004
-_080A1EC4: .4byte gUnknown_2024284
+_080A1EC4: .4byte gPlayerParty
 _080A1EC8: .4byte gUnknown_203AD30
 _080A1ECC: .4byte gUnknown_84169DC
 _080A1ED0: .4byte sub_810A1F8
@@ -2090,7 +2090,7 @@ sub_80A2010: @ 80A2010
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A2044 @ =gUnknown_2022B4C
+	ldr r0, _080A2044 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x8
 	ands r0, r1
@@ -2110,7 +2110,7 @@ sub_80A2010: @ 80A2010
 	bl sub_8108E70
 	b _080A2060
 	.align 2, 0
-_080A2044: .4byte gUnknown_2022B4C
+_080A2044: .4byte gBattleTypeFlags
 _080A2048: .4byte gUnknown_203AD30
 _080A204C: .4byte 0x0000ffff
 _080A2050: .4byte gStringVar4

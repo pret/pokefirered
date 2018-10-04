@@ -2573,7 +2573,7 @@ sub_8103A40: @ 8103A40
 	movs r2, 0x28
 	adds r3, r6, 0
 	bl sub_8107D68
-	ldr r0, _08103AC4 @ =gUnknown_8254784
+	ldr r0, _08103AC4 @ =gBaseStats
 	lsls r4, r5, 3
 	subs r4, r5
 	lsls r4, 2
@@ -2607,7 +2607,7 @@ _08103AB6:
 	bx r0
 	.align 2, 0
 _08103AC0: .4byte gUnknown_203ACF0
-_08103AC4: .4byte gUnknown_8254784
+_08103AC4: .4byte gBaseStats
 	thumb_func_end sub_8103A40
 
 	thumb_func_start sub_8103AC8
@@ -7741,7 +7741,7 @@ _08106478:
 	ldr r0, [r7]
 	adds r0, 0x56
 	ldrb r0, [r0]
-	ldr r1, _081066B4 @ =gUnknown_8254784
+	ldr r1, _081066B4 @ =gBaseStats
 	ldr r2, [sp, 0x1C]
 	lsls r4, r2, 3
 	subs r4, r2
@@ -7974,7 +7974,7 @@ _08106534:
 	b _081066E2
 	.align 2, 0
 _081066B0: .4byte gUnknown_8245EE0
-_081066B4: .4byte gUnknown_8254784
+_081066B4: .4byte gBaseStats
 _081066B8: .4byte gUnknown_203ACF0
 _081066BC: .4byte gUnknown_8452368
 _081066C0: .4byte 0x0000ffff

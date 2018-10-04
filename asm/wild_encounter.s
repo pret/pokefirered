@@ -420,7 +420,7 @@ sub_80829FC: @ 80829FC
 	bl __umodsi3
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08082A38 @ =gUnknown_202402C
+	ldr r1, _08082A38 @ =gEnemyParty
 	str r0, [sp]
 	adds r0, r1, 0
 	adds r1, r4, 0
@@ -429,7 +429,7 @@ sub_80829FC: @ 80829FC
 	bl CreateMonWithNature
 	b _08082A74
 	.align 2, 0
-_08082A38: .4byte gUnknown_202402C
+_08082A38: .4byte gEnemyParty
 _08082A3C:
 	ldr r0, _08082A7C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -445,7 +445,7 @@ _08082A3C:
 	adds r0, r2
 	ldrb r0, [r0]
 	bl sub_8082A88
-	ldr r2, _08082A84 @ =gUnknown_202402C
+	ldr r2, _08082A84 @ =gEnemyParty
 	movs r1, 0x1
 	str r1, [sp]
 	str r0, [sp, 0x4]
@@ -465,7 +465,7 @@ _08082A74:
 	.align 2, 0
 _08082A7C: .4byte gSaveBlock1Ptr
 _08082A80: .4byte gUnknown_83CA71C
-_08082A84: .4byte gUnknown_202402C
+_08082A84: .4byte gEnemyParty
 	thumb_func_end sub_80829FC
 
 	thumb_func_start sub_8082A88
@@ -722,7 +722,7 @@ sub_8082C58: @ 8082C58
 	ldr r5, _08082C90 @ =gUnknown_20386D0
 	movs r0, 0
 	strb r0, [r5, 0x9]
-	ldr r4, _08082C94 @ =gUnknown_2024284
+	ldr r4, _08082C94 @ =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
 	bl GetMonData
@@ -747,7 +747,7 @@ _08082C84:
 	bx r1
 	.align 2, 0
 _08082C90: .4byte gUnknown_20386D0
-_08082C94: .4byte gUnknown_2024284
+_08082C94: .4byte gPlayerParty
 	thumb_func_end sub_8082C58
 
 	thumb_func_start sub_8082C98
@@ -1333,7 +1333,7 @@ _08083120:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _0808315C @ =gUnknown_2024284
+	ldr r0, _0808315C @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
@@ -1357,7 +1357,7 @@ _08083152:
 	b _0808316C
 	.align 2, 0
 _08083158: .4byte 0x00004020
-_0808315C: .4byte gUnknown_2024284
+_0808315C: .4byte gPlayerParty
 _08083160:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1624,7 +1624,7 @@ _08083326:
 	lsls r4, 1
 	lsrs r5, 1
 _0808332A:
-	ldr r0, _08083368 @ =gUnknown_2024284
+	ldr r0, _08083368 @ =gPlayerParty
 	movs r1, 0xC
 	bl GetMonData
 	ldr r1, _0808336C @ =gUnknown_20386D0
@@ -1652,7 +1652,7 @@ _08083356:
 	beq _08083376
 	b _0808337A
 	.align 2, 0
-_08083368: .4byte gUnknown_2024284
+_08083368: .4byte gPlayerParty
 _0808336C: .4byte gUnknown_20386D0
 _08083370:
 	lsls r4, 1

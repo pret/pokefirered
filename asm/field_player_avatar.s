@@ -2834,7 +2834,7 @@ _0805C866:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _0805C888 @ =gUnknown_2024284
+	ldr r0, _0805C888 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -2848,7 +2848,7 @@ _0805C882:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805C888: .4byte gUnknown_2024284
+_0805C888: .4byte gPlayerParty
 	thumb_func_end PartyHasMonWithSurf
 
 	thumb_func_start IsPlayerSurfingNorth

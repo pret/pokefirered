@@ -4051,7 +4051,7 @@ ScrCmd_bufferleadmonspeciesname: @ 806BCC8
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _0806BD0C @ =gUnknown_2024284
+	ldr r1, _0806BD0C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
@@ -4068,7 +4068,7 @@ ScrCmd_bufferleadmonspeciesname: @ 806BCC8
 	bx r1
 	.align 2, 0
 _0806BD08: .4byte gUnknown_83A7294
-_0806BD0C: .4byte gUnknown_2024284
+_0806BD0C: .4byte gPlayerParty
 _0806BD10: .4byte gUnknown_8245EE0
 	thumb_func_end ScrCmd_bufferleadmonspeciesname
 
@@ -4087,7 +4087,7 @@ ScrCmd_bufferpartymonnick: @ 806BD14
 	lsrs r0, 16
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _0806BD54 @ =gUnknown_2024284
+	ldr r1, _0806BD54 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _0806BD58 @ =gUnknown_83A7294
 	lsls r4, 2
@@ -4103,7 +4103,7 @@ ScrCmd_bufferpartymonnick: @ 806BD14
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806BD54: .4byte gUnknown_2024284
+_0806BD54: .4byte gPlayerParty
 _0806BD58: .4byte gUnknown_83A7294
 	thumb_func_end ScrCmd_bufferpartymonnick
 
@@ -4565,7 +4565,7 @@ _0806C0F6:
 	movs r0, 0x64
 	adds r1, r6, 0
 	muls r1, r0
-	ldr r0, _0806C120 @ =gUnknown_2024284
+	ldr r0, _0806C120 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -4581,7 +4581,7 @@ _0806C116:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C120: .4byte gUnknown_2024284
+_0806C120: .4byte gPlayerParty
 	thumb_func_end ScrCmd_checkpartymove
 
 	thumb_func_start ScrCmd_givemoney
@@ -5533,7 +5533,7 @@ ScrCmd_setmonobedient: @ 806C7D4
 	lsrs r0, 16
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _0806C808 @ =gUnknown_2024284
+	ldr r1, _0806C808 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x50
 	mov r2, sp
@@ -5543,7 +5543,7 @@ ScrCmd_setmonobedient: @ 806C7D4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C808: .4byte gUnknown_2024284
+_0806C808: .4byte gPlayerParty
 	thumb_func_end ScrCmd_setmonobedient
 
 	thumb_func_start ScrCmd_checkmonobedience
@@ -5558,7 +5558,7 @@ ScrCmd_checkmonobedience: @ 806C80C
 	ldr r4, _0806C83C @ =gUnknown_20370D0
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _0806C840 @ =gUnknown_2024284
+	ldr r1, _0806C840 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x50
 	movs r2, 0
@@ -5570,7 +5570,7 @@ ScrCmd_checkmonobedience: @ 806C80C
 	bx r1
 	.align 2, 0
 _0806C83C: .4byte gUnknown_20370D0
-_0806C840: .4byte gUnknown_2024284
+_0806C840: .4byte gPlayerParty
 	thumb_func_end ScrCmd_checkmonobedience
 
 	thumb_func_start sub_806C844
@@ -5594,7 +5594,7 @@ sub_806C844: @ 806C844
 	bhi _0806C87A
 	movs r0, 0x64
 	muls r0, r3
-	ldr r1, _0806C884 @ =gUnknown_2024284
+	ldr r1, _0806C884 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x23
 	mov r2, sp
@@ -5606,7 +5606,7 @@ _0806C87A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C884: .4byte gUnknown_2024284
+_0806C884: .4byte gPlayerParty
 	thumb_func_end sub_806C844
 
 	.align 2, 0 @ Don't pad with nop.

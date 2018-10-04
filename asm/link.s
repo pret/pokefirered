@@ -3037,7 +3037,7 @@ _0800AB56:
 _0800AB5C:
 	cmp r3, r2
 	bne _0800AB7E
-	ldr r2, _0800AB88 @ =gUnknown_2022B4C
+	ldr r2, _0800AB88 @ =gBattleTypeFlags
 	ldr r0, [r2]
 	ldr r1, _0800AB8C @ =0x0000ffdf
 	ands r0, r1
@@ -3057,7 +3057,7 @@ _0800AB7E:
 	bx r0
 	.align 2, 0
 _0800AB84: .4byte gUnknown_3003F30
-_0800AB88: .4byte gUnknown_2022B4C
+_0800AB88: .4byte gBattleTypeFlags
 _0800AB8C: .4byte 0x0000ffdf
 _0800AB90: .4byte gLinkVSyncDisabled
 _0800AB94: .4byte gUnknown_3003F80

@@ -765,7 +765,7 @@ PlayCry4: @ 8071EC0
 	bl sub_8071F78
 	b _08071F10
 _08071EEA:
-	ldr r0, _08071F18 @ =gUnknown_2022B4C
+	ldr r0, _08071F18 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -789,7 +789,7 @@ _08071F10:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08071F18: .4byte gUnknown_2022B4C
+_08071F18: .4byte gBattleTypeFlags
 _08071F1C: .4byte gMPlay_BGM
 _08071F20: .4byte 0x0000ffff
 	thumb_func_end PlayCry4

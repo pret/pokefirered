@@ -57,7 +57,7 @@ sub_81507FC: @ 81507FC
 	adds r0, r1
 	movs r1, 0x64
 	muls r1, r6
-	ldr r2, _081508C0 @ =gUnknown_2024284
+	ldr r2, _081508C0 @ =gPlayerParty
 	adds r1, r2
 	bl sub_8152048
 	ldr r0, _081508C4 @ =sub_8150A84
@@ -87,7 +87,7 @@ _081508B0: .4byte 0x00003330
 _081508B4: .4byte 0x000032cc
 _081508B8: .4byte 0x000031a0
 _081508BC: .4byte 0x0000318c
-_081508C0: .4byte gUnknown_2024284
+_081508C0: .4byte gPlayerParty
 _081508C4: .4byte sub_8150A84
 _081508C8: .4byte sub_815201C
 _081508CC:
@@ -6315,7 +6315,7 @@ _081537C6:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _081537F4 @ =gUnknown_2024284
+	ldr r0, _081537F4 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
@@ -6332,7 +6332,7 @@ _081537C6:
 	b _08153804
 	.align 2, 0
 _081537F0: .4byte gUnknown_20370D0
-_081537F4: .4byte gUnknown_2024284
+_081537F4: .4byte gPlayerParty
 _081537F8:
 	adds r5, 0x1
 	cmp r5, 0x5

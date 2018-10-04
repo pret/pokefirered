@@ -42,7 +42,7 @@ _08141C90: .4byte gUnknown_203F3A8
 sub_8141C94: @ 8141C94
 	push {r4-r7,lr}
 	sub sp, 0x10
-	ldr r7, _08141CB0 @ =gUnknown_202402C
+	ldr r7, _08141CB0 @ =gEnemyParty
 	bl sub_80CBDB0
 	lsls r0, 16
 	lsrs r0, 16
@@ -53,7 +53,7 @@ sub_8141C94: @ 8141C94
 	movs r6, 0xF3
 	b _08141CBA
 	.align 2, 0
-_08141CB0: .4byte gUnknown_202402C
+_08141CB0: .4byte gEnemyParty
 _08141CB4:
 	movs r6, 0xF4
 	b _08141CBA
@@ -346,7 +346,7 @@ _08141EF2:
 CreateRoamerMonInstance: @ 8141EF8
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, _08141F84 @ =gUnknown_202402C
+	ldr r5, _08141F84 @ =gEnemyParty
 	bl ZeroEnemyPartyMons
 	ldr r4, _08141F88 @ =gSaveBlock1Ptr
 	ldr r0, [r4]
@@ -406,7 +406,7 @@ CreateRoamerMonInstance: @ 8141EF8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08141F84: .4byte gUnknown_202402C
+_08141F84: .4byte gEnemyParty
 _08141F88: .4byte gSaveBlock1Ptr
 _08141F8C: .4byte 0x000030d0
 _08141F90: .4byte 0x000030dd

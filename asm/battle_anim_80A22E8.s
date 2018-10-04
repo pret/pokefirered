@@ -11132,7 +11132,7 @@ _080A77B6:
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
 	mov r9, r0
-	ldr r0, _080A7818 @ =gUnknown_2022B4C
+	ldr r0, _080A7818 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -11155,7 +11155,7 @@ _080A77B6:
 	.align 2, 0
 _080A7810: .4byte gUnknown_2037F1A
 _080A7814: .4byte gUnknown_3005090
-_080A7818: .4byte gUnknown_2022B4C
+_080A7818: .4byte gBattleTypeFlags
 _080A781C: .4byte gUnknown_2037F1B
 _080A7820:
 	mov r5, sp
@@ -17711,7 +17711,7 @@ _080AAADE:
 sub_80AAAE4: @ 80AAAE4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _080AAB28 @ =gUnknown_2022B4C
+	ldr r0, _080AAB28 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -17740,7 +17740,7 @@ sub_80AAAE4: @ 80AAAE4
 	bl StartSpriteAffineAnim
 	b _080AAB50
 	.align 2, 0
-_080AAB28: .4byte gUnknown_2022B4C
+_080AAB28: .4byte gBattleTypeFlags
 _080AAB2C: .4byte gUnknown_2037F1A
 _080AAB30:
 	ldr r4, _080AAB70 @ =gUnknown_2037F1A
@@ -20135,31 +20135,31 @@ sub_80ABDC8: @ 80ABDC8
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ABDFC
-	ldr r1, _080ABDF0 @ =gUnknown_2023BCE
+	ldr r1, _080ABDF0 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, _080ABDF4 @ =gUnknown_2024284
+	ldr r0, _080ABDF4 @ =gPlayerParty
 	b _080ABE0C
 	.align 2, 0
 _080ABDEC: .4byte gUnknown_2037F1A
-_080ABDF0: .4byte gUnknown_2023BCE
-_080ABDF4: .4byte gUnknown_2024284
+_080ABDF0: .4byte gBattlerPartyIndexes
+_080ABDF4: .4byte gPlayerParty
 _080ABDF8:
 	adds r0, r2, 0
 	b _080ABE3E
 _080ABDFC:
-	ldr r1, _080ABE44 @ =gUnknown_2023BCE
+	ldr r1, _080ABE44 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, _080ABE48 @ =gUnknown_202402C
+	ldr r0, _080ABE48 @ =gEnemyParty
 _080ABE0C:
 	adds r5, r1, r0
 	adds r0, r5, 0
@@ -20190,8 +20190,8 @@ _080ABE3E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080ABE44: .4byte gUnknown_2023BCE
-_080ABE48: .4byte gUnknown_202402C
+_080ABE44: .4byte gBattlerPartyIndexes
+_080ABE48: .4byte gEnemyParty
 	thumb_func_end sub_80ABDC8
 
 	thumb_func_start sub_80ABE4C
@@ -30866,7 +30866,7 @@ sub_80B107C: @ 80B107C
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080B10D8
-	ldr r4, _080B10CC @ =gUnknown_2023D6B
+	ldr r4, _080B10CC @ =sBattler_AI
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -30895,7 +30895,7 @@ sub_80B107C: @ 80B107C
 	b _080B10F4
 	.align 2, 0
 _080B10C8: .4byte gUnknown_2037F02
-_080B10CC: .4byte gUnknown_2023D6B
+_080B10CC: .4byte sBattler_AI
 _080B10D0: .4byte gUnknown_2037F1A
 _080B10D4: .4byte gUnknown_2037F1B
 _080B10D8:
@@ -31170,7 +31170,7 @@ sub_80B12E8: @ 80B12E8
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080B132C
-	ldr r4, _080B1320 @ =gUnknown_2023D6B
+	ldr r4, _080B1320 @ =sBattler_AI
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -31189,7 +31189,7 @@ sub_80B12E8: @ 80B12E8
 	b _080B1332
 	.align 2, 0
 _080B131C: .4byte gUnknown_2037F02
-_080B1320: .4byte gUnknown_2023D6B
+_080B1320: .4byte sBattler_AI
 _080B1324: .4byte gUnknown_2037F1B
 _080B1328: .4byte gUnknown_2037F1A
 _080B132C:
@@ -43678,7 +43678,7 @@ sub_80B7448: @ 80B7448
 	ldr r0, _080B74A0 @ =gUnknown_2037F02
 	ldrh r0, [r0]
 	strh r0, [r6, 0x3A]
-	ldr r4, _080B74A4 @ =gUnknown_2023D6B
+	ldr r4, _080B74A4 @ =sBattler_AI
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_8076B2C
@@ -43696,7 +43696,7 @@ sub_80B7448: @ 80B7448
 	.align 2, 0
 _080B749C: .4byte gUnknown_2037F1A
 _080B74A0: .4byte gUnknown_2037F02
-_080B74A4: .4byte gUnknown_2023D6B
+_080B74A4: .4byte sBattler_AI
 _080B74A8:
 	lsrs r0, r1, 17
 _080B74AA:
@@ -46138,14 +46138,14 @@ _080B87CA:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8818
-	ldr r1, _080B8810 @ =gUnknown_2023BCE
+	ldr r1, _080B8810 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080B8814 @ =gUnknown_202402C
+	ldr r1, _080B8814 @ =gEnemyParty
 	b _080B8828
 	.align 2, 0
 _080B87EC: .4byte gUnknown_2022984
@@ -46157,17 +46157,17 @@ _080B8800: .4byte 0x00000c08
 _080B8804: .4byte gUnknown_2037F1A
 _080B8808: .4byte gSprites
 _080B880C: .4byte gUnknown_2023D44
-_080B8810: .4byte gUnknown_2023BCE
-_080B8814: .4byte gUnknown_202402C
+_080B8810: .4byte gBattlerPartyIndexes
+_080B8814: .4byte gEnemyParty
 _080B8818:
-	ldr r1, _080B88B8 @ =gUnknown_2023BCE
+	ldr r1, _080B88B8 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080B88BC @ =gUnknown_2024284
+	ldr r1, _080B88BC @ =gPlayerParty
 _080B8828:
 	adds r0, r1
 	movs r1, 0xB
@@ -46233,8 +46233,8 @@ _080B8828:
 	bl sub_8075B48
 	b _080B88EC
 	.align 2, 0
-_080B88B8: .4byte gUnknown_2023BCE
-_080B88BC: .4byte gUnknown_2024284
+_080B88B8: .4byte gBattlerPartyIndexes
+_080B88BC: .4byte gPlayerParty
 _080B88C0: .4byte gUnknown_2037F1A
 _080B88C4: .4byte gUnknown_8D1D388
 _080B88C8: .4byte gUnknown_8D1D224
@@ -51093,14 +51093,14 @@ _080BADFE:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BAE4C
-	ldr r1, _080BAE44 @ =gUnknown_2023BCE
+	ldr r1, _080BAE44 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080BAE48 @ =gUnknown_202402C
+	ldr r1, _080BAE48 @ =gEnemyParty
 	b _080BAE5C
 	.align 2, 0
 _080BAE20: .4byte gUnknown_2022984
@@ -51112,17 +51112,17 @@ _080BAE34: .4byte 0x00000c08
 _080BAE38: .4byte gUnknown_2037F1A
 _080BAE3C: .4byte gSprites
 _080BAE40: .4byte gUnknown_2023D44
-_080BAE44: .4byte gUnknown_2023BCE
-_080BAE48: .4byte gUnknown_202402C
+_080BAE44: .4byte gBattlerPartyIndexes
+_080BAE48: .4byte gEnemyParty
 _080BAE4C:
-	ldr r1, _080BAF0C @ =gUnknown_2023BCE
+	ldr r1, _080BAF0C @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080BAF10 @ =gUnknown_2024284
+	ldr r1, _080BAF10 @ =gPlayerParty
 _080BAE5C:
 	adds r0, r1
 	movs r1, 0xB
@@ -51204,8 +51204,8 @@ _080BAEAC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BAF0C: .4byte gUnknown_2023BCE
-_080BAF10: .4byte gUnknown_2024284
+_080BAF0C: .4byte gBattlerPartyIndexes
+_080BAF10: .4byte gPlayerParty
 _080BAF14: .4byte gUnknown_2037F1A
 _080BAF18: .4byte gUnknown_8D20858
 _080BAF1C: .4byte gUnknown_8D2083C
@@ -51561,7 +51561,7 @@ _080BB20A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB25C
-	ldr r1, _080BB254 @ =gUnknown_2023BCE
+	ldr r1, _080BB254 @ =gBattlerPartyIndexes
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	lsls r0, 1
@@ -51569,7 +51569,7 @@ _080BB20A:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080BB258 @ =gUnknown_202402C
+	ldr r1, _080BB258 @ =gEnemyParty
 	b _080BB26E
 	.align 2, 0
 _080BB230: .4byte gUnknown_2037F1B
@@ -51581,10 +51581,10 @@ _080BB244: .4byte 0x00003f3d
 _080BB248: .4byte 0x00003f42
 _080BB24C: .4byte gSprites
 _080BB250: .4byte gUnknown_2023D44
-_080BB254: .4byte gUnknown_2023BCE
-_080BB258: .4byte gUnknown_202402C
+_080BB254: .4byte gBattlerPartyIndexes
+_080BB258: .4byte gEnemyParty
 _080BB25C:
-	ldr r1, _080BB290 @ =gUnknown_2023BCE
+	ldr r1, _080BB290 @ =gBattlerPartyIndexes
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	lsls r0, 1
@@ -51592,7 +51592,7 @@ _080BB25C:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080BB294 @ =gUnknown_2024284
+	ldr r1, _080BB294 @ =gPlayerParty
 _080BB26E:
 	adds r0, r1
 	movs r1, 0xB
@@ -51610,8 +51610,8 @@ _080BB26E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BB290: .4byte gUnknown_2023BCE
-_080BB294: .4byte gUnknown_2024284
+_080BB290: .4byte gBattlerPartyIndexes
+_080BB294: .4byte gPlayerParty
 _080BB298: .4byte gUnknown_3005090
 _080BB29C: .4byte sub_80BB2A0
 	thumb_func_end sub_80BB0D8
@@ -52693,13 +52693,13 @@ _080BBAFC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BBB3C
-	ldr r1, _080BBB34 @ =gUnknown_2023BCE
+	ldr r1, _080BBB34 @ =gBattlerPartyIndexes
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080BBB38 @ =gUnknown_202402C
+	ldr r1, _080BBB38 @ =gEnemyParty
 	b _080BBB4A
 	.align 2, 0
 _080BBB20: .4byte gUnknown_2022984
@@ -52707,16 +52707,16 @@ _080BBB24: .4byte gUnknown_2022986
 _080BBB28: .4byte 0x00003f3f
 _080BBB2C: .4byte 0x00003f3d
 _080BBB30: .4byte 0x00003f42
-_080BBB34: .4byte gUnknown_2023BCE
-_080BBB38: .4byte gUnknown_202402C
+_080BBB34: .4byte gBattlerPartyIndexes
+_080BBB38: .4byte gEnemyParty
 _080BBB3C:
-	ldr r1, _080BBC10 @ =gUnknown_2023BCE
+	ldr r1, _080BBC10 @ =gBattlerPartyIndexes
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080BBC14 @ =gUnknown_2024284
+	ldr r1, _080BBC14 @ =gPlayerParty
 _080BBB4A:
 	adds r0, r1
 	movs r1, 0xB
@@ -52811,8 +52811,8 @@ _080BBBA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BBC10: .4byte gUnknown_2023BCE
-_080BBC14: .4byte gUnknown_2024284
+_080BBC10: .4byte gBattlerPartyIndexes
+_080BBC14: .4byte gPlayerParty
 _080BBC18: .4byte gUnknown_2023D44
 _080BBC1C: .4byte gUnknown_2022978
 _080BBC20: .4byte gUnknown_202297A
@@ -53377,7 +53377,7 @@ sub_80BC060: @ 80BC060
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BC080 @ =gUnknown_2037F1A
-	ldr r1, _080BC084 @ =gUnknown_2023D6C
+	ldr r1, _080BC084 @ =gBattlerTarget
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, _080BC088 @ =gUnknown_2037F1B
@@ -53389,7 +53389,7 @@ sub_80BC060: @ 80BC060
 	bx r0
 	.align 2, 0
 _080BC080: .4byte gUnknown_2037F1A
-_080BC084: .4byte gUnknown_2023D6C
+_080BC084: .4byte gBattlerTarget
 _080BC088: .4byte gUnknown_2037F1B
 _080BC08C: .4byte gUnknown_2023D6E
 	thumb_func_end sub_80BC060
@@ -53437,7 +53437,7 @@ sub_80BC0DC: @ 80BC0DC
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BC0F4 @ =gUnknown_2037F1B
-	ldr r1, _080BC0F8 @ =gUnknown_2023D6C
+	ldr r1, _080BC0F8 @ =gBattlerTarget
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -53445,7 +53445,7 @@ sub_80BC0DC: @ 80BC0DC
 	bx r0
 	.align 2, 0
 _080BC0F4: .4byte gUnknown_2037F1B
-_080BC0F8: .4byte gUnknown_2023D6C
+_080BC0F8: .4byte gBattlerTarget
 	thumb_func_end sub_80BC0DC
 
 	thumb_func_start sub_80BC0FC
@@ -53454,7 +53454,7 @@ sub_80BC0FC: @ 80BC0FC
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BC11C @ =gUnknown_2037F1A
-	ldr r1, _080BC120 @ =gUnknown_2023D6B
+	ldr r1, _080BC120 @ =sBattler_AI
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, _080BC124 @ =gUnknown_2037F1B
@@ -53466,7 +53466,7 @@ sub_80BC0FC: @ 80BC0FC
 	bx r0
 	.align 2, 0
 _080BC11C: .4byte gUnknown_2037F1A
-_080BC120: .4byte gUnknown_2023D6B
+_080BC120: .4byte sBattler_AI
 _080BC124: .4byte gUnknown_2037F1B
 _080BC128: .4byte gUnknown_2023D6E
 	thumb_func_end sub_80BC0FC
@@ -53796,7 +53796,7 @@ sub_80BC3A0: @ 80BC3A0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080BC3B8 @ =gUnknown_2022B4C
+	ldr r0, _080BC3B8 @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -53805,7 +53805,7 @@ sub_80BC3A0: @ 80BC3A0
 	ldr r0, _080BC3BC @ =sub_80BCC4C
 	b _080BC3E8
 	.align 2, 0
-_080BC3B8: .4byte gUnknown_2022B4C
+_080BC3B8: .4byte gBattleTypeFlags
 _080BC3BC: .4byte sub_80BCC4C
 _080BC3C0:
 	movs r0, 0x80
@@ -53938,7 +53938,7 @@ _080BC4C0:
 	.4byte _080BC574
 	.4byte _080BC6B4
 _080BC4D4:
-	ldr r0, _080BC4EC @ =gUnknown_2022B4C
+	ldr r0, _080BC4EC @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -53951,7 +53951,7 @@ _080BC4D4:
 	movs r1, 0x10
 	b _080BC4FA
 	.align 2, 0
-_080BC4EC: .4byte gUnknown_2022B4C
+_080BC4EC: .4byte gBattleTypeFlags
 _080BC4F0:
 	lsls r0, r4, 2
 	adds r0, r4
@@ -54310,7 +54310,7 @@ _080BC7AC:
 	adds r2, r0, r1
 	movs r3, 0x10
 	strh r3, [r2, 0x10]
-	ldr r0, _080BC7CC @ =gUnknown_2022B4C
+	ldr r0, _080BC7CC @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -54320,7 +54320,7 @@ _080BC7AC:
 	b _080BC7D4
 	.align 2, 0
 _080BC7C8: .4byte gUnknown_3005090
-_080BC7CC: .4byte gUnknown_2022B4C
+_080BC7CC: .4byte gBattleTypeFlags
 _080BC7D0:
 	movs r0, 0x1
 	strh r0, [r2, 0xC]
@@ -54629,7 +54629,7 @@ _080BCA28:
 	lsls r0, 3
 	adds r2, r0, r1
 	strh r4, [r2, 0x10]
-	ldr r0, _080BCA6C @ =gUnknown_2022B4C
+	ldr r0, _080BCA6C @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -54641,7 +54641,7 @@ _080BCA28:
 _080BCA60: .4byte 0x00001842
 _080BCA64: .4byte 0x00000808
 _080BCA68: .4byte gUnknown_3005090
-_080BCA6C: .4byte gUnknown_2022B4C
+_080BCA6C: .4byte gBattleTypeFlags
 _080BCA70:
 	movs r0, 0x1
 _080BCA72:
@@ -54999,7 +54999,7 @@ _080BCD34:
 	adds r0, 0x1
 	strh r0, [r1, 0x8]
 	ldr r4, _080BCDB4 @ =gSprites
-	ldr r5, _080BCDB8 @ =gUnknown_2023FE8
+	ldr r5, _080BCDB8 @ =gBattleStruct
 	ldr r0, [r5]
 	adds r0, 0x7D
 	ldrb r0, [r0]
@@ -55058,7 +55058,7 @@ _080BCD34:
 	b _080BCEE6
 	.align 2, 0
 _080BCDB4: .4byte gSprites
-_080BCDB8: .4byte gUnknown_2023FE8
+_080BCDB8: .4byte gBattleStruct
 _080BCDBC: .4byte sub_801182C
 _080BCDC0: .4byte 0x00003f06
 _080BCDC4:

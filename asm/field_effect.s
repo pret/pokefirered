@@ -5813,7 +5813,7 @@ FldEff_FieldMoveShowMonInit: @ 8086084
 	movs r1, 0x64
 	adds r4, r0, 0
 	muls r4, r1
-	ldr r0, _080860DC @ =gUnknown_2024284
+	ldr r0, _080860DC @ =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -5840,7 +5840,7 @@ FldEff_FieldMoveShowMonInit: @ 8086084
 	bx r1
 	.align 2, 0
 _080860D8: .4byte gUnknown_20386E0
-_080860DC: .4byte gUnknown_2024284
+_080860DC: .4byte gPlayerParty
 	thumb_func_end FldEff_FieldMoveShowMonInit
 
 	thumb_func_start sub_80860E0

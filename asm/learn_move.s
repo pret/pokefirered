@@ -489,7 +489,7 @@ _080E4A88:
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080E4ACC @ =gUnknown_2024284
+	ldr r1, _080E4ACC @ =gPlayerParty
 	adds r0, r1
 	ldr r3, _080E4AD0 @ =0x00000a67
 	adds r1, r2, r3
@@ -513,7 +513,7 @@ _080E4A88:
 	b _080E4ED8
 	.align 2, 0
 _080E4AC8: .4byte gUnknown_203AAB4
-_080E4ACC: .4byte gUnknown_2024284
+_080E4ACC: .4byte gPlayerParty
 _080E4AD0: .4byte 0x00000a67
 _080E4AD4: .4byte 0xffff0000
 _080E4AD8: .4byte gUnknown_841E405
@@ -738,7 +738,7 @@ _080E4C7E:
 	adds r2, r6
 	bl get_coro_args_x18_x1A
 	bl FreeAllWindowBuffers
-	ldr r0, _080E4CD8 @ =gUnknown_2024284
+	ldr r0, _080E4CD8 @ =gPlayerParty
 	ldr r5, [r7]
 	movs r2, 0x98
 	lsls r2, 2
@@ -767,7 +767,7 @@ _080E4CC8: .4byte gUnknown_2037AB8
 _080E4CCC: .4byte 0x00000263
 _080E4CD0: .4byte 0x00000a68
 _080E4CD4: .4byte 0x00000a6a
-_080E4CD8: .4byte gUnknown_2024284
+_080E4CD8: .4byte gPlayerParty
 _080E4CDC: .4byte gUnknown_2024029
 _080E4CE0: .4byte sub_80E4800
 _080E4CE4:
@@ -870,7 +870,7 @@ _080E4DB4:
 	ldrb r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, _080E4E50 @ =gUnknown_2024284
+	ldr r5, _080E4E50 @ =gPlayerParty
 	adds r0, r5
 	ldrb r1, [r2]
 	adds r1, 0xD
@@ -936,7 +936,7 @@ _080E4DB4:
 	strh r0, [r1]
 	b _080E4EDA
 	.align 2, 0
-_080E4E50: .4byte gUnknown_2024284
+_080E4E50: .4byte gPlayerParty
 _080E4E54: .4byte gStringVar3
 _080E4E58: .4byte gUnknown_8247094
 _080E4E5C: .4byte 0x00000261
@@ -1264,7 +1264,7 @@ sub_80E50CC: @ 80E50CC
 	ldrb r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, _080E51EC @ =gUnknown_2024284
+	ldr r5, _080E51EC @ =gPlayerParty
 	adds r0, r5
 	adds r1, 0xE8
 	bl GetMoveRelearnerMoves
@@ -1315,7 +1315,7 @@ _080E513C:
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080E51EC @ =gUnknown_2024284
+	ldr r1, _080E51EC @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
@@ -1393,7 +1393,7 @@ _080E51AA:
 	bx r0
 	.align 2, 0
 _080E51E8: .4byte gUnknown_203AAB4
-_080E51EC: .4byte gUnknown_2024284
+_080E51EC: .4byte gPlayerParty
 _080E51F0: .4byte gUnknown_8247094
 _080E51F4: .4byte gStringVar1
 _080E51F8: .4byte gUnknown_84161C1
@@ -1556,7 +1556,7 @@ sub_80E5340: @ 80E5340
 	sub sp, 0x3C
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r1, _080E5380 @ =gUnknown_8250C04
+	ldr r1, _080E5380 @ =gBattleMoves
 	lsls r0, r5, 1
 	adds r0, r5
 	lsls r0, 2
@@ -1582,7 +1582,7 @@ sub_80E5340: @ 80E5340
 	bl sub_80E559C
 	b _080E53A6
 	.align 2, 0
-_080E5380: .4byte gUnknown_8250C04
+_080E5380: .4byte gBattleMoves
 _080E5384: .4byte gUnknown_8416213
 _080E5388:
 	ldrb r1, [r4, 0x1]
@@ -1599,7 +1599,7 @@ _080E5388:
 	movs r3, 0x4
 	bl sub_80E559C
 _080E53A6:
-	ldr r2, _080E53CC @ =gUnknown_8250C04
+	ldr r2, _080E53CC @ =gBattleMoves
 	lsls r1, r5, 1
 	adds r0, r1, r5
 	lsls r0, 2
@@ -1618,7 +1618,7 @@ _080E53A6:
 	bl sub_80E559C
 	b _080E53F4
 	.align 2, 0
-_080E53CC: .4byte gUnknown_8250C04
+_080E53CC: .4byte gBattleMoves
 _080E53D0: .4byte gUnknown_8416213
 _080E53D4:
 	ldrb r1, [r0, 0x3]
@@ -1636,7 +1636,7 @@ _080E53D4:
 	movs r3, 0x12
 	bl sub_80E559C
 _080E53F4:
-	ldr r1, _080E543C @ =gUnknown_8250C04
+	ldr r1, _080E543C @ =gBattleMoves
 	adds r0, r4, r5
 	lsls r0, 2
 	adds r0, r1
@@ -1669,7 +1669,7 @@ _080E53F4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E543C: .4byte gUnknown_8250C04
+_080E543C: .4byte gBattleMoves
 _080E5440: .4byte gUnknown_84886E8
 	thumb_func_end sub_80E5340
 

@@ -118,14 +118,8 @@ gUnknown_823A004:: @ 823A004
 gUnknown_823E558:: @ 823E558
 	.incbin "baserom.gba", 0x23E558, 0x570
 
-gUnknown_823EAC8:: @ 823EAC8
-	.incbin "baserom.gba", 0x23EAC8, 0x4
-
-gUnknown_823EACC:: @ 823EACC
-	.incbin "baserom.gba", 0x23EACC, 0xC
-
-gUnknown_823EAD8:: @ 823EAD8
-	.incbin "baserom.gba", 0x23EAD8, 0x7408
+gTrainers:: @ 823EAD8
+	.incbin "baserom.gba", 0x23EAC8, 0x7418
 
 gUnknown_8245EE0:: @ 8245EE0
 	.incbin "baserom.gba", 0x245EE0, 0xD05
@@ -301,7 +295,7 @@ gUnknown_8250A34:: @ 8250A34
 gUnknown_8250B20:: @ 8250B20
 	.incbin "baserom.gba", 0x250B20, 0xE4
 
-gUnknown_8250C04:: @ 8250C04
+gBattleMoves:: @ 8250C04
 	.incbin "baserom.gba", 0x250C04, 0x4
 
 gUnknown_8250C08:: @ 8250C08
@@ -343,7 +337,7 @@ gUnknown_82539D4:: @ 82539D4
 gUnknown_8253AE4:: @ 8253AE4
 	.incbin "baserom.gba", 0x253AE4, 0xCA0
 
-gUnknown_8254784:: @ 8254784
+gBaseStats:: @ 8254784
 	.incbin "baserom.gba", 0x254784, 0x11
 
 gUnknown_8254795:: @ 8254795
@@ -409,7 +403,7 @@ gUnknown_825E074:: @ 825E074
 gUnknown_825E2F4:: @ 825E2F4
 	.incbin "baserom.gba", 0x25E2F4, 0x168
 
-gUnknown_825E45C:: @ 825E45C
+gBitTable:: @ 825E45C
 	.incbin "baserom.gba", 0x25E45C, 0x80
 
 gUnknown_825E4DC:: @ 825E4DC
@@ -3026,7 +3020,7 @@ gUnknown_83F2EE0:: @ 83F2EE0
 gUnknown_83F3024:: @ 83F3024
 	.incbin "baserom.gba", 0x3F3024, 0x2580
 
-gUnknown_83F55A4:: @ 83F55A4
+sBattleAICmdTable:: @ 83F55A4
 	.incbin "baserom.gba", 0x3F55A4, 0x178
 
 gUnknown_83F571C:: @ 83F571C

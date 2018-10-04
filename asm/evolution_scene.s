@@ -58,7 +58,7 @@ _080CDD68:
 	ldrsh r1, [r6, r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, _080CDDA4 @ =gUnknown_2024284
+	ldr r0, _080CDDA4 @ =gPlayerParty
 	adds r7, r1, r0
 	ldrh r4, [r6, 0xC]
 	ldrb r5, [r6, 0xE]
@@ -77,7 +77,7 @@ _080CDD98:
 	bx r0
 	.align 2, 0
 _080CDDA0: .4byte gUnknown_2037AB8
-_080CDDA4: .4byte gUnknown_2024284
+_080CDDA4: .4byte gPlayerParty
 	thumb_func_end Task_BeginEvolutionScene
 
 	thumb_func_start BeginEvolutionScene
@@ -450,7 +450,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	movs r1, 0x64
 	adds r4, r2, 0
 	muls r4, r1
-	ldr r1, _080CE288 @ =gUnknown_2024284
+	ldr r1, _080CE288 @ =gPlayerParty
 	adds r4, r1
 	ldrh r5, [r0, 0xC]
 	adds r0, r4, 0
@@ -606,7 +606,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	.align 2, 0
 _080CE280: .4byte gUnknown_3005090
 _080CE284: .4byte gUnknown_2039A20
-_080CE288: .4byte gUnknown_2024284
+_080CE288: .4byte gPlayerParty
 _080CE28C: .4byte 0x05006000
 _080CE290: .4byte gUnknown_2022974
 _080CE294: .4byte gUnknown_2022976
@@ -645,7 +645,7 @@ CB2_TradeEvolutionSceneLoadGraphics: @ 80CE2DC
 	ldrsh r2, [r0, r1]
 	movs r1, 0x64
 	muls r2, r1
-	ldr r1, _080CE320 @ =gUnknown_2024284
+	ldr r1, _080CE320 @ =gPlayerParty
 	adds r4, r2, r1
 	ldrh r6, [r0, 0xC]
 	ldr r0, _080CE324 @ =gMain
@@ -665,7 +665,7 @@ _080CE30E:
 	.align 2, 0
 _080CE318: .4byte gUnknown_3005090
 _080CE31C: .4byte gUnknown_2039A20
-_080CE320: .4byte gUnknown_2024284
+_080CE320: .4byte gPlayerParty
 _080CE324: .4byte gMain
 _080CE328: .4byte _080CE32C
 	.align 2, 0
@@ -1149,7 +1149,7 @@ _080CE778:
 _080CE782:
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, _080CE8CC @ =gUnknown_2024284
+	ldr r4, _080CE8CC @ =gPlayerParty
 	adds r0, r4
 	mov r9, r0
 	ldr r1, [sp, 0x4]
@@ -1200,7 +1200,7 @@ _080CE7F0:
 	ldrb r1, [r5]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080CE8CC @ =gUnknown_2024284
+	ldr r1, _080CE8CC @ =gPlayerParty
 	adds r0, r1
 	adds r1, r4, 0
 	mov r2, sp
@@ -1214,7 +1214,7 @@ _080CE80C:
 	ldrb r0, [r7]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, _080CE8CC @ =gUnknown_2024284
+	ldr r5, _080CE8CC @ =gPlayerParty
 	adds r0, r5
 	adds r1, r4, 0
 	mov r2, sp
@@ -1293,7 +1293,7 @@ _080CE8B2:
 	.align 2, 0
 _080CE8C4: .4byte gUnknown_8259754
 _080CE8C8: .4byte gUnknown_2024029
-_080CE8CC: .4byte gUnknown_2024284
+_080CE8CC: .4byte gPlayerParty
 _080CE8D0: .4byte gUnknown_8245EE0
 _080CE8D4: .4byte 0x0000012f
 _080CE8D8: .4byte gUnknown_83F8440
@@ -1318,7 +1318,7 @@ sub_80CE8DC: @ 80CE8DC
 	ldrsh r1, [r5, r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, _080CE940 @ =gUnknown_2024284
+	ldr r0, _080CE940 @ =gPlayerParty
 	adds r1, r0
 	mov r9, r1
 	bl sub_806E25C
@@ -1348,7 +1348,7 @@ sub_80CE8DC: @ 80CE8DC
 	bl _080CF528
 	.align 2, 0
 _080CE93C: .4byte gUnknown_3005090
-_080CE940: .4byte gUnknown_2024284
+_080CE940: .4byte gPlayerParty
 _080CE944: .4byte gUnknown_2023E82
 _080CE948:
 	ldr r0, _080CE9A0 @ =gMain
@@ -2433,7 +2433,7 @@ _080CF2B4:
 	b _080CF528
 _080CF2C2:
 	bl FreeAllWindowBuffers
-	ldr r0, _080CF2F8 @ =gUnknown_2024284
+	ldr r0, _080CF2F8 @ =gPlayerParty
 	ldr r1, _080CF2FC @ =gUnknown_3005090
 	mov r3, r8
 	adds r5, r3, r7
@@ -2456,7 +2456,7 @@ _080CF2C2:
 	b _080CF528
 	.align 2, 0
 _080CF2F4: .4byte gUnknown_2037AB8
-_080CF2F8: .4byte gUnknown_2024284
+_080CF2F8: .4byte gPlayerParty
 _080CF2FC: .4byte gUnknown_3005090
 _080CF300: .4byte gUnknown_2024029
 _080CF304: .4byte CB2_EvolutionSceneLoadGraphics
@@ -2733,7 +2733,7 @@ sub_80CF53C: @ 80CF53C
 	ldrsh r1, [r4, r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, _080CF5C0 @ =gUnknown_2024284
+	ldr r0, _080CF5C0 @ =gPlayerParty
 	adds r1, r0
 	mov r8, r1
 	bl sub_806E25C
@@ -2783,7 +2783,7 @@ _080CF5B2:
 	mov pc, r0
 	.align 2, 0
 _080CF5BC: .4byte gUnknown_3005090
-_080CF5C0: .4byte gUnknown_2024284
+_080CF5C0: .4byte gPlayerParty
 _080CF5C4: .4byte gUnknown_2023E82
 _080CF5C8: .4byte _080CF5CC
 	.align 2, 0
@@ -3703,7 +3703,7 @@ _080CFDC6:
 	bl GetBgTilemapBuffer
 	bl Free
 	bl FreeAllWindowBuffers
-	ldr r0, _080CFE1C @ =gUnknown_2024284
+	ldr r0, _080CFE1C @ =gPlayerParty
 	ldr r1, _080CFE20 @ =gUnknown_3005090
 	adds r5, r7, r6
 	lsls r5, 3
@@ -3726,7 +3726,7 @@ _080CFDC6:
 	.align 2, 0
 _080CFE14: .4byte gUnknown_2037AB8
 _080CFE18: .4byte gUnknown_3003F3C
-_080CFE1C: .4byte gUnknown_2024284
+_080CFE1C: .4byte gPlayerParty
 _080CFE20: .4byte gUnknown_3005090
 _080CFE24: .4byte gUnknown_2024029
 _080CFE28: .4byte CB2_TradeEvolutionSceneLoadGraphics

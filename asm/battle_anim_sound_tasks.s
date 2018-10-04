@@ -379,25 +379,25 @@ _080DD0E8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DD10C
-	ldr r1, _080DD104 @ =gUnknown_2023BCE
+	ldr r1, _080DD104 @ =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080DD108 @ =gUnknown_202402C
+	ldr r1, _080DD108 @ =gEnemyParty
 	b _080DD11A
 	.align 2, 0
-_080DD104: .4byte gUnknown_2023BCE
-_080DD108: .4byte gUnknown_202402C
+_080DD104: .4byte gBattlerPartyIndexes
+_080DD108: .4byte gEnemyParty
 _080DD10C:
-	ldr r1, _080DD140 @ =gUnknown_2023BCE
+	ldr r1, _080DD140 @ =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080DD144 @ =gUnknown_2024284
+	ldr r1, _080DD144 @ =gPlayerParty
 _080DD11A:
 	adds r0, r1
 	movs r1, 0xB
@@ -418,8 +418,8 @@ _080DD13A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD140: .4byte gUnknown_2023BCE
-_080DD144: .4byte gUnknown_2024284
+_080DD140: .4byte gBattlerPartyIndexes
+_080DD144: .4byte gPlayerParty
 	thumb_func_end sub_80DD06C
 
 	thumb_func_start sub_80DD148
@@ -491,25 +491,25 @@ _080DD1C4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DD1E8
-	ldr r1, _080DD1E0 @ =gUnknown_2023BCE
+	ldr r1, _080DD1E0 @ =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080DD1E4 @ =gUnknown_202402C
+	ldr r1, _080DD1E4 @ =gEnemyParty
 	b _080DD1F6
 	.align 2, 0
-_080DD1E0: .4byte gUnknown_2023BCE
-_080DD1E4: .4byte gUnknown_202402C
+_080DD1E0: .4byte gBattlerPartyIndexes
+_080DD1E4: .4byte gEnemyParty
 _080DD1E8:
-	ldr r1, _080DD234 @ =gUnknown_2023BCE
+	ldr r1, _080DD234 @ =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080DD238 @ =gUnknown_2024284
+	ldr r1, _080DD238 @ =gPlayerParty
 _080DD1F6:
 	adds r0, r1
 	movs r1, 0xB
@@ -540,8 +540,8 @@ _080DD1F6:
 	bl PlayCry3
 	b _080DD24C
 	.align 2, 0
-_080DD234: .4byte gUnknown_2023BCE
-_080DD238: .4byte gUnknown_2024284
+_080DD234: .4byte gBattlerPartyIndexes
+_080DD238: .4byte gPlayerParty
 _080DD23C: .4byte gUnknown_3005090
 _080DD240: .4byte gUnknown_2037F02
 _080DD244:

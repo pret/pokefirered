@@ -126,7 +126,7 @@ _0811C628:
 	movs r0, 0x64
 	mov r4, r8
 	muls r4, r0
-	ldr r0, _0811C6E0 @ =gUnknown_2024284
+	ldr r0, _0811C6E0 @ =gPlayerParty
 	adds r4, r0
 	adds r0, r7, 0
 	adds r0, 0x92
@@ -208,7 +208,7 @@ _0811C6D2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0811C6E0: .4byte gUnknown_2024284
+_0811C6E0: .4byte gPlayerParty
 _0811C6E4: .4byte gUnknown_8247094
 	thumb_func_end sub_811C5D4
 

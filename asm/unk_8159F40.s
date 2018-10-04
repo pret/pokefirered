@@ -16,7 +16,7 @@ sub_8159F40: @ 8159F40
 	movs r0, 0
 	mov r10, r0
 	mov r9, r0
-	ldr r1, _08159F90 @ =gUnknown_2022B4C
+	ldr r1, _08159F90 @ =gBattleTypeFlags
 	movs r0, 0x80
 	lsls r0, 9
 	str r0, [r1]
@@ -41,21 +41,21 @@ _08159F72:
 	movs r0, 0x64
 	mov r1, r10
 	muls r1, r0
-	ldr r0, _08159F9C @ =gUnknown_2024284
+	ldr r0, _08159F9C @ =gPlayerParty
 	adds r6, r1, r0
 	movs r0, 0x1
 	add r10, r0
 	b _08159FAE
 	.align 2, 0
-_08159F90: .4byte gUnknown_2022B4C
+_08159F90: .4byte gBattleTypeFlags
 _08159F94: .4byte gUnknown_84792D0
 _08159F98: .4byte gUnknown_20370C0
-_08159F9C: .4byte gUnknown_2024284
+_08159F9C: .4byte gPlayerParty
 _08159FA0:
 	movs r0, 0x64
 	mov r1, r9
 	muls r1, r0
-	ldr r0, _0815A004 @ =gUnknown_202402C
+	ldr r0, _0815A004 @ =gEnemyParty
 	adds r6, r1, r0
 	movs r2, 0x1
 	add r9, r2
@@ -102,7 +102,7 @@ _08159FD4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815A004: .4byte gUnknown_202402C
+_0815A004: .4byte gEnemyParty
 	thumb_func_end sub_8159F40
 
 	thumb_func_start sub_815A008

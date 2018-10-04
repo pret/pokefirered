@@ -13,7 +13,7 @@ hm_prepare_dive_probably: @ 80E5684
 	lsrs r0, 24
 	movs r6, 0x64
 	muls r0, r6
-	ldr r4, _080E56D0 @ =gUnknown_2024284
+	ldr r4, _080E56D0 @ =gPlayerParty
 	adds r0, r4
 	movs r1, 0x3A
 	bl GetMonData
@@ -40,7 +40,7 @@ hm_prepare_dive_probably: @ 80E5684
 	movs r0, 0
 	b _080E56D6
 	.align 2, 0
-_080E56D0: .4byte gUnknown_2024284
+_080E56D0: .4byte gPlayerParty
 _080E56D4:
 	movs r0, 0x1
 _080E56D6:
@@ -121,7 +121,7 @@ _080E5768:
 	mov r10, r0
 	mov r0, r10
 	muls r0, r5
-	ldr r1, _080E57A0 @ =gUnknown_2024284
+	ldr r1, _080E57A0 @ =gPlayerParty
 	mov r9, r1
 	adds r6, r0, r1
 	adds r0, r6, 0
@@ -143,7 +143,7 @@ _080E5796:
 	bl sub_80E5934
 	b _080E57D4
 	.align 2, 0
-_080E57A0: .4byte gUnknown_2024284
+_080E57A0: .4byte gPlayerParty
 _080E57A4:
 	movs r0, 0x1
 	bl PlaySE
@@ -192,7 +192,7 @@ sub_80E57E8: @ 80E57E8
 	ldrsb r1, [r5, r1]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080E5834 @ =gUnknown_2024284
+	ldr r1, _080E5834 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x3A
 	bl GetMonData
@@ -213,7 +213,7 @@ sub_80E57E8: @ 80E57E8
 	bx r0
 	.align 2, 0
 _080E5830: .4byte gUnknown_203B0A0
-_080E5834: .4byte gUnknown_2024284
+_080E5834: .4byte gPlayerParty
 _080E5838: .4byte sub_80E583C
 	thumb_func_end sub_80E57E8
 
@@ -228,7 +228,7 @@ sub_80E583C: @ 80E583C
 	ldrsb r1, [r0, r1]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080E5888 @ =gUnknown_2024284
+	ldr r1, _080E5888 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _080E588C @ =gStringVar1
 	bl GetMonNickname
@@ -253,7 +253,7 @@ sub_80E583C: @ 80E583C
 	bx r0
 	.align 2, 0
 _080E5884: .4byte gUnknown_203B0A0
-_080E5888: .4byte gUnknown_2024284
+_080E5888: .4byte gPlayerParty
 _080E588C: .4byte gStringVar1
 _080E5890: .4byte gStringVar4
 _080E5894: .4byte gUnknown_8416F27

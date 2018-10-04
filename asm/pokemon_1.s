@@ -80,7 +80,7 @@ ZeroMonData: @ 803D994
 	thumb_func_start ZeroPlayerPartyMons
 ZeroPlayerPartyMons: @ 803DA14
 	push {r4,r5,lr}
-	ldr r4, _0803DA30 @ =gUnknown_2024284
+	ldr r4, _0803DA30 @ =gPlayerParty
 	movs r0, 0xFA
 	lsls r0, 1
 	adds r5, r4, r0
@@ -94,13 +94,13 @@ _0803DA1E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803DA30: .4byte gUnknown_2024284
+_0803DA30: .4byte gPlayerParty
 	thumb_func_end ZeroPlayerPartyMons
 
 	thumb_func_start ZeroEnemyPartyMons
 ZeroEnemyPartyMons: @ 803DA34
 	push {r4,r5,lr}
-	ldr r4, _0803DA50 @ =gUnknown_202402C
+	ldr r4, _0803DA50 @ =gEnemyParty
 	movs r0, 0xFA
 	lsls r0, 1
 	adds r5, r4, r0
@@ -114,7 +114,7 @@ _0803DA3E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803DA50: .4byte gUnknown_202402C
+_0803DA50: .4byte gEnemyParty
 	thumb_func_end ZeroEnemyPartyMons
 
 	thumb_func_start CreateMon
@@ -310,7 +310,7 @@ _0803DB92:
 	mov r2, sp
 	adds r2, 0xE
 	bl sub_80404D0
-	ldr r4, _0803DCC4 @ =gUnknown_8254784
+	ldr r4, _0803DCC4 @ =gBaseStats
 	mov r2, sp
 	ldrh r1, [r2, 0xE]
 	lsls r0, r1, 3
@@ -405,7 +405,7 @@ _0803DB92:
 	.align 2, 0
 _0803DCBC: .4byte gSaveBlock2Ptr
 _0803DCC0: .4byte gGameLanguage
-_0803DCC4: .4byte gUnknown_8254784
+_0803DCC4: .4byte gBaseStats
 _0803DCC8: .4byte gUnknown_8253AE4
 _0803DCCC: .4byte gGameVersion
 _0803DCD0:
@@ -470,7 +470,7 @@ _0803DCD0:
 	adds r2, r4, 0
 	bl sub_80404D0
 _0803DD58:
-	ldr r2, _0803DD94 @ =gUnknown_8254784
+	ldr r2, _0803DD94 @ =gBaseStats
 	mov r3, sp
 	ldrh r1, [r3, 0xE]
 	lsls r0, r1, 3
@@ -500,7 +500,7 @@ _0803DD7E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803DD94: .4byte gUnknown_8254784
+_0803DD94: .4byte gBaseStats
 	thumb_func_end CreateBoxMon
 
 	thumb_func_start CreateMonWithNature
@@ -1451,7 +1451,7 @@ CalculateMonStats: @ 803E47C
 	.align 2, 0
 _0803E564: .4byte 0x0000012f
 _0803E568:
-	ldr r1, _0803E734 @ =gUnknown_8254784
+	ldr r1, _0803E734 @ =gBaseStats
 	lsls r2, r7, 3
 	subs r0, r2, r7
 	lsls r0, 2
@@ -1475,7 +1475,7 @@ _0803E582:
 	adds r0, 0xA
 	str r0, [sp, 0x4]
 _0803E596:
-	ldr r1, _0803E738 @ =gUnknown_2023FC4
+	ldr r1, _0803E738 @ =gBattleScripting
 	add r2, sp, 0x4
 	ldrb r0, [r2]
 	mov r3, r8
@@ -1491,7 +1491,7 @@ _0803E5AE:
 	adds r0, r5, 0
 	movs r1, 0x3A
 	bl sub_804037C
-	ldr r0, _0803E734 @ =gUnknown_8254784
+	ldr r0, _0803E734 @ =gBaseStats
 	subs r1, r6, r7
 	lsls r1, 2
 	adds r6, r1, r0
@@ -1668,8 +1668,8 @@ _0803E72E:
 	movs r0, 0x1
 	b _0803E758
 	.align 2, 0
-_0803E734: .4byte gUnknown_8254784
-_0803E738: .4byte gUnknown_2023FC4
+_0803E734: .4byte gBaseStats
+_0803E738: .4byte gBattleScripting
 _0803E73C: .4byte 0x0000012f
 _0803E740:
 	ldr r1, [sp, 0x1C]
@@ -1757,7 +1757,7 @@ GetLevelFromMonExp: @ 803E7C4
 	adds r3, r0, 0
 	movs r2, 0x1
 	ldr r6, _0803E828 @ =gUnknown_8253AE4
-	ldr r1, _0803E82C @ =gUnknown_8254784
+	ldr r1, _0803E82C @ =gBaseStats
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
@@ -1793,7 +1793,7 @@ _0803E81A:
 	bx r1
 	.align 2, 0
 _0803E828: .4byte gUnknown_8253AE4
-_0803E82C: .4byte gUnknown_8254784
+_0803E82C: .4byte gBaseStats
 	thumb_func_end GetLevelFromMonExp
 
 	thumb_func_start GetLevelFromBoxMonExp
@@ -1813,7 +1813,7 @@ GetLevelFromBoxMonExp: @ 803E830
 	adds r3, r0, 0
 	movs r2, 0x1
 	ldr r6, _0803E894 @ =gUnknown_8253AE4
-	ldr r1, _0803E898 @ =gUnknown_8254784
+	ldr r1, _0803E898 @ =gBaseStats
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
@@ -1849,7 +1849,7 @@ _0803E886:
 	bx r1
 	.align 2, 0
 _0803E894: .4byte gUnknown_8253AE4
-_0803E898: .4byte gUnknown_8254784
+_0803E898: .4byte gBaseStats
 	thumb_func_end GetLevelFromBoxMonExp
 
 	thumb_func_start GiveMoveToMon
@@ -1932,7 +1932,7 @@ GiveMoveToBattleMon: @ 803E920
 	movs r3, 0
 	adds r5, r0, 0
 	adds r5, 0x24
-	ldr r2, _0803E94C @ =gUnknown_8250C04
+	ldr r2, _0803E94C @ =gBattleMoves
 	lsls r1, r4, 1
 	adds r1, r4
 	lsls r1, 2
@@ -1950,7 +1950,7 @@ _0803E93A:
 	adds r0, r4, 0
 	b _0803E95A
 	.align 2, 0
-_0803E94C: .4byte gUnknown_8250C04
+_0803E94C: .4byte gBattleMoves
 _0803E950:
 	adds r1, 0x2
 	adds r3, 0x1
@@ -2013,7 +2013,7 @@ SetBattleMonMoveSlot: @ 803E9A4
 	strh r1, [r3]
 	adds r0, 0x24
 	adds r0, r2
-	ldr r3, _0803E9D0 @ =gUnknown_8250C04
+	ldr r3, _0803E9D0 @ =gBattleMoves
 	lsls r2, r1, 1
 	adds r2, r1
 	lsls r2, 2
@@ -2024,7 +2024,7 @@ SetBattleMonMoveSlot: @ 803E9A4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803E9D0: .4byte gUnknown_8250C04
+_0803E9D0: .4byte gBattleMoves
 	thumb_func_end SetBattleMonMoveSlot
 
 	thumb_func_start GiveMonInitialMoveset
@@ -2302,7 +2302,7 @@ _0803EBB0:
 	mov r0, sp
 	mov r2, r8
 	strh r2, [r0, 0x6]
-	ldr r1, _0803EC3C @ =gUnknown_8250C04
+	ldr r1, _0803EC3C @ =gBattleMoves
 	mov r2, r8
 	lsls r0, r2, 1
 	add r0, r8
@@ -2339,7 +2339,7 @@ _0803EC04:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803EC3C: .4byte gUnknown_8250C04
+_0803EC3C: .4byte gBattleMoves
 	thumb_func_end DeleteFirstMoveAndGiveMoveToMon
 
 	thumb_func_start DeleteFirstMoveAndGiveMoveToBoxMon
@@ -2388,7 +2388,7 @@ _0803EC5C:
 	mov r0, sp
 	mov r2, r8
 	strh r2, [r0, 0x6]
-	ldr r1, _0803ECE8 @ =gUnknown_8250C04
+	ldr r1, _0803ECE8 @ =gBattleMoves
 	mov r2, r8
 	lsls r0, r2, 1
 	add r0, r8
@@ -2425,7 +2425,7 @@ _0803ECB0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803ECE8: .4byte gUnknown_8250C04
+_0803ECE8: .4byte gBattleMoves
 	thumb_func_end DeleteFirstMoveAndGiveMoveToBoxMon
 
 	.align 2, 0 @ Don't pad with nop.

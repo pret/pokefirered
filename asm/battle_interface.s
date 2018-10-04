@@ -1844,7 +1844,7 @@ _08048966:
 	ldrh r4, [r0, 0x38]
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, _08048A04 @ =gUnknown_2023FE8
+	ldr r5, _08048A04 @ =gBattleStruct
 	ldr r0, [r5]
 	adds r0, 0x7C
 	ldrb r1, [r0]
@@ -1909,7 +1909,7 @@ _080489D0:
 _080489F8: .4byte 0x04000008
 _080489FC: .4byte gSprites
 _08048A00: .4byte 0x06010000
-_08048A04: .4byte gUnknown_2023FE8
+_08048A04: .4byte gBattleStruct
 _08048A08: .4byte gUnknown_202401C
 _08048A0C:
 	ldr r0, [r5]
@@ -1963,7 +1963,7 @@ sub_8048A4C: @ 8048A4C
 _08048A66:
 	ldr r1, _08048B7C @ =gSprites
 	mov r10, r1
-	ldr r2, _08048B80 @ =gUnknown_2023BCE
+	ldr r2, _08048B80 @ =gBattlerPartyIndexes
 	mov r8, r2
 _08048A6E:
 	ldr r0, _08048B84 @ =gUnknown_3004FF0
@@ -2042,7 +2042,7 @@ _08048ABA:
 	bne _08048B08
 	b _08048CE0
 _08048B08:
-	ldr r0, _08048B90 @ =gUnknown_2022B4C
+	ldr r0, _08048B90 @ =gBattleTypeFlags
 	ldr r2, [r0]
 	movs r0, 0x80
 	ands r2, r0
@@ -2078,7 +2078,7 @@ _08048B16:
 	ldrh r0, [r1]
 	movs r2, 0x64
 	muls r0, r2
-	ldr r1, _08048B9C @ =gUnknown_2024284
+	ldr r1, _08048B9C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x39
 	bl GetMonData
@@ -2093,19 +2093,19 @@ _08048B16:
 	ldrh r0, [r2]
 	movs r1, 0x64
 	muls r0, r1
-	ldr r2, _08048B9C @ =gUnknown_2024284
+	ldr r2, _08048B9C @ =gPlayerParty
 	b _08048C6E
 	.align 2, 0
 _08048B78: .4byte gUnknown_2023BCC
 _08048B7C: .4byte gSprites
-_08048B80: .4byte gUnknown_2023BCE
+_08048B80: .4byte gBattlerPartyIndexes
 _08048B84: .4byte gUnknown_3004FF0
 _08048B88: .4byte SpriteCallbackDummy
 _08048B8C: .4byte gUnknown_2024018
-_08048B90: .4byte gUnknown_2022B4C
+_08048B90: .4byte gBattleTypeFlags
 _08048B94: .4byte 0x06010000
 _08048B98: .4byte 0x05000040
-_08048B9C: .4byte gUnknown_2024284
+_08048B9C: .4byte gPlayerParty
 _08048BA0:
 	ldrb r0, [r6]
 	bl UpdateStatusIconInHealthbox
@@ -2114,7 +2114,7 @@ _08048BA0:
 	ldrh r1, [r2]
 	movs r2, 0x64
 	muls r1, r2
-	ldr r2, _08048BDC @ =gUnknown_2024284
+	ldr r2, _08048BDC @ =gPlayerParty
 	adds r1, r2
 	movs r2, 0x5
 	bl UpdateHealthboxAttribute
@@ -2134,13 +2134,13 @@ _08048BA0:
 	bl CpuSet
 	b _08048CCA
 	.align 2, 0
-_08048BDC: .4byte gUnknown_2024284
+_08048BDC: .4byte gPlayerParty
 _08048BE0: .4byte 0x06010680
 _08048BE4: .4byte 0x04000008
 _08048BE8:
 	cmp r4, 0x1
 	bne _08048C94
-	ldr r0, _08048C0C @ =gUnknown_2022B4C
+	ldr r0, _08048C0C @ =gBattleTypeFlags
 	ldr r2, [r0]
 	movs r0, 0x80
 	ands r2, r0
@@ -2151,13 +2151,13 @@ _08048BE8:
 	ldrh r1, [r2]
 	movs r2, 0x64
 	muls r1, r2
-	ldr r2, _08048C10 @ =gUnknown_202402C
+	ldr r2, _08048C10 @ =gEnemyParty
 	adds r1, r2
 	bl sub_80487F8
 	b _08048CCA
 	.align 2, 0
-_08048C0C: .4byte gUnknown_2022B4C
-_08048C10: .4byte gUnknown_202402C
+_08048C0C: .4byte gBattleTypeFlags
+_08048C10: .4byte gEnemyParty
 _08048C14:
 	ldrb r1, [r6]
 	lsls r0, r1, 4
@@ -2185,7 +2185,7 @@ _08048C14:
 	ldrh r0, [r1]
 	movs r2, 0x64
 	muls r0, r2
-	ldr r1, _08048C90 @ =gUnknown_202402C
+	ldr r1, _08048C90 @ =gEnemyParty
 	adds r0, r1
 	movs r1, 0x39
 	bl GetMonData
@@ -2200,7 +2200,7 @@ _08048C14:
 	ldrh r0, [r2]
 	movs r1, 0x64
 	muls r0, r1
-	ldr r2, _08048C90 @ =gUnknown_202402C
+	ldr r2, _08048C90 @ =gEnemyParty
 _08048C6E:
 	adds r0, r2
 	movs r1, 0x3A
@@ -2215,7 +2215,7 @@ _08048C6E:
 	.align 2, 0
 _08048C88: .4byte 0x06010000
 _08048C8C: .4byte 0x05000040
-_08048C90: .4byte gUnknown_202402C
+_08048C90: .4byte gEnemyParty
 _08048C94:
 	ldrb r0, [r6]
 	bl UpdateStatusIconInHealthbox
@@ -2224,11 +2224,11 @@ _08048C94:
 	ldrh r1, [r2]
 	movs r5, 0x64
 	muls r1, r5
-	ldr r4, _08048D04 @ =gUnknown_202402C
+	ldr r4, _08048D04 @ =gEnemyParty
 	adds r1, r4
 	movs r2, 0x5
 	bl UpdateHealthboxAttribute
-	ldr r0, _08048D08 @ =gUnknown_2022B4C
+	ldr r0, _08048D08 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	ands r0, r1
@@ -2273,8 +2273,8 @@ _08048CF2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08048D04: .4byte gUnknown_202402C
-_08048D08: .4byte gUnknown_2022B4C
+_08048D04: .4byte gEnemyParty
+_08048D08: .4byte gBattleTypeFlags
 _08048D0C: .4byte gUnknown_3004FF0
 _08048D10: .4byte gUnknown_2023BCC
 	thumb_func_end sub_8048A4C
@@ -2593,7 +2593,7 @@ _08048F86:
 	cmp r0, 0
 	bne _0804906E
 	movs r6, 0
-	ldr r5, _08048FD8 @ =gUnknown_2022B4C
+	ldr r5, _08048FD8 @ =gBattleTypeFlags
 	mov r10, r5
 	ldr r0, _08048FDC @ =0x0000ffff
 	mov r9, r0
@@ -2628,7 +2628,7 @@ _08048FAA:
 	b _08049056
 	.align 2, 0
 _08048FD4: .4byte 0x0000ff88
-_08048FD8: .4byte gUnknown_2022B4C
+_08048FD8: .4byte gBattleTypeFlags
 _08048FDC: .4byte 0x0000ffff
 _08048FE0: .4byte gSprites
 _08048FE4: .4byte 0x000003ff
@@ -2706,7 +2706,7 @@ _08049062:
 	b _08049148
 _0804906E:
 	movs r6, 0
-	ldr r1, _080490B4 @ =gUnknown_2022B4C
+	ldr r1, _080490B4 @ =gBattleTypeFlags
 	mov r10, r1
 	ldr r2, _080490B8 @ =0x0000ffff
 	mov r9, r2
@@ -2741,7 +2741,7 @@ _08049088:
 	adds r1, 0x3
 	b _08049132
 	.align 2, 0
-_080490B4: .4byte gUnknown_2022B4C
+_080490B4: .4byte gBattleTypeFlags
 _080490B8: .4byte 0x0000ffff
 _080490BC: .4byte gSprites
 _080490C0: .4byte 0x000003ff
@@ -3721,7 +3721,7 @@ sub_804981C: @ 804981C
 	lsls r1, 24
 	lsrs r1, 24
 	mov r10, r1
-	ldr r0, _080498DC @ =gUnknown_2022B4C
+	ldr r0, _080498DC @ =gBattleTypeFlags
 	ldr r1, [r0]
 	ldr r0, _080498E0 @ =0x00010210
 	ands r0, r1
@@ -3746,13 +3746,13 @@ sub_804981C: @ 804981C
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804991C
-	ldr r1, _080498E8 @ =gUnknown_2023BCE
+	ldr r1, _080498E8 @ =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r5, r0, r1
 	ldrh r0, [r5]
 	movs r7, 0x64
 	muls r0, r7
-	ldr r6, _080498EC @ =gUnknown_202402C
+	ldr r6, _080498EC @ =gEnemyParty
 	adds r0, r6
 	adds r1, r4, 0
 	bl sub_80448F8
@@ -3799,11 +3799,11 @@ sub_804981C: @ 804981C
 	bl CpuSet
 	b _0804991C
 	.align 2, 0
-_080498DC: .4byte gUnknown_2022B4C
+_080498DC: .4byte gBattleTypeFlags
 _080498E0: .4byte 0x00010210
 _080498E4: .4byte gSprites
-_080498E8: .4byte gUnknown_2023BCE
-_080498EC: .4byte gUnknown_202402C
+_080498E8: .4byte gBattlerPartyIndexes
+_080498EC: .4byte gEnemyParty
 _080498F0: .4byte 0x06010000
 _080498F4: .4byte 0x04000008
 _080498F8:
@@ -3866,13 +3866,13 @@ UpdateStatusIconInHealthbox: @ 8049934
 	lsls r0, 24
 	cmp r0, 0
 	bne _080499A4
-	ldr r1, _0804999C @ =gUnknown_2023BCE
+	ldr r1, _0804999C @ =gBattlerPartyIndexes
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080499A0 @ =gUnknown_2024284
+	ldr r1, _080499A0 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x37
 	bl GetMonData
@@ -3888,16 +3888,16 @@ UpdateStatusIconInHealthbox: @ 8049934
 	b _080499C0
 	.align 2, 0
 _08049998: .4byte gSprites
-_0804999C: .4byte gUnknown_2023BCE
-_080499A0: .4byte gUnknown_2024284
+_0804999C: .4byte gBattlerPartyIndexes
+_080499A0: .4byte gPlayerParty
 _080499A4:
-	ldr r1, _080499E0 @ =gUnknown_2023BCE
+	ldr r1, _080499E0 @ =gBattlerPartyIndexes
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080499E4 @ =gUnknown_202402C
+	ldr r1, _080499E4 @ =gEnemyParty
 	adds r0, r1
 	movs r1, 0x37
 	bl GetMonData
@@ -3919,8 +3919,8 @@ _080499C0:
 	movs r0, 0x2
 	b _08049AF4
 	.align 2, 0
-_080499E0: .4byte gUnknown_2023BCE
-_080499E4: .4byte gUnknown_202402C
+_080499E0: .4byte gBattlerPartyIndexes
+_080499E4: .4byte gEnemyParty
 _080499E8:
 	movs r0, 0x88
 	ands r0, r4
@@ -4502,7 +4502,7 @@ _08049E96:
 	ldr r0, _08049F48 @ =gUnknown_8253AE4
 	mov r12, r0
 	lsls r1, r4, 2
-	ldr r2, _08049F4C @ =gUnknown_8254784
+	ldr r2, _08049F4C @ =gBaseStats
 	lsls r0, r5, 3
 	subs r0, r5
 	lsls r0, 2
@@ -4566,7 +4566,7 @@ _08049F2E:
 	.align 2, 0
 _08049F44: .4byte gSprites
 _08049F48: .4byte gUnknown_8253AE4
-_08049F4C: .4byte gUnknown_8254784
+_08049F4C: .4byte gBaseStats
 _08049F50:
 	cmp r7, 0x3
 	beq _08049F58
@@ -4911,13 +4911,13 @@ _0804A1D8:
 	movs r4, 0x8
 	str r4, [sp, 0x4]
 	bl sub_804A3C4
-	ldr r1, _0804A280 @ =gUnknown_2023BCE
+	ldr r1, _0804A280 @ =gBattlerPartyIndexes
 	lsls r0, r6, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0804A284 @ =gUnknown_2024284
+	ldr r1, _0804A284 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x38
 	bl GetMonData
@@ -4978,8 +4978,8 @@ _0804A23A:
 	b _0804A2CC
 	.align 2, 0
 _0804A27C: .4byte gUnknown_2024018
-_0804A280: .4byte gUnknown_2023BCE
-_0804A284: .4byte gUnknown_2024284
+_0804A280: .4byte gBattlerPartyIndexes
+_0804A284: .4byte gPlayerParty
 _0804A288: .4byte gSprites
 _0804A28C: .4byte 0x06010000
 _0804A290: .4byte 0x04000008

@@ -111,11 +111,11 @@ DoMoveAnim: @ 807259C
 	lsls r1, 16
 	lsrs r1, 16
 	ldr r2, _080725C0 @ =gUnknown_2037F1A
-	ldr r0, _080725C4 @ =gUnknown_2023D6B
+	ldr r0, _080725C4 @ =sBattler_AI
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r2, _080725C8 @ =gUnknown_2037F1B
-	ldr r0, _080725CC @ =gUnknown_2023D6C
+	ldr r0, _080725CC @ =gBattlerTarget
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r0, _080725D0 @ =gUnknown_81C68F4
@@ -125,9 +125,9 @@ DoMoveAnim: @ 807259C
 	bx r0
 	.align 2, 0
 _080725C0: .4byte gUnknown_2037F1A
-_080725C4: .4byte gUnknown_2023D6B
+_080725C4: .4byte sBattler_AI
 _080725C8: .4byte gUnknown_2037F1B
-_080725CC: .4byte gUnknown_2023D6C
+_080725CC: .4byte gBattlerTarget
 _080725D0: .4byte gUnknown_81C68F4
 	thumb_func_end DoMoveAnim
 
@@ -150,7 +150,7 @@ sub_80725D4: @ 80725D4
 	movs r0, 0
 	bl UpdateOamPriorityInAllHealthboxes
 	movs r4, 0
-	ldr r6, _08072618 @ =gUnknown_2023BCE
+	ldr r6, _08072618 @ =gBattlerPartyIndexes
 	movs r7, 0x64
 	ldr r5, _0807261C @ =gUnknown_2037F1C
 _08072600:
@@ -162,16 +162,16 @@ _08072600:
 	beq _08072624
 	ldrh r0, [r6]
 	muls r0, r7
-	ldr r1, _08072620 @ =gUnknown_202402C
+	ldr r1, _08072620 @ =gEnemyParty
 	b _0807262A
 	.align 2, 0
-_08072618: .4byte gUnknown_2023BCE
+_08072618: .4byte gBattlerPartyIndexes
 _0807261C: .4byte gUnknown_2037F1C
-_08072620: .4byte gUnknown_202402C
+_08072620: .4byte gEnemyParty
 _08072624:
 	ldrh r0, [r6]
 	muls r0, r7
-	ldr r1, _0807264C @ =gUnknown_2024284
+	ldr r1, _0807264C @ =gPlayerParty
 _0807262A:
 	adds r0, r1
 	movs r1, 0xB
@@ -189,7 +189,7 @@ _0807262A:
 	mov r1, r9
 	b _08072658
 	.align 2, 0
-_0807264C: .4byte gUnknown_2024284
+_0807264C: .4byte gPlayerParty
 _08072650: .4byte gUnknown_2037F18
 _08072654:
 	ldr r0, _080726C0 @ =gUnknown_2037F18

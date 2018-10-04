@@ -3431,7 +3431,7 @@ _081334A8:
 	bl ItemIdToBattleMoveId
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r1, _081334D8 @ =gUnknown_8250C04
+	ldr r1, _081334D8 @ =gBattleMoves
 	lsls r0, r7, 1
 	adds r0, r7
 	lsls r0, 2
@@ -3450,7 +3450,7 @@ _081334A8:
 	ldr r2, _081334DC @ =gUnknown_8416213
 	b _081334F0
 	.align 2, 0
-_081334D8: .4byte gUnknown_8250C04
+_081334D8: .4byte gBattleMoves
 _081334DC: .4byte gUnknown_8416213
 _081334E0:
 	ldr r4, _08133524 @ =gStringVar1
@@ -3474,7 +3474,7 @@ _081334F0:
 	movs r1, 0x3
 	movs r3, 0x7
 	bl sub_81332EC
-	ldr r2, _08133528 @ =gUnknown_8250C04
+	ldr r2, _08133528 @ =gBattleMoves
 	lsls r1, r7, 1
 	adds r0, r1, r7
 	lsls r0, 2
@@ -3487,7 +3487,7 @@ _081334F0:
 	b _08133540
 	.align 2, 0
 _08133524: .4byte gStringVar1
-_08133528: .4byte gUnknown_8250C04
+_08133528: .4byte gBattleMoves
 _0813352C: .4byte gUnknown_8416213
 _08133530:
 	ldr r4, _081335A8 @ =gStringVar1
@@ -3514,7 +3514,7 @@ _08133540:
 	movs r3, 0x7
 	bl sub_81332EC
 	ldr r5, _081335A8 @ =gStringVar1
-	ldr r1, _081335AC @ =gUnknown_8250C04
+	ldr r1, _081335AC @ =gBattleMoves
 	adds r0, r6, r7
 	lsls r0, 2
 	adds r0, r1
@@ -3549,7 +3549,7 @@ _0813359A:
 	bx r0
 	.align 2, 0
 _081335A8: .4byte gStringVar1
-_081335AC: .4byte gUnknown_8250C04
+_081335AC: .4byte gBattleMoves
 	thumb_func_end sub_8133444
 
 	thumb_func_start sub_81335B0
@@ -3699,7 +3699,7 @@ sub_813368C: @ 813368C
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8133714
-	ldr r0, _081336F0 @ =gUnknown_8250C04
+	ldr r0, _081336F0 @ =gBattleMoves
 	mov r8, r0
 	adds r0, r6, 0
 	bl ItemIdToBattleMoveId
@@ -3717,7 +3717,7 @@ sub_813368C: @ 813368C
 	.align 2, 0
 _081336E8: .4byte gUnknown_8463220
 _081336EC: .4byte gSprites
-_081336F0: .4byte gUnknown_8250C04
+_081336F0: .4byte gBattleMoves
 _081336F4:
 	lsls r0, r7, 4
 	adds r0, r7
@@ -3898,7 +3898,7 @@ _08133822:
 	ldrh r0, [r5, 0x30]
 	adds r0, 0x1
 	strh r0, [r5, 0x30]
-	ldr r4, _08133878 @ =gUnknown_8250C04
+	ldr r4, _08133878 @ =gBattleMoves
 	ldrh r0, [r5, 0x2E]
 	bl ItemIdToBattleMoveId
 	lsls r0, 16
@@ -3925,7 +3925,7 @@ _08133822:
 	bl sub_8133790
 	b _081338A2
 	.align 2, 0
-_08133878: .4byte gUnknown_8250C04
+_08133878: .4byte gBattleMoves
 _0813387C: .4byte 0xfffffedf
 _08133880:
 	adds r0, r1, 0

@@ -239,7 +239,7 @@ _080F1F98:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, _080F2058 @ =gUnknown_2024284
+	ldr r0, _080F2058 @ =gPlayerParty
 	adds r6, r1, r0
 	adds r0, r6, 0
 	movs r1, 0xB
@@ -325,7 +325,7 @@ _080F2022:
 	.align 2, 0
 _080F2050: .4byte gUnknown_3005090
 _080F2054: .4byte gUnknown_203AB38
-_080F2058: .4byte gUnknown_2024284
+_080F2058: .4byte gPlayerParty
 _080F205C: .4byte 0x000001ff
 _080F2060: .4byte 0xfffffe00
 _080F2064:

@@ -1882,7 +1882,7 @@ AdjustFriendship_step: @ 806D74C
 	strh r1, [r0]
 	cmp r1, 0
 	bne _0806D77A
-	ldr r5, _0806D784 @ =gUnknown_2024284
+	ldr r5, _0806D784 @ =gPlayerParty
 	movs r4, 0x5
 _0806D76A:
 	adds r0, r5, 0
@@ -1898,7 +1898,7 @@ _0806D77A:
 	bx r0
 	.align 2, 0
 _0806D780: .4byte 0x00004021
-_0806D784: .4byte gUnknown_2024284
+_0806D784: .4byte gPlayerParty
 	thumb_func_end AdjustFriendship_step
 
 	thumb_func_start overworld_poison_timer_set

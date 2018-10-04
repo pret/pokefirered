@@ -1580,7 +1580,7 @@ _08111492:
 	subs r0, r3
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _081114C0 @ =gUnknown_2024284
+	ldr r1, _081114C0 @ =gPlayerParty
 	adds r0, r1
 	str r3, [sp, 0x10]
 	bl ZeroMonData
@@ -1597,7 +1597,7 @@ _08111492:
 	b _0811150E
 	.align 2, 0
 _081114BC: .4byte 0x00004027
-_081114C0: .4byte gUnknown_2024284
+_081114C0: .4byte gPlayerParty
 _081114C4:
 	mov r8, r4
 	cmp r5, r0
@@ -1623,7 +1623,7 @@ _081114CE:
 _081114EE:
 	movs r0, 0x64
 	muls r0, r3
-	ldr r1, _08111574 @ =gUnknown_2024284
+	ldr r1, _08111574 @ =gPlayerParty
 	adds r0, r1
 	mov r1, r9
 	movs r2, 0x64
@@ -1688,7 +1688,7 @@ _08111554:
 	bls _08111520
 	b _081115D2
 	.align 2, 0
-_08111574: .4byte gUnknown_2024284
+_08111574: .4byte gPlayerParty
 _08111578:
 	cmp r5, r0
 	bcs _081115D2
@@ -1779,7 +1779,7 @@ sub_8111618: @ 8111618
 _0811161E:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, _08111648 @ =gUnknown_2024284
+	ldr r1, _08111648 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x5
 	bl GetMonData
@@ -1799,7 +1799,7 @@ _08111636:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08111648: .4byte gUnknown_2024284
+_08111648: .4byte gPlayerParty
 	thumb_func_end sub_8111618
 
 	thumb_func_start sub_811164C
@@ -6179,7 +6179,7 @@ sub_81137E4: @ 81137E4
 	lsrs r0, 16
 	cmp r0, 0x22
 	bne _08113814
-	ldr r2, _08113810 @ =gUnknown_823EAC8
+	ldr r2, _08113810 @ =gTrainers
 	ldrh r1, [r1]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -6197,7 +6197,7 @@ sub_81137E4: @ 81137E4
 	movs r0, 0x1
 	b _08113816
 	.align 2, 0
-_08113810: .4byte gUnknown_823EAC8
+_08113810: .4byte gTrainers
 _08113814:
 	movs r0, 0
 _08113816:
@@ -9006,7 +9006,7 @@ sub_8114D68: @ 8114D68
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08114DD8 @ =gUnknown_823EACC
+	ldr r0, _08114DD8 @ =gTrainers+0x4
 	adds r1, r0
 	movs r0, 0x1
 	bl UnkTextUtil_SetPtrI
@@ -9035,7 +9035,7 @@ sub_8114D68: @ 8114D68
 	bx r1
 	.align 2, 0
 _08114DD4: .4byte gStringVar1
-_08114DD8: .4byte gUnknown_823EACC
+_08114DD8: .4byte gTrainers+0x4
 _08114DDC: .4byte gUnknown_8456ACC
 _08114DE0: .4byte gStringVar4
 _08114DE4: .4byte gUnknown_841AF0C
@@ -9325,7 +9325,7 @@ sub_811500C: @ 811500C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08115068 @ =gUnknown_823EACC
+	ldr r0, _08115068 @ =gTrainers+0x4
 	adds r1, r0
 	movs r0, 0
 	bl UnkTextUtil_SetPtrI
@@ -9353,7 +9353,7 @@ sub_811500C: @ 811500C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08115068: .4byte gUnknown_823EACC
+_08115068: .4byte gTrainers+0x4
 _0811506C: .4byte gUnknown_8456ACC
 _08115070: .4byte gStringVar4
 _08115074: .4byte gUnknown_841AF3E
@@ -9544,7 +9544,7 @@ sub_81151DC: @ 81151DC
 	movs r0, 0
 	adds r1, r4, 0
 	bl UnkTextUtil_SetPtrI
-	ldr r3, _08115230 @ =gUnknown_823EAC8
+	ldr r3, _08115230 @ =gTrainers
 	ldrh r1, [r5, 0x4]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -9566,7 +9566,7 @@ _0811521A:
 	b _0811523E
 	.align 2, 0
 _0811522C: .4byte gStringVar1
-_08115230: .4byte gUnknown_823EAC8
+_08115230: .4byte gTrainers
 _08115234:
 	adds r1, r3, 0x4
 	adds r1, r2, r1

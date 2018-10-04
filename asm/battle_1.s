@@ -246,7 +246,7 @@ sub_800F380: @ 800F380
 	adds r1, r5, 0
 	movs r2, 0x4
 	bl CpuSet
-	ldr r0, _0800F404 @ =gUnknown_2022B4C
+	ldr r0, _0800F404 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, _0800F408 @ =0x00010010
 	ands r0, r1
@@ -276,7 +276,7 @@ _0800F3F4: .4byte 0x00002529
 _0800F3F8: .4byte 0x00007fff
 _0800F3FC: .4byte 0x0000675a
 _0800F400: .4byte gUnknown_20376B0
-_0800F404: .4byte gUnknown_2022B4C
+_0800F404: .4byte gBattleTypeFlags
 _0800F408: .4byte 0x00010010
 	thumb_func_end sub_800F380
 
@@ -342,7 +342,7 @@ sub_800F460: @ 800F460
 	lsrs r4, 24
 	mov r9, r4
 	movs r4, 0
-	ldr r0, _0800F4B8 @ =gUnknown_2022B4C
+	ldr r0, _0800F4B8 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -365,7 +365,7 @@ sub_800F460: @ 800F460
 	beq _0800F4CA
 	b _0800F504
 	.align 2, 0
-_0800F4B8: .4byte gUnknown_2022B4C
+_0800F4B8: .4byte gBattleTypeFlags
 _0800F4BC: .4byte gUnknown_3005090
 _0800F4C0:
 	cmp r5, 0x2
@@ -447,7 +447,7 @@ _0800F50E:
 	.align 2, 0
 _0800F544: .4byte 0x00006001
 _0800F548:
-	ldr r0, _0800F564 @ =gUnknown_2023FE8
+	ldr r0, _0800F564 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
 	ldrb r0, [r0]
@@ -461,7 +461,7 @@ _0800F548:
 	ldrh r4, [r0, 0xE]
 	b _0800F578
 	.align 2, 0
-_0800F564: .4byte gUnknown_2023FE8
+_0800F564: .4byte gBattleStruct
 _0800F568: .4byte gUnknown_3005090
 _0800F56C:
 	ldr r1, _0800F5C4 @ =gUnknown_3005090
@@ -529,7 +529,7 @@ sub_800F5CC: @ 800F5CC
 _0800F5E0: .4byte gUnknown_2023E8A
 _0800F5E4: .4byte gUnknown_83FE883
 _0800F5E8:
-	ldr r0, _0800F61C @ =gUnknown_2022B4C
+	ldr r0, _0800F61C @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -538,7 +538,7 @@ _0800F5E8:
 	cmp r2, 0x1
 	bne _0800F632
 	ldr r2, _0800F620 @ =gUnknown_202273C
-	ldr r0, _0800F624 @ =gUnknown_2023FE8
+	ldr r0, _0800F624 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
 	ldrb r1, [r0]
@@ -555,9 +555,9 @@ _0800F5E8:
 	beq _0800F6BC
 	b _0800F6F0
 	.align 2, 0
-_0800F61C: .4byte gUnknown_2022B4C
+_0800F61C: .4byte gBattleTypeFlags
 _0800F620: .4byte gUnknown_202273C
-_0800F624: .4byte gUnknown_2023FE8
+_0800F624: .4byte gBattleStruct
 _0800F628:
 	cmp r0, 0x2
 	beq _0800F6BC
@@ -566,7 +566,7 @@ _0800F628:
 	b _0800F682
 _0800F632:
 	ldr r2, _0800F654 @ =gUnknown_202273C
-	ldr r0, _0800F658 @ =gUnknown_2023FE8
+	ldr r0, _0800F658 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
 	ldrb r1, [r0]
@@ -584,7 +584,7 @@ _0800F632:
 	b _0800F6F0
 	.align 2, 0
 _0800F654: .4byte gUnknown_202273C
-_0800F658: .4byte gUnknown_2023FE8
+_0800F658: .4byte gBattleStruct
 _0800F65C:
 	cmp r0, 0x2
 	beq _0800F682
@@ -595,7 +595,7 @@ _0800F666:
 	cmp r2, 0x1
 	bne _0800F6A4
 	ldr r2, _0800F694 @ =gUnknown_202273C
-	ldr r0, _0800F698 @ =gUnknown_2023FE8
+	ldr r0, _0800F698 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
 	ldrb r1, [r0]
@@ -616,12 +616,12 @@ _0800F682:
 	b _0800F6F0
 	.align 2, 0
 _0800F694: .4byte gUnknown_202273C
-_0800F698: .4byte gUnknown_2023FE8
+_0800F698: .4byte gBattleStruct
 _0800F69C: .4byte gUnknown_83FE874
 _0800F6A0: .4byte gUnknown_83FE87B
 _0800F6A4:
 	ldr r2, _0800F6D0 @ =gUnknown_202273C
-	ldr r0, _0800F6D4 @ =gUnknown_2023FE8
+	ldr r0, _0800F6D4 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
 	ldrb r1, [r0]
@@ -642,7 +642,7 @@ _0800F6BC:
 	b _0800F6F0
 	.align 2, 0
 _0800F6D0: .4byte gUnknown_202273C
-_0800F6D4: .4byte gUnknown_2023FE8
+_0800F6D4: .4byte gBattleStruct
 _0800F6D8: .4byte gUnknown_83FE874
 _0800F6DC: .4byte gUnknown_83FE87B
 _0800F6E0:
@@ -694,7 +694,7 @@ _0800F72C:
 _0800F732:
 	b _0800FAC4
 _0800F734:
-	ldr r0, _0800F75C @ =gUnknown_2022B4C
+	ldr r0, _0800F75C @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -716,7 +716,7 @@ _0800F744:
 	beq _0800F76E
 	b _0800F7C2
 	.align 2, 0
-_0800F75C: .4byte gUnknown_2022B4C
+_0800F75C: .4byte gBattleTypeFlags
 _0800F760: .4byte gUnknown_2022744
 _0800F764:
 	cmp r0, 0x2
@@ -773,7 +773,7 @@ _0800F7C2:
 	bge _0800F744
 	b _0800F830
 _0800F7CC:
-	ldr r0, _0800F844 @ =gUnknown_2023FE8
+	ldr r0, _0800F844 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
 	ldrb r5, [r0]
@@ -831,7 +831,7 @@ _0800F830:
 	strh r0, [r1, 0x8]
 	b _0800FAC4
 	.align 2, 0
-_0800F844: .4byte gUnknown_2023FE8
+_0800F844: .4byte gBattleStruct
 _0800F848: .4byte gUnknown_202273C
 _0800F84C: .4byte gUnknown_3005090
 _0800F850:
@@ -853,7 +853,7 @@ _0800F850:
 	movs r2, 0x50
 	movs r3, 0
 	bl CreateSprite
-	ldr r4, _0800F8E4 @ =gUnknown_2023FE8
+	ldr r4, _0800F8E4 @ =gBattleStruct
 	ldr r1, [r4]
 	adds r1, 0x7D
 	strb r0, [r1]
@@ -900,7 +900,7 @@ _0800F8D4: .4byte 0x0000021e
 _0800F8D8: .4byte gUnknown_20375F8
 _0800F8DC: .4byte 0x00007fff
 _0800F8E0: .4byte gUnknown_82482E8
-_0800F8E4: .4byte gUnknown_2023FE8
+_0800F8E4: .4byte gBattleStruct
 _0800F8E8: .4byte gUnknown_8248300
 _0800F8EC: .4byte gSprites
 _0800F8F0:
@@ -1042,7 +1042,7 @@ _0800FA08:
 	adds r0, r7, 0
 	bl DestroyTask
 	ldr r4, _0800FAD0 @ =gSprites
-	ldr r5, _0800FAD4 @ =gUnknown_2023FE8
+	ldr r5, _0800FAD4 @ =gBattleStruct
 	ldr r0, [r5]
 	adds r0, 0x7D
 	ldrb r0, [r0]
@@ -1138,7 +1138,7 @@ _0800FAC4:
 	bx r0
 	.align 2, 0
 _0800FAD0: .4byte gSprites
-_0800FAD4: .4byte gUnknown_2023FE8
+_0800FAD4: .4byte gBattleStruct
 _0800FAD8: .4byte 0x000003ff
 _0800FADC: .4byte 0xfffffc00
 	thumb_func_end sub_800F6FC
@@ -1146,7 +1146,7 @@ _0800FADC: .4byte 0xfffffc00
 	thumb_func_start sub_800FAE0
 sub_800FAE0: @ 800FAE0
 	push {r4,lr}
-	ldr r0, _0800FB64 @ =gUnknown_2022B4C
+	ldr r0, _0800FB64 @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1200,7 +1200,7 @@ sub_800FAE0: @ 800FAE0
 	bl sub_800F034
 	b _0800FC26
 	.align 2, 0
-_0800FB64: .4byte gUnknown_2022B4C
+_0800FB64: .4byte gBattleTypeFlags
 _0800FB68: .4byte gUnknown_8E7737C
 _0800FB6C: .4byte 0x06004000
 _0800FB70: .4byte gUnknown_8E77598
@@ -1250,8 +1250,8 @@ _0800FBD8:
 	ands r1, r0
 	cmp r1, 0
 	beq _0800FC08
-	ldr r2, _0800FC00 @ =gUnknown_823EAC8
-	ldr r0, _0800FC04 @ =gUnknown_20386AE
+	ldr r2, _0800FC00 @ =gTrainers
+	ldr r0, _0800FC04 @ =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1267,8 +1267,8 @@ _0800FBF8:
 	bl sub_800F2AC
 	b _0800FC26
 	.align 2, 0
-_0800FC00: .4byte gUnknown_823EAC8
-_0800FC04: .4byte gUnknown_20386AE
+_0800FC00: .4byte gTrainers
+_0800FC04: .4byte gTrainerBattleOpponent_A
 _0800FC08:
 	bl sav1_map_get_battletype
 	lsls r0, 24
@@ -1292,7 +1292,7 @@ _0800FC26:
 	thumb_func_start sub_800FC2C
 sub_800FC2C: @ 800FC2C
 	push {lr}
-	ldr r0, _0800FC40 @ =gUnknown_2022B4C
+	ldr r0, _0800FC40 @ =gBattleTypeFlags
 	ldr r1, [r0]
 	ldr r2, _0800FC44 @ =0x00080902
 	ands r2, r1
@@ -1301,7 +1301,7 @@ sub_800FC2C: @ 800FC2C
 	movs r0, 0xA
 	b _0800FCAA
 	.align 2, 0
-_0800FC40: .4byte gUnknown_2022B4C
+_0800FC40: .4byte gBattleTypeFlags
 _0800FC44: .4byte 0x00080902
 _0800FC48:
 	movs r0, 0x80
@@ -1320,8 +1320,8 @@ _0800FC60:
 	ands r1, r0
 	cmp r1, 0
 	beq _0800FC90
-	ldr r2, _0800FC80 @ =gUnknown_823EAC8
-	ldr r0, _0800FC84 @ =gUnknown_20386AE
+	ldr r2, _0800FC80 @ =gTrainers
+	ldr r0, _0800FC84 @ =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1333,8 +1333,8 @@ _0800FC60:
 	movs r0, 0xC
 	b _0800FCAA
 	.align 2, 0
-_0800FC80: .4byte gUnknown_823EAC8
-_0800FC84: .4byte gUnknown_20386AE
+_0800FC80: .4byte gTrainers
+_0800FC84: .4byte gTrainerBattleOpponent_A
 _0800FC88:
 	cmp r0, 0x5A
 	bne _0800FC90

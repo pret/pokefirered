@@ -3591,7 +3591,7 @@ _080FA1DE:
 	ble _080FA1D4
 	cmp r2, r5
 	bne _080FA218
-	ldr r2, _080FA20C @ =gUnknown_2022B4C
+	ldr r2, _080FA20C @ =gBattleTypeFlags
 	ldr r0, [r2]
 	ldr r1, _080FA210 @ =0x0000ffdf
 	ands r0, r1
@@ -3608,7 +3608,7 @@ _080FA1DE:
 	b _080FA218
 	.align 2, 0
 _080FA208: .4byte gUnknown_3005450
-_080FA20C: .4byte gUnknown_2022B4C
+_080FA20C: .4byte gBattleTypeFlags
 _080FA210: .4byte 0x0000ffdf
 _080FA214:
 	ldr r0, _080FA220 @ =sub_80FA160

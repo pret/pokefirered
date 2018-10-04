@@ -36,7 +36,7 @@ sub_803ECEC: @ 803ECEC
 	cmp r3, 0
 	bne _0803ED40
 	ldr r2, _0803ED38 @ =gUnknown_2024020
-	ldr r1, _0803ED3C @ =gUnknown_8250C04
+	ldr r1, _0803ED3C @ =gBattleMoves
 	ldr r3, [sp, 0x8]
 	lsls r0, r3, 1
 	adds r0, r3
@@ -47,14 +47,14 @@ sub_803ECEC: @ 803ECEC
 	b _0803ED44
 	.align 2, 0
 _0803ED38: .4byte gUnknown_2024020
-_0803ED3C: .4byte gUnknown_8250C04
+_0803ED3C: .4byte gBattleMoves
 _0803ED40:
 	ldr r0, _0803ED5C @ =gUnknown_2024020
 	strh r3, [r0]
 _0803ED44:
 	cmp r7, 0
 	bne _0803ED64
-	ldr r1, _0803ED60 @ =gUnknown_8250C04
+	ldr r1, _0803ED60 @ =gBattleMoves
 	ldr r7, [sp, 0x8]
 	lsls r0, r7, 1
 	adds r0, r7
@@ -65,7 +65,7 @@ _0803ED44:
 	b _0803ED6E
 	.align 2, 0
 _0803ED5C: .4byte gUnknown_2024020
-_0803ED60: .4byte gUnknown_8250C04
+_0803ED60: .4byte gBattleMoves
 _0803ED64:
 	movs r0, 0x3F
 	mov r9, r0
@@ -155,7 +155,7 @@ _0803EE0C:
 	lsls r0, r7, 17
 	lsrs r7, r0, 16
 _0803EE10:
-	ldr r0, _0803EF28 @ =gUnknown_2022B4C
+	ldr r0, _0803EF28 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, _0803EF2C @ =0x00000802
 	ands r0, r1
@@ -179,7 +179,7 @@ _0803EE10:
 	lsls r0, 16
 	lsrs r7, r0, 16
 _0803EE44:
-	ldr r0, _0803EF28 @ =gUnknown_2022B4C
+	ldr r0, _0803EF28 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, _0803EF2C @ =0x00000802
 	ands r0, r1
@@ -204,7 +204,7 @@ _0803EE44:
 	lsrs r0, 16
 	str r0, [sp, 0x14]
 _0803EE7A:
-	ldr r0, _0803EF28 @ =gUnknown_2022B4C
+	ldr r0, _0803EF28 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, _0803EF2C @ =0x00000802
 	ands r0, r1
@@ -230,7 +230,7 @@ _0803EE7A:
 	lsrs r0, 16
 	mov r8, r0
 _0803EEB2:
-	ldr r0, _0803EF28 @ =gUnknown_2022B4C
+	ldr r0, _0803EF28 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, _0803EF2C @ =0x00000802
 	ands r0, r1
@@ -288,7 +288,7 @@ _0803EF0E:
 	mov r8, r0
 	b _0803EF44
 	.align 2, 0
-_0803EF28: .4byte gUnknown_2022B4C
+_0803EF28: .4byte gBattleTypeFlags
 _0803EF2C: .4byte 0x00000802
 _0803EF30: .4byte 0x00000824
 _0803EF34: .4byte 0x00000826
@@ -312,7 +312,7 @@ _0803EF58:
 	mov r0, r10
 	cmp r0, 0x22
 	bne _0803EF90
-	ldr r0, _0803F244 @ =gUnknown_2022B4C
+	ldr r0, _0803F244 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 1
@@ -340,7 +340,7 @@ _0803EF90:
 	ldr r0, [sp, 0x1C]
 	cmp r0, 0x22
 	bne _0803EFC8
-	ldr r0, _0803F244 @ =gUnknown_2022B4C
+	ldr r0, _0803F244 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 1
@@ -655,8 +655,8 @@ _0803F1DA:
 	bl __divsi3
 	strh r0, [r4]
 _0803F20A:
-	ldr r2, _0803F254 @ =gUnknown_8250C04
-	ldr r0, _0803F258 @ =gUnknown_2023D4A
+	ldr r2, _0803F254 @ =gBattleMoves
+	ldr r0, _0803F258 @ =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -674,7 +674,7 @@ _0803F224:
 	bls _0803F22C
 	b _0803F38A
 _0803F22C:
-	ldr r0, _0803F25C @ =gUnknown_2023D71
+	ldr r0, _0803F25C @ =gCritMultiplier
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x2
@@ -686,13 +686,13 @@ _0803F22C:
 	ldr r2, _0803F260 @ =gUnknown_825DEAD
 	b _0803F26E
 	.align 2, 0
-_0803F244: .4byte gUnknown_2022B4C
+_0803F244: .4byte gBattleTypeFlags
 _0803F248: .4byte 0xfffffe69
 _0803F24C: .4byte 0x00000175
 _0803F250: .4byte gUnknown_2024020
-_0803F254: .4byte gUnknown_8250C04
-_0803F258: .4byte gUnknown_2023D4A
-_0803F25C: .4byte gUnknown_2023D71
+_0803F254: .4byte gBattleMoves
+_0803F258: .4byte gCurrentMove
+_0803F25C: .4byte gCritMultiplier
 _0803F260: .4byte gUnknown_825DEAD
 _0803F264:
 	adds r5, r7, 0
@@ -791,7 +791,7 @@ _0803F310:
 	ldrb r1, [r4]
 	cmp r1, 0x1
 	bne _0803F352
-	ldr r0, _0803F348 @ =gUnknown_2022B4C
+	ldr r0, _0803F348 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ands r0, r1
 	cmp r0, 0
@@ -809,19 +809,19 @@ _0803F310:
 	b _0803F352
 	.align 2, 0
 _0803F344: .4byte gUnknown_825DEAD
-_0803F348: .4byte gUnknown_2022B4C
+_0803F348: .4byte gBattleTypeFlags
 _0803F34C:
 	lsrs r0, r5, 31
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _0803F352:
-	ldr r0, _0803F3B0 @ =gUnknown_2022B4C
+	ldr r0, _0803F3B0 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
 	beq _0803F384
-	ldr r0, _0803F3B4 @ =gUnknown_8250C04
+	ldr r0, _0803F3B4 @ =gBattleMoves
 	ldr r3, [sp, 0x8]
 	lsls r1, r3, 1
 	adds r1, r3
@@ -854,7 +854,7 @@ _0803F392:
 	bhi _0803F39A
 	b _0803F59C
 _0803F39A:
-	ldr r0, _0803F3B8 @ =gUnknown_2023D71
+	ldr r0, _0803F3B8 @ =gCritMultiplier
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x2
@@ -866,9 +866,9 @@ _0803F39A:
 	ldr r2, _0803F3BC @ =gUnknown_825DEAD
 	b _0803F3CA
 	.align 2, 0
-_0803F3B0: .4byte gUnknown_2022B4C
-_0803F3B4: .4byte gUnknown_8250C04
-_0803F3B8: .4byte gUnknown_2023D71
+_0803F3B0: .4byte gBattleTypeFlags
+_0803F3B4: .4byte gBattleMoves
+_0803F3B8: .4byte gCritMultiplier
 _0803F3BC: .4byte gUnknown_825DEAD
 _0803F3C0:
 	mov r5, r8
@@ -951,7 +951,7 @@ _0803F43E:
 	ldrb r1, [r4]
 	cmp r1, 0x1
 	bne _0803F492
-	ldr r0, _0803F488 @ =gUnknown_2022B4C
+	ldr r0, _0803F488 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ands r0, r1
 	cmp r0, 0
@@ -969,19 +969,19 @@ _0803F43E:
 	b _0803F492
 	.align 2, 0
 _0803F484: .4byte gUnknown_825DEAD
-_0803F488: .4byte gUnknown_2022B4C
+_0803F488: .4byte gBattleTypeFlags
 _0803F48C:
 	lsrs r0, r5, 31
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _0803F492:
-	ldr r0, _0803F50C @ =gUnknown_2022B4C
+	ldr r0, _0803F50C @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
 	beq _0803F4C4
-	ldr r0, _0803F510 @ =gUnknown_8250C04
+	ldr r0, _0803F510 @ =gBattleMoves
 	ldr r2, [sp, 0x8]
 	lsls r1, r2, 1
 	adds r1, r2
@@ -1020,7 +1020,7 @@ _0803F4C4:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803F574
-	ldr r2, _0803F514 @ =gUnknown_2023F1C
+	ldr r2, _0803F514 @ =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -1034,9 +1034,9 @@ _0803F4C4:
 	beq _0803F520
 	b _0803F52C
 	.align 2, 0
-_0803F50C: .4byte gUnknown_2022B4C
-_0803F510: .4byte gUnknown_8250C04
-_0803F514: .4byte gUnknown_2023F1C
+_0803F50C: .4byte gBattleTypeFlags
+_0803F510: .4byte gBattleMoves
+_0803F514: .4byte gBattleWeather
 _0803F518:
 	lsrs r0, r5, 31
 	adds r0, r5, r0
@@ -1054,7 +1054,7 @@ _0803F52C:
 	ands r0, r1
 	cmp r0, 0
 	beq _0803F544
-	ldr r0, _0803F55C @ =gUnknown_2023D4A
+	ldr r0, _0803F55C @ =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0x4C
 	bne _0803F544
@@ -1074,7 +1074,7 @@ _0803F544:
 	beq _0803F56E
 	b _0803F574
 	.align 2, 0
-_0803F55C: .4byte gUnknown_2023D4A
+_0803F55C: .4byte gCurrentMove
 _0803F560:
 	lsls r0, r5, 4
 	subs r0, r5
@@ -1087,7 +1087,7 @@ _0803F56E:
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _0803F574:
-	ldr r0, _0803F5B0 @ =gUnknown_2023FF4
+	ldr r0, _0803F5B0 @ =gBattleResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	ldr r7, [sp, 0x10]
@@ -1117,7 +1117,7 @@ _0803F59C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803F5B0: .4byte gUnknown_2023FF4
+_0803F5B0: .4byte gBattleResources
 	thumb_func_end sub_803ECEC
 
 	.align 2, 0 @ Don't pad with nop.

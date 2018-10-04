@@ -329,7 +329,7 @@ sub_8097678: @ 8097678
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r2, _080976A0 @ =gUnknown_825E45C
+	ldr r2, _080976A0 @ =gBitTable
 	lsrs r1, 22
 	adds r1, r2
 	ldr r2, [r1]
@@ -346,7 +346,7 @@ sub_8097678: @ 8097678
 	strh r2, [r1, 0x8]
 	bx lr
 	.align 2, 0
-_080976A0: .4byte gUnknown_825E45C
+_080976A0: .4byte gBitTable
 _080976A4: .4byte gUnknown_3005090
 	thumb_func_end sub_8097678
 
@@ -360,7 +360,7 @@ sub_80976A8: @ 80976A8
 	adds r2, r0
 	lsls r2, 3
 	adds r2, r3
-	ldr r0, _080976CC @ =gUnknown_825E45C
+	ldr r0, _080976CC @ =gBitTable
 	lsrs r1, 22
 	adds r1, r0
 	ldr r0, [r1]
@@ -370,7 +370,7 @@ sub_80976A8: @ 80976A8
 	bx lr
 	.align 2, 0
 _080976C8: .4byte gUnknown_3005090
-_080976CC: .4byte gUnknown_825E45C
+_080976CC: .4byte gBitTable
 	thumb_func_end sub_80976A8
 
 	thumb_func_start sub_80976D0
@@ -384,7 +384,7 @@ sub_80976D0: @ 80976D0
 	adds r2, r0
 	lsls r2, 3
 	adds r2, r3
-	ldr r0, _080976FC @ =gUnknown_825E45C
+	ldr r0, _080976FC @ =gBitTable
 	lsrs r1, 22
 	adds r1, r0
 	ldr r0, [r1]
@@ -396,7 +396,7 @@ sub_80976D0: @ 80976D0
 	b _08097702
 	.align 2, 0
 _080976F8: .4byte gUnknown_3005090
-_080976FC: .4byte gUnknown_825E45C
+_080976FC: .4byte gBitTable
 _08097700:
 	movs r0, 0x1
 _08097702:

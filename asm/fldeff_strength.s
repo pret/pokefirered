@@ -83,7 +83,7 @@ sub_80D0860: @ 80D0860
 	ldr r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080D08A0 @ =gUnknown_2024284
+	ldr r1, _080D08A0 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _080D08A4 @ =gStringVar1
 	bl GetMonNickname
@@ -94,7 +94,7 @@ sub_80D0860: @ 80D0860
 _080D0894: .4byte gUnknown_3005090
 _080D0898: .4byte sub_80D08A8
 _080D089C: .4byte gUnknown_20386E0
-_080D08A0: .4byte gUnknown_2024284
+_080D08A0: .4byte gPlayerParty
 _080D08A4: .4byte gStringVar1
 	thumb_func_end sub_80D0860
 

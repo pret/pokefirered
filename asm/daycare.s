@@ -250,7 +250,7 @@ StoreSelectedPokemonInDaycare: @ 8045580
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _080455A4 @ =gUnknown_2024284
+	ldr r1, _080455A4 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _080455A8 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
@@ -261,7 +261,7 @@ StoreSelectedPokemonInDaycare: @ 8045580
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080455A4: .4byte gUnknown_2024284
+_080455A4: .4byte gPlayerParty
 _080455A8: .4byte gSaveBlock1Ptr
 	thumb_func_end StoreSelectedPokemonInDaycare
 
@@ -390,7 +390,7 @@ TakeSelectedPokemonFromDaycare: @ 804565C
 	mov r0, sp
 	bl ApplyDaycareExperience
 _080456AA:
-	ldr r0, _080456FC @ =gUnknown_2024284
+	ldr r0, _080456FC @ =gPlayerParty
 	movs r1, 0xFA
 	lsls r1, 1
 	adds r6, r0, r1
@@ -426,7 +426,7 @@ _080456D8:
 	bx r1
 	.align 2, 0
 _080456F8: .4byte gStringVar1
-_080456FC: .4byte gUnknown_2024284
+_080456FC: .4byte gPlayerParty
 	thumb_func_end TakeSelectedPokemonFromDaycare
 
 	thumb_func_start TakeSelectedPokemonMonFromDaycareShiftSlots
@@ -1784,7 +1784,7 @@ sub_80460D4: @ 80460D4
 	mov r0, sp
 	movs r1, 0x2D
 	bl sub_804037C
-	ldr r0, _0804614C @ =gUnknown_2024284
+	ldr r0, _0804614C @ =gPlayerParty
 	movs r1, 0xFA
 	lsls r1, 1
 	adds r0, r1
@@ -1800,7 +1800,7 @@ sub_80460D4: @ 80460D4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804614C: .4byte gUnknown_2024284
+_0804614C: .4byte gPlayerParty
 	thumb_func_end sub_80460D4
 
 	thumb_func_start CreateEgg
@@ -2058,7 +2058,7 @@ _08046350:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _08046388 @ =gUnknown_2024284
+	ldr r0, _08046388 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x2D
@@ -2081,7 +2081,7 @@ _08046350:
 	movs r0, 0x1
 	b _080463AA
 	.align 2, 0
-_08046388: .4byte gUnknown_2024284
+_08046388: .4byte gPlayerParty
 _0804638C: .4byte gUnknown_20370C0
 _08046390:
 	subs r0, 0x1
@@ -2202,7 +2202,7 @@ GetSelectedMonNickAndSpecies: @ 8046460
 	lsrs r0, 24
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, _08046494 @ =gUnknown_2024284
+	ldr r4, _08046494 @ =gPlayerParty
 	adds r0, r4
 	ldr r1, _08046498 @ =gStringVar1
 	bl GetBoxMonNick
@@ -2219,7 +2219,7 @@ GetSelectedMonNickAndSpecies: @ 8046460
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08046494: .4byte gUnknown_2024284
+_08046494: .4byte gPlayerParty
 _08046498: .4byte gStringVar1
 	thumb_func_end GetSelectedMonNickAndSpecies
 
@@ -2348,7 +2348,7 @@ GetDaycareCompatibilityScore: @ 804654C
 	adds r2, 0x14
 	str r2, [sp, 0x24]
 	subs r0, 0x6
-	ldr r1, _08046600 @ =gUnknown_8254784
+	ldr r1, _08046600 @ =gBaseStats
 	mov r10, r1
 	ldr r5, [sp, 0x20]
 	mov r8, r0
@@ -2420,7 +2420,7 @@ _080465FC:
 	movs r0, 0
 	b _0804665C
 	.align 2, 0
-_08046600: .4byte gUnknown_8254784
+_08046600: .4byte gBaseStats
 _08046604:
 	cmp r0, 0xD
 	bne _08046614
@@ -3123,7 +3123,7 @@ sub_8046B40: @ 8046B40
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _08046B64 @ =gUnknown_2024284
+	ldr r1, _08046B64 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _08046B68 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
@@ -3133,7 +3133,7 @@ sub_8046B40: @ 8046B40
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046B64: .4byte gUnknown_2024284
+_08046B64: .4byte gPlayerParty
 _08046B68: .4byte gSaveBlock1Ptr
 _08046B6C: .4byte 0x00003c98
 	thumb_func_end sub_8046B40

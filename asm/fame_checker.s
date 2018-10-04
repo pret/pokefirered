@@ -3434,7 +3434,7 @@ _0812DF00:
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _0812DF5C @ =gUnknown_823EACC
+	ldr r1, _0812DF5C @ =gTrainers+0x4
 	adds r0, r1
 	str r0, [r2]
 	str r4, [r2, 0x4]
@@ -3446,7 +3446,7 @@ _0812DF4C: .4byte gSaveBlock1Ptr
 _0812DF50: .4byte 0x00003a54
 _0812DF54: .4byte gUnknown_845F5EA
 _0812DF58: .4byte gUnknown_203B100
-_0812DF5C: .4byte gUnknown_823EACC
+_0812DF5C: .4byte gTrainers+0x4
 _0812DF60:
 	ldr r0, _0812DFC0 @ =gUnknown_203B100
 	ldr r0, [r0]

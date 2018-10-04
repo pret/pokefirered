@@ -104,7 +104,7 @@ _080BF9B8: .4byte gUnknown_3005090
 sub_80BF9BC: @ 80BF9BC
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _080BF9F0 @ =gUnknown_2024284
+	ldr r0, _080BF9F0 @ =gPlayerParty
 	ldr r1, _080BF9F4 @ =gUnknown_20370C0
 	ldrb r1, [r1]
 	ldr r2, _080BF9F8 @ =gUnknown_2024029
@@ -126,7 +126,7 @@ sub_80BF9BC: @ 80BF9BC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BF9F0: .4byte gUnknown_2024284
+_080BF9F0: .4byte gPlayerParty
 _080BF9F4: .4byte gUnknown_20370C0
 _080BF9F8: .4byte gUnknown_2024029
 _080BF9FC: .4byte c2_exit_to_overworld_2_switch
@@ -147,7 +147,7 @@ _080BFA14:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080BFA4C @ =gUnknown_2024284
+	ldr r1, _080BFA4C @ =gPlayerParty
 	adds r0, r1
 	adds r1, r4, 0
 	adds r1, 0xD
@@ -169,7 +169,7 @@ _080BFA32:
 	.align 2, 0
 _080BFA44: .4byte gUnknown_20370D0
 _080BFA48: .4byte gUnknown_20370C0
-_080BFA4C: .4byte gUnknown_2024284
+_080BFA4C: .4byte gPlayerParty
 	thumb_func_end ScrSpecial_CountPokemonMoves
 
 	thumb_func_start ScrSpecial_GetPokemonNicknameAndMoveName
@@ -180,7 +180,7 @@ ScrSpecial_GetPokemonNicknameAndMoveName: @ 80BFA50
 	movs r0, 0x64
 	adds r5, r1, 0
 	muls r5, r0
-	ldr r0, _080BFA94 @ =gUnknown_2024284
+	ldr r0, _080BFA94 @ =gPlayerParty
 	adds r5, r0
 	ldr r0, _080BFA98 @ =gUnknown_20370C2
 	ldrh r1, [r0]
@@ -204,7 +204,7 @@ ScrSpecial_GetPokemonNicknameAndMoveName: @ 80BFA50
 	bx r0
 	.align 2, 0
 _080BFA90: .4byte gUnknown_20370C0
-_080BFA94: .4byte gUnknown_2024284
+_080BFA94: .4byte gPlayerParty
 _080BFA98: .4byte gUnknown_20370C2
 _080BFA9C: .4byte gStringVar1
 _080BFAA0: .4byte gStringVar2
@@ -343,7 +343,7 @@ sub_80BFBA8: @ 80BFBA8
 	ldrh r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, _080BFC0C @ =gUnknown_2024284
+	ldr r5, _080BFC0C @ =gPlayerParty
 	adds r0, r5
 	ldr r4, _080BFC10 @ =gUnknown_20370C2
 	ldrb r2, [r4]
@@ -363,7 +363,7 @@ _080BFBDA:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080BFC0C @ =gUnknown_2024284
+	ldr r1, _080BFC0C @ =gPlayerParty
 	adds r0, r1
 	lsls r1, r4, 24
 	lsrs r1, 24
@@ -383,7 +383,7 @@ _080BFBFC:
 	bx r0
 	.align 2, 0
 _080BFC08: .4byte gUnknown_20370C0
-_080BFC0C: .4byte gUnknown_2024284
+_080BFC0C: .4byte gPlayerParty
 _080BFC10: .4byte gUnknown_20370C2
 	thumb_func_end sub_80BFBA8
 
@@ -394,7 +394,7 @@ sub_80BFC14: @ 80BFC14
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080BFC3C @ =gUnknown_2024284
+	ldr r1, _080BFC3C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2D
 	bl GetMonData
@@ -407,7 +407,7 @@ sub_80BFC14: @ 80BFC14
 	b _080BFC48
 	.align 2, 0
 _080BFC38: .4byte gUnknown_20370C0
-_080BFC3C: .4byte gUnknown_2024284
+_080BFC3C: .4byte gPlayerParty
 _080BFC40: .4byte gUnknown_20370D0
 _080BFC44:
 	ldr r0, _080BFC4C @ =gUnknown_20370D0

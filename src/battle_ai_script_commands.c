@@ -5,6 +5,7 @@
 #include "constants/species.h"
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
+#include "constants/battle_move_effects.h"
 
 extern u16 Random(void);
 extern void sub_80C7164(void);
@@ -34,9 +35,220 @@ extern const u8 *gAIScriptPtr;
 extern u8 *BattleAIs[];
 extern u16 gLastUsedMove[];
 
+static void BattleAICmd_if_random_less_than(void);
+static void BattleAICmd_if_random_greater_than(void);
+static void BattleAICmd_if_random_equal(void);
+static void BattleAICmd_if_random_not_equal(void);
+static void BattleAICmd_score(void);
+static void BattleAICmd_if_hp_less_than(void);
+static void BattleAICmd_if_hp_more_than(void);
+static void BattleAICmd_if_hp_equal(void);
+static void BattleAICmd_if_hp_not_equal(void);
+static void BattleAICmd_if_status(void);
+static void BattleAICmd_if_not_status(void);
+static void BattleAICmd_if_status2(void);
+static void BattleAICmd_if_not_status2(void);
+static void BattleAICmd_if_status3(void);
+static void BattleAICmd_if_not_status3(void);
+static void BattleAICmd_if_status4(void);
+static void BattleAICmd_if_not_status4(void);
+static void BattleAICmd_if_less_than(void);
+static void BattleAICmd_if_more_than(void);
+static void BattleAICmd_if_equal(void);
+static void BattleAICmd_if_not_equal(void);
+static void BattleAICmd_if_less_than_32(void);
+static void BattleAICmd_if_more_than_32(void);
+static void BattleAICmd_if_equal_32(void);
+static void BattleAICmd_if_not_equal_32(void);
+static void BattleAICmd_if_move(void);
+static void BattleAICmd_if_not_move(void);
+static void BattleAICmd_if_in_bytes(void);
+static void BattleAICmd_if_not_in_bytes(void);
+static void BattleAICmd_if_in_words(void);
+static void BattleAICmd_if_not_in_words(void);
+static void BattleAICmd_if_user_can_damage(void);
+static void BattleAICmd_if_user_cant_damage(void);
+static void BattleAICmd_get_turn_count(void);
+static void BattleAICmd_get_type(void);
+static void BattleAICmd_get_move_power(void);
+static void BattleAICmd_is_most_powerful_move(void);
+static void BattleAICmd_get_move(void);
+static void BattleAICmd_if_arg_equal(void);
+static void BattleAICmd_if_arg_not_equal(void);
+static void BattleAICmd_if_would_go_first(void);
+static void BattleAICmd_if_would_not_go_first(void);
+static void BattleAICmd_nullsub_2A(void);
+static void BattleAICmd_nullsub_2B(void);
+static void BattleAICmd_count_alive_pokemon(void);
+static void BattleAICmd_get_considered_move(void);
+static void BattleAICmd_get_considered_move_effect(void);
+static void BattleAICmd_get_ability(void);
+static void BattleAICmd_get_highest_possible_damage(void);
+static void BattleAICmd_if_type_effectiveness(void);
+static void BattleAICmd_nullsub_32(void);
+static void BattleAICmd_nullsub_33(void);
+static void BattleAICmd_if_status_in_party(void);
+static void BattleAICmd_if_status_not_in_party(void);
+static void BattleAICmd_get_weather(void);
+static void BattleAICmd_if_effect(void);
+static void BattleAICmd_if_not_effect(void);
+static void BattleAICmd_if_stat_level_less_than(void);
+static void BattleAICmd_if_stat_level_more_than(void);
+static void BattleAICmd_if_stat_level_equal(void);
+static void BattleAICmd_if_stat_level_not_equal(void);
+static void BattleAICmd_if_can_faint(void);
+static void BattleAICmd_if_cant_faint(void);
+static void BattleAICmd_if_has_move(void);
+static void BattleAICmd_if_dont_have_move(void);
+static void BattleAICmd_if_move_effect(void);
+static void BattleAICmd_if_not_move_effect(void);
+static void BattleAICmd_if_last_move_did_damage(void);
+static void BattleAICmd_if_encored(void);
+static void BattleAICmd_flee(void);
+static void BattleAICmd_frlg_safari(void);
+static void BattleAICmd_watch(void);
+static void BattleAICmd_get_hold_effect(void);
+static void BattleAICmd_get_gender(void);
+static void BattleAICmd_is_first_turn(void);
+static void BattleAICmd_get_stockpile_count(void);
+static void BattleAICmd_is_double_battle(void);
+static void BattleAICmd_get_used_held_item(void);
+static void BattleAICmd_get_move_type_from_result(void);
+static void BattleAICmd_get_move_power_from_result(void);
+static void BattleAICmd_get_move_effect_from_result(void);
+static void BattleAICmd_get_protect_count(void);
+static void BattleAICmd_nullsub_52(void);
+static void BattleAICmd_nullsub_53(void);
+static void BattleAICmd_nullsub_54(void);
+static void BattleAICmd_nullsub_55(void);
+static void BattleAICmd_nullsub_56(void);
+static void BattleAICmd_nullsub_57(void);
+static void BattleAICmd_call(void);
+static void BattleAICmd_jump(void);
+static void BattleAICmd_end(void);
+static void BattleAICmd_if_level_compare(void);
+static void BattleAICmd_if_taunted(void);
+static void BattleAICmd_if_not_taunted(void);
+
 typedef void (*BattleAICmdFunc)(void);
 
-extern const BattleAICmdFunc sBattleAICmdTable[];
+static const BattleAICmdFunc sBattleAICmdTable[] =
+{
+    BattleAICmd_if_random_less_than,         // 0x0
+    BattleAICmd_if_random_greater_than,      // 0x1
+    BattleAICmd_if_random_equal,             // 0x2
+    BattleAICmd_if_random_not_equal,         // 0x3
+    BattleAICmd_score,                       // 0x4
+    BattleAICmd_if_hp_less_than,             // 0x5
+    BattleAICmd_if_hp_more_than,             // 0x6
+    BattleAICmd_if_hp_equal,                 // 0x7
+    BattleAICmd_if_hp_not_equal,             // 0x8
+    BattleAICmd_if_status,                   // 0x9
+    BattleAICmd_if_not_status,               // 0xA
+    BattleAICmd_if_status2,                  // 0xB
+    BattleAICmd_if_not_status2,              // 0xC
+    BattleAICmd_if_status3,                  // 0xD
+    BattleAICmd_if_not_status3,              // 0xE
+    BattleAICmd_if_status4,                  // 0xF
+    BattleAICmd_if_not_status4,              // 0x10
+    BattleAICmd_if_less_than,                // 0x11
+    BattleAICmd_if_more_than,                // 0x12
+    BattleAICmd_if_equal,                    // 0x13
+    BattleAICmd_if_not_equal,                // 0x14
+    BattleAICmd_if_less_than_32,             // 0x15
+    BattleAICmd_if_more_than_32,             // 0x16
+    BattleAICmd_if_equal_32,                 // 0x17
+    BattleAICmd_if_not_equal_32,             // 0x18
+    BattleAICmd_if_move,                     // 0x19
+    BattleAICmd_if_not_move,                 // 0x1A
+    BattleAICmd_if_in_bytes,                 // 0x1B
+    BattleAICmd_if_not_in_bytes,             // 0x1C
+    BattleAICmd_if_in_words,                 // 0x1D
+    BattleAICmd_if_not_in_words,             // 0x1E
+    BattleAICmd_if_user_can_damage,          // 0x1F
+    BattleAICmd_if_user_cant_damage,         // 0x20
+    BattleAICmd_get_turn_count,              // 0x21
+    BattleAICmd_get_type,                    // 0x22
+    BattleAICmd_get_move_power,              // 0x23
+    BattleAICmd_is_most_powerful_move,       // 0x24
+    BattleAICmd_get_move,                    // 0x25
+    BattleAICmd_if_arg_equal,                // 0x26
+    BattleAICmd_if_arg_not_equal,            // 0x27
+    BattleAICmd_if_would_go_first,           // 0x28
+    BattleAICmd_if_would_not_go_first,       // 0x29
+    BattleAICmd_nullsub_2A,                  // 0x2A
+    BattleAICmd_nullsub_2B,                  // 0x2B
+    BattleAICmd_count_alive_pokemon,         // 0x2C
+    BattleAICmd_get_considered_move,         // 0x2D
+    BattleAICmd_get_considered_move_effect,  // 0x2E
+    BattleAICmd_get_ability,                 // 0x2F
+    BattleAICmd_get_highest_possible_damage, // 0x30
+    BattleAICmd_if_type_effectiveness,       // 0x31
+    BattleAICmd_nullsub_32,                  // 0x32
+    BattleAICmd_nullsub_33,                  // 0x33
+    BattleAICmd_if_status_in_party,          // 0x34
+    BattleAICmd_if_status_not_in_party,      // 0x35
+    BattleAICmd_get_weather,                 // 0x36
+    BattleAICmd_if_effect,                   // 0x37
+    BattleAICmd_if_not_effect,               // 0x38
+    BattleAICmd_if_stat_level_less_than,     // 0x39
+    BattleAICmd_if_stat_level_more_than,     // 0x3A
+    BattleAICmd_if_stat_level_equal,         // 0x3B
+    BattleAICmd_if_stat_level_not_equal,     // 0x3C
+    BattleAICmd_if_can_faint,                // 0x3D
+    BattleAICmd_if_cant_faint,               // 0x3E
+    BattleAICmd_if_has_move,                 // 0x3F
+    BattleAICmd_if_dont_have_move,           // 0x40
+    BattleAICmd_if_move_effect,              // 0x41
+    BattleAICmd_if_not_move_effect,          // 0x42
+    BattleAICmd_if_last_move_did_damage,     // 0x43
+    BattleAICmd_if_encored,                  // 0x44
+    BattleAICmd_flee,                        // 0x45
+    BattleAICmd_frlg_safari,                 // 0x46
+    BattleAICmd_watch,                       // 0x47
+    BattleAICmd_get_hold_effect,             // 0x48
+    BattleAICmd_get_gender,                  // 0x49
+    BattleAICmd_is_first_turn,               // 0x4A
+    BattleAICmd_get_stockpile_count,         // 0x4B
+    BattleAICmd_is_double_battle,            // 0x4C
+    BattleAICmd_get_used_held_item,          // 0x4D
+    BattleAICmd_get_move_type_from_result,   // 0x4E
+    BattleAICmd_get_move_power_from_result,  // 0x4F
+    BattleAICmd_get_move_effect_from_result, // 0x50
+    BattleAICmd_get_protect_count,           // 0x51
+    BattleAICmd_nullsub_52,                  // 0x52
+    BattleAICmd_nullsub_53,                  // 0x53
+    BattleAICmd_nullsub_54,                  // 0x54
+    BattleAICmd_nullsub_55,                  // 0x55
+    BattleAICmd_nullsub_56,                  // 0x56
+    BattleAICmd_nullsub_57,                  // 0x57
+    BattleAICmd_call,                        // 0x58
+    BattleAICmd_jump,                        // 0x59
+    BattleAICmd_end,                         // 0x5A
+    BattleAICmd_if_level_compare,            // 0x5B
+    BattleAICmd_if_taunted,                  // 0x5C
+    BattleAICmd_if_not_taunted,              // 0x5D
+};
+
+#ifdef NONMATCHING
+static
+#endif
+const u16 sDiscouragedPowerfulMoveEffects[] =
+{
+    EFFECT_EXPLOSION,
+    EFFECT_DREAM_EATER,
+    EFFECT_RAZOR_WIND,
+    EFFECT_SKY_ATTACK,
+    EFFECT_RECHARGE,
+    EFFECT_SKULL_BASH,
+    EFFECT_SOLARBEAM,
+    EFFECT_SPIT_UP,
+    EFFECT_FOCUS_PUNCH,
+    EFFECT_SUPERPOWER,
+    EFFECT_ERUPTION,
+    EFFECT_OVERHEAT,
+    0xFFFF
+};
 
 // TODO: move these
 extern u8 sBattler_AI;
@@ -761,7 +973,7 @@ static void BattleAICmd_get_move_power(void)
 
 // still a nonmatching
 #ifdef NONMATCHING
-void BattleAICmd_is_most_powerful_move(void)
+static void BattleAICmd_is_most_powerful_move(void)
 {
     int i, j;
     s32 damages[MAX_MON_MOVES];
@@ -824,7 +1036,7 @@ void BattleAICmd_is_most_powerful_move(void)
 }
 #else
 NAKED
-void BattleAICmd_is_most_powerful_move(void)
+static void BattleAICmd_is_most_powerful_move(void)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -834,7 +1046,7 @@ void BattleAICmd_is_most_powerful_move(void)
     push {r5-r7}\n\
     sub sp, 0x14\n\
     movs r3, 0\n\
-    ldr r0, _080C80A4 @ =gUnknown_83F571C\n\
+    ldr r0, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
     ldrh r1, [r0]\n\
     ldr r5, _080C80A8 @ =0x0000ffff\n\
     ldr r6, _080C80AC @ =gBattleMoves\n\
@@ -849,7 +1061,7 @@ void BattleAICmd_is_most_powerful_move(void)
     lsls r0, 2\n\
     adds r0, r6\n\
     ldrb r4, [r0]\n\
-    ldr r1, _080C80A4 @ =gUnknown_83F571C\n\
+    ldr r1, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
 _080C7F92:\n\
     ldrh r0, [r1]\n\
     cmp r4, r0\n\
@@ -873,7 +1085,7 @@ _080C7FA2:\n\
     b _080C8142\n\
 _080C7FB8:\n\
     lsls r0, r3, 1\n\
-    ldr r1, _080C80A4 @ =gUnknown_83F571C\n\
+    ldr r1, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
     adds r0, r1\n\
     ldrh r3, [r0]\n\
     ldr r0, _080C80A8 @ =0x0000ffff\n\
@@ -896,7 +1108,7 @@ _080C7FC8:\n\
     strb r2, [r0]\n\
     movs r6, 0\n\
     mov r9, r3\n\
-    ldr r2, _080C80A4 @ =gUnknown_83F571C\n\
+    ldr r2, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
     ldrh r2, [r2]\n\
     str r2, [sp, 0x10]\n\
 _080C7FEC:\n\
@@ -925,7 +1137,7 @@ _080C7FEC:\n\
     lsls r0, 2\n\
     adds r0, r2\n\
     ldrb r2, [r0]\n\
-    ldr r1, _080C80A4 @ =gUnknown_83F571C\n\
+    ldr r1, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
 _080C8020:\n\
     ldrh r0, [r1]\n\
     cmp r2, r0\n\
@@ -947,7 +1159,7 @@ _080C8030:\n\
     cmp r0, 0\n\
     beq _080C80DC\n\
     lsls r0, r3, 1\n\
-    ldr r2, _080C80A4 @ =gUnknown_83F571C\n\
+    ldr r2, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
     adds r0, r2\n\
     ldrh r0, [r0]\n\
     cmp r0, r9\n\
@@ -991,7 +1203,7 @@ _080C8030:\n\
     str r0, [r4]\n\
     b _080C80E4\n\
     .align 2, 0\n\
-_080C80A4: .4byte gUnknown_83F571C\n\
+_080C80A4: .4byte sDiscouragedPowerfulMoveEffects\n\
 _080C80A8: .4byte 0x0000ffff\n\
 _080C80AC: .4byte gBattleMoves\n\
 _080C80B0: .4byte gBattleResources\n\
@@ -1255,7 +1467,7 @@ static void BattleAICmd_get_ability(void)
     gAIScriptPtr += 2;
 }
 
-static void BattleAICmd_get_highest_type_effectiveness(void)
+static void BattleAICmd_get_highest_possible_damage(void)
 {
     s32 i;
     u8 *dynamicMoveType;

@@ -653,7 +653,7 @@ sub_815DC8C: @ 815DC8C
 	ldr r0, _0815DCC8 @ =0x00001f0c
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r1, _0815DCCC @ =gUnknown_2036DFC
+	ldr r1, _0815DCCC @ =gMapHeader
 	ldrb r1, [r1, 0x12]
 	subs r1, 0x2A
 	strb r1, [r0]
@@ -669,7 +669,7 @@ _0815DCBC: .4byte gSaveBlock1Ptr
 _0815DCC0: .4byte 0x00003d34
 _0815DCC4: .4byte gUnknown_203F458
 _0815DCC8: .4byte 0x00001f0c
-_0815DCCC: .4byte gUnknown_2036DFC
+_0815DCCC: .4byte gMapHeader
 _0815DCD0:
 	ldr r0, [r4]
 	ldr r1, _0815DD20 @ =gUnknown_84827AC
@@ -732,7 +732,7 @@ _0815DD40: .4byte gUnknown_203F458
 	thumb_func_start sub_815DD44
 sub_815DD44: @ 815DD44
 	push {r4,lr}
-	ldr r0, _0815DD68 @ =gUnknown_2036DFC
+	ldr r0, _0815DD68 @ =gMapHeader
 	ldrh r0, [r0, 0x12]
 	ldr r1, _0815DD6C @ =0xfffffed7
 	adds r0, r1
@@ -749,7 +749,7 @@ sub_815DD44: @ 815DD44
 	bl sub_8055D40
 	b _0815DDA2
 	.align 2, 0
-_0815DD68: .4byte gUnknown_2036DFC
+_0815DD68: .4byte gMapHeader
 _0815DD6C: .4byte 0xfffffed7
 _0815DD70: .4byte gUnknown_203F458
 _0815DD74: .4byte gUnknown_20370D0
@@ -1380,7 +1380,7 @@ _0815E214: .4byte 0x00003d34
 	thumb_func_start sub_815E218
 sub_815E218: @ 815E218
 	push {lr}
-	ldr r0, _0815E260 @ =gUnknown_2036DFC
+	ldr r0, _0815E260 @ =gMapHeader
 	ldrh r0, [r0, 0x12]
 	mov r12, r0
 	ldr r3, _0815E264 @ =0xfffffed6
@@ -1416,7 +1416,7 @@ sub_815E218: @ 815E218
 	movs r0, 0
 	b _0815E280
 	.align 2, 0
-_0815E260: .4byte gUnknown_2036DFC
+_0815E260: .4byte gMapHeader
 _0815E264: .4byte 0xfffffed6
 _0815E268: .4byte gSaveBlock1Ptr
 _0815E26C: .4byte 0x00003d34
@@ -2234,7 +2234,7 @@ _0815E904: .4byte gUnknown_20370D0
 	thumb_func_start sub_815E908
 sub_815E908: @ 815E908
 	push {lr}
-	ldr r0, _0815E928 @ =gUnknown_2036DFC
+	ldr r0, _0815E928 @ =gMapHeader
 	ldrh r1, [r0, 0x12]
 	ldr r0, _0815E92C @ =0x00000129
 	cmp r1, r0
@@ -2249,7 +2249,7 @@ sub_815E908: @ 815E908
 	strh r1, [r0]
 	b _0815E93E
 	.align 2, 0
-_0815E928: .4byte gUnknown_2036DFC
+_0815E928: .4byte gMapHeader
 _0815E92C: .4byte 0x00000129
 _0815E930: .4byte 0x00004082
 _0815E934: .4byte gUnknown_20370D0

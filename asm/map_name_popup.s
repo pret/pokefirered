@@ -298,7 +298,7 @@ sub_8098340: @ 8098340
 	str r0, [sp]
 	str r1, [sp, 0x4]
 	movs r6, 0x1D
-	ldr r0, _0809837C @ =gUnknown_2036DFC
+	ldr r0, _0809837C @ =gMapHeader
 	ldrb r0, [r0, 0x1A]
 	lsls r0, 24
 	asrs r0, 24
@@ -318,7 +318,7 @@ sub_8098340: @ 8098340
 	b _08098396
 	.align 2, 0
 _08098378: .4byte gUnknown_83D4164
-_0809837C: .4byte gUnknown_2036DFC
+_0809837C: .4byte gMapHeader
 _08098380: .4byte 0x00ffffff
 _08098384:
 	ldr r2, [sp]
@@ -384,7 +384,7 @@ sub_8098400: @ 8098400
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r5, 0x70
-	ldr r4, _08098478 @ =gUnknown_2036DFC
+	ldr r4, _08098478 @ =gMapHeader
 	ldrb r1, [r4, 0x14]
 	add r0, sp, 0xC
 	movs r2, 0
@@ -435,7 +435,7 @@ _08098434:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08098478: .4byte gUnknown_2036DFC
+_08098478: .4byte gMapHeader
 	thumb_func_end sub_8098400
 
 	thumb_func_start sub_809847C

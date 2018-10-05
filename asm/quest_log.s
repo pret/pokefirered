@@ -3046,7 +3046,7 @@ sub_8111FCC: @ 8111FCC
 	cmp r0, 0x40
 	beq _0811200E
 	ldr r0, _08112030 @ =gStringVar1
-	ldr r1, _08112034 @ =gUnknown_2036DFC
+	ldr r1, _08112034 @ =gMapHeader
 	ldrb r1, [r1, 0x14]
 	bl sub_80C4DF8
 	ldr r0, _08112038 @ =gStringVar4
@@ -3069,7 +3069,7 @@ _08112024: .4byte gUnknown_3005090
 _08112028: .4byte gUnknown_2037AB8
 _0811202C: .4byte gUnknown_203AE94
 _08112030: .4byte gStringVar1
-_08112034: .4byte gUnknown_2036DFC
+_08112034: .4byte gMapHeader
 _08112038: .4byte gStringVar4
 _0811203C: .4byte gUnknown_841B073
 _08112040: .4byte sub_8112044
@@ -10263,7 +10263,7 @@ sub_8115798: @ 8115798
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _081157C6
-	ldr r0, _081157D8 @ =gUnknown_2036DFC
+	ldr r0, _081157D8 @ =gMapHeader
 	ldrb r1, [r0, 0x14]
 	mov r0, sp
 	strh r1, [r0]
@@ -10280,7 +10280,7 @@ _081157C6:
 	.align 2, 0
 _081157D0: .4byte gUnknown_203ADFA
 _081157D4: .4byte gUnknown_203B049
-_081157D8: .4byte gUnknown_2036DFC
+_081157D8: .4byte gMapHeader
 	thumb_func_end sub_8115798
 
 	thumb_func_start sub_81157DC

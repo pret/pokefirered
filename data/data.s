@@ -1464,7 +1464,7 @@ gUnknown_83A7240:: @ 83A7240
 	.asciz "0"
 
 	.align 2
-gUnknown_83A7244:: @ 83A7244
+gNullScriptPtr:: @ 83A7244
 	.incbin "baserom.gba", 0x3A7244, 0x4
 
 gUnknown_83A7248:: @ 83A7248

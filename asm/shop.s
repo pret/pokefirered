@@ -1598,7 +1598,7 @@ sub_809B778: @ 809B778
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r0, _0809B804 @ =gUnknown_2036DFC
+	ldr r0, _0809B804 @ =gMapHeader
 	ldr r0, [r0]
 	mov r9, r0
 	mov r4, sp
@@ -1661,7 +1661,7 @@ _0809B7B2:
 	bl sub_809B850
 	b _0809B822
 	.align 2, 0
-_0809B804: .4byte gUnknown_2036DFC
+_0809B804: .4byte gMapHeader
 _0809B808: .4byte 0x0000027f
 _0809B80C:
 	mov r2, r9
@@ -2840,7 +2840,7 @@ sub_809C164: @ 809C164
 	movs r1, 0
 	movs r2, 0x18
 	bl memset
-	ldr r0, _0809C19C @ =gUnknown_2036DFC
+	ldr r0, _0809C19C @ =gMapHeader
 	ldrb r0, [r0, 0x14]
 	strb r0, [r4, 0x8]
 	strb r0, [r4, 0x14]
@@ -2850,7 +2850,7 @@ sub_809C164: @ 809C164
 	.align 2, 0
 _0809C194: .4byte EnableBothScriptContexts
 _0809C198: .4byte gUnknown_203996C
-_0809C19C: .4byte gUnknown_2036DFC
+_0809C19C: .4byte gMapHeader
 	thumb_func_end sub_809C164
 
 	thumb_func_start sub_809C1A0

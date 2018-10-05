@@ -291,7 +291,7 @@ _080C0022:
 _080C0058:
 	movs r7, 0
 	movs r1, 0
-	ldr r2, _080C00B8 @ =gUnknown_2036DFC
+	ldr r2, _080C00B8 @ =gMapHeader
 	ldrb r0, [r2, 0x14]
 	ldr r3, _080C00A4 @ =gUnknown_20399D4
 	mov r8, r3
@@ -332,7 +332,7 @@ _080C00A8: .4byte 0x00004797
 _080C00AC: .4byte gUnknown_83F1B00
 _080C00B0: .4byte 0x00004796
 _080C00B4: .4byte 0x00000845
-_080C00B8: .4byte gUnknown_2036DFC
+_080C00B8: .4byte gMapHeader
 _080C00BC: .4byte gUnknown_83F1AA4
 _080C00C0:
 	adds r0, r3, 0x1
@@ -7445,7 +7445,7 @@ _080C3B60:
 _080C3B84:
 	ldr r0, _080C3BA0 @ =gUnknown_20399E4
 	ldr r2, [r0]
-	ldr r1, _080C3BA4 @ =gUnknown_2036DFC
+	ldr r1, _080C3BA4 @ =gMapHeader
 	ldrb r0, [r1, 0x14]
 	strh r0, [r2, 0x14]
 	ldr r0, [r1]
@@ -7459,7 +7459,7 @@ _080C3B84:
 	b _080C3C9A
 	.align 2, 0
 _080C3BA0: .4byte gUnknown_20399E4
-_080C3BA4: .4byte gUnknown_2036DFC
+_080C3BA4: .4byte gMapHeader
 _080C3BA8: .4byte gSaveBlock1Ptr
 _080C3BAC:
 	ldr r4, _080C3BE8 @ =gSaveBlock1Ptr
@@ -7526,7 +7526,7 @@ _080C3C28: .4byte gUnknown_20399E4
 _080C3C2C:
 	ldr r4, _080C3C5C @ =gUnknown_20399E4
 	ldr r0, [r4]
-	ldr r1, _080C3C60 @ =gUnknown_2036DFC
+	ldr r1, _080C3C60 @ =gMapHeader
 	ldrb r1, [r1, 0x14]
 	strh r1, [r0, 0x14]
 	cmp r1, 0xC4
@@ -7548,7 +7548,7 @@ _080C3C2C:
 	b _080C3C8E
 	.align 2, 0
 _080C3C5C: .4byte gUnknown_20399E4
-_080C3C60: .4byte gUnknown_2036DFC
+_080C3C60: .4byte gMapHeader
 _080C3C64: .4byte gSaveBlock1Ptr
 _080C3C68:
 	ldr r0, _080C3D30 @ =gSaveBlock1Ptr

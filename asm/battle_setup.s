@@ -786,7 +786,7 @@ _0807FCA2:
 	movs r0, 0x2
 	b _0807FD88
 _0807FCB2:
-	ldr r0, _0807FCC8 @ =gUnknown_2036DFC
+	ldr r0, _0807FCC8 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	subs r0, 0x1
 	cmp r0, 0x8
@@ -797,7 +797,7 @@ _0807FCB2:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807FCC8: .4byte gUnknown_2036DFC
+_0807FCC8: .4byte gMapHeader
 _0807FCCC: .4byte _0807FCD0
 	.align 2, 0
 _0807FCD0:
@@ -923,7 +923,7 @@ _0807FDC0:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807FDE8
-	ldr r0, _0807FDE0 @ =gUnknown_2036DFC
+	ldr r0, _0807FDE0 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x4
 	beq _0807FDE4
@@ -932,7 +932,7 @@ _0807FDC0:
 	movs r0, 0
 	b _0807FDEA
 	.align 2, 0
-_0807FDE0: .4byte gUnknown_2036DFC
+_0807FDE0: .4byte gMapHeader
 _0807FDE4:
 	movs r0, 0x1
 	b _0807FDEA

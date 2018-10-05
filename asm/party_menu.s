@@ -12205,7 +12205,7 @@ _08124A82:
 	thumb_func_start sub_8124A8C
 sub_8124A8C: @ 8124A8C
 	push {lr}
-	ldr r0, _08124AA4 @ =gUnknown_2036DFC
+	ldr r0, _08124AA4 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_or_6
 	lsls r0, 24
@@ -12215,7 +12215,7 @@ sub_8124A8C: @ 8124A8C
 	movs r0, 0
 	b _08124AAA
 	.align 2, 0
-_08124AA4: .4byte gUnknown_2036DFC
+_08124AA4: .4byte gMapHeader
 _08124AA8:
 	movs r0, 0x1
 _08124AAA:
@@ -12390,7 +12390,7 @@ _08124BDA:
 	.align 2, 0
 _08124BF8: .4byte gSaveBlock1Ptr
 _08124BFC:
-	ldr r0, _08124C18 @ =gUnknown_2036DFC
+	ldr r0, _08124C18 @ =gMapHeader
 _08124BFE:
 	ldrb r0, [r0, 0x14]
 _08124C00:
@@ -12404,7 +12404,7 @@ _08124C00:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08124C18: .4byte gUnknown_2036DFC
+_08124C18: .4byte gMapHeader
 	thumb_func_end sub_8124BB0
 
 	thumb_func_start sub_8124C1C

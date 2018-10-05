@@ -137,7 +137,7 @@ sub_807DC18: @ 807DC18
 	push {r4,lr}
 	bl warp1_get_mapheader
 	adds r4, r0, 0
-	ldr r1, _0807DC54 @ =gUnknown_2036DFC
+	ldr r1, _0807DC54 @ =gMapHeader
 	ldrb r0, [r4, 0x14]
 	ldrb r1, [r1, 0x14]
 	cmp r0, r1
@@ -161,7 +161,7 @@ _0807DC36:
 	beq _0807DC62
 	b _0807DC6A
 	.align 2, 0
-_0807DC54: .4byte gUnknown_2036DFC
+_0807DC54: .4byte gMapHeader
 _0807DC58:
 	movs r0, 0x1
 	movs r1, 0

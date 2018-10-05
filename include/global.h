@@ -474,7 +474,11 @@ struct RecordMixingDayCareMail
 
 struct SaveBlock1
 {
-    /*0x0000*/ u8 filler[0x3A4C];
+    /*0x0000*/ u8 filler[0x4];
+    /*0x0004*/ struct WarpData location;
+    /*0x000C*/ u8 fillerC[0x3610];
+    /*0x361C*/ struct RamScript ramScript;
+    /*0x3A08*/ u8 filler3A08[0x44];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
 };
 

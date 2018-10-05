@@ -93,7 +93,7 @@ task08_080C9820: @ 80C9820
 	cmp r0, 0
 	beq _080C98A2
 _080C9856:
-	ldr r0, _080C987C @ =gUnknown_2036DFC
+	ldr r0, _080C987C @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _080C9888
@@ -109,7 +109,7 @@ _080C9856:
 	.align 2, 0
 _080C9874: .4byte gUnknown_2037078
 _080C9878: .4byte gUnknown_2036E38
-_080C987C: .4byte gUnknown_2036DFC
+_080C987C: .4byte gMapHeader
 _080C9880: .4byte gUnknown_3005090
 _080C9884: .4byte sub_80C98FC
 _080C9888:

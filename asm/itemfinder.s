@@ -11,7 +11,7 @@ sub_813EC8C: @ 813EC8C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r2, 0
-	ldr r7, _0813ECE0 @ =gUnknown_2036DFC
+	ldr r7, _0813ECE0 @ =gMapHeader
 	lsls r1, r4, 2
 	adds r0, r1, r4
 	lsls r3, r0, 3
@@ -48,7 +48,7 @@ _0813ECA2:
 	str r0, [r1]
 	b _0813ED08
 	.align 2, 0
-_0813ECE0: .4byte gUnknown_2036DFC
+_0813ECE0: .4byte gMapHeader
 _0813ECE4: .4byte gUnknown_3005098
 _0813ECE8: .4byte gUnknown_3005090
 _0813ECEC: .4byte sub_813EDB0
@@ -557,12 +557,12 @@ _0813F0AC:
 	subs r0, r5, r0
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r0, _0813F0C0 @ =gUnknown_2036DFC
+	ldr r0, _0813F0C0 @ =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	b _0813F0DE
 	.align 2, 0
-_0813F0C0: .4byte gUnknown_2036DFC
+_0813F0C0: .4byte gMapHeader
 _0813F0C4:
 	ldr r0, [r3]
 	ldr r0, [r0]
@@ -570,7 +570,7 @@ _0813F0C4:
 	adds r0, r5
 	b _0813F0D8
 _0813F0CE:
-	ldr r0, _0813F0E8 @ =gUnknown_2036DFC
+	ldr r0, _0813F0E8 @ =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0]
 	adds r0, 0x7
@@ -587,7 +587,7 @@ _0813F0E2:
 	lsrs r2, r0, 16
 	b _0813F0F0
 	.align 2, 0
-_0813F0E8: .4byte gUnknown_2036DFC
+_0813F0E8: .4byte gMapHeader
 _0813F0EC:
 	movs r0, 0
 	b _0813F102
@@ -617,7 +617,7 @@ sub_813F108: @ 813F108
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
-	ldr r0, _0813F21C @ =gUnknown_2036DFC
+	ldr r0, _0813F21C @ =gMapHeader
 	ldr r1, [r0]
 	ldr r0, [r1]
 	adds r0, 0x7
@@ -749,7 +749,7 @@ _0813F20C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813F21C: .4byte gUnknown_2036DFC
+_0813F21C: .4byte gMapHeader
 	thumb_func_end sub_813F108
 
 	thumb_func_start sub_813F220

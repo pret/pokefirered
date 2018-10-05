@@ -611,7 +611,7 @@ gUnknown_2031DEC: @ 2031DEC
 gUnknown_2031DFC: @ 2031DFC
 	.space 0x5000
 
-gUnknown_2036DFC: @ 2036DFC
+gMapHeader: @ 2036DFC
 	.space 0x1C
 
 gUnknown_2036E18: @ 2036E18
@@ -647,12 +647,9 @@ gUnknown_203709A: @ 203709A
 gUnknown_203709C: @ 203709C
 	.space 0x4
 
-gUnknown_20370A0: @ 20370A0
-	.space 0x4
+	.include "src/script.o"
 
-gUnknown_20370A4: @ 20370A4
-	.space 0x4
-
+	.align 2
 gUnknown_20370A8: @ 20370A8
 	.space 0x4
 

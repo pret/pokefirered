@@ -101,7 +101,7 @@ sub_810C444: @ 810C444
 	adds r1, r0
 	mov r8, r1
 	movs r7, 0
-	ldr r0, _0810C4E4 @ =gUnknown_2036DFC
+	ldr r0, _0810C4E4 @ =gMapHeader
 	ldr r1, [r0, 0x4]
 	adds r2, r0, 0
 	ldrb r1, [r1]
@@ -152,7 +152,7 @@ _0810C47A:
 	bl npc_set_running_behaviour_etc
 _0810C4C0:
 	strb r6, [r5, 0x9]
-	ldr r2, _0810C4E4 @ =gUnknown_2036DFC
+	ldr r2, _0810C4E4 @ =gMapHeader
 _0810C4C4:
 	adds r0, r7, 0x1
 	lsls r0, 24
@@ -170,7 +170,7 @@ _0810C4D2:
 	bx r0
 	.align 2, 0
 _0810C4E0: .4byte gSaveBlock1Ptr
-_0810C4E4: .4byte gUnknown_2036DFC
+_0810C4E4: .4byte gMapHeader
 _0810C4E8: .4byte gUnknown_2036E38
 	thumb_func_end sub_810C444
 

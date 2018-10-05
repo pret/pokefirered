@@ -1530,7 +1530,7 @@ _0809A86E:
 	bl Alloc
 	adds r4, r0, 0
 	strh r5, [r4]
-	ldr r0, _0809A8A0 @ =gUnknown_2036DFC
+	ldr r0, _0809A8A0 @ =gMapHeader
 	ldrb r0, [r0, 0x14]
 	strb r0, [r4, 0x2]
 	movs r0, 0x28
@@ -1546,7 +1546,7 @@ _0809A88C:
 _0809A894: .4byte 0xfea30000
 _0809A898: .4byte 0x00000169
 _0809A89C: .4byte gSaveBlock1Ptr
-_0809A8A0: .4byte gUnknown_2036DFC
+_0809A8A0: .4byte gMapHeader
 	thumb_func_end sub_809A824
 
 	thumb_func_start SanitizeItemId

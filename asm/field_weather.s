@@ -2811,7 +2811,7 @@ sub_807B140: @ 807B140
 	ldr r0, [r4]
 	adds r0, 0x2E
 	ldrb r5, [r0]
-	ldr r0, _0807B170 @ =gUnknown_2036DFC
+	ldr r0, _0807B170 @ =gMapHeader
 	ldrb r0, [r0, 0x16]
 	bl TranslateWeatherNum
 	ldr r1, [r4]
@@ -2827,7 +2827,7 @@ sub_807B140: @ 807B140
 	bx r0
 	.align 2, 0
 _0807B16C: .4byte gSaveBlock1Ptr
-_0807B170: .4byte gUnknown_2036DFC
+_0807B170: .4byte gMapHeader
 	thumb_func_end sub_807B140
 
 	thumb_func_start SetWeather

@@ -521,7 +521,7 @@ sub_80BD460: @ 80BD460
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BD478
-	ldr r0, _080BD47C @ =gUnknown_2036DFC
+	ldr r0, _080BD47C @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x8
 	bne _080BD480
@@ -529,7 +529,7 @@ _080BD478:
 	movs r0, 0x1
 	b _080BD482
 	.align 2, 0
-_080BD47C: .4byte gUnknown_2036DFC
+_080BD47C: .4byte gMapHeader
 _080BD480:
 	movs r0, 0
 _080BD482:
@@ -542,7 +542,7 @@ sub_80BD488: @ 80BD488
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080BD4AC @ =gUnknown_2036DFC
+	ldr r0, _080BD4AC @ =gMapHeader
 	ldrb r1, [r0, 0x19]
 	movs r0, 0x2
 	ands r0, r1
@@ -558,7 +558,7 @@ _080BD4A8:
 	movs r0, 0x1
 	b _080BD4B2
 	.align 2, 0
-_080BD4AC: .4byte gUnknown_2036DFC
+_080BD4AC: .4byte gMapHeader
 _080BD4B0:
 	movs r0, 0
 _080BD4B2:

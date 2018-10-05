@@ -8,7 +8,7 @@
 	thumb_func_start sub_80C9B2C
 sub_80C9B2C: @ 80C9B2C
 	push {lr}
-	ldr r0, _080C9B54 @ =gUnknown_2036DFC
+	ldr r0, _080C9B54 @ =gMapHeader
 	ldrb r0, [r0, 0x15]
 	cmp r0, 0x1
 	bne _080C9B6C
@@ -26,7 +26,7 @@ sub_80C9B2C: @ 80C9B2C
 	movs r0, 0x1
 	b _080C9B6E
 	.align 2, 0
-_080C9B54: .4byte gUnknown_2036DFC
+_080C9B54: .4byte gMapHeader
 _080C9B58: .4byte 0x00000806
 _080C9B5C: .4byte gUnknown_3005024
 _080C9B60: .4byte hm_add_c3_launch_phase_2
@@ -214,7 +214,7 @@ sub_80C9CE8: @ 80C9CE8
 	lsrs r6, r0, 24
 	movs r4, 0
 	bl sub_80561B4
-	ldr r5, _080C9D24 @ =gUnknown_2036DFC
+	ldr r5, _080C9D24 @ =gMapHeader
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r5, 0x14]
@@ -230,7 +230,7 @@ sub_80C9CE8: @ 80C9CE8
 	movs r0, 0x1
 	b _080C9D70
 	.align 2, 0
-_080C9D24: .4byte gUnknown_2036DFC
+_080C9D24: .4byte gMapHeader
 _080C9D28:
 	adds r0, r3, 0x4
 	adds r0, r2, r0

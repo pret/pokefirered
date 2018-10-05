@@ -352,7 +352,7 @@ sub_806CAC8: @ 806CAC8
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806CB6C
-	bl sub_8069C74
+	bl mapheader_run_first_tag2_script_list_match
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1082,7 +1082,7 @@ sub_806D0E4: @ 806D0E4
 	lsrs r7, r1, 24
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r4, _0806D118 @ =gUnknown_2036DFC
+	ldr r4, _0806D118 @ =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -1103,7 +1103,7 @@ sub_806D0E4: @ 806D0E4
 	ldr r0, _0806D11C @ =gUnknown_81C555B
 	b _0806D1E6
 	.align 2, 0
-_0806D118: .4byte gUnknown_2036DFC
+_0806D118: .4byte gMapHeader
 _0806D11C: .4byte gUnknown_81C555B
 _0806D120:
 	adds r0, r7, 0
@@ -1746,7 +1746,7 @@ _0806D65A:
 	thumb_func_start sub_806D660
 sub_806D660: @ 806D660
 	push {r4,lr}
-	ldr r4, _0806D688 @ =gUnknown_2036DFC
+	ldr r4, _0806D688 @ =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -1764,7 +1764,7 @@ sub_806D660: @ 806D660
 	movs r0, 0x1
 	b _0806D68E
 	.align 2, 0
-_0806D688: .4byte gUnknown_2036DFC
+_0806D688: .4byte gMapHeader
 _0806D68C:
 	movs r0, 0
 _0806D68E:
@@ -1916,7 +1916,7 @@ _0806D798: .4byte 0x00004022
 	thumb_func_start overworld_poison_step
 overworld_poison_step: @ 806D79C
 	push {r4,lr}
-	ldr r0, _0806D7D8 @ =gUnknown_2036DFC
+	ldr r0, _0806D7D8 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x9
 	beq _0806D7E0
@@ -1943,7 +1943,7 @@ overworld_poison_step: @ 806D79C
 	movs r0, 0x1
 	b _0806D7E2
 	.align 2, 0
-_0806D7D8: .4byte gUnknown_2036DFC
+_0806D7D8: .4byte gMapHeader
 _0806D7DC: .4byte 0x00004022
 _0806D7E0:
 	movs r0, 0
@@ -2128,7 +2128,7 @@ _0806D924: .4byte gUnknown_20370D4
 	thumb_func_start sub_806D928
 sub_806D928: @ 806D928
 	push {r4,lr}
-	ldr r4, _0806D94C @ =gUnknown_2036DFC
+	ldr r4, _0806D94C @ =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -2145,7 +2145,7 @@ sub_806D928: @ 806D928
 	movs r0, 0
 	b _0806D958
 	.align 2, 0
-_0806D94C: .4byte gUnknown_2036DFC
+_0806D94C: .4byte gMapHeader
 _0806D950:
 	ldr r0, [r0, 0x8]
 	cmp r0, 0
@@ -2173,7 +2173,7 @@ sub_806D964: @ 806D964
 	lsls r2, 24
 	lsrs r6, r2, 24
 	mov r9, r6
-	ldr r0, _0806D9B8 @ =gUnknown_2036DFC
+	ldr r0, _0806D9B8 @ =gMapHeader
 	mov r8, r0
 	adds r1, r7, 0
 	bl map_warp_check_packed
@@ -2199,7 +2199,7 @@ sub_806D964: @ 806D964
 	movs r0, 0x1
 	b _0806DA02
 	.align 2, 0
-_0806D9B8: .4byte gUnknown_2036DFC
+_0806D9B8: .4byte gMapHeader
 _0806D9BC:
 	adds r0, r4, 0
 	mov r1, r9
@@ -2249,7 +2249,7 @@ sub_806DA10: @ 806DA10
 	adds r6, r0, 0
 	lsls r1, 16
 	lsrs r5, r1, 16
-	ldr r7, _0806DA68 @ =gUnknown_2036DFC
+	ldr r7, _0806DA68 @ =gMapHeader
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl map_warp_check_packed
@@ -2283,7 +2283,7 @@ sub_806DA10: @ 806DA10
 	movs r0, 0x1
 	b _0806DAEE
 	.align 2, 0
-_0806DA68: .4byte gUnknown_2036DFC
+_0806DA68: .4byte gMapHeader
 _0806DA6C:
 	adds r0, r4, 0
 	bl sub_805A158
@@ -2542,7 +2542,7 @@ map_warp_check_packed: @ 806DC30
 sub_806DC54: @ 806DC54
 	push {r4-r7,lr}
 	adds r5, r2, 0
-	ldr r0, _0806DC74 @ =gUnknown_2036DFC
+	ldr r0, _0806DC74 @ =gMapHeader
 	ldr r0, [r0, 0x4]
 	lsls r1, 24
 	asrs r7, r1, 24
@@ -2556,7 +2556,7 @@ sub_806DC54: @ 806DC54
 	bl copy_saved_warp2_bank_and_enter_x_to_warp1
 	b _0806DCC4
 	.align 2, 0
-_0806DC74: .4byte gUnknown_2036DFC
+_0806DC74: .4byte gMapHeader
 _0806DC78:
 	movs r0, 0x7
 	ldrsb r0, [r4, r0]
@@ -2617,7 +2617,7 @@ sub_806DCD0: @ 806DCD0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806DD30
-	ldr r7, _0806DD2C @ =gUnknown_2036DFC
+	ldr r7, _0806DD2C @ =gMapHeader
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl map_warp_check_packed
@@ -2642,7 +2642,7 @@ sub_806DCD0: @ 806DCD0
 	movs r0, 0x1
 	b _0806DD32
 	.align 2, 0
-_0806DD2C: .4byte gUnknown_2036DFC
+_0806DD2C: .4byte gMapHeader
 _0806DD30:
 	movs r0, 0
 _0806DD32:
@@ -2831,7 +2831,7 @@ sub_806DE70: @ 806DE70
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsls r1, 16
-	ldr r2, _0806DEC0 @ =gUnknown_2036DFC
+	ldr r2, _0806DEC0 @ =gMapHeader
 	ldr r2, [r2, 0x4]
 	ldr r4, [r2, 0xC]
 	ldrb r5, [r2, 0x2]
@@ -2867,13 +2867,13 @@ _0806DEB8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806DEC0: .4byte gUnknown_2036DFC
+_0806DEC0: .4byte gMapHeader
 	thumb_func_end sub_806DE70
 
 	thumb_func_start sub_806DEC4
 sub_806DEC4: @ 806DEC4
 	push {r4,lr}
-	ldr r4, _0806DEE8 @ =gUnknown_2036DFC
+	ldr r4, _0806DEE8 @ =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -2889,7 +2889,7 @@ sub_806DEC4: @ 806DEC4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806DEE8: .4byte gUnknown_2036DFC
+_0806DEE8: .4byte gMapHeader
 	thumb_func_end sub_806DEC4
 
 	thumb_func_start FindInvisibleMapObjectByPosition
@@ -2946,7 +2946,7 @@ dive_warp: @ 806DF3C
 	adds r4, r0, 0
 	lsls r1, 16
 	lsrs r5, r1, 16
-	ldr r0, _0806DF70 @ =gUnknown_2036DFC
+	ldr r0, _0806DF70 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _0806DF74
@@ -2967,7 +2967,7 @@ dive_warp: @ 806DF3C
 	bl sub_8055824
 	b _0806DF98
 	.align 2, 0
-_0806DF70: .4byte gUnknown_2036DFC
+_0806DF70: .4byte gMapHeader
 _0806DF74:
 	lsls r0, r5, 24
 	lsrs r0, 24
@@ -3020,7 +3020,7 @@ sub_806DFB8: @ 806DFB8
 	bl sub_8058F78
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _0806E010 @ =gUnknown_2036DFC
+	ldr r0, _0806E010 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _0806E014
@@ -3046,7 +3046,7 @@ sub_806DFB8: @ 806DFB8
 	movs r0, 0x1
 	b _0806E046
 	.align 2, 0
-_0806E010: .4byte gUnknown_2036DFC
+_0806E010: .4byte gMapHeader
 _0806E014:
 	adds r0, r5, 0
 	bl sub_8059FB0
@@ -3122,7 +3122,7 @@ SetCableClubWarp: @ 806E08C
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	bl sub_8058F78
-	ldr r4, _0806E0CC @ =gUnknown_2036DFC
+	ldr r4, _0806E0CC @ =gMapHeader
 	adds r0, r4, 0
 	mov r1, sp
 	bl map_warp_check_packed
@@ -3138,7 +3138,7 @@ SetCableClubWarp: @ 806E08C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806E0CC: .4byte gUnknown_2036DFC
+_0806E0CC: .4byte gMapHeader
 	thumb_func_end SetCableClubWarp
 
 	.align 2, 0 @ Don't pad with nop.

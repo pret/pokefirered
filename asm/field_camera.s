@@ -136,14 +136,14 @@ DrawWholeMapView: @ 805A684
 	ldrsh r0, [r1, r2]
 	movs r2, 0x2
 	ldrsh r1, [r1, r2]
-	ldr r2, _0805A6A4 @ =gUnknown_2036DFC
+	ldr r2, _0805A6A4 @ =gMapHeader
 	ldr r2, [r2]
 	bl DrawWholeMapViewInternal
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805A6A0: .4byte gSaveBlock1Ptr
-_0805A6A4: .4byte gUnknown_2036DFC
+_0805A6A4: .4byte gMapHeader
 	thumb_func_end DrawWholeMapView
 
 	thumb_func_start DrawWholeMapViewInternal
@@ -224,7 +224,7 @@ RedrawMapSlicesForCameraUpdate: @ 805A72C
 	adds r5, r0, 0
 	adds r6, r1, 0
 	adds r7, r2, 0
-	ldr r0, _0805A774 @ =gUnknown_2036DFC
+	ldr r0, _0805A774 @ =gMapHeader
 	ldr r4, [r0]
 	cmp r6, 0
 	ble _0805A744
@@ -256,7 +256,7 @@ _0805A768:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805A774: .4byte gUnknown_2036DFC
+_0805A774: .4byte gMapHeader
 	thumb_func_end RedrawMapSlicesForCameraUpdate
 
 	thumb_func_start RedrawMapSliceNorth
@@ -474,7 +474,7 @@ CurrentMapDrawMetatileAt: @ 805A8E8
 	adds r1, r0, 0
 	cmp r1, 0
 	blt _0805A90E
-	ldr r0, _0805A918 @ =gUnknown_2036DFC
+	ldr r0, _0805A918 @ =gMapHeader
 	ldr r0, [r0]
 	lsls r1, 16
 	lsrs r1, 16
@@ -487,7 +487,7 @@ _0805A90E:
 	bx r0
 	.align 2, 0
 _0805A914: .4byte gUnknown_3000E90
-_0805A918: .4byte gUnknown_2036DFC
+_0805A918: .4byte gMapHeader
 	thumb_func_end CurrentMapDrawMetatileAt
 
 	thumb_func_start sub_805A91C

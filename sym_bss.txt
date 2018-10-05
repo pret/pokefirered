@@ -96,33 +96,9 @@ gUnknown_3000E9C: @ 3000E9C
 gUnknown_3000EA0: @ 3000EA0
 	.space 0x8
 
-gUnknown_3000EA8: @ 3000EA8
-	.space 0x8
+	.include "src/script.o"
 
-gUnknown_3000EB0: @ 3000EB0
-	.space 0x78
-
-gUnknown_3000F28: @ 3000F28
-	.space 0x74
-
-gUnknown_3000F9C: @ 3000F9C
-	.space 0x1
-
-gUnknown_3000F9D: @ 3000F9D
-	.space 0x1
-
-gUnknown_3000F9E: @ 3000F9E
-	.space 0x1
-
-gUnknown_3000F9F: @ 3000F9F
-	.space 0x1
-
-gUnknown_3000FA0: @ 3000FA0
-	.space 0x1
-
-gUnknown_3000FA1: @ 3000FA1
-	.space 0x3
-
+	.align 2
 gUnknown_3000FA4: @ 3000FA4
 	.space 0x4
 

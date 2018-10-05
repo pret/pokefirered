@@ -1500,7 +1500,7 @@ _080A1B88: .4byte sub_810A1F8
 	thumb_func_start sub_80A1B8C
 sub_80A1B8C: @ 80A1B8C
 	push {lr}
-	ldr r0, _080A1BA0 @ =gUnknown_2036DFC
+	ldr r0, _080A1BA0 @ =gMapHeader
 	ldrb r1, [r0, 0x19]
 	movs r0, 0x1
 	ands r0, r1
@@ -1509,7 +1509,7 @@ sub_80A1B8C: @ 80A1B8C
 	movs r0, 0
 	b _080A1BA6
 	.align 2, 0
-_080A1BA0: .4byte gUnknown_2036DFC
+_080A1BA0: .4byte gMapHeader
 _080A1BA4:
 	movs r0, 0x1
 _080A1BA6:
@@ -1529,7 +1529,7 @@ ItemUseOutOfBattle_EscapeRope: @ 80A1BAC
 	bne _080A1BEC
 	ldr r0, _080A1BDC @ =gUnknown_203AD30
 	ldrh r2, [r0]
-	ldr r0, _080A1BE0 @ =gUnknown_2036DFC
+	ldr r0, _080A1BE0 @ =gMapHeader
 	ldrb r3, [r0, 0x14]
 	movs r0, 0x4
 	movs r1, 0
@@ -1542,7 +1542,7 @@ ItemUseOutOfBattle_EscapeRope: @ 80A1BAC
 	b _080A1BFE
 	.align 2, 0
 _080A1BDC: .4byte gUnknown_203AD30
-_080A1BE0: .4byte gUnknown_2036DFC
+_080A1BE0: .4byte gMapHeader
 _080A1BE4: .4byte gUnknown_2039998
 _080A1BE8: .4byte sub_80A1C08
 _080A1BEC:
@@ -1769,7 +1769,7 @@ sub_80A1D9C: @ 80A1D9C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080A1DE8 @ =gUnknown_2036DFC
+	ldr r0, _080A1DE8 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x3
 	beq _080A1DB2
@@ -1805,7 +1805,7 @@ _080A1DD2:
 	bl sub_80A1110
 	b _080A1E00
 	.align 2, 0
-_080A1DE8: .4byte gUnknown_2036DFC
+_080A1DE8: .4byte gMapHeader
 _080A1DEC: .4byte gSaveBlock1Ptr
 _080A1DF0: .4byte gUnknown_3005090
 _080A1DF4:

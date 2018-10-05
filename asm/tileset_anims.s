@@ -195,7 +195,7 @@ cur_mapheader_run_tileset1_func: @ 807002C
 	ldr r1, _08070060 @ =gUnknown_3000FB8
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, _08070064 @ =gUnknown_2036DFC
+	ldr r0, _08070064 @ =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	cmp r0, 0
@@ -211,7 +211,7 @@ _08070052:
 _08070058: .4byte gUnknown_3000FAE
 _0807005C: .4byte gUnknown_3000FB0
 _08070060: .4byte gUnknown_3000FB8
-_08070064: .4byte gUnknown_2036DFC
+_08070064: .4byte gMapHeader
 	thumb_func_end cur_mapheader_run_tileset1_func
 
 	thumb_func_start cur_mapheader_run_tileset2_func
@@ -225,7 +225,7 @@ cur_mapheader_run_tileset2_func: @ 8070068
 	ldr r1, _0807009C @ =gUnknown_3000FBC
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, _080700A0 @ =gUnknown_2036DFC
+	ldr r0, _080700A0 @ =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
@@ -241,7 +241,7 @@ _0807008E:
 _08070094: .4byte gUnknown_3000FB2
 _08070098: .4byte gUnknown_3000FB4
 _0807009C: .4byte gUnknown_3000FBC
-_080700A0: .4byte gUnknown_2036DFC
+_080700A0: .4byte gMapHeader
 	thumb_func_end cur_mapheader_run_tileset2_func
 
 	thumb_func_start sub_80700A4

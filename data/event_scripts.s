@@ -1,9 +1,9 @@
 	.section script_data, "aw", %progbits
 
-gUnknown_815F9B4:: @ 815F9B4
+gScriptCmdTable:: @ 815F9B4
 	.incbin "baserom.gba", 0x15F9B4, 0x354
 
-gUnknown_815FD08:: @ 815FD08
+gScriptCmdTableEnd:: @ 815FD08
 	.incbin "baserom.gba", 0x15FD08, 0x4
 
 gUnknown_815FD0C:: @ 815FD0C

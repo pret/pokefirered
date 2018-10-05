@@ -217,7 +217,7 @@ sub_810C808: @ 810C808
 	strb r1, [r0]
 	mov r8, r1
 	mov r9, r1
-	ldr r0, _0810C8E0 @ =gUnknown_2036DFC
+	ldr r0, _0810C8E0 @ =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldrb r0, [r0]
 	cmp r8, r0
@@ -287,7 +287,7 @@ _0810C8AC:
 	adds r5, 0x18
 	movs r0, 0x1
 	add r9, r0
-	ldr r0, _0810C8E0 @ =gUnknown_2036DFC
+	ldr r0, _0810C8E0 @ =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldrb r0, [r0]
 	cmp r9, r0
@@ -310,7 +310,7 @@ _0810C8BC:
 	bx r0
 	.align 2, 0
 _0810C8DC: .4byte gSaveBlock1Ptr
-_0810C8E0: .4byte gUnknown_2036DFC
+_0810C8E0: .4byte gMapHeader
 _0810C8E4: .4byte gUnknown_203ADB8
 _0810C8E8: .4byte gUnknown_2036E38
 	thumb_func_end sub_810C808
@@ -670,7 +670,7 @@ sub_810CB90: @ 810CB90
 	beq _0810CC8A
 	movs r0, 0
 	mov r8, r0
-	ldr r0, _0810CC60 @ =gUnknown_2036DFC
+	ldr r0, _0810CC60 @ =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldrb r0, [r0]
 	cmp r8, r0
@@ -742,7 +742,7 @@ _0810CBDE:
 _0810CC54: .4byte gSaveBlock1Ptr
 _0810CC58: .4byte gUnknown_845318C
 _0810CC5C: .4byte gTrainerBattleOpponent_A
-_0810CC60: .4byte gUnknown_2036DFC
+_0810CC60: .4byte gMapHeader
 _0810CC64: .4byte gUnknown_2036E38
 _0810CC68: .4byte gUnknown_8453F67
 _0810CC6C: .4byte 0x0000063a
@@ -756,7 +756,7 @@ _0810CC78:
 	adds r6, 0x18
 	movs r0, 0x1
 	add r8, r0
-	ldr r0, _0810CC9C @ =gUnknown_2036DFC
+	ldr r0, _0810CC9C @ =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldrb r0, [r0]
 	cmp r8, r0
@@ -771,7 +771,7 @@ _0810CC8A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810CC9C: .4byte gUnknown_2036DFC
+_0810CC9C: .4byte gMapHeader
 	thumb_func_end sub_810CB90
 
 	thumb_func_start sub_810CCA0
@@ -1129,7 +1129,7 @@ sub_810CF04: @ 810CF04
 	lsls r0, 31
 	cmp r0, 0
 	beq _0810CF4C
-	ldr r0, _0810CF44 @ =gUnknown_2036DFC
+	ldr r0, _0810CF44 @ =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldrb r0, [r0]
 	ldrb r2, [r1, 0x8]
@@ -1149,7 +1149,7 @@ sub_810CF04: @ 810CF04
 	b _0810CF4E
 	.align 2, 0
 _0810CF40: .4byte gUnknown_2036E38
-_0810CF44: .4byte gUnknown_2036DFC
+_0810CF44: .4byte gMapHeader
 _0810CF48: .4byte gSprites
 _0810CF4C:
 	movs r0, 0

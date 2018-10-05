@@ -771,13 +771,13 @@ sub_805E3A0: @ 805E3A0
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, _0805E3B8 @ =gUnknown_2036DFC
+	ldr r0, _0805E3B8 @ =gMapHeader
 	ldr r0, [r0, 0x4]
 	cmp r0, 0
 	bne _0805E3CE
 	b _0805E404
 	.align 2, 0
-_0805E3B8: .4byte gUnknown_2036DFC
+_0805E3B8: .4byte gMapHeader
 _0805E3BC:
 	ldr r0, [r7]
 	ldrb r1, [r0, 0x5]
@@ -1903,7 +1903,7 @@ sub_805EC30: @ 805EC30
 	lsls r1, 16
 	lsrs r1, 16
 	str r1, [sp, 0x8]
-	ldr r0, _0805ED08 @ =gUnknown_2036DFC
+	ldr r0, _0805ED08 @ =gMapHeader
 	ldr r3, [r0, 0x4]
 	cmp r3, 0
 	beq _0805ECF8
@@ -2001,7 +2001,7 @@ _0805ECF8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805ED08: .4byte gUnknown_2036DFC
+_0805ED08: .4byte gMapHeader
 _0805ED0C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_805EC30
 
@@ -4285,12 +4285,12 @@ GetFieldObjectTemplateByLocalIdAndMap: @ 805FD5C
 	movs r0, 0x8E
 	lsls r0, 4
 	adds r1, r0
-	ldr r0, _0805FD90 @ =gUnknown_2036DFC
+	ldr r0, _0805FD90 @ =gMapHeader
 	ldr r0, [r0, 0x4]
 	b _0805FDA0
 	.align 2, 0
 _0805FD8C: .4byte gSaveBlock1Ptr
-_0805FD90: .4byte gUnknown_2036DFC
+_0805FD90: .4byte gMapHeader
 _0805FD94:
 	adds r0, r2, 0
 	adds r1, r3, 0

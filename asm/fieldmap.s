@@ -19,26 +19,26 @@ mapconnection_get_mapheader: @ 80589C4
 	thumb_func_start not_trainer_hill_battle_pyramid
 not_trainer_hill_battle_pyramid: @ 80589D4
 	push {lr}
-	ldr r0, _080589E4 @ =gUnknown_2036DFC
+	ldr r0, _080589E4 @ =gMapHeader
 	bl sub_8058A00
 	bl mapheader_run_script_with_tag_x1
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080589E4: .4byte gUnknown_2036DFC
+_080589E4: .4byte gMapHeader
 	thumb_func_end not_trainer_hill_battle_pyramid
 
 	thumb_func_start sub_80589E8
 sub_80589E8: @ 80589E8
 	push {lr}
-	ldr r0, _080589FC @ =gUnknown_2036DFC
+	ldr r0, _080589FC @ =gMapHeader
 	bl sub_8058A00
 	bl sub_80591C4
 	bl mapheader_run_script_with_tag_x1
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080589FC: .4byte gUnknown_2036DFC
+_080589FC: .4byte gMapHeader
 	thumb_func_end sub_80589E8
 
 	thumb_func_start sub_8058A00
@@ -519,7 +519,7 @@ MapGridGetZCoordAt: @ 8058D44
 	.align 2, 0
 _08058D70: .4byte gUnknown_3005040
 _08058D74:
-	ldr r0, _08058DB4 @ =gUnknown_2036DFC
+	ldr r0, _08058DB4 @ =gMapHeader
 	ldr r6, [r0]
 	subs r0, r2, 0x7
 	ldrb r5, [r6, 0x18]
@@ -550,7 +550,7 @@ _08058DA8:
 	lsrs r0, r1, 12
 	b _08058DBE
 	.align 2, 0
-_08058DB4: .4byte gUnknown_2036DFC
+_08058DB4: .4byte gMapHeader
 _08058DB8: .4byte 0x000003ff
 _08058DBC:
 	movs r0, 0
@@ -587,7 +587,7 @@ sub_8058DC4: @ 8058DC4
 	.align 2, 0
 _08058DF0: .4byte gUnknown_3005040
 _08058DF4:
-	ldr r0, _08058E38 @ =gUnknown_2036DFC
+	ldr r0, _08058E38 @ =gMapHeader
 	ldr r6, [r0]
 	subs r0, r2, 0x7
 	ldrb r5, [r6, 0x18]
@@ -621,7 +621,7 @@ _08058E28:
 	lsrs r0, r1, 10
 	b _08058E42
 	.align 2, 0
-_08058E38: .4byte gUnknown_2036DFC
+_08058E38: .4byte gMapHeader
 _08058E3C: .4byte 0x000003ff
 _08058E40:
 	movs r0, 0x1
@@ -662,7 +662,7 @@ sub_8058E48: @ 8058E48
 	.align 2, 0
 _08058E7C: .4byte gUnknown_3005040
 _08058E80:
-	ldr r0, _08058EC8 @ =gUnknown_2036DFC
+	ldr r0, _08058EC8 @ =gMapHeader
 	ldr r6, [r0]
 	mov r0, r8
 	subs r0, 0x7
@@ -697,10 +697,10 @@ _08058EBA:
 	adds r0, r7, 0
 	b _08058F0A
 	.align 2, 0
-_08058EC8: .4byte gUnknown_2036DFC
+_08058EC8: .4byte gMapHeader
 _08058ECC: .4byte 0x000003ff
 _08058ED0:
-	ldr r0, _08058F18 @ =gUnknown_2036DFC
+	ldr r0, _08058F18 @ =gMapHeader
 	ldr r6, [r0]
 	mov r0, r8
 	subs r0, 0x7
@@ -735,7 +735,7 @@ _08058F0A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08058F18: .4byte gUnknown_2036DFC
+_08058F18: .4byte gMapHeader
 	thumb_func_end sub_8058E48
 
 	thumb_func_start sub_8058F1C
@@ -778,7 +778,7 @@ sub_8058F48: @ 8058F48
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _08058F74 @ =gUnknown_2036DFC
+	ldr r0, _08058F74 @ =gMapHeader
 	ldr r0, [r0]
 	adds r2, r4, 0
 	bl sub_8059080
@@ -786,7 +786,7 @@ sub_8058F48: @ 8058F48
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08058F74: .4byte gUnknown_2036DFC
+_08058F74: .4byte gMapHeader
 	thumb_func_end sub_8058F48
 
 	thumb_func_start sub_8058F78
@@ -1346,7 +1346,7 @@ sub_8059334: @ 8059334
 _0805936C: .4byte gUnknown_3005040
 _08059370: .4byte 0x000003ff
 _08059374:
-	ldr r0, _080593CC @ =gUnknown_2036DFC
+	ldr r0, _080593CC @ =gMapHeader
 	ldr r6, [r0]
 	subs r0, r7, 0x7
 	ldrb r5, [r6, 0x18]
@@ -1389,7 +1389,7 @@ _080593B0:
 	movs r0, 0x4
 	b _08059432
 	.align 2, 0
-_080593CC: .4byte gUnknown_2036DFC
+_080593CC: .4byte gMapHeader
 _080593D0: .4byte 0x000003ff
 _080593D4: .4byte gUnknown_3005040
 _080593D8: .4byte gUnknown_2036E24
@@ -1696,7 +1696,7 @@ sub_8059600: @ 8059600
 	mov r8, r2
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, _0805963C @ =gUnknown_2036DFC
+	ldr r0, _0805963C @ =gMapHeader
 	ldr r0, [r0, 0xC]
 	ldr r7, [r0]
 	ldr r4, [r0, 0x4]
@@ -1719,7 +1719,7 @@ _0805961E:
 	adds r0, r4, 0
 	b _0805964A
 	.align 2, 0
-_0805963C: .4byte gUnknown_2036DFC
+_0805963C: .4byte gMapHeader
 _08059640:
 	adds r5, 0x1
 	adds r4, 0xC
@@ -1754,7 +1754,7 @@ sub_8059658: @ 8059658
 	blt _080596B0
 	cmp r4, 0x2
 	bgt _08059690
-	ldr r0, _0805968C @ =gUnknown_2036DFC
+	ldr r0, _0805968C @ =gMapHeader
 	ldr r0, [r0]
 	ldr r1, [r0]
 	ldr r0, [r2]
@@ -1763,11 +1763,11 @@ sub_8059658: @ 8059658
 	adds r0, r7, 0
 	b _080596A2
 	.align 2, 0
-_0805968C: .4byte gUnknown_2036DFC
+_0805968C: .4byte gMapHeader
 _08059690:
 	cmp r6, 0x4
 	bgt _080596B0
-	ldr r0, _080596AC @ =gUnknown_2036DFC
+	ldr r0, _080596AC @ =gMapHeader
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	ldr r0, [r2]
@@ -1780,7 +1780,7 @@ _080596A2:
 	lsrs r0, 24
 	b _080596B2
 	.align 2, 0
-_080596AC: .4byte gUnknown_2036DFC
+_080596AC: .4byte gMapHeader
 _080596B0:
 	movs r0, 0
 _080596B2:
@@ -1884,13 +1884,13 @@ sub_805973C: @ 805973C
 	mov r8, r0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, _0805975C @ =gUnknown_2036DFC
+	ldr r2, _0805975C @ =gMapHeader
 	ldr r0, [r2, 0xC]
 	cmp r0, 0
 	bne _08059764
 	b _080597DA
 	.align 2, 0
-_0805975C: .4byte gUnknown_2036DFC
+_0805975C: .4byte gMapHeader
 _08059760:
 	adds r0, r4, 0
 	b _080597DC

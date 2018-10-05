@@ -8,7 +8,7 @@
 	thumb_func_start SetUpFieldMove_Teleport
 SetUpFieldMove_Teleport: @ 80F66F0
 	push {lr}
-	ldr r0, _080F6708 @ =gUnknown_2036DFC
+	ldr r0, _080F6708 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_or_6
 	lsls r0, 24
@@ -18,7 +18,7 @@ SetUpFieldMove_Teleport: @ 80F66F0
 	movs r0, 0
 	b _080F671A
 	.align 2, 0
-_080F6708: .4byte gUnknown_2036DFC
+_080F6708: .4byte gMapHeader
 _080F670C:
 	ldr r1, _080F6720 @ =gUnknown_3005024
 	ldr r0, _080F6724 @ =hm_add_c3_launch_phase_2

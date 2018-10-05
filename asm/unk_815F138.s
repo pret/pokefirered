@@ -32,7 +32,7 @@ sub_815F138: @ 815F138
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0815F194 @ =gUnknown_3005090
+	ldr r2, _0815F194 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -52,7 +52,7 @@ sub_815F138: @ 815F138
 	bx r0
 	.align 2, 0
 _0815F190: .4byte sub_815F1AC
-_0815F194: .4byte gUnknown_3005090
+_0815F194: .4byte gTasks
 	thumb_func_end sub_815F138
 
 	thumb_func_start sub_815F198
@@ -77,7 +77,7 @@ sub_815F1AC: @ 815F1AC
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _0815F1D0 @ =gUnknown_3005098
+	ldr r1, _0815F1D0 @ =gTasks+0x8
 	adds r5, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -89,7 +89,7 @@ sub_815F1AC: @ 815F1AC
 	beq _0815F1DA
 	b _0815F29E
 	.align 2, 0
-_0815F1D0: .4byte gUnknown_3005098
+_0815F1D0: .4byte gTasks+0x8
 _0815F1D4:
 	cmp r0, 0x2
 	beq _0815F260

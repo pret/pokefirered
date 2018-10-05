@@ -2817,12 +2817,12 @@ _0804913E:
 	cmp r6, 0x5
 	ble _08049088
 _08049148:
-	ldr r0, _080491A8 @ =nullsub_43
+	ldr r0, _080491A8 @ =TaskDummy
 	movs r1, 0x5
 	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _080491AC @ =gUnknown_3005090
+	ldr r2, _080491AC @ =gTasks
 	lsls r3, r4, 2
 	adds r1, r3, r4
 	lsls r1, 3
@@ -2864,8 +2864,8 @@ _08049172:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080491A8: .4byte nullsub_43
-_080491AC: .4byte gUnknown_3005090
+_080491A8: .4byte TaskDummy
+_080491AC: .4byte gTasks
 	thumb_func_end sub_8048D14
 
 	thumb_func_start sub_80491B0
@@ -2879,7 +2879,7 @@ sub_80491B0: @ 80491B0
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r2, _080492C0 @ =gUnknown_3005090
+	ldr r2, _080492C0 @ =gTasks
 	lsls r3, r0, 2
 	adds r1, r3, r0
 	lsls r1, 3
@@ -2909,7 +2909,7 @@ _080491DE:
 	movs r0, 0x52
 	movs r1, 0x10
 	bl SetGpuReg
-	ldr r1, _080492C0 @ =gUnknown_3005090
+	ldr r1, _080492C0 @ =gTasks
 	ldr r0, [sp, 0xC]
 	add r0, r8
 	lsls r0, 3
@@ -3007,7 +3007,7 @@ _08049268:
 	mov r12, r2
 	b _08049302
 	.align 2, 0
-_080492C0: .4byte gUnknown_3005090
+_080492C0: .4byte gTasks
 _080492C4: .4byte gSprites
 _080492C8: .4byte sub_8049630
 _080492CC:
@@ -3064,7 +3064,7 @@ _08049302:
 	str r1, [r3]
 	ldr r1, _08049354 @ =gUnknown_8260404
 	bl SetSubspriteTables
-	ldr r1, _08049358 @ =gUnknown_3005090
+	ldr r1, _08049358 @ =gTasks
 	ldr r0, [sp, 0xC]
 	add r0, r8
 	lsls r0, 3
@@ -3077,10 +3077,10 @@ _08049348: .4byte sub_8049630
 _0804934C: .4byte gSprites
 _08049350: .4byte sub_8049568
 _08049354: .4byte gUnknown_8260404
-_08049358: .4byte gUnknown_3005090
+_08049358: .4byte gTasks
 _0804935C: .4byte sub_8049388
 _08049360:
-	ldr r0, _08049380 @ =gUnknown_3005090
+	ldr r0, _08049380 @ =gTasks
 	ldr r1, [sp, 0xC]
 	add r1, r8
 	lsls r1, 3
@@ -3097,7 +3097,7 @@ _0804936E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08049380: .4byte gUnknown_3005090
+_08049380: .4byte gTasks
 _08049384: .4byte sub_804948C
 	thumb_func_end sub_80491B0
 
@@ -3106,7 +3106,7 @@ sub_8049388: @ 8049388
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080493DC @ =gUnknown_3005090
+	ldr r2, _080493DC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3146,7 +3146,7 @@ _080493D4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080493DC: .4byte gUnknown_3005090
+_080493DC: .4byte gTasks
 _080493E0: .4byte sub_80493E4
 	thumb_func_end sub_8049388
 
@@ -3156,7 +3156,7 @@ sub_80493E4: @ 80493E4
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r7, _0804945C @ =gUnknown_3005090
+	ldr r7, _0804945C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r6, r0, 3
@@ -3212,7 +3212,7 @@ _08049442:
 	ble _08049442
 	b _08049482
 	.align 2, 0
-_0804945C: .4byte gUnknown_3005090
+_0804945C: .4byte gTasks
 _08049460: .4byte gSprites
 _08049464:
 	movs r0, 0x3
@@ -3241,7 +3241,7 @@ sub_804948C: @ 804948C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	ldr r7, _080494C4 @ =gUnknown_3005090
+	ldr r7, _080494C4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r6, r0, 3
@@ -3263,7 +3263,7 @@ sub_804948C: @ 804948C
 	bl SetGpuReg
 	b _08049546
 	.align 2, 0
-_080494C4: .4byte gUnknown_3005090
+_080494C4: .4byte gTasks
 _080494C8:
 	movs r0, 0x1
 	negs r0, r0

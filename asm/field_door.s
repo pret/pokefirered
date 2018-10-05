@@ -165,7 +165,7 @@ sub_805B028: @ 805B028
 	lsls r2, r4, 2
 	adds r2, r4
 	lsls r2, 3
-	ldr r0, _0805B05C @ =gUnknown_3005098
+	ldr r0, _0805B05C @ =gTasks+0x8
 	adds r2, r0
 	ldrh r1, [r2]
 	lsls r1, 16
@@ -185,7 +185,7 @@ _0805B056:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805B05C: .4byte gUnknown_3005098
+_0805B05C: .4byte gTasks+0x8
 	thumb_func_end sub_805B028
 
 	thumb_func_start sub_805B060
@@ -293,7 +293,7 @@ task_overworld_door_add_if_inactive: @ 805B0E8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r2, _0805B138 @ =gUnknown_3005098
+	ldr r2, _0805B138 @ =gTasks+0x8
 	adds r1, r2
 	strh r7, [r1, 0xC]
 	mov r2, r8
@@ -309,7 +309,7 @@ task_overworld_door_add_if_inactive: @ 805B0E8
 	b _0805B140
 	.align 2, 0
 _0805B134: .4byte sub_805B028
-_0805B138: .4byte gUnknown_3005098
+_0805B138: .4byte gTasks+0x8
 _0805B13C:
 	movs r0, 0x1
 	negs r0, r0

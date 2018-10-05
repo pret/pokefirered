@@ -255,7 +255,7 @@ task00_for_dp12: @ 8088020
 _08088048: .4byte gUnknown_203961C
 _0808804C: .4byte gUnknown_2039600
 _08088050:
-	ldr r1, _0808807C @ =gUnknown_3005090
+	ldr r1, _0808807C @ =gTasks
 	mov r0, r12
 	lsls r2, r0, 2
 	adds r0, r2, r0
@@ -277,7 +277,7 @@ _08088050:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0808807C: .4byte gUnknown_3005090
+_0808807C: .4byte gTasks
 _08088080: .4byte _08088084
 	.align 2, 0
 _08088084:
@@ -559,7 +559,7 @@ sub_8088230: @ 8088230
 	bl CreateTask
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, _08088348 @ =gUnknown_3005090
+	ldr r0, _08088348 @ =gTasks
 	lsls r4, r7, 2
 	adds r4, r7
 	lsls r4, 3
@@ -634,7 +634,7 @@ _0808832A:
 _0808833C: .4byte 0x04000010
 _08088340: .4byte 0xa2600001
 _08088344: .4byte task00_for_dp12
-_08088348: .4byte gUnknown_3005090
+_08088348: .4byte gTasks
 _0808834C: .4byte gUnknown_2039600
 _08088350: .4byte gUnknown_203961C
 _08088354: .4byte gUnknown_2038980

@@ -61,7 +61,7 @@ _080BF4B8:
 	ldr r1, _080BF50C @ =gUnknown_20399CC
 	ldr r0, [sp, 0x34]
 	str r0, [r1]
-	ldr r1, _080BF510 @ =gUnknown_3005090
+	ldr r1, _080BF510 @ =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
 	add r0, r8
@@ -80,7 +80,7 @@ _080BF500: .4byte gUnknown_20399D0
 _080BF504: .4byte gStringVar4
 _080BF508: .4byte gTextFlags
 _080BF50C: .4byte gUnknown_20399CC
-_080BF510: .4byte gUnknown_3005090
+_080BF510: .4byte gTasks
 _080BF514: .4byte Task_ContinueTaskAfterMessagePrints
 	thumb_func_end DisplayMessageAndContinueTask
 
@@ -148,7 +148,7 @@ _080BF580:
 _080BF586:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _080BF5A0 @ =gUnknown_3005090
+	ldr r1, _080BF5A0 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -158,12 +158,12 @@ _080BF586:
 	ldr r1, [r1]
 	b _080BF5BE
 	.align 2, 0
-_080BF5A0: .4byte gUnknown_3005090
+_080BF5A0: .4byte gTasks
 _080BF5A4: .4byte gUnknown_20399C8
 _080BF5A8:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _080BF5C8 @ =gUnknown_3005090
+	ldr r1, _080BF5C8 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -178,7 +178,7 @@ _080BF5C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BF5C8: .4byte gUnknown_3005090
+_080BF5C8: .4byte gTasks
 _080BF5CC: .4byte gUnknown_20399C8
 	thumb_func_end sub_80BF560
 
@@ -213,7 +213,7 @@ sub_80BF5D0: @ 80BF5D0
 	bl sub_810FF60
 	ldr r0, _080BF624 @ =gUnknown_20399C8
 	str r7, [r0]
-	ldr r1, _080BF628 @ =gUnknown_3005090
+	ldr r1, _080BF628 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -226,7 +226,7 @@ sub_80BF5D0: @ 80BF5D0
 	bx r0
 	.align 2, 0
 _080BF624: .4byte gUnknown_20399C8
-_080BF628: .4byte gUnknown_3005090
+_080BF628: .4byte gTasks
 _080BF62C: .4byte sub_80BF560
 	thumb_func_end sub_80BF5D0
 

@@ -12,7 +12,7 @@ sub_8134200: @ 8134200
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08134228 @ =gUnknown_3005098
+	ldr r0, _08134228 @ =gTasks+0x8
 	adds r1, r0
 	ldr r2, _0813422C @ =gSprites
 	ldrb r1, [r1, 0xD]
@@ -28,7 +28,7 @@ sub_8134200: @ 8134200
 	strb r1, [r0]
 	bx lr
 	.align 2, 0
-_08134228: .4byte gUnknown_3005098
+_08134228: .4byte gTasks+0x8
 _0813422C: .4byte gSprites
 	thumb_func_end sub_8134200
 
@@ -87,7 +87,7 @@ sub_8134230: @ 8134230
 	lsls r4, r0, 2
 	add r4, r10
 	lsls r4, 3
-	ldr r0, _081343D8 @ =gUnknown_3005098
+	ldr r0, _081343D8 @ =gTasks+0x8
 	adds r4, r0
 	movs r0, 0
 	strb r0, [r4, 0xC]
@@ -223,7 +223,7 @@ _081343C8: .4byte 0xffff0000
 _081343CC: .4byte 0x0000ffff
 _081343D0: .4byte gUnknown_846341C
 _081343D4: .4byte sub_8134200
-_081343D8: .4byte gUnknown_3005098
+_081343D8: .4byte gTasks+0x8
 _081343DC: .4byte 0x00002f42
 _081343E0: .4byte 0x0000080c
 _081343E4: .4byte 0x00001f1f
@@ -242,7 +242,7 @@ sub_81343F4: @ 81343F4
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
-	ldr r0, _08134498 @ =gUnknown_3005098
+	ldr r0, _08134498 @ =gTasks+0x8
 	adds r4, r0
 	ldrh r0, [r4, 0xE]
 	bl FreeSpriteTilesByTag
@@ -301,7 +301,7 @@ sub_81343F4: @ 81343F4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08134498: .4byte gUnknown_3005098
+_08134498: .4byte gTasks+0x8
 _0813449C: .4byte gSprites
 _081344A0: .4byte 0x00001f1f
 	thumb_func_end sub_81343F4
@@ -346,12 +346,12 @@ sub_81344E0: @ 81344E0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _081344F4 @ =gUnknown_3005098
+	ldr r0, _081344F4 @ =gTasks+0x8
 	adds r1, r0
 	ldrb r0, [r1]
 	bx lr
 	.align 2, 0
-_081344F4: .4byte gUnknown_3005098
+_081344F4: .4byte gTasks+0x8
 	thumb_func_end sub_81344E0
 
 	.align 2, 0 @ Don't pad with nop.

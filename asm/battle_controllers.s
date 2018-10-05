@@ -901,7 +901,7 @@ CreateTasksForSendRecvLinkBuffers: @ 800D93C
 	bl CreateTask
 	ldr r2, _0800D9D8 @ =gUnknown_202286C
 	strb r0, [r2]
-	ldr r5, _0800D9DC @ =gUnknown_3005090
+	ldr r5, _0800D9DC @ =gTasks
 	ldrb r1, [r2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -971,7 +971,7 @@ CreateTasksForSendRecvLinkBuffers: @ 800D93C
 	.align 2, 0
 _0800D9D4: .4byte sub_800DB6C
 _0800D9D8: .4byte gUnknown_202286C
-_0800D9DC: .4byte gUnknown_3005090
+_0800D9DC: .4byte gTasks
 _0800D9E0: .4byte Task_HandleCopyReceivedLinkBuffersData
 _0800D9E4: .4byte gUnknown_202286D
 _0800D9E8: .4byte gUnknown_202286E
@@ -995,7 +995,7 @@ PrepareBufferDataTransferLink: @ 800D9EC
 	bics r0, r1
 	adds r0, 0x4
 	mov r8, r0
-	ldr r2, _0800DB4C @ =gUnknown_3005090
+	ldr r2, _0800DB4C @ =gTasks
 	ldr r3, _0800DB50 @ =gUnknown_202286C
 	ldrb r1, [r3]
 	lsls r0, r1, 2
@@ -1159,7 +1159,7 @@ _0800DB2C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800DB4C: .4byte gUnknown_3005090
+_0800DB4C: .4byte gTasks
 _0800DB50: .4byte gUnknown_202286C
 _0800DB54: .4byte gUnknown_2023FEC
 _0800DB58: .4byte gActiveBattler
@@ -1174,7 +1174,7 @@ sub_800DB6C: @ 800DB6C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _0800DB94 @ =gUnknown_3005090
+	ldr r1, _0800DB94 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1192,7 +1192,7 @@ _0800DB88:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0800DB94: .4byte gUnknown_3005090
+_0800DB94: .4byte gTasks
 _0800DB98: .4byte _0800DB9C
 	.align 2, 0
 _0800DB9C:
@@ -1263,7 +1263,7 @@ _0800DC1A:
 	cmp r0, 0
 	beq _0800DC3C
 	bl sub_800A5BC
-	ldr r0, _0800DC38 @ =gUnknown_3005090
+	ldr r0, _0800DC38 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1272,9 +1272,9 @@ _0800DC1A:
 	adds r0, 0x1
 	b _0800DD1E
 	.align 2, 0
-_0800DC38: .4byte gUnknown_3005090
+_0800DC38: .4byte gTasks
 _0800DC3C:
-	ldr r0, _0800DC4C @ =gUnknown_3005090
+	ldr r0, _0800DC4C @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1283,7 +1283,7 @@ _0800DC3C:
 	adds r0, 0x1
 	b _0800DD1E
 	.align 2, 0
-_0800DC4C: .4byte gUnknown_3005090
+_0800DC4C: .4byte gTasks
 _0800DC50:
 	lsls r1, r4, 2
 	adds r0, r1, r4
@@ -1349,7 +1349,7 @@ _0800DCC6:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800DD20
-	ldr r0, _0800DCFC @ =gUnknown_3005090
+	ldr r0, _0800DCFC @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1371,7 +1371,7 @@ _0800DCC6:
 	strh r0, [r1, 0x26]
 	b _0800DD1C
 	.align 2, 0
-_0800DCFC: .4byte gUnknown_3005090
+_0800DCFC: .4byte gTasks
 _0800DD00: .4byte gUnknown_2023FEC
 _0800DD04:
 	lsls r0, r4, 2
@@ -1450,7 +1450,7 @@ _0800DD70:
 	ldr r1, _0800DE3C @ =gUnknown_202211C
 	adds r0, r1
 	ldrh r6, [r0]
-	ldr r7, _0800DE40 @ =gUnknown_3005090
+	ldr r7, _0800DE40 @ =gTasks
 	ldr r4, _0800DE44 @ =gUnknown_202286D
 	mov r12, r4
 	ldrb r1, [r4]
@@ -1535,7 +1535,7 @@ _0800DE28:
 	.align 2, 0
 _0800DE38: .4byte gBitTable
 _0800DE3C: .4byte gUnknown_202211C
-_0800DE40: .4byte gUnknown_3005090
+_0800DE40: .4byte gTasks
 _0800DE44: .4byte gUnknown_202286D
 _0800DE48: .4byte gUnknown_2023FF0
 	thumb_func_end sub_800DD28
@@ -1548,7 +1548,7 @@ Task_HandleCopyReceivedLinkBuffersData: @ 800DE4C
 	push {r6,r7}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r1, _0800DEB4 @ =gUnknown_3005090
+	ldr r1, _0800DEB4 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -1596,7 +1596,7 @@ _0800DE82:
 	beq _0800DEC2
 	b _0800DF7A
 	.align 2, 0
-_0800DEB4: .4byte gUnknown_3005090
+_0800DEB4: .4byte gTasks
 _0800DEB8: .4byte gUnknown_2023FF0
 _0800DEBC:
 	cmp r0, 0x2
@@ -1687,7 +1687,7 @@ _0800DF64:
 	bics r0, r1
 	str r0, [r3]
 _0800DF7A:
-	ldr r0, _0800DFA0 @ =gUnknown_3005090
+	ldr r0, _0800DFA0 @ =gTasks
 	mov r2, r9
 	adds r1, r2, r7
 	lsls r1, 3
@@ -1706,7 +1706,7 @@ _0800DF8C:
 	.align 2, 0
 _0800DF98: .4byte gUnknown_2023BC8
 _0800DF9C: .4byte gBitTable
-_0800DFA0: .4byte gUnknown_3005090
+_0800DFA0: .4byte gTasks
 	thumb_func_end Task_HandleCopyReceivedLinkBuffersData
 
 	thumb_func_start EmitGetMonData

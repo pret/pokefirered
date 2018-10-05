@@ -5405,7 +5405,7 @@ _080D6E0C:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, _080D6EB8 @ =gUnknown_3005090
+	ldr r4, _080D6EB8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -5456,7 +5456,7 @@ _080D6EA8: .4byte gSprites
 _080D6EAC: .4byte gUnknown_2023D44
 _080D6EB0: .4byte gActiveBattler
 _080D6EB4: .4byte sub_80D6ED0
-_080D6EB8: .4byte gUnknown_3005090
+_080D6EB8: .4byte gTasks
 _080D6EBC: .4byte gUnknown_2024018
 _080D6EC0: .4byte gUnknown_2024000
 _080D6EC4: .4byte sub_80491B0
@@ -5473,7 +5473,7 @@ sub_80D6ED0: @ 80D6ED0
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _080D6EF8 @ =gUnknown_3005090
+	ldr r1, _080D6EF8 @ =gTasks
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
@@ -5487,7 +5487,7 @@ sub_80D6ED0: @ 80D6ED0
 	strh r0, [r1, 0xA]
 	b _080D6FB8
 	.align 2, 0
-_080D6EF8: .4byte gUnknown_3005090
+_080D6EF8: .4byte gTasks
 _080D6EFC:
 	ldr r7, _080D6F3C @ =gActiveBattler
 	ldrb r0, [r7]
@@ -5741,7 +5741,7 @@ sub_80D70E8: @ 80D70E8
 	ands r0, r1
 	cmp r0, 0
 	beq _080D711A
-	ldr r2, _080D712C @ =gUnknown_3005090
+	ldr r2, _080D712C @ =gTasks
 	ldr r0, _080D7130 @ =gUnknown_2024000
 	adds r0, r3, r0
 	ldrb r1, [r0]
@@ -5758,7 +5758,7 @@ _080D711A:
 	.align 2, 0
 _080D7124: .4byte gUnknown_2024018
 _080D7128: .4byte gActiveBattler
-_080D712C: .4byte gUnknown_3005090
+_080D712C: .4byte gTasks
 _080D7130: .4byte gUnknown_2024000
 _080D7134: .4byte sub_80491B0
 	thumb_func_end sub_80D70E8

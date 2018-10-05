@@ -747,7 +747,7 @@ _08134AFC: .4byte 0x00003214
 _08134B00: .4byte sub_8134BAC
 _08134B04: .4byte 0x00003270
 _08134B08:
-	ldr r2, _08134B28 @ =gUnknown_3005090
+	ldr r2, _08134B28 @ =gTasks
 	ldr r1, _08134B2C @ =0x00003018
 	adds r0, r3, r1
 	ldrb r1, [r0]
@@ -763,7 +763,7 @@ _08134B08:
 	strb r0, [r1]
 	b _08134B9A
 	.align 2, 0
-_08134B28: .4byte gUnknown_3005090
+_08134B28: .4byte gTasks
 _08134B2C: .4byte 0x00003018
 _08134B30: .4byte sub_8134E84
 _08134B34: .4byte 0x00003270
@@ -832,7 +832,7 @@ sub_8134BAC: @ 8134BAC
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r6, _08134BD4 @ =gUnknown_3005098
+	ldr r6, _08134BD4 @ =gTasks+0x8
 	adds r7, r0, r6
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -846,7 +846,7 @@ _08134BCA:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08134BD4: .4byte gUnknown_3005098
+_08134BD4: .4byte gTasks+0x8
 _08134BD8: .4byte _08134BDC
 	.align 2, 0
 _08134BDC:
@@ -1439,7 +1439,7 @@ _08135114:
 	b _08135180
 _08135132:
 	bl sub_8138440
-	ldr r3, _08135168 @ =gUnknown_3005090
+	ldr r3, _08135168 @ =gTasks
 	ldr r2, [r4]
 	ldr r1, _0813516C @ =0x00003018
 	adds r0, r2, r1
@@ -1464,7 +1464,7 @@ _08135132:
 	strb r1, [r0]
 	b _0813518E
 	.align 2, 0
-_08135168: .4byte gUnknown_3005090
+_08135168: .4byte gTasks
 _0813516C: .4byte 0x00003018
 _08135170: .4byte sub_8138CD8
 _08135174: .4byte 0x00003284
@@ -1742,7 +1742,7 @@ _081353EC:
 	b _0813544C
 _08135400:
 	bl sub_8138440
-	ldr r3, _08135434 @ =gUnknown_3005090
+	ldr r3, _08135434 @ =gTasks
 	ldr r2, [r4]
 	ldr r1, _08135438 @ =0x00003018
 	adds r0, r2, r1
@@ -1767,7 +1767,7 @@ _08135400:
 	strb r1, [r0]
 	b _0813545A
 	.align 2, 0
-_08135434: .4byte gUnknown_3005090
+_08135434: .4byte gTasks
 _08135438: .4byte 0x00003018
 _0813543C: .4byte sub_8134840
 _08135440: .4byte 0x00003284
@@ -9046,7 +9046,7 @@ _08138FDC: .4byte gUnknown_203B16E
 _08138FE0: .4byte 0x00003224
 _08138FE4: .4byte 0x00003214
 _08138FE8:
-	ldr r2, _08139004 @ =gUnknown_3005090
+	ldr r2, _08139004 @ =gTasks
 	ldr r6, _08139008 @ =0x00003018
 	adds r0, r6
 	ldrb r1, [r0]
@@ -9060,7 +9060,7 @@ _08138FE8:
 	strb r0, [r3]
 	b _08139094
 	.align 2, 0
-_08139004: .4byte gUnknown_3005090
+_08139004: .4byte gTasks
 _08139008: .4byte 0x00003018
 _0813900C: .4byte sub_81351A0
 _08139010:

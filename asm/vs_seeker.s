@@ -15,7 +15,7 @@ sub_810C670: @ 810C670
 	lsls r1, r4, 2
 	adds r0, r1, r4
 	lsls r3, r0, 3
-	ldr r5, _0810C6C4 @ =gUnknown_3005098
+	ldr r5, _0810C6C4 @ =gTasks+0x8
 	adds r6, r1, 0
 	movs r1, 0
 _0810C686:
@@ -45,7 +45,7 @@ _0810C686:
 	b _0810C6DC
 	.align 2, 0
 _0810C6C0: .4byte gUnknown_203ADB8
-_0810C6C4: .4byte gUnknown_3005098
+_0810C6C4: .4byte gTasks+0x8
 _0810C6C8: .4byte 0x00000434
 _0810C6CC: .4byte gUnknown_81C137C
 _0810C6D0:
@@ -74,7 +74,7 @@ _0810C6F0:
 	bl sub_80A2294
 	movs r0, 0x41
 	bl FieldEffectStart
-	ldr r1, _0810C728 @ =gUnknown_3005090
+	ldr r1, _0810C728 @ =gTasks
 	adds r0, r6, r4
 	lsls r0, 3
 	adds r0, r1
@@ -89,7 +89,7 @@ _0810C718:
 	.align 2, 0
 _0810C720: .4byte gUnknown_203AD30
 _0810C724: .4byte 0x0000ffff
-_0810C728: .4byte gUnknown_3005090
+_0810C728: .4byte gTasks
 _0810C72C: .4byte sub_810C730
 	thumb_func_end sub_810C670
 
@@ -98,7 +98,7 @@ sub_810C730: @ 810C730
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0810C758 @ =gUnknown_3005090
+	ldr r2, _0810C758 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -117,7 +117,7 @@ _0810C754:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810C758: .4byte gUnknown_3005090
+_0810C758: .4byte gTasks
 _0810C75C: .4byte sub_810C760
 	thumb_func_end sub_810C730
 
@@ -129,7 +129,7 @@ sub_810C760: @ 810C760
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0810C7E8 @ =gUnknown_3005098
+	ldr r1, _0810C7E8 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
@@ -177,7 +177,7 @@ _0810C794:
 	ldr r3, _0810C7FC @ =gUnknown_8453F5C
 	movs r0, 0xFF
 	bl ScriptMovement_StartObjectMovementScript
-	ldr r1, _0810C800 @ =gUnknown_3005090
+	ldr r1, _0810C800 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -189,13 +189,13 @@ _0810C7E2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810C7E8: .4byte gUnknown_3005098
+_0810C7E8: .4byte gTasks+0x8
 _0810C7EC: .4byte gUnknown_845318C
 _0810C7F0: .4byte gUnknown_203ADB8
 _0810C7F4: .4byte 0x00000431
 _0810C7F8: .4byte gSaveBlock1Ptr
 _0810C7FC: .4byte gUnknown_8453F5C
-_0810C800: .4byte gUnknown_3005090
+_0810C800: .4byte gTasks
 _0810C804: .4byte sub_810C8EC
 	thumb_func_end sub_810C760
 

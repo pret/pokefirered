@@ -2252,7 +2252,7 @@ _081119F2:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08111A28 @ =gUnknown_3005090
+	ldr r2, _08111A28 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2268,7 +2268,7 @@ _081119F2:
 	.align 2, 0
 _08111A20: .4byte gUnknown_3005E88
 _08111A24: .4byte sub_8111A34
-_08111A28: .4byte gUnknown_3005090
+_08111A28: .4byte gTasks
 _08111A2C:
 	movs r0, 0
 _08111A2E:
@@ -2286,7 +2286,7 @@ sub_8111A34: @ 8111A34
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08111A54 @ =gUnknown_3005098
+	ldr r1, _08111A54 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
@@ -2296,7 +2296,7 @@ sub_8111A34: @ 8111A34
 	beq _08111A90
 	b _08111AC0
 	.align 2, 0
-_08111A54: .4byte gUnknown_3005098
+_08111A54: .4byte gTasks+0x8
 _08111A58:
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -2999,7 +2999,7 @@ sub_8111F8C: @ 8111F8C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08111FC4 @ =gUnknown_3005090
+	ldr r0, _08111FC4 @ =gTasks
 	adds r4, r1, r0
 	bl ScriptContext2_IsEnabled
 	lsls r0, 24
@@ -3017,7 +3017,7 @@ _08111FBC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08111FC4: .4byte gUnknown_3005090
+_08111FC4: .4byte gTasks
 _08111FC8: .4byte sub_8111FCC
 	thumb_func_end sub_8111F8C
 
@@ -3029,7 +3029,7 @@ sub_8111FCC: @ 8111FCC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08112024 @ =gUnknown_3005090
+	ldr r0, _08112024 @ =gTasks
 	adds r5, r1, r0
 	ldr r0, _08112028 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -3065,7 +3065,7 @@ _0811201E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08112024: .4byte gUnknown_3005090
+_08112024: .4byte gTasks
 _08112028: .4byte gUnknown_2037AB8
 _0811202C: .4byte gUnknown_203AE94
 _08112030: .4byte gStringVar1
@@ -3083,7 +3083,7 @@ sub_8112044: @ 8112044
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0811208C @ =gUnknown_3005090
+	ldr r0, _0811208C @ =gTasks
 	adds r4, r1, r0
 	ldr r0, _08112090 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -3113,7 +3113,7 @@ _08112076:
 	strb r1, [r0]
 	b _081120A4
 	.align 2, 0
-_0811208C: .4byte gUnknown_3005090
+_0811208C: .4byte gTasks
 _08112090: .4byte gMain
 _08112094: .4byte gUnknown_203AE94
 _08112098: .4byte sub_81120AC
@@ -3136,7 +3136,7 @@ sub_81120AC: @ 81120AC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _081120D0 @ =gUnknown_3005098
+	ldr r1, _081120D0 @ =gTasks+0x8
 	adds r6, r0, r1
 	movs r0, 0
 	ldrsh r1, [r6, r0]
@@ -3148,7 +3148,7 @@ sub_81120AC: @ 81120AC
 	beq _081120DA
 	b _08112164
 	.align 2, 0
-_081120D0: .4byte gUnknown_3005098
+_081120D0: .4byte gTasks+0x8
 _081120D4:
 	cmp r1, 0x2
 	beq _0811214C
@@ -3277,7 +3277,7 @@ sub_81121D8: @ 81121D8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0811227C @ =gUnknown_3005098
+	ldr r0, _0811227C @ =gTasks+0x8
 	adds r7, r1, r0
 	ldrh r1, [r7, 0x2]
 	movs r2, 0x2
@@ -3347,7 +3347,7 @@ sub_81121D8: @ 81121D8
 	movs r0, 0
 	b _08112292
 	.align 2, 0
-_0811227C: .4byte gUnknown_3005098
+_0811227C: .4byte gTasks+0x8
 _08112280: .4byte gUnknown_20371FA
 _08112284: .4byte gUnknown_20375FA
 _08112288: .4byte gUnknown_203ADFE

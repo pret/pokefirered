@@ -1947,7 +1947,7 @@ sub_8151750: @ 8151750
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, _08151774 @ =gUnknown_3005098
+	ldr r1, _08151774 @ =gTasks+0x8
 	adds r6, r0, r1
 	movs r0, 0
 	ldrsh r5, [r6, r0]
@@ -1959,7 +1959,7 @@ sub_8151750: @ 8151750
 	beq _0815177E
 	b _08151836
 	.align 2, 0
-_08151774: .4byte gUnknown_3005098
+_08151774: .4byte gTasks+0x8
 _08151778:
 	cmp r5, 0x2
 	beq _081517BA
@@ -6373,7 +6373,7 @@ sub_8153830: @ 8153830
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08153854 @ =gUnknown_3005098
+	ldr r1, _08153854 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -6385,7 +6385,7 @@ sub_8153830: @ 8153830
 	beq _08153862
 	b _081538CA
 	.align 2, 0
-_08153854: .4byte gUnknown_3005098
+_08153854: .4byte gTasks+0x8
 _08153858:
 	cmp r0, 0x2
 	beq _08153888

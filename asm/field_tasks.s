@@ -10,7 +10,7 @@ task_per_step_callback_manager: @ 806E810
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0806E834 @ =gUnknown_3005090
+	ldr r2, _0806E834 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -25,7 +25,7 @@ task_per_step_callback_manager: @ 806E810
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806E834: .4byte gUnknown_3005090
+_0806E834: .4byte gTasks
 _0806E838: .4byte gUnknown_83A7310
 	thumb_func_end task_per_step_callback_manager
 
@@ -37,7 +37,7 @@ sub_806E83C: @ 806E83C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0806E874 @ =gUnknown_3005098
+	ldr r0, _0806E874 @ =gTasks+0x8
 	adds r4, r1, r0
 	bl ScriptContext2_IsEnabled
 	lsls r0, 24
@@ -58,7 +58,7 @@ _0806E86C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806E874: .4byte gUnknown_3005098
+_0806E874: .4byte gTasks+0x8
 _0806E878: .4byte gUnknown_203ADFA
 	thumb_func_end sub_806E83C
 
@@ -77,7 +77,7 @@ sub_806E87C: @ 806E87C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0806E8C8 @ =gUnknown_3005090
+	ldr r2, _0806E8C8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -99,7 +99,7 @@ _0806E8BC:
 	bx r0
 	.align 2, 0
 _0806E8C4: .4byte task_per_step_callback_manager
-_0806E8C8: .4byte gUnknown_3005090
+_0806E8C8: .4byte gTasks
 _0806E8CC: .4byte sub_806E83C
 	thumb_func_end sub_806E87C
 
@@ -117,7 +117,7 @@ ActivatePerStepCallback: @ 806E8D0
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _0806E90C @ =gUnknown_3005098
+	ldr r1, _0806E90C @ =gTasks+0x8
 	adds r1, r0, r1
 	movs r2, 0
 	adds r0, r1, 0
@@ -134,7 +134,7 @@ _0806E8F4:
 	b _0806E912
 	.align 2, 0
 _0806E908: .4byte task_per_step_callback_manager
-_0806E90C: .4byte gUnknown_3005098
+_0806E90C: .4byte gTasks+0x8
 _0806E910:
 	strh r4, [r1]
 _0806E912:
@@ -159,7 +159,7 @@ wild_encounter_reset_coro_args: @ 806E918
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _0806E950 @ =gUnknown_3005098
+	ldr r1, _0806E950 @ =gTasks+0x8
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x2]
@@ -170,7 +170,7 @@ _0806E942:
 	.align 2, 0
 _0806E948: .4byte task_per_step_callback_manager
 _0806E94C: .4byte sub_806E83C
-_0806E950: .4byte gUnknown_3005098
+_0806E950: .4byte gTasks+0x8
 	thumb_func_end wild_encounter_reset_coro_args
 
 	thumb_func_start nullsub_40
@@ -262,7 +262,7 @@ sub_806E9E0: @ 806E9E0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0806EA04 @ =gUnknown_3005098
+	ldr r0, _0806EA04 @ =gTasks+0x8
 	adds r5, r1, r0
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
@@ -274,7 +274,7 @@ sub_806E9E0: @ 806E9E0
 	beq _0806EA12
 	b _0806EB42
 	.align 2, 0
-_0806EA04: .4byte gUnknown_3005098
+_0806EA04: .4byte gTasks+0x8
 _0806EA08:
 	cmp r0, 0x2
 	beq _0806EAB0
@@ -448,7 +448,7 @@ sub_806EB54: @ 806EB54
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0806EBD8 @ =gUnknown_3005098
+	ldr r0, _0806EBD8 @ =gTasks+0x8
 	adds r5, r1, r0
 	mov r4, sp
 	adds r4, 0x2
@@ -504,7 +504,7 @@ _0806EB8E:
 	bl ash
 	b _0806EBF6
 	.align 2, 0
-_0806EBD8: .4byte gUnknown_3005098
+_0806EBD8: .4byte gTasks+0x8
 _0806EBDC: .4byte 0x0000020a
 _0806EBE0: .4byte 0x00000212
 _0806EBE4:
@@ -564,7 +564,7 @@ sub_806EC40: @ 806EC40
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0806ED10 @ =gUnknown_3005098
+	ldr r0, _0806ED10 @ =gTasks+0x8
 	adds r5, r1, r0
 	mov r4, sp
 	adds r4, 0x2
@@ -659,7 +659,7 @@ _0806ECF8:
 	strh r0, [r5, 0xC]
 	b _0806ED2E
 	.align 2, 0
-_0806ED10: .4byte gUnknown_3005098
+_0806ED10: .4byte gTasks+0x8
 _0806ED14: .4byte 0x00004030
 _0806ED18:
 	movs r2, 0xE

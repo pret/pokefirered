@@ -58,7 +58,7 @@ FldEff_SweetScent: @ 80DE104
 	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080DE12C @ =gUnknown_3005090
+	ldr r2, _080DE12C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -71,7 +71,7 @@ FldEff_SweetScent: @ 80DE104
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DE12C: .4byte gUnknown_3005090
+_080DE12C: .4byte gTasks
 _080DE130: .4byte sub_80DE134
 	thumb_func_end FldEff_SweetScent
 
@@ -122,7 +122,7 @@ sub_80DE134: @ 80DE134
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080DE1CC @ =gUnknown_3005090
+	ldr r2, _080DE1CC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -141,7 +141,7 @@ _080DE1BC: .4byte gUnknown_20371F8
 _080DE1C0: .4byte gUnknown_20375F8
 _080DE1C4: .4byte gSprites
 _080DE1C8: .4byte sub_80DE1D0
-_080DE1CC: .4byte gUnknown_3005090
+_080DE1CC: .4byte gTasks
 	thumb_func_end sub_80DE134
 
 	thumb_func_start sub_80DE1D0
@@ -153,7 +153,7 @@ sub_80DE1D0: @ 80DE1D0
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r5, r0, 3
-	ldr r6, _080DE21C @ =gUnknown_3005098
+	ldr r6, _080DE21C @ =gTasks+0x8
 	adds r2, r5, r6
 	ldr r0, _080DE220 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -181,7 +181,7 @@ sub_80DE1D0: @ 80DE1D0
 	bl DestroyTask
 	b _080DE26C
 	.align 2, 0
-_080DE21C: .4byte gUnknown_3005098
+_080DE21C: .4byte gTasks+0x8
 _080DE220: .4byte gUnknown_2037AB8
 _080DE224: .4byte gUnknown_203AAB0
 _080DE228:

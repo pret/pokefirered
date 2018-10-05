@@ -67,7 +67,7 @@ sub_80E56DC: @ 80E56DC
 	bl sub_811F818
 	movs r0, 0x5
 	bl sub_8121D0C
-	ldr r1, _080E571C @ =gUnknown_3005090
+	ldr r1, _080E571C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -79,7 +79,7 @@ sub_80E56DC: @ 80E56DC
 	bx r0
 	.align 2, 0
 _080E5718: .4byte gUnknown_203B0A0
-_080E571C: .4byte gUnknown_3005090
+_080E571C: .4byte gTasks
 _080E5720: .4byte sub_811FB28
 	thumb_func_end sub_80E56DC
 
@@ -104,7 +104,7 @@ sub_80E5724: @ 80E5724
 	movs r0, 0
 	strb r0, [r1, 0xB]
 	bl sub_8121D0C
-	ldr r1, _080E5760 @ =gUnknown_3005090
+	ldr r1, _080E5760 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -114,7 +114,7 @@ sub_80E5724: @ 80E5724
 	b _080E57D4
 	.align 2, 0
 _080E575C: .4byte gUnknown_203B0A0
-_080E5760: .4byte gUnknown_3005090
+_080E5760: .4byte gTasks
 _080E5764: .4byte sub_811FB28
 _080E5768:
 	movs r0, 0x64
@@ -241,7 +241,7 @@ sub_80E583C: @ 80E583C
 	bl sub_81202F8
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r1, _080E5898 @ =gUnknown_3005090
+	ldr r1, _080E5898 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -257,7 +257,7 @@ _080E5888: .4byte gPlayerParty
 _080E588C: .4byte gStringVar1
 _080E5890: .4byte gStringVar4
 _080E5894: .4byte gUnknown_8416F27
-_080E5898: .4byte gUnknown_3005090
+_080E5898: .4byte gTasks
 _080E589C: .4byte sub_80E58A0
 	thumb_func_end sub_80E583C
 
@@ -289,7 +289,7 @@ sub_80E58A0: @ 80E58A0
 	bl ClearWindowTilemap
 	movs r0, 0
 	bl sub_8121D0C
-	ldr r1, _080E58F8 @ =gUnknown_3005090
+	ldr r1, _080E58F8 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -302,7 +302,7 @@ _080E58EE:
 	bx r0
 	.align 2, 0
 _080E58F4: .4byte gUnknown_203B0A0
-_080E58F8: .4byte gUnknown_3005090
+_080E58F8: .4byte gTasks
 _080E58FC: .4byte sub_811FB28
 	thumb_func_end sub_80E58A0
 
@@ -318,7 +318,7 @@ sub_80E5900: @ 80E5900
 	beq _080E5926
 	movs r0, 0x5
 	bl sub_8121D0C
-	ldr r0, _080E592C @ =gUnknown_3005090
+	ldr r0, _080E592C @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -330,7 +330,7 @@ _080E5926:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E592C: .4byte gUnknown_3005090
+_080E592C: .4byte gTasks
 _080E5930: .4byte sub_811FB28
 	thumb_func_end sub_80E5900
 
@@ -347,7 +347,7 @@ sub_80E5934: @ 80E5934
 	bl sub_81202F8
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r1, _080E5968 @ =gUnknown_3005090
+	ldr r1, _080E5968 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -359,7 +359,7 @@ sub_80E5934: @ 80E5934
 	bx r0
 	.align 2, 0
 _080E5964: .4byte gUnknown_84169F8
-_080E5968: .4byte gUnknown_3005090
+_080E5968: .4byte gTasks
 _080E596C: .4byte sub_80E5900
 	thumb_func_end sub_80E5934
 

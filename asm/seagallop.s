@@ -237,7 +237,7 @@ sub_814706C: @ 814706C
 sub_8147084: @ 8147084
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08147098 @ =gUnknown_3005090
+	ldr r2, _08147098 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -246,7 +246,7 @@ sub_8147084: @ 8147084
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08147098: .4byte gUnknown_3005090
+_08147098: .4byte gTasks
 _0814709C: .4byte sub_81470CC
 	thumb_func_end sub_8147084
 
@@ -283,7 +283,7 @@ sub_81470CC: @ 81470CC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08147100 @ =gUnknown_3005090
+	ldr r0, _08147100 @ =gTasks
 	adds r4, r1, r0
 	bl sub_81470A0
 	ldrh r0, [r4, 0xA]
@@ -302,7 +302,7 @@ _081470FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08147100: .4byte gUnknown_3005090
+_08147100: .4byte gTasks
 _08147104: .4byte sub_8147108
 	thumb_func_end sub_81470CC
 

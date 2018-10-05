@@ -2626,7 +2626,7 @@ sub_8148E80: @ 8148E80
 	lsls r0, 2
 	add r0, r10
 	lsls r0, 3
-	ldr r1, _08148EB4 @ =gUnknown_3005098
+	ldr r1, _08148EB4 @ =gTasks+0x8
 	adds r6, r0, r1
 	mov r0, r10
 	movs r1, 0xE
@@ -2640,7 +2640,7 @@ sub_8148E80: @ 8148E80
 	beq _08148ED8
 	b _08148F44
 	.align 2, 0
-_08148EB4: .4byte gUnknown_3005098
+_08148EB4: .4byte gTasks+0x8
 _08148EB8:
 	bl sub_8147C20
 	mov r0, r10
@@ -7833,7 +7833,7 @@ sub_814B524: @ 814B524
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0814B548 @ =gUnknown_3005098
+	ldr r1, _0814B548 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -7845,7 +7845,7 @@ sub_814B524: @ 814B524
 	beq _0814B556
 	b _0814B5BE
 	.align 2, 0
-_0814B548: .4byte gUnknown_3005098
+_0814B548: .4byte gTasks+0x8
 _0814B54C:
 	cmp r0, 0x2
 	beq _0814B57C

@@ -406,7 +406,7 @@ task02_080097CC: @ 80097CC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080097FC @ =gUnknown_3005090
+	ldr r0, _080097FC @ =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -427,7 +427,7 @@ _080097F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080097FC: .4byte gUnknown_3005090
+_080097FC: .4byte gTasks
 _08009800: .4byte gUnknown_3003F84
 	thumb_func_end task02_080097CC
 

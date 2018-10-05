@@ -437,7 +437,7 @@ _080340E0:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08034158 @ =gUnknown_3005090
+	ldr r2, _08034158 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -471,7 +471,7 @@ _08034148: .4byte gUnknown_2037F1B
 _0803414C: .4byte gUnknown_2024018
 _08034150: .4byte gUnknown_81C6EA8
 _08034154: .4byte Task_ClearBitWhenBattleTableAnimDone
-_08034158: .4byte gUnknown_3005090
+_08034158: .4byte gTasks
 	thumb_func_end TryHandleLaunchBattleTableAnimation
 
 	thumb_func_start Task_ClearBitWhenBattleTableAnimDone
@@ -488,7 +488,7 @@ Task_ClearBitWhenBattleTableAnimDone: @ 803415C
 	bne _0803419E
 	ldr r0, _080341AC @ =gUnknown_2024018
 	ldr r2, [r0]
-	ldr r1, _080341B0 @ =gUnknown_3005090
+	ldr r1, _080341B0 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -515,7 +515,7 @@ _0803419E:
 _080341A4: .4byte gUnknown_2037EDC
 _080341A8: .4byte gUnknown_2037EE1
 _080341AC: .4byte gUnknown_2024018
-_080341B0: .4byte gUnknown_3005090
+_080341B0: .4byte gTasks
 	thumb_func_end Task_ClearBitWhenBattleTableAnimDone
 
 	thumb_func_start ShouldAnimBeDoneRegardlessOfSubsitute
@@ -564,7 +564,7 @@ InitAndLaunchSpecialAnimation: @ 80341D8
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08034240 @ =gUnknown_3005090
+	ldr r2, _08034240 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -591,7 +591,7 @@ _08034230: .4byte gUnknown_2037F1A
 _08034234: .4byte gUnknown_2037F1B
 _08034238: .4byte gUnknown_81C6F18
 _0803423C: .4byte Task_ClearBitWhenSpecialAnimDone
-_08034240: .4byte gUnknown_3005090
+_08034240: .4byte gTasks
 _08034244: .4byte gUnknown_2024018
 	thumb_func_end InitAndLaunchSpecialAnimation
 
@@ -609,7 +609,7 @@ Task_ClearBitWhenSpecialAnimDone: @ 8034248
 	bne _0803428A
 	ldr r0, _08034298 @ =gUnknown_2024018
 	ldr r2, [r0]
-	ldr r1, _0803429C @ =gUnknown_3005090
+	ldr r1, _0803429C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -636,7 +636,7 @@ _0803428A:
 _08034290: .4byte gUnknown_2037EDC
 _08034294: .4byte gUnknown_2037EE1
 _08034298: .4byte gUnknown_2024018
-_0803429C: .4byte gUnknown_3005090
+_0803429C: .4byte gTasks
 	thumb_func_end Task_ClearBitWhenSpecialAnimDone
 
 	thumb_func_start IsMoveWithoutAnimation

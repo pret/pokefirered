@@ -2967,7 +2967,7 @@ Task_HandleDaycareLevelMenuInput: @ 80469FC
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r1, _08046A2C @ =gUnknown_3005090
+	ldr r1, _08046A2C @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -2987,7 +2987,7 @@ Task_HandleDaycareLevelMenuInput: @ 80469FC
 	beq _08046A40
 	b _08046A46
 	.align 2, 0
-_08046A2C: .4byte gUnknown_3005090
+_08046A2C: .4byte gTasks
 _08046A30: .4byte gMain
 _08046A34:
 	ldr r0, _08046A3C @ =gUnknown_20370D0
@@ -3000,7 +3000,7 @@ _08046A40:
 	movs r0, 0x2
 	strh r0, [r1]
 _08046A46:
-	ldr r0, _08046A78 @ =gUnknown_3005090
+	ldr r0, _08046A78 @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -3020,7 +3020,7 @@ _08046A46:
 	b _08046AAC
 	.align 2, 0
 _08046A74: .4byte gUnknown_20370D0
-_08046A78: .4byte gUnknown_3005090
+_08046A78: .4byte gTasks
 _08046A7C:
 	movs r1, 0x2
 	adds r0, r1, 0
@@ -3083,7 +3083,7 @@ ShowDaycareLevelMenu: @ 8046AB8
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08046B24 @ =gUnknown_3005090
+	ldr r2, _08046B24 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3098,7 +3098,7 @@ ShowDaycareLevelMenu: @ 8046AB8
 _08046B18: .4byte gUnknown_825F7F4
 _08046B1C: .4byte gUnknown_825F814
 _08046B20: .4byte Task_HandleDaycareLevelMenuInput
-_08046B24: .4byte gUnknown_3005090
+_08046B24: .4byte gTasks
 	thumb_func_end ShowDaycareLevelMenu
 
 	thumb_func_start ChooseSendDaycareMon

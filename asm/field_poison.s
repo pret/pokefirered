@@ -141,7 +141,7 @@ Task_WhiteOut: @ 80A054C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080A0570 @ =gUnknown_3005098
+	ldr r1, _080A0570 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -153,7 +153,7 @@ Task_WhiteOut: @ 80A054C
 	beq _080A057A
 	b _080A05F6
 	.align 2, 0
-_080A0570: .4byte gUnknown_3005098
+_080A0570: .4byte gTasks+0x8
 _080A0574:
 	cmp r0, 0x2
 	beq _080A05B8

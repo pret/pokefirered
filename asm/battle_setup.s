@@ -13,7 +13,7 @@ sub_807F620: @ 807F620
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0807F640 @ =gUnknown_3005098
+	ldr r1, _0807F640 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -23,7 +23,7 @@ sub_807F620: @ 807F620
 	beq _0807F65E
 	b _0807F686
 	.align 2, 0
-_0807F640: .4byte gUnknown_3005098
+_0807F640: .4byte gTasks+0x8
 _0807F644:
 	bl c3_80A0DD8_is_running
 	cmp r0, 0
@@ -71,7 +71,7 @@ sub_807F690: @ 807F690
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0807F6C8 @ =gUnknown_3005090
+	ldr r2, _0807F6C8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -84,7 +84,7 @@ sub_807F690: @ 807F690
 	bx r0
 	.align 2, 0
 _0807F6C4: .4byte sub_807F620
-_0807F6C8: .4byte gUnknown_3005090
+_0807F6C8: .4byte gTasks
 	thumb_func_end sub_807F690
 
 	thumb_func_start sub_807F6CC

@@ -1033,7 +1033,7 @@ sub_81568DC: @ 81568DC
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r1, _081569DC @ =gUnknown_3005090
+	ldr r1, _081569DC @ =gTasks
 	lsls r0, 2
 	add r0, r9
 	lsls r0, 3
@@ -1146,7 +1146,7 @@ _081569D6:
 	ldr r0, _081569F4 @ =sub_8156C68
 	b _08156A3A
 	.align 2, 0
-_081569DC: .4byte gUnknown_3005090
+_081569DC: .4byte gTasks
 _081569E0: .4byte gBattlerPartyIndexes
 _081569E4: .4byte gPlayerParty
 _081569E8: .4byte gUnknown_8253AE4
@@ -1154,7 +1154,7 @@ _081569EC: .4byte gBaseStats
 _081569F0: .4byte gActiveBattler
 _081569F4: .4byte sub_8156C68
 _081569F8:
-	ldr r0, _08156A08 @ =gUnknown_3005090
+	ldr r0, _08156A08 @ =gTasks
 	mov r2, r9
 	lsls r1, r2, 2
 	add r1, r9
@@ -1163,7 +1163,7 @@ _081569F8:
 	ldr r0, _08156A0C @ =sub_8156D80
 	b _08156A3C
 	.align 2, 0
-_08156A08: .4byte gUnknown_3005090
+_08156A08: .4byte gTasks
 _08156A0C: .4byte sub_8156D80
 _08156A10:
 	str r0, [sp, 0x4]
@@ -1212,7 +1212,7 @@ sub_8156A54: @ 8156A54
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08156B0C @ =gUnknown_3005090
+	ldr r1, _08156B0C @ =gTasks
 	lsls r2, r0, 2
 	mov r8, r2
 	add r8, r0
@@ -1292,7 +1292,7 @@ sub_8156A54: @ 8156A54
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08156B0C: .4byte gUnknown_3005090
+_08156B0C: .4byte gTasks
 _08156B10: .4byte gPlayerParty
 _08156B14: .4byte gUnknown_8253AE4
 _08156B18: .4byte gBaseStats
@@ -1311,7 +1311,7 @@ sub_8156B24: @ 8156B24
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _08156B50 @ =gUnknown_3005090
+	ldr r1, _08156B50 @ =gTasks
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
@@ -1325,7 +1325,7 @@ sub_8156B24: @ 8156B24
 	strh r0, [r6, 0x1C]
 	b _08156C50
 	.align 2, 0
-_08156B50: .4byte gUnknown_3005090
+_08156B50: .4byte gTasks
 _08156B54:
 	ldrb r0, [r6, 0x8]
 	mov r9, r0
@@ -1457,7 +1457,7 @@ sub_8156C68: @ 8156C68
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _08156CBC @ =gUnknown_3005090
+	ldr r1, _08156CBC @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1485,7 +1485,7 @@ _08156C9C:
 	adds r2, r4, 0
 	movs r3, 0
 	bl InitAndLaunchSpecialAnimation
-	ldr r0, _08156CBC @ =gUnknown_3005090
+	ldr r0, _08156CBC @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -1496,7 +1496,7 @@ _08156C9C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08156CBC: .4byte gUnknown_3005090
+_08156CBC: .4byte gTasks
 _08156CC0: .4byte gBattlerPartyIndexes
 _08156CC4: .4byte sub_8156CC8
 	thumb_func_end sub_8156C68
@@ -1506,7 +1506,7 @@ sub_8156CC8: @ 8156CC8
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _08156D34 @ =gUnknown_3005090
+	ldr r1, _08156D34 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -1555,7 +1555,7 @@ sub_8156CC8: @ 8156CC8
 	bl UpdateHealthboxAttribute
 	b _08156D5C
 	.align 2, 0
-_08156D34: .4byte gUnknown_3005090
+_08156D34: .4byte gTasks
 _08156D38: .4byte gUnknown_2024018
 _08156D3C: .4byte gPlayerParty
 _08156D40: .4byte gBattlerPartyIndexes
@@ -1571,7 +1571,7 @@ _08156D48:
 	movs r2, 0
 	bl UpdateHealthboxAttribute
 _08156D5C:
-	ldr r0, _08156D78 @ =gUnknown_3005090
+	ldr r0, _08156D78 @ =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -1585,7 +1585,7 @@ _08156D6A:
 	.align 2, 0
 _08156D70: .4byte gUnknown_3004FF0
 _08156D74: .4byte gPlayerParty
-_08156D78: .4byte gUnknown_3005090
+_08156D78: .4byte gTasks
 _08156D7C: .4byte sub_8156D80
 	thumb_func_end sub_8156CC8
 
@@ -1595,7 +1595,7 @@ sub_8156D80: @ 8156D80
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _08156DBC @ =gUnknown_3005090
+	ldr r0, _08156DBC @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -1619,7 +1619,7 @@ sub_8156D80: @ 8156D80
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08156DBC: .4byte gUnknown_3005090
+_08156DBC: .4byte gTasks
 _08156DC0: .4byte gPlayerParty
 _08156DC4: .4byte gUnknown_3004FE0
 _08156DC8: .4byte sub_8156EE8
@@ -5352,7 +5352,7 @@ _08158CF0: .4byte gUnknown_2022BC4
 sub_8158CF4: @ 8158CF4
 	push {r4-r6,lr}
 	sub sp, 0x4
-	ldr r0, _08158DA4 @ =nullsub_43
+	ldr r0, _08158DA4 @ =TaskDummy
 	movs r1, 0xFF
 	bl CreateTask
 	ldr r3, _08158DA8 @ =gUnknown_3004FFC
@@ -5360,7 +5360,7 @@ sub_8158CF4: @ 8158CF4
 	ldrb r1, [r4]
 	adds r1, r3
 	strb r0, [r1]
-	ldr r5, _08158DB0 @ =gUnknown_3005090
+	ldr r5, _08158DB0 @ =gTasks
 	ldrb r2, [r4]
 	adds r3, r2, r3
 	ldrb r0, [r3]
@@ -5437,10 +5437,10 @@ _08158D60:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08158DA4: .4byte nullsub_43
+_08158DA4: .4byte TaskDummy
 _08158DA8: .4byte gUnknown_3004FFC
 _08158DAC: .4byte gActiveBattler
-_08158DB0: .4byte gUnknown_3005090
+_08158DB0: .4byte gTasks
 _08158DB4: .4byte gUnknown_2022BC4
 _08158DB8: .4byte gBattleStruct
 _08158DBC: .4byte gUnknown_203B0DC
@@ -5617,7 +5617,7 @@ _08158F08:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08158F60 @ =gUnknown_3005090
+	ldr r2, _08158F60 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -5638,7 +5638,7 @@ _08158F54:
 	bx r0
 	.align 2, 0
 _08158F5C: .4byte sub_81568DC
-_08158F60: .4byte gUnknown_3005090
+_08158F60: .4byte gTasks
 _08158F64: .4byte gUnknown_3004FE0
 _08158F68: .4byte nullsub_99
 	thumb_func_end sub_8158ED0
@@ -6223,7 +6223,7 @@ sub_8159304: @ 8159304
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, _08159460 @ =gUnknown_3005090
+	ldr r4, _08159460 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -6278,7 +6278,7 @@ _08159450: .4byte sub_80335F8
 _08159454: .4byte 0x0000d6f8
 _08159458: .4byte gUnknown_8239FD4
 _0815945C: .4byte sub_81595EC
-_08159460: .4byte gUnknown_3005090
+_08159460: .4byte gTasks
 _08159464: .4byte gUnknown_2024018
 _08159468: .4byte gUnknown_2024000
 _0815946C: .4byte sub_80491B0
@@ -6461,7 +6461,7 @@ sub_81595EC: @ 81595EC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _0815960C @ =gUnknown_3005090
+	ldr r1, _0815960C @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -6475,7 +6475,7 @@ sub_81595EC: @ 81595EC
 	strh r0, [r1, 0xA]
 	b _08159646
 	.align 2, 0
-_0815960C: .4byte gUnknown_3005090
+_0815960C: .4byte gTasks
 _08159610:
 	ldr r4, _0815964C @ =gActiveBattler
 	ldrb r5, [r4]

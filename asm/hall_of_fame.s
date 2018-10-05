@@ -168,7 +168,7 @@ CB2_DoHallOfFameScreen: @ 80F1EFC
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F1F38 @ =gUnknown_3005090
+	ldr r2, _080F1F38 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -184,7 +184,7 @@ _080F1F2C:
 	bx r0
 	.align 2, 0
 _080F1F34: .4byte Task_Hof_InitMonData
-_080F1F38: .4byte gUnknown_3005090
+_080F1F38: .4byte gTasks
 _080F1F3C: .4byte gUnknown_203AB38
 	thumb_func_end CB2_DoHallOfFameScreen
 
@@ -200,7 +200,7 @@ CB2_DoHallOfFameScreenDontSaveData: @ 80F1F40
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F1F70 @ =gUnknown_3005090
+	ldr r2, _080F1F70 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -212,7 +212,7 @@ _080F1F66:
 	bx r0
 	.align 2, 0
 _080F1F6C: .4byte Task_Hof_InitMonData
-_080F1F70: .4byte gUnknown_3005090
+_080F1F70: .4byte gTasks
 	thumb_func_end CB2_DoHallOfFameScreenDontSaveData
 
 	thumb_func_start Task_Hof_InitMonData
@@ -225,7 +225,7 @@ Task_Hof_InitMonData: @ 80F1F74
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _080F2050 @ =gUnknown_3005090
+	ldr r1, _080F2050 @ =gTasks
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
@@ -313,7 +313,7 @@ _080F2022:
 	lsrs r2, r0, 16
 	cmp r2, 0x9
 	bls _080F2022
-	ldr r0, _080F2050 @ =gUnknown_3005090
+	ldr r0, _080F2050 @ =gTasks
 	mov r2, r8
 	adds r1, r5, r2
 	lsls r1, 3
@@ -323,7 +323,7 @@ _080F2022:
 	strh r0, [r1, 0xC]
 	b _080F2098
 	.align 2, 0
-_080F2050: .4byte gUnknown_3005090
+_080F2050: .4byte gTasks
 _080F2054: .4byte gUnknown_203AB38
 _080F2058: .4byte gPlayerParty
 _080F205C: .4byte 0x000001ff
@@ -366,7 +366,7 @@ _080F20A4:
 	ldr r0, _080F20F0 @ =gUnknown_203AB34
 	movs r3, 0
 	str r3, [r0]
-	ldr r4, _080F20F4 @ =gUnknown_3005090
+	ldr r4, _080F20F4 @ =gTasks
 	mov r6, r8
 	adds r1, r5, r6
 	lsls r1, 3
@@ -402,7 +402,7 @@ _080F20C2:
 	.align 2, 0
 _080F20EC: .4byte 0xfffffe00
 _080F20F0: .4byte gUnknown_203AB34
-_080F20F4: .4byte gUnknown_3005090
+_080F20F4: .4byte gTasks
 _080F20F8: .4byte sub_80F2294
 _080F20FC:
 	ldr r0, _080F2110 @ =Task_Hof_InitTeamSaveData
@@ -525,7 +525,7 @@ _080F21B2:
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
-	ldr r1, _080F2218 @ =gUnknown_3005090
+	ldr r1, _080F2218 @ =gTasks
 	mov r0, r8
 	add r0, r9
 	lsls r0, 3
@@ -544,7 +544,7 @@ _080F2208: .4byte 0x000001ff
 _080F220C: .4byte gUnknown_201C000
 _080F2210: .4byte gUnknown_203AB38
 _080F2214: .4byte gUnknown_8419F54
-_080F2218: .4byte gUnknown_3005090
+_080F2218: .4byte gTasks
 _080F221C: .4byte sub_80F2220
 	thumb_func_end Task_Hof_InitTeamSaveData
 
@@ -561,7 +561,7 @@ sub_80F2220: @ 80F2220
 	bl TrySavingData
 	movs r0, 0x30
 	bl PlaySE
-	ldr r1, _080F225C @ =gUnknown_3005090
+	ldr r1, _080F225C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -576,7 +576,7 @@ sub_80F2220: @ 80F2220
 	.align 2, 0
 _080F2254: .4byte gUnknown_30053A4
 _080F2258: .4byte CB2_DoHallOfFameScreenDontSaveData
-_080F225C: .4byte gUnknown_3005090
+_080F225C: .4byte gTasks
 _080F2260: .4byte sub_80F2264
 	thumb_func_end sub_80F2220
 
@@ -585,7 +585,7 @@ sub_80F2264: @ 80F2264
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F2284 @ =gUnknown_3005090
+	ldr r2, _080F2284 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -599,7 +599,7 @@ sub_80F2264: @ 80F2264
 	strh r0, [r1, 0xE]
 	b _080F228C
 	.align 2, 0
-_080F2284: .4byte gUnknown_3005090
+_080F2284: .4byte gTasks
 _080F2288:
 	ldr r0, _080F2290 @ =sub_80F2294
 	str r0, [r1]
@@ -614,7 +614,7 @@ _080F2290: .4byte sub_80F2294
 sub_80F2294: @ 80F2294
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F22A8 @ =gUnknown_3005090
+	ldr r2, _080F22A8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -623,7 +623,7 @@ sub_80F2294: @ 80F2294
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080F22A8: .4byte gUnknown_3005090
+_080F22A8: .4byte gTasks
 _080F22AC: .4byte sub_80F22B0
 	thumb_func_end sub_80F2294
 
@@ -636,7 +636,7 @@ sub_80F22B0: @ 80F22B0
 	sub sp, 0x10
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, _080F22E4 @ =gUnknown_3005090
+	ldr r0, _080F22E4 @ =gTasks
 	lsls r1, r7, 2
 	adds r1, r7
 	lsls r1, 3
@@ -655,7 +655,7 @@ sub_80F22B0: @ 80F22B0
 	ldr r1, _080F22EC @ =gUnknown_840C268
 	b _080F22F2
 	.align 2, 0
-_080F22E4: .4byte gUnknown_3005090
+_080F22E4: .4byte gTasks
 _080F22E8: .4byte gUnknown_203AB38
 _080F22EC: .4byte gUnknown_840C268
 _080F22F0:
@@ -710,7 +710,7 @@ _080F22F2:
 	adds r1, r3
 	ldr r2, _080F2394 @ =sub_80F3870
 	str r2, [r1]
-	ldr r5, _080F2398 @ =gUnknown_3005090
+	ldr r5, _080F2398 @ =gTasks
 	adds r1, r6, 0x5
 	lsls r1, 1
 	lsls r4, r7, 2
@@ -739,7 +739,7 @@ _080F2388: .4byte gUnknown_840C298
 _080F238C: .4byte 0x0000ffff
 _080F2390: .4byte gSprites
 _080F2394: .4byte sub_80F3870
-_080F2398: .4byte gUnknown_3005090
+_080F2398: .4byte gTasks
 _080F239C: .4byte sub_80F23A0
 	thumb_func_end sub_80F22B0
 
@@ -748,7 +748,7 @@ sub_80F23A0: @ 80F23A0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, _080F2410 @ =gUnknown_3005090
+	ldr r4, _080F2410 @ =gTasks
 	lsls r3, r0, 2
 	adds r3, r0
 	lsls r3, 3
@@ -801,7 +801,7 @@ _080F2408:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2410: .4byte gUnknown_3005090
+_080F2410: .4byte gTasks
 _080F2414: .4byte gUnknown_203AB38
 _080F2418: .4byte gSprites
 _080F241C: .4byte 0x000001ff
@@ -817,7 +817,7 @@ Task_Hof_TryDisplayAnotherMon: @ 80F2424
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, _080F2460 @ =gUnknown_3005090
+	ldr r2, _080F2460 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r6, r0, 3
@@ -840,7 +840,7 @@ Task_Hof_TryDisplayAnotherMon: @ 80F2424
 	strh r0, [r4, 0xE]
 	b _080F2500
 	.align 2, 0
-_080F2460: .4byte gUnknown_3005090
+_080F2460: .4byte gTasks
 _080F2464: .4byte gUnknown_203AB38
 _080F2468:
 	ldr r2, _080F24E0 @ =gUnknown_203AB34
@@ -945,7 +945,7 @@ Task_Hof_PaletteFadeAndPrintWelcomeText: @ 80F2514
 	lsls r1, r4, 2
 	adds r0, r1, r4
 	lsls r5, r0, 3
-	ldr r0, _080F25A0 @ =gUnknown_3005098
+	ldr r0, _080F25A0 @ =gTasks+0x8
 	mov r12, r0
 	mov r8, r1
 	ldr r6, _080F25A4 @ =gSprites
@@ -980,7 +980,7 @@ _080F2564:
 	bl HallOfFame_PrintWelcomeText
 	movs r0, 0x62
 	bl PlaySE
-	ldr r1, _080F25A8 @ =gUnknown_3005090
+	ldr r1, _080F25A8 @ =gTasks
 	mov r2, r8
 	adds r0, r2, r4
 	lsls r0, 3
@@ -998,9 +998,9 @@ _080F2564:
 	bx r0
 	.align 2, 0
 _080F259C: .4byte 0xffff0000
-_080F25A0: .4byte gUnknown_3005098
+_080F25A0: .4byte gTasks+0x8
 _080F25A4: .4byte gSprites
-_080F25A8: .4byte gUnknown_3005090
+_080F25A8: .4byte gTasks
 _080F25AC: .4byte sub_80F25B0
 	thumb_func_end Task_Hof_PaletteFadeAndPrintWelcomeText
 
@@ -1014,7 +1014,7 @@ sub_80F25B0: @ 80F25B0
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r7, _080F25F0 @ =gUnknown_3005090
+	ldr r7, _080F25F0 @ =gTasks
 	lsls r4, r6, 2
 	adds r0, r4, r6
 	lsls r5, r0, 3
@@ -1037,7 +1037,7 @@ sub_80F25B0: @ 80F25B0
 	bl sub_80F3930
 	b _080F266E
 	.align 2, 0
-_080F25F0: .4byte gUnknown_3005090
+_080F25F0: .4byte gTasks
 _080F25F4:
 	movs r3, 0
 	mov r9, r4
@@ -1090,7 +1090,7 @@ _080F2630:
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
-	ldr r1, _080F268C @ =gUnknown_3005090
+	ldr r1, _080F268C @ =gTasks
 	mov r2, r9
 	adds r0, r2, r6
 	lsls r0, 3
@@ -1112,7 +1112,7 @@ _080F266E:
 _080F2680: .4byte gUnknown_203AB34
 _080F2684: .4byte gSprites
 _080F2688: .4byte 0x00007716
-_080F268C: .4byte gUnknown_3005090
+_080F268C: .4byte gTasks
 _080F2690: .4byte sub_80F2694
 	thumb_func_end sub_80F25B0
 
@@ -1121,7 +1121,7 @@ sub_80F2694: @ 80F2694
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F26B4 @ =gUnknown_3005090
+	ldr r2, _080F26B4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1135,7 +1135,7 @@ sub_80F2694: @ 80F2694
 	str r0, [r1]
 	b _080F26CE
 	.align 2, 0
-_080F26B4: .4byte gUnknown_3005090
+_080F26B4: .4byte gTasks
 _080F26B8: .4byte sub_80F26D4
 _080F26BC:
 	adds r0, r2, 0x1
@@ -1183,7 +1183,7 @@ sub_80F26D4: @ 80F26D4
 	movs r2, 0x78
 	movs r3, 0x48
 	bl sub_810C2A4
-	ldr r1, _080F2750 @ =gUnknown_3005090
+	ldr r1, _080F2750 @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -1206,7 +1206,7 @@ sub_80F26D4: @ 80F26D4
 	.align 2, 0
 _080F2748: .4byte gSaveBlock2Ptr
 _080F274C: .4byte 0x0000ffff
-_080F2750: .4byte gUnknown_3005090
+_080F2750: .4byte gTasks
 _080F2754: .4byte gUnknown_840C234
 _080F2758: .4byte 0x0000021d
 _080F275C: .4byte Task_Hof_WaitAndPrintPlayerInfo
@@ -1218,7 +1218,7 @@ Task_Hof_WaitAndPrintPlayerInfo: @ 80F2760
 	sub sp, 0x10
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F2784 @ =gUnknown_3005090
+	ldr r2, _080F2784 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1232,7 +1232,7 @@ Task_Hof_WaitAndPrintPlayerInfo: @ 80F2760
 	strh r0, [r4, 0xE]
 	b _080F27F4
 	.align 2, 0
-_080F2784: .4byte gUnknown_3005090
+_080F2784: .4byte gTasks
 _080F2788:
 	ldr r2, _080F27A8 @ =gSprites
 	movs r3, 0x10
@@ -1306,7 +1306,7 @@ Task_Hof_ExitOnKeyPressed: @ 80F2804
 	beq _080F282A
 	movs r0, 0x4
 	bl FadeOutBGM
-	ldr r0, _080F2834 @ =gUnknown_3005090
+	ldr r0, _080F2834 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1319,7 +1319,7 @@ _080F282A:
 	bx r0
 	.align 2, 0
 _080F2830: .4byte gMain
-_080F2834: .4byte gUnknown_3005090
+_080F2834: .4byte gTasks
 _080F2838: .4byte Task_Hof_HandlePaletteOnExit
 	thumb_func_end Task_Hof_ExitOnKeyPressed
 
@@ -1343,7 +1343,7 @@ Task_Hof_HandlePaletteOnExit: @ 80F283C
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _080F2884 @ =gUnknown_3005090
+	ldr r1, _080F2884 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1357,7 +1357,7 @@ Task_Hof_HandlePaletteOnExit: @ 80F283C
 	.align 2, 0
 _080F287C: .4byte gUnknown_20375F8
 _080F2880: .4byte gUnknown_20371F8
-_080F2884: .4byte gUnknown_3005090
+_080F2884: .4byte gTasks
 _080F2888: .4byte Task_Hof_HandleExit
 	thumb_func_end Task_Hof_HandlePaletteOnExit
 
@@ -1373,7 +1373,7 @@ Task_Hof_HandleExit: @ 80F288C
 	cmp r0, 0
 	bne _080F291E
 	lsls r7, r6, 2
-	ldr r1, _080F2928 @ =gUnknown_3005090
+	ldr r1, _080F2928 @ =gTasks
 	adds r0, r7, r6
 	lsls r0, 3
 	adds r1, 0x12
@@ -1389,7 +1389,7 @@ _080F28B6:
 	subs r5, 0x1
 	cmp r5, 0
 	bge _080F28AC
-	ldr r0, _080F2928 @ =gUnknown_3005090
+	ldr r0, _080F2928 @ =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
 	adds r1, r0
@@ -1433,7 +1433,7 @@ _080F291E:
 	bx r0
 	.align 2, 0
 _080F2924: .4byte gUnknown_2037AB8
-_080F2928: .4byte gUnknown_3005090
+_080F2928: .4byte gTasks
 _080F292C: .4byte gUnknown_203AB3C
 _080F2930: .4byte gUnknown_203AB38
 	thumb_func_end Task_Hof_HandleExit
@@ -1614,7 +1614,7 @@ sub_80F2AA4: @ 80F2AA4
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080F2AE4
-	ldr r0, _080F2ADC @ =gUnknown_3005090
+	ldr r0, _080F2ADC @ =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -1623,7 +1623,7 @@ sub_80F2AA4: @ 80F2AA4
 	b _080F2B5A
 	.align 2, 0
 _080F2AD8: .4byte 0x00000226
-_080F2ADC: .4byte gUnknown_3005090
+_080F2ADC: .4byte gTasks
 _080F2AE0: .4byte sub_80F30A4
 _080F2AE4:
 	ldr r0, _080F2B2C @ =gUnknown_201C000
@@ -1656,7 +1656,7 @@ _080F2B04:
 _080F2B1A:
 	cmp r2, 0x31
 	bhi _080F2B3C
-	ldr r0, _080F2B38 @ =gUnknown_3005090
+	ldr r0, _080F2B38 @ =gTasks
 	adds r1, r5, r6
 	lsls r1, 3
 	adds r1, r0
@@ -1666,9 +1666,9 @@ _080F2B1A:
 _080F2B2C: .4byte gUnknown_201C000
 _080F2B30: .4byte gUnknown_203AB38
 _080F2B34: .4byte 0x000001ff
-_080F2B38: .4byte gUnknown_3005090
+_080F2B38: .4byte gTasks
 _080F2B3C:
-	ldr r0, _080F2B64 @ =gUnknown_3005090
+	ldr r0, _080F2B64 @ =gTasks
 	adds r1, r5, r6
 	lsls r1, 3
 	adds r1, r0
@@ -1677,7 +1677,7 @@ _080F2B46:
 	strh r0, [r1, 0x8]
 	movs r0, 0xA
 	bl GetGameStat
-	ldr r2, _080F2B64 @ =gUnknown_3005090
+	ldr r2, _080F2B64 @ =gTasks
 	adds r1, r5, r6
 	lsls r1, 3
 	adds r1, r2
@@ -1690,7 +1690,7 @@ _080F2B5A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2B64: .4byte gUnknown_3005090
+_080F2B64: .4byte gTasks
 _080F2B68: .4byte sub_80F2B6C
 	thumb_func_end sub_80F2AA4
 
@@ -1708,7 +1708,7 @@ sub_80F2B6C: @ 80F2B6C
 	ldr r0, _080F2C24 @ =gUnknown_203AB38
 	ldr r3, [r0]
 	movs r5, 0
-	ldr r1, _080F2C28 @ =gUnknown_3005090
+	ldr r1, _080F2C28 @ =gTasks
 	mov r2, r9
 	lsls r0, r2, 2
 	add r0, r9
@@ -1761,7 +1761,7 @@ _080F2BD6:
 	bls _080F2BC6
 	adds r6, r3, 0
 	movs r5, 0
-	ldr r1, _080F2C28 @ =gUnknown_3005090
+	ldr r1, _080F2C28 @ =gTasks
 	ldr r0, [sp, 0x14]
 	add r0, r9
 	lsls r0, 3
@@ -1794,7 +1794,7 @@ _080F2BF8:
 	b _080F2C4C
 	.align 2, 0
 _080F2C24: .4byte gUnknown_203AB38
-_080F2C28: .4byte gUnknown_3005090
+_080F2C28: .4byte gTasks
 _080F2C2C: .4byte gUnknown_203AB34
 _080F2C30: .4byte 0x000001ff
 _080F2C34: .4byte gUnknown_840C268
@@ -1870,7 +1870,7 @@ _080F2CB4:
 	movs r1, 0xC
 	bl BlendPalettes
 	ldr r0, _080F2D10 @ =gStringVar1
-	ldr r1, _080F2D14 @ =gUnknown_3005090
+	ldr r1, _080F2D14 @ =gTasks
 	ldr r4, [sp, 0x14]
 	add r4, r9
 	lsls r4, 3
@@ -1900,7 +1900,7 @@ _080F2CB4:
 _080F2D08: .4byte 0xffff0000
 _080F2D0C: .4byte 0x00007716
 _080F2D10: .4byte gStringVar1
-_080F2D14: .4byte gUnknown_3005090
+_080F2D14: .4byte gTasks
 _080F2D18: .4byte gStringVar4
 _080F2D1C: .4byte gUnknown_84160B4
 _080F2D20: .4byte gUnknown_8415D78
@@ -1913,7 +1913,7 @@ _080F2D24:
 	movs r3, 0
 	bl sub_810F650
 _080F2D34:
-	ldr r0, _080F2D58 @ =gUnknown_3005090
+	ldr r0, _080F2D58 @ =gTasks
 	ldr r1, [sp, 0x14]
 	add r1, r9
 	lsls r1, 3
@@ -1930,7 +1930,7 @@ _080F2D34:
 	bx r0
 	.align 2, 0
 _080F2D54: .4byte gUnknown_8415D60
-_080F2D58: .4byte gUnknown_3005090
+_080F2D58: .4byte gTasks
 _080F2D5C: .4byte Task_HofPC_PrintMonInfo
 	thumb_func_end sub_80F2B6C
 
@@ -1946,7 +1946,7 @@ Task_HofPC_PrintMonInfo: @ 80F2D60
 	ldr r0, _080F2E68 @ =gUnknown_203AB38
 	ldr r5, [r0]
 	movs r3, 0
-	ldr r1, _080F2E6C @ =gUnknown_3005090
+	ldr r1, _080F2E6C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1968,7 +1968,7 @@ _080F2D94:
 	lsls r7, r4, 2
 	adds r0, r7, r4
 	lsls r6, r0, 3
-	ldr r0, _080F2E70 @ =gUnknown_3005098
+	ldr r0, _080F2E70 @ =gTasks+0x8
 	mov r10, r0
 	ldr r1, _080F2E74 @ =gSprites
 	mov r8, r1
@@ -2003,14 +2003,14 @@ _080F2DD0:
 	bls _080F2DAE
 	adds r1, r7, r4
 	lsls r1, 3
-	ldr r0, _080F2E6C @ =gUnknown_3005090
+	ldr r0, _080F2E6C @ =gTasks
 	adds r6, r1, r0
 	movs r2, 0xC
 	ldrsh r0, [r6, r2]
 	adds r0, 0x5
 	lsls r0, 1
 	adds r0, r1
-	ldr r1, _080F2E6C @ =gUnknown_3005090
+	ldr r1, _080F2E6C @ =gTasks
 	adds r1, 0x8
 	adds r0, r1
 	ldrh r1, [r0]
@@ -2070,8 +2070,8 @@ _080F2E4A:
 	bx r0
 	.align 2, 0
 _080F2E68: .4byte gUnknown_203AB38
-_080F2E6C: .4byte gUnknown_3005090
-_080F2E70: .4byte gUnknown_3005098
+_080F2E6C: .4byte gTasks
+_080F2E70: .4byte gTasks+0x8
 _080F2E74: .4byte gSprites
 _080F2E78: .4byte 0xffff0000
 _080F2E7C: .4byte gUnknown_203AB34
@@ -2094,7 +2094,7 @@ Task_HofPC_HandleInput: @ 80F2E8C
 	adds r3, r1, 0
 	cmp r0, 0
 	beq _080F2F38
-	ldr r7, _080F2F04 @ =gUnknown_3005090
+	ldr r7, _080F2F04 @ =gTasks
 	lsls r0, r5, 2
 	adds r1, r0, r5
 	lsls r3, r1, 3
@@ -2125,7 +2125,7 @@ _080F2ED6:
 	lsrs r4, r0, 16
 	cmp r4, 0x5
 	bls _080F2EC4
-	ldr r0, _080F2F04 @ =gUnknown_3005090
+	ldr r0, _080F2F04 @ =gTasks
 	mov r2, r8
 	adds r1, r2, r5
 	lsls r1, 3
@@ -2143,7 +2143,7 @@ _080F2EF8:
 	b _080F2FD8
 	.align 2, 0
 _080F2F00: .4byte gMain
-_080F2F04: .4byte gUnknown_3005090
+_080F2F04: .4byte gTasks
 _080F2F08: .4byte sub_80F2B6C
 _080F2F0C:
 	bl IsCryPlayingOrClearCrySongs
@@ -2180,7 +2180,7 @@ _080F2F38:
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
 _080F2F5A:
-	ldr r0, _080F2F74 @ =gUnknown_3005090
+	ldr r0, _080F2F74 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -2191,14 +2191,14 @@ _080F2F5A:
 	.align 2, 0
 _080F2F6C: .4byte gMPlay_BGM
 _080F2F70: .4byte 0x0000ffff
-_080F2F74: .4byte gUnknown_3005090
+_080F2F74: .4byte gTasks
 _080F2F78: .4byte sub_80F2FEC
 _080F2F7C:
 	movs r0, 0x40
 	ands r0, r2
 	cmp r0, 0
 	beq _080F2FAC
-	ldr r0, _080F2FA4 @ =gUnknown_3005090
+	ldr r0, _080F2FA4 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -2214,7 +2214,7 @@ _080F2F7C:
 	str r0, [r1]
 	b _080F2FD8
 	.align 2, 0
-_080F2FA4: .4byte gUnknown_3005090
+_080F2FA4: .4byte gTasks
 _080F2FA8: .4byte Task_HofPC_PrintMonInfo
 _080F2FAC:
 	ldrh r1, [r3, 0x2E]
@@ -2222,7 +2222,7 @@ _080F2FAC:
 	ands r0, r1
 	cmp r0, 0
 	beq _080F2FD8
-	ldr r1, _080F2FE4 @ =gUnknown_3005090
+	ldr r1, _080F2FE4 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -2246,7 +2246,7 @@ _080F2FD8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2FE4: .4byte gUnknown_3005090
+_080F2FE4: .4byte gTasks
 _080F2FE8: .4byte Task_HofPC_PrintMonInfo
 	thumb_func_end Task_HofPC_HandleInput
 
@@ -2265,7 +2265,7 @@ sub_80F2FEC: @ 80F2FEC
 	movs r1, 0
 	movs r2, 0
 	bl sub_80A0A70
-	ldr r1, _080F3028 @ =gUnknown_3005090
+	ldr r1, _080F3028 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2278,7 +2278,7 @@ sub_80F2FEC: @ 80F2FEC
 	.align 2, 0
 _080F3020: .4byte gUnknown_20375F8
 _080F3024: .4byte gUnknown_20371F8
-_080F3028: .4byte gUnknown_3005090
+_080F3028: .4byte gTasks
 _080F302C: .4byte sub_80F3030
 	thumb_func_end sub_80F2FEC
 
@@ -2362,7 +2362,7 @@ sub_80F30A4: @ 80F30A4
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
-	ldr r1, _080F3104 @ =gUnknown_3005090
+	ldr r1, _080F3104 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2376,7 +2376,7 @@ sub_80F30A4: @ 80F30A4
 	.align 2, 0
 _080F30FC: .4byte gUnknown_8415D8C
 _080F3100: .4byte gUnknown_8416090
-_080F3104: .4byte gUnknown_3005090
+_080F3104: .4byte gTasks
 _080F3108: .4byte Task_HofPC_ExitOnButtonPress
 	thumb_func_end sub_80F30A4
 
@@ -2391,7 +2391,7 @@ Task_HofPC_ExitOnButtonPress: @ 80F310C
 	ands r0, r1
 	cmp r0, 0
 	beq _080F312C
-	ldr r0, _080F3134 @ =gUnknown_3005090
+	ldr r0, _080F3134 @ =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -2403,7 +2403,7 @@ _080F312C:
 	bx r0
 	.align 2, 0
 _080F3130: .4byte gMain
-_080F3134: .4byte gUnknown_3005090
+_080F3134: .4byte gTasks
 _080F3138: .4byte sub_80F2FEC
 	thumb_func_end Task_HofPC_ExitOnButtonPress
 

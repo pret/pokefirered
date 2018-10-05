@@ -191,7 +191,7 @@ sub_800C318: @ 800C318
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0800C4CC @ =gUnknown_3005090
+	ldr r2, _0800C4CC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -215,7 +215,7 @@ _0800C4BC: .4byte gUnknown_8234648
 _0800C4C0: .4byte gUnknown_8234668
 _0800C4C4: .4byte sub_800C2D4
 _0800C4C8: .4byte sub_800C4D0
-_0800C4CC: .4byte gUnknown_3005090
+_0800C4CC: .4byte gTasks
 	thumb_func_end sub_800C318
 
 	thumb_func_start sub_800C4D0
@@ -280,7 +280,7 @@ _0800C54A:
 	bl sub_806E2BC
 	cmp r0, 0x1
 	bne _0800C570
-	ldr r2, _0800C56C @ =gUnknown_3005090
+	ldr r2, _0800C56C @ =gTasks
 	lsls r3, r5, 2
 	adds r0, r3, r5
 	lsls r0, 3
@@ -291,9 +291,9 @@ _0800C54A:
 	adds r2, r3, 0
 	b _0800C57E
 	.align 2, 0
-_0800C56C: .4byte gUnknown_3005090
+_0800C56C: .4byte gTasks
 _0800C570:
-	ldr r0, _0800C588 @ =gUnknown_3005090
+	ldr r0, _0800C588 @ =gTasks
 	lsls r2, r5, 2
 	adds r1, r2, r5
 	lsls r1, 3
@@ -306,11 +306,11 @@ _0800C57E:
 	adds r0, r1
 	b _0800C5FC
 	.align 2, 0
-_0800C588: .4byte gUnknown_3005090
+_0800C588: .4byte gTasks
 _0800C58C:
 	movs r0, 0
 	bl sub_800D094
-	ldr r0, _0800C5A8 @ =gUnknown_3005090
+	ldr r0, _0800C5A8 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -321,12 +321,12 @@ _0800C58C:
 	bl sub_800C634
 	b _0800C626
 	.align 2, 0
-_0800C5A8: .4byte gUnknown_3005090
+_0800C5A8: .4byte gTasks
 _0800C5AC: .4byte gUnknown_8415C42
 _0800C5B0:
 	movs r0, 0
 	bl sub_800D094
-	ldr r1, _0800C5DC @ =gUnknown_3005090
+	ldr r1, _0800C5DC @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -343,7 +343,7 @@ _0800C5B0:
 	strh r0, [r4, 0x8]
 	b _0800C626
 	.align 2, 0
-_0800C5DC: .4byte gUnknown_3005090
+_0800C5DC: .4byte gTasks
 _0800C5E0: .4byte gUnknown_8415BFF
 _0800C5E4:
 	strh r6, [r4, 0x8]
@@ -351,7 +351,7 @@ _0800C5E4:
 _0800C5E8:
 	movs r0, 0
 	bl sub_800D044
-	ldr r1, _0800C604 @ =gUnknown_3005090
+	ldr r1, _0800C604 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -363,12 +363,12 @@ _0800C5FC:
 	str r1, [r0]
 	b _0800C626
 	.align 2, 0
-_0800C604: .4byte gUnknown_3005090
+_0800C604: .4byte gTasks
 _0800C608: .4byte sub_800C704
 _0800C60C:
 	movs r0, 0
 	bl sub_800D094
-	ldr r0, _0800C62C @ =gUnknown_3005090
+	ldr r0, _0800C62C @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -382,7 +382,7 @@ _0800C626:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800C62C: .4byte gUnknown_3005090
+_0800C62C: .4byte gTasks
 _0800C630: .4byte gUnknown_8415C64
 	thumb_func_end sub_800C4D0
 
@@ -395,7 +395,7 @@ sub_800C634: @ 800C634
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_800CDF8
-	ldr r1, _0800C678 @ =gUnknown_3005090
+	ldr r1, _0800C678 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -419,7 +419,7 @@ sub_800C634: @ 800C634
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800C678: .4byte gUnknown_3005090
+_0800C678: .4byte gTasks
 _0800C67C: .4byte sub_800C688
 _0800C680: .4byte 0x0000ffff
 _0800C684: .4byte sub_800C2EC
@@ -454,7 +454,7 @@ sub_800C688: @ 800C688
 	bl sub_800D1E8
 	movs r0, 0
 	bl sub_800D044
-	ldr r1, _0800C6EC @ =gUnknown_3005090
+	ldr r1, _0800C6EC @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -469,7 +469,7 @@ sub_800C688: @ 800C688
 _0800C6E0: .4byte gUnknown_2037AB8
 _0800C6E4: .4byte gMain
 _0800C6E8: .4byte gUnknown_8234638
-_0800C6EC: .4byte gUnknown_3005090
+_0800C6EC: .4byte gTasks
 _0800C6F0: .4byte sub_800C704
 _0800C6F4:
 	ldr r0, _0800C700 @ =sub_800C7A0
@@ -515,7 +515,7 @@ sub_800C704: @ 800C704
 	movs r0, 0x54
 	movs r1, 0x7
 	bl SetGpuReg
-	ldr r0, _0800C768 @ =gUnknown_3005090
+	ldr r0, _0800C768 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -528,7 +528,7 @@ sub_800C704: @ 800C704
 	b _0800C772
 	.align 2, 0
 _0800C764: .4byte gUnknown_2037AB8
-_0800C768: .4byte gUnknown_3005090
+_0800C768: .4byte gTasks
 _0800C76C: .4byte sub_800CA94
 _0800C770:
 	ldr r0, _0800C77C @ =sub_800C780
@@ -610,7 +610,7 @@ _0800C7FE:
 	movs r1, 0xF1
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r2, _0800C860 @ =gUnknown_3005090
+	ldr r2, _0800C860 @ =gTasks
 	lsls r1, r7, 2
 	adds r0, r1, r7
 	lsls r0, 3
@@ -648,7 +648,7 @@ _0800C828:
 	b _0800C8D8
 	.align 2, 0
 _0800C85C: .4byte 0x0000547f
-_0800C860: .4byte gUnknown_3005090
+_0800C860: .4byte gTasks
 _0800C864: .4byte gUnknown_8234688
 _0800C868: .4byte gUnknown_8415A6E
 _0800C86C: .4byte gUnknown_8234618
@@ -772,7 +772,7 @@ _0800C8F0:
 	movs r1, 0x3
 	bl CopyWindowToVram
 _0800C994:
-	ldr r0, _0800C9C4 @ =gUnknown_3005090
+	ldr r0, _0800C9C4 @ =gTasks
 	mov r2, r8
 	adds r1, r2, r7
 	lsls r1, 3
@@ -791,7 +791,7 @@ _0800C9B4: .4byte gUnknown_8415A77
 _0800C9B8: .4byte gUnknown_8415A6E
 _0800C9BC: .4byte gUnknown_8415A97
 _0800C9C0: .4byte gUnknown_8234620
-_0800C9C4: .4byte gUnknown_3005090
+_0800C9C4: .4byte gTasks
 _0800C9C8: .4byte sub_800C9CC
 	thumb_func_end sub_800C7A0
 
@@ -809,7 +809,7 @@ sub_800C9CC: @ 800C9CC
 	asrs r0, 16
 	cmp r0, r5
 	beq _0800CA10
-	ldr r1, _0800CA18 @ =gUnknown_3005090
+	ldr r1, _0800CA18 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -833,7 +833,7 @@ _0800CA10:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800CA18: .4byte gUnknown_3005090
+_0800CA18: .4byte gTasks
 _0800CA1C: .4byte sub_800CA28
 _0800CA20: .4byte 0x0000ffff
 _0800CA24: .4byte sub_800C2EC
@@ -844,7 +844,7 @@ sub_800CA28: @ 800CA28
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0800CA4C @ =gUnknown_3005090
+	ldr r1, _0800CA4C @ =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -858,7 +858,7 @@ sub_800CA28: @ 800CA28
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800CA4C: .4byte gUnknown_3005090
+_0800CA4C: .4byte gTasks
 _0800CA50: .4byte sub_800CA54
 	thumb_func_end sub_800CA28
 
@@ -878,7 +878,7 @@ sub_800CA54: @ 800CA54
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800CA80
-	ldr r0, _0800CA8C @ =gUnknown_3005090
+	ldr r0, _0800CA8C @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -891,7 +891,7 @@ _0800CA80:
 	bx r0
 	.align 2, 0
 _0800CA88: .4byte gUnknown_2037AB8
-_0800CA8C: .4byte gUnknown_3005090
+_0800CA8C: .4byte gTasks
 _0800CA90: .4byte sub_800CA28
 	thumb_func_end sub_800CA54
 
@@ -907,7 +907,7 @@ sub_800CA94: @ 800CA94
 	ands r0, r1
 	cmp r0, 0
 	bne _0800CB84
-	ldr r1, _0800CAC8 @ =gUnknown_3005090
+	ldr r1, _0800CAC8 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -923,7 +923,7 @@ sub_800CA94: @ 800CA94
 	b _0800CAEE
 	.align 2, 0
 _0800CAC4: .4byte gUnknown_2037AB8
-_0800CAC8: .4byte gUnknown_3005090
+_0800CAC8: .4byte gTasks
 _0800CACC:
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
@@ -1026,7 +1026,7 @@ sub_800CB90: @ 800CB90
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _0800CBB4 @ =gUnknown_3005090
+	ldr r1, _0800CBB4 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1041,7 +1041,7 @@ sub_800CB90: @ 800CB90
 	beq _0800CBC2
 	b _0800CC58
 	.align 2, 0
-_0800CBB4: .4byte gUnknown_3005090
+_0800CBB4: .4byte gTasks
 _0800CBB8:
 	cmp r1, 0x2
 	beq _0800CC1C
@@ -1071,7 +1071,7 @@ _0800CBEC:
 	ldr r0, _0800CC04 @ =gUnknown_8415ACB
 	bl sub_800CDF8
 _0800CBF2:
-	ldr r0, _0800CC08 @ =gUnknown_3005090
+	ldr r0, _0800CC08 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -1082,7 +1082,7 @@ _0800CBF2:
 	b _0800CC58
 	.align 2, 0
 _0800CC04: .4byte gUnknown_8415ACB
-_0800CC08: .4byte gUnknown_3005090
+_0800CC08: .4byte gTasks
 _0800CC0C:
 	ldr r0, _0800CC18 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -1235,7 +1235,7 @@ sub_800CCF8: @ 800CCF8
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0800CD3C @ =gUnknown_3005090
+	ldr r1, _0800CD3C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1245,7 +1245,7 @@ sub_800CCF8: @ 800CCF8
 	b _0800CDEC
 	.align 2, 0
 _0800CD38: .4byte gMain
-_0800CD3C: .4byte gUnknown_3005090
+_0800CD3C: .4byte gTasks
 _0800CD40: .4byte sub_800CA94
 _0800CD44:
 	movs r0, 0x2
@@ -1267,7 +1267,7 @@ _0800CD44:
 	movs r0, 0x44
 	movs r1, 0xA0
 	bl SetGpuReg
-	ldr r1, _0800CD84 @ =gUnknown_3005090
+	ldr r1, _0800CD84 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1276,14 +1276,14 @@ _0800CD44:
 	str r1, [r0]
 	b _0800CDEC
 	.align 2, 0
-_0800CD84: .4byte gUnknown_3005090
+_0800CD84: .4byte gTasks
 _0800CD88: .4byte sub_800CC68
 _0800CD8C:
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
 	beq _0800CDB4
-	ldr r0, _0800CDB0 @ =gUnknown_3005090
+	ldr r0, _0800CDB0 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1298,14 +1298,14 @@ _0800CD8C:
 	movs r0, 0x1
 	b _0800CDEE
 	.align 2, 0
-_0800CDB0: .4byte gUnknown_3005090
+_0800CDB0: .4byte gTasks
 _0800CDB4:
 	ldrh r1, [r3, 0x2E]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	beq _0800CDEC
-	ldr r1, _0800CDE4 @ =gUnknown_3005090
+	ldr r1, _0800CDE4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1325,7 +1325,7 @@ _0800CDB4:
 	movs r0, 0x1
 	b _0800CDEE
 	.align 2, 0
-_0800CDE4: .4byte gUnknown_3005090
+_0800CDE4: .4byte gTasks
 _0800CDE8: .4byte gUnknown_8234694
 _0800CDEC:
 	movs r0, 0

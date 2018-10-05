@@ -331,7 +331,7 @@ sub_814F46C: @ 814F46C
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _0814F498 @ =gUnknown_3005090
+	ldr r1, _0814F498 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -349,7 +349,7 @@ _0814F48E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0814F498: .4byte gUnknown_3005090
+_0814F498: .4byte gTasks
 _0814F49C: .4byte _0814F4A0
 	.align 2, 0
 _0814F4A0:
@@ -361,7 +361,7 @@ _0814F4A0:
 	.4byte _0814F630
 _0814F4B8:
 	bl sub_814F3A8
-	ldr r0, _0814F4D0 @ =gUnknown_3005090
+	ldr r0, _0814F4D0 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -371,7 +371,7 @@ _0814F4B8:
 	strh r0, [r1, 0x8]
 	b _0814F648
 	.align 2, 0
-_0814F4D0: .4byte gUnknown_3005090
+_0814F4D0: .4byte gTasks
 _0814F4D4:
 	movs r0, 0x1
 	negs r0, r0
@@ -485,7 +485,7 @@ _0814F5A4:
 _0814F5B8:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r2, _0814F5FC @ =gUnknown_3005090
+	ldr r2, _0814F5FC @ =gTasks
 	ldr r0, _0814F600 @ =gUnknown_3002040
 	ldr r0, [r0]
 	adds r0, 0x61
@@ -507,7 +507,7 @@ _0814F5E2:
 	mov r2, r8
 	adds r1, r2, r5
 	lsls r1, 3
-	ldr r0, _0814F604 @ =gUnknown_3005098
+	ldr r0, _0814F604 @ =gTasks+0x8
 	adds r1, r0
 	adds r0, r1, 0
 	adds r0, 0xE
@@ -516,9 +516,9 @@ _0814F5E2:
 	b _0814F648
 	.align 2, 0
 _0814F5F8: .4byte gMain
-_0814F5FC: .4byte gUnknown_3005090
+_0814F5FC: .4byte gTasks
 _0814F600: .4byte gUnknown_3002040
-_0814F604: .4byte gUnknown_3005098
+_0814F604: .4byte gTasks+0x8
 _0814F608:
 	movs r0, 0x1
 	negs r0, r0
@@ -528,7 +528,7 @@ _0814F608:
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 _0814F618:
-	ldr r1, _0814F62C @ =gUnknown_3005090
+	ldr r1, _0814F62C @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -539,7 +539,7 @@ _0814F622:
 	strh r1, [r0, 0x8]
 	b _0814F648
 	.align 2, 0
-_0814F62C: .4byte gUnknown_3005090
+_0814F62C: .4byte gTasks
 _0814F630:
 	ldr r0, _0814F654 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -801,7 +801,7 @@ sub_814F7E4: @ 814F7E4
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _0814F84C @ =gUnknown_3005098
+	ldr r1, _0814F84C @ =gTasks+0x8
 	adds r7, r0, r1
 	movs r4, 0
 _0814F812:
@@ -833,7 +833,7 @@ _0814F82C:
 	movs r0, 0
 	b _0814F876
 	.align 2, 0
-_0814F84C: .4byte gUnknown_3005098
+_0814F84C: .4byte gTasks+0x8
 _0814F850:
 	adds r1, r6, 0
 	mov r0, sp

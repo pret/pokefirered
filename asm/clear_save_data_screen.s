@@ -167,7 +167,7 @@ _080F56C0:
 	bl BeginNormalPaletteFade
 	ldr r0, _080F56F8 @ =sub_80F558C
 	bl SetVBlankCallback
-	ldr r1, _080F56FC @ =gUnknown_3005090
+	ldr r1, _080F56FC @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -188,7 +188,7 @@ _080F56EC:
 	.align 2, 0
 _080F56F4: .4byte 0x0000ffff
 _080F56F8: .4byte sub_80F558C
-_080F56FC: .4byte gUnknown_3005090
+_080F56FC: .4byte gTasks
 _080F5700: .4byte sub_80F5708
 _080F5704: .4byte gUnknown_203AB54
 	thumb_func_end sub_80F55DC

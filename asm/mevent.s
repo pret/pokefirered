@@ -378,7 +378,7 @@ sub_81438A0: @ 81438A0
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _081438E4 @ =gUnknown_3005098
+	ldr r0, _081438E4 @ =gTasks+0x8
 	adds r4, r0
 	movs r0, 0
 	strb r0, [r4, 0x8]
@@ -401,7 +401,7 @@ sub_81438A0: @ 81438A0
 	bx r0
 	.align 2, 0
 _081438E0: .4byte sub_8143910
-_081438E4: .4byte gUnknown_3005098
+_081438E4: .4byte gTasks+0x8
 	thumb_func_end sub_81438A0
 
 	thumb_func_start sub_81438E8
@@ -441,7 +441,7 @@ sub_8143910: @ 8143910
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08143934 @ =gUnknown_3005098
+	ldr r1, _08143934 @ =gTasks+0x8
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x8]
 	cmp r0, 0x1A
@@ -454,7 +454,7 @@ _08143928:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08143934: .4byte gUnknown_3005098
+_08143934: .4byte gTasks+0x8
 _08143938: .4byte _0814393C
 	.align 2, 0
 _0814393C:

@@ -118,7 +118,7 @@ SECTIONS {
         asm/sound.o(.text);
         asm/battle_anim.o(.text);
         asm/battle_anim_8074480.o(.text);
-        asm/task.o(.text);
+        src/task.o(.text);
         asm/reshow_battle_screen.o(.text);
         asm/battle_anim_8078178.o(.text);
         asm/title_screen.o(.text);

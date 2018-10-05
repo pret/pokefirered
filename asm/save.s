@@ -1934,7 +1934,7 @@ sub_80DA634: @ 80DA634
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _080DA65C @ =gUnknown_3005090
+	ldr r1, _080DA65C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1952,7 +1952,7 @@ _080DA650:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080DA65C: .4byte gUnknown_3005090
+_080DA65C: .4byte gTasks
 _080DA660: .4byte _080DA664
 	.align 2, 0
 _080DA664:
@@ -1983,7 +1983,7 @@ _080DA694:
 _080DA6A8: .4byte gSoftResetDisabled
 _080DA6AC:
 	bl sub_800AB9C
-	ldr r0, _080DA6C0 @ =gUnknown_3005090
+	ldr r0, _080DA6C0 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1992,7 +1992,7 @@ _080DA6AC:
 	strh r0, [r1, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA6C0: .4byte gUnknown_3005090
+_080DA6C0: .4byte gTasks
 _080DA6C4:
 	bl sub_800A4BC
 	lsls r0, 24
@@ -2001,7 +2001,7 @@ _080DA6C4:
 	b _080DA7F6
 _080DA6D0:
 	bl sub_80590D8
-	ldr r0, _080DA6E4 @ =gUnknown_3005090
+	ldr r0, _080DA6E4 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2010,7 +2010,7 @@ _080DA6D0:
 	strh r0, [r1, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA6E4: .4byte gUnknown_3005090
+_080DA6E4: .4byte gTasks
 _080DA6E8:
 	bl sub_804C1C0
 	bl sub_80DA3AC
@@ -2038,7 +2038,7 @@ _080DA712:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DA730
-	ldr r0, _080DA72C @ =gUnknown_3005090
+	ldr r0, _080DA72C @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2047,9 +2047,9 @@ _080DA712:
 	strh r0, [r1, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA72C: .4byte gUnknown_3005090
+_080DA72C: .4byte gTasks
 _080DA730:
-	ldr r0, _080DA740 @ =gUnknown_3005090
+	ldr r0, _080DA740 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2058,10 +2058,10 @@ _080DA730:
 	strh r0, [r1, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA740: .4byte gUnknown_3005090
+_080DA740: .4byte gTasks
 _080DA744:
 	bl sub_80DA40C
-	ldr r0, _080DA758 @ =gUnknown_3005090
+	ldr r0, _080DA758 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2070,11 +2070,11 @@ _080DA744:
 	strh r0, [r1, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA758: .4byte gUnknown_3005090
+_080DA758: .4byte gTasks
 _080DA75C:
 	bl sav2_gender2_inplace_and_xFE
 	bl sub_800AB9C
-	ldr r0, _080DA774 @ =gUnknown_3005090
+	ldr r0, _080DA774 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2083,14 +2083,14 @@ _080DA75C:
 	strh r0, [r1, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA774: .4byte gUnknown_3005090
+_080DA774: .4byte gTasks
 _080DA778:
 	bl sub_800A4BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DA7F6
 	bl sub_80DA434
-	ldr r0, _080DA798 @ =gUnknown_3005090
+	ldr r0, _080DA798 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2099,10 +2099,10 @@ _080DA778:
 	strh r0, [r1, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA798: .4byte gUnknown_3005090
+_080DA798: .4byte gTasks
 _080DA79C:
 	bl sub_800AB9C
-	ldr r0, _080DA7B0 @ =gUnknown_3005090
+	ldr r0, _080DA7B0 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2111,13 +2111,13 @@ _080DA79C:
 	strh r0, [r1, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA7B0: .4byte gUnknown_3005090
+_080DA7B0: .4byte gTasks
 _080DA7B4:
 	bl sub_800A4BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DA7F6
-	ldr r0, _080DA7D0 @ =gUnknown_3005090
+	ldr r0, _080DA7D0 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2127,7 +2127,7 @@ _080DA7B4:
 	strh r0, [r1, 0x8]
 	b _080DA7F6
 	.align 2, 0
-_080DA7D0: .4byte gUnknown_3005090
+_080DA7D0: .4byte gTasks
 _080DA7D4:
 	lsls r1, r4, 2
 	adds r1, r4

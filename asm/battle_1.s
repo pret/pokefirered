@@ -348,7 +348,7 @@ sub_800F460: @ 800F460
 	ands r0, r1
 	cmp r0, 0
 	beq _0800F548
-	ldr r0, _0800F4BC @ =gUnknown_3005090
+	ldr r0, _0800F4BC @ =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -366,7 +366,7 @@ sub_800F460: @ 800F460
 	b _0800F504
 	.align 2, 0
 _0800F4B8: .4byte gBattleTypeFlags
-_0800F4BC: .4byte gUnknown_3005090
+_0800F4BC: .4byte gTasks
 _0800F4C0:
 	cmp r5, 0x2
 	beq _0800F4CE
@@ -453,7 +453,7 @@ _0800F548:
 	ldrb r0, [r0]
 	cmp r5, r0
 	bne _0800F56C
-	ldr r1, _0800F568 @ =gUnknown_3005090
+	ldr r1, _0800F568 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -462,9 +462,9 @@ _0800F548:
 	b _0800F578
 	.align 2, 0
 _0800F564: .4byte gBattleStruct
-_0800F568: .4byte gUnknown_3005090
+_0800F568: .4byte gTasks
 _0800F56C:
-	ldr r1, _0800F5C4 @ =gUnknown_3005090
+	ldr r1, _0800F5C4 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -510,7 +510,7 @@ _0800F5B6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F5C4: .4byte gUnknown_3005090
+_0800F5C4: .4byte gTasks
 _0800F5C8: .4byte 0x00006001
 	thumb_func_end sub_800F460
 
@@ -668,7 +668,7 @@ sub_800F6FC: @ 800F6FC
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r1, _0800F728 @ =gUnknown_3005090
+	ldr r1, _0800F728 @ =gTasks
 	lsls r0, r7, 2
 	mov r8, r0
 	adds r0, r7
@@ -686,7 +686,7 @@ _0800F71E:
 	beq _0800F734
 	b _0800FAC4
 	.align 2, 0
-_0800F728: .4byte gUnknown_3005090
+_0800F728: .4byte gTasks
 _0800F72C:
 	cmp r0, 0x2
 	bne _0800F732
@@ -821,7 +821,7 @@ _0800F7F0:
 	movs r3, 0x2
 	bl sub_800F460
 _0800F830:
-	ldr r0, _0800F84C @ =gUnknown_3005090
+	ldr r0, _0800F84C @ =gTasks
 	mov r2, r8
 	adds r1, r2, r7
 	lsls r1, 3
@@ -833,7 +833,7 @@ _0800F830:
 	.align 2, 0
 _0800F844: .4byte gBattleStruct
 _0800F848: .4byte gUnknown_202273C
-_0800F84C: .4byte gUnknown_3005090
+_0800F84C: .4byte gTasks
 _0800F850:
 	ldr r0, _0800F8CC @ =0x00002710
 	bl AllocSpritePalette
@@ -1007,7 +1007,7 @@ _0800F9BE:
 	subs r0, 0xA4
 	strh r0, [r4]
 _0800F9C4:
-	ldr r1, _0800F9F8 @ =gUnknown_3005090
+	ldr r1, _0800F9F8 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -1029,7 +1029,7 @@ _0800F9E8: .4byte gUnknown_2022978
 _0800F9EC: .4byte gUnknown_202297A
 _0800F9F0: .4byte gUnknown_202297C
 _0800F9F4: .4byte gUnknown_202297E
-_0800F9F8: .4byte gUnknown_3005090
+_0800F9F8: .4byte gTasks
 _0800F9FC:
 	movs r3, 0x12
 	ldrsh r0, [r1, r3]

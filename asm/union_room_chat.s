@@ -2713,7 +2713,7 @@ sub_81298F8: @ 81298F8
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0812991C @ =gUnknown_3005098
+	ldr r1, _0812991C @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -2727,7 +2727,7 @@ _08129912:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0812991C: .4byte gUnknown_3005098
+_0812991C: .4byte gTasks+0x8
 _08129920: .4byte _08129924
 	.align 2, 0
 _08129924:

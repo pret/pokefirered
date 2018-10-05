@@ -5592,7 +5592,7 @@ sub_805781C: @ 805781C
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0805784C @ =gUnknown_3005090
+	ldr r1, _0805784C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -5604,7 +5604,7 @@ sub_805781C: @ 805781C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805784C: .4byte gUnknown_3005090
+_0805784C: .4byte gTasks
 _08057850: .4byte sub_8057854
 	thumb_func_end sub_805781C
 

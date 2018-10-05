@@ -801,7 +801,7 @@ sub_80472E4: @ 80472E4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _08047330 @ =gUnknown_3005090
+	ldr r1, _08047330 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -836,7 +836,7 @@ _08047324:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047330: .4byte gUnknown_3005090
+_08047330: .4byte gTasks
 _08047334: .4byte 0x00000107
 	thumb_func_end sub_80472E4
 

@@ -1102,7 +1102,7 @@ _0801067E:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080106E4 @ =gUnknown_3005090
+	ldr r1, _080106E4 @ =gTasks
 	lsls r2, r0, 2
 	adds r2, r0
 	lsls r2, 3
@@ -1137,7 +1137,7 @@ _0801067E:
 	b _080108B2
 	.align 2, 0
 _080106E0: .4byte sub_800F6FC
-_080106E4: .4byte gUnknown_3005090
+_080106E4: .4byte gTasks
 _080106E8: .4byte gBattleStruct
 _080106EC: .4byte gUnknown_2022118
 _080106F0: .4byte gUnknown_2023E82
@@ -1845,7 +1845,7 @@ _08010CE2:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08010D58 @ =gUnknown_3005090
+	ldr r2, _08010D58 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1880,7 +1880,7 @@ _08010D3A:
 _08010D4C: .4byte gUnknown_201C000
 _08010D50: .4byte gPlayerParty
 _08010D54: .4byte sub_800F6FC
-_08010D58: .4byte gUnknown_3005090
+_08010D58: .4byte gTasks
 _08010D5C: .4byte gUnknown_2022118
 _08010D60: .4byte gUnknown_202273C
 _08010D64:
@@ -3412,7 +3412,7 @@ _08011948:
 	mov r0, r8
 	cmp r0, 0x5
 	ble _080118D8
-	ldr r1, _08011A18 @ =gUnknown_3005090
+	ldr r1, _08011A18 @ =gTasks
 	ldr r2, [sp, 0xC]
 	ldr r3, [sp]
 	adds r0, r2, r3
@@ -3491,7 +3491,7 @@ _080119E2:
 	mov r1, r8
 	cmp r1, 0x5
 	ble _08011972
-	ldr r1, _08011A18 @ =gUnknown_3005090
+	ldr r1, _08011A18 @ =gTasks
 	ldr r2, [sp, 0xC]
 	ldr r3, [sp]
 	adds r0, r2, r3
@@ -3509,7 +3509,7 @@ _080119E2:
 	.align 2, 0
 _08011A10: .4byte gPlayerParty
 _08011A14: .4byte gEnemyParty
-_08011A18: .4byte gUnknown_3005090
+_08011A18: .4byte gTasks
 	thumb_func_end sub_801184C
 
 	thumb_func_start sub_8011A1C
@@ -3619,7 +3619,7 @@ _08011A9C:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08011B88 @ =gUnknown_3005090
+	ldr r2, _08011B88 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3659,7 +3659,7 @@ _08011B78: .4byte gUnknown_8D004D8
 _08011B7C: .4byte gReservedSpritePaletteCount
 _08011B80: .4byte sub_80116F4
 _08011B84: .4byte sub_800F6FC
-_08011B88: .4byte gUnknown_3005090
+_08011B88: .4byte gTasks
 _08011B8C: .4byte sub_8011B94
 _08011B90: .4byte gUnknown_2023E82
 	thumb_func_end sub_8011A1C

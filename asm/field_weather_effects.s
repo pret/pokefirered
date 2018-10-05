@@ -546,7 +546,7 @@ task50_0807B6D4: @ 807B6D4
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0807B6F8 @ =gUnknown_3005090
+	ldr r1, _0807B6F8 @ =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -558,7 +558,7 @@ task50_0807B6D4: @ 807B6D4
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807B6F8: .4byte gUnknown_3005090
+_0807B6F8: .4byte gTasks
 _0807B6FC: .4byte _0807B700
 	.align 2, 0
 _0807B700:

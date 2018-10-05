@@ -3189,7 +3189,7 @@ sub_80FEBAC: @ 80FEBAC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _080FEC04 @ =gUnknown_3005090
+	ldr r1, _080FEC04 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3212,7 +3212,7 @@ sub_80FEBAC: @ 80FEBAC
 	bx r0
 	.align 2, 0
 _080FEC00: .4byte sub_80FEC54
-_080FEC04: .4byte gUnknown_3005090
+_080FEC04: .4byte gTasks
 _080FEC08: .4byte sub_80FEC0C
 	thumb_func_end sub_80FEBAC
 
@@ -3241,7 +3241,7 @@ sub_80FEC24: @ 80FEC24
 sub_80FEC38: @ 80FEC38
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, _080FEC50 @ =gUnknown_3005090
+	ldr r3, _080FEC50 @ =gTasks
 	lsls r2, r0, 2
 	adds r2, r0
 	lsls r2, 3
@@ -3251,7 +3251,7 @@ sub_80FEC38: @ 80FEC38
 	strh r0, [r2, 0x8]
 	bx lr
 	.align 2, 0
-_080FEC50: .4byte gUnknown_3005090
+_080FEC50: .4byte gTasks
 	thumb_func_end sub_80FEC38
 
 	thumb_func_start sub_80FEC54
@@ -3297,7 +3297,7 @@ sub_80FEC90: @ 80FEC90
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _080FECB4 @ =gUnknown_3005098
+	ldr r1, _080FECB4 @ =gTasks+0x8
 	adds r6, r0, r1
 	movs r0, 0
 	ldrsh r5, [r6, r0]
@@ -3309,7 +3309,7 @@ sub_80FEC90: @ 80FEC90
 	beq _080FECC2
 	b _080FED6E
 	.align 2, 0
-_080FECB4: .4byte gUnknown_3005098
+_080FECB4: .4byte gTasks+0x8
 _080FECB8:
 	cmp r5, 0x2
 	beq _080FED28
@@ -3414,7 +3414,7 @@ sub_80FED80: @ 80FED80
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080FEDA4 @ =gUnknown_3005098
+	ldr r1, _080FEDA4 @ =gTasks+0x8
 	adds r6, r0, r1
 	movs r1, 0
 	ldrsh r0, [r6, r1]
@@ -3426,7 +3426,7 @@ sub_80FED80: @ 80FED80
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080FEDA4: .4byte gUnknown_3005098
+_080FEDA4: .4byte gTasks+0x8
 _080FEDA8: .4byte _080FEDAC
 	.align 2, 0
 _080FEDAC:

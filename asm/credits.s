@@ -1727,7 +1727,7 @@ sub_80F47F8: @ 80F47F8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080F481C @ =gUnknown_3005098
+	ldr r0, _080F481C @ =gTasks+0x8
 	adds r3, r1, r0
 	ldrb r0, [r3]
 	cmp r0, 0x1
@@ -1740,7 +1740,7 @@ sub_80F47F8: @ 80F47F8
 	beq _080F4896
 	b _080F48C2
 	.align 2, 0
-_080F481C: .4byte gUnknown_3005098
+_080F481C: .4byte gTasks+0x8
 _080F4820:
 	ldr r4, _080F4848 @ =gSprites
 	ldrb r0, [r3, 0x1]
@@ -1844,7 +1844,7 @@ sub_80F48D0: @ 80F48D0
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _080F4928 @ =gUnknown_3005098
+	ldr r0, _080F4928 @ =gTasks+0x8
 	adds r4, r0
 	ldrh r0, [r4, 0x2]
 	bl FreeSpriteTilesByTag
@@ -1875,7 +1875,7 @@ _080F491E:
 	bx r0
 	.align 2, 0
 _080F4924: .4byte gUnknown_203AB40
-_080F4928: .4byte gUnknown_3005098
+_080F4928: .4byte gTasks+0x8
 _080F492C: .4byte gSprites
 	thumb_func_end sub_80F48D0
 
@@ -1903,7 +1903,7 @@ _080F494A:
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r2, _080F4990 @ =gUnknown_3005098
+	ldr r2, _080F4990 @ =gTasks+0x8
 	adds r6, r1, r2
 	ldr r1, [r4]
 	strb r0, [r1, 0x2]
@@ -1929,7 +1929,7 @@ _080F4980:
 	.align 2, 0
 _080F4988: .4byte gUnknown_203AB40
 _080F498C: .4byte sub_80F47F8
-_080F4990: .4byte gUnknown_3005098
+_080F4990: .4byte gTasks+0x8
 _080F4994: .4byte gUnknown_841431C
 _080F4998:
 	movs r4, 0x88

@@ -162,7 +162,7 @@ sub_80979A0: @ 80979A0
 	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080979C8 @ =gUnknown_3005090
+	ldr r2, _080979C8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -177,7 +177,7 @@ sub_80979A0: @ 80979A0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080979C8: .4byte gUnknown_3005090
+_080979C8: .4byte gTasks
 _080979CC: .4byte sub_8097A20
 	thumb_func_end sub_80979A0
 
@@ -204,7 +204,7 @@ sub_80979F0: @ 80979F0
 	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08097A18 @ =gUnknown_3005090
+	ldr r2, _08097A18 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -219,7 +219,7 @@ sub_80979F0: @ 80979F0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08097A18: .4byte gUnknown_3005090
+_08097A18: .4byte gTasks
 _08097A1C: .4byte sub_8097C6C
 	thumb_func_end sub_80979F0
 

@@ -2272,7 +2272,7 @@ sub_814E830: @ 814E830
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _0814E864 @ =gUnknown_3005098
+	ldr r1, _0814E864 @ =gTasks+0x8
 	adds r7, r0, r1
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -2284,7 +2284,7 @@ sub_814E830: @ 814E830
 	beq _0814E876
 	b _0814EA66
 	.align 2, 0
-_0814E864: .4byte gUnknown_3005098
+_0814E864: .4byte gTasks+0x8
 _0814E868:
 	cmp r0, 0x2
 	bne _0814E86E
@@ -2535,7 +2535,7 @@ sub_814EA7C: @ 814EA7C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0814EAC8 @ =gUnknown_3005090
+	ldr r2, _0814EAC8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2563,7 +2563,7 @@ sub_814EA7C: @ 814EA7C
 	bx r0
 	.align 2, 0
 _0814EAC4: .4byte sub_814E830
-_0814EAC8: .4byte gUnknown_3005090
+_0814EAC8: .4byte gTasks
 _0814EACC: .4byte gSaveBlock2Ptr
 _0814EAD0: .4byte 0x00000af6
 	thumb_func_end sub_814EA7C

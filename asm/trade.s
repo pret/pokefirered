@@ -12659,7 +12659,7 @@ _08053180:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080531E4 @ =gUnknown_3005090
+	ldr r2, _080531E4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -12683,7 +12683,7 @@ _080531D8:
 	.align 2, 0
 _080531DC: .4byte gUnknown_2031DAC
 _080531E0: .4byte c3_08054588
-_080531E4: .4byte gUnknown_3005090
+_080531E4: .4byte gTasks
 _080531E8:
 	ldr r0, [r7]
 	adds r0, 0x90
@@ -15012,7 +15012,7 @@ c3_08054588: @ 8054588
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080545C0 @ =gUnknown_3005098
+	ldr r1, _080545C0 @ =gTasks+0x8
 	adds r4, r0, r1
 	ldr r1, _080545C4 @ =gUnknown_826D250
 	movs r2, 0
@@ -15035,7 +15035,7 @@ c3_08054588: @ 8054588
 	adds r0, r1
 	b _080545D6
 	.align 2, 0
-_080545C0: .4byte gUnknown_3005098
+_080545C0: .4byte gTasks+0x8
 _080545C4: .4byte gUnknown_826D250
 _080545C8: .4byte gUnknown_826BB5C
 _080545CC:
@@ -15125,7 +15125,7 @@ c3_0805465C: @ 805465C
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _08054728 @ =gUnknown_3005098
+	ldr r1, _08054728 @ =gTasks+0x8
 	adds r7, r0, r1
 	movs r0, 0
 	ldrsh r4, [r7, r0]
@@ -15215,7 +15215,7 @@ _0805471E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054728: .4byte gUnknown_3005098
+_08054728: .4byte gTasks+0x8
 _0805472C: .4byte gUnknown_2031DAC
 _08054730: .4byte 0x0000010b
 	thumb_func_end c3_0805465C
@@ -15229,7 +15229,7 @@ sub_8054734: @ 8054734
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, _080547E8 @ =gUnknown_3005098
+	ldr r1, _080547E8 @ =gTasks+0x8
 	adds r6, r0, r1
 	movs r1, 0
 	ldrsh r0, [r6, r1]
@@ -15308,7 +15308,7 @@ _08054774:
 	bl BlendPalettes
 	b _0805480C
 	.align 2, 0
-_080547E8: .4byte gUnknown_3005098
+_080547E8: .4byte gTasks+0x8
 _080547EC: .4byte gUnknown_2031DAC
 _080547F0: .4byte 0x00000109
 _080547F4: .4byte 0x0000010b

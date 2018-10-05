@@ -470,7 +470,7 @@ sub_8081E68: @ 8081E68
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08081E98 @ =gUnknown_3005090
+	ldr r0, _08081E98 @ =gTasks
 	adds r1, r0
 	lsrs r0, r5, 16
 	strh r0, [r1, 0xA]
@@ -481,7 +481,7 @@ sub_8081E68: @ 8081E68
 	bx r0
 	.align 2, 0
 _08081E94: .4byte RunTrainerSeeFuncList
-_08081E98: .4byte gUnknown_3005090
+_08081E98: .4byte gTasks
 	thumb_func_end sub_8081E68
 
 	thumb_func_start sub_8081E9C
@@ -498,7 +498,7 @@ sub_8081E9C: @ 8081E9C
 	adds r1, r5, 0
 	adds r2, r6, 0
 	bl SetTaskFuncWithFollowupFunc
-	ldr r1, _08081ED8 @ =gUnknown_3005090
+	ldr r1, _08081ED8 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -512,7 +512,7 @@ sub_8081E9C: @ 8081E9C
 	bx r0
 	.align 2, 0
 _08081ED4: .4byte RunTrainerSeeFuncList
-_08081ED8: .4byte gUnknown_3005090
+_08081ED8: .4byte gTasks
 	thumb_func_end sub_8081E9C
 
 	thumb_func_start RunTrainerSeeFuncList
@@ -523,7 +523,7 @@ RunTrainerSeeFuncList: @ 8081EDC
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _08081F08 @ =gUnknown_3005090
+	ldr r1, _08081F08 @ =gTasks
 	adds r5, r0, r1
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
@@ -538,7 +538,7 @@ RunTrainerSeeFuncList: @ 8081EDC
 	bl SwitchTaskToFollowupFunc
 	b _08081F28
 	.align 2, 0
-_08081F08: .4byte gUnknown_3005090
+_08081F08: .4byte gTasks
 _08081F0C:
 	ldr r7, _08081F30 @ =gUnknown_83C7258
 _08081F0E:
@@ -1238,7 +1238,7 @@ sub_808243C: @ 808243C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080824D0 @ =gUnknown_3005090
+	ldr r1, _080824D0 @ =gTasks
 	adds r4, r0, r1
 	adds r0, r4, 0
 	adds r0, 0xA
@@ -1297,7 +1297,7 @@ _0808246E:
 	bl DestroyTask
 	b _080824E2
 	.align 2, 0
-_080824D0: .4byte gUnknown_3005090
+_080824D0: .4byte gTasks
 _080824D4: .4byte gUnknown_83C7294
 _080824D8:
 	ldr r2, [sp]
@@ -1325,7 +1325,7 @@ sub_80824EC: @ 80824EC
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _0808251C @ =gUnknown_3005098
+	ldr r1, _0808251C @ =gTasks+0x8
 	adds r0, r1
 	adds r0, 0x2
 	adds r1, r4, 0
@@ -1335,7 +1335,7 @@ sub_80824EC: @ 80824EC
 	bx r0
 	.align 2, 0
 _08082518: .4byte sub_808243C
-_0808251C: .4byte gUnknown_3005098
+_0808251C: .4byte gTasks+0x8
 	thumb_func_end sub_80824EC
 
 	thumb_func_start ScrSpecial_EndTrainerApproach

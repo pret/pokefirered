@@ -228,7 +228,7 @@ sub_80F8268: @ 80F8268
 	movs r0, 0
 	movs r1, 0x7
 	bl GetBgAttribute
-	ldr r1, _080F830C @ =gUnknown_3005090
+	ldr r1, _080F830C @ =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
 	lsls r5, 3
@@ -281,7 +281,7 @@ sub_80F8268: @ 80F8268
 	bx r0
 	.align 2, 0
 _080F8308: .4byte sub_80F83D0
-_080F830C: .4byte gUnknown_3005090
+_080F830C: .4byte gTasks
 _080F8310: .4byte 0x00003e41
 _080F8314: .4byte 0x00002020
 	thumb_func_end sub_80F8268
@@ -388,7 +388,7 @@ sub_80F83D0: @ 80F83D0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080F83F8 @ =gUnknown_3005098
+	ldr r1, _080F83F8 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -402,7 +402,7 @@ _080F83EC:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080F83F8: .4byte gUnknown_3005098
+_080F83F8: .4byte gTasks+0x8
 _080F83FC: .4byte _080F8400
 	.align 2, 0
 _080F8400:

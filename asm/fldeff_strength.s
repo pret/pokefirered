@@ -70,7 +70,7 @@ sub_80D0860: @ 80D0860
 	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080D0894 @ =gUnknown_3005090
+	ldr r2, _080D0894 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -91,7 +91,7 @@ sub_80D0860: @ 80D0860
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0894: .4byte gUnknown_3005090
+_080D0894: .4byte gTasks
 _080D0898: .4byte sub_80D08A8
 _080D089C: .4byte gUnknown_20386E0
 _080D08A0: .4byte gPlayerParty

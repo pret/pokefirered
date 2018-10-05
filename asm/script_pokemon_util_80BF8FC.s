@@ -15,7 +15,7 @@ sub_80BF8FC: @ 80BF8FC
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080BF938 @ =gUnknown_3005090
+	ldr r2, _080BF938 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -33,7 +33,7 @@ sub_80BF8FC: @ 80BF8FC
 	bx r0
 	.align 2, 0
 _080BF934: .4byte sub_80BF97C
-_080BF938: .4byte gUnknown_3005090
+_080BF938: .4byte gTasks
 	thumb_func_end sub_80BF8FC
 
 	thumb_func_start sub_80BF93C
@@ -46,7 +46,7 @@ sub_80BF93C: @ 80BF93C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080BF978 @ =gUnknown_3005090
+	ldr r2, _080BF978 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -64,7 +64,7 @@ sub_80BF93C: @ 80BF93C
 	bx r0
 	.align 2, 0
 _080BF974: .4byte sub_80BF97C
-_080BF978: .4byte gUnknown_3005090
+_080BF978: .4byte gTasks
 	thumb_func_end sub_80BF93C
 
 	thumb_func_start sub_80BF97C
@@ -82,7 +82,7 @@ sub_80BF97C: @ 80BF97C
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r1, _080BF9B8 @ =gUnknown_3005090
+	ldr r1, _080BF9B8 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -97,7 +97,7 @@ _080BF9AC:
 	bx r0
 	.align 2, 0
 _080BF9B4: .4byte gUnknown_2037AB8
-_080BF9B8: .4byte gUnknown_3005090
+_080BF9B8: .4byte gTasks
 	thumb_func_end sub_80BF97C
 
 	thumb_func_start sub_80BF9BC

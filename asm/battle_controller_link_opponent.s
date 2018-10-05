@@ -5676,7 +5676,7 @@ sub_803D454: @ 803D454
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, _0803D54C @ =gUnknown_3005090
+	ldr r4, _0803D54C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -5728,7 +5728,7 @@ _0803D53C: .4byte gSprites
 _0803D540: .4byte sub_8075590
 _0803D544: .4byte sub_803D648
 _0803D548: .4byte sub_803D564
-_0803D54C: .4byte gUnknown_3005090
+_0803D54C: .4byte gTasks
 _0803D550: .4byte gUnknown_2024018
 _0803D554: .4byte gUnknown_2024000
 _0803D558: .4byte sub_80491B0
@@ -5748,7 +5748,7 @@ sub_803D564: @ 803D564
 	ldr r7, _0803D5BC @ =gActiveBattler
 	ldrb r0, [r7]
 	mov r9, r0
-	ldr r1, _0803D5C0 @ =gUnknown_3005090
+	ldr r1, _0803D5C0 @ =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
 	add r0, r8
@@ -5783,7 +5783,7 @@ _0803D59E:
 	b _0803D610
 	.align 2, 0
 _0803D5BC: .4byte gActiveBattler
-_0803D5C0: .4byte gUnknown_3005090
+_0803D5C0: .4byte gTasks
 _0803D5C4: .4byte gBattleTypeFlags
 _0803D5C8: .4byte gUnknown_2022BC4
 _0803D5CC: .4byte gBattlerPartyIndexes
@@ -6060,7 +6060,7 @@ RecordedOpponentHandleCmd49: @ 803D7D8
 	ands r0, r1
 	cmp r0, 0
 	beq _0803D80A
-	ldr r2, _0803D81C @ =gUnknown_3005090
+	ldr r2, _0803D81C @ =gTasks
 	ldr r0, _0803D820 @ =gUnknown_2024000
 	adds r0, r3, r0
 	ldrb r1, [r0]
@@ -6077,7 +6077,7 @@ _0803D80A:
 	.align 2, 0
 _0803D814: .4byte gUnknown_2024018
 _0803D818: .4byte gActiveBattler
-_0803D81C: .4byte gUnknown_3005090
+_0803D81C: .4byte gTasks
 _0803D820: .4byte gUnknown_2024000
 _0803D824: .4byte sub_80491B0
 	thumb_func_end RecordedOpponentHandleCmd49

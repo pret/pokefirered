@@ -15,7 +15,7 @@ sub_813EC8C: @ 813EC8C
 	lsls r1, r4, 2
 	adds r0, r1, r4
 	lsls r3, r0, 3
-	ldr r5, _0813ECE4 @ =gUnknown_3005098
+	ldr r5, _0813ECE4 @ =gTasks+0x8
 	adds r6, r1, 0
 	movs r1, 0
 _0813ECA2:
@@ -36,7 +36,7 @@ _0813ECA2:
 	cmp r0, 0x1
 	bne _0813ECFC
 	bl sub_813F3EC
-	ldr r0, _0813ECE8 @ =gUnknown_3005090
+	ldr r0, _0813ECE8 @ =gTasks
 	adds r1, r6, r4
 	lsls r1, 3
 	adds r1, r0
@@ -49,8 +49,8 @@ _0813ECA2:
 	b _0813ED08
 	.align 2, 0
 _0813ECE0: .4byte gMapHeader
-_0813ECE4: .4byte gUnknown_3005098
-_0813ECE8: .4byte gUnknown_3005090
+_0813ECE4: .4byte gTasks+0x8
+_0813ECE8: .4byte gTasks
 _0813ECEC: .4byte sub_813EDB0
 _0813ECF0:
 	ldr r0, _0813ECF8 @ =sub_813ED3C
@@ -99,7 +99,7 @@ sub_813ED3C: @ 813ED3C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r6, r1, 3
-	ldr r7, _0813ED80 @ =gUnknown_3005098
+	ldr r7, _0813ED80 @ =gTasks+0x8
 	adds r4, r6, r7
 	movs r1, 0x6
 	ldrsh r0, [r4, r1]
@@ -126,7 +126,7 @@ sub_813ED3C: @ 813ED3C
 	str r1, [r0]
 	b _0813EDA8
 	.align 2, 0
-_0813ED80: .4byte gUnknown_3005098
+_0813ED80: .4byte gTasks+0x8
 _0813ED84: .4byte sub_813F364
 _0813ED88:
 	movs r0, 0x41
@@ -158,7 +158,7 @@ sub_813EDB0: @ 813EDB0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r5, r1, 3
-	ldr r6, _0813EDE4 @ =gUnknown_3005098
+	ldr r6, _0813EDE4 @ =gTasks+0x8
 	adds r4, r5, r6
 	movs r1, 0x6
 	ldrsh r0, [r4, r1]
@@ -178,7 +178,7 @@ sub_813EDB0: @ 813EDB0
 	str r1, [r0]
 	b _0813EE0E
 	.align 2, 0
-_0813EDE4: .4byte gUnknown_3005098
+_0813EDE4: .4byte gTasks+0x8
 _0813EDE8: .4byte sub_813F3A8
 _0813EDEC:
 	movs r0, 0x41
@@ -220,7 +220,7 @@ sub_813EE14: @ 813EE14
 	mov r0, sp
 	adds r1, r4, 0
 	bl PlayerGetDestCoords
-	ldr r1, _0813EEC8 @ =gUnknown_3005090
+	ldr r1, _0813EEC8 @ =gTasks
 	mov r2, r9
 	lsls r0, r2, 2
 	add r0, r9
@@ -292,7 +292,7 @@ _0813EE4E:
 	bl sub_813EF40
 	b _0813EF2E
 	.align 2, 0
-_0813EEC8: .4byte gUnknown_3005090
+_0813EEC8: .4byte gTasks
 _0813EECC:
 	lsls r0, r5, 16
 	asrs r1, r0, 16
@@ -325,7 +325,7 @@ _0813EEF2:
 _0813EF04:
 	mov r0, r9
 	bl sub_813F108
-	ldr r0, _0813EF24 @ =gUnknown_3005090
+	ldr r0, _0813EF24 @ =gTasks
 	mov r2, r9
 	lsls r1, r2, 2
 	add r1, r9
@@ -338,7 +338,7 @@ _0813EF04:
 	movs r0, 0
 	b _0813EF30
 	.align 2, 0
-_0813EF24: .4byte gUnknown_3005090
+_0813EF24: .4byte gTasks
 _0813EF28:
 	mov r0, r9
 	bl sub_813EF9C
@@ -364,7 +364,7 @@ sub_813EF40: @ 813EF40
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _0813EF8C @ =gUnknown_3005098
+	ldr r0, _0813EF8C @ =gTasks+0x8
 	adds r4, r0
 	adds r0, r5, 0
 	movs r1, 0x1
@@ -393,7 +393,7 @@ sub_813EF40: @ 813EF40
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813EF8C: .4byte gUnknown_3005098
+_0813EF8C: .4byte gTasks+0x8
 _0813EF90: .4byte gUnknown_20370C0
 _0813EF94: .4byte gUnknown_20370C2
 _0813EF98: .4byte gUnknown_20370C4
@@ -407,7 +407,7 @@ sub_813EF9C: @ 813EF9C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0813EFEC @ =gUnknown_3005098
+	ldr r0, _0813EFEC @ =gTasks+0x8
 	adds r1, r0
 	ldrh r3, [r1, 0x2]
 	ldrh r2, [r1]
@@ -445,7 +445,7 @@ _0813EFD8:
 	movs r0, 0x2
 	b _0813EFFA
 	.align 2, 0
-_0813EFEC: .4byte gUnknown_3005098
+_0813EFEC: .4byte gTasks+0x8
 _0813EFF0:
 	cmp r0, 0x3
 	ble _0813EFF8
@@ -768,7 +768,7 @@ sub_813F220: @ 813F220
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0813F254 @ =gUnknown_3005098
+	ldr r0, _0813F254 @ =gTasks+0x8
 	adds r3, r1, r0
 	movs r1, 0x4
 	ldrsh r0, [r3, r1]
@@ -781,7 +781,7 @@ sub_813F220: @ 813F220
 	strh r0, [r3, 0x4]
 	b _0813F2E2
 	.align 2, 0
-_0813F254: .4byte gUnknown_3005098
+_0813F254: .4byte gTasks+0x8
 _0813F258:
 	movs r1, 0
 	ldrsh r0, [r3, r1]

@@ -312,7 +312,7 @@ _080F699A:
 	adds r1, r6, 0
 	mov r3, r9
 	bl sub_80F6AD0
-	ldr r2, _080F69E4 @ =gUnknown_3005090
+	ldr r2, _080F69E4 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -332,7 +332,7 @@ _080F69D2:
 	bx r0
 	.align 2, 0
 _080F69E0: .4byte task_free_buf_after_copying_tile_data_to_vram
-_080F69E4: .4byte gUnknown_3005090
+_080F69E4: .4byte gTasks
 	thumb_func_end sub_80F696C
 
 	thumb_func_start sub_80F69E8
@@ -375,7 +375,7 @@ _080F6A14:
 	adds r1, r5, 0
 	mov r3, r8
 	bl sub_80F6AD0
-	ldr r2, _080F6A60 @ =gUnknown_3005090
+	ldr r2, _080F6A60 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -394,7 +394,7 @@ _080F6A4E:
 	bx r0
 	.align 2, 0
 _080F6A5C: .4byte task_free_buf_after_copying_tile_data_to_vram
-_080F6A60: .4byte gUnknown_3005090
+_080F6A60: .4byte gTasks
 	thumb_func_end sub_80F69E8
 
 	thumb_func_start task_free_buf_after_copying_tile_data_to_vram
@@ -402,7 +402,7 @@ task_free_buf_after_copying_tile_data_to_vram: @ 80F6A64
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _080F6A9C @ =gUnknown_3005090
+	ldr r1, _080F6A9C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -424,7 +424,7 @@ _080F6A94:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F6A9C: .4byte gUnknown_3005090
+_080F6A9C: .4byte gTasks
 	thumb_func_end task_free_buf_after_copying_tile_data_to_vram
 
 	thumb_func_start malloc_and_decompress

@@ -236,7 +236,7 @@ Task_WeatherInit: @ 8079DBC
 	adds r0, r1
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r1, _08079E04 @ =gUnknown_3005090
+	ldr r1, _08079E04 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -250,7 +250,7 @@ _08079DF4:
 	.align 2, 0
 _08079DFC: .4byte gUnknown_2037F34
 _08079E00: .4byte gUnknown_83C2BC0
-_08079E04: .4byte gUnknown_3005090
+_08079E04: .4byte gTasks
 _08079E08: .4byte Task_WeatherMain
 	thumb_func_end Task_WeatherInit
 

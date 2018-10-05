@@ -2758,7 +2758,7 @@ sub_80717A8: @ 80717A8
 	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _08071804 @ =gUnknown_3005090
+	ldr r1, _08071804 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -2774,7 +2774,7 @@ sub_80717A8: @ 80717A8
 	b _08071810
 	.align 2, 0
 _08071800: .4byte sub_80718B8
-_08071804: .4byte gUnknown_3005090
+_08071804: .4byte gTasks
 _08071808:
 	movs r0, 0
 	strh r0, [r1, 0xE]
@@ -2785,7 +2785,7 @@ _08071810:
 	lsls r4, r5, 2
 	cmp r6, r7
 	bcs _08071828
-	ldr r0, _08071858 @ =gUnknown_3005090
+	ldr r0, _08071858 @ =gTasks
 	adds r1, r4, r5
 	lsls r1, 3
 	adds r1, r0
@@ -2798,7 +2798,7 @@ _08071828:
 	movs r1, 0x5
 	mov r2, r10
 	bl SetWordTaskArg
-	ldr r0, _08071858 @ =gUnknown_3005090
+	ldr r0, _08071858 @ =gTasks
 	adds r1, r4, r5
 	lsls r1, 3
 	adds r1, r0
@@ -2817,7 +2817,7 @@ _08071828:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08071858: .4byte gUnknown_3005090
+_08071858: .4byte gTasks
 	thumb_func_end sub_80717A8
 
 	thumb_func_start sub_807185C
@@ -2827,7 +2827,7 @@ sub_807185C: @ 807185C
 	lsrs r3, r0, 24
 	movs r2, 0
 	ldr r4, _08071880 @ =sub_80718B8
-	ldr r1, _08071884 @ =gUnknown_3005090
+	ldr r1, _08071884 @ =gTasks
 _08071868:
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0x1
@@ -2843,7 +2843,7 @@ _08071868:
 	b _08071892
 	.align 2, 0
 _08071880: .4byte sub_80718B8
-_08071884: .4byte gUnknown_3005090
+_08071884: .4byte gTasks
 _08071888:
 	adds r1, 0x28
 	adds r2, 0x1
@@ -2883,7 +2883,7 @@ sub_80718B8: @ 80718B8
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0807190C @ =gUnknown_3005098
+	ldr r1, _0807190C @ =gTasks+0x8
 	adds r4, r0, r1
 	adds r0, r5, 0
 	movs r1, 0x5
@@ -2916,7 +2916,7 @@ sub_80718B8: @ 80718B8
 	bl DestroyTask
 	b _08071930
 	.align 2, 0
-_0807190C: .4byte gUnknown_3005098
+_0807190C: .4byte gTasks+0x8
 _08071910:
 	ldrh r0, [r4, 0x4]
 	adds r1, r0

@@ -35,7 +35,7 @@ DoPokeballSendOutAnimation: @ 804A938
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0804A99C @ =gUnknown_3005090
+	ldr r2, _0804A99C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -53,7 +53,7 @@ _0804A98C: .4byte gUnknown_2024005
 _0804A990: .4byte gUnknown_2024018
 _0804A994: .4byte gActiveBattler
 _0804A998: .4byte sub_804A9A0
-_0804A99C: .4byte gUnknown_3005090
+_0804A99C: .4byte gTasks
 	thumb_func_end DoPokeballSendOutAnimation
 
 	thumb_func_start sub_804A9A0
@@ -69,7 +69,7 @@ sub_804A9A0: @ 804A9A0
 	str r0, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
-	ldr r1, _0804A9D4 @ =gUnknown_3005090
+	ldr r1, _0804A9D4 @ =gTasks
 	ldr r2, [sp]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -84,7 +84,7 @@ sub_804A9A0: @ 804A9A0
 	strh r0, [r1, 0x8]
 	b _0804ABB8
 	.align 2, 0
-_0804A9D4: .4byte gUnknown_3005090
+_0804A9D4: .4byte gTasks
 _0804A9D8:
 	ldrh r0, [r1, 0xC]
 	mov r9, r0
@@ -294,7 +294,7 @@ _0804AB6C:
 	mov r0, sp
 	ldrh r0, [r0]
 	strh r0, [r4, 0x6]
-	ldr r1, _0804ABCC @ =gUnknown_3005090
+	ldr r1, _0804ABCC @ =gTasks
 	ldr r2, [sp]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -302,7 +302,7 @@ _0804AB6C:
 	adds r0, r1
 	ldrb r1, [r5]
 	strh r1, [r0, 0x10]
-	ldr r1, _0804ABD0 @ =nullsub_43
+	ldr r1, _0804ABD0 @ =TaskDummy
 	str r1, [r0]
 	movs r0, 0x36
 	bl PlaySE
@@ -317,8 +317,8 @@ _0804ABB8:
 	bx r0
 	.align 2, 0
 _0804ABC8: .4byte 0x0000ffd8
-_0804ABCC: .4byte gUnknown_3005090
-_0804ABD0: .4byte nullsub_43
+_0804ABCC: .4byte gTasks
+_0804ABD0: .4byte TaskDummy
 	thumb_func_end sub_804A9A0
 
 	thumb_func_start SpriteCB_TestBallThrow
@@ -333,7 +333,7 @@ SpriteCB_TestBallThrow: @ 804ABD4
 	cmp r0, 0
 	beq _0804AC74
 	ldrb r6, [r7, 0x6]
-	ldr r1, _0804AC80 @ =gUnknown_3005090
+	ldr r1, _0804AC80 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -404,7 +404,7 @@ _0804AC74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804AC80: .4byte gUnknown_3005090
+_0804AC80: .4byte gTasks
 _0804AC84: .4byte sub_804AC88
 	thumb_func_end SpriteCB_TestBallThrow
 
@@ -936,7 +936,7 @@ Task_PlayCryWhenReleasedFromBall: @ 804B070
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _0804B0A4 @ =gUnknown_3005090
+	ldr r2, _0804B0A4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -959,7 +959,7 @@ Task_PlayCryWhenReleasedFromBall: @ 804B070
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0804B0A4: .4byte gUnknown_3005090
+_0804B0A4: .4byte gTasks
 _0804B0A8: .4byte _0804B0AC
 	.align 2, 0
 _0804B0AC:
@@ -1033,7 +1033,7 @@ _0804B166:
 	b _0804B1C6
 _0804B174:
 	bl StopCryAndClearCrySongs
-	ldr r1, _0804B18C @ =gUnknown_3005090
+	ldr r1, _0804B18C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1044,7 +1044,7 @@ _0804B174:
 	strh r1, [r0, 0x26]
 	b _0804B262
 	.align 2, 0
-_0804B18C: .4byte gUnknown_3005090
+_0804B18C: .4byte gTasks
 _0804B190:
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1104,7 +1104,7 @@ _0804B1F8:
 	cmp r0, 0
 	bne _0804B262
 	bl StopCryAndClearCrySongs
-	ldr r0, _0804B21C @ =gUnknown_3005090
+	ldr r0, _0804B21C @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1116,7 +1116,7 @@ _0804B1F8:
 	strh r0, [r1, 0x26]
 	b _0804B262
 	.align 2, 0
-_0804B21C: .4byte gUnknown_3005090
+_0804B21C: .4byte gTasks
 _0804B220:
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1345,7 +1345,7 @@ _0804B3F2:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0804B478 @ =gUnknown_3005090
+	ldr r2, _0804B478 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1404,7 +1404,7 @@ _0804B420:
 	bx r0
 	.align 2, 0
 _0804B474: .4byte Task_PlayCryWhenReleasedFromBall
-_0804B478: .4byte gUnknown_3005090
+_0804B478: .4byte gTasks
 _0804B47C: .4byte gUnknown_2023D44
 _0804B480: .4byte gSprites
 	thumb_func_end sub_804B268

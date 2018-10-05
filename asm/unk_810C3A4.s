@@ -25,7 +25,7 @@ sub_810C3B8: @ 810C3B8
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _0810C43C @ =gUnknown_3005090
+	ldr r1, _0810C43C @ =gTasks
 	adds r5, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
@@ -84,7 +84,7 @@ _0810C436:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810C43C: .4byte gUnknown_3005090
+_0810C43C: .4byte gTasks
 _0810C440: .4byte gUnknown_2036E38
 	thumb_func_end sub_810C3B8
 

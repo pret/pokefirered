@@ -32474,7 +32474,7 @@ _0802DA72:
 	ldr r0, _0802DAB4 @ =sub_8011100
 	cmp r1, r0
 	bne _0802DB6C
-	ldr r2, _0802DAB8 @ =gUnknown_3005090
+	ldr r2, _0802DAB8 @ =gTasks
 	ldr r4, _0802DABC @ =gUnknown_2023E82
 	ldrb r1, [r4, 0x1]
 	lsls r0, r1, 2
@@ -32500,7 +32500,7 @@ _0802DA72:
 _0802DAAC: .4byte gUnknown_2037AB8
 _0802DAB0: .4byte gMain
 _0802DAB4: .4byte sub_8011100
-_0802DAB8: .4byte gUnknown_3005090
+_0802DAB8: .4byte gTasks
 _0802DABC: .4byte gUnknown_2023E82
 _0802DAC0: .4byte 0x05006000
 _0802DAC4: .4byte sub_80116F4

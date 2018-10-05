@@ -153,7 +153,7 @@ _08150558:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08150590 @ =gUnknown_3005090
+	ldr r2, _08150590 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -166,7 +166,7 @@ _08150580: .4byte gUnknown_2036E38
 _08150584: .4byte gSprites
 _08150588: .4byte gUnknown_3005E88
 _0815058C: .4byte sub_81505C4
-_08150590: .4byte gUnknown_3005090
+_08150590: .4byte gTasks
 _08150594:
 	movs r0, 0x4
 	bl sub_805C808
@@ -213,7 +213,7 @@ sub_81505C4: @ 81505C4
 	lsls r0, 2
 	ldr r1, _08150614 @ =gSprites
 	adds r7, r0, r1
-	ldr r1, _08150618 @ =gUnknown_3005090
+	ldr r1, _08150618 @ =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
 	add r0, r8
@@ -232,7 +232,7 @@ sub_81505C4: @ 81505C4
 _0815060C: .4byte gUnknown_2037078
 _08150610: .4byte gUnknown_2036E38
 _08150614: .4byte gSprites
-_08150618: .4byte gUnknown_3005090
+_08150618: .4byte gTasks
 _0815061C:
 	cmp r6, 0x2
 	beq _0815067C

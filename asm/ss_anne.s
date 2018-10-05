@@ -15,7 +15,7 @@ sub_815D334: @ 815D334
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0815D360 @ =gUnknown_3005090
+	ldr r2, _0815D360 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -26,7 +26,7 @@ sub_815D334: @ 815D334
 	bx r0
 	.align 2, 0
 _0815D35C: .4byte sub_815D364
-_0815D360: .4byte gUnknown_3005090
+_0815D360: .4byte gTasks
 	thumb_func_end sub_815D334
 
 	thumb_func_start sub_815D364
@@ -37,7 +37,7 @@ sub_815D364: @ 815D364
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r4, r1, 3
-	ldr r5, _0815D39C @ =gUnknown_3005098
+	ldr r5, _0815D39C @ =gTasks+0x8
 	adds r1, r4, r5
 	ldrh r0, [r1]
 	subs r0, 0x1
@@ -58,7 +58,7 @@ _0815D394:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815D39C: .4byte gUnknown_3005098
+_0815D39C: .4byte gTasks+0x8
 _0815D3A0: .4byte gUnknown_8479C58
 _0815D3A4: .4byte sub_815D3A8
 	thumb_func_end sub_815D364
@@ -72,7 +72,7 @@ sub_815D3A8: @ 815D3A8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r6, r1, 3
-	ldr r7, _0815D424 @ =gUnknown_3005098
+	ldr r7, _0815D424 @ =gTasks+0x8
 	adds r5, r6, r7
 	ldrh r1, [r5, 0x2]
 	adds r1, 0x1
@@ -126,7 +126,7 @@ _0815D3D6:
 	str r1, [r0]
 	b _0815D44A
 	.align 2, 0
-_0815D424: .4byte gUnknown_3005098
+_0815D424: .4byte gTasks+0x8
 _0815D428: .4byte gSaveBlock1Ptr
 _0815D42C: .4byte gUnknown_2036E38
 _0815D430: .4byte gSprites
@@ -155,7 +155,7 @@ sub_815D454: @ 815D454
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
-	ldr r0, _0815D490 @ =gUnknown_3005098
+	ldr r0, _0815D490 @ =gTasks+0x8
 	adds r1, r0
 	ldrh r0, [r1, 0x6]
 	adds r0, 0x1
@@ -177,7 +177,7 @@ _0815D48A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815D490: .4byte gUnknown_3005098
+_0815D490: .4byte gTasks+0x8
 _0815D494: .4byte 0x00000fa1
 	thumb_func_end sub_815D454
 

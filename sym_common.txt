@@ -198,11 +198,10 @@ gUnknown_300507C: @ 300507C
 gUnknown_3005080: @ 3005080
 	.space 0x10
 
-gUnknown_3005090: @ 3005090
-	.space 0x8
-
-gUnknown_3005098: @ 3005098
-	.space 0x298
+	.include "task.o"
+	
+	@ what is this?
+	.space 0x20
 
 gUnknown_3005330: @ 3005330
 	.space 0x4

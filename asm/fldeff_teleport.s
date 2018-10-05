@@ -60,7 +60,7 @@ FldEff_UseTeleport: @ 80F6750
 	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F6778 @ =gUnknown_3005090
+	ldr r2, _080F6778 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -75,7 +75,7 @@ FldEff_UseTeleport: @ 80F6750
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F6778: .4byte gUnknown_3005090
+_080F6778: .4byte gTasks
 _080F677C: .4byte sub_80F6780
 	thumb_func_end FldEff_UseTeleport
 

@@ -218,7 +218,7 @@ _08133A8E:
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
-	ldr r1, _08133B34 @ =gUnknown_3005098
+	ldr r1, _08133B34 @ =gTasks+0x8
 	adds r7, r0, r1
 	movs r0, 0
 	strb r0, [r7]
@@ -289,7 +289,7 @@ _08133B1C:
 	.align 2, 0
 _08133B2C: .4byte gUnknown_8463308
 _08133B30: .4byte sub_8133BA4
-_08133B34: .4byte gUnknown_3005098
+_08133B34: .4byte gTasks+0x8
 _08133B38: .4byte 0x0000ffff
 _08133B3C: .4byte gSprites
 	thumb_func_end AddScrollIndicatorArrowPair
@@ -355,7 +355,7 @@ sub_8133BA4: @ 8133BA4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08133BD4 @ =gUnknown_3005098
+	ldr r0, _08133BD4 @ =gTasks+0x8
 	adds r4, r1, r0
 	ldr r0, [r4, 0x4]
 	ldrh r5, [r0]
@@ -374,7 +374,7 @@ sub_8133BA4: @ 8133BA4
 	orrs r1, r2
 	b _08133BF2
 	.align 2, 0
-_08133BD4: .4byte gUnknown_3005098
+_08133BD4: .4byte gTasks+0x8
 _08133BD8: .4byte gSprites
 _08133BDC:
 	ldr r3, _08133C10 @ =gSprites
@@ -432,7 +432,7 @@ RemoveScrollIndicatorArrowPair: @ 8133C30
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _08133C84 @ =gUnknown_3005098
+	ldr r1, _08133C84 @ =gTasks+0x8
 	adds r5, r0, r1
 	ldrh r0, [r5, 0xE]
 	ldr r4, _08133C88 @ =0x0000ffff
@@ -464,7 +464,7 @@ _08133C58:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08133C84: .4byte gUnknown_3005098
+_08133C84: .4byte gTasks+0x8
 _08133C88: .4byte 0x0000ffff
 _08133C8C: .4byte gSprites
 	thumb_func_end RemoveScrollIndicatorArrowPair
@@ -766,7 +766,7 @@ _08133EA6:
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _08133F94 @ =gUnknown_3005098
+	ldr r1, _08133F94 @ =gTasks+0x8
 	adds r5, r0, r1
 	ldrh r0, [r6, 0x6]
 	movs r3, 0
@@ -870,7 +870,7 @@ _08133F7E:
 	.align 2, 0
 _08133F8C: .4byte gUnknown_8463308
 _08133F90: .4byte nullsub_94
-_08133F94: .4byte gUnknown_3005098
+_08133F94: .4byte gTasks+0x8
 _08133F98: .4byte gDummySpriteTemplate
 _08133F9C: .4byte gSprites
 _08133FA0: .4byte 0x0000ffff
@@ -888,7 +888,7 @@ ListMenuUpdateRedOutlineCursorObject: @ 8133FA4
 	lsls r3, r0, 2
 	adds r3, r0
 	lsls r3, 3
-	ldr r0, _08133FE0 @ =gUnknown_3005098
+	ldr r0, _08133FE0 @ =gTasks+0x8
 	adds r3, r0
 	ldr r5, _08133FE4 @ =gSprites
 	ldrb r4, [r3, 0xC]
@@ -909,7 +909,7 @@ ListMenuUpdateRedOutlineCursorObject: @ 8133FA4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08133FE0: .4byte gUnknown_3005098
+_08133FE0: .4byte gTasks+0x8
 _08133FE4: .4byte gSprites
 	thumb_func_end ListMenuUpdateRedOutlineCursorObject
 
@@ -922,7 +922,7 @@ ListMenuRemoveRedOutlineCursorObject: @ 8133FE8
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08134034 @ =gUnknown_3005098
+	ldr r1, _08134034 @ =gTasks+0x8
 	adds r4, r0, r1
 	ldr r0, [r4, 0x8]
 	bl Free
@@ -950,7 +950,7 @@ _08134016:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08134034: .4byte gUnknown_3005098
+_08134034: .4byte gTasks+0x8
 _08134038: .4byte 0x0000ffff
 _0813403C: .4byte gSprites
 	thumb_func_end ListMenuRemoveRedOutlineCursorObject
@@ -1043,7 +1043,7 @@ _081340D6:
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _08134168 @ =gUnknown_3005098
+	ldr r1, _08134168 @ =gTasks+0x8
 	adds r4, r0, r1
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2]
@@ -1105,7 +1105,7 @@ _08134156:
 	.align 2, 0
 _08134160: .4byte gUnknown_8463308
 _08134164: .4byte nullsub_95
-_08134168: .4byte gUnknown_3005098
+_08134168: .4byte gTasks+0x8
 _0813416C: .4byte gUnknown_84632F0
 _08134170: .4byte gSprites
 _08134174: .4byte 0x0000ffff
@@ -1119,7 +1119,7 @@ ListMenuUpdateRedArrowCursorObject: @ 8134178
 	lsls r3, r0, 2
 	adds r3, r0
 	lsls r3, 3
-	ldr r0, _081341A8 @ =gUnknown_3005098
+	ldr r0, _081341A8 @ =gTasks+0x8
 	adds r3, r0
 	ldr r5, _081341AC @ =gSprites
 	ldrb r4, [r3]
@@ -1138,7 +1138,7 @@ ListMenuUpdateRedArrowCursorObject: @ 8134178
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081341A8: .4byte gUnknown_3005098
+_081341A8: .4byte gTasks+0x8
 _081341AC: .4byte gSprites
 	thumb_func_end ListMenuUpdateRedArrowCursorObject
 
@@ -1151,7 +1151,7 @@ ListMenuRemoveRedArrowCursorObject: @ 81341B0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _081341F4 @ =gUnknown_3005098
+	ldr r1, _081341F4 @ =gTasks+0x8
 	adds r4, r0, r1
 	ldrh r0, [r4, 0x2]
 	ldr r6, _081341F8 @ =0x0000ffff
@@ -1177,7 +1177,7 @@ _081341D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081341F4: .4byte gUnknown_3005098
+_081341F4: .4byte gTasks+0x8
 _081341F8: .4byte 0x0000ffff
 _081341FC: .4byte gSprites
 	thumb_func_end ListMenuRemoveRedArrowCursorObject

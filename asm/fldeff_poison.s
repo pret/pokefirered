@@ -13,7 +13,7 @@ task50_overworld_poison_effect: @ 80A0DD8
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
-	ldr r1, _080A0DFC @ =gUnknown_3005098
+	ldr r1, _080A0DFC @ =gTasks+0x8
 	adds r1, r0, r1
 	movs r3, 0
 	ldrsh r0, [r1, r3]
@@ -25,7 +25,7 @@ task50_overworld_poison_effect: @ 80A0DD8
 	beq _080A0E06
 	b _080A0E32
 	.align 2, 0
-_080A0DFC: .4byte gUnknown_3005098
+_080A0DFC: .4byte gTasks+0x8
 _080A0E00:
 	cmp r0, 0x2
 	beq _080A0E2A

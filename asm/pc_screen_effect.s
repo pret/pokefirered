@@ -90,7 +90,7 @@ sub_80A0AC0: @ 80A0AC0
 	lsls r0, 24
 	lsrs r0, 24
 	adds r2, r0, 0
-	ldr r1, _080A0B08 @ =gUnknown_3005090
+	ldr r1, _080A0B08 @ =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -116,7 +116,7 @@ _080A0AF8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A0B08: .4byte gUnknown_3005090
+_080A0B08: .4byte gTasks
 	thumb_func_end sub_80A0AC0
 
 	thumb_func_start sub_80A0B0C
@@ -127,7 +127,7 @@ sub_80A0B0C: @ 80A0B0C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080A0B30 @ =gUnknown_3005090
+	ldr r1, _080A0B30 @ =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -139,7 +139,7 @@ sub_80A0B0C: @ 80A0B0C
 	beq _080A0B3E
 	b _080A0C5A
 	.align 2, 0
-_080A0B30: .4byte gUnknown_3005090
+_080A0B30: .4byte gTasks
 _080A0B34:
 	cmp r0, 0x2
 	beq _080A0BAE
@@ -306,7 +306,7 @@ sub_80A0C78: @ 80A0C78
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080A0C9C @ =gUnknown_3005090
+	ldr r1, _080A0C9C @ =gTasks
 	adds r4, r0, r1
 	movs r0, 0x8
 	ldrsh r1, [r4, r0]
@@ -318,7 +318,7 @@ sub_80A0C78: @ 80A0C78
 	beq _080A0CAA
 	b _080A0DA8
 	.align 2, 0
-_080A0C9C: .4byte gUnknown_3005090
+_080A0C9C: .4byte gTasks
 _080A0CA0:
 	cmp r1, 0x2
 	beq _080A0D02

@@ -4147,7 +4147,7 @@ sub_808B21C: @ 808B21C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _0808B24C @ =gUnknown_83CD908
-	ldr r2, _0808B250 @ =gUnknown_3005090
+	ldr r2, _0808B250 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4168,7 +4168,7 @@ _0808B22E:
 	bx r0
 	.align 2, 0
 _0808B24C: .4byte gUnknown_83CD908
-_0808B250: .4byte gUnknown_3005090
+_0808B250: .4byte gTasks
 	thumb_func_end sub_808B21C
 
 	thumb_func_start sub_808B254

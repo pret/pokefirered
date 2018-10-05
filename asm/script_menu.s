@@ -409,7 +409,7 @@ _0809CC44:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, _0809CC70 @ =gUnknown_3005090
+	ldr r1, _0809CC70 @ =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -422,12 +422,12 @@ _0809CC44:
 	.align 2, 0
 _0809CC68: .4byte gUnknown_2039988
 _0809CC6C: .4byte sub_809CC98
-_0809CC70: .4byte gUnknown_3005090
+_0809CC70: .4byte gTasks
 _0809CC74:
 	movs r0, 0
 _0809CC76:
 	strh r0, [r1, 0x12]
-	ldr r1, _0809CC94 @ =gUnknown_3005090
+	ldr r1, _0809CC94 @ =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -440,7 +440,7 @@ _0809CC76:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809CC94: .4byte gUnknown_3005090
+_0809CC94: .4byte gTasks
 	thumb_func_end sub_809CC18
 
 	thumb_func_start sub_809CC98
@@ -451,7 +451,7 @@ sub_809CC98: @ 809CC98
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _0809CCC4 @ =gUnknown_3005098
+	ldr r1, _0809CCC4 @ =gTasks+0x8
 	adds r5, r0, r1
 	ldr r0, _0809CCC8 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -467,7 +467,7 @@ sub_809CC98: @ 809CC98
 	strb r0, [r1]
 	b _0809CD3C
 	.align 2, 0
-_0809CCC4: .4byte gUnknown_3005098
+_0809CCC4: .4byte gTasks+0x8
 _0809CCC8: .4byte gUnknown_2037AB8
 _0809CCCC: .4byte gUnknown_2039988
 _0809CCD0:
@@ -674,7 +674,7 @@ task_yes_no_maybe: @ 809CE54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _0809CE74 @ =gUnknown_3005090
+	ldr r1, _0809CE74 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -688,7 +688,7 @@ task_yes_no_maybe: @ 809CE54
 	strh r0, [r1, 0xC]
 	b _0809CEBC
 	.align 2, 0
-_0809CE74: .4byte gUnknown_3005090
+_0809CE74: .4byte gTasks
 _0809CE78:
 	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
@@ -800,7 +800,7 @@ _0809CF08:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0809CFD8 @ =gUnknown_3005090
+	ldr r1, _0809CFD8 @ =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -861,7 +861,7 @@ _0809CFBA:
 _0809CFCC: .4byte gUnknown_20370D0
 _0809CFD0: .4byte sub_809D6D4
 _0809CFD4: .4byte gUnknown_83E04B0
-_0809CFD8: .4byte gUnknown_3005090
+_0809CFD8: .4byte gTasks
 	thumb_func_end sub_809CEC8
 
 	thumb_func_start sub_809CFDC
@@ -872,7 +872,7 @@ sub_809CFDC: @ 809CFDC
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _0809D018 @ =gUnknown_3005098
+	ldr r1, _0809D018 @ =gTasks+0x8
 	adds r5, r0, r1
 	bl sub_8110650
 	lsls r0, 24
@@ -895,7 +895,7 @@ sub_809CFDC: @ 809CFDC
 	strh r0, [r1]
 	b _0809D024
 	.align 2, 0
-_0809D018: .4byte gUnknown_3005098
+_0809D018: .4byte gTasks+0x8
 _0809D01C: .4byte gUnknown_20370D0
 _0809D020:
 	ldr r0, _0809D03C @ =gUnknown_20370D0
@@ -1194,7 +1194,7 @@ sub_809D288: @ 809D288
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0809D2AC @ =gUnknown_3005090
+	ldr r1, _0809D2AC @ =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -1206,7 +1206,7 @@ sub_809D288: @ 809D288
 	beq _0809D2CE
 	b _0809D2E8
 	.align 2, 0
-_0809D2AC: .4byte gUnknown_3005090
+_0809D2AC: .4byte gTasks
 _0809D2B0:
 	cmp r0, 0x2
 	beq _0809D2BA
@@ -1296,7 +1296,7 @@ _0809D31C:
 	movs r2, 0x8
 	movs r3, 0x8
 	bl CreateWindowFromRect
-	ldr r1, _0809D3B4 @ =gUnknown_3005090
+	ldr r1, _0809D3B4 @ =gTasks
 	lsls r3, r4, 2
 	adds r3, r4
 	lsls r3, 3
@@ -1333,7 +1333,7 @@ _0809D31C:
 	b _0809D3C2
 	.align 2, 0
 _0809D3B0: .4byte sub_809D288
-_0809D3B4: .4byte gUnknown_3005090
+_0809D3B4: .4byte gTasks
 _0809D3B8: .4byte gSprites
 _0809D3BC: .4byte SpriteCallbackDummy
 _0809D3C0:
@@ -1355,7 +1355,7 @@ sub_809D3CC: @ 809D3CC
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _0809D3FC
-	ldr r0, _0809D3F4 @ =gUnknown_3005090
+	ldr r0, _0809D3F4 @ =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -1367,7 +1367,7 @@ sub_809D3CC: @ 809D3CC
 	b _0809D3FE
 	.align 2, 0
 _0809D3F0: .4byte sub_809D288
-_0809D3F4: .4byte gUnknown_3005090
+_0809D3F4: .4byte gTasks
 _0809D3F8: .4byte sub_809D404
 _0809D3FC:
 	movs r0, 0
@@ -1408,7 +1408,7 @@ sub_809D424: @ 809D424
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0809D454 @ =gUnknown_3005090
+	ldr r1, _0809D454 @ =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -1421,7 +1421,7 @@ sub_809D424: @ 809D424
 	b _0809D48C
 	.align 2, 0
 _0809D450: .4byte sub_809D288
-_0809D454: .4byte gUnknown_3005090
+_0809D454: .4byte gTasks
 _0809D458:
 	movs r0, 0xC
 	ldrsh r1, [r4, r0]
@@ -1458,7 +1458,7 @@ sub_809D494: @ 809D494
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0809D4B8 @ =gUnknown_3005090
+	ldr r1, _0809D4B8 @ =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -1470,7 +1470,7 @@ sub_809D494: @ 809D494
 	beq _0809D4DE
 	b _0809D4FC
 	.align 2, 0
-_0809D4B8: .4byte gUnknown_3005090
+_0809D4B8: .4byte gTasks
 _0809D4BC:
 	cmp r0, 0x2
 	beq _0809D4C6
@@ -1601,7 +1601,7 @@ _0809D572:
 	movs r2, 0x8
 	movs r3, 0x8
 	bl CreateWindowFromRect
-	ldr r2, _0809D61C @ =gUnknown_3005090
+	ldr r2, _0809D61C @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1632,7 +1632,7 @@ _0809D60C: .4byte gUnknown_20370C2
 _0809D610: .4byte gUnknown_20370C4
 _0809D614: .4byte gSprites
 _0809D618: .4byte sub_809D494
-_0809D61C: .4byte gUnknown_3005090
+_0809D61C: .4byte gTasks
 	thumb_func_end sub_809D504
 
 	thumb_func_start sub_809D620
@@ -1644,7 +1644,7 @@ sub_809D620: @ 809D620
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _0809D64C
-	ldr r0, _0809D648 @ =gUnknown_3005090
+	ldr r0, _0809D648 @ =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -1656,7 +1656,7 @@ sub_809D620: @ 809D620
 	b _0809D64E
 	.align 2, 0
 _0809D644: .4byte sub_809D494
-_0809D648: .4byte gUnknown_3005090
+_0809D648: .4byte gTasks
 _0809D64C:
 	movs r0, 0
 _0809D64E:
@@ -1743,7 +1743,7 @@ sub_809D6D4: @ 809D6D4
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _0809D754 @ =gUnknown_3005098
+	ldr r1, _0809D754 @ =gTasks+0x8
 	adds r2, r0, r1
 	movs r1, 0
 	ldrsh r0, [r2, r1]
@@ -1768,7 +1768,7 @@ _0809D710:
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _0809D754 @ =gUnknown_3005098
+	ldr r1, _0809D754 @ =gTasks+0x8
 	adds r2, r0, r1
 	movs r1, 0
 	ldrsh r0, [r2, r1]
@@ -1790,7 +1790,7 @@ _0809D748:
 	.align 2, 0
 _0809D74C: .4byte gUnknown_81A7AE0
 _0809D750: .4byte sub_809D288
-_0809D754: .4byte gUnknown_3005098
+_0809D754: .4byte gTasks+0x8
 _0809D758: .4byte gSprites
 _0809D75C: .4byte sub_809D494
 _0809D760: .4byte 0x00001b58

@@ -10,7 +10,7 @@ sub_80DCE10: @ 80DCE10
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080DCE6C @ =gUnknown_3005090
+	ldr r1, _080DCE6C @ =gTasks
 	lsls r6, r0, 2
 	adds r6, r0
 	lsls r6, 3
@@ -50,7 +50,7 @@ sub_80DCE10: @ 80DCE10
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DCE6C: .4byte gUnknown_3005090
+_080DCE6C: .4byte gTasks
 _080DCE70: .4byte gUnknown_2037F02
 _080DCE74: .4byte sub_80DCE78
 	thumb_func_end sub_80DCE10
@@ -60,7 +60,7 @@ sub_80DCE78: @ 80DCE78
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080DCEA8 @ =gUnknown_3005090
+	ldr r2, _080DCEA8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -82,7 +82,7 @@ sub_80DCE78: @ 80DCE78
 	str r0, [r4]
 	b _080DCEDE
 	.align 2, 0
-_080DCEA8: .4byte gUnknown_3005090
+_080DCEA8: .4byte gTasks
 _080DCEAC: .4byte sub_80DCEE4
 _080DCEB0:
 	ldrh r0, [r4, 0x1C]
@@ -118,7 +118,7 @@ sub_80DCEE4: @ 80DCEE4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080DCF34 @ =gUnknown_3005090
+	ldr r1, _080DCF34 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -153,7 +153,7 @@ _080DCF2C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DCF34: .4byte gUnknown_3005090
+_080DCF34: .4byte gTasks
 	thumb_func_end sub_80DCEE4
 
 	thumb_func_start mas_80DCF38
@@ -200,7 +200,7 @@ mas_80DCF38: @ 80DCF38
 	adds r1, r5, 0
 	adds r2, r6, 0
 	bl CalculatePanIncrement
-	ldr r2, _080DCFE0 @ =gUnknown_3005090
+	ldr r2, _080DCFE0 @ =gTasks
 	mov r3, r8
 	lsls r1, r3, 2
 	add r1, r8
@@ -237,7 +237,7 @@ mas_80DCF38: @ 80DCF38
 	bx r0
 	.align 2, 0
 _080DCFDC: .4byte gUnknown_2037F02
-_080DCFE0: .4byte gUnknown_3005090
+_080DCFE0: .4byte gTasks
 _080DCFE4: .4byte sub_80DCFE8
 	thumb_func_end mas_80DCF38
 
@@ -246,7 +246,7 @@ sub_80DCFE8: @ 80DCFE8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080DD02C @ =gUnknown_3005090
+	ldr r1, _080DD02C @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -276,9 +276,9 @@ sub_80DCFE8: @ 80DCFE8
 	bl DestroyAnimSoundTask
 	b _080DD062
 	.align 2, 0
-_080DD02C: .4byte gUnknown_3005090
+_080DD02C: .4byte gTasks
 _080DD030:
-	ldr r1, _080DD068 @ =gUnknown_3005090
+	ldr r1, _080DD068 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -307,7 +307,7 @@ _080DD062:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD068: .4byte gUnknown_3005090
+_080DD068: .4byte gTasks
 	thumb_func_end sub_80DCFE8
 
 	thumb_func_start sub_80DD06C
@@ -516,7 +516,7 @@ _080DD1F6:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r1, _080DD23C @ =gUnknown_3005090
+	ldr r1, _080DD23C @ =gTasks
 	lsls r2, r6, 2
 	adds r0, r2, r6
 	lsls r0, 3
@@ -542,14 +542,14 @@ _080DD1F6:
 	.align 2, 0
 _080DD234: .4byte gBattlerPartyIndexes
 _080DD238: .4byte gPlayerParty
-_080DD23C: .4byte gUnknown_3005090
+_080DD23C: .4byte gTasks
 _080DD240: .4byte gUnknown_2037F02
 _080DD244:
 	adds r0, r3, 0
 	movs r2, 0x7
 	bl PlayCry3
 _080DD24C:
-	ldr r0, _080DD25C @ =gUnknown_3005090
+	ldr r0, _080DD25C @ =gTasks
 	adds r1, r5, r6
 	lsls r1, 3
 	adds r1, r0
@@ -557,7 +557,7 @@ _080DD24C:
 	str r0, [r1]
 	b _080DD26A
 	.align 2, 0
-_080DD25C: .4byte gUnknown_3005090
+_080DD25C: .4byte gTasks
 _080DD260: .4byte sub_80DD270
 _080DD264:
 	adds r0, r6, 0
@@ -577,7 +577,7 @@ sub_80DD270: @ 80DD270
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r9, r4
-	ldr r1, _080DD2A0 @ =gUnknown_3005090
+	ldr r1, _080DD2A0 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -595,7 +595,7 @@ sub_80DD270: @ 80DD270
 	strh r0, [r1, 0x1A]
 	b _080DD2E6
 	.align 2, 0
-_080DD2A0: .4byte gUnknown_3005090
+_080DD2A0: .4byte gTasks
 _080DD2A4:
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
@@ -640,7 +640,7 @@ sub_80DD2F4: @ 80DD2F4
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	ldr r1, _080DD318 @ =gUnknown_3005090
+	ldr r1, _080DD318 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -654,7 +654,7 @@ sub_80DD2F4: @ 80DD2F4
 	strh r0, [r1, 0x1A]
 	b _080DD32C
 	.align 2, 0
-_080DD318: .4byte gUnknown_3005090
+_080DD318: .4byte gTasks
 _080DD31C:
 	bl IsCryPlaying
 	lsls r0, 24
@@ -682,7 +682,7 @@ sub_80DD334: @ 80DD334
 	lsls r1, 1
 	adds r1, r2
 	ldrh r3, [r1]
-	ldr r2, _080DD37C @ =gUnknown_3005090
+	ldr r2, _080DD37C @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -702,7 +702,7 @@ sub_80DD334: @ 80DD334
 	.align 2, 0
 _080DD374: .4byte gUnknown_2037F1C
 _080DD378: .4byte gUnknown_2037F1A
-_080DD37C: .4byte gUnknown_3005090
+_080DD37C: .4byte gTasks
 _080DD380: .4byte sub_80DD390
 _080DD384:
 	adds r0, r5, 0
@@ -719,7 +719,7 @@ sub_80DD390: @ 80DD390
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r1, _080DD3B4 @ =gUnknown_3005090
+	ldr r1, _080DD3B4 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -733,7 +733,7 @@ sub_80DD390: @ 80DD390
 	strh r0, [r4, 0x1A]
 	b _080DD3D4
 	.align 2, 0
-_080DD3B4: .4byte gUnknown_3005090
+_080DD3B4: .4byte gTasks
 _080DD3B8:
 	bl IsCryPlaying
 	lsls r0, 24
@@ -841,7 +841,7 @@ sub_80DD444: @ 80DD444
 	adds r1, r5, 0
 	adds r2, r6, 0
 	bl CalculatePanIncrement
-	ldr r2, _080DD4CC @ =gUnknown_3005090
+	ldr r2, _080DD4CC @ =gTasks
 	mov r3, r8
 	lsls r1, r3, 2
 	add r1, r8
@@ -869,7 +869,7 @@ sub_80DD444: @ 80DD444
 	bx r0
 	.align 2, 0
 _080DD4C8: .4byte gUnknown_2037F02
-_080DD4CC: .4byte gUnknown_3005090
+_080DD4CC: .4byte gTasks
 _080DD4D0: .4byte sub_80DD4D4
 	thumb_func_end sub_80DD444
 
@@ -879,7 +879,7 @@ sub_80DD4D4: @ 80DD4D4
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r1, _080DD52C @ =gUnknown_3005090
+	ldr r1, _080DD52C @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -920,7 +920,7 @@ _080DD526:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD52C: .4byte gUnknown_3005090
+_080DD52C: .4byte gTasks
 _080DD530: .4byte gUnknown_2037F24
 	thumb_func_end sub_80DD4D4
 

@@ -549,7 +549,7 @@ sub_80E79B8: @ 80E79B8
 	adds r0, r1
 	ldr r1, _080E7A08 @ =sub_80E7A14
 	str r1, [r0]
-	ldr r3, _080E7A0C @ =gUnknown_3005090
+	ldr r3, _080E7A0C @ =gTasks
 	ldr r1, _080E7A10 @ =gUnknown_3004FFC
 	ldrb r0, [r2]
 	adds r0, r1
@@ -572,7 +572,7 @@ _080E79FC: .4byte gUnknown_2037AB8
 _080E7A00: .4byte gUnknown_3004FE0
 _080E7A04: .4byte gActiveBattler
 _080E7A08: .4byte sub_80E7A14
-_080E7A0C: .4byte gUnknown_3005090
+_080E7A0C: .4byte gTasks
 _080E7A10: .4byte gUnknown_3004FFC
 	thumb_func_end sub_80E79B8
 
@@ -1057,7 +1057,7 @@ sub_80E7E04: @ 80E7E04
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r1, _080E7F04 @ =gUnknown_3005090
+	ldr r1, _080E7F04 @ =gTasks
 	lsls r0, 2
 	add r0, r9
 	lsls r0, 3
@@ -1170,7 +1170,7 @@ _080E7EFE:
 	ldr r0, _080E7F1C @ =sub_80E8190
 	b _080E7F62
 	.align 2, 0
-_080E7F04: .4byte gUnknown_3005090
+_080E7F04: .4byte gTasks
 _080E7F08: .4byte gBattlerPartyIndexes
 _080E7F0C: .4byte gPlayerParty
 _080E7F10: .4byte gUnknown_8253AE4
@@ -1178,7 +1178,7 @@ _080E7F14: .4byte gBaseStats
 _080E7F18: .4byte gActiveBattler
 _080E7F1C: .4byte sub_80E8190
 _080E7F20:
-	ldr r0, _080E7F30 @ =gUnknown_3005090
+	ldr r0, _080E7F30 @ =gTasks
 	mov r2, r9
 	lsls r1, r2, 2
 	add r1, r9
@@ -1187,7 +1187,7 @@ _080E7F20:
 	ldr r0, _080E7F34 @ =sub_80E82A8
 	b _080E7F64
 	.align 2, 0
-_080E7F30: .4byte gUnknown_3005090
+_080E7F30: .4byte gTasks
 _080E7F34: .4byte sub_80E82A8
 _080E7F38:
 	str r0, [sp, 0x4]
@@ -1236,7 +1236,7 @@ sub_80E7F7C: @ 80E7F7C
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080E8034 @ =gUnknown_3005090
+	ldr r1, _080E8034 @ =gTasks
 	lsls r2, r0, 2
 	mov r8, r2
 	add r8, r0
@@ -1316,7 +1316,7 @@ sub_80E7F7C: @ 80E7F7C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E8034: .4byte gUnknown_3005090
+_080E8034: .4byte gTasks
 _080E8038: .4byte gPlayerParty
 _080E803C: .4byte gUnknown_8253AE4
 _080E8040: .4byte gBaseStats
@@ -1335,7 +1335,7 @@ sub_80E804C: @ 80E804C
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _080E8078 @ =gUnknown_3005090
+	ldr r1, _080E8078 @ =gTasks
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
@@ -1349,7 +1349,7 @@ sub_80E804C: @ 80E804C
 	strh r0, [r6, 0x1C]
 	b _080E8178
 	.align 2, 0
-_080E8078: .4byte gUnknown_3005090
+_080E8078: .4byte gTasks
 _080E807C:
 	ldrb r0, [r6, 0x8]
 	mov r9, r0
@@ -1481,7 +1481,7 @@ sub_80E8190: @ 80E8190
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080E81E4 @ =gUnknown_3005090
+	ldr r1, _080E81E4 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1509,7 +1509,7 @@ _080E81C4:
 	adds r2, r4, 0
 	movs r3, 0
 	bl InitAndLaunchSpecialAnimation
-	ldr r0, _080E81E4 @ =gUnknown_3005090
+	ldr r0, _080E81E4 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -1520,7 +1520,7 @@ _080E81C4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E81E4: .4byte gUnknown_3005090
+_080E81E4: .4byte gTasks
 _080E81E8: .4byte gBattlerPartyIndexes
 _080E81EC: .4byte sub_80E81F0
 	thumb_func_end sub_80E8190
@@ -1530,7 +1530,7 @@ sub_80E81F0: @ 80E81F0
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _080E825C @ =gUnknown_3005090
+	ldr r1, _080E825C @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -1579,7 +1579,7 @@ sub_80E81F0: @ 80E81F0
 	bl UpdateHealthboxAttribute
 	b _080E8284
 	.align 2, 0
-_080E825C: .4byte gUnknown_3005090
+_080E825C: .4byte gTasks
 _080E8260: .4byte gUnknown_2024018
 _080E8264: .4byte gPlayerParty
 _080E8268: .4byte gBattlerPartyIndexes
@@ -1595,7 +1595,7 @@ _080E8270:
 	movs r2, 0
 	bl UpdateHealthboxAttribute
 _080E8284:
-	ldr r0, _080E82A0 @ =gUnknown_3005090
+	ldr r0, _080E82A0 @ =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -1609,7 +1609,7 @@ _080E8292:
 	.align 2, 0
 _080E8298: .4byte gUnknown_3004FF0
 _080E829C: .4byte gPlayerParty
-_080E82A0: .4byte gUnknown_3005090
+_080E82A0: .4byte gTasks
 _080E82A4: .4byte sub_80E82A8
 	thumb_func_end sub_80E81F0
 
@@ -1619,7 +1619,7 @@ sub_80E82A8: @ 80E82A8
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _080E82E4 @ =gUnknown_3005090
+	ldr r0, _080E82E4 @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -1643,7 +1643,7 @@ sub_80E82A8: @ 80E82A8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E82E4: .4byte gUnknown_3005090
+_080E82E4: .4byte gTasks
 _080E82E8: .4byte gPlayerParty
 _080E82EC: .4byte gUnknown_3004FE0
 _080E82F0: .4byte sub_80E8930
@@ -6224,7 +6224,7 @@ _080EA8D0: .4byte gUnknown_2022BC4
 sub_80EA8D4: @ 80EA8D4
 	push {r4-r6,lr}
 	sub sp, 0x4
-	ldr r0, _080EA984 @ =nullsub_43
+	ldr r0, _080EA984 @ =TaskDummy
 	movs r1, 0xFF
 	bl CreateTask
 	ldr r3, _080EA988 @ =gUnknown_3004FFC
@@ -6232,7 +6232,7 @@ sub_80EA8D4: @ 80EA8D4
 	ldrb r1, [r4]
 	adds r1, r3
 	strb r0, [r1]
-	ldr r5, _080EA990 @ =gUnknown_3005090
+	ldr r5, _080EA990 @ =gTasks
 	ldrb r2, [r4]
 	adds r3, r2, r3
 	ldrb r0, [r3]
@@ -6309,10 +6309,10 @@ _080EA940:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EA984: .4byte nullsub_43
+_080EA984: .4byte TaskDummy
 _080EA988: .4byte gUnknown_3004FFC
 _080EA98C: .4byte gActiveBattler
-_080EA990: .4byte gUnknown_3005090
+_080EA990: .4byte gTasks
 _080EA994: .4byte gUnknown_2022BC4
 _080EA998: .4byte gBattleStruct
 _080EA99C: .4byte gUnknown_203B0DC
@@ -6491,7 +6491,7 @@ _080EAAF0:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080EAB48 @ =gUnknown_3005090
+	ldr r2, _080EAB48 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -6512,7 +6512,7 @@ _080EAB3C:
 	bx r0
 	.align 2, 0
 _080EAB44: .4byte sub_80E7E04
-_080EAB48: .4byte gUnknown_3005090
+_080EAB48: .4byte gTasks
 _080EAB4C: .4byte gUnknown_3004FE0
 _080EAB50: .4byte nullsub_81
 	thumb_func_end sub_80EAAB8
@@ -6921,7 +6921,7 @@ _080EAD64:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, _080EAECC @ =gUnknown_3005090
+	ldr r4, _080EAECC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -6976,7 +6976,7 @@ _080EAEBC: .4byte 0x0000d6f8
 _080EAEC0: .4byte gUnknown_8239FD4
 _080EAEC4: .4byte gSaveBlock2Ptr
 _080EAEC8: .4byte sub_80EB0A8
-_080EAECC: .4byte gUnknown_3005090
+_080EAECC: .4byte gTasks
 _080EAED0: .4byte gUnknown_2024018
 _080EAED4: .4byte gUnknown_2024000
 _080EAED8: .4byte sub_80491B0
@@ -6997,7 +6997,7 @@ _080EAEE4:
 	ands r0, r1
 	cmp r0, 0
 	beq _080EAF14
-	ldr r2, _080EAF28 @ =gUnknown_3005090
+	ldr r2, _080EAF28 @ =gTasks
 	ldr r0, _080EAF2C @ =gUnknown_2024000
 	adds r0, r3, r0
 	ldrb r1, [r0]
@@ -7016,7 +7016,7 @@ _080EAF18:
 	.align 2, 0
 _080EAF20: .4byte gUnknown_2024018
 _080EAF24: .4byte gActiveBattler
-_080EAF28: .4byte gUnknown_3005090
+_080EAF28: .4byte gTasks
 _080EAF2C: .4byte gUnknown_2024000
 _080EAF30: .4byte sub_80491B0
 	thumb_func_end sub_80EAD54
@@ -7196,7 +7196,7 @@ sub_80EB0A8: @ 80EB0A8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _080EB0C8 @ =gUnknown_3005090
+	ldr r1, _080EB0C8 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -7210,7 +7210,7 @@ sub_80EB0A8: @ 80EB0A8
 	strh r0, [r1, 0xA]
 	b _080EB102
 	.align 2, 0
-_080EB0C8: .4byte gUnknown_3005090
+_080EB0C8: .4byte gTasks
 _080EB0CC:
 	ldr r4, _080EB108 @ =gActiveBattler
 	ldrb r5, [r4]

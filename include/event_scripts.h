@@ -372,4 +372,6 @@ extern const u8 SecretBase_RedCave1_Text_274E75[];
 extern const u8 SecretBase_RedCave1_Text_2751E1[];
 extern const u8 SecretBase_RedCave1_Text_2754F6[];
 extern const u8 SecretBase_RedCave1_Text_2758CC[];
+extern const u8 gUnknown_81C137C[];
+extern const u8 gUnknown_81C13D6[];
 #endif //GUARD_EVENT_SCRIPTS_H

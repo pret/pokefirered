@@ -676,9 +676,9 @@ mplay_80342A4: @ 80342A4
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x1D
 	bls _080342F0
-	ldr r0, _080342FC @ =gMPlay_SE1
+	ldr r0, _080342FC @ =gMPlayInfo_SE1
 	bl m4aMPlayStop
-	ldr r0, _08034300 @ =gMPlay_SE2
+	ldr r0, _08034300 @ =gMPlayInfo_SE2
 	bl m4aMPlayStop
 _080342EC:
 	cmp r5, 0
@@ -689,8 +689,8 @@ _080342F0:
 	.align 2, 0
 _080342F4: .4byte gUnknown_2024018
 _080342F8: .4byte gActiveBattler
-_080342FC: .4byte gMPlay_SE1
-_08034300: .4byte gMPlay_SE2
+_080342FC: .4byte gMPlayInfo_SE1
+_08034300: .4byte gMPlayInfo_SE2
 _08034304:
 	ldr r0, _0803431C @ =gUnknown_2024018
 	ldr r0, [r0]

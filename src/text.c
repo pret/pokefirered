@@ -680,17 +680,17 @@ _08005A84:\n\
     bl FillWindowPixelBuffer\n\
     b _0800589E\n\
 _08005A96:\n\
-    ldr r0, _08005AA0 @ =gMPlay_BGM\n\
+    ldr r0, _08005AA0 @ =gMPlayInfo_BGM\n\
     bl m4aMPlayStop\n\
     b _0800589E\n\
     .align 2, 0\n\
-_08005AA0: .4byte gMPlay_BGM\n\
+_08005AA0: .4byte gMPlayInfo_BGM\n\
 _08005AA4:\n\
-    ldr r0, _08005AAC @ =gMPlay_BGM\n\
+    ldr r0, _08005AAC @ =gMPlayInfo_BGM\n\
     bl m4aMPlayContinue\n\
     b _0800589E\n\
     .align 2, 0\n\
-_08005AAC: .4byte gMPlay_BGM\n\
+_08005AAC: .4byte gMPlayInfo_BGM\n\
 _08005AB0:\n\
     ldr r0, [r6]\n\
     ldrb r4, [r0]\n\

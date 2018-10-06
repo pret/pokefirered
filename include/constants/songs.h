@@ -1,6 +1,7 @@
 #ifndef GUARD_CONSTANTS_SONGS_H
 #define GUARD_CONSTANTS_SONGS_H
 
+#define MUS_DUMMY 0
 #define SE_STOP 0
 #define SE_KAIFUKU 1
 #define SE_PC_LOGON 2

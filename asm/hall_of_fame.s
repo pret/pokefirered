@@ -2151,7 +2151,7 @@ _080F2F0C:
 	cmp r0, 0
 	beq _080F2F26
 	bl StopCryAndClearCrySongs
-	ldr r0, _080F2F2C @ =gMPlay_BGM
+	ldr r0, _080F2F2C @ =gMPlayInfo_BGM
 	ldr r1, _080F2F30 @ =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -2161,7 +2161,7 @@ _080F2F26:
 	str r0, [r4]
 	b _080F2FD8
 	.align 2, 0
-_080F2F2C: .4byte gMPlay_BGM
+_080F2F2C: .4byte gMPlayInfo_BGM
 _080F2F30: .4byte 0x0000ffff
 _080F2F34: .4byte sub_80F2FEC
 _080F2F38:
@@ -2174,7 +2174,7 @@ _080F2F38:
 	cmp r0, 0
 	beq _080F2F5A
 	bl StopCryAndClearCrySongs
-	ldr r0, _080F2F6C @ =gMPlay_BGM
+	ldr r0, _080F2F6C @ =gMPlayInfo_BGM
 	ldr r1, _080F2F70 @ =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -2189,7 +2189,7 @@ _080F2F5A:
 	str r0, [r1]
 	b _080F2FD8
 	.align 2, 0
-_080F2F6C: .4byte gMPlay_BGM
+_080F2F6C: .4byte gMPlayInfo_BGM
 _080F2F70: .4byte 0x0000ffff
 _080F2F74: .4byte gTasks
 _080F2F78: .4byte sub_80F2FEC

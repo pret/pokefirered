@@ -129,21 +129,9 @@ gUnknown_3000FB8: @ 3000FB8
 gUnknown_3000FBC: @ 3000FBC
 	.space 0x4
 
-gUnknown_3000FC0: @ 3000FC0
-	.space 0x2
+	.include "src/sound.o"
 
-gUnknown_3000FC2: @ 3000FC2
-	.space 0x2
-
-gUnknown_3000FC4: @ 3000FC4
-	.space 0x1
-
-gUnknown_3000FC5: @ 3000FC5
-	.space 0x1
-
-gUnknown_3000FC6: @ 3000FC6
-	.space 0x2
-
+	.align 2
 gUnknown_3000FC8: @ 3000FC8
 	.space 0x20
 

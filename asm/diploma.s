@@ -154,7 +154,7 @@ _080F4D30:
 	cmp r0, 0
 	bne _080F4D50
 	movs r0, 0x5
-	bl sub_8071BC4
+	bl PlayFanfareByFanfareNum
 	ldr r0, _080F4D68 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4

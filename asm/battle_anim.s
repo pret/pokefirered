@@ -272,7 +272,7 @@ _080726EE:
 	beq _08072706
 	cmp r8, r0
 	bne _080726EC
-	ldr r0, _0807272C @ =gMPlay_BGM
+	ldr r0, _0807272C @ =gMPlayInfo_BGM
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
 _08072706:
@@ -295,7 +295,7 @@ _08072706:
 	bx r0
 	.align 2, 0
 _08072728: .4byte 0x0000ffff
-_0807272C: .4byte gMPlay_BGM
+_0807272C: .4byte gMPlayInfo_BGM
 _08072730: .4byte gUnknown_2022984
 _08072734: .4byte gUnknown_2022986
 _08072738: .4byte gUnknown_2022988
@@ -868,9 +868,9 @@ _08072B62:
 _08072B6C: .4byte gUnknown_2037F12
 _08072B70: .4byte gUnknown_2037EE0
 _08072B74:
-	ldr r0, _08072BE8 @ =gMPlay_SE1
+	ldr r0, _08072BE8 @ =gMPlayInfo_SE1
 	bl m4aMPlayStop
-	ldr r0, _08072BEC @ =gMPlay_SE2
+	ldr r0, _08072BEC @ =gMPlayInfo_SE2
 	bl m4aMPlayStop
 _08072B80:
 	ldr r1, _08072BF0 @ =gUnknown_2037F12
@@ -905,7 +905,7 @@ _08072BB2:
 	mov r1, r8
 	cmp r1, 0
 	bne _08072BDC
-	ldr r0, _08072C00 @ =gMPlay_BGM
+	ldr r0, _08072C00 @ =gMPlayInfo_BGM
 	ldr r1, _08072BF4 @ =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -923,13 +923,13 @@ _08072BDC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08072BE8: .4byte gMPlay_SE1
-_08072BEC: .4byte gMPlay_SE2
+_08072BE8: .4byte gMPlayInfo_SE1
+_08072BEC: .4byte gMPlayInfo_SE2
 _08072BF0: .4byte gUnknown_2037F12
 _08072BF4: .4byte 0x0000ffff
 _08072BF8: .4byte gUnknown_83ACC08
 _08072BFC: .4byte gUnknown_2037EEE
-_08072C00: .4byte gMPlay_BGM
+_08072C00: .4byte gMPlayInfo_BGM
 _08072C04: .4byte gUnknown_2037EE1
 	thumb_func_end sub_8072B08
 
@@ -3652,17 +3652,17 @@ ScriptCmd_waitsound: @ 80740E0
 	lsrs r0, 16
 	cmp r0, 0x5A
 	bls _0807412E
-	ldr r0, _08074120 @ =gMPlay_SE1
+	ldr r0, _08074120 @ =gMPlayInfo_SE1
 	bl m4aMPlayStop
-	ldr r0, _08074124 @ =gMPlay_SE2
+	ldr r0, _08074124 @ =gMPlayInfo_SE2
 	bl m4aMPlayStop
 	strh r5, [r4]
 	b _08074152
 	.align 2, 0
 _08074118: .4byte gUnknown_2037EE3
 _0807411C: .4byte gUnknown_2037F12
-_08074120: .4byte gMPlay_SE1
-_08074124: .4byte gMPlay_SE2
+_08074120: .4byte gMPlayInfo_SE1
+_08074124: .4byte gMPlayInfo_SE2
 _08074128:
 	ldr r1, _08074138 @ =gUnknown_2037F12
 	movs r0, 0
@@ -4088,9 +4088,9 @@ _08074454: .4byte gSprites
 	thumb_func_start sub_8074458
 sub_8074458: @ 8074458
 	push {lr}
-	ldr r0, _08074474 @ =gMPlay_SE1
+	ldr r0, _08074474 @ =gMPlayInfo_SE1
 	bl m4aMPlayStop
-	ldr r0, _08074478 @ =gMPlay_SE2
+	ldr r0, _08074478 @ =gMPlayInfo_SE2
 	bl m4aMPlayStop
 	ldr r1, _0807447C @ =gUnknown_2037ED4
 	ldr r0, [r1]
@@ -4099,8 +4099,8 @@ sub_8074458: @ 8074458
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08074474: .4byte gMPlay_SE1
-_08074478: .4byte gMPlay_SE2
+_08074474: .4byte gMPlayInfo_SE1
+_08074478: .4byte gMPlayInfo_SE2
 _0807447C: .4byte gUnknown_2037ED4
 	thumb_func_end sub_8074458
 

@@ -195,9 +195,7 @@ gUnknown_3005078: @ 3005078
 gUnknown_300507C: @ 300507C
 	.space 0x4
 
-gUnknown_3005080: @ 3005080
-	.space 0x10
-
+	.include "sound.o"
 	.include "task.o"
 	
 	@ what is this?

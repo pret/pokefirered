@@ -2859,7 +2859,7 @@ _08151E6C:
 	cmp r0, 0x1
 	bne _08151E8C
 	movs r0, 0xA
-	bl sub_8071BC4
+	bl PlayFanfareByFanfareNum
 	ldr r0, [r4]
 	movs r2, 0xAA
 	lsls r2, 1
@@ -3054,7 +3054,7 @@ _08151FF0:
 	cmp r0, 0x1
 	bne _08152010
 	movs r0, 0xA
-	bl sub_8071BC4
+	bl PlayFanfareByFanfareNum
 	ldr r0, [r4]
 	movs r3, 0xAA
 	lsls r3, 1

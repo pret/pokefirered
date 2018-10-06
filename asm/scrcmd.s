@@ -3897,7 +3897,7 @@ sub_806BB9C: @ 806BB9C
 	bl sub_809D2F0
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8071F24
+	bl PlayCry7
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -5165,7 +5165,7 @@ ScrCmd_playmoncry: @ 806C508
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8071F24
+	bl PlayCry7
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}

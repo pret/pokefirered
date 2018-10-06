@@ -3,7 +3,7 @@
 voicegroup_pokemon_cry:: @ 8489C8C
 	.incbin "baserom.gba", 0x489C8C, 0x2C88
 
-gUnknown_848C914:: @ 848C914
+gCryTable:: @ 848C914
 	.incbin "baserom.gba", 0x48C914, 0x600
 
 gUnknown_848CF14:: @ 848CF14
@@ -15,7 +15,7 @@ gUnknown_848D514:: @ 848D514
 gUnknown_848DB14:: @ 848DB14
 	.incbin "baserom.gba", 0x48DB14, 0x30
 
-gUnknown_848DB44:: @ 848DB44
+gCryTable2:: @ 848DB44
 	.incbin "baserom.gba", 0x48DB44, 0x600
 
 gUnknown_848E144:: @ 848E144

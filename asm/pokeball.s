@@ -1287,7 +1287,7 @@ _0804B34E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B3A6
-	ldr r0, _0804B398 @ =gMPlay_BGM
+	ldr r0, _0804B398 @ =gMPlayInfo_BGM
 	bl m4aMPlayStop
 	b _0804B3A6
 	.align 2, 0
@@ -1295,9 +1295,9 @@ _0804B388: .4byte gBattlerPartyIndexes
 _0804B38C: .4byte gPlayerParty
 _0804B390: .4byte gUnknown_2024018
 _0804B394: .4byte gBattleTypeFlags
-_0804B398: .4byte gMPlay_BGM
+_0804B398: .4byte gMPlayInfo_BGM
 _0804B39C:
-	ldr r0, _0804B3C4 @ =gMPlay_BGM
+	ldr r0, _0804B3C4 @ =gMPlayInfo_BGM
 	ldr r1, _0804B3C8 @ =0x0000ffff
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
@@ -1318,7 +1318,7 @@ _0804B3C0:
 	movs r4, 0
 	b _0804B3F2
 	.align 2, 0
-_0804B3C4: .4byte gMPlay_BGM
+_0804B3C4: .4byte gMPlayInfo_BGM
 _0804B3C8: .4byte 0x0000ffff
 _0804B3CC: .4byte gUnknown_2024018
 _0804B3D0:

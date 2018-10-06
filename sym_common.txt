@@ -133,8 +133,8 @@ gUnknown_3004FFC: @ 3004FFC
 	.space 0x4
 
 	.include "random.o"
+	
 	.align 2
-
 gUnknown_3005004: @ 3005004
 	.space 0x4
 

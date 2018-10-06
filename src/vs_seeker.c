@@ -7,6 +7,9 @@
 #include "new_menu_helpers.h"
 #include "item_use.h"
 #include "event_scripts.h"
+#include "script.h"
+#include "map_obj_lock.h"
+#include "field_specials.h"
 #include "item_menu.h"
 #include "field_effect.h"
 #include "script_movement.h"
@@ -26,10 +29,12 @@ void sub_810C730(u8 taskId);
 void sub_810C760(u8 taskId);
 void sub_810C808(void);
 void sub_810C8EC(u8 taskId);
+void sub_810D304(void);
 bool8 sub_810C96C(void);
 void sub_810C604(void);
 u8 sub_810C9A8(const void *);
 u16 sub_810D074(const u8 *);
+u8 sub_810D1CC(void);
 
 // rodata
 extern const struct UnkStruct_845318C gUnknown_845318C[];
@@ -120,4 +125,42 @@ void sub_810C808(void)
         }
     }
     gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_6 = 0xFF;
+}
+
+void sub_810C8EC(u8 taskId)
+{
+    if (ScriptMovement_IsObjectMovementFinished(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup))
+    {
+        if (gUnknown_203ADB8->unk_431_3 == 0)
+        {
+            DisplayItemMessageOnField(taskId, 2, gUnknown_81C1429, sub_80A1E0C);
+        }
+        else
+        {
+            if (gUnknown_203ADB8->unk_431_3 == 2)
+                sub_810D304();
+            sub_80F6F54(0, 1);
+            sub_80696C0();
+            ScriptContext2_Disable();
+            DestroyTask(taskId);
+        }
+        Free(gUnknown_203ADB8);
+    }
+}
+
+u8 sub_810C96C(void)
+{
+    u8 vsSeekerChargeSteps = gSaveBlock1Ptr->trainerRematchStepCounter;
+    if (vsSeekerChargeSteps == 100)
+    {
+        if (sub_810D1CC() == 0xFF)
+            return 1;
+        else
+            return 2;
+    }
+    else
+    {
+        TV_PrintIntToStringVar(0, 100 - vsSeekerChargeSteps);
+        return 0;
+    }
 }

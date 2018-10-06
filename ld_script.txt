@@ -82,7 +82,7 @@ SECTIONS {
         asm/pokemon_item_effect.o(.text);
         asm/pokemon_3.o(.text);
         asm/trig.o(.text);
-        asm/random.o(.text);
+        src/random.o(.text);
         asm/util.o(.text);
         asm/blend_palette.o(.text);
         asm/daycare.o(.text);

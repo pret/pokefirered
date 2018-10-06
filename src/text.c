@@ -37,8 +37,6 @@ extern const struct FontInfo gFontInfos[];
 
 extern const u8 gMenuCursorDimensions[][2];
 
-extern const u16 gFont9JapaneseGlyphs[];
-
 extern const u16 gFont8LatinGlyphs[];
 extern const u8 gFont8LatinGlyphWidths[];
 extern const u16 gFont0LatinGlyphs[];
@@ -53,6 +51,15 @@ extern const u16 gFont0JapaneseGlyphs[];
 extern const u16 gFont1JapaneseGlyphs[];
 extern const u16 gFont2JapaneseGlyphs[];
 extern const u8 gFont2JapaneseGlyphWidths[];
+extern const u16 gFont4JapaneseGlyphs[];
+extern const u8 gFont4JapaneseGlyphWidths[];
+extern const u16 gFont4LatinGlyphs[];
+extern const u8 gFont4LatinGlyphWidths[];
+extern const u16 gFont5JapaneseGlyphs[];
+extern const u8 gFont5JapaneseGlyphWidths[];
+extern const u16 gFont5LatinGlyphs[];
+extern const u8 gFont5LatinGlyphWidths[];
+extern const u16 gFont9JapaneseGlyphs[];
 
 u16 Font0Func(struct TextPrinter *textPrinter)
 {
@@ -1437,4 +1444,426 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
 
     RestoreTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
     return 1;
+}
+
+// TODO: What is this?
+struct Unk80062B0 {
+    u8 filler0[0x26];
+    u16 unk26;
+    u8 filler28[0x6];
+    s16 unk2E;
+    s16 unk30;
+};
+
+void sub_80062B0(struct Unk80062B0 *unkStruct)
+{
+    if(unkStruct->unk2E)
+    {
+        unkStruct->unk2E--;
+    }
+    else
+    {
+        unkStruct->unk2E = 8;
+        switch(unkStruct->unk30)
+        {
+            case 0:
+                unkStruct->unk26 = 0;
+                break;
+            case 1:
+                unkStruct->unk26 = 1;
+                break;
+            case 2:
+                unkStruct->unk26 = 2;
+                break;
+            case 3:
+                unkStruct->unk26 = 1;
+                unkStruct->unk30 = 0;
+                return;
+        }
+        unkStruct->unk30++;
+    }
+}
+
+extern const struct SpriteSheet gUnknown_81EA68C[];
+extern const struct SpritePalette gUnknown_81EA6A4;
+extern const struct SpriteTemplate gUnknown_81EA6B4;
+
+u8 sub_8006300(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority)
+{
+    u8 spriteId;
+    LoadSpriteSheet(&gUnknown_81EA68C[sheetId & 1]);
+    LoadSpritePalette(&gUnknown_81EA6A4);
+    spriteId = CreateSprite(&gUnknown_81EA6B4, x + 3, y + 4, subpriority);
+    gSprites[spriteId].oam.priority = (priority & 3);
+    gSprites[spriteId].oam.matrixNum = 0;
+    gSprites[spriteId].data[0] = 8;
+    return spriteId;
+}
+
+void sub_8006398(u8 spriteId)
+{
+    DestroySprite(&gSprites[spriteId]);
+    FreeSpriteTilesByTag(0x8000);
+    FreeSpritePaletteByTag(0x8000);
+}
+
+u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y)
+{
+    BlitBitmapRectToWindow(
+        windowId,
+        gKeypadIconTiles + (gKeypadIcons[keypadIconId].tile_offset * 0x20),
+        0,
+        0,
+        0x80,
+        0x80,
+        x,
+        y,
+        gKeypadIcons[keypadIconId].width,
+        gKeypadIcons[keypadIconId].height);
+    return gKeypadIcons[keypadIconId].width;
+}
+
+u8 GetKeypadIconTileOffset(u8 keypadIconId)
+{
+    return gKeypadIcons[keypadIconId].tile_offset;
+}
+
+u8 GetKeypadIconWidth(u8 keypadIconId)
+{
+    return gKeypadIcons[keypadIconId].width;
+}
+
+u8 GetKeypadIconHeight(u8 keypadIconId)
+{
+    return gKeypadIcons[keypadIconId].height;
+}
+
+void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
+{
+    const u16* glyphs;
+
+    if (isJapanese == 1)
+    {
+        glyphs = gFont0JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
+        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+        DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));
+        gGlyphInfo[0x80] = 8;     // gGlyphWidth
+        gGlyphInfo[0x81] = 12;    // gGlyphHeight
+    }
+    else
+    {
+        glyphs = gFont0LatinGlyphs + (0x10 * glyphId);
+        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+        DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x40));
+        gGlyphInfo[0x80] = gFont0LatinGlyphWidths[glyphId];
+        gGlyphInfo[0x81] = 13;
+    }
+}
+
+u32 GetGlyphWidthFont0(u16 glyphId, bool32 isJapanese)
+{
+    if (isJapanese == TRUE)
+        return 8;
+    else
+        return gFont0LatinGlyphWidths[glyphId];
+}
+
+void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
+{
+    const u16* glyphs;
+
+    if (isJapanese == TRUE)
+    {
+        int eff;
+        glyphs = gFont1JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & (eff = 0xF)));  // shh, no questions, only matching now
+        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+        DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));    // gUnknown_03002FD0
+        gGlyphInfo[0x80] = 8;     // gGlyphWidth
+        gGlyphInfo[0x81] = 16;    // gGlyphHeight
+    }
+    else
+    {
+        glyphs = gFont1LatinGlyphs + (0x20 * glyphId);
+        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+        DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
+        DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo + 0x40));
+        DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo + 0x60));
+        gGlyphInfo[0x80] = gFont1LatinGlyphWidths[glyphId];
+        gGlyphInfo[0x81] = 14;
+    }
+}
+
+u32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese)
+{
+    if (isJapanese == TRUE)
+        return 8;
+    else
+        return gFont1LatinGlyphWidths[glyphId];
+}
+
+void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
+{
+    const u16* glyphs;
+    int i;
+    u8 lastColor;
+
+    if(isJapanese == TRUE)
+    {
+        if(glyphId == 0)
+        {
+            lastColor = GetLastTextColor(2);
+
+            for(i = 0; i < 0x80; i++)
+            {
+                gGlyphInfo[i] = lastColor | lastColor << 4;
+                // Game Freak, please. writing the same values over and over...
+                gGlyphInfo[0x80] = 10;
+                gGlyphInfo[0x81] = 12;
+            }
+        }
+        else // _080065F8
+        {
+            glyphs = gFont2JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));    // gUnknown_03002FD0
+            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));    // gUnknown_03002FB0
+            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo + 0x60));    // gUnknown_03002FF0
+            gGlyphInfo[0x80] = gFont2JapaneseGlyphWidths[glyphId];     // gGlyphWidth
+            gGlyphInfo[0x81] = 12;    // gGlyphHeight
+        }
+    }
+    else // _0800665C
+    {
+        if(glyphId == 0)
+        {
+            lastColor = GetLastTextColor(2);
+
+            for(i = 0; i < 0x80; i++)
+            {
+                gGlyphInfo[i] = lastColor | lastColor << 4;
+                // but why
+                gGlyphInfo[0x80] = gFont2LatinGlyphWidths[0];
+                gGlyphInfo[0x81] = 14;
+            }
+        }
+        else // _0800669C
+        {
+            glyphs = gFont2LatinGlyphs + (0x20 * glyphId);
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
+            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo + 0x40));
+            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo + 0x60));
+            gGlyphInfo[0x80] = gFont2LatinGlyphWidths[glyphId];
+            gGlyphInfo[0x81] = 14;
+        }
+    }
+}
+
+u32 GetGlyphWidthFont2(u16 glyphId, bool32 isJapanese)
+{
+    if (isJapanese == TRUE)
+    {
+        if(glyphId == 0)
+            return 10;
+
+        return gFont2JapaneseGlyphWidths[glyphId];
+    }
+    else
+    {
+        return gFont2LatinGlyphWidths[glyphId];
+    }
+}
+
+void DecompressGlyphFont3(u16 glyphId, bool32 isJapanese)
+{
+    const u16* glyphs;
+    int i;
+    u8 lastColor;
+
+    if(isJapanese == TRUE)
+    {
+        if(glyphId == 0)
+        {
+            lastColor = GetLastTextColor(2);
+
+            for(i = 0; i < 0x80; i++)
+            {
+                gGlyphInfo[i] = lastColor | lastColor << 4;
+                // Game Freak, please. writing the same values over and over...
+                gGlyphInfo[0x80] = 10;
+                gGlyphInfo[0x81] = 12;
+            }
+        }
+        else
+        {
+            glyphs = gFont2JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));    // gUnknown_03002FD0
+            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));    // gUnknown_03002FB0
+            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo + 0x60));    // gUnknown_03002FF0
+            gGlyphInfo[0x80] = 10;    // gGlyphWidth
+            gGlyphInfo[0x81] = 12;    // gGlyphHeight
+        }
+    }
+    else
+        DecompressGlyphFont2(glyphId, isJapanese);
+}
+
+u32 GetGlyphWidthFont3(u16 glyphId, bool32 isJapanese)
+{
+    if(isJapanese == TRUE)
+        return 10;
+    else
+        return gFont2LatinGlyphWidths[glyphId];
+}
+
+void DecompressGlyphFont4(u16 glyphId, bool32 isJapanese)
+{
+    const u16* glyphs;
+    int i;
+    u8 lastColor;
+
+    if(isJapanese == TRUE)
+    {
+        if(glyphId == 0)
+        {
+            lastColor = GetLastTextColor(2);
+
+            for(i = 0; i < 0x80; i++)
+            {
+                gGlyphInfo[i] = lastColor | lastColor << 4;
+                // Game Freak, please. writing the same values over and over...
+                gGlyphInfo[0x80] = 10;
+                gGlyphInfo[0x81] = 12;
+            }
+        }
+        else // _0800682C
+        {
+            glyphs = gFont4JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));    // gUnknown_03002FD0
+            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));    // gUnknown_03002FB0
+            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo + 0x60));    // gUnknown_03002FF0
+            gGlyphInfo[0x80] = gFont4JapaneseGlyphWidths[glyphId];    // gGlyphWidth
+            gGlyphInfo[0x81] = 12;    // gGlyphHeight
+        }
+    }
+    else
+    {
+        if(glyphId == 0)
+        {
+            lastColor = GetLastTextColor(2);
+
+            for(i = 0; i < 0x80; i++)
+            {
+                gGlyphInfo[i] = lastColor | lastColor << 4;
+                // but why
+                gGlyphInfo[0x80] = gFont4LatinGlyphWidths[0];
+                gGlyphInfo[0x81] = 14;
+            }
+        }
+        else // _080068D0
+        {
+            glyphs = gFont4LatinGlyphs + (0x20 * glyphId);
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));    // gUnknown_03002FD0
+            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo + 0x40));    // gUnknown_03002FB0
+            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo + 0x60));    // gUnknown_03002FF0
+            gGlyphInfo[0x80] = gFont4LatinGlyphWidths[glyphId];    // gGlyphWidth
+            gGlyphInfo[0x81] = 14;    // gGlyphHeight
+        }
+    }
+}
+
+u32 GetGlyphWidthFont4(u16 glyphId, bool32 isJapanese)
+{
+    if(isJapanese == TRUE)
+    {
+        if(glyphId == 0)
+            return 10;
+
+        return gFont4JapaneseGlyphWidths[glyphId];
+    }
+    else
+        return gFont4LatinGlyphWidths[glyphId];
+}
+
+void DecompressGlyphFont5(u16 glyphId, bool32 isJapanese)
+{
+    const u16* glyphs;
+    int i;
+    u8 lastColor;
+
+    if(isJapanese == TRUE)
+    {
+        if(glyphId == 0)
+        {
+            lastColor = GetLastTextColor(2);
+
+            for(i = 0; i < 0x80; i++)
+            {
+                gGlyphInfo[i] = lastColor | lastColor << 4;
+                // Game Freak, please. writing the same values over and over...
+                gGlyphInfo[0x80] = 10;
+                gGlyphInfo[0x81] = 12;
+            }
+        }
+        else // _08006998
+        {
+            glyphs = gFont5JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));    // gUnknown_03002FD0
+            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));    // gUnknown_03002FB0
+            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo + 0x60));    // gUnknown_03002FF0
+            gGlyphInfo[0x80] = gFont5JapaneseGlyphWidths[glyphId];    // gGlyphWidth
+            gGlyphInfo[0x81] = 12;    // gGlyphHeight
+        }
+    }
+    else
+    {
+        if(glyphId == 0)
+        {
+            lastColor = GetLastTextColor(2);
+
+            for(i = 0; i < 0x80; i++)
+            {
+                gGlyphInfo[i] = lastColor | lastColor << 4;
+                // but why
+                gGlyphInfo[0x80] = gFont5LatinGlyphWidths[0];
+                gGlyphInfo[0x81] = 14;
+            }
+        }
+        else
+        {
+            glyphs = gFont5LatinGlyphs + (0x20 * glyphId);
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));    // gUnknown_03002FD0
+            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo + 0x40));    // gUnknown_03002FB0
+            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo + 0x60));    // gUnknown_03002FF0
+            gGlyphInfo[0x80] = gFont5LatinGlyphWidths[glyphId];    // gGlyphWidth
+            gGlyphInfo[0x81] = 14;    // gGlyphHeight
+        }
+    }
+}
+
+u32 GetGlyphWidthFont5(u16 glyphId, bool32 isJapanese)
+{
+    if(isJapanese == TRUE)
+    {
+        if(glyphId == 0)
+            return 10;
+        
+        return gFont5JapaneseGlyphWidths[glyphId];
+    }
+    else
+        return gFont5LatinGlyphWidths[glyphId];
+}
+
+void DecompressGlyphFont9(u16 glyphId)
+{
+    const u16* glyphs = gFont9JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
+    DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
+    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));    // gUnknown_03002FD0
+    gGlyphInfo[0x80] = 8;
+    gGlyphInfo[0x81] = 12;
 }

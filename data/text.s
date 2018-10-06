@@ -24,65 +24,65 @@ gUnknown_81EA6A4:: @ 81EA6A4
 gUnknown_81EA6B4:: @ 81EA6B4
 	.incbin "baserom.gba", 0x1EA6B4, 0x18
 
-gUnknown_81EA6CC:: @ 81EA6CC
+gKeypadIcons:: @ 81EA6CC
 	.incbin "baserom.gba", 0x1EA6CC, 0x34
 
-gUnknown_81EA700:: @ 81EA700
+gKeypadIconTiles:: @ 81EA700
 	.incbin "baserom.gba", 0x1EA700, 0x800
 
-gUnknown_81EAF00:: @ 81EAF00
+gFont0LatinGlyphs:: @ 81EAF00
 	.incbin "baserom.gba", 0x1EAF00, 0x4000
 
-gUnknown_81EEF00:: @ 81EEF00
+gFont0LatinGlyphWidths:: @ 81EEF00
 	.incbin "baserom.gba", 0x1EEF00, 0x200
 
-gUnknown_81EF100:: @ 81EF100
+gFont0JapaneseGlyphs:: @ 81EF100
 	.incbin "baserom.gba", 0x1EF100, 0x4000
 
-gUnknown_81F3100:: @ 81F3100
+gFont1LatinGlyphs:: @ 81F3100
 	.incbin "baserom.gba", 0x1F3100, 0x8000
 
-gUnknown_81FB100:: @ 81FB100
+gFont1LatinGlyphWidths:: @ 81FB100
 	.incbin "baserom.gba", 0x1FB100, 0x200
 
-gUnknown_81FB300:: @ 81FB300
+gFont1JapaneseGlyphs:: @ 81FB300
 	.incbin "baserom.gba", 0x1FB300, 0x4000
 
-gUnknown_81FF300:: @ 81FF300
+gFont2LatinGlyphs:: @ 81FF300
 	.incbin "baserom.gba", 0x1FF300, 0x8000
 
-gUnknown_8207300:: @ 8207300
+gFont2LatinGlyphWidths:: @ 8207300
 	.incbin "baserom.gba", 0x207300, 0x200
 
-gUnknown_8207500:: @ 8207500
+gFont2JapaneseGlyphs:: @ 8207500
 	.incbin "baserom.gba", 0x207500, 0x8000
 
-gUnknown_820F500:: @ 820F500
+gFont2JapaneseGlyphWidths:: @ 820F500
 	.incbin "baserom.gba", 0x20F500, 0x118
 
-gUnknown_820F618:: @ 820F618
+gFont4LatinGlyphs:: @ 820F618
 	.incbin "baserom.gba", 0x20F618, 0x8000
 
-gUnknown_8217618:: @ 8217618
+gFont4LatinGlyphWidths:: @ 8217618
 	.incbin "baserom.gba", 0x217618, 0x200
 
-gUnknown_8217818:: @ 8217818
+gFont4JapaneseGlyphs:: @ 8217818
 	.incbin "baserom.gba", 0x217818, 0x8000
 
-gUnknown_821F818:: @ 821F818
+gFont4JapaneseGlyphWidths:: @ 821F818
 	.incbin "baserom.gba", 0x21F818, 0x118
 
-gUnknown_821F930:: @ 821F930
+gFont5LatinGlyphs:: @ 821F930
 	.incbin "baserom.gba", 0x21F930, 0x8000
 
-gUnknown_8227930:: @ 8227930
+gFont5LatinGlyphWidths:: @ 8227930
 	.incbin "baserom.gba", 0x227930, 0x200
 
-gUnknown_8227B30:: @ 8227B30
+gFont5JapaneseGlyphs:: @ 8227B30
 	.incbin "baserom.gba", 0x227B30, 0x8000
 
-gUnknown_822FB30:: @ 822FB30
+gFont5JapaneseGlyphWidths:: @ 822FB30
 	.incbin "baserom.gba", 0x22FB30, 0x118
 
-gUnknown_822FC48:: @ 822FC48
+gFont9JapaneseGlyphs:: @ 822FC48
 	.incbin "baserom.gba", 0x22FC48, 0x2000

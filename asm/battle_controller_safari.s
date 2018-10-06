@@ -13,7 +13,7 @@ nullsub_79: @ 80DD534
 	thumb_func_start sub_80DD538
 sub_80DD538: @ 80DD538
 	ldr r1, _080DD548 @ =gUnknown_3004FE0
-	ldr r0, _080DD54C @ =gUnknown_2023BC4
+	ldr r0, _080DD54C @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -22,7 +22,7 @@ sub_80DD538: @ 80DD538
 	bx lr
 	.align 2, 0
 _080DD548: .4byte gUnknown_3004FE0
-_080DD54C: .4byte gUnknown_2023BC4
+_080DD54C: .4byte gActiveBattler
 _080DD550: .4byte SafariBufferRunCommand
 	thumb_func_end sub_80DD538
 
@@ -30,8 +30,8 @@ _080DD550: .4byte SafariBufferRunCommand
 SafariBufferRunCommand: @ 80DD554
 	push {lr}
 	ldr r2, _080DD588 @ =gUnknown_2023BC8
-	ldr r1, _080DD58C @ =gUnknown_825E45C
-	ldr r0, _080DD590 @ =gUnknown_2023BC4
+	ldr r1, _080DD58C @ =gBitTable
+	ldr r0, _080DD590 @ =gActiveBattler
 	ldrb r3, [r0]
 	lsls r0, r3, 2
 	adds r0, r1
@@ -55,8 +55,8 @@ SafariBufferRunCommand: @ 80DD554
 	b _080DD5A0
 	.align 2, 0
 _080DD588: .4byte gUnknown_2023BC8
-_080DD58C: .4byte gUnknown_825E45C
-_080DD590: .4byte gUnknown_2023BC4
+_080DD58C: .4byte gBitTable
+_080DD590: .4byte gActiveBattler
 _080DD594: .4byte gUnknown_2022BC4
 _080DD598: .4byte gUnknown_83FED00
 _080DD59C:
@@ -79,7 +79,7 @@ HandleInputChooseAction_0: @ 80DD5A4
 	movs r0, 0x5
 	bl PlaySE
 	ldr r1, _080DD5D8 @ =gUnknown_2023FF8
-	ldr r0, _080DD5DC @ =gUnknown_2023BC4
+	ldr r0, _080DD5DC @ =gActiveBattler
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -93,7 +93,7 @@ HandleInputChooseAction_0: @ 80DD5A4
 	.align 2, 0
 _080DD5D4: .4byte gMain
 _080DD5D8: .4byte gUnknown_2023FF8
-_080DD5DC: .4byte gUnknown_2023BC4
+_080DD5DC: .4byte gActiveBattler
 _080DD5E0:
 	cmp r0, 0x2
 	beq _080DD5F6
@@ -129,7 +129,7 @@ _080DD612:
 	cmp r0, 0
 	beq _080DD650
 	ldr r5, _080DD648 @ =gUnknown_2023FF8
-	ldr r4, _080DD64C @ =gUnknown_2023BC4
+	ldr r4, _080DD64C @ =gActiveBattler
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -150,14 +150,14 @@ _080DD612:
 	b _080DD6BE
 	.align 2, 0
 _080DD648: .4byte gUnknown_2023FF8
-_080DD64C: .4byte gUnknown_2023BC4
+_080DD64C: .4byte gActiveBattler
 _080DD650:
 	movs r0, 0x10
 	ands r0, r1
 	cmp r0, 0
 	beq _080DD68C
 	ldr r5, _080DD684 @ =gUnknown_2023FF8
-	ldr r4, _080DD688 @ =gUnknown_2023BC4
+	ldr r4, _080DD688 @ =gActiveBattler
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -178,14 +178,14 @@ _080DD650:
 	b _080DD6BE
 	.align 2, 0
 _080DD684: .4byte gUnknown_2023FF8
-_080DD688: .4byte gUnknown_2023BC4
+_080DD688: .4byte gActiveBattler
 _080DD68C:
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
 	beq _080DD6D8
 	ldr r5, _080DD6D0 @ =gUnknown_2023FF8
-	ldr r4, _080DD6D4 @ =gUnknown_2023BC4
+	ldr r4, _080DD6D4 @ =gActiveBattler
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -214,14 +214,14 @@ _080DD6BE:
 	b _080DD71A
 	.align 2, 0
 _080DD6D0: .4byte gUnknown_2023FF8
-_080DD6D4: .4byte gUnknown_2023BC4
+_080DD6D4: .4byte gActiveBattler
 _080DD6D8:
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	beq _080DD71A
 	ldr r5, _080DD720 @ =gUnknown_2023FF8
-	ldr r4, _080DD724 @ =gUnknown_2023BC4
+	ldr r4, _080DD724 @ =gActiveBattler
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -252,7 +252,7 @@ _080DD71A:
 	bx r0
 	.align 2, 0
 _080DD720: .4byte gUnknown_2023FF8
-_080DD724: .4byte gUnknown_2023BC4
+_080DD724: .4byte gActiveBattler
 	thumb_func_end HandleInputChooseAction_0
 
 	thumb_func_start sub_80DD728
@@ -260,7 +260,7 @@ sub_80DD728: @ 80DD728
 	push {lr}
 	ldr r2, _080DD750 @ =gSprites
 	ldr r1, _080DD754 @ =gUnknown_2023D44
-	ldr r0, _080DD758 @ =gUnknown_2023BC4
+	ldr r0, _080DD758 @ =gActiveBattler
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -280,7 +280,7 @@ _080DD74C:
 	.align 2, 0
 _080DD750: .4byte gSprites
 _080DD754: .4byte gUnknown_2023D44
-_080DD758: .4byte gUnknown_2023BC4
+_080DD758: .4byte gActiveBattler
 _080DD75C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80DD728
 
@@ -303,7 +303,7 @@ sub_80DD778: @ 80DD778
 	push {lr}
 	ldr r2, _080DD7A0 @ =gSprites
 	ldr r1, _080DD7A4 @ =gUnknown_3004FF0
-	ldr r0, _080DD7A8 @ =gUnknown_2023BC4
+	ldr r0, _080DD7A8 @ =gActiveBattler
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -323,7 +323,7 @@ _080DD79C:
 	.align 2, 0
 _080DD7A0: .4byte gSprites
 _080DD7A4: .4byte gUnknown_3004FF0
-_080DD7A8: .4byte gUnknown_2023BC4
+_080DD7A8: .4byte gActiveBattler
 _080DD7AC: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80DD778
 
@@ -368,7 +368,7 @@ CompleteOnSpecialAnimDone_0: @ 80DD7F0
 	beq _080DD816
 	ldr r0, _080DD824 @ =gUnknown_2024018
 	ldr r2, [r0]
-	ldr r0, _080DD828 @ =gUnknown_2023BC4
+	ldr r0, _080DD828 @ =gActiveBattler
 	ldrb r1, [r0]
 	ldr r2, [r2, 0x4]
 	lsls r0, r1, 1
@@ -388,7 +388,7 @@ _080DD81A:
 	.align 2, 0
 _080DD820: .4byte gUnknown_2024005
 _080DD824: .4byte gUnknown_2024018
-_080DD828: .4byte gUnknown_2023BC4
+_080DD828: .4byte gActiveBattler
 	thumb_func_end CompleteOnSpecialAnimDone_0
 
 	thumb_func_start sub_80DD82C
@@ -401,7 +401,7 @@ sub_80DD82C: @ 80DD82C
 	cmp r0, 0
 	bne _080DD848
 	ldr r1, _080DD850 @ =gUnknown_3004FE0
-	ldr r0, _080DD854 @ =gUnknown_2023BC4
+	ldr r0, _080DD854 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -413,7 +413,7 @@ _080DD848:
 	.align 2, 0
 _080DD84C: .4byte gUnknown_2037AB8
 _080DD850: .4byte gUnknown_3004FE0
-_080DD854: .4byte gUnknown_2023BC4
+_080DD854: .4byte gActiveBattler
 _080DD858: .4byte CompleteWhenChosePokeblock
 	thumb_func_end sub_80DD82C
 
@@ -451,7 +451,7 @@ CompleteOnFinishedBattleAnimation_3: @ 80DD898
 	push {lr}
 	ldr r0, _080DD8C0 @ =gUnknown_2024018
 	ldr r2, [r0]
-	ldr r0, _080DD8C4 @ =gUnknown_2023BC4
+	ldr r0, _080DD8C4 @ =gActiveBattler
 	ldrb r1, [r0]
 	ldr r2, [r2, 0x4]
 	lsls r0, r1, 1
@@ -469,7 +469,7 @@ _080DD8BA:
 	bx r0
 	.align 2, 0
 _080DD8C0: .4byte gUnknown_2024018
-_080DD8C4: .4byte gUnknown_2023BC4
+_080DD8C4: .4byte gActiveBattler
 	thumb_func_end CompleteOnFinishedBattleAnimation_3
 
 	thumb_func_start SafariBufferExecCompleted
@@ -477,13 +477,13 @@ SafariBufferExecCompleted: @ 80DD8C8
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, _080DD908 @ =gUnknown_3004FE0
-	ldr r4, _080DD90C @ =gUnknown_2023BC4
+	ldr r4, _080DD90C @ =gActiveBattler
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
 	ldr r1, _080DD910 @ =SafariBufferRunCommand
 	str r1, [r0]
-	ldr r0, _080DD914 @ =gUnknown_2022B4C
+	ldr r0, _080DD914 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -505,13 +505,13 @@ SafariBufferExecCompleted: @ 80DD8C8
 	b _080DD92E
 	.align 2, 0
 _080DD908: .4byte gUnknown_3004FE0
-_080DD90C: .4byte gUnknown_2023BC4
+_080DD90C: .4byte gActiveBattler
 _080DD910: .4byte SafariBufferRunCommand
-_080DD914: .4byte gUnknown_2022B4C
+_080DD914: .4byte gBattleTypeFlags
 _080DD918: .4byte gUnknown_2022BC4
 _080DD91C:
 	ldr r2, _080DD938 @ =gUnknown_2023BC8
-	ldr r1, _080DD93C @ =gUnknown_825E45C
+	ldr r1, _080DD93C @ =gBitTable
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
@@ -526,7 +526,7 @@ _080DD92E:
 	bx r0
 	.align 2, 0
 _080DD938: .4byte gUnknown_2023BC8
-_080DD93C: .4byte gUnknown_825E45C
+_080DD93C: .4byte gBitTable
 	thumb_func_end SafariBufferExecCompleted
 
 	thumb_func_start CompleteOnFinishedStatusAnimation_3
@@ -534,7 +534,7 @@ CompleteOnFinishedStatusAnimation_3: @ 80DD940
 	push {lr}
 	ldr r0, _080DD968 @ =gUnknown_2024018
 	ldr r2, [r0]
-	ldr r0, _080DD96C @ =gUnknown_2023BC4
+	ldr r0, _080DD96C @ =gActiveBattler
 	ldrb r1, [r0]
 	ldr r2, [r2, 0x4]
 	lsls r0, r1, 1
@@ -552,7 +552,7 @@ _080DD962:
 	bx r0
 	.align 2, 0
 _080DD968: .4byte gUnknown_2024018
-_080DD96C: .4byte gUnknown_2023BC4
+_080DD96C: .4byte gActiveBattler
 	thumb_func_end CompleteOnFinishedStatusAnimation_3
 
 	thumb_func_start sub_80DD970
@@ -617,7 +617,7 @@ SafariHandleDrawTrainerPic: @ 80DD9C4
 	ldr r4, _080DDA7C @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
-	ldr r5, _080DDA80 @ =gUnknown_2023BC4
+	ldr r5, _080DDA80 @ =gActiveBattler
 	ldrb r1, [r5]
 	bl sub_8034750
 	ldr r0, [r4]
@@ -703,7 +703,7 @@ SafariHandleDrawTrainerPic: @ 80DD9C4
 	bx r0
 	.align 2, 0
 _080DDA7C: .4byte gSaveBlock2Ptr
-_080DDA80: .4byte gUnknown_2023BC4
+_080DDA80: .4byte gActiveBattler
 _080DDA84: .4byte gUnknown_20244DC
 _080DDA88: .4byte gUnknown_8239F8C
 _080DDA8C: .4byte gUnknown_2023D44
@@ -757,7 +757,7 @@ sub_80DDAD4: @ 80DDAD4
 	ldr r1, _080DDB18 @ =gUnknown_2024005
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r5, _080DDB1C @ =gUnknown_2023BC4
+	ldr r5, _080DDB1C @ =gActiveBattler
 	ldrb r4, [r5]
 	movs r0, 0x1
 	bl GetBankByIdentity
@@ -780,7 +780,7 @@ sub_80DDAD4: @ 80DDAD4
 	.align 2, 0
 _080DDB14: .4byte gUnknown_2024018
 _080DDB18: .4byte gUnknown_2024005
-_080DDB1C: .4byte gUnknown_2023BC4
+_080DDB1C: .4byte gActiveBattler
 _080DDB20: .4byte gUnknown_3004FE0
 _080DDB24: .4byte CompleteOnSpecialAnimDone_0
 	thumb_func_end sub_80DDAD4
@@ -789,7 +789,7 @@ _080DDB24: .4byte CompleteOnSpecialAnimDone_0
 sub_80DDB28: @ 80DDB28
 	push {r4,r5,lr}
 	ldr r1, _080DDB70 @ =gUnknown_2022BC4
-	ldr r5, _080DDB74 @ =gUnknown_2023BC4
+	ldr r5, _080DDB74 @ =gActiveBattler
 	ldrb r0, [r5]
 	lsls r0, 9
 	adds r1, 0x1
@@ -823,7 +823,7 @@ sub_80DDB28: @ 80DDB28
 	bx r0
 	.align 2, 0
 _080DDB70: .4byte gUnknown_2022BC4
-_080DDB74: .4byte gUnknown_2023BC4
+_080DDB74: .4byte gActiveBattler
 _080DDB78: .4byte gUnknown_2024018
 _080DDB7C: .4byte gUnknown_2024005
 _080DDB80: .4byte gUnknown_3004FE0
@@ -854,7 +854,7 @@ sub_80DDBA0: @ 80DDBA0
 	strh r1, [r0]
 	ldr r0, _080DDBD8 @ =gUnknown_2022976
 	strh r1, [r0]
-	ldr r0, _080DDBDC @ =gUnknown_2023BC4
+	ldr r0, _080DDBDC @ =gActiveBattler
 	ldrb r4, [r0]
 	lsls r4, 9
 	ldr r0, _080DDBE0 @ =gUnknown_2022BC6
@@ -873,7 +873,7 @@ sub_80DDBA0: @ 80DDBA0
 	.align 2, 0
 _080DDBD4: .4byte gUnknown_2022974
 _080DDBD8: .4byte gUnknown_2022976
-_080DDBDC: .4byte gUnknown_2023BC4
+_080DDBDC: .4byte gActiveBattler
 _080DDBE0: .4byte gUnknown_2022BC6
 _080DDBE4: .4byte gUnknown_202298C
 _080DDBE8:
@@ -882,7 +882,7 @@ _080DDBE8:
 	bl sub_80D87BC
 _080DDBF0:
 	ldr r1, _080DDC08 @ =gUnknown_3004FE0
-	ldr r0, _080DDC0C @ =gUnknown_2023BC4
+	ldr r0, _080DDC0C @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -894,14 +894,14 @@ _080DDBF0:
 	.align 2, 0
 _080DDC04: .4byte gUnknown_202298C
 _080DDC08: .4byte gUnknown_3004FE0
-_080DDC0C: .4byte gUnknown_2023BC4
+_080DDC0C: .4byte gActiveBattler
 _080DDC10: .4byte CompleteOnInactiveTextPrinter_3
 	thumb_func_end sub_80DDBA0
 
 	thumb_func_start sub_80DDC14
 sub_80DDC14: @ 80DDC14
 	push {lr}
-	ldr r0, _080DDC2C @ =gUnknown_2023BC4
+	ldr r0, _080DDC2C @ =gActiveBattler
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -910,7 +910,7 @@ sub_80DDC14: @ 80DDC14
 	bl sub_80DDBA0
 	b _080DDC34
 	.align 2, 0
-_080DDC2C: .4byte gUnknown_2023BC4
+_080DDC2C: .4byte gActiveBattler
 _080DDC30:
 	bl SafariBufferExecCompleted
 _080DDC34:
@@ -932,7 +932,7 @@ sub_80DDC38: @ 80DDC38
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, _080DDC6C @ =gUnknown_3004FE0
-	ldr r0, _080DDC70 @ =gUnknown_2023BC4
+	ldr r0, _080DDC70 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -945,7 +945,7 @@ _080DDC5E:
 _080DDC64: .4byte gUnknown_2022974
 _080DDC68: .4byte gUnknown_2022976
 _080DDC6C: .4byte gUnknown_3004FE0
-_080DDC70: .4byte gUnknown_2023BC4
+_080DDC70: .4byte gActiveBattler
 _080DDC74: .4byte HandleInputChooseAction_0
 	thumb_func_end sub_80DDC38
 
@@ -953,7 +953,7 @@ _080DDC74: .4byte HandleInputChooseAction_0
 sub_80DDC78: @ 80DDC78
 	push {r4,lr}
 	ldr r1, _080DDCCC @ =gUnknown_3004FE0
-	ldr r0, _080DDCD0 @ =gUnknown_2023BC4
+	ldr r0, _080DDCD0 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -974,7 +974,7 @@ _080DDC9A:
 	cmp r4, 0x3
 	ble _080DDC9A
 	ldr r1, _080DDCE0 @ =gUnknown_2023FF8
-	ldr r0, _080DDCD0 @ =gUnknown_2023BC4
+	ldr r0, _080DDCD0 @ =gActiveBattler
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -990,7 +990,7 @@ _080DDC9A:
 	bx r0
 	.align 2, 0
 _080DDCCC: .4byte gUnknown_3004FE0
-_080DDCD0: .4byte gUnknown_2023BC4
+_080DDCD0: .4byte gActiveBattler
 _080DDCD4: .4byte sub_80DDC38
 _080DDCD8: .4byte gUnknown_83FDA4C
 _080DDCDC: .4byte gUnknown_83FE747
@@ -1027,7 +1027,7 @@ sub_80DDD04: @ 80DDD04
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 	ldr r1, _080DDD34 @ =gUnknown_3004FE0
-	ldr r2, _080DDD38 @ =gUnknown_2023BC4
+	ldr r2, _080DDD38 @ =gActiveBattler
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
@@ -1041,7 +1041,7 @@ sub_80DDD04: @ 80DDD04
 	bx r0
 	.align 2, 0
 _080DDD34: .4byte gUnknown_3004FE0
-_080DDD38: .4byte gUnknown_2023BC4
+_080DDD38: .4byte gActiveBattler
 _080DDD3C: .4byte sub_80DD82C
 _080DDD40: .4byte gUnknown_2024004
 	thumb_func_end sub_80DDD04
@@ -1082,17 +1082,17 @@ sub_80DDD68: @ 80DDD68
 SafariHandleStatusIconUpdate: @ 80DDD74
 	push {lr}
 	ldr r0, _080DDDA0 @ =gUnknown_3004FF0
-	ldr r1, _080DDDA4 @ =gUnknown_2023BC4
+	ldr r1, _080DDDA4 @ =gActiveBattler
 	ldrb r1, [r1]
 	adds r0, r1, r0
 	ldrb r0, [r0]
-	ldr r2, _080DDDA8 @ =gUnknown_2023BCE
+	ldr r2, _080DDDA8 @ =gBattlerPartyIndexes
 	lsls r1, 1
 	adds r1, r2
 	ldrh r2, [r1]
 	movs r1, 0x64
 	muls r1, r2
-	ldr r2, _080DDDAC @ =gUnknown_2024284
+	ldr r2, _080DDDAC @ =gPlayerParty
 	adds r1, r2
 	movs r2, 0xB
 	bl UpdateHealthboxAttribute
@@ -1101,9 +1101,9 @@ SafariHandleStatusIconUpdate: @ 80DDD74
 	bx r0
 	.align 2, 0
 _080DDDA0: .4byte gUnknown_3004FF0
-_080DDDA4: .4byte gUnknown_2023BC4
-_080DDDA8: .4byte gUnknown_2023BCE
-_080DDDAC: .4byte gUnknown_2024284
+_080DDDA4: .4byte gActiveBattler
+_080DDDA8: .4byte gBattlerPartyIndexes
+_080DDDAC: .4byte gPlayerParty
 	thumb_func_end SafariHandleStatusIconUpdate
 
 	thumb_func_start sub_80DDDB0
@@ -1237,7 +1237,7 @@ sub_80DDE64: @ 80DDE64
 	thumb_func_start SafariHandlePlaySE
 SafariHandlePlaySE: @ 80DDE70
 	push {r4,lr}
-	ldr r4, _080DDEAC @ =gUnknown_2023BC4
+	ldr r4, _080DDEAC @ =gActiveBattler
 	ldrb r0, [r4]
 	bl GetBankSide
 	lsls r0, 24
@@ -1265,7 +1265,7 @@ _080DDE84:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DDEAC: .4byte gUnknown_2023BC4
+_080DDEAC: .4byte gActiveBattler
 _080DDEB0: .4byte gUnknown_2022BC4
 	thumb_func_end SafariHandlePlaySE
 
@@ -1273,7 +1273,7 @@ _080DDEB0: .4byte gUnknown_2022BC4
 SafariHandlecmd44: @ 80DDEB4
 	push {lr}
 	ldr r2, _080DDEDC @ =gUnknown_2022BC4
-	ldr r0, _080DDEE0 @ =gUnknown_2023BC4
+	ldr r0, _080DDEE0 @ =gActiveBattler
 	ldrb r1, [r0]
 	lsls r1, 9
 	adds r0, r2, 0x1
@@ -1290,21 +1290,21 @@ SafariHandlecmd44: @ 80DDEB4
 	bx r0
 	.align 2, 0
 _080DDEDC: .4byte gUnknown_2022BC4
-_080DDEE0: .4byte gUnknown_2023BC4
+_080DDEE0: .4byte gActiveBattler
 	thumb_func_end SafariHandlecmd44
 
 	thumb_func_start SafariHandleFaintingCry
 SafariHandleFaintingCry: @ 80DDEE4
 	push {lr}
-	ldr r1, _080DDF14 @ =gUnknown_2023BCE
-	ldr r0, _080DDF18 @ =gUnknown_2023BC4
+	ldr r1, _080DDF14 @ =gBattlerPartyIndexes
+	ldr r0, _080DDF18 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080DDF1C @ =gUnknown_2024284
+	ldr r1, _080DDF1C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	bl GetMonData
@@ -1316,16 +1316,16 @@ SafariHandleFaintingCry: @ 80DDEE4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DDF14: .4byte gUnknown_2023BCE
-_080DDF18: .4byte gUnknown_2023BC4
-_080DDF1C: .4byte gUnknown_2024284
+_080DDF14: .4byte gBattlerPartyIndexes
+_080DDF18: .4byte gActiveBattler
+_080DDF1C: .4byte gPlayerParty
 	thumb_func_end SafariHandleFaintingCry
 
 	thumb_func_start SafariHandleIntroSlide
 SafariHandleIntroSlide: @ 80DDF20
 	push {lr}
 	ldr r1, _080DDF48 @ =gUnknown_2022BC4
-	ldr r0, _080DDF4C @ =gUnknown_2023BC4
+	ldr r0, _080DDF4C @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 9
 	adds r1, 0x1
@@ -1342,7 +1342,7 @@ SafariHandleIntroSlide: @ 80DDF20
 	bx r0
 	.align 2, 0
 _080DDF48: .4byte gUnknown_2022BC4
-_080DDF4C: .4byte gUnknown_2023BC4
+_080DDF4C: .4byte gActiveBattler
 _080DDF50: .4byte gUnknown_2023F4C
 	thumb_func_end SafariHandleIntroSlide
 
@@ -1350,17 +1350,17 @@ _080DDF50: .4byte gUnknown_2023F4C
 SafariHandleIntroTrainerBallThrow: @ 80DDF54
 	push {r4,r5,lr}
 	ldr r5, _080DDF98 @ =gUnknown_3004FF0
-	ldr r4, _080DDF9C @ =gUnknown_2023BC4
+	ldr r4, _080DDF9C @ =gActiveBattler
 	ldrb r1, [r4]
 	adds r0, r1, r5
 	ldrb r0, [r0]
-	ldr r2, _080DDFA0 @ =gUnknown_2023BCE
+	ldr r2, _080DDFA0 @ =gBattlerPartyIndexes
 	lsls r1, 1
 	adds r1, r2
 	ldrh r2, [r1]
 	movs r1, 0x64
 	muls r1, r2
-	ldr r2, _080DDFA4 @ =gUnknown_2024284
+	ldr r2, _080DDFA4 @ =gPlayerParty
 	adds r1, r2
 	movs r2, 0xA
 	bl UpdateHealthboxAttribute
@@ -1381,9 +1381,9 @@ SafariHandleIntroTrainerBallThrow: @ 80DDF54
 	bx r0
 	.align 2, 0
 _080DDF98: .4byte gUnknown_3004FF0
-_080DDF9C: .4byte gUnknown_2023BC4
-_080DDFA0: .4byte gUnknown_2023BCE
-_080DDFA4: .4byte gUnknown_2024284
+_080DDF9C: .4byte gActiveBattler
+_080DDFA0: .4byte gBattlerPartyIndexes
+_080DDFA4: .4byte gPlayerParty
 _080DDFA8: .4byte gUnknown_3004FE0
 _080DDFAC: .4byte sub_80DD778
 	thumb_func_end SafariHandleIntroTrainerBallThrow
@@ -1425,7 +1425,7 @@ SafariHandleBattleAnimation: @ 80DDFE0
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, _080DE018 @ =gUnknown_2022BC4
-	ldr r6, _080DE01C @ =gUnknown_2023BC4
+	ldr r6, _080DE01C @ =gActiveBattler
 	ldrb r2, [r6]
 	lsls r1, r2, 9
 	adds r0, r5, 0x1
@@ -1450,7 +1450,7 @@ SafariHandleBattleAnimation: @ 80DDFE0
 	b _080DE02C
 	.align 2, 0
 _080DE018: .4byte gUnknown_2022BC4
-_080DE01C: .4byte gUnknown_2023BC4
+_080DE01C: .4byte gActiveBattler
 _080DE020:
 	ldr r0, _080DE034 @ =gUnknown_3004FE0
 	ldrb r1, [r6]
@@ -1489,7 +1489,7 @@ SafariHandleCmd55: @ 80DE054
 	push {r4,lr}
 	ldr r2, _080DE098 @ =gUnknown_2023E8A
 	ldr r1, _080DE09C @ =gUnknown_2022BC4
-	ldr r4, _080DE0A0 @ =gUnknown_2023BC4
+	ldr r4, _080DE0A0 @ =gActiveBattler
 	ldrb r0, [r4]
 	lsls r0, 9
 	adds r1, 0x1
@@ -1501,7 +1501,7 @@ SafariHandleCmd55: @ 80DE054
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl SafariBufferExecCompleted
-	ldr r0, _080DE0A4 @ =gUnknown_2022B4C
+	ldr r0, _080DE0A4 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x6
 	ands r0, r1
@@ -1520,8 +1520,8 @@ _080DE090:
 	.align 2, 0
 _080DE098: .4byte gUnknown_2023E8A
 _080DE09C: .4byte gUnknown_2022BC4
-_080DE0A0: .4byte gUnknown_2023BC4
-_080DE0A4: .4byte gUnknown_2022B4C
+_080DE0A0: .4byte gActiveBattler
+_080DE0A4: .4byte gBattleTypeFlags
 _080DE0A8: .4byte gUnknown_3004FE0
 _080DE0AC: .4byte sub_80DD7B0
 	thumb_func_end SafariHandleCmd55

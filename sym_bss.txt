@@ -96,33 +96,9 @@ gUnknown_3000E9C: @ 3000E9C
 gUnknown_3000EA0: @ 3000EA0
 	.space 0x8
 
-gUnknown_3000EA8: @ 3000EA8
-	.space 0x8
+	.include "src/script.o"
 
-gUnknown_3000EB0: @ 3000EB0
-	.space 0x78
-
-gUnknown_3000F28: @ 3000F28
-	.space 0x74
-
-gUnknown_3000F9C: @ 3000F9C
-	.space 0x1
-
-gUnknown_3000F9D: @ 3000F9D
-	.space 0x1
-
-gUnknown_3000F9E: @ 3000F9E
-	.space 0x1
-
-gUnknown_3000F9F: @ 3000F9F
-	.space 0x1
-
-gUnknown_3000FA0: @ 3000FA0
-	.space 0x1
-
-gUnknown_3000FA1: @ 3000FA1
-	.space 0x3
-
+	.align 2
 gUnknown_3000FA4: @ 3000FA4
 	.space 0x4
 
@@ -153,21 +129,9 @@ gUnknown_3000FB8: @ 3000FB8
 gUnknown_3000FBC: @ 3000FBC
 	.space 0x4
 
-gUnknown_3000FC0: @ 3000FC0
-	.space 0x2
+	.include "src/sound.o"
 
-gUnknown_3000FC2: @ 3000FC2
-	.space 0x2
-
-gUnknown_3000FC4: @ 3000FC4
-	.space 0x1
-
-gUnknown_3000FC5: @ 3000FC5
-	.space 0x1
-
-gUnknown_3000FC6: @ 3000FC6
-	.space 0x2
-
+	.align 2
 gUnknown_3000FC8: @ 3000FC8
 	.space 0x20
 

@@ -83,9 +83,9 @@ _0813B90C: .4byte gMain
 _0813B910: .4byte gUnknown_203F175
 _0813B914: .4byte gUnknown_3005ECC
 _0813B918:
-	ldr r0, _0813B94C @ =gMPlay_SE1
+	ldr r0, _0813B94C @ =gMPlayInfo_SE1
 	bl m4aMPlayStop
-	ldr r0, _0813B950 @ =gMPlay_SE2
+	ldr r0, _0813B950 @ =gMPlayInfo_SE2
 	bl m4aMPlayStop
 	movs r0, 0xFA
 	bl PlaySE
@@ -93,7 +93,7 @@ _0813B918:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0813B93C
-	ldr r0, _0813B958 @ =gMPlay_BGM
+	ldr r0, _0813B958 @ =gMPlayInfo_BGM
 	ldr r1, _0813B95C @ =0x0000ffff
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
@@ -106,10 +106,10 @@ _0813B93C:
 	movs r0, 0x1
 	b _0813BB22
 	.align 2, 0
-_0813B94C: .4byte gMPlay_SE1
-_0813B950: .4byte gMPlay_SE2
+_0813B94C: .4byte gMPlayInfo_SE1
+_0813B950: .4byte gMPlayInfo_SE2
 _0813B954: .4byte gUnknown_203F174
-_0813B958: .4byte gMPlay_BGM
+_0813B958: .4byte gMPlayInfo_BGM
 _0813B95C: .4byte 0x0000ffff
 _0813B960: .4byte gUnknown_203F177
 _0813B964: .4byte gUnknown_203F178
@@ -269,7 +269,7 @@ _0813BAE0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0813BAF4
-	ldr r0, _0813BB08 @ =gMPlay_BGM
+	ldr r0, _0813BB08 @ =gMPlayInfo_BGM
 	ldr r1, _0813BB0C @ =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -282,7 +282,7 @@ _0813BAF4:
 	b _0813BB22
 	.align 2, 0
 _0813BB04: .4byte gUnknown_203F174
-_0813BB08: .4byte gMPlay_BGM
+_0813BB08: .4byte gMPlayInfo_BGM
 _0813BB0C: .4byte 0x0000ffff
 _0813BB10: .4byte gUnknown_203F178
 _0813BB14:

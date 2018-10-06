@@ -56,7 +56,7 @@ _08134548:
 	adds r0, r5, r2
 	mov r3, r8
 	str r3, [r0]
-	ldr r0, _08134588 @ =gUnknown_202402C
+	ldr r0, _08134588 @ =gEnemyParty
 	cmp r8, r0
 	bne _08134590
 	ldr r0, _0813458C @ =0x00003024
@@ -69,7 +69,7 @@ _08134578: .4byte gUnknown_203B16D
 _0813457C: .4byte gUnknown_203B16E
 _08134580: .4byte 0x000032f8
 _08134584: .4byte 0x000032f4
-_08134588: .4byte gUnknown_202402C
+_08134588: .4byte gEnemyParty
 _0813458C: .4byte 0x00003024
 _08134590:
 	ldr r2, _081345C0 @ =0x00003024
@@ -747,7 +747,7 @@ _08134AFC: .4byte 0x00003214
 _08134B00: .4byte sub_8134BAC
 _08134B04: .4byte 0x00003270
 _08134B08:
-	ldr r2, _08134B28 @ =gUnknown_3005090
+	ldr r2, _08134B28 @ =gTasks
 	ldr r1, _08134B2C @ =0x00003018
 	adds r0, r3, r1
 	ldrb r1, [r0]
@@ -763,7 +763,7 @@ _08134B08:
 	strb r0, [r1]
 	b _08134B9A
 	.align 2, 0
-_08134B28: .4byte gUnknown_3005090
+_08134B28: .4byte gTasks
 _08134B2C: .4byte 0x00003018
 _08134B30: .4byte sub_8134E84
 _08134B34: .4byte 0x00003270
@@ -832,7 +832,7 @@ sub_8134BAC: @ 8134BAC
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r6, _08134BD4 @ =gUnknown_3005098
+	ldr r6, _08134BD4 @ =gTasks+0x8
 	adds r7, r0, r6
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -846,7 +846,7 @@ _08134BCA:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08134BD4: .4byte gUnknown_3005098
+_08134BD4: .4byte gTasks+0x8
 _08134BD8: .4byte _08134BDC
 	.align 2, 0
 _08134BDC:
@@ -1439,7 +1439,7 @@ _08135114:
 	b _08135180
 _08135132:
 	bl sub_8138440
-	ldr r3, _08135168 @ =gUnknown_3005090
+	ldr r3, _08135168 @ =gTasks
 	ldr r2, [r4]
 	ldr r1, _0813516C @ =0x00003018
 	adds r0, r2, r1
@@ -1464,7 +1464,7 @@ _08135132:
 	strb r1, [r0]
 	b _0813518E
 	.align 2, 0
-_08135168: .4byte gUnknown_3005090
+_08135168: .4byte gTasks
 _0813516C: .4byte 0x00003018
 _08135170: .4byte sub_8138CD8
 _08135174: .4byte 0x00003284
@@ -1742,7 +1742,7 @@ _081353EC:
 	b _0813544C
 _08135400:
 	bl sub_8138440
-	ldr r3, _08135434 @ =gUnknown_3005090
+	ldr r3, _08135434 @ =gTasks
 	ldr r2, [r4]
 	ldr r1, _08135438 @ =0x00003018
 	adds r0, r2, r1
@@ -1767,7 +1767,7 @@ _08135400:
 	strb r1, [r0]
 	b _0813545A
 	.align 2, 0
-_08135434: .4byte gUnknown_3005090
+_08135434: .4byte gTasks
 _08135438: .4byte 0x00003018
 _0813543C: .4byte sub_8134840
 _08135440: .4byte 0x00003284
@@ -3404,7 +3404,7 @@ _08136168:
 	adds r1, r4, 0
 	bl GetSpeciesName
 	ldr r1, [r6]
-	ldr r2, _081361F8 @ =gUnknown_8254784
+	ldr r2, _081361F8 @ =gBaseStats
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
@@ -3454,7 +3454,7 @@ _08136168:
 	.align 2, 0
 _081361F0: .4byte 0x00003290
 _081361F4: .4byte 0x00003028
-_081361F8: .4byte gUnknown_8254784
+_081361F8: .4byte gBaseStats
 _081361FC: .4byte 0x00003220
 _08136200: .4byte 0x00003221
 _08136204: .4byte 0x00003034
@@ -3976,7 +3976,7 @@ _08136630:
 	ldr r4, _08136790 @ =gUnknown_8253AE4
 	adds r2, r5, 0x1
 	lsls r2, 2
-	ldr r3, _08136794 @ =gUnknown_8254784
+	ldr r3, _08136794 @ =gBaseStats
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4085,7 +4085,7 @@ _08136784: .4byte 0x0000309c
 _08136788: .4byte gUnknown_203B144
 _0813678C: .4byte 0x000031a4
 _08136790: .4byte gUnknown_8253AE4
-_08136794: .4byte gUnknown_8254784
+_08136794: .4byte gBaseStats
 _08136798: .4byte 0x000031b0
 _0813679C: .4byte 0x000031bc
 _081367A0: .4byte gUnknown_824FC40
@@ -4222,7 +4222,7 @@ _081368B0:
 	ldr r1, _0813694C @ =0x0000324e
 	adds r4, r0, r1
 	add r4, r9
-	ldr r5, _08136950 @ =gUnknown_8250C04
+	ldr r5, _08136950 @ =gBattleMoves
 	ldr r2, _08136954 @ =0x00003258
 	adds r3, r0, r2
 	add r3, r9
@@ -4289,7 +4289,7 @@ _081368B0:
 	.align 2, 0
 _08136948: .4byte 0x00003264
 _0813694C: .4byte 0x0000324e
-_08136950: .4byte gUnknown_8250C04
+_08136950: .4byte gBattleMoves
 _08136954: .4byte 0x00003258
 _08136958: .4byte 0x00003128
 _0813695C: .4byte gUnknown_8247094
@@ -4381,7 +4381,7 @@ _081369D0:
 	lsls r1, 1
 	subs r4, r1
 	strh r4, [r2]
-	ldr r2, _08136A64 @ =gUnknown_8250C04
+	ldr r2, _08136A64 @ =gBattleMoves
 	ldr r6, [r6]
 	ldr r3, _08136A5C @ =0x00003258
 	adds r0, r6, r3
@@ -4409,7 +4409,7 @@ _08136A54: .4byte 0x00003290
 _08136A58: .4byte 0x000030f0
 _08136A5C: .4byte 0x00003258
 _08136A60: .4byte gUnknown_203B144
-_08136A64: .4byte gUnknown_8250C04
+_08136A64: .4byte gBattleMoves
 _08136A68: .4byte 0x0000316c
 _08136A6C: .4byte gUnknown_8416213
 _08136A70:
@@ -4423,7 +4423,7 @@ _08136A70:
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 _08136A84:
-	ldr r2, _08136AB4 @ =gUnknown_8250C04
+	ldr r2, _08136AB4 @ =gBattleMoves
 	ldr r0, _08136AB8 @ =gUnknown_203B140
 	ldr r3, [r0]
 	ldr r1, _08136ABC @ =0x00003258
@@ -4446,7 +4446,7 @@ _08136A84:
 	b _08136ADA
 	.align 2, 0
 _08136AB0: .4byte 0x0000316c
-_08136AB4: .4byte gUnknown_8250C04
+_08136AB4: .4byte gBattleMoves
 _08136AB8: .4byte gUnknown_203B140
 _08136ABC: .4byte 0x00003258
 _08136AC0: .4byte 0x00003188
@@ -6230,7 +6230,7 @@ sub_8137970: @ 8137970
 	ldr r1, _081379CC @ =0x000032f4
 	adds r0, r2, r1
 	ldr r1, [r0]
-	ldr r0, _081379D0 @ =gUnknown_202402C
+	ldr r0, _081379D0 @ =gEnemyParty
 	cmp r1, r0
 	beq _081379E4
 	cmp r4, 0xFF
@@ -6257,7 +6257,7 @@ sub_8137970: @ 8137970
 _081379C4: .4byte gUnknown_203B140
 _081379C8: .4byte 0x00003290
 _081379CC: .4byte 0x000032f4
-_081379D0: .4byte gUnknown_202402C
+_081379D0: .4byte gEnemyParty
 _081379D4:
 	cmp r4, 0xFD
 	bne _081379DA
@@ -7623,7 +7623,7 @@ sub_813847C: @ 813847C
 	ldr r1, _081384C0 @ =0x000032f4
 	adds r0, r1
 	ldr r1, [r0]
-	ldr r0, _081384C4 @ =gUnknown_202402C
+	ldr r0, _081384C4 @ =gEnemyParty
 	cmp r1, r0
 	bne _081384D0
 	bl GetMultiplayerId
@@ -7648,7 +7648,7 @@ sub_813847C: @ 813847C
 	.align 2, 0
 _081384BC: .4byte gUnknown_203B140
 _081384C0: .4byte 0x000032f4
-_081384C4: .4byte gUnknown_202402C
+_081384C4: .4byte gEnemyParty
 _081384C8: .4byte gUnknown_202273C
 _081384CC: .4byte 0x0000304c
 _081384D0:
@@ -9046,7 +9046,7 @@ _08138FDC: .4byte gUnknown_203B16E
 _08138FE0: .4byte 0x00003224
 _08138FE4: .4byte 0x00003214
 _08138FE8:
-	ldr r2, _08139004 @ =gUnknown_3005090
+	ldr r2, _08139004 @ =gTasks
 	ldr r6, _08139008 @ =0x00003018
 	adds r0, r6
 	ldrb r1, [r0]
@@ -9060,7 +9060,7 @@ _08138FE8:
 	strb r0, [r3]
 	b _08139094
 	.align 2, 0
-_08139004: .4byte gUnknown_3005090
+_08139004: .4byte gTasks
 _08139008: .4byte 0x00003018
 _0813900C: .4byte sub_81351A0
 _08139010:
@@ -12273,7 +12273,7 @@ _0813A9E2:
 	ldr r3, _0813AADC @ =gUnknown_8253AE4
 	adds r1, r5, 0x1
 	lsls r1, 2
-	ldr r2, _0813AAE0 @ =gUnknown_8254784
+	ldr r2, _0813AAE0 @ =gBaseStats
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
@@ -12396,7 +12396,7 @@ _0813AAB8:
 _0813AAD4: .4byte gUnknown_203B140
 _0813AAD8: .4byte 0x00003290
 _0813AADC: .4byte gUnknown_8253AE4
-_0813AAE0: .4byte gUnknown_8254784
+_0813AAE0: .4byte gBaseStats
 _0813AAE4: .4byte gUnknown_203B160
 _0813AAE8:
 	movs r6, 0x2
@@ -13439,7 +13439,7 @@ _0813B30A:
 	ldrb r1, [r5]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0813B338 @ =gUnknown_2024284
+	ldr r1, _0813B338 @ =gPlayerParty
 	adds r0, r1
 	bl sub_813B2C8
 	lsls r0, 24
@@ -13451,7 +13451,7 @@ _0813B30A:
 	b _0813B340
 	.align 2, 0
 _0813B334: .4byte gUnknown_8463FB8
-_0813B338: .4byte gUnknown_2024284
+_0813B338: .4byte gPlayerParty
 _0813B33C:
 	movs r0, 0x1
 	negs r0, r0
@@ -13477,7 +13477,7 @@ _0813B34E:
 	ldrb r1, [r5]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0813B37C @ =gUnknown_2024284
+	ldr r1, _0813B37C @ =gPlayerParty
 	adds r0, r1
 	bl sub_813B2C8
 	lsls r0, 24
@@ -13489,7 +13489,7 @@ _0813B34E:
 	b _0813B384
 	.align 2, 0
 _0813B378: .4byte gUnknown_8463FB8
-_0813B37C: .4byte gUnknown_2024284
+_0813B37C: .4byte gPlayerParty
 _0813B380:
 	movs r0, 0x1
 	negs r0, r0

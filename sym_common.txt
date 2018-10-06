@@ -111,7 +111,7 @@ gUnknown_3004F80: @ 3004F80
 gUnknown_3004F84: @ 3004F84
 	.space 0xC
 
-gUnknown_3004F90: @ 3004F90
+gBattleResults: @ 3004F90
 	.space 0x44
 
 gUnknown_3004FD4: @ 3004FD4
@@ -195,14 +195,11 @@ gUnknown_3005078: @ 3005078
 gUnknown_300507C: @ 300507C
 	.space 0x4
 
-gUnknown_3005080: @ 3005080
-	.space 0x10
-
-gUnknown_3005090: @ 3005090
-	.space 0x8
-
-gUnknown_3005098: @ 3005098
-	.space 0x298
+	.include "sound.o"
+	.include "task.o"
+	
+	@ what is this?
+	.space 0x20
 
 gUnknown_3005330: @ 3005330
 	.space 0x4

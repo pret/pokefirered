@@ -19,7 +19,7 @@ DoPokeballSendOutAnimation: @ 804A938
 	strb r0, [r1]
 	ldr r0, _0804A990 @ =gUnknown_2024018
 	ldr r0, [r0]
-	ldr r6, _0804A994 @ =gUnknown_2023BC4
+	ldr r6, _0804A994 @ =gActiveBattler
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
 	lsls r0, r1, 1
@@ -35,7 +35,7 @@ DoPokeballSendOutAnimation: @ 804A938
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0804A99C @ =gUnknown_3005090
+	ldr r2, _0804A99C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -51,9 +51,9 @@ DoPokeballSendOutAnimation: @ 804A938
 	.align 2, 0
 _0804A98C: .4byte gUnknown_2024005
 _0804A990: .4byte gUnknown_2024018
-_0804A994: .4byte gUnknown_2023BC4
+_0804A994: .4byte gActiveBattler
 _0804A998: .4byte sub_804A9A0
-_0804A99C: .4byte gUnknown_3005090
+_0804A99C: .4byte gTasks
 	thumb_func_end DoPokeballSendOutAnimation
 
 	thumb_func_start sub_804A9A0
@@ -69,7 +69,7 @@ sub_804A9A0: @ 804A9A0
 	str r0, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
-	ldr r1, _0804A9D4 @ =gUnknown_3005090
+	ldr r1, _0804A9D4 @ =gTasks
 	ldr r2, [sp]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -84,7 +84,7 @@ sub_804A9A0: @ 804A9A0
 	strh r0, [r1, 0x8]
 	b _0804ABB8
 	.align 2, 0
-_0804A9D4: .4byte gUnknown_3005090
+_0804A9D4: .4byte gTasks
 _0804A9D8:
 	ldrh r0, [r1, 0xC]
 	mov r9, r0
@@ -94,25 +94,25 @@ _0804A9D8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804AA04
-	ldr r1, _0804A9FC @ =gUnknown_2023BCE
+	ldr r1, _0804A9FC @ =gBattlerPartyIndexes
 	lsls r0, r6, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0804AA00 @ =gUnknown_202402C
+	ldr r1, _0804AA00 @ =gEnemyParty
 	b _0804AA12
 	.align 2, 0
-_0804A9FC: .4byte gUnknown_2023BCE
-_0804AA00: .4byte gUnknown_202402C
+_0804A9FC: .4byte gBattlerPartyIndexes
+_0804AA00: .4byte gEnemyParty
 _0804AA04:
-	ldr r1, _0804AA50 @ =gUnknown_2023BCE
+	ldr r1, _0804AA50 @ =gBattlerPartyIndexes
 	lsls r0, r6, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0804AA54 @ =gUnknown_2024284
+	ldr r1, _0804AA54 @ =gPlayerParty
 _0804AA12:
 	adds r0, r1
 	movs r1, 0x26
@@ -124,7 +124,7 @@ _0804AA12:
 	lsrs r5, r0, 24
 	adds r0, r5, 0
 	bl LoadBallGfx
-	ldr r0, _0804AA58 @ =gUnknown_2022B4C
+	ldr r0, _0804AA58 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -141,9 +141,9 @@ _0804AA12:
 	mov r10, r1
 	b _0804AA68
 	.align 2, 0
-_0804AA50: .4byte gUnknown_2023BCE
-_0804AA54: .4byte gUnknown_2024284
-_0804AA58: .4byte gUnknown_2022B4C
+_0804AA50: .4byte gBattlerPartyIndexes
+_0804AA54: .4byte gPlayerParty
+_0804AA58: .4byte gBattleTypeFlags
 _0804AA5C: .4byte gUnknown_202273C
 _0804AA60:
 	ldr r0, _0804AAB8 @ =gSaveBlock2Ptr
@@ -179,7 +179,7 @@ _0804AA68:
 	beq _0804AAF8
 	cmp r3, 0xFF
 	bne _0804AB38
-	ldr r0, _0804AAC4 @ =gUnknown_2022B4C
+	ldr r0, _0804AAC4 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 9
@@ -193,13 +193,13 @@ _0804AA68:
 _0804AAB8: .4byte gSaveBlock2Ptr
 _0804AABC: .4byte gUnknown_82606F4
 _0804AAC0: .4byte gSprites
-_0804AAC4: .4byte gUnknown_2022B4C
+_0804AAC4: .4byte gBattleTypeFlags
 _0804AAC8:
 	mov r0, r10
 	movs r5, 0x30
 	movs r4, 0x46
 _0804AACE:
-	ldr r0, _0804AAEC @ =gUnknown_2023D6C
+	ldr r0, _0804AAEC @ =gBattlerTarget
 	strb r6, [r0]
 	ldr r2, _0804AAF0 @ =gSprites
 	lsls r3, r7, 4
@@ -214,7 +214,7 @@ _0804AACE:
 	str r0, [r1]
 	b _0804AB48
 	.align 2, 0
-_0804AAEC: .4byte gUnknown_2023D6C
+_0804AAEC: .4byte gBattlerTarget
 _0804AAF0: .4byte gSprites
 _0804AAF4: .4byte SpriteCB_PlayerMonSendOut_1
 _0804AAF8:
@@ -231,7 +231,7 @@ _0804AAF8:
 	lsrs r0, 24
 	adds r0, 0x18
 	strh r0, [r4, 0x22]
-	ldr r0, _0804AB2C @ =gUnknown_2023D6C
+	ldr r0, _0804AB2C @ =gBattlerTarget
 	strb r6, [r0]
 	movs r1, 0
 	strh r1, [r4, 0x2E]
@@ -242,13 +242,13 @@ _0804AAF8:
 	str r1, [r0]
 	b _0804AB46
 	.align 2, 0
-_0804AB2C: .4byte gUnknown_2023D6C
+_0804AB2C: .4byte gBattlerTarget
 _0804AB30: .4byte gSprites
 _0804AB34: .4byte SpriteCB_OpponentMonSendOut
 _0804AB38:
 	movs r0, 0x1
 	bl GetBankByIdentity
-	ldr r1, _0804AB64 @ =gUnknown_2023D6C
+	ldr r1, _0804AB64 @ =gBattlerTarget
 	strb r0, [r1]
 	movs r2, 0x1
 	str r2, [sp, 0x4]
@@ -259,7 +259,7 @@ _0804AB48:
 	adds r1, r3, r7
 	lsls r1, 2
 	adds r4, r1, r0
-	ldr r5, _0804AB64 @ =gUnknown_2023D6C
+	ldr r5, _0804AB64 @ =gBattlerTarget
 	ldrb r0, [r5]
 	strh r0, [r4, 0x3A]
 	ldr r3, [sp, 0x4]
@@ -269,7 +269,7 @@ _0804AB48:
 	bl DestroyTask
 	b _0804ABB8
 	.align 2, 0
-_0804AB64: .4byte gUnknown_2023D6C
+_0804AB64: .4byte gBattlerTarget
 _0804AB68: .4byte gSprites
 _0804AB6C:
 	movs r0, 0x22
@@ -294,7 +294,7 @@ _0804AB6C:
 	mov r0, sp
 	ldrh r0, [r0]
 	strh r0, [r4, 0x6]
-	ldr r1, _0804ABCC @ =gUnknown_3005090
+	ldr r1, _0804ABCC @ =gTasks
 	ldr r2, [sp]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -302,7 +302,7 @@ _0804AB6C:
 	adds r0, r1
 	ldrb r1, [r5]
 	strh r1, [r0, 0x10]
-	ldr r1, _0804ABD0 @ =nullsub_43
+	ldr r1, _0804ABD0 @ =TaskDummy
 	str r1, [r0]
 	movs r0, 0x36
 	bl PlaySE
@@ -317,8 +317,8 @@ _0804ABB8:
 	bx r0
 	.align 2, 0
 _0804ABC8: .4byte 0x0000ffd8
-_0804ABCC: .4byte gUnknown_3005090
-_0804ABD0: .4byte nullsub_43
+_0804ABCC: .4byte gTasks
+_0804ABD0: .4byte TaskDummy
 	thumb_func_end sub_804A9A0
 
 	thumb_func_start SpriteCB_TestBallThrow
@@ -333,7 +333,7 @@ SpriteCB_TestBallThrow: @ 804ABD4
 	cmp r0, 0
 	beq _0804AC74
 	ldrb r6, [r7, 0x6]
-	ldr r1, _0804AC80 @ =gUnknown_3005090
+	ldr r1, _0804AC80 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -404,7 +404,7 @@ _0804AC74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804AC80: .4byte gUnknown_3005090
+_0804AC80: .4byte gTasks
 _0804AC84: .4byte sub_804AC88
 	thumb_func_end SpriteCB_TestBallThrow
 
@@ -936,7 +936,7 @@ Task_PlayCryWhenReleasedFromBall: @ 804B070
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _0804B0A4 @ =gUnknown_3005090
+	ldr r2, _0804B0A4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -959,7 +959,7 @@ Task_PlayCryWhenReleasedFromBall: @ 804B070
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0804B0A4: .4byte gUnknown_3005090
+_0804B0A4: .4byte gTasks
 _0804B0A8: .4byte _0804B0AC
 	.align 2, 0
 _0804B0AC:
@@ -1033,7 +1033,7 @@ _0804B166:
 	b _0804B1C6
 _0804B174:
 	bl StopCryAndClearCrySongs
-	ldr r1, _0804B18C @ =gUnknown_3005090
+	ldr r1, _0804B18C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1044,7 +1044,7 @@ _0804B174:
 	strh r1, [r0, 0x26]
 	b _0804B262
 	.align 2, 0
-_0804B18C: .4byte gUnknown_3005090
+_0804B18C: .4byte gTasks
 _0804B190:
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1104,7 +1104,7 @@ _0804B1F8:
 	cmp r0, 0
 	bne _0804B262
 	bl StopCryAndClearCrySongs
-	ldr r0, _0804B21C @ =gUnknown_3005090
+	ldr r0, _0804B21C @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1116,7 +1116,7 @@ _0804B1F8:
 	strh r0, [r1, 0x26]
 	b _0804B262
 	.align 2, 0
-_0804B21C: .4byte gUnknown_3005090
+_0804B21C: .4byte gTasks
 _0804B220:
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1217,13 +1217,13 @@ _0804B2DA:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B310
-	ldr r1, _0804B308 @ =gUnknown_2023BCE
+	ldr r1, _0804B308 @ =gBattlerPartyIndexes
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, _0804B30C @ =gUnknown_202402C
+	ldr r0, _0804B30C @ =gEnemyParty
 	adds r7, r1, r0
 	movs r3, 0x19
 	mov r9, r3
@@ -1232,16 +1232,16 @@ _0804B2DA:
 _0804B2FC: .4byte HandleBallAnimEnd
 _0804B300: .4byte gMain
 _0804B304: .4byte 0x00000439
-_0804B308: .4byte gUnknown_2023BCE
-_0804B30C: .4byte gUnknown_202402C
+_0804B308: .4byte gBattlerPartyIndexes
+_0804B30C: .4byte gEnemyParty
 _0804B310:
-	ldr r1, _0804B388 @ =gUnknown_2023BCE
+	ldr r1, _0804B388 @ =gBattlerPartyIndexes
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, _0804B38C @ =gUnknown_2024284
+	ldr r0, _0804B38C @ =gPlayerParty
 	adds r7, r1, r0
 	movs r0, 0xE7
 	mov r9, r0
@@ -1277,7 +1277,7 @@ _0804B34E:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804B3A6
-	ldr r0, _0804B394 @ =gUnknown_2022B4C
+	ldr r0, _0804B394 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -1287,17 +1287,17 @@ _0804B34E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B3A6
-	ldr r0, _0804B398 @ =gMPlay_BGM
+	ldr r0, _0804B398 @ =gMPlayInfo_BGM
 	bl m4aMPlayStop
 	b _0804B3A6
 	.align 2, 0
-_0804B388: .4byte gUnknown_2023BCE
-_0804B38C: .4byte gUnknown_2024284
+_0804B388: .4byte gBattlerPartyIndexes
+_0804B38C: .4byte gPlayerParty
 _0804B390: .4byte gUnknown_2024018
-_0804B394: .4byte gUnknown_2022B4C
-_0804B398: .4byte gMPlay_BGM
+_0804B394: .4byte gBattleTypeFlags
+_0804B398: .4byte gMPlayInfo_BGM
 _0804B39C:
-	ldr r0, _0804B3C4 @ =gMPlay_BGM
+	ldr r0, _0804B3C4 @ =gMPlayInfo_BGM
 	ldr r1, _0804B3C8 @ =0x0000ffff
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
@@ -1318,7 +1318,7 @@ _0804B3C0:
 	movs r4, 0
 	b _0804B3F2
 	.align 2, 0
-_0804B3C4: .4byte gMPlay_BGM
+_0804B3C4: .4byte gMPlayInfo_BGM
 _0804B3C8: .4byte 0x0000ffff
 _0804B3CC: .4byte gUnknown_2024018
 _0804B3D0:
@@ -1345,7 +1345,7 @@ _0804B3F2:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0804B478 @ =gUnknown_3005090
+	ldr r2, _0804B478 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1404,7 +1404,7 @@ _0804B420:
 	bx r0
 	.align 2, 0
 _0804B474: .4byte Task_PlayCryWhenReleasedFromBall
-_0804B478: .4byte gUnknown_3005090
+_0804B478: .4byte gTasks
 _0804B47C: .4byte gUnknown_2023D44
 _0804B480: .4byte gSprites
 	thumb_func_end sub_804B268
@@ -2860,25 +2860,25 @@ GetBankPokeballItemId: @ 804BF90
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804BFBC
-	ldr r1, _0804BFB4 @ =gUnknown_2023BCE
+	ldr r1, _0804BFB4 @ =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0804BFB8 @ =gUnknown_202402C
+	ldr r1, _0804BFB8 @ =gEnemyParty
 	b _0804BFCA
 	.align 2, 0
-_0804BFB4: .4byte gUnknown_2023BCE
-_0804BFB8: .4byte gUnknown_202402C
+_0804BFB4: .4byte gBattlerPartyIndexes
+_0804BFB8: .4byte gEnemyParty
 _0804BFBC:
-	ldr r1, _0804BFDC @ =gUnknown_2023BCE
+	ldr r1, _0804BFDC @ =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0804BFE0 @ =gUnknown_2024284
+	ldr r1, _0804BFE0 @ =gPlayerParty
 _0804BFCA:
 	adds r0, r1
 	movs r1, 0x26
@@ -2889,8 +2889,8 @@ _0804BFCA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0804BFDC: .4byte gUnknown_2023BCE
-_0804BFE0: .4byte gUnknown_2024284
+_0804BFDC: .4byte gBattlerPartyIndexes
+_0804BFE0: .4byte gPlayerParty
 	thumb_func_end GetBankPokeballItemId
 
 	.align 2, 0 @ Don't pad with nop.

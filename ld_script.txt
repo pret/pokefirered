@@ -106,7 +106,7 @@ SECTIONS {
         asm/field_message_box.o(.text);
         asm/map_obj_lock.o(.text);
         asm/text_window_graphics.o(.text);
-        asm/script.o(.text);
+        src/script.o(.text);
         asm/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         asm/event_data.o(.text);
@@ -115,10 +115,10 @@ SECTIONS {
         asm/start_menu.o(.text);
         asm/tileset_anims.o(.text);
         asm/palette.o(.text);
-        asm/sound.o(.text);
+        src/sound.o(.text);
         asm/battle_anim.o(.text);
         asm/battle_anim_8074480.o(.text);
-        asm/task.o(.text);
+        src/task.o(.text);
         asm/reshow_battle_screen.o(.text);
         asm/battle_anim_8078178.o(.text);
         asm/title_screen.o(.text);
@@ -168,7 +168,7 @@ SECTIONS {
         asm/script_pokemon_util_80BF8FC.o(.text);
         asm/heal_location.o(.text);
         asm/region_map.o(.text);
-        asm/battle_ai_script_commands.o(.text);
+        src/battle_ai_script_commands.o(.text);
         asm/rom6.o(.text);
         asm/fldeff_flash.o(.text);
         asm/post_battle_event_funcs.o(.text);
@@ -369,6 +369,8 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         data/data.o(.rodata);
+        src/battle_ai_script_commands.o(.rodata);
+        data/data_84827AC.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

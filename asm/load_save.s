@@ -284,7 +284,7 @@ _0804C200:
 	movs r1, 0x64
 	muls r1, r4
 	adds r0, r1
-	ldr r2, _0804C22C @ =gUnknown_2024284
+	ldr r2, _0804C22C @ =gPlayerParty
 	adds r1, r2
 	adds r0, 0x38
 	movs r2, 0x64
@@ -298,7 +298,7 @@ _0804C200:
 	.align 2, 0
 _0804C224: .4byte gSaveBlock1Ptr
 _0804C228: .4byte gUnknown_2024029
-_0804C22C: .4byte gUnknown_2024284
+_0804C22C: .4byte gPlayerParty
 	thumb_func_end copy_player_party_to_sav1
 
 	thumb_func_start sub_804C230
@@ -311,7 +311,7 @@ sub_804C230: @ 804C230
 	ldrb r0, [r0]
 	strb r0, [r1]
 	movs r4, 0
-	ldr r5, _0804C26C @ =gUnknown_2024284
+	ldr r5, _0804C26C @ =gPlayerParty
 _0804C242:
 	movs r0, 0x64
 	adds r2, r4, 0
@@ -332,7 +332,7 @@ _0804C242:
 	.align 2, 0
 _0804C264: .4byte gUnknown_2024029
 _0804C268: .4byte gSaveBlock1Ptr
-_0804C26C: .4byte gUnknown_2024284
+_0804C26C: .4byte gPlayerParty
 	thumb_func_end sub_804C230
 
 	thumb_func_start save_serialize_npcs

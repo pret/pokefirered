@@ -8,7 +8,7 @@
 	thumb_func_start sub_80C9B2C
 sub_80C9B2C: @ 80C9B2C
 	push {lr}
-	ldr r0, _080C9B54 @ =gUnknown_2036DFC
+	ldr r0, _080C9B54 @ =gMapHeader
 	ldrb r0, [r0, 0x15]
 	cmp r0, 0x1
 	bne _080C9B6C
@@ -26,7 +26,7 @@ sub_80C9B2C: @ 80C9B2C
 	movs r0, 0x1
 	b _080C9B6E
 	.align 2, 0
-_080C9B54: .4byte gUnknown_2036DFC
+_080C9B54: .4byte gMapHeader
 _080C9B58: .4byte 0x00000806
 _080C9B5C: .4byte gUnknown_3005024
 _080C9B60: .4byte hm_add_c3_launch_phase_2
@@ -51,7 +51,7 @@ sub_80C9B74: @ 80C9B74
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r1, _080C9BA8 @ =gUnknown_3005090
+	ldr r1, _080C9BA8 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -65,7 +65,7 @@ sub_80C9B74: @ 80C9B74
 	bx r0
 	.align 2, 0
 _080C9BA4: .4byte gUnknown_20386E0
-_080C9BA8: .4byte gUnknown_3005090
+_080C9BA8: .4byte gTasks
 _080C9BAC: .4byte sub_80C9BB0
 	thumb_func_end sub_80C9B74
 
@@ -214,7 +214,7 @@ sub_80C9CE8: @ 80C9CE8
 	lsrs r6, r0, 24
 	movs r4, 0
 	bl sub_80561B4
-	ldr r5, _080C9D24 @ =gUnknown_2036DFC
+	ldr r5, _080C9D24 @ =gMapHeader
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r5, 0x14]
@@ -230,7 +230,7 @@ sub_80C9CE8: @ 80C9CE8
 	movs r0, 0x1
 	b _080C9D70
 	.align 2, 0
-_080C9D24: .4byte gUnknown_2036DFC
+_080C9D24: .4byte gMapHeader
 _080C9D28:
 	adds r0, r3, 0x4
 	adds r0, r2, r0
@@ -389,7 +389,7 @@ _080C9E2C: .4byte sub_80C9E30
 sub_80C9E30: @ 80C9E30
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080C9E44 @ =gUnknown_3005090
+	ldr r2, _080C9E44 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -398,7 +398,7 @@ sub_80C9E30: @ 80C9E30
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080C9E44: .4byte gUnknown_3005090
+_080C9E44: .4byte gTasks
 _080C9E48: .4byte sub_80C9E4C
 	thumb_func_end sub_80C9E30
 
@@ -441,7 +441,7 @@ sub_80C9E4C: @ 80C9E4C
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r1, _080C9EE8 @ =gUnknown_3005090
+	ldr r1, _080C9EE8 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -464,7 +464,7 @@ _080C9ED8: .4byte gUnknown_83F5804
 _080C9EDC: .4byte gUnknown_83F5854
 _080C9EE0: .4byte 0x00003e41
 _080C9EE4: .4byte 0x00001f0c
-_080C9EE8: .4byte gUnknown_3005090
+_080C9EE8: .4byte gTasks
 _080C9EEC: .4byte sub_80C9EF0
 	thumb_func_end sub_80C9E4C
 
@@ -473,7 +473,7 @@ sub_80C9EF0: @ 80C9EF0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080C9F20 @ =gUnknown_3005090
+	ldr r2, _080C9F20 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -493,7 +493,7 @@ sub_80C9EF0: @ 80C9EF0
 	strh r0, [r5, 0xA]
 	b _080C9F2C
 	.align 2, 0
-_080C9F20: .4byte gUnknown_3005090
+_080C9F20: .4byte gTasks
 _080C9F24:
 	movs r0, 0
 	strh r0, [r5, 0xC]
@@ -516,7 +516,7 @@ sub_80C9F38: @ 80C9F38
 	ldr r1, _080C9F74 @ =0x00001010
 	movs r0, 0x52
 	bl SetGpuReg
-	ldr r1, _080C9F78 @ =gUnknown_3005090
+	ldr r1, _080C9F78 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -538,7 +538,7 @@ sub_80C9F38: @ 80C9F38
 	b _080C9F92
 	.align 2, 0
 _080C9F74: .4byte 0x00001010
-_080C9F78: .4byte gUnknown_3005090
+_080C9F78: .4byte gTasks
 _080C9F7C: .4byte gUnknown_83F5854
 _080C9F80:
 	ldr r0, _080C9F98 @ =gUnknown_83F5804
@@ -563,7 +563,7 @@ sub_80C9FA0: @ 80C9FA0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080C9FC0 @ =gUnknown_3005090
+	ldr r2, _080C9FC0 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -577,7 +577,7 @@ sub_80C9FA0: @ 80C9FA0
 	strh r0, [r1, 0xC]
 	b _080C9FCC
 	.align 2, 0
-_080C9FC0: .4byte gUnknown_3005090
+_080C9FC0: .4byte gTasks
 _080C9FC4:
 	ldr r0, _080C9FD0 @ =gMain
 	ldr r0, [r0, 0x8]
@@ -605,7 +605,7 @@ _080C9FE4: .4byte sub_80C9FE8
 sub_80C9FE8: @ 80C9FE8
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080C9FFC @ =gUnknown_3005090
+	ldr r2, _080C9FFC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -614,7 +614,7 @@ sub_80C9FE8: @ 80C9FE8
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080C9FFC: .4byte gUnknown_3005090
+_080C9FFC: .4byte gTasks
 _080CA000: .4byte sub_80CA004
 	thumb_func_end sub_80C9FE8
 
@@ -657,7 +657,7 @@ sub_80CA004: @ 80CA004
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, _080CA09C @ =gUnknown_3005090
+	ldr r1, _080CA09C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -680,7 +680,7 @@ _080CA08C: .4byte 0x0600f800
 _080CA090: .4byte 0x00001f0c
 _080CA094: .4byte gUnknown_83F5804
 _080CA098: .4byte gUnknown_83F5824
-_080CA09C: .4byte gUnknown_3005090
+_080CA09C: .4byte gTasks
 _080CA0A0: .4byte sub_80CA0A4
 	thumb_func_end sub_80CA004
 
@@ -689,7 +689,7 @@ sub_80CA0A4: @ 80CA0A4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080CA0D8 @ =gUnknown_3005090
+	ldr r2, _080CA0D8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -711,7 +711,7 @@ sub_80CA0A4: @ 80CA0A4
 	bl LoadPalette
 	b _080CA0F4
 	.align 2, 0
-_080CA0D8: .4byte gUnknown_3005090
+_080CA0D8: .4byte gTasks
 _080CA0DC: .4byte gUnknown_83F5844
 _080CA0E0:
 	ldr r1, _080CA0FC @ =0x00001010
@@ -737,7 +737,7 @@ sub_80CA108: @ 80CA108
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080CA13C @ =gUnknown_3005090
+	ldr r2, _080CA13C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -760,7 +760,7 @@ sub_80CA108: @ 80CA108
 	strh r0, [r5, 0xA]
 	b _080CA152
 	.align 2, 0
-_080CA13C: .4byte gUnknown_3005090
+_080CA13C: .4byte gTasks
 _080CA140:
 	ldr r0, _080CA158 @ =gUnknown_83F5824
 	movs r1, 0
@@ -789,7 +789,7 @@ sub_80CA160: @ 80CA160
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080CA18C @ =gUnknown_3005090
+	ldr r2, _080CA18C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -800,7 +800,7 @@ sub_80CA160: @ 80CA160
 	bx r0
 	.align 2, 0
 _080CA188: .4byte sub_80CA190
-_080CA18C: .4byte gUnknown_3005090
+_080CA18C: .4byte gTasks
 	thumb_func_end sub_80CA160
 
 	thumb_func_start sub_80CA190
@@ -812,7 +812,7 @@ sub_80CA190: @ 80CA190
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080CA1B8 @ =gUnknown_3005098
+	ldr r1, _080CA1B8 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -826,7 +826,7 @@ _080CA1AC:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080CA1B8: .4byte gUnknown_3005098
+_080CA1B8: .4byte gTasks+0x8
 _080CA1BC: .4byte _080CA1C0
 	.align 2, 0
 _080CA1C0:
@@ -945,7 +945,7 @@ _080CA2B6:
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	bl sub_80F8234
-	ldr r1, _080CA2DC @ =gUnknown_3005090
+	ldr r1, _080CA2DC @ =gTasks
 	adds r0, r6, r5
 	lsls r0, 3
 	adds r0, r1
@@ -957,7 +957,7 @@ _080CA2D2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA2DC: .4byte gUnknown_3005090
+_080CA2DC: .4byte gTasks
 _080CA2E0: .4byte sub_80CA004
 	thumb_func_end sub_80CA190
 

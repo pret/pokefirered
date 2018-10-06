@@ -406,7 +406,7 @@ task02_080097CC: @ 80097CC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080097FC @ =gUnknown_3005090
+	ldr r0, _080097FC @ =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -427,7 +427,7 @@ _080097F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080097FC: .4byte gUnknown_3005090
+_080097FC: .4byte gTasks
 _08009800: .4byte gUnknown_3003F84
 	thumb_func_end task02_080097CC
 
@@ -3037,7 +3037,7 @@ _0800AB56:
 _0800AB5C:
 	cmp r3, r2
 	bne _0800AB7E
-	ldr r2, _0800AB88 @ =gUnknown_2022B4C
+	ldr r2, _0800AB88 @ =gBattleTypeFlags
 	ldr r0, [r2]
 	ldr r1, _0800AB8C @ =0x0000ffdf
 	ands r0, r1
@@ -3057,7 +3057,7 @@ _0800AB7E:
 	bx r0
 	.align 2, 0
 _0800AB84: .4byte gUnknown_3003F30
-_0800AB88: .4byte gUnknown_2022B4C
+_0800AB88: .4byte gBattleTypeFlags
 _0800AB8C: .4byte 0x0000ffdf
 _0800AB90: .4byte gLinkVSyncDisabled
 _0800AB94: .4byte gUnknown_3003F80
@@ -3234,11 +3234,11 @@ c2_800ACD4: @ 800ACD4
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, _0800ADE0 @ =gMPlay_SE1
+	ldr r0, _0800ADE0 @ =gMPlayInfo_SE1
 	bl m4aMPlayStop
-	ldr r0, _0800ADE4 @ =gMPlay_SE2
+	ldr r0, _0800ADE4 @ =gMPlayInfo_SE2
 	bl m4aMPlayStop
-	ldr r0, _0800ADE8 @ =gMPlay_SE3
+	ldr r0, _0800ADE8 @ =gMPlayInfo_SE3
 	bl m4aMPlayStop
 	ldr r0, _0800ADEC @ =gHeap
 	movs r1, 0xE0
@@ -3333,9 +3333,9 @@ _0800ADD8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800ADE0: .4byte gMPlay_SE1
-_0800ADE4: .4byte gMPlay_SE2
-_0800ADE8: .4byte gMPlay_SE3
+_0800ADE0: .4byte gMPlayInfo_SE1
+_0800ADE4: .4byte gMPlayInfo_SE2
+_0800ADE8: .4byte gMPlayInfo_SE3
 _0800ADEC: .4byte gHeap
 _0800ADF0: .4byte gUnknown_3003F3C
 _0800ADF4: .4byte gUnknown_2022854

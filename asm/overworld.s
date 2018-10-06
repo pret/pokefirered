@@ -445,7 +445,7 @@ sub_8054F68: @ 8054F68
 	movs r0, 0
 	mov r9, r0
 	mov r8, r0
-	ldr r1, _08055040 @ =gUnknown_2036DFC
+	ldr r1, _08055040 @ =gMapHeader
 	ldr r0, [r1, 0x4]
 	ldrb r0, [r0]
 	cmp r9, r0
@@ -455,7 +455,7 @@ _08054F86:
 	ldr r2, _08055044 @ =gSaveBlock1Ptr
 	mov r10, r2
 _08054F8A:
-	ldr r3, _08055040 @ =gUnknown_2036DFC
+	ldr r3, _08055040 @ =gMapHeader
 	ldr r0, [r3, 0x4]
 	ldr r1, [r0, 0x4]
 	mov r4, r9
@@ -498,7 +498,7 @@ _08054F8A:
 	mov r6, r10
 	ldr r1, [r6]
 	adds r1, r3
-	ldr r2, _08055040 @ =gUnknown_2036DFC
+	ldr r2, _08055040 @ =gMapHeader
 	ldr r0, [r2, 0x4]
 	ldr r0, [r0, 0x4]
 	adds r0, r7, r0
@@ -516,7 +516,7 @@ _08054F8A:
 	ldr r6, _08055048 @ =0x000008e4
 	adds r0, r1, r6
 	strh r2, [r0]
-	ldr r2, _08055040 @ =gUnknown_2036DFC
+	ldr r2, _08055040 @ =gMapHeader
 	ldr r0, [r2, 0x4]
 	ldr r0, [r0, 0x4]
 	adds r0, r7, r0
@@ -546,7 +546,7 @@ _08054F8A:
 	strb r1, [r0]
 	b _08055072
 	.align 2, 0
-_08055040: .4byte gUnknown_2036DFC
+_08055040: .4byte gMapHeader
 _08055044: .4byte gSaveBlock1Ptr
 _08055048: .4byte 0x000008e4
 _0805504C: .4byte 0x000008ec
@@ -578,7 +578,7 @@ _08055072:
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r6, _080550A4 @ =gUnknown_2036DFC
+	ldr r6, _080550A4 @ =gMapHeader
 	ldr r0, [r6, 0x4]
 	ldrb r0, [r0]
 	cmp r9, r0
@@ -594,13 +594,13 @@ _08055092:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080550A4: .4byte gUnknown_2036DFC
+_080550A4: .4byte gMapHeader
 	thumb_func_end sub_8054F68
 
 	thumb_func_start sub_80550A8
 sub_80550A8: @ 80550A8
 	push {lr}
-	ldr r0, _080550D0 @ =gUnknown_2036DFC
+	ldr r0, _080550D0 @ =gMapHeader
 	ldr r1, [r0, 0x4]
 	ldr r0, _080550D4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -620,7 +620,7 @@ _080550BC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080550D0: .4byte gUnknown_2036DFC
+_080550D0: .4byte gMapHeader
 _080550D4: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_80550A8
 
@@ -695,7 +695,7 @@ _08055140:
 mapdata_load_assets_to_gpu_and_full_redraw: @ 8055148
 	push {r4,lr}
 	bl move_tilemap_camera_to_upper_left_corner
-	ldr r4, _0805516C @ =gUnknown_2036DFC
+	ldr r4, _0805516C @ =gMapHeader
 	ldr r0, [r4]
 	bl copy_map_tileset1_tileset2_to_vram
 	ldr r0, [r4]
@@ -706,7 +706,7 @@ mapdata_load_assets_to_gpu_and_full_redraw: @ 8055148
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805516C: .4byte gUnknown_2036DFC
+_0805516C: .4byte gMapHeader
 	thumb_func_end mapdata_load_assets_to_gpu_and_full_redraw
 
 	thumb_func_start get_mapdata_header
@@ -860,7 +860,7 @@ _08055270: .4byte gUnknown_2031DBC
 	thumb_func_start set_current_map_header_from_sav1_save_old_name
 set_current_map_header_from_sav1_save_old_name: @ 8055274
 	push {r4-r6,lr}
-	ldr r4, _080552B4 @ =gUnknown_2036DFC
+	ldr r4, _080552B4 @ =gMapHeader
 	ldr r5, _080552B8 @ =gSaveBlock1Ptr
 	ldr r1, [r5]
 	movs r0, 0x4
@@ -889,14 +889,14 @@ set_current_map_header_from_sav1_save_old_name: @ 8055274
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080552B4: .4byte gUnknown_2036DFC
+_080552B4: .4byte gMapHeader
 _080552B8: .4byte gSaveBlock1Ptr
 	thumb_func_end set_current_map_header_from_sav1_save_old_name
 
 	thumb_func_start set_current_map_header_from_sav1
 set_current_map_header_from_sav1: @ 80552BC
 	push {r4,r5,lr}
-	ldr r4, _080552F4 @ =gUnknown_2036DFC
+	ldr r4, _080552F4 @ =gMapHeader
 	ldr r0, _080552F8 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
@@ -922,7 +922,7 @@ set_current_map_header_from_sav1: @ 80552BC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080552F4: .4byte gUnknown_2036DFC
+_080552F4: .4byte gMapHeader
 _080552F8: .4byte gSaveBlock1Ptr
 	thumb_func_end set_current_map_header_from_sav1
 
@@ -936,7 +936,7 @@ update_camera_pos_from_warpid: @ 80552FC
 	adds r4, r0, 0
 	cmp r1, 0
 	blt _08055334
-	ldr r3, _08055330 @ =gUnknown_2036DFC
+	ldr r3, _08055330 @ =gMapHeader
 	ldr r0, [r3, 0x4]
 	ldrb r5, [r0, 0x1]
 	cmp r1, r5
@@ -954,7 +954,7 @@ update_camera_pos_from_warpid: @ 80552FC
 	b _0805536C
 	.align 2, 0
 _0805532C: .4byte gSaveBlock1Ptr
-_08055330: .4byte gUnknown_2036DFC
+_08055330: .4byte gMapHeader
 _08055334:
 	ldr r1, [r4]
 	ldrh r3, [r1, 0x8]
@@ -972,7 +972,7 @@ _08055334:
 	b _0805536C
 _08055350:
 	ldr r3, [r4]
-	ldr r2, _08055374 @ =gUnknown_2036DFC
+	ldr r2, _08055374 @ =gMapHeader
 	ldr r0, [r2]
 	ldr r0, [r0]
 	lsrs r1, r0, 31
@@ -990,7 +990,7 @@ _0805536C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055374: .4byte gUnknown_2036DFC
+_08055374: .4byte gMapHeader
 	thumb_func_end update_camera_pos_from_warpid
 
 	thumb_func_start warp_in
@@ -1569,7 +1569,7 @@ GetMapConnection: @ 805578C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080557A0 @ =gUnknown_2036DFC
+	ldr r0, _080557A0 @ =gMapHeader
 	ldr r0, [r0, 0xC]
 	ldr r3, [r0]
 	ldr r1, [r0, 0x4]
@@ -1577,7 +1577,7 @@ GetMapConnection: @ 805578C
 	bne _080557A8
 	b _080557BC
 	.align 2, 0
-_080557A0: .4byte gUnknown_2036DFC
+_080557A0: .4byte gMapHeader
 _080557A4:
 	adds r0, r1, 0
 	b _080557BE
@@ -1719,7 +1719,7 @@ sub_8055864: @ 8055864
 	bl mapheader_run_script_with_tag_x3
 	bl sub_815D8F8
 	bl not_trainer_hill_battle_pyramid
-	ldr r4, _0805591C @ =gUnknown_2036DFC
+	ldr r4, _0805591C @ =gMapHeader
 	ldr r0, [r4]
 	bl copy_map_tileset2_to_vram_2
 	ldr r0, [r4]
@@ -1740,7 +1740,7 @@ _080558D4:
 	bl wild_encounter_reset_coro_args
 	bl mapheader_run_script_with_tag_x5
 	bl sub_80561B4
-	ldr r1, _0805591C @ =gUnknown_2036DFC
+	ldr r1, _0805591C @ =gMapHeader
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r1, 0x14]
@@ -1754,7 +1754,7 @@ _08055914:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805591C: .4byte gUnknown_2036DFC
+_0805591C: .4byte gMapHeader
 	thumb_func_end sub_8055864
 
 	thumb_func_start sub_8055920
@@ -1762,7 +1762,7 @@ sub_8055920: @ 8055920
 	push {r4,lr}
 	bl set_current_map_header_from_sav1_save_old_name
 	bl sub_8054F68
-	ldr r0, _0805599C @ =gUnknown_2036DFC
+	ldr r0, _0805599C @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_5_or_6
 	adds r4, r0, 0
@@ -1803,7 +1803,7 @@ _08055974:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805599C: .4byte gUnknown_2036DFC
+_0805599C: .4byte gMapHeader
 _080559A0: .4byte gSaveBlock1Ptr
 _080559A4: .4byte 0x00000806
 	thumb_func_end sub_8055920
@@ -1813,7 +1813,7 @@ sub_80559A8: @ 80559A8
 	push {lr}
 	bl set_current_map_header_from_sav1_save_old_name
 	bl sub_8054F68
-	ldr r0, _080559E0 @ =gUnknown_2036DFC
+	ldr r0, _080559E0 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_5_or_6
 	bl TrySetMapSaveWarpStatus
@@ -1827,7 +1827,7 @@ sub_80559A8: @ 80559A8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080559E0: .4byte gUnknown_2036DFC
+_080559E0: .4byte gMapHeader
 	thumb_func_end sub_80559A8
 
 	thumb_func_start sub_80559E4
@@ -2202,14 +2202,14 @@ _08055C98: .4byte gSaveBlock1Ptr
 	thumb_func_start sub_8055C9C
 sub_8055C9C: @ 8055C9C
 	push {lr}
-	ldr r0, _08055CAC @ =gUnknown_2036DFC
+	ldr r0, _08055CAC @ =gMapHeader
 	ldrb r0, [r0, 0x18]
 	cmp r0, 0
 	beq _08055CB0
 	movs r0, 0x1
 	b _08055CB2
 	.align 2, 0
-_08055CAC: .4byte gUnknown_2036DFC
+_08055CAC: .4byte gMapHeader
 _08055CB0:
 	movs r0, 0
 _08055CB2:
@@ -2220,7 +2220,7 @@ _08055CB2:
 	thumb_func_start sub_8055CB8
 sub_8055CB8: @ 8055CB8
 	push {lr}
-	ldr r0, _08055CC8 @ =gUnknown_2036DFC
+	ldr r0, _08055CC8 @ =gMapHeader
 	ldrb r1, [r0, 0x15]
 	cmp r1, 0
 	bne _08055CD0
@@ -2228,7 +2228,7 @@ sub_8055CB8: @ 8055CB8
 	ldr r0, [r0]
 	b _08055CF8
 	.align 2, 0
-_08055CC8: .4byte gUnknown_2036DFC
+_08055CC8: .4byte gMapHeader
 _08055CCC: .4byte gSaveBlock1Ptr
 _08055CD0:
 	ldr r0, _08055CE8 @ =0x00000806
@@ -2302,13 +2302,13 @@ sub_8055D40: @ 8055D40
 	ldr r1, [r1]
 	strh r0, [r1, 0x32]
 	bl get_mapdata_header
-	ldr r1, _08055D58 @ =gUnknown_2036DFC
+	ldr r1, _08055D58 @ =gMapHeader
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08055D54: .4byte gSaveBlock1Ptr
-_08055D58: .4byte gUnknown_2036DFC
+_08055D58: .4byte gMapHeader
 	thumb_func_end sub_8055D40
 
 	thumb_func_start sub_8055D5C
@@ -2409,7 +2409,7 @@ _08055DDC:
 	subs r0, 0x7
 	cmp r0, 0xA
 	bgt _08055E24
-	ldr r0, _08055E1C @ =gMPlay_BGM
+	ldr r0, _08055E1C @ =gMPlayInfo_BGM
 	ldr r1, [r0]
 	ldr r0, _08055E20 @ =gUnknown_86E6B0C
 	cmp r1, r0
@@ -2420,7 +2420,7 @@ _08055DDC:
 	.align 2, 0
 _08055E14: .4byte gSaveBlock1Ptr
 _08055E18: .4byte 0x00004f01
-_08055E1C: .4byte gMPlay_BGM
+_08055E1C: .4byte gMPlayInfo_BGM
 _08055E20: .4byte gUnknown_86E6B0C
 _08055E24:
 	bl sub_8055D8C
@@ -2834,7 +2834,7 @@ sub_8056124: @ 8056124
 	cmp r1, r0
 	bne _08056150
 _08056138:
-	ldr r0, _0805614C @ =gUnknown_2036DFC
+	ldr r0, _0805614C @ =gMapHeader
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0x84
 	beq _08056148
@@ -2846,7 +2846,7 @@ _08056148:
 	movs r0, 0
 	b _08056152
 	.align 2, 0
-_0805614C: .4byte gUnknown_2036DFC
+_0805614C: .4byte gMapHeader
 _08056150:
 	movs r0, 0x1
 _08056152:
@@ -3817,7 +3817,7 @@ _08056914: .4byte sub_807DF7C
 	thumb_func_start sub_8056918
 sub_8056918: @ 8056918
 	push {lr}
-	ldr r0, _08056934 @ =gUnknown_2036DFC
+	ldr r0, _08056934 @ =gMapHeader
 	ldrb r1, [r0, 0x19]
 	movs r0, 0xFC
 	ands r0, r1
@@ -3830,7 +3830,7 @@ _0805692C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056934: .4byte gUnknown_2036DFC
+_08056934: .4byte gMapHeader
 	thumb_func_end sub_8056918
 
 	thumb_func_start sub_8056938
@@ -4022,31 +4022,31 @@ _08056AEE:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08056B62
 _08056AF4:
-	ldr r0, _08056B00 @ =gUnknown_2036DFC
+	ldr r0, _08056B00 @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A54
 	b _08056B62
 	.align 2, 0
-_08056B00: .4byte gUnknown_2036DFC
+_08056B00: .4byte gMapHeader
 _08056B04:
-	ldr r0, _08056B10 @ =gUnknown_2036DFC
+	ldr r0, _08056B10 @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A68
 	b _08056B62
 	.align 2, 0
-_08056B10: .4byte gUnknown_2036DFC
+_08056B10: .4byte gMapHeader
 _08056B14:
 	bl free_temp_tile_data_buffers_if_possible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08056B6E
-	ldr r0, _08056B2C @ =gUnknown_2036DFC
+	ldr r0, _08056B2C @ =gMapHeader
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08056B62
 	.align 2, 0
-_08056B2C: .4byte gUnknown_2036DFC
+_08056B2C: .4byte gMapHeader
 _08056B30:
 	bl DrawWholeMapView
 	b _08056B62
@@ -4164,31 +4164,31 @@ _08056C2A:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08056CCA
 _08056C30:
-	ldr r0, _08056C3C @ =gUnknown_2036DFC
+	ldr r0, _08056C3C @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A54
 	b _08056CCA
 	.align 2, 0
-_08056C3C: .4byte gUnknown_2036DFC
+_08056C3C: .4byte gMapHeader
 _08056C40:
-	ldr r0, _08056C4C @ =gUnknown_2036DFC
+	ldr r0, _08056C4C @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A68
 	b _08056CCA
 	.align 2, 0
-_08056C4C: .4byte gUnknown_2036DFC
+_08056C4C: .4byte gMapHeader
 _08056C50:
 	bl free_temp_tile_data_buffers_if_possible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08056CD0
-	ldr r0, _08056C68 @ =gUnknown_2036DFC
+	ldr r0, _08056C68 @ =gMapHeader
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08056CCA
 	.align 2, 0
-_08056C68: .4byte gUnknown_2036DFC
+_08056C68: .4byte gMapHeader
 _08056C6C:
 	bl DrawWholeMapView
 	b _08056CCA
@@ -4197,7 +4197,7 @@ _08056C72:
 	b _08056CCA
 _08056C78:
 	bl sub_80561B4
-	ldr r5, _08056CA4 @ =gUnknown_2036DFC
+	ldr r5, _08056CA4 @ =gMapHeader
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r5, 0x14]
@@ -4214,9 +4214,9 @@ _08056C78:
 	bl sub_80F8268
 	b _08056CCA
 	.align 2, 0
-_08056CA4: .4byte gUnknown_2036DFC
+_08056CA4: .4byte gMapHeader
 _08056CA8:
-	ldr r0, _08056CBC @ =gUnknown_2036DFC
+	ldr r0, _08056CBC @ =gMapHeader
 	ldrb r1, [r0, 0x19]
 	movs r0, 0xFC
 	ands r0, r1
@@ -4226,7 +4226,7 @@ _08056CA8:
 	bl sub_8098110
 	b _08056CCA
 	.align 2, 0
-_08056CBC: .4byte gUnknown_2036DFC
+_08056CBC: .4byte gMapHeader
 _08056CC0:
 	bl map_post_load_hook_exec
 	lsls r0, 24
@@ -4353,31 +4353,31 @@ _08056DCA:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08056E3E
 _08056DD0:
-	ldr r0, _08056DDC @ =gUnknown_2036DFC
+	ldr r0, _08056DDC @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A54
 	b _08056E3E
 	.align 2, 0
-_08056DDC: .4byte gUnknown_2036DFC
+_08056DDC: .4byte gMapHeader
 _08056DE0:
-	ldr r0, _08056DEC @ =gUnknown_2036DFC
+	ldr r0, _08056DEC @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A68
 	b _08056E3E
 	.align 2, 0
-_08056DEC: .4byte gUnknown_2036DFC
+_08056DEC: .4byte gMapHeader
 _08056DF0:
 	bl free_temp_tile_data_buffers_if_possible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08056E54
-	ldr r0, _08056E08 @ =gUnknown_2036DFC
+	ldr r0, _08056E08 @ =gMapHeader
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08056E3E
 	.align 2, 0
-_08056E08: .4byte gUnknown_2036DFC
+_08056E08: .4byte gMapHeader
 _08056E0C:
 	bl DrawWholeMapView
 	b _08056E3E
@@ -5064,31 +5064,31 @@ _080573C2:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08057412
 _080573C8:
-	ldr r0, _080573D4 @ =gUnknown_2036DFC
+	ldr r0, _080573D4 @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A54
 	b _08057412
 	.align 2, 0
-_080573D4: .4byte gUnknown_2036DFC
+_080573D4: .4byte gMapHeader
 _080573D8:
-	ldr r0, _080573E4 @ =gUnknown_2036DFC
+	ldr r0, _080573E4 @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A68
 	b _08057412
 	.align 2, 0
-_080573E4: .4byte gUnknown_2036DFC
+_080573E4: .4byte gMapHeader
 _080573E8:
 	bl free_temp_tile_data_buffers_if_possible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08057428
-	ldr r0, _08057400 @ =gUnknown_2036DFC
+	ldr r0, _08057400 @ =gMapHeader
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08057412
 	.align 2, 0
-_08057400: .4byte gUnknown_2036DFC
+_08057400: .4byte gMapHeader
 _08057404:
 	bl DrawWholeMapView
 	b _08057412
@@ -5413,31 +5413,31 @@ _080576CC:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _0805772A
 _080576D2:
-	ldr r0, _080576DC @ =gUnknown_2036DFC
+	ldr r0, _080576DC @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A54
 	b _0805772A
 	.align 2, 0
-_080576DC: .4byte gUnknown_2036DFC
+_080576DC: .4byte gMapHeader
 _080576E0:
-	ldr r0, _080576EC @ =gUnknown_2036DFC
+	ldr r0, _080576EC @ =gMapHeader
 	ldr r0, [r0]
 	bl sub_8059A68
 	b _0805772A
 	.align 2, 0
-_080576EC: .4byte gUnknown_2036DFC
+_080576EC: .4byte gMapHeader
 _080576F0:
 	bl free_temp_tile_data_buffers_if_possible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08057740
-	ldr r0, _08057708 @ =gUnknown_2036DFC
+	ldr r0, _08057708 @ =gMapHeader
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _0805772A
 	.align 2, 0
-_08057708: .4byte gUnknown_2036DFC
+_08057708: .4byte gMapHeader
 _0805770C:
 	bl DrawWholeMapView
 	b _0805772A
@@ -5592,7 +5592,7 @@ sub_805781C: @ 805781C
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0805784C @ =gUnknown_3005090
+	ldr r1, _0805784C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -5604,7 +5604,7 @@ sub_805781C: @ 805781C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805784C: .4byte gUnknown_3005090
+_0805784C: .4byte gTasks
 _08057850: .4byte sub_8057854
 	thumb_func_end sub_805781C
 

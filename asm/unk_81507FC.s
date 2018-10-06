@@ -57,7 +57,7 @@ sub_81507FC: @ 81507FC
 	adds r0, r1
 	movs r1, 0x64
 	muls r1, r6
-	ldr r2, _081508C0 @ =gUnknown_2024284
+	ldr r2, _081508C0 @ =gPlayerParty
 	adds r1, r2
 	bl sub_8152048
 	ldr r0, _081508C4 @ =sub_8150A84
@@ -87,7 +87,7 @@ _081508B0: .4byte 0x00003330
 _081508B4: .4byte 0x000032cc
 _081508B8: .4byte 0x000031a0
 _081508BC: .4byte 0x0000318c
-_081508C0: .4byte gUnknown_2024284
+_081508C0: .4byte gPlayerParty
 _081508C4: .4byte sub_8150A84
 _081508C8: .4byte sub_815201C
 _081508CC:
@@ -1947,7 +1947,7 @@ sub_8151750: @ 8151750
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, _08151774 @ =gUnknown_3005098
+	ldr r1, _08151774 @ =gTasks+0x8
 	adds r6, r0, r1
 	movs r0, 0
 	ldrsh r5, [r6, r0]
@@ -1959,7 +1959,7 @@ sub_8151750: @ 8151750
 	beq _0815177E
 	b _08151836
 	.align 2, 0
-_08151774: .4byte gUnknown_3005098
+_08151774: .4byte gTasks+0x8
 _08151778:
 	cmp r5, 0x2
 	beq _081517BA
@@ -2859,7 +2859,7 @@ _08151E6C:
 	cmp r0, 0x1
 	bne _08151E8C
 	movs r0, 0xA
-	bl sub_8071BC4
+	bl PlayFanfareByFanfareNum
 	ldr r0, [r4]
 	movs r2, 0xAA
 	lsls r2, 1
@@ -3054,7 +3054,7 @@ _08151FF0:
 	cmp r0, 0x1
 	bne _08152010
 	movs r0, 0xA
-	bl sub_8071BC4
+	bl PlayFanfareByFanfareNum
 	ldr r0, [r4]
 	movs r3, 0xAA
 	lsls r3, 1
@@ -6315,7 +6315,7 @@ _081537C6:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _081537F4 @ =gUnknown_2024284
+	ldr r0, _081537F4 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
@@ -6332,7 +6332,7 @@ _081537C6:
 	b _08153804
 	.align 2, 0
 _081537F0: .4byte gUnknown_20370D0
-_081537F4: .4byte gUnknown_2024284
+_081537F4: .4byte gPlayerParty
 _081537F8:
 	adds r5, 0x1
 	cmp r5, 0x5
@@ -6373,7 +6373,7 @@ sub_8153830: @ 8153830
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08153854 @ =gUnknown_3005098
+	ldr r1, _08153854 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -6385,7 +6385,7 @@ sub_8153830: @ 8153830
 	beq _08153862
 	b _081538CA
 	.align 2, 0
-_08153854: .4byte gUnknown_3005098
+_08153854: .4byte gTasks+0x8
 _08153858:
 	cmp r0, 0x2
 	beq _08153888

@@ -35,7 +35,7 @@ sub_8069370: @ 8069370
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _08069394 @ =gUnknown_3005090
+	ldr r1, _08069394 @ =gTasks
 	adds r5, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
@@ -47,7 +47,7 @@ sub_8069370: @ 8069370
 	beq _0806939E
 	b _08069402
 	.align 2, 0
-_08069394: .4byte gUnknown_3005090
+_08069394: .4byte gTasks
 _08069398:
 	cmp r0, 0x2
 	beq _080693EA

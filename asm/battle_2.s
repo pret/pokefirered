@@ -12,7 +12,7 @@ sub_800FD9C: @ 800FD9C
 	bl sub_802E03C
 	bl AllocateBattleSpritesData
 	bl AllocateMonSpritesGfx
-	ldr r4, _0800FDCC @ =gUnknown_2022B4C
+	ldr r4, _0800FDCC @ =gBattleTypeFlags
 	ldr r0, [r4]
 	movs r1, 0x40
 	ands r0, r1
@@ -26,7 +26,7 @@ sub_800FD9C: @ 800FD9C
 	strb r0, [r1]
 	b _0800FE1C
 	.align 2, 0
-_0800FDCC: .4byte gUnknown_2022B4C
+_0800FDCC: .4byte gBattleTypeFlags
 _0800FDD0: .4byte sub_80109C8
 _0800FDD4: .4byte gUnknown_2023E82
 _0800FDD8:
@@ -172,7 +172,7 @@ _0800FEA6:
 	ldr r0, _0800FF6C @ =sub_80116F4
 	bl SetVBlankCallback
 	bl sub_800D278
-	ldr r0, _0800FF70 @ =gUnknown_2022B4C
+	ldr r0, _0800FF70 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -200,20 +200,20 @@ _0800FF60: .4byte gUnknown_2022982
 _0800FF64: .4byte gUnknown_2022B50
 _0800FF68: .4byte gReservedSpritePaletteCount
 _0800FF6C: .4byte sub_80116F4
-_0800FF70: .4byte gUnknown_2022B4C
+_0800FF70: .4byte gBattleTypeFlags
 _0800FF74: .4byte sub_8010BA0
 _0800FF78:
 	ldr r0, _0800FFCC @ =sub_8010508
 	bl SetMainCallback2
 _0800FF7E:
-	ldr r0, _0800FFD0 @ =gUnknown_2022B4C
+	ldr r0, _0800FFD0 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
 	cmp r0, 0
 	bne _0800FF98
-	ldr r0, _0800FFD4 @ =gUnknown_202402C
-	ldr r1, _0800FFD8 @ =gUnknown_20386AE
+	ldr r0, _0800FFD4 @ =gEnemyParty
+	ldr r1, _0800FFD8 @ =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
 	bl sub_80112E0
 	bl SetWildMonHeldItem
@@ -225,7 +225,7 @@ _0800FF98:
 	movs r2, 0x2
 	orrs r1, r2
 	strb r1, [r0]
-	ldr r4, _0800FFE4 @ =gUnknown_2024284
+	ldr r4, _0800FFE4 @ =gPlayerParty
 	movs r0, 0xFA
 	lsls r0, 1
 	adds r5, r4, r0
@@ -245,12 +245,12 @@ _0800FFAE:
 	bx r0
 	.align 2, 0
 _0800FFCC: .4byte sub_8010508
-_0800FFD0: .4byte gUnknown_2022B4C
-_0800FFD4: .4byte gUnknown_202402C
-_0800FFD8: .4byte gUnknown_20386AE
+_0800FFD0: .4byte gBattleTypeFlags
+_0800FFD4: .4byte gEnemyParty
+_0800FFD8: .4byte gTrainerBattleOpponent_A
 _0800FFDC: .4byte gMain
 _0800FFE0: .4byte 0x00000439
-_0800FFE4: .4byte gUnknown_2024284
+_0800FFE4: .4byte gPlayerParty
 _0800FFE8: .4byte gUnknown_2023E82
 	thumb_func_end sub_800FE24
 
@@ -271,7 +271,7 @@ _08010002:
 	movs r0, 0x64
 	mov r4, r9
 	muls r4, r0
-	ldr r0, _080100B0 @ =gUnknown_2024284
+	ldr r0, _080100B0 @ =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -338,7 +338,7 @@ _0801007E:
 	mov r2, r9
 	cmp r2, 0x5
 	ble _08010002
-	ldr r1, _080100B4 @ =gUnknown_2023FE8
+	ldr r1, _080100B4 @ =gBattleStruct
 	ldr r0, [r1]
 	movs r2, 0xC3
 	lsls r2, 1
@@ -357,14 +357,14 @@ _0801007E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080100B0: .4byte gUnknown_2024284
-_080100B4: .4byte gUnknown_2023FE8
+_080100B0: .4byte gPlayerParty
+_080100B4: .4byte gBattleStruct
 	thumb_func_end sub_800FFEC
 
 	thumb_func_start sub_80100B8
 sub_80100B8: @ 80100B8
 	push {r4-r7,lr}
-	ldr r0, _08010120 @ =gUnknown_2023FE8
+	ldr r0, _08010120 @ =gBattleStruct
 	ldr r5, [r0]
 	movs r0, 0xC4
 	lsls r0, 1
@@ -417,7 +417,7 @@ _080100FA:
 	ldrb r0, [r0]
 	b _08010174
 	.align 2, 0
-_08010120: .4byte gUnknown_2023FE8
+_08010120: .4byte gBattleStruct
 _08010124: .4byte gSaveBlock1Ptr
 _08010128: .4byte 0x000030ec
 _0801012C: .4byte 0x00003108
@@ -469,7 +469,7 @@ sub_801017C: @ 801017C
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, _08010234 @ =gUnknown_2022B4C
+	ldr r0, _08010234 @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -559,7 +559,7 @@ _080101EC:
 	strb r1, [r0]
 	b _080103FC
 	.align 2, 0
-_08010234: .4byte gUnknown_2022B4C
+_08010234: .4byte gBattleTypeFlags
 _08010238: .4byte gUnknown_2023F54
 _0801023C: .4byte gSaveBlock1Ptr
 _08010240: .4byte 0x000030ec
@@ -819,15 +819,15 @@ sub_8010414: @ 8010414
 	bne _08010458
 	cmp r3, 0
 	bne _08010448
-	ldr r0, _08010444 @ =gUnknown_2022B4C
+	ldr r0, _08010444 @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r2, 0xC
 	b _0801044E
 	.align 2, 0
 _08010440: .4byte gUnknown_2022118
-_08010444: .4byte gUnknown_2022B4C
+_08010444: .4byte gBattleTypeFlags
 _08010448:
-	ldr r0, _0801048C @ =gUnknown_2022B4C
+	ldr r0, _0801048C @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r2, 0x8
 _0801044E:
@@ -861,15 +861,15 @@ _0801047C:
 	bne _080104A4
 	cmp r3, 0
 	bne _08010494
-	ldr r0, _0801048C @ =gUnknown_2022B4C
+	ldr r0, _0801048C @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r2, 0xC
 	b _0801049A
 	.align 2, 0
-_0801048C: .4byte gUnknown_2022B4C
+_0801048C: .4byte gBattleTypeFlags
 _08010490: .4byte gUnknown_2022118
 _08010494:
-	ldr r0, _080104EC @ =gUnknown_2022B4C
+	ldr r0, _080104EC @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r2, 0x8
 _0801049A:
@@ -882,7 +882,7 @@ _080104A4:
 	cmp r6, 0
 	bne _080104FC
 	movs r2, 0
-	ldr r5, _080104EC @ =gUnknown_2022B4C
+	ldr r5, _080104EC @ =gBattleTypeFlags
 	cmp r2, r4
 	bge _080104E2
 	mov r0, r12
@@ -920,7 +920,7 @@ _080104E2:
 	movs r1, 0xC
 	b _080104F8
 	.align 2, 0
-_080104EC: .4byte gUnknown_2022B4C
+_080104EC: .4byte gBattleTypeFlags
 _080104F0: .4byte 0x00000201
 _080104F4:
 	ldr r0, [r5]
@@ -945,7 +945,7 @@ sub_8010508: @ 8010508
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08010540 @ =gUnknown_2023FE8
+	ldr r0, _08010540 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
 	strb r4, [r0]
@@ -964,7 +964,7 @@ _08010536:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08010540: .4byte gUnknown_2023FE8
+_08010540: .4byte gBattleStruct
 _08010544: .4byte gUnknown_2023E82
 _08010548: .4byte _0801054C
 	.align 2, 0
@@ -1016,7 +1016,7 @@ _080105C6:
 _080105CC: .4byte gUnknown_2023E82
 _080105D0: .4byte gUnknown_3003F3C
 _080105D4:
-	ldr r2, _08010640 @ =gUnknown_2022B4C
+	ldr r2, _08010640 @ =gBattleTypeFlags
 	ldr r1, [r2]
 	movs r6, 0x2
 	adds r0, r1, 0
@@ -1033,7 +1033,7 @@ _080105EC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801062A
-	ldr r4, _08010648 @ =gUnknown_2023FE8
+	ldr r4, _08010648 @ =gBattleStruct
 	ldr r0, [r4]
 	movs r5, 0xC2
 	lsls r5, 1
@@ -1067,9 +1067,9 @@ _08010634:
 	bl sub_80FCD74
 	b _080108B8
 	.align 2, 0
-_08010640: .4byte gUnknown_2022B4C
+_08010640: .4byte gBattleTypeFlags
 _08010644: .4byte gUnknown_3003F64
-_08010648: .4byte gUnknown_2023FE8
+_08010648: .4byte gBattleStruct
 _0801064C: .4byte 0x00000185
 _08010650: .4byte gUnknown_2023E82
 _08010654: .4byte gUnknown_3003F3C
@@ -1102,7 +1102,7 @@ _0801067E:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080106E4 @ =gUnknown_3005090
+	ldr r1, _080106E4 @ =gTasks
 	lsls r2, r0, 2
 	adds r2, r0
 	lsls r2, 3
@@ -1114,7 +1114,7 @@ _0801067E:
 	movs r0, 0x5A
 	strh r0, [r2, 0xC]
 	strh r1, [r2, 0x12]
-	ldr r0, _080106E8 @ =gUnknown_2023FE8
+	ldr r0, _080106E8 @ =gBattleStruct
 	ldr r3, [r0]
 	movs r4, 0xC3
 	lsls r4, 1
@@ -1137,8 +1137,8 @@ _0801067E:
 	b _080108B2
 	.align 2, 0
 _080106E0: .4byte sub_800F6FC
-_080106E4: .4byte gUnknown_3005090
-_080106E8: .4byte gUnknown_2023FE8
+_080106E4: .4byte gTasks
+_080106E8: .4byte gBattleStruct
 _080106EC: .4byte gUnknown_2022118
 _080106F0: .4byte gUnknown_2023E82
 _080106F4:
@@ -1151,13 +1151,13 @@ _08010700:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08010714 @ =gUnknown_2024284
+	ldr r1, _08010714 @ =gPlayerParty
 	movs r2, 0xC8
 	bl SendBlock
 	ldr r1, _08010718 @ =gUnknown_2023E82
 	b _080108B2
 	.align 2, 0
-_08010714: .4byte gUnknown_2024284
+_08010714: .4byte gPlayerParty
 _08010718: .4byte gUnknown_2023E82
 _0801071C:
 	bl GetBlockReceivedStatus
@@ -1168,7 +1168,7 @@ _0801071C:
 	b _080108B8
 _0801072A:
 	bl ResetBlockReceivedFlags
-	ldr r0, _08010740 @ =gUnknown_202402C
+	ldr r0, _08010740 @ =gEnemyParty
 	lsls r1, r5, 8
 	ldr r2, _08010744 @ =gUnknown_2022118
 	adds r1, r2
@@ -1177,7 +1177,7 @@ _0801072A:
 	ldr r1, _08010748 @ =gUnknown_2023E82
 	b _080108B2
 	.align 2, 0
-_08010740: .4byte gUnknown_202402C
+_08010740: .4byte gEnemyParty
 _08010744: .4byte gUnknown_2022118
 _08010748: .4byte gUnknown_2023E82
 _0801074C:
@@ -1303,7 +1303,7 @@ _0801084C:
 	str r0, [r1]
 	ldr r0, _08010890 @ =sub_8011100
 	bl SetMainCallback2
-	ldr r2, _08010894 @ =gUnknown_2022B4C
+	ldr r2, _08010894 @ =gBattleTypeFlags
 	ldr r1, [r2]
 	movs r0, 0x2
 	ands r0, r1
@@ -1319,7 +1319,7 @@ _08010884: .4byte gUnknown_3004F80
 _08010888: .4byte gMain
 _0801088C: .4byte sub_80123E4
 _08010890: .4byte sub_8011100
-_08010894: .4byte gUnknown_2022B4C
+_08010894: .4byte gBattleTypeFlags
 _08010898:
 	ldr r0, _080108C0 @ =gUnknown_2023E82
 	ldrb r1, [r0]
@@ -1365,7 +1365,7 @@ _080108DC:
 	movs r0, 0x64
 	mov r4, r8
 	muls r4, r0
-	ldr r0, _080109C0 @ =gUnknown_2024284
+	ldr r0, _080109C0 @ =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -1451,7 +1451,7 @@ _08010994:
 	mov r8, r4
 	cmp r4, 0x2
 	ble _080108DC
-	ldr r0, _080109C4 @ =gUnknown_2023FE8
+	ldr r0, _080109C4 @ =gBattleStruct
 	ldr r0, [r0]
 	movs r1, 0xC2
 	lsls r1, 1
@@ -1468,8 +1468,8 @@ _08010994:
 	bx r0
 	.align 2, 0
 _080109BC: .4byte gUnknown_2022B58
-_080109C0: .4byte gUnknown_2024284
-_080109C4: .4byte gUnknown_2023FE8
+_080109C0: .4byte gPlayerParty
+_080109C4: .4byte gBattleStruct
 	thumb_func_end sub_80108C4
 
 	thumb_func_start sub_80109C8
@@ -1481,7 +1481,7 @@ sub_80109C8: @ 80109C8
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, _08010A0C @ =gUnknown_2023FE8
+	ldr r4, _08010A0C @ =gBattleStruct
 	ldr r0, [r4]
 	adds r0, 0xB5
 	strb r6, [r0]
@@ -1504,7 +1504,7 @@ sub_80109C8: @ 80109C8
 	beq _08010A20
 	b _08010B82
 	.align 2, 0
-_08010A0C: .4byte gUnknown_2023FE8
+_08010A0C: .4byte gBattleStruct
 _08010A10: .4byte gUnknown_2023E82
 _08010A14:
 	cmp r0, 0x2
@@ -1604,7 +1604,7 @@ _08010ABA:
 	ldr r0, [r1, 0x8]
 	mov r2, r9
 	str r0, [r2]
-	ldr r0, _08010AF4 @ =gUnknown_2022B4C
+	ldr r0, _08010AF4 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	mov r2, r8
 	strh r0, [r2]
@@ -1617,7 +1617,7 @@ _08010AE4: .4byte gUnknown_2022118
 _08010AE8: .4byte gUnknown_2022B58
 _08010AEC: .4byte gUnknown_2023E82
 _08010AF0: .4byte gMain
-_08010AF4: .4byte gUnknown_2022B4C
+_08010AF4: .4byte gBattleTypeFlags
 _08010AF8: .4byte sub_80109C8
 _08010AFC:
 	ldr r0, _08010B1C @ =gUnknown_2037AB8
@@ -1649,7 +1649,7 @@ _08010B2A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08010B82
-	ldr r1, _08010B58 @ =gUnknown_2022B4C
+	ldr r1, _08010B58 @ =gBattleTypeFlags
 	mov r2, r8
 	ldrh r0, [r2]
 	str r0, [r1]
@@ -1662,7 +1662,7 @@ _08010B2A:
 	b _08010B82
 	.align 2, 0
 _08010B54: .4byte gUnknown_3003F3C
-_08010B58: .4byte gUnknown_2022B4C
+_08010B58: .4byte gBattleTypeFlags
 _08010B5C: .4byte gMain
 _08010B60: .4byte sub_800FE24
 _08010B64:
@@ -1670,7 +1670,7 @@ _08010B64:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08010B82
-	ldr r1, _08010B94 @ =gUnknown_2022B4C
+	ldr r1, _08010B94 @ =gBattleTypeFlags
 	mov r2, r8
 	ldrh r0, [r2]
 	str r0, [r1]
@@ -1689,7 +1689,7 @@ _08010B82:
 	bx r0
 	.align 2, 0
 _08010B90: .4byte gUnknown_3003F64
-_08010B94: .4byte gUnknown_2022B4C
+_08010B94: .4byte gBattleTypeFlags
 _08010B98: .4byte gMain
 _08010B9C: .4byte sub_800FE24
 	thumb_func_end sub_80109C8
@@ -1702,7 +1702,7 @@ sub_8010BA0: @ 8010BA0
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, _08010BD8 @ =gUnknown_2023FE8
+	ldr r0, _08010BD8 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
 	strb r7, [r0]
@@ -1721,7 +1721,7 @@ _08010BCC:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08010BD8: .4byte gUnknown_2023FE8
+_08010BD8: .4byte gBattleStruct
 _08010BDC: .4byte gUnknown_2023E82
 _08010BE0: .4byte _08010BE4
 	.align 2, 0
@@ -1779,7 +1779,7 @@ _08010C66:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08010CAA
-	ldr r4, _08010CC4 @ =gUnknown_2023FE8
+	ldr r4, _08010CC4 @ =gBattleStruct
 	ldr r0, [r4]
 	movs r5, 0xC2
 	lsls r5, 1
@@ -1817,7 +1817,7 @@ _08010CB4:
 	b _080110F0
 	.align 2, 0
 _08010CC0: .4byte gUnknown_3003F64
-_08010CC4: .4byte gUnknown_2023FE8
+_08010CC4: .4byte gBattleStruct
 _08010CC8: .4byte 0x00000185
 _08010CCC: .4byte gUnknown_2023E82
 _08010CD0: .4byte gUnknown_3003F3C
@@ -1836,7 +1836,7 @@ _08010CE2:
 	bl sub_801017C
 	bl sub_8044708
 	ldr r0, _08010D4C @ =gUnknown_201C000
-	ldr r1, _08010D50 @ =gUnknown_2024284
+	ldr r1, _08010D50 @ =gPlayerParty
 	movs r2, 0x96
 	lsls r2, 1
 	bl memcpy
@@ -1845,7 +1845,7 @@ _08010CE2:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08010D58 @ =gUnknown_3005090
+	ldr r2, _08010D58 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1878,9 +1878,9 @@ _08010D3A:
 	b _08010D9C
 	.align 2, 0
 _08010D4C: .4byte gUnknown_201C000
-_08010D50: .4byte gUnknown_2024284
+_08010D50: .4byte gPlayerParty
 _08010D54: .4byte sub_800F6FC
-_08010D58: .4byte gUnknown_3005090
+_08010D58: .4byte gTasks
 _08010D5C: .4byte gUnknown_2022118
 _08010D60: .4byte gUnknown_202273C
 _08010D64:
@@ -1984,10 +1984,10 @@ _08010E20:
 	cmp r0, 0x3
 	bne _08010EBE
 _08010E24:
-	ldr r0, _08010E28 @ =gUnknown_2024284
+	ldr r0, _08010E28 @ =gPlayerParty
 	b _08010EA4
 	.align 2, 0
-_08010E28: .4byte gUnknown_2024284
+_08010E28: .4byte gPlayerParty
 _08010E2C:
 	ldr r0, _08010E30 @ =gUnknown_20243B0
 	b _08010EA4
@@ -2034,10 +2034,10 @@ _08010E78:
 	cmp r2, 0x3
 	bne _08010EBE
 _08010E7C:
-	ldr r0, _08010E80 @ =gUnknown_2024284
+	ldr r0, _08010E80 @ =gPlayerParty
 	b _08010EA4
 	.align 2, 0
-_08010E80: .4byte gUnknown_2024284
+_08010E80: .4byte gPlayerParty
 _08010E84:
 	ldr r0, _08010E88 @ =gUnknown_20243B0
 	b _08010EA4
@@ -2057,14 +2057,14 @@ _08010E9E:
 	cmp r2, 0x3
 	bne _08010EBE
 _08010EA2:
-	ldr r0, _08010EB0 @ =gUnknown_202402C
+	ldr r0, _08010EB0 @ =gEnemyParty
 _08010EA4:
 	adds r1, r4, 0
 	movs r2, 0xC8
 	bl memcpy
 	b _08010EBE
 	.align 2, 0
-_08010EB0: .4byte gUnknown_202402C
+_08010EB0: .4byte gEnemyParty
 _08010EB4:
 	ldr r0, _08010ED0 @ =gUnknown_2024158
 	adds r1, r4, 0
@@ -2231,7 +2231,7 @@ _08010FDE:
 	adds r6, 0x1
 	cmp r6, 0x3
 	ble _08010F20
-	ldr r4, _08011060 @ =gUnknown_2024284
+	ldr r4, _08011060 @ =gPlayerParty
 	adds r0, r4, 0
 	bl sub_8011D0C
 	adds r0, r4, 0
@@ -2252,7 +2252,7 @@ _08010FDE:
 	lsls r1, 1
 	adds r0, r4, r1
 	bl sub_8011D0C
-	ldr r4, _08011064 @ =gUnknown_202402C
+	ldr r4, _08011064 @ =gEnemyParty
 	adds r0, r4, 0
 	bl sub_8011D0C
 	adds r0, r4, 0
@@ -2277,8 +2277,8 @@ _08010FDE:
 	b _080110EA
 	.align 2, 0
 _0801105C: .4byte gUnknown_2024220
-_08011060: .4byte gUnknown_2024284
-_08011064: .4byte gUnknown_202402C
+_08011060: .4byte gPlayerParty
+_08011064: .4byte gEnemyParty
 _08011068: .4byte gUnknown_2023E82
 _0801106C:
 	bl sub_800D30C
@@ -2307,7 +2307,7 @@ _08011084:
 	str r0, [r1]
 	ldr r0, _080110C8 @ =sub_8011100
 	bl SetMainCallback2
-	ldr r2, _080110CC @ =gUnknown_2022B4C
+	ldr r2, _080110CC @ =gBattleTypeFlags
 	ldr r1, [r2]
 	movs r0, 0x2
 	ands r0, r1
@@ -2323,7 +2323,7 @@ _080110BC: .4byte gUnknown_3004F80
 _080110C0: .4byte gMain
 _080110C4: .4byte sub_80123E4
 _080110C8: .4byte sub_8011100
-_080110CC: .4byte gUnknown_2022B4C
+_080110CC: .4byte gBattleTypeFlags
 _080110D0:
 	ldr r0, _080110FC @ =gUnknown_2023E82
 	ldrb r1, [r0]
@@ -2368,7 +2368,7 @@ sub_8011100: @ 8011100
 	ands r0, r1
 	cmp r0, 0
 	beq _08011158
-	ldr r0, _08011164 @ =gUnknown_2022B4C
+	ldr r0, _08011164 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 9
@@ -2397,7 +2397,7 @@ _08011158:
 	bx r0
 	.align 2, 0
 _08011160: .4byte gMain
-_08011164: .4byte gUnknown_2022B4C
+_08011164: .4byte gBattleTypeFlags
 _08011168: .4byte gUnknown_20370D0
 _0801116C: .4byte gUnknown_2023E8A
 _08011170: .4byte CB2_QuitRecordedBattle
@@ -2607,7 +2607,7 @@ sub_80112E0: @ 80112E0
 	movs r0, 0
 	b _080116AC
 _08011304:
-	ldr r0, _08011334 @ =gUnknown_2022B4C
+	ldr r0, _08011334 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, _08011338 @ =0x00080908
 	ands r0, r1
@@ -2621,7 +2621,7 @@ _08011318:
 	bl ZeroEnemyPartyMons
 	movs r2, 0
 	str r2, [sp, 0x18]
-	ldr r2, _0801133C @ =gUnknown_823EAC8
+	ldr r2, _0801133C @ =gTrainers
 	ldr r1, [sp, 0x20]
 	ldr r3, [sp, 0x14]
 	adds r0, r1, r3
@@ -2631,9 +2631,9 @@ _08011318:
 	ldr r4, [sp, 0x18]
 	b _0801167E
 	.align 2, 0
-_08011334: .4byte gUnknown_2022B4C
+_08011334: .4byte gBattleTypeFlags
 _08011338: .4byte 0x00080908
-_0801133C: .4byte gUnknown_823EAC8
+_0801133C: .4byte gTrainers
 _08011340:
 	ldr r3, [sp, 0x14]
 	adds r0, r1, r3
@@ -2657,7 +2657,7 @@ _08011354:
 	mov r10, r2
 _08011366:
 	movs r6, 0
-	ldr r0, _080113BC @ =gUnknown_823EAC8
+	ldr r0, _080113BC @ =gTrainers
 	ldr r2, [sp, 0x20]
 	ldr r3, [sp, 0x14]
 	adds r1, r2, r3
@@ -2701,7 +2701,7 @@ _0801139E:
 	beq _080113CE
 	b _0801166C
 	.align 2, 0
-_080113BC: .4byte gUnknown_823EAC8
+_080113BC: .4byte gTrainers
 _080113C0:
 	cmp r0, 0x2
 	bne _080113C6
@@ -3049,7 +3049,7 @@ _08011642:
 _0801166C:
 	ldr r4, [sp, 0x1C]
 	str r4, [sp, 0x18]
-	ldr r2, _080116C4 @ =gUnknown_823EAC8
+	ldr r2, _080116C4 @ =gTrainers
 	ldr r1, [sp, 0x20]
 	ldr r3, [sp, 0x14]
 	adds r0, r1, r3
@@ -3062,8 +3062,8 @@ _0801167E:
 	bge _08011686
 	b _08011340
 _08011686:
-	ldr r2, _080116C8 @ =gUnknown_2022B4C
-	ldr r1, _080116C4 @ =gUnknown_823EAC8
+	ldr r2, _080116C8 @ =gBattleTypeFlags
+	ldr r1, _080116C4 @ =gTrainers
 	ldr r4, [sp, 0x20]
 	ldr r3, [sp, 0x14]
 	adds r0, r4, r3
@@ -3074,7 +3074,7 @@ _08011686:
 	orrs r0, r1
 	str r0, [r2]
 _0801169C:
-	ldr r0, _080116C4 @ =gUnknown_823EAC8
+	ldr r0, _080116C4 @ =gTrainers
 	ldr r4, [sp, 0x20]
 	ldr r2, [sp, 0x14]
 	adds r1, r4, r2
@@ -3094,8 +3094,8 @@ _080116AC:
 	.align 2, 0
 _080116BC: .4byte gUnknown_8245EE0
 _080116C0: .4byte gUnknown_8250C08
-_080116C4: .4byte gUnknown_823EAC8
-_080116C8: .4byte gUnknown_2022B4C
+_080116C4: .4byte gTrainers
+_080116C8: .4byte gBattleTypeFlags
 	thumb_func_end sub_80112E0
 
 	thumb_func_start sub_80116CC
@@ -3290,11 +3290,11 @@ sub_801184C: @ 801184C
 	str r0, [sp, 0x4]
 	movs r1, 0
 	str r1, [sp, 0x8]
-	ldr r0, _08011894 @ =gUnknown_2023FE8
+	ldr r0, _08011894 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
 	ldrb r2, [r0]
-	ldr r0, _08011898 @ =gUnknown_2022B4C
+	ldr r0, _08011898 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -3314,8 +3314,8 @@ sub_801184C: @ 801184C
 	beq _080118BC
 	b _080118C4
 	.align 2, 0
-_08011894: .4byte gUnknown_2023FE8
-_08011898: .4byte gUnknown_2022B4C
+_08011894: .4byte gBattleStruct
+_08011898: .4byte gBattleTypeFlags
 _0801189C: .4byte gUnknown_202273C
 _080118A0:
 	cmp r0, 0x2
@@ -3323,18 +3323,18 @@ _080118A0:
 	cmp r0, 0x3
 	bne _080118C4
 _080118A8:
-	ldr r0, _080118B4 @ =gUnknown_202402C
+	ldr r0, _080118B4 @ =gEnemyParty
 	str r0, [sp, 0x4]
-	ldr r1, _080118B8 @ =gUnknown_2024284
+	ldr r1, _080118B8 @ =gPlayerParty
 	str r1, [sp, 0x8]
 	b _080118C4
 	.align 2, 0
-_080118B4: .4byte gUnknown_202402C
-_080118B8: .4byte gUnknown_2024284
+_080118B4: .4byte gEnemyParty
+_080118B8: .4byte gPlayerParty
 _080118BC:
-	ldr r2, _08011A10 @ =gUnknown_2024284
+	ldr r2, _08011A10 @ =gPlayerParty
 	str r2, [sp, 0x4]
-	ldr r3, _08011A14 @ =gUnknown_202402C
+	ldr r3, _08011A14 @ =gEnemyParty
 	str r3, [sp, 0x8]
 _080118C4:
 	movs r7, 0
@@ -3412,7 +3412,7 @@ _08011948:
 	mov r0, r8
 	cmp r0, 0x5
 	ble _080118D8
-	ldr r1, _08011A18 @ =gUnknown_3005090
+	ldr r1, _08011A18 @ =gTasks
 	ldr r2, [sp, 0xC]
 	ldr r3, [sp]
 	adds r0, r2, r3
@@ -3491,7 +3491,7 @@ _080119E2:
 	mov r1, r8
 	cmp r1, 0x5
 	ble _08011972
-	ldr r1, _08011A18 @ =gUnknown_3005090
+	ldr r1, _08011A18 @ =gTasks
 	ldr r2, [sp, 0xC]
 	ldr r3, [sp]
 	adds r0, r2, r3
@@ -3507,9 +3507,9 @@ _080119E2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011A10: .4byte gUnknown_2024284
-_08011A14: .4byte gUnknown_202402C
-_08011A18: .4byte gUnknown_3005090
+_08011A10: .4byte gPlayerParty
+_08011A14: .4byte gEnemyParty
+_08011A18: .4byte gTasks
 	thumb_func_end sub_801184C
 
 	thumb_func_start sub_8011A1C
@@ -3619,7 +3619,7 @@ _08011A9C:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08011B88 @ =gUnknown_3005090
+	ldr r2, _08011B88 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3659,7 +3659,7 @@ _08011B78: .4byte gUnknown_8D004D8
 _08011B7C: .4byte gReservedSpritePaletteCount
 _08011B80: .4byte sub_80116F4
 _08011B84: .4byte sub_800F6FC
-_08011B88: .4byte gUnknown_3005090
+_08011B88: .4byte gTasks
 _08011B8C: .4byte sub_8011B94
 _08011B90: .4byte gUnknown_2023E82
 	thumb_func_end sub_8011A1C
@@ -4087,7 +4087,7 @@ _08011EC8:
 	mov r0, r9
 	ldrh r4, [r0, 0x32]
 _08011ECC:
-	ldr r1, _08011F34 @ =gUnknown_2023BCE
+	ldr r1, _08011F34 @ =gBattlerPartyIndexes
 	lsls r0, r6, 1
 	adds r5, r0, r1
 	ldrh r0, [r5]
@@ -4096,7 +4096,7 @@ _08011ECC:
 	mov r1, r8
 	muls r1, r0
 	adds r0, r1, 0
-	ldr r7, _08011F38 @ =gUnknown_202402C
+	ldr r7, _08011F38 @ =gEnemyParty
 	adds r0, r7
 	movs r1, 0
 	bl GetMonData
@@ -4136,8 +4136,8 @@ _08011ECC:
 	movs r0, 0xC9
 	b _08011F46
 	.align 2, 0
-_08011F34: .4byte gUnknown_2023BCE
-_08011F38: .4byte gUnknown_202402C
+_08011F34: .4byte gBattlerPartyIndexes
+_08011F38: .4byte gEnemyParty
 _08011F3C:
 	movs r1, 0xCE
 	lsls r1, 1
@@ -4796,7 +4796,7 @@ sub_80123E4: @ 80123E4
 	ldr r0, _08012424 @ =gUnknown_3004F84
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r1, _08012428 @ =gUnknown_2023BC4
+	ldr r1, _08012428 @ =gActiveBattler
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0801242C @ =gUnknown_2023BCC
@@ -4826,7 +4826,7 @@ _0801241E:
 	bx r0
 	.align 2, 0
 _08012424: .4byte gUnknown_3004F84
-_08012428: .4byte gUnknown_2023BC4
+_08012428: .4byte gActiveBattler
 _0801242C: .4byte gUnknown_2023BCC
 _08012430: .4byte gUnknown_3004FE0
 	thumb_func_end sub_80123E4
@@ -4849,14 +4849,14 @@ sub_8012434: @ 8012434
 	mov r12, r1
 	ldr r0, _080126D4 @ =gUnknown_2023DA0
 	mov r9, r0
-	ldr r1, _080126D8 @ =gUnknown_2023D98
+	ldr r1, _080126D8 @ =gLastUsedMove
 	mov r8, r1
-	ldr r4, _080126DC @ =gUnknown_2023E0C
+	ldr r4, _080126DC @ =gDisableStructs
 	movs r5, 0
 	ldr r7, _080126E0 @ =gUnknown_2023D90
 	ldr r6, _080126E4 @ =gUnknown_2023DB8
 _08012464:
-	ldr r0, _080126E8 @ =gUnknown_2023DFC
+	ldr r0, _080126E8 @ =gStatuses3
 	adds r0, r5, r0
 	str r3, [r0]
 	movs r1, 0
@@ -4885,7 +4885,7 @@ _0801246C:
 	strb r0, [r1]
 	strh r3, [r6]
 	strh r3, [r7]
-	ldr r1, _080126F4 @ =gUnknown_2023FF4
+	ldr r1, _080126F4 @ =gBattleResources
 	ldr r0, [r1]
 	ldr r0, [r0, 0x4]
 	adds r0, r5
@@ -4904,7 +4904,7 @@ _0801246C:
 	ble _08012464
 	movs r5, 0
 	ldr r3, _080126F8 @ =gUnknown_2023DE4
-	ldr r4, _080126FC @ =gUnknown_2023DDE
+	ldr r4, _080126FC @ =gSideAffecting
 	movs r2, 0x1
 _080124C6:
 	strh r5, [r4]
@@ -4921,11 +4921,11 @@ _080124CA:
 	cmp r2, 0
 	bge _080124C6
 	movs r1, 0
-	ldr r2, _08012700 @ =gUnknown_2023D6B
+	ldr r2, _08012700 @ =sBattler_AI
 	strb r1, [r2]
-	ldr r0, _08012704 @ =gUnknown_2023D6C
+	ldr r0, _08012704 @ =gBattlerTarget
 	strb r1, [r0]
-	ldr r2, _08012708 @ =gUnknown_2023F1C
+	ldr r2, _08012708 @ =gBattleWeather
 	strh r1, [r2]
 	ldr r1, _0801270C @ =gUnknown_2023F20
 	movs r2, 0
@@ -4939,7 +4939,7 @@ _080124F2:
 	movs r0, 0
 	ldr r1, _08012710 @ =gUnknown_2023DD0
 	str r0, [r1]
-	ldr r2, _08012714 @ =gUnknown_2022B4C
+	ldr r2, _08012714 @ =gBattleTypeFlags
 	ldr r0, [r2]
 	ldr r1, _08012718 @ =0x00010002
 	ands r0, r1
@@ -4962,7 +4962,7 @@ _08012522:
 	lsls r0, 30
 	lsrs r0, 31
 	movs r1, 0
-	ldr r2, _08012720 @ =gUnknown_2023FC4
+	ldr r2, _08012720 @ =gBattleScripting
 	strb r0, [r2, 0x1D]
 	ldr r0, _08012724 @ =gUnknown_2023D72
 	strb r1, [r0]
@@ -4973,7 +4973,7 @@ _08012522:
 	movs r2, 0
 	ldr r0, _08012730 @ =gUnknown_2023E7E
 	strh r1, [r0]
-	ldr r1, _080126F4 @ =gUnknown_2023FF4
+	ldr r1, _080126F4 @ =gBattleResources
 	ldr r0, [r1]
 	ldr r0, [r0, 0x8]
 	adds r0, 0x20
@@ -4995,19 +4995,19 @@ _0801255C:
 	ldr r0, _08012738 @ =gUnknown_2023E7C
 	strh r2, [r0]
 	movs r0, 0
-	ldr r1, _0801273C @ =gUnknown_2023D50
+	ldr r1, _0801273C @ =gBattleMoveDamage
 	str r0, [r1]
 	ldr r2, _08012740 @ =gUnknown_2023F4C
 	strh r0, [r2]
 	mov r1, r9
-	ldr r0, _08012720 @ =gUnknown_2023FC4
+	ldr r0, _08012720 @ =gBattleScripting
 	strb r1, [r0, 0x18]
 	strb r1, [r0, 0x19]
 	ldr r2, _08012744 @ =gUnknown_3004FD4
 	strb r1, [r2]
-	ldr r0, _08012748 @ =gUnknown_2023D70
+	ldr r0, _08012748 @ =gAbsentBattlerFlags
 	strb r1, [r0]
-	ldr r7, _0801274C @ =gUnknown_2023FE8
+	ldr r7, _0801274C @ =gBattleStruct
 	ldr r0, [r7]
 	adds r0, 0x6C
 	strb r1, [r0]
@@ -5017,12 +5017,12 @@ _0801255C:
 	ldr r0, [r7]
 	adds r0, 0x7A
 	strb r1, [r0]
-	ldr r0, _08012750 @ =gUnknown_202402C
+	ldr r0, _08012750 @ =gEnemyParty
 	movs r1, 0xB
 	bl GetMonData
 	ldr r4, [r7]
 	adds r4, 0x7C
-	ldr r1, _08012754 @ =gUnknown_8254784
+	ldr r1, _08012754 @ =gBaseStats
 	mov r8, r1
 	lsls r1, r0, 3
 	subs r1, r0
@@ -5035,7 +5035,7 @@ _0801255C:
 	adds r1, r6, 0
 	bl __divsi3
 	strb r0, [r4]
-	ldr r0, _08012750 @ =gUnknown_202402C
+	ldr r0, _08012750 @ =gEnemyParty
 	movs r1, 0xB
 	bl GetMonData
 	ldr r4, [r7]
@@ -5067,7 +5067,7 @@ _080125F2:
 	strb r1, [r0]
 	movs r2, 0
 	adds r4, r7, 0
-	ldr r5, _0801275C @ =gUnknown_3004F90
+	ldr r5, _0801275C @ =gBattleResults
 	adds r3, r4, 0
 	movs r1, 0
 _0801260A:
@@ -5117,7 +5117,7 @@ _0801260A:
 	adds r0, 0xDF
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, _0801275C @ =gUnknown_3004F90
+	ldr r0, _0801275C @ =gBattleResults
 	movs r1, 0
 	movs r2, 0xA
 	adds r0, 0x40
@@ -5174,40 +5174,40 @@ _080126AE:
 _080126CC: .4byte gUnknown_2023DB0
 _080126D0: .4byte gUnknown_2023DA8
 _080126D4: .4byte gUnknown_2023DA0
-_080126D8: .4byte gUnknown_2023D98
-_080126DC: .4byte gUnknown_2023E0C
+_080126D8: .4byte gLastUsedMove
+_080126DC: .4byte gDisableStructs
 _080126E0: .4byte gUnknown_2023D90
 _080126E4: .4byte gUnknown_2023DB8
-_080126E8: .4byte gUnknown_2023DFC
+_080126E8: .4byte gStatuses3
 _080126EC: .4byte gUnknown_2023DD4
 _080126F0: .4byte gUnknown_2023DC0
-_080126F4: .4byte gUnknown_2023FF4
+_080126F4: .4byte gBattleResources
 _080126F8: .4byte gUnknown_2023DE4
-_080126FC: .4byte gUnknown_2023DDE
-_08012700: .4byte gUnknown_2023D6B
-_08012704: .4byte gUnknown_2023D6C
-_08012708: .4byte gUnknown_2023F1C
+_080126FC: .4byte gSideAffecting
+_08012700: .4byte sBattler_AI
+_08012704: .4byte gBattlerTarget
+_08012708: .4byte gBattleWeather
 _0801270C: .4byte gUnknown_2023F20
 _08012710: .4byte gUnknown_2023DD0
-_08012714: .4byte gUnknown_2022B4C
+_08012714: .4byte gBattleTypeFlags
 _08012718: .4byte 0x00010002
 _0801271C: .4byte gSaveBlock2Ptr
-_08012720: .4byte gUnknown_2023FC4
+_08012720: .4byte gBattleScripting
 _08012724: .4byte gUnknown_2023D72
 _08012728: .4byte gUnknown_2023E8A
 _0801272C: .4byte gUnknown_2023BC8
 _08012730: .4byte gUnknown_2023E7E
 _08012734: .4byte gUnknown_2023E82
 _08012738: .4byte gUnknown_2023E7C
-_0801273C: .4byte gUnknown_2023D50
+_0801273C: .4byte gBattleMoveDamage
 _08012740: .4byte gUnknown_2023F4C
 _08012744: .4byte gUnknown_3004FD4
-_08012748: .4byte gUnknown_2023D70
-_0801274C: .4byte gUnknown_2023FE8
-_08012750: .4byte gUnknown_202402C
-_08012754: .4byte gUnknown_8254784
+_08012748: .4byte gAbsentBattlerFlags
+_0801274C: .4byte gBattleStruct
+_08012750: .4byte gEnemyParty
+_08012754: .4byte gBaseStats
 _08012758: .4byte 0x000004fb
-_0801275C: .4byte gUnknown_3004F90
+_0801275C: .4byte gBattleResults
 	thumb_func_end sub_8012434
 
 	thumb_func_start sub_8012760
@@ -5218,8 +5218,8 @@ sub_8012760: @ 8012760
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x1C
-	ldr r4, _080128C4 @ =gUnknown_2023E0C
-	ldr r5, _080128C8 @ =gUnknown_2023BC4
+	ldr r4, _080128C4 @ =gDisableStructs
+	ldr r5, _080128C8 @ =gActiveBattler
 	ldrb r1, [r5]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -5232,8 +5232,8 @@ sub_8012760: @ 8012760
 	stm r1!, {r2,r3,r7}
 	ldr r0, [r0]
 	str r0, [r1]
-	ldr r2, _080128CC @ =gUnknown_8250C04
-	ldr r3, _080128D0 @ =gUnknown_2023D4A
+	ldr r2, _080128CC @ =gBattleMoves
+	ldr r3, _080128D0 @ =gCurrentMove
 	ldrh r1, [r3]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -5242,14 +5242,14 @@ sub_8012760: @ 8012760
 	ldrb r0, [r0]
 	mov r9, r4
 	mov r12, r5
-	ldr r6, _080128D4 @ =gUnknown_2023DFC
+	ldr r6, _080128D4 @ =gStatuses3
 	mov r10, r6
 	cmp r0, 0x7F
 	beq _08012838
 	movs r5, 0
 	mov r4, r12
 	movs r3, 0x58
-	ldr r2, _080128D8 @ =gUnknown_2023BE4
+	ldr r2, _080128D8 @ =gBattleMons
 	adds r2, 0x18
 	movs r1, 0x6
 _080127B0:
@@ -5268,8 +5268,8 @@ _080127B0:
 	bge _08012824
 	ldr r0, _080128E0 @ =gUnknown_2023C34
 	mov r8, r0
-	ldr r3, _080128C4 @ =gUnknown_2023E0C
-	ldr r4, _080128D4 @ =gUnknown_2023DFC
+	ldr r3, _080128C4 @ =gDisableStructs
+	ldr r4, _080128D4 @ =gStatuses3
 _080127D2:
 	movs r0, 0x58
 	muls r0, r5
@@ -5282,7 +5282,7 @@ _080127D2:
 	cmp r0, 0
 	beq _080127F6
 	ldrb r0, [r3, 0x14]
-	ldr r6, _080128C8 @ =gUnknown_2023BC4
+	ldr r6, _080128C8 @ =gActiveBattler
 	ldrb r6, [r6]
 	cmp r0, r6
 	bne _080127F6
@@ -5296,7 +5296,7 @@ _080127F6:
 	cmp r0, 0
 	beq _08012816
 	ldrb r0, [r3, 0x15]
-	ldr r7, _080128C8 @ =gUnknown_2023BC4
+	ldr r7, _080128C8 @ =gActiveBattler
 	ldrb r7, [r7]
 	cmp r0, r7
 	bne _08012816
@@ -5315,12 +5315,12 @@ _08012816:
 	cmp r5, r0
 	blt _080127D2
 _08012824:
-	ldr r1, _080128D0 @ =gUnknown_2023D4A
+	ldr r1, _080128D0 @ =gCurrentMove
 	ldrh r0, [r1]
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, _080128CC @ =gUnknown_8250C04
+	ldr r2, _080128CC @ =gBattleMoves
 	adds r1, r2
 	ldrb r0, [r1]
 	cmp r0, 0x7F
@@ -5331,7 +5331,7 @@ _08012838:
 	movs r0, 0x58
 	adds r2, r1, 0
 	muls r2, r0
-	ldr r0, _080128D8 @ =gUnknown_2023BE4
+	ldr r0, _080128D8 @ =gBattleMons
 	adds r0, 0x50
 	adds r2, r0
 	ldr r0, [r2]
@@ -5363,7 +5363,7 @@ _0801286C:
 	lsls r0, 24
 	cmp r4, r0
 	beq _080128AC
-	ldr r1, _080128D4 @ =gUnknown_2023DFC
+	ldr r1, _080128D4 @ =gStatuses3
 	lsls r0, r5, 2
 	adds r2, r0, r1
 	ldr r1, [r2]
@@ -5371,7 +5371,7 @@ _0801286C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080128AC
-	ldr r0, _080128C4 @ =gUnknown_2023E0C
+	ldr r0, _080128C4 @ =gDisableStructs
 	adds r0, r6, r0
 	ldrb r0, [r0, 0x15]
 	ldrb r3, [r7]
@@ -5390,18 +5390,18 @@ _080128AC:
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _0801286C
-	ldr r6, _080128C4 @ =gUnknown_2023E0C
+	ldr r6, _080128C4 @ =gDisableStructs
 	mov r9, r6
-	ldr r7, _080128C8 @ =gUnknown_2023BC4
+	ldr r7, _080128C8 @ =gActiveBattler
 	mov r12, r7
 	b _0801290C
 	.align 2, 0
-_080128C4: .4byte gUnknown_2023E0C
-_080128C8: .4byte gUnknown_2023BC4
-_080128CC: .4byte gUnknown_8250C04
-_080128D0: .4byte gUnknown_2023D4A
-_080128D4: .4byte gUnknown_2023DFC
-_080128D8: .4byte gUnknown_2023BE4
+_080128C4: .4byte gDisableStructs
+_080128C8: .4byte gActiveBattler
+_080128CC: .4byte gBattleMoves
+_080128D0: .4byte gCurrentMove
+_080128D4: .4byte gStatuses3
+_080128D8: .4byte gBattleMons
 _080128DC: .4byte gUnknown_2023BCC
 _080128E0: .4byte gUnknown_2023C34
 _080128E4: .4byte 0xfbffffff
@@ -5412,7 +5412,7 @@ _080128F0:
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r1, _08012B7C @ =gUnknown_2023BE4
+	ldr r1, _08012B7C @ =gBattleMons
 	adds r1, 0x50
 	adds r0, r1
 	movs r1, 0
@@ -5424,7 +5424,7 @@ _080128F0:
 	str r1, [r0]
 _0801290C:
 	movs r5, 0
-	ldr r7, _08012B80 @ =gUnknown_2023FE8
+	ldr r7, _08012B80 @ =gBattleStruct
 	ldr r3, _08012B84 @ =gUnknown_2023FF8
 	mov r10, r3
 	ldr r6, _08012B88 @ =gUnknown_2023BCC
@@ -5433,8 +5433,8 @@ _0801290C:
 	bge _0801296C
 	ldr r0, _08012B8C @ =gUnknown_2023C34
 	mov r8, r0
-	ldr r6, _08012B90 @ =gUnknown_825E45C
-	ldr r4, _08012B94 @ =gUnknown_2023BC4
+	ldr r6, _08012B90 @ =gBitTable
+	ldr r4, _08012B94 @ =gActiveBattler
 _08012924:
 	movs r0, 0x58
 	muls r0, r5
@@ -5498,12 +5498,12 @@ _0801298E:
 	adds r5, 0x1
 	cmp r5, 0x1B
 	bls _0801298E
-	ldr r6, _08012BA0 @ =gUnknown_2023D4A
+	ldr r6, _08012BA0 @ =gCurrentMove
 	ldrh r0, [r6]
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08012BA4 @ =gUnknown_8250C04
+	ldr r0, _08012BA4 @ =gBattleMoves
 	adds r1, r0
 	ldrb r0, [r1]
 	cmp r0, 0x7F
@@ -5565,7 +5565,7 @@ _0801298E:
 	strb r1, [r0, 0x14]
 _08012A1A:
 	movs r0, 0
-	ldr r6, _08012BA8 @ =gUnknown_2023DCC
+	ldr r6, _08012BA8 @ =gMoveResultFlags
 	strb r0, [r6]
 	mov r0, r12
 	ldrb r1, [r0]
@@ -5579,7 +5579,7 @@ _08012A1A:
 	mov r1, r12
 	ldrb r0, [r1]
 	lsls r0, 1
-	ldr r3, _08012BAC @ =gUnknown_2023D98
+	ldr r3, _08012BAC @ =gLastUsedMove
 	adds r0, r3
 	movs r3, 0
 	strh r2, [r0]
@@ -5726,7 +5726,7 @@ _08012B3C:
 	adds r0, r1
 	adds r0, 0xC9
 	strb r2, [r0]
-	ldr r6, _08012BC4 @ =gUnknown_2023FF4
+	ldr r6, _08012BC4 @ =gBattleResources
 	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
 	ldrb r0, [r3]
@@ -5734,7 +5734,7 @@ _08012B3C:
 	adds r1, r0
 	movs r0, 0
 	str r0, [r1]
-	ldr r7, _08012BA0 @ =gUnknown_2023D4A
+	ldr r7, _08012BA0 @ =gCurrentMove
 	strh r0, [r7]
 	add sp, 0x1C
 	pop {r3-r5}
@@ -5745,25 +5745,25 @@ _08012B3C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08012B7C: .4byte gUnknown_2023BE4
-_08012B80: .4byte gUnknown_2023FE8
+_08012B7C: .4byte gBattleMons
+_08012B80: .4byte gBattleStruct
 _08012B84: .4byte gUnknown_2023FF8
 _08012B88: .4byte gUnknown_2023BCC
 _08012B8C: .4byte gUnknown_2023C34
-_08012B90: .4byte gUnknown_825E45C
-_08012B94: .4byte gUnknown_2023BC4
+_08012B90: .4byte gBitTable
+_08012B94: .4byte gActiveBattler
 _08012B98: .4byte 0xffff1fff
 _08012B9C: .4byte gUnknown_2023FFC
-_08012BA0: .4byte gUnknown_2023D4A
-_08012BA4: .4byte gUnknown_8250C04
-_08012BA8: .4byte gUnknown_2023DCC
-_08012BAC: .4byte gUnknown_2023D98
+_08012BA0: .4byte gCurrentMove
+_08012BA4: .4byte gBattleMoves
+_08012BA8: .4byte gMoveResultFlags
+_08012BAC: .4byte gLastUsedMove
 _08012BB0: .4byte gUnknown_2023DA0
 _08012BB4: .4byte gUnknown_2023DA8
 _08012BB8: .4byte gUnknown_2023DB0
 _08012BBC: .4byte gUnknown_2023D90
 _08012BC0: .4byte gUnknown_2023DC0
-_08012BC4: .4byte gUnknown_2023FF4
+_08012BC4: .4byte gBattleResources
 	thumb_func_end sub_8012760
 
 	thumb_func_start sub_8012BC8
@@ -5774,8 +5774,8 @@ sub_8012BC8: @ 8012BC8
 	mov r5, r8
 	push {r5-r7}
 	movs r3, 0
-	ldr r7, _08012F5C @ =gUnknown_2023BC4
-	ldr r6, _08012F60 @ =gUnknown_2023DFC
+	ldr r7, _08012F5C @ =gActiveBattler
+	ldr r6, _08012F60 @ =gStatuses3
 	ldr r0, _08012F64 @ =gUnknown_2023FF8
 	mov r8, r0
 	ldr r1, _08012F68 @ =gUnknown_2023FFC
@@ -5784,7 +5784,7 @@ sub_8012BC8: @ 8012BC8
 	mov r12, r2
 	adds r5, r7, 0
 	movs r4, 0x58
-	ldr r2, _08012F70 @ =gUnknown_2023BE4
+	ldr r2, _08012F70 @ =gBattleMons
 	adds r2, 0x18
 	movs r1, 0x6
 _08012BEE:
@@ -5799,7 +5799,7 @@ _08012BEE:
 	ldrb r1, [r7]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r2, _08012F70 @ =gUnknown_2023BE4
+	ldr r2, _08012F70 @ =gBattleMons
 	adds r2, 0x50
 	adds r0, r2
 	movs r1, 0
@@ -5815,7 +5815,7 @@ _08012BEE:
 	bge _08012C8A
 	adds r4, r2, 0
 	movs r5, 0
-	ldr r6, _08012F78 @ =gUnknown_825E45C
+	ldr r6, _08012F78 @ =gBitTable
 _08012C26:
 	ldr r1, [r4]
 	movs r0, 0x80
@@ -5823,7 +5823,7 @@ _08012C26:
 	ands r0, r1
 	cmp r0, 0
 	beq _08012C44
-	ldr r2, _08012F7C @ =gUnknown_2023E0C
+	ldr r2, _08012F7C @ =gDisableStructs
 	adds r0, r5, r2
 	ldrb r0, [r0, 0x14]
 	ldrb r2, [r7]
@@ -5852,7 +5852,7 @@ _08012C5C:
 	ands r0, r1
 	cmp r0, 0
 	beq _08012C7C
-	ldr r2, _08012F84 @ =gUnknown_2023FE8
+	ldr r2, _08012F84 @ =gBattleStruct
 	ldr r0, [r2]
 	adds r0, r3, r0
 	ldrb r0, [r0, 0x14]
@@ -5882,7 +5882,7 @@ _08012C8A:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r2, _08012F7C @ =gUnknown_2023E0C
+	ldr r2, _08012F7C @ =gDisableStructs
 	adds r1, r0, r2
 	movs r3, 0
 	movs r2, 0
@@ -6040,14 +6040,14 @@ _08012CA8:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _08012F7C @ =gUnknown_2023E0C
+	ldr r1, _08012F7C @ =gDisableStructs
 	adds r0, r1
 	movs r2, 0
 	movs r1, 0x2
 	strb r1, [r0, 0x16]
 	ldrb r0, [r7]
 	lsls r0, 1
-	ldr r1, _08012F8C @ =gUnknown_2023D98
+	ldr r1, _08012F8C @ =gLastUsedMove
 	adds r0, r1
 	movs r3, 0
 	strh r2, [r0]
@@ -6077,7 +6077,7 @@ _08012CA8:
 	movs r1, 0xFF
 	strb r1, [r0]
 	ldrb r0, [r7]
-	ldr r2, _08012F84 @ =gUnknown_2023FE8
+	ldr r2, _08012F84 @ =gBattleStruct
 	ldr r1, [r2]
 	lsls r0, 1
 	adds r0, r1
@@ -6192,7 +6192,7 @@ _08012EDC:
 	cmp r3, r2
 	blt _08012EC4
 _08012F04:
-	ldr r1, _08012FA4 @ =gUnknown_2023FF4
+	ldr r1, _08012FA4 @ =gBattleResources
 	ldr r0, [r1]
 	ldr r1, [r0, 0x4]
 	ldrb r0, [r7]
@@ -6204,13 +6204,13 @@ _08012F04:
 	movs r3, 0x58
 	adds r1, r0, 0
 	muls r1, r3
-	ldr r2, _08012F70 @ =gUnknown_2023BE4
+	ldr r2, _08012F70 @ =gBattleMons
 	adds r1, r2
 	ldrh r2, [r1]
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
-	ldr r2, _08012FA8 @ =gUnknown_8254784
+	ldr r2, _08012FA8 @ =gBaseStats
 	adds r0, r2
 	ldrb r0, [r0, 0x6]
 	adds r1, 0x21
@@ -6218,13 +6218,13 @@ _08012F04:
 	ldrb r0, [r7]
 	adds r1, r0, 0
 	muls r1, r3
-	ldr r0, _08012F70 @ =gUnknown_2023BE4
+	ldr r0, _08012F70 @ =gBattleMons
 	adds r1, r0
 	ldrh r2, [r1]
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
-	ldr r2, _08012FA8 @ =gUnknown_8254784
+	ldr r2, _08012FA8 @ =gBaseStats
 	adds r0, r2
 	ldrb r0, [r0, 0x7]
 	adds r1, 0x22
@@ -6237,26 +6237,26 @@ _08012F04:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08012F5C: .4byte gUnknown_2023BC4
-_08012F60: .4byte gUnknown_2023DFC
+_08012F5C: .4byte gActiveBattler
+_08012F60: .4byte gStatuses3
 _08012F64: .4byte gUnknown_2023FF8
 _08012F68: .4byte gUnknown_2023FFC
 _08012F6C: .4byte gUnknown_2023E8C
-_08012F70: .4byte gUnknown_2023BE4
+_08012F70: .4byte gBattleMons
 _08012F74: .4byte gUnknown_2023BCC
-_08012F78: .4byte gUnknown_825E45C
-_08012F7C: .4byte gUnknown_2023E0C
+_08012F78: .4byte gBitTable
+_08012F7C: .4byte gDisableStructs
 _08012F80: .4byte 0xfbffffff
-_08012F84: .4byte gUnknown_2023FE8
+_08012F84: .4byte gBattleStruct
 _08012F88: .4byte 0xffff1fff
-_08012F8C: .4byte gUnknown_2023D98
+_08012F8C: .4byte gLastUsedMove
 _08012F90: .4byte gUnknown_2023DA0
 _08012F94: .4byte gUnknown_2023DA8
 _08012F98: .4byte gUnknown_2023DB0
 _08012F9C: .4byte gUnknown_2023D90
 _08012FA0: .4byte gUnknown_2023DC0
-_08012FA4: .4byte gUnknown_2023FF4
-_08012FA8: .4byte gUnknown_8254784
+_08012FA4: .4byte gBattleResources
+_08012FA8: .4byte gBaseStats
 	thumb_func_end sub_8012BC8
 
 	thumb_func_start BattleIntroGetMonsData
@@ -6272,7 +6272,7 @@ BattleIntroGetMonsData: @ 8012FAC
 	.align 2, 0
 _08012FBC: .4byte gUnknown_2023E82
 _08012FC0:
-	ldr r4, _08012FE0 @ =gUnknown_2023BC4
+	ldr r4, _08012FE0 @ =gActiveBattler
 	ldrb r0, [r5, 0x1]
 	strb r0, [r4]
 	movs r0, 0
@@ -6286,7 +6286,7 @@ _08012FC0:
 	strb r0, [r5]
 	b _0801301A
 	.align 2, 0
-_08012FE0: .4byte gUnknown_2023BC4
+_08012FE0: .4byte gActiveBattler
 _08012FE4:
 	ldr r0, _08013008 @ =gUnknown_2023BC8
 	ldr r2, [r0]
@@ -6327,7 +6327,7 @@ BattleIntroPrepareBackgroundSlide: @ 8013020
 	bne _08013050
 	movs r0, 0
 	bl GetBankByIdentity
-	ldr r4, _0801305C @ =gUnknown_2023BC4
+	ldr r4, _0801305C @ =gActiveBattler
 	strb r0, [r4]
 	ldr r0, _08013060 @ =gUnknown_2022B50
 	ldrb r1, [r0]
@@ -6347,7 +6347,7 @@ _08013050:
 	bx r0
 	.align 2, 0
 _08013058: .4byte gUnknown_2023BC8
-_0801305C: .4byte gUnknown_2023BC4
+_0801305C: .4byte gActiveBattler
 _08013060: .4byte gUnknown_2022B50
 _08013064: .4byte gUnknown_3004F84
 _08013068: .4byte sub_8013070
@@ -6367,7 +6367,7 @@ sub_8013070: @ 8013070
 	beq _08013084
 	b _08013314
 _08013084:
-	ldr r2, _080130D8 @ =gUnknown_2023BC4
+	ldr r2, _080130D8 @ =gActiveBattler
 	strb r1, [r2]
 	ldr r0, _080130DC @ =gUnknown_2023BCC
 	ldrb r0, [r0]
@@ -6376,20 +6376,20 @@ _08013084:
 	b _0801330E
 _08013092:
 	movs r7, 0x58
-	ldr r0, _080130E0 @ =gUnknown_2023BE4
+	ldr r0, _080130E0 @ =gBattleMons
 	mov r8, r0
 	mov r9, r2
 	movs r1, 0x48
 	add r1, r8
 	mov r10, r1
 _080130A0:
-	ldr r0, _080130E4 @ =gUnknown_2022B4C
+	ldr r0, _080130E4 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	ands r0, r1
 	cmp r0, 0
 	beq _080130E8
-	ldr r4, _080130D8 @ =gUnknown_2023BC4
+	ldr r4, _080130D8 @ =gActiveBattler
 	ldrb r0, [r4]
 	bl GetBankSide
 	lsls r0, 24
@@ -6410,10 +6410,10 @@ _080130C6:
 	b _080131B6
 	.align 2, 0
 _080130D4: .4byte gUnknown_2023BC8
-_080130D8: .4byte gUnknown_2023BC4
+_080130D8: .4byte gActiveBattler
 _080130DC: .4byte gUnknown_2023BCC
-_080130E0: .4byte gUnknown_2023BE4
-_080130E4: .4byte gUnknown_2022B4C
+_080130E0: .4byte gBattleMons
+_080130E4: .4byte gBattleTypeFlags
 _080130E8:
 	mov r1, r9
 	ldrb r0, [r1]
@@ -6421,9 +6421,9 @@ _080130E8:
 	mov r2, r8
 	adds r3, r0, r2
 	movs r2, 0
-	ldr r6, _08013230 @ =gUnknown_8254784
+	ldr r6, _08013230 @ =gBaseStats
 	ldr r5, _08013234 @ =gUnknown_20233C4
-	ldr r4, _08013238 @ =gUnknown_2023BC4
+	ldr r4, _08013238 @ =gActiveBattler
 _080130FA:
 	adds r0, r3, r2
 	ldrb r1, [r4]
@@ -6479,7 +6479,7 @@ _080130FA:
 	strb r0, [r1]
 	ldrb r0, [r2]
 	bl GetBankSide
-	ldr r1, _0801323C @ =gUnknown_2023FE8
+	ldr r1, _0801323C @ =gBattleStruct
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, 0xA8
@@ -6492,7 +6492,7 @@ _080130FA:
 	ldrh r0, [r0, 0x28]
 	strh r0, [r1]
 	movs r2, 0
-	ldr r4, _08013238 @ =gUnknown_2023BC4
+	ldr r4, _08013238 @ =gActiveBattler
 	movs r5, 0x58
 	ldr r1, _08013240 @ =gUnknown_2023BFC
 	adds r6, r4, 0
@@ -6519,7 +6519,7 @@ _08013196:
 	movs r0, 0
 	str r0, [r1]
 _080131B6:
-	ldr r4, _08013238 @ =gUnknown_2023BC4
+	ldr r4, _08013238 @ =gActiveBattler
 	ldrb r0, [r4]
 	bl GetBankIdentity
 	lsls r0, 24
@@ -6530,7 +6530,7 @@ _080131B6:
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _080131D0:
-	ldr r5, _08013244 @ =gUnknown_2022B4C
+	ldr r5, _08013244 @ =gBattleTypeFlags
 	ldr r0, [r5]
 	movs r1, 0x8
 	ands r0, r1
@@ -6573,12 +6573,12 @@ _080131F6:
 	bl sub_8044898
 	b _080132C2
 	.align 2, 0
-_08013230: .4byte gUnknown_8254784
+_08013230: .4byte gBaseStats
 _08013234: .4byte gUnknown_20233C4
-_08013238: .4byte gUnknown_2023BC4
-_0801323C: .4byte gUnknown_2023FE8
+_08013238: .4byte gActiveBattler
+_0801323C: .4byte gBattleStruct
 _08013240: .4byte gUnknown_2023BFC
-_08013244: .4byte gUnknown_2022B4C
+_08013244: .4byte gBattleTypeFlags
 _08013248: .4byte 0x0001aa02
 _0801324C:
 	ldrb r0, [r4]
@@ -6636,13 +6636,13 @@ _080132B4:
 	ldrb r0, [r1]
 	bl MarkBufferBankForExecution
 _080132C2:
-	ldr r0, _08013328 @ =gUnknown_2022B4C
+	ldr r0, _08013328 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
 	cmp r0, 0
 	beq _080132F8
-	ldr r4, _0801332C @ =gUnknown_2023BC4
+	ldr r4, _0801332C @ =gActiveBattler
 	ldrb r0, [r4]
 	bl GetBankIdentity
 	lsls r0, 24
@@ -6686,8 +6686,8 @@ _08013314:
 	bx r0
 	.align 2, 0
 _08013324: .4byte 0x0001aa02
-_08013328: .4byte gUnknown_2022B4C
-_0801332C: .4byte gUnknown_2023BC4
+_08013328: .4byte gBattleTypeFlags
+_0801332C: .4byte gActiveBattler
 _08013330: .4byte gUnknown_2023BCC
 _08013334: .4byte gUnknown_3004F84
 _08013338: .4byte BattleIntroDrawPartySummaryScreens
@@ -6705,7 +6705,7 @@ BattleIntroDrawPartySummaryScreens: @ 801333C
 	beq _0801334E
 	b _080134C8
 _0801334E:
-	ldr r0, _08013398 @ =gUnknown_2022B4C
+	ldr r0, _08013398 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x8
 	ands r0, r1
@@ -6722,7 +6722,7 @@ _08013366:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, _0801339C @ =gUnknown_202402C
+	ldr r0, _0801339C @ =gEnemyParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -6743,8 +6743,8 @@ _0801338C:
 	b _080133B6
 	.align 2, 0
 _08013394: .4byte gUnknown_2023BC8
-_08013398: .4byte gUnknown_2022B4C
-_0801339C: .4byte gUnknown_202402C
+_08013398: .4byte gBattleTypeFlags
+_0801339C: .4byte gEnemyParty
 _080133A0: .4byte 0x0000ffff
 _080133A4:
 	adds r0, r4, 0
@@ -6763,7 +6763,7 @@ _080133B6:
 	ble _08013366
 	movs r0, 0x1
 	bl GetBankByIdentity
-	ldr r4, _08013410 @ =gUnknown_2023BC4
+	ldr r4, _08013410 @ =gActiveBattler
 	strb r0, [r4]
 	movs r0, 0
 	mov r1, sp
@@ -6778,7 +6778,7 @@ _080133E2:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, _08013414 @ =gUnknown_2024284
+	ldr r0, _08013414 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -6798,8 +6798,8 @@ _08013408:
 	movs r0, 0
 	b _0801342E
 	.align 2, 0
-_08013410: .4byte gUnknown_2023BC4
-_08013414: .4byte gUnknown_2024284
+_08013410: .4byte gActiveBattler
+_08013414: .4byte gPlayerParty
 _08013418: .4byte 0x0000ffff
 _0801341C:
 	adds r0, r4, 0
@@ -6818,7 +6818,7 @@ _0801342E:
 	ble _080133E2
 	movs r0, 0
 	bl GetBankByIdentity
-	ldr r4, _0801345C @ =gUnknown_2023BC4
+	ldr r4, _0801345C @ =gActiveBattler
 	strb r0, [r4]
 	movs r0, 0
 	mov r1, sp
@@ -6830,7 +6830,7 @@ _0801342E:
 	ldr r0, _08013464 @ =BattleIntroPrintTrainerWantsToBattle
 	b _080134C6
 	.align 2, 0
-_0801345C: .4byte gUnknown_2023BC4
+_0801345C: .4byte gActiveBattler
 _08013460: .4byte gUnknown_3004F84
 _08013464: .4byte BattleIntroPrintTrainerWantsToBattle
 _08013468:
@@ -6841,7 +6841,7 @@ _0801346E:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, _0801349C @ =gUnknown_2024284
+	ldr r0, _0801349C @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -6861,7 +6861,7 @@ _08013494:
 	movs r0, 0
 	b _080134B6
 	.align 2, 0
-_0801349C: .4byte gUnknown_2024284
+_0801349C: .4byte gPlayerParty
 _080134A0: .4byte 0x0000ffff
 _080134A4:
 	adds r0, r4, 0
@@ -6903,7 +6903,7 @@ BattleIntroPrintTrainerWantsToBattle: @ 80134DC
 	bne _080134FE
 	movs r0, 0x1
 	bl GetBankByIdentity
-	ldr r1, _08013508 @ =gUnknown_2023BC4
+	ldr r1, _08013508 @ =gActiveBattler
 	strb r0, [r1]
 	ldrb r1, [r1]
 	movs r0, 0
@@ -6916,7 +6916,7 @@ _080134FE:
 	bx r0
 	.align 2, 0
 _08013504: .4byte gUnknown_2023BC8
-_08013508: .4byte gUnknown_2023BC4
+_08013508: .4byte gActiveBattler
 _0801350C: .4byte gUnknown_3004F84
 _08013510: .4byte sub_8013568
 	thumb_func_end BattleIntroPrintTrainerWantsToBattle
@@ -6934,7 +6934,7 @@ sub_8013514: @ 8013514
 	movs r0, 0
 	movs r1, 0
 	bl PrepareStringBattle
-	ldr r0, _0801355C @ =gUnknown_2022B4C
+	ldr r0, _0801355C @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0xA0
 	lsls r1, 8
@@ -6943,7 +6943,7 @@ sub_8013514: @ 8013514
 	bne _0801354A
 	movs r0, 0x1
 	bl GetBankByIdentity
-	ldr r1, _08013560 @ =gUnknown_2023FC4
+	ldr r1, _08013560 @ =gBattleScripting
 	strb r0, [r1, 0x17]
 	ldr r0, _08013564 @ =gUnknown_81D91A1
 	bl BattleScriptExecute
@@ -6954,8 +6954,8 @@ _0801354A:
 _08013550: .4byte gUnknown_2023BC8
 _08013554: .4byte gUnknown_3004F84
 _08013558: .4byte sub_80136E4
-_0801355C: .4byte gUnknown_2022B4C
-_08013560: .4byte gUnknown_2023FC4
+_0801355C: .4byte gBattleTypeFlags
+_08013560: .4byte gBattleScripting
 _08013564: .4byte gUnknown_81D91A1
 	thumb_func_end sub_8013514
 
@@ -6992,7 +6992,7 @@ sub_801359C: @ 801359C
 	ldr r1, [r0]
 	cmp r1, 0
 	bne _0801360C
-	ldr r2, _08013618 @ =gUnknown_2023BC4
+	ldr r2, _08013618 @ =gActiveBattler
 	strb r1, [r2]
 	ldr r0, _0801361C @ =gUnknown_2023BCC
 	ldrb r0, [r0]
@@ -7011,7 +7011,7 @@ _080135B4:
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _080135CE:
-	ldr r0, _08013620 @ =gUnknown_2022B4C
+	ldr r0, _08013620 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -7047,9 +7047,9 @@ _0801360C:
 	bx r0
 	.align 2, 0
 _08013614: .4byte gUnknown_2023BC8
-_08013618: .4byte gUnknown_2023BC4
+_08013618: .4byte gActiveBattler
 _0801361C: .4byte gUnknown_2023BCC
-_08013620: .4byte gUnknown_2022B4C
+_08013620: .4byte gBattleTypeFlags
 _08013624: .4byte gUnknown_3004F84
 _08013628: .4byte sub_801362C
 	thumb_func_end sub_801359C
@@ -7061,14 +7061,14 @@ sub_801362C: @ 801362C
 	ldr r1, [r0]
 	cmp r1, 0
 	bne _0801369C
-	ldr r2, _080136A8 @ =gUnknown_2023BC4
+	ldr r2, _080136A8 @ =gActiveBattler
 	strb r1, [r2]
 	ldr r0, _080136AC @ =gUnknown_2023BCC
 	ldrb r0, [r0]
 	cmp r1, r0
 	bcs _08013696
 	adds r4, r2, 0
-	ldr r6, _080136B0 @ =gUnknown_2023BE4
+	ldr r6, _080136B0 @ =gBattleMons
 	movs r5, 0x58
 	adds r7, r6, 0
 	adds r7, 0x48
@@ -7079,7 +7079,7 @@ _0801364C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08013684
-	ldr r0, _080136B4 @ =gUnknown_2022B4C
+	ldr r0, _080136B4 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, _080136B8 @ =0x0001aa02
 	ands r0, r1
@@ -7118,10 +7118,10 @@ _0801369C:
 	bx r0
 	.align 2, 0
 _080136A4: .4byte gUnknown_2023BC8
-_080136A8: .4byte gUnknown_2023BC4
+_080136A8: .4byte gActiveBattler
 _080136AC: .4byte gUnknown_2023BCC
-_080136B0: .4byte gUnknown_2023BE4
-_080136B4: .4byte gUnknown_2022B4C
+_080136B0: .4byte gBattleMons
+_080136B4: .4byte gBattleTypeFlags
 _080136B8: .4byte 0x0001aa02
 _080136BC: .4byte gUnknown_3004F84
 _080136C0: .4byte sub_80136E4
@@ -7153,7 +7153,7 @@ sub_80136E4: @ 80136E4
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _08013712
-	ldr r0, _0801371C @ =gUnknown_2022B4C
+	ldr r0, _0801371C @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	ands r0, r1
@@ -7175,7 +7175,7 @@ _08013712:
 	bx r0
 	.align 2, 0
 _08013718: .4byte gUnknown_2023BC8
-_0801371C: .4byte gUnknown_2022B4C
+_0801371C: .4byte gBattleTypeFlags
 _08013720: .4byte gUnknown_3004F84
 _08013724: .4byte sub_8013728
 	thumb_func_end sub_80136E4
@@ -7187,7 +7187,7 @@ sub_8013728: @ 8013728
 	ldr r1, [r0]
 	cmp r1, 0
 	bne _080137AC
-	ldr r2, _080137B8 @ =gUnknown_2023BC4
+	ldr r2, _080137B8 @ =gActiveBattler
 	strb r1, [r2]
 	ldr r0, _080137BC @ =gUnknown_2023BCC
 	ldrb r0, [r0]
@@ -7205,7 +7205,7 @@ _08013740:
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _08013758:
-	ldr r0, _080137C0 @ =gUnknown_2022B4C
+	ldr r0, _080137C0 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -7232,7 +7232,7 @@ _0801377E:
 	cmp r0, r1
 	bcc _08013740
 _08013790:
-	ldr r2, _080137C4 @ =gUnknown_2023FE8
+	ldr r2, _080137C4 @ =gBattleStruct
 	ldr r0, [r2]
 	adds r0, 0x4C
 	movs r1, 0
@@ -7252,10 +7252,10 @@ _080137AC:
 	bx r0
 	.align 2, 0
 _080137B4: .4byte gUnknown_2023BC8
-_080137B8: .4byte gUnknown_2023BC4
+_080137B8: .4byte gActiveBattler
 _080137BC: .4byte gUnknown_2023BCC
-_080137C0: .4byte gUnknown_2022B4C
-_080137C4: .4byte gUnknown_2023FE8
+_080137C0: .4byte gBattleTypeFlags
+_080137C4: .4byte gBattleStruct
 _080137C8: .4byte gUnknown_3004F84
 _080137CC: .4byte sub_801385C
 	thumb_func_end sub_8013728
@@ -7267,14 +7267,14 @@ sub_80137D0: @ 80137D0
 	ldr r1, [r0]
 	cmp r1, 0
 	bne _0801383A
-	ldr r2, _08013844 @ =gUnknown_2023BC4
+	ldr r2, _08013844 @ =gActiveBattler
 	strb r1, [r2]
 	ldr r0, _08013848 @ =gUnknown_2023BCC
 	ldrb r0, [r0]
 	cmp r1, r0
 	bcs _0801381E
 	adds r4, r2, 0
-	ldr r5, _0801384C @ =gUnknown_2023BCE
+	ldr r5, _0801384C @ =gBattlerPartyIndexes
 _080137EA:
 	ldrb r0, [r4]
 	bl GetBankSide
@@ -7301,7 +7301,7 @@ _0801380C:
 	cmp r0, r1
 	bcc _080137EA
 _0801381E:
-	ldr r2, _08013850 @ =gUnknown_2023FE8
+	ldr r2, _08013850 @ =gBattleStruct
 	ldr r0, [r2]
 	adds r0, 0x4C
 	movs r1, 0
@@ -7321,10 +7321,10 @@ _0801383A:
 	bx r0
 	.align 2, 0
 _08013840: .4byte gUnknown_2023BC8
-_08013844: .4byte gUnknown_2023BC4
+_08013844: .4byte gActiveBattler
 _08013848: .4byte gUnknown_2023BCC
-_0801384C: .4byte gUnknown_2023BCE
-_08013850: .4byte gUnknown_2023FE8
+_0801384C: .4byte gBattlerPartyIndexes
+_08013850: .4byte gBattleStruct
 _08013854: .4byte gUnknown_3004F84
 _08013858: .4byte sub_801385C
 	thumb_func_end sub_80137D0
@@ -7344,7 +7344,7 @@ sub_801385C: @ 801385C
 	beq _08013874
 	b _08013ADA
 _08013874:
-	ldr r0, _080138A4 @ =gUnknown_2023FE8
+	ldr r0, _080138A4 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0x4C
 	ldrb r0, [r0]
@@ -7369,7 +7369,7 @@ _0801389A:
 	b _080138F0
 	.align 2, 0
 _080138A0: .4byte gUnknown_2023BC8
-_080138A4: .4byte gUnknown_2023FE8
+_080138A4: .4byte gBattleStruct
 _080138A8: .4byte gUnknown_2023BCC
 _080138AC: .4byte gUnknown_2023BDE
 _080138B0:
@@ -7413,7 +7413,7 @@ _080138F0:
 	cmp r5, r0
 	blt _080138B0
 _080138FA:
-	ldr r4, _0801392C @ =gUnknown_2023FE8
+	ldr r4, _0801392C @ =gBattleStruct
 	ldr r0, [r4]
 	adds r0, 0xB6
 	ldrb r0, [r0]
@@ -7436,9 +7436,9 @@ _080138FA:
 	.align 2, 0
 _08013924: .4byte gUnknown_2023BDE
 _08013928: .4byte gUnknown_2023BCC
-_0801392C: .4byte gUnknown_2023FE8
+_0801392C: .4byte gBattleStruct
 _08013930:
-	ldr r2, _08013AE8 @ =gUnknown_2023FE8
+	ldr r2, _08013AE8 @ =gBattleStruct
 	ldr r0, [r2]
 	adds r0, 0x4C
 	ldr r1, _08013AEC @ =gUnknown_2023BCC
@@ -7510,7 +7510,7 @@ _080139A4:
 	beq _080139BA
 	b _08013ADA
 _080139BA:
-	ldr r2, _08013AE8 @ =gUnknown_2023FE8
+	ldr r2, _08013AE8 @ =gBattleStruct
 	ldr r0, [r2]
 	adds r0, 0xD9
 	ldr r1, _08013AEC @ =gUnknown_2023BCC
@@ -7567,7 +7567,7 @@ _08013A1C:
 	bne _08013A1C
 _08013A22:
 	movs r5, 0
-	ldr r1, _08013AE8 @ =gUnknown_2023FE8
+	ldr r1, _08013AE8 @ =gBattleStruct
 	mov r8, r1
 	movs r7, 0x6
 	ldr r6, _08013AF4 @ =gUnknown_2023D7C
@@ -7592,10 +7592,10 @@ _08013A32:
 	movs r0, 0
 	bl TurnValuesCleanUp
 	bl SpecialStatusesClear
-	ldr r0, _08013AE8 @ =gUnknown_2023FE8
+	ldr r0, _08013AE8 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0x91
-	ldr r1, _08013AFC @ =gUnknown_2023D70
+	ldr r1, _08013AFC @ =gAbsentBattlerFlags
 	ldrb r1, [r1]
 	strb r1, [r0]
 	ldr r1, _08013B00 @ =gUnknown_3004F84
@@ -7612,13 +7612,13 @@ _08013A74:
 	bge _08013A74
 	movs r5, 0
 	ldr r3, _08013AEC @ =gUnknown_2023BCC
-	ldr r2, _08013AE8 @ =gUnknown_2023FE8
-	ldr r6, _08013B0C @ =gUnknown_2023FC4
-	ldr r7, _08013B10 @ =gUnknown_2023DCC
+	ldr r2, _08013AE8 @ =gBattleStruct
+	ldr r6, _08013B0C @ =gBattleScripting
+	ldr r7, _08013B10 @ =gMoveResultFlags
 	ldrb r0, [r3]
 	cmp r5, r0
 	bge _08013AA6
-	ldr r0, _08013B14 @ =gUnknown_2023BE4
+	ldr r0, _08013B14 @ =gBattleMons
 	movs r4, 0x9
 	negs r4, r4
 	adds r1, r0, 0
@@ -7667,18 +7667,18 @@ _08013ADA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08013AE8: .4byte gUnknown_2023FE8
+_08013AE8: .4byte gBattleStruct
 _08013AEC: .4byte gUnknown_2023BCC
 _08013AF0: .4byte gUnknown_2023BDE
 _08013AF4: .4byte gUnknown_2023D7C
 _08013AF8: .4byte gUnknown_2023DC4
-_08013AFC: .4byte gUnknown_2023D70
+_08013AFC: .4byte gAbsentBattlerFlags
 _08013B00: .4byte gUnknown_3004F84
 _08013B04: .4byte sub_8014040
 _08013B08: .4byte gUnknown_2023E82
-_08013B0C: .4byte gUnknown_2023FC4
-_08013B10: .4byte gUnknown_2023DCC
-_08013B14: .4byte gUnknown_2023BE4
+_08013B0C: .4byte gBattleScripting
+_08013B10: .4byte gMoveResultFlags
+_08013B14: .4byte gBattleMons
 _08013B18: .4byte gUnknown_2023E80
 	thumb_func_end sub_801385C
 
@@ -7705,7 +7705,7 @@ _08013B34:
 	ldrb r3, [r3]
 	cmp r4, r3
 	bge _08013B86
-	ldr r5, _08013BC8 @ =gUnknown_2023BE4
+	ldr r5, _08013BC8 @ =gBattleMons
 	adds r6, r5, 0
 	adds r6, 0x4C
 _08013B4A:
@@ -7740,7 +7740,7 @@ _08013B7C:
 	cmp r4, r0
 	blt _08013B4A
 _08013B86:
-	ldr r2, _08013BCC @ =gUnknown_2023FE8
+	ldr r2, _08013BCC @ =gBattleStruct
 	ldr r0, [r2]
 	movs r1, 0
 	strb r1, [r0]
@@ -7757,7 +7757,7 @@ _08013B86:
 	strb r1, [r0]
 	ldr r0, [r2]
 	strb r1, [r0, 0x3]
-	ldr r0, _08013BD0 @ =gUnknown_2023DCC
+	ldr r0, _08013BD0 @ =gMoveResultFlags
 	strb r1, [r0]
 _08013BAC:
 	pop {r4-r6}
@@ -7769,9 +7769,9 @@ _08013BB8: .4byte gUnknown_3004F84
 _08013BBC: .4byte sub_8013BD4
 _08013BC0: .4byte gUnknown_2023BCC
 _08013BC4: .4byte gUnknown_2023E82
-_08013BC8: .4byte gUnknown_2023BE4
-_08013BCC: .4byte gUnknown_2023FE8
-_08013BD0: .4byte gUnknown_2023DCC
+_08013BC8: .4byte gBattleMons
+_08013BCC: .4byte gBattleStruct
+_08013BD0: .4byte gMoveResultFlags
 	thumb_func_end sub_8013B1C
 
 	thumb_func_start sub_8013BD4
@@ -7806,7 +7806,7 @@ _08013C04:
 	beq _08013C12
 	b _08013D20
 _08013C12:
-	ldr r0, _08013C7C @ =gUnknown_2023FE8
+	ldr r0, _08013C7C @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0x4D
 	strb r1, [r0]
@@ -7828,13 +7828,13 @@ _08013C12:
 	ldr r1, _08013C90 @ =0xffefffff
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, _08013C94 @ =gUnknown_2023FC4
+	ldr r0, _08013C94 @ =gBattleScripting
 	strb r4, [r0, 0x18]
 	strb r4, [r0, 0x19]
 	strb r4, [r0, 0x14]
-	ldr r0, _08013C98 @ =gUnknown_2023D50
+	ldr r0, _08013C98 @ =gBattleMoveDamage
 	str r4, [r0]
-	ldr r0, _08013C9C @ =gUnknown_2023DCC
+	ldr r0, _08013C9C @ =gMoveResultFlags
 	strb r4, [r0]
 	ldr r1, _08013CA0 @ =gUnknown_2023E82
 	movs r2, 0
@@ -7857,21 +7857,21 @@ _08013C58:
 	b _08013D20
 	.align 2, 0
 _08013C78: .4byte gUnknown_2023E8A
-_08013C7C: .4byte gUnknown_2023FE8
+_08013C7C: .4byte gBattleStruct
 _08013C80: .4byte gUnknown_2023DD0
 _08013C84: .4byte 0xfffffdff
 _08013C88: .4byte 0xfff7ffff
 _08013C8C: .4byte 0xffbfffff
 _08013C90: .4byte 0xffefffff
-_08013C94: .4byte gUnknown_2023FC4
-_08013C98: .4byte gUnknown_2023D50
-_08013C9C: .4byte gUnknown_2023DCC
+_08013C94: .4byte gBattleScripting
+_08013C98: .4byte gBattleMoveDamage
+_08013C9C: .4byte gMoveResultFlags
 _08013CA0: .4byte gUnknown_2023E82
 _08013CA4: .4byte gUnknown_2023BE3
 _08013CA8: .4byte gUnknown_3004F84
 _08013CAC: .4byte RunTurnActionsFunctions
 _08013CB0:
-	ldr r1, _08013D30 @ =gUnknown_3004F90
+	ldr r1, _08013D30 @ =gBattleResults
 	ldrb r0, [r1, 0x13]
 	cmp r0, 0xFE
 	bhi _08013CBC
@@ -7880,11 +7880,11 @@ _08013CB0:
 _08013CBC:
 	movs r2, 0
 	ldr r4, _08013D34 @ =gUnknown_2023BCC
-	ldr r0, _08013D38 @ =gUnknown_2023FE8
+	ldr r0, _08013D38 @ =gBattleStruct
 	mov r8, r0
 	ldr r1, _08013D3C @ =gUnknown_3004F84
 	mov r10, r1
-	ldr r0, _08013D40 @ =gUnknown_2023D70
+	ldr r0, _08013D40 @ =gAbsentBattlerFlags
 	mov r12, r0
 	ldr r1, _08013D44 @ =sub_8014040
 	mov r9, r1
@@ -7908,7 +7908,7 @@ _08013CDE:
 	blt _08013CDE
 _08013CF2:
 	movs r2, 0
-	ldr r3, _08013D38 @ =gUnknown_2023FE8
+	ldr r3, _08013D38 @ =gBattleStruct
 	movs r1, 0x6
 _08013CF8:
 	ldr r0, [r3]
@@ -7939,11 +7939,11 @@ _08013D20:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08013D30: .4byte gUnknown_3004F90
+_08013D30: .4byte gBattleResults
 _08013D34: .4byte gUnknown_2023BCC
-_08013D38: .4byte gUnknown_2023FE8
+_08013D38: .4byte gBattleStruct
 _08013D3C: .4byte gUnknown_3004F84
-_08013D40: .4byte gUnknown_2023D70
+_08013D40: .4byte gAbsentBattlerFlags
 _08013D44: .4byte sub_8014040
 _08013D48: .4byte gUnknown_2023D7C
 _08013D4C: .4byte gUnknown_2023DC4
@@ -7954,8 +7954,8 @@ _08013D50: .4byte gUnknown_2023E80
 IsRunningFromBattleImpossible: @ 8013D54
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, _08013D78 @ =gUnknown_2023BE4
-	ldr r0, _08013D7C @ =gUnknown_2023BC4
+	ldr r1, _08013D78 @ =gBattleMons
+	ldr r0, _08013D7C @ =gActiveBattler
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -7971,8 +7971,8 @@ IsRunningFromBattleImpossible: @ 8013D54
 	ldrb r2, [r0, 0x7]
 	b _08013D8E
 	.align 2, 0
-_08013D78: .4byte gUnknown_2023BE4
-_08013D7C: .4byte gUnknown_2023BC4
+_08013D78: .4byte gBattleMons
+_08013D7C: .4byte gActiveBattler
 _08013D80: .4byte gUnknown_2023F54
 _08013D84:
 	ldrh r0, [r1, 0x2E]
@@ -7981,14 +7981,14 @@ _08013D84:
 	lsrs r2, r0, 24
 _08013D8E:
 	ldr r1, _08013EA4 @ =gUnknown_2023D6F
-	ldr r3, _08013EA8 @ =gUnknown_2023BC4
+	ldr r3, _08013EA8 @ =gActiveBattler
 	ldrb r0, [r3]
 	strb r0, [r1]
 	cmp r2, 0x25
 	bne _08013D9C
 	b _08013F18
 _08013D9C:
-	ldr r0, _08013EAC @ =gUnknown_2022B4C
+	ldr r0, _08013EAC @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -7996,7 +7996,7 @@ _08013D9C:
 	beq _08013DAA
 	b _08013F18
 _08013DAA:
-	ldr r1, _08013EB0 @ =gUnknown_2023BE4
+	ldr r1, _08013EB0 @ =gBattleMons
 	ldrb r2, [r3]
 	movs r0, 0x58
 	muls r0, r2
@@ -8025,7 +8025,7 @@ _08013DD4:
 	lsrs r0, 24
 	cmp r6, r0
 	beq _08013DF8
-	ldr r1, _08013EB0 @ =gUnknown_2023BE4
+	ldr r1, _08013EB0 @ =gBattleMons
 	movs r0, 0x58
 	muls r0, r5
 	adds r0, r1
@@ -8042,8 +8042,8 @@ _08013DF8:
 	lsrs r0, 24
 	cmp r6, r0
 	beq _08013E42
-	ldr r3, _08013EB0 @ =gUnknown_2023BE4
-	ldr r0, _08013EA8 @ =gUnknown_2023BC4
+	ldr r3, _08013EB0 @ =gBattleMons
+	ldr r0, _08013EA8 @ =gActiveBattler
 	ldrb r0, [r0]
 	movs r2, 0x58
 	muls r0, r2
@@ -8082,7 +8082,7 @@ _08013E42:
 	cmp r5, r0
 	blt _08013DD4
 _08013E52:
-	ldr r4, _08013EA8 @ =gUnknown_2023BC4
+	ldr r4, _08013EA8 @ =gActiveBattler
 	ldrb r1, [r4]
 	movs r0, 0
 	str r0, [sp]
@@ -8094,7 +8094,7 @@ _08013E52:
 	lsrs r5, r0, 24
 	cmp r5, 0
 	beq _08013EC4
-	ldr r6, _08013EB0 @ =gUnknown_2023BE4
+	ldr r6, _08013EB0 @ =gBattleMons
 	ldrb r0, [r4]
 	movs r3, 0x58
 	muls r0, r3
@@ -8110,7 +8110,7 @@ _08013E52:
 	cmp r0, 0x8
 	bne _08013EC4
 _08013E8A:
-	ldr r0, _08013EB8 @ =gUnknown_2023FC4
+	ldr r0, _08013EB8 @ =gBattleScripting
 	subs r1, r5, 0x1
 	strb r1, [r0, 0x17]
 	ldr r2, _08013EBC @ =gUnknown_2023D6A
@@ -8125,16 +8125,16 @@ _08013E8A:
 	b _08013F5C
 	.align 2, 0
 _08013EA4: .4byte gUnknown_2023D6F
-_08013EA8: .4byte gUnknown_2023BC4
-_08013EAC: .4byte gUnknown_2022B4C
-_08013EB0: .4byte gUnknown_2023BE4
+_08013EA8: .4byte gActiveBattler
+_08013EAC: .4byte gBattleTypeFlags
+_08013EB0: .4byte gBattleMons
 _08013EB4: .4byte gUnknown_2023BCC
-_08013EB8: .4byte gUnknown_2023FC4
+_08013EB8: .4byte gBattleScripting
 _08013EBC: .4byte gUnknown_2023D6A
 _08013EC0: .4byte gUnknown_2023E82
 _08013EC4:
-	ldr r1, _08013EF8 @ =gUnknown_2023BE4
-	ldr r0, _08013EFC @ =gUnknown_2023BC4
+	ldr r1, _08013EF8 @ =gBattleMons
+	ldr r0, _08013EFC @ =gActiveBattler
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -8145,7 +8145,7 @@ _08013EC4:
 	ands r0, r1
 	cmp r0, 0
 	bne _08013EEE
-	ldr r1, _08013F04 @ =gUnknown_2023DFC
+	ldr r1, _08013F04 @ =gStatuses3
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -8161,13 +8161,13 @@ _08013EEE:
 	movs r0, 0x1
 	b _08013F5E
 	.align 2, 0
-_08013EF8: .4byte gUnknown_2023BE4
-_08013EFC: .4byte gUnknown_2023BC4
+_08013EF8: .4byte gBattleMons
+_08013EFC: .4byte gActiveBattler
 _08013F00: .4byte 0x0400e000
-_08013F04: .4byte gUnknown_2023DFC
+_08013F04: .4byte gStatuses3
 _08013F08: .4byte gUnknown_2023E82
 _08013F0C:
-	ldr r0, _08013F1C @ =gUnknown_2022B4C
+	ldr r0, _08013F1C @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x10
 	ands r0, r1
@@ -8177,9 +8177,9 @@ _08013F18:
 	movs r0, 0
 	b _08013F5E
 	.align 2, 0
-_08013F1C: .4byte gUnknown_2022B4C
+_08013F1C: .4byte gBattleTypeFlags
 _08013F20:
-	ldr r0, _08013F30 @ =gUnknown_2023FC4
+	ldr r0, _08013F30 @ =gBattleScripting
 	strb r5, [r0, 0x17]
 	ldr r1, _08013F34 @ =gUnknown_2023D6A
 	ldrb r0, [r2]
@@ -8188,11 +8188,11 @@ _08013F20:
 	movs r0, 0x2
 	b _08013F5C
 	.align 2, 0
-_08013F30: .4byte gUnknown_2023FC4
+_08013F30: .4byte gBattleScripting
 _08013F34: .4byte gUnknown_2023D6A
 _08013F38: .4byte gUnknown_2023E82
 _08013F3C:
-	ldr r0, _08013F4C @ =gUnknown_2023FC4
+	ldr r0, _08013F4C @ =gBattleScripting
 	strb r5, [r0, 0x17]
 	ldr r1, _08013F50 @ =gUnknown_2023D6A
 	ldrb r0, [r2]
@@ -8201,7 +8201,7 @@ _08013F3C:
 	movs r0, 0x2
 	b _08013F5C
 	.align 2, 0
-_08013F4C: .4byte gUnknown_2023FC4
+_08013F4C: .4byte gBattleScripting
 _08013F50: .4byte gUnknown_2023D6A
 _08013F54: .4byte gUnknown_2023E82
 _08013F58:
@@ -8226,11 +8226,11 @@ sub_8013F6C: @ 8013F6C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r3, 0
-	ldr r0, _08014008 @ =gUnknown_2023BCE
+	ldr r0, _08014008 @ =gBattlerPartyIndexes
 	mov r8, r0
 	ldr r1, _0801400C @ =gUnknown_203B0DC
 	mov r12, r1
-	ldr r7, _08014010 @ =gUnknown_2023FE8
+	ldr r7, _08014010 @ =gBattleStruct
 	lsls r0, r5, 1
 	adds r4, r0, r5
 	adds r6, r0, 0
@@ -8253,7 +8253,7 @@ _08013F88:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r7, _08014010 @ =gUnknown_2023FE8
+	ldr r7, _08014010 @ =gBattleStruct
 	ldr r0, [r7]
 	adds r0, r5, r0
 	adds r0, 0x5C
@@ -8264,7 +8264,7 @@ _08013F88:
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl sub_8127FF4
-	ldr r0, _08014014 @ =gUnknown_2022B4C
+	ldr r0, _08014014 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -8298,10 +8298,10 @@ _08013FE6:
 	ble _08013FE6
 	b _08014032
 	.align 2, 0
-_08014008: .4byte gUnknown_2023BCE
+_08014008: .4byte gBattlerPartyIndexes
 _0801400C: .4byte gUnknown_203B0DC
-_08014010: .4byte gUnknown_2023FE8
-_08014014: .4byte gUnknown_2022B4C
+_08014010: .4byte gBattleStruct
+_08014014: .4byte gBattleTypeFlags
 _08014018:
 	movs r3, 0
 	adds r2, r6, r5
@@ -8338,7 +8338,7 @@ sub_8014040: @ 8014040
 	ldr r0, _0801408C @ =gUnknown_2023E82
 	movs r1, 0
 	strb r1, [r0, 0x4]
-	ldr r0, _08014090 @ =gUnknown_2023BC4
+	ldr r0, _08014090 @ =gActiveBattler
 	strb r1, [r0]
 	ldr r0, _08014094 @ =gUnknown_2023BCC
 	adds r2, r0, 0
@@ -8347,7 +8347,7 @@ sub_8014040: @ 8014040
 	bcc _08014064
 	bl _08014C68
 _08014064:
-	ldr r4, _08014090 @ =gUnknown_2023BC4
+	ldr r4, _08014090 @ =gActiveBattler
 	ldrb r0, [r4]
 	bl GetBankIdentity
 	lsls r0, 24
@@ -8367,7 +8367,7 @@ _08014080:
 	mov pc, r0
 	.align 2, 0
 _0801408C: .4byte gUnknown_2023E82
-_08014090: .4byte gUnknown_2023BC4
+_08014090: .4byte gActiveBattler
 _08014094: .4byte gUnknown_2023BCC
 _08014098: .4byte _0801409C
 	.align 2, 0
@@ -8380,15 +8380,15 @@ _0801409C:
 	.4byte _08014B88
 	.4byte _08014C20
 _080140B8:
-	ldr r0, _08014150 @ =gUnknown_2023BC4
+	ldr r0, _08014150 @ =gActiveBattler
 	ldrb r1, [r0]
-	ldr r4, _08014154 @ =gUnknown_2023FE8
+	ldr r4, _08014154 @ =gBattleStruct
 	ldr r0, [r4]
 	adds r1, r0
 	adds r1, 0x5C
 	movs r0, 0x6
 	strb r0, [r1]
-	ldr r0, _08014158 @ =gUnknown_2022B4C
+	ldr r0, _08014158 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -8405,7 +8405,7 @@ _080140B8:
 	ldr r1, [r4]
 	adds r1, 0x91
 	ldrb r1, [r1]
-	ldr r2, _0801415C @ =gUnknown_825E45C
+	ldr r2, _0801415C @ =gBitTable
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r2
@@ -8424,12 +8424,12 @@ _080140B8:
 	beq _08014114
 	bl _08014C4E
 _08014114:
-	ldr r0, _08014154 @ =gUnknown_2023FE8
+	ldr r0, _08014154 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0x91
 	ldrb r3, [r0]
-	ldr r1, _0801415C @ =gUnknown_825E45C
-	ldr r4, _08014150 @ =gUnknown_2023BC4
+	ldr r1, _0801415C @ =gBitTable
+	ldr r4, _08014150 @ =gActiveBattler
 	ldrb r2, [r4]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -8441,7 +8441,7 @@ _08014114:
 	adds r0, r2, r0
 	movs r1, 0xD
 	strb r1, [r0]
-	ldr r0, _08014158 @ =gUnknown_2022B4C
+	ldr r0, _08014158 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -8454,10 +8454,10 @@ _08014114:
 	strb r0, [r1]
 	bl _08014C4E
 	.align 2, 0
-_08014150: .4byte gUnknown_2023BC4
-_08014154: .4byte gUnknown_2023FE8
-_08014158: .4byte gUnknown_2022B4C
-_0801415C: .4byte gUnknown_825E45C
+_08014150: .4byte gActiveBattler
+_08014154: .4byte gBattleStruct
+_08014158: .4byte gBattleTypeFlags
+_0801415C: .4byte gBitTable
 _08014160: .4byte gUnknown_2023E82
 _08014164: .4byte gUnknown_2023D7C
 _08014168:
@@ -8470,7 +8470,7 @@ _08014168:
 	.align 2, 0
 _08014178: .4byte gUnknown_2023E82
 _0801417C:
-	ldr r1, _080141B0 @ =gUnknown_2023BE4
+	ldr r1, _080141B0 @ =gBattleMons
 	movs r0, 0x58
 	muls r0, r2
 	adds r1, 0x50
@@ -8497,7 +8497,7 @@ _0801419C:
 	strb r1, [r0]
 	bl _08014C4E
 	.align 2, 0
-_080141B0: .4byte gUnknown_2023BE4
+_080141B0: .4byte gBattleMons
 _080141B4: .4byte gUnknown_2023D7C
 _080141B8: .4byte gUnknown_2023E82
 _080141BC:
@@ -8516,8 +8516,8 @@ _080141D4: .4byte gUnknown_2023D7C
 _080141D8: .4byte gUnknown_20233C4
 _080141DC:
 	ldr r4, _08014234 @ =gUnknown_2023BC8
-	ldr r1, _08014238 @ =gUnknown_825E45C
-	ldr r3, _0801423C @ =gUnknown_2023BC4
+	ldr r1, _08014238 @ =gBitTable
+	ldr r3, _0801423C @ =gActiveBattler
 	ldrb r5, [r3]
 	lsls r0, r5, 2
 	adds r0, r1
@@ -8561,8 +8561,8 @@ _08014228:
 	mov pc, r0
 	.align 2, 0
 _08014234: .4byte gUnknown_2023BC8
-_08014238: .4byte gUnknown_825E45C
-_0801423C: .4byte gUnknown_2023BC4
+_08014238: .4byte gBitTable
+_0801423C: .4byte gActiveBattler
 _08014240: .4byte gUnknown_2023D7C
 _08014244: .4byte gUnknown_20233C4
 _08014248: .4byte _0801424C
@@ -8587,14 +8587,14 @@ _08014280:
 	cmp r0, 0
 	beq _080142D8
 	ldr r0, _080142C8 @ =gUnknown_2023E82
-	ldr r3, _080142CC @ =gUnknown_2023BC4
+	ldr r3, _080142CC @ =gActiveBattler
 	ldrb r1, [r3]
 	adds r1, r0
 	movs r4, 0
 	movs r0, 0x5
 	strb r0, [r1]
 	ldrb r1, [r3]
-	ldr r2, _080142D0 @ =gUnknown_2023FE8
+	ldr r2, _080142D0 @ =gBattleStruct
 	ldr r0, [r2]
 	adds r1, r0
 	adds r1, 0x54
@@ -8617,12 +8617,12 @@ _08014280:
 	bl _08014C78
 	.align 2, 0
 _080142C8: .4byte gUnknown_2023E82
-_080142CC: .4byte gUnknown_2023BC4
-_080142D0: .4byte gUnknown_2023FE8
+_080142CC: .4byte gActiveBattler
+_080142D0: .4byte gBattleStruct
 _080142D4: .4byte gUnknown_20233C4
 _080142D8:
-	ldr r3, _08014318 @ =gUnknown_2023E0C
-	ldr r5, _0801431C @ =gUnknown_2023BC4
+	ldr r3, _08014318 @ =gDisableStructs
+	ldr r5, _0801431C @ =gActiveBattler
 	ldrb r4, [r5]
 	lsls r0, r4, 3
 	subs r0, r4
@@ -8636,7 +8636,7 @@ _080142D8:
 	adds r0, r1
 	strh r2, [r0]
 	ldrb r2, [r5]
-	ldr r0, _08014324 @ =gUnknown_2023FE8
+	ldr r0, _08014324 @ =gBattleStruct
 	ldr r1, [r0]
 	adds r1, r2, r1
 	adds r1, 0x80
@@ -8653,14 +8653,14 @@ _080142D8:
 	strb r1, [r0]
 	bl _08014C78
 	.align 2, 0
-_08014318: .4byte gUnknown_2023E0C
-_0801431C: .4byte gUnknown_2023BC4
+_08014318: .4byte gDisableStructs
+_0801431C: .4byte gActiveBattler
 _08014320: .4byte gUnknown_2023DC4
-_08014324: .4byte gUnknown_2023FE8
+_08014324: .4byte gBattleStruct
 _08014328: .4byte gUnknown_2023E82
 _0801432C:
 	add r2, sp, 0x4
-	ldr r3, _080143CC @ =gUnknown_2023BE4
+	ldr r3, _080143CC @ =gBattleMons
 	movs r1, 0x58
 	adds r0, r4, 0
 	muls r0, r1
@@ -8729,7 +8729,7 @@ _0801436E:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0801436E
-	ldr r0, _080143D0 @ =gUnknown_2022B4C
+	ldr r0, _080143D0 @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x1
 	ands r1, r0
@@ -8739,10 +8739,10 @@ _0801436E:
 	bl EmitChooseMove
 	b _0801460E
 	.align 2, 0
-_080143CC: .4byte gUnknown_2023BE4
-_080143D0: .4byte gUnknown_2022B4C
+_080143CC: .4byte gBattleMons
+_080143D0: .4byte gBattleTypeFlags
 _080143D4:
-	ldr r0, _08014410 @ =gUnknown_2022B4C
+	ldr r0, _08014410 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, _08014414 @ =0x00000902
 	ands r0, r1
@@ -8763,7 +8763,7 @@ _080143D4:
 	strb r0, [r1]
 	mov r0, r8
 	ldrb r1, [r0]
-	ldr r2, _08014424 @ =gUnknown_2023FE8
+	ldr r2, _08014424 @ =gBattleStruct
 	ldr r0, [r2]
 	adds r1, r0
 	adds r1, 0x54
@@ -8772,15 +8772,15 @@ _080143D4:
 	ldrb r0, [r1]
 	b _0801472C
 	.align 2, 0
-_08014410: .4byte gUnknown_2022B4C
+_08014410: .4byte gBattleTypeFlags
 _08014414: .4byte 0x00000902
 _08014418: .4byte gUnknown_2023D80
 _0801441C: .4byte gUnknown_81D96A4
 _08014420: .4byte gUnknown_2023E82
-_08014424: .4byte gUnknown_2023FE8
+_08014424: .4byte gBattleStruct
 _08014428:
-	ldr r2, _08014448 @ =gUnknown_2023FE8
-	ldr r4, _0801444C @ =gUnknown_2023BC4
+	ldr r2, _08014448 @ =gBattleStruct
+	ldr r4, _0801444C @ =gActiveBattler
 	ldrb r1, [r4]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -8793,21 +8793,21 @@ _08014428:
 	bl MarkBufferBankForExecution
 	b _080146AC
 	.align 2, 0
-_08014448: .4byte gUnknown_2023FE8
-_0801444C: .4byte gUnknown_2023BC4
+_08014448: .4byte gBattleStruct
+_0801444C: .4byte gActiveBattler
 _08014450:
-	ldr r5, _080144A8 @ =gUnknown_2023BC4
+	ldr r5, _080144A8 @ =gActiveBattler
 	ldrb r0, [r5]
-	ldr r3, _080144AC @ =gUnknown_2023FE8
+	ldr r3, _080144AC @ =gBattleStruct
 	ldr r1, [r3]
 	adds r1, r0, r1
 	adds r1, 0x58
-	ldr r2, _080144B0 @ =gUnknown_2023BCE
+	ldr r2, _080144B0 @ =gBattlerPartyIndexes
 	lsls r0, 1
 	adds r0, r2
 	ldrh r0, [r0]
 	strb r0, [r1]
-	ldr r7, _080144B4 @ =gUnknown_2023BE4
+	ldr r7, _080144B4 @ =gBattleMons
 	ldrb r2, [r5]
 	movs r6, 0x58
 	adds r0, r2, 0
@@ -8820,7 +8820,7 @@ _08014450:
 	ands r0, r1
 	cmp r0, 0
 	bne _08014492
-	ldr r0, _080144BC @ =gUnknown_2023DFC
+	ldr r0, _080144BC @ =gStatuses3
 	lsls r1, r2, 2
 	adds r1, r0
 	ldr r1, [r1]
@@ -8841,12 +8841,12 @@ _08014492:
 	movs r2, 0x6
 	b _080145DE
 	.align 2, 0
-_080144A8: .4byte gUnknown_2023BC4
-_080144AC: .4byte gUnknown_2023FE8
-_080144B0: .4byte gUnknown_2023BCE
-_080144B4: .4byte gUnknown_2023BE4
+_080144A8: .4byte gActiveBattler
+_080144AC: .4byte gBattleStruct
+_080144B0: .4byte gBattlerPartyIndexes
+_080144B4: .4byte gBattleMons
 _080144B8: .4byte 0x0400e000
-_080144BC: .4byte gUnknown_2023DFC
+_080144BC: .4byte gStatuses3
 _080144C0:
 	str r1, [sp]
 	movs r0, 0xC
@@ -8887,7 +8887,7 @@ _080144C0:
 	cmp r0, 0x1A
 	bne _08014548
 _08014510:
-	ldr r5, _08014574 @ =gUnknown_2023BC4
+	ldr r5, _08014574 @ =gActiveBattler
 	ldrb r1, [r5]
 	movs r0, 0
 	str r0, [sp]
@@ -8899,7 +8899,7 @@ _08014510:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _08014584
-	ldr r2, _08014578 @ =gUnknown_2023BE4
+	ldr r2, _08014578 @ =gBattleMons
 	ldrb r1, [r5]
 	movs r0, 0x58
 	muls r0, r1
@@ -8923,8 +8923,8 @@ _08014548:
 	lsrs r1, 24
 	ldr r0, _0801457C @ =gUnknown_2023D6A
 	ldrb r3, [r0]
-	ldr r4, _08014580 @ =gUnknown_2023FE8
-	ldr r0, _08014574 @ =gUnknown_2023BC4
+	ldr r4, _08014580 @ =gBattleStruct
+	ldr r0, _08014574 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r2, r0, 1
 	adds r2, r0
@@ -8937,12 +8937,12 @@ _08014548:
 	bl EmitChoosePokemon
 	b _0801460E
 	.align 2, 0
-_08014574: .4byte gUnknown_2023BC4
-_08014578: .4byte gUnknown_2023BE4
+_08014574: .4byte gActiveBattler
+_08014578: .4byte gBattleMons
 _0801457C: .4byte gUnknown_2023D6A
-_08014580: .4byte gUnknown_2023FE8
+_08014580: .4byte gBattleStruct
 _08014584:
-	ldr r0, _080145A8 @ =gUnknown_2023BC4
+	ldr r0, _080145A8 @ =gActiveBattler
 	ldrb r1, [r0]
 	mov r8, r0
 	cmp r1, 0x2
@@ -8951,7 +8951,7 @@ _08014584:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080145B4
-	ldr r0, _080145B0 @ =gUnknown_2023FE8
+	ldr r0, _080145B0 @ =gBattleStruct
 	ldr r3, [r0]
 	adds r0, r3, 0
 	adds r0, 0x5C
@@ -8960,9 +8960,9 @@ _08014584:
 	ldrb r1, [r0]
 	b _080145D0
 	.align 2, 0
-_080145A8: .4byte gUnknown_2023BC4
+_080145A8: .4byte gActiveBattler
 _080145AC: .4byte gUnknown_2023D7C
-_080145B0: .4byte gUnknown_2023FE8
+_080145B0: .4byte gBattleStruct
 _080145B4:
 	mov r1, r8
 	ldrb r0, [r1]
@@ -8972,7 +8972,7 @@ _080145B4:
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x2
 	bne _080145F0
-	ldr r0, _080145EC @ =gUnknown_2023FE8
+	ldr r0, _080145EC @ =gBattleStruct
 	ldr r3, [r0]
 	adds r0, r3, 0
 	adds r0, 0x5D
@@ -8992,10 +8992,10 @@ _080145DE:
 	b _0801460E
 	.align 2, 0
 _080145E8: .4byte gUnknown_2023D7C
-_080145EC: .4byte gUnknown_2023FE8
+_080145EC: .4byte gBattleStruct
 _080145F0:
-	ldr r2, _08014618 @ =gUnknown_2023FE8
-	ldr r0, _0801461C @ =gUnknown_2023BC4
+	ldr r2, _08014618 @ =gBattleStruct
+	ldr r0, _0801461C @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r1, r0, 1
 	adds r1, r0
@@ -9009,20 +9009,20 @@ _080145F0:
 	movs r3, 0
 	bl EmitChoosePokemon
 _0801460E:
-	ldr r0, _0801461C @ =gUnknown_2023BC4
+	ldr r0, _0801461C @ =gActiveBattler
 	ldrb r0, [r0]
 	bl MarkBufferBankForExecution
 	b _080146AC
 	.align 2, 0
-_08014618: .4byte gUnknown_2023FE8
-_0801461C: .4byte gUnknown_2023BC4
+_08014618: .4byte gBattleStruct
+_0801461C: .4byte gActiveBattler
 _08014620:
 	bl IsPlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	beq _080146AC
 	ldr r1, _0801465C @ =gUnknown_2023D80
-	ldr r3, _08014660 @ =gUnknown_2023BC4
+	ldr r3, _08014660 @ =gActiveBattler
 	ldrb r0, [r3]
 	lsls r0, 2
 	adds r0, r1
@@ -9035,7 +9035,7 @@ _08014620:
 	movs r0, 0x5
 	strb r0, [r1]
 	ldrb r1, [r3]
-	ldr r2, _0801466C @ =gUnknown_2023FE8
+	ldr r2, _0801466C @ =gBattleStruct
 	ldr r0, [r2]
 	adds r1, r0
 	adds r1, 0x54
@@ -9048,10 +9048,10 @@ _08014620:
 	b _08014C78
 	.align 2, 0
 _0801465C: .4byte gUnknown_2023D80
-_08014660: .4byte gUnknown_2023BC4
+_08014660: .4byte gActiveBattler
 _08014664: .4byte gUnknown_81D8949
 _08014668: .4byte gUnknown_2023E82
-_0801466C: .4byte gUnknown_2023FE8
+_0801466C: .4byte gBattleStruct
 _08014670:
 	ldr r4, _080146A8 @ =gUnknown_2023E82
 	mov r2, r8
@@ -9080,14 +9080,14 @@ _08014670:
 	.align 2, 0
 _080146A8: .4byte gUnknown_2023E82
 _080146AC:
-	ldr r0, _080146D8 @ =gUnknown_2022B4C
+	ldr r0, _080146D8 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0xA
 	ands r0, r1
 	cmp r0, 0x8
 	bne _080146EC
 	ldr r0, _080146DC @ =gUnknown_20233C4
-	ldr r4, _080146E0 @ =gUnknown_2023BC4
+	ldr r4, _080146E0 @ =gActiveBattler
 	ldrb r1, [r4]
 	lsls r1, 9
 	adds r0, 0x1
@@ -9102,9 +9102,9 @@ _080146AC:
 	adds r0, r1
 	b _08014926
 	.align 2, 0
-_080146D8: .4byte gUnknown_2022B4C
+_080146D8: .4byte gBattleTypeFlags
 _080146DC: .4byte gUnknown_20233C4
-_080146E0: .4byte gUnknown_2023BC4
+_080146E0: .4byte gActiveBattler
 _080146E4: .4byte gUnknown_81D8924
 _080146E8: .4byte gUnknown_2023E82
 _080146EC:
@@ -9113,7 +9113,7 @@ _080146EC:
 	cmp r0, 0
 	beq _08014750
 	ldr r0, _08014738 @ =gUnknown_20233C4
-	ldr r4, _0801473C @ =gUnknown_2023BC4
+	ldr r4, _0801473C @ =gActiveBattler
 	ldrb r2, [r4]
 	lsls r1, r2, 9
 	adds r0, 0x1
@@ -9133,7 +9133,7 @@ _080146EC:
 	movs r0, 0x5
 	strb r0, [r1]
 	ldrb r1, [r4]
-	ldr r2, _0801474C @ =gUnknown_2023FE8
+	ldr r2, _0801474C @ =gBattleStruct
 	ldr r0, [r2]
 	adds r1, r0
 	adds r1, 0x54
@@ -9147,24 +9147,24 @@ _0801472C:
 	b _08014C78
 	.align 2, 0
 _08014738: .4byte gUnknown_20233C4
-_0801473C: .4byte gUnknown_2023BC4
+_0801473C: .4byte gActiveBattler
 _08014740: .4byte gUnknown_2023D80
 _08014744: .4byte gUnknown_81D8943
 _08014748: .4byte gUnknown_2023E82
-_0801474C: .4byte gUnknown_2023FE8
+_0801474C: .4byte gBattleStruct
 _08014750:
 	ldr r2, _0801475C @ =gUnknown_2023E82
-	ldr r0, _08014760 @ =gUnknown_2023BC4
+	ldr r0, _08014760 @ =gActiveBattler
 	ldrb r1, [r0]
 	adds r1, r2
 	b _08014B32
 	.align 2, 0
 _0801475C: .4byte gUnknown_2023E82
-_08014760: .4byte gUnknown_2023BC4
+_08014760: .4byte gActiveBattler
 _08014764:
 	ldr r4, _080147A8 @ =gUnknown_2023BC8
-	ldr r1, _080147AC @ =gUnknown_825E45C
-	ldr r3, _080147B0 @ =gUnknown_2023BC4
+	ldr r1, _080147AC @ =gBitTable
+	ldr r3, _080147B0 @ =gActiveBattler
 	ldrb r5, [r3]
 	lsls r0, r5, 2
 	adds r0, r1
@@ -9200,8 +9200,8 @@ _0801479E:
 	mov pc, r0
 	.align 2, 0
 _080147A8: .4byte gUnknown_2023BC8
-_080147AC: .4byte gUnknown_825E45C
-_080147B0: .4byte gUnknown_2023BC4
+_080147AC: .4byte gBitTable
+_080147B0: .4byte gActiveBattler
 _080147B4: .4byte gUnknown_2023D7C
 _080147B8: .4byte _080147BC
 	.align 2, 0
@@ -9269,7 +9269,7 @@ _08014838:
 	movs r0, 0x5
 	strb r0, [r1]
 	ldrb r1, [r5]
-	ldr r2, _08014878 @ =gUnknown_2023FE8
+	ldr r2, _08014878 @ =gBattleStruct
 	ldr r0, [r2]
 	adds r1, r0
 	adds r1, 0x54
@@ -9288,11 +9288,11 @@ _08014838:
 	b _08014C78
 	.align 2, 0
 _08014874: .4byte gUnknown_2023E82
-_08014878: .4byte gUnknown_2023FE8
+_08014878: .4byte gBattleStruct
 _0801487C:
 	mov r2, r8
 	ldrb r0, [r2]
-	ldr r4, _080148C8 @ =gUnknown_2023FE8
+	ldr r4, _080148C8 @ =gBattleStruct
 	ldr r1, [r4]
 	adds r1, r0, r1
 	adds r1, 0x80
@@ -9304,7 +9304,7 @@ _0801487C:
 	ldrb r2, [r2]
 	lsls r5, r2, 1
 	adds r5, r0
-	ldr r3, _080148D0 @ =gUnknown_2023BE4
+	ldr r3, _080148D0 @ =gBattleMons
 	ldr r4, [r4]
 	adds r0, r2, r4
 	adds r0, 0x80
@@ -9328,13 +9328,13 @@ _0801487C:
 	ldrb r1, [r3]
 	b _08014B30
 	.align 2, 0
-_080148C8: .4byte gUnknown_2023FE8
+_080148C8: .4byte gBattleStruct
 _080148CC: .4byte gUnknown_2023DC4
-_080148D0: .4byte gUnknown_2023BE4
+_080148D0: .4byte gBattleMons
 _080148D4: .4byte gUnknown_2023E82
 _080148D8:
 	ldr r2, _08014900 @ =gUnknown_20233C4
-	ldr r5, _08014904 @ =gUnknown_2023BC4
+	ldr r5, _08014904 @ =gActiveBattler
 	ldrb r4, [r5]
 	lsls r1, r4, 9
 	adds r0, r2, 0x1
@@ -9356,12 +9356,12 @@ _080148F6:
 	b _08014B30
 	.align 2, 0
 _08014900: .4byte gUnknown_20233C4
-_08014904: .4byte gUnknown_2023BC4
+_08014904: .4byte gActiveBattler
 _08014908: .4byte gUnknown_2023D68
 _0801490C: .4byte gUnknown_2023E82
 _08014910:
 	ldr r6, _0801492C @ =gUnknown_20233C4
-	ldr r7, _08014930 @ =gUnknown_2023BC4
+	ldr r7, _08014930 @ =gActiveBattler
 	ldrb r2, [r7]
 	lsls r0, r2, 9
 	adds r1, r6, 0x1
@@ -9377,16 +9377,16 @@ _08014926:
 	b _08014C4E
 	.align 2, 0
 _0801492C: .4byte gUnknown_20233C4
-_08014930: .4byte gUnknown_2023BC4
+_08014930: .4byte gActiveBattler
 _08014934: .4byte gUnknown_2023E82
 _08014938:
-	ldr r0, _080149FC @ =gUnknown_2023FE8
+	ldr r0, _080149FC @ =gBattleStruct
 	mov r12, r0
 	ldr r0, [r0]
 	adds r0, r2, r0
 	adds r0, 0x5C
 	strb r1, [r0]
-	ldr r0, _08014A00 @ =gUnknown_2022B4C
+	ldr r0, _08014A00 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -9480,8 +9480,8 @@ _080149F6:
 	ldrb r1, [r7]
 	b _08014B30
 	.align 2, 0
-_080149FC: .4byte gUnknown_2023FE8
-_08014A00: .4byte gUnknown_2022B4C
+_080149FC: .4byte gBattleStruct
+_08014A00: .4byte gBattleTypeFlags
 _08014A04: .4byte gUnknown_2023E82
 _08014A08:
 	ldr r2, _08014A20 @ =gUnknown_2023DD0
@@ -9491,41 +9491,41 @@ _08014A08:
 	orrs r0, r1
 	str r0, [r2]
 	ldr r2, _08014A24 @ =gUnknown_2023E82
-	ldr r0, _08014A28 @ =gUnknown_2023BC4
+	ldr r0, _08014A28 @ =gActiveBattler
 	ldrb r1, [r0]
 	adds r1, r2
 	b _08014B32
 	.align 2, 0
 _08014A20: .4byte gUnknown_2023DD0
 _08014A24: .4byte gUnknown_2023E82
-_08014A28: .4byte gUnknown_2023BC4
+_08014A28: .4byte gActiveBattler
 _08014A2C:
 	ldr r2, _08014A38 @ =gUnknown_2023E82
-	ldr r0, _08014A3C @ =gUnknown_2023BC4
+	ldr r0, _08014A3C @ =gActiveBattler
 	ldrb r1, [r0]
 	adds r1, r2
 	b _08014B32
 	.align 2, 0
 _08014A38: .4byte gUnknown_2023E82
-_08014A3C: .4byte gUnknown_2023BC4
+_08014A3C: .4byte gActiveBattler
 _08014A40:
 	ldr r2, _08014A4C @ =gUnknown_2023E82
-	ldr r0, _08014A50 @ =gUnknown_2023BC4
+	ldr r0, _08014A50 @ =gActiveBattler
 	ldrb r1, [r0]
 	adds r1, r2
 	b _08014B32
 	.align 2, 0
 _08014A4C: .4byte gUnknown_2023E82
-_08014A50: .4byte gUnknown_2023BC4
+_08014A50: .4byte gActiveBattler
 _08014A54:
 	ldr r2, _08014A60 @ =gUnknown_2023E82
-	ldr r0, _08014A64 @ =gUnknown_2023BC4
+	ldr r0, _08014A64 @ =gActiveBattler
 	ldrb r1, [r0]
 	adds r1, r2
 	b _08014B32
 	.align 2, 0
 _08014A60: .4byte gUnknown_2023E82
-_08014A64: .4byte gUnknown_2023BC4
+_08014A64: .4byte gActiveBattler
 _08014A68:
 	ldr r2, _08014A80 @ =gUnknown_2023DD0
 	ldr r0, [r2]
@@ -9534,27 +9534,27 @@ _08014A68:
 	orrs r0, r1
 	str r0, [r2]
 	ldr r2, _08014A84 @ =gUnknown_2023E82
-	ldr r0, _08014A88 @ =gUnknown_2023BC4
+	ldr r0, _08014A88 @ =gActiveBattler
 	ldrb r1, [r0]
 	adds r1, r2
 	b _08014B32
 	.align 2, 0
 _08014A80: .4byte gUnknown_2023DD0
 _08014A84: .4byte gUnknown_2023E82
-_08014A88: .4byte gUnknown_2023BC4
+_08014A88: .4byte gActiveBattler
 _08014A8C:
 	ldr r2, _08014A98 @ =gUnknown_2023E82
-	ldr r0, _08014A9C @ =gUnknown_2023BC4
+	ldr r0, _08014A9C @ =gActiveBattler
 	ldrb r1, [r0]
 	adds r1, r2
 	b _08014B32
 	.align 2, 0
 _08014A98: .4byte gUnknown_2023E82
-_08014A9C: .4byte gUnknown_2023BC4
+_08014A9C: .4byte gActiveBattler
 _08014AA0:
 	ldr r3, _08014B08 @ =gUnknown_2023BC8
-	ldr r4, _08014B0C @ =gUnknown_825E45C
-	ldr r0, _08014B10 @ =gUnknown_2023BC4
+	ldr r4, _08014B0C @ =gBitTable
+	ldr r0, _08014B10 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r4
@@ -9574,7 +9574,7 @@ _08014AA0:
 	beq _08014ACA
 	b _08014C4E
 _08014ACA:
-	ldr r0, _08014B14 @ =gUnknown_2022B4C
+	ldr r0, _08014B14 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x41
 	ands r0, r1
@@ -9588,7 +9588,7 @@ _08014ACA:
 	adds r0, r5, 0
 	eors r0, r1
 	bl GetBankByIdentity
-	ldr r1, _08014B18 @ =gUnknown_2023FE8
+	ldr r1, _08014B18 @ =gBattleStruct
 	ldr r1, [r1]
 	adds r1, 0x91
 	ldrb r1, [r1]
@@ -9606,16 +9606,16 @@ _08014AFE:
 	b _08014B24
 	.align 2, 0
 _08014B08: .4byte gUnknown_2023BC8
-_08014B0C: .4byte gUnknown_825E45C
-_08014B10: .4byte gUnknown_2023BC4
-_08014B14: .4byte gUnknown_2022B4C
-_08014B18: .4byte gUnknown_2023FE8
+_08014B0C: .4byte gBitTable
+_08014B10: .4byte gActiveBattler
+_08014B14: .4byte gBattleTypeFlags
+_08014B18: .4byte gBattleStruct
 _08014B1C:
 	movs r0, 0
 	movs r1, 0x1
 	bl EmitLinkStandbyMsg
 _08014B24:
-	ldr r4, _08014B3C @ =gUnknown_2023BC4
+	ldr r4, _08014B3C @ =gActiveBattler
 _08014B26:
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
@@ -9629,12 +9629,12 @@ _08014B32:
 	strb r0, [r1]
 	b _08014C4E
 	.align 2, 0
-_08014B3C: .4byte gUnknown_2023BC4
+_08014B3C: .4byte gActiveBattler
 _08014B40: .4byte gUnknown_2023E82
 _08014B44:
 	ldr r3, _08014B78 @ =gUnknown_2023BC8
-	ldr r1, _08014B7C @ =gUnknown_825E45C
-	ldr r0, _08014B80 @ =gUnknown_2023BC4
+	ldr r1, _08014B7C @ =gBitTable
+	ldr r0, _08014B80 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -9659,13 +9659,13 @@ _08014B44:
 	b _08014C4E
 	.align 2, 0
 _08014B78: .4byte gUnknown_2023BC8
-_08014B7C: .4byte gUnknown_825E45C
-_08014B80: .4byte gUnknown_2023BC4
+_08014B7C: .4byte gBitTable
+_08014B80: .4byte gActiveBattler
 _08014B84: .4byte gUnknown_2023E82
 _08014B88:
-	ldr r5, _08014BA8 @ =gUnknown_2023BC4
+	ldr r5, _08014BA8 @ =gActiveBattler
 	ldrb r2, [r5]
-	ldr r0, _08014BAC @ =gUnknown_2023FE8
+	ldr r0, _08014BAC @ =gBattleStruct
 	ldr r0, [r0]
 	adds r1, r2, r0
 	adds r0, r1, 0
@@ -9680,11 +9680,11 @@ _08014B88:
 	strb r1, [r0]
 	b _08014C4E
 	.align 2, 0
-_08014BA8: .4byte gUnknown_2023BC4
-_08014BAC: .4byte gUnknown_2023FE8
+_08014BA8: .4byte gActiveBattler
+_08014BAC: .4byte gBattleStruct
 _08014BB0: .4byte gUnknown_2023E82
 _08014BB4:
-	ldr r0, _08014C08 @ =gUnknown_2023D6B
+	ldr r0, _08014C08 @ =sBattler_AI
 	strb r2, [r0]
 	ldr r7, _08014C0C @ =gUnknown_2023D74
 	ldr r6, _08014C10 @ =gUnknown_2023D80
@@ -9694,7 +9694,7 @@ _08014BB4:
 	ldr r4, [r0]
 	str r4, [r7]
 	ldr r3, _08014C14 @ =gUnknown_2023BC8
-	ldr r1, _08014C18 @ =gUnknown_825E45C
+	ldr r1, _08014C18 @ =gBitTable
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
@@ -9726,16 +9726,16 @@ _08014BFA:
 	str r1, [r0]
 	b _08014C4E
 	.align 2, 0
-_08014C08: .4byte gUnknown_2023D6B
+_08014C08: .4byte sBattler_AI
 _08014C0C: .4byte gUnknown_2023D74
 _08014C10: .4byte gUnknown_2023D80
 _08014C14: .4byte gUnknown_2023BC8
-_08014C18: .4byte gUnknown_825E45C
+_08014C18: .4byte gBitTable
 _08014C1C: .4byte gUnknown_825011C
 _08014C20:
 	ldr r3, _08014C88 @ =gUnknown_2023BC8
-	ldr r1, _08014C8C @ =gUnknown_825E45C
-	ldr r0, _08014C90 @ =gUnknown_2023BC4
+	ldr r1, _08014C8C @ =gBitTable
+	ldr r0, _08014C90 @ =gActiveBattler
 	ldrb r4, [r0]
 	lsls r0, r4, 2
 	adds r0, r1
@@ -9758,7 +9758,7 @@ _08014C48:
 	adds r0, r4, r0
 	strb r3, [r0]
 _08014C4E:
-	ldr r0, _08014C90 @ =gUnknown_2023BC4
+	ldr r0, _08014C90 @ =gActiveBattler
 	ldrb r1, [r0]
 	adds r1, 0x1
 	strb r1, [r0]
@@ -9790,8 +9790,8 @@ _08014C78:
 	bx r0
 	.align 2, 0
 _08014C88: .4byte gUnknown_2023BC8
-_08014C8C: .4byte gUnknown_825E45C
-_08014C90: .4byte gUnknown_2023BC4
+_08014C8C: .4byte gBitTable
+_08014C90: .4byte gActiveBattler
 _08014C94: .4byte gUnknown_2023E82
 _08014C98: .4byte gUnknown_2023BCC
 _08014C9C: .4byte gUnknown_3004F84
@@ -9865,7 +9865,7 @@ GetWhoStrikesFirst: @ 8014CD8
 	lsls r0, 24
 	cmp r0, 0
 	bne _08014DA0
-	ldr r1, _08014D58 @ =gUnknown_2023BE4
+	ldr r1, _08014D58 @ =gBattleMons
 	movs r0, 0x58
 	mov r2, r9
 	muls r2, r0
@@ -9875,7 +9875,7 @@ GetWhoStrikesFirst: @ 8014CD8
 	ldrb r3, [r0]
 	cmp r3, 0x21
 	bne _08014D44
-	ldr r0, _08014D5C @ =gUnknown_2023F1C
+	ldr r0, _08014D5C @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -9884,7 +9884,7 @@ GetWhoStrikesFirst: @ 8014CD8
 _08014D44:
 	cmp r3, 0x22
 	bne _08014D60
-	ldr r0, _08014D5C @ =gUnknown_2023F1C
+	ldr r0, _08014D5C @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -9894,8 +9894,8 @@ _08014D54:
 	movs r3, 0x2
 	b _08014D62
 	.align 2, 0
-_08014D58: .4byte gUnknown_2023BE4
-_08014D5C: .4byte gUnknown_2023F1C
+_08014D58: .4byte gBattleMons
+_08014D5C: .4byte gBattleWeather
 _08014D60:
 	movs r3, 0x1
 _08014D62:
@@ -9903,13 +9903,13 @@ _08014D62:
 	mov r1, r10
 	muls r1, r0
 	adds r0, r1, 0
-	ldr r2, _08014D98 @ =gUnknown_2023BE4
+	ldr r2, _08014D98 @ =gBattleMons
 	adds r0, r2
 	adds r0, 0x20
 	ldrb r2, [r0]
 	cmp r2, 0x21
 	bne _08014D82
-	ldr r0, _08014D9C @ =gUnknown_2023F1C
+	ldr r0, _08014D9C @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -9918,7 +9918,7 @@ _08014D62:
 _08014D82:
 	cmp r2, 0x22
 	bne _08014DA2
-	ldr r0, _08014D9C @ =gUnknown_2023F1C
+	ldr r0, _08014D9C @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -9928,14 +9928,14 @@ _08014D92:
 	movs r7, 0x2
 	b _08014DA4
 	.align 2, 0
-_08014D98: .4byte gUnknown_2023BE4
-_08014D9C: .4byte gUnknown_2023F1C
+_08014D98: .4byte gBattleMons
+_08014D9C: .4byte gBattleWeather
 _08014DA0:
 	movs r3, 0x1
 _08014DA2:
 	movs r7, 0x1
 _08014DA4:
-	ldr r1, _08014DE8 @ =gUnknown_2023BE4
+	ldr r1, _08014DE8 @ =gBattleMons
 	movs r0, 0x58
 	mov r2, r9
 	muls r2, r0
@@ -9968,7 +9968,7 @@ _08014DA4:
 	ldrb r5, [r0, 0x1A]
 	b _08014E08
 	.align 2, 0
-_08014DE8: .4byte gUnknown_2023BE4
+_08014DE8: .4byte gBattleMons
 _08014DEC: .4byte gUnknown_825DEAD
 _08014DF0: .4byte gUnknown_2023F54
 _08014DF4:
@@ -9981,7 +9981,7 @@ _08014DF4:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08014E08:
-	ldr r0, _08014EC4 @ =gUnknown_2022B4C
+	ldr r0, _08014EC4 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -10011,7 +10011,7 @@ _08014E3C:
 	lsrs r2, 1
 	mov r8, r2
 _08014E46:
-	ldr r1, _08014ECC @ =gUnknown_2023BE4
+	ldr r1, _08014ECC @ =gBattleMons
 	movs r0, 0x58
 	mov r3, r9
 	muls r3, r0
@@ -10041,7 +10041,7 @@ _08014E64:
 	negs r1, r1
 	mov r8, r1
 _08014E80:
-	ldr r1, _08014ECC @ =gUnknown_2023BE4
+	ldr r1, _08014ECC @ =gBattleMons
 	movs r0, 0x58
 	mov r2, r10
 	muls r2, r0
@@ -10075,9 +10075,9 @@ _08014E80:
 	ldrb r5, [r0, 0x1A]
 	b _08014EF0
 	.align 2, 0
-_08014EC4: .4byte gUnknown_2022B4C
+_08014EC4: .4byte gBattleTypeFlags
 _08014EC8: .4byte 0x00000822
-_08014ECC: .4byte gUnknown_2023BE4
+_08014ECC: .4byte gBattleMons
 _08014ED0: .4byte gUnknown_2023E80
 _08014ED4: .4byte gUnknown_825DEAD
 _08014ED8: .4byte gUnknown_2023F54
@@ -10091,7 +10091,7 @@ _08014EDC:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08014EF0:
-	ldr r0, _08014F68 @ =gUnknown_2022B4C
+	ldr r0, _08014F68 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -10117,7 +10117,7 @@ _08014F20:
 	bne _08014F26
 	lsrs r7, 1
 _08014F26:
-	ldr r2, _08014F70 @ =gUnknown_2023BE4
+	ldr r2, _08014F70 @ =gBattleMons
 	movs r0, 0x58
 	mov r1, r10
 	muls r1, r0
@@ -10151,9 +10151,9 @@ _08014F5C:
 	movs r3, 0
 	b _08015014
 	.align 2, 0
-_08014F68: .4byte gUnknown_2022B4C
+_08014F68: .4byte gBattleTypeFlags
 _08014F6C: .4byte 0x00000822
-_08014F70: .4byte gUnknown_2023BE4
+_08014F70: .4byte gBattleMons
 _08014F74: .4byte gUnknown_2023E80
 _08014F78:
 	ldr r0, _08014F98 @ =gUnknown_2023D7C
@@ -10176,7 +10176,7 @@ _08014F78:
 _08014F98: .4byte gUnknown_2023D7C
 _08014F9C: .4byte gUnknown_2023E8C
 _08014FA0:
-	ldr r0, _08014FC0 @ =gUnknown_2023FE8
+	ldr r0, _08014FC0 @ =gBattleStruct
 	ldr r0, [r0]
 	add r0, r9
 	adds r0, 0x80
@@ -10187,14 +10187,14 @@ _08014FA0:
 	muls r3, r1
 	adds r1, r3, 0
 	adds r0, r1
-	ldr r1, _08014FC4 @ =gUnknown_2023BE4
+	ldr r1, _08014FC4 @ =gBattleMons
 	adds r1, 0xC
 	adds r0, r1
 	ldrh r3, [r0]
 	b _08014FCA
 	.align 2, 0
-_08014FC0: .4byte gUnknown_2023FE8
-_08014FC4: .4byte gUnknown_2023BE4
+_08014FC0: .4byte gBattleStruct
+_08014FC4: .4byte gBattleMons
 _08014FC8:
 	movs r3, 0
 _08014FCA:
@@ -10215,7 +10215,7 @@ _08014FCA:
 	.align 2, 0
 _08014FE8: .4byte gUnknown_2023E8C
 _08014FEC:
-	ldr r0, _0801500C @ =gUnknown_2023FE8
+	ldr r0, _0801500C @ =gBattleStruct
 	ldr r0, [r0]
 	add r0, r10
 	adds r0, 0x80
@@ -10226,18 +10226,18 @@ _08014FEC:
 	muls r2, r1
 	adds r1, r2, 0
 	adds r0, r1
-	ldr r1, _08015010 @ =gUnknown_2023BE4
+	ldr r1, _08015010 @ =gBattleMons
 	adds r1, 0xC
 	adds r0, r1
 	ldrh r2, [r0]
 	b _08015016
 	.align 2, 0
-_0801500C: .4byte gUnknown_2023FE8
-_08015010: .4byte gUnknown_2023BE4
+_0801500C: .4byte gBattleStruct
+_08015010: .4byte gBattleMons
 _08015014:
 	movs r2, 0
 _08015016:
-	ldr r4, _08015060 @ =gUnknown_8250C04
+	ldr r4, _08015060 @ =gBattleMoves
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -10274,7 +10274,7 @@ _0801503A:
 	movs r3, 0x2
 	b _08015094
 	.align 2, 0
-_08015060: .4byte gUnknown_8250C04
+_08015060: .4byte gBattleMoves
 _08015064:
 	cmp r8, r7
 	bcs _08015096
@@ -10324,13 +10324,13 @@ sub_80150A8: @ 80150A8
 	mov r5, r8
 	push {r5-r7}
 	movs r3, 0
-	ldr r0, _080150FC @ =gUnknown_2022B4C
+	ldr r0, _080150FC @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	beq _08015114
-	ldr r0, _08015100 @ =gUnknown_2023BC4
+	ldr r0, _08015100 @ =gActiveBattler
 	strb r3, [r0]
 	ldr r4, _08015104 @ =gUnknown_2023BCC
 	mov r8, r0
@@ -10363,8 +10363,8 @@ _080150D8:
 	bcc _080150D8
 	b _080152FA
 	.align 2, 0
-_080150FC: .4byte gUnknown_2022B4C
-_08015100: .4byte gUnknown_2023BC4
+_080150FC: .4byte gBattleTypeFlags
+_08015100: .4byte gActiveBattler
 _08015104: .4byte gUnknown_2023BCC
 _08015108: .4byte gUnknown_2023BDA
 _0801510C: .4byte gUnknown_2023D7C
@@ -10374,7 +10374,7 @@ _08015114:
 	ands r1, r0
 	cmp r1, 0
 	beq _08015164
-	ldr r0, _08015158 @ =gUnknown_2023BC4
+	ldr r0, _08015158 @ =gActiveBattler
 	strb r3, [r0]
 	ldr r1, _0801515C @ =gUnknown_2023BCC
 	mov r8, r0
@@ -10405,13 +10405,13 @@ _08015136:
 	bne _08015136
 	b _08015172
 	.align 2, 0
-_08015158: .4byte gUnknown_2023BC4
+_08015158: .4byte gActiveBattler
 _0801515C: .4byte gUnknown_2023BCC
 _08015160: .4byte gUnknown_2023D7C
 _08015164:
 	ldr r0, _080151D8 @ =gUnknown_2023D7C
 	ldrb r0, [r0]
-	ldr r2, _080151DC @ =gUnknown_2023BC4
+	ldr r2, _080151DC @ =gActiveBattler
 	mov r8, r2
 	cmp r0, 0x3
 	bne _08015174
@@ -10438,7 +10438,7 @@ _08015174:
 	mov r10, r7
 	ldr r0, _080151EC @ =CheckFocusPunch_ClearVarsBeforeTurnStarts
 	mov r12, r0
-	ldr r1, _080151F0 @ =gUnknown_2023FE8
+	ldr r1, _080151F0 @ =gBattleStruct
 	mov r9, r1
 	ldr r7, _080151F4 @ =gUnknown_2023BCC
 	ldrb r7, [r7]
@@ -10474,12 +10474,12 @@ _080151CC:
 	b _08015304
 	.align 2, 0
 _080151D8: .4byte gUnknown_2023D7C
-_080151DC: .4byte gUnknown_2023BC4
+_080151DC: .4byte gActiveBattler
 _080151E0: .4byte gUnknown_2023BDA
 _080151E4: .4byte gUnknown_2023BDE
 _080151E8: .4byte gUnknown_3004F84
 _080151EC: .4byte CheckFocusPunch_ClearVarsBeforeTurnStarts
-_080151F0: .4byte gUnknown_2023FE8
+_080151F0: .4byte gBattleStruct
 _080151F4: .4byte gUnknown_2023BCC
 _080151F8:
 	movs r0, 0
@@ -10620,7 +10620,7 @@ _080152FA:
 	ldr r1, _08015324 @ =gUnknown_3004F84
 	ldr r0, _08015328 @ =CheckFocusPunch_ClearVarsBeforeTurnStarts
 	str r0, [r1]
-	ldr r0, _0801532C @ =gUnknown_2023FE8
+	ldr r0, _0801532C @ =gBattleStruct
 	ldr r0, [r0]
 _08015304:
 	adds r0, 0x48
@@ -10639,7 +10639,7 @@ _0801531C: .4byte gUnknown_2023BDE
 _08015320: .4byte gUnknown_2023BCC
 _08015324: .4byte gUnknown_3004F84
 _08015328: .4byte CheckFocusPunch_ClearVarsBeforeTurnStarts
-_0801532C: .4byte gUnknown_2023FE8
+_0801532C: .4byte gBattleStruct
 	thumb_func_end sub_80150A8
 
 	thumb_func_start TurnValuesCleanUp
@@ -10652,7 +10652,7 @@ TurnValuesCleanUp: @ 8015330
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r1, _08015388 @ =gUnknown_2023BC4
+	ldr r1, _08015388 @ =gActiveBattler
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0801538C @ =gUnknown_2023BCC
@@ -10664,7 +10664,7 @@ TurnValuesCleanUp: @ 8015330
 	adds r6, r5, 0
 	ldr r0, _08015394 @ =gUnknown_2023C34
 	mov r12, r0
-	ldr r1, _08015398 @ =gUnknown_2023E0C
+	ldr r1, _08015398 @ =gDisableStructs
 	mov r8, r1
 	mov r10, r8
 _0801535E:
@@ -10689,11 +10689,11 @@ _0801535E:
 	strb r0, [r1]
 	b _080153F8
 	.align 2, 0
-_08015388: .4byte gUnknown_2023BC4
+_08015388: .4byte gActiveBattler
 _0801538C: .4byte gUnknown_2023BCC
 _08015390: .4byte gUnknown_2023E8C
 _08015394: .4byte gUnknown_2023C34
-_08015398: .4byte gUnknown_2023E0C
+_08015398: .4byte gDisableStructs
 _0801539C:
 	ldrb r0, [r6]
 	lsls r0, 4
@@ -10791,7 +10791,7 @@ _0801544C: .4byte gUnknown_2023DE4
 	thumb_func_start SpecialStatusesClear
 SpecialStatusesClear: @ 8015450
 	push {r4-r6,lr}
-	ldr r2, _08015494 @ =gUnknown_2023BC4
+	ldr r2, _08015494 @ =gActiveBattler
 	movs r0, 0
 	strb r0, [r2]
 	ldr r0, _08015498 @ =gUnknown_2023BCC
@@ -10828,7 +10828,7 @@ _0801548E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08015494: .4byte gUnknown_2023BC4
+_08015494: .4byte gActiveBattler
 _08015498: .4byte gUnknown_2023BCC
 _0801549C: .4byte gUnknown_2023ECC
 	thumb_func_end SpecialStatusesClear
@@ -10843,7 +10843,7 @@ CheckFocusPunch_ClearVarsBeforeTurnStarts: @ 80154A0
 	ands r0, r1
 	cmp r0, 0
 	bne _0801555E
-	ldr r2, _0801552C @ =gUnknown_2023FE8
+	ldr r2, _0801552C @ =gBattleStruct
 	ldr r0, [r2]
 	adds r0, 0x48
 	ldr r1, _08015530 @ =gUnknown_2023BCC
@@ -10853,8 +10853,8 @@ CheckFocusPunch_ClearVarsBeforeTurnStarts: @ 80154A0
 	ldrb r1, [r6]
 	cmp r0, r1
 	bcs _0801555E
-	ldr r5, _08015534 @ =gUnknown_2023BC4
-	ldr r4, _08015538 @ =gUnknown_2023D6B
+	ldr r5, _08015534 @ =gActiveBattler
+	ldr r4, _08015538 @ =sBattler_AI
 	movs r7, 0x84
 	lsls r7, 1
 _080154CC:
@@ -10873,7 +10873,7 @@ _080154CC:
 	ldrh r0, [r0]
 	cmp r0, r7
 	bne _08015550
-	ldr r1, _08015540 @ =gUnknown_2023BE4
+	ldr r1, _08015540 @ =gBattleMons
 	movs r0, 0x58
 	muls r0, r3
 	adds r1, 0x4C
@@ -10883,7 +10883,7 @@ _080154CC:
 	ands r0, r1
 	cmp r0, 0
 	bne _08015550
-	ldr r2, _08015544 @ =gUnknown_2023E0C
+	ldr r2, _08015544 @ =gDisableStructs
 	ldrb r1, [r4]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -10905,13 +10905,13 @@ _080154CC:
 	b _08015598
 	.align 2, 0
 _08015528: .4byte gUnknown_2023DD0
-_0801552C: .4byte gUnknown_2023FE8
+_0801552C: .4byte gBattleStruct
 _08015530: .4byte gUnknown_2023BCC
-_08015534: .4byte gUnknown_2023BC4
-_08015538: .4byte gUnknown_2023D6B
+_08015534: .4byte gActiveBattler
+_08015538: .4byte sBattler_AI
 _0801553C: .4byte gUnknown_2023DC4
-_08015540: .4byte gUnknown_2023BE4
-_08015544: .4byte gUnknown_2023E0C
+_08015540: .4byte gBattleMons
+_08015544: .4byte gDisableStructs
 _08015548: .4byte gUnknown_2023E8C
 _0801554C: .4byte gUnknown_81D9015
 _08015550:
@@ -10932,10 +10932,10 @@ _0801555E:
 	movs r3, 0
 	ldrb r0, [r0]
 	strb r0, [r1]
-	ldr r0, _080155AC @ =gUnknown_2023F50
+	ldr r0, _080155AC @ =gDynamicBasePower
 	movs r2, 0
 	strh r3, [r0]
-	ldr r0, _080155B0 @ =gUnknown_2023FE8
+	ldr r0, _080155B0 @ =gBattleStruct
 	ldr r0, [r0]
 	strb r2, [r0, 0x13]
 	ldr r1, _080155B4 @ =gUnknown_3004F84
@@ -10944,9 +10944,9 @@ _0801555E:
 	ldr r0, _080155BC @ =gUnknown_2023E82
 	strb r2, [r0, 0x3]
 	strb r2, [r0, 0x4]
-	ldr r0, _080155C0 @ =gUnknown_2023FC4
+	ldr r0, _080155C0 @ =gBattleScripting
 	strb r2, [r0, 0x16]
-	ldr r0, _080155C4 @ =gUnknown_2023FF4
+	ldr r0, _080155C4 @ =gBattleResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	adds r0, 0x20
@@ -10959,13 +10959,13 @@ _08015598:
 _080155A0: .4byte gUnknown_2023BE2
 _080155A4: .4byte gUnknown_2023BE3
 _080155A8: .4byte gUnknown_2023BDA
-_080155AC: .4byte gUnknown_2023F50
-_080155B0: .4byte gUnknown_2023FE8
+_080155AC: .4byte gDynamicBasePower
+_080155B0: .4byte gBattleStruct
 _080155B4: .4byte gUnknown_3004F84
 _080155B8: .4byte RunTurnActionsFunctions
 _080155BC: .4byte gUnknown_2023E82
-_080155C0: .4byte gUnknown_2023FC4
-_080155C4: .4byte gUnknown_2023FF4
+_080155C0: .4byte gBattleScripting
+_080155C4: .4byte gBattleResources
 	thumb_func_end CheckFocusPunch_ClearVarsBeforeTurnStarts
 
 	thumb_func_start RunTurnActionsFunctions
@@ -10979,7 +10979,7 @@ RunTurnActionsFunctions: @ 80155C8
 	movs r0, 0xC
 	strb r0, [r2]
 _080155D8:
-	ldr r5, _08015624 @ =gUnknown_2023FE8
+	ldr r5, _08015624 @ =gBattleStruct
 	ldr r0, [r5]
 	adds r0, 0x4B
 	ldr r4, _08015628 @ =gUnknown_2023BE2
@@ -11014,7 +11014,7 @@ _080155D8:
 	.align 2, 0
 _0801561C: .4byte gUnknown_2023E8A
 _08015620: .4byte gUnknown_2023BE3
-_08015624: .4byte gUnknown_2023FE8
+_08015624: .4byte gBattleStruct
 _08015628: .4byte gUnknown_2023BE2
 _0801562C: .4byte gUnknown_8250038
 _08015630: .4byte gUnknown_2023BCC
@@ -11051,7 +11051,7 @@ sub_8015670: @ 8015670
 	ldr r1, _080156A8 @ =gUnknown_2023BE3
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, _080156AC @ =gUnknown_2022B4C
+	ldr r0, _080156AC @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -11063,7 +11063,7 @@ sub_8015670: @ 8015670
 	strb r0, [r1]
 	movs r0, 0
 	bl GetBankByIdentity
-	ldr r1, _080156B8 @ =gUnknown_2023D6B
+	ldr r1, _080156B8 @ =sBattler_AI
 	strb r0, [r1]
 	ldr r1, _080156BC @ =gUnknown_2023D74
 	ldr r0, _080156C0 @ =gUnknown_81D88CC
@@ -11075,10 +11075,10 @@ sub_8015670: @ 8015670
 	b _0801576E
 	.align 2, 0
 _080156A8: .4byte gUnknown_2023BE3
-_080156AC: .4byte gUnknown_2022B4C
+_080156AC: .4byte gBattleTypeFlags
 _080156B0: .4byte gUnknown_2022AB8
 _080156B4: .4byte gUnknown_2023E8A
-_080156B8: .4byte gUnknown_2023D6B
+_080156B8: .4byte sBattler_AI
 _080156BC: .4byte gUnknown_2023D74
 _080156C0: .4byte gUnknown_81D88CC
 _080156C4:
@@ -11106,8 +11106,8 @@ _080156EC:
 	ldr r1, _08015720 @ =gUnknown_2023D74
 	ldr r0, _08015724 @ =gUnknown_81D87EF
 	str r0, [r1]
-	ldr r2, _08015728 @ =gUnknown_823EAC8
-	ldr r0, _0801572C @ =gUnknown_20386AE
+	ldr r2, _08015728 @ =gTrainers
+	ldr r0, _0801572C @ =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -11125,8 +11125,8 @@ _080156EC:
 	.align 2, 0
 _08015720: .4byte gUnknown_2023D74
 _08015724: .4byte gUnknown_81D87EF
-_08015728: .4byte gUnknown_823EAC8
-_0801572C: .4byte gUnknown_20386AE
+_08015728: .4byte gTrainers
+_0801572C: .4byte gTrainerBattleOpponent_A
 _08015730: .4byte _08015734
 	.align 2, 0
 _08015734:
@@ -11173,7 +11173,7 @@ sub_801578C: @ 801578C
 	ldr r1, _080157C4 @ =gUnknown_2023BE3
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, _080157C8 @ =gUnknown_2022B4C
+	ldr r0, _080157C8 @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r4, 0x2
 	adds r0, r1, 0
@@ -11186,7 +11186,7 @@ sub_801578C: @ 801578C
 	strb r0, [r1]
 	movs r0, 0
 	bl GetBankByIdentity
-	ldr r1, _080157D4 @ =gUnknown_2023D6B
+	ldr r1, _080157D4 @ =sBattler_AI
 	strb r0, [r1]
 	ldr r1, _080157D8 @ =gUnknown_2023D74
 	ldr r0, _080157DC @ =gUnknown_81D88CC
@@ -11198,10 +11198,10 @@ sub_801578C: @ 801578C
 	b _08015830
 	.align 2, 0
 _080157C4: .4byte gUnknown_2023BE3
-_080157C8: .4byte gUnknown_2022B4C
+_080157C8: .4byte gBattleTypeFlags
 _080157CC: .4byte gUnknown_2022AB8
 _080157D0: .4byte gUnknown_2023E8A
-_080157D4: .4byte gUnknown_2023D6B
+_080157D4: .4byte sBattler_AI
 _080157D8: .4byte gUnknown_2023D74
 _080157DC: .4byte gUnknown_81D88CC
 _080157E0:
@@ -11231,12 +11231,12 @@ _0801580C:
 _08015810:
 	movs r0, 0x1
 	bl GetBankByIdentity
-	ldr r1, _08015820 @ =gUnknown_2023D6B
+	ldr r1, _08015820 @ =sBattler_AI
 	strb r0, [r1]
 	b _0801582A
 	.align 2, 0
 _0801581C: .4byte gUnknown_2023E82
-_08015820: .4byte gUnknown_2023D6B
+_08015820: .4byte sBattler_AI
 _08015824:
 	ldr r1, _0801583C @ =gUnknown_2023E82
 	movs r0, 0
@@ -11267,7 +11267,7 @@ sub_8015850: @ 8015850
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, _0801587C @ =gUnknown_2023E8C
-	ldr r0, _08015880 @ =gUnknown_2023D6B
+	ldr r0, _08015880 @ =sBattler_AI
 	ldrb r0, [r0]
 	lsls r0, 4
 	adds r0, r1
@@ -11284,7 +11284,7 @@ sub_8015850: @ 8015850
 	.align 2, 0
 _08015878: .4byte gUnknown_2023BE3
 _0801587C: .4byte gUnknown_2023E8C
-_08015880: .4byte gUnknown_2023D6B
+_08015880: .4byte sBattler_AI
 _08015884: .4byte gUnknown_2023D74
 _08015888: .4byte gUnknown_81D8916
 _0801588C:
@@ -11321,10 +11321,10 @@ sub_80158BC: @ 80158BC
 	strb r0, [r1]
 	movs r0, 0x7
 	strb r0, [r1, 0x1]
-	ldr r2, _080158F8 @ =gUnknown_2023D6B
+	ldr r2, _080158F8 @ =sBattler_AI
 	ldrb r0, [r2]
 	strb r0, [r1, 0x2]
-	ldr r3, _080158FC @ =gUnknown_2023BCE
+	ldr r3, _080158FC @ =gBattlerPartyIndexes
 	ldrb r0, [r2]
 	lsls r0, 1
 	adds r0, r3
@@ -11342,8 +11342,8 @@ sub_80158BC: @ 80158BC
 	.align 2, 0
 _080158F0: .4byte gUnknown_2023BE3
 _080158F4: .4byte gUnknown_2022AB8
-_080158F8: .4byte gUnknown_2023D6B
-_080158FC: .4byte gUnknown_2023BCE
+_080158F8: .4byte sBattler_AI
+_080158FC: .4byte gBattlerPartyIndexes
 _08015900: .4byte gUnknown_2023D74
 _08015904: .4byte gUnknown_81D891D
 _08015908: .4byte gUnknown_3004F84
@@ -11360,20 +11360,20 @@ sub_8015910: @ 8015910
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _08015A04
-	ldr r0, _08015978 @ =gUnknown_2022B4C
+	ldr r0, _08015978 @ =gBattleTypeFlags
 	ldr r1, [r0]
 	ldr r0, _0801597C @ =0x00080b92
 	ands r1, r0
 	cmp r1, 0
 	bne _080159BC
-	ldr r2, _08015980 @ =gUnknown_2023BC4
+	ldr r2, _08015980 @ =gActiveBattler
 	strb r1, [r2]
 	ldr r0, _08015984 @ =gUnknown_2023BCC
 	ldrb r0, [r0]
 	cmp r1, r0
 	bcs _080159BC
 	adds r4, r2, 0
-	ldr r6, _08015988 @ =gUnknown_2023BE4
+	ldr r6, _08015988 @ =gBattleMons
 	movs r5, 0x58
 	adds r7, r6, 0
 	adds r7, 0x30
@@ -11383,7 +11383,7 @@ _08015942:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080159AA
-	ldr r2, _0801598C @ =gUnknown_3004F90
+	ldr r2, _0801598C @ =gBattleResults
 	ldrh r0, [r2, 0x6]
 	cmp r0, 0
 	bne _08015990
@@ -11402,12 +11402,12 @@ _08015942:
 	b _080159AA
 	.align 2, 0
 _08015974: .4byte gUnknown_2023BE3
-_08015978: .4byte gUnknown_2022B4C
+_08015978: .4byte gBattleTypeFlags
 _0801597C: .4byte 0x00080b92
-_08015980: .4byte gUnknown_2023BC4
+_08015980: .4byte gActiveBattler
 _08015984: .4byte gUnknown_2023BCC
-_08015988: .4byte gUnknown_2023BE4
-_0801598C: .4byte gUnknown_3004F90
+_08015988: .4byte gBattleMons
+_0801598C: .4byte gBattleResults
 _08015990:
 	ldrb r0, [r4]
 	muls r0, r5
@@ -11433,7 +11433,7 @@ _080159AA:
 	bcc _08015942
 _080159BC:
 	bl sub_812BFDC
-	ldr r0, _080159F0 @ =gUnknown_2022B4C
+	ldr r0, _080159F0 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x8
 	ands r0, r1
@@ -11454,7 +11454,7 @@ _080159D0:
 	b _08015A1E
 	.align 2, 0
 _080159EC: .4byte gUnknown_2023BCC
-_080159F0: .4byte gUnknown_2022B4C
+_080159F0: .4byte gBattleTypeFlags
 _080159F4: .4byte gUnknown_3004F84
 _080159F8: .4byte sub_8015A30
 _080159FC: .4byte gUnknown_300537C
@@ -11516,7 +11516,7 @@ _08015A6C:
 _08015A70:
 	str r0, [r1]
 	bl FreeAllWindowBuffers
-	ldr r0, _08015A9C @ =gUnknown_2022B4C
+	ldr r0, _08015A9C @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -11531,7 +11531,7 @@ _08015A8E:
 	.align 2, 0
 _08015A94: .4byte gUnknown_3004F84
 _08015A98: .4byte sub_8015AA0
-_08015A9C: .4byte gUnknown_2022B4C
+_08015A9C: .4byte gBattleTypeFlags
 	thumb_func_end sub_8015A30
 
 	thumb_func_start sub_8015AA0
@@ -11546,7 +11546,7 @@ _08015AAC:
 	movs r5, 0
 _08015AAE:
 	ldrb r2, [r3]
-	ldr r0, _08015AF8 @ =gUnknown_825E45C
+	ldr r0, _08015AF8 @ =gBitTable
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r1, [r1]
@@ -11559,7 +11559,7 @@ _08015AAE:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _08015AFC @ =gUnknown_2024284
+	ldr r0, _08015AFC @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0
@@ -11580,8 +11580,8 @@ _08015AAE:
 	b _08015B1C
 	.align 2, 0
 _08015AF4: .4byte gUnknown_3004FD4
-_08015AF8: .4byte gUnknown_825E45C
-_08015AFC: .4byte gUnknown_2024284
+_08015AF8: .4byte gBitTable
+_08015AFC: .4byte gPlayerParty
 _08015B00: .4byte gUnknown_3004F84
 _08015B04: .4byte sub_8015B30
 _08015B08:
@@ -11630,13 +11630,13 @@ _08015B54: .4byte sub_8015AA0
 	thumb_func_start ReturnFromBattleToOverworld
 ReturnFromBattleToOverworld: @ 8015B58
 	push {r4-r6,lr}
-	ldr r6, _08015BDC @ =gUnknown_2022B4C
+	ldr r6, _08015BDC @ =gBattleTypeFlags
 	ldr r0, [r6]
 	movs r5, 0x2
 	ands r0, r5
 	cmp r0, 0
 	bne _08015B74
-	ldr r4, _08015BE0 @ =gUnknown_2024284
+	ldr r4, _08015BE0 @ =gPlayerParty
 	adds r0, r4, 0
 	bl sub_8043A68
 	adds r0, r4, 0
@@ -11672,7 +11672,7 @@ _08015B86:
 	ands r4, r0
 	cmp r4, 0
 	beq _08015BC6
-	ldr r0, _08015BFC @ =gUnknown_202402C
+	ldr r0, _08015BFC @ =gEnemyParty
 	bl UpdateRoamerHPStatus
 	ldrb r1, [r5]
 	movs r0, 0x1
@@ -11694,15 +11694,15 @@ _08015BD4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08015BDC: .4byte gUnknown_2022B4C
-_08015BE0: .4byte gUnknown_2024284
+_08015BDC: .4byte gBattleTypeFlags
+_08015BE0: .4byte gPlayerParty
 _08015BE4: .4byte gUnknown_3003F64
 _08015BE8: .4byte gUnknown_20370D0
 _08015BEC: .4byte gUnknown_2023E8A
 _08015BF0: .4byte gMain
 _08015BF4: .4byte 0x00000439
 _08015BF8: .4byte gUnknown_3004F80
-_08015BFC: .4byte gUnknown_202402C
+_08015BFC: .4byte gEnemyParty
 	thumb_func_end ReturnFromBattleToOverworld
 
 	thumb_func_start RunBattleScriptCommands_PopCallbacksStack
@@ -11715,7 +11715,7 @@ RunBattleScriptCommands_PopCallbacksStack: @ 8015C00
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _08015C48
-	ldr r3, _08015C40 @ =gUnknown_2023FF4
+	ldr r3, _08015C40 @ =gBattleResources
 	ldr r0, [r3]
 	ldr r0, [r0, 0xC]
 	adds r1, r0, 0
@@ -11739,7 +11739,7 @@ _08015C24:
 	b _08015C62
 	.align 2, 0
 _08015C3C: .4byte gUnknown_2023BE3
-_08015C40: .4byte gUnknown_2023FF4
+_08015C40: .4byte gBattleResources
 _08015C44: .4byte gUnknown_3004F84
 _08015C48:
 	ldr r0, _08015C68 @ =gUnknown_2023BC8
@@ -11797,19 +11797,19 @@ sub_8015CA0: @ 8015CA0
 	sub sp, 0x8
 	movs r0, 0x4
 	str r0, [sp]
-	ldr r6, _08015CE0 @ =gUnknown_2023D6B
+	ldr r6, _08015CE0 @ =sBattler_AI
 	ldr r1, _08015CE4 @ =gUnknown_2023BDE
 	ldr r0, _08015CE8 @ =gUnknown_2023BE2
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r6]
-	ldr r1, _08015CEC @ =gUnknown_2023FE8
+	ldr r1, _08015CEC @ =gBattleStruct
 	ldr r3, [r1]
 	adds r0, r3, 0
 	adds r0, 0x91
 	ldrb r2, [r0]
-	ldr r1, _08015CF0 @ =gUnknown_825E45C
+	ldr r1, _08015CF0 @ =gBitTable
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
@@ -11821,23 +11821,23 @@ sub_8015CA0: @ 8015CA0
 	movs r0, 0xC
 	b _0801634C
 	.align 2, 0
-_08015CE0: .4byte gUnknown_2023D6B
+_08015CE0: .4byte sBattler_AI
 _08015CE4: .4byte gUnknown_2023BDE
 _08015CE8: .4byte gUnknown_2023BE2
-_08015CEC: .4byte gUnknown_2023FE8
-_08015CF0: .4byte gUnknown_825E45C
+_08015CEC: .4byte gBattleStruct
+_08015CF0: .4byte gBitTable
 _08015CF4: .4byte gUnknown_2023BE3
 _08015CF8:
-	ldr r1, _08015D6C @ =gUnknown_2023D71
+	ldr r1, _08015D6C @ =gCritMultiplier
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, _08015D70 @ =gUnknown_2023FC4
+	ldr r1, _08015D70 @ =gBattleScripting
 	movs r0, 0x1
 	strb r0, [r1, 0xE]
 	adds r0, r3, 0
 	adds r0, 0xB7
 	strb r2, [r0]
-	ldr r0, _08015D74 @ =gUnknown_2023DCC
+	ldr r0, _08015D74 @ =gMoveResultFlags
 	strb r2, [r0]
 	ldr r0, _08015D78 @ =gUnknown_2023D72
 	strb r2, [r0]
@@ -11847,7 +11847,7 @@ _08015CF8:
 	ldr r3, _08015D84 @ =gUnknown_2023D49
 	mov r9, r3
 	ldrb r0, [r6]
-	ldr r4, _08015D88 @ =gUnknown_2023FE8
+	ldr r4, _08015D88 @ =gBattleStruct
 	ldr r1, [r4]
 	adds r0, r1
 	adds r0, 0x80
@@ -11867,7 +11867,7 @@ _08015CF8:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r3]
-	ldr r2, _08015D90 @ =gUnknown_2023D4A
+	ldr r2, _08015D90 @ =gCurrentMove
 	ldr r1, _08015D94 @ =gUnknown_2023D4C
 	movs r0, 0xA5
 	strh r0, [r1]
@@ -11882,24 +11882,24 @@ _08015CF8:
 	movs r1, 0
 	bl GetMoveTarget
 	ldrb r1, [r6]
-	ldr r3, _08015D88 @ =gUnknown_2023FE8
+	ldr r3, _08015D88 @ =gBattleStruct
 	ldr r2, [r3]
 	b _08015EF6
 	.align 2, 0
-_08015D6C: .4byte gUnknown_2023D71
-_08015D70: .4byte gUnknown_2023FC4
-_08015D74: .4byte gUnknown_2023DCC
+_08015D6C: .4byte gCritMultiplier
+_08015D70: .4byte gBattleScripting
+_08015D74: .4byte gMoveResultFlags
 _08015D78: .4byte gUnknown_2023D72
 _08015D7C: .4byte gUnknown_2023E82
 _08015D80: .4byte gUnknown_2023D48
 _08015D84: .4byte gUnknown_2023D49
-_08015D88: .4byte gUnknown_2023FE8
+_08015D88: .4byte gBattleStruct
 _08015D8C: .4byte gUnknown_2023E8C
-_08015D90: .4byte gUnknown_2023D4A
+_08015D90: .4byte gCurrentMove
 _08015D94: .4byte gUnknown_2023D4C
 _08015D98: .4byte gUnknown_2023DD0
 _08015D9C:
-	ldr r0, _08015DD4 @ =gUnknown_2023BE4
+	ldr r0, _08015DD4 @ =gBattleMons
 	movs r1, 0x58
 	adds r5, r4, 0
 	muls r5, r1
@@ -11919,7 +11919,7 @@ _08015D9C:
 	cmp r7, 0
 	beq _08015DE4
 _08015DC2:
-	ldr r3, _08015DD8 @ =gUnknown_2023D4A
+	ldr r3, _08015DD8 @ =gCurrentMove
 	ldr r2, _08015DDC @ =gUnknown_2023D4C
 	ldr r1, _08015DE0 @ =gUnknown_2023DB8
 	lsls r0, r4, 1
@@ -11929,12 +11929,12 @@ _08015DC2:
 	strh r0, [r3]
 	b _08015F18
 	.align 2, 0
-_08015DD4: .4byte gUnknown_2023BE4
-_08015DD8: .4byte gUnknown_2023D4A
+_08015DD4: .4byte gBattleMons
+_08015DD8: .4byte gCurrentMove
 _08015DDC: .4byte gUnknown_2023D4C
 _08015DE0: .4byte gUnknown_2023DB8
 _08015DE4:
-	ldr r3, _08015E38 @ =gUnknown_2023E0C
+	ldr r3, _08015E38 @ =gDisableStructs
 	mov r12, r3
 	lsls r0, r4, 3
 	subs r0, r4
@@ -11953,7 +11953,7 @@ _08015DE4:
 	ldrh r1, [r0]
 	cmp r2, r1
 	bne _08015E48
-	ldr r2, _08015E3C @ =gUnknown_2023D4A
+	ldr r2, _08015E3C @ =gCurrentMove
 	ldr r0, _08015E40 @ =gUnknown_2023D4C
 	strh r4, [r0]
 	strh r4, [r2]
@@ -11971,14 +11971,14 @@ _08015DE4:
 	movs r1, 0
 	bl GetMoveTarget
 	ldrb r1, [r6]
-	ldr r3, _08015E44 @ =gUnknown_2023FE8
+	ldr r3, _08015E44 @ =gBattleStruct
 	ldr r2, [r3]
 	b _08015EF6
 	.align 2, 0
-_08015E38: .4byte gUnknown_2023E0C
-_08015E3C: .4byte gUnknown_2023D4A
+_08015E38: .4byte gDisableStructs
+_08015E3C: .4byte gCurrentMove
 _08015E40: .4byte gUnknown_2023D4C
-_08015E44: .4byte gUnknown_2023FE8
+_08015E44: .4byte gBattleStruct
 _08015E48:
 	cmp r2, 0
 	beq _08015EBC
@@ -11988,7 +11988,7 @@ _08015E48:
 	strb r3, [r4]
 	mov r0, r8
 	strb r3, [r0]
-	ldr r3, _08015EB0 @ =gUnknown_2023D4A
+	ldr r3, _08015EB0 @ =gCurrentMove
 	ldr r2, _08015EB4 @ =gUnknown_2023D4C
 	ldrb r0, [r0]
 	lsls r0, 1
@@ -12027,18 +12027,18 @@ _08015E48:
 	movs r1, 0
 	bl GetMoveTarget
 	ldrb r1, [r6]
-	ldr r3, _08015EB8 @ =gUnknown_2023FE8
+	ldr r3, _08015EB8 @ =gBattleStruct
 	ldr r2, [r3]
 	b _08015EF6
 	.align 2, 0
-_08015EB0: .4byte gUnknown_2023D4A
+_08015EB0: .4byte gCurrentMove
 _08015EB4: .4byte gUnknown_2023D4C
-_08015EB8: .4byte gUnknown_2023FE8
+_08015EB8: .4byte gBattleStruct
 _08015EBC:
 	mov r4, r8
 	ldrb r0, [r4]
 	lsls r0, 1
-	ldr r4, _08015EFC @ =gUnknown_2023D6B
+	ldr r4, _08015EFC @ =sBattler_AI
 	ldrb r2, [r4]
 	movs r1, 0x58
 	muls r1, r2
@@ -12053,7 +12053,7 @@ _08015EBC:
 	ldrh r2, [r2]
 	cmp r3, r2
 	beq _08015F10
-	ldr r1, _08015F04 @ =gUnknown_2023D4A
+	ldr r1, _08015F04 @ =gCurrentMove
 	ldr r0, _08015F08 @ =gUnknown_2023D4C
 	strh r3, [r0]
 	strh r3, [r1]
@@ -12061,47 +12061,47 @@ _08015EBC:
 	movs r1, 0
 	bl GetMoveTarget
 	ldrb r1, [r4]
-	ldr r2, _08015F0C @ =gUnknown_2023FE8
+	ldr r2, _08015F0C @ =gBattleStruct
 	ldr r2, [r2]
 _08015EF6:
 	adds r1, r2
 	strb r0, [r1, 0xC]
 	b _08015F18
 	.align 2, 0
-_08015EFC: .4byte gUnknown_2023D6B
+_08015EFC: .4byte sBattler_AI
 _08015F00: .4byte gUnknown_2023DC4
-_08015F04: .4byte gUnknown_2023D4A
+_08015F04: .4byte gCurrentMove
 _08015F08: .4byte gUnknown_2023D4C
-_08015F0C: .4byte gUnknown_2023FE8
+_08015F0C: .4byte gBattleStruct
 _08015F10:
-	ldr r1, _08015F30 @ =gUnknown_2023D4A
+	ldr r1, _08015F30 @ =gCurrentMove
 	ldr r0, _08015F34 @ =gUnknown_2023D4C
 	strh r3, [r0]
 	strh r3, [r1]
 _08015F18:
-	ldr r0, _08015F38 @ =gUnknown_2023D6B
+	ldr r0, _08015F38 @ =sBattler_AI
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08015F40
-	ldr r0, _08015F3C @ =gUnknown_3004F90
-	ldr r1, _08015F30 @ =gUnknown_2023D4A
+	ldr r0, _08015F3C @ =gBattleResults
+	ldr r1, _08015F30 @ =gCurrentMove
 	ldrh r1, [r1]
 	strh r1, [r0, 0x22]
 	b _08015F48
 	.align 2, 0
-_08015F30: .4byte gUnknown_2023D4A
+_08015F30: .4byte gCurrentMove
 _08015F34: .4byte gUnknown_2023D4C
-_08015F38: .4byte gUnknown_2023D6B
-_08015F3C: .4byte gUnknown_3004F90
+_08015F38: .4byte sBattler_AI
+_08015F3C: .4byte gBattleResults
 _08015F40:
-	ldr r0, _08015FAC @ =gUnknown_3004F90
-	ldr r1, _08015FB0 @ =gUnknown_2023D4A
+	ldr r0, _08015FAC @ =gBattleResults
+	ldr r1, _08015FB0 @ =gCurrentMove
 	ldrh r1, [r1]
 	strh r1, [r0, 0x24]
 _08015F48:
-	ldr r4, _08015FB4 @ =gUnknown_2023D6B
+	ldr r4, _08015FB4 @ =sBattler_AI
 	ldrb r0, [r4]
 	bl GetBankSide
 	movs r1, 0x1
@@ -12117,8 +12117,8 @@ _08015F48:
 	adds r3, r4, 0
 	cmp r0, 0
 	beq _08015FC8
-	ldr r2, _08015FBC @ =gUnknown_8250C04
-	ldr r0, _08015FB0 @ =gUnknown_2023D4A
+	ldr r2, _08015FBC @ =gBattleMoves
+	ldr r0, _08015FB0 @ =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -12136,7 +12136,7 @@ _08015F48:
 	lsls r0, 24
 	cmp r4, r0
 	beq _08015FC8
-	ldr r1, _08015FC0 @ =gUnknown_2023BE4
+	ldr r1, _08015FC0 @ =gBattleMons
 	ldrb r2, [r5, 0x9]
 	movs r0, 0x58
 	muls r0, r2
@@ -12144,23 +12144,23 @@ _08015F48:
 	ldrh r0, [r0, 0x28]
 	cmp r0, 0
 	beq _08015FC8
-	ldr r0, _08015FC4 @ =gUnknown_2023D6C
+	ldr r0, _08015FC4 @ =gBattlerTarget
 	strb r2, [r0]
 	b _0801632C
 	.align 2, 0
-_08015FAC: .4byte gUnknown_3004F90
-_08015FB0: .4byte gUnknown_2023D4A
-_08015FB4: .4byte gUnknown_2023D6B
+_08015FAC: .4byte gBattleResults
+_08015FB0: .4byte gCurrentMove
+_08015FB4: .4byte sBattler_AI
 _08015FB8: .4byte gUnknown_2023DE4
-_08015FBC: .4byte gUnknown_8250C04
-_08015FC0: .4byte gUnknown_2023BE4
-_08015FC4: .4byte gUnknown_2023D6C
+_08015FBC: .4byte gBattleMoves
+_08015FC0: .4byte gBattleMons
+_08015FC4: .4byte gBattlerTarget
 _08015FC8:
-	ldr r2, _080160E4 @ =gUnknown_2022B4C
+	ldr r2, _080160E4 @ =gBattleTypeFlags
 	ldr r1, [r2]
 	movs r0, 0x1
 	ands r1, r0
-	ldr r3, _080160E8 @ =gUnknown_2023D6B
+	ldr r3, _080160E8 @ =sBattler_AI
 	adds r7, r2, 0
 	cmp r1, 0
 	bne _08015FDA
@@ -12176,8 +12176,8 @@ _08015FDA:
 	beq _08015FEC
 	b _080161F8
 _08015FEC:
-	ldr r2, _080160F0 @ =gUnknown_8250C04
-	ldr r0, _080160F4 @ =gUnknown_2023D4A
+	ldr r2, _080160F0 @ =gBattleMoves
+	ldr r0, _080160F4 @ =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -12191,10 +12191,10 @@ _08015FEC:
 	bne _08016008
 	b _080161F8
 _08016008:
-	ldr r3, _080160F8 @ =gUnknown_2023BE4
-	ldr r2, _080160E8 @ =gUnknown_2023D6B
+	ldr r3, _080160F8 @ =gBattleMons
+	ldr r2, _080160E8 @ =sBattler_AI
 	ldrb r6, [r2]
-	ldr r0, _080160FC @ =gUnknown_2023FE8
+	ldr r0, _080160FC @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, r6, r0
 	ldrb r1, [r0, 0xC]
@@ -12217,7 +12217,7 @@ _08016030:
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _08016100 @ =gUnknown_2023BC4
+	ldr r1, _08016100 @ =gActiveBattler
 	strb r5, [r1]
 	ldr r0, _08016104 @ =gUnknown_2023BCC
 	ldrb r0, [r0]
@@ -12231,16 +12231,16 @@ _08016048:
 	lsrs r0, 24
 	cmp r6, r0
 	beq _08016096
-	ldr r0, _080160E8 @ =gUnknown_2023D6B
+	ldr r0, _080160E8 @ =sBattler_AI
 	ldrb r1, [r0]
-	ldr r0, _080160FC @ =gUnknown_2023FE8
+	ldr r0, _080160FC @ =gBattleStruct
 	ldr r0, [r0]
 	adds r1, r0
 	ldrb r0, [r1, 0xC]
 	ldrb r1, [r4]
 	cmp r0, r1
 	beq _08016096
-	ldr r1, _080160F8 @ =gUnknown_2023BE4
+	ldr r1, _080160F8 @ =gBattleMons
 	ldrb r2, [r4]
 	movs r0, 0x58
 	muls r0, r2
@@ -12277,7 +12277,7 @@ _080160A8:
 	beq _080160B0
 	b _080161AA
 _080160B0:
-	ldr r2, _080160F0 @ =gUnknown_8250C04
+	ldr r2, _080160F0 @ =gBattleMoves
 	ldr r0, _08016108 @ =gUnknown_2023D4C
 	ldrh r1, [r0]
 	lsls r0, r1, 1
@@ -12288,7 +12288,7 @@ _080160B0:
 	ands r4, r0
 	cmp r4, 0
 	beq _08016130
-	ldr r0, _080160E8 @ =gUnknown_2023D6B
+	ldr r0, _080160E8 @ =sBattler_AI
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -12302,14 +12302,14 @@ _080160B0:
 	movs r0, 0x1
 	b _08016122
 	.align 2, 0
-_080160E4: .4byte gUnknown_2022B4C
-_080160E8: .4byte gUnknown_2023D6B
+_080160E4: .4byte gBattleTypeFlags
+_080160E8: .4byte sBattler_AI
 _080160EC: .4byte gUnknown_2023DE4
-_080160F0: .4byte gUnknown_8250C04
-_080160F4: .4byte gUnknown_2023D4A
-_080160F8: .4byte gUnknown_2023BE4
-_080160FC: .4byte gUnknown_2023FE8
-_08016100: .4byte gUnknown_2023BC4
+_080160F0: .4byte gBattleMoves
+_080160F4: .4byte gCurrentMove
+_080160F8: .4byte gBattleMons
+_080160FC: .4byte gBattleStruct
+_08016100: .4byte gActiveBattler
 _08016104: .4byte gUnknown_2023BCC
 _08016108: .4byte gUnknown_2023D4C
 _0801610C:
@@ -12327,26 +12327,26 @@ _08016120:
 	movs r0, 0x2
 _08016122:
 	bl GetBankByIdentity
-	ldr r1, _0801612C @ =gUnknown_2023D6C
+	ldr r1, _0801612C @ =gBattlerTarget
 	strb r0, [r1]
 	b _08016140
 	.align 2, 0
-_0801612C: .4byte gUnknown_2023D6C
+_0801612C: .4byte gBattlerTarget
 _08016130:
-	ldr r2, _08016178 @ =gUnknown_2023D6C
-	ldr r0, _0801617C @ =gUnknown_2023D6B
+	ldr r2, _08016178 @ =gBattlerTarget
+	ldr r0, _0801617C @ =sBattler_AI
 	ldrb r0, [r0]
-	ldr r1, _08016180 @ =gUnknown_2023FE8
+	ldr r1, _08016180 @ =gBattleStruct
 	ldr r1, [r1]
 	adds r0, r1
 	ldrb r0, [r0, 0xC]
 	strb r0, [r2]
 _08016140:
-	ldr r7, _08016184 @ =gUnknown_2023D70
+	ldr r7, _08016184 @ =gAbsentBattlerFlags
 	ldrb r0, [r7]
-	ldr r1, _08016188 @ =gUnknown_825E45C
+	ldr r1, _08016188 @ =gBitTable
 	mov r8, r1
-	ldr r5, _08016178 @ =gUnknown_2023D6C
+	ldr r5, _08016178 @ =gBattlerTarget
 	ldrb r1, [r5]
 	lsls r1, 2
 	add r1, r8
@@ -12356,7 +12356,7 @@ _08016140:
 	bne _0801615A
 	b _0801632C
 _0801615A:
-	ldr r6, _0801617C @ =gUnknown_2023D6B
+	ldr r6, _0801617C @ =sBattler_AI
 	ldrb r0, [r6]
 	bl GetBankSide
 	adds r4, r0, 0
@@ -12369,11 +12369,11 @@ _0801615A:
 	ldrb r0, [r5]
 	b _0801631A
 	.align 2, 0
-_08016178: .4byte gUnknown_2023D6C
-_0801617C: .4byte gUnknown_2023D6B
-_08016180: .4byte gUnknown_2023FE8
-_08016184: .4byte gUnknown_2023D70
-_08016188: .4byte gUnknown_825E45C
+_08016178: .4byte gBattlerTarget
+_0801617C: .4byte sBattler_AI
+_08016180: .4byte gBattleStruct
+_08016184: .4byte gAbsentBattlerFlags
+_08016188: .4byte gBitTable
 _0801618C:
 	ldrb r0, [r6]
 	bl GetBankIdentity
@@ -12389,14 +12389,14 @@ _0801618C:
 	add r0, r8
 	b _08016310
 _080161AA:
-	ldr r4, _080161E4 @ =gUnknown_2023BC4
+	ldr r4, _080161E4 @ =gActiveBattler
 	ldr r0, _080161E8 @ =gUnknown_2023BDE
 	ldr r3, [sp]
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	strb r0, [r4]
 	ldrb r0, [r4]
-	ldr r2, _080161EC @ =gUnknown_2023BE4
+	ldr r2, _080161EC @ =gBattleMons
 	movs r1, 0x58
 	muls r1, r0
 	adds r1, r2
@@ -12413,23 +12413,23 @@ _080161AA:
 	movs r2, 0x2
 	orrs r1, r2
 	strb r1, [r0]
-	ldr r1, _080161F4 @ =gUnknown_2023D6C
+	ldr r1, _080161F4 @ =gBattlerTarget
 	ldrb r0, [r4]
 	strb r0, [r1]
 	b _0801632C
 	.align 2, 0
-_080161E4: .4byte gUnknown_2023BC4
+_080161E4: .4byte gActiveBattler
 _080161E8: .4byte gUnknown_2023BDE
-_080161EC: .4byte gUnknown_2023BE4
+_080161EC: .4byte gBattleMons
 _080161F0: .4byte gUnknown_2023ECC
-_080161F4: .4byte gUnknown_2023D6C
+_080161F4: .4byte gBattlerTarget
 _080161F8:
 	ldr r0, [r7]
 	movs r4, 0x1
 	ands r0, r4
 	cmp r0, 0
 	beq _080162A0
-	ldr r2, _08016238 @ =gUnknown_8250C04
+	ldr r2, _08016238 @ =gBattleMoves
 	ldr r0, _0801623C @ =gUnknown_2023D4C
 	ldrh r1, [r0]
 	lsls r0, r1, 1
@@ -12454,7 +12454,7 @@ _080161F8:
 	movs r0, 0x1
 	b _08016256
 	.align 2, 0
-_08016238: .4byte gUnknown_8250C04
+_08016238: .4byte gBattleMoves
 _0801623C: .4byte gUnknown_2023D4C
 _08016240:
 	movs r0, 0x3
@@ -12471,12 +12471,12 @@ _08016254:
 	movs r0, 0x2
 _08016256:
 	bl GetBankByIdentity
-	ldr r1, _08016290 @ =gUnknown_2023D6C
+	ldr r1, _08016290 @ =gBattlerTarget
 	strb r0, [r1]
-	ldr r0, _08016294 @ =gUnknown_2023D70
+	ldr r0, _08016294 @ =gAbsentBattlerFlags
 	ldrb r1, [r0]
-	ldr r2, _08016298 @ =gUnknown_825E45C
-	ldr r5, _08016290 @ =gUnknown_2023D6C
+	ldr r2, _08016298 @ =gBitTable
+	ldr r5, _08016290 @ =gBattlerTarget
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r2
@@ -12484,7 +12484,7 @@ _08016256:
 	ands r1, r0
 	cmp r1, 0
 	beq _0801632C
-	ldr r0, _0801629C @ =gUnknown_2023D6B
+	ldr r0, _0801629C @ =sBattler_AI
 	ldrb r0, [r0]
 	bl GetBankSide
 	adds r4, r0, 0
@@ -12497,22 +12497,22 @@ _08016256:
 	ldrb r0, [r5]
 	b _0801631A
 	.align 2, 0
-_08016290: .4byte gUnknown_2023D6C
-_08016294: .4byte gUnknown_2023D70
-_08016298: .4byte gUnknown_825E45C
-_0801629C: .4byte gUnknown_2023D6B
+_08016290: .4byte gBattlerTarget
+_08016294: .4byte gAbsentBattlerFlags
+_08016298: .4byte gBitTable
+_0801629C: .4byte sBattler_AI
 _080162A0:
-	ldr r5, _080162E4 @ =gUnknown_2023D6C
+	ldr r5, _080162E4 @ =gBattlerTarget
 	adds r2, r3, 0
 	ldrb r0, [r2]
-	ldr r1, _080162E8 @ =gUnknown_2023FE8
+	ldr r1, _080162E8 @ =gBattleStruct
 	ldr r1, [r1]
 	adds r0, r1
 	ldrb r0, [r0, 0xC]
 	strb r0, [r5]
-	ldr r6, _080162EC @ =gUnknown_2023D70
+	ldr r6, _080162EC @ =gAbsentBattlerFlags
 	ldrb r1, [r6]
-	ldr r7, _080162F0 @ =gUnknown_825E45C
+	ldr r7, _080162F0 @ =gBitTable
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r7
@@ -12534,10 +12534,10 @@ _080162A0:
 	ldrb r0, [r5]
 	b _0801631A
 	.align 2, 0
-_080162E4: .4byte gUnknown_2023D6C
-_080162E8: .4byte gUnknown_2023FE8
-_080162EC: .4byte gUnknown_2023D70
-_080162F0: .4byte gUnknown_825E45C
+_080162E4: .4byte gBattlerTarget
+_080162E8: .4byte gBattleStruct
+_080162EC: .4byte gAbsentBattlerFlags
+_080162F0: .4byte gBitTable
 _080162F4:
 	ldrb r0, [r3]
 	bl GetBankIdentity
@@ -12568,8 +12568,8 @@ _0801631A:
 _0801632C:
 	ldr r4, _08016360 @ =gUnknown_2023D74
 	ldr r3, _08016364 @ =gUnknown_81D65A8
-	ldr r2, _08016368 @ =gUnknown_8250C04
-	ldr r0, _0801636C @ =gUnknown_2023D4A
+	ldr r2, _08016368 @ =gBattleMoves
+	ldr r0, _0801636C @ =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -12595,15 +12595,15 @@ _0801634C:
 	.align 2, 0
 _08016360: .4byte gUnknown_2023D74
 _08016364: .4byte gUnknown_81D65A8
-_08016368: .4byte gUnknown_8250C04
-_0801636C: .4byte gUnknown_2023D4A
+_08016368: .4byte gBattleMoves
+_0801636C: .4byte gCurrentMove
 _08016370: .4byte gUnknown_2023BE3
 	thumb_func_end sub_8015CA0
 
 	thumb_func_start sub_8016374
 sub_8016374: @ 8016374
 	push {r4,lr}
-	ldr r3, _080163E0 @ =gUnknown_2023D6B
+	ldr r3, _080163E0 @ =sBattler_AI
 	ldr r1, _080163E4 @ =gUnknown_2023BDE
 	ldr r0, _080163E8 @ =gUnknown_2023BE2
 	ldrb r0, [r0]
@@ -12631,7 +12631,7 @@ sub_8016374: @ 8016374
 	ldrb r4, [r3]
 	strb r4, [r2, 0x2]
 	ldrb r0, [r3]
-	ldr r1, _08016400 @ =gUnknown_2023FE8
+	ldr r1, _08016400 @ =gBattleStruct
 	ldr r1, [r1]
 	adds r0, r1
 	adds r0, 0x58
@@ -12639,7 +12639,7 @@ sub_8016374: @ 8016374
 	strb r0, [r2, 0x3]
 	movs r0, 0xFF
 	strb r0, [r2, 0x4]
-	ldr r0, _08016404 @ =gUnknown_2023FC4
+	ldr r0, _08016404 @ =gBattleScripting
 	strb r4, [r0, 0x17]
 	ldr r1, _08016408 @ =gUnknown_2023D74
 	ldr r0, _0801640C @ =gUnknown_81D894D
@@ -12647,7 +12647,7 @@ sub_8016374: @ 8016374
 	ldr r1, _08016410 @ =gUnknown_2023BE3
 	movs r0, 0xA
 	strb r0, [r1]
-	ldr r1, _08016414 @ =gUnknown_3004F90
+	ldr r1, _08016414 @ =gBattleResults
 	ldrb r0, [r1, 0x2]
 	cmp r0, 0xFE
 	bhi _080163DA
@@ -12658,7 +12658,7 @@ _080163DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080163E0: .4byte gUnknown_2023D6B
+_080163E0: .4byte sBattler_AI
 _080163E4: .4byte gUnknown_2023BDE
 _080163E8: .4byte gUnknown_2023BE2
 _080163EC: .4byte gUnknown_2022974
@@ -12666,12 +12666,12 @@ _080163F0: .4byte gUnknown_2022976
 _080163F4: .4byte gUnknown_2023FF8
 _080163F8: .4byte gUnknown_2023FFC
 _080163FC: .4byte gUnknown_2022AB8
-_08016400: .4byte gUnknown_2023FE8
-_08016404: .4byte gUnknown_2023FC4
+_08016400: .4byte gBattleStruct
+_08016404: .4byte gBattleScripting
 _08016408: .4byte gUnknown_2023D74
 _0801640C: .4byte gUnknown_81D894D
 _08016410: .4byte gUnknown_2023BE3
-_08016414: .4byte gUnknown_3004F90
+_08016414: .4byte gBattleResults
 	thumb_func_end sub_8016374
 
 	thumb_func_start sub_8016418
@@ -12681,8 +12681,8 @@ sub_8016418: @ 8016418
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r4, _08016474 @ =gUnknown_2023D6B
-	ldr r2, _08016478 @ =gUnknown_2023D6C
+	ldr r4, _08016474 @ =sBattler_AI
+	ldr r2, _08016478 @ =gBattlerTarget
 	ldr r1, _0801647C @ =gUnknown_2023BDE
 	ldr r0, _08016480 @ =gUnknown_2023BE2
 	ldrb r0, [r0]
@@ -12722,8 +12722,8 @@ sub_8016418: @ 8016418
 	str r0, [r2]
 	b _080164FC
 	.align 2, 0
-_08016474: .4byte gUnknown_2023D6B
-_08016478: .4byte gUnknown_2023D6C
+_08016474: .4byte sBattler_AI
+_08016478: .4byte gBattlerTarget
 _0801647C: .4byte gUnknown_2023BDE
 _08016480: .4byte gUnknown_2023BE2
 _08016484: .4byte gUnknown_2022974
@@ -12785,12 +12785,12 @@ _08016504: .4byte gUnknown_2023D74
 _08016508: .4byte gUnknown_81D99E4
 _0801650C: .4byte gUnknown_2023BE3
 _08016510:
-	ldr r3, _08016548 @ =gUnknown_2023FC4
+	ldr r3, _08016548 @ =gBattleScripting
 	ldrb r0, [r4]
 	strb r0, [r3, 0x17]
 	lsls r0, 24
 	lsrs r0, 25
-	ldr r2, _0801654C @ =gUnknown_2023FE8
+	ldr r2, _0801654C @ =gBattleStruct
 	ldr r1, [r2]
 	adds r0, r1
 	adds r0, 0xC4
@@ -12814,8 +12814,8 @@ _0801653C:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08016548: .4byte gUnknown_2023FC4
-_0801654C: .4byte gUnknown_2023FE8
+_08016548: .4byte gBattleScripting
+_0801654C: .4byte gBattleStruct
 _08016550: .4byte gUnknown_2023D74
 _08016554: .4byte gUnknown_81D99E4
 _08016558: .4byte gUnknown_2023BE3
@@ -12831,7 +12831,7 @@ _08016574:
 	ldr r5, _080165AC @ =gUnknown_2023E82
 	movs r0, 0
 	strb r0, [r5, 0x5]
-	ldr r2, _080165B0 @ =gUnknown_2023D6B
+	ldr r2, _080165B0 @ =sBattler_AI
 	ldrb r0, [r2]
 	lsrs r0, 1
 	ldr r1, [r7]
@@ -12859,7 +12859,7 @@ _080165A6:
 	b _08016706
 	.align 2, 0
 _080165AC: .4byte gUnknown_2023E82
-_080165B0: .4byte gUnknown_2023D6B
+_080165B0: .4byte sBattler_AI
 _080165B4: .4byte gUnknown_2023D74
 _080165B8: .4byte gUnknown_81D99E4
 _080165BC: .4byte gUnknown_2023BE3
@@ -12903,7 +12903,7 @@ _08016608:
 	ldr r3, _0801663C @ =gUnknown_2023E82
 	movs r0, 0x4
 	strb r0, [r3, 0x5]
-	ldr r2, _08016640 @ =gUnknown_2023D6B
+	ldr r2, _08016640 @ =sBattler_AI
 	ldrb r0, [r2]
 	lsrs r0, 1
 	ldr r1, [r7]
@@ -12928,7 +12928,7 @@ _08016608:
 	b _08016706
 	.align 2, 0
 _0801663C: .4byte gUnknown_2023E82
-_08016640: .4byte gUnknown_2023D6B
+_08016640: .4byte sBattler_AI
 _08016644: .4byte gUnknown_2023D74
 _08016648: .4byte gUnknown_81D99E4
 _0801664C: .4byte gUnknown_2023BE3
@@ -12999,7 +12999,7 @@ _080166CC: .4byte gUnknown_2023D74
 _080166D0: .4byte gUnknown_81D99E4
 _080166D4: .4byte gUnknown_2023BE3
 _080166D8:
-	ldr r0, _080166EC @ =gUnknown_2022B4C
+	ldr r0, _080166EC @ =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x1
 	ands r1, r0
@@ -13010,13 +13010,13 @@ _080166D8:
 	strb r0, [r1, 0x5]
 	b _080166F8
 	.align 2, 0
-_080166EC: .4byte gUnknown_2022B4C
+_080166EC: .4byte gBattleTypeFlags
 _080166F0: .4byte gUnknown_2023E82
 _080166F4:
 	ldr r0, _08016734 @ =gUnknown_2023E82
 	strb r1, [r0, 0x5]
 _080166F8:
-	ldr r0, _08016738 @ =gUnknown_2023D6B
+	ldr r0, _08016738 @ =sBattler_AI
 	mov r8, r0
 	ldr r1, _0801673C @ =gUnknown_2023D74
 	mov r9, r1
@@ -13049,7 +13049,7 @@ _0801671E:
 	bx r0
 	.align 2, 0
 _08016734: .4byte gUnknown_2023E82
-_08016738: .4byte gUnknown_2023D6B
+_08016738: .4byte sBattler_AI
 _0801673C: .4byte gUnknown_2023D74
 _08016740: .4byte gUnknown_81D99E4
 _08016744: .4byte gUnknown_2023BE3
@@ -13061,7 +13061,7 @@ sub_8016748: @ 8016748
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r6, 0
-	ldr r1, _0801676C @ =gUnknown_2023BE4
+	ldr r1, _0801676C @ =gBattleMons
 	movs r0, 0x58
 	muls r0, r4
 	adds r1, r0, r1
@@ -13076,7 +13076,7 @@ sub_8016748: @ 8016748
 	ldrb r1, [r0, 0x7]
 	b _0801677E
 	.align 2, 0
-_0801676C: .4byte gUnknown_2023BE4
+_0801676C: .4byte gBattleMons
 _08016770: .4byte gUnknown_2023F54
 _08016774:
 	ldrh r0, [r1, 0x2E]
@@ -13089,7 +13089,7 @@ _0801677E:
 	cmp r1, 0x25
 	bne _080167BC
 	ldr r2, _080167B0 @ =gUnknown_2023D68
-	ldr r1, _080167B4 @ =gUnknown_2023BE4
+	ldr r1, _080167B4 @ =gBattleMons
 	movs r0, 0x58
 	muls r0, r4
 	adds r0, r1
@@ -13109,10 +13109,10 @@ _0801677E:
 	.align 2, 0
 _080167AC: .4byte gUnknown_2023D6F
 _080167B0: .4byte gUnknown_2023D68
-_080167B4: .4byte gUnknown_2023BE4
+_080167B4: .4byte gBattleMons
 _080167B8: .4byte gUnknown_2023E8C
 _080167BC:
-	ldr r7, _080167EC @ =gUnknown_2023BE4
+	ldr r7, _080167EC @ =gBattleMons
 	movs r2, 0x58
 	adds r0, r4, 0
 	muls r0, r2
@@ -13136,11 +13136,11 @@ _080167BC:
 	strb r0, [r2, 0x1]
 	b _08016816
 	.align 2, 0
-_080167EC: .4byte gUnknown_2023BE4
+_080167EC: .4byte gBattleMons
 _080167F0: .4byte gUnknown_2023D6A
 _080167F4: .4byte gUnknown_2023E8C
 _080167F8:
-	ldr r0, _08016820 @ =gUnknown_2022B4C
+	ldr r0, _08016820 @ =gBattleTypeFlags
 	ldr r3, [r0]
 	movs r0, 0xA0
 	lsls r0, 8
@@ -13160,7 +13160,7 @@ _08016816:
 	lsrs r6, r0, 24
 	b _0801687A
 	.align 2, 0
-_08016820: .4byte gUnknown_2022B4C
+_08016820: .4byte gBattleTypeFlags
 _08016824:
 	movs r0, 0x1
 	ands r3, r0
@@ -13179,7 +13179,7 @@ _08016824:
 	ldrh r1, [r2, 0x6]
 	bl __divsi3
 	adds r4, r0, 0
-	ldr r0, _08016894 @ =gUnknown_2023FE8
+	ldr r0, _08016894 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0x6C
 	ldrb r1, [r0]
@@ -13199,7 +13199,7 @@ _08016868:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0801686E:
-	ldr r0, _08016894 @ =gUnknown_2023FE8
+	ldr r0, _08016894 @ =gBattleStruct
 	ldr r1, [r0]
 	adds r1, 0x6C
 	ldrb r0, [r1]
@@ -13221,7 +13221,7 @@ _0801688C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08016894: .4byte gUnknown_2023FE8
+_08016894: .4byte gBattleStruct
 _08016898: .4byte gUnknown_2023BE2
 _0801689C: .4byte gUnknown_2023BCC
 _080168A0: .4byte gUnknown_2023E8A
@@ -13230,14 +13230,14 @@ _080168A0: .4byte gUnknown_2023E8A
 	thumb_func_start sub_80168A4
 sub_80168A4: @ 80168A4
 	push {r4-r6,lr}
-	ldr r4, _080168F4 @ =gUnknown_2023D6B
+	ldr r4, _080168F4 @ =sBattler_AI
 	ldr r1, _080168F8 @ =gUnknown_2023BDE
 	ldr r5, _080168FC @ =gUnknown_2023BE2
 	ldrb r0, [r5]
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r4]
-	ldr r0, _08016900 @ =gUnknown_2022B4C
+	ldr r0, _08016900 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -13246,7 +13246,7 @@ sub_80168A4: @ 80168A4
 	ldr r0, _08016904 @ =gUnknown_2023BCC
 	ldrb r1, [r0]
 	strb r1, [r5]
-	ldr r2, _08016908 @ =gUnknown_2023BC4
+	ldr r2, _08016908 @ =gActiveBattler
 	movs r0, 0
 	strb r0, [r2]
 	lsls r1, 24
@@ -13270,12 +13270,12 @@ _080168D8:
 	movs r1, 0x2
 	b _08016922
 	.align 2, 0
-_080168F4: .4byte gUnknown_2023D6B
+_080168F4: .4byte sBattler_AI
 _080168F8: .4byte gUnknown_2023BDE
 _080168FC: .4byte gUnknown_2023BE2
-_08016900: .4byte gUnknown_2022B4C
+_08016900: .4byte gBattleTypeFlags
 _08016904: .4byte gUnknown_2023BCC
-_08016908: .4byte gUnknown_2023BC4
+_08016908: .4byte gActiveBattler
 _0801690C: .4byte gUnknown_2023D7C
 _08016910: .4byte gUnknown_2023E8A
 _08016914:
@@ -13337,7 +13337,7 @@ _08016980: .4byte gUnknown_2023D74
 _08016984: .4byte gUnknown_81D893A
 _08016988: .4byte gUnknown_2023BE3
 _0801698C:
-	ldr r1, _080169B4 @ =gUnknown_2023BE4
+	ldr r1, _080169B4 @ =gBattleMons
 	ldrb r2, [r4]
 	movs r0, 0x58
 	muls r0, r2
@@ -13358,7 +13358,7 @@ _0801698C:
 	movs r0, 0xA
 	b _080169D6
 	.align 2, 0
-_080169B4: .4byte gUnknown_2023BE4
+_080169B4: .4byte gBattleMons
 _080169B8: .4byte 0x0400e000
 _080169BC: .4byte gUnknown_2023E82
 _080169C0: .4byte gUnknown_2023D74
@@ -13384,7 +13384,7 @@ _080169E4: .4byte gUnknown_2023E8A
 	thumb_func_start sub_80169E8
 sub_80169E8: @ 80169E8
 	push {r4,r5,lr}
-	ldr r2, _08016A44 @ =gUnknown_2023D6B
+	ldr r2, _08016A44 @ =sBattler_AI
 	ldr r1, _08016A48 @ =gUnknown_2023BDE
 	ldr r0, _08016A4C @ =gUnknown_2023BE2
 	ldrb r0, [r0]
@@ -13396,7 +13396,7 @@ sub_80169E8: @ 80169E8
 	strh r5, [r0]
 	ldr r0, _08016A54 @ =gUnknown_2022976
 	strh r5, [r0]
-	ldr r4, _08016A58 @ =gUnknown_2023FE8
+	ldr r4, _08016A58 @ =gBattleStruct
 	ldr r1, [r4]
 	adds r2, r1, 0
 	adds r2, 0x79
@@ -13410,12 +13410,12 @@ sub_80169E8: @ 80169E8
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08016A68
-	ldr r0, _08016A5C @ =gUnknown_202402C
+	ldr r0, _08016A5C @ =gEnemyParty
 	movs r1, 0xB
 	bl GetMonData
 	ldr r4, [r4]
 	adds r4, 0x7C
-	ldr r2, _08016A60 @ =gUnknown_8254784
+	ldr r2, _08016A60 @ =gBaseStats
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -13428,14 +13428,14 @@ sub_80169E8: @ 80169E8
 	strb r0, [r4]
 	b _08016A98
 	.align 2, 0
-_08016A44: .4byte gUnknown_2023D6B
+_08016A44: .4byte sBattler_AI
 _08016A48: .4byte gUnknown_2023BDE
 _08016A4C: .4byte gUnknown_2023BE2
 _08016A50: .4byte gUnknown_2022974
 _08016A54: .4byte gUnknown_2022976
-_08016A58: .4byte gUnknown_2023FE8
-_08016A5C: .4byte gUnknown_202402C
-_08016A60: .4byte gUnknown_8254784
+_08016A58: .4byte gBattleStruct
+_08016A5C: .4byte gEnemyParty
+_08016A60: .4byte gBaseStats
 _08016A64: .4byte 0x000004fb
 _08016A68:
 	ldr r1, _08016A70 @ =gUnknown_2023E82
@@ -13485,7 +13485,7 @@ _08016ABC: .4byte gUnknown_2023BE3
 
 	thumb_func_start sub_8016AC0
 sub_8016AC0: @ 8016AC0
-	ldr r2, _08016AF8 @ =gUnknown_2023D6B
+	ldr r2, _08016AF8 @ =sBattler_AI
 	ldr r1, _08016AFC @ =gUnknown_2023BDE
 	ldr r0, _08016B00 @ =gUnknown_2023BE2
 	ldrb r0, [r0]
@@ -13513,7 +13513,7 @@ sub_8016AC0: @ 8016AC0
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_08016AF8: .4byte gUnknown_2023D6B
+_08016AF8: .4byte sBattler_AI
 _08016AFC: .4byte gUnknown_2023BDE
 _08016B00: .4byte gUnknown_2023BE2
 _08016B04: .4byte gUnknown_2022974
@@ -13528,7 +13528,7 @@ _08016B1C: .4byte gUnknown_2023BE3
 	thumb_func_start sub_8016B20
 sub_8016B20: @ 8016B20
 	push {r4-r7,lr}
-	ldr r2, _08016B9C @ =gUnknown_2023D6B
+	ldr r2, _08016B9C @ =sBattler_AI
 	ldr r1, _08016BA0 @ =gUnknown_2023BDE
 	ldr r0, _08016BA4 @ =gUnknown_2023BE2
 	ldrb r0, [r0]
@@ -13541,7 +13541,7 @@ sub_8016B20: @ 8016B20
 	ldr r0, _08016BAC @ =gUnknown_2022976
 	strh r7, [r0]
 	bl Random
-	ldr r6, _08016BB0 @ =gUnknown_2023FE8
+	ldr r6, _08016BB0 @ =gBattleStruct
 	ldr r5, [r6]
 	adds r5, 0x7A
 	ldrb r4, [r5]
@@ -13589,12 +13589,12 @@ _08016B86:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016B9C: .4byte gUnknown_2023D6B
+_08016B9C: .4byte sBattler_AI
 _08016BA0: .4byte gUnknown_2023BDE
 _08016BA4: .4byte gUnknown_2023BE2
 _08016BA8: .4byte gUnknown_2022974
 _08016BAC: .4byte gUnknown_2022976
-_08016BB0: .4byte gUnknown_2023FE8
+_08016BB0: .4byte gBattleStruct
 _08016BB4: .4byte gUnknown_2023D74
 _08016BB8: .4byte gUnknown_81D9A04
 _08016BBC: .4byte gUnknown_2023BE3
@@ -13603,7 +13603,7 @@ _08016BBC: .4byte gUnknown_2023BE3
 	thumb_func_start sub_8016BC0
 sub_8016BC0: @ 8016BC0
 	push {r4-r7,lr}
-	ldr r2, _08016C3C @ =gUnknown_2023D6B
+	ldr r2, _08016C3C @ =sBattler_AI
 	ldr r1, _08016C40 @ =gUnknown_2023BDE
 	ldr r0, _08016C44 @ =gUnknown_2023BE2
 	ldrb r0, [r0]
@@ -13616,7 +13616,7 @@ sub_8016BC0: @ 8016BC0
 	ldr r0, _08016C4C @ =gUnknown_2022976
 	strh r7, [r0]
 	bl Random
-	ldr r6, _08016C50 @ =gUnknown_2023FE8
+	ldr r6, _08016C50 @ =gBattleStruct
 	ldr r5, [r6]
 	adds r5, 0x79
 	ldrb r4, [r5]
@@ -13664,12 +13664,12 @@ _08016C26:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016C3C: .4byte gUnknown_2023D6B
+_08016C3C: .4byte sBattler_AI
 _08016C40: .4byte gUnknown_2023BDE
 _08016C44: .4byte gUnknown_2023BE2
 _08016C48: .4byte gUnknown_2022974
 _08016C4C: .4byte gUnknown_2022976
-_08016C50: .4byte gUnknown_2023FE8
+_08016C50: .4byte gBattleStruct
 _08016C54: .4byte gUnknown_2023D74
 _08016C58: .4byte gUnknown_81D9A04
 _08016C5C: .4byte gUnknown_2023BE3
@@ -13678,7 +13678,7 @@ _08016C5C: .4byte gUnknown_2023BE3
 	thumb_func_start HandleAction_SafriZoneRun
 HandleAction_SafriZoneRun: @ 8016C60
 	push {r4,lr}
-	ldr r2, _08016C88 @ =gUnknown_2023D6B
+	ldr r2, _08016C88 @ =sBattler_AI
 	ldr r1, _08016C8C @ =gUnknown_2023BDE
 	ldr r4, _08016C90 @ =gUnknown_2023BE2
 	ldrb r0, [r4]
@@ -13697,7 +13697,7 @@ HandleAction_SafriZoneRun: @ 8016C60
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016C88: .4byte gUnknown_2023D6B
+_08016C88: .4byte sBattler_AI
 _08016C8C: .4byte gUnknown_2023BDE
 _08016C90: .4byte gUnknown_2023BE2
 _08016C94: .4byte gUnknown_2023BCC
@@ -13706,7 +13706,7 @@ _08016C98: .4byte gUnknown_2023E8A
 
 	thumb_func_start HandleAction_Action9
 HandleAction_Action9: @ 8016C9C
-	ldr r3, _08016CE8 @ =gUnknown_2023D6B
+	ldr r3, _08016CE8 @ =sBattler_AI
 	ldr r1, _08016CEC @ =gUnknown_2023BDE
 	ldr r0, _08016CF0 @ =gUnknown_2023BE2
 	ldrb r0, [r0]
@@ -13724,7 +13724,7 @@ HandleAction_Action9: @ 8016C9C
 	movs r0, 0x7
 	strb r0, [r1, 0x1]
 	strb r2, [r1, 0x2]
-	ldr r2, _08016D00 @ =gUnknown_2023BCE
+	ldr r2, _08016D00 @ =gBattlerPartyIndexes
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r2
@@ -13744,13 +13744,13 @@ HandleAction_Action9: @ 8016C9C
 	strb r0, [r1, 0x1]
 	bx lr
 	.align 2, 0
-_08016CE8: .4byte gUnknown_2023D6B
+_08016CE8: .4byte sBattler_AI
 _08016CEC: .4byte gUnknown_2023BDE
 _08016CF0: .4byte gUnknown_2023BE2
 _08016CF4: .4byte gUnknown_2022974
 _08016CF8: .4byte gUnknown_2022976
 _08016CFC: .4byte gUnknown_2022AB8
-_08016D00: .4byte gUnknown_2023BCE
+_08016D00: .4byte gBattlerPartyIndexes
 _08016D04: .4byte gUnknown_2023D74
 _08016D08: .4byte gUnknown_81D9A04
 _08016D0C: .4byte gUnknown_2023BE3
@@ -13765,7 +13765,7 @@ HandleAction_Action11: @ 8016D14
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08016D30
-	ldr r0, _08016D34 @ =gUnknown_2023FE8
+	ldr r0, _08016D34 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0x4D
 	strb r1, [r0]
@@ -13776,7 +13776,7 @@ _08016D30:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016D34: .4byte gUnknown_2023FE8
+_08016D34: .4byte gBattleStruct
 _08016D38: .4byte gUnknown_2023BE3
 	thumb_func_end HandleAction_Action11
 
@@ -13825,19 +13825,19 @@ HandleAction_ActionFinished: @ 8016D70
 	ldr r1, _08016DF4 @ =0xf1e892af
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, _08016DF8 @ =gUnknown_2023D4A
+	ldr r0, _08016DF8 @ =gCurrentMove
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _08016DFC @ =gUnknown_2023D50
+	ldr r0, _08016DFC @ =gBattleMoveDamage
 	movs r4, 0
 	str r4, [r0]
-	ldr r0, _08016E00 @ =gUnknown_2023DCC
+	ldr r0, _08016E00 @ =gMoveResultFlags
 	strb r1, [r0]
-	ldr r5, _08016E04 @ =gUnknown_2023FC4
+	ldr r5, _08016E04 @ =gBattleScripting
 	strb r1, [r5, 0x18]
 	strb r1, [r5, 0x19]
 	ldr r2, _08016E08 @ =gUnknown_2023DA0
-	ldr r3, _08016E0C @ =gUnknown_2023D6B
+	ldr r3, _08016E0C @ =sBattler_AI
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r2
@@ -13847,17 +13847,17 @@ HandleAction_ActionFinished: @ 8016D70
 	lsls r0, 1
 	adds r0, r2
 	strh r4, [r0]
-	ldr r0, _08016E14 @ =gUnknown_2023FE8
+	ldr r0, _08016E14 @ =gBattleStruct
 	ldr r0, [r0]
 	strb r1, [r0, 0x13]
-	ldr r0, _08016E18 @ =gUnknown_2023F50
+	ldr r0, _08016E18 @ =gDynamicBasePower
 	strh r4, [r0]
 	strb r1, [r5, 0x14]
 	ldr r0, _08016E1C @ =gUnknown_2023E82
 	strb r1, [r0, 0x3]
 	strb r1, [r0, 0x4]
 	strb r1, [r5, 0x16]
-	ldr r0, _08016E20 @ =gUnknown_2023FF4
+	ldr r0, _08016E20 @ =gBattleResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	adds r0, 0x20
@@ -13871,17 +13871,17 @@ _08016DE8: .4byte gUnknown_2023BE3
 _08016DEC: .4byte gUnknown_2023BDA
 _08016DF0: .4byte gUnknown_2023DD0
 _08016DF4: .4byte 0xf1e892af
-_08016DF8: .4byte gUnknown_2023D4A
-_08016DFC: .4byte gUnknown_2023D50
-_08016E00: .4byte gUnknown_2023DCC
-_08016E04: .4byte gUnknown_2023FC4
+_08016DF8: .4byte gCurrentMove
+_08016DFC: .4byte gBattleMoveDamage
+_08016E00: .4byte gMoveResultFlags
+_08016E04: .4byte gBattleScripting
 _08016E08: .4byte gUnknown_2023DA0
-_08016E0C: .4byte gUnknown_2023D6B
+_08016E0C: .4byte sBattler_AI
 _08016E10: .4byte gUnknown_2023DA8
-_08016E14: .4byte gUnknown_2023FE8
-_08016E18: .4byte gUnknown_2023F50
+_08016E14: .4byte gBattleStruct
+_08016E18: .4byte gDynamicBasePower
 _08016E1C: .4byte gUnknown_2023E82
-_08016E20: .4byte gUnknown_2023FF4
+_08016E20: .4byte gBattleResources
 	thumb_func_end HandleAction_ActionFinished
 
 	.align 2, 0 @ Don't pad with nop.

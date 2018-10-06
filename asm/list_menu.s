@@ -235,7 +235,7 @@ ListMenuHandleInput: @ 8107078
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _081070A4 @ =gUnknown_3005098
+	ldr r0, _081070A4 @ =gTasks+0x8
 	adds r3, r1, r0
 	ldr r2, _081070A8 @ =gMain
 	ldrh r1, [r2, 0x2E]
@@ -252,7 +252,7 @@ ListMenuHandleInput: @ 8107078
 	ldr r0, [r0, 0x4]
 	b _08107136
 	.align 2, 0
-_081070A4: .4byte gUnknown_3005098
+_081070A4: .4byte gTasks+0x8
 _081070A8: .4byte gMain
 _081070AC:
 	movs r0, 0x2
@@ -350,7 +350,7 @@ sub_810713C: @ 810713C
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _0810717C @ =gUnknown_3005098
+	ldr r1, _0810717C @ =gTasks+0x8
 	adds r1, r0, r1
 	cmp r3, 0
 	beq _08107158
@@ -376,7 +376,7 @@ _08107170:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810717C: .4byte gUnknown_3005098
+_0810717C: .4byte gTasks+0x8
 	thumb_func_end sub_810713C
 
 	thumb_func_start sub_8107180
@@ -387,7 +387,7 @@ sub_8107180: @ 8107180
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _081071C0 @ =gUnknown_3005098
+	ldr r0, _081071C0 @ =gTasks+0x8
 	adds r4, r0
 	ldrb r0, [r4, 0x10]
 	ldrb r2, [r4, 0x15]
@@ -410,7 +410,7 @@ sub_8107180: @ 8107180
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081071C0: .4byte gUnknown_3005098
+_081071C0: .4byte gTasks+0x8
 	thumb_func_end sub_8107180
 
 	thumb_func_start sub_81071C4
@@ -425,7 +425,7 @@ sub_81071C4: @ 81071C4
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _08107204 @ =gUnknown_3005098
+	ldr r0, _08107204 @ =gTasks+0x8
 	adds r4, r0
 	lsrs r1, 20
 	ldrb r6, [r4, 0x14]
@@ -448,7 +448,7 @@ sub_81071C4: @ 81071C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08107204: .4byte gUnknown_3005098
+_08107204: .4byte gTasks+0x8
 	thumb_func_end sub_81071C4
 
 	thumb_func_start sub_8107208
@@ -465,7 +465,7 @@ sub_8107208: @ 8107208
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _08107240 @ =gUnknown_3005098
+	ldr r0, _08107240 @ =gTasks+0x8
 	adds r4, r0
 	ldrb r0, [r4, 0x10]
 	movs r1, 0x1
@@ -479,7 +479,7 @@ sub_8107208: @ 8107208
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08107240: .4byte gUnknown_3005098
+_08107240: .4byte gTasks+0x8
 	thumb_func_end sub_8107208
 
 	thumb_func_start sub_8107244
@@ -548,7 +548,7 @@ sub_81072AC: @ 81072AC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _081072D0 @ =gUnknown_3005098
+	ldr r0, _081072D0 @ =gTasks+0x8
 	adds r1, r0
 	cmp r2, 0
 	beq _081072CA
@@ -560,7 +560,7 @@ _081072CA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081072D0: .4byte gUnknown_3005098
+_081072D0: .4byte gTasks+0x8
 	thumb_func_end sub_81072AC
 
 	thumb_func_start get_coro_args_x18_x1A
@@ -572,7 +572,7 @@ get_coro_args_x18_x1A: @ 81072D4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _081072FC @ =gUnknown_3005098
+	ldr r0, _081072FC @ =gTasks+0x8
 	adds r1, r0
 	cmp r3, 0
 	beq _081072EE
@@ -587,7 +587,7 @@ _081072F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081072FC: .4byte gUnknown_3005098
+_081072FC: .4byte gTasks+0x8
 	thumb_func_end get_coro_args_x18_x1A
 
 	thumb_func_start ListMenuGetYCoordForPrintingArrowCursor
@@ -598,7 +598,7 @@ ListMenuGetYCoordForPrintingArrowCursor: @ 8107300
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _08107344 @ =gUnknown_3005098
+	ldr r0, _08107344 @ =gTasks+0x8
 	adds r4, r0
 	ldrb r0, [r4, 0x17]
 	lsls r0, 26
@@ -625,7 +625,7 @@ ListMenuGetYCoordForPrintingArrowCursor: @ 8107300
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08107344: .4byte gUnknown_3005098
+_08107344: .4byte gTasks+0x8
 	thumb_func_end ListMenuGetYCoordForPrintingArrowCursor
 
 	thumb_func_start ListMenuInitInternal
@@ -649,7 +649,7 @@ ListMenuInitInternal: @ 8107348
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
-	ldr r1, _0810741C @ =gUnknown_3005098
+	ldr r1, _0810741C @ =gTasks+0x8
 	adds r7, r0, r1
 	adds r0, r7, 0
 	ldm r4!, {r1-r3}
@@ -731,7 +731,7 @@ _081073E0:
 	bx r1
 	.align 2, 0
 _08107418: .4byte nullsub_90
-_0810741C: .4byte gUnknown_3005098
+_0810741C: .4byte gTasks+0x8
 _08107420: .4byte gUnknown_3005E60
 _08107424: .4byte 0xfffc0fff
 	thumb_func_end ListMenuInitInternal
@@ -1658,7 +1658,7 @@ sub_8107B00: @ 8107B00
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08107B24 @ =gUnknown_3005098
+	ldr r0, _08107B24 @ =gTasks+0x8
 	adds r2, r1, r0
 	cmp r3, 0x10
 	bhi _08107BC8
@@ -1668,7 +1668,7 @@ sub_8107B00: @ 8107B00
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08107B24: .4byte gUnknown_3005098
+_08107B24: .4byte gTasks+0x8
 _08107B28: .4byte _08107B2C
 	.align 2, 0
 _08107B2C:
@@ -1768,7 +1768,7 @@ sub_8107BD0: @ 8107BD0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08107BF4 @ =gUnknown_3005098
+	ldr r0, _08107BF4 @ =gTasks+0x8
 	adds r3, r1, r0
 	cmp r4, 0x10
 	bhi _08107CD0
@@ -1778,7 +1778,7 @@ sub_8107BD0: @ 8107BD0
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08107BF4: .4byte gUnknown_3005098
+_08107BF4: .4byte gTasks+0x8
 _08107BF8: .4byte _08107BFC
 	.align 2, 0
 _08107BFC:

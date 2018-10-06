@@ -46,7 +46,7 @@ sub_80D08F8: @ 80D08F8
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080D0920 @ =gUnknown_3005090
+	ldr r1, _080D0920 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -59,7 +59,7 @@ sub_80D08F8: @ 80D08F8
 	b _080D093C
 	.align 2, 0
 _080D091C: .4byte sub_80D0978
-_080D0920: .4byte gUnknown_3005090
+_080D0920: .4byte gTasks
 _080D0924:
 	bl sub_80D3DD0
 	ldr r4, _080D0944 @ =gUnknown_2039A2C
@@ -89,7 +89,7 @@ LaunchBattleTransitionTask: @ 80D0948
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080D0974 @ =gUnknown_3005090
+	ldr r2, _080D0974 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -100,7 +100,7 @@ LaunchBattleTransitionTask: @ 80D0948
 	bx r0
 	.align 2, 0
 _080D0970: .4byte sub_80D0978
-_080D0974: .4byte gUnknown_3005090
+_080D0974: .4byte gTasks
 	thumb_func_end LaunchBattleTransitionTask
 
 	thumb_func_start sub_80D0978
@@ -109,7 +109,7 @@ sub_80D0978: @ 80D0978
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D09A8 @ =gUnknown_83FA3B0
-	ldr r2, _080D09AC @ =gUnknown_3005090
+	ldr r2, _080D09AC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -130,7 +130,7 @@ _080D098A:
 	bx r0
 	.align 2, 0
 _080D09A8: .4byte gUnknown_83FA3B0
-_080D09AC: .4byte gUnknown_3005090
+_080D09AC: .4byte gTasks
 	thumb_func_end sub_80D0978
 
 	thumb_func_start Transition_Phase1
@@ -260,7 +260,7 @@ Phase1Task_TransitionAll: @ 80D0A8C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	ldr r1, _080D0AC0 @ =gUnknown_3005090
+	ldr r1, _080D0AC0 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -281,7 +281,7 @@ Phase1Task_TransitionAll: @ 80D0A8C
 	bl CreatePhase1Task
 	b _080D0AD4
 	.align 2, 0
-_080D0AC0: .4byte gUnknown_3005090
+_080D0AC0: .4byte gTasks
 _080D0AC4:
 	bl sub_80D3CA4
 	lsls r0, 24
@@ -302,7 +302,7 @@ sub_80D0ADC: @ 80D0ADC
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D0B0C @ =gUnknown_83FA3C0
-	ldr r2, _080D0B10 @ =gUnknown_3005090
+	ldr r2, _080D0B10 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -323,7 +323,7 @@ _080D0AEE:
 	bx r0
 	.align 2, 0
 _080D0B0C: .4byte gUnknown_83FA3C0
-_080D0B10: .4byte gUnknown_3005090
+_080D0B10: .4byte gTasks
 	thumb_func_end sub_80D0ADC
 
 	thumb_func_start sub_80D0B14
@@ -433,7 +433,7 @@ sub_80D0BD4: @ 80D0BD4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D0C04 @ =gUnknown_83FA3CC
-	ldr r2, _080D0C08 @ =gUnknown_3005090
+	ldr r2, _080D0C08 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -454,7 +454,7 @@ _080D0BE6:
 	bx r0
 	.align 2, 0
 _080D0C04: .4byte gUnknown_83FA3CC
-_080D0C08: .4byte gUnknown_3005090
+_080D0C08: .4byte gTasks
 	thumb_func_end sub_80D0BD4
 
 	thumb_func_start sub_80D0C0C
@@ -621,7 +621,7 @@ sub_80D0D54: @ 80D0D54
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D0D84 @ =gUnknown_83FA3D4
-	ldr r2, _080D0D88 @ =gUnknown_3005090
+	ldr r2, _080D0D88 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -642,7 +642,7 @@ _080D0D66:
 	bx r0
 	.align 2, 0
 _080D0D84: .4byte gUnknown_83FA3D4
-_080D0D88: .4byte gUnknown_3005090
+_080D0D88: .4byte gTasks
 	thumb_func_end sub_80D0D54
 
 	thumb_func_start sub_80D0D8C
@@ -820,7 +820,7 @@ sub_80D0EE4: @ 80D0EE4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D0F14 @ =gUnknown_83FA3DC
-	ldr r2, _080D0F18 @ =gUnknown_3005090
+	ldr r2, _080D0F18 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -841,7 +841,7 @@ _080D0EF6:
 	bx r0
 	.align 2, 0
 _080D0F14: .4byte gUnknown_83FA3DC
-_080D0F18: .4byte gUnknown_3005090
+_080D0F18: .4byte gTasks
 	thumb_func_end sub_80D0EE4
 
 	thumb_func_start sub_80D0F1C
@@ -1441,7 +1441,7 @@ sub_80D13C8: @ 80D13C8
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D13F8 @ =gUnknown_83FA3F4
-	ldr r2, _080D13FC @ =gUnknown_3005090
+	ldr r2, _080D13FC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1462,7 +1462,7 @@ _080D13DA:
 	bx r0
 	.align 2, 0
 _080D13F8: .4byte gUnknown_83FA3F4
-_080D13FC: .4byte gUnknown_3005090
+_080D13FC: .4byte gTasks
 	thumb_func_end sub_80D13C8
 
 	thumb_func_start Phase2_Transition_PokeballsTrail_Func1
@@ -1753,7 +1753,7 @@ sub_80D1638: @ 80D1638
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D1668 @ =gUnknown_83FA414
-	ldr r2, _080D166C @ =gUnknown_3005090
+	ldr r2, _080D166C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1774,7 +1774,7 @@ _080D164A:
 	bx r0
 	.align 2, 0
 _080D1668: .4byte gUnknown_83FA414
-_080D166C: .4byte gUnknown_3005090
+_080D166C: .4byte gTasks
 	thumb_func_end sub_80D1638
 
 	thumb_func_start sub_80D1670
@@ -2416,7 +2416,7 @@ sub_80D1B58: @ 80D1B58
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D1B88 @ =gUnknown_83FA430
-	ldr r2, _080D1B8C @ =gUnknown_3005090
+	ldr r2, _080D1B8C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2437,7 +2437,7 @@ _080D1B6A:
 	bx r0
 	.align 2, 0
 _080D1B88: .4byte gUnknown_83FA430
-_080D1B8C: .4byte gUnknown_3005090
+_080D1B8C: .4byte gTasks
 	thumb_func_end sub_80D1B58
 
 	thumb_func_start sub_80D1B90
@@ -2651,7 +2651,7 @@ sub_80D1D2C: @ 80D1D2C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D1D5C @ =gUnknown_83FA438
-	ldr r2, _080D1D60 @ =gUnknown_3005090
+	ldr r2, _080D1D60 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2672,7 +2672,7 @@ _080D1D3E:
 	bx r0
 	.align 2, 0
 _080D1D5C: .4byte gUnknown_83FA438
-_080D1D60: .4byte gUnknown_3005090
+_080D1D60: .4byte gTasks
 	thumb_func_end sub_80D1D2C
 
 	thumb_func_start sub_80D1D64
@@ -2902,7 +2902,7 @@ sub_80D1F2C: @ 80D1F2C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D1F5C @ =gUnknown_83FA464
-	ldr r2, _080D1F60 @ =gUnknown_3005090
+	ldr r2, _080D1F60 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2923,7 +2923,7 @@ _080D1F3E:
 	bx r0
 	.align 2, 0
 _080D1F5C: .4byte gUnknown_83FA464
-_080D1F60: .4byte gUnknown_3005090
+_080D1F60: .4byte gTasks
 	thumb_func_end sub_80D1F2C
 
 	thumb_func_start sub_80D1F64
@@ -3978,7 +3978,7 @@ Phase2Task_Transition_Sydney: @ 80D2768
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080D2784 @ =gUnknown_3005090
+	ldr r2, _080D2784 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3989,7 +3989,7 @@ Phase2Task_Transition_Sydney: @ 80D2768
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D2784: .4byte gUnknown_3005090
+_080D2784: .4byte gTasks
 	thumb_func_end Phase2Task_Transition_Sydney
 
 	thumb_func_start Phase2Task_Transition_Phoebe
@@ -3997,7 +3997,7 @@ Phase2Task_Transition_Phoebe: @ 80D2788
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080D27A4 @ =gUnknown_3005090
+	ldr r2, _080D27A4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4008,7 +4008,7 @@ Phase2Task_Transition_Phoebe: @ 80D2788
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D27A4: .4byte gUnknown_3005090
+_080D27A4: .4byte gTasks
 	thumb_func_end Phase2Task_Transition_Phoebe
 
 	thumb_func_start Phase2Task_Transition_Glacia
@@ -4016,7 +4016,7 @@ Phase2Task_Transition_Glacia: @ 80D27A8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080D27C4 @ =gUnknown_3005090
+	ldr r2, _080D27C4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4027,7 +4027,7 @@ Phase2Task_Transition_Glacia: @ 80D27A8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D27C4: .4byte gUnknown_3005090
+_080D27C4: .4byte gTasks
 	thumb_func_end Phase2Task_Transition_Glacia
 
 	thumb_func_start Phase2Task_Transition_Drake
@@ -4035,7 +4035,7 @@ Phase2Task_Transition_Drake: @ 80D27C8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080D27E4 @ =gUnknown_3005090
+	ldr r2, _080D27E4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4046,7 +4046,7 @@ Phase2Task_Transition_Drake: @ 80D27C8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D27E4: .4byte gUnknown_3005090
+_080D27E4: .4byte gTasks
 	thumb_func_end Phase2Task_Transition_Drake
 
 	thumb_func_start Phase2Task_Transition_Steven
@@ -4054,7 +4054,7 @@ Phase2Task_Transition_Steven: @ 80D27E8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080D2804 @ =gUnknown_3005090
+	ldr r2, _080D2804 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4065,7 +4065,7 @@ Phase2Task_Transition_Steven: @ 80D27E8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D2804: .4byte gUnknown_3005090
+_080D2804: .4byte gTasks
 	thumb_func_end Phase2Task_Transition_Steven
 
 	thumb_func_start Phase2Task_MugShotTransition
@@ -4074,7 +4074,7 @@ Phase2Task_MugShotTransition: @ 80D2808
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D2838 @ =gUnknown_83FA46C
-	ldr r2, _080D283C @ =gUnknown_3005090
+	ldr r2, _080D283C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4095,7 +4095,7 @@ _080D281A:
 	bx r0
 	.align 2, 0
 _080D2838: .4byte gUnknown_83FA46C
-_080D283C: .4byte gUnknown_3005090
+_080D283C: .4byte gTasks
 	thumb_func_end Phase2Task_MugShotTransition
 
 	thumb_func_start Phase2_Mugshot_Func1
@@ -5292,7 +5292,7 @@ sub_80D316C: @ 80D316C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D319C @ =gUnknown_83FA4E8
-	ldr r2, _080D31A0 @ =gUnknown_3005090
+	ldr r2, _080D31A0 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -5313,7 +5313,7 @@ _080D317E:
 	bx r0
 	.align 2, 0
 _080D319C: .4byte gUnknown_83FA4E8
-_080D31A0: .4byte gUnknown_3005090
+_080D31A0: .4byte gTasks
 	thumb_func_end sub_80D316C
 
 	thumb_func_start sub_80D31A4
@@ -5608,7 +5608,7 @@ sub_80D33EC: @ 80D33EC
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D341C @ =gUnknown_83FA4F4
-	ldr r2, _080D3420 @ =gUnknown_3005090
+	ldr r2, _080D3420 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -5629,7 +5629,7 @@ _080D33FE:
 	bx r0
 	.align 2, 0
 _080D341C: .4byte gUnknown_83FA4F4
-_080D3420: .4byte gUnknown_3005090
+_080D3420: .4byte gTasks
 	thumb_func_end sub_80D33EC
 
 	thumb_func_start sub_80D3424
@@ -6141,7 +6141,7 @@ sub_80D3818: @ 80D3818
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D3848 @ =gUnknown_83FA514
-	ldr r2, _080D384C @ =gUnknown_3005090
+	ldr r2, _080D384C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -6162,7 +6162,7 @@ _080D382A:
 	bx r0
 	.align 2, 0
 _080D3848: .4byte gUnknown_83FA514
-_080D384C: .4byte gUnknown_3005090
+_080D384C: .4byte gTasks
 	thumb_func_end sub_80D3818
 
 	thumb_func_start Phase2_Transition_GridSquares_Func1
@@ -6279,7 +6279,7 @@ sub_80D3928: @ 80D3928
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D3958 @ =gUnknown_83FA520
-	ldr r2, _080D395C @ =gUnknown_3005090
+	ldr r2, _080D395C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -6300,7 +6300,7 @@ _080D393A:
 	bx r0
 	.align 2, 0
 _080D3958: .4byte gUnknown_83FA520
-_080D395C: .4byte gUnknown_3005090
+_080D395C: .4byte gTasks
 	thumb_func_end sub_80D3928
 
 	thumb_func_start sub_80D3960
@@ -6704,7 +6704,7 @@ CreatePhase1Task: @ 80D3C40
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080D3CA0 @ =gUnknown_3005090
+	ldr r2, _080D3CA0 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -6725,7 +6725,7 @@ CreatePhase1Task: @ 80D3C40
 	bx r0
 	.align 2, 0
 _080D3C9C: .4byte sub_80D3CC4
-_080D3CA0: .4byte gUnknown_3005090
+_080D3CA0: .4byte gTasks
 	thumb_func_end CreatePhase1Task
 
 	thumb_func_start sub_80D3CA4
@@ -6754,7 +6754,7 @@ sub_80D3CC4: @ 80D3CC4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _080D3CF4 @ =gUnknown_83FA588
-	ldr r2, _080D3CF8 @ =gUnknown_3005090
+	ldr r2, _080D3CF8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -6775,7 +6775,7 @@ _080D3CD6:
 	bx r0
 	.align 2, 0
 _080D3CF4: .4byte gUnknown_83FA588
-_080D3CF8: .4byte gUnknown_3005090
+_080D3CF8: .4byte gTasks
 	thumb_func_end sub_80D3CC4
 
 	thumb_func_start Phase1_TransitionAll_Func1

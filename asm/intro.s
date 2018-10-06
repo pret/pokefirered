@@ -1321,7 +1321,7 @@ sub_80ED0AC: @ 80ED0AC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080ED114 @ =gUnknown_3005098
+	ldr r0, _080ED114 @ =gTasks+0x8
 	adds r4, r1, r0
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -1368,7 +1368,7 @@ _080ED10C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ED114: .4byte gUnknown_3005098
+_080ED114: .4byte gTasks+0x8
 	thumb_func_end sub_80ED0AC
 
 	thumb_func_start sub_80ED118
@@ -1378,7 +1378,7 @@ sub_80ED118: @ 80ED118
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080ED13C @ =gUnknown_3005090
+	ldr r2, _080ED13C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1389,7 +1389,7 @@ sub_80ED118: @ 80ED118
 	bx r0
 	.align 2, 0
 _080ED138: .4byte sub_80ED0AC
-_080ED13C: .4byte gUnknown_3005090
+_080ED13C: .4byte gTasks
 	thumb_func_end sub_80ED118
 
 	thumb_func_start sub_80ED140
@@ -1400,7 +1400,7 @@ sub_80ED140: @ 80ED140
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080ED184 @ =gUnknown_3005098
+	ldr r0, _080ED184 @ =gTasks+0x8
 	adds r1, r0
 	ldrh r0, [r1]
 	adds r0, 0x1
@@ -1429,7 +1429,7 @@ _080ED17E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ED184: .4byte gUnknown_3005098
+_080ED184: .4byte gTasks+0x8
 	thumb_func_end sub_80ED140
 
 	thumb_func_start sub_80ED188
@@ -2009,7 +2009,7 @@ sub_80ED69C: @ 80ED69C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080ED6C4 @ =gUnknown_3005090
+	ldr r2, _080ED6C4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2025,7 +2025,7 @@ sub_80ED69C: @ 80ED69C
 	bl ChangeBgX
 	b _080ED6D2
 	.align 2, 0
-_080ED6C4: .4byte gUnknown_3005090
+_080ED6C4: .4byte gTasks
 _080ED6C8:
 	movs r0, 0x1
 	movs r1, 0x20
@@ -2055,7 +2055,7 @@ sub_80ED6EC: @ 80ED6EC
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080ED710 @ =gUnknown_3005090
+	ldr r2, _080ED710 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2066,7 +2066,7 @@ sub_80ED6EC: @ 80ED6EC
 	bx r0
 	.align 2, 0
 _080ED70C: .4byte sub_80ED69C
-_080ED710: .4byte gUnknown_3005090
+_080ED710: .4byte gTasks
 	thumb_func_end sub_80ED6EC
 
 	thumb_func_start sub_80ED714
@@ -2077,7 +2077,7 @@ sub_80ED714: @ 80ED714
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080ED75C @ =gUnknown_3005098
+	ldr r0, _080ED75C @ =gTasks+0x8
 	adds r2, r1, r0
 	movs r0, 0
 	ldrsh r1, [r2, r0]
@@ -2108,7 +2108,7 @@ _080ED758:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ED75C: .4byte gUnknown_3005098
+_080ED75C: .4byte gTasks+0x8
 	thumb_func_end sub_80ED714
 
 	thumb_func_start sub_80ED760
@@ -2118,7 +2118,7 @@ sub_80ED760: @ 80ED760
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080ED784 @ =gUnknown_3005090
+	ldr r2, _080ED784 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2129,7 +2129,7 @@ sub_80ED760: @ 80ED760
 	bx r0
 	.align 2, 0
 _080ED780: .4byte sub_80ED714
-_080ED784: .4byte gUnknown_3005090
+_080ED784: .4byte gTasks
 	thumb_func_end sub_80ED760
 
 	thumb_func_start sub_80ED788
@@ -2139,7 +2139,7 @@ sub_80ED788: @ 80ED788
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080ED7AC @ =gUnknown_3005090
+	ldr r2, _080ED7AC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2150,7 +2150,7 @@ sub_80ED788: @ 80ED788
 	bx r0
 	.align 2, 0
 _080ED7A8: .4byte sub_80ED714
-_080ED7AC: .4byte gUnknown_3005090
+_080ED7AC: .4byte gTasks
 	thumb_func_end sub_80ED788
 
 	thumb_func_start sub_80ED7B0
@@ -2160,7 +2160,7 @@ sub_80ED7B0: @ 80ED7B0
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080ED7D0 @ =gUnknown_3005090
+	ldr r2, _080ED7D0 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2170,7 +2170,7 @@ sub_80ED7B0: @ 80ED7B0
 	bx r1
 	.align 2, 0
 _080ED7CC: .4byte sub_80ED714
-_080ED7D0: .4byte gUnknown_3005090
+_080ED7D0: .4byte gTasks
 	thumb_func_end sub_80ED7B0
 
 	thumb_func_start sub_80ED7D4
@@ -2976,7 +2976,7 @@ sub_80EDE04: @ 80EDE04
 	lsls r0, 2
 	add r0, r9
 	lsls r0, 3
-	ldr r1, _080EDEB0 @ =gUnknown_3005098
+	ldr r1, _080EDEB0 @ =gTasks+0x8
 	adds r0, r1
 	mov r8, r0
 	ldrh r1, [r0, 0x4]
@@ -3050,7 +3050,7 @@ _080EDE88:
 	bl DestroyTask
 	b _080EDECA
 	.align 2, 0
-_080EDEB0: .4byte gUnknown_3005098
+_080EDEB0: .4byte gTasks+0x8
 _080EDEB4: .4byte gUnknown_840BC84
 _080EDEB8: .4byte gUnknown_840BC08
 _080EDEBC: .4byte gSprites
@@ -3089,7 +3089,7 @@ sub_80EDEEC: @ 80EDEEC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080EDF5C @ =gUnknown_3005098
+	ldr r1, _080EDF5C @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -3140,7 +3140,7 @@ _080EDF56:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EDF5C: .4byte gUnknown_3005098
+_080EDF5C: .4byte gTasks+0x8
 _080EDF60: .4byte gUnknown_840BCBC
 _080EDF64: .4byte gUnknown_840BC08
 	thumb_func_end sub_80EDEEC
@@ -3184,7 +3184,7 @@ sub_80EDF94: @ 80EDF94
 	movs r1, 0x5
 	adds r2, r4, 0
 	bl SetWordTaskArg
-	ldr r0, _080EDFD4 @ =gUnknown_3005090
+	ldr r0, _080EDFD4 @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -3199,7 +3199,7 @@ sub_80EDF94: @ 80EDF94
 	bx r0
 	.align 2, 0
 _080EDFD0: .4byte sub_80EE024
-_080EDFD4: .4byte gUnknown_3005090
+_080EDFD4: .4byte gTasks
 	thumb_func_end sub_80EDF94
 
 	thumb_func_start sub_80EDFD8
@@ -3248,7 +3248,7 @@ sub_80EE024: @ 80EE024
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
-	ldr r1, _080EE048 @ =gUnknown_3005098
+	ldr r1, _080EE048 @ =gTasks+0x8
 	adds r5, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -3260,7 +3260,7 @@ sub_80EE024: @ 80EE024
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080EE048: .4byte gUnknown_3005098
+_080EE048: .4byte gTasks+0x8
 _080EE04C: .4byte _080EE050
 	.align 2, 0
 _080EE050:
@@ -3493,7 +3493,7 @@ sub_80EE200: @ 80EE200
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _080EE220 @ =gUnknown_3005098
+	ldr r1, _080EE220 @ =gTasks+0x8
 	adds r1, r0, r1
 	movs r2, 0
 	ldrsh r0, [r1, r2]
@@ -3503,7 +3503,7 @@ sub_80EE200: @ 80EE200
 	beq _080EE232
 	b _080EE28A
 	.align 2, 0
-_080EE220: .4byte gUnknown_3005098
+_080EE220: .4byte gTasks+0x8
 _080EE224:
 	movs r3, 0x80
 	lsls r3, 3

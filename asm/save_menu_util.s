@@ -105,13 +105,13 @@ _080F8076:
 	.align 2, 0
 _080F8094: .4byte gSaveBlock2Ptr
 _080F8098:
-	ldr r0, _080F80A4 @ =gUnknown_2036DFC
+	ldr r0, _080F80A4 @ =gMapHeader
 	ldrb r1, [r0, 0x14]
 	adds r0, r5, 0
 	bl sub_80C4DF8
 	b _080F80D8
 	.align 2, 0
-_080F80A4: .4byte gUnknown_2036DFC
+_080F80A4: .4byte gMapHeader
 _080F80A8:
 	movs r4, 0x82
 	lsls r4, 4

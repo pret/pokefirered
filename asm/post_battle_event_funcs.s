@@ -56,7 +56,7 @@ _080CA34A:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _080CA3B8 @ =gUnknown_2024284
+	ldr r0, _080CA3B8 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
@@ -101,7 +101,7 @@ _080CA39E:
 	.align 2, 0
 _080CA3B0: .4byte gUnknown_203AB44
 _080CA3B4: .4byte gSaveBlock2Ptr
-_080CA3B8: .4byte gUnknown_2024284
+_080CA3B8: .4byte gPlayerParty
 _080CA3BC: .4byte 0x0000083b
 _080CA3C0: .4byte CB2_DoHallOfFameScreen
 	thumb_func_end sub_80CA2E4

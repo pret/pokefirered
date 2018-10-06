@@ -167,7 +167,7 @@ gUnknown_2022AD8: @ 2022AD8
 gUnknown_2022AE8: @ 2022AE8
 	.space 0x64
 
-gUnknown_2022B4C: @ 2022B4C
+gBattleTypeFlags: @ 2022B4C
 	.space 0x4
 
 gUnknown_2022B50: @ 2022B50
@@ -206,7 +206,7 @@ gUnknown_20233C4: @ 20233C4
 gUnknown_20233C8: @ 20233C8
 	.space 0x7FC
 
-gUnknown_2023BC4: @ 2023BC4
+gActiveBattler: @ 2023BC4
 	.space 0x4
 
 gUnknown_2023BC8: @ 2023BC8
@@ -215,7 +215,7 @@ gUnknown_2023BC8: @ 2023BC8
 gUnknown_2023BCC: @ 2023BCC
 	.space 0x2
 
-gUnknown_2023BCE: @ 2023BCE
+gBattlerPartyIndexes: @ 2023BCE
 	.space 0x8
 
 gUnknown_2023BD6: @ 2023BD6
@@ -233,7 +233,7 @@ gUnknown_2023BE2: @ 2023BE2
 gUnknown_2023BE3: @ 2023BE3
 	.space 0x1
 
-gUnknown_2023BE4: @ 2023BE4
+gBattleMons: @ 2023BE4
 	.space 0xC
 
 gUnknown_2023BF0: @ 2023BF0
@@ -263,7 +263,7 @@ gUnknown_2023D48: @ 2023D48
 gUnknown_2023D49: @ 2023D49
 	.space 0x1
 
-gUnknown_2023D4A: @ 2023D4A
+gCurrentMove: @ 2023D4A
 	.space 0x2
 
 gUnknown_2023D4C: @ 2023D4C
@@ -272,7 +272,7 @@ gUnknown_2023D4C: @ 2023D4C
 gUnknown_2023D4E: @ 2023D4E
 	.space 0x2
 
-gUnknown_2023D50: @ 2023D50
+gBattleMoveDamage: @ 2023D50
 	.space 0x4
 
 gUnknown_2023D54: @ 2023D54
@@ -287,10 +287,10 @@ gUnknown_2023D68: @ 2023D68
 gUnknown_2023D6A: @ 2023D6A
 	.space 0x1
 
-gUnknown_2023D6B: @ 2023D6B
+sBattler_AI: @ 2023D6B
 	.space 0x1
 
-gUnknown_2023D6C: @ 2023D6C
+gBattlerTarget: @ 2023D6C
 	.space 0x1
 
 gUnknown_2023D6D: @ 2023D6D
@@ -302,10 +302,10 @@ gUnknown_2023D6E: @ 2023D6E
 gUnknown_2023D6F: @ 2023D6F
 	.space 0x1
 
-gUnknown_2023D70: @ 2023D70
+gAbsentBattlerFlags: @ 2023D70
 	.space 0x1
 
-gUnknown_2023D71: @ 2023D71
+gCritMultiplier: @ 2023D71
 	.space 0x1
 
 gUnknown_2023D72: @ 2023D72
@@ -323,7 +323,7 @@ gUnknown_2023D80: @ 2023D80
 gUnknown_2023D90: @ 2023D90
 	.space 0x8
 
-gUnknown_2023D98: @ 2023D98
+gLastUsedMove: @ 2023D98
 	.space 0x8
 
 gUnknown_2023DA0: @ 2023DA0
@@ -344,7 +344,7 @@ gUnknown_2023DC0: @ 2023DC0
 gUnknown_2023DC4: @ 2023DC4
 	.space 0x8
 
-gUnknown_2023DCC: @ 2023DCC
+gMoveResultFlags: @ 2023DCC
 	.space 0x4
 
 gUnknown_2023DD0: @ 2023DD0
@@ -359,16 +359,16 @@ gUnknown_2023DD8: @ 2023DD8
 gUnknown_2023DDC: @ 2023DDC
 	.space 0x2
 
-gUnknown_2023DDE: @ 2023DDE
+gSideAffecting: @ 2023DDE
 	.space 0x6
 
 gUnknown_2023DE4: @ 2023DE4
 	.space 0x18
 
-gUnknown_2023DFC: @ 2023DFC
+gStatuses3: @ 2023DFC
 	.space 0x10
 
-gUnknown_2023E0C: @ 2023E0C
+gDisableStructs: @ 2023E0C
 	.space 0x70
 
 gUnknown_2023E7C: @ 2023E7C
@@ -395,7 +395,7 @@ gUnknown_2023E8C: @ 2023E8C
 gUnknown_2023ECC: @ 2023ECC
 	.space 0x50
 
-gUnknown_2023F1C: @ 2023F1C
+gBattleWeather: @ 2023F1C
 	.space 0x4
 
 gUnknown_2023F20: @ 2023F20
@@ -407,7 +407,7 @@ gUnknown_2023F4C: @ 2023F4C
 gUnknown_2023F4E: @ 2023F4E
 	.space 0x2
 
-gUnknown_2023F50: @ 2023F50
+gDynamicBasePower: @ 2023F50
 	.space 0x2
 
 gUnknown_2023F52: @ 2023F52
@@ -419,13 +419,13 @@ gUnknown_2023F54: @ 2023F54
 gUnknown_2023F5C: @ 2023F5C
 	.space 0x68
 
-gUnknown_2023FC4: @ 2023FC4
+gBattleScripting: @ 2023FC4
 	.space 0x4
 
 gUnknown_2023FC8: @ 2023FC8
 	.space 0x20
 
-gUnknown_2023FE8: @ 2023FE8
+gBattleStruct: @ 2023FE8
 	.space 0x4
 
 gUnknown_2023FEC: @ 2023FEC
@@ -434,7 +434,7 @@ gUnknown_2023FEC: @ 2023FEC
 gUnknown_2023FF0: @ 2023FF0
 	.space 0x4
 
-gUnknown_2023FF4: @ 2023FF4
+gBattleResources: @ 2023FF4
 	.space 0x4
 
 gUnknown_2023FF8: @ 2023FF8
@@ -479,7 +479,7 @@ gUnknown_2024029: @ 2024029
 gUnknown_202402A: @ 202402A
 	.space 0x2
 
-gUnknown_202402C: @ 202402C
+gEnemyParty: @ 202402C
 	.space 0xC8
 
 gUnknown_20240F4: @ 20240F4
@@ -494,7 +494,7 @@ gUnknown_20241BC: @ 20241BC
 gUnknown_2024220: @ 2024220
 	.space 0x64
 
-gUnknown_2024284: @ 2024284
+gPlayerParty: @ 2024284
 	.space 0x64
 
 gUnknown_20242E8: @ 20242E8
@@ -611,7 +611,7 @@ gUnknown_2031DEC: @ 2031DEC
 gUnknown_2031DFC: @ 2031DFC
 	.space 0x5000
 
-gUnknown_2036DFC: @ 2036DFC
+gMapHeader: @ 2036DFC
 	.space 0x1C
 
 gUnknown_2036E18: @ 2036E18
@@ -647,12 +647,9 @@ gUnknown_203709A: @ 203709A
 gUnknown_203709C: @ 203709C
 	.space 0x4
 
-gUnknown_20370A0: @ 20370A0
-	.space 0x4
+	.include "src/script.o"
 
-gUnknown_20370A4: @ 20370A4
-	.space 0x4
-
+	.align 2
 gUnknown_20370A8: @ 20370A8
 	.space 0x4
 
@@ -818,12 +815,9 @@ gUnknown_2037AC8: @ 2037AC8
 gUnknown_2037ACC: @ 2037ACC
 	.space 0x400
 
-gUnknown_2037ECC: @ 2037ECC
-	.space 0x4
+	.include "src/sound.o"
 
-gUnknown_2037ED0: @ 2037ED0
-	.space 0x4
-
+	.align 2
 gUnknown_2037ED4: @ 2037ED4
 	.space 0x4
 
@@ -920,7 +914,7 @@ gUnknown_20386A8: @ 20386A8
 gUnknown_20386AC: @ 20386AC
 	.space 0x2
 
-gUnknown_20386AE: @ 20386AE
+gTrainerBattleOpponent_A: @ 20386AE
 	.space 0x2
 
 gUnknown_20386B0: @ 20386B0
@@ -1205,7 +1199,7 @@ gUnknown_20399F0: @ 20399F0
 gUnknown_20399FC: @ 20399FC
 	.space 0x4
 
-gUnknown_2039A00: @ 2039A00
+gAIScriptPtr: @ 2039A00
 	.space 0x4
 
 gUnknown_2039A04: @ 2039A04

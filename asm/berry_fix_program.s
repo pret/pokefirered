@@ -98,7 +98,7 @@ sub_815F74C: @ 815F74C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0815F7DC @ =gUnknown_3005090
+	ldr r2, _0815F7DC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -117,7 +117,7 @@ _0815F7CC: .4byte 0x85006000
 _0815F7D0: .4byte 0x85000100
 _0815F7D4: .4byte gUnknown_3005ECC
 _0815F7D8: .4byte sub_815F7F0
-_0815F7DC: .4byte gUnknown_3005090
+_0815F7DC: .4byte gTasks
 _0815F7E0: .4byte sub_815F7E4
 	thumb_func_end sub_815F74C
 
@@ -138,7 +138,7 @@ sub_815F7F0: @ 815F7F0
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
-	ldr r1, _0815F818 @ =gUnknown_3005098
+	ldr r1, _0815F818 @ =gTasks+0x8
 	adds r5, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -152,7 +152,7 @@ _0815F80C:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0815F818: .4byte gUnknown_3005098
+_0815F818: .4byte gTasks+0x8
 _0815F81C: .4byte _0815F820
 	.align 2, 0
 _0815F820:

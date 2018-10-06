@@ -251,7 +251,7 @@ _0812B376:
 	bl sub_812B1F0
 	b _0812B406
 _0812B388:
-	ldr r0, _0812B3B0 @ =gUnknown_2036DFC
+	ldr r0, _0812B3B0 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_8_or_9
 	lsls r0, 24
@@ -271,7 +271,7 @@ _0812B3A8:
 	bl sub_812B1F0
 	b _0812B406
 	.align 2, 0
-_0812B3B0: .4byte gUnknown_2036DFC
+_0812B3B0: .4byte gMapHeader
 _0812B3B4: .4byte gSaveBlock1Ptr
 _0812B3B8:
 	movs r0, 0xC1

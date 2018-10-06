@@ -82,7 +82,7 @@ sub_80695CC: @ 80695CC
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _0806963C @ =gUnknown_3005090
+	ldr r1, _0806963C @ =gTasks
 	adds r5, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
@@ -131,7 +131,7 @@ _08069634:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806963C: .4byte gUnknown_3005090
+_0806963C: .4byte gTasks
 _08069640: .4byte gUnknown_2036E38
 _08069644: .4byte gUnknown_3005074
 	thumb_func_end sub_80695CC
@@ -179,7 +179,7 @@ LockSelectedMapObject: @ 806966C
 	blt _080696AA
 	adds r0, r1, 0
 	bl FreezeMapObject
-	ldr r0, _080696BC @ =gUnknown_3005090
+	ldr r0, _080696BC @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -194,7 +194,7 @@ _080696AA:
 _080696B0: .4byte gUnknown_3005074
 _080696B4: .4byte sub_80695CC
 _080696B8: .4byte gUnknown_2036E38
-_080696BC: .4byte gUnknown_3005090
+_080696BC: .4byte gTasks
 	thumb_func_end LockSelectedMapObject
 
 	thumb_func_start sub_80696C0

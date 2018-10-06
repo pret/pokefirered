@@ -154,8 +154,8 @@ _080F4D30:
 	cmp r0, 0
 	bne _080F4D50
 	movs r0, 0x5
-	bl sub_8071BC4
-	ldr r0, _080F4D68 @ =gUnknown_3005090
+	bl PlayFanfareByFanfareNum
+	ldr r0, _080F4D68 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -175,7 +175,7 @@ _080F4D5A:
 	bx r0
 	.align 2, 0
 _080F4D64: .4byte gUnknown_2037AB8
-_080F4D68: .4byte gUnknown_3005090
+_080F4D68: .4byte gTasks
 _080F4D6C: .4byte sub_80F4D74
 _080F4D70: .4byte gUnknown_203AB48
 	thumb_func_end sub_80F4C68

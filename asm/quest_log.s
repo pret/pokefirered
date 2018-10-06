@@ -1580,7 +1580,7 @@ _08111492:
 	subs r0, r3
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _081114C0 @ =gUnknown_2024284
+	ldr r1, _081114C0 @ =gPlayerParty
 	adds r0, r1
 	str r3, [sp, 0x10]
 	bl ZeroMonData
@@ -1597,7 +1597,7 @@ _08111492:
 	b _0811150E
 	.align 2, 0
 _081114BC: .4byte 0x00004027
-_081114C0: .4byte gUnknown_2024284
+_081114C0: .4byte gPlayerParty
 _081114C4:
 	mov r8, r4
 	cmp r5, r0
@@ -1623,7 +1623,7 @@ _081114CE:
 _081114EE:
 	movs r0, 0x64
 	muls r0, r3
-	ldr r1, _08111574 @ =gUnknown_2024284
+	ldr r1, _08111574 @ =gPlayerParty
 	adds r0, r1
 	mov r1, r9
 	movs r2, 0x64
@@ -1688,7 +1688,7 @@ _08111554:
 	bls _08111520
 	b _081115D2
 	.align 2, 0
-_08111574: .4byte gUnknown_2024284
+_08111574: .4byte gPlayerParty
 _08111578:
 	cmp r5, r0
 	bcs _081115D2
@@ -1779,7 +1779,7 @@ sub_8111618: @ 8111618
 _0811161E:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, _08111648 @ =gUnknown_2024284
+	ldr r1, _08111648 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x5
 	bl GetMonData
@@ -1799,7 +1799,7 @@ _08111636:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08111648: .4byte gUnknown_2024284
+_08111648: .4byte gPlayerParty
 	thumb_func_end sub_8111618
 
 	thumb_func_start sub_811164C
@@ -2252,7 +2252,7 @@ _081119F2:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08111A28 @ =gUnknown_3005090
+	ldr r2, _08111A28 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2268,7 +2268,7 @@ _081119F2:
 	.align 2, 0
 _08111A20: .4byte gUnknown_3005E88
 _08111A24: .4byte sub_8111A34
-_08111A28: .4byte gUnknown_3005090
+_08111A28: .4byte gTasks
 _08111A2C:
 	movs r0, 0
 _08111A2E:
@@ -2286,7 +2286,7 @@ sub_8111A34: @ 8111A34
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08111A54 @ =gUnknown_3005098
+	ldr r1, _08111A54 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
@@ -2296,7 +2296,7 @@ sub_8111A34: @ 8111A34
 	beq _08111A90
 	b _08111AC0
 	.align 2, 0
-_08111A54: .4byte gUnknown_3005098
+_08111A54: .4byte gTasks+0x8
 _08111A58:
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -2999,7 +2999,7 @@ sub_8111F8C: @ 8111F8C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08111FC4 @ =gUnknown_3005090
+	ldr r0, _08111FC4 @ =gTasks
 	adds r4, r1, r0
 	bl ScriptContext2_IsEnabled
 	lsls r0, 24
@@ -3017,7 +3017,7 @@ _08111FBC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08111FC4: .4byte gUnknown_3005090
+_08111FC4: .4byte gTasks
 _08111FC8: .4byte sub_8111FCC
 	thumb_func_end sub_8111F8C
 
@@ -3029,7 +3029,7 @@ sub_8111FCC: @ 8111FCC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08112024 @ =gUnknown_3005090
+	ldr r0, _08112024 @ =gTasks
 	adds r5, r1, r0
 	ldr r0, _08112028 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -3046,7 +3046,7 @@ sub_8111FCC: @ 8111FCC
 	cmp r0, 0x40
 	beq _0811200E
 	ldr r0, _08112030 @ =gStringVar1
-	ldr r1, _08112034 @ =gUnknown_2036DFC
+	ldr r1, _08112034 @ =gMapHeader
 	ldrb r1, [r1, 0x14]
 	bl sub_80C4DF8
 	ldr r0, _08112038 @ =gStringVar4
@@ -3065,11 +3065,11 @@ _0811201E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08112024: .4byte gUnknown_3005090
+_08112024: .4byte gTasks
 _08112028: .4byte gUnknown_2037AB8
 _0811202C: .4byte gUnknown_203AE94
 _08112030: .4byte gStringVar1
-_08112034: .4byte gUnknown_2036DFC
+_08112034: .4byte gMapHeader
 _08112038: .4byte gStringVar4
 _0811203C: .4byte gUnknown_841B073
 _08112040: .4byte sub_8112044
@@ -3083,7 +3083,7 @@ sub_8112044: @ 8112044
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0811208C @ =gUnknown_3005090
+	ldr r0, _0811208C @ =gTasks
 	adds r4, r1, r0
 	ldr r0, _08112090 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -3113,7 +3113,7 @@ _08112076:
 	strb r1, [r0]
 	b _081120A4
 	.align 2, 0
-_0811208C: .4byte gUnknown_3005090
+_0811208C: .4byte gTasks
 _08112090: .4byte gMain
 _08112094: .4byte gUnknown_203AE94
 _08112098: .4byte sub_81120AC
@@ -3136,7 +3136,7 @@ sub_81120AC: @ 81120AC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _081120D0 @ =gUnknown_3005098
+	ldr r1, _081120D0 @ =gTasks+0x8
 	adds r6, r0, r1
 	movs r0, 0
 	ldrsh r1, [r6, r0]
@@ -3148,7 +3148,7 @@ sub_81120AC: @ 81120AC
 	beq _081120DA
 	b _08112164
 	.align 2, 0
-_081120D0: .4byte gUnknown_3005098
+_081120D0: .4byte gTasks+0x8
 _081120D4:
 	cmp r1, 0x2
 	beq _0811214C
@@ -3277,7 +3277,7 @@ sub_81121D8: @ 81121D8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0811227C @ =gUnknown_3005098
+	ldr r0, _0811227C @ =gTasks+0x8
 	adds r7, r1, r0
 	ldrh r1, [r7, 0x2]
 	movs r2, 0x2
@@ -3347,7 +3347,7 @@ sub_81121D8: @ 81121D8
 	movs r0, 0
 	b _08112292
 	.align 2, 0
-_0811227C: .4byte gUnknown_3005098
+_0811227C: .4byte gTasks+0x8
 _08112280: .4byte gUnknown_20371FA
 _08112284: .4byte gUnknown_20375FA
 _08112288: .4byte gUnknown_203ADFE
@@ -6179,7 +6179,7 @@ sub_81137E4: @ 81137E4
 	lsrs r0, 16
 	cmp r0, 0x22
 	bne _08113814
-	ldr r2, _08113810 @ =gUnknown_823EAC8
+	ldr r2, _08113810 @ =gTrainers
 	ldrh r1, [r1]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -6197,7 +6197,7 @@ sub_81137E4: @ 81137E4
 	movs r0, 0x1
 	b _08113816
 	.align 2, 0
-_08113810: .4byte gUnknown_823EAC8
+_08113810: .4byte gTrainers
 _08113814:
 	movs r0, 0
 _08113816:
@@ -9006,7 +9006,7 @@ sub_8114D68: @ 8114D68
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08114DD8 @ =gUnknown_823EACC
+	ldr r0, _08114DD8 @ =gTrainers+0x4
 	adds r1, r0
 	movs r0, 0x1
 	bl UnkTextUtil_SetPtrI
@@ -9035,7 +9035,7 @@ sub_8114D68: @ 8114D68
 	bx r1
 	.align 2, 0
 _08114DD4: .4byte gStringVar1
-_08114DD8: .4byte gUnknown_823EACC
+_08114DD8: .4byte gTrainers+0x4
 _08114DDC: .4byte gUnknown_8456ACC
 _08114DE0: .4byte gStringVar4
 _08114DE4: .4byte gUnknown_841AF0C
@@ -9325,7 +9325,7 @@ sub_811500C: @ 811500C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08115068 @ =gUnknown_823EACC
+	ldr r0, _08115068 @ =gTrainers+0x4
 	adds r1, r0
 	movs r0, 0
 	bl UnkTextUtil_SetPtrI
@@ -9353,7 +9353,7 @@ sub_811500C: @ 811500C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08115068: .4byte gUnknown_823EACC
+_08115068: .4byte gTrainers+0x4
 _0811506C: .4byte gUnknown_8456ACC
 _08115070: .4byte gStringVar4
 _08115074: .4byte gUnknown_841AF3E
@@ -9544,7 +9544,7 @@ sub_81151DC: @ 81151DC
 	movs r0, 0
 	adds r1, r4, 0
 	bl UnkTextUtil_SetPtrI
-	ldr r3, _08115230 @ =gUnknown_823EAC8
+	ldr r3, _08115230 @ =gTrainers
 	ldrh r1, [r5, 0x4]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -9566,7 +9566,7 @@ _0811521A:
 	b _0811523E
 	.align 2, 0
 _0811522C: .4byte gStringVar1
-_08115230: .4byte gUnknown_823EAC8
+_08115230: .4byte gTrainers
 _08115234:
 	adds r1, r3, 0x4
 	adds r1, r2, r1
@@ -10263,7 +10263,7 @@ sub_8115798: @ 8115798
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _081157C6
-	ldr r0, _081157D8 @ =gUnknown_2036DFC
+	ldr r0, _081157D8 @ =gMapHeader
 	ldrb r1, [r0, 0x14]
 	mov r0, sp
 	strh r1, [r0]
@@ -10280,7 +10280,7 @@ _081157C6:
 	.align 2, 0
 _081157D0: .4byte gUnknown_203ADFA
 _081157D4: .4byte gUnknown_203B049
-_081157D8: .4byte gUnknown_2036DFC
+_081157D8: .4byte gMapHeader
 	thumb_func_end sub_8115798
 
 	thumb_func_start sub_81157DC

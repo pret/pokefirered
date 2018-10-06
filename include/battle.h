@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_H
 
 // should they be included here or included individually by every file?
+#include "constants/battle.h"
 #include "battle_util.h"
 #include "battle_script_commands.h"
 #include "battle_2.h"
@@ -25,9 +26,6 @@
 
 #define SIDE_PLAYER     0x0
 #define SIDE_OPPONENT   0x1
-
-#define BIT_SIDE        0x1
-#define BIT_MON         0x2
 
 #define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
 #define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
@@ -72,9 +70,6 @@
 #define STEVEN_PARTNER_ID           0xC03
 #define SECRET_BASE_OPPONENT        0x400
 
-#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
-#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000)
-
 #define BATTLE_WON                  0x1
 #define BATTLE_LOST                 0x2
 #define BATTLE_DREW                 0x3
@@ -99,76 +94,6 @@
 
 #define STATUS_PSN_ANY          ((STATUS_POISON | STATUS_TOXIC_POISON))
 #define STATUS_ANY              ((STATUS_SLEEP | STATUS_POISON | STATUS_BURN | STATUS_FREEZE | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
-
-#define STATUS2_CONFUSION           0x00000007
-#define STATUS2_FLINCHED            0x00000008
-#define STATUS2_UPROAR              0x00000070
-#define STATUS2_BIDE                0x00000300  // two bits 0x100, 0x200
-#define STATUS2_LOCK_CONFUSE        0x00000C00
-#define STATUS2_MULTIPLETURNS       0x00001000
-#define STATUS2_WRAPPED             0x0000E000
-#define STATUS2_INFATUATION         0x000F0000  // 4 bits, one for every bank
-#define STATUS2_INFATUATED_WITH(bank)((gBitTable[bank] << 16))
-#define STATUS2_FOCUS_ENERGY        0x00100000
-#define STATUS2_TRANSFORMED         0x00200000
-#define STATUS2_RECHARGE            0x00400000
-#define STATUS2_RAGE                0x00800000
-#define STATUS2_SUBSTITUTE          0x01000000
-#define STATUS2_DESTINY_BOND        0x02000000
-#define STATUS2_ESCAPE_PREVENTION   0x04000000
-#define STATUS2_NIGHTMARE           0x08000000
-#define STATUS2_CURSED              0x10000000
-#define STATUS2_FORESIGHT           0x20000000
-#define STATUS2_DEFENSE_CURL        0x40000000
-#define STATUS2_TORMENT             0x80000000
-
-#define STATUS3_LEECHSEED_BANK          0x3
-#define STATUS3_LEECHSEED               0x4
-#define STATUS3_ALWAYS_HITS             0x18    // two bits
-#define STATUS3_PERISH_SONG             0x20
-#define STATUS3_ON_AIR                  0x40
-#define STATUS3_UNDERGROUND             0x80
-#define STATUS3_MINIMIZED               0x100
-#define STATUS3_ROOTED                  0x400
-#define STATUS3_CHARGED_UP              0x200
-#define STATUS3_YAWN                    0x1800  // two bits
-#define STATUS3_IMPRISONED_OTHERS       0x2000
-#define STATUS3_GRUDGE                  0x4000
-#define STATUS3_CANT_SCORE_A_CRIT       0x8000
-#define STATUS3_MUDSPORT                0x10000
-#define STATUS3_WATERSPORT              0x20000
-#define STATUS3_UNDERWATER              0x40000
-#define STATUS3_INTIMIDATE_POKES        0x80000
-#define STATUS3_TRACE                   0x100000
-
-#define STATUS3_SEMI_INVULNERABLE       ((STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER))
-
-#define HITMARKER_x10                   0x00000010
-#define HITMARKER_x20                   0x00000020
-#define HITMARKER_DESTINYBOND           0x00000040
-#define HITMARKER_NO_ANIMATIONS         0x00000080
-#define HITMARKER_IGNORE_SUBSTITUTE     0x00000100
-#define HITMARKER_NO_ATTACKSTRING       0x00000200
-#define HITMARKER_ATTACKSTRING_PRINTED  0x00000400
-#define HITMARKER_NO_PPDEDUCT           0x00000800
-#define HITMARKER_PURSUIT_TRAP          0x00001000
-#define HITMARKER_IGNORE_SAFEGUARD      0x00002000
-#define HITMARKER_SYNCHRONISE_EFFECT    0x00004000
-#define HITMARKER_RUN                   0x00008000
-#define HITMARKER_IGNORE_ON_AIR         0x00010000
-#define HITMARKER_IGNORE_UNDERGROUND    0x00020000
-#define HITMARKER_IGNORE_UNDERWATER     0x00040000
-#define HITMARKER_UNABLE_TO_USE_MOVE    0x00080000
-#define HITMARKER_x100000               0x00100000
-#define HITMARKER_x200000               0x00200000
-#define HITMARKER_x400000               0x00400000
-#define HITMARKER_x800000               0x00800000
-#define HITMARKER_GRUDGE                0x01000000
-#define HITMARKER_OBEYS                 0x02000000
-#define HITMARKER_x4000000              0x04000000
-#define HITMARKER_x8000000              0x08000000
-#define HITMARKER_FAINTED(bank)         ((gBitTable[bank] << 0x1C))
-#define HITMARKER_UNK(bank)             ((0x10000000 << bank))
 
 #define SIDE_STATUS_REFLECT          (1 << 0)
 #define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
@@ -208,20 +133,6 @@
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
-
-#define WEATHER_RAIN_TEMPORARY      (1 << 0)
-#define WEATHER_RAIN_DOWNPOUR       (1 << 1)
-#define WEATHER_RAIN_PERMANENT      (1 << 2)
-#define WEATHER_RAIN_ANY ((WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT))
-#define WEATHER_SANDSTORM_TEMPORARY (1 << 3)
-#define WEATHER_SANDSTORM_PERMANENT (1 << 4)
-#define WEATHER_SANDSTORM_ANY ((WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT))
-#define WEATHER_SUN_TEMPORARY       (1 << 5)
-#define WEATHER_SUN_PERMANENT       (1 << 6)
-#define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
-#define WEATHER_HAIL                (1 << 7)
-#define WEATHER_HAIL_ANY ((WEATHER_HAIL))
-#define WEATHER_ANY ((WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY))
 
 #define BATTLE_TERRAIN_GRASS        0
 #define BATTLE_TERRAIN_LONG_GRASS   1
@@ -507,19 +418,39 @@ struct AI_ThinkingStruct
     u8 simulatedRNG[4];
 };
 
-struct UsedMoves
-{
-    u16 moves[BATTLE_BANKS_COUNT];
-    u16 unknown[BATTLE_BANKS_COUNT];
-};
+extern u8 gActiveBattler;
+extern u8 gBattlerTarget;
+extern u8 gAbsentBattlerFlags;
+
+// TODO: move these to constants/battle.h
+#define MAX_BATTLERS_COUNT  4
+#define BIT_FLANK           2
+
+// script's table id to bit
+#define AI_SCRIPT_CHECK_BAD_MOVE (1 << 0)
+#define AI_SCRIPT_TRY_TO_FAINT (1 << 1)
+#define AI_SCRIPT_CHECK_VIABILITY (1 << 2)
+#define AI_SCRIPT_SETUP_FIRST_TURN (1 << 3)
+#define AI_SCRIPT_RISKY (1 << 4)
+#define AI_SCRIPT_PREFER_STRONGEST_MOVE (1 << 5)
+#define AI_SCRIPT_PREFER_BATON_PASS (1 << 6)
+#define AI_SCRIPT_DOUBLE_BATTLE (1 << 7)
+#define AI_SCRIPT_HP_AWARE (1 << 8)
+#define AI_SCRIPT_UNKNOWN (1 << 9)
+// 10 - 28 are not used
+#define AI_SCRIPT_ROAMING (1 << 29)
+#define AI_SCRIPT_SAFARI (1 << 30)
+#define AI_SCRIPT_FIRST_BATTLE (1 << 31)
+
+extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 
 struct BattleHistory
 {
-    struct UsedMoves usedMoves[BATTLE_BANKS_COUNT];
-    u8 abilities[BATTLE_BANKS_COUNT];
-    u8 itemEffects[BATTLE_BANKS_COUNT];
-    u16 trainerItems[BATTLE_BANKS_COUNT];
-    u8 itemsNo;
+    /*0x00*/ u16 usedMoves[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
+    /*0x20*/ u8 abilities[MAX_BATTLERS_COUNT / 2];
+    /*0x22*/ u8 itemEffects[MAX_BATTLERS_COUNT / 2];
+    /*0x24*/ u16 trainerItems[MAX_BATTLERS_COUNT];
+    /*0x2C*/ u8 itemsNo;
 };
 
 struct BattleScriptsStack
@@ -631,10 +562,10 @@ struct BattleStruct
     u8 runTries;
     u8 caughtMonNick[11];
     u8 field_78;
-    u8 field_79;
-    u8 field_7A;
-    u8 field_7B;
-    u8 field_7C;
+    u8 safariGoNearCounter;
+    u8 safariPkblThrowCounter;
+    u8 safariEscapeFactor;
+    u8 safariCatchFactor;
     u8 field_7D;
     u8 field_7E;
     u8 formToChangeInto;
@@ -834,6 +765,32 @@ extern struct BattleStruct* gBattleStruct;
 #define SET_STAT_BUFF_VALUE(n)(((s8)(((s8)(n) << 4)) & 0xF0))
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + (stage << 4) + (goesDown << 7))
+
+// used in many battle files, it seems as though Hisashi Sogabe wrote
+// some sort of macro to replace the use of actually calling memset.
+// Perhaps it was thought calling memset was much slower?
+
+// The compiler wont allow us to locally declare ptr in this macro; some
+// functions that invoke this macro will not match without this egregeous
+// assumption about the variable names, so in order to avoid this assumption,
+// we opt to pass the variables themselves, even though it is likely that
+// Sogabe assumed the variables were named src and dest. Trust me: I tried to
+// avoid assuming variable names, but the ROM just will not match without the
+// assumptions. Therefore, these macros are bad practice, but I'm putting them
+// here anyway.
+#define MEMSET_ALT(data, c, size, var, dest)    \
+{    \
+    dest = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        dest[var] = c;    \
+}    \
+
+#define MEMCPY_ALT(data, dest, size, var, src)    \
+{    \
+    src = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        dest[var] = src[var];    \
+}    \
 
 struct BattleScripting
 {

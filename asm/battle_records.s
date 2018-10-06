@@ -195,7 +195,7 @@ sub_80CD3B8: @ 80CD3B8
 	ands r0, r1
 	cmp r0, 0
 	bne _080CD3D8
-	ldr r0, _080CD3E0 @ =gUnknown_3005090
+	ldr r0, _080CD3E0 @ =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -207,7 +207,7 @@ _080CD3D8:
 	bx r0
 	.align 2, 0
 _080CD3DC: .4byte gUnknown_2037AB8
-_080CD3E0: .4byte gUnknown_3005090
+_080CD3E0: .4byte gTasks
 _080CD3E4: .4byte sub_80CD3E8
 	thumb_func_end sub_80CD3B8
 
@@ -219,7 +219,7 @@ sub_80CD3E8: @ 80CD3E8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080CD41C @ =gUnknown_3005090
+	ldr r0, _080CD41C @ =gTasks
 	adds r4, r1, r0
 	ldr r0, _080CD420 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -241,7 +241,7 @@ _080CD416:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CD41C: .4byte gUnknown_3005090
+_080CD41C: .4byte gTasks
 _080CD420: .4byte gMain
 _080CD424: .4byte sub_80CD428
 	thumb_func_end sub_80CD3E8
@@ -260,7 +260,7 @@ sub_80CD428: @ 80CD428
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _080CD458 @ =gUnknown_3005090
+	ldr r1, _080CD458 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -272,7 +272,7 @@ sub_80CD428: @ 80CD428
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CD458: .4byte gUnknown_3005090
+_080CD458: .4byte gTasks
 _080CD45C: .4byte sub_80CD460
 	thumb_func_end sub_80CD428
 

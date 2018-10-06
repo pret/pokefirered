@@ -69,7 +69,7 @@ _080F515C:
 	.align 2, 0
 _080F5168: .4byte gUnknown_3005430
 _080F516C:
-	ldr r0, _080F5184 @ =gMPlay_BGM
+	ldr r0, _080F5184 @ =gMPlayInfo_BGM
 	ldr r1, _080F5188 @ =0x0000ffff
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
@@ -79,7 +79,7 @@ _080F516C:
 	strb r0, [r1]
 	b _080F52D6
 	.align 2, 0
-_080F5184: .4byte gMPlay_BGM
+_080F5184: .4byte gMPlayInfo_BGM
 _080F5188: .4byte 0x0000ffff
 _080F518C: .4byte gUnknown_203AB50
 _080F5190:
@@ -206,7 +206,7 @@ _080F5298:
 	.align 2, 0
 _080F52B0: .4byte gUnknown_203AB50
 _080F52B4:
-	ldr r0, _080F52DC @ =gMPlay_BGM
+	ldr r0, _080F52DC @ =gMPlayInfo_BGM
 	ldr r1, _080F52E0 @ =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -225,7 +225,7 @@ _080F52D8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F52DC: .4byte gMPlay_BGM
+_080F52DC: .4byte gMPlayInfo_BGM
 _080F52E0: .4byte 0x0000ffff
 _080F52E4: .4byte gUnknown_3005430
 _080F52E8: .4byte gUnknown_203AB50

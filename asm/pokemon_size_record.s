@@ -223,7 +223,7 @@ _080A0848:
 	ldrh r1, [r1]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, _080A0870 @ =gUnknown_2024284
+	ldr r0, _080A0870 @ =gPlayerParty
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x2D
@@ -239,7 +239,7 @@ _080A086A:
 	movs r0, 0x1
 	b _080A08C4
 	.align 2, 0
-_080A0870: .4byte gUnknown_2024284
+_080A0870: .4byte gPlayerParty
 _080A0874:
 	mov r4, sp
 	adds r0, r5, 0
@@ -437,7 +437,7 @@ _080A09E6:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _080A0A40 @ =gUnknown_2024284
+	ldr r0, _080A0A40 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -475,7 +475,7 @@ _080A0A28:
 _080A0A34: .4byte gUnknown_83E27AC
 _080A0A38: .4byte gSaveBlock1Ptr
 _080A0A3C: .4byte 0x0000309c
-_080A0A40: .4byte gUnknown_2024284
+_080A0A40: .4byte gPlayerParty
 _080A0A44: .4byte 0x0000083b
 	thumb_func_end GiveGiftRibbonToParty
 

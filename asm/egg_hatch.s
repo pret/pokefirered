@@ -185,9 +185,9 @@ AddHatchedMonToParty: @ 8046D60
 	movs r1, 0x64
 	adds r5, r0, 0
 	muls r5, r1
-	ldr r0, _08046E14 @ =gUnknown_2024284
+	ldr r0, _08046E14 @ =gPlayerParty
 	adds r5, r0
-	ldr r1, _08046E18 @ =gUnknown_202402C
+	ldr r1, _08046E18 @ =gEnemyParty
 	adds r0, r5, 0
 	bl sub_8046BFC
 	adds r0, r5, 0
@@ -250,8 +250,8 @@ AddHatchedMonToParty: @ 8046D60
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046E14: .4byte gUnknown_2024284
-_08046E18: .4byte gUnknown_202402C
+_08046E14: .4byte gPlayerParty
+_08046E18: .4byte gEnemyParty
 _08046E1C: .4byte gStringVar1
 	thumb_func_end AddHatchedMonToParty
 
@@ -366,7 +366,7 @@ sub_8046ED0: @ 8046ED0
 	bne _08046EFE
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, _08046F18 @ =gUnknown_2024284
+	ldr r0, _08046F18 @ =gPlayerParty
 	adds r5, r1, r0
 	movs r4, 0x1
 _08046EFE:
@@ -375,7 +375,7 @@ _08046EFE:
 	movs r0, 0x64
 	adds r1, r2, 0
 	muls r1, r0
-	ldr r0, _08046F18 @ =gUnknown_2024284
+	ldr r0, _08046F18 @ =gPlayerParty
 	adds r5, r1, r0
 	movs r4, 0x3
 _08046F0E:
@@ -385,7 +385,7 @@ _08046F0E:
 	beq _08046F6C
 	b _08046FA6
 	.align 2, 0
-_08046F18: .4byte gUnknown_2024284
+_08046F18: .4byte gPlayerParty
 _08046F1C:
 	adds r0, r5, 0
 	movs r1, 0xB
@@ -774,7 +774,7 @@ EggHatchSetMonNickname: @ 80472A0
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080472D4 @ =gUnknown_2024284
+	ldr r1, _080472D4 @ =gPlayerParty
 	adds r0, r1
 	ldr r2, _080472D8 @ =gStringVar3
 	movs r1, 0x2
@@ -790,7 +790,7 @@ EggHatchSetMonNickname: @ 80472A0
 	bx r0
 	.align 2, 0
 _080472D0: .4byte gUnknown_20370C0
-_080472D4: .4byte gUnknown_2024284
+_080472D4: .4byte gPlayerParty
 _080472D8: .4byte gStringVar3
 _080472DC: .4byte gUnknown_3000E74
 _080472E0: .4byte c2_exit_to_overworld_2_switch
@@ -801,7 +801,7 @@ sub_80472E4: @ 80472E4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _08047330 @ =gUnknown_3005090
+	ldr r1, _08047330 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -836,7 +836,7 @@ _08047324:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047330: .4byte gUnknown_3005090
+_08047330: .4byte gTasks
 _08047334: .4byte 0x00000107
 	thumb_func_end sub_80472E4
 
@@ -997,7 +997,7 @@ _08047482:
 	ldrb r1, [r0, 0x4]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080474D4 @ =gUnknown_2024284
+	ldr r1, _080474D4 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _080474D8 @ =gStringVar1
 	bl GetMonNick
@@ -1028,7 +1028,7 @@ _08047482:
 	bl CopyWindowToVram
 	b _08047684
 	.align 2, 0
-_080474D4: .4byte gUnknown_2024284
+_080474D4: .4byte gPlayerParty
 _080474D8: .4byte gStringVar1
 _080474DC: .4byte gStringVar4
 _080474E0: .4byte gUnknown_841B6FD
@@ -1054,7 +1054,7 @@ _08047504:
 	ldrb r1, [r0, 0x4]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _08047538 @ =gUnknown_2024284
+	ldr r1, _08047538 @ =gPlayerParty
 	adds r0, r1
 	ldr r1, _0804753C @ =gStringVar1
 	bl GetMonNick
@@ -1073,7 +1073,7 @@ _08047504:
 	ldr r1, [r5]
 	b _08047648
 	.align 2, 0
-_08047538: .4byte gUnknown_2024284
+_08047538: .4byte gPlayerParty
 _0804753C: .4byte gStringVar1
 _08047540: .4byte gStringVar4
 _08047544: .4byte gUnknown_841B716
@@ -1134,7 +1134,7 @@ _080475A8:
 	mov r1, r8
 	muls r1, r0
 	adds r0, r1, 0
-	ldr r6, _08047628 @ =gUnknown_2024284
+	ldr r6, _08047628 @ =gPlayerParty
 	adds r0, r6
 	ldr r1, _0804762C @ =gStringVar3
 	mov r10, r1
@@ -1183,7 +1183,7 @@ _080475A8:
 	b _08047684
 	.align 2, 0
 _08047624: .4byte gUnknown_3000E74
-_08047628: .4byte gUnknown_2024284
+_08047628: .4byte gPlayerParty
 _0804762C: .4byte gStringVar3
 _08047630: .4byte EggHatchSetMonNickname
 _08047634:
@@ -1366,7 +1366,7 @@ SpriteCB_Egg_2: @ 804776C
 	ldrb r1, [r0, 0x4]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080477D8 @ =gUnknown_2024284
+	ldr r1, _080477D8 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	bl GetMonData
@@ -1393,7 +1393,7 @@ SpriteCB_Egg_2: @ 804776C
 	.align 2, 0
 _080477D0: .4byte SpriteCB_Egg_3
 _080477D4: .4byte gUnknown_3000E74
-_080477D8: .4byte gUnknown_2024284
+_080477D8: .4byte gPlayerParty
 _080477DC: .4byte gSprites
 _080477E0: .4byte gUnknown_82349CC
 _080477E4:

@@ -78,7 +78,7 @@ _080DA878: .4byte 0x081dbd34
 RunMysteryEventScriptCommand: @ 80DA87C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8069804
+	bl RunScriptCommand
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DA894

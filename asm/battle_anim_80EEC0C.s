@@ -178,7 +178,7 @@ sub_80EEC0C: @ 80EEC0C
 	negs r0, r0
 	subs r0, 0x20
 	strh r0, [r1]
-	ldr r1, _080EEDEC @ =gUnknown_3005090
+	ldr r1, _080EEDEC @ =gTasks
 	ldr r2, [sp, 0x10]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -217,7 +217,7 @@ _080EEDDC: .4byte gUnknown_8D2EC24
 _080EEDE0: .4byte gUnknown_8D2DF78
 _080EEDE4: .4byte gUnknown_2022978
 _080EEDE8: .4byte gUnknown_202297A
-_080EEDEC: .4byte gUnknown_3005090
+_080EEDEC: .4byte gTasks
 _080EEDF0: .4byte sub_80EEDF4
 	thumb_func_end sub_80EEC0C
 
@@ -231,7 +231,7 @@ sub_80EEDF4: @ 80EEDF4
 	ldr r0, _080EEE3C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
 	mov r8, r0
-	ldr r1, _080EEE40 @ =gUnknown_3005090
+	ldr r1, _080EEE40 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -261,7 +261,7 @@ sub_80EEDF4: @ 80EEDF4
 	b _080EEFA8
 	.align 2, 0
 _080EEE3C: .4byte gUnknown_2037F1A
-_080EEE40: .4byte gUnknown_3005090
+_080EEE40: .4byte gTasks
 _080EEE44: .4byte gUnknown_202297A
 _080EEE48:
 	cmp r0, 0x2
@@ -680,7 +680,7 @@ _080EF19C: .4byte gUnknown_2037F1A
 sub_80EF1A0: @ 80EF1A0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080EF1C0 @ =gUnknown_3005090
+	ldr r2, _080EF1C0 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -694,7 +694,7 @@ sub_80EF1A0: @ 80EF1A0
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080EF1C0: .4byte gUnknown_3005090
+_080EF1C0: .4byte gTasks
 _080EF1C4: .4byte gUnknown_2037F02
 _080EF1C8: .4byte sub_80EF1CC
 	thumb_func_end sub_80EF1A0
@@ -704,7 +704,7 @@ sub_80EF1CC: @ 80EF1CC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080EF218 @ =gUnknown_3005090
+	ldr r1, _080EF218 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -740,7 +740,7 @@ _080EF20A:
 	beq _080EF25C
 	b _080EF28C
 	.align 2, 0
-_080EF218: .4byte gUnknown_3005090
+_080EF218: .4byte gTasks
 _080EF21C: .4byte 0x0000d709
 _080EF220:
 	ldrh r0, [r4, 0xC]
@@ -814,7 +814,7 @@ sub_80EF298: @ 80EF298
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r5, [r0]
-	ldr r1, _080EF2CC @ =gUnknown_3005090
+	ldr r1, _080EF2CC @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -831,7 +831,7 @@ sub_80EF298: @ 80EF298
 	.align 2, 0
 _080EF2C4: .4byte gUnknown_2023D44
 _080EF2C8: .4byte gUnknown_2037F1A
-_080EF2CC: .4byte gUnknown_3005090
+_080EF2CC: .4byte gTasks
 _080EF2D0:
 	cmp r0, 0x2
 	beq _080EF318
@@ -910,29 +910,29 @@ sub_80EF344: @ 80EF344
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EF38C
-	ldr r1, _080EF384 @ =gUnknown_2023BCE
+	ldr r1, _080EF384 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080EF388 @ =gUnknown_2024284
+	ldr r1, _080EF388 @ =gPlayerParty
 	b _080EF39C
 	.align 2, 0
 _080EF37C: .4byte gUnknown_2023D44
 _080EF380: .4byte gUnknown_2037F1A
-_080EF384: .4byte gUnknown_2023BCE
-_080EF388: .4byte gUnknown_2024284
+_080EF384: .4byte gBattlerPartyIndexes
+_080EF388: .4byte gPlayerParty
 _080EF38C:
-	ldr r1, _080EF3CC @ =gUnknown_2023BCE
+	ldr r1, _080EF3CC @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080EF3D0 @ =gUnknown_202402C
+	ldr r1, _080EF3D0 @ =gEnemyParty
 _080EF39C:
 	adds r0, r1
 	movs r1, 0x26
@@ -943,7 +943,7 @@ _080EF39C:
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r2, _080EF3D4 @ =gUnknown_3005090
+	ldr r2, _080EF3D4 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -956,9 +956,9 @@ _080EF39C:
 	beq _080EF458
 	b _080EF482
 	.align 2, 0
-_080EF3CC: .4byte gUnknown_2023BCE
-_080EF3D0: .4byte gUnknown_202402C
-_080EF3D4: .4byte gUnknown_3005090
+_080EF3CC: .4byte gBattlerPartyIndexes
+_080EF3D0: .4byte gEnemyParty
+_080EF3D4: .4byte gTasks
 _080EF3D8:
 	ldr r5, _080EF450 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
@@ -1280,7 +1280,7 @@ sub_80EF5AC: @ 80EF5AC
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3, 0x9]
-	ldr r1, _080EF690 @ =gUnknown_3005090
+	ldr r1, _080EF690 @ =gTasks
 	mov r2, r10
 	lsls r0, r2, 2
 	add r0, r10
@@ -1304,7 +1304,7 @@ _080EF680: .4byte gUnknown_2037F1B
 _080EF684: .4byte sub_80EF8C0
 _080EF688: .4byte gUnknown_2024018
 _080EF68C: .4byte gUnknown_2023D44
-_080EF690: .4byte gUnknown_3005090
+_080EF690: .4byte gTasks
 _080EF694: .4byte sub_80EF698
 	thumb_func_end sub_80EF5AC
 
@@ -1313,7 +1313,7 @@ sub_80EF698: @ 80EF698
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r1, _080EF6C8 @ =gUnknown_3005090
+	ldr r1, _080EF6C8 @ =gTasks
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r0, 3
@@ -1334,7 +1334,7 @@ _080EF6C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EF6C8: .4byte gUnknown_3005090
+_080EF6C8: .4byte gTasks
 _080EF6CC: .4byte gSprites
 _080EF6D0: .4byte 0x0000ffff
 	thumb_func_end sub_80EF698
@@ -1347,7 +1347,7 @@ sub_80EF6D4: @ 80EF6D4
 	push {r6,r7}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, _080EF6F4 @ =gUnknown_2022B4C
+	ldr r0, _080EF6F4 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 2
@@ -1358,7 +1358,7 @@ sub_80EF6D4: @ 80EF6D4
 	movs r6, 0xB
 	b _080EF708
 	.align 2, 0
-_080EF6F4: .4byte gUnknown_2022B4C
+_080EF6F4: .4byte gBattleTypeFlags
 _080EF6F8:
 	movs r5, 0x17
 	movs r6, 0xB
@@ -1441,7 +1441,7 @@ _080EF708:
 	add r0, r9
 	ldr r1, _080EF7E0 @ =sub_8012354
 	str r1, [r0]
-	ldr r1, _080EF7E4 @ =gUnknown_3005090
+	ldr r1, _080EF7E4 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -1464,7 +1464,7 @@ _080EF7D4: .4byte gUnknown_2037F1B
 _080EF7D8: .4byte SpriteCallbackDummy
 _080EF7DC: .4byte gUnknown_2023D44
 _080EF7E0: .4byte sub_8012354
-_080EF7E4: .4byte gUnknown_3005090
+_080EF7E4: .4byte gTasks
 _080EF7E8: .4byte sub_80EF7EC
 	thumb_func_end sub_80EF6D4
 
@@ -1492,7 +1492,7 @@ sub_80EF7EC: @ 80EF7EC
 	movs r0, 0x36
 	movs r1, 0
 	bl PlaySE12WithPanning
-	ldr r0, _080EF854 @ =gUnknown_3005090
+	ldr r0, _080EF854 @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -1519,7 +1519,7 @@ _080EF846:
 	.align 2, 0
 _080EF84C: .4byte gSprites
 _080EF850: .4byte gUnknown_2023D44
-_080EF854: .4byte gUnknown_3005090
+_080EF854: .4byte gTasks
 _080EF858: .4byte sub_80EF8C0
 _080EF85C: .4byte sub_80EF864
 _080EF860: .4byte sub_80EF698
@@ -1702,7 +1702,7 @@ sub_80EF9B4: @ 80EF9B4
 	asrs r0, 16
 	cmp r0, 0xA
 	bne _080EF9F0
-	ldr r0, _080EF9F8 @ =nullsub_43
+	ldr r0, _080EF9F8 @ =TaskDummy
 	movs r1, 0x32
 	bl CreateTask
 	lsls r0, 24
@@ -1727,7 +1727,7 @@ _080EF9F0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EF9F8: .4byte nullsub_43
+_080EF9F8: .4byte TaskDummy
 _080EF9FC: .4byte sub_80EFA0C
 _080EFA00: .4byte gSprites
 _080EFA04: .4byte gUnknown_2023D44
@@ -1746,7 +1746,7 @@ sub_80EFA0C: @ 80EFA0C
 	ldrh r0, [r7, 0x38]
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _080EFA58 @ =gUnknown_3005090
+	ldr r1, _080EFA58 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -1773,7 +1773,7 @@ _080EFA3E:
 	.align 2, 0
 _080EFA50: .4byte gUnknown_2023D44
 _080EFA54: .4byte gUnknown_2037F1B
-_080EFA58: .4byte gUnknown_3005090
+_080EFA58: .4byte gTasks
 _080EFA5C:
 	cmp r0, 0x2
 	beq _080EFAF8
@@ -1869,7 +1869,7 @@ _080EFB12:
 	.align 2, 0
 _080EFB1C: .4byte gSprites
 _080EFB20:
-	ldr r0, _080EFB50 @ =gUnknown_3005090
+	ldr r0, _080EFB50 @ =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -1892,7 +1892,7 @@ _080EFB48:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EFB50: .4byte gUnknown_3005090
+_080EFB50: .4byte gTasks
 _080EFB54: .4byte sub_80EFB58
 	thumb_func_end sub_80EFA0C
 
@@ -3317,7 +3317,7 @@ LaunchBallStarsTask: @ 80F05EC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _080F0670 @ =gUnknown_3005090
+	ldr r1, _080F0670 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3342,7 +3342,7 @@ LaunchBallStarsTask: @ 80F05EC
 	bx r1
 	.align 2, 0
 _080F066C: .4byte gUnknown_840C074
-_080F0670: .4byte gUnknown_3005090
+_080F0670: .4byte gTasks
 	thumb_func_end LaunchBallStarsTask
 
 	thumb_func_start sub_80F0674
@@ -3382,7 +3382,7 @@ sub_80F06A4: @ 80F06A4
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _080F0780 @ =gUnknown_3005090
+	ldr r1, _080F0780 @ =gTasks
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
@@ -3450,7 +3450,7 @@ _080F073C:
 	lsls r0, 5
 	strh r0, [r7, 0x2E]
 _080F0740:
-	ldr r0, _080F0780 @ =gUnknown_3005090
+	ldr r0, _080F0780 @ =gTasks
 	mov r4, r8
 	lsls r1, r4, 2
 	add r1, r8
@@ -3482,7 +3482,7 @@ _080F0776:
 	bl DestroyTask
 	b _080F07AC
 	.align 2, 0
-_080F0780: .4byte gUnknown_3005090
+_080F0780: .4byte gTasks
 _080F0784: .4byte gUnknown_840C0A4
 _080F0788: .4byte gSprites
 _080F078C: .4byte gUnknown_840C068
@@ -3573,7 +3573,7 @@ sub_80F0818: @ 80F0818
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, _080F08FC @ =gUnknown_3005090
+	ldr r0, _080F08FC @ =gTasks
 	mov r2, r9
 	lsls r1, r2, 2
 	add r1, r9
@@ -3678,7 +3678,7 @@ _080F08E6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F08FC: .4byte gUnknown_3005090
+_080F08FC: .4byte gTasks
 _080F0900: .4byte gSprites
 _080F0904: .4byte gUnknown_840C0A4
 _080F0908: .4byte gUnknown_840C068
@@ -3699,7 +3699,7 @@ sub_80F091C: @ 80F091C
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, _080F0A00 @ =gUnknown_3005090
+	ldr r0, _080F0A00 @ =gTasks
 	mov r2, r9
 	lsls r1, r2, 2
 	add r1, r9
@@ -3804,7 +3804,7 @@ _080F09EA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F0A00: .4byte gUnknown_3005090
+_080F0A00: .4byte gTasks
 _080F0A04: .4byte gSprites
 _080F0A08: .4byte gUnknown_840C0A4
 _080F0A0C: .4byte gUnknown_840C068
@@ -3825,7 +3825,7 @@ sub_80F0A20: @ 80F0A20
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r1, _080F0B00 @ =gUnknown_3005090
+	ldr r1, _080F0B00 @ =gTasks
 	lsls r0, 2
 	add r0, r9
 	lsls r0, 3
@@ -3928,7 +3928,7 @@ _080F0AEA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F0B00: .4byte gUnknown_3005090
+_080F0B00: .4byte gTasks
 _080F0B04: .4byte gSprites
 _080F0B08: .4byte gUnknown_840C068
 _080F0B0C: .4byte gUnknown_840C0A4
@@ -3949,7 +3949,7 @@ sub_80F0B20: @ 80F0B20
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, _080F0C08 @ =gUnknown_3005090
+	ldr r0, _080F0C08 @ =gTasks
 	mov r2, r9
 	lsls r1, r2, 2
 	add r1, r9
@@ -4056,7 +4056,7 @@ _080F0BF2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F0C08: .4byte gUnknown_3005090
+_080F0C08: .4byte gTasks
 _080F0C0C: .4byte gSprites
 _080F0C10: .4byte gUnknown_840C0A4
 _080F0C14: .4byte gUnknown_840C068
@@ -4077,7 +4077,7 @@ sub_80F0C28: @ 80F0C28
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _080F0C54 @ =gUnknown_3005090
+	ldr r1, _080F0C54 @ =gTasks
 	lsls r2, r0, 2
 	adds r0, r2, r0
 	lsls r0, 3
@@ -4091,7 +4091,7 @@ sub_80F0C28: @ 80F0C28
 	strh r0, [r3, 0x16]
 	b _080F0D2A
 	.align 2, 0
-_080F0C54: .4byte gUnknown_3005090
+_080F0C54: .4byte gTasks
 _080F0C58:
 	ldrh r0, [r3, 0x26]
 	lsls r0, 24
@@ -4165,7 +4165,7 @@ _080F0CE0:
 	lsrs r7, r0, 24
 	cmp r7, 0x7
 	bls _080F0C84
-	ldr r0, _080F0D50 @ =gUnknown_3005090
+	ldr r0, _080F0D50 @ =gTasks
 	ldr r1, [sp, 0x14]
 	add r1, r8
 	lsls r1, 3
@@ -4212,7 +4212,7 @@ _080F0D40: .4byte gUnknown_840C068
 _080F0D44: .4byte gUnknown_840C0A4
 _080F0D48: .4byte gSprites + 0x1C
 _080F0D4C: .4byte sub_80F0D5C
-_080F0D50: .4byte gUnknown_3005090
+_080F0D50: .4byte gTasks
 _080F0D54: .4byte gMain
 _080F0D58: .4byte 0x00000439
 	thumb_func_end sub_80F0C28
@@ -4273,7 +4273,7 @@ sub_80F0DB4: @ 80F0DB4
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r1, _080F0E90 @ =gUnknown_3005090
+	ldr r1, _080F0E90 @ =gTasks
 	lsls r0, 2
 	add r0, r9
 	lsls r0, 3
@@ -4374,7 +4374,7 @@ _080F0E7A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F0E90: .4byte gUnknown_3005090
+_080F0E90: .4byte gTasks
 _080F0E94: .4byte gSprites
 _080F0E98: .4byte gUnknown_840C068
 _080F0E9C: .4byte gUnknown_840C0A4
@@ -4443,7 +4443,7 @@ sub_80F0F10: @ 80F0F10
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
-	ldr r0, _080F0FC4 @ =gUnknown_3005090
+	ldr r0, _080F0FC4 @ =gTasks
 	ldr r2, [sp]
 	lsls r1, r2, 2
 	adds r1, r2
@@ -4523,7 +4523,7 @@ _080F0F5C:
 	movs r0, 0x1
 	b _080F0FE2
 	.align 2, 0
-_080F0FC4: .4byte gUnknown_3005090
+_080F0FC4: .4byte gTasks
 _080F0FC8: .4byte gUnknown_840C0A4
 _080F0FCC: .4byte gSprites
 _080F0FD0: .4byte gUnknown_840C068
@@ -4590,7 +4590,7 @@ sub_80F103C: @ 80F103C
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r1, _080F1114 @ =gUnknown_3005090
+	ldr r1, _080F1114 @ =gTasks
 	lsls r0, 2
 	add r0, r9
 	lsls r0, 3
@@ -4688,7 +4688,7 @@ _080F10FC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F1114: .4byte gUnknown_3005090
+_080F1114: .4byte gTasks
 _080F1118: .4byte gSprites
 _080F111C: .4byte gUnknown_840C068
 _080F1120: .4byte gUnknown_840C0A4
@@ -4833,7 +4833,7 @@ LaunchBallFadeMonTask: @ 80F1218
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _080F1280 @ =gUnknown_3005090
+	ldr r1, _080F1280 @ =gTasks
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
@@ -4864,7 +4864,7 @@ LaunchBallFadeMonTask: @ 80F1218
 	b _080F12AE
 	.align 2, 0
 _080F127C: .4byte sub_80F12E0
-_080F1280: .4byte gUnknown_3005090
+_080F1280: .4byte gTasks
 _080F1284: .4byte gUnknown_840C1C4
 _080F1288:
 	lsls r0, r6, 20
@@ -4915,7 +4915,7 @@ sub_80F12E0: @ 80F12E0
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r1, _080F1330 @ =gUnknown_3005090
+	ldr r1, _080F1330 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -4950,7 +4950,7 @@ sub_80F12E0: @ 80F12E0
 	strh r0, [r4, 0xC]
 	b _080F1360
 	.align 2, 0
-_080F1330: .4byte gUnknown_3005090
+_080F1330: .4byte gTasks
 _080F1334: .4byte gUnknown_840C1C4
 _080F1338:
 	ldr r0, _080F1368 @ =gUnknown_2037AB8
@@ -4993,7 +4993,7 @@ sub_80F1370: @ 80F1370
 	ands r0, r1
 	cmp r0, 0
 	bne _080F13A8
-	ldr r0, _080F13B4 @ =gUnknown_3005090
+	ldr r0, _080F13B4 @ =gTasks
 	lsls r4, r2, 2
 	adds r4, r2
 	lsls r4, 3
@@ -5017,7 +5017,7 @@ _080F13A8:
 	bx r0
 	.align 2, 0
 _080F13B0: .4byte gUnknown_2037AB8
-_080F13B4: .4byte gUnknown_3005090
+_080F13B4: .4byte gTasks
 _080F13B8: .4byte 0x00007fff
 _080F13BC: .4byte sub_80F13C0
 	thumb_func_end sub_80F1370
@@ -5027,7 +5027,7 @@ sub_80F13C0: @ 80F13C0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, _080F140C @ =gUnknown_3005090
+	ldr r1, _080F140C @ =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -5062,7 +5062,7 @@ sub_80F13C0: @ 80F13C0
 	strh r0, [r4, 0xC]
 	b _080F141A
 	.align 2, 0
-_080F140C: .4byte gUnknown_3005090
+_080F140C: .4byte gTasks
 _080F1410: .4byte gUnknown_840C1C4
 _080F1414:
 	adds r0, r2, 0
@@ -5087,7 +5087,7 @@ sub_80F1420: @ 80F1420
 	ldrb r2, [r3]
 	adds r0, r2, r0
 	ldrb r6, [r0]
-	ldr r1, _080F145C @ =gUnknown_3005090
+	ldr r1, _080F145C @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -5104,7 +5104,7 @@ sub_80F1420: @ 80F1420
 	.align 2, 0
 _080F1454: .4byte gUnknown_2023D44
 _080F1458: .4byte gUnknown_2037F1A
-_080F145C: .4byte gUnknown_3005090
+_080F145C: .4byte gTasks
 _080F1460:
 	cmp r0, 0x2
 	beq _080F150A
@@ -5154,7 +5154,7 @@ _080F14A8:
 	strh r0, [r2, 0x24]
 	adds r2, r3, 0
 _080F14C0:
-	ldr r1, _080F14F4 @ =gUnknown_3005090
+	ldr r1, _080F14F4 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -5180,7 +5180,7 @@ _080F14C0:
 	b _080F15BA
 	.align 2, 0
 _080F14F0: .4byte gSprites
-_080F14F4: .4byte gUnknown_3005090
+_080F14F4: .4byte gTasks
 _080F14F8:
 	ldrb r1, [r5, 0x1E]
 	adds r0, r2, 0
@@ -5231,7 +5231,7 @@ _080F1540:
 	strh r0, [r1, 0x24]
 	adds r4, r2, 0
 _080F1558:
-	ldr r1, _080F1590 @ =gUnknown_3005090
+	ldr r1, _080F1590 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -5258,7 +5258,7 @@ _080F1558:
 	b _080F15B4
 	.align 2, 0
 _080F158C: .4byte gSprites
-_080F1590: .4byte gUnknown_3005090
+_080F1590: .4byte gTasks
 _080F1594: .4byte gUnknown_2037F1A
 _080F1598:
 	ldr r0, _080F15C4 @ =gSprites
@@ -5294,7 +5294,7 @@ sub_80F15C8: @ 80F15C8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080F15EC @ =gUnknown_3005090
+	ldr r1, _080F15EC @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -5309,7 +5309,7 @@ sub_80F15C8: @ 80F15C8
 	beq _080F15F6
 	b _080F16B4
 	.align 2, 0
-_080F15EC: .4byte gUnknown_3005090
+_080F15EC: .4byte gTasks
 _080F15F0:
 	cmp r0, 0x2
 	beq _080F167E
@@ -5337,7 +5337,7 @@ _080F1620:
 	movs r0, 0x52
 	movs r1, 0x10
 	bl SetGpuReg
-	ldr r0, _080F1640 @ =gUnknown_3005090
+	ldr r0, _080F1640 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -5348,7 +5348,7 @@ _080F1620:
 	b _080F16B4
 	.align 2, 0
 _080F163C: .4byte 0x00003f44
-_080F1640: .4byte gUnknown_3005090
+_080F1640: .4byte gTasks
 _080F1644:
 	ldrh r0, [r4, 0xA]
 	adds r1, r0, 0x1
@@ -5530,7 +5530,7 @@ _080F179E:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, _080F17F4 @ =gUnknown_3005090
+	ldr r3, _080F17F4 @ =gTasks
 	lsls r2, r4, 2
 	adds r2, r4
 	lsls r2, 3
@@ -5553,7 +5553,7 @@ _080F17E4: .4byte 0x000027f9
 _080F17E8: .4byte gUnknown_83AD350
 _080F17EC: .4byte gUnknown_83ADC58
 _080F17F0: .4byte sub_80F181C
-_080F17F4: .4byte gUnknown_3005090
+_080F17F4: .4byte gTasks
 _080F17F8:
 	ldr r0, _080F1818 @ =gUnknown_2024018
 	ldr r0, [r0]
@@ -5584,7 +5584,7 @@ sub_80F181C: @ 80F181C
 	push {r6,r7}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r1, _080F1844 @ =gUnknown_3005090
+	ldr r1, _080F1844 @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -5598,7 +5598,7 @@ sub_80F181C: @ 80F181C
 	strh r0, [r4, 0x22]
 	b _080F19C0
 	.align 2, 0
-_080F1844: .4byte gUnknown_3005090
+_080F1844: .4byte gTasks
 _080F1848:
 	ldr r0, _080F189C @ =gUnknown_2024018
 	ldr r0, [r0]
@@ -5693,7 +5693,7 @@ _080F18F8:
 	orrs r0, r1
 	strh r0, [r2, 0x4]
 _080F1906:
-	ldr r2, _080F1940 @ =gUnknown_3005090
+	ldr r2, _080F1940 @ =gTasks
 	lsls r1, r7, 2
 	adds r0, r1, r7
 	lsls r0, 3
@@ -5718,7 +5718,7 @@ _080F1930: .4byte gUnknown_83FF180
 _080F1934: .4byte gSprites
 _080F1938: .4byte 0x000003ff
 _080F193C: .4byte 0xfffffc00
-_080F1940: .4byte gUnknown_3005090
+_080F1940: .4byte gTasks
 _080F1944: .4byte sub_80F1A2C
 _080F1948:
 	ldr r3, _080F19CC @ =gSprites
@@ -5762,7 +5762,7 @@ _080F1990:
 	lsls r0, 2
 	adds r0, r1
 	strh r7, [r0, 0x2E]
-	ldr r1, _080F19D8 @ =gUnknown_3005090
+	ldr r1, _080F19D8 @ =gTasks
 	mov r2, r9
 	adds r0, r2, r7
 	lsls r0, 3
@@ -5793,7 +5793,7 @@ _080F19C0:
 _080F19CC: .4byte gSprites
 _080F19D0: .4byte sub_80F1A80
 _080F19D4: .4byte 0x0000ffe0
-_080F19D8: .4byte gUnknown_3005090
+_080F19D8: .4byte gTasks
 _080F19DC: .4byte sub_80F19E0
 	thumb_func_end sub_80F181C
 
@@ -5803,7 +5803,7 @@ sub_80F19E0: @ 80F19E0
 	lsls r0, 24
 	lsrs r0, 24
 	adds r3, r0, 0
-	ldr r1, _080F1A24 @ =gUnknown_3005090
+	ldr r1, _080F1A24 @ =gTasks
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r0, 3
@@ -5835,7 +5835,7 @@ _080F1A20:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F1A24: .4byte gUnknown_3005090
+_080F1A24: .4byte gTasks
 _080F1A28: .4byte gUnknown_2024018
 	thumb_func_end sub_80F19E0
 
@@ -5860,7 +5860,7 @@ sub_80F1A2C: @ 80F1A2C
 	asrs r0, 16
 	cmp r0, 0xFF
 	ble _080F1A76
-	ldr r2, _080F1A7C @ =gUnknown_3005090
+	ldr r2, _080F1A7C @ =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 2
@@ -5879,7 +5879,7 @@ _080F1A76:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F1A7C: .4byte gUnknown_3005090
+_080F1A7C: .4byte gTasks
 	thumb_func_end sub_80F1A2C
 
 	thumb_func_start sub_80F1A80
@@ -5912,7 +5912,7 @@ _080F1A94:
 	asrs r1, 16
 	cmp r1, 0x20
 	ble _080F1AD6
-	ldr r2, _080F1ADC @ =gUnknown_3005090
+	ldr r2, _080F1ADC @ =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 2
@@ -5931,7 +5931,7 @@ _080F1AD6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F1ADC: .4byte gUnknown_3005090
+_080F1ADC: .4byte gTasks
 	thumb_func_end sub_80F1A80
 
 	thumb_func_start sub_80F1AE0

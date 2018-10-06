@@ -31,7 +31,7 @@ _080A047E:
 	thumb_func_start AllMonsFainted
 AllMonsFainted: @ 80A0484
 	push {r4,r5,lr}
-	ldr r4, _080A04A4 @ =gUnknown_2024284
+	ldr r4, _080A04A4 @ =gPlayerParty
 	movs r5, 0
 _080A048A:
 	adds r0, r4, 0
@@ -46,7 +46,7 @@ _080A048A:
 	movs r0, 0
 	b _080A04B2
 	.align 2, 0
-_080A04A4: .4byte gUnknown_2024284
+_080A04A4: .4byte gPlayerParty
 _080A04A8:
 	adds r5, 0x1
 	adds r4, 0x64
@@ -68,7 +68,7 @@ MonFaintFromPoisonOnField: @ 80A04B8
 	movs r1, 0x64
 	adds r4, r0, 0
 	muls r4, r1
-	ldr r0, _080A04FC @ =gUnknown_2024284
+	ldr r0, _080A04FC @ =gPlayerParty
 	adds r4, r0
 	movs r0, 0
 	str r0, [sp]
@@ -91,7 +91,7 @@ MonFaintFromPoisonOnField: @ 80A04B8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A04FC: .4byte gUnknown_2024284
+_080A04FC: .4byte gPlayerParty
 _080A0500: .4byte gStringVar1
 	thumb_func_end MonFaintFromPoisonOnField
 
@@ -102,7 +102,7 @@ CheckMonFaintedFromPoison: @ 80A0504
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, _080A0540 @ =gUnknown_2024284
+	ldr r0, _080A0540 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	bl CheckMonIsValid
@@ -124,7 +124,7 @@ CheckMonFaintedFromPoison: @ 80A0504
 	movs r0, 0x1
 	b _080A0546
 	.align 2, 0
-_080A0540: .4byte gUnknown_2024284
+_080A0540: .4byte gPlayerParty
 _080A0544:
 	movs r0, 0
 _080A0546:
@@ -141,7 +141,7 @@ Task_WhiteOut: @ 80A054C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _080A0570 @ =gUnknown_3005098
+	ldr r1, _080A0570 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -153,7 +153,7 @@ Task_WhiteOut: @ 80A054C
 	beq _080A057A
 	b _080A05F6
 	.align 2, 0
-_080A0570: .4byte gUnknown_3005098
+_080A0570: .4byte gTasks+0x8
 _080A0574:
 	cmp r0, 0x2
 	beq _080A05B8
@@ -245,7 +245,7 @@ _080A0614: .4byte Task_WhiteOut
 overworld_poison: @ 80A0618
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r4, _080A0684 @ =gUnknown_2024284
+	ldr r4, _080A0684 @ =gPlayerParty
 	movs r7, 0
 	movs r6, 0
 	movs r5, 0x5
@@ -298,7 +298,7 @@ _080A067C:
 	movs r0, 0x2
 	b _080A0692
 	.align 2, 0
-_080A0684: .4byte gUnknown_2024284
+_080A0684: .4byte gPlayerParty
 _080A0688:
 	cmp r7, 0
 	bne _080A0690

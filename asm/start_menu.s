@@ -586,7 +586,7 @@ sub_806F1F0: @ 806F1F0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0806F210 @ =gUnknown_3005098
+	ldr r1, _0806F210 @ =gTasks+0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -596,7 +596,7 @@ sub_806F1F0: @ 806F1F0
 	beq _0806F238
 	b _0806F24E
 	.align 2, 0
-_0806F210: .4byte gUnknown_3005098
+_0806F210: .4byte gTasks+0x8
 _0806F214:
 	bl InUnionRoom
 	cmp r0, 0x1
@@ -1858,7 +1858,7 @@ sub_806FBB8: @ 806FBB8
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _0806FBEC @ =gUnknown_3005098
+	ldr r1, _0806FBEC @ =gTasks+0x8
 	adds r5, r0, r1
 	ldr r0, _0806FBF0 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -1880,7 +1880,7 @@ _0806FBE2:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0806FBEC: .4byte gUnknown_3005098
+_0806FBEC: .4byte gTasks+0x8
 _0806FBF0: .4byte gUnknown_2037AB8
 _0806FBF4: .4byte _0806FBF8
 	.align 2, 0

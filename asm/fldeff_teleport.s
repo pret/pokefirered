@@ -8,7 +8,7 @@
 	thumb_func_start SetUpFieldMove_Teleport
 SetUpFieldMove_Teleport: @ 80F66F0
 	push {lr}
-	ldr r0, _080F6708 @ =gUnknown_2036DFC
+	ldr r0, _080F6708 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_or_6
 	lsls r0, 24
@@ -18,7 +18,7 @@ SetUpFieldMove_Teleport: @ 80F66F0
 	movs r0, 0
 	b _080F671A
 	.align 2, 0
-_080F6708: .4byte gUnknown_2036DFC
+_080F6708: .4byte gMapHeader
 _080F670C:
 	ldr r1, _080F6720 @ =gUnknown_3005024
 	ldr r0, _080F6724 @ =hm_add_c3_launch_phase_2
@@ -60,7 +60,7 @@ FldEff_UseTeleport: @ 80F6750
 	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F6778 @ =gUnknown_3005090
+	ldr r2, _080F6778 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -75,7 +75,7 @@ FldEff_UseTeleport: @ 80F6750
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F6778: .4byte gUnknown_3005090
+_080F6778: .4byte gTasks
 _080F677C: .4byte sub_80F6780
 	thumb_func_end FldEff_UseTeleport
 

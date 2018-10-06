@@ -1385,7 +1385,7 @@ task_add_00_mystery_gift: @ 8142E58
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _08142E9C @ =gUnknown_3005098
+	ldr r0, _08142E9C @ =gTasks+0x8
 	adds r4, r0
 	movs r0, 0
 	strb r0, [r4, 0x8]
@@ -1408,7 +1408,7 @@ task_add_00_mystery_gift: @ 8142E58
 	bx r0
 	.align 2, 0
 _08142E98: .4byte sub_8142EA0
-_08142E9C: .4byte gUnknown_3005098
+_08142E9C: .4byte gTasks+0x8
 	thumb_func_end task_add_00_mystery_gift
 
 	thumb_func_start sub_8142EA0
@@ -1420,7 +1420,7 @@ sub_8142EA0: @ 8142EA0
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _08142EC4 @ =gUnknown_3005098
+	ldr r1, _08142EC4 @ =gTasks+0x8
 	adds r5, r0, r1
 	ldrb r0, [r5, 0x8]
 	cmp r0, 0x25
@@ -1433,7 +1433,7 @@ _08142EBA:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08142EC4: .4byte gUnknown_3005098
+_08142EC4: .4byte gTasks+0x8
 _08142EC8: .4byte _08142ECC
 	.align 2, 0
 _08142ECC:

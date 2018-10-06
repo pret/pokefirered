@@ -43,7 +43,7 @@ sub_8098110: @ 8098110
 	movs r0, 0
 	movs r2, 0
 	bl ChangeBgY
-	ldr r1, _08098184 @ =gUnknown_3005090
+	ldr r1, _08098184 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -57,9 +57,9 @@ sub_8098110: @ 8098110
 _08098178: .4byte gUnknown_203ADFA
 _0809817C: .4byte sub_80981AC
 _08098180: .4byte 0xffffef7f
-_08098184: .4byte gUnknown_3005090
+_08098184: .4byte gTasks
 _08098188:
-	ldr r0, _080981A8 @ =gUnknown_3005090
+	ldr r0, _080981A8 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -78,7 +78,7 @@ _080981A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080981A8: .4byte gUnknown_3005090
+_080981A8: .4byte gTasks
 	thumb_func_end sub_8098110
 
 	thumb_func_start sub_80981AC
@@ -89,7 +89,7 @@ sub_80981AC: @ 80981AC
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
-	ldr r1, _080981D0 @ =gUnknown_3005090
+	ldr r1, _080981D0 @ =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -103,7 +103,7 @@ _080981C6:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080981D0: .4byte gUnknown_3005090
+_080981D0: .4byte gTasks
 _080981D4: .4byte _080981D8
 	.align 2, 0
 _080981D8:
@@ -252,7 +252,7 @@ sub_80982EC: @ 80982EC
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _0809831C @ =gUnknown_3005098
+	ldr r1, _0809831C @ =gTasks+0x8
 	adds r1, r0, r1
 	movs r2, 0
 	ldrsh r0, [r1, r2]
@@ -265,7 +265,7 @@ _08098312:
 	bx r0
 	.align 2, 0
 _08098318: .4byte sub_80981AC
-_0809831C: .4byte gUnknown_3005098
+_0809831C: .4byte gTasks+0x8
 	thumb_func_end sub_80982EC
 
 	thumb_func_start sub_8098320
@@ -298,7 +298,7 @@ sub_8098340: @ 8098340
 	str r0, [sp]
 	str r1, [sp, 0x4]
 	movs r6, 0x1D
-	ldr r0, _0809837C @ =gUnknown_2036DFC
+	ldr r0, _0809837C @ =gMapHeader
 	ldrb r0, [r0, 0x1A]
 	lsls r0, 24
 	asrs r0, 24
@@ -318,7 +318,7 @@ sub_8098340: @ 8098340
 	b _08098396
 	.align 2, 0
 _08098378: .4byte gUnknown_83D4164
-_0809837C: .4byte gUnknown_2036DFC
+_0809837C: .4byte gMapHeader
 _08098380: .4byte 0x00ffffff
 _08098384:
 	ldr r2, [sp]
@@ -384,7 +384,7 @@ sub_8098400: @ 8098400
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r5, 0x70
-	ldr r4, _08098478 @ =gUnknown_2036DFC
+	ldr r4, _08098478 @ =gMapHeader
 	ldrb r1, [r4, 0x14]
 	add r0, sp, 0xC
 	movs r2, 0
@@ -435,7 +435,7 @@ _08098434:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08098478: .4byte gUnknown_2036DFC
+_08098478: .4byte gMapHeader
 	thumb_func_end sub_8098400
 
 	thumb_func_start sub_809847C

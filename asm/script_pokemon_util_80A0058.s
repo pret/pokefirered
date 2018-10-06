@@ -19,7 +19,7 @@ sp000_heal_pokemon: @ 80A0058
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcs _080A0104
-	ldr r1, _080A0118 @ =gUnknown_2024284
+	ldr r1, _080A0118 @ =gPlayerParty
 	mov r10, r1
 	mov r6, sp
 _080A0076:
@@ -99,7 +99,7 @@ _080A0104:
 	bx r0
 	.align 2, 0
 _080A0114: .4byte gUnknown_2024029
-_080A0118: .4byte gUnknown_2024284
+_080A0118: .4byte gPlayerParty
 	thumb_func_end sp000_heal_pokemon
 
 	thumb_func_start ScriptGiveMon
@@ -242,7 +242,7 @@ _080A0228:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _080A0258 @ =gUnknown_2024284
+	ldr r0, _080A0258 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -261,7 +261,7 @@ _080A0228:
 	movs r0, 0x1
 	b _080A0264
 	.align 2, 0
-_080A0258: .4byte gUnknown_2024284
+_080A0258: .4byte gPlayerParty
 _080A025C:
 	adds r5, 0x1
 	cmp r5, 0x5
@@ -313,7 +313,7 @@ CreateScriptedWildMon: @ 80A029C
 	lsls r7, r2, 16
 	lsrs r6, r7, 16
 	bl ZeroEnemyPartyMons
-	ldr r0, _080A02F8 @ =gUnknown_202402C
+	ldr r0, _080A02F8 @ =gEnemyParty
 	mov r8, r0
 	movs r0, 0
 	str r0, [sp]
@@ -344,7 +344,7 @@ _080A02EA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A02F8: .4byte gUnknown_202402C
+_080A02F8: .4byte gEnemyParty
 	thumb_func_end CreateScriptedWildMon
 
 	thumb_func_start ScriptSetMonMoveSlot
@@ -366,7 +366,7 @@ ScriptSetMonMoveSlot: @ 80A02FC
 _080A0318:
 	movs r0, 0x64
 	muls r0, r3
-	ldr r1, _080A0330 @ =gUnknown_2024284
+	ldr r1, _080A0330 @ =gPlayerParty
 	adds r0, r1
 	adds r1, r4, 0
 	bl SetMonMoveSlot
@@ -375,7 +375,7 @@ _080A0318:
 	bx r0
 	.align 2, 0
 _080A032C: .4byte gUnknown_2024029
-_080A0330: .4byte gUnknown_2024284
+_080A0330: .4byte gPlayerParty
 	thumb_func_end ScriptSetMonMoveSlot
 
 	thumb_func_start sub_80A0334
@@ -478,7 +478,7 @@ sub_80A03D8: @ 80A03D8
 	movs r5, 0
 	movs r0, 0x64
 	mov r8, r0
-	ldr r6, _080A0454 @ =gUnknown_2024284
+	ldr r6, _080A0454 @ =gPlayerParty
 	adds r4, r7, 0
 _080A03F4:
 	ldr r0, _080A0458 @ =gUnknown_203B0D4
@@ -500,7 +500,7 @@ _080A040E:
 	ble _080A03F4
 	movs r0, 0
 	str r0, [sp]
-	ldr r4, _080A0454 @ =gUnknown_2024284
+	ldr r4, _080A0454 @ =gPlayerParty
 	ldr r2, _080A045C @ =0x05000096
 	mov r0, sp
 	adds r1, r4, 0
@@ -527,7 +527,7 @@ _080A042C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A0454: .4byte gUnknown_2024284
+_080A0454: .4byte gPlayerParty
 _080A0458: .4byte gUnknown_203B0D4
 _080A045C: .4byte 0x05000096
 	thumb_func_end sub_80A03D8

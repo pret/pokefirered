@@ -361,7 +361,7 @@ _0810806E:
 	adds r2, r4
 	ldrh r2, [r2]
 	bl ListMenuInit
-	ldr r2, _081080B4 @ =gUnknown_3005090
+	ldr r2, _081080B4 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -376,7 +376,7 @@ _0810806E:
 	.align 2, 0
 _081080AC: .4byte gUnknown_203ACFC
 _081080B0: .4byte gUnknown_3005E70
-_081080B4: .4byte gUnknown_3005090
+_081080B4: .4byte gTasks
 _081080B8:
 	ldr r0, _081080C4 @ =gUnknown_203ACFC
 	ldrb r0, [r0, 0x6]
@@ -1754,7 +1754,7 @@ sub_8108B50: @ 8108B50
 	str r2, [sp]
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _08108B84 @ =gUnknown_3005090
+	ldr r1, _08108B84 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1766,7 +1766,7 @@ sub_8108B50: @ 8108B50
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08108B84: .4byte gUnknown_3005090
+_08108B84: .4byte gTasks
 _08108B88: .4byte sub_8108B8C
 	thumb_func_end sub_8108B50
 
@@ -1778,7 +1778,7 @@ sub_8108B8C: @ 8108B8C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08108BE0 @ =gUnknown_3005098
+	ldr r1, _08108BE0 @ =gTasks+0x8
 	adds r4, r0, r1
 	ldr r0, _08108BE4 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -1811,7 +1811,7 @@ sub_8108B8C: @ 8108B8C
 	bl SetMainCallback2
 	b _08108BFA
 	.align 2, 0
-_08108BE0: .4byte gUnknown_3005098
+_08108BE0: .4byte gTasks+0x8
 _08108BE4: .4byte gUnknown_2037AB8
 _08108BE8: .4byte sub_8108CFC
 _08108BEC: .4byte gUnknown_203ACFC
@@ -1883,7 +1883,7 @@ _08108C6C:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08108CAC @ =gUnknown_3005090
+	ldr r2, _08108CAC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1901,7 +1901,7 @@ _08108C9E:
 	bx r0
 	.align 2, 0
 _08108CA8: .4byte sub_8108CFC
-_08108CAC: .4byte gUnknown_3005090
+_08108CAC: .4byte gTasks
 _08108CB0: .4byte 0x0000fff0
 	thumb_func_end sub_8108C10
 
@@ -1913,7 +1913,7 @@ sub_8108CB4: @ 8108CB4
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08108CE4 @ =gUnknown_3005090
+	ldr r2, _08108CE4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1929,7 +1929,7 @@ sub_8108CB4: @ 8108CB4
 	bx r0
 	.align 2, 0
 _08108CE0: .4byte sub_8108CFC
-_08108CE4: .4byte gUnknown_3005090
+_08108CE4: .4byte gTasks
 _08108CE8: .4byte 0x0000fff0
 _08108CEC: .4byte gUnknown_203ACFC
 	thumb_func_end sub_8108CB4
@@ -1952,7 +1952,7 @@ sub_8108CFC: @ 8108CFC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08108D28 @ =gUnknown_3005098
+	ldr r1, _08108D28 @ =gTasks+0x8
 	adds r4, r0, r1
 	ldrh r0, [r4, 0x2]
 	ldrh r1, [r4]
@@ -1967,7 +1967,7 @@ sub_8108CFC: @ 8108CFC
 	bl SetGpuReg
 	b _08108D34
 	.align 2, 0
-_08108D28: .4byte gUnknown_3005098
+_08108D28: .4byte gTasks+0x8
 _08108D2C:
 	ldrh r1, [r4]
 	movs r0, 0x44
@@ -2168,7 +2168,7 @@ sub_8108E70: @ 8108E70
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
-	ldr r0, _08108EDC @ =gUnknown_3005098
+	ldr r0, _08108EDC @ =gTasks+0x8
 	adds r4, r0
 	movs r0, 0x5
 	bl sub_810BA70
@@ -2201,7 +2201,7 @@ sub_8108E70: @ 8108E70
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08108EDC: .4byte gUnknown_3005098
+_08108EDC: .4byte gTasks+0x8
 	thumb_func_end sub_8108E70
 
 	thumb_func_start sub_8108EE0
@@ -2243,7 +2243,7 @@ sub_8108F0C: @ 8108F0C
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _08108F78 @ =gUnknown_3005098
+	ldr r1, _08108F78 @ =gTasks+0x8
 	adds r7, r0, r1
 	ldr r0, _08108F7C @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -2290,7 +2290,7 @@ _08108F4A:
 	bne _08108FE4
 	b _08108FA0
 	.align 2, 0
-_08108F78: .4byte gUnknown_3005098
+_08108F78: .4byte gTasks+0x8
 _08108F7C: .4byte gUnknown_2037AB8
 _08108F80: .4byte sub_8108CFC
 _08108F84: .4byte gUnknown_203ACFC
@@ -2371,7 +2371,7 @@ _08109018:
 	movs r0, 0
 	strh r0, [r1]
 	bl sub_8108CB4
-	ldr r1, _0810903C @ =gUnknown_3005090
+	ldr r1, _0810903C @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -2380,7 +2380,7 @@ _08109018:
 	b _081090C4
 	.align 2, 0
 _08109038: .4byte gUnknown_203AD30
-_0810903C: .4byte gUnknown_3005090
+_0810903C: .4byte gTasks
 _08109040: .4byte sub_8108B50
 _08109044:
 	movs r0, 0x5
@@ -2397,7 +2397,7 @@ _08109044:
 	movs r0, 0
 	strh r0, [r1]
 	bl sub_8108CB4
-	ldr r1, _0810907C @ =gUnknown_3005090
+	ldr r1, _0810907C @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -2407,7 +2407,7 @@ _08109044:
 	.align 2, 0
 _08109074: .4byte gUnknown_203AD10
 _08109078: .4byte gUnknown_203AD30
-_0810907C: .4byte gUnknown_3005090
+_0810907C: .4byte gTasks
 _08109080: .4byte sub_8108B50
 _08109084:
 	bl sub_8108978
@@ -2432,7 +2432,7 @@ _08109084:
 	bl sub_809A798
 	ldr r1, _081090D0 @ =gUnknown_203AD30
 	strh r0, [r1]
-	ldr r1, _081090D4 @ =gUnknown_3005090
+	ldr r1, _081090D4 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -2447,7 +2447,7 @@ _081090C6:
 	bx r0
 	.align 2, 0
 _081090D0: .4byte gUnknown_203AD30
-_081090D4: .4byte gUnknown_3005090
+_081090D4: .4byte gTasks
 _081090D8: .4byte sub_81090DC
 	thumb_func_end sub_8108F0C
 
@@ -2485,7 +2485,7 @@ sub_810910C: @ 810910C
 	bl sub_8109140
 	bl sub_8108888
 	bl sub_81088D8
-	ldr r1, _08109138 @ =gUnknown_3005090
+	ldr r1, _08109138 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2496,7 +2496,7 @@ sub_810910C: @ 810910C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109138: .4byte gUnknown_3005090
+_08109138: .4byte gTasks
 _0810913C: .4byte sub_8108F0C
 	thumb_func_end sub_810910C
 
@@ -2593,7 +2593,7 @@ sub_81091D0: @ 81091D0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r7, r0, 3
-	ldr r0, _08109288 @ =gUnknown_3005098
+	ldr r0, _08109288 @ =gTasks+0x8
 	mov r8, r0
 	adds r4, r7, r0
 	movs r0, 0
@@ -2661,7 +2661,7 @@ _08109242:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109288: .4byte gUnknown_3005098
+_08109288: .4byte gTasks+0x8
 _0810928C: .4byte gUnknown_203ACFC
 _08109290: .4byte gUnknown_203AD10
 _08109294: .4byte sub_8109298
@@ -2675,7 +2675,7 @@ sub_8109298: @ 8109298
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _081092DC @ =gUnknown_3005098
+	ldr r1, _081092DC @ =gTasks+0x8
 	adds r5, r0, r1
 	bl sub_80BF708
 	lsls r0, 24
@@ -2701,7 +2701,7 @@ sub_8109298: @ 8109298
 	beq _081092FA
 	b _08109314
 	.align 2, 0
-_081092DC: .4byte gUnknown_3005098
+_081092DC: .4byte gTasks+0x8
 _081092E0: .4byte gUnknown_203ACFC
 _081092E4:
 	ldrh r0, [r5, 0x16]
@@ -2821,7 +2821,7 @@ sub_81093B8: @ 81093B8
 	lsls r5, r0, 2
 	adds r5, r0
 	lsls r5, 3
-	ldr r0, _08109494 @ =gUnknown_3005098
+	ldr r0, _08109494 @ =gTasks+0x8
 	mov r9, r0
 	adds r1, r5, 0
 	add r1, r9
@@ -2905,7 +2905,7 @@ sub_81093B8: @ 81093B8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109494: .4byte gUnknown_3005098
+_08109494: .4byte gTasks+0x8
 _08109498: .4byte gUnknown_203AD10
 _0810949C: .4byte gStringVar1
 _081094A0: .4byte gUnknown_203ACFC
@@ -2923,7 +2923,7 @@ sub_81094B0: @ 81094B0
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _08109538 @ =gUnknown_3005098
+	ldr r1, _08109538 @ =gTasks+0x8
 	adds r4, r0, r1
 	bl sub_80BF72C
 	lsls r0, 24
@@ -2976,7 +2976,7 @@ sub_81094B0: @ 81094B0
 	bl sub_81095AC
 	b _0810959E
 	.align 2, 0
-_08109538: .4byte gUnknown_3005098
+_08109538: .4byte gTasks+0x8
 _0810953C: .4byte gUnknown_203ACFC
 _08109540: .4byte gMain
 _08109544: .4byte gUnknown_203AD10
@@ -3044,7 +3044,7 @@ sub_81095AC: @ 81095AC
 	adds r0, r1
 	lsls r0, 3
 	mov r9, r0
-	ldr r0, _081095E4 @ =gUnknown_3005098
+	ldr r0, _081095E4 @ =gTasks+0x8
 	mov r10, r0
 	mov r6, r9
 	add r6, r10
@@ -3061,7 +3061,7 @@ _081095DA:
 	bl sub_810967C
 	b _0810965C
 	.align 2, 0
-_081095E4: .4byte gUnknown_3005098
+_081095E4: .4byte gTasks+0x8
 _081095E8:
 	ldr r1, _0810966C @ =gUnknown_203988C
 	ldr r4, _08109670 @ =gUnknown_203ACFC
@@ -3145,7 +3145,7 @@ sub_810967C: @ 810967C
 	adds r1, r0
 	lsls r1, 3
 	mov r8, r1
-	ldr r0, _0810970C @ =gUnknown_3005098
+	ldr r0, _0810970C @ =gTasks+0x8
 	mov r10, r0
 	mov r6, r8
 	add r6, r10
@@ -3202,7 +3202,7 @@ _081096CA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810970C: .4byte gUnknown_3005098
+_0810970C: .4byte gTasks+0x8
 _08109710: .4byte gUnknown_203ACFC
 _08109714: .4byte gUnknown_3005E70
 _08109718: .4byte sub_8108F0C
@@ -3765,7 +3765,7 @@ sub_8109BB8: @ 8109BB8
 	lsrs r4, 24
 	adds r0, r4, 0
 	bl sub_8109890
-	ldr r1, _08109BDC @ =gUnknown_3005090
+	ldr r1, _08109BDC @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3776,7 +3776,7 @@ sub_8109BB8: @ 8109BB8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109BDC: .4byte gUnknown_3005090
+_08109BDC: .4byte gTasks
 _08109BE0: .4byte sub_8109BE4
 	thumb_func_end sub_8109BB8
 
@@ -3891,7 +3891,7 @@ sub_8109CC0: @ 8109CC0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r6, r0, 3
-	ldr r7, _08109D14 @ =gUnknown_3005098
+	ldr r7, _08109D14 @ =gTasks+0x8
 	adds r4, r6, r7
 	movs r0, 0xA
 	bl sub_810BAD8
@@ -3919,7 +3919,7 @@ sub_8109CC0: @ 8109CC0
 	bl sub_8109D38
 	b _08109D2A
 	.align 2, 0
-_08109D14: .4byte gUnknown_3005098
+_08109D14: .4byte gTasks+0x8
 _08109D18:
 	ldrh r0, [r4, 0x2]
 	ldr r1, _08109D30 @ =gUnknown_84163DB
@@ -3948,7 +3948,7 @@ sub_8109D38: @ 8109D38
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
-	ldr r0, _08109D9C @ =gUnknown_3005098
+	ldr r0, _08109D9C @ =gTasks+0x8
 	adds r1, r0
 	ldr r0, _08109DA0 @ =gStringVar2
 	movs r2, 0x10
@@ -3985,7 +3985,7 @@ sub_8109D38: @ 8109D38
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109D9C: .4byte gUnknown_3005098
+_08109D9C: .4byte gTasks+0x8
 _08109DA0: .4byte gStringVar2
 _08109DA4: .4byte gStringVar4
 _08109DA8: .4byte gUnknown_8416409
@@ -4001,7 +4001,7 @@ sub_8109DB0: @ 8109DB0
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
-	ldr r0, _08109DE8 @ =gUnknown_3005098
+	ldr r0, _08109DE8 @ =gTasks+0x8
 	adds r4, r0
 	movs r0, 0x6
 	bl sub_810BA3C
@@ -4018,7 +4018,7 @@ sub_8109DB0: @ 8109DB0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109DE8: .4byte gUnknown_3005098
+_08109DE8: .4byte gTasks+0x8
 	thumb_func_end sub_8109DB0
 
 	thumb_func_start sub_8109DEC
@@ -4030,7 +4030,7 @@ sub_8109DEC: @ 8109DEC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08109E1C @ =gUnknown_3005098
+	ldr r1, _08109E1C @ =gTasks+0x8
 	adds r4, r0, r1
 	adds r0, r4, 0
 	adds r0, 0x10
@@ -4046,7 +4046,7 @@ sub_8109DEC: @ 8109DEC
 	bl sub_81097E4
 	b _08109EA2
 	.align 2, 0
-_08109E1C: .4byte gUnknown_3005098
+_08109E1C: .4byte gTasks+0x8
 _08109E20:
 	ldr r0, _08109E60 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -4111,7 +4111,7 @@ sub_8109EA8: @ 8109EA8
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r5, _08109F28 @ =gUnknown_3005098
+	ldr r5, _08109F28 @ =gTasks+0x8
 	adds r6, r4, r5
 	movs r0, 0x6
 	bl sub_810BA3C
@@ -4162,7 +4162,7 @@ sub_8109EA8: @ 8109EA8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109F28: .4byte gUnknown_3005098
+_08109F28: .4byte gTasks+0x8
 _08109F2C: .4byte gUnknown_203ACFC
 _08109F30: .4byte gStringVar1
 _08109F34: .4byte gStringVar2
@@ -4182,7 +4182,7 @@ sub_8109F44: @ 8109F44
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
-	ldr r1, _08109FEC @ =gUnknown_3005098
+	ldr r1, _08109FEC @ =gTasks+0x8
 	adds r7, r0, r1
 	ldr r0, _08109FF0 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -4247,7 +4247,7 @@ _08109FE0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109FEC: .4byte gUnknown_3005098
+_08109FEC: .4byte gTasks+0x8
 _08109FF0: .4byte gMain
 _08109FF4: .4byte gUnknown_203AD30
 _08109FF8: .4byte gUnknown_203ACFC
@@ -4265,7 +4265,7 @@ sub_810A000: @ 810A000
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
-	ldr r1, _0810A040 @ =gUnknown_3005098
+	ldr r1, _0810A040 @ =gTasks+0x8
 	adds r7, r0, r1
 	ldr r0, _0810A044 @ =gUnknown_203ACFC
 	ldrb r0, [r0, 0x6]
@@ -4287,7 +4287,7 @@ sub_810A000: @ 810A000
 	strh r0, [r1]
 	b _0810A052
 	.align 2, 0
-_0810A040: .4byte gUnknown_3005098
+_0810A040: .4byte gTasks+0x8
 _0810A044: .4byte gUnknown_203ACFC
 _0810A048: .4byte gSaveBlock1Ptr
 _0810A04C: .4byte 0x00000296
@@ -4344,7 +4344,7 @@ sub_810A0A8: @ 810A0A8
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r6, r0, 3
-	ldr r0, _0810A110 @ =gUnknown_3005098
+	ldr r0, _0810A110 @ =gTasks+0x8
 	mov r8, r0
 	adds r1, r6, r0
 	ldr r0, _0810A114 @ =gUnknown_203ACFC
@@ -4379,7 +4379,7 @@ sub_810A0A8: @ 810A0A8
 	bl sub_8108E70
 	b _0810A166
 	.align 2, 0
-_0810A110: .4byte gUnknown_3005098
+_0810A110: .4byte gTasks+0x8
 _0810A114: .4byte gUnknown_203ACFC
 _0810A118: .4byte gUnknown_841630F
 _0810A11C: .4byte sub_810A1D0
@@ -4504,7 +4504,7 @@ sub_810A1F8: @ 810A1F8
 	lsls r5, r0, 2
 	add r5, r8
 	lsls r5, 3
-	ldr r0, _0810A27C @ =gUnknown_3005098
+	ldr r0, _0810A27C @ =gTasks+0x8
 	adds r5, r0
 	movs r0, 0x5
 	bl sub_810BA9C
@@ -4551,7 +4551,7 @@ sub_810A1F8: @ 810A1F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A27C: .4byte gUnknown_3005098
+_0810A27C: .4byte gTasks+0x8
 _0810A280: .4byte gUnknown_203ACFC
 _0810A284: .4byte gUnknown_3005E70
 	thumb_func_end sub_810A1F8
@@ -4566,7 +4566,7 @@ sub_810A288: @ 810A288
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
-	ldr r0, _0810A2D8 @ =gUnknown_3005098
+	ldr r0, _0810A2D8 @ =gTasks+0x8
 	adds r4, r0
 	ldrb r0, [r4]
 	mov r6, sp
@@ -4593,7 +4593,7 @@ sub_810A288: @ 810A288
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A2D8: .4byte gUnknown_3005098
+_0810A2D8: .4byte gTasks+0x8
 	thumb_func_end sub_810A288
 
 	thumb_func_start sub_810A2DC
@@ -4612,7 +4612,7 @@ sub_810A2DC: @ 810A2DC
 	bl PutWindowTilemap
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r1, _0810A320 @ =gUnknown_3005090
+	ldr r1, _0810A320 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -4626,7 +4626,7 @@ sub_810A2DC: @ 810A2DC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A320: .4byte gUnknown_3005090
+_0810A320: .4byte gTasks
 	thumb_func_end sub_810A2DC
 
 	thumb_func_start sub_810A324
@@ -4674,7 +4674,7 @@ sub_810A370: @ 810A370
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r7, r0, 3
-	ldr r0, _0810A3BC @ =gUnknown_3005098
+	ldr r0, _0810A3BC @ =gTasks+0x8
 	mov r9, r0
 	adds r1, r7, r0
 	ldr r2, _0810A3C0 @ =gUnknown_203ACFC
@@ -4700,7 +4700,7 @@ sub_810A370: @ 810A370
 	bl sub_8108E70
 	b _0810A426
 	.align 2, 0
-_0810A3BC: .4byte gUnknown_3005098
+_0810A3BC: .4byte gTasks+0x8
 _0810A3C0: .4byte gUnknown_203ACFC
 _0810A3C4: .4byte gUnknown_841630F
 _0810A3C8: .4byte sub_810A1D0
@@ -4802,7 +4802,7 @@ sub_810A468: @ 810A468
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r7, r0, 3
-	ldr r0, _0810A4B4 @ =gUnknown_3005098
+	ldr r0, _0810A4B4 @ =gTasks+0x8
 	mov r9, r0
 	adds r1, r7, r0
 	ldr r2, _0810A4B8 @ =gUnknown_203ACFC
@@ -4829,7 +4829,7 @@ sub_810A468: @ 810A468
 	bl sub_8108E70
 	b _0810A51E
 	.align 2, 0
-_0810A4B4: .4byte gUnknown_3005098
+_0810A4B4: .4byte gTasks+0x8
 _0810A4B8: .4byte gUnknown_203ACFC
 _0810A4BC: .4byte gUnknown_841630F
 _0810A4C0: .4byte sub_810A1D0
@@ -4934,7 +4934,7 @@ sub_810A568: @ 810A568
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0810A58C @ =gUnknown_3005098
+	ldr r1, _0810A58C @ =gTasks+0x8
 	adds r4, r0, r1
 	ldr r6, _0810A590 @ =gUnknown_203AD30
 	ldrh r1, [r6]
@@ -4945,7 +4945,7 @@ sub_810A568: @ 810A568
 	ldr r0, _0810A594 @ =sub_810A654
 	b _0810A5A0
 	.align 2, 0
-_0810A58C: .4byte gUnknown_3005098
+_0810A58C: .4byte gTasks+0x8
 _0810A590: .4byte gUnknown_203AD30
 _0810A594: .4byte sub_810A654
 _0810A598:
@@ -5079,7 +5079,7 @@ sub_810A690: @ 810A690
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
-	ldr r0, _0810A6F4 @ =gUnknown_3005098
+	ldr r0, _0810A6F4 @ =gTasks+0x8
 	adds r4, r0
 	ldr r6, _0810A6F8 @ =gStringVar3
 	ldr r0, _0810A6FC @ =gUnknown_203ACFC
@@ -5117,7 +5117,7 @@ sub_810A690: @ 810A690
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A6F4: .4byte gUnknown_3005098
+_0810A6F4: .4byte gTasks+0x8
 _0810A6F8: .4byte gStringVar3
 _0810A6FC: .4byte gUnknown_203ACFC
 _0810A700: .4byte gStringVar4
@@ -5147,7 +5147,7 @@ sub_810A720: @ 810A720
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
-	ldr r0, _0810A76C @ =gUnknown_3005098
+	ldr r0, _0810A76C @ =gTasks+0x8
 	adds r4, r0
 	movs r0, 0x2
 	bl sub_810BA3C
@@ -5170,7 +5170,7 @@ sub_810A720: @ 810A720
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A76C: .4byte gUnknown_3005098
+_0810A76C: .4byte gTasks+0x8
 	thumb_func_end sub_810A720
 
 	thumb_func_start sub_810A770
@@ -5185,7 +5185,7 @@ sub_810A770: @ 810A770
 	lsls r5, r0, 2
 	adds r5, r0
 	lsls r5, 3
-	ldr r0, _0810A81C @ =gUnknown_3005098
+	ldr r0, _0810A81C @ =gTasks+0x8
 	mov r8, r0
 	adds r2, r5, 0
 	add r2, r8
@@ -5253,7 +5253,7 @@ sub_810A770: @ 810A770
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A81C: .4byte gUnknown_3005098
+_0810A81C: .4byte gTasks+0x8
 _0810A820: .4byte gStringVar1
 _0810A824: .4byte gStringVar4
 _0810A828: .4byte gUnknown_84162B9
@@ -5291,7 +5291,7 @@ sub_810A85C: @ 810A85C
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _0810A8B4 @ =gUnknown_3005098
+	ldr r1, _0810A8B4 @ =gTasks+0x8
 	adds r5, r0, r1
 	adds r0, r5, 0
 	adds r0, 0x10
@@ -5323,7 +5323,7 @@ sub_810A85C: @ 810A85C
 	bl sub_810A834
 	b _0810A93A
 	.align 2, 0
-_0810A8B4: .4byte gUnknown_3005098
+_0810A8B4: .4byte gTasks+0x8
 _0810A8B8: .4byte gUnknown_203ACFC
 _0810A8BC:
 	ldr r0, _0810A8EC @ =gMain
@@ -5388,7 +5388,7 @@ sub_810A940: @ 810A940
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
-	ldr r0, _0810A9B4 @ =gUnknown_3005098
+	ldr r0, _0810A9B4 @ =gTasks+0x8
 	adds r4, r0
 	movs r0, 0
 	bl PutWindowTilemap
@@ -5431,7 +5431,7 @@ sub_810A940: @ 810A940
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A9B4: .4byte gUnknown_3005098
+_0810A9B4: .4byte gTasks+0x8
 _0810A9B8: .4byte gUnknown_203AD30
 _0810A9BC: .4byte gStringVar1
 _0810A9C0: .4byte gStringVar3
@@ -5453,7 +5453,7 @@ sub_810A9D4: @ 810A9D4
 	lsls r6, r0, 2
 	adds r6, r0
 	lsls r6, 3
-	ldr r0, _0810AAD8 @ =gUnknown_3005098
+	ldr r0, _0810AAD8 @ =gTasks+0x8
 	mov r10, r0
 	adds r1, r6, 0
 	add r1, r10
@@ -5558,7 +5558,7 @@ sub_810A9D4: @ 810A9D4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810AAD8: .4byte gUnknown_3005098
+_0810AAD8: .4byte gTasks+0x8
 _0810AADC: .4byte gUnknown_203AD30
 _0810AAE0: .4byte gSaveBlock1Ptr
 _0810AAE4: .4byte gUnknown_203ACFC
@@ -5614,7 +5614,7 @@ sub_810AB40: @ 810AB40
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r4, r0, 3
-	ldr r5, _0810AB64 @ =gUnknown_3005098
+	ldr r5, _0810AB64 @ =gTasks+0x8
 	adds r1, r4, r5
 	movs r0, 0x1
 	strh r0, [r1, 0x10]
@@ -5626,7 +5626,7 @@ sub_810AB40: @ 810AB40
 	bl sub_810AC40
 	b _0810AB7A
 	.align 2, 0
-_0810AB64: .4byte gUnknown_3005098
+_0810AB64: .4byte gTasks+0x8
 _0810AB68:
 	ldrh r0, [r1, 0x2]
 	ldr r1, _0810AB80 @ =gUnknown_841638F
@@ -5654,7 +5654,7 @@ sub_810AB88: @ 810AB88
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0810ABB8 @ =gUnknown_3005098
+	ldr r1, _0810ABB8 @ =gTasks+0x8
 	adds r4, r0, r1
 	adds r0, r4, 0
 	adds r0, 0x10
@@ -5670,7 +5670,7 @@ sub_810AB88: @ 810AB88
 	bl sub_81097E4
 	b _0810AC38
 	.align 2, 0
-_0810ABB8: .4byte gUnknown_3005098
+_0810ABB8: .4byte gTasks+0x8
 _0810ABBC:
 	ldr r0, _0810ABFC @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -5737,7 +5737,7 @@ sub_810AC40: @ 810AC40
 	adds r0, r4
 	lsls r0, 3
 	mov r8, r0
-	ldr r0, _0810ACCC @ =gUnknown_3005098
+	ldr r0, _0810ACCC @ =gTasks+0x8
 	mov r9, r0
 	mov r7, r8
 	add r7, r9
@@ -5790,7 +5790,7 @@ sub_810AC40: @ 810AC40
 	str r1, [r0]
 	b _0810ACF8
 	.align 2, 0
-_0810ACCC: .4byte gUnknown_3005098
+_0810ACCC: .4byte gTasks+0x8
 _0810ACD0: .4byte gUnknown_203AD30
 _0810ACD4: .4byte 0x0000ffff
 _0810ACD8: .4byte gStringVar1
@@ -5859,7 +5859,7 @@ _0810AD1E:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0810AD8C @ =gUnknown_3005090
+	ldr r2, _0810AD8C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -5870,7 +5870,7 @@ _0810AD1E:
 _0810AD80: .4byte gSaveBlock1Ptr
 _0810AD84: .4byte 0x00000296
 _0810AD88: .4byte gUnknown_203AD30
-_0810AD8C: .4byte gUnknown_3005090
+_0810AD8C: .4byte gTasks
 _0810AD90:
 	ldr r0, [r4]
 	adds r0, r5
@@ -6142,7 +6142,7 @@ sub_810AF9C: @ 810AF9C
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r6, r0, 3
-	ldr r7, _0810AFCC @ =gUnknown_3005098
+	ldr r7, _0810AFCC @ =gTasks+0x8
 	adds r5, r6, r7
 	ldr r0, _0810AFD0 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -6160,7 +6160,7 @@ sub_810AF9C: @ 810AF9C
 	beq _0810AFE4
 	b _0810B064
 	.align 2, 0
-_0810AFCC: .4byte gUnknown_3005098
+_0810AFCC: .4byte gTasks+0x8
 _0810AFD0: .4byte gUnknown_2037AB8
 _0810AFD4:
 	movs r0, 0x99
@@ -6248,7 +6248,7 @@ sub_810B070: @ 810B070
 	str r2, [sp]
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0810B0A4 @ =gUnknown_3005090
+	ldr r1, _0810B0A4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -6260,7 +6260,7 @@ sub_810B070: @ 810B070
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810B0A4: .4byte gUnknown_3005090
+_0810B0A4: .4byte gTasks
 _0810B0A8: .4byte sub_810B0AC
 	thumb_func_end sub_810B070
 
@@ -6388,7 +6388,7 @@ _0810B19C:
 	ldr r1, [r0]
 	ldr r0, _0810B1C8 @ =sub_815ABFC
 	str r0, [r1]
-	ldr r1, _0810B1CC @ =gUnknown_3005090
+	ldr r1, _0810B1CC @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -6403,7 +6403,7 @@ _0810B1BC:
 	.align 2, 0
 _0810B1C4: .4byte gUnknown_203AD10
 _0810B1C8: .4byte sub_815ABFC
-_0810B1CC: .4byte gUnknown_3005090
+_0810B1CC: .4byte gTasks
 _0810B1D0: .4byte sub_810B070
 	thumb_func_end sub_810B180
 
@@ -6415,7 +6415,7 @@ sub_810B1D4: @ 810B1D4
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r5, r0, 3
-	ldr r6, _0810B220 @ =gUnknown_3005098
+	ldr r6, _0810B220 @ =gTasks+0x8
 	adds r7, r5, r6
 	ldr r0, _0810B224 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -6449,7 +6449,7 @@ _0810B202:
 	beq _0810B254
 	b _0810B36C
 	.align 2, 0
-_0810B220: .4byte gUnknown_3005098
+_0810B220: .4byte gTasks+0x8
 _0810B224: .4byte gUnknown_2037AB8
 _0810B228:
 	movs r0, 0x99
@@ -6612,7 +6612,7 @@ sub_810B378: @ 810B378
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r6, r0, 3
-	ldr r7, _0810B3B0 @ =gUnknown_3005098
+	ldr r7, _0810B3B0 @ =gTasks+0x8
 	adds r4, r6, r7
 	ldr r0, _0810B3B4 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -6632,7 +6632,7 @@ _0810B396:
 	bl sub_804C230
 	b _0810B4B6
 	.align 2, 0
-_0810B3B0: .4byte gUnknown_3005098
+_0810B3B0: .4byte gTasks+0x8
 _0810B3B4: .4byte gUnknown_2037AB8
 _0810B3B8:
 	movs r0, 0x10
@@ -6771,7 +6771,7 @@ sub_810B4BC: @ 810B4BC
 	adds r0, r4
 	lsls r0, 3
 	mov r8, r0
-	ldr r0, _0810B504 @ =gUnknown_3005098
+	ldr r0, _0810B504 @ =gTasks+0x8
 	mov r9, r0
 	mov r5, r8
 	add r5, r9
@@ -6794,7 +6794,7 @@ sub_810B4BC: @ 810B4BC
 	bl sub_804C230
 	b _0810B5C6
 	.align 2, 0
-_0810B504: .4byte gUnknown_3005098
+_0810B504: .4byte gTasks+0x8
 _0810B508: .4byte gUnknown_2037AB8
 _0810B50C:
 	movs r0, 0x10
@@ -6897,7 +6897,7 @@ sub_810B5D4: @ 810B5D4
 	adds r0, r4
 	lsls r0, 3
 	mov r8, r0
-	ldr r0, _0810B624 @ =gUnknown_3005098
+	ldr r0, _0810B624 @ =gTasks+0x8
 	mov r9, r0
 	mov r6, r8
 	add r6, r9
@@ -6926,7 +6926,7 @@ sub_810B5D4: @ 810B5D4
 	beq _0810B63C
 	b _0810B6E0
 	.align 2, 0
-_0810B624: .4byte gUnknown_3005098
+_0810B624: .4byte gTasks+0x8
 _0810B628: .4byte gUnknown_2037AB8
 _0810B62C:
 	movs r0, 0x99

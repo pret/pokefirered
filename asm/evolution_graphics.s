@@ -594,7 +594,7 @@ LaunchTask_PreEvoSparklesSet1: @ 80F5DA0
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F5DCC @ =gUnknown_3005090
+	ldr r2, _080F5DCC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -605,7 +605,7 @@ LaunchTask_PreEvoSparklesSet1: @ 80F5DA0
 	bx r1
 	.align 2, 0
 _080F5DC8: .4byte sub_80F5DD0
-_080F5DCC: .4byte gUnknown_3005090
+_080F5DCC: .4byte gTasks
 	thumb_func_end LaunchTask_PreEvoSparklesSet1
 
 	thumb_func_start sub_80F5DD0
@@ -616,7 +616,7 @@ sub_80F5DD0: @ 80F5DD0
 	lsls r4, 24
 	lsrs r4, 24
 	bl SetEvoSparklesMatrices
-	ldr r0, _080F5E14 @ =gUnknown_3005090
+	ldr r0, _080F5E14 @ =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
 	lsls r5, 3
@@ -642,7 +642,7 @@ sub_80F5DD0: @ 80F5DD0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5E14: .4byte gUnknown_3005090
+_080F5E14: .4byte gTasks
 _080F5E18: .4byte 0x00007fff
 _080F5E1C: .4byte EvoTask_CreatePreEvoSparkleSet1
 	thumb_func_end sub_80F5DD0
@@ -652,7 +652,7 @@ EvoTask_CreatePreEvoSparkleSet1: @ 80F5E20
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080F5E78 @ =gUnknown_3005090
+	ldr r1, _080F5E78 @ =gTasks
 	lsls r3, r5, 2
 	adds r0, r3, r5
 	lsls r0, 3
@@ -685,7 +685,7 @@ _080F5E48:
 	cmp r4, 0x3
 	bls _080F5E48
 _080F5E66:
-	ldr r0, _080F5E78 @ =gUnknown_3005090
+	ldr r0, _080F5E78 @ =gTasks
 	adds r1, r7, r5
 	lsls r1, 3
 	adds r1, r0
@@ -694,7 +694,7 @@ _080F5E66:
 	strh r0, [r1, 0x26]
 	b _080F5E84
 	.align 2, 0
-_080F5E78: .4byte gUnknown_3005090
+_080F5E78: .4byte gTasks
 _080F5E7C:
 	movs r0, 0x60
 	strh r0, [r1, 0x26]
@@ -713,7 +713,7 @@ EvoTask_WaitForPre1SparklesToGoUp: @ 80F5E90
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, _080F5EB0 @ =gUnknown_3005090
+	ldr r1, _080F5EB0 @ =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -727,7 +727,7 @@ EvoTask_WaitForPre1SparklesToGoUp: @ 80F5E90
 	strh r0, [r1, 0x26]
 	b _080F5EBA
 	.align 2, 0
-_080F5EB0: .4byte gUnknown_3005090
+_080F5EB0: .4byte gTasks
 _080F5EB4:
 	adds r0, r2, 0
 	bl DestroyTask
@@ -758,7 +758,7 @@ sub_80F5ED8: @ 80F5ED8
 	lsls r4, 24
 	lsrs r4, 24
 	bl SetEvoSparklesMatrices
-	ldr r1, _080F5F04 @ =gUnknown_3005090
+	ldr r1, _080F5F04 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -773,7 +773,7 @@ sub_80F5ED8: @ 80F5ED8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5F04: .4byte gUnknown_3005090
+_080F5F04: .4byte gTasks
 _080F5F08: .4byte EvoTask_CreatePreEvoSparklesSet2
 	thumb_func_end sub_80F5ED8
 
@@ -782,7 +782,7 @@ EvoTask_CreatePreEvoSparklesSet2: @ 80F5F0C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080F5F50 @ =gUnknown_3005090
+	ldr r1, _080F5F50 @ =gTasks
 	lsls r2, r5, 2
 	adds r0, r2, r5
 	lsls r0, 3
@@ -805,7 +805,7 @@ _080F5F2C:
 	cmp r4, 0x8
 	bls _080F5F2C
 _080F5F3E:
-	ldr r0, _080F5F50 @ =gUnknown_3005090
+	ldr r0, _080F5F50 @ =gTasks
 	adds r1, r6, r5
 	lsls r1, 3
 	adds r1, r0
@@ -814,7 +814,7 @@ _080F5F3E:
 	strh r0, [r1, 0x26]
 	b _080F5F58
 	.align 2, 0
-_080F5F50: .4byte gUnknown_3005090
+_080F5F50: .4byte gTasks
 _080F5F54:
 	ldr r0, _080F5F60 @ =sub_80F5F64
 	str r0, [r1]
@@ -857,7 +857,7 @@ sub_80F5F8C: @ 80F5F8C
 	lsls r4, 24
 	lsrs r4, 24
 	bl SetEvoSparklesMatrices
-	ldr r1, _080F5FB8 @ =gUnknown_3005090
+	ldr r1, _080F5FB8 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -872,7 +872,7 @@ sub_80F5F8C: @ 80F5F8C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5FB8: .4byte gUnknown_3005090
+_080F5FB8: .4byte gTasks
 _080F5FBC: .4byte EvoTask_CreatePostEvoSparklesSet1
 	thumb_func_end sub_80F5F8C
 
@@ -881,7 +881,7 @@ EvoTask_CreatePostEvoSparklesSet1: @ 80F5FC0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080F602C @ =gUnknown_3005090
+	ldr r1, _080F602C @ =gTasks
 	lsls r2, r5, 2
 	adds r0, r2, r5
 	lsls r0, 3
@@ -905,7 +905,7 @@ _080F5FE0:
 	cmp r4, 0xF
 	bls _080F5FE0
 _080F5FF4:
-	ldr r0, _080F602C @ =gUnknown_3005090
+	ldr r0, _080F602C @ =gTasks
 	adds r1, r6, r5
 	lsls r1, 3
 	adds r1, r0
@@ -925,7 +925,7 @@ _080F6006:
 	cmp r4, 0xF
 	bls _080F6006
 _080F601A:
-	ldr r0, _080F602C @ =gUnknown_3005090
+	ldr r0, _080F602C @ =gTasks
 	adds r1, r6, r5
 	lsls r1, 3
 	adds r1, r0
@@ -934,7 +934,7 @@ _080F601A:
 	strh r0, [r1, 0x26]
 	b _080F6034
 	.align 2, 0
-_080F602C: .4byte gUnknown_3005090
+_080F602C: .4byte gTasks
 _080F6030:
 	ldr r0, _080F603C @ =sub_80F6040
 	str r0, [r1]
@@ -967,7 +967,7 @@ LaunchTask_PostEvoSparklesSet2AndFlash: @ 80F6050
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F607C @ =gUnknown_3005090
+	ldr r2, _080F607C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -978,7 +978,7 @@ LaunchTask_PostEvoSparklesSet2AndFlash: @ 80F6050
 	bx r1
 	.align 2, 0
 _080F6078: .4byte sub_80F6080
-_080F607C: .4byte gUnknown_3005090
+_080F607C: .4byte gTasks
 	thumb_func_end LaunchTask_PostEvoSparklesSet2AndFlash
 
 	thumb_func_start sub_80F6080
@@ -989,7 +989,7 @@ sub_80F6080: @ 80F6080
 	lsls r4, 24
 	lsrs r4, 24
 	bl SetEvoSparklesMatrices
-	ldr r0, _080F60CC @ =gUnknown_3005090
+	ldr r0, _080F60CC @ =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
 	lsls r5, 3
@@ -1017,7 +1017,7 @@ sub_80F6080: @ 80F6080
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F60CC: .4byte gUnknown_3005090
+_080F60CC: .4byte gTasks
 _080F60D0: .4byte gUnknown_2037638
 _080F60D4: .4byte gUnknown_2037238
 _080F60D8: .4byte 0xfff90f1c
@@ -1031,7 +1031,7 @@ sub_80F60E4: @ 80F60E4
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _080F611C @ =gUnknown_3005090
+	ldr r1, _080F611C @ =gTasks
 	lsls r5, r6, 2
 	adds r0, r5, r6
 	lsls r0, 3
@@ -1053,7 +1053,7 @@ sub_80F60E4: @ 80F60E4
 	bl CreatePostEvoSparkleSet2
 	b _080F6144
 	.align 2, 0
-_080F611C: .4byte gUnknown_3005090
+_080F611C: .4byte gTasks
 _080F6120:
 	movs r4, 0
 _080F6122:
@@ -1074,7 +1074,7 @@ _080F6134:
 	movs r3, 0
 	bl BeginNormalPaletteFade
 _080F6144:
-	ldr r0, _080F615C @ =gUnknown_3005090
+	ldr r0, _080F615C @ =gTasks
 	adds r1, r5, r6
 	lsls r1, 3
 	adds r1, r0
@@ -1085,7 +1085,7 @@ _080F6144:
 	.align 2, 0
 _080F6154: .4byte 0xffff0f1c
 _080F6158: .4byte 0x00007fff
-_080F615C: .4byte gUnknown_3005090
+_080F615C: .4byte gTasks
 _080F6160:
 	ldr r0, _080F616C @ =sub_80F6170
 	str r0, [r1]
@@ -1129,7 +1129,7 @@ sub_80F6190: @ 80F6190
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F61BC @ =gUnknown_3005090
+	ldr r2, _080F61BC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1140,7 +1140,7 @@ sub_80F6190: @ 80F6190
 	bx r1
 	.align 2, 0
 _080F61B8: .4byte sub_80F61C0
-_080F61BC: .4byte gUnknown_3005090
+_080F61BC: .4byte gTasks
 	thumb_func_end sub_80F6190
 
 	thumb_func_start sub_80F61C0
@@ -1151,7 +1151,7 @@ sub_80F61C0: @ 80F61C0
 	lsls r4, 24
 	lsrs r4, 24
 	bl SetEvoSparklesMatrices
-	ldr r0, _080F620C @ =gUnknown_3005090
+	ldr r0, _080F620C @ =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
 	lsls r5, 3
@@ -1179,7 +1179,7 @@ sub_80F61C0: @ 80F61C0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F620C: .4byte gUnknown_3005090
+_080F620C: .4byte gTasks
 _080F6210: .4byte gUnknown_2037638
 _080F6214: .4byte gUnknown_2037238
 _080F6218: .4byte 0xfff90f00
@@ -1193,7 +1193,7 @@ sub_80F6224: @ 80F6224
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _080F625C @ =gUnknown_3005090
+	ldr r1, _080F625C @ =gTasks
 	lsls r5, r6, 2
 	adds r0, r5, r6
 	lsls r0, 3
@@ -1215,7 +1215,7 @@ sub_80F6224: @ 80F6224
 	bl CreatePostEvoSparkleSet2
 	b _080F6284
 	.align 2, 0
-_080F625C: .4byte gUnknown_3005090
+_080F625C: .4byte gTasks
 _080F6260:
 	movs r4, 0
 _080F6262:
@@ -1236,7 +1236,7 @@ _080F6274:
 	movs r3, 0
 	bl BeginNormalPaletteFade
 _080F6284:
-	ldr r0, _080F629C @ =gUnknown_3005090
+	ldr r0, _080F629C @ =gTasks
 	adds r1, r5, r6
 	lsls r1, 3
 	adds r1, r0
@@ -1247,7 +1247,7 @@ _080F6284:
 	.align 2, 0
 _080F6294: .4byte 0xffff0f00
 _080F6298: .4byte 0x00007fff
-_080F629C: .4byte gUnknown_3005090
+_080F629C: .4byte gTasks
 _080F62A0:
 	ldr r0, _080F62AC @ =sub_80F6170
 	str r0, [r1]
@@ -1298,7 +1298,7 @@ _080F62CE:
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, _080F63F0 @ =gUnknown_3005090
+	ldr r0, _080F63F0 @ =gTasks
 	mov r1, r8
 	lsls r6, r1, 2
 	add r6, r8
@@ -1419,7 +1419,7 @@ _080F62CE:
 	.align 2, 0
 _080F63E8: .4byte sub_80F6400
 _080F63EC: .4byte 0x00007fff
-_080F63F0: .4byte gUnknown_3005090
+_080F63F0: .4byte gTasks
 _080F63F4: .4byte gSprites
 _080F63F8: .4byte nullsub_86
 _080F63FC: .4byte gUnknown_20377F8
@@ -1429,7 +1429,7 @@ _080F63FC: .4byte gUnknown_20377F8
 sub_80F6400: @ 80F6400
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080F641C @ =gUnknown_3005090
+	ldr r2, _080F641C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1442,7 +1442,7 @@ sub_80F6400: @ 80F6400
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080F641C: .4byte gUnknown_3005090
+_080F641C: .4byte gTasks
 _080F6420: .4byte sub_80F6424
 	thumb_func_end sub_80F6400
 
@@ -1451,7 +1451,7 @@ sub_80F6424: @ 80F6424
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r1, _080F6444 @ =gUnknown_3005090
+	ldr r1, _080F6444 @ =gTasks
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r0, 3
@@ -1464,7 +1464,7 @@ sub_80F6424: @ 80F6424
 	bl PreEvoVisible_PostEvoInvisible_KillTask
 	b _080F646A
 	.align 2, 0
-_080F6444: .4byte gUnknown_3005090
+_080F6444: .4byte gTasks
 _080F6448:
 	ldrh r1, [r2, 0x14]
 	movs r4, 0x14
@@ -1497,7 +1497,7 @@ sub_80F6474: @ 80F6474
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _080F6498 @ =gUnknown_3005090
+	ldr r1, _080F6498 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1511,7 +1511,7 @@ sub_80F6474: @ 80F6474
 	str r0, [r2]
 	b _080F6584
 	.align 2, 0
-_080F6498: .4byte gUnknown_3005090
+_080F6498: .4byte gTasks
 _080F649C: .4byte PreEvoVisible_PostEvoInvisible_KillTask
 _080F64A0:
 	movs r6, 0
@@ -1651,7 +1651,7 @@ PreEvoInvisible_PostEvoVisible_KillTask: @ 80F6590
 	lsrs r0, 24
 	ldr r1, _080F6638 @ =gSprites
 	mov r8, r1
-	ldr r1, _080F663C @ =gUnknown_3005090
+	ldr r1, _080F663C @ =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -1729,7 +1729,7 @@ PreEvoInvisible_PostEvoVisible_KillTask: @ 80F6590
 	bx r0
 	.align 2, 0
 _080F6638: .4byte gSprites
-_080F663C: .4byte gUnknown_3005090
+_080F663C: .4byte gTasks
 	thumb_func_end PreEvoInvisible_PostEvoVisible_KillTask
 
 	thumb_func_start PreEvoVisible_PostEvoInvisible_KillTask
@@ -1741,7 +1741,7 @@ PreEvoVisible_PostEvoInvisible_KillTask: @ 80F6640
 	lsrs r0, 24
 	ldr r1, _080F66E8 @ =gSprites
 	mov r8, r1
-	ldr r1, _080F66EC @ =gUnknown_3005090
+	ldr r1, _080F66EC @ =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -1819,7 +1819,7 @@ PreEvoVisible_PostEvoInvisible_KillTask: @ 80F6640
 	bx r0
 	.align 2, 0
 _080F66E8: .4byte gSprites
-_080F66EC: .4byte gUnknown_3005090
+_080F66EC: .4byte gTasks
 	thumb_func_end PreEvoVisible_PostEvoInvisible_KillTask
 
 	.align 2, 0 @ Don't pad with nop.

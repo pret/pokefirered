@@ -1174,7 +1174,7 @@ sub_809E32C: @ 809E32C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _0809E35C @ =gUnknown_83E2354
-	ldr r2, _0809E360 @ =gUnknown_3005090
+	ldr r2, _0809E360 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1195,7 +1195,7 @@ _0809E33E:
 	bx r0
 	.align 2, 0
 _0809E35C: .4byte gUnknown_83E2354
-_0809E360: .4byte gUnknown_3005090
+_0809E360: .4byte gTasks
 	thumb_func_end sub_809E32C
 
 	thumb_func_start sub_809E364
@@ -1410,7 +1410,7 @@ sub_809E4F0: @ 809E4F0
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0809E514 @ =gUnknown_3005090
+	ldr r2, _0809E514 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1421,7 +1421,7 @@ sub_809E4F0: @ 809E4F0
 	bx r0
 	.align 2, 0
 _0809E510: .4byte c3_0809E58C
-_0809E514: .4byte gUnknown_3005090
+_0809E514: .4byte gTasks
 	thumb_func_end sub_809E4F0
 
 	thumb_func_start sub_809E518
@@ -1440,7 +1440,7 @@ sub_809E518: @ 809E518
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0809E554 @ =gUnknown_3005090
+	ldr r0, _0809E554 @ =gTasks
 	adds r4, r1, r0
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -1454,7 +1454,7 @@ sub_809E518: @ 809E518
 	b _0809E584
 	.align 2, 0
 _0809E550: .4byte c3_0809E58C
-_0809E554: .4byte gUnknown_3005090
+_0809E554: .4byte gTasks
 _0809E558:
 	cmp r5, 0x3
 	bne _0809E568
@@ -1492,7 +1492,7 @@ c3_0809E58C: @ 809E58C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0809E5F4 @ =gUnknown_3005090
+	ldr r0, _0809E5F4 @ =gTasks
 	adds r4, r1, r0
 	ldrh r1, [r4, 0x8]
 	movs r2, 0x8
@@ -1538,7 +1538,7 @@ _0809E5D8:
 	adds r0, r2, r1
 	b _0809E606
 	.align 2, 0
-_0809E5F4: .4byte gUnknown_3005090
+_0809E5F4: .4byte gTasks
 _0809E5F8:
 	movs r0, 0x10
 	strh r0, [r4, 0xE]
@@ -3140,7 +3140,7 @@ GetInputEvent: @ 809F21C
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0809F23C @ =gUnknown_3005090
+	ldr r2, _0809F23C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3150,7 +3150,7 @@ GetInputEvent: @ 809F21C
 	bx r1
 	.align 2, 0
 _0809F238: .4byte sub_809F26C
-_0809F23C: .4byte gUnknown_3005090
+_0809F23C: .4byte gTasks
 	thumb_func_end GetInputEvent
 
 	thumb_func_start SetInputState
@@ -3163,7 +3163,7 @@ SetInputState: @ 809F240
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0809F268 @ =gUnknown_3005090
+	ldr r2, _0809F268 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3174,7 +3174,7 @@ SetInputState: @ 809F240
 	bx r0
 	.align 2, 0
 _0809F264: .4byte sub_809F26C
-_0809F268: .4byte gUnknown_3005090
+_0809F268: .4byte gTasks
 	thumb_func_end SetInputState
 
 	thumb_func_start sub_809F26C
@@ -3184,7 +3184,7 @@ sub_809F26C: @ 809F26C
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, _0809F294 @ =gUnknown_83E23E0
-	ldr r2, _0809F298 @ =gUnknown_3005090
+	ldr r2, _0809F298 @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -3199,7 +3199,7 @@ sub_809F26C: @ 809F26C
 	bx r0
 	.align 2, 0
 _0809F294: .4byte gUnknown_83E23E0
-_0809F298: .4byte gUnknown_3005090
+_0809F298: .4byte gTasks
 	thumb_func_end sub_809F26C
 
 	thumb_func_start InputState_Disabled

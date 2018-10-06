@@ -29,7 +29,7 @@ sub_8078178: @ 8078178
 	bl sub_800F034
 	ldr r0, _08078228 @ =gUnknown_83AD950
 	bl sub_800F078
-	ldr r1, _0807822C @ =gUnknown_3005090
+	ldr r1, _0807822C @ =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
 	add r0, r8
@@ -92,7 +92,7 @@ _0807821C: .4byte gUnknown_2023D44
 _08078220: .4byte sub_80782BC
 _08078224: .4byte gUnknown_83AD048
 _08078228: .4byte gUnknown_83AD950
-_0807822C: .4byte gUnknown_3005090
+_0807822C: .4byte gTasks
 _08078230: .4byte gSprites
 _08078234: .4byte gUnknown_83BF574
 _08078238:
@@ -169,7 +169,7 @@ sub_80782BC: @ 80782BC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _08078314 @ =gUnknown_3005090
+	ldr r1, _08078314 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -209,7 +209,7 @@ sub_80782BC: @ 80782BC
 	strh r0, [r4, 0x12]
 	b _08078346
 	.align 2, 0
-_08078314: .4byte gUnknown_3005090
+_08078314: .4byte gTasks
 _08078318:
 	ldrh r1, [r4, 0x10]
 	subs r0, r1, 0x1
@@ -408,7 +408,7 @@ _08078484:
 	adds r0, r1
 	ldr r1, _080784CC @ =gUnknown_83BF554
 	bl SetSubspriteTables
-	ldr r1, _080784D0 @ =gUnknown_3005090
+	ldr r1, _080784D0 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -429,7 +429,7 @@ _080784C0: .4byte 0x0000271a
 _080784C4: .4byte 0xffff0000
 _080784C8: .4byte gSprites
 _080784CC: .4byte gUnknown_83BF554
-_080784D0: .4byte gUnknown_3005090
+_080784D0: .4byte gTasks
 _080784D4: .4byte sub_80784D8
 	thumb_func_end sub_80783FC
 
@@ -438,7 +438,7 @@ sub_80784D8: @ 80784D8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08078504 @ =gUnknown_3005090
+	ldr r2, _08078504 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -457,7 +457,7 @@ sub_80784D8: @ 80784D8
 	strh r0, [r1, 0xA]
 	b _08078522
 	.align 2, 0
-_08078504: .4byte gUnknown_3005090
+_08078504: .4byte gTasks
 _08078508: .4byte sub_8078528
 _0807850C:
 	lsls r0, r2, 24
@@ -485,7 +485,7 @@ sub_8078528: @ 8078528
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, _080785C4 @ =gUnknown_3005090
+	ldr r1, _080785C4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -554,7 +554,7 @@ _080785B8:
 	bx r0
 	.align 2, 0
 _080785C0: .4byte 0x0000271a
-_080785C4: .4byte gUnknown_3005090
+_080785C4: .4byte gTasks
 _080785C8: .4byte gUnknown_20375F8
 _080785CC: .4byte 0x0000010d
 _080785D0: .4byte 0x0000010f
@@ -566,7 +566,7 @@ sub_80785D8: @ 80785D8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08078608 @ =gUnknown_3005090
+	ldr r2, _08078608 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -587,7 +587,7 @@ sub_80785D8: @ 80785D8
 	strh r0, [r2, 0xA]
 	b _08078626
 	.align 2, 0
-_08078608: .4byte gUnknown_3005090
+_08078608: .4byte gTasks
 _0807860C: .4byte sub_807862C
 _08078610:
 	lsls r0, r3, 24
@@ -611,7 +611,7 @@ sub_807862C: @ 807862C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	ldr r1, _0807866C @ =gUnknown_3005090
+	ldr r1, _0807866C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -637,7 +637,7 @@ sub_807862C: @ 807862C
 	bl DestroySprite
 	b _0807868E
 	.align 2, 0
-_0807866C: .4byte gUnknown_3005090
+_0807866C: .4byte gTasks
 _08078670: .4byte gSprites
 _08078674:
 	cmp r0, 0x27
@@ -874,7 +874,7 @@ _08078838:
 	strh r1, [r0, 0x4]
 	strh r1, [r0, 0x6]
 	strh r3, [r0, 0x8]
-	ldr r1, _08078864 @ =gUnknown_3005090
+	ldr r1, _08078864 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -889,7 +889,7 @@ _0807885A:
 	bx r0
 	.align 2, 0
 _08078860: .4byte gUnknown_2037F02
-_08078864: .4byte gUnknown_3005090
+_08078864: .4byte gTasks
 _08078868: .4byte sub_80BB088
 	thumb_func_end sub_8078694
 
@@ -913,7 +913,7 @@ LaunchStatusAnimation: @ 807886C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080788B8 @ =gUnknown_3005090
+	ldr r2, _080788B8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -927,7 +927,7 @@ _080788A8: .4byte gUnknown_2037F1A
 _080788AC: .4byte gUnknown_2037F1B
 _080788B0: .4byte gUnknown_81C6E84
 _080788B4: .4byte task0A_80788BC
-_080788B8: .4byte gUnknown_3005090
+_080788B8: .4byte gTasks
 	thumb_func_end LaunchStatusAnimation
 
 	thumb_func_start task0A_80788BC
@@ -944,7 +944,7 @@ task0A_80788BC: @ 80788BC
 	bne _080788FE
 	ldr r0, _0807890C @ =gUnknown_2024018
 	ldr r2, [r0]
-	ldr r1, _08078910 @ =gUnknown_3005090
+	ldr r1, _08078910 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -971,7 +971,7 @@ _080788FE:
 _08078904: .4byte gUnknown_2037EDC
 _08078908: .4byte gUnknown_2037EE1
 _0807890C: .4byte gUnknown_2024018
-_08078910: .4byte gUnknown_3005090
+_08078910: .4byte gTasks
 	thumb_func_end task0A_80788BC
 
 	.align 2, 0 @ Don't pad with nop.

@@ -122,7 +122,7 @@ sub_80974F8: @ 80974F8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r3, r1, 3
-	ldr r5, _08097538 @ =gUnknown_3005098
+	ldr r5, _08097538 @ =gTasks+0x8
 	ldr r0, _0809753C @ =0x0000ffff
 	adds r4, r0, 0
 _08097518:
@@ -142,7 +142,7 @@ _08097518:
 	bx r0
 	.align 2, 0
 _08097534: .4byte Task_80A244C
-_08097538: .4byte gUnknown_3005098
+_08097538: .4byte gTasks+0x8
 _0809753C: .4byte 0x0000ffff
 	thumb_func_end sub_80974F8
 
@@ -226,7 +226,7 @@ sub_80975C0: @ 80975C0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080975E4 @ =gUnknown_3005098
+	ldr r0, _080975E4 @ =gTasks+0x8
 	adds r1, r0
 	adds r1, 0x2
 	movs r2, 0
@@ -237,7 +237,7 @@ _080975D8:
 	adds r0, r2, 0
 	b _080975F6
 	.align 2, 0
-_080975E4: .4byte gUnknown_3005098
+_080975E4: .4byte gTasks+0x8
 _080975E8:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -261,7 +261,7 @@ sub_80975FC: @ 80975FC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0809762C @ =gUnknown_3005098
+	ldr r0, _0809762C @ =gTasks+0x8
 	adds r1, r0
 	adds r1, 0x2
 	str r1, [r2]
@@ -280,7 +280,7 @@ _08097628:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809762C: .4byte gUnknown_3005098
+_0809762C: .4byte gTasks+0x8
 	thumb_func_end sub_80975FC
 
 	thumb_func_start sub_8097630
@@ -329,14 +329,14 @@ sub_8097678: @ 8097678
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r2, _080976A0 @ =gUnknown_825E45C
+	ldr r2, _080976A0 @ =gBitTable
 	lsrs r1, 22
 	adds r1, r2
 	ldr r2, [r1]
 	mvns r2, r2
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r3, _080976A4 @ =gUnknown_3005090
+	ldr r3, _080976A4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -346,8 +346,8 @@ sub_8097678: @ 8097678
 	strh r2, [r1, 0x8]
 	bx lr
 	.align 2, 0
-_080976A0: .4byte gUnknown_825E45C
-_080976A4: .4byte gUnknown_3005090
+_080976A0: .4byte gBitTable
+_080976A4: .4byte gTasks
 	thumb_func_end sub_8097678
 
 	thumb_func_start sub_80976A8
@@ -355,12 +355,12 @@ sub_80976A8: @ 80976A8
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, _080976C8 @ =gUnknown_3005090
+	ldr r3, _080976C8 @ =gTasks
 	lsls r2, r0, 2
 	adds r2, r0
 	lsls r2, 3
 	adds r2, r3
-	ldr r0, _080976CC @ =gUnknown_825E45C
+	ldr r0, _080976CC @ =gBitTable
 	lsrs r1, 22
 	adds r1, r0
 	ldr r0, [r1]
@@ -369,8 +369,8 @@ sub_80976A8: @ 80976A8
 	strh r0, [r2, 0x8]
 	bx lr
 	.align 2, 0
-_080976C8: .4byte gUnknown_3005090
-_080976CC: .4byte gUnknown_825E45C
+_080976C8: .4byte gTasks
+_080976CC: .4byte gBitTable
 	thumb_func_end sub_80976A8
 
 	thumb_func_start sub_80976D0
@@ -379,12 +379,12 @@ sub_80976D0: @ 80976D0
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, _080976F8 @ =gUnknown_3005090
+	ldr r3, _080976F8 @ =gTasks
 	lsls r2, r0, 2
 	adds r2, r0
 	lsls r2, 3
 	adds r2, r3
-	ldr r0, _080976FC @ =gUnknown_825E45C
+	ldr r0, _080976FC @ =gBitTable
 	lsrs r1, 22
 	adds r1, r0
 	ldr r0, [r1]
@@ -395,8 +395,8 @@ sub_80976D0: @ 80976D0
 	movs r0, 0
 	b _08097702
 	.align 2, 0
-_080976F8: .4byte gUnknown_3005090
-_080976FC: .4byte gUnknown_825E45C
+_080976F8: .4byte gTasks
+_080976FC: .4byte gBitTable
 _08097700:
 	movs r0, 0x1
 _08097702:
@@ -468,7 +468,7 @@ UnfreezeObjects: @ 8097768
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080977A4 @ =gUnknown_3005098
+	ldr r0, _080977A4 @ =gTasks+0x8
 	adds r1, r0
 	adds r4, r1, 0x2
 	movs r5, 0
@@ -494,7 +494,7 @@ _08097792:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080977A4: .4byte gUnknown_3005098
+_080977A4: .4byte gTasks+0x8
 _080977A8: .4byte gUnknown_2036E38
 	thumb_func_end UnfreezeObjects
 

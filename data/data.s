@@ -12,6 +12,7 @@ gWirelessLinkDisplay4bpp:: @ 8231EE4
 gWirelessLinkDisplayBin:: @ 823238C
 	.incbin "graphics/interface/wireless_link_display.bin.lz"
 
+	.align 2
 gUnknown_8232578:: @ 8232578
 	.incbin "baserom.gba", 0x232578, 0x20
 

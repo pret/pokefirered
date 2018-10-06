@@ -476,7 +476,14 @@ struct SaveBlock1
 {
     /*0x0000*/ u8 filler[0x4];
     /*0x0004*/ struct WarpData location;
-    /*0x000C*/ u8 fillerC[0x3610];
+    /*0x0C*/ struct WarpData warp1;
+    /*0x14*/ struct WarpData warp2;
+    /*0x1C*/ struct WarpData lastHealLocation;
+    /*0x24*/ struct WarpData warp4;
+    /*0x002C*/ u8 filler2C[0x674];
+    /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
+    /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
+    /*0x0EE0*/ u8 fillerEE0[0x273C];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[0x44];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];

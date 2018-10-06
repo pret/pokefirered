@@ -3,6 +3,7 @@
 #include "sound.h"
 #include "task.h"
 #include "malloc.h"
+#include "field_map_obj.h"
 #include "new_menu_helpers.h"
 #include "item_use.h"
 #include "event_scripts.h"
@@ -17,15 +18,18 @@ struct UnkStruct_845318C
     // TODO: populate
 };
 
+extern struct MapObject gUnknown_2036E38[MAP_OBJECTS_COUNT];
+
 // static declarations
 EWRAM_DATA struct VsSeekerStruct *gUnknown_203ADB8;
 void sub_810C730(u8 taskId);
 void sub_810C760(u8 taskId);
-void sub_810C8EC(u8 taskId);
 void sub_810C808(void);
+void sub_810C8EC(u8 taskId);
 bool8 sub_810C96C(void);
 void sub_810C604(void);
 u8 sub_810C9A8(const void *);
+u16 sub_810D074(const u8 *);
 
 // rodata
 extern const struct UnkStruct_845318C gUnknown_845318C[];
@@ -91,4 +95,29 @@ void sub_810C760(u8 taskId)
         ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gUnknown_8453F5C);
         gTasks[taskId].func = sub_810C8EC;
     }
+}
+
+void sub_810C808(void)
+{
+    struct MapObjectTemplate *templates = gSaveBlock1Ptr->mapObjectTemplates;
+    u8 fieldObjectId = 0;
+    u8 vsSeekerObjectIdx = 0;
+    s32 mapObjectIdx;
+
+    for (mapObjectIdx = 0; mapObjectIdx < gMapHeader.events->mapObjectCount; mapObjectIdx++)
+    {
+        if (templates[mapObjectIdx].unkC == 1 || templates[mapObjectIdx].unkC == 3)
+        {
+            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_0 = templates[mapObjectIdx].script;
+            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_4 = sub_810D074(templates[mapObjectIdx].script);
+            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_6 = templates[mapObjectIdx].localId;
+            TryGetFieldObjectIdByLocalIdAndMap(templates[mapObjectIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &fieldObjectId);
+            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_7 = fieldObjectId;
+            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_8 = gUnknown_2036E38[fieldObjectId].coords2.x - 7;
+            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_a = gUnknown_2036E38[fieldObjectId].coords2.y - 7;
+            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_c = templates[mapObjectIdx].graphicsId;
+            vsSeekerObjectIdx++;
+        }
+    }
+    gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_6 = 0xFF;
 }

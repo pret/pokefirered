@@ -115,7 +115,7 @@ SECTIONS {
         asm/start_menu.o(.text);
         asm/tileset_anims.o(.text);
         asm/palette.o(.text);
-        asm/sound.o(.text);
+        src/sound.o(.text);
         asm/battle_anim.o(.text);
         asm/battle_anim_8074480.o(.text);
         src/task.o(.text);

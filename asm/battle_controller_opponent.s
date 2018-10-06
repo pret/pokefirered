@@ -394,7 +394,7 @@ _08035CD0:
 	ands r0, r1
 	cmp r0, 0
 	beq _08035DA4
-	ldr r0, _08035DA0 @ =gMPlay_BGM
+	ldr r0, _08035DA0 @ =gMPlayInfo_BGM
 	bl m4aMPlayContinue
 	b _08035DB0
 	.align 2, 0
@@ -405,9 +405,9 @@ _08035D90: .4byte SpriteCallbackDummy
 _08035D94: .4byte gUnknown_2024018
 _08035D98: .4byte 0x000027f9
 _08035D9C: .4byte gBattleTypeFlags
-_08035DA0: .4byte gMPlay_BGM
+_08035DA0: .4byte gMPlayInfo_BGM
 _08035DA4:
-	ldr r0, _08035DD8 @ =gMPlay_BGM
+	ldr r0, _08035DD8 @ =gMPlayInfo_BGM
 	ldr r1, _08035DDC @ =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -435,7 +435,7 @@ _08035DD2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08035DD8: .4byte gMPlay_BGM
+_08035DD8: .4byte gMPlayInfo_BGM
 _08035DDC: .4byte 0x0000ffff
 _08035DE0: .4byte gUnknown_2024018
 _08035DE4: .4byte gActiveBattler
@@ -1074,7 +1074,7 @@ sub_80362E8: @ 80362E8
 	lsls r0, 24
 	cmp r0, 0
 	bne _08036320
-	ldr r0, _0803632C @ =gMPlay_BGM
+	ldr r0, _0803632C @ =gMPlayInfo_BGM
 	ldr r1, _08036330 @ =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -1086,7 +1086,7 @@ _08036320:
 	.align 2, 0
 _08036324: .4byte gUnknown_2024018
 _08036328: .4byte gActiveBattler
-_0803632C: .4byte gMPlay_BGM
+_0803632C: .4byte gMPlayInfo_BGM
 _08036330: .4byte 0x0000ffff
 	thumb_func_end sub_80362E8
 

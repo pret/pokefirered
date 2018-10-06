@@ -15270,7 +15270,7 @@ sub_8126350: @ 8126350
 	adds r1, r4, 0
 	bl sub_80A2294
 	movs r0, 0
-	bl sub_8071BC4
+	bl PlayFanfareByFanfareNum
 	ldrb r0, [r6, 0x9]
 	adds r1, r4, 0
 	bl sub_8126440

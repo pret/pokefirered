@@ -815,12 +815,9 @@ gUnknown_2037AC8: @ 2037AC8
 gUnknown_2037ACC: @ 2037ACC
 	.space 0x400
 
-gUnknown_2037ECC: @ 2037ECC
-	.space 0x4
+	.include "src/sound.o"
 
-gUnknown_2037ED0: @ 2037ED0
-	.space 0x4
-
+	.align 2
 gUnknown_2037ED4: @ 2037ED4
 	.space 0x4
 

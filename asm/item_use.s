@@ -838,7 +838,7 @@ sub_80A1648: @ 80A1648
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xB
-	bl sub_8071BC4
+	bl PlayFanfareByFanfareNum
 	ldr r1, _080A166C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4

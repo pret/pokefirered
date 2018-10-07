@@ -58,7 +58,6 @@ SECTIONS {
         asm/blit.o(.text);
         src/window_8bpp.o(.text);
         src/text.o(.text);
-        asm/text.o(.text);
         src/sprite.o(.text);
         src/string_util.o(.text);
         asm/link.o(.text);
@@ -364,7 +363,6 @@ SECTIONS {
         src/text_printer.o(.rodata);
         src/window.o(.rodata);
         src/text.o(.rodata);
-        data/text.o(.rodata);
         src/sprite.o(.rodata);
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);

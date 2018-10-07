@@ -14,6 +14,7 @@
 #include "item_menu.h"
 #include "field_effect.h"
 #include "script_movement.h"
+#include "battle.h"
 #include "battle_setup.h"
 #include "random.h"
 #include "field_map_obj.h"
@@ -26,6 +27,7 @@ struct UnkStruct_845318C
 };
 
 extern struct MapObject gUnknown_2036E38[MAP_OBJECTS_COUNT];
+extern u8 gUnknown_3005074;
 
 // static declarations
 EWRAM_DATA struct VsSeekerStruct *gUnknown_203ADB8;
@@ -36,15 +38,18 @@ void sub_810C8EC(u8 taskId);
 void sub_810D304(void);
 bool8 sub_810C96C(void);
 void sub_810C604(void);
-u8 sub_810C9A8(const void *);
+u8 sub_810C9A8(const struct UnkStruct_845318C *);
 bool8 sub_810D0FC(struct VsSeekerSubstruct *);
 u16 sub_810D074(const u8 *);
 u8 sub_810D1CC(void);
 void sub_810D24C(struct VsSeekerSubstruct *, const u8 *);
+int sub_810CE10(const struct UnkStruct_845318C *, u16);
 bool8 sub_810D164(const void *, u16, u8 *);
 u8 sub_810D280(int, u16);
 u8 sub_810CF90(u8);
 void sub_810C640(void);
+void sub_810CF54(struct MapObjectTemplate *);
+void sub_805FE7C(struct MapObject *, u8);
 
 // rodata
 extern const struct UnkStruct_845318C gUnknown_845318C[];
@@ -52,6 +57,7 @@ extern const u8 gUnknown_8453F5C[];
 extern const u8 gUnknown_8453F60[];
 extern const u8 gUnknown_8453F62[];
 extern const u8 gUnknown_8453F64[];
+extern const u8 gUnknown_8453F67[];
 
 // text
 void sub_810C670(u8 taskId)
@@ -180,7 +186,7 @@ u8 sub_810C96C(void)
 
 // Nonmatching due to register roulette
 #ifdef NONMATCHING
-u8 sub_810C9A8(const void * a0)
+u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
 {
     u16 r8 = 0;
     u8 sp0 = 0;
@@ -245,7 +251,7 @@ u8 sub_810C9A8(const void * a0)
 }
 #else
 NAKED
-u8 sub_810C9A8(const void * a0)
+u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -479,3 +485,33 @@ u8 sub_810C9A8(const void * a0)
                 "\tbx r1");
 }
 #endif
+
+void sub_810CB90(void)
+{
+    u8 sp0 = 0;
+    struct MapObjectTemplate *r4 = gSaveBlock1Ptr->mapObjectTemplates;
+    int r9 = sub_810CE10(gUnknown_845318C, gTrainerBattleOpponent_A);
+
+    if (r9 != -1)
+    {
+        int r8;
+
+        for (r8 = 0; r8 < gMapHeader.events->mapObjectCount; r8++)
+        {
+            if ((r4[r8].unkC == 1 || r4[r8].unkC == 3) && r9 == sub_810CE10(gUnknown_845318C, sub_810D074(r4[r8].script)))
+            {
+                struct MapObject *r4_2;
+
+                TryGetFieldObjectIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
+                r4_2 = &gUnknown_2036E38[sp0];
+                sub_810CF54(&r4[r8]);
+                sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->mapobj_unk_18]);
+                gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
+                if (gUnknown_3005074 == sp0)
+                    r4_2->animPattern = gUnknown_8453F67[r4_2->mapobj_unk_18];
+                else
+                    r4_2->animPattern = 0x08;
+            }
+        }
+    }
+}

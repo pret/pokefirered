@@ -76,6 +76,7 @@ void MoveCoords(u8, s16 *, s16 *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
 u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
 u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
+void npc_coords_shift_still(struct MapObject *);
 
 // Exported data declarations
 

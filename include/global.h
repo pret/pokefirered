@@ -482,7 +482,8 @@ struct SaveBlock1
     /*0x24*/ struct WarpData warp4;
     /*0x002C*/ u8 filler2C[0x60C];
     /*0x638*/ u8 trainerRematchStepCounter;
-    /*0x639*/ u8 trainerRematches[100];
+              u8 filler_639;
+    /*0x63a*/ u8 trainerRematches[100];
     /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
     /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
     /*0x0EE0*/ u8 fillerEE0[0x273C];

@@ -3,6 +3,14 @@
 #include "random.h"
 #include "event_data.h"
 
+extern EWRAM_DATA u16 gUnknown_20370D0;
+
+u32 sub_8146D74(struct MysteryEventStruct *);
+void sub_8146DD8(struct MysteryEventStruct *);
+u16 sub_8146E0C(struct MysteryEventStruct *);
+void sub_8146DA0(struct MysteryEventStruct *);
+void sub_8146D94(struct MysteryEventStruct *);
+
 #ifdef NONMATCHING
 void sub_8146C30(u32 a0)
 {
@@ -88,12 +96,66 @@ void sub_8146C88(void)
 void sub_8146CA4(void)
 {
     u16 *r4 = sub_806E454(0x4028);
-    struct MysteryEventStruct *r5 = sub_8143D94();
-    struct MysteryEventStruct r0 = *r5;
+    struct MysteryEventStruct *r2 = sub_8143D94();
+    struct MysteryEventStruct r0 = *r2;
 
     if ((u8)r0.unk_0_5 > 4 && ++(*r4) > 0x1f3)
     {
-        r5->unk_0_5 = 0;
+        r2->unk_0_5 = 0;
         *r4 = 0;
     }
+}
+
+u16 sub_8146CE8(void)
+{
+    u16 *r6 = &gUnknown_20370D0;
+    struct MysteryEventStruct *r4 = sub_8143D94();
+    u16 r5;
+
+    if (!sub_806E2BC() || !sub_8143E1C())
+        return 0;
+
+    r5 = sub_8146E0C(r4);
+
+    switch (r5)
+    {
+        case 0:
+            break;
+        case 1:
+            *r6 = sub_8146D74(r4);
+            break;
+        case 2:
+            *r6 = sub_8146D74(r4);
+            break;
+        case 3:
+            break;
+        case 4:
+            *r6 = sub_8146D74(r4);
+            sub_8146DA0(r4);
+            break;
+        case 5:
+            *r6 = sub_8146D74(r4);
+            sub_8146D94(r4);
+            break;
+        case 6:
+            break;
+    }
+
+    return r5;
+}
+
+u32 sub_8146D74(struct MysteryEventStruct *a0)
+{
+    u32 r4;
+
+    a0->unk_0_0 = 0;
+    r4 = a0->unk_1 + 0x84;
+    a0->unk_1 = 0;
+    sub_8146DD8(a0);
+    return r4;
+}
+
+void sub_8146D94(struct MysteryEventStruct *a0)
+{
+    a0->unk_0_2 = 0;
 }

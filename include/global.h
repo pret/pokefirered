@@ -466,6 +466,14 @@ struct RecordMixingDayCareMail
     bool16 holdsItem[DAYCARE_MON_COUNT];
 };
 
+struct MysteryEventStruct
+{
+    u8 unk_0_0:2;
+    u8 unk_0_2:3;
+    u8 unk_0_5:3;
+    u8 unk_1;
+};
+
 #define MAP_OBJECTS_COUNT  16
 #define BERRY_TREES_COUNT  128
 #define FLAGS_COUNT        300
@@ -476,7 +484,19 @@ struct SaveBlock1
 {
     /*0x0000*/ u8 filler[0x4];
     /*0x0004*/ struct WarpData location;
-    /*0x000C*/ u8 fillerC[0x3610];
+    /*0x0C*/ struct WarpData warp1;
+    /*0x14*/ struct WarpData warp2;
+    /*0x1C*/ struct WarpData lastHealLocation;
+    /*0x24*/ struct WarpData warp4;
+    /*0x002C*/ u8 filler2C[0x60C];
+    /*0x638*/ u8 trainerRematchStepCounter;
+              u8 filler_639;
+    /*0x63a*/ u8 trainerRematches[100];
+    /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
+    /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
+    /*0x0EE0*/ u8 fillerEE0[0x2580];
+    /*0x3460*/ struct MysteryEventStruct unk_3460;
+    /*0x3464*/ u8 filler_3464[0x1b8];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[0x44];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];

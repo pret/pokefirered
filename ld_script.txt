@@ -249,7 +249,7 @@ SECTIONS {
         asm/mevent.o(.text);
         asm/mevent_server.o(.text);
         asm/mevent_8145654.o(.text);
-        asm/menews_jisan.o(.text);
+        src/menews_jisan.o(.text);
         asm/seagallop.o(.text);
         asm/unk_8147500.o(.text);
         asm/unk_8147AA8.o(.text);
@@ -369,6 +369,8 @@ SECTIONS {
         data/data.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data_84827AC.o(.rodata);
+        src/menews_jisan.o(.rodata);
+        data/data_84827AC.o(.rodata.8468C98);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

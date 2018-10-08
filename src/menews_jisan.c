@@ -194,7 +194,7 @@ u32 sub_8146E0C(struct MysteryEventStruct *a0)
                 return 4;
             return 5;
         default:
-            AGBAssert("C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/menews_jisan.c", 383, "0", 1);
+            AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/menews_jisan.c", 383);
             return 0;
     }
 }

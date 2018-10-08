@@ -5,53 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8146C30
-sub_8146C30: @ 8146C30
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	bl sub_8143D94
-	adds r5, r0, 0
-	movs r0, 0x3
-	adds r1, r4, 0
-	ands r1, r0
-	ldrb r2, [r5]
-	movs r0, 0x4
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5]
-	cmp r4, 0x2
-	bhi _08146C56
-	cmp r4, 0x1
-	bcs _08146C5C
-	b _08146C80
-_08146C56:
-	cmp r4, 0x3
-	beq _08146C6E
-	b _08146C80
-_08146C5C:
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xF
-	bl __umodsi3
-	adds r0, 0x10
-	b _08146C7E
-_08146C6E:
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xF
-	bl __umodsi3
-	adds r0, 0x1
-_08146C7E:
-	strb r0, [r5, 0x1]
-_08146C80:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8146C30
-
 	thumb_func_start sub_8146C88
 sub_8146C88: @ 8146C88
 	push {lr}

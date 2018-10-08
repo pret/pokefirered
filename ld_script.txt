@@ -249,6 +249,7 @@ SECTIONS {
         asm/mevent.o(.text);
         asm/mevent_server.o(.text);
         asm/mevent_8145654.o(.text);
+        src/menews_jisan.o(.text);
         asm/menews_jisan.o(.text);
         asm/seagallop.o(.text);
         asm/unk_8147500.o(.text);

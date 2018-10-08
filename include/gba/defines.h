@@ -69,5 +69,6 @@
 #define WIN_RANGE(a, b) (((a) << 8) | (b))
 
 #define NAKED __attribute__((naked))
+#define UNUSED __attribute__((unused))
 
 #endif // GUARD_GBA_DEFINES

@@ -51,4 +51,6 @@ extern u16 gSpecialVar_MonBoxId;
 extern u16 gSpecialVar_MonBoxPos;
 extern u16 gSpecialVar_0x8014;
 
+extern u16 gUnknown_20370D0;
+
 #endif // GUARD_EVENT_DATA_H

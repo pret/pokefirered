@@ -2,14 +2,13 @@
 #include "mevent.h"
 #include "random.h"
 #include "event_data.h"
+#include "menews_jisan.h"
 
-extern EWRAM_DATA u16 gUnknown_20370D0;
-
-u32 sub_8146D74(struct MysteryEventStruct *);
-void sub_8146DD8(struct MysteryEventStruct *);
-u32 sub_8146E0C(struct MysteryEventStruct *);
-void sub_8146DA0(struct MysteryEventStruct *);
-void sub_8146D94(struct MysteryEventStruct *);
+static u32 sub_8146D74(struct MysteryEventStruct *);
+static void sub_8146DD8(struct MysteryEventStruct *);
+static u32 sub_8146E0C(struct MysteryEventStruct *);
+static void sub_8146DA0(struct MysteryEventStruct *);
+static void sub_8146D94(struct MysteryEventStruct *);
 
 #ifdef NONMATCHING
 void sub_8146C30(u32 a0)
@@ -144,7 +143,7 @@ u16 sub_8146CE8(void)
     return r5;
 }
 
-u32 sub_8146D74(struct MysteryEventStruct *a0)
+static u32 sub_8146D74(struct MysteryEventStruct *a0)
 {
     u32 r4;
 
@@ -155,26 +154,26 @@ u32 sub_8146D74(struct MysteryEventStruct *a0)
     return r4;
 }
 
-void sub_8146D94(struct MysteryEventStruct *a0)
+static void sub_8146D94(struct MysteryEventStruct *a0)
 {
     a0->unk_0_2 = 0;
 }
 
-void sub_8146DA0(struct MysteryEventStruct *a0)
+static void sub_8146DA0(struct MysteryEventStruct *a0)
 {
     a0->unk_0_2++;
     if ((u8)a0->unk_0_2 > 4)
         a0->unk_0_2 = 4;
 }
 
-void sub_8146DD8(struct MysteryEventStruct *a0)
+static void sub_8146DD8(struct MysteryEventStruct *a0)
 {
     a0->unk_0_5++;
     if ((u8)a0->unk_0_5 > 5)
         a0->unk_0_5 = 5;
 }
 
-u32 sub_8146E0C(struct MysteryEventStruct *a0)
+static u32 sub_8146E0C(struct MysteryEventStruct *a0)
 {
     struct MysteryEventStruct r0;
     if ((u8)a0->unk_0_5 == 5)

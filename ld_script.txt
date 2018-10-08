@@ -372,6 +372,8 @@ SECTIONS {
         data/data.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data_84827AC.o(.rodata);
+        src/vs_seeker.o(.rodata);
+        data/data_84827AC.o(.rodata.8453F6C);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

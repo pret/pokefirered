@@ -7,7 +7,7 @@ extern EWRAM_DATA u16 gUnknown_20370D0;
 
 u32 sub_8146D74(struct MysteryEventStruct *);
 void sub_8146DD8(struct MysteryEventStruct *);
-u16 sub_8146E0C(struct MysteryEventStruct *);
+u32 sub_8146E0C(struct MysteryEventStruct *);
 void sub_8146DA0(struct MysteryEventStruct *);
 void sub_8146D94(struct MysteryEventStruct *);
 
@@ -158,4 +158,43 @@ u32 sub_8146D74(struct MysteryEventStruct *a0)
 void sub_8146D94(struct MysteryEventStruct *a0)
 {
     a0->unk_0_2 = 0;
+}
+
+void sub_8146DA0(struct MysteryEventStruct *a0)
+{
+    a0->unk_0_2++;
+    if ((u8)a0->unk_0_2 > 4)
+        a0->unk_0_2 = 4;
+}
+
+void sub_8146DD8(struct MysteryEventStruct *a0)
+{
+    a0->unk_0_5++;
+    if ((u8)a0->unk_0_5 > 5)
+        a0->unk_0_5 = 5;
+}
+
+u32 sub_8146E0C(struct MysteryEventStruct *a0)
+{
+    struct MysteryEventStruct r0;
+    if ((u8)a0->unk_0_5 == 5)
+        return 6;
+
+    r0 = *a0;
+    switch (r0.unk_0_0)
+    {
+        case 0:
+            return 3;
+        case 1:
+            return 1;
+        case 2:
+            return 2;
+        case 3:
+            if ((u8)r0.unk_0_2 < 3)
+                return 4;
+            return 5;
+        default:
+            AGBAssert("C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/menews_jisan.c", 383, "0", 1);
+            return 0;
+    }
 }

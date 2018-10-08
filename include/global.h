@@ -468,11 +468,10 @@ struct RecordMixingDayCareMail
 
 struct MysteryEventStruct
 {
-    u32 unk_0_0:2;
-    u32 unk_0_2:3;
-    u32 unk_0_5:3;
-    u32 unk_1:8;
-    u32 unk_2:16;
+    u8 unk_0_0:2;
+    u8 unk_0_2:3;
+    u8 unk_0_5:3;
+    u8 unk_1;
 };
 
 #define MAP_OBJECTS_COUNT  16

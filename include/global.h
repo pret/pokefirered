@@ -468,10 +468,11 @@ struct RecordMixingDayCareMail
 
 struct MysteryEventStruct
 {
-    u8 unk_0_0:2;
-    u8 unk_0_2:6;
-    u8 unk_1;
-    u8 filler_2[0x1ba];
+    u32 unk_0_0:2;
+    u32 unk_0_2:3;
+    u32 unk_0_5:3;
+    u32 unk_1:8;
+    u32 unk_2:16;
 };
 
 #define MAP_OBJECTS_COUNT  16
@@ -496,6 +497,7 @@ struct SaveBlock1
     /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
     /*0x0EE0*/ u8 fillerEE0[0x2580];
     /*0x3460*/ struct MysteryEventStruct unk_3460;
+    /*0x3464*/ u8 filler_3464[0x1b8];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[0x44];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];

@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8146C88
-sub_8146C88: @ 8146C88
-	push {lr}
-	bl sub_8143D94
-	movs r1, 0
-	strb r1, [r0]
-	strb r1, [r0, 0x1]
-	ldr r0, _08146CA0 @ =0x00004028
-	bl VarSet
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08146CA0: .4byte 0x00004028
-	thumb_func_end sub_8146C88
-
-	thumb_func_start sub_8146CA4
-sub_8146CA4: @ 8146CA4
-	push {r4,lr}
-	ldr r0, _08146CE0 @ =0x00004028
-	bl sub_806E454
-	adds r4, r0, 0
-	bl sub_8143D94
-	adds r2, r0, 0
-	ldr r0, [r2]
-	lsls r0, 24
-	lsrs r0, 29
-	cmp r0, 0x4
-	bls _08146CD8
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-	lsls r0, 16
-	ldr r1, _08146CE4 @ =0x01f30000
-	cmp r0, r1
-	bls _08146CD8
-	ldrb r0, [r2]
-	movs r1, 0x1F
-	ands r1, r0
-	strb r1, [r2]
-	movs r0, 0
-	strh r0, [r4]
-_08146CD8:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08146CE0: .4byte 0x00004028
-_08146CE4: .4byte 0x01f30000
-	thumb_func_end sub_8146CA4
-
 	thumb_func_start sub_8146CE8
 sub_8146CE8: @ 8146CE8
 	push {r4-r6,lr}

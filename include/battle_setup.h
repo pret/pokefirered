@@ -14,5 +14,6 @@ void trainer_flag_clear(u16);
 void BattleSetup_StartTrainerBattle(void);
 u8 *BattleSetup_GetScriptAddrAfterBattle(void);
 u8 *BattleSetup_GetTrainerPostBattleScript(void);
+void sub_80803FC(void);
 
 #endif // GUARD_BATTLE_SETUP_H

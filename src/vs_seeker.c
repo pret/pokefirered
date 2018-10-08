@@ -23,9 +23,11 @@
 // static types
 struct UnkStruct_845318C
 {
-    // TODO: populate
+    u16 unk_0;
+    u8 filler_2[14];
 };
 
+extern u16 gUnknown_20370D2;
 extern struct MapObject gUnknown_2036E38[MAP_OBJECTS_COUNT];
 extern u8 gUnknown_3005074;
 
@@ -35,10 +37,15 @@ void sub_810C730(u8 taskId);
 void sub_810C760(u8 taskId);
 void sub_810C808(void);
 void sub_810C8EC(u8 taskId);
-void sub_810D304(void);
 bool8 sub_810C96C(void);
-void sub_810C604(void);
 u8 sub_810C9A8(const struct UnkStruct_845318C *);
+u8 sub_810CD14(const u16 *, u8);
+u8 sub_810CD80(const struct UnkStruct_845318C *, u16);
+bool32 sub_810D0A8(u16);
+u8 sub_810CDB4(const struct UnkStruct_845318C *, u16);
+int sub_810D084(const struct UnkStruct_845318C *, u16);
+void sub_810D304(void);
+void sub_810C604(void);
 bool8 sub_810D0FC(struct VsSeekerSubstruct *);
 u16 sub_810D074(const u8 *);
 u8 sub_810D1CC(void);
@@ -514,4 +521,84 @@ void sub_810CB90(void)
             }
         }
     }
+}
+
+void sub_810CCA0(const u16 * a0, u8 * a1)
+{
+    switch (*a1)
+    {
+        case 0:
+            break;
+        case 1:
+            if (!FlagGet(0x292))
+                *a1 = sub_810CD14(a0, *a1);
+            break;
+        case 2:
+            if (!FlagGet(0x896))
+                *a1 = sub_810CD14(a0, *a1);
+            break;
+        case 3:
+            if (!FlagGet(0x897))
+                *a1 = sub_810CD14(a0, *a1);
+            break;
+        case 4:
+            if (!FlagGet(0x82c))
+                *a1 = sub_810CD14(a0, *a1);
+            break;
+        case 5:
+            if (!FlagGet(0x844))
+                *a1 = sub_810CD14(a0, *a1);
+            break;
+    }
+}
+
+u8 sub_810CD14(const u16 * a0, u8 a1)
+{
+    while (--a1 != 0)
+    {
+        const u16 *r0 = a0 + a1;
+        if (*r0 != 0xFFFF)
+            return a1;
+    }
+    return 0;
+}
+
+u8 sub_810CD4C(void)
+{
+    if (sub_810CD80(gUnknown_845318C, gTrainerBattleOpponent_A))
+    {
+        return 1;
+    }
+    return sub_810CDB4(gUnknown_845318C, gTrainerBattleOpponent_A);
+}
+
+bool8 sub_810CD80(const struct UnkStruct_845318C *a0, u16 a1)
+{
+    int r1 = sub_810D084(a0, a1);
+
+    if (r1 == -1)
+        return FALSE;
+    if (r1 >= 0 && r1 < 0xdd)
+    {
+        if (sub_810D0A8(gUnknown_20370D2))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_810CDB4(const struct UnkStruct_845318C *a0, u16 a1)
+{
+    int r1 = sub_810D084(a0, a1);
+
+    if (r1 == -1)
+        return FALSE;
+    if (!HasTrainerAlreadyBeenFought(a0[r1].unk_0))
+        return FALSE;
+    return TRUE;
+}
+
+void sub_810CDE8(void)
+{
+    gSaveBlock1Ptr->trainerRematches[gUnknown_20370D2] = 0;
+    sub_80803FC();
 }

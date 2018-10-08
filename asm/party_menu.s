@@ -13278,7 +13278,7 @@ _08125330:
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r3, 0
-	bl sub_8042414
+	bl PokemonUseItemEffects2
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08125342:
@@ -13882,7 +13882,7 @@ sub_812580C: @ 812580C
 	ldrh r1, [r1]
 	ldrb r2, [r3, 0x9]
 	ldrb r3, [r3, 0xE]
-	bl sub_8042414
+	bl PokemonUseItemEffects2
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -15175,7 +15175,7 @@ dp05_rare_candy: @ 81262AC
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r3, 0
-	bl sub_8042414
+	bl PokemonUseItemEffects2
 	lsls r0, 24
 	lsrs r4, r0, 24
 	b _081262F6
@@ -16210,7 +16210,7 @@ sub_8126B60: @ 8126B60
 	ldrh r1, [r1]
 	ldrb r2, [r2, 0x9]
 	movs r3, 0
-	bl sub_8042414
+	bl PokemonUseItemEffects2
 	lsls r0, 24
 	cmp r0, 0
 	beq _08126BC8

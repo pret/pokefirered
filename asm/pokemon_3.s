@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8042414
-sub_8042414: @ 8042414
+	thumb_func_start PokemonUseItemEffects2
+PokemonUseItemEffects2: @ 8042414
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1000,7 +1000,7 @@ _08042BD8:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8042414
+	thumb_func_end PokemonUseItemEffects2
 
 	thumb_func_start sub_8042BE8
 sub_8042BE8: @ 8042BE8

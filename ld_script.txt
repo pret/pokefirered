@@ -58,7 +58,6 @@ SECTIONS {
         asm/blit.o(.text);
         src/window_8bpp.o(.text);
         src/text.o(.text);
-        asm/text.o(.text);
         src/sprite.o(.text);
         src/string_util.o(.text);
         asm/link.o(.text);
@@ -251,7 +250,7 @@ SECTIONS {
         asm/mevent.o(.text);
         asm/mevent_server.o(.text);
         asm/mevent_8145654.o(.text);
-        asm/menews_jisan.o(.text);
+        src/menews_jisan.o(.text);
         asm/seagallop.o(.text);
         asm/unk_8147500.o(.text);
         asm/unk_8147AA8.o(.text);
@@ -365,7 +364,6 @@ SECTIONS {
         src/text_printer.o(.rodata);
         src/window.o(.rodata);
         src/text.o(.rodata);
-        data/text.o(.rodata);
         src/sprite.o(.rodata);
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
@@ -374,6 +372,8 @@ SECTIONS {
         data/data_84827AC.o(.rodata);
         src/vs_seeker.o(.rodata);
         data/data_84827AC.o(.rodata.8453F6C);
+        src/menews_jisan.o(.rodata);
+        data/data_84827AC.o(.rodata.8468C98);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

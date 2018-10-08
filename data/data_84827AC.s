@@ -4999,14 +4999,9 @@ gUnknown_8468B6C:: @ 8468B6C
 gUnknown_8468BCC:: @ 8468BCC
 	.incbin "baserom.gba", 0x468BCC, 0x90
 
-	.align 2
-gUnknown_8468C5C:: @ 8468C5C
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/menews_jisan.c"
+	.section .rodata.8468C98
 
-	.align 2
-gUnknown_8468C94:: @ 8468C94
-	.asciz "0"
-
+// seagallop.o
 	.align 2
 gUnknown_8468C98:: @ 8468C98
 	.incbin "baserom.gba", 0x468C98, 0x520

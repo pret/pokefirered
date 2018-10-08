@@ -473,12 +473,12 @@ _0804CA10:
 	bl SetGpuReg
 	ldr r2, _0804CB2C @ =gUnknown_2031DA8
 	ldr r0, [r2]
-	ldr r1, _0804CB30 @ =gUnknown_2024029
+	ldr r1, _0804CB30 @ =gPlayerPartyCount
 	ldrb r1, [r1]
 	adds r0, 0x36
 	strb r1, [r0]
 	ldr r0, [r2]
-	ldr r1, _0804CB34 @ =gUnknown_202402A
+	ldr r1, _0804CB34 @ =gEnemyPartyCount
 	ldrb r1, [r1]
 	adds r0, 0x37
 	strb r1, [r0]
@@ -602,8 +602,8 @@ _0804CB20:
 	b _0804CEC2
 	.align 2, 0
 _0804CB2C: .4byte gUnknown_2031DA8
-_0804CB30: .4byte gUnknown_2024029
-_0804CB34: .4byte gUnknown_202402A
+_0804CB30: .4byte gPlayerPartyCount
+_0804CB34: .4byte gEnemyPartyCount
 _0804CB38: .4byte gUnknown_8261E40
 _0804CB3C: .4byte gPlayerParty
 _0804CB40: .4byte 0xfff40000
@@ -1156,12 +1156,12 @@ _0804D00C:
 	bl CalculateEnemyPartyCount
 	ldr r4, _0804D12C @ =gUnknown_2031DA8
 	ldr r0, [r4]
-	ldr r1, _0804D130 @ =gUnknown_2024029
+	ldr r1, _0804D130 @ =gPlayerPartyCount
 	ldrb r1, [r1]
 	adds r0, 0x36
 	strb r1, [r0]
 	ldr r0, [r4]
-	ldr r1, _0804D134 @ =gUnknown_202402A
+	ldr r1, _0804D134 @ =gEnemyPartyCount
 	ldrb r1, [r1]
 	adds r0, 0x37
 	strb r1, [r0]
@@ -1292,8 +1292,8 @@ _0804D120:
 	b _0804D4B4
 	.align 2, 0
 _0804D12C: .4byte gUnknown_2031DA8
-_0804D130: .4byte gUnknown_2024029
-_0804D134: .4byte gUnknown_202402A
+_0804D130: .4byte gPlayerPartyCount
+_0804D134: .4byte gEnemyPartyCount
 _0804D138: .4byte gUnknown_8261E40
 _0804D13C: .4byte gPlayerParty
 _0804D140: .4byte 0xfff40000
@@ -2488,7 +2488,7 @@ _0804DB1A:
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, _0804DB74 @ =gUnknown_8246BE5
-	bl sub_804037C
+	bl SetMonData
 _0804DB5A:
 	adds r4, 0x64
 	subs r5, 0x1
@@ -3568,7 +3568,7 @@ _0804E3B6:
 _0804E3D0: .4byte gUnknown_2031DA8
 _0804E3D4:
 	ldr r0, _0804E3F4 @ =gPlayerParty
-	ldr r1, _0804E3F8 @ =gUnknown_2024029
+	ldr r1, _0804E3F8 @ =gPlayerPartyCount
 	ldrb r1, [r1]
 	ldr r2, _0804E3FC @ =gUnknown_2031DA8
 	ldr r2, [r2]
@@ -3584,7 +3584,7 @@ _0804E3D4:
 	mov pc, r0
 	.align 2, 0
 _0804E3F4: .4byte gPlayerParty
-_0804E3F8: .4byte gUnknown_2024029
+_0804E3F8: .4byte gPlayerPartyCount
 _0804E3FC: .4byte gUnknown_2031DA8
 _0804E400: .4byte _0804E404
 	.align 2, 0
@@ -7287,7 +7287,7 @@ _08050040:
 	lsls r0, r5, 3
 	ldr r1, _08050074 @ =gUnknown_82350AC
 	adds r0, r1
-	ldr r1, _08050078 @ =gUnknown_202401C
+	ldr r1, _08050078 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -7297,12 +7297,12 @@ _08050040:
 	b _0805009A
 	.align 2, 0
 _08050074: .4byte gUnknown_82350AC
-_08050078: .4byte gUnknown_202401C
+_08050078: .4byte gMonSpritesGfxPtr
 _0805007C:
 	lsls r0, r5, 3
 	ldr r1, _080500BC @ =gUnknown_82350AC
 	adds r0, r1
-	ldr r1, _080500C0 @ =gUnknown_202401C
+	ldr r1, _080500C0 @ =gMonSpritesGfxPtr
 	ldr r2, [r1]
 	lsls r4, r6, 1
 	adds r1, r4, 0x1
@@ -7330,7 +7330,7 @@ _0805009A:
 	b _0805011E
 	.align 2, 0
 _080500BC: .4byte gUnknown_82350AC
-_080500C0: .4byte gUnknown_202401C
+_080500C0: .4byte gMonSpritesGfxPtr
 _080500C4: .4byte gUnknown_2031DAC
 _080500C8:
 	mov r0, r8
@@ -7338,7 +7338,7 @@ _080500C8:
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
 	bl sub_803F7D4
-	ldr r0, _08050128 @ =gUnknown_20244DC
+	ldr r0, _08050128 @ =gMultiuseSpriteTemplate
 	movs r1, 0x78
 	movs r2, 0x3C
 	movs r3, 0x6
@@ -7380,7 +7380,7 @@ _0805011E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050128: .4byte gUnknown_20244DC
+_08050128: .4byte gMultiuseSpriteTemplate
 _0805012C: .4byte gUnknown_2031DAC
 _08050130: .4byte gSprites
 _08050134: .4byte SpriteCallbackDummy
@@ -8221,7 +8221,7 @@ _08050866:
 	adds r0, r7, 0
 	movs r1, 0x20
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 _080508A2:
 	mov r0, r8
 	cmp r0, 0xFF
@@ -10809,7 +10809,7 @@ _08052042:
 	lsls r0, r2, 3
 	ldr r1, _08052068 @ =gUnknown_82350AC
 	adds r0, r1
-	ldr r1, _0805206C @ =gUnknown_202401C
+	ldr r1, _0805206C @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
@@ -10820,7 +10820,7 @@ _08052042:
 _08052060: .4byte gSprites
 _08052064: .4byte SpriteCallbackDummy
 _08052068: .4byte gUnknown_82350AC
-_0805206C: .4byte gUnknown_202401C
+_0805206C: .4byte gMonSpritesGfxPtr
 _08052070:
 	ldr r4, _0805211C @ =gSprites
 	ldr r2, [r7]
@@ -11063,7 +11063,7 @@ _0805223C:
 	adds r0, r5
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_8042EC4
+	bl GetEvolutionTargetSpecies
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -13034,7 +13034,7 @@ _0805349E:
 	lsls r0, r2, 3
 	ldr r1, _080534C4 @ =gUnknown_82350AC
 	adds r0, r1
-	ldr r1, _080534C8 @ =gUnknown_202401C
+	ldr r1, _080534C8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
@@ -13045,7 +13045,7 @@ _0805349E:
 _080534BC: .4byte gSprites
 _080534C0: .4byte SpriteCallbackDummy
 _080534C4: .4byte gUnknown_82350AC
-_080534C8: .4byte gUnknown_202401C
+_080534C8: .4byte gMonSpritesGfxPtr
 _080534CC:
 	ldr r4, _08053578 @ =gSprites
 	ldr r2, [r7]
@@ -13288,7 +13288,7 @@ _08053698:
 	adds r0, r5
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_8042EC4
+	bl GetEvolutionTargetSpecies
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -13416,7 +13416,7 @@ _080537B8:
 	adds r0, r5
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_8042EC4
+	bl GetEvolutionTargetSpecies
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -13793,7 +13793,7 @@ sub_8053A9C: @ 8053A9C
 	ldrh r1, [r4, 0x38]
 	movs r6, 0xB
 	muls r1, r6
-	ldr r5, _08053ADC @ =gUnknown_8245EE0
+	ldr r5, _08053ADC @ =gSpeciesNames
 	adds r1, r5
 	bl StringCopy
 	ldr r0, _08053AE0 @ =gStringVar2
@@ -13809,7 +13809,7 @@ sub_8053A9C: @ 8053A9C
 _08053AD0: .4byte gUnknown_20370C0
 _08053AD4: .4byte gUnknown_826CF8C
 _08053AD8: .4byte gStringVar1
-_08053ADC: .4byte gUnknown_8245EE0
+_08053ADC: .4byte gSpeciesNames
 _08053AE0: .4byte gStringVar2
 	thumb_func_end sub_8053A9C
 
@@ -13840,7 +13840,7 @@ sub_8053AE4: @ 8053AE4
 	ldrh r2, [r4, 0xC]
 	movs r1, 0xB
 	muls r1, r2
-	ldr r2, _08053B44 @ =gUnknown_8245EE0
+	ldr r2, _08053B44 @ =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
 	add sp, 0x20
@@ -13854,7 +13854,7 @@ _08053B34: .4byte gUnknown_20370C2
 _08053B38: .4byte gPlayerParty
 _08053B3C: .4byte gStringVar1
 _08053B40: .4byte gStringVar2
-_08053B44: .4byte gUnknown_8245EE0
+_08053B44: .4byte gSpeciesNames
 	thumb_func_end sub_8053AE4
 
 	thumb_func_start sub_8053B48
@@ -13898,85 +13898,85 @@ sub_8053B48: @ 8053B48
 	adds r2, 0xE
 	adds r0, r6, 0
 	movs r1, 0x27
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0xF
 	adds r0, r6, 0
 	movs r1, 0x28
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x10
 	adds r0, r6, 0
 	movs r1, 0x29
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x11
 	adds r0, r6, 0
 	movs r1, 0x2A
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x12
 	adds r0, r6, 0
 	movs r1, 0x2B
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x13
 	adds r0, r6, 0
 	movs r1, 0x2C
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x2B
 	adds r0, r6, 0
 	movs r1, 0x7
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x36
 	adds r0, r6, 0
 	movs r1, 0x31
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x14
 	adds r0, r6, 0
 	movs r1, 0x2E
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1D
 	adds r0, r6, 0
 	movs r1, 0x17
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1E
 	adds r0, r6, 0
 	movs r1, 0x18
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1C
 	adds r0, r6, 0
 	movs r1, 0x16
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1F
 	adds r0, r6, 0
 	movs r1, 0x21
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x20
 	adds r0, r6, 0
 	movs r1, 0x2F
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x37
 	adds r0, r6, 0
 	movs r1, 0x30
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x23
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	mov r4, sp
 	adds r4, 0x35
 	movs r0, 0
@@ -14002,12 +14002,12 @@ sub_8053B48: @ 8053B48
 	adds r0, r6, 0
 	movs r1, 0x40
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x28
 	adds r0, r6, 0
 	movs r1, 0xC
-	bl sub_804037C
+	bl SetMonData
 	b _08053CC0
 	.align 2, 0
 _08053CA4: .4byte gUnknown_826CF8C
@@ -14019,7 +14019,7 @@ _08053CB4:
 	adds r2, 0x28
 	adds r0, r6, 0
 	movs r1, 0xC
-	bl sub_804037C
+	bl SetMonData
 _08053CC0:
 	ldr r0, _08053CD0 @ =gEnemyParty
 	bl CalculateMonStats

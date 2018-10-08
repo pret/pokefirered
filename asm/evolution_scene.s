@@ -221,7 +221,7 @@ EvolutionScene: @ 80CDDF4
 	mov r2, r10
 	muls r2, r1
 	adds r1, r2, 0
-	ldr r2, _080CE0B4 @ =gUnknown_8245EE0
+	ldr r2, _080CE0B4 @ =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
 	adds r0, r4, 0
@@ -241,7 +241,7 @@ EvolutionScene: @ 80CDDF4
 	lsls r0, r5, 3
 	ldr r1, _080CE0B8 @ =gUnknown_82350AC
 	adds r0, r1
-	ldr r2, _080CE0BC @ =gUnknown_202401C
+	ldr r2, _080CE0BC @ =gMonSpritesGfxPtr
 	ldr r1, [r2]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -258,7 +258,7 @@ EvolutionScene: @ 80CDDF4
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_803F7D4
-	ldr r0, _080CE0C0 @ =gUnknown_20244DC
+	ldr r0, _080CE0C0 @ =gMultiuseSpriteTemplate
 	mov r8, r0
 	ldr r1, _080CE0C4 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
@@ -297,7 +297,7 @@ EvolutionScene: @ 80CDDF4
 	lsls r0, r1, 3
 	ldr r2, _080CE0B8 @ =gUnknown_82350AC
 	adds r0, r2
-	ldr r2, _080CE0BC @ =gUnknown_202401C
+	ldr r2, _080CE0BC @ =gMonSpritesGfxPtr
 	ldr r1, [r2]
 	ldr r1, [r1, 0x10]
 	mov r2, r10
@@ -414,10 +414,10 @@ _080CE0A4: .4byte gReservedSpritePaletteCount
 _080CE0A8: .4byte gUnknown_2039A20
 _080CE0AC: .4byte gStringVar1
 _080CE0B0: .4byte gStringVar2
-_080CE0B4: .4byte gUnknown_8245EE0
+_080CE0B4: .4byte gSpeciesNames
 _080CE0B8: .4byte gUnknown_82350AC
-_080CE0BC: .4byte gUnknown_202401C
-_080CE0C0: .4byte gUnknown_20244DC
+_080CE0BC: .4byte gMonSpritesGfxPtr
+_080CE0C0: .4byte gMultiuseSpriteTemplate
 _080CE0C4: .4byte gDummySpriteAffineAnimTable
 _080CE0C8: .4byte gSprites
 _080CE0CC: .4byte nullsub_10
@@ -526,7 +526,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	lsls r0, r5, 3
 	ldr r1, _080CE2B8 @ =gUnknown_82350AC
 	adds r0, r1
-	ldr r1, _080CE2BC @ =gUnknown_202401C
+	ldr r1, _080CE2BC @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r5, 0
@@ -543,7 +543,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl sub_803F7D4
-	ldr r0, _080CE2C0 @ =gUnknown_20244DC
+	ldr r0, _080CE2C0 @ =gMultiuseSpriteTemplate
 	ldr r1, _080CE2C4 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
@@ -619,8 +619,8 @@ _080CE2AC: .4byte gUnknown_2022982
 _080CE2B0: .4byte gUnknown_2022B50
 _080CE2B4: .4byte gReservedSpritePaletteCount
 _080CE2B8: .4byte gUnknown_82350AC
-_080CE2BC: .4byte gUnknown_202401C
-_080CE2C0: .4byte gUnknown_20244DC
+_080CE2BC: .4byte gMonSpritesGfxPtr
+_080CE2C0: .4byte gMultiuseSpriteTemplate
 _080CE2C4: .4byte gDummySpriteAffineAnimTable
 _080CE2C8: .4byte gSprites
 _080CE2CC: .4byte nullsub_10
@@ -772,7 +772,7 @@ _080CE414:
 	lsls r0, r6, 3
 	ldr r1, _080CE454 @ =gUnknown_82350AC
 	adds r0, r1
-	ldr r1, _080CE458 @ =gUnknown_202401C
+	ldr r1, _080CE458 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r6, 0
@@ -789,12 +789,12 @@ _080CE414:
 	b _080CE4EC
 	.align 2, 0
 _080CE454: .4byte gUnknown_82350AC
-_080CE458: .4byte gUnknown_202401C
+_080CE458: .4byte gMonSpritesGfxPtr
 _080CE45C:
 	adds r0, r6, 0
 	movs r1, 0x1
 	bl sub_803F7D4
-	ldr r0, _080CE4B4 @ =gUnknown_20244DC
+	ldr r0, _080CE4B4 @ =gMultiuseSpriteTemplate
 	ldr r1, _080CE4B8 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
@@ -832,7 +832,7 @@ _080CE45C:
 	bl sub_80504B0
 	b _080CE534
 	.align 2, 0
-_080CE4B4: .4byte gUnknown_20244DC
+_080CE4B4: .4byte gMultiuseSpriteTemplate
 _080CE4B8: .4byte gDummySpriteAffineAnimTable
 _080CE4BC: .4byte gUnknown_2039A20
 _080CE4C0: .4byte gSprites
@@ -921,7 +921,7 @@ TradeEvolutionScene: @ 80CE540
 	ldr r0, _080CE6B4 @ =gStringVar2
 	movs r1, 0xB
 	muls r1, r5
-	ldr r2, _080CE6B8 @ =gUnknown_8245EE0
+	ldr r2, _080CE6B8 @ =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
 	ldr r1, _080CE6BC @ =gAffineAnimsDisabled
@@ -953,7 +953,7 @@ TradeEvolutionScene: @ 80CE540
 	lsls r0, r5, 3
 	ldr r1, _080CE6C4 @ =gUnknown_82350AC
 	adds r0, r1
-	ldr r1, _080CE6C8 @ =gUnknown_202401C
+	ldr r1, _080CE6C8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -970,7 +970,7 @@ TradeEvolutionScene: @ 80CE540
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_803F7D4
-	ldr r0, _080CE6CC @ =gUnknown_20244DC
+	ldr r0, _080CE6CC @ =gMultiuseSpriteTemplate
 	ldr r1, _080CE6D0 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
@@ -1066,12 +1066,12 @@ TradeEvolutionScene: @ 80CE540
 	.align 2, 0
 _080CE6B0: .4byte gStringVar1
 _080CE6B4: .4byte gStringVar2
-_080CE6B8: .4byte gUnknown_8245EE0
+_080CE6B8: .4byte gSpeciesNames
 _080CE6BC: .4byte gAffineAnimsDisabled
 _080CE6C0: .4byte gUnknown_2039A20
 _080CE6C4: .4byte gUnknown_82350AC
-_080CE6C8: .4byte gUnknown_202401C
-_080CE6CC: .4byte gUnknown_20244DC
+_080CE6C8: .4byte gMonSpritesGfxPtr
+_080CE6CC: .4byte gMultiuseSpriteTemplate
 _080CE6D0: .4byte gDummySpriteAffineAnimTable
 _080CE6D4: .4byte gSprites
 _080CE6D8: .4byte nullsub_10
@@ -1141,7 +1141,7 @@ CreateShedinja: @ 80CE748
 	beq _080CE778
 	b _080CE8B2
 _080CE778:
-	ldr r6, _080CE8C8 @ =gUnknown_2024029
+	ldr r6, _080CE8C8 @ =gPlayerPartyCount
 	ldrb r0, [r6]
 	cmp r0, 0x5
 	bls _080CE782
@@ -1162,7 +1162,7 @@ _080CE782:
 	adds r2, r1, r7
 	adds r2, 0xC
 	movs r1, 0xB
-	bl sub_804037C
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -1170,28 +1170,28 @@ _080CE782:
 	ldrh r2, [r1, 0xC]
 	movs r1, 0xB
 	muls r2, r1
-	ldr r1, _080CE8D0 @ =gUnknown_8245EE0
+	ldr r1, _080CE8D0 @ =gSpeciesNames
 	adds r2, r1
 	movs r1, 0x2
-	bl sub_804037C
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x8
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xA
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	movs r4, 0x32
 	ldr r0, [sp, 0x8]
 	mov r8, r0
@@ -1204,12 +1204,12 @@ _080CE7F0:
 	adds r0, r1
 	adds r1, r4, 0
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r4, 0x1
 	cmp r4, 0x36
 	ble _080CE7F0
 	movs r4, 0x43
-	ldr r7, _080CE8C8 @ =gUnknown_2024029
+	ldr r7, _080CE8C8 @ =gPlayerPartyCount
 _080CE80C:
 	ldrb r0, [r7]
 	movs r6, 0x64
@@ -1218,17 +1218,17 @@ _080CE80C:
 	adds r0, r5
 	adds r1, r4, 0
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r4, 0x1
 	cmp r4, 0x4F
 	ble _080CE80C
-	ldr r4, _080CE8C8 @ =gUnknown_2024029
+	ldr r4, _080CE8C8 @ =gPlayerPartyCount
 	ldrb r0, [r4]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x37
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	movs r0, 0xFF
 	str r0, [sp]
 	ldrb r0, [r4]
@@ -1236,7 +1236,7 @@ _080CE80C:
 	adds r0, r5
 	movs r1, 0x40
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	ldrb r0, [r4]
 	muls r0, r6
 	adds r0, r5
@@ -1280,7 +1280,7 @@ _080CE80C:
 	ldr r2, _080CE8D8 @ =gUnknown_83F8440
 	mov r0, r9
 	movs r1, 0x2
-	bl sub_804037C
+	bl SetMonData
 _080CE8B2:
 	add sp, 0xC
 	pop {r3-r5}
@@ -1292,9 +1292,9 @@ _080CE8B2:
 	bx r0
 	.align 2, 0
 _080CE8C4: .4byte gUnknown_8259754
-_080CE8C8: .4byte gUnknown_2024029
+_080CE8C8: .4byte gPlayerPartyCount
 _080CE8CC: .4byte gPlayerParty
-_080CE8D0: .4byte gUnknown_8245EE0
+_080CE8D0: .4byte gSpeciesNames
 _080CE8D4: .4byte 0x0000012f
 _080CE8D8: .4byte gUnknown_83F8440
 	thumb_func_end CreateShedinja
@@ -1817,7 +1817,7 @@ _080CED3A:
 	adds r2, 0xC
 	mov r0, r9
 	movs r1, 0xB
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r9
 	bl CalculateMonStats
 	ldrh r1, [r4, 0xA]
@@ -2440,13 +2440,13 @@ _080CF2C2:
 	lsls r5, 3
 	adds r5, r1
 	ldrb r1, [r5, 0x1C]
-	ldr r2, _080CF300 @ =gUnknown_2024029
+	ldr r2, _080CF300 @ =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
 	ldr r3, _080CF304 @ =CB2_EvolutionSceneLoadGraphics
-	ldr r4, _080CF308 @ =gUnknown_2024022
+	ldr r4, _080CF308 @ =gMoveToLearn
 	ldrh r4, [r4]
 	str r4, [sp]
 	bl sub_8134738
@@ -2458,9 +2458,9 @@ _080CF2C2:
 _080CF2F4: .4byte gUnknown_2037AB8
 _080CF2F8: .4byte gPlayerParty
 _080CF2FC: .4byte gTasks
-_080CF300: .4byte gUnknown_2024029
+_080CF300: .4byte gPlayerPartyCount
 _080CF304: .4byte CB2_EvolutionSceneLoadGraphics
-_080CF308: .4byte gUnknown_2024022
+_080CF308: .4byte gMoveToLearn
 _080CF30C:
 	ldr r0, _080CF340 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -2540,7 +2540,7 @@ _080CF398:
 	mov r0, r9
 	adds r1, r4, 0
 	bl RemoveMonPPBonus
-	ldr r0, _080CF3D8 @ =gUnknown_2024022
+	ldr r0, _080CF3D8 @ =gMoveToLearn
 	ldrh r1, [r0]
 	mov r0, r9
 	adds r2, r4, 0
@@ -2555,7 +2555,7 @@ _080CF398:
 	b _080CF526
 	.align 2, 0
 _080CF3D4: .4byte gUnknown_2022AC8
-_080CF3D8: .4byte gUnknown_2024022
+_080CF3D8: .4byte gMoveToLearn
 _080CF3DC: .4byte gTasks
 _080CF3E0:
 	ldr r0, _080CF408 @ =gUnknown_83FDF3C
@@ -3124,7 +3124,7 @@ _080CF8A8:
 	adds r2, 0xC
 	mov r0, r8
 	movs r1, 0xB
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	bl CalculateMonStats
 	ldrh r1, [r4, 0xA]
@@ -3709,13 +3709,13 @@ _080CFDC6:
 	lsls r5, 3
 	adds r5, r1
 	ldrb r1, [r5, 0x1C]
-	ldr r2, _080CFE24 @ =gUnknown_2024029
+	ldr r2, _080CFE24 @ =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
 	ldr r3, _080CFE28 @ =CB2_TradeEvolutionSceneLoadGraphics
-	ldr r4, _080CFE2C @ =gUnknown_2024022
+	ldr r4, _080CFE2C @ =gMoveToLearn
 	ldrh r4, [r4]
 	str r4, [sp]
 	bl sub_8134738
@@ -3728,9 +3728,9 @@ _080CFE14: .4byte gUnknown_2037AB8
 _080CFE18: .4byte gUnknown_3003F3C
 _080CFE1C: .4byte gPlayerParty
 _080CFE20: .4byte gTasks
-_080CFE24: .4byte gUnknown_2024029
+_080CFE24: .4byte gPlayerPartyCount
 _080CFE28: .4byte CB2_TradeEvolutionSceneLoadGraphics
-_080CFE2C: .4byte gUnknown_2024022
+_080CFE2C: .4byte gMoveToLearn
 _080CFE30:
 	ldr r0, _080CFE64 @ =gUnknown_2037AB8
 	ldrb r1, [r0, 0x7]
@@ -3811,7 +3811,7 @@ _080CFEC0:
 	mov r0, r8
 	adds r1, r4, 0
 	bl RemoveMonPPBonus
-	ldr r0, _080CFF18 @ =gUnknown_2024022
+	ldr r0, _080CFF18 @ =gMoveToLearn
 	ldrh r1, [r0]
 	mov r0, r8
 	adds r2, r4, 0
@@ -3835,7 +3835,7 @@ _080CFEC0:
 	b _080D0038
 	.align 2, 0
 _080CFF14: .4byte gUnknown_2022AC8
-_080CFF18: .4byte gUnknown_2024022
+_080CFF18: .4byte gMoveToLearn
 _080CFF1C: .4byte gUnknown_83FDF3C
 _080CFF20: .4byte gUnknown_202298C
 _080CFF24: .4byte gTasks

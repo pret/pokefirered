@@ -331,7 +331,7 @@ _08045628:
 	movs r6, 0
 	cmp r0, r7
 	bne _08045638
-	ldr r0, _08045658 @ =gUnknown_2024022
+	ldr r0, _08045658 @ =gMoveToLearn
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	bl DeleteFirstMoveAndGiveMoveToMon
@@ -352,7 +352,7 @@ _0804564C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08045658: .4byte gUnknown_2024022
+_08045658: .4byte gMoveToLearn
 	thumb_func_end ApplyDaycareExperience
 
 	thumb_func_start TakeSelectedPokemonFromDaycare
@@ -386,7 +386,7 @@ TakeSelectedPokemonFromDaycare: @ 804565C
 	add r2, sp, 0x64
 	mov r0, sp
 	movs r1, 0x19
-	bl sub_804037C
+	bl SetMonData
 	mov r0, sp
 	bl ApplyDaycareExperience
 _080456AA:
@@ -488,7 +488,7 @@ GetLevelAfterDaycareSteps: @ 804574C
 	add r2, sp, 0x50
 	mov r0, sp
 	movs r1, 0x19
-	bl sub_80404D0
+	bl SetBoxMonData
 	mov r0, sp
 	bl GetLevelFromBoxMonExp
 	lsls r0, 24
@@ -1039,7 +1039,7 @@ _08045B64:
 	strb r0, [r2]
 	mov r0, r9
 	movs r1, 0x27
-	bl sub_804037C
+	bl SetMonData
 	b _08045C0E
 _08045B82:
 	add r4, sp, 0x10
@@ -1094,7 +1094,7 @@ _08045BD0:
 	movs r1, 0x2B
 _08045BE8:
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	b _08045C0E
 _08045BF0:
 	add r4, sp, 0x10
@@ -1109,7 +1109,7 @@ _08045BF0:
 	mov r0, r9
 	movs r1, 0x2C
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 _08045C0E:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1783,7 +1783,7 @@ sub_80460D4: @ 80460D4
 	strb r0, [r2]
 	mov r0, sp
 	movs r1, 0x2D
-	bl sub_804037C
+	bl SetMonData
 	ldr r0, _0804614C @ =gPlayerParty
 	movs r1, 0xFA
 	lsls r1, 1
@@ -1842,11 +1842,11 @@ CreateEgg: @ 8046150
 	adds r0, r7, 0
 	movs r1, 0x26
 	add r2, sp, 0x10
-	bl sub_804037C
+	bl SetMonData
 	ldr r2, _08046200 @ =gUnknown_825F83E
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl sub_804037C
+	bl SetMonData
 	lsls r2, r5, 3
 	subs r2, r5
 	lsls r2, 2
@@ -1854,15 +1854,15 @@ CreateEgg: @ 8046150
 	adds r2, r0
 	adds r0, r7, 0
 	movs r1, 0x20
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x24
 	mov r2, r8
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	cmp r6, 0
 	beq _080461E2
 	add r2, sp, 0x14
@@ -1870,7 +1870,7 @@ CreateEgg: @ 8046150
 	strb r0, [r2]
 	adds r0, r7, 0
 	movs r1, 0x23
-	bl sub_804037C
+	bl SetMonData
 _080461E2:
 	mov r2, sp
 	adds r2, 0x15
@@ -1878,7 +1878,7 @@ _080461E2:
 	strb r0, [r2]
 	adds r0, r7, 0
 	movs r1, 0x2D
-	bl sub_804037C
+	bl SetMonData
 	add sp, 0x18
 	pop {r3,r4}
 	mov r8, r3
@@ -1936,11 +1936,11 @@ SetInitialEggData: @ 8046208
 	adds r0, r6, 0
 	movs r1, 0x26
 	add r2, sp, 0x10
-	bl sub_804037C
+	bl SetMonData
 	ldr r2, _080462A4 @ =gUnknown_825F83E
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_804037C
+	bl SetMonData
 	lsls r2, r5, 3
 	subs r2, r5
 	lsls r2, 2
@@ -1948,15 +1948,15 @@ SetInitialEggData: @ 8046208
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x20
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x24
 	mov r2, r9
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -2089,11 +2089,11 @@ _08046390:
 	adds r0, r4, 0
 	movs r1, 0x20
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 _0804639E:
 	adds r5, 0x1
 _080463A0:
-	ldr r0, _080463B4 @ =gUnknown_2024029
+	ldr r0, _080463B4 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	bcc _08046350
@@ -2105,7 +2105,7 @@ _080463AA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080463B4: .4byte gUnknown_2024029
+_080463B4: .4byte gPlayerPartyCount
 	thumb_func_end sub_80462C4
 
 	thumb_func_start sub_80463B8

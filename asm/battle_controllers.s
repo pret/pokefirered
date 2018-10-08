@@ -129,7 +129,7 @@ _0800D328:
 	cmp r0, 0
 	bne _0800D356
 	movs r4, 0
-	ldr r0, _0800D360 @ =gUnknown_2023BCC
+	ldr r0, _0800D360 @ =gBattlersCount
 	ldrb r1, [r0]
 	cmp r4, r1
 	bge _0800D356
@@ -149,7 +149,7 @@ _0800D356:
 	bx r0
 	.align 2, 0
 _0800D35C: .4byte gBattleTypeFlags
-_0800D360: .4byte gUnknown_2023BCC
+_0800D360: .4byte gBattlersCount
 	thumb_func_end sub_800D30C
 
 	thumb_func_start sub_800D364
@@ -177,7 +177,7 @@ sub_800D364: @ 800D364
 	strb r3, [r0]
 	str r1, [r2, 0x4]
 	strb r4, [r0, 0x1]
-	ldr r1, _0800D3B0 @ =gUnknown_2023BCC
+	ldr r1, _0800D3B0 @ =gBattlersCount
 	movs r0, 0x2
 	b _0800D478
 	.align 2, 0
@@ -187,7 +187,7 @@ _0800D3A0: .4byte sub_80123C0
 _0800D3A4: .4byte gUnknown_3004FE0
 _0800D3A8: .4byte sub_81560A4
 _0800D3AC: .4byte gUnknown_2023BD6
-_0800D3B0: .4byte gUnknown_2023BCC
+_0800D3B0: .4byte gBattlersCount
 _0800D3B4:
 	movs r0, 0x80
 	ands r0, r2
@@ -224,7 +224,7 @@ _0800D3E8:
 	str r0, [r2, 0x4]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
-	ldr r1, _0800D410 @ =gUnknown_2023BCC
+	ldr r1, _0800D410 @ =gBattlersCount
 	movs r0, 0x2
 	b _0800D478
 	.align 2, 0
@@ -232,7 +232,7 @@ _0800D400: .4byte gUnknown_3004FE0
 _0800D404: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D408: .4byte gUnknown_2023BD6
 _0800D40C: .4byte sub_8035A7C
-_0800D410: .4byte gUnknown_2023BCC
+_0800D410: .4byte gBattlersCount
 _0800D414:
 	ldr r1, _0800D444 @ =gUnknown_3004F84
 	ldr r0, _0800D448 @ =sub_80123C0
@@ -279,7 +279,7 @@ _0800D458:
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
 _0800D474:
-	ldr r1, _0800D490 @ =gUnknown_2023BCC
+	ldr r1, _0800D490 @ =gBattlersCount
 	movs r0, 0x4
 _0800D478:
 	strb r0, [r1]
@@ -291,7 +291,7 @@ _0800D480: .4byte gUnknown_3004FE0
 _0800D484: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D488: .4byte gUnknown_2023BD6
 _0800D48C: .4byte sub_8035A7C
-_0800D490: .4byte gUnknown_2023BCC
+_0800D490: .4byte gBattlersCount
 	thumb_func_end sub_800D364
 
 	thumb_func_start sub_800D494
@@ -323,7 +323,7 @@ sub_800D494: @ 800D494
 	ldr r0, _0800D4E8 @ =sub_803A668
 	str r0, [r2, 0x4]
 	strb r5, [r1, 0x1]
-	ldr r1, _0800D4EC @ =gUnknown_2023BCC
+	ldr r1, _0800D4EC @ =gBattlersCount
 	movs r0, 0x2
 	b _0800D752
 	.align 2, 0
@@ -334,7 +334,7 @@ _0800D4DC: .4byte gUnknown_3004FE0
 _0800D4E0: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D4E4: .4byte gUnknown_2023BD6
 _0800D4E8: .4byte sub_803A668
-_0800D4EC: .4byte gUnknown_2023BCC
+_0800D4EC: .4byte gBattlersCount
 _0800D4F0:
 	ldr r2, _0800D508 @ =gUnknown_3004FE0
 	ldr r0, _0800D50C @ =SetBankFuncToPlayerBufferRunCommand
@@ -344,7 +344,7 @@ _0800D4F0:
 	ldr r0, _0800D514 @ =sub_803A668
 	str r0, [r2]
 	strb r5, [r1]
-	ldr r1, _0800D518 @ =gUnknown_2023BCC
+	ldr r1, _0800D518 @ =gBattlersCount
 	movs r0, 0x2
 	b _0800D752
 	.align 2, 0
@@ -352,7 +352,7 @@ _0800D508: .4byte gUnknown_3004FE0
 _0800D50C: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D510: .4byte gUnknown_2023BD6
 _0800D514: .4byte sub_803A668
-_0800D518: .4byte gUnknown_2023BCC
+_0800D518: .4byte gBattlersCount
 _0800D51C:
 	movs r5, 0x41
 	ands r5, r0
@@ -405,7 +405,7 @@ _0800D56C:
 	movs r0, 0x3
 	strb r0, [r1, 0x2]
 _0800D588:
-	ldr r0, _0800D5A0 @ =gUnknown_2023BCC
+	ldr r0, _0800D5A0 @ =gBattlersCount
 	strb r6, [r0]
 	b _0800D754
 	.align 2, 0
@@ -413,7 +413,7 @@ _0800D590: .4byte gUnknown_3004FE0
 _0800D594: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D598: .4byte gUnknown_2023BD6
 _0800D59C: .4byte sub_803A668
-_0800D5A0: .4byte gUnknown_2023BCC
+_0800D5A0: .4byte gBattlersCount
 _0800D5A4:
 	bl GetMultiplayerId
 	lsls r0, 24
@@ -639,7 +639,7 @@ _0800D740:
 	bgt _0800D74E
 	b _0800D5D0
 _0800D74E:
-	ldr r1, _0800D764 @ =gUnknown_2023BCC
+	ldr r1, _0800D764 @ =gBattlersCount
 	movs r0, 0x4
 _0800D752:
 	strb r0, [r1]
@@ -652,7 +652,7 @@ _0800D754:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800D764: .4byte gUnknown_2023BCC
+_0800D764: .4byte gBattlersCount
 	thumb_func_end sub_800D494
 
 	thumb_func_start sub_800D768
@@ -801,7 +801,7 @@ _0800D888:
 _0800D890:
 	mov r8, r10
 _0800D892:
-	ldr r0, _0800D8AC @ =gUnknown_2023BCC
+	ldr r0, _0800D8AC @ =gBattlersCount
 	ldrb r0, [r0]
 	cmp r8, r0
 	bge _0800D89C
@@ -815,7 +815,7 @@ _0800D89C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800D8AC: .4byte gUnknown_2023BCC
+_0800D8AC: .4byte gBattlersCount
 	thumb_func_end sub_800D768
 
 	thumb_func_start PrepareBufferDataTransfer
@@ -1709,8 +1709,8 @@ _0800DF9C: .4byte gBitTable
 _0800DFA0: .4byte gTasks
 	thumb_func_end Task_HandleCopyReceivedLinkBuffersData
 
-	thumb_func_start EmitGetMonData
-EmitGetMonData: @ 800DFA4
+	thumb_func_start BtlController_EmitGetMonData
+BtlController_EmitGetMonData: @ 800DFA4
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1728,7 +1728,7 @@ EmitGetMonData: @ 800DFA4
 	bx r0
 	.align 2, 0
 _0800DFC4: .4byte gUnknown_2022874
-	thumb_func_end EmitGetMonData
+	thumb_func_end BtlController_EmitGetMonData
 
 	thumb_func_start EmitGetRawMonData
 EmitGetRawMonData: @ 800DFC8
@@ -2106,7 +2106,7 @@ EmitMoveAnimation: @ 800E1FC
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_8019F18
+	bl AbilityBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2116,7 +2116,7 @@ EmitMoveAnimation: @ 800E1FC
 	movs r1, 0
 	movs r2, 0x4D
 	movs r3, 0
-	bl sub_8019F18
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800E29C
@@ -2194,7 +2194,7 @@ EmitPrintString: @ 800E2D4
 	ldr r0, _0800E3C4 @ =gUnknown_2023D68
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
-	ldr r0, _0800E3C8 @ =gUnknown_2023D6A
+	ldr r0, _0800E3C8 @ =gLastUsedAbility
 	ldrb r0, [r0]
 	strb r0, [r1, 0x6]
 	ldr r0, _0800E3CC @ =gBattleScripting
@@ -2210,7 +2210,7 @@ EmitPrintString: @ 800E2D4
 	adds r0, 0xAD
 	ldrb r0, [r0]
 	strb r0, [r3, 0x9]
-	ldr r0, _0800E3D4 @ =gUnknown_2023D6F
+	ldr r0, _0800E3D4 @ =gPotentialItemEffectBattler
 	ldrb r0, [r0]
 	strb r0, [r3, 0xA]
 	ldr r3, _0800E3D8 @ =gBattleMoves
@@ -2281,10 +2281,10 @@ _0800E3B8: .4byte gUnknown_2023E8A
 _0800E3BC: .4byte gCurrentMove
 _0800E3C0: .4byte gUnknown_2023D4C
 _0800E3C4: .4byte gUnknown_2023D68
-_0800E3C8: .4byte gUnknown_2023D6A
+_0800E3C8: .4byte gLastUsedAbility
 _0800E3CC: .4byte gBattleScripting
 _0800E3D0: .4byte gBattleStruct
-_0800E3D4: .4byte gUnknown_2023D6F
+_0800E3D4: .4byte gPotentialItemEffectBattler
 _0800E3D8: .4byte gBattleMoves
 _0800E3DC: .4byte gUnknown_2022AD8
 _0800E3E0: .4byte gBattleMons
@@ -2323,7 +2323,7 @@ EmitPrintSelectionString: @ 800E3EC
 	ldr r0, _0800E4B4 @ =gUnknown_2023D68
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
-	ldr r0, _0800E4B8 @ =gUnknown_2023D6A
+	ldr r0, _0800E4B8 @ =gLastUsedAbility
 	ldrb r0, [r0]
 	strb r0, [r1, 0x6]
 	ldr r0, _0800E4BC @ =gBattleScripting
@@ -2393,7 +2393,7 @@ _0800E4A8: .4byte gUnknown_2022874
 _0800E4AC: .4byte gCurrentMove
 _0800E4B0: .4byte gUnknown_2023D4C
 _0800E4B4: .4byte gUnknown_2023D68
-_0800E4B8: .4byte gUnknown_2023D6A
+_0800E4B8: .4byte gLastUsedAbility
 _0800E4BC: .4byte gBattleScripting
 _0800E4C0: .4byte gBattleStruct
 _0800E4C4: .4byte gUnknown_2022AD8

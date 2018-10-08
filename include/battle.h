@@ -28,7 +28,7 @@
 #define SIDE_OPPONENT   0x1
 
 #define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
-#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
+#define GET_BANK_SIDE(bank)((GetBattlerPosition(bank) & BIT_SIDE))
 #define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
 
 #define BATTLE_TYPE_DOUBLE          0x0001
@@ -210,7 +210,7 @@ struct TrainerMonNoItemDefaultMoves
 };
 
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
-u8 GetBankSide(u8 bank);
+u8 GetBattlerSide(u8 bank);
 
 struct TrainerMonItemDefaultMoves
 {
@@ -646,6 +646,9 @@ extern struct BattleStruct* gBattleStruct;
         typeArg = gBattleMoves[move].type;                  \
 }
 
+#define IS_TYPE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
+#define IS_TYPE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
+
 #define MOVE_EFFECT_SLEEP               0x1
 #define MOVE_EFFECT_POISON              0x2
 #define MOVE_EFFECT_BURN                0x3
@@ -847,9 +850,9 @@ enum
 };
 
 // rom_80A5C6C
-u8 GetBankSide(u8 bank);
-u8 GetBankIdentity(u8 bank);
-u8 GetBankByIdentity(u8 bank);
+u8 GetBattlerSide(u8 bank);
+u8 GetBattlerPosition(u8 bank);
+u8 GetBattlerAtPosition(u8 bank);
 
 struct BattleSpriteInfo
 {
@@ -961,5 +964,17 @@ extern u16 gLastUsedItem;
 extern u32 gBattleTypeFlags;
 extern struct MonSpritesGfx* gMonSpritesGfxPtr;
 extern u16 gTrainerBattleOpponent_A;
+extern u16 gMoveToLearn;
+extern u16 gBattleMovePower;
+extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
+extern u16 gCurrentMove;
+extern u8 gCritMultiplier;
+extern u16 gBattleWeather;
+extern u8 gLastUsedAbility;
+extern u8 gBattlerInMenuId;
+extern u8 gPotentialItemEffectBattler;
+extern u8 gBattlersCount;
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
+extern s32 gBattleMoveDamage;
 
 #endif // GUARD_BATTLE_H

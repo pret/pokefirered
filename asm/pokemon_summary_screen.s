@@ -3490,7 +3490,7 @@ _08136240:
 	adds r0, r3
 	movs r1, 0xB
 	muls r1, r4
-	ldr r2, _08136318 @ =gUnknown_8245EE0
+	ldr r2, _08136318 @ =gSpeciesNames
 	adds r1, r2
 	bl StringCompare
 	cmp r0, 0
@@ -3575,7 +3575,7 @@ _08136308: .4byte 0x00003084
 _0813630C: .4byte gUnknown_84161CD
 _08136310: .4byte gUnknown_203B140
 _08136314: .4byte 0x00003034
-_08136318: .4byte gUnknown_8245EE0
+_08136318: .4byte gSpeciesNames
 _0813631C: .4byte 0x00003290
 _08136320: .4byte 0x0000ffff
 _08136324: .4byte 0x0000306c
@@ -3973,7 +3973,7 @@ _08136630:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _08136790 @ =gUnknown_8253AE4
+	ldr r4, _08136790 @ =gExperienceTables
 	adds r2, r5, 0x1
 	lsls r2, 2
 	ldr r3, _08136794 @ =gBaseStats
@@ -4084,7 +4084,7 @@ _08136780: .4byte 0x00003290
 _08136784: .4byte 0x0000309c
 _08136788: .4byte gUnknown_203B144
 _0813678C: .4byte 0x000031a4
-_08136790: .4byte gUnknown_8253AE4
+_08136790: .4byte gExperienceTables
 _08136794: .4byte gBaseStats
 _08136798: .4byte 0x000031b0
 _0813679C: .4byte 0x000031bc
@@ -9242,29 +9242,29 @@ sub_81390B0: @ 81390B0
 	adds r1, 0xD
 	adds r0, r6, 0
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	ldrb r1, [r0]
 	adds r1, 0xD
 	adds r0, r6, 0
 	ldr r2, [sp, 0x8]
-	bl sub_804037C
+	bl SetMonData
 	ldr r3, _081391E0 @ =gUnknown_203B16D
 	ldrb r1, [r3]
 	adds r1, 0x11
 	adds r0, r6, 0
 	adds r2, r7, 0
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	ldrb r1, [r0]
 	adds r1, 0x11
 	adds r0, r6, 0
 	mov r2, r10
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x15
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -9389,29 +9389,29 @@ sub_81391EC: @ 81391EC
 	adds r1, 0xD
 	adds r0, r6, 0
 	mov r2, sp
-	bl sub_80404D0
+	bl SetBoxMonData
 	mov r0, r8
 	ldrb r1, [r0]
 	adds r1, 0xD
 	adds r0, r6, 0
 	ldr r2, [sp, 0x8]
-	bl sub_80404D0
+	bl SetBoxMonData
 	ldr r3, _0813931C @ =gUnknown_203B16D
 	ldrb r1, [r3]
 	adds r1, 0x11
 	adds r0, r6, 0
 	adds r2, r7, 0
-	bl sub_80404D0
+	bl SetBoxMonData
 	mov r0, r8
 	ldrb r1, [r0]
 	adds r1, 0x11
 	adds r0, r6, 0
 	mov r2, r10
-	bl sub_80404D0
+	bl SetBoxMonData
 	adds r0, r6, 0
 	movs r1, 0x15
 	adds r2, r4, 0
-	bl sub_80404D0
+	bl SetBoxMonData
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -12270,7 +12270,7 @@ _0813A9B4:
 	bls _0813A9E2
 	b _0813AAE8
 _0813A9E2:
-	ldr r3, _0813AADC @ =gUnknown_8253AE4
+	ldr r3, _0813AADC @ =gExperienceTables
 	adds r1, r5, 0x1
 	lsls r1, 2
 	ldr r2, _0813AAE0 @ =gBaseStats
@@ -12395,7 +12395,7 @@ _0813AAB8:
 	.align 2, 0
 _0813AAD4: .4byte gUnknown_203B140
 _0813AAD8: .4byte 0x00003290
-_0813AADC: .4byte gUnknown_8253AE4
+_0813AADC: .4byte gExperienceTables
 _0813AAE0: .4byte gBaseStats
 _0813AAE4: .4byte gUnknown_203B160
 _0813AAE8:

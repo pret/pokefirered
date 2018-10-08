@@ -229,11 +229,11 @@ sub_802E228: @ 802E228
 	cmp r0, 0
 	beq _0802E274
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, _0802E270 @ =gBattleMons
@@ -256,7 +256,7 @@ _0802E26C: .4byte gBattleTypeFlags
 _0802E270: .4byte gBattleMons
 _0802E274:
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0802E27E:

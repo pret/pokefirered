@@ -6885,7 +6885,7 @@ _08119414:
 	lsrs r0, 22
 	movs r1, 0xB
 	muls r1, r0
-	ldr r0, _08119458 @ =gUnknown_8245EE0
+	ldr r0, _08119458 @ =gSpeciesNames
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -6907,7 +6907,7 @@ _0811944A:
 	b _081198DC
 	.align 2, 0
 _08119454: .4byte gStringVar1
-_08119458: .4byte gUnknown_8245EE0
+_08119458: .4byte gSpeciesNames
 _0811945C: .4byte gStringVar2
 _08119460: .4byte gStringVar4
 _08119464: .4byte gUnknown_8458DBC
@@ -10003,7 +10003,7 @@ _0811AC3C:
 	movs r0, 0xB
 	mov r2, r8
 	muls r2, r0
-	ldr r0, _0811ACA0 @ =gUnknown_8245EE0
+	ldr r0, _0811ACA0 @ =gSpeciesNames
 	adds r2, r0
 	str r5, [sp]
 	str r4, [sp, 0x4]
@@ -10041,7 +10041,7 @@ _0811AC90:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811ACA0: .4byte gUnknown_8245EE0
+_0811ACA0: .4byte gSpeciesNames
 	thumb_func_end sub_811ABE4
 
 	thumb_func_start sub_811ACA4
@@ -10227,7 +10227,7 @@ _0811ADE0:
 	beq _0811AE40
 	adds r4, 0x1
 _0811ADFA:
-	ldr r0, _0811AE0C @ =gUnknown_2024029
+	ldr r0, _0811AE0C @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	blt _0811ADE0
@@ -10235,10 +10235,10 @@ _0811ADFA:
 	b _0811AE5C
 	.align 2, 0
 _0811AE08: .4byte gPlayerParty
-_0811AE0C: .4byte gUnknown_2024029
+_0811AE0C: .4byte gPlayerPartyCount
 _0811AE10:
 	movs r4, 0
-	ldr r0, _0811AE44 @ =gUnknown_2024029
+	ldr r0, _0811AE44 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bge _0811AE5A
@@ -10265,12 +10265,12 @@ _0811AE40:
 	movs r0, 0
 	b _0811AE5C
 	.align 2, 0
-_0811AE44: .4byte gUnknown_2024029
+_0811AE44: .4byte gPlayerPartyCount
 _0811AE48: .4byte gBaseStats
 _0811AE4C: .4byte gPlayerParty
 _0811AE50:
 	adds r4, 0x1
-	ldr r0, _0811AE64 @ =gUnknown_2024029
+	ldr r0, _0811AE64 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	blt _0811AE1C
@@ -10281,7 +10281,7 @@ _0811AE5C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0811AE64: .4byte gUnknown_2024029
+_0811AE64: .4byte gPlayerPartyCount
 	thumb_func_end sub_811ADD0
 
 	thumb_func_start sub_811AE68
@@ -10480,14 +10480,14 @@ _0811AFC8:
 	ldrh r2, [r4, 0xA]
 	movs r1, 0xB
 	muls r1, r2
-	ldr r2, _0811AFF4 @ =gUnknown_8245EE0
+	ldr r2, _0811AFF4 @ =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
 	movs r4, 0
 	b _0811AFFA
 	.align 2, 0
 _0811AFF0: .4byte gUnknown_203B06C
-_0811AFF4: .4byte gUnknown_8245EE0
+_0811AFF4: .4byte gSpeciesNames
 _0811AFF8:
 	adds r4, 0x1
 _0811AFFA:
@@ -10509,7 +10509,7 @@ _0811AFFA:
 	ldrh r1, [r5, 0x2]
 	movs r0, 0xB
 	muls r1, r0
-	ldr r0, _0811B048 @ =gUnknown_8245EE0
+	ldr r0, _0811B048 @ =gSpeciesNames
 	adds r1, r0
 	adds r0, r6, 0
 	adds r0, 0x79
@@ -10527,7 +10527,7 @@ _0811B030:
 	b _0811B080
 	.align 2, 0
 _0811B044: .4byte gUnknown_3007460
-_0811B048: .4byte gUnknown_8245EE0
+_0811B048: .4byte gSpeciesNames
 _0811B04C: .4byte gUnknown_8457DB8
 _0811B050:
 	movs r4, 0
@@ -10626,7 +10626,7 @@ sub_811B0F0: @ 811B0F0
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r5, 0
-	ldr r0, _0811B138 @ =gUnknown_2024029
+	ldr r0, _0811B138 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r6, r0
 	bge _0811B130
@@ -10651,7 +10651,7 @@ _0811B0FE:
 	adds r6, 0x1
 _0811B126:
 	adds r5, 0x1
-	ldr r0, _0811B138 @ =gUnknown_2024029
+	ldr r0, _0811B138 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _0811B0FE
@@ -10661,7 +10661,7 @@ _0811B130:
 	movs r0, 0
 	b _0811B142
 	.align 2, 0
-_0811B138: .4byte gUnknown_2024029
+_0811B138: .4byte gPlayerPartyCount
 _0811B13C: .4byte gPlayerParty
 _0811B140:
 	movs r0, 0x1
@@ -10807,7 +10807,7 @@ _0811B212:
 _0811B238:
 	adds r5, 0x1
 _0811B23A:
-	ldr r0, _0811B254 @ =gUnknown_2024029
+	ldr r0, _0811B254 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _0811B212
@@ -10820,7 +10820,7 @@ _0811B242:
 	bx r1
 	.align 2, 0
 _0811B250: .4byte gPlayerParty
-_0811B254: .4byte gUnknown_2024029
+_0811B254: .4byte gPlayerPartyCount
 	thumb_func_end sub_811B1EC
 
 	thumb_func_start sub_811B258

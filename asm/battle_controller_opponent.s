@@ -2567,12 +2567,12 @@ _08036F9C:
 	adds r0, r4, 0
 	movs r1, 0xB
 	adds r2, r7, 0
-	bl sub_804037C
+	bl SetMonData
 	adds r2, r7, 0
 	adds r2, 0x2E
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_804037C
+	bl SetMonData
 	movs r0, 0
 	mov r8, r0
 	movs r0, 0x3B
@@ -2613,12 +2613,12 @@ _08037002:
 	adds r1, 0xD
 	mov r0, r9
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	mov r1, r8
 	adds r1, 0x11
 	mov r0, r9
 	adds r2, r6, 0
-	bl sub_804037C
+	bl SetMonData
 	adds r6, 0x1
 	adds r4, 0x2
 	movs r0, 0x1
@@ -2634,15 +2634,15 @@ _08037002:
 	adds r0, r4, 0
 	movs r1, 0x15
 	mov r2, r10
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x20
 	ldr r2, [sp, 0x20]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x19
 	ldr r2, [sp, 0x28]
-	bl sub_804037C
+	bl SetMonData
 	ldrb r0, [r7, 0x14]
 	lsls r0, 27
 	lsrs r0, 27
@@ -2651,7 +2651,7 @@ _08037002:
 	adds r0, r4, 0
 	movs r1, 0x27
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r1, sp
 	ldrh r0, [r7, 0x14]
 	lsls r0, 22
@@ -2660,7 +2660,7 @@ _08037002:
 	adds r0, r4, 0
 	movs r1, 0x28
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r1, sp
 	ldrb r0, [r7, 0x15]
 	lsls r0, 25
@@ -2669,7 +2669,7 @@ _08037002:
 	adds r0, r4, 0
 	movs r1, 0x29
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r1, sp
 	ldr r0, [r7, 0x14]
 	lsls r0, 12
@@ -2678,7 +2678,7 @@ _08037002:
 	adds r0, r4, 0
 	movs r1, 0x2A
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r1, sp
 	ldrh r0, [r7, 0x16]
 	lsls r0, 23
@@ -2687,7 +2687,7 @@ _08037002:
 	adds r0, r4, 0
 	movs r1, 0x2B
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r1, sp
 	ldrb r0, [r7, 0x17]
 	lsls r0, 26
@@ -2696,47 +2696,47 @@ _08037002:
 	adds r0, r4, 0
 	movs r1, 0x2C
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0
 	ldr r2, [sp, 0x2C]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x37
 	ldr r2, [sp, 0x30]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x38
 	ldr r2, [sp, 0x1C]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x39
 	ldr r2, [sp, 0x18]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3A
 	ldr r2, [sp, 0x24]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3B
 	ldr r2, [sp, 0x4]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3C
 	ldr r2, [sp, 0x8]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3D
 	ldr r2, [sp, 0xC]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3E
 	ldr r2, [sp, 0x10]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3F
 	ldr r2, [sp, 0x14]
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037130: .4byte gEnemyParty
@@ -2749,7 +2749,7 @@ _08037134:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0xB
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _0803714C: .4byte gEnemyParty
@@ -2762,7 +2762,7 @@ _08037150:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0xC
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037168: .4byte gEnemyParty
@@ -2784,12 +2784,12 @@ _08037184:
 	adds r1, 0xD
 	adds r0, r7, 0
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	mov r1, r8
 	adds r1, 0x11
 	adds r0, r7, 0
 	adds r2, r6, 0
-	bl sub_804037C
+	bl SetMonData
 	adds r6, 0x1
 	adds r4, 0x2
 	movs r0, 0x1
@@ -2803,7 +2803,7 @@ _08037184:
 	adds r0, r1
 	movs r1, 0x15
 	mov r2, r9
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080371BC: .4byte gEnemyParty
@@ -2835,7 +2835,7 @@ _080371E0:
 	adds r0, r4, 0
 	movs r1, 0x11
 	str r3, [sp, 0x34]
-	bl sub_804037C
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -2843,7 +2843,7 @@ _080371E0:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x12
-	bl sub_804037C
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -2851,7 +2851,7 @@ _080371E0:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x13
-	bl sub_804037C
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -2859,7 +2859,7 @@ _080371E0:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x14
-	bl sub_804037C
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -2867,7 +2867,7 @@ _080371E0:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037244: .4byte gEnemyParty
@@ -2886,7 +2886,7 @@ _08037248:
 _0803725E:
 	adds r3, 0x3
 	adds r2, r3
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037268: .4byte gEnemyParty
@@ -2900,7 +2900,7 @@ _08037270:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037288: .4byte gEnemyParty
@@ -2913,7 +2913,7 @@ _0803728C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x19
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080372A4: .4byte gEnemyParty
@@ -2926,7 +2926,7 @@ _080372A8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1A
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080372C0: .4byte gEnemyParty
@@ -2939,7 +2939,7 @@ _080372C4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1B
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080372DC: .4byte gEnemyParty
@@ -2952,7 +2952,7 @@ _080372E0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1C
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080372F8: .4byte gEnemyParty
@@ -2965,7 +2965,7 @@ _080372FC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1D
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037314: .4byte gEnemyParty
@@ -2978,7 +2978,7 @@ _08037318:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1E
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037330: .4byte gEnemyParty
@@ -2991,7 +2991,7 @@ _08037334:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1F
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _0803734C: .4byte gEnemyParty
@@ -3004,7 +3004,7 @@ _08037350:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x20
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037368: .4byte gEnemyParty
@@ -3017,7 +3017,7 @@ _0803736C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x22
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037384: .4byte gEnemyParty
@@ -3030,7 +3030,7 @@ _08037388:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x23
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080373A0: .4byte gEnemyParty
@@ -3043,7 +3043,7 @@ _080373A4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x24
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080373BC: .4byte gEnemyParty
@@ -3056,7 +3056,7 @@ _080373C0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x25
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080373D8: .4byte gEnemyParty
@@ -3069,7 +3069,7 @@ _080373DC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x26
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080373F4: .4byte gEnemyParty
@@ -3085,7 +3085,7 @@ _080373F8:
 	adds r0, r4, 0
 	movs r1, 0x27
 	str r3, [sp, 0x34]
-	bl sub_804037C
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -3093,7 +3093,7 @@ _080373F8:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl sub_804037C
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -3101,7 +3101,7 @@ _080373F8:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl sub_804037C
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -3109,7 +3109,7 @@ _080373F8:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl sub_804037C
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -3117,7 +3117,7 @@ _080373F8:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl sub_804037C
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -3136,7 +3136,7 @@ _0803746C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x27
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037484: .4byte gEnemyParty
@@ -3149,7 +3149,7 @@ _08037488:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x28
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080374A0: .4byte gEnemyParty
@@ -3162,7 +3162,7 @@ _080374A4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x29
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080374BC: .4byte gEnemyParty
@@ -3175,7 +3175,7 @@ _080374C0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x2A
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080374D8: .4byte gEnemyParty
@@ -3188,7 +3188,7 @@ _080374DC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x2B
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080374F4: .4byte gEnemyParty
@@ -3202,7 +3202,7 @@ _080374F8:
 	adds r2, r3
 _08037506:
 	movs r1, 0x2C
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037510: .4byte gEnemyParty
@@ -3215,7 +3215,7 @@ _08037514:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _0803752C: .4byte gEnemyParty
@@ -3228,7 +3228,7 @@ _08037530:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x9
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037548: .4byte gEnemyParty
@@ -3241,7 +3241,7 @@ _0803754C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x37
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037564: .4byte gEnemyParty
@@ -3254,7 +3254,7 @@ _08037568:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x38
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037580: .4byte gEnemyParty
@@ -3267,7 +3267,7 @@ _08037584:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x39
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _0803759C: .4byte gEnemyParty
@@ -3280,7 +3280,7 @@ _080375A0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3A
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080375B8: .4byte gEnemyParty
@@ -3293,7 +3293,7 @@ _080375BC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3B
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080375D4: .4byte gEnemyParty
@@ -3306,7 +3306,7 @@ _080375D8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3C
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080375F0: .4byte gEnemyParty
@@ -3319,7 +3319,7 @@ _080375F4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3D
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _0803760C: .4byte gEnemyParty
@@ -3332,7 +3332,7 @@ _08037610:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3E
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037628: .4byte gEnemyParty
@@ -3345,7 +3345,7 @@ _0803762C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3F
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037644: .4byte gEnemyParty
@@ -3358,7 +3358,7 @@ _08037648:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x16
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037660: .4byte gEnemyParty
@@ -3371,7 +3371,7 @@ _08037664:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x17
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _0803767C: .4byte gEnemyParty
@@ -3384,7 +3384,7 @@ _08037680:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x18
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037698: .4byte gEnemyParty
@@ -3397,7 +3397,7 @@ _0803769C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x21
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080376B4: .4byte gEnemyParty
@@ -3410,7 +3410,7 @@ _080376B8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x2F
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080376D0: .4byte gEnemyParty
@@ -3423,7 +3423,7 @@ _080376D4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x30
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _080376EC: .4byte gEnemyParty
@@ -3436,7 +3436,7 @@ _080376F0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x32
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037708: .4byte gEnemyParty
@@ -3449,7 +3449,7 @@ _0803770C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x33
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037724: .4byte gEnemyParty
@@ -3462,7 +3462,7 @@ _08037728:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x34
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _08037740: .4byte gEnemyParty
@@ -3475,7 +3475,7 @@ _08037744:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x35
-	bl sub_804037C
+	bl SetMonData
 	b _08037774
 	.align 2, 0
 _0803775C: .4byte gEnemyParty
@@ -3488,7 +3488,7 @@ _08037760:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x36
-	bl sub_804037C
+	bl SetMonData
 _08037774:
 	add sp, 0x38
 	pop {r3-r5}
@@ -3644,13 +3644,13 @@ _08037890:
 _080378AA:
 	ldr r7, _0803799C @ =gActiveBattler
 	ldrb r0, [r7]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
 	bl sub_803F7D4
-	ldr r6, _080379A0 @ =gUnknown_20244DC
+	ldr r6, _080379A0 @ =gMultiuseSpriteTemplate
 	ldrb r0, [r7]
 	movs r1, 0x2
 	bl sub_8074480
@@ -3758,7 +3758,7 @@ _08037986:
 	bx r0
 	.align 2, 0
 _0803799C: .4byte gActiveBattler
-_080379A0: .4byte gUnknown_20244DC
+_080379A0: .4byte gMultiuseSpriteTemplate
 _080379A4: .4byte gUnknown_2023D44
 _080379A8: .4byte gSprites
 _080379AC: .4byte 0x0000ff10
@@ -3867,13 +3867,13 @@ sub_8037A28: @ 8037A28
 	adds r1, r6, 0
 	bl BattleLoadOpponentMonSpriteGfx
 	adds r0, r6, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
 	bl sub_803F7D4
-	ldr r0, _08037B98 @ =gUnknown_20244DC
+	ldr r0, _08037B98 @ =gMultiuseSpriteTemplate
 	mov r9, r0
 	adds r0, r6, 0
 	movs r1, 0x2
@@ -3984,7 +3984,7 @@ _08037B88: .4byte gUnknown_2022BC4
 _08037B8C: .4byte gEnemyParty
 _08037B90: .4byte sub_8033E3C
 _08037B94: .4byte gUnknown_3004FFC
-_08037B98: .4byte gUnknown_20244DC
+_08037B98: .4byte gMultiuseSpriteTemplate
 _08037B9C: .4byte gUnknown_2023D44
 _08037BA0: .4byte gSprites
 _08037BA4: .4byte gUnknown_2024024
@@ -4198,13 +4198,13 @@ _08037D3A:
 	bl sub_80346C4
 	mov r1, r8
 	ldrb r0, [r1]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r9
-	bl sub_803F864
-	ldr r5, _08037E74 @ =gUnknown_20244DC
+	bl SetMultiuseSpriteTemplateToTrainerBack
+	ldr r5, _08037E74 @ =gMultiuseSpriteTemplate
 	ldr r1, _08037E78 @ =gUnknown_823932C
 	mov r2, r9
 	lsls r0, r2, 2
@@ -4339,7 +4339,7 @@ _08037D3A:
 	.align 2, 0
 _08037E6C: .4byte gTrainers
 _08037E70: .4byte gActiveBattler
-_08037E74: .4byte gUnknown_20244DC
+_08037E74: .4byte gMultiuseSpriteTemplate
 _08037E78: .4byte gUnknown_823932C
 _08037E7C: .4byte gUnknown_2023D44
 _08037E80: .4byte gSprites
@@ -4417,13 +4417,13 @@ _08037F0E:
 	bl sub_80346C4
 	mov r1, r8
 	ldrb r0, [r1]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r9
-	bl sub_803F864
-	ldr r0, _08038048 @ =gUnknown_20244DC
+	bl SetMultiuseSpriteTemplateToTrainerBack
+	ldr r0, _08038048 @ =gMultiuseSpriteTemplate
 	ldr r2, _0803804C @ =gUnknown_823932C
 	mov r3, r9
 	lsls r1, r3, 2
@@ -4559,7 +4559,7 @@ _08037F0E:
 	.align 2, 0
 _08038040: .4byte gTrainers
 _08038044: .4byte gActiveBattler
-_08038048: .4byte gUnknown_20244DC
+_08038048: .4byte gMultiuseSpriteTemplate
 _0803804C: .4byte gUnknown_823932C
 _08038050: .4byte gUnknown_2023D44
 _08038054: .4byte gSprites
@@ -5292,7 +5292,7 @@ _0803861C:
 	cmp r0, 0
 	beq _08038656
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r5, _08038674 @ =gBattlerTarget
 	strb r0, [r5]
 	ldr r0, _08038678 @ =gAbsentBattlerFlags
@@ -5306,7 +5306,7 @@ _0803861C:
 	cmp r1, 0
 	beq _08038656
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	strb r0, [r5]
 _08038656:
 	ldr r0, _08038674 @ =gBattlerTarget
@@ -5371,7 +5371,7 @@ _080386C4:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r1, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 16
@@ -5384,7 +5384,7 @@ _080386C4:
 _080386F4: .4byte gBattleTypeFlags
 _080386F8:
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 16
@@ -5427,7 +5427,7 @@ sub_8038744: @ 8038744
 	push {r4-r6,lr}
 	ldr r6, _08038788 @ =gActiveBattler
 	ldrb r0, [r6]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r5, _0803878C @ =gBattleStruct
@@ -5449,7 +5449,7 @@ sub_8038744: @ 8038744
 	cmp r0, 0
 	bne _08038794
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
@@ -5460,11 +5460,11 @@ _0803878C: .4byte gBattleStruct
 _08038790: .4byte gBattleTypeFlags
 _08038794:
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r5, r0, 24
 _080387A8:
@@ -5500,7 +5500,7 @@ _080387DC: .4byte gEnemyParty
 _080387E0: .4byte gBattlerPartyIndexes
 _080387E4:
 	ldrb r0, [r6]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, [r5]
@@ -5508,7 +5508,7 @@ _080387E4:
 	adds r0, 0x92
 	ldrb r4, [r0]
 	ldrb r0, [r6]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, [r5]
@@ -5990,7 +5990,7 @@ OpponentHandleEffectivenessSound: @ 8038B9C
 	push {r4,lr}
 	ldr r4, _08038BD8 @ =gActiveBattler
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -6372,7 +6372,7 @@ sub_8038EA8: @ 8038EA8
 	cmp r0, 0
 	beq _08038ED8
 	adds r0, r2, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08038ED8

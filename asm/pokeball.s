@@ -90,7 +90,7 @@ _0804A9D8:
 	mov r9, r0
 	ldrb r6, [r1, 0xE]
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804AA04
@@ -247,7 +247,7 @@ _0804AB30: .4byte gSprites
 _0804AB34: .4byte SpriteCB_OpponentMonSendOut
 _0804AB38:
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r1, _0804AB64 @ =gBattlerTarget
 	strb r0, [r1]
 	movs r2, 0x1
@@ -1213,7 +1213,7 @@ sub_804B268: @ 804B268
 	b _0804B420
 _0804B2DA:
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B310
@@ -1253,13 +1253,13 @@ _0804B324:
 	lsrs r0, 16
 	mov r8, r0
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _0804B34E
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1323,13 +1323,13 @@ _0804B3C8: .4byte 0x0000ffff
 _0804B3CC: .4byte gUnknown_2024018
 _0804B3D0:
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _0804B3EC
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1858,7 +1858,7 @@ _0804B7C8:
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1935,7 +1935,7 @@ SpriteCB_OpponentMonSendOut: @ 804B868
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -2612,7 +2612,7 @@ sub_804BD94: @ 804BD94
 	ldr r0, _0804BE1C @ =sub_804BE48
 	str r0, [r4, 0x1C]
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804BDE2
@@ -2641,7 +2641,7 @@ _0804BDE2:
 	ldr r1, [r1]
 	bl _call_via_r1
 	adds r0, r5, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -2856,7 +2856,7 @@ GetBankPokeballItemId: @ 804BF90
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804BFBC

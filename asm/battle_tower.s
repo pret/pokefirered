@@ -939,7 +939,7 @@ sub_80E6078: @ 80E6078
 	ldrb r0, [r1]
 	cmp r0, 0xC8
 	bne _080E60A4
-	ldr r1, _080E609C @ =gUnknown_82538A8
+	ldr r1, _080E609C @ =gFacilityClassToPicIndex
 	ldr r2, _080E60A0 @ =0x000004a1
 	adds r0, r3, r2
 	ldrb r0, [r0]
@@ -948,12 +948,12 @@ sub_80E6078: @ 80E6078
 	.align 2, 0
 _080E6094: .4byte gSaveBlock2Ptr
 _080E6098: .4byte 0x0000056c
-_080E609C: .4byte gUnknown_82538A8
+_080E609C: .4byte gFacilityClassToPicIndex
 _080E60A0: .4byte 0x000004a1
 _080E60A4:
 	cmp r0, 0x63
 	bls _080E60C4
-	ldr r2, _080E60C0 @ =gUnknown_82538A8
+	ldr r2, _080E60C0 @ =gFacilityClassToPicIndex
 	ldrb r0, [r1]
 	subs r0, 0x64
 	movs r1, 0xA4
@@ -965,9 +965,9 @@ _080E60A4:
 	adds r0, r2
 	b _080E60D6
 	.align 2, 0
-_080E60C0: .4byte gUnknown_82538A8
+_080E60C0: .4byte gFacilityClassToPicIndex
 _080E60C4:
-	ldr r3, _080E60DC @ =gUnknown_82538A8
+	ldr r3, _080E60DC @ =gFacilityClassToPicIndex
 	ldr r2, _080E60E0 @ =gUnknown_83FFAC4
 	ldrb r1, [r1]
 	lsls r0, r1, 2
@@ -981,7 +981,7 @@ _080E60D6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080E60DC: .4byte gUnknown_82538A8
+_080E60DC: .4byte gFacilityClassToPicIndex
 _080E60E0: .4byte gUnknown_83FFAC4
 	thumb_func_end sub_80E6078
 
@@ -995,7 +995,7 @@ sub_80E60E4: @ 80E60E4
 	ldrb r0, [r1]
 	cmp r0, 0xC8
 	bne _080E6110
-	ldr r1, _080E6108 @ =gUnknown_825393E
+	ldr r1, _080E6108 @ =gFacilityClassToTrainerClass
 	ldr r2, _080E610C @ =0x000004a1
 	adds r0, r3, r2
 	ldrb r0, [r0]
@@ -1004,12 +1004,12 @@ sub_80E60E4: @ 80E60E4
 	.align 2, 0
 _080E6100: .4byte gSaveBlock2Ptr
 _080E6104: .4byte 0x0000056c
-_080E6108: .4byte gUnknown_825393E
+_080E6108: .4byte gFacilityClassToTrainerClass
 _080E610C: .4byte 0x000004a1
 _080E6110:
 	cmp r0, 0x63
 	bhi _080E6130
-	ldr r3, _080E6128 @ =gUnknown_825393E
+	ldr r3, _080E6128 @ =gFacilityClassToTrainerClass
 	ldr r2, _080E612C @ =gUnknown_83FFAC4
 	ldrb r1, [r1]
 	lsls r0, r1, 2
@@ -1020,10 +1020,10 @@ _080E6110:
 	adds r0, r3
 	b _080E6144
 	.align 2, 0
-_080E6128: .4byte gUnknown_825393E
+_080E6128: .4byte gFacilityClassToTrainerClass
 _080E612C: .4byte gUnknown_83FFAC4
 _080E6130:
-	ldr r2, _080E614C @ =gUnknown_825393E
+	ldr r2, _080E614C @ =gFacilityClassToTrainerClass
 	ldrb r0, [r1]
 	subs r0, 0x64
 	movs r1, 0xA4
@@ -1038,7 +1038,7 @@ _080E6144:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080E614C: .4byte gUnknown_825393E
+_080E614C: .4byte gFacilityClassToTrainerClass
 	thumb_func_end sub_80E60E4
 
 	thumb_func_start sub_80E6150
@@ -1465,7 +1465,7 @@ _080E646E:
 	adds r0, r4, 0
 	movs r1, 0x20
 	add r2, sp, 0xC
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	add r0, r10
 	ldrb r2, [r0, 0x2]
@@ -1474,7 +1474,7 @@ _080E646E:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_804037C
+	bl SetMonData
 	mov r6, r9
 _080E64A0:
 	cmp r6, 0x3
@@ -1523,7 +1523,7 @@ _080E64EC:
 	movs r0, 0xB
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _080E651C @ =gUnknown_8245EE0
+	ldr r0, _080E651C @ =gSpeciesNames
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringAppend
@@ -1537,7 +1537,7 @@ _080E64EC:
 	.align 2, 0
 _080E6514: .4byte gStringVar1
 _080E6518: .4byte gUnknown_83FE859
-_080E651C: .4byte gUnknown_8245EE0
+_080E651C: .4byte gSpeciesNames
 _080E6520:
 	cmp r4, 0x8
 	beq _080E6538
@@ -1999,7 +1999,7 @@ _080E6874:
 	adds r0, r4, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _080E6874
@@ -2101,7 +2101,7 @@ _080E6948:
 	adds r0, r4
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _080E6948
@@ -3306,7 +3306,7 @@ _080E72EA:
 	adds r0, r4, 0
 	adds r1, r7, 0
 	adds r2, r6, 0
-	bl sub_804037C
+	bl SetMonData
 _080E731A:
 	adds r5, 0x1
 	cmp r5, 0x2
@@ -3437,7 +3437,7 @@ _080E741C: .4byte gPlayerParty
 
 	thumb_func_start GetEreaderTrainerFrontSpriteId
 GetEreaderTrainerFrontSpriteId: @ 80E7420
-	ldr r1, _080E7434 @ =gUnknown_82538A8
+	ldr r1, _080E7434 @ =gFacilityClassToPicIndex
 	ldr r0, _080E7438 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, _080E743C @ =0x000004a1
@@ -3447,14 +3447,14 @@ GetEreaderTrainerFrontSpriteId: @ 80E7420
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_080E7434: .4byte gUnknown_82538A8
+_080E7434: .4byte gFacilityClassToPicIndex
 _080E7438: .4byte gSaveBlock2Ptr
 _080E743C: .4byte 0x000004a1
 	thumb_func_end GetEreaderTrainerFrontSpriteId
 
 	thumb_func_start GetEreaderTrainerClassId
 GetEreaderTrainerClassId: @ 80E7440
-	ldr r1, _080E7454 @ =gUnknown_825393E
+	ldr r1, _080E7454 @ =gFacilityClassToTrainerClass
 	ldr r0, _080E7458 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, _080E745C @ =0x000004a1
@@ -3464,7 +3464,7 @@ GetEreaderTrainerClassId: @ 80E7440
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_080E7454: .4byte gUnknown_825393E
+_080E7454: .4byte gFacilityClassToTrainerClass
 _080E7458: .4byte gSaveBlock2Ptr
 _080E745C: .4byte 0x000004a1
 	thumb_func_end GetEreaderTrainerClassId

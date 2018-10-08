@@ -319,7 +319,7 @@ _0815DA0C: .4byte gUnknown_20370C0
 
 	thumb_func_start sub_815DA10
 sub_815DA10: @ 815DA10
-	ldr r1, _0815DA20 @ =gUnknown_825393E
+	ldr r1, _0815DA20 @ =gFacilityClassToTrainerClass
 	ldr r0, _0815DA24 @ =gUnknown_203F45C
 	ldr r0, [r0]
 	adds r0, 0x3D
@@ -328,7 +328,7 @@ sub_815DA10: @ 815DA10
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_0815DA20: .4byte gUnknown_825393E
+_0815DA20: .4byte gFacilityClassToTrainerClass
 _0815DA24: .4byte gUnknown_203F45C
 	thumb_func_end sub_815DA10
 
@@ -347,7 +347,7 @@ _0815DA38: .4byte gUnknown_203F45C
 
 	thumb_func_start sub_815DA3C
 sub_815DA3C: @ 815DA3C
-	ldr r1, _0815DA4C @ =gUnknown_82538A8
+	ldr r1, _0815DA4C @ =gFacilityClassToPicIndex
 	ldr r0, _0815DA50 @ =gUnknown_203F45C
 	ldr r0, [r0]
 	adds r0, 0x3D
@@ -356,7 +356,7 @@ sub_815DA3C: @ 815DA3C
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_0815DA4C: .4byte gUnknown_82538A8
+_0815DA4C: .4byte gFacilityClassToPicIndex
 _0815DA50: .4byte gUnknown_203F45C
 	thumb_func_end sub_815DA3C
 
@@ -2287,14 +2287,14 @@ sub_815E948: @ 815E948
 	ldrb r1, [r3, 0x1B]
 	movs r3, 0
 	ldr r2, _0815E984 @ =gUnknown_847A074
-	ldr r0, _0815E988 @ =gUnknown_825393E
+	ldr r0, _0815E988 @ =gFacilityClassToTrainerClass
 	adds r1, r0
 	b _0815E994
 	.align 2, 0
 _0815E97C: .4byte 0x00004001
 _0815E980: .4byte gUnknown_203F458
 _0815E984: .4byte gUnknown_847A074
-_0815E988: .4byte gUnknown_825393E
+_0815E988: .4byte gFacilityClassToTrainerClass
 _0815E98C:
 	adds r2, 0x4
 	adds r3, 0x1

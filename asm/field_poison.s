@@ -78,7 +78,7 @@ MonFaintFromPoisonOnField: @ 80A04B8
 	adds r0, r4, 0
 	movs r1, 0x37
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	ldr r5, _080A0500 @ =gStringVar1
 	adds r0, r4, 0
 	movs r1, 0x2
@@ -279,7 +279,7 @@ _080A065C:
 	adds r0, r4, 0
 	movs r1, 0x39
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r7, 0x1
 _080A0668:
 	adds r4, 0x64

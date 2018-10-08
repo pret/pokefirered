@@ -579,7 +579,7 @@ gUnknown_83FE860:: @ 83FE860
 gUnknown_83FE864:: @ 83FE864
 	.incbin "baserom.gba", 0x3FE864, 0x4
 
-gUnknown_83FE868:: @ 83FE868
+gText_BadEgg:: @ 83FE868
 	.incbin "baserom.gba", 0x3FE868, 0xC
 
 gUnknown_83FE874:: @ 83FE874
@@ -1185,7 +1185,7 @@ gExpandedPlaceholder_Red:: @ 8415A58
 gExpandedPlaceholder_Green:: @ 8415A5C
 	.incbin "baserom.gba", 0x415A5C, 0x6
 
-gUnknown_8415A62:: @ 8415A62
+gText_EggNickname:: @ 8415A62
 	.incbin "baserom.gba", 0x415A62, 0x4
 
 gUnknown_8415A66:: @ 8415A66

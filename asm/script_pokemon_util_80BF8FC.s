@@ -107,7 +107,7 @@ sub_80BF9BC: @ 80BF9BC
 	ldr r0, _080BF9F0 @ =gPlayerParty
 	ldr r1, _080BF9F4 @ =gUnknown_20370C0
 	ldrb r1, [r1]
-	ldr r2, _080BF9F8 @ =gUnknown_2024029
+	ldr r2, _080BF9F8 @ =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24
@@ -128,7 +128,7 @@ sub_80BF9BC: @ 80BF9BC
 	.align 2, 0
 _080BF9F0: .4byte gPlayerParty
 _080BF9F4: .4byte gUnknown_20370C0
-_080BF9F8: .4byte gUnknown_2024029
+_080BF9F8: .4byte gPlayerPartyCount
 _080BF9FC: .4byte c2_exit_to_overworld_2_switch
 _080BFA00: .4byte gUnknown_3005020
 _080BFA04: .4byte sub_807DD24
@@ -304,23 +304,23 @@ sub_80BFAA8: @ 80BFAA8
 	mov r0, r8
 	ldr r1, [sp, 0x8]
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	ldr r1, [sp, 0xC]
 	ldr r2, [sp, 0x14]
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	ldr r1, [sp, 0x10]
 	mov r2, r10
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	ldr r1, [sp, 0x1C]
 	ldr r2, [sp, 0x18]
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	movs r1, 0x15
 	adds r2, r6, 0
-	bl sub_804037C
+	bl SetMonData
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3

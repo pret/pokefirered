@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80423A4
-sub_80423A4: @ 80423A4
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r4, r2, 0
-	lsls r3, 24
-	lsrs r6, r3, 24
-	movs r1, 0x37
-	movs r2, 0
-	bl GetMonData
-	adds r1, r0, 0
-	str r1, [sp]
-	ands r0, r4
-	cmp r0, 0
-	beq _08042408
-	mvns r4, r4
-	ands r1, r4
-	str r1, [sp]
-	adds r0, r5, 0
-	movs r1, 0x37
-	mov r2, sp
-	bl sub_804037C
-	ldr r0, _080423FC @ =gMain
-	ldr r1, _08042400 @ =0x00000439
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080423F6
-	cmp r6, 0x4
-	beq _080423F6
-	ldr r0, _08042404 @ =gBattleMons
-	movs r1, 0x58
-	muls r1, r6
-	adds r0, 0x4C
-	adds r1, r0
-	ldr r0, [r1]
-	ands r0, r4
-	str r0, [r1]
-_080423F6:
-	movs r0, 0
-	b _0804240A
-	.align 2, 0
-_080423FC: .4byte gMain
-_08042400: .4byte 0x00000439
-_08042404: .4byte gBattleMons
-_08042408:
-	movs r0, 0x1
-_0804240A:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80423A4
-
 	thumb_func_start sub_8042414
 sub_8042414: @ 8042414
 	push {r4-r7,lr}
@@ -97,8 +40,8 @@ sub_8042414: @ 8042414
 	beq _08042458
 	bl ItemId_GetHoldEffect
 _08042458:
-	ldr r1, _080424B0 @ =gUnknown_2023D6F
-	ldr r0, _080424B4 @ =gUnknown_2024004
+	ldr r1, _080424B0 @ =gPotentialItemEffectBattler
+	ldr r0, _080424B4 @ =gBattlerInMenuId
 	ldrb r2, [r0]
 	strb r2, [r1]
 	ldr r0, _080424B8 @ =gMain
@@ -114,14 +57,14 @@ _08042458:
 	ldr r0, _080424C0 @ =gActiveBattler
 	strb r2, [r0]
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
 	orrs r1, r0
 	lsrs r1, 31
 	str r1, [sp, 0xC]
-	ldr r0, _080424C4 @ =gUnknown_2023BCC
+	ldr r0, _080424C4 @ =gBattlersCount
 	ldr r4, [sp]
 	subs r4, 0xD
 	ldrb r0, [r0]
@@ -141,18 +84,18 @@ _08042458:
 	str r2, [sp, 0x1C]
 	b _08042504
 	.align 2, 0
-_080424B0: .4byte gUnknown_2023D6F
-_080424B4: .4byte gUnknown_2024004
+_080424B0: .4byte gPotentialItemEffectBattler
+_080424B4: .4byte gBattlerInMenuId
 _080424B8: .4byte gMain
 _080424BC: .4byte 0x00000439
 _080424C0: .4byte gActiveBattler
-_080424C4: .4byte gUnknown_2023BCC
+_080424C4: .4byte gBattlersCount
 _080424C8: .4byte gBattlerPartyIndexes
 _080424CC:
 	ldr r0, [sp, 0xC]
 	adds r0, 0x2
 	str r0, [sp, 0xC]
-	ldr r0, _080424F4 @ =gUnknown_2023BCC
+	ldr r0, _080424F4 @ =gBattlersCount
 	ldr r1, [sp, 0xC]
 	ldrb r0, [r0]
 	cmp r1, r0
@@ -169,7 +112,7 @@ _080424CC:
 	str r0, [sp, 0x1C]
 	b _08042504
 	.align 2, 0
-_080424F4: .4byte gUnknown_2023BCC
+_080424F4: .4byte gBattlersCount
 _080424F8:
 	ldr r0, _08042520 @ =gActiveBattler
 	strb r1, [r0]
@@ -182,7 +125,7 @@ _08042504:
 	lsrs r0, 16
 	cmp r0, 0xA5
 	bhi _08042578
-	ldr r1, _08042524 @ =gUnknown_82528BC
+	ldr r1, _08042524 @ =gItemEffectTable
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -194,7 +137,7 @@ _08042504:
 	b _08042578
 	.align 2, 0
 _08042520: .4byte gActiveBattler
-_08042524: .4byte gUnknown_82528BC
+_08042524: .4byte gItemEffectTable
 _08042528:
 	ldr r2, [sp]
 	cmp r2, 0xAF
@@ -213,14 +156,14 @@ _0804252E:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _0804255C @ =gUnknown_2023F5C
+	ldr r1, _0804255C @ =gEnigmaBerries+0x8
 	adds r0, r1
 	b _0804257C
 	.align 2, 0
 _08042550: .4byte gMain
 _08042554: .4byte 0x00000439
 _08042558: .4byte gActiveBattler
-_0804255C: .4byte gUnknown_2023F5C
+_0804255C: .4byte gEnigmaBerries+0x8
 _08042560:
 	ldr r0, _0804256C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -451,10 +394,10 @@ _08042708:
 	adds r5, r2, 0
 	cmp r0, 0
 	beq _0804273A
-	ldr r4, _08042838 @ =gUnknown_2023DE4
+	ldr r4, _08042838 @ =gSideTimers
 	ldr r0, _0804283C @ =gActiveBattler
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -599,7 +542,7 @@ _08042832:
 	str r0, [sp, 0x10]
 	b _08042BCA
 	.align 2, 0
-_08042838: .4byte gUnknown_2023DE4
+_08042838: .4byte gSideTimers
 _0804283C: .4byte gActiveBattler
 _08042840: .4byte 0x00000f88
 _08042844: .4byte gMain
@@ -698,7 +641,7 @@ _08042904:
 	bls _08042914
 	b _08042578
 _08042914:
-	ldr r0, _08042930 @ =gUnknown_825DFEA
+	ldr r0, _08042930 @ =sGetMonDataEVConstants
 	add r0, r9
 	ldrb r1, [r0]
 	mov r0, r8
@@ -712,7 +655,7 @@ _0804292A:
 	b _08042A3A
 	.align 2, 0
 _0804292C: .4byte 0x01fd0000
-_08042930: .4byte gUnknown_825DFEA
+_08042930: .4byte sGetMonDataEVConstants
 _08042934:
 	movs r0, 0x10
 	ands r0, r7
@@ -854,7 +797,7 @@ _08042A4A:
 	mov r0, r8
 	movs r1, 0x2
 	ldr r2, [sp]
-	bl sub_8042EC4
+	bl GetEvolutionTargetSpecies
 	lsls r0, 16
 	cmp r0, 0
 	beq _08042A5C
@@ -916,7 +859,7 @@ _08042ABC:
 	bls _08042ACC
 	b _08042578
 _08042ACC:
-	ldr r0, _08042AF0 @ =gUnknown_825DFEA
+	ldr r0, _08042AF0 @ =sGetMonDataEVConstants
 	mov r1, r9
 	adds r1, 0x2
 	adds r1, r0
@@ -932,7 +875,7 @@ _08042ACC:
 	b _08042BB4
 	.align 2, 0
 _08042AEC: .4byte 0x01fd0000
-_08042AF0: .4byte gUnknown_825DFEA
+_08042AF0: .4byte sGetMonDataEVConstants
 _08042AF4:
 	mov r0, r8
 	movs r1, 0x15
@@ -1089,7 +1032,7 @@ GetItemEffectParamOffset: @ 8042C08
 	lsls r2, 24
 	lsrs r5, r2, 24
 	movs r7, 0x6
-	ldr r1, _08042C30 @ =gUnknown_82528BC
+	ldr r1, _08042C30 @ =gItemEffectTable
 	adds r0, r3, 0
 	subs r0, 0xD
 	lsls r0, 2
@@ -1103,7 +1046,7 @@ _08042C2C:
 	movs r0, 0
 	b _08042D48
 	.align 2, 0
-_08042C30: .4byte gUnknown_82528BC
+_08042C30: .4byte gItemEffectTable
 _08042C34:
 	cmp r3, 0xAF
 	bne _08042C46
@@ -1113,7 +1056,7 @@ _08042C38:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _08042C5C @ =gUnknown_2023F5C
+	ldr r1, _08042C5C @ =gEnigmaBerries+0x8
 	adds r0, r1
 _08042C46:
 	mov r12, r0
@@ -1128,7 +1071,7 @@ _08042C4A:
 	b _08042D3E
 	.align 2, 0
 _08042C58: .4byte gActiveBattler
-_08042C5C: .4byte gUnknown_2023F5C
+_08042C5C: .4byte gEnigmaBerries+0x8
 _08042C60:
 	cmp r2, 0
 	blt _08042D3E
@@ -1266,7 +1209,7 @@ _08042D48:
 sub_8042D50: @ 8042D50
 	push {lr}
 	ldr r2, _08042D84 @ =gBattlerTarget
-	ldr r1, _08042D88 @ =gUnknown_2024004
+	ldr r1, _08042D88 @ =gBattlerInMenuId
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r3, _08042D8C @ =gUnknown_2022AB8
@@ -1288,7 +1231,7 @@ sub_8042D50: @ 8042D50
 	bx r0
 	.align 2, 0
 _08042D84: .4byte gBattlerTarget
-_08042D88: .4byte gUnknown_2024004
+_08042D88: .4byte gBattlerInMenuId
 _08042D8C: .4byte gUnknown_2022AB8
 _08042D90: .4byte gUnknown_83FD5D0
 _08042D94: .4byte gUnknown_825DFF0
@@ -1314,19 +1257,19 @@ sub_8042DA4: @ 8042DA4
 	ands r0, r1
 	cmp r0, 0
 	beq _08042DE4
-	ldr r2, _08042DDC @ =gUnknown_2024004
+	ldr r2, _08042DDC @ =gBattlerInMenuId
 	ldrb r1, [r2]
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _08042DE0 @ =gUnknown_2023F5C
+	ldr r1, _08042DE0 @ =gEnigmaBerries+0x8
 	adds r7, r0, r1
 	b _08042E04
 	.align 2, 0
 _08042DD4: .4byte gMain
 _08042DD8: .4byte 0x00000439
-_08042DDC: .4byte gUnknown_2024004
-_08042DE0: .4byte gUnknown_2023F5C
+_08042DDC: .4byte gBattlerInMenuId
+_08042DE0: .4byte gEnigmaBerries+0x8
 _08042DE4:
 	ldr r0, _08042DF0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -1337,15 +1280,15 @@ _08042DE4:
 _08042DF0: .4byte gSaveBlock1Ptr
 _08042DF4: .4byte 0x00003108
 _08042DF8:
-	ldr r1, _08042E3C @ =gUnknown_82528BC
+	ldr r1, _08042E3C @ =gItemEffectTable
 	subs r0, 0xD
 	lsls r0, 2
 	adds r0, r1
 	ldr r7, [r0]
 _08042E02:
-	ldr r2, _08042E40 @ =gUnknown_2024004
+	ldr r2, _08042E40 @ =gBattlerInMenuId
 _08042E04:
-	ldr r1, _08042E44 @ =gUnknown_2023D6F
+	ldr r1, _08042E44 @ =gPotentialItemEffectBattler
 	ldrb r0, [r2]
 	strb r0, [r1]
 	movs r5, 0
@@ -1373,12 +1316,12 @@ _08042E24:
 	bl sub_8042D50
 	b _08042E5A
 	.align 2, 0
-_08042E3C: .4byte gUnknown_82528BC
-_08042E40: .4byte gUnknown_2024004
-_08042E44: .4byte gUnknown_2023D6F
+_08042E3C: .4byte gItemEffectTable
+_08042E40: .4byte gBattlerInMenuId
+_08042E44: .4byte gPotentialItemEffectBattler
 _08042E48: .4byte sBattler_AI
 _08042E4C:
-	ldr r0, _08042E88 @ =gUnknown_2024004
+	ldr r0, _08042E88 @ =gBattlerInMenuId
 	ldrb r0, [r0]
 	mov r1, r8
 	strb r0, [r1]
@@ -1395,7 +1338,7 @@ _08042E5A:
 	cmp r0, 0
 	beq _08042E7A
 	ldr r1, _08042E90 @ =sBattler_AI
-	ldr r0, _08042E88 @ =gUnknown_2024004
+	ldr r0, _08042E88 @ =gBattlerInMenuId
 	ldrb r0, [r0]
 	strb r0, [r1]
 	ldr r0, _08042E94 @ =gUnknown_83FBBB4
@@ -1408,7 +1351,7 @@ _08042E7A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08042E88: .4byte gUnknown_2024004
+_08042E88: .4byte gBattlerInMenuId
 _08042E8C: .4byte gUnknown_83FBBE9
 _08042E90: .4byte sBattler_AI
 _08042E94: .4byte gUnknown_83FBBB4
@@ -1440,8 +1383,8 @@ GetNatureFromPersonality: @ 8042EB4
 	bx r1
 	thumb_func_end GetNatureFromPersonality
 
-	thumb_func_start sub_8042EC4
-sub_8042EC4: @ 8042EC4
+	thumb_func_start GetEvolutionTargetSpecies
+GetEvolutionTargetSpecies: @ 8042EC4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1778,7 +1721,7 @@ _0804315E:
 	mov r0, r8
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 _0804316E:
 	adds r4, 0x8
 	ldr r2, [sp, 0x4]
@@ -1820,7 +1763,7 @@ _080431A4:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8042EC4
+	thumb_func_end GetEvolutionTargetSpecies
 
 	thumb_func_start sub_80431B4
 sub_80431B4: @ 80431B4
@@ -2064,7 +2007,7 @@ sub_8043338: @ 8043338
 	lsls r1, 17
 	cmp r0, r1
 	bne _08043446
-	ldr r0, _08043408 @ =gUnknown_202401C
+	ldr r0, _08043408 @ =gMonSpritesGfxPtr
 	ldr r1, [r0]
 	ldr r0, [r1, 0x4]
 	cmp r10, r0
@@ -2159,7 +2102,7 @@ _080433C8:
 	adds r0, 0x40
 	b _08043426
 	.align 2, 0
-_08043408: .4byte gUnknown_202401C
+_08043408: .4byte gMonSpritesGfxPtr
 _0804340C: .4byte gUnknown_825265C
 _08043410: .4byte gUnknown_825265E
 _08043414:
@@ -2383,7 +2326,7 @@ EvolutionRenameMon: @ 804356C
 	movs r6, 0xB
 	adds r0, r7, 0
 	muls r0, r6
-	ldr r4, _080435DC @ =gUnknown_8245EE0
+	ldr r4, _080435DC @ =gSpeciesNames
 	adds r0, r4
 	mov r1, r9
 	bl StringCompare
@@ -2394,7 +2337,7 @@ EvolutionRenameMon: @ 804356C
 	adds r2, r4
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_804037C
+	bl SetMonData
 _080435C8:
 	add sp, 0x4
 	pop {r3,r4}
@@ -2405,7 +2348,7 @@ _080435C8:
 	bx r0
 	.align 2, 0
 _080435D8: .4byte gStringVar1
-_080435DC: .4byte gUnknown_8245EE0
+_080435DC: .4byte gSpeciesNames
 	thumb_func_end EvolutionRenameMon
 
 	thumb_func_start sub_80435E0
@@ -2606,13 +2549,13 @@ sub_80436F8: @ 80436F8
 	ands r0, r1
 	cmp r0, 0
 	beq _08043744
-	ldr r0, _08043740 @ =gUnknown_2023F54
+	ldr r0, _08043740 @ =gEnigmaBerries
 	ldrb r4, [r0, 0x7]
 	b _08043760
 	.align 2, 0
 _08043738: .4byte gMain
 _0804373C: .4byte 0x00000439
-_08043740: .4byte gUnknown_2023F54
+_08043740: .4byte gEnigmaBerries
 _08043744:
 	ldr r0, _08043750 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -2770,7 +2713,7 @@ _0804386C:
 	adds r0, r7, 0
 	movs r1, 0x20
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 _08043876:
 	add sp, 0x4
 	pop {r4-r7}
@@ -2925,14 +2868,14 @@ _0804397C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080439B4
-	ldr r0, _080439B0 @ =gUnknown_2023F54
+	ldr r0, _080439B0 @ =gEnigmaBerries
 	ldrb r0, [r0, 0x7]
 	b _080439D0
 	.align 2, 0
 _080439A4: .4byte gBaseStats
 _080439A8: .4byte gMain
 _080439AC: .4byte 0x00000439
-_080439B0: .4byte gUnknown_2023F54
+_080439B0: .4byte gEnigmaBerries
 _080439B4:
 	ldr r0, _080439C0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -2989,7 +2932,7 @@ _08043A0C:
 	adds r1, r6, 0
 	adds r1, 0x1A
 	mov r0, r8
-	bl sub_804037C
+	bl SetMonData
 	adds r6, 0x1
 	cmp r6, 0x5
 	bgt _08043A2E
@@ -3170,7 +3113,7 @@ sub_8043B48: @ 8043B48
 	sub sp, 0x4
 	adds r4, r0, 0
 	str r3, [sp]
-	ldr r2, _08043B88 @ =gUnknown_8253AE4
+	ldr r2, _08043B88 @ =gExperienceTables
 	ldr r3, _08043B8C @ =gBaseStats
 	lsls r0, r1, 3
 	subs r0, r1
@@ -3192,14 +3135,14 @@ sub_8043B48: @ 8043B48
 	adds r0, r4, 0
 	movs r1, 0x19
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 _08043B80:
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08043B88: .4byte gUnknown_8253AE4
+_08043B88: .4byte gExperienceTables
 _08043B8C: .4byte gBaseStats
 	thumb_func_end sub_8043B48
 
@@ -3232,7 +3175,7 @@ sub_8043B90: @ 8043B90
 	adds r5, r0, 0
 	cmp r7, 0x63
 	bhi _08043C14
-	ldr r3, _08043C0C @ =gUnknown_8253AE4
+	ldr r3, _08043C0C @ =gExperienceTables
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r1, 2
@@ -3253,7 +3196,7 @@ sub_8043B90: @ 8043B90
 	adds r0, r4, 0
 	movs r1, 0x38
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r0, sp
 	ldrb r2, [r0]
 	adds r0, r4, 0
@@ -3263,7 +3206,7 @@ sub_8043B90: @ 8043B90
 	movs r0, 0x1
 	b _08043C22
 	.align 2, 0
-_08043C0C: .4byte gUnknown_8253AE4
+_08043C0C: .4byte gExperienceTables
 _08043C10: .4byte gBaseStats
 _08043C14:
 	adds r0, r4, 0
@@ -3369,7 +3312,7 @@ _08043CBA:
 	cmp r5, 0x3
 	ble _08043CBA
 	movs r5, 0
-	ldr r6, _08043DC8 @ =gUnknown_825D7B4
+	ldr r6, _08043DC8 @ =gLevelUpLearnsets
 	lsls r1, r7, 2
 	adds r2, r1, r6
 	ldr r3, [r2]
@@ -3403,7 +3346,7 @@ _08043CE8:
 	cmp r1, r0
 	beq _08043D38
 	ldr r0, [sp, 0x14]
-	ldr r1, _08043DC8 @ =gUnknown_825D7B4
+	ldr r1, _08043DC8 @ =gLevelUpLearnsets
 	adds r6, r0, r1
 	ldr r2, _08043DD0 @ =0x000001ff
 	mov r8, r2
@@ -3439,7 +3382,7 @@ _08043D38:
 	cmp r2, r0
 	beq _08043D7C
 	ldr r1, [sp, 0x14]
-	ldr r2, _08043DC8 @ =gUnknown_825D7B4
+	ldr r2, _08043DC8 @ =gLevelUpLearnsets
 	adds r6, r1, r2
 	ldr r0, _08043DD0 @ =0x000001ff
 	mov r8, r0
@@ -3499,7 +3442,7 @@ _08043DB4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08043DC8: .4byte gUnknown_825D7B4
+_08043DC8: .4byte gLevelUpLearnsets
 _08043DCC: .4byte 0x0000ffff
 _08043DD0: .4byte 0x000001ff
 	thumb_func_end GetMoveRelearnerMoves
@@ -3511,7 +3454,7 @@ GetLevelUpMovesBySpecies: @ 8043DD4
 	lsls r0, 16
 	movs r5, 0
 	movs r4, 0
-	ldr r1, _08043E20 @ =gUnknown_825D7B4
+	ldr r1, _08043E20 @ =gLevelUpLearnsets
 	lsrs r0, 14
 	adds r0, r1
 	ldr r2, [r0]
@@ -3547,7 +3490,7 @@ _08043E18:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08043E20: .4byte gUnknown_825D7B4
+_08043E20: .4byte gLevelUpLearnsets
 _08043E24: .4byte 0x0000ffff
 _08043E28: .4byte 0x000001ff
 	thumb_func_end GetLevelUpMovesBySpecies
@@ -3599,7 +3542,7 @@ _08043E70:
 	cmp r5, 0x3
 	ble _08043E70
 	movs r5, 0
-	ldr r3, _08043F84 @ =gUnknown_825D7B4
+	ldr r3, _08043F84 @ =gLevelUpLearnsets
 	ldr r2, [sp, 0x38]
 	adds r1, r2, r3
 	ldr r0, [r1]
@@ -3635,7 +3578,7 @@ _08043EA0:
 	cmp r1, r0
 	beq _08043EF2
 	ldr r0, [sp, 0x38]
-	ldr r1, _08043F84 @ =gUnknown_825D7B4
+	ldr r1, _08043F84 @ =gLevelUpLearnsets
 	adds r6, r0, r1
 	ldr r2, _08043F8C @ =0x000001ff
 	mov r8, r2
@@ -3672,7 +3615,7 @@ _08043EF2:
 	cmp r2, r0
 	beq _08043F38
 	ldr r2, [sp, 0x38]
-	ldr r0, _08043F84 @ =gUnknown_825D7B4
+	ldr r0, _08043F84 @ =gLevelUpLearnsets
 	adds r6, r2, r0
 	ldr r2, _08043F8C @ =0x000001ff
 	mov r8, r2
@@ -3733,7 +3676,7 @@ _08043F72:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08043F84: .4byte gUnknown_825D7B4
+_08043F84: .4byte gLevelUpLearnsets
 _08043F88: .4byte 0x0000ffff
 _08043F8C: .4byte 0x000001ff
 	thumb_func_end GetNumberOfRelearnableMoves
@@ -4245,7 +4188,7 @@ _080442EC:
 	adds r1, 0x11
 	adds r0, r5, 0
 	mov r2, sp
-	bl sub_80404D0
+	bl SetBoxMonData
 _08044338:
 	adds r6, 0x1
 	cmp r6, 0x3
@@ -4259,7 +4202,7 @@ _08044338:
 	thumb_func_start sub_8044348
 sub_8044348: @ 8044348
 	push {r4,r5,lr}
-	ldr r2, _0804438C @ =gUnknown_2023D6A
+	ldr r2, _0804438C @ =gLastUsedAbility
 	ldr r5, _08044390 @ =gBattleStruct
 	ldr r1, [r5]
 	adds r0, r1, 0
@@ -4277,7 +4220,7 @@ sub_8044348: @ 8044348
 	movs r0, 0xFF
 	strb r0, [r4, 0x4]
 	ldrb r0, [r1]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804439C
@@ -4291,7 +4234,7 @@ sub_8044348: @ 8044348
 	bl pokemon_order_func
 	b _080443AA
 	.align 2, 0
-_0804438C: .4byte gUnknown_2023D6A
+_0804438C: .4byte gLastUsedAbility
 _08044390: .4byte gBattleStruct
 _08044394: .4byte gUnknown_2022AB8
 _08044398: .4byte gBattlerPartyIndexes
@@ -4310,7 +4253,7 @@ _080443AA:
 	strb r0, [r4]
 	movs r0, 0x4
 	strb r0, [r4, 0x1]
-	ldr r1, _080443E8 @ =gUnknown_2024004
+	ldr r1, _080443E8 @ =gBattlerInMenuId
 	ldrb r0, [r1]
 	strb r0, [r4, 0x2]
 	ldr r2, _080443E0 @ =gBattlerPartyIndexes
@@ -4331,7 +4274,7 @@ _080443AA:
 	.align 2, 0
 _080443E0: .4byte gBattlerPartyIndexes
 _080443E4: .4byte gUnknown_2022AC8
-_080443E8: .4byte gUnknown_2024004
+_080443E8: .4byte gBattlerInMenuId
 _080443EC: .4byte gUnknown_83FCA2C
 _080443F0: .4byte gStringVar4
 	thumb_func_end sub_8044348
@@ -4377,7 +4320,7 @@ _0804443E:
 	adds r2, r3, r2
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_804037C
+	bl SetMonData
 	b _08044468
 	.align 2, 0
 _0804444C: .4byte gBattleTypeFlags
@@ -4389,7 +4332,7 @@ _0804445C:
 	adds r2, r3, r2
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_804037C
+	bl SetMonData
 _08044468:
 	pop {r4,r5}
 	pop {r0}
@@ -4518,12 +4461,12 @@ _08044548: .4byte gPlayerParty
 sub_804454C: @ 804454C
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, _08044558 @ =gUnknown_82538A8
+	ldr r1, _08044558 @ =gFacilityClassToPicIndex
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_08044558: .4byte gUnknown_82538A8
+_08044558: .4byte gFacilityClassToPicIndex
 	thumb_func_end sub_804454C
 
 	thumb_func_start sub_804455C
@@ -4647,7 +4590,7 @@ _08044648:
 	beq _08044632
 _08044658:
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044632
@@ -4765,7 +4708,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3B
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3C
 	movs r2, 0
@@ -4774,7 +4717,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3C
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3D
 	movs r2, 0
@@ -4783,7 +4726,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3D
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3E
 	movs r2, 0
@@ -4792,7 +4735,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3E
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3F
 	movs r2, 0
@@ -4801,7 +4744,7 @@ _0804470E:
 	adds r0, r4, 0
 	movs r1, 0x3F
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 _08044798:
 	adds r5, 0x1
 	cmp r5, 0x5
@@ -4870,7 +4813,7 @@ sub_80447F0: @ 80447F0
 	ldrb r0, [r1, 0x13]
 	lsls r0, 3
 	orrs r2, r0
-	ldr r1, _08044830 @ =gUnknown_825393E
+	ldr r1, _08044830 @ =gFacilityClassToTrainerClass
 	ldr r0, _08044834 @ =gUnknown_825E032
 	lsls r2, 1
 	adds r2, r0
@@ -4881,7 +4824,7 @@ sub_80447F0: @ 80447F0
 	bx r1
 	.align 2, 0
 _0804482C: .4byte gUnknown_202273C
-_08044830: .4byte gUnknown_825393E
+_08044830: .4byte gFacilityClassToTrainerClass
 _08044834: .4byte gUnknown_825E032
 	thumb_func_end sub_80447F0
 
@@ -4908,7 +4851,7 @@ sub_8044838: @ 8044838
 	adds r1, r5, 0
 	adds r2, r4, 0
 	movs r3, 0x20
-	bl sub_803E1EC
+	bl CreateObedientMon
 	cmp r6, 0
 	beq _08044880
 	add r0, sp, 0x10
@@ -4919,7 +4862,7 @@ sub_8044838: @ 8044838
 	adds r0, r7, 0
 	movs r1, 0xC
 	add r2, sp, 0x10
-	bl sub_804037C
+	bl SetMonData
 _08044880:
 	add sp, 0x14
 	pop {r4-r7}
@@ -4997,7 +4940,7 @@ sub_80448F8: @ 80448F8
 	cmp r0, 0
 	beq _08044944
 	adds r0, r2, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044944

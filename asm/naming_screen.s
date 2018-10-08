@@ -3524,7 +3524,7 @@ sub_809F4F0: @ 809F4F0
 	ldrh r1, [r0]
 	movs r0, 0xB
 	muls r1, r0
-	ldr r0, _0809F560 @ =gUnknown_8245EE0
+	ldr r0, _0809F560 @ =gSpeciesNames
 	adds r1, r0
 	add r0, sp, 0xC
 	bl StringCopy
@@ -3565,7 +3565,7 @@ sub_809F4F0: @ 809F4F0
 	.align 2, 0
 _0809F558: .4byte gUnknown_203998C
 _0809F55C: .4byte 0x00001e34
-_0809F560: .4byte gUnknown_8245EE0
+_0809F560: .4byte gSpeciesNames
 _0809F564: .4byte 0x00001e28
 _0809F568: .4byte 0x00001e14
 	thumb_func_end sub_809F4F0

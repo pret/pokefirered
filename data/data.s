@@ -88,7 +88,7 @@ gUnknown_82373F4:: @ 82373F4
 gUnknown_82380CC:: @ 82380CC
 	.incbin "baserom.gba", 0x2380CC, 0x1010
 
-gUnknown_82390DC:: @ 82390DC
+gTrainerFrontAnimsPtrTable:: @ 82390DC
 	.incbin "baserom.gba", 0x2390DC, 0x250
 
 gUnknown_823932C:: @ 823932C
@@ -100,7 +100,7 @@ gUnknown_823957C:: @ 823957C
 gUnknown_8239A1C:: @ 8239A1C
 	.incbin "baserom.gba", 0x239A1C, 0x558
 
-gUnknown_8239F74:: @ 8239F74
+gTrainerBackAnimsPtrTable:: @ 8239F74
 	.incbin "baserom.gba", 0x239F74, 0x18
 
 gUnknown_8239F8C:: @ 8239F8C
@@ -121,7 +121,7 @@ gUnknown_823E558:: @ 823E558
 gTrainers:: @ 823EAD8
 	.incbin "baserom.gba", 0x23EAC8, 0x7418
 
-gUnknown_8245EE0:: @ 8245EE0
+gSpeciesNames:: @ 8245EE0
 	.incbin "baserom.gba", 0x245EE0, 0xD05
 
 gUnknown_8246BE5:: @ 8246BE5
@@ -296,10 +296,7 @@ gUnknown_8250B20:: @ 8250B20
 	.incbin "baserom.gba", 0x250B20, 0xE4
 
 gBattleMoves:: @ 8250C04
-	.incbin "baserom.gba", 0x250C04, 0x4
-
-gUnknown_8250C08:: @ 8250C08
-	.incbin "baserom.gba", 0x250C08, 0x10B0
+	.incbin "baserom.gba", 0x250C04, 0x10B4
 
 gUnknown_8251CB8:: @ 8251CB8
 	.incbin "baserom.gba", 0x251CB8, 0x336
@@ -316,7 +313,7 @@ gUnknown_825265C:: @ 825265C
 gUnknown_825265E:: @ 825265E
 	.incbin "baserom.gba", 0x25265E, 0x25E
 
-gUnknown_82528BC:: @ 82528BC
+gItemEffectTable:: @ 82528BC
 	.incbin "baserom.gba", 0x2528BC, 0x28C
 
 gUnknown_8252B48:: @ 8252B48
@@ -325,16 +322,16 @@ gUnknown_8252B48:: @ 8252B48
 gUnknown_8252BC8:: @ 8252BC8
 	.incbin "baserom.gba", 0x252BC8, 0xCE0
 
-gUnknown_82538A8:: @ 82538A8
+gFacilityClassToPicIndex:: @ 82538A8
 	.incbin "baserom.gba", 0x2538A8, 0x96
 
-gUnknown_825393E:: @ 825393E
+gFacilityClassToTrainerClass:: @ 825393E
 	.incbin "baserom.gba", 0x25393E, 0x96
 
 gUnknown_82539D4:: @ 82539D4
 	.incbin "baserom.gba", 0x2539D4, 0x110
 
-gUnknown_8253AE4:: @ 8253AE4
+gExperienceTables:: @ 8253AE4
 	.incbin "baserom.gba", 0x253AE4, 0xCA0
 
 gBaseStats:: @ 8254784
@@ -346,7 +343,7 @@ gUnknown_8254795:: @ 8254795
 gUnknown_8259754:: @ 8259754
 	.incbin "baserom.gba", 0x259754, 0x4060
 
-gUnknown_825D7B4:: @ 825D7B4
+gLevelUpLearnsets:: @ 825D7B4
 	.incbin "baserom.gba", 0x25D7B4, 0x670
 
 gUnknown_825DE24:: @ 825DE24
@@ -355,16 +352,16 @@ gUnknown_825DE24:: @ 825DE24
 gUnknown_825DEA1:: @ 825DEA1
 	.incbin "baserom.gba", 0x25DEA1, 0x4
 
-gUnknown_825DEA5:: @ 825DEA5
+gPPUpWriteMasks:: @ 825DEA5
 	.incbin "baserom.gba", 0x25DEA5, 0x4
 
 gUnknown_825DEA9:: @ 825DEA9
 	.incbin "baserom.gba", 0x25DEA9, 0x4
 
-gUnknown_825DEAD:: @ 825DEAD
+gStatStageRatios:: @ 825DEAD
 	.incbin "baserom.gba", 0x25DEAD, 0x1F
 
-gUnknown_825DECC:: @ 825DECC
+sHoldEffectToType:: @ 825DECC
 	.incbin "baserom.gba", 0x25DECC, 0x24
 
 gUnknown_825DEF0:: @ 825DEF0
@@ -373,10 +370,10 @@ gUnknown_825DEF0:: @ 825DEF0
 gUnknown_825DF50:: @ 825DF50
 	.incbin "baserom.gba", 0x25DF50, 0x90
 
-gUnknown_825DFE0:: @ 825DFE0
+sSecretBaseFacilityClasses:: @ 825DFE0
 	.incbin "baserom.gba", 0x25DFE0, 0xA
 
-gUnknown_825DFEA:: @ 825DFEA
+sGetMonDataEVConstants:: @ 825DFEA
 	.incbin "baserom.gba", 0x25DFEA, 0x6
 
 gUnknown_825DFF0:: @ 825DFF0

@@ -239,6 +239,18 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
+#define PARTY_SIZE 6
+
+struct SecretBaseParty
+{
+    u32 personality[PARTY_SIZE];
+    u16 moves[PARTY_SIZE * 4];
+    u16 species[PARTY_SIZE];
+    u16 heldItems[PARTY_SIZE];
+    u8 levels[PARTY_SIZE];
+    u8 EVs[PARTY_SIZE];
+};
+
 struct SecretBaseRecord
 {
     /*0x1A9C*/ u8 secretBaseId;
@@ -246,7 +258,7 @@ struct SecretBaseRecord
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 sbr_field_1_5:1;
     /*0x1A9D*/ u8 sbr_field_1_6:2;
-    /*0x1A9E*/ u8 trainerName[OT_NAME_LENGTH];
+    /*0x1A9E*/ u8 trainerName[7]; // TODO: Change PLAYER_NAME_LENGTH to 7
     /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 sbr_field_e;
@@ -254,12 +266,7 @@ struct SecretBaseRecord
     /*0x1AAD*/ u8 sbr_field_11;
     /*0x1AAE*/ u8 decorations[16];
     /*0x1ABE*/ u8 decorationPos[16];
-    /*0x1AD0*/ u32 partyPersonality[6];
-    /*0x1AE8*/ u16 partyMoves[6 * 4];
-    /*0x1B18*/ u16 partySpecies[6];
-    /*0x1B24*/ u16 partyHeldItems[6];
-    /*0x1B2E*/ u8 partyLevels[6];
-    /*0x1B34*/ u8 partyEVs[6];
+    /*0x1AD0*/ struct SecretBaseParty party;
 };
 
 #include "constants/game_stat.h"
@@ -476,7 +483,9 @@ struct SaveBlock1
 {
     /*0x0000*/ u8 filler[0x4];
     /*0x0004*/ struct WarpData location;
-    /*0x000C*/ u8 fillerC[0x3610];
+    /*0x000C*/ u8 fillerC[0x30DE];
+    /*0x30EA*/ struct EnigmaBerry enigmaBerry;
+    /*0x3120*/ u8 filler3120[0x4FC];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[0x44];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];

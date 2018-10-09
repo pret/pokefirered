@@ -44,7 +44,7 @@ u8 sub_810CD80(const struct UnkStruct_845318C *, u16);
 u8 sub_810CDB4(const struct UnkStruct_845318C *, u16);
 int sub_810CE10(const struct UnkStruct_845318C * a0, u16 a1);
 bool8 sub_810CED0(const struct UnkStruct_845318C *, u16);
-bool32 sub_810D0A8(u16);
+bool32 sub_810D0A8(u32);
 int sub_810D084(const struct UnkStruct_845318C *, u16);
 void sub_810D304(void);
 void sub_810C604(void);
@@ -883,7 +883,7 @@ bool8 sub_810CED0(const struct UnkStruct_845318C * a0, u16 a1)
 bool8 sub_810CF04(u8 a0)
 {
     struct MapObject *r1 = &gUnknown_2036E38[a0];
-    
+
     if (r1->active && gMapHeader.events->mapObjectCount >= r1->localId && gSprites[r1->spriteId].data[0] == a0)
         return TRUE;
     return FALSE;
@@ -906,4 +906,70 @@ u8 sub_810CF54(struct MapObjectTemplate * unused)
         default:
             return 8;
     }
+}
+
+u8 sub_810CF90(u8 a0)
+{
+    switch (a0)
+    {
+        case 0x11:
+        case 0x12:
+        case 0x13:
+        case 0x14:
+        case 0x16:
+        case 0x17:
+        case 0x18:
+        case 0x19:
+        case 0x1a:
+        case 0x1c:
+        case 0x1d:
+        case 0x1e:
+        case 0x25:
+        case 0x27:
+        case 0x28:
+        case 0x29:
+        case 0x2a:
+        case 0x2d:
+        case 0x2e:
+        case 0x36:
+        case 0x38:
+        case 0x3e:
+            return 0x4e;
+        case 0x24:
+        case 0x2b:
+        case 0x2c:
+            return 0x4f;
+        default:
+            return 0x4d;
+    }
+}
+
+u16 sub_810D074(const u8 *a0)
+{
+    u16 retval;
+
+    a0 += 2;
+    retval = a0[0];
+    retval |= a0[1] << 8;
+    return retval;
+}
+
+int sub_810D084(const struct UnkStruct_845318C * a0, u16 a1)
+{
+    u32 r3;
+
+    for (r3 = 0; r3 < 0xdd; r3++)
+    {
+        if (a0[r3].unk_0[0] == a1)
+            return r3;
+    }
+
+    return -1;
+}
+
+bool32 sub_810D0A8(u32 a0)
+{
+    if (!gSaveBlock1Ptr->trainerRematches[a0])
+        return FALSE;
+    return TRUE;
 }

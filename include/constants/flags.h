@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
+// TODO: Get correct names and numbers
+
 #define FLAG_0x001               0x1
 #define FLAG_0x002               0x2
 #define FLAG_0x003               0x3

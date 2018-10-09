@@ -21,14 +21,46 @@
 #include "field_player_avatar.h"
 #include "map_obj_8097404.h"
 #include "unk_810c3a4.h"
+#include "constants/movement_commands.h"
 #include "vs_seeker.h"
 
-// static types
-struct UnkStruct_845318C
+typedef enum
 {
-    u16 unk_0[6];
-    u16 unk_c;
-    u16 unk_e;
+    VSSEEKER_RESPONSE_NO_RESPONSE,
+    VSSEEKER_RESPONSE_UNFOUGHT_TRAINERS,
+    VSSEEKER_RESPONSE_FOUND_REMATCHES
+} VsSeekerResponseCode;
+
+// static types
+typedef struct VsSeekerData
+{
+    u16 trainerIdxs[6];
+    u16 unk_c; // unused
+    u16 unk_e; // unused
+} VsSeekerData;
+
+struct VsSeekerTrainerInfo
+{
+    const u8 *script;
+    u16 trainerIdx;
+    u8 localId;
+    u8 fieldObjectId;
+    s16 xCoord;
+    s16 yCoord;
+    u8 graphicsId;
+};
+
+struct VsSeekerStruct
+{
+    /*0x000*/ struct VsSeekerTrainerInfo trainerInfo[MAP_OBJECTS_COUNT];
+    /*0x100*/ u8 filler_100[0x300];
+    /*0x400*/ u16 trainerIdxArray[MAP_OBJECTS_COUNT];
+    /*0x420*/ u8 runningBehaviourEtcArray[MAP_OBJECTS_COUNT];
+    /*0x430*/ u8 numRematchableTrainers;
+    /*0x431*/ u8 trainerHasNotYetBeenFought:1;
+    /*0x431*/ u8 trainerDoesNotWantRematch:1;
+    /*0x431*/ u8 trainerWantsRematch:1;
+    u8 responseCode:5;
 };
 
 extern u16 gUnknown_20370D2;
@@ -36,32 +68,32 @@ extern struct MapObject gUnknown_2036E38[MAP_OBJECTS_COUNT];
 extern u8 gUnknown_3005074;
 
 // static declarations
-static EWRAM_DATA struct VsSeekerStruct *gUnknown_203ADB8 = NULL;
+static EWRAM_DATA struct VsSeekerStruct *sVsSeeker = NULL;
 
-static void sub_810C730(u8 taskId);
-static void sub_810C760(u8 taskId);
-static void sub_810C808(void);
-static void sub_810C8EC(u8 taskId);
-static bool8 sub_810C96C(void);
-static u8 sub_810C9A8(const struct UnkStruct_845318C *);
-static u8 sub_810CD14(const u16 *, u8);
-static u8 sub_810CD80(const struct UnkStruct_845318C *, u16);
-static u8 sub_810CDB4(const struct UnkStruct_845318C *, u16);
-static int sub_810CE10(const struct UnkStruct_845318C * a0, u16 a1);
-static bool8 sub_810CED0(const struct UnkStruct_845318C *, u16);
-static u8 sub_810CF90(u8);
-static u16 sub_810D074(const u8 *);
-static int sub_810D084(const struct UnkStruct_845318C *, u16);
-static bool32 sub_810D0A8(u32);
-static bool8 sub_810D0FC(struct VsSeekerSubstruct *);
-static u8 sub_810D164(const struct UnkStruct_845318C *, u16, u8 *);
-static u8 sub_810D1CC(void);
-static void sub_810D24C(struct VsSeekerSubstruct *, const u8 *);
-static u8 sub_810D280(int, u16);
-static void sub_810D304(void);
+static void Task_VsSeeker_1(u8 taskId);
+static void Task_VsSeeker_2(u8 taskId);
+static void GatherNearbyTrainerInfo(void);
+static void Task_VsSeeker_3(u8 taskId);
+static bool8 CanUseVsSeeker(void);
+static u8 GetVsSeekerResponseInArea(const VsSeekerData *);
+static u8 GetRematchTrainerIdGivenGameState(const u16 *, u8);
+static u8 sub_810CD80(const VsSeekerData *, u16);
+static u8 HasRematchTrainerAlreadyBeenFought(const VsSeekerData *, u16);
+static s32 sub_810CE10(const VsSeekerData * a0, u16 a1);
+static bool8 sub_810CED0(const VsSeekerData *, u16);
+static u8 GetRunningBehaviorFromGraphicsId(u8);
+static u16 GetTrainerFlagFromScript(const u8 *);
+static s32 GetRematchIdx(const VsSeekerData *, u16);
+static bool32 IsThisTrainerRematchable(u32);
+static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo *);
+static u8 GetNextAvailableRematchTrainer(const VsSeekerData *, u16, u8 *);
+static u8 GetRematchableTrainerLocalId(void);
+static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo *, const u8 *);
+static u8 GetCurVsSeekerResponse(s32, u16);
+static void StartAllRespondantIdleMovements(void);
 
 // rodata
-static const struct UnkStruct_845318C gUnknown_845318C[] = {
+static const VsSeekerData sVsSeekerData[] = {
     { {0x0059, 0x0065, 0xffff, 0x01f2, 0x01f3, 0x0000},
       0x0003, 0x0015 },
     { {0x005a, 0x005a, 0x0000, 0x0000, 0x0000, 0x0000},
@@ -506,15 +538,34 @@ static const struct UnkStruct_845318C gUnknown_845318C[] = {
       0x0003, 0x0041 }
 };
 
-static const u8 gUnknown_8453F5C[] = { 0x1c, 0x1c, 0x1c, 0xfe };
-static const u8 gUnknown_8453F60[] = { 0x62, 0xfe };
-static const u8 gUnknown_8453F62[] = { 0x64, 0xfe };
-static const u8 gUnknown_8453F64[] = { 0x2d, 0x65, 0xfe };
+static const u8 gUnknown_8453F5C[] = {
+    step_1c,
+    step_1c,
+    step_1c,
+    step_end
+};
+
+static const u8 gUnknown_8453F60[] = {
+    step_62,
+    step_end
+};
+
+static const u8 sMovementScript_TrainerNoRematch[] = {
+    step_64,
+    step_end
+};
+
+static const u8 gUnknown_8453F64[] = {
+    step_2d,
+    step_65,
+    step_end
+};
+
 static const u8 gUnknown_8453F67[] = { 0x08, 0x08, 0x07, 0x09, 0x0a };
 
 
 // text
-void sub_810C670(u8 taskId)
+void Task_VsSeeker_0(u8 taskId)
 {
     u8 i;
     u8 respval;
@@ -522,38 +573,38 @@ void sub_810C670(u8 taskId)
     for (i = 0; i < 16; i++)
         gTasks[taskId].data[i] = 0;
 
-    gUnknown_203ADB8 = AllocZeroed(sizeof(struct VsSeekerStruct));
-    sub_810C808();
-    respval = sub_810C96C();
+    sVsSeeker = AllocZeroed(sizeof(struct VsSeekerStruct));
+    GatherNearbyTrainerInfo();
+    respval = CanUseVsSeeker();
     if (respval == 0)
     {
-        Free(gUnknown_203ADB8);
+        Free(sVsSeeker);
         DisplayItemMessageOnField(taskId, 2, gUnknown_81C137C, sub_80A1E0C);
     }
     else if (respval == 1)
     {
-        Free(gUnknown_203ADB8);
+        Free(sVsSeeker);
         DisplayItemMessageOnField(taskId, 2, gUnknown_81C13D6, sub_80A1E0C);
     }
     else if (respval == 2)
     {
         sub_80A2294(4, 0, gUnknown_203AD30, 0xffff);
         FieldEffectStart(FLDEFF_UNK_41); // TODO: name this enum
-        gTasks[taskId].func = sub_810C730;
+        gTasks[taskId].func = Task_VsSeeker_1;
         gTasks[taskId].data[0] = 15;
     }
 }
 
-static void sub_810C730(u8 taskId)
+static void Task_VsSeeker_1(u8 taskId)
 {
     if (--gTasks[taskId].data[0] == 0)
     {
-        gTasks[taskId].func = sub_810C760;
+        gTasks[taskId].func = Task_VsSeeker_2;
         gTasks[taskId].data[1] = 16;
     }
 }
 
-static void sub_810C760(u8 taskId)
+static void Task_VsSeeker_2(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -569,13 +620,13 @@ static void sub_810C760(u8 taskId)
         data[1] = 0;
         data[2] = 0;
         sub_810C604();
-        gUnknown_203ADB8->unk_431_3 = sub_810C9A8(gUnknown_845318C);
+        sVsSeeker->responseCode = GetVsSeekerResponseInArea(sVsSeekerData);
         ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gUnknown_8453F5C);
-        gTasks[taskId].func = sub_810C8EC;
+        gTasks[taskId].func = Task_VsSeeker_3;
     }
 }
 
-static void sub_810C808(void)
+static void GatherNearbyTrainerInfo(void)
 {
     struct MapObjectTemplate *templates = gSaveBlock1Ptr->mapObjectTemplates;
     u8 fieldObjectId = 0;
@@ -586,47 +637,47 @@ static void sub_810C808(void)
     {
         if (templates[mapObjectIdx].unkC == 1 || templates[mapObjectIdx].unkC == 3)
         {
-            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_0 = templates[mapObjectIdx].script;
-            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_4 = sub_810D074(templates[mapObjectIdx].script);
-            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_6 = templates[mapObjectIdx].localId;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].script = templates[mapObjectIdx].script;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].trainerIdx = GetTrainerFlagFromScript(templates[mapObjectIdx].script);
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].localId = templates[mapObjectIdx].localId;
             TryGetFieldObjectIdByLocalIdAndMap(templates[mapObjectIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &fieldObjectId);
-            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_7 = fieldObjectId;
-            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_8 = gUnknown_2036E38[fieldObjectId].coords2.x - 7;
-            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_a = gUnknown_2036E38[fieldObjectId].coords2.y - 7;
-            gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_c = templates[mapObjectIdx].graphicsId;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].fieldObjectId = fieldObjectId;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gUnknown_2036E38[fieldObjectId].coords2.x - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gUnknown_2036E38[fieldObjectId].coords2.y - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].graphicsId = templates[mapObjectIdx].graphicsId;
             vsSeekerObjectIdx++;
         }
     }
-    gUnknown_203ADB8->unk_000[vsSeekerObjectIdx].unk_6 = 0xFF;
+    sVsSeeker->trainerInfo[vsSeekerObjectIdx].localId = 0xFF;
 }
 
-static void sub_810C8EC(u8 taskId)
+static void Task_VsSeeker_3(u8 taskId)
 {
     if (ScriptMovement_IsObjectMovementFinished(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup))
     {
-        if (gUnknown_203ADB8->unk_431_3 == 0)
+        if (sVsSeeker->responseCode == 0)
         {
             DisplayItemMessageOnField(taskId, 2, gUnknown_81C1429, sub_80A1E0C);
         }
         else
         {
-            if (gUnknown_203ADB8->unk_431_3 == 2)
-                sub_810D304();
+            if (sVsSeeker->responseCode == 2)
+                StartAllRespondantIdleMovements();
             sub_80F6F54(0, 1);
             sub_80696C0();
             ScriptContext2_Disable();
             DestroyTask(taskId);
         }
-        Free(gUnknown_203ADB8);
+        Free(sVsSeeker);
     }
 }
 
-u8 sub_810C96C(void)
+u8 CanUseVsSeeker(void)
 {
     u8 vsSeekerChargeSteps = gSaveBlock1Ptr->trainerRematchStepCounter;
     if (vsSeekerChargeSteps == 100)
     {
-        if (sub_810D1CC() == 0xFF)
+        if (GetRematchableTrainerLocalId() == 0xFF)
             return 1;
         else
             return 2;
@@ -640,72 +691,72 @@ u8 sub_810C96C(void)
 
 // Nonmatching due to register roulette
 #ifdef NONMATCHING
-static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
+static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
 {
     u16 r8 = 0;
     u8 sp0 = 0;
-    int vsSeekerIdx;
+    s32 vsSeekerIdx;
 
-    for (vsSeekerIdx = 0; gUnknown_203ADB8->unk_000[vsSeekerIdx].unk_6 != 0xFF; vsSeekerIdx++)
+    for (vsSeekerIdx = 0; sVsSeeker->trainerInfo[vsSeekerIdx].localId != 0xFF; vsSeekerIdx++)
     {
-        if (sub_810D0FC(&gUnknown_203ADB8->unk_000[vsSeekerIdx]) == 1)
+        if (IsTrainerVisibleOnScreen(&sVsSeeker->trainerInfo[vsSeekerIdx]) == 1)
         {
-            r8 = gUnknown_203ADB8->unk_000[vsSeekerIdx].unk_4;
+            r8 = sVsSeeker->trainerInfo[vsSeekerIdx].trainerIdx;
             if (!HasTrainerAlreadyBeenFought(r8))
             {
-                sub_810D24C(&gUnknown_203ADB8->unk_000[vsSeekerIdx], gUnknown_8453F60);
-                gUnknown_203ADB8->unk_431_0 = 1;
+                StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], gUnknown_8453F60);
+                sVsSeeker->trainerHasNotYetBeenFought = 1;
             }
             else
             {
-                u8 r7 = sub_810D164(a0, r8, &sp0);
+                u8 r7 = GetNextAvailableRematchTrainer(a0, r8, &sp0);
                 if (r7 == 0)
                 {
-                    sub_810D24C(&gUnknown_203ADB8->unk_000[vsSeekerIdx], gUnknown_8453F62);
-                    gUnknown_203ADB8->unk_431_1 = 1;
+                    StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
+                    sVsSeeker->trainerDoesNotWantRematch = 1;
                 }
                 else
                 {
                     u16 rval = Random() % 100;
-                    u8 r0 = sub_810D280(vsSeekerIdx, r8);
+                    u8 r0 = GetCurVsSeekerResponse(vsSeekerIdx, r8);
                     if (r0 == 2)
                         rval = 100;
                     else if (r0 == 1)
                         rval = 0;
                     if (rval < 30)
                     {
-                        sub_810D24C(&gUnknown_203ADB8->unk_000[vsSeekerIdx], gUnknown_8453F62);
-                        gUnknown_203ADB8->unk_431_1 = 1;
+                        StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
+                        sVsSeeker->trainerDoesNotWantRematch = 1;
                     }
                     else
                     {
-                        gSaveBlock1Ptr->trainerRematches[gUnknown_203ADB8->unk_000[vsSeekerIdx].unk_6] = r7;
-                        npc_coords_shift_still(&gUnknown_2036E38[gUnknown_203ADB8->unk_000[vsSeekerIdx].unk_7]);
-                        sub_810D24C(&gUnknown_203ADB8->unk_000[vsSeekerIdx], gUnknown_8453F64);
-                        gUnknown_203ADB8->unk_400[gUnknown_203ADB8->unk_430] = r8;
-                        gUnknown_203ADB8->unk_420[gUnknown_203ADB8->unk_430] = sub_810CF90(gUnknown_203ADB8->unk_000[vsSeekerIdx].unk_c);
-                        gUnknown_203ADB8->unk_430++;
-                        gUnknown_203ADB8->unk_431_2 = 1;
+                        gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[vsSeekerIdx].localId] = r7;
+                        npc_coords_shift_still(&gUnknown_2036E38[sVsSeeker->trainerInfo[vsSeekerIdx].fieldObjectId]);
+                        StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], gUnknown_8453F64);
+                        sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = r8;
+                        sVsSeeker->runningBehaviourEtcArray[sVsSeeker->numRematchableTrainers] = GetRunningBehaviorFromGraphicsId(sVsSeeker->trainerInfo[vsSeekerIdx].graphicsId);
+                        sVsSeeker->numRematchableTrainers++;
+                        sVsSeeker->trainerWantsRematch = 1;
                     }
                 }
             }
         }
     }
 
-    if (gUnknown_203ADB8->unk_431_2)
+    if (sVsSeeker->trainerWantsRematch)
     {
         PlaySE(SE_PIN);
         FlagSet(0x801); // TODO: make this an enum
         sub_810C640();
         return 2;
     }
-    if (gUnknown_203ADB8->unk_431_0)
+    if (sVsSeeker->trainerHasNotYetBeenFought)
         return 1;
     return 0;
 }
 #else
 NAKED
-static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
+static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -721,7 +772,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tstrb r1, [r0]\n"
                 "\tmovs r2, 0\n"
                 "\tmov r9, r2\n"
-                "\tldr r4, _0810CA14 @ =gUnknown_203ADB8\n"
+                "\tldr r4, _0810CA14 @ =sVsSeeker\n"
                 "\tldr r0, [r4]\n"
                 "\tldrb r0, [r0, 0x6]\n"
                 "\tcmp r0, 0xFF\n"
@@ -736,7 +787,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "_0810C9DA:\n"
                 "\tldr r0, [r6]\n"
                 "\tadds r0, r5\n"
-                "\tbl sub_810D0FC\n"
+                "\tbl IsTrainerVisibleOnScreen\n"
                 "\tlsls r0, 24\n"
                 "\tlsrs r0, 24\n"
                 "\tcmp r0, 0x1\n"
@@ -754,7 +805,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tldr r0, [r6]\n"
                 "\tadds r0, r5\n"
                 "\tldr r1, _0810CA18 @ =gUnknown_8453F60\n"
-                "\tbl sub_810D24C\n"
+                "\tbl StartTrainerObjectMovementScript\n"
                 "\tldr r2, [r6]\n"
                 "\tldr r0, _0810CA1C @ =0x00000431\n"
                 "\tadds r2, r0\n"
@@ -762,22 +813,22 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tmovs r1, 0x1\n"
                 "\tb _0810CB14\n"
                 "\t.align 2, 0\n"
-                "_0810CA14: .4byte gUnknown_203ADB8\n"
+                "_0810CA14: .4byte sVsSeeker\n"
                 "_0810CA18: .4byte gUnknown_8453F60\n"
                 "_0810CA1C: .4byte 0x00000431\n"
                 "_0810CA20:\n"
                 "\tldr r0, [sp, 0x4]\n"
                 "\tmov r1, r8\n"
                 "\tmov r2, sp\n"
-                "\tbl sub_810D164\n"
+                "\tbl GetNextAvailableRematchTrainer\n"
                 "\tlsls r0, 24\n"
                 "\tlsrs r7, r0, 24\n"
                 "\tcmp r7, 0\n"
                 "\tbne _0810CA50\n"
                 "\tldr r0, [r6]\n"
                 "\tadds r0, r5\n"
-                "\tldr r1, _0810CA48 @ =gUnknown_8453F62\n"
-                "\tbl sub_810D24C\n"
+                "\tldr r1, _0810CA48 @ =sMovementScript_TrainerNoRematch\n"
+                "\tbl StartTrainerObjectMovementScript\n"
                 "\tldr r2, [r6]\n"
                 "\tldr r3, _0810CA4C @ =0x00000431\n"
                 "\tadds r2, r3\n"
@@ -785,7 +836,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tmovs r1, 0x2\n"
                 "\tb _0810CB14\n"
                 "\t.align 2, 0\n"
-                "_0810CA48: .4byte gUnknown_8453F62\n"
+                "_0810CA48: .4byte sMovementScript_TrainerNoRematch\n"
                 "_0810CA4C: .4byte 0x00000431\n"
                 "_0810CA50:\n"
                 "\tbl Random\n"
@@ -797,7 +848,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tlsrs r4, r0, 16\n"
                 "\tmov r0, r9\n"
                 "\tmov r1, r8\n"
-                "\tbl sub_810D280\n"
+                "\tbl GetCurVsSeekerResponse\n"
                 "\tlsls r0, 24\n"
                 "\tlsrs r0, 24\n"
                 "\tcmp r0, 0x2\n"
@@ -813,8 +864,8 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tbhi _0810CAA0\n"
                 "\tldr r0, [r6]\n"
                 "\tadds r0, r5\n"
-                "\tldr r1, _0810CA98 @ =gUnknown_8453F62\n"
-                "\tbl sub_810D24C\n"
+                "\tldr r1, _0810CA98 @ =sMovementScript_TrainerNoRematch\n"
+                "\tbl StartTrainerObjectMovementScript\n"
                 "\tldr r2, [r6]\n"
                 "\tldr r0, _0810CA9C @ =0x00000431\n"
                 "\tadds r2, r0\n"
@@ -822,7 +873,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tmovs r1, 0x2\n"
                 "\tb _0810CB14\n"
                 "\t.align 2, 0\n"
-                "_0810CA98: .4byte gUnknown_8453F62\n"
+                "_0810CA98: .4byte sMovementScript_TrainerNoRematch\n"
                 "_0810CA9C: .4byte 0x00000431\n"
                 "_0810CAA0:\n"
                 "\tldr r0, _0810CB54 @ =gSaveBlock1Ptr\n"
@@ -846,7 +897,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tldr r0, [r6]\n"
                 "\tadds r0, r5\n"
                 "\tldr r1, _0810CB60 @ =gUnknown_8453F64\n"
-                "\tbl sub_810D24C\n"
+                "\tbl StartTrainerObjectMovementScript\n"
                 "\tldr r2, [r6]\n"
                 "\tmov r3, r10\n"
                 "\tadds r0, r2, r3\n"
@@ -860,7 +911,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tstrh r1, [r0]\n"
                 "\tadds r2, r5\n"
                 "\tldrb r0, [r2, 0xC]\n"
-                "\tbl sub_810CF90\n"
+                "\tbl GetRunningBehaviorFromGraphicsId\n"
                 "\tldr r1, [r6]\n"
                 "\tmov r3, r10\n"
                 "\tadds r2, r1, r3\n"
@@ -887,7 +938,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tadds r5, 0x10\n"
                 "\tmovs r1, 0x1\n"
                 "\tadd r9, r1\n"
-                "\tldr r4, _0810CB68 @ =gUnknown_203ADB8\n"
+                "\tldr r4, _0810CB68 @ =sVsSeeker\n"
                 "\tldr r0, [r4]\n"
                 "\tadds r0, r5\n"
                 "\tldrb r0, [r0, 0x6]\n"
@@ -895,7 +946,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "\tbeq _0810CB2C\n"
                 "\tb _0810C9DA\n"
                 "_0810CB2C:\n"
-                "\tldr r2, _0810CB68 @ =gUnknown_203ADB8\n"
+                "\tldr r2, _0810CB68 @ =sVsSeeker\n"
                 "\tldr r0, [r2]\n"
                 "\tldr r3, _0810CB64 @ =0x00000431\n"
                 "\tadds r0, r3\n"
@@ -917,7 +968,7 @@ static u8 sub_810C9A8(const struct UnkStruct_845318C * a0)
                 "_0810CB5C: .4byte gUnknown_2036E38\n"
                 "_0810CB60: .4byte gUnknown_8453F64\n"
                 "_0810CB64: .4byte 0x00000431\n"
-                "_0810CB68: .4byte gUnknown_203ADB8\n"
+                "_0810CB68: .4byte sVsSeeker\n"
                 "_0810CB6C: .4byte 0x00000801\n"
                 "_0810CB70:\n"
                 "\tmovs r0, 0x1\n"
@@ -944,21 +995,21 @@ void sub_810CB90(void)
 {
     u8 sp0 = 0;
     struct MapObjectTemplate *r4 = gSaveBlock1Ptr->mapObjectTemplates;
-    int r9 = sub_810CE10(gUnknown_845318C, gTrainerBattleOpponent_A);
+    s32 r9 = sub_810CE10(sVsSeekerData, gTrainerBattleOpponent_A);
 
     if (r9 != -1)
     {
-        int r8;
+        s32 r8;
 
         for (r8 = 0; r8 < gMapHeader.events->mapObjectCount; r8++)
         {
-            if ((r4[r8].unkC == 1 || r4[r8].unkC == 3) && r9 == sub_810CE10(gUnknown_845318C, sub_810D074(r4[r8].script)))
+            if ((r4[r8].unkC == 1 || r4[r8].unkC == 3) && r9 == sub_810CE10(sVsSeekerData, GetTrainerFlagFromScript(r4[r8].script)))
             {
                 struct MapObject *r4_2;
 
                 TryGetFieldObjectIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
                 r4_2 = &gUnknown_2036E38[sp0];
-                sub_810CF54(&r4[r8]);
+                sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
                 sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->mapobj_unk_18]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
                 if (gUnknown_3005074 == sp0)
@@ -970,7 +1021,7 @@ void sub_810CB90(void)
     }
 }
 
-static void sub_810CCA0(const u16 * a0, u8 * a1)
+static void TryGetRematchTrainerIdGivenGameState(const u16 * a0, u8 * a1)
 {
     switch (*a1)
     {
@@ -978,28 +1029,28 @@ static void sub_810CCA0(const u16 * a0, u8 * a1)
             break;
         case 1:
             if (!FlagGet(FLAG_0x292))
-                *a1 = sub_810CD14(a0, *a1);
+                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 2:
             if (!FlagGet(FLAG_SYS_NATIONAL_DEX))
-                *a1 = sub_810CD14(a0, *a1);
+                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 3:
             if (!FlagGet(FLAG_SYS_CAVE_SHIP))
-                *a1 = sub_810CD14(a0, *a1);
+                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 4:
             if (!FlagGet(FLAG_TRAINER_FLAG_START + 0x32c))
-                *a1 = sub_810CD14(a0, *a1);
+                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 5:
             if (!FlagGet(FLAG_TRAINER_FLAG_START + 0x344))
-                *a1 = sub_810CD14(a0, *a1);
+                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
     }
 }
 
-static u8 sub_810CD14(const u16 * a0, u8 a1)
+static u8 GetRematchTrainerIdGivenGameState(const u16 * a0, u8 a1)
 {
     while (--a1 != 0)
     {
@@ -1012,34 +1063,34 @@ static u8 sub_810CD14(const u16 * a0, u8 a1)
 
 u8 sub_810CD4C(void) // unreferenced, or reference not disassembled
 {
-    if (sub_810CD80(gUnknown_845318C, gTrainerBattleOpponent_A))
+    if (sub_810CD80(sVsSeekerData, gTrainerBattleOpponent_A))
     {
         return 1;
     }
-    return sub_810CDB4(gUnknown_845318C, gTrainerBattleOpponent_A);
+    return HasRematchTrainerAlreadyBeenFought(sVsSeekerData, gTrainerBattleOpponent_A);
 }
 
-static bool8 sub_810CD80(const struct UnkStruct_845318C *a0, u16 a1)
+static bool8 sub_810CD80(const VsSeekerData *vsSeekerData, u16 trainerBattleOpponent)
 {
-    int r1 = sub_810D084(a0, a1);
+    s32 rematchIdx = GetRematchIdx(vsSeekerData, trainerBattleOpponent);
 
-    if (r1 == -1)
+    if (rematchIdx == -1)
         return FALSE;
-    if (r1 >= 0 && r1 < 0xdd)
+    if (rematchIdx >= 0 && rematchIdx < ARRAY_COUNT(sVsSeekerData))
     {
-        if (sub_810D0A8(gUnknown_20370D2))
+        if (IsThisTrainerRematchable(gUnknown_20370D2))
             return TRUE;
     }
     return FALSE;
 }
 
-static bool8 sub_810CDB4(const struct UnkStruct_845318C *a0, u16 a1)
+static bool8 HasRematchTrainerAlreadyBeenFought(const VsSeekerData *vsSeekerData, u16 trainerBattleOpponent)
 {
-    int r1 = sub_810D084(a0, a1);
+    s32 rematchIdx = GetRematchIdx(vsSeekerData, trainerBattleOpponent);
 
-    if (r1 == -1)
+    if (rematchIdx == -1)
         return FALSE;
-    if (!HasTrainerAlreadyBeenFought(a0[r1].unk_0[0]))
+    if (!HasTrainerAlreadyBeenFought(vsSeekerData[rematchIdx].trainerIdxs[0]))
         return FALSE;
     return TRUE;
 }
@@ -1050,19 +1101,19 @@ void sub_810CDE8(void)
     sub_80803FC();
 }
 
-static int sub_810CE10(const struct UnkStruct_845318C * a0, u16 a1)
+static s32 sub_810CE10(const VsSeekerData * a0, u16 a1)
 {
     u32 r1;
     s32 r3;
 
-    for (r1 = 0; r1 < 0xdd; r1++)
+    for (r1 = 0; r1 < ARRAY_COUNT(sVsSeekerData); r1++)
     {
         for (r3 = 0; r3 < 6; r3++)
         {
             u16 r0;
-            if (a0[r1].unk_0[r3] == 0)
+            if (a0[r1].trainerIdxs[r3] == 0)
                 break;
-            r0 = a0[r1].unk_0[r3];
+            r0 = a0[r1].trainerIdxs[r3];
             if (r0 == 0xFFFF)
                 continue;
             if (r0 == a1)
@@ -1073,31 +1124,31 @@ static int sub_810CE10(const struct UnkStruct_845318C * a0, u16 a1)
     return -1;
 }
 
-int sub_810CE64(u16 a0)
+s32 sub_810CE64(u16 a0)
 {
-    u8 sp0;
-    u8 sp1;
-    sp1 = sub_810D164(gUnknown_845318C, a0, &sp0);
-    if (!sp1)
+    u8 i;
+    u8 j;
+    j = GetNextAvailableRematchTrainer(sVsSeekerData, a0, &i);
+    if (!j)
         return 0;
-    sub_810CCA0(gUnknown_845318C[sp0].unk_0, &sp1);
-    return gUnknown_845318C[sp0].unk_0[sp1];
+    TryGetRematchTrainerIdGivenGameState(sVsSeekerData[i].trainerIdxs, &j);
+    return sVsSeekerData[i].trainerIdxs[j];
 }
 
 u8 sub_810CEB4(void) // unreferenced, or reference not disassembled
 {
-    return sub_810CED0(gUnknown_845318C, gTrainerBattleOpponent_A);
+    return sub_810CED0(sVsSeekerData, gTrainerBattleOpponent_A);
 }
 
-static bool8 sub_810CED0(const struct UnkStruct_845318C * a0, u16 a1)
+static bool8 sub_810CED0(const VsSeekerData * a0, u16 a1)
 {
-    int r1 = sub_810CE10(a0, a1);
+    s32 r1 = sub_810CE10(a0, a1);
 
     if (r1 == -1)
         return FALSE;
-    if ((u32)r1 >= 0xdd)
+    if ((u32)r1 >= ARRAY_COUNT(sVsSeekerData))
         return FALSE;
-    if (!sub_810D0A8(gUnknown_20370D2))
+    if (!IsThisTrainerRematchable(gUnknown_20370D2))
         return FALSE;
     return TRUE;
 }
@@ -1111,7 +1162,7 @@ bool8 sub_810CF04(u8 a0)
     return FALSE;
 }
 
-u8 sub_810CF54(struct MapObjectTemplate * unused)
+u8 sub_810CF54()
 {
     u16 r1 = Random() % 4;
 
@@ -1130,9 +1181,9 @@ u8 sub_810CF54(struct MapObjectTemplate * unused)
     }
 }
 
-static u8 sub_810CF90(u8 a0)
+static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
 {
-    switch (a0)
+    switch (graphicsId)
     {
         case 0x11:
         case 0x12:
@@ -1166,30 +1217,41 @@ static u8 sub_810CF90(u8 a0)
     }
 }
 
-static u16 sub_810D074(const u8 *a0)
+static u16 GetTrainerFlagFromScript(const u8 *script)
+/*
+ * The trainer flag is a little-endian short located +2 from
+ * the script pointer, assuming the trainerbattle command is
+ * first in the script.  Because scripts are unaligned, and
+ * because the ARM processor requires shorts to be 16-bit
+ * aligned, this function needs to perform explicit bitwise
+ * operations to get the correct flag.
+ * 
+ * 5c XX YY ZZ ...
+ *       -- --
+ */
 {
-    u16 retval;
+    u16 trainerFlag;
 
-    a0 += 2;
-    retval = a0[0];
-    retval |= a0[1] << 8;
-    return retval;
+    script += 2;
+    trainerFlag = script[0];
+    trainerFlag |= script[1] << 8;
+    return trainerFlag;
 }
 
-static int sub_810D084(const struct UnkStruct_845318C * a0, u16 a1)
+static s32 GetRematchIdx(const VsSeekerData * vsSeekerData, u16 trainerFlagIdx)
 {
-    u32 r3;
+    u32 i;
 
-    for (r3 = 0; r3 < 0xdd; r3++)
+    for (i = 0; i < ARRAY_COUNT(sVsSeekerData); i++)
     {
-        if (a0[r3].unk_0[0] == a1)
-            return r3;
+        if (vsSeekerData[i].trainerIdxs[0] == trainerFlagIdx)
+            return i;
     }
 
     return -1;
 }
 
-static bool32 sub_810D0A8(u32 a0)
+static bool32 IsThisTrainerRematchable(u32 a0)
 {
     if (!gSaveBlock1Ptr->trainerRematches[a0])
         return FALSE;
@@ -1204,7 +1266,7 @@ void sub_810D0D0(void)
         gSaveBlock1Ptr->trainerRematches[i] = 0;
 }
 
-static bool8 sub_810D0FC(struct VsSeekerSubstruct * a0)
+static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo)
 {
     s16 x;
     s16 y;
@@ -1213,78 +1275,78 @@ static bool8 sub_810D0FC(struct VsSeekerSubstruct * a0)
     x -= 7;
     y -= 7;
 
-    if (   x - 7 <= a0->unk_8
-        && x + 7 >= a0->unk_8
-        && y - 5 <= a0->unk_a
-        && y + 5 >= a0->unk_a
-        && sub_810CF04(a0->unk_7) == 1)
+    if (   x - 7 <= trainerInfo->xCoord
+        && x + 7 >= trainerInfo->xCoord
+        && y - 5 <= trainerInfo->yCoord
+        && y + 5 >= trainerInfo->yCoord
+        && sub_810CF04(trainerInfo->fieldObjectId) == 1)
         return TRUE;
     return FALSE;
 }
 
-static u8 sub_810D164(const struct UnkStruct_845318C * a0, u16 a1, u8 * a2)
+static u8 GetNextAvailableRematchTrainer(const VsSeekerData * vsSeekerData, u16 trainerFlagNo, u8 * idxPtr)
 {
-    u32 r4;
-    int r5;
+    u32 i;
+    s32 j;
 
-    for (r4 = 0; r4 < 0xdd; r4++)
+    for (i = 0; i < ARRAY_COUNT(sVsSeekerData); i++)
     {
-        if (a0[r4].unk_0[0] == a1)
+        if (vsSeekerData[i].trainerIdxs[0] == trainerFlagNo)
         {
-            *a2 = r4;
-            for (r5 = 1; r5 < 6; r5++)
+            *idxPtr = i;
+            for (j = 1; j < 6; j++)
             {
-                if (a0[r4].unk_0[r5] == 0)
-                    return r5 - 1;
-                if (a0[r4].unk_0[r5] == 0xffff)
+                if (vsSeekerData[i].trainerIdxs[j] == 0)
+                    return j - 1;
+                if (vsSeekerData[i].trainerIdxs[j] == 0xffff)
                     continue;
-                if (HasTrainerAlreadyBeenFought(a0[r4].unk_0[r5]))
+                if (HasTrainerAlreadyBeenFought(vsSeekerData[i].trainerIdxs[j]))
                     continue;
-                return r5;
+                return j;
             }
-            return r5 - 1;
+            return j - 1;
         }
     }
 
-    *a2 = 0;
+    *idxPtr = 0;
     return 0;
 }
 
-static u8 sub_810D1CC(void)
+static u8 GetRematchableTrainerLocalId(void)
 {
-    u8 sp0;
-    u8 r5;
+    u8 idx;
+    u8 i;
 
-    for (r5 = 0; gUnknown_203ADB8->unk_000[r5].unk_6 != 0xFF; r5++)
+    for (i = 0; sVsSeeker->trainerInfo[i].localId != 0xFF; i++)
     {
-        if (sub_810D0FC(&gUnknown_203ADB8->unk_000[r5]) == 1)
+        if (IsTrainerVisibleOnScreen(&sVsSeeker->trainerInfo[i]) == 1)
         {
-            if (HasTrainerAlreadyBeenFought(gUnknown_203ADB8->unk_000[r5].unk_4) != 1 || sub_810D164(gUnknown_845318C, gUnknown_203ADB8->unk_000[r5].unk_4, &sp0))
-                return gUnknown_203ADB8->unk_000[r5].unk_6;
+            if (HasTrainerAlreadyBeenFought(sVsSeeker->trainerInfo[i].trainerIdx) != 1 || GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[i].trainerIdx, &idx))
+                return sVsSeeker->trainerInfo[i].localId;
         }
     }
 
     return 0xFF;
 }
 
-static void sub_810D24C(struct VsSeekerSubstruct * a0, const u8 * a1)
+static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo * trainerInfo, const u8 * script)
 {
-    npc_sync_anim_pause_bits(&gUnknown_2036E38[a0->unk_7]);
-    ScriptMovement_StartObjectMovementScript(a0->unk_6, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, a1);
+    npc_sync_anim_pause_bits(&gUnknown_2036E38[trainerInfo->fieldObjectId]);
+    ScriptMovement_StartObjectMovementScript(trainerInfo->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, script);
 }
 
-static u8 sub_810D280(int a0, u16 a1)
+static u8 GetCurVsSeekerResponse(s32 a0, u16 a1)
 {
-    int r5;
-    int r3;
+    s32 i;
+    s32 j;
 
-    for (r5 = 0; r5 < a0; r5++)
+    for (i = 0; i < a0; i++)
     {
-        if (sub_810D0FC(&gUnknown_203ADB8->unk_000[r5]) == 1 && gUnknown_203ADB8->unk_000[r5].unk_4 == a1)
+        if (IsTrainerVisibleOnScreen(&sVsSeeker->trainerInfo[i]) == 1 && sVsSeeker->trainerInfo[i].trainerIdx == a1)
         {
-            for (r3 = 0; r3 < gUnknown_203ADB8->unk_430; r3++)
+            for (j = 0; j < sVsSeeker->numRematchableTrainers; j++)
             {
-                if (gUnknown_203ADB8->unk_400[r3] == gUnknown_203ADB8->unk_000[r5].unk_4)
+                if (sVsSeeker->trainerIdxArray[j] == sVsSeeker->trainerInfo[i].trainerIdx)
                     return 2;
             }
             return 1;
@@ -1293,23 +1355,24 @@ static u8 sub_810D280(int a0, u16 a1)
     return 0;
 }
 
-static void sub_810D304(void)
+static void StartAllRespondantIdleMovements(void)
 {
-    u8 sp0 = 0;
-    s32 r7;
-    s32 r8;
-
-    for (r7 = 0; r7 < gUnknown_203ADB8->unk_430; r7++)
+    u8 dummy = 0;
+    s32 i;
+    s32 j;
+    
+    for (i = 0; i < sVsSeeker->numRematchableTrainers; i++)
     {
-        for (r8 = 0; gUnknown_203ADB8->unk_000[r8].unk_6 != 0xFF; r8++)
+        for (j = 0; sVsSeeker->trainerInfo[j].localId != 0xFF; j++)
         {
-            if (gUnknown_203ADB8->unk_000[r8].unk_4 == gUnknown_203ADB8->unk_400[r7])
+            if (sVsSeeker->trainerInfo[j].trainerIdx == sVsSeeker->trainerIdxArray[i])
             {
-                struct MapObject *r4 = &gUnknown_2036E38[gUnknown_203ADB8->unk_000[r8].unk_7];
-                if (sub_810CF04(gUnknown_203ADB8->unk_000[r8].unk_7) == 1)
-                    npc_set_running_behaviour_etc(r4, gUnknown_203ADB8->unk_420[r7]);
-                sub_805FE7C(r4, gUnknown_203ADB8->unk_420[r7]);
-                gSaveBlock1Ptr->trainerRematches[gUnknown_203ADB8->unk_000[r8].unk_6] = sub_810D164(gUnknown_845318C, gUnknown_203ADB8->unk_000[r8].unk_4, &sp0);
+                struct MapObject *r4 = &gUnknown_2036E38[sVsSeeker->trainerInfo[j].fieldObjectId];
+
+                if (sub_810CF04(sVsSeeker->trainerInfo[j].fieldObjectId) == 1)
+                    npc_set_running_behaviour_etc(r4, sVsSeeker->runningBehaviourEtcArray[i]);
+                sub_805FE7C(r4, sVsSeeker->runningBehaviourEtcArray[i]);
+                gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[j].localId] = GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[j].trainerIdx, &dummy);
             }
         }
     }

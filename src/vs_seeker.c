@@ -1070,3 +1070,25 @@ u8 sub_810D280(int a0, u16 a1)
     }
     return 0;
 }
+
+void sub_810D304(void)
+{
+    u8 sp0 = 0;
+    s32 r7;
+    s32 r8;
+
+    for (r7 = 0; r7 < gUnknown_203ADB8->unk_430; r7++)
+    {
+        for (r8 = 0; gUnknown_203ADB8->unk_000[r8].unk_6 != 0xFF; r8++)
+        {
+            if (gUnknown_203ADB8->unk_000[r8].unk_4 == gUnknown_203ADB8->unk_400[r7])
+            {
+                struct MapObject *r4 = &gUnknown_2036E38[gUnknown_203ADB8->unk_000[r8].unk_7];
+                if (sub_810CF04(gUnknown_203ADB8->unk_000[r8].unk_7) == 1)
+                    npc_set_running_behaviour_etc(r4, gUnknown_203ADB8->unk_420[r7]);
+                sub_805FE7C(r4, gUnknown_203ADB8->unk_420[r7]);
+                gSaveBlock1Ptr->trainerRematches[gUnknown_203ADB8->unk_000[r8].unk_6] = sub_810D164(gUnknown_845318C, gUnknown_203ADB8->unk_000[r8].unk_4, &sp0);
+            }
+        }
+    }
+}

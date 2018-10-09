@@ -826,3 +826,26 @@ void sub_810CDE8(void)
     gSaveBlock1Ptr->trainerRematches[gUnknown_20370D2] = 0;
     sub_80803FC();
 }
+
+int sub_810CE10(const struct UnkStruct_845318C * a0, u16 a1)
+{
+    u32 r1;
+    s32 r3;
+
+    for (r1 = 0; r1 < 0xdd; r1++)
+    {
+        for (r3 = 0; r3 < 6; r3++)
+        {
+            u16 r0;
+            if (a0[r1].unk_0[r3] == 0)
+                break;
+            r0 = a0[r1].unk_0[r3];
+            if (r0 == 0xFFFF)
+                continue;
+            if (r0 == a1)
+                return r1;
+        }
+    }
+
+    return -1;
+}

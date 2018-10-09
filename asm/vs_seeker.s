@@ -5,55 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_810CE10
-sub_810CE10: @ 810CE10
-	push {r4-r7,lr}
-	mov r12, r0
-	lsls r1, 16
-	lsrs r6, r1, 16
-	movs r1, 0
-	mov r4, r12
-	movs r7, 0
-_0810CE1E:
-	movs r3, 0
-	ldrh r0, [r4]
-	cmp r0, 0
-	beq _0810CE4E
-	ldr r5, _0810CE3C @ =0x0000ffff
-	mov r0, r12
-	adds r2, r7, r0
-_0810CE2C:
-	ldrh r0, [r2]
-	cmp r0, r5
-	beq _0810CE40
-	cmp r0, r6
-	bne _0810CE40
-	adds r0, r1, 0
-	b _0810CE5C
-	.align 2, 0
-_0810CE3C: .4byte 0x0000ffff
-_0810CE40:
-	adds r2, 0x2
-	adds r3, 0x1
-	cmp r3, 0x5
-	bgt _0810CE4E
-	ldrh r0, [r2]
-	cmp r0, 0
-	bne _0810CE2C
-_0810CE4E:
-	adds r4, 0x10
-	adds r7, 0x10
-	adds r1, 0x1
-	cmp r1, 0xDC
-	bls _0810CE1E
-	movs r0, 0x1
-	negs r0, r0
-_0810CE5C:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_810CE10
-
 	thumb_func_start sub_810CE64
 sub_810CE64: @ 810CE64
 	push {r4,r5,lr}

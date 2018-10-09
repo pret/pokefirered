@@ -1463,8 +1463,7 @@ gUnknown_203AD40: @ 203AD40
 gUnknown_203AD58: @ 203AD58
 	.space 0x60
 
-gUnknown_203ADB8: @ 203ADB8
-	.space 0x4
+	.include "src/vs_seeker.o"
 
 gUnknown_203ADBC: @ 203ADBC
 	.space 0x4

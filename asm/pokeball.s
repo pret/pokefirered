@@ -130,7 +130,7 @@ _0804AA12:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804AA60
-	ldr r4, _0804AA5C @ =gUnknown_202273C
+	ldr r4, _0804AA5C @ =gLinkPlayers
 	adds r0, r6, 0
 	bl GetBankMultiplayerId
 	lsls r1, r0, 3
@@ -144,7 +144,7 @@ _0804AA12:
 _0804AA50: .4byte gBattlerPartyIndexes
 _0804AA54: .4byte gPlayerParty
 _0804AA58: .4byte gBattleTypeFlags
-_0804AA5C: .4byte gUnknown_202273C
+_0804AA5C: .4byte gLinkPlayers
 _0804AA60:
 	ldr r0, _0804AAB8 @ =gSaveBlock2Ptr
 	ldr r0, [r0]

@@ -7736,7 +7736,7 @@ _080322AE:
 	cmp r0, 0
 	beq _0803233C
 	bl GetMultiplayerId
-	ldr r5, _08032324 @ =gUnknown_202273C
+	ldr r5, _08032324 @ =gLinkPlayers
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7772,7 +7772,7 @@ _080322AE:
 	bne _08032328
 _08032306:
 	bl GetMultiplayerId
-	ldr r2, _08032324 @ =gUnknown_202273C
+	ldr r2, _08032324 @ =gLinkPlayers
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7784,7 +7784,7 @@ _08032306:
 	b _08032342
 	.align 2, 0
 _08032320: .4byte gBattleTypeFlags
-_08032324: .4byte gUnknown_202273C
+_08032324: .4byte gLinkPlayers
 _08032328:
 	bl GetMultiplayerId
 	lsls r0, 24
@@ -7913,7 +7913,7 @@ sub_8032428: @ 8032428
 	cmp r0, 0
 	beq _080324B8
 	bl GetMultiplayerId
-	ldr r5, _080324A0 @ =gUnknown_202273C
+	ldr r5, _080324A0 @ =gLinkPlayers
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7949,7 +7949,7 @@ sub_8032428: @ 8032428
 	bne _080324A4
 _08032482:
 	bl GetMultiplayerId
-	ldr r2, _080324A0 @ =gUnknown_202273C
+	ldr r2, _080324A0 @ =gLinkPlayers
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7961,7 +7961,7 @@ _08032482:
 	b _080324BE
 	.align 2, 0
 _0803249C: .4byte gBattleTypeFlags
-_080324A0: .4byte gUnknown_202273C
+_080324A0: .4byte gLinkPlayers
 _080324A4:
 	bl GetMultiplayerId
 	lsls r0, 24

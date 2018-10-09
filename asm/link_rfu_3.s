@@ -3157,12 +3157,12 @@ _081172C0:
 	ldr r0, _081172E0 @ =gUnknown_2039624
 	adds r7, r0, 0
 	adds r7, 0x38
-	ldr r6, _081172E4 @ =gUnknown_202273C
+	ldr r6, _081172E4 @ =gLinkPlayers
 	adds r5, r0, 0
 	b _08117302
 	.align 2, 0
 _081172E0: .4byte gUnknown_2039624
-_081172E4: .4byte gUnknown_202273C
+_081172E4: .4byte gLinkPlayers
 _081172E8:
 	lsls r0, r4, 8
 	ldr r1, _08117338 @ =gUnknown_2022118
@@ -3275,7 +3275,7 @@ sub_81173C0: @ 81173C0
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r5, _0811742C @ =gUnknown_202273C
+	ldr r5, _0811742C @ =gLinkPlayers
 	ldr r0, _08117430 @ =0x00002211
 	str r0, [r5, 0x14]
 	bl GetMultiplayerId
@@ -3315,7 +3315,7 @@ sub_81173C0: @ 81173C0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811742C: .4byte gUnknown_202273C
+_0811742C: .4byte gLinkPlayers
 _08117430: .4byte 0x00002211
 _08117434: .4byte gMain
 _08117438: .4byte sub_8081668
@@ -6054,7 +6054,7 @@ _08118CB6:
 	bl sub_80F9E2C
 	ldr r0, _08118CDC @ =gStringVar4
 	ldr r2, _08118CE0 @ =gUnknown_845842C
-	ldr r1, _08118CE4 @ =gUnknown_202273C
+	ldr r1, _08118CE4 @ =gLinkPlayers
 	ldrb r1, [r1, 0x13]
 	lsls r1, 2
 	adds r1, r2
@@ -6065,7 +6065,7 @@ _08118CB6:
 	.align 2, 0
 _08118CDC: .4byte gStringVar4
 _08118CE0: .4byte gUnknown_845842C
-_08118CE4: .4byte gUnknown_202273C
+_08118CE4: .4byte gLinkPlayers
 _08118CE8:
 	ldr r0, _08118D10 @ =gUnknown_203B058
 	strb r5, [r0]
@@ -6218,7 +6218,7 @@ _08118E36:
 	ldrb r2, [r4]
 	movs r1, 0x40
 	orrs r1, r2
-	ldr r2, _08118E5C @ =gUnknown_202273C
+	ldr r2, _08118E5C @ =gLinkPlayers
 	ldrb r2, [r2, 0x13]
 	bl sub_811AE68
 	strb r5, [r4]
@@ -6226,7 +6226,7 @@ _08118E36:
 	.align 2, 0
 _08118E54: .4byte gStringVar4
 _08118E58: .4byte gUnknown_203B058
-_08118E5C: .4byte gUnknown_202273C
+_08118E5C: .4byte gLinkPlayers
 _08118E60:
 	movs r0, 0x2
 	ldrsh r1, [r7, r0]
@@ -7519,7 +7519,7 @@ sub_8119944: @ 8119944
 	cmp r0, 0
 	beq _08119994
 	ldr r0, _08119978 @ =gStringVar4
-	ldr r1, _0811997C @ =gUnknown_202273C
+	ldr r1, _0811997C @ =gLinkPlayers
 	adds r1, 0x2F
 	ldrb r1, [r1]
 	adds r2, r5, 0
@@ -7538,7 +7538,7 @@ sub_8119944: @ 8119944
 	b _08119996
 	.align 2, 0
 _08119978: .4byte gStringVar4
-_0811997C: .4byte gUnknown_202273C
+_0811997C: .4byte gLinkPlayers
 _08119980: .4byte gUnknown_203B058
 _08119984:
 	cmp r0, 0x2
@@ -10349,7 +10349,7 @@ sub_811AECC: @ 811AECC
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, _0811AF00 @ =gUnknown_202273C
+	ldr r2, _0811AF00 @ =gLinkPlayers
 	movs r0, 0x1
 	adds r1, r3, 0
 	eors r1, r0
@@ -10366,7 +10366,7 @@ sub_811AECC: @ 811AECC
 	beq _0811AF0A
 	b _0811AF60
 	.align 2, 0
-_0811AF00: .4byte gUnknown_202273C
+_0811AF00: .4byte gLinkPlayers
 _0811AF04:
 	cmp r6, 0x45
 	beq _0811AF44
@@ -10866,7 +10866,7 @@ sub_811B298: @ 811B298
 sub_811B2A8: @ 811B2A8
 	push {r4,lr}
 	movs r4, 0x80
-	ldr r3, _0811B2D4 @ =gUnknown_202273C
+	ldr r3, _0811B2D4 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -10886,7 +10886,7 @@ sub_811B2A8: @ 811B2A8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0811B2D4: .4byte gUnknown_202273C
+_0811B2D4: .4byte gLinkPlayers
 	thumb_func_end sub_811B2A8
 
 	thumb_func_start sub_811B2D8

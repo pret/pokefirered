@@ -3839,7 +3839,7 @@ sub_80D61C8: @ 80D61C8
 _080D61E2:
 	ldrb r0, [r6]
 	bl GetBankMultiplayerId
-	ldr r5, _080D6244 @ =gUnknown_202273C
+	ldr r5, _080D6244 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3873,7 +3873,7 @@ _080D6228:
 	ldr r0, _080D6240 @ =gActiveBattler
 	ldrb r0, [r0]
 	bl GetBankMultiplayerId
-	ldr r2, _080D6244 @ =gUnknown_202273C
+	ldr r2, _080D6244 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3883,7 +3883,7 @@ _080D6228:
 	b _080D6258
 	.align 2, 0
 _080D6240: .4byte gActiveBattler
-_080D6244: .4byte gUnknown_202273C
+_080D6244: .4byte gLinkPlayers
 _080D6248:
 	ldrb r0, [r6]
 	bl GetBankMultiplayerId
@@ -5315,7 +5315,7 @@ sub_80D6CD4: @ 80D6CD4
 	lsrs r7, r0, 24
 	ldrb r0, [r6]
 	bl GetBankMultiplayerId
-	ldr r4, _080D6DF8 @ =gUnknown_202273C
+	ldr r4, _080D6DF8 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5349,7 +5349,7 @@ _080D6DC2:
 	ldr r0, _080D6DE0 @ =gActiveBattler
 	ldrb r0, [r0]
 	bl GetBankMultiplayerId
-	ldr r2, _080D6DF8 @ =gUnknown_202273C
+	ldr r2, _080D6DF8 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5365,7 +5365,7 @@ _080D6DE8: .4byte 0x0000ffd8
 _080D6DEC: .4byte sub_8075590
 _080D6DF0: .4byte sub_80335F8
 _080D6DF4: .4byte 0x0000d6f9
-_080D6DF8: .4byte gUnknown_202273C
+_080D6DF8: .4byte gLinkPlayers
 _080D6DFC:
 	ldrb r0, [r6]
 	bl GetBankMultiplayerId

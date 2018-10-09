@@ -432,7 +432,7 @@ _0812C330: .4byte gBattleStruct
 sub_812C334: @ 812C334
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r3, _0812C35C @ =gUnknown_202273C
+	ldr r3, _0812C35C @ =gLinkPlayers
 	ldr r4, _0812C360 @ =gBattleStruct
 	ldr r0, [r4]
 	adds r0, 0xB5
@@ -452,7 +452,7 @@ _0812C352:
 	str r5, [r6]
 	b _0812C370
 	.align 2, 0
-_0812C35C: .4byte gUnknown_202273C
+_0812C35C: .4byte gLinkPlayers
 _0812C360: .4byte gBattleStruct
 _0812C364:
 	ldr r0, [r4]

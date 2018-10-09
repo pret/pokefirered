@@ -4066,7 +4066,7 @@ sub_803C7F8: @ 803C7F8
 _0803C820:
 	ldrb r0, [r6]
 	bl GetBankMultiplayerId
-	ldr r5, _0803C88C @ =gUnknown_202273C
+	ldr r5, _0803C88C @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4097,7 +4097,7 @@ _0803C820:
 	cmp r4, 0x3
 	bne _0803C8A0
 _0803C866:
-	ldr r4, _0803C88C @ =gUnknown_202273C
+	ldr r4, _0803C88C @ =gLinkPlayers
 	ldr r0, _0803C888 @ =gActiveBattler
 	ldrb r0, [r0]
 	bl GetBankMultiplayerId
@@ -4114,7 +4114,7 @@ _0803C866:
 	.align 2, 0
 _0803C884: .4byte gBattleTypeFlags
 _0803C888: .4byte gActiveBattler
-_0803C88C: .4byte gUnknown_202273C
+_0803C88C: .4byte gLinkPlayers
 _0803C890: .4byte gFacilityClassToPicIndex
 _0803C894:
 	ldr r0, _0803C89C @ =gFacilityClassToPicIndex
@@ -4153,7 +4153,7 @@ _0803C8C0:
 _0803C8D8: .4byte gTrainerBattleOpponent_A
 _0803C8DC:
 	bl GetMultiplayerId
-	ldr r6, _0803C954 @ =gUnknown_202273C
+	ldr r6, _0803C954 @ =gLinkPlayers
 	movs r5, 0x1
 	eors r0, r5
 	lsls r0, 24
@@ -4192,7 +4192,7 @@ _0803C8DC:
 	cmp r4, 0x3
 	bne _0803C968
 _0803C930:
-	ldr r4, _0803C954 @ =gUnknown_202273C
+	ldr r4, _0803C954 @ =gLinkPlayers
 	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
@@ -4209,7 +4209,7 @@ _0803C930:
 	adds r0, 0x3D
 	b _0803C990
 	.align 2, 0
-_0803C954: .4byte gUnknown_202273C
+_0803C954: .4byte gLinkPlayers
 _0803C958: .4byte gFacilityClassToPicIndex
 _0803C95C:
 	ldr r0, _0803C964 @ =gFacilityClassToPicIndex

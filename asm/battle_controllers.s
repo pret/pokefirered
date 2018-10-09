@@ -429,7 +429,7 @@ _0800D5A4:
 _0800D5BC:
 	movs r0, 0
 	mov r10, r0
-	ldr r1, _0800D5EC @ =gUnknown_202273C
+	ldr r1, _0800D5EC @ =gLinkPlayers
 	mov r12, r1
 	ldr r7, _0800D5F0 @ =gUnknown_2023BD6
 	mov r8, r0
@@ -451,21 +451,21 @@ _0800D5D0:
 	.align 2, 0
 _0800D5E4: .4byte gUnknown_3004F84
 _0800D5E8: .4byte sub_80123C0
-_0800D5EC: .4byte gUnknown_202273C
+_0800D5EC: .4byte gLinkPlayers
 _0800D5F0: .4byte gUnknown_2023BD6
 _0800D5F4: .4byte gBattlerPartyIndexes
 _0800D5F8:
 	cmp r0, 0x3
 	bne _0800D61A
 _0800D5FC:
-	ldr r0, _0800D60C @ =gUnknown_202273C
+	ldr r0, _0800D60C @ =gLinkPlayers
 	adds r0, r4, r0
 	ldrb r0, [r0, 0x18]
 	movs r1, 0
 	bl sub_8127DA8
 	b _0800D61A
 	.align 2, 0
-_0800D60C: .4byte gUnknown_202273C
+_0800D60C: .4byte gLinkPlayers
 _0800D610:
 	lsls r0, 24
 	lsrs r0, 24
@@ -474,7 +474,7 @@ _0800D610:
 _0800D61A:
 	cmp r10, r5
 	bne _0800D66A
-	ldr r0, _0800D640 @ =gUnknown_202273C
+	ldr r0, _0800D640 @ =gLinkPlayers
 	adds r3, r4, r0
 	ldrh r1, [r3, 0x18]
 	lsls r1, 2
@@ -492,7 +492,7 @@ _0800D61A:
 	beq _0800D650
 	b _0800D740
 	.align 2, 0
-_0800D640: .4byte gUnknown_202273C
+_0800D640: .4byte gLinkPlayers
 _0800D644: .4byte gUnknown_3004FE0
 _0800D648: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D64C:
@@ -514,7 +514,7 @@ _0800D660:
 	ldrh r0, [r3, 0x18]
 	b _0800D738
 _0800D66A:
-	ldr r2, _0800D690 @ =gUnknown_202273C
+	ldr r2, _0800D690 @ =gLinkPlayers
 	adds r0, r4, r2
 	ldrh r1, [r0, 0x18]
 	movs r3, 0x1
@@ -534,7 +534,7 @@ _0800D66A:
 	beq _0800D6A6
 	b _0800D6EC
 	.align 2, 0
-_0800D690: .4byte gUnknown_202273C
+_0800D690: .4byte gLinkPlayers
 _0800D694:
 	lsls r0, r5, 3
 	subs r0, r5
@@ -1413,7 +1413,7 @@ sub_800DD28: @ 800DD28
 	ands r0, r1
 	cmp r0, 0
 	beq _0800DE28
-	ldr r0, _0800DD64 @ =gUnknown_202273C
+	ldr r0, _0800DD64 @ =gLinkPlayers
 	ldr r1, [r0, 0x14]
 	ldr r0, _0800DD68 @ =0x00002211
 	cmp r1, r0
@@ -1426,7 +1426,7 @@ sub_800DD28: @ 800DD28
 	.align 2, 0
 _0800DD5C: .4byte gUnknown_3003F64
 _0800DD60: .4byte gBattleTypeFlags
-_0800DD64: .4byte gUnknown_202273C
+_0800DD64: .4byte gLinkPlayers
 _0800DD68: .4byte 0x00002211
 _0800DD6C: .4byte gUnknown_2022118
 _0800DD70:

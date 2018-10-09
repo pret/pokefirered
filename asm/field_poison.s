@@ -74,7 +74,7 @@ MonFaintFromPoisonOnField: @ 80A04B8
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_80436F8
+	bl AdjustFriendship
 	adds r0, r4, 0
 	movs r1, 0x37
 	mov r2, sp

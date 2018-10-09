@@ -1887,7 +1887,7 @@ AdjustFriendship_step: @ 806D74C
 _0806D76A:
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_80436F8
+	bl AdjustFriendship
 	adds r5, 0x64
 	subs r4, 0x1
 	cmp r4, 0

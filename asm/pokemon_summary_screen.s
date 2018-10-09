@@ -7631,7 +7631,7 @@ sub_813847C: @ 813847C
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _081384C8 @ =gUnknown_202273C
+	ldr r2, _081384C8 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -7649,7 +7649,7 @@ sub_813847C: @ 813847C
 _081384BC: .4byte gUnknown_203B140
 _081384C0: .4byte 0x000032f4
 _081384C4: .4byte gEnemyParty
-_081384C8: .4byte gUnknown_202273C
+_081384C8: .4byte gLinkPlayers
 _081384CC: .4byte 0x0000304c
 _081384D0:
 	bl sub_80CC1E4

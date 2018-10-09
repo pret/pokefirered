@@ -9182,7 +9182,7 @@ _080220DA:
 	adds r0, r1, 0
 	adds r0, r7
 	movs r1, 0
-	bl sub_80436F8
+	bl AdjustFriendship
 	ldr r1, _08022328 @ =gBattlerPartyIndexes
 	mov r2, r9
 	ldr r0, [r2]

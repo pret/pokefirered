@@ -232,7 +232,7 @@ _0800FF98:
 _0800FFAE:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_80436F8
+	bl AdjustFriendship
 	adds r4, 0x64
 	cmp r4, r5
 	ble _0800FFAE
@@ -630,7 +630,7 @@ _080102C0:
 	beq _0801034C
 	movs r5, 0
 	ldr r3, _08010340 @ =gEnigmaBerries
-	ldr r2, _08010344 @ =gUnknown_202273C
+	ldr r2, _08010344 @ =gLinkPlayers
 	mov r9, r2
 	adds r6, r3, 0
 	movs r4, 0x8
@@ -693,7 +693,7 @@ _0801031C:
 	b _080103FC
 	.align 2, 0
 _08010340: .4byte gEnigmaBerries
-_08010344: .4byte gUnknown_202273C
+_08010344: .4byte gLinkPlayers
 _08010348: .4byte gUnknown_202211C
 _0801034C:
 	movs r5, 0
@@ -1560,7 +1560,7 @@ _08010A6A:
 _08010A78:
 	cmp r4, r6
 	beq _08010ABA
-	ldr r2, _08010A9C @ =gUnknown_202273C
+	ldr r2, _08010A9C @ =gLinkPlayers
 	adds r0, r7, r2
 	ldrh r1, [r0, 0x18]
 	movs r3, 0x1
@@ -1576,7 +1576,7 @@ _08010A78:
 	beq _08010AAC
 	b _08010ABA
 	.align 2, 0
-_08010A9C: .4byte gUnknown_202273C
+_08010A9C: .4byte gLinkPlayers
 _08010AA0:
 	adds r0, r5, r2
 	ldrh r1, [r0, 0x18]
@@ -1862,7 +1862,7 @@ _08010CE2:
 	adds r2, r1, 0
 	ldr r0, _08010D5C @ =gUnknown_2022118
 	adds r3, r0, 0x2
-	ldr r5, _08010D60 @ =gUnknown_202273C
+	ldr r5, _08010D60 @ =gLinkPlayers
 	movs r4, 0x3F
 	movs r7, 0x80
 	lsls r7, 1
@@ -1882,7 +1882,7 @@ _08010D50: .4byte gPlayerParty
 _08010D54: .4byte sub_800F6FC
 _08010D58: .4byte gTasks
 _08010D5C: .4byte gUnknown_2022118
-_08010D60: .4byte gUnknown_202273C
+_08010D60: .4byte gLinkPlayers
 _08010D64:
 	cmp r0, 0x2
 	beq _08010D7E
@@ -1967,7 +1967,7 @@ _08010DEE:
 _08010E00:
 	cmp r6, r7
 	bne _08010E34
-	ldr r0, _08010E1C @ =gUnknown_202273C
+	ldr r0, _08010E1C @ =gLinkPlayers
 	adds r0, r5, r0
 	ldrh r0, [r0, 0x18]
 	cmp r0, 0x2
@@ -1979,7 +1979,7 @@ _08010E00:
 	b _08010EBE
 	.align 2, 0
 _08010E18: .4byte gUnknown_2022118
-_08010E1C: .4byte gUnknown_202273C
+_08010E1C: .4byte gLinkPlayers
 _08010E20:
 	cmp r0, 0x3
 	bne _08010EBE
@@ -1994,7 +1994,7 @@ _08010E2C:
 	.align 2, 0
 _08010E30: .4byte gUnknown_20243B0
 _08010E34:
-	ldr r2, _08010E54 @ =gUnknown_202273C
+	ldr r2, _08010E54 @ =gLinkPlayers
 	adds r0, r5, r2
 	ldrh r1, [r0, 0x18]
 	movs r3, 0x1
@@ -2011,7 +2011,7 @@ _08010E34:
 	beq _08010E66
 	b _08010E8C
 	.align 2, 0
-_08010E54: .4byte gUnknown_202273C
+_08010E54: .4byte gLinkPlayers
 _08010E58:
 	mov r1, r8
 	adds r0, r1, r2
@@ -2120,7 +2120,7 @@ _08010F0E:
 _08010F20:
 	cmp r6, r7
 	bne _08010F54
-	ldr r0, _08010F3C @ =gUnknown_202273C
+	ldr r0, _08010F3C @ =gLinkPlayers
 	adds r0, r5, r0
 	ldrh r0, [r0, 0x18]
 	cmp r0, 0x2
@@ -2132,7 +2132,7 @@ _08010F20:
 	b _08010FDE
 	.align 2, 0
 _08010F38: .4byte gUnknown_2022118
-_08010F3C: .4byte gUnknown_202273C
+_08010F3C: .4byte gLinkPlayers
 _08010F40:
 	cmp r0, 0x3
 	bne _08010FDE
@@ -2147,7 +2147,7 @@ _08010F4C:
 	.align 2, 0
 _08010F50: .4byte gUnknown_2024478
 _08010F54:
-	ldr r2, _08010F74 @ =gUnknown_202273C
+	ldr r2, _08010F74 @ =gLinkPlayers
 	adds r0, r5, r2
 	ldrh r1, [r0, 0x18]
 	movs r3, 0x1
@@ -2164,7 +2164,7 @@ _08010F54:
 	beq _08010F86
 	b _08010FAC
 	.align 2, 0
-_08010F74: .4byte gUnknown_202273C
+_08010F74: .4byte gLinkPlayers
 _08010F78:
 	mov r1, r8
 	adds r0, r1, r2
@@ -3300,7 +3300,7 @@ sub_801184C: @ 801184C
 	ands r0, r1
 	cmp r0, 0
 	beq _080118BC
-	ldr r1, _0801189C @ =gUnknown_202273C
+	ldr r1, _0801189C @ =gLinkPlayers
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -3316,7 +3316,7 @@ sub_801184C: @ 801184C
 	.align 2, 0
 _08011894: .4byte gBattleStruct
 _08011898: .4byte gBattleTypeFlags
-_0801189C: .4byte gUnknown_202273C
+_0801189C: .4byte gLinkPlayers
 _080118A0:
 	cmp r0, 0x2
 	beq _080118BC

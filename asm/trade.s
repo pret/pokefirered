@@ -6469,7 +6469,7 @@ _0804FA70:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, _0804FAB0 @ =gUnknown_202273C
+	ldr r0, _0804FAB0 @ =gLinkPlayers
 	adds r1, r0
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -6492,7 +6492,7 @@ _0804FA70:
 	movs r0, 0x5
 	b _0804FB24
 	.align 2, 0
-_0804FAB0: .4byte gUnknown_202273C
+_0804FAB0: .4byte gLinkPlayers
 _0804FAB4:
 	cmp r1, 0x97
 	bgt _0804FADE
@@ -6578,7 +6578,7 @@ sub_804FB34: @ 804FB34
 	cmp r0, 0
 	beq _0804FBC0
 	bl GetMultiplayerId
-	ldr r6, _0804FBB8 @ =gUnknown_202273C
+	ldr r6, _0804FBB8 @ =gLinkPlayers
 	movs r7, 0x1
 	eors r0, r7
 	lsls r0, 24
@@ -6635,7 +6635,7 @@ _0804FB6E:
 	b _0804FBC2
 	.align 2, 0
 _0804FBB4: .4byte gUnknown_3003F64
-_0804FBB8: .4byte gUnknown_202273C
+_0804FBB8: .4byte gLinkPlayers
 _0804FBBC:
 	movs r0, 0x1
 	b _0804FBC2
@@ -14480,7 +14480,7 @@ _08054132:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805415A
-	ldr r4, _0805417C @ =gUnknown_202273C
+	ldr r4, _0805417C @ =gLinkPlayers
 	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
@@ -14509,7 +14509,7 @@ _0805415A:
 	.align 2, 0
 _08054174: .4byte gUnknown_2031DAC
 _08054178: .4byte gUnknown_3003F3C
-_0805417C: .4byte gUnknown_202273C
+_0805417C: .4byte gLinkPlayers
 _08054180: .4byte gMain
 _08054184:
 	ldr r0, _0805419C @ =gUnknown_2031DAC

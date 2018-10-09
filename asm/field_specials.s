@@ -4619,7 +4619,7 @@ sub_80CC948: @ 80CC948
 	ldr r1, _080CC96C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x6
-	bl sub_80436F8
+	bl AdjustFriendship
 	ldr r0, _080CC970 @ =0x00004025
 	movs r1, 0
 	bl VarSet

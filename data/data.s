@@ -307,16 +307,13 @@ gUnknown_8251FEE:: @ 8251FEE
 gUnknown_8252324:: @ 8252324
 	.incbin "baserom.gba", 0x252324, 0x338
 
-gUnknown_825265C:: @ 825265C
-	.incbin "baserom.gba", 0x25265C, 0x2
-
-gUnknown_825265E:: @ 825265E
-	.incbin "baserom.gba", 0x25265E, 0x25E
+gSpindaSpotGraphics:: @ 825265C
+	.incbin "baserom.gba", 0x25265C, 0x260
 
 gItemEffectTable:: @ 82528BC
 	.incbin "baserom.gba", 0x2528BC, 0x28C
 
-gUnknown_8252B48:: @ 8252B48
+gNatureStatTable:: @ 8252B48
 	.incbin "baserom.gba", 0x252B48, 0x80
 
 gUnknown_8252BC8:: @ 8252BC8
@@ -379,7 +376,7 @@ sGetMonDataEVConstants:: @ 825DFEA
 gUnknown_825DFF0:: @ 825DFF0
 	.incbin "baserom.gba", 0x25DFF0, 0x6
 
-gUnknown_825DFF6:: @ 825DFF6
+sFriendshipEventDeltas:: @ 825DFF6
 	.incbin "baserom.gba", 0x25DFF6, 0x1E
 
 gUnknown_825E014:: @ 825E014

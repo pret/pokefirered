@@ -12727,7 +12727,7 @@ sub_8124E48: @ 8124E48
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x4
-	bl sub_80436F8
+	bl AdjustFriendship
 	ldrh r1, [r7]
 	movs r0, 0xA9
 	lsls r0, 1
@@ -12815,7 +12815,7 @@ sub_8124EFC: @ 8124EFC
 	bl SetMonMoveSlot
 	adds r0, r5, 0
 	movs r1, 0x4
-	bl sub_80436F8
+	bl AdjustFriendship
 	ldrh r2, [r7]
 	movs r0, 0x4
 	adds r1, r5, 0
@@ -14399,7 +14399,7 @@ sub_8125C48: @ 8125C48
 	bne _08125C84
 	adds r0, r5, 0
 	movs r1, 0x4
-	bl sub_80436F8
+	bl AdjustFriendship
 	movs r0, 0xA9
 	lsls r0, 1
 	cmp r4, r0

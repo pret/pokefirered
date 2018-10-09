@@ -14,6 +14,7 @@
 #include "battle_controllers.h"
 #include "evolution_scene.h"
 #include "battle_message.h"
+#include "link.h"
 #include "constants/items.h"
 #include "constants/species.h"
 #include "constants/pokemon.h"
@@ -65,6 +66,9 @@ extern u16 gUnknown_8251CB8[];
 extern u16 gUnknown_8251FEE[];
 extern u16 gUnknown_8252324[];
 extern u16 gUnknown_82539D4[];
+extern struct SpindaSpot gSpindaSpotGraphics[];
+extern s8 gNatureStatTable[][5];
+extern const s8 sFriendshipEventDeltas[][3];
 
 // External functions
 extern u8 sav1_map_get_name(void); // overworld
@@ -4795,4 +4799,408 @@ u16 SpeciesToCryId(u16 species)
         return SPECIES_UNOWN - 1;
 
     return gUnknown_82539D4[species - ((SPECIES_OLD_UNOWN_Z + 1) - 1)];
+}
+
+void sub_8043338(u16 species, u32 personality, u8 *dest)
+{
+    if (species == SPECIES_SPINDA
+        && dest != gMonSpritesGfxPtr->sprites[0]
+        && dest != gMonSpritesGfxPtr->sprites[2])
+    {
+        int i;
+        for (i = 0; i < 4; i++)
+        {
+            int j;
+            u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
+            u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
+
+            for (j = 0; j < 16; j++)
+            {
+                int k;
+                s32 row = gSpindaSpotGraphics[i].image[j];
+
+                for (k = x; k < x + 16; k++)
+                {
+                    u8 *val = dest + ((k / 8) * 32) + ((k % 8) / 2) + ((y >> 3) << 8) + ((y & 7) << 2);
+
+                    if (row & 1)
+                    {
+                        if (k & 1)
+                        {
+                            if ((u8)((*val & 0xF0) - 0x10) <= 0x20)
+                                *val += 0x40;
+                        }
+                        else
+                        {
+                            if ((u8)((*val & 0xF) - 0x01) <= 0x02)
+                                *val += 0x04;
+                        }
+                    }
+
+                    row >>= 1;
+                }
+
+                y++;
+            }
+
+            personality >>= 8;
+        }
+    }
+}
+
+void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4)
+{
+    if (species == SPECIES_SPINDA && a4)
+    {
+        int i;
+        for (i = 0; i < 4; i++)
+        {
+            int j;
+            u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
+            u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
+
+            for (j = 0; j < 16; j++)
+            {
+                int k;
+                s32 row = gSpindaSpotGraphics[i].image[j];
+
+                for (k = x; k < x + 16; k++)
+                {
+                    u8 *val = dest + ((k / 8) * 32) + ((k % 8) / 2) + ((y >> 3) << 8) + ((y & 7) << 2);
+
+                    if (row & 1)
+                    {
+                        if (k & 1)
+                        {
+                            if ((u8)((*val & 0xF0) - 0x10) <= 0x20)
+                                *val += 0x40;
+                        }
+                        else
+                        {
+                            if ((u8)((*val & 0xF) - 0x01) <= 0x02)
+                                *val += 0x04;
+                        }
+                    }
+
+                    row >>= 1;
+                }
+
+                y++;
+            }
+
+            personality >>= 8;
+        }
+    }
+}
+
+void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
+{
+    u8 language;
+    GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
+    language = GetMonData(mon, MON_DATA_LANGUAGE, &language);
+    if (language == GAME_LANGUAGE && !StringCompare(gSpeciesNames[oldSpecies], gStringVar1))
+        SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[newSpecies]);
+}
+
+bool8 sub_80435E0(void)
+{
+    bool8 retVal = FALSE;
+    switch (gLinkPlayers[GetMultiplayerId()].id)
+    {
+    case 0:
+    case 3:
+        retVal = FALSE;
+        break;
+    case 1:
+    case 2:
+        retVal = TRUE;
+        break;
+    }
+    return retVal;
+}
+
+bool8 sub_8043620(u8 id)
+{
+    bool8 retVal = FALSE;
+    switch (gLinkPlayers[id].id)
+    {
+    case 0:
+    case 3:
+        retVal = FALSE;
+        break;
+    case 1:
+    case 2:
+        retVal = TRUE;
+        break;
+    }
+    return retVal;
+}
+
+s32 GetBankMultiplayerId(u16 a1)
+{
+    s32 id;
+    for (id = 0; id < MAX_LINK_PLAYERS; id++)
+        if (gLinkPlayers[id].id == a1)
+            break;
+    return id;
+}
+
+u8 sub_804367C(u16 trainer)
+{
+    return gTrainers[trainer].encounterMusic_gender & 0x7F;
+}
+
+u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex)
+{
+    if (statIndex < 1 || statIndex > 5)
+    {
+        // should just be "return n", but it wouldn't match without this
+        u16 retVal = n;
+        retVal++;
+        retVal--;
+        return retVal;
+    }
+
+    switch (gNatureStatTable[nature][statIndex - 1])
+    {
+    case 1:
+        return (u16)(n * 110) / 100;
+    case -1:
+        return (u16)(n * 90) / 100;
+    }
+
+    return n;
+}
+
+// TODO: Move these to constants/trainers.h
+#define TRAINER_CLASS_ELITE_FOUR     0x54
+#define TRAINER_CLASS_LEADER         0x57
+#define TRAINER_CLASS_CHAMPION       0x5A
+
+// TODO: Move these too
+#define FRIENDSHIP_EVENT_LEAGUE_BATTLE 0x3
+#define FRIENDSHIP_EVENT_WALKING       0x5
+
+void AdjustFriendship(struct Pokemon *mon, u8 event)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
+    u8 holdEffect;
+
+    if (heldItem == ITEM_ENIGMA_BERRY)
+    {
+        if (gMain.inBattle)
+            holdEffect = gEnigmaBerries[0].holdEffect;
+        else
+            holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+    }
+    else
+    {
+        holdEffect = ItemId_GetHoldEffect(heldItem);
+    }
+
+    if (species && species != SPECIES_EGG)
+    {
+        u8 friendshipLevel = 0;
+        s16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
+        if (friendship > 99)
+            friendshipLevel++;
+        if (friendship > 199)
+            friendshipLevel++;
+
+        if ((event != FRIENDSHIP_EVENT_WALKING || !(Random() & 1))
+         && (event != FRIENDSHIP_EVENT_LEAGUE_BATTLE
+          || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+           && (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR
+            || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_LEADER
+            || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION))))
+        {
+            s8 delta = sFriendshipEventDeltas[event][friendshipLevel];
+            if (delta > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
+                delta = (150 * delta) / 100;
+
+            friendship += delta;
+            if (delta > 0)
+            {
+                if (GetMonData(mon, MON_DATA_POKEBALL, 0) == ITEM_LUXURY_BALL)
+                    friendship++;
+                if (GetMonData(mon, MON_DATA_MET_LOCATION, 0) == sav1_map_get_name())
+                    friendship++;
+            }
+
+            if (friendship < 0)
+                friendship = 0;
+            if (friendship > 255)
+                friendship = 255;
+
+            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
+        }
+    }
+}
+
+void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
+{
+    u8 evs[NUM_STATS];
+    u16 evIncrease = 0;
+    u16 totalEVs = 0;
+    u16 heldItem;
+    u8 holdEffect;
+    int i;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        evs[i] = GetMonData(mon, MON_DATA_HP_EV + i, 0);
+        totalEVs += evs[i];
+    }
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        u8 hasHadPokerus;
+        int multiplier;
+
+        if (totalEVs >= MAX_TOTAL_EVS)
+            break;
+
+        hasHadPokerus = CheckPartyHasHadPokerus(mon, 0);
+
+        if (hasHadPokerus)
+            multiplier = 2;
+        else
+            multiplier = 1;
+
+        switch (i)
+        {
+        case 0:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_HP * multiplier;
+            break;
+        case 1:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_Attack * multiplier;
+            break;
+        case 2:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_Defense * multiplier;
+            break;
+        case 3:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_Speed * multiplier;
+            break;
+        case 4:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_SpAttack * multiplier;
+            break;
+        case 5:
+            evIncrease = gBaseStats[defeatedSpecies].evYield_SpDefense * multiplier;
+            break;
+        }
+
+        heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
+
+        if (heldItem == ITEM_ENIGMA_BERRY)
+        {
+            if (gMain.inBattle)
+                holdEffect = gEnigmaBerries[0].holdEffect;
+            else
+                holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+        }
+        else
+        {
+            holdEffect = ItemId_GetHoldEffect(heldItem);
+        }
+
+        if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
+            evIncrease *= 2;
+
+        if (totalEVs + (s16)evIncrease > MAX_TOTAL_EVS)
+            evIncrease = ((s16)evIncrease + MAX_TOTAL_EVS) - (totalEVs + evIncrease);
+
+        if (evs[i] + (s16)evIncrease > 255)
+        {
+            int val1 = (s16)evIncrease + 255;
+            int val2 = evs[i] + evIncrease;
+            evIncrease = val1 - val2;
+        }
+
+        evs[i] += evIncrease;
+        totalEVs += evIncrease;
+        SetMonData(mon, MON_DATA_HP_EV + i, &evs[i]);
+    }
+}
+
+u16 GetMonEVCount(struct Pokemon *mon)
+{
+    int i;
+    u16 count = 0;
+
+    for (i = 0; i < NUM_STATS; i++)
+        count += GetMonData(mon, MON_DATA_HP_EV + i, 0);
+
+    return count;
+}
+
+void sub_8043A68(void)
+{
+    u8 foo[4]; // huh?
+}
+
+u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
+{
+    u8 retVal;
+
+    int partyIndex = 0;
+    unsigned curBit = 1;
+    retVal = 0;
+
+    if (selection)
+    {
+        do
+        {
+            if ((selection & 1) && (GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0) & 0xF))
+                retVal |= curBit;
+            partyIndex++;
+            curBit <<= 1;
+            selection >>= 1;
+        }
+        while (selection);
+    }
+    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0) & 0xF)
+    {
+        retVal = 1;
+    }
+
+    return retVal;
+}
+
+u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
+{
+    u8 retVal;
+
+    int partyIndex = 0;
+    unsigned curBit = 1;
+    retVal = 0;
+
+    if (selection)
+    {
+        do
+        {
+            if ((selection & 1) && GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0))
+                retVal |= curBit;
+            partyIndex++;
+            curBit <<= 1;
+            selection >>= 1;
+        }
+        while (selection);
+    }
+    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0))
+    {
+        retVal = 1;
+    }
+
+    return retVal;
+}
+
+void sub_8043B38(void)
+{
+    u8 foo[4]; // huh?
+}
+
+void sub_8043B40(void)
+{
+    u8 foo[4]; // huh?
 }

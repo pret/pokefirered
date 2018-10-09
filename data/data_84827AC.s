@@ -276,19 +276,19 @@ gUnknown_83FAC34:: @ 83FAC34
 gUnknown_83FB134:: @ 83FB134
 	.incbin "baserom.gba", 0x3FB134, 0xA80
 
-gUnknown_83FBBB4:: @ 83FBBB4
+BattleText_MistShroud:: @ 83FBBB4
 	.incbin "baserom.gba", 0x3FBBB4, 0x35
 
-gUnknown_83FBBE9:: @ 83FBBE9
+BattleText_GetPumped:: @ 83FBBE9
 	.incbin "baserom.gba", 0x3FBBE9, 0xE43
 
 gUnknown_83FCA2C:: @ 83FCA2C
 	.incbin "baserom.gba", 0x3FCA2C, 0x11E
 
-gUnknown_83FCB4A:: @ 83FCB4A
+BattleText_Rose:: @ 83FCB4A
 	.incbin "baserom.gba", 0x3FCB4A, 0x20
 
-gUnknown_83FCB6A:: @ 83FCB6A
+BattleText_UnknownString3:: @ 83FCB6A
 	.incbin "baserom.gba", 0x3FCB6A, 0x120
 
 gUnknown_83FCC8A:: @ 83FCC8A

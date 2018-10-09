@@ -28,6 +28,7 @@ char* strcpy(char *dst0, const char *src0);
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
 
+#define POKEMON_SLOTS_NUMBER 412
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 

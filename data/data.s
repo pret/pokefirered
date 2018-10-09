@@ -340,7 +340,7 @@ gBaseStats:: @ 8254784
 gUnknown_8254795:: @ 8254795
 	.incbin "baserom.gba", 0x254795, 0x4FBF
 
-gUnknown_8259754:: @ 8259754
+gEvolutionTable:: @ 8259754
 	.incbin "baserom.gba", 0x259754, 0x4060
 
 gLevelUpLearnsets:: @ 825D7B4

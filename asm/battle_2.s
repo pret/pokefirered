@@ -11057,7 +11057,7 @@ sub_8015670: @ 8015670
 	ands r0, r1
 	cmp r0, 0
 	beq _080156C4
-	ldr r1, _080156B0 @ =gUnknown_2022AB8
+	ldr r1, _080156B0 @ =gBattleTextBuff1
 	ldr r4, _080156B4 @ =gUnknown_2023E8A
 	ldrb r0, [r4]
 	strb r0, [r1]
@@ -11076,7 +11076,7 @@ sub_8015670: @ 8015670
 	.align 2, 0
 _080156A8: .4byte gUnknown_2023BE3
 _080156AC: .4byte gBattleTypeFlags
-_080156B0: .4byte gUnknown_2022AB8
+_080156B0: .4byte gBattleTextBuff1
 _080156B4: .4byte gUnknown_2023E8A
 _080156B8: .4byte sBattler_AI
 _080156BC: .4byte gUnknown_2023D74
@@ -11180,7 +11180,7 @@ sub_801578C: @ 801578C
 	ands r0, r4
 	cmp r0, 0
 	beq _080157E0
-	ldr r1, _080157CC @ =gUnknown_2022AB8
+	ldr r1, _080157CC @ =gBattleTextBuff1
 	ldr r4, _080157D0 @ =gUnknown_2023E8A
 	ldrb r0, [r4]
 	strb r0, [r1]
@@ -11199,7 +11199,7 @@ sub_801578C: @ 801578C
 	.align 2, 0
 _080157C4: .4byte gUnknown_2023BE3
 _080157C8: .4byte gBattleTypeFlags
-_080157CC: .4byte gUnknown_2022AB8
+_080157CC: .4byte gBattleTextBuff1
 _080157D0: .4byte gUnknown_2023E8A
 _080157D4: .4byte sBattler_AI
 _080157D8: .4byte gUnknown_2023D74
@@ -11316,7 +11316,7 @@ sub_80158BC: @ 80158BC
 	ldr r1, _080158F0 @ =gUnknown_2023BE3
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, _080158F4 @ =gUnknown_2022AB8
+	ldr r1, _080158F4 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x7
@@ -11341,7 +11341,7 @@ sub_80158BC: @ 80158BC
 	bx lr
 	.align 2, 0
 _080158F0: .4byte gUnknown_2023BE3
-_080158F4: .4byte gUnknown_2022AB8
+_080158F4: .4byte gBattleTextBuff1
 _080158F8: .4byte sBattler_AI
 _080158FC: .4byte gBattlerPartyIndexes
 _08015900: .4byte gUnknown_2023D74
@@ -12623,7 +12623,7 @@ sub_8016374: @ 8016374
 	ldrb r0, [r3]
 	adds r0, r1
 	strb r2, [r0]
-	ldr r2, _080163FC @ =gUnknown_2022AB8
+	ldr r2, _080163FC @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r2]
 	movs r0, 0x7
@@ -12665,7 +12665,7 @@ _080163EC: .4byte gUnknown_2022974
 _080163F0: .4byte gUnknown_2022976
 _080163F4: .4byte gUnknown_2023FF8
 _080163F8: .4byte gUnknown_2023FFC
-_080163FC: .4byte gUnknown_2022AB8
+_080163FC: .4byte gBattleTextBuff1
 _08016400: .4byte gBattleStruct
 _08016404: .4byte gBattleScripting
 _08016408: .4byte gUnknown_2023D74
@@ -12933,7 +12933,7 @@ _08016644: .4byte gUnknown_2023D74
 _08016648: .4byte gUnknown_81D99E4
 _0801664C: .4byte gUnknown_2023BE3
 _08016650:
-	ldr r3, _080166C4 @ =gUnknown_2022AB8
+	ldr r3, _080166C4 @ =gBattleTextBuff1
 	movs r4, 0xFD
 	strb r4, [r3]
 	movs r0, 0x5
@@ -12942,7 +12942,7 @@ _08016650:
 	strb r2, [r3, 0x2]
 	movs r0, 0xFF
 	strb r0, [r3, 0x3]
-	ldr r1, _080166C8 @ =gUnknown_2022AC8
+	ldr r1, _080166C8 @ =gBattleTextBuff2
 	strb r4, [r1]
 	strb r5, [r1, 0x1]
 	movs r0, 0xD2
@@ -12993,8 +12993,8 @@ _080166B4:
 	strb r1, [r2, 0x11]
 	b _08016706
 	.align 2, 0
-_080166C4: .4byte gUnknown_2022AB8
-_080166C8: .4byte gUnknown_2022AC8
+_080166C4: .4byte gBattleTextBuff1
+_080166C8: .4byte gBattleTextBuff2
 _080166CC: .4byte gUnknown_2023D74
 _080166D0: .4byte gUnknown_81D99E4
 _080166D4: .4byte gUnknown_2023BE3
@@ -13718,7 +13718,7 @@ HandleAction_Action9: @ 8016C9C
 	strh r1, [r0]
 	ldr r0, _08016CF8 @ =gUnknown_2022976
 	strh r1, [r0]
-	ldr r1, _08016CFC @ =gUnknown_2022AB8
+	ldr r1, _08016CFC @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x7
@@ -13749,7 +13749,7 @@ _08016CEC: .4byte gUnknown_2023BDE
 _08016CF0: .4byte gUnknown_2023BE2
 _08016CF4: .4byte gUnknown_2022974
 _08016CF8: .4byte gUnknown_2022976
-_08016CFC: .4byte gUnknown_2022AB8
+_08016CFC: .4byte gBattleTextBuff1
 _08016D00: .4byte gBattlerPartyIndexes
 _08016D04: .4byte gUnknown_2023D74
 _08016D08: .4byte gUnknown_81D9A04

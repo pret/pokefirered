@@ -2243,12 +2243,12 @@ _0800E35A:
 	adds r5, 0x10
 	mov r4, r12
 	adds r4, 0x20
-	ldr r6, _0800E3E4 @ =gUnknown_2022AC8
+	ldr r6, _0800E3E4 @ =gBattleTextBuff2
 	mov r2, r12
 	adds r2, 0x30
 _0800E378:
 	adds r1, r5, r3
-	ldr r7, _0800E3E8 @ =gUnknown_2022AB8
+	ldr r7, _0800E3E8 @ =gBattleTextBuff1
 	adds r0, r3, r7
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -2288,8 +2288,8 @@ _0800E3D4: .4byte gPotentialItemEffectBattler
 _0800E3D8: .4byte gBattleMoves
 _0800E3DC: .4byte gUnknown_2022AD8
 _0800E3E0: .4byte gBattleMons
-_0800E3E4: .4byte gUnknown_2022AC8
-_0800E3E8: .4byte gUnknown_2022AB8
+_0800E3E4: .4byte gBattleTextBuff2
+_0800E3E8: .4byte gBattleTextBuff1
 	thumb_func_end EmitPrintString
 
 	thumb_func_start EmitPrintSelectionString
@@ -2356,12 +2356,12 @@ _0800E44E:
 	adds r5, 0x10
 	mov r4, r12
 	adds r4, 0x20
-	ldr r6, _0800E4CC @ =gUnknown_2022AC8
+	ldr r6, _0800E4CC @ =gBattleTextBuff2
 	mov r2, r12
 	adds r2, 0x30
 _0800E46C:
 	adds r1, r5, r3
-	ldr r7, _0800E4D0 @ =gUnknown_2022AB8
+	ldr r7, _0800E4D0 @ =gBattleTextBuff1
 	adds r0, r3, r7
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -2398,8 +2398,8 @@ _0800E4BC: .4byte gBattleScripting
 _0800E4C0: .4byte gBattleStruct
 _0800E4C4: .4byte gUnknown_2022AD8
 _0800E4C8: .4byte gBattleMons
-_0800E4CC: .4byte gUnknown_2022AC8
-_0800E4D0: .4byte gUnknown_2022AB8
+_0800E4CC: .4byte gBattleTextBuff2
+_0800E4D0: .4byte gBattleTextBuff1
 	thumb_func_end EmitPrintSelectionString
 
 	thumb_func_start EmitChooseAction

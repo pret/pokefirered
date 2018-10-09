@@ -3555,7 +3555,7 @@ sub_80496C0: @ 80496C0
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, _08049760 @ =gUnknown_202298C
+	ldr r0, _08049760 @ =gDisplayedStringBattle
 	ldr r1, _08049764 @ =gUnknown_8260556
 	bl StringCopy
 	adds r5, r0, 0
@@ -3623,7 +3623,7 @@ _08049754:
 	movs r0, 0xB
 	b _08049782
 	.align 2, 0
-_08049760: .4byte gUnknown_202298C
+_08049760: .4byte gDisplayedStringBattle
 _08049764: .4byte gUnknown_8260556
 _08049768: .4byte gSpeciesNames
 _0804976C: .4byte gSprites
@@ -3642,7 +3642,7 @@ _08049782:
 	strb r0, [r5]
 	movs r0, 0xFF
 	strb r0, [r5, 0x1]
-	ldr r0, _080497E4 @ =gUnknown_202298C
+	ldr r0, _080497E4 @ =gDisplayedStringBattle
 	add r3, sp, 0xC
 	movs r1, 0
 	movs r2, 0x3
@@ -3684,7 +3684,7 @@ _080497D4:
 	bl sub_804A6E8
 	b _08049804
 	.align 2, 0
-_080497E4: .4byte gUnknown_202298C
+_080497E4: .4byte gDisplayedStringBattle
 _080497E8: .4byte gSprites
 _080497EC: .4byte 0x06010040
 _080497F0: .4byte 0x06010400

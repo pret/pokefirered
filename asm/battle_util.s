@@ -1866,7 +1866,7 @@ _08017C84:
 	mov r8, r3
 	movs r7, 0
 	ldr r6, _08017D24 @ =sBattler_AI
-	ldr r5, _08017D28 @ =gUnknown_2022AB8
+	ldr r5, _08017D28 @ =gBattleTextBuff1
 _08017C8E:
 	ldr r0, [r1]
 	adds r0, 0xDB
@@ -1942,7 +1942,7 @@ _08017D18: .4byte gBattlersCount
 _08017D1C: .4byte gBattleStruct
 _08017D20: .4byte gActiveBattler
 _08017D24: .4byte sBattler_AI
-_08017D28: .4byte gUnknown_2022AB8
+_08017D28: .4byte gBattleTextBuff1
 _08017D2C: .4byte gSideTimers
 _08017D30: .4byte gSideAffecting
 _08017D34: .4byte 0x0000fffe
@@ -1961,7 +1961,7 @@ _08017D4A:
 	movs r2, 0
 	mov r8, r2
 	ldr r7, _08017DE4 @ =sBattler_AI
-	ldr r5, _08017DE8 @ =gUnknown_2022AB8
+	ldr r5, _08017DE8 @ =gBattleTextBuff1
 _08017D56:
 	ldr r0, [r1]
 	adds r0, 0xDB
@@ -2036,7 +2036,7 @@ _08017DD4:
 	b _08017EA4
 	.align 2, 0
 _08017DE4: .4byte sBattler_AI
-_08017DE8: .4byte gUnknown_2022AB8
+_08017DE8: .4byte gBattleTextBuff1
 _08017DEC: .4byte gSideTimers
 _08017DF0: .4byte gActiveBattler
 _08017DF4: .4byte gSideAffecting
@@ -2056,7 +2056,7 @@ _08017E08:
 	movs r2, 0
 	mov r8, r2
 	ldr r7, _08017EC4 @ =sBattler_AI
-	ldr r5, _08017EC8 @ =gUnknown_2022AB8
+	ldr r5, _08017EC8 @ =gBattleTextBuff1
 _08017E20:
 	ldr r0, [r1]
 	adds r0, 0xDB
@@ -2143,7 +2143,7 @@ _08017EAC:
 	.align 2, 0
 _08017EC0: .4byte gActiveBattler
 _08017EC4: .4byte sBattler_AI
-_08017EC8: .4byte gUnknown_2022AB8
+_08017EC8: .4byte gBattleTextBuff1
 _08017ECC: .4byte gSideTimers
 _08017ED0: .4byte gSideAffecting
 _08017ED4: .4byte 0x0000feff
@@ -3099,7 +3099,7 @@ _08018664:
 	adds r0, r2
 	ldrb r0, [r0, 0x5]
 	strb r0, [r1, 0x11]
-	ldr r1, _080186E4 @ =gUnknown_2022AB8
+	ldr r1, _080186E4 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -3136,12 +3136,12 @@ _080186D4: .4byte gBattleMons
 _080186D8: .4byte 0xffffe000
 _080186DC: .4byte gBattleScripting
 _080186E0: .4byte gBattleStruct
-_080186E4: .4byte gUnknown_2022AB8
+_080186E4: .4byte gBattleTextBuff1
 _080186E8: .4byte gUnknown_2023D74
 _080186EC: .4byte gUnknown_81D9124
 _080186F0: .4byte gBattleMoveDamage
 _080186F4:
-	ldr r2, _08018724 @ =gUnknown_2022AB8
+	ldr r2, _08018724 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r2]
 	movs r0, 0x2
@@ -3167,7 +3167,7 @@ _08018720:
 	ldr r0, [r1]
 	b _08018C04
 	.align 2, 0
-_08018724: .4byte gUnknown_2022AB8
+_08018724: .4byte gBattleTextBuff1
 _08018728: .4byte gBattleStruct
 _0801872C: .4byte gUnknown_2023D74
 _08018730: .4byte gUnknown_81D9136
@@ -3902,7 +3902,7 @@ _08018CD4:
 	b _08018E16
 _08018CE6:
 	ldr r4, _08018D28 @ =gActiveBattler
-	ldr r5, _08018D2C @ =gUnknown_2022AB8
+	ldr r5, _08018D2C @ =gBattleTextBuff1
 	ldr r6, _08018D30 @ =gUnknown_2023F20
 	movs r0, 0x8
 	adds r0, r6
@@ -3935,7 +3935,7 @@ _08018CFC:
 _08018D20: .4byte 0x00000181
 _08018D24: .4byte gBattlersCount
 _08018D28: .4byte gActiveBattler
-_08018D2C: .4byte gUnknown_2022AB8
+_08018D2C: .4byte gBattleTextBuff1
 _08018D30: .4byte gUnknown_2023F20
 _08018D34: .4byte gBattlerTarget
 _08018D38: .4byte gAbsentBattlerFlags
@@ -4068,7 +4068,7 @@ _08018E2C:
 	b _08018F68
 _08018E42:
 	ldr r5, _08018E84 @ =gActiveBattler
-	ldr r4, _08018E88 @ =gUnknown_2022AB8
+	ldr r4, _08018E88 @ =gBattleTextBuff1
 	ldr r6, _08018E8C @ =gDisableStructs
 	mov r12, r6
 	ldr r0, _08018E90 @ =sBattler_AI
@@ -4101,7 +4101,7 @@ _08018E4E:
 _08018E7C: .4byte 0x00000181
 _08018E80: .4byte gBattlersCount
 _08018E84: .4byte gActiveBattler
-_08018E88: .4byte gUnknown_2022AB8
+_08018E88: .4byte gBattleTextBuff1
 _08018E8C: .4byte gDisableStructs
 _08018E90: .4byte sBattler_AI
 _08018E94: .4byte gUnknown_2023BDE
@@ -6809,7 +6809,7 @@ _0801A4D2:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801A4E4
-	ldr r0, _0801A564 @ =gUnknown_2022AB8
+	ldr r0, _0801A564 @ =gBattleTextBuff1
 	ldr r1, _0801A568 @ =gUnknown_8250094
 	bl StringCopy
 _0801A4E4:
@@ -6818,7 +6818,7 @@ _0801A4E4:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801A4F6
-	ldr r0, _0801A564 @ =gUnknown_2022AB8
+	ldr r0, _0801A564 @ =gBattleTextBuff1
 	ldr r1, _0801A56C @ =gUnknown_825009C
 	bl StringCopy
 _0801A4F6:
@@ -6827,7 +6827,7 @@ _0801A4F6:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801A508
-	ldr r0, _0801A564 @ =gUnknown_2022AB8
+	ldr r0, _0801A564 @ =gBattleTextBuff1
 	ldr r1, _0801A570 @ =gUnknown_82500A4
 	bl StringCopy
 _0801A508:
@@ -6836,7 +6836,7 @@ _0801A508:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801A51A
-	ldr r0, _0801A564 @ =gUnknown_2022AB8
+	ldr r0, _0801A564 @ =gBattleTextBuff1
 	ldr r1, _0801A574 @ =gUnknown_82500AC
 	bl StringCopy
 _0801A51A:
@@ -6845,7 +6845,7 @@ _0801A51A:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801A52C
-	ldr r0, _0801A564 @ =gUnknown_2022AB8
+	ldr r0, _0801A564 @ =gBattleTextBuff1
 	ldr r1, _0801A578 @ =gUnknown_82500B4
 	bl StringCopy
 _0801A52C:
@@ -6874,7 +6874,7 @@ _0801A52C:
 	bl MarkBufferBankForExecution
 	bl _0801BB5A
 	.align 2, 0
-_0801A564: .4byte gUnknown_2022AB8
+_0801A564: .4byte gBattleTextBuff1
 _0801A568: .4byte gUnknown_8250094
 _0801A56C: .4byte gUnknown_825009C
 _0801A570: .4byte gUnknown_82500A4
@@ -7407,7 +7407,7 @@ _0801AA10:
 _0801AA1A:
 	strb r5, [r3]
 	strb r5, [r2]
-	ldr r1, _0801AA50 @ =gUnknown_2022AB8
+	ldr r1, _0801AA50 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x3
@@ -7426,7 +7426,7 @@ _0801AA40: .4byte gBattleMoves
 _0801AA44: .4byte gUnknown_2023ECC
 _0801AA48: .4byte gBattlerTarget
 _0801AA4C: .4byte gBattleMons
-_0801AA50: .4byte gUnknown_2022AB8
+_0801AA50: .4byte gBattleTextBuff1
 _0801AA54: .4byte gUnknown_2023D74
 _0801AA58: .4byte gUnknown_81D949C
 _0801AA5C:
@@ -8197,12 +8197,12 @@ _0801B158:
 	bne _0801B172
 	b _0801B29E
 _0801B172:
-	ldr r0, _0801B17C @ =gUnknown_2022AB8
+	ldr r0, _0801B17C @ =gBattleTextBuff1
 	ldr r1, _0801B180 @ =gUnknown_8250094
 	b _0801B264
 	.align 2, 0
 _0801B178: .4byte 0x00000f88
-_0801B17C: .4byte gUnknown_2022AB8
+_0801B17C: .4byte gBattleTextBuff1
 _0801B180: .4byte gUnknown_8250094
 _0801B184:
 	movs r0, 0x58
@@ -8219,14 +8219,14 @@ _0801B184:
 	bne _0801B19E
 	b _0801B29E
 _0801B19E:
-	ldr r0, _0801B1AC @ =gUnknown_2022AB8
+	ldr r0, _0801B1AC @ =gBattleTextBuff1
 	ldr r1, _0801B1B0 @ =gUnknown_82500BC
 	bl StringCopy
 	movs r2, 0x2
 	mov r9, r2
 	b _0801B2A4
 	.align 2, 0
-_0801B1AC: .4byte gUnknown_2022AB8
+_0801B1AC: .4byte gBattleTextBuff1
 _0801B1B0: .4byte gUnknown_82500BC
 _0801B1B4:
 	movs r0, 0x58
@@ -8241,11 +8241,11 @@ _0801B1B4:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801B29E
-	ldr r0, _0801B1D4 @ =gUnknown_2022AB8
+	ldr r0, _0801B1D4 @ =gBattleTextBuff1
 	ldr r1, _0801B1D8 @ =gUnknown_82500A4
 	b _0801B264
 	.align 2, 0
-_0801B1D4: .4byte gUnknown_2022AB8
+_0801B1D4: .4byte gBattleTextBuff1
 _0801B1D8: .4byte gUnknown_82500A4
 _0801B1DC:
 	movs r0, 0x58
@@ -8265,7 +8265,7 @@ _0801B1DC:
 	ldr r1, _0801B20C @ =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, _0801B210 @ =gUnknown_2022AB8
+	ldr r0, _0801B210 @ =gBattleTextBuff1
 	ldr r1, _0801B214 @ =gUnknown_825009C
 	bl StringCopy
 	movs r0, 0x1
@@ -8273,7 +8273,7 @@ _0801B1DC:
 	b _0801B2A4
 	.align 2, 0
 _0801B20C: .4byte 0xf7ffffff
-_0801B210: .4byte gUnknown_2022AB8
+_0801B210: .4byte gBattleTextBuff1
 _0801B214: .4byte gUnknown_825009C
 _0801B218:
 	movs r0, 0x58
@@ -8288,14 +8288,14 @@ _0801B218:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801B29E
-	ldr r0, _0801B240 @ =gUnknown_2022AB8
+	ldr r0, _0801B240 @ =gBattleTextBuff1
 	ldr r1, _0801B244 @ =gUnknown_82500AC
 	bl StringCopy
 	movs r2, 0x1
 	mov r9, r2
 	b _0801B2A4
 	.align 2, 0
-_0801B240: .4byte gUnknown_2022AB8
+_0801B240: .4byte gBattleTextBuff1
 _0801B244: .4byte gUnknown_82500AC
 _0801B248:
 	movs r0, 0x58
@@ -8310,7 +8310,7 @@ _0801B248:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801B29E
-	ldr r0, _0801B270 @ =gUnknown_2022AB8
+	ldr r0, _0801B270 @ =gBattleTextBuff1
 	ldr r1, _0801B274 @ =gUnknown_82500B4
 _0801B264:
 	bl StringCopy
@@ -8318,7 +8318,7 @@ _0801B264:
 	mov r9, r4
 	b _0801B2A4
 	.align 2, 0
-_0801B270: .4byte gUnknown_2022AB8
+_0801B270: .4byte gBattleTextBuff1
 _0801B274: .4byte gUnknown_82500B4
 _0801B278:
 	movs r0, 0x58
@@ -8334,7 +8334,7 @@ _0801B278:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801B29E
-	ldr r0, _0801B2B4 @ =gUnknown_2022AB8
+	ldr r0, _0801B2B4 @ =gBattleTextBuff1
 	ldr r1, _0801B2B8 @ =gUnknown_82500C4
 	bl StringCopy
 	movs r2, 0x3
@@ -8353,7 +8353,7 @@ _0801B2A4:
 	beq _0801B2C4
 	b _0801B304
 	.align 2, 0
-_0801B2B4: .4byte gUnknown_2022AB8
+_0801B2B4: .4byte gBattleTextBuff1
 _0801B2B8: .4byte gUnknown_82500C4
 _0801B2BC:
 	mov r0, r9
@@ -9394,7 +9394,7 @@ _0801BAC8:
 	str r0, [r1]
 	ldr r0, _0801BB24 @ =gBattleScripting
 	strb r5, [r0, 0x17]
-	ldr r1, _0801BB28 @ =gUnknown_2022AB8
+	ldr r1, _0801BB28 @ =gBattleTextBuff1
 	movs r4, 0xFD
 	strb r4, [r1]
 	movs r0, 0x4
@@ -9410,7 +9410,7 @@ _0801BAC8:
 	strb r0, [r1, 0x3]
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
-	ldr r1, _0801BB34 @ =gUnknown_2022AC8
+	ldr r1, _0801BB34 @ =gBattleTextBuff2
 	strb r4, [r1]
 	movs r0, 0x9
 	strb r0, [r1, 0x1]
@@ -9426,10 +9426,10 @@ _0801BB18: .4byte gUnknown_81D92A1
 _0801BB1C: .4byte gStatuses3
 _0801BB20: .4byte 0xffefffff
 _0801BB24: .4byte gBattleScripting
-_0801BB28: .4byte gUnknown_2022AB8
+_0801BB28: .4byte gBattleTextBuff1
 _0801BB2C: .4byte gActiveBattler
 _0801BB30: .4byte gBattlerPartyIndexes
-_0801BB34: .4byte gUnknown_2022AC8
+_0801BB34: .4byte gBattleTextBuff2
 _0801BB38: .4byte gLastUsedAbility
 _0801BB3C:
 	mov r3, r8
@@ -9970,7 +9970,7 @@ _0801BFDC:
 	add r0, sp, 0x4
 	strb r1, [r0]
 _0801BFE0:
-	ldr r1, _0801C020 @ =gUnknown_2022AB8
+	ldr r1, _0801C020 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -9999,7 +9999,7 @@ _0801BFE0:
 	str r0, [sp, 0xC]
 	bl _0801C95A
 	.align 2, 0
-_0801C020: .4byte gUnknown_2022AB8
+_0801C020: .4byte gBattleTextBuff1
 _0801C024: .4byte gUnknown_81D960C
 _0801C028: .4byte gActiveBattler
 _0801C02C:
@@ -10117,7 +10117,7 @@ _0801C112:
 	beq _0801C11A
 	bl _0801C952
 _0801C11A:
-	ldr r1, _0801C170 @ =gUnknown_2022AB8
+	ldr r1, _0801C170 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x8
@@ -10161,7 +10161,7 @@ _0801C14E:
 _0801C16C:
 	b _0801C30C
 	.align 2, 0
-_0801C170: .4byte gUnknown_2022AB8
+_0801C170: .4byte gBattleTextBuff1
 _0801C174: .4byte gBattleMoveDamage
 _0801C178:
 	movs r0, 0x58
@@ -10180,7 +10180,7 @@ _0801C190:
 	beq _0801C198
 	bl _0801C952
 _0801C198:
-	ldr r1, _0801C1EC @ =gUnknown_2022AB8
+	ldr r1, _0801C1EC @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x8
@@ -10224,7 +10224,7 @@ _0801C1CC:
 _0801C1EA:
 	b _0801C3A0
 	.align 2, 0
-_0801C1EC: .4byte gUnknown_2022AB8
+_0801C1EC: .4byte gBattleTextBuff1
 _0801C1F0: .4byte gBattleMoveDamage
 _0801C1F4:
 	movs r0, 0x58
@@ -10244,7 +10244,7 @@ _0801C20C:
 	beq _0801C212
 	b _0801C952
 _0801C212:
-	ldr r1, _0801C26C @ =gUnknown_2022AB8
+	ldr r1, _0801C26C @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x8
@@ -10289,7 +10289,7 @@ _0801C248:
 	bl BattleScriptExecute
 	b _0801C27E
 	.align 2, 0
-_0801C26C: .4byte gUnknown_2022AB8
+_0801C26C: .4byte gBattleTextBuff1
 _0801C270: .4byte gBattleMoveDamage
 _0801C274: .4byte gUnknown_81D964F
 _0801C278:
@@ -10319,7 +10319,7 @@ _0801C2A0:
 	beq _0801C2A6
 	b _0801C952
 _0801C2A6:
-	ldr r1, _0801C300 @ =gUnknown_2022AB8
+	ldr r1, _0801C300 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x8
@@ -10365,7 +10365,7 @@ _0801C2F8:
 	bl BattleScriptExecute
 	b _0801C312
 	.align 2, 0
-_0801C300: .4byte gUnknown_2022AB8
+_0801C300: .4byte gBattleTextBuff1
 _0801C304: .4byte gBattleMoveDamage
 _0801C308: .4byte gUnknown_81D964F
 _0801C30C:
@@ -10394,7 +10394,7 @@ _0801C332:
 	beq _0801C338
 	b _0801C952
 _0801C338:
-	ldr r1, _0801C394 @ =gUnknown_2022AB8
+	ldr r1, _0801C394 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x8
@@ -10440,7 +10440,7 @@ _0801C38A:
 	bl BattleScriptExecute
 	b _0801C3A6
 	.align 2, 0
-_0801C394: .4byte gUnknown_2022AB8
+_0801C394: .4byte gBattleTextBuff1
 _0801C398: .4byte gBattleMoveDamage
 _0801C39C: .4byte gUnknown_81D964F
 _0801C3A0:
@@ -10475,7 +10475,7 @@ _0801C3CE:
 	ble _0801C3D8
 	b _0801C952
 _0801C3D8:
-	ldr r1, _0801C408 @ =gUnknown_2022AB8
+	ldr r1, _0801C408 @ =gBattleTextBuff1
 	movs r2, 0xFD
 	strb r2, [r1]
 	movs r0, 0x5
@@ -10484,7 +10484,7 @@ _0801C3D8:
 	strb r0, [r1, 0x2]
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
-	ldr r1, _0801C40C @ =gUnknown_2022AC8
+	ldr r1, _0801C40C @ =gBattleTextBuff2
 	strb r2, [r1]
 	strb r6, [r1, 0x1]
 	movs r0, 0xD2
@@ -10500,8 +10500,8 @@ _0801C3D8:
 	movs r0, 0xF
 	b _0801C56C
 	.align 2, 0
-_0801C408: .4byte gUnknown_2022AB8
-_0801C40C: .4byte gUnknown_2022AC8
+_0801C408: .4byte gBattleTextBuff1
+_0801C40C: .4byte gBattleTextBuff2
 _0801C410: .4byte gUnknown_2023D6E
 _0801C414: .4byte gBattleScripting
 _0801C418:
@@ -10527,7 +10527,7 @@ _0801C436:
 	ble _0801C440
 	b _0801C952
 _0801C440:
-	ldr r1, _0801C460 @ =gUnknown_2022AB8
+	ldr r1, _0801C460 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x5
@@ -10544,7 +10544,7 @@ _0801C440:
 	movs r0, 0x10
 	b _0801C506
 	.align 2, 0
-_0801C460: .4byte gUnknown_2022AB8
+_0801C460: .4byte gBattleTextBuff1
 _0801C464: .4byte gUnknown_2023D6E
 _0801C468: .4byte gBattleScripting
 _0801C46C:
@@ -10570,7 +10570,7 @@ _0801C48A:
 	ble _0801C494
 	b _0801C952
 _0801C494:
-	ldr r1, _0801C4B4 @ =gUnknown_2022AB8
+	ldr r1, _0801C4B4 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x5
@@ -10587,7 +10587,7 @@ _0801C494:
 	movs r0, 0x11
 	b _0801C56C
 	.align 2, 0
-_0801C4B4: .4byte gUnknown_2022AB8
+_0801C4B4: .4byte gBattleTextBuff1
 _0801C4B8: .4byte gUnknown_2023D6E
 _0801C4BC: .4byte gBattleScripting
 _0801C4C0:
@@ -10613,7 +10613,7 @@ _0801C4DE:
 	ble _0801C4E8
 	b _0801C952
 _0801C4E8:
-	ldr r1, _0801C518 @ =gUnknown_2022AB8
+	ldr r1, _0801C518 @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x5
@@ -10637,7 +10637,7 @@ _0801C506:
 	str r2, [sp, 0xC]
 	b _0801C95A
 	.align 2, 0
-_0801C518: .4byte gUnknown_2022AB8
+_0801C518: .4byte gBattleTextBuff1
 _0801C51C: .4byte gUnknown_2023D6E
 _0801C520: .4byte gBattleScripting
 _0801C524: .4byte gUnknown_81D9679
@@ -10664,7 +10664,7 @@ _0801C546:
 	ble _0801C550
 	b _0801C952
 _0801C550:
-	ldr r1, _0801C57C @ =gUnknown_2022AB8
+	ldr r1, _0801C57C @ =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x5
@@ -10687,7 +10687,7 @@ _0801C56C:
 	str r5, [sp, 0xC]
 	b _0801C95A
 	.align 2, 0
-_0801C57C: .4byte gUnknown_2022AB8
+_0801C57C: .4byte gBattleTextBuff1
 _0801C580: .4byte gUnknown_2023D6E
 _0801C584: .4byte gBattleScripting
 _0801C588: .4byte gUnknown_81D9679
@@ -10799,7 +10799,7 @@ _0801C638:
 	asrs r0, 24
 	cmp r0, 0xC
 	beq _0801C638
-	ldr r1, _0801C6AC @ =gUnknown_2022AB8
+	ldr r1, _0801C6AC @ =gBattleTextBuff1
 	movs r2, 0
 	movs r3, 0xFD
 	strb r3, [r1]
@@ -10810,7 +10810,7 @@ _0801C638:
 	strb r0, [r1, 0x2]
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
-	ldr r0, _0801C6B0 @ =gUnknown_2022AC8
+	ldr r0, _0801C6B0 @ =gBattleTextBuff2
 	strb r3, [r0]
 	strb r2, [r0, 0x1]
 	movs r1, 0xD1
@@ -10838,8 +10838,8 @@ _0801C638:
 	b _0801C95A
 	.align 2, 0
 _0801C6A8: .4byte gUnknown_2023BFC
-_0801C6AC: .4byte gUnknown_2022AB8
-_0801C6B0: .4byte gUnknown_2022AC8
+_0801C6AC: .4byte gBattleTextBuff1
+_0801C6B0: .4byte gBattleTextBuff2
 _0801C6B4: .4byte gUnknown_2023D6E
 _0801C6B8: .4byte gBattleScripting
 _0801C6BC: .4byte gUnknown_81D9679
@@ -11025,7 +11025,7 @@ _0801C816:
 	ands r2, r0
 	cmp r2, 0
 	beq _0801C82E
-	ldr r0, _0801C8BC @ =gUnknown_2022AB8
+	ldr r0, _0801C8BC @ =gBattleTextBuff1
 	ldr r1, _0801C8C0 @ =gUnknown_8250094
 	bl StringCopy
 	movs r0, 0x1
@@ -11044,7 +11044,7 @@ _0801C82E:
 	ldr r1, _0801C8C4 @ =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, _0801C8BC @ =gUnknown_2022AB8
+	ldr r0, _0801C8BC @ =gBattleTextBuff1
 	ldr r1, _0801C8C8 @ =gUnknown_825009C
 	bl StringCopy
 	movs r2, 0x1
@@ -11055,7 +11055,7 @@ _0801C854:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801C86A
-	ldr r0, _0801C8BC @ =gUnknown_2022AB8
+	ldr r0, _0801C8BC @ =gBattleTextBuff1
 	ldr r1, _0801C8CC @ =gUnknown_82500A4
 	bl StringCopy
 	movs r3, 0x1
@@ -11066,7 +11066,7 @@ _0801C86A:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801C880
-	ldr r0, _0801C8BC @ =gUnknown_2022AB8
+	ldr r0, _0801C8BC @ =gBattleTextBuff1
 	ldr r1, _0801C8D0 @ =gUnknown_82500AC
 	bl StringCopy
 	movs r0, 0x1
@@ -11077,7 +11077,7 @@ _0801C880:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801C896
-	ldr r0, _0801C8BC @ =gUnknown_2022AB8
+	ldr r0, _0801C8BC @ =gBattleTextBuff1
 	ldr r1, _0801C8D4 @ =gUnknown_82500B4
 	bl StringCopy
 	movs r1, 0x1
@@ -11089,7 +11089,7 @@ _0801C896:
 	ands r0, r2
 	cmp r0, 0
 	beq _0801C8AE
-	ldr r0, _0801C8BC @ =gUnknown_2022AB8
+	ldr r0, _0801C8BC @ =gBattleTextBuff1
 	ldr r1, _0801C8D8 @ =gUnknown_82500BC
 	bl StringCopy
 	movs r3, 0x1
@@ -11102,7 +11102,7 @@ _0801C8AE:
 	movs r0, 0
 	b _0801C8E4
 	.align 2, 0
-_0801C8BC: .4byte gUnknown_2022AB8
+_0801C8BC: .4byte gBattleTextBuff1
 _0801C8C0: .4byte gUnknown_8250094
 _0801C8C4: .4byte 0xf7ffffff
 _0801C8C8: .4byte gUnknown_825009C
@@ -11157,7 +11157,7 @@ _0801C91C:
 	ldr r0, _0801C978 @ =0xfff0ffff
 	ands r2, r0
 	str r2, [r1]
-	ldr r0, _0801C97C @ =gUnknown_2022AB8
+	ldr r0, _0801C97C @ =gBattleTextBuff1
 	ldr r1, _0801C980 @ =gUnknown_82500C4
 	bl StringCopy
 	ldr r0, _0801C984 @ =gUnknown_81D95BF
@@ -11189,7 +11189,7 @@ _0801C95A:
 	b _0801CFA6
 	.align 2, 0
 _0801C978: .4byte 0xfff0ffff
-_0801C97C: .4byte gUnknown_2022AB8
+_0801C97C: .4byte gBattleTextBuff1
 _0801C980: .4byte gUnknown_82500C4
 _0801C984: .4byte gUnknown_81D95BF
 _0801C988: .4byte gUnknown_2023E82
@@ -11517,7 +11517,7 @@ _0801CC5C:
 	ldr r0, _0801CC84 @ =0xfff0ffff
 	ands r1, r0
 	str r1, [r2]
-	ldr r0, _0801CC88 @ =gUnknown_2022AB8
+	ldr r0, _0801CC88 @ =gBattleTextBuff1
 	ldr r1, _0801CC8C @ =gUnknown_82500C4
 	bl StringCopy
 	bl BattleScriptPushCursor
@@ -11533,7 +11533,7 @@ _0801CC5C:
 	.align 2, 0
 _0801CC80: .4byte gBattleMons
 _0801CC84: .4byte 0xfff0ffff
-_0801CC88: .4byte gUnknown_2022AB8
+_0801CC88: .4byte gBattleTextBuff1
 _0801CC8C: .4byte gUnknown_82500C4
 _0801CC90: .4byte gUnknown_2023E82
 _0801CC94: .4byte gUnknown_2023D74
@@ -11564,7 +11564,7 @@ _0801CCC4:
 	ands r2, r0
 	cmp r2, 0
 	beq _0801CCD4
-	ldr r0, _0801CD64 @ =gUnknown_2022AB8
+	ldr r0, _0801CD64 @ =gBattleTextBuff1
 	ldr r1, _0801CD68 @ =gUnknown_8250094
 	bl StringCopy
 _0801CCD4:
@@ -11580,7 +11580,7 @@ _0801CCD4:
 	ldr r1, _0801CD6C @ =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, _0801CD64 @ =gUnknown_2022AB8
+	ldr r0, _0801CD64 @ =gBattleTextBuff1
 	ldr r1, _0801CD70 @ =gUnknown_825009C
 	bl StringCopy
 _0801CCF4:
@@ -11589,7 +11589,7 @@ _0801CCF4:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801CD06
-	ldr r0, _0801CD64 @ =gUnknown_2022AB8
+	ldr r0, _0801CD64 @ =gBattleTextBuff1
 	ldr r1, _0801CD74 @ =gUnknown_82500A4
 	bl StringCopy
 _0801CD06:
@@ -11598,7 +11598,7 @@ _0801CD06:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801CD18
-	ldr r0, _0801CD64 @ =gUnknown_2022AB8
+	ldr r0, _0801CD64 @ =gBattleTextBuff1
 	ldr r1, _0801CD78 @ =gUnknown_82500AC
 	bl StringCopy
 _0801CD18:
@@ -11607,7 +11607,7 @@ _0801CD18:
 	ands r0, r1
 	cmp r0, 0
 	beq _0801CD2A
-	ldr r0, _0801CD64 @ =gUnknown_2022AB8
+	ldr r0, _0801CD64 @ =gBattleTextBuff1
 	ldr r1, _0801CD7C @ =gUnknown_82500B4
 	bl StringCopy
 _0801CD2A:
@@ -11617,7 +11617,7 @@ _0801CD2A:
 	ands r0, r3
 	cmp r0, 0
 	beq _0801CD3E
-	ldr r0, _0801CD64 @ =gUnknown_2022AB8
+	ldr r0, _0801CD64 @ =gBattleTextBuff1
 	ldr r1, _0801CD80 @ =gUnknown_82500BC
 	bl StringCopy
 _0801CD3E:
@@ -11640,7 +11640,7 @@ _0801CD58:
 	b _0801CDF6
 	.align 2, 0
 _0801CD60: .4byte gBattleMons
-_0801CD64: .4byte gUnknown_2022AB8
+_0801CD64: .4byte gBattleTextBuff1
 _0801CD68: .4byte gUnknown_8250094
 _0801CD6C: .4byte 0xf7ffffff
 _0801CD70: .4byte gUnknown_825009C

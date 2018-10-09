@@ -1133,7 +1133,7 @@ CreateShedinja: @ 80CE748
 	str r0, [sp, 0x8]
 	add r0, r10
 	lsls r7, r0, 3
-	ldr r1, _080CE8C4 @ =gUnknown_8259754
+	ldr r1, _080CE8C4 @ =gEvolutionTable
 	adds r1, r7
 	mov r8, r1
 	ldrh r0, [r1]
@@ -1158,7 +1158,7 @@ _080CE782:
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
-	ldr r1, _080CE8C4 @ =gUnknown_8259754
+	ldr r1, _080CE8C4 @ =gEvolutionTable
 	adds r2, r1, r7
 	adds r2, 0xC
 	movs r1, 0xB
@@ -1242,7 +1242,7 @@ _080CE80C:
 	adds r0, r5
 	bl CalculateMonStats
 	bl CalculatePlayerPartyCount
-	ldr r0, _080CE8C4 @ =gUnknown_8259754
+	ldr r0, _080CE8C4 @ =gEvolutionTable
 	mov r4, r8
 	add r4, r10
 	lsls r4, 3
@@ -1291,7 +1291,7 @@ _080CE8B2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CE8C4: .4byte gUnknown_8259754
+_080CE8C4: .4byte gEvolutionTable
 _080CE8C8: .4byte gPlayerPartyCount
 _080CE8CC: .4byte gPlayerParty
 _080CE8D0: .4byte gSpeciesNames
@@ -1881,7 +1881,7 @@ _080CEDC6:
 	movs r1, 0x2
 	add r2, sp, 0x4
 	bl GetMonData
-	ldr r0, _080CEE24 @ =gUnknown_2022AB8
+	ldr r0, _080CEE24 @ =gBattleTextBuff1
 	add r1, sp, 0x4
 	bl StringCopy10
 	ldr r0, _080CEE28 @ =0x0000ffff
@@ -1892,7 +1892,7 @@ _080CEDC6:
 	b _080CF528
 	.align 2, 0
 _080CEE20: .4byte gTasks
-_080CEE24: .4byte gUnknown_2022AB8
+_080CEE24: .4byte gBattleTextBuff1
 _080CEE28: .4byte 0x0000ffff
 _080CEE2C:
 	ldr r0, _080CEE3C @ =0x0000fffe
@@ -2088,7 +2088,7 @@ _080CEFB6:
 	ldr r0, _080CEFEC @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0xC]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CEFF0 @ =gUnknown_202298C
+	ldr r0, _080CEFF0 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r0, _080CEFF4 @ =gTasks
@@ -2106,7 +2106,7 @@ _080CEFDE:
 	.align 2, 0
 _080CEFE8: .4byte 0x00000101
 _080CEFEC: .4byte gUnknown_83FDF3C
-_080CEFF0: .4byte gUnknown_202298C
+_080CEFF0: .4byte gDisplayedStringBattle
 _080CEFF4: .4byte gTasks
 _080CEFF8:
 	movs r0, 0
@@ -2191,7 +2191,7 @@ _080CF0A2:
 	ldr r0, _080CF0C8 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x10]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CF0CC @ =gUnknown_202298C
+	ldr r0, _080CF0CC @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r0, _080CF0D0 @ =gTasks
@@ -2204,7 +2204,7 @@ _080CF0A2:
 	b _080CF526
 	.align 2, 0
 _080CF0C8: .4byte gUnknown_83FDF3C
-_080CF0CC: .4byte gUnknown_202298C
+_080CF0CC: .4byte gDisplayedStringBattle
 _080CF0D0: .4byte gTasks
 _080CF0D4:
 	movs r0, 0
@@ -2223,7 +2223,7 @@ _080CF0EE:
 	ldr r0, _080CF110 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x14]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CF114 @ =gUnknown_202298C
+	ldr r0, _080CF114 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r0, _080CF118 @ =gTasks
@@ -2236,7 +2236,7 @@ _080CF0EE:
 	b _080CF526
 	.align 2, 0
 _080CF110: .4byte gUnknown_83FDF3C
-_080CF114: .4byte gUnknown_202298C
+_080CF114: .4byte gDisplayedStringBattle
 _080CF118: .4byte gTasks
 _080CF11C:
 	movs r0, 0
@@ -2251,7 +2251,7 @@ _080CF11C:
 	ldr r0, _080CF1A8 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x18]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CF1AC @ =gUnknown_202298C
+	ldr r0, _080CF1AC @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r0, _080CF1B0 @ =gTasks
@@ -2305,7 +2305,7 @@ _080CF176:
 	b _080CF528
 	.align 2, 0
 _080CF1A8: .4byte gUnknown_83FDF3C
-_080CF1AC: .4byte gUnknown_202298C
+_080CF1AC: .4byte gDisplayedStringBattle
 _080CF1B0: .4byte gTasks
 _080CF1B4: .4byte gUnknown_83FE791
 _080CF1B8: .4byte gUnknown_2023E82
@@ -2508,7 +2508,7 @@ _080CF34C:
 	adds r0, r3
 	ldr r0, [r0]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CF390 @ =gUnknown_202298C
+	ldr r0, _080CF390 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r1, _080CF394 @ =gTasks
@@ -2522,10 +2522,10 @@ _080CF34C:
 	.align 2, 0
 _080CF388: .4byte gUnknown_83FDF3C
 _080CF38C: .4byte 0x000004cc
-_080CF390: .4byte gUnknown_202298C
+_080CF390: .4byte gDisplayedStringBattle
 _080CF394: .4byte gTasks
 _080CF398:
-	ldr r1, _080CF3D4 @ =gUnknown_2022AC8
+	ldr r1, _080CF3D4 @ =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2554,7 +2554,7 @@ _080CF398:
 	adds r0, 0x1
 	b _080CF526
 	.align 2, 0
-_080CF3D4: .4byte gUnknown_2022AC8
+_080CF3D4: .4byte gBattleTextBuff2
 _080CF3D8: .4byte gMoveToLearn
 _080CF3DC: .4byte gTasks
 _080CF3E0:
@@ -2564,7 +2564,7 @@ _080CF3E0:
 	adds r0, r1
 	ldr r0, [r0]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CF40C @ =gUnknown_202298C
+	ldr r0, _080CF40C @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r0, _080CF410 @ =gTasks
@@ -2577,7 +2577,7 @@ _080CF3E0:
 	b _080CF526
 	.align 2, 0
 _080CF408: .4byte gUnknown_83FDF3C
-_080CF40C: .4byte gUnknown_202298C
+_080CF40C: .4byte gDisplayedStringBattle
 _080CF410: .4byte gTasks
 _080CF414:
 	movs r0, 0
@@ -2596,7 +2596,7 @@ _080CF42E:
 	ldr r0, _080CF450 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x1C]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CF454 @ =gUnknown_202298C
+	ldr r0, _080CF454 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r0, _080CF458 @ =gTasks
@@ -2609,7 +2609,7 @@ _080CF42E:
 	b _080CF526
 	.align 2, 0
 _080CF450: .4byte gUnknown_83FDF3C
-_080CF454: .4byte gUnknown_202298C
+_080CF454: .4byte gDisplayedStringBattle
 _080CF458: .4byte gTasks
 _080CF45C:
 	movs r0, 0
@@ -2627,7 +2627,7 @@ _080CF45C:
 	adds r0, r1
 	ldr r0, [r0]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CF49C @ =gUnknown_202298C
+	ldr r0, _080CF49C @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r1, _080CF4A0 @ =gTasks
@@ -2640,13 +2640,13 @@ _080CF45C:
 	b _080CF528
 	.align 2, 0
 _080CF498: .4byte gUnknown_83FDF3C
-_080CF49C: .4byte gUnknown_202298C
+_080CF49C: .4byte gDisplayedStringBattle
 _080CF4A0: .4byte gTasks
 _080CF4A4:
 	ldr r0, _080CF4CC @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x20]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CF4D0 @ =gUnknown_202298C
+	ldr r0, _080CF4D0 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r1, _080CF4D4 @ =gTasks
@@ -2663,13 +2663,13 @@ _080CF4A4:
 	b _080CF528
 	.align 2, 0
 _080CF4CC: .4byte gUnknown_83FDF3C
-_080CF4D0: .4byte gUnknown_202298C
+_080CF4D0: .4byte gDisplayedStringBattle
 _080CF4D4: .4byte gTasks
 _080CF4D8:
 	ldr r0, _080CF4F8 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x24]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080CF4FC @ =gUnknown_202298C
+	ldr r0, _080CF4FC @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 	ldr r1, _080CF500 @ =gTasks
@@ -2683,7 +2683,7 @@ _080CF4F2:
 	b _080CF528
 	.align 2, 0
 _080CF4F8: .4byte gUnknown_83FDF3C
-_080CF4FC: .4byte gUnknown_202298C
+_080CF4FC: .4byte gDisplayedStringBattle
 _080CF500: .4byte gTasks
 _080CF504:
 	movs r0, 0
@@ -3191,7 +3191,7 @@ _080CF940:
 	movs r1, 0x2
 	add r2, sp, 0xC
 	bl GetMonData
-	ldr r0, _080CF990 @ =gUnknown_2022AB8
+	ldr r0, _080CF990 @ =gBattleTextBuff1
 	add r1, sp, 0xC
 	bl StringCopy10
 	ldr r0, _080CF994 @ =0x0000ffff
@@ -3202,7 +3202,7 @@ _080CF940:
 	b _080D003A
 	.align 2, 0
 _080CF98C: .4byte gTasks
-_080CF990: .4byte gUnknown_2022AB8
+_080CF990: .4byte gBattleTextBuff1
 _080CF994: .4byte 0x0000ffff
 _080CF998:
 	ldr r0, _080CF9A8 @ =0x0000fffe
@@ -3373,7 +3373,7 @@ _080CFAF2:
 	ldr r0, _080CFB28 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0xC]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFB2C @ =gUnknown_202298C
+	ldr r1, _080CFB2C @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3391,7 +3391,7 @@ _080CFB1A:
 	.align 2, 0
 _080CFB24: .4byte 0x00000101
 _080CFB28: .4byte gUnknown_83FDF3C
-_080CFB2C: .4byte gUnknown_202298C
+_080CFB2C: .4byte gDisplayedStringBattle
 _080CFB30: .4byte gTasks
 _080CFB34:
 	movs r0, 0
@@ -3474,7 +3474,7 @@ _080CFBDA:
 	ldr r0, _080CFC00 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x10]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFC04 @ =gUnknown_202298C
+	ldr r1, _080CFC04 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3487,7 +3487,7 @@ _080CFBDA:
 	b _080D0038
 	.align 2, 0
 _080CFC00: .4byte gUnknown_83FDF3C
-_080CFC04: .4byte gUnknown_202298C
+_080CFC04: .4byte gDisplayedStringBattle
 _080CFC08: .4byte gTasks
 _080CFC0C:
 	movs r0, 0
@@ -3506,7 +3506,7 @@ _080CFC26:
 	ldr r0, _080CFC48 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x14]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFC4C @ =gUnknown_202298C
+	ldr r1, _080CFC4C @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3519,7 +3519,7 @@ _080CFC26:
 	b _080D0038
 	.align 2, 0
 _080CFC48: .4byte gUnknown_83FDF3C
-_080CFC4C: .4byte gUnknown_202298C
+_080CFC4C: .4byte gDisplayedStringBattle
 _080CFC50: .4byte gTasks
 _080CFC54:
 	movs r0, 0
@@ -3534,7 +3534,7 @@ _080CFC54:
 	ldr r0, _080CFCE8 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x18]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFCEC @ =gUnknown_202298C
+	ldr r1, _080CFCEC @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3592,7 +3592,7 @@ _080CFCAE:
 	b _080D003A
 	.align 2, 0
 _080CFCE8: .4byte gUnknown_83FDF3C
-_080CFCEC: .4byte gUnknown_202298C
+_080CFCEC: .4byte gDisplayedStringBattle
 _080CFCF0: .4byte gTasks
 _080CFCF4: .4byte gUnknown_826D1CC
 _080CFCF8: .4byte gUnknown_2023E82
@@ -3622,7 +3622,7 @@ _080CFD1C:
 	adds r0, r3
 	ldr r0, [r0]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFD68 @ =gUnknown_202298C
+	ldr r1, _080CFD68 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3650,7 +3650,7 @@ _080CFD56:
 	.align 2, 0
 _080CFD60: .4byte gUnknown_2023E82
 _080CFD64: .4byte gUnknown_83FDF3C
-_080CFD68: .4byte gUnknown_202298C
+_080CFD68: .4byte gDisplayedStringBattle
 _080CFD6C: .4byte gTasks
 _080CFD70:
 	ldr r1, _080CFD9C @ =gUnknown_2023E82
@@ -3662,7 +3662,7 @@ _080CFD70:
 	adds r0, r1
 	ldr r0, [r0]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFDA4 @ =gUnknown_202298C
+	ldr r1, _080CFDA4 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3676,7 +3676,7 @@ _080CFD70:
 	.align 2, 0
 _080CFD9C: .4byte gUnknown_2023E82
 _080CFDA0: .4byte gUnknown_83FDF3C
-_080CFDA4: .4byte gUnknown_202298C
+_080CFDA4: .4byte gDisplayedStringBattle
 _080CFDA8: .4byte gTasks
 _080CFDAC:
 	ldr r0, _080CFE14 @ =gUnknown_2037AB8
@@ -3779,7 +3779,7 @@ _080CFE74:
 	adds r0, r3
 	ldr r0, [r0]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFEB8 @ =gUnknown_202298C
+	ldr r1, _080CFEB8 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3793,10 +3793,10 @@ _080CFE74:
 	.align 2, 0
 _080CFEB0: .4byte gUnknown_83FDF3C
 _080CFEB4: .4byte 0x000004cc
-_080CFEB8: .4byte gUnknown_202298C
+_080CFEB8: .4byte gDisplayedStringBattle
 _080CFEBC: .4byte gTasks
 _080CFEC0:
-	ldr r1, _080CFF14 @ =gUnknown_2022AC8
+	ldr r1, _080CFF14 @ =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -3822,7 +3822,7 @@ _080CFEC0:
 	adds r0, r1
 	ldr r0, [r0]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFF20 @ =gUnknown_202298C
+	ldr r1, _080CFF20 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3834,10 +3834,10 @@ _080CFEC0:
 	adds r0, 0x1
 	b _080D0038
 	.align 2, 0
-_080CFF14: .4byte gUnknown_2022AC8
+_080CFF14: .4byte gBattleTextBuff2
 _080CFF18: .4byte gMoveToLearn
 _080CFF1C: .4byte gUnknown_83FDF3C
-_080CFF20: .4byte gUnknown_202298C
+_080CFF20: .4byte gDisplayedStringBattle
 _080CFF24: .4byte gTasks
 _080CFF28:
 	movs r0, 0
@@ -3856,7 +3856,7 @@ _080CFF42:
 	ldr r0, _080CFF64 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x1C]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFF68 @ =gUnknown_202298C
+	ldr r1, _080CFF68 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3869,7 +3869,7 @@ _080CFF42:
 	b _080D0038
 	.align 2, 0
 _080CFF64: .4byte gUnknown_83FDF3C
-_080CFF68: .4byte gUnknown_202298C
+_080CFF68: .4byte gDisplayedStringBattle
 _080CFF6C: .4byte gTasks
 _080CFF70:
 	movs r0, 0
@@ -3887,7 +3887,7 @@ _080CFF70:
 	adds r0, r3
 	ldr r0, [r0]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFFB0 @ =gUnknown_202298C
+	ldr r1, _080CFFB0 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3900,13 +3900,13 @@ _080CFF70:
 	b _080D003A
 	.align 2, 0
 _080CFFAC: .4byte gUnknown_83FDF3C
-_080CFFB0: .4byte gUnknown_202298C
+_080CFFB0: .4byte gDisplayedStringBattle
 _080CFFB4: .4byte gTasks
 _080CFFB8:
 	ldr r0, _080CFFE0 @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x20]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080CFFE4 @ =gUnknown_202298C
+	ldr r1, _080CFFE4 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3923,13 +3923,13 @@ _080CFFB8:
 	b _080D003A
 	.align 2, 0
 _080CFFE0: .4byte gUnknown_83FDF3C
-_080CFFE4: .4byte gUnknown_202298C
+_080CFFE4: .4byte gDisplayedStringBattle
 _080CFFE8: .4byte gTasks
 _080CFFEC:
 	ldr r0, _080D000C @ =gUnknown_83FDF3C
 	ldr r0, [r0, 0x24]
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r1, _080D0010 @ =gUnknown_202298C
+	ldr r1, _080D0010 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_8054508
@@ -3943,7 +3943,7 @@ _080D0006:
 	b _080D003A
 	.align 2, 0
 _080D000C: .4byte gUnknown_83FDF3C
-_080D0010: .4byte gUnknown_202298C
+_080D0010: .4byte gDisplayedStringBattle
 _080D0014: .4byte gTasks
 _080D0018:
 	movs r0, 0

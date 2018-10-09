@@ -5072,7 +5072,7 @@ sub_8158A88: @ 8158A88
 	lsls r0, 24
 	cmp r0, 0
 	beq _08158AD0
-	ldr r0, _08158ACC @ =gUnknown_202298C
+	ldr r0, _08158ACC @ =gDisplayedStringBattle
 	movs r1, 0x40
 	bl sub_80D87BC
 	b _08158AD8
@@ -5081,9 +5081,9 @@ _08158ABC: .4byte gUnknown_2022974
 _08158AC0: .4byte gUnknown_2022976
 _08158AC4: .4byte gActiveBattler
 _08158AC8: .4byte gUnknown_2022BC6
-_08158ACC: .4byte gUnknown_202298C
+_08158ACC: .4byte gDisplayedStringBattle
 _08158AD0:
-	ldr r0, _08158AEC @ =gUnknown_202298C
+	ldr r0, _08158AEC @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 _08158AD8:
@@ -5098,7 +5098,7 @@ _08158AD8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08158AEC: .4byte gUnknown_202298C
+_08158AEC: .4byte gDisplayedStringBattle
 _08158AF0: .4byte gUnknown_3004FE0
 _08158AF4: .4byte gActiveBattler
 _08158AF8: .4byte sub_815623C
@@ -5193,7 +5193,7 @@ _08158B8E:
 	bl ActionSelectionCreateCursorAt
 	ldr r0, _08158BD4 @ =gUnknown_83FE6D5
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _08158BD8 @ =gUnknown_202298C
+	ldr r0, _08158BD8 @ =gDisplayedStringBattle
 	movs r1, 0x1
 	bl sub_80D87BC
 	b _08158BE8
@@ -5205,7 +5205,7 @@ _08158BC8: .4byte gUnknown_83FDA4C
 _08158BCC: .4byte gUnknown_83FE725
 _08158BD0: .4byte gUnknown_2023FF8
 _08158BD4: .4byte gUnknown_83FE6D5
-_08158BD8: .4byte gUnknown_202298C
+_08158BD8: .4byte gDisplayedStringBattle
 _08158BDC:
 	ldr r0, _08158BF0 @ =gUnknown_3004FE0
 	ldrb r1, [r4]
@@ -7267,13 +7267,13 @@ _08159C44:
 	strh r0, [r1]
 	bl sub_8159EF0
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _08159C60 @ =gUnknown_202298C
+	ldr r0, _08159C60 @ =gDisplayedStringBattle
 	movs r1, 0x18
 	bl sub_80D87BC
 	b _08159C94
 	.align 2, 0
 _08159C5C: .4byte gUnknown_2022976
-_08159C60: .4byte gUnknown_202298C
+_08159C60: .4byte gDisplayedStringBattle
 _08159C64:
 	movs r0, 0x18
 	bl IsTextPrinterActive
@@ -7468,12 +7468,12 @@ _08159DF0: .4byte gUnknown_2037AB8
 _08159DF4:
 	bl sub_8159EF0
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _08159E08 @ =gUnknown_202298C
+	ldr r0, _08159E08 @ =gDisplayedStringBattle
 	movs r1, 0x18
 	bl sub_80D87BC
 	b _08159E84
 	.align 2, 0
-_08159E08: .4byte gUnknown_202298C
+_08159E08: .4byte gDisplayedStringBattle
 _08159E0C:
 	movs r0, 0x18
 	bl IsTextPrinterActive

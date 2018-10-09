@@ -4557,7 +4557,7 @@ sub_8030830: @ 8030830
 	movs r0, 0
 	strb r0, [r2]
 	movs r5, 0
-	ldr r6, _0803089C @ =gUnknown_202298C
+	ldr r6, _0803089C @ =gDisplayedStringBattle
 	adds r4, r1, r3
 	adds r7, r2, 0
 _08030848:
@@ -4597,7 +4597,7 @@ _08030880:
 _08030890: .4byte gActiveBattler
 _08030894: .4byte gUnknown_2022BC8
 _08030898: .4byte gUnknown_3004FF8
-_0803089C: .4byte gUnknown_202298C
+_0803089C: .4byte gDisplayedStringBattle
 _080308A0: .4byte gUnknown_83FE770
 _080308A4: .4byte gUnknown_8247094
 	thumb_func_end sub_8030830
@@ -4605,7 +4605,7 @@ _080308A4: .4byte gUnknown_8247094
 	thumb_func_start MoveSelectionDisplayPpString
 MoveSelectionDisplayPpString: @ 80308A8
 	push {r4,lr}
-	ldr r4, _080308C4 @ =gUnknown_202298C
+	ldr r4, _080308C4 @ =gDisplayedStringBattle
 	ldr r1, _080308C8 @ =gUnknown_83FE766
 	adds r0, r4, 0
 	bl StringCopy
@@ -4616,7 +4616,7 @@ MoveSelectionDisplayPpString: @ 80308A8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080308C4: .4byte gUnknown_202298C
+_080308C4: .4byte gDisplayedStringBattle
 _080308C8: .4byte gUnknown_83FE766
 	thumb_func_end MoveSelectionDisplayPpString
 
@@ -4637,7 +4637,7 @@ MoveSelectionDisplayPpNumber: @ 80308CC
 	lsls r4, r1, 9
 	adds r0, r5, 0x4
 	adds r4, r0
-	ldr r6, _08030938 @ =gUnknown_202298C
+	ldr r6, _08030938 @ =gDisplayedStringBattle
 	ldr r5, _0803093C @ =gUnknown_2023FFC
 	adds r1, r5
 	adds r0, r4, 0
@@ -4671,7 +4671,7 @@ _08030928:
 	.align 2, 0
 _08030930: .4byte gUnknown_2022BC4
 _08030934: .4byte gActiveBattler
-_08030938: .4byte gUnknown_202298C
+_08030938: .4byte gDisplayedStringBattle
 _0803093C: .4byte gUnknown_2023FFC
 	thumb_func_end MoveSelectionDisplayPpNumber
 
@@ -4683,7 +4683,7 @@ MoveSelectionDisplayMoveType: @ 8030940
 	lsls r4, 9
 	ldr r0, _080309B0 @ =gUnknown_2022BC8
 	adds r4, r0
-	ldr r6, _080309B4 @ =gUnknown_202298C
+	ldr r6, _080309B4 @ =gDisplayedStringBattle
 	ldr r1, _080309B8 @ =gUnknown_83FE76A
 	adds r0, r6, 0
 	bl StringCopy
@@ -4729,7 +4729,7 @@ MoveSelectionDisplayMoveType: @ 8030940
 	.align 2, 0
 _080309AC: .4byte gActiveBattler
 _080309B0: .4byte gUnknown_2022BC8
-_080309B4: .4byte gUnknown_202298C
+_080309B4: .4byte gDisplayedStringBattle
 _080309B8: .4byte gUnknown_83FE76A
 _080309BC: .4byte gUnknown_83FE770
 _080309C0: .4byte gBattleMoves
@@ -8764,7 +8764,7 @@ sub_8032AFC: @ 8032AFC
 	lsls r0, 24
 	cmp r0, 0
 	beq _08032B44
-	ldr r0, _08032B40 @ =gUnknown_202298C
+	ldr r0, _08032B40 @ =gDisplayedStringBattle
 	movs r1, 0x40
 	bl sub_80D87BC
 	b _08032B4C
@@ -8773,9 +8773,9 @@ _08032B30: .4byte gUnknown_2022974
 _08032B34: .4byte gUnknown_2022976
 _08032B38: .4byte gActiveBattler
 _08032B3C: .4byte gUnknown_2022BC6
-_08032B40: .4byte gUnknown_202298C
+_08032B40: .4byte gDisplayedStringBattle
 _08032B44:
-	ldr r0, _08032B60 @ =gUnknown_202298C
+	ldr r0, _08032B60 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 _08032B4C:
@@ -8790,7 +8790,7 @@ _08032B4C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08032B60: .4byte gUnknown_202298C
+_08032B60: .4byte gDisplayedStringBattle
 _08032B64: .4byte gUnknown_3004FE0
 _08032B68: .4byte gActiveBattler
 _08032B6C: .4byte sub_8030610
@@ -8880,7 +8880,7 @@ _08032BF6:
 	bl ActionSelectionCreateCursorAt
 	ldr r0, _08032C40 @ =gUnknown_83FE6D5
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _08032C44 @ =gUnknown_202298C
+	ldr r0, _08032C44 @ =gDisplayedStringBattle
 	movs r1, 0x1
 	bl sub_80D87BC
 	pop {r4}
@@ -8894,7 +8894,7 @@ _08032C34: .4byte gUnknown_83FDA4C
 _08032C38: .4byte gUnknown_83FE725
 _08032C3C: .4byte gUnknown_2023FF8
 _08032C40: .4byte gUnknown_83FE6D5
-_08032C44: .4byte gUnknown_202298C
+_08032C44: .4byte gDisplayedStringBattle
 	thumb_func_end sub_8032BD4
 
 	thumb_func_start nullsub_14

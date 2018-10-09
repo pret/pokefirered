@@ -866,7 +866,7 @@ sub_80DDBA0: @ 80DDBA0
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DDBE8
-	ldr r0, _080DDBE4 @ =gUnknown_202298C
+	ldr r0, _080DDBE4 @ =gDisplayedStringBattle
 	movs r1, 0x40
 	bl sub_80D87BC
 	b _080DDBF0
@@ -875,9 +875,9 @@ _080DDBD4: .4byte gUnknown_2022974
 _080DDBD8: .4byte gUnknown_2022976
 _080DDBDC: .4byte gActiveBattler
 _080DDBE0: .4byte gUnknown_2022BC6
-_080DDBE4: .4byte gUnknown_202298C
+_080DDBE4: .4byte gDisplayedStringBattle
 _080DDBE8:
-	ldr r0, _080DDC04 @ =gUnknown_202298C
+	ldr r0, _080DDC04 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 _080DDBF0:
@@ -892,7 +892,7 @@ _080DDBF0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DDC04: .4byte gUnknown_202298C
+_080DDC04: .4byte gDisplayedStringBattle
 _080DDC08: .4byte gUnknown_3004FE0
 _080DDC0C: .4byte gActiveBattler
 _080DDC10: .4byte CompleteOnInactiveTextPrinter_3
@@ -982,7 +982,7 @@ _080DDC9A:
 	bl ActionSelectionCreateCursorAt
 	ldr r0, _080DDCE4 @ =gUnknown_83FE6E6
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080DDCE8 @ =gUnknown_202298C
+	ldr r0, _080DDCE8 @ =gDisplayedStringBattle
 	movs r1, 0x1
 	bl sub_80D87BC
 	pop {r4}
@@ -996,7 +996,7 @@ _080DDCD8: .4byte gUnknown_83FDA4C
 _080DDCDC: .4byte gUnknown_83FE747
 _080DDCE0: .4byte gUnknown_2023FF8
 _080DDCE4: .4byte gUnknown_83FE6E6
-_080DDCE8: .4byte gUnknown_202298C
+_080DDCE8: .4byte gDisplayedStringBattle
 	thumb_func_end sub_80DDC78
 
 	thumb_func_start sub_80DDCEC

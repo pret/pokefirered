@@ -5130,7 +5130,7 @@ sub_80384BC: @ 80384BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _08038504
-	ldr r0, _08038500 @ =gUnknown_202298C
+	ldr r0, _08038500 @ =gDisplayedStringBattle
 	movs r1, 0x40
 	bl sub_80D87BC
 	b _0803850C
@@ -5139,9 +5139,9 @@ _080384F0: .4byte gUnknown_2022974
 _080384F4: .4byte gUnknown_2022976
 _080384F8: .4byte gActiveBattler
 _080384FC: .4byte gUnknown_2022BC6
-_08038500: .4byte gUnknown_202298C
+_08038500: .4byte gDisplayedStringBattle
 _08038504:
-	ldr r0, _08038534 @ =gUnknown_202298C
+	ldr r0, _08038534 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 _0803850C:
@@ -5165,7 +5165,7 @@ _0803850C:
 	ldr r1, _08038548 @ =sub_80E85C0
 	b _08038574
 	.align 2, 0
-_08038534: .4byte gUnknown_202298C
+_08038534: .4byte gDisplayedStringBattle
 _08038538: .4byte gBattleTypeFlags
 _0803853C: .4byte 0x0000017f
 _08038540: .4byte gUnknown_3004FE0

@@ -4969,7 +4969,7 @@ sub_803CF50: @ 803CF50
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803CF98
-	ldr r0, _0803CF94 @ =gUnknown_202298C
+	ldr r0, _0803CF94 @ =gDisplayedStringBattle
 	movs r1, 0x40
 	bl sub_80D87BC
 	b _0803CFA0
@@ -4978,9 +4978,9 @@ _0803CF84: .4byte gUnknown_2022974
 _0803CF88: .4byte gUnknown_2022976
 _0803CF8C: .4byte gActiveBattler
 _0803CF90: .4byte gUnknown_2022BC6
-_0803CF94: .4byte gUnknown_202298C
+_0803CF94: .4byte gDisplayedStringBattle
 _0803CF98:
-	ldr r0, _0803CFB4 @ =gUnknown_202298C
+	ldr r0, _0803CFB4 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 _0803CFA0:
@@ -4995,7 +4995,7 @@ _0803CFA0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803CFB4: .4byte gUnknown_202298C
+_0803CFB4: .4byte gDisplayedStringBattle
 _0803CFB8: .4byte gUnknown_3004FE0
 _0803CFBC: .4byte gActiveBattler
 _0803CFC0: .4byte CompleteOnInactiveTextPrinter_5

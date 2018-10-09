@@ -4590,7 +4590,7 @@ sub_80D67CC: @ 80D67CC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D6814
-	ldr r0, _080D6810 @ =gUnknown_202298C
+	ldr r0, _080D6810 @ =gDisplayedStringBattle
 	movs r1, 0x40
 	bl sub_80D87BC
 	b _080D681C
@@ -4599,9 +4599,9 @@ _080D6800: .4byte gUnknown_2022974
 _080D6804: .4byte gUnknown_2022976
 _080D6808: .4byte gActiveBattler
 _080D680C: .4byte gUnknown_2022BC6
-_080D6810: .4byte gUnknown_202298C
+_080D6810: .4byte gDisplayedStringBattle
 _080D6814:
-	ldr r0, _080D6830 @ =gUnknown_202298C
+	ldr r0, _080D6830 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 _080D681C:
@@ -4616,7 +4616,7 @@ _080D681C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D6830: .4byte gUnknown_202298C
+_080D6830: .4byte gDisplayedStringBattle
 _080D6834: .4byte gUnknown_3004FE0
 _080D6838: .4byte gActiveBattler
 _080D683C: .4byte sub_80D4718

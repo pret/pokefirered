@@ -1780,13 +1780,13 @@ _080E8404: .4byte gUnknown_2037AB8
 _080E8408:
 	ldr r0, _080E8418 @ =gUnknown_83FDAE2
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080E841C @ =gUnknown_202298C
+	ldr r0, _080E841C @ =gDisplayedStringBattle
 	movs r1, 0x18
 	bl sub_80D87BC
 	b _080E851E
 	.align 2, 0
 _080E8418: .4byte gUnknown_83FDAE2
-_080E841C: .4byte gUnknown_202298C
+_080E841C: .4byte gDisplayedStringBattle
 _080E8420:
 	movs r0, 0x18
 	bl IsTextPrinterActive
@@ -1831,14 +1831,14 @@ _080E8468:
 	bne _080E855E
 	ldr r0, _080E8488 @ =gUnknown_83FDB92
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080E848C @ =gUnknown_202298C
+	ldr r0, _080E848C @ =gDisplayedStringBattle
 	movs r1, 0x18
 	bl sub_80D87BC
 	b _080E851E
 	.align 2, 0
 _080E8484: .4byte gUnknown_2037AB8
 _080E8488: .4byte gUnknown_83FDB92
-_080E848C: .4byte gUnknown_202298C
+_080E848C: .4byte gDisplayedStringBattle
 _080E8490:
 	movs r0, 0x18
 	bl IsTextPrinterActive
@@ -1881,14 +1881,14 @@ _080E84D8:
 	bne _080E855E
 	ldr r0, _080E84F8 @ =gUnknown_83FDBEF
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080E84FC @ =gUnknown_202298C
+	ldr r0, _080E84FC @ =gDisplayedStringBattle
 	movs r1, 0x18
 	bl sub_80D87BC
 	b _080E851E
 	.align 2, 0
 _080E84F4: .4byte gUnknown_2037AB8
 _080E84F8: .4byte gUnknown_83FDBEF
-_080E84FC: .4byte gUnknown_202298C
+_080E84FC: .4byte gDisplayedStringBattle
 _080E8500:
 	movs r0, 0x18
 	bl IsTextPrinterActive
@@ -2083,12 +2083,12 @@ _080E866C: .4byte gUnknown_2037AB8
 _080E8670:
 	adds r0, r2, 0
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080E8680 @ =gUnknown_202298C
+	ldr r0, _080E8680 @ =gDisplayedStringBattle
 	movs r1, 0x18
 	bl sub_80D87BC
 	b _080E86A2
 	.align 2, 0
-_080E8680: .4byte gUnknown_202298C
+_080E8680: .4byte gDisplayedStringBattle
 _080E8684:
 	movs r0, 0x18
 	bl IsTextPrinterActive
@@ -2263,13 +2263,13 @@ _080E87E4: .4byte gUnknown_2037AB8
 _080E87E8:
 	ldr r0, _080E87F8 @ =gUnknown_83FDCD2
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080E87FC @ =gUnknown_202298C
+	ldr r0, _080E87FC @ =gDisplayedStringBattle
 	movs r1, 0x18
 	bl sub_80D87BC
 	b _080E8868
 	.align 2, 0
 _080E87F8: .4byte gUnknown_83FDCD2
-_080E87FC: .4byte gUnknown_202298C
+_080E87FC: .4byte gDisplayedStringBattle
 _080E8800:
 	movs r0, 0x18
 	bl IsTextPrinterActive
@@ -5812,14 +5812,14 @@ _080EA570:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080EA590
-	ldr r0, _080EA58C @ =gUnknown_202298C
+	ldr r0, _080EA58C @ =gDisplayedStringBattle
 	movs r1, 0x40
 	bl sub_80D87BC
 	b _080EA598
 	.align 2, 0
-_080EA58C: .4byte gUnknown_202298C
+_080EA58C: .4byte gDisplayedStringBattle
 _080EA590:
-	ldr r0, _080EA5B4 @ =gUnknown_202298C
+	ldr r0, _080EA5B4 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 _080EA598:
@@ -5838,7 +5838,7 @@ _080EA598:
 	beq _080EA5F8
 	b _080EA64C
 	.align 2, 0
-_080EA5B4: .4byte gUnknown_202298C
+_080EA5B4: .4byte gDisplayedStringBattle
 _080EA5B8: .4byte gBattleTypeFlags
 _080EA5BC:
 	cmp r1, 0xE3
@@ -6047,7 +6047,7 @@ _080EA770:
 	ldr r0, _080EA784 @ =gUnknown_83FE6FA
 	bl BattleStringExpandPlaceholdersToDisplayedString
 _080EA776:
-	ldr r0, _080EA788 @ =gUnknown_202298C
+	ldr r0, _080EA788 @ =gDisplayedStringBattle
 	movs r1, 0x1
 	bl sub_80D87BC
 	pop {r4}
@@ -6055,7 +6055,7 @@ _080EA776:
 	bx r0
 	.align 2, 0
 _080EA784: .4byte gUnknown_83FE6FA
-_080EA788: .4byte gUnknown_202298C
+_080EA788: .4byte gDisplayedStringBattle
 	thumb_func_end sub_80EA6FC
 
 	thumb_func_start sub_80EA78C

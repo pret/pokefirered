@@ -152,13 +152,13 @@ gUnknown_2022988: @ 2022988
 gUnknown_202298A: @ 202298A
 	.space 0x2
 
-gUnknown_202298C: @ 202298C
+gDisplayedStringBattle: @ 202298C
 	.space 0x12C
 
-gUnknown_2022AB8: @ 2022AB8
+gBattleTextBuff1: @ 2022AB8
 	.space 0x10
 
-gUnknown_2022AC8: @ 2022AC8
+gBattleTextBuff2: @ 2022AC8
 	.space 0x10
 
 gUnknown_2022AD8: @ 2022AD8

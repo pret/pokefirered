@@ -53,7 +53,7 @@ sub_80D7274: @ 80D7274
 	movs r2, 0
 	mov r12, r8
 	mov r10, r5
-	ldr r1, _080D7350 @ =gUnknown_2022AB8
+	ldr r1, _080D7350 @ =gBattleTextBuff1
 	mov r9, r1
 	ldr r3, _080D7354 @ =gUnknown_2039A30
 _080D72D6:
@@ -67,10 +67,10 @@ _080D72D6:
 	cmp r2, 0x3
 	ble _080D72D6
 	movs r2, 0
-	ldr r0, _080D7350 @ =gUnknown_2022AB8
+	ldr r0, _080D7350 @ =gBattleTextBuff1
 	mov r8, r0
 	ldr r3, _080D7330 @ =gUnknown_2039A34
-	ldr r5, _080D7358 @ =gUnknown_2022AC8
+	ldr r5, _080D7358 @ =gBattleTextBuff2
 	ldr r4, _080D735C @ =gUnknown_2022AD8
 _080D72F4:
 	mov r0, r8
@@ -113,9 +113,9 @@ _080D7340: .4byte gLastUsedAbility
 _080D7344: .4byte gBattleScripting
 _080D7348: .4byte gBattleStruct
 _080D734C: .4byte gPotentialItemEffectBattler
-_080D7350: .4byte gUnknown_2022AB8
+_080D7350: .4byte gBattleTextBuff1
 _080D7354: .4byte gUnknown_2039A30
-_080D7358: .4byte gUnknown_2022AC8
+_080D7358: .4byte gBattleTextBuff2
 _080D735C: .4byte gUnknown_2022AD8
 _080D7360: .4byte _080D7364
 	.align 2, 0
@@ -452,7 +452,7 @@ _080D75F0:
 	lsls r0, 1
 	cmp r1, r0
 	bls _080D762C
-	ldr r0, _080D7620 @ =gUnknown_2022AC8
+	ldr r0, _080D7620 @ =gBattleTextBuff2
 	ldr r2, _080D7624 @ =gUnknown_83FEA28
 	ldr r1, _080D7628 @ =gBattleStruct
 	ldr r1, [r1]
@@ -465,11 +465,11 @@ _080D75F0:
 	b _080D763C
 	.align 2, 0
 _080D761C: .4byte gUnknown_2039A34
-_080D7620: .4byte gUnknown_2022AC8
+_080D7620: .4byte gBattleTextBuff2
 _080D7624: .4byte gUnknown_83FEA28
 _080D7628: .4byte gBattleStruct
 _080D762C:
-	ldr r0, _080D7648 @ =gUnknown_2022AC8
+	ldr r0, _080D7648 @ =gBattleTextBuff2
 	ldrh r2, [r2]
 	movs r1, 0xD
 	muls r1, r2
@@ -477,16 +477,16 @@ _080D762C:
 	adds r1, r2
 	bl StringCopy
 _080D763C:
-	ldr r0, _080D7648 @ =gUnknown_2022AC8
+	ldr r0, _080D7648 @ =gBattleTextBuff2
 	bl sub_80D8720
 	ldr r7, _080D7650 @ =gUnknown_83FD57B
 	b _080D77DC
 	.align 2, 0
-_080D7648: .4byte gUnknown_2022AC8
+_080D7648: .4byte gBattleTextBuff2
 _080D764C: .4byte gUnknown_8247094
 _080D7650: .4byte gUnknown_83FD57B
 _080D7654:
-	ldr r4, _080D7694 @ =gUnknown_2022AB8
+	ldr r4, _080D7694 @ =gBattleTextBuff1
 	ldrb r1, [r4]
 	movs r0, 0x80
 	ands r0, r1
@@ -509,7 +509,7 @@ _080D7654:
 	eors r0, r1
 	strb r0, [r4]
 _080D7682:
-	ldr r0, _080D7694 @ =gUnknown_2022AB8
+	ldr r0, _080D7694 @ =gBattleTextBuff1
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -519,7 +519,7 @@ _080D7682:
 	ldr r7, _080D7698 @ =gUnknown_83FCC8A
 	b _080D77DC
 	.align 2, 0
-_080D7694: .4byte gUnknown_2022AB8
+_080D7694: .4byte gBattleTextBuff1
 _080D7698: .4byte gUnknown_83FCC8A
 _080D769C:
 	ldr r0, _080D76AC @ =gBattleTypeFlags
@@ -570,7 +570,7 @@ _080D76F0:
 	ands r0, r1
 	cmp r0, 0
 	beq _080D7738
-	ldr r0, _080D7714 @ =gUnknown_2022AB8
+	ldr r0, _080D7714 @ =gBattleTextBuff1
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _080D7728
@@ -581,7 +581,7 @@ _080D76F0:
 	b _080D77DC
 	.align 2, 0
 _080D7710: .4byte gBattleTypeFlags
-_080D7714: .4byte gUnknown_2022AB8
+_080D7714: .4byte gBattleTextBuff1
 _080D7718:
 	cmp r0, 0x3
 	beq _080D7730
@@ -608,7 +608,7 @@ _080D7738:
 	lsls r0, 4
 	cmp r1, r0
 	bne _080D7780
-	ldr r0, _080D775C @ =gUnknown_2022AB8
+	ldr r0, _080D775C @ =gBattleTextBuff1
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _080D7770
@@ -619,7 +619,7 @@ _080D7738:
 	b _080D77DC
 	.align 2, 0
 _080D7758: .4byte gTrainerBattleOpponent_A
-_080D775C: .4byte gUnknown_2022AB8
+_080D775C: .4byte gBattleTextBuff1
 _080D7760:
 	cmp r0, 0x3
 	beq _080D7778
@@ -640,7 +640,7 @@ _080D7778:
 	.align 2, 0
 _080D777C: .4byte gUnknown_83FE9FF
 _080D7780:
-	ldr r0, _080D7794 @ =gUnknown_2022AB8
+	ldr r0, _080D7794 @ =gBattleTextBuff1
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _080D77A8
@@ -650,7 +650,7 @@ _080D7780:
 	beq _080D779E
 	b _080D77DC
 	.align 2, 0
-_080D7794: .4byte gUnknown_2022AB8
+_080D7794: .4byte gBattleTextBuff1
 _080D7798:
 	cmp r0, 0x3
 	beq _080D77B0
@@ -674,13 +674,13 @@ _080D77B8:
 	ldr r0, _080D77C8 @ =0x00000181
 	cmp r6, r0
 	bls _080D77D0
-	ldr r1, _080D77CC @ =gUnknown_202298C
+	ldr r1, _080D77CC @ =gDisplayedStringBattle
 	movs r0, 0xFF
 	strb r0, [r1]
 	b _080D77E2
 	.align 2, 0
 _080D77C8: .4byte 0x00000181
-_080D77CC: .4byte gUnknown_202298C
+_080D77CC: .4byte gDisplayedStringBattle
 _080D77D0:
 	ldr r1, _080D77F0 @ =gUnknown_83FDF3C
 	adds r0, r6, 0
@@ -706,12 +706,12 @@ _080D77F0: .4byte gUnknown_83FDF3C
 	thumb_func_start BattleStringExpandPlaceholdersToDisplayedString
 BattleStringExpandPlaceholdersToDisplayedString: @ 80D77F4
 	push {lr}
-	ldr r1, _080D7800 @ =gUnknown_202298C
+	ldr r1, _080D7800 @ =gDisplayedStringBattle
 	bl sub_80D7868
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D7800: .4byte gUnknown_202298C
+_080D7800: .4byte gDisplayedStringBattle
 	thumb_func_end BattleStringExpandPlaceholdersToDisplayedString
 
 	thumb_func_start TryGetStatusString
@@ -859,7 +859,7 @@ _080D78B0:
 	.4byte _080D8250
 	.4byte _080D79B8
 _080D7974:
-	ldr r5, _080D7984 @ =gUnknown_2022AB8
+	ldr r5, _080D7984 @ =gBattleTextBuff1
 	ldrb r0, [r5]
 	cmp r0, 0xFD
 	bne _080D798C
@@ -867,7 +867,7 @@ _080D7974:
 	adds r0, r5, 0
 	b _080D79C4
 	.align 2, 0
-_080D7984: .4byte gUnknown_2022AB8
+_080D7984: .4byte gBattleTextBuff1
 _080D7988: .4byte gStringVar1
 _080D798C:
 	adds r0, r5, 0
@@ -880,14 +880,14 @@ _080D799C:
 	adds r4, r5, 0
 	bl _080D8382
 _080D79A2:
-	ldr r1, _080D79B0 @ =gUnknown_2022AC8
+	ldr r1, _080D79B0 @ =gBattleTextBuff2
 	ldrb r0, [r1]
 	cmp r0, 0xFD
 	bne _080D79D8
 	ldr r4, _080D79B4 @ =gStringVar2
 	b _080D79C2
 	.align 2, 0
-_080D79B0: .4byte gUnknown_2022AC8
+_080D79B0: .4byte gBattleTextBuff2
 _080D79B4: .4byte gStringVar2
 _080D79B8:
 	ldr r1, _080D79D0 @ =gUnknown_2022AD8

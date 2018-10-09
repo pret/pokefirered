@@ -766,7 +766,7 @@ sub_8045970: @ 8045970
 	lsrs r2, r0, 16
 	movs r0, 0
 	mov r8, r0
-	ldr r0, _0804599C @ =gUnknown_8259754
+	ldr r0, _0804599C @ =gEvolutionTable
 	mov r12, r0
 _08045982:
 	movs r7, 0
@@ -784,7 +784,7 @@ _08045990:
 	lsrs r2, r4, 16
 	b _080459CC
 	.align 2, 0
-_0804599C: .4byte gUnknown_8259754
+_0804599C: .4byte gEvolutionTable
 _080459A0:
 	adds r1, 0x1
 	cmp r1, 0x4

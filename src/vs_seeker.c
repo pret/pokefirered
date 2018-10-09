@@ -19,6 +19,7 @@
 #include "random.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
+#include "unk_810c3a4.h"
 #include "vs_seeker.h"
 
 // static types
@@ -45,20 +46,17 @@ u8 sub_810CD80(const struct UnkStruct_845318C *, u16);
 u8 sub_810CDB4(const struct UnkStruct_845318C *, u16);
 int sub_810CE10(const struct UnkStruct_845318C * a0, u16 a1);
 bool8 sub_810CED0(const struct UnkStruct_845318C *, u16);
-bool32 sub_810D0A8(u32);
-int sub_810D084(const struct UnkStruct_845318C *, u16);
-void sub_810D304(void);
-void sub_810C604(void);
-bool8 sub_810D0FC(struct VsSeekerSubstruct *);
+u8 sub_810CF54(struct MapObjectTemplate *);
+u8 sub_810CF90(u8);
 u16 sub_810D074(const u8 *);
+int sub_810D084(const struct UnkStruct_845318C *, u16);
+bool32 sub_810D0A8(u32);
+bool8 sub_810D0FC(struct VsSeekerSubstruct *);
+u8 sub_810D164(const struct UnkStruct_845318C *, u16, u8 *);
 u8 sub_810D1CC(void);
 void sub_810D24C(struct VsSeekerSubstruct *, const u8 *);
-u8 sub_810D164(const struct UnkStruct_845318C *, u16, u8 *);
 u8 sub_810D280(int, u16);
-u8 sub_810CF90(u8);
-void sub_810C640(void);
-u8 sub_810CF54(struct MapObjectTemplate *);
-void sub_805FE7C(struct MapObject *, u8);
+void sub_810D304(void);
 
 // rodata
 const struct UnkStruct_845318C gUnknown_845318C[] = {
@@ -1027,4 +1025,21 @@ u8 sub_810D164(const struct UnkStruct_845318C * a0, u16 a1, u8 * a2)
 
     *a2 = 0;
     return 0;
+}
+
+u8 sub_810D1CC(void)
+{
+    u8 sp0;
+    u8 r5;
+
+    for (r5 = 0; gUnknown_203ADB8->unk_000[r5].unk_6 != 0xFF; r5++)
+    {
+        if (sub_810D0FC(&gUnknown_203ADB8->unk_000[r5]) == 1)
+        {
+            if (HasTrainerAlreadyBeenFought(gUnknown_203ADB8->unk_000[r5].unk_4) != 1 || sub_810D164(gUnknown_845318C, gUnknown_203ADB8->unk_000[r5].unk_4, &sp0))
+                return gUnknown_203ADB8->unk_000[r5].unk_6;
+        }
+    }
+
+    return 0xFF;
 }

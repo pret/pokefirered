@@ -9,8 +9,8 @@ struct VsSeekerSubstruct
     u16 unk_4;
     u8 unk_6;
     u8 unk_7;
-    u16 unk_8;
-    u16 unk_a;
+    s16 unk_8;
+    s16 unk_a;
     u8 unk_c;
 };
 

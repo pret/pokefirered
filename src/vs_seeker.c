@@ -18,6 +18,7 @@
 #include "battle_setup.h"
 #include "random.h"
 #include "field_map_obj.h"
+#include "field_player_avatar.h"
 #include "vs_seeker.h"
 
 // static types
@@ -972,4 +973,30 @@ bool32 sub_810D0A8(u32 a0)
     if (!gSaveBlock1Ptr->trainerRematches[a0])
         return FALSE;
     return TRUE;
+}
+
+void sub_810D0D0(void)
+{
+    u8 i;
+
+    for (i = 0; i < 100; i++)
+        gSaveBlock1Ptr->trainerRematches[i] = 0;
+}
+
+bool8 sub_810D0FC(struct VsSeekerSubstruct * a0)
+{
+    s16 x;
+    s16 y;
+
+    PlayerGetDestCoords(&x, &y);
+    x -= 7;
+    y -= 7;
+
+    if (   x - 7 <= a0->unk_8
+        && x + 7 >= a0->unk_8
+        && y - 5 <= a0->unk_a
+        && y + 5 >= a0->unk_a
+        && sub_810CF04(a0->unk_7) == 1)
+        return TRUE;
+    return FALSE;
 }

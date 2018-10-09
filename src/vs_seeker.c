@@ -41,8 +41,10 @@ bool8 sub_810C96C(void);
 u8 sub_810C9A8(const struct UnkStruct_845318C *);
 u8 sub_810CD14(const u16 *, u8);
 u8 sub_810CD80(const struct UnkStruct_845318C *, u16);
-bool32 sub_810D0A8(u16);
 u8 sub_810CDB4(const struct UnkStruct_845318C *, u16);
+int sub_810CE10(const struct UnkStruct_845318C * a0, u16 a1);
+bool8 sub_810CED0(const struct UnkStruct_845318C *, u16);
+bool32 sub_810D0A8(u16);
 int sub_810D084(const struct UnkStruct_845318C *, u16);
 void sub_810D304(void);
 void sub_810C604(void);
@@ -50,12 +52,11 @@ bool8 sub_810D0FC(struct VsSeekerSubstruct *);
 u16 sub_810D074(const u8 *);
 u8 sub_810D1CC(void);
 void sub_810D24C(struct VsSeekerSubstruct *, const u8 *);
-int sub_810CE10(const struct UnkStruct_845318C *, u16);
 bool8 sub_810D164(const void *, u16, u8 *);
 u8 sub_810D280(int, u16);
 u8 sub_810CF90(u8);
 void sub_810C640(void);
-void sub_810CF54(struct MapObjectTemplate *);
+u8 sub_810CF54(struct MapObjectTemplate *);
 void sub_805FE7C(struct MapObject *, u8);
 
 // rodata
@@ -754,23 +755,23 @@ void sub_810CCA0(const u16 * a0, u8 * a1)
         case 0:
             break;
         case 1:
-            if (!FlagGet(0x292))
+            if (!FlagGet(FLAG_0x292))
                 *a1 = sub_810CD14(a0, *a1);
             break;
         case 2:
-            if (!FlagGet(0x896))
+            if (!FlagGet(FLAG_SYS_NATIONAL_DEX))
                 *a1 = sub_810CD14(a0, *a1);
             break;
         case 3:
-            if (!FlagGet(0x897))
+            if (!FlagGet(FLAG_SYS_CAVE_SHIP))
                 *a1 = sub_810CD14(a0, *a1);
             break;
         case 4:
-            if (!FlagGet(0x82c))
+            if (!FlagGet(FLAG_TRAINER_FLAG_START + 0x32c))
                 *a1 = sub_810CD14(a0, *a1);
             break;
         case 5:
-            if (!FlagGet(0x844))
+            if (!FlagGet(FLAG_TRAINER_FLAG_START + 0x344))
                 *a1 = sub_810CD14(a0, *a1);
             break;
     }
@@ -848,4 +849,61 @@ int sub_810CE10(const struct UnkStruct_845318C * a0, u16 a1)
     }
 
     return -1;
+}
+
+int sub_810CE64(u16 a0)
+{
+    u8 sp0;
+    u8 sp1;
+    sp1 = sub_810D164(gUnknown_845318C, a0, &sp0);
+    if (!sp1)
+        return 0;
+    sub_810CCA0(gUnknown_845318C[sp0].unk_0, &sp1);
+    return gUnknown_845318C[sp0].unk_0[sp1];
+}
+
+u8 sub_810CEB4(void)
+{
+    return sub_810CED0(gUnknown_845318C, gTrainerBattleOpponent_A);
+}
+
+bool8 sub_810CED0(const struct UnkStruct_845318C * a0, u16 a1)
+{
+    int r1 = sub_810CE10(a0, a1);
+
+    if (r1 == -1)
+        return FALSE;
+    if ((u32)r1 >= 0xdd)
+        return FALSE;
+    if (!sub_810D0A8(gUnknown_20370D2))
+        return FALSE;
+    return TRUE;
+}
+
+bool8 sub_810CF04(u8 a0)
+{
+    struct MapObject *r1 = &gUnknown_2036E38[a0];
+    
+    if (r1->active && gMapHeader.events->mapObjectCount >= r1->localId && gSprites[r1->spriteId].data[0] == a0)
+        return TRUE;
+    return FALSE;
+}
+
+u8 sub_810CF54(struct MapObjectTemplate * unused)
+{
+    u16 r1 = Random() % 4;
+
+    switch (r1)
+    {
+        case 0:
+            return 7;
+        case 1:
+            return 8;
+        case 2:
+            return 9;
+        case 3:
+            return 10;
+        default:
+            return 8;
+    }
 }

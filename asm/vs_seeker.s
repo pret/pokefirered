@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_810D164
-sub_810D164: @ 810D164
-	push {r4-r7,lr}
-	lsls r1, 16
-	lsrs r1, 16
-	movs r4, 0
-	adds r3, r0, 0
-_0810D16E:
-	ldrh r0, [r3]
-	cmp r0, r1
-	bne _0810D1B8
-	strb r4, [r2]
-	movs r5, 0x1
-	ldr r7, _0810D188 @ =0x0000ffff
-	adds r4, r3, 0x2
-	movs r6, 0
-_0810D17E:
-	ldrh r0, [r4]
-	cmp r0, 0
-	bne _0810D18C
-	lsrs r0, r6, 24
-	b _0810D1C6
-	.align 2, 0
-_0810D188: .4byte 0x0000ffff
-_0810D18C:
-	cmp r0, r7
-	beq _0810D1A2
-	ldrh r0, [r4]
-	bl HasTrainerAlreadyBeenFought
-	lsls r0, 24
-	cmp r0, 0
-	bne _0810D1A2
-	lsls r0, r5, 24
-	lsrs r0, 24
-	b _0810D1C6
-_0810D1A2:
-	adds r4, 0x2
-	movs r0, 0x80
-	lsls r0, 17
-	adds r6, r0
-	adds r5, 0x1
-	cmp r5, 0x5
-	ble _0810D17E
-	subs r0, r5, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	b _0810D1C6
-_0810D1B8:
-	adds r3, 0x10
-	adds r4, 0x1
-	cmp r4, 0xDC
-	bls _0810D16E
-	movs r0, 0
-	strb r0, [r2]
-	movs r0, 0
-_0810D1C6:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_810D164
-
 	thumb_func_start sub_810D1CC
 sub_810D1CC: @ 810D1CC
 	push {r4-r7,lr}

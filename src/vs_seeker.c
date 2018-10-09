@@ -53,7 +53,7 @@ bool8 sub_810D0FC(struct VsSeekerSubstruct *);
 u16 sub_810D074(const u8 *);
 u8 sub_810D1CC(void);
 void sub_810D24C(struct VsSeekerSubstruct *, const u8 *);
-bool8 sub_810D164(const void *, u16, u8 *);
+u8 sub_810D164(const struct UnkStruct_845318C *, u16, u8 *);
 u8 sub_810D280(int, u16);
 u8 sub_810CF90(u8);
 void sub_810C640(void);
@@ -999,4 +999,32 @@ bool8 sub_810D0FC(struct VsSeekerSubstruct * a0)
         && sub_810CF04(a0->unk_7) == 1)
         return TRUE;
     return FALSE;
+}
+
+u8 sub_810D164(const struct UnkStruct_845318C * a0, u16 a1, u8 * a2)
+{
+    u32 r4;
+    int r5;
+
+    for (r4 = 0; r4 < 0xdd; r4++)
+    {
+        if (a0[r4].unk_0[0] == a1)
+        {
+            *a2 = r4;
+            for (r5 = 1; r5 < 6; r5++)
+            {
+                if (a0[r4].unk_0[r5] == 0)
+                    return r5 - 1;
+                if (a0[r4].unk_0[r5] == 0xffff)
+                    continue;
+                if (HasTrainerAlreadyBeenFought(a0[r4].unk_0[r5]))
+                    continue;
+                return r5;
+            }
+            return r5 - 1;
+        }
+    }
+
+    *a2 = 0;
+    return 0;
 }

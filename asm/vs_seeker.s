@@ -5,33 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_810D24C
-sub_810D24C: @ 810D24C
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldrb r1, [r4, 0x7]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0810D278 @ =gUnknown_2036E38
-	adds r0, r1
-	bl npc_sync_anim_pause_bits
-	ldrb r0, [r4, 0x6]
-	ldr r1, _0810D27C @ =gSaveBlock1Ptr
-	ldr r2, [r1]
-	ldrb r1, [r2, 0x5]
-	ldrb r2, [r2, 0x4]
-	adds r3, r5, 0
-	bl ScriptMovement_StartObjectMovementScript
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810D278: .4byte gUnknown_2036E38
-_0810D27C: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_810D24C
-
 	thumb_func_start sub_810D280
 sub_810D280: @ 810D280
 	push {r4-r7,lr}

@@ -19,6 +19,7 @@
 #include "random.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
+#include "map_obj_8097404.h"
 #include "unk_810c3a4.h"
 #include "vs_seeker.h"
 
@@ -1042,4 +1043,10 @@ u8 sub_810D1CC(void)
     }
 
     return 0xFF;
+}
+
+void sub_810D24C(struct VsSeekerSubstruct * a0, const u8 * a1)
+{
+    npc_sync_anim_pause_bits(&gUnknown_2036E38[a0->unk_7]);
+    ScriptMovement_StartObjectMovementScript(a0->unk_6, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, a1);
 }

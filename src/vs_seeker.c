@@ -1050,3 +1050,23 @@ void sub_810D24C(struct VsSeekerSubstruct * a0, const u8 * a1)
     npc_sync_anim_pause_bits(&gUnknown_2036E38[a0->unk_7]);
     ScriptMovement_StartObjectMovementScript(a0->unk_6, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, a1);
 }
+
+u8 sub_810D280(int a0, u16 a1)
+{
+    int r5;
+    int r3;
+
+    for (r5 = 0; r5 < a0; r5++)
+    {
+        if (sub_810D0FC(&gUnknown_203ADB8->unk_000[r5]) == 1 && gUnknown_203ADB8->unk_000[r5].unk_4 == a1)
+        {
+            for (r3 = 0; r3 < gUnknown_203ADB8->unk_430; r3++)
+            {
+                if (gUnknown_203ADB8->unk_400[r3] == gUnknown_203ADB8->unk_000[r5].unk_4)
+                    return 2;
+            }
+            return 1;
+        }
+    }
+    return 0;
+}

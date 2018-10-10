@@ -345,8 +345,7 @@ gUnknown_3005E60: @ 3005E60
 gUnknown_3005E70: @ 3005E70
 	.space 0x18
 
-gUnknown_3005E88: @ 3005E88
-	.space 0x4
+	.include "quest_log.o"
 
 gUnknown_3005E8C: @ 3005E8C
 	.space 0x4

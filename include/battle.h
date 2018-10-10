@@ -47,7 +47,7 @@
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
 #define BATTLE_TYPE_TWO_OPPONENTS   0x8000
-#define BATTLE_TYPE_DOME            0x10000
+#define BATTLE_TYPE_DOME            0x10000 // this is used in pokemon.c, but its clearly not the correct name for FR/LG. TODO: Fix these
 #define BATTLE_TYPE_PALACE          0x20000
 #define BATTLE_TYPE_ARENA           0x40000
 #define BATTLE_TYPE_FACTORY         0x80000
@@ -545,7 +545,7 @@ struct BattleStruct
     u8 field_46;
     u8 field_47;
     u8 focusPunchBank;
-    u8 field_49;
+    u8 battlerPreventingSwitchout;
     u8 moneyMultiplier;
     u8 savedTurnActionNumber;
     u8 switchInAbilitiesCounter;
@@ -598,7 +598,7 @@ struct BattleStruct
     u8 field_A7;
     u16 hpOnSwitchout[2];
     u32 savedBattleTypeFlags;
-    u8 field_B0;
+    u8 abilityPreventingSwitchout;
     u8 hpScale;
     u8 synchronizeMoveEffect;
     u8 field_B3;

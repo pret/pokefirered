@@ -4155,7 +4155,7 @@ _08011F50:
 	cmp r4, r0
 	bne _08011F74
 	ldr r0, _08011F6C @ =gUnknown_83AE03C
-	ldr r1, _08011F70 @ =gUnknown_2024024
+	ldr r1, _08011F70 @ =gBattleMonForms
 	adds r1, r6, r1
 	ldrb r1, [r1]
 	lsls r1, 2
@@ -4165,7 +4165,7 @@ _08011F50:
 	.align 2, 0
 _08011F68: .4byte 0x00000181
 _08011F6C: .4byte gUnknown_83AE03C
-_08011F70: .4byte gUnknown_2024024
+_08011F70: .4byte gBattleMonForms
 _08011F74:
 	movs r0, 0xCE
 	lsls r0, 1
@@ -4240,7 +4240,7 @@ _08011FE8:
 	lsrs r0, 22
 	adds r1, 0x4
 	adds r1, r0
-	ldr r2, _08012040 @ =gUnknown_2024024
+	ldr r2, _08012040 @ =gBattleMonForms
 	movs r3, 0x2E
 	ldrsh r0, [r4, r3]
 	adds r0, r2
@@ -4260,7 +4260,7 @@ _0801201A:
 	subs r0, 0x1
 	cmp r0, 0
 	bge _0801201A
-	ldr r0, _08012040 @ =gUnknown_2024024
+	ldr r0, _08012040 @ =gBattleMonForms
 	movs r3, 0x2E
 	ldrsh r1, [r4, r3]
 	adds r1, r0
@@ -4273,7 +4273,7 @@ _08012034:
 	bx r0
 	.align 2, 0
 _0801203C: .4byte gMonSpritesGfxPtr
-_08012040: .4byte gUnknown_2024024
+_08012040: .4byte gBattleMonForms
 	thumb_func_end sub_8011FB4
 
 	thumb_func_start sub_8012044

@@ -3164,7 +3164,7 @@ _080DFAC6:
 	lsls r0, r1, 2
 	adds r2, 0x4
 	adds r2, r0
-	ldr r1, _080DFB0C @ =gUnknown_2024024
+	ldr r1, _080DFB0C @ =gBattleMonForms
 	ldr r0, _080DFB10 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
 	adds r0, r1
@@ -3193,7 +3193,7 @@ _080DFB00:
 	b _080DFBCE
 	.align 2, 0
 _080DFB08: .4byte gMonSpritesGfxPtr
-_080DFB0C: .4byte gUnknown_2024024
+_080DFB0C: .4byte gBattleMonForms
 _080DFB10: .4byte gUnknown_2037F1A
 _080DFB14: .4byte 0x04000200
 _080DFB18: .4byte gTasks

@@ -4001,7 +4001,7 @@ sub_81580E0: @ 81580E0
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _08158230 @ =gUnknown_2024024
+	ldr r1, _08158230 @ =gBattleMonForms
 	adds r2, r1
 	ldrb r1, [r2]
 	bl StartSpriteAnim
@@ -4041,7 +4041,7 @@ _08158220: .4byte gMultiuseSpriteTemplate
 _08158224: .4byte gUnknown_2023D44
 _08158228: .4byte gSprites
 _0815822C: .4byte 0x0000ff10
-_08158230: .4byte gUnknown_2024024
+_08158230: .4byte gBattleMonForms
 _08158234: .4byte gUnknown_3004FE0
 _08158238: .4byte sub_8156184
 	thumb_func_end sub_81580E0
@@ -6400,7 +6400,7 @@ sub_8159478: @ 8159478
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _081595E4 @ =gUnknown_2024024
+	ldr r1, _081595E4 @ =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -6452,7 +6452,7 @@ _081595D4: .4byte gUnknown_3004FFC
 _081595D8: .4byte gMultiuseSpriteTemplate
 _081595DC: .4byte gUnknown_2023D44
 _081595E0: .4byte gSprites
-_081595E4: .4byte gUnknown_2024024
+_081595E4: .4byte gBattleMonForms
 _081595E8: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8159478
 

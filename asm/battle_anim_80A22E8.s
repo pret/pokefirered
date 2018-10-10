@@ -55250,7 +55250,7 @@ sub_80BCEF4: @ 80BCEF4
 	lsls r4, 2
 	adds r2, 0x4
 	adds r2, r4
-	ldr r1, _080BCFC8 @ =gUnknown_2024024
+	ldr r1, _080BCFC8 @ =gBattleMonForms
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r1, 11
@@ -55320,7 +55320,7 @@ _080BCFA0:
 	bx r0
 	.align 2, 0
 _080BCFC4: .4byte gMonSpritesGfxPtr
-_080BCFC8: .4byte gUnknown_2024024
+_080BCFC8: .4byte gBattleMonForms
 	thumb_func_end sub_80BCEF4
 
 	thumb_func_start sub_80BCFCC

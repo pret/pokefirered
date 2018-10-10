@@ -3435,7 +3435,7 @@ LinkPartnerHandleLoadPokeSprite: @ 80D5DB4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _080D5EC4 @ =gUnknown_2024024
+	ldr r1, _080D5EC4 @ =gBattleMonForms
 	adds r2, r1
 	ldrb r1, [r2]
 	bl StartSpriteAnim
@@ -3458,7 +3458,7 @@ _080D5EB4: .4byte gMultiuseSpriteTemplate
 _080D5EB8: .4byte gUnknown_2023D44
 _080D5EBC: .4byte gSprites
 _080D5EC0: .4byte 0x0000ff10
-_080D5EC4: .4byte gUnknown_2024024
+_080D5EC4: .4byte gBattleMonForms
 _080D5EC8: .4byte gUnknown_3004FE0
 _080D5ECC: .4byte sub_80D4590
 	thumb_func_end LinkPartnerHandleLoadPokeSprite
@@ -3626,7 +3626,7 @@ sub_80D5F40: @ 80D5F40
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _080D60A4 @ =gUnknown_2024024
+	ldr r1, _080D60A4 @ =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -3677,7 +3677,7 @@ _080D6094: .4byte gUnknown_3004FFC
 _080D6098: .4byte gMultiuseSpriteTemplate
 _080D609C: .4byte gUnknown_2023D44
 _080D60A0: .4byte gSprites
-_080D60A4: .4byte gUnknown_2024024
+_080D60A4: .4byte gBattleMonForms
 _080D60A8: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80D5F40
 

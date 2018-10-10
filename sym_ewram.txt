@@ -464,7 +464,7 @@ gBattleMovePower: @ 2024020
 gMoveToLearn: @ 2024022
 	.space 0x2
 
-gUnknown_2024024: @ 2024024
+gBattleMonForms: @ 2024024
 	.space 0x4
 
 sLearningMoveTableID: @ 2024028

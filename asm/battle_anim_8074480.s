@@ -227,7 +227,7 @@ _08074638:
 	cmp r4, r0
 	bne _08074658
 	ldr r0, _08074650 @ =gUnknown_83AE050
-	ldr r1, _08074654 @ =gUnknown_2024024
+	ldr r1, _08074654 @ =gBattleMonForms
 	adds r1, r5, r1
 	ldrb r1, [r1]
 	adds r1, r0
@@ -236,7 +236,7 @@ _08074638:
 	.align 2, 0
 _0807464C: .4byte 0x00000181
 _08074650: .4byte gUnknown_83AE050
-_08074654: .4byte gUnknown_2024024
+_08074654: .4byte gBattleMonForms
 _08074658:
 	movs r0, 0xCE
 	lsls r0, 1
@@ -328,7 +328,7 @@ _08074704:
 	cmp r4, r0
 	bne _08074728
 	ldr r0, _08074720 @ =gUnknown_83AE03C
-	ldr r1, _08074724 @ =gUnknown_2024024
+	ldr r1, _08074724 @ =gBattleMonForms
 	adds r1, r6, r1
 	ldrb r1, [r1]
 	lsls r1, 2
@@ -338,7 +338,7 @@ _08074704:
 	.align 2, 0
 _0807471C: .4byte 0x00000181
 _08074720: .4byte gUnknown_83AE03C
-_08074724: .4byte gUnknown_2024024
+_08074724: .4byte gBattleMonForms
 _08074728:
 	movs r0, 0xCE
 	lsls r0, 1
@@ -382,7 +382,7 @@ sub_807474C: @ 807474C
 	cmp r4, r0
 	bne _08074788
 	ldr r0, _08074780 @ =gUnknown_83AE04C
-	ldr r1, _08074784 @ =gUnknown_2024024
+	ldr r1, _08074784 @ =gBattleMonForms
 	adds r1, r6, r1
 	ldrb r1, [r1]
 	adds r1, r0
@@ -391,7 +391,7 @@ sub_807474C: @ 807474C
 	.align 2, 0
 _0807477C: .4byte 0x00000181
 _08074780: .4byte gUnknown_83AE04C
-_08074784: .4byte gUnknown_2024024
+_08074784: .4byte gBattleMonForms
 _08074788:
 	movs r0, 0xCE
 	lsls r0, 1
@@ -5431,7 +5431,7 @@ _08076CA6:
 	ldr r0, _08076CBC @ =0x00000181
 	cmp r7, r0
 	bne _08076CC8
-	ldr r0, _08076CC0 @ =gUnknown_2024024
+	ldr r0, _08076CC0 @ =gBattleMonForms
 	add r0, r8
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -5440,7 +5440,7 @@ _08076CA6:
 	b _08076CDE
 	.align 2, 0
 _08076CBC: .4byte 0x00000181
-_08076CC0: .4byte gUnknown_2024024
+_08076CC0: .4byte gBattleMonForms
 _08076CC4: .4byte gUnknown_83AE03C
 _08076CC8:
 	movs r0, 0xCE

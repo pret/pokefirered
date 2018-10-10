@@ -7135,7 +7135,7 @@ sub_80EAF34: @ 80EAF34
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _080EB0A0 @ =gUnknown_2024024
+	ldr r1, _080EB0A0 @ =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -7187,7 +7187,7 @@ _080EB090: .4byte gUnknown_3004FFC
 _080EB094: .4byte gMultiuseSpriteTemplate
 _080EB098: .4byte gUnknown_2023D44
 _080EB09C: .4byte gSprites
-_080EB0A0: .4byte gUnknown_2024024
+_080EB0A0: .4byte gBattleMonForms
 _080EB0A4: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80EAF34
 

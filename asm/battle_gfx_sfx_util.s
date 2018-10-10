@@ -348,7 +348,7 @@ TryHandleLaunchBattleTableAnimation: @ 803401C
 	ands r0, r7
 	cmp r0, 0
 	beq _08034064
-	ldr r0, _08034060 @ =gUnknown_2024024
+	ldr r0, _08034060 @ =gBattleMonForms
 	adds r0, r6, r0
 	movs r2, 0x7F
 	adds r1, r7, 0
@@ -357,7 +357,7 @@ TryHandleLaunchBattleTableAnimation: @ 803401C
 	movs r0, 0x1
 	b _08034132
 	.align 2, 0
-_08034060: .4byte gUnknown_2024024
+_08034060: .4byte gBattleMonForms
 _08034064:
 	ldr r0, _08034090 @ =gUnknown_2024018
 	mov r9, r0
@@ -829,7 +829,7 @@ _080343DA:
 	adds r1, r4
 	adds r0, r6, 0
 	bl LZDecompressWram
-	ldr r0, _08034480 @ =gUnknown_2024024
+	ldr r0, _08034480 @ =gBattleMonForms
 	add r0, r8
 	ldrb r1, [r0]
 	lsls r1, 5
@@ -872,7 +872,7 @@ _08034468:
 	.align 2, 0
 _08034478: .4byte 0x00000181
 _0803447C: .4byte gBattleStruct
-_08034480: .4byte gUnknown_2024024
+_08034480: .4byte gBattleMonForms
 _08034484: .4byte gUnknown_2024018
 _08034488: .4byte 0x00007fff
 _0803448C: .4byte gUnknown_20375F8
@@ -1035,7 +1035,7 @@ _0803459A:
 	adds r1, r4
 	adds r0, r6, 0
 	bl LZDecompressWram
-	ldr r0, _08034640 @ =gUnknown_2024024
+	ldr r0, _08034640 @ =gBattleMonForms
 	add r0, r8
 	ldrb r1, [r0]
 	lsls r1, 5
@@ -1077,7 +1077,7 @@ _08034626:
 	.align 2, 0
 _08034638: .4byte 0x00000181
 _0803463C: .4byte gBattleStruct
-_08034640: .4byte gUnknown_2024024
+_08034640: .4byte gBattleMonForms
 _08034644: .4byte gUnknown_2024018
 _08034648: .4byte 0x00007fff
 _0803464C: .4byte gUnknown_20375F8
@@ -1927,7 +1927,7 @@ _08034C16:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _08034D7C @ =gUnknown_2024024
+	ldr r1, _08034D7C @ =gBattleMonForms
 	add r1, r9
 	ldrb r1, [r1]
 	bl StartSpriteAnim
@@ -1968,7 +1968,7 @@ _08034D6C: .4byte gUnknown_2023D44
 _08034D70: .4byte 0x06010000
 _08034D74: .4byte 0x040000d4
 _08034D78: .4byte 0x84000200
-_08034D7C: .4byte gUnknown_2024024
+_08034D7C: .4byte gBattleMonForms
 _08034D80: .4byte gSpeciesNames
 _08034D84: .4byte gUnknown_3004FF0
 _08034D88:
@@ -2008,7 +2008,7 @@ _08034D88:
 	mov r1, r10
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, _08034E38 @ =gUnknown_2024024
+	ldr r1, _08034E38 @ =gBattleMonForms
 	add r1, r9
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
@@ -2052,7 +2052,7 @@ _08034E28: .4byte gUnknown_2023D44
 _08034E2C: .4byte gSprites
 _08034E30: .4byte gUnknown_2024018
 _08034E34: .4byte gBattleStruct
-_08034E38: .4byte gUnknown_2024024
+_08034E38: .4byte gBattleMonForms
 _08034E3C: .4byte 0x00007fff
 _08034E40: .4byte gUnknown_20375F8
 _08034E44: .4byte gUnknown_20371F8
@@ -2244,7 +2244,7 @@ _08034F5E:
 	adds r1, r4
 	adds r0, r6, 0
 	bl LZDecompressWram
-	ldr r0, _080350A4 @ =gUnknown_2024024
+	ldr r0, _080350A4 @ =gBattleMonForms
 	ldr r1, [sp]
 	adds r0, r1, r0
 	ldrb r1, [r0]
@@ -2276,7 +2276,7 @@ _08034FFC:
 	adds r0, r3, r0
 	mov r1, r8
 	strh r1, [r0, 0x2]
-	ldr r0, _080350A4 @ =gUnknown_2024024
+	ldr r0, _080350A4 @ =gBattleMonForms
 	mov r2, r9
 	adds r4, r2, r0
 	ldr r3, [sp]
@@ -2325,7 +2325,7 @@ _08035094: .4byte 0x040000d4
 _08035098: .4byte 0x84000200
 _0803509C: .4byte 0x00000181
 _080350A0: .4byte gBattleStruct
-_080350A4: .4byte gUnknown_2024024
+_080350A4: .4byte gBattleMonForms
 _080350A8: .4byte 0x00007fff
 _080350AC: .4byte gUnknown_20375F8
 _080350B0: .4byte gUnknown_20371F8
@@ -2465,7 +2465,7 @@ LoadBattleMonGfxAndAnimate: @ 80351A8
 	lsls r0, 2
 	ldr r1, _080351E4 @ =gSprites
 	adds r4, r0, r1
-	ldr r0, _080351E8 @ =gUnknown_2024024
+	ldr r0, _080351E8 @ =gBattleMonForms
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
@@ -2477,7 +2477,7 @@ LoadBattleMonGfxAndAnimate: @ 80351A8
 	b _080351F2
 	.align 2, 0
 _080351E4: .4byte gSprites
-_080351E8: .4byte gUnknown_2024024
+_080351E8: .4byte gBattleMonForms
 _080351EC:
 	adds r0, r6, 0
 	bl GetBankSpriteDefault_Y
@@ -3371,7 +3371,7 @@ ClearTemporarySpeciesSpriteData: @ 803589C
 	movs r3, 0
 	movs r2, 0
 	strh r2, [r0, 0x2]
-	ldr r0, _080358D0 @ =gUnknown_2024024
+	ldr r0, _080358D0 @ =gBattleMonForms
 	adds r0, r4, r0
 	strb r3, [r0]
 	cmp r1, 0
@@ -3384,7 +3384,7 @@ _080358C4:
 	bx r0
 	.align 2, 0
 _080358CC: .4byte gUnknown_2024018
-_080358D0: .4byte gUnknown_2024024
+_080358D0: .4byte gBattleMonForms
 	thumb_func_end ClearTemporarySpeciesSpriteData
 
 	thumb_func_start AllocateMonSpritesGfx

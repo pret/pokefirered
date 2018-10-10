@@ -282,7 +282,7 @@ BattleText_MistShroud:: @ 83FBBB4
 BattleText_GetPumped:: @ 83FBBE9
 	.incbin "baserom.gba", 0x3FBBE9, 0xE43
 
-gUnknown_83FCA2C:: @ 83FCA2C
+gText_PkmnsXPreventsSwitching:: @ 83FCA2C
 	.incbin "baserom.gba", 0x3FCA2C, 0x11E
 
 BattleText_Rose:: @ 83FCB4A

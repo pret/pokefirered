@@ -81,7 +81,7 @@ _0800D298:
 	movs r4, 0
 	str r4, [r0]
 	bl ClearBattleAnimationVars
-	bl sub_8043FBC
+	bl ClearBattleMonForms
 	bl BattleAI_HandleItemUseBeforeAISetup
 	ldr r0, _0800D304 @ =gUnknown_2022B54
 	str r4, [r0]

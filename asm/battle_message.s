@@ -707,7 +707,7 @@ _080D77F0: .4byte gUnknown_83FDF3C
 BattleStringExpandPlaceholdersToDisplayedString: @ 80D77F4
 	push {lr}
 	ldr r1, _080D7800 @ =gDisplayedStringBattle
-	bl sub_80D7868
+	bl BattleStringExpandPlaceholders
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -770,8 +770,8 @@ _080D785E:
 	bx r1
 	thumb_func_end TryGetStatusString
 
-	thumb_func_start sub_80D7868
-sub_80D7868: @ 80D7868
+	thumb_func_start BattleStringExpandPlaceholders
+BattleStringExpandPlaceholders: @ 80D7868
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2177,7 +2177,7 @@ _080D83FA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D7868
+	thumb_func_end BattleStringExpandPlaceholders
 
 	thumb_func_start ExpandBattleTextBuffPlaceholders
 ExpandBattleTextBuffPlaceholders: @ 80D8418

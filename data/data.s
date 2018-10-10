@@ -79,13 +79,13 @@ gUnknown_8235E6C:: @ 8235E6C
 gUnknown_823654C:: @ 823654C
 	.incbin "baserom.gba", 0x23654C, 0xDC0
 
-gUnknown_823730C:: @ 823730C
+gMonPaletteTable:: @ 823730C
 	.incbin "baserom.gba", 0x23730C, 0xE8
 
 gUnknown_82373F4:: @ 82373F4
 	.incbin "baserom.gba", 0x2373F4, 0xCD8
 
-gUnknown_82380CC:: @ 82380CC
+gMonShinyPaletteTable:: @ 82380CC
 	.incbin "baserom.gba", 0x2380CC, 0x1010
 
 gTrainerFrontAnimsPtrTable:: @ 82390DC
@@ -316,7 +316,7 @@ gItemEffectTable:: @ 82528BC
 gNatureStatTable:: @ 8252B48
 	.incbin "baserom.gba", 0x252B48, 0x80
 
-gUnknown_8252BC8:: @ 8252BC8
+gTMHMLearnsets:: @ 8252BC8
 	.incbin "baserom.gba", 0x252BC8, 0xCE0
 
 gFacilityClassToPicIndex:: @ 82538A8
@@ -343,7 +343,7 @@ gEvolutionTable:: @ 8259754
 gLevelUpLearnsets:: @ 825D7B4
 	.incbin "baserom.gba", 0x25D7B4, 0x670
 
-gUnknown_825DE24:: @ 825DE24
+gPokeblockFlavorCompatibilityTable:: @ 825DE24
 	.incbin "baserom.gba", 0x25DE24, 0x7D
 
 gUnknown_825DEA1:: @ 825DEA1
@@ -379,7 +379,7 @@ gUnknown_825DFF0:: @ 825DFF0
 sFriendshipEventDeltas:: @ 825DFF6
 	.incbin "baserom.gba", 0x25DFF6, 0x1E
 
-gUnknown_825E014:: @ 825E014
+sHMMoves:: @ 825E014
 	.incbin "baserom.gba", 0x25E014, 0x12
 
 gUnknown_825E026:: @ 825E026

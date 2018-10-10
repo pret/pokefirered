@@ -476,7 +476,13 @@ struct MysteryEventStruct
 
 struct QuestLog
 {
-    /*0x0000*/ u8 filler_000[0x568];
+    /*0x0000*/ u8 unk_000;
+    /*0x0001*/ s8 unk_001;
+    /*0x0002*/ s8 unk_002;
+    /*0x0003*/ s8 unk_003;
+    /*0x0004*/ s16 unk_004;
+    /*0x0006*/ s16 unk_006;
+    /*0x0008*/ u8 filler_008[0x560];
     /*0x0568*/ u8 filler_568[0x100];
     /*0x0668*/ u8 end[0];
 };
@@ -489,7 +495,7 @@ struct QuestLog
 
 struct SaveBlock1
 {
-    /*0x0000*/ u8 filler[0x4];
+    /*0x0000*/ struct Coords16 pos;
     /*0x0004*/ struct WarpData location;
     /*0x0C*/ struct WarpData warp1;
     /*0x14*/ struct WarpData warp2;

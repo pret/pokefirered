@@ -154,7 +154,7 @@ void sub_8110AB4(void)
 
 u8 sub_8110AC8(void)
 {
-    return gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_000[0];
+    return gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000;
 }
 
 void sub_8110AEC(u16 a0)
@@ -166,9 +166,9 @@ void sub_8110AEC(u16 a0)
     sub_8113B88();
     gUnknown_203AE08 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_568;
     if ((a0 >= 12 && a0 < 20) || a0 == 35)
-        gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_000[0] = 2;
+        gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 2;
     else
-        gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_000[0] = 1;
+        gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 1;
     sub_81115E8();
     sub_8110BB0(gUnknown_203ADF8);
     sub_8110BE8(gUnknown_203ADF8);
@@ -179,4 +179,14 @@ void sub_8110AEC(u16 a0)
     sub_8112940(2, gUnknown_203AE98, 0x100);
     sub_8110E68(gUnknown_203AE98);
     sub_81109CC(1);
+}
+
+void sub_8110BB0(u8 a0)
+{
+    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
+    questLog->unk_001 = gSaveBlock1Ptr->location.mapGroup;
+    questLog->unk_002 = gSaveBlock1Ptr->location.mapNum;
+    questLog->unk_003 = gSaveBlock1Ptr->location.warpId;
+    questLog->unk_004 = gSaveBlock1Ptr->pos.x;
+    questLog->unk_006 = gSaveBlock1Ptr->pos.y;
 }

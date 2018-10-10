@@ -5,37 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8110BB0
-sub_8110BB0: @ 8110BB0
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _08110BE4 @ =gSaveBlock1Ptr
-	movs r1, 0xCD
-	lsls r1, 3
-	muls r1, r0
-	movs r0, 0x98
-	lsls r0, 5
-	adds r1, r0
-	ldr r0, [r2]
-	adds r1, r0, r1
-	ldrb r0, [r0, 0x4]
-	strb r0, [r1, 0x1]
-	ldr r0, [r2]
-	ldrb r0, [r0, 0x5]
-	strb r0, [r1, 0x2]
-	ldr r0, [r2]
-	ldrb r0, [r0, 0x6]
-	strb r0, [r1, 0x3]
-	ldr r2, [r2]
-	ldrh r0, [r2]
-	strh r0, [r1, 0x4]
-	ldrh r0, [r2, 0x2]
-	strh r0, [r1, 0x6]
-	bx lr
-	.align 2, 0
-_08110BE4: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8110BB0
-
 	thumb_func_start sub_8110BE8
 sub_8110BE8: @ 8110BE8
 	push {r4-r7,lr}

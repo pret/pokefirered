@@ -58,3 +58,13 @@ void sub_811092C(void)
     if (gUnknown_203AE8C)
         gUnknown_203AE8C();
 }
+
+bool8 sub_8110944(u8 * a0, s32 a1)
+{
+    u8 * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_568;
+    u8 * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
+    r0 -= a1;
+    if (a0 < r2 || a0 > r0)
+        return FALSE;
+    return TRUE;
+}

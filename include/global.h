@@ -476,7 +476,9 @@ struct MysteryEventStruct
 
 struct QuestLog
 {
-    /*0x0000*/ u8 filler_000[0x668];
+    /*0x0000*/ u8 filler_000[0x568];
+    /*0x0568*/ u8 filler_568[0x100];
+    /*0x0668*/ u8 end[0];
 };
 
 #define MAP_OBJECTS_COUNT  16

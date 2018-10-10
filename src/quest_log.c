@@ -1,5 +1,6 @@
 #include "global.h"
 #include "script.h"
+#include "event_data.h"
 #include "quest_log.h"
 
 u8 gUnknown_3005E88;
@@ -14,6 +15,7 @@ struct UnkStruct_203AE94
 
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
+EWRAM_DATA u16 gUnknown_203ADFC = 0;
 EWRAM_DATA void * gUnknown_203AE04 = NULL;
 EWRAM_DATA void * gUnknown_203AE08 = NULL;
 EWRAM_DATA void * gUnknown_203AE0C[32] = {NULL};
@@ -22,13 +24,22 @@ EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 EWRAM_DATA u8 gUnknown_203AE98[0x100] = {0};
 
 void sub_8110A00(void);
-u8 sub_8110E68(void *);
 void sub_8110A3C(void);
 void sub_8110E3C(void);
-void sub_8111AD8(void);
+u8 sub_8110E68(void *);
 void sub_81118F4(s8);
+void sub_8111AD8(void);
+void sub_8113B88(void);
 void sub_8113BD8(void);
 void sub_81138F8(void);
+void sub_81115E8(void);
+void sub_8110BB0(u8);
+void sub_8110BE8(u8);
+void sub_8110D94(void);
+void sub_8110E20(void);
+void sub_8110D48(u8);
+void sub_8112940(u8, u8 *, u16);
+
 
 void sub_8110840(void * a0)
 {
@@ -134,4 +145,38 @@ void sub_8110A3C(void)
             sub_81118F4(0);
         }
     }
+}
+
+void sub_8110AB4(void)
+{
+    gUnknown_20370D0 = gUnknown_203ADFA;
+}
+
+u8 sub_8110AC8(void)
+{
+    return gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_000[0];
+}
+
+void sub_8110AEC(u16 a0)
+{
+    if (gUnknown_203ADF8 > 3)
+        gUnknown_203ADF8 = 0;
+
+    sub_81108F0(gUnknown_203ADF8);
+    sub_8113B88();
+    gUnknown_203AE08 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_568;
+    if ((a0 >= 12 && a0 < 20) || a0 == 35)
+        gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_000[0] = 2;
+    else
+        gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_000[0] = 1;
+    sub_81115E8();
+    sub_8110BB0(gUnknown_203ADF8);
+    sub_8110BE8(gUnknown_203ADF8);
+    sub_8110D94();
+    sub_8110E20();
+    sub_8110D48(gUnknown_203ADF8);
+    gUnknown_203ADFC = 0;
+    sub_8112940(2, gUnknown_203AE98, 0x100);
+    sub_8110E68(gUnknown_203AE98);
+    sub_81109CC(1);
 }

@@ -474,6 +474,16 @@ struct MysteryEventStruct
     u8 unk_1;
 };
 
+struct QuestLogNPCData
+{
+    u32 x:8;
+    u32 negx:1;
+    u32 y:8;
+    u32 negy:1;
+    u32 elevation:6;
+    u32 movementType:8;
+};
+
 struct QuestLog
 {
     /*0x0000*/ u8 unk_000;
@@ -482,7 +492,8 @@ struct QuestLog
     /*0x0003*/ s8 unk_003;
     /*0x0004*/ s16 unk_004;
     /*0x0006*/ s16 unk_006;
-    /*0x0008*/ u8 filler_008[0x560];
+    /*0x0008*/ u8 filler_008[0x460];
+    /*0x0468*/ struct QuestLogNPCData npcData[64];
     /*0x0568*/ u8 filler_568[0x100];
     /*0x0668*/ u8 end[0];
 };

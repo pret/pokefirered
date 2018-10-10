@@ -1,0 +1,4 @@
+#ifndef GUARD_QUEST_LOG_H
+#define GUARD_QUEST_LOG_H
+
+#endif //GUARD_QUEST_LOG_H

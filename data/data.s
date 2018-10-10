@@ -1558,7 +1558,10 @@ gUnknown_83AC970:: @ 83AC970
 	.incbin "baserom.gba", 0x3AC970, 0x20
 
 sFanfares:: @ 83AC990
-	.incbin "baserom.gba", 0x3AC990, 0x278
+	.incbin "baserom.gba", 0x3AC990, 0x40
+
+gUnknown_83AC9D0:: @ 83AC9D0
+	.incbin "baserom.gba", 0x3AC9D0, 0x238
 
 gUnknown_83ACC08:: @ 83ACC08
 	.incbin "baserom.gba", 0x3ACC08, 0x440

@@ -1322,7 +1322,7 @@ _0813C2D4:
 	bl GetKeypadIconTileOffset
 	lsls r0, 24
 	lsrs r0, 19
-	ldr r1, _0813C344 @ =gUnknown_81EA700
+	ldr r1, _0813C344 @ =gKeypadIconTiles
 	adds r0, r1
 	str r0, [sp, 0x14]
 	add r1, sp, 0x14
@@ -1365,7 +1365,7 @@ _0813C2D4:
 	bl GetKeypadIconWidth
 	b _0813C38E
 	.align 2, 0
-_0813C344: .4byte gUnknown_81EA700
+_0813C344: .4byte gKeypadIconTiles
 _0813C348:
 	mov r0, r9
 	ldrb r1, [r0]

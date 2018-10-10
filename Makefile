@@ -91,6 +91,8 @@ tidy:
 	
 include graphics_file_rules.mk
 
+include graphics_file_rules.mk
+
 %.s: ;
 %.png: ;
 %.pal: ;

@@ -9,17 +9,18 @@ gUnknown_8D004D8:: @ 8D004D8
 	.align 2
 gMenuMapBin:: @ 8D0051C
 	.incbin "graphics/interface/menu_map.bin.lz"
-
+	
+	.align 2
 gUnknown_8D00748:: @ 8D00748
 	.incbin "baserom.gba", 0xD00748, 0x488
 
-	@ circled questionmark normal palette, different locations in ruby/emerald
+	.align 2
 gUnknown_8D00BD0:: @ 8D00BD0
-	.incbin "baserom.gba", 0xD00BD0, 0x18
-	
-	@ circled questionmark shiny palette, different locations in ruby/emerald
+	.incbin "graphics/pokemon/palettes/circled_question_mark_palette.gbapal.lz"
+
+	.align 2
 gUnknown_8D00BE8:: @ 8D00BE8
-	.incbin "baserom.gba", 0xD00BE8, 0x18
+	.incbin "graphics/pokemon/palettes/circled_question_mark_shiny_palette.gbapal.lz"
 
 	.align 2
 gOldCharmap4bpp:: @ 8D00C00
@@ -232,7 +233,7 @@ gSprite0094bpp:: @ 8D02F8C
 	.align 2
 gSprite009Gbapal:: @ 8D03274
 	.incbin "graphics/battle_anims/sprites/009.gbapal.lz"
-	@ BEGINHERE
+
 	.align 2
 gSprite0114bpp:: @ 8D03294
 	.incbin "graphics/battle_anims/sprites/011.4bpp.lz"
@@ -375,252 +376,167 @@ gSprite026Gbapal:: @ 8D047B4
 	
 	.align 2
 gSprite027Gbapal:: @ 8D047DC
-	.incbin "baserom.gba", 0xD047DC, 0x28 @ this should be 027.gbapal.lz but my matcher didnt pick it up...
+	.incbin "graphics/battle_anims/sprites/027.gbapal.lz"
 	
 	.align 2
 gSprite0274bpp:: @ 8D04804
 	.incbin "graphics/battle_anims/sprites/027.4bpp.lz"
-	
-
 
 	.align 2
 gSprite028Gbapal:: @ 8D04B00
 	.incbin "graphics/battle_anims/sprites/028.gbapal.lz"
-	
-
 
 	.align 2
 gSprite0284bpp:: @ 8D04B28
 	.incbin "graphics/battle_anims/sprites/028.4bpp.lz"
-	
-
 
 	.align 2
 gSprite0294bpp:: @ 8D04E78
 	.incbin "graphics/battle_anims/sprites/029.4bpp.lz"
-	
-
 
 	.align 2
 gSprite029Gbapal:: @ 8D05130
 	.incbin "graphics/battle_anims/sprites/029.gbapal.lz"
-	
-
-
 
 	.align 2
 gSprite0304bpp:: @ 8D05158
 	.incbin "graphics/battle_anims/sprites/030.4bpp.lz"
-	
-
 
 	.align 2
 gSprite030Gbapal:: @ 8D05518
 	.incbin "graphics/battle_anims/sprites/030.gbapal.lz"
-	
-
 
 	.align 2
 gSprite033Gbapal:: @ 8D0553C
 	.incbin "graphics/battle_anims/sprites/033.gbapal.lz"
-	
-
 
 	.align 2
 gSprite0334bpp:: @ 8D05564
 	.incbin "graphics/battle_anims/sprites/033.4bpp.lz"
-	
-
 
 	.align 2
 gSprite0344bpp:: @ 8D05ED4
 	.incbin "graphics/battle_anims/sprites/034.4bpp.lz"
-	
-
 
 	.align 2
 gSprite0354bpp:: @ 8D062A0
 	.incbin "graphics/battle_anims/sprites/035.4bpp.lz"
-	
-	
-	
+
 	.align 2
 gSprite036Gbapal:: @ 8D06638
 	.incbin "graphics/battle_anims/sprites/036.gbapal.lz"
-	
-
 
 	.align 2
 gSprite0364bpp:: @ 8D06660
 	.incbin "graphics/battle_anims/sprites/036.4bpp.lz"
-	
-
 
 	.align 2
 gSprite0374bpp:: @ 8D06A34
 	.incbin "graphics/battle_anims/sprites/037.4bpp.lz"
-	
-
-
 
 	.align 2
 gUnknown_D06D804bpp:: @ 8D06D80
 	.incbin "graphics/unknown/unknown_D06D80.4bpp.lz"
-	
-
-
 
 	.align 2
 gUnknown_D06D80Gbapal:: @ 8D06DC4
 	.incbin "graphics/unknown/unknown_D06D80.gbapal.lz"
-	
-
-
 
 	.align 2
 gUnknown_D06D80Gbapal2:: @ 8D06DD8
 	.incbin "graphics/unknown/unknown_D06D80_2.gbapal.lz"
-	
-
-
 
 	.align 2
 gUnusedObi14bpp:: @ 8D06E0C
 	.incbin "graphics/unused/obi1.4bpp.lz"
-	
-
 
 	.align 2
 gUnusedObiPalpak1Gbapal:: @ 8D07170
 	.incbin "graphics/unused/obi_palpak1.gbapal.lz"
-	
-
 
 	.align 2
 gUnusedOldPal4Gbapal:: @ 8D071B4
 	.incbin "graphics/unused/old_pal4.gbapal.lz"
-	
-
 
 	.align 2
 gUnusedObiPalpak3Gbapal:: @ 8D071CC
 	.incbin "graphics/unused/obi_palpak3.gbapal.lz"
-	
-
 
 	.align 2
 gUnusedObi24bpp:: @ 8D07224
 	.incbin "graphics/unused/obi2.4bpp.lz"
-	
-
 
 	.align 2
 gUnusedOldBattleInterfaceTilemapBin:: @ 8D077EC
 	.incbin "graphics/unused/old_battle_interface_tilemap.bin.lz"
-	
-
-
 
 	.align 2
 gSprite038Gbapal:: @ 8D078FC
 	.incbin "graphics/battle_anims/sprites/038.gbapal.lz"
-	
-
 
 	.align 2
 gSprite039Gbapal:: @ 8D07924
 	.incbin "graphics/battle_anims/sprites/039.gbapal.lz"
-	
-
 
 	.align 2
 gSprite0384bpp:: @ 8D0794C
 	.incbin "graphics/battle_anims/sprites/038.4bpp.lz"
-	
-
 
 	.align 2
 gSprite0394bpp:: @ 8D07B70
 	.incbin "graphics/battle_anims/sprites/039.4bpp.lz"
-	
-
 
 	.align 2
 gSprite0404bpp:: @ 8D07E6C
 	.incbin "graphics/battle_anims/sprites/040.4bpp.lz"
-	
-
-
 
 	.align 2
 gSprite0414bpp:: @ 8D08078
 	.incbin "graphics/battle_anims/sprites/041.4bpp.lz"
-	
-
 
 	.align 2
 gIntefacePartyMenuHpBar4bpp:: @ 8D08218
 	.incbin "graphics/interface/party_menu_hpbar.4bpp.lz"
-	
-
 
 	.align 2
 gSprite0424bpp:: @ 8D082AC
 	.incbin "graphics/battle_anims/sprites/042.4bpp.lz"
-	
-
 
 	.align 2
 gSprite042Gbapal:: @ 8D0857C
 	.incbin "graphics/battle_anims/sprites/042.gbapal.lz"
-	
-
 
 	.align 2
 gSprite0434bpp:: @ 8D085A4
 	.incbin "graphics/battle_anims/sprites/043.4bpp.lz"
-	
-
 
 	.align 2
 gSprite043Gbapal:: @ 8D089A4
 	.incbin "graphics/battle_anims/sprites/043.gbapal.lz"
-	
 
 	.align 2
 gSprite044Gbapal:: @ 8D089CC
-	.incbin "baserom.gba", 0xD089CC, 0x28 @ this should be 044.gbapal.lz but my matched didnt pick it up...
-
+	.incbin "graphics/battle_anims/sprites/044.gbapal.lz"
 
 	.align 2
 gSprite0444bpp:: @ 8D089F4
 	.incbin "graphics/battle_anims/sprites/044.4bpp.lz"
-	
-
 
 	.align 2
 gSprite045Gbapal:: @ 8D08C60
 	.incbin "graphics/battle_anims/sprites/045.gbapal.lz"
-	
-
 
 	.align 2
 gSprite0454bpp:: @ 8D08C88
 	.incbin "graphics/battle_anims/sprites/045.4bpp.lz"
-	
-
 
 	.align 2
 gBattleInterfaceUnusedWindow4bpp:: @ 8D08EF4
 	.incbin "graphics/battle_interface/unused_window.4bpp.lz"
-	
-
 
 	.align 2
 gBattleInterfaceUnusedWindowGbapal:: @ 8D093B0
 	.incbin "graphics/battle_interface/unused_window.gbapal.lz"
-	
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 gUnknown_8D093D8:: @ 8D093D8
@@ -729,8 +645,17 @@ gUnknown_8D2EC70:: @ 8D2EC70
 	.incbin "baserom.gba", 0xD2EC70, 0xF44
 
 gUnknown_8D2FBB4:: @ 8D2FBB4
-	.incbin "baserom.gba", 0xD2FBB4, 0x1477C8
-
+	.incbin "baserom.gba", 0xD2FBB4, 0x20
+	
+	@ INSERT POKEMANS HERE
+gUnknown_8D2FBD4:: @ 8D2FBD4
+	.incbin "baserom.gba", 0xD2FBD4, 0x119184
+	
+	@ INSERT TRAINERS HERE
+gUnknown_8E48D58:: @ 8E48D58
+	.incbin "baserom.gba", 0xE48D58, 0x2E624
+	
+	@ THIS IS ./graphics/battle_transitions/vs_frame.4bpp.lz
 gUnknown_8E7737C:: @ 8E7737C
 	.incbin "baserom.gba", 0xE7737C, 0xE8
 

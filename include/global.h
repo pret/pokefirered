@@ -476,7 +476,7 @@ struct MysteryEventStruct
 
 struct QuestLog
 {
-    /*0x0000*/ u8 filler_0000[0x19a0];
+    /*0x0000*/ u8 filler_000[0x668];
 };
 
 #define MAP_OBJECTS_COUNT  16
@@ -500,7 +500,7 @@ struct SaveBlock1
     /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
     /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
     /*0x0EE0*/ u8 fillerEE0[0x420];
-    /*0x1300*/ struct QuestLog questLog;
+    /*0x1300*/ struct QuestLog questLog[4];
     /*0x2ca0*/ u8 filler2CA0[0x7c0];
     /*0x3460*/ struct MysteryEventStruct unk_3460;
     /*0x3464*/ u8 filler_3464[0x1b8];

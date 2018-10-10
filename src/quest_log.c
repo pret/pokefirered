@@ -6,7 +6,7 @@ EWRAM_DATA u8 gUnknown_203ADFA = 0;
 EWRAM_DATA void * gUnknown_203AE04 = NULL;
 EWRAM_DATA void * gUnknown_203AE08 = NULL;
 EWRAM_DATA void * gUnknown_203AE0C[32] = {NULL};
-EWRAM_DATA u32 gUnknown_203AE8C = 0;
+EWRAM_DATA void (* gUnknown_203AE8C)(void) = 0;
 
 void sub_8113BD8(void);
 void sub_81138F8(void);
@@ -32,7 +32,7 @@ void sub_8110840(void * a0)
 
 void sub_811089C(void)
 {
-    gSaveBlock1Ptr->questLog = (struct QuestLog){};
+    memset(gSaveBlock1Ptr->questLog, 0, sizeof(gSaveBlock1Ptr->questLog));
     gUnknown_203ADF8 = 0;
     gUnknown_203ADFA = 0;
     gUnknown_203AE8C = 0;
@@ -40,4 +40,21 @@ void sub_811089C(void)
     gUnknown_203AE04 = 0;
     sub_8113BD8();
     sub_81138F8();
+}
+
+void sub_81108F0(u8 a0)
+{
+    memset(gSaveBlock1Ptr->questLog + a0, 0, sizeof(struct QuestLog));
+    gUnknown_203AE04 = NULL;
+}
+
+void sub_8110920(void)
+{
+    gUnknown_203AE04 = NULL;
+}
+
+void sub_811092C(void)
+{
+    if (gUnknown_203AE8C)
+        gUnknown_203AE8C();
 }

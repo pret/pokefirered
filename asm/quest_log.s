@@ -5,57 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81108F0
-sub_81108F0: @ 81108F0
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _08110918 @ =gSaveBlock1Ptr
-	ldr r1, [r1]
-	movs r2, 0xCD
-	lsls r2, 3
-	muls r0, r2
-	adds r0, r1
-	movs r1, 0x98
-	lsls r1, 5
-	adds r0, r1
-	movs r1, 0
-	bl memset
-	ldr r1, _0811091C @ =gUnknown_203AE04
-	movs r0, 0
-	str r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08110918: .4byte gSaveBlock1Ptr
-_0811091C: .4byte gUnknown_203AE04
-	thumb_func_end sub_81108F0
-
-	thumb_func_start sub_8110920
-sub_8110920: @ 8110920
-	ldr r1, _08110928 @ =gUnknown_203AE04
-	movs r0, 0
-	str r0, [r1]
-	bx lr
-	.align 2, 0
-_08110928: .4byte gUnknown_203AE04
-	thumb_func_end sub_8110920
-
-	thumb_func_start sub_811092C
-sub_811092C: @ 811092C
-	push {lr}
-	ldr r0, _08110940 @ =gUnknown_203AE8C
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _0811093A
-	bl _call_via_r0
-_0811093A:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08110940: .4byte gUnknown_203AE8C
-	thumb_func_end sub_811092C
-
 	thumb_func_start sub_8110944
 sub_8110944: @ 8110944
 	push {r4,r5,lr}

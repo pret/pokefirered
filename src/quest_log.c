@@ -27,19 +27,20 @@ void sub_8110A00(void);
 void sub_8110A3C(void);
 void sub_8110BB0(u8);
 void sub_8110BE8(u8);
-void sub_815A008(struct QuestLog *);
 void sub_8110E3C(void);
+void sub_8110D94(void);
+void sub_8110E20(void);
+void sub_8110D48(u8);
+void sub_81115E8(void);
 u8 sub_8110E68(void *);
 void sub_81118F4(s8);
 void sub_8111AD8(void);
 void sub_8113B88(void);
 void sub_8113BD8(void);
-void sub_81138F8(void);
-void sub_81115E8(void);
-void sub_8110D94(void);
-void sub_8110E20(void);
-void sub_8110D48(u8);
+void sub_8113BF4(void *);
 void sub_8112940(u8, u8 *, u16);
+void sub_81138F8(void);
+void sub_815A008(struct QuestLog *);
 
 
 void sub_8110840(void * a0)
@@ -423,4 +424,11 @@ void sub_8110D94(void)
 void sub_8110E20(void)
 {
     VarSet(VAR_0x40AE, gSaveBlock1Ptr->mapDataId);
+}
+
+void sub_8110E3C(void)
+{
+    sub_8113BF4(gUnknown_203AE08);
+    if (++gUnknown_203ADF8 > 3)
+        gUnknown_203ADF8 = 0;
 }

@@ -110,7 +110,7 @@ _08046CC8:
 	adds r2, r0
 	adds r2, 0x10
 	adds r0, r5, 0
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -123,7 +123,7 @@ _08046CE6:
 	lsls r2, r4, 2
 	adds r2, r7, r2
 	adds r0, r5, 0
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -135,30 +135,30 @@ _08046CE6:
 	adds r0, r5, 0
 	movs r1, 0x3
 	mov r2, r9
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0x25
 	mov r2, r10
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0x8
 	ldr r2, [sp, 0x40]
-	bl sub_804037C
+	bl SetMonData
 	movs r0, 0x78
 	ldr r1, [sp, 0x44]
 	strb r0, [r1]
 	adds r0, r5, 0
 	movs r1, 0x20
 	ldr r2, [sp, 0x44]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0x22
 	ldr r2, [sp, 0x4C]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0x50
 	ldr r2, [sp, 0x48]
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r6, 0
 	adds r1, r5, 0
 	movs r2, 0x64
@@ -193,7 +193,7 @@ AddHatchedMonToParty: @ 8046D60
 	adds r0, r5, 0
 	movs r1, 0x2D
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -206,7 +206,7 @@ AddHatchedMonToParty: @ 8046D60
 	adds r0, r5, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	bl SpeciesToNationalPokedexNum
 	adds r4, r0, 0
@@ -227,20 +227,20 @@ AddHatchedMonToParty: @ 8046D60
 	strh r0, [r2]
 	adds r0, r5, 0
 	movs r1, 0x26
-	bl sub_804037C
+	bl SetMonData
 	add r2, sp, 0x10
 	movs r0, 0
 	strh r0, [r2]
 	adds r0, r5, 0
 	movs r1, 0x24
-	bl sub_804037C
+	bl SetMonData
 	bl sav1_map_get_name
 	mov r2, sp
 	adds r2, 0x12
 	strb r0, [r2]
 	adds r0, r5, 0
 	movs r1, 0x23
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r5, 0
 	bl MonRestorePP
 	adds r0, r5, 0
@@ -400,7 +400,7 @@ _08046F1C:
 	lsls r0, r4, 3
 	ldr r1, _08046F64 @ =gUnknown_82350AC
 	adds r0, r1
-	ldr r1, _08046F68 @ =gUnknown_202401C
+	ldr r1, _08046F68 @ =gMonSpritesGfxPtr
 	ldr r2, [r1]
 	mov r6, r8
 	lsls r1, r6, 1
@@ -419,14 +419,14 @@ _08046F1C:
 	b _08046FA6
 	.align 2, 0
 _08046F64: .4byte gUnknown_82350AC
-_08046F68: .4byte gUnknown_202401C
+_08046F68: .4byte gMonSpritesGfxPtr
 _08046F6C:
 	adds r0, r5, 0
 	bl GetMonSpritePalStruct
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
 	bl sub_803F7D4
-	ldr r0, _08046FB4 @ =gUnknown_20244DC
+	ldr r0, _08046FB4 @ =gMultiuseSpriteTemplate
 	movs r1, 0x78
 	movs r2, 0x46
 	movs r3, 0x6
@@ -456,7 +456,7 @@ _08046FA6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08046FB4: .4byte gUnknown_20244DC
+_08046FB4: .4byte gMultiuseSpriteTemplate
 _08046FB8: .4byte gSprites
 _08046FBC: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8046ED0
@@ -778,7 +778,7 @@ EggHatchSetMonNickname: @ 80472A0
 	adds r0, r1
 	ldr r2, _080472D8 @ =gStringVar3
 	movs r1, 0x2
-	bl sub_804037C
+	bl SetMonData
 	bl FreeMonSpritesGfx
 	ldr r0, _080472DC @ =gUnknown_3000E74
 	ldr r0, [r0]

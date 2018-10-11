@@ -80,7 +80,7 @@ gUnknown_202271C: @ 202271C
 gUnknown_2022720: @ 2022720
 	.space 0x1C
 
-gUnknown_202273C: @ 202273C
+gLinkPlayers: @ 202273C
 	.space 0x8
 
 gUnknown_2022744: @ 2022744
@@ -152,13 +152,13 @@ gUnknown_2022988: @ 2022988
 gUnknown_202298A: @ 202298A
 	.space 0x2
 
-gUnknown_202298C: @ 202298C
+gDisplayedStringBattle: @ 202298C
 	.space 0x12C
 
-gUnknown_2022AB8: @ 2022AB8
+gBattleTextBuff1: @ 2022AB8
 	.space 0x10
 
-gUnknown_2022AC8: @ 2022AC8
+gBattleTextBuff2: @ 2022AC8
 	.space 0x10
 
 gUnknown_2022AD8: @ 2022AD8
@@ -212,7 +212,7 @@ gActiveBattler: @ 2023BC4
 gUnknown_2023BC8: @ 2023BC8
 	.space 0x4
 
-gUnknown_2023BCC: @ 2023BCC
+gBattlersCount: @ 2023BCC
 	.space 0x2
 
 gBattlerPartyIndexes: @ 2023BCE
@@ -284,7 +284,7 @@ gUnknown_2023D58: @ 2023D58
 gUnknown_2023D68: @ 2023D68
 	.space 0x2
 
-gUnknown_2023D6A: @ 2023D6A
+gLastUsedAbility: @ 2023D6A
 	.space 0x1
 
 sBattler_AI: @ 2023D6B
@@ -299,7 +299,7 @@ gUnknown_2023D6D: @ 2023D6D
 gUnknown_2023D6E: @ 2023D6E
 	.space 0x1
 
-gUnknown_2023D6F: @ 2023D6F
+gPotentialItemEffectBattler: @ 2023D6F
 	.space 0x1
 
 gAbsentBattlerFlags: @ 2023D70
@@ -362,7 +362,7 @@ gUnknown_2023DDC: @ 2023DDC
 gSideAffecting: @ 2023DDE
 	.space 0x6
 
-gUnknown_2023DE4: @ 2023DE4
+gSideTimers: @ 2023DE4
 	.space 0x18
 
 gStatuses3: @ 2023DFC
@@ -413,11 +413,8 @@ gDynamicBasePower: @ 2023F50
 gUnknown_2023F52: @ 2023F52
 	.space 0x2
 
-gUnknown_2023F54: @ 2023F54
-	.space 0x8
-
-gUnknown_2023F5C: @ 2023F5C
-	.space 0x68
+gEnigmaBerries: @ 2023F54
+	.space 0x70
 
 gBattleScripting: @ 2023FC4
 	.space 0x4
@@ -446,7 +443,7 @@ gUnknown_2023FFC: @ 2023FFC
 gUnknown_2024000: @ 2024000
 	.space 0x4
 
-gUnknown_2024004: @ 2024004
+gBattlerInMenuId: @ 2024004
 	.space 0x1
 
 gUnknown_2024005: @ 2024005
@@ -458,25 +455,25 @@ gUnknown_2024008: @ 2024008
 gUnknown_2024018: @ 2024018
 	.space 0x4
 
-gUnknown_202401C: @ 202401C
+gMonSpritesGfxPtr: @ 202401C
 	.space 0x4
 
-gUnknown_2024020: @ 2024020
+gBattleMovePower: @ 2024020
 	.space 0x2
 
-gUnknown_2024022: @ 2024022
+gMoveToLearn: @ 2024022
 	.space 0x2
 
-gUnknown_2024024: @ 2024024
+gBattleMonForms: @ 2024024
 	.space 0x4
 
-gUnknown_2024028: @ 2024028
+sLearningMoveTableID: @ 2024028
 	.space 0x1
 
-gUnknown_2024029: @ 2024029
+gPlayerPartyCount: @ 2024029
 	.space 0x1
 
-gUnknown_202402A: @ 202402A
+gEnemyPartyCount: @ 202402A
 	.space 0x2
 
 gEnemyParty: @ 202402C
@@ -512,7 +509,7 @@ gUnknown_2024414: @ 2024414
 gUnknown_2024478: @ 2024478
 	.space 0x64
 
-gUnknown_20244DC: @ 20244DC
+gMultiuseSpriteTemplate: @ 20244DC
 	.space 0x18
 
 gUnknown_20244F4: @ 20244F4
@@ -716,10 +713,10 @@ gUnknown_20370D2: @ 20370D2
 gUnknown_20370D4: @ 20370D4
 	.space 0x2
 
-gUnknown_20370D6: @ 20370D6
+gSpecialVar_MonBoxId: @ 20370D6
 	.space 0x2
 
-gUnknown_20370D8: @ 20370D8
+gSpecialVar_MonBoxPos: @ 20370D8
 	.space 0x2
 
 gUnknown_20370DA: @ 20370DA

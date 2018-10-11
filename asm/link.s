@@ -1112,7 +1112,7 @@ _08009D40:
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
-	ldr r1, _08009DD0 @ =gUnknown_202273C
+	ldr r1, _08009DD0 @ =gLinkPlayers
 	adds r2, r0, r1
 	adds r1, r2, 0
 	mov r0, r8
@@ -1155,7 +1155,7 @@ _08009DBC:
 _08009DC4: .4byte gUnknown_2022118
 _08009DC8: .4byte gUnknown_3003ED0
 _08009DCC: .4byte gUnknown_3003EB8
-_08009DD0: .4byte gUnknown_202273C
+_08009DD0: .4byte gLinkPlayers
 _08009DD4: .4byte gUnknown_82345C0
 _08009DD8: .4byte c2_800ACD4
 _08009DDC:
@@ -1599,12 +1599,12 @@ _0800A100:
 	bl sub_80098B8
 _0800A112:
 	movs r6, 0
-	ldr r4, _0800A120 @ =gUnknown_202273C
+	ldr r4, _0800A120 @ =gLinkPlayers
 	movs r5, 0
 	b _0800A138
 	.align 2, 0
 _0800A11C: .4byte gUnknown_3003EAC
-_0800A120: .4byte gUnknown_202273C
+_0800A120: .4byte gLinkPlayers
 _0800A124:
 	adds r0, r4, 0
 	adds r0, 0x14
@@ -1628,7 +1628,7 @@ _0800A138:
 	lsrs r0, 24
 	cmp r7, r0
 	bne _0800A1B8
-	ldr r0, _0800A170 @ =gUnknown_202273C
+	ldr r0, _0800A170 @ =gLinkPlayers
 	ldr r1, [r0, 0x14]
 	ldr r0, _0800A174 @ =0x00001133
 	cmp r1, r0
@@ -1643,7 +1643,7 @@ _0800A138:
 	ldr r2, _0800A178 @ =gUnknown_3000E54
 	b _0800A1E0
 	.align 2, 0
-_0800A170: .4byte gUnknown_202273C
+_0800A170: .4byte gLinkPlayers
 _0800A174: .4byte 0x00001133
 _0800A178: .4byte gUnknown_3000E54
 _0800A17C:
@@ -1715,10 +1715,10 @@ IsLinkPlayerDataExchangeComplete: @ 800A1F0
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r4, 0
-	ldr r5, _0800A1FC @ =gUnknown_202273C
+	ldr r5, _0800A1FC @ =gLinkPlayers
 	b _0800A220
 	.align 2, 0
-_0800A1FC: .4byte gUnknown_202273C
+_0800A1FC: .4byte gLinkPlayers
 _0800A200:
 	lsls r0, r4, 3
 	subs r0, r4
@@ -1772,7 +1772,7 @@ _0800A254: .4byte gUnknown_3000E54
 GetLinkPlayerTrainerId: @ 800A258
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0800A26C @ =gUnknown_202273C
+	ldr r2, _0800A26C @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -1781,13 +1781,13 @@ GetLinkPlayerTrainerId: @ 800A258
 	ldr r0, [r1]
 	bx lr
 	.align 2, 0
-_0800A26C: .4byte gUnknown_202273C
+_0800A26C: .4byte gLinkPlayers
 	thumb_func_end GetLinkPlayerTrainerId
 
 	thumb_func_start sub_800A270
 sub_800A270: @ 800A270
 	push {r4,r5,lr}
-	ldr r5, _0800A290 @ =gUnknown_202273C
+	ldr r5, _0800A290 @ =gLinkPlayers
 	movs r4, 0x4
 _0800A276:
 	adds r0, r5, 0
@@ -1802,7 +1802,7 @@ _0800A276:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A290: .4byte gUnknown_202273C
+_0800A290: .4byte gLinkPlayers
 	thumb_func_end sub_800A270
 
 	thumb_func_start ResetBlockSend
@@ -2706,7 +2706,7 @@ sub_800A900: @ 800A900
 	bl GetMultiplayerId
 	ldr r1, _0800A938 @ =gUnknown_3003F60
 	strb r0, [r1]
-	ldr r4, _0800A93C @ =gUnknown_202273C
+	ldr r4, _0800A93C @ =gLinkPlayers
 	ldr r3, _0800A940 @ =gUnknown_20227C8
 	movs r2, 0x4
 _0800A914:
@@ -2729,7 +2729,7 @@ _0800A914:
 	.align 2, 0
 _0800A934: .4byte gUnknown_3003F40
 _0800A938: .4byte gUnknown_3003F60
-_0800A93C: .4byte gUnknown_202273C
+_0800A93C: .4byte gLinkPlayers
 _0800A940: .4byte gUnknown_20227C8
 	thumb_func_end sub_800A900
 
@@ -2760,7 +2760,7 @@ sub_800A95C: @ 800A95C
 	adds r6, r0, 0
 	cmp r5, r2
 	bge _0800A986
-	ldr r1, _0800A994 @ =gUnknown_202273C
+	ldr r1, _0800A994 @ =gLinkPlayers
 	ldr r0, _0800A998 @ =gUnknown_20227C8
 	adds r4, r0, 0x4
 	adds r3, r1, 0x4
@@ -2784,7 +2784,7 @@ _0800A986:
 	b _0800A99E
 	.align 2, 0
 _0800A990: .4byte gUnknown_3003F40
-_0800A994: .4byte gUnknown_202273C
+_0800A994: .4byte gLinkPlayers
 _0800A998: .4byte gUnknown_20227C8
 _0800A99C:
 	movs r0, 0x1
@@ -2805,7 +2805,7 @@ sub_800A9A4: @ 800A9A4
 	cmp r4, r0
 	bcs _0800AA04
 	ldr r6, _0800AA14 @ =gUnknown_20227C8
-	ldr r5, _0800AA18 @ =gUnknown_202273C
+	ldr r5, _0800AA18 @ =gLinkPlayers
 	movs r0, 0x8
 	adds r0, r6
 	mov r8, r0
@@ -2853,7 +2853,7 @@ _0800AA04:
 	.align 2, 0
 _0800AA10: .4byte gUnknown_3003F40
 _0800AA14: .4byte gUnknown_20227C8
-_0800AA18: .4byte gUnknown_202273C
+_0800AA18: .4byte gLinkPlayers
 _0800AA1C: .4byte gUnknown_3003EAC
 _0800AA20: .4byte c2_800ACD4
 	thumb_func_end sub_800A9A4
@@ -3731,7 +3731,7 @@ sub_800B110: @ 800B110
 	lsls r2, r0, 3
 	subs r2, r0
 	lsls r2, 2
-	ldr r0, _0800B16C @ =gUnknown_202273C
+	ldr r0, _0800B16C @ =gLinkPlayers
 	adds r2, r0
 	adds r1, r2, 0
 	adds r0, r4, 0
@@ -3765,7 +3765,7 @@ _0800B160:
 	bx r0
 	.align 2, 0
 _0800B168: .4byte gUnknown_2022118
-_0800B16C: .4byte gUnknown_202273C
+_0800B16C: .4byte gLinkPlayers
 _0800B170: .4byte gUnknown_82345C0
 _0800B174: .4byte c2_800ACD4
 	thumb_func_end sub_800B110

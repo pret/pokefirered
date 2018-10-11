@@ -537,7 +537,7 @@ _0800F5E8:
 	beq _0800F666
 	cmp r2, 0x1
 	bne _0800F632
-	ldr r2, _0800F620 @ =gUnknown_202273C
+	ldr r2, _0800F620 @ =gLinkPlayers
 	ldr r0, _0800F624 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
@@ -556,7 +556,7 @@ _0800F5E8:
 	b _0800F6F0
 	.align 2, 0
 _0800F61C: .4byte gBattleTypeFlags
-_0800F620: .4byte gUnknown_202273C
+_0800F620: .4byte gLinkPlayers
 _0800F624: .4byte gBattleStruct
 _0800F628:
 	cmp r0, 0x2
@@ -565,7 +565,7 @@ _0800F628:
 	bne _0800F6F0
 	b _0800F682
 _0800F632:
-	ldr r2, _0800F654 @ =gUnknown_202273C
+	ldr r2, _0800F654 @ =gLinkPlayers
 	ldr r0, _0800F658 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
@@ -583,7 +583,7 @@ _0800F632:
 	beq _0800F682
 	b _0800F6F0
 	.align 2, 0
-_0800F654: .4byte gUnknown_202273C
+_0800F654: .4byte gLinkPlayers
 _0800F658: .4byte gBattleStruct
 _0800F65C:
 	cmp r0, 0x2
@@ -594,7 +594,7 @@ _0800F65C:
 _0800F666:
 	cmp r2, 0x1
 	bne _0800F6A4
-	ldr r2, _0800F694 @ =gUnknown_202273C
+	ldr r2, _0800F694 @ =gLinkPlayers
 	ldr r0, _0800F698 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
@@ -615,12 +615,12 @@ _0800F682:
 	bl sub_80D87BC
 	b _0800F6F0
 	.align 2, 0
-_0800F694: .4byte gUnknown_202273C
+_0800F694: .4byte gLinkPlayers
 _0800F698: .4byte gBattleStruct
 _0800F69C: .4byte gUnknown_83FE874
 _0800F6A0: .4byte gUnknown_83FE87B
 _0800F6A4:
-	ldr r2, _0800F6D0 @ =gUnknown_202273C
+	ldr r2, _0800F6D0 @ =gLinkPlayers
 	ldr r0, _0800F6D4 @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0xB5
@@ -641,7 +641,7 @@ _0800F6BC:
 	bl sub_80D87BC
 	b _0800F6F0
 	.align 2, 0
-_0800F6D0: .4byte gUnknown_202273C
+_0800F6D0: .4byte gLinkPlayers
 _0800F6D4: .4byte gBattleStruct
 _0800F6D8: .4byte gUnknown_83FE874
 _0800F6DC: .4byte gUnknown_83FE87B
@@ -781,7 +781,7 @@ _0800F7CC:
 	adds r6, r5, 0
 	eors r6, r0
 	adds r1, r6, 0
-	ldr r4, _0800F848 @ =gUnknown_202273C
+	ldr r4, _0800F848 @ =gLinkPlayers
 	lsls r0, r5, 3
 	subs r0, r5
 	lsls r0, 2
@@ -832,7 +832,7 @@ _0800F830:
 	b _0800FAC4
 	.align 2, 0
 _0800F844: .4byte gBattleStruct
-_0800F848: .4byte gUnknown_202273C
+_0800F848: .4byte gLinkPlayers
 _0800F84C: .4byte gTasks
 _0800F850:
 	ldr r0, _0800F8CC @ =0x00002710

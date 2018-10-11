@@ -301,11 +301,11 @@ _08097E36:
 	mov r0, r8
 	movs r1, 0x40
 	mov r2, r9
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r1, r9
 	ldrb r0, [r1]
 	b _08097EEE
@@ -413,7 +413,7 @@ GiveMailToMon2: @ 8097F44
 	adds r0, r6, 0
 	movs r1, 0x40
 	adds r2, r4, 0
-	bl sub_804037C
+	bl SetMonData
 	mov r0, sp
 	strb r5, [r0]
 	mov r1, sp
@@ -422,7 +422,7 @@ GiveMailToMon2: @ 8097F44
 	adds r0, r6, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	ldrb r0, [r4]
 	b _08097FAA
 	.align 2, 0
@@ -476,11 +476,11 @@ TakeMailFromMon: @ 8097FB8
 	strb r1, [r0, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x40
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 _08098008:
 	add sp, 0x8
 	pop {r4}
@@ -577,11 +577,11 @@ _08098060:
 	adds r0, r5, 0
 	movs r1, 0x40
 	mov r2, r9
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r7, 0
 	b _080980E8
 	.align 2, 0

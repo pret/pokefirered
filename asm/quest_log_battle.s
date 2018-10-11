@@ -99,7 +99,7 @@ _0812C06A:
 	lsls r1, 1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812C0BC
@@ -121,7 +121,7 @@ _0812C0B8: .4byte gBattleMons
 _0812C0BC:
 	ldr r5, _0812C0D8 @ =gBattleMons
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r4, 0x58
@@ -137,7 +137,7 @@ _0812C0D8: .4byte gBattleMons
 _0812C0DC:
 	movs r0, 0x2
 _0812C0DE:
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r4
@@ -146,10 +146,10 @@ _0812C0EA:
 	ldrh r0, [r0]
 	strh r0, [r7, 0x4]
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r6, _0812C14C @ =gBattleMons
 	lsls r4, 24
 	lsrs r4, 24
@@ -168,10 +168,10 @@ _0812C0EA:
 	lsrs r0, 16
 	mov r8, r0
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r4, 24
 	lsrs r4, 24
 	adds r1, r4, 0
@@ -194,7 +194,7 @@ _0812C150:
 	ldrh r0, [r0, 0x20]
 	strh r0, [r7, 0x2]
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r5, _0812C1C8 @ =gBattleMons
 	lsls r0, 24
 	lsrs r0, 24
@@ -204,7 +204,7 @@ _0812C150:
 	ldrh r0, [r0]
 	strh r0, [r7, 0x4]
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r4
@@ -212,7 +212,7 @@ _0812C150:
 	ldrh r0, [r0, 0x28]
 	mov r8, r0
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r4
@@ -432,7 +432,7 @@ _0812C330: .4byte gBattleStruct
 sub_812C334: @ 812C334
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r3, _0812C35C @ =gUnknown_202273C
+	ldr r3, _0812C35C @ =gLinkPlayers
 	ldr r4, _0812C360 @ =gBattleStruct
 	ldr r0, [r4]
 	adds r0, 0xB5
@@ -452,7 +452,7 @@ _0812C352:
 	str r5, [r6]
 	b _0812C370
 	.align 2, 0
-_0812C35C: .4byte gUnknown_202273C
+_0812C35C: .4byte gLinkPlayers
 _0812C360: .4byte gBattleStruct
 _0812C364:
 	ldr r0, [r4]

@@ -78,7 +78,7 @@ _080CA34A:
 	adds r0, r4, 0
 	movs r1, 0x43
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	movs r6, 0x1
 _080CA388:
 	adds r5, 0x1

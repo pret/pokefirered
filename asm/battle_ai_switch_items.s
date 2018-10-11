@@ -28,7 +28,7 @@ ShouldSwitchIfPerishSong: @ 8039188
 	cmp r0, 0
 	bne _080391E4
 	adds r0, r2, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _080391E0 @ =gBattleStruct
@@ -73,7 +73,7 @@ _08039204: .4byte gBattleTypeFlags
 _08039208:
 	ldr r0, _0803922C @ =gActiveBattler
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039230 @ =gBattleStruct
@@ -93,7 +93,7 @@ _08039230: .4byte gBattleStruct
 _08039234:
 	ldr r4, _0803936C @ =gBattleMons
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x58
@@ -106,7 +106,7 @@ _08039234:
 	b _0803935C
 _08039250:
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r6, 0
@@ -185,7 +185,7 @@ _080392A4:
 	movs r1, 0x2E
 	bl GetMonData
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r4, 0
@@ -305,12 +305,12 @@ _080393D6:
 	beq _08039442
 	mov r8, r3
 	mov r0, r8
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	movs r4, 0x2
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r1, _08039424 @ =gAbsentBattlerFlags
 	ldrb r1, [r1]
 	ldr r2, _08039428 @ =gBitTable
@@ -333,11 +333,11 @@ _08039424: .4byte gAbsentBattlerFlags
 _08039428: .4byte gBitTable
 _0803942C:
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r7, r0, 24
 	b _08039446
@@ -396,7 +396,7 @@ _0803949C: .4byte gBattleMons
 _080394A0:
 	ldr r0, _080394C4 @ =gActiveBattler
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _080394C8 @ =gBattleStruct
@@ -616,7 +616,7 @@ _08039664:
 	ldr r0, _08039690 @ =gActiveBattler
 	ldrb r0, [r0]
 _08039668:
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039694 @ =gBattleStruct
@@ -650,7 +650,7 @@ ai_has_super_effective_move_on_field: @ 8039698
 	lsrs r0, 24
 	mov r8, r0
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, _08039730 @ =gAbsentBattlerFlags
@@ -727,7 +727,7 @@ _08039744:
 	b _080397C4
 _08039748:
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, _080397D0 @ =gAbsentBattlerFlags
@@ -898,12 +898,12 @@ _0803987A:
 	beq _08039918
 	mov r9, r3
 	mov r0, r9
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	movs r4, 0x2
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r1, _080398CC @ =gAbsentBattlerFlags
 	ldrb r1, [r1]
 	ldr r2, _080398D0 @ =gBitTable
@@ -928,11 +928,11 @@ _080398CC: .4byte gAbsentBattlerFlags
 _080398D0: .4byte gBitTable
 _080398D4:
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -940,7 +940,7 @@ _080398D4:
 _080398EC:
 	ldr r0, _08039910 @ =gActiveBattler
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039914 @ =gBattleStruct
@@ -1170,7 +1170,7 @@ _08039ABA:
 	adds r1, r2, 0
 	movs r2, 0x17
 	movs r3, 0
-	bl sub_8019F18
+	bl AbilityBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -1182,7 +1182,7 @@ _08039AD2:
 	movs r0, 0xC
 	movs r2, 0x47
 	movs r3, 0
-	bl sub_8019F18
+	bl AbilityBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -1194,7 +1194,7 @@ _08039AEA:
 	movs r1, 0
 	movs r2, 0x2A
 	movs r3, 0
-	bl sub_8019F18
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _08039B1C
@@ -1226,12 +1226,12 @@ _08039B1C:
 	ldr r4, _08039B60 @ =gActiveBattler
 	ldrb r7, [r4]
 	adds r0, r7, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	movs r5, 0x2
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r1, _08039B70 @ =gAbsentBattlerFlags
 	ldrb r1, [r1]
 	ldr r2, _08039B74 @ =gBitTable
@@ -1254,11 +1254,11 @@ _08039B70: .4byte gAbsentBattlerFlags
 _08039B74: .4byte gBitTable
 _08039B78:
 	ldrb r0, [r4]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _08039B94
@@ -1396,7 +1396,7 @@ _08039C94:
 	beq _08039D8C
 	ldr r0, _08039CE0 @ =gActiveBattler
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039CE4 @ =gBattleStruct
@@ -1417,7 +1417,7 @@ _08039C94:
 	cmp r0, 0
 	bne _08039CE8
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
@@ -1428,11 +1428,11 @@ _08039CE0: .4byte gActiveBattler
 _08039CE4: .4byte gBattleStruct
 _08039CE8:
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08039CFC:
@@ -1476,7 +1476,7 @@ _08039D3E:
 _08039D44:
 	ldr r0, _08039D88 @ =gActiveBattler
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r1, _08039D84 @ =gBattleStruct
@@ -1487,7 +1487,7 @@ _08039D44:
 _08039D5A:
 	ldr r4, _08039D88 @ =gActiveBattler
 	ldrb r0, [r4]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	ldrb r2, [r4]
 	ldr r1, _08039D84 @ =gBattleStruct
 	ldr r1, [r1]
@@ -1628,12 +1628,12 @@ _08039E5E:
 	beq _08039EF8
 	str r2, [sp, 0xC]
 	adds r0, r2, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	movs r5, 0x2
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r1, _08039EA4 @ =gAbsentBattlerFlags
 	ldrb r1, [r1]
 	ldr r2, _08039EA8 @ =gBitTable
@@ -1655,11 +1655,11 @@ _08039EA4: .4byte gAbsentBattlerFlags
 _08039EA8: .4byte gBitTable
 _08039EAC:
 	ldrb r0, [r4]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x10]
@@ -1690,7 +1690,7 @@ _08039EF0: .4byte gAbsentBattlerFlags
 _08039EF4: .4byte gBitTable
 _08039EF8:
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -2151,7 +2151,7 @@ _0803A26E:
 	bne _0803A286
 	b _0803A644
 _0803A286:
-	ldr r1, _0803A2B0 @ =gUnknown_82528BC
+	ldr r1, _0803A2B0 @ =gItemEffectTable
 	subs r0, 0xD
 	lsls r0, 2
 	adds r0, r1
@@ -2171,7 +2171,7 @@ _0803A296:
 	.align 2, 0
 _0803A2A8: .4byte gEnemyParty
 _0803A2AC: .4byte gBattleResources
-_0803A2B0: .4byte gUnknown_82528BC
+_0803A2B0: .4byte gItemEffectTable
 _0803A2B4: .4byte gSaveBlock1Ptr
 _0803A2B8: .4byte 0x00003108
 _0803A2BC:
@@ -2576,7 +2576,7 @@ _0803A5C4: .4byte gDisableStructs
 _0803A5C8:
 	ldr r4, _0803A630 @ =gActiveBattler
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, _0803A634 @ =gDisableStructs
@@ -2588,7 +2588,7 @@ _0803A5C8:
 	ldrb r0, [r0, 0x16]
 	cmp r0, 0
 	beq _0803A5F8
-	ldr r0, _0803A638 @ =gUnknown_2023DE4
+	ldr r0, _0803A638 @ =gSideTimers
 	lsls r1, r3, 1
 	adds r1, r3
 	lsls r1, 2
@@ -2628,7 +2628,7 @@ _0803A5FC:
 	.align 2, 0
 _0803A630: .4byte gActiveBattler
 _0803A634: .4byte gDisableStructs
-_0803A638: .4byte gUnknown_2023DE4
+_0803A638: .4byte gSideTimers
 _0803A63C: .4byte gBattleStruct
 _0803A640: .4byte gBattleResources
 _0803A644:

@@ -496,8 +496,8 @@ struct QuestLog
     /*0x0148*/ u8 unk_148[0x120];
     /*0x02c8*/ u8 unk_268[0x200];
     /*0x0468*/ struct QuestLogNPCData npcData[64];
-    /*0x0568*/ u8 filler_568[0x100];
-    /*0x0668*/ u8 end[0];
+    /*0x0568*/ u16 unk_568[0x80];
+    /*0x0668*/ u16 end[0];
 };
 
 #define MAP_OBJECTS_COUNT  16

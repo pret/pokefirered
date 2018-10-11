@@ -41,7 +41,7 @@ EWRAM_DATA u8 gUnknown_203ADFA = 0;
 EWRAM_DATA u16 gUnknown_203ADFC = 0;
 EWRAM_DATA u8 gUnknown_203ADFE[3];
 EWRAM_DATA void * gUnknown_203AE04 = NULL;
-EWRAM_DATA void * gUnknown_203AE08 = NULL;
+EWRAM_DATA u16 * gUnknown_203AE08 = NULL;
 EWRAM_DATA void * gUnknown_203AE0C[32] = {NULL};
 EWRAM_DATA void (* gUnknown_203AE8C)(void) = 0;
 EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
@@ -65,7 +65,12 @@ u16 sub_8111618(void);
 u16 sub_811164C(void);
 void sub_8111688(void);
 void sub_811175C(u8, struct UnkStruct_203AE98 *);
-void sub_81118F4(s8);
+void * sub_8113D08(void *, struct UnkStruct_203AE98 *);
+void * sub_8113D94(void *, struct UnkStruct_203AE98 *);
+void * sub_8113C20(void *, struct UnkStruct_203AE98 *);
+void * sub_8113C8C(void *, struct UnkStruct_203AE98 *);
+void * sub_8113A78(void *, void **);
+void sub_8113ABC(void *);
 void sub_81138F8(void);
 void sub_8111AD8(void);
 void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
@@ -75,6 +80,7 @@ void sub_8113BD8(void);
 void * sub_8113BF4(void *);
 void * sub_8113D48(void *, struct UnkStruct_203AE98 *);
 void * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
+void sub_81118F4(s8);
 
 extern const u8 gUnknown_841A155[];
 
@@ -94,7 +100,7 @@ void sub_8110840(void * a0)
     if (gUnknown_203ADFA != 0)
     {
         if (gUnknown_203AE08)
-            gUnknown_203AE08 += r1;
+            gUnknown_203AE08 = (void *)gUnknown_203AE08 + r1;
         if (gUnknown_203ADFA == 2)
         {
             int r3;
@@ -111,7 +117,7 @@ void sub_811089C(void)
     gUnknown_203ADF8 = 0;
     gUnknown_203ADFA = 0;
     gUnknown_203AE8C = 0;
-    gUnknown_203AE08 = 0;
+    gUnknown_203AE08 = NULL;
     gUnknown_203AE04 = 0;
     sub_8113BD8();
     sub_81138F8();
@@ -134,20 +140,20 @@ void sub_811092C(void)
         gUnknown_203AE8C();
 }
 
-bool8 sub_8110944(u8 * a0, size_t a1)
+bool8 sub_8110944(void * a0, size_t a1)
 {
-    u8 * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_568;
-    u8 * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
+    void * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
+    void * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
     r0 -= a1;
     if (a0 < r2 || a0 > r0)
         return FALSE;
     return TRUE;
 }
 
-bool8 sub_8110988(u8 * a0, size_t a1)
+bool8 sub_8110988(void * a0, size_t a1)
 {
-    u8 * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_568;
-    u8 * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
+    void * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
+    void * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
     r0 -= a1;
     if (a0 < r2 || a0 > r0)
         return FALSE;
@@ -209,7 +215,7 @@ void sub_8110AEC(u16 a0)
 
     sub_81108F0(gUnknown_203ADF8);
     sub_8113B88();
-    gUnknown_203AE08 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].filler_568;
+    gUnknown_203AE08 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
     if ((a0 >= 12 && a0 < 20) || a0 == 35)
         gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 2;
     else
@@ -797,4 +803,83 @@ u16 sub_811164C(void)
     }
 
     return count;
+}
+
+void sub_8111688(void)
+{
+    u16 i, j;
+    u16 sp0[4];
+
+    for (i = 0; i < 4; i++)
+    {
+        sp0[i] = VarGet(VAR_0x40AA + i);
+
+        for (j = 0; j < 16; j++)
+        {
+            if (sp0[i] & 1)
+                gSaveBlock1Ptr->trainerRematches[16 * i + j] = 30;
+            else
+                gSaveBlock1Ptr->trainerRematches[16 * i + j] = 0;
+            sp0[i] >>= 1;
+        }
+    }
+}
+
+void sub_8111708(void)
+{
+    struct MapHeader sp0;
+
+    gSaveBlock1Ptr->mapDataId = VarGet(VAR_0x40AE);
+    if (gSaveBlock1Ptr->mapDataId == 0)
+    {
+        sp0 = *get_mapheader_by_bank_and_number(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+        gSaveBlock1Ptr->mapDataId = sp0.mapDataId;
+    }
+}
+
+void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
+{
+    u16 i;
+    u16 *r4;
+    u16 r6 = 0;
+    u16 r9 = 0;
+
+    memset(a1, 0, 32 * sizeof(struct UnkStruct_203AE98));
+    for (i = 0; i < 32; i++)
+    {
+        gUnknown_203AE0C[i] = NULL;
+    }
+
+    r4 = gSaveBlock1Ptr->questLog[a0].unk_568;
+    for (i = 0; i < 32; i++)
+    {
+        switch (*r4 & 0xFFF)
+        {
+            case 0:
+                r4 = sub_8113D08(r4, &a1[r6]);
+                r6++;
+                break;
+            case 1:
+            case 2:
+                r4 = sub_8113D94(r4, &a1[r6]);
+                r6++;
+                break;
+            case 39:
+                r4 = sub_8113C20(r4, &a1[r6]);
+                r6++;
+                break;
+            case 41:
+                r4 = sub_8113C8C(r4, &a1[r6]);
+                r6++;
+                break;
+            default:
+                r4 = sub_8113A78(r4, &gUnknown_203AE0C[r9]);
+                if (r9 == 0)
+                    sub_8113ABC(gUnknown_203AE0C[0]);
+                r9++;
+                break;
+        }
+        if (r4 == NULL)
+            break;
+    }
 }

@@ -653,7 +653,13 @@ gUnknown_8D2FBD4:: @ 8D2FBD4
 	
 	@ INSERT TRAINERS HERE
 gUnknown_8E48D58:: @ 8E48D58
-	.incbin "baserom.gba", 0xE48D58, 0x2E624
+	.incbin "baserom.gba", 0xE48D58, 0x21164
+	
+gUnknown_8E69EBC:: @ 8E69EBC
+	.incbin "baserom.gba", 0xE69EBC, 0xD0A0
+	
+gUnknown_8E76F5C:: @ 8E76F5C
+	.incbin "baserom.gba", 0xE76F5C, 0x420
 	
 	@ THIS IS ./graphics/battle_transitions/vs_frame.4bpp.lz
 gUnknown_8E7737C:: @ 8E7737C

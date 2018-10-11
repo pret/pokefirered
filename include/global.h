@@ -492,7 +492,9 @@ struct QuestLog
     /*0x0003*/ s8 unk_003;
     /*0x0004*/ s16 unk_004;
     /*0x0006*/ s16 unk_006;
-    /*0x0008*/ u8 filler_008[0x460];
+    /*0x0008*/ u8 filler_008[0x140];
+    /*0x0148*/ u8 unk_148[0x120];
+    /*0x02c8*/ u8 unk_268[0x200];
     /*0x0468*/ struct QuestLogNPCData npcData[64];
     /*0x0568*/ u8 filler_568[0x100];
     /*0x0668*/ u8 end[0];
@@ -500,7 +502,7 @@ struct QuestLog
 
 #define MAP_OBJECTS_COUNT  16
 #define BERRY_TREES_COUNT  128
-#define FLAGS_COUNT        300
+#define FLAGS_COUNT        288 // 300
 #define VARS_COUNT         256
 #define MAIL_COUNT         16
 
@@ -512,13 +514,26 @@ struct SaveBlock1
     /*0x14*/ struct WarpData warp2;
     /*0x1C*/ struct WarpData lastHealLocation;
     /*0x24*/ struct WarpData warp4;
-    /*0x002C*/ u8 filler2C[0x60C];
+    /*0x2C*/ u16 savedMusic;
+    /*0x2E*/ u8 weather;
+    /*0x2F*/ u8 filler_2F;
+    /*0x30*/ u8 flashLevel;
+    /*0x32*/ u16 mapDataId;
+    /*0x34*/ u16 mapView[0x100];
+    /*0x234*/ u8 playerPartyCount;
+    /*0x238*/ struct Pokemon playerParty[PARTY_SIZE];
+    /*0x490*/ u32 money;
+    /*0x494*/ u16 coins;
+    /*0x496*/ u16 registeredItem; // registered for use with SELECT button
+    /*0x498*/ u8 filler_0498[0x1a0];
     /*0x638*/ u8 trainerRematchStepCounter;
               u8 filler_639;
     /*0x63a*/ u8 trainerRematches[100];
     /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
     /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
-    /*0x0EE0*/ u8 fillerEE0[0x420];
+    /*0x0EE0*/ u8 flags[FLAGS_COUNT];
+    /*0x1000*/ u16 vars[VARS_COUNT];
+    /*0x1200*/ u8 filler1200[0x100];
     /*0x1300*/ struct QuestLog questLog[4];
     /*0x2ca0*/ u8 filler2CA0[0x7c0];
     /*0x3460*/ struct MysteryEventStruct unk_3460;

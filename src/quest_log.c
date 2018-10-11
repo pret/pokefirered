@@ -392,3 +392,35 @@ void sub_8110BE8(u8 a0)
                 "\t.pool");
 }
 #endif // NONMATCHING
+
+void sub_8110D48(u8 a0)
+{
+    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
+
+    CpuCopy16(gSaveBlock1Ptr->flags, questLog->unk_148, 0x120);
+    CpuCopy16(gSaveBlock1Ptr->vars, questLog->unk_268, 0x200);
+}
+
+void sub_8110D94(void)
+{
+    u16 i, j;
+    u16 sp0[4];
+
+    for (i = 0; i < 4; i++)
+    {
+        sp0[i] = 0;
+        for (j = 0; j < 16; j++)
+        {
+            if (gSaveBlock1Ptr->trainerRematches[16 * i + j])
+            {
+                sp0[i] += (1 << j);
+            }
+        }
+        VarSet(VAR_0x40AA + i, sp0[i]);
+    }
+}
+
+void sub_8110E20(void)
+{
+    VarSet(VAR_0x40AE, gSaveBlock1Ptr->mapDataId);
+}

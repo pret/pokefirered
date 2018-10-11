@@ -273,7 +273,7 @@ copy_player_party_to_sav1: @ 804C1F0
 	push {r4,lr}
 	ldr r0, _0804C224 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
-	ldr r1, _0804C228 @ =gUnknown_2024029
+	ldr r1, _0804C228 @ =gPlayerPartyCount
 	ldrb r1, [r1]
 	adds r0, 0x34
 	strb r1, [r0]
@@ -297,14 +297,14 @@ _0804C200:
 	bx r0
 	.align 2, 0
 _0804C224: .4byte gSaveBlock1Ptr
-_0804C228: .4byte gUnknown_2024029
+_0804C228: .4byte gPlayerPartyCount
 _0804C22C: .4byte gPlayerParty
 	thumb_func_end copy_player_party_to_sav1
 
 	thumb_func_start sub_804C230
 sub_804C230: @ 804C230
 	push {r4,r5,lr}
-	ldr r1, _0804C264 @ =gUnknown_2024029
+	ldr r1, _0804C264 @ =gPlayerPartyCount
 	ldr r0, _0804C268 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x34
@@ -330,7 +330,7 @@ _0804C242:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804C264: .4byte gUnknown_2024029
+_0804C264: .4byte gPlayerPartyCount
 _0804C268: .4byte gSaveBlock1Ptr
 _0804C26C: .4byte gPlayerParty
 	thumb_func_end sub_804C230

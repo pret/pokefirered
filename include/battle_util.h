@@ -30,6 +30,10 @@
 #define ABILITYEFFECT_CHECK_ON_FIELD            0x13
 #define ABILITYEFFECT_SWITCH_IN_WEATHER         0xFF
 
+#define ABILITY_ON_OPPOSING_FIELD(battlerId, abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, abilityId, 0, 0))
+#define ABILITY_ON_FIELD(abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, abilityId, 0, 0))
+#define ABILITY_ON_FIELD2(abilityId)(AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, abilityId, 0, 0))
+
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0
 
 #define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
@@ -80,5 +84,6 @@ void ClearFuryCutterDestinyBondGrudge(u8 bank);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 IsMonDisobedient(void);
+void MarkBufferBankForExecution(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H

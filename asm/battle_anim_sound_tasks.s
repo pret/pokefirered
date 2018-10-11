@@ -375,7 +375,7 @@ _080DD0E0: .4byte gUnknown_2037F1B
 _080DD0E4: .4byte gUnknown_2037F02
 _080DD0E8:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DD10C
@@ -487,7 +487,7 @@ _080DD1BC: .4byte gUnknown_2037F1B
 _080DD1C0: .4byte gUnknown_2037F02
 _080DD1C4:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DD1E8

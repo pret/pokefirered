@@ -4800,7 +4800,7 @@ sub_808B700: @ 808B700
 	movs r2, 0x60
 	bl memcpy
 	ldr r1, [r5]
-	ldr r2, _0808B768 @ =gUnknown_202273C
+	ldr r2, _0808B768 @ =gLinkPlayers
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
@@ -4819,7 +4819,7 @@ _0808B758: .4byte gUnknown_20397A4
 _0808B75C: .4byte 0x00007bd0
 _0808B760: .4byte 0x0000045c
 _0808B764: .4byte gUnknown_2039624
-_0808B768: .4byte gUnknown_202273C
+_0808B768: .4byte gLinkPlayers
 _0808B76C: .4byte 0x00007bcf
 _0808B770: .4byte sub_80895B8
 	thumb_func_end sub_808B700

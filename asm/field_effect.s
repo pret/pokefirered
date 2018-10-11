@@ -734,7 +734,7 @@ sub_8083970: @ 8083970
 	str r2, [sp, 0x4]
 	movs r1, 0
 	str r1, [sp, 0x8]
-	ldr r1, _080839C0 @ =gUnknown_823730C
+	ldr r1, _080839C0 @ =gMonPaletteTable
 	lsls r4, r0, 3
 	adds r4, r1
 	ldrh r1, [r4, 0x4]
@@ -758,7 +758,7 @@ sub_8083970: @ 8083970
 	lsrs r0, 24
 	b _080839CA
 	.align 2, 0
-_080839C0: .4byte gUnknown_823730C
+_080839C0: .4byte gMonPaletteTable
 _080839C4: .4byte 0x0000ffff
 _080839C8:
 	movs r0, 0x40

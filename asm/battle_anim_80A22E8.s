@@ -24,7 +24,7 @@ sub_80A22E8: @ 80A22E8
 	strh r0, [r4, 0x30]
 	ldr r0, _080A2320 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2324
@@ -412,7 +412,7 @@ sub_80A25EC: @ 80A25EC
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2638
@@ -523,7 +523,7 @@ sub_80A26F0: @ 80A26F0
 	bl sub_8075160
 	ldr r0, _080A2750 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2710
@@ -1080,7 +1080,7 @@ sub_80A2B38: @ 80A2B38
 	adds r4, r0, 0
 	ldr r0, _080A2B58 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2B5C
@@ -1135,7 +1135,7 @@ sub_80A2B9C: @ 80A2B9C
 	bl sub_8075160
 	ldr r0, _080A2BF0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2BBC
@@ -1197,11 +1197,11 @@ _080A2C1C:
 	bl sub_8075068
 	ldr r0, _080A2C50 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	adds r4, r0, 0
 	ldr r0, _080A2C48 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -1664,7 +1664,7 @@ sub_80A2F74: @ 80A2F74
 	strh r1, [r5, 0x24]
 	ldr r0, _080A2FFC @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2FBE
@@ -1793,7 +1793,7 @@ sub_80A3098: @ 80A3098
 _080A30AA:
 	ldr r6, _080A30FC @ =gUnknown_2037F1B
 	ldrb r0, [r6]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A30C2
@@ -2485,7 +2485,7 @@ sub_80A35F4: @ 80A35F4
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -3021,7 +3021,7 @@ sub_80A39C0: @ 80A39C0
 	bl sub_8076B2C
 	strh r0, [r5, 0x1E]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0x1
@@ -3833,7 +3833,7 @@ _080A405C:
 _080A405E:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4088
@@ -4310,7 +4310,7 @@ sub_80A43F8: @ 80A43F8
 	adds r4, r0, 0
 	ldr r0, _080A4418 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4420
@@ -4355,7 +4355,7 @@ sub_80A4450: @ 80A4450
 	adds r5, r0, 0
 	ldr r0, _080A4488 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A446A
@@ -4439,7 +4439,7 @@ sub_80A44E0: @ 80A44E0
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4514
@@ -4600,7 +4600,7 @@ _080A463E:
 	strh r4, [r6, 0x22]
 	ldr r0, _080A4670 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4656
@@ -4854,7 +4854,7 @@ sub_80A481C: @ 80A481C
 	strh r0, [r5, 0x2E]
 	ldr r0, _080A4840 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4844
@@ -4987,7 +4987,7 @@ _080A4906:
 	adds r0, r4
 	strh r0, [r5, 0x22]
 	ldrb r0, [r6]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4944
@@ -5649,7 +5649,7 @@ sub_80A4E40: @ 80A4E40
 	bl sub_8074FCC
 	ldr r0, _080A4E6C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4E74
@@ -5741,7 +5741,7 @@ sub_80A4EF4: @ 80A4EF4
 	bl sub_8074FCC
 	ldr r0, _080A4F24 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4F2C
@@ -6368,7 +6368,7 @@ sub_80A5398: @ 80A5398
 	strh r0, [r4, 0x2E]
 	ldr r5, _080A53D8 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r2, 0x2
 	negs r2, r2
@@ -6417,7 +6417,7 @@ sub_80A53E8: @ 80A53E8
 	movs r1, 0
 	bl sub_80758E0
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3A]
@@ -6478,7 +6478,7 @@ sub_80A5474: @ 80A5474
 	strh r0, [r4, 0x2E]
 	ldr r5, _080A54B4 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r1, 0x3
 	cmp r0, 0
@@ -6547,12 +6547,12 @@ sub_80A54E8: @ 80A54E8
 	ldrb r0, [r0]
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3A]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A552C
@@ -6656,7 +6656,7 @@ _080A55BC:
 	ldrb r0, [r0]
 	strh r0, [r4, 0x32]
 	ldrb r0, [r2]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x34]
@@ -6770,7 +6770,7 @@ sub_80A5694: @ 80A5694
 	movs r4, 0
 	strh r0, [r5, 0x8]
 	ldrb r0, [r2]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	strh r2, [r5, 0xA]
@@ -7776,7 +7776,7 @@ sub_80A5E34: @ 80A5E34
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r4, 0
-	ldr r0, _080A5E9C @ =gUnknown_2023BCC
+	ldr r0, _080A5E9C @ =gBattlersCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _080A5E90
@@ -7788,7 +7788,7 @@ _080A5E48:
 	cmp r0, 0x1
 	bne _080A5E64
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5E64
@@ -7801,7 +7801,7 @@ _080A5E64:
 	cmp r0, 0x1
 	bne _080A5E82
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -7813,7 +7813,7 @@ _080A5E82:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A5E9C @ =gUnknown_2023BCC
+	ldr r0, _080A5E9C @ =gBattlersCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _080A5E48
@@ -7824,7 +7824,7 @@ _080A5E90:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A5E9C: .4byte gUnknown_2023BCC
+_080A5E9C: .4byte gBattlersCount
 _080A5EA0: .4byte gUnknown_2037F02
 _080A5EA4: .4byte gUnknown_3004FF0
 	thumb_func_end sub_80A5E34
@@ -7845,7 +7845,7 @@ _080A5EB2:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _080A5EC2:
-	ldr r0, _080A5EDC @ =gUnknown_2023BCC
+	ldr r0, _080A5EDC @ =gBattlersCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _080A5EB2
@@ -7856,7 +7856,7 @@ _080A5EC2:
 	bx r0
 	.align 2, 0
 _080A5ED8: .4byte gUnknown_3004FF0
-_080A5EDC: .4byte gUnknown_2023BCC
+_080A5EDC: .4byte gBattlersCount
 	thumb_func_end sub_80A5EA8
 
 	thumb_func_start sub_80A5EE0
@@ -8380,7 +8380,7 @@ _080A62D0: .4byte 0xffffec00
 _080A62D4:
 	ldr r0, _080A6314 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A631C
@@ -9148,7 +9148,7 @@ sub_80A68B0: @ 80A68B0
 	adds r6, r0, 0
 	ldr r7, _080A6934 @ =gUnknown_2037F1A
 	ldrb r0, [r7]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9452,7 +9452,7 @@ sub_80A6B0C: @ 80A6B0C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A6B2C
@@ -9513,7 +9513,7 @@ _080A6B82:
 	adds r1, r5, 0
 	bl sub_80A6B0C
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -9802,7 +9802,7 @@ _080A6DAE:
 	adds r1, r5, 0
 	bl sub_80A6B0C
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A6DD4
@@ -10075,7 +10075,7 @@ sub_80A6F8C: @ 80A6F8C
 	adds r0, r1
 	ldrb r6, [r0]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6FE4
@@ -10231,7 +10231,7 @@ sub_80A70DC: @ 80A70DC
 	ldrb r0, [r0]
 	adds r1, r0, r1
 	ldrb r4, [r1]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A7118
@@ -10356,7 +10356,7 @@ sub_80A71D8: @ 80A71D8
 	bl sub_8074FCC
 	ldr r0, _080A71FC @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A7204
@@ -10384,7 +10384,7 @@ _080A7210:
 	strh r0, [r4, 0x22]
 	ldr r0, _080A7248 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A724C
@@ -10492,7 +10492,7 @@ _080A72E8: .4byte gUnknown_2037F02
 _080A72EC:
 	ldr r0, _080A73B4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A730E
@@ -11485,7 +11485,7 @@ sub_80A7A88: @ 80A7A88
 	lsrs r7, r0, 16
 	ldr r0, _080A7B30 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A7ACC
@@ -11571,7 +11571,7 @@ sub_80A7B54: @ 80A7B54
 	strh r0, [r4, 0x24]
 	ldr r0, _080A7BC0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A7B78
@@ -11784,7 +11784,7 @@ sub_80A7D04: @ 80A7D04
 	bl sub_8075160
 	ldr r0, _080A7D54 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A7D22
@@ -12824,7 +12824,7 @@ sub_80A851C: @ 80A851C
 	adds r4, r0, 0
 	ldr r5, _080A854C @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A8550
@@ -12903,7 +12903,7 @@ _080A85C8:
 _080A85CA:
 	ldrb r5, [r0]
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13053,7 +13053,7 @@ sub_80A86A4: @ 80A86A4
 	strh r0, [r4, 0x1A]
 	ldr r0, _080A8720 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13754,7 +13754,7 @@ _080A8C34:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8C60
@@ -13863,7 +13863,7 @@ _080A8D08:
 	str r3, [sp, 0x4]
 _080A8D10:
 	adds r0, r7, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8D6C
@@ -14025,7 +14025,7 @@ _080A8E4C:
 	strh r0, [r2, 0x2]
 _080A8E6C:
 	mov r0, r8
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8E90
@@ -14129,7 +14129,7 @@ sub_80A8F38: @ 80A8F38
 	bl sub_8075160
 	ldr r0, _080A8F6C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r1, 0xA0
 	cmp r0, 0
@@ -14174,7 +14174,7 @@ sub_80A8F7C: @ 80A8F7C
 	strh r2, [r4, 0x2E]
 	ldr r0, _080A8FE8 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r1, 0xA0
 	cmp r0, 0
@@ -14523,7 +14523,7 @@ sub_80A9210: @ 80A9210
 	strh r0, [r4, 0x20]
 	ldr r0, _080A9248 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A9250
@@ -15155,7 +15155,7 @@ _080A96CC:
 	lsls r0, 6
 	bl AllocZeroed
 	adds r1, r0, 0
-	ldr r0, _080A9758 @ =gUnknown_202401C
+	ldr r0, _080A9758 @ =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	movs r2, 0xBE
 	lsls r2, 1
@@ -15165,7 +15165,7 @@ _080A96CC:
 	bl LZDecompressWram
 	movs r4, 0
 _080A9700:
-	ldr r5, _080A9758 @ =gUnknown_202401C
+	ldr r5, _080A9758 @ =gMonSpritesGfxPtr
 	ldr r0, [r5]
 	movs r1, 0xBE
 	lsls r1, 1
@@ -15205,7 +15205,7 @@ _080A9700:
 	.align 2, 0
 _080A9750: .4byte 0x000027de
 _080A9754: .4byte 0x00002710
-_080A9758: .4byte gUnknown_202401C
+_080A9758: .4byte gMonSpritesGfxPtr
 _080A975C: .4byte gUnknown_8D227E4
 	thumb_func_end sub_80A96B4
 
@@ -15288,7 +15288,7 @@ sub_80A97E8: @ 80A97E8
 	bl sub_8075160
 	ldr r6, _080A9850 @ =gUnknown_2037F1A
 	ldrb r0, [r6]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9808
@@ -16226,7 +16226,7 @@ _080A9F94: .4byte gUnknown_8E7F874
 _080A9F98:
 	ldr r0, _080A9FB4 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -17369,7 +17369,7 @@ _080AA854:
 _080AA856:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -17936,7 +17936,7 @@ sub_80AAC98: @ 80AAC98
 	adds r6, r0, 0
 	ldr r5, _080AACC0 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AACC8
@@ -17979,7 +17979,7 @@ _080AACDA:
 	strb r0, [r2]
 	ldr r0, _080AADA4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AAD10
@@ -18176,7 +18176,7 @@ sub_80AAE84: @ 80AAE84
 	bl sub_8075160
 	ldr r0, _080AAEAC @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AAEB4
@@ -18570,7 +18570,7 @@ sub_80AB168: @ 80AB168
 	cmp r0, 0
 	bne _080AB1C2
 	ldrb r0, [r7]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AB1BC
@@ -18624,11 +18624,11 @@ sub_80AB1F8: @ 80AB1F8
 	adds r6, r0, 0
 	ldr r5, _080AB2B8 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	adds r4, r0, 0
 	ldr r0, _080AB2BC @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -18639,12 +18639,12 @@ sub_80AB1F8: @ 80AB1F8
 	negs r0, r0
 	strh r0, [r4]
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AB23A
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18676,7 +18676,7 @@ _080AB260:
 	bl sub_8075160
 	ldr r0, _080AB2B8 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AB27A
@@ -18858,7 +18858,7 @@ sub_80AB38C: @ 80AB38C
 	bl SetAnimBgAttribute
 	ldr r0, _080AB400 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18982,7 +18982,7 @@ _080AB4F4: .4byte gUnknown_202297A
 _080AB4F8:
 	ldr r0, _080AB528 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -20131,7 +20131,7 @@ sub_80ABDC8: @ 80ABDC8
 	push {r4,r5,lr}
 	ldr r4, _080ABDEC @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ABDFC
@@ -20438,7 +20438,7 @@ sub_80AC00C: @ 80AC00C
 	strh r0, [r4, 0xA]
 	ldr r0, _080AC040 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AC044
@@ -20849,7 +20849,7 @@ sub_80AC328: @ 80AC328
 	lsrs r0, 24
 	strh r0, [r5, 0x10]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2
@@ -21656,7 +21656,7 @@ sub_80AC990: @ 80AC990
 	bl sub_8074FCC
 	ldr r0, _080AC9C4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AC9CC
@@ -21712,7 +21712,7 @@ sub_80ACA00: @ 80ACA00
 	adds r4, r0, 0
 	ldr r0, _080ACA2C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ACA34
@@ -21804,7 +21804,7 @@ sub_80ACAA8: @ 80ACAA8
 	bl sub_8074FCC
 	ldr r0, _080ACACC @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ACAD4
@@ -21963,24 +21963,24 @@ sub_80ACBDC: @ 80ACBDC
 	adds r6, r0, 0
 	ldr r5, _080ACC34 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	adds r4, r0, 0
 	ldr r0, _080ACC38 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _080ACC22
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldrb r1, [r5]
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r1, r0
 	beq _080ACC1A
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldrb r1, [r5]
 	lsls r0, 24
 	lsrs r0, 24
@@ -22352,7 +22352,7 @@ sub_80ACEA4: @ 80ACEA4
 	strh r0, [r4, 0x10]
 	ldr r0, _080ACF0C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x12]
@@ -22778,7 +22778,7 @@ sub_80AD1F8: @ 80AD1F8
 	ldrh r4, [r0, 0x20]
 	ldr r0, _080AD24C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AD250
@@ -22960,7 +22960,7 @@ sub_80AD374: @ 80AD374
 	lsrs r4, r0, 16
 	ldr r0, _080AD3B0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AD3B4
@@ -23223,7 +23223,7 @@ _080AD55C:
 	strh r0, [r5, 0x3C]
 	ldr r0, _080AD588 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AD58C
@@ -23258,7 +23258,7 @@ _080AD5B4:
 	strh r0, [r5, 0x30]
 	ldr r0, _080AD5D4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AD5D8
@@ -23564,7 +23564,7 @@ sub_80AD800: @ 80AD800
 	adds r4, r1, r0
 	ldr r0, _080AD864 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2
@@ -24082,7 +24082,7 @@ sub_80ADBEC: @ 80ADBEC
 	adds r4, r0, 0
 	ldr r0, _080ADC0C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ADC14
@@ -24140,7 +24140,7 @@ sub_80ADC58: @ 80ADC58
 	adds r4, r0, 0
 	ldr r0, _080ADC78 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ADC80
@@ -24206,7 +24206,7 @@ sub_80ADCB8: @ 80ADCB8
 	strh r0, [r5, 0x22]
 	ldr r0, _080ADD00 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ADD08
@@ -24613,7 +24613,7 @@ sub_80AE000: @ 80AE000
 	bne _080AE01C
 	ldr r0, _080AE060 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AE024
@@ -24685,7 +24685,7 @@ _080AE092:
 	cmp r0, 0
 	bne _080AE0AA
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AE0B2
@@ -25637,7 +25637,7 @@ sub_80AE7DC: @ 80AE7DC
 	movs r0, 0x10
 	strh r0, [r5, 0x3C]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -25756,7 +25756,7 @@ _080AE8D4:
 	lsrs r0, 24
 	strh r0, [r5, 0x24]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AE910
@@ -25932,7 +25932,7 @@ _080AEA3E:
 _080AEA40:
 	ldr r4, _080AEA80 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2
@@ -27131,7 +27131,7 @@ sub_80AF330: @ 80AF330
 	strh r0, [r4, 0x32]
 	ldr r0, _080AF368 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF370
@@ -27205,7 +27205,7 @@ _080AF3D4:
 	bl sub_8076D9C
 	ldr r0, _080AF420 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF3FA
@@ -27319,7 +27319,7 @@ _080AF4B8:
 _080AF4CA:
 	ldr r0, _080AF4E8 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF4F0
@@ -27445,7 +27445,7 @@ sub_80AF5A4: @ 80AF5A4
 	strh r0, [r4, 0x2E]
 	ldr r0, _080AF600 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	ldr r1, _080AF604 @ =0x0000ffec
 	cmp r0, 0
@@ -27483,7 +27483,7 @@ sub_80AF60C: @ 80AF60C
 	adds r4, r0, 0
 	ldr r0, _080AF660 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	ldr r1, _080AF664 @ =0x0000ffec
 	cmp r0, 0
@@ -27632,7 +27632,7 @@ _080AF724:
 _080AF736:
 	ldr r0, _080AF758 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF760
@@ -27835,7 +27835,7 @@ _080AF8B0:
 	bl sub_8076D9C
 	ldr r0, _080AF8F4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF8D6
@@ -27904,7 +27904,7 @@ _080AF938:
 	movs r1, 0
 	bl sub_8076D9C
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF964
@@ -27950,7 +27950,7 @@ _080AF996:
 	movs r1, 0
 	bl sub_8076D9C
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF9C0
@@ -27997,7 +27997,7 @@ _080AF9FA:
 	strh r0, [r5, 0x3A]
 	ldr r0, _080AFA40 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AFA10
@@ -29317,7 +29317,7 @@ sub_80B0458: @ 80B0458
 	ldrh r0, [r4, 0x2]
 	lsls r0, 20
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
@@ -29648,7 +29648,7 @@ _080B071A:
 	strh r0, [r5, 0x2E]
 	ldr r0, _080B0784 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0742
@@ -29874,7 +29874,7 @@ sub_80B08DC: @ 80B08DC
 	bne _080B0904
 	ldr r0, _080B0924 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0904
@@ -30296,7 +30296,7 @@ sub_80B0C28: @ 80B0C28
 	cmp r0, r1
 	bne _080B0C54
 	ldrb r0, [r2]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -30312,7 +30312,7 @@ _080B0C54:
 	bl sub_8075114
 	ldr r0, _080B0CA4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0C72
@@ -31225,7 +31225,7 @@ _080B1364: .4byte gUnknown_2037F1A
 _080B1368: .4byte gUnknown_2037F1B
 _080B136C:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B138C
@@ -31324,7 +31324,7 @@ sub_80B13F8: @ 80B13F8
 	ldr r0, _080B147C @ =gUnknown_2037F16
 	ldrb r6, [r0]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B1442
@@ -31395,7 +31395,7 @@ _080B14A8:
 _080B14BC:
 	ldr r0, _080B14E4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B14D2
@@ -31510,7 +31510,7 @@ _080B158E:
 	strh r0, [r4, 0x1C]
 	ldr r0, _080B15BC @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B15C4
@@ -31662,7 +31662,7 @@ _080B16B8:
 	bl sub_8076D9C
 	ldr r0, _080B171C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B16E6
@@ -31795,7 +31795,7 @@ sub_80B17C4: @ 80B17C4
 	bl sub_8076D9C
 	ldr r0, _080B1828 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B17F0
@@ -31862,7 +31862,7 @@ _080B1854:
 	bl sub_8076D9C
 	ldr r0, _080B1898 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B187A
@@ -32096,7 +32096,7 @@ sub_80B1A1C: @ 80B1A1C
 	bl sub_8075160
 	ldr r0, _080B1A88 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1A3C
@@ -32169,7 +32169,7 @@ sub_80B1AB8: @ 80B1AB8
 	adds r5, r0, 0
 	ldr r4, _080B1B54 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1AE4
@@ -32360,7 +32360,7 @@ sub_80B1C3C: @ 80B1C3C
 	adds r5, r0, 0
 	ldr r0, _080B1C64 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1C6C
@@ -32546,7 +32546,7 @@ _080B1DB0:
 _080B1DB2:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B1DC8
@@ -33875,7 +33875,7 @@ _080B27A4:
 	bne _080B27BC
 	ldr r0, _080B2810 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B27D2
@@ -33886,7 +33886,7 @@ _080B27BC:
 	bne _080B27D8
 	ldr r0, _080B2814 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B27D8
@@ -34833,7 +34833,7 @@ sub_80B2ECC: @ 80B2ECC
 	adds r6, r0, 0
 	ldr r0, _080B2F84 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B2EE8
@@ -34859,7 +34859,7 @@ _080B2EFE:
 	cmp r0, 0
 	bne _080B2F5A
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r7, r4, 0
@@ -34905,7 +34905,7 @@ _080B2F5A:
 	beq _080B2F90
 	ldr r0, _080B2F84 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B2F88
@@ -34923,7 +34923,7 @@ _080B2F88:
 _080B2F90:
 	ldr r5, _080B3000 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B2FA6
@@ -35098,7 +35098,7 @@ sub_80B30B0: @ 80B30B0
 	cmp r0, 0
 	bne _080B3146
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
@@ -35172,7 +35172,7 @@ sub_80B3168: @ 80B3168
 	cmp r0, 0
 	bne _080B31C0
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
@@ -35239,7 +35239,7 @@ _080B31EA:
 	beq _080B3232
 	ldr r0, _080B3220 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B3224
@@ -35317,7 +35317,7 @@ sub_80B3278: @ 80B3278
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B32C8
@@ -35384,7 +35384,7 @@ sub_80B32F4: @ 80B32F4
 	lsls r1, 16
 	lsrs r7, r1, 16
 	ldrb r0, [r6]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -35581,7 +35581,7 @@ sub_80B3480: @ 80B3480
 	strh r1, [r4, 0xC]
 	ldr r0, _080B34D0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r1, 0x8
 	cmp r0, 0
@@ -37023,7 +37023,7 @@ _080B3FD4: .4byte gUnknown_2037F02
 _080B3FD8:
 	ldr r0, _080B406C @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B4008
@@ -37116,7 +37116,7 @@ _080B409C: .4byte gUnknown_2037F02
 _080B40A0:
 	ldr r0, _080B4118 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B40BC
@@ -37293,7 +37293,7 @@ sub_80B41F8: @ 80B41F8
 	bl sub_8076D9C
 	ldr r0, _080B422C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4234
@@ -37321,7 +37321,7 @@ _080B4240:
 	strh r0, [r4, 0x22]
 	ldr r0, _080B426C @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B425C
@@ -37492,7 +37492,7 @@ _080B4380: .4byte gUnknown_2037F02
 _080B4384:
 	ldr r0, _080B4480 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B43A6
@@ -37513,22 +37513,22 @@ _080B43A6:
 	bne _080B43F6
 	ldr r0, _080B4480 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	adds r4, r0, 0
 	ldr r5, _080B4488 @ =gUnknown_2037F1B
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _080B43F6
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B43E4
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -37622,7 +37622,7 @@ sub_80B4494: @ 80B4494
 	bl sub_8075160
 	ldr r0, _080B4500 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B44B4
@@ -37923,7 +37923,7 @@ sub_80B46F8: @ 80B46F8
 	bl AnimateSprite
 	ldr r0, _080B4724 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4728
@@ -38132,7 +38132,7 @@ _080B48B0:
 	beq _080B48CA
 	ldr r0, _080B4900 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B48CA
@@ -38378,7 +38378,7 @@ sub_80B4AA8: @ 80B4AA8
 	beq _080B4AF4
 	ldr r0, _080B4AF0 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4AF4
@@ -39121,7 +39121,7 @@ sub_80B5074: @ 80B5074
 	adds r4, r0, 0
 	ldr r0, _080B509C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -40248,7 +40248,7 @@ _080B58DC:
 	strh r1, [r0, 0x2E]
 	ldr r0, _080B5948 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B5950
@@ -41614,7 +41614,7 @@ sub_80B63B4: @ 80B63B4
 	bl SetGpuReg
 	ldr r0, _080B6410 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B63FC
@@ -41897,7 +41897,7 @@ sub_80B664C: @ 80B664C
 	bl sub_8075160
 	ldr r0, _080B6678 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B6680
@@ -42103,7 +42103,7 @@ sub_80B67D4: @ 80B67D4
 	strh r0, [r5, 0x24]
 	ldr r0, _080B683C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B67F8
@@ -42348,7 +42348,7 @@ _080B69B2:
 	strh r7, [r5, 0x2E]
 	ldr r0, _080B6A1C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0
@@ -42824,7 +42824,7 @@ _080B6D8C:
 	lsls r0, 6
 	bl AllocZeroed
 	adds r1, r0, 0
-	ldr r5, _080B6DFC @ =gUnknown_202401C
+	ldr r5, _080B6DFC @ =gMonSpritesGfxPtr
 	ldr r0, [r5]
 	movs r4, 0xBE
 	lsls r4, 1
@@ -42866,7 +42866,7 @@ _080B6D8C:
 	str r1, [r0]
 	b _080B6F1E
 	.align 2, 0
-_080B6DFC: .4byte gUnknown_202401C
+_080B6DFC: .4byte gMonSpritesGfxPtr
 _080B6E00: .4byte gUnknown_8E7F4AC
 _080B6E04:
 	ldrh r0, [r6, 0xA]
@@ -43435,7 +43435,7 @@ sub_80B725C: @ 80B725C
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B72AC
@@ -43514,7 +43514,7 @@ sub_80B72F8: @ 80B72F8
 	strh r0, [r5, 0x36]
 	ldr r0, _080B7354 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B735C
@@ -43637,7 +43637,7 @@ sub_80B741C: @ 80B741C
 	adds r4, r0, 0
 	ldr r0, _080B7444 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B7436
@@ -44901,7 +44901,7 @@ sub_80B7DA4: @ 80B7DA4
 	adds r0, 0x20
 	strh r0, [r5, 0x26]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B7E14
@@ -45351,7 +45351,7 @@ _080B817C:
 	adds r0, 0x4
 	strh r0, [r5, 0x26]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B81D0
@@ -46085,13 +46085,13 @@ _080B8750:
 	bne _080B87CA
 	ldr r4, _080B8804 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080B8780
 	ldrb r0, [r4]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B87CA
@@ -46134,7 +46134,7 @@ _080B8780:
 _080B87CA:
 	ldr r4, _080B8804 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8818
@@ -46489,7 +46489,7 @@ _080B8ADA:
 	beq _080B8B06
 _080B8AE0:
 	adds r0, r4, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
@@ -46680,7 +46680,7 @@ sub_80B8C54: @ 80B8C54
 	bl sub_8075114
 	ldr r0, _080B8CB4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8C74
@@ -48355,7 +48355,7 @@ sub_80B9904: @ 80B9904
 	strh r0, [r4, 0x2E]
 	ldr r0, _080B9940 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -48887,7 +48887,7 @@ sub_80B9CE4: @ 80B9CE4
 	strh r1, [r0, 0x12]
 	strh r5, [r0, 0x18]
 	movs r4, 0
-	ldr r0, _080B9D90 @ =gUnknown_2023BCC
+	ldr r0, _080B9D90 @ =gBattlersCount
 	ldrb r1, [r0]
 	mov r9, r3
 	mov r8, r2
@@ -48947,7 +48947,7 @@ _080B9D5A:
 	.align 2, 0
 _080B9D88: .4byte gTasks
 _080B9D8C: .4byte gUnknown_2037F02
-_080B9D90: .4byte gUnknown_2023BCC
+_080B9D90: .4byte gBattlersCount
 _080B9D94: .4byte gUnknown_2037F1A
 _080B9D98: .4byte gUnknown_2037F1B
 _080B9D9C: .4byte sub_80B9DF0
@@ -49732,7 +49732,7 @@ _080BA362:
 	cmp r0, 0x1
 	bhi _080BA3B4
 	movs r4, 0
-	ldr r5, _080BA3C0 @ =gUnknown_2023BCC
+	ldr r5, _080BA3C0 @ =gBattlersCount
 	ldrb r0, [r5]
 	cmp r4, r0
 	bcs _080BA3B4
@@ -49767,7 +49767,7 @@ _080BA3BA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BA3C0: .4byte gUnknown_2023BCC
+_080BA3C0: .4byte gBattlersCount
 _080BA3C4: .4byte gSprites
 _080BA3C8: .4byte gUnknown_2023D44
 	thumb_func_end sub_80BA320
@@ -50062,7 +50062,7 @@ sub_80BA5F8: @ 80BA5F8
 	adds r4, r0, 0
 	ldr r0, _080BA628 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BA61C
@@ -51035,13 +51035,13 @@ _080BAD7A:
 	bne _080BADFE
 	ldr r5, _080BAE38 @ =gUnknown_2037F1A
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080BADAA
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BADFE
@@ -51089,7 +51089,7 @@ _080BADAA:
 _080BADFE:
 	ldr r4, _080BAE38 @ =gUnknown_2037F1A
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BAE4C
@@ -51506,14 +51506,14 @@ _080BB18E:
 	cmp r0, 0
 	bne _080BB20A
 	ldrb r0, [r1]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080BB1C0
 	ldr r0, [r4]
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BB20A
@@ -51557,7 +51557,7 @@ _080BB20A:
 	ldr r4, _080BB234 @ =gUnknown_20399B4
 	ldr r0, [r4]
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB25C
@@ -52348,7 +52348,7 @@ sub_80BB82C: @ 80BB82C
 	beq _080BB868
 	ldr r0, _080BB89C @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB868
@@ -52456,7 +52456,7 @@ sub_80BB920: @ 80BB920
 	lsrs r4, 24
 	ldr r0, _080BB944 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	ldr r1, _080BB948 @ =gUnknown_2037F02
 	lsls r0, 24
 	lsrs r0, 24
@@ -52479,7 +52479,7 @@ sub_80BB94C: @ 80BB94C
 	lsrs r4, 24
 	ldr r0, _080BB970 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	ldr r1, _080BB974 @ =gUnknown_2037F02
 	lsls r0, 24
 	lsrs r0, 24
@@ -52689,7 +52689,7 @@ _080BBAFC:
 	movs r0, 0xA
 	bl SetGpuReg
 	adds r0, r7, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BBB3C
@@ -53068,7 +53068,7 @@ sub_80BBE10: @ 80BBE10
 	movs r0, 0x80
 	lsls r0, 6
 	bl AllocZeroed
-	ldr r1, _080BBE38 @ =gUnknown_202401C
+	ldr r1, _080BBE38 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	movs r2, 0xBE
 	lsls r2, 1
@@ -53080,7 +53080,7 @@ sub_80BBE10: @ 80BBE10
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BBE38: .4byte gUnknown_202401C
+_080BBE38: .4byte gMonSpritesGfxPtr
 	thumb_func_end sub_80BBE10
 
 	thumb_func_start sub_80BBE3C
@@ -53089,7 +53089,7 @@ sub_80BBE3C: @ 80BBE3C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r6, _080BBE68 @ =gUnknown_202401C
+	ldr r6, _080BBE68 @ =gMonSpritesGfxPtr
 	ldr r0, [r6]
 	movs r5, 0xBE
 	lsls r5, 1
@@ -53106,7 +53106,7 @@ sub_80BBE3C: @ 80BBE3C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BBE68: .4byte gUnknown_202401C
+_080BBE68: .4byte gMonSpritesGfxPtr
 	thumb_func_end sub_80BBE3C
 
 	thumb_func_start sub_80BBE6C
@@ -53161,7 +53161,7 @@ _080BBEC2:
 	adds r4, r0, 0
 	adds r4, 0x10
 _080BBEC8:
-	ldr r0, _080BBEFC @ =gUnknown_202401C
+	ldr r0, _080BBEFC @ =gMonSpritesGfxPtr
 	ldr r1, [r0]
 	ldr r0, _080BBF00 @ =gUnknown_2037F02
 	movs r2, 0x2
@@ -53185,7 +53185,7 @@ _080BBEC8:
 	bx r0
 	.align 2, 0
 _080BBEF8: .4byte gUnknown_2037F1B
-_080BBEFC: .4byte gUnknown_202401C
+_080BBEFC: .4byte gMonSpritesGfxPtr
 _080BBF00: .4byte gUnknown_2037F02
 _080BBF04: .4byte gUnknown_20371F8
 	thumb_func_end sub_80BBE6C
@@ -53245,7 +53245,7 @@ _080BBF64:
 	lsls r0, r4, 5
 	ldr r1, _080BBF98 @ =gUnknown_20371F8
 	adds r0, r1
-	ldr r1, _080BBF9C @ =gUnknown_202401C
+	ldr r1, _080BBF9C @ =gMonSpritesGfxPtr
 	ldr r2, [r1]
 	ldr r1, _080BBFA0 @ =gUnknown_2037F02
 	movs r3, 0x2
@@ -53267,7 +53267,7 @@ _080BBF64:
 	.align 2, 0
 _080BBF94: .4byte gUnknown_2037F1B
 _080BBF98: .4byte gUnknown_20371F8
-_080BBF9C: .4byte gUnknown_202401C
+_080BBF9C: .4byte gMonSpritesGfxPtr
 _080BBFA0: .4byte gUnknown_2037F02
 	thumb_func_end sub_80BBF08
 
@@ -53401,11 +53401,11 @@ sub_80BC090: @ 80BC090
 	lsrs r5, r0, 24
 	ldr r0, _080BC0B8 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	adds r4, r0, 0
 	ldr r0, _080BC0BC @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -55242,15 +55242,15 @@ sub_80BCEF4: @ 80BCEF4
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080BCFC4 @ =gUnknown_202401C
+	ldr r1, _080BCFC4 @ =gMonSpritesGfxPtr
 	ldr r2, [r1]
 	lsls r4, 2
 	adds r2, 0x4
 	adds r2, r4
-	ldr r1, _080BCFC8 @ =gUnknown_2024024
+	ldr r1, _080BCFC8 @ =gBattleMonForms
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r1, 11
@@ -55319,8 +55319,8 @@ _080BCFA0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BCFC4: .4byte gUnknown_202401C
-_080BCFC8: .4byte gUnknown_2024024
+_080BCFC4: .4byte gMonSpritesGfxPtr
+_080BCFC8: .4byte gBattleMonForms
 	thumb_func_end sub_80BCEF4
 
 	thumb_func_start sub_80BCFCC
@@ -55355,7 +55355,7 @@ sub_80BCFCC: @ 80BCFCC
 	lsls r0, 24
 	mov r9, r0
 	ldr r4, _080BD090 @ =0x040000d4
-	ldr r0, _080BD094 @ =gUnknown_202401C
+	ldr r0, _080BD094 @ =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	lsrs r2, 22
 	adds r0, 0x4
@@ -55429,7 +55429,7 @@ _080BD080:
 	bx r0
 	.align 2, 0
 _080BD090: .4byte 0x040000d4
-_080BD094: .4byte gUnknown_202401C
+_080BD094: .4byte gMonSpritesGfxPtr
 _080BD098: .4byte 0x80000400
 	thumb_func_end sub_80BCFCC
 

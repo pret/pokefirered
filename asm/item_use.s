@@ -743,7 +743,7 @@ _080A1578:
 	movs r1, 0x11
 	adds r2, r4, 0
 	movs r3, 0
-	bl ExecuteTableBasedItemEffect_
+	bl ExecuteTableBasedItemEffect
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1592
@@ -1886,7 +1886,7 @@ sub_80A1E7C: @ 80A1E7C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, _080A1EBC @ =gBattlerPartyIndexes
-	ldr r0, _080A1EC0 @ =gUnknown_2024004
+	ldr r0, _080A1EC0 @ =gBattlerInMenuId
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1900,7 +1900,7 @@ sub_80A1E7C: @ 80A1E7C
 	lsls r2, 24
 	lsrs r2, 24
 	movs r3, 0
-	bl ExecuteTableBasedItemEffect_
+	bl ExecuteTableBasedItemEffect
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -1913,7 +1913,7 @@ sub_80A1E7C: @ 80A1E7C
 	b _080A1EE4
 	.align 2, 0
 _080A1EBC: .4byte gBattlerPartyIndexes
-_080A1EC0: .4byte gUnknown_2024004
+_080A1EC0: .4byte gBattlerInMenuId
 _080A1EC4: .4byte gPlayerParty
 _080A1EC8: .4byte gUnknown_203AD30
 _080A1ECC: .4byte gUnknown_84169DC

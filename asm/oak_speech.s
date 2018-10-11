@@ -4637,7 +4637,7 @@ sub_8130F2C: @ 8130F2C
 	movs r0, 0x1D
 	movs r1, 0
 	bl sub_803F7D4
-	ldr r0, _08130FA8 @ =gUnknown_20244DC
+	ldr r0, _08130FA8 @ =gMultiuseSpriteTemplate
 	movs r1, 0x60
 	movs r2, 0x60
 	movs r3, 0x1
@@ -4677,7 +4677,7 @@ sub_8130F2C: @ 8130F2C
 	.align 2, 0
 _08130FA0: .4byte gUnknown_8235194
 _08130FA4: .4byte gUnknown_82373F4
-_08130FA8: .4byte gUnknown_20244DC
+_08130FA8: .4byte gMultiuseSpriteTemplate
 _08130FAC: .4byte gSprites
 _08130FB0: .4byte SpriteCallbackDummy
 _08130FB4: .4byte gTasks

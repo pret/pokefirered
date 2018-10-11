@@ -207,7 +207,7 @@ _08098B6C:
 _08098B70:
 	movs r0, 0x3
 _08098B72:
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
@@ -878,7 +878,7 @@ sub_809907C: @ 809907C
 	lsrs r4, r0, 24
 	ldr r0, _080990A4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099098
@@ -909,7 +909,7 @@ sub_80990AC: @ 80990AC
 	strb r0, [r2]
 	ldr r0, _080990D4 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080990DC
@@ -1206,7 +1206,7 @@ _080992FE:
 	adds r0, r2, r0
 	ldrb r6, [r0]
 	adds r0, r2, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099328
@@ -1299,7 +1299,7 @@ _080993BE:
 	adds r0, r1, r0
 	ldrb r7, [r0]
 	adds r0, r1, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080993E8
@@ -1418,7 +1418,7 @@ sub_809949C: @ 809949C
 	lsrs r7, r0, 16
 	ldr r0, _08099524 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080994CE
@@ -1642,7 +1642,7 @@ _08099664:
 	strh r2, [r5, 0x8]
 	ldr r0, _08099688 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099690
@@ -1723,7 +1723,7 @@ sub_8099704: @ 8099704
 	lsrs r5, r0, 24
 	ldr r6, _08099754 @ =gUnknown_2037F1A
 	ldrb r0, [r6]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099720
@@ -1829,7 +1829,7 @@ _080997D8: .4byte gTasks
 _080997DC: .4byte gSprites
 _080997E0:
 	ldrb r0, [r4, 0x12]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08099808
@@ -2121,7 +2121,7 @@ _08099A14:
 	ldr r0, _08099A6C @ =gUnknown_2037F1B
 _08099A16:
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0
@@ -2208,7 +2208,7 @@ _08099AC0:
 	ldr r0, _08099AF0 @ =gUnknown_2037F1B
 _08099AC2:
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08099AD4

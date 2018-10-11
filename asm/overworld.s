@@ -4834,7 +4834,7 @@ sub_80571A8: @ 80571A8
 	ldrb r0, [r0]
 	cmp r6, r0
 	bcs _08057212
-	ldr r7, _0805722C @ =gUnknown_202273C
+	ldr r7, _0805722C @ =gLinkPlayers
 _080571D8:
 	lsls r5, r6, 24
 	lsrs r5, 24
@@ -4874,7 +4874,7 @@ _08057212:
 	.align 2, 0
 _08057224: .4byte gUnknown_300502C
 _08057228: .4byte gUnknown_3005030
-_0805722C: .4byte gUnknown_202273C
+_0805722C: .4byte gLinkPlayers
 	thumb_func_end sub_80571A8
 
 	thumb_func_start sub_8057230
@@ -4885,7 +4885,7 @@ sub_8057230: @ 8057230
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _0805725E
-	ldr r5, _08057268 @ =gUnknown_202273C
+	ldr r5, _08057268 @ =gLinkPlayers
 _0805723E:
 	lsls r0, r4, 24
 	lsrs r0, 24
@@ -4908,7 +4908,7 @@ _0805725E:
 	bx r0
 	.align 2, 0
 _08057264: .4byte gUnknown_3005030
-_08057268: .4byte gUnknown_202273C
+_08057268: .4byte gLinkPlayers
 	thumb_func_end sub_8057230
 
 	thumb_func_start sub_805726C

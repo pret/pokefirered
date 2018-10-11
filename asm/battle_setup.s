@@ -260,7 +260,7 @@ sub_807F810: @ 807F810
 	ldr r0, _0807F860 @ =gEnemyParty
 	ldr r2, _0807F864 @ =gUnknown_841D148
 	movs r1, 0x2
-	bl sub_804037C
+	bl SetMonData
 	movs r0, 0x7
 	bl IncrementGameStat
 	movs r0, 0x8
@@ -396,7 +396,7 @@ _0807F960:
 	ldr r0, _0807F990 @ =gEnemyParty
 	ldr r2, _0807F994 @ =gUnknown_841D148
 	movs r1, 0x2
-	bl sub_804037C
+	bl SetMonData
 	movs r0, 0x7
 	bl IncrementGameStat
 	movs r0, 0x8

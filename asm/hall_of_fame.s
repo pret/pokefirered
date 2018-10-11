@@ -2624,7 +2624,7 @@ _080F32C4:
 	lsrs r1, 23
 	movs r2, 0xB
 	muls r1, r2
-	ldr r2, _080F3324 @ =gUnknown_8245EE0
+	ldr r2, _080F3324 @ =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
 	adds r6, r0, 0
@@ -2641,7 +2641,7 @@ _080F3318:
 	.align 2, 0
 _080F331C: .4byte gUnknown_840C23C
 _080F3320: .4byte 0x000001ff
-_080F3324: .4byte gUnknown_8245EE0
+_080F3324: .4byte gSpeciesNames
 _080F3328:
 	lsls r0, r1, 23
 	lsrs r0, 23

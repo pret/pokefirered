@@ -256,7 +256,6 @@ extern const u32 gBitTable[]; // util.h
 extern u32 gStatuses3[]; // battle_2.h
 extern u16 gSideAffecting[2];
 extern const struct BattleMove gBattleMoves[];
-extern u16 gBattlerPartyIndexes[];
 extern u16 gDynamicBasePower;
 extern u8 gMoveResultFlags;
 extern u8 gCritMultiplier;
@@ -485,14 +484,14 @@ void sub_80C71A8(u8 a)
 
 void sub_80C71D0(u8 a, u8 b)
 {
-    if (GetBankSide(a) == 0)
-        BATTLE_HISTORY->abilities[GetBankIdentity(a) & 1] = b;
+    if (GetBattlerSide(a) == 0)
+        BATTLE_HISTORY->abilities[GetBattlerPosition(a) & 1] = b;
 }
 
 void sub_80C7208(u8 a, u8 b)
 {
-    if (GetBankSide(a) == 0)
-        BATTLE_HISTORY->itemEffects[GetBankIdentity(a) & 1] = b;
+    if (GetBattlerSide(a) == 0)
+        BATTLE_HISTORY->itemEffects[GetBattlerPosition(a) & 1] = b;
 }
 
 static void BattleAICmd_if_random_less_than(void)
@@ -720,7 +719,7 @@ static void BattleAICmd_if_status4(void)
     else
         index = gBattlerTarget;
 
-    arg1 = GetBankIdentity(index) & 1;
+    arg1 = GetBattlerPosition(index) & 1;
     arg2 = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gSideAffecting[arg1] & arg2) != 0)
@@ -739,7 +738,7 @@ static void BattleAICmd_if_not_status4(void)
     else
         index = gBattlerTarget;
 
-    arg1 = GetBankIdentity(index) & 1;
+    arg1 = GetBattlerPosition(index) & 1;
     arg2 = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gSideAffecting[arg1] & arg2) == 0)
@@ -1361,7 +1360,7 @@ static void BattleAICmd_count_alive_pokemon(void)
     else
         index = gBattlerTarget;
 
-    if (GetBankSide(index) == 0)
+    if (GetBattlerSide(index) == 0)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -1370,8 +1369,8 @@ static void BattleAICmd_count_alive_pokemon(void)
     {
         u32 status;
         var = gBattlerPartyIndexes[index];
-        status = GetBankIdentity(index) ^ 2;
-        var2 = gBattlerPartyIndexes[GetBankByIdentity(status)];
+        status = GetBattlerPosition(index) ^ 2;
+        var2 = gBattlerPartyIndexes[GetBattlerAtPosition(status)];
     }
     else
     {
@@ -1414,9 +1413,9 @@ static void BattleAICmd_get_ability(void)
     else
         index = gBattlerTarget;
 
-    if (GetBankSide(index) == TARGET)
+    if (GetBattlerSide(index) == TARGET)
     {
-        u16 side = GetBankIdentity(index) & 1;
+        u16 side = GetBattlerPosition(index) & 1;
 
         if (BATTLE_HISTORY->abilities[side] != 0)
         {
@@ -2008,9 +2007,9 @@ static void BattleAICmd_get_hold_effect(void)
     else
         index = gBattlerTarget;
 
-    if (GetBankSide(index) == 0)
+    if (GetBattlerSide(index) == 0)
     {
-        side = (GetBankIdentity(index) & 1);
+        side = (GetBattlerPosition(index) & 1);
         AI_THINKING_STRUCT->funcResult = BATTLE_HISTORY->itemEffects[side];
     }
     else

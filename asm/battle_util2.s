@@ -229,11 +229,11 @@ sub_802E228: @ 802E228
 	cmp r0, 0
 	beq _0802E274
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, _0802E270 @ =gBattleMons
@@ -256,7 +256,7 @@ _0802E26C: .4byte gBattleTypeFlags
 _0802E270: .4byte gBattleMons
 _0802E274:
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0802E27E:
@@ -289,7 +289,7 @@ _0802E27E:
 	ldr r1, _0802E2C8 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x9
-	bl sub_80436F8
+	bl AdjustFriendship
 	b _0802E302
 	.align 2, 0
 _0802E2C0: .4byte gBattleMons
@@ -305,7 +305,7 @@ _0802E2CC:
 	ldr r1, _0802E2E8 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x7
-	bl sub_80436F8
+	bl AdjustFriendship
 	b _0802E302
 	.align 2, 0
 _0802E2E4: .4byte gBattlerPartyIndexes
@@ -320,7 +320,7 @@ _0802E2EC:
 	ldr r1, _0802E30C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x7
-	bl sub_80436F8
+	bl AdjustFriendship
 _0802E302:
 	pop {r4,r5}
 	pop {r0}

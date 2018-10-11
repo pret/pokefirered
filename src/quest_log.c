@@ -12,11 +12,13 @@
 #include "script.h"
 #include "overworld.h"
 #include "field_fadetransition.h"
+#include "field_weather.h"
 #include "item.h"
 #include "wild_encounter.h"
 #include "help_system.h"
 #include "unk_8159F40.h"
 #include "pokemon_storage_system.h"
+#include "save.h"
 #include "quest_log.h"
 
 u8 gUnknown_3005E88;
@@ -65,6 +67,10 @@ u16 sub_8111618(void);
 u16 sub_811164C(void);
 void sub_8111688(void);
 void sub_811175C(u8, struct UnkStruct_203AE98 *);
+void sub_81118F4(s8);
+void sub_8111914(void);
+void sub_8111984(void);
+bool8 sub_8111F60(void);
 void * sub_8113D08(void *, struct UnkStruct_203AE98 *);
 void * sub_8113D94(void *, struct UnkStruct_203AE98 *);
 void * sub_8113C20(void *, struct UnkStruct_203AE98 *);
@@ -80,7 +86,6 @@ void sub_8113BD8(void);
 void * sub_8113BF4(void *);
 void * sub_8113D48(void *, struct UnkStruct_203AE98 *);
 void * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
-void sub_81118F4(s8);
 
 extern const u8 gUnknown_841A155[];
 
@@ -882,4 +887,40 @@ void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
         if (r4 == NULL)
             break;
     }
+}
+
+void sub_81118F4(s8 a0)
+{
+    fade_screen(1, a0);
+    gUnknown_203AE8C = sub_8111914;
+}
+
+void sub_8111914(void)
+{
+    if (!gUnknown_2037AB8.active)
+    {
+        ScriptContext2_Enable();
+        if (++gUnknown_203ADF8 < 4 && gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000)
+        {
+            gUnknown_203ADF9--;
+            sub_8111368();
+        }
+        else
+        {
+            gUnknown_3005E88 = 0;
+            sub_8111984();
+        }
+    }
+}
+
+void sub_8111984(void)
+{
+    sub_806E6FC();
+    ResetSaveCounters();
+    sub_80DA4FC(0);
+    SetMainCallback2(sub_8057430);
+    gUnknown_3005024 = sub_8111F60;
+    FreeAllWindowBuffers();
+    gUnknown_203ADFA = 3;
+    gUnknown_203AE8C = NULL;
 }

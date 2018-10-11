@@ -93,5 +93,6 @@ u16 sub_815355C(void);
 u32 TryCopySpecialSaveSection(u8 sector, u8* dst);
 u32 sub_8153634(u8 sector, u8* src);
 void sub_8153688(u8 taskId);
+void sub_80DA4FC(u8);
 
 #endif // GUARD_SAVE_H

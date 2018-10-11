@@ -12,6 +12,7 @@
 #include "field_fadetransition.h"
 #include "wild_encounter.h"
 #include "help_system.h"
+#include "unk_8159F40.h"
 #include "quest_log.h"
 
 u8 gUnknown_3005E88;
@@ -576,6 +577,7 @@ void sub_8111070(u8 a0)
         FillWindowPixelRect(gUnknown_203ADFE[i], 15, 0, 0, gUnknown_845661C[i].width * 8, gUnknown_845661C[i].height * 8);
     }
 
+    // _("Previously on your quest…$")
     StringExpandPlaceholders(gStringVar4, gUnknown_841A155);
 
     if (a0)
@@ -590,4 +592,32 @@ void sub_8111070(u8 a0)
     CopyWindowToVram(gUnknown_203ADFE[0], 2);
     CopyWindowToVram(gUnknown_203ADFE[2], 2);
     CopyWindowToVram(gUnknown_203ADFE[1], 3);
+}
+
+void sub_8111134(void)
+{
+    PutWindowTilemap(gUnknown_203ADFE[1]);
+    CopyWindowToVram(gUnknown_203ADFE[1], 1);
+}
+
+void sub_8111150(u8 a0)
+{
+    struct QuestLog *questLog = &gSaveBlock1Ptr->questLog[a0];
+    u16 i;
+    
+    for (i = 0; i < 64; i++)
+    {
+        if (questLog->npcData[i].negx)
+            gSaveBlock1Ptr->mapObjectTemplates[i].x = -questLog->npcData[i].x;
+        else
+            gSaveBlock1Ptr->mapObjectTemplates[i].x = questLog->npcData[i].x;
+        if (questLog->npcData[i].negy)
+            gSaveBlock1Ptr->mapObjectTemplates[i].y = -(u8)questLog->npcData[i].y;
+        else
+            gSaveBlock1Ptr->mapObjectTemplates[i].y = questLog->npcData[i].y;
+        gSaveBlock1Ptr->mapObjectTemplates[i].elevation = questLog->npcData[i].elevation;
+        gSaveBlock1Ptr->mapObjectTemplates[i].movementType = questLog->npcData[i].movementType;
+    }
+
+    sub_815A1F8(questLog, gSaveBlock1Ptr->mapObjectTemplates);
 }

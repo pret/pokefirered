@@ -72,7 +72,12 @@ void IncrementGameStat(u8);
 u32 GetGameStat(u8);
 
 void sub_8056938(void);
+void sub_8055D5C(struct WarpData *);
+void sub_80572A8(void);
+void sub_805726C(void);
 
 extern u8 gUnknown_2031DD8;
+
+extern bool8 (* gUnknown_3005024)(void);
 
 #endif //GUARD_ROM4_H

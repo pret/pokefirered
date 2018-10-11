@@ -10,6 +10,7 @@
 #include "script.h"
 #include "overworld.h"
 #include "field_fadetransition.h"
+#include "item.h"
 #include "wild_encounter.h"
 #include "help_system.h"
 #include "unk_8159F40.h"
@@ -57,6 +58,7 @@ void sub_8110F90(u8);
 void sub_8111150(u8);
 void sub_8111368(void);
 void sub_81115E8(void);
+void sub_8111688(void);
 void sub_811175C(u8, struct UnkStruct_203AE98 *);
 void sub_81118F4(s8);
 void sub_81138F8(void);
@@ -434,8 +436,8 @@ void sub_8110D48(u8 a0)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
 
-    CpuCopy16(gSaveBlock1Ptr->flags, questLog->unk_148, 0x120);
-    CpuCopy16(gSaveBlock1Ptr->vars, questLog->unk_268, 0x200);
+    CpuCopy16(gSaveBlock1Ptr->flags, questLog->unk_148, FLAGS_COUNT * sizeof(u8));
+    CpuCopy16(gSaveBlock1Ptr->vars, questLog->unk_268, VARS_COUNT * sizeof(u16));
 }
 
 void sub_8110D94(void)
@@ -620,4 +622,57 @@ void sub_8111150(u8 a0)
     }
 
     sub_815A1F8(questLog, gSaveBlock1Ptr->mapObjectTemplates);
+}
+
+void sub_8111274(u8 a0, u8 a1)
+{
+    struct WarpData sp0;
+    
+    if (!a1)
+    {
+        gSaveBlock1Ptr->location.mapGroup = gSaveBlock1Ptr->questLog[a0].unk_001;
+        gSaveBlock1Ptr->location.mapNum = gSaveBlock1Ptr->questLog[a0].unk_002;
+        gSaveBlock1Ptr->location.warpId = gSaveBlock1Ptr->questLog[a0].unk_003;
+        gSaveBlock1Ptr->pos.x = gSaveBlock1Ptr->questLog[a0].unk_004;
+        gSaveBlock1Ptr->pos.y = gSaveBlock1Ptr->questLog[a0].unk_006;
+    }
+    else
+    {
+        sp0.mapGroup = gSaveBlock1Ptr->questLog[a0].unk_001;
+        sp0.mapNum = gSaveBlock1Ptr->questLog[a0].unk_002;
+        sp0.warpId = gSaveBlock1Ptr->questLog[a0].unk_003;
+        sp0.x = gSaveBlock1Ptr->questLog[a0].unk_004;
+        sp0.y = gSaveBlock1Ptr->questLog[a0].unk_006;
+        sub_8055D5C(&sp0);
+    }
+}
+
+void sub_8111368(void)
+{
+    gUnknown_203ADFA = 2;
+    sub_806E6FC();
+    sub_809A2DC();
+    sub_809A2A4();
+    if (sub_8110AC8() == 1)
+    {
+        sub_8111274(gUnknown_203ADF8, 0);
+        gUnknown_3005024 = sub_8111038;
+        SetMainCallback2(sub_80572A8);
+    }
+    else
+    {
+        sub_8111274(gUnknown_203ADF8, 1);
+        warp_in();
+        gUnknown_3005024 = sub_8111000;
+        SetMainCallback2(sub_805726C);
+    }
+}
+
+void sub_81113E4(void)
+{
+    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[gUnknown_203ADF8];
+
+    CpuCopy16(questLog->unk_148, gSaveBlock1Ptr->flags, FLAGS_COUNT * sizeof(u8));
+    CpuCopy16(questLog->unk_268, gSaveBlock1Ptr->vars, VARS_COUNT * sizeof(u16));
+    sub_8111688();
 }

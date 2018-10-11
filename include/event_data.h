@@ -31,6 +31,7 @@ u8 FlagClear(u16 id);
 bool8 FlagGet(u16 id);
 u16 * sub_806E454(u16 id);
 bool32 sub_806E2BC(void);
+void sub_806E6FC(void);
 
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;

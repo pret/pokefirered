@@ -115,9 +115,10 @@ gUnknown_8239FD4:: @ 8239FD4
 gUnknown_823A004:: @ 823A004
 	.incbin "baserom.gba", 0x23A004, 0x4554
 
-gUnknown_823E558:: @ 823E558
-	.incbin "baserom.gba", 0x23E558, 0x570
+gTrainerClassNames:: @ 823E558
+	.include "data/text/trainer_class_names.inc"
 
+	.align 2, 0
 gTrainers:: @ 823EAD8
 	.incbin "baserom.gba", 0x23EAC8, 0x7418
 

@@ -71,4 +71,8 @@ void mapldr_default(void);
 void IncrementGameStat(u8);
 u32 GetGameStat(u8);
 
+void sub_8056938(void);
+
+extern u8 gUnknown_2031DD8;
+
 #endif //GUARD_ROM4_H

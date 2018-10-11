@@ -1,6 +1,11 @@
 #include "global.h"
-#include "script.h"
+#include "main.h"
+#include "task.h"
 #include "event_data.h"
+#include "script.h"
+#include "overworld.h"
+#include "wild_encounter.h"
+#include "help_system.h"
 #include "quest_log.h"
 
 u8 gUnknown_3005E88;
@@ -20,6 +25,7 @@ struct UnkStruct_203AE98
 };
 
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
+EWRAM_DATA u8 gUnknown_203ADF9 = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
 EWRAM_DATA u16 gUnknown_203ADFC = 0;
 EWRAM_DATA void * gUnknown_203AE04 = NULL;
@@ -39,14 +45,19 @@ void sub_8110D94(void);
 void sub_8110E20(void);
 void sub_8110D48(u8);
 u8 sub_8110E68(struct UnkStruct_203AE98 *);
+void sub_8110F90(u8);
+void sub_8111150(u8);
+void sub_8111368(void);
 void sub_81115E8(void);
+void sub_811175C(u8, struct UnkStruct_203AE98 *);
 void sub_81118F4(s8);
+void sub_81138F8(void);
 void sub_8111AD8(void);
 void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
+void sub_811381C(void);
 void sub_8113B88(void);
 void sub_8113BD8(void);
 void * sub_8113BF4(void *);
-void sub_81138F8(void);
 void * sub_8113D48(void *, struct UnkStruct_203AE98 *);
 void * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
 
@@ -473,4 +484,48 @@ bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
     }
     gUnknown_203ADFC = gUnknown_203AF98;
     return TRUE;
+}
+
+void sub_8110F14(u8 taskId)
+{
+    u8 i;
+
+    sub_811381C();
+    gUnknown_203ADF9 = 0;
+    for (i = 0; i < 4; i++)
+    {
+        if (gSaveBlock1Ptr->questLog[i].unk_000)
+            gUnknown_203ADF9++;
+    }
+
+    if (gUnknown_203ADF9 != 0)
+    {
+        gUnknown_3005ECC = FALSE;
+        sub_8110F90(taskId);
+        DestroyTask(taskId);
+    }
+    else
+    {
+        SetMainCallback2(sub_8056938);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8110F90(u8 unused)
+{
+    gSaveBlock1Ptr->location.mapGroup = 3;
+    gSaveBlock1Ptr->location.mapNum = 19;
+    gSaveBlock1Ptr->location.warpId = -1;
+    gUnknown_203ADF8 = 0;
+    gUnknown_2031DD8 = 1;
+    sub_8082740(1);
+    sub_8111368();
+}
+
+void sub_8110FCC(void)
+{
+    sub_811175C(gUnknown_203ADF8, gUnknown_203AE98);
+    sub_8113B88();
+    sub_8112940(1, gUnknown_203AE98, 0x100);
+    sub_8111150(gUnknown_203ADF8);
 }

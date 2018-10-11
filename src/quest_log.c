@@ -1,4 +1,6 @@
 #include "global.h"
+#include "constants/species.h"
+#include "malloc.h"
 #include "main.h"
 #include "task.h"
 #include "palette.h"
@@ -14,6 +16,7 @@
 #include "wild_encounter.h"
 #include "help_system.h"
 #include "unk_8159F40.h"
+#include "pokemon_storage_system.h"
 #include "quest_log.h"
 
 u8 gUnknown_3005E88;
@@ -58,6 +61,8 @@ void sub_8110F90(u8);
 void sub_8111150(u8);
 void sub_8111368(void);
 void sub_81115E8(void);
+u16 sub_8111618(void);
+u16 sub_811164C(void);
 void sub_8111688(void);
 void sub_811175C(u8, struct UnkStruct_203AE98 *);
 void sub_81118F4(s8);
@@ -675,4 +680,83 @@ void sub_81113E4(void)
     CpuCopy16(questLog->unk_148, gSaveBlock1Ptr->flags, FLAGS_COUNT * sizeof(u8));
     CpuCopy16(questLog->unk_268, gSaveBlock1Ptr->vars, VARS_COUNT * sizeof(u16));
     sub_8111688();
+}
+
+struct PokemonAndSomethingElse
+{
+    struct Pokemon mon;
+    u16 unk_64;
+    u16 unk_66;
+};
+
+void sub_8111438(void)
+{
+    struct PokemonAndSomethingElse *r9 = AllocZeroed(sizeof(struct PokemonAndSomethingElse));
+    u16 r0, r3, r5, r6;
+
+    CreateMon(&r9->mon, SPECIES_RATTATA, 1, 0x20, FALSE, 0, 0, 0);
+    r0 = VarGet(VAR_0x4027);
+    r9->unk_64 = r0 >> 12;
+    r9->unk_66 = r0 % 0x1000;
+
+    r5 = sub_8111618();
+    if (r5 > r9->unk_64)
+    {
+        for (r3 = 0; r3 < r5 - r9->unk_64; r3++)
+        {
+            ZeroMonData(&gPlayerParty[5 - r3]);
+        }
+    }
+    else if (r5 < r9->unk_64)
+    {
+        for (r3 = 0; r3 < 5; r3++)
+        {
+            sub_808BCB4(0, r3);
+        }
+        for (r3 = r5; r3 < r9->unk_64; r3++)
+        {
+            CopyMon(&gPlayerParty[r3], &r9->mon, sizeof(struct Pokemon));
+        }
+    }
+
+    r5 = sub_811164C();
+    if (r5 > r9->unk_66)
+    {
+        for (r3 = 0; r3 < 14; r3++)
+        {
+            for (r6 = 0; r6 < 30; r6++)
+            {
+                if (GetBoxMonDataFromAnyBox(r3, r6, MON_DATA_SANITY_BIT2))
+                {
+                    sub_808BCB4(r3, r6);
+                    r5--;
+                    if (r5 == r9->unk_66)
+                        break;
+                }
+            }
+            if (r5 == r9->unk_66)
+                break;
+        }
+    }
+    else if (r5 < r9->unk_66)
+    {
+        for (r3 = 0; r3 < 14; r3++)
+        {
+            for (r6 = 0; r6 < 30; r6++)
+            {
+                struct BoxPokemon * boxMon = GetBoxedMonPtr(r3, r6);
+                if (!GetBoxMonData(boxMon, MON_DATA_SANITY_BIT2))
+                {
+                    CopyMon(boxMon, &r9->mon.box, sizeof(struct BoxPokemon));
+                    r5++;
+                    if (r5 == r9->unk_66)
+                        break;
+                }
+            }
+            if (r5 == r9->unk_66)
+                break;
+        }
+    }
+
+    Free(r9);
 }

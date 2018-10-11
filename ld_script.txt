@@ -370,6 +370,9 @@ SECTIONS {
         data/data.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data_84827AC.o(.rodata);
+        src/quest_log.o(.rodata);
+        data/quest_log.o(.rodata);
+        data/data_84827AC.o(.rodata.8456C74);
         src/menews_jisan.o(.rodata);
         data/data_84827AC.o(.rodata.8468C98);
         src/m4a_tables.o(.rodata);

@@ -8,5 +8,7 @@ void sp13F_fall_to_last_warp(void);
 
 void sub_80AF848(void);
 void sub_80AF87C(void);
+void sub_807DF64(void);
+void sub_807DF7C(void);
 
 #endif // GUARD_FIELD_FADETRANSITION_H

@@ -1,9 +1,15 @@
 #include "global.h"
 #include "main.h"
 #include "task.h"
+#include "palette.h"
+#include "menu.h"
+#include "window.h"
+#include "text_window.h"
 #include "event_data.h"
+#include "string_util.h"
 #include "script.h"
 #include "overworld.h"
+#include "field_fadetransition.h"
 #include "wild_encounter.h"
 #include "help_system.h"
 #include "quest_log.h"
@@ -28,6 +34,7 @@ EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 EWRAM_DATA u8 gUnknown_203ADF9 = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
 EWRAM_DATA u16 gUnknown_203ADFC = 0;
+EWRAM_DATA u8 gUnknown_203ADFE[3];
 EWRAM_DATA void * gUnknown_203AE04 = NULL;
 EWRAM_DATA void * gUnknown_203AE08 = NULL;
 EWRAM_DATA void * gUnknown_203AE0C[32] = {NULL};
@@ -61,6 +68,15 @@ void * sub_8113BF4(void *);
 void * sub_8113D48(void *, struct UnkStruct_203AE98 *);
 void * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
 
+extern const u8 gUnknown_841A155[];
+
+const struct WindowTemplate gUnknown_845661C[3] = {
+    { 0, 0,  0, 30, 2, 15, 0x0e9 },
+    { 0, 0, 18, 30, 2, 15, 0x0ad },
+    { 0, 0, 14, 30, 6, 15, 0x14c }
+};
+
+const struct TextColor gUnknown_8456634 = {15, 1, 12};
 
 void sub_8110840(void * a0)
 {
@@ -528,4 +544,50 @@ void sub_8110FCC(void)
     sub_8113B88();
     sub_8112940(1, gUnknown_203AE98, 0x100);
     sub_8111150(gUnknown_203ADF8);
+}
+
+bool8 sub_8111000(void)
+{
+    LoadPalette(stdpal_get(4), 0xF0, 0x20);
+    sub_81109CC(2);
+    sub_807DF64();
+    gUnknown_203AE94 = (struct UnkStruct_203AE94){};
+    gUnknown_203AE94.unk_0_0 = 2;
+    return 1;
+}
+
+bool8 sub_8111038(void)
+{
+    LoadPalette(stdpal_get(4), 0xF0, 0x20);
+    sub_81109CC(2);
+    sub_807DF7C();
+    gUnknown_203AE94 = (struct UnkStruct_203AE94){};
+    gUnknown_203AE94.unk_0_0 = 2;
+    return 1;
+}
+
+void sub_8111070(u8 a0)
+{
+    u8 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        gUnknown_203ADFE[i] = AddWindow(&gUnknown_845661C[i]);
+        FillWindowPixelRect(gUnknown_203ADFE[i], 15, 0, 0, gUnknown_845661C[i].width * 8, gUnknown_845661C[i].height * 8);
+    }
+
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A155);
+
+    if (a0)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, a0, STR_CONV_MODE_LEFT_ALIGN, 1);
+        StringAppend(gStringVar4, gStringVar1);
+    }
+
+    AddTextPrinterParametrized2(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, &gUnknown_8456634, 0, gStringVar4);
+    PutWindowTilemap(gUnknown_203ADFE[0]);
+    PutWindowTilemap(gUnknown_203ADFE[1]);
+    CopyWindowToVram(gUnknown_203ADFE[0], 2);
+    CopyWindowToVram(gUnknown_203ADFE[2], 2);
+    CopyWindowToVram(gUnknown_203ADFE[1], 3);
 }

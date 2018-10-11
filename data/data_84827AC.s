@@ -2089,7 +2089,7 @@ gUnknown_8419F54:: @ 8419F54
 	.incbin "baserom.gba", 0x419F54, 0x201
 
 gUnknown_841A155:: @ 841A155
-	.incbin "baserom.gba", 0x41A155, 0x1A
+	.string "Previously on your quest…$"
 
 gUnknown_841A16F:: @ 841A16F
 	.incbin "baserom.gba", 0x41A16F, 0x24
@@ -3386,78 +3386,9 @@ gUnknown_8454003:: @ 8454003
 gUnknown_8456618:: @ 8456618
 	.incbin "baserom.gba", 0x456618, 0x4
 
-gUnknown_845661C:: @ 845661C
-	.incbin "baserom.gba", 0x45661C, 0x18
-
-gUnknown_8456634:: @ 8456634
-	.incbin "baserom.gba", 0x456634, 0x4
-
-gUnknown_8456638:: @ 8456638
-	.incbin "baserom.gba", 0x456638, 0x60
-
-gUnknown_8456698:: @ 8456698
-	.incbin "baserom.gba", 0x456698, 0x4
-
-gUnknown_845669C:: @ 845669C
-	.incbin "baserom.gba", 0x45669C, 0x8
-
-gUnknown_84566A4:: @ 84566A4
-	.incbin "baserom.gba", 0x4566A4, 0x4
-
-gUnknown_84566A8:: @ 84566A8
-	.incbin "baserom.gba", 0x4566A8, 0x280
-
-gUnknown_8456928:: @ 8456928
-	.incbin "baserom.gba", 0x456928, 0x8
-
-gUnknown_8456930:: @ 8456930
-	.incbin "baserom.gba", 0x456930, 0x4
-
-gUnknown_8456934:: @ 8456934
-	.incbin "baserom.gba", 0x456934, 0x4
-
-gUnknown_8456938:: @ 8456938
-	.incbin "baserom.gba", 0x456938, 0x8
-
-gUnknown_8456940:: @ 8456940
-	.incbin "baserom.gba", 0x456940, 0x8
-
-gUnknown_8456948:: @ 8456948
-	.incbin "baserom.gba", 0x456948, 0xAC
-
-gUnknown_84569F4:: @ 84569F4
-	.incbin "baserom.gba", 0x4569F4, 0xAC
-
-gUnknown_8456AA0:: @ 8456AA0
-	.incbin "baserom.gba", 0x456AA0, 0x2C
-
-gUnknown_8456ACC:: @ 8456ACC
-	.incbin "baserom.gba", 0x456ACC, 0xC
-
-gUnknown_8456AD8:: @ 8456AD8
-	.incbin "baserom.gba", 0x456AD8, 0xC
-
-gUnknown_8456AE4:: @ 8456AE4
-	.incbin "baserom.gba", 0x456AE4, 0xC
-
-gUnknown_8456AF0:: @ 8456AF0
-	.incbin "baserom.gba", 0x456AF0, 0xCC
-
-gUnknown_8456BBC:: @ 8456BBC
-	.incbin "baserom.gba", 0x456BBC, 0x28
-
-gUnknown_8456BE4:: @ 8456BE4
-	.incbin "baserom.gba", 0x456BE4, 0x33
-
-gUnknown_8456C17:: @ 8456C17
-	.incbin "baserom.gba", 0x456C17, 0x9
-
-gUnknown_8456C20:: @ 8456C20
-	.incbin "baserom.gba", 0x456C20, 0x30
-
-gUnknown_8456C50:: @ 8456C50
-	.incbin "baserom.gba", 0x456C50, 0x24
-
+	@ quest_log.o
+	@ link_rfu_3.o
+	.section .rodata.8456C74
 gUnknown_8456C74:: @ 8456C74
 	.incbin "baserom.gba", 0x456C74, 0x5C
 

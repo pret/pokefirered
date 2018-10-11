@@ -13,6 +13,12 @@ struct UnkStruct_203AE94
     u8 unk_1;
 };
 
+struct UnkStruct_203AE98
+{
+    u8 filler_0[6];
+    u8 unk_6;
+};
+
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
 EWRAM_DATA u16 gUnknown_203ADFC = 0;
@@ -21,7 +27,8 @@ EWRAM_DATA void * gUnknown_203AE08 = NULL;
 EWRAM_DATA void * gUnknown_203AE0C[32] = {NULL};
 EWRAM_DATA void (* gUnknown_203AE8C)(void) = 0;
 EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
-EWRAM_DATA u8 gUnknown_203AE98[0x100] = {0};
+EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
+EWRAM_DATA u16 gUnknown_203AF98 = 0;
 
 void sub_8110A00(void);
 void sub_8110A3C(void);
@@ -31,16 +38,17 @@ void sub_8110E3C(void);
 void sub_8110D94(void);
 void sub_8110E20(void);
 void sub_8110D48(u8);
+u8 sub_8110E68(struct UnkStruct_203AE98 *);
 void sub_81115E8(void);
-u8 sub_8110E68(void *);
 void sub_81118F4(s8);
 void sub_8111AD8(void);
+void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
 void sub_8113B88(void);
 void sub_8113BD8(void);
-void sub_8113BF4(void *);
-void sub_8112940(u8, u8 *, u16);
+void * sub_8113BF4(void *);
 void sub_81138F8(void);
-void sub_815A008(struct QuestLog *);
+void * sub_8113D48(void *, struct UnkStruct_203AE98 *);
+void * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
 
 
 void sub_8110840(void * a0)
@@ -431,4 +439,38 @@ void sub_8110E3C(void)
     sub_8113BF4(gUnknown_203AE08);
     if (++gUnknown_203ADF8 > 3)
         gUnknown_203ADF8 = 0;
+}
+
+bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
+{
+    u16 i;
+
+    for (i = gUnknown_203ADFC; i < gUnknown_203AF98; i++)
+    {
+        if (gUnknown_203AE08 == NULL)
+            return FALSE;
+        switch (a0[i].unk_6)
+        {
+            case 0:
+            case 1:
+                gUnknown_203AE08 = sub_8113D48(gUnknown_203AE08, &a0[i]);
+                break;
+            default:
+                gUnknown_203AE08 = sub_8113CC8(gUnknown_203AE08, &a0[i]);
+                break;
+        }
+        if (gUnknown_203AE08 == NULL)
+        {
+            gUnknown_3005E88 = 0;
+            return FALSE;
+        }
+    }
+
+    if (gUnknown_3005E88 == 0)
+    {
+        gUnknown_203AE08 = sub_8113BF4(gUnknown_203AE08);
+        return FALSE;
+    }
+    gUnknown_203ADFC = gUnknown_203AF98;
+    return TRUE;
 }

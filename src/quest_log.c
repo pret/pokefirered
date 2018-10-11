@@ -740,9 +740,9 @@ void sub_8111438(void)
     }
     else if (r5 < r9->unk_66)
     {
-        for (r3 = 0; r3 < 14; r3++)
+        for (r3 = 0; r3 < TOTAL_BOXES_COUNT; r3++)
         {
-            for (r6 = 0; r6 < 30; r6++)
+            for (r6 = 0; r6 < IN_BOX_COUNT; r6++)
             {
                 struct BoxPokemon * boxMon = GetBoxedMonPtr(r3, r6);
                 if (!GetBoxMonData(boxMon, MON_DATA_SANITY_BIT2))
@@ -759,4 +759,42 @@ void sub_8111438(void)
     }
 
     Free(r9);
+}
+
+void sub_81115E8(void)
+{
+    u16 r4 = sub_8111618();
+    u16 r1 = sub_811164C();
+    VarSet(VAR_0x4027, (r4 << 12) + r1);
+}
+
+u16 sub_8111618(void)
+{
+    u16 count = 0;
+    u16 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT2))
+            count++;
+    }
+
+    return count;
+}
+
+u16 sub_811164C(void)
+{
+    u16 count = 0;
+    u16 i, j;
+
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+    {
+        for (j = 0; j < IN_BOX_COUNT; j++)
+        {
+            if (GetBoxMonDataFromAnyBox(i, j, MON_DATA_SANITY_BIT2))
+                count++;
+        }
+    }
+
+    return count;
 }

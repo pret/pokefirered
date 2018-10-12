@@ -6334,8 +6334,7 @@ gFile_graphics_pokemon_palettes_hitmontop_shiny_palette:: @ 8DD1E68
 gFile_graphics_pokemon_icons_hitmontop_icon:: @ 8DD1E90
 	.incbin "graphics/pokemon/icons/hitmontop_icon.4bpp"
 
-gUnknown_hitmontop_blank_space:: @ 8DD2290
-	@.space 0x200
+gUnknown_hitmontop_unknown_data:: @ 8DD2290
 	.incbin "baserom.gba", 0xDD2290, 0x200
 
 	.align 2

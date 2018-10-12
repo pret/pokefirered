@@ -52,6 +52,8 @@ EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
 EWRAM_DATA u16 gUnknown_203AF98 = 0;
 
+EWRAM_DATA u16 gUnknown_203B044[2] = {0};
+
 void sub_8110A00(void);
 void sub_8110A3C(void);
 void sub_8110BB0(u8);
@@ -75,7 +77,10 @@ void sub_8111984(void);
 void sub_8111A34(u8);
 void sub_8111AD8(void);
 void sub_8111B80(void);
+u8 sub_8111BD4(void);
+void sub_8111D10(void);
 void sub_8111E20(void);
+void sub_8111E64(s8);
 bool8 sub_8111F60(void);
 void sub_8112364(void);
 void sub_8112888(u8);
@@ -1015,4 +1020,82 @@ void sub_8111AD8(void)
         else if (sub_8113AE8(gUnknown_203AE0C[gUnknown_203AE94.unk_1]) == 1)
             sub_8111B80();
     }
+}
+
+void sub_8111B80(void)
+{
+    if (gUnknown_203AE94.unk_0_0 == 0)
+    {
+        gUnknown_203AE94.unk_0_0 = 1;
+        gUnknown_203AE94.unk_0_4 = 0;
+        gUnknown_203AE94.unk_3 = 0;
+        gUnknown_203AE94.unk_2 = sub_8111BD4();
+        if (gUnknown_203B044[1] == 0)
+            gUnknown_203AE94.unk_1++;
+        if (gUnknown_203AE94.unk_1 > 32)
+            return;
+        sub_8111D10();
+    }
+    sub_8112888(1);
+}
+
+u8 sub_8111BD4(void)
+{
+    u16 i;
+    u16 count = 0;
+
+    for (i = 0; i < 0x400 && gStringVar4[i] != EOS; i++)
+    {
+        if (gStringVar4[i] != CHAR_NEWLINE)
+            count++;
+    }
+
+    if (count < 20)
+        return 0x5F;
+    if (count < 36)
+        return 0x7F;
+    if (count < 46)
+        return 0xBF;
+    return 0xFF;
+}
+
+bool8 sub_8111C2C(void)
+{
+    if (gUnknown_203ADFA != 2)
+        return FALSE;
+    if (gUnknown_3005E88 == 0 || gUnknown_203AE94.unk_0_0 == 1 || gUnknown_203AE94.unk_0_0 == 2)
+        return TRUE;
+    return FALSE;
+}
+
+void sub_8111C68(void)
+{
+    if (gUnknown_203AE94.unk_0_6 == 0)
+    {
+        if (gMain.newKeys & A_BUTTON)
+        {
+            gUnknown_203AE94.unk_0_6 = 2;
+            gUnknown_3005E88 = 0;
+            sub_81118F4(-3);
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            gUnknown_203AE94.unk_0_6 = 1;
+            gUnknown_3005E88 = 0;
+            sub_8111E64(-3);
+        }
+    }
+}
+
+bool8 sub_8111CD0(void)
+{
+    if (gUnknown_203AE94.unk_0_6 != 0)
+        return TRUE;
+    return FALSE;
+}
+
+void sub_8111CF0(void)
+{
+    if (gUnknown_203ADFA == 2)
+        sub_8111070(gUnknown_203ADF9);
 }

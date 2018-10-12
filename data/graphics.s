@@ -10403,8 +10403,8 @@ gFile_graphics_trainers_front_pics_emerald_black_belt_front_pic:: @ 8E4C2CC
 	.incbin "graphics/trainers/front_pics/emerald_black_belt_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_black_belt:: @ 8E4C630
-	.incbin "graphics/trainers/palettes/black_belt.gbapal.lz"
+gFile_graphics_trainers_palettes_emerald_black_belt:: @ 8E4C630
+	.incbin "graphics/trainers/palettes/emerald_black_belt.gbapal.lz"
 
 	.align 2
 gFile_graphics_trainers_front_pics_guitarist_front_pic:: @ 8E4C658
@@ -11115,7 +11115,7 @@ gFile_graphics_trainers_front_pics_black_belt_front_pic:: @ 8E6044C
 	.incbin "graphics/trainers/front_pics/black_belt_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_black_belt2:: @ 8E6086C
+gFile_graphics_trainers_palettes_black_belt:: @ 8E6086C
 	.incbin "graphics/trainers/palettes/black_belt.gbapal.lz"
 
 	.align 2

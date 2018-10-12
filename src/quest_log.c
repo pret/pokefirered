@@ -70,6 +70,8 @@ void sub_811175C(u8, struct UnkStruct_203AE98 *);
 void sub_81118F4(s8);
 void sub_8111914(void);
 void sub_8111984(void);
+void sub_8112364(void);
+void sub_8111A34(u8);
 bool8 sub_8111F60(void);
 void * sub_8113D08(void *, struct UnkStruct_203AE98 *);
 void * sub_8113D94(void *, struct UnkStruct_203AE98 *);
@@ -923,4 +925,58 @@ void sub_8111984(void)
     FreeAllWindowBuffers();
     gUnknown_203ADFA = 3;
     gUnknown_203AE8C = NULL;
+}
+
+void sub_81119C8(void)
+{
+    sub_8111914();
+}
+
+bool8 sub_81119D4(void (*a0)(void))
+{
+    u8 taskId;
+
+    switch (gUnknown_203ADFA)
+    {
+        case 1:
+            sub_8112364();
+            break;
+        case 2:
+            gUnknown_3005E88 = 3;
+            taskId = CreateTask(sub_8111A34, 80);
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].data[1] = 0;
+            SetWordTaskArg(taskId, 14, (u32)a0);
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8111A34(u8 taskId)
+{
+    void (*routine)(void);
+    s16 * data = gTasks[taskId].data;
+
+    switch (data[1])
+    {
+        case 0:
+            if (++data[0] == 0x7F)
+            {
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+                gUnknown_203AE94.unk_0_6 = 2;
+                data[1]++;
+            }
+            break;
+        case 1:
+            if (!gUnknown_2037AB8.active)
+            {
+                gUnknown_3005E88 = 0;
+                routine = (void (*)(void)) GetWordTaskArg(taskId, 14);
+                if (routine != NULL)
+                    routine();
+                DestroyTask(taskId);
+                gUnknown_203AE8C = sub_8111914;
+            }
+            break;
+    }
 }

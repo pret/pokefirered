@@ -14,9 +14,11 @@
 #include "field_fadetransition.h"
 #include "field_weather.h"
 #include "map_obj_80688E4.h"
+#include "map_obj_lock.h"
 #include "field_player_avatar.h"
 #include "item.h"
 #include "region_map.h"
+#include "map_name_popup.h"
 #include "wild_encounter.h"
 #include "help_system.h"
 #include "unk_8159F40.h"
@@ -94,6 +96,8 @@ void sub_8111F8C(u8);
 void sub_8111FCC(u8);
 void sub_8112044(u8);
 void sub_81120AC(u8);
+bool8 sub_81121D8(u8);
+void sub_811229C(void);
 void sub_8112364(void);
 void sub_8112888(u8);
 void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
@@ -1269,4 +1273,54 @@ void sub_8112044(u8 taskId)
     }
     else
         task->data[0]++;
+}
+
+void sub_81120AC(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 i;
+
+    switch (data[0])
+    {
+        case 0:
+            gUnknown_2031DD8 = 0;
+            sub_8055DC4();
+            sub_811229C();
+            FillWindowPixelRect(gUnknown_203ADFE[0], 0xF, 0, 0, gUnknown_845661C[0].width * 8, gUnknown_845661C[0].height * 8);
+            data[0]++;
+            break;
+        case 1:
+            if (sub_81121D8(taskId))
+            {
+                for (i = 0; i < 3; i++)
+                {
+                    ClearWindowTilemap(gUnknown_203ADFE[i]);
+                    CopyWindowToVram(gUnknown_203ADFE[i], 1);
+                    RemoveWindow(gUnknown_203ADFE[i]);
+                }
+                data[1] = 0;
+                data[0]++;
+            }
+            break;
+        case 2:
+            if (data[1] < 32)
+                data[1]++;
+            else
+                data[0]++;
+            break;
+        default:
+            if (gUnknown_203AE94.unk_0_6 == 1)
+                sub_8098110(1);
+            CpuCopy16(gUnknown_203AE90, gUnknown_20371F8, 0x400);
+            Free(gUnknown_203AE90);
+            gUnknown_203AE94 = (struct UnkStruct_203AE94){};
+            sub_80696C0();
+            ScriptContext2_Disable();
+            gTextFlags.flag_2 = FALSE;
+            gUnknown_2036E28 = 0;
+            sub_8082740(0);
+            gUnknown_3005ECC = 1;
+            DestroyTask(taskId);
+            break;
+    }
 }

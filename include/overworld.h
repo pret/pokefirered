@@ -76,8 +76,10 @@ void sub_8055D5C(struct WarpData *);
 void sub_80572A8(void);
 void sub_805726C(void);
 void sub_8057430(void);
+void sub_8055DC4(void);
 
 extern u8 gUnknown_2031DD8;
+extern u8 gUnknown_2036E28;
 
 extern bool8 (* gUnknown_3005024)(void);
 

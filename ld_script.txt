@@ -368,7 +368,7 @@ SECTIONS {
         data/data_83F5738.o(.rodata);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
-		src/menews_jisan.o(.rodata);
+        src/menews_jisan.o(.rodata);
         data/data_8468C98.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

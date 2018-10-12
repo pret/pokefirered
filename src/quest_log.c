@@ -99,6 +99,7 @@ void sub_811229C(void);
 void sub_8112364(void);
 void sub_8112888(u8);
 void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
+void sub_8113A1C(u8);
 void sub_811381C(void);
 void sub_81138F8(void);
 void * sub_8113A78(void *, void **);
@@ -1338,4 +1339,46 @@ bool8 sub_81121D8(u8 taskId)
     CopyWindowToVram(gUnknown_203ADFE[1], 2);
     data[1]++;
     return FALSE;
+}
+
+void sub_811229C(void)
+{
+    u16 * buffer = Alloc(0x400);
+    CpuCopy16(gUnknown_203AE90, buffer, 0x400);
+    sub_807B0C4(gUnknown_203AE90, gUnknown_203AE90, 0xd0);
+    sub_807B0C4(gUnknown_203AE90 + 0x110, gUnknown_203AE90 + 0x110, 0x10);
+    sub_807B0C4(gUnknown_203AE90 + 0x160, gUnknown_203AE90 + 0x160, 0x40);
+    sub_807B0C4(gUnknown_203AE90 + 0x1b0, gUnknown_203AE90 + 0x1b0, 0x50);
+    CpuCopy16(gUnknown_203AE90, gPlttBufferUnfaded, 0x400);
+    CpuCopy16(buffer, gUnknown_203AE90, 0x400);
+    Free(buffer);
+}
+
+void sub_811231C(void)
+{
+    if (gUnknown_203ADFA == 1)
+    {
+        sub_8110E68(gUnknown_203AE98);
+        sub_8110E3C();
+        gUnknown_203ADFA = 0;
+        gUnknown_203AE8C = NULL;
+        gUnknown_203AE04 = NULL;
+        gUnknown_203AE08 = NULL;
+        gUnknown_3005E88 = 0;
+    }
+}
+
+void sub_8112364(void)
+{
+    if (gUnknown_3005E88 && gUnknown_203ADFA == 1)
+    {
+        sub_8110E68(gUnknown_203AE98);
+        sub_8113A1C(1);
+        sub_8110E3C();
+        gUnknown_3005E88 = 0;
+        gUnknown_203ADFA = 0;
+        gUnknown_203AE8C = NULL;
+    }
+    gUnknown_203AE04 = NULL;
+    gUnknown_203AE08 = NULL;
 }

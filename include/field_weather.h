@@ -8,5 +8,6 @@ u8 GetSav1Weather(void);
 void sub_80AEDBC(void);
 
 void DoCurrentWeather(void);
+void sub_807B0C4(u16 *, u16 *, u32);
 
 #endif // GUARD_WEATHER_H

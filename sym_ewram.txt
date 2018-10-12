@@ -761,7 +761,7 @@ gUnknown_2037104: @ 2037104
 gUnknown_2037108: @ 2037108
 	.space 0xF0
 
-gUnknown_20371F8: @ 20371F8
+gPlttBufferUnfaded: @ 20371F8
 	.space 0x2
 
 gUnknown_20371FA: @ 20371FA
@@ -788,7 +788,7 @@ gUnknown_20373F8: @ 20373F8
 gUnknown_2037408: @ 2037408
 	.space 0x1F0
 
-gUnknown_20375F8: @ 20375F8
+gPlttBufferFaded: @ 20375F8
 	.space 0x2
 
 gUnknown_20375FA: @ 20375FA

@@ -138,8 +138,8 @@ Transition_Phase1: @ 80D09B0
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_807B05C
-	ldr r0, _080D09DC @ =gUnknown_20375F8
-	ldr r1, _080D09E0 @ =gUnknown_20371F8
+	ldr r0, _080D09DC @ =gPlttBufferFaded
+	ldr r1, _080D09E0 @ =gPlttBufferUnfaded
 	ldr r2, _080D09E4 @ =0x04000100
 	bl CpuSet
 	ldr r1, _080D09E8 @ =gUnknown_83FA320
@@ -155,8 +155,8 @@ Transition_Phase1: @ 80D09B0
 	movs r0, 0x1
 	b _080D09FA
 	.align 2, 0
-_080D09DC: .4byte gUnknown_20375F8
-_080D09E0: .4byte gUnknown_20371F8
+_080D09DC: .4byte gPlttBufferFaded
+_080D09E0: .4byte gPlttBufferUnfaded
 _080D09E4: .4byte 0x04000100
 _080D09E8: .4byte gUnknown_83FA320
 _080D09EC:

@@ -1381,9 +1381,9 @@ _08079478:
 	lsls r0, 16
 	cmp r0, 0
 	beq _080794CC
-	ldr r2, _080794C0 @ =gUnknown_20371F8
+	ldr r2, _080794C0 @ =gPlttBufferUnfaded
 	ldr r4, _080794C4 @ =gUnknown_8EAE094
-	ldr r1, _080794C8 @ =gUnknown_20375F8
+	ldr r1, _080794C8 @ =gPlttBufferFaded
 	movs r0, 0xF1
 	lsls r0, 1
 	adds r1, r0
@@ -1401,14 +1401,14 @@ _080794AC:
 	bge _080794AC
 	b _080794F2
 	.align 2, 0
-_080794C0: .4byte gUnknown_20371F8
+_080794C0: .4byte gPlttBufferUnfaded
 _080794C4: .4byte gUnknown_8EAE094
-_080794C8: .4byte gUnknown_20375F8
+_080794C8: .4byte gPlttBufferFaded
 _080794CC:
 	movs r3, 0
-	ldr r2, _08079518 @ =gUnknown_20371F8
+	ldr r2, _08079518 @ =gPlttBufferUnfaded
 	ldr r0, _0807951C @ =gUnknown_8EAE094
-	ldr r1, _08079520 @ =gUnknown_20375F8
+	ldr r1, _08079520 @ =gPlttBufferFaded
 	adds r4, r0, 0x2
 	movs r0, 0xF1
 	lsls r0, 1
@@ -1445,9 +1445,9 @@ _08079510:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08079518: .4byte gUnknown_20371F8
+_08079518: .4byte gPlttBufferUnfaded
 _0807951C: .4byte gUnknown_8EAE094
-_08079520: .4byte gUnknown_20375F8
+_08079520: .4byte gPlttBufferFaded
 _08079524: .4byte gPaletteFade
 	thumb_func_end sub_807941C
 

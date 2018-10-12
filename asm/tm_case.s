@@ -3075,8 +3075,8 @@ _08133170:
 	ldrh r1, [r1]
 	strh r1, [r2, 0xA]
 	bl Free
-	ldr r0, _08133208 @ =gUnknown_20375F8
-	ldr r1, _0813320C @ =gUnknown_20371F8
+	ldr r0, _08133208 @ =gPlttBufferFaded
+	ldr r1, _0813320C @ =gPlttBufferUnfaded
 	movs r2, 0x80
 	lsls r2, 1
 	bl CpuFastSet
@@ -3100,8 +3100,8 @@ _081331F8: .4byte gSaveBlock1Ptr
 _081331FC: .4byte 0x00000464
 _08133200: .4byte gUnknown_203B11C
 _08133204: .4byte gUnknown_203B10C
-_08133208: .4byte gUnknown_20375F8
-_0813320C: .4byte gUnknown_20371F8
+_08133208: .4byte gPlttBufferFaded
+_0813320C: .4byte gPlttBufferUnfaded
 _08133210:
 	ldr r0, _0813323C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]

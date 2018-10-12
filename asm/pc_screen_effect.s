@@ -226,7 +226,7 @@ _080A0BCC:
 	movs r1, 0
 	movs r2, 0
 	bl BlendPalettes
-	ldr r0, _080A0C0C @ =gUnknown_20375F8
+	ldr r0, _080A0C0C @ =gPlttBufferFaded
 	strh r5, [r0]
 _080A0BF2:
 	ldrh r1, [r4, 0xE]
@@ -241,7 +241,7 @@ _080A0BF2:
 	ldrsh r0, [r4, r1]
 	b _080A0C54
 	.align 2, 0
-_080A0C0C: .4byte gUnknown_20375F8
+_080A0C0C: .4byte gPlttBufferFaded
 _080A0C10:
 	ldrh r0, [r4, 0x12]
 	ldrh r1, [r4, 0xC]
@@ -326,11 +326,11 @@ _080A0CA0:
 	beq _080A0D54
 	b _080A0DA8
 _080A0CAA:
-	ldr r0, _080A0CB0 @ =gUnknown_20375F8
+	ldr r0, _080A0CB0 @ =gPlttBufferFaded
 	strh r1, [r0]
 	b _080A0DCA
 	.align 2, 0
-_080A0CB0: .4byte gUnknown_20375F8
+_080A0CB0: .4byte gPlttBufferFaded
 _080A0CB4:
 	movs r1, 0
 	strh r1, [r4, 0xE]
@@ -431,7 +431,7 @@ _080A0D72:
 	movs r1, 0x10
 	movs r2, 0
 	bl BlendPalettes
-	ldr r1, _080A0DA4 @ =gUnknown_20375F8
+	ldr r1, _080A0DA4 @ =gPlttBufferFaded
 	movs r0, 0
 	strh r0, [r1]
 _080A0D88:
@@ -449,7 +449,7 @@ _080A0D88:
 	bne _080A0DD0
 	b _080A0DCA
 	.align 2, 0
-_080A0DA4: .4byte gUnknown_20375F8
+_080A0DA4: .4byte gPlttBufferFaded
 _080A0DA8:
 	movs r1, 0x80
 	lsls r1, 6

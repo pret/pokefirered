@@ -12786,7 +12786,7 @@ sub_8091EF0: @ 8091EF0
 	adds r1, r2, r3
 	ldrh r1, [r1]
 	lsls r1, 1
-	ldr r2, _08091F34 @ =gUnknown_20371F8
+	ldr r2, _08091F34 @ =gPlttBufferUnfaded
 	adds r1, r2
 	movs r2, 0x2
 	bl CpuSet
@@ -12794,7 +12794,7 @@ sub_8091EF0: @ 8091EF0
 	.align 2, 0
 _08091F2C: .4byte gUnknown_20397B0
 _08091F30: .4byte gUnknown_83D29D0
-_08091F34: .4byte gUnknown_20371F8
+_08091F34: .4byte gPlttBufferUnfaded
 _08091F38:
 	lsls r0, r1, 2
 	ldr r1, _08091F54 @ =gUnknown_83D29D0
@@ -12803,7 +12803,7 @@ _08091F38:
 	adds r1, r2, r3
 	ldrh r1, [r1]
 	lsls r1, 1
-	ldr r2, _08091F5C @ =gUnknown_20371F8
+	ldr r2, _08091F5C @ =gPlttBufferUnfaded
 	adds r1, r2
 	movs r2, 0x2
 	bl CpuSet
@@ -12813,7 +12813,7 @@ _08091F50:
 	.align 2, 0
 _08091F54: .4byte gUnknown_83D29D0
 _08091F58: .4byte 0x0000071e
-_08091F5C: .4byte gUnknown_20371F8
+_08091F5C: .4byte gPlttBufferUnfaded
 	thumb_func_end sub_8091EF0
 
 	thumb_func_start sub_8091F60

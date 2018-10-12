@@ -495,7 +495,7 @@ sub_80EEFC8: @ 80EEFC8
 	lsls r4, 4
 	orrs r4, r3
 	lsls r0, 1
-	ldr r1, _080EF0B0 @ =gUnknown_20371F8
+	ldr r1, _080EF0B0 @ =gPlttBufferUnfaded
 	mov r8, r1
 	add r0, r8
 	mov r2, r9
@@ -557,7 +557,7 @@ _080EF0A0: .4byte gUnknown_3004FF0
 _080EF0A4: .4byte gSprites
 _080EF0A8: .4byte 0x0000d709
 _080EF0AC: .4byte 0x0000d70a
-_080EF0B0: .4byte gUnknown_20371F8
+_080EF0B0: .4byte gPlttBufferUnfaded
 	thumb_func_end sub_80EEFC8
 
 	thumb_func_start sub_80EF0B4

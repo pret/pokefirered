@@ -11,7 +11,7 @@ palette_bg_faded_fill_white: @ 807DB14
 	sub sp, 0x4
 	ldr r0, _0807DB2C @ =0x7fff7fff
 	str r0, [sp]
-	ldr r1, _0807DB30 @ =gUnknown_20375F8
+	ldr r1, _0807DB30 @ =gPlttBufferFaded
 	ldr r2, _0807DB34 @ =0x01000100
 	mov r0, sp
 	bl CpuFastSet
@@ -20,7 +20,7 @@ palette_bg_faded_fill_white: @ 807DB14
 	bx r0
 	.align 2, 0
 _0807DB2C: .4byte 0x7fff7fff
-_0807DB30: .4byte gUnknown_20375F8
+_0807DB30: .4byte gPlttBufferFaded
 _0807DB34: .4byte 0x01000100
 	thumb_func_end palette_bg_faded_fill_white
 
@@ -30,7 +30,7 @@ palette_bg_faded_fill_black: @ 807DB38
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, _0807DB50 @ =gUnknown_20375F8
+	ldr r1, _0807DB50 @ =gPlttBufferFaded
 	ldr r2, _0807DB54 @ =0x01000100
 	mov r0, sp
 	bl CpuFastSet
@@ -38,7 +38,7 @@ palette_bg_faded_fill_black: @ 807DB38
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807DB50: .4byte gUnknown_20375F8
+_0807DB50: .4byte gPlttBufferFaded
 _0807DB54: .4byte 0x01000100
 	thumb_func_end palette_bg_faded_fill_black
 

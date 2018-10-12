@@ -1648,18 +1648,18 @@ sub_809E6B8: @ 809E6B8
 	lsrs r0, 24
 	bl sub_809E644
 	lsls r0, 16
-	ldr r2, _0809E6D8 @ =gUnknown_20375F8
+	ldr r2, _0809E6D8 @ =gPlttBufferFaded
 	lsrs r0, 15
 	adds r2, r0, r2
-	ldr r1, _0809E6DC @ =gUnknown_20371F8
+	ldr r1, _0809E6DC @ =gPlttBufferUnfaded
 	adds r0, r1
 	ldrh r0, [r0]
 	strh r0, [r2]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809E6D8: .4byte gUnknown_20375F8
-_0809E6DC: .4byte gUnknown_20371F8
+_0809E6D8: .4byte gPlttBufferFaded
+_0809E6DC: .4byte gPlttBufferUnfaded
 	thumb_func_end sub_809E6B8
 
 	thumb_func_start sub_809E6E0

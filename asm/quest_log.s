@@ -5,99 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81121D8
-sub_81121D8: @ 81121D8
-	push {r4-r7,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, _0811227C @ =gTasks+0x8
-	adds r7, r1, r0
-	ldrh r1, [r7, 0x2]
-	movs r2, 0x2
-	ldrsh r0, [r7, r2]
-	cmp r0, 0xF
-	bgt _08112290
-	ldr r5, _08112280 @ =gUnknown_20371FA
-	ldr r6, _08112284 @ =gUnknown_20375FA
-	movs r4, 0xF
-	subs r3, r4, r1
-	lsls r3, 24
-	lsrs r3, 24
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0xDF
-	bl sub_80716F8
-	movs r0, 0xFF
-	lsls r0, 1
-	adds r5, r0
-	adds r6, r0
-	movs r2, 0x80
-	lsls r2, 1
-	ldrb r0, [r7, 0x2]
-	subs r4, r0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r5, 0
-	adds r1, r6, 0
-	adds r3, r4, 0
-	bl sub_80716F8
-	ldr r5, _08112288 @ =gUnknown_203ADFE
-	ldrb r0, [r5]
-	ldr r4, _0811228C @ =gUnknown_845661C
-	ldrb r3, [r4, 0x4]
-	lsls r3, 3
-	subs r3, 0x1
-	ldrh r1, [r7, 0x2]
-	subs r3, r1
-	lsls r3, 16
-	lsrs r3, 16
-	ldrb r1, [r4, 0x3]
-	lsls r1, 3
-	str r1, [sp]
-	movs r6, 0x1
-	str r6, [sp, 0x4]
-	movs r1, 0
-	movs r2, 0
-	bl FillWindowPixelRect
-	ldrb r0, [r5, 0x1]
-	ldrh r3, [r7, 0x2]
-	ldrb r1, [r4, 0xB]
-	lsls r1, 3
-	str r1, [sp]
-	str r6, [sp, 0x4]
-	movs r1, 0
-	movs r2, 0
-	bl FillWindowPixelRect
-	ldrb r0, [r5]
-	movs r1, 0x2
-	bl CopyWindowToVram
-	ldrb r0, [r5, 0x1]
-	movs r1, 0x2
-	bl CopyWindowToVram
-	ldrh r0, [r7, 0x2]
-	adds r0, 0x1
-	strh r0, [r7, 0x2]
-	movs r0, 0
-	b _08112292
-	.align 2, 0
-_0811227C: .4byte gTasks+0x8
-_08112280: .4byte gUnknown_20371FA
-_08112284: .4byte gUnknown_20375FA
-_08112288: .4byte gUnknown_203ADFE
-_0811228C: .4byte gUnknown_845661C
-_08112290:
-	movs r0, 0x1
-_08112292:
-	add sp, 0x8
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81121D8
-
 	thumb_func_start sub_811229C
 sub_811229C: @ 811229C
 	push {r4-r6,lr}
@@ -138,7 +45,7 @@ sub_811229C: @ 811229C
 	movs r2, 0x50
 	bl sub_807B0C4
 	ldr r0, [r4]
-	ldr r1, _08112318 @ =gUnknown_20371F8
+	ldr r1, _08112318 @ =gPlttBufferUnfaded
 	adds r2, r5, 0
 	bl CpuSet
 	ldr r1, [r4]
@@ -152,7 +59,7 @@ sub_811229C: @ 811229C
 	bx r0
 	.align 2, 0
 _08112314: .4byte gUnknown_203AE90
-_08112318: .4byte gUnknown_20371F8
+_08112318: .4byte gPlttBufferUnfaded
 	thumb_func_end sub_811229C
 
 	thumb_func_start sub_811231C

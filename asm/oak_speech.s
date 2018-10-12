@@ -270,10 +270,10 @@ sub_812EB10: @ 812EB10
 	thumb_func_start sub_812EB2C
 sub_812EB2C: @ 812EB2C
 	push {lr}
-	ldr r0, _0812EB48 @ =gUnknown_20371F8
+	ldr r0, _0812EB48 @ =gPlttBufferUnfaded
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _0812EB4C @ =gUnknown_20375F8
+	ldr r0, _0812EB4C @ =gPlttBufferFaded
 	strh r1, [r0]
 	ldr r0, _0812EB50 @ =sub_812EB58
 	bl CreateTask
@@ -282,8 +282,8 @@ sub_812EB2C: @ 812EB2C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812EB48: .4byte gUnknown_20371F8
-_0812EB4C: .4byte gUnknown_20375F8
+_0812EB48: .4byte gPlttBufferUnfaded
+_0812EB4C: .4byte gPlttBufferFaded
 _0812EB50: .4byte sub_812EB58
 _0812EB54: .4byte sub_812EB10
 	thumb_func_end sub_812EB2C
@@ -4188,9 +4188,9 @@ _08130B4A:
 	cmp r1, 0xE
 	ble _08130B96
 	movs r2, 0
-	ldr r6, _08130BA0 @ =gUnknown_20375F8
+	ldr r6, _08130BA0 @ =gPlttBufferFaded
 	adds r3, r7, 0
-	ldr r4, _08130BA4 @ =gUnknown_20371F8
+	ldr r4, _08130BA4 @ =gPlttBufferUnfaded
 _08130B78:
 	adds r0, r2, 0
 	adds r0, 0x40
@@ -4212,8 +4212,8 @@ _08130B96:
 	bx r0
 	.align 2, 0
 _08130B9C: .4byte 0x00007fff
-_08130BA0: .4byte gUnknown_20375F8
-_08130BA4: .4byte gUnknown_20371F8
+_08130BA0: .4byte gPlttBufferFaded
+_08130BA4: .4byte gPlttBufferUnfaded
 	thumb_func_end sub_8130B10
 
 	thumb_func_start sub_8130BA8

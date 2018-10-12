@@ -681,7 +681,7 @@ _0811EFD4:
 	lsls r2, 1
 	movs r1, 0
 	bl LoadCompressedPalette
-	ldr r0, _0811EFF8 @ =gUnknown_20371F8
+	ldr r0, _0811EFF8 @ =gPlttBufferUnfaded
 	ldr r4, _0811EFFC @ =gUnknown_203B09C
 	ldr r1, [r4]
 	adds r1, 0x18
@@ -691,7 +691,7 @@ _0811EFD4:
 	b _0811F01A
 	.align 2, 0
 _0811EFF4: .4byte gUnknown_8E829C8
-_0811EFF8: .4byte gUnknown_20371F8
+_0811EFF8: .4byte gPlttBufferUnfaded
 _0811EFFC: .4byte gUnknown_203B09C
 _0811F000:
 	movs r0, 0x4
@@ -747,7 +747,7 @@ sub_811F03C: @ 811F03C
 	adds r0, r5, 0
 	movs r2, 0x10
 	bl CpuSet
-	ldr r0, _0811F06C @ =gUnknown_20375F8
+	ldr r0, _0811F06C @ =gPlttBufferFaded
 	adds r4, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -758,7 +758,7 @@ sub_811F03C: @ 811F03C
 	bx r0
 	.align 2, 0
 _0811F068: .4byte gUnknown_2037258
-_0811F06C: .4byte gUnknown_20375F8
+_0811F06C: .4byte gPlttBufferFaded
 	thumb_func_end sub_811F03C
 
 	thumb_func_start sub_811F070

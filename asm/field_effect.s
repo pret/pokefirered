@@ -218,38 +218,38 @@ _080835B4: .4byte gUnknown_2036E28
 _080835B8:
 	adds r4, 0x10
 	lsls r0, r4, 5
-	ldr r1, _080835C8 @ =gUnknown_20371F8
+	ldr r1, _080835C8 @ =gPlttBufferUnfaded
 	adds r0, r1
 	movs r1, 0x10
 	bl TintPalette_GrayScale
 	b _080835F6
 	.align 2, 0
-_080835C8: .4byte gUnknown_20371F8
+_080835C8: .4byte gPlttBufferUnfaded
 _080835CC:
 	adds r4, 0x10
 	lsls r0, r4, 5
-	ldr r1, _080835DC @ =gUnknown_20371F8
+	ldr r1, _080835DC @ =gPlttBufferUnfaded
 	adds r0, r1
 	movs r1, 0x10
 	bl TintPalette_SepiaTone
 	b _080835F6
 	.align 2, 0
-_080835DC: .4byte gUnknown_20371F8
+_080835DC: .4byte gPlttBufferUnfaded
 _080835E0:
 	adds r4, 0x10
 	lsls r0, r4, 4
 	movs r1, 0x10
 	bl sub_8111F38
 	lsls r0, r4, 5
-	ldr r1, _0808360C @ =gUnknown_20371F8
+	ldr r1, _0808360C @ =gPlttBufferUnfaded
 	adds r0, r1
 	movs r1, 0x10
 	bl TintPalette_GrayScale
 _080835F6:
 	lsls r1, r4, 5
-	ldr r0, _0808360C @ =gUnknown_20371F8
+	ldr r0, _0808360C @ =gPlttBufferUnfaded
 	adds r0, r1, r0
-	ldr r2, _08083610 @ =gUnknown_20375F8
+	ldr r2, _08083610 @ =gPlttBufferFaded
 	adds r1, r2
 	movs r2, 0x8
 	bl CpuFastSet
@@ -258,8 +258,8 @@ _08083606:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808360C: .4byte gUnknown_20371F8
-_08083610: .4byte gUnknown_20375F8
+_0808360C: .4byte gPlttBufferUnfaded
+_08083610: .4byte gPlttBufferFaded
 	thumb_func_end sub_8083598
 
 	thumb_func_start sub_8083614
@@ -873,7 +873,7 @@ MultiplyInvertedPaletteRGBComponents: @ 8083A88
 	lsrs r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, _08083B0C @ =gUnknown_20371F8
+	ldr r4, _08083B0C @ =gPlttBufferUnfaded
 	lsrs r0, 15
 	adds r4, r0, r4
 	ldrh r4, [r4]
@@ -918,7 +918,7 @@ MultiplyInvertedPaletteRGBComponents: @ 8083A88
 	lsls r4, 26
 	orrs r4, r6
 	lsrs r4, 16
-	ldr r1, _08083B10 @ =gUnknown_20375F8
+	ldr r1, _08083B10 @ =gPlttBufferFaded
 	adds r0, r1
 	strh r4, [r0]
 	pop {r3,r4}
@@ -928,8 +928,8 @@ MultiplyInvertedPaletteRGBComponents: @ 8083A88
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08083B0C: .4byte gUnknown_20371F8
-_08083B10: .4byte gUnknown_20375F8
+_08083B0C: .4byte gPlttBufferUnfaded
+_08083B10: .4byte gPlttBufferFaded
 	thumb_func_end MultiplyInvertedPaletteRGBComponents
 
 	thumb_func_start MultiplyPaletteRGBComponents
@@ -944,7 +944,7 @@ MultiplyPaletteRGBComponents: @ 8083B14
 	lsrs r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, _08083B84 @ =gUnknown_20371F8
+	ldr r4, _08083B84 @ =gPlttBufferUnfaded
 	lsrs r0, 15
 	adds r4, r0, r4
 	ldrh r4, [r4]
@@ -981,7 +981,7 @@ MultiplyPaletteRGBComponents: @ 8083B14
 	lsls r4, 26
 	orrs r4, r5
 	lsrs r4, 16
-	ldr r1, _08083B88 @ =gUnknown_20375F8
+	ldr r1, _08083B88 @ =gPlttBufferFaded
 	adds r0, r1
 	strh r4, [r0]
 	pop {r3}
@@ -990,8 +990,8 @@ MultiplyPaletteRGBComponents: @ 8083B14
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08083B84: .4byte gUnknown_20371F8
-_08083B88: .4byte gUnknown_20375F8
+_08083B84: .4byte gPlttBufferUnfaded
+_08083B88: .4byte gPlttBufferFaded
 	thumb_func_end MultiplyPaletteRGBComponents
 
 	thumb_func_start sub_8083B8C

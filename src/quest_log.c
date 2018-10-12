@@ -44,8 +44,6 @@ struct UnkStruct_203AE98
     u8 unk_6;
 };
 
-extern u16 gUnknown_20371F8[];
-
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 EWRAM_DATA u8 gUnknown_203ADF9 = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
@@ -1214,7 +1212,7 @@ void sub_8111F14(void)
 
 void sub_8111F38(u16 a0, u16 a1)
 {
-    CpuSet(gUnknown_20371F8 + a0, gUnknown_203AE90 + a0, a1);
+    CpuSet(gPlttBufferUnfaded + a0, gUnknown_203AE90 + a0, a1);
 }
 
 bool8 sub_8111F60(void)
@@ -1311,7 +1309,7 @@ void sub_81120AC(u8 taskId)
         default:
             if (gUnknown_203AE94.unk_0_6 == 1)
                 sub_8098110(1);
-            CpuCopy16(gUnknown_203AE90, gUnknown_20371F8, 0x400);
+            CpuCopy16(gUnknown_203AE90, gPlttBufferUnfaded, 0x400);
             Free(gUnknown_203AE90);
             gUnknown_203AE94 = (struct UnkStruct_203AE94){};
             sub_80696C0();
@@ -1323,4 +1321,21 @@ void sub_81120AC(u8 taskId)
             DestroyTask(taskId);
             break;
     }
+}
+
+bool8 sub_81121D8(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (data[1] > 15)
+        return TRUE;
+
+    sub_80716F8(gPlttBufferUnfaded + 0x01, gPlttBufferFaded + 0x01, 0xDF, 0x0F - data[1]);
+    sub_80716F8(gPlttBufferUnfaded + 0x100, gPlttBufferFaded + 0x100, 0x100, 0x0F - data[1]);
+    FillWindowPixelRect(gUnknown_203ADFE[0], 0x00, 0, gUnknown_845661C[0].height * 8 - 1 - data[1], gUnknown_845661C[0].width * 8, 1);
+    FillWindowPixelRect(gUnknown_203ADFE[1], 0x00, 0, data[1], gUnknown_845661C[1].width * 8, 1);
+    CopyWindowToVram(gUnknown_203ADFE[0], 2);
+    CopyWindowToVram(gUnknown_203ADFE[1], 2);
+    data[1]++;
+    return FALSE;
 }

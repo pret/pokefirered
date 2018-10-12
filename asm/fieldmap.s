@@ -2125,35 +2125,35 @@ sub_80598CC: @ 80598CC
 _080598EC: .4byte gUnknown_2036E28
 _080598F0:
 	lsls r4, 1
-	ldr r0, _08059900 @ =gUnknown_20371F8
+	ldr r0, _08059900 @ =gPlttBufferUnfaded
 	adds r0, r4, r0
 	adds r1, r5, 0
 	bl TintPalette_GrayScale
 	b _0805992C
 	.align 2, 0
-_08059900: .4byte gUnknown_20371F8
+_08059900: .4byte gPlttBufferUnfaded
 _08059904:
 	lsls r4, 1
-	ldr r0, _08059914 @ =gUnknown_20371F8
+	ldr r0, _08059914 @ =gPlttBufferUnfaded
 	adds r0, r4, r0
 	adds r1, r5, 0
 	bl TintPalette_SepiaTone
 	b _0805992C
 	.align 2, 0
-_08059914: .4byte gUnknown_20371F8
+_08059914: .4byte gPlttBufferUnfaded
 _08059918:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8111F38
 	lsls r4, 1
-	ldr r0, _08059940 @ =gUnknown_20371F8
+	ldr r0, _08059940 @ =gPlttBufferUnfaded
 	adds r0, r4, r0
 	adds r1, r5, 0
 	bl TintPalette_GrayScale
 _0805992C:
-	ldr r0, _08059940 @ =gUnknown_20371F8
+	ldr r0, _08059940 @ =gPlttBufferUnfaded
 	adds r0, r4, r0
-	ldr r1, _08059944 @ =gUnknown_20375F8
+	ldr r1, _08059944 @ =gPlttBufferFaded
 	adds r1, r4, r1
 	adds r2, r5, 0
 	bl CpuSet
@@ -2162,8 +2162,8 @@ _0805993A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059940: .4byte gUnknown_20371F8
-_08059944: .4byte gUnknown_20375F8
+_08059940: .4byte gPlttBufferUnfaded
+_08059944: .4byte gPlttBufferFaded
 	thumb_func_end sub_80598CC
 
 	thumb_func_start sub_8059948
@@ -2188,36 +2188,36 @@ sub_8059948: @ 8059948
 _08059968: .4byte gUnknown_2036E28
 _0805996C:
 	lsls r4, 5
-	ldr r0, _0805997C @ =gUnknown_20371F8
+	ldr r0, _0805997C @ =gPlttBufferUnfaded
 	adds r0, r4, r0
 	lsls r1, r6, 4
 	bl TintPalette_GrayScale
 	b _080599AA
 	.align 2, 0
-_0805997C: .4byte gUnknown_20371F8
+_0805997C: .4byte gPlttBufferUnfaded
 _08059980:
 	lsls r4, 5
-	ldr r0, _08059990 @ =gUnknown_20371F8
+	ldr r0, _08059990 @ =gPlttBufferUnfaded
 	adds r0, r4, r0
 	lsls r1, r6, 4
 	bl TintPalette_SepiaTone
 	b _080599AA
 	.align 2, 0
-_08059990: .4byte gUnknown_20371F8
+_08059990: .4byte gPlttBufferUnfaded
 _08059994:
 	lsls r0, r4, 4
 	lsls r5, r6, 4
 	adds r1, r5, 0
 	bl sub_8111F38
 	lsls r4, 5
-	ldr r0, _080599C0 @ =gUnknown_20371F8
+	ldr r0, _080599C0 @ =gPlttBufferUnfaded
 	adds r0, r4, r0
 	adds r1, r5, 0
 	bl TintPalette_GrayScale
 _080599AA:
-	ldr r0, _080599C0 @ =gUnknown_20371F8
+	ldr r0, _080599C0 @ =gPlttBufferUnfaded
 	adds r0, r4, r0
-	ldr r1, _080599C4 @ =gUnknown_20375F8
+	ldr r1, _080599C4 @ =gPlttBufferFaded
 	adds r1, r4, r1
 	lsls r2, r6, 3
 	bl CpuFastSet
@@ -2226,8 +2226,8 @@ _080599B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080599C0: .4byte gUnknown_20371F8
-_080599C4: .4byte gUnknown_20375F8
+_080599C0: .4byte gPlttBufferUnfaded
+_080599C4: .4byte gPlttBufferFaded
 	thumb_func_end sub_8059948
 
 	thumb_func_start apply_map_tileset_palette

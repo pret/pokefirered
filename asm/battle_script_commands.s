@@ -32539,7 +32539,7 @@ _0802DAE0:
 	bl sub_810C1CC
 	str r4, [sp, 0x14]
 	add r0, sp, 0x14
-	ldr r1, _0802DB48 @ =gUnknown_20375F8
+	ldr r1, _0802DB48 @ =gPlttBufferFaded
 	ldr r2, _0802DB4C @ =0x05000080
 	bl CpuSet
 	ldr r0, _0802DB50 @ =0x0001ffff
@@ -32562,7 +32562,7 @@ _0802DB36:
 	.align 2, 0
 _0802DB40: .4byte gBattleMons
 _0802DB44: .4byte 0x0000ffff
-_0802DB48: .4byte gUnknown_20375F8
+_0802DB48: .4byte gPlttBufferFaded
 _0802DB4C: .4byte 0x05000080
 _0802DB50: .4byte 0x0001ffff
 _0802DB54: .4byte gUnknown_2023E82

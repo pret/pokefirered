@@ -1330,8 +1330,8 @@ Task_Hof_HandlePaletteOnExit: @ 80F283C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080F287C @ =gUnknown_20375F8
-	ldr r1, _080F2880 @ =gUnknown_20371F8
+	ldr r0, _080F287C @ =gPlttBufferFaded
+	ldr r1, _080F2880 @ =gPlttBufferUnfaded
 	movs r2, 0x80
 	lsls r2, 2
 	bl CpuSet
@@ -1355,8 +1355,8 @@ Task_Hof_HandlePaletteOnExit: @ 80F283C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F287C: .4byte gUnknown_20375F8
-_080F2880: .4byte gUnknown_20371F8
+_080F287C: .4byte gPlttBufferFaded
+_080F2880: .4byte gPlttBufferUnfaded
 _080F2884: .4byte gTasks
 _080F2888: .4byte Task_Hof_HandleExit
 	thumb_func_end Task_Hof_HandlePaletteOnExit
@@ -2256,8 +2256,8 @@ sub_80F2FEC: @ 80F2FEC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080F3020 @ =gUnknown_20375F8
-	ldr r1, _080F3024 @ =gUnknown_20371F8
+	ldr r0, _080F3020 @ =gPlttBufferFaded
+	ldr r1, _080F3024 @ =gPlttBufferUnfaded
 	movs r2, 0x80
 	lsls r2, 2
 	bl CpuSet
@@ -2276,8 +2276,8 @@ sub_80F2FEC: @ 80F2FEC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F3020: .4byte gUnknown_20375F8
-_080F3024: .4byte gUnknown_20371F8
+_080F3020: .4byte gPlttBufferFaded
+_080F3024: .4byte gPlttBufferUnfaded
 _080F3028: .4byte gTasks
 _080F302C: .4byte sub_80F3030
 	thumb_func_end sub_80F2FEC

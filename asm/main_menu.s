@@ -988,11 +988,11 @@ _0800CB2E:
 	.align 2, 0
 _0800CB44: .4byte gUnknown_2031DE0
 _0800CB48:
-	ldr r0, _0800CB64 @ =gUnknown_20371F8
+	ldr r0, _0800CB64 @ =gPlttBufferUnfaded
 	movs r2, 0
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _0800CB68 @ =gUnknown_20375F8
+	ldr r0, _0800CB68 @ =gPlttBufferFaded
 	strh r1, [r0]
 	ldr r0, _0800CB6C @ =gUnknown_2031DE0
 	strb r2, [r0]
@@ -1001,8 +1001,8 @@ _0800CB48:
 	bl sub_8110F14
 	b _0800CB84
 	.align 2, 0
-_0800CB64: .4byte gUnknown_20371F8
-_0800CB68: .4byte gUnknown_20375F8
+_0800CB64: .4byte gPlttBufferUnfaded
+_0800CB68: .4byte gPlttBufferFaded
 _0800CB6C: .4byte gUnknown_2031DE0
 _0800CB70:
 	ldr r0, _0800CB8C @ =sub_81422AC

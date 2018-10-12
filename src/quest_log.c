@@ -16,6 +16,7 @@
 #include "map_obj_80688E4.h"
 #include "field_player_avatar.h"
 #include "item.h"
+#include "region_map.h"
 #include "wild_encounter.h"
 #include "help_system.h"
 #include "unk_8159F40.h"
@@ -91,6 +92,8 @@ void sub_8111E84(void);
 bool8 sub_8111F60(void);
 void sub_8111F8C(u8);
 void sub_8111FCC(u8);
+void sub_8112044(u8);
+void sub_81120AC(u8);
 void sub_8112364(void);
 void sub_8112888(u8);
 void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
@@ -111,6 +114,7 @@ void * sub_8113D48(void *, struct UnkStruct_203AE98 *);
 void * sub_8113D94(void *, struct UnkStruct_203AE98 *);
 
 extern const u8 gUnknown_841A155[];
+extern const u8 gUnknown_841B073[];
 
 const struct WindowTemplate gUnknown_845661C[3] = {
     { 0, 0,  0, 30, 2, 15, 0x0e9 },
@@ -1230,4 +1234,39 @@ void sub_8111F8C(u8 taskId)
         ScriptContext2_Enable();
         task->func = sub_8111FCC;
     }
+}
+
+void sub_8111FCC(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    if (!gPaletteFade.active)
+    {
+        if (gUnknown_203AE94.unk_0_6 != 1)
+        {
+            sub_80C4DF8(gStringVar1, gMapHeader.regionMapSectionId);
+            StringExpandPlaceholders(gStringVar4, gUnknown_841B073);
+            sub_8111D10();
+        }
+        task->data[0] = 0;
+        task->data[1] = 0;
+        task->func = sub_8112044;
+        player_bitmagic();
+        ScriptContext2_Enable();
+    }
+}
+
+void sub_8112044(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON) || task->data[0] >= 0x7f || gUnknown_203AE94.unk_0_6 == 1)
+    {
+        sub_8111E20();
+        task->data[0] = 0;
+        task->func = sub_81120AC;
+        gUnknown_203ADFA = 0;
+    }
+    else
+        task->data[0]++;
 }

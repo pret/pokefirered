@@ -29,6 +29,8 @@ struct UnkStruct_203AE94
     u8 unk_0_4:2;
     u8 unk_0_6:2;
     u8 unk_1;
+    u8 unk_2;
+    u8 unk_3;
 };
 
 struct UnkStruct_203AE98
@@ -70,24 +72,29 @@ void sub_811175C(u8, struct UnkStruct_203AE98 *);
 void sub_81118F4(s8);
 void sub_8111914(void);
 void sub_8111984(void);
-void sub_8112364(void);
 void sub_8111A34(u8);
-bool8 sub_8111F60(void);
-void * sub_8113D08(void *, struct UnkStruct_203AE98 *);
-void * sub_8113D94(void *, struct UnkStruct_203AE98 *);
-void * sub_8113C20(void *, struct UnkStruct_203AE98 *);
-void * sub_8113C8C(void *, struct UnkStruct_203AE98 *);
-void * sub_8113A78(void *, void **);
-void sub_8113ABC(void *);
-void sub_81138F8(void);
 void sub_8111AD8(void);
+void sub_8111B80(void);
+void sub_8111E20(void);
+bool8 sub_8111F60(void);
+void sub_8112364(void);
+void sub_8112888(u8);
 void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
 void sub_811381C(void);
+void sub_81138F8(void);
+void * sub_8113A78(void *, void **);
+void sub_8113ABC(void *);
+bool8 sub_8113AE8(void *);
+bool8 sub_8113B44(void *);
 void sub_8113B88(void);
 void sub_8113BD8(void);
 void * sub_8113BF4(void *);
-void * sub_8113D48(void *, struct UnkStruct_203AE98 *);
+void * sub_8113C20(void *, struct UnkStruct_203AE98 *);
+void * sub_8113C8C(void *, struct UnkStruct_203AE98 *);
 void * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
+void * sub_8113D08(void *, struct UnkStruct_203AE98 *);
+void * sub_8113D48(void *, struct UnkStruct_203AE98 *);
+void * sub_8113D94(void *, struct UnkStruct_203AE98 *);
 
 extern const u8 gUnknown_841A155[];
 
@@ -978,5 +985,34 @@ void sub_8111A34(u8 taskId)
                 gUnknown_203AE8C = sub_8111914;
             }
             break;
+    }
+}
+
+void sub_8111AD8(void)
+{
+    if (gUnknown_203AE94.unk_0_0 == 1)
+    {
+        if (--gUnknown_203AE94.unk_2 != 0)
+            return;
+        gUnknown_203AE94.unk_0_0 = 0;
+        gUnknown_203AE94.unk_0_4 = 1;
+        sub_8112888(2);
+    }
+
+    if (gUnknown_203AE94.unk_0_4 == 1)
+    {
+        if (++gUnknown_203AE94.unk_3 > 15)
+        {
+            sub_8111E20();
+            gUnknown_203AE94.unk_0_4 = 0;
+            gUnknown_203AE94.unk_3 = 0;
+        }
+    }
+    if (gUnknown_203AE94.unk_1 < 32)
+    {
+        if (sub_8113B44(gUnknown_203AE0C[gUnknown_203AE94.unk_1]) == 1)
+            sub_8111B80();
+        else if (sub_8113AE8(gUnknown_203AE0C[gUnknown_203AE94.unk_1]) == 1)
+            sub_8111B80();
     }
 }

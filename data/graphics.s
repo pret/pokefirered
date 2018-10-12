@@ -7,9 +7,9 @@ gUnknown_8D004D8:: @ 8D004D8
 	.incbin "baserom.gba", 0xD004D8, 0x44
 
 	.align 2
-gMenuMapBin:: @ 8D0051C
+gFile_graphics_interface_menu_map_tilemap:: @ 8D0051C
 	.incbin "graphics/interface/menu_map.bin.lz"
-	
+
 	.align 2
 gUnknown_8D00748:: @ 8D00748
 	.incbin "baserom.gba", 0xD00748, 0x488
@@ -23,519 +23,519 @@ gUnknown_8D00BE8:: @ 8D00BE8
 	.incbin "graphics/pokemon/palettes/circled_question_mark_shiny_palette.gbapal.lz"
 
 	.align 2
-gOldCharmap4bpp:: @ 8D00C00
+gFile_graphics_unused_old_charmap_sheet:: @ 8D00C00
 	.incbin "graphics/unused/old_charmap.4bpp.lz" @from ruby
-	
+
 	.align 2
-gOldCharmapBin:: @ 8D013D8
+gFile_graphics_unused_old_charmap_tilemap:: @ 8D013D8
 	.incbin "graphics/unused/old_charmap.bin.lz" @from ruby
-	
+
 	.align 2
-gOldCharmapGbapal:: @ 8D01604
+gFile_graphics_unused_old_charmap_palette:: @ 8D01604
 	.incbin "graphics/unused/old_charmap.gbapal.lz" @from ruby
-	
+
 	.align 2
-gSmokescreenImpact4bpp:: @ 8D0162C
+gFile_graphics_battle_anims_sprites_smokescreen_impact_sheet:: @ 8D0162C
 	.incbin "graphics/battle_anims/sprites/smokescreen_impact.4bpp.lz"
-	
+
 	.align 2
-gSmokescreenImpactGbapal:: @ 8D0170C
+gFile_graphics_battle_anims_sprites_smokescreen_impact_palette:: @ 8D0170C
 	.incbin "graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz"
-	
+
 	.align 2
-gBallPoke4bpp:: @ 8D01724
+gFile_graphics_interface_ball_Poke_sheet:: @ 8D01724
 	.incbin "graphics/interface/ball/poke.4bpp.lz"
-	
+
 	.align 2
-gBallPokeGbaPal:: @ 8D017E0
+gFile_graphics_interface_ball_Poke_palette:: @ 8D017E0
 	.incbin "graphics/interface/ball/poke.gbapal.lz"
-	
+
 	.align 2
-gBallGreat4bpp:: @ 8D01800
+gFile_graphics_interface_ball_Great_sheet:: @ 8D01800
 	.incbin "graphics/interface/ball/great.4bpp.lz"
-	
+
 	.align 2
-gBallGreatGbapal:: @ 8D018BC
+gFile_graphics_interface_ball_Great_palette:: @ 8D018BC
 	.incbin "graphics/interface/ball/great.gbapal.lz"
-	
+
 	.align 2
-gBallSafari4bpp:: @ 8D018E0
+gFile_graphics_interface_ball_Safari_sheet:: @ 8D018E0
 	.incbin "graphics/interface/ball/safari.4bpp.lz"
-	
+
 	.align 2
-gBallSafariGbapal:: @ 8D019A4
+gFile_graphics_interface_ball_Safari_palette:: @ 8D019A4
 	.incbin "graphics/interface/ball/safari.gbapal.lz"
-	
+
 	.align 2
-gBallUltra4bpp:: @ 8D019C8
+gFile_graphics_interface_ball_Ultra_sheet:: @ 8D019C8
 	.incbin "graphics/interface/ball/ultra.4bpp.lz"
-	
+
 	.align 2
-gBallUltraGbapal:: @ 8D01A7C
+gFile_graphics_interface_ball_Ultra_palette:: @ 8D01A7C
 	.incbin "graphics/interface/ball/ultra.gbapal.lz"
-	
+
 	.align 2
-gBallMaster4bpp:: @ 8D01A9C
+gFile_graphics_interface_ball_Master_sheet:: @ 8D01A9C
 	.incbin "graphics/interface/ball/master.4bpp.lz"
-	
+
 	.align 2
-gBallMasterGbapal:: @ 8D01B5C
+gFile_graphics_interface_ball_Master_palette:: @ 8D01B5C
 	.incbin "graphics/interface/ball/master.gbapal.lz"
-	
+
 	.align 2
-gBallNet4bpp:: @ 8D01B80
+gFile_graphics_interface_ball_Net_sheet:: @ 8D01B80
 	.incbin "graphics/interface/ball/net.4bpp.lz"
-	
+
 	.align 2
-gBallNetGbapal:: @ 8D01C40
+gFile_graphics_interface_ball_Net_palette:: @ 8D01C40
 	.incbin "graphics/interface/ball/net.gbapal.lz"
-	
+
 	.align 2
-gBallDive4bpp:: @ 8D01C60
+gFile_graphics_interface_ball_Dive_sheet:: @ 8D01C60
 	.incbin "graphics/interface/ball/dive.4bpp.lz"
-	
+
 	.align 2
-gBallDiveGbapal:: @ 8D01D74
+gFile_graphics_interface_ball_Dive_palette:: @ 8D01D74
 	.incbin "graphics/interface/ball/dive.gbapal.lz"
-	
+
 	.align 2
-gBallNest4bpp:: @ 8D01D9C
+gFile_graphics_interface_ball_Nest_sheet:: @ 8D01D9C
 	.incbin "graphics/interface/ball/nest.4bpp.lz"
-	
+
 	.align 2
-gBallNestGbapal:: @ 8D01E60
+gFile_graphics_interface_ball_Nest_palette:: @ 8D01E60
 	.incbin "graphics/interface/ball/nest.gbapal.lz"
-	
+
 	.align 2
-gBallRepeat4bpp:: @ 8D01E84
+gFile_graphics_interface_ball_Repeat_sheet:: @ 8D01E84
 	.incbin "graphics/interface/ball/repeat.4bpp.lz"
-	
+
 	.align 2
-gBallRepeatGbapal:: @ 8D01F44
+gFile_graphics_interface_ball_Repeat_palette:: @ 8D01F44
 	.incbin "graphics/interface/ball/repeat.gbapal.lz"
-	
+
 	.align 2
-gBallTimer4bpp:: @ 8D01F68
+gFile_graphics_interface_ball_Timer_sheet:: @ 8D01F68
 	.incbin "graphics/interface/ball/timer.4bpp.lz"
-	
+
 	.align 2
-gBallTimerGbapal:: @ 8D02060
+gFile_graphics_interface_ball_Timer_palette:: @ 8D02060
 	.incbin "graphics/interface/ball/timer.gbapal.lz"
-	
+
 	.align 2
-gBallLuxury4bpp:: @ 8D02084
+gFile_graphics_interface_ball_Luxury_sheet:: @ 8D02084
 	.incbin "graphics/interface/ball/luxury.4bpp.lz"
-	
+
 	.align 2
-gBallLuxuryGbapal:: @ 8D021B0
+gFile_graphics_interface_ball_Luxury_palette:: @ 8D021B0
 	.incbin "graphics/interface/ball/luxury.gbapal.lz"
-	
+
 	.align 2
-gBallPremier4bpp:: @ 8D021D8
+gFile_graphics_interface_ball_Premier_sheet:: @ 8D021D8
 	.incbin "graphics/interface/ball/premier.4bpp.lz"
-	
+
 	.align 2
-gBallPremierGbapal:: @ 8D022C8
+gFile_graphics_interface_ball_Premier_palette:: @ 8D022C8
 	.incbin "graphics/interface/ball/premier.gbapal.lz"
-	
+
 	.align 2
-gBallOpen4bpp:: @ 8D022E8
+gFile_graphics_interface_ball_Open_sheet:: @ 8D022E8
 	.incbin "graphics/interface/ball_open.4bpp.lz"
-	
+
 	.align 2
-gBlank4bpp:: @ 8D02364
+gFile_graphics_interface_blank_sheet:: @ 8D02364
 	.incbin "graphics/interface/blank.4bpp.lz"
-	
+
 	.align 2
-gSprite1464bpp:: @ 8D02460
+gFile_graphics_battle_anims_sprites_146_sheet:: @ 8D02460
 	.incbin "graphics/battle_anims/sprites/146.4bpp.lz"
-	
+
 	.align 2
-gSprite0004bpp:: @ 8D02520
+gFile_graphics_battle_anims_sprites_000_sheet:: @ 8D02520
 	.incbin "graphics/battle_anims/sprites/000.4bpp.lz"
-	
+
 	.align 2
-gSprite0034bpp:: @ 8D025D0
+gFile_graphics_battle_anims_sprites_003_sheet:: @ 8D025D0
 	.incbin "graphics/battle_anims/sprites/003.4bpp.lz"
-	
+
 	.align 2
-gSprite0044bpp:: @ 8D02644
+gFile_graphics_battle_anims_sprites_004_sheet:: @ 8D02644
 	.incbin "graphics/battle_anims/sprites/004.4bpp.lz"
-	
+
 	.align 2
-gSprite0054bpp:: @ 8D026F4
+gFile_graphics_battle_anims_sprites_005_sheet:: @ 8D026F4
 	.incbin "graphics/battle_anims/sprites/005.4bpp.lz"
-	
+
 	.align 2
-gSprite0064bpp:: @ 8D027C8
+gFile_graphics_battle_anims_sprites_006_sheet:: @ 8D027C8
 	.incbin "graphics/battle_anims/sprites/006.4bpp.lz"
-	
+
 	.align 2
-gSprite115Gbapal:: @ 8D02894
+gFile_graphics_battle_anims_sprites_115_palette:: @ 8D02894
 	.incbin "graphics/battle_anims/sprites/115.gbapal.lz"
-	
+
 	.align 2
-gSprite000Gbapal:: @ 8D028B4
+gFile_graphics_battle_anims_sprites_000_palette:: @ 8D028B4
 	.incbin "graphics/battle_anims/sprites/000.gbapal.lz"
-	
+
 	.align 2
-gSprite003Gbapal:: @ 8D028D8
+gFile_graphics_battle_anims_sprites_003_palette:: @ 8D028D8
 	.incbin "graphics/battle_anims/sprites/003.gbapal.lz"
-	
+
 	.align 2
-gSprite004Gbapal:: @ 8D02900
+gFile_graphics_battle_anims_sprites_004_palette:: @ 8D02900
 	.incbin "graphics/battle_anims/sprites/004.gbapal.lz"
-	
+
 	.align 2
-gSprite005Gbapal:: @ 8D02914
+gFile_graphics_battle_anims_sprites_005_palette:: @ 8D02914
 	.incbin "graphics/battle_anims/sprites/005.gbapal.lz"
-	
+
 	.align 2
-gSprite006Gbapal:: @ 8D0293C
+gFile_graphics_battle_anims_sprites_006_palette:: @ 8D0293C
 	.incbin "graphics/battle_anims/sprites/006.gbapal.lz"
-	
+
 	.align 2
-gSprite1614bpp:: @ 8D02964
+gFile_graphics_battle_anims_sprites_161_sheet:: @ 8D02964
 	.incbin "graphics/battle_anims/sprites/161.4bpp.lz"
-	
+
 	.align 2
-gSprite161Gbapal:: @ 8D0298C
+gFile_graphics_battle_anims_sprites_161_palette:: @ 8D0298C
 	.incbin "graphics/battle_anims/sprites/161.gbapal.lz"
-	
+
 	.align 2
-gSprite0074bpp:: @ 8D029B4
+gFile_graphics_battle_anims_sprites_007_sheet:: @ 8D029B4
 	.incbin "graphics/battle_anims/sprites/007.4bpp.lz"
-	
+
 	.align 2
-gSprite0074Gbapal:: @ 8D02B30
+gFile_graphics_battle_anims_sprites_007_palette:: @ 8D02B30
 	.incbin "graphics/battle_anims/sprites/007.gbapal.lz"
-	
+
 	.align 2
-gSprite0084bpp:: @ 8D02B50
+gFile_graphics_battle_anims_sprites_008_sheet:: @ 8D02B50
 	.incbin "graphics/battle_anims/sprites/008.4bpp.lz"
-	
+
 	.align 2
-gSprite008Gbapal:: @ 8D02B70
+gFile_graphics_battle_anims_sprites_008_palette:: @ 8D02B70
 	.incbin "graphics/battle_anims/sprites/008.gbapal.lz"
-	
+
 	.align 2
-gSprite010Gbapal:: @ 8D02B8C
+gFile_graphics_battle_anims_sprites_010_palette:: @ 8D02B8C
 	.incbin "graphics/battle_anims/sprites/010.gbapal.lz"
-	
+
 	.align 2
-gSprite0104bpp:: @ 8D02BAC
+gFile_graphics_battle_anims_sprites_010_sheet:: @ 8D02BAC
 	.incbin "graphics/battle_anims/sprites/010.4bpp.lz"
-	
+
 	.align 2
-gSprite0094bpp:: @ 8D02F8C
+gFile_graphics_battle_anims_sprites_009_sheet:: @ 8D02F8C
 	.incbin "graphics/battle_anims/sprites/009.4bpp.lz"
-	
+
 	.align 2
-gSprite009Gbapal:: @ 8D03274
+gFile_graphics_battle_anims_sprites_009_palette:: @ 8D03274
 	.incbin "graphics/battle_anims/sprites/009.gbapal.lz"
 
 	.align 2
-gSprite0114bpp:: @ 8D03294
+gFile_graphics_battle_anims_sprites_011_sheet:: @ 8D03294
 	.incbin "graphics/battle_anims/sprites/011.4bpp.lz"
-	
+
 	.align 2
-gSprite011Gbapal:: @ 8D0330C
+gFile_graphics_battle_anims_sprites_011_palette:: @ 8D0330C
 	.incbin "graphics/battle_anims/sprites/011.gbapal.lz"
-	
+
 	.align 2
-gSprite0124bpp:: @ 8D03334
+gFile_graphics_battle_anims_sprites_012_sheet:: @ 8D03334
 	.incbin "graphics/battle_anims/sprites/012.4bpp.lz"
-	
+
 	.align 2
-gSprite012Gbapal:: @ 8D0339C
+gFile_graphics_battle_anims_sprites_012_palette:: @ 8D0339C
 	.incbin "graphics/battle_anims/sprites/012.gbapal.lz"
-	
+
 	.align 2
-gSprite1524bpp:: @ 8D033B4
+gFile_graphics_battle_anims_sprites_152_sheet:: @ 8D033B4
 	.incbin "graphics/battle_anims/sprites/152.4bpp.lz"
-	
+
 	.align 2
-gSprite152Gbapal:: @ 8D033FC
+gFile_graphics_battle_anims_sprites_152_palette:: @ 8D033FC
 	.incbin "graphics/battle_anims/sprites/152.gbapal.lz"
-	
+
 	.align 2
-gSprite0134bpp:: @ 8D03420
+gFile_graphics_battle_anims_sprites_013_sheet:: @ 8D03420
 	.incbin "graphics/battle_anims/sprites/013.4bpp.lz"
-	
+
 	.align 2
-gSprite013Gbapal:: @ 8D03454
+gFile_graphics_battle_anims_sprites_013_palette:: @ 8D03454
 	.incbin "graphics/battle_anims/sprites/013.gbapal.lz"
-	
+
 	.align 2
-gSprite0154bpp:: @ 8D0346C
+gFile_graphics_battle_anims_sprites_015_sheet:: @ 8D0346C
 	.incbin "graphics/battle_anims/sprites/015.4bpp.lz"
-	
+
 	.align 2
-gSprite015Gbapal:: @ 8D034D8
+gFile_graphics_battle_anims_sprites_015_palette:: @ 8D034D8
 	.incbin "graphics/battle_anims/sprites/015.gbapal.lz"
-	
+
 	.align 2
-gSprite0164bpp:: @ 8D03500
+gFile_graphics_battle_anims_sprites_016_sheet:: @ 8D03500
 	.incbin "graphics/battle_anims/sprites/016.4bpp.lz"
-	
+
 	.align 2
-gSprite016Gbapal:: @ 8D03570
+gFile_graphics_battle_anims_sprites_016_palette:: @ 8D03570
 	.incbin "graphics/battle_anims/sprites/016.gbapal.lz"
-	
+
 	.align 2
-gSprite0174bpp:: @ 8D03580
+gFile_graphics_battle_anims_sprites_017_sheet:: @ 8D03580
 	.incbin "graphics/battle_anims/sprites/017.4bpp.lz"
-	
+
 	.align 2
-gUnknown_8D035A0:: @ 8D035A0
+gFile_graphics_unknown_Unknown_8D035A0_sheet:: @ 8D035A0
 	.incbin "graphics/unknown/unknown_D035A0.4bpp.lz"
-	
+
 	.align 2
-gSprite019Gbapal:: @ 8D035C4
+gFile_graphics_battle_anims_sprites_019_palette:: @ 8D035C4
 	.incbin "graphics/battle_anims/sprites/019.gbapal.lz"
-	
+
 	.align 2
-gSprite0194bpp:: @ 8D035E0
+gFile_graphics_battle_anims_sprites_019_sheet:: @ 8D035E0
 	.incbin "graphics/battle_anims/sprites/019.4bpp.lz"
-	
+
 	.align 2
-gSprite0204bpp:: @ 8D036A0
+gFile_graphics_battle_anims_sprites_020_sheet:: @ 8D036A0
 	.incbin "graphics/battle_anims/sprites/020.4bpp.lz"
-	
+
 	.align 2
-gSprite020Gbapal:: @ 8D0376C
+gFile_graphics_battle_anims_sprites_020_palette:: @ 8D0376C
 	.incbin "graphics/battle_anims/sprites/020.gbapal.lz"
-	
+
 	.align 2
-gSprite023Gbapal:: @ 8D03794
+gFile_graphics_battle_anims_sprites_023_palette:: @ 8D03794
 	.incbin "graphics/battle_anims/sprites/023.gbapal.lz"
-	
+
 	.align 2
-gSprite0234bpp:: @ 8D037BC
+gFile_graphics_battle_anims_sprites_023_sheet:: @ 8D037BC
 	.incbin "graphics/battle_anims/sprites/023.4bpp.lz"
-	
+
 	.align 2
-gSprite023UnusedGbapal:: @ 8D038C4
+gFile_graphics_unused_battle_anim_023_palette:: @ 8D038C4
 	.incbin "graphics/unused/battle_anim_023.gbapal.lz"
-	
+
 	.align 2
-gSpriteMusicNotes4bpp:: @ 8D038EC
+gFile_graphics_unused_music_notes_sheet:: @ 8D038EC
 	.incbin "graphics/unused/music_notes.4bpp.lz"
-	
+
 	.align 2
-gSprite021Gbapal:: @ 8D039E8
+gFile_graphics_battle_anims_sprites_021_palette:: @ 8D039E8
 	.incbin "graphics/battle_anims/sprites/021.gbapal.lz"
-	
+
 	.align 2
-gSprite0214bpp:: @ 8D03A10
+gFile_graphics_battle_anims_sprites_021_sheet:: @ 8D03A10
 	.incbin "graphics/battle_anims/sprites/021.4bpp.lz"
-	
+
 	.align 2
-gSprite022Gbapal:: @ 8D03D48
+gFile_graphics_battle_anims_sprites_022_palette:: @ 8D03D48
 	.incbin "graphics/battle_anims/sprites/022.gbapal.lz"
-	
+
 	.align 2
-gSprite025Gbapal:: @ 8D03D70
+gFile_graphics_battle_anims_sprites_025_palette:: @ 8D03D70
 	.incbin "graphics/battle_anims/sprites/025.gbapal.lz"
-	
+
 	.align 2
-gSprite0254bpp:: @ 8D03D98
+gFile_graphics_battle_anims_sprites_025_sheet:: @ 8D03D98
 	.incbin "graphics/battle_anims/sprites/025.4bpp.lz"
-	
+
 	.align 2
-gSprite0244bpp:: @ 8D03E88
+gFile_graphics_battle_anims_sprites_024_sheet:: @ 8D03E88
 	.incbin "graphics/battle_anims/sprites/024.4bpp.lz"
-	
+
 	.align 2
-gSprite024Gbapal:: @ 8D03F54
+gFile_graphics_battle_anims_sprites_024_palette:: @ 8D03F54
 	.incbin "graphics/battle_anims/sprites/024.gbapal.lz"
-	
+
 	.align 2
-gSprite0314bpp:: @ 8D03F68
+gFile_graphics_battle_anims_sprites_031_sheet:: @ 8D03F68
 	.incbin "graphics/battle_anims/sprites/031.4bpp.lz"
-	
+
 	.align 2
-gSprite031Gbapal:: @ 8D04348
+gFile_graphics_battle_anims_sprites_031_palette:: @ 8D04348
 	.incbin "graphics/battle_anims/sprites/031.gbapal.lz"
-	
+
 	.align 2
-gSprite032Gbapal:: @ 8D04368
+gFile_graphics_battle_anims_sprites_032_palette:: @ 8D04368
 	.incbin "graphics/battle_anims/sprites/032.gbapal.lz"
-	
+
 	.align 2
-gSprite0324bpp:: @ 8D04390
+gFile_graphics_battle_anims_sprites_032_sheet:: @ 8D04390
 	.incbin "graphics/battle_anims/sprites/032.4bpp.lz"
-	
+
 	.align 2
-gSprite0264bpp:: @ 8D0447C
+gFile_graphics_battle_anims_sprites_026_sheet:: @ 8D0447C
 	.incbin "graphics/battle_anims/sprites/026.4bpp.lz"
-	
+
 	.align 2
-gSprite026Gbapal:: @ 8D047B4
+gFile_graphics_battle_anims_sprites_026_palette:: @ 8D047B4
 	.incbin "graphics/battle_anims/sprites/026.gbapal.lz"
-	
+
 	.align 2
-gSprite027Gbapal:: @ 8D047DC
+gFile_graphics_battle_anims_sprites_027_palette:: @ 8D047DC
 	.incbin "graphics/battle_anims/sprites/027.gbapal.lz"
-	
+
 	.align 2
-gSprite0274bpp:: @ 8D04804
+gFile_graphics_battle_anims_sprites_027_sheet:: @ 8D04804
 	.incbin "graphics/battle_anims/sprites/027.4bpp.lz"
 
 	.align 2
-gSprite028Gbapal:: @ 8D04B00
+gFile_graphics_battle_anims_sprites_028_palette:: @ 8D04B00
 	.incbin "graphics/battle_anims/sprites/028.gbapal.lz"
 
 	.align 2
-gSprite0284bpp:: @ 8D04B28
+gFile_graphics_battle_anims_sprites_028_sheet:: @ 8D04B28
 	.incbin "graphics/battle_anims/sprites/028.4bpp.lz"
 
 	.align 2
-gSprite0294bpp:: @ 8D04E78
+gFile_graphics_battle_anims_sprites_029_sheet:: @ 8D04E78
 	.incbin "graphics/battle_anims/sprites/029.4bpp.lz"
 
 	.align 2
-gSprite029Gbapal:: @ 8D05130
+gFile_graphics_battle_anims_sprites_029_palette:: @ 8D05130
 	.incbin "graphics/battle_anims/sprites/029.gbapal.lz"
 
 	.align 2
-gSprite0304bpp:: @ 8D05158
+gFile_graphics_battle_anims_sprites_030_sheet:: @ 8D05158
 	.incbin "graphics/battle_anims/sprites/030.4bpp.lz"
 
 	.align 2
-gSprite030Gbapal:: @ 8D05518
+gFile_graphics_battle_anims_sprites_030_palette:: @ 8D05518
 	.incbin "graphics/battle_anims/sprites/030.gbapal.lz"
 
 	.align 2
-gSprite033Gbapal:: @ 8D0553C
+gFile_graphics_battle_anims_sprites_033_palette:: @ 8D0553C
 	.incbin "graphics/battle_anims/sprites/033.gbapal.lz"
 
 	.align 2
-gSprite0334bpp:: @ 8D05564
+gFile_graphics_battle_anims_sprites_033_sheet:: @ 8D05564
 	.incbin "graphics/battle_anims/sprites/033.4bpp.lz"
 
 	.align 2
-gSprite0344bpp:: @ 8D05ED4
+gFile_graphics_battle_anims_sprites_034_sheet:: @ 8D05ED4
 	.incbin "graphics/battle_anims/sprites/034.4bpp.lz"
 
 	.align 2
-gSprite0354bpp:: @ 8D062A0
+gFile_graphics_battle_anims_sprites_035_sheet:: @ 8D062A0
 	.incbin "graphics/battle_anims/sprites/035.4bpp.lz"
 
 	.align 2
-gSprite036Gbapal:: @ 8D06638
+gFile_graphics_battle_anims_sprites_036_palette:: @ 8D06638
 	.incbin "graphics/battle_anims/sprites/036.gbapal.lz"
 
 	.align 2
-gSprite0364bpp:: @ 8D06660
+gFile_graphics_battle_anims_sprites_036_sheet:: @ 8D06660
 	.incbin "graphics/battle_anims/sprites/036.4bpp.lz"
 
 	.align 2
-gSprite0374bpp:: @ 8D06A34
+gFile_graphics_battle_anims_sprites_037_sheet:: @ 8D06A34
 	.incbin "graphics/battle_anims/sprites/037.4bpp.lz"
 
 	.align 2
-gUnknown_D06D804bpp:: @ 8D06D80
+gFile_graphics_unknown_unknown_D06D80_sheet:: @ 8D06D80
 	.incbin "graphics/unknown/unknown_D06D80.4bpp.lz"
 
 	.align 2
-gUnknown_D06D80Gbapal:: @ 8D06DC4
+gFile_graphics_unknown_unknown_D06D80_palette:: @ 8D06DC4
 	.incbin "graphics/unknown/unknown_D06D80.gbapal.lz"
 
 	.align 2
-gUnknown_D06D80Gbapal2:: @ 8D06DD8
+gFile_graphics_unknown_unknown_D06D80_2_palette:: @ 8D06DD8
 	.incbin "graphics/unknown/unknown_D06D80_2.gbapal.lz"
 
 	.align 2
-gUnusedObi14bpp:: @ 8D06E0C
+gFile_graphics_unused_obi1_sheet:: @ 8D06E0C
 	.incbin "graphics/unused/obi1.4bpp.lz"
 
 	.align 2
-gUnusedObiPalpak1Gbapal:: @ 8D07170
+gFile_graphics_unused_obi_palpak1_palette:: @ 8D07170
 	.incbin "graphics/unused/obi_palpak1.gbapal.lz"
 
 	.align 2
-gUnusedOldPal4Gbapal:: @ 8D071B4
+gFile_graphics_unused_old_pal4_palette:: @ 8D071B4
 	.incbin "graphics/unused/old_pal4.gbapal.lz"
 
 	.align 2
-gUnusedObiPalpak3Gbapal:: @ 8D071CC
+gFile_graphics_unused_obi_palpak3_palette:: @ 8D071CC
 	.incbin "graphics/unused/obi_palpak3.gbapal.lz"
 
 	.align 2
-gUnusedObi24bpp:: @ 8D07224
+gFile_graphics_unused_obi2_sheet:: @ 8D07224
 	.incbin "graphics/unused/obi2.4bpp.lz"
 
 	.align 2
-gUnusedOldBattleInterfaceTilemapBin:: @ 8D077EC
+gFile_graphics_unused_old_battle_interface_tilemap:: @ 8D077EC
 	.incbin "graphics/unused/old_battle_interface_tilemap.bin.lz"
 
 	.align 2
-gSprite038Gbapal:: @ 8D078FC
+gFile_graphics_battle_anims_sprites_038_palette:: @ 8D078FC
 	.incbin "graphics/battle_anims/sprites/038.gbapal.lz"
 
 	.align 2
-gSprite039Gbapal:: @ 8D07924
+gFile_graphics_battle_anims_sprites_039_palette:: @ 8D07924
 	.incbin "graphics/battle_anims/sprites/039.gbapal.lz"
 
 	.align 2
-gSprite0384bpp:: @ 8D0794C
+gFile_graphics_battle_anims_sprites_038_sheet:: @ 8D0794C
 	.incbin "graphics/battle_anims/sprites/038.4bpp.lz"
 
 	.align 2
-gSprite0394bpp:: @ 8D07B70
+gFile_graphics_battle_anims_sprites_039_sheet:: @ 8D07B70
 	.incbin "graphics/battle_anims/sprites/039.4bpp.lz"
 
 	.align 2
-gSprite0404bpp:: @ 8D07E6C
+gFile_graphics_battle_anims_sprites_040_sheet:: @ 8D07E6C
 	.incbin "graphics/battle_anims/sprites/040.4bpp.lz"
 
 	.align 2
-gSprite0414bpp:: @ 8D08078
+gFile_graphics_battle_anims_sprites_041_sheet:: @ 8D08078
 	.incbin "graphics/battle_anims/sprites/041.4bpp.lz"
 
 	.align 2
-gIntefacePartyMenuHpBar4bpp:: @ 8D08218
+gFile_graphics_interface_party_menu_hpbar_sheet:: @ 8D08218
 	.incbin "graphics/interface/party_menu_hpbar.4bpp.lz"
 
 	.align 2
-gSprite0424bpp:: @ 8D082AC
+gFile_graphics_battle_anims_sprites_042_sheet:: @ 8D082AC
 	.incbin "graphics/battle_anims/sprites/042.4bpp.lz"
 
 	.align 2
-gSprite042Gbapal:: @ 8D0857C
+gFile_graphics_battle_anims_sprites_042_palette:: @ 8D0857C
 	.incbin "graphics/battle_anims/sprites/042.gbapal.lz"
 
 	.align 2
-gSprite0434bpp:: @ 8D085A4
+gFile_graphics_battle_anims_sprites_043_sheet:: @ 8D085A4
 	.incbin "graphics/battle_anims/sprites/043.4bpp.lz"
 
 	.align 2
-gSprite043Gbapal:: @ 8D089A4
+gFile_graphics_battle_anims_sprites_043_palette:: @ 8D089A4
 	.incbin "graphics/battle_anims/sprites/043.gbapal.lz"
 
 	.align 2
-gSprite044Gbapal:: @ 8D089CC
+gFile_graphics_battle_anims_sprites_044_palette:: @ 8D089CC
 	.incbin "graphics/battle_anims/sprites/044.gbapal.lz"
 
 	.align 2
-gSprite0444bpp:: @ 8D089F4
+gFile_graphics_battle_anims_sprites_044_sheet:: @ 8D089F4
 	.incbin "graphics/battle_anims/sprites/044.4bpp.lz"
 
 	.align 2
-gSprite045Gbapal:: @ 8D08C60
+gFile_graphics_battle_anims_sprites_045_palette:: @ 8D08C60
 	.incbin "graphics/battle_anims/sprites/045.gbapal.lz"
 
 	.align 2
-gSprite0454bpp:: @ 8D08C88
+gFile_graphics_battle_anims_sprites_045_sheet:: @ 8D08C88
 	.incbin "graphics/battle_anims/sprites/045.4bpp.lz"
 
 	.align 2
-gBattleInterfaceUnusedWindow4bpp:: @ 8D08EF4
+gFile_graphics_battle_interface_unused_window_sheet:: @ 8D08EF4
 	.incbin "graphics/battle_interface/unused_window.4bpp.lz"
 
 	.align 2
-gBattleInterfaceUnusedWindowGbapal:: @ 8D093B0
+gFile_graphics_battle_interface_unused_window_palette:: @ 8D093B0
 	.incbin "graphics/battle_interface/unused_window.gbapal.lz"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -646,689 +646,534 @@ gUnknown_8D2EC70:: @ 8D2EC70
 
 gUnknown_8D2FBB4:: @ 8D2FBB4
 	.incbin "baserom.gba", 0xD2FBB4, 0x20
-	
 
 	.align 2
 gFile_graphics_pokemon_front_pics_bulbasaur_still_front_pic:: @ 8D2FBD4
 	.incbin "graphics/pokemon/front_pics/bulbasaur_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD2FBD4, 0x02A4
 
 	.align 2
 gFile_graphics_pokemon_palettes_bulbasaur_palette:: @ 8D2FE78
 	.incbin "graphics/pokemon/palettes/bulbasaur_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD2FE78, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_bulbasaur_back_pic:: @ 8D2FEA0
 	.incbin "graphics/pokemon/back_pics/bulbasaur_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD2FEA0, 0x02C4
 
 	.align 2
 gFile_graphics_pokemon_palettes_bulbasaur_shiny_palette:: @ 8D30164
 	.incbin "graphics/pokemon/palettes/bulbasaur_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD30164, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_bulbasaur_icon:: @ 8D3018C
 	.incbin "graphics/pokemon/icons/bulbasaur_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD3018C, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_bulbasaur_footprint:: @ 8D3058C
 	.incbin "graphics/pokemon/footprints/bulbasaur_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD3058C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_ivysaur_still_front_pic:: @ 8D305AC
 	.incbin "graphics/pokemon/front_pics/ivysaur_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD305AC, 0x033C
 
 	.align 2
 gFile_graphics_pokemon_palettes_ivysaur_palette:: @ 8D308E8
 	.incbin "graphics/pokemon/palettes/ivysaur_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD308E8, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_ivysaur_back_pic:: @ 8D30910
 	.incbin "graphics/pokemon/back_pics/ivysaur_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD30910, 0x0354
 
 	.align 2
 gFile_graphics_pokemon_palettes_ivysaur_shiny_palette:: @ 8D30C64
 	.incbin "graphics/pokemon/palettes/ivysaur_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD30C64, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_ivysaur_icon:: @ 8D30C8C
 	.incbin "graphics/pokemon/icons/ivysaur_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD30C8C, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_ivysaur_footprint:: @ 8D3108C
 	.incbin "graphics/pokemon/footprints/ivysaur_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD3108C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_venusaur_still_front_pic:: @ 8D310AC
 	.incbin "graphics/pokemon/front_pics/venusaur_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD310AC, 0x0540
 
 	.align 2
 gFile_graphics_pokemon_palettes_venusaur_palette:: @ 8D315EC
 	.incbin "graphics/pokemon/palettes/venusaur_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD315EC, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_venusaur_back_pic:: @ 8D31614
 	.incbin "graphics/pokemon/back_pics/venusaur_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD31614, 0x04C8
 
 	.align 2
 gFile_graphics_pokemon_palettes_venusaur_shiny_palette:: @ 8D31ADC
 	.incbin "graphics/pokemon/palettes/venusaur_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD31ADC, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_venusaur_icon:: @ 8D31B04
 	.incbin "graphics/pokemon/icons/venusaur_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD31B04, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_venusaur_footprint:: @ 8D31F04
 	.incbin "graphics/pokemon/footprints/venusaur_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD31F04, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_charmander_still_front_pic:: @ 8D31F24
 	.incbin "graphics/pokemon/front_pics/charmander_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD31F24, 0x02A0
 
 	.align 2
 gFile_graphics_pokemon_palettes_charmander_palette:: @ 8D321C4
 	.incbin "graphics/pokemon/palettes/charmander_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD321C4, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_charmander_back_pic:: @ 8D321EC
 	.incbin "graphics/pokemon/back_pics/charmander_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD321EC, 0x0284
 
 	.align 2
 gFile_graphics_pokemon_palettes_charmander_shiny_palette:: @ 8D32470
 	.incbin "graphics/pokemon/palettes/charmander_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD32470, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_charmander_icon:: @ 8D32498
 	.incbin "graphics/pokemon/icons/charmander_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD32498, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_charmander_footprint:: @ 8D32898
 	.incbin "graphics/pokemon/footprints/charmander_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD32898, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_charmeleon_still_front_pic:: @ 8D328B8
 	.incbin "graphics/pokemon/front_pics/charmeleon_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD328B8, 0x03AC
 
 	.align 2
 gFile_graphics_pokemon_palettes_charmeleon_palette:: @ 8D32C64
 	.incbin "graphics/pokemon/palettes/charmeleon_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD32C64, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_charmeleon_back_pic:: @ 8D32C8C
 	.incbin "graphics/pokemon/back_pics/charmeleon_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD32C8C, 0x02F4
 
 	.align 2
 gFile_graphics_pokemon_palettes_charmeleon_shiny_palette:: @ 8D32F80
 	.incbin "graphics/pokemon/palettes/charmeleon_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD32F80, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_charmeleon_icon:: @ 8D32FA8
 	.incbin "graphics/pokemon/icons/charmeleon_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD32FA8, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_charmeleon_footprint:: @ 8D333A8
 	.incbin "graphics/pokemon/footprints/charmeleon_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD333A8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_charizard_still_front_pic:: @ 8D333C8
 	.incbin "graphics/pokemon/front_pics/charizard_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD333C8, 0x04FC
 
 	.align 2
 gFile_graphics_pokemon_palettes_charizard_palette:: @ 8D338C4
 	.incbin "graphics/pokemon/palettes/charizard_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD338C4, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_charizard_back_pic:: @ 8D338EC
 	.incbin "graphics/pokemon/back_pics/charizard_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD338EC, 0x040C
 
 	.align 2
 gFile_graphics_pokemon_palettes_charizard_shiny_palette:: @ 8D33CF8
 	.incbin "graphics/pokemon/palettes/charizard_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD33CF8, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_charizard_icon:: @ 8D33D20
 	.incbin "graphics/pokemon/icons/charizard_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD33D20, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_charizard_footprint:: @ 8D34120
 	.incbin "graphics/pokemon/footprints/charizard_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD34120, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_squirtle_still_front_pic:: @ 8D34140
 	.incbin "graphics/pokemon/front_pics/squirtle_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD34140, 0x029C
 
 	.align 2
 gFile_graphics_pokemon_palettes_squirtle_palette:: @ 8D343DC
 	.incbin "graphics/pokemon/palettes/squirtle_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD343DC, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_squirtle_back_pic:: @ 8D34404
 	.incbin "graphics/pokemon/back_pics/squirtle_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD34404, 0x0288
 
 	.align 2
 gFile_graphics_pokemon_palettes_squirtle_shiny_palette:: @ 8D3468C
 	.incbin "graphics/pokemon/palettes/squirtle_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3468C, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_squirtle_icon:: @ 8D346B4
 	.incbin "graphics/pokemon/icons/squirtle_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD346B4, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_squirtle_footprint:: @ 8D34AB4
 	.incbin "graphics/pokemon/footprints/squirtle_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD34AB4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_wartortle_still_front_pic:: @ 8D34AD4
 	.incbin "graphics/pokemon/front_pics/wartortle_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD34AD4, 0x03AC
 
 	.align 2
 gFile_graphics_pokemon_palettes_wartortle_palette:: @ 8D34E80
 	.incbin "graphics/pokemon/palettes/wartortle_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD34E80, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_wartortle_back_pic:: @ 8D34EA8
 	.incbin "graphics/pokemon/back_pics/wartortle_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD34EA8, 0x0348
 
 	.align 2
 gFile_graphics_pokemon_palettes_wartortle_shiny_palette:: @ 8D351F0
 	.incbin "graphics/pokemon/palettes/wartortle_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD351F0, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_wartortle_icon:: @ 8D35218
 	.incbin "graphics/pokemon/icons/wartortle_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD35218, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_wartortle_footprint:: @ 8D35618
 	.incbin "graphics/pokemon/footprints/wartortle_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD35618, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_blastoise_still_front_pic:: @ 8D35638
 	.incbin "graphics/pokemon/front_pics/blastoise_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD35638, 0x0504
 
 	.align 2
 gFile_graphics_pokemon_palettes_blastoise_palette:: @ 8D35B3C
 	.incbin "graphics/pokemon/palettes/blastoise_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD35B3C, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_blastoise_back_pic:: @ 8D35B64
 	.incbin "graphics/pokemon/back_pics/blastoise_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD35B64, 0x0414
 
 	.align 2
 gFile_graphics_pokemon_palettes_blastoise_shiny_palette:: @ 8D35F78
 	.incbin "graphics/pokemon/palettes/blastoise_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD35F78, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_blastoise_icon:: @ 8D35FA0
 	.incbin "graphics/pokemon/icons/blastoise_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD35FA0, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_blastoise_footprint:: @ 8D363A0
 	.incbin "graphics/pokemon/footprints/blastoise_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD363A0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_caterpie_still_front_pic:: @ 8D363C0
 	.incbin "graphics/pokemon/front_pics/caterpie_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD363C0, 0x0258
 
 	.align 2
 gFile_graphics_pokemon_palettes_caterpie_palette:: @ 8D36618
 	.incbin "graphics/pokemon/palettes/caterpie_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD36618, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_caterpie_back_pic:: @ 8D36640
 	.incbin "graphics/pokemon/back_pics/caterpie_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD36640, 0x0288
 
 	.align 2
 gFile_graphics_pokemon_palettes_caterpie_shiny_palette:: @ 8D368C8
 	.incbin "graphics/pokemon/palettes/caterpie_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD368C8, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_caterpie_icon:: @ 8D368F0
 	.incbin "graphics/pokemon/icons/caterpie_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD368F0, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_caterpie_footprint:: @ 8D36CF0
 	.incbin "graphics/pokemon/footprints/caterpie_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD36CF0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_metapod_still_front_pic:: @ 8D36D10
 	.incbin "graphics/pokemon/front_pics/metapod_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD36D10, 0x021C
 
 	.align 2
 gFile_graphics_pokemon_palettes_metapod_palette:: @ 8D36F2C
 	.incbin "graphics/pokemon/palettes/metapod_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD36F2C, 0x0020
 
 	.align 2
 gFile_graphics_pokemon_back_pics_metapod_back_pic:: @ 8D36F4C
 	.incbin "graphics/pokemon/back_pics/metapod_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD36F4C, 0x021C
 
 	.align 2
 gFile_graphics_pokemon_palettes_metapod_shiny_palette:: @ 8D37168
 	.incbin "graphics/pokemon/palettes/metapod_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD37168, 0x0020
 
 	.align 2
 gFile_graphics_pokemon_icons_metapod_icon:: @ 8D37188
 	.incbin "graphics/pokemon/icons/metapod_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD37188, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_metapod_footprint:: @ 8D37588
 	.incbin "graphics/pokemon/footprints/metapod_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD37588, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_butterfree_still_front_pic:: @ 8D375A8
 	.incbin "graphics/pokemon/front_pics/butterfree_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD375A8, 0x0378
 
 	.align 2
 gFile_graphics_pokemon_palettes_butterfree_palette:: @ 8D37920
 	.incbin "graphics/pokemon/palettes/butterfree_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD37920, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_butterfree_back_pic:: @ 8D37948
 	.incbin "graphics/pokemon/back_pics/butterfree_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD37948, 0x0404
 
 	.align 2
 gFile_graphics_pokemon_palettes_butterfree_shiny_palette:: @ 8D37D4C
 	.incbin "graphics/pokemon/palettes/butterfree_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD37D4C, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_butterfree_icon:: @ 8D37D74
 	.incbin "graphics/pokemon/icons/butterfree_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD37D74, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_butterfree_footprint:: @ 8D38174
 	.incbin "graphics/pokemon/footprints/butterfree_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD38174, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_weedle_still_front_pic:: @ 8D38194
 	.incbin "graphics/pokemon/front_pics/weedle_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD38194, 0x023C
 
 	.align 2
 gFile_graphics_pokemon_palettes_weedle_palette:: @ 8D383D0
 	.incbin "graphics/pokemon/palettes/weedle_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD383D0, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_weedle_back_pic:: @ 8D383F8
 	.incbin "graphics/pokemon/back_pics/weedle_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD383F8, 0x0268
 
 	.align 2
 gFile_graphics_pokemon_palettes_weedle_shiny_palette:: @ 8D38660
 	.incbin "graphics/pokemon/palettes/weedle_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD38660, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_weedle_icon:: @ 8D38688
 	.incbin "graphics/pokemon/icons/weedle_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD38688, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_weedle_footprint:: @ 8D38A88
 	.incbin "graphics/pokemon/footprints/weedle_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD38A88, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_kakuna_still_front_pic:: @ 8D38AA8
 	.incbin "graphics/pokemon/front_pics/kakuna_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD38AA8, 0x0240
 
 	.align 2
 gFile_graphics_pokemon_palettes_kakuna_palette:: @ 8D38CE8
 	.incbin "graphics/pokemon/palettes/kakuna_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD38CE8, 0x0024
 
 	.align 2
 gFile_graphics_pokemon_back_pics_kakuna_back_pic:: @ 8D38D0C
 	.incbin "graphics/pokemon/back_pics/kakuna_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD38D0C, 0x0284
 
 	.align 2
 gFile_graphics_pokemon_palettes_kakuna_shiny_palette:: @ 8D38F90
 	.incbin "graphics/pokemon/palettes/kakuna_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD38F90, 0x0024
 
 	.align 2
 gFile_graphics_pokemon_icons_kakuna_icon:: @ 8D38FB4
 	.incbin "graphics/pokemon/icons/kakuna_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD38FB4, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_kakuna_footprint:: @ 8D393B4
 	.incbin "graphics/pokemon/footprints/kakuna_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD393B4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_beedrill_still_front_pic:: @ 8D393D4
 	.incbin "graphics/pokemon/front_pics/beedrill_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD393D4, 0x0420
 
 	.align 2
 gFile_graphics_pokemon_palettes_beedrill_palette:: @ 8D397F4
 	.incbin "graphics/pokemon/palettes/beedrill_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD397F4, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_beedrill_back_pic:: @ 8D3981C
 	.incbin "graphics/pokemon/back_pics/beedrill_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3981C, 0x0374
 
 	.align 2
 gFile_graphics_pokemon_palettes_beedrill_shiny_palette:: @ 8D39B90
 	.incbin "graphics/pokemon/palettes/beedrill_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD39B90, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_beedrill_icon:: @ 8D39BB8
 	.incbin "graphics/pokemon/icons/beedrill_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD39BB8, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_beedrill_footprint:: @ 8D39FB8
 	.incbin "graphics/pokemon/footprints/beedrill_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD39FB8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_pidgey_still_front_pic:: @ 8D39FD8
 	.incbin "graphics/pokemon/front_pics/pidgey_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD39FD8, 0x0278
 
 	.align 2
 gFile_graphics_pokemon_palettes_pidgey_palette:: @ 8D3A250
 	.incbin "graphics/pokemon/palettes/pidgey_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3A250, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_pidgey_back_pic:: @ 8D3A278
 	.incbin "graphics/pokemon/back_pics/pidgey_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3A278, 0x0354
 
 	.align 2
 gFile_graphics_pokemon_palettes_pidgey_shiny_palette:: @ 8D3A5CC
 	.incbin "graphics/pokemon/palettes/pidgey_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3A5CC, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_pidgey_icon:: @ 8D3A5F4
 	.incbin "graphics/pokemon/icons/pidgey_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD3A5F4, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_pidgey_footprint:: @ 8D3A9F4
 	.incbin "graphics/pokemon/footprints/pidgey_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD3A9F4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_pidgeotto_still_front_pic:: @ 8D3AA14
 	.incbin "graphics/pokemon/front_pics/pidgeotto_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3AA14, 0x0398
 
 	.align 2
 gFile_graphics_pokemon_palettes_pidgeotto_palette:: @ 8D3ADAC
 	.incbin "graphics/pokemon/palettes/pidgeotto_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3ADAC, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_pidgeotto_back_pic:: @ 8D3ADD4
 	.incbin "graphics/pokemon/back_pics/pidgeotto_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3ADD4, 0x034C
 
 	.align 2
 gFile_graphics_pokemon_palettes_pidgeotto_shiny_palette:: @ 8D3B120
 	.incbin "graphics/pokemon/palettes/pidgeotto_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3B120, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_pidgeotto_icon:: @ 8D3B148
 	.incbin "graphics/pokemon/icons/pidgeotto_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD3B148, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_pidgeotto_footprint:: @ 8D3B548
 	.incbin "graphics/pokemon/footprints/pidgeotto_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD3B548, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_pidgeot_still_front_pic:: @ 8D3B568
 	.incbin "graphics/pokemon/front_pics/pidgeot_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3B568, 0x04EC
 
 	.align 2
 gFile_graphics_pokemon_palettes_pidgeot_palette:: @ 8D3BA54
 	.incbin "graphics/pokemon/palettes/pidgeot_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3BA54, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_pidgeot_back_pic:: @ 8D3BA7C
 	.incbin "graphics/pokemon/back_pics/pidgeot_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3BA7C, 0x03E8
 
 	.align 2
 gFile_graphics_pokemon_palettes_pidgeot_shiny_palette:: @ 8D3BE64
 	.incbin "graphics/pokemon/palettes/pidgeot_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3BE64, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_pidgeot_icon:: @ 8D3BE8C
 	.incbin "graphics/pokemon/icons/pidgeot_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD3BE8C, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_pidgeot_footprint:: @ 8D3C28C
 	.incbin "graphics/pokemon/footprints/pidgeot_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD3C28C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_rattata_still_front_pic:: @ 8D3C2AC
 	.incbin "graphics/pokemon/front_pics/rattata_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3C2AC, 0x0258
 
 	.align 2
 gFile_graphics_pokemon_palettes_rattata_palette:: @ 8D3C504
 	.incbin "graphics/pokemon/palettes/rattata_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3C504, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_rattata_back_pic:: @ 8D3C52C
 	.incbin "graphics/pokemon/back_pics/rattata_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3C52C, 0x02B8
 
 	.align 2
 gFile_graphics_pokemon_palettes_rattata_shiny_palette:: @ 8D3C7E4
 	.incbin "graphics/pokemon/palettes/rattata_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3C7E4, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_rattata_icon:: @ 8D3C80C
 	.incbin "graphics/pokemon/icons/rattata_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD3C80C, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_rattata_footprint:: @ 8D3CC0C
 	.incbin "graphics/pokemon/footprints/rattata_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD3CC0C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_raticate_still_front_pic:: @ 8D3CC2C
 	.incbin "graphics/pokemon/front_pics/raticate_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3CC2C, 0x0390
 
 	.align 2
 gFile_graphics_pokemon_palettes_raticate_palette:: @ 8D3CFBC
 	.incbin "graphics/pokemon/palettes/raticate_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3CFBC, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_raticate_back_pic:: @ 8D3CFE4
 	.incbin "graphics/pokemon/back_pics/raticate_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3CFE4, 0x0310
 
 	.align 2
 gFile_graphics_pokemon_palettes_raticate_shiny_palette:: @ 8D3D2F4
 	.incbin "graphics/pokemon/palettes/raticate_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3D2F4, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_raticate_icon:: @ 8D3D31C
 	.incbin "graphics/pokemon/icons/raticate_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD3D31C, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_raticate_footprint:: @ 8D3D71C
 	.incbin "graphics/pokemon/footprints/raticate_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD3D71C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_spearow_still_front_pic:: @ 8D3D73C
 	.incbin "graphics/pokemon/front_pics/spearow_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3D73C, 0x02C0
 
 	.align 2
 gFile_graphics_pokemon_palettes_spearow_palette:: @ 8D3D9FC
 	.incbin "graphics/pokemon/palettes/spearow_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3D9FC, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_spearow_back_pic:: @ 8D3DA24
 	.incbin "graphics/pokemon/back_pics/spearow_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3DA24, 0x02DC
 
 	.align 2
 gFile_graphics_pokemon_palettes_spearow_shiny_palette:: @ 8D3DD00
 	.incbin "graphics/pokemon/palettes/spearow_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3DD00, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_spearow_icon:: @ 8D3DD28
 	.incbin "graphics/pokemon/icons/spearow_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD3DD28, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_spearow_footprint:: @ 8D3E128
 	.incbin "graphics/pokemon/footprints/spearow_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD3E128, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_fearow_still_front_pic:: @ 8D3E148
 	.incbin "graphics/pokemon/front_pics/fearow_still_front_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3E148, 0x04BC
 
 	.align 2
 gFile_graphics_pokemon_palettes_fearow_palette:: @ 8D3E604
 	.incbin "graphics/pokemon/palettes/fearow_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3E604, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_back_pics_fearow_back_pic:: @ 8D3E62C
 	.incbin "graphics/pokemon/back_pics/fearow_back_pic.4bpp.lz"
-	@ .incbin "baserom.gba", 0xD3E62C, 0x02F8
 
 	.align 2
 gFile_graphics_pokemon_palettes_fearow_shiny_palette:: @ 8D3E924
 	.incbin "graphics/pokemon/palettes/fearow_shiny_palette.gbapal.lz"
-	@ .incbin "baserom.gba", 0xD3E924, 0x0028
 
 	.align 2
 gFile_graphics_pokemon_icons_fearow_icon:: @ 8D3E94C
 	.incbin "graphics/pokemon/icons/fearow_icon.4bpp"
-	@ .incbin "baserom.gba", 0xD3E94C, 0x0400
 
 	.align 2
 gFile_graphics_pokemon_footprints_fearow_footprint:: @ 8D3ED4C
 	.incbin "graphics/pokemon/footprints/fearow_footprint.1bpp"
-	@ .incbin "baserom.gba", 0xD3ED4C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_ekans_still_front_pic:: @ 8D3ED6C
@@ -1360,7 +1205,6 @@ gFile_graphics_pokemon_footprints_ekans_footprint:: @ 8D3F774
 	.incbin "graphics/pokemon/footprints/ekans_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD3F774, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_arbok_still_front_pic:: @ 8D3F794
 	.incbin "graphics/pokemon/front_pics/arbok_still_front_pic.4bpp.lz"
@@ -1390,7 +1234,6 @@ gFile_graphics_pokemon_icons_arbok_icon:: @ 8D3FEE0
 gFile_graphics_pokemon_footprints_arbok_footprint:: @ 8D402E0
 	.incbin "graphics/pokemon/footprints/arbok_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD402E0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_pikachu_still_front_pic:: @ 8D40300
@@ -1422,7 +1265,6 @@ gFile_graphics_pokemon_footprints_pikachu_footprint:: @ 8D40CF8
 	.incbin "graphics/pokemon/footprints/pikachu_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD40CF8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_raichu_still_front_pic:: @ 8D40D18
 	.incbin "graphics/pokemon/front_pics/raichu_still_front_pic.4bpp.lz"
@@ -1452,7 +1294,6 @@ gFile_graphics_pokemon_icons_raichu_icon:: @ 8D41480
 gFile_graphics_pokemon_footprints_raichu_footprint:: @ 8D41880
 	.incbin "graphics/pokemon/footprints/raichu_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD41880, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_sandshrew_still_front_pic:: @ 8D418A0
@@ -1484,7 +1325,6 @@ gFile_graphics_pokemon_footprints_sandshrew_footprint:: @ 8D422F4
 	.incbin "graphics/pokemon/footprints/sandshrew_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD422F4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_sandslash_still_front_pic:: @ 8D42314
 	.incbin "graphics/pokemon/front_pics/sandslash_still_front_pic.4bpp.lz"
@@ -1514,7 +1354,6 @@ gFile_graphics_pokemon_icons_sandslash_icon:: @ 8D42B98
 gFile_graphics_pokemon_footprints_sandslash_footprint:: @ 8D42F98
 	.incbin "graphics/pokemon/footprints/sandslash_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD42F98, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_nidoran_f_still_front_pic:: @ 8D42FB8
@@ -1546,7 +1385,6 @@ gFile_graphics_pokemon_footprints_nidoran_f_footprint:: @ 8D4394C
 	.incbin "graphics/pokemon/footprints/nidoran_f_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4394C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_nidorina_still_front_pic:: @ 8D4396C
 	.incbin "graphics/pokemon/front_pics/nidorina_still_front_pic.4bpp.lz"
@@ -1576,7 +1414,6 @@ gFile_graphics_pokemon_icons_nidorina_icon:: @ 8D44070
 gFile_graphics_pokemon_footprints_nidorina_footprint:: @ 8D44470
 	.incbin "graphics/pokemon/footprints/nidorina_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD44470, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_nidoqueen_still_front_pic:: @ 8D44490
@@ -1608,7 +1445,6 @@ gFile_graphics_pokemon_footprints_nidoqueen_footprint:: @ 8D450D0
 	.incbin "graphics/pokemon/footprints/nidoqueen_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD450D0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_nidoran_m_still_front_pic:: @ 8D450F0
 	.incbin "graphics/pokemon/front_pics/nidoran_m_still_front_pic.4bpp.lz"
@@ -1638,7 +1474,6 @@ gFile_graphics_pokemon_icons_nidoran_m_icon:: @ 8D45700
 gFile_graphics_pokemon_footprints_nidoran_m_footprint:: @ 8D45B00
 	.incbin "graphics/pokemon/footprints/nidoran_m_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD45B00, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_nidorino_still_front_pic:: @ 8D45B20
@@ -1670,7 +1505,6 @@ gFile_graphics_pokemon_footprints_nidorino_footprint:: @ 8D466B0
 	.incbin "graphics/pokemon/footprints/nidorino_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD466B0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_nidoking_still_front_pic:: @ 8D466D0
 	.incbin "graphics/pokemon/front_pics/nidoking_still_front_pic.4bpp.lz"
@@ -1700,7 +1534,6 @@ gFile_graphics_pokemon_icons_nidoking_icon:: @ 8D47098
 gFile_graphics_pokemon_footprints_nidoking_footprint:: @ 8D47498
 	.incbin "graphics/pokemon/footprints/nidoking_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD47498, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_clefairy_still_front_pic:: @ 8D474B8
@@ -1732,7 +1565,6 @@ gFile_graphics_pokemon_footprints_clefairy_footprint:: @ 8D47E74
 	.incbin "graphics/pokemon/footprints/clefairy_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD47E74, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_clefable_still_front_pic:: @ 8D47E94
 	.incbin "graphics/pokemon/front_pics/clefable_still_front_pic.4bpp.lz"
@@ -1762,7 +1594,6 @@ gFile_graphics_pokemon_icons_clefable_icon:: @ 8D4855C
 gFile_graphics_pokemon_footprints_clefable_footprint:: @ 8D4895C
 	.incbin "graphics/pokemon/footprints/clefable_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4895C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_vulpix_still_front_pic:: @ 8D4897C
@@ -1794,7 +1625,6 @@ gFile_graphics_pokemon_footprints_vulpix_footprint:: @ 8D493FC
 	.incbin "graphics/pokemon/footprints/vulpix_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD493FC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_ninetales_still_front_pic:: @ 8D4941C
 	.incbin "graphics/pokemon/front_pics/ninetales_still_front_pic.4bpp.lz"
@@ -1824,7 +1654,6 @@ gFile_graphics_pokemon_icons_ninetales_icon:: @ 8D49CA8
 gFile_graphics_pokemon_footprints_ninetales_footprint:: @ 8D4A0A8
 	.incbin "graphics/pokemon/footprints/ninetales_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4A0A8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_jigglypuff_still_front_pic:: @ 8D4A0C8
@@ -1856,7 +1685,6 @@ gFile_graphics_pokemon_footprints_jigglypuff_footprint:: @ 8D4A9F8
 	.incbin "graphics/pokemon/footprints/jigglypuff_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4A9F8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_wigglytuff_still_front_pic:: @ 8D4AA18
 	.incbin "graphics/pokemon/front_pics/wigglytuff_still_front_pic.4bpp.lz"
@@ -1886,7 +1714,6 @@ gFile_graphics_pokemon_icons_wigglytuff_icon:: @ 8D4B074
 gFile_graphics_pokemon_footprints_wigglytuff_footprint:: @ 8D4B474
 	.incbin "graphics/pokemon/footprints/wigglytuff_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4B474, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_zubat_still_front_pic:: @ 8D4B494
@@ -1918,7 +1745,6 @@ gFile_graphics_pokemon_footprints_zubat_footprint:: @ 8D4BE5C
 	.incbin "graphics/pokemon/footprints/zubat_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4BE5C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_golbat_still_front_pic:: @ 8D4BE7C
 	.incbin "graphics/pokemon/front_pics/golbat_still_front_pic.4bpp.lz"
@@ -1948,7 +1774,6 @@ gFile_graphics_pokemon_icons_golbat_icon:: @ 8D4C528
 gFile_graphics_pokemon_footprints_golbat_footprint:: @ 8D4C928
 	.incbin "graphics/pokemon/footprints/golbat_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4C928, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_oddish_still_front_pic:: @ 8D4C948
@@ -1980,7 +1805,6 @@ gFile_graphics_pokemon_footprints_oddish_footprint:: @ 8D4D29C
 	.incbin "graphics/pokemon/footprints/oddish_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4D29C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_gloom_still_front_pic:: @ 8D4D2BC
 	.incbin "graphics/pokemon/front_pics/gloom_still_front_pic.4bpp.lz"
@@ -2010,7 +1834,6 @@ gFile_graphics_pokemon_icons_gloom_icon:: @ 8D4D9F4
 gFile_graphics_pokemon_footprints_gloom_footprint:: @ 8D4DDF4
 	.incbin "graphics/pokemon/footprints/gloom_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4DDF4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_vileplume_still_front_pic:: @ 8D4DE14
@@ -2042,7 +1865,6 @@ gFile_graphics_pokemon_footprints_vileplume_footprint:: @ 8D4EA04
 	.incbin "graphics/pokemon/footprints/vileplume_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4EA04, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_paras_still_front_pic:: @ 8D4EA24
 	.incbin "graphics/pokemon/front_pics/paras_still_front_pic.4bpp.lz"
@@ -2072,7 +1894,6 @@ gFile_graphics_pokemon_icons_paras_icon:: @ 8D4EF80
 gFile_graphics_pokemon_footprints_paras_footprint:: @ 8D4F380
 	.incbin "graphics/pokemon/footprints/paras_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4F380, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_parasect_still_front_pic:: @ 8D4F3A0
@@ -2104,7 +1925,6 @@ gFile_graphics_pokemon_footprints_parasect_footprint:: @ 8D4FE7C
 	.incbin "graphics/pokemon/footprints/parasect_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD4FE7C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_venonat_still_front_pic:: @ 8D4FE9C
 	.incbin "graphics/pokemon/front_pics/venonat_still_front_pic.4bpp.lz"
@@ -2134,7 +1954,6 @@ gFile_graphics_pokemon_icons_venonat_icon:: @ 8D5053C
 gFile_graphics_pokemon_footprints_venonat_footprint:: @ 8D5093C
 	.incbin "graphics/pokemon/footprints/venonat_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5093C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_venomoth_still_front_pic:: @ 8D5095C
@@ -2166,7 +1985,6 @@ gFile_graphics_pokemon_footprints_venomoth_footprint:: @ 8D51554
 	.incbin "graphics/pokemon/footprints/venomoth_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD51554, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_diglett_still_front_pic:: @ 8D51574
 	.incbin "graphics/pokemon/front_pics/diglett_still_front_pic.4bpp.lz"
@@ -2196,7 +2014,6 @@ gFile_graphics_pokemon_icons_diglett_icon:: @ 8D519E0
 gFile_graphics_pokemon_footprints_diglett_footprint:: @ 8D51DE0
 	.incbin "graphics/pokemon/footprints/diglett_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD51DE0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_dugtrio_still_front_pic:: @ 8D51E00
@@ -2228,7 +2045,6 @@ gFile_graphics_pokemon_footprints_dugtrio_footprint:: @ 8D52828
 	.incbin "graphics/pokemon/footprints/dugtrio_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD52828, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_meowth_still_front_pic:: @ 8D52848
 	.incbin "graphics/pokemon/front_pics/meowth_still_front_pic.4bpp.lz"
@@ -2258,7 +2074,6 @@ gFile_graphics_pokemon_icons_meowth_icon:: @ 8D52E68
 gFile_graphics_pokemon_footprints_meowth_footprint:: @ 8D53268
 	.incbin "graphics/pokemon/footprints/meowth_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD53268, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_persian_still_front_pic:: @ 8D53288
@@ -2290,7 +2105,6 @@ gFile_graphics_pokemon_footprints_persian_footprint:: @ 8D53D90
 	.incbin "graphics/pokemon/footprints/persian_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD53D90, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_psyduck_still_front_pic:: @ 8D53DB0
 	.incbin "graphics/pokemon/front_pics/psyduck_still_front_pic.4bpp.lz"
@@ -2320,7 +2134,6 @@ gFile_graphics_pokemon_icons_psyduck_icon:: @ 8D54380
 gFile_graphics_pokemon_footprints_psyduck_footprint:: @ 8D54780
 	.incbin "graphics/pokemon/footprints/psyduck_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD54780, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_golduck_still_front_pic:: @ 8D547A0
@@ -2352,7 +2165,6 @@ gFile_graphics_pokemon_footprints_golduck_footprint:: @ 8D552D4
 	.incbin "graphics/pokemon/footprints/golduck_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD552D4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_mankey_still_front_pic:: @ 8D552F4
 	.incbin "graphics/pokemon/front_pics/mankey_still_front_pic.4bpp.lz"
@@ -2382,7 +2194,6 @@ gFile_graphics_pokemon_icons_mankey_icon:: @ 8D559A4
 gFile_graphics_pokemon_footprints_mankey_footprint:: @ 8D55DA4
 	.incbin "graphics/pokemon/footprints/mankey_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD55DA4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_primeape_still_front_pic:: @ 8D55DC4
@@ -2414,7 +2225,6 @@ gFile_graphics_pokemon_footprints_primeape_footprint:: @ 8D56910
 	.incbin "graphics/pokemon/footprints/primeape_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD56910, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_growlithe_still_front_pic:: @ 8D56930
 	.incbin "graphics/pokemon/front_pics/growlithe_still_front_pic.4bpp.lz"
@@ -2444,7 +2254,6 @@ gFile_graphics_pokemon_icons_growlithe_icon:: @ 8D56FE4
 gFile_graphics_pokemon_footprints_growlithe_footprint:: @ 8D573E4
 	.incbin "graphics/pokemon/footprints/growlithe_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD573E4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_arcanine_still_front_pic:: @ 8D57404
@@ -2476,7 +2285,6 @@ gFile_graphics_pokemon_footprints_arcanine_footprint:: @ 8D58130
 	.incbin "graphics/pokemon/footprints/arcanine_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD58130, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_poliwag_still_front_pic:: @ 8D58150
 	.incbin "graphics/pokemon/front_pics/poliwag_still_front_pic.4bpp.lz"
@@ -2506,7 +2314,6 @@ gFile_graphics_pokemon_icons_poliwag_icon:: @ 8D586A0
 gFile_graphics_pokemon_footprints_poliwag_footprint:: @ 8D58AA0
 	.incbin "graphics/pokemon/footprints/poliwag_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD58AA0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_poliwhirl_still_front_pic:: @ 8D58AC0
@@ -2538,7 +2345,6 @@ gFile_graphics_pokemon_footprints_poliwhirl_footprint:: @ 8D5950C
 	.incbin "graphics/pokemon/footprints/poliwhirl_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5950C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_poliwrath_still_front_pic:: @ 8D5952C
 	.incbin "graphics/pokemon/front_pics/poliwrath_still_front_pic.4bpp.lz"
@@ -2568,7 +2374,6 @@ gFile_graphics_pokemon_icons_poliwrath_icon:: @ 8D59C34
 gFile_graphics_pokemon_footprints_poliwrath_footprint:: @ 8D5A034
 	.incbin "graphics/pokemon/footprints/poliwrath_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5A034, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_abra_still_front_pic:: @ 8D5A054
@@ -2600,7 +2405,6 @@ gFile_graphics_pokemon_footprints_abra_footprint:: @ 8D5AA44
 	.incbin "graphics/pokemon/footprints/abra_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5AA44, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_kadabra_still_front_pic:: @ 8D5AA64
 	.incbin "graphics/pokemon/front_pics/kadabra_still_front_pic.4bpp.lz"
@@ -2630,7 +2434,6 @@ gFile_graphics_pokemon_icons_kadabra_icon:: @ 8D5B328
 gFile_graphics_pokemon_footprints_kadabra_footprint:: @ 8D5B728
 	.incbin "graphics/pokemon/footprints/kadabra_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5B728, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_alakazam_still_front_pic:: @ 8D5B748
@@ -2662,7 +2465,6 @@ gFile_graphics_pokemon_footprints_alakazam_footprint:: @ 8D5C3B0
 	.incbin "graphics/pokemon/footprints/alakazam_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5C3B0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_machop_still_front_pic:: @ 8D5C3D0
 	.incbin "graphics/pokemon/front_pics/machop_still_front_pic.4bpp.lz"
@@ -2692,7 +2494,6 @@ gFile_graphics_pokemon_icons_machop_icon:: @ 8D5C98C
 gFile_graphics_pokemon_footprints_machop_footprint:: @ 8D5CD8C
 	.incbin "graphics/pokemon/footprints/machop_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5CD8C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_machoke_still_front_pic:: @ 8D5CDAC
@@ -2724,7 +2525,6 @@ gFile_graphics_pokemon_footprints_machoke_footprint:: @ 8D5D918
 	.incbin "graphics/pokemon/footprints/machoke_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5D918, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_machamp_still_front_pic:: @ 8D5D938
 	.incbin "graphics/pokemon/front_pics/machamp_still_front_pic.4bpp.lz"
@@ -2754,7 +2554,6 @@ gFile_graphics_pokemon_icons_machamp_icon:: @ 8D5E2D0
 gFile_graphics_pokemon_footprints_machamp_footprint:: @ 8D5E6D0
 	.incbin "graphics/pokemon/footprints/machamp_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5E6D0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_bellsprout_still_front_pic:: @ 8D5E6F0
@@ -2786,7 +2585,6 @@ gFile_graphics_pokemon_footprints_bellsprout_footprint:: @ 8D5F068
 	.incbin "graphics/pokemon/footprints/bellsprout_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5F068, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_weepinbell_still_front_pic:: @ 8D5F088
 	.incbin "graphics/pokemon/front_pics/weepinbell_still_front_pic.4bpp.lz"
@@ -2816,7 +2614,6 @@ gFile_graphics_pokemon_icons_weepinbell_icon:: @ 8D5F6F8
 gFile_graphics_pokemon_footprints_weepinbell_footprint:: @ 8D5FAF8
 	.incbin "graphics/pokemon/footprints/weepinbell_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD5FAF8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_victreebel_still_front_pic:: @ 8D5FB18
@@ -2848,7 +2645,6 @@ gFile_graphics_pokemon_footprints_victreebel_footprint:: @ 8D6072C
 	.incbin "graphics/pokemon/footprints/victreebel_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6072C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_tentacool_still_front_pic:: @ 8D6074C
 	.incbin "graphics/pokemon/front_pics/tentacool_still_front_pic.4bpp.lz"
@@ -2878,7 +2674,6 @@ gFile_graphics_pokemon_icons_tentacool_icon:: @ 8D60D10
 gFile_graphics_pokemon_footprints_tentacool_footprint:: @ 8D61110
 	.incbin "graphics/pokemon/footprints/tentacool_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD61110, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_tentacruel_still_front_pic:: @ 8D61130
@@ -2910,7 +2705,6 @@ gFile_graphics_pokemon_footprints_tentacruel_footprint:: @ 8D61E10
 	.incbin "graphics/pokemon/footprints/tentacruel_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD61E10, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_geodude_still_front_pic:: @ 8D61E30
 	.incbin "graphics/pokemon/front_pics/geodude_still_front_pic.4bpp.lz"
@@ -2940,7 +2734,6 @@ gFile_graphics_pokemon_icons_geodude_icon:: @ 8D62390
 gFile_graphics_pokemon_footprints_geodude_footprint:: @ 8D62790
 	.incbin "graphics/pokemon/footprints/geodude_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD62790, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_graveler_still_front_pic:: @ 8D627B0
@@ -2972,7 +2765,6 @@ gFile_graphics_pokemon_footprints_graveler_footprint:: @ 8D63270
 	.incbin "graphics/pokemon/footprints/graveler_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD63270, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_golem_still_front_pic:: @ 8D63290
 	.incbin "graphics/pokemon/front_pics/golem_still_front_pic.4bpp.lz"
@@ -3002,7 +2794,6 @@ gFile_graphics_pokemon_icons_golem_icon:: @ 8D639D0
 gFile_graphics_pokemon_footprints_golem_footprint:: @ 8D63DD0
 	.incbin "graphics/pokemon/footprints/golem_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD63DD0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_ponyta_still_front_pic:: @ 8D63DF0
@@ -3034,7 +2825,6 @@ gFile_graphics_pokemon_footprints_ponyta_footprint:: @ 8D6490C
 	.incbin "graphics/pokemon/footprints/ponyta_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6490C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_rapidash_still_front_pic:: @ 8D6492C
 	.incbin "graphics/pokemon/front_pics/rapidash_still_front_pic.4bpp.lz"
@@ -3064,7 +2854,6 @@ gFile_graphics_pokemon_icons_rapidash_icon:: @ 8D65214
 gFile_graphics_pokemon_footprints_rapidash_footprint:: @ 8D65614
 	.incbin "graphics/pokemon/footprints/rapidash_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD65614, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_slowpoke_still_front_pic:: @ 8D65634
@@ -3096,7 +2885,6 @@ gFile_graphics_pokemon_footprints_slowpoke_footprint:: @ 8D65FBC
 	.incbin "graphics/pokemon/footprints/slowpoke_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD65FBC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_slowbro_still_front_pic:: @ 8D65FDC
 	.incbin "graphics/pokemon/front_pics/slowbro_still_front_pic.4bpp.lz"
@@ -3126,7 +2914,6 @@ gFile_graphics_pokemon_icons_slowbro_icon:: @ 8D66868
 gFile_graphics_pokemon_footprints_slowbro_footprint:: @ 8D66C68
 	.incbin "graphics/pokemon/footprints/slowbro_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD66C68, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_magnemite_still_front_pic:: @ 8D66C88
@@ -3158,7 +2945,6 @@ gFile_graphics_pokemon_footprints_magnemite_footprint:: @ 8D67494
 	.incbin "graphics/pokemon/footprints/magnemite_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD67494, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_magneton_still_front_pic:: @ 8D674B4
 	.incbin "graphics/pokemon/front_pics/magneton_still_front_pic.4bpp.lz"
@@ -3188,7 +2974,6 @@ gFile_graphics_pokemon_icons_magneton_icon:: @ 8D67BC0
 gFile_graphics_pokemon_footprints_magneton_footprint:: @ 8D67FC0
 	.incbin "graphics/pokemon/footprints/magneton_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD67FC0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_farfetch_d_still_front_pic:: @ 8D67FE0
@@ -3220,7 +3005,6 @@ gFile_graphics_pokemon_footprints_farfetch_d_footprint:: @ 8D68AF0
 	.incbin "graphics/pokemon/footprints/farfetch_d_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD68AF0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_doduo_still_front_pic:: @ 8D68B10
 	.incbin "graphics/pokemon/front_pics/doduo_still_front_pic.4bpp.lz"
@@ -3250,7 +3034,6 @@ gFile_graphics_pokemon_icons_doduo_icon:: @ 8D6915C
 gFile_graphics_pokemon_footprints_doduo_footprint:: @ 8D6955C
 	.incbin "graphics/pokemon/footprints/doduo_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6955C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_dodrio_still_front_pic:: @ 8D6957C
@@ -3282,7 +3065,6 @@ gFile_graphics_pokemon_footprints_dodrio_footprint:: @ 8D6A270
 	.incbin "graphics/pokemon/footprints/dodrio_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6A270, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_seel_still_front_pic:: @ 8D6A290
 	.incbin "graphics/pokemon/front_pics/seel_still_front_pic.4bpp.lz"
@@ -3312,7 +3094,6 @@ gFile_graphics_pokemon_icons_seel_icon:: @ 8D6A8F0
 gFile_graphics_pokemon_footprints_seel_footprint:: @ 8D6ACF0
 	.incbin "graphics/pokemon/footprints/seel_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6ACF0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_dewgong_still_front_pic:: @ 8D6AD10
@@ -3344,7 +3125,6 @@ gFile_graphics_pokemon_footprints_dewgong_footprint:: @ 8D6B7BC
 	.incbin "graphics/pokemon/footprints/dewgong_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6B7BC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_grimer_still_front_pic:: @ 8D6B7DC
 	.incbin "graphics/pokemon/front_pics/grimer_still_front_pic.4bpp.lz"
@@ -3374,7 +3154,6 @@ gFile_graphics_pokemon_icons_grimer_icon:: @ 8D6BE10
 gFile_graphics_pokemon_footprints_grimer_footprint:: @ 8D6C210
 	.incbin "graphics/pokemon/footprints/grimer_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6C210, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_muk_still_front_pic:: @ 8D6C230
@@ -3406,7 +3185,6 @@ gFile_graphics_pokemon_footprints_muk_footprint:: @ 8D6CD00
 	.incbin "graphics/pokemon/footprints/muk_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6CD00, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_shellder_still_front_pic:: @ 8D6CD20
 	.incbin "graphics/pokemon/front_pics/shellder_still_front_pic.4bpp.lz"
@@ -3436,7 +3214,6 @@ gFile_graphics_pokemon_icons_shellder_icon:: @ 8D6D2F0
 gFile_graphics_pokemon_footprints_shellder_footprint:: @ 8D6D6F0
 	.incbin "graphics/pokemon/footprints/shellder_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6D6F0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_cloyster_still_front_pic:: @ 8D6D710
@@ -3468,7 +3245,6 @@ gFile_graphics_pokemon_footprints_cloyster_footprint:: @ 8D6E3A0
 	.incbin "graphics/pokemon/footprints/cloyster_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6E3A0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_gastly_still_front_pic:: @ 8D6E3C0
 	.incbin "graphics/pokemon/front_pics/gastly_still_front_pic.4bpp.lz"
@@ -3498,7 +3274,6 @@ gFile_graphics_pokemon_icons_gastly_icon:: @ 8D6EAEC
 gFile_graphics_pokemon_footprints_gastly_footprint:: @ 8D6EEEC
 	.incbin "graphics/pokemon/footprints/gastly_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6EEEC, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_haunter_still_front_pic:: @ 8D6EF0C
@@ -3530,7 +3305,6 @@ gFile_graphics_pokemon_footprints_haunter_footprint:: @ 8D6FA20
 	.incbin "graphics/pokemon/footprints/haunter_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD6FA20, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_gengar_still_front_pic:: @ 8D6FA40
 	.incbin "graphics/pokemon/front_pics/gengar_still_front_pic.4bpp.lz"
@@ -3560,7 +3334,6 @@ gFile_graphics_pokemon_icons_gengar_icon:: @ 8D70128
 gFile_graphics_pokemon_footprints_gengar_footprint:: @ 8D70528
 	.incbin "graphics/pokemon/footprints/gengar_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD70528, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_onix_still_front_pic:: @ 8D70548
@@ -3592,7 +3365,6 @@ gFile_graphics_pokemon_footprints_onix_footprint:: @ 8D711CC
 	.incbin "graphics/pokemon/footprints/onix_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD711CC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_drowzee_still_front_pic:: @ 8D711EC
 	.incbin "graphics/pokemon/front_pics/drowzee_still_front_pic.4bpp.lz"
@@ -3622,7 +3394,6 @@ gFile_graphics_pokemon_icons_drowzee_icon:: @ 8D717B0
 gFile_graphics_pokemon_footprints_drowzee_footprint:: @ 8D71BB0
 	.incbin "graphics/pokemon/footprints/drowzee_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD71BB0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_hypno_still_front_pic:: @ 8D71BD0
@@ -3654,7 +3425,6 @@ gFile_graphics_pokemon_footprints_hypno_footprint:: @ 8D72780
 	.incbin "graphics/pokemon/footprints/hypno_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD72780, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_krabby_still_front_pic:: @ 8D727A0
 	.incbin "graphics/pokemon/front_pics/krabby_still_front_pic.4bpp.lz"
@@ -3684,7 +3454,6 @@ gFile_graphics_pokemon_icons_krabby_icon:: @ 8D72EA0
 gFile_graphics_pokemon_footprints_krabby_footprint:: @ 8D732A0
 	.incbin "graphics/pokemon/footprints/krabby_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD732A0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_kingler_still_front_pic:: @ 8D732C0
@@ -3716,7 +3485,6 @@ gFile_graphics_pokemon_footprints_kingler_footprint:: @ 8D73F14
 	.incbin "graphics/pokemon/footprints/kingler_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD73F14, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_voltorb_still_front_pic:: @ 8D73F34
 	.incbin "graphics/pokemon/front_pics/voltorb_still_front_pic.4bpp.lz"
@@ -3746,7 +3514,6 @@ gFile_graphics_pokemon_icons_voltorb_icon:: @ 8D743F8
 gFile_graphics_pokemon_footprints_voltorb_footprint:: @ 8D747F8
 	.incbin "graphics/pokemon/footprints/voltorb_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD747F8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_electrode_still_front_pic:: @ 8D74818
@@ -3778,7 +3545,6 @@ gFile_graphics_pokemon_footprints_electrode_footprint:: @ 8D7513C
 	.incbin "graphics/pokemon/footprints/electrode_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD7513C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_exeggcute_still_front_pic:: @ 8D7515C
 	.incbin "graphics/pokemon/front_pics/exeggcute_still_front_pic.4bpp.lz"
@@ -3808,7 +3574,6 @@ gFile_graphics_pokemon_icons_exeggcute_icon:: @ 8D7583C
 gFile_graphics_pokemon_footprints_exeggcute_footprint:: @ 8D75C3C
 	.incbin "graphics/pokemon/footprints/exeggcute_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD75C3C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_exeggutor_still_front_pic:: @ 8D75C5C
@@ -3840,7 +3605,6 @@ gFile_graphics_pokemon_footprints_exeggutor_footprint:: @ 8D768C8
 	.incbin "graphics/pokemon/footprints/exeggutor_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD768C8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_cubone_still_front_pic:: @ 8D768E8
 	.incbin "graphics/pokemon/front_pics/cubone_still_front_pic.4bpp.lz"
@@ -3870,7 +3634,6 @@ gFile_graphics_pokemon_icons_cubone_icon:: @ 8D76F34
 gFile_graphics_pokemon_footprints_cubone_footprint:: @ 8D77334
 	.incbin "graphics/pokemon/footprints/cubone_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD77334, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_marowak_still_front_pic:: @ 8D77354
@@ -3902,7 +3665,6 @@ gFile_graphics_pokemon_footprints_marowak_footprint:: @ 8D77E38
 	.incbin "graphics/pokemon/footprints/marowak_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD77E38, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_hitmonlee_still_front_pic:: @ 8D77E58
 	.incbin "graphics/pokemon/front_pics/hitmonlee_still_front_pic.4bpp.lz"
@@ -3932,7 +3694,6 @@ gFile_graphics_pokemon_icons_hitmonlee_icon:: @ 8D784C0
 gFile_graphics_pokemon_footprints_hitmonlee_footprint:: @ 8D788C0
 	.incbin "graphics/pokemon/footprints/hitmonlee_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD788C0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_hitmonchan_still_front_pic:: @ 8D788E0
@@ -3964,7 +3725,6 @@ gFile_graphics_pokemon_footprints_hitmonchan_footprint:: @ 8D793B4
 	.incbin "graphics/pokemon/footprints/hitmonchan_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD793B4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_lickitung_still_front_pic:: @ 8D793D4
 	.incbin "graphics/pokemon/front_pics/lickitung_still_front_pic.4bpp.lz"
@@ -3994,7 +3754,6 @@ gFile_graphics_pokemon_icons_lickitung_icon:: @ 8D79AA0
 gFile_graphics_pokemon_footprints_lickitung_footprint:: @ 8D79EA0
 	.incbin "graphics/pokemon/footprints/lickitung_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD79EA0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_koffing_still_front_pic:: @ 8D79EC0
@@ -4026,7 +3785,6 @@ gFile_graphics_pokemon_footprints_koffing_footprint:: @ 8D7A910
 	.incbin "graphics/pokemon/footprints/koffing_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD7A910, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_weezing_still_front_pic:: @ 8D7A930
 	.incbin "graphics/pokemon/front_pics/weezing_still_front_pic.4bpp.lz"
@@ -4056,7 +3814,6 @@ gFile_graphics_pokemon_icons_weezing_icon:: @ 8D7B1C0
 gFile_graphics_pokemon_footprints_weezing_footprint:: @ 8D7B5C0
 	.incbin "graphics/pokemon/footprints/weezing_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD7B5C0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_rhyhorn_still_front_pic:: @ 8D7B5E0
@@ -4088,7 +3845,6 @@ gFile_graphics_pokemon_footprints_rhyhorn_footprint:: @ 8D7C164
 	.incbin "graphics/pokemon/footprints/rhyhorn_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD7C164, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_rhydon_still_front_pic:: @ 8D7C184
 	.incbin "graphics/pokemon/front_pics/rhydon_still_front_pic.4bpp.lz"
@@ -4118,7 +3874,6 @@ gFile_graphics_pokemon_icons_rhydon_icon:: @ 8D7CB18
 gFile_graphics_pokemon_footprints_rhydon_footprint:: @ 8D7CF18
 	.incbin "graphics/pokemon/footprints/rhydon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD7CF18, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_chansey_still_front_pic:: @ 8D7CF38
@@ -4150,7 +3905,6 @@ gFile_graphics_pokemon_footprints_chansey_footprint:: @ 8D7D90C
 	.incbin "graphics/pokemon/footprints/chansey_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD7D90C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_tangela_still_front_pic:: @ 8D7D92C
 	.incbin "graphics/pokemon/front_pics/tangela_still_front_pic.4bpp.lz"
@@ -4180,7 +3934,6 @@ gFile_graphics_pokemon_icons_tangela_icon:: @ 8D7E0F4
 gFile_graphics_pokemon_footprints_tangela_footprint:: @ 8D7E4F4
 	.incbin "graphics/pokemon/footprints/tangela_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD7E4F4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_kangaskhan_still_front_pic:: @ 8D7E514
@@ -4212,7 +3965,6 @@ gFile_graphics_pokemon_footprints_kangaskhan_footprint:: @ 8D7F23C
 	.incbin "graphics/pokemon/footprints/kangaskhan_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD7F23C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_horsea_still_front_pic:: @ 8D7F25C
 	.incbin "graphics/pokemon/front_pics/horsea_still_front_pic.4bpp.lz"
@@ -4242,7 +3994,6 @@ gFile_graphics_pokemon_icons_horsea_icon:: @ 8D7F7F8
 gFile_graphics_pokemon_footprints_horsea_footprint:: @ 8D7FBF8
 	.incbin "graphics/pokemon/footprints/horsea_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD7FBF8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_seadra_still_front_pic:: @ 8D7FC18
@@ -4274,7 +4025,6 @@ gFile_graphics_pokemon_footprints_seadra_footprint:: @ 8D80790
 	.incbin "graphics/pokemon/footprints/seadra_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD80790, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_goldeen_still_front_pic:: @ 8D807B0
 	.incbin "graphics/pokemon/front_pics/goldeen_still_front_pic.4bpp.lz"
@@ -4304,7 +4054,6 @@ gFile_graphics_pokemon_icons_goldeen_icon:: @ 8D80ED8
 gFile_graphics_pokemon_footprints_goldeen_footprint:: @ 8D812D8
 	.incbin "graphics/pokemon/footprints/goldeen_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD812D8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_seaking_still_front_pic:: @ 8D812F8
@@ -4336,7 +4085,6 @@ gFile_graphics_pokemon_footprints_seaking_footprint:: @ 8D81F0C
 	.incbin "graphics/pokemon/footprints/seaking_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD81F0C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_staryu_still_front_pic:: @ 8D81F2C
 	.incbin "graphics/pokemon/front_pics/staryu_still_front_pic.4bpp.lz"
@@ -4366,7 +4114,6 @@ gFile_graphics_pokemon_icons_staryu_icon:: @ 8D82494
 gFile_graphics_pokemon_footprints_staryu_footprint:: @ 8D82894
 	.incbin "graphics/pokemon/footprints/staryu_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD82894, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_starmie_still_front_pic:: @ 8D828B4
@@ -4398,7 +4145,6 @@ gFile_graphics_pokemon_footprints_starmie_footprint:: @ 8D83348
 	.incbin "graphics/pokemon/footprints/starmie_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD83348, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_mr_mime_still_front_pic:: @ 8D83368
 	.incbin "graphics/pokemon/front_pics/mr_mime_still_front_pic.4bpp.lz"
@@ -4428,7 +4174,6 @@ gFile_graphics_pokemon_icons_mr_mime_icon:: @ 8D83AA8
 gFile_graphics_pokemon_footprints_mr_mime_footprint:: @ 8D83EA8
 	.incbin "graphics/pokemon/footprints/mr_mime_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD83EA8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_scyther_still_front_pic:: @ 8D83EC8
@@ -4460,7 +4205,6 @@ gFile_graphics_pokemon_footprints_scyther_footprint:: @ 8D84B58
 	.incbin "graphics/pokemon/footprints/scyther_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD84B58, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_jynx_still_front_pic:: @ 8D84B78
 	.incbin "graphics/pokemon/front_pics/jynx_still_front_pic.4bpp.lz"
@@ -4490,7 +4234,6 @@ gFile_graphics_pokemon_icons_jynx_icon:: @ 8D85280
 gFile_graphics_pokemon_footprints_jynx_footprint:: @ 8D85680
 	.incbin "graphics/pokemon/footprints/jynx_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD85680, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_electabuzz_still_front_pic:: @ 8D856A0
@@ -4522,7 +4265,6 @@ gFile_graphics_pokemon_footprints_electabuzz_footprint:: @ 8D86258
 	.incbin "graphics/pokemon/footprints/electabuzz_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD86258, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_magmar_still_front_pic:: @ 8D86278
 	.incbin "graphics/pokemon/front_pics/magmar_still_front_pic.4bpp.lz"
@@ -4552,7 +4294,6 @@ gFile_graphics_pokemon_icons_magmar_icon:: @ 8D86A30
 gFile_graphics_pokemon_footprints_magmar_footprint:: @ 8D86E30
 	.incbin "graphics/pokemon/footprints/magmar_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD86E30, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_pinsir_still_front_pic:: @ 8D86E50
@@ -4584,7 +4325,6 @@ gFile_graphics_pokemon_footprints_pinsir_footprint:: @ 8D87A1C
 	.incbin "graphics/pokemon/footprints/pinsir_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD87A1C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_tauros_still_front_pic:: @ 8D87A3C
 	.incbin "graphics/pokemon/front_pics/tauros_still_front_pic.4bpp.lz"
@@ -4614,7 +4354,6 @@ gFile_graphics_pokemon_icons_tauros_icon:: @ 8D881A0
 gFile_graphics_pokemon_footprints_tauros_footprint:: @ 8D885A0
 	.incbin "graphics/pokemon/footprints/tauros_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD885A0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_magikarp_still_front_pic:: @ 8D885C0
@@ -4646,7 +4385,6 @@ gFile_graphics_pokemon_footprints_magikarp_footprint:: @ 8D89088
 	.incbin "graphics/pokemon/footprints/magikarp_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD89088, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_gyarados_still_front_pic:: @ 8D890A8
 	.incbin "graphics/pokemon/front_pics/gyarados_still_front_pic.4bpp.lz"
@@ -4676,7 +4414,6 @@ gFile_graphics_pokemon_icons_gyarados_icon:: @ 8D89B54
 gFile_graphics_pokemon_footprints_gyarados_footprint:: @ 8D89F54
 	.incbin "graphics/pokemon/footprints/gyarados_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD89F54, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_lapras_still_front_pic:: @ 8D89F74
@@ -4708,7 +4445,6 @@ gFile_graphics_pokemon_footprints_lapras_footprint:: @ 8D8AAE8
 	.incbin "graphics/pokemon/footprints/lapras_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD8AAE8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_ditto_still_front_pic:: @ 8D8AB08
 	.incbin "graphics/pokemon/front_pics/ditto_still_front_pic.4bpp.lz"
@@ -4738,7 +4474,6 @@ gFile_graphics_pokemon_icons_ditto_icon:: @ 8D8AF38
 gFile_graphics_pokemon_footprints_ditto_footprint:: @ 8D8B338
 	.incbin "graphics/pokemon/footprints/ditto_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD8B338, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_eevee_still_front_pic:: @ 8D8B358
@@ -4770,7 +4505,6 @@ gFile_graphics_pokemon_footprints_eevee_footprint:: @ 8D8BDBC
 	.incbin "graphics/pokemon/footprints/eevee_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD8BDBC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_vaporeon_still_front_pic:: @ 8D8BDDC
 	.incbin "graphics/pokemon/front_pics/vaporeon_still_front_pic.4bpp.lz"
@@ -4800,7 +4534,6 @@ gFile_graphics_pokemon_icons_vaporeon_icon:: @ 8D8C488
 gFile_graphics_pokemon_footprints_vaporeon_footprint:: @ 8D8C888
 	.incbin "graphics/pokemon/footprints/vaporeon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD8C888, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_jolteon_still_front_pic:: @ 8D8C8A8
@@ -4832,7 +4565,6 @@ gFile_graphics_pokemon_footprints_jolteon_footprint:: @ 8D8D3F4
 	.incbin "graphics/pokemon/footprints/jolteon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD8D3F4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_flareon_still_front_pic:: @ 8D8D414
 	.incbin "graphics/pokemon/front_pics/flareon_still_front_pic.4bpp.lz"
@@ -4862,7 +4594,6 @@ gFile_graphics_pokemon_icons_flareon_icon:: @ 8D8DB78
 gFile_graphics_pokemon_footprints_flareon_footprint:: @ 8D8DF78
 	.incbin "graphics/pokemon/footprints/flareon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD8DF78, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_porygon_still_front_pic:: @ 8D8DF98
@@ -4894,7 +4625,6 @@ gFile_graphics_pokemon_footprints_porygon_footprint:: @ 8D8E950
 	.incbin "graphics/pokemon/footprints/porygon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD8E950, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_omanyte_still_front_pic:: @ 8D8E970
 	.incbin "graphics/pokemon/front_pics/omanyte_still_front_pic.4bpp.lz"
@@ -4924,7 +4654,6 @@ gFile_graphics_pokemon_icons_omanyte_icon:: @ 8D8EF9C
 gFile_graphics_pokemon_footprints_omanyte_footprint:: @ 8D8F39C
 	.incbin "graphics/pokemon/footprints/omanyte_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD8F39C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_omastar_still_front_pic:: @ 8D8F3BC
@@ -4956,7 +4685,6 @@ gFile_graphics_pokemon_footprints_omastar_footprint:: @ 8D8FF0C
 	.incbin "graphics/pokemon/footprints/omastar_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD8FF0C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_kabuto_still_front_pic:: @ 8D8FF2C
 	.incbin "graphics/pokemon/front_pics/kabuto_still_front_pic.4bpp.lz"
@@ -4986,7 +4714,6 @@ gFile_graphics_pokemon_icons_kabuto_icon:: @ 8D9043C
 gFile_graphics_pokemon_footprints_kabuto_footprint:: @ 8D9083C
 	.incbin "graphics/pokemon/footprints/kabuto_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9083C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_kabutops_still_front_pic:: @ 8D9085C
@@ -5018,7 +4745,6 @@ gFile_graphics_pokemon_footprints_kabutops_footprint:: @ 8D91458
 	.incbin "graphics/pokemon/footprints/kabutops_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD91458, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_aerodactyl_still_front_pic:: @ 8D91478
 	.incbin "graphics/pokemon/front_pics/aerodactyl_still_front_pic.4bpp.lz"
@@ -5048,7 +4774,6 @@ gFile_graphics_pokemon_icons_aerodactyl_icon:: @ 8D91C1C
 gFile_graphics_pokemon_footprints_aerodactyl_footprint:: @ 8D9201C
 	.incbin "graphics/pokemon/footprints/aerodactyl_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9201C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_snorlax_still_front_pic:: @ 8D9203C
@@ -5080,7 +4805,6 @@ gFile_graphics_pokemon_footprints_snorlax_footprint:: @ 8D92A7C
 	.incbin "graphics/pokemon/footprints/snorlax_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD92A7C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_articuno_still_front_pic:: @ 8D92A9C
 	.incbin "graphics/pokemon/front_pics/articuno_still_front_pic.4bpp.lz"
@@ -5110,7 +4834,6 @@ gFile_graphics_pokemon_icons_articuno_icon:: @ 8D93240
 gFile_graphics_pokemon_footprints_articuno_footprint:: @ 8D93640
 	.incbin "graphics/pokemon/footprints/articuno_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD93640, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_zapdos_still_front_pic:: @ 8D93660
@@ -5142,7 +4865,6 @@ gFile_graphics_pokemon_footprints_zapdos_footprint:: @ 8D9423C
 	.incbin "graphics/pokemon/footprints/zapdos_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9423C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_moltres_still_front_pic:: @ 8D9425C
 	.incbin "graphics/pokemon/front_pics/moltres_still_front_pic.4bpp.lz"
@@ -5172,7 +4894,6 @@ gFile_graphics_pokemon_icons_moltres_icon:: @ 8D94AB4
 gFile_graphics_pokemon_footprints_moltres_footprint:: @ 8D94EB4
 	.incbin "graphics/pokemon/footprints/moltres_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD94EB4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_dratini_still_front_pic:: @ 8D94ED4
@@ -5204,7 +4925,6 @@ gFile_graphics_pokemon_footprints_dratini_footprint:: @ 8D95868
 	.incbin "graphics/pokemon/footprints/dratini_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD95868, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_dragonair_still_front_pic:: @ 8D95888
 	.incbin "graphics/pokemon/front_pics/dragonair_still_front_pic.4bpp.lz"
@@ -5234,7 +4954,6 @@ gFile_graphics_pokemon_icons_dragonair_icon:: @ 8D95F80
 gFile_graphics_pokemon_footprints_dragonair_footprint:: @ 8D96380
 	.incbin "graphics/pokemon/footprints/dragonair_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD96380, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_dragonite_still_front_pic:: @ 8D963A0
@@ -5266,7 +4985,6 @@ gFile_graphics_pokemon_footprints_dragonite_footprint:: @ 8D97038
 	.incbin "graphics/pokemon/footprints/dragonite_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD97038, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_mewtwo_still_front_pic:: @ 8D97058
 	.incbin "graphics/pokemon/front_pics/mewtwo_still_front_pic.4bpp.lz"
@@ -5296,7 +5014,6 @@ gFile_graphics_pokemon_icons_mewtwo_icon:: @ 8D978A8
 gFile_graphics_pokemon_footprints_mewtwo_footprint:: @ 8D97CA8
 	.incbin "graphics/pokemon/footprints/mewtwo_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD97CA8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_mew_still_front_pic:: @ 8D97CC8
@@ -5328,7 +5045,6 @@ gFile_graphics_pokemon_footprints_mew_footprint:: @ 8D98720
 	.incbin "graphics/pokemon/footprints/mew_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD98720, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_chikorita_still_front_pic:: @ 8D98740
 	.incbin "graphics/pokemon/front_pics/chikorita_still_front_pic.4bpp.lz"
@@ -5358,7 +5074,6 @@ gFile_graphics_pokemon_icons_chikorita_icon:: @ 8D98CBC
 gFile_graphics_pokemon_footprints_chikorita_footprint:: @ 8D990BC
 	.incbin "graphics/pokemon/footprints/chikorita_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD990BC, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_bayleef_still_front_pic:: @ 8D990DC
@@ -5390,7 +5105,6 @@ gFile_graphics_pokemon_footprints_bayleef_footprint:: @ 8D99C90
 	.incbin "graphics/pokemon/footprints/bayleef_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD99C90, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_meganium_still_front_pic:: @ 8D99CB0
 	.incbin "graphics/pokemon/front_pics/meganium_still_front_pic.4bpp.lz"
@@ -5420,7 +5134,6 @@ gFile_graphics_pokemon_icons_meganium_icon:: @ 8D9A5AC
 gFile_graphics_pokemon_footprints_meganium_footprint:: @ 8D9A9AC
 	.incbin "graphics/pokemon/footprints/meganium_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9A9AC, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_cyndaquil_still_front_pic:: @ 8D9A9CC
@@ -5452,7 +5165,6 @@ gFile_graphics_pokemon_footprints_cyndaquil_footprint:: @ 8D9B3D4
 	.incbin "graphics/pokemon/footprints/cyndaquil_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9B3D4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_quilava_still_front_pic:: @ 8D9B3F4
 	.incbin "graphics/pokemon/front_pics/quilava_still_front_pic.4bpp.lz"
@@ -5482,7 +5194,6 @@ gFile_graphics_pokemon_icons_quilava_icon:: @ 8D9BAD4
 gFile_graphics_pokemon_footprints_quilava_footprint:: @ 8D9BED4
 	.incbin "graphics/pokemon/footprints/quilava_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9BED4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_typhlosion_still_front_pic:: @ 8D9BEF4
@@ -5514,7 +5225,6 @@ gFile_graphics_pokemon_footprints_typhlosion_footprint:: @ 8D9CB70
 	.incbin "graphics/pokemon/footprints/typhlosion_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9CB70, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_totodile_still_front_pic:: @ 8D9CB90
 	.incbin "graphics/pokemon/front_pics/totodile_still_front_pic.4bpp.lz"
@@ -5544,7 +5254,6 @@ gFile_graphics_pokemon_icons_totodile_icon:: @ 8D9D164
 gFile_graphics_pokemon_footprints_totodile_footprint:: @ 8D9D564
 	.incbin "graphics/pokemon/footprints/totodile_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9D564, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_croconaw_still_front_pic:: @ 8D9D584
@@ -5576,7 +5285,6 @@ gFile_graphics_pokemon_footprints_croconaw_footprint:: @ 8D9E08C
 	.incbin "graphics/pokemon/footprints/croconaw_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9E08C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_feraligatr_still_front_pic:: @ 8D9E0AC
 	.incbin "graphics/pokemon/front_pics/feraligatr_still_front_pic.4bpp.lz"
@@ -5606,7 +5314,6 @@ gFile_graphics_pokemon_icons_feraligatr_icon:: @ 8D9EB34
 gFile_graphics_pokemon_footprints_feraligatr_footprint:: @ 8D9EF34
 	.incbin "graphics/pokemon/footprints/feraligatr_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9EF34, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_sentret_still_front_pic:: @ 8D9EF54
@@ -5638,7 +5345,6 @@ gFile_graphics_pokemon_footprints_sentret_footprint:: @ 8D9F924
 	.incbin "graphics/pokemon/footprints/sentret_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xD9F924, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_furret_still_front_pic:: @ 8D9F944
 	.incbin "graphics/pokemon/front_pics/furret_still_front_pic.4bpp.lz"
@@ -5668,7 +5374,6 @@ gFile_graphics_pokemon_icons_furret_icon:: @ 8D9FFF0
 gFile_graphics_pokemon_footprints_furret_footprint:: @ 8DA03F0
 	.incbin "graphics/pokemon/footprints/furret_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA03F0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_hoothoot_still_front_pic:: @ 8DA0410
@@ -5700,7 +5405,6 @@ gFile_graphics_pokemon_footprints_hoothoot_footprint:: @ 8DA0DEC
 	.incbin "graphics/pokemon/footprints/hoothoot_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA0DEC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_noctowl_still_front_pic:: @ 8DA0E0C
 	.incbin "graphics/pokemon/front_pics/noctowl_still_front_pic.4bpp.lz"
@@ -5730,7 +5434,6 @@ gFile_graphics_pokemon_icons_noctowl_icon:: @ 8DA150C
 gFile_graphics_pokemon_footprints_noctowl_footprint:: @ 8DA190C
 	.incbin "graphics/pokemon/footprints/noctowl_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA190C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_ledyba_still_front_pic:: @ 8DA192C
@@ -5762,7 +5465,6 @@ gFile_graphics_pokemon_footprints_ledyba_footprint:: @ 8DA23A0
 	.incbin "graphics/pokemon/footprints/ledyba_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA23A0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_ledian_still_front_pic:: @ 8DA23C0
 	.incbin "graphics/pokemon/front_pics/ledian_still_front_pic.4bpp.lz"
@@ -5792,7 +5494,6 @@ gFile_graphics_pokemon_icons_ledian_icon:: @ 8DA2AF0
 gFile_graphics_pokemon_footprints_ledian_footprint:: @ 8DA2EF0
 	.incbin "graphics/pokemon/footprints/ledian_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA2EF0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_spinarak_still_front_pic:: @ 8DA2F10
@@ -5824,7 +5525,6 @@ gFile_graphics_pokemon_footprints_spinarak_footprint:: @ 8DA3838
 	.incbin "graphics/pokemon/footprints/spinarak_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA3838, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_ariados_still_front_pic:: @ 8DA3858
 	.incbin "graphics/pokemon/front_pics/ariados_still_front_pic.4bpp.lz"
@@ -5854,7 +5554,6 @@ gFile_graphics_pokemon_icons_ariados_icon:: @ 8DA3FE0
 gFile_graphics_pokemon_footprints_ariados_footprint:: @ 8DA43E0
 	.incbin "graphics/pokemon/footprints/ariados_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA43E0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_crobat_still_front_pic:: @ 8DA4400
@@ -5886,7 +5585,6 @@ gFile_graphics_pokemon_footprints_crobat_footprint:: @ 8DA4F08
 	.incbin "graphics/pokemon/footprints/crobat_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA4F08, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_chinchou_still_front_pic:: @ 8DA4F28
 	.incbin "graphics/pokemon/front_pics/chinchou_still_front_pic.4bpp.lz"
@@ -5916,7 +5614,6 @@ gFile_graphics_pokemon_icons_chinchou_icon:: @ 8DA5548
 gFile_graphics_pokemon_footprints_chinchou_footprint:: @ 8DA5948
 	.incbin "graphics/pokemon/footprints/chinchou_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA5948, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_lanturn_still_front_pic:: @ 8DA5968
@@ -5948,7 +5645,6 @@ gFile_graphics_pokemon_footprints_lanturn_footprint:: @ 8DA6428
 	.incbin "graphics/pokemon/footprints/lanturn_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA6428, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_pichu_still_front_pic:: @ 8DA6448
 	.incbin "graphics/pokemon/front_pics/pichu_still_front_pic.4bpp.lz"
@@ -5978,7 +5674,6 @@ gFile_graphics_pokemon_icons_pichu_icon:: @ 8DA6910
 gFile_graphics_pokemon_footprints_pichu_footprint:: @ 8DA6D10
 	.incbin "graphics/pokemon/footprints/pichu_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA6D10, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_cleffa_still_front_pic:: @ 8DA6D30
@@ -6010,7 +5705,6 @@ gFile_graphics_pokemon_footprints_cleffa_footprint:: @ 8DA759C
 	.incbin "graphics/pokemon/footprints/cleffa_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA759C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_igglybuff_still_front_pic:: @ 8DA75BC
 	.incbin "graphics/pokemon/front_pics/igglybuff_still_front_pic.4bpp.lz"
@@ -6040,7 +5734,6 @@ gFile_graphics_pokemon_icons_igglybuff_icon:: @ 8DA7A30
 gFile_graphics_pokemon_footprints_igglybuff_footprint:: @ 8DA7E30
 	.incbin "graphics/pokemon/footprints/igglybuff_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA7E30, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_togepi_still_front_pic:: @ 8DA7E50
@@ -6072,7 +5765,6 @@ gFile_graphics_pokemon_footprints_togepi_footprint:: @ 8DA86E8
 	.incbin "graphics/pokemon/footprints/togepi_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA86E8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_togetic_still_front_pic:: @ 8DA8708
 	.incbin "graphics/pokemon/front_pics/togetic_still_front_pic.4bpp.lz"
@@ -6102,7 +5794,6 @@ gFile_graphics_pokemon_icons_togetic_icon:: @ 8DA8CF8
 gFile_graphics_pokemon_footprints_togetic_footprint:: @ 8DA90F8
 	.incbin "graphics/pokemon/footprints/togetic_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA90F8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_natu_still_front_pic:: @ 8DA9118
@@ -6134,7 +5825,6 @@ gFile_graphics_pokemon_footprints_natu_footprint:: @ 8DA9948
 	.incbin "graphics/pokemon/footprints/natu_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDA9948, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_xatu_still_front_pic:: @ 8DA9968
 	.incbin "graphics/pokemon/front_pics/xatu_still_front_pic.4bpp.lz"
@@ -6164,7 +5854,6 @@ gFile_graphics_pokemon_icons_xatu_icon:: @ 8DAA00C
 gFile_graphics_pokemon_footprints_xatu_footprint:: @ 8DAA40C
 	.incbin "graphics/pokemon/footprints/xatu_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDAA40C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_mareep_still_front_pic:: @ 8DAA42C
@@ -6196,7 +5885,6 @@ gFile_graphics_pokemon_footprints_mareep_footprint:: @ 8DAAE24
 	.incbin "graphics/pokemon/footprints/mareep_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDAAE24, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_flaaffy_still_front_pic:: @ 8DAAE44
 	.incbin "graphics/pokemon/front_pics/flaaffy_still_front_pic.4bpp.lz"
@@ -6226,7 +5914,6 @@ gFile_graphics_pokemon_icons_flaaffy_icon:: @ 8DAB4B0
 gFile_graphics_pokemon_footprints_flaaffy_footprint:: @ 8DAB8B0
 	.incbin "graphics/pokemon/footprints/flaaffy_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDAB8B0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_ampharos_still_front_pic:: @ 8DAB8D0
@@ -6258,7 +5945,6 @@ gFile_graphics_pokemon_footprints_ampharos_footprint:: @ 8DAC3F4
 	.incbin "graphics/pokemon/footprints/ampharos_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDAC3F4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_bellossom_still_front_pic:: @ 8DAC414
 	.incbin "graphics/pokemon/front_pics/bellossom_still_front_pic.4bpp.lz"
@@ -6288,7 +5974,6 @@ gFile_graphics_pokemon_icons_bellossom_icon:: @ 8DAC9F8
 gFile_graphics_pokemon_footprints_bellossom_footprint:: @ 8DACDF8
 	.incbin "graphics/pokemon/footprints/bellossom_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDACDF8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_marill_still_front_pic:: @ 8DACE18
@@ -6320,7 +6005,6 @@ gFile_graphics_pokemon_footprints_marill_footprint:: @ 8DAD7D8
 	.incbin "graphics/pokemon/footprints/marill_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDAD7D8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_azumarill_still_front_pic:: @ 8DAD7F8
 	.incbin "graphics/pokemon/front_pics/azumarill_still_front_pic.4bpp.lz"
@@ -6350,7 +6034,6 @@ gFile_graphics_pokemon_icons_azumarill_icon:: @ 8DADE04
 gFile_graphics_pokemon_footprints_azumarill_footprint:: @ 8DAE204
 	.incbin "graphics/pokemon/footprints/azumarill_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDAE204, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_sudowoodo_still_front_pic:: @ 8DAE224
@@ -6382,7 +6065,6 @@ gFile_graphics_pokemon_footprints_sudowoodo_footprint:: @ 8DAECE8
 	.incbin "graphics/pokemon/footprints/sudowoodo_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDAECE8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_politoed_still_front_pic:: @ 8DAED08
 	.incbin "graphics/pokemon/front_pics/politoed_still_front_pic.4bpp.lz"
@@ -6412,7 +6094,6 @@ gFile_graphics_pokemon_icons_politoed_icon:: @ 8DAF350
 gFile_graphics_pokemon_footprints_politoed_footprint:: @ 8DAF750
 	.incbin "graphics/pokemon/footprints/politoed_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDAF750, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_hoppip_still_front_pic:: @ 8DAF770
@@ -6444,7 +6125,6 @@ gFile_graphics_pokemon_footprints_hoppip_footprint:: @ 8DB0154
 	.incbin "graphics/pokemon/footprints/hoppip_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB0154, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_skiploom_still_front_pic:: @ 8DB0174
 	.incbin "graphics/pokemon/front_pics/skiploom_still_front_pic.4bpp.lz"
@@ -6474,7 +6154,6 @@ gFile_graphics_pokemon_icons_skiploom_icon:: @ 8DB072C
 gFile_graphics_pokemon_footprints_skiploom_footprint:: @ 8DB0B2C
 	.incbin "graphics/pokemon/footprints/skiploom_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB0B2C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_jumpluff_still_front_pic:: @ 8DB0B4C
@@ -6506,7 +6185,6 @@ gFile_graphics_pokemon_footprints_jumpluff_footprint:: @ 8DB1700
 	.incbin "graphics/pokemon/footprints/jumpluff_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB1700, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_aipom_still_front_pic:: @ 8DB1720
 	.incbin "graphics/pokemon/front_pics/aipom_still_front_pic.4bpp.lz"
@@ -6536,7 +6214,6 @@ gFile_graphics_pokemon_icons_aipom_icon:: @ 8DB1D60
 gFile_graphics_pokemon_footprints_aipom_footprint:: @ 8DB2160
 	.incbin "graphics/pokemon/footprints/aipom_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB2160, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_sunkern_still_front_pic:: @ 8DB2180
@@ -6568,7 +6245,6 @@ gFile_graphics_pokemon_footprints_sunkern_footprint:: @ 8DB2ACC
 	.incbin "graphics/pokemon/footprints/sunkern_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB2ACC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_sunflora_still_front_pic:: @ 8DB2AEC
 	.incbin "graphics/pokemon/front_pics/sunflora_still_front_pic.4bpp.lz"
@@ -6598,7 +6274,6 @@ gFile_graphics_pokemon_icons_sunflora_icon:: @ 8DB3234
 gFile_graphics_pokemon_footprints_sunflora_footprint:: @ 8DB3634
 	.incbin "graphics/pokemon/footprints/sunflora_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB3634, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_yanma_still_front_pic:: @ 8DB3654
@@ -6630,7 +6305,6 @@ gFile_graphics_pokemon_footprints_yanma_footprint:: @ 8DB41DC
 	.incbin "graphics/pokemon/footprints/yanma_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB41DC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_wooper_still_front_pic:: @ 8DB41FC
 	.incbin "graphics/pokemon/front_pics/wooper_still_front_pic.4bpp.lz"
@@ -6660,7 +6334,6 @@ gFile_graphics_pokemon_icons_wooper_icon:: @ 8DB4718
 gFile_graphics_pokemon_footprints_wooper_footprint:: @ 8DB4B18
 	.incbin "graphics/pokemon/footprints/wooper_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB4B18, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_quagsire_still_front_pic:: @ 8DB4B38
@@ -6692,7 +6365,6 @@ gFile_graphics_pokemon_footprints_quagsire_footprint:: @ 8DB55F8
 	.incbin "graphics/pokemon/footprints/quagsire_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB55F8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_espeon_still_front_pic:: @ 8DB5618
 	.incbin "graphics/pokemon/front_pics/espeon_still_front_pic.4bpp.lz"
@@ -6722,7 +6394,6 @@ gFile_graphics_pokemon_icons_espeon_icon:: @ 8DB5C7C
 gFile_graphics_pokemon_footprints_espeon_footprint:: @ 8DB607C
 	.incbin "graphics/pokemon/footprints/espeon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB607C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_umbreon_still_front_pic:: @ 8DB609C
@@ -6754,7 +6425,6 @@ gFile_graphics_pokemon_footprints_umbreon_footprint:: @ 8DB6B14
 	.incbin "graphics/pokemon/footprints/umbreon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB6B14, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_murkrow_still_front_pic:: @ 8DB6B34
 	.incbin "graphics/pokemon/front_pics/murkrow_still_front_pic.4bpp.lz"
@@ -6784,7 +6454,6 @@ gFile_graphics_pokemon_icons_murkrow_icon:: @ 8DB717C
 gFile_graphics_pokemon_footprints_murkrow_footprint:: @ 8DB757C
 	.incbin "graphics/pokemon/footprints/murkrow_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB757C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_slowking_still_front_pic:: @ 8DB759C
@@ -6816,7 +6485,6 @@ gFile_graphics_pokemon_footprints_slowking_footprint:: @ 8DB812C
 	.incbin "graphics/pokemon/footprints/slowking_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB812C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_misdreavus_still_front_pic:: @ 8DB814C
 	.incbin "graphics/pokemon/front_pics/misdreavus_still_front_pic.4bpp.lz"
@@ -6846,7 +6514,6 @@ gFile_graphics_pokemon_icons_misdreavus_icon:: @ 8DB8780
 gFile_graphics_pokemon_footprints_misdreavus_footprint:: @ 8DB8B80
 	.incbin "graphics/pokemon/footprints/misdreavus_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB8B80, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_a_still_front_pic:: @ 8DB8BA0
@@ -6878,7 +6545,6 @@ gFile_graphics_pokemon_footprints_unown_footprint:: @ 8DB93B4
 	.incbin "graphics/pokemon/footprints/unown_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB93B4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_wobbuffet_still_front_pic:: @ 8DB93D4
 	.incbin "graphics/pokemon/front_pics/wobbuffet_still_front_pic.4bpp.lz"
@@ -6908,7 +6574,6 @@ gFile_graphics_pokemon_icons_wobbuffet_icon:: @ 8DB99B8
 gFile_graphics_pokemon_footprints_wobbuffet_footprint:: @ 8DB9DB8
 	.incbin "graphics/pokemon/footprints/wobbuffet_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDB9DB8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_girafarig_still_front_pic:: @ 8DB9DD8
@@ -6940,7 +6605,6 @@ gFile_graphics_pokemon_footprints_girafarig_footprint:: @ 8DBA9D8
 	.incbin "graphics/pokemon/footprints/girafarig_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDBA9D8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_pineco_still_front_pic:: @ 8DBA9F8
 	.incbin "graphics/pokemon/front_pics/pineco_still_front_pic.4bpp.lz"
@@ -6970,7 +6634,6 @@ gFile_graphics_pokemon_icons_pineco_icon:: @ 8DBB058
 gFile_graphics_pokemon_footprints_pineco_footprint:: @ 8DBB458
 	.incbin "graphics/pokemon/footprints/pineco_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDBB458, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_forretress_still_front_pic:: @ 8DBB478
@@ -7002,7 +6665,6 @@ gFile_graphics_pokemon_footprints_forretress_footprint:: @ 8DBBFA4
 	.incbin "graphics/pokemon/footprints/forretress_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDBBFA4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_dunsparce_still_front_pic:: @ 8DBBFC4
 	.incbin "graphics/pokemon/front_pics/dunsparce_still_front_pic.4bpp.lz"
@@ -7032,7 +6694,6 @@ gFile_graphics_pokemon_icons_dunsparce_icon:: @ 8DBC620
 gFile_graphics_pokemon_footprints_dunsparce_footprint:: @ 8DBCA20
 	.incbin "graphics/pokemon/footprints/dunsparce_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDBCA20, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_gligar_still_front_pic:: @ 8DBCA40
@@ -7064,7 +6725,6 @@ gFile_graphics_pokemon_footprints_gligar_footprint:: @ 8DBD690
 	.incbin "graphics/pokemon/footprints/gligar_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDBD690, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_steelix_still_front_pic:: @ 8DBD6B0
 	.incbin "graphics/pokemon/front_pics/steelix_still_front_pic.4bpp.lz"
@@ -7094,7 +6754,6 @@ gFile_graphics_pokemon_icons_steelix_icon:: @ 8DBDFCC
 gFile_graphics_pokemon_footprints_steelix_footprint:: @ 8DBE3CC
 	.incbin "graphics/pokemon/footprints/steelix_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDBE3CC, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_snubbull_still_front_pic:: @ 8DBE3EC
@@ -7126,7 +6785,6 @@ gFile_graphics_pokemon_footprints_snubbull_footprint:: @ 8DBEE38
 	.incbin "graphics/pokemon/footprints/snubbull_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDBEE38, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_granbull_still_front_pic:: @ 8DBEE58
 	.incbin "graphics/pokemon/front_pics/granbull_still_front_pic.4bpp.lz"
@@ -7156,7 +6814,6 @@ gFile_graphics_pokemon_icons_granbull_icon:: @ 8DBF558
 gFile_graphics_pokemon_footprints_granbull_footprint:: @ 8DBF958
 	.incbin "graphics/pokemon/footprints/granbull_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDBF958, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_qwilfish_still_front_pic:: @ 8DBF978
@@ -7188,7 +6845,6 @@ gFile_graphics_pokemon_footprints_qwilfish_footprint:: @ 8DC0368
 	.incbin "graphics/pokemon/footprints/qwilfish_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC0368, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_scizor_still_front_pic:: @ 8DC0388
 	.incbin "graphics/pokemon/front_pics/scizor_still_front_pic.4bpp.lz"
@@ -7219,7 +6875,6 @@ gFile_graphics_pokemon_footprints_scizor_footprint:: @ 8DC1040
 	.incbin "graphics/pokemon/footprints/scizor_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC1040, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_shuckle_still_front_pic:: @ 8DC1060
 	.incbin "graphics/pokemon/front_pics/shuckle_still_front_pic.4bpp.lz"
@@ -7249,7 +6904,6 @@ gFile_graphics_pokemon_icons_shuckle_icon:: @ 8DC15D0
 gFile_graphics_pokemon_footprints_shuckle_footprint:: @ 8DC19D0
 	.incbin "graphics/pokemon/footprints/shuckle_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC19D0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_heracross_still_front_pic:: @ 8DC19F0
@@ -7284,7 +6938,6 @@ gFile_graphics_pokemon_footprints_heracross_footprint:: @ 8DC29A0
 	.incbin "graphics/pokemon/footprints/heracross_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC29A0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_sneasel_still_front_pic:: @ 8DC29C0
 	.incbin "graphics/pokemon/front_pics/sneasel_still_front_pic.4bpp.lz"
@@ -7314,7 +6967,6 @@ gFile_graphics_pokemon_icons_sneasel_icon:: @ 8DC3078
 gFile_graphics_pokemon_footprints_sneasel_footprint:: @ 8DC3478
 	.incbin "graphics/pokemon/footprints/sneasel_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC3478, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_teddiursa_still_front_pic:: @ 8DC3498
@@ -7346,7 +6998,6 @@ gFile_graphics_pokemon_footprints_teddiursa_footprint:: @ 8DC3E08
 	.incbin "graphics/pokemon/footprints/teddiursa_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC3E08, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_ursaring_still_front_pic:: @ 8DC3E28
 	.incbin "graphics/pokemon/front_pics/ursaring_still_front_pic.4bpp.lz"
@@ -7376,7 +7027,6 @@ gFile_graphics_pokemon_icons_ursaring_icon:: @ 8DC4638
 gFile_graphics_pokemon_footprints_ursaring_footprint:: @ 8DC4A38
 	.incbin "graphics/pokemon/footprints/ursaring_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC4A38, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_slugma_still_front_pic:: @ 8DC4A58
@@ -7408,7 +7058,6 @@ gFile_graphics_pokemon_footprints_slugma_footprint:: @ 8DC53FC
 	.incbin "graphics/pokemon/footprints/slugma_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC53FC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_magcargo_still_front_pic:: @ 8DC541C
 	.incbin "graphics/pokemon/front_pics/magcargo_still_front_pic.4bpp.lz"
@@ -7438,7 +7087,6 @@ gFile_graphics_pokemon_icons_magcargo_icon:: @ 8DC5BCC
 gFile_graphics_pokemon_footprints_magcargo_footprint:: @ 8DC5FCC
 	.incbin "graphics/pokemon/footprints/magcargo_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC5FCC, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_swinub_still_front_pic:: @ 8DC5FEC
@@ -7470,7 +7118,6 @@ gFile_graphics_pokemon_footprints_swinub_footprint:: @ 8DC6874
 	.incbin "graphics/pokemon/footprints/swinub_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC6874, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_piloswine_still_front_pic:: @ 8DC6894
 	.incbin "graphics/pokemon/front_pics/piloswine_still_front_pic.4bpp.lz"
@@ -7500,7 +7147,6 @@ gFile_graphics_pokemon_icons_piloswine_icon:: @ 8DC6E58
 gFile_graphics_pokemon_footprints_piloswine_footprint:: @ 8DC7258
 	.incbin "graphics/pokemon/footprints/piloswine_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC7258, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_corsola_still_front_pic:: @ 8DC7278
@@ -7532,7 +7178,6 @@ gFile_graphics_pokemon_footprints_corsola_footprint:: @ 8DC7C70
 	.incbin "graphics/pokemon/footprints/corsola_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC7C70, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_remoraid_still_front_pic:: @ 8DC7C90
 	.incbin "graphics/pokemon/front_pics/remoraid_still_front_pic.4bpp.lz"
@@ -7562,7 +7207,6 @@ gFile_graphics_pokemon_icons_remoraid_icon:: @ 8DC825C
 gFile_graphics_pokemon_footprints_remoraid_footprint:: @ 8DC865C
 	.incbin "graphics/pokemon/footprints/remoraid_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC865C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_octillery_still_front_pic:: @ 8DC867C
@@ -7594,7 +7238,6 @@ gFile_graphics_pokemon_footprints_octillery_footprint:: @ 8DC90B8
 	.incbin "graphics/pokemon/footprints/octillery_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC90B8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_delibird_still_front_pic:: @ 8DC90D8
 	.incbin "graphics/pokemon/front_pics/delibird_still_front_pic.4bpp.lz"
@@ -7624,7 +7267,6 @@ gFile_graphics_pokemon_icons_delibird_icon:: @ 8DC9858
 gFile_graphics_pokemon_footprints_delibird_footprint:: @ 8DC9C58
 	.incbin "graphics/pokemon/footprints/delibird_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDC9C58, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_mantine_still_front_pic:: @ 8DC9C78
@@ -7656,7 +7298,6 @@ gFile_graphics_pokemon_footprints_mantine_footprint:: @ 8DCA804
 	.incbin "graphics/pokemon/footprints/mantine_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDCA804, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_skarmory_still_front_pic:: @ 8DCA824
 	.incbin "graphics/pokemon/front_pics/skarmory_still_front_pic.4bpp.lz"
@@ -7686,7 +7327,6 @@ gFile_graphics_pokemon_icons_skarmory_icon:: @ 8DCB058
 gFile_graphics_pokemon_footprints_skarmory_footprint:: @ 8DCB458
 	.incbin "graphics/pokemon/footprints/skarmory_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDCB458, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_houndour_still_front_pic:: @ 8DCB478
@@ -7718,7 +7358,6 @@ gFile_graphics_pokemon_footprints_houndour_footprint:: @ 8DCBE00
 	.incbin "graphics/pokemon/footprints/houndour_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDCBE00, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_houndoom_still_front_pic:: @ 8DCBE20
 	.incbin "graphics/pokemon/front_pics/houndoom_still_front_pic.4bpp.lz"
@@ -7748,7 +7387,6 @@ gFile_graphics_pokemon_icons_houndoom_icon:: @ 8DCC594
 gFile_graphics_pokemon_footprints_houndoom_footprint:: @ 8DCC994
 	.incbin "graphics/pokemon/footprints/houndoom_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDCC994, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_kingdra_still_front_pic:: @ 8DCC9B4
@@ -7780,7 +7418,6 @@ gFile_graphics_pokemon_footprints_kingdra_footprint:: @ 8DCD5D8
 	.incbin "graphics/pokemon/footprints/kingdra_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDCD5D8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_phanpy_still_front_pic:: @ 8DCD5F8
 	.incbin "graphics/pokemon/front_pics/phanpy_still_front_pic.4bpp.lz"
@@ -7810,7 +7447,6 @@ gFile_graphics_pokemon_icons_phanpy_icon:: @ 8DCDB68
 gFile_graphics_pokemon_footprints_phanpy_footprint:: @ 8DCDF68
 	.incbin "graphics/pokemon/footprints/phanpy_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDCDF68, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_donphan_still_front_pic:: @ 8DCDF88
@@ -7842,7 +7478,6 @@ gFile_graphics_pokemon_footprints_donphan_footprint:: @ 8DCEB48
 	.incbin "graphics/pokemon/footprints/donphan_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDCEB48, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_porygon2_still_front_pic:: @ 8DCEB68
 	.incbin "graphics/pokemon/front_pics/porygon2_still_front_pic.4bpp.lz"
@@ -7872,7 +7507,6 @@ gFile_graphics_pokemon_icons_porygon2_icon:: @ 8DCF15C
 gFile_graphics_pokemon_footprints_porygon2_footprint:: @ 8DCF55C
 	.incbin "graphics/pokemon/footprints/porygon2_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDCF55C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_stantler_still_front_pic:: @ 8DCF57C
@@ -7904,7 +7538,6 @@ gFile_graphics_pokemon_footprints_stantler_footprint:: @ 8DD012C
 	.incbin "graphics/pokemon/footprints/stantler_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD012C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_smeargle_still_front_pic:: @ 8DD014C
 	.incbin "graphics/pokemon/front_pics/smeargle_still_front_pic.4bpp.lz"
@@ -7935,7 +7568,6 @@ gFile_graphics_pokemon_footprints_smeargle_footprint:: @ 8DD0C54
 	.incbin "graphics/pokemon/footprints/smeargle_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD0C54, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_tyrogue_still_front_pic:: @ 8DD0C74
 	.incbin "graphics/pokemon/front_pics/tyrogue_still_front_pic.4bpp.lz"
@@ -7965,7 +7597,6 @@ gFile_graphics_pokemon_icons_tyrogue_icon:: @ 8DD126C
 gFile_graphics_pokemon_footprints_tyrogue_footprint:: @ 8DD166C
 	.incbin "graphics/pokemon/footprints/tyrogue_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD166C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_hitmontop_still_front_pic:: @ 8DD168C
@@ -8001,7 +7632,6 @@ gFile_graphics_pokemon_footprints_hitmontop_footprint:: @ 8DD2490
 	.incbin "graphics/pokemon/footprints/hitmontop_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD2490, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_smoochum_still_front_pic:: @ 8DD24B0
 	.incbin "graphics/pokemon/front_pics/smoochum_still_front_pic.4bpp.lz"
@@ -8031,7 +7661,6 @@ gFile_graphics_pokemon_icons_smoochum_icon:: @ 8DD29D0
 gFile_graphics_pokemon_footprints_smoochum_footprint:: @ 8DD2DD0
 	.incbin "graphics/pokemon/footprints/smoochum_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD2DD0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_elekid_still_front_pic:: @ 8DD2DF0
@@ -8063,7 +7692,6 @@ gFile_graphics_pokemon_footprints_elekid_footprint:: @ 8DD38A0
 	.incbin "graphics/pokemon/footprints/elekid_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD38A0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_magby_still_front_pic:: @ 8DD38C0
 	.incbin "graphics/pokemon/front_pics/magby_still_front_pic.4bpp.lz"
@@ -8093,7 +7721,6 @@ gFile_graphics_pokemon_icons_magby_icon:: @ 8DD3E40
 gFile_graphics_pokemon_footprints_magby_footprint:: @ 8DD4240
 	.incbin "graphics/pokemon/footprints/magby_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD4240, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_miltank_still_front_pic:: @ 8DD4260
@@ -8125,7 +7752,6 @@ gFile_graphics_pokemon_footprints_miltank_footprint:: @ 8DD4DFC
 	.incbin "graphics/pokemon/footprints/miltank_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD4DFC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_blissey_still_front_pic:: @ 8DD4E1C
 	.incbin "graphics/pokemon/front_pics/blissey_still_front_pic.4bpp.lz"
@@ -8155,7 +7781,6 @@ gFile_graphics_pokemon_icons_blissey_icon:: @ 8DD5520
 gFile_graphics_pokemon_footprints_blissey_footprint:: @ 8DD5920
 	.incbin "graphics/pokemon/footprints/blissey_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD5920, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_raikou_still_front_pic:: @ 8DD5940
@@ -8187,7 +7812,6 @@ gFile_graphics_pokemon_footprints_raikou_footprint:: @ 8DD66B4
 	.incbin "graphics/pokemon/footprints/raikou_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD66B4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_entei_still_front_pic:: @ 8DD66D4
 	.incbin "graphics/pokemon/front_pics/entei_still_front_pic.4bpp.lz"
@@ -8217,7 +7841,6 @@ gFile_graphics_pokemon_icons_entei_icon:: @ 8DD7144
 gFile_graphics_pokemon_footprints_entei_footprint:: @ 8DD7544
 	.incbin "graphics/pokemon/footprints/entei_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD7544, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_suicune_still_front_pic:: @ 8DD7564
@@ -8249,7 +7872,6 @@ gFile_graphics_pokemon_footprints_suicune_footprint:: @ 8DD8414
 	.incbin "graphics/pokemon/footprints/suicune_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD8414, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_larvitar_still_front_pic:: @ 8DD8434
 	.incbin "graphics/pokemon/front_pics/larvitar_still_front_pic.4bpp.lz"
@@ -8279,7 +7901,6 @@ gFile_graphics_pokemon_icons_larvitar_icon:: @ 8DD898C
 gFile_graphics_pokemon_footprints_larvitar_footprint:: @ 8DD8D8C
 	.incbin "graphics/pokemon/footprints/larvitar_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD8D8C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_pupitar_still_front_pic:: @ 8DD8DAC
@@ -8311,7 +7932,6 @@ gFile_graphics_pokemon_footprints_pupitar_footprint:: @ 8DD9824
 	.incbin "graphics/pokemon/footprints/pupitar_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDD9824, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_tyranitar_still_front_pic:: @ 8DD9844
 	.incbin "graphics/pokemon/front_pics/tyranitar_still_front_pic.4bpp.lz"
@@ -8341,7 +7961,6 @@ gFile_graphics_pokemon_icons_tyranitar_icon:: @ 8DDA1BC
 gFile_graphics_pokemon_footprints_tyranitar_footprint:: @ 8DDA5BC
 	.incbin "graphics/pokemon/footprints/tyranitar_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDDA5BC, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_lugia_still_front_pic:: @ 8DDA5DC
@@ -8373,7 +7992,6 @@ gFile_graphics_pokemon_footprints_lugia_footprint:: @ 8DDB2C4
 	.incbin "graphics/pokemon/footprints/lugia_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDDB2C4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_ho_oh_still_front_pic:: @ 8DDB2E4
 	.incbin "graphics/pokemon/front_pics/ho_oh_still_front_pic.4bpp.lz"
@@ -8403,7 +8021,6 @@ gFile_graphics_pokemon_icons_ho_oh_icon:: @ 8DDBD98
 gFile_graphics_pokemon_footprints_ho_oh_footprint:: @ 8DDC198
 	.incbin "graphics/pokemon/footprints/ho_oh_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDDC198, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_celebi_still_front_pic:: @ 8DDC1B8
@@ -8435,7 +8052,6 @@ gFile_graphics_pokemon_footprints_celebi_footprint:: @ 8DDCC2C
 	.incbin "graphics/pokemon/footprints/celebi_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDDCC2C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_back_pics_double_question_mark_back_pic:: @ 8DDCC4C
 	.incbin "graphics/pokemon/back_pics/double_question_mark_back_pic.4bpp.lz"
@@ -8455,7 +8071,6 @@ gFile_graphics_pokemon_back_pics_double_question_mark_back_pic2:: @ 8DDCDE4
 gFile_graphics_pokemon_palettes_double_question_mark_shiny_palette:: @ 8DDCF68
 	.incbin "graphics/pokemon/palettes/double_question_mark_shiny_palette.gbapal.lz"
 	@ .incbin "baserom.gba", 0xDDCF68, 0x0014
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_treecko_still_front_pic:: @ 8DDCF7C
@@ -8487,7 +8102,6 @@ gFile_graphics_pokemon_footprints_treecko_footprint:: @ 8DDD9D4
 	.incbin "graphics/pokemon/footprints/treecko_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDDD9D4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_grovyle_still_front_pic:: @ 8DDD9F4
 	.incbin "graphics/pokemon/front_pics/grovyle_still_front_pic.4bpp.lz"
@@ -8517,7 +8131,6 @@ gFile_graphics_pokemon_icons_grovyle_icon:: @ 8DDE20C
 gFile_graphics_pokemon_footprints_grovyle_footprint:: @ 8DDE60C
 	.incbin "graphics/pokemon/footprints/grovyle_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDDE60C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_sceptile_still_front_pic:: @ 8DDE62C
@@ -8549,7 +8162,6 @@ gFile_graphics_pokemon_footprints_sceptile_footprint:: @ 8DDF37C
 	.incbin "graphics/pokemon/footprints/sceptile_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDDF37C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_torchic_still_front_pic:: @ 8DDF39C
 	.incbin "graphics/pokemon/front_pics/torchic_still_front_pic.4bpp.lz"
@@ -8579,7 +8191,6 @@ gFile_graphics_pokemon_icons_torchic_icon:: @ 8DDF960
 gFile_graphics_pokemon_footprints_torchic_footprint:: @ 8DDFD60
 	.incbin "graphics/pokemon/footprints/torchic_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDDFD60, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_combusken_still_front_pic:: @ 8DDFD80
@@ -8611,7 +8222,6 @@ gFile_graphics_pokemon_footprints_combusken_footprint:: @ 8DE098C
 	.incbin "graphics/pokemon/footprints/combusken_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE098C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_blaziken_still_front_pic:: @ 8DE09AC
 	@ .incbin "graphics/pokemon/front_pics/blaziken_still_front_pic.4bpp.lz"
@@ -8641,7 +8251,6 @@ gFile_graphics_pokemon_icons_blaziken_icon:: @ 8DE1250
 gFile_graphics_pokemon_footprints_blaziken_footprint:: @ 8DE1650
 	.incbin "graphics/pokemon/footprints/blaziken_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE1650, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_mudkip_still_front_pic:: @ 8DE1670
@@ -8673,7 +8282,6 @@ gFile_graphics_pokemon_footprints_mudkip_footprint:: @ 8DE2058
 	.incbin "graphics/pokemon/footprints/mudkip_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE2058, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_marshtomp_still_front_pic:: @ 8DE2078
 	.incbin "graphics/pokemon/front_pics/marshtomp_still_front_pic.4bpp.lz"
@@ -8703,7 +8311,6 @@ gFile_graphics_pokemon_icons_marshtomp_icon:: @ 8DE2800
 gFile_graphics_pokemon_footprints_marshtomp_footprint:: @ 8DE2C00
 	.incbin "graphics/pokemon/footprints/marshtomp_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE2C00, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_swampert_still_front_pic:: @ 8DE2C20
@@ -8735,7 +8342,6 @@ gFile_graphics_pokemon_footprints_swampert_footprint:: @ 8DE39A0
 	.incbin "graphics/pokemon/footprints/swampert_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE39A0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_poochyena_still_front_pic:: @ 8DE39C0
 	.incbin "graphics/pokemon/front_pics/poochyena_still_front_pic.4bpp.lz"
@@ -8765,7 +8371,6 @@ gFile_graphics_pokemon_icons_poochyena_icon:: @ 8DE4004
 gFile_graphics_pokemon_footprints_poochyena_footprint:: @ 8DE4404
 	.incbin "graphics/pokemon/footprints/poochyena_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE4404, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_mightyena_still_front_pic:: @ 8DE4424
@@ -8797,7 +8402,6 @@ gFile_graphics_pokemon_footprints_mightyena_footprint:: @ 8DE5024
 	.incbin "graphics/pokemon/footprints/mightyena_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE5024, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_zigzagoon_still_front_pic:: @ 8DE5044
 	.incbin "graphics/pokemon/front_pics/zigzagoon_still_front_pic.4bpp.lz"
@@ -8827,7 +8431,6 @@ gFile_graphics_pokemon_icons_zigzagoon_icon:: @ 8DE57A4
 gFile_graphics_pokemon_footprints_zigzagoon_footprint:: @ 8DE5BA4
 	.incbin "graphics/pokemon/footprints/zigzagoon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE5BA4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_linoone_still_front_pic:: @ 8DE5BC4
@@ -8859,7 +8462,6 @@ gFile_graphics_pokemon_footprints_linoone_footprint:: @ 8DE6658
 	.incbin "graphics/pokemon/footprints/linoone_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE6658, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_wurmple_still_front_pic:: @ 8DE6678
 	.incbin "graphics/pokemon/front_pics/wurmple_still_front_pic.4bpp.lz"
@@ -8889,7 +8491,6 @@ gFile_graphics_pokemon_icons_wurmple_icon:: @ 8DE6B9C
 gFile_graphics_pokemon_footprints_wurmple_footprint:: @ 8DE6F9C
 	.incbin "graphics/pokemon/footprints/wurmple_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE6F9C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_silcoon_still_front_pic:: @ 8DE6FBC
@@ -8921,7 +8522,6 @@ gFile_graphics_pokemon_footprints_silcoon_footprint:: @ 8DE78A8
 	.incbin "graphics/pokemon/footprints/silcoon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE78A8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_beautifly_still_front_pic:: @ 8DE78C8
 	.incbin "graphics/pokemon/front_pics/beautifly_still_front_pic.4bpp.lz"
@@ -8951,7 +8551,6 @@ gFile_graphics_pokemon_icons_beautifly_icon:: @ 8DE8020
 gFile_graphics_pokemon_footprints_beautifly_footprint:: @ 8DE8420
 	.incbin "graphics/pokemon/footprints/beautifly_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE8420, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_cascoon_still_front_pic:: @ 8DE8440
@@ -8983,7 +8582,6 @@ gFile_graphics_pokemon_footprints_cascoon_footprint:: @ 8DE8D0C
 	.incbin "graphics/pokemon/footprints/cascoon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE8D0C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_dustox_still_front_pic:: @ 8DE8D2C
 	.incbin "graphics/pokemon/front_pics/dustox_still_front_pic.4bpp.lz"
@@ -9013,7 +8611,6 @@ gFile_graphics_pokemon_icons_dustox_icon:: @ 8DE933C
 gFile_graphics_pokemon_footprints_dustox_footprint:: @ 8DE973C
 	.incbin "graphics/pokemon/footprints/dustox_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDE973C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_lotad_still_front_pic:: @ 8DE975C
@@ -9045,7 +8642,6 @@ gFile_graphics_pokemon_footprints_lotad_footprint:: @ 8DEA0F4
 	.incbin "graphics/pokemon/footprints/lotad_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDEA0F4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_lombre_still_front_pic:: @ 8DEA114
 	.incbin "graphics/pokemon/front_pics/lombre_still_front_pic.4bpp.lz"
@@ -9075,7 +8671,6 @@ gFile_graphics_pokemon_icons_lombre_icon:: @ 8DEA778
 gFile_graphics_pokemon_footprints_lombre_footprint:: @ 8DEAB78
 	.incbin "graphics/pokemon/footprints/lombre_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDEAB78, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_ludicolo_still_front_pic:: @ 8DEAB98
@@ -9107,7 +8702,6 @@ gFile_graphics_pokemon_footprints_ludicolo_footprint:: @ 8DEB7C8
 	.incbin "graphics/pokemon/footprints/ludicolo_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDEB7C8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_seedot_still_front_pic:: @ 8DEB7E8
 	.incbin "graphics/pokemon/front_pics/seedot_still_front_pic.4bpp.lz"
@@ -9137,7 +8731,6 @@ gFile_graphics_pokemon_icons_seedot_icon:: @ 8DEBDAC
 gFile_graphics_pokemon_footprints_seedot_footprint:: @ 8DEC1AC
 	.incbin "graphics/pokemon/footprints/seedot_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDEC1AC, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_nuzleaf_still_front_pic:: @ 8DEC1CC
@@ -9169,7 +8762,6 @@ gFile_graphics_pokemon_footprints_nuzleaf_footprint:: @ 8DECBD0
 	.incbin "graphics/pokemon/footprints/nuzleaf_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDECBD0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_shiftry_still_front_pic:: @ 8DECBF0
 	.incbin "graphics/pokemon/front_pics/shiftry_still_front_pic.4bpp.lz"
@@ -9199,7 +8791,6 @@ gFile_graphics_pokemon_icons_shiftry_icon:: @ 8DED3C0
 gFile_graphics_pokemon_footprints_shiftry_footprint:: @ 8DED7C0
 	.incbin "graphics/pokemon/footprints/shiftry_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDED7C0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_nincada_still_front_pic:: @ 8DED7E0
@@ -9231,7 +8822,6 @@ gFile_graphics_pokemon_footprints_nincada_footprint:: @ 8DEE188
 	.incbin "graphics/pokemon/footprints/nincada_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDEE188, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_ninjask_still_front_pic:: @ 8DEE1A8
 	.incbin "graphics/pokemon/front_pics/ninjask_still_front_pic.4bpp.lz"
@@ -9261,7 +8851,6 @@ gFile_graphics_pokemon_icons_ninjask_icon:: @ 8DEE934
 gFile_graphics_pokemon_footprints_ninjask_footprint:: @ 8DEED34
 	.incbin "graphics/pokemon/footprints/ninjask_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDEED34, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_shedinja_still_front_pic:: @ 8DEED54
@@ -9293,7 +8882,6 @@ gFile_graphics_pokemon_footprints_shedinja_footprint:: @ 8DEF864
 	.incbin "graphics/pokemon/footprints/shedinja_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDEF864, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_taillow_still_front_pic:: @ 8DEF884
 	.incbin "graphics/pokemon/front_pics/taillow_still_front_pic.4bpp.lz"
@@ -9323,7 +8911,6 @@ gFile_graphics_pokemon_icons_taillow_icon:: @ 8DEFD4C
 gFile_graphics_pokemon_footprints_taillow_footprint:: @ 8DF014C
 	.incbin "graphics/pokemon/footprints/taillow_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF014C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_swellow_still_front_pic:: @ 8DF016C
@@ -9355,7 +8942,6 @@ gFile_graphics_pokemon_footprints_swellow_footprint:: @ 8DF0CB8
 	.incbin "graphics/pokemon/footprints/swellow_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF0CB8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_shroomish_still_front_pic:: @ 8DF0CD8
 	.incbin "graphics/pokemon/front_pics/shroomish_still_front_pic.4bpp.lz"
@@ -9385,7 +8971,6 @@ gFile_graphics_pokemon_icons_shroomish_icon:: @ 8DF1270
 gFile_graphics_pokemon_footprints_shroomish_footprint:: @ 8DF1670
 	.incbin "graphics/pokemon/footprints/shroomish_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF1670, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_breloom_still_front_pic:: @ 8DF1690
@@ -9417,7 +9002,6 @@ gFile_graphics_pokemon_footprints_breloom_footprint:: @ 8DF22A8
 	.incbin "graphics/pokemon/footprints/breloom_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF22A8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_spinda_still_front_pic:: @ 8DF22C8
 	.incbin "graphics/pokemon/front_pics/spinda_still_front_pic.4bpp.lz"
@@ -9447,7 +9031,6 @@ gFile_graphics_pokemon_icons_spinda_icon:: @ 8DF2954
 gFile_graphics_pokemon_footprints_spinda_footprint:: @ 8DF2D54
 	.incbin "graphics/pokemon/footprints/spinda_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF2D54, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_wingull_still_front_pic:: @ 8DF2D74
@@ -9479,7 +9062,6 @@ gFile_graphics_pokemon_footprints_wingull_footprint:: @ 8DF3750
 	.incbin "graphics/pokemon/footprints/wingull_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF3750, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_pelipper_still_front_pic:: @ 8DF3770
 	.incbin "graphics/pokemon/front_pics/pelipper_still_front_pic.4bpp.lz"
@@ -9509,7 +9091,6 @@ gFile_graphics_pokemon_icons_pelipper_icon:: @ 8DF3ED8
 gFile_graphics_pokemon_footprints_pelipper_footprint:: @ 8DF42D8
 	.incbin "graphics/pokemon/footprints/pelipper_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF42D8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_surskit_still_front_pic:: @ 8DF42F8
@@ -9541,7 +9122,6 @@ gFile_graphics_pokemon_footprints_surskit_footprint:: @ 8DF4B8C
 	.incbin "graphics/pokemon/footprints/surskit_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF4B8C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_masquerain_still_front_pic:: @ 8DF4BAC
 	.incbin "graphics/pokemon/front_pics/masquerain_still_front_pic.4bpp.lz"
@@ -9571,7 +9151,6 @@ gFile_graphics_pokemon_icons_masquerain_icon:: @ 8DF52F0
 gFile_graphics_pokemon_footprints_masquerain_footprint:: @ 8DF56F0
 	.incbin "graphics/pokemon/footprints/masquerain_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF56F0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_wailmer_still_front_pic:: @ 8DF5710
@@ -9603,7 +9182,6 @@ gFile_graphics_pokemon_footprints_wailmer_footprint:: @ 8DF6024
 	.incbin "graphics/pokemon/footprints/wailmer_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF6024, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_wailord_still_front_pic:: @ 8DF6044
 	.incbin "graphics/pokemon/front_pics/wailord_still_front_pic.4bpp.lz"
@@ -9633,7 +9211,6 @@ gFile_graphics_pokemon_icons_wailord_icon:: @ 8DF6670
 gFile_graphics_pokemon_footprints_wailord_footprint:: @ 8DF6A70
 	.incbin "graphics/pokemon/footprints/wailord_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF6A70, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_skitty_still_front_pic:: @ 8DF6A90
@@ -9665,7 +9242,6 @@ gFile_graphics_pokemon_footprints_skitty_footprint:: @ 8DF7528
 	.incbin "graphics/pokemon/footprints/skitty_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF7528, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_delcatty_still_front_pic:: @ 8DF7548
 	.incbin "graphics/pokemon/front_pics/delcatty_still_front_pic.4bpp.lz"
@@ -9695,7 +9271,6 @@ gFile_graphics_pokemon_icons_delcatty_icon:: @ 8DF7CC0
 gFile_graphics_pokemon_footprints_delcatty_footprint:: @ 8DF80C0
 	.incbin "graphics/pokemon/footprints/delcatty_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF80C0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_kecleon_still_front_pic:: @ 8DF80E0
@@ -9727,7 +9302,6 @@ gFile_graphics_pokemon_footprints_kecleon_footprint:: @ 8DF8C88
 	.incbin "graphics/pokemon/footprints/kecleon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF8C88, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_baltoy_still_front_pic:: @ 8DF8CA8
 	.incbin "graphics/pokemon/front_pics/baltoy_still_front_pic.4bpp.lz"
@@ -9757,7 +9331,6 @@ gFile_graphics_pokemon_icons_baltoy_icon:: @ 8DF91B4
 gFile_graphics_pokemon_footprints_baltoy_footprint:: @ 8DF95B4
 	.incbin "graphics/pokemon/footprints/baltoy_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDF95B4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_claydol_still_front_pic:: @ 8DF95D4
@@ -9789,7 +9362,6 @@ gFile_graphics_pokemon_footprints_claydol_footprint:: @ 8DFA1B0
 	.incbin "graphics/pokemon/footprints/claydol_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDFA1B0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_nosepass_still_front_pic:: @ 8DFA1D0
 	.incbin "graphics/pokemon/front_pics/nosepass_still_front_pic.4bpp.lz"
@@ -9819,7 +9391,6 @@ gFile_graphics_pokemon_icons_nosepass_icon:: @ 8DFA78C
 gFile_graphics_pokemon_footprints_nosepass_footprint:: @ 8DFAB8C
 	.incbin "graphics/pokemon/footprints/nosepass_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDFAB8C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_torkoal_still_front_pic:: @ 8DFABAC
@@ -9851,7 +9422,6 @@ gFile_graphics_pokemon_footprints_torkoal_footprint:: @ 8DFB770
 	.incbin "graphics/pokemon/footprints/torkoal_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDFB770, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_sableye_still_front_pic:: @ 8DFB790
 	.incbin "graphics/pokemon/front_pics/sableye_still_front_pic.4bpp.lz"
@@ -9881,7 +9451,6 @@ gFile_graphics_pokemon_icons_sableye_icon:: @ 8DFBDDC
 gFile_graphics_pokemon_footprints_sableye_footprint:: @ 8DFC1DC
 	.incbin "graphics/pokemon/footprints/sableye_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDFC1DC, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_barboach_still_front_pic:: @ 8DFC1FC
@@ -9913,7 +9482,6 @@ gFile_graphics_pokemon_footprints_barboach_footprint:: @ 8DFCB6C
 	.incbin "graphics/pokemon/footprints/barboach_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDFCB6C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_whiscash_still_front_pic:: @ 8DFCB8C
 	.incbin "graphics/pokemon/front_pics/whiscash_still_front_pic.4bpp.lz"
@@ -9943,7 +9511,6 @@ gFile_graphics_pokemon_icons_whiscash_icon:: @ 8DFD2A0
 gFile_graphics_pokemon_footprints_whiscash_footprint:: @ 8DFD6A0
 	.incbin "graphics/pokemon/footprints/whiscash_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDFD6A0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_luvdisc_still_front_pic:: @ 8DFD6C0
@@ -9975,7 +9542,6 @@ gFile_graphics_pokemon_footprints_luvdisc_footprint:: @ 8DFDE9C
 	.incbin "graphics/pokemon/footprints/luvdisc_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDFDE9C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_corphish_still_front_pic:: @ 8DFDEBC
 	.incbin "graphics/pokemon/front_pics/corphish_still_front_pic.4bpp.lz"
@@ -10005,7 +9571,6 @@ gFile_graphics_pokemon_icons_corphish_icon:: @ 8DFE584
 gFile_graphics_pokemon_footprints_corphish_footprint:: @ 8DFE984
 	.incbin "graphics/pokemon/footprints/corphish_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDFE984, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_crawdaunt_still_front_pic:: @ 8DFE9A4
@@ -10037,7 +9602,6 @@ gFile_graphics_pokemon_footprints_crawdaunt_footprint:: @ 8DFF668
 	.incbin "graphics/pokemon/footprints/crawdaunt_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xDFF668, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_feebas_still_front_pic:: @ 8DFF688
 	.incbin "graphics/pokemon/front_pics/feebas_still_front_pic.4bpp.lz"
@@ -10067,7 +9631,6 @@ gFile_graphics_pokemon_icons_feebas_icon:: @ 8DFFC9C
 gFile_graphics_pokemon_footprints_feebas_footprint:: @ 8E0009C
 	.incbin "graphics/pokemon/footprints/feebas_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0009C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_milotic_still_front_pic:: @ 8E000BC
@@ -10099,7 +9662,6 @@ gFile_graphics_pokemon_footprints_milotic_footprint:: @ 8E00C90
 	.incbin "graphics/pokemon/footprints/milotic_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE00C90, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_carvanha_still_front_pic:: @ 8E00CB0
 	.incbin "graphics/pokemon/front_pics/carvanha_still_front_pic.4bpp.lz"
@@ -10129,7 +9691,6 @@ gFile_graphics_pokemon_icons_carvanha_icon:: @ 8E0133C
 gFile_graphics_pokemon_footprints_carvanha_footprint:: @ 8E0173C
 	.incbin "graphics/pokemon/footprints/carvanha_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0173C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_sharpedo_still_front_pic:: @ 8E0175C
@@ -10161,7 +9722,6 @@ gFile_graphics_pokemon_footprints_sharpedo_footprint:: @ 8E02294
 	.incbin "graphics/pokemon/footprints/sharpedo_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE02294, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_trapinch_still_front_pic:: @ 8E022B4
 	.incbin "graphics/pokemon/front_pics/trapinch_still_front_pic.4bpp.lz"
@@ -10191,7 +9751,6 @@ gFile_graphics_pokemon_icons_trapinch_icon:: @ 8E02740
 gFile_graphics_pokemon_footprints_trapinch_footprint:: @ 8E02B40
 	.incbin "graphics/pokemon/footprints/trapinch_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE02B40, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_vibrava_still_front_pic:: @ 8E02B60
@@ -10223,7 +9782,6 @@ gFile_graphics_pokemon_footprints_vibrava_footprint:: @ 8E03598
 	.incbin "graphics/pokemon/footprints/vibrava_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE03598, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_flygon_still_front_pic:: @ 8E035B8
 	.incbin "graphics/pokemon/front_pics/flygon_still_front_pic.4bpp.lz"
@@ -10253,7 +9811,6 @@ gFile_graphics_pokemon_icons_flygon_icon:: @ 8E03F34
 gFile_graphics_pokemon_footprints_flygon_footprint:: @ 8E04334
 	.incbin "graphics/pokemon/footprints/flygon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE04334, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_makuhita_still_front_pic:: @ 8E04354
@@ -10285,7 +9842,6 @@ gFile_graphics_pokemon_footprints_makuhita_footprint:: @ 8E04DA8
 	.incbin "graphics/pokemon/footprints/makuhita_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE04DA8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_hariyama_still_front_pic:: @ 8E04DC8
 	.incbin "graphics/pokemon/front_pics/hariyama_still_front_pic.4bpp.lz"
@@ -10315,7 +9871,6 @@ gFile_graphics_pokemon_icons_hariyama_icon:: @ 8E056A8
 gFile_graphics_pokemon_footprints_hariyama_footprint:: @ 8E05AA8
 	.incbin "graphics/pokemon/footprints/hariyama_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE05AA8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_electrike_still_front_pic:: @ 8E05AC8
@@ -10347,7 +9902,6 @@ gFile_graphics_pokemon_footprints_electrike_footprint:: @ 8E06434
 	.incbin "graphics/pokemon/footprints/electrike_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE06434, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_manectric_still_front_pic:: @ 8E06454
 	.incbin "graphics/pokemon/front_pics/manectric_still_front_pic.4bpp.lz"
@@ -10377,7 +9931,6 @@ gFile_graphics_pokemon_icons_manectric_icon:: @ 8E06A00
 gFile_graphics_pokemon_footprints_manectric_footprint:: @ 8E06E00
 	.incbin "graphics/pokemon/footprints/manectric_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE06E00, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_numel_still_front_pic:: @ 8E06E20
@@ -10409,7 +9962,6 @@ gFile_graphics_pokemon_footprints_numel_footprint:: @ 8E077FC
 	.incbin "graphics/pokemon/footprints/numel_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE077FC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_camerupt_still_front_pic:: @ 8E0781C
 	.incbin "graphics/pokemon/front_pics/camerupt_still_front_pic.4bpp.lz"
@@ -10439,7 +9991,6 @@ gFile_graphics_pokemon_icons_camerupt_icon:: @ 8E07F48
 gFile_graphics_pokemon_footprints_camerupt_footprint:: @ 8E08348
 	.incbin "graphics/pokemon/footprints/camerupt_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE08348, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_spheal_still_front_pic:: @ 8E08368
@@ -10471,7 +10022,6 @@ gFile_graphics_pokemon_footprints_spheal_footprint:: @ 8E08C28
 	.incbin "graphics/pokemon/footprints/spheal_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE08C28, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_sealeo_still_front_pic:: @ 8E08C48
 	.incbin "graphics/pokemon/front_pics/sealeo_still_front_pic.4bpp.lz"
@@ -10501,7 +10051,6 @@ gFile_graphics_pokemon_icons_sealeo_icon:: @ 8E09294
 gFile_graphics_pokemon_footprints_sealeo_footprint:: @ 8E09694
 	.incbin "graphics/pokemon/footprints/sealeo_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE09694, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_walrein_still_front_pic:: @ 8E096B4
@@ -10533,7 +10082,6 @@ gFile_graphics_pokemon_footprints_walrein_footprint:: @ 8E0A32C
 	.incbin "graphics/pokemon/footprints/walrein_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0A32C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_cacnea_still_front_pic:: @ 8E0A34C
 	.incbin "graphics/pokemon/front_pics/cacnea_still_front_pic.4bpp.lz"
@@ -10563,7 +10111,6 @@ gFile_graphics_pokemon_icons_cacnea_icon:: @ 8E0AA0C
 gFile_graphics_pokemon_footprints_cacnea_footprint:: @ 8E0AE0C
 	.incbin "graphics/pokemon/footprints/cacnea_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0AE0C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_cacturne_still_front_pic:: @ 8E0AE2C
@@ -10595,7 +10142,6 @@ gFile_graphics_pokemon_footprints_cacturne_footprint:: @ 8E0B9B4
 	.incbin "graphics/pokemon/footprints/cacturne_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0B9B4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_snorunt_still_front_pic:: @ 8E0B9D4
 	.incbin "graphics/pokemon/front_pics/snorunt_still_front_pic.4bpp.lz"
@@ -10625,7 +10171,6 @@ gFile_graphics_pokemon_icons_snorunt_icon:: @ 8E0BFCC
 gFile_graphics_pokemon_footprints_snorunt_footprint:: @ 8E0C3CC
 	.incbin "graphics/pokemon/footprints/snorunt_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0C3CC, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_glalie_still_front_pic:: @ 8E0C3EC
@@ -10657,7 +10202,6 @@ gFile_graphics_pokemon_footprints_glalie_footprint:: @ 8E0CFB4
 	.incbin "graphics/pokemon/footprints/glalie_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0CFB4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_lunatone_still_front_pic:: @ 8E0CFD4
 	.incbin "graphics/pokemon/front_pics/lunatone_still_front_pic.4bpp.lz"
@@ -10687,7 +10231,6 @@ gFile_graphics_pokemon_icons_lunatone_icon:: @ 8E0D6A4
 gFile_graphics_pokemon_footprints_lunatone_footprint:: @ 8E0DAA4
 	.incbin "graphics/pokemon/footprints/lunatone_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0DAA4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_solrock_still_front_pic:: @ 8E0DAC4
@@ -10719,7 +10262,6 @@ gFile_graphics_pokemon_footprints_solrock_footprint:: @ 8E0E74C
 	.incbin "graphics/pokemon/footprints/solrock_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0E74C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_azurill_still_front_pic:: @ 8E0E76C
 	.incbin "graphics/pokemon/front_pics/azurill_still_front_pic.4bpp.lz"
@@ -10749,7 +10291,6 @@ gFile_graphics_pokemon_icons_azurill_icon:: @ 8E0ED9C
 gFile_graphics_pokemon_footprints_azurill_footprint:: @ 8E0F19C
 	.incbin "graphics/pokemon/footprints/azurill_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0F19C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_spoink_still_front_pic:: @ 8E0F1BC
@@ -10781,7 +10322,6 @@ gFile_graphics_pokemon_footprints_spoink_footprint:: @ 8E0FAB8
 	.incbin "graphics/pokemon/footprints/spoink_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE0FAB8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_grumpig_still_front_pic:: @ 8E0FAD8
 	.incbin "graphics/pokemon/front_pics/grumpig_still_front_pic.4bpp.lz"
@@ -10811,7 +10351,6 @@ gFile_graphics_pokemon_icons_grumpig_icon:: @ 8E10244
 gFile_graphics_pokemon_footprints_grumpig_footprint:: @ 8E10644
 	.incbin "graphics/pokemon/footprints/grumpig_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE10644, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_plusle_still_front_pic:: @ 8E10664
@@ -10843,7 +10382,6 @@ gFile_graphics_pokemon_footprints_plusle_footprint:: @ 8E10FF8
 	.incbin "graphics/pokemon/footprints/plusle_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE10FF8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_minun_still_front_pic:: @ 8E11018
 	.incbin "graphics/pokemon/front_pics/minun_still_front_pic.4bpp.lz"
@@ -10873,7 +10411,6 @@ gFile_graphics_pokemon_icons_minun_icon:: @ 8E11598
 gFile_graphics_pokemon_footprints_minun_footprint:: @ 8E11998
 	.incbin "graphics/pokemon/footprints/minun_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE11998, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_mawile_still_front_pic:: @ 8E119B8
@@ -10905,7 +10442,6 @@ gFile_graphics_pokemon_footprints_mawile_footprint:: @ 8E125C4
 	.incbin "graphics/pokemon/footprints/mawile_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE125C4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_meditite_still_front_pic:: @ 8E125E4
 	.incbin "graphics/pokemon/front_pics/meditite_still_front_pic.4bpp.lz"
@@ -10935,7 +10471,6 @@ gFile_graphics_pokemon_icons_meditite_icon:: @ 8E12BB0
 gFile_graphics_pokemon_footprints_meditite_footprint:: @ 8E12FB0
 	.incbin "graphics/pokemon/footprints/meditite_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE12FB0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_medicham_still_front_pic:: @ 8E12FD0
@@ -10967,7 +10502,6 @@ gFile_graphics_pokemon_footprints_medicham_footprint:: @ 8E13A88
 	.incbin "graphics/pokemon/footprints/medicham_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE13A88, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_swablu_still_front_pic:: @ 8E13AA8
 	.incbin "graphics/pokemon/front_pics/swablu_still_front_pic.4bpp.lz"
@@ -10997,7 +10531,6 @@ gFile_graphics_pokemon_icons_swablu_icon:: @ 8E14188
 gFile_graphics_pokemon_footprints_swablu_footprint:: @ 8E14588
 	.incbin "graphics/pokemon/footprints/swablu_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE14588, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_altaria_still_front_pic:: @ 8E145A8
@@ -11029,7 +10562,6 @@ gFile_graphics_pokemon_footprints_altaria_footprint:: @ 8E1514C
 	.incbin "graphics/pokemon/footprints/altaria_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE1514C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_wynaut_still_front_pic:: @ 8E1516C
 	.incbin "graphics/pokemon/front_pics/wynaut_still_front_pic.4bpp.lz"
@@ -11059,7 +10591,6 @@ gFile_graphics_pokemon_icons_wynaut_icon:: @ 8E156E4
 gFile_graphics_pokemon_footprints_wynaut_footprint:: @ 8E15AE4
 	.incbin "graphics/pokemon/footprints/wynaut_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE15AE4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_duskull_still_front_pic:: @ 8E15B04
@@ -11091,7 +10622,6 @@ gFile_graphics_pokemon_footprints_duskull_footprint:: @ 8E164F4
 	.incbin "graphics/pokemon/footprints/duskull_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE164F4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_dusclops_still_front_pic:: @ 8E16514
 	.incbin "graphics/pokemon/front_pics/dusclops_still_front_pic.4bpp.lz"
@@ -11121,7 +10651,6 @@ gFile_graphics_pokemon_icons_dusclops_icon:: @ 8E16BF0
 gFile_graphics_pokemon_footprints_dusclops_footprint:: @ 8E16FF0
 	.incbin "graphics/pokemon/footprints/dusclops_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE16FF0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_roselia_still_front_pic:: @ 8E17010
@@ -11153,7 +10682,6 @@ gFile_graphics_pokemon_footprints_roselia_footprint:: @ 8E17B94
 	.incbin "graphics/pokemon/footprints/roselia_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE17B94, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_slakoth_still_front_pic:: @ 8E17BB4
 	.incbin "graphics/pokemon/front_pics/slakoth_still_front_pic.4bpp.lz"
@@ -11183,7 +10711,6 @@ gFile_graphics_pokemon_icons_slakoth_icon:: @ 8E181D4
 gFile_graphics_pokemon_footprints_slakoth_footprint:: @ 8E185D4
 	.incbin "graphics/pokemon/footprints/slakoth_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE185D4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_vigoroth_still_front_pic:: @ 8E185F4
@@ -11215,7 +10742,6 @@ gFile_graphics_pokemon_footprints_vigoroth_footprint:: @ 8E19108
 	.incbin "graphics/pokemon/footprints/vigoroth_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE19108, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_slaking_still_front_pic:: @ 8E19128
 	.incbin "graphics/pokemon/front_pics/slaking_still_front_pic.4bpp.lz"
@@ -11245,7 +10771,6 @@ gFile_graphics_pokemon_icons_slaking_icon:: @ 8E19A10
 gFile_graphics_pokemon_footprints_slaking_footprint:: @ 8E19E10
 	.incbin "graphics/pokemon/footprints/slaking_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE19E10, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_gulpin_still_front_pic:: @ 8E19E30
@@ -11277,7 +10802,6 @@ gFile_graphics_pokemon_footprints_gulpin_footprint:: @ 8E1A71C
 	.incbin "graphics/pokemon/footprints/gulpin_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE1A71C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_swalot_still_front_pic:: @ 8E1A73C
 	.incbin "graphics/pokemon/front_pics/swalot_still_front_pic.4bpp.lz"
@@ -11307,7 +10831,6 @@ gFile_graphics_pokemon_icons_swalot_icon:: @ 8E1AE18
 gFile_graphics_pokemon_footprints_swalot_footprint:: @ 8E1B218
 	.incbin "graphics/pokemon/footprints/swalot_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE1B218, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_tropius_still_front_pic:: @ 8E1B238
@@ -11339,7 +10862,6 @@ gFile_graphics_pokemon_footprints_tropius_footprint:: @ 8E1BF24
 	.incbin "graphics/pokemon/footprints/tropius_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE1BF24, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_whismur_still_front_pic:: @ 8E1BF44
 	.incbin "graphics/pokemon/front_pics/whismur_still_front_pic.4bpp.lz"
@@ -11369,7 +10891,6 @@ gFile_graphics_pokemon_icons_whismur_icon:: @ 8E1C498
 gFile_graphics_pokemon_footprints_whismur_footprint:: @ 8E1C898
 	.incbin "graphics/pokemon/footprints/whismur_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE1C898, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_loudred_still_front_pic:: @ 8E1C8B8
@@ -11401,7 +10922,6 @@ gFile_graphics_pokemon_footprints_loudred_footprint:: @ 8E1D4F0
 	.incbin "graphics/pokemon/footprints/loudred_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE1D4F0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_exploud_still_front_pic:: @ 8E1D510
 	.incbin "graphics/pokemon/front_pics/exploud_still_front_pic.4bpp.lz"
@@ -11431,7 +10951,6 @@ gFile_graphics_pokemon_icons_exploud_icon:: @ 8E1DED4
 gFile_graphics_pokemon_footprints_exploud_footprint:: @ 8E1E2D4
 	.incbin "graphics/pokemon/footprints/exploud_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE1E2D4, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_clamperl_still_front_pic:: @ 8E1E2F4
@@ -11463,7 +10982,6 @@ gFile_graphics_pokemon_footprints_clamperl_footprint:: @ 8E1ECB0
 	.incbin "graphics/pokemon/footprints/clamperl_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE1ECB0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_huntail_still_front_pic:: @ 8E1ECD0
 	.incbin "graphics/pokemon/front_pics/huntail_still_front_pic.4bpp.lz"
@@ -11493,7 +11011,6 @@ gFile_graphics_pokemon_icons_huntail_icon:: @ 8E1F440
 gFile_graphics_pokemon_footprints_huntail_footprint:: @ 8E1F840
 	.incbin "graphics/pokemon/footprints/huntail_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE1F840, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_gorebyss_still_front_pic:: @ 8E1F860
@@ -11525,7 +11042,6 @@ gFile_graphics_pokemon_footprints_gorebyss_footprint:: @ 8E202A8
 	.incbin "graphics/pokemon/footprints/gorebyss_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE202A8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_absol_still_front_pic:: @ 8E202C8
 	.incbin "graphics/pokemon/front_pics/absol_still_front_pic.4bpp.lz"
@@ -11555,7 +11071,6 @@ gFile_graphics_pokemon_icons_absol_icon:: @ 8E20AA8
 gFile_graphics_pokemon_footprints_absol_footprint:: @ 8E20EA8
 	.incbin "graphics/pokemon/footprints/absol_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE20EA8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_shuppet_still_front_pic:: @ 8E20EC8
@@ -11587,7 +11102,6 @@ gFile_graphics_pokemon_footprints_shuppet_footprint:: @ 8E217E8
 	.incbin "graphics/pokemon/footprints/shuppet_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE217E8, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_banette_still_front_pic:: @ 8E21808
 	.incbin "graphics/pokemon/front_pics/banette_still_front_pic.4bpp.lz"
@@ -11617,7 +11131,6 @@ gFile_graphics_pokemon_icons_banette_icon:: @ 8E21D88
 gFile_graphics_pokemon_footprints_banette_footprint:: @ 8E22188
 	.incbin "graphics/pokemon/footprints/banette_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE22188, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_seviper_still_front_pic:: @ 8E221A8
@@ -11649,7 +11162,6 @@ gFile_graphics_pokemon_footprints_seviper_footprint:: @ 8E22EA4
 	.incbin "graphics/pokemon/footprints/seviper_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE22EA4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_zangoose_still_front_pic:: @ 8E22EC4
 	.incbin "graphics/pokemon/front_pics/zangoose_still_front_pic.4bpp.lz"
@@ -11679,7 +11191,6 @@ gFile_graphics_pokemon_icons_zangoose_icon:: @ 8E23654
 gFile_graphics_pokemon_footprints_zangoose_footprint:: @ 8E23A54
 	.incbin "graphics/pokemon/footprints/zangoose_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE23A54, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_relicanth_still_front_pic:: @ 8E23A74
@@ -11711,7 +11222,6 @@ gFile_graphics_pokemon_footprints_relicanth_footprint:: @ 8E245B0
 	.incbin "graphics/pokemon/footprints/relicanth_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE245B0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_aron_still_front_pic:: @ 8E245D0
 	.incbin "graphics/pokemon/front_pics/aron_still_front_pic.4bpp.lz"
@@ -11741,7 +11251,6 @@ gFile_graphics_pokemon_icons_aron_icon:: @ 8E24A30
 gFile_graphics_pokemon_footprints_aron_footprint:: @ 8E24E30
 	.incbin "graphics/pokemon/footprints/aron_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE24E30, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_lairon_still_front_pic:: @ 8E24E50
@@ -11773,7 +11282,6 @@ gFile_graphics_pokemon_footprints_lairon_footprint:: @ 8E25958
 	.incbin "graphics/pokemon/footprints/lairon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE25958, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_aggron_still_front_pic:: @ 8E25978
 	.incbin "graphics/pokemon/front_pics/aggron_still_front_pic.4bpp.lz"
@@ -11803,7 +11311,6 @@ gFile_graphics_pokemon_icons_aggron_icon:: @ 8E2636C
 gFile_graphics_pokemon_footprints_aggron_footprint:: @ 8E2676C
 	.incbin "graphics/pokemon/footprints/aggron_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2676C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_castform_still_front_pic:: @ 8E2678C
@@ -11835,7 +11342,6 @@ gFile_graphics_pokemon_footprints_castform_footprint:: @ 8E280CC
 	.incbin "graphics/pokemon/footprints/castform_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE280CC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_volbeat_still_front_pic:: @ 8E280EC
 	.incbin "graphics/pokemon/front_pics/volbeat_still_front_pic.4bpp.lz"
@@ -11865,7 +11371,6 @@ gFile_graphics_pokemon_icons_volbeat_icon:: @ 8E2882C
 gFile_graphics_pokemon_footprints_volbeat_footprint:: @ 8E28C2C
 	.incbin "graphics/pokemon/footprints/volbeat_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE28C2C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_illumise_still_front_pic:: @ 8E28C4C
@@ -11897,7 +11402,6 @@ gFile_graphics_pokemon_footprints_illumise_footprint:: @ 8E2972C
 	.incbin "graphics/pokemon/footprints/illumise_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2972C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_lileep_still_front_pic:: @ 8E2974C
 	.incbin "graphics/pokemon/front_pics/lileep_still_front_pic.4bpp.lz"
@@ -11927,7 +11431,6 @@ gFile_graphics_pokemon_icons_lileep_icon:: @ 8E29E24
 gFile_graphics_pokemon_footprints_lileep_footprint:: @ 8E2A224
 	.incbin "graphics/pokemon/footprints/lileep_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2A224, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_cradily_still_front_pic:: @ 8E2A244
@@ -11959,7 +11462,6 @@ gFile_graphics_pokemon_footprints_cradily_footprint:: @ 8E2AEAC
 	.incbin "graphics/pokemon/footprints/cradily_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2AEAC, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_anorith_still_front_pic:: @ 8E2AECC
 	.incbin "graphics/pokemon/front_pics/anorith_still_front_pic.4bpp.lz"
@@ -11989,7 +11491,6 @@ gFile_graphics_pokemon_icons_anorith_icon:: @ 8E2B488
 gFile_graphics_pokemon_footprints_anorith_footprint:: @ 8E2B888
 	.incbin "graphics/pokemon/footprints/anorith_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2B888, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_armaldo_still_front_pic:: @ 8E2B8A8
@@ -12021,7 +11522,6 @@ gFile_graphics_pokemon_footprints_armaldo_footprint:: @ 8E2C6B0
 	.incbin "graphics/pokemon/footprints/armaldo_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2C6B0, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_ralts_still_front_pic:: @ 8E2C6D0
 	.incbin "graphics/pokemon/front_pics/ralts_still_front_pic.4bpp.lz"
@@ -12051,7 +11551,6 @@ gFile_graphics_pokemon_icons_ralts_icon:: @ 8E2CB8C
 gFile_graphics_pokemon_footprints_ralts_footprint:: @ 8E2CF8C
 	.incbin "graphics/pokemon/footprints/ralts_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2CF8C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_kirlia_still_front_pic:: @ 8E2CFAC
@@ -12083,7 +11582,6 @@ gFile_graphics_pokemon_footprints_kirlia_footprint:: @ 8E2DA6C
 	.incbin "graphics/pokemon/footprints/kirlia_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2DA6C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_gardevoir_still_front_pic:: @ 8E2DA8C
 	.incbin "graphics/pokemon/front_pics/gardevoir_still_front_pic.4bpp.lz"
@@ -12113,7 +11611,6 @@ gFile_graphics_pokemon_icons_gardevoir_icon:: @ 8E2E18C
 gFile_graphics_pokemon_footprints_gardevoir_footprint:: @ 8E2E58C
 	.incbin "graphics/pokemon/footprints/gardevoir_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2E58C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_bagon_still_front_pic:: @ 8E2E5AC
@@ -12145,7 +11642,6 @@ gFile_graphics_pokemon_footprints_bagon_footprint:: @ 8E2EF5C
 	.incbin "graphics/pokemon/footprints/bagon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2EF5C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_shelgon_still_front_pic:: @ 8E2EF7C
 	.incbin "graphics/pokemon/front_pics/shelgon_still_front_pic.4bpp.lz"
@@ -12175,7 +11671,6 @@ gFile_graphics_pokemon_icons_shelgon_icon:: @ 8E2F5B8
 gFile_graphics_pokemon_footprints_shelgon_footprint:: @ 8E2F9B8
 	.incbin "graphics/pokemon/footprints/shelgon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE2F9B8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_salamence_still_front_pic:: @ 8E2F9D8
@@ -12207,7 +11702,6 @@ gFile_graphics_pokemon_footprints_salamence_footprint:: @ 8E30570
 	.incbin "graphics/pokemon/footprints/salamence_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE30570, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_beldum_still_front_pic:: @ 8E30590
 	.incbin "graphics/pokemon/front_pics/beldum_still_front_pic.4bpp.lz"
@@ -12237,7 +11731,6 @@ gFile_graphics_pokemon_icons_beldum_icon:: @ 8E30B40
 gFile_graphics_pokemon_footprints_beldum_footprint:: @ 8E30F40
 	.incbin "graphics/pokemon/footprints/beldum_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE30F40, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_metang_still_front_pic:: @ 8E30F60
@@ -12269,7 +11762,6 @@ gFile_graphics_pokemon_footprints_metang_footprint:: @ 8E31B30
 	.incbin "graphics/pokemon/footprints/metang_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE31B30, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_metagross_still_front_pic:: @ 8E31B50
 	.incbin "graphics/pokemon/front_pics/metagross_still_front_pic.4bpp.lz"
@@ -12299,7 +11791,6 @@ gFile_graphics_pokemon_icons_metagross_icon:: @ 8E322D0
 gFile_graphics_pokemon_footprints_metagross_footprint:: @ 8E326D0
 	.incbin "graphics/pokemon/footprints/metagross_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE326D0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_regirock_still_front_pic:: @ 8E326F0
@@ -12331,7 +11822,6 @@ gFile_graphics_pokemon_footprints_regirock_footprint:: @ 8E33448
 	.incbin "graphics/pokemon/footprints/regirock_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE33448, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_regice_still_front_pic:: @ 8E33468
 	.incbin "graphics/pokemon/front_pics/regice_still_front_pic.4bpp.lz"
@@ -12361,7 +11851,6 @@ gFile_graphics_pokemon_icons_regice_icon:: @ 8E33BF0
 gFile_graphics_pokemon_footprints_regice_footprint:: @ 8E33FF0
 	.incbin "graphics/pokemon/footprints/regice_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE33FF0, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_registeel_still_front_pic:: @ 8E34010
@@ -12393,7 +11882,6 @@ gFile_graphics_pokemon_footprints_registeel_footprint:: @ 8E34C20
 	.incbin "graphics/pokemon/footprints/registeel_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE34C20, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_kyogre_still_front_pic:: @ 8E34C40
 	.incbin "graphics/pokemon/front_pics/kyogre_still_front_pic.4bpp.lz"
@@ -12423,7 +11911,6 @@ gFile_graphics_pokemon_icons_kyogre_icon:: @ 8E35378
 gFile_graphics_pokemon_footprints_kyogre_footprint:: @ 8E35778
 	.incbin "graphics/pokemon/footprints/kyogre_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE35778, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_groudon_still_front_pic:: @ 8E35798
@@ -12455,7 +11942,6 @@ gFile_graphics_pokemon_footprints_groudon_footprint:: @ 8E365E4
 	.incbin "graphics/pokemon/footprints/groudon_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE365E4, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_rayquaza_still_front_pic:: @ 8E36604
 	.incbin "graphics/pokemon/front_pics/rayquaza_still_front_pic.4bpp.lz"
@@ -12485,7 +11971,6 @@ gFile_graphics_pokemon_icons_rayquaza_icon:: @ 8E36E9C
 gFile_graphics_pokemon_footprints_rayquaza_footprint:: @ 8E3729C
 	.incbin "graphics/pokemon/footprints/rayquaza_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE3729C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_latias_still_front_pic:: @ 8E372BC
@@ -12517,7 +12002,6 @@ gFile_graphics_pokemon_footprints_latias_footprint:: @ 8E37E2C
 	.incbin "graphics/pokemon/footprints/latias_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE37E2C, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_latios_still_front_pic:: @ 8E37E4C
 	.incbin "graphics/pokemon/front_pics/latios_still_front_pic.4bpp.lz"
@@ -12548,7 +12032,6 @@ gFile_graphics_pokemon_footprints_latios_footprint:: @ 8E38A50
 	.incbin "graphics/pokemon/footprints/latios_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE38A50, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_jirachi_still_front_pic:: @ 8E38A70
 	.incbin "graphics/pokemon/front_pics/jirachi_still_front_pic.4bpp.lz"
@@ -12578,7 +12061,6 @@ gFile_graphics_pokemon_icons_jirachi_icon:: @ 8E3916C
 gFile_graphics_pokemon_footprints_jirachi_footprint:: @ 8E3956C
 	.incbin "graphics/pokemon/footprints/jirachi_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE3956C, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_deoxys_still_front_pic:: @ 8E3958C
@@ -12615,7 +12097,6 @@ gFile_graphics_pokemon_footprints_deoxys_footprint:: @ 8E3AB88
 	.incbin "graphics/pokemon/footprints/deoxys_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE3AB88, 0x0020
 
-
 	.align 2
 gFile_graphics_pokemon_front_pics_chimecho_still_front_pic:: @ 8E3ABA8
 	.incbin "graphics/pokemon/front_pics/chimecho_still_front_pic.4bpp.lz"
@@ -12645,7 +12126,6 @@ gFile_graphics_pokemon_icons_chimecho_icon:: @ 8E3B0B8
 gFile_graphics_pokemon_footprints_chimecho_footprint:: @ 8E3B4B8
 	.incbin "graphics/pokemon/footprints/chimecho_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE3B4B8, 0x0020
-
 
 	.align 2
 gFile_graphics_pokemon_front_pics_egg_still_front_pic:: @ 8E3B4D8
@@ -13061,7 +12541,6 @@ gFile_graphics_pokemon_back_pics_unown_question_mark_back_pic:: @ 8E48758
 gFile_graphics_pokemon_icons_unown_question_mark_icon:: @ 8E48958
 	.incbin "graphics/pokemon/icons/unown_question_mark_icon.4bpp"
 	@ .incbin "baserom.gba", 0xE48958, 0x0400
-
 
 	.align 2
 gFile_graphics_trainers_front_pics_aqua_leader_archie_front_pic:: @ 8E48D58
@@ -13883,7 +13362,6 @@ gFile_graphics_trainers_palettes_elite_four_drake:: @ 8E5AD34
 	.incbin "graphics/trainers/palettes/elite_four_drake.gbapal.lz"
 	@ .incbin "baserom.gba", 0xE5AD34, 0x0028
 
-
 	.align 2
 gFile_graphics_trainers_front_pics_youngster_front_pic:: @ 8E5AD5C
 	.incbin "graphics/trainers/front_pics/youngster_front_pic.4bpp.lz"
@@ -14394,7 +13872,6 @@ gFile_graphics_trainers_palettes_oak:: @ 8E66BF4
 	.incbin "graphics/trainers/palettes/oak.gbapal.lz"
 	@ .incbin "baserom.gba", 0xE66BF4, 0x0028
 
-
 	.align 2
 gFile_graphics_trainers_front_pics_ruby_sapphire_brendan_front_pic2:: @ 8E66C1C
 	.incbin "graphics/trainers/front_pics/ruby_sapphire_brendan_front_pic.4bpp.lz"
@@ -14434,7 +13911,6 @@ gFile_graphics_trainers_front_pics_leaf_front_pic:: @ 8E675B4
 gFile_graphics_trainers_palettes_leaf:: @ 8E678F0
 	.incbin "graphics/trainers/palettes/leaf.gbapal.lz"
 	@ .incbin "baserom.gba", 0xE678F0, 0x0028
-
 
 	.align 2
 gFile_graphics_trainers_front_pics_rocket_grunt_f_front_pic:: @ 8E67918
@@ -14546,7 +14022,6 @@ gFile_graphics_trainers_palettes_painter:: @ 8E69E94
 	.incbin "graphics/trainers/palettes/painter.gbapal.lz"
 	@ .incbin "baserom.gba", 0xE69E94, 0x0028
 
-	
 	.align 2
 gFile_graphics_trainers_back_pics_red_back_pic:: @ 8E69EBC
 	.incbin "graphics/trainers/back_pics/red_back_pic.4bpp"
@@ -14577,7 +14052,6 @@ gFile_graphics_trainers_back_pics_ruby_sapphire_may_back_pic:: @ 8E74EBC
 	.incbin "graphics/trainers/back_pics/ruby_sapphire_may_back_pic.4bpp"
 	@ .incbin "baserom.gba", 0xE74EBC, 0x2000
 
-
 	.align 2
 gFile_graphics_trainers_palettes_leaf_back_pic:: @ 8E76EBC
 	.incbin "graphics/trainers/palettes/leaf_back_pic.gbapal.lz"
@@ -14607,7 +14081,6 @@ gFile_graphics_pokemon_icons_question_mark_icon:: @ 8E76F5C
 gFile_graphics_pokemon_footprints_question_mark_footprint:: @ 8E7735C
 	.incbin "graphics/pokemon/footprints/question_mark_footprint.1bpp"
 	@ .incbin "baserom.gba", 0xE7735C, 0x0020
-
 
 	.align 2
 	@ THIS IS ./graphics/battle_transitions/vs_frame.4bpp.lz

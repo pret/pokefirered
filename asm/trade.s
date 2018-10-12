@@ -7850,7 +7850,7 @@ sub_80504CC: @ 80504CC
 	movs r2, 0
 	movs r3, 0
 	bl sub_80F696C
-	ldr r0, _080505BC @ =gMenuMapBin
+	ldr r0, _080505BC @ =gFile_graphics_interface_menu_map_tilemap
 	mov r8, r0
 	ldr r4, _080505C0 @ =gUnknown_201C000
 	adds r1, r4, 0
@@ -7897,7 +7897,7 @@ sub_80504CC: @ 80504CC
 	.align 2, 0
 _080505B4: .4byte gUnknown_826D1D4
 _080505B8: .4byte gUnknown_8D00000
-_080505BC: .4byte gMenuMapBin
+_080505BC: .4byte gFile_graphics_interface_menu_map_tilemap
 _080505C0: .4byte gUnknown_201C000
 _080505C4: .4byte gUnknown_8D004D8
 _080505C8: .4byte gUnknown_826D1BC

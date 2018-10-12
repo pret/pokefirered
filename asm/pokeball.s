@@ -2811,7 +2811,7 @@ _0804BF2C:
 	bl GetSpriteTileStartByTag
 	adds r1, r0, 0
 	lsls r1, 16
-	ldr r0, _0804BF5C @ =gBallOpen4bpp
+	ldr r0, _0804BF5C @ =gFile_graphics_interface_ball_Open_sheet
 	lsrs r1, 11
 	ldr r2, _0804BF60 @ =0x06010100
 	adds r1, r2
@@ -2824,7 +2824,7 @@ _0804BF48:
 _0804BF50: .4byte gUnknown_826056C
 _0804BF54: .4byte 0xffff0000
 _0804BF58: .4byte gUnknown_82605CC
-_0804BF5C: .4byte gBallOpen4bpp
+_0804BF5C: .4byte gFile_graphics_interface_ball_Open_sheet
 _0804BF60: .4byte 0x06010100
 	thumb_func_end LoadBallGfx
 

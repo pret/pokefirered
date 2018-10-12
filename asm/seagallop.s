@@ -316,7 +316,7 @@ sub_8147108: @ 8147108
 	lsls r0, 24
 	cmp r0, 0
 	beq _08147136
-	ldr r0, _0814713C @ =gUnknown_2037AB8
+	ldr r0, _0814713C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -331,7 +331,7 @@ _08147136:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814713C: .4byte gUnknown_2037AB8
+_0814713C: .4byte gPaletteFade
 	thumb_func_end sub_8147108
 
 	thumb_func_start sub_8147140

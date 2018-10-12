@@ -15654,7 +15654,7 @@ _0802549C:
 	.align 2, 0
 _080254A4: .4byte gBattleScripting
 _080254A8:
-	ldr r0, _080254E4 @ =gUnknown_2037AB8
+	ldr r0, _080254E4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -15684,7 +15684,7 @@ _080254D8:
 	strb r0, [r1, 0x1F]
 	b _080256D0
 	.align 2, 0
-_080254E4: .4byte gUnknown_2037AB8
+_080254E4: .4byte gPaletteFade
 _080254E8: .4byte gPlayerParty
 _080254EC: .4byte gBattleStruct
 _080254F0: .4byte gUnknown_2024029
@@ -15692,7 +15692,7 @@ _080254F4: .4byte sub_8077764
 _080254F8: .4byte gUnknown_2024022
 _080254FC: .4byte gBattleScripting
 _08025500:
-	ldr r0, _0802552C @ =gUnknown_2037AB8
+	ldr r0, _0802552C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -15716,7 +15716,7 @@ _0802551A:
 	strb r5, [r0, 0x1F]
 	b _080256D0
 	.align 2, 0
-_0802552C: .4byte gUnknown_2037AB8
+_0802552C: .4byte gPaletteFade
 _08025530: .4byte gMain
 _08025534: .4byte sub_8011100
 _08025538: .4byte gBattleScripting
@@ -32443,7 +32443,7 @@ _0802DA24:
 	.align 2, 0
 _0802DA38: .4byte 0x00007fff
 _0802DA3C:
-	ldr r0, _0802DA5C @ =gUnknown_2037AB8
+	ldr r0, _0802DA5C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -32458,10 +32458,10 @@ _0802DA4A:
 	strb r0, [r1, 0x1]
 	b _0802DB36
 	.align 2, 0
-_0802DA5C: .4byte gUnknown_2037AB8
+_0802DA5C: .4byte gPaletteFade
 _0802DA60: .4byte gUnknown_2023E82
 _0802DA64:
-	ldr r0, _0802DAAC @ =gUnknown_2037AB8
+	ldr r0, _0802DAAC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -32497,7 +32497,7 @@ _0802DA72:
 	strb r0, [r4]
 	b _0802DB6C
 	.align 2, 0
-_0802DAAC: .4byte gUnknown_2037AB8
+_0802DAAC: .4byte gPaletteFade
 _0802DAB0: .4byte gMain
 _0802DAB4: .4byte sub_8011100
 _0802DAB8: .4byte gTasks
@@ -32567,7 +32567,7 @@ _0802DB4C: .4byte 0x05000080
 _0802DB50: .4byte 0x0001ffff
 _0802DB54: .4byte gUnknown_2023E82
 _0802DB58:
-	ldr r0, _0802DB74 @ =gUnknown_2037AB8
+	ldr r0, _0802DB74 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -32583,7 +32583,7 @@ _0802DB6C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802DB74: .4byte gUnknown_2037AB8
+_0802DB74: .4byte gPaletteFade
 _0802DB78: .4byte gUnknown_2023D74
 	thumb_func_end sub_802D9D8
 
@@ -32946,7 +32946,7 @@ _0802DE36:
 	.align 2, 0
 _0802DE3C: .4byte gUnknown_2023E82
 _0802DE40:
-	ldr r0, _0802DEFC @ =gUnknown_2037AB8
+	ldr r0, _0802DEFC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -33035,7 +33035,7 @@ _0802DE4E:
 	strb r0, [r1]
 	b _0802DFA6
 	.align 2, 0
-_0802DEFC: .4byte gUnknown_2037AB8
+_0802DEFC: .4byte gPaletteFade
 _0802DF00: .4byte gBattlerPartyIndexes
 _0802DF04: .4byte sBattler_AI
 _0802DF08: .4byte gEnemyParty
@@ -33048,7 +33048,7 @@ _0802DF18:
 	ldr r0, _0802DF58 @ =sub_8011100
 	cmp r1, r0
 	bne _0802DFA6
-	ldr r0, _0802DF5C @ =gUnknown_2037AB8
+	ldr r0, _0802DF5C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -33075,7 +33075,7 @@ _0802DF18:
 	.align 2, 0
 _0802DF54: .4byte gMain
 _0802DF58: .4byte sub_8011100
-_0802DF5C: .4byte gUnknown_2037AB8
+_0802DF5C: .4byte gPaletteFade
 _0802DF60: .4byte gBattlerPartyIndexes
 _0802DF64: .4byte sBattler_AI
 _0802DF68: .4byte gEnemyParty

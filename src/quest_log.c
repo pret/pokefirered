@@ -13,6 +13,8 @@
 #include "overworld.h"
 #include "field_fadetransition.h"
 #include "field_weather.h"
+#include "map_obj_80688E4.h"
+#include "field_player_avatar.h"
 #include "item.h"
 #include "wild_encounter.h"
 #include "help_system.h"
@@ -39,6 +41,8 @@ struct UnkStruct_203AE98
     u8 unk_6;
 };
 
+extern u16 gUnknown_20371F8[];
+
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 EWRAM_DATA u8 gUnknown_203ADF9 = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
@@ -48,6 +52,7 @@ EWRAM_DATA void * gUnknown_203AE04 = NULL;
 EWRAM_DATA u16 * gUnknown_203AE08 = NULL;
 EWRAM_DATA void * gUnknown_203AE0C[32] = {NULL};
 EWRAM_DATA void (* gUnknown_203AE8C)(void) = 0;
+EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
 EWRAM_DATA u16 gUnknown_203AF98 = 0;
@@ -82,7 +87,10 @@ void sub_8111D10(void);
 void sub_8111D90(u8);
 void sub_8111E20(void);
 void sub_8111E64(s8);
+void sub_8111E84(void);
 bool8 sub_8111F60(void);
+void sub_8111F8C(u8);
+void sub_8111FCC(u8);
 void sub_8112364(void);
 void sub_8112888(u8);
 void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
@@ -916,7 +924,7 @@ void sub_81118F4(s8 a0)
 
 void sub_8111914(void)
 {
-    if (!gUnknown_2037AB8.active)
+    if (!gPaletteFade.active)
     {
         ScriptContext2_Enable();
         if (++gUnknown_203ADF8 < 4 && gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000)
@@ -985,7 +993,7 @@ void sub_8111A34(u8 taskId)
             }
             break;
         case 1:
-            if (!gUnknown_2037AB8.active)
+            if (!gPaletteFade.active)
             {
                 gUnknown_3005E88 = 0;
                 routine = (void (*)(void)) GetWordTaskArg(taskId, 14);
@@ -1156,5 +1164,70 @@ void sub_8111D90(u8 a0)
 
         CopyToWindowPixelBuffer(a0, (const u8 *)buffer, 0x1680, 0);
         Free(buffer);
+    }
+}
+
+void sub_8111E20(void)
+{
+    ClearWindowTilemap(gUnknown_203ADFE[2]);
+    FillWindowPixelRect(gUnknown_203ADFE[2], 15, 0, 0, 0xf0, 0x30);
+    CopyWindowToVram(gUnknown_203ADFE[2], 2);
+    PutWindowTilemap(gUnknown_203ADFE[1]);
+    CopyWindowToVram(gUnknown_203ADFE[1], 1);
+}
+
+void sub_8111E64(s8 a0)
+{
+    fade_screen(1, a0);
+    gUnknown_203AE8C = sub_8111E84;
+}
+
+void sub_8111E84(void)
+{
+    if (!gPaletteFade.active)
+    {
+        ScriptContext2_Enable();
+        for (gUnknown_203ADF8 = gUnknown_203ADF8; gUnknown_203ADF8 < 4; gUnknown_203ADF8++)
+        {
+            if (gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 == 0)
+                break;
+            sub_811175C(gUnknown_203ADF8, gUnknown_203AE98);
+        }
+        gUnknown_3005E88 = 0;
+        sub_8111984();
+    }
+}
+
+void sub_8111F14(void)
+{
+    if (gUnknown_203ADFA == 3)
+        gUnknown_203AE90 = AllocZeroed(0x200 * sizeof(u16));
+}
+
+void sub_8111F38(u16 a0, u16 a1)
+{
+    CpuSet(gUnknown_20371F8 + a0, gUnknown_203AE90 + a0, a1);
+}
+
+bool8 sub_8111F60(void)
+{
+    LoadPalette(stdpal_get(4), 0xF0, 0x20);
+    sub_8111070(0);
+    sub_807DF7C();
+    CreateTask(sub_8111F8C, 0xFF);
+    return TRUE;
+}
+
+void sub_8111F8C(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    if (ScriptContext2_IsEnabled() != TRUE)
+    {
+        player_bitmagic();
+        sub_805C270();
+        sub_805C780();
+        ScriptContext2_Enable();
+        task->func = sub_8111FCC;
     }
 }

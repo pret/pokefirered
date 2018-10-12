@@ -1151,7 +1151,7 @@ _080D93E4:
 	beq _080D93FE
 	b _080D9552
 _080D93FE:
-	ldr r0, _080D944C @ =gUnknown_2037AB8
+	ldr r0, _080D944C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	adds r0, r3, 0
 	ands r0, r1
@@ -1191,7 +1191,7 @@ _080D9424:
 	beq _080D9456
 	b _080D953C
 	.align 2, 0
-_080D944C: .4byte gUnknown_2037AB8
+_080D944C: .4byte gPaletteFade
 _080D9450:
 	cmp r0, 0x2
 	beq _080D94FE

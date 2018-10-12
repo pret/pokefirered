@@ -13,7 +13,7 @@ nullsub_44: @ 8077760
 	thumb_func_start sub_8077764
 sub_8077764: @ 8077764
 	push {lr}
-	ldr r2, _080777B0 @ =gUnknown_2037AB8
+	ldr r2, _080777B0 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -48,7 +48,7 @@ sub_8077764: @ 8077764
 	bl sub_812B1F0
 	b _080777DA
 	.align 2, 0
-_080777B0: .4byte gUnknown_2037AB8
+_080777B0: .4byte gPaletteFade
 _080777B4: .4byte gBattleScripting
 _080777B8: .4byte gBattleTypeFlags
 _080777BC:
@@ -355,7 +355,7 @@ _08077A5C:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginHardwarePaletteFade
-	ldr r2, _08077AA0 @ =gUnknown_2037AB8
+	ldr r2, _08077AA0 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -375,7 +375,7 @@ _08077A8A:
 	bx r0
 	.align 2, 0
 _08077A9C: .4byte sub_80116F4
-_08077AA0: .4byte gUnknown_2037AB8
+_08077AA0: .4byte gPaletteFade
 _08077AA4: .4byte sub_8011100
 _08077AA8: .4byte gBattleScripting
 	thumb_func_end sub_80777E8

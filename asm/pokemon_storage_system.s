@@ -1731,7 +1731,7 @@ _0808C66E:
 	.align 2, 0
 _0808C67C: .4byte gUnknown_83CDA20
 _0808C680:
-	ldr r0, _0808C6A4 @ =gUnknown_2037AB8
+	ldr r0, _0808C6A4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1748,7 +1748,7 @@ _0808C69C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808C6A4: .4byte gUnknown_2037AB8
+_0808C6A4: .4byte gPaletteFade
 	thumb_func_end c3_0808C39C
 
 	thumb_func_start sub_808C6A8

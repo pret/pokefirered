@@ -499,7 +499,7 @@ sub_8047004: @ 8047004
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08047034 @ =gUnknown_2037AB8
+	ldr r0, _08047034 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -518,7 +518,7 @@ _0804702C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047034: .4byte gUnknown_2037AB8
+_08047034: .4byte gPaletteFade
 _08047038: .4byte CB2_EggHatch_0
 _0804703C: .4byte gUnknown_3005020
 _08047040: .4byte sub_807DD24
@@ -912,7 +912,7 @@ _080473D8: .4byte gUnknown_8260134
 _080473DC: .4byte gUnknown_3000E74
 _080473E0: .4byte sub_80472E4
 _080473E4:
-	ldr r0, _08047408 @ =gUnknown_2037AB8
+	ldr r0, _08047408 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -931,7 +931,7 @@ _080473F6:
 	ldr r1, [r5]
 	b _08047648
 	.align 2, 0
-_08047408: .4byte gUnknown_2037AB8
+_08047408: .4byte gPaletteFade
 _0804740C:
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x3]
@@ -1205,7 +1205,7 @@ _08047648:
 	.align 2, 0
 _08047650: .4byte gUnknown_3000E74
 _08047654:
-	ldr r0, _080476A8 @ =gUnknown_2037AB8
+	ldr r0, _080476A8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1238,7 +1238,7 @@ _08047684:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080476A8: .4byte gUnknown_2037AB8
+_080476A8: .4byte gPaletteFade
 _080476AC: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8047338
 
@@ -1489,7 +1489,7 @@ _0804788C:
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
 	strh r0, [r5, 0x2E]
-	ldr r0, _080478C8 @ =gUnknown_2037AB8
+	ldr r0, _080478C8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1515,7 +1515,7 @@ _080478BA:
 	bx r0
 	.align 2, 0
 _080478C4: .4byte 0x0000ffff
-_080478C8: .4byte gUnknown_2037AB8
+_080478C8: .4byte gPaletteFade
 _080478CC: .4byte SpriteCB_Egg_5
 	thumb_func_end SpriteCB_Egg_4
 

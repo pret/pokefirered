@@ -155,7 +155,7 @@ sub_80DE1D0: @ 80DE1D0
 	lsls r5, r0, 3
 	ldr r6, _080DE21C @ =gTasks+0x8
 	adds r2, r5, r6
-	ldr r0, _080DE220 @ =gUnknown_2037AB8
+	ldr r0, _080DE220 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -182,7 +182,7 @@ sub_80DE1D0: @ 80DE1D0
 	b _080DE26C
 	.align 2, 0
 _080DE21C: .4byte gTasks+0x8
-_080DE220: .4byte gUnknown_2037AB8
+_080DE220: .4byte gPaletteFade
 _080DE224: .4byte gUnknown_203AAB0
 _080DE228:
 	adds r0, r6, 0
@@ -229,7 +229,7 @@ sub_80DE274: @ 80DE274
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _080DE2B0 @ =gUnknown_2037AB8
+	ldr r0, _080DE2B0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -253,7 +253,7 @@ _080DE2AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE2B0: .4byte gUnknown_2037AB8
+_080DE2B0: .4byte gPaletteFade
 _080DE2B4: .4byte gUnknown_203AAB0
 _080DE2B8: .4byte gUnknown_20371F8
 _080DE2BC: .4byte gUnknown_81BE564

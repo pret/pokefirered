@@ -806,7 +806,7 @@ gUnknown_20377F8: @ 20377F8
 gUnknown_20379F8: @ 20379F8
 	.space 0xC0
 
-gUnknown_2037AB8: @ 2037AB8
+gPaletteFade: @ 2037AB8
 	.space 0x10
 
 gUnknown_2037AC8: @ 2037AC8

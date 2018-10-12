@@ -48,7 +48,7 @@ _080CDD50:
 	strh r0, [r6, 0x8]
 	b _080CDD98
 _080CDD68:
-	ldr r0, _080CDDA0 @ =gUnknown_2037AB8
+	ldr r0, _080CDDA0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -76,7 +76,7 @@ _080CDD98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CDDA0: .4byte gUnknown_2037AB8
+_080CDDA0: .4byte gPaletteFade
 _080CDDA4: .4byte gPlayerParty
 	thumb_func_end Task_BeginEvolutionScene
 
@@ -1483,7 +1483,7 @@ _080CEA84: .4byte gSprites
 _080CEA88: .4byte gUnknown_2039A20
 _080CEA8C: .4byte gTasks
 _080CEA90:
-	ldr r0, _080CEAC0 @ =gUnknown_2037AB8
+	ldr r0, _080CEAC0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1505,7 +1505,7 @@ _080CEAA0:
 	adds r1, r0
 	b _080CEFDE
 	.align 2, 0
-_080CEAC0: .4byte gUnknown_2037AB8
+_080CEAC0: .4byte gPaletteFade
 _080CEAC4: .4byte gStringVar4
 _080CEAC8: .4byte gUnknown_83FE672
 _080CEACC: .4byte gTasks
@@ -1572,7 +1572,7 @@ _080CEB28:
 	.align 2, 0
 _080CEB54: .4byte gTasks
 _080CEB58:
-	ldr r0, _080CEB84 @ =gUnknown_2037AB8
+	ldr r0, _080CEB84 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1593,7 +1593,7 @@ _080CEB68:
 	adds r1, r0
 	b _080CEFDE
 	.align 2, 0
-_080CEB84: .4byte gUnknown_2037AB8
+_080CEB84: .4byte gPaletteFade
 _080CEB88: .4byte gUnknown_2023E82
 _080CEB8C: .4byte gTasks
 _080CEB90:
@@ -1773,7 +1773,7 @@ _080CED00: .4byte gUnknown_2037238
 _080CED04: .4byte gUnknown_2039A20
 _080CED08: .4byte gTasks
 _080CED0C:
-	ldr r0, _080CED28 @ =gUnknown_2037AB8
+	ldr r0, _080CED28 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1788,7 +1788,7 @@ _080CED1C:
 	ldrh r0, [r4, 0xC]
 	b _080CEF28
 	.align 2, 0
-_080CED28: .4byte gUnknown_2037AB8
+_080CED28: .4byte gPaletteFade
 _080CED2C:
 	bl IsCryFinished
 	lsls r0, 24
@@ -1922,7 +1922,7 @@ _080CEE40:
 	.align 2, 0
 _080CEE5C: .4byte gTasks
 _080CEE60:
-	ldr r0, _080CEEC4 @ =gUnknown_2037AB8
+	ldr r0, _080CEEC4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r2, 0x80
 	adds r0, r2, 0
@@ -1967,7 +1967,7 @@ _080CEEA0:
 	bl SetMainCallback2
 	b _080CF528
 	.align 2, 0
-_080CEEC4: .4byte gUnknown_2037AB8
+_080CEEC4: .4byte gPaletteFade
 _080CEEC8: .4byte gUnknown_2039A20
 _080CEECC: .4byte gUnknown_300537C
 _080CEED0:
@@ -2000,7 +2000,7 @@ _080CEF04: .4byte gUnknown_2023E82
 _080CEF08: .4byte 0x0006001c
 _080CEF0C: .4byte 0x00007fff
 _080CEF10:
-	ldr r0, _080CEF38 @ =gUnknown_2037AB8
+	ldr r0, _080CEF38 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2023,7 +2023,7 @@ _080CEF2E:
 	strh r0, [r4, 0x8]
 	b _080CF528
 	.align 2, 0
-_080CEF38: .4byte gUnknown_2037AB8
+_080CEF38: .4byte gPaletteFade
 _080CEF3C:
 	bl IsCryFinished
 	lsls r0, 24
@@ -2424,7 +2424,7 @@ _080CF284:
 _080CF2AC: .4byte gTasks
 _080CF2B0: .4byte gMain
 _080CF2B4:
-	ldr r0, _080CF2F4 @ =gUnknown_2037AB8
+	ldr r0, _080CF2F4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2455,14 +2455,14 @@ _080CF2C2:
 	strh r0, [r5, 0x14]
 	b _080CF528
 	.align 2, 0
-_080CF2F4: .4byte gUnknown_2037AB8
+_080CF2F4: .4byte gPaletteFade
 _080CF2F8: .4byte gPlayerParty
 _080CF2FC: .4byte gTasks
 _080CF300: .4byte gUnknown_2024029
 _080CF304: .4byte CB2_EvolutionSceneLoadGraphics
 _080CF308: .4byte gUnknown_2024022
 _080CF30C:
-	ldr r0, _080CF340 @ =gUnknown_2037AB8
+	ldr r0, _080CF340 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2489,7 +2489,7 @@ _080CF324:
 	movs r0, 0xA
 	b _080CF526
 	.align 2, 0
-_080CF340: .4byte gUnknown_2037AB8
+_080CF340: .4byte gPaletteFade
 _080CF344: .4byte sub_80CE710
 _080CF348: .4byte gTasks
 _080CF34C:
@@ -2887,7 +2887,7 @@ _080CF6AC:
 	.align 2, 0
 _080CF6CC: .4byte gTasks
 _080CF6D0:
-	ldr r0, _080CF724 @ =gUnknown_2037AB8
+	ldr r0, _080CF724 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2925,7 +2925,7 @@ _080CF6E0:
 	bl SetGpuReg
 	bl _080D003A
 	.align 2, 0
-_080CF724: .4byte gUnknown_2037AB8
+_080CF724: .4byte gPaletteFade
 _080CF728: .4byte gSprites
 _080CF72C: .4byte gUnknown_2039A20
 _080CF730: .4byte gUnknown_2023E82
@@ -3305,7 +3305,7 @@ _080CFA68: .4byte gUnknown_2039A20
 _080CFA6C: .4byte 0x0004001c
 _080CFA70: .4byte 0x00007fff
 _080CFA74:
-	ldr r0, _080CFA98 @ =gUnknown_2037AB8
+	ldr r0, _080CFA98 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3326,7 +3326,7 @@ _080CFA90:
 	strh r0, [r4, 0x8]
 	b _080D003A
 	.align 2, 0
-_080CFA98: .4byte gUnknown_2037AB8
+_080CFA98: .4byte gPaletteFade
 _080CFA9C:
 	bl IsCryFinished
 	lsls r0, 24
@@ -3679,7 +3679,7 @@ _080CFDA0: .4byte gUnknown_83FDF3C
 _080CFDA4: .4byte gUnknown_202298C
 _080CFDA8: .4byte gTasks
 _080CFDAC:
-	ldr r0, _080CFE14 @ =gUnknown_2037AB8
+	ldr r0, _080CFE14 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3724,7 +3724,7 @@ _080CFDC6:
 	strh r0, [r5, 0x14]
 	b _080D003A
 	.align 2, 0
-_080CFE14: .4byte gUnknown_2037AB8
+_080CFE14: .4byte gPaletteFade
 _080CFE18: .4byte gUnknown_3003F3C
 _080CFE1C: .4byte gPlayerParty
 _080CFE20: .4byte gTasks
@@ -3732,7 +3732,7 @@ _080CFE24: .4byte gUnknown_2024029
 _080CFE28: .4byte CB2_TradeEvolutionSceneLoadGraphics
 _080CFE2C: .4byte gUnknown_2024022
 _080CFE30:
-	ldr r0, _080CFE64 @ =gUnknown_2037AB8
+	ldr r0, _080CFE64 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3759,7 +3759,7 @@ _080CFE4A:
 	movs r0, 0x9
 	b _080D0038
 	.align 2, 0
-_080CFE64: .4byte gUnknown_2037AB8
+_080CFE64: .4byte gPaletteFade
 _080CFE68: .4byte gMain
 _080CFE6C: .4byte sub_80CE72C
 _080CFE70: .4byte gTasks

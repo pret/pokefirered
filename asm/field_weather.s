@@ -690,7 +690,7 @@ _0807A144:
 _0807A164: .4byte gUnknown_2037F34
 _0807A168: .4byte 0x000006c6
 _0807A16C:
-	ldr r0, _0807A190 @ =gUnknown_2037AB8
+	ldr r0, _0807A190 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -711,7 +711,7 @@ _0807A18C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807A190: .4byte gUnknown_2037AB8
+_0807A190: .4byte gPaletteFade
 _0807A194: .4byte 0x000006c1
 _0807A198: .4byte 0x000006c6
 	thumb_func_end sub_807A084
@@ -1988,7 +1988,7 @@ _0807AB20:
 	adds r1, r2
 	movs r2, 0x8
 	bl CpuFastSet
-	ldr r0, _0807AB54 @ =gUnknown_2037AB8
+	ldr r0, _0807AB54 @ =gPaletteFade
 	ldrh r2, [r0, 0x4]
 	lsls r2, 21
 	lsrs r2, 27
@@ -2002,7 +2002,7 @@ _0807AB20:
 	.align 2, 0
 _0807AB4C: .4byte gUnknown_20375F8
 _0807AB50: .4byte gUnknown_20371F8
-_0807AB54: .4byte gUnknown_2037AB8
+_0807AB54: .4byte gPaletteFade
 _0807AB58:
 	lsls r0, r4, 20
 	lsrs r4, r0, 16

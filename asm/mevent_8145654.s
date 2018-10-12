@@ -246,7 +246,7 @@ _08145834:
 	lsrs r6, r0, 24
 	cmp r6, 0
 	bne _0814592E
-	ldr r2, _081458A0 @ =gUnknown_2037AB8
+	ldr r2, _081458A0 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -291,7 +291,7 @@ _08145834:
 	bl CopyBgTilemapBufferToVram
 	b _0814591E
 	.align 2, 0
-_081458A0: .4byte gUnknown_2037AB8
+_081458A0: .4byte gPaletteFade
 _081458A4: .4byte gUnknown_203F3C8
 _081458A8: .4byte 0x0000045c
 _081458AC:
@@ -315,7 +315,7 @@ _081458D2:
 	bl ShowBg
 	movs r0, 0x2
 	bl ShowBg
-	ldr r2, _08145904 @ =gUnknown_2037AB8
+	ldr r2, _08145904 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -331,7 +331,7 @@ _081458D2:
 	bl UpdatePaletteFade
 	b _0814591E
 	.align 2, 0
-_08145904: .4byte gUnknown_2037AB8
+_08145904: .4byte gPaletteFade
 _08145908:
 	bl UpdatePaletteFade
 	lsls r0, 24
@@ -1780,7 +1780,7 @@ _08146494:
 	beq _081464A2
 	b _081465EC
 _081464A2:
-	ldr r2, _0814653C @ =gUnknown_2037AB8
+	ldr r2, _0814653C @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -1851,7 +1851,7 @@ _081464A2:
 	bl CopyBgTilemapBufferToVram
 	b _081465D2
 	.align 2, 0
-_0814653C: .4byte gUnknown_2037AB8
+_0814653C: .4byte gPaletteFade
 _08146540: .4byte gUnknown_203F3CC
 _08146544:
 	bl sub_8146980
@@ -1870,7 +1870,7 @@ _0814655C:
 	bl ShowBg
 	movs r0, 0x3
 	bl ShowBg
-	ldr r2, _081465AC @ =gUnknown_2037AB8
+	ldr r2, _081465AC @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -1898,7 +1898,7 @@ _0814655C:
 	bl UpdatePaletteFade
 	b _081465D2
 	.align 2, 0
-_081465AC: .4byte gUnknown_2037AB8
+_081465AC: .4byte gPaletteFade
 _081465B0: .4byte gUnknown_203F3CC
 _081465B4: .4byte 0x000001c1
 _081465B8:

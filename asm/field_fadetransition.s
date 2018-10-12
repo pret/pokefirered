@@ -1125,12 +1125,12 @@ _0807E408: .4byte task_mpl_807E3C8
 
 	thumb_func_start sub_807E40C
 sub_807E40C: @ 807E40C
-	ldr r0, _0807E414 @ =gUnknown_2037AB8
+	ldr r0, _0807E414 @ =gPaletteFade
 	ldrb r0, [r0, 0x7]
 	lsrs r0, 7
 	bx lr
 	.align 2, 0
-_0807E414: .4byte gUnknown_2037AB8
+_0807E414: .4byte gPaletteFade
 	thumb_func_end sub_807E40C
 
 	thumb_func_start sub_807E418

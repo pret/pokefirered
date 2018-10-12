@@ -3849,7 +3849,7 @@ _08117944:
 	bl fade_screen
 	b _08117968
 _08117958:
-	ldr r0, _08117970 @ =gUnknown_2037AB8
+	ldr r0, _08117970 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3862,7 +3862,7 @@ _08117968:
 	strh r0, [r4]
 	b _08117988
 	.align 2, 0
-_08117970: .4byte gUnknown_2037AB8
+_08117970: .4byte gPaletteFade
 _08117974:
 	bl sub_800A4BC
 	lsls r0, 24
@@ -6990,7 +6990,7 @@ _081194F0:
 	movs r0, 0x36
 	b _081198DA
 _08119504:
-	ldr r0, _08119528 @ =gUnknown_2037AB8
+	ldr r0, _08119528 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -7009,7 +7009,7 @@ _08119512:
 	bl sub_81277F4
 	b _081198DC
 	.align 2, 0
-_08119528: .4byte gUnknown_2037AB8
+_08119528: .4byte gPaletteFade
 _0811952C: .4byte gUnknown_203B06C
 _08119530: .4byte gUnknown_3005020
 _08119534: .4byte sub_807DCE4

@@ -497,7 +497,7 @@ _080BF01C:
 _080BF026:
 	ldr r0, _080BF038 @ =sub_80BF354
 	bl SetVBlankCallback
-	ldr r2, _080BF03C @ =gUnknown_2037AB8
+	ldr r2, _080BF03C @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -505,7 +505,7 @@ _080BF026:
 	b _080BF0F4
 	.align 2, 0
 _080BF038: .4byte sub_80BF354
-_080BF03C: .4byte gUnknown_2037AB8
+_080BF03C: .4byte gPaletteFade
 _080BF040:
 	ldr r5, _080BF064 @ =gUnknown_20399C4
 	ldr r0, [r5]
@@ -573,7 +573,7 @@ _080BF0A4:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r2, _080BF0E8 @ =gUnknown_2037AB8
+	ldr r2, _080BF0E8 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -586,7 +586,7 @@ _080BF0A4:
 	movs r0, 0x1
 	b _080BF104
 	.align 2, 0
-_080BF0E8: .4byte gUnknown_2037AB8
+_080BF0E8: .4byte gPaletteFade
 _080BF0EC: .4byte gUnknown_20399C4
 _080BF0F0: .4byte sub_80BF394
 _080BF0F4:

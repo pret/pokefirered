@@ -1103,7 +1103,7 @@ sub_80F6170: @ 80F6170
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080F618C @ =gUnknown_2037AB8
+	ldr r0, _080F618C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1115,7 +1115,7 @@ _080F6188:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F618C: .4byte gUnknown_2037AB8
+_080F618C: .4byte gPaletteFade
 	thumb_func_end sub_80F6170
 
 	thumb_func_start sub_80F6190

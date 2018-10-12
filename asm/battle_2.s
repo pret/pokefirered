@@ -1620,7 +1620,7 @@ _08010AF0: .4byte gMain
 _08010AF4: .4byte gBattleTypeFlags
 _08010AF8: .4byte sub_80109C8
 _08010AFC:
-	ldr r0, _08010B1C @ =gUnknown_2037AB8
+	ldr r0, _08010B1C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1635,7 +1635,7 @@ _08010AFC:
 	bl sub_800AB9C
 	b _08010B82
 	.align 2, 0
-_08010B1C: .4byte gUnknown_2037AB8
+_08010B1C: .4byte gPaletteFade
 _08010B20: .4byte gUnknown_3003F3C
 _08010B24:
 	bl sub_800AAC0
@@ -2439,7 +2439,7 @@ _080111B8: .4byte 0x00000439
 CB2_QuitRecordedBattle: @ 80111BC
 	push {lr}
 	bl UpdatePaletteFade
-	ldr r0, _080111E4 @ =gUnknown_2037AB8
+	ldr r0, _080111E4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2454,7 +2454,7 @@ _080111DE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080111E4: .4byte gUnknown_2037AB8
+_080111E4: .4byte gPaletteFade
 _080111E8: .4byte gMain
 	thumb_func_end CB2_QuitRecordedBattle
 
@@ -3726,7 +3726,7 @@ _08011C08:
 	strb r0, [r4]
 	b _08011C34
 _08011C10:
-	ldr r0, _08011C3C @ =gUnknown_2037AB8
+	ldr r0, _08011C3C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3745,7 +3745,7 @@ _08011C34:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011C3C: .4byte gUnknown_2037AB8
+_08011C3C: .4byte gPaletteFade
 _08011C40: .4byte gMain
 	thumb_func_end sub_8011BB0
 
@@ -11485,7 +11485,7 @@ _08015A2C: .4byte gUnknown_2023D74
 	thumb_func_start sub_8015A30
 sub_8015A30: @ 8015A30
 	push {lr}
-	ldr r0, _08015A58 @ =gUnknown_2037AB8
+	ldr r0, _08015A58 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11505,7 +11505,7 @@ _08015A52:
 	ldr r0, _08015A68 @ =ReturnFromBattleToOverworld
 	b _08015A70
 	.align 2, 0
-_08015A58: .4byte gUnknown_2037AB8
+_08015A58: .4byte gPaletteFade
 _08015A5C: .4byte gUnknown_3004FD4
 _08015A60: .4byte gUnknown_2023E8A
 _08015A64: .4byte gUnknown_3004F84

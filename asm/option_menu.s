@@ -640,7 +640,7 @@ _08088878:
 	.align 2, 0
 _08088890: .4byte gUnknown_2039620
 _08088894:
-	ldr r0, _080888AC @ =gUnknown_2037AB8
+	ldr r0, _080888AC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -653,7 +653,7 @@ _080888A2:
 	strb r0, [r1, 0x10]
 	b _080888B6
 	.align 2, 0
-_080888AC: .4byte gUnknown_2037AB8
+_080888AC: .4byte gPaletteFade
 _080888B0:
 	adds r0, r2, 0
 	bl sub_8088B00

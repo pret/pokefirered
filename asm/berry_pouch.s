@@ -362,7 +362,7 @@ sub_813D048: @ 813D048
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0813D074 @ =gUnknown_2037AB8
+	ldr r0, _0813D074 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -379,7 +379,7 @@ _0813D06C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813D074: .4byte gUnknown_2037AB8
+_0813D074: .4byte gPaletteFade
 _0813D078: .4byte gUnknown_203F370
 	thumb_func_end sub_813D048
 
@@ -1399,7 +1399,7 @@ sub_813D844: @ 813D844
 	lsls r0, 3
 	ldr r1, _0813D87C @ =gTasks+0x8
 	adds r2, r0, r1
-	ldr r0, _0813D880 @ =gUnknown_2037AB8
+	ldr r0, _0813D880 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1419,7 +1419,7 @@ sub_813D844: @ 813D844
 	b _0813D896
 	.align 2, 0
 _0813D87C: .4byte gTasks+0x8
-_0813D880: .4byte gUnknown_2037AB8
+_0813D880: .4byte gPaletteFade
 _0813D884: .4byte gUnknown_203F37A
 _0813D888: .4byte gUnknown_203F36C
 _0813D88C:
@@ -1669,7 +1669,7 @@ sub_813DA68: @ 813DA68
 	lsls r0, 3
 	ldr r1, _0813DAD8 @ =gTasks+0x8
 	adds r7, r0, r1
-	ldr r0, _0813DADC @ =gUnknown_2037AB8
+	ldr r0, _0813DADC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1714,7 +1714,7 @@ _0813DA9E:
 	b _0813DB48
 	.align 2, 0
 _0813DAD8: .4byte gTasks+0x8
-_0813DADC: .4byte gUnknown_2037AB8
+_0813DADC: .4byte gPaletteFade
 _0813DAE0: .4byte gUnknown_203F37A
 _0813DAE4: .4byte gMain
 _0813DAE8: .4byte gUnknown_203AD30

@@ -2536,7 +2536,7 @@ sub_8073850: @ 8073850
 	.align 2, 0
 _08073884: .4byte gTasks
 _08073888:
-	ldr r2, _080738A4 @ =gUnknown_2037AB8
+	ldr r2, _080738A4 @ =gPaletteFade
 	ldrb r1, [r2, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2551,7 +2551,7 @@ _08073888:
 	strb r0, [r1]
 	b _080738F0
 	.align 2, 0
-_080738A4: .4byte gUnknown_2037AB8
+_080738A4: .4byte gPaletteFade
 _080738A8: .4byte gUnknown_2037F17
 _080738AC:
 	cmp r3, 0x2

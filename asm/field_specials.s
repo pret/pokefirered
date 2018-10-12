@@ -4717,7 +4717,7 @@ sub_80CCA18: @ 80CCA18
 	lsls r1, 3
 	ldr r0, _080CCAA4 @ =gTasks+0x8
 	adds r4, r1, r0
-	ldr r0, _080CCAA8 @ =gUnknown_2037AB8
+	ldr r0, _080CCAA8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4779,7 +4779,7 @@ _080CCA78:
 	b _080CCADE
 	.align 2, 0
 _080CCAA4: .4byte gTasks+0x8
-_080CCAA8: .4byte gUnknown_2037AB8
+_080CCAA8: .4byte gPaletteFade
 _080CCAAC: .4byte gUnknown_2036E28
 _080CCAB0: .4byte gSaveBlock1Ptr
 _080CCAB4: .4byte 0x00004f01
@@ -4847,7 +4847,7 @@ _080CCB36:
 	movs r0, 0x7
 	movs r1, 0x1
 	bl sub_8059948
-	ldr r0, _080CCB64 @ =gUnknown_2037AB8
+	ldr r0, _080CCB64 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4866,7 +4866,7 @@ _080CCB5A:
 	bx r0
 	.align 2, 0
 _080CCB60: .4byte gUnknown_83F60B0
-_080CCB64: .4byte gUnknown_2037AB8
+_080CCB64: .4byte gPaletteFade
 	thumb_func_end sub_80CCAF4
 
 	thumb_func_start sub_80CCB68

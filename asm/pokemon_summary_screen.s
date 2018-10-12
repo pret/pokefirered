@@ -463,7 +463,7 @@ _08134890:
 	.align 2, 0
 _081348A8: .4byte gUnknown_203B140
 _081348AC:
-	ldr r0, _081348C8 @ =gUnknown_2037AB8
+	ldr r0, _081348C8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -476,7 +476,7 @@ _081348AC:
 	adds r0, r2
 	b _08134AF6
 	.align 2, 0
-_081348C8: .4byte gUnknown_2037AB8
+_081348C8: .4byte gPaletteFade
 _081348CC: .4byte gUnknown_203B140
 _081348D0: .4byte 0x00003270
 _081348D4:
@@ -803,7 +803,7 @@ _08134B60:
 _08134B80: .4byte gUnknown_203B140
 _08134B84: .4byte 0x00003270
 _08134B88:
-	ldr r0, _08134BA8 @ =gUnknown_2037AB8
+	ldr r0, _08134BA8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -819,7 +819,7 @@ _08134B9A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08134BA8: .4byte gUnknown_2037AB8
+_08134BA8: .4byte gPaletteFade
 	thumb_func_end sub_8134840
 
 	thumb_func_start sub_8134BAC
@@ -9566,7 +9566,7 @@ _08139420:
 _0813943C: .4byte gUnknown_203B140
 _08139440: .4byte 0x00003288
 _08139444:
-	ldr r0, _08139460 @ =gUnknown_2037AB8
+	ldr r0, _08139460 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9581,7 +9581,7 @@ _08139452:
 	adds r1, r0
 	b _08139728
 	.align 2, 0
-_08139460: .4byte gUnknown_2037AB8
+_08139460: .4byte gPaletteFade
 _08139464: .4byte gUnknown_203B140
 _08139468: .4byte 0x00003288
 _0813946C:
@@ -9926,7 +9926,7 @@ _08139738:
 	.align 2, 0
 _08139744: .4byte gUnknown_203B16D
 _08139748:
-	ldr r0, _08139764 @ =gUnknown_2037AB8
+	ldr r0, _08139764 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9940,7 +9940,7 @@ _0813975A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08139764: .4byte gUnknown_2037AB8
+_08139764: .4byte gPaletteFade
 	thumb_func_end sub_81393D4
 
 	thumb_func_start sub_8139768

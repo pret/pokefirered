@@ -72,7 +72,7 @@ sub_80BF97C: @ 80BF97C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _080BF9B4 @ =gUnknown_2037AB8
+	ldr r2, _080BF9B4 @ =gPaletteFade
 	ldrb r1, [r2, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -96,7 +96,7 @@ _080BF9AC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BF9B4: .4byte gUnknown_2037AB8
+_080BF9B4: .4byte gPaletteFade
 _080BF9B8: .4byte gTasks
 	thumb_func_end sub_80BF97C
 

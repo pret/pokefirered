@@ -155,7 +155,7 @@ _08128548:
 _08128550: .4byte sub_81285B4
 _08128554:
 	bl UpdatePaletteFade
-	ldr r0, _081285A0 @ =gUnknown_2037AB8
+	ldr r0, _081285A0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -187,7 +187,7 @@ _08128598:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081285A0: .4byte gUnknown_2037AB8
+_081285A0: .4byte gPaletteFade
 _081285A4: .4byte sub_81285CC
 _081285A8: .4byte sub_81285E8
 _081285AC: .4byte gUnknown_203B0E0
@@ -1711,7 +1711,7 @@ _081291C8:
 	.align 2, 0
 _081291E4: .4byte gUnknown_203B0E0
 _081291E8:
-	ldr r0, _08129210 @ =gUnknown_2037AB8
+	ldr r0, _08129210 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1728,7 +1728,7 @@ _08129206:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08129210: .4byte gUnknown_2037AB8
+_08129210: .4byte gPaletteFade
 _08129214: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8128FB8
 

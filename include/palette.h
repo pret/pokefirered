@@ -68,6 +68,6 @@ void BeginHardwarePaletteFade(u8, u8, u8, u8, u8);
 void BlendPalettes(u32, u8, u16);
 void BlendPalettesUnfaded(u32, u8, u16);
 
-extern struct PaletteFadeControl gUnknown_2037AB8;
+extern struct PaletteFadeControl gPaletteFade;
 
 #endif // GUARD_PALETTE_H

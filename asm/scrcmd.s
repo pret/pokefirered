@@ -1423,7 +1423,7 @@ ScrCmd_setflashradius: @ 806A8FC
 	thumb_func_start sub_806A918
 sub_806A918: @ 806A918
 	push {lr}
-	ldr r0, _0806A92C @ =gUnknown_2037AB8
+	ldr r0, _0806A92C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1432,7 +1432,7 @@ sub_806A918: @ 806A918
 	movs r0, 0
 	b _0806A932
 	.align 2, 0
-_0806A92C: .4byte gUnknown_2037AB8
+_0806A92C: .4byte gPaletteFade
 _0806A930:
 	movs r0, 0x1
 _0806A932:

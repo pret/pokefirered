@@ -27,7 +27,7 @@ LoadCompressedObjectPic: @ 800EBCC
 	sub sp, 0x8
 	adds r4, r0, 0
 	ldr r0, [r4]
-	ldr r5, _0800EBFC @ =gUnknown_201C000
+	ldr r5, _0800EBFC @ =gDecompressionBuffer
 	adds r1, r5, 0
 	bl LZ77UnCompWram
 	str r5, [sp]
@@ -45,7 +45,7 @@ LoadCompressedObjectPic: @ 800EBCC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800EBFC: .4byte gUnknown_201C000
+_0800EBFC: .4byte gDecompressionBuffer
 	thumb_func_end LoadCompressedObjectPic
 
 	thumb_func_start LoadCompressedObjectPicOverrideBuffer
@@ -76,7 +76,7 @@ LoadCompressedObjectPalette: @ 800EC28
 	sub sp, 0x8
 	adds r5, r0, 0
 	ldr r0, [r5]
-	ldr r4, _0800EC54 @ =gUnknown_201C000
+	ldr r4, _0800EC54 @ =gDecompressionBuffer
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	str r4, [sp]
@@ -93,7 +93,7 @@ LoadCompressedObjectPalette: @ 800EC28
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800EC54: .4byte gUnknown_201C000
+_0800EC54: .4byte gDecompressionBuffer
 _0800EC58: .4byte 0xffff0000
 	thumb_func_end LoadCompressedObjectPalette
 

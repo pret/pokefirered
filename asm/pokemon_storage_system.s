@@ -8,14 +8,14 @@
 	thumb_func_start sub_808B9C0
 sub_808B9C0: @ 808B9C0
 	push {lr}
-	ldr r1, _0808B9D0 @ =gUnknown_3005010
+	ldr r1, _0808B9D0 @ =gPokemonStoragePtr
 	ldr r1, [r1]
 	ldr r2, _0808B9D4 @ =0x000083d0
 	bl memcpy
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B9D0: .4byte gUnknown_3005010
+_0808B9D0: .4byte gPokemonStoragePtr
 _0808B9D4: .4byte 0x000083d0
 	thumb_func_end sub_808B9C0
 
@@ -23,25 +23,25 @@ _0808B9D4: .4byte 0x000083d0
 sub_808B9D8: @ 808B9D8
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, _0808B9EC @ =gUnknown_3005010
+	ldr r0, _0808B9EC @ =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldr r2, _0808B9F0 @ =0x000083d0
 	bl memcpy
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B9EC: .4byte gUnknown_3005010
+_0808B9EC: .4byte gPokemonStoragePtr
 _0808B9F0: .4byte 0x000083d0
 	thumb_func_end sub_808B9D8
 
 	thumb_func_start StorageGetCurrentBox
 StorageGetCurrentBox: @ 808B9F4
-	ldr r0, _0808B9FC @ =gUnknown_3005010
+	ldr r0, _0808B9FC @ =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_0808B9FC: .4byte gUnknown_3005010
+_0808B9FC: .4byte gPokemonStoragePtr
 	thumb_func_end StorageGetCurrentBox
 
 	thumb_func_start sub_808BA00
@@ -51,14 +51,14 @@ sub_808BA00: @ 808BA00
 	lsrs r1, r0, 24
 	cmp r1, 0xD
 	bhi _0808BA10
-	ldr r0, _0808BA14 @ =gUnknown_3005010
+	ldr r0, _0808BA14 @ =gPokemonStoragePtr
 	ldr r0, [r0]
 	strb r1, [r0]
 _0808BA10:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BA14: .4byte gUnknown_3005010
+_0808BA14: .4byte gPokemonStoragePtr
 	thumb_func_end sub_808BA00
 
 	thumb_func_start GetBoxMonDataFromAnyBox
@@ -73,7 +73,7 @@ GetBoxMonDataFromAnyBox: @ 808BA18
 	bhi _0808BA54
 	cmp r4, 0x1D
 	bhi _0808BA54
-	ldr r2, _0808BA50 @ =gUnknown_3005010
+	ldr r2, _0808BA50 @ =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -90,7 +90,7 @@ GetBoxMonDataFromAnyBox: @ 808BA18
 	bl GetBoxMonData
 	b _0808BA56
 	.align 2, 0
-_0808BA50: .4byte gUnknown_3005010
+_0808BA50: .4byte gPokemonStoragePtr
 _0808BA54:
 	movs r0, 0
 _0808BA56:
@@ -112,7 +112,7 @@ SetBoxMonDataFromAnyBox: @ 808BA5C
 	bhi _0808BA94
 	cmp r4, 0x1D
 	bhi _0808BA94
-	ldr r2, _0808BA9C @ =gUnknown_3005010
+	ldr r2, _0808BA9C @ =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -133,7 +133,7 @@ _0808BA94:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BA9C: .4byte gUnknown_3005010
+_0808BA9C: .4byte gPokemonStoragePtr
 	thumb_func_end SetBoxMonDataFromAnyBox
 
 	thumb_func_start GetBoxMonDataFromSelectedBox
@@ -143,7 +143,7 @@ GetBoxMonDataFromSelectedBox: @ 808BAA0
 	adds r2, r1, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, _0808BABC @ =gUnknown_3005010
+	ldr r0, _0808BABC @ =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	adds r1, r3, 0
@@ -151,7 +151,7 @@ GetBoxMonDataFromSelectedBox: @ 808BAA0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808BABC: .4byte gUnknown_3005010
+_0808BABC: .4byte gPokemonStoragePtr
 	thumb_func_end GetBoxMonDataFromSelectedBox
 
 	thumb_func_start SetBoxMonDataFromSelectedBox
@@ -162,7 +162,7 @@ SetBoxMonDataFromSelectedBox: @ 808BAC0
 	adds r3, r2, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0808BAE0 @ =gUnknown_3005010
+	ldr r0, _0808BAE0 @ =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	adds r1, r4, 0
@@ -172,7 +172,7 @@ SetBoxMonDataFromSelectedBox: @ 808BAC0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BAE0: .4byte gUnknown_3005010
+_0808BAE0: .4byte gPokemonStoragePtr
 	thumb_func_end SetBoxMonDataFromSelectedBox
 
 	thumb_func_start GetBoxMonNickFromAnyBox
@@ -187,7 +187,7 @@ GetBoxMonNickFromAnyBox: @ 808BAE4
 	bhi _0808BB20
 	cmp r4, 0x1D
 	bhi _0808BB20
-	ldr r2, _0808BB1C @ =gUnknown_3005010
+	ldr r2, _0808BB1C @ =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -205,7 +205,7 @@ GetBoxMonNickFromAnyBox: @ 808BAE4
 	bl GetBoxMonData
 	b _0808BB24
 	.align 2, 0
-_0808BB1C: .4byte gUnknown_3005010
+_0808BB1C: .4byte gPokemonStoragePtr
 _0808BB20:
 	movs r0, 0xFF
 	strb r0, [r5]
@@ -227,7 +227,7 @@ SetBoxMonNickFromAnyBox: @ 808BB2C
 	bhi _0808BB62
 	cmp r4, 0x1D
 	bhi _0808BB62
-	ldr r2, _0808BB68 @ =gUnknown_3005010
+	ldr r2, _0808BB68 @ =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -248,7 +248,7 @@ _0808BB62:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BB68: .4byte gUnknown_3005010
+_0808BB68: .4byte gPokemonStoragePtr
 	thumb_func_end SetBoxMonNickFromAnyBox
 
 	thumb_func_start GetAndCopyBoxMonDataFromAnyBox
@@ -264,7 +264,7 @@ GetAndCopyBoxMonDataFromAnyBox: @ 808BB6C
 	bhi _0808BBAC
 	cmp r4, 0x1D
 	bhi _0808BBAC
-	ldr r2, _0808BBA8 @ =gUnknown_3005010
+	ldr r2, _0808BBA8 @ =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -282,7 +282,7 @@ GetAndCopyBoxMonDataFromAnyBox: @ 808BB6C
 	bl GetBoxMonData
 	b _0808BBAE
 	.align 2, 0
-_0808BBA8: .4byte gUnknown_3005010
+_0808BBA8: .4byte gPokemonStoragePtr
 _0808BBAC:
 	movs r0, 0
 _0808BBAE:
@@ -303,7 +303,7 @@ CopyBoxMonFromAnyBox: @ 808BBB4
 	bhi _0808BBEA
 	cmp r1, 0x1D
 	bhi _0808BBEA
-	ldr r0, _0808BBF0 @ =gUnknown_3005010
+	ldr r0, _0808BBF0 @ =gPokemonStoragePtr
 	ldr r0, [r0]
 	lsls r3, r1, 2
 	adds r3, r1
@@ -324,7 +324,7 @@ _0808BBEA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BBF0: .4byte gUnknown_3005010
+_0808BBF0: .4byte gPokemonStoragePtr
 	thumb_func_end CopyBoxMonFromAnyBox
 
 	thumb_func_start sub_808BBF4
@@ -339,7 +339,7 @@ sub_808BBF4: @ 808BBF4
 	bhi _0808BC2A
 	cmp r2, 0x1D
 	bhi _0808BC2A
-	ldr r0, _0808BC30 @ =gUnknown_3005010
+	ldr r0, _0808BC30 @ =gPokemonStoragePtr
 	ldr r1, [r0]
 	lsls r3, r2, 2
 	adds r3, r2
@@ -360,7 +360,7 @@ _0808BC2A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BC30: .4byte gUnknown_3005010
+_0808BC30: .4byte gPokemonStoragePtr
 	thumb_func_end sub_808BBF4
 
 	thumb_func_start sub_808BC34
@@ -395,7 +395,7 @@ sub_808BC34: @ 808BC34
 	bhi _0808BCA0
 	cmp r6, 0x1D
 	bhi _0808BCA0
-	ldr r2, _0808BCB0 @ =gUnknown_3005010
+	ldr r2, _0808BCB0 @ =gPokemonStoragePtr
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r1, r0, 4
@@ -427,7 +427,7 @@ _0808BCA0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BCB0: .4byte gUnknown_3005010
+_0808BCB0: .4byte gPokemonStoragePtr
 	thumb_func_end sub_808BC34
 
 	thumb_func_start sub_808BCB4
@@ -441,7 +441,7 @@ sub_808BCB4: @ 808BCB4
 	bhi _0808BCE4
 	cmp r4, 0x1D
 	bhi _0808BCE4
-	ldr r2, _0808BCEC @ =gUnknown_3005010
+	ldr r2, _0808BCEC @ =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -460,7 +460,7 @@ _0808BCE4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BCEC: .4byte gUnknown_3005010
+_0808BCEC: .4byte gPokemonStoragePtr
 	thumb_func_end sub_808BCB4
 
 	thumb_func_start sub_808BCF0
@@ -475,7 +475,7 @@ sub_808BCF0: @ 808BCF0
 	bhi _0808BD24
 	cmp r4, 0x1D
 	bhi _0808BD24
-	ldr r2, _0808BD2C @ =gUnknown_3005010
+	ldr r2, _0808BD2C @ =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -495,7 +495,7 @@ _0808BD24:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BD2C: .4byte gUnknown_3005010
+_0808BD2C: .4byte gPokemonStoragePtr
 	thumb_func_end sub_808BCF0
 
 	thumb_func_start GetBoxedMonPtr
@@ -509,7 +509,7 @@ GetBoxedMonPtr: @ 808BD30
 	bhi _0808BD64
 	cmp r4, 0x1D
 	bhi _0808BD64
-	ldr r2, _0808BD60 @ =gUnknown_3005010
+	ldr r2, _0808BD60 @ =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -524,7 +524,7 @@ GetBoxedMonPtr: @ 808BD30
 	adds r0, r1
 	b _0808BD66
 	.align 2, 0
-_0808BD60: .4byte gUnknown_3005010
+_0808BD60: .4byte gPokemonStoragePtr
 _0808BD64:
 	movs r0, 0
 _0808BD66:
@@ -543,7 +543,7 @@ GetBoxNamePtr: @ 808BD6C
 	movs r0, 0
 	b _0808BD88
 _0808BD7A:
-	ldr r0, _0808BD8C @ =gUnknown_3005010
+	ldr r0, _0808BD8C @ =gPokemonStoragePtr
 	lsls r1, r2, 3
 	adds r1, r2
 	ldr r2, _0808BD90 @ =0x00008344
@@ -554,7 +554,7 @@ _0808BD88:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808BD8C: .4byte gUnknown_3005010
+_0808BD8C: .4byte gPokemonStoragePtr
 _0808BD90: .4byte 0x00008344
 	thumb_func_end GetBoxNamePtr
 
@@ -568,7 +568,7 @@ sub_808BD94: @ 808BD94
 	movs r0, 0
 	b _0808BDAE
 _0808BDA2:
-	ldr r0, _0808BDB4 @ =gUnknown_3005010
+	ldr r0, _0808BDB4 @ =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldr r2, _0808BDB8 @ =0x000083c2
 	adds r0, r2
@@ -578,7 +578,7 @@ _0808BDAE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808BDB4: .4byte gUnknown_3005010
+_0808BDB4: .4byte gPokemonStoragePtr
 _0808BDB8: .4byte 0x000083c2
 	thumb_func_end sub_808BD94
 
@@ -593,7 +593,7 @@ sub_808BDBC: @ 808BDBC
 	bhi _0808BDDA
 	cmp r1, 0xF
 	bhi _0808BDDA
-	ldr r0, _0808BDE0 @ =gUnknown_3005010
+	ldr r0, _0808BDE0 @ =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldr r3, _0808BDE4 @ =0x000083c2
 	adds r0, r3
@@ -603,7 +603,7 @@ _0808BDDA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808BDE0: .4byte gUnknown_3005010
+_0808BDE0: .4byte gPokemonStoragePtr
 _0808BDE4: .4byte 0x000083c2
 	thumb_func_end sub_808BDBC
 

@@ -28,10 +28,10 @@ sub_8079B7C: @ 8079B7C
 	strb r0, [r1]
 	bl SetSaveBlocksPointers
 	bl sub_8054A28
-	bl ResetSaveCounters
+	bl Save_ResetSaveCounters
 	movs r0, 0
-	bl sub_80DA4FC
-	ldr r0, _08079BF8 @ =gUnknown_30053A0
+	bl Save_LoadGameData
+	ldr r0, _08079BF8 @ =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08079BC4
@@ -59,7 +59,7 @@ _08079BC8:
 _08079BEC: .4byte 0x04000208
 _08079BF0: .4byte gMain
 _08079BF4: .4byte 0x00000439
-_08079BF8: .4byte gUnknown_30053A0
+_08079BF8: .4byte gSaveFileStatus
 _08079BFC: .4byte gSaveBlock2Ptr
 _08079C00: .4byte gHeap
 _08079C04: .4byte sub_8056938

@@ -306,10 +306,10 @@ c2_copyright_1: @ 80EC820
 	cmp r0, 0
 	bne _080EC858
 	bl sub_8054A28
-	bl ResetSaveCounters
+	bl Save_ResetSaveCounters
 	movs r0, 0
-	bl sub_80DA4FC
-	ldr r0, _080EC85C @ =gUnknown_30053A0
+	bl Save_LoadGameData
+	ldr r0, _080EC85C @ =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080EC846
@@ -328,7 +328,7 @@ _080EC858:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC85C: .4byte gUnknown_30053A0
+_080EC85C: .4byte gSaveFileStatus
 _080EC860: .4byte gSaveBlock2Ptr
 	thumb_func_end c2_copyright_1
 

@@ -2194,9 +2194,9 @@ _08111980: .4byte gUnknown_3005E88
 sub_8111984: @ 8111984
 	push {lr}
 	bl sub_806E6FC
-	bl ResetSaveCounters
+	bl Save_ResetSaveCounters
 	movs r0, 0
-	bl sub_80DA4FC
+	bl Save_LoadGameData
 	ldr r0, _081119B4 @ =sub_8057430
 	bl SetMainCallback2
 	ldr r1, _081119B8 @ =gUnknown_3005024

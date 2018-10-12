@@ -122,7 +122,7 @@ _081436B8: .4byte gUnknown_3003F84
 	thumb_func_start sub_81436BC
 sub_81436BC: @ 81436BC
 	push {lr}
-	ldr r0, _081436E0 @ =gUnknown_201C000
+	ldr r0, _081436E0 @ =gDecompressionBuffer
 	movs r2, 0x80
 	lsls r2, 6
 	movs r1, 0
@@ -137,7 +137,7 @@ sub_81436BC: @ 81436BC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081436E0: .4byte gUnknown_201C000
+_081436E0: .4byte gDecompressionBuffer
 _081436E4: .4byte gUnknown_202271A
 _081436E8: .4byte 0x00005502
 	thumb_func_end sub_81436BC
@@ -775,7 +775,7 @@ _08143C12:
 	strb r0, [r4, 0x8]
 	b _08143D1A
 _08143C1C:
-	ldr r0, _08143C30 @ =gUnknown_201C000
+	ldr r0, _08143C30 @ =gDecompressionBuffer
 	bl sub_815D6B4
 	strb r0, [r4, 0xE]
 	ldrb r0, [r4, 0xE]
@@ -784,7 +784,7 @@ _08143C1C:
 	strb r0, [r4, 0x8]
 	b _08143D1A
 	.align 2, 0
-_08143C30: .4byte gUnknown_201C000
+_08143C30: .4byte gDecompressionBuffer
 _08143C34:
 	ldr r0, _08143C48 @ =gUnknown_3003F64
 	ldrb r0, [r0]
@@ -803,7 +803,7 @@ _08143C4C:
 	strb r0, [r4, 0x8]
 	b _08143D1A
 _08143C52:
-	ldr r0, _08143C70 @ =gUnknown_201C000
+	ldr r0, _08143C70 @ =gDecompressionBuffer
 	bl sub_815D794
 	cmp r0, 0
 	beq _08143C78
@@ -815,7 +815,7 @@ _08143C52:
 	strb r0, [r4, 0x8]
 	b _08143D1A
 	.align 2, 0
-_08143C70: .4byte gUnknown_201C000
+_08143C70: .4byte gDecompressionBuffer
 _08143C74: .4byte gUnknown_841DE99
 _08143C78:
 	movs r0, 0x16

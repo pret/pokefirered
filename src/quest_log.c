@@ -79,6 +79,7 @@ void sub_8111AD8(void);
 void sub_8111B80(void);
 u8 sub_8111BD4(void);
 void sub_8111D10(void);
+void sub_8111D90(u8);
 void sub_8111E20(void);
 void sub_8111E64(s8);
 bool8 sub_8111F60(void);
@@ -110,6 +111,10 @@ const struct WindowTemplate gUnknown_845661C[3] = {
 };
 
 const struct TextColor gUnknown_8456634 = {15, 1, 12};
+
+const u16 gUnknown_8456638[] = INCBIN_U16("data/graphics/unknown_8456638.bin");
+
+const u8 gUnknown_8456698[] = {17, 10, 3};
 
 void sub_8110840(void * a0)
 {
@@ -1098,4 +1103,58 @@ void sub_8111CF0(void)
 {
     if (gUnknown_203ADFA == 2)
         sub_8111070(gUnknown_203ADF9);
+}
+
+void sub_8111D10(void)
+{
+    u16 i;
+    u8 count = 0;
+
+    for (i = 0; i < 0x100 && gStringVar4[i] != EOS; i++)
+    {
+        if (gStringVar4[i] == CHAR_NEWLINE)
+            count++;
+    }
+
+    PutWindowTilemap(gUnknown_203ADFE[2]);
+    sub_8111D90(gUnknown_203ADFE[2]);
+    AddTextPrinterParametrized2(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, &gUnknown_8456634, 0, gStringVar4);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_8111D90(u8 a0)
+{
+    const u16 * src = gUnknown_8456638;
+    u16 * buffer = Alloc(0x1680);
+    u8 i, j, y;
+
+    if (buffer)
+    {
+        for (i = 0; i < 6; i++)
+        {
+            switch (i)
+            {
+                default:
+                    y = 1;
+                    break;
+                case 0:
+                    y = 0;
+                    break;
+                case 5:
+                    y = 2;
+                    break;
+            }
+
+            // r6 = y * 32
+            // r5 = 2 * (i % 16)
+            // r4 = j
+            for (j = 0; j < 30; j++)
+            {
+                CpuCopy32(src + 16 * y, buffer + 16 * (2 * (15 * i) + j), 32);
+            }
+        }
+
+        CopyToWindowPixelBuffer(a0, (const u8 *)buffer, 0x1680, 0);
+        Free(buffer);
+    }
 }

@@ -22,7 +22,7 @@ sub_8079C08: @ 8079C08
 	lsrs r5, 24
 	ldr r0, _08079CD0 @ =gUnknown_83C2CE0
 	lsls r1, r5, 5
-	ldr r2, _08079CD4 @ =gUnknown_20373F8
+	ldr r2, _08079CD4 @ =gPlttBufferUnfaded + 0x200
 	adds r1, r2
 	ldr r2, _08079CD8 @ =0x04000008
 	bl CpuSet
@@ -101,7 +101,7 @@ _08079CC4:
 	.align 2, 0
 _08079CCC: .4byte Task_WeatherMain
 _08079CD0: .4byte gUnknown_83C2CE0
-_08079CD4: .4byte gUnknown_20373F8
+_08079CD4: .4byte gPlttBufferUnfaded + 0x200
 _08079CD8: .4byte 0x04000008
 _08079CDC: .4byte gUnknown_2037F34
 _08079CE0: .4byte 0x000006d5

@@ -762,46 +762,10 @@ gUnknown_2037108: @ 2037108
 	.space 0xF0
 
 gPlttBufferUnfaded: @ 20371F8
-	.space 0x2
-
-gUnknown_20371FA: @ 20371FA
-	.space 0x1E
-
-gUnknown_2037218: @ 2037218
-	.space 0x20
-
-gUnknown_2037238: @ 2037238
-	.space 0x20
-
-gUnknown_2037258: @ 2037258
-	.space 0x20
-
-gUnknown_2037278: @ 2037278
-	.space 0x120
-
-gUnknown_2037398: @ 2037398
-	.space 0x60
-
-gUnknown_20373F8: @ 20373F8
-	.space 0x10
-
-gUnknown_2037408: @ 2037408
-	.space 0x1F0
+	.space 0x400
 
 gPlttBufferFaded: @ 20375F8
-	.space 0x2
-
-gUnknown_20375FA: @ 20375FA
-	.space 0x3E
-
-gUnknown_2037638: @ 2037638
-	.space 0x78
-
-gUnknown_20376B0: @ 20376B0
-	.space 0x148
-
-gUnknown_20377F8: @ 20377F8
-	.space 0x200
+	.space 0x400
 
 gUnknown_20379F8: @ 20379F8
 	.space 0xC0

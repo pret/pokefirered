@@ -6117,7 +6117,7 @@ _080A51A4:
 	ldrb r1, [r4, 0x5]
 	lsrs r1, 4
 	lsls r0, r1, 5
-	ldr r2, _080A5204 @ =gUnknown_2037408
+	ldr r2, _080A5204 @ =gPlttBufferUnfaded + 0x210
 	adds r0, r2
 	lsls r1, 4
 	ldr r3, _080A5208 @ =0x00000101
@@ -6135,7 +6135,7 @@ _080A51A4:
 	b _080A5214
 	.align 2, 0
 _080A5200: .4byte 0x00007fff
-_080A5204: .4byte gUnknown_2037408
+_080A5204: .4byte gPlttBufferUnfaded + 0x210
 _080A5208: .4byte 0x00000101
 _080A520C:
 	cmp r0, 0

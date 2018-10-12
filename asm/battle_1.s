@@ -242,7 +242,7 @@ sub_800F380: @ 800F380
 	adds r2, 0x2
 	ldr r1, _0800F3FC @ =0x0000675a
 	strh r1, [r2]
-	ldr r5, _0800F400 @ =gUnknown_20376B0
+	ldr r5, _0800F400 @ =gPlttBufferFaded + 0xB8
 	adds r1, r5, 0
 	movs r2, 0x4
 	bl CpuSet
@@ -275,7 +275,7 @@ _0800F3F0: .4byte gPlttBufferUnfaded
 _0800F3F4: .4byte 0x00002529
 _0800F3F8: .4byte 0x00007fff
 _0800F3FC: .4byte 0x0000675a
-_0800F400: .4byte gUnknown_20376B0
+_0800F400: .4byte gPlttBufferFaded + 0xB8
 _0800F404: .4byte gBattleTypeFlags
 _0800F408: .4byte 0x00010010
 	thumb_func_end sub_800F380

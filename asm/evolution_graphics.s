@@ -997,8 +997,8 @@ sub_80F6080: @ 80F6080
 	movs r0, 0
 	strh r0, [r5, 0x26]
 	bl sub_80D0474
-	ldr r0, _080F60D0 @ =gUnknown_2037638
-	ldr r1, _080F60D4 @ =gUnknown_2037238
+	ldr r0, _080F60D0 @ =gPlttBufferFaded + 0x40
+	ldr r1, _080F60D4 @ =gPlttBufferUnfaded + 0x40
 	movs r2, 0x30
 	bl CpuSet
 	ldr r0, _080F60D8 @ =0xfff90f1c
@@ -1018,8 +1018,8 @@ sub_80F6080: @ 80F6080
 	bx r0
 	.align 2, 0
 _080F60CC: .4byte gTasks
-_080F60D0: .4byte gUnknown_2037638
-_080F60D4: .4byte gUnknown_2037238
+_080F60D0: .4byte gPlttBufferFaded + 0x40
+_080F60D4: .4byte gPlttBufferUnfaded + 0x40
 _080F60D8: .4byte 0xfff90f1c
 _080F60DC: .4byte 0x00007fff
 _080F60E0: .4byte sub_80F60E4
@@ -1159,8 +1159,8 @@ sub_80F61C0: @ 80F61C0
 	movs r0, 0
 	strh r0, [r5, 0x26]
 	bl sub_80D0474
-	ldr r0, _080F6210 @ =gUnknown_2037638
-	ldr r1, _080F6214 @ =gUnknown_2037238
+	ldr r0, _080F6210 @ =gPlttBufferFaded + 0x40
+	ldr r1, _080F6214 @ =gPlttBufferUnfaded + 0x40
 	movs r2, 0x30
 	bl CpuSet
 	ldr r0, _080F6218 @ =0xfff90f00
@@ -1180,8 +1180,8 @@ sub_80F61C0: @ 80F61C0
 	bx r0
 	.align 2, 0
 _080F620C: .4byte gTasks
-_080F6210: .4byte gUnknown_2037638
-_080F6214: .4byte gUnknown_2037238
+_080F6210: .4byte gPlttBufferFaded + 0x40
+_080F6214: .4byte gPlttBufferUnfaded + 0x40
 _080F6218: .4byte 0xfff90f00
 _080F621C: .4byte 0x00007fff
 _080F6220: .4byte sub_80F6224
@@ -1369,7 +1369,7 @@ _080F62CE:
 	ldrb r1, [r2, 0x5]
 	lsrs r1, 4
 	lsls r1, 5
-	ldr r0, _080F63FC @ =gUnknown_20377F8
+	ldr r0, _080F63FC @ =gPlttBufferFaded + 0x200
 	mov r10, r0
 	add r1, r10
 	add r0, sp, 0x4
@@ -1422,7 +1422,7 @@ _080F63EC: .4byte 0x00007fff
 _080F63F0: .4byte gTasks
 _080F63F4: .4byte gSprites
 _080F63F8: .4byte nullsub_86
-_080F63FC: .4byte gUnknown_20377F8
+_080F63FC: .4byte gPlttBufferFaded + 0x200
 	thumb_func_end sub_80F62B4
 
 	thumb_func_start sub_80F6400

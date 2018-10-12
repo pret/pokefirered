@@ -577,7 +577,7 @@ _08078DF2:
 	bgt _08078E02
 	b _08078FB6
 _08078E02:
-	ldr r0, _08078E20 @ =gUnknown_2037398
+	ldr r0, _08078E20 @ =gPlttBufferUnfaded + 0x1A0
 	movs r1, 0x10
 	bl TintPalette_GrayScale2
 	movs r0, 0x80
@@ -590,7 +590,7 @@ _08078E02:
 	bl BeginNormalPaletteFade
 	b _08078F80
 	.align 2, 0
-_08078E20: .4byte gUnknown_2037398
+_08078E20: .4byte gPlttBufferUnfaded + 0x1A0
 _08078E24:
 	ldr r0, _08078E3C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -749,7 +749,7 @@ _08078F24:
 	movs r0, 0
 	bl ShowBg
 	ldr r0, _08078F90 @ =gUnknown_8EAD5E8
-	ldr r1, _08078F94 @ =gUnknown_2037398
+	ldr r1, _08078F94 @ =gPlttBufferUnfaded + 0x1A0
 	movs r2, 0x10
 	bl CpuSet
 	movs r0, 0x80
@@ -772,7 +772,7 @@ _08078F80:
 _08078F88: .4byte 0x00001fff
 _08078F8C: .4byte 0x00007fde
 _08078F90: .4byte gUnknown_8EAD5E8
-_08078F94: .4byte gUnknown_2037398
+_08078F94: .4byte gPlttBufferUnfaded + 0x1A0
 _08078F98:
 	movs r0, 0
 	bl sub_807185C

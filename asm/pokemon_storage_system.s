@@ -12030,7 +12030,7 @@ _08091924:
 	adds r1, r2
 	ldrb r1, [r1]
 	lsls r1, 6
-	ldr r2, _08091964 @ =gUnknown_2037278
+	ldr r2, _08091964 @ =gPlttBufferUnfaded + 0x80
 	adds r1, r2
 	movs r2, 0x20
 	bl CpuSet
@@ -12055,7 +12055,7 @@ _08091938:
 	bx r0
 	.align 2, 0
 _08091960: .4byte 0x000002d2
-_08091964: .4byte gUnknown_2037278
+_08091964: .4byte gPlttBufferUnfaded + 0x80
 _08091968: .4byte gUnknown_20397B0
 	thumb_func_end sub_8091850
 

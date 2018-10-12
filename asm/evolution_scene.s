@@ -375,7 +375,7 @@ EvolutionScene: @ 80CDDF4
 	strh r2, [r0, 0x1C]
 	ldr r1, _080CE0A8 @ =gUnknown_2039A20
 	ldr r0, [r1]
-	ldr r1, _080CE0D8 @ =gUnknown_2037238
+	ldr r1, _080CE0D8 @ =gPlttBufferUnfaded + 0x40
 	adds r0, 0x4
 	movs r2, 0x60
 	bl memcpy
@@ -423,7 +423,7 @@ _080CE0C8: .4byte gSprites
 _080CE0CC: .4byte nullsub_10
 _080CE0D0: .4byte sub_80CE8DC
 _080CE0D4: .4byte gTasks
-_080CE0D8: .4byte gUnknown_2037238
+_080CE0D8: .4byte gPlttBufferUnfaded + 0x40
 _080CE0DC: .4byte nullsub_76
 _080CE0E0: .4byte sub_80D0050
 _080CE0E4: .4byte sub_80CE710
@@ -1748,7 +1748,7 @@ _080CECC0:
 	bl _080CF528
 _080CECCE:
 	bl m4aMPlayAllStop
-	ldr r0, _080CED00 @ =gUnknown_2037238
+	ldr r0, _080CED00 @ =gPlttBufferUnfaded + 0x40
 	ldr r1, _080CED04 @ =gUnknown_2039A20
 	ldr r1, [r1]
 	adds r1, 0x4
@@ -1769,7 +1769,7 @@ _080CECCE:
 	adds r1, r0
 	b _080CEFDE
 	.align 2, 0
-_080CED00: .4byte gUnknown_2037238
+_080CED00: .4byte gPlttBufferUnfaded + 0x40
 _080CED04: .4byte gUnknown_2039A20
 _080CED08: .4byte gTasks
 _080CED0C:
@@ -3085,7 +3085,7 @@ _080CF86E:
 	ldrh r0, [r4, 0xC]
 	movs r1, 0
 	bl PlayCry1
-	ldr r0, _080CF894 @ =gUnknown_2037238
+	ldr r0, _080CF894 @ =gPlttBufferUnfaded + 0x40
 	ldr r1, _080CF898 @ =gUnknown_2039A20
 	ldr r1, [r1]
 	adds r1, 0x4
@@ -3094,7 +3094,7 @@ _080CF86E:
 	b _080CFA90
 	.align 2, 0
 _080CF890: .4byte gTasks
-_080CF894: .4byte gUnknown_2037238
+_080CF894: .4byte gPlttBufferUnfaded + 0x40
 _080CF898: .4byte gUnknown_2039A20
 _080CF89C:
 	bl IsCryFinished

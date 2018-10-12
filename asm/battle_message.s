@@ -2968,7 +2968,7 @@ SetPpNumbersPaletteInMoveSelection: @ 80D89DC
 	ldrh r0, [r0, 0x2]
 	adds r5, 0xB6
 	strh r0, [r5]
-	ldr r4, _080D8A4C @ =gUnknown_20376B0
+	ldr r4, _080D8A4C @ =gPlttBufferFaded + 0xB8
 	adds r0, r2, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -2987,7 +2987,7 @@ _080D8A3C: .4byte gUnknown_2022BC8
 _080D8A40: .4byte gUnknown_8D2FBB4
 _080D8A44: .4byte gUnknown_2023FFC
 _080D8A48: .4byte gPlttBufferUnfaded
-_080D8A4C: .4byte gUnknown_20376B0
+_080D8A4C: .4byte gPlttBufferFaded + 0xB8
 	thumb_func_end SetPpNumbersPaletteInMoveSelection
 
 	thumb_func_start GetCurrentPpToMaxPpState

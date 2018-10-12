@@ -2477,7 +2477,7 @@ _080EDA1C:
 	ldr r2, _080EDA50 @ =0x00007fff
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _080EDA54 @ =gUnknown_2037218
+	ldr r1, _080EDA54 @ =gPlttBufferUnfaded + 0x20
 	ldr r2, _080EDA58 @ =0x01000020
 	add r0, sp, 0x4
 	bl CpuSet
@@ -2492,7 +2492,7 @@ _080EDA1C:
 	b _080EDA6E
 	.align 2, 0
 _080EDA50: .4byte 0x00007fff
-_080EDA54: .4byte gUnknown_2037218
+_080EDA54: .4byte gPlttBufferUnfaded + 0x20
 _080EDA58: .4byte 0x01000020
 _080EDA5C:
 	ldr r0, _080EDA78 @ =gPaletteFade

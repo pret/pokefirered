@@ -739,7 +739,7 @@ sub_811F03C: @ 811F03C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 28
-	ldr r5, _0811F068 @ =gUnknown_2037258
+	ldr r5, _0811F068 @ =gPlttBufferUnfaded + 0x60
 	lsrs r4, 23
 	adds r1, r5, 0
 	subs r1, 0x60
@@ -757,7 +757,7 @@ sub_811F03C: @ 811F03C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811F068: .4byte gUnknown_2037258
+_0811F068: .4byte gPlttBufferUnfaded + 0x60
 _0811F06C: .4byte gPlttBufferFaded
 	thumb_func_end sub_811F03C
 

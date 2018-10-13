@@ -667,13 +667,13 @@ _0811EFB4:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811F030
-	ldr r0, _0811EFCC @ =gUnknown_8E82AB0
+	ldr r0, _0811EFCC @ =gFile_graphics_interface_party_menu_misc_tilemap
 	ldr r1, _0811EFD0 @ =gUnknown_203B0BC
 	ldr r1, [r1]
 	bl LZDecompressWram
 	b _0811F016
 	.align 2, 0
-_0811EFCC: .4byte gUnknown_8E82AB0
+_0811EFCC: .4byte gFile_graphics_interface_party_menu_misc_tilemap
 _0811EFD0: .4byte gUnknown_203B0BC
 _0811EFD4:
 	ldr r0, _0811EFF4 @ =gUnknown_8E829C8

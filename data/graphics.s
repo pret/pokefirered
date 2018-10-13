@@ -13882,9 +13882,31 @@ gFile_graphics_interface_party_menu_misc_sheet:: @ 8E82700
 gUnknown_8E829C8:: @ 8E829C8
 	.incbin "baserom.gba", 0xE829C8, 0xE8
 
-gUnknown_8E82AB0:: @ 8E82AB0
-	.incbin "baserom.gba", 0xE82AB0, 0x61C
+	.align 2
+gFile_graphics_interface_party_menu_misc_tilemap:: @ 8E82AB0
+	.incbin "graphics/interface/party_menu_misc.bin.lz"
 
+	.align 2
+gFile_graphics_interface_party_menu_pokeball_sheet:: @ 8E82BE8
+	.incbin "graphics/interface/party_menu_pokeball.4bpp.lz"
+
+	.align 2
+gFile_graphics_interface_party_menu_pokeball_small_sheet:: @ 8E82D68
+	.incbin "graphics/interface/party_menu_pokeball_small.4bpp.lz"
+
+	.align 2
+gFile_graphics_interface_party_menu_pokeball_palette:: @ 8E82E7C
+	.incbin "graphics/interface/party_menu_pokeball.gbapal.lz"
+
+	.align 2
+gUnknown_8E82EA0:: @ 8E82EA0
+	.incbin "baserom.gba", 0xE82EA0, 0x204
+
+	.align 2
+gFile_graphics_interface_status_icons_palette:: @ 8E830A4
+	.incbin "graphics/interface/status_icons.gbapal.lz"
+
+	.align 2
 gUnknown_8E830CC:: @ 8E830CC
 	.incbin "baserom.gba", 0xE830CC, 0x1F4
 
@@ -13898,8 +13920,17 @@ gUnknown_8E835B4:: @ 8E835B4
 	.incbin "baserom.gba", 0xE835B4, 0x50
 
 gUnknown_8E83604:: @ 8E83604
-	.incbin "baserom.gba", 0xE83604, 0xFD4
+	.incbin "baserom.gba", 0xE83604, 0xF84
+	
+	.align 2
+gFile_graphics_interface_bag_swap_sheet:: @ 8E84588
+	.incbin "graphics/interface/bag_swap.4bpp.lz"
 
+	.align 2
+gFile_graphics_interface_bag_swap_palette:: @ 8E845C8
+	.incbin "graphics/interface/bag_swap.gbapal.lz"
+
+	.align 2
 gUnknown_8E845D8:: @ 8E845D8
 	.incbin "baserom.gba", 0xE845D8, 0x44C
 

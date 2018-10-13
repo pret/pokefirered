@@ -2351,7 +2351,7 @@ sub_80350BC: @ 80350BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080350FC
-	ldr r0, _080350F4 @ =gUnknown_8D2D0B4
+	ldr r0, _080350F4 @ =gFile_graphics_battle_anims_sprites_substitute_sheet
 	ldr r1, _080350F8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsls r4, r5, 2
@@ -2361,10 +2361,10 @@ sub_80350BC: @ 80350BC
 	bl LZDecompressVram
 	b _0803510E
 	.align 2, 0
-_080350F4: .4byte gUnknown_8D2D0B4
+_080350F4: .4byte gFile_graphics_battle_anims_sprites_substitute_sheet
 _080350F8: .4byte gMonSpritesGfxPtr
 _080350FC:
-	ldr r0, _08035144 @ =gUnknown_8D2D2F4
+	ldr r0, _08035144 @ =gFile_graphics_battle_anims_sprites_substitute_tilemap
 	ldr r1, _08035148 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsls r4, r5, 2
@@ -2375,7 +2375,7 @@ _080350FC:
 _0803510E:
 	movs r3, 0x1
 	lsls r6, 4
-	ldr r7, _0803514C @ =gUnknown_8D2D090
+	ldr r7, _0803514C @ =gFile_graphics_battle_anims_sprites_substitute_palette
 	ldr r0, _08035148 @ =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	adds r0, 0x4
@@ -2401,9 +2401,9 @@ _08035120:
 	bl LoadCompressedPalette
 	b _0803519A
 	.align 2, 0
-_08035144: .4byte gUnknown_8D2D2F4
+_08035144: .4byte gFile_graphics_battle_anims_sprites_substitute_tilemap
 _08035148: .4byte gMonSpritesGfxPtr
-_0803514C: .4byte gUnknown_8D2D090
+_0803514C: .4byte gFile_graphics_battle_anims_sprites_substitute_palette
 _08035150: .4byte 0x040000d4
 _08035154: .4byte 0x84000200
 _08035158:

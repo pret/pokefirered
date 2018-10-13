@@ -154,15 +154,15 @@ sub_80EEC0C: @ 80EEC0C
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080EEDD8 @ =gUnknown_8D2EC70
+	ldr r1, _080EEDD8 @ =gFile_graphics_battle_anims_masks_unknown_D2EC24_tilemap
 	bl sub_807543C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080EEDDC @ =gUnknown_8D2EC24
+	ldr r1, _080EEDDC @ =gFile_graphics_battle_anims_masks_unknown_D2EC24_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080EEDE0 @ =gUnknown_8D2DF78
+	ldr r0, _080EEDE0 @ =gFile_graphics_battle_anims_masks_cure_bubbles_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -212,9 +212,9 @@ _080EEDC8: .4byte 0x00003f42
 _080EEDCC: .4byte gUnknown_3004FF0
 _080EEDD0: .4byte gSprites
 _080EEDD4: .4byte SpriteCallbackDummy
-_080EEDD8: .4byte gUnknown_8D2EC70
-_080EEDDC: .4byte gUnknown_8D2EC24
-_080EEDE0: .4byte gUnknown_8D2DF78
+_080EEDD8: .4byte gFile_graphics_battle_anims_masks_unknown_D2EC24_tilemap
+_080EEDDC: .4byte gFile_graphics_battle_anims_masks_unknown_D2EC24_sheet
+_080EEDE0: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_palette
 _080EEDE4: .4byte gUnknown_2022978
 _080EEDE8: .4byte gUnknown_202297A
 _080EEDEC: .4byte gTasks

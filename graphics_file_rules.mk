@@ -373,7 +373,7 @@ $(BTLANMSPRGFXDIR)/001.4bpp: $(BTLANMSPRGFXDIR)/001_0.4bpp \
 						  $(BTLANMSPRGFXDIR)/001_1.4bpp
 	@cat $^ >$@
 
-$(MASKSGFXDIR)/unknown_C2EA50.4bpp: %.4bpp: %.png
+$(MASKSGFXDIR)/unknown_D2EC24.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 14
 
 $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png

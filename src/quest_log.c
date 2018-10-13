@@ -54,6 +54,7 @@ struct UnkStruct_203AE98
 
 u8 gUnknown_3005E88;
 u16 gUnknown_3005E8C;
+struct UnkStruct_3005E90 gUnknown_3005E90;
 struct UnkStruct_203AE98 * gUnknown_3005E94;
 
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
@@ -69,7 +70,7 @@ EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
 EWRAM_DATA u16 gUnknown_203AF98 = 0;
-EWRAM_DATA u8 gUnknown_203AF9A[128];
+EWRAM_DATA u8 gUnknown_203AF9A[64][2];
 EWRAM_DATA u16 gUnknown_203B01A;
 EWRAM_DATA u16 gUnknown_203B01C;
 
@@ -148,6 +149,8 @@ const struct TextColor gUnknown_8456634 = {15, 1, 12};
 const u16 gUnknown_8456638[] = INCBIN_U16("data/graphics/unknown_8456638.bin");
 
 const u8 gUnknown_8456698[] = {17, 10, 3};
+
+extern const struct UnkStruct_203AE98 gUnknown_845669C;
 
 void sub_8110840(void * a0)
 {
@@ -1437,24 +1440,24 @@ void sub_811246C(struct Sprite *sprite)
     struct MapObject *mapObject = &gMapObjects[sprite->data[0]];
     if (mapObject->localId == 0xFF)
     {
-        if (gUnknown_203AF9A[0] != 0xFF)
+        if (gUnknown_203AF9A[0][0] != 0xFF)
         {
-            sub_8063CA4(mapObject, gUnknown_203AF9A[0]);
-            gUnknown_203AF9A[0] = 0xFF;
+            sub_8063CA4(mapObject, gUnknown_203AF9A[0][0]);
+            gUnknown_203AF9A[0][0] = 0xFF;
         }
-        if (gUnknown_203AF9A[1] != 0xFF)
+        if (gUnknown_203AF9A[0][1] != 0xFF)
         {
             sub_8150454();
-            gUnknown_203AF9A[1] = 0xFF;
+            gUnknown_203AF9A[0][1] = 0xFF;
         }
         sub_8063E28(mapObject, sprite);
     }
     else
     {
-        if (gUnknown_203AF9A[2 * mapObject->localId] != 0xFF)
+        if (gUnknown_203AF9A[mapObject->localId][0] != 0xFF)
         {
-            sub_8063CA4(mapObject, gUnknown_203AF9A[2 * mapObject->localId]);
-            gUnknown_203AF9A[2 * mapObject->localId] = 0xFF;
+            sub_8063CA4(mapObject, gUnknown_203AF9A[mapObject->localId][0]);
+            gUnknown_203AF9A[mapObject->localId][0] = 0xFF;
         }
         sub_8063E28(mapObject, sprite);
     }
@@ -1604,6 +1607,73 @@ void sub_81128BC(u8 a0)
                 gUnknown_3005E88 = 1;
             else if (r1 == 2)
                 gUnknown_3005E88 = 2;
+            break;
+    }
+}
+
+void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
+{
+    s32 i;
+
+    switch (a0)
+    {
+        default:
+            gUnknown_3005E88 = 0;
+            break;
+        case 1:
+            gUnknown_3005E94 = a1;
+            gUnknown_3005E8C = a2 / 8;
+            for (i = 0; i < 0x40; i++)
+            {
+                gUnknown_203AF9A[i][0] |= 0xFF;
+                gUnknown_203AF9A[i][1] |= 0xFF;
+            }
+            gUnknown_203AF98 = 0;
+            gUnknown_203B01C = 0;
+            gUnknown_3005E90 = (struct UnkStruct_3005E90){};
+            gUnknown_203B01A = gUnknown_3005E94[gUnknown_203AF98].unk_4;
+            gUnknown_203AF9A[0][0] = gUnknown_3005E94[gUnknown_203AF98].unk_3;
+            gUnknown_203AF9A[0][1] = 0xFF;
+            gUnknown_3005E88 = 1;
+            break;
+        case 2:
+            gUnknown_3005E94 = a1;
+            gUnknown_3005E8C = a2 / 8;
+            for (i = 0; i < gUnknown_3005E8C; i++)
+            {
+                gUnknown_3005E94[i] = (struct UnkStruct_203AE98){ 0, 0, 0, 0, 0xFFFF, 0xFF };
+            }
+            gUnknown_203AF98 = 0;
+            gUnknown_203B01A = 0;
+            gUnknown_3005E94[gUnknown_203AF98].unk_4 = 0;
+            gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
+            gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
+            switch (player_get_direction_lower_nybble())
+            {
+                case 0:
+                case 1:
+                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 0;
+                    break;
+                case 4:
+                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 3;
+                    break;
+                case 2:
+                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 1;
+                    break;
+                case 3:
+                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 2;
+                    break;
+            }
+            gUnknown_203B01C = 0;
+            gUnknown_203AF98++;
+            gUnknown_3005E94[gUnknown_203AF98].unk_4 = 0;
+            gUnknown_3005E94[gUnknown_203AF98].unk_6 = 2;
+            gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
+            gUnknown_3005E94[gUnknown_203AF98].unk_1 = 0;
+            gUnknown_3005E94[gUnknown_203AF98].unk_2 = 0;
+            gUnknown_3005E94[gUnknown_203AF98].unk_3 = 0;
+            gUnknown_203AF98++;
+            gUnknown_3005E88 = 2;
             break;
     }
 }

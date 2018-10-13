@@ -15891,8 +15891,105 @@ gUnknown_8E93B14:: @ 8E93B14
 	.incbin "baserom.gba", 0xE93B14, 0x24
 
 gUnknown_8E93B38:: @ 8E93B38
-	.incbin "baserom.gba", 0xE93B38, 0x2264
+	.incbin "baserom.gba", 0xE93B38, 0x4E8
+	
+	.align 2
+gFile_graphics_mail_orange_tiles_sheet:: @ 8E94020
+	.incbin "graphics/mail/orange/tiles.4bpp.lz"
 
+	.align 2
+gFile_graphics_mail_harbor_tiles_sheet:: @ 8E941C0
+	.incbin "graphics/mail/harbor/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_glitter_tiles_sheet:: @ 8E942FC
+	.incbin "graphics/mail/glitter/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_mech_tiles_sheet:: @ 8E9450C
+	.incbin "graphics/mail/mech/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_wood_tiles_sheet:: @ 8E945E4
+	.incbin "graphics/mail/wood/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_wave_tiles_sheet:: @ 8E947DC
+	.incbin "graphics/mail/wave/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_bead_tiles_sheet:: @ 8E9495C
+	.incbin "graphics/mail/bead/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_shadow_tiles_sheet:: @ 8E94A04
+	.incbin "graphics/mail/shadow/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_tropic_tiles_sheet:: @ 8E94B94
+	.incbin "graphics/mail/tropic/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_dream_tiles_sheet:: @ 8E94CD4
+	.incbin "graphics/mail/dream/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_fab_tiles_sheet:: @ 8E94E3C
+	.incbin "graphics/mail/fab/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_retro_tiles_sheet:: @ 8E94F8C
+	.incbin "graphics/mail/retro/tiles.4bpp.lz"
+
+	.align 2
+gFile_graphics_mail_orange_map_tilemap:: @ 8E9522C
+	.incbin "graphics/mail/orange/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_harbor_map_tilemap:: @ 8E95304
+	.incbin "graphics/mail/harbor/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_glitter_map_tilemap:: @ 8E953E4
+	.incbin "graphics/mail/glitter/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_mech_map_tilemap:: @ 8E954F0
+	.incbin "graphics/mail/mech/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_wood_map_tilemap:: @ 8E955CC
+	.incbin "graphics/mail/wood/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_wave_map_tilemap:: @ 8E956BC
+	.incbin "graphics/mail/wave/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_bead_map_tilemap:: @ 8E9579C
+	.incbin "graphics/mail/bead/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_shadow_map_tilemap:: @ 8E9587C
+	.incbin "graphics/mail/shadow/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_tropic_map_tilemap:: @ 8E95988
+	.incbin "graphics/mail/tropic/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_dream_map_tilemap:: @ 8E95A78
+	.incbin "graphics/mail/dream/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_fab_map_tilemap:: @ 8E95B70
+	.incbin "graphics/mail/fab/map.bin.lz"
+
+	.align 2
+gFile_graphics_mail_retro_map_tilemap:: @ 8E95C88
+	.incbin "graphics/mail/retro/map.bin.lz"
+
+	.align 2
 gUnknown_8E95D9C:: @ 8E95D9C
 	.incbin "baserom.gba", 0xE95D9C, 0x20
 

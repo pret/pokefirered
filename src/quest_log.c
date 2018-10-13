@@ -18,6 +18,7 @@
 #include "map_obj_80688E4.h"
 #include "map_obj_lock.h"
 #include "field_player_avatar.h"
+#include "field_control_avatar.h"
 #include "item.h"
 #include "region_map.h"
 #include "map_name_popup.h"
@@ -51,7 +52,9 @@ struct UnkStruct_203AE98
     u8 unk_6;
 };
 
-IWRAM_DATA struct UnkStruct_203AE98 * gUnknown_3005E94;
+u8 gUnknown_3005E88;
+u16 gUnknown_3005E8C;
+struct UnkStruct_203AE98 * gUnknown_3005E94;
 
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 EWRAM_DATA u8 gUnknown_203ADF9 = 0;
@@ -1514,5 +1517,50 @@ void sub_81126AC(u8 a0, u8 a1)
         gUnknown_203B01C = gUnknown_203AF98;
         gUnknown_203AF98++;
         gUnknown_203B01A = a1;
+    }
+}
+
+void sub_8112720(u8 a0)
+{
+    if (!sub_8112D1C())
+    {
+        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 1;
+        gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
+        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
+        gUnknown_203AF98++;
+        gUnknown_203B01A = 0;
+    }
+}
+
+void sub_811278C(u8 a0, u8 a1)
+{
+    if (!sub_8112D1C())
+    {
+        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 1;
+        gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
+        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
+        gUnknown_203AF98++;
+        gUnknown_203B01A = a1;
+    }
+}
+
+void sub_81127F8(u32 * a0)
+{
+    if (gUnknown_203AF98 < gUnknown_3005E8C)
+    {
+        u32 r2 = *a0 & 0x00FF00F3;
+        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 2;
+        gUnknown_3005E94[gUnknown_203AF98].unk_0 = r2;
+        gUnknown_3005E94[gUnknown_203AF98].unk_1 = r2 >> 8;
+        gUnknown_3005E94[gUnknown_203AF98].unk_2 = r2 >> 16;
+        gUnknown_3005E94[gUnknown_203AF98].unk_3 = r2 >> 24;
+        gUnknown_203AF98++;
+        if (ScriptContext2_IsEnabled())
+            gUnknown_203B01A = TRUE;
+        else
+            gUnknown_203B01A = FALSE;
     }
 }

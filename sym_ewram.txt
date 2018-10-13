@@ -632,7 +632,7 @@ gUnknown_2036E34: @ 2036E34
 gMapObjects: @ 2036E38
 	.space 0x240
 
-gUnknown_2037078: @ 2037078
+gPlayerAvatar: @ 2037078
 	.space 0x20
 
 gUnknown_2037098: @ 2037098

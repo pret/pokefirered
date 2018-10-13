@@ -789,8 +789,8 @@ sub_8058F48: @ 8058F48
 _08058F74: .4byte gMapHeader
 	thumb_func_end sub_8058F48
 
-	thumb_func_start sub_8058F78
-sub_8058F78: @ 8058F78
+	thumb_func_start MapGridGetMetatileBehaviorAt
+MapGridGetMetatileBehaviorAt: @ 8058F78
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
@@ -800,7 +800,7 @@ sub_8058F78: @ 8058F78
 	bl sub_8058F48
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8058F78
+	thumb_func_end MapGridGetMetatileBehaviorAt
 
 	thumb_func_start sub_8058F8C
 sub_8058F8C: @ 8058F8C

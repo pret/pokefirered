@@ -484,8 +484,8 @@ _08059D66:
 	bx r1
 	thumb_func_end sub_8059D2C
 
-	thumb_func_start sub_8059D70
-sub_8059D70: @ 8059D70
+	thumb_func_start MetatileBehavior_IsMoveTile
+MetatileBehavior_IsMoveTile: @ 8059D70
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -519,7 +519,7 @@ _08059DA6:
 _08059DA8:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059D70
+	thumb_func_end MetatileBehavior_IsMoveTile
 
 	thumb_func_start sub_8059DAC
 sub_8059DAC: @ 8059DAC

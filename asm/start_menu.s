@@ -631,8 +631,8 @@ _0806F24E:
 _0806F254: .4byte gUnknown_20370F0
 	thumb_func_end sub_806F1F0
 
-	thumb_func_start sub_806F258
-sub_806F258: @ 806F258
+	thumb_func_start ShowStartMenu
+ShowStartMenu: @ 806F258
 	push {lr}
 	bl sub_805642C
 	cmp r0, 0
@@ -648,7 +648,7 @@ _0806F26E:
 	bx r0
 	.align 2, 0
 _0806F27C: .4byte sub_806F1F0
-	thumb_func_end sub_806F258
+	thumb_func_end ShowStartMenu
 
 	thumb_func_start sub_806F280
 sub_806F280: @ 806F280

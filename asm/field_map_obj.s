@@ -1012,7 +1012,7 @@ unref_sub_808D958: @ 805E55C
 	push {r4,lr}
 	movs r4, 0
 _0805E560:
-	ldr r0, _0805E588 @ =gUnknown_2037078
+	ldr r0, _0805E588 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
 	beq _0805E576
@@ -1032,7 +1032,7 @@ _0805E576:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E588: .4byte gUnknown_2037078
+_0805E588: .4byte gPlayerAvatar
 _0805E58C: .4byte gMapObjects
 	thumb_func_end unref_sub_808D958
 
@@ -2418,7 +2418,7 @@ SetPlayerAvatarFieldObjectIdAndObjectId: @ 805F02C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _0805F058 @ =gUnknown_2037078
+	ldr r5, _0805F058 @ =gPlayerAvatar
 	strb r0, [r5, 0x5]
 	strb r1, [r5, 0x4]
 	ldr r1, _0805F05C @ =gMapObjects
@@ -2436,7 +2436,7 @@ SetPlayerAvatarFieldObjectIdAndObjectId: @ 805F02C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F058: .4byte gUnknown_2037078
+_0805F058: .4byte gPlayerAvatar
 _0805F05C: .4byte gMapObjects
 	thumb_func_end SetPlayerAvatarFieldObjectIdAndObjectId
 
@@ -10369,7 +10369,7 @@ sub_80628E4: @ 80628E4
 	adds r6, r0, 0
 	adds r7, r1, 0
 	ldr r2, _08062908 @ =gMapObjects
-	ldr r3, _0806290C @ =gUnknown_2037078
+	ldr r3, _0806290C @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -10386,7 +10386,7 @@ _08062904:
 	b _08062938
 	.align 2, 0
 _08062908: .4byte gMapObjects
-_0806290C: .4byte gUnknown_2037078
+_0806290C: .4byte gPlayerAvatar
 _08062910:
 	ldr r5, _08062940 @ =gUnknown_83A6390
 	bl player_get_x22
@@ -10533,7 +10533,7 @@ sub_80629B8: @ 80629B8
 	ldrsh r0, [r0, r2]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r8
@@ -10622,7 +10622,7 @@ sub_8062A70: @ 8062A70
 	ldrsh r0, [r0, r2]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r8
@@ -10711,7 +10711,7 @@ sub_8062B28: @ 8062B28
 	ldrsh r0, [r0, r2]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r8
@@ -10800,7 +10800,7 @@ sub_8062BE0: @ 8062BE0
 	ldrsh r0, [r0, r2]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r8
@@ -10925,7 +10925,7 @@ sub_8062CE0: @ 8062CE0
 	ldrsh r0, [r0, r2]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r8
@@ -11021,7 +11021,7 @@ oac_hopping: @ 8062D98
 	ldrsh r0, [r0, r2]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r8
@@ -11100,7 +11100,7 @@ mss_08062EA4: @ 8062EA4
 	adds r6, r0, 0
 	adds r7, r1, 0
 	ldr r2, _08062EC8 @ =gMapObjects
-	ldr r3, _08062ECC @ =gUnknown_2037078
+	ldr r3, _08062ECC @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -11117,7 +11117,7 @@ _08062EC4:
 	b _08062EF8
 	.align 2, 0
 _08062EC8: .4byte gMapObjects
-_08062ECC: .4byte gUnknown_2037078
+_08062ECC: .4byte gPlayerAvatar
 _08062ED0:
 	ldr r5, _08062F00 @ =gUnknown_83A6390
 	bl player_get_x22
@@ -12593,7 +12593,7 @@ IsMetatileDirectionallyImpassable: @ 80638AC
 	asrs r0, 16
 	lsls r1, r7, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [r4]

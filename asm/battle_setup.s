@@ -757,7 +757,7 @@ sub_807FC5C: @ 807FC5C
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r5, r0, 16
 	lsls r0, r5, 24
@@ -907,7 +907,7 @@ GetBattleTransitionTypeByMap: @ 807FD90
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r4, r0, 16
 	bl sav1_get_flash_used_on_map

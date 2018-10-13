@@ -59,7 +59,7 @@ sub_8150498: @ 8150498
 	thumb_func_start sub_81504A8
 sub_81504A8: @ 81504A8
 	push {r4,lr}
-	ldr r0, _081504E0 @ =gUnknown_2037078
+	ldr r0, _081504E0 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -83,14 +83,14 @@ sub_81504A8: @ 81504A8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081504E0: .4byte gUnknown_2037078
+_081504E0: .4byte gPlayerAvatar
 _081504E4: .4byte gMapObjects
 	thumb_func_end sub_81504A8
 
 	thumb_func_start sub_81504E8
 sub_81504E8: @ 81504E8
 	push {r4,lr}
-	ldr r0, _08150528 @ =gUnknown_2037078
+	ldr r0, _08150528 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -117,14 +117,14 @@ sub_81504E8: @ 81504E8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08150528: .4byte gUnknown_2037078
+_08150528: .4byte gPlayerAvatar
 _0815052C: .4byte gMapObjects
 	thumb_func_end sub_81504E8
 
 	thumb_func_start sub_8150530
 sub_8150530: @ 8150530
 	push {r4-r6,lr}
-	ldr r6, _0815057C @ =gUnknown_2037078
+	ldr r6, _0815057C @ =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -161,7 +161,7 @@ _08150558:
 	strh r4, [r1, 0x8]
 	b _081505BC
 	.align 2, 0
-_0815057C: .4byte gUnknown_2037078
+_0815057C: .4byte gPlayerAvatar
 _08150580: .4byte gMapObjects
 _08150584: .4byte gSprites
 _08150588: .4byte gUnknown_3005E88
@@ -199,7 +199,7 @@ sub_81505C4: @ 81505C4
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, _0815060C @ =gUnknown_2037078
+	ldr r0, _0815060C @ =gPlayerAvatar
 	mov r9, r0
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -229,7 +229,7 @@ sub_81505C4: @ 81505C4
 	beq _08150626
 	b _081506FC
 	.align 2, 0
-_0815060C: .4byte gUnknown_2037078
+_0815060C: .4byte gPlayerAvatar
 _08150610: .4byte gMapObjects
 _08150614: .4byte gSprites
 _08150618: .4byte gTasks
@@ -348,7 +348,7 @@ _081506FC:
 	thumb_func_start sub_8150708
 sub_8150708: @ 8150708
 	push {r4,r5,lr}
-	ldr r5, _08150770 @ =gUnknown_2037078
+	ldr r5, _08150770 @ =gPlayerAvatar
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -394,7 +394,7 @@ _08150768:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08150770: .4byte gUnknown_2037078
+_08150770: .4byte gPlayerAvatar
 _08150774: .4byte gMapObjects
 _08150778: .4byte gUnknown_20386E0
 	thumb_func_end sub_8150708

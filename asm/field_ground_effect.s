@@ -118,13 +118,13 @@ FieldObjectUpdateMetatileBehaviors: @ 8067C24
 	ldrsh r0, [r4, r1]
 	movs r2, 0x16
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	strb r0, [r4, 0x1F]
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	movs r2, 0x12
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	strb r0, [r4, 0x1E]
 	pop {r4}
 	pop {r0}
@@ -616,7 +616,7 @@ _08067FA0:
 	adds r1, r6, r1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetReflectionTypeByMetatileBehavior
@@ -632,7 +632,7 @@ _08067FA0:
 	adds r1, r6, r1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetReflectionTypeByMetatileBehavior
@@ -661,7 +661,7 @@ _08067FFC:
 	adds r1, r6, r1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetReflectionTypeByMetatileBehavior
@@ -678,7 +678,7 @@ _08067FFC:
 	adds r1, r6, r1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetReflectionTypeByMetatileBehavior
@@ -695,7 +695,7 @@ _08067FFC:
 	adds r1, r6, r1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetReflectionTypeByMetatileBehavior
@@ -712,7 +712,7 @@ _08067FFC:
 	adds r1, r6, r1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetReflectionTypeByMetatileBehavior
@@ -801,7 +801,7 @@ _08068114:
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08068144 @ =gUnknown_83A705C

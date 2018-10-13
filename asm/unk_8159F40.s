@@ -669,14 +669,14 @@ _0815A444:
 	ldrsh r0, [r6, r2]
 	movs r2, 0x12
 	ldrsh r1, [r6, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	strb r0, [r6, 0x1E]
 	ldrb r4, [r6, 0x1F]
 	movs r1, 0x10
 	ldrsh r0, [r6, r1]
 	movs r2, 0x12
 	ldrsh r1, [r6, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	cmp r4, r0
 	bne _0815A488
 	ldrh r0, [r6, 0x10]
@@ -694,7 +694,7 @@ _0815A488:
 	asrs r0, 16
 	movs r2, 0x12
 	ldrsh r1, [r6, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	cmp r4, r0
 	bne _0815A4A8
 	ldrh r0, [r6, 0x10]
@@ -710,7 +710,7 @@ _0815A4A8:
 	asrs r0, 16
 	movs r2, 0x12
 	ldrsh r1, [r6, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	cmp r4, r0
 	bne _0815A4C8
 	ldrh r0, [r6, 0x10]
@@ -726,7 +726,7 @@ _0815A4C8:
 	subs r1, 0x1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	cmp r4, r0
 	bne _0815A4E8
 	ldrh r0, [r6, 0x10]
@@ -742,7 +742,7 @@ _0815A4E8:
 	adds r1, 0x1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	cmp r4, r0
 	bne _0815A508
 	ldrh r0, [r6, 0x10]
@@ -798,7 +798,7 @@ sub_815A540: @ 815A540
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8059CA4
@@ -810,7 +810,7 @@ sub_815A540: @ 815A540
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815A5A4
-	ldr r0, _0815A5B0 @ =gUnknown_2037078
+	ldr r0, _0815A5B0 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -833,7 +833,7 @@ _0815A5A4:
 	bx r0
 	.align 2, 0
 _0815A5AC: .4byte gUnknown_203ADFA
-_0815A5B0: .4byte gUnknown_2037078
+_0815A5B0: .4byte gPlayerAvatar
 _0815A5B4: .4byte gMapObjects
 _0815A5B8: .4byte gSprites
 	thumb_func_end sub_815A540

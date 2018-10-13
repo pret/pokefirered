@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8081B30
-sub_8081B30: @ 8081B30
+	thumb_func_start CheckForTrainersWantingBattle
+CheckForTrainersWantingBattle: @ 8081B30
 	push {r4,r5,lr}
 	bl sub_8111C2C
 	lsls r0, 24
@@ -54,7 +54,7 @@ _08081B7A:
 	bx r1
 	.align 2, 0
 _08081B80: .4byte gMapObjects
-	thumb_func_end sub_8081B30
+	thumb_func_end CheckForTrainersWantingBattle
 
 	thumb_func_start sub_8081B84
 sub_8081B84: @ 8081B84
@@ -735,7 +735,7 @@ _0808204A:
 	bl sub_805FE7C
 	adds r0, r4, 0
 	bl sub_805FE5C
-	ldr r0, _080820B4 @ =gUnknown_2037078
+	ldr r0, _080820B4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -763,7 +763,7 @@ _080820AC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080820B4: .4byte gUnknown_2037078
+_080820B4: .4byte gPlayerAvatar
 _080820B8: .4byte gMapObjects
 	thumb_func_end sub_808202C
 
@@ -772,7 +772,7 @@ sub_80820BC: @ 80820BC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _080820F8 @ =gUnknown_2037078
+	ldr r0, _080820F8 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -798,7 +798,7 @@ _080820EE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080820F8: .4byte gUnknown_2037078
+_080820F8: .4byte gPlayerAvatar
 _080820FC: .4byte gMapObjects
 	thumb_func_end sub_80820BC
 

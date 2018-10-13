@@ -2190,7 +2190,7 @@ sub_8055C74: @ 8055C74
 	adds r1, 0x7
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -2677,7 +2677,7 @@ sub_8055FE0: @ 8055FE0
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8059CA4
@@ -3263,7 +3263,7 @@ sub_805644C: @ 805644C
 	mov r0, sp
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_806C8BC
+	bl FieldGetPlayerInput
 	mov r0, sp
 	bl sub_806CD30
 	bl ScriptContext2_IsEnabled
@@ -4735,7 +4735,7 @@ sub_8057100: @ 8057100
 sub_8057114: @ 8057114
 	push {lr}
 	ldr r2, _08057138 @ =gMapObjects
-	ldr r3, _0805713C @ =gUnknown_2037078
+	ldr r3, _0805713C @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4751,7 +4751,7 @@ sub_8057114: @ 8057114
 	bx r0
 	.align 2, 0
 _08057138: .4byte gMapObjects
-_0805713C: .4byte gUnknown_2037078
+_0805713C: .4byte gPlayerAvatar
 	thumb_func_end sub_8057114
 
 	thumb_func_start sub_8057140
@@ -6640,7 +6640,7 @@ _08057F96:
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	strh r0, [r6, 0xC]
 	add sp, 0x4
 	pop {r4-r6}
@@ -6913,7 +6913,7 @@ sub_80581C8: @ 80581C8
 	push {lr}
 	movs r0, 0x6
 	bl PlaySE
-	bl sub_806F258
+	bl ShowStartMenu
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0

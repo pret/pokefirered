@@ -5817,8 +5817,8 @@ _0810AD08: .4byte gUnknown_84163BB
 _0810AD0C: .4byte sub_810A1D0
 	thumb_func_end sub_810AC40
 
-	thumb_func_start sub_810AD10
-sub_810AD10: @ 810AD10
+	thumb_func_start UseRegisteredKeyItemOnField
+UseRegisteredKeyItemOnField: @ 810AD10
 	push {r4-r6,lr}
 	bl InUnionRoom
 	cmp r0, 0x1
@@ -5887,7 +5887,7 @@ _0810ADA0:
 	bx r1
 	.align 2, 0
 _0810ADA8: .4byte gUnknown_81A77A0
-	thumb_func_end sub_810AD10
+	thumb_func_end UseRegisteredKeyItemOnField
 
 	thumb_func_start sub_810ADAC
 sub_810ADAC: @ 810ADAC

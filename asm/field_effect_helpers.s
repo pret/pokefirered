@@ -888,7 +888,7 @@ _080DB438:
 	ldrsh r0, [r5, r2]
 	movs r2, 0x32
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r8
@@ -1239,7 +1239,7 @@ _080DB6E8:
 	ldrsh r0, [r5, r2]
 	movs r2, 0x32
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r0, r8
@@ -2864,7 +2864,7 @@ sub_80DC348: @ 80DC348
 	ldrsh r1, [r4, r2]
 	bl CurrentMapDrawMetatileAt
 	ldr r2, _080DC3A0 @ =gMapObjects
-	ldr r0, _080DC3A4 @ =gUnknown_2037078
+	ldr r0, _080DC3A4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2881,7 +2881,7 @@ sub_80DC348: @ 80DC348
 	bx r0
 	.align 2, 0
 _080DC3A0: .4byte gMapObjects
-_080DC3A4: .4byte gUnknown_2037078
+_080DC3A4: .4byte gPlayerAvatar
 	thumb_func_end sub_80DC348
 
 	thumb_func_start sub_80DC3A8

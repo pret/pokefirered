@@ -73,7 +73,7 @@ task08_080C9820: @ 80C9820
 	lsrs r5, r0, 24
 	adds r6, r5, 0
 	bl ScriptContext2_Enable
-	ldr r1, _080C9874 @ =gUnknown_2037078
+	ldr r1, _080C9874 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r1, [r1, 0x5]
@@ -107,7 +107,7 @@ _080C9856:
 	ldr r0, _080C9884 @ =sub_80C98FC
 	b _080C98A0
 	.align 2, 0
-_080C9874: .4byte gUnknown_2037078
+_080C9874: .4byte gPlayerAvatar
 _080C9878: .4byte gMapObjects
 _080C987C: .4byte gMapHeader
 _080C9880: .4byte gTasks
@@ -139,7 +139,7 @@ sub_80C98B0: @ 80C98B0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080C98EC @ =gUnknown_2037078
+	ldr r0, _080C98EC @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -165,7 +165,7 @@ _080C98E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C98EC: .4byte gUnknown_2037078
+_080C98EC: .4byte gPlayerAvatar
 _080C98F0: .4byte gMapObjects
 _080C98F4: .4byte gTasks
 _080C98F8: .4byte sub_80C98FC
@@ -207,7 +207,7 @@ _080C9934:
 	movs r0, 0x3
 	str r0, [r6, 0x8]
 _080C993C:
-	ldr r5, _080C998C @ =gUnknown_2037078
+	ldr r5, _080C998C @ =gPlayerAvatar
 	ldrb r0, [r5, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -243,7 +243,7 @@ _080C9980:
 	bx r0
 	.align 2, 0
 _080C9988: .4byte gUnknown_20386E0
-_080C998C: .4byte gUnknown_2037078
+_080C998C: .4byte gPlayerAvatar
 _080C9990: .4byte gMapObjects
 _080C9994: .4byte gSprites
 _080C9998: .4byte gTasks
@@ -266,7 +266,7 @@ sub_80C99A0: @ 80C99A0
 	ldrh r0, [r0, 0x1A]
 	orrs r1, r0
 	bl _call_via_r1
-	ldr r1, _080C99D4 @ =gUnknown_2037078
+	ldr r1, _080C99D4 @ =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	adds r0, r4, 0
@@ -276,7 +276,7 @@ sub_80C99A0: @ 80C99A0
 	bx r0
 	.align 2, 0
 _080C99D0: .4byte gTasks
-_080C99D4: .4byte gUnknown_2037078
+_080C99D4: .4byte gPlayerAvatar
 	thumb_func_end sub_80C99A0
 
 	thumb_func_start SetUpFieldMove_RockSmash

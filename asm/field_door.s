@@ -487,7 +487,7 @@ sub_805B268: @ 805B268
 	asrs r0, 16
 	lsls r1, r5, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8059BDC
@@ -515,7 +515,7 @@ sub_805B29C: @ 805B29C
 	asrs r0, 16
 	lsls r1, r5, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8059BDC
@@ -543,7 +543,7 @@ sub_805B2D0: @ 805B2D0
 	asrs r0, 16
 	lsls r1, r5, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8059BDC
@@ -577,7 +577,7 @@ sub_805B310: @ 805B310
 	asrs r0, 16
 	lsls r1, r5, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8059BDC

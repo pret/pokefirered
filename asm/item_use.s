@@ -348,7 +348,7 @@ sub_80A122C: @ 80A122C
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x83
@@ -506,7 +506,7 @@ sub_80A137C: @ 80A137C
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r6, r0, 16
 	lsls r0, r6, 24

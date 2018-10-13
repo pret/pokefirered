@@ -34,8 +34,8 @@ sub_806C888: @ 806C888
 	bx r0
 	thumb_func_end sub_806C888
 
-	thumb_func_start sub_806C8BC
-sub_806C8BC: @ 806C8BC
+	thumb_func_start FieldGetPlayerInput
+FieldGetPlayerInput: @ 806C8BC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -46,14 +46,14 @@ sub_806C8BC: @ 806C8BC
 	mov r4, sp
 	adds r4, 0x2
 	strh r2, [r4]
-	ldr r0, _0806CA14 @ =gUnknown_2037078
+	ldr r0, _0806CA14 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x2]
 	mov r8, r1
 	ldrb r6, [r0, 0x3]
 	bl cur_mapdata_block_role_at_player_pos
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059D70
+	bl MetatileBehavior_IsMoveTile
 	lsls r0, 24
 	lsrs r7, r0, 24
 	bl ScriptContext1_IsScriptSetUp
@@ -89,7 +89,7 @@ _0806C914:
 	ands r0, r1
 	cmp r0, 0
 	beq _0806C940
-	ldr r0, _0806CA14 @ =gUnknown_2037078
+	ldr r0, _0806CA14 @ =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -107,7 +107,7 @@ _0806C940:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _0806C9D0
-	ldr r0, _0806CA14 @ =gUnknown_2037078
+	ldr r0, _0806CA14 @ =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -213,7 +213,7 @@ _0806C9F6:
 	movs r0, 0x2
 	b _0806CA3E
 	.align 2, 0
-_0806CA14: .4byte gUnknown_2037078
+_0806CA14: .4byte gPlayerAvatar
 _0806CA18: .4byte gUnknown_203ADFA
 _0806CA1C:
 	movs r0, 0x80
@@ -244,7 +244,7 @@ _0806CA40:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806C8BC
+	thumb_func_end FieldGetPlayerInput
 
 	thumb_func_start sub_806CA4C
 sub_806CA4C: @ 806CA4C
@@ -339,7 +339,7 @@ sub_806CAC8: @ 806CAC8
 	ldrsh r0, [r0, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r7, _0806CB70 @ =gUnknown_3005078
@@ -347,7 +347,7 @@ sub_806CAC8: @ 806CAC8
 	bl sub_806C888
 	ldrb r0, [r5, 0x2]
 	strb r0, [r7, 0x2]
-	bl sub_8081B30
+	bl CheckForTrainersWantingBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -406,7 +406,7 @@ _0806CB88:
 	ldrsh r0, [r0, r1]
 	movs r2, 0x2
 	ldrsh r1, [r7, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r4, r0, 16
 	mov r0, sp
@@ -431,7 +431,7 @@ _0806CBC0:
 	ldrsh r0, [r0, r1]
 	movs r2, 0x2
 	ldrsh r1, [r7, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r4, r0, 16
 _0806CBD8:
@@ -441,7 +441,7 @@ _0806CBD8:
 	cmp r0, 0
 	beq _0806CBFC
 	mov r0, r8
-	bl sub_806D7F4
+	bl is_it_battle_time_3
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -464,7 +464,7 @@ _0806CBFC:
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_806D964
+	bl mapheader_run_first_tag2_script_list_match_conditionally
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -484,7 +484,7 @@ _0806CC2C:
 	ldrsh r0, [r0, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldrb r1, [r5]
@@ -541,7 +541,7 @@ _0806CC9C:
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_806DCD0
+	bl map_warp_consider_2_to_inside
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -567,7 +567,7 @@ _0806CCCC:
 	bl FlagSet
 	movs r0, 0x6
 	bl PlaySE
-	bl sub_806F258
+	bl ShowStartMenu
 	b _0806CB6C
 	.align 2, 0
 _0806CCF4: .4byte gUnknown_3005078
@@ -577,7 +577,7 @@ _0806CCFC:
 	ands r0, r1
 	cmp r0, 0
 	beq _0806CD20
-	bl sub_810AD10
+	bl UseRegisteredKeyItemOnField
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -708,7 +708,7 @@ sub_806CDF8: @ 806CDF8
 	bne _0806CE18
 	movs r0, 0x6
 	bl PlaySE
-	bl sub_806F258
+	bl ShowStartMenu
 	adds r0, r4, 0
 	bl DestroyTask
 _0806CE18:
@@ -775,7 +775,7 @@ cur_mapdata_block_role_at_player_pos: @ 806CE74
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r0, 16
 	add sp, 0x4
@@ -873,7 +873,7 @@ sub_806CF38: @ 806CF38
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl MetatileBehavior_IsCounter
@@ -1713,7 +1713,7 @@ sub_806D5E8: @ 806D5E8
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806D650
-	ldr r0, _0806D654 @ =gUnknown_2037078
+	ldr r0, _0806D654 @ =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -1721,7 +1721,7 @@ sub_806D5E8: @ 806D5E8
 	bne _0806D658
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_8059D70
+	bl MetatileBehavior_IsMoveTile
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D658
@@ -1734,7 +1734,7 @@ _0806D650:
 	movs r0, 0x1
 	b _0806D65A
 	.align 2, 0
-_0806D654: .4byte gUnknown_2037078
+_0806D654: .4byte gPlayerAvatar
 _0806D658:
 	movs r0, 0
 _0806D65A:
@@ -1792,7 +1792,7 @@ sub_806D698: @ 806D698
 	cmp r0, 0x2
 	beq _0806D72C
 	bl AdjustFriendship_step
-	ldr r0, _0806D6E4 @ =gUnknown_2037078
+	ldr r0, _0806D6E4 @ =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -1800,7 +1800,7 @@ sub_806D698: @ 806D698
 	bne _0806D720
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8059D70
+	bl MetatileBehavior_IsMoveTile
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D720
@@ -1814,7 +1814,7 @@ sub_806D698: @ 806D698
 	b _0806D730
 	.align 2, 0
 _0806D6E0: .4byte gUnknown_203ADFA
-_0806D6E4: .4byte gUnknown_2037078
+_0806D6E4: .4byte gPlayerAvatar
 _0806D6E8: .4byte gUnknown_81A8CED
 _0806D6EC:
 	bl overworld_poison_step
@@ -1961,15 +1961,15 @@ sub_806D7E8: @ 806D7E8
 	bx r0
 	thumb_func_end sub_806D7E8
 
-	thumb_func_start sub_806D7F4
-sub_806D7F4: @ 806D7F4
+	thumb_func_start is_it_battle_time_3
+is_it_battle_time_3: @ 806D7F4
 	push {lr}
 	bl sub_80833B0
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806D7F4
+	thumb_func_end is_it_battle_time_3
 
 	thumb_func_start sub_806D804
 sub_806D804: @ 806D804
@@ -2159,8 +2159,8 @@ _0806D958:
 _0806D960: .4byte gUnknown_81C555B
 	thumb_func_end sub_806D928
 
-	thumb_func_start sub_806D964
-sub_806D964: @ 806D964
+	thumb_func_start mapheader_run_first_tag2_script_list_match_conditionally
+mapheader_run_first_tag2_script_list_match_conditionally: @ 806D964
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2209,7 +2209,7 @@ _0806D9BC:
 	cmp r0, 0x1
 	bne _0806DA00
 	movs r4, 0
-	ldr r0, _0806D9FC @ =gUnknown_2037078
+	ldr r0, _0806D9FC @ =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x6
 	ands r0, r1
@@ -2230,7 +2230,7 @@ _0806D9E2:
 	movs r0, 0x1
 	b _0806DA02
 	.align 2, 0
-_0806D9FC: .4byte gUnknown_2037078
+_0806D9FC: .4byte gPlayerAvatar
 _0806DA00:
 	movs r0, 0
 _0806DA02:
@@ -2241,7 +2241,7 @@ _0806DA02:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806D964
+	thumb_func_end mapheader_run_first_tag2_script_list_match_conditionally
 
 	thumb_func_start sub_806DA10
 sub_806DA10: @ 806DA10
@@ -2600,8 +2600,8 @@ _0806DCC4:
 _0806DCCC: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_806DC54
 
-	thumb_func_start sub_806DCD0
-sub_806DCD0: @ 806DCD0
+	thumb_func_start map_warp_consider_2_to_inside
+map_warp_consider_2_to_inside: @ 806DCD0
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	lsls r1, 16
@@ -2649,7 +2649,7 @@ _0806DD32:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DCD0
+	thumb_func_end map_warp_consider_2_to_inside
 
 	thumb_func_start map_warp_check
 map_warp_check: @ 806DD38
@@ -2799,7 +2799,7 @@ sub_806DE28: @ 806DE28
 	ldrsh r0, [r5, r1]
 	movs r2, 0x12
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	cmp r0, 0x66
 	bne _0806DE64
 	movs r0, 0x25
@@ -2839,7 +2839,7 @@ sub_806DE70: @ 806DE70
 	asrs r0, 16
 	lsrs r6, r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	cmp r0, 0x20
 	bne _0806DEB8
 	cmp r5, 0
@@ -3017,7 +3017,7 @@ sub_806DFB8: @ 806DFB8
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _0806E010 @ =gMapHeader
@@ -3095,7 +3095,7 @@ GetFieldObjectScriptPointerForComparison: @ 806E050
 	ldrsh r0, [r0, r1]
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3121,7 +3121,7 @@ SetCableClubWarp: @ 806E08C
 	ldrsh r0, [r0, r1]
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	ldr r4, _0806E0CC @ =gMapHeader
 	adds r0, r4, 0
 	mov r1, sp

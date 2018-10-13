@@ -319,7 +319,7 @@ _08097ABC:
 	movs r7, 0
 	ldr r5, _08097B44 @ =gSprites
 _08097AE2:
-	ldr r0, _08097B48 @ =gUnknown_2037078
+	ldr r0, _08097B48 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -366,7 +366,7 @@ _08097B38: .4byte gUnknown_2039A04
 _08097B3C: .4byte 0x0000ffff
 _08097B40: .4byte gUnknown_2039870
 _08097B44: .4byte gSprites
-_08097B48: .4byte gUnknown_2037078
+_08097B48: .4byte gPlayerAvatar
 _08097B4C: .4byte gUnknown_83D414C
 	thumb_func_end sub_8097A48
 

@@ -21,7 +21,7 @@ _080CA62C: .4byte sub_80F4C10
 	thumb_func_start sub_80CA630
 sub_80CA630: @ 80CA630
 	push {r4,lr}
-	ldr r0, _080CA65C @ =gUnknown_2037078
+	ldr r0, _080CA65C @ =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -40,7 +40,7 @@ _080CA644:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA65C: .4byte gUnknown_2037078
+_080CA65C: .4byte gPlayerAvatar
 	thumb_func_end sub_80CA630
 
 	thumb_func_start nullsub_74

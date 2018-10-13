@@ -9685,7 +9685,7 @@ sub_811A9B8: @ 811A9B8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x8
 	bne _0811A9F0
-	ldr r0, _0811A9EC @ =gUnknown_2037078
+	ldr r0, _0811A9EC @ =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _0811A9E6
@@ -9695,7 +9695,7 @@ _0811A9E6:
 	movs r0, 0x1
 	b _0811A9F2
 	.align 2, 0
-_0811A9EC: .4byte gUnknown_2037078
+_0811A9EC: .4byte gPlayerAvatar
 _0811A9F0:
 	movs r0, 0
 _0811A9F2:
@@ -11147,7 +11147,7 @@ _0811B500: .4byte gUnknown_8459580
 	thumb_func_start is_walking_or_running
 is_walking_or_running: @ 811B504
 	push {lr}
-	ldr r0, _0811B518 @ =gUnknown_2037078
+	ldr r0, _0811B518 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _0811B512
@@ -11157,7 +11157,7 @@ _0811B512:
 	movs r0, 0x1
 	b _0811B51E
 	.align 2, 0
-_0811B518: .4byte gUnknown_2037078
+_0811B518: .4byte gPlayerAvatar
 _0811B51C:
 	movs r0, 0
 _0811B51E:

@@ -2068,7 +2068,7 @@ mapldr_08084390: @ 8084390
 	movs r1, 0
 	bl CreateTask
 	ldr r4, _080843EC @ =gMapObjects
-	ldr r3, _080843F0 @ =gUnknown_2037078
+	ldr r3, _080843F0 @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2102,7 +2102,7 @@ _080843D2:
 	.align 2, 0
 _080843E8: .4byte c3_080843F8
 _080843EC: .4byte gMapObjects
-_080843F0: .4byte gUnknown_2037078
+_080843F0: .4byte gPlayerAvatar
 _080843F4: .4byte gUnknown_3005020
 	thumb_func_end mapldr_08084390
 
@@ -2209,7 +2209,7 @@ sub_80844BC: @ 80844BC
 	mov r5, r8
 	push {r5,r6}
 	mov r9, r0
-	ldr r6, _08084558 @ =gUnknown_2037078
+	ldr r6, _08084558 @ =gPlayerAvatar
 	ldrb r0, [r6, 0x5]
 	lsls r5, r0, 3
 	adds r5, r0
@@ -2278,7 +2278,7 @@ sub_80844BC: @ 80844BC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084558: .4byte gUnknown_2037078
+_08084558: .4byte gPlayerAvatar
 _0808455C: .4byte gMapObjects
 _08084560: .4byte gSprites
 	thumb_func_end sub_80844BC
@@ -2305,7 +2305,7 @@ _08084578:
 sub_8084580: @ 8084580
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, _080845E4 @ =gUnknown_2037078
+	ldr r6, _080845E4 @ =gPlayerAvatar
 	ldrb r0, [r6, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
@@ -2352,7 +2352,7 @@ sub_8084580: @ 8084580
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080845E4: .4byte gUnknown_2037078
+_080845E4: .4byte gPlayerAvatar
 _080845E8: .4byte gSprites
 _080845EC: .4byte gSpriteCoordOffsetY
 _080845F0: .4byte gMapObjects
@@ -2362,7 +2362,7 @@ _080845F0: .4byte gMapObjects
 sub_80845F4: @ 80845F4
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r2, _080846A0 @ =gUnknown_2037078
+	ldr r2, _080846A0 @ =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2449,7 +2449,7 @@ _08084698:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080846A0: .4byte gUnknown_2037078
+_080846A0: .4byte gPlayerAvatar
 _080846A4: .4byte gMapObjects
 _080846A8: .4byte gSprites
 	thumb_func_end sub_80845F4
@@ -2511,7 +2511,7 @@ _080846FE:
 sub_8084708: @ 8084708
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r1, _08084778 @ =gUnknown_2037078
+	ldr r1, _08084778 @ =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Disable
@@ -2528,7 +2528,7 @@ sub_8084708: @ 8084708
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_8055B38
@@ -2555,7 +2555,7 @@ _08084760:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084778: .4byte gUnknown_2037078
+_08084778: .4byte gPlayerAvatar
 _0808477C: .4byte 0x00004001
 _08084780: .4byte sub_8084484
 	thumb_func_end sub_8084708
@@ -2645,7 +2645,7 @@ sub_80847F8: @ 80847F8
 sub_8084820: @ 8084820
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08084888 @ =gUnknown_2037078
+	ldr r0, _08084888 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2692,7 +2692,7 @@ _0808487E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084888: .4byte gUnknown_2037078
+_08084888: .4byte gPlayerAvatar
 _0808488C: .4byte gMapObjects
 	thumb_func_end sub_8084820
 
@@ -2760,7 +2760,7 @@ sub_80848E8: @ 80848E8
 sub_80848F8: @ 80848F8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _0808493C @ =gUnknown_2037078
+	ldr r0, _0808493C @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -2792,7 +2792,7 @@ _08084936:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808493C: .4byte gUnknown_2037078
+_0808493C: .4byte gPlayerAvatar
 _08084940: .4byte gSprites
 	thumb_func_end sub_80848F8
 
@@ -2800,7 +2800,7 @@ _08084940: .4byte gSprites
 sub_8084944: @ 8084944
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08084988 @ =gUnknown_2037078
+	ldr r0, _08084988 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -2832,7 +2832,7 @@ _08084982:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08084988: .4byte gUnknown_2037078
+_08084988: .4byte gPlayerAvatar
 _0808498C: .4byte gSprites
 	thumb_func_end sub_8084944
 
@@ -2939,7 +2939,7 @@ sub_8084A5C: @ 8084A5C
 	sub sp, 0x4
 	adds r5, r0, 0
 	bl CameraObjectReset2
-	ldr r0, _08084ABC @ =gUnknown_2037078
+	ldr r0, _08084ABC @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -2963,7 +2963,7 @@ sub_8084A5C: @ 8084A5C
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldrh r0, [r5, 0x8]
@@ -2978,7 +2978,7 @@ sub_8084A5C: @ 8084A5C
 	strh r0, [r5, 0x8]
 	b _08084AC6
 	.align 2, 0
-_08084ABC: .4byte gUnknown_2037078
+_08084ABC: .4byte gPlayerAvatar
 _08084AC0: .4byte gMapObjects
 _08084AC4:
 	movs r1, 0
@@ -2996,7 +2996,7 @@ _08084AC6:
 sub_8084AD8: @ 8084AD8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08084B10 @ =gUnknown_2037078
+	ldr r0, _08084B10 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -3021,7 +3021,7 @@ sub_8084AD8: @ 8084AD8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084B10: .4byte gUnknown_2037078
+_08084B10: .4byte gPlayerAvatar
 _08084B14: .4byte gSprites
 	thumb_func_end sub_8084AD8
 
@@ -3029,7 +3029,7 @@ _08084B14: .4byte gSprites
 sub_8084B18: @ 8084B18
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, _08084B70 @ =gUnknown_2037078
+	ldr r0, _08084B70 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3071,7 +3071,7 @@ _08084B66:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084B70: .4byte gUnknown_2037078
+_08084B70: .4byte gPlayerAvatar
 _08084B74: .4byte gSprites
 	thumb_func_end sub_8084B18
 
@@ -3079,7 +3079,7 @@ _08084B74: .4byte gSprites
 sub_8084B78: @ 8084B78
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08084BB0 @ =gUnknown_2037078
+	ldr r0, _08084BB0 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -3104,7 +3104,7 @@ sub_8084B78: @ 8084B78
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084BB0: .4byte gUnknown_2037078
+_08084BB0: .4byte gPlayerAvatar
 _08084BB4: .4byte gSprites
 	thumb_func_end sub_8084B78
 
@@ -3112,7 +3112,7 @@ _08084BB4: .4byte gSprites
 sub_8084BB8: @ 8084BB8
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, _08084C10 @ =gUnknown_2037078
+	ldr r0, _08084C10 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3155,7 +3155,7 @@ _08084C08:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084C10: .4byte gUnknown_2037078
+_08084C10: .4byte gPlayerAvatar
 _08084C14: .4byte gSprites
 	thumb_func_end sub_8084BB8
 
@@ -3184,7 +3184,7 @@ _08084C36:
 	thumb_func_start sub_8084C3C
 sub_8084C3C: @ 8084C3C
 	push {r4,lr}
-	ldr r0, _08084C94 @ =gUnknown_2037078
+	ldr r0, _08084C94 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3219,7 +3219,7 @@ _08084C8A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084C94: .4byte gUnknown_2037078
+_08084C94: .4byte gPlayerAvatar
 _08084C98: .4byte gMapObjects
 _08084C9C: .4byte sub_8084A24
 	thumb_func_end sub_8084C3C
@@ -3268,7 +3268,7 @@ _08084CEA:
 	ldrsh r2, [r4, r0]
 	lsls r2, 2
 	adds r2, r5
-	ldr r0, _08084D1C @ =gUnknown_2037078
+	ldr r0, _08084D1C @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -3287,7 +3287,7 @@ _08084CEA:
 	.align 2, 0
 _08084D14: .4byte gUnknown_83CC084
 _08084D18: .4byte gTasks
-_08084D1C: .4byte gUnknown_2037078
+_08084D1C: .4byte gPlayerAvatar
 _08084D20: .4byte gMapObjects
 	thumb_func_end sub_8084CD8
 
@@ -3296,7 +3296,7 @@ sub_8084D24: @ 8084D24
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	ldr r1, _08084D40 @ =gUnknown_2037078
+	ldr r1, _08084D40 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrh r0, [r4, 0x8]
@@ -3307,7 +3307,7 @@ sub_8084D24: @ 8084D24
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084D40: .4byte gUnknown_2037078
+_08084D40: .4byte gPlayerAvatar
 	thumb_func_end sub_8084D24
 
 	thumb_func_start waterfall_1_do_anim_probably
@@ -3404,7 +3404,7 @@ _08084DE2:
 	cmp r4, 0
 	bne _08084E18
 	bl ScriptContext2_Disable
-	ldr r0, _08084E10 @ =gUnknown_2037078
+	ldr r0, _08084E10 @ =gPlayerAvatar
 	strb r4, [r0, 0x6]
 	ldr r0, _08084E14 @ =sub_8084CD8
 	bl FindTaskIdByFunc
@@ -3416,7 +3416,7 @@ _08084DE2:
 	movs r0, 0
 	b _08084E1E
 	.align 2, 0
-_08084E10: .4byte gUnknown_2037078
+_08084E10: .4byte gPlayerAvatar
 _08084E14: .4byte sub_8084CD8
 _08084E18:
 	movs r0, 0x3
@@ -3490,7 +3490,7 @@ _08084E94: .4byte gTasks
 
 	thumb_func_start dive_1_lock
 dive_1_lock: @ 8084E98
-	ldr r2, _08084EA8 @ =gUnknown_2037078
+	ldr r2, _08084EA8 @ =gPlayerAvatar
 	movs r1, 0x1
 	strb r1, [r2, 0x6]
 	ldrh r1, [r0, 0x8]
@@ -3499,7 +3499,7 @@ dive_1_lock: @ 8084E98
 	movs r0, 0
 	bx lr
 	.align 2, 0
-_08084EA8: .4byte gUnknown_2037078
+_08084EA8: .4byte gPlayerAvatar
 	thumb_func_end dive_1_lock
 
 	thumb_func_start dive_2_unknown
@@ -3538,7 +3538,7 @@ dive_3_unknown: @ 8084ED4
 	cmp r0, 0
 	bne _08084F18
 	ldr r2, _08084F20 @ =gMapObjects
-	ldr r0, _08084F24 @ =gUnknown_2037078
+	ldr r0, _08084F24 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3561,7 +3561,7 @@ _08084F18:
 	bx r1
 	.align 2, 0
 _08084F20: .4byte gMapObjects
-_08084F24: .4byte gUnknown_2037078
+_08084F24: .4byte gPlayerAvatar
 _08084F28: .4byte sub_8084E60
 	thumb_func_end dive_3_unknown
 
@@ -3586,7 +3586,7 @@ sub_8084F44: @ 8084F44
 	lsrs r0, 24
 	ldr r6, _08084F8C @ =gUnknown_83CC0A4
 	ldr r2, _08084F90 @ =gTasks
-	ldr r5, _08084F94 @ =gUnknown_2037078
+	ldr r5, _08084F94 @ =gPlayerAvatar
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3620,7 +3620,7 @@ _08084F58:
 	.align 2, 0
 _08084F8C: .4byte gUnknown_83CC0A4
 _08084F90: .4byte gTasks
-_08084F94: .4byte gUnknown_2037078
+_08084F94: .4byte gPlayerAvatar
 _08084F98: .4byte gMapObjects
 _08084F9C: .4byte gSprites
 	thumb_func_end sub_8084F44
@@ -3634,7 +3634,7 @@ sub_8084FA0: @ 8084FA0
 	bl CameraObjectReset2
 	movs r0, 0
 	bl SetCameraPanningCallback
-	ldr r0, _08084FD4 @ =gUnknown_2037078
+	ldr r0, _08084FD4 @ =gPlayerAvatar
 	movs r2, 0x1
 	strb r2, [r0, 0x6]
 	ldrb r0, [r5, 0x3]
@@ -3650,7 +3650,7 @@ sub_8084FA0: @ 8084FA0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084FD4: .4byte gUnknown_2037078
+_08084FD4: .4byte gPlayerAvatar
 	thumb_func_end sub_8084FA0
 
 	thumb_func_start sub_8084FD8
@@ -3932,7 +3932,7 @@ sub_80851E8: @ 80851E8
 	lsrs r0, 24
 	ldr r6, _08085230 @ =gUnknown_83CC0BC
 	ldr r2, _08085234 @ =gTasks
-	ldr r5, _08085238 @ =gUnknown_2037078
+	ldr r5, _08085238 @ =gPlayerAvatar
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3966,7 +3966,7 @@ _080851FC:
 	.align 2, 0
 _08085230: .4byte gUnknown_83CC0BC
 _08085234: .4byte gTasks
-_08085238: .4byte gUnknown_2037078
+_08085238: .4byte gPlayerAvatar
 _0808523C: .4byte gMapObjects
 _08085240: .4byte gSprites
 	thumb_func_end sub_80851E8
@@ -3978,7 +3978,7 @@ sub_8085244: @ 8085244
 	adds r4, r1, 0
 	bl CameraObjectReset2
 	bl player_bitmagic
-	ldr r1, _08085270 @ =gUnknown_2037078
+	ldr r1, _08085270 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r0, [r4, 0x1]
@@ -3993,7 +3993,7 @@ sub_8085244: @ 8085244
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08085270: .4byte gUnknown_2037078
+_08085270: .4byte gPlayerAvatar
 	thumb_func_end sub_8085244
 
 	thumb_func_start sub_8085274
@@ -4088,7 +4088,7 @@ sub_8085314: @ 8085314
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808533E
-	ldr r1, _08085344 @ =gUnknown_2037078
+	ldr r1, _08085344 @ =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Disable
@@ -4103,7 +4103,7 @@ _0808533E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08085344: .4byte gUnknown_2037078
+_08085344: .4byte gPlayerAvatar
 _08085348: .4byte sub_80851E8
 	thumb_func_end sub_8085314
 
@@ -4195,7 +4195,7 @@ sub_80853E4: @ 80853E4
 	lsrs r0, 24
 	ldr r6, _0808542C @ =gUnknown_83CC0CC
 	ldr r2, _08085430 @ =gTasks
-	ldr r5, _08085434 @ =gUnknown_2037078
+	ldr r5, _08085434 @ =gPlayerAvatar
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4229,7 +4229,7 @@ _080853F8:
 	.align 2, 0
 _0808542C: .4byte gUnknown_83CC0CC
 _08085430: .4byte gTasks
-_08085434: .4byte gUnknown_2037078
+_08085434: .4byte gPlayerAvatar
 _08085438: .4byte gMapObjects
 _0808543C: .4byte gSprites
 	thumb_func_end sub_80853E4
@@ -4241,7 +4241,7 @@ sub_8085440: @ 8085440
 	adds r4, r1, 0
 	bl player_bitmagic
 	bl CameraObjectReset2
-	ldr r1, _0808546C @ =gUnknown_2037078
+	ldr r1, _0808546C @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r0, [r4, 0x3]
@@ -4256,7 +4256,7 @@ sub_8085440: @ 8085440
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808546C: .4byte gUnknown_2037078
+_0808546C: .4byte gPlayerAvatar
 	thumb_func_end sub_8085440
 
 	thumb_func_start sub_8085470
@@ -4541,7 +4541,7 @@ sub_808566C: @ 808566C
 sub_8085690: @ 8085690
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r0, _080856D4 @ =gUnknown_2037078
+	ldr r0, _080856D4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4571,7 +4571,7 @@ sub_8085690: @ 8085690
 	bl PlaySE
 	b _08085702
 	.align 2, 0
-_080856D4: .4byte gUnknown_2037078
+_080856D4: .4byte gPlayerAvatar
 _080856D8: .4byte gMapObjects
 _080856DC:
 	movs r1, 0x8
@@ -4974,7 +4974,7 @@ sub_80859D4: @ 80859D4
 	movs r0, 0
 	str r0, [r1]
 	ldr r2, _08085A18 @ =gMapObjects
-	ldr r0, _08085A1C @ =gUnknown_2037078
+	ldr r0, _08085A1C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4992,7 +4992,7 @@ sub_80859D4: @ 80859D4
 	.align 2, 0
 _08085A14: .4byte gUnknown_3005020
 _08085A18: .4byte gMapObjects
-_08085A1C: .4byte gUnknown_2037078
+_08085A1C: .4byte gPlayerAvatar
 _08085A20: .4byte sub_8085A24
 	thumb_func_end sub_80859D4
 
@@ -5051,7 +5051,7 @@ sub_8085A80: @ 8085A80
 	adds r4, r0, 0
 	adds r5, r4, 0
 	adds r5, 0x8
-	ldr r0, _08085AD4 @ =gUnknown_2037078
+	ldr r0, _08085AD4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5087,7 +5087,7 @@ sub_8085A80: @ 8085A80
 	strh r0, [r5, 0xC]
 	b _08085B10
 	.align 2, 0
-_08085AD4: .4byte gUnknown_2037078
+_08085AD4: .4byte gPlayerAvatar
 _08085AD8: .4byte gMapObjects
 _08085ADC:
 	movs r2, 0xE
@@ -5221,7 +5221,7 @@ sub_8085BD0: @ 8085BD0
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, _08085C58 @ =gUnknown_2037078
+	ldr r0, _08085C58 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5281,7 +5281,7 @@ _08085C4A:
 	bx r0
 	.align 2, 0
 _08085C54: .4byte gUnknown_83CC108
-_08085C58: .4byte gUnknown_2037078
+_08085C58: .4byte gPlayerAvatar
 _08085C5C: .4byte gMapObjects
 	thumb_func_end sub_8085BD0
 
@@ -5294,7 +5294,7 @@ sub_8085C60: @ 8085C60
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r2, _08085D28 @ =gUnknown_2037078
+	ldr r2, _08085D28 @ =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5386,7 +5386,7 @@ _08085D1A:
 	bx r0
 	.align 2, 0
 _08085D24: .4byte gUnknown_83CC108
-_08085D28: .4byte gUnknown_2037078
+_08085D28: .4byte gPlayerAvatar
 _08085D2C: .4byte gMapObjects
 _08085D30: .4byte gSprites
 	thumb_func_end sub_8085C60
@@ -5440,7 +5440,7 @@ mapldr_08085D88: @ 8085D88
 	movs r0, 0
 	str r0, [r1]
 	ldr r2, _08085DD0 @ =gMapObjects
-	ldr r0, _08085DD4 @ =gUnknown_2037078
+	ldr r0, _08085DD4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5459,7 +5459,7 @@ mapldr_08085D88: @ 8085D88
 	.align 2, 0
 _08085DCC: .4byte gUnknown_3005020
 _08085DD0: .4byte gMapObjects
-_08085DD4: .4byte gUnknown_2037078
+_08085DD4: .4byte gPlayerAvatar
 _08085DD8: .4byte sub_8085DDC
 	thumb_func_end mapldr_08085D88
 
@@ -5496,7 +5496,7 @@ sub_8085E0C: @ 8085E0C
 	lsls r0, 24
 	cmp r0, 0
 	beq _08085E82
-	ldr r5, _08085E88 @ =gUnknown_2037078
+	ldr r5, _08085E88 @ =gPlayerAvatar
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
@@ -5551,7 +5551,7 @@ _08085E82:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08085E88: .4byte gUnknown_2037078
+_08085E88: .4byte gPlayerAvatar
 _08085E8C: .4byte gSprites
 _08085E90: .4byte gSpriteCoordOffsetY
 _08085E94: .4byte gMapObjects
@@ -5566,7 +5566,7 @@ sub_8085E98: @ 8085E98
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r2, _08085F04 @ =gUnknown_2037078
+	ldr r2, _08085F04 @ =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5612,7 +5612,7 @@ sub_8085E98: @ 8085E98
 	b _08085F36
 	.align 2, 0
 _08085F00: .4byte gUnknown_83CC108
-_08085F04: .4byte gUnknown_2037078
+_08085F04: .4byte gPlayerAvatar
 _08085F08: .4byte gMapObjects
 _08085F0C: .4byte gSprites
 _08085F10:
@@ -5699,7 +5699,7 @@ sub_8085F9C: @ 8085F9C
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, _0808601C @ =gUnknown_2037078
+	ldr r0, _0808601C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5750,7 +5750,7 @@ _08086010:
 	bx r0
 	.align 2, 0
 _08086018: .4byte gUnknown_83CC108
-_0808601C: .4byte gUnknown_2037078
+_0808601C: .4byte gPlayerAvatar
 _08086020: .4byte gMapObjects
 _08086024: .4byte sub_8085DDC
 	thumb_func_end sub_8085F9C
@@ -7001,7 +7001,7 @@ sub_80869C0: @ 80869C0
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r5, _08086A18 @ =gUnknown_2037078
+	ldr r5, _08086A18 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
 	movs r0, 0x8
@@ -7034,7 +7034,7 @@ sub_80869C0: @ 80869C0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086A18: .4byte gUnknown_2037078
+_08086A18: .4byte gPlayerAvatar
 _08086A1C: .4byte gMapObjects
 	thumb_func_end sub_80869C0
 
@@ -7042,7 +7042,7 @@ _08086A1C: .4byte gMapObjects
 sub_8086A20: @ 8086A20
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08086A64 @ =gUnknown_2037078
+	ldr r0, _08086A64 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7072,7 +7072,7 @@ _08086A5C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086A64: .4byte gUnknown_2037078
+_08086A64: .4byte gPlayerAvatar
 _08086A68: .4byte gMapObjects
 	thumb_func_end sub_8086A20
 
@@ -7080,7 +7080,7 @@ _08086A68: .4byte gMapObjects
 sub_8086A6C: @ 8086A6C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08086AA8 @ =gUnknown_2037078
+	ldr r0, _08086AA8 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7108,7 +7108,7 @@ _08086AA2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086AA8: .4byte gUnknown_2037078
+_08086AA8: .4byte gPlayerAvatar
 _08086AAC: .4byte gMapObjects
 _08086AB0: .4byte gUnknown_20386E0
 	thumb_func_end sub_8086A6C
@@ -7122,7 +7122,7 @@ sub_8086AB4: @ 8086AB4
 	lsls r0, 24
 	cmp r0, 0
 	bne _08086B1E
-	ldr r5, _08086B24 @ =gUnknown_2037078
+	ldr r5, _08086B24 @ =gPlayerAvatar
 	ldrb r0, [r5, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -7166,7 +7166,7 @@ _08086B1E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086B24: .4byte gUnknown_2037078
+_08086B24: .4byte gPlayerAvatar
 _08086B28: .4byte gMapObjects
 _08086B2C: .4byte gUnknown_20386E0
 	thumb_func_end sub_8086AB4
@@ -7174,7 +7174,7 @@ _08086B2C: .4byte gUnknown_20386E0
 	thumb_func_start sub_8086B30
 sub_8086B30: @ 8086B30
 	push {r4,r5,lr}
-	ldr r5, _08086B9C @ =gUnknown_2037078
+	ldr r5, _08086B9C @ =gPlayerAvatar
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7219,7 +7219,7 @@ _08086B96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086B9C: .4byte gUnknown_2037078
+_08086B9C: .4byte gPlayerAvatar
 _08086BA0: .4byte gMapObjects
 _08086BA4: .4byte sub_8086990
 	thumb_func_end sub_8086B30
@@ -7277,7 +7277,7 @@ sub_8086C00: @ 8086C00
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, _08086C20 @ =gUnknown_2037078
+	ldr r1, _08086C20 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrh r0, [r4, 0x8]
@@ -7287,14 +7287,14 @@ sub_8086C00: @ 8086C00
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086C20: .4byte gUnknown_2037078
+_08086C20: .4byte gPlayerAvatar
 	thumb_func_end sub_8086C00
 
 	thumb_func_start sub_8086C24
 sub_8086C24: @ 8086C24
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08086C68 @ =gUnknown_2037078
+	ldr r0, _08086C68 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7324,7 +7324,7 @@ _08086C60:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086C68: .4byte gUnknown_2037078
+_08086C68: .4byte gPlayerAvatar
 _08086C6C: .4byte gMapObjects
 	thumb_func_end sub_8086C24
 
@@ -7332,7 +7332,7 @@ _08086C6C: .4byte gMapObjects
 sub_8086C70: @ 8086C70
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r5, _08086C9C @ =gUnknown_2037078
+	ldr r5, _08086C9C @ =gPlayerAvatar
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7352,7 +7352,7 @@ sub_8086C70: @ 8086C70
 	movs r0, 0x1
 	b _08086CAE
 	.align 2, 0
-_08086C9C: .4byte gUnknown_2037078
+_08086C9C: .4byte gPlayerAvatar
 _08086CA0: .4byte gMapObjects
 _08086CA4:
 	movs r0, 0x8
@@ -7398,7 +7398,7 @@ _08086CEE:
 	thumb_func_start sub_8086CF4
 sub_8086CF4: @ 8086CF4
 	push {r4,lr}
-	ldr r4, _08086D2C @ =gUnknown_2037078
+	ldr r4, _08086D2C @ =gPlayerAvatar
 	ldrb r1, [r4, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7423,7 +7423,7 @@ _08086D26:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086D2C: .4byte gUnknown_2037078
+_08086D2C: .4byte gPlayerAvatar
 _08086D30: .4byte gMapObjects
 _08086D34: .4byte sub_8086BD0
 	thumb_func_end sub_8086CF4
@@ -7591,7 +7591,7 @@ _08086E6C: .4byte gTasks
 sub_8086E70: @ 8086E70
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, _08086EC0 @ =gUnknown_2037078
+	ldr r6, _08086EC0 @ =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7626,7 +7626,7 @@ _08086EB8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086EC0: .4byte gUnknown_2037078
+_08086EC0: .4byte gPlayerAvatar
 _08086EC4: .4byte gMapObjects
 	thumb_func_end sub_8086E70
 
@@ -7634,7 +7634,7 @@ _08086EC4: .4byte gMapObjects
 sub_8086EC8: @ 8086EC8
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08086F00 @ =gUnknown_2037078
+	ldr r0, _08086F00 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7659,7 +7659,7 @@ _08086EF8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086F00: .4byte gUnknown_2037078
+_08086F00: .4byte gPlayerAvatar
 _08086F04: .4byte gMapObjects
 _08086F08: .4byte gUnknown_20386E0
 	thumb_func_end sub_8086EC8
@@ -7673,7 +7673,7 @@ sub_8086F0C: @ 8086F0C
 	lsls r0, 24
 	cmp r0, 0
 	bne _08086F54
-	ldr r0, _08086F5C @ =gUnknown_2037078
+	ldr r0, _08086F5C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7704,7 +7704,7 @@ _08086F54:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086F5C: .4byte gUnknown_2037078
+_08086F5C: .4byte gPlayerAvatar
 _08086F60: .4byte gMapObjects
 	thumb_func_end sub_8086F0C
 
@@ -7724,7 +7724,7 @@ sub_8086F64: @ 8086F64
 	strh r0, [r4, 0xC]
 	movs r0, 0x1
 	bl SetPlayerAvatarTransitionFlags
-	ldr r0, _08086FA0 @ =gUnknown_2037078
+	ldr r0, _08086FA0 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7738,7 +7738,7 @@ _08086F98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086FA0: .4byte gUnknown_2037078
+_08086FA0: .4byte gPlayerAvatar
 _08086FA4: .4byte gMapObjects
 	thumb_func_end sub_8086F64
 
@@ -7746,7 +7746,7 @@ _08086FA4: .4byte gMapObjects
 sub_8086FA8: @ 8086FA8
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08086FF4 @ =gUnknown_2037078
+	ldr r0, _08086FF4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7781,7 +7781,7 @@ _08086FEC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086FF4: .4byte gUnknown_2037078
+_08086FF4: .4byte gPlayerAvatar
 _08086FF8: .4byte gMapObjects
 	thumb_func_end sub_8086FA8
 
@@ -7796,7 +7796,7 @@ sub_8086FFC: @ 8086FFC
 	asrs r0, 16
 	cmp r0, 0x7
 	ble _0808705A
-	ldr r0, _08087060 @ =gUnknown_2037078
+	ldr r0, _08087060 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -7835,7 +7835,7 @@ _0808705A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087060: .4byte gUnknown_2037078
+_08087060: .4byte gPlayerAvatar
 _08087064: .4byte gMapObjects
 _08087068: .4byte gSprites
 	thumb_func_end sub_8086FFC
@@ -7851,7 +7851,7 @@ sub_808706C: @ 808706C
 	asrs r0, 16
 	cmp r0, 0x9
 	ble _080870FC
-	ldr r0, _08087104 @ =gUnknown_2037078
+	ldr r0, _08087104 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -7914,7 +7914,7 @@ _080870FC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087104: .4byte gUnknown_2037078
+_08087104: .4byte gPlayerAvatar
 _08087108: .4byte gMapObjects
 _0808710C: .4byte gSprites
 _08087110: .4byte gSaveBlock2Ptr
@@ -8425,7 +8425,7 @@ _080874C4: .4byte gTasks
 sub_80874C8: @ 80874C8
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r4, _080875B4 @ =gUnknown_2037078
+	ldr r4, _080875B4 @ =gPlayerAvatar
 	ldrb r1, [r4, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -8531,7 +8531,7 @@ _080875AE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080875B4: .4byte gUnknown_2037078
+_080875B4: .4byte gPlayerAvatar
 _080875B8: .4byte gMapObjects
 _080875BC: .4byte gSprites
 _080875C0: .4byte gSaveBlock2Ptr
@@ -8561,7 +8561,7 @@ sub_80875C8: @ 80875C8
 	cmp r0, 0
 	bne _08087630
 _080875F2:
-	ldr r0, _0808763C @ =gUnknown_2037078
+	ldr r0, _0808763C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -8597,7 +8597,7 @@ _08087630:
 	bx r0
 	.align 2, 0
 _08087638: .4byte gSprites
-_0808763C: .4byte gUnknown_2037078
+_0808763C: .4byte gPlayerAvatar
 _08087640: .4byte gMapObjects
 	thumb_func_end sub_80875C8
 
@@ -8610,7 +8610,7 @@ sub_8087644: @ 8087644
 	mov r0, sp
 	movs r2, 0x24
 	bl memcpy
-	ldr r0, _08087690 @ =gUnknown_2037078
+	ldr r0, _08087690 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -8640,7 +8640,7 @@ _08087682:
 	bx r0
 	.align 2, 0
 _0808768C: .4byte gUnknown_83CC1F0
-_08087690: .4byte gUnknown_2037078
+_08087690: .4byte gPlayerAvatar
 _08087694: .4byte gSprites
 	thumb_func_end sub_8087644
 
@@ -8653,7 +8653,7 @@ sub_8087698: @ 8087698
 	lsls r0, 24
 	cmp r0, 0
 	beq _080876FC
-	ldr r0, _08087704 @ =gUnknown_2037078
+	ldr r0, _08087704 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r5, r0, 3
 	adds r5, r0
@@ -8697,7 +8697,7 @@ _080876FC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087704: .4byte gUnknown_2037078
+_08087704: .4byte gPlayerAvatar
 _08087708: .4byte gMapObjects
 _0808770C: .4byte gSprites
 	thumb_func_end sub_8087698
@@ -8706,7 +8706,7 @@ _0808770C: .4byte gSprites
 sub_8087710: @ 8087710
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08087740 @ =gUnknown_2037078
+	ldr r0, _08087740 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -8727,7 +8727,7 @@ _08087738:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087740: .4byte gUnknown_2037078
+_08087740: .4byte gPlayerAvatar
 _08087744: .4byte gMapObjects
 	thumb_func_end sub_8087710
 
@@ -8771,7 +8771,7 @@ fishE: @ 8087780
 	lsls r0, 16
 	cmp r0, 0
 	bne _080877EA
-	ldr r6, _080877F0 @ =gUnknown_2037078
+	ldr r6, _080877F0 @ =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -8815,7 +8815,7 @@ _080877EA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080877F0: .4byte gUnknown_2037078
+_080877F0: .4byte gPlayerAvatar
 _080877F4: .4byte gMapObjects
 _080877F8: .4byte sub_8087498
 	thumb_func_end fishE

@@ -11378,7 +11378,7 @@ sub_811B66C: @ 811B66C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0811B6C0 @ =gUnknown_2036E38
+	ldr r1, _0811B6C0 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -11396,7 +11396,7 @@ sub_811B66C: @ 811B66C
 	.align 2, 0
 _0811B6B8: .4byte gUnknown_8457120
 _0811B6BC: .4byte gSaveBlock1Ptr
-_0811B6C0: .4byte gUnknown_2036E38
+_0811B6C0: .4byte gMapObjects
 _0811B6C4:
 	ldr r0, _0811B6DC @ =gUnknown_8457138	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
 	ldr r1, _0811B6E0 @ =0x00000183
@@ -11437,7 +11437,7 @@ sub_811B6E8: @ 811B6E8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0811B72C @ =gUnknown_2036E38
+	ldr r1, _0811B72C @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -11449,7 +11449,7 @@ sub_811B6E8: @ 811B6E8
 	.align 2, 0
 _0811B724: .4byte gUnknown_8457120
 _0811B728: .4byte gSaveBlock1Ptr
-_0811B72C: .4byte gUnknown_2036E38
+_0811B72C: .4byte gMapObjects
 _0811B730:
 	bl ScriptContext2_IsEnabled
 	lsls r0, 24

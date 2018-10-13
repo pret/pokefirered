@@ -14,6 +14,7 @@
 #include "overworld.h"
 #include "field_fadetransition.h"
 #include "field_weather.h"
+#include "field_map_obj.h"
 #include "map_obj_80688E4.h"
 #include "map_obj_lock.h"
 #include "field_player_avatar.h"
@@ -25,6 +26,7 @@
 #include "unk_8159F40.h"
 #include "pokemon_storage_system.h"
 #include "save.h"
+#include "quest_log_8150454.h"
 #include "quest_log.h"
 
 u8 gUnknown_3005E88;
@@ -58,6 +60,7 @@ EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
 EWRAM_DATA u16 gUnknown_203AF98 = 0;
+EWRAM_DATA u8 gUnknown_203AF9A[128];
 
 EWRAM_DATA u16 gUnknown_203B044[2] = {0};
 
@@ -1412,5 +1415,33 @@ void sub_8112450(void)
     {
         sub_8112364();
         sub_81123BC();
+    }
+}
+
+void sub_811246C(struct Sprite *sprite)
+{
+    struct MapObject *mapObject = &gMapObjects[sprite->data[0]];
+    if (mapObject->localId == 0xFF)
+    {
+        if (gUnknown_203AF9A[0] != 0xFF)
+        {
+            sub_8063CA4(mapObject, gUnknown_203AF9A[0]);
+            gUnknown_203AF9A[0] = 0xFF;
+        }
+        if (gUnknown_203AF9A[1] != 0xFF)
+        {
+            sub_8150454();
+            gUnknown_203AF9A[1] = 0xFF;
+        }
+        sub_8063E28(mapObject, sprite);
+    }
+    else
+    {
+        if (gUnknown_203AF9A[2 * mapObject->localId] != 0xFF)
+        {
+            sub_8063CA4(mapObject, gUnknown_203AF9A[2 * mapObject->localId]);
+            gUnknown_203AF9A[2 * mapObject->localId] = 0xFF;
+        }
+        sub_8063E28(mapObject, sprite);
     }
 }

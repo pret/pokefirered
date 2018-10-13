@@ -44,7 +44,7 @@ _0810C3E2:
 	cmp r0, 0
 	bne _0810C41C
 	movs r4, 0
-	ldr r7, _0810C440 @ =gUnknown_2036E38
+	ldr r7, _0810C440 @ =gMapObjects
 _0810C3EE:
 	adds r0, r4, 0
 	bl sub_810CF04
@@ -85,7 +85,7 @@ _0810C436:
 	bx r0
 	.align 2, 0
 _0810C43C: .4byte gTasks
-_0810C440: .4byte gUnknown_2036E38
+_0810C440: .4byte gMapObjects
 	thumb_func_end sub_810C3B8
 
 	thumb_func_start sub_810C444
@@ -140,7 +140,7 @@ _0810C47A:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, _0810C4E8 @ =gUnknown_2036E38
+	ldr r2, _0810C4E8 @ =gMapObjects
 	adds r4, r1, r2
 	bl sub_810CF04
 	lsls r0, 24
@@ -171,7 +171,7 @@ _0810C4D2:
 	.align 2, 0
 _0810C4E0: .4byte gSaveBlock1Ptr
 _0810C4E4: .4byte gMapHeader
-_0810C4E8: .4byte gUnknown_2036E38
+_0810C4E8: .4byte gMapObjects
 	thumb_func_end sub_810C444
 
 	thumb_func_start sub_810C4EC
@@ -269,7 +269,7 @@ _0810C59A:
 	lsls r0, r5, 3
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, _0810C5FC @ =gUnknown_2036E38
+	ldr r1, _0810C5FC @ =gMapObjects
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x6]
 	subs r0, 0x4D
@@ -314,7 +314,7 @@ _0810C5EA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810C5FC: .4byte gUnknown_2036E38
+_0810C5FC: .4byte gMapObjects
 _0810C600: .4byte gSprites
 	thumb_func_end sub_810C594
 

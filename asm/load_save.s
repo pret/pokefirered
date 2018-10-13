@@ -345,7 +345,7 @@ save_serialize_npcs: @ 804C270
 	movs r5, 0xD4
 	lsls r5, 3
 	mov r8, r5
-	ldr r4, _0804C2B4 @ =gUnknown_2036E38
+	ldr r4, _0804C2B4 @ =gMapObjects
 	movs r3, 0
 	movs r2, 0xF
 _0804C286:
@@ -372,7 +372,7 @@ _0804C286:
 	bx r0
 	.align 2, 0
 _0804C2B0: .4byte gSaveBlock1Ptr
-_0804C2B4: .4byte gUnknown_2036E38
+_0804C2B4: .4byte gMapObjects
 	thumb_func_end save_serialize_npcs
 
 	thumb_func_start sub_804C2B8
@@ -385,7 +385,7 @@ sub_804C2B8: @ 804C2B8
 	movs r5, 0xD4
 	lsls r5, 3
 	mov r8, r5
-	ldr r4, _0804C2FC @ =gUnknown_2036E38
+	ldr r4, _0804C2FC @ =gMapObjects
 	movs r3, 0
 	movs r2, 0xF
 _0804C2CE:
@@ -412,7 +412,7 @@ _0804C2CE:
 	bx r0
 	.align 2, 0
 _0804C2F8: .4byte gSaveBlock1Ptr
-_0804C2FC: .4byte gUnknown_2036E38
+_0804C2FC: .4byte gMapObjects
 	thumb_func_end sub_804C2B8
 
 	thumb_func_start SaveSerializedGame

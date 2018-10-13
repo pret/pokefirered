@@ -18915,7 +18915,7 @@ _080AB45C: .4byte gUnknown_8E809CC
 _080AB460: .4byte gUnknown_2037F02
 _080AB464: .4byte gUnknown_8E81CEC
 _080AB468:
-	ldr r0, _080AB4E0 @ =gUnknown_8E7BAB0
+	ldr r0, _080AB4E0 @ =gFile_graphics_battle_anims_backgrounds_water_muddy_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -18973,7 +18973,7 @@ _080AB476:
 	strh r0, [r7, 0xE]
 	b _080AB552
 	.align 2, 0
-_080AB4E0: .4byte gUnknown_8E7BAB0
+_080AB4E0: .4byte gFile_graphics_battle_anims_backgrounds_water_muddy_palette
 _080AB4E4: .4byte sub_80AB79C
 _080AB4E8: .4byte gTasks
 _080AB4EC: .4byte 0x0000ffb0

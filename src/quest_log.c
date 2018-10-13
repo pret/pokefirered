@@ -114,6 +114,7 @@ void sub_811229C(void);
 void sub_8112364(void);
 void sub_8112888(u8);
 void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
+u8 sub_8112CAC(void);
 bool8 sub_8112CEC(void);
 bool8 sub_8112D1C(void);
 void sub_8113A1C(u8);
@@ -1562,5 +1563,47 @@ void sub_81127F8(u32 * a0)
             gUnknown_203B01A = TRUE;
         else
             gUnknown_203B01A = FALSE;
+    }
+}
+
+void sub_8112888(u8 a0)
+{
+    switch (a0)
+    {
+        case 1:
+            if (gUnknown_3005E88 == 1)
+                gUnknown_3005E88 = 3;
+            break;
+        case 2:
+            if (gUnknown_3005E88 == 3)
+                gUnknown_3005E88 = 1;
+            break;
+    }
+}
+
+void sub_81128BC(u8 a0)
+{
+    u8 r1 = sub_8112CAC();
+
+    switch (a0)
+    {
+        case 1:
+            if (r1 == 1)
+                gUnknown_3005E88 = 3;
+            else if (r1 == 2)
+            {
+                gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
+                gUnknown_3005E94[gUnknown_203AF98].unk_6 = 3;
+                gUnknown_203AF98++;
+                gUnknown_203B01A = 0;
+                gUnknown_3005E88 = 4;
+            }
+            break;
+        case 2:
+            if (r1 == 1)
+                gUnknown_3005E88 = 1;
+            else if (r1 == 2)
+                gUnknown_3005E88 = 2;
+            break;
     }
 }

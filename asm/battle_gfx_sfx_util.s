@@ -1466,7 +1466,7 @@ _0803495A:
 	thumb_func_start LoadBattleBarGfx
 LoadBattleBarGfx: @ 8034964
 	push {lr}
-	ldr r0, _0803497C @ =gUnknown_8D093D8
+	ldr r0, _0803497C @ =gFile_graphics_interface_hp_numbers
 	ldr r1, _08034980 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	movs r2, 0xBA
@@ -1477,7 +1477,7 @@ LoadBattleBarGfx: @ 8034964
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803497C: .4byte gUnknown_8D093D8
+_0803497C: .4byte gFile_graphics_interface_hp_numbers
 _08034980: .4byte gMonSpritesGfxPtr
 	thumb_func_end LoadBattleBarGfx
 

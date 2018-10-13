@@ -46190,15 +46190,15 @@ _080B8828:
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080B88C4 @ =gUnknown_8D1D388
+	ldr r1, _080B88C4 @ =gFile_graphics_battle_anims_masks_metal_shine_tilemap
 	bl sub_807543C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080B88C8 @ =gUnknown_8D1D224
+	ldr r1, _080B88C8 @ =gFile_graphics_battle_anims_masks_metal_shine_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080B88CC @ =gUnknown_8D1D360
+	ldr r0, _080B88CC @ =gFile_graphics_battle_anims_masks_metal_shine_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -46236,9 +46236,9 @@ _080B8828:
 _080B88B8: .4byte gBattlerPartyIndexes
 _080B88BC: .4byte gPlayerParty
 _080B88C0: .4byte gUnknown_2037F1A
-_080B88C4: .4byte gUnknown_8D1D388
-_080B88C8: .4byte gUnknown_8D1D224
-_080B88CC: .4byte gUnknown_8D1D360
+_080B88C4: .4byte gFile_graphics_battle_anims_masks_metal_shine_tilemap
+_080B88C8: .4byte gFile_graphics_battle_anims_masks_metal_shine_sheet
+_080B88CC: .4byte gFile_graphics_battle_anims_masks_metal_shine_palette
 _080B88D0: .4byte gUnknown_2022978
 _080B88D4: .4byte gSprites
 _080B88D8: .4byte gUnknown_202297A

@@ -5,6 +5,7 @@
 #include "task.h"
 #include "palette.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "window.h"
 #include "text_window.h"
 #include "event_data.h"
@@ -1381,4 +1382,35 @@ void sub_8112364(void)
     }
     gUnknown_203AE04 = NULL;
     gUnknown_203AE08 = NULL;
+}
+
+void sub_81123BC(void)
+{
+    struct QuestLog * buffer = AllocZeroed(4 * sizeof(struct QuestLog));
+    u8 i;
+    u8 r4 = gUnknown_203ADF8;
+    u8 count = 0;
+    for (i = 0; i < 4; i++)
+    {
+        if (r4 > 3)
+            r4 = 0;
+        if (gSaveBlock1Ptr->questLog[r4].unk_000)
+        {
+            buffer[count] = gSaveBlock1Ptr->questLog[r4];
+            count++;
+        }
+        r4++;
+    }
+    gUnknown_203ADF8 = count % 4;
+    CpuCopy16(buffer, gSaveBlock1Ptr->questLog, 4 * sizeof(struct QuestLog));
+    Free(buffer);
+}
+
+void sub_8112450(void)
+{
+    if (sub_80BF708() != 1)
+    {
+        sub_8112364();
+        sub_81123BC();
+    }
 }

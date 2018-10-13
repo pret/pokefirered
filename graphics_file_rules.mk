@@ -351,7 +351,7 @@ $(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp \
 									$(UNUSEDGFXDIR)/old_contest_2_2.4bpp
 	@cat $^ >$@
 
-$(UNKNOWNGFXDIR)/unknown_C19470.4bpp: %.4bpp: %.png
+$(UNKNOWNGFXDIR)/unknown_D196E4.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36
 
 $(BTLANMSPRGFXDIR)/141.4bpp: $(BTLANMSPRGFXDIR)/141_0.4bpp \

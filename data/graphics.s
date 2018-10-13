@@ -537,8 +537,6 @@ gFile_graphics_battle_interface_unused_window_sheet:: @ 8D08EF4
 	.align 2
 gFile_graphics_battle_interface_unused_window_palette:: @ 8D093B0
 	.incbin "graphics/battle_interface/unused_window.gbapal.lz"
-	
-@ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	.align 2
 gFile_graphics_interface_hp_numbers:: @ 8D093D8
@@ -1065,8 +1063,561 @@ gUnknown_8D11B84:: @ 8D11B84
 	.incbin "baserom.gba", 0xD11B84, 0x40
 
 gUnknown_8D11BC4:: @ 8D11BC4
-	.incbin "baserom.gba", 0xD11BC4, 0xB660
+	.incbin "baserom.gba", 0xD11BC4, 0xF00
+	
+	.align 2
+gFile_graphics_battle_interface_unused_window3_sheet:: @ 8D12AC4
+	.incbin "graphics/battle_interface/unused_window3.4bpp.lz"
 
+	.align 2
+gFile_graphics_battle_interface_unused_window4_sheet:: @ 8D12C00
+	.incbin "graphics/battle_interface/unused_window4.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_116_sheet:: @ 8D12EB0
+	.incbin "graphics/battle_anims/sprites/116.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_116_palette:: @ 8D1315C
+	.incbin "graphics/battle_anims/sprites/116.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_117_sheet:: @ 8D13184
+	.incbin "graphics/battle_anims/sprites/117.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_117_palette:: @ 8D133C0
+	.incbin "graphics/battle_anims/sprites/117.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_118_sheet:: @ 8D133DC
+	.incbin "graphics/battle_anims/sprites/118.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_118_palette:: @ 8D13574
+	.incbin "graphics/battle_anims/sprites/118.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_119_sheet:: @ 8D13590
+	.incbin "graphics/battle_anims/sprites/119.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_119_palette:: @ 8D13820
+	.incbin "graphics/battle_anims/sprites/119.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_120_sheet:: @ 8D13848
+	.incbin "graphics/battle_anims/sprites/120.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_120_palette:: @ 8D1393C
+	.incbin "graphics/battle_anims/sprites/120.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_121_sheet:: @ 8D13964
+	.incbin "graphics/battle_anims/sprites/121.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_121_palette:: @ 8D13990
+	.incbin "graphics/battle_anims/sprites/121.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_122_sheet:: @ 8D139B4
+	.incbin "graphics/battle_anims/sprites/122.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_122_palette:: @ 8D13AB0
+	.incbin "graphics/battle_anims/sprites/122.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_123_sheet:: @ 8D13ACC
+	.incbin "graphics/battle_anims/sprites/123.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_124_sheet:: @ 8D13C08
+	.incbin "graphics/battle_anims/sprites/124.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_124_palette:: @ 8D13EA0
+	.incbin "graphics/battle_anims/sprites/124.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_125_sheet:: @ 8D13EC8
+	.incbin "graphics/battle_anims/sprites/125.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_125_palette:: @ 8D13FB4
+	.incbin "graphics/battle_anims/sprites/125.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_126_sheet:: @ 8D13FDC
+	.incbin "graphics/battle_anims/sprites/126.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_126_palette:: @ 8D14044
+	.incbin "graphics/battle_anims/sprites/126.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_127_sheet:: @ 8D14064
+	.incbin "graphics/battle_anims/sprites/127.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_127_palette:: @ 8D14204
+	.incbin "graphics/battle_anims/sprites/127.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_128_sheet:: @ 8D14228
+	.incbin "graphics/battle_anims/sprites/128.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_128_palette:: @ 8D14494
+	.incbin "graphics/battle_anims/sprites/128.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_129_sheet:: @ 8D144B4
+	.incbin "graphics/battle_anims/sprites/129.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_130_sheet:: @ 8D14518
+	.incbin "graphics/battle_anims/sprites/130.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_130_palette:: @ 8D148E8
+	.incbin "graphics/battle_anims/sprites/130.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_131_sheet:: @ 8D14910
+	.incbin "graphics/battle_anims/sprites/131.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_132_sheet:: @ 8D14A80
+	.incbin "graphics/battle_anims/sprites/132.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_132_palette:: @ 8D14B80
+	.incbin "graphics/battle_anims/sprites/132.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_133_sheet:: @ 8D14BA0
+	.incbin "graphics/battle_anims/sprites/133.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_133_palette:: @ 8D14C1C
+	.incbin "graphics/battle_anims/sprites/133.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_134_sheet:: @ 8D14C44
+	.incbin "graphics/battle_anims/sprites/134.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_076_sheet:: @ 8D14D14
+	.incbin "graphics/battle_anims/sprites/076.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_076_palette:: @ 8D14F50
+	.incbin "graphics/battle_anims/sprites/076.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_077_sheet:: @ 8D14F78
+	.incbin "graphics/battle_anims/sprites/077.4bpp.lz"
+
+	.align 2
+gFile_graphics_unused_old_contest_sheet:: @ 8D1504C
+	.incbin "graphics/unused/old_contest.4bpp.lz"
+
+	.align 2
+gFile_graphics_unused_old_contest_palette:: @ 8D15960
+	.incbin "graphics/unused/old_contest.gbapal.lz"
+
+	.align 2
+gFile_graphics_unused_old_contest_tilemap:: @ 8D15A64
+	.incbin "graphics/unused/old_contest.bin.lz"
+
+	.align 2
+gFile_graphics_unknown_unknown_D15BE8_tilemap:: @ 8D15BE8
+	.incbin "graphics/unknown/unknown_D15BE8.bin.lz"
+
+	.align 2
+gFile_graphics_unused_numbers_sheet:: @ 8D15EA8
+	.incbin "graphics/unused/numbers.4bpp.lz" @from ruby
+
+	.align 2
+gFile_graphics_unused_numbers_palette:: @ 8D15F98
+	.incbin "graphics/unused/numbers.gbapal.lz" @from ruby
+
+	.align 2
+gFile_graphics_unused_old_contest_2_sheet:: @ 8D15FB8
+	.incbin "graphics/unused/old_contest_2.4bpp.lz"
+
+	.align 2
+gFile_graphics_unused_old_contest_2_palette:: @ 8D16FC8
+	.incbin "graphics/unused/old_contest_2.gbapal.lz"
+
+	.align 2
+gFile_graphics_unused_old_contest_2_tilemap:: @ 8D170E0
+	.incbin "graphics/unused/old_contest_2.bin.lz"
+
+	.align 2
+gFile_graphics_unknown_unknown_D172A8_tilemap:: @ 8D172A8
+	.incbin "graphics/unknown/unknown_D172A8.bin.lz"
+
+	.align 2
+gFile_graphics_unknown_unknown_D17548_tilemap:: @ 8D17548
+	.incbin "graphics/unknown/unknown_D17548.bin.lz"
+
+	.align 2
+gFile_graphics_unknown_unknown_D17654_tilemap:: @ 8D17654
+	.incbin "graphics/unknown/unknown_D17654.bin.lz"
+
+	.align 2
+gFile_graphics_unknown_unknown_D17AB8_tilemap:: @ 8D17AB8
+	.incbin "graphics/unknown/unknown_D17AB8.bin.lz"
+
+	.align 2
+gUnknown_8D17BE8:: @ 8D17BE8
+	.incbin "baserom.gba", 0xD17BE8, 0xB98
+	
+	.align 2
+gFile_graphics_contest_audience_sheet:: @ 8D18780
+	.incbin "graphics/contest/audience.4bpp.lz"
+
+	.align 2
+gFile_graphics_contest_faces_sheet:: @ 8D193DC
+	.incbin "graphics/contest/faces.4bpp.lz"
+
+	.align 2
+gFile_graphics_contest_judge_symbols_sheet:: @ 8D194F8
+	.incbin "graphics/contest/judge_symbols.4bpp.lz"
+
+	.align 2
+gFile_graphics_contest_judge_symbols_palette:: @ 8D1969C
+	.incbin "graphics/contest/judge_symbols.gbapal.lz"
+
+	.align 2
+gFile_graphics_contest_heart:: @ 8D196C4
+	.incbin "graphics/contest/heart.4bpp"
+
+	.align 2
+gFile_graphics_unknown_unknown_D196E4_sheet:: @ 8D196E4
+	.incbin "graphics/unknown/unknown_D196E4.4bpp.lz"
+
+	.align 2
+gFile_graphics_unknown_unknown_D196E4_palette:: @ 8D197D4
+	.incbin "graphics/unknown/unknown_D196E4.gbapal.lz"
+
+	.align 2
+gUnknown_8D197FC:: @ 8D197FC
+	.incbin "baserom.gba", 0xD197FC, 0x868
+	
+	.align 2
+gFile_graphics_contest_misc_2_tilemap_1_tilemap:: @ 8D1A064
+	.incbin "graphics/contest/misc_2_tilemap_1.bin.lz"
+
+	.align 2
+gFile_graphics_contest_misc_2_tilemap_2_tilemap:: @ 8D1A178
+	.incbin "graphics/contest/misc_2_tilemap_2.bin.lz"
+
+	.align 2
+gFile_graphics_contest_misc_2_tilemap_3_tilemap:: @ 8D1A2A4
+	.incbin "graphics/contest/misc_2_tilemap_3.bin.lz"
+
+	.align 2
+gFile_graphics_contest_misc_2_palette:: @ 8D1A42C
+	.incbin "graphics/contest/misc_2.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_135_sheet:: @ 8D1A518
+	.incbin "graphics/battle_anims/sprites/135.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_135_palette:: @ 8D1A5F0
+	.incbin "graphics/battle_anims/sprites/135.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_particles_sheet:: @ 8D1A608
+	.incbin "graphics/battle_anims/sprites/particles.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_136_sheet:: @ 8D1A6B8
+	.incbin "graphics/battle_anims/sprites/136.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_136_palette:: @ 8D1A6DC
+	.incbin "graphics/battle_anims/sprites/136.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_137_sheet:: @ 8D1A704
+	.incbin "graphics/battle_anims/sprites/137.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_139_sheet:: @ 8D1A908
+	.incbin "graphics/battle_anims/sprites/139.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_139_palette:: @ 8D1AAF8
+	.incbin "graphics/battle_anims/sprites/139.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_145_sheet:: @ 8D1AB18
+	.incbin "graphics/battle_anims/sprites/145.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_138_sheet:: @ 8D1ACB8
+	.incbin "graphics/battle_anims/sprites/138.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_140_sheet:: @ 8D1AE04
+	.incbin "graphics/battle_anims/sprites/140.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_140_palette:: @ 8D1AE84
+	.incbin "graphics/battle_anims/sprites/140.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_141_sheet:: @ 8D1AEA4
+	.incbin "graphics/battle_anims/sprites/141.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_141_palette:: @ 8D1AFAC
+	.incbin "graphics/battle_anims/sprites/141.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_142_sheet:: @ 8D1AFCC
+	.incbin "graphics/battle_anims/sprites/142.4bpp.lz"
+
+	.align 2
+gFile_graphics_unused_old_beatup_sheet:: @ 8D1B02C
+	.incbin "graphics/unused/old_beatup.4bpp.lz"
+
+	.align 2
+gFile_graphics_unused_old_beatup_palette:: @ 8D1B0C8
+	.incbin "graphics/unused/old_beatup.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_147_sheet:: @ 8D1B0E4
+	.incbin "graphics/battle_anims/sprites/147.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_147_palette:: @ 8D1B1F8
+	.incbin "graphics/battle_anims/sprites/147.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_149_sheet:: @ 8D1B220
+	.incbin "graphics/battle_anims/sprites/149.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_148_sheet:: @ 8D1B2F0
+	.incbin "graphics/battle_anims/sprites/148.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_148_palette:: @ 8D1B3D4
+	.incbin "graphics/battle_anims/sprites/148.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_259_palette:: @ 8D1B3F4
+	.incbin "graphics/battle_anims/sprites/259.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_074_sheet:: @ 8D1B414
+	.incbin "graphics/battle_anims/sprites/074.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_074_palette:: @ 8D1B47C
+	.incbin "graphics/battle_anims/sprites/074.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_150_sheet:: @ 8D1B4A0
+	.incbin "graphics/battle_anims/sprites/150.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_150_palette:: @ 8D1B574
+	.incbin "graphics/battle_anims/sprites/150.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_151_sheet:: @ 8D1B590
+	.incbin "graphics/battle_anims/sprites/151.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_153_sheet:: @ 8D1B688
+	.incbin "graphics/battle_anims/sprites/153.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_153_palette:: @ 8D1B6F4
+	.incbin "graphics/battle_anims/sprites/153.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_154_sheet:: @ 8D1B70C
+	.incbin "graphics/battle_anims/sprites/154.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_154_palette:: @ 8D1B7B8
+	.incbin "graphics/battle_anims/sprites/154.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_155_sheet:: @ 8D1B7D8
+	.incbin "graphics/battle_anims/sprites/155.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_155_palette:: @ 8D1B8A0
+	.incbin "graphics/battle_anims/sprites/155.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_156_sheet:: @ 8D1B8C0
+	.incbin "graphics/battle_anims/sprites/156.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_156_palette:: @ 8D1BAD8
+	.incbin "graphics/battle_anims/sprites/156.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_157_sheet:: @ 8D1BB00
+	.incbin "graphics/battle_anims/sprites/157.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_157_palette:: @ 8D1BB64
+	.incbin "graphics/battle_anims/sprites/157.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_158_sheet:: @ 8D1BB7C
+	.incbin "graphics/battle_anims/sprites/158.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_158_palette:: @ 8D1BC44
+	.incbin "graphics/battle_anims/sprites/158.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_159_sheet:: @ 8D1BC68
+	.incbin "graphics/battle_anims/sprites/159.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_159_palette:: @ 8D1BCE4
+	.incbin "graphics/battle_anims/sprites/159.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_160_sheet:: @ 8D1BD0C
+	.incbin "graphics/battle_anims/sprites/160.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_160_palette:: @ 8D1BDB4
+	.incbin "graphics/battle_anims/sprites/160.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_144_sheet:: @ 8D1BDDC
+	.incbin "graphics/battle_anims/sprites/144.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_144_palette:: @ 8D1BE54
+	.incbin "graphics/battle_anims/sprites/144.gbapal.lz"
+
+	.align 2
+gFile_graphics_unknown_unknown_D1BE74_sheet:: @ 8D1BE74
+	.incbin "graphics/unknown/unknown_D1BE74.4bpp.lz"
+
+	.align 2
+gFile_graphics_unknown_unknown_D1BE74_palette:: @ 8D1BE9C
+	.incbin "graphics/unknown/unknown_D1BE74.gbapal.lz"
+
+	.align 2
+gFile_graphics_unknown_unknown_D1BE74_tilemap:: @ 8D1BEB4
+	.incbin "graphics/unknown/unknown_D1BE74.bin.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_162_sheet:: @ 8D1BFB8
+	.incbin "graphics/battle_anims/sprites/162.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_162_palette:: @ 8D1C03C
+	.incbin "graphics/battle_anims/sprites/162.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_163_sheet:: @ 8D1C05C
+	.incbin "graphics/battle_anims/sprites/163.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_163_palette:: @ 8D1C0BC
+	.incbin "graphics/battle_anims/sprites/163.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_288_palette:: @ 8D1C0D4
+	.incbin "graphics/battle_anims/sprites/288.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_164_palette:: @ 8D1C0EC
+	.incbin "graphics/battle_anims/sprites/164.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_165_palette:: @ 8D1C104
+	.incbin "graphics/battle_anims/sprites/165.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_166_sheet:: @ 8D1C11C
+	.incbin "graphics/battle_anims/sprites/166.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_166_palette:: @ 8D1C428
+	.incbin "graphics/battle_anims/sprites/166.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_167_palette:: @ 8D1C448
+	.incbin "graphics/battle_anims/sprites/167.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_168_palette:: @ 8D1C468
+	.incbin "graphics/battle_anims/sprites/168.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_169_palette:: @ 8D1C488
+	.incbin "graphics/battle_anims/sprites/169.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_170_palette:: @ 8D1C4A8
+	.incbin "graphics/battle_anims/sprites/170.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_171_sheet:: @ 8D1C4C8
+	.incbin "graphics/battle_anims/sprites/171.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_171_palette:: @ 8D1C514
+	.incbin "graphics/battle_anims/sprites/171.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_172_palette:: @ 8D1C53C
+	.incbin "graphics/battle_anims/sprites/172.gbapal.lz"
+
+	.align 2
+gFile_graphics_contest_judge_sheet:: @ 8D1C55C
+	.incbin "graphics/contest/judge.4bpp.lz"
+
+	.align 2
+gFile_graphics_contest_judge_palette:: @ 8D1C830
+	.incbin "graphics/contest/judge.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_001_sheet:: @ 8D1C858
+	.incbin "graphics/battle_anims/sprites/001.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_001_palette:: @ 8D1C90C
+	.incbin "graphics/battle_anims/sprites/001.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_sprites_173_sheet:: @ 8D1C934
+	.incbin "graphics/battle_anims/sprites/173.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_backgrounds_00_sheet:: @ 8D1C9BC
+	.incbin "graphics/battle_anims/backgrounds/00.4bpp.lz"
+
+	.align 2
+gFile_graphics_battle_anims_backgrounds_00_palette:: @ 8D1CFB4
+	.incbin "graphics/battle_anims/backgrounds/00.gbapal.lz"
+
+	.align 2
+gFile_graphics_battle_anims_backgrounds_00_tilemap:: @ 8D1CFD4
+	.incbin "graphics/battle_anims/backgrounds/00.bin.lz"
+
+	.align 2
 gUnknown_8D1D224:: @ 8D1D224
 	.incbin "baserom.gba", 0xD1D224, 0x13C
 

@@ -38100,15 +38100,15 @@ _080B4854:
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080B48F0 @ =gUnknown_8E79354
+	ldr r1, _080B48F0 @ =gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap
 	bl sub_807543C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080B48F4 @ =gUnknown_8E794D0
+	ldr r1, _080B48F4 @ =gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080B48F8 @ =gUnknown_8E799FC
+	ldr r0, _080B48F8 @ =gFile_graphics_battle_anims_sprites_261_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -38154,9 +38154,9 @@ _080B48CA:
 _080B48E4: .4byte 0x00003f42
 _080B48E8: .4byte gUnknown_2022978
 _080B48EC: .4byte gUnknown_202297A
-_080B48F0: .4byte gUnknown_8E79354
-_080B48F4: .4byte gUnknown_8E794D0
-_080B48F8: .4byte gUnknown_8E799FC
+_080B48F0: .4byte gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap
+_080B48F4: .4byte gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet
+_080B48F8: .4byte gFile_graphics_battle_anims_sprites_261_palette
 _080B48FC: .4byte gUnknown_2037F02
 _080B4900: .4byte gUnknown_2037F1A
 _080B4904: .4byte gTasks

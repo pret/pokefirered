@@ -364,43 +364,43 @@ CreateRoamerMonInstance: @ 8141EF8
 	adds r2, r0
 	adds r0, r5, 0
 	movs r1, 0x37
-	bl sub_804037C
+	bl SetMonData
 	ldr r2, [r4]
 	ldr r1, _08141F94 @ =0x000030da
 	adds r2, r1
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl sub_804037C
+	bl SetMonData
 	ldr r2, [r4]
 	ldr r0, _08141F98 @ =0x000030de
 	adds r2, r0
 	adds r0, r5, 0
 	movs r1, 0x16
-	bl sub_804037C
+	bl SetMonData
 	ldr r2, [r4]
 	ldr r1, _08141F9C @ =0x000030df
 	adds r2, r1
 	adds r0, r5, 0
 	movs r1, 0x17
-	bl sub_804037C
+	bl SetMonData
 	ldr r2, [r4]
 	ldr r0, _08141FA0 @ =0x000030e0
 	adds r2, r0
 	adds r0, r5, 0
 	movs r1, 0x18
-	bl sub_804037C
+	bl SetMonData
 	ldr r2, [r4]
 	ldr r1, _08141FA4 @ =0x000030e1
 	adds r2, r1
 	adds r0, r5, 0
 	movs r1, 0x21
-	bl sub_804037C
+	bl SetMonData
 	ldr r2, [r4]
 	ldr r0, _08141FA8 @ =0x000030e2
 	adds r2, r0
 	adds r0, r5, 0
 	movs r1, 0x2F
-	bl sub_804037C
+	bl SetMonData
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

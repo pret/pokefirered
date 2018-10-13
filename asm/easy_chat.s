@@ -158,11 +158,11 @@ _080BD810:
 _080BD814:
 	movs r0, 0xB
 	muls r0, r2
-	ldr r1, _080BD820 @ =gUnknown_8245EE0
+	ldr r1, _080BD820 @ =gSpeciesNames
 	adds r0, r1
 	b _080BD846
 	.align 2, 0
-_080BD820: .4byte gUnknown_8245EE0
+_080BD820: .4byte gSpeciesNames
 _080BD824:
 	movs r0, 0xD
 	muls r0, r2

@@ -1967,7 +1967,7 @@ _0810356C:
 	lsrs r0, 16
 	movs r1, 0xB
 	muls r0, r1
-	ldr r1, _081035C0 @ =gUnknown_8245EE0
+	ldr r1, _081035C0 @ =gSpeciesNames
 	adds r0, r1
 	str r0, [r2]
 	mov r10, r5
@@ -1975,7 +1975,7 @@ _0810356C:
 	b _081035D6
 	.align 2, 0
 _081035BC: .4byte gUnknown_203ACF0
-_081035C0: .4byte gUnknown_8245EE0
+_081035C0: .4byte gSpeciesNames
 _081035C4:
 	ldr r2, _081035FC @ =gUnknown_203ACF0
 	ldr r0, [r2]
@@ -2048,7 +2048,7 @@ _0810360C:
 	lsrs r0, 16
 	movs r1, 0xB
 	muls r0, r1
-	ldr r1, _08103698 @ =gUnknown_8245EE0
+	ldr r1, _08103698 @ =gSpeciesNames
 	adds r0, r1
 	str r0, [r2]
 	adds r0, r5, 0
@@ -2080,7 +2080,7 @@ _08103682:
 	.align 2, 0
 _08103690: .4byte gUnknown_203ACF0
 _08103694: .4byte gUnknown_8443FC0
-_08103698: .4byte gUnknown_8245EE0
+_08103698: .4byte gSpeciesNames
 _0810369C:
 	movs r1, 0
 	mov r8, r1
@@ -2124,7 +2124,7 @@ _081036A4:
 	lsrs r0, 16
 	movs r1, 0xB
 	muls r0, r1
-	ldr r1, _08103738 @ =gUnknown_8245EE0
+	ldr r1, _08103738 @ =gSpeciesNames
 	adds r0, r1
 	str r0, [r2]
 	adds r0, r5, 0
@@ -2156,7 +2156,7 @@ _08103722:
 	.align 2, 0
 _08103730: .4byte gUnknown_203ACF0
 _08103734: .4byte gUnknown_84448FE
-_08103738: .4byte gUnknown_8245EE0
+_08103738: .4byte gSpeciesNames
 _0810373C:
 	movs r1, 0
 	mov r8, r1
@@ -2197,7 +2197,7 @@ _08103744:
 	lsrs r0, 16
 	movs r1, 0xB
 	muls r0, r1
-	ldr r1, _081037D0 @ =gUnknown_8245EE0
+	ldr r1, _081037D0 @ =gSpeciesNames
 	adds r0, r1
 	str r0, [r2]
 	adds r0, r5, 0
@@ -2228,7 +2228,7 @@ _081037BA:
 	.align 2, 0
 _081037C8: .4byte gUnknown_203ACF0
 _081037CC: .4byte gUnknown_84442F6
-_081037D0: .4byte gUnknown_8245EE0
+_081037D0: .4byte gSpeciesNames
 _081037D4: .4byte 0x00000181
 _081037D8:
 	movs r1, 0
@@ -2270,7 +2270,7 @@ _081037E0:
 	lsrs r0, 16
 	movs r1, 0xB
 	muls r0, r1
-	ldr r1, _0810386C @ =gUnknown_8245EE0
+	ldr r1, _0810386C @ =gSpeciesNames
 	adds r0, r1
 	str r0, [r2]
 	adds r0, r5, 0
@@ -2301,7 +2301,7 @@ _08103856:
 	.align 2, 0
 _08103864: .4byte gUnknown_203ACF0
 _08103868: .4byte gUnknown_84445FA
-_0810386C: .4byte gUnknown_8245EE0
+_0810386C: .4byte gSpeciesNames
 _08103870: .4byte 0x00000181
 _08103874:
 	movs r1, 0
@@ -2338,7 +2338,7 @@ _08103878:
 	lsrs r0, 16
 	movs r1, 0xB
 	muls r0, r1
-	ldr r1, _081038CC @ =gUnknown_8245EE0
+	ldr r1, _081038CC @ =gSpeciesNames
 	adds r0, r1
 	str r0, [r2]
 	mov r10, r5
@@ -2346,7 +2346,7 @@ _08103878:
 	b _081038E2
 	.align 2, 0
 _081038C8: .4byte gUnknown_203ACF0
-_081038CC: .4byte gUnknown_8245EE0
+_081038CC: .4byte gSpeciesNames
 _081038D0:
 	ldr r2, _08103918 @ =gUnknown_203ACF0
 	ldr r0, [r2]
@@ -4988,7 +4988,7 @@ _08104D72:
 	movs r1, 0xB
 	mov r2, r8
 	muls r2, r1
-	ldr r1, _08104E70 @ =gUnknown_8245EE0
+	ldr r1, _08104E70 @ =gSpeciesNames
 	adds r2, r1
 	movs r1, 0xD
 	str r1, [sp]
@@ -5038,7 +5038,7 @@ _08104E60: .4byte gUnknown_203ACF0
 _08104E64: .4byte gUnknown_84521CC
 _08104E68: .4byte gUnknown_8452334
 _08104E6C: .4byte gUnknown_8440124
-_08104E70: .4byte gUnknown_8245EE0
+_08104E70: .4byte gSpeciesNames
 _08104E74: .4byte gUnknown_8443600
 _08104E78:
 	ldrb r0, [r1]
@@ -7091,7 +7091,7 @@ sub_8105E1C: @ 8105E1C
 	ldrh r2, [r1]
 	movs r1, 0xB
 	muls r2, r1
-	ldr r1, _08105FE0 @ =gUnknown_8245EE0
+	ldr r1, _08105FE0 @ =gSpeciesNames
 	adds r2, r1
 	str r5, [sp]
 	mov r1, r8
@@ -7189,7 +7189,7 @@ _08105FD0: .4byte gUnknown_84521D4
 _08105FD4: .4byte gUnknown_203ACF0
 _08105FD8: .4byte gUnknown_84521DC
 _08105FDC: .4byte gUnknown_84521E4
-_08105FE0: .4byte gUnknown_8245EE0
+_08105FE0: .4byte gSpeciesNames
 _08105FE4: .4byte gUnknown_8415FAD
 _08105FE8: .4byte gUnknown_8415FB3
 _08105FEC:
@@ -7710,7 +7710,7 @@ _08106478:
 	ldr r3, [sp, 0x1C]
 	adds r2, r3, 0
 	muls r2, r1
-	ldr r1, _081066B0 @ =gUnknown_8245EE0
+	ldr r1, _081066B0 @ =gSpeciesNames
 	adds r2, r1
 	movs r1, 0xC
 	str r1, [sp]
@@ -7973,7 +7973,7 @@ _08106534:
 	bl SetOamMatrix
 	b _081066E2
 	.align 2, 0
-_081066B0: .4byte gUnknown_8245EE0
+_081066B0: .4byte gSpeciesNames
 _081066B4: .4byte gBaseStats
 _081066B8: .4byte gUnknown_203ACF0
 _081066BC: .4byte gUnknown_8452368

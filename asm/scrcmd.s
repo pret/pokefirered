@@ -4022,7 +4022,7 @@ ScrCmd_bufferspeciesname: @ 806BC88
 	ldr r2, [r4]
 	movs r1, 0xB
 	muls r1, r0
-	ldr r0, _0806BCC4 @ =gUnknown_8245EE0
+	ldr r0, _0806BCC4 @ =gSpeciesNames
 	adds r1, r0
 	adds r0, r2, 0
 	bl StringCopy
@@ -4032,7 +4032,7 @@ ScrCmd_bufferspeciesname: @ 806BC88
 	bx r1
 	.align 2, 0
 _0806BCC0: .4byte gUnknown_83A7294
-_0806BCC4: .4byte gUnknown_8245EE0
+_0806BCC4: .4byte gSpeciesNames
 	thumb_func_end ScrCmd_bufferspeciesname
 
 	thumb_func_start ScrCmd_bufferleadmonspeciesname
@@ -4058,7 +4058,7 @@ ScrCmd_bufferleadmonspeciesname: @ 806BCC8
 	bl GetMonData
 	movs r1, 0xB
 	muls r1, r0
-	ldr r0, _0806BD10 @ =gUnknown_8245EE0
+	ldr r0, _0806BD10 @ =gSpeciesNames
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -4069,7 +4069,7 @@ ScrCmd_bufferleadmonspeciesname: @ 806BCC8
 	.align 2, 0
 _0806BD08: .4byte gUnknown_83A7294
 _0806BD0C: .4byte gPlayerParty
-_0806BD10: .4byte gUnknown_8245EE0
+_0806BD10: .4byte gSpeciesNames
 	thumb_func_end ScrCmd_bufferleadmonspeciesname
 
 	thumb_func_start ScrCmd_bufferpartymonnick
@@ -5537,7 +5537,7 @@ ScrCmd_setmonobedient: @ 806C7D4
 	adds r0, r1
 	movs r1, 0x50
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	movs r0, 0
 	add sp, 0x4
 	pop {r1}
@@ -5598,7 +5598,7 @@ sub_806C844: @ 806C844
 	adds r0, r1
 	movs r1, 0x23
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 _0806C87A:
 	movs r0, 0
 	add sp, 0x4

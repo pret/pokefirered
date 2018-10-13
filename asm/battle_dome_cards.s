@@ -291,7 +291,7 @@ _0810BD90: .4byte gUnknown_203AD40
 _0810BD94: .4byte gUnknown_82349BC
 _0810BD98:
 	ldr r0, _0810BDA4 @ =gUnknown_203AD40
-	ldr r1, _0810BDA8 @ =gUnknown_82390DC
+	ldr r1, _0810BDA8 @ =gTrainerFrontAnimsPtrTable
 	ldr r1, [r1]
 	str r1, [r0, 0x8]
 _0810BDA0:
@@ -299,7 +299,7 @@ _0810BDA0:
 	bx r0
 	.align 2, 0
 _0810BDA4: .4byte gUnknown_203AD40
-_0810BDA8: .4byte gUnknown_82390DC
+_0810BDA8: .4byte gTrainerFrontAnimsPtrTable
 	thumb_func_end uns_builder_assign_animtable1
 
 	thumb_func_start oamt_spawn_poke_or_trainer_picture
@@ -1082,21 +1082,21 @@ sub_810C374: @ 810C374
 	bne _0810C39A
 	cmp r0, 0
 	beq _0810C394
-	ldr r0, _0810C390 @ =gUnknown_82538A8
+	ldr r0, _0810C390 @ =gFacilityClassToPicIndex
 	adds r0, 0x87
 	ldrb r0, [r0]
 	b _0810C39A
 	.align 2, 0
-_0810C390: .4byte gUnknown_82538A8
+_0810C390: .4byte gFacilityClassToPicIndex
 _0810C394:
-	ldr r0, _0810C3A0 @ =gUnknown_82538A8
+	ldr r0, _0810C3A0 @ =gFacilityClassToPicIndex
 	adds r0, 0x86
 	ldrb r0, [r0]
 _0810C39A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0810C3A0: .4byte gUnknown_82538A8
+_0810C3A0: .4byte gFacilityClassToPicIndex
 	thumb_func_end sub_810C374
 
 	.align 2, 0 @ Don't pad with nop.

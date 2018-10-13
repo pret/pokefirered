@@ -829,9 +829,9 @@ sub_806E6FC: @ 806E6FC
 	strh r0, [r1]
 	ldr r1, _0806E790 @ =gUnknown_20370D2
 	strh r0, [r1]
-	ldr r1, _0806E794 @ =gUnknown_20370D6
+	ldr r1, _0806E794 @ =gSpecialVar_MonBoxId
 	strh r0, [r1]
-	ldr r1, _0806E798 @ =gUnknown_20370D8
+	ldr r1, _0806E798 @ =gSpecialVar_MonBoxPos
 	strh r0, [r1]
 	ldr r1, _0806E79C @ =gUnknown_20370DA
 	strh r0, [r1]
@@ -857,8 +857,8 @@ _0806E784: .4byte gUnknown_20370D4
 _0806E788: .4byte gUnknown_20370D0
 _0806E78C: .4byte gUnknown_203AD30
 _0806E790: .4byte gUnknown_20370D2
-_0806E794: .4byte gUnknown_20370D6
-_0806E798: .4byte gUnknown_20370D8
+_0806E794: .4byte gSpecialVar_MonBoxId
+_0806E798: .4byte gSpecialVar_MonBoxPos
 _0806E79C: .4byte gUnknown_20370DA
 _0806E7A0: .4byte gUnknown_20370DC
 _0806E7A4: .4byte gUnknown_20370DE

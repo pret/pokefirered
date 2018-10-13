@@ -127,7 +127,7 @@ SetBoxMonDataFromAnyBox: @ 808BA5C
 	adds r0, r1
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80404D0
+	bl SetBoxMonData
 _0808BA94:
 	pop {r4-r6}
 	pop {r0}
@@ -242,7 +242,7 @@ SetBoxMonNickFromAnyBox: @ 808BB2C
 	adds r0, r1
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl sub_80404D0
+	bl SetBoxMonData
 _0808BB62:
 	pop {r4,r5}
 	pop {r0}
@@ -6333,7 +6333,7 @@ _0808ECAC:
 	bne _0808ECD0
 	bl sub_808FF70
 	bl CalculatePlayerPartyCount
-	ldr r1, _0808ECD8 @ =gUnknown_2024029
+	ldr r1, _0808ECD8 @ =gPlayerPartyCount
 	strb r0, [r1]
 	ldr r0, _0808ECDC @ =gUnknown_20397B0
 	ldr r0, [r0]
@@ -6345,7 +6345,7 @@ _0808ECD0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808ECD8: .4byte gUnknown_2024029
+_0808ECD8: .4byte gPlayerPartyCount
 _0808ECDC: .4byte gUnknown_20397B0
 _0808ECE0: .4byte sub_808EE18
 	thumb_func_end sub_808EBB0
@@ -6476,7 +6476,7 @@ _0808EDE0:
 	bne _0808EE04
 	bl sub_808FF70
 	bl CalculatePlayerPartyCount
-	ldr r1, _0808EE0C @ =gUnknown_2024029
+	ldr r1, _0808EE0C @ =gPlayerPartyCount
 	strb r0, [r1]
 	ldr r0, _0808EE10 @ =gUnknown_20397B0
 	ldr r0, [r0]
@@ -6488,7 +6488,7 @@ _0808EE04:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808EE0C: .4byte gUnknown_2024029
+_0808EE0C: .4byte gPlayerPartyCount
 _0808EE10: .4byte gUnknown_20397B0
 _0808EE14: .4byte sub_808EE18
 	thumb_func_end sub_808ECE4
@@ -6628,7 +6628,7 @@ sub_808EF0C: @ 808EF0C
 	adds r0, r1
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	b _0808EF56
 	.align 2, 0
 _0808EF40: .4byte gUnknown_203AD30
@@ -16062,7 +16062,7 @@ sub_8093878: @ 8093878
 	adds r0, r1
 	movs r1, 0x8
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	b _080938EC
 	.align 2, 0
 _080938A8: .4byte gUnknown_20397B0
@@ -16084,7 +16084,7 @@ _080938B8:
 	adds r0, r1
 	movs r1, 0x8
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 _080938D8:
 	movs r0, 0
 	ldrsb r0, [r4, r0]
@@ -16674,7 +16674,7 @@ _08093D90: .4byte 0x00000cf5
 _08093D94:
 	ldr r2, _08093DD0 @ =0x00000cf5
 	adds r0, r1, r2
-	ldr r1, _08093DD4 @ =gUnknown_8415A62
+	ldr r1, _08093DD4 @ =gText_EggNickname
 	movs r2, 0
 	movs r3, 0x8
 	bl StringCopyPadded
@@ -16702,7 +16702,7 @@ _08093DC6:
 	b _08093F84
 	.align 2, 0
 _08093DD0: .4byte 0x00000cf5
-_08093DD4: .4byte gUnknown_8415A62
+_08093DD4: .4byte gText_EggNickname
 _08093DD8: .4byte gUnknown_20397B0
 _08093DDC: .4byte 0x00000d19
 _08093DE0: .4byte 0x00000d3d
@@ -16739,7 +16739,7 @@ _08093DF4:
 	ldrh r1, [r0]
 	movs r0, 0xB
 	muls r1, r0
-	ldr r0, _08093E8C @ =gUnknown_8245EE0
+	ldr r0, _08093E8C @ =gSpeciesNames
 	adds r1, r0
 	adds r0, r2, 0
 	movs r2, 0
@@ -16785,7 +16785,7 @@ _08093E7C: .4byte 0x00000cf5
 _08093E80: .4byte 0x00000cea
 _08093E84: .4byte 0x00000d19
 _08093E88: .4byte 0x00000d1a
-_08093E8C: .4byte gUnknown_8245EE0
+_08093E8C: .4byte gSpeciesNames
 _08093E90: .4byte 0x00000d3d
 _08093E94: .4byte 0x00000d3e
 _08093E98: .4byte 0x00000d3f
@@ -20886,7 +20886,7 @@ _08095DEC:
 	adds r0, r1
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x1
 	bl sub_8090C84
@@ -21032,7 +21032,7 @@ _08095F10:
 	adds r2, r5
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl sub_804037C
+	bl SetMonData
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r5
@@ -21118,7 +21118,7 @@ _08095FD4:
 	ldr r1, _08096004 @ =0x00002224
 	adds r2, r1
 	movs r1, 0xC
-	bl sub_804037C
+	bl SetMonData
 	mov r0, r8
 	movs r1, 0
 	bl sub_8090C84
@@ -21183,7 +21183,7 @@ _08096064:
 	adds r0, r1
 	movs r1, 0xC
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x1
 	bl sub_8090C84

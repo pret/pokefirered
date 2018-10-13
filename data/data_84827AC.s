@@ -276,19 +276,19 @@ gUnknown_83FAC34:: @ 83FAC34
 gUnknown_83FB134:: @ 83FB134
 	.incbin "baserom.gba", 0x3FB134, 0xA80
 
-gUnknown_83FBBB4:: @ 83FBBB4
+BattleText_MistShroud:: @ 83FBBB4
 	.incbin "baserom.gba", 0x3FBBB4, 0x35
 
-gUnknown_83FBBE9:: @ 83FBBE9
+BattleText_GetPumped:: @ 83FBBE9
 	.incbin "baserom.gba", 0x3FBBE9, 0xE43
 
-gUnknown_83FCA2C:: @ 83FCA2C
+gText_PkmnsXPreventsSwitching:: @ 83FCA2C
 	.incbin "baserom.gba", 0x3FCA2C, 0x11E
 
-gUnknown_83FCB4A:: @ 83FCB4A
+BattleText_Rose:: @ 83FCB4A
 	.incbin "baserom.gba", 0x3FCB4A, 0x20
 
-gUnknown_83FCB6A:: @ 83FCB6A
+BattleText_UnknownString3:: @ 83FCB6A
 	.incbin "baserom.gba", 0x3FCB6A, 0x120
 
 gUnknown_83FCC8A:: @ 83FCC8A
@@ -579,7 +579,7 @@ gUnknown_83FE860:: @ 83FE860
 gUnknown_83FE864:: @ 83FE864
 	.incbin "baserom.gba", 0x3FE864, 0x4
 
-gUnknown_83FE868:: @ 83FE868
+gText_BadEgg:: @ 83FE868
 	.incbin "baserom.gba", 0x3FE868, 0xC
 
 gUnknown_83FE874:: @ 83FE874
@@ -1185,7 +1185,7 @@ gExpandedPlaceholder_Red:: @ 8415A58
 gExpandedPlaceholder_Green:: @ 8415A5C
 	.incbin "baserom.gba", 0x415A5C, 0x6
 
-gUnknown_8415A62:: @ 8415A62
+gText_EggNickname:: @ 8415A62
 	.incbin "baserom.gba", 0x415A62, 0x4
 
 gUnknown_8415A66:: @ 8415A66

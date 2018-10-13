@@ -744,7 +744,7 @@ _080E4C7E:
 	lsls r2, 2
 	adds r1, r5, r2
 	ldrb r1, [r1]
-	ldr r2, _080E4CDC @ =gUnknown_2024029
+	ldr r2, _080E4CDC @ =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24
@@ -768,7 +768,7 @@ _080E4CCC: .4byte 0x00000263
 _080E4CD0: .4byte 0x00000a68
 _080E4CD4: .4byte 0x00000a6a
 _080E4CD8: .4byte gPlayerParty
-_080E4CDC: .4byte gUnknown_2024029
+_080E4CDC: .4byte gPlayerPartyCount
 _080E4CE0: .4byte sub_80E4800
 _080E4CE4:
 	ldr r1, [r7]

@@ -82,7 +82,7 @@ _080F863E:
 	bl CpuSet
 	mov r0, r9
 	strh r5, [r0]
-	ldr r1, _080F86BC @ =gUnknown_202273C
+	ldr r1, _080F86BC @ =gLinkPlayers
 	ldr r2, _080F86C0 @ =0x01000046
 	bl CpuSet
 	add sp, 0x8
@@ -101,7 +101,7 @@ _080F86AC: .4byte gUnknown_3003F50
 _080F86B0: .4byte 0x01000008
 _080F86B4: .4byte gUnknown_3003ED0
 _080F86B8: .4byte 0x01000028
-_080F86BC: .4byte gUnknown_202273C
+_080F86BC: .4byte gLinkPlayers
 _080F86C0: .4byte 0x01000046
 	thumb_func_end sub_80F85F8
 
@@ -4706,7 +4706,7 @@ _080FAA10:
 	cmp r4, 0x3
 	ble _080FAA10
 	adds r6, r2, 0
-	ldr r5, _080FAA54 @ =gUnknown_202273C
+	ldr r5, _080FAA54 @ =gLinkPlayers
 	movs r4, 0x4
 _080FAA24:
 	adds r0, r5, 0
@@ -4731,7 +4731,7 @@ _080FAA24:
 	.align 2, 0
 _080FAA4C: .4byte gUnknown_3005450
 _080FAA50: .4byte 0x00000996
-_080FAA54: .4byte gUnknown_202273C
+_080FAA54: .4byte gLinkPlayers
 	thumb_func_end sub_80FA9FC
 
 	thumb_func_start sub_80FAA58
@@ -4874,7 +4874,7 @@ _080FAB70:
 	lsls r2, r4, 8
 	ldr r0, _080FAB9C @ =gUnknown_2022118
 	adds r2, r0
-	ldr r1, _080FABA0 @ =gUnknown_202273C
+	ldr r1, _080FABA0 @ =gLinkPlayers
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
@@ -4891,7 +4891,7 @@ _080FAB70:
 	b _080FAC2E
 	.align 2, 0
 _080FAB9C: .4byte gUnknown_2022118
-_080FABA0: .4byte gUnknown_202273C
+_080FABA0: .4byte gLinkPlayers
 _080FABA4:
 	ldr r5, _080FAC40 @ =gUnknown_2022618
 	adds r1, r5, 0
@@ -4918,7 +4918,7 @@ _080FABC6:
 	adds r2, 0x1
 	cmp r2, 0x3
 	ble _080FABC6
-	ldr r1, _080FAC50 @ =gUnknown_202273C
+	ldr r1, _080FAC50 @ =gLinkPlayers
 	adds r0, r5, 0
 	adds r0, 0x14
 	movs r2, 0x8C
@@ -4936,7 +4936,7 @@ _080FABEE:
 	ldrb r0, [r1, 0xD]
 	strb r0, [r5, 0xF]
 	movs r2, 0
-	ldr r3, _080FAC50 @ =gUnknown_202273C
+	ldr r3, _080FAC50 @ =gLinkPlayers
 	mov r12, r3
 	adds r4, r5, 0
 	adds r4, 0x10
@@ -4977,7 +4977,7 @@ _080FAC40: .4byte gUnknown_2022618
 _080FAC44: .4byte gUnknown_843EDE4
 _080FAC48: .4byte gUnknown_3005450
 _080FAC4C: .4byte 0x00000996
-_080FAC50: .4byte gUnknown_202273C
+_080FAC50: .4byte gLinkPlayers
 _080FAC54: .4byte gTasks
 _080FAC58:
 	adds r0, r3, 0
@@ -5512,7 +5512,7 @@ sub_80FB030: @ 80FB030
 	mov r8, r1
 	movs r4, 0
 	movs r6, 0x1
-	ldr r2, _080FB0E0 @ =gUnknown_202273C
+	ldr r2, _080FB0E0 @ =gLinkPlayers
 	mov r12, r2
 	ldr r0, _080FB0E4 @ =0x00000996
 	adds r0, r3
@@ -5573,7 +5573,7 @@ _080FB0C4:
 _080FB0D4: .4byte gUnknown_3005450
 _080FB0D8: .4byte 0x0000099a
 _080FB0DC: .4byte 0x0000099b
-_080FB0E0: .4byte gUnknown_202273C
+_080FB0E0: .4byte gLinkPlayers
 _080FB0E4: .4byte 0x00000996
 	thumb_func_end sub_80FB030
 
@@ -10016,7 +10016,7 @@ _080FD258:
 	lsrs r0, 24
 	cmp r4, r0
 	beq _080FD29E
-	ldr r2, _080FD328 @ =gUnknown_202273C
+	ldr r2, _080FD328 @ =gLinkPlayers
 	adds r0, r5, r2
 	ldrh r0, [r0, 0x1A]
 	cmp r0, 0x1
@@ -10115,7 +10115,7 @@ _080FD318:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FD328: .4byte gUnknown_202273C
+_080FD328: .4byte gLinkPlayers
 _080FD32C: .4byte 0x00003bac
 _080FD330: .4byte gSaveBlock1Ptr
 _080FD334: .4byte 0x00003ba8

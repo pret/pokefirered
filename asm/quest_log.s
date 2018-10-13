@@ -3670,12 +3670,12 @@ sub_8113EAC: @ 8113EAC
 	bl GetSpeciesName
 	b _08113F08
 _08113ED0:
-	ldr r1, _08113EDC @ =gUnknown_8415A62
+	ldr r1, _08113EDC @ =gText_EggNickname
 	adds r0, r3, 0
 	bl StringCopy
 	b _08113F08
 	.align 2, 0
-_08113EDC: .4byte gUnknown_8415A62
+_08113EDC: .4byte gText_EggNickname
 _08113EE0:
 	movs r0, 0xCE
 	lsls r0, 1
@@ -3684,15 +3684,15 @@ _08113EE0:
 	movs r0, 0xB
 	adds r1, r4, 0
 	muls r1, r0
-	ldr r0, _08113EFC @ =gUnknown_8245EE0
+	ldr r0, _08113EFC @ =gSpeciesNames
 	adds r1, r0
 	adds r0, r2, 0
 	bl UnkTextUtil_SetPtrI
 	b _08113F08
 	.align 2, 0
-_08113EFC: .4byte gUnknown_8245EE0
+_08113EFC: .4byte gSpeciesNames
 _08113F00:
-	ldr r1, _08113F10 @ =gUnknown_8415A62
+	ldr r1, _08113F10 @ =gText_EggNickname
 	adds r0, r5, 0
 	bl UnkTextUtil_SetPtrI
 _08113F08:
@@ -3700,7 +3700,7 @@ _08113F08:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08113F10: .4byte gUnknown_8415A62
+_08113F10: .4byte gText_EggNickname
 	thumb_func_end sub_8113EAC
 
 	thumb_func_start sub_8113F14

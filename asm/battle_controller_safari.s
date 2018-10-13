@@ -623,13 +623,13 @@ SafariHandleDrawTrainerPic: @ 80DD9C4
 	ldr r0, [r4]
 	ldrb r6, [r0, 0x8]
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_803F864
-	ldr r0, _080DDA84 @ =gUnknown_20244DC
+	bl SetMultiuseSpriteTemplateToTrainerBack
+	ldr r0, _080DDA84 @ =gMultiuseSpriteTemplate
 	ldr r2, _080DDA88 @ =gUnknown_8239F8C
 	ldr r1, [r4]
 	ldrb r1, [r1, 0x8]
@@ -704,7 +704,7 @@ SafariHandleDrawTrainerPic: @ 80DD9C4
 	.align 2, 0
 _080DDA7C: .4byte gSaveBlock2Ptr
 _080DDA80: .4byte gActiveBattler
-_080DDA84: .4byte gUnknown_20244DC
+_080DDA84: .4byte gMultiuseSpriteTemplate
 _080DDA88: .4byte gUnknown_8239F8C
 _080DDA8C: .4byte gUnknown_2023D44
 _080DDA90: .4byte gSprites
@@ -760,7 +760,7 @@ sub_80DDAD4: @ 80DDAD4
 	ldr r5, _080DDB1C @ =gActiveBattler
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -804,7 +804,7 @@ sub_80DDB28: @ 80DDB28
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -866,7 +866,7 @@ sub_80DDBA0: @ 80DDBA0
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DDBE8
-	ldr r0, _080DDBE4 @ =gUnknown_202298C
+	ldr r0, _080DDBE4 @ =gDisplayedStringBattle
 	movs r1, 0x40
 	bl sub_80D87BC
 	b _080DDBF0
@@ -875,9 +875,9 @@ _080DDBD4: .4byte gUnknown_2022974
 _080DDBD8: .4byte gUnknown_2022976
 _080DDBDC: .4byte gActiveBattler
 _080DDBE0: .4byte gUnknown_2022BC6
-_080DDBE4: .4byte gUnknown_202298C
+_080DDBE4: .4byte gDisplayedStringBattle
 _080DDBE8:
-	ldr r0, _080DDC04 @ =gUnknown_202298C
+	ldr r0, _080DDC04 @ =gDisplayedStringBattle
 	movs r1, 0
 	bl sub_80D87BC
 _080DDBF0:
@@ -892,7 +892,7 @@ _080DDBF0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DDC04: .4byte gUnknown_202298C
+_080DDC04: .4byte gDisplayedStringBattle
 _080DDC08: .4byte gUnknown_3004FE0
 _080DDC0C: .4byte gActiveBattler
 _080DDC10: .4byte CompleteOnInactiveTextPrinter_3
@@ -903,7 +903,7 @@ sub_80DDC14: @ 80DDC14
 	push {lr}
 	ldr r0, _080DDC2C @ =gActiveBattler
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DDC30
@@ -982,7 +982,7 @@ _080DDC9A:
 	bl ActionSelectionCreateCursorAt
 	ldr r0, _080DDCE4 @ =gUnknown_83FE6E6
 	bl BattleStringExpandPlaceholdersToDisplayedString
-	ldr r0, _080DDCE8 @ =gUnknown_202298C
+	ldr r0, _080DDCE8 @ =gDisplayedStringBattle
 	movs r1, 0x1
 	bl sub_80D87BC
 	pop {r4}
@@ -996,7 +996,7 @@ _080DDCD8: .4byte gUnknown_83FDA4C
 _080DDCDC: .4byte gUnknown_83FE747
 _080DDCE0: .4byte gUnknown_2023FF8
 _080DDCE4: .4byte gUnknown_83FE6E6
-_080DDCE8: .4byte gUnknown_202298C
+_080DDCE8: .4byte gDisplayedStringBattle
 	thumb_func_end sub_80DDC78
 
 	thumb_func_start sub_80DDCEC
@@ -1033,7 +1033,7 @@ sub_80DDD04: @ 80DDD04
 	adds r0, r1
 	ldr r1, _080DDD3C @ =sub_80DD82C
 	str r1, [r0]
-	ldr r1, _080DDD40 @ =gUnknown_2024004
+	ldr r1, _080DDD40 @ =gBattlerInMenuId
 	ldrb r0, [r2]
 	strb r0, [r1]
 	add sp, 0x4
@@ -1043,7 +1043,7 @@ sub_80DDD04: @ 80DDD04
 _080DDD34: .4byte gUnknown_3004FE0
 _080DDD38: .4byte gActiveBattler
 _080DDD3C: .4byte sub_80DD82C
-_080DDD40: .4byte gUnknown_2024004
+_080DDD40: .4byte gBattlerInMenuId
 	thumb_func_end sub_80DDD04
 
 	thumb_func_start sub_80DDD44
@@ -1239,7 +1239,7 @@ SafariHandlePlaySE: @ 80DDE70
 	push {r4,lr}
 	ldr r4, _080DDEAC @ =gActiveBattler
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0

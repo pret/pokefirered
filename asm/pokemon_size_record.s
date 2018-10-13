@@ -299,7 +299,7 @@ sub_80A08CC: @ 80A08CC
 	ldr r0, _080A08FC @ =gStringVar1
 	movs r1, 0xB
 	muls r1, r4
-	ldr r2, _080A0900 @ =gUnknown_8245EE0
+	ldr r2, _080A0900 @ =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
 	pop {r4}
@@ -308,7 +308,7 @@ sub_80A08CC: @ 80A08CC
 	.align 2, 0
 _080A08F8: .4byte gStringVar3
 _080A08FC: .4byte gStringVar1
-_080A0900: .4byte gUnknown_8245EE0
+_080A0900: .4byte gSpeciesNames
 	thumb_func_end sub_80A08CC
 
 	thumb_func_start sub_80A0904
@@ -454,7 +454,7 @@ _080A09E6:
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	mov r2, r8
-	bl sub_804037C
+	bl SetMonData
 	movs r7, 0x1
 _080A0A18:
 	adds r5, 0x1

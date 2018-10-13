@@ -16214,7 +16214,7 @@ _080A9F52:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9F98
-	ldr r0, _080A9F94 @ =gUnknown_8E7F874
+	ldr r0, _080A9F94 @ =gFile_graphics_battle_anims_backgrounds_scary_face_contest_tilemap
 	ldr r1, [sp, 0x4]
 	bl LZDecompressVram
 	b _080A9FC6
@@ -16222,7 +16222,7 @@ _080A9F52:
 _080A9F88: .4byte 0x00003f42
 _080A9F8C: .4byte gUnknown_2022978
 _080A9F90: .4byte gUnknown_202297A
-_080A9F94: .4byte gUnknown_8E7F874
+_080A9F94: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_contest_tilemap
 _080A9F98:
 	ldr r0, _080A9FB4 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
@@ -16233,16 +16233,16 @@ _080A9F98:
 	bne _080A9FBC
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080A9FB8 @ =gUnknown_8E7F4AC
+	ldr r1, _080A9FB8 @ =gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap
 	bl sub_807543C
 	b _080A9FC6
 	.align 2, 0
 _080A9FB4: .4byte gUnknown_2037F1B
-_080A9FB8: .4byte gUnknown_8E7F4AC
+_080A9FB8: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap
 _080A9FBC:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AA010 @ =gUnknown_8E7F690
+	ldr r1, _080AA010 @ =gFile_graphics_battle_anims_backgrounds_scary_face_opponent_tilemap
 	bl sub_807543C
 _080A9FC6:
 	mov r0, sp
@@ -16280,7 +16280,7 @@ _080A9FFA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AA010: .4byte gUnknown_8E7F690
+_080AA010: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_opponent_tilemap
 _080AA014: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_sheet
 _080AA018: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_palette
 _080AA01C: .4byte gTasks
@@ -18865,23 +18865,23 @@ sub_80AB38C: @ 80AB38C
 	bne _080AB408
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AB404 @ =gUnknown_8E81D14
+	ldr r1, _080AB404 @ =gFile_graphics_unknown_unknown_E81D14_tilemap
 	bl sub_807543C
 	b _080AB42E
 	.align 2, 0
 _080AB3FC: .4byte 0x00003f42
 _080AB400: .4byte gUnknown_2037F1A
-_080AB404: .4byte gUnknown_8E81D14
+_080AB404: .4byte gFile_graphics_unknown_unknown_E81D14_tilemap
 _080AB408:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AB414 @ =gUnknown_8E81FE4
+	ldr r1, _080AB414 @ =gFile_graphics_unknown_unknown_E81FE4_tilemap
 	bl sub_807543C
 	b _080AB42E
 	.align 2, 0
-_080AB414: .4byte gUnknown_8E81FE4
+_080AB414: .4byte gFile_graphics_unknown_unknown_E81FE4_tilemap
 _080AB418:
-	ldr r0, _080AB458 @ =gUnknown_8E822B8
+	ldr r0, _080AB458 @ =gFile_graphics_unknown_unknown_E822B8_tilemap
 	ldr r1, [sp, 0x4]
 	bl LZDecompressVram
 	mov r0, sp
@@ -18893,7 +18893,7 @@ _080AB418:
 _080AB42E:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AB45C @ =gUnknown_8E809CC
+	ldr r1, _080AB45C @ =gFile_graphics_battle_anims_backgrounds_water_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
@@ -18902,7 +18902,7 @@ _080AB42E:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080AB468
-	ldr r0, _080AB464 @ =gUnknown_8E81CEC
+	ldr r0, _080AB464 @ =gFile_graphics_battle_anims_backgrounds_water_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -18910,10 +18910,10 @@ _080AB42E:
 	bl LoadCompressedPalette
 	b _080AB476
 	.align 2, 0
-_080AB458: .4byte gUnknown_8E822B8
-_080AB45C: .4byte gUnknown_8E809CC
+_080AB458: .4byte gFile_graphics_unknown_unknown_E822B8_tilemap
+_080AB45C: .4byte gFile_graphics_battle_anims_backgrounds_water_sheet
 _080AB460: .4byte gUnknown_2037F02
-_080AB464: .4byte gUnknown_8E81CEC
+_080AB464: .4byte gFile_graphics_battle_anims_backgrounds_water_palette
 _080AB468:
 	ldr r0, _080AB4E0 @ =gFile_graphics_battle_anims_backgrounds_water_muddy_palette
 	mov r1, sp
@@ -28163,7 +28163,7 @@ _080AFB26:
 	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AFBB0 @ =gUnknown_8E7F1F4
+	ldr r1, _080AFBB0 @ =gFile_graphics_battle_anims_backgrounds_fog_tilemap
 	bl sub_807543C
 	ldr r0, _080AFBB4 @ =gUnknown_83C2CE0
 	mov r1, sp
@@ -28198,7 +28198,7 @@ _080AFBA0: .4byte 0x00003f42
 _080AFBA4: .4byte gUnknown_2022978
 _080AFBA8: .4byte gUnknown_202297A
 _080AFBAC: .4byte gUnknown_83C3540
-_080AFBB0: .4byte gUnknown_8E7F1F4
+_080AFBB0: .4byte gFile_graphics_battle_anims_backgrounds_fog_tilemap
 _080AFBB4: .4byte gUnknown_83C2CE0
 _080AFBB8: .4byte gTasks
 _080AFBBC: .4byte sub_80AFBC0
@@ -28474,7 +28474,7 @@ _080AFDC2:
 	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AFE50 @ =gUnknown_8E7F1F4
+	ldr r1, _080AFE50 @ =gFile_graphics_battle_anims_backgrounds_fog_tilemap
 	bl sub_807543C
 	ldr r0, _080AFE54 @ =gUnknown_83C2CE0
 	mov r1, sp
@@ -28511,7 +28511,7 @@ _080AFE40: .4byte 0x00003f42
 _080AFE44: .4byte gUnknown_2022978
 _080AFE48: .4byte gUnknown_202297A
 _080AFE4C: .4byte gUnknown_83C3540
-_080AFE50: .4byte gUnknown_8E7F1F4
+_080AFE50: .4byte gFile_graphics_battle_anims_backgrounds_fog_tilemap
 _080AFE54: .4byte gUnknown_83C2CE0
 _080AFE58: .4byte gTasks
 _080AFE5C: .4byte 0x0000ffff
@@ -42830,7 +42830,7 @@ _080B6D8C:
 	lsls r4, 1
 	adds r0, r4
 	str r1, [r0]
-	ldr r0, _080B6E00 @ =gUnknown_8E7F4AC
+	ldr r0, _080B6E00 @ =gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap
 	bl LZDecompressWram
 	add r0, sp, 0xC
 	ldrb r0, [r0, 0x8]
@@ -42867,7 +42867,7 @@ _080B6D8C:
 	b _080B6F1E
 	.align 2, 0
 _080B6DFC: .4byte gMonSpritesGfxPtr
-_080B6E00: .4byte gUnknown_8E7F4AC
+_080B6E00: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap
 _080B6E04:
 	ldrh r0, [r6, 0xA]
 	adds r0, 0x1

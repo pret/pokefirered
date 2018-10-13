@@ -647,7 +647,7 @@ _0811EF6C:
 	.4byte _0811F010
 _0811EF8C:
 	ldr r4, _0811EFAC @ =gUnknown_203B0B8
-	ldr r0, _0811EFB0 @ =gUnknown_8E82700
+	ldr r0, _0811EFB0 @ =gFile_graphics_interface_party_menu_misc_sheet
 	mov r1, sp
 	bl malloc_and_decompress
 	adds r1, r0, 0
@@ -661,7 +661,7 @@ _0811EF8C:
 	b _0811F016
 	.align 2, 0
 _0811EFAC: .4byte gUnknown_203B0B8
-_0811EFB0: .4byte gUnknown_8E82700
+_0811EFB0: .4byte gFile_graphics_interface_party_menu_misc_sheet
 _0811EFB4:
 	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24

@@ -7897,13 +7897,8 @@ sub_80504CC: @ 80504CC
 	.align 2, 0
 _080505B4: .4byte gUnknown_826D1D4
 _080505B8: .4byte gUnknown_8D00000
-<<<<<<< HEAD
 _080505BC: .4byte gFile_graphics_interface_menu_map_tilemap
-_080505C0: .4byte gUnknown_201C000
-=======
-_080505BC: .4byte gUnknown_8D0051C
 _080505C0: .4byte gDecompressionBuffer
->>>>>>> upstream/master
 _080505C4: .4byte gUnknown_8D004D8
 _080505C8: .4byte gUnknown_826D1BC
 	thumb_func_end sub_80504CC

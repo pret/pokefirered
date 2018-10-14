@@ -648,7 +648,7 @@ _0804CB9C:
 	ldr r0, [r0]
 	ldr r6, _0804CC18 @ =gUnknown_2031C94
 	ldr r1, [r6]
-	ldr r5, _0804CC1C @ =gUnknown_201C000
+	ldr r5, _0804CC1C @ =gDecompressionBuffer
 	str r5, [sp]
 	movs r4, 0x3
 	str r4, [sp, 0x4]
@@ -701,7 +701,7 @@ _0804CB9C:
 	.align 2, 0
 _0804CC14: .4byte gSaveBlock2Ptr
 _0804CC18: .4byte gUnknown_2031C94
-_0804CC1C: .4byte gUnknown_201C000
+_0804CC1C: .4byte gDecompressionBuffer
 _0804CC20: .4byte gUnknown_2022744
 _0804CC24: .4byte gUnknown_8261ECC
 _0804CC28: .4byte gMain
@@ -1338,7 +1338,7 @@ _0804D19C:
 	ldr r0, [r0]
 	ldr r6, _0804D218 @ =gUnknown_2031C94
 	ldr r1, [r6]
-	ldr r5, _0804D21C @ =gUnknown_201C000
+	ldr r5, _0804D21C @ =gDecompressionBuffer
 	str r5, [sp]
 	movs r4, 0x3
 	str r4, [sp, 0x4]
@@ -1392,7 +1392,7 @@ _0804D200:
 	.align 2, 0
 _0804D214: .4byte gSaveBlock2Ptr
 _0804D218: .4byte gUnknown_2031C94
-_0804D21C: .4byte gUnknown_201C000
+_0804D21C: .4byte gDecompressionBuffer
 _0804D220: .4byte gUnknown_2022744
 _0804D224: .4byte gUnknown_8261ECC
 _0804D228: .4byte gMain
@@ -6024,7 +6024,7 @@ _0804F71E:
 sub_804F728: @ 804F728
 	push {lr}
 	sub sp, 0x8
-	ldr r2, _0804F744 @ =gUnknown_201C000
+	ldr r2, _0804F744 @ =gDecompressionBuffer
 	str r2, [sp]
 	movs r2, 0x6
 	str r2, [sp, 0x4]
@@ -6035,7 +6035,7 @@ sub_804F728: @ 804F728
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804F744: .4byte gUnknown_201C000
+_0804F744: .4byte gDecompressionBuffer
 	thumb_func_end sub_804F728
 
 	thumb_func_start sub_804F748
@@ -7852,7 +7852,7 @@ sub_80504CC: @ 80504CC
 	bl sub_80F696C
 	ldr r0, _080505BC @ =gFile_graphics_interface_menu_map_tilemap
 	mov r8, r0
-	ldr r4, _080505C0 @ =gUnknown_201C000
+	ldr r4, _080505C0 @ =gDecompressionBuffer
 	adds r1, r4, 0
 	bl LZDecompressWram
 	movs r0, 0
@@ -7897,8 +7897,13 @@ sub_80504CC: @ 80504CC
 	.align 2, 0
 _080505B4: .4byte gUnknown_826D1D4
 _080505B8: .4byte gUnknown_8D00000
+<<<<<<< HEAD
 _080505BC: .4byte gFile_graphics_interface_menu_map_tilemap
 _080505C0: .4byte gUnknown_201C000
+=======
+_080505BC: .4byte gUnknown_8D0051C
+_080505C0: .4byte gDecompressionBuffer
+>>>>>>> upstream/master
 _080505C4: .4byte gUnknown_8D004D8
 _080505C8: .4byte gUnknown_826D1BC
 	thumb_func_end sub_80504CC

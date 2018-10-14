@@ -463,7 +463,7 @@ _0813BC58: .4byte gUnknown_203F18A
 	thumb_func_start sub_813BC5C
 sub_813BC5C: @ 813BC5C
 	push {lr}
-	ldr r0, _0813BC70 @ =gUnknown_201C000
+	ldr r0, _0813BC70 @ =gDecompressionBuffer
 	ldr r1, _0813BC74 @ =0x0600c000
 	movs r2, 0x80
 	lsls r2, 7
@@ -472,7 +472,7 @@ sub_813BC5C: @ 813BC5C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813BC70: .4byte gUnknown_201C000
+_0813BC70: .4byte gDecompressionBuffer
 _0813BC74: .4byte 0x0600c000
 	thumb_func_end sub_813BC5C
 
@@ -1586,7 +1586,7 @@ sub_813C4CC: @ 813C4CC
 	movs r1, 0xF
 	movs r2, 0x2
 	bl GenerateFontHalfRowLookupTable
-	ldr r1, _0813C508 @ =gUnknown_201C000
+	ldr r1, _0813C508 @ =gDecompressionBuffer
 	str r4, [sp]
 	movs r0, 0x1A
 	str r0, [sp, 0x4]
@@ -1601,7 +1601,7 @@ sub_813C4CC: @ 813C4CC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813C508: .4byte gUnknown_201C000
+_0813C508: .4byte gDecompressionBuffer
 	thumb_func_end sub_813C4CC
 
 	thumb_func_start sub_813C50C
@@ -1617,7 +1617,7 @@ sub_813C50C: @ 813C50C
 	ldr r2, _0813C578 @ =0x0000eeee
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r4, _0813C57C @ =gUnknown_201C000
+	ldr r4, _0813C57C @ =gDecompressionBuffer
 	ldr r2, _0813C580 @ =0x01001a00
 	adds r0, r1, 0
 	adds r1, r4, 0
@@ -1658,7 +1658,7 @@ sub_813C50C: @ 813C50C
 	bx r0
 	.align 2, 0
 _0813C578: .4byte 0x0000eeee
-_0813C57C: .4byte gUnknown_201C000
+_0813C57C: .4byte gDecompressionBuffer
 _0813C580: .4byte 0x01001a00
 	thumb_func_end sub_813C50C
 
@@ -1751,7 +1751,7 @@ sub_813C624: @ 813C624
 	ldr r2, _0813C640 @ =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _0813C644 @ =gUnknown_201C000
+	ldr r1, _0813C644 @ =gDecompressionBuffer
 	ldr r2, _0813C648 @ =0x01001a00
 	mov r0, sp
 	bl CpuSet
@@ -1760,7 +1760,7 @@ sub_813C624: @ 813C624
 	bx r0
 	.align 2, 0
 _0813C640: .4byte 0x0000ffff
-_0813C644: .4byte gUnknown_201C000
+_0813C644: .4byte gDecompressionBuffer
 _0813C648: .4byte 0x01001a00
 	thumb_func_end sub_813C624
 

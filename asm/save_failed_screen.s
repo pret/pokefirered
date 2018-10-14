@@ -15,8 +15,8 @@ sub_80F50F4: @ 80F50F4
 _080F50FC: .4byte gUnknown_3005430
 	thumb_func_end sub_80F50F4
 
-	thumb_func_start sub_80F5100
-sub_80F5100: @ 80F5100
+	thumb_func_start DoSaveFailedScreen
+DoSaveFailedScreen: @ 80F5100
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _080F5110 @ =gUnknown_203AB4C
@@ -28,7 +28,7 @@ sub_80F5100: @ 80F5100
 	.align 2, 0
 _080F5110: .4byte gUnknown_203AB4C
 _080F5114: .4byte gUnknown_3005430
-	thumb_func_end sub_80F5100
+	thumb_func_end DoSaveFailedScreen
 
 	thumb_func_start sub_80F5118
 sub_80F5118: @ 80F5118
@@ -435,7 +435,7 @@ _080F5454: .4byte 0x01001180
 sub_80F5458: @ 80F5458
 	push {r4,r5,lr}
 	movs r5, 0
-	ldr r0, _080F5490 @ =gUnknown_300538C
+	ldr r0, _080F5490 @ =gDamagedSaveSectors
 	ldr r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0
@@ -447,12 +447,12 @@ _080F5466:
 	bne _080F5498
 	ldr r0, _080F5494 @ =gUnknown_203AB4C
 	ldrb r0, [r0]
-	bl sub_80DA248
+	bl HandleSavingData
 	adds r5, 0x1
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _080F548C
-	ldr r4, _080F5490 @ =gUnknown_300538C
+	ldr r4, _080F5490 @ =gDamagedSaveSectors
 	cmp r5, 0x2
 	ble _080F5466
 	ldr r0, [r4]
@@ -462,7 +462,7 @@ _080F548C:
 	movs r0, 0x1
 	b _080F549A
 	.align 2, 0
-_080F5490: .4byte gUnknown_300538C
+_080F5490: .4byte gDamagedSaveSectors
 _080F5494: .4byte gUnknown_203AB4C
 _080F5498:
 	movs r0, 0
@@ -477,7 +477,7 @@ VerifySectorWipe: @ 80F54A0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _080F54C4 @ =gUnknown_2039A38
+	ldr r4, _080F54C4 @ =gSaveDataBuffer
 	movs r3, 0x80
 	lsls r3, 5
 	movs r1, 0
@@ -492,7 +492,7 @@ _080F54B8:
 	movs r0, 0x1
 	b _080F54DA
 	.align 2, 0
-_080F54C4: .4byte gUnknown_2039A38
+_080F54C4: .4byte gSaveDataBuffer
 _080F54C8: .4byte 0x000003ff
 _080F54CC:
 	adds r0, r1, 0x1

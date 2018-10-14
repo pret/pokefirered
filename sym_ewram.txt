@@ -1,4 +1,4 @@
-gUnknown_201C000: @ 201C000
+gDecompressionBuffer: @ 201C000
 	.space 0x20
 
 gUnknown_201C020: @ 201C020
@@ -1244,9 +1244,9 @@ gUnknown_2039A30: @ 2039A30
 gUnknown_2039A34: @ 2039A34
 	.space 0x4
 
-gUnknown_2039A38: @ 2039A38
-	.space 0x1004
+	.include "src/save.o"
 
+	.align 2
 gUnknown_203AA3C: @ 203AA3C
 	.space 0x74
 

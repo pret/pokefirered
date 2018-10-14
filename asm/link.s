@@ -1033,7 +1033,7 @@ _08009CC0:
 	mov r10, r7
 	cmp r1, r0
 	bls _08009D10
-	ldr r0, _08009D08 @ =gUnknown_201C000
+	ldr r0, _08009D08 @ =gDecompressionBuffer
 	mov r8, r0
 	movs r2, 0
 	adds r5, r3, 0
@@ -1058,7 +1058,7 @@ _08009CE4:
 	b _08009D40
 	.align 2, 0
 _08009D04: .4byte gUnknown_3000E18
-_08009D08: .4byte gUnknown_201C000
+_08009D08: .4byte gDecompressionBuffer
 _08009D0C: .4byte gUnknown_3003ED0
 _08009D10:
 	movs r2, 0

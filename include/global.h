@@ -32,6 +32,9 @@ char* strcpy(char *dst0, const char *src0);
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
+#define min(a, b) ((a) < (b) ? (a) : (b))
+#define max(a, b) ((a) >= (b) ? (a) : (b))
+
 // There are many quirks in the source code which have overarching behavioral differences from
 // a number of other files. For example, diploma.c seems to declare rodata before each use while
 // other files declare out of order and must be at the beginning. There are also a number of
@@ -510,6 +513,7 @@ struct SaveBlock1
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[0x44];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
+    /*0x3A54*/ u8 filler3A54[0x314];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

@@ -1835,7 +1835,7 @@ _08010CE2:
 	bl sub_8010414
 	bl sub_801017C
 	bl sub_8044708
-	ldr r0, _08010D4C @ =gUnknown_201C000
+	ldr r0, _08010D4C @ =gDecompressionBuffer
 	ldr r1, _08010D50 @ =gPlayerParty
 	movs r2, 0x96
 	lsls r2, 1
@@ -1877,7 +1877,7 @@ _08010D3A:
 	beq _08010D6E
 	b _08010D9C
 	.align 2, 0
-_08010D4C: .4byte gUnknown_201C000
+_08010D4C: .4byte gDecompressionBuffer
 _08010D50: .4byte gPlayerParty
 _08010D54: .4byte sub_800F6FC
 _08010D58: .4byte gTasks
@@ -1940,14 +1940,14 @@ _08010DC2:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08010DDC @ =gUnknown_201C000
+	ldr r1, _08010DDC @ =gDecompressionBuffer
 	movs r2, 0xC8
 	bl SendBlock
 	ldr r1, _08010DD8 @ =gUnknown_2023E82
 	b _080110EA
 	.align 2, 0
 _08010DD8: .4byte gUnknown_2023E82
-_08010DDC: .4byte gUnknown_201C000
+_08010DDC: .4byte gDecompressionBuffer
 _08010DE0:
 	bl GetBlockReceivedStatus
 	movs r1, 0xF

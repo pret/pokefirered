@@ -1726,12 +1726,12 @@ _080D8084:
 	movs r0, 0xD
 _080D8094:
 	muls r1, r0
-	ldr r0, _080D80A0 @ =gUnknown_823E558
+	ldr r0, _080D80A0 @ =gTrainerClassNames
 	adds r4, r1, r0
 	b _080D8382
 	.align 2, 0
 _080D809C: .4byte gTrainers
-_080D80A0: .4byte gUnknown_823E558
+_080D80A0: .4byte gTrainerClassNames
 _080D80A4:
 	ldr r0, _080D80E8 @ =gTrainerBattleOpponent_A
 	ldrh r2, [r0]

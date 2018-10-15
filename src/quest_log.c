@@ -84,6 +84,7 @@ EWRAM_DATA u8 gUnknown_203AF9A[64][2];
 EWRAM_DATA u16 gUnknown_203B01A;
 EWRAM_DATA u16 gUnknown_203B01C;
 EWRAM_DATA u16 gUnknown_203B01E;
+EWRAM_DATA u8 gUnknown_203B020;
 
 EWRAM_DATA u16 gUnknown_203B044[2] = {0};
 
@@ -1979,6 +1980,12 @@ bool8 sub_8112D1C(void)
     return FALSE;
 }
 
+const struct UnkStruct_300201C gUnknown_84566A4 = {
+    0,
+    FALSE,
+    0x7FFF
+};
+
 u16 * sub_8112D40(u8 a0, u16 a1)
 {
     u16 * response;
@@ -1996,4 +2003,60 @@ u16 * sub_8112D40(u8 a0, u16 a1)
     else
         response = NULL;
     return response;
+}
+
+void sub_8112DB0(u8 a0, u16 a1, u16 a2)
+{
+    if (gUnknown_203AF98 == 0)
+        return;
+    if (gUnknown_203AF98 >= gUnknown_3005E8C)
+        return;
+    if (gUnknown_203B01E >= gUnknown_3002020)
+        return;
+    gUnknown_300201C[gUnknown_203B01E].unk_0_0 = a1;
+    gUnknown_300201C[gUnknown_203B01E].unk_0_f = a0;
+    gUnknown_300201C[gUnknown_203B01E].unk_2 = a2;
+    gUnknown_203B01E++;
+}
+
+void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
+{
+    s32 i;
+
+    if (a0 == 0 || a0 > 2)
+        gUnknown_3005E88 = 0;
+    else
+    {
+        gUnknown_300201C = a1;
+        gUnknown_3002020 = a2 >> 2;
+        gUnknown_203B01E = 0;
+        if (a0 == 2)
+        {
+            for (i = 0; i < gUnknown_3005E8C; i++)
+            {
+                gUnknown_300201C[i] = gUnknown_84566A4;
+            }
+        }
+    }
+}
+
+const u16 gUnknown_84566A8[] = INCBIN_U16("data/graphics/unknown_84566a8.bin");
+
+const struct WindowTemplate gUnknown_8456928 = {
+    0x00, 0, 15, 30, 5, 15, 0x008F
+};
+
+void sub_8112EA8(void)
+{
+    gUnknown_203B020 = 0xFF;
+}
+
+u8 sub_8112EB4(void)
+{
+    if (gUnknown_203B020 == 0xFF)
+    {
+        gUnknown_203B020 = AddWindow(&gUnknown_8456928);
+        PutWindowTilemap(gUnknown_203B020);
+    }
+    return gUnknown_203B020;
 }

@@ -321,7 +321,7 @@ sub_812B40C: @ 812B40C
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0812B42E
-	ldr r0, _0812B438 @ =gUnknown_30053A0
+	ldr r0, _0812B438 @ =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0812B440
@@ -337,7 +337,7 @@ _0812B42E:
 	b _0812B44E
 	.align 2, 0
 _0812B434: .4byte gUnknown_203B0EE
-_0812B438: .4byte gUnknown_30053A0
+_0812B438: .4byte gSaveFileStatus
 _0812B43C: .4byte 0x0000083c
 _0812B440:
 	ldr r0, _0812B454 @ =0x0000083c

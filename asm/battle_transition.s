@@ -4942,7 +4942,7 @@ sub_80D2EA4: @ 80D2EA4
 	adds r2, 0x2A
 	lsls r2, 16
 	asrs r2, 16
-	ldr r5, _080D3004 @ =gUnknown_201C000
+	ldr r5, _080D3004 @ =gDecompressionBuffer
 	str r5, [sp]
 	movs r3, 0
 	bl CreateTrainerSprite
@@ -5077,7 +5077,7 @@ sub_80D2EA4: @ 80D2EA4
 _080D2FF8: .4byte gReservedSpritePaletteCount
 _080D2FFC: .4byte gUnknown_83FA494
 _080D3000: .4byte gUnknown_83FA4AE
-_080D3004: .4byte gUnknown_201C000
+_080D3004: .4byte gDecompressionBuffer
 _080D3008: .4byte gSaveBlock2Ptr
 _080D300C: .4byte gSprites
 _080D3010: .4byte sub_80D301C

@@ -12,22 +12,22 @@ CheckForFlashMemory: @ 804BFE4
 	lsls r0, 16
 	cmp r0, 0
 	bne _0804C000
-	ldr r1, _0804BFFC @ =gUnknown_3005004
+	ldr r1, _0804BFFC @ =gFlashMemoryPresent
 	movs r0, 0x1
 	str r0, [r1]
 	bl InitFlashTimer
 	b _0804C006
 	.align 2, 0
-_0804BFFC: .4byte gUnknown_3005004
+_0804BFFC: .4byte gFlashMemoryPresent
 _0804C000:
-	ldr r1, _0804C00C @ =gUnknown_3005004
+	ldr r1, _0804C00C @ =gFlashMemoryPresent
 	movs r0, 0
 	str r0, [r1]
 _0804C006:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804C00C: .4byte gUnknown_3005004
+_0804C00C: .4byte gFlashMemoryPresent
 	thumb_func_end CheckForFlashMemory
 
 	thumb_func_start ClearSav2
@@ -83,7 +83,7 @@ SetSaveBlocksPointers: @ 804C058
 	ldr r0, _0804C098 @ =gSaveBlock1
 	adds r0, r1, r0
 	str r0, [r4]
-	ldr r2, _0804C09C @ =gUnknown_3005010
+	ldr r2, _0804C09C @ =gPokemonStoragePtr
 	ldr r0, _0804C0A0 @ =gPokemonStorage
 	adds r1, r0
 	str r1, [r2]
@@ -98,7 +98,7 @@ _0804C08C: .4byte gSaveBlock1Ptr
 _0804C090: .4byte gSaveBlock2Ptr
 _0804C094: .4byte gSaveBlock2
 _0804C098: .4byte gSaveBlock1
-_0804C09C: .4byte gUnknown_3005010
+_0804C09C: .4byte gPokemonStoragePtr
 _0804C0A0: .4byte gPokemonStorage
 	thumb_func_end SetSaveBlocksPointers
 
@@ -134,7 +134,7 @@ sub_804C0A4: @ 804C0A4
 	ldr r0, _0804C178 @ =gHeap + 0xf24
 	adds r2, r7, 0
 	bl memcpy
-	ldr r6, _0804C17C @ =gUnknown_3005010
+	ldr r6, _0804C17C @ =gPokemonStoragePtr
 	ldr r1, [r6]
 	ldr r0, _0804C180 @ =0x000083d0
 	mov r8, r0
@@ -195,7 +195,7 @@ _0804C16C: .4byte 0x00000f24
 _0804C170: .4byte gSaveBlock1Ptr
 _0804C174: .4byte 0x00003d68
 _0804C178: .4byte gHeap + 0xf24
-_0804C17C: .4byte gUnknown_3005010
+_0804C17C: .4byte gPokemonStoragePtr
 _0804C180: .4byte 0x000083d0
 _0804C184: .4byte gHeap + 0x4c8c
 	thumb_func_end sub_804C0A4

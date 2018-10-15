@@ -1107,10 +1107,10 @@ _08079248:
 	bl SeedRngAndSetTrainerId
 	bl SetSaveBlocksPointers
 	bl sub_8054A28
-	bl ResetSaveCounters
+	bl Save_ResetSaveCounters
 	movs r0, 0
-	bl sub_80DA4FC
-	ldr r0, _080792B4 @ =gUnknown_30053A0
+	bl Save_LoadGameData
+	ldr r0, _080792B4 @ =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08079276
@@ -1143,7 +1143,7 @@ _080792A6:
 	bx r0
 	.align 2, 0
 _080792B0: .4byte gPaletteFade
-_080792B4: .4byte gUnknown_30053A0
+_080792B4: .4byte gSaveFileStatus
 _080792B8: .4byte gSaveBlock2Ptr
 _080792BC: .4byte gHeap
 _080792C0: .4byte sub_800C300

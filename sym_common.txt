@@ -135,7 +135,7 @@ gUnknown_3004FFC: @ 3004FFC
 	.include "random.o"
 	
 	.align 2
-gUnknown_3005004: @ 3005004
+gFlashMemoryPresent: @ 3005004
 	.space 0x4
 
 gSaveBlock1Ptr: @ 3005008
@@ -144,7 +144,7 @@ gSaveBlock1Ptr: @ 3005008
 gSaveBlock2Ptr: @ 300500C
 	.space 0x4
 
-gUnknown_3005010: @ 3005010
+gPokemonStoragePtr: @ 3005010
 	.space 0x4
 
 gUnknown_3005014: @ 3005014
@@ -240,39 +240,9 @@ gUnknown_3005378: @ 3005378
 gUnknown_300537C: @ 300537C
 	.space 0x4
 
-gUnknown_3005380: @ 3005380
-	.space 0x4
+	.include "save.o"
 
-gUnknown_3005384: @ 3005384
-	.space 0x4
-
-gUnknown_3005388: @ 3005388
-	.space 0x4
-
-gUnknown_300538C: @ 300538C
-	.space 0x4
-
-gUnknown_3005390: @ 3005390
-	.space 0x4
-
-gUnknown_3005394: @ 3005394
-	.space 0x4
-
-gUnknown_3005398: @ 3005398
-	.space 0x8
-
-gUnknown_30053A0: @ 30053A0
-	.space 0x4
-
-gUnknown_30053A4: @ 30053A4
-	.space 0xC
-
-gUnknown_30053B0: @ 30053B0
-	.space 0x70
-
-gUnknown_3005420: @ 3005420
-	.space 0x4
-
+	.align 2
 gUnknown_3005424: @ 3005424
 	.space 0x4
 

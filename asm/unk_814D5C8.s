@@ -2787,13 +2787,13 @@ sub_814EC80: @ 814EC80
 	adds r6, r0, 0
 	movs r5, 0
 	ldr r0, _0814EC94 @ =gUnknown_8EB0ADC
-	ldr r4, _0814EC98 @ =gUnknown_201C000
+	ldr r4, _0814EC98 @ =gDecompressionBuffer
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	b _0814ECCA
 	.align 2, 0
 _0814EC94: .4byte gUnknown_8EB0ADC
-_0814EC98: .4byte gUnknown_201C000
+_0814EC98: .4byte gDecompressionBuffer
 _0814EC9C:
 	lsls r1, r5, 2
 	movs r2, 0xA2

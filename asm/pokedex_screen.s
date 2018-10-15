@@ -6926,7 +6926,7 @@ sub_8105D64: @ 8105D64
 	adds r0, r1
 	ldr r0, [r0]
 	mov r12, r0
-	ldr r7, _08105E18 @ =gUnknown_201C000
+	ldr r7, _08105E18 @ =gDecompressionBuffer
 	movs r5, 0
 	movs r1, 0
 _08105DA6:
@@ -6988,7 +6988,7 @@ _08105E02:
 	bx r0
 	.align 2, 0
 _08105E14: .4byte gUnknown_843FAB0
-_08105E18: .4byte gUnknown_201C000
+_08105E18: .4byte gDecompressionBuffer
 	thumb_func_end sub_8105D64
 
 	thumb_func_start sub_8105E1C

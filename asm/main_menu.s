@@ -254,7 +254,7 @@ _0800C4E8:
 	movs r0, 0x54
 	movs r1, 0x7
 	bl SetGpuReg
-	ldr r0, _0800C53C @ =gUnknown_30053A0
+	ldr r0, _0800C53C @ =gSaveFileStatus
 	ldrh r4, [r0]
 	cmp r4, 0x2
 	beq _0800C58C
@@ -267,7 +267,7 @@ _0800C4E8:
 	b _0800C5E8
 	.align 2, 0
 _0800C538: .4byte gPaletteFade
-_0800C53C: .4byte gUnknown_30053A0
+_0800C53C: .4byte gSaveFileStatus
 _0800C540:
 	cmp r4, 0x4
 	beq _0800C60C

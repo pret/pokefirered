@@ -971,8 +971,8 @@ void sub_8111914(void)
 void sub_8111984(void)
 {
     sub_806E6FC();
-    ResetSaveCounters();
-    sub_80DA4FC(0);
+    Save_ResetSaveCounters();
+    Save_LoadGameData(0);
     SetMainCallback2(sub_8057430);
     gUnknown_3005024 = sub_8111F60;
     FreeAllWindowBuffers();

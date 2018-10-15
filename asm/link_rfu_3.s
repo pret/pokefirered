@@ -10960,7 +10960,7 @@ sub_811B31C: @ 811B31C
 	lsrs r0, 16
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _0811B4B4 @ =gUnknown_823E558
+	ldr r0, _0811B4B4 @ =gTrainerClassNames
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringCopy
@@ -11109,7 +11109,7 @@ _0811B45E:
 	b _0811B4F0
 	.align 2, 0
 _0811B4B0: .4byte gUnknown_2039624
-_0811B4B4: .4byte gUnknown_823E558
+_0811B4B4: .4byte gTrainerClassNames
 _0811B4B8: .4byte gUnknown_84594B0
 _0811B4BC: .4byte gUnknown_84594C4
 _0811B4C0: .4byte gStringVar4

@@ -52,10 +52,20 @@ struct UnkStruct_203AE98
     u8 unk_6;
 };
 
+struct UnkStruct_300201C
+{
+    u16 unk_0_0:15;
+    u16 unk_0_f:1;
+    u16 unk_2;
+};
+
 u8 gUnknown_3005E88;
 u16 gUnknown_3005E8C;
 struct UnkStruct_3005E90 gUnknown_3005E90;
 struct UnkStruct_203AE98 * gUnknown_3005E94;
+
+IWRAM_DATA struct UnkStruct_300201C * gUnknown_300201C;
+IWRAM_DATA u16 gUnknown_3002020;
 
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 EWRAM_DATA u8 gUnknown_203ADF9 = 0;
@@ -73,6 +83,7 @@ EWRAM_DATA u16 gUnknown_203AF98 = 0;
 EWRAM_DATA u8 gUnknown_203AF9A[64][2];
 EWRAM_DATA u16 gUnknown_203B01A;
 EWRAM_DATA u16 gUnknown_203B01C;
+EWRAM_DATA u16 gUnknown_203B01E;
 
 EWRAM_DATA u16 gUnknown_203B044[2] = {0};
 
@@ -1932,3 +1943,57 @@ void sub_8112B3C(void)
                 "_08112C98: .4byte gUnknown_3005E88");
 }
 #endif
+
+void sub_8112C9C(void)
+{
+    gUnknown_203B01A++;
+}
+
+u8 sub_8112CAC(void)
+{
+    switch (gUnknown_3005E88)
+    {
+        case 0:
+        default:
+            return 0;
+        case 1:
+        case 3:
+            return 1;
+        case 2:
+        case 4:
+            return 2;
+    }
+}
+
+bool8 sub_8112CEC(void)
+{
+    if (gUnknown_203AF98 >= gUnknown_3005E8C || ScriptContext2_IsEnabled() == TRUE)
+        return TRUE;
+    return FALSE;
+}
+
+bool8 sub_8112D1C(void)
+{
+    if (gUnknown_203AF98 >= gUnknown_3005E8C)
+        return TRUE;
+    return FALSE;
+}
+
+u16 * sub_8112D40(u8 a0, u16 a1)
+{
+    u16 * response;
+    if (gUnknown_203AF98 == 0)
+        return NULL;
+    if (gUnknown_203AF98 >= gUnknown_3005E8C)
+        return NULL;
+    if (gUnknown_203B01E >= gUnknown_3002020)
+        return NULL;
+    if (gUnknown_300201C[gUnknown_203B01E].unk_0_0 == a1 && gUnknown_300201C[gUnknown_203B01E].unk_0_f == a0)
+    {
+        response = &gUnknown_300201C[gUnknown_203B01E].unk_2;
+        gUnknown_203B01E++;
+    }
+    else
+        response = NULL;
+    return response;
+}

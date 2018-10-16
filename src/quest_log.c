@@ -2331,3 +2331,32 @@ u8 sub_8113194(struct Var4038Struct * a0)
     a0->unk_1 |= 1 << gUnknown_8456938[retval];
     return gUnknown_8456938[retval];
 }
+
+const u8 gUnknown_8456940[] = {
+    5, 6, 3, 7, 4, 1, 0, 2
+};
+
+u8 sub_81131FC(struct Var4038Struct * a0)
+{
+    u8 i;
+    u8 retval = 0;
+
+    if (sub_81132A0(a0) == 1)
+        return 0;
+
+    for (i = 0; i < 8; i++)
+    {
+        if ((a0->unk_1 >> gUnknown_8456940[i]) & 1)
+        {
+            retval = i;
+            if (Random() % 2)
+            {
+                a0->unk_1 ^= 1 << gUnknown_8456940[i];
+                return gUnknown_8456940[i];
+            }
+        }
+    }
+    if ((a0->unk_1 >> gUnknown_8456940[retval]) & 1)
+        a0->unk_1 ^= 1 << gUnknown_8456940[retval];
+    return gUnknown_8456940[retval];
+}

@@ -5,64 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8113194
-sub_8113194: @ 8113194
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r5, r0, 0
-	movs r0, 0
-	mov r8, r0
-	movs r6, 0
-	movs r7, 0x1
-_081131A4:
-	ldrb r1, [r5, 0x1]
-	ldr r0, _081131D0 @ =gUnknown_8456938
-	adds r0, r6, r0
-	ldrb r4, [r0]
-	asrs r1, r4
-	ands r1, r7
-	cmp r1, 0
-	bne _081131D4
-	mov r8, r6
-	bl Random
-	adds r1, r7, 0
-	ands r1, r0
-	cmp r1, 0
-	beq _081131D4
-	adds r0, r7, 0
-	lsls r0, r4
-	ldrb r1, [r5, 0x1]
-	orrs r0, r1
-	strb r0, [r5, 0x1]
-	adds r0, r4, 0
-	b _081131EE
-	.align 2, 0
-_081131D0: .4byte gUnknown_8456938
-_081131D4:
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	cmp r6, 0x7
-	bls _081131A4
-	ldr r0, _081131F8 @ =gUnknown_8456938
-	add r0, r8
-	ldrb r0, [r0]
-	movs r1, 0x1
-	lsls r1, r0
-	ldrb r2, [r5, 0x1]
-	orrs r1, r2
-	strb r1, [r5, 0x1]
-_081131EE:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_081131F8: .4byte gUnknown_8456938
-	thumb_func_end sub_8113194
-
 	thumb_func_start sub_81131FC
 sub_81131FC: @ 81131FC
 	push {r4-r7,lr}

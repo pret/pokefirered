@@ -5,6 +5,7 @@
 #include "task.h"
 #include "palette.h"
 #include "menu.h"
+#include "random.h"
 #include "menu_helpers.h"
 #include "window.h"
 #include "text_window.h"
@@ -36,6 +37,7 @@ struct Var4038Struct
 {
     u8 unk_0_0:7;
     u8 unk_0_7:1;
+    u8 unk_1;
 };
 
 struct UnkStruct_203AE94
@@ -139,7 +141,7 @@ bool8 sub_8112D1C(void);
 void sub_8113078(struct Var4038Struct *);
 void sub_81130BC(struct Var4038Struct *);
 u16 sub_81132A0(struct Var4038Struct *);
-void sub_8113194(struct Var4038Struct *);
+u8 sub_8113194(struct Var4038Struct *);
 void sub_81132E0(struct Var4038Struct *);
 bool8 sub_8113508(void);
 void sub_8113524(struct Var4038Struct *);
@@ -2303,4 +2305,29 @@ u8 sub_8113114(struct Var4038Struct * a0, u8 a1)
     }
 
     return a0->unk_0_0;
+}
+
+const u8 gUnknown_8456938[] = {
+    1, 3, 5, 0, 7, 6, 4, 2
+};
+
+u8 sub_8113194(struct Var4038Struct * a0)
+{
+    u8 i;
+    u8 retval = 0;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (!((a0->unk_1 >> gUnknown_8456938[i]) & 1))
+        {
+            retval = i;
+            if (Random() % 2)
+            {
+                a0->unk_1 |= 1 << gUnknown_8456938[i];
+                return gUnknown_8456938[i];
+            }
+        }
+    }
+    a0->unk_1 |= 1 << gUnknown_8456938[retval];
+    return gUnknown_8456938[retval];
 }

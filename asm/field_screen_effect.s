@@ -942,7 +942,7 @@ _0807F542:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0807F580 @ =gUnknown_2036E38
+	ldr r1, _0807F580 @ =gMapObjects
 	adds r0, r1
 	movs r1, 0x2
 	bl FieldObjectTurn
@@ -958,7 +958,7 @@ _0807F542:
 	.align 2, 0
 _0807F578: .4byte gUnknown_841B5B6
 _0807F57C: .4byte gUnknown_2037078
-_0807F580: .4byte gUnknown_2036E38
+_0807F580: .4byte gMapObjects
 _0807F584: .4byte gTasks
 _0807F588:
 	lsls r4, r6, 2

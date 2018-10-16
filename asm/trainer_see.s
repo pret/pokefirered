@@ -19,7 +19,7 @@ _08081B40:
 	b _08081B7A
 _08081B44:
 	movs r4, 0
-	ldr r5, _08081B80 @ =gUnknown_2036E38
+	ldr r5, _08081B80 @ =gMapObjects
 _08081B48:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -53,7 +53,7 @@ _08081B7A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08081B80: .4byte gUnknown_2036E38
+_08081B80: .4byte gMapObjects
 	thumb_func_end sub_8081B30
 
 	thumb_func_start sub_8081B84
@@ -70,7 +70,7 @@ sub_8081B84: @ 8081B84
 	lsls r4, r5, 3
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, _08081BE0 @ =gUnknown_2036E38
+	ldr r1, _08081BE0 @ =gMapObjects
 	adds r0, r1
 	bl sub_8081BEC
 	lsls r0, 24
@@ -90,7 +90,7 @@ _08081BC0:
 	bl TrainerWantsBattle
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, _08081BE0 @ =gUnknown_2036E38
+	ldr r1, _08081BE0 @ =gMapObjects
 	adds r0, r1
 	subs r1, r7, 0x1
 	lsls r1, 24
@@ -99,7 +99,7 @@ _08081BC0:
 	movs r0, 0x1
 	b _08081BE6
 	.align 2, 0
-_08081BE0: .4byte gUnknown_2036E38
+_08081BE0: .4byte gMapObjects
 _08081BE4:
 	movs r0, 0
 _08081BE6:
@@ -740,7 +740,7 @@ _0808204A:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080820B8 @ =gUnknown_2036E38
+	ldr r1, _080820B8 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -764,7 +764,7 @@ _080820AC:
 	bx r1
 	.align 2, 0
 _080820B4: .4byte gUnknown_2037078
-_080820B8: .4byte gUnknown_2036E38
+_080820B8: .4byte gMapObjects
 	thumb_func_end sub_808202C
 
 	thumb_func_start sub_80820BC
@@ -777,7 +777,7 @@ sub_80820BC: @ 80820BC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080820FC @ =gUnknown_2036E38
+	ldr r1, _080820FC @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -799,7 +799,7 @@ _080820EE:
 	bx r1
 	.align 2, 0
 _080820F8: .4byte gUnknown_2037078
-_080820FC: .4byte gUnknown_2036E38
+_080820FC: .4byte gMapObjects
 	thumb_func_end sub_80820BC
 
 	thumb_func_start sub_8082100
@@ -1025,7 +1025,7 @@ sub_808226C: @ 808226C
 	movs r1, 0x7
 	movs r2, 0x7F
 	bl SpawnSpecialFieldObjectParametrized
-	ldr r2, _080822C8 @ =gUnknown_2036E38
+	ldr r2, _080822C8 @ =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -1046,7 +1046,7 @@ sub_808226C: @ 808226C
 	bx r1
 	.align 2, 0
 _080822C4: .4byte gSaveBlock1Ptr
-_080822C8: .4byte gUnknown_2036E38
+_080822C8: .4byte gMapObjects
 	thumb_func_end sub_808226C
 
 	thumb_func_start sub_80822CC
@@ -1067,7 +1067,7 @@ sub_80822CC: @ 80822CC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _0808234C @ =gUnknown_2036E38
+	ldr r4, _0808234C @ =gMapObjects
 	adds r0, r4
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
@@ -1096,7 +1096,7 @@ _08082312:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0808234C @ =gUnknown_2036E38
+	ldr r0, _0808234C @ =gMapObjects
 	adds r4, r0
 	movs r0, 0x2
 	bl sub_8063FB0
@@ -1111,7 +1111,7 @@ _08082312:
 	b _0808236E
 	.align 2, 0
 _08082348: .4byte gSaveBlock1Ptr
-_0808234C: .4byte gUnknown_2036E38
+_0808234C: .4byte gMapObjects
 _08082350:
 	ldr r1, _08082378 @ =gUnknown_20386E0
 	adds r2, r1, 0x4
@@ -1158,7 +1158,7 @@ sub_808237C: @ 808237C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _08082408 @ =gUnknown_2036E38
+	ldr r4, _08082408 @ =gMapObjects
 	adds r0, r4
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
@@ -1187,7 +1187,7 @@ _080823CC:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08082408 @ =gUnknown_2036E38
+	ldr r0, _08082408 @ =gMapObjects
 	adds r4, r0
 	movs r0, 0x1
 	bl sub_8063FB0
@@ -1202,7 +1202,7 @@ _080823CC:
 	b _0808242E
 	.align 2, 0
 _08082404: .4byte gSaveBlock1Ptr
-_08082408: .4byte gUnknown_2036E38
+_08082408: .4byte gMapObjects
 _0808240C:
 	bl GetPlayerAvatarObjectId
 	lsls r0, 24
@@ -1579,7 +1579,7 @@ _080826DA:
 	bl FieldEffectStop
 	b _08082736
 _080826E8:
-	ldr r2, _0808272C @ =gUnknown_2036E38
+	ldr r2, _0808272C @ =gMapObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -1614,7 +1614,7 @@ _080826E8:
 	strh r0, [r4, 0x34]
 	b _08082736
 	.align 2, 0
-_0808272C: .4byte gUnknown_2036E38
+_0808272C: .4byte gMapObjects
 _08082730: .4byte gSprites
 _08082734:
 	strh r2, [r4, 0x34]

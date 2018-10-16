@@ -127,7 +127,7 @@ sub_815A008: @ 815A008
 	movs r1, 0x7F
 	mov r9, r1
 _0815A02E:
-	ldr r2, _0815A1F4 @ =gUnknown_2036E38
+	ldr r2, _0815A1F4 @ =gMapObjects
 	adds r3, r7, r2
 	ldrb r0, [r3]
 	lsls r0, 31
@@ -355,7 +355,7 @@ _0815A1E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815A1F4: .4byte gUnknown_2036E38
+_0815A1F4: .4byte gMapObjects
 	thumb_func_end sub_815A008
 
 	thumb_func_start sub_815A1F8
@@ -372,7 +372,7 @@ sub_815A1F8: @ 815A1F8
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r4, _0815A480 @ =gUnknown_2036E38
+	ldr r4, _0815A480 @ =gMapObjects
 	ldr r2, _0815A484 @ =0x01000120
 	mov r0, sp
 	adds r1, r4, 0
@@ -386,7 +386,7 @@ _0815A224:
 	lsls r7, r2, 3
 	adds r5, r7, r2
 	lsls r5, 2
-	ldr r0, _0815A480 @ =gUnknown_2036E38
+	ldr r0, _0815A480 @ =gMapObjects
 	adds r5, r0
 	lsls r6, r2, 2
 	add r6, r12
@@ -663,7 +663,7 @@ _0815A444:
 	mov r0, r8
 	add r0, r12
 	lsls r0, 2
-	ldr r1, _0815A480 @ =gUnknown_2036E38
+	ldr r1, _0815A480 @ =gMapObjects
 	adds r6, r0, r1
 	movs r2, 0x10
 	ldrsh r0, [r6, r2]
@@ -684,7 +684,7 @@ _0815A444:
 	ldrh r0, [r6, 0x12]
 	b _0815A506
 	.align 2, 0
-_0815A480: .4byte gUnknown_2036E38
+_0815A480: .4byte gMapObjects
 _0815A484: .4byte 0x01000120
 _0815A488:
 	ldrb r4, [r6, 0x1F]
@@ -758,7 +758,7 @@ _0815A508:
 	bhi _0815A512
 	b _0815A224
 _0815A512:
-	ldr r0, _0815A538 @ =gUnknown_2036E38
+	ldr r0, _0815A538 @ =gMapObjects
 	ldr r1, _0815A53C @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	movs r2, 0xD4
@@ -776,7 +776,7 @@ _0815A512:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815A538: .4byte gUnknown_2036E38
+_0815A538: .4byte gMapObjects
 _0815A53C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_815A1F8
 
@@ -815,7 +815,7 @@ sub_815A540: @ 815A540
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0815A5B4 @ =gUnknown_2036E38
+	ldr r0, _0815A5B4 @ =gMapObjects
 	adds r4, r0
 	movs r0, 0x1
 	bl SetPlayerAvatarTransitionFlags
@@ -834,7 +834,7 @@ _0815A5A4:
 	.align 2, 0
 _0815A5AC: .4byte gUnknown_203ADFA
 _0815A5B0: .4byte gUnknown_2037078
-_0815A5B4: .4byte gUnknown_2036E38
+_0815A5B4: .4byte gMapObjects
 _0815A5B8: .4byte gSprites
 	thumb_func_end sub_815A540
 

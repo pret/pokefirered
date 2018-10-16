@@ -3065,7 +3065,7 @@ ScrCmd_resetobjectpriority: @ 806B58C
 	thumb_func_start ScrCmd_faceplayer
 ScrCmd_faceplayer: @ 806B5BC
 	push {r4,lr}
-	ldr r2, _0806B5EC @ =gUnknown_2036E38
+	ldr r2, _0806B5EC @ =gMapObjects
 	ldr r0, _0806B5F0 @ =gUnknown_3005074
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3088,7 +3088,7 @@ _0806B5E4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B5EC: .4byte gUnknown_2036E38
+_0806B5EC: .4byte gMapObjects
 _0806B5F0: .4byte gUnknown_3005074
 	thumb_func_end ScrCmd_faceplayer
 
@@ -3245,7 +3245,7 @@ ScrCmd_lock: @ 806B704
 	movs r0, 0
 	b _0806B752
 _0806B714:
-	ldr r2, _0806B738 @ =gUnknown_2036E38
+	ldr r2, _0806B738 @ =gMapObjects
 	ldr r0, _0806B73C @ =gUnknown_3005074
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3262,7 +3262,7 @@ _0806B714:
 	bl SetupNativeScript
 	b _0806B750
 	.align 2, 0
-_0806B738: .4byte gUnknown_2036E38
+_0806B738: .4byte gMapObjects
 _0806B73C: .4byte gUnknown_3005074
 _0806B740: .4byte sub_8069648
 _0806B744:
@@ -3294,7 +3294,7 @@ ScrCmd_releaseall: @ 806B75C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0806B790 @ =gUnknown_2036E38
+	ldr r1, _0806B790 @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80974D8
@@ -3303,14 +3303,14 @@ ScrCmd_releaseall: @ 806B75C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B790: .4byte gUnknown_2036E38
+_0806B790: .4byte gMapObjects
 	thumb_func_end ScrCmd_releaseall
 
 	thumb_func_start ScrCmd_release
 ScrCmd_release: @ 806B794
 	push {r4,lr}
 	bl HideFieldMessageBox
-	ldr r4, _0806B7E4 @ =gUnknown_2036E38
+	ldr r4, _0806B7E4 @ =gMapObjects
 	ldr r0, _0806B7E8 @ =gUnknown_3005074
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3343,7 +3343,7 @@ _0806B7B6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B7E4: .4byte gUnknown_2036E38
+_0806B7E4: .4byte gMapObjects
 _0806B7E8: .4byte gUnknown_3005074
 	thumb_func_end ScrCmd_release
 

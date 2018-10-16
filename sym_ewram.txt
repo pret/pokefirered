@@ -530,21 +530,9 @@ gUnknown_202456C: @ 202456C
 gUnknown_2024580: @ 2024580
 	.space 0x8
 
-gSaveBlock2: @ 2024588
-	.space 0xFA4
+	.include "src/load_save.o"
 
-gSaveBlock1: @ 202552C
-	.space 0x3DE8
-
-gPokemonStorage: @ 2029314
-	.space 0x8450
-
-gUnknown_2031764: @ 2031764
-	.space 0x528
-
-gUnknown_2031C8C: @ 2031C8C
-	.space 0x4
-
+	.align 2
 gUnknown_2031C90: @ 2031C90
 	.space 0x4
 
@@ -629,7 +617,7 @@ gUnknown_2036E30: @ 2036E30
 gUnknown_2036E34: @ 2036E34
 	.space 0x4
 
-gUnknown_2036E38: @ 2036E38
+gMapObjects: @ 2036E38
 	.space 0x240
 
 gUnknown_2037078: @ 2037078

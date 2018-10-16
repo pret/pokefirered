@@ -81,7 +81,7 @@ _08099E04:
 	adds r0, 0x2
 	mov r1, r8
 	str r2, [sp]
-	bl sub_804C56C
+	bl ApplyNewEncryptionKeyToHword
 	adds r6, 0x1
 	ldr r2, [sp]
 	ldrb r4, [r4, 0x4]

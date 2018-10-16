@@ -100,7 +100,7 @@ _080695F6:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0806961E
-	ldr r2, _08069640 @ =gUnknown_2036E38
+	ldr r2, _08069640 @ =gMapObjects
 	ldr r0, _08069644 @ =gUnknown_3005074
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -132,7 +132,7 @@ _08069634:
 	bx r0
 	.align 2, 0
 _0806963C: .4byte gTasks
-_08069640: .4byte gUnknown_2036E38
+_08069640: .4byte gMapObjects
 _08069644: .4byte gUnknown_3005074
 	thumb_func_end sub_80695CC
 
@@ -167,7 +167,7 @@ LockSelectedMapObject: @ 806966C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, _080696B8 @ =gUnknown_2036E38
+	ldr r2, _080696B8 @ =gMapObjects
 	ldrb r1, [r4]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -193,7 +193,7 @@ _080696AA:
 	.align 2, 0
 _080696B0: .4byte gUnknown_3005074
 _080696B4: .4byte sub_80695CC
-_080696B8: .4byte gUnknown_2036E38
+_080696B8: .4byte gMapObjects
 _080696BC: .4byte gTasks
 	thumb_func_end LockSelectedMapObject
 
@@ -210,7 +210,7 @@ sub_80696C0: @ 80696C0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080696EC @ =gUnknown_2036E38
+	ldr r1, _080696EC @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80974D8
@@ -218,13 +218,13 @@ sub_80696C0: @ 80696C0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080696EC: .4byte gUnknown_2036E38
+_080696EC: .4byte gMapObjects
 	thumb_func_end sub_80696C0
 
 	thumb_func_start sub_80696F0
 sub_80696F0: @ 80696F0
 	push {r4,lr}
-	ldr r4, _08069738 @ =gUnknown_2036E38
+	ldr r4, _08069738 @ =gMapObjects
 	ldr r0, _0806973C @ =gUnknown_3005074
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -256,7 +256,7 @@ _0806970E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08069738: .4byte gUnknown_2036E38
+_08069738: .4byte gMapObjects
 _0806973C: .4byte gUnknown_3005074
 	thumb_func_end sub_80696F0
 
@@ -268,7 +268,7 @@ sub_8069740: @ 8069740
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08069760 @ =gUnknown_2036E38
+	ldr r1, _08069760 @ =gMapObjects
 	adds r0, r1
 	ldr r1, _08069764 @ =gUnknown_20370D4
 	ldrb r1, [r1]
@@ -277,7 +277,7 @@ sub_8069740: @ 8069740
 	bx r0
 	.align 2, 0
 _0806975C: .4byte gUnknown_3005074
-_08069760: .4byte gUnknown_2036E38
+_08069760: .4byte gMapObjects
 _08069764: .4byte gUnknown_20370D4
 	thumb_func_end sub_8069740
 
@@ -289,14 +289,14 @@ sub_8069768: @ 8069768
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08069784 @ =gUnknown_2036E38
+	ldr r1, _08069784 @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimActive
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08069780: .4byte gUnknown_3005074
-_08069784: .4byte gUnknown_2036E38
+_08069784: .4byte gMapObjects
 	thumb_func_end sub_8069768
 
 	.align 2, 0 @ Don't pad with nop.

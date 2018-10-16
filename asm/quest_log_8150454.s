@@ -64,7 +64,7 @@ sub_81504A8: @ 81504A8
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _081504E4 @ =gUnknown_2036E38
+	ldr r0, _081504E4 @ =gMapObjects
 	adds r4, r0
 	movs r0, 0
 	bl sub_805C808
@@ -84,7 +84,7 @@ sub_81504A8: @ 81504A8
 	bx r0
 	.align 2, 0
 _081504E0: .4byte gUnknown_2037078
-_081504E4: .4byte gUnknown_2036E38
+_081504E4: .4byte gMapObjects
 	thumb_func_end sub_81504A8
 
 	thumb_func_start sub_81504E8
@@ -95,7 +95,7 @@ sub_81504E8: @ 81504E8
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0815052C @ =gUnknown_2036E38
+	ldr r0, _0815052C @ =gMapObjects
 	adds r4, r0
 	movs r0, 0x1
 	bl sub_805C808
@@ -118,7 +118,7 @@ sub_81504E8: @ 81504E8
 	bx r0
 	.align 2, 0
 _08150528: .4byte gUnknown_2037078
-_0815052C: .4byte gUnknown_2036E38
+_0815052C: .4byte gMapObjects
 	thumb_func_end sub_81504E8
 
 	thumb_func_start sub_8150530
@@ -129,7 +129,7 @@ sub_8150530: @ 8150530
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08150580 @ =gUnknown_2036E38
+	ldr r1, _08150580 @ =gMapObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
@@ -162,7 +162,7 @@ _08150558:
 	b _081505BC
 	.align 2, 0
 _0815057C: .4byte gUnknown_2037078
-_08150580: .4byte gUnknown_2036E38
+_08150580: .4byte gMapObjects
 _08150584: .4byte gSprites
 _08150588: .4byte gUnknown_3005E88
 _0815058C: .4byte sub_81505C4
@@ -205,7 +205,7 @@ sub_81505C4: @ 81505C4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08150610 @ =gUnknown_2036E38
+	ldr r1, _08150610 @ =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
@@ -230,7 +230,7 @@ sub_81505C4: @ 81505C4
 	b _081506FC
 	.align 2, 0
 _0815060C: .4byte gUnknown_2037078
-_08150610: .4byte gUnknown_2036E38
+_08150610: .4byte gMapObjects
 _08150614: .4byte gSprites
 _08150618: .4byte gTasks
 _0815061C:
@@ -353,7 +353,7 @@ sub_8150708: @ 8150708
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08150774 @ =gUnknown_2036E38
+	ldr r1, _08150774 @ =gMapObjects
 	adds r4, r0, r1
 	ldrb r1, [r5]
 	movs r0, 0x8
@@ -395,7 +395,7 @@ _08150768:
 	bx r0
 	.align 2, 0
 _08150770: .4byte gUnknown_2037078
-_08150774: .4byte gUnknown_2036E38
+_08150774: .4byte gMapObjects
 _08150778: .4byte gUnknown_20386E0
 	thumb_func_end sub_8150708
 

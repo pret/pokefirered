@@ -224,7 +224,7 @@ sub_810C808: @ 810C808
 	bge _0810C8BC
 	ldr r7, _0810C8E4 @ =gUnknown_203ADB8
 	mov r6, sp
-	ldr r0, _0810C8E8 @ =gUnknown_2036E38
+	ldr r0, _0810C8E8 @ =gMapObjects
 	mov r10, r0
 	adds r5, r2, 0
 _0810C83C:
@@ -312,7 +312,7 @@ _0810C8BC:
 _0810C8DC: .4byte gSaveBlock1Ptr
 _0810C8E0: .4byte gMapHeader
 _0810C8E4: .4byte gUnknown_203ADB8
-_0810C8E8: .4byte gUnknown_2036E38
+_0810C8E8: .4byte gMapObjects
 	thumb_func_end sub_810C808
 
 	thumb_func_start sub_810C8EC
@@ -544,7 +544,7 @@ _0810CAA0:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0810CB5C @ =gUnknown_2036E38
+	ldr r1, _0810CB5C @ =gMapObjects
 	adds r0, r1
 	bl npc_coords_shift_still
 	ldr r0, [r6]
@@ -618,7 +618,7 @@ _0810CB2C:
 	.align 2, 0
 _0810CB54: .4byte gSaveBlock1Ptr
 _0810CB58: .4byte 0x0000063a
-_0810CB5C: .4byte gUnknown_2036E38
+_0810CB5C: .4byte gMapObjects
 _0810CB60: .4byte gUnknown_8453F64
 _0810CB64: .4byte 0x00000431
 _0810CB68: .4byte gUnknown_203ADB8
@@ -706,7 +706,7 @@ _0810CBDE:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0810CC64 @ =gUnknown_2036E38
+	ldr r1, _0810CC64 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r6, 0
 	bl sub_810CF54
@@ -743,7 +743,7 @@ _0810CC54: .4byte gSaveBlock1Ptr
 _0810CC58: .4byte gUnknown_845318C
 _0810CC5C: .4byte gTrainerBattleOpponent_A
 _0810CC60: .4byte gMapHeader
-_0810CC64: .4byte gUnknown_2036E38
+_0810CC64: .4byte gMapObjects
 _0810CC68: .4byte gUnknown_8453F67
 _0810CC6C: .4byte 0x0000063a
 _0810CC70: .4byte gUnknown_3005074
@@ -1123,7 +1123,7 @@ sub_810CF04: @ 810CF04
 	lsls r0, r3, 3
 	adds r0, r3
 	lsls r0, 2
-	ldr r1, _0810CF40 @ =gUnknown_2036E38
+	ldr r1, _0810CF40 @ =gMapObjects
 	adds r1, r0, r1
 	ldrb r0, [r1]
 	lsls r0, 31
@@ -1148,7 +1148,7 @@ sub_810CF04: @ 810CF04
 	movs r0, 0x1
 	b _0810CF4E
 	.align 2, 0
-_0810CF40: .4byte gUnknown_2036E38
+_0810CF40: .4byte gMapObjects
 _0810CF44: .4byte gMapHeader
 _0810CF48: .4byte gSprites
 _0810CF4C:
@@ -1550,7 +1550,7 @@ sub_810D24C: @ 810D24C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0810D278 @ =gUnknown_2036E38
+	ldr r1, _0810D278 @ =gMapObjects
 	adds r0, r1
 	bl npc_sync_anim_pause_bits
 	ldrb r0, [r4, 0x6]
@@ -1564,7 +1564,7 @@ sub_810D24C: @ 810D24C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810D278: .4byte gUnknown_2036E38
+_0810D278: .4byte gMapObjects
 _0810D27C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_810D24C
 
@@ -1691,7 +1691,7 @@ _0810D340:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, _0810D3E4 @ =gUnknown_2036E38
+	ldr r2, _0810D3E4 @ =gMapObjects
 	adds r4, r1, r2
 	bl sub_810CF04
 	lsls r0, 24
@@ -1758,7 +1758,7 @@ _0810D3CC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810D3E4: .4byte gUnknown_2036E38
+_0810D3E4: .4byte gMapObjects
 _0810D3E8: .4byte gUnknown_845318C
 _0810D3EC: .4byte gSaveBlock1Ptr
 _0810D3F0: .4byte 0x0000063a

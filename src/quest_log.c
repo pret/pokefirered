@@ -32,6 +32,12 @@
 
 u8 gUnknown_3005E88;
 
+struct Var4038Struct
+{
+    u8 unk_0_0:7;
+    u8 unk_0_7:1;
+};
+
 struct UnkStruct_203AE94
 {
     u8 unk_0_0:4;
@@ -130,6 +136,14 @@ void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
 u8 sub_8112CAC(void);
 bool8 sub_8112CEC(void);
 bool8 sub_8112D1C(void);
+void sub_8113078(struct Var4038Struct *);
+void sub_81130BC(struct Var4038Struct *);
+u16 sub_81132A0(struct Var4038Struct *);
+void sub_8113194(struct Var4038Struct *);
+void sub_81132E0(struct Var4038Struct *);
+bool8 sub_8113508(void);
+void sub_8113524(struct Var4038Struct *);
+void sub_8113390(struct Var4038Struct *);
 void sub_8113A1C(u8);
 void sub_811381C(void);
 void sub_81138F8(void);
@@ -164,21 +178,21 @@ const u8 gUnknown_8456698[] = {17, 10, 3};
 
 extern const struct UnkStruct_203AE98 gUnknown_845669C;
 
-void sub_8110840(void * a0)
+void sub_8110840(void * oldPointer)
 {
-    size_t r1 = (void *)gSaveBlock1Ptr - a0;
+    ptrdiff_t offset = (void *)gSaveBlock1Ptr - oldPointer;
     if (gUnknown_203AE04)
-        gUnknown_203AE04 += r1;
+        gUnknown_203AE04 += offset;
     if (gUnknown_203ADFA != 0)
     {
         if (gUnknown_203AE08)
-            gUnknown_203AE08 = (void *)gUnknown_203AE08 + r1;
+            gUnknown_203AE08 = (void *)gUnknown_203AE08 + offset;
         if (gUnknown_203ADFA == 2)
         {
             int r3;
             for (r3 = 0; r3 < 0x20; r3++)
                 if (gUnknown_203AE0C[r3])
-                    gUnknown_203AE0C[r3] += r1;
+                    gUnknown_203AE0C[r3] += offset;
         }
     }
 }
@@ -2205,3 +2219,88 @@ void sub_8112F18(u8 a0)
                 "_08112FCC: .4byte 0x04000008");
 }
 #endif
+
+void sub_8112FD0(void)
+{
+    sub_8112F18(gUnknown_203B020);
+}
+
+const struct TextColor gUnknown_8456930 = {
+    0, 10, 2
+};
+
+void sub_8112FE4(const u8 * a0)
+{
+    AddTextPrinterParametrized2(gUnknown_203B020, 0x02, 2, 5, 1, 1, &gUnknown_8456930, -1, a0);
+}
+
+void sub_8113018(const u8 * a0, u8 a1)
+{
+    sub_8112FD0();
+    sub_8112FE4(a0);
+    if (a1)
+        CopyWindowToVram(gUnknown_203B020, a1);
+}
+
+void sub_8113044(void)
+{
+    VarSet(VAR_0x4038, 0);
+    VarSet(VAR_0x4039, 0);
+}
+
+void sub_8113064(void)
+{
+    sub_8113078((struct Var4038Struct *)GetVarPointer(VAR_0x4038));
+}
+
+void sub_8113078(struct Var4038Struct * varPtr)
+{
+    if (sub_8113508())
+    {
+        sub_81132E0(varPtr);
+        VarSet(VAR_0x4039, gSaveBlock2Ptr->playTimeHours);
+    }
+}
+
+void sub_81130A8(void)
+{
+    sub_81130BC((struct Var4038Struct *)GetVarPointer(VAR_0x4038));
+}
+
+void sub_81130BC(struct Var4038Struct * varPtr)
+{
+    if (!varPtr->unk_0_7)
+    {
+        sub_8113524(varPtr);
+        sub_8113390(varPtr);
+        VarSet(VAR_0x4039, gSaveBlock2Ptr->playTimeHours);
+        FlagClear(FLAG_0x06C);
+        FlagClear(FLAG_0x06D);
+        FlagClear(FLAG_0x06E);
+        FlagClear(FLAG_0x06F);
+        VarSet(VAR_0x4073, 1);
+    }
+}
+
+ALIGNED(4) const u8 gUnknown_8456934[] = {2, 1, 2, 1};
+
+u8 sub_8113114(struct Var4038Struct * a0, u8 a1)
+{
+    if (VarGet(VAR_0x4073) == 2)
+    {
+        if (a0->unk_0_0 + gUnknown_8456934[a1] >= 20)
+        {
+            if (sub_81132A0(a0) < 3)
+            {
+                sub_8113194(a0);
+                a0->unk_0_0 = 0;
+            }
+            else
+                a0->unk_0_0 = 20;
+        }
+        else
+            a0->unk_0_0 += gUnknown_8456934[a1];
+    }
+
+    return a0->unk_0_0;
+}

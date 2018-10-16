@@ -79,7 +79,7 @@ sub_8069F3C: @ 8069F3C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
@@ -692,7 +692,7 @@ ScrCmd_setvar: @ 806A390
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r4, r0, 0
 	adds r0, r5, 0
 	bl ScriptReadHalfword
@@ -710,13 +710,13 @@ ScrCmd_copyvar: @ 806A3B4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	ldrh r0, [r0]
 	strh r0, [r5]
 	movs r0, 0
@@ -732,7 +732,7 @@ ScrCmd_setorcopyvar: @ 806A3E0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
@@ -909,7 +909,7 @@ ScrCmd_compare_var_to_value: @ 806A520
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	ldrh r5, [r0]
 	adds r0, r4, 0
 	bl ScriptReadHalfword
@@ -932,13 +932,13 @@ ScrCmd_compare_var_to_var: @ 806A550
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	ldrh r2, [r5]
 	ldrh r1, [r0]
 	adds r0, r2, 0
@@ -957,7 +957,7 @@ ScrCmd_addvar: @ 806A584
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r4, r0, 0
 	adds r0, r5, 0
 	bl ScriptReadHalfword
@@ -977,7 +977,7 @@ ScrCmd_subvar: @ 806A5AC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
@@ -2319,13 +2319,13 @@ ScrCmd_getplayerxy: @ 806B010
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r2, _0806B048 @ =gSaveBlock1Ptr
 	ldr r1, [r2]
 	ldrh r1, [r1]
@@ -5428,7 +5428,7 @@ ScrCmd_checkcoins: @ 806C72C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r4, r0, 0
 	bl sub_80D0554
 	strh r0, [r4]

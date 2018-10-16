@@ -1872,7 +1872,7 @@ _0806D748: .4byte 0x00004021
 AdjustFriendship_step: @ 806D74C
 	push {r4,r5,lr}
 	ldr r0, _0806D780 @ =0x00004021
-	bl sub_806E454
+	bl GetVarPointer
 	ldrh r1, [r0]
 	adds r1, 0x1
 	strh r1, [r0]
@@ -1921,7 +1921,7 @@ overworld_poison_step: @ 806D79C
 	cmp r0, 0x9
 	beq _0806D7E0
 	ldr r0, _0806D7DC @ =0x00004022
-	bl sub_806E454
+	bl GetVarPointer
 	adds r4, r0, 0
 	ldrh r0, [r4]
 	adds r0, 0x1

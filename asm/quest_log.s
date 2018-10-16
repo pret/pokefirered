@@ -5,239 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8112FD0
-sub_8112FD0: @ 8112FD0
-	push {lr}
-	ldr r0, _08112FE0 @ =gUnknown_203B020
-	ldrb r0, [r0]
-	bl sub_8112F18
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08112FE0: .4byte gUnknown_203B020
-	thumb_func_end sub_8112FD0
-
-	thumb_func_start sub_8112FE4
-sub_8112FE4: @ 8112FE4
-	push {lr}
-	sub sp, 0x14
-	adds r2, r0, 0
-	ldr r0, _08113010 @ =gUnknown_203B020
-	ldrb r0, [r0]
-	movs r1, 0x1
-	str r1, [sp]
-	str r1, [sp, 0x4]
-	ldr r1, _08113014 @ =gUnknown_8456930
-	str r1, [sp, 0x8]
-	movs r1, 0x1
-	negs r1, r1
-	str r1, [sp, 0xC]
-	str r2, [sp, 0x10]
-	movs r1, 0x2
-	movs r2, 0x2
-	movs r3, 0x5
-	bl AddTextPrinterParametrized2
-	add sp, 0x14
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08113010: .4byte gUnknown_203B020
-_08113014: .4byte gUnknown_8456930
-	thumb_func_end sub_8112FE4
-
-	thumb_func_start sub_8113018
-sub_8113018: @ 8113018
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r1, 24
-	lsrs r5, r1, 24
-	bl sub_8112FD0
-	adds r0, r4, 0
-	bl sub_8112FE4
-	cmp r5, 0
-	beq _08113038
-	ldr r0, _08113040 @ =gUnknown_203B020
-	ldrb r0, [r0]
-	adds r1, r5, 0
-	bl CopyWindowToVram
-_08113038:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08113040: .4byte gUnknown_203B020
-	thumb_func_end sub_8113018
-
-	thumb_func_start sub_8113044
-sub_8113044: @ 8113044
-	push {lr}
-	ldr r0, _0811305C @ =0x00004038
-	movs r1, 0
-	bl VarSet
-	ldr r0, _08113060 @ =0x00004039
-	movs r1, 0
-	bl VarSet
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811305C: .4byte 0x00004038
-_08113060: .4byte 0x00004039
-	thumb_func_end sub_8113044
-
-	thumb_func_start sub_8113064
-sub_8113064: @ 8113064
-	push {lr}
-	ldr r0, _08113074 @ =0x00004038
-	bl sub_806E454
-	bl sub_8113078
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08113074: .4byte 0x00004038
-	thumb_func_end sub_8113064
-
-	thumb_func_start sub_8113078
-sub_8113078: @ 8113078
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_8113508
-	lsls r0, 24
-	cmp r0, 0
-	beq _08113098
-	adds r0, r4, 0
-	bl sub_81132E0
-	ldr r0, _081130A0 @ =0x00004039
-	ldr r1, _081130A4 @ =gSaveBlock2Ptr
-	ldr r1, [r1]
-	ldrh r1, [r1, 0xE]
-	bl VarSet
-_08113098:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081130A0: .4byte 0x00004039
-_081130A4: .4byte gSaveBlock2Ptr
-	thumb_func_end sub_8113078
-
-	thumb_func_start sub_81130A8
-sub_81130A8: @ 81130A8
-	push {lr}
-	ldr r0, _081130B8 @ =0x00004038
-	bl sub_806E454
-	bl sub_81130BC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081130B8: .4byte 0x00004038
-	thumb_func_end sub_81130A8
-
-	thumb_func_start sub_81130BC
-sub_81130BC: @ 81130BC
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrb r1, [r4]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08113102
-	adds r0, r4, 0
-	bl sub_8113524
-	adds r0, r4, 0
-	bl sub_8113390
-	ldr r0, _08113108 @ =0x00004039
-	ldr r1, _0811310C @ =gSaveBlock2Ptr
-	ldr r1, [r1]
-	ldrh r1, [r1, 0xE]
-	bl VarSet
-	movs r0, 0x6C
-	bl FlagClear
-	movs r0, 0x6D
-	bl FlagClear
-	movs r0, 0x6E
-	bl FlagClear
-	movs r0, 0x6F
-	bl FlagClear
-	ldr r0, _08113110 @ =0x00004073
-	movs r1, 0x1
-	bl VarSet
-_08113102:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08113108: .4byte 0x00004039
-_0811310C: .4byte gSaveBlock2Ptr
-_08113110: .4byte 0x00004073
-	thumb_func_end sub_81130BC
-
-	thumb_func_start sub_8113114
-sub_8113114: @ 8113114
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r1, 24
-	lsrs r5, r1, 24
-	ldr r0, _0811315C @ =0x00004073
-	bl VarGet
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x2
-	bne _08113188
-	ldr r0, [r4]
-	lsls r2, r0, 25
-	lsrs r1, r2, 25
-	ldr r0, _08113160 @ =gUnknown_8456934
-	adds r0, r5, r0
-	ldrb r0, [r0]
-	adds r1, r0
-	cmp r1, 0x13
-	ble _08113174
-	adds r0, r4, 0
-	bl sub_81132A0
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x2
-	bhi _08113164
-	adds r0, r4, 0
-	bl sub_8113194
-	ldrb r1, [r4]
-	movs r0, 0x80
-	negs r0, r0
-	ands r0, r1
-	b _08113186
-	.align 2, 0
-_0811315C: .4byte 0x00004073
-_08113160: .4byte gUnknown_8456934
-_08113164:
-	ldrb r0, [r4]
-	movs r1, 0x80
-	negs r1, r1
-	ands r1, r0
-	movs r0, 0x14
-	orrs r1, r0
-	strb r1, [r4]
-	b _08113188
-_08113174:
-	lsrs r1, r2, 25
-	adds r1, r0
-	movs r0, 0x7F
-	ands r1, r0
-	ldrb r2, [r4]
-	movs r0, 0x80
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-_08113186:
-	strb r0, [r4]
-_08113188:
-	ldr r0, [r4]
-	lsls r0, 25
-	lsrs r0, 25
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8113114
-
 	thumb_func_start sub_8113194
 sub_8113194: @ 8113194
 	push {r4-r7,lr}
@@ -377,7 +144,7 @@ _08113284: .4byte gUnknown_8456940
 sub_8113288: @ 8113288
 	push {lr}
 	ldr r0, _0811329C @ =0x00004038
-	bl sub_806E454
+	bl GetVarPointer
 	bl sub_81132A0
 	lsls r0, 16
 	lsrs r0, 16
@@ -419,7 +186,7 @@ _081132BA:
 sub_81132CC: @ 81132CC
 	push {lr}
 	ldr r0, _081132DC @ =0x00004038
-	bl sub_806E454
+	bl GetVarPointer
 	bl sub_81132E0
 	pop {r0}
 	bx r0
@@ -495,7 +262,7 @@ _0811335C:
 sub_8113364: @ 8113364
 	push {lr}
 	ldr r0, _08113378 @ =0x00004038
-	bl sub_806E454
+	bl GetVarPointer
 	bl sub_811337C
 	lsls r0, 16
 	lsrs r0, 16
@@ -674,7 +441,7 @@ _081134B2:
 sub_81134B8: @ 81134B8
 	push {lr}
 	ldr r0, _081134C8 @ =0x00004038
-	bl sub_806E454
+	bl GetVarPointer
 	bl sub_81134CC
 	pop {r0}
 	bx r0
@@ -725,7 +492,7 @@ sub_8113508: @ 8113508
 sub_8113510: @ 8113510
 	push {lr}
 	ldr r0, _08113520 @ =0x00004038
-	bl sub_806E454
+	bl GetVarPointer
 	bl sub_8113524
 	pop {r0}
 	bx r0
@@ -746,7 +513,7 @@ sub_8113524: @ 8113524
 sub_8113530: @ 8113530
 	push {lr}
 	ldr r0, _08113548 @ =0x00004038
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r1, _0811354C @ =gUnknown_20370C0
 	ldrb r1, [r1]
 	bl sub_8113114

@@ -94,7 +94,7 @@ void sub_8146C88(void)
 
 void sub_8146CA4(void)
 {
-    u16 *r4 = sub_806E454(0x4028);
+    u16 *r4 = GetVarPointer(0x4028);
     struct MysteryEventStruct *r2 = sub_8143D94();
     struct MysteryEventStruct r0 = *r2;
 

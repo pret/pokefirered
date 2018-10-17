@@ -140,8 +140,8 @@ bool8 sub_8112CEC(void);
 bool8 sub_8112D1C(void);
 void sub_8113078(struct Var4038Struct *);
 void sub_81130BC(struct Var4038Struct *);
-u16 sub_81132A0(struct Var4038Struct *);
 u8 sub_8113194(struct Var4038Struct *);
+u16 sub_81132A0(struct Var4038Struct *);
 void sub_81132E0(struct Var4038Struct *);
 bool8 sub_8113508(void);
 void sub_8113524(struct Var4038Struct *);
@@ -2359,4 +2359,55 @@ u8 sub_81131FC(struct Var4038Struct * a0)
     if ((a0->unk_1 >> gUnknown_8456940[retval]) & 1)
         a0->unk_1 ^= 1 << gUnknown_8456940[retval];
     return gUnknown_8456940[retval];
+}
+
+u16 sub_8113288(void)
+{
+    return sub_81132A0((struct Var4038Struct *)GetVarPointer(VAR_0x4038));
+}
+
+u16 sub_81132A0(struct Var4038Struct * a0)
+{
+    u8 count = 0;
+    u8 i;
+
+    for (i = 0; i < 8; i++)
+    {
+        if ((a0->unk_1 >> i) & 1)
+            count++;
+    }
+
+    return count;
+}
+
+void sub_81132CC(void)
+{
+    sub_81132E0((struct Var4038Struct *)GetVarPointer(VAR_0x4038));
+}
+
+void sub_81132E0(struct Var4038Struct * a0)
+{
+    u8 i = 0;
+    u16 var_4039;
+
+    if (gSaveBlock2Ptr->playTimeHours < 999)
+    {
+        while (1)
+        {
+            if (sub_81132A0(a0) < 5)
+            {
+                VarSet(VAR_0x4039, gSaveBlock2Ptr->playTimeHours);
+                break;
+            }
+            if (i == 8)
+                break;
+            var_4039 = VarGet(VAR_0x4039);
+            if (gSaveBlock2Ptr->playTimeHours - var_4039 < 12)
+                break;
+            sub_81131FC(a0);
+            var_4039 = VarGet(VAR_0x4039);
+            VarSet(VAR_0x4039, var_4039 + 12);
+            i++;
+        }
+    }
 }

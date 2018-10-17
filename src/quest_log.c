@@ -21,6 +21,7 @@
 #include "map_obj_lock.h"
 #include "field_player_avatar.h"
 #include "field_control_avatar.h"
+#include "battle.h"
 #include "item.h"
 #include "region_map.h"
 #include "map_name_popup.h"
@@ -149,7 +150,8 @@ void sub_81132E0(struct Var4038Struct *);
 bool16 sub_811337C(struct Var4038Struct *);
 void sub_8113390(struct Var4038Struct *);
 void sub_8113414(u8 (*)[16], u8, u8);
-bool8 sub_8113508(void);
+void sub_81134CC(struct Var4038Struct *);
+bool8 sub_8113508(struct Var4038Struct * );
 void sub_8113524(struct Var4038Struct *);
 void sub_8113A1C(u8);
 void sub_811381C(void);
@@ -2262,7 +2264,7 @@ void sub_8113064(void)
 
 void sub_8113078(struct Var4038Struct * varPtr)
 {
-    if (sub_8113508())
+    if (sub_8113508(varPtr))
     {
         sub_81132E0(varPtr);
         VarSet(VAR_0x4039, gSaveBlock2Ptr->playTimeHours);
@@ -2504,4 +2506,41 @@ void sub_8113414(u8 (* a0)[16], u8 a1, u8 a2)
             *str++ = EOS;
         }
     }
+}
+
+void sub_81134B8(void)
+{
+    sub_81134CC(VAR_0x4038_STRUCT);
+}
+
+void sub_81134CC(struct Var4038Struct * a0)
+{
+    if (VarGet(VAR_0x4073) == 2)
+    {
+        sub_8113078(a0);
+        if (gUnknown_2023E8A == 1)
+            sub_8113194(a0);
+        else
+            sub_81131FC(a0);
+    }
+}
+
+bool8 sub_8113508(struct Var4038Struct * a0)
+{
+    return a0->unk_0_7;
+}
+
+void sub_8113510(void)
+{
+    sub_8113524(VAR_0x4038_STRUCT);
+}
+
+void sub_8113524(struct Var4038Struct * a0)
+{
+    a0->unk_0_7 = TRUE;
+}
+
+u8 sub_8113530(void)
+{
+    return sub_8113114(VAR_0x4038_STRUCT, gUnknown_20370C0);
 }

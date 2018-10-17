@@ -75,10 +75,7 @@ SECTIONS {
         asm/battle_controller_opponent.o(.text);
         asm/battle_ai_switch_items.o(.text);
         asm/battle_controller_link_opponent.o(.text);
-        asm/pokemon_1.o(.text);
-        asm/calculate_base_damage.o(.text);
-        asm/pokemon_2.o(.text);
-        asm/pokemon_item_effect.o(.text);
+        src/pokemon.o(.text);
         asm/pokemon_3.o(.text);
         asm/trig.o(.text);
         src/random.o(.text);
@@ -89,7 +86,7 @@ SECTIONS {
         asm/battle_interface.o(.text);
         asm/smokescreen.o(.text);
         asm/pokeball.o(.text);
-        asm/load_save.o(.text);
+        src/load_save.o(.text);
         asm/trade.o(.text);
         asm/play_time.o(.text);
         asm/new_game.o(.text);
@@ -184,7 +181,7 @@ SECTIONS {
         asm/math_util.o(.text);
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
-        asm/save.o(.text);
+        src/save.o(.text);
         asm/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/battle_anim_sound_tasks.o(.text);
@@ -368,11 +365,13 @@ SECTIONS {
         src/string_util.o(.rodata);
         data/data.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
-        data/data_84827AC.o(.rodata);
+        data/data_83F5738.o(.rodata);
+        src/save.o(.rodata);
+        data/data_83FECCC.o(.rodata);
         src/vs_seeker.o(.rodata);
-        data/data_84827AC.o(.rodata.8453F6C);
+        data/data_83FECCC.o(.rodata.8453F6C);
         src/menews_jisan.o(.rodata);
-        data/data_84827AC.o(.rodata.8468C98);
+        data/data_8468C98.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

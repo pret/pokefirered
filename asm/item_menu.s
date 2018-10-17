@@ -6629,7 +6629,7 @@ _0810B396:
 	cmp r0, 0x1
 	bne _0810B3B8
 	bl FreeRestoreBattleData
-	bl sub_804C230
+	bl LoadPlayerParty
 	b _0810B4B6
 	.align 2, 0
 _0810B3B0: .4byte gTasks+0x8
@@ -6791,7 +6791,7 @@ sub_810B4BC: @ 810B4BC
 	cmp r0, 0x1
 	bne _0810B50C
 	bl FreeRestoreBattleData
-	bl sub_804C230
+	bl LoadPlayerParty
 	b _0810B5C6
 	.align 2, 0
 _0810B504: .4byte gTasks+0x8

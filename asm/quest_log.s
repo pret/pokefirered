@@ -2194,9 +2194,9 @@ _08111980: .4byte gUnknown_3005E88
 sub_8111984: @ 8111984
 	push {lr}
 	bl sub_806E6FC
-	bl ResetSaveCounters
+	bl Save_ResetSaveCounters
 	movs r0, 0
-	bl sub_80DA4FC
+	bl Save_LoadGameData
 	ldr r0, _081119B4 @ =sub_8057430
 	bl SetMainCallback2
 	ldr r1, _081119B8 @ =gUnknown_3005024
@@ -3591,7 +3591,7 @@ sub_811246C: @ 811246C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _081124B0 @ =gUnknown_2036E38
+	ldr r1, _081124B0 @ =gMapObjects
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x8]
 	cmp r0, 0xFF
@@ -3618,7 +3618,7 @@ _081124A6:
 	bl sub_8063E28
 	b _081124E0
 	.align 2, 0
-_081124B0: .4byte gUnknown_2036E38
+_081124B0: .4byte gMapObjects
 _081124B4: .4byte gUnknown_203AF9A
 _081124B8:
 	ldr r5, _081124E8 @ =gUnknown_203AF9A
@@ -7157,12 +7157,12 @@ sub_8113EAC: @ 8113EAC
 	bl GetSpeciesName
 	b _08113F08
 _08113ED0:
-	ldr r1, _08113EDC @ =gUnknown_8415A62
+	ldr r1, _08113EDC @ =gText_EggNickname
 	adds r0, r3, 0
 	bl StringCopy
 	b _08113F08
 	.align 2, 0
-_08113EDC: .4byte gUnknown_8415A62
+_08113EDC: .4byte gText_EggNickname
 _08113EE0:
 	movs r0, 0xCE
 	lsls r0, 1
@@ -7171,15 +7171,15 @@ _08113EE0:
 	movs r0, 0xB
 	adds r1, r4, 0
 	muls r1, r0
-	ldr r0, _08113EFC @ =gUnknown_8245EE0
+	ldr r0, _08113EFC @ =gSpeciesNames
 	adds r1, r0
 	adds r0, r2, 0
 	bl UnkTextUtil_SetPtrI
 	b _08113F08
 	.align 2, 0
-_08113EFC: .4byte gUnknown_8245EE0
+_08113EFC: .4byte gSpeciesNames
 _08113F00:
-	ldr r1, _08113F10 @ =gUnknown_8415A62
+	ldr r1, _08113F10 @ =gText_EggNickname
 	adds r0, r5, 0
 	bl UnkTextUtil_SetPtrI
 _08113F08:
@@ -7187,7 +7187,7 @@ _08113F08:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08113F10: .4byte gUnknown_8415A62
+_08113F10: .4byte gText_EggNickname
 	thumb_func_end sub_8113EAC
 
 	thumb_func_start sub_8113F14

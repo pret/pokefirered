@@ -906,7 +906,7 @@ _0806CF7E:
 	lsrs r3, r0, 24
 	cmp r3, 0x10
 	beq _0806CF9E
-	ldr r1, _0806CFA8 @ =gUnknown_2036E38
+	ldr r1, _0806CFA8 @ =gMapObjects
 	lsls r2, r3, 3
 	adds r0, r2, r3
 	lsls r0, 2
@@ -920,7 +920,7 @@ _0806CF9E:
 	b _0806CFDE
 	.align 2, 0
 _0806CFA4: .4byte gUnknown_826D2D8
-_0806CFA8: .4byte gUnknown_2036E38
+_0806CFA8: .4byte gMapObjects
 _0806CFAC:
 	movs r4, 0
 	ldr r1, _0806CFE4 @ =gUnknown_2031DEC
@@ -978,7 +978,7 @@ sub_806CFF4: @ 806CFF4
 	lsrs r5, r0, 24
 	cmp r5, 0x10
 	beq _0806D02A
-	ldr r2, _0806D098 @ =gUnknown_2036E38
+	ldr r2, _0806D098 @ =gMapObjects
 	lsls r1, r5, 3
 	adds r0, r1, r5
 	lsls r0, 2
@@ -1016,7 +1016,7 @@ _0806D02A:
 	lsrs r5, r0, 24
 	cmp r5, 0x10
 	beq _0806D092
-	ldr r2, _0806D098 @ =gUnknown_2036E38
+	ldr r2, _0806D098 @ =gMapObjects
 	lsls r1, r5, 3
 	adds r0, r1, r5
 	lsls r0, 2
@@ -1031,7 +1031,7 @@ _0806D078:
 	bne _0806D0A0
 	adds r0, r6, r5
 	lsls r0, 2
-	ldr r1, _0806D098 @ =gUnknown_2036E38
+	ldr r1, _0806D098 @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
@@ -1041,13 +1041,13 @@ _0806D092:
 	movs r0, 0
 	b _0806D0C8
 	.align 2, 0
-_0806D098: .4byte gUnknown_2036E38
+_0806D098: .4byte gMapObjects
 _0806D09C: .4byte gUnknown_826D2D8
 _0806D0A0:
 	ldr r0, _0806D0D4 @ =gUnknown_3005074
 	strb r5, [r0]
 	ldr r4, _0806D0D8 @ =gUnknown_20370D2
-	ldr r1, _0806D0DC @ =gUnknown_2036E38
+	ldr r1, _0806D0DC @ =gMapObjects
 	adds r0, r6, r5
 	lsls r0, 2
 	adds r0, r1
@@ -1071,7 +1071,7 @@ _0806D0C8:
 	.align 2, 0
 _0806D0D4: .4byte gUnknown_3005074
 _0806D0D8: .4byte gUnknown_20370D2
-_0806D0DC: .4byte gUnknown_2036E38
+_0806D0DC: .4byte gMapObjects
 _0806D0E0: .4byte gUnknown_20370D4
 	thumb_func_end sub_806CFF4
 
@@ -1887,7 +1887,7 @@ AdjustFriendship_step: @ 806D74C
 _0806D76A:
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_80436F8
+	bl AdjustFriendship
 	adds r5, 0x64
 	subs r4, 0x1
 	cmp r4, 0

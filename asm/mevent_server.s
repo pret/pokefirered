@@ -820,7 +820,7 @@ _08144E30:
 	.align 2, 0
 _08144E48: .4byte gSaveBlock2Ptr
 _08144E4C:
-	ldr r0, _08144E68 @ =gUnknown_201C000
+	ldr r0, _08144E68 @ =gDecompressionBuffer
 	ldr r1, [r4, 0x18]
 	movs r2, 0x80
 	lsls r2, 3
@@ -837,7 +837,7 @@ _08144E62:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08144E68: .4byte gUnknown_201C000
+_08144E68: .4byte gDecompressionBuffer
 	thumb_func_end sub_8144CA0
 
 	thumb_func_start sub_8144E6C
@@ -894,7 +894,7 @@ _08144EB4:
 sub_8144EBC: @ 8144EBC
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r3, _08144EE4 @ =gUnknown_201C000
+	ldr r3, _08144EE4 @ =gDecompressionBuffer
 	adds r0, r4, 0x4
 	ldr r1, _08144EE8 @ =gSaveBlock2Ptr
 	ldr r1, [r1]
@@ -913,7 +913,7 @@ _08144EDC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08144EE4: .4byte gUnknown_201C000
+_08144EE4: .4byte gDecompressionBuffer
 _08144EE8: .4byte gSaveBlock2Ptr
 _08144EEC: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8144EBC

@@ -980,7 +980,7 @@ sub_80CD98C: @ 80CD98C
 	ldrh r2, [r2, 0xE]
 	ldr r3, _080CD9EC @ =gUnknown_2023E8A
 	ldrb r3, [r3]
-	ldr r5, _080CD9F0 @ =gUnknown_202273C
+	ldr r5, _080CD9F0 @ =gLinkPlayers
 	lsls r4, r6, 3
 	subs r4, r6
 	lsls r4, 2
@@ -999,7 +999,7 @@ _080CD9E0: .4byte gSaveBlock2Ptr
 _080CD9E4: .4byte 0x00000a98
 _080CD9E8: .4byte gUnknown_2039654
 _080CD9EC: .4byte gUnknown_2023E8A
-_080CD9F0: .4byte gUnknown_202273C
+_080CD9F0: .4byte gLinkPlayers
 	thumb_func_end sub_80CD98C
 
 	thumb_func_start sub_80CD9F4

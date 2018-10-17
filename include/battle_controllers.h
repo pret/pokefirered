@@ -181,7 +181,7 @@ void sub_8033648(void);
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data);
 
 // emitters
-void EmitGetMonData(u8 bufferId, u8 requestId, u8 monToCheck);
+void BtlController_EmitGetMonData(u8 bufferId, u8 requestId, u8 monToCheck);
 void EmitGetRawMonData(u8 bufferId, u8 monId, u8 bytes); // unused
 void EmitSetMonData(u8 bufferId, u8 requestId, u8 monToCheck, u8 bytes, void *data);
 void EmitSetRawMonData(u8 bufferId, u8 monId, u8 bytes, void *data); // unused

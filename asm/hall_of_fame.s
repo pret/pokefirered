@@ -429,7 +429,7 @@ Task_Hof_InitTeamSaveData: @ 80F2114
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r7, _080F2140 @ =gUnknown_201C000
+	ldr r7, _080F2140 @ =gDecompressionBuffer
 	bl sub_8112450
 	ldr r0, _080F2144 @ =gUnknown_203AB44
 	ldrb r0, [r0]
@@ -442,11 +442,11 @@ Task_Hof_InitTeamSaveData: @ 80F2114
 	bl memset
 	b _080F2162
 	.align 2, 0
-_080F2140: .4byte gUnknown_201C000
+_080F2140: .4byte gDecompressionBuffer
 _080F2144: .4byte gUnknown_203AB44
 _080F2148:
 	movs r0, 0x3
-	bl sub_80DA4FC
+	bl Save_LoadGameData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -483,7 +483,7 @@ _080F218C:
 	cmp r5, 0x31
 	bls _080F21B2
 _080F2190:
-	ldr r4, _080F220C @ =gUnknown_201C000
+	ldr r4, _080F220C @ =gDecompressionBuffer
 	adds r6, r4, 0
 	adds r4, 0x78
 	movs r5, 0
@@ -541,7 +541,7 @@ _080F21B2:
 	bx r0
 	.align 2, 0
 _080F2208: .4byte 0x000001ff
-_080F220C: .4byte gUnknown_201C000
+_080F220C: .4byte gDecompressionBuffer
 _080F2210: .4byte gUnknown_203AB38
 _080F2214: .4byte gUnknown_8419F54
 _080F2218: .4byte gTasks
@@ -554,7 +554,7 @@ sub_80F2220: @ 80F2220
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _080F2254 @ =gUnknown_30053A4
+	ldr r1, _080F2254 @ =gGameContinueCallback
 	ldr r0, _080F2258 @ =CB2_DoHallOfFameScreenDontSaveData
 	str r0, [r1]
 	movs r0, 0x3
@@ -574,7 +574,7 @@ sub_80F2220: @ 80F2220
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2254: .4byte gUnknown_30053A4
+_080F2254: .4byte gGameContinueCallback
 _080F2258: .4byte CB2_DoHallOfFameScreenDontSaveData
 _080F225C: .4byte gTasks
 _080F2260: .4byte sub_80F2264
@@ -1609,7 +1609,7 @@ sub_80F2AA4: @ 80F2AA4
 	movs r3, 0xC
 	bl sub_810F558
 	movs r0, 0x3
-	bl sub_80DA4FC
+	bl Save_LoadGameData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1626,7 +1626,7 @@ _080F2AD8: .4byte 0x00000226
 _080F2ADC: .4byte gTasks
 _080F2AE0: .4byte sub_80F30A4
 _080F2AE4:
-	ldr r0, _080F2B2C @ =gUnknown_201C000
+	ldr r0, _080F2B2C @ =gDecompressionBuffer
 	ldr r4, _080F2B30 @ =gUnknown_203AB38
 	ldr r1, [r4]
 	movs r2, 0x80
@@ -1663,7 +1663,7 @@ _080F2B1A:
 	subs r0, r2, 0x1
 	b _080F2B46
 	.align 2, 0
-_080F2B2C: .4byte gUnknown_201C000
+_080F2B2C: .4byte gDecompressionBuffer
 _080F2B30: .4byte gUnknown_203AB38
 _080F2B34: .4byte 0x000001ff
 _080F2B38: .4byte gTasks
@@ -2624,7 +2624,7 @@ _080F32C4:
 	lsrs r1, 23
 	movs r2, 0xB
 	muls r1, r2
-	ldr r2, _080F3324 @ =gUnknown_8245EE0
+	ldr r2, _080F3324 @ =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
 	adds r6, r0, 0
@@ -2641,7 +2641,7 @@ _080F3318:
 	.align 2, 0
 _080F331C: .4byte gUnknown_840C23C
 _080F3320: .4byte 0x000001ff
-_080F3324: .4byte gUnknown_8245EE0
+_080F3324: .4byte gSpeciesNames
 _080F3328:
 	lsls r0, r1, 23
 	lsrs r0, 23

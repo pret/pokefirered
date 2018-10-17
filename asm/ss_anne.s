@@ -100,7 +100,7 @@ _0815D3D6:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815D42C @ =gUnknown_2036E38
+	ldr r1, _0815D42C @ =gMapObjects
 	adds r0, r1
 	ldr r2, _0815D430 @ =gSprites
 	ldrb r1, [r0, 0x4]
@@ -128,7 +128,7 @@ _0815D3D6:
 	.align 2, 0
 _0815D424: .4byte gTasks+0x8
 _0815D428: .4byte gSaveBlock1Ptr
-_0815D42C: .4byte gUnknown_2036E38
+_0815D42C: .4byte gMapObjects
 _0815D430: .4byte gSprites
 _0815D434: .4byte sub_815D454
 _0815D438:
@@ -197,7 +197,7 @@ sub_815D498: @ 815D498
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815D50C @ =gUnknown_2036E38
+	ldr r1, _0815D50C @ =gMapObjects
 	adds r0, r1
 	ldr r4, _0815D510 @ =gSprites
 	ldrb r1, [r0, 0x4]
@@ -238,7 +238,7 @@ sub_815D498: @ 815D498
 	bx r0
 	.align 2, 0
 _0815D508: .4byte gSaveBlock1Ptr
-_0815D50C: .4byte gUnknown_2036E38
+_0815D50C: .4byte gMapObjects
 _0815D510: .4byte gSprites
 _0815D514: .4byte gUnknown_8479C88
 	thumb_func_end sub_815D498
@@ -260,7 +260,7 @@ sub_815D518: @ 815D518
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815D59C @ =gUnknown_2036E38
+	ldr r1, _0815D59C @ =gMapObjects
 	adds r0, r1
 	ldr r2, _0815D5A0 @ =gSprites
 	ldrb r1, [r0, 0x4]
@@ -308,7 +308,7 @@ _0815D58E:
 	bx r0
 	.align 2, 0
 _0815D598: .4byte gSaveBlock1Ptr
-_0815D59C: .4byte gUnknown_2036E38
+_0815D59C: .4byte gMapObjects
 _0815D5A0: .4byte gSprites
 	thumb_func_end sub_815D518
 
@@ -328,7 +328,7 @@ sub_815D5A4: @ 815D5A4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0815D618 @ =gUnknown_2036E38
+	ldr r1, _0815D618 @ =gMapObjects
 	adds r0, r1
 	ldr r4, _0815D61C @ =gSprites
 	ldrb r0, [r0, 0x4]
@@ -371,7 +371,7 @@ _0815D60C:
 	bx r0
 	.align 2, 0
 _0815D614: .4byte gSaveBlock1Ptr
-_0815D618: .4byte gUnknown_2036E38
+_0815D618: .4byte gMapObjects
 _0815D61C: .4byte gSprites
 _0815D620: .4byte gUnknown_8479CC0
 	thumb_func_end sub_815D5A4

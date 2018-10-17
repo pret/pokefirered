@@ -1379,7 +1379,7 @@ _0806F814:
 	beq _0806F858
 	b _0806F864
 _0806F81A:
-	ldr r0, _0806F838 @ =gUnknown_30053A0
+	ldr r0, _0806F838 @ =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0806F826
@@ -1396,7 +1396,7 @@ _0806F82E:
 	str r0, [r1]
 	b _0806F864
 	.align 2, 0
-_0806F838: .4byte gUnknown_30053A0
+_0806F838: .4byte gSaveFileStatus
 _0806F83C: .4byte gUnknown_2031DB0
 _0806F840: .4byte gUnknown_3000FA4
 _0806F844: .4byte sub_806F86C

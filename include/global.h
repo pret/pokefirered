@@ -28,8 +28,12 @@ char* strcpy(char *dst0, const char *src0);
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
 
+#define POKEMON_SLOTS_NUMBER 412
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
+
+#define min(a, b) ((a) < (b) ? (a) : (b))
+#define max(a, b) ((a) >= (b) ? (a) : (b))
 
 // There are many quirks in the source code which have overarching behavioral differences from
 // a number of other files. For example, diploma.c seems to declare rodata before each use while
@@ -74,6 +78,12 @@ enum LanguageId {
 };
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
+
+#define BAG_ITEMS_COUNT     42
+#define BAG_KEYITEMS_COUNT  30
+#define BAG_POKEBALLS_COUNT 13
+#define BAG_TMHM_COUNT      58
+#define BAG_BERRIES_COUNT   43
 
 enum
 {
@@ -239,6 +249,18 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
+#define PARTY_SIZE 6
+
+struct SecretBaseParty
+{
+    u32 personality[PARTY_SIZE];
+    u16 moves[PARTY_SIZE * 4];
+    u16 species[PARTY_SIZE];
+    u16 heldItems[PARTY_SIZE];
+    u8 levels[PARTY_SIZE];
+    u8 EVs[PARTY_SIZE];
+};
+
 struct SecretBaseRecord
 {
     /*0x1A9C*/ u8 secretBaseId;
@@ -246,7 +268,7 @@ struct SecretBaseRecord
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 sbr_field_1_5:1;
     /*0x1A9D*/ u8 sbr_field_1_6:2;
-    /*0x1A9E*/ u8 trainerName[OT_NAME_LENGTH];
+    /*0x1A9E*/ u8 trainerName[7]; // TODO: Change PLAYER_NAME_LENGTH to 7
     /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 sbr_field_e;
@@ -254,12 +276,7 @@ struct SecretBaseRecord
     /*0x1AAD*/ u8 sbr_field_11;
     /*0x1AAE*/ u8 decorations[16];
     /*0x1ABE*/ u8 decorationPos[16];
-    /*0x1AD0*/ u32 partyPersonality[6];
-    /*0x1AE8*/ u16 partyMoves[6 * 4];
-    /*0x1B18*/ u16 partySpecies[6];
-    /*0x1B24*/ u16 partyHeldItems[6];
-    /*0x1B2E*/ u8 partyLevels[6];
-    /*0x1B34*/ u8 partyEVs[6];
+    /*0x1AD0*/ struct SecretBaseParty party;
 };
 
 #include "constants/game_stat.h"
@@ -482,24 +499,41 @@ struct MysteryEventStruct
 
 struct SaveBlock1
 {
-    /*0x0000*/ u8 filler[0x4];
+    /*0x0000*/ struct Coords16 pos;
     /*0x0004*/ struct WarpData location;
-    /*0x0C*/ struct WarpData warp1;
-    /*0x14*/ struct WarpData warp2;
-    /*0x1C*/ struct WarpData lastHealLocation;
-    /*0x24*/ struct WarpData warp4;
-    /*0x002C*/ u8 filler2C[0x60C];
-    /*0x638*/ u8 trainerRematchStepCounter;
-              u8 filler_639;
-    /*0x63a*/ u8 trainerRematches[100];
-    /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
-    /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
-    /*0x0EE0*/ u8 fillerEE0[0x2580];
+    /*0x000C*/ struct WarpData warp1;
+    /*0x0014*/ struct WarpData warp2;
+    /*0x001C*/ struct WarpData lastHealLocation;
+    /*0x0024*/ struct WarpData warp4;
+    /*0x002C*/ u8 filler2C[0x8];
+    /*0x0034*/ u8 playerPartyCount;
+    /*0x0038*/ struct Pokemon playerParty[PARTY_SIZE];
+    /*0x0290*/ u32 money;
+    /*0x0294*/ u16 coins;
+    /*0x0296*/ u8 filler296[0x7A];
+    /*0x0310*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+               struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+               struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+               struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+               struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+               u8 filler5F8[0x40];
+    /*0x0638*/ u8 trainerRematchStepCounter;
+               u8 filler_639;
+    /*0x063a*/ u8 trainerRematches[100];
+    /*0x06A0*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
+    /*0x08E0*/ struct MapObjectTemplate mapObjectTemplates[64];
+    /*0x0EE0*/ u8 fillerEE0[0x1DF0];
+    /*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];
+               u8 filler2F10[0x1DA];
+    /*0x30EA*/ struct EnigmaBerry enigmaBerry;
+    /*0x3120*/ u8 filler3120[0x340];
     /*0x3460*/ struct MysteryEventStruct unk_3460;
     /*0x3464*/ u8 filler_3464[0x1b8];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[0x44];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
+    /*0x3A54*/ u8 filler3A54[0x2E4];
+               u32 unkArray[4][3];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

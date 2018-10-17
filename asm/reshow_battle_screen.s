@@ -276,7 +276,7 @@ _080779A8:
 _080779B0:
 	bl LoadAndCreateEnemyShadowSprites
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -300,7 +300,7 @@ _080779B0:
 	cmp r0, 0
 	beq _08077A14
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -318,7 +318,7 @@ _080779B0:
 	bl SetBankEnemyShadowSpriteCallback
 _08077A14:
 	ldr r1, _08077A4C @ =gUnknown_2023FF8
-	ldr r0, _08077A50 @ =gUnknown_2024004
+	ldr r0, _08077A50 @ =gBattlerInMenuId
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -341,7 +341,7 @@ _08077A14:
 _08077A44: .4byte gBattlerPartyIndexes
 _08077A48: .4byte gEnemyParty
 _08077A4C: .4byte gUnknown_2023FF8
-_08077A50: .4byte gUnknown_2024004
+_08077A50: .4byte gBattlerInMenuId
 _08077A54: .4byte gUnknown_3003F3C
 _08077A58: .4byte gUnknown_3003F64
 _08077A5C:
@@ -426,14 +426,14 @@ sub_8077B0C: @ 8077B0C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08077B54 @ =gUnknown_2023BCC
+	ldr r0, _08077B54 @ =gBattlersCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _08077B1C
 	b _08077C2C
 _08077B1C:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077BA6
@@ -458,7 +458,7 @@ _08077B1C:
 	bl sub_8034658
 	b _08077C24
 	.align 2, 0
-_08077B54: .4byte gUnknown_2023BCC
+_08077B54: .4byte gBattlersCount
 _08077B58: .4byte gBattleTypeFlags
 _08077B5C: .4byte gBattlerPartyIndexes
 _08077B60: .4byte gEnemyParty
@@ -576,7 +576,7 @@ sub_8077C38: @ 8077C38
 	push {r5-r7}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, _08077C6C @ =gUnknown_2023BCC
+	ldr r0, _08077C6C @ =gBattlersCount
 	ldrb r0, [r0]
 	cmp r7, r0
 	bcc _08077C50
@@ -595,7 +595,7 @@ _08077C50:
 	bl sub_8074900
 	b _08077C9A
 	.align 2, 0
-_08077C6C: .4byte gUnknown_2023BCC
+_08077C6C: .4byte gBattlersCount
 _08077C70: .4byte gBattleTypeFlags
 _08077C74:
 	ldr r0, _08077C90 @ =gUnknown_2024018
@@ -621,7 +621,7 @@ _08077C9A:
 	lsrs r0, 24
 	mov r8, r0
 	adds r0, r7, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08077CAE
@@ -656,13 +656,13 @@ _08077CD2:
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl sub_803F7D4
-	ldr r5, _08077D98 @ =gUnknown_20244DC
+	ldr r5, _08077D98 @ =gMultiuseSpriteTemplate
 	adds r0, r7, 0
 	movs r1, 0x2
 	bl sub_8074480
@@ -726,7 +726,7 @@ _08077CD2:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _08077DA8 @ =gUnknown_2024024
+	ldr r1, _08077DA8 @ =gBattleMonForms
 	adds r1, r7, r1
 	ldrb r1, [r1]
 	bl StartSpriteAnim
@@ -734,11 +734,11 @@ _08077CD2:
 	.align 2, 0
 _08077D90: .4byte gBattlerPartyIndexes
 _08077D94: .4byte gEnemyParty
-_08077D98: .4byte gUnknown_20244DC
+_08077D98: .4byte gMultiuseSpriteTemplate
 _08077D9C: .4byte gUnknown_2023D44
 _08077DA0: .4byte gSprites
 _08077DA4: .4byte SpriteCallbackDummy
-_08077DA8: .4byte gUnknown_2024024
+_08077DA8: .4byte gBattleMonForms
 _08077DAC:
 	ldr r0, _08077E00 @ =gBattleTypeFlags
 	ldr r1, [r0]
@@ -752,13 +752,13 @@ _08077DAC:
 	ldr r0, [r5]
 	ldrb r4, [r0, 0x8]
 	movs r0, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_803F864
-	ldr r6, _08077E08 @ =gUnknown_20244DC
+	bl SetMultiuseSpriteTemplateToTrainerBack
+	ldr r6, _08077E08 @ =gMultiuseSpriteTemplate
 	ldr r1, _08077E0C @ =gUnknown_8239F8C
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x8]
@@ -782,7 +782,7 @@ _08077DAC:
 	.align 2, 0
 _08077E00: .4byte gBattleTypeFlags
 _08077E04: .4byte gSaveBlock2Ptr
-_08077E08: .4byte gUnknown_20244DC
+_08077E08: .4byte gMultiuseSpriteTemplate
 _08077E0C: .4byte gUnknown_8239F8C
 _08077E10:
 	ldr r0, [r0]
@@ -794,13 +794,13 @@ _08077E10:
 	cmp r7, 0
 	bne _08077EA8
 	movs r0, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	movs r0, 0x5
-	bl sub_803F864
-	ldr r5, _08077E94 @ =gUnknown_20244DC
+	bl SetMultiuseSpriteTemplateToTrainerBack
+	ldr r5, _08077E94 @ =gMultiuseSpriteTemplate
 	ldr r0, _08077E98 @ =gUnknown_8239F8C
 	ldrb r0, [r0, 0x14]
 	movs r4, 0x8
@@ -849,7 +849,7 @@ _08077E54:
 	strh r7, [r0, 0x2E]
 	b _08077F84
 	.align 2, 0
-_08077E94: .4byte gUnknown_20244DC
+_08077E94: .4byte gMultiuseSpriteTemplate
 _08077E98: .4byte gUnknown_8239F8C
 _08077E9C: .4byte gUnknown_2023D44
 _08077EA0: .4byte gSprites
@@ -882,13 +882,13 @@ _08077EA8:
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl sub_803F7D4
-	ldr r5, _08077FCC @ =gUnknown_20244DC
+	ldr r5, _08077FCC @ =gMultiuseSpriteTemplate
 	adds r0, r7, 0
 	movs r1, 0x2
 	bl sub_8074480
@@ -952,7 +952,7 @@ _08077EA8:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, _08077FDC @ =gUnknown_2024024
+	ldr r1, _08077FDC @ =gBattleMonForms
 	adds r1, r7, r1
 	ldrb r1, [r1]
 	bl StartSpriteAnim
@@ -992,11 +992,11 @@ _08077FB4:
 	.align 2, 0
 _08077FC4: .4byte gBattlerPartyIndexes
 _08077FC8: .4byte gPlayerParty
-_08077FCC: .4byte gUnknown_20244DC
+_08077FCC: .4byte gMultiuseSpriteTemplate
 _08077FD0: .4byte gUnknown_2023D44
 _08077FD4: .4byte gSprites
 _08077FD8: .4byte SpriteCallbackDummy
-_08077FDC: .4byte gUnknown_2024024
+_08077FDC: .4byte gBattleMonForms
 _08077FE0: .4byte gUnknown_2024018
 	thumb_func_end sub_8077C38
 
@@ -1005,7 +1005,7 @@ CreateHealthboxSprite: @ 8077FE4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _0807800C @ =gUnknown_2023BCC
+	ldr r0, _0807800C @ =gBattlersCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	bcc _08077FF4
@@ -1022,7 +1022,7 @@ _08077FF4:
 	bl CreateSafariPlayerHealthboxSprites
 	b _0807802C
 	.align 2, 0
-_0807800C: .4byte gUnknown_2023BCC
+_0807800C: .4byte gBattlersCount
 _08078010: .4byte gBattleTypeFlags
 _08078014:
 	ldr r0, [r0]
@@ -1048,7 +1048,7 @@ _0807802C:
 	adds r0, r6, 0
 	bl SetHealthboxSpriteVisible
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08078074
@@ -1105,13 +1105,13 @@ _080780A8:
 	bl UpdateHealthboxAttribute
 _080780C0:
 	adds r0, r5, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080780DC
 	adds r0, r5, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1135,7 +1135,7 @@ _080780F8:
 	bl nullsub_21
 _08078104:
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807813C

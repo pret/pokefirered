@@ -64,7 +64,7 @@ struct VsSeekerStruct
 };
 
 extern u16 gUnknown_20370D2;
-extern struct MapObject gUnknown_2036E38[MAP_OBJECTS_COUNT];
+extern struct MapObject gMapObjects[MAP_OBJECTS_COUNT];
 extern u8 gUnknown_3005074;
 
 // static declarations
@@ -642,8 +642,8 @@ static void GatherNearbyTrainerInfo(void)
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].localId = templates[mapObjectIdx].localId;
             TryGetFieldObjectIdByLocalIdAndMap(templates[mapObjectIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &fieldObjectId);
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].fieldObjectId = fieldObjectId;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gUnknown_2036E38[fieldObjectId].coords2.x - 7;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gUnknown_2036E38[fieldObjectId].coords2.y - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gMapObjects[fieldObjectId].coords2.x - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gMapObjects[fieldObjectId].coords2.y - 7;
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].graphicsId = templates[mapObjectIdx].graphicsId;
             vsSeekerObjectIdx++;
         }
@@ -731,7 +731,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                     else
                     {
                         gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[vsSeekerIdx].localId] = r7;
-                        npc_coords_shift_still(&gUnknown_2036E38[sVsSeeker->trainerInfo[vsSeekerIdx].fieldObjectId]);
+                        npc_coords_shift_still(&gMapObjects[sVsSeeker->trainerInfo[vsSeekerIdx].fieldObjectId]);
                         StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], gUnknown_8453F64);
                         sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = r8;
                         sVsSeeker->runningBehaviourEtcArray[sVsSeeker->numRematchableTrainers] = GetRunningBehaviorFromGraphicsId(sVsSeeker->trainerInfo[vsSeekerIdx].graphicsId);
@@ -891,7 +891,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                 "\tlsls r0, r1, 3\n"
                 "\tadds r0, r1\n"
                 "\tlsls r0, 2\n"
-                "\tldr r1, _0810CB5C @ =gUnknown_2036E38\n"
+                "\tldr r1, _0810CB5C @ =gMapObjects\n"
                 "\tadds r0, r1\n"
                 "\tbl npc_coords_shift_still\n"
                 "\tldr r0, [r6]\n"
@@ -965,7 +965,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                 "\t.align 2, 0\n"
                 "_0810CB54: .4byte gSaveBlock1Ptr\n"
                 "_0810CB58: .4byte 0x0000063a\n"
-                "_0810CB5C: .4byte gUnknown_2036E38\n"
+                "_0810CB5C: .4byte gMapObjects\n"
                 "_0810CB60: .4byte gUnknown_8453F64\n"
                 "_0810CB64: .4byte 0x00000431\n"
                 "_0810CB68: .4byte sVsSeeker\n"
@@ -1008,7 +1008,7 @@ void sub_810CB90(void)
                 struct MapObject *r4_2;
 
                 TryGetFieldObjectIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
-                r4_2 = &gUnknown_2036E38[sp0];
+                r4_2 = &gMapObjects[sp0];
                 sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
                 sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->mapobj_unk_18]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
@@ -1155,7 +1155,7 @@ static bool8 sub_810CED0(const VsSeekerData * a0, u16 a1)
 
 bool8 sub_810CF04(u8 a0)
 {
-    struct MapObject *r1 = &gUnknown_2036E38[a0];
+    struct MapObject *r1 = &gMapObjects[a0];
 
     if (r1->active && gMapHeader.events->mapObjectCount >= r1->localId && gSprites[r1->spriteId].data[0] == a0)
         return TRUE;
@@ -1331,7 +1331,7 @@ static u8 GetRematchableTrainerLocalId(void)
 
 static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo * trainerInfo, const u8 * script)
 {
-    npc_sync_anim_pause_bits(&gUnknown_2036E38[trainerInfo->fieldObjectId]);
+    npc_sync_anim_pause_bits(&gMapObjects[trainerInfo->fieldObjectId]);
     ScriptMovement_StartObjectMovementScript(trainerInfo->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, script);
 }
 
@@ -1367,7 +1367,7 @@ static void StartAllRespondantIdleMovements(void)
         {
             if (sVsSeeker->trainerInfo[j].trainerIdx == sVsSeeker->trainerIdxArray[i])
             {
-                struct MapObject *r4 = &gUnknown_2036E38[sVsSeeker->trainerInfo[j].fieldObjectId];
+                struct MapObject *r4 = &gMapObjects[sVsSeeker->trainerInfo[j].fieldObjectId];
 
                 if (sub_810CF04(sVsSeeker->trainerInfo[j].fieldObjectId) == 1)
                     npc_set_running_behaviour_etc(r4, sVsSeeker->runningBehaviourEtcArray[i]);

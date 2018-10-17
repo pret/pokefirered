@@ -15,7 +15,7 @@ sp000_heal_pokemon: @ 80A0058
 	sub sp, 0x4
 	movs r0, 0
 	mov r8, r0
-	ldr r0, _080A0114 @ =gUnknown_2024029
+	ldr r0, _080A0114 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcs _080A0104
@@ -37,7 +37,7 @@ _080A0076:
 	adds r0, r4, 0
 	movs r1, 0x39
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x15
 	bl GetMonData
@@ -62,7 +62,7 @@ _080A00AC:
 	adds r1, 0x11
 	adds r0, r4, 0
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -79,12 +79,12 @@ _080A00AC:
 	add r0, r10
 	movs r1, 0x37
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	mov r1, r9
 	lsls r0, r1, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, _080A0114 @ =gUnknown_2024029
+	ldr r0, _080A0114 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcc _080A0076
@@ -98,7 +98,7 @@ _080A0104:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A0114: .4byte gUnknown_2024029
+_080A0114: .4byte gPlayerPartyCount
 _080A0118: .4byte gPlayerParty
 	thumb_func_end sp000_heal_pokemon
 
@@ -139,7 +139,7 @@ ScriptGiveMon: @ 80A011C
 	adds r0, r7, 0
 	movs r1, 0xC
 	add r2, sp, 0x10
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r7, 0
 	bl GiveMonToPlayer
 	lsls r0, 24
@@ -189,7 +189,7 @@ sub_80A01AC: @ 80A01AC
 	adds r0, r5, 0
 	movs r1, 0x2D
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	adds r0, r5, 0
 	bl GiveMonToPlayer
 	adds r4, r0, 0
@@ -335,7 +335,7 @@ CreateScriptedWildMon: @ 80A029C
 	mov r0, r8
 	movs r1, 0xC
 	add r2, sp, 0x10
-	bl sub_804037C
+	bl SetMonData
 _080A02EA:
 	add sp, 0x14
 	pop {r3}
@@ -358,7 +358,7 @@ ScriptSetMonMoveSlot: @ 80A02FC
 	lsrs r2, 24
 	cmp r3, 0x6
 	bls _080A0318
-	ldr r0, _080A032C @ =gUnknown_2024029
+	ldr r0, _080A032C @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	subs r0, 0x1
 	lsls r0, 24
@@ -374,7 +374,7 @@ _080A0318:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A032C: .4byte gUnknown_2024029
+_080A032C: .4byte gPlayerPartyCount
 _080A0330: .4byte gPlayerParty
 	thumb_func_end ScriptSetMonMoveSlot
 
@@ -442,7 +442,7 @@ sub_80A039C: @ 80A039C
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _080A03B8
-	bl sub_804C230
+	bl LoadPlayerParty
 	ldr r0, _080A03B4 @ =gUnknown_20370D0
 	strh r4, [r0]
 	b _080A03C2

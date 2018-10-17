@@ -253,7 +253,7 @@ sub_8054A60: @ 8054A60
 	bl sub_80A0904
 	bl sub_80A0958
 	bl sub_806E190
-	ldr r0, _08054B64 @ =gUnknown_2024029
+	ldr r0, _08054B64 @ =gPlayerPartyCount
 	strb r5, [r0]
 	bl ZeroPlayerPartyMons
 	bl sub_808C7E0
@@ -291,7 +291,7 @@ _08054B54: .4byte 0x00003a4c
 _08054B58: .4byte gUnknown_2031DB0
 _08054B5C: .4byte gSaveBlock2Ptr
 _08054B60: .4byte 0x00000bb8
-_08054B64: .4byte gUnknown_2024029
+_08054B64: .4byte gPlayerPartyCount
 _08054B68: .4byte 0x00000296
 _08054B6C: .4byte gUnknown_81A6481
 	thumb_func_end sub_8054A60

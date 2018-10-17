@@ -604,7 +604,7 @@ SpawnScriptFieldObject: @ 80CAA34
 	bl SpawnSpecialFieldObjectParametrized
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080CAA84 @ =gUnknown_2036E38
+	ldr r2, _080CAA84 @ =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -620,7 +620,7 @@ SpawnScriptFieldObject: @ 80CAA34
 	bx r0
 	.align 2, 0
 _080CAA80: .4byte gSaveBlock1Ptr
-_080CAA84: .4byte gUnknown_2036E38
+_080CAA84: .4byte gMapObjects
 	thumb_func_end SpawnScriptFieldObject
 
 	thumb_func_start RemoveScriptFieldObject
@@ -713,7 +713,7 @@ GivLeadMonEffortRibbon: @ 80CAB08
 	adds r0, r1
 	movs r1, 0x47
 	mov r2, sp
-	bl sub_804037C
+	bl SetMonData
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -1457,7 +1457,7 @@ _080CB0EA:
 	lsrs r0, 16
 	movs r1, 0xB
 	muls r1, r0
-	ldr r0, _080CB120 @ =gUnknown_8245EE0
+	ldr r0, _080CB120 @ =gSpeciesNames
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -1470,7 +1470,7 @@ _080CB110: .4byte 0x0000ffff
 _080CB114: .4byte 0x0000403b
 _080CB118: .4byte 0x00004035
 _080CB11C: .4byte gStringVar1
-_080CB120: .4byte gUnknown_8245EE0
+_080CB120: .4byte gSpeciesNames
 	thumb_func_end sub_80CB0A8
 
 	thumb_func_start sub_80CB124
@@ -3167,7 +3167,7 @@ sub_80CBE00: @ 80CBE00
 _080CBE18: .4byte gUnknown_20370DA
 _080CBE1C: .4byte gUnknown_3005074
 _080CBE20:
-	ldr r2, _080CBE4C @ =gUnknown_2036E38
+	ldr r2, _080CBE4C @ =gMapObjects
 	ldrb r1, [r1]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3191,7 +3191,7 @@ _080CBE48:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CBE4C: .4byte gUnknown_2036E38
+_080CBE4C: .4byte gMapObjects
 	thumb_func_end sub_80CBE00
 
 	thumb_func_start sub_80CBE50
@@ -3225,7 +3225,7 @@ sub_80CBE50: @ 80CBE50
 	bl GetMonData
 	movs r1, 0xB
 	muls r0, r1
-	ldr r1, _080CBEAC @ =gUnknown_8245EE0
+	ldr r1, _080CBEAC @ =gSpeciesNames
 	adds r0, r1
 	adds r1, r6, 0
 	bl StringCompare
@@ -3236,7 +3236,7 @@ sub_80CBE50: @ 80CBE50
 	.align 2, 0
 _080CBEA4: .4byte gPlayerParty
 _080CBEA8: .4byte gStringVar1
-_080CBEAC: .4byte gUnknown_8245EE0
+_080CBEAC: .4byte gSpeciesNames
 _080CBEB0:
 	movs r0, 0x1
 _080CBEB2:
@@ -3407,9 +3407,9 @@ ChangeBoxPokemonNickname: @ 80CBFE0
 	mov r6, r8
 	push {r6}
 	sub sp, 0x8
-	ldr r0, _080CC050 @ =gUnknown_20370D6
+	ldr r0, _080CC050 @ =gSpecialVar_MonBoxId
 	ldrb r0, [r0]
-	ldr r1, _080CC054 @ =gUnknown_20370D8
+	ldr r1, _080CC054 @ =gSpecialVar_MonBoxPos
 	ldrb r1, [r1]
 	bl GetBoxedMonPtr
 	adds r6, r0, 0
@@ -3453,8 +3453,8 @@ ChangeBoxPokemonNickname: @ 80CBFE0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CC050: .4byte gUnknown_20370D6
-_080CC054: .4byte gUnknown_20370D8
+_080CC050: .4byte gSpecialVar_MonBoxId
+_080CC054: .4byte gSpecialVar_MonBoxPos
 _080CC058: .4byte gStringVar3
 _080CC05C: .4byte gStringVar2
 _080CC060: .4byte ChangeBoxPokemonNickname_CB
@@ -3463,9 +3463,9 @@ _080CC060: .4byte ChangeBoxPokemonNickname_CB
 	thumb_func_start ChangeBoxPokemonNickname_CB
 ChangeBoxPokemonNickname_CB: @ 80CC064
 	push {lr}
-	ldr r0, _080CC07C @ =gUnknown_20370D6
+	ldr r0, _080CC07C @ =gSpecialVar_MonBoxId
 	ldrb r0, [r0]
-	ldr r1, _080CC080 @ =gUnknown_20370D8
+	ldr r1, _080CC080 @ =gSpecialVar_MonBoxPos
 	ldrb r1, [r1]
 	ldr r2, _080CC084 @ =gStringVar2
 	bl SetBoxMonNickFromAnyBox
@@ -3473,8 +3473,8 @@ ChangeBoxPokemonNickname_CB: @ 80CC064
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CC07C: .4byte gUnknown_20370D6
-_080CC080: .4byte gUnknown_20370D8
+_080CC07C: .4byte gSpecialVar_MonBoxId
+_080CC080: .4byte gSpecialVar_MonBoxPos
 _080CC084: .4byte gStringVar2
 	thumb_func_end ChangeBoxPokemonNickname_CB
 
@@ -3576,7 +3576,7 @@ ChangePokemonNickname_CB: @ 80CC144
 	adds r0, r1
 	ldr r2, _080CC16C @ =gStringVar2
 	movs r1, 0x2
-	bl sub_804037C
+	bl SetMonData
 	bl c2_exit_to_overworld_1_continue_scripts_restart_music
 	pop {r0}
 	bx r0
@@ -4619,7 +4619,7 @@ sub_80CC948: @ 80CC948
 	ldr r1, _080CC96C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x6
-	bl sub_80436F8
+	bl AdjustFriendship
 	ldr r0, _080CC970 @ =0x00004025
 	movs r1, 0
 	bl VarSet

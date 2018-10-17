@@ -511,20 +511,20 @@ sub_80DAB80: @ 80DAB80
 	cmp r4, r0
 	bne _080DABD0
 	ldr r0, _080DABC8 @ =gStringVar1
-	ldr r1, _080DABCC @ =gUnknown_8415A62
+	ldr r1, _080DABCC @ =gText_EggNickname
 	movs r2, 0xB
 	bl StringCopyN
 	b _080DABDA
 	.align 2, 0
 _080DABC8: .4byte gStringVar1
-_080DABCC: .4byte gUnknown_8415A62
+_080DABCC: .4byte gText_EggNickname
 _080DABD0:
 	ldr r0, _080DABF0 @ =gStringVar1
 	ldr r1, _080DABF4 @ =gUnknown_8415A66
 	movs r2, 0xB
 	bl StringCopyN
 _080DABDA:
-	ldr r0, _080DABF8 @ =gUnknown_2024029
+	ldr r0, _080DABF8 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r0, 0x6
 	bne _080DAC04
@@ -536,7 +536,7 @@ _080DABDA:
 	.align 2, 0
 _080DABF0: .4byte gStringVar1
 _080DABF4: .4byte gUnknown_8415A66
-_080DABF8: .4byte gUnknown_2024029
+_080DABF8: .4byte gPlayerPartyCount
 _080DABFC: .4byte gStringVar4
 _080DAC00: .4byte gUnknown_8488D8E
 _080DAC04:

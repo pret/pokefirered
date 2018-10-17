@@ -727,7 +727,7 @@ _0807E0AE:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0807E0E8 @ =gUnknown_2036E38
+	ldr r1, _0807E0E8 @ =gMapObjects
 	adds r0, r1
 	movs r1, 0x10
 	bl sub_8063CA4
@@ -735,7 +735,7 @@ _0807E0AE:
 	strh r0, [r4, 0x8]
 	b _0807E206
 	.align 2, 0
-_0807E0E8: .4byte gUnknown_2036E38
+_0807E0E8: .4byte gMapObjects
 _0807E0EC:
 	ldrh r0, [r4, 0x24]
 	adds r0, 0x1
@@ -781,13 +781,13 @@ _0807E10E:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0807E15C @ =gUnknown_2036E38
+	ldr r1, _0807E15C @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	b _0807E1F2
 	.align 2, 0
 _0807E158: .4byte sub_807F204
-_0807E15C: .4byte gUnknown_2036E38
+_0807E15C: .4byte gMapObjects
 _0807E160:
 	bl sub_807E418
 	cmp r0, 0
@@ -804,7 +804,7 @@ _0807E160:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0807E194 @ =gUnknown_2036E38
+	ldr r1, _0807E194 @ =gMapObjects
 	adds r0, r1
 	movs r1, 0x10
 	bl sub_8063CA4
@@ -812,7 +812,7 @@ _0807E160:
 	strh r0, [r4, 0x8]
 	b _0807E206
 	.align 2, 0
-_0807E194: .4byte gUnknown_2036E38
+_0807E194: .4byte gMapObjects
 _0807E198:
 	bl walkrun_is_standing_still
 	lsls r0, 24
@@ -836,14 +836,14 @@ _0807E198:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0807E1D8 @ =gUnknown_2036E38
+	ldr r1, _0807E1D8 @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0x3
 	strh r0, [r4, 0x8]
 	b _0807E206
 	.align 2, 0
-_0807E1D8: .4byte gUnknown_2036E38
+_0807E1D8: .4byte gMapObjects
 _0807E1DC:
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
@@ -927,7 +927,7 @@ _0807E25E:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0807E2A4 @ =gUnknown_2036E38
+	ldr r0, _0807E2A4 @ =gMapObjects
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -942,7 +942,7 @@ _0807E25E:
 	strh r0, [r5, 0x8]
 	b _0807E2C6
 	.align 2, 0
-_0807E2A4: .4byte gUnknown_2036E38
+_0807E2A4: .4byte gMapObjects
 _0807E2A8:
 	bl walkrun_is_standing_still
 	lsls r0, 24
@@ -1729,7 +1729,7 @@ _0807E8AE:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _0807E8F0 @ =gUnknown_2036E38
+	ldr r4, _0807E8F0 @ =gMapObjects
 	adds r0, r4
 	bl FieldObjectClearAnimIfSpecialAnimActive
 	movs r0, 0xFF
@@ -1749,7 +1749,7 @@ _0807E8AE:
 	strh r0, [r5, 0x8]
 	b _0807E976
 	.align 2, 0
-_0807E8F0: .4byte gUnknown_2036E38
+_0807E8F0: .4byte gMapObjects
 _0807E8F4:
 	bl walkrun_is_standing_still
 	lsls r0, 24
@@ -1774,7 +1774,7 @@ _0807E8F4:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0807E93C @ =gUnknown_2036E38
+	ldr r1, _0807E93C @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0
@@ -1783,7 +1783,7 @@ _0807E8F4:
 	strh r0, [r5, 0x8]
 	b _0807E976
 	.align 2, 0
-_0807E93C: .4byte gUnknown_2036E38
+_0807E93C: .4byte gMapObjects
 _0807E940:
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
@@ -1836,7 +1836,7 @@ sub_807E980: @ 807E980
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0807E9C8 @ =gUnknown_2036E38
+	ldr r1, _0807E9C8 @ =gMapObjects
 	adds r6, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
@@ -1856,7 +1856,7 @@ sub_807E980: @ 807E980
 	.align 2, 0
 _0807E9C0: .4byte gTasks+0x8
 _0807E9C4: .4byte gUnknown_2037078
-_0807E9C8: .4byte gUnknown_2036E38
+_0807E9C8: .4byte gMapObjects
 _0807E9CC: .4byte gSprites
 _0807E9D0:
 	cmp r0, 0x2
@@ -1995,7 +1995,7 @@ sub_807EAC4: @ 807EAC4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0807EB60 @ =gUnknown_2036E38
+	ldr r2, _0807EB60 @ =gMapObjects
 	adds r0, r2
 	mov r8, r0
 	lsls r1, 16
@@ -2051,7 +2051,7 @@ _0807EB4C:
 	.align 2, 0
 _0807EB58: .4byte gUnknown_2037078
 _0807EB5C: .4byte gSprites
-_0807EB60: .4byte gUnknown_2036E38
+_0807EB60: .4byte gMapObjects
 	thumb_func_end sub_807EAC4
 
 	thumb_func_start sub_807EB64
@@ -2069,7 +2069,7 @@ sub_807EB64: @ 807EB64
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0807EBB8 @ =gUnknown_2036E38
+	ldr r0, _0807EBB8 @ =gMapObjects
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -2093,7 +2093,7 @@ sub_807EB64: @ 807EB64
 	bx r0
 	.align 2, 0
 _0807EBB4: .4byte gUnknown_2037078
-_0807EBB8: .4byte gUnknown_2036E38
+_0807EBB8: .4byte gMapObjects
 	thumb_func_end sub_807EB64
 
 	thumb_func_start sub_807EBBC
@@ -2272,7 +2272,7 @@ _0807ED0C:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0807ED98 @ =gUnknown_2036E38
+	ldr r0, _0807ED98 @ =gMapObjects
 	adds r4, r0
 	adds r0, r1, 0
 	bl sub_8064270
@@ -2333,7 +2333,7 @@ _0807ED0C:
 	bx r0
 	.align 2, 0
 _0807ED94: .4byte gUnknown_2037078
-_0807ED98: .4byte gUnknown_2036E38
+_0807ED98: .4byte gMapObjects
 _0807ED9C: .4byte gSprites
 	thumb_func_end sub_807ECBC
 

@@ -1288,6 +1288,13 @@
 #define TRAINERS_FLAG_NO    0x356
 #define CODE_FLAGS          (FLAG_TRAINER_FLAG_START + TRAINERS_FLAG_NO + 0xA) // 0x860
 
+// TODO: Find what these are
+#define FLAG_UNK820         0x820
+#define FLAG_UNK824         0x824
+#define FLAG_UNK826         0x826
+
+#define FLAG_UNK843         0x843
+
 // SYSTEM FLAGS
 
 // 0x860

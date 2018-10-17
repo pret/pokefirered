@@ -10,6 +10,7 @@
 #include "window.h"
 #include "text_window.h"
 #include "event_data.h"
+#include "event_scripts.h"
 #include "string_util.h"
 #include "script.h"
 #include "overworld.h"
@@ -39,6 +40,8 @@ struct Var4038Struct
     u8 unk_0_7:1;
     u8 unk_1;
 };
+
+#define VAR_0x4038_STRUCT ((struct Var4038Struct *)GetVarPointer(VAR_0x4038))
 
 struct UnkStruct_203AE94
 {
@@ -143,9 +146,11 @@ void sub_81130BC(struct Var4038Struct *);
 u8 sub_8113194(struct Var4038Struct *);
 u16 sub_81132A0(struct Var4038Struct *);
 void sub_81132E0(struct Var4038Struct *);
+bool16 sub_811337C(struct Var4038Struct *);
+void sub_8113390(struct Var4038Struct *);
+void sub_8113414(u8 (*)[16], u8, u8);
 bool8 sub_8113508(void);
 void sub_8113524(struct Var4038Struct *);
-void sub_8113390(struct Var4038Struct *);
 void sub_8113A1C(u8);
 void sub_811381C(void);
 void sub_81138F8(void);
@@ -2252,7 +2257,7 @@ void sub_8113044(void)
 
 void sub_8113064(void)
 {
-    sub_8113078((struct Var4038Struct *)GetVarPointer(VAR_0x4038));
+    sub_8113078(VAR_0x4038_STRUCT);
 }
 
 void sub_8113078(struct Var4038Struct * varPtr)
@@ -2266,7 +2271,7 @@ void sub_8113078(struct Var4038Struct * varPtr)
 
 void sub_81130A8(void)
 {
-    sub_81130BC((struct Var4038Struct *)GetVarPointer(VAR_0x4038));
+    sub_81130BC(VAR_0x4038_STRUCT);
 }
 
 void sub_81130BC(struct Var4038Struct * varPtr)
@@ -2363,7 +2368,7 @@ u8 sub_81131FC(struct Var4038Struct * a0)
 
 u16 sub_8113288(void)
 {
-    return sub_81132A0((struct Var4038Struct *)GetVarPointer(VAR_0x4038));
+    return sub_81132A0(VAR_0x4038_STRUCT);
 }
 
 u16 sub_81132A0(struct Var4038Struct * a0)
@@ -2382,7 +2387,7 @@ u16 sub_81132A0(struct Var4038Struct * a0)
 
 void sub_81132CC(void)
 {
-    sub_81132E0((struct Var4038Struct *)GetVarPointer(VAR_0x4038));
+    sub_81132E0(VAR_0x4038_STRUCT);
 }
 
 void sub_81132E0(struct Var4038Struct * a0)
@@ -2408,6 +2413,95 @@ void sub_81132E0(struct Var4038Struct * a0)
             var_4039 = VarGet(VAR_0x4039);
             VarSet(VAR_0x4039, var_4039 + 12);
             i++;
+        }
+    }
+}
+
+bool16 sub_8113364(void)
+{
+    return sub_811337C(VAR_0x4038_STRUCT);
+}
+
+bool16 sub_811337C(struct Var4038Struct * a0)
+{
+    return (a0->unk_1 >> gUnknown_20370C0) & 1;
+}
+
+void sub_8113390(struct Var4038Struct * a0)
+{
+    a0->unk_1 |= 1;
+    a0->unk_1 |= 2;
+    a0->unk_1 |= 4;
+}
+
+void sub_81133A4(void)
+{
+    u8 r3 = 0;
+    u8 r2 = 0;
+
+    switch (gUnknown_20370C0)
+    {
+        case 0:
+            r2 = 0;
+            r3 = 0;
+            break;
+        case 1:
+        case 2:
+        case 3:
+        case 7:
+            break;
+        case 4:
+            r2 = 1;
+            r3 = 0;
+            break;
+        case 5:
+            r2 = 0;
+            r3 = 1;
+            break;
+        case 6:
+            r2 = 2;
+            r3 = 1;
+            break;
+    }
+    sub_8113414(gSaveBlock2Ptr->unk_A98, r3, r2);
+}
+
+void sub_8113414(u8 (* a0)[16], u8 a1, u8 a2)
+{
+    u8 * str;
+    const u8 * src = a0[a1];
+    if (src[0] == EOS)
+    {
+        switch (a2)
+        {
+            case 0:
+                StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);
+                break;
+            case 1:
+                StringCopy(gStringVar1, gUnknown_84178D0);
+                break;
+            case 2:
+                StringCopy(gStringVar1, gUnknown_84178DA);
+                break;
+            default:
+                StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);
+                break;
+        }
+    }
+    else
+    {
+        str = gStringVar1;
+        StringCopyN(str, src, 7);
+        str[7] = EOS;
+        if (   str[0] == EXT_CTRL_CODE_BEGIN
+            && str[1] == EXT_CTRL_CODE_JPN)
+        {
+            str += 2;
+            while (*str != EOS)
+                str++;
+            *str++ = EXT_CTRL_CODE_BEGIN;
+            *str++ = EXT_CTRL_CODE_ENG;
+            *str++ = EOS;
         }
     }
 }

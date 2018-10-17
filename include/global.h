@@ -237,7 +237,9 @@ struct SaveBlock2
     /*0x098*/ struct Time localTimeOffset;
     /*0x0A0*/ struct Time lastBerryTreeUpdate;
     /*0x0A8*/ u32 field_A8;
-    /*0x0AC*/ u8 filler_AC[0xE74];
+    /*0x0AC*/ u8 filler_AC[0x9ec];
+    /*0xA98*/ u8 unk_A98[2][16];
+    /*0xAB8*/ u8 filler_AB8[0x468];
     /*0xF20*/ u32 encryptionKey;
 };
 

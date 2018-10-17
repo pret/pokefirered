@@ -2161,7 +2161,7 @@ sub_815BC90: @ 815BC90
 	ldr r1, _0815BCD8 @ =gMain
 	ldr r0, _0815BCDC @ =sub_815BD58
 	str r0, [r1, 0x8]
-	bl copy_player_party_to_sav1
+	bl SavePlayerParty
 	bl sub_8159F40
 	movs r0, 0
 	bl PlayMapChosenOrBattleBGM
@@ -2243,7 +2243,7 @@ _0815BD54: .4byte sub_800FD9C
 	thumb_func_start sub_815BD58
 sub_815BD58: @ 815BD58
 	push {lr}
-	bl sub_804C230
+	bl LoadPlayerParty
 	ldr r0, _0815BD6C @ =gUnknown_2023E8A
 	ldrb r0, [r0]
 	cmp r0, 0x3

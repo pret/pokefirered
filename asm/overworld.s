@@ -421,7 +421,7 @@ _08054F40:
 	ldr r0, [r6]
 	adds r0, r1
 	adds r1, r5, 0
-	bl sub_804C588
+	bl ApplyNewEncryptionKeyToWord
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4439,7 +4439,7 @@ _08056E60:
 	thumb_func_start MoveSaveBlocks_ResetHeap_
 MoveSaveBlocks_ResetHeap_: @ 8056E74
 	push {lr}
-	bl sub_804C0A4
+	bl MoveSaveBlocks_ResetHeap
 	pop {r0}
 	bx r0
 	thumb_func_end MoveSaveBlocks_ResetHeap_

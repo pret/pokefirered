@@ -133,20 +133,9 @@ gUnknown_3004FFC: @ 3004FFC
 	.space 0x4
 
 	.include "random.o"
-	
+	.include "load_save.o"
+
 	.align 2
-gFlashMemoryPresent: @ 3005004
-	.space 0x4
-
-gSaveBlock1Ptr: @ 3005008
-	.space 0x4
-
-gSaveBlock2Ptr: @ 300500C
-	.space 0x4
-
-gPokemonStoragePtr: @ 3005010
-	.space 0x4
-
 gUnknown_3005014: @ 3005014
 	.space 0x4
 

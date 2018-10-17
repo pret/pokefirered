@@ -1924,8 +1924,8 @@ sub_8081668: @ 8081668
 	ands r0, r1
 	str r0, [r2]
 	bl sub_8055DB8
-	bl sub_804C230
-	bl sub_804C440
+	bl LoadPlayerParty
+	bl SavePlayerBag
 	bl sub_81134B8
 	ldr r0, _080816B8 @ =gUnknown_20370C0
 	ldrh r0, [r0]
@@ -2025,8 +2025,8 @@ sub_8081744: @ 8081744
 	cmp r1, 0x5
 	bne _08081760
 _08081758:
-	bl sub_804C230
-	bl sub_804C440
+	bl LoadPlayerParty
+	bl SavePlayerBag
 _08081760:
 	movs r0, 0x7F
 	bl copy_saved_warp2_bank_and_enter_x_to_warp1

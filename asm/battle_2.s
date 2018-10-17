@@ -8,7 +8,7 @@
 	thumb_func_start sub_800FD9C
 sub_800FD9C: @ 800FD9C
 	push {r4,lr}
-	bl sub_804C0A4
+	bl MoveSaveBlocks_ResetHeap
 	bl sub_802E03C
 	bl AllocateBattleSpritesData
 	bl AllocateMonSpritesGfx

@@ -4877,7 +4877,7 @@ _08120FAC: .4byte sub_8120FB0
 sub_8120FB0: @ 8120FB0
 	push {lr}
 	bl FreeRestoreBattleData
-	bl sub_804C230
+	bl LoadPlayerParty
 	bl sub_815AC20
 	ldr r0, _08120FC8 @ =sub_815ABFC
 	bl SetMainCallback2

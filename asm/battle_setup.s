@@ -579,7 +579,7 @@ _0807FAF4: .4byte gBattleTypeFlags
 	thumb_func_start sub_807FAF8
 sub_807FAF8: @ 807FAF8
 	push {lr}
-	bl sub_804C230
+	bl LoadPlayerParty
 	bl sub_807FB40
 	pop {r0}
 	bx r0
@@ -594,7 +594,7 @@ sub_807FB08: @ 807FB08
 	ldr r1, _0807FB38 @ =gMain
 	ldr r0, _0807FB3C @ =sub_807FAF8
 	str r0, [r1, 0x8]
-	bl copy_player_party_to_sav1
+	bl SavePlayerParty
 	bl sub_8159F40
 	bl GetWildBattleTransition
 	lsls r0, 24

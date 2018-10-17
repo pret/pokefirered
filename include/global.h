@@ -79,6 +79,12 @@ enum LanguageId {
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
+#define BAG_ITEMS_COUNT     42
+#define BAG_KEYITEMS_COUNT  30
+#define BAG_POKEBALLS_COUNT 13
+#define BAG_TMHM_COUNT      58
+#define BAG_BERRIES_COUNT   43
+
 enum
 {
     MALE,
@@ -532,23 +538,30 @@ struct SaveBlock1
     /*0x2F*/ u8 filler_2F;
     /*0x30*/ u8 flashLevel;
     /*0x32*/ u16 mapDataId;
-    /*0x34*/ u16 mapView[0x100];
     /*0x234*/ u8 playerPartyCount;
     /*0x238*/ struct Pokemon playerParty[PARTY_SIZE];
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
-    /*0x498*/ u8 filler_0498[0x1a0];
+	/*0x0298*/ u8 filler298[0x78];
+	/*0x0310*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+	/*0x????*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+	/*0x????*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+	/*0x????*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+	/*0x????*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+	/*0x05F8*/ u8 filler5F8[0x40];
     /*0x638*/ u8 trainerRematchStepCounter;
               u8 filler_639;
-    /*0x63a*/ u8 trainerRematches[100];
+    /*0x63A*/ u8 trainerRematches[100];
     /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
     /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
     /*0x0EE0*/ u8 flags[FLAGS_COUNT];
     /*0x1000*/ u16 vars[VARS_COUNT];
     /*0x1200*/ u8 filler1200[0x100];
     /*0x1300*/ struct QuestLog questLog[4];
-    /*0x2ca0*/ u8 filler2CA0[0x44C];
+    /*0x2CA0*/ u8 filler2CA0[0x30];
+	/*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];
+	/*0x2F10*/ u8 filler2F10[0x1DA];
 	/*0x30EC*/ struct EnigmaBerry enigmaBerry;
 	/*0x3120*/ u8 filler3120[0x340];
     /*0x3460*/ struct MysteryEventStruct unk_3460;
@@ -556,7 +569,8 @@ struct SaveBlock1
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[0x44];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
-    /*0x3A54*/ u8 filler3A54[0x314];
+    /*0x3A54*/ u8 filler3A54[0x2E4];
+               u32 unkArray[4][3];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

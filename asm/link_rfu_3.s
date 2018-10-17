@@ -3273,8 +3273,8 @@ sub_81173C0: @ 81173C0
 	lsls r6, 16
 	lsrs r6, 16
 	bl sp000_heal_pokemon
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	ldr r5, _0811742C @ =gLinkPlayers
 	ldr r0, _08117430 @ =0x00002211
 	str r0, [r5, 0x14]
@@ -3661,8 +3661,8 @@ _081177A0:
 	movs r1, 0x1
 	bl sub_8117594
 	bl sp000_heal_pokemon
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -3674,8 +3674,8 @@ _081177C4: .4byte gUnknown_2022618
 _081177C8:
 	bl sub_80563F0
 	bl sp000_heal_pokemon
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	ldr r0, _081177EC @ =gUnknown_2022618
 	movs r1, 0x1
 	bl sub_8117594
@@ -3690,8 +3690,8 @@ _081177EC: .4byte gUnknown_2022618
 _081177F0:
 	bl sub_80563F0
 	bl sp000_heal_pokemon
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	ldr r0, _08117814 @ =gUnknown_2022618
 	movs r1, 0x1
 	bl sub_8117594

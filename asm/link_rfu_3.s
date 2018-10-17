@@ -3273,8 +3273,8 @@ sub_81173C0: @ 81173C0
 	lsls r6, 16
 	lsrs r6, 16
 	bl sp000_heal_pokemon
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	ldr r5, _0811742C @ =gLinkPlayers
 	ldr r0, _08117430 @ =0x00002211
 	str r0, [r5, 0x14]
@@ -3661,8 +3661,8 @@ _081177A0:
 	movs r1, 0x1
 	bl sub_8117594
 	bl sp000_heal_pokemon
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -3674,8 +3674,8 @@ _081177C4: .4byte gUnknown_2022618
 _081177C8:
 	bl sub_80563F0
 	bl sp000_heal_pokemon
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	ldr r0, _081177EC @ =gUnknown_2022618
 	movs r1, 0x1
 	bl sub_8117594
@@ -3690,8 +3690,8 @@ _081177EC: .4byte gUnknown_2022618
 _081177F0:
 	bl sub_80563F0
 	bl sp000_heal_pokemon
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	ldr r0, _08117814 @ =gUnknown_2022618
 	movs r1, 0x1
 	bl sub_8117594
@@ -11378,7 +11378,7 @@ sub_811B66C: @ 811B66C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0811B6C0 @ =gUnknown_2036E38
+	ldr r1, _0811B6C0 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -11396,7 +11396,7 @@ sub_811B66C: @ 811B66C
 	.align 2, 0
 _0811B6B8: .4byte gUnknown_8457120
 _0811B6BC: .4byte gSaveBlock1Ptr
-_0811B6C0: .4byte gUnknown_2036E38
+_0811B6C0: .4byte gMapObjects
 _0811B6C4:
 	ldr r0, _0811B6DC @ =gUnknown_8457138	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
 	ldr r1, _0811B6E0 @ =0x00000183
@@ -11437,7 +11437,7 @@ sub_811B6E8: @ 811B6E8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0811B72C @ =gUnknown_2036E38
+	ldr r1, _0811B72C @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -11449,7 +11449,7 @@ sub_811B6E8: @ 811B6E8
 	.align 2, 0
 _0811B724: .4byte gUnknown_8457120
 _0811B728: .4byte gSaveBlock1Ptr
-_0811B72C: .4byte gUnknown_2036E38
+_0811B72C: .4byte gMapObjects
 _0811B730:
 	bl ScriptContext2_IsEnabled
 	lsls r0, 24

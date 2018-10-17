@@ -421,7 +421,7 @@ _08054F40:
 	ldr r0, [r6]
 	adds r0, r1
 	adds r1, r5, 0
-	bl sub_804C588
+	bl ApplyNewEncryptionKeyToWord
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4439,7 +4439,7 @@ _08056E60:
 	thumb_func_start MoveSaveBlocks_ResetHeap_
 MoveSaveBlocks_ResetHeap_: @ 8056E74
 	push {lr}
-	bl sub_804C0A4
+	bl MoveSaveBlocks_ResetHeap
 	pop {r0}
 	bx r0
 	thumb_func_end MoveSaveBlocks_ResetHeap_
@@ -4734,7 +4734,7 @@ sub_8057100: @ 8057100
 	thumb_func_start sub_8057114
 sub_8057114: @ 8057114
 	push {lr}
-	ldr r2, _08057138 @ =gUnknown_2036E38
+	ldr r2, _08057138 @ =gMapObjects
 	ldr r3, _0805713C @ =gUnknown_2037078
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
@@ -4750,7 +4750,7 @@ sub_8057114: @ 8057114
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057138: .4byte gUnknown_2036E38
+_08057138: .4byte gMapObjects
 _0805713C: .4byte gUnknown_2037078
 	thumb_func_end sub_8057114
 
@@ -7200,7 +7200,7 @@ SpawnLinkPlayerMapObject: @ 805839C
 	lsls r5, r6, 3
 	adds r5, r6
 	lsls r5, 2
-	ldr r0, _08058444 @ =gUnknown_2036E38
+	ldr r0, _08058444 @ =gMapObjects
 	adds r5, r0
 	adds r0, r4, 0
 	bl ZeroLinkPlayerMapObject
@@ -7248,7 +7248,7 @@ SpawnLinkPlayerMapObject: @ 805839C
 	bx r0
 	.align 2, 0
 _08058440: .4byte gUnknown_2031DEC
-_08058444: .4byte gUnknown_2036E38
+_08058444: .4byte gMapObjects
 	thumb_func_end SpawnLinkPlayerMapObject
 
 	thumb_func_start InitLinkPlayerMapObjectPos
@@ -7300,7 +7300,7 @@ sub_8058488: @ 8058488
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080584B4 @ =gUnknown_2036E38
+	ldr r0, _080584B4 @ =gMapObjects
 	adds r1, r0
 	strb r2, [r1, 0x19]
 _080584AA:
@@ -7308,7 +7308,7 @@ _080584AA:
 	bx r0
 	.align 2, 0
 _080584B0: .4byte gUnknown_2031DEC
-_080584B4: .4byte gUnknown_2036E38
+_080584B4: .4byte gMapObjects
 	thumb_func_end sub_8058488
 
 	thumb_func_start sub_80584B8
@@ -7322,7 +7322,7 @@ sub_80584B8: @ 80584B8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080584FC @ =gUnknown_2036E38
+	ldr r1, _080584FC @ =gMapObjects
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x4]
 	cmp r0, 0x40
@@ -7346,7 +7346,7 @@ _080584E4:
 	bx r0
 	.align 2, 0
 _080584F8: .4byte gUnknown_2031DEC
-_080584FC: .4byte gUnknown_2036E38
+_080584FC: .4byte gMapObjects
 _08058500: .4byte gSprites
 	thumb_func_end sub_80584B8
 
@@ -7360,13 +7360,13 @@ sub_8058504: @ 8058504
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058520 @ =gUnknown_2036E38
+	ldr r1, _08058520 @ =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	bx lr
 	.align 2, 0
 _0805851C: .4byte gUnknown_2031DEC
-_08058520: .4byte gUnknown_2036E38
+_08058520: .4byte gMapObjects
 	thumb_func_end sub_8058504
 
 	thumb_func_start sub_8058524
@@ -7379,7 +7379,7 @@ sub_8058524: @ 8058524
 	lsls r0, r3, 3
 	adds r0, r3
 	lsls r0, 2
-	ldr r3, _08058548 @ =gUnknown_2036E38
+	ldr r3, _08058548 @ =gMapObjects
 	adds r0, r3
 	ldrh r3, [r0, 0x10]
 	strh r3, [r1]
@@ -7388,7 +7388,7 @@ sub_8058524: @ 8058524
 	bx lr
 	.align 2, 0
 _08058544: .4byte gUnknown_2031DEC
-_08058548: .4byte gUnknown_2036E38
+_08058548: .4byte gMapObjects
 	thumb_func_end sub_8058524
 
 	thumb_func_start sub_805854C
@@ -7401,13 +7401,13 @@ sub_805854C: @ 805854C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058568 @ =gUnknown_2036E38
+	ldr r1, _08058568 @ =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0x19]
 	bx lr
 	.align 2, 0
 _08058564: .4byte gUnknown_2031DEC
-_08058568: .4byte gUnknown_2036E38
+_08058568: .4byte gMapObjects
 	thumb_func_end sub_805854C
 
 	thumb_func_start sub_805856C
@@ -7420,7 +7420,7 @@ sub_805856C: @ 805856C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805858C @ =gUnknown_2036E38
+	ldr r1, _0805858C @ =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0xB]
 	lsls r0, 28
@@ -7428,7 +7428,7 @@ sub_805856C: @ 805856C
 	bx lr
 	.align 2, 0
 _08058588: .4byte gUnknown_2031DEC
-_0805858C: .4byte gUnknown_2036E38
+_0805858C: .4byte gMapObjects
 	thumb_func_end sub_805856C
 
 	thumb_func_start sub_8058590
@@ -7441,7 +7441,7 @@ sub_8058590: @ 8058590
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080585B4 @ =gUnknown_2036E38
+	ldr r1, _080585B4 @ =gMapObjects
 	adds r0, r1
 	adds r0, 0x21
 	movs r1, 0
@@ -7451,7 +7451,7 @@ sub_8058590: @ 8058590
 	bx lr
 	.align 2, 0
 _080585B0: .4byte gUnknown_2031DEC
-_080585B4: .4byte gUnknown_2036E38
+_080585B4: .4byte gMapObjects
 	thumb_func_end sub_8058590
 
 	thumb_func_start GetLinkPlayerIdAt
@@ -7479,7 +7479,7 @@ _080585DA:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058600 @ =gUnknown_2036E38
+	ldr r1, _08058600 @ =gMapObjects
 	adds r1, r0, r1
 	movs r6, 0x10
 	ldrsh r0, [r1, r6]
@@ -7493,7 +7493,7 @@ _080585DA:
 	b _08058610
 	.align 2, 0
 _080585FC: .4byte gUnknown_2031DEC
-_08058600: .4byte gUnknown_2036E38
+_08058600: .4byte gMapObjects
 _08058604:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -7521,7 +7521,7 @@ sub_8058618: @ 8058618
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805864C @ =gUnknown_2036E38
+	ldr r1, _0805864C @ =gMapObjects
 	adds r6, r0, r1
 	ldrb r0, [r5]
 	cmp r0, 0
@@ -7535,7 +7535,7 @@ sub_8058618: @ 8058618
 	b _08058674
 	.align 2, 0
 _08058648: .4byte gUnknown_2031DEC
-_0805864C: .4byte gUnknown_2036E38
+_0805864C: .4byte gMapObjects
 _08058650:
 	ldr r4, _0805867C @ =gUnknown_826D374
 	ldr r1, _08058680 @ =gUnknown_826D33C
@@ -7780,7 +7780,7 @@ npc_080587EC: @ 80587EC
 	mov r12, r2
 	lsls r3, 16
 	movs r4, 0
-	ldr r0, _08058850 @ =gUnknown_2036E38
+	ldr r0, _08058850 @ =gMapObjects
 	mov r9, r0
 	lsrs r2, r3, 16
 	mov r10, r2
@@ -7820,7 +7820,7 @@ _0805884A:
 	movs r0, 0x1
 	b _0805886A
 	.align 2, 0
-_08058850: .4byte gUnknown_2036E38
+_08058850: .4byte gMapObjects
 _08058854:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -7857,7 +7857,7 @@ sub_8058878: @ 8058878
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080588B8 @ =gUnknown_2036E38
+	ldr r1, _080588B8 @ =gMapObjects
 	adds r4, r0, r1
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -7875,7 +7875,7 @@ sub_8058878: @ 8058878
 	b _080588C6
 	.align 2, 0
 _080588B4: .4byte gUnknown_2031DEC
-_080588B8: .4byte gUnknown_2036E38
+_080588B8: .4byte gMapObjects
 _080588BC:
 	ldrb r0, [r4]
 	lsls r0, 30
@@ -7931,7 +7931,7 @@ SpriteCB_LinkPlayer: @ 805890C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058974 @ =gUnknown_2036E38
+	ldr r1, _08058974 @ =gMapObjects
 	adds r6, r0, r1
 	ldrh r0, [r6, 0xC]
 	strh r0, [r5, 0x20]
@@ -7967,7 +7967,7 @@ SpriteCB_LinkPlayer: @ 805890C
 	b _0805898A
 	.align 2, 0
 _08058970: .4byte gUnknown_2031DEC
-_08058974: .4byte gUnknown_2036E38
+_08058974: .4byte gMapObjects
 _08058978:
 	ldrb r0, [r6, 0x19]
 	bl get_go_image_anim_num

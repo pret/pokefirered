@@ -604,7 +604,7 @@ SpawnScriptFieldObject: @ 80CAA34
 	bl SpawnSpecialFieldObjectParametrized
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080CAA84 @ =gUnknown_2036E38
+	ldr r2, _080CAA84 @ =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -620,7 +620,7 @@ SpawnScriptFieldObject: @ 80CAA34
 	bx r0
 	.align 2, 0
 _080CAA80: .4byte gSaveBlock1Ptr
-_080CAA84: .4byte gUnknown_2036E38
+_080CAA84: .4byte gMapObjects
 	thumb_func_end SpawnScriptFieldObject
 
 	thumb_func_start RemoveScriptFieldObject
@@ -3167,7 +3167,7 @@ sub_80CBE00: @ 80CBE00
 _080CBE18: .4byte gUnknown_20370DA
 _080CBE1C: .4byte gUnknown_3005074
 _080CBE20:
-	ldr r2, _080CBE4C @ =gUnknown_2036E38
+	ldr r2, _080CBE4C @ =gMapObjects
 	ldrb r1, [r1]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3191,7 +3191,7 @@ _080CBE48:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CBE4C: .4byte gUnknown_2036E38
+_080CBE4C: .4byte gMapObjects
 	thumb_func_end sub_80CBE00
 
 	thumb_func_start sub_80CBE50

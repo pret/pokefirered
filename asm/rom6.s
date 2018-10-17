@@ -23,7 +23,7 @@ npc_before_player_of_type: @ 80C97A8
 	bl GetFieldObjectIdByXYZ
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080C97EC @ =gUnknown_2036E38
+	ldr r2, _080C97EC @ =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -38,7 +38,7 @@ npc_before_player_of_type: @ 80C97A8
 	b _080C97F6
 	.align 2, 0
 _080C97E8: .4byte gUnknown_2039A04
-_080C97EC: .4byte gUnknown_2036E38
+_080C97EC: .4byte gMapObjects
 _080C97F0: .4byte gUnknown_20370D2
 _080C97F4:
 	movs r0, 0
@@ -80,7 +80,7 @@ task08_080C9820: @ 80C9820
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080C9878 @ =gUnknown_2036E38
+	ldr r1, _080C9878 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -108,7 +108,7 @@ _080C9856:
 	b _080C98A0
 	.align 2, 0
 _080C9874: .4byte gUnknown_2037078
-_080C9878: .4byte gUnknown_2036E38
+_080C9878: .4byte gMapObjects
 _080C987C: .4byte gMapHeader
 _080C9880: .4byte gTasks
 _080C9884: .4byte sub_80C98FC
@@ -144,7 +144,7 @@ sub_80C98B0: @ 80C98B0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080C98F0 @ =gUnknown_2036E38
+	ldr r1, _080C98F0 @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
@@ -166,7 +166,7 @@ _080C98E4:
 	bx r0
 	.align 2, 0
 _080C98EC: .4byte gUnknown_2037078
-_080C98F0: .4byte gUnknown_2036E38
+_080C98F0: .4byte gMapObjects
 _080C98F4: .4byte gTasks
 _080C98F8: .4byte sub_80C98FC
 	thumb_func_end sub_80C98B0
@@ -212,7 +212,7 @@ _080C993C:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _080C9990 @ =gUnknown_2036E38
+	ldr r0, _080C9990 @ =gMapObjects
 	adds r4, r0
 	bl GetPlayerAvatarGraphicsIdByCurrentState
 	adds r1, r0, 0
@@ -244,7 +244,7 @@ _080C9980:
 	.align 2, 0
 _080C9988: .4byte gUnknown_20386E0
 _080C998C: .4byte gUnknown_2037078
-_080C9990: .4byte gUnknown_2036E38
+_080C9990: .4byte gMapObjects
 _080C9994: .4byte gSprites
 _080C9998: .4byte gTasks
 _080C999C: .4byte sub_80C99A0

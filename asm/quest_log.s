@@ -3591,7 +3591,7 @@ sub_811246C: @ 811246C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _081124B0 @ =gUnknown_2036E38
+	ldr r1, _081124B0 @ =gMapObjects
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x8]
 	cmp r0, 0xFF
@@ -3618,7 +3618,7 @@ _081124A6:
 	bl sub_8063E28
 	b _081124E0
 	.align 2, 0
-_081124B0: .4byte gUnknown_2036E38
+_081124B0: .4byte gMapObjects
 _081124B4: .4byte gUnknown_203AF9A
 _081124B8:
 	ldr r5, _081124E8 @ =gUnknown_203AF9A

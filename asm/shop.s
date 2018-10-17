@@ -1889,7 +1889,7 @@ _0809B976:
 	ldr r1, _0809B9EC @ =gUnknown_20398B8
 	adds r0, r2, r1
 	strh r5, [r0]
-	ldr r1, _0809B9F0 @ =gUnknown_2036E38
+	ldr r1, _0809B9F0 @ =gMapObjects
 	lsls r0, r3, 3
 	adds r0, r3
 	lsls r0, 2
@@ -1910,7 +1910,7 @@ _0809B9E0: .4byte gUnknown_20398BA
 _0809B9E4: .4byte 0x0000fffd
 _0809B9E8: .4byte 0x0000fffe
 _0809B9EC: .4byte gUnknown_20398B8
-_0809B9F0: .4byte gUnknown_2036E38
+_0809B9F0: .4byte gMapObjects
 _0809B9F4:
 	cmp r0, 0x3
 	beq _0809BA06
@@ -1968,7 +1968,7 @@ sub_809BA40: @ 809BA40
 	sub sp, 0x4
 	movs r6, 0
 	ldr r7, _0809BAE8 @ =gUnknown_20398B4
-	ldr r0, _0809BAEC @ =gUnknown_2036E38
+	ldr r0, _0809BAEC @ =gMapObjects
 	mov r8, r0
 	adds r1, r7, 0x6
 	mov r9, r1
@@ -2045,7 +2045,7 @@ _0809BACE:
 	bx r0
 	.align 2, 0
 _0809BAE8: .4byte gUnknown_20398B4
-_0809BAEC: .4byte gUnknown_2036E38
+_0809BAEC: .4byte gMapObjects
 _0809BAF0: .4byte 0xfff80000
 _0809BAF4: .4byte SpriteCallbackDummy
 _0809BAF8: .4byte gSprites

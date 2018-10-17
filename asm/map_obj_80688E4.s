@@ -86,7 +86,7 @@ _0806896E:
 player_bitmagic: @ 8068974
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _080689A8 @ =gUnknown_2036E38
+	ldr r5, _080689A8 @ =gMapObjects
 _0806897A:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -112,7 +112,7 @@ _08068998:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080689A8: .4byte gUnknown_2036E38
+_080689A8: .4byte gMapObjects
 _080689AC: .4byte gUnknown_2037078
 	thumb_func_end player_bitmagic
 
@@ -122,7 +122,7 @@ FreezeMapObjectsExceptOne: @ 80689B0
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r6, _080689EC @ =gUnknown_2036E38
+	ldr r6, _080689EC @ =gMapObjects
 _080689BA:
 	cmp r4, r5
 	beq _080689DC
@@ -150,7 +150,7 @@ _080689DC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080689EC: .4byte gUnknown_2036E38
+_080689EC: .4byte gMapObjects
 _080689F0: .4byte gUnknown_2037078
 	thumb_func_end FreezeMapObjectsExceptOne
 
@@ -213,7 +213,7 @@ _08068A58: .4byte gSprites
 UnfreezeMapObjects: @ 8068A5C
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _08068A88 @ =gUnknown_2036E38
+	ldr r5, _08068A88 @ =gMapObjects
 _08068A62:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -235,7 +235,7 @@ _08068A78:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068A88: .4byte gUnknown_2036E38
+_08068A88: .4byte gMapObjects
 	thumb_func_end UnfreezeMapObjects
 
 	thumb_func_start little_step

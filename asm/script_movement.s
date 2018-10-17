@@ -480,7 +480,7 @@ _0809777C:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080977A8 @ =gUnknown_2036E38
+	ldr r1, _080977A8 @ =gMapObjects
 	adds r0, r1
 	bl npc_sync_anim_pause_bits
 _08097792:
@@ -495,7 +495,7 @@ _08097792:
 	bx r0
 	.align 2, 0
 _080977A4: .4byte gTasks+0x8
-_080977A8: .4byte gUnknown_2036E38
+_080977A8: .4byte gMapObjects
 	thumb_func_end UnfreezeObjects
 
 	thumb_func_start Task_80A244C
@@ -557,7 +557,7 @@ sub_80977F0: @ 80977F0
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _08097850 @ =gUnknown_2036E38
+	ldr r1, _08097850 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimActive
@@ -580,7 +580,7 @@ _08097838:
 	bl FreezeMapObject
 	b _0809786A
 	.align 2, 0
-_08097850: .4byte gUnknown_2036E38
+_08097850: .4byte gMapObjects
 _08097854:
 	adds r0, r4, 0
 	bl sub_8063CA4

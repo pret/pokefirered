@@ -79,6 +79,12 @@ enum LanguageId {
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
+#define BAG_ITEMS_COUNT     42
+#define BAG_KEYITEMS_COUNT  30
+#define BAG_POKEBALLS_COUNT 13
+#define BAG_TMHM_COUNT      58
+#define BAG_BERRIES_COUNT   43
+
 enum
 {
     MALE,
@@ -493,27 +499,41 @@ struct MysteryEventStruct
 
 struct SaveBlock1
 {
-    /*0x0000*/ u8 filler[0x4];
+    /*0x0000*/ struct Coords16 pos;
     /*0x0004*/ struct WarpData location;
-    /*0x0C*/ struct WarpData warp1;
-    /*0x14*/ struct WarpData warp2;
-    /*0x1C*/ struct WarpData lastHealLocation;
-    /*0x24*/ struct WarpData warp4;
-    /*0x002C*/ u8 filler2C[0x60C];
-    /*0x638*/ u8 trainerRematchStepCounter;
-              u8 filler_639;
-    /*0x63a*/ u8 trainerRematches[100];
-    /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
-    /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
-    /*0x0EE0*/ u8 fillerEE0[0x220A];
-	/*0x30EA*/ struct EnigmaBerry enigmaBerry;
-	/*0x3120*/ u8 filler3120[0x340];
+    /*0x000C*/ struct WarpData warp1;
+    /*0x0014*/ struct WarpData warp2;
+    /*0x001C*/ struct WarpData lastHealLocation;
+    /*0x0024*/ struct WarpData warp4;
+    /*0x002C*/ u8 filler2C[0x8];
+    /*0x0034*/ u8 playerPartyCount;
+    /*0x0038*/ struct Pokemon playerParty[PARTY_SIZE];
+    /*0x0290*/ u32 money;
+    /*0x0294*/ u16 coins;
+    /*0x0296*/ u8 filler296[0x7A];
+    /*0x0310*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+               struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+               struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+               struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+               struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+               u8 filler5F8[0x40];
+    /*0x0638*/ u8 trainerRematchStepCounter;
+               u8 filler_639;
+    /*0x063a*/ u8 trainerRematches[100];
+    /*0x06A0*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
+    /*0x08E0*/ struct MapObjectTemplate mapObjectTemplates[64];
+    /*0x0EE0*/ u8 fillerEE0[0x1DF0];
+    /*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];
+               u8 filler2F10[0x1DA];
+    /*0x30EA*/ struct EnigmaBerry enigmaBerry;
+    /*0x3120*/ u8 filler3120[0x340];
     /*0x3460*/ struct MysteryEventStruct unk_3460;
     /*0x3464*/ u8 filler_3464[0x1b8];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[0x44];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
-    /*0x3A54*/ u8 filler3A54[0x314];
+    /*0x3A54*/ u8 filler3A54[0x2E4];
+               u32 unkArray[4][3];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

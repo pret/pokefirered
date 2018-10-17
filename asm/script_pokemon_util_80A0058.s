@@ -442,7 +442,7 @@ sub_80A039C: @ 80A039C
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _080A03B8
-	bl sub_804C230
+	bl LoadPlayerParty
 	ldr r0, _080A03B4 @ =gUnknown_20370D0
 	strh r4, [r0]
 	b _080A03C2

@@ -579,7 +579,7 @@ _0807FAF4: .4byte gBattleTypeFlags
 	thumb_func_start sub_807FAF8
 sub_807FAF8: @ 807FAF8
 	push {lr}
-	bl sub_804C230
+	bl LoadPlayerParty
 	bl sub_807FB40
 	pop {r0}
 	bx r0
@@ -594,7 +594,7 @@ sub_807FB08: @ 807FB08
 	ldr r1, _0807FB38 @ =gMain
 	ldr r0, _0807FB3C @ =sub_807FAF8
 	str r0, [r1, 0x8]
-	bl copy_player_party_to_sav1
+	bl SavePlayerParty
 	bl sub_8159F40
 	bl GetWildBattleTransition
 	lsls r0, 24
@@ -1650,7 +1650,7 @@ TrainerWantsBattle: @ 8080334
 	ldr r2, _08080368 @ =gUnknown_3005074
 	strb r0, [r2]
 	ldr r4, _0808036C @ =gUnknown_20370D2
-	ldr r3, _08080370 @ =gUnknown_2036E38
+	ldr r3, _08080370 @ =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -1669,7 +1669,7 @@ TrainerWantsBattle: @ 8080334
 	.align 2, 0
 _08080368: .4byte gUnknown_3005074
 _0808036C: .4byte gUnknown_20370D2
-_08080370: .4byte gUnknown_2036E38
+_08080370: .4byte gMapObjects
 _08080374: .4byte gUnknown_81A4EB4
 	thumb_func_end TrainerWantsBattle
 
@@ -1698,7 +1698,7 @@ sub_8080398: @ 8080398
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _080803C8 @ =gUnknown_2036E38
+	ldr r0, _080803C8 @ =gMapObjects
 	adds r4, r0
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
@@ -1714,7 +1714,7 @@ sub_8080398: @ 8080398
 	bx r0
 	.align 2, 0
 _080803C4: .4byte gUnknown_3005074
-_080803C8: .4byte gUnknown_2036E38
+_080803C8: .4byte gMapObjects
 	thumb_func_end sub_8080398
 
 	thumb_func_start sub_80803CC

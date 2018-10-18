@@ -1254,7 +1254,7 @@ sub_811F430: @ 811F430
 	ldr r0, _0811F474 @ =gUnknown_20370D0
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _0811F478 @ =gUnknown_20370C2
+	ldr r0, _0811F478 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0xE
 	bhi _0811F492
@@ -1269,7 +1269,7 @@ _0811F468: .4byte gPlayerParty
 _0811F46C: .4byte gUnknown_203AD30
 _0811F470: .4byte gUnknown_203B0A0
 _0811F474: .4byte gUnknown_20370D0
-_0811F478: .4byte gUnknown_20370C2
+_0811F478: .4byte gSpecialVar_0x8005
 _0811F47C:
 	cmp r0, 0x3
 	bne _0811F492
@@ -2374,7 +2374,7 @@ _0811FCE8:
 	ands r0, r1
 	cmp r0, 0x7
 	bne _0811FD1A
-	ldr r4, _0811FD2C @ =gUnknown_20370C2
+	ldr r4, _0811FD2C @ =gSpecialVar_0x8005
 	movs r1, 0
 	ldrsb r1, [r5, r1]
 	movs r0, 0x64
@@ -2392,7 +2392,7 @@ _0811FD1A:
 	.align 2, 0
 _0811FD24: .4byte gUnknown_20370C0
 _0811FD28: .4byte gUnknown_203B0A0
-_0811FD2C: .4byte gUnknown_20370C2
+_0811FD2C: .4byte gSpecialVar_0x8005
 _0811FD30: .4byte gPlayerParty
 _0811FD34:
 	adds r0, r5, 0
@@ -3956,7 +3956,7 @@ sub_81208E4: @ 81208E4
 	adds r5, 0xE
 	movs r0, 0
 	strh r0, [r2, 0xE]
-	ldr r0, _08120938 @ =gUnknown_20370C2
+	ldr r0, _08120938 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08120944
@@ -3987,7 +3987,7 @@ _0812090C:
 	b _0812096E
 	.align 2, 0
 _08120934: .4byte gUnknown_203B0A0
-_08120938: .4byte gUnknown_20370C2
+_08120938: .4byte gSpecialVar_0x8005
 _0812093C: .4byte gPlayerPartyCount
 _08120940: .4byte gPlayerParty
 _08120944:
@@ -6625,7 +6625,7 @@ _08121DB0:
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 _08121DE8:
@@ -13661,7 +13661,7 @@ _08125620:
 	mov r0, r9
 	mov r1, r8
 	adds r3, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	cmp r5, 0
 	beq _08125680
 	mov r0, r10
@@ -16547,7 +16547,7 @@ sub_8126DC8: @ 8126DC8
 	ldr r1, _08126E58 @ =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNickname
-	ldr r4, _08126E5C @ =gUnknown_20370C2
+	ldr r4, _08126E5C @ =gSpecialVar_0x8005
 	ldrb r0, [r4]
 	bl sub_8120BA8
 	strh r0, [r7, 0xE]
@@ -16587,7 +16587,7 @@ _08126E4C: .4byte gUnknown_2037AB8
 _08126E50: .4byte gUnknown_203B0A0
 _08126E54: .4byte gPlayerParty
 _08126E58: .4byte gStringVar1
-_08126E5C: .4byte gUnknown_20370C2
+_08126E5C: .4byte gSpecialVar_0x8005
 _08126E60: .4byte gStringVar2
 _08126E64: .4byte gUnknown_8247094
 _08126E68: .4byte 0xffff0000
@@ -17836,7 +17836,7 @@ _08127818: .4byte sub_811FB28
 sub_812781C: @ 812781C
 	push {lr}
 	sub sp, 0xC
-	ldr r0, _08127844 @ =gUnknown_20370C2
+	ldr r0, _08127844 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0xE
 	bhi _08127850
@@ -17853,7 +17853,7 @@ sub_812781C: @ 812781C
 	bl sub_811EA44
 	b _08127870
 	.align 2, 0
-_08127844: .4byte gUnknown_20370C2
+_08127844: .4byte gSpecialVar_0x8005
 _08127848: .4byte sub_811FB28
 _0812784C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _08127850:

@@ -671,7 +671,7 @@ gUnknown_20370BE: @ 20370BE
 gUnknown_20370C0: @ 20370C0
 	.space 0x2
 
-gUnknown_20370C2: @ 20370C2
+gSpecialVar_0x8005: @ 20370C2
 	.space 0x2
 
 gUnknown_20370C4: @ 20370C4
@@ -1115,9 +1115,9 @@ gUnknown_2039988: @ 2039988
 gUnknown_203998C: @ 203998C
 	.space 0x4
 
-gUnknown_2039990: @ 2039990
-	.space 0x4
+	.include "src/money.o"
 
+	.align 2
 gUnknown_2039994: @ 2039994
 	.space 0x2
 
@@ -1220,9 +1220,9 @@ gUnknown_2039A20: @ 2039A20
 gUnknown_2039A24: @ 2039A24
 	.space 0x4
 
-gUnknown_2039A28: @ 2039A28
-	.space 0x4
+	.include "src/coins.o"
 
+	.align 2
 gUnknown_2039A2C: @ 2039A2C
 	.space 0x4
 

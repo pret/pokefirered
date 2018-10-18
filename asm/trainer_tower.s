@@ -1036,7 +1036,7 @@ sub_815DF54: @ 815DF54
 	adds r0, r3, r0
 _0815DF7C:
 	ldrb r1, [r0, 0x1B]
-	ldr r0, _0815DF98 @ =gUnknown_20370C2
+	ldr r0, _0815DF98 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	beq _0815DFD4
@@ -1048,7 +1048,7 @@ _0815DF7C:
 	.align 2, 0
 _0815DF90: .4byte gUnknown_20370C4
 _0815DF94: .4byte gUnknown_203F458
-_0815DF98: .4byte gUnknown_20370C2
+_0815DF98: .4byte gSpecialVar_0x8005
 _0815DF9C:
 	cmp r0, 0x4
 	beq _0815E000
@@ -1331,7 +1331,7 @@ _0815E1BC: .4byte sub_815E124
 	thumb_func_start sub_815E1C0
 sub_815E1C0: @ 815E1C0
 	push {lr}
-	ldr r0, _0815E1E4 @ =gUnknown_20370C2
+	ldr r0, _0815E1E4 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0815E1DE
@@ -1349,7 +1349,7 @@ _0815E1DE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E1E4: .4byte gUnknown_20370C2
+_0815E1E4: .4byte gSpecialVar_0x8005
 _0815E1E8: .4byte gUnknown_20370D0
 _0815E1EC: .4byte gUnknown_203F458
 	thumb_func_end sub_815E1C0
@@ -1443,7 +1443,7 @@ sub_815E28C: @ 815E28C
 	ldr r0, [r4]
 	ldr r5, _0815E2D4 @ =0x00003d34
 	adds r1, r0, r5
-	ldr r0, _0815E2D8 @ =gUnknown_20370C2
+	ldr r0, _0815E2D8 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	str r0, [r1]
 	cmp r0, 0x3
@@ -1471,7 +1471,7 @@ _0815E2A8:
 	.align 2, 0
 _0815E2D0: .4byte gSaveBlock1Ptr
 _0815E2D4: .4byte 0x00003d34
-_0815E2D8: .4byte gUnknown_20370C2
+_0815E2D8: .4byte gSpecialVar_0x8005
 _0815E2DC: .4byte 0x00003d42
 _0815E2E0:
 	ldr r1, [r4]
@@ -2034,7 +2034,7 @@ sub_815E720: @ 815E720
 	adds r0, r7, 0
 	movs r1, 0x2
 	movs r3, 0x4A
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	mov r8, r0
 	movs r1, 0xB8
@@ -2111,7 +2111,7 @@ _0815E76C:
 	adds r0, r7, 0
 	movs r1, 0x2
 	movs r3, 0x18
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r1, r10
 	lsrs r0, r1, 24
 	str r0, [sp]
@@ -2123,7 +2123,7 @@ _0815E76C:
 	movs r1, 0x2
 	ldr r2, _0815E87C @ =gStringVar4
 	movs r3, 0x60
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0xA0
 	lsls r0, 21
 	add r10, r0

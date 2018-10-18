@@ -5571,7 +5571,7 @@ sub_8131660: @ 8131660
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r0, r8
 	cmp r0, 0
 	bne _081316F4
@@ -5610,7 +5610,7 @@ _081316FA:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	lsls r4, 24
 	lsrs r4, 24
 	cmp r4, 0x3

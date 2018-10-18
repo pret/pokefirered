@@ -182,7 +182,7 @@ ScrSpecial_GetPokemonNicknameAndMoveName: @ 80BFA50
 	muls r5, r0
 	ldr r0, _080BFA94 @ =gPlayerParty
 	adds r5, r0
-	ldr r0, _080BFA98 @ =gUnknown_20370C2
+	ldr r0, _080BFA98 @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	adds r1, 0xD
 	adds r0, r5, 0
@@ -205,7 +205,7 @@ ScrSpecial_GetPokemonNicknameAndMoveName: @ 80BFA50
 	.align 2, 0
 _080BFA90: .4byte gUnknown_20370C0
 _080BFA94: .4byte gPlayerParty
-_080BFA98: .4byte gUnknown_20370C2
+_080BFA98: .4byte gSpecialVar_0x8005
 _080BFA9C: .4byte gStringVar1
 _080BFAA0: .4byte gStringVar2
 _080BFAA4: .4byte gUnknown_8247094
@@ -345,7 +345,7 @@ sub_80BFBA8: @ 80BFBA8
 	muls r0, r6
 	ldr r5, _080BFC0C @ =gPlayerParty
 	adds r0, r5
-	ldr r4, _080BFC10 @ =gUnknown_20370C2
+	ldr r4, _080BFC10 @ =gSpecialVar_0x8005
 	ldrb r2, [r4]
 	movs r1, 0
 	bl SetMonMoveSlot
@@ -384,7 +384,7 @@ _080BFBFC:
 	.align 2, 0
 _080BFC08: .4byte gUnknown_20370C0
 _080BFC0C: .4byte gPlayerParty
-_080BFC10: .4byte gUnknown_20370C2
+_080BFC10: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_80BFBA8
 
 	thumb_func_start sub_80BFC14

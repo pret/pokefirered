@@ -145,7 +145,7 @@ SECTIONS {
         asm/berry.o(.text);
         asm/script_menu.o(.text);
         asm/naming_screen.o(.text);
-        asm/money.o(.text);
+        src/money.o(.text);
         asm/script_pokemon_util_80A0058.o(.text);
         asm/field_poison.o(.text);
         asm/pokemon_size_record.o(.text);
@@ -173,7 +173,7 @@ SECTIONS {
         asm/field_specials.o(.text);
         asm/battle_records.o(.text);
         asm/evolution_scene.o(.text);
-        asm/coins.o(.text);
+        src/coins.o(.text);
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         asm/battle_controller_link_partner.o(.text);

@@ -1073,7 +1073,7 @@ sub_8088BD0: @ 8088BD0
 	str r0, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
@@ -1287,7 +1287,7 @@ _08088D9A:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24

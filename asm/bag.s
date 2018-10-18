@@ -188,7 +188,7 @@ sub_810B994: @ 810B994
 	movs r0, 0x2
 	movs r1, 0
 	adds r2, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -403,12 +403,12 @@ sub_810BB40: @ 810BB40
 	movs r1, 0xA4
 	lsls r1, 2
 	adds r0, r1
-	bl sub_809FD58
+	bl GetMoney
 	adds r3, r0, 0
 	adds r0, r4, 0
 	movs r1, 0x81
 	movs r2, 0xC
-	bl sub_809FF48
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	pop {r4}
 	pop {r0}
 	bx r0

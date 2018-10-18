@@ -3575,7 +3575,7 @@ _080FEEEC:
 	b _080FEF08
 _080FEEF4:
 	ldr r2, _080FEF18 @ =gSaveBlock1Ptr
-	ldr r0, _080FEF1C @ =gUnknown_20370C2
+	ldr r0, _080FEF1C @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3594,7 +3594,7 @@ _080FEF12:
 	bx r0
 	.align 2, 0
 _080FEF18: .4byte gSaveBlock1Ptr
-_080FEF1C: .4byte gUnknown_20370C2
+_080FEF1C: .4byte gSpecialVar_0x8005
 _080FEF20: .4byte 0x00002cd0
 _080FEF24: .4byte gUnknown_20370C0
 _080FEF28: .4byte sub_80568C4
@@ -7766,7 +7766,7 @@ _08100DAC:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	adds r2, r6, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}

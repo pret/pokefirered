@@ -2227,17 +2227,17 @@ _080E6A80:
 	ldr r0, [r6]
 	adds r0, r2
 	adds r0, r5
-	ldr r1, _080E6AA8 @ =gUnknown_20370C2
+	ldr r1, _080E6AA8 @ =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	strb r1, [r0]
 	b _080E6C80
 	.align 2, 0
 _080E6AA0: .4byte gBattleStruct
 _080E6AA4: .4byte 0x0000055e
-_080E6AA8: .4byte gUnknown_20370C2
+_080E6AA8: .4byte gSpecialVar_0x8005
 _080E6AAC:
 	ldr r2, [r6]
-	ldr r0, _080E6AC8 @ =gUnknown_20370C2
+	ldr r0, _080E6AC8 @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	ldr r3, _080E6ACC @ =0x0000055c
 	adds r2, r3
@@ -2251,7 +2251,7 @@ _080E6AAC:
 	strb r0, [r2]
 	b _080E6C80
 	.align 2, 0
-_080E6AC8: .4byte gUnknown_20370C2
+_080E6AC8: .4byte gSpecialVar_0x8005
 _080E6ACC: .4byte 0x0000055c
 _080E6AD0:
 	ldr r0, [r6]
@@ -2260,31 +2260,31 @@ _080E6AD0:
 	lsls r2, 3
 	adds r0, r2
 	adds r0, r1
-	ldr r1, _080E6AE0 @ =gUnknown_20370C2
+	ldr r1, _080E6AE0 @ =gSpecialVar_0x8005
 	b _080E6BC6
 	.align 2, 0
-_080E6AE0: .4byte gUnknown_20370C2
+_080E6AE0: .4byte gSpecialVar_0x8005
 _080E6AE4:
 	ldr r0, [r6]
 	lsls r1, r5, 1
 	ldr r3, _080E6AF4 @ =0x00000564
 	adds r0, r3
 	adds r0, r1
-	ldr r1, _080E6AF8 @ =gUnknown_20370C2
+	ldr r1, _080E6AF8 @ =gSpecialVar_0x8005
 	b _080E6BC6
 	.align 2, 0
 _080E6AF4: .4byte 0x00000564
-_080E6AF8: .4byte gUnknown_20370C2
+_080E6AF8: .4byte gSpecialVar_0x8005
 _080E6AFC:
 	ldr r0, [r6]
-	ldr r1, _080E6B0C @ =gUnknown_20370C2
+	ldr r1, _080E6B0C @ =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	ldr r2, _080E6B10 @ =0x0000056c
 	adds r0, r2
 	strb r1, [r0]
 	b _080E6C80
 	.align 2, 0
-_080E6B0C: .4byte gUnknown_20370C2
+_080E6B0C: .4byte gSpecialVar_0x8005
 _080E6B10: .4byte 0x0000056c
 _080E6B14:
 	movs r2, 0
@@ -2384,7 +2384,7 @@ _080E6BD0: .4byte 0x00000595
 _080E6BD4: .4byte gUnknown_20370D0
 _080E6BD8:
 	ldr r3, [r6]
-	ldr r0, _080E6BF8 @ =gUnknown_20370C2
+	ldr r0, _080E6BF8 @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	ldr r1, _080E6BFC @ =0x0000055c
 	adds r3, r1
@@ -2399,7 +2399,7 @@ _080E6BD8:
 	strb r0, [r3]
 	b _080E6C80
 	.align 2, 0
-_080E6BF8: .4byte gUnknown_20370C2
+_080E6BF8: .4byte gSpecialVar_0x8005
 _080E6BFC: .4byte 0x0000055c
 _080E6C00:
 	ldr r0, [r6]

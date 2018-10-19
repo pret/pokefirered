@@ -69,7 +69,7 @@ sub_808078C: @ 808078C
 	movs r1, 0x2
 	adds r2, r5, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2085,14 +2085,14 @@ _080817C0:
 	cmp r0, 0
 	beq _08081820
 	bl sub_8057F34
-	ldr r0, _080817DC @ =gUnknown_20370C2
+	ldr r0, _080817DC @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	bl sub_80096F8
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _08081820
 	.align 2, 0
-_080817DC: .4byte gUnknown_20370C2
+_080817DC: .4byte gSpecialVar_0x8005
 _080817E0:
 	bl sub_8057EC0
 	cmp r0, 0x1

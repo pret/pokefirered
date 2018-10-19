@@ -91,14 +91,14 @@ sub_80CA69C: @ 80CA69C
 	ldr r2, [r0]
 	ldrh r0, [r2]
 	strh r0, [r1]
-	ldr r1, _080CA6B8 @ =gUnknown_20370C2
+	ldr r1, _080CA6B8 @ =gSpecialVar_0x8005
 	ldrh r0, [r2, 0x2]
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
 _080CA6B0: .4byte gUnknown_20370C0
 _080CA6B4: .4byte gSaveBlock1Ptr
-_080CA6B8: .4byte gUnknown_20370C2
+_080CA6B8: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_80CA69C
 
 	thumb_func_start sub_80CA6BC
@@ -862,7 +862,7 @@ sub_80CAC28: @ 80CAC28
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _080CAC74 @ =gUnknown_20370C2
+	ldr r0, _080CAC74 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	movs r2, 0
 	strh r0, [r1, 0x8]
@@ -885,7 +885,7 @@ sub_80CAC28: @ 80CAC28
 	.align 2, 0
 _080CAC6C: .4byte sub_80CAC84
 _080CAC70: .4byte gTasks
-_080CAC74: .4byte gUnknown_20370C2
+_080CAC74: .4byte gSpecialVar_0x8005
 _080CAC78: .4byte gUnknown_20370C4
 _080CAC7C: .4byte gUnknown_20370C6
 _080CAC80: .4byte gUnknown_20370C0
@@ -1074,7 +1074,7 @@ sub_80CADC4: @ 80CADC4
 	movs r1, 0x2
 	add r2, sp, 0xC
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	bl sub_809D424
 	add sp, 0x10
 	pop {r0}
@@ -1094,7 +1094,7 @@ sub_80CADEC: @ 80CADEC
 	lsrs r2, r0, 16
 	ldr r1, _080CAE20 @ =gUnknown_20370C0
 	strh r2, [r1]
-	ldr r0, _080CAE24 @ =gUnknown_20370C2
+	ldr r0, _080CAE24 @ =gSpecialVar_0x8005
 	strh r2, [r0]
 	ldrh r0, [r1]
 	subs r0, 0x1
@@ -1109,7 +1109,7 @@ _080CAE14:
 	mov pc, r0
 	.align 2, 0
 _080CAE20: .4byte gUnknown_20370C0
-_080CAE24: .4byte gUnknown_20370C2
+_080CAE24: .4byte gSpecialVar_0x8005
 _080CAE28: .4byte _080CAE2C
 	.align 2, 0
 _080CAE2C:
@@ -1136,19 +1136,19 @@ _080CAE68:
 	ands r0, r1
 	cmp r0, 0
 	bne _080CAE84
-	ldr r1, _080CAE80 @ =gUnknown_20370C2
+	ldr r1, _080CAE80 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x1
 	b _080CB01A
 	.align 2, 0
-_080CAE80: .4byte gUnknown_20370C2
+_080CAE80: .4byte gSpecialVar_0x8005
 _080CAE84:
-	ldr r1, _080CAE8C @ =gUnknown_20370C2
+	ldr r1, _080CAE8C @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAE8C: .4byte gUnknown_20370C2
+_080CAE8C: .4byte gSpecialVar_0x8005
 _080CAE90:
 	bl Random
 	lsls r0, 16
@@ -1159,23 +1159,23 @@ _080CAE90:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	bne _080CAEB4
-	ldr r1, _080CAEB0 @ =gUnknown_20370C2
+	ldr r1, _080CAEB0 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x1
 	b _080CB01A
 	.align 2, 0
-_080CAEB0: .4byte gUnknown_20370C2
+_080CAEB0: .4byte gSpecialVar_0x8005
 _080CAEB4:
 	cmp r2, 0x1
 	beq _080CAEBA
 	b _080CB014
 _080CAEBA:
-	ldr r1, _080CAEC4 @ =gUnknown_20370C2
+	ldr r1, _080CAEC4 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAEC4: .4byte gUnknown_20370C2
+_080CAEC4: .4byte gSpecialVar_0x8005
 _080CAEC8:
 	bl Random
 	lsls r0, 16
@@ -1186,12 +1186,12 @@ _080CAEC8:
 	beq _080CAEDA
 	b _080CB014
 _080CAEDA:
-	ldr r1, _080CAEE4 @ =gUnknown_20370C2
+	ldr r1, _080CAEE4 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAEE4: .4byte gUnknown_20370C2
+_080CAEE4: .4byte gSpecialVar_0x8005
 _080CAEE8:
 	bl Random
 	lsls r0, 16
@@ -1202,28 +1202,28 @@ _080CAEE8:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	bne _080CAF0C
-	ldr r1, _080CAF08 @ =gUnknown_20370C2
+	ldr r1, _080CAF08 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	subs r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAF08: .4byte gUnknown_20370C2
+_080CAF08: .4byte gSpecialVar_0x8005
 _080CAF0C:
 	cmp r2, 0x1
 	bne _080CAF1C
-	ldr r1, _080CAF18 @ =gUnknown_20370C2
+	ldr r1, _080CAF18 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x1
 	b _080CB01A
 	.align 2, 0
-_080CAF18: .4byte gUnknown_20370C2
+_080CAF18: .4byte gSpecialVar_0x8005
 _080CAF1C:
-	ldr r1, _080CAF24 @ =gUnknown_20370C2
+	ldr r1, _080CAF24 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAF24: .4byte gUnknown_20370C2
+_080CAF24: .4byte gSpecialVar_0x8005
 _080CAF28:
 	bl Random
 	lsls r0, 16
@@ -1233,30 +1233,30 @@ _080CAF28:
 	lsrs r2, r1, 16
 	cmp r2, 0
 	bne _080CAF48
-	ldr r1, _080CAF44 @ =gUnknown_20370C2
+	ldr r1, _080CAF44 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	subs r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAF44: .4byte gUnknown_20370C2
+_080CAF44: .4byte gSpecialVar_0x8005
 _080CAF48:
 	cmp r2, 0x1
 	bne _080CAF58
-	ldr r1, _080CAF54 @ =gUnknown_20370C2
+	ldr r1, _080CAF54 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x1
 	b _080CB01A
 	.align 2, 0
-_080CAF54: .4byte gUnknown_20370C2
+_080CAF54: .4byte gSpecialVar_0x8005
 _080CAF58:
 	cmp r2, 0x2
 	bne _080CB014
-	ldr r1, _080CAF64 @ =gUnknown_20370C2
+	ldr r1, _080CAF64 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAF64: .4byte gUnknown_20370C2
+_080CAF64: .4byte gSpecialVar_0x8005
 _080CAF68:
 	bl Random
 	lsls r0, 16
@@ -1267,21 +1267,21 @@ _080CAF68:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	bne _080CAF8C
-	ldr r1, _080CAF88 @ =gUnknown_20370C2
+	ldr r1, _080CAF88 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	subs r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAF88: .4byte gUnknown_20370C2
+_080CAF88: .4byte gSpecialVar_0x8005
 _080CAF8C:
 	cmp r2, 0x1
 	bne _080CB014
-	ldr r1, _080CAF98 @ =gUnknown_20370C2
+	ldr r1, _080CAF98 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAF98: .4byte gUnknown_20370C2
+_080CAF98: .4byte gSpecialVar_0x8005
 _080CAF9C:
 	bl Random
 	lsls r0, 16
@@ -1290,19 +1290,19 @@ _080CAF9C:
 	ands r0, r1
 	cmp r0, 0
 	bne _080CAFB8
-	ldr r1, _080CAFB4 @ =gUnknown_20370C2
+	ldr r1, _080CAFB4 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	subs r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAFB4: .4byte gUnknown_20370C2
+_080CAFB4: .4byte gSpecialVar_0x8005
 _080CAFB8:
-	ldr r1, _080CAFC0 @ =gUnknown_20370C2
+	ldr r1, _080CAFC0 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x1
 	b _080CB01A
 	.align 2, 0
-_080CAFC0: .4byte gUnknown_20370C2
+_080CAFC0: .4byte gSpecialVar_0x8005
 _080CAFC4:
 	bl Random
 	lsls r0, 16
@@ -1313,21 +1313,21 @@ _080CAFC4:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	bne _080CAFE8
-	ldr r1, _080CAFE4 @ =gUnknown_20370C2
+	ldr r1, _080CAFE4 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	subs r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CAFE4: .4byte gUnknown_20370C2
+_080CAFE4: .4byte gSpecialVar_0x8005
 _080CAFE8:
 	cmp r2, 0x1
 	bne _080CB014
-	ldr r1, _080CAFF4 @ =gUnknown_20370C2
+	ldr r1, _080CAFF4 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	adds r0, 0x1
 	b _080CB01A
 	.align 2, 0
-_080CAFF4: .4byte gUnknown_20370C2
+_080CAFF4: .4byte gSpecialVar_0x8005
 _080CAFF8:
 	bl Random
 	lsls r0, 16
@@ -1336,20 +1336,20 @@ _080CAFF8:
 	ands r0, r1
 	cmp r0, 0
 	bne _080CB014
-	ldr r1, _080CB010 @ =gUnknown_20370C2
+	ldr r1, _080CB010 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	subs r0, 0x5
 	b _080CB01A
 	.align 2, 0
-_080CB010: .4byte gUnknown_20370C2
+_080CB010: .4byte gSpecialVar_0x8005
 _080CB014:
-	ldr r1, _080CB040 @ =gUnknown_20370C2
+	ldr r1, _080CB040 @ =gSpecialVar_0x8005
 	ldrh r0, [r1]
 	subs r0, 0x1
 _080CB01A:
 	strh r0, [r1]
 _080CB01C:
-	ldr r5, _080CB040 @ =gUnknown_20370C2
+	ldr r5, _080CB040 @ =gSpecialVar_0x8005
 	ldrh r0, [r5]
 	cmp r0, 0xF
 	bls _080CB04C
@@ -1367,7 +1367,7 @@ _080CB01C:
 	subs r0, r4, 0x1
 	b _080CB04A
 	.align 2, 0
-_080CB040: .4byte gUnknown_20370C2
+_080CB040: .4byte gSpecialVar_0x8005
 _080CB044: .4byte gUnknown_20370C0
 _080CB048:
 	adds r0, r4, 0x1
@@ -1955,7 +1955,7 @@ sub_80CB498: @ 80CB498
 	strh r3, [r4, 0x4]
 	movs r6, 0x1
 	strh r6, [r4, 0x8]
-	ldr r0, _080CB4D8 @ =gUnknown_20370C2
+	ldr r0, _080CB4D8 @ =gSpecialVar_0x8005
 	ldr r1, _080CB4DC @ =gUnknown_20370C4
 	ldrh r2, [r0]
 	ldrh r0, [r1]
@@ -1969,7 +1969,7 @@ sub_80CB498: @ 80CB498
 	.align 2, 0
 _080CB4D0: .4byte sub_80CB514
 _080CB4D4: .4byte gTasks+0x8
-_080CB4D8: .4byte gUnknown_20370C2
+_080CB4D8: .4byte gSpecialVar_0x8005
 _080CB4DC: .4byte gUnknown_20370C4
 _080CB4E0:
 	subs r0, r2
@@ -2088,9 +2088,9 @@ sub_80CB580: @ 80CB580
 	str r6, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r1, _080CB634 @ =gUnknown_83F5B44
-	ldr r0, _080CB638 @ =gUnknown_20370C2
+	ldr r0, _080CB638 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -2112,7 +2112,7 @@ sub_80CB580: @ 80CB580
 	adds r0, r1, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	ldrb r0, [r4]
@@ -2132,7 +2132,7 @@ _080CB628: .4byte gUnknown_83F5B3C
 _080CB62C: .4byte 0x0000021d
 _080CB630: .4byte gUnknown_8418075
 _080CB634: .4byte gUnknown_83F5B44
-_080CB638: .4byte gUnknown_20370C2
+_080CB638: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_80CB580
 
 	thumb_func_start sub_80CB63C
@@ -3895,16 +3895,16 @@ sub_80CC3CC: @ 80CC3CC
 	ldr r1, _080CC400 @ =0x0000ffff
 	cmp r6, r1
 	bls _080CC408
-	ldr r0, _080CC404 @ =gUnknown_20370C2
+	ldr r0, _080CC404 @ =gSpecialVar_0x8005
 	strh r1, [r0]
 	b _080CC40C
 	.align 2, 0
 _080CC3F8: .4byte gUnknown_20370C0
 _080CC3FC: .4byte gUnknown_20370C4
 _080CC400: .4byte 0x0000ffff
-_080CC404: .4byte gUnknown_20370C2
+_080CC404: .4byte gSpecialVar_0x8005
 _080CC408:
-	ldr r0, _080CC440 @ =gUnknown_20370C2
+	ldr r0, _080CC440 @ =gSpecialVar_0x8005
 	strh r6, [r0]
 _080CC40C:
 	adds r1, r0, 0
@@ -3937,7 +3937,7 @@ _080CC438:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CC440: .4byte gUnknown_20370C2
+_080CC440: .4byte gSpecialVar_0x8005
 _080CC444: .4byte gUnknown_20370C0
 _080CC448: .4byte gUnknown_20370C4
 	thumb_func_end sub_80CC3CC
@@ -4953,7 +4953,7 @@ _080CCBEA:
 	ldr r0, _080CCC24 @ =gStringVar2
 	ldr r1, _080CCC28 @ =gUnknown_82481BE
 	bl StringCopy
-	ldr r1, _080CCC2C @ =gUnknown_20370C2
+	ldr r1, _080CCC2C @ =gSpecialVar_0x8005
 	movs r0, 0xF
 	strh r0, [r1]
 	ldr r0, _080CCC30 @ =0x000002de
@@ -4963,7 +4963,7 @@ _080CCC1C: .4byte gUnknown_83F6203
 _080CCC20: .4byte gPlayerParty
 _080CCC24: .4byte gStringVar2
 _080CCC28: .4byte gUnknown_82481BE
-_080CCC2C: .4byte gUnknown_20370C2
+_080CCC2C: .4byte gSpecialVar_0x8005
 _080CCC30: .4byte 0x000002de
 _080CCC34:
 	cmp r7, 0x1
@@ -4971,7 +4971,7 @@ _080CCC34:
 	ldr r0, _080CCC4C @ =gStringVar2
 	ldr r1, _080CCC50 @ =gUnknown_824802B
 	bl StringCopy
-	ldr r1, _080CCC54 @ =gUnknown_20370C2
+	ldr r1, _080CCC54 @ =gSpecialVar_0x8005
 	movs r0, 0x10
 	strh r0, [r1]
 	ldr r0, _080CCC58 @ =0x000002df
@@ -4979,13 +4979,13 @@ _080CCC34:
 	.align 2, 0
 _080CCC4C: .4byte gStringVar2
 _080CCC50: .4byte gUnknown_824802B
-_080CCC54: .4byte gUnknown_20370C2
+_080CCC54: .4byte gSpecialVar_0x8005
 _080CCC58: .4byte 0x000002df
 _080CCC5C:
 	ldr r0, _080CCC80 @ =gStringVar2
 	ldr r1, _080CCC84 @ =gUnknown_8248038
 	bl StringCopy
-	ldr r1, _080CCC88 @ =gUnknown_20370C2
+	ldr r1, _080CCC88 @ =gSpecialVar_0x8005
 	movs r0, 0x11
 	strh r0, [r1]
 	movs r0, 0xB8
@@ -5002,7 +5002,7 @@ _080CCC7A:
 	.align 2, 0
 _080CCC80: .4byte gStringVar2
 _080CCC84: .4byte gUnknown_8248038
-_080CCC88: .4byte gUnknown_20370C2
+_080CCC88: .4byte gSpecialVar_0x8005
 _080CCC8C:
 	movs r0, 0x64
 	mov r1, r8
@@ -5064,7 +5064,7 @@ _080CCCF4: .4byte gUnknown_20370C4
 sub_80CCCF8: @ 80CCCF8
 	push {r4,lr}
 	movs r4, 0
-	ldr r0, _080CCD0C @ =gUnknown_20370C2
+	ldr r0, _080CCD0C @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0xF
 	bne _080CCD14
@@ -5072,7 +5072,7 @@ sub_80CCCF8: @ 80CCCF8
 	bl FlagSet
 	b _080CCD2C
 	.align 2, 0
-_080CCD0C: .4byte gUnknown_20370C2
+_080CCD0C: .4byte gSpecialVar_0x8005
 _080CCD10: .4byte 0x000002de
 _080CCD14:
 	cmp r0, 0x10
@@ -5537,7 +5537,7 @@ sub_80CD098: @ 80CD098
 	ldrh r3, [r0]
 	cmp r3, 0
 	bne _080CD0E0
-	ldr r0, _080CD0D8 @ =gUnknown_20370C2
+	ldr r0, _080CD0D8 @ =gSpecialVar_0x8005
 	ldrh r2, [r0]
 	str r3, [sp]
 	movs r0, 0
@@ -5550,7 +5550,7 @@ sub_80CD098: @ 80CD098
 _080CD0CC: .4byte gUnknown_203ADFA
 _080CD0D0: .4byte gUnknown_20370C0
 _080CD0D4: .4byte gUnknown_20370C4
-_080CD0D8: .4byte gUnknown_20370C2
+_080CD0D8: .4byte gSpecialVar_0x8005
 _080CD0DC: .4byte gUnknown_2039A1B
 _080CD0E0:
 	ldr r0, _080CD0F0 @ =gUnknown_2039A1B
@@ -5694,7 +5694,7 @@ sub_80CD1CC: @ 80CD1CC
 	strh r0, [r4, 0x2]
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
-	ldr r0, _080CD220 @ =gUnknown_20370C2
+	ldr r0, _080CD220 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r1, r0
 	bne _080CD200
@@ -5721,7 +5721,7 @@ _080CD214:
 	bx r0
 	.align 2, 0
 _080CD21C: .4byte gTasks+0x8
-_080CD220: .4byte gUnknown_20370C2
+_080CD220: .4byte gSpecialVar_0x8005
 _080CD224: .4byte gUnknown_20370C0
 	thumb_func_end sub_80CD1CC
 

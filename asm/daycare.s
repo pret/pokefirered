@@ -601,14 +601,14 @@ GetDaycareCost: @ 8045838
 	ldr r1, _08045858 @ =gUnknown_20370C0
 	ldrb r1, [r1]
 	bl GetDaycareCostForMon
-	ldr r1, _0804585C @ =gUnknown_20370C2
+	ldr r1, _0804585C @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08045854: .4byte gSaveBlock1Ptr
 _08045858: .4byte gUnknown_20370C0
-_0804585C: .4byte gUnknown_20370C2
+_0804585C: .4byte gSpecialVar_0x8005
 	thumb_func_end GetDaycareCost
 
 	thumb_func_start sub_8045860
@@ -3146,14 +3146,14 @@ sub_8046B70: @ 8046B70
 	ldr r1, _08046B8C @ =0x00003c98
 	adds r0, r1
 	bl GetDaycareCostForSelectedMon
-	ldr r1, _08046B90 @ =gUnknown_20370C2
+	ldr r1, _08046B90 @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08046B88: .4byte gSaveBlock1Ptr
 _08046B8C: .4byte 0x00003c98
-_08046B90: .4byte gUnknown_20370C2
+_08046B90: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_8046B70
 
 	thumb_func_start sub_8046B94

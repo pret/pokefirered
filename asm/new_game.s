@@ -247,7 +247,7 @@ sub_8054A60: @ 8054A60
 	lsls r1, 2
 	adds r0, r1
 	ldr r1, _08054B60 @ =0x00000bb8
-	bl sub_809FD70
+	bl SetMoney
 	bl sub_8054E68
 	bl InitLinkBattleRecords
 	bl sub_80A0904

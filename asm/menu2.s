@@ -275,7 +275,7 @@ _0812E70A:
 	mov r0, r8
 	movs r1, 0x2
 	adds r2, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _0812E75C
 	.align 2, 0
 _0812E734: .4byte gSaveBlock2Ptr

@@ -787,7 +787,7 @@ gUnknown_84162B9:: @ 84162B9
 gUnknown_84162BD:: @ 84162BD
 	.incbin "baserom.gba", 0x4162BD, 0x7
 
-gUnknown_84162C4:: @ 84162C4
+gText_Coins:: @ 84162C4
 	.incbin "baserom.gba", 0x4162C4, 0x24
 
 gUnknown_84162E8:: @ 84162E8
@@ -940,7 +940,7 @@ gUnknown_8416936:: @ 8416936
 gUnknown_8416959:: @ 8416959
 	.incbin "baserom.gba", 0x416959, 0x21
 
-gUnknown_841697A:: @ 841697A
+gText_PokedollarVar1:: @ 841697A
 	.incbin "baserom.gba", 0x41697A, 0x48
 
 gUnknown_84169C2:: @ 84169C2

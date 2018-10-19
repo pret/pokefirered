@@ -191,7 +191,7 @@ sub_806EE7C: @ 806EE7C
 	movs r1, 0x2
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -306,7 +306,7 @@ _0806EFA8:
 	movs r1, 0x2
 	mov r2, r9
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _0806EFDA:
 	movs r0, 0x80
 	lsls r0, 9

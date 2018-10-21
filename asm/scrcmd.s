@@ -3956,7 +3956,7 @@ _0806BC16:
 	movs r1, 0x6
 	adds r2, r4, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	add sp, 0xC
 	pop {r4,r5}
@@ -4699,10 +4699,10 @@ sub_806C1CC: @ 806C1CC
 	movs r1, 0xA4
 	lsls r1, 2
 	adds r0, r1
-	bl sub_809FD58
+	bl GetMoney
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_809FFB8
+	bl DrawMoneyBox
 _0806C20A:
 	movs r0, 0
 	pop {r4,r5}
@@ -4716,7 +4716,7 @@ _0806C218: .4byte gSaveBlock1Ptr
 	thumb_func_start sub_806C21C
 sub_806C21C: @ 806C21C
 	push {lr}
-	bl sub_80A0034
+	bl HideMoneyBox
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -4739,8 +4739,8 @@ sub_806C228: @ 806C228
 	movs r1, 0xA4
 	lsls r1, 2
 	adds r0, r1
-	bl sub_809FD58
-	bl sub_809FFA0
+	bl GetMoney
+	bl ChangeAmountInMoneyBox
 _0806C24E:
 	movs r0, 0
 	pop {r1}
@@ -4765,12 +4765,12 @@ sub_806C258: @ 806C258
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806C286
-	bl sub_80D0554
+	bl GetCoins
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80D072C
+	bl ShowCoinsWindow
 _0806C286:
 	movs r0, 0
 	pop {r4,r5}
@@ -4786,7 +4786,7 @@ ScrCmd_hidecoinsbox: @ 806C294
 	ldr r1, [r0, 0x8]
 	adds r1, 0x2
 	str r1, [r0, 0x8]
-	bl sub_80D07C8
+	bl HideCoinsWindow
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -4798,10 +4798,10 @@ ScrCmd_updatecoinsbox: @ 806C2A8
 	ldr r1, [r0, 0x8]
 	adds r1, 0x2
 	str r1, [r0, 0x8]
-	bl sub_80D0554
+	bl GetCoins
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80D06D0
+	bl PrintCoinsString
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -5430,7 +5430,7 @@ ScrCmd_checkcoins: @ 806C72C
 	lsrs r0, 16
 	bl sub_806E454
 	adds r4, r0, 0
-	bl sub_80D0554
+	bl GetCoins
 	strh r0, [r4]
 	movs r0, 0
 	pop {r4}
@@ -5447,7 +5447,7 @@ ScrCmd_givecoins: @ 806C74C
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80D05A4
+	bl GiveCoins
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5478,7 +5478,7 @@ ScrCmd_takecoins: @ 806C784
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80D05E4
+	bl TakeCoins
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

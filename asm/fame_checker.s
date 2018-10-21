@@ -2239,7 +2239,7 @@ sub_812D5EC: @ 812D5EC
 	ldrh r0, [r1]
 	cmp r0, 0xF
 	bhi _0812D632
-	ldr r5, _0812D63C @ =gUnknown_20370C2
+	ldr r5, _0812D63C @ =gSpecialVar_0x8005
 	ldrh r0, [r5]
 	cmp r0, 0x5
 	bhi _0812D632
@@ -2274,7 +2274,7 @@ _0812D632:
 	bx r0
 	.align 2, 0
 _0812D638: .4byte gUnknown_20370C0
-_0812D63C: .4byte gUnknown_20370C2
+_0812D63C: .4byte gSpecialVar_0x8005
 _0812D640: .4byte gSaveBlock1Ptr
 _0812D644: .4byte 0x00003a54
 _0812D648: .4byte 0x00000fff
@@ -2288,7 +2288,7 @@ sub_812D650: @ 812D650
 	ldrh r0, [r1]
 	cmp r0, 0xF
 	bhi _0812D69E
-	ldr r0, _0812D6A8 @ =gUnknown_20370C2
+	ldr r0, _0812D6A8 @ =gSpecialVar_0x8005
 	ldrh r4, [r0]
 	adds r0, r4, 0
 	cmp r0, 0x2
@@ -2329,7 +2329,7 @@ _0812D69E:
 	bx r0
 	.align 2, 0
 _0812D6A4: .4byte gUnknown_20370C0
-_0812D6A8: .4byte gUnknown_20370C2
+_0812D6A8: .4byte gSpecialVar_0x8005
 _0812D6AC: .4byte gSaveBlock1Ptr
 _0812D6B0: .4byte 0x00003a54
 	thumb_func_end sub_812D650

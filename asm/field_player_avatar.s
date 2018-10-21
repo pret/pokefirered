@@ -4452,7 +4452,7 @@ _0805D4D4:
 	str r5, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0x2
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]

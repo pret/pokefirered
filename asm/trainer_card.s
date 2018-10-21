@@ -441,7 +441,7 @@ _0808937A:
 	str r0, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1007,7 +1007,7 @@ _080897EE:
 	movs r1, 0xA4
 	lsls r1, 2
 	adds r0, r1
-	bl sub_809FD58
+	bl GetMoney
 	str r0, [r5, 0x24]
 	movs r2, 0
 	adds r7, r5, 0

@@ -30,5 +30,5 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 [poketcg]: https://github.com/pret/poketcg
 [pokeruby]: https://github.com/pret/pokeruby
 [pokeemerald]: https://github.com/pret/pokeemerald
-[Discord]: https://discord.gg/cJxDDVP
+[Discord]: https://discord.gg/6EuWgX9
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret

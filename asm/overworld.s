@@ -52,7 +52,7 @@ sub_8054C04: @ 8054C04
 	movs r1, 0xA4
 	lsls r1, 2
 	adds r0, r1
-	bl sub_809FD58
+	bl GetMoney
 	cmp r4, r0
 	bls _08054C38
 	adds r4, r0, 0

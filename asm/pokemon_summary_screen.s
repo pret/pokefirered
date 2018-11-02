@@ -9734,7 +9734,7 @@ _08139584:
 	ldr r0, _081395A4 @ =gUnknown_203B16D
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r1, _081395AC @ =gUnknown_20370C2
+	ldr r1, _081395AC @ =gSpecialVar_0x8005
 	ldrb r0, [r2]
 	strh r0, [r1]
 	ldr r0, _081395B0 @ =gUnknown_203B140
@@ -9745,7 +9745,7 @@ _08139584:
 	.align 2, 0
 _081395A4: .4byte gUnknown_203B16D
 _081395A8: .4byte gUnknown_203B16E
-_081395AC: .4byte gUnknown_20370C2
+_081395AC: .4byte gSpecialVar_0x8005
 _081395B0: .4byte gUnknown_203B140
 _081395B4: .4byte 0x00003288
 _081395B8:
@@ -9771,7 +9771,7 @@ _081395DE:
 	ldr r1, _081395F8 @ =gUnknown_203B16E
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r1, _081395FC @ =gUnknown_20370C2
+	ldr r1, _081395FC @ =gSpecialVar_0x8005
 	movs r0, 0x4
 	strh r0, [r1]
 	ldr r0, [r5]
@@ -9783,7 +9783,7 @@ _081395F0:
 	b _0813975A
 	.align 2, 0
 _081395F8: .4byte gUnknown_203B16E
-_081395FC: .4byte gUnknown_20370C2
+_081395FC: .4byte gSpecialVar_0x8005
 _08139600: .4byte 0x00003288
 _08139604:
 	bl sub_8136F4C

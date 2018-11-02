@@ -14,18 +14,18 @@ sub_80CA3D8: @ 80CA3D8
 	bne _080CA3FC
 	movs r0, 0
 	bl sub_8088EDC
-	ldr r1, _080CA3F8 @ =gUnknown_20370C2
+	ldr r1, _080CA3F8 @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	movs r0, 0x1
 	bl sub_8088EDC
 	b _080CA40C
 	.align 2, 0
 _080CA3F4: .4byte gUnknown_20370C0
-_080CA3F8: .4byte gUnknown_20370C2
+_080CA3F8: .4byte gSpecialVar_0x8005
 _080CA3FC:
 	movs r0, 0
 	bl pokedex_count
-	ldr r1, _080CA41C @ =gUnknown_20370C2
+	ldr r1, _080CA41C @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	movs r0, 0x1
 	bl pokedex_count
@@ -38,7 +38,7 @@ _080CA40C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CA41C: .4byte gUnknown_20370C2
+_080CA41C: .4byte gSpecialVar_0x8005
 _080CA420: .4byte gUnknown_20370C4
 	thumb_func_end sub_80CA3D8
 

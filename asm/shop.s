@@ -1189,7 +1189,7 @@ _0809B450:
 	cmp r0, 0
 	bne _0809B450
 _0809B45C:
-	ldr r1, _0809B490 @ =gUnknown_841697A
+	ldr r1, _0809B490 @ =gText_PokedollarVar1
 	adds r0, r2, 0
 	bl StringExpandPlaceholders
 	ldr r2, _0809B48C @ =gStringVar4
@@ -1213,7 +1213,7 @@ _0809B480:
 	.align 2, 0
 _0809B488: .4byte gStringVar1
 _0809B48C: .4byte gStringVar4
-_0809B490: .4byte gUnknown_841697A
+_0809B490: .4byte gText_PokedollarVar1
 	thumb_func_end sub_809B408
 
 	thumb_func_start sub_809B494
@@ -2111,7 +2111,7 @@ sub_809BB44: @ 809BB44
 	movs r0, 0x3
 	movs r1, 0x36
 	movs r2, 0xA
-	bl sub_809FEC4
+	bl PrintMoneyAmount
 	ldr r0, _0809BBB4 @ =gStringVar1
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -2301,7 +2301,7 @@ sub_809BCA0: @ 809BCA0
 	movs r1, 0xA4
 	lsls r1, 2
 	adds r0, r1
-	bl sub_809FD58
+	bl GetMoney
 	adds r4, r0, 0
 	ldrh r0, [r5, 0xA]
 	bl itemid_get_market_price
@@ -2539,11 +2539,11 @@ sub_809BF0C: @ 809BF0C
 	bl PlaySE
 	ldr r0, [r6]
 	adds r0, r5
-	bl sub_809FD58
+	bl GetMoney
 	adds r1, r0, 0
 	movs r0, 0
 	movs r2, 0
-	bl sub_809FE40
+	bl PrintMoneyAmountInMoneyBox
 	ldr r1, _0809BF60 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4

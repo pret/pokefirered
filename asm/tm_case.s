@@ -2380,7 +2380,7 @@ sub_8132B5C: @ 8132B5C
 	movs r1, 0x38
 	movs r2, 0xA
 	adds r3, r6, 0
-	bl sub_809FEC4
+	bl PrintMoneyAmount
 	add sp, 0x14
 	pop {r4-r6}
 	pop {r0}
@@ -2612,11 +2612,11 @@ sub_8132D34: @ 8132D34
 	bl sub_8131F90
 	ldr r0, [r7]
 	add r0, r10
-	bl sub_809FD58
+	bl GetMoney
 	adds r1, r0, 0
 	movs r0, 0x8
 	movs r2, 0
-	bl sub_809FE40
+	bl PrintMoneyAmountInMoneyBox
 	movs r2, 0x8
 	negs r2, r2
 	add r9, r2
@@ -3587,12 +3587,12 @@ sub_81335E0: @ 81335E0
 	movs r1, 0xA4
 	lsls r1, 2
 	adds r0, r1
-	bl sub_809FD58
+	bl GetMoney
 	adds r3, r0, 0
 	movs r0, 0x8
 	movs r1, 0x78
 	movs r2, 0xD
-	bl sub_809FF48
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	pop {r0}
 	bx r0
 	.align 2, 0

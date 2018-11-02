@@ -5159,7 +5159,7 @@ _0814A0EA:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x2
@@ -5245,7 +5245,7 @@ _0814A196:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x2
@@ -5366,7 +5366,7 @@ _0814A286:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x2
@@ -5448,7 +5448,7 @@ _0814A32A:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x2
@@ -5676,7 +5676,7 @@ _0814A4C2:
 	str r1, [sp, 0x4]
 	str r3, [sp, 0x8]
 	movs r1, 0x2
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x2
@@ -5734,7 +5734,7 @@ sub_814A53C: @ 814A53C
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x2
@@ -5789,7 +5789,7 @@ sub_814A5B4: @ 814A5B4
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x2

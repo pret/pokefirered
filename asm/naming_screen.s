@@ -3498,7 +3498,7 @@ sub_809F49C: @ 809F49C
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -3553,7 +3553,7 @@ sub_809F4F0: @ 809F4F0
 	movs r1, 0x1
 	add r2, sp, 0xC
 	movs r3, 0x1
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -4123,7 +4123,7 @@ _0809F97A:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	add r2, sp, 0xC
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24

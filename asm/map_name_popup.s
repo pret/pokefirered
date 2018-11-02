@@ -429,7 +429,7 @@ _08098434:
 	movs r1, 0x2
 	add r2, sp, 0xC
 	adds r3, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0x28
 	pop {r4-r6}
 	pop {r0}

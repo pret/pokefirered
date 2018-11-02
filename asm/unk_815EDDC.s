@@ -303,7 +303,7 @@ sub_815EFBC: @ 815EFBC
 	movs r1, 0
 	mov r2, r9
 	mov r3, r8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -345,7 +345,7 @@ sub_815F014: @ 815F014
 	adds r0, r6, 0
 	movs r1, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	str r4, [sp]
 	adds r0, r6, 0
 	mov r1, r8

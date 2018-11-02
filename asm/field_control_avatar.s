@@ -1160,7 +1160,7 @@ _0806D17A:
 	ldr r0, [r5, 0x8]
 	movs r1, 0
 	bl sub_80CC44C
-	ldr r1, _0806D1C4 @ =gUnknown_20370C2
+	ldr r1, _0806D1C4 @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	ldr r0, [r5, 0x8]
 	movs r1, 0x1
@@ -1183,7 +1183,7 @@ _0806D17A:
 	ldr r0, _0806D1D4 @ =gUnknown_81A6843
 	b _0806D1E6
 	.align 2, 0
-_0806D1C4: .4byte gUnknown_20370C2
+_0806D1C4: .4byte gSpecialVar_0x8005
 _0806D1C8: .4byte gUnknown_20370C0
 _0806D1CC: .4byte gUnknown_20370C4
 _0806D1D0: .4byte gUnknown_20370D4

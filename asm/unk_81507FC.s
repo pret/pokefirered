@@ -6493,7 +6493,7 @@ sub_81538D0: @ 81538D0
 	adds r0, r7, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r4, 0
 	add r2, sp, 0x18
 	mov r8, r2
@@ -6536,7 +6536,7 @@ _08153946:
 	adds r0, r7, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r3, 0xE0
 	subs r3, r5
 	lsls r3, 24
@@ -6552,7 +6552,7 @@ _08153946:
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r2, r8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r4, r6, 0
 	cmp r4, 0x2
 	ble _08153946
@@ -9290,7 +9290,7 @@ _08154E70:
 	str r3, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
@@ -9342,7 +9342,7 @@ _08154EC8:
 	add r2, sp, 0xC
 	ldr r4, [sp, 0x6C]
 	lsrs r3, r4, 24
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r1, _08154F70 @ =gUnknown_203F440
 	ldr r0, [r1]
 	add r0, r10
@@ -9356,7 +9356,7 @@ _08154EC8:
 	str r1, [sp, 0x8]
 	ldr r2, _08154F68 @ =gUnknown_841CE1C
 	lsrs r3, 24
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -9512,7 +9512,7 @@ _08155060:
 	str r5, [sp, 0x8]
 	movs r1, 0
 	mov r2, r8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r4]
 	add r0, r9
 	ldrb r0, [r0]
@@ -9523,7 +9523,7 @@ _08155060:
 	str r5, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0x44
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	mov r9, r0
 	ldr r1, [sp, 0x84]
@@ -9657,7 +9657,7 @@ _081551D0:
 	movs r1, 0
 	str r1, [sp, 0x8]
 	add r2, sp, 0xC
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _081551FA:
 	adds r0, r7, 0x1
 	lsls r0, 24
@@ -9795,7 +9795,7 @@ _081552DC:
 	movs r1, 0
 	str r1, [sp, 0x8]
 	adds r2, r6, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _08155658
 	.align 2, 0
 _08155330: .4byte gUnknown_203F440
@@ -9982,7 +9982,7 @@ _08155480:
 	str r6, [sp, 0x8]
 	movs r1, 0
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	bl UnkTextUtil_Reset
 	bl sub_8153390
 	lsls r0, 16
@@ -10007,7 +10007,7 @@ _08155480:
 	movs r1, 0
 	add r2, sp, 0xC
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	bl sub_815372C
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -10059,7 +10059,7 @@ _08155580:
 	str r1, [sp, 0x8]
 	add r2, sp, 0xC
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _0815559E:
 	ldr r4, _081555C8 @ =gUnknown_203F440
 	ldr r0, [r4]
@@ -10319,7 +10319,7 @@ _0815579C:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r3, r10
 	ldr r0, [r3]
 	adds r0, r7
@@ -10331,7 +10331,7 @@ _0815579C:
 	str r5, [sp, 0x4]
 	str r4, [sp, 0x8]
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r2, r10
 	ldr r0, [r2]
 	adds r0, r7
@@ -10343,7 +10343,7 @@ _0815579C:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r3, r10
 	ldr r0, [r3]
 	adds r0, r7
@@ -10355,7 +10355,7 @@ _0815579C:
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r2, r10
 	ldr r0, [r2]
 	add r0, r8
@@ -10435,7 +10435,7 @@ _081558B0:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r2, r10
 	ldr r0, [r2]
 	adds r0, r4
@@ -10448,7 +10448,7 @@ _081558B0:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r1, r10
 	ldr r0, [r1]
 	adds r0, r4
@@ -10475,7 +10475,7 @@ _08155922:
 	adds r0, r1, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r4, _08155970 @ =gUnknown_203F440
 	ldr r0, [r4]
 	ldr r1, _08155974 @ =0x00003009
@@ -10798,7 +10798,7 @@ _08155BA4:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -10970,7 +10970,7 @@ _08155D08:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r6]
 	adds r0, r4
 	ldrb r0, [r0]

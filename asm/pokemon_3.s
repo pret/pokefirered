@@ -426,7 +426,7 @@ sub_8044838: @ 8044838
 	sub sp, 0x14
 	ldr r0, _08044888 @ =gUnknown_20370C0
 	ldrh r5, [r0]
-	ldr r0, _0804488C @ =gUnknown_20370C2
+	ldr r0, _0804488C @ =gSpecialVar_0x8005
 	ldrh r4, [r0]
 	ldr r0, _08044890 @ =gUnknown_20370C4
 	ldrh r6, [r0]
@@ -462,7 +462,7 @@ _08044880:
 	bx r0
 	.align 2, 0
 _08044888: .4byte gUnknown_20370C0
-_0804488C: .4byte gUnknown_20370C2
+_0804488C: .4byte gSpecialVar_0x8005
 _08044890: .4byte gUnknown_20370C4
 _08044894: .4byte gEnemyParty
 	thumb_func_end sub_8044838

@@ -807,7 +807,7 @@ sub_806E6FC: @ 806E6FC
 	strh r0, [r1]
 	ldr r1, _0806E764 @ =gUnknown_20370C0
 	strh r0, [r1]
-	ldr r1, _0806E768 @ =gUnknown_20370C2
+	ldr r1, _0806E768 @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	ldr r1, _0806E76C @ =gUnknown_20370C4
 	strh r0, [r1]
@@ -846,7 +846,7 @@ _0806E758: .4byte gUnknown_20370BA
 _0806E75C: .4byte gUnknown_20370BC
 _0806E760: .4byte gUnknown_20370BE
 _0806E764: .4byte gUnknown_20370C0
-_0806E768: .4byte gUnknown_20370C2
+_0806E768: .4byte gSpecialVar_0x8005
 _0806E76C: .4byte gUnknown_20370C4
 _0806E770: .4byte gUnknown_20370C6
 _0806E774: .4byte gUnknown_20370C8

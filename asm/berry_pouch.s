@@ -3070,7 +3070,7 @@ sub_813E668: @ 813E668
 	movs r1, 0x38
 	movs r2, 0xA
 	adds r3, r4, 0
-	bl sub_809FEC4
+	bl PrintMoneyAmount
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -3299,11 +3299,11 @@ sub_813E7F0: @ 813E7F0
 	lsrs r4, 24
 	ldr r0, [r7]
 	add r0, r10
-	bl sub_809FD58
+	bl GetMoney
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_809FE40
+	bl PrintMoneyAmountInMoneyBox
 	movs r2, 0x8
 	negs r2, r2
 	add r9, r2
@@ -3731,12 +3731,12 @@ sub_813EBD4: @ 813EBD4
 	movs r1, 0xA4
 	lsls r1, 2
 	adds r0, r1
-	bl sub_809FD58
+	bl GetMoney
 	adds r3, r0, 0
 	adds r0, r4, 0
 	movs r1, 0xA
 	movs r2, 0xC
-	bl sub_809FF48
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	pop {r4}
 	pop {r0}
 	bx r0

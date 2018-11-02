@@ -4273,7 +4273,7 @@ sub_812A424: @ 812A424
 	str r7, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x18]
 	ldr r2, _0812A518 @ =gUnknown_841793C
@@ -4283,7 +4283,7 @@ sub_812A424: @ 812A424
 	str r7, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x18]
 	movs r1, 0x1

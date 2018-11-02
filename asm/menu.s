@@ -1405,7 +1405,7 @@ RedrawMenuCursor: @ 810F874
 	movs r4, 0
 	str r4, [sp, 0x4]
 	str r4, [sp, 0x8]
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -1803,7 +1803,7 @@ _0810FBA0:
 	adds r0, r6, 0
 	mov r1, r10
 	mov r3, r9
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2561,7 +2561,7 @@ _0811017C:
 	str r0, [sp, 0x8]
 	ldr r0, [sp, 0xC]
 	mov r1, r9
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2658,7 +2658,7 @@ _08110230:
 	str r0, [sp, 0x8]
 	ldr r0, [sp, 0xC]
 	mov r1, r10
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2899,7 +2899,7 @@ sub_811037C: @ 811037C
 	str r3, [sp, 0x4]
 	str r3, [sp, 0x8]
 	adds r3, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3

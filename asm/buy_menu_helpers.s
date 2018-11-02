@@ -59,12 +59,12 @@ sub_813F6D0: @ 813F6D0
 	movs r1, 0xA4
 	lsls r1, 2
 	adds r0, r1
-	bl sub_809FD58
+	bl GetMoney
 	adds r3, r0, 0
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xF
-	bl sub_809FF48
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	pop {r0}
 	bx r0
 	.align 2, 0

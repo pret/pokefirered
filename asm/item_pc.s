@@ -2072,7 +2072,7 @@ sub_810E418: @ 810E418
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
@@ -2100,7 +2100,7 @@ _0810E4B8:
 	adds r0, r1, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
@@ -2257,7 +2257,7 @@ sub_810E5E0: @ 810E5E0
 	str r4, [sp, 0x8]
 	adds r2, r5, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r6, 0
 	movs r1, 0x1
 	movs r2, 0x2

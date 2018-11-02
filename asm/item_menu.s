@@ -5275,7 +5275,7 @@ sub_810A834: @ 810A834
 	movs r1, 0x38
 	movs r2, 0xA
 	adds r3, r4, 0
-	bl sub_809FEC4
+	bl PrintMoneyAmount
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -5539,11 +5539,11 @@ sub_810A9D4: @ 810A9D4
 	ldr r2, _0810AAE0 @ =gSaveBlock1Ptr
 	ldr r0, [r2]
 	adds r0, r7
-	bl sub_809FD58
+	bl GetMoney
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_809FE40
+	bl PrintMoneyAmountInMoneyBox
 	movs r3, 0x8
 	negs r3, r3
 	add r10, r3

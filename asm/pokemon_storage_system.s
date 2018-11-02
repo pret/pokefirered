@@ -7329,7 +7329,7 @@ _0808F4D4:
 	str r6, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0x2
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -7352,7 +7352,7 @@ _0808F4D4:
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _0808F57E
 	.align 2, 0
 _0808F51C: .4byte gUnknown_20397B0
@@ -7368,7 +7368,7 @@ _0808F528:
 	str r1, [sp, 0x8]
 	movs r0, 0
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r4, 0
 	movs r5, 0xF
 _0808F542:
@@ -7392,7 +7392,7 @@ _0808F558:
 	movs r0, 0
 	str r0, [sp, 0x8]
 	movs r1, 0x2
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -8307,7 +8307,7 @@ _0808FC7C:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xD

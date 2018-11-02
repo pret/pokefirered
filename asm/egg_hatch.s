@@ -575,7 +575,7 @@ _08047090:
 	ldr r0, _08047150 @ =sub_8046FC0
 	bl SetVBlankCallback
 	bl GetCurrentMapMusic
-	ldr r1, _08047154 @ =gUnknown_20370C2
+	ldr r1, _08047154 @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	bl reset_temp_tile_data_buffers
 	movs r0, 0
@@ -628,7 +628,7 @@ _08047090:
 _08047148: .4byte gUnknown_3000E74
 _0804714C: .4byte gUnknown_20370C0
 _08047150: .4byte sub_8046FC0
-_08047154: .4byte gUnknown_20370C2
+_08047154: .4byte gSpecialVar_0x8005
 _08047158: .4byte gUnknown_826019C
 _0804715C:
 	ldr r0, _0804716C @ =gUnknown_82601A4

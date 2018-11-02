@@ -212,7 +212,7 @@ _0813F990:
 	.4byte _0813FB08
 	.4byte _0813FB48
 _0813F9A4:
-	bl sub_80D0554
+	bl GetCoins
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813F9BC
@@ -234,7 +234,7 @@ _0813F9BC:
 	adds r0, 0x1
 	strh r0, [r1, 0xE]
 	movs r0, 0x1
-	bl sub_80D05E4
+	bl TakeCoins
 	movs r0, 0x58
 	bl PlaySE
 	movs r0, 0x8
@@ -259,7 +259,7 @@ _0813F9FC:
 	ldrh r0, [r0, 0xE]
 	movs r7, 0x3
 	subs r4, r7, r0
-	bl sub_80D0554
+	bl GetCoins
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r4
@@ -268,18 +268,18 @@ _0813F9FC:
 	strh r7, [r0, 0xE]
 	lsls r0, r4, 16
 	lsrs r0, 16
-	bl sub_80D05E4
+	bl TakeCoins
 	b _0813FA42
 	.align 2, 0
 _0813FA2C: .4byte gUnknown_203F3A0
 _0813FA30:
-	bl sub_80D0554
+	bl GetCoins
 	ldr r1, [r5]
 	ldrh r2, [r1, 0xE]
 	adds r0, r2
 	strh r0, [r1, 0xE]
 	movs r0, 0
-	bl sub_80D057C
+	bl SetCoins
 _0813FA42:
 	movs r0, 0x58
 	bl PlaySE
@@ -347,7 +347,7 @@ _0813FAC2:
 	ldrh r0, [r0, 0xE]
 	cmp r0, 0x3
 	beq _0813FAD6
-	bl sub_80D0554
+	bl GetCoins
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813FAE0
@@ -649,7 +649,7 @@ _0813FD28:
 	ldr r0, _0813FD40 @ =gUnknown_203F3A0
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xE]
-	bl sub_80D05A4
+	bl GiveCoins
 	movs r0, 0x8
 	movs r1, 0
 	bl sub_8141148
@@ -871,7 +871,7 @@ _0813FECC:
 	ldr r0, [r4]
 	adds r0, 0x50
 	ldrh r0, [r0]
-	bl sub_80D05A4
+	bl GiveCoins
 	ldr r0, [r4]
 	adds r0, 0x50
 	strh r6, [r0]
@@ -900,7 +900,7 @@ _0813FF28:
 	cmp r0, 0
 	beq _0813FF44
 	movs r0, 0x1
-	bl sub_80D05A4
+	bl GiveCoins
 	ldr r1, [r4]
 	adds r1, 0x50
 	ldrh r0, [r1]
@@ -3100,7 +3100,7 @@ sub_8140F2C: @ 8140F2C
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	bl sub_80D0554
+	bl GetCoins
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0

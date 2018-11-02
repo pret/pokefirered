@@ -613,7 +613,7 @@ sub_80A1460: @ 80A1460
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r4, _080A14B4 @ =gStringVar1
-	bl sub_80D0554
+	bl GetCoins
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16

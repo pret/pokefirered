@@ -522,7 +522,7 @@ sub_80EBA8C: @ 80EBA8C
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -1082,7 +1082,7 @@ sub_80EBEB0: @ 80EBEB0
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, r8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r4, _080EBF38 @ =gUnknown_203AAC4

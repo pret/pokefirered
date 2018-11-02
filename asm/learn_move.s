@@ -222,7 +222,7 @@ sub_80E4800: @ 80E4800
 	bl sub_80E50CC
 	ldr r0, _080E485C @ =gUnknown_203AAB4
 	ldr r0, [r0]
-	ldr r1, _080E4860 @ =gUnknown_20370C2
+	ldr r1, _080E4860 @ =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	ldr r2, _080E4864 @ =0x00000261
 	adds r0, r2
@@ -245,7 +245,7 @@ sub_80E4800: @ 80E4800
 	bx r0
 	.align 2, 0
 _080E485C: .4byte gUnknown_203AAB4
-_080E4860: .4byte gUnknown_20370C2
+_080E4860: .4byte gSpecialVar_0x8005
 _080E4864: .4byte 0x00000261
 _080E4868: .4byte sub_80E4620
 _080E486C: .4byte sub_80E4870

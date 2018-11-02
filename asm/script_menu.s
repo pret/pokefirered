@@ -1000,7 +1000,7 @@ _0809D0B0:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, _0809D12C @ =gUnknown_8417BBE
 	movs r0, 0x32
 	str r0, [sp]
@@ -1009,7 +1009,7 @@ _0809D0B0:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, _0809D130 @ =gUnknown_8417BCB
 	movs r0, 0x42
 	str r0, [sp]
@@ -1018,7 +1018,7 @@ _0809D0B0:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _0809D1A8
 	.align 2, 0
 _0809D11C: .4byte gUnknown_8417BB6
@@ -1065,7 +1065,7 @@ _0809D14C:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _0809D188:
 	ldr r2, _0809D1D8 @ =gUnknown_8417BCB
 	mov r0, r9
@@ -1081,7 +1081,7 @@ _0809D188:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _0809D1A8:
 	ldr r0, _0809D1DC @ =0x00000834
 	bl FlagGet
@@ -1099,7 +1099,7 @@ _0809D1A8:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _0809D1FA
 	.align 2, 0
 _0809D1D0: .4byte 0x00000829
@@ -1117,7 +1117,7 @@ _0809D1E4:
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _0809D1FA:
 	ldr r4, _0809D24C @ =gStringVar4
 	ldr r1, _0809D250 @ =gUnknown_8417BB6
@@ -1558,7 +1558,7 @@ _0809D560:
 	bl LoadPalette
 _0809D572:
 	ldr r0, _0809D608 @ =gUnknown_83E0768
-	ldr r1, _0809D60C @ =gUnknown_20370C2
+	ldr r1, _0809D60C @ =gSpecialVar_0x8005
 	mov r8, r1
 	ldrh r1, [r1]
 	lsls r1, 19
@@ -1628,7 +1628,7 @@ _0809D5F4:
 _0809D600: .4byte gUnknown_83E17D0
 _0809D604: .4byte gUnknown_83E0F80
 _0809D608: .4byte gUnknown_83E0768
-_0809D60C: .4byte gUnknown_20370C2
+_0809D60C: .4byte gSpecialVar_0x8005
 _0809D610: .4byte gUnknown_20370C4
 _0809D614: .4byte gSprites
 _0809D618: .4byte sub_809D494
@@ -1814,7 +1814,7 @@ sub_809D764: @ 809D764
 	bne _0809D784
 	b _0809D8A8
 _0809D784:
-	ldr r0, _0809D7A8 @ =gUnknown_20370C2
+	ldr r0, _0809D7A8 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _0809D7B0
@@ -1832,7 +1832,7 @@ _0809D798:
 	.align 2, 0
 _0809D7A0: .4byte gUnknown_20370D0
 _0809D7A4: .4byte sub_809D6D4
-_0809D7A8: .4byte gUnknown_20370C2
+_0809D7A8: .4byte gSpecialVar_0x8005
 _0809D7AC: .4byte gUnknown_20370C0
 _0809D7B0:
 	movs r4, 0
@@ -1886,7 +1886,7 @@ _0809D7F2:
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _0809D82E
 	.align 2, 0
 _0809D820: .4byte gUnknown_20370C0
@@ -1922,7 +1922,7 @@ _0809D844:
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r6, 0x1
 	lsls r0, 24
 	ldr r2, _0809D8BC @ =gUnknown_84161C8
@@ -1936,7 +1936,7 @@ _0809D844:
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x10
 	str r0, [sp]
 	mov r0, r9
@@ -1975,7 +1975,7 @@ sub_809D8C0: @ 809D8C0
 	adds r1, r2, 0
 	cmp r1, 0x7F
 	beq _0809D930
-	ldr r0, _0809D8F0 @ =gUnknown_20370C2
+	ldr r0, _0809D8F0 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _0809D924
@@ -1993,7 +1993,7 @@ sub_809D8C0: @ 809D8C0
 	b _0809D94E
 	.align 2, 0
 _0809D8EC: .4byte gUnknown_20370D0
-_0809D8F0: .4byte gUnknown_20370C2
+_0809D8F0: .4byte gSpecialVar_0x8005
 _0809D8F4: .4byte gUnknown_20370C0
 _0809D8F8:
 	cmp r1, 0x1

@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81136D4
-sub_81136D4: @ 81136D4
-	push {lr}
-	ldr r0, _08113728 @ =gSaveBlock1Ptr
-	ldr r2, [r0]
-	movs r1, 0x4
-	ldrsb r1, [r2, r1]
-	adds r3, r0, 0
-	cmp r1, 0x2
-	bne _081136F0
-	ldrb r0, [r2, 0x5]
-	subs r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xA
-	bls _08113724
-_081136F0:
-	ldr r2, [r3]
-	ldrh r1, [r2, 0x4]
-	ldr r0, _0811372C @ =0x0000090e
-	cmp r1, r0
-	beq _08113724
-	movs r0, 0x4
-	ldrsb r0, [r2, r0]
-	cmp r0, 0x1F
-	bne _08113708
-	ldrb r0, [r2, 0x5]
-	cmp r0, 0x1
-	bls _08113724
-_08113708:
-	ldr r0, [r3]
-	ldrh r1, [r0, 0x4]
-	ldr r0, _08113730 @ =0x00002e01
-	cmp r1, r0
-	beq _08113724
-	ldr r0, _08113734 @ =0x00003a01
-	cmp r1, r0
-	beq _08113724
-	ldr r0, _08113738 @ =0x00000b02
-	cmp r1, r0
-	beq _08113724
-	ldr r0, _0811373C @ =0x0000060a
-	cmp r1, r0
-	bne _08113740
-_08113724:
-	movs r0, 0x1
-	b _08113742
-	.align 2, 0
-_08113728: .4byte gSaveBlock1Ptr
-_0811372C: .4byte 0x0000090e
-_08113730: .4byte 0x00002e01
-_08113734: .4byte 0x00003a01
-_08113738: .4byte 0x00000b02
-_0811373C: .4byte 0x0000060a
-_08113740:
-	movs r0, 0
-_08113742:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81136D4
-
 	thumb_func_start sub_8113748
 sub_8113748: @ 8113748
 	push {lr}

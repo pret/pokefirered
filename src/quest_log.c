@@ -2909,3 +2909,20 @@ void sub_8113550(u16 a0, void * a1)
                 "_081136D0: .4byte gUnknown_203B048");
 }
 #endif // NONMATCHING
+
+bool8 sub_81136D4(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == 2 && (gSaveBlock1Ptr->location.mapNum == 1 || gSaveBlock1Ptr->location.mapNum == 2 || gSaveBlock1Ptr->location.mapNum == 3 || gSaveBlock1Ptr->location.mapNum == 4 || gSaveBlock1Ptr->location.mapNum == 5 || gSaveBlock1Ptr->location.mapNum == 6 || gSaveBlock1Ptr->location.mapNum == 7 || gSaveBlock1Ptr->location.mapNum == 8 || gSaveBlock1Ptr->location.mapNum == 9 || gSaveBlock1Ptr->location.mapNum == 10 || gSaveBlock1Ptr->location.mapNum == 11))
+        return TRUE;
+
+    if (gSaveBlock1Ptr->location.mapGroup == 14 && gSaveBlock1Ptr->location.mapNum == 9)
+        return TRUE;
+
+    if (gSaveBlock1Ptr->location.mapGroup == 31 && (gSaveBlock1Ptr->location.mapNum == 0 || gSaveBlock1Ptr->location.mapNum == 1))
+        return TRUE;
+
+    if ((gSaveBlock1Ptr->location.mapGroup == 1 && gSaveBlock1Ptr->location.mapNum == 46) || (gSaveBlock1Ptr->location.mapGroup == 1 && gSaveBlock1Ptr->location.mapNum == 58) || (gSaveBlock1Ptr->location.mapGroup == 2 && gSaveBlock1Ptr->location.mapNum == 11) || (gSaveBlock1Ptr->location.mapGroup == 10 && gSaveBlock1Ptr->location.mapNum == 6))
+        return TRUE;
+
+    return FALSE;
+}

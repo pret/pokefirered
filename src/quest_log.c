@@ -30,6 +30,7 @@
 #include "unk_8159F40.h"
 #include "pokemon_storage_system.h"
 #include "save.h"
+#include "link.h"
 #include "quest_log_8150454.h"
 #include "quest_log.h"
 
@@ -99,6 +100,7 @@ EWRAM_DATA u16 gUnknown_203B01E;
 EWRAM_DATA u8 gUnknown_203B020;
 
 EWRAM_DATA u16 gUnknown_203B044[2] = {0};
+EWRAM_DATA u8 gUnknown_203B048 = 0;
 
 void sub_8110A00(void);
 void sub_8110A3C(void);
@@ -153,6 +155,53 @@ void sub_8113414(u8 (*)[16], u8, u8);
 void sub_81134CC(struct Var4038Struct *);
 bool8 sub_8113508(struct Var4038Struct * );
 void sub_8113524(struct Var4038Struct *);
+bool8 sub_81136D4(void);
+bool8 sub_8113778(u16, void*);
+void* sub_8113828(u16, void*);
+bool8 sub_81138A0(u16, void*);
+bool8 sub_8113954(u16, void*);
+bool8 sub_8113A44(u16, void*);
+void sub_8113B94(u16);
+void *sub_8113F14(void *, void *);
+void *sub_8113F80(void *, void *);
+void *sub_8114174(void *, void *);
+void *sub_81141D0(void *, void *);
+void *sub_811422C(void *, void *);
+void *sub_8114288(void *, void *);
+void *sub_8114310(void *, void *);
+void *sub_8114380(void *, void *);
+void *sub_81143F0(void *, void *);
+void *sub_811445C(void *, void *);
+void *sub_81144EC(void *, void *);
+void *sub_8114578(void *, void *);
+void *sub_8114604(void *, void *);
+void *sub_8114710(void *, void *);
+void *sub_8114744(void *, void *);
+void *sub_8114778(void *, void *);
+void *sub_8114808(void *, void *);
+void *sub_811488C(void *, void *);
+void *sub_8114918(void *, void *);
+void *sub_8114990(void *, void *);
+void *sub_8114A1C(void *, void *);
+void *sub_8114AA0(void *, void *);
+void *sub_8114B0C(void *, void *);
+void *sub_8114B78(void *, void *);
+void *sub_8114BE4(void *, void *);
+void *sub_8114C68(void *, void *);
+void *sub_8114CC0(void *, void *);
+void *sub_8114D4C(void *, void *);
+void *sub_8114DE8(void *, void *);
+void *sub_8114FF0(void *, void *);
+void *sub_8115078(void *, void *);
+void *sub_81151C0(void *, void *);
+void *sub_8115280(void *, void *);
+void *sub_8115410(void *, void *);
+void *sub_81154DC(void *, void *);
+void *sub_81155A4(void *, void *);
+void *sub_81156D8(void *, void *);
+void *sub_81157DC(void *, void *);
+bool8 sub_81153A8(u16, void*);
+bool8 sub_81153E4(u16, void*);
 void sub_8113A1C(u8);
 void sub_811381C(void);
 void sub_81138F8(void);
@@ -184,8 +233,6 @@ const struct TextColor gUnknown_8456634 = {15, 1, 12};
 const u16 gUnknown_8456638[] = INCBIN_U16("data/graphics/unknown_8456638.bin");
 
 const u8 gUnknown_8456698[] = {17, 10, 3};
-
-extern const struct UnkStruct_203AE98 gUnknown_845669C;
 
 void sub_8110840(void * oldPointer)
 {
@@ -2544,3 +2591,321 @@ u8 sub_8113530(void)
 {
     return sub_8113114(VAR_0x4038_STRUCT, gUnknown_20370C0);
 }
+
+void * (*const gUnknown_8456948[])(void *, void *) = {
+    NULL,
+    NULL,
+    NULL,
+    sub_8113F14,
+    sub_8113F80,
+    sub_8114174,
+    sub_81141D0,
+    sub_811422C,
+    sub_8114288,
+    sub_8114310,
+    sub_8114380,
+    sub_81143F0,
+    sub_811445C,
+    sub_81144EC,
+    sub_8114578,
+    sub_8114604,
+    sub_8114710,
+    sub_8114744,
+    sub_8114778,
+    sub_8114808,
+    sub_811488C,
+    sub_8114918,
+    sub_8114990,
+    sub_8114A1C,
+    sub_8114AA0,
+    sub_8114B0C,
+    sub_8114B78,
+    sub_8114BE4,
+    sub_8114C68,
+    sub_8114CC0,
+    sub_8114D4C,
+    sub_8114DE8,
+    sub_8114FF0,
+    sub_8115078,
+    sub_81151C0,
+    sub_8115280,
+    sub_8115410,
+    sub_81154DC,
+    sub_81155A4,
+    NULL,
+    sub_81156D8,
+    NULL,
+    sub_81157DC
+};
+
+#ifdef NONMATCHING
+void sub_8113550(u16 a0, void * a1)
+{
+    void * r1;
+
+    if (a0 == 35 && gUnknown_203B048 == 2)
+    {
+        sub_811381C();
+        return;
+    }
+    sub_811381C();
+    if (gUnknown_203ADFA == 2)
+        return;
+
+    if (a0 < 3 || a0 > 26)
+        return;
+
+    if (sub_81136D4() == TRUE)
+        return;
+
+    if (sub_81138A0(a0, a1) == TRUE)
+        return;
+
+    if (sub_80BF708() == TRUE)
+        return;
+
+    // NONMATCHING: branch logic here
+    if (InUnionRoom() == TRUE)
+        return;
+
+    if (sub_8113954(a0, a1) == TRUE)
+        return;
+
+    if (sub_8113A44(a0, a1) == TRUE)
+        return;
+
+    if (sub_81153E4(a0, a1) == FALSE)
+        return;
+
+    if (gUnknown_3005E88 == 0)
+    {
+        if (sub_8113778(a0, a1) == TRUE)
+            return;
+
+        if (a0 != 31 || gUnknown_203AE04 == NULL)
+        {
+            if (sub_81153A8(a0, a1) == FALSE)
+                return;
+            sub_8110AEC(a0);
+        }
+    }
+    else if (a0 == 40)
+        return;
+
+    sub_8113B94(a0);
+    if (a0 == 31)
+    {
+        if (gUnknown_203AE04 == NULL)
+        {
+            gUnknown_203AE04 = gUnknown_203AE08;
+            r1 = gUnknown_8456948[a0](gUnknown_203AE04, a1);
+        }
+        else
+        {
+            gUnknown_8456948[a0](gUnknown_203AE04, a1);
+            return;
+        }
+    }
+    else
+    {
+        gUnknown_203AE04 = NULL;
+        r1 = gUnknown_8456948[a0](gUnknown_203AE08, a1);
+    }
+
+    if (r1 == NULL)
+    {
+        r1 = sub_8113828(a0, a1);
+        if (r1 == NULL)
+            return;
+    }
+
+    gUnknown_203AE08 = r1;
+    if (gUnknown_203B048 == 0)
+        return;
+    sub_811231C();
+}
+#else
+NAKED
+void sub_8113550(u16 a0, void * a1)
+{
+    asm_unified("\tpush {r4,r5,lr}\n"
+                "\tadds r5, r1, 0\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r4, r0, 16\n"
+                "\tcmp r4, 0x23\n"
+                "\tbne _08113570\n"
+                "\tldr r0, _0811356C @ =gUnknown_203B048\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0x2\n"
+                "\tbne _08113570\n"
+                "\tbl sub_811381C\n"
+                "\tb ._return\n"
+                "\t.align 2, 0\n"
+                "_0811356C: .4byte gUnknown_203B048\n"
+                "_08113570:\n"
+                "\tbl sub_811381C\n"
+                "\tldr r0, _0811362C @ =gUnknown_203ADFA\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0x2\n"
+                "\tbne _0811357E\n"
+                "\tb ._return\n"
+                "_0811357E:\n"
+                "\tsubs r0, r4, 0x3\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r0, 16\n"
+                "\tcmp r0, 0x27\n"
+                "\tbls _0811358A\n"
+                "\tb ._return\n"
+                "_0811358A:\n"
+                "\tbl sub_81136D4\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _08113598\n"
+                "\tb ._return\n"
+                "_08113598:\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r1, r5, 0\n"
+                "\tbl sub_81138A0\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _081135AA\n"
+                "\tb ._return\n"
+                "_081135AA:\n"
+                "\tbl sub_80BF708\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _081135B8\n"
+                "\tb ._return\n"
+                "_081135B8:\n"
+                "\tbl InUnionRoom\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _081135C2\n"
+                "\tb ._return\n"
+                "_081135C2:\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r1, r5, 0\n"
+                "\tbl sub_8113954\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x1\n"
+                "\tbeq ._return\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r1, r5, 0\n"
+                "\tbl sub_8113A44\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x1\n"
+                "\tbeq ._return\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r1, r5, 0\n"
+                "\tbl sub_81153E4\n"
+                "\tlsls r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tbeq ._return\n"
+                "\tldr r0, _08113630 @ =gUnknown_3005E88\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08113638\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r1, r5, 0\n"
+                "\tbl sub_8113778\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x1\n"
+                "\tbeq ._return\n"
+                "\tcmp r4, 0x1F\n"
+                "\tbne _08113614\n"
+                "\tldr r0, _08113634 @ =gUnknown_203AE04\n"
+                "\tldr r0, [r0]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _0811363C\n"
+                "_08113614:\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r1, r5, 0\n"
+                "\tbl sub_81153A8\n"
+                "\tlsls r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tbeq ._return\n"
+                "\tadds r0, r4, 0\n"
+                "\tbl sub_8110AEC\n"
+                "\tb _0811363C\n"
+                "\t.align 2, 0\n"
+                "_0811362C: .4byte gUnknown_203ADFA\n"
+                "_08113630: .4byte gUnknown_3005E88\n"
+                "_08113634: .4byte gUnknown_203AE04\n"
+                "_08113638:\n"
+                "\tcmp r4, 0x28\n"
+                "\tbeq ._return\n"
+                "_0811363C:\n"
+                "\tadds r0, r4, 0\n"
+                "\tbl sub_8113B94\n"
+                "\tcmp r4, 0x1F\n"
+                "\tbne _0811367C\n"
+                "\tldr r2, _0811365C @ =gUnknown_203AE04\n"
+                "\tldr r1, [r2]\n"
+                "\tcmp r1, 0\n"
+                "\tbne _08113668\n"
+                "\tldr r0, _08113660 @ =gUnknown_203AE08\n"
+                "\tldr r0, [r0]\n"
+                "\tstr r0, [r2]\n"
+                "\tldr r1, _08113664 @ =gUnknown_8456948\n"
+                "\tldr r2, [r1, 0x7C]\n"
+                "\tb _0811368E\n"
+                "\t.align 2, 0\n"
+                "_0811365C: .4byte gUnknown_203AE04\n"
+                "_08113660: .4byte gUnknown_203AE08\n"
+                "_08113664: .4byte gUnknown_8456948\n"
+                "_08113668:\n"
+                "\tldr r0, _08113678 @ =gUnknown_8456948\n"
+                "\tldr r2, [r0, 0x7C]\n"
+                "\tadds r0, r1, 0\n"
+                "\tadds r1, r5, 0\n"
+                "\tbl _call_via_r2\n"
+                "\tb ._return\n"
+                "\t.align 2, 0\n"
+                "_08113678: .4byte gUnknown_8456948\n"
+                "_0811367C:\n"
+                "\tldr r1, _081136C4 @ =gUnknown_203AE04\n"
+                "\tmovs r0, 0\n"
+                "\tstr r0, [r1]\n"
+                "\tldr r0, _081136C8 @ =gUnknown_8456948\n"
+                "\tlsls r1, r4, 2\n"
+                "\tadds r1, r0\n"
+                "\tldr r0, _081136CC @ =gUnknown_203AE08\n"
+                "\tldr r0, [r0]\n"
+                "\tldr r2, [r1]\n"
+                "_0811368E:\n"
+                "\tadds r1, r5, 0\n"
+                "\tbl _call_via_r2\n"
+                "\tadds r1, r0, 0\n"
+                "\tcmp r1, 0\n"
+                "\tbne _081136AC\n"
+                "\tbl sub_811231C\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r1, r5, 0\n"
+                "\tbl sub_8113828\n"
+                "\tadds r1, r0, 0\n"
+                "\tcmp r1, 0\n"
+                "\tbeq ._return\n"
+                "_081136AC:\n"
+                "\tldr r0, _081136CC @ =gUnknown_203AE08\n"
+                "\tstr r1, [r0]\n"
+                "\tldr r0, _081136D0 @ =gUnknown_203B048\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0\n"
+                "\tbeq ._return\n"
+                "\tbl sub_811231C\n"
+                "._return:\n"
+                "\tpop {r4,r5}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_081136C4: .4byte gUnknown_203AE04\n"
+                "_081136C8: .4byte gUnknown_8456948\n"
+                "_081136CC: .4byte gUnknown_203AE08\n"
+                "_081136D0: .4byte gUnknown_203B048");
+}
+#endif // NONMATCHING

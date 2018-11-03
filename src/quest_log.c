@@ -72,6 +72,12 @@ struct UnkStruct_300201C
     u16 unk_2;
 };
 
+struct UnkStruct_203B024
+{
+    u16 unk_00;
+    u32 unk_04[7];
+};
+
 u8 gUnknown_3005E88;
 u16 gUnknown_3005E8C;
 struct UnkStruct_3005E90 gUnknown_3005E90;
@@ -84,11 +90,11 @@ EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 EWRAM_DATA u8 gUnknown_203ADF9 = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
 EWRAM_DATA u16 gUnknown_203ADFC = 0;
-EWRAM_DATA u8 gUnknown_203ADFE[3];
+EWRAM_DATA u8 gUnknown_203ADFE[3] = {0};
 EWRAM_DATA void * gUnknown_203AE04 = NULL;
 EWRAM_DATA u16 * gUnknown_203AE08 = NULL;
 EWRAM_DATA void * gUnknown_203AE0C[32] = {NULL};
-EWRAM_DATA void (* gUnknown_203AE8C)(void) = 0;
+EWRAM_DATA void (* gUnknown_203AE8C)(void) = NULL;
 EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
@@ -98,11 +104,12 @@ EWRAM_DATA u16 gUnknown_203B01A = 0;
 EWRAM_DATA u16 gUnknown_203B01C = 0;
 EWRAM_DATA u16 gUnknown_203B01E = 0;
 EWRAM_DATA u8 gUnknown_203B020 = 0;
-
-EWRAM_DATA ALIGNED(2) u16 gUnknown_203B024[16] = {0};
-
+EWRAM_DATA struct UnkStruct_203B024 gUnknown_203B024 = {0};
 EWRAM_DATA u16 gUnknown_203B044[2] = {0};
 EWRAM_DATA u8 gUnknown_203B048 = 0;
+EWRAM_DATA u8 gUnknown_203B049 = 0;
+EWRAM_DATA u8 gUnknown_203B04A = 0;
+EWRAM_DATA u8 gUnknown_203B04B = 0;
 
 void sub_8110A00(void);
 void sub_8110A3C(void);
@@ -3009,19 +3016,64 @@ bool8 sub_81138A0(u16 a0, u16 * a1)
         return FALSE;
 
     sub_81138F8();
-    gUnknown_203B024[0] = a0;
+    gUnknown_203B024.unk_00 = a0;
 
     if (a0 < 16 || a0 > 17)
     {
         if (a0 == 12 || a0 == 18)
-            memcpy(gUnknown_203B024 + 2, a1, 12);
+            memcpy(gUnknown_203B024.unk_04, a1, 12);
         else
-            memcpy(gUnknown_203B024 + 2, a1, 24);
+            memcpy(gUnknown_203B024.unk_04, a1, 24);
     }
     return TRUE;
 }
 
 void sub_81138F8(void)
 {
-    memset(gUnknown_203B024, 0, sizeof(gUnknown_203B024));
+    gUnknown_203B024 = (struct UnkStruct_203B024){};
+}
+
+void sub_811390C(void)
+{
+    if (gUnknown_203B024.unk_00 != 0)
+    {
+        void * resp;
+        gUnknown_203B04A = 0;
+        sub_8110AEC(gUnknown_203B024.unk_00);
+        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
+        gUnknown_203AE08 = resp;
+        sub_81138F8();
+    }
+}
+
+bool8 sub_8113954(u16 a0, u16 * a1)
+{
+    if (a0 != 34 && a0 != 30 && a0 != 32 && a0 != 33)
+        return FALSE;
+    sub_81138F8();
+    if (gUnknown_3005E88 || FlagGet(0x82C) || sub_81137E4(a0, a1) != TRUE)
+    {
+        gUnknown_203B024.unk_00 = a0;
+        memcpy(gUnknown_203B024.unk_04, a1, 8);
+    }
+    return TRUE;
+}
+
+void sub_81139BC(void)
+{
+    if (gUnknown_203B024.unk_00 != 0)
+    {
+        void * resp;
+        if (gUnknown_3005E88 == 0)
+        {
+            gUnknown_203B04A = 0;
+            sub_8110AEC(gUnknown_203B024.unk_00);
+        }
+        sub_8113B94(gUnknown_203B024.unk_00);
+        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
+        gUnknown_203AE08 = resp;
+        sub_8113A1C(1);
+        sub_81138F8();
+        sub_811231C();
+    }
 }

@@ -1457,77 +1457,7 @@ gUnknown_203ADF3: @ 203ADF3
 gUnknown_203ADF4: @ 203ADF4
 	.space 0x4
 
-gUnknown_203ADF8: @ 203ADF8
-	.space 0x1
-
-gUnknown_203ADF9: @ 203ADF9
-	.space 0x1
-
-gUnknown_203ADFA: @ 203ADFA
-	.space 0x2
-
-gUnknown_203ADFC: @ 203ADFC
-	.space 0x2
-
-gUnknown_203ADFE: @ 203ADFE
-	.space 0x6
-
-gUnknown_203AE04: @ 203AE04
-	.space 0x4
-
-gUnknown_203AE08: @ 203AE08
-	.space 0x4
-
-gUnknown_203AE0C: @ 203AE0C
-	.space 0x80
-
-gUnknown_203AE8C: @ 203AE8C
-	.space 0x4
-
-gUnknown_203AE90: @ 203AE90
-	.space 0x4
-
-gUnknown_203AE94: @ 203AE94
-	.space 0x4
-
-gUnknown_203AE98: @ 203AE98
-	.space 0x100
-
-gUnknown_203AF98: @ 203AF98
-	.space 0x2
-
-gUnknown_203AF9A: @ 203AF9A
-	.space 0x80
-
-gUnknown_203B01A: @ 203B01A
-	.space 0x2
-
-gUnknown_203B01C: @ 203B01C
-	.space 0x2
-
-gUnknown_203B01E: @ 203B01E
-	.space 0x2
-
-gUnknown_203B020: @ 203B020
-	.space 0x4
-
-gUnknown_203B024: @ 203B024
-	.space 0x20
-
-gUnknown_203B044: @ 203B044
-	.space 0x4
-
-gUnknown_203B048: @ 203B048
-	.space 0x1
-
-gUnknown_203B049: @ 203B049
-	.space 0x1
-
-gUnknown_203B04A: @ 203B04A
-	.space 0x1
-
-gUnknown_203B04B: @ 203B04B
-	.space 0x1
+	.include "src/quest_log.o"
 
 gUnknown_203B04C: @ 203B04C
 	.space 0xC

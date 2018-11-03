@@ -93,11 +93,13 @@ EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
 EWRAM_DATA u16 gUnknown_203AF98 = 0;
-EWRAM_DATA u8 gUnknown_203AF9A[64][2];
-EWRAM_DATA u16 gUnknown_203B01A;
-EWRAM_DATA u16 gUnknown_203B01C;
-EWRAM_DATA u16 gUnknown_203B01E;
-EWRAM_DATA u8 gUnknown_203B020;
+EWRAM_DATA u8 gUnknown_203AF9A[64][2] = {{0}};
+EWRAM_DATA u16 gUnknown_203B01A = 0;
+EWRAM_DATA u16 gUnknown_203B01C = 0;
+EWRAM_DATA u16 gUnknown_203B01E = 0;
+EWRAM_DATA u8 gUnknown_203B020 = 0;
+
+EWRAM_DATA ALIGNED(2) u16 gUnknown_203B024[16] = {0};
 
 EWRAM_DATA u16 gUnknown_203B044[2] = {0};
 EWRAM_DATA u8 gUnknown_203B048 = 0;
@@ -156,11 +158,12 @@ void sub_81134CC(struct Var4038Struct *);
 bool8 sub_8113508(struct Var4038Struct * );
 void sub_8113524(struct Var4038Struct *);
 bool8 sub_81136D4(void);
-bool8 sub_8113778(u16, void*);
-void* sub_8113828(u16, void*);
-bool8 sub_81138A0(u16, void*);
-bool8 sub_8113954(u16, void*);
-bool8 sub_8113A44(u16, void*);
+bool8 sub_8113778(u16, u16 *);
+bool8 sub_81137E4(u16, u16 *);
+void * sub_8113828(u16, u16 *);
+bool8 sub_81138A0(u16, u16 *);
+bool8 sub_8113954(u16, u16 *);
+bool8 sub_8113A44(u16, u16 *);
 void sub_8113B94(u16);
 void *sub_8113F14(void *, void *);
 void *sub_8113F80(void *, void *);
@@ -2639,7 +2642,7 @@ void * (*const gUnknown_8456948[])(void *, void *) = {
 };
 
 #ifdef NONMATCHING
-void sub_8113550(u16 a0, void * a1)
+void sub_8113550(u16 a0, u16 * a1)
 {
     void * r1;
 
@@ -2726,7 +2729,7 @@ void sub_8113550(u16 a0, void * a1)
 }
 #else
 NAKED
-void sub_8113550(u16 a0, void * a1)
+void sub_8113550(u16 a0, u16 * a1)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                 "\tadds r5, r1, 0\n"
@@ -2925,4 +2928,100 @@ bool8 sub_81136D4(void)
         return TRUE;
 
     return FALSE;
+}
+
+bool8 sub_8113748(void)
+{
+    if (sub_81136D4() != TRUE)
+        return FALSE;
+
+    if (gUnknown_203ADFA == 2)
+        return TRUE;
+
+    if (gUnknown_203ADFA == 1)
+        sub_8112364();
+
+    return FALSE;
+}
+
+bool8 sub_8113778(u16 a0, u16 * a1)
+{
+    if (a0 == 36 || a0 == 11)
+        return TRUE;
+
+    if (!FlagGet(0x82C))
+    {
+        if (a0 == 3 || a0 == 31 || sub_81137E4(a0, a1) == TRUE)
+            return TRUE;
+    }
+
+    if (!FlagGet(0x844))
+    {
+        if (a0 == 4 || a0 == 5 || a0 == 6 || a0 == 7 || a0 == 8 || a0 == 9 || a0 == 10 || a0 == 22 || a0 == 25 || a0 == 26)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 sub_81137E4(u16 a0, u16 * a1)
+{
+    if (a0 == 34)
+    {
+        u8 trainerClass = gTrainers[*a1].trainerClass;
+        if (   trainerClass == 0x51
+            || trainerClass == 0x59
+            || trainerClass == 0x5A
+            || trainerClass == 0x53)
+            return FALSE;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_811381C(void)
+{
+    gUnknown_203B048 = 0;
+}
+
+void * sub_8113828(u16 a0, u16 * a1)
+{
+    if (sub_8113778(a0, a1) == TRUE)
+        return NULL;
+
+    if (sub_81153A8(a0, a1) == FALSE)
+        return NULL;
+
+    sub_8110AEC(a0);
+    sub_8113B94(a0);
+
+    if (a0 == 31)
+        gUnknown_203AE04 = gUnknown_203AE08;
+    else
+        gUnknown_203AE04 = NULL;
+
+    return gUnknown_8456948[a0](gUnknown_203AE08, a1);
+}
+
+bool8 sub_81138A0(u16 a0, u16 * a1)
+{
+    if (a0 < 12 || a0 > 19)
+        return FALSE;
+
+    sub_81138F8();
+    gUnknown_203B024[0] = a0;
+
+    if (a0 < 16 || a0 > 17)
+    {
+        if (a0 == 12 || a0 == 18)
+            memcpy(gUnknown_203B024 + 2, a1, 12);
+        else
+            memcpy(gUnknown_203B024 + 2, a1, 24);
+    }
+    return TRUE;
+}
+
+void sub_81138F8(void)
+{
+    memset(gUnknown_203B024, 0, sizeof(gUnknown_203B024));
 }

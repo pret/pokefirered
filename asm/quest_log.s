@@ -5,33 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8113ABC
-sub_8113ABC: @ 8113ABC
-	push {lr}
-	adds r2, r0, 0x4
-	ldrh r1, [r0]
-	ldr r0, _08113AD0 @ =0x00000fff
-	ands r0, r1
-	cmp r0, 0x23
-	beq _08113AD8
-	ldr r1, _08113AD4 @ =gUnknown_203B04A
-	movs r0, 0
-	b _08113ADE
-	.align 2, 0
-_08113AD0: .4byte 0x00000fff
-_08113AD4: .4byte gUnknown_203B04A
-_08113AD8:
-	ldr r1, _08113AE4 @ =gUnknown_203B04A
-	ldrb r0, [r2, 0x1]
-	adds r0, 0x1
-_08113ADE:
-	strb r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08113AE4: .4byte gUnknown_203B04A
-	thumb_func_end sub_8113ABC
-
 	thumb_func_start sub_8113AE8
 sub_8113AE8: @ 8113AE8
 	push {r4,lr}

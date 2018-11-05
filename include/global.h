@@ -503,6 +503,25 @@ struct QuestLogNPCData
     u32 movementType:8;
 };
 
+struct UnkStruct_203B024_Sub1
+{
+	u8 unk_00;
+	u8 unk_01;
+	u8 filler_02[26];
+};
+
+union UnkUnion_203B024
+{
+	struct UnkStruct_203B024_Sub1 type1;
+	u8 filler[28];
+};
+
+struct UnkStruct_203B024
+{
+	u16 unk_00;
+	union UnkUnion_203B024 unk_04;
+};
+
 struct QuestLog
 {
     /*0x0000*/ u8 unk_000;
@@ -515,7 +534,7 @@ struct QuestLog
     /*0x0148*/ u8 unk_148[0x120];
     /*0x02c8*/ u8 unk_268[0x200];
     /*0x0468*/ struct QuestLogNPCData npcData[64];
-    /*0x0568*/ u16 unk_568[0x80];
+    /*0x0568*/ struct UnkStruct_203B024 unk_568[8];
     /*0x0668*/ u16 end[0];
 };
 

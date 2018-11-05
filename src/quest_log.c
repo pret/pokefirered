@@ -72,12 +72,6 @@ struct UnkStruct_300201C
     u16 unk_2;
 };
 
-struct UnkStruct_203B024
-{
-    u16 unk_00;
-    u32 unk_04[7];
-};
-
 u8 gUnknown_3005E88;
 u16 gUnknown_3005E8C;
 struct UnkStruct_3005E90 gUnknown_3005E90;
@@ -92,8 +86,8 @@ EWRAM_DATA u8 gUnknown_203ADFA = 0;
 EWRAM_DATA u16 gUnknown_203ADFC = 0;
 EWRAM_DATA u8 gUnknown_203ADFE[3] = {0};
 EWRAM_DATA void * gUnknown_203AE04 = NULL;
-EWRAM_DATA u16 * gUnknown_203AE08 = NULL;
-EWRAM_DATA void * gUnknown_203AE0C[32] = {NULL};
+EWRAM_DATA struct UnkStruct_203B024 * gUnknown_203AE08 = NULL;
+EWRAM_DATA struct UnkStruct_203B024 * gUnknown_203AE0C[32] = {NULL};
 EWRAM_DATA void (* gUnknown_203AE8C)(void) = NULL;
 EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
@@ -174,21 +168,21 @@ void sub_8113A1C(u16);
 void sub_811381C(void);
 void sub_81138F8(void);
 bool8 sub_8113A44(u16, u16 *);
-void * sub_8113A78(u16 *, void **);
-void sub_8113ABC(void *);
+void * sub_8113A78(struct UnkStruct_203B024 *, struct UnkStruct_203B024 **);
+void sub_8113ABC(struct UnkStruct_203B024 *);
 bool8 sub_8113AE8(void *);
 bool8 sub_8113B44(void *);
 void sub_8113B88(void);
 void sub_8113B94(u16);
 void sub_8113BD8(void);
-void * sub_8113BF4(void *);
+struct UnkStruct_203B024 * sub_8113BF4(struct UnkStruct_203B024 *);
 void * sub_8113C20(void *, struct UnkStruct_203AE98 *);
 void *sub_8113C5C(void *, u16);
-void * sub_8113C8C(void *, struct UnkStruct_203AE98 *);
-void * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
-void * sub_8113D08(void *, struct UnkStruct_203AE98 *);
-void * sub_8113D48(void *, struct UnkStruct_203AE98 *);
-void * sub_8113D94(void *, struct UnkStruct_203AE98 *);
+struct UnkStruct_203B024 * sub_8113C8C(void *, struct UnkStruct_203AE98 *);
+struct UnkStruct_203B024 * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
+struct UnkStruct_203B024 * sub_8113D08(void *, struct UnkStruct_203AE98 *);
+struct UnkStruct_203B024 * sub_8113D48(void *, struct UnkStruct_203AE98 *);
+struct UnkStruct_203B024 * sub_8113D94(void *, struct UnkStruct_203AE98 *);
 void *sub_8113F14(void *, void *);
 u16 *sub_8113F3C(u16 *);
 void *sub_8113F80(void *, void *);
@@ -298,7 +292,7 @@ void sub_8110840(void * oldPointer)
             int r3;
             for (r3 = 0; r3 < 0x20; r3++)
                 if (gUnknown_203AE0C[r3])
-                    gUnknown_203AE0C[r3] += offset;
+                    gUnknown_203AE0C[r3] = (void *)gUnknown_203AE0C[r3] + offset;
         }
     }
 }
@@ -1032,7 +1026,7 @@ void sub_8111708(void)
 void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
 {
     u16 i;
-    u16 *r4;
+    struct UnkStruct_203B024 *r4;
     u16 r6 = 0;
     u16 r9 = 0;
 
@@ -1045,7 +1039,7 @@ void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
     r4 = gSaveBlock1Ptr->questLog[a0].unk_568;
     for (i = 0; i < 32; i++)
     {
-        switch (*r4 & 0xFFF)
+        switch (r4->unk_00 & 0xFFF)
         {
             case 0:
                 r4 = sub_8113D08(r4, &a1[r6]);
@@ -3061,9 +3055,9 @@ bool8 sub_81138A0(u16 a0, u16 * a1)
     if (a0 < 16 || a0 > 17)
     {
         if (a0 == 12 || a0 == 18)
-            memcpy(gUnknown_203B024.unk_04, a1, 12);
+            memcpy(&gUnknown_203B024.unk_04, a1, 12);
         else
-            memcpy(gUnknown_203B024.unk_04, a1, 24);
+            memcpy(&gUnknown_203B024.unk_04, a1, 24);
     }
     return TRUE;
 }
@@ -3080,7 +3074,7 @@ void sub_811390C(void)
         void * resp;
         gUnknown_203B04A = 0;
         sub_8110AEC(gUnknown_203B024.unk_00);
-        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
+        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, &gUnknown_203B024.unk_04);
         gUnknown_203AE08 = resp;
         sub_81138F8();
     }
@@ -3094,7 +3088,7 @@ bool8 sub_8113954(u16 a0, u16 * a1)
     if (gUnknown_3005E88 || FlagGet(0x82C) || sub_81137E4(a0, a1) != TRUE)
     {
         gUnknown_203B024.unk_00 = a0;
-        memcpy(gUnknown_203B024.unk_04, a1, 8);
+        memcpy(&gUnknown_203B024.unk_04, a1, 8);
     }
     return TRUE;
 }
@@ -3110,7 +3104,7 @@ void sub_81139BC(void)
             sub_8110AEC(gUnknown_203B024.unk_00);
         }
         sub_8113B94(gUnknown_203B024.unk_00);
-        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
+        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, &gUnknown_203B024.unk_04);
         gUnknown_203AE08 = resp;
         sub_8113A1C(1);
         sub_81138F8();
@@ -3230,14 +3224,23 @@ const u8 gUnknown_8456AA0[] = {
     0x06
 };
 
-void * sub_8113A78(u16 *a0, void **a1)
+void * sub_8113A78(struct UnkStruct_203B024 *a0, struct UnkStruct_203B024 **a1)
 {
-    u16 r2 = *a0 & 0xfff;
-    u16 r4 = *a0 >> 12;
+    u16 r2 = a0->unk_00 & 0xfff;
+    u16 r4 = a0->unk_00 >> 12;
     if (r2 == 33)
         r4 = 0;
     if (r2 < 3 || r2 > 42)
         return NULL;
     *a1 = a0;
     return gUnknown_8456AA0[r2] + (gUnknown_8456AA0[r2] - 4) * r4 + (void *)a0;
+}
+
+void sub_8113ABC(struct UnkStruct_203B024 * a0)
+{
+    struct UnkStruct_203B024_Sub1 * r2 = &a0->unk_04.type1;
+    if ((a0->unk_00 & 0xFFF) != 35)
+        gUnknown_203B04A = 0;
+    else
+        gUnknown_203B04A = r2->unk_01 + 1;
 }

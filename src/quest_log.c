@@ -72,6 +72,13 @@ struct UnkStruct_300201C
     u16 unk_2;
 };
 
+struct UnkStruct_203B044
+{
+    u8 unk_0;
+    u8 unk_1;
+    u16 unk_2;
+};
+
 u8 gUnknown_3005E88;
 u16 gUnknown_3005E8C;
 struct UnkStruct_3005E90 gUnknown_3005E90;
@@ -99,7 +106,7 @@ EWRAM_DATA u16 gUnknown_203B01C = 0;
 EWRAM_DATA u16 gUnknown_203B01E = 0;
 EWRAM_DATA u8 gUnknown_203B020 = 0;
 EWRAM_DATA struct UnkStruct_203B024 gUnknown_203B024 = {0};
-EWRAM_DATA u16 gUnknown_203B044[2] = {0};
+EWRAM_DATA struct UnkStruct_203B044 gUnknown_203B044 = {0};
 EWRAM_DATA u8 gUnknown_203B048 = 0;
 EWRAM_DATA u8 gUnknown_203B049 = 0;
 EWRAM_DATA u8 gUnknown_203B04A = 0;
@@ -170,7 +177,7 @@ void sub_81138F8(void);
 bool8 sub_8113A44(u16, u16 *);
 void * sub_8113A78(struct UnkStruct_203B024 *, struct UnkStruct_203B024 **);
 void sub_8113ABC(struct UnkStruct_203B024 *);
-bool8 sub_8113AE8(void *);
+bool8 sub_8113AE8(struct UnkStruct_203B024 *);
 bool8 sub_8113B44(void *);
 void sub_8113B88(void);
 void sub_8113B94(u16);
@@ -184,82 +191,82 @@ struct UnkStruct_203B024 * sub_8113D08(void *, struct UnkStruct_203AE98 *);
 struct UnkStruct_203B024 * sub_8113D48(void *, struct UnkStruct_203AE98 *);
 struct UnkStruct_203B024 * sub_8113D94(void *, struct UnkStruct_203AE98 *);
 void *sub_8113F14(void *, void *);
-u16 *sub_8113F3C(u16 *);
+struct UnkStruct_203B024 *sub_8113F3C(struct UnkStruct_203B024 *);
 void *sub_8113F80(void *, void *);
-u16 *sub_8113FBC(u16 *);
+struct UnkStruct_203B024 *sub_8113FBC(struct UnkStruct_203B024 *);
 void *sub_8114174(void *, void *);
-u16 *sub_8114188(u16 *);
+struct UnkStruct_203B024 *sub_8114188(struct UnkStruct_203B024 *);
 void *sub_81141D0(void *, void *);
-u16 *sub_81141E4(u16 *);
+struct UnkStruct_203B024 *sub_81141E4(struct UnkStruct_203B024 *);
 void *sub_811422C(void *, void *);
-u16 *sub_8114240(u16 *);
+struct UnkStruct_203B024 *sub_8114240(struct UnkStruct_203B024 *);
 void *sub_8114288(void *, void *);
-u16 *sub_811429C(u16 *);
+struct UnkStruct_203B024 *sub_811429C(struct UnkStruct_203B024 *);
 void *sub_8114310(void *, void *);
-u16 *sub_8114324(u16 *);
+struct UnkStruct_203B024 *sub_8114324(struct UnkStruct_203B024 *);
 void *sub_8114380(void *, void *);
-u16 *sub_8114394(u16 *);
+struct UnkStruct_203B024 *sub_8114394(struct UnkStruct_203B024 *);
 void *sub_81143F0(void *, void *);
-u16 *sub_811443C(u16 *);
+struct UnkStruct_203B024 *sub_811443C(struct UnkStruct_203B024 *);
 void *sub_811445C(void *, void *);
-u16 *sub_811448C(u16 *);
+struct UnkStruct_203B024 *sub_811448C(struct UnkStruct_203B024 *);
 void *sub_81144EC(void *, void *);
-u16 *sub_8114518(u16 *);
+struct UnkStruct_203B024 *sub_8114518(struct UnkStruct_203B024 *);
 void *sub_8114578(void *, void *);
-u16 *sub_81145A4(u16 *);
+struct UnkStruct_203B024 *sub_81145A4(struct UnkStruct_203B024 *);
 void *sub_8114604(void *, void *);
-u16 *sub_811464C(u16 *);
+struct UnkStruct_203B024 *sub_811464C(struct UnkStruct_203B024 *);
 void *sub_8114710(void *, void *);
-u16 *sub_8114724(u16 *);
+struct UnkStruct_203B024 *sub_8114724(struct UnkStruct_203B024 *);
 void *sub_8114744(void *, void *);
-u16 *sub_8114758(u16 *);
+struct UnkStruct_203B024 *sub_8114758(struct UnkStruct_203B024 *);
 void *sub_8114778(void *, void *);
-u16 *sub_81147A8(u16 *);
+struct UnkStruct_203B024 *sub_81147A8(struct UnkStruct_203B024 *);
 void *sub_8114808(void *, void *);
-u16 *sub_8114834(u16 *);
+struct UnkStruct_203B024 *sub_8114834(struct UnkStruct_203B024 *);
 void *sub_811488C(void *, void *);
-u16 *sub_81148BC(u16 *);
+struct UnkStruct_203B024 *sub_81148BC(struct UnkStruct_203B024 *);
 void *sub_8114918(void *, void *);
-u16 *sub_8114944(u16 *);
+struct UnkStruct_203B024 *sub_8114944(struct UnkStruct_203B024 *);
 void *sub_8114990(void *, void *);
-u16 *sub_81149D0(u16 *);
+struct UnkStruct_203B024 *sub_81149D0(struct UnkStruct_203B024 *);
 void *sub_8114A1C(void *, void *);
-u16 *sub_8114A4C(u16 *);
+struct UnkStruct_203B024 *sub_8114A4C(struct UnkStruct_203B024 *);
 void *sub_8114AA0(void *, void *);
-u16 *sub_8114AC8(u16 *);
+struct UnkStruct_203B024 *sub_8114AC8(struct UnkStruct_203B024 *);
 void *sub_8114B0C(void *, void *);
-u16 *sub_8114B34(u16 *);
+struct UnkStruct_203B024 *sub_8114B34(struct UnkStruct_203B024 *);
 void *sub_8114B78(void *, void *);
-u16 *sub_8114BA0(u16 *);
+struct UnkStruct_203B024 *sub_8114BA0(struct UnkStruct_203B024 *);
 void *sub_8114BE4(void *, void *);
-u16 *sub_8114C0C(u16 *);
+struct UnkStruct_203B024 *sub_8114C0C(struct UnkStruct_203B024 *);
 void *sub_8114C68(void *, void *);
-u16 *sub_8114C8C(u16 *);
+struct UnkStruct_203B024 *sub_8114C8C(struct UnkStruct_203B024 *);
 void *sub_8114CC0(void *, void *);
-u16 *sub_8114CE4(u16 *);
+struct UnkStruct_203B024 *sub_8114CE4(struct UnkStruct_203B024 *);
 void *sub_8114D4C(void *, void *);
-u16 *sub_8114D68(u16 *);
+struct UnkStruct_203B024 *sub_8114D68(struct UnkStruct_203B024 *);
 void *sub_8114DE8(void *, void *);
-u16 *sub_8114E68(u16 *);
+struct UnkStruct_203B024 *sub_8114E68(struct UnkStruct_203B024 *);
 bool8 sub_8114FBC(u16);
 void *sub_8114FF0(void *, void *);
-u16 *sub_811500C(u16 *);
+struct UnkStruct_203B024 *sub_811500C(struct UnkStruct_203B024 *);
 void *sub_8115078(void *, void *);
-u16 *sub_81150CC(u16 *);
+struct UnkStruct_203B024 *sub_81150CC(struct UnkStruct_203B024 *);
 void *sub_81151C0(void *, void *);
-u16 *sub_81151DC(u16 *);
+struct UnkStruct_203B024 *sub_81151DC(struct UnkStruct_203B024 *);
 void *sub_8115280(void *, void *);
-u16 *sub_81152BC(u16 *);
+struct UnkStruct_203B024 *sub_81152BC(struct UnkStruct_203B024 *);
 void *sub_8115410(void *, void *);
-u16 *sub_8115460(u16 *);
+struct UnkStruct_203B024 *sub_8115460(struct UnkStruct_203B024 *);
 void *sub_81154DC(void *, void *);
-u16 *sub_8115518(u16 *);
+struct UnkStruct_203B024 *sub_8115518(struct UnkStruct_203B024 *);
 void *sub_81155A4(void *, void *);
-u16 *sub_81155E0(u16 *);
+struct UnkStruct_203B024 *sub_81155E0(struct UnkStruct_203B024 *);
 void *sub_81156D8(void *, void *);
-u16 *sub_8115700(u16 *);
+struct UnkStruct_203B024 *sub_8115700(struct UnkStruct_203B024 *);
 void *sub_81157DC(void *, void *);
-u16 *sub_8115800(u16 *);
+struct UnkStruct_203B024 *sub_8115800(struct UnkStruct_203B024 *);
 bool8 sub_81153A8(u16, void*);
 bool8 sub_81153E4(u16, void*);
 
@@ -1197,7 +1204,7 @@ void sub_8111B80(void)
         gUnknown_203AE94.unk_0_4 = 0;
         gUnknown_203AE94.unk_3 = 0;
         gUnknown_203AE94.unk_2 = sub_8111BD4();
-        if (gUnknown_203B044[1] == 0)
+        if (gUnknown_203B044.unk_2 == 0)
             gUnknown_203AE94.unk_1++;
         if (gUnknown_203AE94.unk_1 > 32)
             return;
@@ -3132,7 +3139,7 @@ bool8 sub_8113A44(u16 a0, u16 *a1)
     return FALSE;
 }
 
-u16 * (*const gUnknown_84569F4[])(u16 *) = {
+struct UnkStruct_203B024 * (*const gUnknown_84569F4[])(struct UnkStruct_203B024 *) = {
     NULL,
     NULL,
     NULL,
@@ -3244,3 +3251,69 @@ void sub_8113ABC(struct UnkStruct_203B024 * a0)
     else
         gUnknown_203B04A = r2->unk_01 + 1;
 }
+
+#ifdef NONMATCHING
+bool8 sub_8113AE8(struct UnkStruct_203B024 * a0)
+{
+    if (a0 == NULL || a0->unk_02 > gUnknown_203AF98)
+        return FALSE;
+
+    gUnknown_84569F4[a0->unk_00 & 0xFFF](a0);
+    gUnknown_203B044.unk_0 = a0->unk_00;
+    gUnknown_203B044.unk_1 = (a0->unk_00 & 0xF000) >> 12;
+    if (gUnknown_203B044.unk_1 != 0)
+        gUnknown_203B044.unk_2 = 1;
+    return TRUE;
+}
+#else
+NAKED
+bool8 sub_8113AE8(struct UnkStruct_203B024 * a0)
+{
+    asm_unified("\tpush {r4,lr}\n"
+                "\tadds r4, r0, 0\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _08113AFA\n"
+                "\tldr r1, _08113B00 @ =gUnknown_203AF98\n"
+                "\tldrh r0, [r0, 0x2]\n"
+                "\tldrh r1, [r1]\n"
+                "\tcmp r0, r1\n"
+                "\tbls _08113B04\n"
+                "_08113AFA:\n"
+                "\tmovs r0, 0\n"
+                "\tb _08113B32\n"
+                "\t.align 2, 0\n"
+                "_08113B00: .4byte gUnknown_203AF98\n"
+                "_08113B04:\n"
+                "\tldr r2, _08113B38 @ =gUnknown_84569F4\n"
+                "\tldrh r1, [r4]\n"
+                "\tldr r0, _08113B3C @ =0x00000fff\n"
+                "\tands r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r2\n"
+                "\tldr r1, [r0]\n"
+                "\tadds r0, r4, 0\n"
+                "\tbl _call_via_r1\n"
+                "\tldr r2, _08113B40 @ =gUnknown_203B044\n"
+                "\tldrh r1, [r4]\n"
+                "\tstrb r1, [r2]\n"
+                "\tmovs r0, 0xF0\n"
+                "\tlsls r0, 8\n"
+                "\tands r0, r1\n"
+                "\tlsrs r0, 12\n"
+                "\tstrb r0, [r2, 0x1]\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _08113B30\n"
+                "\tmovs r0, 0x1\n"
+                "\tstrh r0, [r2, 0x2]\n"
+                "_08113B30:\n"
+                "\tmovs r0, 0x1\n"
+                "_08113B32:\n"
+                "\tpop {r4}\n"
+                "\tpop {r1}\n"
+                "\tbx r1\n"
+                "\t.align 2, 0\n"
+                "_08113B38: .4byte gUnknown_84569F4\n"
+                "_08113B3C: .4byte 0x00000fff\n"
+                "_08113B40: .4byte gUnknown_203B044");
+}
+#endif

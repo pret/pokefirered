@@ -519,6 +519,7 @@ union UnkUnion_203B024
 struct UnkStruct_203B024
 {
 	u16 unk_00;
+	u16 unk_02;
 	union UnkUnion_203B024 unk_04;
 };
 

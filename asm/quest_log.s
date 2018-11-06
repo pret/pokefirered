@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8113AE8
-sub_8113AE8: @ 8113AE8
-	push {r4,lr}
-	adds r4, r0, 0
-	cmp r0, 0
-	beq _08113AFA
-	ldr r1, _08113B00 @ =gUnknown_203AF98
-	ldrh r0, [r0, 0x2]
-	ldrh r1, [r1]
-	cmp r0, r1
-	bls _08113B04
-_08113AFA:
-	movs r0, 0
-	b _08113B32
-	.align 2, 0
-_08113B00: .4byte gUnknown_203AF98
-_08113B04:
-	ldr r2, _08113B38 @ =gUnknown_84569F4
-	ldrh r1, [r4]
-	ldr r0, _08113B3C @ =0x00000fff
-	ands r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	ldr r2, _08113B40 @ =gUnknown_203B044
-	ldrh r1, [r4]
-	strb r1, [r2]
-	movs r0, 0xF0
-	lsls r0, 8
-	ands r0, r1
-	lsrs r0, 12
-	strb r0, [r2, 0x1]
-	cmp r0, 0
-	beq _08113B30
-	movs r0, 0x1
-	strh r0, [r2, 0x2]
-_08113B30:
-	movs r0, 0x1
-_08113B32:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08113B38: .4byte gUnknown_84569F4
-_08113B3C: .4byte 0x00000fff
-_08113B40: .4byte gUnknown_203B044
-	thumb_func_end sub_8113AE8
-
 	thumb_func_start sub_8113B44
 sub_8113B44: @ 8113B44
 	push {r4,lr}

@@ -3383,3 +3383,84 @@ u16 * sub_8113C5C(u16 * a0, u16 a1)
     a0[1] = a1;
     return a0 + 2;
 }
+
+u16 * sub_8113C8C(u16 * a0, struct UnkStruct_203AE98 * a1)
+{
+    if (!sub_8110988(a0, gUnknown_8456AA0[41]))
+        return NULL;
+    a1->unk_6 = 0xFE;
+    a1->unk_4 = a0[1];
+    a1->unk_0 = 0;
+    a1->unk_1 = 0;
+    a1->unk_2 = 0;
+    a1->unk_3 = 0;
+    return a0 + 2;
+}
+
+u16 * sub_8113CC8(u16 * a0, struct UnkStruct_203AE98 * a1)
+{
+    u8 * r6 = (u8 *)a0 + 4;
+
+    if (!sub_8110988(a0, gUnknown_8456AA0[0]))
+        return NULL;
+    a0[0] = 0;
+    a0[1] = a1->unk_4;
+    r6[0] = a1->unk_0;
+    r6[1] = a1->unk_1;
+    r6[2] = a1->unk_2;
+    r6[3] = a1->unk_3;
+    return (u16 *)(r6 + 4);
+}
+
+u16 * sub_8113D08(u16 * a0, struct UnkStruct_203AE98 * a1)
+{
+    u8 * r6 = (u8 *)a0 + 4;
+
+    if (!sub_8110988(a0, gUnknown_8456AA0[0]))
+        return NULL;
+    a1->unk_6 = 2;
+    a1->unk_4 = a0[1];
+    a1->unk_0 = r6[0];
+    a1->unk_1 = r6[1];
+    a1->unk_2 = r6[2];
+    a1->unk_3 = r6[3];
+    return (u16 *)(r6 + 4);
+}
+
+u16 * sub_8113D48(u16 * a0, struct UnkStruct_203AE98 * a1)
+{
+    u16 * r4 = a0;
+    u8 * r6 = (u8 *)a0 + 4;
+
+    if (!sub_8110988(r4, gUnknown_8456AA0[2]))
+        return NULL;
+    if (a1->unk_6 == 0)
+        r4[0] = 2;
+    else
+        r4[0] = 1;
+    r4[1] = a1->unk_4;
+    r6[0] = a1->unk_0;
+    r6[1] = a1->unk_1;
+    r6[2] = a1->unk_2;
+    r6[3] = a1->unk_3;
+    return (u16 *)(r6 + 4);
+}
+
+u16 * sub_8113D94(u16 * a0, struct UnkStruct_203AE98 * a1)
+{
+    u16 * r5 = a0;
+    u8 * r6 = (u8 *)a0 + 4;
+
+    if (!sub_8110988(r5, gUnknown_8456AA0[2]))
+        return NULL;
+    if (r5[0] == 2)
+        a1->unk_6 = 0;
+    else
+        a1->unk_6 = 1;
+    a1->unk_4 = r5[1];
+    a1->unk_0 = r6[0];
+    a1->unk_1 = r6[1];
+    a1->unk_2 = r6[2];
+    a1->unk_3 = r6[3];
+    return (u16 *)(r6 + 4);
+}

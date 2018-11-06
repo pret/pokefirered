@@ -183,7 +183,7 @@ void sub_8113B88(void);
 void sub_8113B94(u16);
 void sub_8113BD8(void);
 struct UnkStruct_203B024 * sub_8113BF4(struct UnkStruct_203B024 *);
-void * sub_8113C20(void *, struct UnkStruct_203AE98 *);
+struct UnkStruct_203B024 * sub_8113C20(struct UnkStruct_203B024 * a0, struct UnkStruct_203AE98 * a1);
 void *sub_8113C5C(void *, u16);
 struct UnkStruct_203B024 * sub_8113C8C(void *, struct UnkStruct_203AE98 *);
 struct UnkStruct_203B024 * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
@@ -338,17 +338,17 @@ bool8 sub_8110944(void * a0, size_t a1)
     void * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
     void * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
     r0 -= a1;
-    if (a0 < r2 || a0 > r0)
+    if ((void *)a0 < r2 || (void *)a0 > r0)
         return FALSE;
     return TRUE;
 }
 
-bool8 sub_8110988(void * a0, size_t a1)
+bool8 sub_8110988(struct UnkStruct_203B024 * a0, size_t a1)
 {
     void * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
     void * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
     r0 -= a1;
-    if (a0 < r2 || a0 > r0)
+    if ((void *)a0 < r2 || (void *)a0 > r0)
         return FALSE;
     return TRUE;
 }
@@ -3345,4 +3345,32 @@ void sub_8113B94(u16 a0)
     }
     else if (gUnknown_203B044.unk_1 < 5)
         gUnknown_203B044.unk_1++;
+}
+
+void sub_8113BD8(void)
+{
+    gUnknown_203B049 = 0;
+    gUnknown_203B04A = 0;
+    gUnknown_203B04B = 0;
+}
+
+struct UnkStruct_203B024 * sub_8113BF4(struct UnkStruct_203B024 * a0)
+{
+    if (!sub_8110988(a0, gUnknown_8456AA0[39]))
+        return NULL;
+    a0->unk_00 = 39;
+    return (void *)a0 + 2;
+}
+
+struct UnkStruct_203B024 * sub_8113C20(struct UnkStruct_203B024 * a0, struct UnkStruct_203AE98 * a1)
+{
+    if (!sub_8110988(a0, gUnknown_8456AA0[39]))
+        return NULL;
+    a1->unk_6 = 0xFF;
+    a1->unk_4 = 0;
+    a1->unk_0 = 0;
+    a1->unk_1 = 0;
+    a1->unk_2 = 0;
+    a1->unk_3 = 0;
+    return (void *)a0 + 2;
 }

@@ -3464,3 +3464,43 @@ u16 * sub_8113D94(u16 * a0, struct UnkStruct_203AE98 * a1)
     a1->unk_3 = r6[3];
     return (u16 *)(r6 + 4);
 }
+
+u16 * sub_8113DE0(u16 a0, u16 * a1)
+{
+    u8 r6;
+    u16 * r5;
+    u8 r4;
+    u8 r1;
+
+    if (gUnknown_203B044.unk_1 == 0)
+        r6 = gUnknown_8456AA0[a0];
+    else
+        r6 = gUnknown_8456AA0[a0] - 4;
+    if (!sub_8110944(a1, r6))
+        return NULL;
+
+    r5 = (void *)a1;
+
+    if (gUnknown_203B044.unk_1 != 0)
+        r5 = (void *)r5 - (gUnknown_203B044.unk_1 * r6 + 4);
+
+    if (gUnknown_203B044.unk_1 == 5)
+    {
+        for (r4 = 0; r4 < 4; r4++)
+        {
+            memcpy(
+                (void *)r5 + (r4 * r6 + 4),
+                (void *)r5 + ((r4 + 1) * r6 + 4),
+                r6
+            );
+        }
+        r1 = 4;
+    }
+    else
+        r1 = gUnknown_203B044.unk_1;
+
+    r5[0] = a0 + (r1 << 12);
+    r5[1] = gUnknown_203AF98;
+    r5 = (void *)r5 + (r1 * r6 + 4);
+    return r5;
+}

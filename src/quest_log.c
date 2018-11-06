@@ -178,7 +178,7 @@ bool8 sub_8113A44(u16, u16 *);
 void * sub_8113A78(struct UnkStruct_203B024 *, struct UnkStruct_203B024 **);
 void sub_8113ABC(struct UnkStruct_203B024 *);
 bool8 sub_8113AE8(struct UnkStruct_203B024 *);
-bool8 sub_8113B44(void *);
+bool8 sub_8113B44(struct UnkStruct_203B024 *);
 void sub_8113B88(void);
 void sub_8113B94(u16);
 void sub_8113BD8(void);
@@ -3317,3 +3317,32 @@ bool8 sub_8113AE8(struct UnkStruct_203B024 * a0)
                 "_08113B40: .4byte gUnknown_203B044");
 }
 #endif
+
+bool8 sub_8113B44(struct UnkStruct_203B024 * a0)
+{
+    if (gUnknown_203B044.unk_2 == 0)
+        return FALSE;
+
+    gUnknown_84569F4[gUnknown_203B044.unk_0](a0);
+    gUnknown_203B044.unk_2++;
+    if (gUnknown_203B044.unk_2 > gUnknown_203B044.unk_1)
+        sub_8113B88();
+    return TRUE;
+}
+
+void sub_8113B88(void)
+{
+    gUnknown_203B044 = (struct UnkStruct_203B044){};
+}
+
+void sub_8113B94(u16 a0)
+{
+    if (gUnknown_203B044.unk_0 != (u8)a0 || gUnknown_203B044.unk_2 != gUnknown_203AF98)
+    {
+        gUnknown_203B044.unk_0 = a0;
+        gUnknown_203B044.unk_1 = 0;
+        gUnknown_203B044.unk_2 = gUnknown_203AF98;
+    }
+    else if (gUnknown_203B044.unk_1 < 5)
+        gUnknown_203B044.unk_1++;
+}

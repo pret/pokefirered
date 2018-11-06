@@ -92,9 +92,9 @@ EWRAM_DATA u8 gUnknown_203ADF9 = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
 EWRAM_DATA u16 gUnknown_203ADFC = 0;
 EWRAM_DATA u8 gUnknown_203ADFE[3] = {0};
-EWRAM_DATA void * gUnknown_203AE04 = NULL;
-EWRAM_DATA struct UnkStruct_203B024 * gUnknown_203AE08 = NULL;
-EWRAM_DATA struct UnkStruct_203B024 * gUnknown_203AE0C[32] = {NULL};
+EWRAM_DATA u16 * gUnknown_203AE04 = NULL;
+EWRAM_DATA u16 * gUnknown_203AE08 = NULL;
+EWRAM_DATA u16 * gUnknown_203AE0C[32] = {NULL};
 EWRAM_DATA void (* gUnknown_203AE8C)(void) = NULL;
 EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
@@ -175,98 +175,98 @@ void sub_8113A1C(u16);
 void sub_811381C(void);
 void sub_81138F8(void);
 bool8 sub_8113A44(u16, u16 *);
-void * sub_8113A78(struct UnkStruct_203B024 *, struct UnkStruct_203B024 **);
-void sub_8113ABC(struct UnkStruct_203B024 *);
-bool8 sub_8113AE8(struct UnkStruct_203B024 *);
-bool8 sub_8113B44(struct UnkStruct_203B024 *);
+u16 * sub_8113A78(u16 *, u16 **);
+void sub_8113ABC(u16 *);
+bool8 sub_8113AE8(u16 *);
+bool8 sub_8113B44(u16 *);
 void sub_8113B88(void);
 void sub_8113B94(u16);
 void sub_8113BD8(void);
-struct UnkStruct_203B024 * sub_8113BF4(struct UnkStruct_203B024 *);
-struct UnkStruct_203B024 * sub_8113C20(struct UnkStruct_203B024 * a0, struct UnkStruct_203AE98 * a1);
-void *sub_8113C5C(void *, u16);
-struct UnkStruct_203B024 * sub_8113C8C(void *, struct UnkStruct_203AE98 *);
-struct UnkStruct_203B024 * sub_8113CC8(void *, struct UnkStruct_203AE98 *);
-struct UnkStruct_203B024 * sub_8113D08(void *, struct UnkStruct_203AE98 *);
-struct UnkStruct_203B024 * sub_8113D48(void *, struct UnkStruct_203AE98 *);
-struct UnkStruct_203B024 * sub_8113D94(void *, struct UnkStruct_203AE98 *);
+u16 * sub_8113BF4(u16 *);
+u16 * sub_8113C20(u16 *, struct UnkStruct_203AE98 *);
+u16 * sub_8113C5C(u16 *, u16);
+u16 * sub_8113C8C(u16 *, struct UnkStruct_203AE98 *);
+u16 * sub_8113CC8(u16 *, struct UnkStruct_203AE98 *);
+u16 * sub_8113D08(u16 *, struct UnkStruct_203AE98 *);
+u16 * sub_8113D48(u16 *, struct UnkStruct_203AE98 *);
+u16 * sub_8113D94(u16 *, struct UnkStruct_203AE98 *);
 void *sub_8113F14(void *, void *);
-struct UnkStruct_203B024 *sub_8113F3C(struct UnkStruct_203B024 *);
+u16 *sub_8113F3C(u16 *);
 void *sub_8113F80(void *, void *);
-struct UnkStruct_203B024 *sub_8113FBC(struct UnkStruct_203B024 *);
+u16 *sub_8113FBC(u16 *);
 void *sub_8114174(void *, void *);
-struct UnkStruct_203B024 *sub_8114188(struct UnkStruct_203B024 *);
+u16 *sub_8114188(u16 *);
 void *sub_81141D0(void *, void *);
-struct UnkStruct_203B024 *sub_81141E4(struct UnkStruct_203B024 *);
+u16 *sub_81141E4(u16 *);
 void *sub_811422C(void *, void *);
-struct UnkStruct_203B024 *sub_8114240(struct UnkStruct_203B024 *);
+u16 *sub_8114240(u16 *);
 void *sub_8114288(void *, void *);
-struct UnkStruct_203B024 *sub_811429C(struct UnkStruct_203B024 *);
+u16 *sub_811429C(u16 *);
 void *sub_8114310(void *, void *);
-struct UnkStruct_203B024 *sub_8114324(struct UnkStruct_203B024 *);
+u16 *sub_8114324(u16 *);
 void *sub_8114380(void *, void *);
-struct UnkStruct_203B024 *sub_8114394(struct UnkStruct_203B024 *);
+u16 *sub_8114394(u16 *);
 void *sub_81143F0(void *, void *);
-struct UnkStruct_203B024 *sub_811443C(struct UnkStruct_203B024 *);
+u16 *sub_811443C(u16 *);
 void *sub_811445C(void *, void *);
-struct UnkStruct_203B024 *sub_811448C(struct UnkStruct_203B024 *);
+u16 *sub_811448C(u16 *);
 void *sub_81144EC(void *, void *);
-struct UnkStruct_203B024 *sub_8114518(struct UnkStruct_203B024 *);
+u16 *sub_8114518(u16 *);
 void *sub_8114578(void *, void *);
-struct UnkStruct_203B024 *sub_81145A4(struct UnkStruct_203B024 *);
+u16 *sub_81145A4(u16 *);
 void *sub_8114604(void *, void *);
-struct UnkStruct_203B024 *sub_811464C(struct UnkStruct_203B024 *);
+u16 *sub_811464C(u16 *);
 void *sub_8114710(void *, void *);
-struct UnkStruct_203B024 *sub_8114724(struct UnkStruct_203B024 *);
+u16 *sub_8114724(u16 *);
 void *sub_8114744(void *, void *);
-struct UnkStruct_203B024 *sub_8114758(struct UnkStruct_203B024 *);
+u16 *sub_8114758(u16 *);
 void *sub_8114778(void *, void *);
-struct UnkStruct_203B024 *sub_81147A8(struct UnkStruct_203B024 *);
+u16 *sub_81147A8(u16 *);
 void *sub_8114808(void *, void *);
-struct UnkStruct_203B024 *sub_8114834(struct UnkStruct_203B024 *);
+u16 *sub_8114834(u16 *);
 void *sub_811488C(void *, void *);
-struct UnkStruct_203B024 *sub_81148BC(struct UnkStruct_203B024 *);
+u16 *sub_81148BC(u16 *);
 void *sub_8114918(void *, void *);
-struct UnkStruct_203B024 *sub_8114944(struct UnkStruct_203B024 *);
+u16 *sub_8114944(u16 *);
 void *sub_8114990(void *, void *);
-struct UnkStruct_203B024 *sub_81149D0(struct UnkStruct_203B024 *);
+u16 *sub_81149D0(u16 *);
 void *sub_8114A1C(void *, void *);
-struct UnkStruct_203B024 *sub_8114A4C(struct UnkStruct_203B024 *);
+u16 *sub_8114A4C(u16 *);
 void *sub_8114AA0(void *, void *);
-struct UnkStruct_203B024 *sub_8114AC8(struct UnkStruct_203B024 *);
+u16 *sub_8114AC8(u16 *);
 void *sub_8114B0C(void *, void *);
-struct UnkStruct_203B024 *sub_8114B34(struct UnkStruct_203B024 *);
+u16 *sub_8114B34(u16 *);
 void *sub_8114B78(void *, void *);
-struct UnkStruct_203B024 *sub_8114BA0(struct UnkStruct_203B024 *);
+u16 *sub_8114BA0(u16 *);
 void *sub_8114BE4(void *, void *);
-struct UnkStruct_203B024 *sub_8114C0C(struct UnkStruct_203B024 *);
+u16 *sub_8114C0C(u16 *);
 void *sub_8114C68(void *, void *);
-struct UnkStruct_203B024 *sub_8114C8C(struct UnkStruct_203B024 *);
+u16 *sub_8114C8C(u16 *);
 void *sub_8114CC0(void *, void *);
-struct UnkStruct_203B024 *sub_8114CE4(struct UnkStruct_203B024 *);
+u16 *sub_8114CE4(u16 *);
 void *sub_8114D4C(void *, void *);
-struct UnkStruct_203B024 *sub_8114D68(struct UnkStruct_203B024 *);
+u16 *sub_8114D68(u16 *);
 void *sub_8114DE8(void *, void *);
-struct UnkStruct_203B024 *sub_8114E68(struct UnkStruct_203B024 *);
+u16 *sub_8114E68(u16 *);
 bool8 sub_8114FBC(u16);
 void *sub_8114FF0(void *, void *);
-struct UnkStruct_203B024 *sub_811500C(struct UnkStruct_203B024 *);
+u16 *sub_811500C(u16 *);
 void *sub_8115078(void *, void *);
-struct UnkStruct_203B024 *sub_81150CC(struct UnkStruct_203B024 *);
+u16 *sub_81150CC(u16 *);
 void *sub_81151C0(void *, void *);
-struct UnkStruct_203B024 *sub_81151DC(struct UnkStruct_203B024 *);
+u16 *sub_81151DC(u16 *);
 void *sub_8115280(void *, void *);
-struct UnkStruct_203B024 *sub_81152BC(struct UnkStruct_203B024 *);
+u16 *sub_81152BC(u16 *);
 void *sub_8115410(void *, void *);
-struct UnkStruct_203B024 *sub_8115460(struct UnkStruct_203B024 *);
+u16 *sub_8115460(u16 *);
 void *sub_81154DC(void *, void *);
-struct UnkStruct_203B024 *sub_8115518(struct UnkStruct_203B024 *);
+u16 *sub_8115518(u16 *);
 void *sub_81155A4(void *, void *);
-struct UnkStruct_203B024 *sub_81155E0(struct UnkStruct_203B024 *);
+u16 *sub_81155E0(u16 *);
 void *sub_81156D8(void *, void *);
-struct UnkStruct_203B024 *sub_8115700(struct UnkStruct_203B024 *);
+u16 *sub_8115700(u16 *);
 void *sub_81157DC(void *, void *);
-struct UnkStruct_203B024 *sub_8115800(struct UnkStruct_203B024 *);
+u16 *sub_8115800(u16 *);
 bool8 sub_81153A8(u16, void*);
 bool8 sub_81153E4(u16, void*);
 
@@ -289,7 +289,7 @@ void sub_8110840(void * oldPointer)
 {
     ptrdiff_t offset = (void *)gSaveBlock1Ptr - oldPointer;
     if (gUnknown_203AE04)
-        gUnknown_203AE04 += offset;
+        gUnknown_203AE04 = (void *)gUnknown_203AE04 + offset;
     if (gUnknown_203ADFA != 0)
     {
         if (gUnknown_203AE08)
@@ -343,7 +343,7 @@ bool8 sub_8110944(void * a0, size_t a1)
     return TRUE;
 }
 
-bool8 sub_8110988(struct UnkStruct_203B024 * a0, size_t a1)
+bool8 sub_8110988(u16 * a0, size_t a1)
 {
     void * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
     void * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
@@ -408,7 +408,7 @@ void sub_8110AEC(u16 a0)
 
     sub_81108F0(gUnknown_203ADF8);
     sub_8113B88();
-    gUnknown_203AE08 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
+    gUnknown_203AE08 = (u16 *)gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
     if ((a0 >= 12 && a0 < 20) || a0 == 35)
         gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 2;
     else
@@ -1033,7 +1033,7 @@ void sub_8111708(void)
 void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
 {
     u16 i;
-    struct UnkStruct_203B024 *r4;
+    u16 *r4;
     u16 r6 = 0;
     u16 r9 = 0;
 
@@ -1043,10 +1043,10 @@ void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
         gUnknown_203AE0C[i] = NULL;
     }
 
-    r4 = gSaveBlock1Ptr->questLog[a0].unk_568;
+    r4 = (u16 *)gSaveBlock1Ptr->questLog[a0].unk_568;
     for (i = 0; i < 32; i++)
     {
-        switch (r4->unk_00 & 0xFFF)
+        switch (r4[0] & 0xFFF)
         {
             case 0:
                 r4 = sub_8113D08(r4, &a1[r6]);
@@ -3139,7 +3139,7 @@ bool8 sub_8113A44(u16 a0, u16 *a1)
     return FALSE;
 }
 
-struct UnkStruct_203B024 * (*const gUnknown_84569F4[])(struct UnkStruct_203B024 *) = {
+u16 * (*const gUnknown_84569F4[])(u16 *) = {
     NULL,
     NULL,
     NULL,
@@ -3231,10 +3231,10 @@ const u8 gUnknown_8456AA0[] = {
     0x06
 };
 
-void * sub_8113A78(struct UnkStruct_203B024 *a0, struct UnkStruct_203B024 **a1)
+u16 * sub_8113A78(u16 * a0, u16 **a1)
 {
-    u16 r2 = a0->unk_00 & 0xfff;
-    u16 r4 = a0->unk_00 >> 12;
+    u16 r2 = a0[0] & 0xfff;
+    u16 r4 = a0[0] >> 12;
     if (r2 == 33)
         r4 = 0;
     if (r2 < 3 || r2 > 42)
@@ -3243,31 +3243,31 @@ void * sub_8113A78(struct UnkStruct_203B024 *a0, struct UnkStruct_203B024 **a1)
     return gUnknown_8456AA0[r2] + (gUnknown_8456AA0[r2] - 4) * r4 + (void *)a0;
 }
 
-void sub_8113ABC(struct UnkStruct_203B024 * a0)
+void sub_8113ABC(u16 * a0)
 {
-    struct UnkStruct_203B024_Sub1 * r2 = &a0->unk_04.type1;
-    if ((a0->unk_00 & 0xFFF) != 35)
+    u8 * r2 = (u8 *)(a0 + 2);
+    if ((a0[0] & 0xFFF) != 35)
         gUnknown_203B04A = 0;
     else
-        gUnknown_203B04A = r2->unk_01 + 1;
+        gUnknown_203B04A = r2[1] + 1;
 }
 
 #ifdef NONMATCHING
-bool8 sub_8113AE8(struct UnkStruct_203B024 * a0)
+bool8 sub_8113AE8(u16 * a0)
 {
-    if (a0 == NULL || a0->unk_02 > gUnknown_203AF98)
+    if (a0 == NULL || a0[1] > gUnknown_203AF98)
         return FALSE;
 
-    gUnknown_84569F4[a0->unk_00 & 0xFFF](a0);
-    gUnknown_203B044.unk_0 = a0->unk_00;
-    gUnknown_203B044.unk_1 = (a0->unk_00 & 0xF000) >> 12;
+    gUnknown_84569F4[a0[0] & 0xFFF](a0);
+    gUnknown_203B044.unk_0 = a0[0];
+    gUnknown_203B044.unk_1 = (a0[0] & 0xF000) >> 12;
     if (gUnknown_203B044.unk_1 != 0)
         gUnknown_203B044.unk_2 = 1;
     return TRUE;
 }
 #else
 NAKED
-bool8 sub_8113AE8(struct UnkStruct_203B024 * a0)
+bool8 sub_8113AE8(u16 * a0)
 {
     asm_unified("\tpush {r4,lr}\n"
                 "\tadds r4, r0, 0\n"
@@ -3318,7 +3318,7 @@ bool8 sub_8113AE8(struct UnkStruct_203B024 * a0)
 }
 #endif
 
-bool8 sub_8113B44(struct UnkStruct_203B024 * a0)
+bool8 sub_8113B44(u16 * a0)
 {
     if (gUnknown_203B044.unk_2 == 0)
         return FALSE;
@@ -3354,15 +3354,15 @@ void sub_8113BD8(void)
     gUnknown_203B04B = 0;
 }
 
-struct UnkStruct_203B024 * sub_8113BF4(struct UnkStruct_203B024 * a0)
+u16 * sub_8113BF4(u16 * a0)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[39]))
         return NULL;
-    a0->unk_00 = 39;
-    return (void *)a0 + 2;
+    a0[0] = 39;
+    return a0 + 1;
 }
 
-struct UnkStruct_203B024 * sub_8113C20(struct UnkStruct_203B024 * a0, struct UnkStruct_203AE98 * a1)
+u16 * sub_8113C20(u16 * a0, struct UnkStruct_203AE98 * a1)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[39]))
         return NULL;
@@ -3372,5 +3372,14 @@ struct UnkStruct_203B024 * sub_8113C20(struct UnkStruct_203B024 * a0, struct Unk
     a1->unk_1 = 0;
     a1->unk_2 = 0;
     a1->unk_3 = 0;
-    return (void *)a0 + 2;
+    return a0 + 1;
+}
+
+u16 * sub_8113C5C(u16 * a0, u16 a1)
+{
+    if (!sub_8110988(a0, gUnknown_8456AA0[41]))
+        return NULL;
+    a0[0] = 41;
+    a0[1] = a1;
+    return a0 + 2;
 }

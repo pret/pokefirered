@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/species.h"
+#include "data2.h"
 #include "malloc.h"
 #include "main.h"
 #include "task.h"
@@ -9,6 +10,7 @@
 #include "menu_helpers.h"
 #include "window.h"
 #include "text_window.h"
+#include "unk_text_util.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "string_util.h"
@@ -3503,4 +3505,31 @@ u16 * sub_8113DE0(u16 a0, u16 * a1)
     r5[1] = gUnknown_203AF98;
     r5 = (void *)r5 + (r1 * r6 + 4);
     return r5;
+}
+
+u16 * sub_8113E88(u16 a0, u16 * a1)
+{
+    a1 = (void *)a1 + (gUnknown_203B044.unk_2 * (gUnknown_8456AA0[a0] - 4) + 4);
+    return a1;
+}
+
+// TODO: delete this declaration once data_83FECCC.s is decompiled
+extern const u8 gText_EggNickname[];
+
+void sub_8113EAC(u16 a0, u8 * a1, u8 a2)
+{
+    if (a1 != NULL)
+    {
+        if (a0 != SPECIES_EGG)
+            GetSpeciesName(a1, a0);
+        else
+            StringCopy(a1, gText_EggNickname);
+    }
+    else
+    {
+        if (a0 != SPECIES_EGG)
+            UnkTextUtil_SetPtrI(a2, gSpeciesNames[a0]);
+        else
+            UnkTextUtil_SetPtrI(a2, gText_EggNickname);
+    }
 }

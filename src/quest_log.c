@@ -170,7 +170,7 @@ void sub_8113524(struct Var4038Struct *);
 bool8 sub_81136D4(void);
 bool8 sub_8113778(u16, u16 *);
 bool8 sub_81137E4(u16, u16 *);
-void * sub_8113828(u16, u16 *);
+u16 * sub_8113828(u16, u16 *);
 bool8 sub_81138A0(u16, u16 *);
 bool8 sub_8113954(u16, u16 *);
 void sub_8113A1C(u16);
@@ -192,82 +192,82 @@ u16 * sub_8113CC8(u16 *, struct UnkStruct_203AE98 *);
 u16 * sub_8113D08(u16 *, struct UnkStruct_203AE98 *);
 u16 * sub_8113D48(u16 *, struct UnkStruct_203AE98 *);
 u16 * sub_8113D94(u16 *, struct UnkStruct_203AE98 *);
-void *sub_8113F14(void *, void *);
+u16 *sub_8113F14(u16 *, u16 *);
 u16 *sub_8113F3C(u16 *);
-void *sub_8113F80(void *, void *);
+u16 *sub_8113F80(u16 *, u16 *);
 u16 *sub_8113FBC(u16 *);
-void *sub_8114174(void *, void *);
+u16 *sub_8114174(u16 *, u16 *);
 u16 *sub_8114188(u16 *);
-void *sub_81141D0(void *, void *);
+u16 *sub_81141D0(u16 *, u16 *);
 u16 *sub_81141E4(u16 *);
-void *sub_811422C(void *, void *);
+u16 *sub_811422C(u16 *, u16 *);
 u16 *sub_8114240(u16 *);
-void *sub_8114288(void *, void *);
+u16 *sub_8114288(u16 *, u16 *);
 u16 *sub_811429C(u16 *);
-void *sub_8114310(void *, void *);
+u16 *sub_8114310(u16 *, u16 *);
 u16 *sub_8114324(u16 *);
-void *sub_8114380(void *, void *);
+u16 *sub_8114380(u16 *, u16 *);
 u16 *sub_8114394(u16 *);
-void *sub_81143F0(void *, void *);
+u16 *sub_81143F0(u16 *, u16 *);
 u16 *sub_811443C(u16 *);
-void *sub_811445C(void *, void *);
+u16 *sub_811445C(u16 *, u16 *);
 u16 *sub_811448C(u16 *);
-void *sub_81144EC(void *, void *);
+u16 *sub_81144EC(u16 *, u16 *);
 u16 *sub_8114518(u16 *);
-void *sub_8114578(void *, void *);
+u16 *sub_8114578(u16 *, u16 *);
 u16 *sub_81145A4(u16 *);
-void *sub_8114604(void *, void *);
+u16 *sub_8114604(u16 *, u16 *);
 u16 *sub_811464C(u16 *);
-void *sub_8114710(void *, void *);
+u16 *sub_8114710(u16 *, u16 *);
 u16 *sub_8114724(u16 *);
-void *sub_8114744(void *, void *);
+u16 *sub_8114744(u16 *, u16 *);
 u16 *sub_8114758(u16 *);
-void *sub_8114778(void *, void *);
+u16 *sub_8114778(u16 *, u16 *);
 u16 *sub_81147A8(u16 *);
-void *sub_8114808(void *, void *);
+u16 *sub_8114808(u16 *, u16 *);
 u16 *sub_8114834(u16 *);
-void *sub_811488C(void *, void *);
+u16 *sub_811488C(u16 *, u16 *);
 u16 *sub_81148BC(u16 *);
-void *sub_8114918(void *, void *);
+u16 *sub_8114918(u16 *, u16 *);
 u16 *sub_8114944(u16 *);
-void *sub_8114990(void *, void *);
+u16 *sub_8114990(u16 *, u16 *);
 u16 *sub_81149D0(u16 *);
-void *sub_8114A1C(void *, void *);
+u16 *sub_8114A1C(u16 *, u16 *);
 u16 *sub_8114A4C(u16 *);
-void *sub_8114AA0(void *, void *);
+u16 *sub_8114AA0(u16 *, u16 *);
 u16 *sub_8114AC8(u16 *);
-void *sub_8114B0C(void *, void *);
+u16 *sub_8114B0C(u16 *, u16 *);
 u16 *sub_8114B34(u16 *);
-void *sub_8114B78(void *, void *);
+u16 *sub_8114B78(u16 *, u16 *);
 u16 *sub_8114BA0(u16 *);
-void *sub_8114BE4(void *, void *);
+u16 *sub_8114BE4(u16 *, u16 *);
 u16 *sub_8114C0C(u16 *);
-void *sub_8114C68(void *, void *);
+u16 *sub_8114C68(u16 *, u16 *);
 u16 *sub_8114C8C(u16 *);
-void *sub_8114CC0(void *, void *);
+u16 *sub_8114CC0(u16 *, u16 *);
 u16 *sub_8114CE4(u16 *);
-void *sub_8114D4C(void *, void *);
+u16 *sub_8114D4C(u16 *, u16 *);
 u16 *sub_8114D68(u16 *);
-void *sub_8114DE8(void *, void *);
+u16 *sub_8114DE8(u16 *, u16 *);
 u16 *sub_8114E68(u16 *);
 bool8 sub_8114FBC(u16);
-void *sub_8114FF0(void *, void *);
+u16 *sub_8114FF0(u16 *, u16 *);
 u16 *sub_811500C(u16 *);
-void *sub_8115078(void *, void *);
+u16 *sub_8115078(u16 *, u16 *);
 u16 *sub_81150CC(u16 *);
-void *sub_81151C0(void *, void *);
+u16 *sub_81151C0(u16 *, u16 *);
 u16 *sub_81151DC(u16 *);
-void *sub_8115280(void *, void *);
+u16 *sub_8115280(u16 *, u16 *);
 u16 *sub_81152BC(u16 *);
-void *sub_8115410(void *, void *);
+u16 *sub_8115410(u16 *, u16 *);
 u16 *sub_8115460(u16 *);
-void *sub_81154DC(void *, void *);
+u16 *sub_81154DC(u16 *, u16 *);
 u16 *sub_8115518(u16 *);
-void *sub_81155A4(void *, void *);
+u16 *sub_81155A4(u16 *, u16 *);
 u16 *sub_81155E0(u16 *);
-void *sub_81156D8(void *, void *);
+u16 *sub_81156D8(u16 *, u16 *);
 u16 *sub_8115700(u16 *);
-void *sub_81157DC(void *, void *);
+u16 *sub_81157DC(u16 *, u16 *);
 u16 *sub_8115800(u16 *);
 bool8 sub_81153A8(u16, void*);
 bool8 sub_81153E4(u16, void*);
@@ -2645,7 +2645,7 @@ u8 sub_8113530(void)
     return sub_8113114(VAR_0x4038_STRUCT, gUnknown_20370C0);
 }
 
-void * (*const gUnknown_8456948[])(void *, void *) = {
+u16 * (*const gUnknown_8456948[])(u16 *, u16 *) = {
     NULL,
     NULL,
     NULL,
@@ -2694,7 +2694,7 @@ void * (*const gUnknown_8456948[])(void *, void *) = {
 #ifdef NONMATCHING
 void sub_8113550(u16 a0, u16 * a1)
 {
-    void * r1;
+    u16 * r1;
 
     if (a0 == 35 && gUnknown_203B048 == 2)
     {
@@ -3034,7 +3034,7 @@ void sub_811381C(void)
     gUnknown_203B048 = 0;
 }
 
-void * sub_8113828(u16 a0, u16 * a1)
+u16 * sub_8113828(u16 a0, u16 * a1)
 {
     if (sub_8113778(a0, a1) == TRUE)
         return NULL;
@@ -3080,10 +3080,10 @@ void sub_811390C(void)
 {
     if (gUnknown_203B024.unk_00 != 0)
     {
-        void * resp;
+        u16 * resp;
         gUnknown_203B04A = 0;
         sub_8110AEC(gUnknown_203B024.unk_00);
-        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, &gUnknown_203B024.unk_04);
+        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, (u16 *)&gUnknown_203B024.unk_04);
         gUnknown_203AE08 = resp;
         sub_81138F8();
     }
@@ -3106,14 +3106,14 @@ void sub_81139BC(void)
 {
     if (gUnknown_203B024.unk_00 != 0)
     {
-        void * resp;
+        u16 * resp;
         if (gUnknown_3005E88 == 0)
         {
             gUnknown_203B04A = 0;
             sub_8110AEC(gUnknown_203B024.unk_00);
         }
         sub_8113B94(gUnknown_203B024.unk_00);
-        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, &gUnknown_203B024.unk_04);
+        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, (u16 *)&gUnknown_203B024.unk_04);
         gUnknown_203AE08 = resp;
         sub_8113A1C(1);
         sub_81138F8();
@@ -3532,4 +3532,15 @@ void sub_8113EAC(u16 a0, u8 * a1, u8 a2)
         else
             UnkTextUtil_SetPtrI(a2, gText_EggNickname);
     }
+}
+
+u16 * sub_8113F14(u16 * a0, u16 * a1)
+{
+    u16 * r2 = sub_8113DE0(3, a0);
+    if (r2 == NULL)
+        return NULL;
+    
+    r2[0] = a1[0];
+    r2[1] = a1[1];
+    return r2 + 2;
 }

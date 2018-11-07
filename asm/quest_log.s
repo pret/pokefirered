@@ -5,31 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8113F14
-sub_8113F14: @ 8113F14
-	push {r4,lr}
-	adds r2, r0, 0
-	adds r4, r1, 0
-	movs r0, 0x3
-	adds r1, r2, 0
-	bl sub_8113DE0
-	adds r2, r0, 0
-	cmp r2, 0
-	beq _08113F34
-	ldrh r0, [r4]
-	strh r0, [r2]
-	ldrh r0, [r4, 0x2]
-	strh r0, [r2, 0x2]
-	adds r0, r2, 0x4
-	b _08113F36
-_08113F34:
-	movs r0, 0
-_08113F36:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8113F14
-
 	thumb_func_start sub_8113F3C
 sub_8113F3C: @ 8113F3C
 	push {r4,lr}

@@ -1259,7 +1259,7 @@ sub_809B494: @ 809B494
 	lsrs r0, 16
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _0809B524 @ =gUnknown_8247094
+	ldr r0, _0809B524 @ =gMoveNames
 	adds r1, r0
 	adds r0, r5, 0
 	bl StringCopy
@@ -1280,7 +1280,7 @@ _0809B514: .4byte gStringVar1
 _0809B518: .4byte 0xfffffee0
 _0809B51C: .4byte gStringVar4
 _0809B520: .4byte gUnknown_8416226
-_0809B524: .4byte gUnknown_8247094
+_0809B524: .4byte gMoveNames
 _0809B528:
 	ldr r2, _0809B564 @ =gUnknown_8416213
 	movs r4, 0

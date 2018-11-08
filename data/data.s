@@ -128,7 +128,7 @@ gSpeciesNames:: @ 8245EE0
 gUnknown_8246BE5:: @ 8246BE5
 	.incbin "baserom.gba", 0x246BE5, 0x4AF
 
-gUnknown_8247094:: @ 8247094
+gMoveNames:: @ 8247094
 	.incbin "baserom.gba", 0x247094, 0xF97
 
 gUnknown_824802B:: @ 824802B

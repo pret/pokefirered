@@ -709,12 +709,12 @@ _0810D968:
 	lsrs r0, 16
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _0810D9C0 @ =gUnknown_8247094
+	ldr r0, _0810D9C0 @ =gMoveNames
 	adds r5, r1, r0
 	b _0810D9DA
 	.align 2, 0
 _0810D9BC: .4byte gUnknown_203ADBC
-_0810D9C0: .4byte gUnknown_8247094
+_0810D9C0: .4byte gMoveNames
 _0810D9C4:
 	adds r0, r4, 0
 	bl ItemId_GetDescription

@@ -13647,7 +13647,7 @@ _08125620:
 	movs r0, 0xD
 	adds r2, r5, 0
 	muls r2, r0
-	ldr r0, _081256BC @ =gUnknown_8247094
+	ldr r0, _081256BC @ =gMoveNames
 	adds r2, r0
 	lsls r0, r6, 4
 	adds r0, 0x2
@@ -13697,7 +13697,7 @@ _08125680:
 	bx r0
 	.align 2, 0
 _081256B8: .4byte gPlayerParty
-_081256BC: .4byte gUnknown_8247094
+_081256BC: .4byte gMoveNames
 	thumb_func_end sub_81255F0
 
 	thumb_func_start sub_81256C0
@@ -13974,7 +13974,7 @@ sub_8125898: @ 8125898
 	ldr r2, _08125944 @ =gStringVar1
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _08125948 @ =gUnknown_8247094
+	ldr r0, _08125948 @ =gMoveNames
 	adds r1, r0
 	adds r0, r2, 0
 	bl StringCopy
@@ -14005,7 +14005,7 @@ _08125938: .4byte gUnknown_203AD30
 _0812593C: .4byte gUnknown_203B0C0
 _08125940: .4byte 0x0000ffff
 _08125944: .4byte gStringVar1
-_08125948: .4byte gUnknown_8247094
+_08125948: .4byte gMoveNames
 _0812594C: .4byte gStringVar4
 _08125950: .4byte gTasks
 _08125954: .4byte sub_81255BC
@@ -14076,7 +14076,7 @@ _081259A0:
 	ldr r0, _08125A28 @ =gStringVar1
 	movs r1, 0xD
 	muls r1, r4
-	ldr r2, _08125A2C @ =gUnknown_8247094
+	ldr r2, _08125A2C @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	adds r0, r5, 0
@@ -14104,7 +14104,7 @@ _08125A1C: .4byte gUnknown_203B0C0
 _08125A20: .4byte gPlayerParty
 _08125A24: .4byte 0x0000ffff
 _08125A28: .4byte gStringVar1
-_08125A2C: .4byte gUnknown_8247094
+_08125A2C: .4byte gMoveNames
 _08125A30: .4byte gStringVar4
 _08125A34: .4byte gTasks
 _08125A38: .4byte sub_81255BC
@@ -14288,7 +14288,7 @@ sub_8125B40: @ 8125B40
 	ldrsh r2, [r7, r1]
 	movs r1, 0xD
 	muls r1, r2
-	ldr r2, _08125BE4 @ =gUnknown_8247094
+	ldr r2, _08125BE4 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	movs r0, 0
@@ -14328,7 +14328,7 @@ _08125BD4: .4byte gPlayerParty
 _08125BD8: .4byte gUnknown_203AD30
 _08125BDC: .4byte gStringVar1
 _08125BE0: .4byte gStringVar2
-_08125BE4: .4byte gUnknown_8247094
+_08125BE4: .4byte gMoveNames
 _08125BE8: .4byte 0x0000ffff
 _08125BEC: .4byte gUnknown_3005E98
 _08125BF0: .4byte sub_8125C38
@@ -14416,7 +14416,7 @@ _08125C84:
 	ldrsh r2, [r6, r1]
 	movs r1, 0xD
 	muls r1, r2
-	ldr r2, _08125CE0 @ =gUnknown_8247094
+	ldr r2, _08125CE0 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	ldr r4, _08125CE4 @ =gStringVar4
@@ -14444,7 +14444,7 @@ _08125CD0: .4byte gPlayerParty
 _08125CD4: .4byte gUnknown_203AD30
 _08125CD8: .4byte gStringVar1
 _08125CDC: .4byte gStringVar2
-_08125CE0: .4byte gUnknown_8247094
+_08125CE0: .4byte gMoveNames
 _08125CE4: .4byte gStringVar4
 _08125CE8: .4byte gUnknown_8416DB3
 _08125CEC: .4byte gTasks
@@ -14806,7 +14806,7 @@ sub_8125F5C: @ 8125F5C
 	ldr r0, _08125FF4 @ =gStringVar2
 	movs r1, 0xD
 	muls r1, r4
-	ldr r2, _08125FF8 @ =gUnknown_8247094
+	ldr r2, _08125FF8 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	adds r0, r6, 0
@@ -14831,7 +14831,7 @@ _08125FE8: .4byte gPlayerParty
 _08125FEC: .4byte gUnknown_203AD30
 _08125FF0: .4byte gStringVar1
 _08125FF4: .4byte gStringVar2
-_08125FF8: .4byte gUnknown_8247094
+_08125FF8: .4byte gMoveNames
 	thumb_func_end sub_8125F5C
 
 	thumb_func_start sub_8125FFC
@@ -14864,7 +14864,7 @@ sub_8125FFC: @ 8125FFC
 	ldr r0, _08126068 @ =gStringVar2
 	movs r1, 0xD
 	muls r1, r4
-	ldr r2, _0812606C @ =gUnknown_8247094
+	ldr r2, _0812606C @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	ldr r0, _08126070 @ =gUnknown_8416EC6
@@ -14884,7 +14884,7 @@ _0812605C: .4byte gUnknown_203B0A0
 _08126060: .4byte gPlayerParty
 _08126064: .4byte gStringVar1
 _08126068: .4byte gStringVar2
-_0812606C: .4byte gUnknown_8247094
+_0812606C: .4byte gMoveNames
 _08126070: .4byte gUnknown_8416EC6
 _08126074: .4byte gTasks
 _08126078: .4byte sub_812607C
@@ -14945,7 +14945,7 @@ sub_81260D8: @ 81260D8
 	ldrsh r2, [r1, r3]
 	movs r1, 0xD
 	muls r1, r2
-	ldr r2, _08126128 @ =gUnknown_8247094
+	ldr r2, _08126128 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	ldr r4, _0812612C @ =gStringVar4
@@ -14970,7 +14970,7 @@ sub_81260D8: @ 81260D8
 	.align 2, 0
 _08126120: .4byte gStringVar2
 _08126124: .4byte gUnknown_203B0A0
-_08126128: .4byte gUnknown_8247094
+_08126128: .4byte gMoveNames
 _0812612C: .4byte gStringVar4
 _08126130: .4byte gUnknown_8416E6B
 _08126134: .4byte gTasks
@@ -15044,7 +15044,7 @@ _081261AE:
 	ldrsh r2, [r7, r1]
 	movs r1, 0xD
 	muls r1, r2
-	ldr r2, _081261FC @ =gUnknown_8247094
+	ldr r2, _081261FC @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	ldr r4, _08126200 @ =gStringVar4
@@ -15069,7 +15069,7 @@ _081261AE:
 	.align 2, 0
 _081261F4: .4byte gStringVar1
 _081261F8: .4byte gStringVar2
-_081261FC: .4byte gUnknown_8247094
+_081261FC: .4byte gMoveNames
 _08126200: .4byte gStringVar4
 _08126204: .4byte gUnknown_8416E84
 _08126208: .4byte gTasks
@@ -15105,7 +15105,7 @@ _0812623A:
 	ldrsh r2, [r1, r3]
 	movs r1, 0xD
 	muls r1, r2
-	ldr r2, _0812627C @ =gUnknown_8247094
+	ldr r2, _0812627C @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	ldr r0, _08126280 @ =gUnknown_8416DF7
@@ -15125,7 +15125,7 @@ _0812626A:
 _08126270: .4byte gStringVar1
 _08126274: .4byte gStringVar2
 _08126278: .4byte gUnknown_203B0A0
-_0812627C: .4byte gUnknown_8247094
+_0812627C: .4byte gMoveNames
 _08126280: .4byte gUnknown_8416DF7
 _08126284: .4byte gTasks
 _08126288: .4byte sub_8125D88
@@ -15754,7 +15754,7 @@ sub_8126770: @ 8126770
 	ldrh r2, [r6]
 	movs r1, 0xD
 	muls r1, r2
-	ldr r2, _081267F0 @ =gUnknown_8247094
+	ldr r2, _081267F0 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	ldr r4, _081267F4 @ =gStringVar4
@@ -15787,7 +15787,7 @@ _081267E0: .4byte gPlayerParty
 _081267E4: .4byte gStringVar1
 _081267E8: .4byte gStringVar2
 _081267EC: .4byte gMoveToLearn
-_081267F0: .4byte gUnknown_8247094
+_081267F0: .4byte gMoveNames
 _081267F4: .4byte gStringVar4
 _081267F8: .4byte gUnknown_8416DF7
 _081267FC: .4byte gTasks
@@ -15818,7 +15818,7 @@ sub_8126804: @ 8126804
 	ldr r0, _0812687C @ =gStringVar2
 	movs r1, 0xD
 	muls r1, r5
-	ldr r2, _08126880 @ =gUnknown_8247094
+	ldr r2, _08126880 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	ldr r4, _08126884 @ =gStringVar4
@@ -15849,7 +15849,7 @@ _08126870: .4byte gUnknown_203B0A0
 _08126874: .4byte gPlayerParty
 _08126878: .4byte gStringVar1
 _0812687C: .4byte gStringVar2
-_08126880: .4byte gUnknown_8247094
+_08126880: .4byte gMoveNames
 _08126884: .4byte gStringVar4
 _08126888: .4byte gUnknown_8416DB3
 _0812688C: .4byte gTasks
@@ -16556,7 +16556,7 @@ sub_8126DC8: @ 8126DC8
 	ldrsh r2, [r7, r1]
 	movs r1, 0xD
 	muls r1, r2
-	ldr r2, _08126E64 @ =gUnknown_8247094
+	ldr r2, _08126E64 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	movs r0, 0x2
@@ -16589,7 +16589,7 @@ _08126E54: .4byte gPlayerParty
 _08126E58: .4byte gStringVar1
 _08126E5C: .4byte gSpecialVar_0x8005
 _08126E60: .4byte gStringVar2
-_08126E64: .4byte gUnknown_8247094
+_08126E64: .4byte gMoveNames
 _08126E68: .4byte 0xffff0000
 _08126E6C:
 	ldr r1, _08126E70 @ =gUnknown_8416DC2

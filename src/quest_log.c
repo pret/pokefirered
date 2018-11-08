@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/species.h"
+#include "constants/items.h"
 #include "data2.h"
 #include "malloc.h"
 #include "main.h"
@@ -29,6 +30,7 @@
 #include "map_name_popup.h"
 #include "wild_encounter.h"
 #include "help_system.h"
+#include "party_menu.h"
 #include "unk_8159F40.h"
 #include "pokemon_storage_system.h"
 #include "save.h"
@@ -275,6 +277,14 @@ bool8 sub_81153E4(u16, void*);
 extern const u8 gUnknown_841A155[];
 extern const u8 gUnknown_841A16F[];
 extern const u8 gUnknown_841B073[];
+extern const u8 gUnknown_841AFA6[];
+extern const u8 gUnknown_841A1E7[];
+extern const u8 gUnknown_841A210[];
+extern const u8 gUnknown_841A220[];
+extern const u8 gUnknown_841A965[];
+extern const u8 gUnknown_841A277[];
+extern const u8 gUnknown_841A938[];
+extern const u8 gUnknown_841A255[];
 
 const struct WindowTemplate gUnknown_845661C[3] = {
     { 0, 0,  0, 30, 2, 15, 0x0e9 },
@@ -2646,7 +2656,7 @@ u8 sub_8113530(void)
     return sub_8113114(VAR_0x4038_STRUCT, gUnknown_20370C0);
 }
 
-u16 * (*const gUnknown_8456948[])(u16 *, u16 *) = {
+static u16 * (*const sQuestLogStorageCBs[])(u16 *, u16 *) = {
     NULL,
     NULL,
     NULL,
@@ -2752,18 +2762,18 @@ void sub_8113550(u16 a0, u16 * a1)
         if (gUnknown_203AE04 == NULL)
         {
             gUnknown_203AE04 = gUnknown_203AE08;
-            r1 = gUnknown_8456948[a0](gUnknown_203AE04, a1);
+            r1 = sQuestLogStorageCBs[a0](gUnknown_203AE04, a1);
         }
         else
         {
-            gUnknown_8456948[a0](gUnknown_203AE04, a1);
+            sQuestLogStorageCBs[a0](gUnknown_203AE04, a1);
             return;
         }
     }
     else
     {
         gUnknown_203AE04 = NULL;
-        r1 = gUnknown_8456948[a0](gUnknown_203AE08, a1);
+        r1 = sQuestLogStorageCBs[a0](gUnknown_203AE08, a1);
     }
 
     if (r1 == NULL)
@@ -2905,27 +2915,27 @@ void sub_8113550(u16 a0, u16 * a1)
                 "\tldr r0, _08113660 @ =gUnknown_203AE08\n"
                 "\tldr r0, [r0]\n"
                 "\tstr r0, [r2]\n"
-                "\tldr r1, _08113664 @ =gUnknown_8456948\n"
+                "\tldr r1, _08113664 @ =sQuestLogStorageCBs\n"
                 "\tldr r2, [r1, 0x7C]\n"
                 "\tb _0811368E\n"
                 "\t.align 2, 0\n"
                 "_0811365C: .4byte gUnknown_203AE04\n"
                 "_08113660: .4byte gUnknown_203AE08\n"
-                "_08113664: .4byte gUnknown_8456948\n"
+                "_08113664: .4byte sQuestLogStorageCBs\n"
                 "_08113668:\n"
-                "\tldr r0, _08113678 @ =gUnknown_8456948\n"
+                "\tldr r0, _08113678 @ =sQuestLogStorageCBs\n"
                 "\tldr r2, [r0, 0x7C]\n"
                 "\tadds r0, r1, 0\n"
                 "\tadds r1, r5, 0\n"
                 "\tbl _call_via_r2\n"
                 "\tb ._return\n"
                 "\t.align 2, 0\n"
-                "_08113678: .4byte gUnknown_8456948\n"
+                "_08113678: .4byte sQuestLogStorageCBs\n"
                 "_0811367C:\n"
                 "\tldr r1, _081136C4 @ =gUnknown_203AE04\n"
                 "\tmovs r0, 0\n"
                 "\tstr r0, [r1]\n"
-                "\tldr r0, _081136C8 @ =gUnknown_8456948\n"
+                "\tldr r0, _081136C8 @ =sQuestLogStorageCBs\n"
                 "\tlsls r1, r4, 2\n"
                 "\tadds r1, r0\n"
                 "\tldr r0, _081136CC @ =gUnknown_203AE08\n"
@@ -2958,7 +2968,7 @@ void sub_8113550(u16 a0, u16 * a1)
                 "\tbx r0\n"
                 "\t.align 2, 0\n"
                 "_081136C4: .4byte gUnknown_203AE04\n"
-                "_081136C8: .4byte gUnknown_8456948\n"
+                "_081136C8: .4byte sQuestLogStorageCBs\n"
                 "_081136CC: .4byte gUnknown_203AE08\n"
                 "_081136D0: .4byte gUnknown_203B048");
 }
@@ -3051,7 +3061,7 @@ u16 * sub_8113828(u16 a0, u16 * a1)
     else
         gUnknown_203AE04 = NULL;
 
-    return gUnknown_8456948[a0](gUnknown_203AE08, a1);
+    return sQuestLogStorageCBs[a0](gUnknown_203AE08, a1);
 }
 
 bool8 sub_81138A0(u16 a0, u16 * a1)
@@ -3084,7 +3094,7 @@ void sub_811390C(void)
         u16 * resp;
         gUnknown_203B04A = 0;
         sub_8110AEC(gUnknown_203B024.unk_00);
-        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, (u16 *)&gUnknown_203B024.unk_04);
+        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, (u16 *)&gUnknown_203B024.unk_04);
         gUnknown_203AE08 = resp;
         sub_81138F8();
     }
@@ -3114,7 +3124,7 @@ void sub_81139BC(void)
             sub_8110AEC(gUnknown_203B024.unk_00);
         }
         sub_8113B94(gUnknown_203B024.unk_00);
-        resp = gUnknown_8456948[gUnknown_203B024.unk_00](gUnknown_203AE08, (u16 *)&gUnknown_203B024.unk_04);
+        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, (u16 *)&gUnknown_203B024.unk_04);
         gUnknown_203AE08 = resp;
         sub_8113A1C(1);
         sub_81138F8();
@@ -3142,7 +3152,7 @@ bool8 sub_8113A44(u16 a0, u16 *a1)
     return FALSE;
 }
 
-u16 * (*const gUnknown_84569F4[])(u16 *) = {
+static u16 * (*const sQuestLogScriptParsingCBs[])(u16 *) = {
     NULL,
     NULL,
     NULL,
@@ -3261,7 +3271,7 @@ bool8 sub_8113AE8(u16 * a0)
     if (a0 == NULL || a0[1] > gUnknown_203AF98)
         return FALSE;
 
-    gUnknown_84569F4[a0[0] & 0xFFF](a0);
+    sQuestLogScriptParsingCBs[a0[0] & 0xFFF](a0);
     gUnknown_203B044.unk_0 = a0[0];
     gUnknown_203B044.unk_1 = (a0[0] & 0xF000) >> 12;
     if (gUnknown_203B044.unk_1 != 0)
@@ -3287,7 +3297,7 @@ bool8 sub_8113AE8(u16 * a0)
                 "\t.align 2, 0\n"
                 "_08113B00: .4byte gUnknown_203AF98\n"
                 "_08113B04:\n"
-                "\tldr r2, _08113B38 @ =gUnknown_84569F4\n"
+                "\tldr r2, _08113B38 @ =sQuestLogScriptParsingCBs\n"
                 "\tldrh r1, [r4]\n"
                 "\tldr r0, _08113B3C @ =0x00000fff\n"
                 "\tands r0, r1\n"
@@ -3315,7 +3325,7 @@ bool8 sub_8113AE8(u16 * a0)
                 "\tpop {r1}\n"
                 "\tbx r1\n"
                 "\t.align 2, 0\n"
-                "_08113B38: .4byte gUnknown_84569F4\n"
+                "_08113B38: .4byte sQuestLogScriptParsingCBs\n"
                 "_08113B3C: .4byte 0x00000fff\n"
                 "_08113B40: .4byte gUnknown_203B044");
 }
@@ -3326,7 +3336,7 @@ bool8 sub_8113B44(u16 * a0)
     if (gUnknown_203B044.unk_2 == 0)
         return FALSE;
 
-    gUnknown_84569F4[gUnknown_203B044.unk_0](a0);
+    sQuestLogScriptParsingCBs[gUnknown_203B044.unk_0](a0);
     gUnknown_203B044.unk_2++;
     if (gUnknown_203B044.unk_2 > gUnknown_203B044.unk_1)
         sub_8113B88();
@@ -3517,7 +3527,7 @@ u16 * sub_8113E88(u16 a0, u16 * a1)
 // TODO: delete this declaration once data_83FECCC.s is decompiled
 extern const u8 gText_EggNickname[];
 
-void sub_8113EAC(u16 a0, u8 * a1, u8 a2)
+void QuestLog_AutoGetSpeciesname(u16 a0, u8 * a1, u8 a2)
 {
     if (a1 != NULL)
     {
@@ -3549,9 +3559,77 @@ u16 * sub_8113F14(u16 * a0, u16 * a1)
 u16 * sub_8113F3C(u16 * a0)
 {
     u16 * r4 = sub_8113E88(3, a0);
-    sub_8113EAC(r4[0], gStringVar1, 0);
-    sub_8113EAC(r4[1], gStringVar2, 0);
+    QuestLog_AutoGetSpeciesname(r4[0], gStringVar1, 0);
+    QuestLog_AutoGetSpeciesname(r4[1], gStringVar2, 0);
     StringExpandPlaceholders(gStringVar4, gUnknown_841A16F);
     r4 += 2;
     return r4;
+}
+
+u16 * sub_8113F80(u16 * a0, u16 * a1)
+{
+    u16 * r2 = sub_8113DE0(4, a0);
+    if (r2 == NULL)
+        return NULL;
+
+    r2[0] = a1[0];
+    r2[1] = a1[2];
+    r2[2] = a1[3];
+
+    if (a1[0] == ITEM_ESCAPE_ROPE)
+        gUnknown_203B048 = 2;
+
+    return r2 + 3;
+}
+
+u16 * sub_8113FBC(u16 * a0)
+{
+    u16 * r5 = sub_8113E88(4, a0);
+
+    switch (ItemId_GetPocket(r5[0]))
+    {
+        case POCKET_ITEMS:
+        case POCKET_POKE_BALLS:
+        case POCKET_BERRY_POUCH:
+            StringCopy(gStringVar1, ItemId_GetItem(r5[0])->name);
+            if (r5[0] == ITEM_ESCAPE_ROPE)
+            {
+                sub_80C4DF8(gStringVar2, r5[2]);
+                StringExpandPlaceholders(gStringVar4, gUnknown_841AFA6);
+            }
+            else if (r5[1] != 0xFFFF)
+            {
+                QuestLog_AutoGetSpeciesname(r5[1], gStringVar2, 0);
+                StringExpandPlaceholders(gStringVar4, gUnknown_841A1E7);
+            }
+            else
+            {
+                StringExpandPlaceholders(gStringVar4, gUnknown_841A210);
+            }
+            break;
+        case POCKET_KEY_ITEMS:
+            StringCopy(gStringVar1, ItemId_GetItem(r5[0])->name);
+            StringExpandPlaceholders(gStringVar4, gUnknown_841A220);
+            break;
+        case POCKET_TM_CASE:
+            QuestLog_AutoGetSpeciesname(r5[1], gStringVar1, 0);
+            StringCopy(gStringVar2, gMoveNames[ItemIdToBattleMoveId(r5[0])]);
+            if (r5[2] != 0xFFFF)
+            {
+                StringCopy(gStringVar3, gMoveNames[r5[2]]);
+                if (r5[0] > ITEM_TM50)
+                    StringExpandPlaceholders(gStringVar4, gUnknown_841A965);
+                else
+                    StringExpandPlaceholders(gStringVar4, gUnknown_841A277);
+            }
+            else
+            {
+                if (r5[0] > ITEM_TM50)
+                    StringExpandPlaceholders(gStringVar4, gUnknown_841A938);
+                else
+                    StringExpandPlaceholders(gStringVar4, gUnknown_841A255);
+            }
+            break;
+    }
+    return r5 + 3;
 }

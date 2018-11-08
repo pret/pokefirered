@@ -5033,7 +5033,7 @@ _0804EF50:
 	adds r1, r0, 0
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _0804EF84 @ =gUnknown_8247094
+	ldr r0, _0804EF84 @ =gMoveNames
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringAppend
@@ -5049,7 +5049,7 @@ _0804EF6C:
 	b _0804EF9C
 	.align 2, 0
 _0804EF80: .4byte gUnknown_8261EB6
-_0804EF84: .4byte gUnknown_8247094
+_0804EF84: .4byte gMoveNames
 _0804EF88: .4byte gUnknown_8261EC7
 _0804EF8C:
 	ldr r1, _0804EFAC @ =gUnknown_8261EB6

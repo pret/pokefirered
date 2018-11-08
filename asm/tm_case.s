@@ -704,7 +704,7 @@ _08131DC4:
 	lsrs r0, 16
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _08131E14 @ =gUnknown_8247094
+	ldr r0, _08131E14 @ =gMoveNames
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringAppend
@@ -721,7 +721,7 @@ _08131E04: .4byte 0xfffffee0
 _08131E08: .4byte gStringVar4
 _08131E0C: .4byte gUnknown_846317C
 _08131E10: .4byte gUnknown_8416703
-_08131E14: .4byte gUnknown_8247094
+_08131E14: .4byte gMoveNames
 	thumb_func_end sub_8131D48
 
 	thumb_func_start sub_8131E18

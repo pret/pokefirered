@@ -5,212 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8113F80
-sub_8113F80: @ 8113F80
-	push {r4,lr}
-	adds r2, r0, 0
-	adds r4, r1, 0
-	movs r0, 0x4
-	adds r1, r2, 0
-	bl sub_8113DE0
-	adds r2, r0, 0
-	cmp r2, 0
-	bne _08113F98
-	movs r0, 0
-	b _08113FB2
-_08113F98:
-	ldrh r0, [r4]
-	strh r0, [r2]
-	ldrh r0, [r4, 0x4]
-	strh r0, [r2, 0x2]
-	ldrh r0, [r4, 0x6]
-	strh r0, [r2, 0x4]
-	ldrh r0, [r4]
-	cmp r0, 0x55
-	bne _08113FB0
-	ldr r1, _08113FB8 @ =gUnknown_203B048
-	movs r0, 0x2
-	strb r0, [r1]
-_08113FB0:
-	adds r0, r2, 0x6
-_08113FB2:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08113FB8: .4byte gUnknown_203B048
-	thumb_func_end sub_8113F80
-
-	thumb_func_start sub_8113FBC
-sub_8113FBC: @ 8113FBC
-	push {r4-r7,lr}
-	adds r1, r0, 0
-	movs r0, 0x4
-	bl sub_8113E88
-	adds r5, r0, 0
-	ldrh r0, [r5]
-	bl ItemId_GetPocket
-	lsls r0, 24
-	lsrs r0, 24
-	subs r0, 0x1
-	cmp r0, 0x4
-	bls _08113FDA
-	b _0811413C
-_08113FDA:
-	lsls r0, 2
-	ldr r1, _08113FE4 @ =_08113FE8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08113FE4: .4byte _08113FE8
-	.align 2, 0
-_08113FE8:
-	.4byte _08113FFC
-	.4byte _08114074
-	.4byte _08113FFC
-	.4byte _0811409C
-	.4byte _08113FFC
-_08113FFC:
-	ldr r4, _08114024 @ =gStringVar1
-	ldrh r0, [r5]
-	bl ItemId_GetItem
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-	ldrh r0, [r5]
-	cmp r0, 0x55
-	bne _08114034
-	ldr r0, _08114028 @ =gStringVar2
-	ldrb r1, [r5, 0x4]
-	bl sub_80C4DF8
-	ldr r0, _0811402C @ =gStringVar4
-	ldr r1, _08114030 @ =gUnknown_841AFA6
-	bl StringExpandPlaceholders
-	b _0811413C
-	.align 2, 0
-_08114024: .4byte gStringVar1
-_08114028: .4byte gStringVar2
-_0811402C: .4byte gStringVar4
-_08114030: .4byte gUnknown_841AFA6
-_08114034:
-	ldrh r1, [r5, 0x2]
-	ldr r0, _08114050 @ =0x0000ffff
-	cmp r1, r0
-	beq _08114060
-	adds r0, r1, 0
-	ldr r1, _08114054 @ =gStringVar2
-	movs r2, 0
-	bl sub_8113EAC
-	ldr r0, _08114058 @ =gStringVar4
-	ldr r1, _0811405C @ =gUnknown_841A1E7
-	bl StringExpandPlaceholders
-	b _0811413C
-	.align 2, 0
-_08114050: .4byte 0x0000ffff
-_08114054: .4byte gStringVar2
-_08114058: .4byte gStringVar4
-_0811405C: .4byte gUnknown_841A1E7
-_08114060:
-	ldr r0, _0811406C @ =gStringVar4
-	ldr r1, _08114070 @ =gUnknown_841A210
-	bl StringExpandPlaceholders
-	b _0811413C
-	.align 2, 0
-_0811406C: .4byte gStringVar4
-_08114070: .4byte gUnknown_841A210
-_08114074:
-	ldr r4, _08114090 @ =gStringVar1
-	ldrh r0, [r5]
-	bl ItemId_GetItem
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-	ldr r0, _08114094 @ =gStringVar4
-	ldr r1, _08114098 @ =gUnknown_841A220
-	bl StringExpandPlaceholders
-	b _0811413C
-	.align 2, 0
-_08114090: .4byte gStringVar1
-_08114094: .4byte gStringVar4
-_08114098: .4byte gUnknown_841A220
-_0811409C:
-	ldrh r0, [r5, 0x2]
-	ldr r1, _081140E8 @ =gStringVar1
-	movs r2, 0
-	bl sub_8113EAC
-	ldr r4, _081140EC @ =gStringVar2
-	ldrh r0, [r5]
-	bl ItemIdToBattleMoveId
-	lsls r0, 16
-	lsrs r0, 16
-	movs r7, 0xD
-	adds r1, r0, 0
-	muls r1, r7
-	ldr r6, _081140F0 @ =gUnknown_8247094
-	adds r1, r6
-	adds r0, r4, 0
-	bl StringCopy
-	ldrh r1, [r5, 0x4]
-	ldr r0, _081140F4 @ =0x0000ffff
-	cmp r1, r0
-	beq _08114118
-	ldr r0, _081140F8 @ =gStringVar3
-	muls r1, r7
-	adds r1, r6
-	bl StringCopy
-	ldrh r1, [r5]
-	movs r0, 0xA9
-	lsls r0, 1
-	cmp r1, r0
-	bls _08114104
-	ldr r0, _081140FC @ =gStringVar4
-	ldr r1, _08114100 @ =gUnknown_841A965
-	bl StringExpandPlaceholders
-	b _0811413C
-	.align 2, 0
-_081140E8: .4byte gStringVar1
-_081140EC: .4byte gStringVar2
-_081140F0: .4byte gUnknown_8247094
-_081140F4: .4byte 0x0000ffff
-_081140F8: .4byte gStringVar3
-_081140FC: .4byte gStringVar4
-_08114100: .4byte gUnknown_841A965
-_08114104:
-	ldr r0, _08114110 @ =gStringVar4
-	ldr r1, _08114114 @ =gUnknown_841A277
-	bl StringExpandPlaceholders
-	b _0811413C
-	.align 2, 0
-_08114110: .4byte gStringVar4
-_08114114: .4byte gUnknown_841A277
-_08114118:
-	ldrh r1, [r5]
-	movs r0, 0xA9
-	lsls r0, 1
-	cmp r1, r0
-	bls _08114134
-	ldr r0, _0811412C @ =gStringVar4
-	ldr r1, _08114130 @ =gUnknown_841A938
-	bl StringExpandPlaceholders
-	b _0811413C
-	.align 2, 0
-_0811412C: .4byte gStringVar4
-_08114130: .4byte gUnknown_841A938
-_08114134:
-	ldr r0, _08114144 @ =gStringVar4
-	ldr r1, _08114148 @ =gUnknown_841A255
-	bl StringExpandPlaceholders
-_0811413C:
-	adds r0, r5, 0x6
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08114144: .4byte gStringVar4
-_08114148: .4byte gUnknown_841A255
-	thumb_func_end sub_8113FBC
-
 	thumb_func_start sub_811414C
 sub_811414C: @ 811414C
 	push {r4,lr}
@@ -257,7 +51,7 @@ sub_8114188: @ 8114188
 	ldrh r0, [r4, 0x2]
 	ldr r1, _081141C0 @ =gStringVar1
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r5, _081141C4 @ =gStringVar2
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -301,7 +95,7 @@ sub_81141E4: @ 81141E4
 	ldrh r0, [r4, 0x2]
 	ldr r1, _0811421C @ =gStringVar1
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r5, _08114220 @ =gStringVar2
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -345,7 +139,7 @@ sub_8114240: @ 8114240
 	ldrh r0, [r4, 0x2]
 	ldr r1, _08114278 @ =gStringVar2
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r5, _0811427C @ =gStringVar1
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -389,7 +183,7 @@ sub_811429C: @ 811429C
 	ldrh r0, [r4, 0x2]
 	ldr r1, _081142D4 @ =gStringVar1
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r5, _081142D8 @ =gStringVar2
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -459,7 +253,7 @@ sub_8114324: @ 8114324
 	ldrh r0, [r4, 0x4]
 	ldr r1, _0811436C @ =gStringVar1
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r5, _08114370 @ =gStringVar2
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -510,7 +304,7 @@ sub_8114394: @ 8114394
 	ldrh r0, [r4, 0x4]
 	ldr r1, _081143DC @ =gStringVar2
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r5, _081143E0 @ =gStringVar3
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -645,11 +439,11 @@ sub_811448C: @ 811448C
 	ldrh r0, [r5, 0x6]
 	ldr r1, _081144DC @ =gStringVar2
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrh r0, [r5, 0x4]
 	ldr r1, _081144E0 @ =gStringVar3
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r0, _081144E4 @ =gStringVar4
 	ldr r1, _081144E8 @ =gUnknown_841A3FF
 	bl StringExpandPlaceholders
@@ -1019,11 +813,11 @@ sub_81147A8: @ 81147A8
 	ldrh r0, [r5, 0x6]
 	ldr r1, _081147F8 @ =gStringVar2
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrh r0, [r5, 0x4]
 	ldr r1, _081147FC @ =gStringVar3
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r0, _08114800 @ =gStringVar4
 	ldr r1, _08114804 @ =gUnknown_841A76A
 	bl StringExpandPlaceholders
@@ -1148,7 +942,7 @@ sub_81148BC: @ 81148BC
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrb r0, [r5, 0x1]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
@@ -1157,7 +951,7 @@ sub_81148BC: @ 81148BC
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x3
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r0, _08114910 @ =gStringVar4
 	ldr r1, _08114914 @ =gUnknown_841A566
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1214,11 +1008,11 @@ sub_8114944: @ 8114944
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x2
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r0, _08114988 @ =gStringVar4
 	ldr r1, _0811498C @ =gUnknown_841A5D9
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1287,11 +1081,11 @@ sub_81149D0: @ 81149D0
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x2
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r0, _08114A14 @ =gStringVar4
 	ldr r1, _08114A18 @ =gUnknown_841A60A
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1350,7 +1144,7 @@ sub_8114A4C: @ 8114A4C
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrb r0, [r5, 0x1]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
@@ -1411,7 +1205,7 @@ sub_8114AC8: @ 8114AC8
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r0, _08114B04 @ =gStringVar4
 	ldr r1, _08114B08 @ =gUnknown_841A5FA
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1467,7 +1261,7 @@ sub_8114B34: @ 8114B34
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r0, _08114B70 @ =gStringVar4
 	ldr r1, _08114B74 @ =gUnknown_841A632
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1518,7 +1312,7 @@ sub_8114BA0: @ 8114BA0
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrb r0, [r4, 0x2]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
@@ -1773,11 +1567,11 @@ sub_8114D68: @ 8114D68
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x2
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x3
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r1, _08114DDC @ =gUnknown_8456ACC
 	ldrb r0, [r6, 0x1]
 	lsls r0, 2
@@ -1903,7 +1697,7 @@ _08114E84:
 	ldrh r0, [r5, 0x4]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r4, _08114F04 @ =gStringVar2
 	ldrb r1, [r5, 0x8]
 	adds r0, r4, 0
@@ -1916,7 +1710,7 @@ _08114E84:
 	ldrh r0, [r5, 0x6]
 	movs r1, 0
 	movs r2, 0x3
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r4, _08114F08 @ =gStringVar3
 	ldrb r1, [r6, 0x1]
 	adds r0, r4, 0
@@ -2092,11 +1886,11 @@ sub_811500C: @ 811500C
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x2
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r1, _0811506C @ =gUnknown_8456ACC
 	ldrb r0, [r5, 0x1]
 	lsls r0, 2
@@ -2229,7 +2023,7 @@ _08115148:
 	ldrh r0, [r4, 0x4]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r0, _08115188 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0x2
@@ -2237,7 +2031,7 @@ _08115148:
 	ldrh r0, [r4, 0x6]
 	movs r1, 0
 	movs r2, 0x3
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r0, _0811518C @ =gStringVar4
 	ldr r1, _08115190 @ =gUnknown_841A312
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -2336,11 +2130,11 @@ _0811523E:
 	ldrh r0, [r5]
 	movs r1, 0
 	movs r2, 0x2
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrh r0, [r5, 0x2]
 	movs r1, 0
 	movs r2, 0x3
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldr r1, _08115274 @ =gUnknown_8456ACC
 	ldrb r0, [r6, 0x1]
 	lsls r0, 2
@@ -2626,7 +2420,7 @@ sub_8115460: @ 8115460
 	ldrh r0, [r4]
 	ldr r1, _0811549C @ =gStringVar1
 	movs r2, 0
-	bl sub_8113EAC
+	bl QuestLog_AutoGetSpeciesname
 	ldrb r0, [r5, 0x1]
 	cmp r0, 0xFF
 	beq _08115486

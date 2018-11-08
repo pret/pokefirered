@@ -1662,58 +1662,58 @@ gUnknown_841A155:: @ 841A155
 	.string "Previously on your quest…$"
 
 gUnknown_841A16F:: @ 841A16F
-	.incbin "baserom.gba", 0x41A16F, 0x24
+	.string "{PLAYER} switched the POKéMON\n{STR_VAR_1} with {STR_VAR_2}.$"
 
 gUnknown_841A193:: @ 841A193
-	.incbin "baserom.gba", 0x41A193, 0x3A
+	.string "Took the item {STR_VAR_2} from\n{STR_VAR_1} and gave it the item\n{STR_VAR_3} to hold.$"
 
 gUnknown_841A1CD:: @ 841A1CD
-	.incbin "baserom.gba", 0x41A1CD, 0x1A
+	.string "Took the item {STR_VAR_2} from\n{STR_VAR_1}.$"
 
 gUnknown_841A1E7:: @ 841A1E7
-	.incbin "baserom.gba", 0x41A1E7, 0x29
+	.string "Used the item {STR_VAR_1} on {STR_VAR_2}\nat this location.$"
 
 gUnknown_841A210:: @ 841A210
-	.incbin "baserom.gba", 0x41A210, 0x10
+	.string "{PLAYER} used the\n{STR_VAR_1}.$"
 
 gUnknown_841A220:: @ 841A220
-	.incbin "baserom.gba", 0x41A220, 0x35
+	.string "Used the item {STR_VAR_1}, which was\nin the KEY ITEMS POCKET.$"
 
 gUnknown_841A255:: @ 841A255
-	.incbin "baserom.gba", 0x41A255, 0x22
+	.string "{STR_VAR_1} learned the move\n{STR_VAR_2} from a TM.$"
 
 gUnknown_841A277:: @ 841A277
-	.incbin "baserom.gba", 0x41A277, 0x39
+	.string "{STR_VAR_1} learned the move\n{STR_VAR_2} from a TM and forgot\nthe move {STR_VAR_3}.$"
 
 gUnknown_841A2B0:: @ 841A2B0
-	.incbin "baserom.gba", 0x41A2B0, 0x31
+	.string "POKéMON were fully restored\nat a POKéMON CENTER.$"
 
 gUnknown_841A2E1:: @ 841A2E1
-	.incbin "baserom.gba", 0x41A2E1, 0x31
+	.string "{UNKNOWN_F7 0x00} had a marvelous battle\nwith the CHAMPION, {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841A312:: @ 841A312
-	.incbin "baserom.gba", 0x41A312, 0x37
+	.string "In the end, {UNKNOWN_F7 0x00} sent out {UNKNOWN_F7 0x01}\nwhile {UNKNOWN_F7 0x02} countered with\n{UNKNOWN_F7 0x03}.$"
 
 gUnknown_841A349:: @ 841A349
-	.incbin "baserom.gba", 0x41A349, 0x48
+	.string "And, as a result of battling with every\nbit of power, {UNKNOWN_F7 0x00} won\nthe match.$"
 
 gUnknown_841A391:: @ 841A391
-	.incbin "baserom.gba", 0x41A391, 0x49
+	.string "Removed the item {STR_VAR_1} from\nthe BAG’s ITEMS POCKET and stored it\non the PC.$"
 
 gUnknown_841A3DA:: @ 841A3DA
-	.incbin "baserom.gba", 0x41A3DA, 0x25
+	.string "{PLAYER} withdrew the item {STR_VAR_1}\nfrom the PC.$"
 
 gUnknown_841A3FF:: @ 841A3FF
-	.incbin "baserom.gba", 0x41A3FF, 0x23
+	.string "Traded {STR_VAR_3} in exchange for\n{STR_VAR_1}’s {STR_VAR_2}.$"
 
 gUnknown_841A422:: @ 841A422
-	.incbin "baserom.gba", 0x41A422, 0x55
+	.string "Took on {UNKNOWN_F7 0x00} in a SINGLE BATTLE.\nIt was a hotly contested match that\nresulted in a {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841A477:: @ 841A477
-	.incbin "baserom.gba", 0x41A477, 0x4F
+	.string "Took on {UNKNOWN_F7 0x00} in a DOUBLE BATTLE.\nIt was an extended match that resulted\nin a {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841A4C6:: @ 841A4C6
-	.incbin "baserom.gba", 0x41A4C6, 0x3C
+	.string "{UNKNOWN_F7 0x00} and {UNKNOWN_F7 0x01} took on\n{UNKNOWN_F7 0x02} and {UNKNOWN_F7 0x03} in a\nMULTI BATTLE and got a {UNKNOWN_F7 0x04}.$"
 
 gUnknown_841A502::
 	.string "win$"

@@ -473,7 +473,7 @@ _080D762C:
 	ldrh r2, [r2]
 	movs r1, 0xD
 	muls r1, r2
-	ldr r2, _080D764C @ =gUnknown_8247094
+	ldr r2, _080D764C @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 _080D763C:
@@ -483,7 +483,7 @@ _080D763C:
 	b _080D77DC
 	.align 2, 0
 _080D7648: .4byte gBattleTextBuff2
-_080D764C: .4byte gUnknown_8247094
+_080D764C: .4byte gMoveNames
 _080D7650: .4byte gUnknown_83FD57B
 _080D7654:
 	ldr r4, _080D7694 @ =gBattleTextBuff1
@@ -1505,11 +1505,11 @@ _080D7ED4:
 _080D7ED6:
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080D7EE0 @ =gUnknown_8247094
+	ldr r0, _080D7EE0 @ =gMoveNames
 	adds r4, r1, r0
 	b _080D8382
 	.align 2, 0
-_080D7EE0: .4byte gUnknown_8247094
+_080D7EE0: .4byte gMoveNames
 _080D7EE4:
 	ldr r0, _080D7F1C @ =gBattleTypeFlags
 	ldr r1, [r0]
@@ -2294,11 +2294,11 @@ _080D84EC:
 	orrs r1, r0
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080D8500 @ =gUnknown_8247094
+	ldr r0, _080D8500 @ =gMoveNames
 	adds r1, r0
 	b _080D868E
 	.align 2, 0
-_080D8500: .4byte gUnknown_8247094
+_080D8500: .4byte gMoveNames
 _080D8504:
 	adds r0, r5, r7
 	ldrb r0, [r0, 0x1]

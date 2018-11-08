@@ -882,7 +882,7 @@ _080E4DB4:
 	mov r9, r1
 	mov r1, r9
 	muls r1, r0
-	ldr r3, _080E4E58 @ =gUnknown_8247094
+	ldr r3, _080E4E58 @ =gMoveNames
 	mov r8, r3
 	add r1, r8
 	adds r0, r2, 0
@@ -938,7 +938,7 @@ _080E4DB4:
 	.align 2, 0
 _080E4E50: .4byte gPlayerParty
 _080E4E54: .4byte gStringVar3
-_080E4E58: .4byte gUnknown_8247094
+_080E4E58: .4byte gMoveNames
 _080E4E5C: .4byte 0x00000261
 _080E4E60: .4byte 0x00000a67
 _080E4E64: .4byte gStringVar2
@@ -1297,7 +1297,7 @@ _080E511A:
 	adds r1, r2
 	ldrh r1, [r1]
 	muls r1, r7
-	ldr r2, _080E51F0 @ =gUnknown_8247094
+	ldr r2, _080E51F0 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	adds r4, 0xD
@@ -1394,7 +1394,7 @@ _080E51AA:
 	.align 2, 0
 _080E51E8: .4byte gUnknown_203AAB4
 _080E51EC: .4byte gPlayerParty
-_080E51F0: .4byte gUnknown_8247094
+_080E51F0: .4byte gMoveNames
 _080E51F4: .4byte gStringVar1
 _080E51F8: .4byte gUnknown_84161C1
 _080E51FC: .4byte gUnknown_3005E70

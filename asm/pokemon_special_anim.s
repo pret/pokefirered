@@ -50,7 +50,7 @@ _0811C58C:
 	adds r0, 0x77
 	movs r1, 0xD
 	muls r1, r6
-	ldr r2, _0811C5A8 @ =gUnknown_8247094
+	ldr r2, _0811C5A8 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	adds r0, r4, 0
@@ -60,7 +60,7 @@ _0811C5A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811C5A8: .4byte gUnknown_8247094
+_0811C5A8: .4byte gMoveNames
 	thumb_func_end sub_811C568
 
 	thumb_func_start sub_811C5AC
@@ -194,7 +194,7 @@ _0811C628:
 	adds r2, 0x84
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _0811C6E4 @ =gUnknown_8247094
+	ldr r0, _0811C6E4 @ =gMoveNames
 	adds r1, r0
 	adds r0, r2, 0
 	bl StringCopy
@@ -209,7 +209,7 @@ _0811C6D2:
 	bx r1
 	.align 2, 0
 _0811C6E0: .4byte gPlayerParty
-_0811C6E4: .4byte gUnknown_8247094
+_0811C6E4: .4byte gMoveNames
 	thumb_func_end sub_811C5D4
 
 	thumb_func_start sub_811C6E8

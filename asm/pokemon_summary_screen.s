@@ -4241,7 +4241,7 @@ _081368B0:
 	adds r0, r1
 	ldrh r1, [r3]
 	muls r1, r2
-	ldr r2, _0813695C @ =gUnknown_8247094
+	ldr r2, _0813695C @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	cmp r7, 0x3
@@ -4292,7 +4292,7 @@ _0813694C: .4byte 0x0000324e
 _08136950: .4byte gBattleMoves
 _08136954: .4byte 0x00003258
 _08136958: .4byte 0x00003128
-_0813695C: .4byte gUnknown_8247094
+_0813695C: .4byte gMoveNames
 _08136960: .4byte 0x00003208
 _08136964: .4byte 0x000030b8
 _08136968: .4byte 0x000030f0

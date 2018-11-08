@@ -4570,7 +4570,7 @@ _08030848:
 	ldrh r1, [r4]
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080308A4 @ =gUnknown_8247094
+	ldr r0, _080308A4 @ =gMoveNames
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringAppend
@@ -4599,7 +4599,7 @@ _08030894: .4byte gUnknown_2022BC8
 _08030898: .4byte gUnknown_3004FF8
 _0803089C: .4byte gDisplayedStringBattle
 _080308A0: .4byte gUnknown_83FE770
-_080308A4: .4byte gUnknown_8247094
+_080308A4: .4byte gMoveNames
 	thumb_func_end sub_8030830
 
 	thumb_func_start MoveSelectionDisplayPpString

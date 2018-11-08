@@ -4570,7 +4570,7 @@ _080CC8EC:
 	lsrs r0, 16
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _080CC914 @ =gUnknown_8247094
+	ldr r0, _080CC914 @ =gMoveNames
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -4581,7 +4581,7 @@ _080CC908:
 	bx r1
 	.align 2, 0
 _080CC910: .4byte gStringVar1
-_080CC914: .4byte gUnknown_8247094
+_080CC914: .4byte gMoveNames
 	thumb_func_end sub_80CC8CC
 
 	thumb_func_start sub_80CC918

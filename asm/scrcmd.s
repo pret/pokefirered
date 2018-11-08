@@ -4243,7 +4243,7 @@ ScrCmd_buffermovename: @ 806BE50
 	ldr r2, [r4]
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _0806BE8C @ =gUnknown_8247094
+	ldr r0, _0806BE8C @ =gMoveNames
 	adds r1, r0
 	adds r0, r2, 0
 	bl StringCopy
@@ -4253,7 +4253,7 @@ ScrCmd_buffermovename: @ 806BE50
 	bx r1
 	.align 2, 0
 _0806BE88: .4byte gUnknown_83A7294
-_0806BE8C: .4byte gUnknown_8247094
+_0806BE8C: .4byte gMoveNames
 	thumb_func_end ScrCmd_buffermovename
 
 	thumb_func_start ScrCmd_buffernumberstring

@@ -276,15 +276,130 @@ bool8 sub_81153E4(u16, void*);
 
 extern const u8 gUnknown_841A155[];
 extern const u8 gUnknown_841A16F[];
-extern const u8 gUnknown_841B073[];
-extern const u8 gUnknown_841AFA6[];
+extern const u8 gUnknown_841A193[];
+extern const u8 gUnknown_841A1CD[];
 extern const u8 gUnknown_841A1E7[];
 extern const u8 gUnknown_841A210[];
 extern const u8 gUnknown_841A220[];
-extern const u8 gUnknown_841A965[];
-extern const u8 gUnknown_841A277[];
-extern const u8 gUnknown_841A938[];
 extern const u8 gUnknown_841A255[];
+extern const u8 gUnknown_841A277[];
+extern const u8 gUnknown_841A2B0[];
+extern const u8 gUnknown_841A2E1[];
+extern const u8 gUnknown_841A312[];
+extern const u8 gUnknown_841A349[];
+extern const u8 gUnknown_841A391[];
+extern const u8 gUnknown_841A3DA[];
+extern const u8 gUnknown_841A3FF[];
+extern const u8 gUnknown_841A422[];
+extern const u8 gUnknown_841A477[];
+extern const u8 gUnknown_841A4C6[];
+extern const u8 gUnknown_841A502[];
+extern const u8 gUnknown_841A506[];
+extern const u8 gUnknown_841A50B[];
+extern const u8 gUnknown_841A53A[];
+extern const u8 gUnknown_841A566[];
+extern const u8 gUnknown_841A59C[];
+extern const u8 gUnknown_841A5D9[];
+extern const u8 gUnknown_841A5FA[];
+extern const u8 gUnknown_841A60A[];
+extern const u8 gUnknown_841A632[];
+extern const u8 gUnknown_841A64F[];
+extern const u8 gUnknown_841A66E[];
+extern const u8 gUnknown_841A694[];
+extern const u8 gUnknown_841A6A5[];
+extern const u8 gUnknown_841A6E1[];
+extern const u8 gUnknown_841A732[];
+extern const u8 gUnknown_841A74E[];
+extern const u8 gUnknown_841A756[];
+extern const u8 gUnknown_841A762[];
+extern const u8 gUnknown_841A76A[];
+extern const u8 gUnknown_841A7B0[];
+extern const u8 gUnknown_841A7DD[];
+extern const u8 gUnknown_841A810[];
+extern const u8 gUnknown_841A858[];
+extern const u8 gUnknown_841A896[];
+extern const u8 gUnknown_841A8D4[];
+extern const u8 gUnknown_841A8DD[];
+extern const u8 gUnknown_841A8E0[];
+extern const u8 gUnknown_841A90C[];
+extern const u8 gUnknown_841A938[];
+extern const u8 gUnknown_841A965[];
+extern const u8 gUnknown_841A9A9[];
+extern const u8 gUnknown_841A9D4[];
+extern const u8 gUnknown_841AA01[];
+extern const u8 gUnknown_841AA2B[];
+extern const u8 gUnknown_841AA76[];
+extern const u8 gUnknown_841AAAA[];
+extern const u8 gUnknown_841AAEC[];
+extern const u8 gUnknown_841AB29[];
+extern const u8 gUnknown_841AB74[];
+extern const u8 gUnknown_841AB8E[];
+extern const u8 gUnknown_841ABAB[];
+extern const u8 gUnknown_841ABCD[];
+extern const u8 gUnknown_841ABF9[];
+extern const u8 gUnknown_841AC2A[];
+extern const u8 gUnknown_841AC51[];
+extern const u8 gUnknown_841AC93[];
+extern const u8 gUnknown_841ACBC[];
+extern const u8 gUnknown_841ACF9[];
+extern const u8 gUnknown_841AD1D[];
+extern const u8 gUnknown_841AD3C[];
+extern const u8 gUnknown_841AD69[];
+extern const u8 gUnknown_841AD9E[];
+extern const u8 gUnknown_841ADC8[];
+extern const u8 gUnknown_841ADFF[];
+extern const u8 gUnknown_841AE1E[];
+extern const u8 gUnknown_841AE48[];
+extern const u8 gUnknown_841AE8F[];
+extern const u8 gUnknown_841AEA7[];
+extern const u8 gUnknown_841AEDC[];
+extern const u8 gUnknown_841AF0C[];
+extern const u8 gUnknown_841AF3E[];
+extern const u8 gUnknown_841AF6D[];
+extern const u8 gUnknown_841AF98[];
+extern const u8 gUnknown_841AF9F[];
+extern const u8 gUnknown_841AFA6[];
+extern const u8 gUnknown_841AFD1[];
+extern const u8 gUnknown_841AFD6[];
+extern const u8 gUnknown_841B005[];
+extern const u8 gUnknown_841B03F[];
+extern const u8 gUnknown_841B064[];
+extern const u8 gUnknown_841B073[];
+extern const u8 gUnknown_841B09F[];
+extern const u8 gUnknown_841B0A4[];
+extern const u8 gUnknown_841B0B5[];
+extern const u8 gUnknown_841B0B9[];
+extern const u8 gUnknown_841B0CD[];
+extern const u8 gUnknown_841B0DD[];
+extern const u8 gUnknown_841B0F6[];
+extern const u8 gUnknown_841B0FF[];
+extern const u8 gUnknown_841B109[];
+extern const u8 gUnknown_841B116[];
+extern const u8 gUnknown_841B11F[];
+extern const u8 gUnknown_841B130[];
+extern const u8 gUnknown_841B141[];
+extern const u8 gUnknown_841B14B[];
+extern const u8 gUnknown_841B15A[];
+extern const u8 gUnknown_841B166[];
+extern const u8 gUnknown_841B172[];
+extern const u8 gUnknown_841B180[];
+extern const u8 gUnknown_841B190[];
+extern const u8 gUnknown_841B1A3[];
+extern const u8 gUnknown_841B1B7[];
+extern const u8 gUnknown_841B1C7[];
+extern const u8 gUnknown_841B1DA[];
+extern const u8 gUnknown_841B1E5[];
+extern const u8 gUnknown_841B1F4[];
+extern const u8 gUnknown_841B200[];
+extern const u8 gUnknown_841B20E[];
+extern const u8 gUnknown_841B21C[];
+extern const u8 gUnknown_841B226[];
+extern const u8 gUnknown_841B236[];
+extern const u8 gUnknown_841B246[];
+extern const u8 gUnknown_841B25B[];
+extern const u8 gUnknown_841B268[];
+extern const u8 gUnknown_841B277[];
+
 
 const struct WindowTemplate gUnknown_845661C[3] = {
     { 0, 0,  0, 30, 2, 15, 0x0e9 },
@@ -3632,4 +3747,106 @@ u16 * sub_8113FBC(u16 * a0)
             break;
     }
     return r5 + 3;
+}
+
+u16 * sub_811414C(u16 a0, u16 * a1, u16 * a2)
+{
+    u16 * r1 = sub_8113DE0(a0, a1);
+    if (r1 == NULL)
+        return NULL;
+
+    r1[0] = a2[0];
+    r1[1] = a2[2];
+    return r1 + 2;
+}
+
+u16 * sub_8114174(u16 * a0, u16 * a1)
+{
+    return sub_811414C(5, a0, a1);
+}
+
+u16 * sub_8114188(u16 * a0)
+{
+    u16 * r4 = sub_8113E88(5, a0);
+    QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
+    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841AB74);
+    r4 += 2;
+    return r4;
+}
+
+u16 * sub_81141D0(u16 * a0, u16 * a1)
+{
+    return sub_811414C(6, a0, a1);
+}
+
+u16 * sub_81141E4(u16 * a0)
+{
+    u16 * r4 = sub_8113E88(6, a0);
+
+    QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
+    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841AB8E);
+    r4 += 2;
+    return r4;
+}
+
+u16 * sub_811422C(u16 * a0, u16 * a1)
+{
+    return sub_811414C(7, a0, a1);
+}
+
+u16 * sub_8114240(u16 * a0)
+{
+    u16 * r4 = sub_8113E88(7, a0);
+
+    QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
+    StringCopy(gStringVar1, ItemId_GetItem(r4[0])->name);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A6A5);
+    r4 += 2;
+    return r4;
+}
+
+u16 * sub_8114288(u16 * a0, u16 * a1)
+{
+    return sub_811414C(8, a0, a1);
+}
+
+u16 * sub_811429C(u16 * a0)
+{
+    u16 * r4 = sub_8113E88(8, a0);
+
+    QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
+    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A1CD);
+    r4 += 2;
+    return r4;
+}
+
+u16 * sub_81142E4(u16 a0, u16 * a1, u16 * a2)
+{
+    u16 * r1 = sub_8113DE0(a0, a1);
+    if (r1 == NULL)
+        return NULL;
+
+    r1[0] = a2[0];
+    r1[1] = a2[1];
+    r1[2] = a2[2];
+    return r1 + 3;
+}
+
+u16 * sub_8114310(u16 * a0, u16 * a1)
+{
+    return sub_81142E4(9, a0, a1);
+}
+
+u16 * sub_8114324(u16 * a0)
+{
+    u16 * r4 = sub_8113E88(9, a0);
+    QuestLog_AutoGetSpeciesName(r4[2], gStringVar1, 0);
+    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar3, ItemId_GetItem(r4[1])->name);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A193);
+    r4 += 3;
+    return r4;
 }

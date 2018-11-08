@@ -1810,7 +1810,7 @@ _080A1DEC: .4byte gSaveBlock1Ptr
 _080A1DF0: .4byte gTasks
 _080A1DF4:
 	ldr r1, _080A1E04 @ =gUnknown_2039998
-	ldr r0, _080A1E08 @ =sub_810C670
+	ldr r0, _080A1E08 @ =Task_VsSeeker_0
 	str r0, [r1]
 	adds r0, r2, 0
 	bl sub_80A103C
@@ -1819,7 +1819,7 @@ _080A1E00:
 	bx r0
 	.align 2, 0
 _080A1E04: .4byte gUnknown_2039998
-_080A1E08: .4byte sub_810C670
+_080A1E08: .4byte Task_VsSeeker_0
 	thumb_func_end sub_80A1D9C
 
 	thumb_func_start sub_80A1E0C

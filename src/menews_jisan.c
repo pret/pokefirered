@@ -89,12 +89,12 @@ void sub_8146C88(void)
     r5->unk_0_2 = 0;
     r5->unk_0_5 = 0;
     r5->unk_1 = 0;
-    VarSet(0x4028, 0);
+    VarSet(VAR_0x4028, 0);
 }
 
 void sub_8146CA4(void)
 {
-    u16 *r4 = sub_806E454(0x4028);
+    u16 *r4 = sub_806E454(VAR_0x4028);
     struct MysteryEventStruct *r2 = sub_8143D94();
     struct MysteryEventStruct r0 = *r2;
 

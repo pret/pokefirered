@@ -2709,24 +2709,9 @@ gUnknown_8453178:: @ 8453178
 gUnknown_8453184:: @ 8453184
 	.incbin "baserom.gba", 0x453184, 0x8
 
-gUnknown_845318C:: @ 845318C
-	.incbin "baserom.gba", 0x45318C, 0xDD0
+	.section .rodata.8453F6C
 
-gUnknown_8453F5C:: @ 8453F5C
-	.incbin "baserom.gba", 0x453F5C, 0x4
-
-gUnknown_8453F60:: @ 8453F60
-	.incbin "baserom.gba", 0x453F60, 0x2
-
-gUnknown_8453F62:: @ 8453F62
-	.incbin "baserom.gba", 0x453F62, 0x2
-
-gUnknown_8453F64:: @ 8453F64
-	.incbin "baserom.gba", 0x453F64, 0x3
-
-gUnknown_8453F67:: @ 8453F67
-	.incbin "baserom.gba", 0x453F67, 0x5
-
+// item_pc.o
 gUnknown_8453F6C:: @ 8453F6C
 	.incbin "baserom.gba", 0x453F6C, 0x8
 

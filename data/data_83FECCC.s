@@ -1592,7 +1592,7 @@ gUnknown_841A8D4:: @ 841A8D4
 	.incbin "baserom.gba", 0x41A8D4, 0x9
 
 gUnknown_841A8DD:: @ 841A8DD
-	.incbin "baserom.gba", 0x41A8DD, 0x3
+	.string "{UNKNOWN_F7 0x04}$"
 
 gUnknown_841A8E0:: @ 841A8E0
 	.string "{STR_VAR_1} shared its HP using the move\nSOFTBOILED.$"

@@ -321,6 +321,8 @@ TALL_PLUS   = FC 0C FB
 '·' = AF
 '‥' = B0
 
+@ TODO: Identify and declare F7 control codes
+
 STRING = FD
 
 @ string placeholders

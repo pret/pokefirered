@@ -273,6 +273,7 @@ bool8 sub_81153A8(u16, void*);
 bool8 sub_81153E4(u16, void*);
 
 extern const u8 gUnknown_841A155[];
+extern const u8 gUnknown_841A16F[];
 extern const u8 gUnknown_841B073[];
 
 const struct WindowTemplate gUnknown_845661C[3] = {
@@ -3543,4 +3544,14 @@ u16 * sub_8113F14(u16 * a0, u16 * a1)
     r2[0] = a1[0];
     r2[1] = a1[1];
     return r2 + 2;
+}
+
+u16 * sub_8113F3C(u16 * a0)
+{
+    u16 * r4 = sub_8113E88(3, a0);
+    sub_8113EAC(r4[0], gStringVar1, 0);
+    sub_8113EAC(r4[1], gStringVar2, 0);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A16F);
+    r4 += 2;
+    return r4;
 }

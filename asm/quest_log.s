@@ -5,36 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8113F3C
-sub_8113F3C: @ 8113F3C
-	push {r4,lr}
-	adds r1, r0, 0
-	movs r0, 0x3
-	bl sub_8113E88
-	adds r4, r0, 0
-	ldrh r0, [r4]
-	ldr r1, _08113F70 @ =gStringVar1
-	movs r2, 0
-	bl sub_8113EAC
-	ldrh r0, [r4, 0x2]
-	ldr r1, _08113F74 @ =gStringVar2
-	movs r2, 0
-	bl sub_8113EAC
-	ldr r0, _08113F78 @ =gStringVar4
-	ldr r1, _08113F7C @ =gUnknown_841A16F
-	bl StringExpandPlaceholders
-	adds r4, 0x4
-	adds r0, r4, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08113F70: .4byte gStringVar1
-_08113F74: .4byte gStringVar2
-_08113F78: .4byte gStringVar4
-_08113F7C: .4byte gUnknown_841A16F
-	thumb_func_end sub_8113F3C
-
 	thumb_func_start sub_8113F80
 sub_8113F80: @ 8113F80
 	push {r4,lr}

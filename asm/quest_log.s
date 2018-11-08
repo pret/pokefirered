@@ -51,7 +51,7 @@ sub_8114188: @ 8114188
 	ldrh r0, [r4, 0x2]
 	ldr r1, _081141C0 @ =gStringVar1
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r5, _081141C4 @ =gStringVar2
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -95,7 +95,7 @@ sub_81141E4: @ 81141E4
 	ldrh r0, [r4, 0x2]
 	ldr r1, _0811421C @ =gStringVar1
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r5, _08114220 @ =gStringVar2
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -139,7 +139,7 @@ sub_8114240: @ 8114240
 	ldrh r0, [r4, 0x2]
 	ldr r1, _08114278 @ =gStringVar2
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r5, _0811427C @ =gStringVar1
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -183,7 +183,7 @@ sub_811429C: @ 811429C
 	ldrh r0, [r4, 0x2]
 	ldr r1, _081142D4 @ =gStringVar1
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r5, _081142D8 @ =gStringVar2
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -253,7 +253,7 @@ sub_8114324: @ 8114324
 	ldrh r0, [r4, 0x4]
 	ldr r1, _0811436C @ =gStringVar1
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r5, _08114370 @ =gStringVar2
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -304,7 +304,7 @@ sub_8114394: @ 8114394
 	ldrh r0, [r4, 0x4]
 	ldr r1, _081143DC @ =gStringVar2
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r5, _081143E0 @ =gStringVar3
 	ldrh r0, [r4]
 	bl ItemId_GetItem
@@ -439,11 +439,11 @@ sub_811448C: @ 811448C
 	ldrh r0, [r5, 0x6]
 	ldr r1, _081144DC @ =gStringVar2
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrh r0, [r5, 0x4]
 	ldr r1, _081144E0 @ =gStringVar3
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r0, _081144E4 @ =gStringVar4
 	ldr r1, _081144E8 @ =gUnknown_841A3FF
 	bl StringExpandPlaceholders
@@ -813,11 +813,11 @@ sub_81147A8: @ 81147A8
 	ldrh r0, [r5, 0x6]
 	ldr r1, _081147F8 @ =gStringVar2
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrh r0, [r5, 0x4]
 	ldr r1, _081147FC @ =gStringVar3
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r0, _08114800 @ =gStringVar4
 	ldr r1, _08114804 @ =gUnknown_841A76A
 	bl StringExpandPlaceholders
@@ -942,7 +942,7 @@ sub_81148BC: @ 81148BC
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrb r0, [r5, 0x1]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
@@ -951,7 +951,7 @@ sub_81148BC: @ 81148BC
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x3
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r0, _08114910 @ =gStringVar4
 	ldr r1, _08114914 @ =gUnknown_841A566
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1008,11 +1008,11 @@ sub_8114944: @ 8114944
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x2
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r0, _08114988 @ =gStringVar4
 	ldr r1, _0811498C @ =gUnknown_841A5D9
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1081,11 +1081,11 @@ sub_81149D0: @ 81149D0
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x2
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r0, _08114A14 @ =gStringVar4
 	ldr r1, _08114A18 @ =gUnknown_841A60A
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1144,7 +1144,7 @@ sub_8114A4C: @ 8114A4C
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrb r0, [r5, 0x1]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
@@ -1205,7 +1205,7 @@ sub_8114AC8: @ 8114AC8
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r0, _08114B04 @ =gStringVar4
 	ldr r1, _08114B08 @ =gUnknown_841A5FA
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1261,7 +1261,7 @@ sub_8114B34: @ 8114B34
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r0, _08114B70 @ =gStringVar4
 	ldr r1, _08114B74 @ =gUnknown_841A632
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -1312,7 +1312,7 @@ sub_8114BA0: @ 8114BA0
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrb r0, [r4, 0x2]
 	bl GetBoxNamePtr
 	adds r1, r0, 0
@@ -1567,11 +1567,11 @@ sub_8114D68: @ 8114D68
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x2
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x3
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r1, _08114DDC @ =gUnknown_8456ACC
 	ldrb r0, [r6, 0x1]
 	lsls r0, 2
@@ -1697,7 +1697,7 @@ _08114E84:
 	ldrh r0, [r5, 0x4]
 	movs r1, 0
 	movs r2, 0x1
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r4, _08114F04 @ =gStringVar2
 	ldrb r1, [r5, 0x8]
 	adds r0, r4, 0
@@ -1710,7 +1710,7 @@ _08114E84:
 	ldrh r0, [r5, 0x6]
 	movs r1, 0
 	movs r2, 0x3
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r4, _08114F08 @ =gStringVar3
 	ldrb r1, [r6, 0x1]
 	adds r0, r4, 0
@@ -1886,11 +1886,11 @@ sub_811500C: @ 811500C
 	ldrh r0, [r4]
 	movs r1, 0
 	movs r2, 0x1
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0x2
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r1, _0811506C @ =gUnknown_8456ACC
 	ldrb r0, [r5, 0x1]
 	lsls r0, 2
@@ -2023,7 +2023,7 @@ _08115148:
 	ldrh r0, [r4, 0x4]
 	movs r1, 0
 	movs r2, 0x1
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r0, _08115188 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0x2
@@ -2031,7 +2031,7 @@ _08115148:
 	ldrh r0, [r4, 0x6]
 	movs r1, 0
 	movs r2, 0x3
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r0, _0811518C @ =gStringVar4
 	ldr r1, _08115190 @ =gUnknown_841A312
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -2130,11 +2130,11 @@ _0811523E:
 	ldrh r0, [r5]
 	movs r1, 0
 	movs r2, 0x2
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrh r0, [r5, 0x2]
 	movs r1, 0
 	movs r2, 0x3
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldr r1, _08115274 @ =gUnknown_8456ACC
 	ldrb r0, [r6, 0x1]
 	lsls r0, 2
@@ -2420,7 +2420,7 @@ sub_8115460: @ 8115460
 	ldrh r0, [r4]
 	ldr r1, _0811549C @ =gStringVar1
 	movs r2, 0
-	bl QuestLog_AutoGetSpeciesname
+	bl QuestLog_AutoGetSpeciesName
 	ldrb r0, [r5, 0x1]
 	cmp r0, 0xFF
 	beq _08115486

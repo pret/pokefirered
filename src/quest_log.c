@@ -3527,7 +3527,7 @@ u16 * sub_8113E88(u16 a0, u16 * a1)
 // TODO: delete this declaration once data_83FECCC.s is decompiled
 extern const u8 gText_EggNickname[];
 
-void QuestLog_AutoGetSpeciesname(u16 a0, u8 * a1, u8 a2)
+void QuestLog_AutoGetSpeciesName(u16 a0, u8 * a1, u8 a2)
 {
     if (a1 != NULL)
     {
@@ -3559,8 +3559,8 @@ u16 * sub_8113F14(u16 * a0, u16 * a1)
 u16 * sub_8113F3C(u16 * a0)
 {
     u16 * r4 = sub_8113E88(3, a0);
-    QuestLog_AutoGetSpeciesname(r4[0], gStringVar1, 0);
-    QuestLog_AutoGetSpeciesname(r4[1], gStringVar2, 0);
+    QuestLog_AutoGetSpeciesName(r4[0], gStringVar1, 0);
+    QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
     StringExpandPlaceholders(gStringVar4, gUnknown_841A16F);
     r4 += 2;
     return r4;
@@ -3599,7 +3599,7 @@ u16 * sub_8113FBC(u16 * a0)
             }
             else if (r5[1] != 0xFFFF)
             {
-                QuestLog_AutoGetSpeciesname(r5[1], gStringVar2, 0);
+                QuestLog_AutoGetSpeciesName(r5[1], gStringVar2, 0);
                 StringExpandPlaceholders(gStringVar4, gUnknown_841A1E7);
             }
             else
@@ -3612,7 +3612,7 @@ u16 * sub_8113FBC(u16 * a0)
             StringExpandPlaceholders(gStringVar4, gUnknown_841A220);
             break;
         case POCKET_TM_CASE:
-            QuestLog_AutoGetSpeciesname(r5[1], gStringVar1, 0);
+            QuestLog_AutoGetSpeciesName(r5[1], gStringVar1, 0);
             StringCopy(gStringVar2, gMoveNames[ItemIdToBattleMoveId(r5[0])]);
             if (r5[2] != 0xFFFF)
             {

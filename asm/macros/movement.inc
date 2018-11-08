@@ -104,6 +104,10 @@
 	create_movement step_5f
 	create_movement step_60
 	create_movement step_61
+	create_movement step_62
+	create_movement step_63
+	create_movement step_64
+	create_movement step_65
 
 	enum_start 0x91
 	create_movement step_91

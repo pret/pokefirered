@@ -194,83 +194,84 @@ u16 * sub_8113CC8(u16 *, struct UnkStruct_203AE98 *);
 u16 * sub_8113D08(u16 *, struct UnkStruct_203AE98 *);
 u16 * sub_8113D48(u16 *, struct UnkStruct_203AE98 *);
 u16 * sub_8113D94(u16 *, struct UnkStruct_203AE98 *);
-u16 *sub_8113F14(u16 *, u16 *);
-u16 *sub_8113F3C(u16 *);
-u16 *sub_8113F80(u16 *, u16 *);
-u16 *sub_8113FBC(u16 *);
-u16 *sub_8114174(u16 *, u16 *);
-u16 *sub_8114188(u16 *);
-u16 *sub_81141D0(u16 *, u16 *);
-u16 *sub_81141E4(u16 *);
-u16 *sub_811422C(u16 *, u16 *);
-u16 *sub_8114240(u16 *);
-u16 *sub_8114288(u16 *, u16 *);
-u16 *sub_811429C(u16 *);
-u16 *sub_8114310(u16 *, u16 *);
-u16 *sub_8114324(u16 *);
-u16 *sub_8114380(u16 *, u16 *);
-u16 *sub_8114394(u16 *);
-u16 *sub_81143F0(u16 *, u16 *);
-u16 *sub_811443C(u16 *);
-u16 *sub_811445C(u16 *, u16 *);
-u16 *sub_811448C(u16 *);
-u16 *sub_81144EC(u16 *, u16 *);
-u16 *sub_8114518(u16 *);
-u16 *sub_8114578(u16 *, u16 *);
-u16 *sub_81145A4(u16 *);
-u16 *sub_8114604(u16 *, u16 *);
-u16 *sub_811464C(u16 *);
-u16 *sub_8114710(u16 *, u16 *);
-u16 *sub_8114724(u16 *);
-u16 *sub_8114744(u16 *, u16 *);
-u16 *sub_8114758(u16 *);
-u16 *sub_8114778(u16 *, u16 *);
-u16 *sub_81147A8(u16 *);
-u16 *sub_8114808(u16 *, u16 *);
-u16 *sub_8114834(u16 *);
-u16 *sub_811488C(u16 *, u16 *);
-u16 *sub_81148BC(u16 *);
-u16 *sub_8114918(u16 *, u16 *);
-u16 *sub_8114944(u16 *);
-u16 *sub_8114990(u16 *, u16 *);
-u16 *sub_81149D0(u16 *);
-u16 *sub_8114A1C(u16 *, u16 *);
-u16 *sub_8114A4C(u16 *);
-u16 *sub_8114AA0(u16 *, u16 *);
-u16 *sub_8114AC8(u16 *);
-u16 *sub_8114B0C(u16 *, u16 *);
-u16 *sub_8114B34(u16 *);
-u16 *sub_8114B78(u16 *, u16 *);
-u16 *sub_8114BA0(u16 *);
-u16 *sub_8114BE4(u16 *, u16 *);
-u16 *sub_8114C0C(u16 *);
-u16 *sub_8114C68(u16 *, u16 *);
-u16 *sub_8114C8C(u16 *);
-u16 *sub_8114CC0(u16 *, u16 *);
-u16 *sub_8114CE4(u16 *);
-u16 *sub_8114D4C(u16 *, u16 *);
-u16 *sub_8114D68(u16 *);
-u16 *sub_8114DE8(u16 *, u16 *);
-u16 *sub_8114E68(u16 *);
+u16 * sub_8113F14(u16 *, const u16 *);
+const u16 * sub_8113F3C(const u16 *);
+u16 * sub_8113F80(u16 *, const u16 *);
+const u16 * sub_8113FBC(const u16 *);
+u16 * sub_8114174(u16 *, const u16 *);
+const u16 * sub_8114188(const u16 *);
+u16 * sub_81141D0(u16 *, const u16 *);
+const u16 * sub_81141E4(const u16 *);
+u16 * sub_811422C(u16 *, const u16 *);
+const u16 * sub_8114240(const u16 *);
+u16 * sub_8114288(u16 *, const u16 *);
+const u16 * sub_811429C(const u16 *);
+u16 * sub_8114310(u16 *, const u16 *);
+const u16 * sub_8114324(const u16 *);
+u16 * sub_8114380(u16 *, const u16 *);
+const u16 * sub_8114394(const u16 *);
+u16 * sub_81143F0(u16 *, const u16 *);
+const u16 * sub_811443C(const u16 *);
+u16 * sub_811445C(u16 *, const u16 *);
+const u16 * sub_811448C(const u16 *);
+u16 * sub_81144EC(u16 *, const u16 *);
+const u16 * sub_8114518(const u16 *);
+u16 * sub_8114578(u16 *, const u16 *);
+const u16 * sub_81145A4(const u16 *);
+u16 * sub_8114604(u16 *, const u16 *);
+const u16 * sub_811464C(const u16 *);
+u16 * sub_8114710(u16 *, const u16 *);
+const u16 * sub_8114724(const u16 *);
+u16 * sub_8114744(u16 *, const u16 *);
+const u16 * sub_8114758(const u16 *);
+u16 * sub_8114778(u16 *, const u16 *);
+const u16 * sub_81147A8(const u16 *);
+u16 * sub_8114808(u16 *, const u16 *);
+const u16 * sub_8114834(const u16 *);
+u16 * sub_811488C(u16 *, const u16 *);
+const u16 * sub_81148BC(const u16 *);
+u16 * sub_8114918(u16 *, const u16 *);
+const u16 * sub_8114944(const u16 *);
+u16 * sub_8114990(u16 *, const u16 *);
+const u16 * sub_81149D0(const u16 *);
+u16 * sub_8114A1C(u16 *, const u16 *);
+const u16 * sub_8114A4C(const u16 *);
+u16 * sub_8114AA0(u16 *, const u16 *);
+const u16 * sub_8114AC8(const u16 *);
+u16 * sub_8114B0C(u16 *, const u16 *);
+const u16 * sub_8114B34(const u16 *);
+u16 * sub_8114B78(u16 *, const u16 *);
+const u16 * sub_8114BA0(const u16 *);
+u16 * sub_8114BE4(u16 *, const u16 *);
+const u16 * sub_8114C0C(const u16 *);
+u16 * sub_8114C68(u16 *, const u16 *);
+const u16 * sub_8114C8C(const u16 *);
+u16 * sub_8114CC0(u16 *, const u16 *);
+const u16 * sub_8114CE4(const u16 *);
+u16 * sub_8114D4C(u16 *, const u16 *);
+const u16 * sub_8114D68(const u16 *);
+u16 * sub_8114DE8(u16 *, const u16 *);
+const u16 * sub_8114E68(const u16 *);
 bool8 sub_8114FBC(u16);
-u16 *sub_8114FF0(u16 *, u16 *);
-u16 *sub_811500C(u16 *);
-u16 *sub_8115078(u16 *, u16 *);
-u16 *sub_81150CC(u16 *);
-u16 *sub_81151C0(u16 *, u16 *);
-u16 *sub_81151DC(u16 *);
-u16 *sub_8115280(u16 *, u16 *);
-u16 *sub_81152BC(u16 *);
-u16 *sub_8115410(u16 *, u16 *);
-u16 *sub_8115460(u16 *);
-u16 *sub_81154DC(u16 *, u16 *);
-u16 *sub_8115518(u16 *);
-u16 *sub_81155A4(u16 *, u16 *);
-u16 *sub_81155E0(u16 *);
-u16 *sub_81156D8(u16 *, u16 *);
-u16 *sub_8115700(u16 *);
-u16 *sub_81157DC(u16 *, u16 *);
-u16 *sub_8115800(u16 *);
+u16 * sub_8114FF0(u16 *, const u16 *);
+const u16 * sub_811500C(const u16 *);
+u16 * sub_8115078(u16 *, const u16 *);
+const u16 * sub_81150CC(const u16 *);
+u16 * sub_81151C0(u16 *, const u16 *);
+const u16 * sub_81151DC(const u16 *);
+u16 * sub_8115280(u16 *, const u16 *);
+const u16 * sub_81152BC(const u16 *);
+u16 * sub_8115410(u16 *, const u16 *);
+const u16 * sub_8115460(const u16 *);
+u16 * sub_81154DC(u16 *, const u16 *);
+const u16 * sub_8115518(const u16 *);
+u16 * sub_81155A4(u16 *, const u16 *);
+const u16 * sub_81155E0(const u16 *);
+u16 * sub_81156D8(u16 *, const u16 *);
+const u16 * sub_8115700(const u16 *);
+u16 * sub_81157DC(u16 *, const u16 *);
+const u16 * sub_8115800(const u16 *);
+void sub_8115834(u8 *);
 bool8 sub_81153A8(u16, void*);
 bool8 sub_81153E4(u16, void*);
 
@@ -2771,7 +2772,7 @@ u8 sub_8113530(void)
     return sub_8113114(VAR_0x4038_STRUCT, gUnknown_20370C0);
 }
 
-static u16 * (*const sQuestLogStorageCBs[])(u16 *, u16 *) = {
+static u16 * (*const sQuestLogStorageCBs[])(u16 *, const u16 *) = {
     NULL,
     NULL,
     NULL,
@@ -2905,7 +2906,7 @@ void sub_8113550(u16 a0, u16 * a1)
 }
 #else
 NAKED
-void sub_8113550(u16 a0, u16 * a1)
+void sub_8113550(u16 a0, const u16 * a1)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                 "\tadds r5, r1, 0\n"
@@ -3267,7 +3268,7 @@ bool8 sub_8113A44(u16 a0, u16 *a1)
     return FALSE;
 }
 
-static u16 * (*const sQuestLogScriptParsingCBs[])(u16 *) = {
+static const u16 * (*const sQuestLogScriptParsingCBs[])(const u16 *) = {
     NULL,
     NULL,
     NULL,
@@ -3633,9 +3634,9 @@ u16 * sub_8113DE0(u16 a0, u16 * a1)
     return r5;
 }
 
-u16 * sub_8113E88(u16 a0, u16 * a1)
+const u16 * sub_8113E88(u16 a0, const u16 * a1)
 {
-    a1 = (void *)a1 + (gUnknown_203B044.unk_2 * (gUnknown_8456AA0[a0] - 4) + 4);
+    a1 = (const void *)a1 + (gUnknown_203B044.unk_2 * (gUnknown_8456AA0[a0] - 4) + 4);
     return a1;
 }
 
@@ -3660,7 +3661,7 @@ void QuestLog_AutoGetSpeciesName(u16 a0, u8 * a1, u8 a2)
     }
 }
 
-u16 * sub_8113F14(u16 * a0, u16 * a1)
+u16 * sub_8113F14(u16 * a0, const u16 * a1)
 {
     u16 * r2 = sub_8113DE0(3, a0);
     if (r2 == NULL)
@@ -3671,9 +3672,9 @@ u16 * sub_8113F14(u16 * a0, u16 * a1)
     return r2 + 2;
 }
 
-u16 * sub_8113F3C(u16 * a0)
+const u16 * sub_8113F3C(const u16 * a0)
 {
-    u16 * r4 = sub_8113E88(3, a0);
+    const u16 * r4 = sub_8113E88(3, a0);
     QuestLog_AutoGetSpeciesName(r4[0], gStringVar1, 0);
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
     StringExpandPlaceholders(gStringVar4, gUnknown_841A16F);
@@ -3681,7 +3682,7 @@ u16 * sub_8113F3C(u16 * a0)
     return r4;
 }
 
-u16 * sub_8113F80(u16 * a0, u16 * a1)
+u16 * sub_8113F80(u16 * a0, const u16 * a1)
 {
     u16 * r2 = sub_8113DE0(4, a0);
     if (r2 == NULL)
@@ -3697,9 +3698,9 @@ u16 * sub_8113F80(u16 * a0, u16 * a1)
     return r2 + 3;
 }
 
-u16 * sub_8113FBC(u16 * a0)
+const u16 * sub_8113FBC(const u16 * a0)
 {
-    u16 * r5 = sub_8113E88(4, a0);
+    const u16 * r5 = sub_8113E88(4, a0);
 
     switch (ItemId_GetPocket(r5[0]))
     {
@@ -3749,7 +3750,7 @@ u16 * sub_8113FBC(u16 * a0)
     return r5 + 3;
 }
 
-u16 * sub_811414C(u16 a0, u16 * a1, u16 * a2)
+u16 * sub_811414C(u16 a0, u16 * a1, const u16 * a2)
 {
     u16 * r1 = sub_8113DE0(a0, a1);
     if (r1 == NULL)
@@ -3760,14 +3761,14 @@ u16 * sub_811414C(u16 a0, u16 * a1, u16 * a2)
     return r1 + 2;
 }
 
-u16 * sub_8114174(u16 * a0, u16 * a1)
+u16 * sub_8114174(u16 * a0, const u16 * a1)
 {
     return sub_811414C(5, a0, a1);
 }
 
-u16 * sub_8114188(u16 * a0)
+const u16 * sub_8114188(const u16 * a0)
 {
-    u16 * r4 = sub_8113E88(5, a0);
+    const u16 * r4 = sub_8113E88(5, a0);
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
     StringExpandPlaceholders(gStringVar4, gUnknown_841AB74);
@@ -3775,14 +3776,14 @@ u16 * sub_8114188(u16 * a0)
     return r4;
 }
 
-u16 * sub_81141D0(u16 * a0, u16 * a1)
+u16 * sub_81141D0(u16 * a0, const u16 * a1)
 {
     return sub_811414C(6, a0, a1);
 }
 
-u16 * sub_81141E4(u16 * a0)
+const u16 * sub_81141E4(const u16 * a0)
 {
-    u16 * r4 = sub_8113E88(6, a0);
+    const u16 * r4 = sub_8113E88(6, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
@@ -3791,14 +3792,14 @@ u16 * sub_81141E4(u16 * a0)
     return r4;
 }
 
-u16 * sub_811422C(u16 * a0, u16 * a1)
+u16 * sub_811422C(u16 * a0, const u16 * a1)
 {
     return sub_811414C(7, a0, a1);
 }
 
-u16 * sub_8114240(u16 * a0)
+const u16 * sub_8114240(const u16 * a0)
 {
-    u16 * r4 = sub_8113E88(7, a0);
+    const u16 * r4 = sub_8113E88(7, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
     StringCopy(gStringVar1, ItemId_GetItem(r4[0])->name);
@@ -3807,14 +3808,14 @@ u16 * sub_8114240(u16 * a0)
     return r4;
 }
 
-u16 * sub_8114288(u16 * a0, u16 * a1)
+u16 * sub_8114288(u16 * a0, const u16 * a1)
 {
     return sub_811414C(8, a0, a1);
 }
 
-u16 * sub_811429C(u16 * a0)
+const u16 * sub_811429C(const u16 * a0)
 {
-    u16 * r4 = sub_8113E88(8, a0);
+    const u16 * r4 = sub_8113E88(8, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
@@ -3823,7 +3824,7 @@ u16 * sub_811429C(u16 * a0)
     return r4;
 }
 
-u16 * sub_81142E4(u16 a0, u16 * a1, u16 * a2)
+u16 * sub_81142E4(u16 a0, u16 * a1, const u16 * a2)
 {
     u16 * r1 = sub_8113DE0(a0, a1);
     if (r1 == NULL)
@@ -3835,18 +3836,126 @@ u16 * sub_81142E4(u16 a0, u16 * a1, u16 * a2)
     return r1 + 3;
 }
 
-u16 * sub_8114310(u16 * a0, u16 * a1)
+u16 * sub_8114310(u16 * a0, const u16 * a1)
 {
     return sub_81142E4(9, a0, a1);
 }
 
-u16 * sub_8114324(u16 * a0)
+const u16 * sub_8114324(const u16 * a0)
 {
-    u16 * r4 = sub_8113E88(9, a0);
+    const u16 * r4 = sub_8113E88(9, a0);
     QuestLog_AutoGetSpeciesName(r4[2], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
     StringCopy(gStringVar3, ItemId_GetItem(r4[1])->name);
     StringExpandPlaceholders(gStringVar4, gUnknown_841A193);
     r4 += 3;
     return r4;
+}
+
+u16 * sub_8114380(u16 * a0, const u16 * a1)
+{
+    return sub_81142E4(10, a0, a1);
+}
+
+const u16 * sub_8114394(const u16 * a0)
+{
+    const u16 * r4 = sub_8113E88(10, a0);
+    QuestLog_AutoGetSpeciesName(r4[2], gStringVar2, 0);
+    StringCopy(gStringVar3, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar1, ItemId_GetItem(r4[1])->name);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A6E1);
+    r4 += 3;
+    return r4;
+}
+
+u16 * sub_81143F0(u16 * a0, const u16 * a1)
+{
+    u16 * r4 = a0;
+    if (gUnknown_203B044.unk_0 == 11 && gUnknown_203B044.unk_1 != 0)
+        return r4;
+
+    if (!sub_8110944(a0, gUnknown_8456AA0[11]))
+        return NULL;
+
+    r4[0] = 11;
+    r4[1] = gUnknown_203AF98;
+    return r4 + 2;
+}
+
+const u16 * sub_811443C(const u16 * a0)
+{
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A2B0);
+    a0 += 2;
+    return a0;
+}
+
+u16 * sub_811445C(u16 * a0, const u16 * a1)
+{
+    u16 * r4 = a0 + 4;
+
+    a0[0] = 12;
+    a0[1] = gUnknown_203AF98;
+    a0[2] = a1[0];
+    a0[3] = a1[1];
+    a1 += 2;
+    memcpy(r4, a1, 7);
+    r4 += 4;
+    return r4;
+}
+
+const u16 * sub_811448C(const u16 * a0)
+{
+    const u16 * r6 = a0 + 4;
+
+    memset(gStringVar1, EOS, 8);
+    memcpy(gStringVar1, r6, 7);
+
+    sub_8115834(gStringVar1);
+    QuestLog_AutoGetSpeciesName(a0[3], gStringVar2, 0);
+    QuestLog_AutoGetSpeciesName(a0[2], gStringVar3, 0);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A3FF);
+    r6 += 4;
+    return r6;
+}
+
+u16 * sub_81144EC(u16 * a0, const u16 * a1)
+{
+    a0[0] = 13;
+    a0[1] = gUnknown_203AF98;
+    *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
+    memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
+    a0 += 6;
+    return a0;
+}
+
+const u8 *const gUnknown_8456ACC[] = {
+    gUnknown_841A74E,
+    gUnknown_841A756,
+    gUnknown_841A762
+};
+
+const u8 *const gUnknown_8456AD8[] = {
+    gUnknown_841AF98,
+    gUnknown_841A762,
+    gUnknown_841AF9F
+};
+
+const u8 *const gUnknown_8456AE4[] = {
+    gUnknown_841A502,
+    gUnknown_841A506,
+    gUnknown_841AFD1
+};
+
+const u16 * sub_8114518(const u16 * a0)
+{
+    UnkTextUtil_Reset();
+
+    memset(gStringVar1, EOS, 8);
+    memcpy(gStringVar1, (const u8 *)a0 + 5, 7);
+    sub_8115834(gStringVar1);
+    UnkTextUtil_SetPtrI(0, gStringVar1);
+    UnkTextUtil_SetPtrI(1, gUnknown_8456AE4[((const u8 *)a0)[4]]);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A422);
+    a0 += 6;
+    return a0;
 }

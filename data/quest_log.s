@@ -1,21 +1,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_8456ACC:: @ 8456ACC
-	.4byte gUnknown_841A74E
-	.4byte gUnknown_841A756
-	.4byte gUnknown_841A762
-
-gUnknown_8456AD8:: @ 8456AD8
-	.4byte gUnknown_841AF98
-	.4byte gUnknown_841A762
-	.4byte gUnknown_841AF9F
-
-gUnknown_8456AE4:: @ 8456AE4
-	.4byte gUnknown_841A502
-	.4byte gUnknown_841A506
-	.4byte gUnknown_841AFD1
-
 gUnknown_8456AF0:: @ 8456AF0
 	.4byte gUnknown_841B09F
 	.4byte gUnknown_841B0A4

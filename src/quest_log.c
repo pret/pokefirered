@@ -4046,3 +4046,49 @@ const u16 * sub_8114758(const u16 * a0)
     a0 += 2;
     return a0;
 }
+
+u16 * sub_8114778(u16 * a0, const u16 * a1)
+{
+    u8 * r4 = (u8 *)(a0 + 4);
+    a0[0] = 18;
+    a0[1] = gUnknown_203AF98;
+    a0[2] = a1[0];
+    a0[3] = a1[1];
+    memcpy(r4, a1 + 2, 7);
+    r4 += 8;
+    return (u16 *)r4;
+}
+
+const u16 * sub_81147A8(const u16 * a0)
+{
+    const u8 * r6 = (const u8 *)(a0 + 4);
+    memset(gStringVar1, EOS, 8);
+    memcpy(gStringVar1, r6, 7);
+    sub_8115834(gStringVar1);
+    QuestLog_AutoGetSpeciesName(a0[3], gStringVar2, 0);
+    QuestLog_AutoGetSpeciesName(a0[2], gStringVar3, 0);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A76A);
+    r6 += 8;
+    return (const u16 *)r6;
+}
+
+u16 * sub_8114808(u16 * a0, const u16 * a1)
+{
+    a0[0] = 19;
+    a0[1] = gUnknown_203AF98;
+    *(u8 *)&a0[2] = *(const u8 *)&a1[0];
+    memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
+    a0 += 6;
+    return a0;
+}
+
+const u16 * sub_8114834(const u16 * a0)
+{
+    memset(gStringVar1, EOS, 8);
+    memcpy(gStringVar1, (const u8 *)a0 + 5, 7);
+    sub_8115834(gStringVar1);
+    StringCopy(gStringVar2, gUnknown_8456AE4[*(const u8 *)&a0[2]]);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A7B0);
+    a0 += 6;
+    return a0;
+}

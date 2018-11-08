@@ -3918,16 +3918,6 @@ const u16 * sub_811448C(const u16 * a0)
     return r6;
 }
 
-u16 * sub_81144EC(u16 * a0, const u16 * a1)
-{
-    a0[0] = 13;
-    a0[1] = gUnknown_203AF98;
-    *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
-    memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
-    a0 += 6;
-    return a0;
-}
-
 const u8 *const gUnknown_8456ACC[] = {
     gUnknown_841A74E,
     gUnknown_841A756,
@@ -3946,6 +3936,16 @@ const u8 *const gUnknown_8456AE4[] = {
     gUnknown_841AFD1
 };
 
+u16 * sub_81144EC(u16 * a0, const u16 * a1)
+{
+    a0[0] = 13;
+    a0[1] = gUnknown_203AF98;
+    *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
+    memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
+    a0 += 6;
+    return a0;
+}
+
 const u16 * sub_8114518(const u16 * a0)
 {
     UnkTextUtil_Reset();
@@ -3957,5 +3957,92 @@ const u16 * sub_8114518(const u16 * a0)
     UnkTextUtil_SetPtrI(1, gUnknown_8456AE4[((const u8 *)a0)[4]]);
     UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A422);
     a0 += 6;
+    return a0;
+}
+
+u16 * sub_8114578(u16 * a0, const u16 * a1)
+{
+    a0[0] = 14;
+    a0[1] = gUnknown_203AF98;
+    *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
+    memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
+    a0 += 6;
+    return a0;
+}
+
+const u16 * sub_81145A4(const u16 * a0)
+{
+    UnkTextUtil_Reset();
+
+    memset(gStringVar1, EOS, 8);
+    memcpy(gStringVar1, (const u8 *)a0 + 5, 7);
+    sub_8115834(gStringVar1);
+    UnkTextUtil_SetPtrI(0, gStringVar1);
+    UnkTextUtil_SetPtrI(1, gUnknown_8456AE4[((const u8 *)a0)[4]]);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A477);
+    a0 += 6;
+    return a0;
+}
+
+u16 * sub_8114604(u16 * a0, const u16 * a1)
+{
+    a0[0] = 15;
+    a0[1] = gUnknown_203AF98;
+    *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
+    memcpy((u8 *)a0 +  5, (const u8 *)a1 +  1, 7);
+    memcpy((u8 *)a0 + 12, (const u8 *)a1 +  8, 7);
+    memcpy((u8 *)a0 + 19, (const u8 *)a1 + 15, 7);
+    a0 += 13;
+    return a0;
+}
+
+const u16 * sub_811464C(const u16 * a0)
+{
+    UnkTextUtil_Reset();
+
+    memset(gStringVar1, EOS, 8);
+    memset(gStringVar2, EOS, 8);
+    memset(gStringVar3, EOS, 8);
+    StringCopy7(gStringVar1, (const u8 *)a0 +  5);
+    StringCopy7(gStringVar2, (const u8 *)a0 + 12);
+    StringCopy7(gStringVar3, (const u8 *)a0 + 19);
+    sub_8115834(gStringVar1);
+    sub_8115834(gStringVar2);
+    sub_8115834(gStringVar3);
+    UnkTextUtil_SetPtrI(0, gSaveBlock2Ptr->playerName);
+    UnkTextUtil_SetPtrI(1, gStringVar1);
+    UnkTextUtil_SetPtrI(2, gStringVar2);
+    UnkTextUtil_SetPtrI(3, gStringVar3);
+    UnkTextUtil_SetPtrI(4, gUnknown_8456AE4[((const u8 *)a0)[4]]);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A4C6);
+    a0 += 13;
+    return a0;
+}
+
+u16 * sub_8114710(u16 * a0, const u16 * a1)
+{
+    a0[0] = 16;
+    a0[1] = gUnknown_203AF98;
+    return a0 + 2;
+}
+
+const u16 * sub_8114724(const u16 * a0)
+{
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A50B);
+    a0 += 2;
+    return a0;
+}
+
+u16 * sub_8114744(u16 * a0, const u16 * a1)
+{
+    a0[0] = 17;
+    a0[1] = gUnknown_203AF98;
+    return a0 + 2;
+}
+
+const u16 * sub_8114758(const u16 * a0)
+{
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A732);
+    a0 += 2;
     return a0;
 }

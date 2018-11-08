@@ -1271,7 +1271,14 @@ gUnknown_8418C83:: @ 8418C83
 	.incbin "baserom.gba", 0x418C83, 0x56
 
 gUnknown_8418CD9:: @ 8418CD9
-	.incbin "baserom.gba", 0x418CD9, 0x130
+	.string "The backup memory is damaged or\n"
+	.string "the game’s battery has run dry.\n"
+	.string "The game can be played, but its\n"
+	.string "progress cannot be saved.\n"
+	.string "“Please press the A Button.”$"
+
+gUnknown_8418D70:: @ 8418D70
+	.incbin "baserom.gba", 0x418D70, 0x99
 
 gUnknown_8418E09:: @ 8418E09
 	.incbin "baserom.gba", 0x418E09, 0x6E
@@ -1307,46 +1314,210 @@ gUnknown_8418EBC:: @ 8418EBC
 	.incbin "baserom.gba", 0x418EBC, 0x7
 
 gUnknown_8418EC3:: @ 8418EC3
-	.incbin "baserom.gba", 0x418EC3, 0x8BF
+	.string "No data$"
+
+gUnknown_8418ECB:: @ 8418ECB
+	@ Viridian Forest
+	.string "A deep and sprawling forest that\n"
+	.string "extends around VIRIDIAN CITY.\n"
+	.string "A natural maze, many people\n"
+	.string "become lost inside.$"
+
+gUnknown_8418F3A:: @ 8418F3A
+	@ Mt. Moon
+	.string "A mystical mountain that is known\n"
+	.string "for its frequent meteor falls.\n"
+	.string "The shards of stars that fall\n"
+	.string "here are known as MOON STONES.$"
+
+gUnknown_8418FB8:: @ 8418FB8
+	@ Diglett's Cave
+	.string "A seemingly plain tunnel that was\n"
+	.string "dug by wild DIGLETT.\n"
+	.string "It is famous for connecting\n"
+	.string "ROUTES 2 and 11.$"
+
+gUnknown_841901C:: @ 841901C
+	@ Victory Road
+	.string "A tunnel situated on ROUTE 23.\n"
+	.string "It earned its name because it\n"
+	.string "must be traveled by all TRAINERS\n"
+	.string "aiming for the top.$"
+
+gUnknown_841908E:: @ 841908E
+	@ Pokémon Mansion
+	.string "A decrepit, burned-down mansion\n"
+	.string "on CINNABAR ISLAND.\n"
+	.string "It got its name because a famous\n"
+	.string "POKéMON researcher lived there.$"
+
+gUnknown_8419103:: @ 8419103
+	@ Safari Zone
+	.string "An amusement park outside FUCHSIA\n"
+	.string "CITY where many rare POKéMON can\n"
+	.string "be observed in the wild.\n"
+	.string "Catch them in a popular game!$"
+
+gUnknown_841917D:: @ 841917D
+	@ Rock Tunnel
+	.string "A naturally formed underground\n"
+	.string "tunnel. Because it has not been\n"
+	.string "developed, it is inky dark inside.\n"
+	.string "A light is needed to get through.$"
+
+gUnknown_8419201:: @ 8419201
+	@ Seafoam Islands
+	.string "A pair of islands that is situated\n"
+	.string "on ROUTE 20.\n"
+	.string "The two islands are shaped the\n"
+	.string "same, as if they were twins.$"
+
+gUnknown_841926D:: @ 841926D
+	@ Pokémon Tower
+	.string "A tower that houses the graves of\n"
+	.string "countless POKéMON.\n"
+	.string "Many people visit it daily to pay\n"
+	.string "their respects to the fallen.$"
+
+gUnknown_84192E2:: @ 84192E2
+	@ Cerulean Cave
+	.string "A mysterious cave that is filled\n"
+	.string "with terribly tough POKéMON.\n"
+	.string "It is so dangerous, the POKéMON\n"
+	.string "LEAGUE is in charge of it.$"
+
+gUnknown_841935B:: @ 841935B
+	@ Power Plant
+	.string "A power plant that was abandoned\n"
+	.string "years ago, though some of the\n"
+	.string "machines still work. It is infested\n"
+	.string "with electric POKéMON.$"
+
+gUnknown_84193D5:: @ 84193D5
+	@ Mt. Ember
+	.string "Supposedly an inactive volcano.\n"
+	.string "However, there are persistent\n"
+	.string "reports that the peak blazes\n"
+	.string "with fire at night.$"
+
+gUnknown_8419444:: @ 8419444
+	@ Berry Forest
+	.string "A forest on a small islet off the\n"
+	.string "coast of THREE ISLAND. BERRIES\n"
+	.string "grow wildly in profusion, quickly\n"
+	.string "replenishing those that fall off.$"
+
+gUnknown_84194C9:: @ 84194C9
+	@ Icefall Cave
+	.string "A cave which is covered by water\n"
+	.string "and ice on FOUR ISLAND.\n"
+	.string "It seems like the end of the cave\n"
+	.string "is connected to the ocean.$"
+
+gUnknown_841953F:: @ 841953F
+	@ Lost Cave
+	.string "A bewildering cave off the coast\n"
+	.string "of RESORT GORGEOUS.\n"
+	.string "Some curious thrill seekers have\n"
+	.string "never emerged from it.$"
+
+gUnknown_84195AC:: @ 84195AC
+	@ Tanoby Ruins
+	.string "An ancient ruin that is rumored to\n"
+	.string "be home to a peculiar POKéMON.\n"
+	.string "However, so far, the POKéMON\n"
+	.string "remains an unconfirmed rumor.$"
+
+gUnknown_8419629:: @ 8419629
+	@ Altering Cave
+	.string "This island has been known by this\n"
+	.string "name since the distant past.\n"
+	.string "No one today knows where it got\n"
+	.string "this name, however.$"
+
+gUnknown_841969D:: @ 841969D
+	@ Pattern Bush
+	.string "A lush and bush-like area. \n"
+	.string "In it are patterns where no grass\n"
+	.string "grows. Some study it in the belief\n"
+	.string "that a secret is concealed.$"
+
+gUnknown_841971A:: @ 841971A
+	@ Dotted Hole
+	.string "A mysterious, just-discovered\n"
+	.string "ruin from an ancient time.\n"
+	.string "It got its name from the six dots\n"
+	.string "on its door.$"
 
 gUnknown_8419782:: @ 8419782
-	.incbin "baserom.gba", 0x419782, 0x1B
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a trade.$"
 
 gUnknown_841979D:: @ 841979D
-	.incbin "baserom.gba", 0x41979D, 0x1B
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a trade.$"
 
 gUnknown_84197B8:: @ 84197B8
-	.incbin "baserom.gba", 0x4197B8, 0x35
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a fateful encounter when\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84197ED:: @ 84197ED
-	.incbin "baserom.gba", 0x4197ED, 0x35
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a fateful encounter when\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419822:: @ 8419822
-	.incbin "baserom.gba", 0x419822, 0x1F
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419841:: @ 8419841
-	.incbin "baserom.gba", 0x419841, 0x1F
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419860:: @ 8419860
-	.incbin "baserom.gba", 0x419860, 0x2A
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841988A:: @ 841988A
-	.incbin "baserom.gba", 0x41988A, 0x2A
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198B4:: @ 84198B4
-	.incbin "baserom.gba", 0x4198B4, 0x21
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198D5:: @ 84198D5
-	.incbin "baserom.gba", 0x4198D5, 0x5A
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+
+@ TODO: Replace this gibberish with the proper Hiragana
+gUnknown_84198F6:: @ 84198F6
+	.string "{UNKNOWN_F7 0x00}ßÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
+
+gUnknown_8419913:: @ 8419913
+	.string "{UNKNOWN_F7 0x00}ÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
 
 gUnknown_841992F:: @ 841992F
-	.incbin "baserom.gba", 0x41992F, 0x3E
+	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
+	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_841996D:: @ 841996D
-	.incbin "baserom.gba", 0x41996D, 0x3E
+	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
+	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199AB:: @ 84199AB
-	.incbin "baserom.gba", 0x4199AB, 0x49
+	.string "{UNKNOWN_F7 0x00} nature. Apparently met in\n"
+	.string "a fateful encounter (hatched:\n"
+	.string "{UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199F4:: @ 84199F4
 	.incbin "baserom.gba", 0x4199F4, 0x217
@@ -1454,7 +1625,38 @@ gUnknown_8419E57:: @ 8419E57
 	.incbin "baserom.gba", 0x419E57, 0xFD
 
 gUnknown_8419F54:: @ 8419F54
-	.incbin "baserom.gba", 0x419F54, 0x201
+	.string "SAVING…\n"
+	.string "DON’T TURN OFF THE POWER.$"
+
+gUnknown_8419F76:: @ 8419F76
+	.string "A device that records POKéMON secrets\n"
+	.string "upon meeting or catching them.$"
+
+gUnknown_8419FBB:: @ 8419FBB
+	.string "Check and organize POKéMON that are\n"
+	.string "traveling with you in your party.$"
+
+gUnknown_841A001:: @ 841A001
+	.string "Equipped with pockets for storing items\n"
+	.string "you bought, received, or found.$"
+
+gUnknown_841A049:: @ 841A049
+	.string "Check your money and other game data.$"
+
+gUnknown_841A06F:: @ 841A06F
+	.string "Save your game with a complete record\n"
+	.string "of your progress to take a break.$"
+
+gUnknown_841A0B7:: @ 841A0B7
+	.string "Adjust various game settings such as text\n"
+	.string "speed, game rules, etc.$"
+
+gUnknown_841A0F9:: @ 841A0F9
+	.string "Close this MENU window.$"
+
+gUnknown_841A111:: @ 841A111
+	.string "Retire from the SAFARI GAME and return to\n"
+	.string "the registration counter.$"
 
 gUnknown_841A155:: @ 841A155
 	.string "Previously on your quest…$"
@@ -1520,43 +1722,59 @@ gUnknown_841A506::
 	.string "loss$"
 
 gUnknown_841A50B:: @ 841A50B
-	.string "Mingled with other TRAINERS in\nthe UNION ROOM.$"
+	.string "Mingled with other TRAINERS in\n"
+	.string "the UNION ROOM.$"
 
 gUnknown_841A53A::
-	.string "Departed {STR_VAR_2}\nin {STR_VAR_1} for the next\ndestination.$"
+	.string "Departed {STR_VAR_2}\n"
+	.string "in {STR_VAR_1} for the next\n"
+	.string "destination.$"
 
 gUnknown_841A566:: @ 841A566
-	.incbin "baserom.gba", 0x41A566, 0x36
+	.string "After consideration, switched\n"
+	.string "{UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00} with\n"
+	.string "{UNKNOWN_F7 0x03} in {UNKNOWN_F7 0x02}.$"
 
 gUnknown_841A59C:: @ 841A59C
-	.incbin "baserom.gba", 0x41A59C, 0x3D
+	.string "After deep thought, switched\n"
+	.string "{UNKNOWN_F7 0x01} in BOX “{UNKNOWN_F7 0x00}” to\n"
+	.string "the BOX “{UNKNOWN_F7 0x02}.”$"
 
 gUnknown_841A5D9:: @ 841A5D9
-	.incbin "baserom.gba", 0x41A5D9, 0x21
+	.string "Switched around {UNKNOWN_F7 0x01} and\n"
+	.string "{UNKNOWN_F7 0x02} in {UNKNOWN_F7 0x00}.$"
 
 gUnknown_841A5FA:: @ 841A5FA
-	.incbin "baserom.gba", 0x41A5FA, 0x10
+	.string "Moved {UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00}.$"
 
 gUnknown_841A60A:: @ 841A60A
-	.incbin "baserom.gba", 0x41A60A, 0x28
+	.string "Switched {UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00}\n"
+	.string "with {UNKNOWN_F7 0x02} in the party.$"
 
 gUnknown_841A632:: @ 841A632
-	.incbin "baserom.gba", 0x41A632, 0x1D
+	.string "Added {UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00}\n"
+	.string "to the party.$"
 
 gUnknown_841A64F:: @ 841A64F
-	.incbin "baserom.gba", 0x41A64F, 0x1F
+	.string "Moved {UNKNOWN_F7 0x00} from the party\n"
+	.string "to {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841A66E:: @ 841A66E
-	.incbin "baserom.gba", 0x41A66E, 0x26
+	.string "Moved a group of POKéMON in\n"
+	.string "{UNKNOWN_F7 0x00} to {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841A694:: @ 841A694
 	.string "a different spot$"
 
 gUnknown_841A6A5:: @ 841A6A5
-	.string "Removed the item {STR_VAR_1} from\n{PLAYER}’s PC and gave it to {STR_VAR_2}\nto hold.$"
+	.string "Removed the item {STR_VAR_1} from\n"
+	.string "{PLAYER}’s PC and gave it to {STR_VAR_2}\n"
+	.string "to hold.$"
 
 gUnknown_841A6E1:: @ 841A6E1
-	.string "Removed the item {STR_VAR_1} from\na PC, gave it to {STR_VAR_2}, and put\nthe {STR_VAR_3} it held in the BAG.$"
+	.string "Removed the item {STR_VAR_1} from\n"
+	.string "a PC, gave it to {STR_VAR_2}, and put\n"
+	.string "the {STR_VAR_3} it held in the BAG.$"
 
 gUnknown_841A732:: @ 841A732
 	.string "Chatted with many TRAINERS.$"
@@ -1595,10 +1813,12 @@ gUnknown_841A8DD:: @ 841A8DD
 	.string "{UNKNOWN_F7 0x04}$"
 
 gUnknown_841A8E0:: @ 841A8E0
-	.string "{STR_VAR_1} shared its HP using the move\nSOFTBOILED.$"
+	.string "{STR_VAR_1} shared its HP using the move\n"
+	.string "SOFTBOILED.$"
 
 gUnknown_841A90C:: @ 841A90C
-	.string "{STR_VAR_1} shared its HP using the move\nMILK DRINK.$"
+	.string "{STR_VAR_1} shared its HP using the move\n"
+	.string "MILK DRINK.$"
 
 gUnknown_841A938:: @ 841A938
 	.incbin "baserom.gba", 0x41A938, 0x2D
@@ -1634,64 +1854,87 @@ gUnknown_841AB74:: @ 841AB74
 	.incbin "baserom.gba", 0x41AB74, 0x1A
 
 gUnknown_841AB8E:: @ 841AB8E
-	.string "{PLAYER} made {STR_VAR_1} hold the item\n{STR_VAR_2}.$"
+	.string "{PLAYER} made {STR_VAR_1} hold the item\n"
+	.string "{STR_VAR_2}.$"
 
 gUnknown_841ABAB:: @ 841ABAB
-	.string "{STR_VAR_1} used the Hidden Move\nCUT here.$"
+	.string "{STR_VAR_1} used the Hidden Move\n"
+	.string "CUT here.$"
 
 gUnknown_841ABCD:: @ 841ABCD
-	.string "{STR_VAR_1} used the Hidden Move\nFLY and flew to {STR_VAR_2}.$"
+	.string "{STR_VAR_1} used the Hidden Move\n"
+	.string "FLY and flew to {STR_VAR_2}.$"
 
 gUnknown_841ABF9:: @ 841ABF9
-	.string "{STR_VAR_1} used the Hidden Move\nSURF and rode the waves.$"
+	.string "{STR_VAR_1} used the Hidden Move\n"
+	.string "SURF and rode the waves.$"
 
 gUnknown_841AC2A:: @ 841AC2A
-	.string "{STR_VAR_1} used the Hidden Move\nSTRENGTH here.$"
+	.string "{STR_VAR_1} used the Hidden Move\n"
+	.string "STRENGTH here.$"
 
 gUnknown_841AC51:: @ 841AC51
-	.string "{STR_VAR_1} used the Hidden Move\nFLASH and illuminated a pitch-black\ncave.$"
+	.string "{STR_VAR_1} used the Hidden Move\n"
+	.string "FLASH and illuminated a pitch-black\n"
+	.string "cave.$"
 
 gUnknown_841AC93:: @ 841AC93
-	.string "{STR_VAR_1} used the Hidden Move\nROCK SMASH here.$"
+	.string "{STR_VAR_1} used the Hidden Move\n"
+	.string "ROCK SMASH here.$"
 
 gUnknown_841ACBC:: @ 841ACBC
-	.string "{STR_VAR_1} used the Hidden Move\nWATERFALL to scale a raging torrent.$"
+	.string "{STR_VAR_1} used the Hidden Move\n"
+	.string "WATERFALL to scale a raging torrent.$"
 
 gUnknown_841ACF9:: @ 841ACF9
-	.string "{STR_VAR_1}è êÉÁ Ñこª& òざÏ\néで+わざ\nダ¡ビング& ÚÉっŒ!$"
+	.string "{STR_VAR_1}è êÉÁ Ñこª& òざÏ\n"
+	.string "éで+わざ\n"
+	.string "ダ¡ビング& ÚÉっŒ!$"
 
 gUnknown_841AD1D:: @ 841AD1D
-	.string "{STR_VAR_1} used DIG to escape from\n{STR_VAR_2}.$"
+	.string "{STR_VAR_1} used DIG to escape from\n"
+	.string "{STR_VAR_2}.$"
 
 gUnknown_841AD3C:: @ 841AD3C
-	.string "{STR_VAR_1} used SWEET SCENT to attract\nwild POKéMON.$"
+	.string "{STR_VAR_1} used SWEET SCENT to attract\n"
+	.string "wild POKéMON.$"
 
 gUnknown_841AD69:: @ 841AD69
-	.string "{STR_VAR_1} used TELEPORT, transporting\nthe party to {STR_VAR_2}’s\n{STR_VAR_3}.$"
+	.string "{STR_VAR_1} used TELEPORT, transporting\n"
+	.string "the party to {STR_VAR_2}’s\n"
+	.string "{STR_VAR_3}.$"
 
 gUnknown_841AD9E:: @ 841AD9E
-	.string "{PLAYER} left {STR_VAR_1}’s\n{STR_VAR_2} for the next\ndestination.$"
+	.string "{PLAYER} left {STR_VAR_1}’s\n"
+	.string "{STR_VAR_2} for the next\n"
+	.string "destination.$"
 
 gUnknown_841ADC8:: @ 841ADC8
-	.string "Played a lot of games at the ROCKET\nGAME CORNER in {STR_VAR_1}.$"
+	.string "Played a lot of games at the ROCKET\n"
+	.string "GAME CORNER in {STR_VAR_1}.$"
 
 gUnknown_841ADFF:: @ 841ADFF
 	.string "{PLAYER} rested comfortably at home.$"
 
 gUnknown_841AE1E:: @ 841AE1E
-	.string "{PLAYER} left PROF. OAK’s POKéMON\nRESEARCH LAB.$"
+	.string "{PLAYER} left PROF. OAK’s POKéMON\n"
+	.string "RESEARCH LAB.$"
 
 gUnknown_841AE48:: @ 841AE48
-	.string "The GYM in {STR_VAR_1} was full of\ntough TRAINERS…\nPreparations had to be made.$"
+	.string "The GYM in {STR_VAR_1} was full of\n"
+	.string "tough TRAINERS…\n"
+	.string "Preparations had to be made.$"
 
 gUnknown_841AE8F:: @ 841AE8F
 	.string "Departed the GYM in {STR_VAR_1}.$"
 
 gUnknown_841AEA7:: @ 841AEA7
-	.string "{PLAYER} had a great time with POKéMON\nin the SAFARI ZONE.$"
+	.string "{PLAYER} had a great time with POKéMON\n"
+	.string "in the SAFARI ZONE.$"
 
 gUnknown_841AEDC:: @ 841AEDC
-	.string "Managed to get out of {STR_VAR_2}\nafter wandering about.$"
+	.string "Managed to get out of {STR_VAR_2}\n"
+	.string "after wandering about.$"
 
 gUnknown_841AF0C:: @ 841AF0C
 	.incbin "baserom.gba", 0x41AF0C, 0x32
@@ -1709,25 +1952,31 @@ gUnknown_841AF9F:: @ 841AF9F
 	.string "barely$"
 
 gUnknown_841AFA6:: @ 841AFA6
-	.string "{PLAYER} used an ESCAPE ROPE to get\nout from {STR_VAR_2}.$"
+	.string "{PLAYER} used an ESCAPE ROPE to get\n"
+	.string "out from {STR_VAR_2}.$"
 
 gUnknown_841AFD1:: @ 841AFD1
 	.string "draw$"
 
 gUnknown_841AFD6:: @ 841AFD6
-	.string "Departed from the {STR_VAR_2}\nfor the next destination.$"
+	.string "Departed from the {STR_VAR_2}\n"
+	.string "for the next destination.$"
 
 gUnknown_841B005:: @ 841B005
-	.string "{PLAYER} departed from\n{STR_VAR_2} and made way\nto the next destination.$"
+	.string "{PLAYER} departed from\n"
+	.string "{STR_VAR_2} and made way\n"
+	.string "to the next destination.$"
 
 gUnknown_841B03F:: @ 841B03F
-	.string "Here in {STR_VAR_1}, {PLAYER}\nobtained the item {STR_VAR_2}.$"
+	.string "Here in {STR_VAR_1}, {PLAYER}\n"
+	.string "obtained the item {STR_VAR_2}.$"
 
 gUnknown_841B064:: @ 841B064
 	.string "Arrived in {STR_VAR_1}.$"
 
 gUnknown_841B073:: @ 841B073
-	.string "And {PLAYER} saved the game at this\nlocation: {STR_VAR_1}.$"
+	.string "And {PLAYER} saved the game at this\n"
+	.string "location: {STR_VAR_1}.$"
 
 gUnknown_841B09F:: @ 841B09F
 	.string "HOME$"
@@ -4501,4 +4750,6 @@ gUnknown_8468B6C:: @ 8468B6C
 
 gUnknown_8468BCC:: @ 8468BCC
 	.incbin "baserom.gba", 0x468BCC, 0x90
+
+
 

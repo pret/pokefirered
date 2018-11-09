@@ -769,8 +769,8 @@ void sub_8110D48(u8 a0)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
 
-    CpuCopy16(gSaveBlock1Ptr->flags, questLog->unk_148, FLAGS_COUNT * sizeof(u8));
-    CpuCopy16(gSaveBlock1Ptr->vars, questLog->unk_268, VARS_COUNT * sizeof(u16));
+    CpuCopy16(gSaveBlock1Ptr->flags, questLog->flags, FLAGS_COUNT * sizeof(u8));
+    CpuCopy16(gSaveBlock1Ptr->vars, questLog->vars, VARS_COUNT * sizeof(u16));
 }
 
 void sub_8110D94(void)
@@ -1005,8 +1005,8 @@ void sub_81113E4(void)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[gUnknown_203ADF8];
 
-    CpuCopy16(questLog->unk_148, gSaveBlock1Ptr->flags, FLAGS_COUNT * sizeof(u8));
-    CpuCopy16(questLog->unk_268, gSaveBlock1Ptr->vars, VARS_COUNT * sizeof(u16));
+    CpuCopy16(questLog->flags, gSaveBlock1Ptr->flags, FLAGS_COUNT * sizeof(u8));
+    CpuCopy16(questLog->vars, gSaveBlock1Ptr->vars, VARS_COUNT * sizeof(u16));
     sub_8111688();
 }
 

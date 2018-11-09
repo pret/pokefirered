@@ -5,6 +5,8 @@
 #ifndef GUARD_FIELD_GROUND_EFFECT_H
 #define GUARD_FIELD_GROUND_EFFECT_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

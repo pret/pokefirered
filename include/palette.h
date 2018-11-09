@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#include "global.h"
+
 #define gPaletteFade_selectedPalettes (gPaletteFade.multipurpose1) // normal and fast fade
 #define gPaletteFade_blendCnt         (gPaletteFade.multipurpose1) // hardware fade
 #define gPaletteFade_delay            (gPaletteFade.multipurpose2) // normal and hardware fade

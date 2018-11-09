@@ -1,6 +1,8 @@
 #ifndef GUARD_ROM4_H
 #define GUARD_ROM4_H
 
+#include "global.h"
+
 #include "main.h"
 
 struct UnkPlayerStruct

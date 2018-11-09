@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_SETUP_H
 #define GUARD_BATTLE_SETUP_H
 
+#include "global.h"
+
 void BattleSetup_StartScriptedWildBattle(void);
 u8 BattleSetup_GetTerrainId(void);
 u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);

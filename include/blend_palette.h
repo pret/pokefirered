@@ -1,6 +1,8 @@
 #ifndef GUARD_BLEND_PALETTE_H
 #define GUARD_BLEND_PALETTE_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

@@ -1,6 +1,8 @@
 #ifndef GUARD_EASYCHAT_H
 #define GUARD_EASYCHAT_H
 
+#include "global.h"
+
 // Taken from Pokeruby, check if it's correct
 enum
 {

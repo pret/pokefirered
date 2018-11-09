@@ -1,6 +1,8 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
+#include "global.h"
+
 #define NUM_SECTORS 32 // defined in agb_flash but not in a header
 
 #define SAVE_STATUS_EMPTY 0

@@ -1,6 +1,8 @@
 #ifndef GUARD_QUEST_LOG_H
 #define GUARD_QUEST_LOG_H
 
+#include "global.h"
+
 struct UnkStruct_3005E90
 {
     u8 unk_0;

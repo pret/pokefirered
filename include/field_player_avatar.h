@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_PLAYER_AVATAR_H
 #define GUARD_FIELD_PLAYER_AVATAR_H
 
+#include "global.h"
+
 void ClearPlayerAvatarInfo(void);
 void SetPlayerAvatarExtraStateTransition(u8, u8);
 u8 GetPlayerAvatarGenderByGraphicsId(u8);

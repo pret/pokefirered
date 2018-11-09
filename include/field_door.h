@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELDDOOR_H
 #define GUARD_FIELDDOOR_H
 
+#include "global.h"
+
 void FieldSetDoorOpened(u32, u32);
 void FieldSetDoorClosed(u32, u32);
 s8 FieldAnimateDoorClose(u32, u32);

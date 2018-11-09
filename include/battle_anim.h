@@ -1,6 +1,12 @@
 #ifndef GUARD_BATTLE_ANIM_H
 #define GUARD_BATTLE_ANIM_H
 
+#include "global.h"
+
+#ifndef BATTLE_BANKS_COUNT
+#define BATTLE_BANKS_COUNT 4
+#endif // BATTLE_BANKS_COUNT
+
 enum
 {
     ANIM_BANK_ATTACKER,

@@ -1,6 +1,8 @@
 #ifndef GUARD_DATA2_H
 #define GUARD_DATA2_H
 
+#include "global.h"
+
 struct MonCoords
 {
     // This would use a bitfield, but some function

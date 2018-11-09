@@ -1,6 +1,8 @@
 #ifndef GUARD_WEATHER_H
 #define GUARD_WEATHER_H
 
+#include "global.h"
+
 void fade_screen(u8, s8);
 
 void SetSav1Weather(u32);

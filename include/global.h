@@ -3,6 +3,7 @@
 
 #include "config.h"
 #include "gba/gba.h"
+#include <string.h>
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -12,10 +13,18 @@
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 
 #if defined (__APPLE__) || defined (__CYGWIN__)
-void *memset(void *, int, size_t);
-void *memcpy(void *, const void *, size_t);
-int strcmp(const char *s1, const char *s2);
-char* strcpy(char *dst0, const char *src0);
+// Get the IDE to stfu
+
+// We define it this way to fool preproc.
+#define INCBIN(x) {0}
+#define INCBIN_U8  INCBIN
+#define INCBIN_U16 INCBIN
+#define INCBIN_U32 INCBIN
+#define INCBIN_S8  INCBIN
+#define INCBIN_S16 INCBIN
+#define INCBIN_S32 INCBIN
+#define _(x) (x)
+#define __(x) (x)
 #endif // __APPLE__
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
@@ -518,7 +527,12 @@ union QuestLogScene
 
 typedef union QuestLogScene QuestLogScene;
 
+// This name is a complete guess and may change.
+
+// Declare here so that it can be recursively referenced.
 union QuestLogMovement;
+
+// Define here
 union QuestLogMovement
 {
 	u16 ident_raw;
@@ -537,8 +551,11 @@ struct QuestLog
     /*0x0004*/ s16 unk_004;
     /*0x0006*/ s16 unk_006;
     /*0x0008*/ u8 filler_008[0x140];
-    /*0x0148*/ u8 unk_148[0x120];
-    /*0x02c8*/ u8 unk_268[0x200];
+
+    // These arrays hold the game state for
+    // playing back the quest log
+    /*0x0148*/ u8 flags[0x120];
+    /*0x02c8*/ u16 vars[0x100];
     /*0x0468*/ struct QuestLogNPCData npcData[64];
     /*0x0568*/ u16 unk_568[128];
     /*0x0668*/ u16 end[0];

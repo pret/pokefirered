@@ -1,6 +1,8 @@
 #ifndef GUARD_NEW_MENU_HELPERS_H
 #define GUARD_NEW_MENU_HELPERS_H
 
+#include "global.h"
+
 #include "text.h"
 #include "task.h"
 

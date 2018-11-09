@@ -537,7 +537,7 @@ void sub_8110AEC(u16 a0)
 
     sub_81108F0(gUnknown_203ADF8);
     sub_8113B88();
-    gUnknown_203AE08 = (u16 *)gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
+    gUnknown_203AE08 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
     if ((a0 >= 12 && a0 < 20) || a0 == 35)
         gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 2;
     else
@@ -1172,7 +1172,7 @@ void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
         gUnknown_203AE0C[i] = NULL;
     }
 
-    r4 = (u16 *)gSaveBlock1Ptr->questLog[a0].unk_568;
+    r4 = gSaveBlock1Ptr->questLog[a0].unk_568;
     for (i = 0; i < 32; i++)
     {
         switch (r4[0] & 0xFFF)
@@ -3191,9 +3191,9 @@ bool8 sub_81138A0(u16 a0, u16 * a1)
     if (a0 < 16 || a0 > 17)
     {
         if (a0 == 12 || a0 == 18)
-            memcpy(&gUnknown_203B024.unk_04, a1, 12);
+            memcpy(gUnknown_203B024.unk_04, a1, 12);
         else
-            memcpy(&gUnknown_203B024.unk_04, a1, 24);
+            memcpy(gUnknown_203B024.unk_04, a1, 24);
     }
     return TRUE;
 }
@@ -3210,7 +3210,7 @@ void sub_811390C(void)
         u16 * resp;
         gUnknown_203B04A = 0;
         sub_8110AEC(gUnknown_203B024.unk_00);
-        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, (u16 *)&gUnknown_203B024.unk_04);
+        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
         gUnknown_203AE08 = resp;
         sub_81138F8();
     }
@@ -3224,7 +3224,7 @@ bool8 sub_8113954(u16 a0, u16 * a1)
     if (gUnknown_3005E88 || FlagGet(0x82C) || sub_81137E4(a0, a1) != TRUE)
     {
         gUnknown_203B024.unk_00 = a0;
-        memcpy(&gUnknown_203B024.unk_04, a1, 8);
+        memcpy(gUnknown_203B024.unk_04, a1, 8);
     }
     return TRUE;
 }
@@ -3240,7 +3240,7 @@ void sub_81139BC(void)
             sub_8110AEC(gUnknown_203B024.unk_00);
         }
         sub_8113B94(gUnknown_203B024.unk_00);
-        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, (u16 *)&gUnknown_203B024.unk_04);
+        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
         gUnknown_203AE08 = resp;
         sub_8113A1C(1);
         sub_81138F8();

@@ -11129,7 +11129,7 @@ _08062ED0:
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _08062F04 @ =sub_8059B44
+	ldr r3, _08062F04 @ =MetatileBehavior_IsTallGrass
 	ldr r4, [r4]
 	adds r0, r6, 0
 	adds r1, r7, 0
@@ -11142,7 +11142,7 @@ _08062EF8:
 	bx r1
 	.align 2, 0
 _08062F00: .4byte gUnknown_83A6390
-_08062F04: .4byte sub_8059B44
+_08062F04: .4byte MetatileBehavior_IsTallGrass
 	thumb_func_end mss_08062EA4
 
 	thumb_func_start FieldObjectCB_TreeDisguise
@@ -13373,13 +13373,13 @@ sub_8063E28: @ 8063E28
 	bl sub_8064544
 _08063E5C:
 	ldrb r0, [r4, 0x1E]
-	bl sub_8059DAC
+	bl MetatileBehavior_IsIce_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08063E78
 	ldrb r0, [r4, 0x1E]
-	bl sub_8059DC0
+	bl MetatileBehavior_IsUnknownMovement48
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

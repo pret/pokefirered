@@ -87,7 +87,7 @@ sub_80BD100: @ 80BD100
 	mov r0, r8
 	strb r0, [r5, 0xA]
 	ldrb r0, [r4, 0x1E]
-	bl sub_805A1DC
+	bl MetatileBehavior_IsCyclingRoadPullDownTile
 	cmp r0, 0x1
 	bne _080BD176
 	ldr r0, _080BD164 @ =gMain
@@ -207,7 +207,7 @@ sub_80BD1E8: @ 80BD1E8
 	ldr r1, _080BD244 @ =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0x1E]
-	bl sub_805A1DC
+	bl MetatileBehavior_IsCyclingRoadPullDownTile
 	adds r2, r0, 0
 	cmp r2, 0x1
 	bne _080BD25A
@@ -572,12 +572,12 @@ sub_80BD4B8: @ 80BD4B8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_805A234
+	bl MetatileBehavior_IsMB0A
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BD4E2
 	adds r0, r4, 0
-	bl sub_805A118
+	bl MetatileBehavior_ReturnFalse_9
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BD4E6
@@ -611,21 +611,21 @@ sub_80BD4F0: @ 80BD4F0
 	cmp r0, 0x1
 	bhi _080BD51A
 	adds r0, r4, 0
-	bl sub_805A210
+	bl MetatileBehavior_ReturnFalse_15
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BD532
 	adds r0, r4, 0
-	bl sub_805A218
+	bl MetatileBehavior_ReturnFalse_17
 	b _080BD52C
 _080BD51A:
 	adds r0, r5, 0
-	bl sub_805A214
+	bl MetatileBehavior_ReturnFalse_16
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BD532
 	adds r0, r5, 0
-	bl sub_805A21C
+	bl MetatileBehavior_ReturnFalse_18
 _080BD52C:
 	lsls r0, 24
 	cmp r0, 0
@@ -697,7 +697,7 @@ player_should_look_direction_be_enforced_upon_movement: @ 80BD58C
 	lsls r0, 2
 	adds r0, r2
 	ldrb r0, [r0, 0x1E]
-	bl sub_805A20C
+	bl MetatileBehavior_ReturnFalse_14
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BD5C0
@@ -875,7 +875,7 @@ Bike_HandleBumpySlopeJump: @ 80BD6C4
 	bl sub_8058F78
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805A20C
+	bl MetatileBehavior_ReturnFalse_14
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BD70C

@@ -22,17 +22,17 @@ EWRAM_DATA u8 gUnknown_20370A0 = 0;
 EWRAM_DATA u8 *gUnknown_20370A4 = NULL;
 
 // ewram bss
-IWRAM_DATA static u8 sScriptContext1Status;
-IWRAM_DATA static u32 sUnusedVariable1;
-IWRAM_DATA static struct ScriptContext sScriptContext1;
-IWRAM_DATA static u32 sUnusedVariable2;
-IWRAM_DATA static struct ScriptContext sScriptContext2;
-IWRAM_DATA static bool8 sScriptContext2Enabled;
-IWRAM_DATA static u8 gUnknown_3000F9D;
-IWRAM_DATA static u8 gUnknown_3000F9E;
-IWRAM_DATA static u8 gUnknown_3000F9F;
-IWRAM_DATA static u8 gUnknown_3000FA0;
-IWRAM_DATA static u8 gUnknown_3000FA1;
+/*IWRAM_DATA*/ static u8 sScriptContext1Status;
+/*IWRAM_DATA*/ static u32 sUnusedVariable1;
+/*IWRAM_DATA*/ static struct ScriptContext sScriptContext1;
+/*IWRAM_DATA*/ static u32 sUnusedVariable2;
+/*IWRAM_DATA*/ static struct ScriptContext sScriptContext2;
+/*IWRAM_DATA*/ static bool8 sScriptContext2Enabled;
+/*IWRAM_DATA*/ static u8 gUnknown_3000F9D;
+/*IWRAM_DATA*/ static u8 gUnknown_3000F9E;
+/*IWRAM_DATA*/ static u8 gUnknown_3000F9F;
+/*IWRAM_DATA*/ static u8 gUnknown_3000FA0;
+/*IWRAM_DATA*/ static u8 gUnknown_3000FA1;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];

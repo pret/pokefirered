@@ -47,8 +47,7 @@ gStringVar3: @ 2021D04
 gStringVar4: @ 2021D18
 	.space 0x3E8
 
-gUnknownStringVar: @ 2022100
-	.space 0x10
+    .include "src/string_util.o"
 
 gUnknown_2022110: @ 2022110
 	.space 0x1

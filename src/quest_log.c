@@ -88,8 +88,8 @@ u16 gUnknown_3005E8C;
 struct UnkStruct_3005E90 gUnknown_3005E90;
 struct UnkStruct_203AE98 * gUnknown_3005E94;
 
-IWRAM_DATA struct UnkStruct_300201C * gUnknown_300201C;
-IWRAM_DATA u16 gUnknown_3002020;
+static struct UnkStruct_300201C * gUnknown_300201C;
+static u16 gUnknown_3002020;
 
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 EWRAM_DATA u8 gUnknown_203ADF9 = 0;

@@ -734,10 +734,9 @@ bool8 MetatileBehavior_UnusedReturnFalse_11(u8 metatileBehavior) { return FALSE;
 bool8 MetatileBehavior_UnusedReturnFalse_12(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_UnusedReturnFalse_13(u8 metatileBehavior) { return FALSE; }
 
-// TODO: Confirm argument names
-bool8 sub_805A2BC(u8 metatileBehavior, u8 playerDirection)
+bool8 sub_805A2BC(u8 arg1, u8 arg2)
 {
-    if(gUnknown_8353068[metatileBehavior] & playerDirection)
+    if(gUnknown_8353068[arg1] & arg2)
         return TRUE;
     else
         return FALSE;

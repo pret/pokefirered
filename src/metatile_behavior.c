@@ -2,6 +2,20 @@
 #include "metatile_behavior.h"
 #include "constants/metatile_behaviors.h"
 
+static const bool8 sTileSurfable[METATILE_COUNT] = {
+    [MB_POND_WATER] = TRUE,
+    [MB_SEMI_DEEP_WATER] = TRUE,
+    [MB_DEEP_WATER] = TRUE,
+    [MB_WATERFALL] = TRUE,
+    [MB_SPLASHING_WATER] = TRUE,
+    [MB_1A] = TRUE,
+    [MB_1B] = TRUE,
+    [MB_EASTWARD_CURRENT] = TRUE,
+    [MB_WESTWARD_CURRENT] = TRUE,
+    [MB_NORTHWARD_CURRENT] = TRUE,
+    [MB_SOUTHWARD_CURRENT] = TRUE
+};
+
 bool8 MetatileBehavior_UnusedReturnTrue(u8 metatileBehavior)
 {
     return TRUE;
@@ -181,7 +195,7 @@ bool8 MetatileBehavior_ReturnFalse_2(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_IsSurfable(u8 metatileBehavior)
 {
-    if(sTileBitAttributes[metatileBehavior] & 1)
+    if(sTileSurfable[metatileBehavior] & 1)
         return TRUE;
     else
         return FALSE;
@@ -501,7 +515,7 @@ bool8 MetatileBehavior_IsDeepSemiDeepOrSplashingWater(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB1A(u8 metatileBehavior)
+bool8 MetatileBehavior_UnusedIsMB1A(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_1A)
         return TRUE;

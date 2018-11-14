@@ -364,6 +364,7 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         data/data.o(.rodata);
+        src/metatile_behavior.o(.rodata);
         data/metatile_behavior.o(.rodata);
         data/data_835B488.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);

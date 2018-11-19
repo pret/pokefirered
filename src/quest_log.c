@@ -4205,3 +4205,130 @@ const u16 * sub_8114A4C(const u16 * a0)
     UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A59C);
     return (const u16 *)boxIdxs + 1;
 }
+
+u16 * sub_8114AA0(u16 * a0, const u16 * a1)
+{
+    u16 * r2;
+    r2 = sub_8113DE0(24, a0);
+    if (r2 == NULL)
+        return NULL;
+    r2[0] = a1[0];
+    *((u8 *)r2 + 2) = *((const u8 *)a1 + 4);
+    return r2 + 2;
+}
+
+const u16 * sub_8114AC8(const u16 * a0)
+{
+    const u8 * boxIdxs;
+    a0 = sub_8113E88(24, a0);
+    boxIdxs = (const u8 *)a0 + 2;
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, GetBoxNamePtr(boxIdxs[0]));
+    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A5FA);
+    return (const u16 *)boxIdxs + 1;
+}
+
+u16 * sub_8114B0C(u16 * a0, const u16 * a1)
+{
+    u16 * r2;
+    r2 = sub_8113DE0(25, a0);
+    if (r2 == NULL)
+        return NULL;
+    r2[0] = a1[0];
+    *((u8 *)r2 + 2) = *((const u8 *)a1 + 4);
+    return r2 + 2;
+}
+
+const u16 * sub_8114B34(const u16 * a0)
+{
+    const u8 * boxIdxs;
+    a0 = sub_8113E88(25, a0);
+    boxIdxs = (const u8 *)a0 + 2;
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, GetBoxNamePtr(boxIdxs[0]));
+    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A632);
+    return (const u16 *)boxIdxs + 1;
+}
+
+u16 * sub_8114B78(u16 * a0, const u16 * a1)
+{
+    u16 * r2;
+    r2 = sub_8113DE0(26, a0);
+    if (r2 == NULL)
+        return NULL;
+    r2[0] = a1[0];
+    *((u8 *)r2 + 2) = *((const u8 *)a1 + 4);
+    return r2 + 2;
+}
+
+const u16 * sub_8114BA0(const u16 * a0)
+{
+    const u8 * boxIdxs;
+    a0 = sub_8113E88(26, a0);
+    boxIdxs = (const u8 *)a0 + 2;
+    UnkTextUtil_Reset();
+    QuestLog_AutoGetSpeciesName(a0[0], NULL, 0);
+    UnkTextUtil_SetPtrI(1, GetBoxNamePtr(boxIdxs[0]));
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A64F);
+    return (const u16 *)boxIdxs + 1;
+}
+
+u16 * sub_8114BE4(u16 * a0, const u16 * a1)
+{
+    u16 * r2;
+    r2 = sub_8113DE0(27, a0);
+    if (r2 == NULL)
+        return NULL;
+    *((u8 *)r2 + 0) = *((const u8 *)a1 + 4);
+    *((u8 *)r2 + 1) = *((const u8 *)a1 + 5);
+    return r2 + 1;
+}
+
+const u16 * sub_8114C0C(const u16 * a0)
+{
+    const u16 *r4 = sub_8113E88(27, a0);
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, GetBoxNamePtr(*((const u8 *)r4 + 0)));
+    if (*((const u8 *)r4 + 0) == *((const u8 *)r4 + 1))
+        UnkTextUtil_SetPtrI(1, gUnknown_841A694);
+    else
+        UnkTextUtil_SetPtrI(1, GetBoxNamePtr(*((const u8 *)r4 + 1)));
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A66E);
+    return r4 + 1;
+}
+
+u16 * sub_8114C68(u16 * a0, const u16 * a1)
+{
+    a0 = sub_8113DE0(28, a0);
+    if (a0 == NULL)
+        return NULL;
+    a0[0] = a1[0];
+    return a0 + 1;
+}
+
+const u16 * sub_8114C8C(const u16 * a0)
+{
+    const u16 *r4 = sub_8113E88(28, a0);
+    sub_8099E90(r4[0], gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A391);
+    return r4 + 1;
+}
+
+u16 * sub_8114CC0(u16 * a0, const u16 * a1)
+{
+    a0 = sub_8113DE0(29, a0);
+    if (a0 == NULL)
+        return NULL;
+    a0[0] = a1[0];
+    return a0 + 1;
+}
+
+const u16 * sub_8114CE4(const u16 * a0)
+{
+    const u16 *r4 = sub_8113E88(29, a0);
+    sub_8099E90(r4[0], gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841A3DA);
+    return r4 + 1;
+}

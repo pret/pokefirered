@@ -4367,3 +4367,26 @@ const u16 * sub_8114D68(const u16 * a0)
     UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AF0C);
     return a0 + 4;
 }
+
+u16 * sub_8114DE8(u16 * a0, const u16 * a1)
+{
+    u16 * r4 = a0;
+    u8 * r5 = (u8 *)a0 + 8;
+    if (!sub_8110944(r4, gUnknown_8456AA0[31]))
+        return NULL;
+    if (r5[0] == 0 && r5[1] == 0)
+    {
+        r4[0] = 31;
+        r4[1] = gUnknown_203AF98;
+    }
+    if (a1[0])
+        r4[2] = a1[0];
+    if (a1[1])
+        r4[3] = a1[1];
+    if (a1[0] && r5[0] != 0xFF)
+        r5[0]++;
+    if (a1[1] && r5[1] != 0xFF)
+        r5[1]++;
+    r5[2] = *((const u8 *)a1 + 4);
+    return (u16 *)(r5 + 4);
+}

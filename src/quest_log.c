@@ -4092,3 +4092,116 @@ const u16 * sub_8114834(const u16 * a0)
     a0 += 6;
     return a0;
 }
+
+u16 * sub_811488C(u16 * a0, const u16 * a1)
+{
+    a0 = sub_8113DE0(20, a0);
+    if (a0 == NULL)
+        return NULL;
+    a0[0] = a1[0];
+    a0[1] = a1[1];
+    *((u8 *)a0 + 4) = *((const u8 *)a1 + 4);
+    *((u8 *)a0 + 5) = *((const u8 *)a1 + 5);
+    return a0 + 3;
+}
+
+const u16 * sub_81148BC(const u16 * a0)
+{
+    const u8 * boxIdxs;
+    a0 = sub_8113E88(20, a0);
+    boxIdxs = (const u8 *)a0 + 4;
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, GetBoxNamePtr(boxIdxs[0]));
+    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
+    UnkTextUtil_SetPtrI(2, GetBoxNamePtr(boxIdxs[1]));
+    QuestLog_AutoGetSpeciesName(a0[1], NULL, 3);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A566);
+    return a0 + 3;
+}
+
+u16 * sub_8114918(u16 * a0, const u16 * a1)
+{
+    a0 = sub_8113DE0(21, a0);
+    if (a0 == NULL)
+        return NULL;
+    a0[0] = a1[0];
+    a0[1] = a1[1];
+    *((u8 *)a0 + 4) = *((const u8 *)a1 + 4);
+    return a0 + 3;
+}
+
+const u16 * sub_8114944(const u16 * a0)
+{
+    const u8 * boxIdxs;
+    a0 = sub_8113E88(21, a0);
+    boxIdxs = (const u8 *)a0 + 4;
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, GetBoxNamePtr(boxIdxs[0]));
+    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
+    QuestLog_AutoGetSpeciesName(a0[1], NULL, 2);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A5D9);
+    return a0 + 3;
+}
+
+u16 * sub_8114990(u16 * a0, const u16 * a1)
+{
+    u16 * r2;
+    u16 * ret;
+    r2 = sub_8113DE0(22, a0);
+    if (r2 == NULL)
+        return NULL;
+    ret = r2 + 2;
+    if (*((const u8 *)a1 + 4) == TOTAL_BOXES_COUNT)
+    {
+        r2[0] = a1[1];
+        r2[1] = a1[0];
+        *((u8 *)r2 + 4) = *((const u8 *)a1 + 5);
+    }
+    else
+    {
+        r2[0] = a1[0];
+        r2[1] = a1[1];
+        *((u8 *)r2 + 4) = *((const u8 *)a1 + 4);
+    }
+    return ret + 1;
+}
+
+const u16 * sub_81149D0(const u16 * a0)
+{
+    const u8 * boxIdxs;
+    a0 = sub_8113E88(22, a0);
+    boxIdxs = (const u8 *)a0 + 4;
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, GetBoxNamePtr(boxIdxs[0]));
+    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
+    QuestLog_AutoGetSpeciesName(a0[1], NULL, 2);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A60A);
+    return a0 + 3;
+}
+
+u16 * sub_8114A1C(u16 * a0, const u16 * a1)
+{
+    u16 * r2;
+    u16 * ret;
+    r2 = sub_8113DE0(23, a0);
+    if (r2 == NULL)
+        return NULL;
+    r2[0] = a1[0];
+    ret = r2 + 1;
+    *((u8 *)ret + 0) = *((const u8 *)a1 + 4);
+    *((u8 *)ret + 1) = *((const u8 *)a1 + 5);
+    return ret + 1;
+}
+
+const u16 * sub_8114A4C(const u16 * a0)
+{
+    const u8 * boxIdxs;
+    a0 = sub_8113E88(23, a0);
+    boxIdxs = (const u8 *)a0 + 2;
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, GetBoxNamePtr(boxIdxs[0]));
+    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
+    UnkTextUtil_SetPtrI(2, GetBoxNamePtr(boxIdxs[1]));
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A59C);
+    return (const u16 *)boxIdxs + 1;
+}

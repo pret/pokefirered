@@ -1984,7 +1984,7 @@ _08055AF4:
 	beq _08055B30
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2018,7 +2018,7 @@ sub_8055B38: @ 8055B38
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2067,25 +2067,25 @@ _08055B94:
 	lsls r4, 24
 	lsrs r5, r4, 24
 	adds r0, r5, 0
-	bl sub_8059CA0
+	bl MetatileBehavior_ReturnFalse_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08055BD0
 	adds r0, r5, 0
-	bl sub_8059C8C
+	bl MetatileBehavior_IsCaveDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08055C68
 	adds r0, r5, 0
-	bl sub_8059BDC
+	bl MetatileBehavior_IsWarpDoor_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08055C68
 	adds r0, r5, 0
-	bl sub_8059D18
+	bl MetatileBehavior_IsSouthArrowWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2097,7 +2097,7 @@ _08055BD0:
 _08055BD4: .4byte 0x00000802
 _08055BD8:
 	adds r0, r5, 0
-	bl sub_8059D04
+	bl MetatileBehavior_IsNorthArrowWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2115,13 +2115,13 @@ _08055BD8:
 	cmp r0, 0x1
 	beq _08055C1E
 	adds r0, r5, 0
-	bl sub_8059C0C
+	bl MetatileBehavior_IsUnknownWarp6C
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08055C1E
 	adds r0, r5, 0
-	bl sub_8059C34
+	bl MetatileBehavior_IsUnknownWarp6E
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2131,13 +2131,13 @@ _08055C1E:
 	b _08055C6E
 _08055C22:
 	adds r0, r5, 0
-	bl sub_8059C20
+	bl MetatileBehavior_IsUnknownWarp6D
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08055C3E
 	adds r0, r5, 0
-	bl sub_8059C48
+	bl MetatileBehavior_IsUnknownWarp6F
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2158,7 +2158,7 @@ _08055C4C:
 	beq _08055C6C
 _08055C54:
 	lsrs r0, r4, 24
-	bl sub_8059C78
+	bl MetatileBehavior_IsLadder
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2680,7 +2680,7 @@ sub_8055FE0: @ 8055FE0
 	bl sub_8058F78
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805606A
@@ -6714,7 +6714,7 @@ sub_8058034: @ 8058034
 	bne _08058058
 _08058042:
 	ldrb r0, [r4, 0xC]
-	bl sub_8059D18
+	bl MetatileBehavior_IsSouthArrowWarp
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058058

@@ -92,7 +92,7 @@ SECTIONS {
         asm/new_game.o(.text);
         asm/overworld.o(.text);
         asm/fieldmap.o(.text);
-        asm/metatile_behavior.o(.text);
+        src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
         asm/field_door.o(.text);
         asm/field_player_avatar.o(.text);
@@ -364,6 +364,9 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         data/data.o(.rodata);
+        src/metatile_behavior.o(.rodata);
+        data/metatile_behavior.o(.rodata);
+        data/data_835B488.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data_83F5738.o(.rodata);
         src/save.o(.rodata);

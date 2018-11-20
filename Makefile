@@ -30,7 +30,7 @@ ASFLAGS := -mcpu=arm7tdmi
 CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
+CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LDFLAGS = -Map ../../$(MAP)
 
@@ -174,4 +174,3 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
-

@@ -4515,3 +4515,31 @@ const u16 * sub_81150CC(const u16 * a0)
     }
     return (const u16 *)(r5 + 2);
 }
+
+u16 * sub_81151C0(u16 * a0, const u16 * a1)
+{
+    gUnknown_203B048 = TRUE;
+    return sub_8114D18(34, a0, a1);
+}
+
+const u16 * sub_81151DC(const u16 * a0)
+{
+    const u16 * r5 = sub_8113E88(34, a0);
+    const u8 * r6 = (const u8 *)r5 + 6;
+    UnkTextUtil_Reset();
+    sub_80C4DF8(gStringVar1, r6[0]);
+    UnkTextUtil_SetPtrI(0, gStringVar1);
+    if (
+            gTrainers[r5[2]].trainerClass == 0x51
+         || gTrainers[r5[2]].trainerClass == 0x59
+         || gTrainers[r5[2]].trainerClass == 0x5A
+    )
+        UnkTextUtil_SetPtrI(1, GetExpandedPlaceholder(6));
+    else
+        UnkTextUtil_SetPtrI(1, gTrainers[r5[2]].trainerName);
+    QuestLog_AutoGetSpeciesName(r5[0], NULL, 2);
+    QuestLog_AutoGetSpeciesName(r5[1], NULL, 3);
+    UnkTextUtil_SetPtrI(4, gUnknown_8456ACC[r6[1]]);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AF6D);
+    return (const u16 *)(r6 + 2);
+}

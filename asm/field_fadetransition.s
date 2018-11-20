@@ -465,7 +465,7 @@ sub_807DE78: @ 807DE78
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8059BDC
+	bl MetatileBehavior_IsWarpDoor_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -500,7 +500,7 @@ _0807DEE8:
 	adds r0, r5, 0
 	bl sub_807DF4C
 	adds r0, r4, 0
-	bl sub_8059C8C
+	bl MetatileBehavior_IsCaveDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -511,7 +511,7 @@ _0807DEE8:
 _0807DF00: .4byte task_map_chg_seq_0807E20C
 _0807DF04:
 	adds r0, r4, 0
-	bl sub_8059C5C
+	bl MetatileBehavior_IsUnknownWarp6C_to_6F
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2105,7 +2105,7 @@ sub_807EBBC: @ 807EBBC
 	lsrs r4, r0, 24
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl sub_8059C0C
+	bl MetatileBehavior_IsUnknownWarp6C
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807EBE0
@@ -2117,7 +2117,7 @@ sub_807EBBC: @ 807EBBC
 	b _0807EC2A
 _0807EBE0:
 	adds r0, r4, 0
-	bl sub_8059C20
+	bl MetatileBehavior_IsUnknownWarp6D
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807EBFA
@@ -2130,7 +2130,7 @@ _0807EBE0:
 	b _0807EC2A
 _0807EBFA:
 	adds r0, r4, 0
-	bl sub_8059C34
+	bl MetatileBehavior_IsUnknownWarp6E
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807EC0E
@@ -2140,7 +2140,7 @@ _0807EBFA:
 	b _0807EC2A
 _0807EC0E:
 	adds r0, r7, 0
-	bl sub_8059C48
+	bl MetatileBehavior_IsUnknownWarp6F
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2251,12 +2251,12 @@ sub_807ECBC: @ 807ECBC
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
-	bl sub_8059C34
+	bl MetatileBehavior_IsUnknownWarp6E
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807ED06
 	adds r0, r6, 0
-	bl sub_8059C0C
+	bl MetatileBehavior_IsUnknownWarp6C
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807ED0A

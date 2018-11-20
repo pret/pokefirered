@@ -134,13 +134,13 @@ npc_pal_op: @ 80DAE54
 	cmp r0, 0
 	bne _080DAEB0
 	ldrb r0, [r5, 0x1F]
-	bl sub_8059F5C
+	bl MetatileBehavior_ReturnFalse_7
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
 	bne _080DAE96
 	ldrb r0, [r5, 0x1E]
-	bl sub_8059F5C
+	bl MetatileBehavior_ReturnFalse_7
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -714,27 +714,27 @@ _080DB2AE:
 	cmp r0, r1
 	bne _080DB32C
 	ldrb r0, [r4, 0x1E]
-	bl sub_8059B44
+	bl MetatileBehavior_IsTallGrass
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB32C
 	ldrb r0, [r4, 0x1E]
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB32C
 	ldrb r0, [r4, 0x1F]
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB32C
 	ldrb r0, [r4, 0x1E]
-	bl sub_8059B90
+	bl MetatileBehavior_IsReflective
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB32C
 	ldrb r0, [r4, 0x1F]
-	bl sub_8059B90
+	bl MetatileBehavior_IsReflective
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB334
@@ -900,7 +900,7 @@ _080DB438:
 	cmp r0, 0
 	bne _080DB48C
 	adds r0, r6, 0
-	bl sub_8059F34
+	bl MetatileBehavior_IsTallGrass_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB48C
@@ -1251,7 +1251,7 @@ _080DB6E8:
 	cmp r0, 0
 	bne _080DB73C
 	adds r0, r4, 0
-	bl sub_8059F4C
+	bl MetatileBehavior_ReturnFalse_3
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB73C

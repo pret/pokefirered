@@ -53,7 +53,7 @@ sub_806C8BC: @ 806C8BC
 	bl cur_mapdata_block_role_at_player_pos
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059D70
+	bl MetatileBehavior_IsForcedMovementTile
 	lsls r0, 24
 	lsrs r7, r0, 24
 	bl ScriptContext1_IsScriptSetUp
@@ -1226,7 +1226,7 @@ _0806D210: .4byte gUnknown_20370D4
 _0806D214: .4byte gUnknown_81A6955
 _0806D218:
 	adds r0, r4, 0
-	bl sub_805A134
+	bl MetatileBehavior_IsRegionMap
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1237,7 +1237,7 @@ _0806D218:
 _0806D22C: .4byte gUnknown_81A6C32
 _0806D230:
 	adds r0, r4, 0
-	bl sub_805A24C
+	bl MetatileBehavior_IsBookshelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1248,7 +1248,7 @@ _0806D230:
 _0806D244: .4byte gUnknown_81A7606
 _0806D248:
 	adds r0, r4, 0
-	bl sub_805A260
+	bl MetatileBehavior_IsPokeMartShelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1259,7 +1259,7 @@ _0806D248:
 _0806D25C: .4byte gUnknown_81A760F
 _0806D260:
 	adds r0, r4, 0
-	bl sub_805A44C
+	bl MetatileBehavior_IsFood
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1270,7 +1270,7 @@ _0806D260:
 _0806D274: .4byte gUnknown_81A7618
 _0806D278:
 	adds r0, r4, 0
-	bl sub_805A558
+	bl MetatileBehavior_IsImpressiveMachine
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1281,7 +1281,7 @@ _0806D278:
 _0806D28C: .4byte gUnknown_81A7633
 _0806D290:
 	adds r0, r4, 0
-	bl sub_805A474
+	bl MetatileBehavior_IsBlueprints
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1292,7 +1292,7 @@ _0806D290:
 _0806D2A4: .4byte gUnknown_81A763C
 _0806D2A8:
 	adds r0, r4, 0
-	bl sub_805A56C
+	bl MetatileBehavior_IsVideoGame
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1303,7 +1303,7 @@ _0806D2A8:
 _0806D2BC: .4byte gUnknown_81A7621
 _0806D2C0:
 	adds r0, r4, 0
-	bl sub_805A580
+	bl MetatileBehavior_IsBurglary
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1314,7 +1314,7 @@ _0806D2C0:
 _0806D2D4: .4byte gUnknown_81A7645
 _0806D2D8:
 	adds r0, r4, 0
-	bl sub_805A4C4
+	bl MetatileBehavior_IsComputer
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1325,7 +1325,7 @@ _0806D2D8:
 _0806D2EC: .4byte gUnknown_81A762A
 _0806D2F0:
 	adds r0, r4, 0
-	bl sub_805A594
+	bl MetatileBehavior_IsMBA3
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1348,7 +1348,7 @@ _0806D308:
 _0806D31C: .4byte gUnknown_81A764E
 _0806D320:
 	adds r0, r4, 0
-	bl sub_805A374
+	bl MetatileBehavior_IsCabinet
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1359,7 +1359,7 @@ _0806D320:
 _0806D334: .4byte gUnknown_81A7657
 _0806D338:
 	adds r0, r4, 0
-	bl sub_805A388
+	bl MetatileBehavior_IsKitchen
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1370,7 +1370,7 @@ _0806D338:
 _0806D34C: .4byte gUnknown_81A7660
 _0806D350:
 	adds r0, r4, 0
-	bl sub_805A39C
+	bl MetatileBehavior_IsDresser
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1381,7 +1381,7 @@ _0806D350:
 _0806D364: .4byte gUnknown_81A7669
 _0806D368:
 	adds r0, r4, 0
-	bl sub_805A3B0
+	bl MetatileBehavior_IsSnacks
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1392,7 +1392,7 @@ _0806D368:
 _0806D37C: .4byte gUnknown_81A7672
 _0806D380:
 	adds r0, r4, 0
-	bl sub_805A488
+	bl MetatileBehavior_IsPainting
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1403,7 +1403,7 @@ _0806D380:
 _0806D394: .4byte gUnknown_81A767B
 _0806D398:
 	adds r0, r4, 0
-	bl sub_805A49C
+	bl MetatileBehavior_IsPowerPlantMachine
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1414,7 +1414,7 @@ _0806D398:
 _0806D3AC: .4byte gUnknown_81A7684
 _0806D3B0:
 	adds r0, r4, 0
-	bl sub_805A4B0
+	bl MetatileBehavior_IsTelephone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1425,7 +1425,7 @@ _0806D3B0:
 _0806D3C4: .4byte gUnknown_81A768D
 _0806D3C8:
 	adds r0, r4, 0
-	bl sub_805A4D8
+	bl MetatileBehavior_IsAdvertisingPoster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1436,7 +1436,7 @@ _0806D3C8:
 _0806D3DC: .4byte gUnknown_81A7696
 _0806D3E0:
 	adds r0, r4, 0
-	bl sub_805A4EC
+	bl MetatileBehavior_IsTastyFood
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1447,7 +1447,7 @@ _0806D3E0:
 _0806D3F4: .4byte gUnknown_81A769F
 _0806D3F8:
 	adds r0, r4, 0
-	bl sub_805A500
+	bl MetatileBehavior_IsTrashBin
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1458,7 +1458,7 @@ _0806D3F8:
 _0806D40C: .4byte gUnknown_81A76A8
 _0806D410:
 	adds r0, r4, 0
-	bl sub_805A514
+	bl MetatileBehavior_IsCup
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1469,7 +1469,7 @@ _0806D410:
 _0806D424: .4byte gUnknown_81A76B1
 _0806D428:
 	adds r0, r4, 0
-	bl sub_805A528
+	bl MetatileBehavior_ReturnFalse_19
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1480,7 +1480,7 @@ _0806D428:
 _0806D43C: .4byte gUnknown_81A76BA
 _0806D440:
 	adds r0, r4, 0
-	bl sub_805A52C
+	bl MetatileBehavior_ReturnFalse_20
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1491,7 +1491,7 @@ _0806D440:
 _0806D454: .4byte gUnknown_81A76C3
 _0806D458:
 	adds r0, r4, 0
-	bl sub_805A530
+	bl MetatileBehavior_IsBlinkingLights
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1502,7 +1502,7 @@ _0806D458:
 _0806D46C: .4byte gUnknown_81A76CC
 _0806D470:
 	adds r0, r4, 0
-	bl sub_805A544
+	bl MetatileBehavior_IsMB9F
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1514,7 +1514,7 @@ _0806D484: .4byte gUnknown_81A76D5
 _0806D488:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805A3D8
+	bl MetatileBehavior_IsPlayerFacingMB_8D
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1525,7 +1525,7 @@ _0806D488:
 _0806D49C: .4byte gUnknown_81BBFD8
 _0806D4A0:
 	adds r0, r4, 0
-	bl sub_805A410
+	bl MetatileBehavior_IsQuestionnaire
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1537,7 +1537,7 @@ _0806D4B4: .4byte gUnknown_81A7702
 _0806D4B8:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805A3F4
+	bl MetatileBehavior_IsPlayerFacingBattleRecords
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1548,7 +1548,7 @@ _0806D4B8:
 _0806D4CC: .4byte gUnknown_81BB8A7
 _0806D4D0:
 	adds r0, r4, 0
-	bl sub_805A424
+	bl MetatileBehavior_IsIndigoPlateauMark
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1560,7 +1560,7 @@ _0806D4D0:
 _0806D4E8: .4byte gUnknown_81A76F0
 _0806D4EC:
 	adds r0, r4, 0
-	bl sub_805A438
+	bl MetatileBehavior_IsIndigoPlateauMark2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1573,7 +1573,7 @@ _0806D504: .4byte gUnknown_81A76F9
 _0806D508:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805A290
+	bl MetatileBehavior_IsPlayerFacingPokeMartSign
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1586,7 +1586,7 @@ _0806D520: .4byte gUnknown_81A76DE
 _0806D524:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805A274
+	bl MetatileBehavior_IsPlayerFacingPokemonCenterSign
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1610,7 +1610,7 @@ sub_806D548: @ 806D548
 	lsls r1, 24
 	lsrs r4, r1, 24
 	adds r0, r4, 0
-	bl sub_8059CC8
+	bl MetatileBehavior_IsSemiDeepWater
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1721,7 +1721,7 @@ sub_806D5E8: @ 806D5E8
 	bne _0806D658
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_8059D70
+	bl MetatileBehavior_IsForcedMovementTile
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D658
@@ -1800,7 +1800,7 @@ sub_806D698: @ 806D698
 	bne _0806D720
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8059D70
+	bl MetatileBehavior_IsForcedMovementTile
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D720
@@ -2057,7 +2057,7 @@ sub_806D898: @ 806D898
 	lsrs r4, r0, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805A274
+	bl MetatileBehavior_IsPlayerFacingPokemonCenterSign
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2067,7 +2067,7 @@ sub_806D898: @ 806D898
 _0806D8B6:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_805A290
+	bl MetatileBehavior_IsPlayerFacingPokeMartSign
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2076,7 +2076,7 @@ _0806D8B6:
 	b _0806D902
 _0806D8CA:
 	adds r0, r4, 0
-	bl sub_805A424
+	bl MetatileBehavior_IsIndigoPlateauMark
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2085,7 +2085,7 @@ _0806D8CA:
 	b _0806D902
 _0806D8DC:
 	adds r0, r4, 0
-	bl sub_805A438
+	bl MetatileBehavior_IsIndigoPlateauMark2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2094,7 +2094,7 @@ _0806D8DC:
 	b _0806D902
 _0806D8EE:
 	adds r0, r4, 0
-	bl sub_805A360
+	bl MetatileBehavior_IsSignpost
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2273,7 +2273,7 @@ sub_806DA10: @ 806DA10
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8059BF0
+	bl MetatileBehavior_IsEscalator
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2286,7 +2286,7 @@ sub_806DA10: @ 806DA10
 _0806DA68: .4byte gMapHeader
 _0806DA6C:
 	adds r0, r4, 0
-	bl sub_805A158
+	bl MetatileBehavior_ReturnFalse_12
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2296,7 +2296,7 @@ _0806DA6C:
 	b _0806DAEE
 _0806DA82:
 	adds r0, r4, 0
-	bl MetatileBehavior_IsLavaridge1FWarp
+	bl MetatileBheavior_IsMB_68
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2306,7 +2306,7 @@ _0806DA82:
 	b _0806DAEE
 _0806DA98:
 	adds r0, r4, 0
-	bl MetatileBehavior_IsAquaHideoutWarp
+	bl MetatileBehavior_IsRegularWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2316,7 +2316,7 @@ _0806DA98:
 	b _0806DAEE
 _0806DAAE:
 	adds r0, r4, 0
-	bl sub_805A184
+	bl MetatileBehavior_IsUnionRoomWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2326,7 +2326,7 @@ _0806DAAE:
 	b _0806DAEE
 _0806DAC4:
 	adds r0, r4, 0
-	bl sub_805A1C4
+	bl MetatileBehavior_IsFallWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2362,49 +2362,49 @@ sub_806DAF4: @ 806DAF4
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl sub_8059C78
+	bl MetatileBehavior_IsLadder
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl sub_8059BF0
+	bl MetatileBehavior_IsEscalator
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl sub_8059C8C
+	bl MetatileBehavior_IsCaveDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl sub_805A158
+	bl MetatileBehavior_ReturnFalse_12
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl MetatileBehavior_IsLavaridge1FWarp
+	bl MetatileBheavior_IsMB_68
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl MetatileBehavior_IsAquaHideoutWarp
+	bl MetatileBehavior_IsRegularWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl sub_805A1C4
+	bl MetatileBehavior_IsFallWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl sub_805A184
+	bl MetatileBehavior_IsUnionRoomWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2435,23 +2435,23 @@ _0806DB98:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8059C20
+	bl MetatileBehavior_IsUnknownWarp6D
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806DBCC
 	adds r0, r4, 0
-	bl sub_8059C48
+	bl MetatileBehavior_IsUnknownWarp6F
 	b _0806DBC6
 _0806DBB0:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8059C0C
+	bl MetatileBehavior_IsUnknownWarp6C
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806DBCC
 	adds r0, r4, 0
-	bl sub_8059C34
+	bl MetatileBehavior_IsUnknownWarp6E
 _0806DBC6:
 	lsls r0, 24
 	cmp r0, 0
@@ -2491,12 +2491,12 @@ _0806DBF2:
 _0806DBFC:
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059D04
+	bl MetatileBehavior_IsNorthArrowWarp
 	b _0806DC22
 _0806DC06:
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059D18
+	bl MetatileBehavior_IsSouthArrowWarp
 	b _0806DC22
 _0806DC10:
 	lsls r0, 24
@@ -2952,7 +2952,7 @@ dive_warp: @ 806DF3C
 	bne _0806DF74
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_8059FCC
+	bl MetatileBehavior_IsMB19
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806DF74
@@ -2971,7 +2971,7 @@ _0806DF70: .4byte gMapHeader
 _0806DF74:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_8059FB0
+	bl MetatileBehavior_IsDeepOrSemiDeepWater
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3025,7 +3025,7 @@ sub_806DFB8: @ 806DFB8
 	cmp r0, 0x5
 	bne _0806E014
 	adds r0, r5, 0
-	bl sub_8059FCC
+	bl MetatileBehavior_IsMB19
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806E014
@@ -3049,7 +3049,7 @@ sub_806DFB8: @ 806DFB8
 _0806E010: .4byte gMapHeader
 _0806E014:
 	adds r0, r5, 0
-	bl sub_8059FB0
+	bl MetatileBehavior_IsDeepOrSemiDeepWater
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

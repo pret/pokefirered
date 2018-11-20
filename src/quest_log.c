@@ -4543,3 +4543,193 @@ const u16 * sub_81151DC(const u16 * a0)
     UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AF6D);
     return (const u16 *)(r6 + 2);
 }
+
+const u8 *const gUnknown_8456AF0[] = {
+        gUnknown_841B09F,
+        gUnknown_841B0A4,
+        gUnknown_841B0B5,
+        gUnknown_841B0B9,
+        gUnknown_841B0B9,
+        gUnknown_841B0CD,
+        gUnknown_841B0CD,
+        gUnknown_841B0DD,
+        gUnknown_841B0B5,
+        gUnknown_841B0F6,
+        gUnknown_841B0F6,
+        gUnknown_841B0B5,
+        gUnknown_841B0FF,
+        gUnknown_841B109,
+        gUnknown_841B116,
+        gUnknown_841B11F,
+        gUnknown_841B11F,
+        gUnknown_841B130,
+        gUnknown_841B0B5,
+        gUnknown_841B141,
+        gUnknown_841B14B,
+        gUnknown_841B14B,
+        gUnknown_841B15A,
+        gUnknown_841B15A,
+        gUnknown_841B166,
+        gUnknown_841B172,
+        gUnknown_841B180,
+        gUnknown_841B190,
+        gUnknown_841B11F,
+        gUnknown_841B11F,
+        gUnknown_841B1A3,
+        gUnknown_841B1B7,
+        gUnknown_841B1C7,
+        gUnknown_841B0B5,
+        gUnknown_841B1DA,
+        gUnknown_841B1E5,
+        gUnknown_841B1F4,
+        gUnknown_841B0B5,
+        gUnknown_841B200,
+        gUnknown_841B20E,
+        gUnknown_841B0B5,
+        gUnknown_841B21C,
+        gUnknown_841B226,
+        gUnknown_841B226,
+        gUnknown_841B236,
+        gUnknown_841B0B5,
+        gUnknown_841B246,
+        gUnknown_841B25B,
+        gUnknown_841B25B,
+        gUnknown_841B268,
+        gUnknown_841B277
+};
+
+const u8 *const gUnknown_8456BBC[] = {
+        gUnknown_841A53A,
+        gUnknown_841AD9E,
+        gUnknown_841ADC8,
+        gUnknown_841ADFF,
+        gUnknown_841AE1E,
+        gUnknown_841AE48,
+        gUnknown_841AEA7,
+        gUnknown_841AEDC,
+        gUnknown_841AFD6,
+        gUnknown_841B005
+};
+
+const u8 gUnknown_8456BE4[] = {
+        0x03,
+        0x04,
+        0x05,
+        0x08,
+        0x08,
+        0x07,
+        0x07,
+        0x01,
+        0x05,
+        0x07,
+        0x07,
+        0x05,
+        0x00,
+        0x00,
+        0x00,
+        0x08,
+        0x08,
+        0x00,
+        0x05,
+        0x08,
+        0x07,
+        0x07,
+        0x07,
+        0x07,
+        0x08,
+        0x08,
+        0x00,
+        0x00,
+        0x08,
+        0x08,
+        0x00,
+        0x00,
+        0x02,
+        0x05,
+        0x00,
+        0x08,
+        0x06,
+        0x05,
+        0x00,
+        0x00,
+        0x05,
+        0x09,
+        0x07,
+        0x07,
+        0x09,
+        0x05,
+        0x00,
+        0x07,
+        0x07,
+        0x08,
+        0x07
+};
+
+const u8 gUnknown_8456C17[] = {
+        0x5a,
+        0x5b,
+        0x5d,
+        0x5e,
+        0x5f,
+        0x62,
+        0x60,
+        0x59,
+        0x00
+};
+
+const u8 *const gUnknown_8456C20[] = {
+        gUnknown_841AC51,
+        gUnknown_841ABAB,
+        gUnknown_841ABCD,
+        gUnknown_841AC2A,
+        gUnknown_841ABF9,
+        gUnknown_841AC93,
+        gUnknown_841ACBC,
+        gUnknown_841AD69,
+        gUnknown_841AD1D,
+        gUnknown_841A90C,
+        gUnknown_841A8E0,
+        gUnknown_841AD3C
+};
+
+u16 * sub_8115280(u16 * a0, const u16 * a1)
+{
+    u16 * r2 = sub_8113DE0(35, a0);
+    if (r2 == NULL)
+        return NULL;
+    *((u8 *)r2 + 0) = *((const u8 *)a1 + 0);
+    if ((*((u8 *)r2 + 1) = *((const u8 *)a1 + 1)) == 0x24)
+        gUnknown_203B048 = TRUE;
+    return r2 + 1;
+}
+
+/*
+const u16 * sub_81152BC(const u16 * a0)
+{
+    u8 r4;
+    const u16 * r5 = sub_8113E88(35, a0);
+    const u8 * r5_2 = (const u8 *)r5 + 0;
+    sub_80C4DF8(gStringVar1, r5_2[1]);
+    StringCopy(gStringVar2, gUnknown_8456AF0[r5_2[1]]);
+    if (gUnknown_8456BE4[r5_2[1]] == 5)
+    {
+        for (r4 = 0; r4 < 8; r4++)
+        {
+            if (r5_2[0] == gUnknown_8456C17[r4])
+            {
+                if (FlagGet(0x820) != TRUE)
+                    StringExpandPlaceholders(gStringVar4, gUnknown_841AE48);
+                else
+                    StringExpandPlaceholders(gStringVar4, gUnknown_841AE8F);
+                break;
+            }
+        }
+        if (r4 == 8)
+            StringExpandPlaceholders(gStringVar4, gUnknown_8456BBC[gUnknown_8456BE4[r5_2[1]]]);
+    }
+    else
+        StringExpandPlaceholders(gStringVar4, gUnknown_8456BBC[gUnknown_8456BE4[r5_2[1]]]);
+
+    return r5 + 1;
+}
+ */

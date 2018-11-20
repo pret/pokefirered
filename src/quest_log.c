@@ -462,12 +462,12 @@ void sub_811092C(void)
         gUnknown_203AE8C();
 }
 
-bool8 sub_8110944(void * a0, size_t a1)
+bool8 sub_8110944(const void * a0, size_t a1)
 {
     void * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
     void * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
     r0 -= a1;
-    if ((void *)a0 < r2 || (void *)a0 > r0)
+    if ((const void *)a0 < r2 || (const void *)a0 > r0)
         return FALSE;
     return TRUE;
 }
@@ -4389,4 +4389,129 @@ u16 * sub_8114DE8(u16 * a0, const u16 * a1)
         r5[1]++;
     r5[2] = *((const u8 *)a1 + 4);
     return (u16 *)(r5 + 4);
+}
+
+const u16 * sub_8114E68(const u16 * a0)
+{
+    const u8 * r6;
+    if (!sub_8110944(a0, gUnknown_8456AA0[31]))
+        return NULL;
+
+    r6 = (const u8 *)a0 + 8;
+    UnkTextUtil_Reset();
+    sub_80C4DF8(gStringVar1, r6[2]);
+    UnkTextUtil_SetPtrI(0, gStringVar1);
+    QuestLog_AutoGetSpeciesName(a0[2], NULL, 1);
+    ConvertIntToDecimalStringN(gStringVar2, r6[0], STR_CONV_MODE_LEFT_ALIGN, 3);
+    UnkTextUtil_SetPtrI(2, gStringVar2);
+    QuestLog_AutoGetSpeciesName(a0[3], NULL, 3);
+    ConvertIntToDecimalStringN(gStringVar3, r6[1], STR_CONV_MODE_LEFT_ALIGN, 3);
+    UnkTextUtil_SetPtrI(4, gStringVar3);
+    UnkTextUtil_SetPtrI(5, gSaveBlock2Ptr->playerName);
+    if (r6[0] == 0)
+    {
+        if (r6[1] == 1)
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AA01);
+        else
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AA2B);
+    }
+    else if (r6[1] == 0)
+    {
+        if (r6[0] == 1)
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A9A9);
+        else
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A9D4);
+    }
+    else if (r6[0] == 1)
+    {
+        if (r6[1] == 1)
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AA76);
+        else
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AAAA);
+    }
+    else
+    {
+        if (r6[1] == 1)
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AAEC);
+        else
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AB29);
+    }
+    return (const u16 *)(r6 + 4);
+}
+
+bool8 sub_8114FBC(u16 a0)
+{
+    switch (a0)
+    {
+        case 0x96:
+        case 0x8F ... 0x92:
+        case 0xF9 ... 0xFA:
+        case 0x19A:
+            return TRUE;
+    }
+    return FALSE;
+}
+
+u16 * sub_8114FF0(u16 * a0, const u16 * a1)
+{
+    gUnknown_203B048 = TRUE;
+    return sub_8114D18(32, a0, a1);
+}
+
+const u16 * sub_811500C(const u16 * a0)
+{
+    const u8 * r5;
+    a0 = sub_8113E88(32, a0);
+    r5 = (const u8 *)a0 + 6;
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, gTrainers[a0[2]].trainerName);
+    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
+    QuestLog_AutoGetSpeciesName(a0[1], NULL, 2);
+    UnkTextUtil_SetPtrI(3, gUnknown_8456ACC[r5[1]]);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841AF3E);
+    return a0 + 4;
+}
+
+u16 * sub_8115078(u16 * a0, const u16 * a1)
+{
+    if (!sub_8110944(a0, gUnknown_8456AA0[33]))
+        return NULL;
+    a0[0] = 0x2021;
+    a0[1] = gUnknown_203AF98;
+    a0[2] = a1[1];
+    a0[3] = a1[2];
+    *((u8 *)a0 + 8) = *((const u8 *)a1 + 6);
+    gUnknown_203B048 = TRUE;
+    return a0 + 5;
+}
+
+const u16 * sub_81150CC(const u16 * a0)
+{
+    const u8 * r5;
+    if (!sub_8110944(a0, gUnknown_8456AA0[33]))
+        return NULL;
+
+    r5 = (const u8 *)a0 + 8;
+    UnkTextUtil_Reset();
+
+    switch (gUnknown_203B044.unk_2)
+    {
+        case 0:
+            UnkTextUtil_SetPtrI(0, gSaveBlock2Ptr->playerName);
+            UnkTextUtil_SetPtrI(1, gSaveBlock1Ptr->rivalName);
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A2E1);
+            break;
+        case 1:
+            UnkTextUtil_SetPtrI(0, gSaveBlock1Ptr->rivalName);
+            QuestLog_AutoGetSpeciesName(a0[2], NULL, 1);
+            UnkTextUtil_SetPtrI(2, gSaveBlock2Ptr->playerName);
+            QuestLog_AutoGetSpeciesName(a0[3], NULL, 3);
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A312);
+            break;
+        case 2:
+            UnkTextUtil_SetPtrI(0, gUnknown_8456AD8[r5[0]]);
+            UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A349);
+            break;
+    }
+    return (const u16 *)(r5 + 2);
 }

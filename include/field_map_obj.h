@@ -80,6 +80,9 @@ u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
 u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
 void sub_8063E28(struct MapObject *, struct Sprite *);
 void sub_8063CA4(struct MapObject *, u8);
+void npc_coords_shift_still(struct MapObject *);
+void sub_805FE7C(struct MapObject *, u8);
+void npc_set_running_behaviour_etc(struct MapObject *, u8);
 
 // Exported data declarations
 

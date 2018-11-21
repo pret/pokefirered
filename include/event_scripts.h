@@ -377,4 +377,8 @@ extern const u8 SecretBase_RedCave1_Text_2758CC[];
 
 extern const u8 gUnknown_84178D0[];
 extern const u8 gUnknown_84178DA[];
+// vs_seeker
+extern const u8 gUnknown_81C137C[];
+extern const u8 gUnknown_81C13D6[];
+extern const u8 gUnknown_81C1429[];
 #endif //GUARD_EVENT_SCRIPTS_H

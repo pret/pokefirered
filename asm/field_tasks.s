@@ -481,7 +481,7 @@ _0806EB8E:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059F50
+	bl MetatileBehavior_ReturnFalse_4
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806EBF6
@@ -633,7 +633,7 @@ _0806ECCE:
 	strh r0, [r5, 0x6]
 	lsls r0, r7, 24
 	lsrs r0, 24
-	bl sub_805A1D8
+	bl MetatileBehavior_ReturnFalse_13
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806ED2E

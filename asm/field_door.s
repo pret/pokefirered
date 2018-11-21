@@ -490,7 +490,7 @@ sub_805B268: @ 805B268
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059BDC
+	bl MetatileBehavior_IsWarpDoor_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805B292
@@ -518,7 +518,7 @@ sub_805B29C: @ 805B29C
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059BDC
+	bl MetatileBehavior_IsWarpDoor_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805B2C6
@@ -546,7 +546,7 @@ sub_805B2D0: @ 805B2D0
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059BDC
+	bl MetatileBehavior_IsWarpDoor_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805B304
@@ -580,7 +580,7 @@ sub_805B310: @ 805B310
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059BDC
+	bl MetatileBehavior_IsWarpDoor_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805B344

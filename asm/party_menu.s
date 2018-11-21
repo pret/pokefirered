@@ -12103,7 +12103,7 @@ sub_8124998: @ 8124998
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059CC8
+	bl MetatileBehavior_IsSemiDeepWater
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12166,7 +12166,7 @@ _08124A24:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059CC8
+	bl MetatileBehavior_IsSemiDeepWater
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

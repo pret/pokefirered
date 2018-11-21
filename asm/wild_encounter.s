@@ -878,7 +878,7 @@ _08082D78:
 	bl sub_8058F1C
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8059F58
+	bl MetatileBehavior_ReturnFalse_6
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

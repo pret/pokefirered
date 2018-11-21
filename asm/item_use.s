@@ -359,25 +359,25 @@ sub_80A122C: @ 80A122C
 	cmp r0, 0x1
 	beq _080A129A
 	adds r0, r4, 0
-	bl sub_805A218
+	bl MetatileBehavior_ReturnFalse_17
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080A129A
 	adds r0, r4, 0
-	bl sub_805A21C
+	bl MetatileBehavior_ReturnFalse_18
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080A129A
 	adds r0, r4, 0
-	bl sub_805A210
+	bl MetatileBehavior_ReturnFalse_15
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080A129A
 	adds r0, r4, 0
-	bl sub_805A214
+	bl MetatileBehavior_ReturnFalse_16
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -535,7 +535,7 @@ _080A13D0:
 	b _080A1406
 _080A13D4:
 	adds r0, r5, 0
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A13F4
@@ -551,7 +551,7 @@ _080A13D4:
 _080A13F4:
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_8059F58
+	bl MetatileBehavior_ReturnFalse_6
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1810,7 +1810,7 @@ _080A1DEC: .4byte gSaveBlock1Ptr
 _080A1DF0: .4byte gTasks
 _080A1DF4:
 	ldr r1, _080A1E04 @ =gUnknown_2039998
-	ldr r0, _080A1E08 @ =sub_810C670
+	ldr r0, _080A1E08 @ =Task_VsSeeker_0
 	str r0, [r1]
 	adds r0, r2, 0
 	bl sub_80A103C
@@ -1819,7 +1819,7 @@ _080A1E00:
 	bx r0
 	.align 2, 0
 _080A1E04: .4byte gUnknown_2039998
-_080A1E08: .4byte sub_810C670
+_080A1E08: .4byte Task_VsSeeker_0
 	thumb_func_end sub_80A1D9C
 
 	thumb_func_start sub_80A1E0C

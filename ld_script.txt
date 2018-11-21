@@ -92,7 +92,7 @@ SECTIONS {
         asm/new_game.o(.text);
         asm/overworld.o(.text);
         asm/fieldmap.o(.text);
-        asm/metatile_behavior.o(.text);
+        src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
         asm/field_door.o(.text);
         asm/field_player_avatar.o(.text);
@@ -215,7 +215,7 @@ SECTIONS {
         asm/bag.o(.text);
         asm/battle_dome_cards.o(.text);
         asm/unk_810C3A4.o(.text);
-        asm/vs_seeker.o(.text);
+        src/vs_seeker.o(.text);
         asm/item_pc.o(.text);
         asm/mailbox_pc.o(.text);
         asm/menu.o(.text);
@@ -365,10 +365,15 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         data/data.o(.rodata);
+        src/metatile_behavior.o(.rodata);
+        data/metatile_behavior.o(.rodata);
+        data/data_835B488.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data_83F5738.o(.rodata);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
+        src/vs_seeker.o(.rodata);
+        data/data_83FECCC.o(.rodata.8453F6C);
         src/quest_log.o(.rodata);
         data/data_83FECCC.o(.rodata.8456C74);
         src/menews_jisan.o(.rodata);

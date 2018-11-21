@@ -763,7 +763,7 @@ sub_807FC5C: @ 807FC5C
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8059F34
+	bl MetatileBehavior_IsTallGrass_2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FC92
@@ -771,7 +771,7 @@ sub_807FC5C: @ 807FC5C
 	b _0807FD88
 _0807FC92:
 	adds r0, r4, 0
-	bl sub_8059F4C
+	bl MetatileBehavior_ReturnFalse_3
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FCA2
@@ -779,7 +779,7 @@ _0807FC92:
 	b _0807FD88
 _0807FCA2:
 	adds r0, r4, 0
-	bl sub_8059B74
+	bl MetatileBehavior_IsMB21OrWaterfallBottom
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FCB2
@@ -814,7 +814,7 @@ _0807FCF4:
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl MetatileBehavior_IsMB_0B
+	bl MetatileBehavior_IsMB0B
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FD08
@@ -823,7 +823,7 @@ _0807FD04:
 	b _0807FD88
 _0807FD08:
 	adds r0, r4, 0
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807FD70
@@ -835,7 +835,7 @@ _0807FD18:
 _0807FD1C:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807FD82
@@ -844,17 +844,17 @@ _0807FD2C:
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_805A01C
+	bl MetatileBehavior_IsDeepSemiDeepOrSplashingWater
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807FD82
 	adds r0, r4, 0
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807FD70
 	adds r0, r4, 0
-	bl MetatileBehavior_IsMountain
+	bl MetatileBehavior_IsMB0C
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FD58
@@ -867,7 +867,7 @@ _0807FD58:
 	cmp r0, 0
 	beq _0807FD86
 	adds r0, r4, 0
-	bl sub_8059F5C
+	bl MetatileBehavior_ReturnFalse_7
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FD74
@@ -876,7 +876,7 @@ _0807FD70:
 	b _0807FD88
 _0807FD74:
 	adds r0, r4, 0
-	bl sub_8059F58
+	bl MetatileBehavior_ReturnFalse_6
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -919,7 +919,7 @@ GetBattleTransitionTypeByMap: @ 807FD90
 _0807FDC0:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8059CA4
+	bl MetatileBehavior_IsSurfable
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807FDE8

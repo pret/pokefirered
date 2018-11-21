@@ -1,5 +1,5 @@
-#ifndef GUARD_item_menu_H
-#define GUARD_item_menu_H
+#ifndef GUARD_ITEM_MENU_H
+#define GUARD_ITEM_MENU_H
 
 #include "global.h"
 
@@ -7,8 +7,10 @@
 
 // Exported RAM declarations
 
+extern u16 gUnknown_203AD30;
+
 // Exported ROM declarations
 void sub_81AAC50(void);
 void sub_81AAC70(void);
 
-#endif //GUARD_item_menu_H
+#endif //GUARD_ITEM_MENU_H

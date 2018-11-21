@@ -261,6 +261,8 @@ u16 * sub_81151C0(u16 *, const u16 *);
 const u16 * sub_81151DC(const u16 *);
 u16 * sub_8115280(u16 *, const u16 *);
 const u16 * sub_81152BC(const u16 *);
+bool8 sub_81153A8(u16, u16 *);
+bool8 sub_81153E4(u16, u16 *);
 u16 * sub_8115410(u16 *, const u16 *);
 const u16 * sub_8115460(const u16 *);
 u16 * sub_81154DC(u16 *, const u16 *);
@@ -272,8 +274,6 @@ const u16 * sub_8115700(const u16 *);
 u16 * sub_81157DC(u16 *, const u16 *);
 const u16 * sub_8115800(const u16 *);
 void sub_8115834(u8 *);
-bool8 sub_81153A8(u16, u16 *);
-bool8 sub_81153E4(u16, u16 *);
 
 extern const u8 gUnknown_841A155[];
 extern const u8 gUnknown_841A16F[];
@@ -4829,6 +4829,72 @@ const u16 * sub_8115518(const u16 * a0)
     return (const u16 *)(r7 + 2);
 }
 
+u16 * sub_81155A4(u16 * a0, const u16 * a1)
+{
+    a0 = sub_8113DE0(38, a0);
+    if (a0 == NULL)
+        return NULL;
+    a0[0] = a1[2];
+    a0[1] = a1[3];
+    a0[2] = *((const u32 *)a1) >> 16;
+    a0[3] = *((const u32 *)a1);
+    *((u8 *)a0 + 8) = *((const u8 *)a1 + 8);
+    *((u8 *)a0 + 9) = *((const u8 *)a1 + 9);
+    return a0 + 5;
+}
+
+const u16 * sub_81155E0(const u16 * a0) {
+    const u16 *r5 = sub_8113E88(38, a0);
+    const u8 *r7 = (const u8 *) r5 + 8;
+    u32 r6 = (r5[2] << 16) + r5[3];
+    UnkTextUtil_Reset();
+    sub_80C4DF8(gStringVar1, r7[0]);
+    if (r7[1] == 0) {
+        UnkTextUtil_SetPtrI(0, gSaveBlock2Ptr->playerName);
+        UnkTextUtil_SetPtrI(1, gStringVar1);
+        UnkTextUtil_SetPtrI(2, ItemId_GetItem(r5[0])->name);
+        if (r5[1] == 1)
+            UnkTextUtil_SetPtrI(3, gUnknown_841A8D4);
+        else
+        {
+            ConvertIntToDecimalStringN(gStringVar2, r5[1], STR_CONV_MODE_LEFT_ALIGN, 3);
+            UnkTextUtil_SetPtrI(4, gStringVar2);
+            UnkTextUtil_StringExpandPlaceholders(gStringVar3, gUnknown_841A8DD);
+            UnkTextUtil_SetPtrI(3, gStringVar3);
+        }
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A858);
+    }
+    else
+    {
+        UnkTextUtil_SetPtrI(0, gStringVar1);
+        UnkTextUtil_SetPtrI(1, ItemId_GetItem(r5[0])->name);
+        ConvertIntToDecimalStringN(gStringVar2, r6, STR_CONV_MODE_LEFT_ALIGN, 6);
+        UnkTextUtil_SetPtrI(2, gStringVar2);
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A896);
+    }
+    return (const u16 *)(r7 + 2);
+}
+
+u16 * sub_81156D8(u16 * a0, const u16 * a1)
+{
+    a0 = sub_8113DE0(40, a0);
+    if (a0 == NULL)
+        return NULL;
+    a0[0] = a1[0];
+    *((u8 *)a0 + 2) = *((const u8 *)a1 + 2);
+    return a0 + 2;
+}
+
+const u16 * sub_8115700(const u16 * a0)
+{
+    const u16 * r4 = sub_8113E88(40, a0);
+    const u8 * r5 = (const u8 *)r4 + 2;
+    sub_80C4DF8(gStringVar1, r5[0]);
+    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841B03F);
+    return (const u16 *)(r5 + 2);
+}
+
 const u16 gUnknown_8456C50[] = {
         0x0891,
         0x0892,
@@ -4848,3 +4914,114 @@ const u16 gUnknown_8456C50[] = {
         0x08a0,
         0x08a1
 };
+
+#ifdef NONMATCHING
+void sub_8115748(u16 a0)
+{
+    s32 i;
+    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+        return;
+    for (i = 0; i < 17; i++)
+    {
+        if (a0 != gUnknown_8456C50[i])
+            continue;
+        if (!FlagGet(a0))
+            gUnknown_203B049 = TRUE;
+        else
+            gUnknown_203B049 = FALSE;
+        break;
+    }
+}
+#else
+NAKED
+void sub_8115748(u16 a0)
+{
+    asm_unified("\tpush {r4,lr}\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r2, r0, 16\n"
+                "\tldr r0, =gUnknown_203ADFA\n"
+                "\tldrb r0, [r0]\n"
+                "\tsubs r0, 0x2\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x1\n"
+                "\tbls _08115792\n"
+                "\tmovs r1, 0\n"
+                "\tldr r4, =gUnknown_203B049\n"
+                "\tldr r0, =gUnknown_8456C50\n"
+                "\tb _08115778\n"
+                "\t.pool\n"
+                "_08115770:\n"
+                "\tmovs r0, 0\n"
+                "\tb _08115790\n"
+                "_08115774:\n"
+                "\tadds r0, 0x2\n"
+                "\tadds r1, 0x1\n"
+                "_08115778:\n"
+                "\tcmp r1, 0x10\n"
+                "\tbgt _08115792\n"
+                "\tldrh r3, [r0]\n"
+                "\tcmp r2, r3\n"
+                "\tbne _08115774\n"
+                "\tadds r0, r2, 0\n"
+                "\tbl FlagGet\n"
+                "\tlsls r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08115770\n"
+                "\tmovs r0, 0x1\n"
+                "_08115790:\n"
+                "\tstrb r0, [r4]\n"
+                "_08115792:\n"
+                "\tpop {r4}\n"
+                "\tpop {r0}\n"
+                "\tbx r0");
+}
+#endif // NONMATCHING
+
+void sub_8115798(void)
+{
+    u16 sp0;
+    if (gUnknown_203ADFA != 2 && gUnknown_203ADFA != 3)
+    {
+        if (gUnknown_203B049)
+        {
+            sp0 = gMapHeader.regionMapSectionId;
+            sub_8113550(42, &sp0);
+            gUnknown_203B049 = FALSE;
+        }
+    }
+}
+
+u16 * sub_81157DC(u16 * a0, const u16 * a1)
+{
+    a0 = sub_8113DE0(42, a0);
+    if (a0 == NULL)
+        return NULL;
+    a0[0] = a1[0];
+    return a0 + 1;
+}
+
+const u16 * sub_8115800(const u16 * a0)
+{
+    const u16 * r4 = sub_8113E88(42, a0);
+    sub_80C4DF8(gStringVar1, r4[0]);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841B064);
+    return r4 + 1;
+}
+
+void sub_8115834(u8 * a0)
+{
+    s32 i;
+    if (*a0++ == EXT_CTRL_CODE_BEGIN && *a0++ == EXT_CTRL_CODE_JPN)
+    {
+        for (i = 0; i < 5; i++)
+        {
+            if (*a0 == EXT_CTRL_CODE_BEGIN)
+                break;
+            a0++;
+        }
+        *a0++ = EXT_CTRL_CODE_BEGIN;
+        *a0++ = EXT_CTRL_CODE_ENG;
+        *a0++ = EOS;
+    }
+}

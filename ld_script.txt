@@ -371,7 +371,6 @@ SECTIONS {
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
         src/quest_log.o(.rodata);
-        data/quest_log.o(.rodata);
         data/data_83FECCC.o(.rodata.8456C74);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);

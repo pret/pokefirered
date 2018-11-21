@@ -272,8 +272,8 @@ const u16 * sub_8115700(const u16 *);
 u16 * sub_81157DC(u16 *, const u16 *);
 const u16 * sub_8115800(const u16 *);
 void sub_8115834(u8 *);
-bool8 sub_81153A8(u16, void*);
-bool8 sub_81153E4(u16, void*);
+bool8 sub_81153A8(u16, u16 *);
+bool8 sub_81153E4(u16, u16 *);
 
 extern const u8 gUnknown_841A155[];
 extern const u8 gUnknown_841A16F[];
@@ -400,6 +400,7 @@ extern const u8 gUnknown_841B246[];
 extern const u8 gUnknown_841B25B[];
 extern const u8 gUnknown_841B268[];
 extern const u8 gUnknown_841B277[];
+extern const u8 gUnknown_8418C1B[];
 
 
 const struct WindowTemplate gUnknown_845661C[3] = {
@@ -4730,3 +4731,120 @@ const u16 * sub_81152BC(const u16 * a0)
 
     return (const u16 *)(r5_2 + 2);
 }
+
+void sub_811539C(void)
+{
+    gUnknown_203B04B = TRUE;
+}
+
+bool8 sub_81153A8(u16 a0, u16 * a1)
+{
+    if (a0 != 35)
+    {
+        gUnknown_203B04A = 0;
+        return TRUE;
+    }
+    if (gUnknown_203B04A == *((u8 *)a1 + 1) + 1)
+        return FALSE;
+    gUnknown_203B04A = *((u8 *)a1 + 1) + 1;
+    return TRUE;
+}
+
+bool8 sub_81153E4(u16 a0, u16 * a1)
+{
+    if (a0 != 35)
+        return TRUE;
+    if (*((u8 *)a1 + 1) == 32 && gUnknown_203B04B == 0)
+        return FALSE;
+    gUnknown_203B04B = 0;
+    return TRUE;
+}
+
+u16 * sub_8115410(u16 * a0, const u16 * a1)
+{
+    u8 * r3;
+    a0 = sub_8113DE0(36, a0);
+    if (a0 == NULL)
+        return NULL;
+    a0[0] = a1[0];
+    r3 = (u8 *)a0 + 2;
+    r3[0] = *((const u8 *)a1 + 2);
+    r3[1] = *((const u8 *)a1 + 3);
+    if (r3[0] == 7 || r3[0] == 8)
+        gUnknown_203B048 = 2;
+    else
+        gUnknown_203B048 = 1;
+    return (u16 *)(r3 + 2);
+}
+
+const u16 * sub_8115460(const u16 * a0)
+{
+    const u16 * r4 = sub_8113E88(36, a0);
+    const u8 * r5 = (const u8 *)r4 + 2;
+    QuestLog_AutoGetSpeciesName(r4[0], gStringVar1, 0);
+    if (r5[1] != 0xFF)
+        sub_80C4DF8(gStringVar2, r5[1]);
+    if (r5[0] == 7)
+    {
+        if (r5[1] == 0x58)
+            StringCopy(gStringVar3, gUnknown_841B09F);
+        else
+            StringCopy(gStringVar3, gUnknown_8418C1B);
+    }
+    StringExpandPlaceholders(gStringVar4, gUnknown_8456C20[r5[0]]);
+    return (const u16 *)(r5 + 2);
+}
+
+u16 * sub_81154DC(u16 * a0, const u16 * a1)
+{
+    a0 = sub_8113DE0(37, a0);
+    if (a0 == NULL)
+        return NULL;
+    a0[0] = a1[2];
+    a0[1] = a1[3];
+    a0[2] = *((const u32 *)a1) >> 16;
+    a0[3] = *((const u32 *)a1);
+    *((u8 *)a0 + 8) = *((const u8 *)a1 + 8);
+    *((u8 *)a0 + 9) = 1;
+    return a0 + 5;
+}
+
+const u16 * sub_8115518(const u16 * a0)
+{
+    const u16 * r4 = sub_8113E88(37, a0);
+    const u8 * r7 = (const u8 *)r4 + 8;
+    u32 r6 = (r4[2] << 16) + r4[3];
+    UnkTextUtil_Reset();
+    sub_80C4DF8(gStringVar1, r7[0]);
+    UnkTextUtil_SetPtrI(0, gStringVar1);
+    UnkTextUtil_SetPtrI(1, ItemId_GetItem(r4[0])->name);
+    if (r4[1] < 2)
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A7DD);
+    else
+    {
+        ConvertIntToDecimalStringN(gStringVar2, r6, STR_CONV_MODE_LEFT_ALIGN, 6);
+        UnkTextUtil_SetPtrI(2, gStringVar2);
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A810);
+    }
+    return (const u16 *)(r7 + 2);
+}
+
+const u16 gUnknown_8456C50[] = {
+        0x0891,
+        0x0892,
+        0x0893,
+        0x0894,
+        0x0895,
+        0x0896,
+        0x0897,
+        0x0898,
+        0x0899,
+        0x089a,
+        0x089b,
+        0x089c,
+        0x089d,
+        0x089e,
+        0x089f,
+        0x08a0,
+        0x08a1
+};

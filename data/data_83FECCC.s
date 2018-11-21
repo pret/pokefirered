@@ -1265,7 +1265,10 @@ gUnknown_84189EE:: @ 84189EE
 	.incbin "baserom.gba", 0x4189EE, 0x22D
 
 gUnknown_8418C1B:: @ 8418C1B
-	.incbin "baserom.gba", 0x418C1B, 0x68
+	.string "POKéMON CENTER$"
+
+gUnknown_8418C2A:: @ 8418C2A
+	.incbin "baserom.gba", 0x418C2A, 0x59
 
 gUnknown_8418C83:: @ 8418C83
 	.incbin "baserom.gba", 0x418C83, 0x56

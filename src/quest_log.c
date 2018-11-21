@@ -4673,8 +4673,7 @@ const u8 gUnknown_8456C17[] = {
         0x5f,
         0x62,
         0x60,
-        0x59,
-        0x00
+        0x59
 };
 
 const u8 *const gUnknown_8456C20[] = {
@@ -4703,33 +4702,31 @@ u16 * sub_8115280(u16 * a0, const u16 * a1)
     return r2 + 1;
 }
 
-/*
 const u16 * sub_81152BC(const u16 * a0)
 {
-    u8 r4;
+    u8 r4, r6;
     const u16 * r5 = sub_8113E88(35, a0);
     const u8 * r5_2 = (const u8 *)r5 + 0;
-    sub_80C4DF8(gStringVar1, r5_2[1]);
-    StringCopy(gStringVar2, gUnknown_8456AF0[r5_2[1]]);
-    if (gUnknown_8456BE4[r5_2[1]] == 5)
+    r6 = r5_2[1];
+    sub_80C4DF8(gStringVar1, r5_2[0]);
+    StringCopy(gStringVar2, gUnknown_8456AF0[r6]);
+    if (gUnknown_8456BE4[r6] == 5)
     {
-        for (r4 = 0; r4 < 8; r4++)
+        for (r4 = 0; r4 < ARRAY_COUNT(gUnknown_8456C17); r4++)
         {
-            if (r5_2[0] == gUnknown_8456C17[r4])
-            {
-                if (FlagGet(0x820) != TRUE)
-                    StringExpandPlaceholders(gStringVar4, gUnknown_841AE48);
-                else
-                    StringExpandPlaceholders(gStringVar4, gUnknown_841AE8F);
-                break;
-            }
+            if (r5_2[0] != gUnknown_8456C17[r4])
+                continue;
+            if (FlagGet(0x820 + r4) == TRUE)
+                StringExpandPlaceholders(gStringVar4, gUnknown_841AE8F);
+            else
+                StringExpandPlaceholders(gStringVar4, gUnknown_841AE48);
+            break;
         }
         if (r4 == 8)
-            StringExpandPlaceholders(gStringVar4, gUnknown_8456BBC[gUnknown_8456BE4[r5_2[1]]]);
+            StringExpandPlaceholders(gStringVar4, gUnknown_8456BBC[gUnknown_8456BE4[r6]]);
     }
     else
-        StringExpandPlaceholders(gStringVar4, gUnknown_8456BBC[gUnknown_8456BE4[r5_2[1]]]);
+        StringExpandPlaceholders(gStringVar4, gUnknown_8456BBC[gUnknown_8456BE4[r6]]);
 
-    return r5 + 1;
+    return (const u16 *)(r5_2 + 2);
 }
- */

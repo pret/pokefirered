@@ -155,6 +155,8 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
+#define DEX_FLAGS_NO ((POKEMON_SLOTS_NUMBER / 8) + ((POKEMON_SLOTS_NUMBER % 8) ? 1 : 0))
+
 struct Pokedex
 {
     /*0x00*/ u8 order;
@@ -164,8 +166,8 @@ struct Pokedex
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
-    /*0x10*/ u8 owned[52];
-    /*0x44*/ u8 seen[52];
+    /*0x10*/ u8 owned[DEX_FLAGS_NO];
+    /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
 struct PokemonJumpResults // possibly used in the game itself?
@@ -514,9 +516,9 @@ struct QuestLogNPCData
 
 struct UnkStruct_203B024
 {
-	u16 unk_00;
-	u16 unk_02;
-	u16 unk_04[14];
+    u16 unk_00;
+    u16 unk_02;
+    u16 unk_04[14];
 };
 
 union QuestLogScene
@@ -535,11 +537,11 @@ union QuestLogMovement;
 // Define here
 union QuestLogMovement
 {
-	u16 ident_raw;
-	struct {
-		u16 ident:12;
-		u16 flags:4;
-	} ident_struct;
+    u16 ident_raw;
+    struct {
+    	u16 ident:12;
+    	u16 flags:4;
+    } ident_struct;
 };
 
 struct QuestLog
@@ -571,30 +573,31 @@ struct SaveBlock1
 {
     /*0x0000*/ struct Coords16 pos;
     /*0x0004*/ struct WarpData location;
-    /*0x0C*/ struct WarpData warp1;
-    /*0x14*/ struct WarpData warp2;
-    /*0x1C*/ struct WarpData lastHealLocation;
-    /*0x24*/ struct WarpData warp4;
-    /*0x2C*/ u16 savedMusic;
-    /*0x2E*/ u8 weather;
-    /*0x2F*/ u8 filler_2F;
-    /*0x30*/ u8 flashLevel;
-    /*0x32*/ u16 mapDataId;
-    /*0x234*/ u8 playerPartyCount;
-    /*0x238*/ struct Pokemon playerParty[PARTY_SIZE];
-    /*0x490*/ u32 money;
-    /*0x494*/ u16 coins;
-    /*0x496*/ u16 registeredItem; // registered for use with SELECT button
-	/*0x0298*/ u8 filler298[0x78];
-	/*0x0310*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
-	/*0x????*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
-	/*0x????*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-	/*0x????*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
-	/*0x????*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
-	/*0x05F8*/ u8 filler5F8[0x40];
-    /*0x638*/ u8 trainerRematchStepCounter;
-              u8 filler_639;
-    /*0x63A*/ u8 trainerRematches[100];
+    /*0x000C*/ struct WarpData warp1;
+    /*0x0014*/ struct WarpData warp2;
+    /*0x001C*/ struct WarpData lastHealLocation;
+    /*0x0024*/ struct WarpData warp4;
+    /*0x002C*/ u16 savedMusic;
+    /*0x002E*/ u8 weather;
+    /*0x002F*/ u8 filler_2F;
+    /*0x0030*/ u8 flashLevel;
+    /*0x0032*/ u16 mapDataId;
+    /*0x0034*/ u8 playerPartyCount;
+    /*0x0038*/ struct Pokemon playerParty[PARTY_SIZE];
+    /*0x0290*/ u32 money;
+    /*0x0294*/ u16 coins;
+    /*0x0296*/ u16 registeredItem; // registered for use with SELECT button
+    /*0x0298*/ u8 filler298[0x78];
+    /*0x0310*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+    /*0x03b8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+    /*0x0430*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+    /*0x0464*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+    /*0x054c*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+    /*0x05F8*/ u8 seen1[DEX_FLAGS_NO];
+    /*0x062C*/ u8 filler_062c[12];
+    /*0x0638*/ u8 trainerRematchStepCounter;
+               u8 filler_639;
+    /*0x063A*/ u8 trainerRematches[100];
     /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
     /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
     /*0x0EE0*/ u8 flags[FLAGS_COUNT];
@@ -602,14 +605,27 @@ struct SaveBlock1
     /*0x1200*/ u8 filler1200[0x100];
     /*0x1300*/ struct QuestLog questLog[4];
     /*0x2CA0*/ u8 filler2CA0[0x30];
-	/*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];
-	/*0x2F10*/ u8 filler2F10[0x1DA];
-	/*0x30EC*/ struct EnigmaBerry enigmaBerry;
-	/*0x3120*/ u8 filler3120[0x340];
+    /*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];
+    /*0x2F10*/ u8 filler2F10[0x184];
+               struct {
+    /*0x3094*/ u8 unknown1[8];
+    /*0x309C*/ u8 giftRibbons[11];
+    /*0x30A7*/ u8 unknown2[8];
+    /*0x30AF*/ u32 currentPokeCoupons;
+    /*0x30B3*/ u32 totalEarnedPokeCoupons;
+    /*0x30B7*/ u8 unknown3[6];
+    /*0x30BD*/ u8 receivedWishmakerJirachi;
+    /*0x30BE*/ u8 unknown4[18];
+    } __attribute__((packed)) externalReservedData;
+    /*0x30D0*/ struct Roamer roamer;
+    /*0x30EC*/ struct EnigmaBerry enigmaBerry;
+    /*0x3120*/ u8 filler3120[0x340];
     /*0x3460*/ struct MysteryEventStruct unk_3460;
     /*0x3464*/ u8 filler_3464[0x1b8];
     /*0x361C*/ struct RamScript ramScript;
-    /*0x3A08*/ u8 filler3A08[0x44];
+    /*0x3A08*/ u8 filler3A08[12];
+    /*0x3A14*/ u8 seen2[DEX_FLAGS_NO];
+    /*0x3A48*/ u8 filler_3a48[4];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
     /*0x3A54*/ u8 filler3A54[0x2E4];
                u32 unkArray[4][3];

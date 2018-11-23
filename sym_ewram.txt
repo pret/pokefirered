@@ -895,7 +895,7 @@ gUnknown_20386D0: @ 20386D0
 gUnknown_20386DC: @ 20386DC
 	.space 0x4
 
-gUnknown_20386E0: @ 20386E0
+gFieldEffectArguments: @ 20386E0
 	.space 0x20
 
 gUnknown_2038700: @ 2038700

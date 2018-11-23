@@ -11984,7 +11984,7 @@ task_launch_hm_phase_2: @ 81248C8
 	cmp r0, 0x1
 	bne _081248F4
 	bl brm_get_selected_species
-	ldr r1, _081248FC @ =gUnknown_20386E0
+	ldr r1, _081248FC @ =gFieldEffectArguments
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [r1]
@@ -11998,7 +11998,7 @@ _081248F4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081248FC: .4byte gUnknown_20386E0
+_081248FC: .4byte gFieldEffectArguments
 _08124900: .4byte gUnknown_203B0C4
 	thumb_func_end task_launch_hm_phase_2
 
@@ -12074,7 +12074,7 @@ _08124976:
 hm_surf_run_dp02scr: @ 812497C
 	push {lr}
 	bl GetCursorSelectionMonId
-	ldr r1, _08124994 @ =gUnknown_20386E0
+	ldr r1, _08124994 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -12083,7 +12083,7 @@ hm_surf_run_dp02scr: @ 812497C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08124994: .4byte gUnknown_20386E0
+_08124994: .4byte gFieldEffectArguments
 	thumb_func_end hm_surf_run_dp02scr
 
 	thumb_func_start sub_8124998
@@ -12250,7 +12250,7 @@ _08124AD8: .4byte sub_80568A8
 hm2_waterfall: @ 8124ADC
 	push {lr}
 	bl GetCursorSelectionMonId
-	ldr r1, _08124AF4 @ =gUnknown_20386E0
+	ldr r1, _08124AF4 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -12259,7 +12259,7 @@ hm2_waterfall: @ 8124ADC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08124AF4: .4byte gUnknown_20386E0
+_08124AF4: .4byte gFieldEffectArguments
 	thumb_func_end hm2_waterfall
 
 	thumb_func_start hm_prepare_waterfall

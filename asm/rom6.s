@@ -183,7 +183,7 @@ sub_80C98FC: @ 80C98FC
 	cmp r4, 0
 	bne _080C9980
 	bl player_get_direction_lower_nybble
-	ldr r6, _080C9988 @ =gUnknown_20386E0
+	ldr r6, _080C9988 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r6, 0x4]
@@ -242,7 +242,7 @@ _080C9980:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C9988: .4byte gUnknown_20386E0
+_080C9988: .4byte gFieldEffectArguments
 _080C998C: .4byte gPlayerAvatar
 _080C9990: .4byte gMapObjects
 _080C9994: .4byte gSprites
@@ -312,7 +312,7 @@ _080C9A0C: .4byte sub_80C9A10
 sub_80C9A10: @ 80C9A10
 	push {lr}
 	bl GetCursorSelectionMonId
-	ldr r1, _080C9A28 @ =gUnknown_20386E0
+	ldr r1, _080C9A28 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -321,7 +321,7 @@ sub_80C9A10: @ 80C9A10
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C9A28: .4byte gUnknown_20386E0
+_080C9A28: .4byte gFieldEffectArguments
 _080C9A2C: .4byte gUnknown_81BE064
 	thumb_func_end sub_80C9A10
 
@@ -397,14 +397,14 @@ hm2_dig: @ 80C9AAC
 	movs r0, 0x26
 	bl FieldEffectStart
 	bl GetCursorSelectionMonId
-	ldr r1, _080C9AC8 @ =gUnknown_20386E0
+	ldr r1, _080C9AC8 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C9AC8: .4byte gUnknown_20386E0
+_080C9AC8: .4byte gFieldEffectArguments
 	thumb_func_end hm2_dig
 
 	thumb_func_start sub_80C9ACC

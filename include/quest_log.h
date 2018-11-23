@@ -19,4 +19,6 @@ extern u16 gUnknown_3005E8C;
 extern struct UnkStruct_3005E90 gUnknown_3005E90;
 extern struct UnkStruct_203AE98 * gUnknown_3005E94;
 
+void sub_8112720(u8);
+
 #endif //GUARD_QUEST_LOG_H

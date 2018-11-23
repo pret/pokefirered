@@ -5338,7 +5338,7 @@ _080CCF32:
 	ldr r0, _080CCF64 @ =sub_80CCF98
 	movs r1, 0x8
 	bl CreateTask
-	ldr r3, _080CCF68 @ =gUnknown_20386E0
+	ldr r3, _080CCF68 @ =gFieldEffectArguments
 	movs r0, 0x1
 	str r0, [r3]
 	movs r0, 0x38
@@ -5361,7 +5361,7 @@ _080CCF32:
 	b _080CCF72
 	.align 2, 0
 _080CCF64: .4byte sub_80CCF98
-_080CCF68: .4byte gUnknown_20386E0
+_080CCF68: .4byte gFieldEffectArguments
 _080CCF6C: .4byte gUnknown_83F6366
 _080CCF70:
 	movs r0, 0x5

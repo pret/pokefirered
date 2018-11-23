@@ -580,7 +580,7 @@ _080DB1D8: .4byte gSprites
 	thumb_func_start oei_shadow
 oei_shadow: @ 80DB1DC
 	push {r4,r5,lr}
-	ldr r5, _080DB268 @ =gUnknown_20386E0
+	ldr r5, _080DB268 @ =gFieldEffectArguments
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
@@ -648,7 +648,7 @@ _080DB260:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DB268: .4byte gUnknown_20386E0
+_080DB268: .4byte gFieldEffectArguments
 _080DB26C: .4byte gMapObjects
 _080DB270: .4byte gUnknown_83A0010
 _080DB274: .4byte gUnknown_83FECD2
@@ -757,7 +757,7 @@ _080DB344: .4byte 0x00400001
 oei_grass_normal: @ 80DB348
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, _080DB3E0 @ =gUnknown_20386E0
+	ldr r5, _080DB3E0 @ =gFieldEffectArguments
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -829,7 +829,7 @@ _080DB3D4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DB3E0: .4byte gUnknown_20386E0
+_080DB3E0: .4byte gFieldEffectArguments
 _080DB3E4: .4byte gUnknown_83A0010
 _080DB3E8: .4byte gSprites
 	thumb_func_end oei_grass_normal
@@ -972,7 +972,7 @@ _080DB4F0: .4byte gMapObjects
 	thumb_func_start FldEff_JumpTallGrass
 FldEff_JumpTallGrass: @ 80DB4F4
 	push {r4,lr}
-	ldr r4, _080DB558 @ =gUnknown_20386E0
+	ldr r4, _080DB558 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1021,7 +1021,7 @@ _080DB550:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DB558: .4byte gUnknown_20386E0
+_080DB558: .4byte gFieldEffectArguments
 _080DB55C: .4byte gUnknown_83A0010
 _080DB560: .4byte gSprites
 	thumb_func_end FldEff_JumpTallGrass
@@ -1107,7 +1107,7 @@ _080DB5E8:
 FldEff_LongGrass: @ 80DB5F4
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, _080DB690 @ =gUnknown_20386E0
+	ldr r5, _080DB690 @ =gFieldEffectArguments
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -1180,7 +1180,7 @@ _080DB684:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DB690: .4byte gUnknown_20386E0
+_080DB690: .4byte gFieldEffectArguments
 _080DB694: .4byte gUnknown_83A0010
 _080DB698: .4byte gSprites
 	thumb_func_end FldEff_LongGrass
@@ -1315,7 +1315,7 @@ _080DB794: .4byte gMapObjects
 	thumb_func_start FldEff_JumpLongGrass
 FldEff_JumpLongGrass: @ 80DB798
 	push {r4,lr}
-	ldr r4, _080DB7FC @ =gUnknown_20386E0
+	ldr r4, _080DB7FC @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1364,7 +1364,7 @@ _080DB7F4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DB7FC: .4byte gUnknown_20386E0
+_080DB7FC: .4byte gFieldEffectArguments
 _080DB800: .4byte gUnknown_83A0010
 _080DB804: .4byte gSprites
 	thumb_func_end FldEff_JumpLongGrass
@@ -1372,7 +1372,7 @@ _080DB804: .4byte gSprites
 	thumb_func_start sub_80DB808
 sub_80DB808: @ 80DB808
 	push {r4-r6,lr}
-	ldr r6, _080DB89C @ =gUnknown_20386E0
+	ldr r6, _080DB89C @ =gFieldEffectArguments
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -1445,7 +1445,7 @@ _080DB894:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DB89C: .4byte gUnknown_20386E0
+_080DB89C: .4byte gFieldEffectArguments
 _080DB8A0: .4byte gMapObjects
 _080DB8A4: .4byte gUnknown_83A0010
 _080DB8A8: .4byte gSprites
@@ -1579,7 +1579,7 @@ _080DB99C: .4byte gSprites
 	thumb_func_start FldEff_SandFootprints
 FldEff_SandFootprints: @ 80DB9A0
 	push {r4,lr}
-	ldr r4, _080DBA08 @ =gUnknown_20386E0
+	ldr r4, _080DBA08 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1628,7 +1628,7 @@ _080DB9FE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DBA08: .4byte gUnknown_20386E0
+_080DBA08: .4byte gFieldEffectArguments
 _080DBA0C: .4byte gUnknown_83A0010
 _080DBA10: .4byte gSprites
 	thumb_func_end FldEff_SandFootprints
@@ -1636,7 +1636,7 @@ _080DBA10: .4byte gSprites
 	thumb_func_start FldEff_DeepSandFootprints
 FldEff_DeepSandFootprints: @ 80DBA14
 	push {r4,r5,lr}
-	ldr r4, _080DBA7C @ =gUnknown_20386E0
+	ldr r4, _080DBA7C @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1686,7 +1686,7 @@ _080DBA74:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DBA7C: .4byte gUnknown_20386E0
+_080DBA7C: .4byte gFieldEffectArguments
 _080DBA80: .4byte gUnknown_83A0010
 _080DBA84: .4byte gSprites
 	thumb_func_end FldEff_DeepSandFootprints
@@ -1694,7 +1694,7 @@ _080DBA84: .4byte gSprites
 	thumb_func_start FldEff_BikeTireTracks
 FldEff_BikeTireTracks: @ 80DBA88
 	push {r4,r5,lr}
-	ldr r4, _080DBAF0 @ =gUnknown_20386E0
+	ldr r4, _080DBAF0 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1744,7 +1744,7 @@ _080DBAE8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DBAF0: .4byte gUnknown_20386E0
+_080DBAF0: .4byte gFieldEffectArguments
 _080DBAF4: .4byte gUnknown_83A0010
 _080DBAF8: .4byte gSprites
 	thumb_func_end FldEff_BikeTireTracks
@@ -1829,7 +1829,7 @@ _080DBB80:
 	thumb_func_start FldEff_Splash
 FldEff_Splash: @ 80DBB88
 	push {r4-r6,lr}
-	ldr r6, _080DBC1C @ =gUnknown_20386E0
+	ldr r6, _080DBC1C @ =gFieldEffectArguments
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -1899,7 +1899,7 @@ _080DBC12:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DBC1C: .4byte gUnknown_20386E0
+_080DBC1C: .4byte gFieldEffectArguments
 _080DBC20: .4byte gMapObjects
 _080DBC24: .4byte gUnknown_83A0010
 _080DBC28: .4byte gSprites
@@ -1980,7 +1980,7 @@ _080DBCB4: .4byte gMapObjects
 	thumb_func_start FldEff_JumpSmallSplash
 FldEff_JumpSmallSplash: @ 80DBCB8
 	push {r4,lr}
-	ldr r4, _080DBD1C @ =gUnknown_20386E0
+	ldr r4, _080DBD1C @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2029,7 +2029,7 @@ _080DBD14:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DBD1C: .4byte gUnknown_20386E0
+_080DBD1C: .4byte gFieldEffectArguments
 _080DBD20: .4byte gUnknown_83A0010
 _080DBD24: .4byte gSprites
 	thumb_func_end FldEff_JumpSmallSplash
@@ -2037,7 +2037,7 @@ _080DBD24: .4byte gSprites
 	thumb_func_start oei_water_drop_tall
 oei_water_drop_tall: @ 80DBD28
 	push {r4,lr}
-	ldr r4, _080DBD8C @ =gUnknown_20386E0
+	ldr r4, _080DBD8C @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2086,7 +2086,7 @@ _080DBD84:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DBD8C: .4byte gUnknown_20386E0
+_080DBD8C: .4byte gFieldEffectArguments
 _080DBD90: .4byte gUnknown_83A0010
 _080DBD94: .4byte gSprites
 	thumb_func_end oei_water_drop_tall
@@ -2094,7 +2094,7 @@ _080DBD94: .4byte gSprites
 	thumb_func_start FldEff_FeetInFlowingWater
 FldEff_FeetInFlowingWater: @ 80DBD98
 	push {r4-r7,lr}
-	ldr r7, _080DBE38 @ =gUnknown_20386E0
+	ldr r7, _080DBE38 @ =gFieldEffectArguments
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -2170,7 +2170,7 @@ _080DBE2E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DBE38: .4byte gUnknown_20386E0
+_080DBE38: .4byte gFieldEffectArguments
 _080DBE3C: .4byte gMapObjects
 _080DBE40: .4byte gUnknown_83A0010
 _080DBE44: .4byte gSprites
@@ -2265,7 +2265,7 @@ oei_ripples: @ 80DBEF0
 	push {r4,lr}
 	ldr r0, _080DBF44 @ =gUnknown_83A0010
 	ldr r0, [r0, 0x14]
-	ldr r4, _080DBF48 @ =gUnknown_20386E0
+	ldr r4, _080DBF48 @ =gFieldEffectArguments
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	movs r3, 0x4
@@ -2306,14 +2306,14 @@ _080DBF3C:
 	bx r1
 	.align 2, 0
 _080DBF44: .4byte gUnknown_83A0010
-_080DBF48: .4byte gUnknown_20386E0
+_080DBF48: .4byte gFieldEffectArguments
 _080DBF4C: .4byte gSprites
 	thumb_func_end oei_ripples
 
 	thumb_func_start sub_80DBF50
 sub_80DBF50: @ 80DBF50
 	push {r4-r6,lr}
-	ldr r6, _080DBFE4 @ =gUnknown_20386E0
+	ldr r6, _080DBFE4 @ =gFieldEffectArguments
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -2386,7 +2386,7 @@ _080DBFDC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DBFE4: .4byte gUnknown_20386E0
+_080DBFE4: .4byte gFieldEffectArguments
 _080DBFE8: .4byte gMapObjects
 _080DBFEC: .4byte gUnknown_83A0010
 _080DBFF0: .4byte gSprites
@@ -2474,7 +2474,7 @@ _080DC088: .4byte gSprites
 	thumb_func_start FldEff_Unknown19
 FldEff_Unknown19: @ 80DC08C
 	push {r4,lr}
-	ldr r4, _080DC0EC @ =gUnknown_20386E0
+	ldr r4, _080DC0EC @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2521,7 +2521,7 @@ _080DC0E4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DC0EC: .4byte gUnknown_20386E0
+_080DC0EC: .4byte gFieldEffectArguments
 _080DC0F0: .4byte gUnknown_83A0010
 _080DC0F4: .4byte gSprites
 	thumb_func_end FldEff_Unknown19
@@ -2529,7 +2529,7 @@ _080DC0F4: .4byte gSprites
 	thumb_func_start FldEff_Unknown20
 FldEff_Unknown20: @ 80DC0F8
 	push {r4,lr}
-	ldr r4, _080DC158 @ =gUnknown_20386E0
+	ldr r4, _080DC158 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2576,7 +2576,7 @@ _080DC150:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DC158: .4byte gUnknown_20386E0
+_080DC158: .4byte gFieldEffectArguments
 _080DC15C: .4byte gUnknown_83A0010
 _080DC160: .4byte gSprites
 	thumb_func_end FldEff_Unknown20
@@ -2584,7 +2584,7 @@ _080DC160: .4byte gSprites
 	thumb_func_start FldEff_Unknown21
 FldEff_Unknown21: @ 80DC164
 	push {r4,lr}
-	ldr r4, _080DC1C4 @ =gUnknown_20386E0
+	ldr r4, _080DC1C4 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2631,7 +2631,7 @@ _080DC1BC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DC1C4: .4byte gUnknown_20386E0
+_080DC1C4: .4byte gFieldEffectArguments
 _080DC1C8: .4byte gUnknown_83A0010
 _080DC1CC: .4byte gSprites
 	thumb_func_end FldEff_Unknown21
@@ -2639,7 +2639,7 @@ _080DC1CC: .4byte gSprites
 	thumb_func_start FldEff_Unknown22
 FldEff_Unknown22: @ 80DC1D0
 	push {r4,lr}
-	ldr r4, _080DC230 @ =gUnknown_20386E0
+	ldr r4, _080DC230 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2686,7 +2686,7 @@ _080DC228:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DC230: .4byte gUnknown_20386E0
+_080DC230: .4byte gFieldEffectArguments
 _080DC234: .4byte gUnknown_83A0010
 _080DC238: .4byte gSprites
 	thumb_func_end FldEff_Unknown22
@@ -2696,7 +2696,7 @@ ash: @ 80DC23C
 	push {r4,lr}
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r4, _080DC26C @ =gUnknown_20386E0
+	ldr r4, _080DC26C @ =gFieldEffectArguments
 	lsls r0, 16
 	asrs r0, 16
 	str r0, [r4]
@@ -2717,14 +2717,14 @@ ash: @ 80DC23C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DC26C: .4byte gUnknown_20386E0
+_080DC26C: .4byte gFieldEffectArguments
 	thumb_func_end ash
 
 	thumb_func_start oei_ash
 oei_ash: @ 80DC270
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, _080DC2F0 @ =gUnknown_20386E0
+	ldr r5, _080DC2F0 @ =gFieldEffectArguments
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -2786,7 +2786,7 @@ _080DC2E6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DC2F0: .4byte gUnknown_20386E0
+_080DC2F0: .4byte gFieldEffectArguments
 _080DC2F4: .4byte gUnknown_83A0010
 _080DC2F8: .4byte gSprites
 	thumb_func_end oei_ash
@@ -2909,7 +2909,7 @@ _080DC3C8:
 	thumb_func_start sub_80DC3D0
 sub_80DC3D0: @ 80DC3D0
 	push {r4,r5,lr}
-	ldr r4, _080DC43C @ =gUnknown_20386E0
+	ldr r4, _080DC43C @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2960,7 +2960,7 @@ _080DC42C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DC43C: .4byte gUnknown_20386E0
+_080DC43C: .4byte gFieldEffectArguments
 _080DC440: .4byte gUnknown_83A0010
 _080DC444: .4byte gSprites
 _080DC448: .4byte 0x0000ffff
@@ -3387,7 +3387,7 @@ _080DC73C: .4byte gSprites
 	thumb_func_start FldEff_Dust
 FldEff_Dust: @ 80DC740
 	push {r4,lr}
-	ldr r4, _080DC7A4 @ =gUnknown_20386E0
+	ldr r4, _080DC7A4 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3436,7 +3436,7 @@ _080DC79C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DC7A4: .4byte gUnknown_20386E0
+_080DC7A4: .4byte gFieldEffectArguments
 _080DC7A8: .4byte gUnknown_83A0010
 _080DC7AC: .4byte gSprites
 	thumb_func_end FldEff_Dust
@@ -3444,7 +3444,7 @@ _080DC7AC: .4byte gSprites
 	thumb_func_start FldEff_SandPile
 FldEff_SandPile: @ 80DC7B0
 	push {r4-r7,lr}
-	ldr r7, _080DC85C @ =gUnknown_20386E0
+	ldr r7, _080DC85C @ =gFieldEffectArguments
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -3527,7 +3527,7 @@ _080DC854:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DC85C: .4byte gUnknown_20386E0
+_080DC85C: .4byte gFieldEffectArguments
 _080DC860: .4byte gMapObjects
 _080DC864: .4byte gUnknown_83A0010
 _080DC868: .4byte gSprites
@@ -3641,7 +3641,7 @@ _080DC934: .4byte gMapObjects
 	thumb_func_start FldEff_Bubbles
 FldEff_Bubbles: @ 80DC938
 	push {r4,lr}
-	ldr r4, _080DC990 @ =gUnknown_20386E0
+	ldr r4, _080DC990 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3684,7 +3684,7 @@ _080DC988:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DC990: .4byte gUnknown_20386E0
+_080DC990: .4byte gFieldEffectArguments
 _080DC994: .4byte gUnknown_83A0010
 _080DC998: .4byte gSprites
 	thumb_func_end FldEff_Bubbles
@@ -3775,7 +3775,7 @@ ShowDisguiseFieldEffect: @ 80DCA10
 	lsrs r6, r1, 24
 	lsls r2, 24
 	lsrs r7, r2, 24
-	ldr r5, _080DCA44 @ =gUnknown_20386E0
+	ldr r5, _080DCA44 @ =gFieldEffectArguments
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
@@ -3789,7 +3789,7 @@ ShowDisguiseFieldEffect: @ 80DCA10
 	movs r0, 0x40
 	b _080DCAB4
 	.align 2, 0
-_080DCA44: .4byte gUnknown_20386E0
+_080DCA44: .4byte gFieldEffectArguments
 _080DCA48:
 	ldr r1, _080DCAC0 @ =gUnknown_83A0010
 	lsls r0, r6, 2
@@ -4043,7 +4043,7 @@ _080DCC18:
 	thumb_func_start FldEff_Sparkle
 FldEff_Sparkle: @ 80DCC1C
 	push {r4,lr}
-	ldr r4, _080DCC84 @ =gUnknown_20386E0
+	ldr r4, _080DCC84 @ =gFieldEffectArguments
 	ldr r0, [r4]
 	adds r0, 0x7
 	str r0, [r4]
@@ -4094,7 +4094,7 @@ _080DCC7C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DCC84: .4byte gUnknown_20386E0
+_080DCC84: .4byte gFieldEffectArguments
 _080DCC88: .4byte gUnknown_83A0010
 _080DCC8C: .4byte gSprites
 	thumb_func_end FldEff_Sparkle

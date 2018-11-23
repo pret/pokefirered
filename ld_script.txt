@@ -256,7 +256,7 @@ SECTIONS {
         asm/wireless_communication_status_screen.o(.text);
         asm/braille_text.o(.text);
         asm/text_window.o(.text);
-        asm/quest_log_8150454.o(.text);
+        src/quest_log_8150454.o(.text);
         asm/unk_81507FC.o(.text);
         asm/battle_controller_pokedude.o(.text);
         asm/unk_8159F40.o(.text);
@@ -379,6 +379,8 @@ SECTIONS {
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
         data/data_8468C98.o(.rodata);
+        src/quest_log_8150454.o(.rodata);
+        data/data_8471F00.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

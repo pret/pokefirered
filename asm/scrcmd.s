@@ -5060,7 +5060,7 @@ ScrCmd_setfieldeffectarg: @ 806C458
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r1, _0806C484 @ =gUnknown_20386E0
+	ldr r1, _0806C484 @ =gFieldEffectArguments
 	lsls r4, 2
 	adds r4, r1
 	lsls r0, 16
@@ -5071,7 +5071,7 @@ ScrCmd_setfieldeffectarg: @ 806C458
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C484: .4byte gUnknown_20386E0
+_0806C484: .4byte gFieldEffectArguments
 	thumb_func_end ScrCmd_setfieldeffectarg
 
 	thumb_func_start WaitForFieldEffectFinish

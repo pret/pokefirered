@@ -1437,7 +1437,7 @@ oe_exec_and_other_stuff: @ 80692C8
 	adds r0, r1, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _080692EC @ =gUnknown_20386E0
+	ldr r1, _080692EC @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -1448,7 +1448,7 @@ oe_exec_and_other_stuff: @ 80692C8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080692EC: .4byte gUnknown_20386E0
+_080692EC: .4byte gFieldEffectArguments
 	thumb_func_end oe_exec_and_other_stuff
 
 	thumb_func_start DoShadowFieldEffect
@@ -1475,7 +1475,7 @@ DoRippleFieldEffect: @ 806930C
 	adds r4, r1, 0
 	ldrb r0, [r0, 0x5]
 	bl GetFieldObjectGraphicsInfo
-	ldr r2, _08069344 @ =gUnknown_20386E0
+	ldr r2, _08069344 @ =gFieldEffectArguments
 	movs r3, 0x20
 	ldrsh r1, [r4, r3]
 	str r1, [r2]
@@ -1497,7 +1497,7 @@ DoRippleFieldEffect: @ 806930C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08069344: .4byte gUnknown_20386E0
+_08069344: .4byte gFieldEffectArguments
 	thumb_func_end DoRippleFieldEffect
 
 	.align 2, 0 @ Don't pad with nop.

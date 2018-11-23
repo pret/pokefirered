@@ -11168,7 +11168,7 @@ FieldObjectCB_TreeDisguise: @ 8062F08
 	cmp r0, 0
 	bne _08062F50
 _08062F30:
-	ldr r1, _08062F70 @ =gUnknown_20386E0
+	ldr r1, _08062F70 @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -11198,7 +11198,7 @@ _08062F50:
 	bx r0
 	.align 2, 0
 _08062F6C: .4byte gMapObjects
-_08062F70: .4byte gUnknown_20386E0
+_08062F70: .4byte gFieldEffectArguments
 _08062F74: .4byte sub_8062F78
 	thumb_func_end FieldObjectCB_TreeDisguise
 
@@ -11234,7 +11234,7 @@ FieldObjectCB_MountainDisguise: @ 8062F84
 	cmp r0, 0
 	bne _08062FCC
 _08062FAC:
-	ldr r1, _08062FEC @ =gUnknown_20386E0
+	ldr r1, _08062FEC @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -11264,7 +11264,7 @@ _08062FCC:
 	bx r0
 	.align 2, 0
 _08062FE8: .4byte gMapObjects
-_08062FEC: .4byte gUnknown_20386E0
+_08062FEC: .4byte gFieldEffectArguments
 _08062FF0: .4byte sub_8062F78
 	thumb_func_end FieldObjectCB_MountainDisguise
 
@@ -19462,7 +19462,7 @@ sub_8066910: @ 8066910
 do_exclamation_mark_bubble_1: @ 8066920
 	push {r4,lr}
 	adds r4, r1, 0
-	ldr r1, _08066940 @ =gUnknown_20386E0
+	ldr r1, _08066940 @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -19475,14 +19475,14 @@ do_exclamation_mark_bubble_1: @ 8066920
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08066940: .4byte gUnknown_20386E0
+_08066940: .4byte gFieldEffectArguments
 	thumb_func_end do_exclamation_mark_bubble_1
 
 	thumb_func_start do_exclamation_mark_bubble_2
 do_exclamation_mark_bubble_2: @ 8066944
 	push {r4,lr}
 	adds r4, r1, 0
-	ldr r1, _08066964 @ =gUnknown_20386E0
+	ldr r1, _08066964 @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -19495,14 +19495,14 @@ do_exclamation_mark_bubble_2: @ 8066944
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08066964: .4byte gUnknown_20386E0
+_08066964: .4byte gFieldEffectArguments
 	thumb_func_end do_exclamation_mark_bubble_2
 
 	thumb_func_start do_heart_bubble
 do_heart_bubble: @ 8066968
 	push {r4,lr}
 	adds r4, r1, 0
-	ldr r1, _08066988 @ =gUnknown_20386E0
+	ldr r1, _08066988 @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -19515,14 +19515,14 @@ do_heart_bubble: @ 8066968
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08066988: .4byte gUnknown_20386E0
+_08066988: .4byte gFieldEffectArguments
 	thumb_func_end do_heart_bubble
 
 	thumb_func_start sub_806698C
 sub_806698C: @ 806698C
 	push {r4,lr}
 	adds r4, r1, 0
-	ldr r1, _080669AC @ =gUnknown_20386E0
+	ldr r1, _080669AC @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -19535,14 +19535,14 @@ sub_806698C: @ 806698C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080669AC: .4byte gUnknown_20386E0
+_080669AC: .4byte gFieldEffectArguments
 	thumb_func_end sub_806698C
 
 	thumb_func_start sub_80669B0
 sub_80669B0: @ 80669B0
 	push {r4,lr}
 	adds r4, r1, 0
-	ldr r1, _080669D0 @ =gUnknown_20386E0
+	ldr r1, _080669D0 @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -19555,7 +19555,7 @@ sub_80669B0: @ 80669B0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080669D0: .4byte gUnknown_20386E0
+_080669D0: .4byte gFieldEffectArguments
 	thumb_func_end sub_80669B0
 
 	thumb_func_start sub_80669D4

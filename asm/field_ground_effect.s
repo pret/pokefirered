@@ -1139,7 +1139,7 @@ _08068378:
 	thumb_func_start GroundEffect_SpawnOnTallGrass
 GroundEffect_SpawnOnTallGrass: @ 806837C
 	push {lr}
-	ldr r3, _080683C0 @ =gUnknown_20386E0
+	ldr r3, _080683C0 @ =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r1, [r0, r2]
 	str r1, [r3]
@@ -1172,14 +1172,14 @@ GroundEffect_SpawnOnTallGrass: @ 806837C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080683C0: .4byte gUnknown_20386E0
+_080683C0: .4byte gFieldEffectArguments
 _080683C4: .4byte gSaveBlock1Ptr
 	thumb_func_end GroundEffect_SpawnOnTallGrass
 
 	thumb_func_start GroundEffect_StepOnTallGrass
 GroundEffect_StepOnTallGrass: @ 80683C8
 	push {lr}
-	ldr r3, _0806840C @ =gUnknown_20386E0
+	ldr r3, _0806840C @ =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r1, [r0, r2]
 	str r1, [r3]
@@ -1212,14 +1212,14 @@ GroundEffect_StepOnTallGrass: @ 80683C8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806840C: .4byte gUnknown_20386E0
+_0806840C: .4byte gFieldEffectArguments
 _08068410: .4byte gSaveBlock1Ptr
 	thumb_func_end GroundEffect_StepOnTallGrass
 
 	thumb_func_start GroundEffect_SpawnOnLongGrass
 GroundEffect_SpawnOnLongGrass: @ 8068414
 	push {lr}
-	ldr r3, _08068458 @ =gUnknown_20386E0
+	ldr r3, _08068458 @ =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r1, [r0, r2]
 	str r1, [r3]
@@ -1252,14 +1252,14 @@ GroundEffect_SpawnOnLongGrass: @ 8068414
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068458: .4byte gUnknown_20386E0
+_08068458: .4byte gFieldEffectArguments
 _0806845C: .4byte gSaveBlock1Ptr
 	thumb_func_end GroundEffect_SpawnOnLongGrass
 
 	thumb_func_start GroundEffect_StepOnLongGrass
 GroundEffect_StepOnLongGrass: @ 8068460
 	push {lr}
-	ldr r3, _080684A4 @ =gUnknown_20386E0
+	ldr r3, _080684A4 @ =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r1, [r0, r2]
 	str r1, [r3]
@@ -1292,7 +1292,7 @@ GroundEffect_StepOnLongGrass: @ 8068460
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080684A4: .4byte gUnknown_20386E0
+_080684A4: .4byte gFieldEffectArguments
 _080684A8: .4byte gSaveBlock1Ptr
 	thumb_func_end GroundEffect_StepOnLongGrass
 
@@ -1386,7 +1386,7 @@ DoTracksGroundEffect_Footprints: @ 8068530
 	mov r0, sp
 	movs r2, 0x4
 	bl memcpy
-	ldr r1, _0806857C @ =gUnknown_20386E0
+	ldr r1, _0806857C @ =gFieldEffectArguments
 	movs r2, 0x14
 	ldrsh r0, [r5, r2]
 	str r0, [r1]
@@ -1412,7 +1412,7 @@ DoTracksGroundEffect_Footprints: @ 8068530
 	bx r0
 	.align 2, 0
 _08068578: .4byte gUnknown_83A70A8
-_0806857C: .4byte gUnknown_20386E0
+_0806857C: .4byte gFieldEffectArguments
 	thumb_func_end DoTracksGroundEffect_Footprints
 
 	thumb_func_start DoTracksGroundEffect_BikeTireTracks
@@ -1423,7 +1423,7 @@ DoTracksGroundEffect_BikeTireTracks: @ 8068580
 	ldr r0, [r4, 0x14]
 	cmp r1, r0
 	beq _080685C2
-	ldr r2, _080685C8 @ =gUnknown_20386E0
+	ldr r2, _080685C8 @ =gFieldEffectArguments
 	movs r1, 0x14
 	ldrsh r0, [r4, r1]
 	str r0, [r2]
@@ -1454,7 +1454,7 @@ _080685C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080685C8: .4byte gUnknown_20386E0
+_080685C8: .4byte gFieldEffectArguments
 _080685CC: .4byte gUnknown_83A70AC
 	thumb_func_end DoTracksGroundEffect_BikeTireTracks
 
@@ -1492,7 +1492,7 @@ GroundEffect_JumpOnTallGrass: @ 80685FC
 	sub sp, 0x4
 	adds r5, r0, 0
 	adds r6, r1, 0
-	ldr r1, _08068650 @ =gUnknown_20386E0
+	ldr r1, _08068650 @ =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r0, [r5, r2]
 	str r0, [r1]
@@ -1528,13 +1528,13 @@ _08068646:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068650: .4byte gUnknown_20386E0
+_08068650: .4byte gFieldEffectArguments
 	thumb_func_end GroundEffect_JumpOnTallGrass
 
 	thumb_func_start GroundEffect_JumpOnLongGrass
 GroundEffect_JumpOnLongGrass: @ 8068654
 	push {lr}
-	ldr r2, _08068678 @ =gUnknown_20386E0
+	ldr r2, _08068678 @ =gFieldEffectArguments
 	movs r3, 0x10
 	ldrsh r1, [r0, r3]
 	str r1, [r2]
@@ -1551,13 +1551,13 @@ GroundEffect_JumpOnLongGrass: @ 8068654
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068678: .4byte gUnknown_20386E0
+_08068678: .4byte gFieldEffectArguments
 	thumb_func_end GroundEffect_JumpOnLongGrass
 
 	thumb_func_start GroundEffect_JumpOnShallowWater
 GroundEffect_JumpOnShallowWater: @ 806867C
 	push {r4,lr}
-	ldr r3, _080686A8 @ =gUnknown_20386E0
+	ldr r3, _080686A8 @ =gFieldEffectArguments
 	movs r4, 0x10
 	ldrsh r2, [r0, r4]
 	str r2, [r3]
@@ -1577,13 +1577,13 @@ GroundEffect_JumpOnShallowWater: @ 806867C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080686A8: .4byte gUnknown_20386E0
+_080686A8: .4byte gFieldEffectArguments
 	thumb_func_end GroundEffect_JumpOnShallowWater
 
 	thumb_func_start GroundEffect_JumpOnWater
 GroundEffect_JumpOnWater: @ 80686AC
 	push {r4,lr}
-	ldr r3, _080686D8 @ =gUnknown_20386E0
+	ldr r3, _080686D8 @ =gFieldEffectArguments
 	movs r4, 0x10
 	ldrsh r2, [r0, r4]
 	str r2, [r3]
@@ -1603,13 +1603,13 @@ GroundEffect_JumpOnWater: @ 80686AC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080686D8: .4byte gUnknown_20386E0
+_080686D8: .4byte gFieldEffectArguments
 	thumb_func_end GroundEffect_JumpOnWater
 
 	thumb_func_start GroundEffect_JumpLandingDust
 GroundEffect_JumpLandingDust: @ 80686DC
 	push {r4,lr}
-	ldr r3, _08068708 @ =gUnknown_20386E0
+	ldr r3, _08068708 @ =gFieldEffectArguments
 	movs r4, 0x10
 	ldrsh r2, [r0, r4]
 	str r2, [r3]
@@ -1629,7 +1629,7 @@ GroundEffect_JumpLandingDust: @ 80686DC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068708: .4byte gUnknown_20386E0
+_08068708: .4byte gFieldEffectArguments
 	thumb_func_end GroundEffect_JumpLandingDust
 
 	thumb_func_start GroundEffect_ShortGrass
@@ -1655,7 +1655,7 @@ GroundEffect_HotSprings: @ 806871C
 	thumb_func_start GroundEffect_Seaweed
 GroundEffect_Seaweed: @ 806872C
 	push {lr}
-	ldr r2, _08068748 @ =gUnknown_20386E0
+	ldr r2, _08068748 @ =gFieldEffectArguments
 	movs r3, 0x10
 	ldrsh r1, [r0, r3]
 	str r1, [r2]
@@ -1667,7 +1667,7 @@ GroundEffect_Seaweed: @ 806872C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068748: .4byte gUnknown_20386E0
+_08068748: .4byte gFieldEffectArguments
 	thumb_func_end GroundEffect_Seaweed
 
 	thumb_func_start DoFlaggedGroundEffects

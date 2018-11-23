@@ -41,14 +41,14 @@ hm2_sweet_scent: @ 80DE0E8
 	movs r0, 0x33
 	bl FieldEffectStart
 	bl GetCursorSelectionMonId
-	ldr r1, _080DE100 @ =gUnknown_20386E0
+	ldr r1, _080DE100 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE100: .4byte gUnknown_20386E0
+_080DE100: .4byte gFieldEffectArguments
 	thumb_func_end hm2_sweet_scent
 
 	thumb_func_start FldEff_SweetScent

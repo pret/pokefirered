@@ -146,14 +146,14 @@ sub_8097984: @ 8097984
 	movs r0, 0x1
 	bl FieldEffectStart
 	bl GetCursorSelectionMonId
-	ldr r1, _0809799C @ =gUnknown_20386E0
+	ldr r1, _0809799C @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809799C: .4byte gUnknown_20386E0
+_0809799C: .4byte gFieldEffectArguments
 	thumb_func_end sub_8097984
 
 	thumb_func_start sub_80979A0
@@ -185,7 +185,7 @@ _080979CC: .4byte sub_8097A20
 sub_80979D0: @ 80979D0
 	push {lr}
 	bl GetCursorSelectionMonId
-	ldr r1, _080979E8 @ =gUnknown_20386E0
+	ldr r1, _080979E8 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -194,7 +194,7 @@ sub_80979D0: @ 80979D0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080979E8: .4byte gUnknown_20386E0
+_080979E8: .4byte gFieldEffectArguments
 _080979EC: .4byte gUnknown_81BDF6B
 	thumb_func_end sub_80979D0
 

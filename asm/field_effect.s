@@ -2019,7 +2019,7 @@ task00_8084310: @ 8084310
 	cmp r0, 0
 	beq _08084376
 	bl GetCursorSelectionMonId
-	ldr r1, _08084380 @ =gUnknown_20386E0
+	ldr r1, _08084380 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -2053,7 +2053,7 @@ _08084376:
 	bx r0
 	.align 2, 0
 _0808437C: .4byte gTasks
-_08084380: .4byte gUnknown_20386E0
+_08084380: .4byte gFieldEffectArguments
 _08084384: .4byte sub_805671C
 _08084388: .4byte gUnknown_3005020
 _0808438C: .4byte mapldr_08084390
@@ -3238,7 +3238,7 @@ oei_waterfall: @ 8084CA0
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r2, _08084CD4 @ =gUnknown_20386E0
+	ldr r2, _08084CD4 @ =gFieldEffectArguments
 	ldr r2, [r2]
 	strh r2, [r1, 0xA]
 	bl _call_via_r4
@@ -3249,7 +3249,7 @@ oei_waterfall: @ 8084CA0
 	.align 2, 0
 _08084CCC: .4byte sub_8084CD8
 _08084CD0: .4byte gTasks
-_08084CD4: .4byte gUnknown_20386E0
+_08084CD4: .4byte gFieldEffectArguments
 	thumb_func_end oei_waterfall
 
 	thumb_func_start sub_8084CD8
@@ -3323,7 +3323,7 @@ waterfall_1_do_anim_probably: @ 8084D44
 	bne _08084D74
 	adds r0, r5, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
-	ldr r1, _08084D7C @ =gUnknown_20386E0
+	ldr r1, _08084D7C @ =gFieldEffectArguments
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -3338,7 +3338,7 @@ _08084D74:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084D7C: .4byte gUnknown_20386E0
+_08084D7C: .4byte gFieldEffectArguments
 	thumb_func_end waterfall_1_do_anim_probably
 
 	thumb_func_start waterfall_2_wait_anim_finish_probably
@@ -3442,7 +3442,7 @@ FldEff_UseDive: @ 8084E24
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r3, _08084E5C @ =gUnknown_20386E0
+	ldr r3, _08084E5C @ =gFieldEffectArguments
 	ldr r2, [r3]
 	strh r2, [r1, 0x26]
 	ldr r2, [r3, 0x4]
@@ -3455,7 +3455,7 @@ FldEff_UseDive: @ 8084E24
 	.align 2, 0
 _08084E54: .4byte sub_8084E60
 _08084E58: .4byte gTasks
-_08084E5C: .4byte gUnknown_20386E0
+_08084E5C: .4byte gFieldEffectArguments
 	thumb_func_end FldEff_UseDive
 
 	thumb_func_start sub_8084E60
@@ -3507,7 +3507,7 @@ dive_2_unknown: @ 8084EAC
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	ldr r1, _08084ED0 @ =gUnknown_20386E0
+	ldr r1, _08084ED0 @ =gFieldEffectArguments
 	movs r2, 0x26
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -3521,7 +3521,7 @@ dive_2_unknown: @ 8084EAC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084ED0: .4byte gUnknown_20386E0
+_08084ED0: .4byte gFieldEffectArguments
 	thumb_func_end dive_2_unknown
 
 	thumb_func_start dive_3_unknown
@@ -3691,7 +3691,7 @@ sub_808500C: @ 808500C
 	strh r0, [r2, 0x26]
 	movs r0, 0x1
 	strh r0, [r4, 0xE]
-	ldr r3, _08085054 @ =gUnknown_20386E0
+	ldr r3, _08085054 @ =gFieldEffectArguments
 	movs r5, 0x10
 	ldrsh r0, [r1, r5]
 	str r0, [r3]
@@ -3719,7 +3719,7 @@ sub_808500C: @ 808500C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08085054: .4byte gUnknown_20386E0
+_08085054: .4byte gFieldEffectArguments
 	thumb_func_end sub_808500C
 
 	thumb_func_start sub_8085058
@@ -4006,7 +4006,7 @@ sub_8085274: @ 8085274
 	lsls r0, 24
 	cmp r0, 0
 	beq _080852B4
-	ldr r1, _080852BC @ =gUnknown_20386E0
+	ldr r1, _080852BC @ =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r0, [r5, r2]
 	str r0, [r1]
@@ -4034,7 +4034,7 @@ _080852B4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080852BC: .4byte gUnknown_20386E0
+_080852BC: .4byte gFieldEffectArguments
 	thumb_func_end sub_8085274
 
 	thumb_func_start sub_80852C0
@@ -4110,7 +4110,7 @@ _08085348: .4byte sub_80851E8
 	thumb_func_start FldEff_LavaridgeGymWarp
 FldEff_LavaridgeGymWarp: @ 808534C
 	push {r4,lr}
-	ldr r4, _080853A4 @ =gUnknown_20386E0
+	ldr r4, _080853A4 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -4151,7 +4151,7 @@ FldEff_LavaridgeGymWarp: @ 808534C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080853A4: .4byte gUnknown_20386E0
+_080853A4: .4byte gFieldEffectArguments
 _080853A8: .4byte gUnknown_83A0010
 _080853AC: .4byte gSprites
 	thumb_func_end FldEff_LavaridgeGymWarp
@@ -4275,7 +4275,7 @@ sub_8085470: @ 8085470
 	ldrsh r0, [r5, r2]
 	cmp r0, 0x3
 	ble _080854C4
-	ldr r1, _080854C0 @ =gUnknown_20386E0
+	ldr r1, _080854C0 @ =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -4299,7 +4299,7 @@ sub_8085470: @ 8085470
 	strh r0, [r5, 0x8]
 	b _080854E4
 	.align 2, 0
-_080854C0: .4byte gUnknown_20386E0
+_080854C0: .4byte gFieldEffectArguments
 _080854C4:
 	adds r0, r1, 0x1
 	strh r0, [r5, 0xA]
@@ -4414,7 +4414,7 @@ _0808559C: .4byte sub_80853E4
 	thumb_func_start FldEff_PopOutOfAsh
 FldEff_PopOutOfAsh: @ 80855A0
 	push {r4,lr}
-	ldr r4, _080855F8 @ =gUnknown_20386E0
+	ldr r4, _080855F8 @ =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -4455,7 +4455,7 @@ FldEff_PopOutOfAsh: @ 80855A0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080855F8: .4byte gUnknown_20386E0
+_080855F8: .4byte gFieldEffectArguments
 _080855FC: .4byte gUnknown_83A0010
 _08085600: .4byte gSprites
 	thumb_func_end FldEff_PopOutOfAsh
@@ -5777,7 +5777,7 @@ _0808604A:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _0808607C @ =gUnknown_20386E0
+	ldr r2, _0808607C @ =gFieldEffectArguments
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
@@ -5796,14 +5796,14 @@ _0808604A:
 	bx r1
 	.align 2, 0
 _08086078: .4byte sub_8086468
-_0808607C: .4byte gUnknown_20386E0
+_0808607C: .4byte gFieldEffectArguments
 _08086080: .4byte gTasks
 	thumb_func_end FldEff_FieldMoveShowMon
 
 	thumb_func_start FldEff_FieldMoveShowMonInit
 FldEff_FieldMoveShowMonInit: @ 8086084
 	push {r4-r6,lr}
-	ldr r5, _080860D8 @ =gUnknown_20386E0
+	ldr r5, _080860D8 @ =gFieldEffectArguments
 	ldr r0, [r5]
 	movs r6, 0x80
 	lsls r6, 24
@@ -5839,7 +5839,7 @@ FldEff_FieldMoveShowMonInit: @ 8086084
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080860D8: .4byte gUnknown_20386E0
+_080860D8: .4byte gFieldEffectArguments
 _080860DC: .4byte gPlayerParty
 	thumb_func_end FldEff_FieldMoveShowMonInit
 
@@ -6945,7 +6945,7 @@ sub_8086944: @ 8086944
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _08086988 @ =gUnknown_20386E0
+	ldr r0, _08086988 @ =gFieldEffectArguments
 	ldr r0, [r0]
 	strh r0, [r1, 0x26]
 	bl sav1_reset_battle_music_maybe
@@ -6964,7 +6964,7 @@ _08086978:
 	.align 2, 0
 _08086980: .4byte sub_8086990
 _08086984: .4byte gTasks
-_08086988: .4byte gUnknown_20386E0
+_08086988: .4byte gFieldEffectArguments
 _0808698C: .4byte 0x00000131
 	thumb_func_end sub_8086944
 
@@ -7091,7 +7091,7 @@ sub_8086A6C: @ 8086A6C
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086AA2
-	ldr r2, _08086AB0 @ =gUnknown_20386E0
+	ldr r2, _08086AB0 @ =gFieldEffectArguments
 	movs r1, 0x26
 	ldrsh r0, [r4, r1]
 	movs r1, 0x80
@@ -7110,7 +7110,7 @@ _08086AA2:
 	.align 2, 0
 _08086AA8: .4byte gPlayerAvatar
 _08086AAC: .4byte gMapObjects
-_08086AB0: .4byte gUnknown_20386E0
+_08086AB0: .4byte gFieldEffectArguments
 	thumb_func_end sub_8086A6C
 
 	thumb_func_start sub_8086AB4
@@ -7146,7 +7146,7 @@ sub_8086AB4: @ 8086AB4
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl sub_8063CA4
-	ldr r1, _08086B2C @ =gUnknown_20386E0
+	ldr r1, _08086B2C @ =gFieldEffectArguments
 	movs r2, 0xA
 	ldrsh r0, [r6, r2]
 	str r0, [r1]
@@ -7168,7 +7168,7 @@ _08086B1E:
 	.align 2, 0
 _08086B24: .4byte gPlayerAvatar
 _08086B28: .4byte gMapObjects
-_08086B2C: .4byte gUnknown_20386E0
+_08086B2C: .4byte gFieldEffectArguments
 	thumb_func_end sub_8086AB4
 
 	thumb_func_start sub_8086B30
@@ -7456,7 +7456,7 @@ sub_8086D38: @ 8086D38
 	strb r0, [r2, 0x5]
 	ldr r0, _08086D8C @ =sub_8086D94
 	str r0, [r2, 0x1C]
-	ldr r0, _08086D90 @ =gUnknown_20386E0
+	ldr r0, _08086D90 @ =gFieldEffectArguments
 	ldr r0, [r0]
 	strh r0, [r2, 0x30]
 	movs r0, 0x97
@@ -7469,7 +7469,7 @@ sub_8086D38: @ 8086D38
 _08086D84: .4byte gUnknown_83A0010
 _08086D88: .4byte gSprites
 _08086D8C: .4byte sub_8086D94
-_08086D90: .4byte gUnknown_20386E0
+_08086D90: .4byte gFieldEffectArguments
 	thumb_func_end sub_8086D38
 
 	thumb_func_start sub_8086D94
@@ -7550,7 +7550,7 @@ FldEff_UseFly: @ 8086E10
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _08086E3C @ =gUnknown_20386E0
+	ldr r0, _08086E3C @ =gFieldEffectArguments
 	ldr r0, [r0]
 	strh r0, [r1, 0xA]
 	movs r0, 0
@@ -7559,7 +7559,7 @@ FldEff_UseFly: @ 8086E10
 	.align 2, 0
 _08086E34: .4byte sub_8086E40
 _08086E38: .4byte gTasks
-_08086E3C: .4byte gUnknown_20386E0
+_08086E3C: .4byte gFieldEffectArguments
 	thumb_func_end FldEff_UseFly
 
 	thumb_func_start sub_8086E40
@@ -7648,7 +7648,7 @@ sub_8086EC8: @ 8086EC8
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
-	ldr r1, _08086F08 @ =gUnknown_20386E0
+	ldr r1, _08086F08 @ =gFieldEffectArguments
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -7661,7 +7661,7 @@ _08086EF8:
 	.align 2, 0
 _08086F00: .4byte gPlayerAvatar
 _08086F04: .4byte gMapObjects
-_08086F08: .4byte gUnknown_20386E0
+_08086F08: .4byte gFieldEffectArguments
 	thumb_func_end sub_8086EC8
 
 	thumb_func_start sub_8086F0C
@@ -8977,7 +8977,7 @@ _08087920: .4byte sub_80872F0
 sub_8087924: @ 8087924
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r7, _080879C4 @ =gUnknown_20386E0
+	ldr r7, _080879C4 @ =gFieldEffectArguments
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -9054,7 +9054,7 @@ _080879BA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080879C4: .4byte gUnknown_20386E0
+_080879C4: .4byte gFieldEffectArguments
 _080879C8: .4byte gMapObjects
 _080879CC: .4byte sub_80879D8
 _080879D0: .4byte gTasks
@@ -9176,7 +9176,7 @@ _08087AB0: .4byte gMapObjects
 sub_8087AB4: @ 8087AB4
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r4, _08087AF8 @ =gUnknown_20386E0
+	ldr r4, _08087AF8 @ =gFieldEffectArguments
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x4]
 	ldrb r2, [r4, 0x8]
@@ -9206,7 +9206,7 @@ sub_8087AB4: @ 8087AB4
 	strh r0, [r1, 0x18]
 	b _08087B0A
 	.align 2, 0
-_08087AF8: .4byte gUnknown_20386E0
+_08087AF8: .4byte gFieldEffectArguments
 _08087AFC: .4byte sub_8087BC0
 _08087B00: .4byte gTasks
 _08087B04:

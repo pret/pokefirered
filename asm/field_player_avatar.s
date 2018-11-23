@@ -3559,7 +3559,7 @@ sub_805CD84: @ 805CD84
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl sub_805C0A4
-	ldr r2, _0805CE18 @ =gUnknown_20386E0
+	ldr r2, _0805CE18 @ =gFieldEffectArguments
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	str r0, [r2]
@@ -3592,7 +3592,7 @@ _0805CE0E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805CE18: .4byte gUnknown_20386E0
+_0805CE18: .4byte gFieldEffectArguments
 _0805CE1C: .4byte gSprites
 	thumb_func_end sub_805CD84
 

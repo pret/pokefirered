@@ -51,7 +51,7 @@ _080D083C: .4byte sub_80D0840
 sub_80D0840: @ 80D0840
 	push {lr}
 	bl GetCursorSelectionMonId
-	ldr r1, _080D0858 @ =gUnknown_20386E0
+	ldr r1, _080D0858 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -60,7 +60,7 @@ sub_80D0840: @ 80D0840
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0858: .4byte gUnknown_20386E0
+_080D0858: .4byte gFieldEffectArguments
 _080D085C: .4byte gUnknown_81BE16E
 	thumb_func_end sub_80D0840
 
@@ -79,7 +79,7 @@ sub_80D0860: @ 80D0860
 	lsrs r0, r2, 16
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
-	ldr r0, _080D089C @ =gUnknown_20386E0
+	ldr r0, _080D089C @ =gFieldEffectArguments
 	ldr r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -93,7 +93,7 @@ sub_80D0860: @ 80D0860
 	.align 2, 0
 _080D0894: .4byte gTasks
 _080D0898: .4byte sub_80D08A8
-_080D089C: .4byte gUnknown_20386E0
+_080D089C: .4byte gFieldEffectArguments
 _080D08A0: .4byte gPlayerParty
 _080D08A4: .4byte gStringVar1
 	thumb_func_end sub_80D0860

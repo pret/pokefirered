@@ -1522,7 +1522,7 @@ Phase2_Transition_PokeballsTrail_Func2: @ 80D144C
 	ands r5, r0
 	movs r1, 0
 	mov r8, r4
-	ldr r6, _080D14D4 @ =gUnknown_20386E0
+	ldr r6, _080D14D4 @ =gFieldEffectArguments
 _080D147A:
 	lsls r5, 16
 	asrs r5, 16
@@ -1567,7 +1567,7 @@ _080D147A:
 	.align 2, 0
 _080D14CC: .4byte gUnknown_83FA400
 _080D14D0: .4byte gUnknown_83FA404
-_080D14D4: .4byte gUnknown_20386E0
+_080D14D4: .4byte gFieldEffectArguments
 	thumb_func_end Phase2_Transition_PokeballsTrail_Func2
 
 	thumb_func_start Phase2_Transition_PokeballsTrail_Func3
@@ -1596,7 +1596,7 @@ _080D1500: .4byte sub_80D13C8
 FldEff_Pokeball: @ 80D1504
 	push {r4,r5,lr}
 	ldr r0, _080D1560 @ =gUnknown_83FA5CC
-	ldr r5, _080D1564 @ =gUnknown_20386E0
+	ldr r5, _080D1564 @ =gFieldEffectArguments
 	movs r2, 0
 	ldrsh r1, [r5, r2]
 	movs r3, 0x4
@@ -1639,7 +1639,7 @@ FldEff_Pokeball: @ 80D1504
 	bx r1
 	.align 2, 0
 _080D1560: .4byte gUnknown_83FA5CC
-_080D1564: .4byte gUnknown_20386E0
+_080D1564: .4byte gFieldEffectArguments
 _080D1568: .4byte gSprites
 _080D156C: .4byte 0x0000ffff
 	thumb_func_end FldEff_Pokeball

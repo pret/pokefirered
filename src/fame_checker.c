@@ -2,6 +2,7 @@
 #include "constants/songs.h"
 #include "bg.h"
 #include "graphics.h"
+#include "new_menu_helpers.h"
 #include "item_menu.h"
 #include "list_menu.h"
 #include "gpu_regs.h"
@@ -29,7 +30,8 @@ struct FameCheckerData
     u8 unk_0C[17];
     u8 unk_1D[6];
     u8 unk_23_0:1;
-    u8 unk_23_1:7;
+    u8 unk_23_1:1;
+    u8 unk_23_2:1;
 };
 
 struct FameCheckerData2
@@ -52,7 +54,9 @@ void sub_812C648(void);
 void sub_812C664(u8 taskId);
 void sub_812C694(u8 taskId);
 bool8 sub_812C8F8(u8 taskId);
+void sub_812C990(void);
 void sub_812C9BC(u8 taskId);
+void sub_812CA1C(u8 taskId);
 void sub_812CAD8(u8 taskId);
 void sub_812CD3C(void);
 void sub_812CE04(u8 taskId);
@@ -70,7 +74,9 @@ void sub_812D594(void);
 bool8 sub_812D6B4(void);
 u8 sub_812D724(s16 a0);
 u8 sub_812D7E4(void);
+void sub_812D800(struct Sprite *sprite);
 u8 sub_812D888(u8 a0);
+void sub_812D9A8(u8 a0, u16 a1);
 void sub_812DA14(u8 a0);
 void sub_812DB28(void);
 void sub_812E000(void);
@@ -80,6 +86,7 @@ void sub_812E110(u8 taskId);
 void sub_812E178(u8 a0, s16 a1);
 void sub_812E4A4(u8 a0);
 
+extern const u8 gUnknown_84181E4[];
 
 extern const u16 gUnknown_845C600[];
 extern const struct BgTemplate gUnknown_845FBF4[4];
@@ -279,5 +286,61 @@ void sub_812C694(u8 taskId)
         }
         else
             ListMenuHandleInput(0);
+    }
+}
+
+bool8 sub_812C8F8(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    if (gUnknown_203B0FC->unk_07_1)
+    {
+        gSprites[task->data[2]].data[0] = 2;
+        gSprites[task->data[2]].pos2.x += 10;
+        gSprites[task->data[3]].data[0] = 2;
+        gSprites[task->data[3]].pos2.x += 10;
+        sub_812CE9C();
+        task->func = sub_812CA1C;
+        sub_812C990();
+        gUnknown_203B0FC->unk_23_2 = FALSE;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_812C990(void)
+{
+    AddTextPrinterParametrized(2, 2, gUnknown_84181E4, 0, NULL, 2, 1, 3);
+}
+
+void sub_812C9BC(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    if (gSprites[task->data[2]].data[0] == 0)
+    {
+        sub_812CD3C();
+        gUnknown_203B0FC->unk_07_1 = TRUE;
+        task->func = sub_812C694;
+    }
+    else
+        ChangeBgX(1, 0xA00, 1);
+}
+
+void sub_812CA1C(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    if (GetBgX(1) != 0)
+        ChangeBgX(1, 0xA00, 2);
+    else
+        ChangeBgX(1, 0x000, 0);
+    if (gSprites[task->data[2]].data[0] == 0)
+    {
+        if (gUnknown_203B0FC->unk_07_0)
+            sub_812D0F4(0);
+        sub_812E178(1, 4);
+        sub_812E178(2, 2);
+        gUnknown_203B0FC->unk_07_1 = FALSE;
+        sub_812D9A8(taskId, sub_812E064());
+        task->func = sub_812C694;
+        gSprites[task->data[3]].callback = sub_812D800;
     }
 }

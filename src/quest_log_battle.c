@@ -157,13 +157,8 @@ void sub_812C334(s32 * a0, s32 * a1)
     for (r5 = 0; r5 < 4; r5++)
     {
         if (r2 == gLinkPlayers[r5].id)
-        {
             a0[0] = r5;
-        }
         else if (r5 != gBattleStruct->field_B5)
-        {
-            a1[_optimized_out] = r5;
-            _optimized_out++;
-        }
+            a1[_optimized_out++] = r5;
     }
 }

@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_812C380
-sub_812C380: @ 812C380
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_812C380
-
-	thumb_func_start sub_812C394
-sub_812C394: @ 812C394
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_812C394
-
-	thumb_func_start sub_812C3AC
-sub_812C3AC: @ 812C3AC
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	movs r0, 0
-	bl SetVBlankCallback
-	ldr r4, _0812C3F0 @ =gUnknown_203B0FC
-	movs r0, 0x24
-	bl AllocZeroed
-	str r0, [r4]
-	str r5, [r0]
-	movs r1, 0
-	strb r1, [r0, 0x9]
-	ldr r0, [r4]
-	strb r1, [r0, 0xA]
-	ldr r0, [r4]
-	strb r1, [r0, 0xB]
-	ldr r1, [r4]
-	adds r1, 0x23
-	ldrb r2, [r1]
-	movs r0, 0x2
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1]
-	movs r0, 0xC7
-	bl PlaySE
-	ldr r0, _0812C3F4 @ =sub_812C3F8
-	bl SetMainCallback2
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0812C3F0: .4byte gUnknown_203B0FC
-_0812C3F4: .4byte sub_812C3F8
-	thumb_func_end sub_812C3AC
-
 	thumb_func_start sub_812C3F8
 sub_812C3F8: @ 812C3F8
 	push {r4-r6,lr}

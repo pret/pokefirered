@@ -149,61 +149,21 @@ void sub_812C224(void)
     }
 }
 
-#ifdef NONMATCHING
 void sub_812C334(s32 * a0, s32 * a1)
 {
     s32 r5;
-    u8 r2 = gLinkPlayers[gBattleStruct->field_B5].id;
+    s32 _optimized_out = 0;
+    u8 r2 = gLinkPlayers[gBattleStruct->field_B5].id ^ 2;
     for (r5 = 0; r5 < 4; r5++)
     {
-        if ((r2 ^ 2) == gLinkPlayers[r5].id)
-            *a0 = r5;
+        if (r2 == gLinkPlayers[r5].id)
+        {
+            a0[0] = r5;
+        }
         else if (r5 != gBattleStruct->field_B5)
-            *a1++ = r5;
+        {
+            a1[_optimized_out] = r5;
+            _optimized_out++;
+        }
     }
 }
-#else
-NAKED
-void sub_812C334(s32 * a0, s32 * a1)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                "\tadds r6, r0, 0\n"
-                "\tldr r3, _0812C35C @ =gLinkPlayers\n"
-                "\tldr r4, _0812C360 @ =gBattleStruct\n"
-                "\tldr r0, [r4]\n"
-                "\tadds r0, 0xB5\n"
-                "\tldrb r2, [r0]\n"
-                "\tlsls r0, r2, 3\n"
-                "\tsubs r0, r2\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r3\n"
-                "\tldrb r2, [r0, 0x18]\n"
-                "\tmovs r0, 0x2\n"
-                "\tmovs r5, 0\n"
-                "\teors r2, r0\n"
-                "_0812C352:\n"
-                "\tldrh r0, [r3, 0x18]\n"
-                "\tcmp r2, r0\n"
-                "\tbne _0812C364\n"
-                "\tstr r5, [r6]\n"
-                "\tb _0812C370\n"
-                "\t.align 2, 0\n"
-                "_0812C35C: .4byte gLinkPlayers\n"
-                "_0812C360: .4byte gBattleStruct\n"
-                "_0812C364:\n"
-                "\tldr r0, [r4]\n"
-                "\tadds r0, 0xB5\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r5, r0\n"
-                "\tbeq _0812C370\n"
-                "\tstm r1!, {r5}\n"
-                "_0812C370:\n"
-                "\tadds r3, 0x1C\n"
-                "\tadds r5, 0x1\n"
-                "\tcmp r5, 0x3\n"
-                "\tble _0812C352\n"
-                "\tpop {r4-r6}\n"
-                "\tpop {r0}\n"
-                "\tbx r0");
-}
-#endif // NONMATCHING

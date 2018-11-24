@@ -1,6 +1,8 @@
 #ifndef GUARD_LOAD_SAVE_H
 #define GUARD_LOAD_SAVE_H
 
+#include "global.h"
+
 extern bool32 gFlashMemoryPresent;
 
 void ClearSav2(void);

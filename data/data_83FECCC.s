@@ -2,7 +2,7 @@
 
 	.align 2
 gUnknown_83FECCC:: @ 83FECCC
-	.incbin "baserom.gba", 0x3FECCC, 0x6
+	.byte 0x0c, 0x00, 0x1c, 0x00, 0x2c, 0x00
 
 gUnknown_83FECD2:: @ 83FECD2
 	.incbin "baserom.gba", 0x3FECD2, 0x4
@@ -1265,13 +1265,23 @@ gUnknown_84189EE:: @ 84189EE
 	.incbin "baserom.gba", 0x4189EE, 0x22D
 
 gUnknown_8418C1B:: @ 8418C1B
-	.incbin "baserom.gba", 0x418C1B, 0x68
+	.string "POKéMON CENTER$"
+
+gUnknown_8418C2A:: @ 8418C2A
+	.incbin "baserom.gba", 0x418C2A, 0x59
 
 gUnknown_8418C83:: @ 8418C83
 	.incbin "baserom.gba", 0x418C83, 0x56
 
 gUnknown_8418CD9:: @ 8418CD9
-	.incbin "baserom.gba", 0x418CD9, 0x130
+	.string "The backup memory is damaged or\n"
+	.string "the game’s battery has run dry.\n"
+	.string "The game can be played, but its\n"
+	.string "progress cannot be saved.\n"
+	.string "“Please press the A Button.”$"
+
+gUnknown_8418D70:: @ 8418D70
+	.incbin "baserom.gba", 0x418D70, 0x99
 
 gUnknown_8418E09:: @ 8418E09
 	.incbin "baserom.gba", 0x418E09, 0x6E
@@ -1307,46 +1317,210 @@ gUnknown_8418EBC:: @ 8418EBC
 	.incbin "baserom.gba", 0x418EBC, 0x7
 
 gUnknown_8418EC3:: @ 8418EC3
-	.incbin "baserom.gba", 0x418EC3, 0x8BF
+	.string "No data$"
+
+gUnknown_8418ECB:: @ 8418ECB
+	@ Viridian Forest
+	.string "A deep and sprawling forest that\n"
+	.string "extends around VIRIDIAN CITY.\n"
+	.string "A natural maze, many people\n"
+	.string "become lost inside.$"
+
+gUnknown_8418F3A:: @ 8418F3A
+	@ Mt. Moon
+	.string "A mystical mountain that is known\n"
+	.string "for its frequent meteor falls.\n"
+	.string "The shards of stars that fall\n"
+	.string "here are known as MOON STONES.$"
+
+gUnknown_8418FB8:: @ 8418FB8
+	@ Diglett's Cave
+	.string "A seemingly plain tunnel that was\n"
+	.string "dug by wild DIGLETT.\n"
+	.string "It is famous for connecting\n"
+	.string "ROUTES 2 and 11.$"
+
+gUnknown_841901C:: @ 841901C
+	@ Victory Road
+	.string "A tunnel situated on ROUTE 23.\n"
+	.string "It earned its name because it\n"
+	.string "must be traveled by all TRAINERS\n"
+	.string "aiming for the top.$"
+
+gUnknown_841908E:: @ 841908E
+	@ Pokémon Mansion
+	.string "A decrepit, burned-down mansion\n"
+	.string "on CINNABAR ISLAND.\n"
+	.string "It got its name because a famous\n"
+	.string "POKéMON researcher lived there.$"
+
+gUnknown_8419103:: @ 8419103
+	@ Safari Zone
+	.string "An amusement park outside FUCHSIA\n"
+	.string "CITY where many rare POKéMON can\n"
+	.string "be observed in the wild.\n"
+	.string "Catch them in a popular game!$"
+
+gUnknown_841917D:: @ 841917D
+	@ Rock Tunnel
+	.string "A naturally formed underground\n"
+	.string "tunnel. Because it has not been\n"
+	.string "developed, it is inky dark inside.\n"
+	.string "A light is needed to get through.$"
+
+gUnknown_8419201:: @ 8419201
+	@ Seafoam Islands
+	.string "A pair of islands that is situated\n"
+	.string "on ROUTE 20.\n"
+	.string "The two islands are shaped the\n"
+	.string "same, as if they were twins.$"
+
+gUnknown_841926D:: @ 841926D
+	@ Pokémon Tower
+	.string "A tower that houses the graves of\n"
+	.string "countless POKéMON.\n"
+	.string "Many people visit it daily to pay\n"
+	.string "their respects to the fallen.$"
+
+gUnknown_84192E2:: @ 84192E2
+	@ Cerulean Cave
+	.string "A mysterious cave that is filled\n"
+	.string "with terribly tough POKéMON.\n"
+	.string "It is so dangerous, the POKéMON\n"
+	.string "LEAGUE is in charge of it.$"
+
+gUnknown_841935B:: @ 841935B
+	@ Power Plant
+	.string "A power plant that was abandoned\n"
+	.string "years ago, though some of the\n"
+	.string "machines still work. It is infested\n"
+	.string "with electric POKéMON.$"
+
+gUnknown_84193D5:: @ 84193D5
+	@ Mt. Ember
+	.string "Supposedly an inactive volcano.\n"
+	.string "However, there are persistent\n"
+	.string "reports that the peak blazes\n"
+	.string "with fire at night.$"
+
+gUnknown_8419444:: @ 8419444
+	@ Berry Forest
+	.string "A forest on a small islet off the\n"
+	.string "coast of THREE ISLAND. BERRIES\n"
+	.string "grow wildly in profusion, quickly\n"
+	.string "replenishing those that fall off.$"
+
+gUnknown_84194C9:: @ 84194C9
+	@ Icefall Cave
+	.string "A cave which is covered by water\n"
+	.string "and ice on FOUR ISLAND.\n"
+	.string "It seems like the end of the cave\n"
+	.string "is connected to the ocean.$"
+
+gUnknown_841953F:: @ 841953F
+	@ Lost Cave
+	.string "A bewildering cave off the coast\n"
+	.string "of RESORT GORGEOUS.\n"
+	.string "Some curious thrill seekers have\n"
+	.string "never emerged from it.$"
+
+gUnknown_84195AC:: @ 84195AC
+	@ Tanoby Ruins
+	.string "An ancient ruin that is rumored to\n"
+	.string "be home to a peculiar POKéMON.\n"
+	.string "However, so far, the POKéMON\n"
+	.string "remains an unconfirmed rumor.$"
+
+gUnknown_8419629:: @ 8419629
+	@ Altering Cave
+	.string "This island has been known by this\n"
+	.string "name since the distant past.\n"
+	.string "No one today knows where it got\n"
+	.string "this name, however.$"
+
+gUnknown_841969D:: @ 841969D
+	@ Pattern Bush
+	.string "A lush and bush-like area. \n"
+	.string "In it are patterns where no grass\n"
+	.string "grows. Some study it in the belief\n"
+	.string "that a secret is concealed.$"
+
+gUnknown_841971A:: @ 841971A
+	@ Dotted Hole
+	.string "A mysterious, just-discovered\n"
+	.string "ruin from an ancient time.\n"
+	.string "It got its name from the six dots\n"
+	.string "on its door.$"
 
 gUnknown_8419782:: @ 8419782
-	.incbin "baserom.gba", 0x419782, 0x1B
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a trade.$"
 
 gUnknown_841979D:: @ 841979D
-	.incbin "baserom.gba", 0x41979D, 0x1B
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a trade.$"
 
 gUnknown_84197B8:: @ 84197B8
-	.incbin "baserom.gba", 0x4197B8, 0x35
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a fateful encounter when\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84197ED:: @ 84197ED
-	.incbin "baserom.gba", 0x4197ED, 0x35
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a fateful encounter when\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419822:: @ 8419822
-	.incbin "baserom.gba", 0x419822, 0x1F
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419841:: @ 8419841
-	.incbin "baserom.gba", 0x419841, 0x1F
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419860:: @ 8419860
-	.incbin "baserom.gba", 0x419860, 0x2A
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841988A:: @ 841988A
-	.incbin "baserom.gba", 0x41988A, 0x2A
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198B4:: @ 84198B4
-	.incbin "baserom.gba", 0x4198B4, 0x21
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198D5:: @ 84198D5
-	.incbin "baserom.gba", 0x4198D5, 0x5A
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+
+@ TODO: Replace this gibberish with the proper Hiragana
+gUnknown_84198F6:: @ 84198F6
+	.string "{UNKNOWN_F7 0x00}ßÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
+
+gUnknown_8419913:: @ 8419913
+	.string "{UNKNOWN_F7 0x00}ÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
 
 gUnknown_841992F:: @ 841992F
-	.incbin "baserom.gba", 0x41992F, 0x3E
+	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
+	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_841996D:: @ 841996D
-	.incbin "baserom.gba", 0x41996D, 0x3E
+	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
+	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199AB:: @ 84199AB
-	.incbin "baserom.gba", 0x4199AB, 0x49
+	.string "{UNKNOWN_F7 0x00} nature. Apparently met in\n"
+	.string "a fateful encounter (hatched:\n"
+	.string "{UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199F4:: @ 84199F4
 	.incbin "baserom.gba", 0x4199F4, 0x217
@@ -1454,193 +1628,41 @@ gUnknown_8419E57:: @ 8419E57
 	.incbin "baserom.gba", 0x419E57, 0xFD
 
 gUnknown_8419F54:: @ 8419F54
-	.incbin "baserom.gba", 0x419F54, 0x201
+	.string "SAVING…\n"
+	.string "DON’T TURN OFF THE POWER.$"
 
-gUnknown_841A155:: @ 841A155
-	.incbin "baserom.gba", 0x41A155, 0x1A
+// Start menu option descriptions
+gUnknown_8419F76:: @ 8419F76 // Pokedex
+	.string "A device that records POKéMON secrets\n"
+	.string "upon meeting or catching them.$"
 
-gUnknown_841A16F:: @ 841A16F
-	.incbin "baserom.gba", 0x41A16F, 0x24
+gUnknown_8419FBB:: @ 8419FBB // Pokemon
+	.string "Check and organize POKéMON that are\n"
+	.string "traveling with you in your party.$"
 
-gUnknown_841A193:: @ 841A193
-	.incbin "baserom.gba", 0x41A193, 0x3A
+gUnknown_841A001:: @ 841A001 // Bag
+	.string "Equipped with pockets for storing items\n"
+	.string "you bought, received, or found.$"
 
-gUnknown_841A1CD:: @ 841A1CD
-	.incbin "baserom.gba", 0x41A1CD, 0x1A
+gUnknown_841A049:: @ 841A049 // {PLAYER}
+	.string "Check your money and other game data.$"
 
-gUnknown_841A1E7:: @ 841A1E7
-	.incbin "baserom.gba", 0x41A1E7, 0x29
+gUnknown_841A06F:: @ 841A06F // Save
+	.string "Save your game with a complete record\n"
+	.string "of your progress to take a break.$"
 
-gUnknown_841A210:: @ 841A210
-	.incbin "baserom.gba", 0x41A210, 0x10
+gUnknown_841A0B7:: @ 841A0B7 // Options
+	.string "Adjust various game settings such as text\n"
+	.string "speed, game rules, etc.$"
 
-gUnknown_841A220:: @ 841A220
-	.incbin "baserom.gba", 0x41A220, 0x35
+gUnknown_841A0F9:: @ 841A0F9 // Quit
+	.string "Close this MENU window.$"
 
-gUnknown_841A255:: @ 841A255
-	.incbin "baserom.gba", 0x41A255, 0x22
+gUnknown_841A111:: @ 841A111 // Retire
+	.string "Retire from the SAFARI GAME and return to\n"
+	.string "the registration counter.$"
 
-gUnknown_841A277:: @ 841A277
-	.incbin "baserom.gba", 0x41A277, 0x39
-
-gUnknown_841A2B0:: @ 841A2B0
-	.incbin "baserom.gba", 0x41A2B0, 0x31
-
-gUnknown_841A2E1:: @ 841A2E1
-	.incbin "baserom.gba", 0x41A2E1, 0x31
-
-gUnknown_841A312:: @ 841A312
-	.incbin "baserom.gba", 0x41A312, 0x37
-
-gUnknown_841A349:: @ 841A349
-	.incbin "baserom.gba", 0x41A349, 0x48
-
-gUnknown_841A391:: @ 841A391
-	.incbin "baserom.gba", 0x41A391, 0x49
-
-gUnknown_841A3DA:: @ 841A3DA
-	.incbin "baserom.gba", 0x41A3DA, 0x25
-
-gUnknown_841A3FF:: @ 841A3FF
-	.incbin "baserom.gba", 0x41A3FF, 0x23
-
-gUnknown_841A422:: @ 841A422
-	.incbin "baserom.gba", 0x41A422, 0x55
-
-gUnknown_841A477:: @ 841A477
-	.incbin "baserom.gba", 0x41A477, 0x4F
-
-gUnknown_841A4C6:: @ 841A4C6
-	.incbin "baserom.gba", 0x41A4C6, 0x45
-
-gUnknown_841A50B:: @ 841A50B
-	.incbin "baserom.gba", 0x41A50B, 0x5B
-
-gUnknown_841A566:: @ 841A566
-	.incbin "baserom.gba", 0x41A566, 0x36
-
-gUnknown_841A59C:: @ 841A59C
-	.incbin "baserom.gba", 0x41A59C, 0x3D
-
-gUnknown_841A5D9:: @ 841A5D9
-	.incbin "baserom.gba", 0x41A5D9, 0x21
-
-gUnknown_841A5FA:: @ 841A5FA
-	.incbin "baserom.gba", 0x41A5FA, 0x10
-
-gUnknown_841A60A:: @ 841A60A
-	.incbin "baserom.gba", 0x41A60A, 0x28
-
-gUnknown_841A632:: @ 841A632
-	.incbin "baserom.gba", 0x41A632, 0x1D
-
-gUnknown_841A64F:: @ 841A64F
-	.incbin "baserom.gba", 0x41A64F, 0x1F
-
-gUnknown_841A66E:: @ 841A66E
-	.incbin "baserom.gba", 0x41A66E, 0x26
-
-gUnknown_841A694:: @ 841A694
-	.incbin "baserom.gba", 0x41A694, 0x11
-
-gUnknown_841A6A5:: @ 841A6A5
-	.incbin "baserom.gba", 0x41A6A5, 0x3C
-
-gUnknown_841A6E1:: @ 841A6E1
-	.incbin "baserom.gba", 0x41A6E1, 0x51
-
-gUnknown_841A732:: @ 841A732
-	.incbin "baserom.gba", 0x41A732, 0x38
-
-gUnknown_841A76A:: @ 841A76A
-	.incbin "baserom.gba", 0x41A76A, 0x46
-
-gUnknown_841A7B0:: @ 841A7B0
-	.incbin "baserom.gba", 0x41A7B0, 0x2D
-
-gUnknown_841A7DD:: @ 841A7DD
-	.incbin "baserom.gba", 0x41A7DD, 0x33
-
-gUnknown_841A810:: @ 841A810
-	.incbin "baserom.gba", 0x41A810, 0x48
-
-gUnknown_841A858:: @ 841A858
-	.incbin "baserom.gba", 0x41A858, 0x3E
-
-gUnknown_841A896:: @ 841A896
-	.incbin "baserom.gba", 0x41A896, 0x3E
-
-gUnknown_841A8D4:: @ 841A8D4
-	.incbin "baserom.gba", 0x41A8D4, 0x9
-
-gUnknown_841A8DD:: @ 841A8DD
-	.incbin "baserom.gba", 0x41A8DD, 0x5B
-
-gUnknown_841A938:: @ 841A938
-	.incbin "baserom.gba", 0x41A938, 0x2D
-
-gUnknown_841A965:: @ 841A965
-	.incbin "baserom.gba", 0x41A965, 0x44
-
-gUnknown_841A9A9:: @ 841A9A9
-	.incbin "baserom.gba", 0x41A9A9, 0x2B
-
-gUnknown_841A9D4:: @ 841A9D4
-	.incbin "baserom.gba", 0x41A9D4, 0x2D
-
-gUnknown_841AA01:: @ 841AA01
-	.incbin "baserom.gba", 0x41AA01, 0x2A
-
-gUnknown_841AA2B:: @ 841AA2B
-	.incbin "baserom.gba", 0x41AA2B, 0x4B
-
-gUnknown_841AA76:: @ 841AA76
-	.incbin "baserom.gba", 0x41AA76, 0x34
-
-gUnknown_841AAAA:: @ 841AAAA
-	.incbin "baserom.gba", 0x41AAAA, 0x42
-
-gUnknown_841AAEC:: @ 841AAEC
-	.incbin "baserom.gba", 0x41AAEC, 0x3D
-
-gUnknown_841AB29:: @ 841AB29
-	.incbin "baserom.gba", 0x41AB29, 0x4B
-
-gUnknown_841AB74:: @ 841AB74
-	.incbin "baserom.gba", 0x41AB74, 0x1A
-
-gUnknown_841AB8E:: @ 841AB8E
-	.incbin "baserom.gba", 0x41AB8E, 0x2BA
-
-gUnknown_841AE48:: @ 841AE48
-	.incbin "baserom.gba", 0x41AE48, 0x47
-
-gUnknown_841AE8F:: @ 841AE8F
-	.incbin "baserom.gba", 0x41AE8F, 0x7D
-
-gUnknown_841AF0C:: @ 841AF0C
-	.incbin "baserom.gba", 0x41AF0C, 0x32
-
-gUnknown_841AF3E:: @ 841AF3E
-	.incbin "baserom.gba", 0x41AF3E, 0x2F
-
-gUnknown_841AF6D:: @ 841AF6D
-	.incbin "baserom.gba", 0x41AF6D, 0x39
-
-gUnknown_841AFA6:: @ 841AFA6
-	.incbin "baserom.gba", 0x41AFA6, 0x99
-
-gUnknown_841B03F:: @ 841B03F
-	.incbin "baserom.gba", 0x41B03F, 0x25
-
-gUnknown_841B064:: @ 841B064
-	.incbin "baserom.gba", 0x41B064, 0xF
-
-gUnknown_841B073:: @ 841B073
-	.incbin "baserom.gba", 0x41B073, 0x2C
-
-gUnknown_841B09F:: @ 841B09F
-	.incbin "baserom.gba", 0x41B09F, 0x1E6
+	.include "data/text/quest_log.inc"
 
 gUnknown_841B285:: @ 841B285
 	.incbin "baserom.gba", 0x41B285, 0xE
@@ -2739,78 +2761,9 @@ gUnknown_8454003:: @ 8454003
 gUnknown_8456618:: @ 8456618
 	.incbin "baserom.gba", 0x456618, 0x4
 
-gUnknown_845661C:: @ 845661C
-	.incbin "baserom.gba", 0x45661C, 0x18
-
-gUnknown_8456634:: @ 8456634
-	.incbin "baserom.gba", 0x456634, 0x4
-
-gUnknown_8456638:: @ 8456638
-	.incbin "baserom.gba", 0x456638, 0x60
-
-gUnknown_8456698:: @ 8456698
-	.incbin "baserom.gba", 0x456698, 0x4
-
-gUnknown_845669C:: @ 845669C
-	.incbin "baserom.gba", 0x45669C, 0x8
-
-gUnknown_84566A4:: @ 84566A4
-	.incbin "baserom.gba", 0x4566A4, 0x4
-
-gUnknown_84566A8:: @ 84566A8
-	.incbin "baserom.gba", 0x4566A8, 0x280
-
-gUnknown_8456928:: @ 8456928
-	.incbin "baserom.gba", 0x456928, 0x8
-
-gUnknown_8456930:: @ 8456930
-	.incbin "baserom.gba", 0x456930, 0x4
-
-gUnknown_8456934:: @ 8456934
-	.incbin "baserom.gba", 0x456934, 0x4
-
-gUnknown_8456938:: @ 8456938
-	.incbin "baserom.gba", 0x456938, 0x8
-
-gUnknown_8456940:: @ 8456940
-	.incbin "baserom.gba", 0x456940, 0x8
-
-gUnknown_8456948:: @ 8456948
-	.incbin "baserom.gba", 0x456948, 0xAC
-
-gUnknown_84569F4:: @ 84569F4
-	.incbin "baserom.gba", 0x4569F4, 0xAC
-
-gUnknown_8456AA0:: @ 8456AA0
-	.incbin "baserom.gba", 0x456AA0, 0x2C
-
-gUnknown_8456ACC:: @ 8456ACC
-	.incbin "baserom.gba", 0x456ACC, 0xC
-
-gUnknown_8456AD8:: @ 8456AD8
-	.incbin "baserom.gba", 0x456AD8, 0xC
-
-gUnknown_8456AE4:: @ 8456AE4
-	.incbin "baserom.gba", 0x456AE4, 0xC
-
-gUnknown_8456AF0:: @ 8456AF0
-	.incbin "baserom.gba", 0x456AF0, 0xCC
-
-gUnknown_8456BBC:: @ 8456BBC
-	.incbin "baserom.gba", 0x456BBC, 0x28
-
-gUnknown_8456BE4:: @ 8456BE4
-	.incbin "baserom.gba", 0x456BE4, 0x33
-
-gUnknown_8456C17:: @ 8456C17
-	.incbin "baserom.gba", 0x456C17, 0x9
-
-gUnknown_8456C20:: @ 8456C20
-	.incbin "baserom.gba", 0x456C20, 0x30
-
-gUnknown_8456C50:: @ 8456C50
-	.incbin "baserom.gba", 0x456C50, 0x24
-
+	@ quest_log.o
+	@ link_rfu_3.o
+	.section .rodata.8456C74
 gUnknown_8456C74:: @ 8456C74
 	.incbin "baserom.gba", 0x456C74, 0x5C
 
@@ -4366,3 +4319,6 @@ gUnknown_8468B6C:: @ 8468B6C
 
 gUnknown_8468BCC:: @ 8468BCC
 	.incbin "baserom.gba", 0x468BCC, 0x90
+
+
+

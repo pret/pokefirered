@@ -348,7 +348,7 @@ sub_80A122C: @ 80A122C
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x83
@@ -506,7 +506,7 @@ sub_80A137C: @ 80A137C
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r6, r0, 16
 	lsls r0, r6, 24
@@ -1060,7 +1060,7 @@ sub_80A17E8: @ 80A17E8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A1818 @ =gUnknown_2037AB8
+	ldr r0, _080A1818 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1079,7 +1079,7 @@ _080A1812:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1818: .4byte gUnknown_2037AB8
+_080A1818: .4byte gPaletteFade
 _080A181C: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A17E8
 
@@ -1138,7 +1138,7 @@ sub_80A1880: @ 80A1880
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A18B0 @ =gUnknown_2037AB8
+	ldr r0, _080A18B0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1157,7 +1157,7 @@ _080A18AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A18B0: .4byte gUnknown_2037AB8
+_080A18B0: .4byte gPaletteFade
 _080A18B4: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A1880
 
@@ -1253,7 +1253,7 @@ sub_80A1960: @ 80A1960
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A1990 @ =gUnknown_2037AB8
+	ldr r0, _080A1990 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1271,7 +1271,7 @@ _080A1988:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1990: .4byte gUnknown_2037AB8
+_080A1990: .4byte gPaletteFade
 _080A1994: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A1960
 
@@ -1660,7 +1660,7 @@ sub_80A1CC0: @ 80A1CC0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A1CF0 @ =gUnknown_2037AB8
+	ldr r0, _080A1CF0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1678,7 +1678,7 @@ _080A1CE8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1CF0: .4byte gUnknown_2037AB8
+_080A1CF0: .4byte gPaletteFade
 _080A1CF4: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A1CC0
 
@@ -1743,7 +1743,7 @@ sub_80A1D68: @ 80A1D68
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A1D94 @ =gUnknown_2037AB8
+	ldr r0, _080A1D94 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1760,7 +1760,7 @@ _080A1D8E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1D94: .4byte gUnknown_2037AB8
+_080A1D94: .4byte gPaletteFade
 _080A1D98: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80A1D68
 

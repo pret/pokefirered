@@ -330,7 +330,7 @@ _080DD7AC: .4byte SpriteCallbackDummy
 	thumb_func_start sub_80DD7B0
 sub_80DD7B0: @ 80DD7B0
 	push {lr}
-	ldr r0, _080DD7E0 @ =gUnknown_2037AB8
+	ldr r0, _080DD7E0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -353,7 +353,7 @@ _080DD7DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD7E0: .4byte gUnknown_2037AB8
+_080DD7E0: .4byte gPaletteFade
 _080DD7E4: .4byte gMain
 _080DD7E8: .4byte 0x00000439
 _080DD7EC: .4byte gUnknown_3004F80
@@ -394,7 +394,7 @@ _080DD828: .4byte gActiveBattler
 	thumb_func_start sub_80DD82C
 sub_80DD82C: @ 80DD82C
 	push {lr}
-	ldr r0, _080DD84C @ =gUnknown_2037AB8
+	ldr r0, _080DD84C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -411,7 +411,7 @@ _080DD848:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD84C: .4byte gUnknown_2037AB8
+_080DD84C: .4byte gPaletteFade
 _080DD850: .4byte gUnknown_3004FE0
 _080DD854: .4byte gActiveBattler
 _080DD858: .4byte CompleteWhenChosePokeblock
@@ -425,7 +425,7 @@ CompleteWhenChosePokeblock: @ 80DD85C
 	ldr r0, _080DD88C @ =sub_8011100
 	cmp r1, r0
 	bne _080DD882
-	ldr r0, _080DD890 @ =gUnknown_2037AB8
+	ldr r0, _080DD890 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -442,7 +442,7 @@ _080DD882:
 	.align 2, 0
 _080DD888: .4byte gMain
 _080DD88C: .4byte sub_8011100
-_080DD890: .4byte gUnknown_2037AB8
+_080DD890: .4byte gPaletteFade
 _080DD894: .4byte gUnknown_203AD30
 	thumb_func_end CompleteWhenChosePokeblock
 

@@ -72,7 +72,7 @@ sub_80BF97C: @ 80BF97C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _080BF9B4 @ =gUnknown_2037AB8
+	ldr r2, _080BF9B4 @ =gPaletteFade
 	ldrb r1, [r2, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -96,7 +96,7 @@ _080BF9AC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BF9B4: .4byte gUnknown_2037AB8
+_080BF9B4: .4byte gPaletteFade
 _080BF9B8: .4byte gTasks
 	thumb_func_end sub_80BF97C
 
@@ -196,7 +196,7 @@ ScrSpecial_GetPokemonNicknameAndMoveName: @ 80BFA50
 	ldr r0, _080BFAA0 @ =gStringVar2
 	movs r1, 0xD
 	muls r1, r4
-	ldr r2, _080BFAA4 @ =gUnknown_8247094
+	ldr r2, _080BFAA4 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	pop {r4,r5}
@@ -208,7 +208,7 @@ _080BFA94: .4byte gPlayerParty
 _080BFA98: .4byte gSpecialVar_0x8005
 _080BFA9C: .4byte gStringVar1
 _080BFAA0: .4byte gStringVar2
-_080BFAA4: .4byte gUnknown_8247094
+_080BFAA4: .4byte gMoveNames
 	thumb_func_end ScrSpecial_GetPokemonNicknameAndMoveName
 
 	thumb_func_start sub_80BFAA8

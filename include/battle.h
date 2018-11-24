@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
+#include "global.h"
+
 // should they be included here or included individually by every file?
 #include "constants/battle.h"
 #include "battle_util.h"
@@ -602,7 +604,11 @@ struct BattleStruct
     u8 hpScale;
     u8 synchronizeMoveEffect;
     u8 field_B3;
-    void (*savedCallback)(void);
+    u8 field_B4;
+    u8 field_B5;
+    u8 field_B6;
+    u8 field_B7;
+    // void (*savedCallback)(void);
     u16 usedHeldItems[BATTLE_BANKS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
     u8 AI_itemType[2];
@@ -976,5 +982,7 @@ extern u8 gPotentialItemEffectBattler;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern s32 gBattleMoveDamage;
+
+extern u8 gUnknown_2023E8A;
 
 #endif // GUARD_BATTLE_H

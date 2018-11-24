@@ -1067,7 +1067,6 @@ void CopyBgTilemapBufferToVram(u8 bg)
 
 void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u8 height)
 {
-    void* srcCopy;
     u16 destX16;
     u16 destY16;
     u16 mode;
@@ -1077,26 +1076,30 @@ void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u
         switch (GetBgType(bg))
         {
             case 0:
-                srcCopy = src;
+            {
+                u16 * srcCopy = src;
                 for (destY16 = destY; destY16 < (destY + height); destY16++)
                 {
                     for (destX16 = destX; destX16 < (destX + width); destX16++)
                     {
-                        ((u16*)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *((u16*)srcCopy)++;
+                        ((u16*)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *(srcCopy)++;
                     }
                 }
                 break;
+            }
             case 1:
-                srcCopy = src;
+            {
+                u8 * srcCopy = src;
                 mode = GetBgMetricAffineMode(bg, 0x1);
                 for (destY16 = destY; destY16 < (destY + height); destY16++)
                 {
                     for (destX16 = destX; destX16 < (destX + width); destX16++)
                     {
-                        ((u8*)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *((u8*)srcCopy)++;
+                        ((u8*)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *(srcCopy)++;
                     }
                 }
                 break;
+            }
         }
     }
 }

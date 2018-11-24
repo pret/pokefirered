@@ -453,7 +453,7 @@ sub_809CC98: @ 809CC98
 	lsls r0, 3
 	ldr r1, _0809CCC4 @ =gTasks+0x8
 	adds r5, r0, r1
-	ldr r0, _0809CCC8 @ =gUnknown_2037AB8
+	ldr r0, _0809CCC8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -468,7 +468,7 @@ sub_809CC98: @ 809CC98
 	b _0809CD3C
 	.align 2, 0
 _0809CCC4: .4byte gTasks+0x8
-_0809CCC8: .4byte gUnknown_2037AB8
+_0809CCC8: .4byte gPaletteFade
 _0809CCCC: .4byte gUnknown_2039988
 _0809CCD0:
 	movs r1, 0xA

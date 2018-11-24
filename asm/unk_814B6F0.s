@@ -508,7 +508,7 @@ _0814BAC4:
 	lsls r1, r5, 3
 	subs r1, r5
 	lsls r1, 2
-	ldr r2, _0814BB2C @ =gUnknown_2022744
+	ldr r2, _0814BB2C @ =gLinkPlayers + 8
 	adds r1, r2
 	bl StringCopy
 	adds r4, r6, r4
@@ -555,7 +555,7 @@ _0814BB14:
 	beq _0814BB3A
 	b _0814BB46
 	.align 2, 0
-_0814BB2C: .4byte gUnknown_2022744
+_0814BB2C: .4byte gLinkPlayers + 8
 _0814BB30: .4byte gSaveBlock2Ptr
 _0814BB34:
 	cmp r0, 0x2

@@ -78,7 +78,7 @@ _0806E164: .4byte 0x00000842
 sub_806E168: @ 806E168
 	push {lr}
 	ldr r0, _0806E184 @ =0x0000403c
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r1, _0806E188 @ =gSaveBlock2Ptr
 	ldr r2, [r1]
 	movs r1, 0
@@ -98,7 +98,7 @@ _0806E18C: .4byte 0x00000838
 sub_806E190: @ 806E190
 	push {lr}
 	ldr r0, _0806E1B0 @ =0x0000403c
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r1, _0806E1B4 @ =gSaveBlock2Ptr
 	ldr r2, [r1]
 	movs r1, 0xDA
@@ -154,7 +154,7 @@ _0806E1FE:
 sub_806E204: @ 806E204
 	push {lr}
 	ldr r0, _0806E224 @ =0x0000404e
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r1, _0806E228 @ =gSaveBlock2Ptr
 	ldr r2, [r1]
 	movs r1, 0
@@ -174,7 +174,7 @@ _0806E228: .4byte gSaveBlock2Ptr
 sub_806E22C: @ 806E22C
 	push {lr}
 	ldr r0, _0806E250 @ =0x0000404e
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r1, _0806E254 @ =gSaveBlock2Ptr
 	ldr r2, [r1]
 	movs r1, 0xB9
@@ -419,8 +419,8 @@ _0806E44E:
 	bx r1
 	thumb_func_end CanResetRTC
 
-	thumb_func_start sub_806E454
-sub_806E454: @ 806E454
+	thumb_func_start GetVarPointer
+GetVarPointer: @ 806E454
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -522,7 +522,7 @@ _0806E518:
 	.align 2, 0
 _0806E520: .4byte gUnknown_815FD0C
 _0806E524: .4byte 0xffff8000
-	thumb_func_end sub_806E454
+	thumb_func_end GetVarPointer
 
 	thumb_func_start sub_806E528
 sub_806E528: @ 806E528
@@ -569,7 +569,7 @@ VarGet: @ 806E568
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_806E454
+	bl GetVarPointer
 	cmp r0, 0
 	beq _0806E57C
 	ldrh r0, [r0]
@@ -589,7 +589,7 @@ VarSet: @ 806E584
 	lsrs r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	bl sub_806E454
+	bl GetVarPointer
 	cmp r0, 0
 	beq _0806E59C
 	strh r4, [r0]

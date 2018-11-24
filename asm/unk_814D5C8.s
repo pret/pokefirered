@@ -192,14 +192,14 @@ _0814D774:
 	bl sub_814EB38
 	adds r0, r5, 0
 	bl sub_814EBB0
-	ldr r0, _0814D794 @ =gUnknown_2037AB8
+	ldr r0, _0814D794 @ =gPaletteFade
 	ldrb r1, [r0, 0x8]
 	movs r2, 0x80
 	orrs r1, r2
 	strb r1, [r0, 0x8]
 	b _0814D878
 	.align 2, 0
-_0814D794: .4byte gUnknown_2037AB8
+_0814D794: .4byte gPaletteFade
 _0814D798:
 	ldr r0, _0814D7E4 @ =gUnknown_8EAFEA0
 	movs r2, 0xC0
@@ -261,7 +261,7 @@ _0814D7F4:
 	.align 2, 0
 _0814D82C: .4byte gSpriteCoordOffsetY
 _0814D830:
-	ldr r2, _0814D874 @ =gUnknown_2037AB8
+	ldr r2, _0814D874 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -289,7 +289,7 @@ _0814D830:
 	movs r0, 0x1
 	b _0814D880
 	.align 2, 0
-_0814D874: .4byte gUnknown_2037AB8
+_0814D874: .4byte gPaletteFade
 _0814D878:
 	ldrb r0, [r5, 0xC]
 	adds r0, 0x1

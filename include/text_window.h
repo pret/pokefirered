@@ -1,6 +1,8 @@
 #ifndef GUARD_TEXT_WINDOW_H
 #define GUARD_TEXT_WINDOW_H
 
+#include "global.h"
+
 struct TilesPal
 {
     u32* tiles;

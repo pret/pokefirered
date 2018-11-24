@@ -8,14 +8,14 @@
 	thumb_func_start walkrun_is_standing_still
 walkrun_is_standing_still: @ 8069554
 	push {lr}
-	ldr r0, _08069564 @ =gUnknown_2037078
+	ldr r0, _08069564 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x1
 	beq _08069568
 	movs r0, 0x1
 	b _0806956A
 	.align 2, 0
-_08069564: .4byte gUnknown_2037078
+_08069564: .4byte gPlayerAvatar
 _08069568:
 	movs r0, 0
 _0806956A:

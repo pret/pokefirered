@@ -79,7 +79,7 @@ sub_8069F3C: @ 8069F3C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
@@ -692,7 +692,7 @@ ScrCmd_setvar: @ 806A390
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r4, r0, 0
 	adds r0, r5, 0
 	bl ScriptReadHalfword
@@ -710,13 +710,13 @@ ScrCmd_copyvar: @ 806A3B4
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	ldrh r0, [r0]
 	strh r0, [r5]
 	movs r0, 0
@@ -732,7 +732,7 @@ ScrCmd_setorcopyvar: @ 806A3E0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
@@ -909,7 +909,7 @@ ScrCmd_compare_var_to_value: @ 806A520
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	ldrh r5, [r0]
 	adds r0, r4, 0
 	bl ScriptReadHalfword
@@ -932,13 +932,13 @@ ScrCmd_compare_var_to_var: @ 806A550
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	ldrh r2, [r5]
 	ldrh r1, [r0]
 	adds r0, r2, 0
@@ -957,7 +957,7 @@ ScrCmd_addvar: @ 806A584
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r4, r0, 0
 	adds r0, r5, 0
 	bl ScriptReadHalfword
@@ -977,7 +977,7 @@ ScrCmd_subvar: @ 806A5AC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
@@ -1423,7 +1423,7 @@ ScrCmd_setflashradius: @ 806A8FC
 	thumb_func_start sub_806A918
 sub_806A918: @ 806A918
 	push {lr}
-	ldr r0, _0806A92C @ =gUnknown_2037AB8
+	ldr r0, _0806A92C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1432,7 +1432,7 @@ sub_806A918: @ 806A918
 	movs r0, 0
 	b _0806A932
 	.align 2, 0
-_0806A92C: .4byte gUnknown_2037AB8
+_0806A92C: .4byte gPaletteFade
 _0806A930:
 	movs r0, 0x1
 _0806A932:
@@ -2319,13 +2319,13 @@ ScrCmd_getplayerxy: @ 806B010
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r2, _0806B048 @ =gSaveBlock1Ptr
 	ldr r1, [r2]
 	ldrh r1, [r1]
@@ -4243,7 +4243,7 @@ ScrCmd_buffermovename: @ 806BE50
 	ldr r2, [r4]
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _0806BE8C @ =gUnknown_8247094
+	ldr r0, _0806BE8C @ =gMoveNames
 	adds r1, r0
 	adds r0, r2, 0
 	bl StringCopy
@@ -4253,7 +4253,7 @@ ScrCmd_buffermovename: @ 806BE50
 	bx r1
 	.align 2, 0
 _0806BE88: .4byte gUnknown_83A7294
-_0806BE8C: .4byte gUnknown_8247094
+_0806BE8C: .4byte gMoveNames
 	thumb_func_end ScrCmd_buffermovename
 
 	thumb_func_start ScrCmd_buffernumberstring
@@ -5060,7 +5060,7 @@ ScrCmd_setfieldeffectarg: @ 806C458
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r1, _0806C484 @ =gUnknown_20386E0
+	ldr r1, _0806C484 @ =gFieldEffectArguments
 	lsls r4, 2
 	adds r4, r1
 	lsls r0, 16
@@ -5071,7 +5071,7 @@ ScrCmd_setfieldeffectarg: @ 806C458
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C484: .4byte gUnknown_20386E0
+_0806C484: .4byte gFieldEffectArguments
 	thumb_func_end ScrCmd_setfieldeffectarg
 
 	thumb_func_start WaitForFieldEffectFinish
@@ -5428,7 +5428,7 @@ ScrCmd_checkcoins: @ 806C72C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806E454
+	bl GetVarPointer
 	adds r4, r0, 0
 	bl GetCoins
 	strh r0, [r4]

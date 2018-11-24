@@ -468,7 +468,7 @@ _08150BA2:
 _08150BC8: .4byte sub_8152034
 _08150BCC:
 	bl UpdatePaletteFade
-	ldr r0, _08150BE8 @ =gUnknown_2037AB8
+	ldr r0, _08150BE8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -483,7 +483,7 @@ _08150BE0:
 	strb r0, [r1, 0xC]
 	b _08150BFC
 	.align 2, 0
-_08150BE8: .4byte gUnknown_2037AB8
+_08150BE8: .4byte gPaletteFade
 _08150BEC: .4byte gUnknown_203F3E0
 _08150BF0:
 	adds r0, r1, 0
@@ -1678,7 +1678,7 @@ _08151512:
 	b _0815155E
 _08151524:
 	bl UpdatePaletteFade
-	ldr r0, _08151538 @ =gUnknown_2037AB8
+	ldr r0, _08151538 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1686,7 +1686,7 @@ _08151524:
 	bne _08151590
 	b _0815155E
 	.align 2, 0
-_08151538: .4byte gUnknown_2037AB8
+_08151538: .4byte gPaletteFade
 _0815153C:
 	bl sub_8154274
 	bl sub_8153ED8
@@ -1828,7 +1828,7 @@ _08151656:
 	b _08151686
 _08151676:
 	bl UpdatePaletteFade
-	ldr r0, _08151694 @ =gUnknown_2037AB8
+	ldr r0, _08151694 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1842,7 +1842,7 @@ _08151686:
 	strb r0, [r1, 0x10]
 	b _081516CC
 	.align 2, 0
-_08151694: .4byte gUnknown_2037AB8
+_08151694: .4byte gPaletteFade
 _08151698: .4byte gUnknown_203F3E0
 _0815169C:
 	ldrb r0, [r1, 0x4]
@@ -5763,13 +5763,13 @@ _081533F0:
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
-	ldr r1, _08153400 @ =gUnknown_2022744
+	ldr r1, _08153400 @ =gLinkPlayers + 8
 _081533F8:
 	adds r0, r1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08153400: .4byte gUnknown_2022744
+_08153400: .4byte gLinkPlayers + 8
 	thumb_func_end sub_81533C4
 
 	thumb_func_start sub_8153404
@@ -6605,7 +6605,7 @@ _08153A14:
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
-	ldr r1, _08153A94 @ =gUnknown_2022744
+	ldr r1, _08153A94 @ =gLinkPlayers + 8
 	adds r0, r1
 	lsls r1, r4, 2
 	adds r1, r5
@@ -6668,7 +6668,7 @@ _08153A7E:
 	.align 2, 0
 _08153A8C: .4byte gUnknown_203F3E0
 _08153A90: .4byte gUnknown_8475648
-_08153A94: .4byte gUnknown_2022744
+_08153A94: .4byte gLinkPlayers + 8
 _08153A98: .4byte gUnknown_8475608
 	thumb_func_end sub_8153A04
 

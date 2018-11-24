@@ -3372,7 +3372,7 @@ _080FED28:
 	strh r0, [r6]
 	b _080FED6E
 _080FED38:
-	ldr r0, _080FED78 @ =gUnknown_2037AB8
+	ldr r0, _080FED78 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3402,7 +3402,7 @@ _080FED6E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FED78: .4byte gUnknown_2037AB8
+_080FED78: .4byte gPaletteFade
 _080FED7C: .4byte 0x0000082d
 	thumb_func_end sub_80FEC90
 

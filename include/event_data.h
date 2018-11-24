@@ -1,6 +1,8 @@
 #ifndef GUARD_EVENT_DATA_H
 #define GUARD_EVENT_DATA_H
 
+#include "global.h"
+
 #include "constants/flags.h"
 #include "constants/vars.h"
 
@@ -29,8 +31,9 @@ u8 *GetFlagPointer(u16 id);
 u8 FlagSet(u16 id);
 u8 FlagClear(u16 id);
 bool8 FlagGet(u16 id);
-u16 * sub_806E454(u16 id);
+u16 * GetVarPointer(u16 id);
 bool32 sub_806E2BC(void);
+void sub_806E6FC(void);
 
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;
@@ -52,5 +55,6 @@ extern u16 gSpecialVar_MonBoxPos;
 extern u16 gSpecialVar_0x8014;
 
 extern u16 gUnknown_20370D0;
+extern u16 gUnknown_20370C0;
 
 #endif // GUARD_EVENT_DATA_H

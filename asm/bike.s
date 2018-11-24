@@ -42,7 +42,7 @@ sub_80BD0D4: @ 80BD0D4
 	lsls r2, 16
 	lsrs r2, 16
 	ldr r4, _080BD0F8 @ =gUnknown_83E7D10
-	ldr r3, _080BD0FC @ =gUnknown_2037078
+	ldr r3, _080BD0FC @ =gPlayerAvatar
 	ldrb r3, [r3, 0x8]
 	lsls r3, 2
 	adds r3, r4
@@ -55,7 +55,7 @@ sub_80BD0D4: @ 80BD0D4
 	bx r1
 	.align 2, 0
 _080BD0F8: .4byte gUnknown_83E7D10
-_080BD0FC: .4byte gUnknown_2037078
+_080BD0FC: .4byte gPlayerAvatar
 	thumb_func_end sub_80BD0D4
 
 	thumb_func_start sub_80BD100
@@ -72,7 +72,7 @@ sub_80BD100: @ 80BD100
 	lsls r2, 16
 	lsrs r2, 16
 	mov r9, r2
-	ldr r5, _080BD15C @ =gUnknown_2037078
+	ldr r5, _080BD15C @ =gPlayerAvatar
 	ldrb r0, [r5, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -105,7 +105,7 @@ sub_80BD100: @ 80BD100
 	movs r0, 0x3
 	b _080BD1B6
 	.align 2, 0
-_080BD15C: .4byte gUnknown_2037078
+_080BD15C: .4byte gPlayerAvatar
 _080BD160: .4byte gMapObjects
 _080BD164: .4byte gMain
 _080BD168:
@@ -124,11 +124,11 @@ _080BD176:
 	bne _080BD18C
 _080BD17E:
 	strb r7, [r6]
-	ldr r1, _080BD188 @ =gUnknown_2037078
+	ldr r1, _080BD188 @ =gPlayerAvatar
 	movs r0, 0
 	b _080BD1B4
 	.align 2, 0
-_080BD188: .4byte gUnknown_2037078
+_080BD188: .4byte gPlayerAvatar
 _080BD18C:
 	cmp r0, r7
 	beq _080BD1B0
@@ -148,7 +148,7 @@ _080BD18C:
 	lsrs r0, 24
 	b _080BD1B6
 _080BD1B0:
-	ldr r1, _080BD1C4 @ =gUnknown_2037078
+	ldr r1, _080BD1C4 @ =gPlayerAvatar
 	movs r0, 0x2
 _080BD1B4:
 	strb r0, [r1, 0x2]
@@ -161,13 +161,13 @@ _080BD1B6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BD1C4: .4byte gUnknown_2037078
+_080BD1C4: .4byte gPlayerAvatar
 	thumb_func_end sub_80BD100
 
 	thumb_func_start sub_80BD1C8
 sub_80BD1C8: @ 80BD1C8
 	push {lr}
-	ldr r2, _080BD1E4 @ =gUnknown_2037078
+	ldr r2, _080BD1E4 @ =gPlayerAvatar
 	ldrb r1, [r2, 0x9]
 	strb r1, [r0]
 	movs r1, 0
@@ -179,7 +179,7 @@ sub_80BD1C8: @ 80BD1C8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BD1E4: .4byte gUnknown_2037078
+_080BD1E4: .4byte gPlayerAvatar
 	thumb_func_end sub_80BD1C8
 
 	thumb_func_start sub_80BD1E8
@@ -199,7 +199,7 @@ sub_80BD1E8: @ 80BD1E8
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r7, r5, 0
-	ldr r4, _080BD240 @ =gUnknown_2037078
+	ldr r4, _080BD240 @ =gPlayerAvatar
 	ldrb r1, [r4, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -226,7 +226,7 @@ sub_80BD1E8: @ 80BD1E8
 	lsrs r0, 24
 	b _080BD270
 	.align 2, 0
-_080BD240: .4byte gUnknown_2037078
+_080BD240: .4byte gPlayerAvatar
 _080BD244: .4byte gMapObjects
 _080BD248:
 	movs r0, 0x2
@@ -276,7 +276,7 @@ sub_80BD28C: @ 80BD28C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080BD2C0 @ =gUnknown_2037078
+	ldr r0, _080BD2C0 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -298,7 +298,7 @@ _080BD2B2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BD2C0: .4byte gUnknown_2037078
+_080BD2C0: .4byte gPlayerAvatar
 _080BD2C4: .4byte gMapObjects
 	thumb_func_end sub_80BD28C
 
@@ -308,7 +308,7 @@ sub_80BD2C8: @ 80BD2C8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r0, _080BD2F8 @ =gUnknown_2037078
+	ldr r0, _080BD2F8 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -326,7 +326,7 @@ sub_80BD2C8: @ 80BD2C8
 	bl sub_80BD27C
 	b _080BD350
 	.align 2, 0
-_080BD2F8: .4byte gUnknown_2037078
+_080BD2F8: .4byte gPlayerAvatar
 _080BD2FC: .4byte gMapObjects
 _080BD300:
 	adds r0, r4, 0
@@ -420,7 +420,7 @@ sub_80BD3A0: @ 80BD3A0
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r0, _080BD404 @ =gUnknown_2037078
+	ldr r0, _080BD404 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -443,7 +443,7 @@ sub_80BD3A0: @ 80BD3A0
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	add r1, sp, 0x4
@@ -462,7 +462,7 @@ sub_80BD3A0: @ 80BD3A0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BD404: .4byte gUnknown_2037078
+_080BD404: .4byte gPlayerAvatar
 _080BD408: .4byte gMapObjects
 	thumb_func_end sub_80BD3A0
 
@@ -645,7 +645,7 @@ _080BD538:
 sub_80BD540: @ 80BD540
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _080BD57C @ =gUnknown_2037078
+	ldr r0, _080BD57C @ =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x18
 	ands r0, r1
@@ -661,7 +661,7 @@ sub_80BD540: @ 80BD540
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80BD4B8
@@ -671,7 +671,7 @@ sub_80BD540: @ 80BD540
 	movs r0, 0
 	b _080BD582
 	.align 2, 0
-_080BD57C: .4byte gUnknown_2037078
+_080BD57C: .4byte gPlayerAvatar
 _080BD580:
 	movs r0, 0x1
 _080BD582:
@@ -690,7 +690,7 @@ player_should_look_direction_be_enforced_upon_movement: @ 80BD58C
 	cmp r0, 0
 	beq _080BD5C0
 	ldr r2, _080BD5B8 @ =gMapObjects
-	ldr r0, _080BD5BC @ =gUnknown_2037078
+	ldr r0, _080BD5BC @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -705,7 +705,7 @@ player_should_look_direction_be_enforced_upon_movement: @ 80BD58C
 	b _080BD5C2
 	.align 2, 0
 _080BD5B8: .4byte gMapObjects
-_080BD5BC: .4byte gUnknown_2037078
+_080BD5BC: .4byte gPlayerAvatar
 _080BD5C0:
 	movs r0, 0x1
 _080BD5C2:
@@ -721,7 +721,7 @@ sub_80BD5C8: @ 80BD5C8
 	ldr r1, _080BD5F0 @ =gUnknown_2036E2C
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, _080BD5F4 @ =gUnknown_2037078
+	ldr r0, _080BD5F4 @ =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x6
 	ands r0, r1
@@ -734,7 +734,7 @@ sub_80BD5C8: @ 80BD5C8
 	b _080BD618
 	.align 2, 0
 _080BD5F0: .4byte gUnknown_2036E2C
-_080BD5F4: .4byte gUnknown_2037078
+_080BD5F4: .4byte gPlayerAvatar
 _080BD5F8:
 	adds r0, r2, 0
 	bl SetPlayerAvatarTransitionFlags
@@ -757,7 +757,7 @@ _080BD618:
 	thumb_func_start sub_80BD620
 sub_80BD620: @ 80BD620
 	push {lr}
-	ldr r2, _080BD64C @ =gUnknown_2037078
+	ldr r2, _080BD64C @ =gPlayerAvatar
 	movs r3, 0
 	strb r3, [r2, 0x8]
 	strb r3, [r2, 0x9]
@@ -779,32 +779,32 @@ _080BD638:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BD64C: .4byte gUnknown_2037078
+_080BD64C: .4byte gPlayerAvatar
 	thumb_func_end sub_80BD620
 
 	thumb_func_start Bike_UpdateBikeCounterSpeed
 Bike_UpdateBikeCounterSpeed: @ 80BD650
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080BD660 @ =gUnknown_2037078
+	ldr r2, _080BD660 @ =gPlayerAvatar
 	strb r0, [r2, 0xA]
 	lsrs r1, r0, 1
 	adds r0, r1
 	strb r0, [r2, 0xB]
 	bx lr
 	.align 2, 0
-_080BD660: .4byte gUnknown_2037078
+_080BD660: .4byte gPlayerAvatar
 	thumb_func_end Bike_UpdateBikeCounterSpeed
 
 	thumb_func_start sub_80BD664
 sub_80BD664: @ 80BD664
-	ldr r1, _080BD670 @ =gUnknown_2037078
+	ldr r1, _080BD670 @ =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0xA]
 	strb r0, [r1, 0xB]
 	bx lr
 	.align 2, 0
-_080BD670: .4byte gUnknown_2037078
+_080BD670: .4byte gPlayerAvatar
 	thumb_func_end sub_80BD664
 
 	thumb_func_start GetPlayerSpeed
@@ -815,7 +815,7 @@ GetPlayerSpeed: @ 80BD674
 	mov r0, sp
 	movs r2, 0x6
 	bl memcpy
-	ldr r2, _080BD6A0 @ =gUnknown_2037078
+	ldr r2, _080BD6A0 @ =gPlayerAvatar
 	ldrb r1, [r2]
 	movs r0, 0x2
 	ands r0, r1
@@ -829,7 +829,7 @@ GetPlayerSpeed: @ 80BD674
 	b _080BD6BE
 	.align 2, 0
 _080BD69C: .4byte gUnknown_83E7D1C
-_080BD6A0: .4byte gUnknown_2037078
+_080BD6A0: .4byte gPlayerAvatar
 _080BD6A4:
 	movs r0, 0x4
 	ands r0, r1
@@ -856,7 +856,7 @@ _080BD6BE:
 Bike_HandleBumpySlopeJump: @ 80BD6C4
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, _080BD714 @ =gUnknown_2037078
+	ldr r5, _080BD714 @ =gPlayerAvatar
 	ldrb r1, [r5]
 	movs r0, 0x4
 	ands r0, r1
@@ -872,7 +872,7 @@ Bike_HandleBumpySlopeJump: @ 80BD6C4
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl MetatileBehavior_ReturnFalse_14
@@ -891,7 +891,7 @@ _080BD70C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BD714: .4byte gUnknown_2037078
+_080BD714: .4byte gPlayerAvatar
 	thumb_func_end Bike_HandleBumpySlopeJump
 
 	.align 2, 0 @ Don't pad with nop.

@@ -322,7 +322,7 @@ _0806EA52:
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
@@ -478,7 +478,7 @@ _0806EB8E:
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl MetatileBehavior_ReturnFalse_4
@@ -576,7 +576,7 @@ sub_806EC40: @ 806EC40
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldrh r1, [r5, 0x8]

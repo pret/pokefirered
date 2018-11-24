@@ -505,7 +505,7 @@ sub_8078528: @ 8078528
 	asrs r0, 16
 	cmp r0, 0x3
 	bne _080785B8
-	ldr r3, _080785C8 @ =gUnknown_20375F8
+	ldr r3, _080785C8 @ =gPlttBufferFaded
 	lsls r2, 4
 	mov r12, r2
 	ldr r1, _080785CC @ =0x0000010d
@@ -555,7 +555,7 @@ _080785B8:
 	.align 2, 0
 _080785C0: .4byte 0x0000271a
 _080785C4: .4byte gTasks
-_080785C8: .4byte gUnknown_20375F8
+_080785C8: .4byte gPlttBufferFaded
 _080785CC: .4byte 0x0000010d
 _080785D0: .4byte 0x0000010f
 _080785D4: .4byte sub_80785D8

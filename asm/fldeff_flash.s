@@ -47,7 +47,7 @@ sub_80C9B74: @ 80C9B74
 	lsls r4, 24
 	lsrs r4, 24
 	bl GetCursorSelectionMonId
-	ldr r1, _080C9BA4 @ =gUnknown_20386E0
+	ldr r1, _080C9BA4 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -64,7 +64,7 @@ sub_80C9B74: @ 80C9B74
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C9BA4: .4byte gUnknown_20386E0
+_080C9BA4: .4byte gFieldEffectArguments
 _080C9BA8: .4byte gTasks
 _080C9BAC: .4byte sub_80C9BB0
 	thumb_func_end sub_80C9B74

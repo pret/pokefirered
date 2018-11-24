@@ -704,7 +704,7 @@ _08131DC4:
 	lsrs r0, 16
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _08131E14 @ =gUnknown_8247094
+	ldr r0, _08131E14 @ =gMoveNames
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringAppend
@@ -721,7 +721,7 @@ _08131E04: .4byte 0xfffffee0
 _08131E08: .4byte gStringVar4
 _08131E0C: .4byte gUnknown_846317C
 _08131E10: .4byte gUnknown_8416703
-_08131E14: .4byte gUnknown_8247094
+_08131E14: .4byte gMoveNames
 	thumb_func_end sub_8131D48
 
 	thumb_func_start sub_8131E18
@@ -1314,7 +1314,7 @@ sub_813226C: @ 813226C
 	lsls r0, 3
 	ldr r1, _081322A4 @ =gTasks+0x8
 	adds r2, r0, r1
-	ldr r0, _081322A8 @ =gUnknown_2037AB8
+	ldr r0, _081322A8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1334,7 +1334,7 @@ sub_813226C: @ 813226C
 	b _081322BE
 	.align 2, 0
 _081322A4: .4byte gTasks+0x8
-_081322A8: .4byte gUnknown_2037AB8
+_081322A8: .4byte gPaletteFade
 _081322AC: .4byte gUnknown_203B116
 _081322B0: .4byte gUnknown_203B118
 _081322B4:
@@ -1365,7 +1365,7 @@ sub_81322D4: @ 81322D4
 	lsls r0, 3
 	ldr r1, _08132340 @ =gTasks+0x8
 	adds r6, r0, r1
-	ldr r0, _08132344 @ =gUnknown_2037AB8
+	ldr r0, _08132344 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1406,7 +1406,7 @@ sub_81322D4: @ 81322D4
 	b _08132370
 	.align 2, 0
 _08132340: .4byte gTasks+0x8
-_08132344: .4byte gUnknown_2037AB8
+_08132344: .4byte gPaletteFade
 _08132348: .4byte gUnknown_203B116
 _0813234C: .4byte gMain
 _08132350: .4byte gUnknown_203AD30
@@ -2770,7 +2770,7 @@ sub_8132F20: @ 8132F20
 	lsls r3, r1, 3
 	ldr r4, _08132F54 @ =gTasks+0x8
 	adds r2, r3, r4
-	ldr r0, _08132F58 @ =gUnknown_2037AB8
+	ldr r0, _08132F58 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2791,7 +2791,7 @@ _08132F4E:
 	bx r0
 	.align 2, 0
 _08132F54: .4byte gTasks+0x8
-_08132F58: .4byte gUnknown_2037AB8
+_08132F58: .4byte gPaletteFade
 _08132F5C: .4byte sub_8132F60
 	thumb_func_end sub_8132F20
 
@@ -2873,7 +2873,7 @@ _08133008:
 	.align 2, 0
 _08133020: .4byte 0xffff8405
 _08133024:
-	ldr r0, _0813304C @ =gUnknown_2037AB8
+	ldr r0, _0813304C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2895,7 +2895,7 @@ _08133046:
 	strh r1, [r6, 0x12]
 	b _081331EA
 	.align 2, 0
-_0813304C: .4byte gUnknown_2037AB8
+_0813304C: .4byte gPaletteFade
 _08133050:
 	movs r0, 0x12
 	ldrsh r1, [r6, r0]
@@ -3035,7 +3035,7 @@ _0813315C:
 	.align 2, 0
 _0813316C: .4byte gMain
 _08133170:
-	ldr r0, _081331F4 @ =gUnknown_2037AB8
+	ldr r0, _081331F4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3075,8 +3075,8 @@ _08133170:
 	ldrh r1, [r1]
 	strh r1, [r2, 0xA]
 	bl Free
-	ldr r0, _08133208 @ =gUnknown_20375F8
-	ldr r1, _0813320C @ =gUnknown_20371F8
+	ldr r0, _08133208 @ =gPlttBufferFaded
+	ldr r1, _0813320C @ =gPlttBufferUnfaded
 	movs r2, 0x80
 	lsls r2, 1
 	bl CpuFastSet
@@ -3095,15 +3095,15 @@ _081331EA:
 	strh r0, [r6, 0x10]
 	b _08133232
 	.align 2, 0
-_081331F4: .4byte gUnknown_2037AB8
+_081331F4: .4byte gPaletteFade
 _081331F8: .4byte gSaveBlock1Ptr
 _081331FC: .4byte 0x00000464
 _08133200: .4byte gUnknown_203B11C
 _08133204: .4byte gUnknown_203B10C
-_08133208: .4byte gUnknown_20375F8
-_0813320C: .4byte gUnknown_20371F8
+_08133208: .4byte gPlttBufferFaded
+_0813320C: .4byte gPlttBufferUnfaded
 _08133210:
-	ldr r0, _0813323C @ =gUnknown_2037AB8
+	ldr r0, _0813323C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3122,7 +3122,7 @@ _08133232:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813323C: .4byte gUnknown_2037AB8
+_0813323C: .4byte gPaletteFade
 _08133240: .4byte gUnknown_203B10C
 	thumb_func_end sub_8132F60
 

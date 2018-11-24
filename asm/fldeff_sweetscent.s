@@ -41,14 +41,14 @@ hm2_sweet_scent: @ 80DE0E8
 	movs r0, 0x33
 	bl FieldEffectStart
 	bl GetCursorSelectionMonId
-	ldr r1, _080DE100 @ =gUnknown_20386E0
+	ldr r1, _080DE100 @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE100: .4byte gUnknown_20386E0
+_080DE100: .4byte gFieldEffectArguments
 	thumb_func_end hm2_sweet_scent
 
 	thumb_func_start FldEff_SweetScent
@@ -87,13 +87,13 @@ sub_80DE134: @ 80DE134
 	bl Alloc
 	adds r1, r0, 0
 	str r1, [r4]
-	ldr r4, _080DE1BC @ =gUnknown_20371F8
+	ldr r4, _080DE1BC @ =gPlttBufferUnfaded
 	movs r5, 0x80
 	lsls r5, 1
 	adds r0, r4, 0
 	adds r2, r5, 0
 	bl CpuFastSet
-	ldr r0, _080DE1C0 @ =gUnknown_20375F8
+	ldr r0, _080DE1C0 @ =gPlttBufferFaded
 	adds r1, r4, 0
 	adds r2, r5, 0
 	bl CpuFastSet
@@ -137,8 +137,8 @@ sub_80DE134: @ 80DE134
 	bx r0
 	.align 2, 0
 _080DE1B8: .4byte gUnknown_203AAB0
-_080DE1BC: .4byte gUnknown_20371F8
-_080DE1C0: .4byte gUnknown_20375F8
+_080DE1BC: .4byte gPlttBufferUnfaded
+_080DE1C0: .4byte gPlttBufferFaded
 _080DE1C4: .4byte gSprites
 _080DE1C8: .4byte sub_80DE1D0
 _080DE1CC: .4byte gTasks
@@ -155,7 +155,7 @@ sub_80DE1D0: @ 80DE1D0
 	lsls r5, r0, 3
 	ldr r6, _080DE21C @ =gTasks+0x8
 	adds r2, r5, r6
-	ldr r0, _080DE220 @ =gUnknown_2037AB8
+	ldr r0, _080DE220 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -182,7 +182,7 @@ sub_80DE1D0: @ 80DE1D0
 	b _080DE26C
 	.align 2, 0
 _080DE21C: .4byte gTasks+0x8
-_080DE220: .4byte gUnknown_2037AB8
+_080DE220: .4byte gPaletteFade
 _080DE224: .4byte gUnknown_203AAB0
 _080DE228:
 	adds r0, r6, 0
@@ -229,7 +229,7 @@ sub_80DE274: @ 80DE274
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _080DE2B0 @ =gUnknown_2037AB8
+	ldr r0, _080DE2B0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -237,7 +237,7 @@ sub_80DE274: @ 80DE274
 	bne _080DE2AA
 	ldr r4, _080DE2B4 @ =gUnknown_203AAB0
 	ldr r0, [r4]
-	ldr r1, _080DE2B8 @ =gUnknown_20371F8
+	ldr r1, _080DE2B8 @ =gPlttBufferUnfaded
 	movs r2, 0x80
 	lsls r2, 1
 	bl CpuFastSet
@@ -253,9 +253,9 @@ _080DE2AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE2B0: .4byte gUnknown_2037AB8
+_080DE2B0: .4byte gPaletteFade
 _080DE2B4: .4byte gUnknown_203AAB0
-_080DE2B8: .4byte gUnknown_20371F8
+_080DE2B8: .4byte gPlttBufferUnfaded
 _080DE2BC: .4byte gUnknown_81BE564
 	thumb_func_end sub_80DE274
 

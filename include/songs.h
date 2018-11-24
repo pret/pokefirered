@@ -1,6 +1,8 @@
 #ifndef GUARD_SONGS_H
 #define GUARD_SONGS_H
 
+#include "global.h"
+
 enum
 {
     /*0x00*/ SE_STOP,

@@ -60,5 +60,8 @@ u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
 u16 itemid_get_market_price(u16 itemId);
+void sub_809A2DC(void);
+void sub_809A2A4(void);
+void sub_8099E90(u16, u8 *);
 
 #endif // ITEM_H

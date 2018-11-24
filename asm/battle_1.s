@@ -228,7 +228,7 @@ sub_800F380: @ 800F380
 	movs r1, 0x22
 	movs r2, 0x10
 	bl sub_815001C
-	ldr r4, _0800F3F0 @ =gUnknown_20371F8
+	ldr r4, _0800F3F0 @ =gPlttBufferUnfaded
 	adds r0, r4, 0
 	adds r0, 0xB8
 	ldr r1, _0800F3F4 @ =0x00002529
@@ -242,7 +242,7 @@ sub_800F380: @ 800F380
 	adds r2, 0x2
 	ldr r1, _0800F3FC @ =0x0000675a
 	strh r1, [r2]
-	ldr r5, _0800F400 @ =gUnknown_20376B0
+	ldr r5, _0800F400 @ =gPlttBufferFaded + 0xB8
 	adds r1, r5, 0
 	movs r2, 0x4
 	bl CpuSet
@@ -271,11 +271,11 @@ _0800F3EA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F3F0: .4byte gUnknown_20371F8
+_0800F3F0: .4byte gPlttBufferUnfaded
 _0800F3F4: .4byte 0x00002529
 _0800F3F8: .4byte 0x00007fff
 _0800F3FC: .4byte 0x0000675a
-_0800F400: .4byte gUnknown_20376B0
+_0800F400: .4byte gPlttBufferFaded + 0xB8
 _0800F404: .4byte gBattleTypeFlags
 _0800F408: .4byte 0x00010010
 	thumb_func_end sub_800F380
@@ -703,7 +703,7 @@ _0800F734:
 	movs r5, 0
 	movs r6, 0x3
 _0800F744:
-	ldr r0, _0800F760 @ =gUnknown_2022744
+	ldr r0, _0800F760 @ =gLinkPlayers + 8
 	adds r1, r5, r0
 	subs r0, 0x8
 	adds r4, r5, r0
@@ -717,7 +717,7 @@ _0800F744:
 	b _0800F7C2
 	.align 2, 0
 _0800F75C: .4byte gBattleTypeFlags
-_0800F760: .4byte gUnknown_2022744
+_0800F760: .4byte gLinkPlayers + 8
 _0800F764:
 	cmp r0, 0x2
 	beq _0800F790
@@ -838,12 +838,12 @@ _0800F850:
 	ldr r0, _0800F8CC @ =0x00002710
 	bl AllocSpritePalette
 	lsls r0, 24
-	ldr r2, _0800F8D0 @ =gUnknown_20371F8
+	ldr r2, _0800F8D0 @ =gPlttBufferUnfaded
 	lsrs r0, 19
 	ldr r3, _0800F8D4 @ =0x0000021e
 	adds r0, r3
 	adds r2, r0, r2
-	ldr r1, _0800F8D8 @ =gUnknown_20375F8
+	ldr r1, _0800F8D8 @ =gPlttBufferFaded
 	adds r0, r1
 	ldr r1, _0800F8DC @ =0x00007fff
 	strh r1, [r0]
@@ -895,9 +895,9 @@ _0800F850:
 	b _0800FAC4
 	.align 2, 0
 _0800F8CC: .4byte 0x00002710
-_0800F8D0: .4byte gUnknown_20371F8
+_0800F8D0: .4byte gPlttBufferUnfaded
 _0800F8D4: .4byte 0x0000021e
-_0800F8D8: .4byte gUnknown_20375F8
+_0800F8D8: .4byte gPlttBufferFaded
 _0800F8DC: .4byte 0x00007fff
 _0800F8E0: .4byte gUnknown_82482E8
 _0800F8E4: .4byte gBattleStruct

@@ -89,7 +89,7 @@ sub_814BBB8: @ 814BBB8
 	lsls r4, 8
 	ldrb r2, [r1, 0x7]
 	orrs r4, r2
-	ldr r5, _0814BC0C @ =gUnknown_2037AB8
+	ldr r5, _0814BC0C @ =gPaletteFade
 	ldrb r3, [r5, 0x8]
 	movs r2, 0x7F
 	ands r2, r3
@@ -110,7 +110,7 @@ sub_814BBB8: @ 814BBB8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0814BC0C: .4byte gUnknown_2037AB8
+_0814BC0C: .4byte gPaletteFade
 	thumb_func_end sub_814BBB8
 
 	thumb_func_start sub_814BC10

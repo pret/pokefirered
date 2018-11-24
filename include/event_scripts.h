@@ -5,6 +5,8 @@
 #ifndef GUARD_EVENT_SCRIPTS_H
 #define GUARD_EVENT_SCRIPTS_H
 
+#include "global.h"
+
 extern const u8 gUnknown_0823B4E8[];
 extern const u8 gUnknown_0823B5E9[];
 extern const u8 EventScript_275BB7[];
@@ -373,6 +375,8 @@ extern const u8 SecretBase_RedCave1_Text_2751E1[];
 extern const u8 SecretBase_RedCave1_Text_2754F6[];
 extern const u8 SecretBase_RedCave1_Text_2758CC[];
 
+extern const u8 gUnknown_84178D0[];
+extern const u8 gUnknown_84178DA[];
 // vs_seeker
 extern const u8 gUnknown_81C137C[];
 extern const u8 gUnknown_81C13D6[];

@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_2_H
 #define GUARD_BATTLE_2_H
 
+#include "global.h"
+
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
 void CB2_QuitRecordedBattle(void);

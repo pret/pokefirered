@@ -1731,12 +1731,12 @@ _0814315C:
 	movs r0, 0xB
 	strb r0, [r5, 0x8]
 	ldr r0, _0814316C @ =gStringVar1
-	ldr r1, _08143170 @ =gUnknown_2022744
+	ldr r1, _08143170 @ =gLinkPlayers + 8
 	bl StringCopy
 	b _081435C6
 	.align 2, 0
 _0814316C: .4byte gStringVar1
-_08143170: .4byte gUnknown_2022744
+_08143170: .4byte gLinkPlayers + 8
 _08143174:
 	adds r4, r5, 0
 	adds r4, 0x9
@@ -1847,7 +1847,7 @@ _08143242:
 	cmp r0, 0x1
 	bne _08143250
 	ldr r0, _0814325C @ =gStringVar1
-	ldr r1, _08143260 @ =gUnknown_2022744
+	ldr r1, _08143260 @ =gLinkPlayers + 8
 	bl StringCopy
 _08143250:
 	movs r0, 0xF
@@ -1856,7 +1856,7 @@ _08143250:
 	.align 2, 0
 _08143258: .4byte gUnknown_841E7A3
 _0814325C: .4byte gStringVar1
-_08143260: .4byte gUnknown_2022744
+_08143260: .4byte gLinkPlayers + 8
 _08143264:
 	ldrb r1, [r5, 0xC]
 	ldrb r2, [r5, 0xD]
@@ -2229,14 +2229,14 @@ _08143514:
 _08143528:
 	bl task_add_05_task_del_08FA224_when_no_RfuFunc
 	ldr r0, _0814353C @ =gStringVar1
-	ldr r1, _08143540 @ =gUnknown_2022760
+	ldr r1, _08143540 @ =gLinkPlayers + 0x24
 	bl StringCopy
 	movs r0, 0x22
 	strb r0, [r5, 0x8]
 	b _081435C6
 	.align 2, 0
 _0814353C: .4byte gStringVar1
-_08143540: .4byte gUnknown_2022760
+_08143540: .4byte gLinkPlayers + 0x24
 _08143544:
 	bl sub_80FA4F8
 	lsls r0, 24

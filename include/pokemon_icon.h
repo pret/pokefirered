@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_ICON_H
 #define GUARD_POKEMON_ICON_H
 
+#include "global.h"
+
 const u8 *GetMonIconPtr(u16 speciesId, u32 personality, u32 frameNo);
 const u16 *GetValidMonIconPalettePtr(u16 speciesId);
 u16 sub_80D2E84(u16 speciesId);

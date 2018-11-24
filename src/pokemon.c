@@ -1,3 +1,5 @@
+#define IS_POKEMON_C
+
 #include "global.h"
 #include "pokemon.h"
 #include "random.h"

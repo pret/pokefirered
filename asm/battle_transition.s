@@ -138,8 +138,8 @@ Transition_Phase1: @ 80D09B0
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_807B05C
-	ldr r0, _080D09DC @ =gUnknown_20375F8
-	ldr r1, _080D09E0 @ =gUnknown_20371F8
+	ldr r0, _080D09DC @ =gPlttBufferFaded
+	ldr r1, _080D09E0 @ =gPlttBufferUnfaded
 	ldr r2, _080D09E4 @ =0x04000100
 	bl CpuSet
 	ldr r1, _080D09E8 @ =gUnknown_83FA320
@@ -155,8 +155,8 @@ Transition_Phase1: @ 80D09B0
 	movs r0, 0x1
 	b _080D09FA
 	.align 2, 0
-_080D09DC: .4byte gUnknown_20375F8
-_080D09E0: .4byte gUnknown_20371F8
+_080D09DC: .4byte gPlttBufferFaded
+_080D09E0: .4byte gPlttBufferUnfaded
 _080D09E4: .4byte 0x04000100
 _080D09E8: .4byte gUnknown_83FA320
 _080D09EC:
@@ -407,7 +407,7 @@ _080D0B9E:
 	thumb_func_start sub_80D0BA8
 sub_80D0BA8: @ 80D0BA8
 	push {lr}
-	ldr r0, _080D0BCC @ =gUnknown_2037AB8
+	ldr r0, _080D0BCC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -423,7 +423,7 @@ _080D0BC4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0BCC: .4byte gUnknown_2037AB8
+_080D0BCC: .4byte gPaletteFade
 _080D0BD0: .4byte sub_80D0ADC
 	thumb_func_end sub_80D0BA8
 
@@ -533,7 +533,7 @@ sub_80D0C78: @ 80D0C78
 	adds r0, r3, 0
 	movs r3, 0x2
 	bl sub_80D3E74
-	ldr r0, _080D0CE8 @ =gUnknown_2037AB8
+	ldr r0, _080D0CE8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -558,7 +558,7 @@ _080D0CCA:
 	.align 2, 0
 _080D0CE0: .4byte gUnknown_2039A2C
 _080D0CE4: .4byte gUnknown_2038700
-_080D0CE8: .4byte gUnknown_2037AB8
+_080D0CE8: .4byte gPaletteFade
 _080D0CEC: .4byte sub_80D0BD4
 	thumb_func_end sub_80D0C78
 
@@ -733,7 +733,7 @@ _080D0E18:
 	lsrs r4, r0, 16
 	cmp r5, 0x9F
 	bls _080D0E18
-	ldr r0, _080D0E78 @ =gUnknown_2037AB8
+	ldr r0, _080D0E78 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -757,7 +757,7 @@ _080D0E5E:
 	.align 2, 0
 _080D0E70: .4byte gUnknown_2039A2C
 _080D0E74: .4byte gUnknown_2038700
-_080D0E78: .4byte gUnknown_2037AB8
+_080D0E78: .4byte gPaletteFade
 _080D0E7C: .4byte sub_80D0D54
 	thumb_func_end sub_80D0DF0
 
@@ -1522,7 +1522,7 @@ Phase2_Transition_PokeballsTrail_Func2: @ 80D144C
 	ands r5, r0
 	movs r1, 0
 	mov r8, r4
-	ldr r6, _080D14D4 @ =gUnknown_20386E0
+	ldr r6, _080D14D4 @ =gFieldEffectArguments
 _080D147A:
 	lsls r5, 16
 	asrs r5, 16
@@ -1567,7 +1567,7 @@ _080D147A:
 	.align 2, 0
 _080D14CC: .4byte gUnknown_83FA400
 _080D14D0: .4byte gUnknown_83FA404
-_080D14D4: .4byte gUnknown_20386E0
+_080D14D4: .4byte gFieldEffectArguments
 	thumb_func_end Phase2_Transition_PokeballsTrail_Func2
 
 	thumb_func_start Phase2_Transition_PokeballsTrail_Func3
@@ -1596,7 +1596,7 @@ _080D1500: .4byte sub_80D13C8
 FldEff_Pokeball: @ 80D1504
 	push {r4,r5,lr}
 	ldr r0, _080D1560 @ =gUnknown_83FA5CC
-	ldr r5, _080D1564 @ =gUnknown_20386E0
+	ldr r5, _080D1564 @ =gFieldEffectArguments
 	movs r2, 0
 	ldrsh r1, [r5, r2]
 	movs r3, 0x4
@@ -1639,7 +1639,7 @@ FldEff_Pokeball: @ 80D1504
 	bx r1
 	.align 2, 0
 _080D1560: .4byte gUnknown_83FA5CC
-_080D1564: .4byte gUnknown_20386E0
+_080D1564: .4byte gFieldEffectArguments
 _080D1568: .4byte gSprites
 _080D156C: .4byte 0x0000ffff
 	thumb_func_end FldEff_Pokeball
@@ -2559,7 +2559,7 @@ _080D1C78:
 	ldrsh r0, [r6, r5]
 	cmp r0, 0
 	beq _080D1C9A
-	ldr r0, _080D1CC0 @ =gUnknown_2037AB8
+	ldr r0, _080D1CC0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2588,7 +2588,7 @@ _080D1C9A:
 _080D1CB4: .4byte gUnknown_2039A2C
 _080D1CB8: .4byte 0x1fff0000
 _080D1CBC: .4byte gUnknown_2038700
-_080D1CC0: .4byte gUnknown_2037AB8
+_080D1CC0: .4byte gPaletteFade
 _080D1CC4: .4byte sub_80D1B58
 	thumb_func_end sub_80D1BE8
 

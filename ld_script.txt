@@ -219,13 +219,13 @@ SECTIONS {
         asm/item_pc.o(.text);
         asm/mailbox_pc.o(.text);
         asm/menu.o(.text);
-        asm/quest_log.o(.text);
+        src/quest_log.o(.text);
         asm/link_rfu_3.o(.text);
         asm/pokemon_special_anim.o(.text);
         asm/party_menu.o(.text);
         asm/union_room_chat.o(.text);
         asm/help_system_812B1E0.o(.text);
-        asm/quest_log_battle.o(.text);
+        src/quest_log_battle.o(.text);
         asm/fame_checker.o(.text);
         asm/menu2.o(.text);
         asm/oak_speech.o(.text);
@@ -256,7 +256,7 @@ SECTIONS {
         asm/wireless_communication_status_screen.o(.text);
         asm/braille_text.o(.text);
         asm/text_window.o(.text);
-        asm/quest_log_8150454.o(.text);
+        src/quest_log_8150454.o(.text);
         asm/unk_81507FC.o(.text);
         asm/battle_controller_pokedude.o(.text);
         asm/unk_8159F40.o(.text);
@@ -357,6 +357,7 @@ SECTIONS {
         src/main.o(.rodata);
         src/bg.o(.rodata);
         src/malloc.o(.rodata);
+        src/malloc.o(.rodata.str1.4);
         src/text_printer.o(.rodata);
         src/window.o(.rodata);
         src/text.o(.rodata);
@@ -373,8 +374,13 @@ SECTIONS {
         data/data_83FECCC.o(.rodata);
         src/vs_seeker.o(.rodata);
         data/data_83FECCC.o(.rodata.8453F6C);
+        src/quest_log.o(.rodata);
+        data/data_83FECCC.o(.rodata.8456C74);
         src/menews_jisan.o(.rodata);
+        src/menews_jisan.o(.rodata.str1.4);
         data/data_8468C98.o(.rodata);
+        src/quest_log_8150454.o(.rodata);
+        data/data_8471F00.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

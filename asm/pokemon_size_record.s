@@ -327,7 +327,7 @@ _080A0914: .4byte 0x0000403d
 sub_80A0918: @ 80A0918
 	push {lr}
 	ldr r0, _080A092C @ =0x0000403d
-	bl sub_806E454
+	bl GetVarPointer
 	adds r1, r0, 0
 	movs r0, 0xD6
 	bl sub_80A08CC
@@ -341,7 +341,7 @@ _080A092C: .4byte 0x0000403d
 sub_80A0930: @ 80A0930
 	push {r4,lr}
 	ldr r0, _080A0950 @ =0x0000403d
-	bl sub_806E454
+	bl GetVarPointer
 	adds r1, r0, 0
 	ldr r4, _080A0954 @ =gUnknown_20370D0
 	movs r0, 0xD6
@@ -373,7 +373,7 @@ _080A0968: .4byte 0x00004040
 sub_80A096C: @ 80A096C
 	push {lr}
 	ldr r0, _080A0980 @ =0x00004040
-	bl sub_806E454
+	bl GetVarPointer
 	adds r1, r0, 0
 	movs r0, 0x81
 	bl sub_80A08CC
@@ -387,7 +387,7 @@ _080A0980: .4byte 0x00004040
 sub_80A0984: @ 80A0984
 	push {r4,lr}
 	ldr r0, _080A09A4 @ =0x00004040
-	bl sub_806E454
+	bl GetVarPointer
 	adds r1, r0, 0
 	ldr r4, _080A09A8 @ =gUnknown_20370D0
 	movs r0, 0x81

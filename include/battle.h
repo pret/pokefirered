@@ -604,7 +604,11 @@ struct BattleStruct
     u8 hpScale;
     u8 synchronizeMoveEffect;
     u8 field_B3;
-    void (*savedCallback)(void);
+    u8 field_B4;
+    u8 field_B5;
+    u8 field_B6;
+    u8 field_B7;
+    // void (*savedCallback)(void);
     u16 usedHeldItems[BATTLE_BANKS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
     u8 AI_itemType[2];

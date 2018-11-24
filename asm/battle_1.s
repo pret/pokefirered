@@ -703,7 +703,7 @@ _0800F734:
 	movs r5, 0
 	movs r6, 0x3
 _0800F744:
-	ldr r0, _0800F760 @ =gUnknown_2022744
+	ldr r0, _0800F760 @ =gLinkPlayers + 8
 	adds r1, r5, r0
 	subs r0, 0x8
 	adds r4, r5, r0
@@ -717,7 +717,7 @@ _0800F744:
 	b _0800F7C2
 	.align 2, 0
 _0800F75C: .4byte gBattleTypeFlags
-_0800F760: .4byte gUnknown_2022744
+_0800F760: .4byte gLinkPlayers + 8
 _0800F764:
 	cmp r0, 0x2
 	beq _0800F790

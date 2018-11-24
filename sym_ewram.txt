@@ -80,13 +80,7 @@ gUnknown_2022720: @ 2022720
 	.space 0x1C
 
 gLinkPlayers: @ 202273C
-	.space 0x8
-
-gUnknown_2022744: @ 2022744
-	.space 0x1C
-
-gUnknown_2022760: @ 2022760
-	.space 0x68
+	.space 0x8C
 
 gUnknown_20227C8: @ 20227C8
 	.space 0x8C

@@ -1834,11 +1834,11 @@ _080D8162:
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
-	ldr r1, _080D8170 @ =gUnknown_2022744
+	ldr r1, _080D8170 @ =gLinkPlayers + 8
 	adds r4, r0, r1
 	b _080D8382
 	.align 2, 0
-_080D8170: .4byte gUnknown_2022744
+_080D8170: .4byte gLinkPlayers + 8
 _080D8174:
 	ldr r4, _080D8184 @ =gLinkPlayers
 	lsls r0, r7, 3
@@ -1888,12 +1888,12 @@ _080D81C8:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, _080D81D8 @ =gUnknown_2022744
+	ldr r0, _080D81D8 @ =gLinkPlayers + 8
 	adds r4, r1, r0
 	b _080D8382
 	.align 2, 0
 _080D81D4: .4byte gBattleScripting
-_080D81D8: .4byte gUnknown_2022744
+_080D81D8: .4byte gLinkPlayers + 8
 _080D81DC:
 	ldr r0, _080D81E4 @ =gSaveBlock2Ptr
 	ldr r4, [r0]

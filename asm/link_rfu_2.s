@@ -9954,7 +9954,7 @@ _080FD1C8:
 	subs r0, r4
 	lsls r0, 2
 	str r0, [sp, 0x1C]
-	ldr r2, _080FD24C @ =gUnknown_2022744
+	ldr r2, _080FD24C @ =gLinkPlayers + 8
 	mov r10, r2
 	ldr r6, _080FD250 @ =0x00003ba8
 	movs r4, 0
@@ -10007,7 +10007,7 @@ _080FD22C:
 	ldr r6, [sp, 0x14]
 	b _080FD2A4
 	.align 2, 0
-_080FD24C: .4byte gUnknown_2022744
+_080FD24C: .4byte gLinkPlayers + 8
 _080FD250: .4byte 0x00003ba8
 _080FD254: .4byte gSaveBlock1Ptr
 _080FD258:

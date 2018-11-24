@@ -2408,7 +2408,7 @@ sub_8081A34: @ 8081A34
 	lsls r1, r4, 3
 	subs r1, r4
 	lsls r1, 2
-	ldr r2, _08081A7C @ =gUnknown_2022744
+	ldr r2, _08081A7C @ =gLinkPlayers + 8
 	adds r1, r2
 	bl StringCopy
 	adds r0, r4, 0
@@ -2429,7 +2429,7 @@ sub_8081A34: @ 8081A34
 	.align 2, 0
 _08081A74: .4byte gUnknown_20370C4
 _08081A78: .4byte gStringVar1
-_08081A7C: .4byte gUnknown_2022744
+_08081A7C: .4byte gLinkPlayers + 8
 _08081A80: .4byte gStringVar2
 _08081A84: .4byte gUnknown_83C6AB8
 _08081A88:

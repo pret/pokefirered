@@ -2687,7 +2687,7 @@ _08148EFA:
 	ldr r2, [sp]
 	cmp r0, 0
 	beq _08148F34
-	ldr r1, _08148F58 @ =gUnknown_2022744
+	ldr r1, _08148F58 @ =gLinkPlayers + 8
 	add r1, r9
 	adds r0, r7, 0
 	bl StringCopy
@@ -2723,7 +2723,7 @@ _08148F44:
 	bx r0
 	.align 2, 0
 _08148F54: .4byte 0x000082a8
-_08148F58: .4byte gUnknown_2022744
+_08148F58: .4byte gLinkPlayers + 8
 	thumb_func_end sub_8148E80
 
 	thumb_func_start sub_8148F5C

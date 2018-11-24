@@ -5763,13 +5763,13 @@ _081533F0:
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
-	ldr r1, _08153400 @ =gUnknown_2022744
+	ldr r1, _08153400 @ =gLinkPlayers + 8
 _081533F8:
 	adds r0, r1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08153400: .4byte gUnknown_2022744
+_08153400: .4byte gLinkPlayers + 8
 	thumb_func_end sub_81533C4
 
 	thumb_func_start sub_8153404
@@ -6605,7 +6605,7 @@ _08153A14:
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
-	ldr r1, _08153A94 @ =gUnknown_2022744
+	ldr r1, _08153A94 @ =gLinkPlayers + 8
 	adds r0, r1
 	lsls r1, r4, 2
 	adds r1, r5
@@ -6668,7 +6668,7 @@ _08153A7E:
 	.align 2, 0
 _08153A8C: .4byte gUnknown_203F3E0
 _08153A90: .4byte gUnknown_8475648
-_08153A94: .4byte gUnknown_2022744
+_08153A94: .4byte gLinkPlayers + 8
 _08153A98: .4byte gUnknown_8475608
 	thumb_func_end sub_8153A04
 

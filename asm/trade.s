@@ -664,7 +664,7 @@ _0804CB9C:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _0804CC20 @ =gUnknown_2022744
+	ldr r1, _0804CC20 @ =gLinkPlayers + 8
 	adds r0, r1
 	ldr r1, [r6, 0xC]
 	str r5, [sp]
@@ -702,7 +702,7 @@ _0804CB9C:
 _0804CC14: .4byte gSaveBlock2Ptr
 _0804CC18: .4byte gUnknown_2031C94
 _0804CC1C: .4byte gDecompressionBuffer
-_0804CC20: .4byte gUnknown_2022744
+_0804CC20: .4byte gLinkPlayers + 8
 _0804CC24: .4byte gUnknown_8261ECC
 _0804CC28: .4byte gMain
 _0804CC2C: .4byte gUnknown_2031DA8
@@ -762,7 +762,7 @@ _0804CC62:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _0804CD08 @ =gUnknown_2022744
+	ldr r1, _0804CD08 @ =gLinkPlayers + 8
 	adds r1, r0, r1
 	movs r0, 0x1
 	movs r2, 0
@@ -811,7 +811,7 @@ _0804CCC6:
 _0804CCFC: .4byte gSaveBlock2Ptr
 _0804CD00: .4byte gUnknown_8261E8A
 _0804CD04: .4byte gUnknown_8261CC8
-_0804CD08: .4byte gUnknown_2022744
+_0804CD08: .4byte gLinkPlayers + 8
 _0804CD0C: .4byte gMain
 _0804CD10:
 	ldr r4, _0804CDCC @ =gUnknown_8261CC8
@@ -1354,7 +1354,7 @@ _0804D19C:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _0804D220 @ =gUnknown_2022744
+	ldr r1, _0804D220 @ =gLinkPlayers + 8
 	adds r0, r1
 	ldr r1, [r6, 0xC]
 	str r5, [sp]
@@ -1393,7 +1393,7 @@ _0804D200:
 _0804D214: .4byte gSaveBlock2Ptr
 _0804D218: .4byte gUnknown_2031C94
 _0804D21C: .4byte gDecompressionBuffer
-_0804D220: .4byte gUnknown_2022744
+_0804D220: .4byte gLinkPlayers + 8
 _0804D224: .4byte gUnknown_8261ECC
 _0804D228: .4byte gMain
 _0804D22C: .4byte gUnknown_2031DA8
@@ -1459,7 +1459,7 @@ _0804D270:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _0804D318 @ =gUnknown_2022744
+	ldr r1, _0804D318 @ =gLinkPlayers + 8
 	adds r1, r0, r1
 	movs r0, 0x1
 	movs r2, 0
@@ -1508,7 +1508,7 @@ _0804D2D4:
 _0804D30C: .4byte gSaveBlock2Ptr
 _0804D310: .4byte gUnknown_8261E8A
 _0804D314: .4byte gUnknown_8261CC8
-_0804D318: .4byte gUnknown_2022744
+_0804D318: .4byte gLinkPlayers + 8
 _0804D31C: .4byte gMain
 _0804D320:
 	ldr r4, _0804D3B0 @ =gUnknown_8261CC8
@@ -7706,7 +7706,7 @@ _0805039C:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, _08050428 @ =gUnknown_2022744
+	ldr r0, _08050428 @ =gLinkPlayers + 8
 	adds r1, r0
 	adds r0, r4, 0
 	movs r2, 0x7
@@ -7721,7 +7721,7 @@ _08050418: .4byte gUnknown_2031DA4
 _0805041C: .4byte gPlayerParty
 _08050420: .4byte gUnknown_2031DAC
 _08050424: .4byte gEnemyParty
-_08050428: .4byte gUnknown_2022744
+_08050428: .4byte gLinkPlayers + 8
 _0805042C: .4byte gMain
 _08050430:
 	bl sub_805049C
@@ -7947,7 +7947,7 @@ _08050628:
 	strb r0, [r1]
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
-	ldr r4, _080506D4 @ =gUnknown_2022744
+	ldr r4, _080506D4 @ =gLinkPlayers + 8
 	ldr r0, _080506D8 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r4, 0
@@ -8014,7 +8014,7 @@ _08050628:
 	.align 2, 0
 _080506CC: .4byte gUnknown_2031DA4
 _080506D0: .4byte gSpecialVar_0x8005
-_080506D4: .4byte gUnknown_2022744
+_080506D4: .4byte gLinkPlayers + 8
 _080506D8: .4byte gSaveBlock2Ptr
 _080506DC: .4byte gEnemyParty
 _080506E0: .4byte gUnknown_2031DAC
@@ -8871,7 +8871,7 @@ sub_8050E24: @ 8050E24
 	lsls r1, r2, 3
 	subs r1, r2
 	lsls r1, 2
-	ldr r0, _08050E9C @ =gUnknown_2022744
+	ldr r0, _08050E9C @ =gLinkPlayers + 8
 	adds r1, r0
 	adds r0, r3, 0
 	bl StringCopy
@@ -8905,7 +8905,7 @@ sub_8050E24: @ 8050E24
 	.align 2, 0
 _08050E94: .4byte gUnknown_2031DAC
 _08050E98: .4byte gStringVar1
-_08050E9C: .4byte gUnknown_2022744
+_08050E9C: .4byte gLinkPlayers + 8
 _08050EA0: .4byte gUnknown_2031DA4
 _08050EA4: .4byte gEnemyParty
 _08050EA8: .4byte gStringVar3

@@ -2,10 +2,11 @@
 #include "constants/species.h"
 #include "malloc.h"
 #include "battle.h"
+#include "link.h"
 #include "overworld.h"
 #include "quest_log.h"
 
-struct QuestLogStruct_01
+struct QuestLogStruct_TrainerBattleRecord
 {
     u16 v0;
     u16 v2;
@@ -14,19 +15,21 @@ struct QuestLogStruct_01
     u8 v7;
 };
 
-struct QuestLogStruct_02
+struct QuestLogStruct_WildBattleRecord
 {
     u16 v0;
     u16 v2;
     u8 v4;
 };
 
+void sub_812C334(u32 *, u32 *);
+
 void sub_812BFDC(void)
 {
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_DOME)) && (gUnknown_2023E8A == 1 || gUnknown_2023E8A == 7))
     {
-        struct QuestLogStruct_01 * questLogTrainerBattleRecord = Alloc(sizeof(struct QuestLogStruct_01));
-        struct QuestLogStruct_02 * questLogWildBattleRecord = Alloc(sizeof(struct QuestLogStruct_02));
+        struct QuestLogStruct_TrainerBattleRecord * questLogTrainerBattleRecord = Alloc(sizeof(struct QuestLogStruct_TrainerBattleRecord));
+        struct QuestLogStruct_WildBattleRecord * questLogWildBattleRecord = Alloc(sizeof(struct QuestLogStruct_WildBattleRecord));
         u16 questLogMessageType;
         u16 playerEndingHP;
         u16 playerMaxHP;
@@ -93,5 +96,55 @@ void sub_812BFDC(void)
         }
         Free(questLogTrainerBattleRecord);
         Free(questLogWildBattleRecord);
+    }
+}
+
+struct QuestLogStruct_LinkBattleRecord
+{
+    u8 v0;
+    u8 v1[3][7];
+};
+
+void sub_812C224(void)
+{
+    u32 sp0;
+    u32 sp4[2];
+    u16 r8;
+    s32 r3;
+    u32 r0;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+    {
+        struct QuestLogStruct_LinkBattleRecord * r5 = Alloc(sizeof(struct QuestLogStruct_LinkBattleRecord));
+        r5->v0 = gUnknown_2023E8A - 1;
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        {
+            r8 = 15;
+            sub_812C334(&sp0, sp4);
+            for (r3 = 0; r3 < 7; r3++)
+            {
+                r5->v1[0][r3] = gLinkPlayers[sp0].name[r3];
+                r5->v1[1][r3] = gLinkPlayers[sp4[0]].name[r3];
+                r5->v1[2][r3] = gLinkPlayers[sp4[1]].name[r3];
+            }
+        }
+        else
+        {
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                r8 = 14;
+            else
+            {
+                r0 = InUnionRoom();
+                r8 = 13;
+                if (r0 == TRUE)
+                    r8 = 19;
+            }
+            for (r3 = 0; r3 < 7; r3++)
+            {
+                r5->v1[0][r3] = gLinkPlayers[gBattleStruct->field_B5 ^ 1].name[r3];
+            }
+        }
+        sub_8113550(r8, (const u16 *)r5);
+        Free(r5);
     }
 }

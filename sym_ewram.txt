@@ -47,8 +47,7 @@ gStringVar3: @ 2021D04
 gStringVar4: @ 2021D18
 	.space 0x3E8
 
-gUnknownStringVar: @ 2022100
-	.space 0x10
+    .include "src/string_util.o"
 
 gUnknown_2022110: @ 2022110
 	.space 0x1
@@ -81,13 +80,7 @@ gUnknown_2022720: @ 2022720
 	.space 0x1C
 
 gLinkPlayers: @ 202273C
-	.space 0x8
-
-gUnknown_2022744: @ 2022744
-	.space 0x1C
-
-gUnknown_2022760: @ 2022760
-	.space 0x68
+	.space 0x8C
 
 gUnknown_20227C8: @ 20227C8
 	.space 0x8C
@@ -620,7 +613,7 @@ gUnknown_2036E34: @ 2036E34
 gMapObjects: @ 2036E38
 	.space 0x240
 
-gUnknown_2037078: @ 2037078
+gPlayerAvatar: @ 2037078
 	.space 0x20
 
 gUnknown_2037098: @ 2037098
@@ -746,52 +739,16 @@ gUnknown_2037104: @ 2037104
 gUnknown_2037108: @ 2037108
 	.space 0xF0
 
-gUnknown_20371F8: @ 20371F8
-	.space 0x2
+gPlttBufferUnfaded: @ 20371F8
+	.space 0x400
 
-gUnknown_20371FA: @ 20371FA
-	.space 0x1E
-
-gUnknown_2037218: @ 2037218
-	.space 0x20
-
-gUnknown_2037238: @ 2037238
-	.space 0x20
-
-gUnknown_2037258: @ 2037258
-	.space 0x20
-
-gUnknown_2037278: @ 2037278
-	.space 0x120
-
-gUnknown_2037398: @ 2037398
-	.space 0x60
-
-gUnknown_20373F8: @ 20373F8
-	.space 0x10
-
-gUnknown_2037408: @ 2037408
-	.space 0x1F0
-
-gUnknown_20375F8: @ 20375F8
-	.space 0x2
-
-gUnknown_20375FA: @ 20375FA
-	.space 0x3E
-
-gUnknown_2037638: @ 2037638
-	.space 0x78
-
-gUnknown_20376B0: @ 20376B0
-	.space 0x148
-
-gUnknown_20377F8: @ 20377F8
-	.space 0x200
+gPlttBufferFaded: @ 20375F8
+	.space 0x400
 
 gUnknown_20379F8: @ 20379F8
 	.space 0xC0
 
-gUnknown_2037AB8: @ 2037AB8
+gPaletteFade: @ 2037AB8
 	.space 0x10
 
 gUnknown_2037AC8: @ 2037AC8
@@ -932,7 +889,7 @@ gUnknown_20386D0: @ 20386D0
 gUnknown_20386DC: @ 20386DC
 	.space 0x4
 
-gUnknown_20386E0: @ 20386E0
+gFieldEffectArguments: @ 20386E0
 	.space 0x20
 
 gUnknown_2038700: @ 2038700
@@ -1492,77 +1449,7 @@ gUnknown_203ADF3: @ 203ADF3
 gUnknown_203ADF4: @ 203ADF4
 	.space 0x4
 
-gUnknown_203ADF8: @ 203ADF8
-	.space 0x1
-
-gUnknown_203ADF9: @ 203ADF9
-	.space 0x1
-
-gUnknown_203ADFA: @ 203ADFA
-	.space 0x2
-
-gUnknown_203ADFC: @ 203ADFC
-	.space 0x2
-
-gUnknown_203ADFE: @ 203ADFE
-	.space 0x6
-
-gUnknown_203AE04: @ 203AE04
-	.space 0x4
-
-gUnknown_203AE08: @ 203AE08
-	.space 0x4
-
-gUnknown_203AE0C: @ 203AE0C
-	.space 0x80
-
-gUnknown_203AE8C: @ 203AE8C
-	.space 0x4
-
-gUnknown_203AE90: @ 203AE90
-	.space 0x4
-
-gUnknown_203AE94: @ 203AE94
-	.space 0x4
-
-gUnknown_203AE98: @ 203AE98
-	.space 0x100
-
-gUnknown_203AF98: @ 203AF98
-	.space 0x2
-
-gUnknown_203AF9A: @ 203AF9A
-	.space 0x80
-
-gUnknown_203B01A: @ 203B01A
-	.space 0x2
-
-gUnknown_203B01C: @ 203B01C
-	.space 0x2
-
-gUnknown_203B01E: @ 203B01E
-	.space 0x2
-
-gUnknown_203B020: @ 203B020
-	.space 0x4
-
-gUnknown_203B024: @ 203B024
-	.space 0x20
-
-gUnknown_203B044: @ 203B044
-	.space 0x4
-
-gUnknown_203B048: @ 203B048
-	.space 0x1
-
-gUnknown_203B049: @ 203B049
-	.space 0x1
-
-gUnknown_203B04A: @ 203B04A
-	.space 0x1
-
-gUnknown_203B04B: @ 203B04B
-	.space 0x1
+	.include "src/quest_log.o"
 
 gUnknown_203B04C: @ 203B04C
 	.space 0xC

@@ -130,7 +130,7 @@ _080F1EBC: .4byte sub_80F1DAC
 _080F1EC0: .4byte gMain
 _080F1EC4:
 	bl UpdatePaletteFade
-	ldr r0, _080F1EE8 @ =gUnknown_2037AB8
+	ldr r0, _080F1EE8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -144,7 +144,7 @@ _080F1EC4:
 	movs r0, 0
 	b _080F1EF2
 	.align 2, 0
-_080F1EE8: .4byte gUnknown_2037AB8
+_080F1EE8: .4byte gPaletteFade
 _080F1EEC: .4byte sub_80F1DC0
 _080F1EF0:
 	movs r0, 0x1
@@ -1330,8 +1330,8 @@ Task_Hof_HandlePaletteOnExit: @ 80F283C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080F287C @ =gUnknown_20375F8
-	ldr r1, _080F2880 @ =gUnknown_20371F8
+	ldr r0, _080F287C @ =gPlttBufferFaded
+	ldr r1, _080F2880 @ =gPlttBufferUnfaded
 	movs r2, 0x80
 	lsls r2, 2
 	bl CpuSet
@@ -1355,8 +1355,8 @@ Task_Hof_HandlePaletteOnExit: @ 80F283C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F287C: .4byte gUnknown_20375F8
-_080F2880: .4byte gUnknown_20371F8
+_080F287C: .4byte gPlttBufferFaded
+_080F2880: .4byte gPlttBufferUnfaded
 _080F2884: .4byte gTasks
 _080F2888: .4byte Task_Hof_HandleExit
 	thumb_func_end Task_Hof_HandlePaletteOnExit
@@ -1366,7 +1366,7 @@ Task_Hof_HandleExit: @ 80F288C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, _080F2924 @ =gUnknown_2037AB8
+	ldr r0, _080F2924 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1432,7 +1432,7 @@ _080F291E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2924: .4byte gUnknown_2037AB8
+_080F2924: .4byte gPaletteFade
 _080F2928: .4byte gTasks
 _080F292C: .4byte gUnknown_203AB3C
 _080F2930: .4byte gUnknown_203AB38
@@ -2256,8 +2256,8 @@ sub_80F2FEC: @ 80F2FEC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080F3020 @ =gUnknown_20375F8
-	ldr r1, _080F3024 @ =gUnknown_20371F8
+	ldr r0, _080F3020 @ =gPlttBufferFaded
+	ldr r1, _080F3024 @ =gPlttBufferUnfaded
 	movs r2, 0x80
 	lsls r2, 2
 	bl CpuSet
@@ -2276,8 +2276,8 @@ sub_80F2FEC: @ 80F2FEC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F3020: .4byte gUnknown_20375F8
-_080F3024: .4byte gUnknown_20371F8
+_080F3020: .4byte gPlttBufferFaded
+_080F3024: .4byte gPlttBufferUnfaded
 _080F3028: .4byte gTasks
 _080F302C: .4byte sub_80F3030
 	thumb_func_end sub_80F2FEC

@@ -5,6 +5,8 @@
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
+#include "global.h"
+
 extern const u8 gInterfaceGfx_PokeBall[];
 extern const u8 gInterfacePal_PokeBall[];
 extern const u8 gInterfaceGfx_GreatBall[];

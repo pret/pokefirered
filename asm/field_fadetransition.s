@@ -11,7 +11,7 @@ palette_bg_faded_fill_white: @ 807DB14
 	sub sp, 0x4
 	ldr r0, _0807DB2C @ =0x7fff7fff
 	str r0, [sp]
-	ldr r1, _0807DB30 @ =gUnknown_20375F8
+	ldr r1, _0807DB30 @ =gPlttBufferFaded
 	ldr r2, _0807DB34 @ =0x01000100
 	mov r0, sp
 	bl CpuFastSet
@@ -20,7 +20,7 @@ palette_bg_faded_fill_white: @ 807DB14
 	bx r0
 	.align 2, 0
 _0807DB2C: .4byte 0x7fff7fff
-_0807DB30: .4byte gUnknown_20375F8
+_0807DB30: .4byte gPlttBufferFaded
 _0807DB34: .4byte 0x01000100
 	thumb_func_end palette_bg_faded_fill_white
 
@@ -30,7 +30,7 @@ palette_bg_faded_fill_black: @ 807DB38
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, _0807DB50 @ =gUnknown_20375F8
+	ldr r1, _0807DB50 @ =gPlttBufferFaded
 	ldr r2, _0807DB54 @ =0x01000100
 	mov r0, sp
 	bl CpuFastSet
@@ -38,7 +38,7 @@ palette_bg_faded_fill_black: @ 807DB38
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807DB50: .4byte gUnknown_20375F8
+_0807DB50: .4byte gPlttBufferFaded
 _0807DB54: .4byte 0x01000100
 	thumb_func_end palette_bg_faded_fill_black
 
@@ -461,7 +461,7 @@ sub_807DE78: @ 807DE78
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
@@ -1125,12 +1125,12 @@ _0807E408: .4byte task_mpl_807E3C8
 
 	thumb_func_start sub_807E40C
 sub_807E40C: @ 807E40C
-	ldr r0, _0807E414 @ =gUnknown_2037AB8
+	ldr r0, _0807E414 @ =gPaletteFade
 	ldrb r0, [r0, 0x7]
 	lsrs r0, 7
 	bx lr
 	.align 2, 0
-_0807E414: .4byte gUnknown_2037AB8
+_0807E414: .4byte gPaletteFade
 	thumb_func_end sub_807E40C
 
 	thumb_func_start sub_807E418
@@ -1831,7 +1831,7 @@ sub_807E980: @ 807E980
 	lsls r0, 3
 	ldr r1, _0807E9C0 @ =gTasks+0x8
 	adds r5, r0, r1
-	ldr r2, _0807E9C4 @ =gUnknown_2037078
+	ldr r2, _0807E9C4 @ =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1855,7 +1855,7 @@ sub_807E980: @ 807E980
 	b _0807EA9A
 	.align 2, 0
 _0807E9C0: .4byte gTasks+0x8
-_0807E9C4: .4byte gUnknown_2037078
+_0807E9C4: .4byte gPlayerAvatar
 _0807E9C8: .4byte gMapObjects
 _0807E9CC: .4byte gSprites
 _0807E9D0:
@@ -1984,7 +1984,7 @@ sub_807EAC4: @ 807EAC4
 	lsls r0, 16
 	lsrs r0, 16
 	mov r12, r0
-	ldr r3, _0807EB58 @ =gUnknown_2037078
+	ldr r3, _0807EB58 @ =gPlayerAvatar
 	ldrb r2, [r3, 0x4]
 	lsls r0, r2, 4
 	adds r0, r2
@@ -2049,7 +2049,7 @@ _0807EB4C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807EB58: .4byte gUnknown_2037078
+_0807EB58: .4byte gPlayerAvatar
 _0807EB5C: .4byte gSprites
 _0807EB60: .4byte gMapObjects
 	thumb_func_end sub_807EAC4
@@ -2064,7 +2064,7 @@ sub_807EB64: @ 807EB64
 	mov r8, r2
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r0, _0807EBB4 @ =gUnknown_2037078
+	ldr r0, _0807EBB4 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -2092,7 +2092,7 @@ sub_807EB64: @ 807EB64
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807EBB4: .4byte gUnknown_2037078
+_0807EBB4: .4byte gPlayerAvatar
 _0807EBB8: .4byte gMapObjects
 	thumb_func_end sub_807EB64
 
@@ -2247,7 +2247,7 @@ sub_807ECBC: @ 807ECBC
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
@@ -2266,7 +2266,7 @@ _0807ED06:
 _0807ED0A:
 	movs r1, 0x4
 _0807ED0C:
-	ldr r0, _0807ED94 @ =gUnknown_2037078
+	ldr r0, _0807ED94 @ =gPlayerAvatar
 	mov r8, r0
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
@@ -2332,7 +2332,7 @@ _0807ED0C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807ED94: .4byte gUnknown_2037078
+_0807ED94: .4byte gPlayerAvatar
 _0807ED98: .4byte gMapObjects
 _0807ED9C: .4byte gSprites
 	thumb_func_end sub_807ECBC
@@ -2343,7 +2343,7 @@ sub_807EDA0: @ 807EDA0
 	adds r5, r0, 0
 	adds r6, r1, 0
 	ldr r4, [sp, 0x14]
-	ldr r0, _0807EDC8 @ =gUnknown_2037078
+	ldr r0, _0807EDC8 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -2359,7 +2359,7 @@ sub_807EDA0: @ 807EDA0
 	movs r0, 0
 	b _0807EDF8
 	.align 2, 0
-_0807EDC8: .4byte gUnknown_2037078
+_0807EDC8: .4byte gPlayerAvatar
 _0807EDCC: .4byte gSprites
 _0807EDD0:
 	ldrh r0, [r5]

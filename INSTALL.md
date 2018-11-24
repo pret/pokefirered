@@ -50,3 +50,9 @@ If the command for building pokefirered.gba does not work, run `nproc` and use t
 ## Windows 10
 
 Install the [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10), then install [devkitARM](https://devkitpro.org/wiki/Getting_Started) inside the subsystem, and run the commands.
+
+## Important note for all users
+
+Until further notice, this repository is dependent on `baserom.gba`, which is a copy of Pokémon FireRed (U)(1.0) bearing the SHA1 sum `41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc`.  If you attempt to build and get the following error or similar, it's because `baserom.gba` is missing.
+
+    No rule to make target 'build/firered/data/librfu_rodata.o', needed by 'pokefirered.elf'. Stop.

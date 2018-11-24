@@ -388,7 +388,7 @@ _0814F4D4:
 	bl ShowBg
 	b _0814F618
 _0814F4F8:
-	ldr r0, _0814F510 @ =gUnknown_2037AB8
+	ldr r0, _0814F510 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -402,7 +402,7 @@ _0814F506:
 	adds r0, r2
 	b _0814F622
 	.align 2, 0
-_0814F510: .4byte gUnknown_2037AB8
+_0814F510: .4byte gPaletteFade
 _0814F514:
 	ldr r0, _0814F570 @ =gUnknown_3002040
 	ldr r0, [r0]
@@ -541,7 +541,7 @@ _0814F622:
 	.align 2, 0
 _0814F62C: .4byte gTasks
 _0814F630:
-	ldr r0, _0814F654 @ =gUnknown_2037AB8
+	ldr r0, _0814F654 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -559,7 +559,7 @@ _0814F648:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814F654: .4byte gUnknown_2037AB8
+_0814F654: .4byte gPaletteFade
 _0814F658: .4byte sub_814F32C
 	thumb_func_end sub_814F46C
 

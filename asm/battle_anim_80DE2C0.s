@@ -606,7 +606,7 @@ sub_80DE718: @ 80DE718
 	asrs r0, 16
 	cmp r0, 0x4
 	bne _080DE788
-	ldr r0, _080DE7A8 @ =gUnknown_20375F8
+	ldr r0, _080DE7A8 @ =gPlttBufferFaded
 	lsls r2, r6, 4
 	adds r1, r2, 0
 	adds r1, 0xB
@@ -658,7 +658,7 @@ _080DE798:
 	bx r0
 	.align 2, 0
 _080DE7A4: .4byte gTasks
-_080DE7A8: .4byte gUnknown_20375F8
+_080DE7A8: .4byte gPlttBufferFaded
 _080DE7AC: .4byte gUnknown_2037F02
 _080DE7B0: .4byte 0x0000ffff
 	thumb_func_end sub_80DE718
@@ -711,7 +711,7 @@ sub_80DE7DC: @ 80DE7DC
 	asrs r0, 16
 	cmp r0, 0x4
 	bne _080DE87E
-	ldr r0, _080DE8A0 @ =gUnknown_20375F8
+	ldr r0, _080DE8A0 @ =gPlttBufferFaded
 	lsls r2, r7, 4
 	adds r1, r2, 0
 	adds r1, 0xB
@@ -722,7 +722,7 @@ sub_80DE7DC: @ 80DE7DC
 	mov r10, r3
 	mov r9, r0
 	adds r5, r2, 0
-	ldr r2, _080DE8A4 @ =gUnknown_20371F8
+	ldr r2, _080DE8A4 @ =gPlttBufferUnfaded
 	mov r12, r2
 	lsls r0, r7, 5
 	add r0, r9
@@ -787,8 +787,8 @@ _080DE88E:
 	bx r0
 	.align 2, 0
 _080DE89C: .4byte gTasks
-_080DE8A0: .4byte gUnknown_20375F8
-_080DE8A4: .4byte gUnknown_20371F8
+_080DE8A0: .4byte gPlttBufferFaded
+_080DE8A4: .4byte gPlttBufferUnfaded
 _080DE8A8: .4byte gUnknown_2037F02
 _080DE8AC: .4byte 0x0000ffff
 	thumb_func_end sub_80DE7DC

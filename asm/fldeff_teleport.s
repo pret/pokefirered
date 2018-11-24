@@ -44,14 +44,14 @@ hm_teleport_run_dp02scr: @ 80F6730
 	movs r0, 0x3F
 	bl FieldEffectStart
 	bl GetCursorSelectionMonId
-	ldr r1, _080F674C @ =gUnknown_20386E0
+	ldr r1, _080F674C @ =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F674C: .4byte gUnknown_20386E0
+_080F674C: .4byte gFieldEffectArguments
 	thumb_func_end hm_teleport_run_dp02scr
 
 	thumb_func_start FldEff_UseTeleport

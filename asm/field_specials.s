@@ -21,7 +21,7 @@ _080CA62C: .4byte sub_80F4C10
 	thumb_func_start sub_80CA630
 sub_80CA630: @ 80CA630
 	push {r4,lr}
-	ldr r0, _080CA65C @ =gUnknown_2037078
+	ldr r0, _080CA65C @ =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -40,7 +40,7 @@ _080CA644:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA65C: .4byte gUnknown_2037078
+_080CA65C: .4byte gPlayerAvatar
 	thumb_func_end sub_80CA630
 
 	thumb_func_start nullsub_74
@@ -4570,7 +4570,7 @@ _080CC8EC:
 	lsrs r0, 16
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _080CC914 @ =gUnknown_8247094
+	ldr r0, _080CC914 @ =gMoveNames
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -4581,7 +4581,7 @@ _080CC908:
 	bx r1
 	.align 2, 0
 _080CC910: .4byte gStringVar1
-_080CC914: .4byte gUnknown_8247094
+_080CC914: .4byte gMoveNames
 	thumb_func_end sub_80CC8CC
 
 	thumb_func_start sub_80CC918
@@ -4717,7 +4717,7 @@ sub_80CCA18: @ 80CCA18
 	lsls r1, 3
 	ldr r0, _080CCAA4 @ =gTasks+0x8
 	adds r4, r1, r0
-	ldr r0, _080CCAA8 @ =gUnknown_2037AB8
+	ldr r0, _080CCAA8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4779,7 +4779,7 @@ _080CCA78:
 	b _080CCADE
 	.align 2, 0
 _080CCAA4: .4byte gTasks+0x8
-_080CCAA8: .4byte gUnknown_2037AB8
+_080CCAA8: .4byte gPaletteFade
 _080CCAAC: .4byte gUnknown_2036E28
 _080CCAB0: .4byte gSaveBlock1Ptr
 _080CCAB4: .4byte 0x00004f01
@@ -4847,7 +4847,7 @@ _080CCB36:
 	movs r0, 0x7
 	movs r1, 0x1
 	bl sub_8059948
-	ldr r0, _080CCB64 @ =gUnknown_2037AB8
+	ldr r0, _080CCB64 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4866,7 +4866,7 @@ _080CCB5A:
 	bx r0
 	.align 2, 0
 _080CCB60: .4byte gUnknown_83F60B0
-_080CCB64: .4byte gUnknown_2037AB8
+_080CCB64: .4byte gPaletteFade
 	thumb_func_end sub_80CCAF4
 
 	thumb_func_start sub_80CCB68
@@ -5338,7 +5338,7 @@ _080CCF32:
 	ldr r0, _080CCF64 @ =sub_80CCF98
 	movs r1, 0x8
 	bl CreateTask
-	ldr r3, _080CCF68 @ =gUnknown_20386E0
+	ldr r3, _080CCF68 @ =gFieldEffectArguments
 	movs r0, 0x1
 	str r0, [r3]
 	movs r0, 0x38
@@ -5361,7 +5361,7 @@ _080CCF32:
 	b _080CCF72
 	.align 2, 0
 _080CCF64: .4byte sub_80CCF98
-_080CCF68: .4byte gUnknown_20386E0
+_080CCF68: .4byte gFieldEffectArguments
 _080CCF6C: .4byte gUnknown_83F6366
 _080CCF70:
 	movs r0, 0x5

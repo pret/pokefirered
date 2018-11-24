@@ -3849,7 +3849,7 @@ _08117944:
 	bl fade_screen
 	b _08117968
 _08117958:
-	ldr r0, _08117970 @ =gUnknown_2037AB8
+	ldr r0, _08117970 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3862,7 +3862,7 @@ _08117968:
 	strh r0, [r4]
 	b _08117988
 	.align 2, 0
-_08117970: .4byte gUnknown_2037AB8
+_08117970: .4byte gPaletteFade
 _08117974:
 	bl sub_800A4BC
 	lsls r0, 24
@@ -6293,7 +6293,7 @@ _08118ED6:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r4, _08118F24 @ =gUnknown_2022744
+	ldr r4, _08118F24 @ =gLinkPlayers + 8
 	adds r1, r4
 	adds r0, r5, 0
 	bl StringCopy
@@ -6312,7 +6312,7 @@ _08118ED6:
 	bl _081198DA
 	.align 2, 0
 _08118F20: .4byte gStringVar1
-_08118F24: .4byte gUnknown_2022744
+_08118F24: .4byte gLinkPlayers + 8
 _08118F28: .4byte gStringVar4
 _08118F2C: .4byte gUnknown_8457C20
 _08118F30:
@@ -6543,7 +6543,7 @@ _08119122:
 	movs r0, 0x21
 	strb r0, [r6, 0x14]
 	ldr r0, _08119154 @ =gStringVar1
-	ldr r4, _08119158 @ =gUnknown_2022760
+	ldr r4, _08119158 @ =gLinkPlayers + 0x24
 	adds r1, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -6562,7 +6562,7 @@ _08119122:
 	.align 2, 0
 _08119150: .4byte sub_8117280
 _08119154: .4byte gStringVar1
-_08119158: .4byte gUnknown_2022760
+_08119158: .4byte gLinkPlayers + 0x24
 _0811915C: .4byte gStringVar4
 _08119160: .4byte gUnknown_8457BCC
 _08119164:
@@ -6990,7 +6990,7 @@ _081194F0:
 	movs r0, 0x36
 	b _081198DA
 _08119504:
-	ldr r0, _08119528 @ =gUnknown_2037AB8
+	ldr r0, _08119528 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -7009,7 +7009,7 @@ _08119512:
 	bl sub_81277F4
 	b _081198DC
 	.align 2, 0
-_08119528: .4byte gUnknown_2037AB8
+_08119528: .4byte gPaletteFade
 _0811952C: .4byte gUnknown_203B06C
 _08119530: .4byte gUnknown_3005020
 _08119534: .4byte sub_807DCE4
@@ -9685,7 +9685,7 @@ sub_811A9B8: @ 811A9B8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x8
 	bne _0811A9F0
-	ldr r0, _0811A9EC @ =gUnknown_2037078
+	ldr r0, _0811A9EC @ =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _0811A9E6
@@ -9695,7 +9695,7 @@ _0811A9E6:
 	movs r0, 0x1
 	b _0811A9F2
 	.align 2, 0
-_0811A9EC: .4byte gUnknown_2037078
+_0811A9EC: .4byte gPlayerAvatar
 _0811A9F0:
 	movs r0, 0
 _0811A9F2:
@@ -11147,7 +11147,7 @@ _0811B500: .4byte gUnknown_8459580
 	thumb_func_start is_walking_or_running
 is_walking_or_running: @ 811B504
 	push {lr}
-	ldr r0, _0811B518 @ =gUnknown_2037078
+	ldr r0, _0811B518 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _0811B512
@@ -11157,7 +11157,7 @@ _0811B512:
 	movs r0, 0x1
 	b _0811B51E
 	.align 2, 0
-_0811B518: .4byte gUnknown_2037078
+_0811B518: .4byte gPlayerAvatar
 _0811B51C:
 	movs r0, 0
 _0811B51E:

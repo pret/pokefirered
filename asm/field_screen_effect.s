@@ -937,7 +937,7 @@ _0807F542:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807F5E4
-	ldr r0, _0807F57C @ =gUnknown_2037078
+	ldr r0, _0807F57C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -957,7 +957,7 @@ _0807F542:
 	b _0807F5E4
 	.align 2, 0
 _0807F578: .4byte gUnknown_841B5B6
-_0807F57C: .4byte gUnknown_2037078
+_0807F57C: .4byte gPlayerAvatar
 _0807F580: .4byte gMapObjects
 _0807F584: .4byte gTasks
 _0807F588:

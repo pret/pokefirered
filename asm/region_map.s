@@ -932,7 +932,7 @@ _080C0584:
 _080C05D8: .4byte gUnknown_8418EB5
 _080C05DC: .4byte gUnknown_8418E8B
 _080C05E0:
-	ldr r0, _080C0618 @ =gUnknown_2037AB8
+	ldr r0, _080C0618 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -958,7 +958,7 @@ _080C05FA:
 	adds r1, r2
 	b _080C07A0
 	.align 2, 0
-_080C0618: .4byte gUnknown_2037AB8
+_080C0618: .4byte gPaletteFade
 _080C061C: .4byte gUnknown_20399D4
 _080C0620: .4byte 0x000047a0
 _080C0624:
@@ -1140,7 +1140,7 @@ _080C07A0:
 _080C07A8: .4byte gUnknown_20399D4
 _080C07AC: .4byte 0x000047a0
 _080C07B0:
-	ldr r0, _080C07CC @ =gUnknown_2037AB8
+	ldr r0, _080C07CC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1154,7 +1154,7 @@ _080C07C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C07CC: .4byte gUnknown_2037AB8
+_080C07CC: .4byte gPaletteFade
 	thumb_func_end sub_80C04E4
 
 	thumb_func_start sub_80C07D0
@@ -5019,7 +5019,7 @@ _080C2768:
 	bl sub_80C2B48
 	b _080C2976
 _080C2788:
-	ldr r0, _080C27AC @ =gUnknown_2037AB8
+	ldr r0, _080C27AC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -5037,7 +5037,7 @@ _080C2796:
 	bl PlaySE
 	b _080C299A
 	.align 2, 0
-_080C27AC: .4byte gUnknown_2037AB8
+_080C27AC: .4byte gPaletteFade
 _080C27B0: .4byte 0x00000ccc
 _080C27B4:
 	bl sub_80C29A4
@@ -10006,7 +10006,7 @@ _080C4FEC:
 	.align 2, 0
 _080C4FFC: .4byte gUnknown_8418EB0
 _080C5000:
-	ldr r0, _080C5024 @ =gUnknown_2037AB8
+	ldr r0, _080C5024 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10022,7 +10022,7 @@ _080C500E:
 	bl PutWindowTilemap
 	b _080C51A6
 	.align 2, 0
-_080C5024: .4byte gUnknown_2037AB8
+_080C5024: .4byte gPaletteFade
 _080C5028:
 	bl sub_80C3400
 	lsls r0, 24
@@ -10207,7 +10207,7 @@ _080C51AA:
 	.align 2, 0
 _080C51B4: .4byte gUnknown_20399FC
 _080C51B8:
-	ldr r0, _080C51E4 @ =gUnknown_2037AB8
+	ldr r0, _080C51E4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10229,7 +10229,7 @@ _080C51DC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C51E4: .4byte gUnknown_2037AB8
+_080C51E4: .4byte gPaletteFade
 	thumb_func_end sub_80C4F08
 
 	thumb_func_start sub_80C51E8

@@ -60,11 +60,11 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte  0x8245EE0 @ gSpeciesNames
 	.4byte  0x8247094 @ gMoveNames
 	.4byte  0x84556F8 @ gDecorations
-	.4byte      0xEE0
-	.4byte     0x1000
-	.4byte       0x18
-	.4byte      0x5F8
-	.4byte     0x3A18
+	.4byte      0xEE0 @ offsetof(struct SaveBlock1, flags)
+	.4byte     0x1000 @ offsetof(struct SaveBlock1, vars)
+	.4byte       0x18 @ offsetof(struct SaveBlock2, pokedex)
+	.4byte      0x5F8 @ offsetof(struct SaveBlock1, seen1)
+	.4byte     0x3A18 @ offsetof(struct SaveBlock1, seen2)
 	.4byte       0x3C
 	.4byte      0x838
 	.4byte      0x839
@@ -74,16 +74,17 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte  0xC121006
 	.4byte  0x8010B0F
 	.4byte        0xC
-	.4byte      0xF24
-	.4byte     0x3D68
-	.4byte       0x34
-	.4byte       0x38
-	.4byte          9
-	.4byte        0xA
-	.4byte          0
-	.4byte          8
-	.4byte       0xAD
-	.4byte       0xAD
+	.4byte      0xF24 @ sizeof(struct SaveBlock2)
+	.4byte     0x3D68 @ sizeof(struct SaveBlock1)
+	.4byte       0x34 @ offsetof(struct SaveBlock1, playerPartyCount)
+	.4byte       0x38 @ offsetof(struct SaveBlock1, playerParty)
+	.4byte          9 @ offsetof(struct SaveBlock2, specialSaveWarp)
+	.4byte        0xA @ offsetof(struct SaveBlock2, playerTrainerId)
+	.4byte          0 @ offsetof(struct SaveBlock2, playerName)
+	.4byte          8 @ offsetof(struct SaveBlock2, playerGender)
+
+	.4byte       0xAD @ offsetof(struct SaveBlock2, ?????? (0xAD))
+	.4byte       0xAD @ offsetof(struct SaveBlock2, ?????? (0xAD))
 	.4byte     0x30BB
 	.4byte     0x30A7
 	.4byte          0

@@ -1547,13 +1547,13 @@ _0808135C:
 _08081374: .4byte gUnknown_202271A
 _08081378: .4byte 0x00002211
 _0808137C:
-	ldr r0, _08081388 @ =gUnknown_2037AB8
+	ldr r0, _08081388 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	b _080813A6
 	.align 2, 0
-_08081388: .4byte gUnknown_2037AB8
+_08081388: .4byte gPaletteFade
 _0808138C:
 	ldrh r0, [r4, 0xA]
 	adds r0, 0x1
@@ -1706,7 +1706,7 @@ _080814A0:
 _080814BC: .4byte gUnknown_202271A
 _080814C0: .4byte 0x00002211
 _080814C4:
-	ldr r0, _080814D8 @ =gUnknown_2037AB8
+	ldr r0, _080814D8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1718,7 +1718,7 @@ _080814D2:
 	strh r0, [r6]
 	b _0808160A
 	.align 2, 0
-_080814D8: .4byte gUnknown_2037AB8
+_080814D8: .4byte gPaletteFade
 _080814DC:
 	ldr r1, _080814EC @ =gUnknown_2022720
 	movs r0, 0
@@ -2183,7 +2183,7 @@ _08081882:
 	bl sub_800A068
 	b _080818B8
 _08081894:
-	ldr r0, _080818A4 @ =gUnknown_2037AB8
+	ldr r0, _080818A4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2191,7 +2191,7 @@ _08081894:
 	bne _080818D8
 	b _080818B8
 	.align 2, 0
-_080818A4: .4byte gUnknown_2037AB8
+_080818A4: .4byte gPaletteFade
 _080818A8:
 	ldr r1, _080818C0 @ =gUnknown_2031DA4
 	movs r0, 0
@@ -2259,7 +2259,7 @@ _0808191A:
 	bl sub_80F985C
 	b _08081950
 _0808192C:
-	ldr r0, _0808193C @ =gUnknown_2037AB8
+	ldr r0, _0808193C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2267,7 +2267,7 @@ _0808192C:
 	bne _08081970
 	b _08081950
 	.align 2, 0
-_0808193C: .4byte gUnknown_2037AB8
+_0808193C: .4byte gPaletteFade
 _08081940:
 	ldr r1, _08081958 @ =gUnknown_2031DA4
 	movs r0, 0
@@ -2408,7 +2408,7 @@ sub_8081A34: @ 8081A34
 	lsls r1, r4, 3
 	subs r1, r4
 	lsls r1, 2
-	ldr r2, _08081A7C @ =gUnknown_2022744
+	ldr r2, _08081A7C @ =gLinkPlayers + 8
 	adds r1, r2
 	bl StringCopy
 	adds r0, r4, 0
@@ -2429,7 +2429,7 @@ sub_8081A34: @ 8081A34
 	.align 2, 0
 _08081A74: .4byte gUnknown_20370C4
 _08081A78: .4byte gStringVar1
-_08081A7C: .4byte gUnknown_2022744
+_08081A7C: .4byte gLinkPlayers + 8
 _08081A80: .4byte gStringVar2
 _08081A84: .4byte gUnknown_83C6AB8
 _08081A88:

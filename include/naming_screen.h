@@ -1,6 +1,8 @@
 #ifndef GUARD_NAMING_SCREEN_H
 #define GUARD_NAMING_SCREEN_H
 
+#include "global.h"
+
 #define NAMING_SCREEN_PLAYER        0
 #define NAMING_SCREEN_BOX           1
 #define NAMING_SCREEN_CAUGHT_MON    2

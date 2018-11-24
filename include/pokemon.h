@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_H
 #define GUARD_POKEMON_H
 
+#include "global.h"
+
 #define MON_DATA_PERSONALITY        0
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
@@ -570,8 +572,14 @@ void DecryptBoxMon(struct BoxPokemon *boxMon);
 // but they are not used since some code erroneously omits the third arg.
 // u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
 // u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
+
+#ifdef IS_POKEMON_C
+u32 GetMonData(struct Pokemon *, s32, u8 *);
+u32 GetBoxMonData(struct BoxPokemon *, s32, u8 *);
+#else
 u32 GetMonData();
 u32 GetBoxMonData();
+#endif // IS_POKEMON_C
 
 void SetMonData(struct Pokemon *mon, s32 field, const void *data);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *data);

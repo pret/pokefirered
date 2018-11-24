@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8081B30
-sub_8081B30: @ 8081B30
+	thumb_func_start CheckForTrainersWantingBattle
+CheckForTrainersWantingBattle: @ 8081B30
 	push {r4,r5,lr}
 	bl sub_8111C2C
 	lsls r0, 24
@@ -54,7 +54,7 @@ _08081B7A:
 	bx r1
 	.align 2, 0
 _08081B80: .4byte gMapObjects
-	thumb_func_end sub_8081B30
+	thumb_func_end CheckForTrainersWantingBattle
 
 	thumb_func_start sub_8081B84
 sub_8081B84: @ 8081B84
@@ -585,7 +585,7 @@ sub_8081F38: @ 8081F38
 	movs r0, 0xC
 	b _08081F82
 _08081F54:
-	ldr r1, _08081F8C @ =gUnknown_20386E0
+	ldr r1, _08081F8C @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -611,7 +611,7 @@ _08081F82:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08081F8C: .4byte gUnknown_20386E0
+_08081F8C: .4byte gFieldEffectArguments
 	thumb_func_end sub_8081F38
 
 	thumb_func_start sub_8081F90
@@ -735,7 +735,7 @@ _0808204A:
 	bl sub_805FE7C
 	adds r0, r4, 0
 	bl sub_805FE5C
-	ldr r0, _080820B4 @ =gUnknown_2037078
+	ldr r0, _080820B4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -763,7 +763,7 @@ _080820AC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080820B4: .4byte gUnknown_2037078
+_080820B4: .4byte gPlayerAvatar
 _080820B8: .4byte gMapObjects
 	thumb_func_end sub_808202C
 
@@ -772,7 +772,7 @@ sub_80820BC: @ 80820BC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _080820F8 @ =gUnknown_2037078
+	ldr r0, _080820F8 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -798,7 +798,7 @@ _080820EE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080820F8: .4byte gUnknown_2037078
+_080820F8: .4byte gPlayerAvatar
 _080820FC: .4byte gMapObjects
 	thumb_func_end sub_80820BC
 
@@ -888,7 +888,7 @@ sub_8082184: @ 8082184
 	lsls r0, 24
 	cmp r0, 0
 	beq _080821CA
-	ldr r2, _080821D4 @ =gUnknown_20386E0
+	ldr r2, _080821D4 @ =gFieldEffectArguments
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	str r0, [r2]
@@ -919,7 +919,7 @@ _080821CA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080821D4: .4byte gUnknown_20386E0
+_080821D4: .4byte gFieldEffectArguments
 _080821D8: .4byte gSprites
 	thumb_func_end sub_8082184
 
@@ -1113,7 +1113,7 @@ _08082312:
 _08082348: .4byte gSaveBlock1Ptr
 _0808234C: .4byte gMapObjects
 _08082350:
-	ldr r1, _08082378 @ =gUnknown_20386E0
+	ldr r1, _08082378 @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -1133,7 +1133,7 @@ _0808236E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08082378: .4byte gUnknown_20386E0
+_08082378: .4byte gFieldEffectArguments
 	thumb_func_end sub_80822CC
 
 	thumb_func_start sub_808237C
@@ -1525,7 +1525,7 @@ sub_808265C: @ 808265C
 	orrs r3, r4
 	mov r4, r12
 	strb r3, [r4]
-	ldr r4, _080826A0 @ =gUnknown_20386E0
+	ldr r4, _080826A0 @ =gFieldEffectArguments
 	ldr r3, [r4]
 	strh r3, [r0, 0x2E]
 	ldr r3, [r4, 0x4]
@@ -1541,7 +1541,7 @@ sub_808265C: @ 808265C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080826A0: .4byte gUnknown_20386E0
+_080826A0: .4byte gFieldEffectArguments
 _080826A4: .4byte 0x0000fffb
 	thumb_func_end sub_808265C
 

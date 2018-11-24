@@ -5,6 +5,8 @@
 #ifndef GUARD_MAP_OBJ_8097404_H
 #define GUARD_MAP_OBJ_8097404_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

@@ -1,6 +1,8 @@
 #ifndef GUARD_unknown_task_H
 #define GUARD_unknown_task_H
 
+#include "global.h"
+
 // Exported type declarations
 struct UnknownTaskStruct
 {

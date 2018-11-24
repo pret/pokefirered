@@ -26,9 +26,9 @@ BlendPalette: @ 8045274
 	movs r6, 0
 	cmp r6, r12
 	bcs _080452FA
-	ldr r0, _0804530C @ =gUnknown_20371F8
+	ldr r0, _0804530C @ =gPlttBufferUnfaded
 	mov r10, r0
-	ldr r1, _08045310 @ =gUnknown_20375F8
+	ldr r1, _08045310 @ =gPlttBufferFaded
 	mov r9, r1
 _080452A2:
 	mov r0, r8
@@ -85,8 +85,8 @@ _080452FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804530C: .4byte gUnknown_20371F8
-_08045310: .4byte gUnknown_20375F8
+_0804530C: .4byte gPlttBufferUnfaded
+_08045310: .4byte gPlttBufferFaded
 	thumb_func_end BlendPalette
 
 	thumb_func_start sub_8045314

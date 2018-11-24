@@ -381,7 +381,7 @@ _080BEF28:
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r6, _080BEFD0 @ =gUnknown_20371F8
+	ldr r6, _080BEFD0 @ =gPlttBufferUnfaded
 	ldr r4, _080BEFD4 @ =gUnknown_83EE9C8
 	ldr r0, _080BEFD8 @ =gUnknown_20399C4
 	ldr r3, [r0]
@@ -396,7 +396,7 @@ _080BEF28:
 	lsls r2, 1
 	adds r0, r6, r2
 	strh r1, [r0]
-	ldr r5, _080BEFDC @ =gUnknown_20375F8
+	ldr r5, _080BEFDC @ =gPlttBufferFaded
 	ldrb r1, [r3]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -458,10 +458,10 @@ _080BEF28:
 	strh r0, [r5, 0x16]
 	b _080BF0F4
 	.align 2, 0
-_080BEFD0: .4byte gUnknown_20371F8
+_080BEFD0: .4byte gPlttBufferUnfaded
 _080BEFD4: .4byte gUnknown_83EE9C8
 _080BEFD8: .4byte gUnknown_20399C4
-_080BEFDC: .4byte gUnknown_20375F8
+_080BEFDC: .4byte gPlttBufferFaded
 _080BEFE0: .4byte gUnknown_83EE9C0
 _080BEFE4: .4byte gSaveBlock2Ptr
 _080BEFE8:
@@ -497,7 +497,7 @@ _080BF01C:
 _080BF026:
 	ldr r0, _080BF038 @ =sub_80BF354
 	bl SetVBlankCallback
-	ldr r2, _080BF03C @ =gUnknown_2037AB8
+	ldr r2, _080BF03C @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -505,7 +505,7 @@ _080BF026:
 	b _080BF0F4
 	.align 2, 0
 _080BF038: .4byte sub_80BF354
-_080BF03C: .4byte gUnknown_2037AB8
+_080BF03C: .4byte gPaletteFade
 _080BF040:
 	ldr r5, _080BF064 @ =gUnknown_20399C4
 	ldr r0, [r5]
@@ -573,7 +573,7 @@ _080BF0A4:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r2, _080BF0E8 @ =gUnknown_2037AB8
+	ldr r2, _080BF0E8 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -586,7 +586,7 @@ _080BF0A4:
 	movs r0, 0x1
 	b _080BF104
 	.align 2, 0
-_080BF0E8: .4byte gUnknown_2037AB8
+_080BF0E8: .4byte gPaletteFade
 _080BF0EC: .4byte gUnknown_20399C4
 _080BF0F0: .4byte sub_80BF394
 _080BF0F4:

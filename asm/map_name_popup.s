@@ -348,7 +348,7 @@ _080983B4: .4byte 0x00ffffff
 _080983B8:
 	movs r0, 0x3
 	bl stdpal_get
-	ldr r1, _080983FC @ =gUnknown_2037398
+	ldr r1, _080983FC @ =gPlttBufferUnfaded + 0x1A0
 	movs r2, 0x10
 	bl CpuSet
 _080983C6:
@@ -374,7 +374,7 @@ _080983C6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080983FC: .4byte gUnknown_2037398
+_080983FC: .4byte gPlttBufferUnfaded + 0x1A0
 	thumb_func_end sub_8098340
 
 	thumb_func_start sub_8098400

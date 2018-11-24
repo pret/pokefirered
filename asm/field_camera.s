@@ -1222,7 +1222,7 @@ CameraPanningCB_PanAhead: @ 805AE74
 	.align 2, 0
 _0805AE84: .4byte gUnknown_2036E2C
 _0805AE88:
-	ldr r0, _0805AEA0 @ =gUnknown_2037078
+	ldr r0, _0805AEA0 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x1
 	bne _0805AEA8
@@ -1235,7 +1235,7 @@ _0805AE88:
 	beq _0805AF10
 	b _0805AEAE
 	.align 2, 0
-_0805AEA0: .4byte gUnknown_2037078
+_0805AEA0: .4byte gPlayerAvatar
 _0805AEA4: .4byte gUnknown_3000E9C
 _0805AEA8:
 	ldr r1, _0805AED0 @ =gUnknown_3000E9C

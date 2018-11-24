@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_AI_SCRIPT_COMMANDS_H
 #define GUARD_BATTLE_AI_SCRIPT_COMMANDS_H
 
+#include "global.h"
+
 void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves);
 void BattleAI_SetupAIData(u8 defaultScoreMoves);
 u8 BattleAI_ChooseMoveOrAction(void);

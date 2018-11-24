@@ -1,6 +1,9 @@
 #include "global.h"
 #include "constants/songs.h"
 #include "bg.h"
+#include "graphics.h"
+#include "item_menu.h"
+#include "list_menu.h"
 #include "gpu_regs.h"
 #include "palette.h"
 #include "task.h"
@@ -13,13 +16,18 @@
 
 struct FameCheckerData
 {
-    u32 unk_00;
+    void (*unk_00)(void);
     u16 unk_04;
-    u8 filler_06[3];
+    u8 filler_06[1];
+    u8 unk_07_0:1;
+    u8 unk_07_1:1;
+    u8 unk_07_2:6;
+    u8 filler_08[1];
     u8 unk_09;
     u8 unk_0A;
     u8 unk_0B;
-    u8 filler_0C[23];
+    u8 unk_0C[17];
+    u8 unk_1D[6];
     u8 unk_23_0:1;
     u8 unk_23_1:7;
 };
@@ -36,28 +44,48 @@ EWRAM_DATA struct FameCheckerData * gUnknown_203B0FC = NULL;
 EWRAM_DATA struct FameCheckerData2 * gUnknown_203B100 = NULL;
 EWRAM_DATA u32 gUnknown_203B104 = 0;
 
+struct ListMenuTemplate gUnknown_3005EB0;
+u8 gUnknown_3005EC8;
+
 void sub_812C3F8(void);
 void sub_812C648(void);
 void sub_812C664(u8 taskId);
+void sub_812C694(u8 taskId);
+bool8 sub_812C8F8(u8 taskId);
+void sub_812C9BC(u8 taskId);
+void sub_812CAD8(u8 taskId);
+void sub_812CD3C(void);
+void sub_812CE04(u8 taskId);
 void sub_812CE9C(void);
 void sub_812CEC0(void);
+void sub_812CEE0(u8 windowId);
+void sub_812CEFC(u8 taskId, u8 a1);
+void sub_812CF3C(u8 taskId);
+void sub_812D0F4(u8 a0);
 void sub_812D1A8(u8 a0);
 void sub_812D420(void);
 void sub_812D558(void);
 void sub_812D584(void);
 void sub_812D594(void);
+bool8 sub_812D6B4(void);
+u8 sub_812D724(s16 a0);
+u8 sub_812D7E4(void);
+u8 sub_812D888(u8 a0);
+void sub_812DA14(u8 a0);
 void sub_812DB28(void);
 void sub_812E000(void);
+void sub_812E048(void);
+u16 sub_812E064(void);
+void sub_812E110(u8 taskId);
 void sub_812E178(u8 a0, s16 a1);
+void sub_812E4A4(u8 a0);
 
+
+extern const u16 gUnknown_845C600[];
 extern const struct BgTemplate gUnknown_845FBF4[4];
+extern const struct SpriteSheet gUnknown_845FB9C[];
+extern const struct SpritePalette gUnknown_845FBDC[];
 extern const struct WindowTemplate gUnknown_845FC04[];
-extern const u16 gUnknown_845C600[0x40];
-
-extern const u16 gUnknown_8E9F220[0x30];
-extern const u16 gUnknown_8E9F260[0xa50];
-extern const u16 gUnknown_8EA0700[0x400];
-extern const u16 gUnknown_8EA0F00[0x400];
 
 void sub_812C380(void)
 {
@@ -74,7 +102,7 @@ void sub_812C394(void)
     UpdatePaletteFade();
 }
 
-void sub_812C3AC(u32 a0)
+void sub_812C3AC(void (*a0)(void))
 {
     SetVBlankCallback(NULL);
     gUnknown_203B0FC = AllocZeroed(sizeof(struct FameCheckerData));
@@ -163,5 +191,93 @@ void sub_812C3F8(void)
             SetMainCallback2(sub_812C394);
             gMain.state = 0;
             break;
+    }
+}
+
+void sub_812C648(void)
+{
+    LoadSpriteSheets(gUnknown_845FB9C);
+    LoadSpritePalettes(gUnknown_845FBDC);
+}
+
+void sub_812C664(u8 taskId)
+{
+    if (!gPaletteFade.active)
+        gTasks[taskId].func = sub_812C694;
+}
+
+void sub_812C694(u8 taskId)
+{
+    u16 r4;
+    u8 r4_2;
+    struct Task *task = &gTasks[taskId];
+    s16 * data = gTasks[taskId].data;
+    if (FindTaskIdByFunc(sub_812E110) == 0xFF)
+    {
+        RunTextPrinters();
+        if ((gMain.newKeys & SELECT_BUTTON) && !gUnknown_203B0FC->unk_07_1 && gUnknown_203B0FC->unk_00 != sub_8107EB8)
+            task->func = sub_812CF3C;
+        else if (gMain.newKeys & START_BUTTON)
+        {
+            r4 = sub_812E064();
+            if (sub_812C8F8(taskId) == TRUE)
+            {
+                PlaySE(SE_W100);
+            }
+            else if (r4 != gUnknown_203B0FC->unk_07_2 - 1)
+            {
+                PlaySE(SE_W100);
+                FillWindowPixelRect(3, 0x00, 0, 0, 88, 32);
+                sub_812CEE0(3);
+                sub_812E178(2, 4);
+                sub_812E178(1, 5);
+                sub_812D0F4(1);
+                task->data[2] = sub_812D888(gUnknown_203B0FC->unk_0C[r4]);
+                gSprites[task->data[2]].pos2.x = 0xF0;
+                gSprites[task->data[2]].data[0] = 1;
+                task->data[3] = sub_812D7E4();
+                gSprites[task->data[3]].pos2.x = 0xF0;
+                gSprites[task->data[3]].data[0] = 1;
+                task->func = sub_812C9BC;
+            }
+        }
+        else if (gMain.newKeys & A_BUTTON)
+        {
+            r4 = ListMenuHandleInput(0);
+            if (r4 == gUnknown_203B0FC->unk_07_2 - 1)
+                task->func = sub_812CF3C;
+            else if (gUnknown_203B0FC->unk_07_1)
+            {
+                if (!IsTextPrinterActive(2) && sub_812D6B4() == TRUE)
+                    sub_812CD3C();
+            }
+            else if (gUnknown_203B0FC->unk_07_0)
+            {
+                PlaySE(SE_SELECT);
+                task->data[0] = sub_812D724(task->data[1]);
+                for (r4_2 = 0; r4_2 < 6; r4_2++)
+                {
+                    if (r4_2 != task->data[1])
+                        sub_812CEFC(gUnknown_203B0FC->unk_1D[r4_2], 1);
+                }
+                gUnknown_3005EC8 = 0xFF;
+                sub_812E4A4(0);
+                sub_812D0F4(2);
+                if (gSprites[gUnknown_203B0FC->unk_1D[task->data[1]]].data[1] != 0xFF)
+                {
+                    sub_812CE04(taskId);
+                    sub_812DA14(data[1]);
+                }
+                sub_812E048();
+                task->func = sub_812CAD8;
+            }
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            if (sub_812C8F8(taskId) != TRUE)
+                task->func = sub_812CF3C;
+        }
+        else
+            ListMenuHandleInput(0);
     }
 }

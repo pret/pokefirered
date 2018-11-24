@@ -2820,7 +2820,7 @@ static u16 * (*const sQuestLogStorageCBs[])(u16 *, const u16 *) = {
 };
 
 #ifdef NONMATCHING
-void sub_8113550(u16 a0, u16 * a1)
+void sub_8113550(u16 a0, const u16 * a1)
 {
     u16 * r1;
 

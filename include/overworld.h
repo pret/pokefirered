@@ -70,7 +70,6 @@ void c2_load_new_map(void);
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 void mapldr_default(void);
 
-void IncrementGameStat(u8);
 u32 GetGameStat(u8);
 
 void sub_8056938(void);
@@ -79,6 +78,8 @@ void sub_80572A8(void);
 void sub_805726C(void);
 void sub_8057430(void);
 void sub_8055DC4(void);
+
+u8 sav1_map_get_name(void);
 
 extern u8 gUnknown_2031DD8;
 extern u8 gUnknown_2036E28;

@@ -3,6 +3,8 @@
 #include "sprite.h"
 #include "bg.h"
 #include "graphics.h"
+#include "battle_setup.h"
+#include "menu.h"
 #include "new_menu_helpers.h"
 #include "item_menu.h"
 #include "list_menu.h"
@@ -98,9 +100,13 @@ void sub_812E178(u8 a0, s16 a1);
 void sub_812E4A4(u8 a0);
 
 extern const u8 gUnknown_84181E4[];
+extern const u8 gUnknown_841E5A4[];
+extern const u8 gUnknown_841E5B9[];
+extern const u8 gUnknown_841E5D2[];
 
 extern const u16 gUnknown_845C600[];
 extern const u8 *const gUnknown_845F63C[];
+extern const struct TextColor gUnknown_845F5E0;
 extern const u8 *const gUnknown_845F6BC[];
 extern const struct BgTemplate gUnknown_845FBF4[4];
 extern const struct SpriteSheet gUnknown_845FB9C[];
@@ -557,4 +563,41 @@ void sub_812D094(u8 windowId)
     ClearWindowTilemap(windowId);
     CopyWindowToVram(windowId, 2);
     RemoveWindow(windowId);
+}
+
+u8 sub_812D0C0(u8 a0)
+{
+    if (HasTrainerAlreadyBeenFought(0x15e) == TRUE)
+    {
+        if (a0 == 9)
+            return 15;
+        if (a0 > 9)
+            return a0 - 1;
+    }
+    return a0;
+}
+
+void sub_812D0F4(u8 a0)
+{
+    const u8 * r5 = gUnknown_841E5A4;
+    s32 width;
+    if (a0 != 0)
+    {
+        r5 = gUnknown_841E5D2;
+        if (a0 == 1)
+            r5 = gUnknown_841E5B9;
+    }
+    width = GetStringWidth(0, r5, 0);
+    FillWindowPixelRect(1, 0x00, 0, 0, 0xc0, 0x10);
+    AddTextPrinterParametrized2(1, 0, 188 - width, 0, 0, 2, &gUnknown_845F5E0, -1, r5);
+    sub_812CEE0(1);
+}
+
+void sub_812D174(void)
+{
+    u8 r4;
+    for (r4 = 0; r4 < 6; r4++)
+    {
+        DestroySprite(&gSprites[gUnknown_203B0FC->unk_1D[r4]]);
+    }
 }

@@ -95,6 +95,7 @@ extern const u8 gUnknown_84181E4[];
 
 extern const u16 gUnknown_845C600[];
 extern const u8 *const gUnknown_845F63C[];
+extern const u8 *const gUnknown_845F6BC[];
 extern const struct BgTemplate gUnknown_845FBF4[4];
 extern const struct SpriteSheet gUnknown_845FB9C[];
 extern const struct SpritePalette gUnknown_845FBDC[];
@@ -455,7 +456,17 @@ void sub_812CD3C(void)
         if (sub_812D6B4() == TRUE)
             r8 = 16;
         StringExpandPlaceholders(gStringVar4, gUnknown_845F63C[gUnknown_203B0FC->unk_0C[r6] + r8]);
-        AddTextPrinterParametrized(2, 2, gStringVar4, sub_80F78A8(), 0, 2, 1, 3);
+        AddTextPrinterParametrized(2, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
         sub_812CEE0(2);
     }
+}
+
+void sub_812CE04(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 r5 = sub_812E064();
+    FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
+    StringExpandPlaceholders(gStringVar4, gUnknown_845F6BC[gUnknown_203B0FC->unk_0C[r5] * 6 + data[1]]);
+    AddTextPrinterParametrized(2, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
+    sub_812CEE0(2);
 }

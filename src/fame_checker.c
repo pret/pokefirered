@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/songs.h"
+#include "sprite.h"
 #include "bg.h"
 #include "graphics.h"
 #include "new_menu_helpers.h"
@@ -58,6 +59,7 @@ void sub_812C990(void);
 void sub_812C9BC(u8 taskId);
 void sub_812CA1C(u8 taskId);
 void sub_812CAD8(u8 taskId);
+void sub_812CC68(u8 taskId, s8 dx, s8 dy);
 void sub_812CD3C(void);
 void sub_812CE04(u8 taskId);
 void sub_812CE9C(void);
@@ -73,11 +75,13 @@ void sub_812D584(void);
 void sub_812D594(void);
 bool8 sub_812D6B4(void);
 u8 sub_812D724(s16 a0);
+void sub_812D764(struct Sprite *sprite);
 u8 sub_812D7E4(void);
 void sub_812D800(struct Sprite *sprite);
 u8 sub_812D888(u8 a0);
 void sub_812D9A8(u8 a0, u16 a1);
 void sub_812DA14(u8 a0);
+void sub_812DB10(void);
 void sub_812DB28(void);
 void sub_812E000(void);
 void sub_812E048(void);
@@ -222,9 +226,9 @@ void sub_812C694(u8 taskId)
     if (FindTaskIdByFunc(sub_812E110) == 0xFF)
     {
         RunTextPrinters();
-        if ((gMain.newKeys & SELECT_BUTTON) && !gUnknown_203B0FC->unk_07_1 && gUnknown_203B0FC->unk_00 != sub_8107EB8)
+        if ((PRESSED(SELECT_BUTTON)) && !gUnknown_203B0FC->unk_07_1 && gUnknown_203B0FC->unk_00 != sub_8107EB8)
             task->func = sub_812CF3C;
-        else if (gMain.newKeys & START_BUTTON)
+        else if (PRESSED(START_BUTTON))
         {
             r4 = sub_812E064();
             if (sub_812C8F8(taskId) == TRUE)
@@ -248,7 +252,7 @@ void sub_812C694(u8 taskId)
                 task->func = sub_812C9BC;
             }
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (PRESSED(A_BUTTON))
         {
             r4 = ListMenuHandleInput(0);
             if (r4 == gUnknown_203B0FC->unk_07_2 - 1)
@@ -279,7 +283,7 @@ void sub_812C694(u8 taskId)
                 task->func = sub_812CAD8;
             }
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (PRESSED(B_BUTTON))
         {
             if (sub_812C8F8(taskId) != TRUE)
                 task->func = sub_812CF3C;
@@ -342,5 +346,74 @@ void sub_812CA1C(u8 taskId)
         sub_812D9A8(taskId, sub_812E064());
         task->func = sub_812C694;
         gSprites[task->data[3]].callback = sub_812D800;
+    }
+}
+
+void sub_812CAD8(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    s16 *data = gTasks[taskId].data;
+
+    RunTextPrinters();
+    if (PRESSED(A_BUTTON) && !IsTextPrinterActive(2))
+    {
+        u8 spriteId = gUnknown_203B0FC->unk_1D[data[1]];
+        if (gSprites[spriteId].data[1] != 0xFF)
+            sub_812CE04(taskId);
+    }
+    if (PRESSED(B_BUTTON))
+    {
+        u8 r4;
+        PlaySE(SE_SELECT);
+        for (r4 = 0; r4 < 6; r4++)
+            sub_812CEFC(gUnknown_203B0FC->unk_1D[r4], 0);
+        sub_812CE9C();
+        gSprites[task->data[0]].callback = sub_812D764;
+        if (gUnknown_3005EC8 != 0xFF)
+            sub_812DB10();
+        sub_812E4A4(1);
+        sub_812D0F4(0);
+        sub_812E000();
+        sub_812C990();
+        task->func = sub_812C694;
+    }
+    else if (PRESSED(DPAD_UP) || PRESSED(DPAD_DOWN))
+    {
+        if (task->data[1] >= 3)
+        {
+            task->data[1] -= 3;
+            sub_812CC68(taskId, 0, -0x1b);
+        }
+        else
+        {
+            task->data[1] += 3;
+            sub_812CC68(taskId, 0, +0x1b);
+        }
+    }
+    else if (PRESSED(DPAD_LEFT))
+    {
+        if (task->data[1] == 0 || task->data[1] % 3 == 0)
+        {
+            task->data[1] += 2;
+            sub_812CC68(taskId, +0x5e, 0);
+        }
+        else
+        {
+            task->data[1]--;
+            sub_812CC68(taskId, -0x2f, 0);
+        }
+    }
+    else if (PRESSED(DPAD_RIGHT))
+    {
+        if ((task->data[1] + 1) % 3 == 0)
+        {
+            task->data[1] -= 2;
+            sub_812CC68(taskId, -0x5e, 0);
+        }
+        else
+        {
+            task->data[1]++;
+            sub_812CC68(taskId, +0x2f, 0);
+        }
     }
 }

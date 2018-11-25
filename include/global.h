@@ -62,6 +62,13 @@
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
+// This macro is required to prevent the compiler from optimizing
+// a dpad up/down check in sub_812CAD8 (fame_checker.c).
+// We suspect it was used globally.
+// GameFreak never ceases to amaze.
+// TODO: Propagate use of this macro
+#define PRESSED(button) ({gMain.newKeys & (button);})
+
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];

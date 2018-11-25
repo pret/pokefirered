@@ -646,3 +646,28 @@ bool8 sub_812D1A8(u8 a0)
     }
     return r5;
 }
+
+void sub_812D304(void)
+{
+    u8 r4;
+    for (r4 = 0; r4 < 16; r4++)
+    {
+        gSaveBlock1Ptr->fameChecker[r4].unk_0_0 = 0;
+        gSaveBlock1Ptr->fameChecker[r4].unk_0_2 = 0;
+        gSaveBlock1Ptr->fameChecker[r4].unk_0_E = 0;
+    }
+    gSaveBlock1Ptr->fameChecker[0].unk_0_0 = 2;
+}
+
+void sub_812D388(void)
+{
+    u8 r5, r4;
+    for (r5 = 0; r5 < 16; r5++)
+    {
+        gSaveBlock1Ptr->fameChecker[r5].unk_0_0 = 2;
+        for (r4 = 0; r4 < 6; r4++)
+        {
+            gSaveBlock1Ptr->fameChecker[r5].unk_0_2 |= (1 << r4);
+        }
+    }
+}

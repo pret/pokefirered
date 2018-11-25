@@ -17,5 +17,7 @@ void sub_8197930(void);
 u8 GetPlayerTextSpeed(void);
 void sub_80F6F54(u8, u8);
 u8 sub_80F78A8(void);
+void sub_80F6E9C(void);
+void sub_80F6EE4(u8, u8);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

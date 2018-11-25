@@ -19,13 +19,13 @@
 
 struct FameCheckerData
 {
-    void (*unk_00)(void);
+    MainCallback unk_00;
     u16 unk_04;
     u8 filler_06[1];
     u8 unk_07_0:1;
     u8 unk_07_1:1;
     u8 unk_07_2:6;
-    u8 filler_08[1];
+    u8 unk_08;
     u8 unk_09;
     u8 unk_0A;
     u8 unk_0B;
@@ -66,8 +66,10 @@ void sub_812CE04(u8 taskId);
 void sub_812CE9C(void);
 void sub_812CEC0(void);
 void sub_812CEE0(u8 windowId);
-bool8 sub_812CEFC(u8 taskId, u8 a1);
+bool8 sub_812CEFC(u8 taskId, u8 objMode);
 void sub_812CF3C(u8 taskId);
+void sub_812CF7C(u8 taskId);
+void sub_812D094(u8 windowId);
 void sub_812D0F4(u8 a0);
 void sub_812D1A8(u8 a0);
 void sub_812D420(void);
@@ -75,10 +77,14 @@ void sub_812D558(void);
 void sub_812D584(void);
 void sub_812D594(void);
 bool8 sub_812D6B4(void);
+void sub_812D70C(void);
 u8 sub_812D724(s16 a0);
 void sub_812D764(struct Sprite *sprite);
+void sub_812D770(void);
+void sub_812D7C8(void);
 u8 sub_812D7E4(void);
 void sub_812D800(struct Sprite *sprite);
+void sub_812D814(void);
 u8 sub_812D888(u8 a0);
 void sub_812D9A8(u8 a0, u16 a1);
 void sub_812DA14(u8 a0);
@@ -272,7 +278,7 @@ void sub_812C694(u8 taskId)
                 for (r4_2 = 0; r4_2 < 6; r4_2++)
                 {
                     if (r4_2 != task->data[1])
-                        sub_812CEFC(gUnknown_203B0FC->unk_1D[r4_2], 1);
+                        sub_812CEFC(gUnknown_203B0FC->unk_1D[r4_2], ST_OAM_OBJ_BLEND);
                 }
                 gUnknown_3005EC8 = 0xFF;
                 sub_812E4A4(0);
@@ -369,7 +375,7 @@ void sub_812CAD8(u8 taskId)
         u8 r4;
         PlaySE(SE_SELECT);
         for (r4 = 0; r4 < 6; r4++)
-            sub_812CEFC(gUnknown_203B0FC->unk_1D[r4], 0);
+            sub_812CEFC(gUnknown_203B0FC->unk_1D[r4], ST_OAM_OBJ_NORMAL);
         sub_812CE9C();
         gSprites[task->data[0]].callback = sub_812D764;
         if (gUnknown_3005EC8 != 0xFF)
@@ -429,10 +435,10 @@ void sub_812CC68(u8 taskId, s8 dx, s8 dy)
     gSprites[data[0]].pos1.x += dx;
     gSprites[data[0]].pos1.y += dy;
     for (i = 0; i < 6; i++)
-        sub_812CEFC(gUnknown_203B0FC->unk_1D[i], 1);
+        sub_812CEFC(gUnknown_203B0FC->unk_1D[i], ST_OAM_OBJ_BLEND);
     FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
     sub_812C990();
-    if (sub_812CEFC(gUnknown_203B0FC->unk_1D[data[1]], 0) == TRUE)
+    if (sub_812CEFC(gUnknown_203B0FC->unk_1D[data[1]], ST_OAM_OBJ_NORMAL) == TRUE)
     {
         sub_812CE04(taskId);
         sub_812DA14(data[1]);
@@ -469,4 +475,86 @@ void sub_812CE04(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gUnknown_845F6BC[gUnknown_203B0FC->unk_0C[r5] * 6 + data[1]]);
     AddTextPrinterParametrized(2, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
     sub_812CEE0(2);
+}
+
+void sub_812CE9C(void)
+{
+    FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
+    sub_812CEE0(2);
+}
+
+void sub_812CEC0(void)
+{
+    sub_80F6E9C();
+    sub_80F6EE4(2, 1);
+    sub_812CEE0(2);
+    sub_812CEE0(0);
+}
+
+void sub_812CEE0(u8 windowId)
+{
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+}
+
+bool8 sub_812CEFC(u8 spriteId, u8 objMode)
+{
+    if (gSprites[spriteId].data[1] != 0xFF)
+    {
+        gSprites[spriteId].oam.objMode = objMode;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_812CF3C(u8 taskId)
+{
+    PlaySE(SE_W202);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_812CF7C;
+}
+
+void sub_812CF7C(u8 taskId)
+{
+    u8 r4;
+
+    if (!gPaletteFade.active)
+    {
+        if (gUnknown_203B0FC->unk_07_1)
+        {
+            sub_812D9A8(taskId, sub_812E064());
+            FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[3]]);
+            DestroySprite(&gSprites[gTasks[taskId].data[3]]);
+        }
+        for (r4 = 0; r4 < 6; r4++)
+        {
+            DestroySprite(&gSprites[gUnknown_203B0FC->unk_1D[r4]]);
+        }
+        sub_812D814();
+        sub_812D7C8();
+        sub_812D70C();
+        sub_812D770();
+        sub_812E048();
+        SetMainCallback2(gUnknown_203B0FC->unk_00);
+        sub_810713C(gUnknown_203B0FC->unk_08, 0, 0);
+        Free(gUnknown_203B0F0);
+        Free(gUnknown_203B0F4);
+        Free(gUnknown_203B0F8);
+        Free(gUnknown_203B0FC);
+        Free(gUnknown_203B100);
+        sub_812D094(0);
+        sub_812D094(1);
+        sub_812D094(2);
+        sub_812D094(3);
+        FreeAllWindowBuffers();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_812D094(u8 windowId)
+{
+    FillWindowPixelBuffer(windowId, 0);
+    ClearWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 2);
+    RemoveWindow(windowId);
 }

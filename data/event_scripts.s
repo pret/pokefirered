@@ -226,7 +226,12 @@ gUnknown_81A8DD8:: @ 81A8DD8
 	.incbin "baserom.gba", 0x1A8DD8, 0x25
 
 gUnknown_81A8DFD:: @ 81A8DFD
-	.incbin "baserom.gba", 0x1A8DFD, 0xA072
+	.incbin "baserom.gba", 0x1A8DFD, 0x738b
+
+	.include "data/text/fame_checker.inc"
+
+gUnknown_81B0C45:: @ 0x81B0C45
+	.incbin "baserom.gba", 0x1B0C45, 0x222A
 
 gUnknown_81B2E6F:: @ 81B2E6F
 	.incbin "baserom.gba", 0x1B2E6F, 0x15A

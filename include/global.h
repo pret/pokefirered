@@ -570,6 +570,11 @@ struct QuestLog
     /*0x0668*/ u16 end[0];
 };
 
+struct FameCheckerSaveData
+{
+	/*3a54*/ u8 unk_0_0:2;
+};
+
 #define MAP_OBJECTS_COUNT  16
 #define BERRY_TREES_COUNT  128
 #define FLAGS_COUNT        288 // 300
@@ -634,7 +639,8 @@ struct SaveBlock1
     /*0x3A14*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3A48*/ u8 filler_3a48[4];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
-    /*0x3A54*/ u8 filler3A54[0x2E4];
+    /*0x3A54*/ struct FameCheckerSaveData fameChecker[17];
+    /*0x3A98*/ u8 filler3A94[0x2A0];
                u32 unkArray[4][3];
 };
 

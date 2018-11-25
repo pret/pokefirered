@@ -14,6 +14,7 @@
 #include "sound.h"
 #include "text.h"
 #include "window.h"
+#include "string_util.h"
 #include "text_window.h"
 
 struct FameCheckerData
@@ -65,7 +66,7 @@ void sub_812CE04(u8 taskId);
 void sub_812CE9C(void);
 void sub_812CEC0(void);
 void sub_812CEE0(u8 windowId);
-void sub_812CEFC(u8 taskId, u8 a1);
+bool8 sub_812CEFC(u8 taskId, u8 a1);
 void sub_812CF3C(u8 taskId);
 void sub_812D0F4(u8 a0);
 void sub_812D1A8(u8 a0);
@@ -93,6 +94,7 @@ void sub_812E4A4(u8 a0);
 extern const u8 gUnknown_84181E4[];
 
 extern const u16 gUnknown_845C600[];
+extern const u8 *const gUnknown_845F63C[];
 extern const struct BgTemplate gUnknown_845FBF4[4];
 extern const struct SpriteSheet gUnknown_845FB9C[];
 extern const struct SpritePalette gUnknown_845FBDC[];
@@ -415,5 +417,45 @@ void sub_812CAD8(u8 taskId)
             task->data[1]++;
             sub_812CC68(taskId, +0x2f, 0);
         }
+    }
+}
+
+void sub_812CC68(u8 taskId, s8 dx, s8 dy)
+{
+    u8 i;
+    s16 *data = gTasks[taskId].data;
+    PlaySE(SE_W155);
+    gSprites[data[0]].pos1.x += dx;
+    gSprites[data[0]].pos1.y += dy;
+    for (i = 0; i < 6; i++)
+        sub_812CEFC(gUnknown_203B0FC->unk_1D[i], 1);
+    FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
+    sub_812C990();
+    if (sub_812CEFC(gUnknown_203B0FC->unk_1D[data[1]], 0) == TRUE)
+    {
+        sub_812CE04(taskId);
+        sub_812DA14(data[1]);
+    }
+    else if (gUnknown_3005EC8 != 0xFF)
+        sub_812DB10();
+}
+
+void sub_812CD3C(void)
+{
+    u8 r8 = 0;
+    u16 r6 = sub_812E064();
+    if (gSaveBlock1Ptr->fameChecker[gUnknown_203B0FC->unk_0C[r6]].unk_0_0 != 2)
+    {
+        sub_812CE9C();
+        sub_812C990();
+    }
+    else
+    {
+        FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
+        if (sub_812D6B4() == TRUE)
+            r8 = 16;
+        StringExpandPlaceholders(gStringVar4, gUnknown_845F63C[gUnknown_203B0FC->unk_0C[r6] + r8]);
+        AddTextPrinterParametrized(2, 2, gStringVar4, sub_80F78A8(), 0, 2, 1, 3);
+        sub_812CEE0(2);
     }
 }

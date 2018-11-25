@@ -16,5 +16,6 @@ void SetStandardWindowBorderStyle(u8 a0, u8 a1);
 void sub_8197930(void);
 u8 GetPlayerTextSpeed(void);
 void sub_80F6F54(u8, u8);
+u8 sub_80F78A8(void);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

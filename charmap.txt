@@ -383,6 +383,11 @@ ENG = FC 16
 PAUSE_MUSIC = FC 17
 RESUME_MUSIC = FC 18
 
+@ font sizes
+
+SMALL = FC 06 00
+BIG   = FC 06 04
+
 @ colors
 
 TRANSPARENT = 00
@@ -393,7 +398,7 @@ BLUE = 04
 YELLOW = 05
 CYAN = 06
 MAGENTA = 07
-LIGHT_GREY = 08
+LIGHT_GRAY = 08
 BLACK = 09
 BLACK2 = 0A @ duplicate of black?
 SILVER = 0B

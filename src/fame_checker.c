@@ -17,6 +17,7 @@
 #include "text.h"
 #include "window.h"
 #include "string_util.h"
+#include "field_map_obj.h"
 #include "text_window.h"
 
 struct FameCheckerData
@@ -73,7 +74,7 @@ void sub_812CF3C(u8 taskId);
 void sub_812CF7C(u8 taskId);
 void sub_812D094(u8 windowId);
 void sub_812D0F4(u8 a0);
-void sub_812D1A8(u8 a0);
+bool8 sub_812D1A8(u8 a0);
 void sub_812D420(void);
 void sub_812D558(void);
 void sub_812D584(void);
@@ -83,6 +84,7 @@ void sub_812D70C(void);
 u8 sub_812D724(s16 a0);
 void sub_812D764(struct Sprite *sprite);
 void sub_812D770(void);
+u8 sub_812D780(u8, u8);
 void sub_812D7C8(void);
 u8 sub_812D7E4(void);
 void sub_812D800(struct Sprite *sprite);
@@ -108,6 +110,7 @@ extern const u16 gUnknown_845C600[];
 extern const u8 *const gUnknown_845F63C[];
 extern const struct TextColor gUnknown_845F5E0;
 extern const u8 *const gUnknown_845F6BC[];
+extern const u8 gUnknown_845F83C[];
 extern const struct BgTemplate gUnknown_845FBF4[4];
 extern const struct SpriteSheet gUnknown_845FB9C[];
 extern const struct SpritePalette gUnknown_845FBDC[];
@@ -600,4 +603,46 @@ void sub_812D174(void)
     {
         DestroySprite(&gSprites[gUnknown_203B0FC->unk_1D[r4]]);
     }
+}
+
+bool8 sub_812D1A8(u8 a0)
+{
+    // r8 <- a0
+    bool8 r5 = FALSE;
+    u8 r6;
+    for (r6 = 0; r6 < 6; r6++)
+    {
+        if ((gSaveBlock1Ptr->fameChecker[gUnknown_203B0FC->unk_0C[a0]].unk_0_2 >> r6) & 1)
+        {
+            gUnknown_203B0FC->unk_1D[r6] = sub_805EB44(
+                gUnknown_845F83C[gUnknown_203B0FC->unk_0C[a0] * 6 + r6],
+                r6,
+                47 * (r6 % 3) + 0x72,
+                27 * (r6 / 3) + 0x2F
+            );
+            r5 = TRUE;
+        }
+        else
+        {
+            gUnknown_203B0FC->unk_1D[r6] = sub_812D780(
+                47 * (r6 % 3) + 0x72,
+                27 * (r6 / 3) + 0x1F
+            );
+            gSprites[gUnknown_203B0FC->unk_1D[r6]].data[1] = 0xFF;
+        }
+    }
+    if (r5 == TRUE)
+    {
+        gUnknown_203B0FC->unk_07_0 = TRUE;
+        if (gUnknown_203B0FC->unk_07_1)
+            sub_812D0F4(TRUE);
+        else
+            sub_812D0F4(FALSE);
+    }
+    else
+    {
+        gUnknown_203B0FC->unk_07_0 = FALSE;
+        sub_812D0F4(TRUE);
+    }
+    return r5;
 }

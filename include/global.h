@@ -572,7 +572,8 @@ struct QuestLog
 
 struct FameCheckerSaveData
 {
-	/*3a54*/ u8 unk_0_0:2;
+	/*3a54*/ u16 unk_0_0:2;
+	         u16 unk_0_2:12;
 };
 
 #define MAP_OBJECTS_COUNT  16

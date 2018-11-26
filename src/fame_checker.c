@@ -53,14 +53,14 @@ struct FameCheckerData
     u8 unk_23_2:1;
 };
 
-EWRAM_DATA u16 * gUnknown_203B0F0 = NULL;
-EWRAM_DATA u16 * gUnknown_203B0F4 = NULL;
-EWRAM_DATA u16 * gUnknown_203B0F8 = NULL;
-EWRAM_DATA struct FameCheckerData * gUnknown_203B0FC = NULL;
-EWRAM_DATA struct ListMenuItem * gUnknown_203B100 = NULL;
-EWRAM_DATA s32 gUnknown_203B104 = 0;
+static EWRAM_DATA u16 * sBg3TilemapBuffer = NULL;
+static EWRAM_DATA u16 * sBg1TilemapBuffer = NULL;
+static EWRAM_DATA u16 * sBg2TilemapBuffer = NULL;
+static EWRAM_DATA struct FameCheckerData * sFameCheckerData = NULL;
+static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
+static EWRAM_DATA s32 sLastMenuIdx = 0;
 
-struct ListMenuTemplate gUnknown_3005EB0;
+struct ListMenuTemplate gFameChecker_ListMenuTemplate;
 u8 gUnknown_3005EC8;
 
 static void sub_812C3F8(void);
@@ -499,12 +499,12 @@ static void sub_812C394(void)
 void UseFameChecker(MainCallback savedCallback)
 {
     SetVBlankCallback(NULL);
-    gUnknown_203B0FC = AllocZeroed(sizeof(struct FameCheckerData));
-    gUnknown_203B0FC->savedCallback = savedCallback;
-    gUnknown_203B0FC->unk_09 = 0;
-    gUnknown_203B0FC->unk_0A = 0;
-    gUnknown_203B0FC->unk_0B = 0;
-    gUnknown_203B0FC->unk_23_0 = FALSE;
+    sFameCheckerData = AllocZeroed(sizeof(struct FameCheckerData));
+    sFameCheckerData->savedCallback = savedCallback;
+    sFameCheckerData->unk_09 = 0;
+    sFameCheckerData->unk_0A = 0;
+    sFameCheckerData->unk_0B = 0;
+    sFameCheckerData->unk_23_0 = FALSE;
     PlaySE(SE_W202);
     SetMainCallback2(sub_812C3F8);
 }
@@ -523,14 +523,14 @@ static void sub_812C3F8(void)
             gMain.state++;
             break;
         case 2:
-            gUnknown_203B0F0 = AllocZeroed(0x800);
-            gUnknown_203B0F4 = AllocZeroed(0x1000);
-            gUnknown_203B0F8 = AllocZeroed(0x800);
+            sBg3TilemapBuffer = AllocZeroed(0x800);
+            sBg1TilemapBuffer = AllocZeroed(0x1000);
+            sBg2TilemapBuffer = AllocZeroed(0x800);
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(0, gUnknown_845FBF4, ARRAY_COUNT(gUnknown_845FBF4));
-            SetBgTilemapBuffer(3, gUnknown_203B0F0);
-            SetBgTilemapBuffer(2, gUnknown_203B0F8);
-            SetBgTilemapBuffer(1, gUnknown_203B0F4);
+            SetBgTilemapBuffer(3, sBg3TilemapBuffer);
+            SetBgTilemapBuffer(2, sBg2TilemapBuffer);
+            SetBgTilemapBuffer(1, sBg1TilemapBuffer);
             sub_812D594();
             gMain.state++;
             break;
@@ -561,7 +561,7 @@ static void sub_812C3F8(void)
             InitWindows(gUnknown_845FC04);
             DeactivateAllTextPrinters();
             sub_812CEC0();
-            gUnknown_203B100 = AllocZeroed(17 * sizeof(struct ListMenuItem));
+            sListMenuItems = AllocZeroed(17 * sizeof(struct ListMenuItem));
             sub_812DB28();
             gMain.state++;
             break;
@@ -578,7 +578,7 @@ static void sub_812C3F8(void)
             SetGpuReg(REG_OFFSET_BLDALPHA, 0x07);
             SetGpuReg(REG_OFFSET_BLDY, 0x08);
             SetVBlankCallback(sub_812C380);
-            gUnknown_203B0FC->unk_04 = 0;
+            sFameCheckerData->unk_04 = 0;
             sub_812E000();
             sub_812E178(1, 4);
             CreateTask(sub_812C664, 0x08);
@@ -609,7 +609,7 @@ static void sub_812C694(u8 taskId)
     if (FindTaskIdByFunc(sub_812E110) == 0xFF)
     {
         RunTextPrinters();
-        if ((PRESSED(SELECT_BUTTON)) && !gUnknown_203B0FC->unk_07_1 && gUnknown_203B0FC->savedCallback != sub_8107EB8)
+        if ((PRESSED(SELECT_BUTTON)) && !sFameCheckerData->unk_07_1 && sFameCheckerData->savedCallback != sub_8107EB8)
             task->func = sub_812CF3C;
         else if (PRESSED(START_BUTTON))
         {
@@ -618,7 +618,7 @@ static void sub_812C694(u8 taskId)
             {
                 PlaySE(SE_W100);
             }
-            else if (r4 != gUnknown_203B0FC->unk_07_2 - 1)
+            else if (r4 != sFameCheckerData->unk_07_2 - 1)
             {
                 PlaySE(SE_W100);
                 FillWindowPixelRect(3, 0x00, 0, 0, 88, 32);
@@ -626,7 +626,7 @@ static void sub_812C694(u8 taskId)
                 sub_812E178(2, 4);
                 sub_812E178(1, 5);
                 sub_812D0F4(1);
-                task->data[2] = sub_812D888(gUnknown_203B0FC->unlockedPersons[r4]);
+                task->data[2] = sub_812D888(sFameCheckerData->unlockedPersons[r4]);
                 gSprites[task->data[2]].pos2.x = 0xF0;
                 gSprites[task->data[2]].data[0] = 1;
                 task->data[3] = sub_812D7E4();
@@ -638,26 +638,26 @@ static void sub_812C694(u8 taskId)
         else if (PRESSED(A_BUTTON))
         {
             r4 = ListMenuHandleInput(0);
-            if (r4 == gUnknown_203B0FC->unk_07_2 - 1)
+            if (r4 == sFameCheckerData->unk_07_2 - 1)
                 task->func = sub_812CF3C;
-            else if (gUnknown_203B0FC->unk_07_1)
+            else if (sFameCheckerData->unk_07_1)
             {
                 if (!IsTextPrinterActive(2) && sub_812D6B4() == TRUE)
                     sub_812CD3C();
             }
-            else if (gUnknown_203B0FC->unk_07_0)
+            else if (sFameCheckerData->unk_07_0)
             {
                 PlaySE(SE_SELECT);
                 task->data[0] = sub_812D724(task->data[1]);
                 for (r4_2 = 0; r4_2 < 6; r4_2++)
                 {
                     if (r4_2 != task->data[1])
-                        sub_812CEFC(gUnknown_203B0FC->spriteIds[r4_2], ST_OAM_OBJ_BLEND);
+                        sub_812CEFC(sFameCheckerData->spriteIds[r4_2], ST_OAM_OBJ_BLEND);
                 }
                 gUnknown_3005EC8 = 0xFF;
                 sub_812E4A4(0);
                 sub_812D0F4(2);
-                if (gSprites[gUnknown_203B0FC->spriteIds[task->data[1]]].data[1] != 0xFF)
+                if (gSprites[sFameCheckerData->spriteIds[task->data[1]]].data[1] != 0xFF)
                 {
                     sub_812CE04(taskId);
                     sub_812DA14(data[1]);
@@ -679,7 +679,7 @@ static void sub_812C694(u8 taskId)
 static bool8 sub_812C8F8(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    if (gUnknown_203B0FC->unk_07_1)
+    if (sFameCheckerData->unk_07_1)
     {
         gSprites[task->data[2]].data[0] = 2;
         gSprites[task->data[2]].pos2.x += 10;
@@ -688,7 +688,7 @@ static bool8 sub_812C8F8(u8 taskId)
         sub_812CE9C();
         task->func = sub_812CA1C;
         sub_812C990();
-        gUnknown_203B0FC->unk_23_2 = FALSE;
+        sFameCheckerData->unk_23_2 = FALSE;
         return TRUE;
     }
     return FALSE;
@@ -705,7 +705,7 @@ static void sub_812C9BC(u8 taskId)
     if (gSprites[task->data[2]].data[0] == 0)
     {
         sub_812CD3C();
-        gUnknown_203B0FC->unk_07_1 = TRUE;
+        sFameCheckerData->unk_07_1 = TRUE;
         task->func = sub_812C694;
     }
     else
@@ -721,11 +721,11 @@ static void sub_812CA1C(u8 taskId)
         ChangeBgX(1, 0x000, 0);
     if (gSprites[task->data[2]].data[0] == 0)
     {
-        if (gUnknown_203B0FC->unk_07_0)
+        if (sFameCheckerData->unk_07_0)
             sub_812D0F4(0);
         sub_812E178(1, 4);
         sub_812E178(2, 2);
-        gUnknown_203B0FC->unk_07_1 = FALSE;
+        sFameCheckerData->unk_07_1 = FALSE;
         sub_812D9A8(taskId, sub_812E064());
         task->func = sub_812C694;
         gSprites[task->data[3]].callback = sub_812D800;
@@ -740,7 +740,7 @@ static void sub_812CAD8(u8 taskId)
     RunTextPrinters();
     if (PRESSED(A_BUTTON) && !IsTextPrinterActive(2))
     {
-        u8 spriteId = gUnknown_203B0FC->spriteIds[data[1]];
+        u8 spriteId = sFameCheckerData->spriteIds[data[1]];
         if (gSprites[spriteId].data[1] != 0xFF)
             sub_812CE04(taskId);
     }
@@ -749,7 +749,7 @@ static void sub_812CAD8(u8 taskId)
         u8 r4;
         PlaySE(SE_SELECT);
         for (r4 = 0; r4 < 6; r4++)
-            sub_812CEFC(gUnknown_203B0FC->spriteIds[r4], ST_OAM_OBJ_NORMAL);
+            sub_812CEFC(sFameCheckerData->spriteIds[r4], ST_OAM_OBJ_NORMAL);
         sub_812CE9C();
         gSprites[task->data[0]].callback = sub_812D764;
         if (gUnknown_3005EC8 != 0xFF)
@@ -809,10 +809,10 @@ static void sub_812CC68(u8 taskId, s8 dx, s8 dy)
     gSprites[data[0]].pos1.x += dx;
     gSprites[data[0]].pos1.y += dy;
     for (i = 0; i < 6; i++)
-        sub_812CEFC(gUnknown_203B0FC->spriteIds[i], ST_OAM_OBJ_BLEND);
+        sub_812CEFC(sFameCheckerData->spriteIds[i], ST_OAM_OBJ_BLEND);
     FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
     sub_812C990();
-    if (sub_812CEFC(gUnknown_203B0FC->spriteIds[data[1]], ST_OAM_OBJ_NORMAL) == TRUE)
+    if (sub_812CEFC(sFameCheckerData->spriteIds[data[1]], ST_OAM_OBJ_NORMAL) == TRUE)
     {
         sub_812CE04(taskId);
         sub_812DA14(data[1]);
@@ -825,7 +825,7 @@ static void sub_812CD3C(void)
 {
     u8 r8 = 0;
     u16 r6 = sub_812E064();
-    if (gSaveBlock1Ptr->fameChecker[gUnknown_203B0FC->unlockedPersons[r6]].unk_0_0 != 2)
+    if (gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[r6]].unk_0_0 != 2)
     {
         sub_812CE9C();
         sub_812C990();
@@ -835,7 +835,7 @@ static void sub_812CD3C(void)
         FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
         if (sub_812D6B4() == TRUE)
             r8 = 16;
-        StringExpandPlaceholders(gStringVar4, gUnknown_845F63C[gUnknown_203B0FC->unlockedPersons[r6] + r8]);
+        StringExpandPlaceholders(gStringVar4, gUnknown_845F63C[sFameCheckerData->unlockedPersons[r6] + r8]);
         AddTextPrinterParametrized(2, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
         sub_812CEE0(2);
     }
@@ -846,7 +846,7 @@ static void sub_812CE04(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 r5 = sub_812E064();
     FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
-    StringExpandPlaceholders(gStringVar4, gUnknown_845F6BC[gUnknown_203B0FC->unlockedPersons[r5] * 6 + data[1]]);
+    StringExpandPlaceholders(gStringVar4, gUnknown_845F6BC[sFameCheckerData->unlockedPersons[r5] * 6 + data[1]]);
     AddTextPrinterParametrized(2, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
     sub_812CEE0(2);
 }
@@ -894,7 +894,7 @@ static void sub_812CF7C(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (gUnknown_203B0FC->unk_07_1)
+        if (sFameCheckerData->unk_07_1)
         {
             sub_812D9A8(taskId, sub_812E064());
             FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[3]]);
@@ -902,20 +902,20 @@ static void sub_812CF7C(u8 taskId)
         }
         for (r4 = 0; r4 < 6; r4++)
         {
-            DestroySprite(&gSprites[gUnknown_203B0FC->spriteIds[r4]]);
+            DestroySprite(&gSprites[sFameCheckerData->spriteIds[r4]]);
         }
         sub_812D814();
         sub_812D7C8();
         sub_812D70C();
         sub_812D770();
         sub_812E048();
-        SetMainCallback2(gUnknown_203B0FC->savedCallback);
-        sub_810713C(gUnknown_203B0FC->scrollIndicatorArrowObjectTaskId, 0, 0);
-        Free(gUnknown_203B0F0);
-        Free(gUnknown_203B0F4);
-        Free(gUnknown_203B0F8);
-        Free(gUnknown_203B0FC);
-        Free(gUnknown_203B100);
+        SetMainCallback2(sFameCheckerData->savedCallback);
+        sub_810713C(sFameCheckerData->scrollIndicatorArrowObjectTaskId, 0, 0);
+        Free(sBg3TilemapBuffer);
+        Free(sBg1TilemapBuffer);
+        Free(sBg2TilemapBuffer);
+        Free(sFameCheckerData);
+        Free(sListMenuItems);
         sub_812D094(0);
         sub_812D094(1);
         sub_812D094(2);
@@ -966,7 +966,7 @@ static void sub_812D174(void)
     u8 r4;
     for (r4 = 0; r4 < 6; r4++)
     {
-        DestroySprite(&gSprites[gUnknown_203B0FC->spriteIds[r4]]);
+        DestroySprite(&gSprites[sFameCheckerData->spriteIds[r4]]);
     }
 }
 
@@ -977,10 +977,10 @@ static bool8 sub_812D1A8(u8 a0)
     u8 r6;
     for (r6 = 0; r6 < 6; r6++)
     {
-        if ((gSaveBlock1Ptr->fameChecker[gUnknown_203B0FC->unlockedPersons[a0]].unk_0_2 >> r6) & 1)
+        if ((gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[a0]].unk_0_2 >> r6) & 1)
         {
-            gUnknown_203B0FC->spriteIds[r6] = sub_805EB44(
-                gUnknown_845F83C[gUnknown_203B0FC->unlockedPersons[a0] * 6 + r6],
+            sFameCheckerData->spriteIds[r6] = sub_805EB44(
+                gUnknown_845F83C[sFameCheckerData->unlockedPersons[a0] * 6 + r6],
                 r6,
                 47 * (r6 % 3) + 0x72,
                 27 * (r6 / 3) + 0x2F
@@ -989,24 +989,24 @@ static bool8 sub_812D1A8(u8 a0)
         }
         else
         {
-            gUnknown_203B0FC->spriteIds[r6] = sub_812D780(
+            sFameCheckerData->spriteIds[r6] = sub_812D780(
                 47 * (r6 % 3) + 0x72,
                 27 * (r6 / 3) + 0x1F
             );
-            gSprites[gUnknown_203B0FC->spriteIds[r6]].data[1] = 0xFF;
+            gSprites[sFameCheckerData->spriteIds[r6]].data[1] = 0xFF;
         }
     }
     if (r5 == TRUE)
     {
-        gUnknown_203B0FC->unk_07_0 = TRUE;
-        if (gUnknown_203B0FC->unk_07_1)
+        sFameCheckerData->unk_07_0 = TRUE;
+        if (sFameCheckerData->unk_07_1)
             sub_812D0F4(TRUE);
         else
             sub_812D0F4(FALSE);
     }
     else
     {
-        gUnknown_203B0FC->unk_07_0 = FALSE;
+        sFameCheckerData->unk_07_0 = FALSE;
         sub_812D0F4(TRUE);
     }
     return r5;
@@ -1119,7 +1119,7 @@ static void sub_812D650(void)
 static bool8 sub_812D6B4(void)
 {
     u8 r2;
-    u8 r1 = gUnknown_203B0FC->unlockedPersons[sub_812E064()];
+    u8 r1 = sFameCheckerData->unlockedPersons[sub_812E064()];
     for (r2 = 0; r2 < 6; r2++)
     {
         if (!((gSaveBlock1Ptr->fameChecker[r1].unk_0_2 >> r2) & 1))
@@ -1249,12 +1249,12 @@ static void sub_812D9A8(u8 taskId, u16 a1)
 {
     s16 * data = gTasks[taskId].data;
     u16 r1 = a1;
-    if (a1 == gUnknown_203B0FC->unk_07_2 - 1)
+    if (a1 == sFameCheckerData->unk_07_2 - 1)
         r1 = a1 - 1;
-    if (   gUnknown_203B0FC->unlockedPersons[r1] == 1
-        || gUnknown_203B0FC->unlockedPersons[r1] == 14
-        || gUnknown_203B0FC->unlockedPersons[r1] == 0
-        || gUnknown_203B0FC->unlockedPersons[r1] == 13
+    if (   sFameCheckerData->unlockedPersons[r1] == 1
+        || sFameCheckerData->unlockedPersons[r1] == 14
+        || sFameCheckerData->unlockedPersons[r1] == 0
+        || sFameCheckerData->unlockedPersons[r1] == 13
     )
         DestroySprite(&gSprites[data[2]]);
     else
@@ -1264,7 +1264,7 @@ static void sub_812D9A8(u8 taskId, u16 a1)
 static void sub_812DA14(u8 a0)
 {
     s32 width;
-    u32 r5 = 6 * gUnknown_203B0FC->unlockedPersons[sub_812E064()] + a0;
+    u32 r5 = 6 * sFameCheckerData->unlockedPersons[sub_812E064()] + a0;
     sub_812E094(1);
     gUnknown_3005EC8 = 1;
     FillWindowPixelRect(3, 0x00, 0, 0, 0x58, 0x20);
@@ -1285,31 +1285,31 @@ static void sub_812DB10(void)
 static void sub_812DB28(void)
 {
     sub_812DB64();
-    gUnknown_203B0FC->unk_07_2 = sub_812DEF0();
-    gUnknown_203B0FC->scrollIndicatorArrowObjectTaskId = ListMenuInit(&gUnknown_3005EB0, 0, 0);
+    sFameCheckerData->unk_07_2 = sub_812DEF0();
+    sFameCheckerData->scrollIndicatorArrowObjectTaskId = ListMenuInit(&gFameChecker_ListMenuTemplate, 0, 0);
     sub_812DFE4(0);
 }
 
 static void sub_812DB64(void)
 {
-    gUnknown_3005EB0.items = gUnknown_203B100;
-    gUnknown_3005EB0.moveCursorFunc = sub_812DBC0;
-    gUnknown_3005EB0.itemPrintFunc = NULL;
-    gUnknown_3005EB0.totalItems = 1;
-    gUnknown_3005EB0.maxShowed = 1;
-    gUnknown_3005EB0.windowId = 0;
-    gUnknown_3005EB0.header_X = 0;
-    gUnknown_3005EB0.item_X = 8;
-    gUnknown_3005EB0.cursor_X = 0;
-    gUnknown_3005EB0.upText_Y = 4;
-    gUnknown_3005EB0.cursorPal = 2;
-    gUnknown_3005EB0.fillValue = 0;
-    gUnknown_3005EB0.cursorShadowPal = 3;
-    gUnknown_3005EB0.lettersSpacing = 0;
-    gUnknown_3005EB0.itemVerticalPadding = 0;
-    gUnknown_3005EB0.scrollMultiple = 0;
-    gUnknown_3005EB0.fontId = 2;
-    gUnknown_3005EB0.cursorKind = 0;
+    gFameChecker_ListMenuTemplate.items = sListMenuItems;
+    gFameChecker_ListMenuTemplate.moveCursorFunc = sub_812DBC0;
+    gFameChecker_ListMenuTemplate.itemPrintFunc = NULL;
+    gFameChecker_ListMenuTemplate.totalItems = 1;
+    gFameChecker_ListMenuTemplate.maxShowed = 1;
+    gFameChecker_ListMenuTemplate.windowId = 0;
+    gFameChecker_ListMenuTemplate.header_X = 0;
+    gFameChecker_ListMenuTemplate.item_X = 8;
+    gFameChecker_ListMenuTemplate.cursor_X = 0;
+    gFameChecker_ListMenuTemplate.upText_Y = 4;
+    gFameChecker_ListMenuTemplate.cursorPal = 2;
+    gFameChecker_ListMenuTemplate.fillValue = 0;
+    gFameChecker_ListMenuTemplate.cursorShadowPal = 3;
+    gFameChecker_ListMenuTemplate.lettersSpacing = 0;
+    gFameChecker_ListMenuTemplate.itemVerticalPadding = 0;
+    gFameChecker_ListMenuTemplate.scrollMultiple = 0;
+    gFameChecker_ListMenuTemplate.fontId = 2;
+    gFameChecker_ListMenuTemplate.cursorKind = 0;
 }
 
 static void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
@@ -1317,8 +1317,8 @@ static void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
     u16 sp8;
     u8 taskId;
     u16 r9;
-    gUnknown_203B104 = 0;
-    r9 = gUnknown_203B0FC->unk_0A + gUnknown_203B0FC->unk_0B;
+    sLastMenuIdx = 0;
+    r9 = sFameCheckerData->unk_0A + sFameCheckerData->unk_0B;
     sub_812DDF0(itemIndex, onInit);
     taskId = FindTaskIdByFunc(sub_812C694);
     if (taskId != 0xFF)
@@ -1326,24 +1326,24 @@ static void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         struct Task *task = &gTasks[taskId];
         PlaySE(SE_SELECT);
         task->data[1] = 0;
-        get_coro_args_x18_x1A(gUnknown_203B0FC->scrollIndicatorArrowObjectTaskId, &sp8, NULL);
-        gUnknown_203B0FC->unk_04 = sp8;
-        if (itemIndex != gUnknown_203B0FC->unk_07_2 - 1)
+        get_coro_args_x18_x1A(sFameCheckerData->scrollIndicatorArrowObjectTaskId, &sp8, NULL);
+        sFameCheckerData->unk_04 = sp8;
+        if (itemIndex != sFameCheckerData->unk_07_2 - 1)
         {
             sub_812D174();
             sub_812D1A8(itemIndex);
-            if (gUnknown_203B0FC->unk_07_1)
+            if (sFameCheckerData->unk_07_1)
             {
-                if (!gUnknown_203B0FC->unk_23_2)
+                if (!sFameCheckerData->unk_23_2)
                 {
                     sub_812D9A8(taskId, r9);
-                    gUnknown_203B104 = itemIndex;
+                    sLastMenuIdx = itemIndex;
                     task->func = sub_812DD50;
                 }
                 else
                 {
                     gSprites[task->data[2]].invisible = FALSE;
-                    gUnknown_203B0FC->unk_23_2 = FALSE;
+                    sFameCheckerData->unk_23_2 = FALSE;
                     gSprites[task->data[2]].data[0] = 0;
                     sub_812CD3C();
                 }
@@ -1357,17 +1357,17 @@ static void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         else
         {
             sub_812DDAC();
-            if (gUnknown_203B0FC->unk_07_1)
+            if (sFameCheckerData->unk_07_1)
             {
                 gSprites[task->data[2]].invisible = TRUE;
-                gUnknown_203B0FC->unk_23_2 = TRUE;
+                sFameCheckerData->unk_23_2 = TRUE;
             }
             else
             {
                 u8 r2;
                 for (r2 = 0; r2 < 6; r2++)
                 {
-                    gSprites[gUnknown_203B0FC->spriteIds[r2]].invisible = TRUE;
+                    gSprites[sFameCheckerData->spriteIds[r2]].invisible = TRUE;
                 }
             }
         }
@@ -1377,7 +1377,7 @@ static void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 static void sub_812DD50(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
-    task->data[2] = sub_812D888(gUnknown_203B0FC->unlockedPersons[gUnknown_203B104]);
+    task->data[2] = sub_812D888(sFameCheckerData->unlockedPersons[sLastMenuIdx]);
     gSprites[task->data[2]].data[0] = 0;
     sub_812CD3C();
     task->func = sub_812C694;
@@ -1395,21 +1395,21 @@ static void sub_812DDF0(s32 itemIndex, bool8 onInit)
     u16 sp14;
     u16 sp16;
     u16 r6;
-    get_coro_args_x18_x1A(gUnknown_203B0FC->scrollIndicatorArrowObjectTaskId, &sp14, &sp16);
+    get_coro_args_x18_x1A(sFameCheckerData->scrollIndicatorArrowObjectTaskId, &sp14, &sp16);
     r6 = sp14 + sp16;
-    AddTextPrinterParametrized2(0, 2, 8, 14 * sp16 + 4, 0, 0, &gUnknown_845F5E6, 0, gUnknown_203B100[itemIndex].unk_00);
+    AddTextPrinterParametrized2(0, 2, 8, 14 * sp16 + 4, 0, 0, &gUnknown_845F5E6, 0, sListMenuItems[itemIndex].unk_00);
     if (!onInit)
     {
-        if (sp14 < gUnknown_203B0FC->unk_0A)
-            gUnknown_203B0FC->unk_0B++;
-        else if (sp14 > gUnknown_203B0FC->unk_0A && r6 != gUnknown_203B0FC->unk_07_2 - 1)
-            gUnknown_203B0FC->unk_0B--;
-        AddTextPrinterParametrized2(0, 2, 8, 14 * gUnknown_203B0FC->unk_0B + 4, 0, 0, &gUnknown_845F5E3, 0, gUnknown_203B100[gUnknown_203B0FC->unk_09].unk_00);
+        if (sp14 < sFameCheckerData->unk_0A)
+            sFameCheckerData->unk_0B++;
+        else if (sp14 > sFameCheckerData->unk_0A && r6 != sFameCheckerData->unk_07_2 - 1)
+            sFameCheckerData->unk_0B--;
+        AddTextPrinterParametrized2(0, 2, 8, 14 * sFameCheckerData->unk_0B + 4, 0, 0, &gUnknown_845F5E3, 0, sListMenuItems[sFameCheckerData->unk_09].unk_00);
 
     }
-    gUnknown_203B0FC->unk_09 = itemIndex;
-    gUnknown_203B0FC->unk_0B = sp16;
-    gUnknown_203B0FC->unk_0A = sp14;
+    sFameCheckerData->unk_09 = itemIndex;
+    sFameCheckerData->unk_0B = sp16;
+    sFameCheckerData->unk_0A = sp14;
 }
 
 static u8 sub_812DEF0(void)
@@ -1424,27 +1424,27 @@ static u8 sub_812DEF0(void)
         {
             if (gUnknown_845F5EA[r5] < 0xFE00)
             {
-                gUnknown_203B100[r4].unk_00 = gTrainers[gUnknown_845F5EA[r5]].trainerName;
-                gUnknown_203B100[r4].unk_04 = r4;
+                sListMenuItems[r4].unk_00 = gTrainers[gUnknown_845F5EA[r5]].trainerName;
+                sListMenuItems[r4].unk_04 = r4;
             }
             else
             {
-                gUnknown_203B100[r4].unk_00 = gUnknown_845F60C[gUnknown_845F5EA[r5] - 0xFE00];
-                gUnknown_203B100[r4].unk_04 = r4;
+                sListMenuItems[r4].unk_00 = gUnknown_845F60C[gUnknown_845F5EA[r5] - 0xFE00];
+                sListMenuItems[r4].unk_04 = r4;
             }
-            gUnknown_203B0FC->unlockedPersons[r4] = r5;
+            sFameCheckerData->unlockedPersons[r4] = r5;
             r4++;
         }
     }
-    gUnknown_203B100[r4].unk_00 = gUnknown_84161C1;
-    gUnknown_203B100[r4].unk_04 = r4;
-    gUnknown_203B0FC->unlockedPersons[r4] = 0xFF;
+    sListMenuItems[r4].unk_00 = gUnknown_84161C1;
+    sListMenuItems[r4].unk_04 = r4;
+    sFameCheckerData->unlockedPersons[r4] = 0xFF;
     r4++;
-    gUnknown_3005EB0.totalItems = r4;
+    gFameChecker_ListMenuTemplate.totalItems = r4;
     if (r4 < 5)
-        gUnknown_3005EB0.maxShowed = r4;
+        gFameChecker_ListMenuTemplate.maxShowed = r4;
     else
-        gUnknown_3005EB0.maxShowed = 5;
+        gFameChecker_ListMenuTemplate.maxShowed = 5;
     return r4;
 }
 
@@ -1471,30 +1471,30 @@ static void sub_812E000(void)
              0
     };
 
-    if (gUnknown_203B0FC->unk_07_2 > 5)
+    if (sFameCheckerData->unk_07_2 > 5)
     {
         sp0.unk_06 = 0;
-        sp0.unk_08 = gUnknown_203B0FC->unk_07_2 - 5;
-        gUnknown_203B0FC->unk_06 = AddScrollIndicatorArrowPair(&sp0, &gUnknown_203B0FC->unk_04);
+        sp0.unk_08 = sFameCheckerData->unk_07_2 - 5;
+        sFameCheckerData->unk_06 = AddScrollIndicatorArrowPair(&sp0, &sFameCheckerData->unk_04);
     }
 }
 
 static void sub_812E048(void)
 {
-    if (gUnknown_203B0FC->unk_07_2 > 5)
-        RemoveScrollIndicatorArrowPair(gUnknown_203B0FC->unk_06);
+    if (sFameCheckerData->unk_07_2 > 5)
+        RemoveScrollIndicatorArrowPair(sFameCheckerData->unk_06);
 }
 
 static u16 sub_812E064(void)
 {
     u16 sp0, sp2;
-    get_coro_args_x18_x1A(gUnknown_203B0FC->scrollIndicatorArrowObjectTaskId, &sp0, &sp2);
+    get_coro_args_x18_x1A(sFameCheckerData->scrollIndicatorArrowObjectTaskId, &sp0, &sp2);
     return sp0 + sp2;
 }
 
 static void sub_812E094(u8 a0)
 {
-    if (gUnknown_203B0FC->unk_23_0 != a0)
+    if (sFameCheckerData->unk_23_0 != a0)
     {
         u8 taskId = FindTaskIdByFunc(sub_812E110);
         if (taskId == 0xFF)
@@ -1504,12 +1504,12 @@ static void sub_812E094(u8 a0)
         if (a0 == TRUE)
         {
             gTasks[taskId].data[2] = 1;
-            gUnknown_203B0FC->unk_23_0 = TRUE;
+            sFameCheckerData->unk_23_0 = TRUE;
         }
         else
         {
             gTasks[taskId].data[2] = 4;
-            gUnknown_203B0FC->unk_23_0 = FALSE;
+            sFameCheckerData->unk_23_0 = FALSE;
         }
     }
 }
@@ -1601,7 +1601,7 @@ static void sub_812E178(u8 bg, s16 a1)
 
 static void sub_812E4A4(u8 a0)
 {
-    u16 cursorY = ListMenuGetYCoordForPrintingArrowCursor(gUnknown_203B0FC->scrollIndicatorArrowObjectTaskId);
+    u16 cursorY = ListMenuGetYCoordForPrintingArrowCursor(sFameCheckerData->scrollIndicatorArrowObjectTaskId);
     if (a0 == 1)
         AddTextPrinterParametrized2(0, 2, 0, cursorY, 0, 0, &gUnknown_845F5E3, 0, gUnknown_841623B);
     else

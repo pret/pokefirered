@@ -1,2 +1,2 @@
-gUnknown_3005EB0
+gFameChecker_ListMenuTemplate
 gUnknown_3005EC8

@@ -2097,7 +2097,31 @@ gUnknown_841E5B9:: @ 841E5B9
 	.incbin "baserom.gba", 0x41E5B9, 0x19
 
 gUnknown_841E5D2:: @ 841E5D2
-	.incbin "baserom.gba", 0x41E5D2, 0xCF
+	.string "{UNKNOWN_F8 0x0C}PICK {UNKNOWN_F8 0x00}READ {UNKNOWN_F8 0x01}CANCEL$"
+
+gUnknown_841E5E9:: @ 841E5E9
+	.string "OAK$"
+
+gUnknown_841E5ED:: @ 841E5ED
+	.string "DAISY$"
+
+gUnknown_841E5F3:: @ 841E5F3
+	.string "BILL$"
+
+gUnknown_841E5F8:: @ 841E5F8
+	.string "FUJI$"
+
+gUnknown_841E5FD:: @ 841E5FD
+	.string "A variety of events will be imported\nover Wireless Communication.$"
+
+gUnknown_841E63F:: @ 841E63F
+	.string "Read the WONDER CARDS in your\npossession.$"
+
+gUnknown_841E669:: @ 841E669
+	.string "Read the NEWS that arrived.$"
+
+gUnknown_841E685:: @ 841E685
+	.string "Return to the title screen.$"
 
 gUnknown_841E6A1:: @ 841E6A1
 	.incbin "baserom.gba", 0x41E6A1, 0x3B

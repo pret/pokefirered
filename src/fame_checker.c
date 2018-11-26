@@ -3,6 +3,7 @@
 #include "sprite.h"
 #include "bg.h"
 #include "event_data.h"
+#include "event_scripts.h"
 #include "graphics.h"
 #include "battle.h"
 #include "battle_setup.h"
@@ -125,21 +126,221 @@ extern const u8 gUnknown_84181E4[];
 extern const u8 gUnknown_841E5A4[];
 extern const u8 gUnknown_841E5B9[];
 extern const u8 gUnknown_841E5D2[];
+extern const u8 gUnknown_841E5E9[];
+extern const u8 gUnknown_841E5ED[];
+extern const u8 gUnknown_841E5F3[];
+extern const u8 gUnknown_841E5F8[];
 
-extern const u16 gUnknown_845C600[];
-extern const u16 gUnknown_845DD20[];
-extern const u16 gUnknown_845E540[];
-extern const u16 gUnknown_845ED60[];
-extern const u16 gUnknown_845F580[];
-extern const u16 gUnknown_845F5C0[];
-extern const struct TextColor gUnknown_845F5E0;
-extern const struct TextColor gUnknown_845F5E3;
-extern const struct TextColor gUnknown_845F5E6;
-extern const u16 gUnknown_845F5EA[];
-extern const u8 gUnknown_845F61C[];
-extern const u8 *const gUnknown_845F60C[];
-extern const u8 *const gUnknown_845F63C[];
-extern const u8 *const gUnknown_845F6BC[];
+const u16 gUnknown_845C600[] = INCBIN_U16("data/fame_checker/tilemap_845c600.bin");
+const u16 gUnknown_845DD20[] = INCBIN_U16("data/fame_checker/pal_845dd20.gbapal");
+const u16 gUnknown_845DD40[] = INCBIN_U16("data/fame_checker/img_845dd40.4bpp");
+const u16 gUnknown_845E540[] = INCBIN_U16("data/fame_checker/pal_845e540.gbapal");
+const u16 gUnknown_845E560[] = INCBIN_U16("data/fame_checker/img_845e560.4bpp");
+const u16 gUnknown_845ED60[] = INCBIN_U16("data/fame_checker/pal_845ed60.gbapal");
+const u16 gUnknown_845ED80[] = INCBIN_U16("data/fame_checker/img_845ed80.4bpp");
+const u16 gUnknown_845F580[] = INCBIN_U16("data/fame_checker/pal_845f580.gbapal");
+const u16 gUnknown_845F5A0[] = INCBIN_U16("data/fame_checker/pal_845f5a0.gbapal");
+const u16 gUnknown_845F5C0[] = INCBIN_U16("data/fame_checker/pal_845f5c0.gbapal");
+
+const struct TextColor gUnknown_845F5E0 = {0x00, 0x01, 0x02};
+const struct TextColor gUnknown_845F5E3 = {0x00, 0x02, 0x03};
+const struct TextColor gUnknown_845F5E6 = {0x00, 0x06, 0x07};
+
+const u16 gUnknown_845F5EA[] = {
+    0xfe00,
+    0xfe01,
+    0x019e,
+    0x019f,
+    0x01a0,
+    0x01a1,
+    0x01a2,
+    0x01a4,
+    0x01a3,
+    0x019a,
+    0x019b,
+    0x019c,
+    0x019d,
+    0xfe02,
+    0xfe03,
+    0x015c
+};
+
+const u8 *const gUnknown_845F60C[] = {
+    gUnknown_841E5E9,
+    gUnknown_841E5ED,
+    gUnknown_841E5F3,
+    gUnknown_841E5F8
+};
+
+const u8 gUnknown_845F61C[] = {
+    0x56,
+    0x54,
+    0x74,
+    0x75,
+    0x76,
+    0x77,
+    0x78,
+    0x7a,
+    0x79,
+    0x70,
+    0x71,
+    0x72,
+    0x73,
+    0x64,
+    0x7b,
+    0x6c,
+    0x00,
+    0x01,
+    0x00,
+    0x01,
+    0x00,
+    0x01,
+    0x00,
+    0x01,
+    0x00,
+    0x01,
+    0x00,
+    0x01,
+    0x00,
+    0x00,
+    0x00,
+    0x00
+};
+
+const u8 *const gUnknown_845F63C[] = {
+    gUnknown_81B0188,
+    gUnknown_81B0251,
+    gUnknown_81B030F,
+    gUnknown_81B03B3,
+    gUnknown_81B0446,
+    gUnknown_81B0504,
+    gUnknown_81B05C2,
+    gUnknown_81B0667,
+    gUnknown_81B06FB,
+    gUnknown_81B079F,
+    gUnknown_81B0845,
+    gUnknown_81B08EE,
+    gUnknown_81B097F,
+    gUnknown_81B0A45,
+    gUnknown_81B0AFF,
+    gUnknown_81B0BA6,
+    gUnknown_81B0198,
+    gUnknown_81B025D,
+    gUnknown_81B031B,
+    gUnknown_81B03BF,
+    gUnknown_81B0456,
+    gUnknown_81B0510,
+    gUnknown_81B05CD,
+    gUnknown_81B0675,
+    gUnknown_81B0708,
+    gUnknown_81B07AD,
+    gUnknown_81B0851,
+    gUnknown_81B08FB,
+    gUnknown_81B098B,
+    gUnknown_81B0A50,
+    gUnknown_81B0B0E,
+    gUnknown_81B0BB5
+};
+
+const u8 *const gUnknown_845F6BC[] = {
+    gUnknown_81AD106,
+    gUnknown_81AD145,
+    gUnknown_81AD1BB,
+    gUnknown_81AD258,
+    gUnknown_81AD2B9,
+    gUnknown_81AD377,
+    gUnknown_81AD40C,
+    gUnknown_81AD4AE,
+    gUnknown_81AD516,
+    gUnknown_81AD5A7,
+    gUnknown_81AD608,
+    gUnknown_81AD69F,
+    gUnknown_81AD705,
+    gUnknown_81AD771,
+    gUnknown_81AD840,
+    gUnknown_81AD908,
+    gUnknown_81AD99A,
+    gUnknown_81ADA27,
+    gUnknown_81ADA91,
+    gUnknown_81ADAF6,
+    gUnknown_81ADB5A,
+    gUnknown_81ADBD9,
+    gUnknown_81ADC72,
+    gUnknown_81ADCEB,
+    gUnknown_81ADD3C,
+    gUnknown_81ADDA7,
+    gUnknown_81ADE0B,
+    gUnknown_81ADE82,
+    gUnknown_81ADEEC,
+    gUnknown_81ADF6A,
+    gUnknown_81AE009,
+    gUnknown_81AE072,
+    gUnknown_81AE0F3,
+    gUnknown_81AE15B,
+    gUnknown_81AE1E5,
+    gUnknown_81AE247,
+    gUnknown_81AE2B6,
+    gUnknown_81AE31D,
+    gUnknown_81AE37D,
+    gUnknown_81AE407,
+    gUnknown_81AE48D,
+    gUnknown_81AE51B,
+    gUnknown_81AE5E8,
+    gUnknown_81AE656,
+    gUnknown_81AE6D7,
+    gUnknown_81AE762,
+    gUnknown_81AE7CB,
+    gUnknown_81AE841,
+    gUnknown_81AE89E,
+    gUnknown_81AE90A,
+    gUnknown_81AE990,
+    gUnknown_81AEA59,
+    gUnknown_81AEAEE,
+    gUnknown_81AEB69,
+    gUnknown_81AEBDF,
+    gUnknown_81AEC28,
+    gUnknown_81AEC82,
+    gUnknown_81AED27,
+    gUnknown_81AEDAA,
+    gUnknown_81AEE51,
+    gUnknown_81AEF25,
+    gUnknown_81AEF6C,
+    gUnknown_81AEFC6,
+    gUnknown_81AF04C,
+    gUnknown_81AF0F0,
+    gUnknown_81AF19A,
+    gUnknown_81AF200,
+    gUnknown_81AF248,
+    gUnknown_81AF2B7,
+    gUnknown_81AF34E,
+    gUnknown_81AF3BE,
+    gUnknown_81AF47C,
+    gUnknown_81AF4FD,
+    gUnknown_81AF567,
+    gUnknown_81AF641,
+    gUnknown_81AF6BA,
+    gUnknown_81AF758,
+    gUnknown_81AF7CB,
+    gUnknown_81AF83E,
+    gUnknown_81AF8CA,
+    gUnknown_81AF929,
+    gUnknown_81AF998,
+    gUnknown_81AFA20,
+    gUnknown_81AFAB9,
+    gUnknown_81AFB0C,
+    gUnknown_81AFB76,
+    gUnknown_81AFC38,
+    gUnknown_81AFCE9,
+    gUnknown_81AFD49,
+    gUnknown_81AFDC4,
+    gUnknown_81AFE68,
+    gUnknown_81AFF23,
+    gUnknown_81AFFA8,
+    gUnknown_81B0022,
+    gUnknown_81B00A6,
+    gUnknown_81B0106
+};
+
 extern const u8 *const gUnknown_845F89C[];
 extern const u8 *const gUnknown_845FA1C[];
 extern const u8 gUnknown_845F83C[];

@@ -323,6 +323,7 @@ TALL_PLUS   = FC 0C FB
 
 @ TODO: Identify and declare F7 control codes
 UNKNOWN_F7 = F7
+UNKNOWN_F8 = F8
 UNKNOWN_F9 = F9
 
 STRING = FD

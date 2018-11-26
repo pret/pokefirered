@@ -50,16 +50,11 @@ struct FameCheckerData
     u8 unk_23_2:1;
 };
 
-struct FameCheckerData2
-{
-    u8 filler_00[0x88];
-};
-
 EWRAM_DATA u16 * gUnknown_203B0F0 = NULL;
 EWRAM_DATA u16 * gUnknown_203B0F4 = NULL;
 EWRAM_DATA u16 * gUnknown_203B0F8 = NULL;
 EWRAM_DATA struct FameCheckerData * gUnknown_203B0FC = NULL;
-EWRAM_DATA struct FameCheckerData2 * gUnknown_203B100 = NULL;
+EWRAM_DATA struct ListMenuItem * gUnknown_203B100 = NULL;
 EWRAM_DATA u32 gUnknown_203B104 = 0;
 
 struct ListMenuTemplate gUnknown_3005EB0;
@@ -106,6 +101,10 @@ void sub_812D9A8(u8 a0, u16 a1);
 void sub_812DA14(u8 a0);
 void sub_812DB10(void);
 void sub_812DB28(void);
+void sub_812DB64(void);
+void sub_812DBC0(s32, bool8, struct ListMenu *);
+u8 sub_812DEF0(void);
+void sub_812DFE4(u8);
 void sub_812E000(void);
 void sub_812E048(void);
 u16 sub_812E064(void);
@@ -225,7 +224,7 @@ void sub_812C3F8(void)
             InitWindows(gUnknown_845FC04);
             DeactivateAllTextPrinters();
             sub_812CEC0();
-            gUnknown_203B100 = AllocZeroed(sizeof(struct FameCheckerData2));
+            gUnknown_203B100 = AllocZeroed(17 * sizeof(struct ListMenuItem));
             sub_812DB28();
             gMain.state++;
             break;
@@ -938,4 +937,40 @@ void sub_812DA14(u8 a0)
     width = (0x54 - GetStringWidth(0, gStringVar1, 0)) / 2;
     AddTextPrinterParametrized2(3, 0, width, 10, 0, 2, &gUnknown_845F5E3, -1, gStringVar1);
     sub_812CEE0(3);
+}
+
+void sub_812DB10(void)
+{
+    sub_812E094(0);
+    gUnknown_3005EC8 = 0xFF;
+}
+
+void sub_812DB28(void)
+{
+    sub_812DB64();
+    gUnknown_203B0FC->unk_07_2 = sub_812DEF0();
+    gUnknown_203B0FC->unk_08 = ListMenuInit(&gUnknown_3005EB0, 0, 0);
+    sub_812DFE4(0);
+}
+
+void sub_812DB64(void)
+{
+    gUnknown_3005EB0.items = gUnknown_203B100;
+    gUnknown_3005EB0.moveCursorFunc = sub_812DBC0;
+    gUnknown_3005EB0.itemPrintFunc = NULL;
+    gUnknown_3005EB0.totalItems = 1;
+    gUnknown_3005EB0.maxShowed = 1;
+    gUnknown_3005EB0.windowId = 0;
+    gUnknown_3005EB0.header_X = 0;
+    gUnknown_3005EB0.item_X = 8;
+    gUnknown_3005EB0.cursor_X = 0;
+    gUnknown_3005EB0.upText_Y = 4;
+    gUnknown_3005EB0.cursorPal = 2;
+    gUnknown_3005EB0.fillValue = 0;
+    gUnknown_3005EB0.cursorShadowPal = 3;
+    gUnknown_3005EB0.lettersSpacing = 0;
+    gUnknown_3005EB0.itemVerticalPadding = 0;
+    gUnknown_3005EB0.scrollMultiple = 0;
+    gUnknown_3005EB0.fontId = 2;
+    gUnknown_3005EB0.cursorKind = 0;
 }

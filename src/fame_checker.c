@@ -335,9 +335,55 @@ const struct SpriteSheet gUnknown_845FB9C[] = {
     {}
 };
 
-extern const struct SpritePalette gUnknown_845FBDC[];
-extern const struct BgTemplate gUnknown_845FBF4[4];
-extern const struct WindowTemplate gUnknown_845FC04[];
+const struct SpritePalette gUnknown_845FBDC[] = {
+    {gUnknown_845D500, SPRITETAG_1000},
+    {gUnknown_845D0E0, SPRITETAG_1002},
+    {}
+};
+
+const struct BgTemplate gUnknown_845FBF4[4] = {
+    {
+        .bg = 3,
+        .charBaseIndex = 0x03,
+        .mapBaseIndex =  0x1e,
+        .screenSize = 0,
+        .paletteMode = FALSE,
+        .priority = 3,
+        .baseTile = 0x000},
+    {
+        .bg = 2,
+        .charBaseIndex = 0x03,
+        .mapBaseIndex =  0x1b,
+        .screenSize = 0,
+        .paletteMode = FALSE,
+        .priority = 2,
+        .baseTile = 0x000},
+    {
+        .bg = 1,
+        .charBaseIndex = 0x03,
+        .mapBaseIndex =  0x1c,
+        .screenSize = 1,
+        .paletteMode = FALSE,
+        .priority = 0,
+        .baseTile = 0x000},
+    {
+        .bg = 0,
+        .charBaseIndex = 0x00,
+        .mapBaseIndex =  0x1f,
+        .screenSize = 0,
+        .paletteMode = FALSE,
+        .priority = 2,
+        .baseTile = 0x000},
+};
+
+const struct WindowTemplate gUnknown_845FC04[] = {
+    {0x00, 0x01, 0x03, 0x08, 0x0a, 0x0f, 0x0014},
+    {0x00, 0x06, 0x00, 0x18, 0x02, 0x0f, 0x0064},
+    {0x00, 0x02, 0x0f, 0x1a, 0x04, 0x0f, 0x0094},
+    {0x00, 0x0f, 0x0a, 0x0b, 0x04, 0x0f, 0x00fc},
+    DUMMY_WIN_TEMPLATE
+};
+
 extern const struct SpriteTemplate gUnknown_845FC44;
 extern const struct SpriteTemplate gUnknown_845FC78;
 extern const struct SpriteTemplate gUnknown_845FCB8;

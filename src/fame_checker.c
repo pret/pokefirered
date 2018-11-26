@@ -118,12 +118,13 @@ void sub_812E110(u8 taskId);
 void sub_812E178(u8 a0, s16 a1);
 void sub_812E4A4(u8 a0);
 
+extern const u8 gUnknown_84161C1[];
+extern const u8 gUnknown_841623B[];
 extern const u8 gUnknown_84181C3[];
 extern const u8 gUnknown_84181E4[];
 extern const u8 gUnknown_841E5A4[];
 extern const u8 gUnknown_841E5B9[];
 extern const u8 gUnknown_841E5D2[];
-extern const u8 gUnknown_84161C1[];
 
 extern const u16 gUnknown_845C600[];
 extern const u16 gUnknown_845DD20[];
@@ -1150,4 +1151,120 @@ u16 sub_812E064(void)
     u16 sp0, sp2;
     get_coro_args_x18_x1A(gUnknown_203B0FC->unk_08, &sp0, &sp2);
     return sp0 + sp2;
+}
+
+void sub_812E094(u8 a0)
+{
+    if (gUnknown_203B0FC->unk_23_0 != a0)
+    {
+        u8 taskId = FindTaskIdByFunc(sub_812E110);
+        if (taskId == 0xFF)
+            taskId = CreateTask(sub_812E110, 8);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = 4;
+        if (a0 == TRUE)
+        {
+            gTasks[taskId].data[2] = 1;
+            gUnknown_203B0FC->unk_23_0 = TRUE;
+        }
+        else
+        {
+            gTasks[taskId].data[2] = 4;
+            gUnknown_203B0FC->unk_23_0 = FALSE;
+        }
+    }
+}
+
+void sub_812E110(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+        case 0:
+            if (--task->data[1] == 0)
+            {
+                sub_812E178(1, 0);
+                task->data[1] = 4;
+                task->data[0]++;
+            }
+            break;
+        case 1:
+            if (--task->data[1] == 0)
+            {
+                sub_812E178(1, task->data[2]);
+                DestroyTask(taskId);
+            }
+            break;
+    }
+}
+
+void sub_812E178(u8 bg, s16 a1)
+{
+    if (a1 == 0 || a1 == 3)
+    {
+        FillBgTilemapBufferRect(bg, 0x8C, 14, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0xA1, 15, 10, 10,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x8D, 25, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x8E, 26, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x8F, 14, 11,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x00, 15, 11, 11,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x90, 26, 11,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x91, 14, 12,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0xA3, 15, 12, 10,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x92, 25, 12,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x93, 26, 12,  1,  1, 1);
+    }
+    else if (a1 == 1)
+    {
+        FillBgTilemapBufferRect(bg, 0x9B, 14, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x9C, 15, 10, 11,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x96, 26, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x9D, 14, 11,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x00, 15, 11, 11,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x90, 26, 11,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x9E, 14, 12,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x9F, 15, 12, 11,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x99, 26, 12,  1,  1, 1);
+    }
+    else if (a1 == 2)
+    {
+        FillBgTilemapBufferRect(bg, 0x94, 14, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x95, 15, 10, 11,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x96, 26, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x8F, 14, 11,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x9A, 15, 11, 11,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x90, 26, 11,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x97, 14, 12,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x98, 15, 12, 11,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x99, 26, 12,  1,  1, 1);
+    }
+    else if (a1 == 4)
+    {
+        FillBgTilemapBufferRect(bg, 0x83, 14, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0xA0, 15, 10, 10,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x84, 25, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x85, 26, 10,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x86, 14, 11,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0xA2, 15, 11, 10,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x87, 25, 11,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x88, 26, 11,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x83, 14, 12,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0xA0, 15, 12, 10,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x84, 25, 12,  1,  1, 1);
+        FillBgTilemapBufferRect(bg, 0x85, 26, 12,  1,  1, 1);
+    }
+    else if (a1 == 5)
+    {
+        FillBgTilemapBufferRect(bg, 0x00, 14, 10, 13,  3, 1);
+    }
+    CopyBgTilemapBufferToVram(bg);
+}
+
+void sub_812E4A4(u8 a0)
+{
+    u16 cursorY = ListMenuGetYCoordForPrintingArrowCursor(gUnknown_203B0FC->unk_08);
+    if (a0 == 1)
+        AddTextPrinterParametrized2(0, 2, 0, cursorY, 0, 0, &gUnknown_845F5E3, 0, gUnknown_841623B);
+    else
+        AddTextPrinterParametrized2(0, 2, 0, cursorY, 0, 0, &gUnknown_845F5E0, 0, gUnknown_841623B);
 }

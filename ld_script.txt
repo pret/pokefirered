@@ -227,7 +227,6 @@ SECTIONS {
         asm/help_system_812B1E0.o(.text);
         src/quest_log_battle.o(.text);
         src/fame_checker.o(.text);
-        asm/fame_checker.o(.text);
         asm/menu2.o(.text);
         asm/oak_speech.o(.text);
         asm/tm_case.o(.text);

@@ -29,6 +29,7 @@
 #define SPRITETAG_1000 1000
 #define SPRITETAG_1001 1001
 #define SPRITETAG_1002 1002
+#define SPRITETAG_1004 1004
 #define SPRITETAG_1006 1006
 #define SPRITETAG_1007 1007
 #define SPRITETAG_1008 1008
@@ -1457,18 +1458,18 @@ static void sub_812DFE4(u8 windowId)
 static void sub_812E000(void)
 {
     struct ScrollIndicatorArrowPairTemplate sp0 = {
-             2,
-            40,
-            26,
-             3,
-            40,
-           100,
-             0,
-             0,
-          1004,
-        0xFFFF,
-             1,
-             0
+                       2,
+                      40,
+                      26,
+                       3,
+                      40,
+                     100,
+                       0,
+                       0,
+          SPRITETAG_1004,
+                  0xFFFF,
+                       1,
+                       0
     };
 
     if (sFameCheckerData->unk_07_2 > 5)

@@ -23,6 +23,14 @@
 #include "field_map_obj.h"
 #include "text_window.h"
 
+#define SPRITETAG_1000 1000
+#define SPRITETAG_1001 1001
+#define SPRITETAG_1002 1002
+#define SPRITETAG_1006 1006
+#define SPRITETAG_1007 1007
+#define SPRITETAG_1008 1008
+#define SPRITETAG_1009 1009
+
 struct FameCheckerData
 {
     MainCallback unk_00;
@@ -119,6 +127,9 @@ extern const struct BgTemplate gUnknown_845FBF4[4];
 extern const struct SpriteSheet gUnknown_845FB9C[];
 extern const struct SpritePalette gUnknown_845FBDC[];
 extern const struct WindowTemplate gUnknown_845FC04[];
+extern const struct SpriteTemplate gUnknown_845FC44;
+extern const struct SpriteTemplate gUnknown_845FC78;
+extern const struct SpriteTemplate gUnknown_845FCB8;
 
 void sub_812C380(void)
 {
@@ -741,4 +752,84 @@ void sub_812D5EC(void)
         gSpecialVar_0x8005 = 1;
         sub_812D650();
     }
+}
+
+void sub_812D650(void)
+{
+    if (gUnknown_20370C0 < 16 && gSpecialVar_0x8005 < 3)
+    {
+        if (gSpecialVar_0x8005 == 0)
+            return;
+        if (gSpecialVar_0x8005 == 1 && gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].unk_0_0 == 2)
+            return;
+        gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].unk_0_0 = gSpecialVar_0x8005;
+    }
+}
+
+bool8 sub_812D6B4(void)
+{
+    u8 r2;
+    u8 r1 = gUnknown_203B0FC->unk_0C[sub_812E064()];
+    for (r2 = 0; r2 < 6; r2++)
+    {
+        if (!((gSaveBlock1Ptr->fameChecker[r1].unk_0_2 >> r2) & 1))
+            return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_812D70C(void)
+{
+    FreeSpriteTilesByTag(SPRITETAG_1000);
+    FreeSpritePaletteByTag(SPRITETAG_1000);
+}
+
+u8 sub_812D724(s16 a0)
+{
+    s16 r4 = a0 >= 3 ? 61 : 34;
+    s16 r1 = 47 * (a0 % 3) + 0x72;
+    return CreateSprite(&gUnknown_845FC44, r1, r4, 0);
+}
+
+void sub_812D764(struct Sprite * sprite)
+{
+    DestroySprite(sprite);
+}
+
+void sub_812D770(void)
+{
+    FreeSpriteTilesByTag(SPRITETAG_1001);
+}
+
+u8 sub_812D780(u8 x, u8 y)
+{
+    u8 spriteId = CreateSprite(&gUnknown_845FC78, x, y, 8);
+    gSprites[spriteId].oam.priority = 2;
+    gSprites[spriteId].oam.paletteNum = 2;
+    return spriteId;
+}
+
+void sub_812D7C8(void)
+{
+    FreeSpriteTilesByTag(SPRITETAG_1002);
+    FreeSpritePaletteByTag(SPRITETAG_1002);
+}
+
+u8 sub_812D7E4(void)
+{
+    return CreateSprite(&gUnknown_845FCB8, 0xe2, 0x42, 0);
+}
+
+void sub_812D800(struct Sprite * sprite)
+{
+    FreeSpriteOamMatrix(sprite);
+    DestroySprite(sprite);
+}
+
+void sub_812D814(void)
+{
+    FreeSpriteTilesByTag(SPRITETAG_1006);
+    FreeSpriteTilesByTag(SPRITETAG_1007);
+    FreeSpriteTilesByTag(SPRITETAG_1008);
+    FreeSpriteTilesByTag(SPRITETAG_1009);
 }

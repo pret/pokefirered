@@ -1731,7 +1731,7 @@ _080A1D54: .4byte sub_80A1D68
 sub_80A1D58: @ 80A1D58
 	push {lr}
 	ldr r0, _080A1D64 @ =sub_8107EB8
-	bl sub_812C3AC
+	bl UseFameChecker
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1752,7 +1752,7 @@ sub_80A1D68: @ 80A1D68
 	bl sub_80563F0
 	bl sub_80A1184
 	ldr r0, _080A1D98 @ =c2_exit_to_overworld_2_switch
-	bl sub_812C3AC
+	bl UseFameChecker
 	adds r0, r4, 0
 	bl DestroyTask
 _080A1D8E:

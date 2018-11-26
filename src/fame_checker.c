@@ -116,6 +116,7 @@ void sub_812E110(u8 taskId);
 void sub_812E178(u8 a0, s16 a1);
 void sub_812E4A4(u8 a0);
 
+extern const u8 gUnknown_84181C3[];
 extern const u8 gUnknown_84181E4[];
 extern const u8 gUnknown_841E5A4[];
 extern const u8 gUnknown_841E5B9[];
@@ -978,12 +979,11 @@ void sub_812DB64(void)
     gUnknown_3005EB0.cursorKind = 0;
 }
 
-#ifdef NONMATCHING
 void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     u16 sp8[2];
     u8 taskId;
-    s32 r9;
+    u16 r9;
     gUnknown_203B104 = 0;
     r9 = gUnknown_203B0FC->unk_0A + gUnknown_203B0FC->unk_0B;
     sub_812DDF0(itemIndex, onInit);
@@ -1003,11 +1003,6 @@ void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
             {
                 if (!gUnknown_203B0FC->unk_23_2)
                 {
-                    /*
-                     * The following two instructions compile in the wrong order:
-                     *     adds r0, r4, 0
-                     *     mov r1, r9
-                     */
                     sub_812D9A8(taskId, r9);
                     gUnknown_203B104 = itemIndex;
                     task->func = sub_812DD50;
@@ -1045,200 +1040,19 @@ void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         }
     }
 }
-#else
-NAKED
-void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu * list)
+
+void sub_812DD50(u8 taskId)
 {
-    asm_unified(  "push {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0xC\n"
-                "\tadds r7, r0, 0\n"
-                "\tlsls r1, 24\n"
-                "\tlsrs r1, 24\n"
-                "\tldr r0, _0812DC68 @ =gUnknown_203B104\n"
-                "\tmov r10, r0\n"
-                "\tmovs r2, 0\n"
-                "\tmov r8, r2\n"
-                "\tstr r2, [r0]\n"
-                "\tldr r6, _0812DC6C @ =gUnknown_203B0FC\n"
-                "\tldr r0, [r6]\n"
-                "\tldrb r2, [r0, 0xA]\n"
-                "\tldrb r0, [r0, 0xB]\n"
-                "\tadds r2, r0\n"
-                "\tmov r9, r2\n"
-                "\tadds r0, r7, 0\n"
-                "\tbl sub_812DDF0\n"
-                "\tldr r0, _0812DC70 @ =sub_812C694\n"
-                "\tbl FindTaskIdByFunc\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tcmp r4, 0xFF\n"
-                "\tbne _0812DBFE\n"
-                "\tb _0812DD3A\n"
-                "_0812DBFE:\n"
-                "\tlsls r0, r4, 2\n"
-                "\tadds r0, r4\n"
-                "\tlsls r0, 3\n"
-                "\tldr r1, _0812DC74 @ =gTasks\n"
-                "\tadds r5, r0, r1\n"
-                "\tmovs r0, 0x5\n"
-                "\tbl PlaySE\n"
-                "\tmov r0, r8\n"
-                "\tstrh r0, [r5, 0xA]\n"
-                "\tldr r0, [r6]\n"
-                "\tldrb r0, [r0, 0x8]\n"
-                "\tadd r1, sp, 0x8\n"
-                "\tmovs r2, 0\n"
-                "\tbl get_coro_args_x18_x1A\n"
-                "\tldr r1, [r6]\n"
-                "\tadd r0, sp, 0x8\n"
-                "\tldrh r0, [r0]\n"
-                "\tstrh r0, [r1, 0x4]\n"
-                "\tldrb r0, [r1, 0x7]\n"
-                "\tlsrs r0, 2\n"
-                "\tsubs r0, 0x1\n"
-                "\tcmp r7, r0\n"
-                "\tbeq _0812DCD8\n"
-                "\tbl sub_812D174\n"
-                "\tlsls r0, r7, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tbl sub_812D1A8\n"
-                "\tldr r2, [r6]\n"
-                "\tldrb r1, [r2, 0x7]\n"
-                "\tmovs r0, 0x2\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0812DCBC\n"
-                "\tadds r0, r2, 0\n"
-                "\tadds r0, 0x23\n"
-                "\tldrb r1, [r0]\n"
-                "\tmovs r0, 0x4\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0812DC7C\n"
-                "\tadds r0, r4, 0\n"
-                "\tmov r1, r9\n"
-                "\tbl sub_812D9A8\n"
-                "\tmov r1, r10\n"
-                "\tstr r7, [r1]\n"
-                "\tldr r0, _0812DC78 @ =sub_812DD50\n"
-                "\tstr r0, [r5]\n"
-                "\tb _0812DD3A\n"
-                "\t.align 2, 0\n"
-                "_0812DC68: .4byte gUnknown_203B104\n"
-                "_0812DC6C: .4byte gUnknown_203B0FC\n"
-                "_0812DC70: .4byte sub_812C694\n"
-                "_0812DC74: .4byte gTasks\n"
-                "_0812DC78: .4byte sub_812DD50\n"
-                "_0812DC7C:\n"
-                "\tldr r4, _0812DCB8 @ =gSprites\n"
-                "\tmovs r2, 0xC\n"
-                "\tldrsh r0, [r5, r2]\n"
-                "\tlsls r1, r0, 4\n"
-                "\tadds r1, r0\n"
-                "\tlsls r1, 2\n"
-                "\tadds r1, r4\n"
-                "\tadds r1, 0x3E\n"
-                "\tldrb r3, [r1]\n"
-                "\tmovs r2, 0x5\n"
-                "\tnegs r2, r2\n"
-                "\tadds r0, r2, 0\n"
-                "\tands r0, r3\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, 0x23\n"
-                "\tldrb r1, [r0]\n"
-                "\tands r2, r1\n"
-                "\tstrb r2, [r0]\n"
-                "\tmovs r0, 0xC\n"
-                "\tldrsh r1, [r5, r0]\n"
-                "\tlsls r0, r1, 4\n"
-                "\tadds r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r4\n"
-                "\tmov r1, r8\n"
-                "\tstrh r1, [r0, 0x2E]\n"
-                "\tbl sub_812CD3C\n"
-                "\tb _0812DD3A\n"
-                "\t.align 2, 0\n"
-                "_0812DCB8: .4byte gSprites\n"
-                "_0812DCBC:\n"
-                "\tmovs r0, 0xD0\n"
-                "\tstr r0, [sp]\n"
-                "\tmovs r0, 0x20\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tmovs r0, 0x2\n"
-                "\tmovs r1, 0x11\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0\n"
-                "\tbl FillWindowPixelRect\n"
-                "\tmovs r0, 0x2\n"
-                "\tbl sub_812CEE0\n"
-                "\tb _0812DD3A\n"
-                "_0812DCD8:\n"
-                "\tbl sub_812DDAC\n"
-                "\tldr r0, [r6]\n"
-                "\tldrb r1, [r0, 0x7]\n"
-                "\tmovs r0, 0x2\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0812DD10\n"
-                "\tldr r2, _0812DD0C @ =gSprites\n"
-                "\tmovs r0, 0xC\n"
-                "\tldrsh r1, [r5, r0]\n"
-                "\tlsls r0, r1, 4\n"
-                "\tadds r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r2\n"
-                "\tadds r0, 0x3E\n"
-                "\tldrb r1, [r0]\n"
-                "\tmovs r2, 0x4\n"
-                "\torrs r1, r2\n"
-                "\tstrb r1, [r0]\n"
-                "\tldr r1, [r6]\n"
-                "\tadds r1, 0x23\n"
-                "\tldrb r0, [r1]\n"
-                "\torrs r0, r2\n"
-                "\tstrb r0, [r1]\n"
-                "\tb _0812DD3A\n"
-                "\t.align 2, 0\n"
-                "_0812DD0C: .4byte gSprites\n"
-                "_0812DD10:\n"
-                "\tmovs r2, 0\n"
-                "\tldr r5, _0812DD4C @ =gSprites\n"
-                "\tadds r4, r6, 0\n"
-                "\tmovs r3, 0x4\n"
-                "_0812DD18:\n"
-                "\tldr r0, [r4]\n"
-                "\tadds r0, 0x1D\n"
-                "\tadds r0, r2\n"
-                "\tldrb r1, [r0]\n"
-                "\tlsls r0, r1, 4\n"
-                "\tadds r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r5\n"
-                "\tadds r0, 0x3E\n"
-                "\tldrb r1, [r0]\n"
-                "\torrs r1, r3\n"
-                "\tstrb r1, [r0]\n"
-                "\tadds r0, r2, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r2, r0, 24\n"
-                "\tcmp r2, 0x5\n"
-                "\tbls _0812DD18\n"
-                "_0812DD3A:\n"
-                "\tadd sp, 0xC\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_0812DD4C: .4byte gSprites");
+    struct Task * task = &gTasks[taskId];
+    task->data[2] = sub_812D888(gUnknown_203B0FC->unk_0C[gUnknown_203B104]);
+    gSprites[task->data[2]].data[0] = 0;
+    sub_812CD3C();
+    task->func = sub_812C694;
 }
-#endif // NONMATCHING
+
+void sub_812DDAC(void)
+{
+    FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
+    AddTextPrinterParametrized(2, 2, gUnknown_84181C3, 0, NULL, 2, 1, 3);
+    sub_812CEE0(2);
+}

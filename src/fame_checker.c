@@ -299,7 +299,25 @@ const u8 *const gUnknown_845F89C[] = {
     gUnknown_81B10F8, gUnknown_81B1107, gUnknown_81B1111, gUnknown_81B111B, gUnknown_81B1128, gUnknown_81B1135
 };
 
-extern const u8 *const gUnknown_845FA1C[];
+const u8 *const gUnknown_845FA1C[] = {
+    gUnknown_81B1146, gUnknown_81B114B, gUnknown_81B1155, gUnknown_81B115A, gUnknown_81B116A, gUnknown_81B1171,
+    gUnknown_81B1176, gUnknown_81B117B, gUnknown_81B1181, gUnknown_81B1185, gUnknown_81B1195, gUnknown_81B119E,
+    gUnknown_81B11AE, gUnknown_81B11B3, gUnknown_81B11B9, gUnknown_81B11C3, gUnknown_81B11C7, gUnknown_81B11CB,
+    gUnknown_81B11DB, gUnknown_81B11E0, gUnknown_81B11E6, gUnknown_81B11EB, gUnknown_81B11F5, gUnknown_81B11FA,
+    gUnknown_81B120A, gUnknown_81B120F, gUnknown_81B1219, gUnknown_81B1220, gUnknown_81B1227, gUnknown_81B122E,
+    gUnknown_81B123E, gUnknown_81B1243, gUnknown_81B1249, gUnknown_81B124E, gUnknown_81B1254, gUnknown_81B125A,
+    gUnknown_81B126A, gUnknown_81B126F, gUnknown_81B1274, gUnknown_81B1279, gUnknown_81B1281, gUnknown_81B1291,
+    gUnknown_81B1295, gUnknown_81B129A, gUnknown_81B12A4, gUnknown_81B12AC, gUnknown_81B12B4, gUnknown_81B12C4,
+    gUnknown_81B12CA, gUnknown_81B12CF, gUnknown_81B12D6, gUnknown_81B12DC, gUnknown_81B12E2, gUnknown_81B12E8,
+    gUnknown_81B12F8, gUnknown_81B1300, gUnknown_81B1308, gUnknown_81B1310, gUnknown_81B1320, gUnknown_81B132C,
+    gUnknown_81B1335, gUnknown_81B133B, gUnknown_81B1341, gUnknown_81B1351, gUnknown_81B1359, gUnknown_81B135F,
+    gUnknown_81B1367, gUnknown_81B136E, gUnknown_81B1376, gUnknown_81B137E, gUnknown_81B138E, gUnknown_81B1395,
+    gUnknown_81B139E, gUnknown_81B13A4, gUnknown_81B13AA, gUnknown_81B13B0, gUnknown_81B13BC, gUnknown_81B13CC,
+    gUnknown_81B13D6, gUnknown_81B13D9, gUnknown_81B13E4, gUnknown_81B13EC, gUnknown_81B13F2, gUnknown_81B13F8,
+    gUnknown_81B13FE, gUnknown_81B140A, gUnknown_81B1416, gUnknown_81B141F, gUnknown_81B1423, gUnknown_81B1429,
+    gUnknown_81B1439, gUnknown_81B1442, gUnknown_81B144C, gUnknown_81B1456, gUnknown_81B145F, gUnknown_81B1463
+};
+
 extern const struct BgTemplate gUnknown_845FBF4[4];
 extern const struct SpriteSheet gUnknown_845FB9C[];
 extern const struct SpritePalette gUnknown_845FBDC[];

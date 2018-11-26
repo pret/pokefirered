@@ -9,10 +9,18 @@
 
 struct ScrollIndicatorArrowPairTemplate
 {
-    u8 filler_00[6];
+    u8 unk_00;
+    u8 unk_01;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04;
+    u8 unk_05;
     u16 unk_06;
     u16 unk_08;
-    u8 filler_0a[6];
+    u16 unk_0a;
+    u16 unk_0c;
+    u16 unk_0e_0:4;
+    u16 unk_0e_4:12;
 };
 
 // Exported ROM declarations

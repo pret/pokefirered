@@ -481,8 +481,6 @@ const struct SpriteTemplate gUnknown_845FD2C = {
     SPRITETAG_1009, 0xffff, &gOamData_845FCDC, gUnknown_845FCD8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-extern const struct ScrollIndicatorArrowPairTemplate gUnknown_845FD44;
-
 void sub_812C380(void)
 {
     LoadOam();
@@ -1458,7 +1456,21 @@ void sub_812DFE4(u8 windowId)
 
 void sub_812E000(void)
 {
-    struct ScrollIndicatorArrowPairTemplate sp0 = gUnknown_845FD44;
+    struct ScrollIndicatorArrowPairTemplate sp0 = {
+             2,
+            40,
+            26,
+             3,
+            40,
+           100,
+             0,
+             0,
+          1004,
+        0xFFFF,
+             1,
+             0
+    };
+
     if (gUnknown_203B0FC->unk_07_2 > 5)
     {
         sp0.unk_06 = 0;

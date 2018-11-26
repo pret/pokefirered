@@ -377,7 +377,6 @@ SECTIONS {
         src/quest_log.o(.rodata);
         data/data_83FECCC.o(.rodata.8456C74);
         src/fame_checker.o(.rodata);
-        data/fame_checker.o(.rodata);
         data/data_845FD54.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);

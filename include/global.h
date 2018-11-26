@@ -68,8 +68,8 @@
 // GameFreak never ceases to amaze.
 // TODO: Propagate use of this macro
 #define TEST_BUTTON(field, button) ({(field) & (button);})
-#define PRESSED(button) TEST_BUTTON(gMain.newKeys,  button)
-#define PUSHED(button)  TEST_BUTTON(gMain.heldKeys, button)
+#define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
+#define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
 
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];

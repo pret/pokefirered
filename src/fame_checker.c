@@ -610,9 +610,9 @@ static void sub_812C694(u8 taskId)
     if (FindTaskIdByFunc(sub_812E110) == 0xFF)
     {
         RunTextPrinters();
-        if ((PRESSED(SELECT_BUTTON)) && !sFameCheckerData->unk_07_1 && sFameCheckerData->savedCallback != sub_8107EB8)
+        if ((JOY_NEW(SELECT_BUTTON)) && !sFameCheckerData->unk_07_1 && sFameCheckerData->savedCallback != sub_8107EB8)
             task->func = sub_812CF3C;
-        else if (PRESSED(START_BUTTON))
+        else if (JOY_NEW(START_BUTTON))
         {
             r4 = sub_812E064();
             if (sub_812C8F8(taskId) == TRUE)
@@ -636,7 +636,7 @@ static void sub_812C694(u8 taskId)
                 task->func = sub_812C9BC;
             }
         }
-        else if (PRESSED(A_BUTTON))
+        else if (JOY_NEW(A_BUTTON))
         {
             r4 = ListMenuHandleInput(0);
             if (r4 == sFameCheckerData->unk_07_2 - 1)
@@ -667,7 +667,7 @@ static void sub_812C694(u8 taskId)
                 task->func = sub_812CAD8;
             }
         }
-        else if (PRESSED(B_BUTTON))
+        else if (JOY_NEW(B_BUTTON))
         {
             if (sub_812C8F8(taskId) != TRUE)
                 task->func = sub_812CF3C;
@@ -739,13 +739,13 @@ static void sub_812CAD8(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     RunTextPrinters();
-    if (PRESSED(A_BUTTON) && !IsTextPrinterActive(2))
+    if (JOY_NEW(A_BUTTON) && !IsTextPrinterActive(2))
     {
         u8 spriteId = sFameCheckerData->spriteIds[data[1]];
         if (gSprites[spriteId].data[1] != 0xFF)
             sub_812CE04(taskId);
     }
-    if (PRESSED(B_BUTTON))
+    if (JOY_NEW(B_BUTTON))
     {
         u8 r4;
         PlaySE(SE_SELECT);
@@ -761,7 +761,7 @@ static void sub_812CAD8(u8 taskId)
         sub_812C990();
         task->func = sub_812C694;
     }
-    else if (PRESSED(DPAD_UP) || PRESSED(DPAD_DOWN))
+    else if (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_DOWN))
     {
         if (task->data[1] >= 3)
         {
@@ -774,7 +774,7 @@ static void sub_812CAD8(u8 taskId)
             sub_812CC68(taskId, 0, +0x1b);
         }
     }
-    else if (PRESSED(DPAD_LEFT))
+    else if (JOY_NEW(DPAD_LEFT))
     {
         if (task->data[1] == 0 || task->data[1] % 3 == 0)
         {
@@ -787,7 +787,7 @@ static void sub_812CAD8(u8 taskId)
             sub_812CC68(taskId, -0x2f, 0);
         }
     }
-    else if (PRESSED(DPAD_RIGHT))
+    else if (JOY_NEW(DPAD_RIGHT))
     {
         if ((task->data[1] + 1) % 3 == 0)
         {

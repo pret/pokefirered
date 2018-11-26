@@ -4,6 +4,7 @@
 #include "bg.h"
 #include "event_data.h"
 #include "graphics.h"
+#include "battle.h"
 #include "battle_setup.h"
 #include "menu.h"
 #include "battle_dome_cards.h"
@@ -21,6 +22,7 @@
 #include "window.h"
 #include "string_util.h"
 #include "field_map_obj.h"
+#include "menu_indicators.h"
 #include "text_window.h"
 
 #define SPRITETAG_1000 1000
@@ -35,7 +37,7 @@ struct FameCheckerData
 {
     MainCallback unk_00;
     u16 unk_04;
-    u8 filler_06[1];
+    u8 unk_06;
     u8 unk_07_0:1;
     u8 unk_07_1:1;
     u8 unk_07_2:6;
@@ -121,6 +123,7 @@ extern const u8 gUnknown_84181E4[];
 extern const u8 gUnknown_841E5A4[];
 extern const u8 gUnknown_841E5B9[];
 extern const u8 gUnknown_841E5D2[];
+extern const u8 gUnknown_84161C1[];
 
 extern const u16 gUnknown_845C600[];
 extern const u16 gUnknown_845DD20[];
@@ -130,7 +133,10 @@ extern const u16 gUnknown_845F580[];
 extern const u16 gUnknown_845F5C0[];
 extern const struct TextColor gUnknown_845F5E0;
 extern const struct TextColor gUnknown_845F5E3;
+extern const struct TextColor gUnknown_845F5E6;
+extern const u16 gUnknown_845F5EA[];
 extern const u8 gUnknown_845F61C[];
+extern const u8 *const gUnknown_845F60C[];
 extern const u8 *const gUnknown_845F63C[];
 extern const u8 *const gUnknown_845F6BC[];
 extern const u8 *const gUnknown_845F89C[];
@@ -147,6 +153,7 @@ extern const struct SpriteTemplate gUnknown_845FCE4;
 extern const struct SpriteTemplate gUnknown_845FCFC;
 extern const struct SpriteTemplate gUnknown_845FD14;
 extern const struct SpriteTemplate gUnknown_845FD2C;
+extern const struct ScrollIndicatorArrowPairTemplate gUnknown_845FD44;
 
 void sub_812C380(void)
 {
@@ -981,7 +988,7 @@ void sub_812DB64(void)
 
 void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
-    u16 sp8[2];
+    u16 sp8;
     u8 taskId;
     u16 r9;
     gUnknown_203B104 = 0;
@@ -993,8 +1000,8 @@ void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         struct Task *task = &gTasks[taskId];
         PlaySE(SE_SELECT);
         task->data[1] = 0;
-        get_coro_args_x18_x1A(gUnknown_203B0FC->unk_08, sp8, NULL);
-        gUnknown_203B0FC->unk_04 = sp8[0];
+        get_coro_args_x18_x1A(gUnknown_203B0FC->unk_08, &sp8, NULL);
+        gUnknown_203B0FC->unk_04 = sp8;
         if (itemIndex != gUnknown_203B0FC->unk_07_2 - 1)
         {
             sub_812D174();
@@ -1055,4 +1062,92 @@ void sub_812DDAC(void)
     FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
     AddTextPrinterParametrized(2, 2, gUnknown_84181C3, 0, NULL, 2, 1, 3);
     sub_812CEE0(2);
+}
+
+void sub_812DDF0(s32 itemIndex, bool8 onInit)
+{
+    u16 sp14;
+    u16 sp16;
+    u16 r6;
+    get_coro_args_x18_x1A(gUnknown_203B0FC->unk_08, &sp14, &sp16);
+    r6 = sp14 + sp16;
+    AddTextPrinterParametrized2(0, 2, 8, 14 * sp16 + 4, 0, 0, &gUnknown_845F5E6, 0, gUnknown_203B100[itemIndex].unk_00);
+    if (!onInit)
+    {
+        if (sp14 < gUnknown_203B0FC->unk_0A)
+            gUnknown_203B0FC->unk_0B++;
+        else if (sp14 > gUnknown_203B0FC->unk_0A && r6 != gUnknown_203B0FC->unk_07_2 - 1)
+            gUnknown_203B0FC->unk_0B--;
+        AddTextPrinterParametrized2(0, 2, 8, 14 * gUnknown_203B0FC->unk_0B + 4, 0, 0, &gUnknown_845F5E3, 0, gUnknown_203B100[gUnknown_203B0FC->unk_09].unk_00);
+
+    }
+    gUnknown_203B0FC->unk_09 = itemIndex;
+    gUnknown_203B0FC->unk_0B = sp16;
+    gUnknown_203B0FC->unk_0A = sp14;
+}
+
+u8 sub_812DEF0(void)
+{
+    u8 r4 = 0;
+    u8 r6;
+
+    for (r6 = 0; r6 < 16; r6++)
+    {
+        u8 r5 = sub_812D0C0(r6);
+        if (gSaveBlock1Ptr->fameChecker[r5].unk_0_0 != 0)
+        {
+            if (gUnknown_845F5EA[r5] < 0xFE00)
+            {
+                gUnknown_203B100[r4].unk_00 = gTrainers[gUnknown_845F5EA[r5]].trainerName;
+                gUnknown_203B100[r4].unk_04 = r4;
+            }
+            else
+            {
+                gUnknown_203B100[r4].unk_00 = gUnknown_845F60C[gUnknown_845F5EA[r5] - 0xFE00];
+                gUnknown_203B100[r4].unk_04 = r4;
+            }
+            gUnknown_203B0FC->unk_0C[r4] = r5;
+            r4++;
+        }
+    }
+    gUnknown_203B100[r4].unk_00 = gUnknown_84161C1;
+    gUnknown_203B100[r4].unk_04 = r4;
+    gUnknown_203B0FC->unk_0C[r4] = 0xFF;
+    r4++;
+    gUnknown_3005EB0.totalItems = r4;
+    if (r4 < 5)
+        gUnknown_3005EB0.maxShowed = r4;
+    else
+        gUnknown_3005EB0.maxShowed = 5;
+    return r4;
+}
+
+void sub_812DFE4(u8 windowId)
+{
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+}
+
+void sub_812E000(void)
+{
+    struct ScrollIndicatorArrowPairTemplate sp0 = gUnknown_845FD44;
+    if (gUnknown_203B0FC->unk_07_2 > 5)
+    {
+        sp0.unk_06 = 0;
+        sp0.unk_08 = gUnknown_203B0FC->unk_07_2 - 5;
+        gUnknown_203B0FC->unk_06 = AddScrollIndicatorArrowPair(&sp0, &gUnknown_203B0FC->unk_04);
+    }
+}
+
+void sub_812E048(void)
+{
+    if (gUnknown_203B0FC->unk_07_2 > 5)
+        RemoveScrollIndicatorArrowPair(gUnknown_203B0FC->unk_06);
+}
+
+u16 sub_812E064(void)
+{
+    u16 sp0, sp2;
+    get_coro_args_x18_x1A(gUnknown_203B0FC->unk_08, &sp0, &sp2);
+    return sp0 + sp2;
 }

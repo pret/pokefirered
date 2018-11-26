@@ -5,32 +5,45 @@
 
 	.align 2
 gUnknown_845C600:: @ 845C600
-	.incbin "baserom.gba", 0x45C600, 0x1720
+	.incbin "data/fame_checker/tilemap_845c600.bin"
 
 gUnknown_845DD20:: @ 845DD20
-	.incbin "baserom.gba", 0x45DD20, 0x820
+	.incbin "data/fame_checker/pal_845dd20.gbapal"
+
+gUnknown_845DD40:: @ 845DD40
+	.incbin "data/fame_checker/img_845dd40.4bpp"
 
 gUnknown_845E540:: @ 845E540
-	.incbin "baserom.gba", 0x45E540, 0x820
+	.incbin "data/fame_checker/pal_845e540.gbapal"
+
+gUnknown_845E560:: @ 845E560
+	.incbin "data/fame_checker/img_845e560.4bpp"
 
 gUnknown_845ED60:: @ 845ED60
-	.incbin "baserom.gba", 0x45ED60, 0x820
+	.incbin "data/fame_checker/pal_845ed60.gbapal"
+
+gUnknown_845ED80:: @ 845ED80
+	.incbin "data/fame_checker/img_845ed80.4bpp"
 
 gUnknown_845F580:: @ 845F580
-	.incbin "baserom.gba", 0x45F580, 0x40
+	.incbin "data/fame_checker/pal_845f580.gbapal"
+
+gUnknown_845F5A0:: @ 845F5A0
+	.incbin "data/fame_checker/pal_845f5a0.gbapal"
 
 gUnknown_845F5C0:: @ 845F5C0
-	.incbin "baserom.gba", 0x45F5C0, 0x20
+	.incbin "data/fame_checker/pal_845f5c0.gbapal"
 
 gUnknown_845F5E0:: @ 845F5E0
-	.incbin "baserom.gba", 0x45F5E0, 0x3
+	.byte 0x00, 0x01, 0x02
 
 gUnknown_845F5E3:: @ 845F5E3
-	.incbin "baserom.gba", 0x45F5E3, 0x3
+	.byte 0x00, 0x02, 0x03
 
 gUnknown_845F5E6:: @ 845F5E6
-	.incbin "baserom.gba", 0x45F5E6, 0x4
+	.byte 0x00, 0x06, 0x07
 
+	.align 1
 gUnknown_845F5EA:: @ 845F5EA
 	.incbin "baserom.gba", 0x45F5EA, 0x22
 
@@ -39,7 +52,6 @@ gUnknown_845F60C:: @ 845F60C
 
 gUnknown_845F61C:: @ 845F61C
 	.incbin "baserom.gba", 0x45F61C, 0x20
-
 
 gUnknown_845F63C:: @ 845F63C
 	.4byte gUnknown_81B0188

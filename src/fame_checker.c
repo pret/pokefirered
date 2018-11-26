@@ -2,9 +2,12 @@
 #include "constants/songs.h"
 #include "sprite.h"
 #include "bg.h"
+#include "event_data.h"
 #include "graphics.h"
 #include "battle_setup.h"
 #include "menu.h"
+#include "battle_dome_cards.h"
+#include "scanline_effect.h"
 #include "new_menu_helpers.h"
 #include "item_menu.h"
 #include "list_menu.h"
@@ -79,6 +82,7 @@ void sub_812D420(void);
 void sub_812D558(void);
 void sub_812D584(void);
 void sub_812D594(void);
+void sub_812D650(void);
 bool8 sub_812D6B4(void);
 void sub_812D70C(void);
 u8 sub_812D724(s16 a0);
@@ -698,4 +702,43 @@ void sub_812D420(void)
     SetGpuReg(REG_OFFSET_BLDCNT,   0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY,     0);
+}
+
+void sub_812D558(void)
+{
+    remove_some_task();
+    ResetTasks();
+    ResetSpriteData();
+    dp13_810BB8C();
+    ResetPaletteFade();
+    npc_paltag_set_load(0);
+    gReservedSpritePaletteCount = 7;
+
+}
+
+void sub_812D584(void)
+{
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
+}
+
+void sub_812D594(void)
+{
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+}
+
+void sub_812D5EC(void)
+{
+    if (gUnknown_20370C0 < 16 && gSpecialVar_0x8005 < 6)
+    {
+        gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].unk_0_2 |= (1 << gSpecialVar_0x8005);
+        gSpecialVar_0x8005 = 1;
+        sub_812D650();
+    }
 }

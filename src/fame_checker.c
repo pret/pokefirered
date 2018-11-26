@@ -109,6 +109,7 @@ void sub_812DB28(void);
 void sub_812E000(void);
 void sub_812E048(void);
 u16 sub_812E064(void);
+void sub_812E094(u8);
 void sub_812E110(u8 taskId);
 void sub_812E178(u8 a0, s16 a1);
 void sub_812E4A4(u8 a0);
@@ -119,9 +120,18 @@ extern const u8 gUnknown_841E5B9[];
 extern const u8 gUnknown_841E5D2[];
 
 extern const u16 gUnknown_845C600[];
-extern const u8 *const gUnknown_845F63C[];
+extern const u16 gUnknown_845DD20[];
+extern const u16 gUnknown_845E540[];
+extern const u16 gUnknown_845ED60[];
+extern const u16 gUnknown_845F580[];
+extern const u16 gUnknown_845F5C0[];
 extern const struct TextColor gUnknown_845F5E0;
+extern const struct TextColor gUnknown_845F5E3;
+extern const u8 gUnknown_845F61C[];
+extern const u8 *const gUnknown_845F63C[];
 extern const u8 *const gUnknown_845F6BC[];
+extern const u8 *const gUnknown_845F89C[];
+extern const u8 *const gUnknown_845FA1C[];
 extern const u8 gUnknown_845F83C[];
 extern const struct BgTemplate gUnknown_845FBF4[4];
 extern const struct SpriteSheet gUnknown_845FB9C[];
@@ -130,6 +140,10 @@ extern const struct WindowTemplate gUnknown_845FC04[];
 extern const struct SpriteTemplate gUnknown_845FC44;
 extern const struct SpriteTemplate gUnknown_845FC78;
 extern const struct SpriteTemplate gUnknown_845FCB8;
+extern const struct SpriteTemplate gUnknown_845FCE4;
+extern const struct SpriteTemplate gUnknown_845FCFC;
+extern const struct SpriteTemplate gUnknown_845FD14;
+extern const struct SpriteTemplate gUnknown_845FD2C;
 
 void sub_812C380(void)
 {
@@ -832,4 +846,96 @@ void sub_812D814(void)
     FreeSpriteTilesByTag(SPRITETAG_1007);
     FreeSpriteTilesByTag(SPRITETAG_1008);
     FreeSpriteTilesByTag(SPRITETAG_1009);
+}
+
+void sub_812D840(struct Sprite * sprite)
+{
+    if (sprite->data[0] == 1)
+    {
+        if (sprite->pos2.x - 10 < 0)
+        {
+            sprite->pos2.x = 0;
+            sprite->data[0] = 0;
+        }
+        else
+            sprite->pos2.x -= 10;
+    }
+    else if (sprite->data[0] == 2)
+    {
+        if (sprite->pos2.x > 240)
+        {
+            sprite->pos2.x = 240;
+            sprite->data[0] = 0;
+        }
+        else
+            sprite->pos2.x += 10;
+    }
+}
+
+u8 sub_812D888(u8 a0)
+{
+    u8 r4;
+    if (a0 == 1)
+    {
+        r4 = CreateSprite(&gUnknown_845FCE4, 0x94, 0x42, 0);
+        LoadPalette(gUnknown_845ED60, 0x160, 0x20);
+        gSprites[r4].oam.paletteNum = 6;
+    }
+    else if (a0 == 14)
+    {
+        r4 = CreateSprite(&gUnknown_845FCFC, 0x94, 0x42, 0);
+        LoadPalette(gUnknown_845DD20, 0x160, 0x20);
+        gSprites[r4].oam.paletteNum = 6;
+    }
+    else if (a0 == 0)
+    {
+        r4 = CreateSprite(&gUnknown_845FD14, 0x94, 0x42, 0);
+        LoadPalette(gUnknown_845F580, 0x160, 0x20);
+        gSprites[r4].oam.paletteNum = 6;
+    }
+    else if (a0 == 13)
+    {
+        r4 = CreateSprite(&gUnknown_845FD2C, 0x94, 0x42, 0);
+        LoadPalette(gUnknown_845E540, 0x160, 0x20);
+        gSprites[r4].oam.paletteNum = 6;
+    }
+    else
+    {
+        r4 = sub_810C2A4(gUnknown_845F61C[a0], 1, 0x94, 0x42, 6, 0xFFFF);
+    }
+    gSprites[r4].callback = sub_812D840;
+    if (gSaveBlock1Ptr->fameChecker[a0].unk_0_0 == 1)
+        LoadPalette(gUnknown_845F5C0, 0x160, 0x20);
+    return r4;
+}
+
+void sub_812D9A8(u8 taskId, u16 a1)
+{
+    s16 * data = gTasks[taskId].data;
+    u16 r1 = a1;
+    if (a1 == gUnknown_203B0FC->unk_07_2 - 1)
+        r1 = a1 - 1;
+    if (   gUnknown_203B0FC->unk_0C[r1] == 1
+        || gUnknown_203B0FC->unk_0C[r1] == 14
+        || gUnknown_203B0FC->unk_0C[r1] == 0
+        || gUnknown_203B0FC->unk_0C[r1] == 13
+    )
+        DestroySprite(&gSprites[data[2]]);
+    else
+        sub_810C2E8(data[2]);
+}
+
+void sub_812DA14(u8 a0)
+{
+    s32 width;
+    u32 r5 = 6 * gUnknown_203B0FC->unk_0C[sub_812E064()] + a0;
+    sub_812E094(1);
+    gUnknown_3005EC8 = 1;
+    FillWindowPixelRect(3, 0x00, 0, 0, 0x58, 0x20);
+    width = (0x54 - GetStringWidth(0, gUnknown_845F89C[r5], 0)) / 2;
+    AddTextPrinterParametrized2(3, 0, width, 0, 0, 2, &gUnknown_845F5E3, -1, gUnknown_845F89C[r5]);
+    StringExpandPlaceholders(gStringVar1, gUnknown_845FA1C[r5]);
+    width = (0x54 - GetStringWidth(0, gStringVar1, 0)) / 2;
+    AddTextPrinterParametrized2(3, 0, width, 10, 0, 2, &gUnknown_845F5E3, -1, gStringVar1);
+    sub_812CEE0(3);
 }

@@ -67,7 +67,9 @@
 // We suspect it was used globally.
 // GameFreak never ceases to amaze.
 // TODO: Propagate use of this macro
-#define PRESSED(button) ({gMain.newKeys & (button);})
+#define TEST_BUTTON(field, button) ({(field) & (button);})
+#define PRESSED(button) TEST_BUTTON(gMain.newKeys,  button)
+#define PUSHED(button)  TEST_BUTTON(gMain.heldKeys, button)
 
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];

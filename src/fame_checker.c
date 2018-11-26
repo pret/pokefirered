@@ -132,12 +132,18 @@ extern const u8 gUnknown_841E5F3[];
 extern const u8 gUnknown_841E5F8[];
 
 const u16 gUnknown_845C600[] = INCBIN_U16("data/fame_checker/tilemap_845c600.bin");
+const u8 gUnknown_845CE00[] = INCBIN_U8("data/fame_checker/img_845ce00.4bpp");
+const u8 gUnknown_845CF00[] = INCBIN_U8("data/fame_checker/img_845cf00.4bpp");
+const u16 gUnknown_845D0E0[] = INCBIN_U16("data/fame_checker/pal_845d0e0.gbapal");
+const u8 gUnknown_845D100[] = INCBIN_U8("data/fame_checker/img_845d100.4bpp");
+const u16 gUnknown_845D500[] = INCBIN_U16("data/fame_checker/pal_845d500.gbapal");
+const u8 gUnknown_845D520[] = INCBIN_U8("data/fame_checker/img_845d520.4bpp");
 const u16 gUnknown_845DD20[] = INCBIN_U16("data/fame_checker/pal_845dd20.gbapal");
-const u16 gUnknown_845DD40[] = INCBIN_U16("data/fame_checker/img_845dd40.4bpp");
+const u8 gUnknown_845DD40[] = INCBIN_U8("data/fame_checker/img_845dd40.4bpp");
 const u16 gUnknown_845E540[] = INCBIN_U16("data/fame_checker/pal_845e540.gbapal");
-const u16 gUnknown_845E560[] = INCBIN_U16("data/fame_checker/img_845e560.4bpp");
+const u8 gUnknown_845E560[] = INCBIN_U8("data/fame_checker/img_845e560.4bpp");
 const u16 gUnknown_845ED60[] = INCBIN_U16("data/fame_checker/pal_845ed60.gbapal");
-const u16 gUnknown_845ED80[] = INCBIN_U16("data/fame_checker/img_845ed80.4bpp");
+const u8 gUnknown_845ED80[] = INCBIN_U8("data/fame_checker/img_845ed80.4bpp");
 const u16 gUnknown_845F580[] = INCBIN_U16("data/fame_checker/pal_845f580.gbapal");
 const u16 gUnknown_845F5A0[] = INCBIN_U16("data/fame_checker/pal_845f5a0.gbapal");
 const u16 gUnknown_845F5C0[] = INCBIN_U16("data/fame_checker/pal_845f5c0.gbapal");
@@ -318,9 +324,19 @@ const u8 *const gUnknown_845FA1C[] = {
     gUnknown_81B1439, gUnknown_81B1442, gUnknown_81B144C, gUnknown_81B1456, gUnknown_81B145F, gUnknown_81B1463
 };
 
-extern const struct BgTemplate gUnknown_845FBF4[4];
-extern const struct SpriteSheet gUnknown_845FB9C[];
+const struct SpriteSheet gUnknown_845FB9C[] = {
+    {gUnknown_845D100, 0x400, SPRITETAG_1000},
+    {gUnknown_845CE00, 0x100, SPRITETAG_1001},
+    {gUnknown_845CF00, 0x1e0, SPRITETAG_1002},
+    {gUnknown_845E560, 0x800, SPRITETAG_1006},
+    {gUnknown_845D520, 0x800, SPRITETAG_1007},
+    {gUnknown_845ED80, 0x800, SPRITETAG_1008},
+    {gUnknown_845DD40, 0x800, SPRITETAG_1009},
+    {}
+};
+
 extern const struct SpritePalette gUnknown_845FBDC[];
+extern const struct BgTemplate gUnknown_845FBF4[4];
 extern const struct WindowTemplate gUnknown_845FC04[];
 extern const struct SpriteTemplate gUnknown_845FC44;
 extern const struct SpriteTemplate gUnknown_845FC78;

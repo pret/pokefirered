@@ -104,6 +104,7 @@ void sub_812D9A8(u8 a0, u16 a1);
 void sub_812DA14(u8 a0);
 void sub_812DB10(void);
 void sub_812DB28(void);
+void sub_812D840(struct Sprite * sprite);
 void sub_812DB64(void);
 void sub_812DBC0(s32, bool8, struct ListMenu *);
 void sub_812DD50(u8 taskId);
@@ -384,13 +385,102 @@ const struct WindowTemplate gUnknown_845FC04[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-extern const struct SpriteTemplate gUnknown_845FC44;
-extern const struct SpriteTemplate gUnknown_845FC78;
-extern const struct SpriteTemplate gUnknown_845FCB8;
-extern const struct SpriteTemplate gUnknown_845FCE4;
-extern const struct SpriteTemplate gUnknown_845FCFC;
-extern const struct SpriteTemplate gUnknown_845FD14;
-extern const struct SpriteTemplate gUnknown_845FD2C;
+const union AnimCmd gUnknown_845FC2C[] = {
+    ANIMCMD_FRAME( 0, 15),
+    ANIMCMD_FRAME(16, 15),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gUnknown_845FC38[] = {
+    gUnknown_845FC2C
+};
+
+const struct OamData gOamData_845FC3C = {
+    .size = 2,
+    .priority = 2
+};
+
+const struct SpriteTemplate gUnknown_845FC44 = {
+    SPRITETAG_1000, SPRITETAG_1000, &gOamData_845FC3C, gUnknown_845FC38, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const u8 filler_845FC5C[8] = {};
+
+const struct OamData gOamData_845FC64 = {
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 2,
+    .priority = 2
+};
+
+const union AnimCmd gUnknown_845FC6C[] = {
+    ANIMCMD_FRAME( 0, 10),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_845FC74[] = {
+    gUnknown_845FC6C
+};
+
+const struct SpriteTemplate gUnknown_845FC78 = {
+    SPRITETAG_1001, 0xffff, &gOamData_845FC64, gUnknown_845FC74, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const union AnimCmd gUnknown_845FC90[] = {
+    ANIMCMD_FRAME( 0, 10),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_845FC98[] = {
+    gUnknown_845FC90
+};
+
+const struct OamData gOamData_845FC9C = {
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .size = 2
+};
+
+const union AffineAnimCmd gUnknown_845FCA4[] = {
+    AFFINEANIMCMD_FRAME(0, 0, 4, 20),
+    AFFINEANIMCMD_JUMP(0)
+};
+
+const union AffineAnimCmd *const gUnknown_845FCB4[] = {
+    gUnknown_845FCA4
+};
+
+const struct SpriteTemplate gUnknown_845FCB8 = {
+    SPRITETAG_1002, SPRITETAG_1002, &gOamData_845FC9C, gUnknown_845FC98, NULL, gUnknown_845FCB4, sub_812D840
+};
+
+const union AnimCmd gUnknown_845FCD0[] = {
+    ANIMCMD_FRAME( 0, 15),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_845FCD8[] = {
+    gUnknown_845FCD0
+};
+
+const struct OamData gOamData_845FCDC = {
+    .size = 3
+};
+
+const struct SpriteTemplate gUnknown_845FCE4 = {
+    SPRITETAG_1006, 0xffff, &gOamData_845FCDC, gUnknown_845FCD8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gUnknown_845FCFC = {
+    SPRITETAG_1007, 0xffff, &gOamData_845FCDC, gUnknown_845FCD8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gUnknown_845FD14 = {
+    SPRITETAG_1008, 0xffff, &gOamData_845FCDC, gUnknown_845FCD8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gUnknown_845FD2C = {
+    SPRITETAG_1009, 0xffff, &gOamData_845FCDC, gUnknown_845FCD8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
 extern const struct ScrollIndicatorArrowPairTemplate gUnknown_845FD44;
 
 void sub_812C380(void)

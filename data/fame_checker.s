@@ -4,12 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_845F83C:: @ 845F83C
-	.incbin "baserom.gba", 0x45F83C, 0x60
-
-gUnknown_845F89C:: @ 845F89C
-	.incbin "baserom.gba", 0x45F89C, 0x180
-
 gUnknown_845FA1C:: @ 845FA1C
 	.incbin "baserom.gba", 0x45FA1C, 0x180
 

@@ -22,6 +22,12 @@ enum {
     FAMECHECKER_GIOVANNI
 };
 
+enum {
+    FCPICKSTATE_NO_DRAW,
+    FCPICKSTATE_SILHOUETTE,
+    FCPICKSTATE_COLORED
+};
+
 void ResetFameChecker(void);
 void UseFameChecker(MainCallback savedCallback);
 

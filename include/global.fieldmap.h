@@ -1,8 +1,6 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
-#include "global.h"
-
 #define NUM_FIELD_OBJECTS 16
 
 enum

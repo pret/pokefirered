@@ -39,15 +39,15 @@
 struct FameCheckerData
 {
     MainCallback savedCallback;
-    u16 unk_04;
+    u16 listMenuTopIdx;
     u8 unk_06;
-    u8 unk_07_0:1;
+    u8 personHasUnlockedPanels:1;
     u8 inPickMode:1;
     u8 numUnlockedPersons:6;
     u8 scrollIndicatorArrowObjectTaskId;
-    u8 unk_09;
-    u8 unk_0A;
-    u8 unk_0B;
+    u8 listMenuCurIdx;
+    u8 listMenuTopIdx2;
+    u8 listMenuDrawnSelIdx;
     u8 unlockedPersons[17];
     u8 spriteIds[6];
     u8 unk_23_0:1;
@@ -473,9 +473,9 @@ void UseFameChecker(MainCallback savedCallback)
     SetVBlankCallback(NULL);
     sFameCheckerData = AllocZeroed(sizeof(struct FameCheckerData));
     sFameCheckerData->savedCallback = savedCallback;
-    sFameCheckerData->unk_09 = 0;
-    sFameCheckerData->unk_0A = 0;
-    sFameCheckerData->unk_0B = 0;
+    sFameCheckerData->listMenuCurIdx = 0;
+    sFameCheckerData->listMenuTopIdx2 = 0;
+    sFameCheckerData->listMenuDrawnSelIdx = 0;
     sFameCheckerData->unk_23_0 = FALSE;
     PlaySE(SE_W202);
     SetMainCallback2(sub_812C3F8);
@@ -550,7 +550,7 @@ static void sub_812C3F8(void)
             SetGpuReg(REG_OFFSET_BLDALPHA, 0x07);
             SetGpuReg(REG_OFFSET_BLDY, 0x08);
             SetVBlankCallback(sub_812C380);
-            sFameCheckerData->unk_04 = 0;
+            sFameCheckerData->listMenuTopIdx = 0;
             sub_812E000();
             sub_812E178(1, 4);
             CreateTask(sub_812C664, 0x08);
@@ -617,7 +617,7 @@ static void sub_812C694(u8 taskId)
                 if (!IsTextPrinterActive(2) && sub_812D6B4() == TRUE)
                     sub_812CD3C();
             }
-            else if (sFameCheckerData->unk_07_0)
+            else if (sFameCheckerData->personHasUnlockedPanels)
             {
                 PlaySE(SE_SELECT);
                 task->data[0] = sub_812D724(task->data[1]);
@@ -693,7 +693,7 @@ static void sub_812CA1C(u8 taskId)
         ChangeBgX(1, 0x000, 0);
     if (gSprites[task->data[2]].data[0] == 0)
     {
-        if (sFameCheckerData->unk_07_0)
+        if (sFameCheckerData->personHasUnlockedPanels)
             sub_812D0F4(0);
         sub_812E178(1, 4);
         sub_812E178(2, 2);
@@ -797,7 +797,7 @@ static void sub_812CD3C(void)
 {
     u8 r8 = 0;
     u16 r6 = FameCheckerGetCursorY();
-    if (gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[r6]].unk_0_0 != 2)
+    if (gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[r6]].pickState != FCPICKSTATE_COLORED)
     {
         sub_812CE9C();
         sub_812C990();
@@ -949,7 +949,7 @@ static bool8 sub_812D1A8(u8 a0)
     u8 r6;
     for (r6 = 0; r6 < 6; r6++)
     {
-        if ((gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[a0]].unk_0_2 >> r6) & 1)
+        if ((gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[a0]].flavorTextFlags >> r6) & 1)
         {
             sFameCheckerData->spriteIds[r6] = sub_805EB44(
                 sFameCheckerArrayNpcGraphicsIds[sFameCheckerData->unlockedPersons[a0] * 6 + r6],
@@ -970,7 +970,7 @@ static bool8 sub_812D1A8(u8 a0)
     }
     if (r5 == TRUE)
     {
-        sFameCheckerData->unk_07_0 = TRUE;
+        sFameCheckerData->personHasUnlockedPanels = TRUE;
         if (sFameCheckerData->inPickMode)
             sub_812D0F4(TRUE);
         else
@@ -978,7 +978,7 @@ static bool8 sub_812D1A8(u8 a0)
     }
     else
     {
-        sFameCheckerData->unk_07_0 = FALSE;
+        sFameCheckerData->personHasUnlockedPanels = FALSE;
         sub_812D0F4(TRUE);
     }
     return r5;
@@ -989,11 +989,11 @@ void ResetFameChecker(void)
     u8 r4;
     for (r4 = 0; r4 < 16; r4++)
     {
-        gSaveBlock1Ptr->fameChecker[r4].unk_0_0 = 0;
-        gSaveBlock1Ptr->fameChecker[r4].unk_0_2 = 0;
+        gSaveBlock1Ptr->fameChecker[r4].pickState = FCPICKSTATE_NO_DRAW;
+        gSaveBlock1Ptr->fameChecker[r4].flavorTextFlags = 0;
         gSaveBlock1Ptr->fameChecker[r4].unk_0_E = 0;
     }
-    gSaveBlock1Ptr->fameChecker[0].unk_0_0 = 2;
+    gSaveBlock1Ptr->fameChecker[0].pickState = FCPICKSTATE_COLORED;
 }
 
 static void sub_812D388(void)
@@ -1001,10 +1001,10 @@ static void sub_812D388(void)
     u8 r5, r4;
     for (r5 = 0; r5 < 16; r5++)
     {
-        gSaveBlock1Ptr->fameChecker[r5].unk_0_0 = 2;
+        gSaveBlock1Ptr->fameChecker[r5].pickState = FCPICKSTATE_COLORED;
         for (r4 = 0; r4 < 6; r4++)
         {
-            gSaveBlock1Ptr->fameChecker[r5].unk_0_2 |= (1 << r4);
+            gSaveBlock1Ptr->fameChecker[r5].flavorTextFlags |= (1 << r4);
         }
     }
 }
@@ -1070,7 +1070,7 @@ static void sub_812D5EC(void)
 {
     if (gUnknown_20370C0 < 16 && gSpecialVar_0x8005 < 6)
     {
-        gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].unk_0_2 |= (1 << gSpecialVar_0x8005);
+        gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].flavorTextFlags |= (1 << gSpecialVar_0x8005);
         gSpecialVar_0x8005 = 1;
         sub_812D650();
     }
@@ -1082,9 +1082,9 @@ static void sub_812D650(void)
     {
         if (gSpecialVar_0x8005 == 0)
             return;
-        if (gSpecialVar_0x8005 == 1 && gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].unk_0_0 == 2)
+        if (gSpecialVar_0x8005 == 1 && gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].pickState == FCPICKSTATE_COLORED)
             return;
-        gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].unk_0_0 = gSpecialVar_0x8005;
+        gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].pickState = gSpecialVar_0x8005;
     }
 }
 
@@ -1094,7 +1094,7 @@ static bool8 sub_812D6B4(void)
     u8 r1 = sFameCheckerData->unlockedPersons[FameCheckerGetCursorY()];
     for (r2 = 0; r2 < 6; r2++)
     {
-        if (!((gSaveBlock1Ptr->fameChecker[r1].unk_0_2 >> r2) & 1))
+        if (!((gSaveBlock1Ptr->fameChecker[r1].flavorTextFlags >> r2) & 1))
             return FALSE;
     }
     return TRUE;
@@ -1212,7 +1212,7 @@ static u8 sub_812D888(u8 a0)
         r4 = sub_810C2A4(gUnknown_845F61C[a0], 1, 0x94, 0x42, 6, 0xFFFF);
     }
     gSprites[r4].callback = sub_812D840;
-    if (gSaveBlock1Ptr->fameChecker[a0].unk_0_0 == 1)
+    if (gSaveBlock1Ptr->fameChecker[a0].pickState == FCPICKSTATE_SILHOUETTE)
         LoadPalette(gUnknown_845F5C0, 0x160, 0x20);
     return r4;
 }
@@ -1290,7 +1290,7 @@ static void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
     u8 taskId;
     u16 r9;
     sLastMenuIdx = 0;
-    r9 = sFameCheckerData->unk_0A + sFameCheckerData->unk_0B;
+    r9 = sFameCheckerData->listMenuTopIdx2 + sFameCheckerData->listMenuDrawnSelIdx;
     sub_812DDF0(itemIndex, onInit);
     taskId = FindTaskIdByFunc(sub_812C694);
     if (taskId != 0xFF)
@@ -1299,7 +1299,7 @@ static void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         PlaySE(SE_SELECT);
         task->data[1] = 0;
         get_coro_args_x18_x1A(sFameCheckerData->scrollIndicatorArrowObjectTaskId, &sp8, NULL);
-        sFameCheckerData->unk_04 = sp8;
+        sFameCheckerData->listMenuTopIdx = sp8;
         if (itemIndex != sFameCheckerData->numUnlockedPersons - 1)
         {
             sub_812D174();
@@ -1372,16 +1372,16 @@ static void sub_812DDF0(s32 itemIndex, bool8 onInit)
     AddTextPrinterParametrized2(0, 2, 8, 14 * sp16 + 4, 0, 0, &gUnknown_845F5E6, 0, sListMenuItems[itemIndex].unk_00);
     if (!onInit)
     {
-        if (sp14 < sFameCheckerData->unk_0A)
-            sFameCheckerData->unk_0B++;
-        else if (sp14 > sFameCheckerData->unk_0A && r6 != sFameCheckerData->numUnlockedPersons - 1)
-            sFameCheckerData->unk_0B--;
-        AddTextPrinterParametrized2(0, 2, 8, 14 * sFameCheckerData->unk_0B + 4, 0, 0, &gUnknown_845F5E3, 0, sListMenuItems[sFameCheckerData->unk_09].unk_00);
+        if (sp14 < sFameCheckerData->listMenuTopIdx2)
+            sFameCheckerData->listMenuDrawnSelIdx++;
+        else if (sp14 > sFameCheckerData->listMenuTopIdx2 && r6 != sFameCheckerData->numUnlockedPersons - 1)
+            sFameCheckerData->listMenuDrawnSelIdx--;
+        AddTextPrinterParametrized2(0, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, &gUnknown_845F5E3, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].unk_00);
 
     }
-    sFameCheckerData->unk_09 = itemIndex;
-    sFameCheckerData->unk_0B = sp16;
-    sFameCheckerData->unk_0A = sp14;
+    sFameCheckerData->listMenuCurIdx = itemIndex;
+    sFameCheckerData->listMenuDrawnSelIdx = sp16;
+    sFameCheckerData->listMenuTopIdx2 = sp14;
 }
 
 static u8 sub_812DEF0(void)
@@ -1392,7 +1392,7 @@ static u8 sub_812DEF0(void)
     for (r6 = 0; r6 < 16; r6++)
     {
         u8 r5 = sub_812D0C0(r6);
-        if (gSaveBlock1Ptr->fameChecker[r5].unk_0_0 != 0)
+        if (gSaveBlock1Ptr->fameChecker[r5].pickState != FCPICKSTATE_NO_DRAW)
         {
             if (gUnknown_845F5EA[r5] < 0xFE00)
             {
@@ -1447,7 +1447,7 @@ static void sub_812E000(void)
     {
         sp0.unk_06 = 0;
         sp0.unk_08 = sFameCheckerData->numUnlockedPersons - 5;
-        sFameCheckerData->unk_06 = AddScrollIndicatorArrowPair(&sp0, &sFameCheckerData->unk_04);
+        sFameCheckerData->unk_06 = AddScrollIndicatorArrowPair(&sp0, &sFameCheckerData->listMenuTopIdx);
     }
 }
 

@@ -42,7 +42,7 @@ struct FameCheckerData
 {
     MainCallback savedCallback;
     u16 listMenuTopIdx;
-    u8 unk_06;
+    u8 scrollIndicatorPairTaskId;
     u8 personHasUnlockedPanels:1;
     u8 inPickMode:1;
     u8 numUnlockedPersons:6;
@@ -53,7 +53,7 @@ struct FameCheckerData
     u8 unlockedPersons[NUM_FAMECHECKER_PERSONS + 1];
     u8 spriteIds[6];
     u8 unk_23_0:1;
-    u8 unk_23_1:1;
+    u8 unk_23_1:1; // unused
     u8 unk_23_2:1;
 };
 
@@ -1420,14 +1420,14 @@ static void FC_CreateScrollIndicatorArrowPair(void)
     {
         sp0.unk_06 = 0;
         sp0.unk_08 = sFameCheckerData->numUnlockedPersons - 5;
-        sFameCheckerData->unk_06 = AddScrollIndicatorArrowPair(&sp0, &sFameCheckerData->listMenuTopIdx);
+        sFameCheckerData->scrollIndicatorPairTaskId = AddScrollIndicatorArrowPair(&sp0, &sFameCheckerData->listMenuTopIdx);
     }
 }
 
 static void FreeListMenuSelectorArrowPairResources(void)
 {
     if (sFameCheckerData->numUnlockedPersons > 5)
-        RemoveScrollIndicatorArrowPair(sFameCheckerData->unk_06);
+        RemoveScrollIndicatorArrowPair(sFameCheckerData->scrollIndicatorPairTaskId);
 }
 
 static u16 FameCheckerGetCursorY(void)

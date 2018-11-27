@@ -871,7 +871,7 @@ _0810848C:
 	bl StringCopy
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, _08108550 @ =gUnknown_84161C1
+	ldr r1, _08108550 @ =gFameCheckerText_Cancel
 	bl StringAppend
 	ldr r0, _08108548 @ =gUnknown_203AD18
 	ldr r2, [r0]
@@ -951,7 +951,7 @@ _08108540: .4byte gUnknown_203AD10
 _08108544: .4byte gUnknown_203AD1C
 _08108548: .4byte gUnknown_203AD18
 _0810854C: .4byte gUnknown_8452F60
-_08108550: .4byte gUnknown_84161C1
+_08108550: .4byte gFameCheckerText_Cancel
 _08108554: .4byte gUnknown_3005E70
 _08108558: .4byte sub_81085A4
 _0810855C: .4byte sub_8108654
@@ -1257,7 +1257,7 @@ bag_menu_print_cursor: @ 810878C
 	bl FillWindowPixelRect
 	b _081087DE
 _081087C8:
-	ldr r2, _081087E8 @ =gUnknown_841623B
+	ldr r2, _081087E8 @ =gFameCheckerText_ListMenuCursor
 	str r5, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -1273,7 +1273,7 @@ _081087DE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081087E8: .4byte gUnknown_841623B
+_081087E8: .4byte gFameCheckerText_ListMenuCursor
 	thumb_func_end bag_menu_print_cursor
 
 	thumb_func_start sub_81087EC

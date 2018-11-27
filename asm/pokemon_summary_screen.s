@@ -5401,7 +5401,7 @@ _081372B0:
 	movs r1, 0x1
 	negs r1, r1
 	str r1, [sp, 0x4]
-	ldr r1, _081372E0 @ =gUnknown_84161C1
+	ldr r1, _081372E0 @ =gFameCheckerText_Cancel
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r2, 0x3
@@ -5415,7 +5415,7 @@ _081372CE:
 	.align 2, 0
 _081372D8: .4byte 0x00003003
 _081372DC: .4byte gUnknown_8463EF0
-_081372E0: .4byte gUnknown_84161C1
+_081372E0: .4byte gFameCheckerText_Cancel
 	thumb_func_end sub_8137270
 
 	thumb_func_start sub_81372E4

@@ -572,6 +572,8 @@ struct QuestLog
     /*0x0668*/ u16 end[0];
 };
 
+#include "fame_checker.h"
+
 struct FameCheckerSaveData
 {
 	/*3a54*/ u16 pickState:2;
@@ -643,7 +645,7 @@ struct SaveBlock1
     /*0x3A14*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3A48*/ u8 filler_3a48[4];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
-    /*0x3A54*/ struct FameCheckerSaveData fameChecker[16];
+    /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
     /*0x3A94*/ u8 filler3A94[0x2A4];
                u32 unkArray[4][3];
 };

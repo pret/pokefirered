@@ -589,7 +589,7 @@ _0810D8A4:
 	ldr r3, [r0]
 	lsls r0, r4, 3
 	adds r0, r3
-	ldr r1, _0810D944 @ =gUnknown_84161C1
+	ldr r1, _0810D944 @ =gFameCheckerText_Cancel
 	str r1, [r0]
 	movs r1, 0x2
 	negs r1, r1
@@ -657,7 +657,7 @@ _0810D8A4:
 _0810D938: .4byte gSaveBlock1Ptr
 _0810D93C: .4byte gUnknown_203ADC4
 _0810D940: .4byte gUnknown_203ADBC
-_0810D944: .4byte gUnknown_84161C1
+_0810D944: .4byte gFameCheckerText_Cancel
 _0810D948: .4byte gUnknown_3005E70
 _0810D94C: .4byte sub_810D954
 _0810D950: .4byte sub_810DA20
@@ -879,7 +879,7 @@ sub_810DAD4: @ 810DAD4
 	bl FillWindowPixelRect
 	b _0810DB26
 _0810DB10:
-	ldr r2, _0810DB30 @ =gUnknown_841623B
+	ldr r2, _0810DB30 @ =gFameCheckerText_ListMenuCursor
 	str r5, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -895,7 +895,7 @@ _0810DB26:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810DB30: .4byte gUnknown_841623B
+_0810DB30: .4byte gFameCheckerText_ListMenuCursor
 	thumb_func_end sub_810DAD4
 
 	thumb_func_start sub_810DB34

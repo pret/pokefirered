@@ -1331,7 +1331,7 @@ _080E513C:
 	lsls r7, 1
 	adds r1, r7
 	adds r0, r1
-	ldr r1, _080E51F8 @ =gUnknown_84161C1
+	ldr r1, _080E51F8 @ =gFameCheckerText_Cancel
 	bl StringCopy
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x1A]
@@ -1367,7 +1367,7 @@ _080E51AA:
 	adds r0, r2, 0
 	adds r0, 0x20
 	adds r0, r3
-	ldr r1, _080E51F8 @ =gUnknown_84161C1
+	ldr r1, _080E51F8 @ =gFameCheckerText_Cancel
 	str r1, [r0]
 	adds r2, 0x24
 	adds r2, r3
@@ -1396,7 +1396,7 @@ _080E51E8: .4byte gUnknown_203AAB4
 _080E51EC: .4byte gPlayerParty
 _080E51F0: .4byte gMoveNames
 _080E51F4: .4byte gStringVar1
-_080E51F8: .4byte gUnknown_84161C1
+_080E51F8: .4byte gFameCheckerText_Cancel
 _080E51FC: .4byte gUnknown_3005E70
 _080E5200: .4byte gUnknown_83FFA94
 	thumb_func_end sub_80E50CC

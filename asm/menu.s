@@ -1391,7 +1391,7 @@ RedrawMenuCursor: @ 810F874
 	bl FillWindowPixelRect
 	ldrb r0, [r5, 0x5]
 	ldrb r1, [r5, 0x6]
-	ldr r2, _0810F900 @ =gUnknown_841623B
+	ldr r2, _0810F900 @ =gFameCheckerText_ListMenuCursor
 	ldrb r3, [r5]
 	ldrb r4, [r5, 0x8]
 	mov r6, r8
@@ -1415,7 +1415,7 @@ RedrawMenuCursor: @ 810F874
 	bx r0
 	.align 2, 0
 _0810F8FC: .4byte gUnknown_203ADE4
-_0810F900: .4byte gUnknown_841623B
+_0810F900: .4byte gFameCheckerText_ListMenuCursor
 	thumb_func_end RedrawMenuCursor
 
 	thumb_func_start MoveMenuCursor
@@ -2893,7 +2893,7 @@ sub_811037C: @ 811037C
 	lsrs r3, 24
 	ldrb r0, [r5, 0x5]
 	ldrb r1, [r5, 0x6]
-	ldr r2, _0811044C @ =gUnknown_841623B
+	ldr r2, _0811044C @ =gFameCheckerText_ListMenuCursor
 	str r3, [sp]
 	movs r3, 0
 	str r3, [sp, 0x4]
@@ -2910,7 +2910,7 @@ sub_811037C: @ 811037C
 	bx r0
 	.align 2, 0
 _08110448: .4byte gUnknown_203ADE4
-_0811044C: .4byte gUnknown_841623B
+_0811044C: .4byte gFameCheckerText_ListMenuCursor
 	thumb_func_end sub_811037C
 
 	thumb_func_start sub_8110450

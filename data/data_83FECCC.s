@@ -721,8 +721,8 @@ gUnknown_8416188:: @ 8416188
 gUnknown_8416190:: @ 8416190
 	.incbin "baserom.gba", 0x416190, 0x31
 
-gUnknown_84161C1:: @ 84161C1
-	.incbin "baserom.gba", 0x4161C1, 0x7
+gFameCheckerText_Cancel:: @ 84161C1
+	.string "CANCEL$"
 
 gUnknown_84161C8:: @ 84161C8
 	.incbin "baserom.gba", 0x4161C8, 0x5
@@ -766,8 +766,8 @@ gUnknown_8416226:: @ 8416226
 gUnknown_8416238:: @ 8416238
 	.incbin "baserom.gba", 0x416238, 0x3
 
-gUnknown_841623B:: @ 841623B
-	.incbin "baserom.gba", 0x41623B, 0x2
+gFameCheckerText_ListMenuCursor:: @ 841623B
+	.string "▶$"
 
 gUnknown_841623D:: @ 841623D
 	.incbin "baserom.gba", 0x41623D, 0x25
@@ -1237,11 +1237,14 @@ gUnknown_84181B6:: @ 84181B6
 gUnknown_84181BE:: @ 84181BE
 	.incbin "baserom.gba", 0x4181BE, 0x5
 
-gUnknown_84181C3:: @ 84181C3
-	.incbin "baserom.gba", 0x4181C3, 0x21
+gFameCheckerText_FameCheckerWillBeClosed:: @ 84181C3
+	.string "The FAME CHECKER will be closed.$"
 
-gUnknown_84181E4:: @ 84181E4
-	.incbin "baserom.gba", 0x4181E4, 0x4AC
+gFameCheckerText_ClearTextbox:: @ 84181E4
+	.string "\n                              $"
+
+gUnknown_8418204:: @ 8418204
+	.incbin "baserom.gba", 0x00418204, 0x48c
 
 gUnknown_8418690:: @ 8418690
 	.incbin "baserom.gba", 0x418690, 0x20
@@ -2090,25 +2093,25 @@ gUnknown_841E572:: @ 841E572
 gUnknown_841E58D:: @ 841E58D
 	.incbin "baserom.gba", 0x41E58D, 0x17
 
-gUnknown_841E5A4:: @ 841E5A4
+gFameCheckerText_MainScreenUI:: @ 841E5A4
 	.string "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_A_BUTTON}OK$"
 
-gUnknown_841E5B9:: @ 841E5B9
+gFameCheckerText_PickScreenUI:: @ 841E5B9
 	.string "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
 
-gUnknown_841E5D2:: @ 841E5D2
+gFameCheckerText_FlavorTextUI:: @ 841E5D2
 	.string "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {UNKNOWN_F8 0x01}CANCEL$"
 
-gUnknown_841E5E9:: @ 841E5E9
+gFameCheckerOakName:: @ 841E5E9
 	.string "OAK$"
 
-gUnknown_841E5ED:: @ 841E5ED
+gFameCheckerDaisyName:: @ 841E5ED
 	.string "DAISY$"
 
-gUnknown_841E5F3:: @ 841E5F3
+gFameCheckerBillName:: @ 841E5F3
 	.string "BILL$"
 
-gUnknown_841E5F8:: @ 841E5F8
+gFameCheckerMrFujiName:: @ 841E5F8
 	.string "FUJI$"
 
 gUnknown_841E5FD:: @ 841E5FD

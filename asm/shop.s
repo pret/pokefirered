@@ -892,7 +892,7 @@ _0809B1F2:
 	muls r4, r0
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, _0809B2CC @ =gUnknown_84161C1
+	ldr r1, _0809B2CC @ =gFameCheckerText_Cancel
 	bl StringCopy
 	ldr r0, _0809B2D0 @ =gUnknown_2039964
 	ldr r2, [r0]
@@ -990,7 +990,7 @@ _0809B2BC:
 	b _0809B2E6
 	.align 2, 0
 _0809B2C8: .4byte gUnknown_2039968
-_0809B2CC: .4byte gUnknown_84161C1
+_0809B2CC: .4byte gFameCheckerText_Cancel
 _0809B2D0: .4byte gUnknown_2039964
 _0809B2D4: .4byte gUnknown_3005E70
 _0809B2D8: .4byte gUnknown_2039934
@@ -1378,7 +1378,7 @@ sub_809B59C: @ 809B59C
 	bl CopyWindowToVram
 	b _0809B5F8
 _0809B5E0:
-	ldr r2, _0809B600 @ =gUnknown_841623B
+	ldr r2, _0809B600 @ =gFameCheckerText_ListMenuCursor
 	str r5, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -1395,7 +1395,7 @@ _0809B5F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B600: .4byte gUnknown_841623B
+_0809B600: .4byte gFameCheckerText_ListMenuCursor
 	thumb_func_end sub_809B59C
 
 	thumb_func_start sub_809B604

@@ -19,7 +19,8 @@ enum {
     FAMECHECKER_LANCE,
     FAMECHECKER_BILL,
     FAMECHECKER_MRFUJI,
-    FAMECHECKER_GIOVANNI
+    FAMECHECKER_GIOVANNI,
+    NUM_FAMECHECKER_PERSONS
 };
 
 enum {
@@ -28,7 +29,17 @@ enum {
     FCPICKSTATE_COLORED
 };
 
+enum {
+    FCWINDOWID_LIST,
+    FCWINDOWID_UIHELP,
+    FCWINDOWID_MSGBOX,
+    FCWINDOWID_ICONDESC
+};
+
 void ResetFameChecker(void);
+void FullyUnlockFameChecker(void);
 void UseFameChecker(MainCallback savedCallback);
+void SetFlavorTextFlagFromSpecialVars(void);
+void UpdatePickStateFromSpecialVar8005(void);
 
 #endif //GUARD_FAME_CHECKER_H

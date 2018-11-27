@@ -915,7 +915,7 @@ sub_815B2C0: @ 815B2C0
 	beq _0815B30A
 	subs r0, r4, 0x6
 	ldr r1, [r0]
-	ldr r0, _0815B32C @ =sub_8107EB8
+	ldr r0, _0815B32C @ =UseFameCheckerFromMenu
 	cmp r1, r0
 	bne _0815B330
 _0815B30A:
@@ -932,7 +932,7 @@ _0815B31C: .4byte gTasks+0x8
 _0815B320: .4byte gPaletteFade
 _0815B324: .4byte gUnknown_203F44A
 _0815B328: .4byte gMain
-_0815B32C: .4byte sub_8107EB8
+_0815B32C: .4byte UseFameCheckerFromMenu
 _0815B330:
 	movs r0, 0x5
 	bl PlaySE

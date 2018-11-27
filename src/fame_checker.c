@@ -25,6 +25,7 @@
 #include "field_map_obj.h"
 #include "menu_indicators.h"
 #include "text_window.h"
+#include "fame_checker.h"
 
 #define SPRITETAG_1000 1000
 #define SPRITETAG_1001 1001
@@ -41,8 +42,8 @@ struct FameCheckerData
     u16 unk_04;
     u8 unk_06;
     u8 unk_07_0:1;
-    u8 unk_07_1:1;
-    u8 unk_07_2:6;
+    u8 inPickMode:1;
+    u8 numUnlockedPersons:6;
     u8 scrollIndicatorArrowObjectTaskId;
     u8 unk_09;
     u8 unk_0A;
@@ -95,7 +96,7 @@ static void sub_812D70C(void);
 static u8 sub_812D724(s16 a0);
 static void sub_812D764(struct Sprite *sprite);
 static void sub_812D770(void);
-static u8 sub_812D780(u8, u8);
+static u8 PlaceQuestionMarkTile(u8, u8);
 static void sub_812D7C8(void);
 static u8 sub_812D7E4(void);
 static void sub_812D800(struct Sprite *sprite);
@@ -115,7 +116,7 @@ static u8 sub_812DEF0(void);
 static void sub_812DFE4(u8);
 static void sub_812E000(void);
 static void sub_812E048(void);
-static u16 sub_812E064(void);
+static u16 FameCheckerGetCursorY(void);
 static void sub_812E094(u8);
 static void sub_812E110(u8 taskId);
 static void sub_812E178(u8 a0, s16 a1);
@@ -125,28 +126,28 @@ extern const u8 gUnknown_84161C1[];
 extern const u8 gUnknown_841623B[];
 extern const u8 gUnknown_84181C3[];
 extern const u8 gUnknown_84181E4[];
-extern const u8 gUnknown_841E5A4[];
-extern const u8 gUnknown_841E5B9[];
-extern const u8 gUnknown_841E5D2[];
-extern const u8 gUnknown_841E5E9[];
-extern const u8 gUnknown_841E5ED[];
-extern const u8 gUnknown_841E5F3[];
-extern const u8 gUnknown_841E5F8[];
+extern const u8 gUnknown_841E5A4[]; // "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_A_BUTTON}OK$"
+extern const u8 gUnknown_841E5B9[]; // "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
+extern const u8 gUnknown_841E5D2[]; // "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {UNKNOWN_F8 0x01}CANCEL$"
+extern const u8 gUnknown_841E5E9[]; // "OAK$"
+extern const u8 gUnknown_841E5ED[]; // "DAISY$"
+extern const u8 gUnknown_841E5F3[]; // "BILL$"
+extern const u8 gUnknown_841E5F8[]; // "FUJI$"
 
-static const u16 gUnknown_845C600[] = INCBIN_U16("data/fame_checker/tilemap_845c600.bin");
-static const u8 gUnknown_845CE00[] = INCBIN_U8("data/fame_checker/img_845ce00.4bpp");
-static const u8 gUnknown_845CF00[] = INCBIN_U8("data/fame_checker/img_845cf00.4bpp");
-static const u16 gUnknown_845D0E0[] = INCBIN_U16("data/fame_checker/pal_845d0e0.gbapal");
-static const u8 gUnknown_845D100[] = INCBIN_U8("data/fame_checker/img_845d100.4bpp");
-static const u16 gUnknown_845D500[] = INCBIN_U16("data/fame_checker/pal_845d500.gbapal");
-static const u8 gUnknown_845D520[] = INCBIN_U8("data/fame_checker/img_845d520.4bpp");
-static const u16 gUnknown_845DD20[] = INCBIN_U16("data/fame_checker/pal_845dd20.gbapal");
-static const u8 gUnknown_845DD40[] = INCBIN_U8("data/fame_checker/img_845dd40.4bpp");
-static const u16 gUnknown_845E540[] = INCBIN_U16("data/fame_checker/pal_845e540.gbapal");
-static const u8 gUnknown_845E560[] = INCBIN_U8("data/fame_checker/img_845e560.4bpp");
-static const u16 gUnknown_845ED60[] = INCBIN_U16("data/fame_checker/pal_845ed60.gbapal");
-static const u8 gUnknown_845ED80[] = INCBIN_U8("data/fame_checker/img_845ed80.4bpp");
-static const u16 gUnknown_845F580[] = INCBIN_U16("data/fame_checker/pal_845f580.gbapal");
+static const u16 sFameCheckerTilemap[] = INCBIN_U16("data/fame_checker/tilemap_845c600.bin");
+static const u8 sQuestionMarkSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845ce00.4bpp");
+static const u8 sSpinningPokeballSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845cf00.4bpp");
+static const u16 sSpinningPokeballSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845d0e0.gbapal");
+static const u8 sSelectorCursorSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845d100.4bpp");
+static const u16 sSelectorCursorSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845d500.gbapal");
+static const u8 sFujiSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845d520.4bpp");
+static const u16 sFujiSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845dd20.gbapal");
+static const u8 sBillSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845dd40.4bpp");
+static const u16 sBillSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845e540.gbapal");
+static const u8 sDaisySpriteGfx[] = INCBIN_U8("data/fame_checker/img_845e560.4bpp");
+static const u16 sDaisySpritePalette[] = INCBIN_U16("data/fame_checker/pal_845ed60.gbapal");
+static const u8 sOakSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845ed80.4bpp");
+static const u16 sOakSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845f580.gbapal");
 static const u16 gUnknown_845F5A0[] = INCBIN_U16("data/fame_checker/pal_845f5a0.gbapal");
 static const u16 gUnknown_845F5C0[] = INCBIN_U16("data/fame_checker/pal_845f5c0.gbapal");
 
@@ -181,38 +182,8 @@ static const u8 *const gUnknown_845F60C[] = {
 };
 
 static const u8 gUnknown_845F61C[] = {
-    0x56,
-    0x54,
-    0x74,
-    0x75,
-    0x76,
-    0x77,
-    0x78,
-    0x7a,
-    0x79,
-    0x70,
-    0x71,
-    0x72,
-    0x73,
-    0x64,
-    0x7b,
-    0x6c,
-    0x00,
-    0x01,
-    0x00,
-    0x01,
-    0x00,
-    0x01,
-    0x00,
-    0x01,
-    0x00,
-    0x01,
-    0x00,
-    0x01,
-    0x00,
-    0x00,
-    0x00,
-    0x00
+    0x56, 0x54, 0x74, 0x75, 0x76, 0x77, 0x78, 0x7a, 0x79, 0x70, 0x71, 0x72, 0x73, 0x64, 0x7b, 0x6c,
+    0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00
 };
 
 static const u8 *const gUnknown_845F63C[] = {
@@ -269,7 +240,7 @@ static const u8 *const gUnknown_845F6BC[] = {
     gUnknown_81AFE68, gUnknown_81AFF23, gUnknown_81AFFA8, gUnknown_81B0022, gUnknown_81B00A6, gUnknown_81B0106
 };
 
-static const u8 gUnknown_845F83C[] = {
+static const u8 sFameCheckerArrayNpcGraphicsIds[] = {
     0x67, 0x47, 0x30, 0x69, 0x4b, 0x37,
     0x37, 0x30, 0x3d, 0x69, 0x23, 0x69,
     0x66, 0x50, 0x1b, 0x13, 0x1e, 0x69,
@@ -327,19 +298,19 @@ static const u8 *const gUnknown_845FA1C[] = {
 };
 
 static const struct SpriteSheet gUnknown_845FB9C[] = {
-    {gUnknown_845D100, 0x400, SPRITETAG_1000},
-    {gUnknown_845CE00, 0x100, SPRITETAG_1001},
-    {gUnknown_845CF00, 0x1e0, SPRITETAG_1002},
-    {gUnknown_845E560, 0x800, SPRITETAG_1006},
-    {gUnknown_845D520, 0x800, SPRITETAG_1007},
-    {gUnknown_845ED80, 0x800, SPRITETAG_1008},
-    {gUnknown_845DD40, 0x800, SPRITETAG_1009},
+    {sSelectorCursorSpriteGfx, 0x400, SPRITETAG_1000},
+    {sQuestionMarkSpriteGfx, 0x100, SPRITETAG_1001},
+    {sSpinningPokeballSpriteGfx, 0x1e0, SPRITETAG_1002},
+    {sDaisySpriteGfx, 0x800, SPRITETAG_1006},
+    {sFujiSpriteGfx, 0x800, SPRITETAG_1007},
+    {sOakSpriteGfx, 0x800, SPRITETAG_1008},
+    {sBillSpriteGfx, 0x800, SPRITETAG_1009},
     {}
 };
 
 static const struct SpritePalette gUnknown_845FBDC[] = {
-    {gUnknown_845D500, SPRITETAG_1000},
-    {gUnknown_845D0E0, SPRITETAG_1002},
+    {sSelectorCursorSpritePalette, SPRITETAG_1000},
+    {sSpinningPokeballSpritePalette, SPRITETAG_1002},
     {}
 };
 
@@ -449,7 +420,7 @@ static const union AffineAnimCmd *const gUnknown_845FCB4[] = {
     gUnknown_845FCA4
 };
 
-static const struct SpriteTemplate gUnknown_845FCB8 = {
+static const struct SpriteTemplate sSpinningPokeballSpriteTemplate = {
     SPRITETAG_1002, SPRITETAG_1002, &gOamData_845FC9C, gUnknown_845FC98, NULL, gUnknown_845FCB4, sub_812D840
 };
 
@@ -466,19 +437,19 @@ static const struct OamData gOamData_845FCDC = {
     .size = 3
 };
 
-static const struct SpriteTemplate gUnknown_845FCE4 = {
+static const struct SpriteTemplate sDaisySpriteTemplate = {
     SPRITETAG_1006, 0xffff, &gOamData_845FCDC, gUnknown_845FCD8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_845FCFC = {
+static const struct SpriteTemplate sFujiSpriteTemplate = {
     SPRITETAG_1007, 0xffff, &gOamData_845FCDC, gUnknown_845FCD8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_845FD14 = {
+static const struct SpriteTemplate sOakSpriteTemplate = {
     SPRITETAG_1008, 0xffff, &gOamData_845FCDC, gUnknown_845FCD8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_845FD2C = {
+static const struct SpriteTemplate sBillSpriteTemplate = {
     SPRITETAG_1009, 0xffff, &gOamData_845FCDC, gUnknown_845FCD8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
@@ -541,7 +512,7 @@ static void sub_812C3F8(void)
             LoadPalette(gUnknown_8E9F220 + 0x00, 0x00, 0x40);
             LoadPalette(gUnknown_8E9F220 + 0x10, 0x10, 0x20);
             CopyToBgTilemapBufferRect(2, gUnknown_8EA0F00, 0, 0, 32, 32);
-            CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_845C600, 30, 0, 32, 32, 0x11);
+            CopyToBgTilemapBufferRect_ChangePalette(1, sFameCheckerTilemap, 30, 0, 32, 32, 0x11);
             LoadPalette(stdpal_get(2), 0xF0, 0x20);
             gMain.state++;
             break;
@@ -610,16 +581,16 @@ static void sub_812C694(u8 taskId)
     if (FindTaskIdByFunc(sub_812E110) == 0xFF)
     {
         RunTextPrinters();
-        if ((JOY_NEW(SELECT_BUTTON)) && !sFameCheckerData->unk_07_1 && sFameCheckerData->savedCallback != sub_8107EB8)
+        if ((JOY_NEW(SELECT_BUTTON)) && !sFameCheckerData->inPickMode && sFameCheckerData->savedCallback != UseFameCheckerFromMenu)
             task->func = sub_812CF3C;
         else if (JOY_NEW(START_BUTTON))
         {
-            r4 = sub_812E064();
+            r4 = FameCheckerGetCursorY();
             if (sub_812C8F8(taskId) == TRUE)
             {
                 PlaySE(SE_W100);
             }
-            else if (r4 != sFameCheckerData->unk_07_2 - 1)
+            else if (r4 != sFameCheckerData->numUnlockedPersons - 1)
             {
                 PlaySE(SE_W100);
                 FillWindowPixelRect(3, 0x00, 0, 0, 88, 32);
@@ -639,9 +610,9 @@ static void sub_812C694(u8 taskId)
         else if (JOY_NEW(A_BUTTON))
         {
             r4 = ListMenuHandleInput(0);
-            if (r4 == sFameCheckerData->unk_07_2 - 1)
+            if (r4 == sFameCheckerData->numUnlockedPersons - 1)
                 task->func = sub_812CF3C;
-            else if (sFameCheckerData->unk_07_1)
+            else if (sFameCheckerData->inPickMode)
             {
                 if (!IsTextPrinterActive(2) && sub_812D6B4() == TRUE)
                     sub_812CD3C();
@@ -680,7 +651,7 @@ static void sub_812C694(u8 taskId)
 static bool8 sub_812C8F8(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    if (sFameCheckerData->unk_07_1)
+    if (sFameCheckerData->inPickMode)
     {
         gSprites[task->data[2]].data[0] = 2;
         gSprites[task->data[2]].pos2.x += 10;
@@ -706,7 +677,7 @@ static void sub_812C9BC(u8 taskId)
     if (gSprites[task->data[2]].data[0] == 0)
     {
         sub_812CD3C();
-        sFameCheckerData->unk_07_1 = TRUE;
+        sFameCheckerData->inPickMode = TRUE;
         task->func = sub_812C694;
     }
     else
@@ -726,8 +697,8 @@ static void sub_812CA1C(u8 taskId)
             sub_812D0F4(0);
         sub_812E178(1, 4);
         sub_812E178(2, 2);
-        sFameCheckerData->unk_07_1 = FALSE;
-        sub_812D9A8(taskId, sub_812E064());
+        sFameCheckerData->inPickMode = FALSE;
+        sub_812D9A8(taskId, FameCheckerGetCursorY());
         task->func = sub_812C694;
         gSprites[task->data[3]].callback = sub_812D800;
     }
@@ -825,7 +796,7 @@ static void sub_812CC68(u8 taskId, s8 dx, s8 dy)
 static void sub_812CD3C(void)
 {
     u8 r8 = 0;
-    u16 r6 = sub_812E064();
+    u16 r6 = FameCheckerGetCursorY();
     if (gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[r6]].unk_0_0 != 2)
     {
         sub_812CE9C();
@@ -845,7 +816,7 @@ static void sub_812CD3C(void)
 static void sub_812CE04(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 r5 = sub_812E064();
+    u16 r5 = FameCheckerGetCursorY();
     FillWindowPixelRect(2, 0x11, 0, 0, 0xd0, 0x20);
     StringExpandPlaceholders(gStringVar4, gUnknown_845F6BC[sFameCheckerData->unlockedPersons[r5] * 6 + data[1]]);
     AddTextPrinterParametrized(2, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
@@ -895,9 +866,9 @@ static void sub_812CF7C(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (sFameCheckerData->unk_07_1)
+        if (sFameCheckerData->inPickMode)
         {
-            sub_812D9A8(taskId, sub_812E064());
+            sub_812D9A8(taskId, FameCheckerGetCursorY());
             FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[3]]);
             DestroySprite(&gSprites[gTasks[taskId].data[3]]);
         }
@@ -981,7 +952,7 @@ static bool8 sub_812D1A8(u8 a0)
         if ((gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[a0]].unk_0_2 >> r6) & 1)
         {
             sFameCheckerData->spriteIds[r6] = sub_805EB44(
-                gUnknown_845F83C[sFameCheckerData->unlockedPersons[a0] * 6 + r6],
+                sFameCheckerArrayNpcGraphicsIds[sFameCheckerData->unlockedPersons[a0] * 6 + r6],
                 r6,
                 47 * (r6 % 3) + 0x72,
                 27 * (r6 / 3) + 0x2F
@@ -990,7 +961,7 @@ static bool8 sub_812D1A8(u8 a0)
         }
         else
         {
-            sFameCheckerData->spriteIds[r6] = sub_812D780(
+            sFameCheckerData->spriteIds[r6] = PlaceQuestionMarkTile(
                 47 * (r6 % 3) + 0x72,
                 27 * (r6 / 3) + 0x1F
             );
@@ -1000,7 +971,7 @@ static bool8 sub_812D1A8(u8 a0)
     if (r5 == TRUE)
     {
         sFameCheckerData->unk_07_0 = TRUE;
-        if (sFameCheckerData->unk_07_1)
+        if (sFameCheckerData->inPickMode)
             sub_812D0F4(TRUE);
         else
             sub_812D0F4(FALSE);
@@ -1120,7 +1091,7 @@ static void sub_812D650(void)
 static bool8 sub_812D6B4(void)
 {
     u8 r2;
-    u8 r1 = sFameCheckerData->unlockedPersons[sub_812E064()];
+    u8 r1 = sFameCheckerData->unlockedPersons[FameCheckerGetCursorY()];
     for (r2 = 0; r2 < 6; r2++)
     {
         if (!((gSaveBlock1Ptr->fameChecker[r1].unk_0_2 >> r2) & 1))
@@ -1152,7 +1123,7 @@ static void sub_812D770(void)
     FreeSpriteTilesByTag(SPRITETAG_1001);
 }
 
-static u8 sub_812D780(u8 x, u8 y)
+static u8 PlaceQuestionMarkTile(u8 x, u8 y)
 {
     u8 spriteId = CreateSprite(&gUnknown_845FC78, x, y, 8);
     gSprites[spriteId].oam.priority = 2;
@@ -1168,7 +1139,7 @@ static void sub_812D7C8(void)
 
 static u8 sub_812D7E4(void)
 {
-    return CreateSprite(&gUnknown_845FCB8, 0xe2, 0x42, 0);
+    return CreateSprite(&sSpinningPokeballSpriteTemplate, 0xe2, 0x42, 0);
 }
 
 static void sub_812D800(struct Sprite * sprite)
@@ -1212,28 +1183,28 @@ static void sub_812D840(struct Sprite * sprite)
 static u8 sub_812D888(u8 a0)
 {
     u8 r4;
-    if (a0 == 1)
+    if (a0 == FAMECHECKER_DAISY)
     {
-        r4 = CreateSprite(&gUnknown_845FCE4, 0x94, 0x42, 0);
-        LoadPalette(gUnknown_845ED60, 0x160, 0x20);
+        r4 = CreateSprite(&sDaisySpriteTemplate, 0x94, 0x42, 0);
+        LoadPalette(sDaisySpritePalette, 0x160, 0x20);
         gSprites[r4].oam.paletteNum = 6;
     }
-    else if (a0 == 14)
+    else if (a0 == FAMECHECKER_MRFUJI)
     {
-        r4 = CreateSprite(&gUnknown_845FCFC, 0x94, 0x42, 0);
-        LoadPalette(gUnknown_845DD20, 0x160, 0x20);
+        r4 = CreateSprite(&sFujiSpriteTemplate, 0x94, 0x42, 0);
+        LoadPalette(sFujiSpritePalette, 0x160, 0x20);
         gSprites[r4].oam.paletteNum = 6;
     }
-    else if (a0 == 0)
+    else if (a0 == FAMECHECKER_OAK)
     {
-        r4 = CreateSprite(&gUnknown_845FD14, 0x94, 0x42, 0);
-        LoadPalette(gUnknown_845F580, 0x160, 0x20);
+        r4 = CreateSprite(&sOakSpriteTemplate, 0x94, 0x42, 0);
+        LoadPalette(sOakSpritePalette, 0x160, 0x20);
         gSprites[r4].oam.paletteNum = 6;
     }
-    else if (a0 == 13)
+    else if (a0 == FAMECHECKER_BILL)
     {
-        r4 = CreateSprite(&gUnknown_845FD2C, 0x94, 0x42, 0);
-        LoadPalette(gUnknown_845E540, 0x160, 0x20);
+        r4 = CreateSprite(&sBillSpriteTemplate, 0x94, 0x42, 0);
+        LoadPalette(sBillSpritePalette, 0x160, 0x20);
         gSprites[r4].oam.paletteNum = 6;
     }
     else
@@ -1250,12 +1221,12 @@ static void sub_812D9A8(u8 taskId, u16 a1)
 {
     s16 * data = gTasks[taskId].data;
     u16 r1 = a1;
-    if (a1 == sFameCheckerData->unk_07_2 - 1)
+    if (a1 == sFameCheckerData->numUnlockedPersons - 1)
         r1 = a1 - 1;
-    if (   sFameCheckerData->unlockedPersons[r1] == 1
-        || sFameCheckerData->unlockedPersons[r1] == 14
-        || sFameCheckerData->unlockedPersons[r1] == 0
-        || sFameCheckerData->unlockedPersons[r1] == 13
+    if (   sFameCheckerData->unlockedPersons[r1] == FAMECHECKER_DAISY
+        || sFameCheckerData->unlockedPersons[r1] == FAMECHECKER_MRFUJI
+        || sFameCheckerData->unlockedPersons[r1] == FAMECHECKER_OAK
+        || sFameCheckerData->unlockedPersons[r1] == FAMECHECKER_BILL
     )
         DestroySprite(&gSprites[data[2]]);
     else
@@ -1265,7 +1236,7 @@ static void sub_812D9A8(u8 taskId, u16 a1)
 static void sub_812DA14(u8 a0)
 {
     s32 width;
-    u32 r5 = 6 * sFameCheckerData->unlockedPersons[sub_812E064()] + a0;
+    u32 r5 = 6 * sFameCheckerData->unlockedPersons[FameCheckerGetCursorY()] + a0;
     sub_812E094(1);
     gUnknown_3005EC8 = 1;
     FillWindowPixelRect(3, 0x00, 0, 0, 0x58, 0x20);
@@ -1286,7 +1257,7 @@ static void sub_812DB10(void)
 static void sub_812DB28(void)
 {
     sub_812DB64();
-    sFameCheckerData->unk_07_2 = sub_812DEF0();
+    sFameCheckerData->numUnlockedPersons = sub_812DEF0();
     sFameCheckerData->scrollIndicatorArrowObjectTaskId = ListMenuInit(&gFameChecker_ListMenuTemplate, 0, 0);
     sub_812DFE4(0);
 }
@@ -1329,11 +1300,11 @@ static void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         task->data[1] = 0;
         get_coro_args_x18_x1A(sFameCheckerData->scrollIndicatorArrowObjectTaskId, &sp8, NULL);
         sFameCheckerData->unk_04 = sp8;
-        if (itemIndex != sFameCheckerData->unk_07_2 - 1)
+        if (itemIndex != sFameCheckerData->numUnlockedPersons - 1)
         {
             sub_812D174();
             sub_812D1A8(itemIndex);
-            if (sFameCheckerData->unk_07_1)
+            if (sFameCheckerData->inPickMode)
             {
                 if (!sFameCheckerData->unk_23_2)
                 {
@@ -1358,7 +1329,7 @@ static void sub_812DBC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         else
         {
             sub_812DDAC();
-            if (sFameCheckerData->unk_07_1)
+            if (sFameCheckerData->inPickMode)
             {
                 gSprites[task->data[2]].invisible = TRUE;
                 sFameCheckerData->unk_23_2 = TRUE;
@@ -1403,7 +1374,7 @@ static void sub_812DDF0(s32 itemIndex, bool8 onInit)
     {
         if (sp14 < sFameCheckerData->unk_0A)
             sFameCheckerData->unk_0B++;
-        else if (sp14 > sFameCheckerData->unk_0A && r6 != sFameCheckerData->unk_07_2 - 1)
+        else if (sp14 > sFameCheckerData->unk_0A && r6 != sFameCheckerData->numUnlockedPersons - 1)
             sFameCheckerData->unk_0B--;
         AddTextPrinterParametrized2(0, 2, 8, 14 * sFameCheckerData->unk_0B + 4, 0, 0, &gUnknown_845F5E3, 0, sListMenuItems[sFameCheckerData->unk_09].unk_00);
 
@@ -1472,21 +1443,21 @@ static void sub_812E000(void)
                        0
     };
 
-    if (sFameCheckerData->unk_07_2 > 5)
+    if (sFameCheckerData->numUnlockedPersons > 5)
     {
         sp0.unk_06 = 0;
-        sp0.unk_08 = sFameCheckerData->unk_07_2 - 5;
+        sp0.unk_08 = sFameCheckerData->numUnlockedPersons - 5;
         sFameCheckerData->unk_06 = AddScrollIndicatorArrowPair(&sp0, &sFameCheckerData->unk_04);
     }
 }
 
 static void sub_812E048(void)
 {
-    if (sFameCheckerData->unk_07_2 > 5)
+    if (sFameCheckerData->numUnlockedPersons > 5)
         RemoveScrollIndicatorArrowPair(sFameCheckerData->unk_06);
 }
 
-static u16 sub_812E064(void)
+static u16 FameCheckerGetCursorY(void)
 {
     u16 sp0, sp2;
     get_coro_args_x18_x1A(sFameCheckerData->scrollIndicatorArrowObjectTaskId, &sp0, &sp2);

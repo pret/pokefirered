@@ -911,14 +911,14 @@ _0806F498:
 	bl play_some_sound
 	bl sub_806EF18
 	bl sub_80563F0
-	ldr r0, _0806F4B0 @ =sub_8107EB8
+	ldr r0, _0806F4B0 @ =UseFameCheckerFromMenu
 	bl SetMainCallback2
 	movs r0, 0x1
 _0806F4AC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806F4B0: .4byte sub_8107EB8
+_0806F4B0: .4byte UseFameCheckerFromMenu
 	thumb_func_end sub_806F480
 
 	thumb_func_start sub_806F4B4

@@ -138,8 +138,8 @@ _08107EB0: .4byte gUnknown_203AD10
 _08107EB4: .4byte gUnknown_203ACFC
 	thumb_func_end sub_8107DB4
 
-	thumb_func_start sub_8107EB8
-sub_8107EB8: @ 8107EB8
+	thumb_func_start UseFameCheckerFromMenu
+UseFameCheckerFromMenu: @ 8107EB8
 	push {lr}
 	ldr r2, _08107EC8 @ =sub_80568A8
 	movs r0, 0
@@ -149,7 +149,7 @@ sub_8107EB8: @ 8107EB8
 	bx r0
 	.align 2, 0
 _08107EC8: .4byte sub_80568A8
-	thumb_func_end sub_8107EB8
+	thumb_func_end UseFameCheckerFromMenu
 
 	thumb_func_start sub_8107ECC
 sub_8107ECC: @ 8107ECC

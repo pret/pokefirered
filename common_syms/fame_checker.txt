@@ -1,2 +1,2 @@
 gFameChecker_ListMenuTemplate
-gUnknown_3005EC8
+gIconDescriptionBoxIsOpen

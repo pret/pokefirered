@@ -36,6 +36,9 @@ enum {
     FCWINDOWID_ICONDESC
 };
 
+extern struct ListMenuTemplate gFameChecker_ListMenuTemplate;
+extern u8 gIconDescriptionBoxIsOpen;
+
 void ResetFameChecker(void);
 void FullyUnlockFameChecker(void);
 void UseFameChecker(MainCallback savedCallback);

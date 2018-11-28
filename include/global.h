@@ -616,8 +616,8 @@ struct SaveBlock1
     /*0x0638*/ u8 trainerRematchStepCounter;
                u8 filler_639;
     /*0x063A*/ u8 trainerRematches[100];
-    /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
-    /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
+    /*0x06A0*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
+    /*0x08E0*/ struct MapObjectTemplate mapObjectTemplates[64];
     /*0x0EE0*/ u8 flags[FLAGS_COUNT];
     /*0x1000*/ u16 vars[VARS_COUNT];
     /*0x1200*/ u8 filler1200[0x100];
@@ -626,15 +626,15 @@ struct SaveBlock1
     /*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];
     /*0x2F10*/ u8 filler2F10[0x184];
                struct {
-    /*0x3094*/ u8 unknown1[8];
-    /*0x309C*/ u8 giftRibbons[11];
-    /*0x30A7*/ u8 unknown2[8];
-    /*0x30AF*/ u32 currentPokeCoupons;
-    /*0x30B3*/ u32 totalEarnedPokeCoupons;
-    /*0x30B7*/ u8 unknown3[6];
-    /*0x30BD*/ u8 receivedWishmakerJirachi;
-    /*0x30BE*/ u8 unknown4[18];
-    } __attribute__((packed)) externalReservedData;
+    /*0x3094*/     u8 unknown1[8];
+    /*0x309C*/     u8 giftRibbons[11];
+    /*0x30A7*/     u8 unknown2[8];
+    /*0x30AF*/     u32 currentPokeCoupons;
+    /*0x30B3*/     u32 totalEarnedPokeCoupons;
+    /*0x30B7*/     u8 unknown3[6];
+    /*0x30BD*/     u8 receivedWishmakerJirachi;
+    /*0x30BE*/     u8 unknown4[18];
+               } __attribute__((packed)) externalReservedData;
     /*0x30D0*/ struct Roamer roamer;
     /*0x30EC*/ struct EnigmaBerry enigmaBerry;
     /*0x3120*/ u8 filler3120[0x340];

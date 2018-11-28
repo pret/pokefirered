@@ -621,7 +621,7 @@ struct SaveBlock1
     /*0x08E0*/ struct MapObjectTemplate mapObjectTemplates[64];
     /*0x0EE0*/ u8 flags[FLAGS_COUNT];
     /*0x1000*/ u16 vars[VARS_COUNT];
-    /*0x1200*/ u8 filler1200[0x100];
+    /*0x1200*/ u32 gameStats[NUM_GAME_STATS];
     /*0x1300*/ struct QuestLog questLog[4];
     /*0x2CA0*/ u8 filler2CA0[0x30];
     /*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];

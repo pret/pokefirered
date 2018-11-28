@@ -394,13 +394,13 @@ gUnknown_8E9F1FC:: @ 8E9F1FC
 	.incbin "baserom.gba", 0xE9F1FC, 0x24
 
 gUnknown_8E9F220:: @ 8E9F220
-	.incbin "baserom.gba", 0xE9F220, 0x40
+	.incbin "data/graphics/fame_checker_bg.gbapal"
 
 gUnknown_8E9F260:: @ 8E9F260
-	.incbin "baserom.gba", 0xE9F260, 0x14A0
+	.incbin "data/graphics/fame_checker_bg.4bpp"
 
 gUnknown_8EA0700:: @ 8EA0700
-	.incbin "baserom.gba", 0xEA0700, 0x800
+	.incbin "data/graphics/fame_checker_tilemap.bin"
 
 gUnknown_8EA0F00:: @ 8EA0F00
 	.incbin "baserom.gba", 0xEA0F00, 0x800

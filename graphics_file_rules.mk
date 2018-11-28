@@ -1,4 +1,5 @@
-FONTGFXDIR := data/graphics/fonts
+GLOBALGFXDIR := data/graphics
+FONTGFXDIR := $(GLOBALGFXDIR)/fonts
 FAMECHECKERGFXDIR := data/fame_checker
 
 $(FONTGFXDIR)/font0_latin.latfont: $(FONTGFXDIR)/font0_latin.png
@@ -36,3 +37,6 @@ $(FONTGFXDIR)/font9_jap.fwjpnfont: $(FONTGFXDIR)/font9_jap.png
 
 $(FAMECHECKERGFXDIR)/img_845cf00.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 15
+
+$(GLOBALGFXDIR)/fame_checker_bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 165

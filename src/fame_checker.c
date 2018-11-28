@@ -478,11 +478,11 @@ static void MainCB2_LoadFameChecker(void)
             gMain.state++;
             break;
         case 3:
-            LoadBgTiles(3, gUnknown_8E9F260, sizeof(gUnknown_8E9F260), 0);
-            CopyToBgTilemapBufferRect(3, gUnknown_8EA0700, 0, 0, 32, 32);
-            LoadPalette(gUnknown_8E9F220 + 0x00, 0x00, 0x40);
-            LoadPalette(gUnknown_8E9F220 + 0x10, 0x10, 0x20);
-            CopyToBgTilemapBufferRect(2, gUnknown_8EA0F00, 0, 0, 32, 32);
+            LoadBgTiles(3, gFameCheckerBgTiles, sizeof(gFameCheckerBgTiles), 0);
+            CopyToBgTilemapBufferRect(3, gFameCheckerBg3Tilemap, 0, 0, 32, 32);
+            LoadPalette(gFameCheckerBgPals + 0x00, 0x00, 0x40);
+            LoadPalette(gFameCheckerBgPals + 0x10, 0x10, 0x20);
+            CopyToBgTilemapBufferRect(2, gFameCheckerBg2Tilemap, 0, 0, 32, 32);
             CopyToBgTilemapBufferRect_ChangePalette(1, sFameCheckerTilemap, 30, 0, 32, 32, 0x11);
             LoadPalette(stdpal_get(2), 0xF0, 0x20);
             gMain.state++;

@@ -145,9 +145,9 @@ extern const u16 gUnknown_08DDAFE0[];
 
 // fame_checker
 
-extern const u16 gUnknown_8E9F220[0x30];
-extern const u16 gUnknown_8E9F260[0xa50];
-extern const u16 gUnknown_8EA0700[0x400];
-extern const u16 gUnknown_8EA0F00[0x400];
+extern const u16 gFameCheckerBgPals[0x30];
+extern const u16 gFameCheckerBgTiles[0xa50];
+extern const u16 gFameCheckerBg3Tilemap[0x400];
+extern const u16 gFameCheckerBg2Tilemap[0x400];
 
 #endif //GUARD_GRAPHICS_H

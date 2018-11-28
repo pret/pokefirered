@@ -922,7 +922,7 @@ static bool8 CreateAllFlavorTextIcons(u8 who)
         if ((gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[who]].flavorTextFlags >> i) & 1)
         {
             sFameCheckerData->spriteIds[i] = sub_805EB44(
-                sFameCheckerArrayNpcGraphicsIds[sFameCheckerData->unlockedPersons[a0] * 6 + i],
+                sFameCheckerArrayNpcGraphicsIds[sFameCheckerData->unlockedPersons[who] * 6 + i],
                 i,
                 47 * (i % 3) + 0x72,
                 27 * (i / 3) + 0x2F
@@ -1308,8 +1308,8 @@ static void FC_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list
             }
             else
             {
-                u8 iwho;
-                for (iwho = 0; iwho < 6; iwho++)
+                u8 i;
+                for (i = 0; i < 6; i++)
                 {
                     gSprites[sFameCheckerData->spriteIds[i]].invisible = TRUE;
                 }
@@ -1336,24 +1336,24 @@ static void PrintCancelDescription(void)
 
 static void FC_DoMoveCursor(s32 itemIndex, bool8 onInit)
 {
-    u16 topIdx;
-    u16 drawnSelIdx;
+    u16 listY;
+    u16 cursorY;
     u16 who;
-    get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &topIdx, &drawnSelIdx);
-    who = topIdx + drawnSelIdx;
-    AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 8, 14 * drawnSelIdx + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].unk_00);
+    get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
+    who = listY + cursorY;
+    AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].unk_00);
     if (!onInit)
     {
-        if (topIdx < sFameCheckerData->listMenuTopIdx2)
+        if (listY < sFameCheckerData->listMenuTopIdx2)
             sFameCheckerData->listMenuDrawnSelIdx++;
-        else if (topIdx > sFameCheckerData->listMenuTopIdx2 && who != sFameCheckerData->numUnlockedPersons - 1)
+        else if (listY > sFameCheckerData->listMenuTopIdx2 && who != sFameCheckerData->numUnlockedPersons - 1)
             sFameCheckerData->listMenuDrawnSelIdx--;
         AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, &sTextColor_DkGrey, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].unk_00);
 
     }
     sFameCheckerData->listMenuCurIdx = itemIndex;
-    sFameCheckerData->listMenuDrawnSelIdx = drawnSelIdx;
-    sFameCheckerData->listMenuTopIdx2 = topIdx;
+    sFameCheckerData->listMenuDrawnSelIdx = cursorY;
+    sFameCheckerData->listMenuTopIdx2 = listY;
 }
 
 static u8 FC_PopulateListMenu(void)
@@ -1400,7 +1400,7 @@ static void FC_PutWindowTilemapAndCopyWindowToVramMode3_2(u8 windowId)
 
 static void FC_CreateScrollIndicatorArrowPair(void)
 {
-    struct ScrollIndicatorArrowPairTemplate sp0 = {
+    struct ScrollIndicatorArrowPairTemplate template = {
           2,
           40,
           26,
@@ -1417,9 +1417,9 @@ static void FC_CreateScrollIndicatorArrowPair(void)
 
     if (sFameCheckerData->numUnlockedPersons > 5)
     {
-        sp0.unk_06 = 0;
-        sp0.unk_08 = sFameCheckerData->numUnlockedPersons - 5;
-        sFameCheckerData->scrollIndicatorPairTaskId = AddScrollIndicatorArrowPair(&sp0, &sFameCheckerData->listMenuTopIdx);
+        template.unk_06 = 0;
+        template.unk_08 = sFameCheckerData->numUnlockedPersons - 5;
+        sFameCheckerData->scrollIndicatorPairTaskId = AddScrollIndicatorArrowPair(&template, &sFameCheckerData->listMenuTopIdx);
     }
 }
 
@@ -1431,9 +1431,9 @@ static void FreeListMenuSelectorArrowPairResources(void)
 
 static u16 FameCheckerGetCursorY(void)
 {
-    u16 sp0, sp2;
-    get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &sp0, &sp2);
-    return sp0 + sp2;
+    u16 listY, cursorY;
+    get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
+    return listY + cursorY;
 }
 
 static void HandleFlavorTextModeSwitch(bool8 state)

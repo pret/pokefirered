@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "malloc.h"
 #include "sound.h"
 #include "easy_chat.h"
@@ -71,6 +72,8 @@ extern const u8 gUnknown_841DE9B[];
 extern const u8 gUnknown_841DE9C[];
 extern const u8 gUnknownSerialData_Start[];
 extern const u8 gUnknownSerialData_End[];
+
+extern const u16 gUnknown_8466F00[];
 
 struct MEvent_Str_1 gUnknown_3005ED0;
 
@@ -627,4 +630,87 @@ void sub_814407C(void)
 {
     CpuFill32(0, &gSaveBlock1Ptr->unk_3120.buffer_1c0.data, sizeof(struct MEventBuffer_32E0_Sub));
     gSaveBlock1Ptr->unk_3120.buffer_1c0.crc = 0;
+}
+
+void sub_81440B4(void)
+{
+    CpuFill32(0, sav1_get_mevent_buffer_2(), 18 * sizeof(u16));
+    gSaveBlock1Ptr->unk_3120.buffer_310.crc = 0;
+}
+
+u16 sub_81440E8(void)
+{
+    if (sub_8143FC8())
+        return gSaveBlock1Ptr->unk_3120.buffer_1c0.data.unk_00;
+    return 0;
+}
+
+void sub_814410C(struct MEventBuffer_32E0_Sub * buffer)
+{
+    if (buffer->unk_08_6 == 1)
+        buffer->unk_08_6 = 0;
+}
+
+bool32 sub_8144124(u16 a0)
+{
+    if (a0 >= 1000 && a0 < 1020)
+        return TRUE;
+    return FALSE;
+}
+
+bool32 sub_8144144(void)
+{
+    u16 value = sub_81440E8();
+    if (!sub_8144124(value))
+        return FALSE;
+    if (FlagGet(gUnknown_8466F00[value - 1000]) == TRUE)
+        return FALSE;
+    return TRUE;
+}
+
+s32 sub_8144184(const struct MEventBuffer_3430_Sub * data, s32 size)
+{
+    s32 r3 = 0;
+    s32 i;
+    for (i = 0; i < size; i++)
+    {
+        if (data->unk_08[1][i] && data->unk_08[0][i])
+            r3++;
+    }
+    return r3;
+}
+
+bool32 sub_81441AC(const struct MEventBuffer_3430_Sub * data1, const u16 * data2, s32 size)
+{
+    s32 i;
+    for (i = 0; i < size; i++)
+    {
+        if (data1->unk_08[1][i] == data2[1])
+            return TRUE;
+        if (data1->unk_08[0][i] == data2[0])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 sub_81441F0(const u16 * data)
+{
+    if (data[1] == 0)
+        return FALSE;
+    if (data[0] == 0)
+        return FALSE;
+    if (data[0] >= NUM_SPECIES)
+        return FALSE;
+    return TRUE;
+}
+
+bool32 sub_8144218(void)
+{
+    struct MEventBuffer_32E0_Sub * data;
+    if (!sub_8143FC8())
+        return FALSE;
+    data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+    if (data->unk_08_0 != 1)
+        return FALSE;
+    return sub_8144184(&gSaveBlock1Ptr->unk_3120.buffer_310.data, data->unk_09);
 }

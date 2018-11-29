@@ -628,7 +628,7 @@ struct MEventBuffer_3430_Sub
 {
 	u8 filler_00[6];
 	u16 unk_06;
-	u8 filler_08[28];
+	u16 unk_08[2][7];
 };
 
 struct MEventBuffer_3430

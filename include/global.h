@@ -264,7 +264,9 @@ struct SaveBlock2
     /*0x098*/ struct Time localTimeOffset;
     /*0x0A0*/ struct Time lastBerryTreeUpdate;
     /*0x0A8*/ u32 field_A8;
-    /*0x0AC*/ u8 filler_AC[0x9ec];
+    /*0x0AC*/ u8 filler_AC[0x3F4];
+    /*0x4A0*/ u32 unk_4A0[0x2F];
+    /*0x55c*/ u8 filler_55C[0x53C];
     /*0xA98*/ u8 unk_A98[2][16];
     /*0xAB8*/ u8 filler_AB8[0x468];
     /*0xF20*/ u32 encryptionKey;
@@ -591,22 +593,48 @@ struct FameCheckerSaveData
 #define NUM_EASY_CHAT_EXTRA_PHRASES 33
 #define EASY_CHAT_EXTRA_PHRASES_SIZE ((NUM_EASY_CHAT_EXTRA_PHRASES >> 3) + (NUM_EASY_CHAT_EXTRA_PHRASES % 8 ? 1 : 0))
 
+struct MEventBuffer_3120_Sub
+{
+	u16 unk_00;
+	u8 unk_02;
+	u16 filler_04[220];
+};
+
 struct MEventBuffer_3120
 {
 	u32 crc;
-	u16 data[222];
+	struct MEventBuffer_3120_Sub data;
+};
+
+struct MEventBuffer_32E0_Sub
+{
+	u16 unk_00;
+	u16 unk_02;
+	u8 filler_04[4];
+	u8 unk_08_0:2;
+	u8 unk_08_2:4;
+	u8 unk_08_6:2;
+	u8 unk_09;
+	u8 filler_0A[322];
 };
 
 struct MEventBuffer_32E0
 {
 	u32 crc;
-	u16 data[166];
+	struct MEventBuffer_32E0_Sub data;
+};
+
+struct MEventBuffer_3430_Sub
+{
+	u8 filler_00[6];
+	u16 unk_06;
+	u8 filler_08[28];
 };
 
 struct MEventBuffer_3430
 {
 	u32 crc;
-	u16 data[18];
+	struct MEventBuffer_3430_Sub data;
 };
 
 struct MEventBuffers

@@ -34,6 +34,8 @@ bool8 FlagGet(u16 id);
 u16 * GetVarPointer(u16 id);
 bool32 sub_806E2BC(void);
 void sub_806E6FC(void);
+void sub_806E2D0(void);
+void sub_806E370(void);
 
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;

@@ -10,6 +10,9 @@
 #include "link_rfu_4.h"
 #include "unk_815c27c.h"
 #include "util.h"
+#include "script.h"
+#include "event_data.h"
+#include "battle_tower.h"
 #include "menews_jisan.h"
 
 struct MEvent_Str_1
@@ -41,13 +44,17 @@ struct MEventTaskData1
 };
 
 void sub_8143910(u8 taskId);
-bool32 sub_8143E64(const u16 * src);
-u8 sub_815D6B4(u8 *);
+bool32 sub_8143E64(const struct MEventBuffer_3120_Sub * src);
+void sub_8143E9C(void);
+void sub_8143ED0(void);
+bool32 sub_8144018(const struct MEventBuffer_32E0_Sub * src);
 bool32 sub_815D794(u8 *);
 void sub_81422FC(void);
 void sub_812B484(void);
-void sub_8143E9C(void);
-void sub_8143ED0(void);
+void sub_814407C(void);
+void sub_81440B4(void);
+void sub_8144790(void);
+u8 sub_815D6B4(u8 *);
 
 extern const u8 gUnknown_841DE52[];
 extern const u8 gUnknown_841DE53[];
@@ -466,19 +473,19 @@ void sub_8143D24(void)
     sub_80BDE28();
 }
 
-u16 * sub_8143D58(void)
+struct MEventBuffer_3120_Sub * sub_8143D58(void)
 {
-    return gSaveBlock1Ptr->unk_3120.buffer_000.data;
+    return &gSaveBlock1Ptr->unk_3120.buffer_000.data;
 }
 
-u16 * sav1_get_mevent_buffer_1(void)
+struct MEventBuffer_32E0_Sub * sav1_get_mevent_buffer_1(void)
 {
-    return gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+    return &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
 }
 
-u16 * sav1_get_mevent_buffer_2(void)
+struct MEventBuffer_3430_Sub * sav1_get_mevent_buffer_2(void)
 {
-    return gSaveBlock1Ptr->unk_3120.buffer_310.data;
+    return &gSaveBlock1Ptr->unk_3120.buffer_310.data;
 }
 
 struct MysteryEventStruct * sub_8143D94(void)
@@ -496,36 +503,36 @@ void sub_8143DBC(void)
     sub_8143E9C();
 }
 
-bool32 sub_8143DC8(const u16 * src)
+bool32 sub_8143DC8(const struct MEventBuffer_3120_Sub * src)
 {
     if (!sub_8143E64(src))
         return FALSE;
     sub_8143E9C();
-    memcpy(gSaveBlock1Ptr->unk_3120.buffer_000.data, src, sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data));
-    gSaveBlock1Ptr->unk_3120.buffer_000.crc = CalcCRC16WithTable((void *)gSaveBlock1Ptr->unk_3120.buffer_000.data, sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data));
+    gSaveBlock1Ptr->unk_3120.buffer_000.data = *src;
+    gSaveBlock1Ptr->unk_3120.buffer_000.crc = CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_3120.buffer_000.data, sizeof(struct MEventBuffer_3120_Sub));
     return TRUE;
 }
 
 bool32 sub_8143E1C(void)
 {
-    if (CalcCRC16WithTable((void *)gSaveBlock1Ptr->unk_3120.buffer_000.data, sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data)) != gSaveBlock1Ptr->unk_3120.buffer_000.crc)
+    if (CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_3120.buffer_000.data, sizeof(struct MEventBuffer_3120_Sub)) != gSaveBlock1Ptr->unk_3120.buffer_000.crc)
         return FALSE;
-    if (!sub_8143E64(gSaveBlock1Ptr->unk_3120.buffer_000.data))
+    if (!sub_8143E64(&gSaveBlock1Ptr->unk_3120.buffer_000.data))
         return FALSE;
     return TRUE;
 }
 
-bool32 sub_8143E64(const u16 * data)
+bool32 sub_8143E64(const struct MEventBuffer_3120_Sub * data)
 {
-    if (data[0] == 0)
+    if (data->unk_00 == 0)
         return FALSE;
     return TRUE;
 }
 
 bool32 sub_8143E78(void)
 {
-    u16 * data = gSaveBlock1Ptr->unk_3120.buffer_000.data;
-    if (*(u8 *)&data[1] == 0)
+    const struct MEventBuffer_3120_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_000.data;
+    if (data->unk_02 == 0)
         return FALSE;
     return TRUE;
 }
@@ -544,14 +551,66 @@ void sub_8143ED0(void)
 
 bool32 sub_8143EF4(const u8 * src)
 {
-    const u8 * r5 = (const u8 *)gSaveBlock1Ptr->unk_3120.buffer_000.data;
+    const u8 * r5 = (const u8 *)&gSaveBlock1Ptr->unk_3120.buffer_000.data;
     u32 i;
     if (!sub_8143E1C())
         return FALSE;
-    for (i = 0; i < sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data); i++)
+    for (i = 0; i < sizeof(struct MEventBuffer_3120_Sub); i++)
     {
         if (r5[i] != src[i])
             return FALSE;
     }
+    return TRUE;
+}
+
+void sub_8143F38(void)
+{
+    sub_814407C();
+    sub_81440B4();
+    sub_8144790();
+    ClearRamScript();
+    sub_806E2D0();
+    sub_806E370();
+    sub_80E7524(gSaveBlock2Ptr->unk_4A0);
+}
+
+bool32 sub_8143F68(const struct MEventBuffer_32E0_Sub * data)
+{
+    struct MEventBuffer_3430_Sub * r2;
+    struct MEventBuffer_32E0_Sub * r1;
+    if (!sub_8144018(data))
+        return FALSE;
+    sub_8143F38();
+    memcpy(&gSaveBlock1Ptr->unk_3120.buffer_1c0.data, data, sizeof(struct MEventBuffer_32E0_Sub));
+    gSaveBlock1Ptr->unk_3120.buffer_1c0.crc = CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_3120.buffer_1c0.data, sizeof(struct MEventBuffer_32E0_Sub));
+    r2 = &gSaveBlock1Ptr->unk_3120.buffer_310.data;
+    r1 = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+    r2->unk_06 = r1->unk_02;
+    return TRUE;
+}
+
+bool32 sub_8143FC8(void)
+{
+    if (gSaveBlock1Ptr->unk_3120.buffer_1c0.crc != CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_3120.buffer_1c0.data, sizeof(struct MEventBuffer_32E0_Sub)))
+        return FALSE;
+    if (!sub_8144018(&gSaveBlock1Ptr->unk_3120.buffer_1c0.data))
+        return FALSE;
+    if (!sub_8069DFC())
+        return FALSE;
+    return TRUE;
+}
+
+bool32 sub_8144018(const struct MEventBuffer_32E0_Sub * data)
+{
+    if (data->unk_00 == 0)
+        return FALSE;
+    if (data->unk_08_0 > 2)
+        return FALSE;
+    if (!(data->unk_08_6 == 0 || data->unk_08_6 == 1 || data->unk_08_6 == 2))
+        return FALSE;
+    if (data->unk_08_2 > 7)
+        return FALSE;
+    if (data->unk_09 > 7)
+        return FALSE;
     return TRUE;
 }

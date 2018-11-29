@@ -2,6 +2,7 @@
 #include "constants/songs.h"
 #include "malloc.h"
 #include "sound.h"
+#include "easy_chat.h"
 #include "main.h"
 #include "task.h"
 #include "decompress.h"
@@ -38,11 +39,12 @@ struct MEventTaskData1
 };
 
 void sub_8143910(u8 taskId);
-void sub_8142504(const u8 *str);
 u8 sub_815D6B4(u8 *);
 bool32 sub_815D794(u8 *);
-void sub_812B484(void);
 void sub_81422FC(void);
+void sub_812B484(void);
+void sub_8143E9C(void);
+void sub_8143ED0(void);
 
 extern const u8 gUnknown_841DE52[];
 extern const u8 gUnknown_841DE53[];
@@ -452,4 +454,41 @@ void sub_8143910(u8 taskId)
             SetMainCallback2(sub_81422FC);
             break;
     }
+}
+
+void sub_8143D24(void)
+{
+    CpuFill32(0, &gSaveBlock1Ptr->unk_3120, sizeof(gSaveBlock1Ptr->unk_3120));
+    sub_8143ED0();
+    sub_80BDE28();
+}
+
+u16 * sub_8143D58(void)
+{
+    return gSaveBlock1Ptr->unk_3120.buffer_000.data;
+}
+
+u16 * sav1_get_mevent_buffer_1(void)
+{
+    return gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+}
+
+u16 * sav1_get_mevent_buffer_2(void)
+{
+    return gSaveBlock1Ptr->unk_3120.buffer_310.data;
+}
+
+struct MysteryEventStruct * sub_8143D94(void)
+{
+    return &gSaveBlock1Ptr->unk_3120.unk_340;
+}
+
+u16 * sub_8143DA8(void)
+{
+    return gSaveBlock1Ptr->unk_3120.unk_338;
+}
+
+void sub_8143DBC(void)
+{
+    sub_8143E9C();
 }

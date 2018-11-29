@@ -591,17 +591,33 @@ struct FameCheckerSaveData
 #define NUM_EASY_CHAT_EXTRA_PHRASES 33
 #define EASY_CHAT_EXTRA_PHRASES_SIZE ((NUM_EASY_CHAT_EXTRA_PHRASES >> 3) + (NUM_EASY_CHAT_EXTRA_PHRASES % 8 ? 1 : 0))
 
-struct MEventBuffer1
+struct MEventBuffer_3120
 {
 	u32 crc;
-	u8 data[0x1bc];
+	u16 data[222];
 };
 
-struct MEventBuffer2
+struct MEventBuffer_32E0
 {
 	u32 crc;
-	u8 data[0x14c];
+	u16 data[166];
 };
+
+struct MEventBuffer_3430
+{
+	u32 crc;
+	u16 data[18];
+};
+
+struct MEventBuffers
+{
+	/*0x000 0x3120*/ struct MEventBuffer_3120 buffer_000;
+	/*0x1c0 0x32e0*/ struct MEventBuffer_32E0 buffer_1c0;
+	/*0x310 0x3430*/ struct MEventBuffer_3430 buffer_310;
+	/*0x338 0x3458*/ u16 unk_338[4];
+	/*0x340 0x3460*/ struct MysteryEventStruct unk_340;
+	/*0x344 0x3464*/ u8 filler_344[0x28];
+}; // 0x36C 0x348C
 
 struct SaveBlock1
 {
@@ -650,9 +666,8 @@ struct SaveBlock1
     /*0x309C*/ u8 giftRibbons[52];
     /*0x30D0*/ struct Roamer roamer;
     /*0x30EC*/ struct EnigmaBerry enigmaBerry;
-    /*0x3120*/ u8 filler3120[0x340];
-    /*0x3460*/ struct MysteryEventStruct unk_3460;
-    /*0x3464*/ u8 filler_3464[0x1b8];
+    /*0x3120*/ struct MEventBuffers unk_3120;
+    /*0x348C*/ u8 filler_3464[0x190];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[12];
     /*0x3A14*/ u8 seen2[DEX_FLAGS_NO];

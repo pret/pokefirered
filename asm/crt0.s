@@ -88,22 +88,22 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte     0x30BB
 	.4byte     0x30A7
 	.4byte          0
-	.4byte  0x8254784
-	.4byte  0x824FC40
-	.4byte  0x824FB08
-	.4byte  0x83DB028
-	.4byte  0x8250C04
-	.4byte  0x826056C
-	.4byte  0x82605CC
+	.4byte  0x8254784 @ gBaseStats
+	.4byte  0x824FC40 @ gAbilityNames
+	.4byte  0x824FB08 @ gAbilityDescriptionPointers
+	.4byte  0x83DB028 @ gItems
+	.4byte  0x8250C04 @ gBattleMoves
+	.4byte  0x826056C @ gBallSpriteSheets
+	.4byte  0x82605CC @ gBallSpritePalettes
 	.4byte       0xA8
 	.4byte      0x82C
 	.4byte      0x83B
 	.4byte 0x3A0D1E2A
 	.4byte     0x1E2B
-	.4byte      0x298
-	.4byte     0x309C
-	.4byte     0x30EC
-	.4byte       0x34
+	.4byte      0x298 @ offsetof(struct SaveBlock1, pcItems)  // maybe all items were in a struct together?
+	.4byte     0x309C @ offsetof(struct SaveBlock1, giftRibbons)
+	.4byte     0x30EC @ offsetof(struct SaveBlock1, enigmaBerry)
+	.4byte       0x34 @ size of SaveBlock1 map header reconstruction data?
 	.4byte          0
 	.4byte 0xFFFFFFFF
 

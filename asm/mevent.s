@@ -5,58 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8144054
-sub_8144054: @ 8144054
-	push {lr}
-	ldr r0, _0814406C @ =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, _08144070 @ =0x000032e4
-	adds r0, r1
-	ldrb r1, [r0, 0x8]
-	movs r0, 0xC0
-	ands r0, r1
-	cmp r0, 0
-	beq _08144074
-	movs r0, 0x1
-	b _08144076
-	.align 2, 0
-_0814406C: .4byte gSaveBlock1Ptr
-_08144070: .4byte 0x000032e4
-_08144074:
-	movs r0, 0
-_08144076:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8144054
-
-	thumb_func_start sub_814407C
-sub_814407C: @ 814407C
-	push {r4,r5,lr}
-	sub sp, 0x4
-	movs r5, 0
-	str r5, [sp]
-	ldr r4, _081440A4 @ =gSaveBlock1Ptr
-	ldr r1, [r4]
-	ldr r0, _081440A8 @ =0x000032e4
-	adds r1, r0
-	ldr r2, _081440AC @ =0x05000053
-	mov r0, sp
-	bl CpuSet
-	ldr r0, [r4]
-	ldr r1, _081440B0 @ =0x000032e0
-	adds r0, r1
-	str r5, [r0]
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081440A4: .4byte gSaveBlock1Ptr
-_081440A8: .4byte 0x000032e4
-_081440AC: .4byte 0x05000053
-_081440B0: .4byte 0x000032e0
-	thumb_func_end sub_814407C
-
 	thumb_func_start sub_81440B4
 sub_81440B4: @ 81440B4
 	push {r4,lr}

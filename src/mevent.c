@@ -614,3 +614,17 @@ bool32 sub_8144018(const struct MEventBuffer_32E0_Sub * data)
         return FALSE;
     return TRUE;
 }
+
+bool32 sub_8144054(void)
+{
+    const struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+    if (data->unk_08_6 == 0)
+        return FALSE;
+    return TRUE;
+}
+
+void sub_814407C(void)
+{
+    CpuFill32(0, &gSaveBlock1Ptr->unk_3120.buffer_1c0.data, sizeof(struct MEventBuffer_32E0_Sub));
+    gSaveBlock1Ptr->unk_3120.buffer_1c0.crc = 0;
+}

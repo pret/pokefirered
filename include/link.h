@@ -146,6 +146,7 @@ extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
 
+extern u8 gUnknown_3003F64;
 extern u8 gUnknown_3003F84;
 extern u64 gUnknown_3003FB4;
 extern u16 gUnknown_202271A;
@@ -201,5 +202,8 @@ u8 sub_800ABAC(void);
 u8 sub_800ABBC(void);
 void sub_800AC34(void);
 void sub_8009804(void);
+bool8 sub_800AA48(void);
+void sub_800A5BC(void);
+void sub_800AA80(u8);
 
 #endif // GUARD_LINK_H

@@ -9,6 +9,8 @@
 #include "link.h"
 #include "link_rfu_4.h"
 #include "unk_815c27c.h"
+#include "util.h"
+#include "menews_jisan.h"
 
 struct MEvent_Str_1
 {
@@ -39,6 +41,7 @@ struct MEventTaskData1
 };
 
 void sub_8143910(u8 taskId);
+bool32 sub_8143E64(const u16 * src);
 u8 sub_815D6B4(u8 *);
 bool32 sub_815D794(u8 *);
 void sub_81422FC(void);
@@ -491,4 +494,64 @@ u16 * sub_8143DA8(void)
 void sub_8143DBC(void)
 {
     sub_8143E9C();
+}
+
+bool32 sub_8143DC8(const u16 * src)
+{
+    if (!sub_8143E64(src))
+        return FALSE;
+    sub_8143E9C();
+    memcpy(gSaveBlock1Ptr->unk_3120.buffer_000.data, src, sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data));
+    gSaveBlock1Ptr->unk_3120.buffer_000.crc = CalcCRC16WithTable((void *)gSaveBlock1Ptr->unk_3120.buffer_000.data, sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data));
+    return TRUE;
+}
+
+bool32 sub_8143E1C(void)
+{
+    if (CalcCRC16WithTable((void *)gSaveBlock1Ptr->unk_3120.buffer_000.data, sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data)) != gSaveBlock1Ptr->unk_3120.buffer_000.crc)
+        return FALSE;
+    if (!sub_8143E64(gSaveBlock1Ptr->unk_3120.buffer_000.data))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 sub_8143E64(const u16 * data)
+{
+    if (data[0] == 0)
+        return FALSE;
+    return TRUE;
+}
+
+bool32 sub_8143E78(void)
+{
+    u16 * data = gSaveBlock1Ptr->unk_3120.buffer_000.data;
+    if (*(u8 *)&data[1] == 0)
+        return FALSE;
+    return TRUE;
+}
+
+void sub_8143E9C(void)
+{
+    CpuFill32(0, sub_8143D58(), sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data));
+    gSaveBlock1Ptr->unk_3120.buffer_000.crc = 0;
+}
+
+void sub_8143ED0(void)
+{
+    CpuFill32(0, sub_8143D94(), sizeof(struct MysteryEventStruct));
+    sub_8146C88();
+}
+
+bool32 sub_8143EF4(const u8 * src)
+{
+    const u8 * r5 = (const u8 *)gSaveBlock1Ptr->unk_3120.buffer_000.data;
+    u32 i;
+    if (!sub_8143E1C())
+        return FALSE;
+    for (i = 0; i < sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data); i++)
+    {
+        if (r5[i] != src[i])
+            return FALSE;
+    }
+    return TRUE;
 }

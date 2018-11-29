@@ -591,6 +591,18 @@ struct FameCheckerSaveData
 #define NUM_EASY_CHAT_EXTRA_PHRASES 33
 #define EASY_CHAT_EXTRA_PHRASES_SIZE ((NUM_EASY_CHAT_EXTRA_PHRASES >> 3) + (NUM_EASY_CHAT_EXTRA_PHRASES % 8 ? 1 : 0))
 
+struct MEventBuffer1
+{
+	u32 crc;
+	u8 data[0x1bc];
+};
+
+struct MEventBuffer2
+{
+	u32 crc;
+	u8 data[0x14c];
+};
+
 struct SaveBlock1
 {
     /*0x0000*/ struct Coords16 pos;

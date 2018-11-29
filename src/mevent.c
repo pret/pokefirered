@@ -14,7 +14,10 @@
 #include "script.h"
 #include "event_data.h"
 #include "battle_tower.h"
+#include "new_game.h"
+#include "string_util.h"
 #include "menews_jisan.h"
+#include "mevent.h"
 
 struct MEvent_Str_1
 {
@@ -704,13 +707,113 @@ bool32 sub_81441F0(const u16 * data)
     return TRUE;
 }
 
-bool32 sub_8144218(void)
+s32 sub_8144218(void)
 {
     struct MEventBuffer_32E0_Sub * data;
     if (!sub_8143FC8())
-        return FALSE;
+        return 0;
     data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
     if (data->unk_08_0 != 1)
-        return FALSE;
+        return 0;
     return sub_8144184(&gSaveBlock1Ptr->unk_3120.buffer_310.data, data->unk_09);
+}
+
+bool32 sub_8144254(const u16 * data)
+{
+    struct MEventBuffer_32E0_Sub * buffer = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+    s32 size = buffer->unk_09;
+    s32 i;
+    if (!sub_81441F0(data))
+        return FALSE;
+    if (sub_81441AC(&gSaveBlock1Ptr->unk_3120.buffer_310.data, data, size))
+        return FALSE;
+    for (i = 0; i < size; i++)
+    {
+        if (gSaveBlock1Ptr->unk_3120.buffer_310.data.unk_08[1][i] == 0 && gSaveBlock1Ptr->unk_3120.buffer_310.data.unk_08[0][i] == 0)
+        {
+            gSaveBlock1Ptr->unk_3120.buffer_310.data.unk_08[1][i] = data[1];
+            gSaveBlock1Ptr->unk_3120.buffer_310.data.unk_08[0][i] = data[0];
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_81442CC(struct MEventStruct_Unk1442CC * data)
+{
+    s32 i;
+    CpuFill32(0, data, sizeof(struct MEventStruct_Unk1442CC));
+    data->unk_00 = 0x101;
+    data->unk_04 = 1;
+    data->unk_08 = 1;
+    data->unk_0C = 1;
+    data->unk_10 = 1;
+    if (sub_8143FC8())
+    {
+        data->unk_14 = sav1_get_mevent_buffer_1()->unk_00;
+        data->unk_20 = *sav1_get_mevent_buffer_2();
+        data->unk_44 = sav1_get_mevent_buffer_1()->unk_09;
+    }
+    else
+        data->unk_14 = 0;
+    for (i = 0; i < 4; i++)
+        data->unk_16[i] = gSaveBlock1Ptr->unk_3120.unk_338[i];
+    CopyUnalignedWord(data->unk_4C, gSaveBlock2Ptr->playerTrainerId);
+    StringCopy(data->unk_45, gSaveBlock2Ptr->playerName);
+    for (i = 0; i < 6; i++)
+        data->unk_50[i] = gSaveBlock1Ptr->unk2CA0[i];
+    memcpy(data->unk_5C, RomHeaderGameCode, 4);
+    data->unk_60 = RomHeaderSoftwareVersion;
+}
+
+bool32 sub_81443D4(const struct MEventStruct_Unk1442CC * data)
+{
+    if (data->unk_00 != 0x101)
+        return FALSE;
+    if (!(data->unk_04 & 1))
+        return FALSE;
+    if (!(data->unk_08 & 1))
+        return FALSE;
+    if (!(data->unk_0C & 1))
+        return FALSE;
+    if (!(data->unk_10 & 0x0F))
+        return FALSE;
+    return TRUE;
+}
+
+u32 sub_8144418(const u16 * a0, const struct MEventStruct_Unk1442CC * a1)
+{
+    if (a1->unk_14 == 0)
+        return 0;
+    if (*a0 == a1->unk_14)
+        return 1;
+    return 2;
+}
+
+u32 sub_8144434(const u16 * a0, const struct MEventStruct_Unk1442CC * a1)
+{
+    s32 r4 = a1->unk_44 - sub_8144184(&a1->unk_20, a1->unk_44);
+    if (r4 == 0)
+        return 1;
+    if (sub_81441AC(&a1->unk_20, a0, a1->unk_44))
+        return 3;
+    if (r4 == 1)
+        return 4;
+    return 2;
+}
+
+bool32 sub_8144474(const struct MEventStruct_Unk1442CC * a0, const u16 * a1)
+{
+    s32 i;
+    for (i = 0; i < 4; i++)
+    {
+        if (a0->unk_16[i] != a1[i])
+            return FALSE;
+    }
+    return TRUE;
+}
+
+s32 sub_814449C(const struct MEventStruct_Unk1442CC * a0)
+{
+    return sub_8144184(&a0->unk_20, a0->unk_44);
 }

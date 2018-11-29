@@ -66,4 +66,7 @@ void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
 void RestoreSerialTimer3IntrHandlers(void);
 
+extern const char RomHeaderGameCode[4];
+extern const char RomHeaderSoftwareVersion;
+
 #endif // GUARD_MAIN_H

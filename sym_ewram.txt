@@ -49,51 +49,58 @@ gStringVar4: @ 2021D18
 
     .include "src/string_util.o"
 
-gUnknown_2022110: @ 2022110
+	@ .include "src/link.o"
+gLinkTestDebugValuesEnabled: @ 2022110
 	.space 0x1
 
 gUnknown_2022111: @ 2022111
-	.space 0x3
+	.space 0x1
 
+	.align 2
 gUnknown_2022114: @ 2022114
 	.space 0x4
 
-gUnknown_2022118: @ 2022118
-	.space 0x4
+gBlockRecvBuffer: @ 2022118
+	.space 0x500
 
-gUnknown_202211C: @ 202211C
-	.space 0x4FC
-
-gUnknown_2022618: @ 2022618
+gBlockSendBuffer: @ 2022618
 	.space 0x100
 
-gUnknown_2022718: @ 2022718
+gLinkOpen: @ 2022718
+	.space 0x1
+
+	.align 1
+gLinkType: @ 202271A
 	.space 0x2
 
-gUnknown_202271A: @ 202271A
+gLinkTimeOutCounter: @ 202271C
 	.space 0x2
 
-gUnknown_202271C: @ 202271C
-	.space 0x4
-
-gUnknown_2022720: @ 2022720
+	.align 2
+gLocalLinkPlayer: @ 2022720
 	.space 0x1C
 
+	.align 2
 gLinkPlayers: @ 202273C
 	.space 0x8C
 
-gUnknown_20227C8: @ 20227C8
+	.align 2
+gSavedLinkPlayers: @ 20227C8
 	.space 0x8C
 
-gUnknown_2022854: @ 2022854
+	.align 2
+sLinkErrorBuffer: @ 2022854
 	.space 0x8
 
+	.align 1
 gUnknown_202285C: @ 202285C
-	.space 0x4
+	.space 0x2
 
+	.align 2
 gUnknown_2022860: @ 2022860
 	.space 0xC
 
+	@ .include "src/link_rfu.o"
 gUnknown_202286C: @ 202286C
 	.space 0x1
 

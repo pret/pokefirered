@@ -149,7 +149,7 @@ extern bool8 gLinkVSyncDisabled;
 extern u8 gUnknown_3003F64;
 extern u8 gUnknown_3003F84;
 extern u64 gUnknown_3003FB4;
-extern u16 gUnknown_202271A;
+extern u16 gLinkType;
 
 void Task_DestroySelf(u8);
 void OpenLink(void);

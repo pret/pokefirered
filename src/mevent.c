@@ -8,7 +8,7 @@
 #include "task.h"
 #include "decompress.h"
 #include "link.h"
-#include "link_rfu_4.h"
+#include "link_rfu.h"
 #include "unk_815c27c.h"
 #include "util.h"
 #include "script.h"
@@ -134,7 +134,7 @@ u8 sub_8143674(struct MEvent_Str_1 *a0)
 void sub_81436BC(void)
 {
     memset(gDecompressionBuffer, 0, 0x2000);
-    gUnknown_202271A = 0x5502;
+    gLinkType = 0x5502;
     sub_8009804();
     SetSuppressLinkErrorMessage(TRUE);
 }

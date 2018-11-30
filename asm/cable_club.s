@@ -243,7 +243,7 @@ sub_80808F0: @ 80808F0
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08080934
-	ldr r0, _08080928 @ =gUnknown_202271A
+	ldr r0, _08080928 @ =gLinkType
 	strh r1, [r0]
 	ldr r1, _0808092C @ =gTasks
 	lsls r0, r4, 2
@@ -256,7 +256,7 @@ sub_80808F0: @ 80808F0
 	b _08080936
 	.align 2, 0
 _08080924: .4byte gMain
-_08080928: .4byte gUnknown_202271A
+_08080928: .4byte gLinkType
 _0808092C: .4byte gTasks
 _08080930: .4byte sub_8080FB4
 _08080934:
@@ -290,7 +290,7 @@ _08080952:
 	.align 2, 0
 _08080964: .4byte gMain
 _08080968:
-	ldr r1, _08080984 @ =gUnknown_202271A
+	ldr r1, _08080984 @ =gLinkType
 	movs r0, 0
 	strh r0, [r1]
 	ldr r1, _08080988 @ =gTasks
@@ -306,7 +306,7 @@ _0808097E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08080984: .4byte gUnknown_202271A
+_08080984: .4byte gLinkType
 _08080988: .4byte gTasks
 _0808098C: .4byte sub_8080FB4
 	thumb_func_end sub_808093C
@@ -780,7 +780,7 @@ _08080D54:
 	strb r0, [r1]
 	ldrb r0, [r4]
 	bl sub_800A900
-	ldr r0, _08080D84 @ =gUnknown_2022618
+	ldr r0, _08080D84 @ =gBlockSendBuffer
 	bl sub_80898E8
 	ldr r0, _08080D88 @ =sub_8080E6C
 _08080D72:
@@ -792,7 +792,7 @@ _08080D74:
 	.align 2, 0
 _08080D7C: .4byte gUnknown_3005030
 _08080D80: .4byte gUnknown_300502C
-_08080D84: .4byte gUnknown_2022618
+_08080D84: .4byte gBlockSendBuffer
 _08080D88: .4byte sub_8080E6C
 	thumb_func_end sub_8080CDC
 
@@ -883,7 +883,7 @@ _08080E20:
 	strb r0, [r1]
 	ldrb r0, [r4]
 	bl sub_800A900
-	ldr r0, _08080E60 @ =gUnknown_2022618
+	ldr r0, _08080E60 @ =gBlockSendBuffer
 	bl sub_80898E8
 	ldr r1, _08080E64 @ =gTasks
 	lsls r0, r5, 2
@@ -901,7 +901,7 @@ _08080E50:
 	.align 2, 0
 _08080E58: .4byte gUnknown_3005030
 _08080E5C: .4byte gUnknown_300502C
-_08080E60: .4byte gUnknown_2022618
+_08080E60: .4byte gBlockSendBuffer
 _08080E64: .4byte gTasks
 _08080E68: .4byte sub_8080E6C
 	thumb_func_end sub_8080DC0
@@ -941,7 +941,7 @@ _08080E9A:
 	cmp r0, 0x1
 	bls _08080EDC
 	lsls r1, r5, 8
-	ldr r0, _08080ED4 @ =gUnknown_2022118
+	ldr r0, _08080ED4 @ =gBlockRecvBuffer
 	adds r1, r0
 	ldr r0, _08080ED8 @ =gUnknown_2039624
 	lsls r4, r5, 1
@@ -957,11 +957,11 @@ _08080E9A:
 	b _08080EF2
 	.align 2, 0
 _08080ED0: .4byte gLinkPlayers
-_08080ED4: .4byte gUnknown_2022118
+_08080ED4: .4byte gBlockRecvBuffer
 _08080ED8: .4byte gUnknown_2039624
 _08080EDC:
 	lsls r1, r5, 8
-	ldr r0, _08080F3C @ =gUnknown_2022118
+	ldr r0, _08080F3C @ =gBlockRecvBuffer
 	adds r1, r0
 	ldr r2, _08080F40 @ =gUnknown_2039624
 	lsls r0, r5, 1
@@ -988,7 +988,7 @@ _08080EF8:
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _08080F54
-	ldr r0, _08080F48 @ =gUnknown_202271A
+	ldr r0, _08080F48 @ =gLinkType
 	ldrh r1, [r0]
 	ldr r0, _08080F4C @ =0x00004411
 	ldr r0, _08080F50 @ =gTasks
@@ -1003,10 +1003,10 @@ _08080EF8:
 	bl DestroyTask
 	b _08080F66
 	.align 2, 0
-_08080F3C: .4byte gUnknown_2022118
+_08080F3C: .4byte gBlockRecvBuffer
 _08080F40: .4byte gUnknown_2039624
 _08080F44: .4byte gUnknown_20370D0
-_08080F48: .4byte gUnknown_202271A
+_08080F48: .4byte gLinkType
 _08080F4C: .4byte 0x00004411
 _08080F50: .4byte gTasks
 _08080F54:
@@ -1170,24 +1170,24 @@ _08081080:
 	b _080810B4
 _08081086:
 	movs r3, 0x2
-	ldr r1, _08081090 @ =gUnknown_202271A
+	ldr r1, _08081090 @ =gLinkType
 	ldr r4, _08081094 @ =0x00002233
 	b _080810B0
 	.align 2, 0
-_08081090: .4byte gUnknown_202271A
+_08081090: .4byte gLinkType
 _08081094: .4byte 0x00002233
 _08081098:
 	movs r3, 0x2
-	ldr r1, _080810A0 @ =gUnknown_202271A
+	ldr r1, _080810A0 @ =gLinkType
 	ldr r4, _080810A4 @ =0x00002244
 	b _080810B0
 	.align 2, 0
-_080810A0: .4byte gUnknown_202271A
+_080810A0: .4byte gLinkType
 _080810A4: .4byte 0x00002244
 _080810A8:
 	movs r3, 0x4
 	movs r2, 0x4
-	ldr r1, _080810C4 @ =gUnknown_202271A
+	ldr r1, _080810C4 @ =gLinkType
 	ldr r4, _080810C8 @ =0x00002255
 _080810B0:
 	adds r0, r4, 0
@@ -1200,14 +1200,14 @@ _080810B4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080810C4: .4byte gUnknown_202271A
+_080810C4: .4byte gLinkType
 _080810C8: .4byte 0x00002255
 	thumb_func_end sub_8081064
 
 	thumb_func_start sub_80810CC
 sub_80810CC: @ 80810CC
 	push {lr}
-	ldr r1, _080810E8 @ =gUnknown_202271A
+	ldr r1, _080810E8 @ =gLinkType
 	ldr r2, _080810EC @ =0x00001133
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1220,7 +1220,7 @@ sub_80810CC: @ 80810CC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080810E8: .4byte gUnknown_202271A
+_080810E8: .4byte gLinkType
 _080810EC: .4byte 0x00001133
 _080810F0: .4byte gBattleTypeFlags
 	thumb_func_end sub_80810CC
@@ -1231,7 +1231,7 @@ sub_80810F4: @ 80810F4
 	ldr r1, _08081118 @ =gUnknown_20370D0
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _0808111C @ =gUnknown_202271A
+	ldr r1, _0808111C @ =gLinkType
 	ldr r2, _08081120 @ =0x00003311
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1245,7 +1245,7 @@ sub_80810F4: @ 80810F4
 	bx r0
 	.align 2, 0
 _08081118: .4byte gUnknown_20370D0
-_0808111C: .4byte gUnknown_202271A
+_0808111C: .4byte gLinkType
 _08081120: .4byte 0x00003311
 _08081124: .4byte gBattleTypeFlags
 	thumb_func_end sub_80810F4
@@ -1253,7 +1253,7 @@ _08081124: .4byte gBattleTypeFlags
 	thumb_func_start sub_8081128
 sub_8081128: @ 8081128
 	push {lr}
-	ldr r1, _08081144 @ =gUnknown_202271A
+	ldr r1, _08081144 @ =gLinkType
 	ldr r2, _08081148 @ =0x00006601
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1266,7 +1266,7 @@ sub_8081128: @ 8081128
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081144: .4byte gUnknown_202271A
+_08081144: .4byte gLinkType
 _08081148: .4byte 0x00006601
 _0808114C: .4byte gBattleTypeFlags
 	thumb_func_end sub_8081128
@@ -1305,35 +1305,35 @@ _08081184:
 	.4byte _080811D8
 	.4byte _080811B8
 _08081198:
-	ldr r1, _080811A0 @ =gUnknown_202271A
+	ldr r1, _080811A0 @ =gLinkType
 	ldr r2, _080811A4 @ =0x00002233
 	b _080811DC
 	.align 2, 0
-_080811A0: .4byte gUnknown_202271A
+_080811A0: .4byte gLinkType
 _080811A4: .4byte 0x00002233
 _080811A8:
-	ldr r1, _080811B0 @ =gUnknown_202271A
+	ldr r1, _080811B0 @ =gLinkType
 	ldr r2, _080811B4 @ =0x00002244
 	b _080811DC
 	.align 2, 0
-_080811B0: .4byte gUnknown_202271A
+_080811B0: .4byte gLinkType
 _080811B4: .4byte 0x00002244
 _080811B8:
-	ldr r1, _080811C0 @ =gUnknown_202271A
+	ldr r1, _080811C0 @ =gLinkType
 	ldr r2, _080811C4 @ =0x00002255
 	b _080811DC
 	.align 2, 0
-_080811C0: .4byte gUnknown_202271A
+_080811C0: .4byte gLinkType
 _080811C4: .4byte 0x00002255
 _080811C8:
-	ldr r1, _080811D0 @ =gUnknown_202271A
+	ldr r1, _080811D0 @ =gLinkType
 	ldr r2, _080811D4 @ =0x00001111
 	b _080811DC
 	.align 2, 0
-_080811D0: .4byte gUnknown_202271A
+_080811D0: .4byte gLinkType
 _080811D4: .4byte 0x00001111
 _080811D8:
-	ldr r1, _080811F0 @ =gUnknown_202271A
+	ldr r1, _080811F0 @ =gLinkType
 	ldr r2, _080811F4 @ =0x00003322
 _080811DC:
 	adds r0, r2, 0
@@ -1348,7 +1348,7 @@ _080811EC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080811F0: .4byte gUnknown_202271A
+_080811F0: .4byte gLinkType
 _080811F4: .4byte 0x00003322
 _080811F8: .4byte sub_80811FC
 	thumb_func_end sub_8081150
@@ -1537,14 +1537,14 @@ _0808135C:
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	ldr r1, _08081374 @ =gUnknown_202271A
+	ldr r1, _08081374 @ =gLinkType
 	ldr r2, _08081378 @ =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_800A068
 	b _080813AA
 	.align 2, 0
-_08081374: .4byte gUnknown_202271A
+_08081374: .4byte gLinkType
 _08081378: .4byte 0x00002211
 _0808137C:
 	ldr r0, _08081388 @ =gPaletteFade
@@ -1694,7 +1694,7 @@ _080814A0:
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	ldr r0, _080814BC @ =gUnknown_202271A
+	ldr r0, _080814BC @ =gLinkType
 	ldr r2, _080814C0 @ =0x00002211
 	adds r1, r2, 0
 	strh r1, [r0]
@@ -1703,7 +1703,7 @@ _080814A0:
 	strh r0, [r6]
 	b _0808160A
 	.align 2, 0
-_080814BC: .4byte gUnknown_202271A
+_080814BC: .4byte gLinkType
 _080814C0: .4byte 0x00002211
 _080814C4:
 	ldr r0, _080814D8 @ =gPaletteFade
@@ -1720,7 +1720,7 @@ _080814D2:
 	.align 2, 0
 _080814D8: .4byte gPaletteFade
 _080814DC:
-	ldr r1, _080814EC @ =gUnknown_2022720
+	ldr r1, _080814EC @ =gLocalLinkPlayer
 	movs r0, 0
 	movs r2, 0x1C
 	bl SendBlock
@@ -1728,7 +1728,7 @@ _080814DC:
 	strh r0, [r6]
 	b _0808160A
 	.align 2, 0
-_080814EC: .4byte gUnknown_2022720
+_080814EC: .4byte gLocalLinkPlayer
 _080814F0:
 	bl GetBlockReceivedStatus
 	adds r4, r0, 0
@@ -1746,7 +1746,7 @@ _08081504:
 _0808150C: .4byte gLinkPlayers
 _08081510:
 	lsls r1, r4, 8
-	ldr r2, _08081548 @ =gUnknown_2022118
+	ldr r2, _08081548 @ =gBlockRecvBuffer
 	adds r0, r5, 0
 	adds r1, r2
 	ldm r1!, {r2,r3,r7}
@@ -1772,7 +1772,7 @@ _08081536:
 	strh r0, [r6]
 	b _0808160A
 	.align 2, 0
-_08081548: .4byte gUnknown_2022118
+_08081548: .4byte gBlockRecvBuffer
 _0808154C:
 	ldrh r0, [r6, 0x2]
 	adds r0, 0x1
@@ -2343,7 +2343,7 @@ sub_80819B8: @ 80819B8
 	thumb_func_start sub_80819C8
 sub_80819C8: @ 80819C8
 	push {lr}
-	ldr r1, _080819E4 @ =gUnknown_202271A
+	ldr r1, _080819E4 @ =gLinkType
 	ldr r2, _080819E8 @ =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -2355,7 +2355,7 @@ sub_80819C8: @ 80819C8
 	bl sub_8081828
 	b _080819FA
 	.align 2, 0
-_080819E4: .4byte gUnknown_202271A
+_080819E4: .4byte gLinkType
 _080819E8: .4byte 0x00002211
 _080819EC: .4byte gUnknown_3003F3C
 _080819F0: .4byte sub_8081454

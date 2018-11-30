@@ -2831,7 +2831,7 @@ _081299E6:
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	lsls r0, 8
-	ldr r1, _08129A0C @ =gUnknown_2022118
+	ldr r1, _08129A0C @ =gBlockRecvBuffer
 	adds r0, r1
 	ldrb r0, [r0]
 	subs r0, 0x1
@@ -2843,7 +2843,7 @@ _081299E6:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08129A0C: .4byte gUnknown_2022118
+_08129A0C: .4byte gBlockRecvBuffer
 _08129A10: .4byte _08129A14
 	.align 2, 0
 _08129A14:
@@ -2874,7 +2874,7 @@ _08129A3A:
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	lsls r1, 8
-	ldr r2, _08129A6C @ =gUnknown_2022118
+	ldr r2, _08129A6C @ =gBlockRecvBuffer
 	adds r1, r2
 	bl sub_812963C
 	cmp r0, 0
@@ -2889,7 +2889,7 @@ _08129A3A:
 	b _08129A72
 	.align 2, 0
 _08129A68: .4byte gUnknown_203B0E0
-_08129A6C: .4byte gUnknown_2022118
+_08129A6C: .4byte gBlockRecvBuffer
 _08129A70:
 	ldrh r0, [r4, 0xA]
 _08129A72:

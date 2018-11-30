@@ -1150,7 +1150,7 @@ _081510F4:
 	beq _08151116
 	ldr r0, [r6]
 	adds r0, 0x4A
-	ldr r1, _08151148 @ =gUnknown_2022118
+	ldr r1, _08151148 @ =gBlockRecvBuffer
 	movs r2, 0x3C
 	bl memcpy
 	adds r0, r4, 0
@@ -1188,7 +1188,7 @@ _08151140:
 	strb r0, [r1, 0x10]
 	b _0815118A
 	.align 2, 0
-_08151148: .4byte gUnknown_2022118
+_08151148: .4byte gBlockRecvBuffer
 _0815114C: .4byte gUnknown_203F3E0
 _08151150:
 	movs r0, 0x1
@@ -1305,7 +1305,7 @@ _08151228:
 	lsls r0, 1
 	adds r2, r0
 	lsls r0, r4, 8
-	ldr r1, _08151294 @ =gUnknown_2022118
+	ldr r1, _08151294 @ =gBlockRecvBuffer
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
@@ -1350,7 +1350,7 @@ _0815128A:
 	strb r0, [r1, 0x10]
 	b _081512AA
 	.align 2, 0
-_08151294: .4byte gUnknown_2022118
+_08151294: .4byte gBlockRecvBuffer
 _08151298: .4byte gUnknown_203F3E0
 _0815129C:
 	bl sub_8155E68
@@ -1501,7 +1501,7 @@ _081513C4:
 	lsls r0, 1
 	adds r2, r0
 	lsls r0, r4, 8
-	ldr r1, _08151438 @ =gUnknown_2022118
+	ldr r1, _08151438 @ =gBlockRecvBuffer
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
@@ -1548,7 +1548,7 @@ _0815142A:
 	b _08151480
 	.align 2, 0
 _08151434: .4byte gUnknown_203F3E0
-_08151438: .4byte gUnknown_2022118
+_08151438: .4byte gBlockRecvBuffer
 _0815143C:
 	bl sub_81532B8
 	b _08151480
@@ -2016,7 +2016,7 @@ _081517D2:
 	ldr r0, _08151844 @ =0x0000318c
 	adds r2, r0
 	lsls r0, r4, 8
-	ldr r1, _08151848 @ =gUnknown_2022118
+	ldr r1, _08151848 @ =gBlockRecvBuffer
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
@@ -2063,7 +2063,7 @@ _08151836:
 	.align 2, 0
 _08151840: .4byte gUnknown_203F3E0
 _08151844: .4byte 0x0000318c
-_08151848: .4byte gUnknown_2022118
+_08151848: .4byte gBlockRecvBuffer
 	thumb_func_end sub_8151750
 
 	thumb_func_start sub_815184C

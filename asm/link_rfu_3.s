@@ -3028,7 +3028,7 @@ _0811719C:
 	eors r1, r2
 	lsls r1, 24
 	lsrs r1, 16
-	ldr r2, _081171D4 @ =gUnknown_2022118
+	ldr r2, _081171D4 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0x64
 	bl memcpy
@@ -3038,9 +3038,9 @@ _0811719C:
 	b _081171FA
 	.align 2, 0
 _081171D0: .4byte gEnemyParty
-_081171D4: .4byte gUnknown_2022118
+_081171D4: .4byte gBlockRecvBuffer
 _081171D8:
-	ldr r4, _08117204 @ =gUnknown_2022618
+	ldr r4, _08117204 @ =gBlockSendBuffer
 	ldr r0, _08117208 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, _0811720C @ =0x00002cd0
@@ -3061,7 +3061,7 @@ _081171FA:
 	strh r0, [r5, 0x8]
 	b _0811725C
 	.align 2, 0
-_08117204: .4byte gUnknown_2022618
+_08117204: .4byte gBlockSendBuffer
 _08117208: .4byte gSaveBlock1Ptr
 _0811720C: .4byte 0x00002cd0
 _08117210:
@@ -3077,7 +3077,7 @@ _08117210:
 	eors r1, r0
 	lsls r1, 24
 	lsrs r1, 16
-	ldr r0, _0811726C @ =gUnknown_2022118
+	ldr r0, _0811726C @ =gBlockRecvBuffer
 	adds r1, r0
 	adds r0, r4, 0
 	movs r2, 0xD8
@@ -3104,7 +3104,7 @@ _0811725C:
 	bx r0
 	.align 2, 0
 _08117268: .4byte gUnknown_2031CCC
-_0811726C: .4byte gUnknown_2022118
+_0811726C: .4byte gBlockRecvBuffer
 _08117270: .4byte gUnknown_2031DA4
 _08117274: .4byte gMain
 _08117278: .4byte c2_exit_to_overworld_2_switch
@@ -3165,7 +3165,7 @@ _081172E0: .4byte gUnknown_2039624
 _081172E4: .4byte gLinkPlayers
 _081172E8:
 	lsls r0, r4, 8
-	ldr r1, _08117338 @ =gUnknown_2022118
+	ldr r1, _08117338 @ =gBlockRecvBuffer
 	adds r1, r0, r1
 	adds r0, r5, 0
 	movs r2, 0x60
@@ -3192,7 +3192,7 @@ _08117302:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 16
-	ldr r1, _08117338 @ =gUnknown_2022118
+	ldr r1, _08117338 @ =gBlockRecvBuffer
 	adds r1, r0, r1
 	adds r0, r1, 0
 	adds r0, 0x60
@@ -3200,7 +3200,7 @@ _08117302:
 	bl sub_81446D0
 	b _08117340
 	.align 2, 0
-_08117338: .4byte gUnknown_2022118
+_08117338: .4byte gBlockRecvBuffer
 _0811733C:
 	bl sub_81446C4
 _08117340:
@@ -3657,7 +3657,7 @@ _08117798: .4byte gMain
 _0811779C: .4byte sub_811C1C8
 _081177A0:
 	bl sub_80563F0
-	ldr r0, _081177C4 @ =gUnknown_2022618
+	ldr r0, _081177C4 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	bl sp000_heal_pokemon
@@ -3670,13 +3670,13 @@ _081177A0:
 	movs r2, 0x6
 	b _0811782E
 	.align 2, 0
-_081177C4: .4byte gUnknown_2022618
+_081177C4: .4byte gBlockSendBuffer
 _081177C8:
 	bl sub_80563F0
 	bl sp000_heal_pokemon
 	bl SavePlayerParty
 	bl LoadPlayerBag
-	ldr r0, _081177EC @ =gUnknown_2022618
+	ldr r0, _081177EC @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	movs r0, 0x2
@@ -3686,13 +3686,13 @@ _081177C8:
 	movs r2, 0x6
 	b _0811782E
 	.align 2, 0
-_081177EC: .4byte gUnknown_2022618
+_081177EC: .4byte gBlockSendBuffer
 _081177F0:
 	bl sub_80563F0
 	bl sp000_heal_pokemon
 	bl SavePlayerParty
 	bl LoadPlayerBag
-	ldr r0, _08117814 @ =gUnknown_2022618
+	ldr r0, _08117814 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	movs r0, 0x5
@@ -3701,9 +3701,9 @@ _081177F0:
 	movs r1, 0x3
 	b _0811782C
 	.align 2, 0
-_08117814: .4byte gUnknown_2022618
+_08117814: .4byte gBlockSendBuffer
 _08117818:
-	ldr r0, _0811783C @ =gUnknown_2022618
+	ldr r0, _0811783C @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	bl sub_80563F0
@@ -3720,7 +3720,7 @@ _0811782E:
 	bl SetMainCallback2
 	b _081178E0
 	.align 2, 0
-_0811783C: .4byte gUnknown_2022618
+_0811783C: .4byte gBlockSendBuffer
 _08117840: .4byte sub_8117534
 _08117844:
 	ldr r0, _08117850 @ =sub_8117130
@@ -3746,14 +3746,14 @@ _08117872:
 	bl sub_8128420
 	b _081178E0
 _08117878:
-	ldr r0, _08117888 @ =gUnknown_2022618
+	ldr r0, _08117888 @ =gBlockSendBuffer
 	movs r1, 0
 	bl sub_8117594
 	ldr r0, _0811788C @ =sub_8117354
 	bl SetMainCallback2
 	b _081178E0
 	.align 2, 0
-_08117888: .4byte gUnknown_2022618
+_08117888: .4byte gBlockSendBuffer
 _0811788C: .4byte sub_8117354
 _08117890:
 	movs r0, 0x8
@@ -5947,7 +5947,7 @@ _08118BC2:
 	bne _08118BCE
 	bl _081198DC
 _08118BCE:
-	ldr r0, _08118BF0 @ =gUnknown_2022618
+	ldr r0, _08118BF0 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	ldr r0, _08118BF4 @ =sub_8117280
@@ -5959,7 +5959,7 @@ _08118BCE:
 _08118BE4: .4byte gUnknown_8457F90
 _08118BE8: .4byte gUnknown_203B058
 _08118BEC: .4byte gUnknown_3003F64
-_08118BF0: .4byte gUnknown_2022618
+_08118BF0: .4byte gBlockSendBuffer
 _08118BF4: .4byte sub_8117280
 _08118BF8:
 	ldr r0, _08118C1C @ =sub_8117280
@@ -6518,7 +6518,7 @@ _081190DE:
 	bne _081190EA
 	bl _081198DC
 _081190EA:
-	ldr r0, _08119104 @ =gUnknown_2022618
+	ldr r0, _08119104 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	ldr r0, _08119108 @ =sub_8117280
@@ -6528,7 +6528,7 @@ _081190EA:
 	bl _081198DA
 	.align 2, 0
 _08119100: .4byte gUnknown_3003F64
-_08119104: .4byte gUnknown_2022618
+_08119104: .4byte gBlockSendBuffer
 _08119108: .4byte sub_8117280
 _0811910C:
 	adds r0, r6, 0
@@ -13024,7 +13024,7 @@ _0811C3B0:
 	beq _0811C3BC
 	b _0811C516
 _0811C3BC:
-	ldr r4, _0811C3D8 @ =gUnknown_2022618
+	ldr r4, _0811C3D8 @ =gBlockSendBuffer
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
@@ -13037,13 +13037,13 @@ _0811C3BC:
 	movs r0, 0x52
 	b _0811C3E2
 	.align 2, 0
-_0811C3D8: .4byte gUnknown_2022618
+_0811C3D8: .4byte gBlockSendBuffer
 _0811C3DC: .4byte gUnknown_203B0D4
 _0811C3E0:
 	movs r0, 0x51
 _0811C3E2:
 	strb r0, [r4]
-	ldr r1, _0811C3F8 @ =gUnknown_2022618
+	ldr r1, _0811C3F8 @ =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0x20
 	bl SendBlock
@@ -13053,7 +13053,7 @@ _0811C3E2:
 	adds r1, r2
 	b _0811C4F2
 	.align 2, 0
-_0811C3F8: .4byte gUnknown_2022618
+_0811C3F8: .4byte gBlockSendBuffer
 _0811C3FC: .4byte gMain
 _0811C400:
 	bl GetBlockReceivedStatus
@@ -13063,7 +13063,7 @@ _0811C400:
 	beq _0811C40E
 	b _0811C516
 _0811C40E:
-	ldr r1, _0811C440 @ =gUnknown_2022118
+	ldr r1, _0811C440 @ =gBlockRecvBuffer
 	ldrh r0, [r1]
 	cmp r0, 0x51
 	bne _0811C448
@@ -13087,11 +13087,11 @@ _0811C40E:
 	movs r1, 0x32
 	b _0811C47E
 	.align 2, 0
-_0811C440: .4byte gUnknown_2022118
+_0811C440: .4byte gBlockRecvBuffer
 _0811C444: .4byte gMain
 _0811C448:
 	bl sub_800AAC0
-	ldr r4, _0811C46C @ =gUnknown_2022118
+	ldr r4, _0811C46C @ =gBlockRecvBuffer
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 16
@@ -13106,7 +13106,7 @@ _0811C448:
 	movs r1, 0x6
 	b _0811C47E
 	.align 2, 0
-_0811C46C: .4byte gUnknown_2022118
+_0811C46C: .4byte gBlockRecvBuffer
 _0811C470: .4byte gMain
 _0811C474:
 	ldr r0, _0811C488 @ =gMain

@@ -250,7 +250,7 @@ _0804C80A:
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _0804C8B4
-	ldr r1, _0804C870 @ =gUnknown_202271A
+	ldr r1, _0804C870 @ =gLinkType
 	ldr r5, _0804C874 @ =0x00001122
 	adds r0, r5, 0
 	strh r0, [r1]
@@ -270,7 +270,7 @@ _0804C80A:
 _0804C864: .4byte gPaletteFade
 _0804C868: .4byte gEnemyParty
 _0804C86C: .4byte gUnknown_3003F64
-_0804C870: .4byte gUnknown_202271A
+_0804C870: .4byte gLinkType
 _0804C874: .4byte 0x00001122
 _0804C878: .4byte gUnknown_2031DA8
 _0804C87C: .4byte gUnknown_3003F3C
@@ -2181,7 +2181,7 @@ _0804D860:
 	.4byte _0804DAE0
 	.4byte _0804DB14
 _0804D8B8:
-	ldr r0, _0804D8D8 @ =gUnknown_2022618
+	ldr r0, _0804D8D8 @ =gBlockSendBuffer
 	ldr r1, _0804D8DC @ =gPlayerParty
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2197,7 +2197,7 @@ _0804D8B8:
 	strb r2, [r0]
 	b _0804DB9E
 	.align 2, 0
-_0804D8D8: .4byte gUnknown_2022618
+_0804D8D8: .4byte gBlockSendBuffer
 _0804D8DC: .4byte gPlayerParty
 _0804D8E0: .4byte gUnknown_2031DA8
 _0804D8E4:
@@ -2247,7 +2247,7 @@ _0804D936:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804D958 @ =gUnknown_2022118
+	ldr r2, _0804D958 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2257,10 +2257,10 @@ _0804D936:
 	b _0804DB96
 	.align 2, 0
 _0804D954: .4byte gEnemyParty
-_0804D958: .4byte gUnknown_2022118
+_0804D958: .4byte gBlockRecvBuffer
 _0804D95C: .4byte gUnknown_2031DA8
 _0804D960:
-	ldr r0, _0804D970 @ =gUnknown_2022618
+	ldr r0, _0804D970 @ =gBlockSendBuffer
 	ldr r1, _0804D974 @ =gUnknown_202434C
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2268,7 +2268,7 @@ _0804D960:
 	ldr r1, [r0]
 	b _0804DB96
 	.align 2, 0
-_0804D970: .4byte gUnknown_2022618
+_0804D970: .4byte gBlockSendBuffer
 _0804D974: .4byte gUnknown_202434C
 _0804D978: .4byte gUnknown_2031DA8
 _0804D97C:
@@ -2295,7 +2295,7 @@ _0804D99E:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804D9C0 @ =gUnknown_2022118
+	ldr r2, _0804D9C0 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2305,10 +2305,10 @@ _0804D99E:
 	b _0804DB96
 	.align 2, 0
 _0804D9BC: .4byte gUnknown_20240F4
-_0804D9C0: .4byte gUnknown_2022118
+_0804D9C0: .4byte gBlockRecvBuffer
 _0804D9C4: .4byte gUnknown_2031DA8
 _0804D9C8:
-	ldr r0, _0804D9D8 @ =gUnknown_2022618
+	ldr r0, _0804D9D8 @ =gBlockSendBuffer
 	ldr r1, _0804D9DC @ =gUnknown_2024414
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2316,7 +2316,7 @@ _0804D9C8:
 	ldr r1, [r0]
 	b _0804DB96
 	.align 2, 0
-_0804D9D8: .4byte gUnknown_2022618
+_0804D9D8: .4byte gBlockSendBuffer
 _0804D9DC: .4byte gUnknown_2024414
 _0804D9E0: .4byte gUnknown_2031DA8
 _0804D9E4:
@@ -2343,7 +2343,7 @@ _0804DA06:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804DA28 @ =gUnknown_2022118
+	ldr r2, _0804DA28 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2353,10 +2353,10 @@ _0804DA06:
 	b _0804DB96
 	.align 2, 0
 _0804DA24: .4byte gUnknown_20241BC
-_0804DA28: .4byte gUnknown_2022118
+_0804DA28: .4byte gBlockRecvBuffer
 _0804DA2C: .4byte gUnknown_2031DA8
 _0804DA30:
-	ldr r0, _0804DA48 @ =gUnknown_2022618
+	ldr r0, _0804DA48 @ =gBlockSendBuffer
 	ldr r1, _0804DA4C @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, _0804DA50 @ =0x00002cd0
@@ -2367,7 +2367,7 @@ _0804DA30:
 	ldr r1, [r0]
 	b _0804DB96
 	.align 2, 0
-_0804DA48: .4byte gUnknown_2022618
+_0804DA48: .4byte gBlockSendBuffer
 _0804DA4C: .4byte gSaveBlock1Ptr
 _0804DA50: .4byte 0x00002cd0
 _0804DA54: .4byte gUnknown_2031DA8
@@ -2395,7 +2395,7 @@ _0804DA7A:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804DA9C @ =gUnknown_2022118
+	ldr r2, _0804DA9C @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xD8
 	bl sub_804D814
@@ -2405,10 +2405,10 @@ _0804DA7A:
 	b _0804DB96
 	.align 2, 0
 _0804DA98: .4byte gUnknown_2031CCC
-_0804DA9C: .4byte gUnknown_2022118
+_0804DA9C: .4byte gBlockRecvBuffer
 _0804DAA0: .4byte gUnknown_2031DA8
 _0804DAA4:
-	ldr r0, _0804DABC @ =gUnknown_2022618
+	ldr r0, _0804DABC @ =gBlockSendBuffer
 	ldr r1, _0804DAC0 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, _0804DAC4 @ =0x0000309c
@@ -2419,7 +2419,7 @@ _0804DAA4:
 	ldr r1, [r0]
 	b _0804DB96
 	.align 2, 0
-_0804DABC: .4byte gUnknown_2022618
+_0804DABC: .4byte gBlockSendBuffer
 _0804DAC0: .4byte gSaveBlock1Ptr
 _0804DAC4: .4byte 0x0000309c
 _0804DAC8: .4byte gUnknown_2031DA8
@@ -2447,7 +2447,7 @@ _0804DAE0:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804DB10 @ =gUnknown_2022118
+	ldr r2, _0804DB10 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xB
 	bl sub_804D814
@@ -2456,7 +2456,7 @@ _0804DAE0:
 	b _0804DB96
 	.align 2, 0
 _0804DB0C: .4byte gUnknown_2031DA8
-_0804DB10: .4byte gUnknown_2022118
+_0804DB10: .4byte gBlockRecvBuffer
 _0804DB14:
 	ldr r4, _0804DB68 @ =gEnemyParty
 	ldr r6, _0804DB6C @ =0x0000012f
@@ -2564,7 +2564,7 @@ sub_804DBD4: @ 804DBD4
 	ands r0, r2
 	cmp r0, 0
 	beq _0804DC58
-	ldr r0, _0804DBFC @ =gUnknown_2022118
+	ldr r0, _0804DBFC @ =gBlockRecvBuffer
 	ldrh r1, [r0]
 	ldr r0, _0804DC00 @ =0x0000bbbb
 	cmp r1, r0
@@ -2576,7 +2576,7 @@ sub_804DBD4: @ 804DBD4
 	beq _0804DC28
 	b _0804DC52
 	.align 2, 0
-_0804DBFC: .4byte gUnknown_2022118
+_0804DBFC: .4byte gBlockRecvBuffer
 _0804DC00: .4byte 0x0000bbbb
 _0804DC04: .4byte 0x0000aabb
 _0804DC08:
@@ -2626,7 +2626,7 @@ _0804DC58:
 	ands r0, r2
 	cmp r0, 0
 	beq _0804DCEA
-	ldr r3, _0804DC84 @ =gUnknown_2022118
+	ldr r3, _0804DC84 @ =gBlockRecvBuffer
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r3, r1
@@ -2642,7 +2642,7 @@ _0804DC58:
 	b _0804DCE4
 	.align 2, 0
 _0804DC80: .4byte gUnknown_2031DA8
-_0804DC84: .4byte gUnknown_2022118
+_0804DC84: .4byte gBlockRecvBuffer
 _0804DC88: .4byte 0x0000bbbb
 _0804DC8C: .4byte 0x0000aabb
 _0804DC90:
@@ -2712,7 +2712,7 @@ sub_804DCF4: @ 804DCF4
 	ands r0, r5
 	cmp r0, 0
 	beq _0804DDD6
-	ldr r2, _0804DD20 @ =gUnknown_2022118
+	ldr r2, _0804DD20 @ =gBlockRecvBuffer
 	ldrh r1, [r2]
 	ldr r0, _0804DD24 @ =0x0000ddee
 	cmp r1, r0
@@ -2727,7 +2727,7 @@ sub_804DCF4: @ 804DCF4
 	beq _0804DD6C
 	b _0804DDD0
 	.align 2, 0
-_0804DD20: .4byte gUnknown_2022118
+_0804DD20: .4byte gBlockRecvBuffer
 _0804DD24: .4byte 0x0000ddee
 _0804DD28: .4byte 0x0000ccdd
 _0804DD2C: .4byte 0x0000dddd
@@ -7428,7 +7428,7 @@ _08050194:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080501A8
-	ldr r1, _0805022C @ =gUnknown_202271A
+	ldr r1, _0805022C @ =gLinkType
 	ldr r2, _08050230 @ =0x00001144
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -7491,7 +7491,7 @@ _080501A8:
 	b _08050472
 	.align 2, 0
 _08050228: .4byte gUnknown_3003F64
-_0805022C: .4byte gUnknown_202271A
+_0805022C: .4byte gLinkType
 _08050230: .4byte 0x00001144
 _08050234: .4byte gUnknown_2031DAC
 _08050238: .4byte sub_804FF0C
@@ -13477,7 +13477,7 @@ sub_805383C: @ 805383C
 	ands r0, r6
 	cmp r0, 0
 	beq _0805387A
-	ldr r4, _080538A8 @ =gUnknown_2022118
+	ldr r4, _080538A8 @ =gBlockRecvBuffer
 	ldrh r1, [r4]
 	ldr r0, _080538AC @ =0x0000dcba
 	cmp r1, r0
@@ -13501,7 +13501,7 @@ _0805387A:
 	ands r0, r5
 	cmp r0, 0
 	beq _080538A2
-	ldr r0, _080538A8 @ =gUnknown_2022118
+	ldr r0, _080538A8 @ =gBlockRecvBuffer
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r1
@@ -13522,7 +13522,7 @@ _080538A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080538A8: .4byte gUnknown_2022118
+_080538A8: .4byte gBlockRecvBuffer
 _080538AC: .4byte 0x0000dcba
 _080538B0: .4byte sub_8053788
 _080538B4: .4byte 0x0000abcd

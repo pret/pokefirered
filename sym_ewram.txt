@@ -1706,14 +1706,10 @@ gUnknown_203F3B0: @ 203F3B0
 gUnknown_203F3B8: @ 203F3B8
 	.space 0x4
 
-gUnknown_203F3BC: @ 203F3BC
-	.space 0x4
-
-gUnknown_203F3C0: @ 203F3C0
-	.space 0x4
-
-gUnknown_203F3C4: @ 203F3C4
-	.space 0x4
+	.include "src/mevent.o"
+	.include "src/mevent_server_sub.o"
+	.include "src/mevent_server_ish.o"
+	.include "src/mevent_server.o"
 
 gUnknown_203F3C8: @ 203F3C8
 	.space 0x4

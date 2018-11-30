@@ -5,169 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8144F1C
-sub_8144F1C: @ 8144F1C
-	push {r4,lr}
-	ldr r4, _08144F38 @ =gUnknown_203F3C4
-	movs r0, 0x60
-	bl AllocZeroed
-	str r0, [r4]
-	ldr r1, _08144F3C @ =gUnknown_8468B6C
-	movs r2, 0
-	movs r3, 0x1
-	bl mevent_srv_init_common
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08144F38: .4byte gUnknown_203F3C4
-_08144F3C: .4byte gUnknown_8468B6C
-	thumb_func_end sub_8144F1C
-
-	thumb_func_start sub_8144F40
-sub_8144F40: @ 8144F40
-	push {r4,lr}
-	ldr r4, _08144F5C @ =gUnknown_203F3C4
-	movs r0, 0x60
-	bl AllocZeroed
-	str r0, [r4]
-	ldr r1, _08144F60 @ =gUnknown_8468BCC
-	movs r2, 0
-	movs r3, 0x1
-	bl mevent_srv_init_common
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08144F5C: .4byte gUnknown_203F3C4
-_08144F60: .4byte gUnknown_8468BCC
-	thumb_func_end sub_8144F40
-
-	thumb_func_start sub_8144F64
-sub_8144F64: @ 8144F64
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	ldr r4, _08144F74 @ =gUnknown_203F3C4
-	ldr r0, [r4]
-	cmp r0, 0
-	bne _08144F78
-	movs r0, 0x3
-	b _08144F98
-	.align 2, 0
-_08144F74: .4byte gUnknown_203F3C4
-_08144F78:
-	bl sub_8145600
-	adds r5, r0, 0
-	cmp r5, 0x3
-	bne _08144F96
-	ldr r0, [r4]
-	ldr r1, [r0, 0x4]
-	strh r1, [r6]
-	bl mevent_srv_free_resources
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-_08144F96:
-	adds r0, r5, 0
-_08144F98:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8144F64
-
-	thumb_func_start mevent_srv_init_common
-mevent_srv_init_common: @ 8144FA0
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	adds r4, r0, 0
-	adds r6, r1, 0
-	mov r8, r2
-	mov r9, r3
-	movs r5, 0
-	str r5, [r4]
-	str r5, [r4, 0x8]
-	movs r0, 0xA6
-	lsls r0, 1
-	bl AllocZeroed
-	str r0, [r4, 0x18]
-	movs r0, 0xDE
-	lsls r0, 1
-	bl AllocZeroed
-	str r0, [r4, 0x1C]
-	movs r0, 0x80
-	lsls r0, 3
-	bl AllocZeroed
-	str r0, [r4, 0x14]
-	movs r0, 0x64
-	bl AllocZeroed
-	str r0, [r4, 0x20]
-	str r6, [r4, 0x10]
-	str r5, [r4, 0xC]
-	adds r4, 0x38
-	adds r0, r4, 0
-	mov r1, r8
-	mov r2, r9
-	bl sub_814485C
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end mevent_srv_init_common
-
-	thumb_func_start mevent_srv_free_resources
-mevent_srv_free_resources: @ 8144FF8
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r0, [r4, 0x18]
-	bl Free
-	ldr r0, [r4, 0x1C]
-	bl Free
-	ldr r0, [r4, 0x14]
-	bl Free
-	ldr r0, [r4, 0x20]
-	bl Free
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end mevent_srv_free_resources
-
-	thumb_func_start sub_814501C
-sub_814501C: @ 814501C
-	push {r4-r7,lr}
-	adds r5, r0, 0
-	adds r6, r1, 0
-	adds r7, r2, 0
-	adds r4, r3, 0
-	movs r0, 0x80
-	lsls r0, 3
-	cmp r4, r0
-	bls _0814503A
-	ldr r0, _08145050 @ =gUnknown_8466F80	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
-	ldr r1, _08145054 @ =0x00000101
-	ldr r2, _08145058 @ =gUnknown_8466FB8	"size <= ME_SEND_BUF_SIZE"
-	movs r3, 0x1
-	bl AGBAssert
-_0814503A:
-	adds r0, r5, 0
-	adds r0, 0x38
-	adds r1, r6, 0
-	adds r2, r7, 0
-	adds r3, r4, 0
-	bl sub_8144888
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08145050: .4byte gUnknown_8466F80
-_08145054: .4byte 0x00000101
-_08145058: .4byte gUnknown_8466FB8
-	thumb_func_end sub_814501C
-
 	thumb_func_start sub_814505C
 sub_814505C: @ 814505C
 	push {lr}
@@ -871,7 +708,7 @@ sub_8145600: @ 8145600
 	movs r3, 0x1
 	bl AGBAssert
 _08145616:
-	ldr r1, _08145650 @ =gUnknown_8467030
+	ldr r1, _08145650 @ =func_tbl
 	ldr r0, [r4, 0x8]
 	lsls r0, 2
 	adds r0, r1
@@ -897,7 +734,7 @@ _0814563C:
 _08145644: .4byte gUnknown_8466F80
 _08145648: .4byte 0x00000222
 _0814564C: .4byte gUnknown_8467044
-_08145650: .4byte gUnknown_8467030
+_08145650: .4byte func_tbl
 	thumb_func_end sub_8145600
 
 	.align 2, 0 @ Don't pad with nop.

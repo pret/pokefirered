@@ -1,0 +1,6 @@
+#ifndef GUARD_MYSTERY_GIFT_MENU_H
+#define GUARD_MYSTERY_GIFT_MENU_H
+
+void sub_81422FC(void);
+
+#endif //GUARD_MYSTERY_GIFT_MENU_H

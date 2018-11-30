@@ -329,9 +329,9 @@ gUnknown_3005EA0: @ 3005EA0
 gUnknown_3005ECC: @ 3005ECC
 	.space 0x4
 
-gUnknown_3005ED0: @ 3005ED0
-	.space 0x10
+	.include "mevent.o"
 
+	.align 4
 gUnknown_3005EE0: @ 3005EE0
 	.space 0x10
 

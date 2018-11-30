@@ -1,27 +1,7 @@
 	.section .rodata
 
 	.align 2
-gUnknown_8466F80:: @ 8466F80
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
-
-	.align 2
-gUnknown_8466FB8:: @ 8466FB8
-	.asciz "size <= ME_SEND_BUF_SIZE"
-
-	.align 2
-gUnknown_8466FD4:: @ 8466FD4
-	.asciz "cmd->parameter == NULL"
-
-	.align 2
-gUnknown_8466FEC:: @ 8466FEC
-	.asciz "cmd->flag == FALSE"
-
-	.align 2
-gUnknown_8467000:: @ 8467000
-	.asciz "cmd->flag == FALSE && cmd->parameter == NULL"
-
-	.align 2
-gUnknown_8467030:: @ 8467030
+func_tbl:: @ 8467030
 	.4byte sub_8145080
 	.4byte sub_8145088
 	.4byte sub_814508C

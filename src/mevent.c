@@ -17,6 +17,9 @@
 #include "new_game.h"
 #include "string_util.h"
 #include "menews_jisan.h"
+#include "cereader_tool.h"
+#include "mystery_gift_menu.h"
+#include "help_system.h"
 #include "mevent.h"
 
 struct MEventTaskData1
@@ -40,14 +43,10 @@ bool32 sub_8143E64(const struct MEventBuffer_3120_Sub * src);
 void sub_8143E9C(void);
 void sub_8143ED0(void);
 bool32 sub_8144018(const struct MEventBuffer_32E0_Sub * src);
-bool32 sub_815D794(u8 *);
-void sub_81422FC(void);
-void sub_812B484(void);
 void sub_814407C(void);
 void sub_81440B4(void);
 void sub_8144824(u32, u32, u32 *, s32);
 void sub_8144790(void);
-u8 sub_815D6B4(u8 *);
 
 extern const u8 gUnknown_841DE52[];
 extern const u8 gUnknown_841DE53[];
@@ -90,7 +89,7 @@ const u16 gUnknown_8466F00[] = {
 
 struct MEvent_Str_1 gUnknown_3005ED0;
 
-bool32 gUnknown_203F3BC = FALSE;
+static EWRAM_DATA bool32 gUnknown_203F3BC = FALSE;
 
 void sub_81435DC(struct MEvent_Str_1 *a0, size_t a1, const void * a2)
 {

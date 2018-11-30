@@ -697,7 +697,7 @@ struct SaveBlock1
     /*0x30D0*/ struct Roamer roamer;
     /*0x30EC*/ struct EnigmaBerry enigmaBerry;
     /*0x3120*/ struct MEventBuffers unk_3120;
-    /*0x348C*/ u8 filler_3464[0x190];
+    /*0x348C*/ u8 filler_348C[0x190];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[12];
     /*0x3A14*/ u8 seen2[DEX_FLAGS_NO];

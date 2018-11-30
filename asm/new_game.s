@@ -241,7 +241,7 @@ sub_8054A60: @ 8054A60
 	bl PlayTimeCounter_Reset
 	bl sub_80549AC
 	bl sub_806E0D0
-	bl sub_812D304
+	bl ResetFameChecker
 	ldr r0, [r6]
 	movs r1, 0xA4
 	lsls r1, 2

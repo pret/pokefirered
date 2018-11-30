@@ -3,7 +3,9 @@ MONBACKGFXDIR := graphics/pokemon/back_pics
 MONFRONTGFXDIR := graphics/pokemon/anim_front_pics
 MONPALDIR := graphics/pokemon/palettes
 TILESETGFXDIR := data/tilesets
-FONTGFXDIR := data/graphics/fonts
+GLOBALGFXDIR := data/graphics
+FONTGFXDIR := $(GLOBALGFXDIR)/fonts
+FAMECHECKERGFXDIR := data/fame_checker
 INTERFACEGFXDIR := graphics/interface
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 UNUSEDGFXDIR := graphics/unused
@@ -651,3 +653,9 @@ $(INTERFACEGFXDIR)/region_map_affine.8bpp: %.8bpp: %.png
 
 $(MISCGFXDIR)/birch_help.4bpp: $(MISCGFXDIR)/birch_bag.4bpp $(MISCGFXDIR)/birch_grass.4bpp
 	@cat $^ >$@
+	
+$(FAMECHECKERGFXDIR)/img_845cf00.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 15
+
+$(GLOBALGFXDIR)/fame_checker_bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 165

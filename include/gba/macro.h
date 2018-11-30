@@ -125,6 +125,9 @@
 
 #define DmaCopyLarge32(dmaNum, src, dest, size, block) DmaCopyLarge(dmaNum, src, dest, size, block, 32)
 
+#define DmaClearLarge16(dmaNum, dest, size, block) DmaClearLarge(dmaNum, dest, size, block, 16)
+#define DmaClearLarge32(dmaNum, dest, size, block) DmaClearLarge(dmaNum, dest, size, block, 32)
+
 #define DmaCopyDefvars(dmaNum, src, dest, size, bit) \
 {                                                    \
     const void *_src = src;                          \

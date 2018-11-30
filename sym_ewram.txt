@@ -1556,23 +1556,7 @@ gUnknown_203B0EC: @ 203B0EC
 gUnknown_203B0EE: @ 203B0EE
 	.space 0x2
 
-gUnknown_203B0F0: @ 203B0F0
-	.space 0x4
-
-gUnknown_203B0F4: @ 203B0F4
-	.space 0x4
-
-gUnknown_203B0F8: @ 203B0F8
-	.space 0x4
-
-gUnknown_203B0FC: @ 203B0FC
-	.space 0x4
-
-gUnknown_203B100: @ 203B100
-	.space 0x4
-
-gUnknown_203B104: @ 203B104
-	.space 0x4
+	.include "src/fame_checker.o"
 
 gUnknown_203B108: @ 203B108
 	.space 0x4

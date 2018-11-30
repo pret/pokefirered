@@ -391,7 +391,7 @@ void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numT
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numTemplates)
 {
     asm(".syntax unified\n\
@@ -634,7 +634,7 @@ bool8 IsDma3ManagerBusyWithBgCopy(void)
     return FALSE;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 IsDma3ManagerBusyWithBgCopy(void)
 {
     asm("push {r4-r7,lr}\n\
@@ -1065,7 +1065,7 @@ void CopyBgTilemapBufferToVram(u8 bg)
     }
 }
 
-void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u8 height)
+void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 width, u8 height)
 {
     u16 destX16;
     u16 destY16;
@@ -1077,7 +1077,7 @@ void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u
         {
             case 0:
             {
-                u16 * srcCopy = src;
+                const u16 * srcCopy = src;
                 for (destY16 = destY; destY16 < (destY + height); destY16++)
                 {
                     for (destX16 = destX; destX16 < (destX + width); destX16++)
@@ -1089,7 +1089,7 @@ void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u
             }
             case 1:
             {
-                u8 * srcCopy = src;
+                const u8 * srcCopy = src;
                 mode = GetBgMetricAffineMode(bg, 0x1);
                 for (destY16 = destY; destY16 < (destY + height); destY16++)
                 {
@@ -1104,7 +1104,7 @@ void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u
     }
 }
 
-void CopyToBgTilemapBufferRect_ChangePalette(u8 bg, void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
+void CopyToBgTilemapBufferRect_ChangePalette(u8 bg, const void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
 {
     CopyRectToBgTilemapBufferRect(bg, src, 0, 0, rectWidth, rectHeight, destX, destY, rectWidth, rectHeight, palette, 0, 0);
 }
@@ -1151,8 +1151,8 @@ void CopyRectToBgTilemapBufferRect(u8 bg, void* src, u8 srcX, u8 srcY, u8 srcWid
         }
     }
 }*/
-__attribute__((naked))
-void CopyRectToBgTilemapBufferRect(u8 bg, void* src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
+NAKED
+void CopyRectToBgTilemapBufferRect(u8 bg, const void* src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
 {
     asm("push {r4-r7,lr}\n\
     mov r7, r10\n\
@@ -1598,7 +1598,7 @@ void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u32 tileOffset, u32 pal
     *dest = test;
 }
 #else
-__attribute__((naked))
+NAKED
 void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u32 tileOffset, u32 palette2)
 {
     asm("push {r4-r6,lr}\n\

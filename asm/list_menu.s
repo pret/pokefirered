@@ -969,14 +969,14 @@ _081075DA:
 	beq _08107640
 	b _08107680
 _081075E4:
-	ldr r1, _081075F4 @ =gUnknown_841623B
+	ldr r1, _081075F4 @ =gFameCheckerText_ListMenuCursor
 	adds r0, r6, 0
 	mov r2, r8
 	adds r3, r7, 0
 	bl ListMenuPrint
 	b _08107680
 	.align 2, 0
-_081075F4: .4byte gUnknown_841623B
+_081075F4: .4byte gFameCheckerText_ListMenuCursor
 _081075F8:
 	ldrb r0, [r6, 0x1E]
 	cmp r0, 0xFF

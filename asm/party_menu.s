@@ -5118,7 +5118,7 @@ _08121194:
 	ands r0, r1
 	cmp r0, 0xA
 	beq _081211F0
-	ldr r4, _081211E8 @ =gUnknown_84161C1
+	ldr r4, _081211E8 @ =gFameCheckerText_Cancel
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -5146,7 +5146,7 @@ _08121194:
 	.align 2, 0
 _081211E0: .4byte gUnknown_845A108
 _081211E4: .4byte gUnknown_203B0A0
-_081211E8: .4byte gUnknown_84161C1
+_081211E8: .4byte gFameCheckerText_Cancel
 _081211EC: .4byte gUnknown_8459FFC
 _081211F0:
 	ldr r4, _08121240 @ =gUnknown_84161C8

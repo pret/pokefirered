@@ -63,5 +63,6 @@ bool32 sub_80991F8(void);
 u8 *sub_8099244(void);
 void sub_80992A0(u8 *script, u16 scriptSize);
 bool32 sub_8069DFC(void);
+void sub_8069EA4(u8 * script, u16 scriptSize);
 
 #endif // GUARD_SCRIPT_H

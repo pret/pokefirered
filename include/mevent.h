@@ -34,6 +34,11 @@ struct MEvent_Str_2
 };
 
 struct MysteryEventStruct * sub_8143D94(void);
+bool32 sub_8143DC8(const struct MEventBuffer_3120_Sub * src);
 bool32 sub_8143E1C(void);
+bool32 sub_8143EF4(const u8 * src);
+bool32 sub_8143F68(const struct MEventBuffer_32E0_Sub * data);
+bool32 sub_8144254(const u16 * data);
+void sub_81442CC(struct MEventStruct_Unk1442CC * data);
 
 #endif //GUARD_MEVENT_H

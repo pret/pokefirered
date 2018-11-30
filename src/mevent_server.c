@@ -1,8 +1,12 @@
 #include "global.h"
 #include "malloc.h"
+#include "decompress.h"
 #include "util.h"
 #include "link.h"
 #include "link_rfu.h"
+#include "overworld.h"
+#include "script.h"
+#include "battle_tower.h"
 #include "mevent.h"
 
 extern u16 gBlockRecvBuffer[][128];
@@ -97,7 +101,7 @@ void sub_8144888(struct mevent_srv_sub * srv, u32 a1, void * a2, u32 a3)
     srv->unk_1C = a2;
 }
 
-void sub_81448AC(struct mevent_srv_sub * srv, u16 a1, void * a2)
+void sub_81448AC(struct mevent_srv_sub * srv, u32 a1, void * a2)
 {
     srv->unk_00 = 0;
     srv->unk_06 = a1;
@@ -356,5 +360,110 @@ u32 sub_8144C80(struct mevent_srv_ish * srv)
         srv->unk_08 = 4;
         srv->unk_0C = 0;
     }
+    return 1;
+}
+
+u32 sub_8144CA0(struct mevent_srv_ish * srv)
+{
+    u32 * r2 = (u32 *)srv->unk_1C + 2 * srv->unk_10;
+    ++srv->unk_10;
+    switch (r2[0])
+    {
+        case 0:
+            break;
+        case 1:
+            srv->unk_04 = r2[1];
+            srv->unk_08 = 1;
+            srv->unk_0C = 0;
+            break;
+        case 2:
+            sub_81448AC(&srv->unk_24, r2[1], srv->unk_18);
+            srv->unk_08 = 2;
+            srv->unk_0C = 0;
+            break;
+        case 3:
+            srv->unk_08 = 3;
+            srv->unk_0C = 0;
+            break;
+        case 20:
+            sub_8144888(&srv->unk_24, 0x14, srv->unk_14, 0);
+            srv->unk_08 = 3;
+            srv->unk_0C = 0;
+            break;
+        case 19:
+            sub_8144C00(srv, 0x12, GetGameStat(r2[1]));
+            srv->unk_08 = 3;
+            srv->unk_0C = 0;
+            break;
+        case 6:
+            if (srv->unk_04 == 0)
+                sub_8144BE4(srv);
+            break;
+        case 7:
+            if (srv->unk_04 == 1)
+                sub_8144BE4(srv);
+            break;
+        case 4:
+            sub_8144BE4(srv);
+            break;
+        case 5:
+            memcpy(srv->unk_20, srv->unk_18, 0x40);
+            srv->unk_08 = 5;
+            srv->unk_0C = 0;
+            return 2;
+        case 11:
+            memcpy(srv->unk_20, srv->unk_18, 0x40);
+            srv->unk_08 = 5;
+            srv->unk_0C = 0;
+            return 3;
+        case 12:
+            memcpy(srv->unk_20, srv->unk_18, 0x40);
+            srv->unk_08 = 5;
+            srv->unk_0C = 0;
+            return 5;
+        case 13:
+            srv->unk_08 = 5;
+            srv->unk_0C = 0;
+            return 4;
+        case 8:
+            sub_81442CC(srv->unk_14);
+            sub_8144888(&srv->unk_24, 0x11, srv->unk_14, 0x64);
+            break;
+        case 14:
+            sub_8144C00(srv, 0x13, srv->unk_04);
+            break;
+        case 10:
+            sub_8143F68(srv->unk_18);
+            break;
+        case 9:
+            if (!sub_8143EF4(srv->unk_18))
+            {
+                sub_8143DC8(srv->unk_18);
+                sub_8144C00(srv, 0x13, 0);
+            }
+            else
+                sub_8144C00(srv, 0x13, 1);
+            break;
+        case 15:
+            srv->unk_08 = 6;
+            srv->unk_0C = 0;
+            break;
+        case 16:
+            sub_8144254(srv->unk_18);
+            break;
+        case 17:
+            sub_8069EA4(srv->unk_18, 1000);
+            break;
+        case 18:
+            memcpy(gSaveBlock2Ptr->unk_4A0, srv->unk_18, 0xbc);
+            sub_80E7490();
+            break;
+        case 21:
+            memcpy(gDecompressionBuffer, srv->unk_18, 0x400);
+            srv->unk_08 = 7;
+            srv->unk_0C = 0;
+            break;
+    }
+
     return 1;
 }

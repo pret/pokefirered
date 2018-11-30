@@ -19,18 +19,6 @@
 #include "menews_jisan.h"
 #include "mevent.h"
 
-struct MEvent_Str_1
-{
-    u16 unk_000;
-    size_t unk_004;
-    const void * unk_008;
-};
-
-struct MEvent_Str_2
-{
-    u8 fill_00[0x40];
-};
-
 struct MEventTaskData1
 {
     u16 t00;

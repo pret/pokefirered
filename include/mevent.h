@@ -21,6 +21,18 @@ struct MEventStruct_Unk1442CC
     u8 unk_60;
 };
 
+struct MEvent_Str_1
+{
+    u16 unk_000;
+    size_t unk_004;
+    const void * unk_008;
+};
+
+struct MEvent_Str_2
+{
+    u8 fill_00[0x40];
+};
+
 struct MysteryEventStruct * sub_8143D94(void);
 bool32 sub_8143E1C(void);
 

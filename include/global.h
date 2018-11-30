@@ -28,6 +28,8 @@
 #endif // __APPLE__
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
+// GF's lingo
+#define NELEMS ARRAY_COUNT
 
 // useful math macros
 

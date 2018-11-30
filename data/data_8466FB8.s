@@ -2,7 +2,14 @@
 
 	.align 2
 gUnknown_8466F60:: @ 8466F60
-	.incbin "baserom.gba", 0x466F60, 0x20
+	.4byte sub_8144C34
+	.4byte sub_8144C5C
+	.4byte sub_8144C60
+	.4byte sub_8144C80
+	.4byte sub_8144CA0
+	.4byte sub_8144E6C
+	.4byte sub_8144E84
+	.4byte sub_8144EBC
 
 	.align 2
 gUnknown_8466F80:: @ 8466F80
@@ -26,7 +33,11 @@ gUnknown_8467000:: @ 8467000
 
 	.align 2
 gUnknown_8467030:: @ 8467030
-	.incbin "baserom.gba", 0x467030, 0x14
+	.4byte sub_8145080
+	.4byte sub_8145088
+	.4byte sub_814508C
+	.4byte sub_81450A8
+	.4byte sub_81450C4
 
 	.align 2
 gUnknown_8467044:: @ 8467044

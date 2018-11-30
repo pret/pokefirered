@@ -1,17 +1,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_8466F60:: @ 8466F60
-	.4byte sub_8144C34
-	.4byte sub_8144C5C
-	.4byte sub_8144C60
-	.4byte sub_8144C80
-	.4byte sub_8144CA0
-	.4byte sub_8144E6C
-	.4byte sub_8144E84
-	.4byte sub_8144EBC
-
-	.align 2
 gUnknown_8466F80:: @ 8466F80
 	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
 

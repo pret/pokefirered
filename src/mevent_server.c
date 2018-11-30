@@ -7,6 +7,7 @@
 #include "overworld.h"
 #include "script.h"
 #include "battle_tower.h"
+#include "mystery_event_script.h"
 #include "mevent.h"
 
 extern u16 gBlockRecvBuffer[][128];
@@ -466,4 +467,59 @@ u32 sub_8144CA0(struct mevent_srv_ish * srv)
     }
 
     return 1;
+}
+
+u32 sub_8144E6C(struct mevent_srv_ish * srv)
+{
+    if (srv->unk_0C)
+    {
+        srv->unk_08 = 4;
+        srv->unk_0C = 0;
+    }
+    return 1;
+}
+
+u32 sub_8144E84(struct mevent_srv_ish * srv)
+{
+    switch (srv->unk_0C)
+    {
+        case 0:
+            sub_80DA89C(srv->unk_18);
+            ++srv->unk_0C;
+            break;
+        case 1:
+            if (!sub_80DA8B0(&srv->unk_04))
+            {
+                srv->unk_08 = 4;
+                srv->unk_0C = 0;
+            }
+            break;
+    }
+    return 1;
+}
+
+u32 sub_8144EBC(struct mevent_srv_ish * srv)
+{
+    u32 (*func)(u32 *, struct SaveBlock2 *, struct SaveBlock1 *) = (void *)gDecompressionBuffer;
+    if (func(&srv->unk_04, gSaveBlock2Ptr, gSaveBlock1Ptr) == 1)
+    {
+        srv->unk_08 = 4;
+        srv->unk_0C = 0;
+    }
+    return 1;
+}
+
+u32 mevent_srv_ish_exec(struct mevent_srv_ish * srv)
+{
+    u32 (*funcs[])(struct mevent_srv_ish *) = {
+        sub_8144C34,
+        sub_8144C5C,
+        sub_8144C60,
+        sub_8144C80,
+        sub_8144CA0,
+        sub_8144E6C,
+        sub_8144E84,
+        sub_8144EBC
+    };
+    return funcs[srv->unk_08](srv);
 }

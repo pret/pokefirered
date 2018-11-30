@@ -626,7 +626,9 @@ struct MEventBuffer_32E0
 
 struct MEventBuffer_3430_Sub
 {
-	u8 filler_00[6];
+	u16 unk_00;
+	u16 unk_02;
+	u16 unk_04;
 	u16 unk_06;
 	u16 unk_08[2][7];
 };

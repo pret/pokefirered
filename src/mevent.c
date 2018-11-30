@@ -76,7 +76,28 @@ extern const u8 gUnknown_841DE9C[];
 extern const u8 gUnknownSerialData_Start[];
 extern const u8 gUnknownSerialData_End[];
 
-extern const u16 gUnknown_8466F00[];
+const u16 gUnknown_8466F00[] = {
+    0x02a7,
+    0x02a8,
+    0x02a9,
+    0x02aa,
+    0x02ab,
+    0x02ac,
+    0x02ad,
+    0x02ae,
+    0x02af,
+    0x02b0,
+    0x02b1,
+    0x02b2,
+    0x02b3,
+    0x02b4,
+    0x02b5,
+    0x02b6,
+    0x02b7,
+    0x02b8,
+    0x02b9,
+    0x02ba
+};
 
 struct MEvent_Str_1 gUnknown_3005ED0;
 
@@ -816,4 +837,116 @@ bool32 sub_8144474(const struct MEventStruct_Unk1442CC * a0, const u16 * a1)
 s32 sub_814449C(const struct MEventStruct_Unk1442CC * a0)
 {
     return sub_8144184(&a0->unk_20, a0->unk_44);
+}
+
+//TODO: Remove these later
+const char ALIGNED(4) gUnknown_8466F28[] = "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c";
+const char ALIGNED(4) gUnknown_8466F5C[] = "0";
+
+u16 sub_81444B0(const struct MEventStruct_Unk1442CC * a0, u32 command)
+{
+    switch (command)
+    {
+        case 0:
+            return a0->unk_20.unk_00;
+        case 1:
+            return a0->unk_20.unk_02;
+        case 2:
+            return a0->unk_20.unk_04;
+        case 3:
+            return sub_814449C(a0);
+        case 4:
+            return a0->unk_44;
+        default:
+            AGBAssert(gUnknown_8466F28, 825, gUnknown_8466F5C, 1);
+            // AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c", 825);
+            return 0;
+    }
+}
+
+void sub_814451C(u32 command)
+{
+    struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+    if (data->unk_08_0 == 2)
+    {
+        u16 * dest = NULL;
+        switch (command)
+        {
+            case 0:
+                dest = &gSaveBlock1Ptr->unk_3120.buffer_310.data.unk_00;
+                break;
+            case 1:
+                dest = &gSaveBlock1Ptr->unk_3120.buffer_310.data.unk_02;
+                break;
+            case 2:
+                dest = &gSaveBlock1Ptr->unk_3120.buffer_310.data.unk_04;
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
+        if (dest == NULL)
+        {
+            AGBAssert(gUnknown_8466F28, 868, gUnknown_8466F5C, 1);
+            // AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c", 868);
+        }
+        else if (++(*dest) > 999)
+        {
+            *dest = 999;
+        }
+    }
+}
+
+u16 sub_81445C0(u32 command)
+{
+    switch (command)
+    {
+        case 0:
+        {
+            struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+            if (data->unk_08_0 == 2)
+            {
+                struct MEventBuffer_3430_Sub * buffer = &gSaveBlock1Ptr->unk_3120.buffer_310.data;
+                return buffer->unk_00;
+            }
+            break;
+        }
+        case 1:
+        {
+            struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+            if (data->unk_08_0 == 2)
+            {
+                struct MEventBuffer_3430_Sub * buffer = &gSaveBlock1Ptr->unk_3120.buffer_310.data;
+                return buffer->unk_02;
+            }
+            break;
+        }
+        case 2:
+        {
+            struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+            if (data->unk_08_0 == 2)
+            {
+                struct MEventBuffer_3430_Sub * buffer = &gSaveBlock1Ptr->unk_3120.buffer_310.data;
+                return buffer->unk_04;
+            }
+            break;
+        }
+        case 3:
+        {
+            struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+            if (data->unk_08_0 == 1)
+                return sub_8144218();
+            break;
+        }
+        case 4:
+        {
+            struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
+            if (data->unk_08_0 == 1)
+                return data->unk_09;
+            break;
+        }
+    }
+    AGBAssert(gUnknown_8466F28, 913, gUnknown_8466F5C, 1);
+    return 0;
 }

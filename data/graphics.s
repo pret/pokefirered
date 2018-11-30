@@ -18,11 +18,11 @@ gUnknown_8D0098C:: @ 8D0098C
 	.incbin "baserom.gba", 0xD0098C, 0x244
 
 	.align 2
-gUnknown_8D00BD0:: @ 8D00BD0
+gFile_graphics_pokemon_palettes_circled_question_mark_palette:: @ 8D00BD0
 	.incbin "graphics/pokemon/palettes/circled_question_mark_palette.gbapal.lz"
 
 	.align 2
-gUnknown_8D00BE8:: @ 8D00BE8
+gFile_graphics_pokemon_palettes_circled_question_mark_shiny_palette:: @ 8D00BE8
 	.incbin "graphics/pokemon/palettes/circled_question_mark_shiny_palette.gbapal.lz"
 
 	.align 2
@@ -1835,7 +1835,6 @@ gFile_graphics_battle_anims_sprites_193_sheet:: @ 8D206B8
 	.align 2
 gFile_graphics_battle_anims_sprites_193_palette:: @ 8D20814
 	.incbin "graphics/battle_anims/sprites/193.gbapal.lz"
-
 
 	.align 2
 gFile_graphics_battle_anims_masks_curse_sheet:: @ 8D2083C
@@ -13695,7 +13694,6 @@ gFile_graphics_battle_interface_enemy_mon_shadow_sheet:: @ 8E7BAD4
 gFile_graphics_battle_interface_ball_status_bar_sheet:: @ 8E7BB04
 	.incbin "graphics/battle_interface/ball_status_bar.4bpp.lz"
 	
-	
 	.align 2
 gUnknown_8E7BBB8:: @ 8E7BB88
 	.incbin "baserom.gba", 0xE7BB88, 0x400 @UNKNOWN
@@ -13755,7 +13753,6 @@ gFile_graphics_battle_anims_sprites_277_palette:: @ 8E7EDD8
 	.align 2
 gFile_graphics_battle_anims_sprites_277_sheet:: @ 8E7EE00
 	.incbin "graphics/battle_anims/sprites/277.4bpp.lz"
-
 
 	.align 2
 gFile_graphics_battle_anims_backgrounds_fog_tilemap:: @ 8E7F1F4

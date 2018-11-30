@@ -792,7 +792,7 @@ bool32 sub_81443D4(const struct MEventStruct_Unk1442CC * data)
     return TRUE;
 }
 
-u32 sub_8144418(const u16 * a0, const struct MEventStruct_Unk1442CC * a1)
+u32 sub_8144418(const u16 * a0, const struct MEventStruct_Unk1442CC * a1, void * unused)
 {
     if (a1->unk_14 == 0)
         return 0;
@@ -801,7 +801,7 @@ u32 sub_8144418(const u16 * a0, const struct MEventStruct_Unk1442CC * a1)
     return 2;
 }
 
-u32 sub_8144434(const u16 * a0, const struct MEventStruct_Unk1442CC * a1)
+u32 sub_8144434(const u16 * a0, const struct MEventStruct_Unk1442CC * a1, void * unused)
 {
     s32 r4 = a1->unk_44 - sub_8144184(&a1->unk_20, a1->unk_44);
     if (r4 == 0)

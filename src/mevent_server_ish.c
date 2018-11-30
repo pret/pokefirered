@@ -13,25 +13,24 @@
 
 extern u16 gBlockRecvBuffer[][128];
 
+struct mevent_cmd
+{
+    u32 instr;
+    u32 parameter;
+};
+
 struct mevent_srv_ish
 {
     u32 unk_00;
     u32 unk_04;
     u32 mainseqno;
     u32 unk_0C;
-    u32 unk_10;
+    u32 cmdidx;
     void * unk_14;
     void * unk_18;
-    void * unk_1C;
+    struct mevent_cmd * cmdBuffer;
     void * unk_20;
     struct mevent_srv_sub unk_24;
-};
-
-struct mevent_cmd
-{
-    u32 instr;
-    bool32 flag;
-    u32 parameter;
 };
 
 EWRAM_DATA struct mevent_srv_ish * gUnknown_203F3C0 = NULL;
@@ -85,7 +84,7 @@ void mevent_srv_ish_init(struct mevent_srv_ish * svr, u32 a1, u32 a2)
     svr->unk_0C = 0;
     svr->unk_14 = AllocZeroed(ME_SEND_BUF_SIZE);
     svr->unk_18 = AllocZeroed(ME_SEND_BUF_SIZE);
-    svr->unk_1C = AllocZeroed(ME_SEND_BUF_SIZE);
+    svr->cmdBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
     svr->unk_20 = AllocZeroed(0x40);
     sub_814485C(&svr->unk_24, a1, a2);
 }
@@ -94,14 +93,14 @@ void sub_8144BC0(struct mevent_srv_ish * svr)
 {
     Free(svr->unk_14);
     Free(svr->unk_18);
-    Free(svr->unk_1C);
+    Free(svr->cmdBuffer);
     Free(svr->unk_20);
 }
 
 void sub_8144BE4(struct mevent_srv_ish * svr)
 {
-    memcpy(svr->unk_1C, svr->unk_18, ME_SEND_BUF_SIZE);
-    svr->unk_10 = 0;
+    memcpy(svr->cmdBuffer, svr->unk_18, ME_SEND_BUF_SIZE);
+    svr->cmdidx = 0;
 }
 
 void sub_8144C00(struct mevent_srv_ish * svr, u32 a1, u32 a2)
@@ -111,12 +110,10 @@ void sub_8144C00(struct mevent_srv_ish * svr, u32 a1, u32 a2)
     sub_8144888(&svr->unk_24, a1, svr->unk_14, 4);
 }
 
-// funcs in array gUnknown_8466F60
-
 u32 sub_8144C34(struct mevent_srv_ish * svr)
 {
-    memcpy(svr->unk_1C, gUnknown_84687E0, ME_SEND_BUF_SIZE);
-    svr->unk_10 = 0;
+    memcpy(svr->cmdBuffer, gUnknown_84687E0, ME_SEND_BUF_SIZE);
+    svr->cmdidx = 0;
     svr->mainseqno = 4;
     svr->unk_0C = 0;
     return 0;
@@ -149,19 +146,19 @@ u32 sub_8144C80(struct mevent_srv_ish * svr)
 
 u32 sub_8144CA0(struct mevent_srv_ish * svr)
 {
-    u32 * r2 = (u32 *)svr->unk_1C + 2 * svr->unk_10;
-    ++svr->unk_10;
-    switch (r2[0])
+    struct mevent_cmd * cmd = &svr->cmdBuffer[svr->cmdidx];
+    ++svr->cmdidx;
+    switch (cmd->instr)
     {
         case 0:
             break;
         case 1:
-            svr->unk_04 = r2[1];
+            svr->unk_04 = cmd->parameter;
             svr->mainseqno = 1;
             svr->unk_0C = 0;
             break;
         case 2:
-            sub_81448AC(&svr->unk_24, r2[1], svr->unk_18);
+            sub_81448AC(&svr->unk_24, cmd->parameter, svr->unk_18);
             svr->mainseqno = 2;
             svr->unk_0C = 0;
             break;
@@ -175,7 +172,7 @@ u32 sub_8144CA0(struct mevent_srv_ish * svr)
             svr->unk_0C = 0;
             break;
         case 19:
-            sub_8144C00(svr, 0x12, GetGameStat(r2[1]));
+            sub_8144C00(svr, 0x12, GetGameStat(cmd->parameter));
             svr->mainseqno = 3;
             svr->unk_0C = 0;
             break;

@@ -1,18 +1,6 @@
 	.section .rodata
 
 	.align 2
-func_tbl:: @ 8467030
-	.4byte sub_8145080
-	.4byte sub_8145088
-	.4byte sub_814508C
-	.4byte sub_81450A8
-	.4byte sub_81450C4
-
-	.align 2
-gUnknown_8467044:: @ 8467044
-	.asciz "svr->mainseqno < NELEMS(func_tbl)"
-
-	.align 2
 gUnknown_8467068:: @ 8467068
 	.incbin "baserom.gba", 0x467068, 0x8
 

@@ -226,7 +226,7 @@ SECTIONS {
         asm/union_room_chat.o(.text);
         asm/help_system_812B1E0.o(.text);
         src/quest_log_battle.o(.text);
-        asm/fame_checker.o(.text);
+        src/fame_checker.o(.text);
         asm/menu2.o(.text);
         asm/oak_speech.o(.text);
         asm/tm_case.o(.text);
@@ -376,6 +376,8 @@ SECTIONS {
         data/data_83FECCC.o(.rodata.8453F6C);
         src/quest_log.o(.rodata);
         data/data_83FECCC.o(.rodata.8456C74);
+        src/fame_checker.o(.rodata);
+        data/data_845FD54.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
         data/data_8468C98.o(.rodata);

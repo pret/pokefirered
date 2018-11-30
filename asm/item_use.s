@@ -320,7 +320,7 @@ sub_80A1208: @ 80A1208
 	ldr r0, _080A1224 @ =gUnknown_203AD30
 	ldrh r0, [r0]
 	strh r0, [r1, 0x20]
-	ldr r1, _080A1228 @ =sub_8107EB8
+	ldr r1, _080A1228 @ =UseFameCheckerFromMenu
 	mov r0, sp
 	movs r2, 0
 	bl sub_80BEBEC
@@ -329,7 +329,7 @@ sub_80A1208: @ 80A1208
 	bx r0
 	.align 2, 0
 _080A1224: .4byte gUnknown_203AD30
-_080A1228: .4byte sub_8107EB8
+_080A1228: .4byte UseFameCheckerFromMenu
 	thumb_func_end sub_80A1208
 
 	thumb_func_start sub_80A122C
@@ -1045,14 +1045,14 @@ _080A17D0: .4byte sub_80A17E8
 	thumb_func_start sub_80A17D4
 sub_80A17D4: @ 80A17D4
 	push {lr}
-	ldr r1, _080A17E4 @ =sub_8107EB8
+	ldr r1, _080A17E4 @ =UseFameCheckerFromMenu
 	movs r0, 0
 	movs r2, 0
 	bl sub_81317F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A17E4: .4byte sub_8107EB8
+_080A17E4: .4byte UseFameCheckerFromMenu
 	thumb_func_end sub_80A17D4
 
 	thumb_func_start sub_80A17E8
@@ -1123,14 +1123,14 @@ _080A1868: .4byte sub_80A1880
 	thumb_func_start sub_80A186C
 sub_80A186C: @ 80A186C
 	push {lr}
-	ldr r1, _080A187C @ =sub_8107EB8
+	ldr r1, _080A187C @ =UseFameCheckerFromMenu
 	movs r0, 0
 	movs r2, 0
 	bl sub_813CD50
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A187C: .4byte sub_8107EB8
+_080A187C: .4byte UseFameCheckerFromMenu
 	thumb_func_end sub_80A186C
 
 	thumb_func_start sub_80A1880
@@ -1239,13 +1239,13 @@ _080A1948: .4byte sub_80A1960
 	thumb_func_start sub_80A194C
 sub_80A194C: @ 80A194C
 	push {lr}
-	ldr r1, _080A195C @ =sub_8107EB8
+	ldr r1, _080A195C @ =UseFameCheckerFromMenu
 	movs r0, 0
 	bl sub_815ABC4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A195C: .4byte sub_8107EB8
+_080A195C: .4byte UseFameCheckerFromMenu
 	thumb_func_end sub_80A194C
 
 	thumb_func_start sub_80A1960
@@ -1646,13 +1646,13 @@ _080A1CA8: .4byte sub_80A1CC0
 	thumb_func_start sub_80A1CAC
 sub_80A1CAC: @ 80A1CAC
 	push {lr}
-	ldr r1, _080A1CBC @ =sub_8107EB8
+	ldr r1, _080A1CBC @ =UseFameCheckerFromMenu
 	movs r0, 0
 	bl sub_80BFF50
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1CBC: .4byte sub_8107EB8
+_080A1CBC: .4byte UseFameCheckerFromMenu
 	thumb_func_end sub_80A1CAC
 
 	thumb_func_start sub_80A1CC0
@@ -1730,12 +1730,12 @@ _080A1D54: .4byte sub_80A1D68
 	thumb_func_start sub_80A1D58
 sub_80A1D58: @ 80A1D58
 	push {lr}
-	ldr r0, _080A1D64 @ =sub_8107EB8
-	bl sub_812C3AC
+	ldr r0, _080A1D64 @ =UseFameCheckerFromMenu
+	bl UseFameChecker
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1D64: .4byte sub_8107EB8
+_080A1D64: .4byte UseFameCheckerFromMenu
 	thumb_func_end sub_80A1D58
 
 	thumb_func_start sub_80A1D68
@@ -1752,7 +1752,7 @@ sub_80A1D68: @ 80A1D68
 	bl sub_80563F0
 	bl sub_80A1184
 	ldr r0, _080A1D98 @ =c2_exit_to_overworld_2_switch
-	bl sub_812C3AC
+	bl UseFameChecker
 	adds r0, r4, 0
 	bl DestroyTask
 _080A1D8E:

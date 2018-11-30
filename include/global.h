@@ -62,6 +62,15 @@
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
+// This macro is required to prevent the compiler from optimizing
+// a dpad up/down check in sub_812CAD8 (fame_checker.c).
+// We suspect it was used globally.
+// GameFreak never ceases to amaze.
+// TODO: Propagate use of this macro
+#define TEST_BUTTON(field, button) ({(field) & (button);})
+#define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
+#define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
+
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
@@ -88,6 +97,7 @@ enum LanguageId {
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
+#define PC_ITEMS_COUNT      30
 #define BAG_ITEMS_COUNT     42
 #define BAG_KEYITEMS_COUNT  30
 #define BAG_POKEBALLS_COUNT 13
@@ -479,8 +489,8 @@ struct DaycareMon
 struct DayCare
 {
     struct DaycareMon mons[DAYCARE_MON_COUNT];
-    u32 offspringPersonality;
-    u8 stepCounter;
+    u16 unk_118;
+    u8 unk_11A;
 };
 
 struct DayCareMail
@@ -563,11 +573,23 @@ struct QuestLog
     /*0x0668*/ u16 end[0];
 };
 
+#include "fame_checker.h"
+
+struct FameCheckerSaveData
+{
+	/*3a54*/ u16 pickState:2;
+	         u16 flavorTextFlags:12;
+	         u16 unk_0_E:2;
+};
+
 #define MAP_OBJECTS_COUNT  16
 #define BERRY_TREES_COUNT  128
 #define FLAGS_COUNT        288 // 300
 #define VARS_COUNT         256
 #define MAIL_COUNT         16
+
+#define NUM_EASY_CHAT_EXTRA_PHRASES 33
+#define EASY_CHAT_EXTRA_PHRASES_SIZE ((NUM_EASY_CHAT_EXTRA_PHRASES >> 3) + (NUM_EASY_CHAT_EXTRA_PHRASES % 8 ? 1 : 0))
 
 struct SaveBlock1
 {
@@ -587,36 +609,33 @@ struct SaveBlock1
     /*0x0290*/ u32 money;
     /*0x0294*/ u16 coins;
     /*0x0296*/ u16 registeredItem; // registered for use with SELECT button
-    /*0x0298*/ u8 filler298[0x78];
+    /*0x0298*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
     /*0x0310*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x03b8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
     /*0x0430*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     /*0x0464*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     /*0x054c*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x05F8*/ u8 seen1[DEX_FLAGS_NO];
-    /*0x062C*/ u8 filler_062c[12];
+	/*0x062C*/ u16 berryBlenderRecords[3]; // unused
+	/*0x0632*/ u8 field_632[6]; // unused?
     /*0x0638*/ u8 trainerRematchStepCounter;
-               u8 filler_639;
-    /*0x063A*/ u8 trainerRematches[100];
-    /*0x06A0*/  struct MapObject mapObjects[MAP_OBJECTS_COUNT];
-    /*0x08E0*/  struct MapObjectTemplate mapObjectTemplates[64];
+    /*0x063A*/ u8 ALIGNED(2) trainerRematches[100];
+    /*0x06A0*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
+    /*0x08E0*/ struct MapObjectTemplate mapObjectTemplates[64];
     /*0x0EE0*/ u8 flags[FLAGS_COUNT];
     /*0x1000*/ u16 vars[VARS_COUNT];
-    /*0x1200*/ u8 filler1200[0x100];
+    /*0x1200*/ u32 gameStats[NUM_GAME_STATS];
     /*0x1300*/ struct QuestLog questLog[4];
-    /*0x2CA0*/ u8 filler2CA0[0x30];
+	/*0x2CA0*/ u16 unk2CA0[6];
+	/*0x2CAC*/ u16 unk2CAC[6];
+	/*0x2CB8*/ u16 unk2CB8[6];
+	/*0x2CC4*/ u16 unk2CC4[6];
     /*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];
-    /*0x2F10*/ u8 filler2F10[0x184];
-               struct {
-    /*0x3094*/ u8 unknown1[8];
-    /*0x309C*/ u8 giftRibbons[11];
-    /*0x30A7*/ u8 unknown2[8];
-    /*0x30AF*/ u32 currentPokeCoupons;
-    /*0x30B3*/ u32 totalEarnedPokeCoupons;
-    /*0x30B7*/ u8 unknown3[6];
-    /*0x30BD*/ u8 receivedWishmakerJirachi;
-    /*0x30BE*/ u8 unknown4[18];
-    } __attribute__((packed)) externalReservedData;
+    /*0x2F10*/ u8 additionalPhrases[EASY_CHAT_EXTRA_PHRASES_SIZE];
+    /*0x2F18*/ OldMan oldMan; // unused
+    /*0x2F54*/ struct EasyChatPair easyChatPairs[5]; // unused
+    /*0x2F80*/ struct DayCare daycare;
+    /*0x309C*/ u8 giftRibbons[52];
     /*0x30D0*/ struct Roamer roamer;
     /*0x30EC*/ struct EnigmaBerry enigmaBerry;
     /*0x3120*/ u8 filler3120[0x340];
@@ -627,7 +646,8 @@ struct SaveBlock1
     /*0x3A14*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3A48*/ u8 filler_3a48[4];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
-    /*0x3A54*/ u8 filler3A54[0x2E4];
+    /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
+    /*0x3A94*/ u8 filler3A94[0x2A4];
                u32 unkArray[4][3];
 };
 

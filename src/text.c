@@ -17,7 +17,7 @@ extern void BlitBitmapRectToWindow(u8 windowId, const u8 *pixels, u16 srcX, u16 
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern void CopyWindowToVram(u8 windowId, u8 mode);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
-extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
+extern s32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
 extern void PlaySE(u16 songNum);
 extern u8* UnkTextUtil_GetPtrI(u8 a1);
 
@@ -1388,7 +1388,7 @@ _08005D6A:\n\
     .syntax divided");
 }
 
-u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
+s32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
 {
     int i;
     u8 width;
@@ -1479,7 +1479,7 @@ u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
     return (u8)(GetFontAttribute(fontId, 0) + letterSpacing) * width;
 }
 
-u32 (*GetFontWidthFunc(u8 glyphId))(u16 _glyphId, bool32 _isJapanese)
+s32 (*GetFontWidthFunc(u8 glyphId))(u16 _glyphId, bool32 _isJapanese)
 {
     u32 i;
 
@@ -1492,11 +1492,11 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16 _glyphId, bool32 _isJapanese)
     return NULL;
 }
 
-u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
+s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
     bool8 isJapanese;
     int minGlyphWidth;
-    u32 (*func)(u16 glyphId, bool32 isJapanese);
+    s32 (*func)(u16 glyphId, bool32 isJapanese);
     int localLetterSpacing;
     register u32 lineWidth asm("r5");
     u8 *bufferPointer;
@@ -1863,7 +1863,7 @@ void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
     }
 }
 
-u32 GetGlyphWidthFont0(u16 glyphId, bool32 isJapanese)
+s32 GetGlyphWidthFont0(u16 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return 8;
@@ -1896,7 +1896,7 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
     }
 }
 
-u32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese)
+s32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return 8;
@@ -1962,7 +1962,7 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
     }
 }
 
-u32 GetGlyphWidthFont2(u16 glyphId, bool32 isJapanese)
+s32 GetGlyphWidthFont2(u16 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
     {
@@ -2012,7 +2012,7 @@ void DecompressGlyphFont3(u16 glyphId, bool32 isJapanese)
         DecompressGlyphFont2(glyphId, isJapanese);
 }
 
-u32 GetGlyphWidthFont3(u16 glyphId, bool32 isJapanese)
+s32 GetGlyphWidthFont3(u16 glyphId, bool32 isJapanese)
 {
     if(isJapanese == TRUE)
         return 10;
@@ -2078,7 +2078,7 @@ void DecompressGlyphFont4(u16 glyphId, bool32 isJapanese)
     }
 }
 
-u32 GetGlyphWidthFont4(u16 glyphId, bool32 isJapanese)
+s32 GetGlyphWidthFont4(u16 glyphId, bool32 isJapanese)
 {
     if(isJapanese == TRUE)
     {
@@ -2149,7 +2149,7 @@ void DecompressGlyphFont5(u16 glyphId, bool32 isJapanese)
     }
 }
 
-u32 GetGlyphWidthFont5(u16 glyphId, bool32 isJapanese)
+s32 GetGlyphWidthFont5(u16 glyphId, bool32 isJapanese)
 {
     if(isJapanese == TRUE)
     {

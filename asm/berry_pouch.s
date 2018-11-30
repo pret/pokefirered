@@ -948,7 +948,7 @@ sub_813D4D0: @ 813D4D0
 	bl CopyWindowToVram
 	b _0813D52A
 _0813D514:
-	ldr r2, _0813D534 @ =gUnknown_841623B
+	ldr r2, _0813D534 @ =gFameCheckerText_ListMenuCursor
 	str r5, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -964,7 +964,7 @@ _0813D52A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813D534: .4byte gUnknown_841623B
+_0813D534: .4byte gFameCheckerText_ListMenuCursor
 	thumb_func_end sub_813D4D0
 
 	thumb_func_start sub_813D538

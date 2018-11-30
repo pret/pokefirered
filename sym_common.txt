@@ -324,11 +324,7 @@ gUnknown_3005E9C: @ 3005E9C
 gUnknown_3005EA0: @ 3005EA0
 	.space 0x10
 
-gUnknown_3005EB0: @ 3005EB0
-	.space 0x18
-
-gUnknown_3005EC8: @ 3005EC8
-	.space 0x4
+	.include "fame_checker.o"
 
 gUnknown_3005ECC: @ 3005ECC
 	.space 0x4

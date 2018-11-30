@@ -10348,7 +10348,7 @@ _0815579C:
 	ldr r0, [r3]
 	adds r0, r7
 	ldrb r0, [r0]
-	ldr r2, _08155860 @ =gUnknown_841623B
+	ldr r2, _08155860 @ =gFameCheckerText_ListMenuCursor
 	mov r1, r9
 	str r1, [sp]
 	str r5, [sp, 0x4]
@@ -10379,7 +10379,7 @@ _08155850: .4byte 0x00003009
 _08155854: .4byte gUnknown_841CDD7
 _08155858: .4byte gUnknown_8417938
 _0815585C: .4byte gUnknown_841793C
-_08155860: .4byte gUnknown_841623B
+_08155860: .4byte gFameCheckerText_ListMenuCursor
 _08155864: .4byte 0x00003014
 _08155868:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -10453,7 +10453,7 @@ _081558B0:
 	ldr r0, [r1]
 	adds r0, r4
 	ldrb r1, [r0]
-	ldr r2, _0815591C @ =gUnknown_841623B
+	ldr r2, _0815591C @ =gFameCheckerText_ListMenuCursor
 	cmp r7, 0x1
 	bne _08155920
 	mov r3, r8
@@ -10464,7 +10464,7 @@ _0815590C: .4byte 0x00003020
 _08155910: .4byte 0x00003009
 _08155914: .4byte gUnknown_8417938
 _08155918: .4byte gUnknown_841793C
-_0815591C: .4byte gUnknown_841623B
+_0815591C: .4byte gFameCheckerText_ListMenuCursor
 _08155920:
 	str r6, [sp]
 _08155922:

@@ -86,6 +86,8 @@ void npc_set_running_behaviour_etc(struct MapObject *, u8);
 u8 sub_80634F0(u8 direction);
 u8 sub_8063500(u8 a0);
 void sub_805F060(struct MapObject *mapObject, u8 a1);
+u8 sub_805EB44(u8, u8, s16, s16);
+void npc_paltag_set_load(u8 mode);
 
 // Exported data declarations
 

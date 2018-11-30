@@ -57,6 +57,7 @@ void sub_81422FC(void);
 void sub_812B484(void);
 void sub_814407C(void);
 void sub_81440B4(void);
+void sub_8144824(u32, u32, u32 *, s32);
 void sub_8144790(void);
 u8 sub_815D6B4(u8 *);
 
@@ -100,6 +101,8 @@ const u16 gUnknown_8466F00[] = {
 };
 
 struct MEvent_Str_1 gUnknown_3005ED0;
+
+bool32 gUnknown_203F3BC = FALSE;
 
 void sub_81435DC(struct MEvent_Str_1 *a0, size_t a1, const void * a2)
 {
@@ -839,10 +842,6 @@ s32 sub_814449C(const struct MEventStruct_Unk1442CC * a0)
     return sub_8144184(&a0->unk_20, a0->unk_44);
 }
 
-//TODO: Remove these later
-const char ALIGNED(4) gUnknown_8466F28[] = "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c";
-const char ALIGNED(4) gUnknown_8466F5C[] = "0";
-
 u16 sub_81444B0(const struct MEventStruct_Unk1442CC * a0, u32 command)
 {
     switch (command)
@@ -858,8 +857,7 @@ u16 sub_81444B0(const struct MEventStruct_Unk1442CC * a0, u32 command)
         case 4:
             return a0->unk_44;
         default:
-            AGBAssert(gUnknown_8466F28, 825, gUnknown_8466F5C, 1);
-            // AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c", 825);
+             AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c", 825);
             return 0;
     }
 }
@@ -888,8 +886,7 @@ void sub_814451C(u32 command)
         }
         if (dest == NULL)
         {
-            AGBAssert(gUnknown_8466F28, 868, gUnknown_8466F5C, 1);
-            // AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c", 868);
+             AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c", 868);
         }
         else if (++(*dest) > 999)
         {
@@ -947,6 +944,86 @@ u16 sub_81445C0(u32 command)
             break;
         }
     }
-    AGBAssert(gUnknown_8466F28, 913, gUnknown_8466F5C, 1);
+    AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c", 913);
     return 0;
+}
+
+void sub_81446C4(void)
+{
+    gUnknown_203F3BC = FALSE;
+}
+
+bool32 sub_81446D0(u16 a0)
+{
+    gUnknown_203F3BC = FALSE;
+    if (a0 == 0)
+        return FALSE;
+    if (!sub_8143FC8())
+        return FALSE;
+    if (gSaveBlock1Ptr->unk_3120.buffer_1c0.data.unk_00 != a0)
+        return FALSE;
+    gUnknown_203F3BC = TRUE;
+    return TRUE;
+}
+
+void sub_8144714(u32 a0, u32 a1)
+{
+    if (gUnknown_203F3BC)
+    {
+        switch (a0)
+        {
+            case 2:
+                sub_8144824(2, a1, gSaveBlock1Ptr->unk_3120.unk_344[1], 5);
+                break;
+            case 0:
+                sub_8144824(0, a1, gSaveBlock1Ptr->unk_3120.unk_344[0], 5);
+                break;
+            case 1:
+                sub_8144824(1, a1, gSaveBlock1Ptr->unk_3120.unk_344[0], 5);
+                break;
+            default:
+                 AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c", 988);
+        }
+    }
+}
+
+void sub_8144790(void)
+{
+    CpuFill32(0, gSaveBlock1Ptr->unk_3120.unk_344, sizeof(gSaveBlock1Ptr->unk_3120.unk_344));
+}
+
+bool32 sub_81447BC(u32 a0, u32 * a1, s32 size)
+{
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < size; i++)
+    {
+        if (a1[i] == a0)
+            break;
+    }
+    if (i == size)
+    {
+        for (j = size - 1; j > 0; j--)
+        {
+            a1[j] = a1[j - 1];
+        }
+        a1[0] = a0;
+        return TRUE;
+    }
+    else
+    {
+        for (j = i; j > 0; j--)
+        {
+            a1[j] = a1[j - 1];
+        }
+        a1[0] = a0;
+        return FALSE;
+    }
+}
+
+void sub_8144824(u32 a0, u32 a1, u32 * a2, s32 a3)
+{
+    if (sub_81447BC(a1, a2, a3))
+        sub_814451C(a0);
 }

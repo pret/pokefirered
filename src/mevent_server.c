@@ -109,7 +109,7 @@ static u32 ish_mainseq_1(struct mevent_srv_ish * svr)
 
 static u32 ish_mainseq_2(struct mevent_srv_ish * svr)
 {
-
+    // do recv
     if (mevent_srv_sub_recv(&svr->unk_24))
     {
         svr->mainseqno = 4;
@@ -120,6 +120,7 @@ static u32 ish_mainseq_2(struct mevent_srv_ish * svr)
 
 static u32 ish_mainseq_3(struct mevent_srv_ish * svr)
 {
+    // do send
     if (mevent_srv_sub_send(&svr->unk_24))
     {
         svr->mainseqno = 4;
@@ -130,6 +131,7 @@ static u32 ish_mainseq_3(struct mevent_srv_ish * svr)
 
 static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
 {
+    // process command
     struct mevent_cmd_ish * cmd = &svr->cmdBuffer[svr->cmdidx];
     ++svr->cmdidx;
     switch (cmd->instr)
@@ -235,6 +237,7 @@ static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
 
 static u32 ish_mainseq_5(struct mevent_srv_ish * svr)
 {
+    // wait unk_0C
     if (svr->unk_0C)
     {
         svr->mainseqno = 4;
@@ -245,6 +248,7 @@ static u32 ish_mainseq_5(struct mevent_srv_ish * svr)
 
 static u32 ish_mainseq_6(struct mevent_srv_ish * svr)
 {
+    // ???
     switch (svr->unk_0C)
     {
         case 0:
@@ -264,6 +268,7 @@ static u32 ish_mainseq_6(struct mevent_srv_ish * svr)
 
 static u32 ish_mainseq_7(struct mevent_srv_ish * svr)
 {
+    // exec arbitrary code
     u32 (*func)(u32 *, struct SaveBlock2 *, struct SaveBlock1 *) = (void *)gDecompressionBuffer;
     if (func(&svr->unk_04, gSaveBlock2Ptr, gSaveBlock1Ptr) == 1)
     {
@@ -361,33 +366,38 @@ static u32 sub_8145068(void * a0, void * a1)
         return 2;
 }
 
-static u32 sub_8145080(struct mevent_srv_common * svr)
+static u32 common_mainseq_0(struct mevent_srv_common * svr)
 {
+    // start
     svr->mainseqno = 4;
     return 0;
 }
 
-static u32 sub_8145088(struct mevent_srv_common * svr)
+static u32 common_mainseq_1(struct mevent_srv_common * svr)
 {
+    // done
     return 3;
 }
 
-static u32 sub_814508C(struct mevent_srv_common * svr)
+static u32 common_mainseq_2(struct mevent_srv_common * svr)
 {
+    // do recv
     if (mevent_srv_sub_recv(&svr->unk_38))
         svr->mainseqno = 4;
     return 1;
 }
 
-static u32 sub_81450A8(struct mevent_srv_common * svr)
+static u32 common_mainseq_3(struct mevent_srv_common * svr)
 {
+    // do send
     if (mevent_srv_sub_send(&svr->unk_38))
         svr->mainseqno = 4;
     return 1;
 }
 
-static u32 sub_81450C4(struct mevent_srv_common * svr)
+static u32 common_mainseq_4(struct mevent_srv_common * svr)
 {
+    // process command
     const struct mevent_cmd * cmd = &svr->cmdBuffer[svr->cmdidx];
     void * ptr;
     svr->cmdidx++;
@@ -532,11 +542,11 @@ static u32 sub_81450C4(struct mevent_srv_common * svr)
 }
 
 static u32 (*const func_tbl[])(struct mevent_srv_common *) = {
-    sub_8145080,
-    sub_8145088,
-    sub_814508C,
-    sub_81450A8,
-    sub_81450C4
+    common_mainseq_0,
+    common_mainseq_1,
+    common_mainseq_2,
+    common_mainseq_3,
+    common_mainseq_4
 };
 
 static u32 sub_8145600(struct mevent_srv_common * svr)

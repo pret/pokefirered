@@ -1707,8 +1707,7 @@ gUnknown_203F3B8: @ 203F3B8
 	.space 0x4
 
 	.include "src/mevent.o"
-	.include "src/mevent_server_sub.o"
-	.include "src/mevent_server_ish.o"
+	.include "src/mevent_server_helpers.o"
 	.include "src/mevent_server.o"
 
 gUnknown_203F3C8: @ 203F3C8

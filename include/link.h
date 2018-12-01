@@ -169,7 +169,7 @@ void sub_8007E24(void);
 void sub_8007E4C(void);
 u8 GetMultiplayerId(void);
 u8 bitmask_all_link_players_but_self(void);
-bool8 SendBlock(u8, void *, u16);
+bool8 SendBlock(u8, const void *, u16);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
 void ResetBlockReceivedFlag(u8);

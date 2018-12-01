@@ -244,8 +244,7 @@ SECTIONS {
         asm/mystery_gift_menu.o(.text);
         asm/link_rfu_4.o(.text);
         src/mevent.o(.text);
-        src/mevent_server_sub.o(.text);
-        src/mevent_server_ish.o(.text);
+        src/mevent_server_helpers.o(.text);
         src/mevent_server.o(.text);
         asm/mevent_8145654.o(.text);
         src/menews_jisan.o(.text);
@@ -381,8 +380,7 @@ SECTIONS {
         src/fame_checker.o(.rodata);
         data/data_845FD54.o(.rodata);
         src/mevent.o(.rodata);
-        src/mevent_server_sub.o(.rodata);
-        src/mevent_server_ish.o(.rodata);
+        src/mevent_server_helpers.o(.rodata);
         src/mevent_server.o(.rodata);
         data/data_8466FB8.o(.rodata);
         src/menews_jisan.o(.rodata);

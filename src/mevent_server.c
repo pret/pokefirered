@@ -11,42 +11,282 @@
 #include "mevent.h"
 #include "mevent_server.h"
 
-extern u16 gBlockRecvBuffer[][128];
-
-struct mevent_cmd
-{
-    u32 instr;
-    bool32 flag;
-    void * parameter;
-};
-
-struct mevent_srv_common
-{
-    u32 unk_00;
-    u32 unk_04;
-    u32 mainseqno;
-    u32 cmdidx;
-    const struct mevent_cmd * cmdBuffer;
-    void * unk_14;
-    struct MEventBuffer_32E0_Sub * unk_18;
-    struct MEventBuffer_3120_Sub * unk_1C;
-    struct MEventStruct_Unk1442CC * unk_20;
-    void * unk_24;
-    u32 unk_28;
-    void * unk_2C;
-    u32 unk_30;
-    void * unk_34;
-    struct mevent_srv_sub unk_38;
-};
-
+EWRAM_DATA struct mevent_srv_ish * gUnknown_203F3C0 = NULL;
 EWRAM_DATA struct mevent_srv_common * gUnknown_203F3C4 = NULL;
 
-void mevent_srv_init_common(struct mevent_srv_common *, const void *, u32, u32);
-void mevent_srv_free_resources(struct mevent_srv_common *);
-u32 sub_8145600(struct mevent_srv_common *);
+static void mevent_srv_ish_init(struct mevent_srv_ish *, u32, u32);
+static u32 mevent_srv_ish_exec(struct mevent_srv_ish *);
+static void sub_8144BC0(struct mevent_srv_ish *);
+static void mevent_srv_init_common(struct mevent_srv_common *, const void *, u32, u32);
+static void mevent_srv_free_resources(struct mevent_srv_common *);
+static u32 sub_8145600(struct mevent_srv_common *);
 
-extern const u8 gUnknown_8468B6C[];
-extern const u8 gUnknown_8468BCC[];
+void sub_8144AEC(void)
+{
+    gUnknown_203F3C0 = AllocZeroed(sizeof(struct mevent_srv_ish));
+    mevent_srv_ish_init(gUnknown_203F3C0, 1, 0);
+}
+
+u32 sub_8144B0C(u16 * a0)
+{
+    u32 result;
+    if (gUnknown_203F3C0 == NULL)
+        return 6;
+    result = mevent_srv_ish_exec(gUnknown_203F3C0);
+    if (result == 6)
+    {
+        *a0 = gUnknown_203F3C0->unk_04;
+        sub_8144BC0(gUnknown_203F3C0);
+        Free(gUnknown_203F3C0);
+        gUnknown_203F3C0 = NULL;
+    }
+    return result;
+}
+
+void sub_8144B48(void)
+{
+    gUnknown_203F3C0->unk_0C++;
+}
+
+void * sub_8144B58(void)
+{
+    return gUnknown_203F3C0->unk_20;
+}
+
+void sub_8144B64(u32 a0)
+{
+    gUnknown_203F3C0->unk_04 = a0;
+}
+
+static void mevent_srv_ish_init(struct mevent_srv_ish * svr, u32 a1, u32 a2)
+{
+    svr->unk_00 = 0;
+    svr->mainseqno = 0;
+    svr->unk_0C = 0;
+    svr->unk_14 = AllocZeroed(ME_SEND_BUF_SIZE);
+    svr->unk_18 = AllocZeroed(ME_SEND_BUF_SIZE);
+    svr->cmdBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
+    svr->unk_20 = AllocZeroed(0x40);
+    mevent_srv_sub_init(&svr->unk_24, a1, a2);
+}
+
+static void sub_8144BC0(struct mevent_srv_ish * svr)
+{
+    Free(svr->unk_14);
+    Free(svr->unk_18);
+    Free(svr->cmdBuffer);
+    Free(svr->unk_20);
+}
+
+static void sub_8144BE4(struct mevent_srv_ish * svr)
+{
+    memcpy(svr->cmdBuffer, svr->unk_18, ME_SEND_BUF_SIZE);
+    svr->cmdidx = 0;
+}
+
+static void sub_8144C00(struct mevent_srv_ish * svr, u32 a1, u32 a2)
+{
+    CpuFill32(0, svr->unk_14, ME_SEND_BUF_SIZE);
+    *(u32 *)svr->unk_14 = a2;
+    mevent_srv_sub_init_send(&svr->unk_24, a1, svr->unk_14, 4);
+}
+
+static u32 ish_mainseq_0(struct mevent_srv_ish * svr)
+{
+    // init
+    memcpy(svr->cmdBuffer, gUnknown_84687E0, ME_SEND_BUF_SIZE);
+    svr->cmdidx = 0;
+    svr->mainseqno = 4;
+    svr->unk_0C = 0;
+    return 0;
+}
+
+static u32 ish_mainseq_1(struct mevent_srv_ish * svr)
+{
+    // done
+    return 6;
+}
+
+static u32 ish_mainseq_2(struct mevent_srv_ish * svr)
+{
+
+    if (mevent_srv_sub_recv(&svr->unk_24))
+    {
+        svr->mainseqno = 4;
+        svr->unk_0C = 0;
+    }
+    return 1;
+}
+
+static u32 ish_mainseq_3(struct mevent_srv_ish * svr)
+{
+    if (mevent_srv_sub_send(&svr->unk_24))
+    {
+        svr->mainseqno = 4;
+        svr->unk_0C = 0;
+    }
+    return 1;
+}
+
+static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
+{
+    struct mevent_cmd_ish * cmd = &svr->cmdBuffer[svr->cmdidx];
+    ++svr->cmdidx;
+    switch (cmd->instr)
+    {
+        case 0:
+            break;
+        case 1:
+            svr->unk_04 = cmd->parameter;
+            svr->mainseqno = 1;
+            svr->unk_0C = 0;
+            break;
+        case 2:
+            mevent_srv_sub_init_recv(&svr->unk_24, cmd->parameter, svr->unk_18);
+            svr->mainseqno = 2;
+            svr->unk_0C = 0;
+            break;
+        case 3:
+            svr->mainseqno = 3;
+            svr->unk_0C = 0;
+            break;
+        case 20:
+            mevent_srv_sub_init_send(&svr->unk_24, 0x14, svr->unk_14, 0);
+            svr->mainseqno = 3;
+            svr->unk_0C = 0;
+            break;
+        case 19:
+            sub_8144C00(svr, 0x12, GetGameStat(cmd->parameter));
+            svr->mainseqno = 3;
+            svr->unk_0C = 0;
+            break;
+        case 6:
+            if (svr->unk_04 == 0)
+                sub_8144BE4(svr);
+            break;
+        case 7:
+            if (svr->unk_04 == 1)
+                sub_8144BE4(svr);
+            break;
+        case 4:
+            sub_8144BE4(svr);
+            break;
+        case 5:
+            memcpy(svr->unk_20, svr->unk_18, 0x40);
+            svr->mainseqno = 5;
+            svr->unk_0C = 0;
+            return 2;
+        case 11:
+            memcpy(svr->unk_20, svr->unk_18, 0x40);
+            svr->mainseqno = 5;
+            svr->unk_0C = 0;
+            return 3;
+        case 12:
+            memcpy(svr->unk_20, svr->unk_18, 0x40);
+            svr->mainseqno = 5;
+            svr->unk_0C = 0;
+            return 5;
+        case 13:
+            svr->mainseqno = 5;
+            svr->unk_0C = 0;
+            return 4;
+        case 8:
+            sub_81442CC(svr->unk_14);
+            mevent_srv_sub_init_send(&svr->unk_24, 0x11, svr->unk_14, 0x64);
+            break;
+        case 14:
+            sub_8144C00(svr, 0x13, svr->unk_04);
+            break;
+        case 10:
+            sub_8143F68(svr->unk_18);
+            break;
+        case 9:
+            if (!sub_8143EF4(svr->unk_18))
+            {
+                sub_8143DC8(svr->unk_18);
+                sub_8144C00(svr, 0x13, 0);
+            }
+            else
+                sub_8144C00(svr, 0x13, 1);
+            break;
+        case 15:
+            svr->mainseqno = 6;
+            svr->unk_0C = 0;
+            break;
+        case 16:
+            sub_8144254(svr->unk_18);
+            break;
+        case 17:
+            sub_8069EA4(svr->unk_18, 1000);
+            break;
+        case 18:
+            memcpy(gSaveBlock2Ptr->unk_4A0, svr->unk_18, 0xbc);
+            sub_80E7490();
+            break;
+        case 21:
+            memcpy(gDecompressionBuffer, svr->unk_18, ME_SEND_BUF_SIZE);
+            svr->mainseqno = 7;
+            svr->unk_0C = 0;
+            break;
+    }
+
+    return 1;
+}
+
+static u32 ish_mainseq_5(struct mevent_srv_ish * svr)
+{
+    if (svr->unk_0C)
+    {
+        svr->mainseqno = 4;
+        svr->unk_0C = 0;
+    }
+    return 1;
+}
+
+static u32 ish_mainseq_6(struct mevent_srv_ish * svr)
+{
+    switch (svr->unk_0C)
+    {
+        case 0:
+            sub_80DA89C(svr->unk_18);
+            ++svr->unk_0C;
+            break;
+        case 1:
+            if (!sub_80DA8B0(&svr->unk_04))
+            {
+                svr->mainseqno = 4;
+                svr->unk_0C = 0;
+            }
+            break;
+    }
+    return 1;
+}
+
+static u32 ish_mainseq_7(struct mevent_srv_ish * svr)
+{
+    u32 (*func)(u32 *, struct SaveBlock2 *, struct SaveBlock1 *) = (void *)gDecompressionBuffer;
+    if (func(&svr->unk_04, gSaveBlock2Ptr, gSaveBlock1Ptr) == 1)
+    {
+        svr->mainseqno = 4;
+        svr->unk_0C = 0;
+    }
+    return 1;
+}
+
+static u32 mevent_srv_ish_exec(struct mevent_srv_ish * svr)
+{
+    u32 (*funcs[])(struct mevent_srv_ish *) = {
+        ish_mainseq_0,
+        ish_mainseq_1,
+        ish_mainseq_2,
+        ish_mainseq_3,
+        ish_mainseq_4,
+        ish_mainseq_5,
+        ish_mainseq_6,
+        ish_mainseq_7
+    };
+    return funcs[svr->mainseqno](svr);
+}
 
 void sub_8144F1C(void)
 {
@@ -76,7 +316,7 @@ u32 sub_8144F64(u16 * a0)
     return result;
 }
 
-void mevent_srv_init_common(struct mevent_srv_common * svr, const void * a1, u32 a2, u32 a3)
+static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * a1, u32 a2, u32 a3)
 {
     svr->unk_00 = 0;
     svr->mainseqno = 0;
@@ -86,10 +326,10 @@ void mevent_srv_init_common(struct mevent_srv_common * svr, const void * a1, u32
     svr->unk_20 = AllocZeroed(100);
     svr->cmdBuffer = a1;
     svr->cmdidx = 0;
-    sub_814485C(&svr->unk_38, a2, a3);
+    mevent_srv_sub_init(&svr->unk_38, a2, a3);
 }
 
-void mevent_srv_free_resources(struct mevent_srv_common * svr)
+static void mevent_srv_free_resources(struct mevent_srv_common * svr)
 {
     Free(svr->unk_18);
     Free(svr->unk_1C);
@@ -97,13 +337,13 @@ void mevent_srv_free_resources(struct mevent_srv_common * svr)
     Free(svr->unk_20);
 }
 
-void sub_814501C(struct mevent_srv_common * svr, u32 a1, void * a2, u32 size)
+static void sub_814501C(struct mevent_srv_common * svr, u32 a1, void * a2, u32 size)
 {
      AGB_ASSERT_EX(size <= ME_SEND_BUF_SIZE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 257);
-    sub_8144888(&svr->unk_38, a1, a2, size);
+    mevent_srv_sub_init_send(&svr->unk_38, a1, a2, size);
 }
 
-void * sub_814505C(void * a0, void * a1)
+static void * sub_814505C(void * a0, void * a1)
 {
     if (a0 != NULL)
         return a0;
@@ -111,7 +351,7 @@ void * sub_814505C(void * a0, void * a1)
         return a1;
 }
 
-u32 sub_8145068(void * a0, void * a1)
+static u32 sub_8145068(void * a0, void * a1)
 {
     if (a1 < a0)
         return 0;
@@ -121,32 +361,32 @@ u32 sub_8145068(void * a0, void * a1)
         return 2;
 }
 
-u32 sub_8145080(struct mevent_srv_common * svr)
+static u32 sub_8145080(struct mevent_srv_common * svr)
 {
     svr->mainseqno = 4;
     return 0;
 }
 
-u32 sub_8145088(struct mevent_srv_common * svr)
+static u32 sub_8145088(struct mevent_srv_common * svr)
 {
     return 3;
 }
 
-u32 sub_814508C(struct mevent_srv_common * svr)
+static u32 sub_814508C(struct mevent_srv_common * svr)
 {
-    if (sub_8144844(&svr->unk_38))
+    if (mevent_srv_sub_recv(&svr->unk_38))
         svr->mainseqno = 4;
     return 1;
 }
 
-u32 sub_81450A8(struct mevent_srv_common * svr)
+static u32 sub_81450A8(struct mevent_srv_common * svr)
 {
-    if (sub_8144850(&svr->unk_38))
+    if (mevent_srv_sub_send(&svr->unk_38))
         svr->mainseqno = 4;
     return 1;
 }
 
-u32 sub_81450C4(struct mevent_srv_common * svr)
+static u32 sub_81450C4(struct mevent_srv_common * svr)
 {
     const struct mevent_cmd * cmd = &svr->cmdBuffer[svr->cmdidx];
     void * ptr;
@@ -164,7 +404,7 @@ u32 sub_81450C4(struct mevent_srv_common * svr)
             break;
         case 2:
             AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 364);
-            sub_81448AC(&svr->unk_38, cmd->flag, svr->unk_14);
+            mevent_srv_sub_init_recv(&svr->unk_38, cmd->flag, svr->unk_14);
             svr->mainseqno = 2;
             break;
         case 3:
@@ -299,7 +539,7 @@ static u32 (*const func_tbl[])(struct mevent_srv_common *) = {
     sub_81450C4
 };
 
-u32 sub_8145600(struct mevent_srv_common * svr)
+static u32 sub_8145600(struct mevent_srv_common * svr)
 {
     u32 response;
     AGB_ASSERT_EX(svr->mainseqno < NELEMS(func_tbl), "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 546);

@@ -115,16 +115,16 @@ static bool32 mevent_receive_func(struct mevent_srv_sub * svr)
         case 1:
             if (mevent_has_received(svr->recvPlayerNo))
             {
-                size_t r3 = svr->recvCounter * 252;
-                if (svr->recvSize - r3 <= 252)
+                size_t blocksiz = svr->recvCounter * 252;
+                if (svr->recvSize - blocksiz <= 252)
                 {
-                    mevent_recv_block(svr->recvPlayerNo, svr->recvBfr + r3, svr->recvSize - r3);
+                    mevent_recv_block(svr->recvPlayerNo, svr->recvBfr + blocksiz, svr->recvSize - blocksiz);
                     ++svr->recvCounter;
                     ++svr->seqno;
                 }
                 else
                 {
-                    mevent_recv_block(svr->recvPlayerNo, svr->recvBfr + r3, 252);
+                    mevent_recv_block(svr->recvPlayerNo, svr->recvBfr + blocksiz, 252);
                     ++svr->recvCounter;
                 }
                 mevent_reset_recv(svr->recvPlayerNo);
@@ -171,18 +171,18 @@ static bool32 mevent_send_func(struct mevent_srv_sub * svr)
             {
                 if (mevent_has_received(svr->sendPlayerNo))
                 {
-                    size_t r3;
+                    size_t blocksiz;
                     mevent_reset_recv(svr->sendPlayerNo);
-                    r3 = 252 * svr->sendCounter;
-                    if (svr->sendSize - r3 <= 252)
+                    blocksiz = 252 * svr->sendCounter;
+                    if (svr->sendSize - blocksiz <= 252)
                     {
-                        SendBlock(0, svr->sendBfr + r3, svr->sendSize - r3);
+                        SendBlock(0, svr->sendBfr + blocksiz, svr->sendSize - blocksiz);
                         ++svr->sendCounter;
                         ++svr->seqno;
                     }
                     else
                     {
-                        SendBlock(0, svr->sendBfr + r3, 252);
+                        SendBlock(0, svr->sendBfr + blocksiz, 252);
                         ++svr->sendCounter;
                     }
                 }

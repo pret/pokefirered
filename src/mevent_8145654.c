@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/species.h"
 #include "bg.h"
 #include "palette.h"
 #include "decompress.h"
@@ -11,7 +12,10 @@
 
 struct UnkStruct_8467FB8
 {
-    u16 ident;
+    u8 textPal1:4;
+    u8 textPal2:4;
+    u8 textPal3:4;
+    u8 textPal4:4;
     const u8 * tiles;
     const u8 * map;
     const u16 * pal;
@@ -27,14 +31,13 @@ struct UnkStruct_203F3C8_02DC
 struct UnkStruct_203F3C8
 {
     /*0000*/ struct MEventBuffer_32E0_Sub unk_0000;
-    /*014c*/ struct MEventBuffer_3430_Sub unk_014c;
+    /*014c*/ struct MEventBuffer_3430_Sub unk_014C;
     /*0170*/ const struct UnkStruct_8467FB8 * unk_0170;
     /*0174*/ u8 unk_0174;
     /*0175*/ u8 unk_0175;
-    /*0176*/ u16 unk_0176;
-    /*0178*/ u16 unk_0178;
-    /*017A*/ u16 unk_017A;
-    /*017C*/ u8 filler_017C[15];
+    /*0176*/ u16 unk_0176[3];
+    /*017C*/ u8 unk_017C;
+    /*017D*/ u8 filler_017D[14];
     /*018B*/ u8 unk_018B[41];
     /*01B4*/ u8 unk_01B4[41];
     /*01DD*/ u8 unk_01DD[7];
@@ -54,12 +57,15 @@ EWRAM_DATA struct UnkStruct_203F3C8 * gUnknown_203F3C8 = NULL;
 EWRAM_DATA struct UnkStruct_203F3CC * gUnknown_203F3CC = NULL;
 
 void sub_8145A98(void);
-void sub_8145D18(u8 bgId);
+void sub_8145D18(u8 whichWindow);
 void sub_8146060(void);
 void sub_81461D8(void);
 
+extern const struct TextColor gUnknown_8467068[2];
+extern const u8 gUnknown_8467070[3];
 extern const struct WindowTemplate gUnknown_8467074[3];
 
+extern const struct CompressedSpriteSheet gUnknown_8467F58;
 extern const struct UnkStruct_8467FB8 gUnknown_8467FB8[8];
 
 bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
@@ -70,7 +76,7 @@ bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_S
     if (gUnknown_203F3C8 == NULL)
         return FALSE;
     gUnknown_203F3C8->unk_0000 = *r5;
-    gUnknown_203F3C8->unk_014c = *r6;
+    gUnknown_203F3C8->unk_014C = *r6;
     if (gUnknown_203F3C8->unk_0000.unk_08_2 > 7)
         gUnknown_203F3C8->unk_0000.unk_08_2 = 0;
     if (gUnknown_203F3C8->unk_0000.unk_08_0 > 2)
@@ -112,9 +118,9 @@ s32 sub_814571C(void)
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
             decompress_and_copy_tile_data_to_vram(2, gUnknown_203F3C8->unk_0170->tiles, 0, 0x008, 0);
-            gUnknown_203F3C8->unk_0176 = AddWindow(&gUnknown_8467074[0]);
-            gUnknown_203F3C8->unk_0178 = AddWindow(&gUnknown_8467074[1]);
-            gUnknown_203F3C8->unk_017A = AddWindow(&gUnknown_8467074[2]);
+            gUnknown_203F3C8->unk_0176[0] = AddWindow(&gUnknown_8467074[0]);
+            gUnknown_203F3C8->unk_0176[1] = AddWindow(&gUnknown_8467074[1]);
+            gUnknown_203F3C8->unk_0176[2] = AddWindow(&gUnknown_8467074[2]);
             break;
         case 3:
             if (free_temp_tile_data_buffers_if_possible())
@@ -179,9 +185,9 @@ s32 sub_814593C(bool32 flag)
         case 3:
             HideBg(1);
             HideBg(2);
-            RemoveWindow(gUnknown_203F3C8->unk_017A);
-            RemoveWindow(gUnknown_203F3C8->unk_0178);
-            RemoveWindow(gUnknown_203F3C8->unk_0176);
+            RemoveWindow(gUnknown_203F3C8->unk_0176[2]);
+            RemoveWindow(gUnknown_203F3C8->unk_0176[1]);
+            RemoveWindow(gUnknown_203F3C8->unk_0176[0]);
             break;
         case 4:
             sub_81461D8();
@@ -235,9 +241,9 @@ void sub_8145A98(void)
             break;
         case 2:
             gUnknown_203F3C8->unk_02B1[00] = EOS;
-            sp0[0] = gUnknown_203F3C8->unk_014c.unk_00 < 999 ? gUnknown_203F3C8->unk_014c.unk_00 : 999;
-            sp0[1] = gUnknown_203F3C8->unk_014c.unk_02 < 999 ? gUnknown_203F3C8->unk_014c.unk_02 : 999;
-            sp0[2] = gUnknown_203F3C8->unk_014c.unk_04 < 999 ? gUnknown_203F3C8->unk_014c.unk_04 : 999;
+            sp0[0] = gUnknown_203F3C8->unk_014C.unk_00 < 999 ? gUnknown_203F3C8->unk_014C.unk_00 : 999;
+            sp0[1] = gUnknown_203F3C8->unk_014C.unk_02 < 999 ? gUnknown_203F3C8->unk_014C.unk_02 : 999;
+            sp0[2] = gUnknown_203F3C8->unk_014C.unk_04 < 999 ? gUnknown_203F3C8->unk_014C.unk_04 : 999;
             for (i = 0; i < 8; i++)
             {
                 memset(gUnknown_203F3C8->unk_02DC[i].unk_42, EOS, 4);
@@ -271,3 +277,74 @@ void sub_8145A98(void)
             }
     }
 }
+
+void sub_8145D18(u8 whichWindow)
+{
+    s8 sp0C = 0;
+    s32 windowId = gUnknown_203F3C8->unk_0176[whichWindow];
+    PutWindowTilemap(windowId);
+    FillWindowPixelBuffer(windowId, 0);
+    switch (whichWindow)
+    {
+        case 0:
+        {
+            s32 x;
+            box_print(windowId, 3, 0, 1, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_018B);
+            x = 160 - GetStringWidth(3, gUnknown_203F3C8->unk_01B4, GetFontAttribute(3, 2));
+            if (x < 0)
+                x = 0;
+            box_print(windowId, 3, x, 17, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01B4);
+            if (gUnknown_203F3C8->unk_0000.unk_04 != 0)
+            {
+                box_print(windowId, 2, 166, 17, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01DD);
+            }
+            break;
+        }
+        case 1:
+            for (; sp0C < 4; sp0C++)
+            {
+                box_print(windowId, 3, 0, 16 * sp0C + 2, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal2], 0, gUnknown_203F3C8->unk_01E4[sp0C]);
+            }
+            break;
+        case 2:
+            box_print(windowId, 3, 0, gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_0288);
+            if (gUnknown_203F3C8->unk_0000.unk_08_0 != 2)
+            {
+                box_print(windowId, 3, 0, 16 + gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02B1);
+            }
+            else
+            {
+                s32 x = 0;
+                s32 y = gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0] + 16;
+                s32 spacing = GetFontAttribute(3, 2);
+                for (; sp0C < gUnknown_203F3C8->unk_0175; sp0C++)
+                {
+                    box_print(windowId, 3, x, y, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_01);
+                    if (gUnknown_203F3C8->unk_02DC[sp0C].unk_42[0] != EOS)
+                    {
+                        x += GetStringWidth(3, gUnknown_203F3C8->unk_02DC[sp0C].unk_01, spacing);
+                        box_print(windowId, 2, x, y, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_42);
+                        x += GetStringWidth(3, gUnknown_203F3C8->unk_02DC[sp0C].unk_42, spacing) + gUnknown_203F3C8->unk_02DC[sp0C].unk_00;
+                    }
+                }
+            }
+            break;
+    }
+    CopyWindowToVram(windowId, 3);
+}
+
+/*
+void sub_8146060(void)
+{
+    gUnknown_203F3C8->unk_017C = 0xFF;
+    if (gUnknown_203F3C8->unk_014C.unk_06 != SPECIES_NONE)
+    {
+        gUnknown_203F3C8->unk_017C = sub_8096ECC(sub_8096FD4(gUnknown_203F3C8->unk_014C.unk_06), SpriteCallbackDummy, 0xDC, 0x14, 0, FALSE);
+        gSprites[gUnknown_203F3C8->unk_017C].oam.priority = 2;
+    }
+    if (gUnknown_203F3C8->unk_0000.unk_09 != 0 && gUnknown_203F3C8->unk_0000.unk_08_0 == 1)
+    {
+        sub_800F034(gUnknown_8467F58);
+    }
+}
+ */

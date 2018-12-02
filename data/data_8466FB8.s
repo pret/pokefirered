@@ -89,7 +89,10 @@ gUnknown_8467CAC::
 	.incbin "data/graphics/mevent/tilemap_467CAC.bin.lz"
 
 gUnknown_8467DF4::
-	.incbin "baserom.gba", 0x467DF4, 0x164
+	.incbin "baserom.gba", 0x467DF4, 0x100
+
+gUnknown_8467EF4::
+	.incbin "baserom.gba", 0x467EF4, 0x64
 
 gUnknown_8467F58:: @ 8467F58
 	.incbin "baserom.gba", 0x467F58, 0x8

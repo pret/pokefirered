@@ -1,3 +1,6 @@
+    .include "asm/macros.inc"
+    .include "constants/constants.inc"
+
 	.section .rodata
 
 	.align 2
@@ -34,11 +37,5 @@ gUnknown_8468050:: @ 8468050
 gUnknown_8468720:: @ 8468720
 	.incbin "baserom.gba", 0x468720, 0xC0
 
-gUnknown_84687E0:: @ 84687E0
-	.incbin "baserom.gba", 0x4687E0, 0x38C
-
-gUnknown_8468B6C:: @ 8468B6C
-	.incbin "baserom.gba", 0x468B6C, 0x60
-
-gUnknown_8468BCC:: @ 8468BCC
-	.incbin "baserom.gba", 0x468BCC, 0x90
+    .include "data/mevent/script_ish.inc"
+    .include "data/mevent/script_common.inc"

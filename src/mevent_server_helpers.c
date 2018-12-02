@@ -41,10 +41,10 @@ void mevent_srv_sub_init(struct mevent_srv_sub * svr, u32 sendPlayerNo, u32 recv
     svr->recvFunc = mevent_receive_func;
 }
 
-void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 a1, const void * src, u32 size)
+void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void * src, u32 size)
 {
     svr->seqno = 0;
-    svr->sendIdent = a1;
+    svr->sendIdent = ident;
     svr->sendCounter = 0;
     svr->sendCRC = 0;
     if (size != 0)

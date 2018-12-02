@@ -3176,7 +3176,10 @@ gUnknown_8459580:: @ 8459580
 	.incbin "baserom.gba", 0x459580, 0x8
 
 gUnknown_8459588:: @ 8459588
-	.incbin "baserom.gba", 0x459588, 0xAC
+	.incbin "baserom.gba", 0x459588, 0x64
+
+gUnknown_84595EC::
+	.incbin "baserom.gba", 0x4595EC, 0x48
 
 gUnknown_8459634:: @ 8459634
 	.incbin "baserom.gba", 0x459634, 0x8

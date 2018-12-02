@@ -11,84 +11,88 @@
 #include "mevent.h"
 #include "mevent_server.h"
 
-EWRAM_DATA struct mevent_srv_ish * gUnknown_203F3C0 = NULL;
-EWRAM_DATA struct mevent_srv_common * gUnknown_203F3C4 = NULL;
+EWRAM_DATA struct mevent_srv_ish * s_mevent_srv_ish_ptr = NULL;
+EWRAM_DATA struct mevent_srv_common * s_mevent_srv_common_ptr = NULL;
 
 static void mevent_srv_ish_init(struct mevent_srv_ish *, u32, u32);
 static u32 mevent_srv_ish_exec(struct mevent_srv_ish *);
-static void sub_8144BC0(struct mevent_srv_ish *);
+static void mevent_srv_ish_free_resources(struct mevent_srv_ish *);
 static void mevent_srv_init_common(struct mevent_srv_common *, const void *, u32, u32);
 static void mevent_srv_free_resources(struct mevent_srv_common *);
-static u32 sub_8145600(struct mevent_srv_common *);
+static u32 mevent_srv_exec_common(struct mevent_srv_common *);
 
-void sub_8144AEC(void)
+extern const u8 gUnknown_84687E0[];
+extern const struct mevent_cmd gUnknown_8468B6C[];
+extern const struct mevent_cmd gUnknown_8468BCC[];
+
+void mevent_srv_ish_do_init(void)
 {
-    gUnknown_203F3C0 = AllocZeroed(sizeof(struct mevent_srv_ish));
-    mevent_srv_ish_init(gUnknown_203F3C0, 1, 0);
+    s_mevent_srv_ish_ptr = AllocZeroed(sizeof(struct mevent_srv_ish));
+    mevent_srv_ish_init(s_mevent_srv_ish_ptr, 1, 0);
 }
 
-u32 sub_8144B0C(u16 * a0)
+u32 mevent_srv_ish_do_exec(u16 * a0)
 {
     u32 result;
-    if (gUnknown_203F3C0 == NULL)
+    if (s_mevent_srv_ish_ptr == NULL)
         return 6;
-    result = mevent_srv_ish_exec(gUnknown_203F3C0);
+    result = mevent_srv_ish_exec(s_mevent_srv_ish_ptr);
     if (result == 6)
     {
-        *a0 = gUnknown_203F3C0->unk_04;
-        sub_8144BC0(gUnknown_203F3C0);
-        Free(gUnknown_203F3C0);
-        gUnknown_203F3C0 = NULL;
+        *a0 = s_mevent_srv_ish_ptr->param;
+        mevent_srv_ish_free_resources(s_mevent_srv_ish_ptr);
+        Free(s_mevent_srv_ish_ptr);
+        s_mevent_srv_ish_ptr = NULL;
     }
     return result;
 }
 
-void sub_8144B48(void)
+void mevent_srv_ish_inc_flag(void)
 {
-    gUnknown_203F3C0->unk_0C++;
+    s_mevent_srv_ish_ptr->flag++;
 }
 
-void * sub_8144B58(void)
+void * mevent_srv_ish_get_buffer(void)
 {
-    return gUnknown_203F3C0->unk_20;
+    return s_mevent_srv_ish_ptr->buffer;
 }
 
-void sub_8144B64(u32 a0)
+void mevent_srv_ish_set_param(u32 a0)
 {
-    gUnknown_203F3C0->unk_04 = a0;
+    s_mevent_srv_ish_ptr->param = a0;
 }
 
-static void mevent_srv_ish_init(struct mevent_srv_ish * svr, u32 a1, u32 a2)
+static void mevent_srv_ish_init(struct mevent_srv_ish * svr, u32 sendPlayerNo, u32 recvPlayerNo)
 {
     svr->unk_00 = 0;
     svr->mainseqno = 0;
-    svr->unk_0C = 0;
-    svr->unk_14 = AllocZeroed(ME_SEND_BUF_SIZE);
-    svr->unk_18 = AllocZeroed(ME_SEND_BUF_SIZE);
+    svr->flag = 0;
+    svr->sendBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
+    svr->recvBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
     svr->cmdBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
-    svr->unk_20 = AllocZeroed(0x40);
-    mevent_srv_sub_init(&svr->unk_24, a1, a2);
+    svr->buffer = AllocZeroed(0x40);
+    mevent_srv_sub_init(&svr->manager, sendPlayerNo, recvPlayerNo);
 }
 
-static void sub_8144BC0(struct mevent_srv_ish * svr)
+static void mevent_srv_ish_free_resources(struct mevent_srv_ish * svr)
 {
-    Free(svr->unk_14);
-    Free(svr->unk_18);
+    Free(svr->sendBuffer);
+    Free(svr->recvBuffer);
     Free(svr->cmdBuffer);
-    Free(svr->unk_20);
+    Free(svr->buffer);
 }
 
-static void sub_8144BE4(struct mevent_srv_ish * svr)
+static void mevent_srv_ish_jmp_buffer(struct mevent_srv_ish * svr)
 {
-    memcpy(svr->cmdBuffer, svr->unk_18, ME_SEND_BUF_SIZE);
+    memcpy(svr->cmdBuffer, svr->recvBuffer, ME_SEND_BUF_SIZE);
     svr->cmdidx = 0;
 }
 
-static void sub_8144C00(struct mevent_srv_ish * svr, u32 a1, u32 a2)
+static void mevent_srv_ish_send_word(struct mevent_srv_ish * svr, u32 ident, u32 word)
 {
-    CpuFill32(0, svr->unk_14, ME_SEND_BUF_SIZE);
-    *(u32 *)svr->unk_14 = a2;
-    mevent_srv_sub_init_send(&svr->unk_24, a1, svr->unk_14, 4);
+    CpuFill32(0, svr->sendBuffer, ME_SEND_BUF_SIZE);
+    *(u32 *)svr->sendBuffer = word;
+    mevent_srv_sub_init_send(&svr->manager, ident, svr->sendBuffer, sizeof(u32));
 }
 
 static u32 ish_mainseq_0(struct mevent_srv_ish * svr)
@@ -97,7 +101,7 @@ static u32 ish_mainseq_0(struct mevent_srv_ish * svr)
     memcpy(svr->cmdBuffer, gUnknown_84687E0, ME_SEND_BUF_SIZE);
     svr->cmdidx = 0;
     svr->mainseqno = 4;
-    svr->unk_0C = 0;
+    svr->flag = 0;
     return 0;
 }
 
@@ -110,10 +114,10 @@ static u32 ish_mainseq_1(struct mevent_srv_ish * svr)
 static u32 ish_mainseq_2(struct mevent_srv_ish * svr)
 {
     // do recv
-    if (mevent_srv_sub_recv(&svr->unk_24))
+    if (mevent_srv_sub_recv(&svr->manager))
     {
         svr->mainseqno = 4;
-        svr->unk_0C = 0;
+        svr->flag = 0;
     }
     return 1;
 }
@@ -121,10 +125,10 @@ static u32 ish_mainseq_2(struct mevent_srv_ish * svr)
 static u32 ish_mainseq_3(struct mevent_srv_ish * svr)
 {
     // do send
-    if (mevent_srv_sub_send(&svr->unk_24))
+    if (mevent_srv_sub_send(&svr->manager))
     {
         svr->mainseqno = 4;
-        svr->unk_0C = 0;
+        svr->flag = 0;
     }
     return 1;
 }
@@ -139,96 +143,96 @@ static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
         case 0:
             break;
         case 1:
-            svr->unk_04 = cmd->parameter;
+            svr->param = cmd->parameter;
             svr->mainseqno = 1;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             break;
         case 2:
-            mevent_srv_sub_init_recv(&svr->unk_24, cmd->parameter, svr->unk_18);
+            mevent_srv_sub_init_recv(&svr->manager, cmd->parameter, svr->recvBuffer);
             svr->mainseqno = 2;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             break;
         case 3:
             svr->mainseqno = 3;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             break;
         case 20:
-            mevent_srv_sub_init_send(&svr->unk_24, 0x14, svr->unk_14, 0);
+            mevent_srv_sub_init_send(&svr->manager, 0x14, svr->sendBuffer, 0);
             svr->mainseqno = 3;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             break;
         case 19:
-            sub_8144C00(svr, 0x12, GetGameStat(cmd->parameter));
+            mevent_srv_ish_send_word(svr, 0x12, GetGameStat(cmd->parameter));
             svr->mainseqno = 3;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             break;
         case 6:
-            if (svr->unk_04 == 0)
-                sub_8144BE4(svr);
+            if (svr->param == 0)
+                mevent_srv_ish_jmp_buffer(svr);
             break;
         case 7:
-            if (svr->unk_04 == 1)
-                sub_8144BE4(svr);
+            if (svr->param == 1)
+                mevent_srv_ish_jmp_buffer(svr);
             break;
         case 4:
-            sub_8144BE4(svr);
+            mevent_srv_ish_jmp_buffer(svr);
             break;
         case 5:
-            memcpy(svr->unk_20, svr->unk_18, 0x40);
+            memcpy(svr->buffer, svr->recvBuffer, 0x40);
             svr->mainseqno = 5;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             return 2;
         case 11:
-            memcpy(svr->unk_20, svr->unk_18, 0x40);
+            memcpy(svr->buffer, svr->recvBuffer, 0x40);
             svr->mainseqno = 5;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             return 3;
         case 12:
-            memcpy(svr->unk_20, svr->unk_18, 0x40);
+            memcpy(svr->buffer, svr->recvBuffer, 0x40);
             svr->mainseqno = 5;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             return 5;
         case 13:
             svr->mainseqno = 5;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             return 4;
         case 8:
-            sub_81442CC(svr->unk_14);
-            mevent_srv_sub_init_send(&svr->unk_24, 0x11, svr->unk_14, 0x64);
+            sub_81442CC(svr->sendBuffer);
+            mevent_srv_sub_init_send(&svr->manager, 0x11, svr->sendBuffer, sizeof(struct MEventStruct_Unk1442CC));
             break;
         case 14:
-            sub_8144C00(svr, 0x13, svr->unk_04);
+            mevent_srv_ish_send_word(svr, 0x13, svr->param);
             break;
         case 10:
-            sub_8143F68(svr->unk_18);
+            sub_8143F68(svr->recvBuffer);
             break;
         case 9:
-            if (!sub_8143EF4(svr->unk_18))
+            if (!sub_8143EF4(svr->recvBuffer))
             {
-                sub_8143DC8(svr->unk_18);
-                sub_8144C00(svr, 0x13, 0);
+                sub_8143DC8(svr->recvBuffer);
+                mevent_srv_ish_send_word(svr, 0x13, 0);
             }
             else
-                sub_8144C00(svr, 0x13, 1);
+                mevent_srv_ish_send_word(svr, 0x13, 1);
             break;
         case 15:
             svr->mainseqno = 6;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             break;
         case 16:
-            sub_8144254(svr->unk_18);
+            sub_8144254(svr->recvBuffer);
             break;
         case 17:
-            sub_8069EA4(svr->unk_18, 1000);
+            sub_8069EA4(svr->recvBuffer, 1000);
             break;
         case 18:
-            memcpy(gSaveBlock2Ptr->unk_4A0, svr->unk_18, 0xbc);
+            memcpy(gSaveBlock2Ptr->unk_4A0, svr->recvBuffer, 0xbc);
             sub_80E7490();
             break;
         case 21:
-            memcpy(gDecompressionBuffer, svr->unk_18, ME_SEND_BUF_SIZE);
+            memcpy(gDecompressionBuffer, svr->recvBuffer, ME_SEND_BUF_SIZE);
             svr->mainseqno = 7;
-            svr->unk_0C = 0;
+            svr->flag = 0;
             break;
     }
 
@@ -237,11 +241,11 @@ static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
 
 static u32 ish_mainseq_5(struct mevent_srv_ish * svr)
 {
-    // wait unk_0C
-    if (svr->unk_0C)
+    // wait flag
+    if (svr->flag)
     {
         svr->mainseqno = 4;
-        svr->unk_0C = 0;
+        svr->flag = 0;
     }
     return 1;
 }
@@ -249,17 +253,17 @@ static u32 ish_mainseq_5(struct mevent_srv_ish * svr)
 static u32 ish_mainseq_6(struct mevent_srv_ish * svr)
 {
     // ???
-    switch (svr->unk_0C)
+    switch (svr->flag)
     {
         case 0:
-            sub_80DA89C(svr->unk_18);
-            ++svr->unk_0C;
+            sub_80DA89C(svr->recvBuffer);
+            ++svr->flag;
             break;
         case 1:
-            if (!sub_80DA8B0(&svr->unk_04))
+            if (!sub_80DA8B0(&svr->param))
             {
                 svr->mainseqno = 4;
-                svr->unk_0C = 0;
+                svr->flag = 0;
             }
             break;
     }
@@ -270,10 +274,10 @@ static u32 ish_mainseq_7(struct mevent_srv_ish * svr)
 {
     // exec arbitrary code
     u32 (*func)(u32 *, struct SaveBlock2 *, struct SaveBlock1 *) = (void *)gDecompressionBuffer;
-    if (func(&svr->unk_04, gSaveBlock2Ptr, gSaveBlock1Ptr) == 1)
+    if (func(&svr->param, gSaveBlock2Ptr, gSaveBlock1Ptr) == 1)
     {
         svr->mainseqno = 4;
-        svr->unk_0C = 0;
+        svr->flag = 0;
     }
     return 1;
 }
@@ -293,62 +297,62 @@ static u32 mevent_srv_ish_exec(struct mevent_srv_ish * svr)
     return funcs[svr->mainseqno](svr);
 }
 
-void sub_8144F1C(void)
+void mevent_srv_common_do_init_1(void)
 {
-    gUnknown_203F3C4 = AllocZeroed(sizeof(struct mevent_srv_common));
-    mevent_srv_init_common(gUnknown_203F3C4, gUnknown_8468B6C, 0, 1);
+    s_mevent_srv_common_ptr = AllocZeroed(sizeof(struct mevent_srv_common));
+    mevent_srv_init_common(s_mevent_srv_common_ptr, gUnknown_8468B6C, 0, 1);
 }
 
-void sub_8144F40(void)
+void mevent_srv_common_do_init_2(void)
 {
-    gUnknown_203F3C4 = AllocZeroed(sizeof(struct mevent_srv_common));
-    mevent_srv_init_common(gUnknown_203F3C4, gUnknown_8468BCC, 0, 1);
+    s_mevent_srv_common_ptr = AllocZeroed(sizeof(struct mevent_srv_common));
+    mevent_srv_init_common(s_mevent_srv_common_ptr, gUnknown_8468BCC, 0, 1);
 }
 
-u32 sub_8144F64(u16 * a0)
+u32 mevent_srv_init_do_exec(u16 * a0)
 {
     u32 result;
-    if (gUnknown_203F3C4 == NULL)
+    if (s_mevent_srv_common_ptr == NULL)
         return 3;
-    result = sub_8145600(gUnknown_203F3C4);
+    result = mevent_srv_exec_common(s_mevent_srv_common_ptr);
     if (result == 3)
     {
-        *a0 = gUnknown_203F3C4->unk_04;
-        mevent_srv_free_resources(gUnknown_203F3C4);
-        Free(gUnknown_203F3C4);
-        gUnknown_203F3C4 = NULL;
+        *a0 = s_mevent_srv_common_ptr->param;
+        mevent_srv_free_resources(s_mevent_srv_common_ptr);
+        Free(s_mevent_srv_common_ptr);
+        s_mevent_srv_common_ptr = NULL;
     }
     return result;
 }
 
-static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * a1, u32 a2, u32 a3)
+static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * cmdBuffer, u32 sendPlayerNo, u32 recvPlayerNo)
 {
     svr->unk_00 = 0;
     svr->mainseqno = 0;
-    svr->unk_18 = AllocZeroed(332);
-    svr->unk_1C = AllocZeroed(444);
-    svr->unk_14 = AllocZeroed(ME_SEND_BUF_SIZE);
-    svr->unk_20 = AllocZeroed(100);
-    svr->cmdBuffer = a1;
+    svr->mevent_32e0 = AllocZeroed(sizeof(struct MEventBuffer_32E0_Sub));
+    svr->mevent_3120 = AllocZeroed(sizeof(struct MEventBuffer_3120_Sub));
+    svr->recvBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
+    svr->mevent_unk1442cc = AllocZeroed(sizeof(struct MEventStruct_Unk1442CC));
+    svr->cmdBuffer = cmdBuffer;
     svr->cmdidx = 0;
-    mevent_srv_sub_init(&svr->unk_38, a2, a3);
+    mevent_srv_sub_init(&svr->manager, sendPlayerNo, recvPlayerNo);
 }
 
 static void mevent_srv_free_resources(struct mevent_srv_common * svr)
 {
-    Free(svr->unk_18);
-    Free(svr->unk_1C);
-    Free(svr->unk_14);
-    Free(svr->unk_20);
+    Free(svr->mevent_32e0);
+    Free(svr->mevent_3120);
+    Free(svr->recvBuffer);
+    Free(svr->mevent_unk1442cc);
 }
 
-static void sub_814501C(struct mevent_srv_common * svr, u32 a1, void * a2, u32 size)
+static void mevent_srv_common_init_send(struct mevent_srv_common * svr, u32 ident, const void * src, u32 size)
 {
      AGB_ASSERT_EX(size <= ME_SEND_BUF_SIZE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 257);
-    mevent_srv_sub_init_send(&svr->unk_38, a1, a2, size);
+    mevent_srv_sub_init_send(&svr->manager, ident, src, size);
 }
 
-static void * sub_814505C(void * a0, void * a1)
+static void * mevent_first_if_not_null_else_second(void * a0, void * a1)
 {
     if (a0 != NULL)
         return a0;
@@ -356,7 +360,7 @@ static void * sub_814505C(void * a0, void * a1)
         return a1;
 }
 
-static u32 sub_8145068(void * a0, void * a1)
+static u32 mevent_compare_pointers(void * a0, void * a1)
 {
     if (a1 < a0)
         return 0;
@@ -382,7 +386,7 @@ static u32 common_mainseq_1(struct mevent_srv_common * svr)
 static u32 common_mainseq_2(struct mevent_srv_common * svr)
 {
     // do recv
-    if (mevent_srv_sub_recv(&svr->unk_38))
+    if (mevent_srv_sub_recv(&svr->manager))
         svr->mainseqno = 4;
     return 1;
 }
@@ -390,7 +394,7 @@ static u32 common_mainseq_2(struct mevent_srv_common * svr)
 static u32 common_mainseq_3(struct mevent_srv_common * svr)
 {
     // do send
-    if (mevent_srv_sub_send(&svr->unk_38))
+    if (mevent_srv_sub_send(&svr->manager))
         svr->mainseqno = 4;
     return 1;
 }
@@ -407,14 +411,14 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         case 0:
             AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 354);
             svr->mainseqno = 1;
-            svr->unk_04 = cmd->flag;
+            svr->param = cmd->flag;
             break;
         case 1:
             svr->mainseqno = 3;
             break;
         case 2:
             AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 364);
-            mevent_srv_sub_init_recv(&svr->unk_38, cmd->flag, svr->unk_14);
+            mevent_srv_sub_init_recv(&svr->manager, cmd->flag, svr->recvBuffer);
             svr->mainseqno = 2;
             break;
         case 3:
@@ -425,15 +429,15 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         case 5:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 376);
             AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 377);
-            memcpy(svr->unk_20, svr->unk_14, 100);
+            memcpy(svr->mevent_unk1442cc, svr->recvBuffer, sizeof(struct MEventStruct_Unk1442CC));
             break;
         case 6:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 382);
             AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 383);
-            svr->unk_04 = sub_81443D4(svr->unk_20);
+            svr->param = sub_81443D4(svr->mevent_unk1442cc);
             break;
         case 4:
-            if (svr->unk_04 == cmd->flag)
+            if (svr->param == cmd->flag)
             {
                 svr->cmdidx = 0;
                 svr->cmdBuffer = cmd->parameter;
@@ -441,100 +445,100 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 7:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 396);
-            ptr = sub_814505C(cmd->parameter, svr->unk_18);
-            svr->unk_04 = sub_8144418(ptr, svr->unk_20, ptr);
+            ptr = mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_32e0);
+            svr->param = sub_8144418(ptr, svr->mevent_unk1442cc, ptr);
             break;
         case 8:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 402);
             AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 403);
-            svr->unk_04 = *(u32 *)svr->unk_14;
+            svr->param = *(u32 *)svr->recvBuffer;
             break;
         case 9:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 408);
-            ptr = sub_814505C(cmd->parameter, &svr->unk_34);
-            svr->unk_04 = sub_8144434(ptr, svr->unk_20, ptr);
+            ptr = mevent_first_if_not_null_else_second(cmd->parameter, &svr->sendWord);
+            svr->param = sub_8144434(ptr, svr->mevent_unk1442cc, ptr);
             break;
         case 10:
             AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 415);
-            svr->unk_04 = sub_81444B0(svr->unk_20, cmd->flag);
+            svr->param = sub_81444B0(svr->mevent_unk1442cc, cmd->flag);
             break;
         case 11:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 420);
-            svr->unk_04 = sub_8144474(svr->unk_20, cmd->parameter);
+            svr->param = sub_8144474(svr->mevent_unk1442cc, cmd->parameter);
             break;
         case 12:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 426);
-            svr->unk_04 = sub_8145068(cmd->parameter, *(void **)svr->unk_14);
+            svr->param = mevent_compare_pointers(cmd->parameter, *(void **)svr->recvBuffer);
             break;
         case 14:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 432);
-            sub_814501C(svr, 0x17, sub_814505C(cmd->parameter, svr->unk_1C), 444);
+            mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_3120), sizeof(struct MEventBuffer_3120_Sub));
             break;
         case 13:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 438);
-            sub_814501C(svr, 0x16, sub_814505C(cmd->parameter, svr->unk_18), 332);
+            mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_32e0), sizeof(struct MEventBuffer_32E0_Sub));
             break;
         case 16:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 444);
-            sub_814501C(svr, 0x18, sub_814505C(cmd->parameter, &svr->unk_34), 4);
+            mevent_srv_common_init_send(svr, 0x18, mevent_first_if_not_null_else_second(cmd->parameter, &svr->sendWord), 4);
             break;
         case 15:
             if (cmd->parameter == NULL)
-                sub_814501C(svr, 0x19, svr->unk_24, svr->unk_28);
+                mevent_srv_common_init_send(svr, 0x19, svr->sendBuffer1, svr->sendBuffer1Size);
             else
-                sub_814501C(svr, 0x19, cmd->parameter, cmd->flag);
+                mevent_srv_common_init_send(svr, 0x19, cmd->parameter, cmd->flag);
             break;
         case 18:
             if (cmd->parameter == NULL)
-                sub_814501C(svr, 0x10, svr->unk_2C, svr->unk_30);
+                mevent_srv_common_init_send(svr, 0x10, svr->sendBuffer2, svr->sendBuffer2Size);
             else
-                sub_814501C(svr, 0x10, cmd->parameter, cmd->flag);
+                mevent_srv_common_init_send(svr, 0x10, cmd->parameter, cmd->flag);
             break;
         case 19:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 466);
-            sub_814501C(svr, 0x1a, cmd->parameter, 188);
+            mevent_srv_common_init_send(svr, 0x1a, cmd->parameter, 188);
             break;
         case 20:
-            sub_814501C(svr, 0x15, cmd->parameter, cmd->flag);
+            mevent_srv_common_init_send(svr, 0x15, cmd->parameter, cmd->flag);
             break;
         case 17:
-            sub_814501C(svr, 0x1c, cmd->parameter, cmd->flag);
+            mevent_srv_common_init_send(svr, 0x1c, cmd->parameter, cmd->flag);
             break;
         case 22:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 481);
-            memcpy(svr->unk_18, cmd->parameter, 332);
+            memcpy(svr->mevent_32e0, cmd->parameter, 332);
             break;
         case 23:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 486);
-            memcpy(svr->unk_1C, cmd->parameter, 444);
+            memcpy(svr->mevent_3120, cmd->parameter, 444);
             break;
         case 21:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 491);
-            svr->unk_34 = *(void **)cmd->parameter;
+            svr->sendWord = *(u32 *)cmd->parameter;
             break;
         case 24:
-            svr->unk_24 = cmd->parameter;
-            svr->unk_28 = cmd->flag;
+            svr->sendBuffer1 = cmd->parameter;
+            svr->sendBuffer1Size = cmd->flag;
             break;
         case 25:
-            svr->unk_2C = cmd->parameter;
-            svr->unk_30 = cmd->flag;
+            svr->sendBuffer2 = cmd->parameter;
+            svr->sendBuffer2Size = cmd->flag;
             break;
         case 26:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 506);
-            memcpy(svr->unk_18, sav1_get_mevent_buffer_1(), 332);
-            sub_814410C(svr->unk_18);
+            memcpy(svr->mevent_32e0, sav1_get_mevent_buffer_1(), 332);
+            sub_814410C(svr->mevent_32e0);
             break;
         case 27:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 512);
-            memcpy(svr->unk_1C, sub_8143D58(), 444);
+            memcpy(svr->mevent_3120, sub_8143D58(), 444);
             break;
         case 28:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 517);
-            svr->unk_24 = sub_8069E48();
+            svr->sendBuffer1 = sub_8069E48();
             break;
         case 29:
-            sub_814501C(svr, 0x1b, cmd->parameter, cmd->flag);
+            mevent_srv_common_init_send(svr, 0x1b, cmd->parameter, cmd->flag);
             break;
     }
 
@@ -549,7 +553,7 @@ static u32 (*const func_tbl[])(struct mevent_srv_common *) = {
     common_mainseq_4
 };
 
-static u32 sub_8145600(struct mevent_srv_common * svr)
+static u32 mevent_srv_exec_common(struct mevent_srv_common * svr)
 {
     u32 response;
     AGB_ASSERT_EX(svr->mainseqno < NELEMS(func_tbl), "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 546);

@@ -40,15 +40,15 @@ struct mevent_cmd_ish
 struct mevent_srv_ish
 {
     u32 unk_00;
-    u32 unk_04;
+    u32 param;
     u32 mainseqno;
-    u32 unk_0C;
+    u32 flag;
     u32 cmdidx;
-    void * unk_14;
-    void * unk_18;
+    void * sendBuffer;
+    void * recvBuffer;
     struct mevent_cmd_ish * cmdBuffer;
-    void * unk_20;
-    struct mevent_srv_sub unk_24;
+    void * buffer;
+    struct mevent_srv_sub manager;
 };
 
 struct mevent_cmd
@@ -61,20 +61,20 @@ struct mevent_cmd
 struct mevent_srv_common
 {
     u32 unk_00;
-    u32 unk_04;
+    u32 param;
     u32 mainseqno;
     u32 cmdidx;
     const struct mevent_cmd * cmdBuffer;
-    void * unk_14;
-    struct MEventBuffer_32E0_Sub * unk_18;
-    struct MEventBuffer_3120_Sub * unk_1C;
-    struct MEventStruct_Unk1442CC * unk_20;
-    void * unk_24;
-    u32 unk_28;
-    void * unk_2C;
-    u32 unk_30;
-    void * unk_34;
-    struct mevent_srv_sub unk_38;
+    void * recvBuffer;
+    struct MEventBuffer_32E0_Sub * mevent_32e0;
+    struct MEventBuffer_3120_Sub * mevent_3120;
+    struct MEventStruct_Unk1442CC * mevent_unk1442cc;
+    void * sendBuffer1;
+    u32 sendBuffer1Size;
+    void * sendBuffer2;
+    u32 sendBuffer2Size;
+    u32 sendWord;
+    struct mevent_srv_sub manager;
 };
 
 u32 mevent_srv_sub_recv(struct mevent_srv_sub * svr);
@@ -83,17 +83,13 @@ void mevent_srv_sub_init(struct mevent_srv_sub * svr, u32 sendPlayerNo, u32 recv
 void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void * src, u32 size);
 void mevent_srv_sub_init_recv(struct mevent_srv_sub * svr, u32 ident, void * dest);
 
-void sub_8144AEC(void);
-u32 sub_8144B0C(u16 * a0);
-void sub_8144B48(void);
-void * sub_8144B58(void);
-void sub_8144B64(u32 a0);
-void sub_8144F1C(void);
-void sub_8144F40(void);
-u32 sub_8144F64(u16 * a0);
-
-extern const u8 gUnknown_84687E0[];
-extern const u8 gUnknown_8468B6C[];
-extern const u8 gUnknown_8468BCC[];
+void mevent_srv_ish_do_init(void);
+u32 mevent_srv_ish_do_exec(u16 * a0);
+void mevent_srv_ish_inc_flag(void);
+void * mevent_srv_ish_get_buffer(void);
+void mevent_srv_ish_set_param(u32 a0);
+void mevent_srv_common_do_init_1(void);
+void mevent_srv_common_do_init_2(void);
+u32 mevent_srv_init_do_exec(u16 * a0);
 
 #endif //GUARD_MEVENT_SERVER_H

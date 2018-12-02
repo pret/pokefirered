@@ -48,13 +48,7 @@ struct UnkStruct_203F3C8
     /*045C*/ u8 buffer_045C[0x1000];
 };
 
-struct UnkStruct_203F3CC
-{
-    /*0000*/ u8 filler_0000[0x13a4];
-};
-
 EWRAM_DATA struct UnkStruct_203F3C8 * gUnknown_203F3C8 = NULL;
-EWRAM_DATA struct UnkStruct_203F3CC * gUnknown_203F3CC = NULL;
 
 void sub_8145A98(void);
 void sub_8145D18(u8 whichWindow);
@@ -138,11 +132,11 @@ bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_S
         return FALSE;
     gUnknown_203F3C8->unk_0000 = *r5;
     gUnknown_203F3C8->unk_014C = *r6;
-    if (gUnknown_203F3C8->unk_0000.unk_08_2 > 7)
+    if (gUnknown_203F3C8->unk_0000.unk_08_2 >= NELEMS(gUnknown_8467FB8))
         gUnknown_203F3C8->unk_0000.unk_08_2 = 0;
-    if (gUnknown_203F3C8->unk_0000.unk_08_0 > 2)
+    if (gUnknown_203F3C8->unk_0000.unk_08_0 >= NELEMS(gUnknown_8467070))
         gUnknown_203F3C8->unk_0000.unk_08_0 = 0;
-    if (gUnknown_203F3C8->unk_0000.unk_09 > 7)
+    if (gUnknown_203F3C8->unk_0000.unk_09 > NELEMS(gUnknown_203F3C8->unk_017D))
         gUnknown_203F3C8->unk_0000.unk_09 = 0;
     gUnknown_203F3C8->unk_0170 = &gUnknown_8467FB8[gUnknown_203F3C8->unk_0000.unk_08_2];
     return TRUE;
@@ -444,4 +438,42 @@ void sub_81461D8(void)
         FreeSpriteTilesByTag(0x8000);
         FreeSpritePaletteByTag(0x8000);
     }
+}
+
+struct UnkStruct_8468720
+{
+    u8 unk0;
+    const void * unk4;
+    const void * unk8;
+    const void * unkC;
+};
+
+struct UnkStruct_203F3CC
+{
+    /*0000*/ struct MEventBuffer_3120_Sub unk_0000;
+    /*01bc*/ const struct UnkStruct_8468720 * unk_01BC;
+    /*01c0*/ u8 unk_01C0;
+    /*01c1*/ u8 unk_01C1;
+    /*01c2*/ u8 filler_01C2[0x11e2];
+};
+
+EWRAM_DATA struct UnkStruct_203F3CC * gUnknown_203F3CC = NULL;
+
+extern const struct TextColor gUnknown_8468038[2];
+extern const struct UnkStruct_8468720 gUnknown_8468720[8];
+extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8468050;
+
+bool32 sub_8146288(const struct MEventBuffer_3120_Sub * a0)
+{
+    if (a0 == NULL)
+        return FALSE;
+    gUnknown_203F3CC = AllocZeroed(sizeof(struct UnkStruct_203F3CC));
+    if (gUnknown_203F3CC == NULL)
+        return FALSE;
+    gUnknown_203F3CC->unk_0000 = *a0;
+    if (gUnknown_203F3CC->unk_0000.unk_03 >= NELEMS(gUnknown_8468720))
+        gUnknown_203F3CC->unk_0000.unk_03 = 0;
+    gUnknown_203F3CC->unk_01BC = &gUnknown_8468720[gUnknown_203F3CC->unk_0000.unk_03];
+    gUnknown_203F3CC->unk_01C1 = 0xFF;
+    return TRUE;
 }

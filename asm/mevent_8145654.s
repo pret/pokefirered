@@ -5,56 +5,6 @@
 
 	.text
 
-	@ file boundary maybe
-
-	thumb_func_start sub_8146288
-sub_8146288: @ 8146288
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _0814629E
-	ldr r5, =gUnknown_203F3CC
-	ldr r0, =0x000013a4
-	bl AllocZeroed
-	str r0, [r5]
-	cmp r0, 0
-	bne _081462AC
-_0814629E:
-	movs r0, 0
-	b _081462DC
-	.pool
-_081462AC:
-	movs r6, 0xDE
-	lsls r6, 1
-	adds r1, r4, 0
-	adds r2, r6, 0
-	bl memcpy
-	ldr r1, [r5]
-	ldrb r0, [r1, 0x3]
-	cmp r0, 0x7
-	bls _081462C4
-	movs r0, 0
-	strb r0, [r1, 0x3]
-_081462C4:
-	ldr r2, [r5]
-	adds r3, r2, r6
-	ldrb r0, [r2, 0x3]
-	lsls r0, 4
-	ldr r1, =gUnknown_8468720
-	adds r0, r1
-	str r0, [r3]
-	ldr r0, =0x000001c1
-	adds r1, r2, r0
-	movs r0, 0xFF
-	strb r0, [r1]
-	movs r0, 0x1
-_081462DC:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8146288
-
 	thumb_func_start sub_81462EC
 sub_81462EC: @ 81462EC
 	push {r4,lr}

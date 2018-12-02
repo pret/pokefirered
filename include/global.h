@@ -612,12 +612,16 @@ struct MEventBuffer_32E0_Sub
 {
 	u16 unk_00;
 	u16 unk_02;
-	u8 filler_04[4];
+	u32 unk_04;
 	u8 unk_08_0:2;
 	u8 unk_08_2:4;
 	u8 unk_08_6:2;
 	u8 unk_09;
-	u8 filler_0A[322];
+	u8 unk_0A[40];
+	u8 unk_32[40];
+	u8 unk_5A[4][40];
+	u8 unk_FA[40];
+	u8 unk_122[40];
 };
 
 struct MEventBuffer_32E0

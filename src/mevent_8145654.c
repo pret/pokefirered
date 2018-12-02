@@ -6,6 +6,7 @@
 #include "menu.h"
 #include "pokemon_icon.h"
 #include "mystery_gift_menu.h"
+#include "string_util.h"
 #include "mevent.h"
 
 struct UnkStruct_8467FB8
@@ -16,16 +17,31 @@ struct UnkStruct_8467FB8
     const u16 * pal;
 };
 
+struct UnkStruct_203F3C8_02DC
+{
+    u8 unk_00;
+    u8 unk_01[41];
+    u8 unk_42[4];
+};
+
 struct UnkStruct_203F3C8
 {
     /*0000*/ struct MEventBuffer_32E0_Sub unk_0000;
     /*014c*/ struct MEventBuffer_3430_Sub unk_014c;
     /*0170*/ const struct UnkStruct_8467FB8 * unk_0170;
     /*0174*/ u8 unk_0174;
+    /*0175*/ u8 unk_0175;
     /*0176*/ u16 unk_0176;
     /*0178*/ u16 unk_0178;
     /*017A*/ u16 unk_017A;
-    /*017C*/ u8 filler_0178[0x2E0];
+    /*017C*/ u8 filler_017C[15];
+    /*018B*/ u8 unk_018B[41];
+    /*01B4*/ u8 unk_01B4[41];
+    /*01DD*/ u8 unk_01DD[7];
+    /*01E4*/ u8 unk_01E4[4][41];
+    /*0288*/ u8 unk_0288[41];
+    /*02B1*/ u8 unk_02B1[41];
+    /*02DC*/ struct UnkStruct_203F3C8_02DC unk_02DC[8];
     /*045C*/ u8 buffer_045C[0x1000];
 };
 
@@ -186,4 +202,72 @@ s32 sub_814593C(bool32 flag)
     }
     ++gUnknown_203F3C8->unk_0174;
     return 0;
+}
+
+void sub_8145A98(void)
+{
+    u16 i = 0;
+    u16 r6;
+    u16 sp0[3] = {0, 0, 0};
+
+    memcpy(gUnknown_203F3C8->unk_018B, gUnknown_203F3C8->unk_0000.unk_0A, 40);
+    gUnknown_203F3C8->unk_018B[40] = EOS;
+    memcpy(gUnknown_203F3C8->unk_01B4, gUnknown_203F3C8->unk_0000.unk_32, 40);
+    gUnknown_203F3C8->unk_01B4[40] = EOS;
+    if (gUnknown_203F3C8->unk_0000.unk_04 > 999999)
+        gUnknown_203F3C8->unk_0000.unk_04 = 999999;
+    ConvertIntToDecimalStringN(gUnknown_203F3C8->unk_01DD, gUnknown_203F3C8->unk_0000.unk_04, STR_CONV_MODE_LEFT_ALIGN, 6);
+    for (i = 0; i < 4; i++)
+    {
+        memcpy(gUnknown_203F3C8->unk_01E4[i], gUnknown_203F3C8->unk_0000.unk_5A[i], 40);
+        gUnknown_203F3C8->unk_01E4[i][40] = EOS;
+    }
+    memcpy(gUnknown_203F3C8->unk_0288, gUnknown_203F3C8->unk_0000.unk_FA, 40);
+    gUnknown_203F3C8->unk_0288[40] = EOS;
+    switch (gUnknown_203F3C8->unk_0000.unk_08_0)
+    {
+        case 0:
+            memcpy(gUnknown_203F3C8->unk_02B1, gUnknown_203F3C8->unk_0000.unk_122, 40);
+            gUnknown_203F3C8->unk_02B1[40] = EOS;
+            break;
+        case 1:
+            gUnknown_203F3C8->unk_02B1[00] = EOS;
+            break;
+        case 2:
+            gUnknown_203F3C8->unk_02B1[00] = EOS;
+            sp0[0] = gUnknown_203F3C8->unk_014c.unk_00 < 999 ? gUnknown_203F3C8->unk_014c.unk_00 : 999;
+            sp0[1] = gUnknown_203F3C8->unk_014c.unk_02 < 999 ? gUnknown_203F3C8->unk_014c.unk_02 : 999;
+            sp0[2] = gUnknown_203F3C8->unk_014c.unk_04 < 999 ? gUnknown_203F3C8->unk_014c.unk_04 : 999;
+            for (i = 0; i < 8; i++)
+            {
+                memset(gUnknown_203F3C8->unk_02DC[i].unk_42, EOS, 4);
+                memset(gUnknown_203F3C8->unk_02DC[i].unk_01, EOS, 41);
+            }
+            for (i = 0, r6 = 0; i < 40; i++)
+            {
+                if (gUnknown_203F3C8->unk_0000.unk_122[i] != 0xF7)
+                {
+                    gUnknown_203F3C8->unk_02DC[gUnknown_203F3C8->unk_0175].unk_01[r6] = gUnknown_203F3C8->unk_0000.unk_122[i];
+                    r6++;
+                }
+                else
+                {
+                    u8 r3 = gUnknown_203F3C8->unk_0000.unk_122[i + 1];
+                    if (r3 > 2)
+                    {
+                        i += 2;
+                    }
+                    else
+                    {
+                        ConvertIntToDecimalStringN(gUnknown_203F3C8->unk_02DC[gUnknown_203F3C8->unk_0175].unk_42, sp0[r3], STR_CONV_MODE_LEADING_ZEROS, 3);
+                        gUnknown_203F3C8->unk_02DC[gUnknown_203F3C8->unk_0175].unk_00 = gUnknown_203F3C8->unk_0000.unk_122[i + 2];
+                        gUnknown_203F3C8->unk_0175++;
+                        if (gUnknown_203F3C8->unk_0175 > 7)
+                            break;
+                        r6 = 0;
+                        i += 2;
+                    }
+                }
+            }
+    }
 }

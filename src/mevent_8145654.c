@@ -61,14 +61,73 @@ void sub_8145D18(u8 whichWindow);
 void sub_8146060(void);
 void sub_81461D8(void);
 
-extern const struct TextColor gUnknown_8467068[2];
-extern const u8 gUnknown_8467070[3];
-extern const struct WindowTemplate gUnknown_8467074[3];
+extern const struct OamData gUnknown_83AC9F8;
 
-extern const struct CompressedSpriteSheet gUnknown_8467F58;
-extern const struct SpritePalette gUnknown_8467F60[];
-extern const struct UnkStruct_8467FB8 gUnknown_8467FB8[8];
-extern const struct SpriteTemplate gUnknown_8467FA0;
+const struct TextColor gUnknown_8467068[] = {
+    {0, 2, 3},
+    {0, 1, 2}
+};
+const u8 ALIGNED(4) gUnknown_8467070[3] = {7, 4, 7};
+const struct WindowTemplate gUnknown_8467074[] = {
+    {0x01, 0x01, 0x01, 0x19, 0x04, 0x0f, 0x029c},
+    {0x01, 0x01, 0x06, 0x1c, 0x08, 0x0f, 0x01bc},
+    {0x01, 0x01, 0x0e, 0x1c, 0x05, 0x0f, 0x0130}
+};
+
+const u16 gUnknown_846708C[] = INCBIN_U16("data/graphics/mevent/pal_46708C.gbapal");
+const u16 gUnknown_84670AC[] = INCBIN_U16("data/graphics/mevent/pal_4670AC.gbapal");
+const u16 gUnknown_84670CC[] = INCBIN_U16("data/graphics/mevent/pal_4670CC.gbapal");
+const u16 gUnknown_84670EC[] = INCBIN_U16("data/graphics/mevent/pal_4670EC.gbapal");
+const u16 gUnknown_846710C[] = INCBIN_U16("data/graphics/mevent/pal_46710C.gbapal");
+const u16 gUnknown_846712C[] = INCBIN_U16("data/graphics/mevent/pal_46712C.gbapal");
+const u16 gUnknown_846714C[] = INCBIN_U16("data/graphics/mevent/pal_46714C.gbapal");
+const u16 gUnknown_846716C[] = INCBIN_U16("data/graphics/mevent/pal_46716C.gbapal");
+const u8 gUnknown_846718C[] = INCBIN_U8("data/graphics/mevent/gfx_46718C.4bpp.lz");
+const u8 gUnknown_8467288[] = INCBIN_U8("data/graphics/mevent/tilemap_467288.bin.lz");
+const u8 gUnknown_846737C[] = INCBIN_U8("data/graphics/mevent/gfx_46737C.4bpp.lz");
+const u8 gUnknown_8467470[] = INCBIN_U8("data/graphics/mevent/tilemap_467470.bin.lz");
+const u8 gUnknown_8467558[] = INCBIN_U8("data/graphics/mevent/gfx_467558.4bpp.lz");
+const u8 gUnknown_846762C[] = INCBIN_U8("data/graphics/mevent/tilemap_46762C.bin.lz");
+const u8 gUnknown_8467700[] = INCBIN_U8("data/graphics/mevent/gfx_467700.4bpp.lz");
+const u8 gUnknown_8467934[] = INCBIN_U8("data/graphics/mevent/tilemap_467934.bin.lz");
+const u8 gUnknown_8467A7C[] = INCBIN_U8("data/graphics/mevent/gfx_467A7C.4bpp.lz");
+const u8 gUnknown_8467CAC[] = INCBIN_U8("data/graphics/mevent/tilemap_467CAC.bin.lz");
+const u16 gUnknown_8467DF4[] = INCBIN_U16("data/graphics/mevent/pal_467DF4.gbapal");
+const u16 gUnknown_8467E14[] = INCBIN_U16("data/graphics/mevent/pal_467E14.gbapal");
+const u16 gUnknown_8467E34[] = INCBIN_U16("data/graphics/mevent/pal_467E34.gbapal");
+const u16 gUnknown_8467E54[] = INCBIN_U16("data/graphics/mevent/pal_467E54.gbapal");
+const u16 gUnknown_8467E74[] = INCBIN_U16("data/graphics/mevent/pal_467E74.gbapal");
+const u16 gUnknown_8467E94[] = INCBIN_U16("data/graphics/mevent/pal_467E94.gbapal");
+const u16 gUnknown_8467EB4[] = INCBIN_U16("data/graphics/mevent/pal_467EB4.gbapal");
+const u16 gUnknown_8467ED4[] = INCBIN_U16("data/graphics/mevent/pal_467ED4.gbapal");
+const u8 gUnknown_8467EF4[] = INCBIN_U8("data/graphics/mevent/gfx_467F58.4bpp.lz");
+
+const struct CompressedSpriteSheet gUnknown_8467F58 = {
+    gUnknown_8467EF4, 0x100, 0x8000
+};
+const struct SpritePalette gUnknown_8467F60[] = {
+    {gUnknown_8467DF4, 0x8000},
+    {gUnknown_8467E14, 0x8000},
+    {gUnknown_8467E34, 0x8000},
+    {gUnknown_8467E54, 0x8000},
+    {gUnknown_8467E74, 0x8000},
+    {gUnknown_8467E94, 0x8000},
+    {gUnknown_8467EB4, 0x8000},
+    {gUnknown_8467ED4, 0x8000}
+};
+const struct SpriteTemplate gUnknown_8467FA0 = {
+    0x8000, 0x8000, &gUnknown_83AC9F8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+const struct UnkStruct_8467FB8 gUnknown_8467FB8[8] = {
+    {1, 0, 0, 0, gUnknown_846718C, gUnknown_8467288, gUnknown_846708C},
+    {1, 0, 0, 1, gUnknown_846737C, gUnknown_8467470, gUnknown_84670AC},
+    {1, 0, 0, 2, gUnknown_8467558, gUnknown_846762C, gUnknown_84670CC},
+    {1, 0, 0, 3, gUnknown_8467558, gUnknown_846762C, gUnknown_84670EC},
+    {1, 0, 0, 4, gUnknown_8467558, gUnknown_846762C, gUnknown_846710C},
+    {1, 0, 0, 5, gUnknown_8467558, gUnknown_846762C, gUnknown_846712C},
+    {1, 0, 0, 6, gUnknown_8467700, gUnknown_8467934, gUnknown_846714C},
+    {1, 0, 0, 7, gUnknown_8467A7C, gUnknown_8467CAC, gUnknown_846716C}
+};
 
 bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
 {

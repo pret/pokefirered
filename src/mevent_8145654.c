@@ -361,3 +361,28 @@ void sub_8146060(void)
         }
     }
 }
+
+void sub_81461D8(void)
+{
+    u8 r6 = 0;
+    if (gUnknown_203F3C8->unk_017C != 0xFF)
+        sub_8097070(&gSprites[gUnknown_203F3C8->unk_017C]);
+    if (gUnknown_203F3C8->unk_0000.unk_09 != 0 && gUnknown_203F3C8->unk_0000.unk_08_0 == 1)
+    {
+        for (; r6 < gUnknown_203F3C8->unk_0000.unk_09; r6++)
+        {
+            if (gUnknown_203F3C8->unk_017D[r6][0] != 0xFF)
+            {
+                DestroySprite(&gSprites[gUnknown_203F3C8->unk_017D[r6][0]]);
+                // This might be a typo.  Uncomment the next line, and comment the one that follows, to get the presumed intended behavior.
+                // if (gUnknown_203F3C8->unk_017D[r6][1] != 0xFF)
+                if (gUnknown_203F3C8->unk_017D[r6][0] != 0xFF)
+                {
+                    sub_8097070(&gSprites[gUnknown_203F3C8->unk_017D[r6][1]]);
+                }
+            }
+        }
+        FreeSpriteTilesByTag(0x8000);
+        FreeSpritePaletteByTag(0x8000);
+    }
+}

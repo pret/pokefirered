@@ -14,5 +14,6 @@ void sub_809707C(void);
 void FreeMonIconPalettes(void);
 u16 sub_8096FD4(u16);
 u8 sub_8096ECC(u16, void (*)(struct Sprite *), s16, s16, u8, bool32);
+void sub_8097070(struct Sprite *);
 
 #endif // GUARD_POKEMON_ICON_H

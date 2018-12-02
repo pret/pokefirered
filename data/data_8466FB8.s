@@ -89,16 +89,45 @@ gUnknown_8467CAC::
 	.incbin "data/graphics/mevent/tilemap_467CAC.bin.lz"
 
 gUnknown_8467DF4::
-	.incbin "baserom.gba", 0x467DF4, 0x100
+	.incbin "data/graphics/mevent/pal_467DF4.gbapal"
+
+gUnknown_8467E14::
+	.incbin "data/graphics/mevent/pal_467E14.gbapal"
+
+gUnknown_8467E34::
+	.incbin "data/graphics/mevent/pal_467E34.gbapal"
+
+gUnknown_8467E54::
+	.incbin "data/graphics/mevent/pal_467E54.gbapal"
+
+gUnknown_8467E74::
+	.incbin "data/graphics/mevent/pal_467E74.gbapal"
+
+gUnknown_8467E94::
+	.incbin "data/graphics/mevent/pal_467E94.gbapal"
+
+gUnknown_8467EB4::
+	.incbin "data/graphics/mevent/pal_467EB4.gbapal"
+
+gUnknown_8467ED4::
+	.incbin "data/graphics/mevent/pal_467ED4.gbapal"
 
 gUnknown_8467EF4::
-	.incbin "baserom.gba", 0x467EF4, 0x64
+	.incbin "data/graphics/mevent/gfx_467F58.4bpp.lz"
 
 gUnknown_8467F58:: @ 8467F58
-	.incbin "baserom.gba", 0x467F58, 0x8
+	.4byte gUnknown_8467EF4
+	.2byte 0x0100, 0x8000
 
 gUnknown_8467F60:: @ 8467F60
-	.incbin "baserom.gba", 0x467F60, 0x40
+	obj_pal gUnknown_8467DF4, 0x8000
+	obj_pal gUnknown_8467E14, 0x8000
+	obj_pal gUnknown_8467E34, 0x8000
+	obj_pal gUnknown_8467E54, 0x8000
+	obj_pal gUnknown_8467E74, 0x8000
+	obj_pal gUnknown_8467E94, 0x8000
+	obj_pal gUnknown_8467EB4, 0x8000
+	obj_pal gUnknown_8467ED4, 0x8000
 
 gUnknown_8467FA0:: @ 8467FA0
 	.incbin "baserom.gba", 0x467FA0, 0x18

@@ -37,7 +37,7 @@ struct UnkStruct_203F3C8
     /*0175*/ u8 unk_0175;
     /*0176*/ u16 unk_0176[3];
     /*017C*/ u8 unk_017C;
-    /*017D*/ u8 filler_017D[14];
+    /*017D*/ u8 unk_017D[7][2];
     /*018B*/ u8 unk_018B[41];
     /*01B4*/ u8 unk_01B4[41];
     /*01DD*/ u8 unk_01DD[7];
@@ -66,7 +66,9 @@ extern const u8 gUnknown_8467070[3];
 extern const struct WindowTemplate gUnknown_8467074[3];
 
 extern const struct CompressedSpriteSheet gUnknown_8467F58;
+extern const struct SpritePalette gUnknown_8467F60[];
 extern const struct UnkStruct_8467FB8 gUnknown_8467FB8[8];
+extern const struct SpriteTemplate gUnknown_8467FA0;
 
 bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
 {
@@ -333,9 +335,9 @@ void sub_8145D18(u8 whichWindow)
     CopyWindowToVram(windowId, 3);
 }
 
-/*
 void sub_8146060(void)
 {
+    u8 r7 = 0;
     gUnknown_203F3C8->unk_017C = 0xFF;
     if (gUnknown_203F3C8->unk_014C.unk_06 != SPECIES_NONE)
     {
@@ -344,7 +346,18 @@ void sub_8146060(void)
     }
     if (gUnknown_203F3C8->unk_0000.unk_09 != 0 && gUnknown_203F3C8->unk_0000.unk_08_0 == 1)
     {
-        sub_800F034(gUnknown_8467F58);
+        sub_800F034(&gUnknown_8467F58);
+        LoadSpritePalette(&gUnknown_8467F60[gUnknown_203F3C8->unk_0170->textPal4]);
+        for (; r7 < gUnknown_203F3C8->unk_0000.unk_09; r7++)
+        {
+            gUnknown_203F3C8->unk_017D[r7][0] = 0xFF;
+            gUnknown_203F3C8->unk_017D[r7][1] = 0xFF;
+            gUnknown_203F3C8->unk_017D[r7][0] = CreateSprite(&gUnknown_8467FA0, 0xd8 - 32 * r7, 0x90, 8);
+            if (gUnknown_203F3C8->unk_014C.unk_08[0][r7] != 0)
+            {
+                gUnknown_203F3C8->unk_017D[r7][1] = sub_8096ECC(sub_8096FD4(gUnknown_203F3C8->unk_014C.unk_08[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0, 0);
+                gSprites[gUnknown_203F3C8->unk_017D[r7][1]].oam.priority = 2;
+            }
+        }
     }
 }
- */

@@ -5,6 +5,7 @@
 #include "malloc.h"
 #include "menu.h"
 #include "pokemon_icon.h"
+#include "mystery_gift_menu.h"
 #include "mevent.h"
 
 struct UnkStruct_8467FB8
@@ -28,11 +29,18 @@ struct UnkStruct_203F3C8
     /*045C*/ u8 buffer_045C[0x1000];
 };
 
+struct UnkStruct_203F3CC
+{
+    /*0000*/ u8 filler_0000[0x13a4];
+};
+
 EWRAM_DATA struct UnkStruct_203F3C8 * gUnknown_203F3C8 = NULL;
+EWRAM_DATA struct UnkStruct_203F3CC * gUnknown_203F3CC = NULL;
 
 void sub_8145A98(void);
 void sub_8145D18(u8 bgId);
 void sub_8146060(void);
+void sub_81461D8(void);
 
 extern const struct WindowTemplate gUnknown_8467074[3];
 
@@ -120,6 +128,55 @@ s32 sub_814571C(void)
             sub_8146060();
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
             UpdatePaletteFade();
+            break;
+        default:
+            if (UpdatePaletteFade())
+                return 0;
+            gUnknown_203F3C8->unk_0174 = 0;
+            return 1;
+    }
+    ++gUnknown_203F3C8->unk_0174;
+    return 0;
+}
+
+s32 sub_814593C(bool32 flag)
+{
+    if (gUnknown_203F3C8 == NULL)
+        return -1;
+    switch (gUnknown_203F3C8->unk_0174)
+    {
+        case 0:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            break;
+        case 1:
+            if (UpdatePaletteFade())
+                return 0;
+            break;
+        case 2:
+            FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, 30, 20);
+            CopyBgTilemapBufferToVram(0);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(2);
+            break;
+        case 3:
+            HideBg(1);
+            HideBg(2);
+            RemoveWindow(gUnknown_203F3C8->unk_017A);
+            RemoveWindow(gUnknown_203F3C8->unk_0178);
+            RemoveWindow(gUnknown_203F3C8->unk_0176);
+            break;
+        case 4:
+            sub_81461D8();
+            FreeMonIconPalettes();
+            break;
+        case 5:
+            sub_8142344(gUnknown_203F3B8, flag);
+            break;
+        case 6:
+            CopyBgTilemapBufferToVram(0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
             break;
         default:
             if (UpdatePaletteFade())

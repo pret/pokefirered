@@ -25,58 +25,71 @@ gUnknown_8467074:: @ 8467074
 	.2byte 0x0130
 
 gUnknown_846708C::
-	.incbin "baserom.gba", 0x46708c, 0x20
+	.incbin "data/graphics/mevent/pal_46708C.gbapal"
 
 gUnknown_84670AC::
-	.incbin "baserom.gba", 0x4670ac, 0x20
+	.incbin "data/graphics/mevent/pal_4670AC.gbapal"
 
 gUnknown_84670CC::
-	.incbin "baserom.gba", 0x4670cc, 0x20
+	.incbin "data/graphics/mevent/pal_4670CC.gbapal"
 
 gUnknown_84670EC::
-	.incbin "baserom.gba", 0x4670ec, 0x20
+	.incbin "data/graphics/mevent/pal_4670EC.gbapal"
 
 gUnknown_846710C::
-	.incbin "baserom.gba", 0x46710c, 0x20
+	.incbin "data/graphics/mevent/pal_46710C.gbapal"
 
 gUnknown_846712C::
-	.incbin "baserom.gba", 0x46712c, 0x20
+	.incbin "data/graphics/mevent/pal_46712C.gbapal"
 
 gUnknown_846714C::
-	.incbin "baserom.gba", 0x46714c, 0x20
+	.incbin "data/graphics/mevent/pal_46714C.gbapal"
 
 gUnknown_846716C::
-	.incbin "baserom.gba", 0x46716c, 0x20
+	.incbin "data/graphics/mevent/pal_46716C.gbapal"
 
+	.align 2
 gUnknown_846718C::
-	.incbin "baserom.gba", 0x46718c, 0xFC
+	.incbin "data/graphics/mevent/gfx_46718C.4bpp.lz"
 
+	.align 2
 gUnknown_8467288::
-	.incbin "baserom.gba", 0x467288, 0xF4
+	.incbin "data/graphics/mevent/tilemap_467288.bin.lz"
 
+	.align 2
 gUnknown_846737C::
-	.incbin "baserom.gba", 0x46737c, 0xF4
+	.incbin "data/graphics/mevent/gfx_46737C.4bpp.lz"
 
+	.align 2
 gUnknown_8467470::
-	.incbin "baserom.gba", 0x467470, 0xE8
+	.incbin "data/graphics/mevent/tilemap_467470.bin.lz"
 
+	.align 2
 gUnknown_8467558::
-	.incbin "baserom.gba", 0x467558, 0xD4
+	.incbin "data/graphics/mevent/gfx_467558.4bpp.lz"
 
+	.align 2
 gUnknown_846762C::
-	.incbin "baserom.gba", 0x46762c, 0xD4
+	.incbin "data/graphics/mevent/tilemap_46762C.bin.lz"
 
+	.align 2
 gUnknown_8467700::
-	.incbin "baserom.gba", 0x467700, 0x234
+	.incbin "data/graphics/mevent/gfx_467700.4bpp.lz"
 
+	.align 2
 gUnknown_8467934::
-	.incbin "baserom.gba", 0x467934, 0x148
+	.incbin "data/graphics/mevent/tilemap_467934.bin.lz"
 
+	.align 2
 gUnknown_8467A7C::
-	.incbin "baserom.gba", 0x467a7c, 0x230
+	.incbin "data/graphics/mevent/gfx_467A7C.4bpp.lz"
 
+	.align 2
 gUnknown_8467CAC::
-	.incbin "baserom.gba", 0x467cac, 0x2AC
+	.incbin "data/graphics/mevent/tilemap_467CAC.bin.lz"
+
+gUnknown_8467DF4::
+	.incbin "baserom.gba", 0x467DF4, 0x164
 
 gUnknown_8467F58:: @ 8467F58
 	.incbin "baserom.gba", 0x467F58, 0x8

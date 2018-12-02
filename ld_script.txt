@@ -246,6 +246,7 @@ SECTIONS {
         src/mevent.o(.text);
         src/mevent_server_helpers.o(.text);
         src/mevent_server.o(.text);
+        src/mevent_8145654.o(.text);
         asm/mevent_8145654.o(.text);
         src/menews_jisan.o(.text);
         asm/seagallop.o(.text);
@@ -382,6 +383,7 @@ SECTIONS {
         src/mevent.o(.rodata);
         src/mevent_server_helpers.o(.rodata);
         src/mevent_server.o(.rodata);
+        src/mevent_8145654.o(.rodata);
         data/data_8466FB8.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);

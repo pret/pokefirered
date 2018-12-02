@@ -477,3 +477,13 @@ bool32 sub_8146288(const struct MEventBuffer_3120_Sub * a0)
     gUnknown_203F3CC->unk_01C1 = 0xFF;
     return TRUE;
 }
+
+void sub_81462EC(void)
+{
+    if (gUnknown_203F3CC != NULL)
+    {
+        *gUnknown_203F3CC = (struct UnkStruct_203F3CC){};
+        Free(gUnknown_203F3CC);
+        gUnknown_203F3CC = NULL;
+    }
+}

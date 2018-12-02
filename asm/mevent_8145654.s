@@ -5,27 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81462EC
-sub_81462EC: @ 81462EC
-	push {r4,lr}
-	ldr r4, =gUnknown_203F3CC
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _08146308
-	ldr r2, =0x000013a4
-	movs r1, 0
-	bl memset
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-_08146308:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81462EC
-
 	thumb_func_start sub_8146318
 sub_8146318: @ 8146318
 	push {r4-r7,lr}

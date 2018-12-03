@@ -456,9 +456,13 @@ struct UnkStruct_203F3CC
     /*0000*/ struct MEventBuffer_3120_Sub unk_0000;
     /*01bc*/ const struct UnkStruct_8468720 * unk_01BC;
     /*01c0*/ u8 unk_01C0_0:1;
-    /*01c0*/ u8 unk_01C0_1:7;
+             u8 unk_01C0_1:7;
     /*01c1*/ u8 unk_01C1;
-    /*01c2*/ u8 filler_01C2[4];
+    /*01c2*/ u8 unk_01C2_0:1;
+             u8 unk_01C2_1:7;
+    /*01c3*/ u8 unk_01C3_0:1;
+             u8 unk_01C3_1:7;
+    /*01c4*/ u16 unk_01C4;
     /*01c6*/ u16 unk_01C6;
     /*01c8*/ u16 unk_01C8[2];
     /*01cc*/ u8 filler_01CC[0x1C8];
@@ -470,6 +474,7 @@ EWRAM_DATA struct UnkStruct_203F3CC * gUnknown_203F3CC = NULL;
 
 void sub_8146980(void);
 void sub_8146A30(void);
+void sub_8146B58(void);
 
 extern const struct TextColor gUnknown_8468038[2];
 extern const struct WindowTemplate gUnknown_8468040[2];
@@ -657,4 +662,43 @@ void sub_8146834(void)
         gUnknown_203F3CC->unk_01C1 = AddScrollIndicatorArrowPair(&gUnknown_203F3CC->unk_0394, &gUnknown_203F3CC->unk_01C6);
         gUnknown_203F3CC->unk_01C0_0 = FALSE;
     }
+}
+
+u8 sub_8146884(u16 input)
+{
+    if (gUnknown_203F3CC->unk_01C2_0)
+    {
+        sub_8146B58();
+        return 0xFF;
+    }
+    switch (input)
+    {
+        case A_BUTTON:
+            return 0;
+        case B_BUTTON:
+            return 1;
+        case DPAD_UP:
+            if (gUnknown_203F3CC->unk_01C6 == 0)
+                return 0xFF;
+            if (gUnknown_203F3CC->unk_01C0_0)
+                return 0xFF;
+            gUnknown_203F3CC->unk_01C3_0 = FALSE;
+            break;
+        case DPAD_DOWN:
+            if (gUnknown_203F3CC->unk_01C6 == gUnknown_203F3CC->unk_01C4)
+                return 0xFF;
+            if (gUnknown_203F3CC->unk_01C0_0)
+                return 0xFF;
+            gUnknown_203F3CC->unk_01C3_0 = TRUE;
+            break;
+        default:
+            return 0xFF;
+    }
+    gUnknown_203F3CC->unk_01C2_0 = TRUE;
+    gUnknown_203F3CC->unk_01C2_1 = 2;
+    gUnknown_203F3CC->unk_01C3_1 = 0;
+    if (gUnknown_203F3CC->unk_01C3_0 == FALSE)
+        return 2;
+    else
+        return 3;
 }

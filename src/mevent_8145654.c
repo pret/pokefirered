@@ -443,18 +443,10 @@ void sub_81461D8(void)
     }
 }
 
-struct UnkStruct_8468720
-{
-    u8 unk0;
-    const void * unk4;
-    const void * unk8;
-    const void * unkC;
-};
-
 struct UnkStruct_203F3CC
 {
     /*0000*/ struct MEventBuffer_3120_Sub unk_0000;
-    /*01bc*/ const struct UnkStruct_8468720 * unk_01BC;
+    /*01bc*/ const struct UnkStruct_8467FB8 * unk_01BC;
     /*01c0*/ u8 unk_01C0_0:1;
              u8 unk_01C0_1:7;
     /*01c1*/ u8 unk_01C1;
@@ -490,7 +482,31 @@ const struct ScrollIndicatorArrowPairTemplate gUnknown_8468050 = {
     0x02, 0xe8, 0x18, 0x03, 0xe8, 0x98,
     0x0000, 0x0002, 0x1000, 0x1000, 0x0, 0x000
 };
-extern const struct UnkStruct_8468720 gUnknown_8468720[8];
+
+const u16 gUnknown_8468060[] = INCBIN_U16("data/graphics/mevent/pal_468060.gbapal");
+const u16 gUnknown_8468080[] = INCBIN_U16("data/graphics/mevent/pal_468080.gbapal");
+const u16 gUnknown_84680A0[] = INCBIN_U16("data/graphics/mevent/pal_4680A0.gbapal");
+const u8 gUnknown_84680C0[] = INCBIN_U8("data/graphics/mevent/gfx_4680C0.4bpp.lz");
+const u8 gUnknown_8468140[] = INCBIN_U8("data/graphics/mevent/tilemap_468140.bin.lz");
+const u8 gUnknown_846821C[] = INCBIN_U8("data/graphics/mevent/gfx_46821C.4bpp.lz");
+const u8 gUnknown_846824C[] = INCBIN_U8("data/graphics/mevent/tilemap_46824C.bin.lz");
+const u8 gUnknown_846830C[] = INCBIN_U8("data/graphics/mevent/gfx_46830C.4bpp.lz");
+const u8 gUnknown_846837C[] = INCBIN_U8("data/graphics/mevent/tilemap_46837C.bin.lz");
+const u8 gUnknown_8468448[] = INCBIN_U8("data/graphics/mevent/gfx_468448.4bpp.lz");
+const u8 gUnknown_84684D8[] = INCBIN_U8("data/graphics/mevent/tilemap_4684D8.bin.lz");
+const u8 gUnknown_84685B4[] = INCBIN_U8("data/graphics/mevent/gfx_4685B4.4bpp.lz");
+const u8 gUnknown_8468644[] = INCBIN_U8("data/graphics/mevent/tilemap_468644.bin.lz");
+
+const struct UnkStruct_8467FB8 gUnknown_8468720[] = {
+    {1, 0, 0, 0, gUnknown_84680C0, gUnknown_8468140, gUnknown_8468060},
+    {1, 0, 0, 0, gUnknown_846821C, gUnknown_846824C, gUnknown_84670AC},
+    {1, 0, 0, 0, gUnknown_846830C, gUnknown_846837C, gUnknown_84670CC},
+    {1, 0, 0, 0, gUnknown_846830C, gUnknown_846837C, gUnknown_84670EC},
+    {1, 0, 0, 0, gUnknown_846830C, gUnknown_846837C, gUnknown_846710C},
+    {1, 0, 0, 0, gUnknown_846830C, gUnknown_846837C, gUnknown_846712C},
+    {1, 0, 0, 0, gUnknown_8468448, gUnknown_84684D8, gUnknown_8468080},
+    {1, 0, 0, 0, gUnknown_84685B4, gUnknown_8468644, gUnknown_84680A0}
+};
 
 bool32 sub_8146288(const struct MEventBuffer_3120_Sub * a0)
 {
@@ -549,7 +565,7 @@ s32 sub_8146318(void)
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
             CopyBgTilemapBufferToVram(3);
-            decompress_and_copy_tile_data_to_vram(3, gUnknown_203F3CC->unk_01BC->unk4, 0, 8, 0);
+            decompress_and_copy_tile_data_to_vram(3, gUnknown_203F3CC->unk_01BC->tiles, 0, 8, 0);
             gUnknown_203F3CC->unk_01C8[0] = AddWindow(&gUnknown_8468040[0]);
             gUnknown_203F3CC->unk_01C8[1] = AddWindow(&gUnknown_8468040[1]);
             break;
@@ -557,8 +573,8 @@ s32 sub_8146318(void)
             if (free_temp_tile_data_buffers_if_possible())
                 return 0;
             gPaletteFade.bufferTransferDisabled = TRUE;
-            LoadPalette(gUnknown_203F3CC->unk_01BC->unkC, 0x10, 0x20);
-            LZ77UnCompWram(gUnknown_203F3CC->unk_01BC->unk8, gUnknown_203F3CC->buffer_03A4);
+            LoadPalette(gUnknown_203F3CC->unk_01BC->pal, 0x10, 0x20);
+            LZ77UnCompWram(gUnknown_203F3CC->unk_01BC->map, gUnknown_203F3CC->buffer_03A4);
             CopyRectToBgTilemapBufferRect(1, gUnknown_203F3CC->buffer_03A4, 0, 0, 30, 3, 0, 0, 30, 3, 1, 8, 0);
             CopyRectToBgTilemapBufferRect(3, gUnknown_203F3CC->buffer_03A4, 0, 3, 30, 23, 0, 3, 30, 23, 1, 8, 0);
             CopyBgTilemapBufferToVram(1);
@@ -719,7 +735,7 @@ void sub_8146980(void)
     u8 i = 0;
     memcpy(gUnknown_203F3CC->unk_01CE, gUnknown_203F3CC->unk_0000.unk_04, 40);
     gUnknown_203F3CC->unk_01CE[40] = EOS;
-    for (i = 0; i < 10; ++i)
+    for (; i < 10; ++i)
     {
         memcpy(gUnknown_203F3CC->unk_01F7[i], gUnknown_203F3CC->unk_0000.unk_2C[i], 40);
         gUnknown_203F3CC->unk_01F7[i][40] = EOS;
@@ -728,4 +744,50 @@ void sub_8146980(void)
     }
     gUnknown_203F3CC->unk_0394 = gUnknown_8468050;
     gUnknown_203F3CC->unk_0394.unk_08 = gUnknown_203F3CC->unk_01C4;
+}
+
+void sub_8146A30(void)
+{
+    u8 i = 0;
+    s32 x;
+    PutWindowTilemap(gUnknown_203F3CC->unk_01C8[0]);
+    PutWindowTilemap(gUnknown_203F3CC->unk_01C8[1]);
+    FillWindowPixelBuffer(gUnknown_203F3CC->unk_01C8[0], 0);
+    FillWindowPixelBuffer(gUnknown_203F3CC->unk_01C8[1], 0);
+    x = (0xe0 - GetStringWidth(3, gUnknown_203F3CC->unk_01CE, GetFontAttribute(3, 2))) / 2;
+    if (x < 0)
+        x = 0;
+    box_print(gUnknown_203F3CC->unk_01C8[0], 3, x, 6, &gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal1], 0, gUnknown_203F3CC->unk_01CE);
+    for (; i < 10; ++i)
+    {
+        box_print(gUnknown_203F3CC->unk_01C8[1], 3, 0, 16 * i + 2, &gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal2], 0, gUnknown_203F3CC->unk_01F7[i]);
+    }
+    CopyWindowToVram(gUnknown_203F3CC->unk_01C8[0], 3);
+    CopyWindowToVram(gUnknown_203F3CC->unk_01C8[1], 3);
+}
+
+void sub_8146B58(void)
+{
+    u16 r4 = gUnknown_203F3CC->unk_01C2_1;
+    r4 <<= 8;
+    if (gUnknown_203F3CC->unk_01C3_0)
+    {
+        ChangeBgY(2, r4, 1);
+        ChangeBgY(3, r4, 1);
+    }
+    else
+    {
+        ChangeBgY(2, r4, 2);
+        ChangeBgY(3, r4, 2);
+    }
+    gUnknown_203F3CC->unk_01C3_1 += gUnknown_203F3CC->unk_01C2_1;
+    if (gUnknown_203F3CC->unk_01C3_1 > 15)
+    {
+        if (gUnknown_203F3CC->unk_01C3_0)
+            ++gUnknown_203F3CC->unk_01C6;
+        else
+            --gUnknown_203F3CC->unk_01C6;
+        gUnknown_203F3CC->unk_01C2_0 = FALSE;
+        gUnknown_203F3CC->unk_01C3_1 = 0;
+    }
 }

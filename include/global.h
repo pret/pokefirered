@@ -600,7 +600,8 @@ struct MEventBuffer_3120_Sub
 	u16 unk_00;
 	u8 unk_02;
 	u8 unk_03;
-	u8 filler_04[440];
+	u8 unk_04[40];
+	u8 unk_2C[10][40];
 };
 
 struct MEventBuffer_3120

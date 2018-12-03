@@ -465,7 +465,9 @@ struct UnkStruct_203F3CC
     /*01c4*/ u16 unk_01C4;
     /*01c6*/ u16 unk_01C6;
     /*01c8*/ u16 unk_01C8[2];
-    /*01cc*/ u8 filler_01CC[0x1C8];
+    /*01cc*/ u8 filler_01CC[2];
+    /*01ce*/ u8 unk_01CE[41];
+    /*01f7*/ u8 unk_01F7[10][41];
     /*0394*/ struct ScrollIndicatorArrowPairTemplate unk_0394;
     /*03a4*/ u8 buffer_03A4[0x1000];
 };
@@ -476,10 +478,19 @@ void sub_8146980(void);
 void sub_8146A30(void);
 void sub_8146B58(void);
 
-extern const struct TextColor gUnknown_8468038[2];
-extern const struct WindowTemplate gUnknown_8468040[2];
+const struct TextColor gUnknown_8468038[] = {
+    {0, 2, 3},
+    {0, 1, 2}
+};
+const struct WindowTemplate gUnknown_8468040[] = {
+    {0, 1, 0, 28,  3, 15, 0x000},
+    {2, 1, 3, 28, 20, 15, 0x000}
+};
+const struct ScrollIndicatorArrowPairTemplate gUnknown_8468050 = {
+    0x02, 0xe8, 0x18, 0x03, 0xe8, 0x98,
+    0x0000, 0x0002, 0x1000, 0x1000, 0x0, 0x000
+};
 extern const struct UnkStruct_8468720 gUnknown_8468720[8];
-extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8468050;
 
 bool32 sub_8146288(const struct MEventBuffer_3120_Sub * a0)
 {
@@ -701,4 +712,20 @@ u8 sub_8146884(u16 input)
         return 2;
     else
         return 3;
+}
+
+void sub_8146980(void)
+{
+    u8 i = 0;
+    memcpy(gUnknown_203F3CC->unk_01CE, gUnknown_203F3CC->unk_0000.unk_04, 40);
+    gUnknown_203F3CC->unk_01CE[40] = EOS;
+    for (i = 0; i < 10; ++i)
+    {
+        memcpy(gUnknown_203F3CC->unk_01F7[i], gUnknown_203F3CC->unk_0000.unk_2C[i], 40);
+        gUnknown_203F3CC->unk_01F7[i][40] = EOS;
+        if (i > 7 && gUnknown_203F3CC->unk_01F7[i][0] != EOS)
+            ++gUnknown_203F3CC->unk_01C4;
+    }
+    gUnknown_203F3CC->unk_0394 = gUnknown_8468050;
+    gUnknown_203F3CC->unk_0394.unk_08 = gUnknown_203F3CC->unk_01C4;
 }

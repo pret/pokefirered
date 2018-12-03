@@ -10,6 +10,7 @@
 #include "mystery_gift_menu.h"
 #include "menu_indicators.h"
 #include "string_util.h"
+#include "link_rfu.h"
 #include "mevent.h"
 
 struct UnkStruct_8467FB8
@@ -571,6 +572,69 @@ s32 sub_8146318(void)
             return 1;
     }
 
+    ++gUnknown_203F3CC->unk_01C0_1;
+    return 0;
+}
+
+s32 sub_8146604(bool32 flag)
+{
+    if (gUnknown_203F3CC == NULL)
+        return -1;
+    switch (gUnknown_203F3CC->unk_01C0_1)
+    {
+        case 0:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            break;
+        case 1:
+            if (UpdatePaletteFade())
+                return 0;
+            ChangeBgY(2, 0, 0);
+            SetGpuReg(REG_OFFSET_WIN0H, 0);
+            SetGpuReg(REG_OFFSET_WIN0V, 0);
+            SetGpuReg(REG_OFFSET_WININ, 0);
+            SetGpuReg(REG_OFFSET_WINOUT, 0);
+            ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+            break;
+        case 2:
+            FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, 30, 24);
+            FillBgTilemapBufferRect_Palette0(3, 0x000, 0, 0, 30, 24);
+            CopyBgTilemapBufferToVram(0);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(2);
+            CopyBgTilemapBufferToVram(3);
+            break;
+        case 3:
+            HideBg(1);
+            HideBg(2);
+            RemoveWindow(gUnknown_203F3CC->unk_01C8[1]);
+            RemoveWindow(gUnknown_203F3CC->unk_01C8[0]);
+            break;
+        case 4:
+            ChangeBgY(2, 0, 0);
+            ChangeBgY(3, 0, 0);
+            if (gUnknown_203F3CC->unk_01C1 != 0xFF)
+            {
+                RemoveScrollIndicatorArrowPair(gUnknown_203F3CC->unk_01C1);
+                gUnknown_203F3CC->unk_01C1 = 0xFF;
+            }
+            break;
+        case 5:
+            sub_8142344(gUnknown_203F3B8, flag);
+            break;
+        case 6:
+            sub_8142420();
+            CopyBgTilemapBufferToVram(0);
+            CopyBgTilemapBufferToVram(3);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+            break;
+        default:
+            if (UpdatePaletteFade())
+                return 0;
+            gUnknown_203F3CC->unk_01C0_1 = 0;
+            return 1;
+    }
     ++gUnknown_203F3CC->unk_01C0_1;
     return 0;
 }

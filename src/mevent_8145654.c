@@ -638,3 +638,23 @@ s32 sub_8146604(bool32 flag)
     ++gUnknown_203F3CC->unk_01C0_1;
     return 0;
 }
+
+void sub_81467EC(void)
+{
+    if (!gUnknown_203F3CC->unk_01C0_0 && gUnknown_203F3CC->unk_01C1 != 0xFF)
+    {
+        RemoveScrollIndicatorArrowPair(gUnknown_203F3CC->unk_01C1);
+        gUnknown_203F3CC->unk_01C1 = 0xFF;
+        gUnknown_203F3CC->unk_01C0_0 = TRUE;
+    }
+}
+
+
+void sub_8146834(void)
+{
+    if (gUnknown_203F3CC->unk_01C0_0)
+    {
+        gUnknown_203F3CC->unk_01C1 = AddScrollIndicatorArrowPair(&gUnknown_203F3CC->unk_0394, &gUnknown_203F3CC->unk_01C6);
+        gUnknown_203F3CC->unk_01C0_0 = FALSE;
+    }
+}

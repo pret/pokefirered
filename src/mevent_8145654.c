@@ -1,12 +1,14 @@
 #include "global.h"
 #include "constants/species.h"
 #include "bg.h"
+#include "gpu_regs.h"
 #include "palette.h"
 #include "decompress.h"
 #include "malloc.h"
 #include "menu.h"
 #include "pokemon_icon.h"
 #include "mystery_gift_menu.h"
+#include "menu_indicators.h"
 #include "string_util.h"
 #include "mevent.h"
 
@@ -452,14 +454,24 @@ struct UnkStruct_203F3CC
 {
     /*0000*/ struct MEventBuffer_3120_Sub unk_0000;
     /*01bc*/ const struct UnkStruct_8468720 * unk_01BC;
-    /*01c0*/ u8 unk_01C0;
+    /*01c0*/ u8 unk_01C0_0:1;
+    /*01c0*/ u8 unk_01C0_1:7;
     /*01c1*/ u8 unk_01C1;
-    /*01c2*/ u8 filler_01C2[0x11e2];
+    /*01c2*/ u8 filler_01C2[4];
+    /*01c6*/ u16 unk_01C6;
+    /*01c8*/ u16 unk_01C8[2];
+    /*01cc*/ u8 filler_01CC[0x1C8];
+    /*0394*/ struct ScrollIndicatorArrowPairTemplate unk_0394;
+    /*03a4*/ u8 buffer_03A4[0x1000];
 };
 
 EWRAM_DATA struct UnkStruct_203F3CC * gUnknown_203F3CC = NULL;
 
+void sub_8146980(void);
+void sub_8146A30(void);
+
 extern const struct TextColor gUnknown_8468038[2];
+extern const struct WindowTemplate gUnknown_8468040[2];
 extern const struct UnkStruct_8468720 gUnknown_8468720[8];
 extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8468050;
 
@@ -486,4 +498,79 @@ void sub_81462EC(void)
         Free(gUnknown_203F3CC);
         gUnknown_203F3CC = NULL;
     }
+}
+
+s32 sub_8146318(void)
+{
+    if (gUnknown_203F3CC == NULL)
+        return -1;
+
+    switch (gUnknown_203F3CC->unk_01C0_1)
+    {
+        case 0:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            break;
+        case 1:
+            if (UpdatePaletteFade())
+                return 0;
+            ChangeBgY(0, 0, 0);
+            ChangeBgY(1, 0, 0);
+            ChangeBgY(2, 0, 0);
+            ChangeBgY(3, 0, 0);
+            SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
+            SetGpuReg(REG_OFFSET_WIN0V, 0x1A98);
+            SetGpuReg(REG_OFFSET_WININ, 0x1F);
+            SetGpuReg(REG_OFFSET_WINOUT, 0x1B);
+            SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+            break;
+        case 2:
+            FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, 30, 20);
+            FillBgTilemapBufferRect_Palette0(3, 0x000, 0, 0, 30, 20);
+            CopyBgTilemapBufferToVram(0);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(2);
+            CopyBgTilemapBufferToVram(3);
+            decompress_and_copy_tile_data_to_vram(3, gUnknown_203F3CC->unk_01BC->unk4, 0, 8, 0);
+            gUnknown_203F3CC->unk_01C8[0] = AddWindow(&gUnknown_8468040[0]);
+            gUnknown_203F3CC->unk_01C8[1] = AddWindow(&gUnknown_8468040[1]);
+            break;
+        case 3:
+            if (free_temp_tile_data_buffers_if_possible())
+                return 0;
+            gPaletteFade.bufferTransferDisabled = TRUE;
+            LoadPalette(gUnknown_203F3CC->unk_01BC->unkC, 0x10, 0x20);
+            LZ77UnCompWram(gUnknown_203F3CC->unk_01BC->unk8, gUnknown_203F3CC->buffer_03A4);
+            CopyRectToBgTilemapBufferRect(1, gUnknown_203F3CC->buffer_03A4, 0, 0, 30, 3, 0, 0, 30, 3, 1, 8, 0);
+            CopyRectToBgTilemapBufferRect(3, gUnknown_203F3CC->buffer_03A4, 0, 3, 30, 23, 0, 3, 30, 23, 1, 8, 0);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(3);
+            break;
+        case 4:
+            sub_8146980();
+            break;
+        case 5:
+            sub_8146A30();
+            CopyBgTilemapBufferToVram(0);
+            CopyBgTilemapBufferToVram(2);
+            break;
+        case 6:
+            ShowBg(1);
+            ShowBg(2);
+            ShowBg(3);
+            gPaletteFade.bufferTransferDisabled = FALSE;
+            gUnknown_203F3CC->unk_01C1 = AddScrollIndicatorArrowPair(&gUnknown_203F3CC->unk_0394, &gUnknown_203F3CC->unk_01C6);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+            UpdatePaletteFade();
+            break;
+        default:
+            if (UpdatePaletteFade())
+                return 0;
+            gUnknown_203F3CC->unk_01C0_1 = 0;
+            return 1;
+    }
+
+    ++gUnknown_203F3CC->unk_01C0_1;
+    return 0;
 }

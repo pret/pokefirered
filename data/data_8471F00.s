@@ -336,39 +336,3 @@ gUnknown_84827B4:: @ 84827B4
 
 gUnknown_84886E8:: @ 84886E8
 	.incbin "baserom.gba", 0x4886E8, 0x588
-
-gText_MysteryGiftBerry:: @ 8488C70
-	.string "Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.$"
-
-gText_MysteryGiftBerryTransform:: @ 8488CA2
-	.string "The {STR_VAR_1} BERRY transformed into\none {STR_VAR_2} BERRY.$"
-
-gText_MysteryGiftBerryObtained:: @ 8488CCE
-	.string "The {STR_VAR_1} BERRY has already been\nobtained.$"
-
-gText_MysteryGiftSpecialRibbon:: @ 8488CF6
-	.string "A special RIBBON was awarded to\nyour party POKéMON.$"
-
-gText_MysteryGiftNationalDex:: @ 8488D2A
-	.string "The POKéDEX has been upgraded\nwith the NATIONAL MODE.$"
-
-gText_MysteryGiftRareWord:: @ 8488D60
-	.string "A rare word has been added.$"
-
-gText_MysteryGiftSentOver:: @ 8488D7C
-	.string "{STR_VAR_1} was sent over!$"
-
-gText_MysteryGiftFullParty:: @ 8488D8E
-	.string "Your party is full.\n{STR_VAR_1} could not be sent over.$"
-
-gText_MysteryGiftNewTrainer:: @ 8488DBD
-	.string "A new TRAINER has arrived in\nHOENN.$"
-
-gUnknown_8488DE1::
-	.incbin "baserom.gba", 0x488DE1, 0x1C
-
-gText_MysteryGiftCantBeUsed:: @ 8488DFD
-	.string "This data can’t be used in\nthis version.$"
-
-gUnknown_8488E26::
-	.incbin "baserom.gba", 0x488E26, 0xB42

@@ -389,6 +389,8 @@ SECTIONS {
         data/data_8468C98.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);
+        src/mystery_event_msg.o(.rodata);
+        data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

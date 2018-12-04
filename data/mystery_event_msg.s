@@ -9,10 +9,9 @@
 
 	.section .rodata
 	
-	.align 1
-
-MysteryEventScript_StampCard:: @ 8488E26
-	.incbin "baserom.gba", 0x488E26, 0xB42
+	.align 2
+MysteryEventScript_StampCard:: @ 8488E2
+	.incbin "baserom.gba", 0x488E28, 0xB40
 
 @ 	setvaddress MysteryEventScript_StampCard
 @ 	setorcopyvar VAR_RESULT, 1
@@ -28,16 +27,16 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ sText_MysteryGiftStampCard:
 @ 	.string "Thank you for using the STAMP CARD\nSystem.\pYou have {STR_VAR_1} more to collect to\nfill your STAMP CARD.$"
-@ 
+@
 @ MysteryEventScript_SurfPichu:: @ 8674D3D
 @ 	setvaddress MysteryEventScript_SurfPichu
 @ 	checkflag FLAG_MYSTERY_EVENT_DONE
 @ 	vgoto_if 0, SurfPichu_GiveIfPossible
 @ 	gotoram
-@ 
+@
 @ SurfPichu_GiveIfPossible: @ 8674D4C
 @ 	specialvar VAR_EVENT_PICHU_SLOT, CalculatePlayerPartyCount
 @ 	compare_var_to_value VAR_EVENT_PICHU_SLOT, 6
@@ -53,7 +52,7 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitfanfare
 @ 	release
 @ 	end
-@ 
+@
 @ SurfPichu_FullParty: @ 8674D73
 @ 	lock
 @ 	faceplayer
@@ -62,7 +61,7 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ SurfPichu_GiveEgg: @ 8674D7E
 @ 	giveegg SPECIES_PICHU
 @ 	setobedience VAR_EVENT_PICHU_SLOT
@@ -78,33 +77,33 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	compare_var_to_value VAR_EVENT_PICHU_SLOT, 5
 @ 	vgoto_if 1, SurfPichu_Slot5
 @ 	return
-@ 
+@
 @ SurfPichu_Slot1: @ 8674DC0
 @ 	setpokemove 1, 2, MOVE_SURF
 @ 	return
-@ 
+@
 @ SurfPichu_Slot2:: @ 8674DC6
 @ 	setpokemove 2, 2, MOVE_SURF
 @ 	return
-@ 
+@
 @ SurfPichu_Slot3: @ 8674DCC
 @ 	setpokemove 3, 2, MOVE_SURF
 @ 	return
-@ 
+@
 @ SurfPichu_Slot4: @ 8674DD2
 @ 	setpokemove 4, 2, MOVE_SURF
 @ 	return
-@ 
+@
 @ SurfPichu_Slot5: @ 8674DD8
 @ 	setpokemove 5, 2, MOVE_SURF
 @ 	return
-@ 
+@
 @ sText_MysteryGiftEgg:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.\pFrom the POKéMON CENTER we\nhave a gift--a POKéMON EGG!\pPlease raise it with love and\nkindness.$"
-@ 	
+@
 @ sText_FullParty:
 @ 	.string "Oh, your party appears to be full.\pPlease come see me after storing\na POKéMON on a PC.$"
-@ 
+@
 @ MysteryEventScript_VisitingTrainer:: @ 8674EC1
 @ 	setvaddress MysteryEventScript_VisitingTrainer
 @ 	special ValidateEReaderTrainer
@@ -117,7 +116,7 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ MysteryEventScript_VisitingTrainerArrived: @ 8674EDF
 @ 	lock
 @ 	faceplayer
@@ -126,13 +125,13 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ sText_MysteryGiftVisitingTrainer:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.\pBy holding this WONDER CARD, you\nmay take part in a survey at a\lPOKéMON MART.\pUse these surveys to invite\nTRAINERS to SOOTOPOLIS CITY.\p…Let me give you a secret\npassword for a survey:\p“GIVE ME\nAWESOME TRAINER”\pWrite that in on a survey and send\nit to the WIRELESS\lCOMMUNICATION SYSTEM.$"
-@ 
+@
 @ sText_MysteryGiftVisitingTrainer_2:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.\pA TRAINER has arrived in\nSOOTOPOLIS CITY looking for you.\pWe hope you will enjoy\nbattling the visiting TRAINER.\pYou may invite other TRAINERS by\nentering other passwords.\pTry looking for other passwords\nthat may work.$"
-@ 
+@
 @ MysteryEventScript_BattleCard:: @ 867513C
 @ 	setvaddress MysteryEventScript_BattleCard
 @ 	checkflag FLAG_MYSTERY_EVENT_DONE
@@ -150,7 +149,7 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	release
 @ 	setflag FLAG_MYSTERY_EVENT_DONE
 @ 	end
-@ 
+@
 @ MysteryEventScript_BattleCardInfo: @ 8675179
 @ 	lock
 @ 	faceplayer
@@ -159,13 +158,13 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ sText_MysteryGiftBattleCountCard:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.\pYour BATTLE COUNT CARD keeps\ntrack of your battle record against\lTRAINERS with the same CARD.\pLook for and battle TRAINERS who\nhave the same CARD as you.\pYou may check the overall rankings\nby reading the NEWS.\pPlease do give it a try!$"
-@ 	
+@
 @ sText_MysteryGiftBattleCountCard_2:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.\pCongratulations!\pYou have won a prize for winning\nthree battles!\pWe hope you will be inspired to\nbattle some more.$"
-@ 
+@
 @ MysteryEventScript_AuroraTicket:: @ 867533C
 @ 	setvaddress MysteryEventScript_AuroraTicket
 @ 	lock
@@ -191,33 +190,33 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ AuroraTicket_NoBagSpace: @ 8675397
 @ 	vmessage sText_AuroraTicketNoPlace
 @ 	waitmessage
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ AuroraTicket_Obtained: @ 86753A0
 @ 	vmessage sText_AuroraTicketGot
 @ 	waitmessage
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ sText_AuroraTicket1:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.$"
-@ 	
+@
 @ sText_AuroraTicket2:
 @ 	.string "It appears to be for use at the\nLILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
-@ 	
+@
 @ sText_AuroraTicketGot:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.$"
-@ 	
+@
 @ sText_AuroraTicketNoPlace:
 @ 	.string "Oh, I’m sorry, {PLAYER}.\nYour BAG’s KEY ITEMS POCKET is full.\pPlease store something on your PC,\nthen come back for this.$"
-@ 
+@
 @ MysteryEventScript_MysticTicket:: @ 867550B
 @ 	setvaddress MysteryEventScript_MysticTicket
 @ 	lock
@@ -245,33 +244,33 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ MysticTicket_NoBagSpace: @ 867556F
 @ 	vmessage sText_MysticTicketNoPlace
 @ 	waitmessage
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ MysticTicket_Obtained: @ 8675578
 @ 	vmessage sText_MysticTicketGot
 @ 	waitmessage
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ sText_MysticTicket2:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.$"
-@ 	
+@
 @ sText_MysticTicket1:
 @ 	.string "It appears to be for use at the\nLILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
-@ 	
+@
 @ sText_MysticTicketGot:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.$"
-@ 	
+@
 @ sText_MysticTicketNoPlace:
 @ 	.string "Oh, I’m sorry, {PLAYER}.\nYour BAG’s KEY ITEMS POCKET is full.\pPlease store something on your PC,\nthen come back for this.$"
-@ 
+@
 @ MysteryEventScript_AlteringCave:: @ 86756E3
 @ 	setvaddress MysteryEventScript_AlteringCave
 @ 	addvar VAR_ALTERING_CAVE_WILD_SET, 1
@@ -286,10 +285,10 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ sText_MysteryGiftAlteringCave::
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.\pThere appears to be a rumor about\nrare POKéMON sightings.\pThe sightings reportedly came from\nthe ALTERING CAVE on ROUTE 103.\pPerhaps it would be worthwhile for\nyou to investigate this rumor.$"
-@ 
+@
 @ MysteryEventScript_OldSeaMap:: @ 86757F4
 @ 	setvaddress MysteryEventScript_OldSeaMap
 @ 	lock
@@ -315,29 +314,29 @@ MysteryEventScript_StampCard:: @ 8488E26
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ OldSeaMap_NoBagSpace: @ 867584F
 @ 	vmessage sText_MysteryGiftOldSeaMap_3
 @ 	waitmessage
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ OldSeaMap_Obtained: @ 8675858
 @ 	vmessage sText_MysteryGiftOldSeaMap_2
 @ 	waitmessage
 @ 	waitbutton
 @ 	release
 @ 	end
-@ 
+@
 @ sText_MysteryGiftOldSeaMap:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.\pLet me confirm--you are {PLAYER}?\pWe received this OLD SEA MAP\naddressed to you.$"
-@ 
+@
 @ sText_MysteryGiftOldSeaMap_1:
 @ 	.string "It appears to be for use at the\nLILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
-@ 
+@
 @ sText_MysteryGiftOldSeaMap_2:
 @ 	.string "Thank you for using the MYSTERY\nGIFT System.$"
-@ 
+@
 @ sText_MysteryGiftOldSeaMap_3:
 @ 	.string "Oh, I’m sorry, {PLAYER}.\nYour BAG’s KEY ITEMS POCKET is full.\pPlease store something on your PC,\nthen come back for this.$"

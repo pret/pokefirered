@@ -1,18 +1,46 @@
 	.section script_data, "aw", %progbits
 
-gScriptCmdTable:: @ 815F9B4
-	.incbin "baserom.gba", 0x15F9B4, 0x354
+    .include "data/script_cmd_table.inc"
 
-gScriptCmdTableEnd:: @ 815FD08
-	.incbin "baserom.gba", 0x15FD08, 0x4
-
-gUnknown_815FD0C:: @ 815FD0C
-	.incbin "baserom.gba", 0x15FD0C, 0x54
+    .align 2
+gSpecialVars:: @ 815FD0C
+	.4byte gUnknown_20370B8
+	.4byte gUnknown_20370BA
+	.4byte gUnknown_20370BC
+	.4byte gUnknown_20370BE
+	.4byte gUnknown_20370C0
+	.4byte gSpecialVar_0x8005
+	.4byte gUnknown_20370C4
+	.4byte gUnknown_20370C6
+	.4byte gUnknown_20370C8
+	.4byte gUnknown_20370CA
+	.4byte gUnknown_20370CC
+	.4byte gUnknown_20370CE
+	.4byte gUnknown_20370D4
+	.4byte gUnknown_20370D0
+	.4byte gUnknown_203AD30
+	.4byte gUnknown_20370D2
+	.4byte gSpecialVar_MonBoxId
+	.4byte gSpecialVar_MonBoxPos
+	.4byte gUnknown_20370DA
+	.4byte gUnknown_20370DC
+	.4byte gUnknown_20370DE
 
     .include "data/specials.inc"
 
-gUnknown_8160450:: @ 8160450
-	.incbin "baserom.gba", 0x160450, 0x28
+    .align 2
+gStdScripts:: @ 8160450
+	.4byte gStdScript_81A667B
+	.4byte gStdScript_81A67B3
+	.4byte gStdScript_81A4E3F
+	.4byte gStdScript_81A4E4A
+	.4byte gStdScript_81A4E54
+	.4byte gStdScript_81A4E5C
+	.4byte gStdScript_81A501F
+	.4byte gStdScript_81A676C
+	.4byte gStdScript_81A8E58
+	.4byte gStdScript_81A4E66
+gStdScripts_End::
 
 gUnknown_8160478:: @ 8160478
 	.incbin "baserom.gba", 0x160478, 0x886C
@@ -21,7 +49,22 @@ gUnknown_8168CE4:: @ 8168CE4
 	.incbin "baserom.gba", 0x168CE4, 0x33
 
 gUnknown_8168D17:: @ 8168D17
-	.incbin "baserom.gba", 0x168D17, 0x3C19D
+	.incbin "baserom.gba", 0x168D17, 0x3C128
+
+gStdScript_81A4E3F::
+    .incbin "baserom.gba", 0x1A4E3F, 0xB
+
+gStdScript_81A4E4A::
+    .incbin "baserom.gba", 0x1A4E4A, 0xA
+
+gStdScript_81A4E54::
+    .incbin "baserom.gba", 0x1A4E54, 0x8
+
+gStdScript_81A4E5C::
+    .incbin "baserom.gba", 0x1A4E5C, 0xA
+
+gStdScript_81A4E66::
+    .incbin "baserom.gba", 0x1A4E66, 0x4E
 
 gUnknown_81A4EB4:: @ 81A4EB4
 	.incbin "baserom.gba", 0x1A4EB4, 0xD
@@ -39,7 +82,10 @@ gUnknown_81A4F3E:: @ 81A4F3E
 	.incbin "baserom.gba", 0x1A4F3E, 0x35
 
 gUnknown_81A4F73:: @ 81A4F73
-	.incbin "baserom.gba", 0x1A4F73, 0x117
+	.incbin "baserom.gba", 0x1A4F73, 0xAC
+
+gStdScript_81A501F::
+    .incbin "baserom.gba", 0x1A501F, 0x6B
 
 gUnknown_81A508A:: @ 81A508A
 	.incbin "baserom.gba", 0x1A508A, 0x3EC
@@ -51,7 +97,16 @@ gUnknown_81A6481:: @ 81A6481
 	.incbin "baserom.gba", 0x1A6481, 0xCA
 
 gUnknown_81A654B:: @ 81A654B
-	.incbin "baserom.gba", 0x1A654B, 0x2F8
+	.incbin "baserom.gba", 0x1A654B, 0x130
+
+gStdScript_81A667B::
+    .incbin "baserom.gba", 0x1A667B, 0xF1
+
+gStdScript_81A676C::
+    .incbin "baserom.gba", 0x1A676C, 0x47
+
+gStdScript_81A67B3::
+    .incbin "baserom.gba", 0x1A67B3, 0x90
 
 gUnknown_81A6843:: @ 81A6843
 	.incbin "baserom.gba", 0x1A6843, 0x112
@@ -225,7 +280,10 @@ gUnknown_81A8DD8:: @ 81A8DD8
 	.incbin "baserom.gba", 0x1A8DD8, 0x25
 
 gUnknown_81A8DFD:: @ 81A8DFD
-	.incbin "baserom.gba", 0x1A8DFD, 0x4309
+	.incbin "baserom.gba", 0x1A8DFD, 0x5B
+
+gStdScript_81A8E58::
+    .incbin "baserom.gba", 0x1A8E58, 0x42AE
 
 	.include "data/text/fame_checker.inc"
 

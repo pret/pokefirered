@@ -48,7 +48,7 @@ sub_8069EFC: @ 8069EFC
 	lsrs r0, 14
 	ldr r1, _08069F18 @ =gSpecials
 	adds r1, r0, r1
-	ldr r0, _08069F1C @ =gUnknown_8160450
+	ldr r0, _08069F1C @ =gStdScripts
 	cmp r1, r0
 	bcs _08069F20
 	ldr r0, [r1]
@@ -56,7 +56,7 @@ sub_8069EFC: @ 8069EFC
 	b _08069F2C
 	.align 2, 0
 _08069F18: .4byte gSpecials
-_08069F1C: .4byte gUnknown_8160450
+_08069F1C: .4byte gStdScripts
 _08069F20:
 	ldr r0, _08069F34 @ =gUnknown_83A725C	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c"
 	ldr r2, _08069F38 @ =gUnknown_83A7290	"0"
@@ -87,7 +87,7 @@ sub_8069F3C: @ 8069F3C
 	lsrs r0, 14
 	ldr r1, _08069F6C @ =gSpecials
 	adds r1, r0, r1
-	ldr r0, _08069F70 @ =gUnknown_8160450
+	ldr r0, _08069F70 @ =gStdScripts
 	cmp r1, r0
 	bcs _08069F74
 	ldr r0, [r1]
@@ -96,7 +96,7 @@ sub_8069F3C: @ 8069F3C
 	b _08069F80
 	.align 2, 0
 _08069F6C: .4byte gSpecials
-_08069F70: .4byte gUnknown_8160450
+_08069F70: .4byte gStdScripts
 _08069F74:
 	ldr r0, _08069F88 @ =gUnknown_83A725C	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c"
 	ldr r1, _08069F8C @ =0x00000107
@@ -368,7 +368,7 @@ ScrCmd_gotostd: @ 806A150
 	adds r0, 0x1
 	str r0, [r2, 0x8]
 	lsls r1, 2
-	ldr r0, _0806A178 @ =gUnknown_8160450
+	ldr r0, _0806A178 @ =gStdScripts
 	adds r1, r0
 	ldr r0, _0806A17C @ =gUnknown_8160478
 	cmp r1, r0
@@ -381,7 +381,7 @@ _0806A170:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A178: .4byte gUnknown_8160450
+_0806A178: .4byte gStdScripts
 _0806A17C: .4byte gUnknown_8160478
 	thumb_func_end ScrCmd_gotostd
 
@@ -394,7 +394,7 @@ ScrCmd_callstd: @ 806A180
 	adds r0, 0x1
 	str r0, [r2, 0x8]
 	lsls r1, 2
-	ldr r0, _0806A1A8 @ =gUnknown_8160450
+	ldr r0, _0806A1A8 @ =gStdScripts
 	adds r1, r0
 	ldr r0, _0806A1AC @ =gUnknown_8160478
 	cmp r1, r0
@@ -407,7 +407,7 @@ _0806A1A0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A1A8: .4byte gUnknown_8160450
+_0806A1A8: .4byte gStdScripts
 _0806A1AC: .4byte gUnknown_8160478
 	thumb_func_end ScrCmd_callstd
 
@@ -432,7 +432,7 @@ ScrCmd_gotostd_if: @ 806A1B0
 	cmp r0, 0x1
 	bne _0806A1E8
 	lsls r0, r4, 2
-	ldr r1, _0806A1F4 @ =gUnknown_8160450
+	ldr r1, _0806A1F4 @ =gStdScripts
 	adds r1, r0, r1
 	ldr r0, _0806A1F8 @ =gUnknown_8160478
 	cmp r1, r0
@@ -447,7 +447,7 @@ _0806A1E8:
 	bx r1
 	.align 2, 0
 _0806A1F0: .4byte gUnknown_83A7248
-_0806A1F4: .4byte gUnknown_8160450
+_0806A1F4: .4byte gStdScripts
 _0806A1F8: .4byte gUnknown_8160478
 	thumb_func_end ScrCmd_gotostd_if
 
@@ -472,7 +472,7 @@ ScrCmd_callstd_if: @ 806A1FC
 	cmp r0, 0x1
 	bne _0806A234
 	lsls r0, r4, 2
-	ldr r1, _0806A240 @ =gUnknown_8160450
+	ldr r1, _0806A240 @ =gStdScripts
 	adds r1, r0, r1
 	ldr r0, _0806A244 @ =gUnknown_8160478
 	cmp r1, r0
@@ -487,7 +487,7 @@ _0806A234:
 	bx r1
 	.align 2, 0
 _0806A23C: .4byte gUnknown_83A7248
-_0806A240: .4byte gUnknown_8160450
+_0806A240: .4byte gStdScripts
 _0806A244: .4byte gUnknown_8160478
 	thumb_func_end ScrCmd_callstd_if
 

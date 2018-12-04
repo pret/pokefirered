@@ -509,7 +509,7 @@ _0806E500: .4byte gUnknown_300507C
 _0806E504: .4byte gSaveBlock1Ptr
 _0806E508: .4byte 0xffff9000
 _0806E50C:
-	ldr r0, _0806E520 @ =gUnknown_815FD0C
+	ldr r0, _0806E520 @ =gSpecialVars
 	ldr r3, _0806E524 @ =0xffff8000
 	adds r1, r6, r3
 	lsls r1, 2
@@ -520,7 +520,7 @@ _0806E518:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806E520: .4byte gUnknown_815FD0C
+_0806E520: .4byte gSpecialVars
 _0806E524: .4byte 0xffff8000
 	thumb_func_end GetVarPointer
 

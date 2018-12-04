@@ -9,8 +9,7 @@ gScriptCmdTableEnd:: @ 815FD08
 gUnknown_815FD0C:: @ 815FD0C
 	.incbin "baserom.gba", 0x15FD0C, 0x54
 
-gUnknown_815FD60:: @ 815FD60
-	.incbin "baserom.gba", 0x15FD60, 0x6F0
+    .include "data/specials.inc"
 
 gUnknown_8160450:: @ 8160450
 	.incbin "baserom.gba", 0x160450, 0x28

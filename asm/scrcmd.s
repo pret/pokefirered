@@ -46,7 +46,7 @@ sub_8069EFC: @ 8069EFC
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 14
-	ldr r1, _08069F18 @ =gUnknown_815FD60
+	ldr r1, _08069F18 @ =gSpecials
 	adds r1, r0, r1
 	ldr r0, _08069F1C @ =gUnknown_8160450
 	cmp r1, r0
@@ -55,7 +55,7 @@ sub_8069EFC: @ 8069EFC
 	bl _call_via_r0
 	b _08069F2C
 	.align 2, 0
-_08069F18: .4byte gUnknown_815FD60
+_08069F18: .4byte gSpecials
 _08069F1C: .4byte gUnknown_8160450
 _08069F20:
 	ldr r0, _08069F34 @ =gUnknown_83A725C	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c"
@@ -85,7 +85,7 @@ sub_8069F3C: @ 8069F3C
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 14
-	ldr r1, _08069F6C @ =gUnknown_815FD60
+	ldr r1, _08069F6C @ =gSpecials
 	adds r1, r0, r1
 	ldr r0, _08069F70 @ =gUnknown_8160450
 	cmp r1, r0
@@ -95,7 +95,7 @@ sub_8069F3C: @ 8069F3C
 	strh r0, [r5]
 	b _08069F80
 	.align 2, 0
-_08069F6C: .4byte gUnknown_815FD60
+_08069F6C: .4byte gSpecials
 _08069F70: .4byte gUnknown_8160450
 _08069F74:
 	ldr r0, _08069F88 @ =gUnknown_83A725C	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c"

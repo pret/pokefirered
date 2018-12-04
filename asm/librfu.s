@@ -2769,11 +2769,11 @@ _081E0956:
 	thumb_func_start sub_81E095C
 sub_81E095C: @ 81E095C
 	push {lr}
-	ldr r2, _081E0964 @ =gUnknown_86FC068
+	ldr r2, _081E0964 @ =_Str_RFU_MBOOT
 	ldr r3, _081E0968 @ =0x30000F0
 	b _081E0976
 	.align 2, 0
-_081E0964: .4byte gUnknown_86FC068
+_081E0964: .4byte _Str_RFU_MBOOT
 _081E0968: .4byte 0x30000F0
 _081E096C:
 	ldrb r0, [r3]
@@ -5794,7 +5794,7 @@ _081E1FF0:
 	movs r2, 0
 	movs r0, 0x1
 	ands r0, r3
-	ldr r4, _081E2020 @ =gUnknown_86FC03C
+	ldr r4, _081E2020 @ =_Str_RfuHeader
 	cmp r0, 0
 	bne _081E2012
 	movs r1, 0x1
@@ -5818,7 +5818,7 @@ _081E2012:
 	adds r1, 0xF
 	b _081E202E
 	.align 2, 0
-_081E2020: .4byte gUnknown_86FC03C
+_081E2020: .4byte _Str_RfuHeader
 _081E2024:
 	cmp r0, 0
 	bne _081E2030
@@ -6832,7 +6832,7 @@ rfu_STC_NI_constructLLSF: @ 81E2790
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	lsls r0, 4
-	ldr r1, _081E2810 @ =gUnknown_86FC03C
+	ldr r1, _081E2810 @ =_Str_RfuHeader
 	adds r0, r1
 	mov r8, r0
 	ldrh r1, [r4]
@@ -6883,7 +6883,7 @@ _081E27FA:
 	b _081E285C
 	.align 2, 0
 _081E280C: .4byte gUnknown_3007460
-_081E2810: .4byte gUnknown_86FC03C
+_081E2810: .4byte _Str_RfuHeader
 _081E2814: .4byte 0x00008022
 _081E2818:
 	ldr r0, _081E2844 @ =0x00008022
@@ -7083,7 +7083,7 @@ _081E297C:
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	lsls r0, 4
-	ldr r1, _081E29F8 @ =gUnknown_86FC03C
+	ldr r1, _081E29F8 @ =_Str_RfuHeader
 	adds r5, r0, r1
 	ldrh r0, [r4]
 	movs r1, 0xF
@@ -7142,7 +7142,7 @@ _081E29CE:
 	b _081E2A0C
 	.align 2, 0
 _081E29F4: .4byte gUnknown_3007460
-_081E29F8: .4byte gUnknown_86FC03C
+_081E29F8: .4byte _Str_RfuHeader
 _081E29FC: .4byte gUnknown_3007468
 _081E2A00:
 	movs r0, 0x10
@@ -7469,7 +7469,7 @@ rfu_STC_analyzeLLSF: @ 81E2C40
 	movs r1, 0x1
 	ands r0, r1
 	lsls r0, 4
-	ldr r1, _081E2C78 @ =gUnknown_86FC03C
+	ldr r1, _081E2C78 @ =_Str_RfuHeader
 	adds r6, r0, r1
 	ldrb r0, [r6]
 	cmp r3, r0
@@ -7478,7 +7478,7 @@ rfu_STC_analyzeLLSF: @ 81E2C40
 	b _081E2E6E
 	.align 2, 0
 _081E2C74: .4byte gUnknown_3007460
-_081E2C78: .4byte gUnknown_86FC03C
+_081E2C78: .4byte _Str_RfuHeader
 _081E2C7C:
 	movs r5, 0
 	movs r4, 0
@@ -8877,12 +8877,12 @@ _081E3726:
 	cmp r0, 0x3
 	bhi _081E373C
 	lsls r0, 1
-	ldr r1, _081E3738 @ =gUnknown_86FC074
+	ldr r1, _081E3738 @ =_Str_Sio32ID
 	adds r0, r1
 	ldrh r0, [r0]
 	b _081E373E
 	.align 2, 0
-_081E3738: .4byte gUnknown_86FC074
+_081E3738: .4byte _Str_Sio32ID
 _081E373C:
 	ldr r0, _081E3794 @ =0x00008001
 _081E373E:

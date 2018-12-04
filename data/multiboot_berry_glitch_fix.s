@@ -1,5 +1,5 @@
 	.section .rodata
 
 gMultiBootProgram_BerryGlitchFix_Start:: @ 86FFC6C
-	.incbin "baserom.gba", 0x6FFC6C, 0x3BF4
+	.incbin "data/berry_fix.mb"
 gMultiBootProgram_BerryGlitchFix_End::

@@ -1491,7 +1491,7 @@ _080CB128:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x1
@@ -1521,7 +1521,7 @@ _080CB176:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x1
@@ -3129,7 +3129,7 @@ sub_80CBDCC: @ 80CBDCC
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	pop {r0}
 	bx r0
 	.align 2, 0

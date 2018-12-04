@@ -1197,10 +1197,7 @@ gUnknown_2039A34: @ 2039A34
 	.space 0x4
 
 	.include "src/save.o"
-
-	.align 2
-gUnknown_203AA3C: @ 203AA3C
-	.space 0x74
+	.include "src/mystery_event_script.o"
 
 gUnknown_203AAB0: @ 203AAB0
 	.space 0x4

@@ -622,8 +622,8 @@ _080BDB68: .4byte gSaveBlock1Ptr
 _080BDB6C: .4byte 0x00002f10
 	thumb_func_end sub_80BDB48
 
-	thumb_func_start sub_80BDB70
-sub_80BDB70: @ 80BDB70
+	thumb_func_start EnableRareWord
+EnableRareWord: @ 80BDB70
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -648,7 +648,7 @@ _080BDB94:
 	.align 2, 0
 _080BDB98: .4byte gSaveBlock1Ptr
 _080BDB9C: .4byte 0x00002f10
-	thumb_func_end sub_80BDB70
+	thumb_func_end EnableRareWord
 
 	thumb_func_start sub_80BDBA0
 sub_80BDBA0: @ 80BDBA0
@@ -687,7 +687,7 @@ sub_80BDBCC: @ 80BDBCC
 	b _080BDC32
 _080BDBDC:
 	adds r0, r5, 0
-	bl sub_80BDB70
+	bl EnableRareWord
 	ldr r0, _080BDBF4 @ =0x000001ff
 	ands r4, r0
 	movs r1, 0xA0
@@ -841,7 +841,7 @@ _080BDCF6:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BDD16
@@ -1769,7 +1769,7 @@ _080BE3BC:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	lsrs r0, 24
 	b _080BE40C
@@ -1783,7 +1783,7 @@ _080BE3D6:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	lsrs r0, 24
 	b _080BE40C

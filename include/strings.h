@@ -89,5 +89,7 @@ extern const u8 gText_Cancel4[];
 extern const u8 gText_IsThisTheCorrectTime[];
 extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_Coins[];
+extern const u8 gText_EggNickname[];
+extern const u8 gText_Pokemon[];
 
 #endif //GUARD_STRINGS_H

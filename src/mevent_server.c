@@ -227,7 +227,7 @@ static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
             break;
         case 18:
             memcpy(gSaveBlock2Ptr->unk_4A0, svr->recvBuffer, 0xbc);
-            sub_80E7490();
+            ValidateEReaderTrainer();
             break;
         case 21:
             memcpy(gDecompressionBuffer, svr->recvBuffer, ME_SEND_BUF_SIZE);

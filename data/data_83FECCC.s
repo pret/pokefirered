@@ -556,7 +556,7 @@ gExpandedPlaceholder_Green:: @ 8415A5C
 gText_EggNickname:: @ 8415A62
 	.incbin "baserom.gba", 0x415A62, 0x4
 
-gUnknown_8415A66:: @ 8415A66
+gText_Pokemon:: @ 8415A66
 	.incbin "baserom.gba", 0x415A66, 0x8
 
 gUnknown_8415A6E:: @ 8415A6E

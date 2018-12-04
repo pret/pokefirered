@@ -525,7 +525,7 @@ ScrCmd_setmysteryeventstatus: @ 806A274
 	adds r1, 0x1
 	str r1, [r0, 0x8]
 	adds r0, r2, 0
-	bl sub_80DA8E8
+	bl SetMysteryEventScriptStatus
 	movs r0, 0
 	pop {r1}
 	bx r1

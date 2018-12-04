@@ -143,7 +143,7 @@ sub_80E5A70: @ 80E5A70
 	add r4, sp, 0x28
 	movs r0, 0
 	strb r0, [r4]
-	bl sub_80E7490
+	bl ValidateEReaderTrainer
 	ldr r0, _080E5AA4 @ =gUnknown_20370D0
 	ldrh r0, [r0]
 	adds r7, r4, 0
@@ -1506,7 +1506,7 @@ sub_80E64C0: @ 80E64C0
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E6554
@@ -3497,8 +3497,8 @@ _080E7488: .4byte gSaveBlock2Ptr
 _080E748C: .4byte 0x000004a4
 	thumb_func_end sub_80E7460
 
-	thumb_func_start sub_80E7490
-sub_80E7490: @ 80E7490
+	thumb_func_start ValidateEReaderTrainer
+ValidateEReaderTrainer: @ 80E7490
 	push {r4-r6,lr}
 	ldr r2, _080E74C0 @ =gUnknown_20370D0
 	movs r0, 0
@@ -3556,7 +3556,7 @@ _080E74F6:
 	bx r0
 	.align 2, 0
 _080E74FC: .4byte gUnknown_20370D0
-	thumb_func_end sub_80E7490
+	thumb_func_end ValidateEReaderTrainer
 
 	thumb_func_start sub_80E7500
 sub_80E7500: @ 80E7500

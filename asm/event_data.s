@@ -170,8 +170,8 @@ _0806E224: .4byte 0x0000404e
 _0806E228: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_806E204
 
-	thumb_func_start sub_806E22C
-sub_806E22C: @ 806E22C
+	thumb_func_start EnableNationalPokedex
+EnableNationalPokedex: @ 806E22C
 	push {lr}
 	ldr r0, _0806E250 @ =0x0000404e
 	bl GetVarPointer
@@ -191,7 +191,7 @@ sub_806E22C: @ 806E22C
 _0806E250: .4byte 0x0000404e
 _0806E254: .4byte gSaveBlock2Ptr
 _0806E258: .4byte 0x00006258
-	thumb_func_end sub_806E22C
+	thumb_func_end EnableNationalPokedex
 
 	thumb_func_start sub_806E25C
 sub_806E25C: @ 806E25C

@@ -482,13 +482,13 @@ sub_8044898: @ 8044898
 	orrs r1, r0
 	lsrs r1, 31
 	adds r0, r4, 0
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _080448EE
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	bl NationalPokedexNumToSpecies
 	lsls r0, 16

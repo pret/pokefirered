@@ -8131,7 +8131,7 @@ sub_80507A0: @ 80507A0
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
 	adds r2, r5, 0

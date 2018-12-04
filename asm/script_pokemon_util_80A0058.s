@@ -154,10 +154,10 @@ ScriptGiveMon: @ 80A011C
 	blt _080A0196
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 _080A0196:
 	adds r0, r7, 0
 	bl Free

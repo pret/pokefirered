@@ -214,10 +214,10 @@ AddHatchedMonToParty: @ 8046D60
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	ldr r1, _08046E1C @ =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNick

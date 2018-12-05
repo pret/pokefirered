@@ -1212,14 +1212,14 @@ task50_save_game: @ 806F6D4
 _0806F6F0:
 	cmp r1, 0x3
 	bgt _0806F704
-	ldr r1, _0806F6FC @ =gUnknown_20370D0
+	ldr r1, _0806F6FC @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	b _0806F704
 	.align 2, 0
-_0806F6FC: .4byte gUnknown_20370D0
+_0806F6FC: .4byte gSpecialVar_Result
 _0806F700:
-	ldr r0, _0806F718 @ =gUnknown_20370D0
+	ldr r0, _0806F718 @ =gSpecialVar_Result
 	strh r1, [r0]
 _0806F704:
 	adds r0, r4, 0
@@ -1231,7 +1231,7 @@ _0806F712:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806F718: .4byte gUnknown_20370D0
+_0806F718: .4byte gSpecialVar_Result
 	thumb_func_end task50_save_game
 
 	thumb_func_start sub_806F71C

@@ -495,7 +495,7 @@ _080BDA74:
 	thumb_func_start sub_80BDA7C
 sub_80BDA7C: @ 80BDA7C
 	push {r4,r5,lr}
-	ldr r0, _080BDA90 @ =gUnknown_20370C0
+	ldr r0, _080BDA90 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080BDAB4
@@ -505,7 +505,7 @@ sub_80BDA7C: @ 80BDA7C
 	beq _080BDA9E
 	b _080BDB08
 	.align 2, 0
-_080BDA90: .4byte gUnknown_20370C0
+_080BDA90: .4byte gSpecialVar_0x8004
 _080BDA94:
 	cmp r0, 0x2
 	beq _080BDADC

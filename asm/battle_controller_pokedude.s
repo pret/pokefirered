@@ -22,7 +22,7 @@ sub_81560A4: @ 81560A4
 	ldr r2, _081560D4 @ =gBattleStruct
 	ldr r0, [r2]
 	adds r0, 0x96
-	ldr r1, _081560D8 @ =gUnknown_20370C0
+	ldr r1, _081560D8 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	strb r1, [r0]
 	ldr r0, [r2]
@@ -35,7 +35,7 @@ _081560C8: .4byte gUnknown_3004FE0
 _081560CC: .4byte gActiveBattler
 _081560D0: .4byte sub_81560DC
 _081560D4: .4byte gBattleStruct
-_081560D8: .4byte gUnknown_20370C0
+_081560D8: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_81560A4
 
 	thumb_func_start sub_81560DC
@@ -642,7 +642,7 @@ sub_8156594: @ 8156594
 	str r1, [r0]
 	bl nullsub_44
 	bl FreeAllWindowBuffers
-	ldr r0, _081565D8 @ =gUnknown_20370C0
+	ldr r0, _081565D8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _081565C4
@@ -656,7 +656,7 @@ _081565C8: .4byte gPaletteFade
 _081565CC: .4byte gUnknown_3004FE0
 _081565D0: .4byte gActiveBattler
 _081565D4: .4byte sub_81565E8
-_081565D8: .4byte gUnknown_20370C0
+_081565D8: .4byte gSpecialVar_0x8004
 _081565DC:
 	movs r0, 0x8
 _081565DE:
@@ -680,7 +680,7 @@ sub_81565E8: @ 81565E8
 	ands r0, r1
 	cmp r0, 0
 	bne _0815660E
-	ldr r0, _08156620 @ =gUnknown_203AD30
+	ldr r0, _08156620 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
@@ -692,7 +692,7 @@ _0815660E:
 _08156614: .4byte gMain
 _08156618: .4byte sub_8011100
 _0815661C: .4byte gPaletteFade
-_08156620: .4byte gUnknown_203AD30
+_08156620: .4byte gSpecialVar_ItemId
 	thumb_func_end sub_81565E8
 
 	thumb_func_start sub_8156624

@@ -23,7 +23,7 @@ sub_8159F40: @ 8159F40
 	bl ZeroPlayerPartyMons
 	bl ZeroEnemyPartyMons
 	ldr r1, _08159F94 @ =gUnknown_84792D0
-	ldr r0, _08159F98 @ =gUnknown_20370C0
+	ldr r0, _08159F98 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -49,7 +49,7 @@ _08159F72:
 	.align 2, 0
 _08159F90: .4byte gBattleTypeFlags
 _08159F94: .4byte gUnknown_84792D0
-_08159F98: .4byte gUnknown_20370C0
+_08159F98: .4byte gSpecialVar_0x8004
 _08159F9C: .4byte gPlayerParty
 _08159FA0:
 	movs r0, 0x64

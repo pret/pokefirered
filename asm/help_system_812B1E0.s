@@ -49,13 +49,13 @@ _0812B21C: .4byte gUnknown_203B0EC
 	thumb_func_start sub_812B220
 sub_812B220: @ 812B220
 	ldr r0, _0812B22C @ =gUnknown_203B0EC
-	ldr r1, _0812B230 @ =gUnknown_20370C0
+	ldr r1, _0812B230 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
 _0812B22C: .4byte gUnknown_203B0EC
-_0812B230: .4byte gUnknown_20370C0
+_0812B230: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_812B220
 
 	thumb_func_start sub_812B234

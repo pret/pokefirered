@@ -10,7 +10,7 @@ sub_80A0FBC: @ 80A0FBC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080A0FD8 @ =gUnknown_203AD30
+	ldr r1, _080A0FD8 @ =gSpecialVar_ItemId
 	ldrh r0, [r1]
 	cmp r0, 0xAF
 	bne _080A0FE0
@@ -22,7 +22,7 @@ sub_80A0FBC: @ 80A0FBC
 	ldrb r0, [r1, 0x10]
 	b _080A0FE6
 	.align 2, 0
-_080A0FD8: .4byte gUnknown_203AD30
+_080A0FD8: .4byte gSpecialVar_ItemId
 _080A0FDC: .4byte gTasks
 _080A0FE0:
 	ldrh r0, [r1]
@@ -31,7 +31,7 @@ _080A0FE6:
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A1010 @ =gUnknown_203AD30
+	ldr r0, _080A1010 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl GetPocketByItemId
 	lsls r0, 24
@@ -47,7 +47,7 @@ _080A0FE6:
 	bl sub_813D808
 	b _080A1032
 	.align 2, 0
-_080A1010: .4byte gUnknown_203AD30
+_080A1010: .4byte gSpecialVar_ItemId
 _080A1014: .4byte gUnknown_83E2954
 _080A1018:
 	ldr r0, _080A1038 @ =gUnknown_83E2954
@@ -317,7 +317,7 @@ sub_80A1208: @ 80A1208
 	push {lr}
 	sub sp, 0x24
 	mov r1, sp
-	ldr r0, _080A1224 @ =gUnknown_203AD30
+	ldr r0, _080A1224 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	strh r0, [r1, 0x20]
 	ldr r1, _080A1228 @ =UseFameCheckerFromMenu
@@ -328,7 +328,7 @@ sub_80A1208: @ 80A1208
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1224: .4byte gUnknown_203AD30
+_080A1224: .4byte gSpecialVar_ItemId
 _080A1228: .4byte UseFameCheckerFromMenu
 	thumb_func_end sub_80A1208
 
@@ -571,7 +571,7 @@ ItemUseOnFieldCB_Rod: @ 80A1410
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080A1434 @ =gUnknown_203AD30
+	ldr r0, _080A1434 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl ItemId_GetSecondaryId
 	lsls r0, 24
@@ -583,7 +583,7 @@ ItemUseOnFieldCB_Rod: @ 80A1410
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1434: .4byte gUnknown_203AD30
+_080A1434: .4byte gSpecialVar_ItemId
 	thumb_func_end ItemUseOnFieldCB_Rod
 
 	thumb_func_start ItemUseOutOfBattle_Itemfinder
@@ -625,7 +625,7 @@ sub_80A1460: @ 80A1460
 	ldr r1, _080A14BC @ =gUnknown_8416537
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
-	ldr r0, _080A14C0 @ =gUnknown_203AD30
+	ldr r0, _080A14C0 @ =gSpecialVar_ItemId
 	ldrh r2, [r0]
 	ldr r3, _080A14C4 @ =0x0000ffff
 	movs r0, 0x4
@@ -650,7 +650,7 @@ sub_80A1460: @ 80A1460
 _080A14B4: .4byte gStringVar1
 _080A14B8: .4byte gStringVar4
 _080A14BC: .4byte gUnknown_8416537
-_080A14C0: .4byte gUnknown_203AD30
+_080A14C0: .4byte gSpecialVar_ItemId
 _080A14C4: .4byte 0x0000ffff
 _080A14C8: .4byte gTasks
 _080A14CC: .4byte sub_810A1F8
@@ -684,7 +684,7 @@ sub_80A14E8: @ 80A14E8
 	ldr r1, _080A1540 @ =gUnknown_8416644
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
-	ldr r0, _080A1544 @ =gUnknown_203AD30
+	ldr r0, _080A1544 @ =gSpecialVar_ItemId
 	ldrh r2, [r0]
 	ldr r3, _080A1548 @ =0x0000ffff
 	movs r0, 0x4
@@ -709,7 +709,7 @@ sub_80A14E8: @ 80A14E8
 _080A1538: .4byte gStringVar1
 _080A153C: .4byte gStringVar4
 _080A1540: .4byte gUnknown_8416644
-_080A1544: .4byte gUnknown_203AD30
+_080A1544: .4byte gSpecialVar_ItemId
 _080A1548: .4byte 0x0000ffff
 _080A154C: .4byte gTasks
 _080A1550: .4byte sub_810A1F8
@@ -760,7 +760,7 @@ _080A1598:
 	bcc _080A1578
 	cmp r6, 0
 	beq _080A1600
-	ldr r0, _080A15D4 @ =gUnknown_203AD30
+	ldr r0, _080A15D4 @ =gSpecialVar_ItemId
 	ldrh r2, [r0]
 	ldr r3, _080A15D8 @ =0x0000ffff
 	movs r0, 0x4
@@ -780,7 +780,7 @@ _080A1598:
 	b _080A1616
 	.align 2, 0
 _080A15D0: .4byte gPlayerParty
-_080A15D4: .4byte gUnknown_203AD30
+_080A15D4: .4byte gSpecialVar_ItemId
 _080A15D8: .4byte 0x0000ffff
 _080A15DC: .4byte gTasks
 _080A15E0: .4byte gUnknown_8416690
@@ -1196,7 +1196,7 @@ sub_80A18EC: @ 80A18EC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A1920 @ =gUnknown_203AD30
+	ldr r0, _080A1920 @ =gSpecialVar_ItemId
 	ldrh r2, [r0]
 	ldr r3, _080A1924 @ =0x0000ffff
 	movs r0, 0x4
@@ -1217,7 +1217,7 @@ sub_80A18EC: @ 80A18EC
 	bl sub_8108B50
 	b _080A1940
 	.align 2, 0
-_080A1920: .4byte gUnknown_203AD30
+_080A1920: .4byte gSpecialVar_ItemId
 _080A1924: .4byte 0x0000ffff
 _080A1928: .4byte gTasks
 _080A192C: .4byte sub_80A194C
@@ -1323,7 +1323,7 @@ sub_80A19E8: @ 80A19E8
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1A2A
-	ldr r4, _080A1A30 @ =gUnknown_203AD30
+	ldr r4, _080A1A30 @ =gSpecialVar_ItemId
 	ldrh r2, [r4]
 	ldr r3, _080A1A34 @ =0x0000ffff
 	movs r0, 0x4
@@ -1348,7 +1348,7 @@ _080A1A2A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1A30: .4byte gUnknown_203AD30
+_080A1A30: .4byte gSpecialVar_ItemId
 _080A1A34: .4byte 0x0000ffff
 _080A1A38: .4byte 0x00004020
 _080A1A3C: .4byte gStringVar4
@@ -1358,7 +1358,7 @@ _080A1A40: .4byte sub_810A1F8
 	thumb_func_start sub_80A1A44
 sub_80A1A44: @ 80A1A44
 	push {r4,lr}
-	ldr r4, _080A1A84 @ =gUnknown_203AD30
+	ldr r4, _080A1A84 @ =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	movs r1, 0x1
 	bl sub_809A1D8
@@ -1382,7 +1382,7 @@ sub_80A1A44: @ 80A1A44
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1A84: .4byte gUnknown_203AD30
+_080A1A84: .4byte gSpecialVar_ItemId
 _080A1A88: .4byte gStringVar2
 _080A1A8C: .4byte gStringVar4
 _080A1A90: .4byte gUnknown_841658C
@@ -1394,7 +1394,7 @@ sub_80A1A94: @ 80A1A94
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r5, _080A1AD4 @ =gUnknown_203AD30
+	ldr r5, _080A1AD4 @ =gSpecialVar_ItemId
 	ldrh r2, [r5]
 	ldr r3, _080A1AD8 @ =0x0000ffff
 	movs r0, 0x4
@@ -1418,7 +1418,7 @@ sub_80A1A94: @ 80A1A94
 	adds r0, r4
 	b _080A1B1A
 	.align 2, 0
-_080A1AD4: .4byte gUnknown_203AD30
+_080A1AD4: .4byte gSpecialVar_ItemId
 _080A1AD8: .4byte 0x0000ffff
 _080A1ADC: .4byte 0x00000803
 _080A1AE0: .4byte 0x00000804
@@ -1527,7 +1527,7 @@ ItemUseOutOfBattle_EscapeRope: @ 80A1BAC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080A1BEC
-	ldr r0, _080A1BDC @ =gUnknown_203AD30
+	ldr r0, _080A1BDC @ =gSpecialVar_ItemId
 	ldrh r2, [r0]
 	ldr r0, _080A1BE0 @ =gMapHeader
 	ldrb r3, [r0, 0x14]
@@ -1541,7 +1541,7 @@ ItemUseOutOfBattle_EscapeRope: @ 80A1BAC
 	bl sub_80A103C
 	b _080A1BFE
 	.align 2, 0
-_080A1BDC: .4byte gUnknown_203AD30
+_080A1BDC: .4byte gSpecialVar_ItemId
 _080A1BE0: .4byte gMapHeader
 _080A1BE4: .4byte gUnknown_2039998
 _080A1BE8: .4byte sub_80A1C08
@@ -1687,7 +1687,7 @@ sub_80A1CF8: @ 80A1CF8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A1D2C @ =gUnknown_203AD30
+	ldr r0, _080A1D2C @ =gSpecialVar_ItemId
 	ldrh r2, [r0]
 	ldr r3, _080A1D30 @ =0x0000ffff
 	movs r0, 0x4
@@ -1708,7 +1708,7 @@ sub_80A1CF8: @ 80A1CF8
 	bl sub_8108B50
 	b _080A1D4C
 	.align 2, 0
-_080A1D2C: .4byte gUnknown_203AD30
+_080A1D2C: .4byte gSpecialVar_ItemId
 _080A1D30: .4byte 0x0000ffff
 _080A1D34: .4byte gTasks
 _080A1D38: .4byte sub_80A1D58
@@ -1841,7 +1841,7 @@ sub_80A1E1C: @ 80A1E1C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1E48
-	ldr r0, _080A1E44 @ =gUnknown_203AD30
+	ldr r0, _080A1E44 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl sub_809A1D8
@@ -1850,7 +1850,7 @@ sub_80A1E1C: @ 80A1E1C
 	bl sub_8108B50
 	b _080A1E54
 	.align 2, 0
-_080A1E44: .4byte gUnknown_203AD30
+_080A1E44: .4byte gSpecialVar_ItemId
 _080A1E48:
 	ldr r2, _080A1E5C @ =gUnknown_8416631
 	ldr r3, _080A1E60 @ =sub_810A1F8
@@ -1895,7 +1895,7 @@ sub_80A1E7C: @ 80A1E7C
 	muls r0, r2
 	ldr r1, _080A1EC4 @ =gPlayerParty
 	adds r0, r1
-	ldr r1, _080A1EC8 @ =gUnknown_203AD30
+	ldr r1, _080A1EC8 @ =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	lsls r2, 24
 	lsrs r2, 24
@@ -1915,7 +1915,7 @@ sub_80A1E7C: @ 80A1E7C
 _080A1EBC: .4byte gBattlerPartyIndexes
 _080A1EC0: .4byte gBattlerInMenuId
 _080A1EC4: .4byte gPlayerParty
-_080A1EC8: .4byte gUnknown_203AD30
+_080A1EC8: .4byte gSpecialVar_ItemId
 _080A1ECC: .4byte gUnknown_84169DC
 _080A1ED0: .4byte sub_810A1F8
 _080A1ED4:
@@ -1953,7 +1953,7 @@ sub_80A1EF4: @ 80A1EF4
 	asrs r0, 16
 	cmp r0, 0x7
 	ble _080A1F36
-	ldr r0, _080A1F40 @ =gUnknown_203AD30
+	ldr r0, _080A1F40 @ =gSpecialVar_ItemId
 	ldrh r4, [r0]
 	movs r0, 0x1
 	bl PlaySE
@@ -1973,7 +1973,7 @@ _080A1F36:
 	bx r0
 	.align 2, 0
 _080A1F3C: .4byte gTasks+0x8
-_080A1F40: .4byte gUnknown_203AD30
+_080A1F40: .4byte gSpecialVar_ItemId
 _080A1F44: .4byte sub_80A1F48
 	thumb_func_end sub_80A1EF4
 
@@ -2009,7 +2009,7 @@ sub_80A1F78: @ 80A1F78
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A1F9C @ =gUnknown_203AD30
+	ldr r0, _080A1F9C @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl GetPocketByItemId
 	lsls r0, 24
@@ -2022,7 +2022,7 @@ sub_80A1F78: @ 80A1F78
 	bl sub_813D808
 	b _080A1FB0
 	.align 2, 0
-_080A1F9C: .4byte gUnknown_203AD30
+_080A1F9C: .4byte gSpecialVar_ItemId
 _080A1FA0: .4byte sub_81279E0
 _080A1FA4:
 	ldr r0, _080A1FB8 @ =sub_81279E0
@@ -2097,7 +2097,7 @@ sub_80A2010: @ 80A2010
 	cmp r0, 0
 	bne _080A2058
 	bl sub_80A1A44
-	ldr r0, _080A2048 @ =gUnknown_203AD30
+	ldr r0, _080A2048 @ =gSpecialVar_ItemId
 	ldrh r2, [r0]
 	ldr r3, _080A204C @ =0x0000ffff
 	movs r0, 0x4
@@ -2111,7 +2111,7 @@ sub_80A2010: @ 80A2010
 	b _080A2060
 	.align 2, 0
 _080A2044: .4byte gBattleTypeFlags
-_080A2048: .4byte gUnknown_203AD30
+_080A2048: .4byte gSpecialVar_ItemId
 _080A204C: .4byte 0x0000ffff
 _080A2050: .4byte gStringVar4
 _080A2054: .4byte sub_8108B50
@@ -2130,7 +2130,7 @@ ItemUseOutOfBattle_EnigmaBerry: @ 80A2068
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A208C @ =gUnknown_203AD30
+	ldr r0, _080A208C @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl GetItemEffectType
 	lsls r0, 24
@@ -2146,7 +2146,7 @@ _080A2082:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080A208C: .4byte gUnknown_203AD30
+_080A208C: .4byte gSpecialVar_ItemId
 _080A2090: .4byte _080A2094
 	.align 2, 0
 _080A2094:
@@ -2259,7 +2259,7 @@ ItemUseInBattle_EnigmaBerry: @ 80A2194
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080A21B4 @ =gUnknown_203AD30
+	ldr r0, _080A21B4 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl GetItemEffectType
 	lsls r0, 24
@@ -2272,7 +2272,7 @@ ItemUseInBattle_EnigmaBerry: @ 80A2194
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080A21B4: .4byte gUnknown_203AD30
+_080A21B4: .4byte gSpecialVar_ItemId
 _080A21B8: .4byte _080A21BC
 	.align 2, 0
 _080A21BC:
@@ -2324,7 +2324,7 @@ sub_80A2238: @ 80A2238
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _080A2268 @ =gUnknown_203AD30
+	ldr r0, _080A2268 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl GetPocketByItemId
 	lsls r0, 24
@@ -2342,7 +2342,7 @@ sub_80A2238: @ 80A2238
 	bl sub_813EB20
 	b _080A228A
 	.align 2, 0
-_080A2268: .4byte gUnknown_203AD30
+_080A2268: .4byte gSpecialVar_ItemId
 _080A226C: .4byte gStringVar4
 _080A2270: .4byte gUnknown_8416425
 _080A2274: .4byte sub_813E2B8

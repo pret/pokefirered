@@ -656,49 +656,49 @@ gUnknown_20370B4: @ 20370B4
 gUnknown_20370B6: @ 20370B6
 	.space 0x2
 
-gUnknown_20370B8: @ 20370B8
+gSpecialVar_0x8000: @ 20370B8
 	.space 0x2
 
-gUnknown_20370BA: @ 20370BA
+gSpecialVar_0x8001: @ 20370BA
 	.space 0x2
 
-gUnknown_20370BC: @ 20370BC
+gSpecialVar_0x8002: @ 20370BC
 	.space 0x2
 
-gUnknown_20370BE: @ 20370BE
+gSpecialVar_0x8003: @ 20370BE
 	.space 0x2
 
-gUnknown_20370C0: @ 20370C0
+gSpecialVar_0x8004: @ 20370C0
 	.space 0x2
 
 gSpecialVar_0x8005: @ 20370C2
 	.space 0x2
 
-gUnknown_20370C4: @ 20370C4
+gSpecialVar_0x8006: @ 20370C4
 	.space 0x2
 
-gUnknown_20370C6: @ 20370C6
+gSpecialVar_0x8007: @ 20370C6
 	.space 0x2
 
-gUnknown_20370C8: @ 20370C8
+gSpecialVar_0x8008: @ 20370C8
 	.space 0x2
 
-gUnknown_20370CA: @ 20370CA
+gSpecialVar_0x8009: @ 20370CA
 	.space 0x2
 
-gUnknown_20370CC: @ 20370CC
+gSpecialVar_0x800A: @ 20370CC
 	.space 0x2
 
-gUnknown_20370CE: @ 20370CE
+gSpecialVar_0x800B: @ 20370CE
 	.space 0x2
 
-gUnknown_20370D0: @ 20370D0
+gSpecialVar_Result: @ 20370D0
 	.space 0x2
 
-gUnknown_20370D2: @ 20370D2
+gSpecialVar_LastTalked: @ 20370D2
 	.space 0x2
 
-gUnknown_20370D4: @ 20370D4
+gSpecialVar_Facing: @ 20370D4
 	.space 0x2
 
 gSpecialVar_MonBoxId: @ 20370D6
@@ -1397,7 +1397,7 @@ gUnknown_203AD28: @ 203AD28
 gUnknown_203AD2C: @ 203AD2C
 	.space 0x4
 
-gUnknown_203AD30: @ 203AD30
+gSpecialVar_ItemId: @ 203AD30
 	.space 0x4
 
 gUnknown_203AD34: @ 203AD34

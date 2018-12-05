@@ -8912,7 +8912,7 @@ _08050EA8: .4byte gStringVar3
 _08050EAC: .4byte gPlayerParty
 _08050EB0: .4byte gStringVar2
 _08050EB4:
-	ldr r0, _08050EF8 @ =gUnknown_20370C0
+	ldr r0, _08050EF8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -8944,7 +8944,7 @@ _08050EF0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050EF8: .4byte gUnknown_20370C0
+_08050EF8: .4byte gSpecialVar_0x8004
 _08050EFC: .4byte gUnknown_826CF8C
 _08050F00: .4byte gStringVar1
 _08050F04: .4byte gStringVar3
@@ -13782,7 +13782,7 @@ _08053A98: .4byte SpriteCallbackDummy
 	thumb_func_start sub_8053A9C
 sub_8053A9C: @ 8053A9C
 	push {r4-r6,lr}
-	ldr r0, _08053AD0 @ =gUnknown_20370C0
+	ldr r0, _08053AD0 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -13806,7 +13806,7 @@ sub_8053A9C: @ 8053A9C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08053AD0: .4byte gUnknown_20370C0
+_08053AD0: .4byte gSpecialVar_0x8004
 _08053AD4: .4byte gUnknown_826CF8C
 _08053AD8: .4byte gStringVar1
 _08053ADC: .4byte gSpeciesNames
@@ -13817,7 +13817,7 @@ _08053AE0: .4byte gStringVar2
 sub_8053AE4: @ 8053AE4
 	push {r4,lr}
 	sub sp, 0x20
-	ldr r0, _08053B2C @ =gUnknown_20370C0
+	ldr r0, _08053B2C @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -13848,7 +13848,7 @@ sub_8053AE4: @ 8053AE4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053B2C: .4byte gUnknown_20370C0
+_08053B2C: .4byte gSpecialVar_0x8004
 _08053B30: .4byte gUnknown_826CF8C
 _08053B34: .4byte gSpecialVar_0x8005
 _08053B38: .4byte gPlayerParty
@@ -14115,14 +14115,14 @@ sub_8053D68: @ 8053D68
 	push {lr}
 	ldr r0, _08053D7C @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
-	ldr r1, _08053D80 @ =gUnknown_20370C0
+	ldr r1, _08053D80 @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_8053B48
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08053D7C: .4byte gSpecialVar_0x8005
-_08053D80: .4byte gUnknown_20370C0
+_08053D80: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8053D68
 
 	thumb_func_start sub_8053D84

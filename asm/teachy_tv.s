@@ -2154,7 +2154,7 @@ sub_815BC90: @ 815BC90
 	ldr r1, _0815BCCC @ =gTasks+0x8
 	adds r5, r0, r1
 	bl sub_815B220
-	ldr r1, _0815BCD0 @ =gUnknown_20370C0
+	ldr r1, _0815BCD0 @ =gSpecialVar_0x8004
 	ldr r4, _0815BCD4 @ =gUnknown_203F444
 	ldrb r0, [r4, 0x5]
 	strh r0, [r1]
@@ -2172,7 +2172,7 @@ sub_815BC90: @ 815BC90
 	b _0815BCE2
 	.align 2, 0
 _0815BCCC: .4byte gTasks+0x8
-_0815BCD0: .4byte gUnknown_20370C0
+_0815BCD0: .4byte gSpecialVar_0x8004
 _0815BCD4: .4byte gUnknown_203F444
 _0815BCD8: .4byte gMain
 _0815BCDC: .4byte sub_815BD58

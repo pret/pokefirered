@@ -86,7 +86,7 @@ _080CA698: .4byte gStringVar4
 
 	thumb_func_start sub_80CA69C
 sub_80CA69C: @ 80CA69C
-	ldr r1, _080CA6B0 @ =gUnknown_20370C0
+	ldr r1, _080CA6B0 @ =gSpecialVar_0x8004
 	ldr r0, _080CA6B4 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r0, [r2]
@@ -96,7 +96,7 @@ sub_80CA69C: @ 80CA69C
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_080CA6B0: .4byte gUnknown_20370C0
+_080CA6B0: .4byte gSpecialVar_0x8004
 _080CA6B4: .4byte gSaveBlock1Ptr
 _080CA6B8: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_80CA69C
@@ -188,13 +188,13 @@ _080CA754: .4byte gUnknown_2023E8A
 	thumb_func_start sub_80CA758
 sub_80CA758: @ 80CA758
 	push {lr}
-	ldr r0, _080CA768 @ =gUnknown_20370C0
+	ldr r0, _080CA768 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl FlagSet
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA768: .4byte gUnknown_20370C0
+_080CA768: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80CA758
 
 	thumb_func_start sub_80CA76C
@@ -441,14 +441,14 @@ _080CA92C:
 _080CA92E:
 	cmp r6, 0
 	beq _080CA954
-	ldr r0, _080CA940 @ =gUnknown_20370C0
+	ldr r0, _080CA940 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080CA944
 	movs r4, 0x62
 	b _080CA96E
 	.align 2, 0
-_080CA940: .4byte gUnknown_20370C0
+_080CA940: .4byte gSpecialVar_0x8004
 _080CA944:
 	cmp r0, 0x1
 	beq _080CA94C
@@ -460,14 +460,14 @@ _080CA94C:
 	.align 2, 0
 _080CA950: .4byte 0x0000028f
 _080CA954:
-	ldr r0, _080CA960 @ =gUnknown_20370C0
+	ldr r0, _080CA960 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080CA964
 	movs r4, 0x63
 	b _080CA96E
 	.align 2, 0
-_080CA960: .4byte gUnknown_20370C0
+_080CA960: .4byte gSpecialVar_0x8004
 _080CA964:
 	cmp r0, 0x1
 	beq _080CA96C
@@ -536,14 +536,14 @@ _080CA9D6:
 _080CA9D8:
 	movs r5, 0xFF
 _080CA9DA:
-	ldr r0, _080CA9E8 @ =gUnknown_20370C0
+	ldr r0, _080CA9E8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080CA9EC
 	movs r4, 0x62
 	b _080CA9F6
 	.align 2, 0
-_080CA9E8: .4byte gUnknown_20370C0
+_080CA9E8: .4byte gSpecialVar_0x8004
 _080CA9EC:
 	cmp r0, 0x1
 	beq _080CA9F4
@@ -867,13 +867,13 @@ sub_80CAC28: @ 80CAC28
 	movs r2, 0
 	strh r0, [r1, 0x8]
 	strh r2, [r1, 0xA]
-	ldr r0, _080CAC78 @ =gUnknown_20370C4
+	ldr r0, _080CAC78 @ =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	strh r0, [r1, 0xC]
-	ldr r0, _080CAC7C @ =gUnknown_20370C6
+	ldr r0, _080CAC7C @ =gSpecialVar_0x8007
 	ldrh r0, [r0]
 	strh r0, [r1, 0xE]
-	ldr r0, _080CAC80 @ =gUnknown_20370C0
+	ldr r0, _080CAC80 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	strh r0, [r1, 0x10]
 	movs r0, 0
@@ -886,9 +886,9 @@ sub_80CAC28: @ 80CAC28
 _080CAC6C: .4byte sub_80CAC84
 _080CAC70: .4byte gTasks
 _080CAC74: .4byte gSpecialVar_0x8005
-_080CAC78: .4byte gUnknown_20370C4
-_080CAC7C: .4byte gUnknown_20370C6
-_080CAC80: .4byte gUnknown_20370C0
+_080CAC78: .4byte gSpecialVar_0x8006
+_080CAC7C: .4byte gSpecialVar_0x8007
+_080CAC80: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80CAC28
 
 	thumb_func_start sub_80CAC84
@@ -1002,7 +1002,7 @@ _080CAD4C:
 	thumb_func_start sub_80CAD54
 sub_80CAD54: @ 80CAD54
 	push {lr}
-	ldr r0, _080CAD74 @ =gUnknown_20370C0
+	ldr r0, _080CAD74 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -1016,14 +1016,14 @@ sub_80CAD54: @ 80CAD54
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CAD74: .4byte gUnknown_20370C0
+_080CAD74: .4byte gSpecialVar_0x8004
 _080CAD78: .4byte gPlayerParty
 	thumb_func_end sub_80CAD54
 
 	thumb_func_start sub_80CAD7C
 sub_80CAD7C: @ 80CAD7C
 	push {r4,lr}
-	ldr r0, _080CADA8 @ =gUnknown_20370C0
+	ldr r0, _080CADA8 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -1042,7 +1042,7 @@ sub_80CAD7C: @ 80CAD7C
 	movs r0, 0x1
 	b _080CADBA
 	.align 2, 0
-_080CADA8: .4byte gUnknown_20370C0
+_080CADA8: .4byte gSpecialVar_0x8004
 _080CADAC: .4byte gPlayerParty
 _080CADB0: .4byte gStringVar1
 _080CADB4: .4byte gSaveBlock2Ptr
@@ -1092,7 +1092,7 @@ sub_80CADEC: @ 80CADEC
 	adds r0, 0x1
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r1, _080CAE20 @ =gUnknown_20370C0
+	ldr r1, _080CAE20 @ =gSpecialVar_0x8004
 	strh r2, [r1]
 	ldr r0, _080CAE24 @ =gSpecialVar_0x8005
 	strh r2, [r0]
@@ -1108,7 +1108,7 @@ _080CAE14:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080CAE20: .4byte gUnknown_20370C0
+_080CAE20: .4byte gSpecialVar_0x8004
 _080CAE24: .4byte gSpecialVar_0x8005
 _080CAE28: .4byte _080CAE2C
 	.align 2, 0
@@ -1353,7 +1353,7 @@ _080CB01C:
 	ldrh r0, [r5]
 	cmp r0, 0xF
 	bls _080CB04C
-	ldr r0, _080CB044 @ =gUnknown_20370C0
+	ldr r0, _080CB044 @ =gSpecialVar_0x8004
 	ldrh r4, [r0]
 	adds r0, r4, 0
 	movs r1, 0x5
@@ -1368,7 +1368,7 @@ _080CB01C:
 	b _080CB04A
 	.align 2, 0
 _080CB040: .4byte gSpecialVar_0x8005
-_080CB044: .4byte gUnknown_20370C0
+_080CB044: .4byte gSpecialVar_0x8004
 _080CB048:
 	adds r0, r4, 0x1
 _080CB04A:
@@ -1569,9 +1569,9 @@ _080CB1D2:
 	thumb_func_start sub_80CB1D8
 sub_80CB1D8: @ 80CB1D8
 	push {lr}
-	ldr r0, _080CB1F0 @ =gUnknown_20370D0
+	ldr r0, _080CB1F0 @ =gSpecialVar_Result
 	ldrh r1, [r0]
-	ldr r0, _080CB1F4 @ =gUnknown_20370C4
+	ldr r0, _080CB1F4 @ =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	adds r1, r0
 	ldr r0, _080CB1F8 @ =0x0000270f
@@ -1580,8 +1580,8 @@ sub_80CB1D8: @ 80CB1D8
 	movs r0, 0x1
 	b _080CB1FE
 	.align 2, 0
-_080CB1F0: .4byte gUnknown_20370D0
-_080CB1F4: .4byte gUnknown_20370C4
+_080CB1F0: .4byte gSpecialVar_Result
+_080CB1F4: .4byte gSpecialVar_0x8006
 _080CB1F8: .4byte 0x0000270f
 _080CB1FC:
 	movs r0, 0
@@ -1956,7 +1956,7 @@ sub_80CB498: @ 80CB498
 	movs r6, 0x1
 	strh r6, [r4, 0x8]
 	ldr r0, _080CB4D8 @ =gSpecialVar_0x8005
-	ldr r1, _080CB4DC @ =gUnknown_20370C4
+	ldr r1, _080CB4DC @ =gSpecialVar_0x8006
 	ldrh r2, [r0]
 	ldrh r0, [r1]
 	cmp r2, r0
@@ -1970,7 +1970,7 @@ sub_80CB498: @ 80CB498
 _080CB4D0: .4byte sub_80CB514
 _080CB4D4: .4byte gTasks+0x8
 _080CB4D8: .4byte gSpecialVar_0x8005
-_080CB4DC: .4byte gUnknown_20370C4
+_080CB4DC: .4byte gSpecialVar_0x8006
 _080CB4E0:
 	subs r0, r2
 	lsls r0, 16
@@ -2357,7 +2357,7 @@ _080CB7D6:
 	lsls r0, 3
 	ldr r1, _080CB810 @ =gTasks
 	adds r3, r0, r1
-	ldr r0, _080CB814 @ =gUnknown_20370C0
+	ldr r0, _080CB814 @ =gSpecialVar_0x8004
 	ldrh r4, [r0]
 	cmp r4, 0x3
 	beq _080CB886
@@ -2374,7 +2374,7 @@ _080CB7D6:
 _080CB808: .4byte sub_809D6D4
 _080CB80C: .4byte sub_80CB904
 _080CB810: .4byte gTasks
-_080CB814: .4byte gUnknown_20370C0
+_080CB814: .4byte gSpecialVar_0x8004
 _080CB818:
 	cmp r4, 0x5
 	beq _080CB8B4
@@ -2490,7 +2490,7 @@ _080CB8E6:
 	strh r5, [r3, 0x26]
 	b _080CB8F8
 _080CB8EC:
-	ldr r1, _080CB900 @ =gUnknown_20370D0
+	ldr r1, _080CB900 @ =gSpecialVar_Result
 	movs r0, 0x7F
 	strh r0, [r1]
 	adds r0, r5, 0
@@ -2500,7 +2500,7 @@ _080CB8F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CB900: .4byte gUnknown_20370D0
+_080CB900: .4byte gSpecialVar_Result
 	thumb_func_end sub_80CB7C4
 
 	thumb_func_start sub_80CB904
@@ -2519,7 +2519,7 @@ sub_80CB904: @ 80CB904
 	ldr r1, _080CB934 @ =gTasks
 	adds r5, r0, r1
 	bl ScriptContext2_Enable
-	ldr r0, _080CB938 @ =gUnknown_20370C0
+	ldr r0, _080CB938 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _080CB944
@@ -2530,7 +2530,7 @@ sub_80CB904: @ 80CB904
 	b _080CB94A
 	.align 2, 0
 _080CB934: .4byte gTasks
-_080CB938: .4byte gUnknown_20370C0
+_080CB938: .4byte gSpecialVar_0x8004
 _080CB93C: .4byte gUnknown_2039A18
 _080CB940: .4byte gUnknown_2039A0E
 _080CB944:
@@ -2563,7 +2563,7 @@ _080CB974:
 	lsls r3, r4, 3
 	adds r3, r0
 	lsls r2, r4, 2
-	ldr r0, _080CBA6C @ =gUnknown_20370C0
+	ldr r0, _080CBA6C @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -2676,7 +2676,7 @@ _080CB9D2:
 _080CBA60: .4byte gUnknown_2039A18
 _080CBA64: .4byte gUnknown_2039A14
 _080CBA68: .4byte gUnknown_83F5BCC
-_080CBA6C: .4byte gUnknown_20370C0
+_080CBA6C: .4byte gSpecialVar_0x8004
 _080CBA70: .4byte gUnknown_3005360
 _080CBA74: .4byte gTasks
 _080CBA78: .4byte sub_80CBB28
@@ -2794,16 +2794,16 @@ sub_80CBB28: @ 80CBB28
 	.align 2, 0
 _080CBB54: .4byte gTasks
 _080CBB58:
-	ldr r1, _080CBB68 @ =gUnknown_20370D0
+	ldr r1, _080CBB68 @ =gSpecialVar_Result
 	movs r0, 0x7F
 	strh r0, [r1]
 	movs r0, 0x5
 	bl PlaySE
 	b _080CBB88
 	.align 2, 0
-_080CBB68: .4byte gUnknown_20370D0
+_080CBB68: .4byte gSpecialVar_Result
 _080CBB6C:
-	ldr r0, _080CBB90 @ =gUnknown_20370D0
+	ldr r0, _080CBB90 @ =gSpecialVar_Result
 	strh r4, [r0]
 	movs r0, 0x5
 	bl PlaySE
@@ -2821,7 +2821,7 @@ _080CBB88:
 	bl sub_80CBBAC
 	b _080CBBA2
 	.align 2, 0
-_080CBB90: .4byte gUnknown_20370D0
+_080CBB90: .4byte gSpecialVar_Result
 _080CBB94:
 	adds r0, r5, 0
 	bl sub_80CBD50
@@ -3123,7 +3123,7 @@ _080CBDC8: .4byte 0x00004031
 	thumb_func_start sub_80CBDCC
 sub_80CBDCC: @ 80CBDCC
 	push {lr}
-	ldr r0, _080CBDE4 @ =gUnknown_20370C0
+	ldr r0, _080CBDE4 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
@@ -3133,7 +3133,7 @@ sub_80CBDCC: @ 80CBDCC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CBDE4: .4byte gUnknown_20370C0
+_080CBDE4: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80CBDCC
 
 	thumb_func_start sub_80CBDE8
@@ -3371,7 +3371,7 @@ _080CBF9A:
 	thumb_func_start sub_80CBFA0
 sub_80CBFA0: @ 80CBFA0
 	push {r4,lr}
-	ldr r0, _080CBFC8 @ =gUnknown_20370C0
+	ldr r0, _080CBFC8 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -3389,7 +3389,7 @@ sub_80CBFA0: @ 80CBFA0
 	movs r0, 0x1
 	b _080CBFDA
 	.align 2, 0
-_080CBFC8: .4byte gUnknown_20370C0
+_080CBFC8: .4byte gSpecialVar_0x8004
 _080CBFCC: .4byte gPlayerParty
 _080CBFD0: .4byte gStringVar1
 _080CBFD4: .4byte gStringVar3
@@ -3486,7 +3486,7 @@ ChangePokemonNickname: @ 80CC088
 	mov r4, r8
 	push {r4-r6}
 	sub sp, 0x8
-	ldr r0, _080CC130 @ =gUnknown_20370C0
+	ldr r0, _080CC130 @ =gSpecialVar_0x8004
 	mov r9, r0
 	ldrh r0, [r0]
 	movs r1, 0x64
@@ -3558,7 +3558,7 @@ ChangePokemonNickname: @ 80CC088
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CC130: .4byte gUnknown_20370C0
+_080CC130: .4byte gSpecialVar_0x8004
 _080CC134: .4byte gPlayerParty
 _080CC138: .4byte gStringVar3
 _080CC13C: .4byte gStringVar2
@@ -3568,7 +3568,7 @@ _080CC140: .4byte ChangePokemonNickname_CB
 	thumb_func_start ChangePokemonNickname_CB
 ChangePokemonNickname_CB: @ 80CC144
 	push {lr}
-	ldr r0, _080CC164 @ =gUnknown_20370C0
+	ldr r0, _080CC164 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -3581,7 +3581,7 @@ ChangePokemonNickname_CB: @ 80CC144
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CC164: .4byte gUnknown_20370C0
+_080CC164: .4byte gSpecialVar_0x8004
 _080CC168: .4byte gPlayerParty
 _080CC16C: .4byte gStringVar2
 	thumb_func_end ChangePokemonNickname_CB
@@ -3589,7 +3589,7 @@ _080CC16C: .4byte gStringVar2
 	thumb_func_start TV_CopyNicknameToStringVar1AndEnsureTerminated
 TV_CopyNicknameToStringVar1AndEnsureTerminated: @ 80CC170
 	push {r4,lr}
-	ldr r0, _080CC194 @ =gUnknown_20370C0
+	ldr r0, _080CC194 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -3605,7 +3605,7 @@ TV_CopyNicknameToStringVar1AndEnsureTerminated: @ 80CC170
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CC194: .4byte gUnknown_20370C0
+_080CC194: .4byte gSpecialVar_0x8004
 _080CC198: .4byte gPlayerParty
 _080CC19C: .4byte gStringVar1
 	thumb_func_end TV_CopyNicknameToStringVar1AndEnsureTerminated
@@ -3615,7 +3615,7 @@ TV_CheckMonOTIDEqualsPlayerID: @ 80CC1A0
 	push {r4,lr}
 	bl sub_80CC1E4
 	adds r4, r0, 0
-	ldr r0, _080CC1C8 @ =gUnknown_20370C0
+	ldr r0, _080CC1C8 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -3626,15 +3626,15 @@ TV_CheckMonOTIDEqualsPlayerID: @ 80CC1A0
 	bl GetMonData
 	cmp r4, r0
 	bne _080CC1D4
-	ldr r1, _080CC1D0 @ =gUnknown_20370D0
+	ldr r1, _080CC1D0 @ =gSpecialVar_Result
 	movs r0, 0
 	b _080CC1D8
 	.align 2, 0
-_080CC1C8: .4byte gUnknown_20370C0
+_080CC1C8: .4byte gSpecialVar_0x8004
 _080CC1CC: .4byte gPlayerParty
-_080CC1D0: .4byte gUnknown_20370D0
+_080CC1D0: .4byte gSpecialVar_Result
 _080CC1D4:
-	ldr r1, _080CC1E0 @ =gUnknown_20370D0
+	ldr r1, _080CC1E0 @ =gSpecialVar_Result
 	movs r0, 0x1
 _080CC1D8:
 	strh r0, [r1]
@@ -3642,7 +3642,7 @@ _080CC1D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CC1E0: .4byte gUnknown_20370D0
+_080CC1E0: .4byte gSpecialVar_Result
 	thumb_func_end TV_CheckMonOTIDEqualsPlayerID
 
 	thumb_func_start sub_80CC1E4
@@ -3863,7 +3863,7 @@ _080CC318:
 	adds r0, r4, 0
 	bl VarSet
 	ldr r0, _080CC3C4 @ =0x00004042
-	ldr r1, _080CC3C8 @ =gUnknown_20370C0
+	ldr r1, _080CC3C8 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	bl VarSet
 	add sp, 0x24
@@ -3874,21 +3874,21 @@ _080CC318:
 _080CC3BC: .4byte gPlayerParty
 _080CC3C0: .4byte 0x00004043
 _080CC3C4: .4byte 0x00004042
-_080CC3C8: .4byte gUnknown_20370C0
+_080CC3C8: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80CC2BC
 
 	thumb_func_start sub_80CC3CC
 sub_80CC3CC: @ 80CC3CC
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r4, _080CC3F8 @ =gUnknown_20370C0
+	ldr r4, _080CC3F8 @ =gSpecialVar_0x8004
 	movs r0, 0xA
 	bl GetGameStat
 	strh r0, [r4]
 	movs r0, 0xD
 	bl GetGameStat
 	adds r6, r0, 0
-	ldr r4, _080CC3FC @ =gUnknown_20370C4
+	ldr r4, _080CC3FC @ =gSpecialVar_0x8006
 	movs r0, 0x17
 	bl GetGameStat
 	strh r0, [r4]
@@ -3899,8 +3899,8 @@ sub_80CC3CC: @ 80CC3CC
 	strh r1, [r0]
 	b _080CC40C
 	.align 2, 0
-_080CC3F8: .4byte gUnknown_20370C0
-_080CC3FC: .4byte gUnknown_20370C4
+_080CC3F8: .4byte gSpecialVar_0x8004
+_080CC3FC: .4byte gSpecialVar_0x8006
 _080CC400: .4byte 0x0000ffff
 _080CC404: .4byte gSpecialVar_0x8005
 _080CC408:
@@ -3908,7 +3908,7 @@ _080CC408:
 	strh r6, [r0]
 _080CC40C:
 	adds r1, r0, 0
-	ldr r0, _080CC444 @ =gUnknown_20370C0
+	ldr r0, _080CC444 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080CC41A
@@ -3923,7 +3923,7 @@ _080CC41A:
 	lsls r0, r5, 16
 	lsrs r5, r0, 16
 _080CC428:
-	ldr r0, _080CC448 @ =gUnknown_20370C4
+	ldr r0, _080CC448 @ =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080CC438
@@ -3938,8 +3938,8 @@ _080CC438:
 	bx r1
 	.align 2, 0
 _080CC440: .4byte gSpecialVar_0x8005
-_080CC444: .4byte gUnknown_20370C0
-_080CC448: .4byte gUnknown_20370C4
+_080CC444: .4byte gSpecialVar_0x8004
+_080CC448: .4byte gSpecialVar_0x8006
 	thumb_func_end sub_80CC3CC
 
 	thumb_func_start sub_80CC44C
@@ -3999,7 +3999,7 @@ _080CC49C:
 	movs r1, 0x41
 	movs r2, 0
 	bl GetMonData
-	ldr r1, _080CC4BC @ =gUnknown_20370C0
+	ldr r1, _080CC4BC @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	cmp r0, r1
 	bne _080CC4C0
@@ -4007,7 +4007,7 @@ _080CC49C:
 	b _080CC4CC
 	.align 2, 0
 _080CC4B8: .4byte gPlayerParty
-_080CC4BC: .4byte gUnknown_20370C0
+_080CC4BC: .4byte gSpecialVar_0x8004
 _080CC4C0:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -4331,7 +4331,7 @@ _080CC72C: .4byte 0x0000404d
 	thumb_func_start sub_80CC730
 sub_80CC730: @ 80CC730
 	push {lr}
-	ldr r0, _080CC744 @ =gUnknown_20370D0
+	ldr r0, _080CC744 @ =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080CC77C
@@ -4341,7 +4341,7 @@ sub_80CC730: @ 80CC730
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080CC744: .4byte gUnknown_20370D0
+_080CC744: .4byte gSpecialVar_Result
 _080CC748: .4byte _080CC74C
 	.align 2, 0
 _080CC74C:
@@ -4548,7 +4548,7 @@ _080CC8C4:
 	thumb_func_start sub_80CC8CC
 sub_80CC8CC: @ 80CC8CC
 	push {r4,lr}
-	ldr r1, _080CC8E4 @ =gUnknown_20370C0
+	ldr r1, _080CC8E4 @ =gSpecialVar_0x8004
 	ldr r2, _080CC8E8 @ =0xfffffedf
 	adds r0, r2, 0
 	ldrh r2, [r1]
@@ -4560,7 +4560,7 @@ sub_80CC8CC: @ 80CC8CC
 	movs r0, 0
 	b _080CC908
 	.align 2, 0
-_080CC8E4: .4byte gUnknown_20370C0
+_080CC8E4: .4byte gSpecialVar_0x8004
 _080CC8E8: .4byte 0xfffffedf
 _080CC8EC:
 	ldr r4, _080CC910 @ =gStringVar1
@@ -4612,7 +4612,7 @@ _080CC944: .4byte 0x000001f3
 	thumb_func_start sub_80CC948
 sub_80CC948: @ 80CC948
 	push {lr}
-	ldr r0, _080CC968 @ =gUnknown_20370C0
+	ldr r0, _080CC968 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -4626,7 +4626,7 @@ sub_80CC948: @ 80CC948
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CC968: .4byte gUnknown_20370C0
+_080CC968: .4byte gSpecialVar_0x8004
 _080CC96C: .4byte gPlayerParty
 _080CC970: .4byte 0x00004025
 	thumb_func_end sub_80CC948
@@ -4904,7 +4904,7 @@ sub_80CCB94: @ 80CCB94
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, _080CCBC0 @ =gUnknown_20370C6
+	ldr r0, _080CCBC0 @ =gSpecialVar_0x8007
 	mov r1, r8
 	strh r1, [r0]
 	movs r4, 0
@@ -4915,7 +4915,7 @@ sub_80CCB94: @ 80CCB94
 	mov r9, r0
 	b _080CCBCE
 	.align 2, 0
-_080CCBC0: .4byte gUnknown_20370C6
+_080CCBC0: .4byte gSpecialVar_0x8007
 _080CCBC4: .4byte gPlayerParty
 _080CCBC8:
 	adds r0, r4, 0x1
@@ -5045,7 +5045,7 @@ _080CCCCC:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _080CCCDE:
-	ldr r0, _080CCCF4 @ =gUnknown_20370C4
+	ldr r0, _080CCCF4 @ =gSpecialVar_0x8006
 	strh r6, [r0]
 	movs r0, 0x1
 _080CCCE4:
@@ -5057,7 +5057,7 @@ _080CCCE4:
 	bx r1
 	.align 2, 0
 _080CCCF0: .4byte gPlayerParty
-_080CCCF4: .4byte gUnknown_20370C4
+_080CCCF4: .4byte gSpecialVar_0x8006
 	thumb_func_end sub_80CCB94
 
 	thumb_func_start sub_80CCCF8
@@ -5216,12 +5216,12 @@ task_deoxys_sound: @ 80CCE10
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080CCE38
-	ldr r1, _080CCE34 @ =gUnknown_20370D0
+	ldr r1, _080CCE34 @ =gSpecialVar_Result
 	movs r0, 0x3
 	b _080CCE9E
 	.align 2, 0
 _080CCE30: .4byte 0x00000848
-_080CCE34: .4byte gUnknown_20370D0
+_080CCE34: .4byte gSpecialVar_Result
 _080CCE38:
 	ldr r0, _080CCE80 @ =0x0000403e
 	mov r8, r0
@@ -5249,7 +5249,7 @@ _080CCE38:
 	mov r0, r8
 	movs r1, 0
 	bl VarSet
-	ldr r1, _080CCE8C @ =gUnknown_20370D0
+	ldr r1, _080CCE8C @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	b _080CCEA4
@@ -5257,13 +5257,13 @@ _080CCE38:
 _080CCE80: .4byte 0x0000403e
 _080CCE84: .4byte 0x00004026
 _080CCE88: .4byte gUnknown_83F637C
-_080CCE8C: .4byte gUnknown_20370D0
+_080CCE8C: .4byte gSpecialVar_Result
 _080CCE90:
 	cmp r5, 0xA
 	bne _080CCEB4
 	ldr r0, _080CCEAC @ =0x00000848
 	bl FlagSet
-	ldr r1, _080CCEB0 @ =gUnknown_20370D0
+	ldr r1, _080CCEB0 @ =gSpecialVar_Result
 	movs r0, 0x2
 _080CCE9E:
 	strh r0, [r1]
@@ -5274,7 +5274,7 @@ _080CCEA4:
 	b _080CCED6
 	.align 2, 0
 _080CCEAC: .4byte 0x00000848
-_080CCEB0: .4byte gUnknown_20370D0
+_080CCEB0: .4byte gSpecialVar_Result
 _080CCEB4:
 	adds r0, r5, 0x1
 	lsls r0, 16
@@ -5285,7 +5285,7 @@ _080CCEB4:
 	ldr r0, _080CCEE0 @ =0x0000403e
 	adds r1, r5, 0
 	bl VarSet
-	ldr r1, _080CCEE4 @ =gUnknown_20370D0
+	ldr r1, _080CCEE4 @ =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	adds r0, r7, 0
@@ -5298,7 +5298,7 @@ _080CCED6:
 	bx r0
 	.align 2, 0
 _080CCEE0: .4byte 0x0000403e
-_080CCEE4: .4byte gUnknown_20370D0
+_080CCEE4: .4byte gSpecialVar_Result
 	thumb_func_end task_deoxys_sound
 
 	thumb_func_start sub_80CCEE8
@@ -5528,12 +5528,12 @@ sub_80CD098: @ 80CD098
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _080CD0E8
-	ldr r0, _080CD0D0 @ =gUnknown_20370C0
+	ldr r0, _080CD0D0 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	adds r0, 0x1B
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r0, _080CD0D4 @ =gUnknown_20370C4
+	ldr r0, _080CD0D4 @ =gSpecialVar_0x8006
 	ldrh r3, [r0]
 	cmp r3, 0
 	bne _080CD0E0
@@ -5548,8 +5548,8 @@ sub_80CD098: @ 80CD098
 	b _080CD0E8
 	.align 2, 0
 _080CD0CC: .4byte gUnknown_203ADFA
-_080CD0D0: .4byte gUnknown_20370C0
-_080CD0D4: .4byte gUnknown_20370C4
+_080CD0D0: .4byte gSpecialVar_0x8004
+_080CD0D4: .4byte gSpecialVar_0x8006
 _080CD0D8: .4byte gSpecialVar_0x8005
 _080CD0DC: .4byte gUnknown_2039A1B
 _080CD0E0:
@@ -5583,7 +5583,7 @@ _080CD104:
 	movs r1, 0x41
 	movs r2, 0
 	bl GetMonData
-	ldr r1, _080CD13C @ =gUnknown_20370C0
+	ldr r1, _080CD13C @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	cmp r0, r1
 	bne _080CD140
@@ -5599,7 +5599,7 @@ _080CD104:
 	b _080CD14C
 	.align 2, 0
 _080CD138: .4byte gPlayerParty
-_080CD13C: .4byte gUnknown_20370C0
+_080CD13C: .4byte gSpecialVar_0x8004
 _080CD140:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -5708,7 +5708,7 @@ sub_80CD1CC: @ 80CD1CC
 _080CD200:
 	movs r0, 0
 	ldrsh r1, [r4, r0]
-	ldr r0, _080CD224 @ =gUnknown_20370C0
+	ldr r0, _080CD224 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	subs r0, 0x1
 	cmp r1, r0
@@ -5722,7 +5722,7 @@ _080CD214:
 	.align 2, 0
 _080CD21C: .4byte gTasks+0x8
 _080CD220: .4byte gSpecialVar_0x8005
-_080CD224: .4byte gUnknown_20370C0
+_080CD224: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80CD1CC
 
 	.align 2, 0 @ Don't pad with nop.

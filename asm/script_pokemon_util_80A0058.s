@@ -221,13 +221,13 @@ _080A020C:
 	cmp r1, 0x2
 	bne _080A0214
 _080A0210:
-	ldr r0, _080A0218 @ =gUnknown_20370D0
+	ldr r0, _080A0218 @ =gSpecialVar_Result
 	strh r1, [r0]
 _080A0214:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A0218: .4byte gUnknown_20370D0
+_080A0218: .4byte gSpecialVar_Result
 	thumb_func_end CheckForAlivePartyMons
 
 	thumb_func_start CheckPartyMonHasHeldItem
@@ -400,14 +400,14 @@ sub_80A0350: @ 80A0350
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080A0368
-	ldr r0, _080A0364 @ =gUnknown_20370D0
+	ldr r0, _080A0364 @ =gSpecialVar_Result
 	strh r1, [r0]
 	b _080A036E
 	.align 2, 0
 _080A0360: .4byte gUnknown_203B0D4
-_080A0364: .4byte gUnknown_20370D0
+_080A0364: .4byte gSpecialVar_Result
 _080A0368:
-	ldr r1, _080A0378 @ =gUnknown_20370D0
+	ldr r1, _080A0378 @ =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _080A036E:
@@ -416,7 +416,7 @@ _080A036E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A0378: .4byte gUnknown_20370D0
+_080A0378: .4byte gSpecialVar_Result
 _080A037C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_80A0350
 
@@ -443,15 +443,15 @@ sub_80A039C: @ 80A039C
 	cmp r4, 0
 	bne _080A03B8
 	bl LoadPlayerParty
-	ldr r0, _080A03B4 @ =gUnknown_20370D0
+	ldr r0, _080A03B4 @ =gSpecialVar_Result
 	strh r4, [r0]
 	b _080A03C2
 	.align 2, 0
 _080A03B0: .4byte gUnknown_203B0D4
-_080A03B4: .4byte gUnknown_20370D0
+_080A03B4: .4byte gSpecialVar_Result
 _080A03B8:
 	bl sub_80A03D8
-	ldr r1, _080A03D0 @ =gUnknown_20370D0
+	ldr r1, _080A03D0 @ =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _080A03C2:
@@ -461,7 +461,7 @@ _080A03C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A03D0: .4byte gUnknown_20370D0
+_080A03D0: .4byte gSpecialVar_Result
 _080A03D4: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_80A039C
 

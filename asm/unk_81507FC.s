@@ -6310,7 +6310,7 @@ _081537BC: .4byte gUnknown_203F3E0
 sub_81537C0: @ 81537C0
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r6, _081537F0 @ =gUnknown_20370D0
+	ldr r6, _081537F0 @ =gSpecialVar_Result
 _081537C6:
 	movs r0, 0x64
 	adds r1, r5, 0
@@ -6331,13 +6331,13 @@ _081537C6:
 	strh r0, [r6]
 	b _08153804
 	.align 2, 0
-_081537F0: .4byte gUnknown_20370D0
+_081537F0: .4byte gSpecialVar_Result
 _081537F4: .4byte gPlayerParty
 _081537F8:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _081537C6
-	ldr r1, _0815380C @ =gUnknown_20370D0
+	ldr r1, _0815380C @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 _08153804:
@@ -6345,7 +6345,7 @@ _08153804:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815380C: .4byte gUnknown_20370D0
+_0815380C: .4byte gSpecialVar_Result
 	thumb_func_end sub_81537C0
 
 	thumb_func_start sub_8153810

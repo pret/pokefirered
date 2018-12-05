@@ -796,38 +796,38 @@ _0806E6F6:
 
 	thumb_func_start sub_806E6FC
 sub_806E6FC: @ 806E6FC
-	ldr r1, _0806E754 @ =gUnknown_20370B8
+	ldr r1, _0806E754 @ =gSpecialVar_0x8000
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _0806E758 @ =gUnknown_20370BA
+	ldr r1, _0806E758 @ =gSpecialVar_0x8001
 	strh r0, [r1]
-	ldr r1, _0806E75C @ =gUnknown_20370BC
+	ldr r1, _0806E75C @ =gSpecialVar_0x8002
 	strh r0, [r1]
-	ldr r1, _0806E760 @ =gUnknown_20370BE
+	ldr r1, _0806E760 @ =gSpecialVar_0x8003
 	strh r0, [r1]
-	ldr r1, _0806E764 @ =gUnknown_20370C0
+	ldr r1, _0806E764 @ =gSpecialVar_0x8004
 	strh r0, [r1]
 	ldr r1, _0806E768 @ =gSpecialVar_0x8005
 	strh r0, [r1]
-	ldr r1, _0806E76C @ =gUnknown_20370C4
+	ldr r1, _0806E76C @ =gSpecialVar_0x8006
 	strh r0, [r1]
-	ldr r1, _0806E770 @ =gUnknown_20370C6
+	ldr r1, _0806E770 @ =gSpecialVar_0x8007
 	strh r0, [r1]
-	ldr r1, _0806E774 @ =gUnknown_20370C8
+	ldr r1, _0806E774 @ =gSpecialVar_0x8008
 	strh r0, [r1]
-	ldr r1, _0806E778 @ =gUnknown_20370CA
+	ldr r1, _0806E778 @ =gSpecialVar_0x8009
 	strh r0, [r1]
-	ldr r1, _0806E77C @ =gUnknown_20370CC
+	ldr r1, _0806E77C @ =gSpecialVar_0x800A
 	strh r0, [r1]
-	ldr r1, _0806E780 @ =gUnknown_20370CE
+	ldr r1, _0806E780 @ =gSpecialVar_0x800B
 	strh r0, [r1]
-	ldr r1, _0806E784 @ =gUnknown_20370D4
+	ldr r1, _0806E784 @ =gSpecialVar_Facing
 	strh r0, [r1]
-	ldr r1, _0806E788 @ =gUnknown_20370D0
+	ldr r1, _0806E788 @ =gSpecialVar_Result
 	strh r0, [r1]
-	ldr r1, _0806E78C @ =gUnknown_203AD30
+	ldr r1, _0806E78C @ =gSpecialVar_ItemId
 	strh r0, [r1]
-	ldr r1, _0806E790 @ =gUnknown_20370D2
+	ldr r1, _0806E790 @ =gSpecialVar_LastTalked
 	strh r0, [r1]
 	ldr r1, _0806E794 @ =gSpecialVar_MonBoxId
 	strh r0, [r1]
@@ -841,22 +841,22 @@ sub_806E6FC: @ 806E6FC
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_0806E754: .4byte gUnknown_20370B8
-_0806E758: .4byte gUnknown_20370BA
-_0806E75C: .4byte gUnknown_20370BC
-_0806E760: .4byte gUnknown_20370BE
-_0806E764: .4byte gUnknown_20370C0
+_0806E754: .4byte gSpecialVar_0x8000
+_0806E758: .4byte gSpecialVar_0x8001
+_0806E75C: .4byte gSpecialVar_0x8002
+_0806E760: .4byte gSpecialVar_0x8003
+_0806E764: .4byte gSpecialVar_0x8004
 _0806E768: .4byte gSpecialVar_0x8005
-_0806E76C: .4byte gUnknown_20370C4
-_0806E770: .4byte gUnknown_20370C6
-_0806E774: .4byte gUnknown_20370C8
-_0806E778: .4byte gUnknown_20370CA
-_0806E77C: .4byte gUnknown_20370CC
-_0806E780: .4byte gUnknown_20370CE
-_0806E784: .4byte gUnknown_20370D4
-_0806E788: .4byte gUnknown_20370D0
-_0806E78C: .4byte gUnknown_203AD30
-_0806E790: .4byte gUnknown_20370D2
+_0806E76C: .4byte gSpecialVar_0x8006
+_0806E770: .4byte gSpecialVar_0x8007
+_0806E774: .4byte gSpecialVar_0x8008
+_0806E778: .4byte gSpecialVar_0x8009
+_0806E77C: .4byte gSpecialVar_0x800A
+_0806E780: .4byte gSpecialVar_0x800B
+_0806E784: .4byte gSpecialVar_Facing
+_0806E788: .4byte gSpecialVar_Result
+_0806E78C: .4byte gSpecialVar_ItemId
+_0806E790: .4byte gSpecialVar_LastTalked
 _0806E794: .4byte gSpecialVar_MonBoxId
 _0806E798: .4byte gSpecialVar_MonBoxPos
 _0806E79C: .4byte gUnknown_20370DA

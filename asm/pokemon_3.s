@@ -424,11 +424,11 @@ _08044834: .4byte gUnknown_825E032
 sub_8044838: @ 8044838
 	push {r4-r7,lr}
 	sub sp, 0x14
-	ldr r0, _08044888 @ =gUnknown_20370C0
+	ldr r0, _08044888 @ =gSpecialVar_0x8004
 	ldrh r5, [r0]
 	ldr r0, _0804488C @ =gSpecialVar_0x8005
 	ldrh r4, [r0]
-	ldr r0, _08044890 @ =gUnknown_20370C4
+	ldr r0, _08044890 @ =gSpecialVar_0x8006
 	ldrh r6, [r0]
 	bl ZeroEnemyPartyMons
 	ldr r7, _08044894 @ =gEnemyParty
@@ -461,9 +461,9 @@ _08044880:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08044888: .4byte gUnknown_20370C0
+_08044888: .4byte gSpecialVar_0x8004
 _0804488C: .4byte gSpecialVar_0x8005
-_08044890: .4byte gUnknown_20370C4
+_08044890: .4byte gSpecialVar_0x8006
 _08044894: .4byte gEnemyParty
 	thumb_func_end sub_8044838
 

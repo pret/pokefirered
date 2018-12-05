@@ -696,7 +696,7 @@ sub_8080C6C: @ 8080C6C
 _08080CB0: .4byte gTasks
 _08080CB4: .4byte sub_8080FF0
 _08080CB8:
-	ldr r4, _08080CD4 @ =gUnknown_20370D0
+	ldr r4, _08080CD4 @ =gSpecialVar_Result
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl sub_8080844
@@ -712,7 +712,7 @@ _08080CCE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080CD4: .4byte gUnknown_20370D0
+_08080CD4: .4byte gSpecialVar_Result
 _08080CD8: .4byte sub_8080DC0
 	thumb_func_end sub_8080C6C
 
@@ -736,7 +736,7 @@ sub_8080CDC: @ 8080CDC
 	bl sub_80808BC
 	cmp r0, 0x1
 	beq _08080D74
-	ldr r4, _08080D34 @ =gUnknown_20370D0
+	ldr r4, _08080D34 @ =gSpecialVar_Result
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl sub_8080844
@@ -757,7 +757,7 @@ sub_8080CDC: @ 8080CDC
 	b _08080D72
 	.align 2, 0
 _08080D30: .4byte gTasks
-_08080D34: .4byte gUnknown_20370D0
+_08080D34: .4byte gSpecialVar_Result
 _08080D38: .4byte sub_8080F78
 _08080D3C:
 	cmp r2, 0x7
@@ -838,7 +838,7 @@ sub_8080DC0: @ 8080DC0
 	bl sub_80808BC
 	cmp r0, 0x1
 	beq _08080E50
-	ldr r0, _08080DE8 @ =gUnknown_20370D0
+	ldr r0, _08080DE8 @ =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bne _08080DEC
@@ -848,7 +848,7 @@ sub_8080DC0: @ 8080DC0
 	bl sub_800AAC0
 	b _08080E02
 	.align 2, 0
-_08080DE8: .4byte gUnknown_20370D0
+_08080DE8: .4byte gSpecialVar_Result
 _08080DEC:
 	cmp r0, 0x3
 	bne _08080DF6
@@ -984,7 +984,7 @@ _08080EF8:
 	bl SetSuppressLinkErrorMessage
 	bl ResetBlockReceivedFlags
 	bl HideFieldMessageBox
-	ldr r0, _08080F44 @ =gUnknown_20370D0
+	ldr r0, _08080F44 @ =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _08080F54
@@ -1005,7 +1005,7 @@ _08080EF8:
 	.align 2, 0
 _08080F3C: .4byte gBlockRecvBuffer
 _08080F40: .4byte gUnknown_2039624
-_08080F44: .4byte gUnknown_20370D0
+_08080F44: .4byte gSpecialVar_Result
 _08080F48: .4byte gLinkType
 _08080F4C: .4byte 0x00004411
 _08080F50: .4byte gTasks
@@ -1065,7 +1065,7 @@ sub_8080FB4: @ 8080FB4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _08080FE8 @ =gUnknown_20370D0
+	ldr r1, _08080FE8 @ =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	ldr r1, _08080FEC @ =gTasks
@@ -1083,7 +1083,7 @@ sub_8080FB4: @ 8080FB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080FE8: .4byte gUnknown_20370D0
+_08080FE8: .4byte gSpecialVar_Result
 _08080FEC: .4byte gTasks
 	thumb_func_end sub_8080FB4
 
@@ -1093,7 +1093,7 @@ sub_8080FF0: @ 8080FF0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _08081024 @ =gUnknown_20370D0
+	ldr r1, _08081024 @ =gSpecialVar_Result
 	movs r0, 0x6
 	strh r0, [r1]
 	ldr r1, _08081028 @ =gTasks
@@ -1111,7 +1111,7 @@ sub_8080FF0: @ 8080FF0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081024: .4byte gUnknown_20370D0
+_08081024: .4byte gSpecialVar_Result
 _08081028: .4byte gTasks
 	thumb_func_end sub_8080FF0
 
@@ -1153,7 +1153,7 @@ sub_8081064: @ 8081064
 	push {r4,lr}
 	movs r3, 0x2
 	movs r2, 0x2
-	ldr r0, _0808107C @ =gUnknown_20370C0
+	ldr r0, _0808107C @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _08081098
@@ -1163,7 +1163,7 @@ sub_8081064: @ 8081064
 	beq _08081086
 	b _080810B4
 	.align 2, 0
-_0808107C: .4byte gUnknown_20370C0
+_0808107C: .4byte gSpecialVar_0x8004
 _08081080:
 	cmp r0, 0x5
 	beq _080810A8
@@ -1228,7 +1228,7 @@ _080810F0: .4byte gBattleTypeFlags
 	thumb_func_start sub_80810F4
 sub_80810F4: @ 80810F4
 	push {lr}
-	ldr r1, _08081118 @ =gUnknown_20370D0
+	ldr r1, _08081118 @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	ldr r1, _0808111C @ =gLinkType
@@ -1244,7 +1244,7 @@ sub_80810F4: @ 80810F4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081118: .4byte gUnknown_20370D0
+_08081118: .4byte gSpecialVar_Result
 _0808111C: .4byte gLinkType
 _08081120: .4byte 0x00003311
 _08081124: .4byte gBattleTypeFlags
@@ -1284,7 +1284,7 @@ sub_8081150: @ 8081150
 	.align 2, 0
 _08081164: .4byte sub_80811FC
 _08081168:
-	ldr r0, _0808117C @ =gUnknown_20370C0
+	ldr r0, _0808117C @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	subs r0, 0x1
 	cmp r0, 0x4
@@ -1295,7 +1295,7 @@ _08081168:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0808117C: .4byte gUnknown_20370C0
+_0808117C: .4byte gSpecialVar_0x8004
 _08081180: .4byte _08081184
 	.align 2, 0
 _08081184:
@@ -1597,7 +1597,7 @@ _080813D4:
 	lsls r0, 1
 	bl PlayMapChosenOrBattleBGM
 _080813DC:
-	ldr r0, _080813F0 @ =gUnknown_20370C0
+	ldr r0, _080813F0 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _08081404
@@ -1607,7 +1607,7 @@ _080813DC:
 	beq _080813FA
 	b _0808141A
 	.align 2, 0
-_080813F0: .4byte gUnknown_20370C0
+_080813F0: .4byte gSpecialVar_0x8004
 _080813F4:
 	cmp r0, 0x5
 	beq _08081410
@@ -1818,7 +1818,7 @@ _080815A0:
 	ldr r0, _080815B8 @ =gLinkPlayers
 	ldr r1, _080815BC @ =0x00002211
 	str r1, [r0, 0x14]
-	ldr r0, _080815C0 @ =gUnknown_20370C0
+	ldr r0, _080815C0 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _080815D4
@@ -1830,7 +1830,7 @@ _080815A0:
 	.align 2, 0
 _080815B8: .4byte gLinkPlayers
 _080815BC: .4byte 0x00002211
-_080815C0: .4byte gUnknown_20370C0
+_080815C0: .4byte gSpecialVar_0x8004
 _080815C4:
 	cmp r0, 0x5
 	beq _080815E0
@@ -1927,7 +1927,7 @@ sub_8081668: @ 8081668
 	bl LoadPlayerParty
 	bl SavePlayerBag
 	bl sub_81134B8
-	ldr r0, _080816B8 @ =gUnknown_20370C0
+	ldr r0, _080816B8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	beq _0808170A
@@ -1950,7 +1950,7 @@ sub_8081668: @ 8081668
 	.align 2, 0
 _080816B0: .4byte gBattleTypeFlags
 _080816B4: .4byte 0x0000ffdf
-_080816B8: .4byte gUnknown_20370C0
+_080816B8: .4byte gSpecialVar_0x8004
 _080816BC: .4byte gUnknown_300502C
 _080816C0: .4byte gUnknown_3003F3C
 _080816C4: .4byte gUnknown_2023E8A
@@ -2015,7 +2015,7 @@ _08081740: .4byte sub_806FB7C
 	thumb_func_start sub_8081744
 sub_8081744: @ 8081744
 	push {lr}
-	ldr r0, _0808176C @ =gUnknown_20370C0
+	ldr r0, _0808176C @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	subs r0, r1, 0x1
 	lsls r0, 16
@@ -2033,7 +2033,7 @@ _08081760:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808176C: .4byte gUnknown_20370C0
+_0808176C: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8081744
 
 	thumb_func_start sub_8081770
@@ -2385,14 +2385,14 @@ _08081A18: .4byte sub_808177C
 	thumb_func_start sp02A_crash_sound
 sp02A_crash_sound: @ 8081A1C
 	push {lr}
-	ldr r0, _08081A2C @ =gUnknown_20370C4
+	ldr r0, _08081A2C @ =gSpecialVar_0x8006
 	ldrb r0, [r0]
 	ldr r1, _08081A30 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl sub_808B700
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081A2C: .4byte gUnknown_20370C4
+_08081A2C: .4byte gSpecialVar_0x8006
 _08081A30: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sp02A_crash_sound
 
@@ -2402,7 +2402,7 @@ sub_8081A34: @ 8081A34
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _08081A74 @ =gUnknown_20370C4
+	ldr r0, _08081A74 @ =gSpecialVar_0x8006
 	strh r4, [r0]
 	ldr r0, _08081A78 @ =gStringVar1
 	lsls r1, r4, 3
@@ -2427,7 +2427,7 @@ sub_8081A34: @ 8081A34
 	movs r0, 0x1
 	b _08081A8A
 	.align 2, 0
-_08081A74: .4byte gUnknown_20370C4
+_08081A74: .4byte gSpecialVar_0x8006
 _08081A78: .4byte gStringVar1
 _08081A7C: .4byte gLinkPlayers + 8
 _08081A80: .4byte gStringVar2

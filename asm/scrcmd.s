@@ -1003,7 +1003,7 @@ ScrCmd_random: @ 806A5DC
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r5, _0806A60C @ =gUnknown_20370D0
+	ldr r5, _0806A60C @ =gSpecialVar_Result
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -1015,7 +1015,7 @@ ScrCmd_random: @ 806A5DC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A60C: .4byte gUnknown_20370D0
+_0806A60C: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_random
 
 	thumb_func_start sub_806A610
@@ -1035,7 +1035,7 @@ sub_806A610: @ 806A610
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, _0806A658 @ =gUnknown_20370D0
+	ldr r5, _0806A658 @ =gSpecialVar_Result
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1050,7 +1050,7 @@ sub_806A610: @ 806A610
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A658: .4byte gUnknown_20370D0
+_0806A658: .4byte gSpecialVar_Result
 	thumb_func_end sub_806A610
 
 	thumb_func_start ScrCmd_takeitem
@@ -1070,7 +1070,7 @@ ScrCmd_takeitem: @ 806A65C
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, _0806A69C @ =gUnknown_20370D0
+	ldr r5, _0806A69C @ =gSpecialVar_Result
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1083,7 +1083,7 @@ ScrCmd_takeitem: @ 806A65C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A69C: .4byte gUnknown_20370D0
+_0806A69C: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_takeitem
 
 	thumb_func_start sub_806A6A0
@@ -1103,7 +1103,7 @@ sub_806A6A0: @ 806A6A0
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, _0806A6E0 @ =gUnknown_20370D0
+	ldr r5, _0806A6E0 @ =gSpecialVar_Result
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1116,7 +1116,7 @@ sub_806A6A0: @ 806A6A0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A6E0: .4byte gUnknown_20370D0
+_0806A6E0: .4byte gSpecialVar_Result
 	thumb_func_end sub_806A6A0
 
 	thumb_func_start sub_806A6E4
@@ -1136,7 +1136,7 @@ sub_806A6E4: @ 806A6E4
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, _0806A724 @ =gUnknown_20370D0
+	ldr r5, _0806A724 @ =gSpecialVar_Result
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1149,7 +1149,7 @@ sub_806A6E4: @ 806A6E4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A724: .4byte gUnknown_20370D0
+_0806A724: .4byte gSpecialVar_Result
 	thumb_func_end sub_806A6E4
 
 	thumb_func_start ScrCmd_checkitemtype
@@ -1161,7 +1161,7 @@ ScrCmd_checkitemtype: @ 806A728
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0806A750 @ =gUnknown_20370D0
+	ldr r4, _0806A750 @ =gSpecialVar_Result
 	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
@@ -1171,7 +1171,7 @@ ScrCmd_checkitemtype: @ 806A728
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A750: .4byte gUnknown_20370D0
+_0806A750: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_checkitemtype
 
 	thumb_func_start ScrCmd_givepcitem
@@ -1193,7 +1193,7 @@ ScrCmd_givepcitem: @ 806A754
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r5, _0806A794 @ =gUnknown_20370D0
+	ldr r5, _0806A794 @ =gSpecialVar_Result
 	adds r0, r4, 0
 	bl sub_809A3C8
 	lsls r0, 24
@@ -1204,7 +1204,7 @@ ScrCmd_givepcitem: @ 806A754
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A794: .4byte gUnknown_20370D0
+_0806A794: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_givepcitem
 
 	thumb_func_start ScrCmd_checkpcitem
@@ -1226,7 +1226,7 @@ ScrCmd_checkpcitem: @ 806A798
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r5, _0806A7D8 @ =gUnknown_20370D0
+	ldr r5, _0806A7D8 @ =gSpecialVar_Result
 	adds r0, r4, 0
 	bl sub_809A374
 	lsls r0, 24
@@ -1237,7 +1237,7 @@ ScrCmd_checkpcitem: @ 806A798
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806A7D8: .4byte gUnknown_20370D0
+_0806A7D8: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_checkpcitem
 
 	thumb_func_start sub_806A7DC
@@ -1540,19 +1540,19 @@ sub_806A9D8: @ 806A9D8
 
 	thumb_func_start sub_806A9DC
 sub_806A9DC: @ 806A9DC
-	ldr r0, _0806A9F0 @ =gUnknown_20370B8
+	ldr r0, _0806A9F0 @ =gSpecialVar_0x8000
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _0806A9F4 @ =gUnknown_20370BA
+	ldr r0, _0806A9F4 @ =gSpecialVar_0x8001
 	strh r1, [r0]
-	ldr r0, _0806A9F8 @ =gUnknown_20370BC
+	ldr r0, _0806A9F8 @ =gSpecialVar_0x8002
 	strh r1, [r0]
 	movs r0, 0
 	bx lr
 	.align 2, 0
-_0806A9F0: .4byte gUnknown_20370B8
-_0806A9F4: .4byte gUnknown_20370BA
-_0806A9F8: .4byte gUnknown_20370BC
+_0806A9F0: .4byte gSpecialVar_0x8000
+_0806A9F4: .4byte gSpecialVar_0x8001
+_0806A9F8: .4byte gSpecialVar_0x8002
 	thumb_func_end sub_806A9DC
 
 	thumb_func_start ScrCmd_setweather
@@ -2344,7 +2344,7 @@ _0806B048: .4byte gSaveBlock1Ptr
 	thumb_func_start ScrCmd_getpartysize
 ScrCmd_getpartysize: @ 806B04C
 	push {r4,lr}
-	ldr r4, _0806B064 @ =gUnknown_20370D0
+	ldr r4, _0806B064 @ =gSpecialVar_Result
 	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
@@ -2354,7 +2354,7 @@ ScrCmd_getpartysize: @ 806B04C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806B064: .4byte gUnknown_20370D0
+_0806B064: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_getpartysize
 
 	thumb_func_start ScrCmd_playse
@@ -3569,7 +3569,7 @@ sub_806B96C: @ 806B96C
 	ands r0, r1
 	cmp r0, 0
 	beq _0806B990
-	ldr r0, _0806B98C @ =gUnknown_20370D4
+	ldr r0, _0806B98C @ =gSpecialVar_Facing
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _0806B990
@@ -3577,49 +3577,49 @@ sub_806B96C: @ 806B96C
 	b _0806BA36
 	.align 2, 0
 _0806B988: .4byte gMain
-_0806B98C: .4byte gUnknown_20370D4
+_0806B98C: .4byte gSpecialVar_Facing
 _0806B990:
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	beq _0806B9AC
-	ldr r0, _0806B9A8 @ =gUnknown_20370D4
+	ldr r0, _0806B9A8 @ =gSpecialVar_Facing
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _0806B9AC
 	movs r0, 0x2
 	b _0806BA36
 	.align 2, 0
-_0806B9A8: .4byte gUnknown_20370D4
+_0806B9A8: .4byte gSpecialVar_Facing
 _0806B9AC:
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x20
 	ands r0, r1
 	cmp r0, 0
 	beq _0806B9C8
-	ldr r0, _0806B9C4 @ =gUnknown_20370D4
+	ldr r0, _0806B9C4 @ =gSpecialVar_Facing
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	beq _0806B9C8
 	movs r0, 0x3
 	b _0806BA36
 	.align 2, 0
-_0806B9C4: .4byte gUnknown_20370D4
+_0806B9C4: .4byte gSpecialVar_Facing
 _0806B9C8:
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x10
 	ands r0, r1
 	cmp r0, 0
 	beq _0806B9E4
-	ldr r0, _0806B9E0 @ =gUnknown_20370D4
+	ldr r0, _0806B9E0 @ =gSpecialVar_Facing
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	beq _0806B9E4
 	movs r0, 0x4
 	b _0806BA36
 	.align 2, 0
-_0806B9E0: .4byte gUnknown_20370D4
+_0806B9E0: .4byte gSpecialVar_Facing
 _0806B9E4:
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x80
@@ -3974,7 +3974,7 @@ sub_806BC40: @ 806BC40
 	bne _0806BC50
 	ldr r1, [r4, 0x64]
 _0806BC50:
-	ldr r4, _0806BC68 @ =gUnknown_20370C0
+	ldr r4, _0806BC68 @ =gSpecialVar_0x8004
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0x6
@@ -3985,7 +3985,7 @@ _0806BC50:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806BC68: .4byte gUnknown_20370C0
+_0806BC68: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_806BC40
 
 	thumb_func_start ScrCmd_vmessage
@@ -4453,7 +4453,7 @@ ScrCmd_givemon: @ 806BFD0
 	ldrb r2, [r1]
 	adds r1, 0x1
 	str r1, [r4, 0x8]
-	ldr r4, _0806C04C @ =gUnknown_20370D0
+	ldr r4, _0806C04C @ =gSpecialVar_Result
 	str r0, [sp]
 	str r2, [sp, 0x4]
 	adds r0, r6, 0
@@ -4473,7 +4473,7 @@ ScrCmd_givemon: @ 806BFD0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C04C: .4byte gUnknown_20370D0
+_0806C04C: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_givemon
 
 	thumb_func_start ScrCmd_giveegg
@@ -4485,7 +4485,7 @@ ScrCmd_giveegg: @ 806C050
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0806C078 @ =gUnknown_20370D0
+	ldr r4, _0806C078 @ =gSpecialVar_Result
 	bl sub_80A01AC
 	lsls r0, 24
 	lsrs r0, 24
@@ -4495,7 +4495,7 @@ ScrCmd_giveegg: @ 806C050
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C078: .4byte gUnknown_20370D0
+_0806C078: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_giveegg
 
 	thumb_func_start ScrCmd_setmonmove
@@ -4527,13 +4527,13 @@ ScrCmd_checkpartymove: @ 806C0A8
 	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r1, _0806C0BC @ =gUnknown_20370D0
+	ldr r1, _0806C0BC @ =gSpecialVar_Result
 	movs r0, 0x6
 	strh r0, [r1]
 	movs r6, 0
 	b _0806C0F6
 	.align 2, 0
-_0806C0BC: .4byte gUnknown_20370D0
+_0806C0BC: .4byte gSpecialVar_Result
 _0806C0C0:
 	adds r0, r4, 0
 	movs r1, 0x2D
@@ -4547,14 +4547,14 @@ _0806C0C0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806C0F0
-	ldr r0, _0806C0E8 @ =gUnknown_20370D0
+	ldr r0, _0806C0E8 @ =gSpecialVar_Result
 	strh r6, [r0]
-	ldr r0, _0806C0EC @ =gUnknown_20370C0
+	ldr r0, _0806C0EC @ =gSpecialVar_0x8004
 	strh r5, [r0]
 	b _0806C116
 	.align 2, 0
-_0806C0E8: .4byte gUnknown_20370D0
-_0806C0EC: .4byte gUnknown_20370C0
+_0806C0E8: .4byte gSpecialVar_Result
+_0806C0EC: .4byte gSpecialVar_0x8004
 _0806C0F0:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -4652,7 +4652,7 @@ ScrCmd_checkmoney: @ 806C18C
 	str r0, [r4, 0x8]
 	cmp r1, 0
 	bne _0806C1BA
-	ldr r4, _0806C1C4 @ =gUnknown_20370D0
+	ldr r4, _0806C1C4 @ =gSpecialVar_Result
 	ldr r0, _0806C1C8 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
@@ -4669,7 +4669,7 @@ _0806C1BA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C1C4: .4byte gUnknown_20370D0
+_0806C1C4: .4byte gSpecialVar_Result
 _0806C1C8: .4byte gSaveBlock1Ptr
 	thumb_func_end ScrCmd_checkmoney
 
@@ -5133,7 +5133,7 @@ ScrCmd_setrespawn: @ 806C4D4
 
 	thumb_func_start ScrCmd_checkplayergender
 ScrCmd_checkplayergender: @ 806C4F0
-	ldr r1, _0806C500 @ =gUnknown_20370D0
+	ldr r1, _0806C500 @ =gSpecialVar_Result
 	ldr r0, _0806C504 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -5141,7 +5141,7 @@ ScrCmd_checkplayergender: @ 806C4F0
 	movs r0, 0
 	bx lr
 	.align 2, 0
-_0806C500: .4byte gUnknown_20370D0
+_0806C500: .4byte gSpecialVar_Result
 _0806C504: .4byte gSaveBlock2Ptr
 	thumb_func_end ScrCmd_checkplayergender
 
@@ -5452,13 +5452,13 @@ ScrCmd_givecoins: @ 806C74C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806C774
-	ldr r1, _0806C770 @ =gUnknown_20370D0
+	ldr r1, _0806C770 @ =gSpecialVar_Result
 	movs r0, 0
 	b _0806C778
 	.align 2, 0
-_0806C770: .4byte gUnknown_20370D0
+_0806C770: .4byte gSpecialVar_Result
 _0806C774:
-	ldr r1, _0806C780 @ =gUnknown_20370D0
+	ldr r1, _0806C780 @ =gSpecialVar_Result
 	movs r0, 0x1
 _0806C778:
 	strh r0, [r1]
@@ -5466,7 +5466,7 @@ _0806C778:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C780: .4byte gUnknown_20370D0
+_0806C780: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_givecoins
 
 	thumb_func_start ScrCmd_takecoins
@@ -5483,13 +5483,13 @@ ScrCmd_takecoins: @ 806C784
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806C7AC
-	ldr r1, _0806C7A8 @ =gUnknown_20370D0
+	ldr r1, _0806C7A8 @ =gSpecialVar_Result
 	movs r0, 0
 	b _0806C7B0
 	.align 2, 0
-_0806C7A8: .4byte gUnknown_20370D0
+_0806C7A8: .4byte gSpecialVar_Result
 _0806C7AC:
-	ldr r1, _0806C7B8 @ =gUnknown_20370D0
+	ldr r1, _0806C7B8 @ =gSpecialVar_Result
 	movs r0, 0x1
 _0806C7B0:
 	strh r0, [r1]
@@ -5497,7 +5497,7 @@ _0806C7B0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C7B8: .4byte gUnknown_20370D0
+_0806C7B8: .4byte gSpecialVar_Result
 	thumb_func_end ScrCmd_takecoins
 
 	thumb_func_start sub_806C7BC
@@ -5555,7 +5555,7 @@ ScrCmd_checkmonobedience: @ 806C80C
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0806C83C @ =gUnknown_20370D0
+	ldr r4, _0806C83C @ =gSpecialVar_Result
 	movs r1, 0x64
 	muls r0, r1
 	ldr r1, _0806C840 @ =gPlayerParty
@@ -5569,7 +5569,7 @@ ScrCmd_checkmonobedience: @ 806C80C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806C83C: .4byte gUnknown_20370D0
+_0806C83C: .4byte gSpecialVar_Result
 _0806C840: .4byte gPlayerParty
 	thumb_func_end ScrCmd_checkmonobedience
 

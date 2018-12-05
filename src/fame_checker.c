@@ -1038,9 +1038,9 @@ static void FCSetup_ResetBGCoords(void)
 
 void SetFlavorTextFlagFromSpecialVars(void)
 {
-    if (gUnknown_20370C0 < NUM_FAMECHECKER_PERSONS && gSpecialVar_0x8005 < 6)
+    if (gSpecialVar_0x8004 < NUM_FAMECHECKER_PERSONS && gSpecialVar_0x8005 < 6)
     {
-        gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].flavorTextFlags |= (1 << gSpecialVar_0x8005);
+        gSaveBlock1Ptr->fameChecker[gSpecialVar_0x8004].flavorTextFlags |= (1 << gSpecialVar_0x8005);
         gSpecialVar_0x8005 = FCPICKSTATE_SILHOUETTE;
         UpdatePickStateFromSpecialVar8005();
     }
@@ -1048,15 +1048,15 @@ void SetFlavorTextFlagFromSpecialVars(void)
 
 void UpdatePickStateFromSpecialVar8005(void)
 {
-    if (gUnknown_20370C0 < NUM_FAMECHECKER_PERSONS && gSpecialVar_0x8005 < 3)
+    if (gSpecialVar_0x8004 < NUM_FAMECHECKER_PERSONS && gSpecialVar_0x8005 < 3)
     {
         if (gSpecialVar_0x8005 == FCPICKSTATE_NO_DRAW)
             return;
         if (   gSpecialVar_0x8005 == FCPICKSTATE_SILHOUETTE 
-            && gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].pickState == FCPICKSTATE_COLORED
+            && gSaveBlock1Ptr->fameChecker[gSpecialVar_0x8004].pickState == FCPICKSTATE_COLORED
            )
             return;
-        gSaveBlock1Ptr->fameChecker[gUnknown_20370C0].pickState = gSpecialVar_0x8005;
+        gSaveBlock1Ptr->fameChecker[gSpecialVar_0x8004].pickState = gSpecialVar_0x8005;
     }
 }
 

@@ -2375,7 +2375,7 @@ sub_8011100: @ 8011100
 	ands r0, r1
 	cmp r0, 0
 	beq _08011158
-	ldr r2, _08011168 @ =gUnknown_20370D0
+	ldr r2, _08011168 @ =gSpecialVar_Result
 	ldr r1, _0801116C @ =gUnknown_2023E8A
 	movs r0, 0x3
 	strb r0, [r1]
@@ -2398,7 +2398,7 @@ _08011158:
 	.align 2, 0
 _08011160: .4byte gMain
 _08011164: .4byte gBattleTypeFlags
-_08011168: .4byte gUnknown_20370D0
+_08011168: .4byte gSpecialVar_Result
 _0801116C: .4byte gUnknown_2023E8A
 _08011170: .4byte CB2_QuitRecordedBattle
 	thumb_func_end sub_8011100
@@ -11652,7 +11652,7 @@ _08015B74:
 	cmp r0, 0
 	bne _08015BD4
 _08015B86:
-	ldr r1, _08015BE8 @ =gUnknown_20370D0
+	ldr r1, _08015BE8 @ =gSpecialVar_Result
 	ldr r5, _08015BEC @ =gUnknown_2023E8A
 	ldrb r0, [r5]
 	strh r0, [r1]
@@ -11697,7 +11697,7 @@ _08015BD4:
 _08015BDC: .4byte gBattleTypeFlags
 _08015BE0: .4byte gPlayerParty
 _08015BE4: .4byte gUnknown_3003F64
-_08015BE8: .4byte gUnknown_20370D0
+_08015BE8: .4byte gSpecialVar_Result
 _08015BEC: .4byte gUnknown_2023E8A
 _08015BF0: .4byte gMain
 _08015BF4: .4byte 0x00000439

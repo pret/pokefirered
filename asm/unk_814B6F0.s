@@ -189,7 +189,7 @@ _0814B85C: .4byte sub_814BA98
 sub_814B860: @ 814B860
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r1, _0814B878 @ =gUnknown_203AD30
+	ldr r1, _0814B878 @ =gSpecialVar_ItemId
 	ldrh r0, [r1]
 	subs r0, 0x85
 	lsls r0, 16
@@ -200,7 +200,7 @@ sub_814B860: @ 814B860
 	strh r0, [r1]
 	b _0814B884
 	.align 2, 0
-_0814B878: .4byte gUnknown_203AD30
+_0814B878: .4byte gSpecialVar_ItemId
 _0814B87C:
 	ldrh r0, [r1]
 	movs r1, 0x1
@@ -211,7 +211,7 @@ _0814B884:
 	ldrb r0, [r2, 0x8]
 	lsls r0, 5
 	adds r0, r2, r0
-	ldr r1, _0814B8E4 @ =gUnknown_203AD30
+	ldr r1, _0814B8E4 @ =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	subs r1, 0x85
 	adds r0, 0xA4
@@ -250,7 +250,7 @@ _0814B884:
 	bx r0
 	.align 2, 0
 _0814B8E0: .4byte gUnknown_203F3DC
-_0814B8E4: .4byte gUnknown_203AD30
+_0814B8E4: .4byte gSpecialVar_ItemId
 _0814B8E8: .4byte sub_814BA98
 _0814B8EC: .4byte sub_814BA80
 	thumb_func_end sub_814B860

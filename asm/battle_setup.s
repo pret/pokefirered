@@ -721,13 +721,13 @@ _0807FC30:
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _0807FC40
-	ldr r0, _0807FC3C @ =gUnknown_20370D0
+	ldr r0, _0807FC3C @ =gSpecialVar_Result
 	strh r1, [r0]
 	b _0807FC46
 	.align 2, 0
-_0807FC3C: .4byte gUnknown_20370D0
+_0807FC3C: .4byte gSpecialVar_Result
 _0807FC40:
-	ldr r1, _0807FC54 @ =gUnknown_20370D0
+	ldr r1, _0807FC54 @ =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _0807FC46:
@@ -739,7 +739,7 @@ _0807FC4C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807FC54: .4byte gUnknown_20370D0
+_0807FC54: .4byte gSpecialVar_Result
 _0807FC58: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_807FBF0
 
@@ -1503,7 +1503,7 @@ battle_80801F0: @ 80801F0
 	ldrh r1, [r0]
 	cmp r1, 0
 	beq _08080212
-	ldr r0, _0808021C @ =gUnknown_20370D2
+	ldr r0, _0808021C @ =gSpecialVar_LastTalked
 	strh r1, [r0]
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -1519,7 +1519,7 @@ _08080212:
 	bx r0
 	.align 2, 0
 _08080218: .4byte gUnknown_20386B0
-_0808021C: .4byte gUnknown_20370D2
+_0808021C: .4byte gSpecialVar_LastTalked
 _08080220: .4byte gSaveBlock1Ptr
 _08080224: .4byte gUnknown_3005074
 	thumb_func_end battle_80801F0
@@ -1649,7 +1649,7 @@ TrainerWantsBattle: @ 8080334
 	lsrs r0, 24
 	ldr r2, _08080368 @ =gUnknown_3005074
 	strb r0, [r2]
-	ldr r4, _0808036C @ =gUnknown_20370D2
+	ldr r4, _0808036C @ =gSpecialVar_LastTalked
 	ldr r3, _08080370 @ =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
@@ -1668,7 +1668,7 @@ TrainerWantsBattle: @ 8080334
 	bx r0
 	.align 2, 0
 _08080368: .4byte gUnknown_3005074
-_0808036C: .4byte gUnknown_20370D2
+_0808036C: .4byte gSpecialVar_LastTalked
 _08080370: .4byte gMapObjects
 _08080374: .4byte gUnknown_81A4EB4
 	thumb_func_end TrainerWantsBattle
@@ -1859,7 +1859,7 @@ sub_80804AC: @ 80804AC
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _080804E8
-	ldr r0, _080804E0 @ =gUnknown_20370D0
+	ldr r0, _080804E0 @ =gSpecialVar_Result
 	strh r1, [r0]
 	ldr r0, _080804E4 @ =gUnknown_20386CC
 	ldrh r0, [r0]
@@ -1871,10 +1871,10 @@ sub_80804AC: @ 80804AC
 	.align 2, 0
 _080804D8: .4byte gUnknown_20386AC
 _080804DC: .4byte gUnknown_2023E8A
-_080804E0: .4byte gUnknown_20370D0
+_080804E0: .4byte gSpecialVar_Result
 _080804E4: .4byte gUnknown_20386CC
 _080804E8:
-	ldr r0, _08080500 @ =gUnknown_20370D0
+	ldr r0, _08080500 @ =gSpecialVar_Result
 	movs r1, 0
 	strh r1, [r0]
 _080804EE:
@@ -1884,7 +1884,7 @@ _080804EE:
 	bl sub_81139BC
 	b _0808054E
 	.align 2, 0
-_08080500: .4byte gUnknown_20370D0
+_08080500: .4byte gSpecialVar_Result
 _08080504: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _08080508:
 	ldr r0, _0808051C @ =gTrainerBattleOpponent_A

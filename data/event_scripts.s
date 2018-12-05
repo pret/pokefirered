@@ -4,22 +4,22 @@
 
     .align 2
 gSpecialVars:: @ 815FD0C
-	.4byte gUnknown_20370B8
-	.4byte gUnknown_20370BA
-	.4byte gUnknown_20370BC
-	.4byte gUnknown_20370BE
-	.4byte gUnknown_20370C0
+	.4byte gSpecialVar_0x8000
+	.4byte gSpecialVar_0x8001
+	.4byte gSpecialVar_0x8002
+	.4byte gSpecialVar_0x8003
+	.4byte gSpecialVar_0x8004
 	.4byte gSpecialVar_0x8005
-	.4byte gUnknown_20370C4
-	.4byte gUnknown_20370C6
-	.4byte gUnknown_20370C8
-	.4byte gUnknown_20370CA
-	.4byte gUnknown_20370CC
-	.4byte gUnknown_20370CE
-	.4byte gUnknown_20370D4
-	.4byte gUnknown_20370D0
-	.4byte gUnknown_203AD30
-	.4byte gUnknown_20370D2
+	.4byte gSpecialVar_0x8006
+	.4byte gSpecialVar_0x8007
+	.4byte gSpecialVar_0x8008
+	.4byte gSpecialVar_0x8009
+	.4byte gSpecialVar_0x800A
+	.4byte gSpecialVar_0x800B
+	.4byte gSpecialVar_Facing
+	.4byte gSpecialVar_Result
+	.4byte gSpecialVar_ItemId
+	.4byte gSpecialVar_LastTalked
 	.4byte gSpecialVar_MonBoxId
 	.4byte gSpecialVar_MonBoxPos
 	.4byte gUnknown_20370DA

@@ -369,14 +369,14 @@ sub_813EF40: @ 813EF40
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_80CC44C
-	ldr r1, _0813EF90 @ =gUnknown_20370C0
+	ldr r1, _0813EF90 @ =gSpecialVar_0x8004
 	strh r0, [r1]
 	adds r0, r5, 0
 	movs r1, 0
 	bl sub_80CC44C
 	ldr r1, _0813EF94 @ =gSpecialVar_0x8005
 	strh r0, [r1]
-	ldr r0, _0813EF98 @ =gUnknown_20370C4
+	ldr r0, _0813EF98 @ =gSpecialVar_0x8006
 	movs r5, 0x1
 	strh r5, [r0]
 	ldrh r1, [r1]
@@ -394,9 +394,9 @@ sub_813EF40: @ 813EF40
 	bx r0
 	.align 2, 0
 _0813EF8C: .4byte gTasks+0x8
-_0813EF90: .4byte gUnknown_20370C0
+_0813EF90: .4byte gSpecialVar_0x8004
 _0813EF94: .4byte gSpecialVar_0x8005
-_0813EF98: .4byte gUnknown_20370C4
+_0813EF98: .4byte gSpecialVar_0x8006
 	thumb_func_end sub_813EF40
 
 	thumb_func_start sub_813EF9C

@@ -112,7 +112,7 @@ sub_80BFCD0: @ 80BFCD0
 	movs r1, 0
 	bl VarSet
 _080BFD0A:
-	ldr r0, _080BFD34 @ =gUnknown_20370D2
+	ldr r0, _080BFD34 @ =gSpecialVar_LastTalked
 	strh r5, [r0]
 	movs r0, 0x4
 	strh r0, [r4, 0x4]
@@ -130,7 +130,7 @@ _080BFD24: .4byte 0x00004082
 _080BFD28: .4byte gSaveBlock1Ptr
 _080BFD2C: .4byte 0x00003d34
 _080BFD30: .4byte 0x00003d42
-_080BFD34: .4byte gUnknown_20370D2
+_080BFD34: .4byte gSpecialVar_LastTalked
 _080BFD38:
 	ldr r0, _080BFD7C @ =gSaveBlock1Ptr
 	ldr r1, [r0]
@@ -239,7 +239,7 @@ _080BFDFA:
 
 	thumb_func_start sub_80BFE00
 sub_80BFE00: @ 80BFE00
-	ldr r2, _080BFE10 @ =gUnknown_20370D2
+	ldr r2, _080BFE10 @ =gSpecialVar_LastTalked
 	ldr r1, _080BFE14 @ =gUnknown_83EECE8
 	subs r0, 0x1
 	adds r0, r1
@@ -247,7 +247,7 @@ sub_80BFE00: @ 80BFE00
 	strh r0, [r2]
 	bx lr
 	.align 2, 0
-_080BFE10: .4byte gUnknown_20370D2
+_080BFE10: .4byte gSpecialVar_LastTalked
 _080BFE14: .4byte gUnknown_83EECE8
 	thumb_func_end sub_80BFE00
 

@@ -270,7 +270,7 @@ sub_8069740: @ 8069740
 	lsls r0, 2
 	ldr r1, _08069760 @ =gMapObjects
 	adds r0, r1
-	ldr r1, _08069764 @ =gUnknown_20370D4
+	ldr r1, _08069764 @ =gSpecialVar_Facing
 	ldrb r1, [r1]
 	bl FieldObjectFaceOppositeDirection
 	pop {r0}
@@ -278,7 +278,7 @@ sub_8069740: @ 8069740
 	.align 2, 0
 _0806975C: .4byte gUnknown_3005074
 _08069760: .4byte gMapObjects
-_08069764: .4byte gUnknown_20370D4
+_08069764: .4byte gSpecialVar_Facing
 	thumb_func_end sub_8069740
 
 	thumb_func_start sub_8069768

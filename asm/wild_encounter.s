@@ -1001,15 +1001,15 @@ sub_8082E54: @ 8082E54
 	bne _08082EB0
 	bl sub_807F704
 _08082E9C:
-	ldr r0, _08082EAC @ =gUnknown_20370D0
+	ldr r0, _08082EAC @ =gSpecialVar_Result
 	strh r4, [r0]
 	b _08082EB6
 	.align 2, 0
 _08082EA4: .4byte 0x0000ffff
 _08082EA8: .4byte gUnknown_83C9CB8
-_08082EAC: .4byte gUnknown_20370D0
+_08082EAC: .4byte gSpecialVar_Result
 _08082EB0:
-	ldr r1, _08082EBC @ =gUnknown_20370D0
+	ldr r1, _08082EBC @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 _08082EB6:
@@ -1017,7 +1017,7 @@ _08082EB6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08082EBC: .4byte gUnknown_20370D0
+_08082EBC: .4byte gSpecialVar_Result
 	thumb_func_end sub_8082E54
 
 	thumb_func_start sub_8082EC0

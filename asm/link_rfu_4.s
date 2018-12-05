@@ -1662,7 +1662,7 @@ _081430B8:
 	.align 2, 0
 _081430D0: .4byte gUnknown_3003F64
 _081430D4:
-	ldr r0, _081430E8 @ =gUnknown_20370D0
+	ldr r0, _081430E8 @ =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	beq _081430DE
@@ -1672,7 +1672,7 @@ _081430DE:
 	bl sub_81424B8
 	b _08143464
 	.align 2, 0
-_081430E8: .4byte gUnknown_20370D0
+_081430E8: .4byte gSpecialVar_Result
 _081430EC:
 	ldr r0, _081430F8 @ =gUnknown_841E794
 	bl sub_8142504
@@ -2172,7 +2172,7 @@ _0814349C:
 	.align 2, 0
 _081434B0: .4byte gUnknown_3003F64
 _081434B4:
-	ldr r0, _081434CC @ =gUnknown_20370D0
+	ldr r0, _081434CC @ =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	beq _081434BE
@@ -2185,7 +2185,7 @@ _081434C4:
 	strb r0, [r5, 0x8]
 	b _081435C6
 	.align 2, 0
-_081434CC: .4byte gUnknown_20370D0
+_081434CC: .4byte gSpecialVar_Result
 _081434D0:
 	ldr r0, _081434F0 @ =gStringVar1
 	movs r1, 0xFF

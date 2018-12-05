@@ -1373,12 +1373,12 @@ _08009F74: .4byte gUnknown_3000E08
 _08009F78:
 	ldr r0, _08009F84 @ =gUnknown_3003F50
 	strh r2, [r0]
-	ldr r1, _08009F88 @ =gUnknown_203AD30
+	ldr r1, _08009F88 @ =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	b _08009FD4
 	.align 2, 0
 _08009F84: .4byte gUnknown_3003F50
-_08009F88: .4byte gUnknown_203AD30
+_08009F88: .4byte gSpecialVar_ItemId
 _08009F8C:
 	ldr r0, _08009F98 @ =gUnknown_3003F50
 	strh r2, [r0]

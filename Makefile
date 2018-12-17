@@ -1,6 +1,7 @@
-include $(DEVKITARM)/base_tools
-export CPP := $(PREFIX)cpp
-export LD := $(PREFIX)ld
+AS := tools/binutils/bin/arm-none-eabi-as
+CPP := $(CC) -E
+LD := tools/binutils/bin/arm-none-eabi-ld
+OBJCOPY := tools/binutils/bin/arm-none-eabi-objcopy
 
 TITLE       := POKEMON FIRE
 GAME_CODE   := BPRE
@@ -166,7 +167,7 @@ $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_comm
 	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" > ld_script.ld
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
-	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
+	cd $(OBJ_DIR) && ../../$(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@

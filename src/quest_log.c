@@ -523,7 +523,7 @@ void sub_8110A3C(void)
 
 void sub_8110AB4(void)
 {
-    gUnknown_20370D0 = gUnknown_203ADFA;
+    gSpecialVar_Result = gUnknown_203ADFA;
 }
 
 u8 sub_8110AC8(void)
@@ -2654,7 +2654,7 @@ bool16 sub_8113364(void)
 
 bool16 sub_811337C(struct Var4038Struct * a0)
 {
-    return (a0->unk_1 >> gUnknown_20370C0) & 1;
+    return (a0->unk_1 >> gSpecialVar_0x8004) & 1;
 }
 
 void sub_8113390(struct Var4038Struct * a0)
@@ -2669,7 +2669,7 @@ void sub_81133A4(void)
     u8 r3 = 0;
     u8 r2 = 0;
 
-    switch (gUnknown_20370C0)
+    switch (gSpecialVar_0x8004)
     {
         case 0:
             r2 = 0;
@@ -2770,7 +2770,7 @@ void sub_8113524(struct Var4038Struct * a0)
 
 u8 sub_8113530(void)
 {
-    return sub_8113114(VAR_0x4038_STRUCT, gUnknown_20370C0);
+    return sub_8113114(VAR_0x4038_STRUCT, gSpecialVar_0x8004);
 }
 
 static u16 * (*const sQuestLogStorageCBs[])(u16 *, const u16 *) = {

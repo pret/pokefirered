@@ -31945,7 +31945,7 @@ _0802D5D8:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	movs r4, 0xA
 	cmp r0, 0
@@ -32356,7 +32356,7 @@ sub_802D95C: @ 802D95C
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802D9B4

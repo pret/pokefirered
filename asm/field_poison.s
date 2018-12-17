@@ -196,12 +196,12 @@ _080A05B8:
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _080A05E8
-	ldr r1, _080A05CC @ =gUnknown_20370D0
+	ldr r1, _080A05CC @ =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	b _080A05EC
 	.align 2, 0
-_080A05CC: .4byte gUnknown_20370D0
+_080A05CC: .4byte gSpecialVar_Result
 _080A05D0:
 	ldrb r0, [r4, 0x2]
 	bl MonFaintFromPoisonOnField
@@ -214,7 +214,7 @@ _080A05D0:
 	.align 2, 0
 _080A05E4: .4byte gUnknown_81A5476
 _080A05E8:
-	ldr r0, _080A05FC @ =gUnknown_20370D0
+	ldr r0, _080A05FC @ =gSpecialVar_Result
 	strh r1, [r0]
 _080A05EC:
 	bl EnableBothScriptContexts
@@ -225,7 +225,7 @@ _080A05F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A05FC: .4byte gUnknown_20370D0
+_080A05FC: .4byte gSpecialVar_Result
 	thumb_func_end Task_WhiteOut
 
 	thumb_func_start ExecuteWhiteOut

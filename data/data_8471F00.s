@@ -336,33 +336,3 @@ gUnknown_84827B4:: @ 84827B4
 
 gUnknown_84886E8:: @ 84886E8
 	.incbin "baserom.gba", 0x4886E8, 0x588
-
-gUnknown_8488C70:: @ 8488C70
-	.incbin "baserom.gba", 0x488C70, 0x32
-
-gUnknown_8488CA2:: @ 8488CA2
-	.incbin "baserom.gba", 0x488CA2, 0x2C
-
-gUnknown_8488CCE:: @ 8488CCE
-	.incbin "baserom.gba", 0x488CCE, 0x28
-
-gUnknown_8488CF6:: @ 8488CF6
-	.incbin "baserom.gba", 0x488CF6, 0x34
-
-gUnknown_8488D2A:: @ 8488D2A
-	.incbin "baserom.gba", 0x488D2A, 0x36
-
-gUnknown_8488D60:: @ 8488D60
-	.incbin "baserom.gba", 0x488D60, 0x1C
-
-gUnknown_8488D7C:: @ 8488D7C
-	.incbin "baserom.gba", 0x488D7C, 0x12
-
-gUnknown_8488D8E:: @ 8488D8E
-	.incbin "baserom.gba", 0x488D8E, 0x2F
-
-gUnknown_8488DBD:: @ 8488DBD
-	.incbin "baserom.gba", 0x488DBD, 0x40
-
-gUnknown_8488DFD:: @ 8488DFD
-	.incbin "baserom.gba", 0x488DFD, 0xB6B

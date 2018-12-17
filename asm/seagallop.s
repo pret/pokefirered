@@ -338,7 +338,7 @@ _0814713C: .4byte gPaletteFade
 sub_8147140: @ 8147140
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r1, _081471AC @ =gUnknown_20370C4
+	ldr r1, _081471AC @ =gSpecialVar_0x8006
 	ldrh r0, [r1]
 	cmp r0, 0xA
 	bls _08147150
@@ -382,7 +382,7 @@ _08147150:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081471AC: .4byte gUnknown_20370C4
+_081471AC: .4byte gSpecialVar_0x8006
 _081471B0: .4byte gUnknown_846AEFC
 _081471B4: .4byte gUnknown_3005020
 _081471B8: .4byte sub_807DF64
@@ -767,7 +767,7 @@ _081474C6:
 	thumb_func_start sub_81474CC
 sub_81474CC: @ 81474CC
 	push {lr}
-	ldr r2, _081474EC @ =gUnknown_20370C0
+	ldr r2, _081474EC @ =gSpecialVar_0x8004
 	ldrh r0, [r2]
 	cmp r0, 0xA
 	bhi _081474F8
@@ -775,16 +775,16 @@ sub_81474CC: @ 81474CC
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	ldr r1, _081474F4 @ =gUnknown_20370C4
+	ldr r1, _081474F4 @ =gSpecialVar_0x8006
 	ldrh r1, [r1]
 	asrs r0, r1
 	movs r1, 0x1
 	ands r0, r1
 	b _081474FA
 	.align 2, 0
-_081474EC: .4byte gUnknown_20370C0
+_081474EC: .4byte gSpecialVar_0x8004
 _081474F0: .4byte gUnknown_846AF28
-_081474F4: .4byte gUnknown_20370C4
+_081474F4: .4byte gSpecialVar_0x8006
 _081474F8:
 	movs r0, 0x1
 _081474FA:

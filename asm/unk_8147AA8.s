@@ -4267,17 +4267,17 @@ _08149A1C:
 	bl sub_8149A00
 	cmp r0, 0
 	beq _08149A54
-	ldr r1, _08149A50 @ =gUnknown_20370D0
+	ldr r1, _08149A50 @ =gSpecialVar_Result
 	movs r0, 0x1
 	b _08149A5E
 	.align 2, 0
 _08149A4C: .4byte gPlayerParty
-_08149A50: .4byte gUnknown_20370D0
+_08149A50: .4byte gSpecialVar_Result
 _08149A54:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _08149A1C
-	ldr r1, _08149A68 @ =gUnknown_20370D0
+	ldr r1, _08149A68 @ =gSpecialVar_Result
 	movs r0, 0
 _08149A5E:
 	strh r0, [r1]
@@ -4285,7 +4285,7 @@ _08149A5E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08149A68: .4byte gUnknown_20370D0
+_08149A68: .4byte gSpecialVar_Result
 	thumb_func_end sub_8149A18
 
 	thumb_func_start sub_8149A6C

@@ -23,7 +23,7 @@ _080D0808:
 	movs r0, 0
 	b _080D0826
 _080D080C:
-	ldr r4, _080D082C @ =gUnknown_20370D0
+	ldr r4, _080D082C @ =gSpecialVar_Result
 	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
@@ -40,7 +40,7 @@ _080D0826:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D082C: .4byte gUnknown_20370D0
+_080D082C: .4byte gSpecialVar_Result
 _080D0830: .4byte gUnknown_3005024
 _080D0834: .4byte hm_add_c3_launch_phase_2
 _080D0838: .4byte gUnknown_203B0C4

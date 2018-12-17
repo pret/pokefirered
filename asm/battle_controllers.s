@@ -1420,7 +1420,7 @@ sub_800DD28: @ 800DD28
 	bne _0800DE28
 	bl sub_80FBB4C
 	movs r4, 0
-	ldr r0, _0800DD6C @ =gUnknown_2022118
+	ldr r0, _0800DD6C @ =gBlockRecvBuffer
 	mov r10, r0
 	b _0800DE1C
 	.align 2, 0
@@ -1428,7 +1428,7 @@ _0800DD5C: .4byte gUnknown_3003F64
 _0800DD60: .4byte gBattleTypeFlags
 _0800DD64: .4byte gLinkPlayers
 _0800DD68: .4byte 0x00002211
-_0800DD6C: .4byte gUnknown_2022118
+_0800DD6C: .4byte gBlockRecvBuffer
 _0800DD70:
 	bl GetBlockReceivedStatus
 	lsls r0, 24
@@ -1447,7 +1447,7 @@ _0800DD70:
 	lsls r0, r4, 8
 	mov r4, r10
 	adds r3, r0, r4
-	ldr r1, _0800DE3C @ =gUnknown_202211C
+	ldr r1, _0800DE3C @ =gBlockRecvBuffer + 4
 	adds r0, r1
 	ldrh r6, [r0]
 	ldr r7, _0800DE40 @ =gTasks
@@ -1534,7 +1534,7 @@ _0800DE28:
 	bx r0
 	.align 2, 0
 _0800DE38: .4byte gBitTable
-_0800DE3C: .4byte gUnknown_202211C
+_0800DE3C: .4byte gBlockRecvBuffer + 4
 _0800DE40: .4byte gTasks
 _0800DE44: .4byte gUnknown_202286D
 _0800DE48: .4byte gUnknown_2023FF0

@@ -4435,7 +4435,7 @@ CompleteWhenChoseItem: @ 803073C
 	ands r0, r1
 	cmp r0, 0
 	bne _08030762
-	ldr r0, _08030774 @ =gUnknown_203AD30
+	ldr r0, _08030774 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
@@ -4447,7 +4447,7 @@ _08030762:
 _08030768: .4byte gMain
 _0803076C: .4byte sub_8011100
 _08030770: .4byte gPaletteFade
-_08030774: .4byte gUnknown_203AD30
+_08030774: .4byte gSpecialVar_ItemId
 	thumb_func_end CompleteWhenChoseItem
 
 	thumb_func_start CompleteOnSpecialAnimDone

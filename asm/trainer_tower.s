@@ -303,7 +303,7 @@ sub_815D9E8: @ 815D9E8
 	push {lr}
 	bl sub_815DC8C
 	ldr r1, _0815DA08 @ =gUnknown_847A230
-	ldr r0, _0815DA0C @ =gUnknown_20370C0
+	ldr r0, _0815DA0C @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -314,7 +314,7 @@ sub_815D9E8: @ 815D9E8
 	bx r0
 	.align 2, 0
 _0815DA08: .4byte gUnknown_847A230
-_0815DA0C: .4byte gUnknown_20370C0
+_0815DA0C: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_815D9E8
 
 	thumb_func_start sub_815DA10
@@ -741,7 +741,7 @@ sub_815DD44: @ 815DD44
 	ldrb r1, [r4, 0x4]
 	cmp r0, r1
 	ble _0815DD78
-	ldr r0, _0815DD74 @ =gUnknown_20370D0
+	ldr r0, _0815DD74 @ =gSpecialVar_Result
 	movs r1, 0x3
 	strh r1, [r0]
 	movs r0, 0x99
@@ -752,9 +752,9 @@ sub_815DD44: @ 815DD44
 _0815DD68: .4byte gMapHeader
 _0815DD6C: .4byte 0xfffffed7
 _0815DD70: .4byte gUnknown_203F458
-_0815DD74: .4byte gUnknown_20370D0
+_0815DD74: .4byte gSpecialVar_Result
 _0815DD78:
-	ldr r3, _0815DDA8 @ =gUnknown_20370D0
+	ldr r3, _0815DDA8 @ =gSpecialVar_Result
 	ldrb r1, [r4]
 	lsls r0, r1, 5
 	subs r0, r1
@@ -778,7 +778,7 @@ _0815DDA2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815DDA8: .4byte gUnknown_20370D0
+_0815DDA8: .4byte gSpecialVar_Result
 _0815DDAC: .4byte gUnknown_847A284
 	thumb_func_end sub_815DD44
 
@@ -1015,7 +1015,7 @@ _0815DF4E:
 	thumb_func_start sub_815DF54
 sub_815DF54: @ 815DF54
 	push {r4,r5,lr}
-	ldr r0, _0815DF90 @ =gUnknown_20370C4
+	ldr r0, _0815DF90 @ =gSpecialVar_0x8006
 	ldrh r4, [r0]
 	ldr r2, _0815DF94 @ =gUnknown_203F458
 	ldr r3, [r2]
@@ -1046,7 +1046,7 @@ _0815DF7C:
 	beq _0815DFA6
 	b _0815E05C
 	.align 2, 0
-_0815DF90: .4byte gUnknown_20370C4
+_0815DF90: .4byte gSpecialVar_0x8006
 _0815DF94: .4byte gUnknown_203F458
 _0815DF98: .4byte gSpecialVar_0x8005
 _0815DF9C:
@@ -1335,7 +1335,7 @@ sub_815E1C0: @ 815E1C0
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0815E1DE
-	ldr r3, _0815E1E8 @ =gUnknown_20370D0
+	ldr r3, _0815E1E8 @ =gSpecialVar_Result
 	ldr r0, _0815E1EC @ =gUnknown_203F458
 	ldr r1, [r0]
 	ldrb r2, [r1]
@@ -1350,7 +1350,7 @@ _0815E1DE:
 	bx r0
 	.align 2, 0
 _0815E1E4: .4byte gSpecialVar_0x8005
-_0815E1E8: .4byte gUnknown_20370D0
+_0815E1E8: .4byte gSpecialVar_Result
 _0815E1EC: .4byte gUnknown_203F458
 	thumb_func_end sub_815E1C0
 
@@ -1412,7 +1412,7 @@ sub_815E218: @ 815E218
 	ldrb r1, [r1, 0xD]
 	cmp r3, r1
 	bgt _0815E27C
-	ldr r1, _0815E278 @ =gUnknown_20370D0
+	ldr r1, _0815E278 @ =gSpecialVar_Result
 	movs r0, 0
 	b _0815E280
 	.align 2, 0
@@ -1422,16 +1422,16 @@ _0815E268: .4byte gSaveBlock1Ptr
 _0815E26C: .4byte 0x00003d34
 _0815E270: .4byte 0xfffffed7
 _0815E274: .4byte gUnknown_203F458
-_0815E278: .4byte gUnknown_20370D0
+_0815E278: .4byte gSpecialVar_Result
 _0815E27C:
-	ldr r1, _0815E288 @ =gUnknown_20370D0
+	ldr r1, _0815E288 @ =gSpecialVar_Result
 	movs r0, 0x1
 _0815E280:
 	strh r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E288: .4byte gUnknown_20370D0
+_0815E288: .4byte gSpecialVar_Result
 	thumb_func_end sub_815E218
 
 	thumb_func_start sub_815E28C
@@ -1566,7 +1566,7 @@ _0815E390: .4byte 0x00003d38
 sub_815E394: @ 815E394
 	push {lr}
 	bl DisableVBlankCounter1
-	ldr r3, _0815E3F8 @ =gUnknown_20370D0
+	ldr r3, _0815E3F8 @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r3]
 	ldr r0, _0815E3FC @ =gSaveBlock1Ptr
@@ -1616,7 +1616,7 @@ _0815E3D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E3F8: .4byte gUnknown_20370D0
+_0815E3F8: .4byte gSpecialVar_Result
 _0815E3FC: .4byte gSaveBlock1Ptr
 _0815E400: .4byte 0x00003d34
 _0815E404: .4byte 0x00003d42
@@ -1651,7 +1651,7 @@ sub_815E408: @ 815E408
 	lsrs r5, r0, 31
 	cmp r5, 0
 	beq _0815E45C
-	ldr r1, _0815E458 @ =gUnknown_20370D0
+	ldr r1, _0815E458 @ =gSpecialVar_Result
 	movs r0, 0x2
 	b _0815E4A0
 	.align 2, 0
@@ -1660,7 +1660,7 @@ _0815E448: .4byte gUnknown_203F458
 _0815E44C: .4byte gSaveBlock1Ptr
 _0815E450: .4byte 0x00003d34
 _0815E454: .4byte 0x00003d42
-_0815E458: .4byte gUnknown_20370D0
+_0815E458: .4byte gSpecialVar_Result
 _0815E45C:
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -1685,14 +1685,14 @@ _0815E45C:
 	movs r2, 0x1
 	orrs r0, r2
 	strb r0, [r1]
-	ldr r0, _0815E498 @ =gUnknown_20370D0
+	ldr r0, _0815E498 @ =gSpecialVar_Result
 	strh r5, [r0]
 	b _0815E4A2
 	.align 2, 0
 _0815E494: .4byte gStringVar2
-_0815E498: .4byte gUnknown_20370D0
+_0815E498: .4byte gSpecialVar_Result
 _0815E49C:
-	ldr r1, _0815E4AC @ =gUnknown_20370D0
+	ldr r1, _0815E4AC @ =gSpecialVar_Result
 	movs r0, 0x1
 _0815E4A0:
 	strh r0, [r1]
@@ -1703,7 +1703,7 @@ _0815E4A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E4AC: .4byte gUnknown_20370D0
+_0815E4AC: .4byte gSpecialVar_Result
 	thumb_func_end sub_815E408
 
 	thumb_func_start sub_815E4B0
@@ -1725,14 +1725,14 @@ sub_815E4B0: @ 815E4B0
 	lsrs r5, r0, 31
 	cmp r5, 0
 	beq _0815E4E8
-	ldr r1, _0815E4E4 @ =gUnknown_20370D0
+	ldr r1, _0815E4E4 @ =gSpecialVar_Result
 	movs r0, 0x2
 	b _0815E534
 	.align 2, 0
 _0815E4D8: .4byte gSaveBlock1Ptr
 _0815E4DC: .4byte 0x00003d34
 _0815E4E0: .4byte 0x00003d42
-_0815E4E4: .4byte gUnknown_20370D0
+_0815E4E4: .4byte gSpecialVar_Result
 _0815E4E8:
 	ldr r4, _0815E520 @ =0x00003d38
 	adds r0, r1, r4
@@ -1756,16 +1756,16 @@ _0815E4E8:
 	adds r0, r3
 	adds r1, r4, 0
 	bl sub_815EDF4
-	ldr r0, _0815E52C @ =gUnknown_20370D0
+	ldr r0, _0815E52C @ =gSpecialVar_Result
 	strh r5, [r0]
 	b _0815E536
 	.align 2, 0
 _0815E520: .4byte 0x00003d38
 _0815E524: .4byte 0x00003d34
 _0815E528: .4byte 0x00003d3c
-_0815E52C: .4byte gUnknown_20370D0
+_0815E52C: .4byte gSpecialVar_Result
 _0815E530:
-	ldr r1, _0815E55C @ =gUnknown_20370D0
+	ldr r1, _0815E55C @ =gSpecialVar_Result
 	movs r0, 0x1
 _0815E534:
 	strh r0, [r1]
@@ -1789,7 +1789,7 @@ _0815E536:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E55C: .4byte gUnknown_20370D0
+_0815E55C: .4byte gSpecialVar_Result
 _0815E560: .4byte gSaveBlock1Ptr
 _0815E564: .4byte 0x00003d34
 _0815E568: .4byte 0x00003d42
@@ -1887,14 +1887,14 @@ sub_815E5F0: @ 815E5F0
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r1, _0815E62C @ =gUnknown_20370D0
+	ldr r1, _0815E62C @ =gSpecialVar_Result
 	movs r0, 0
 	b _0815E64C
 	.align 2, 0
 _0815E620: .4byte gSaveBlock1Ptr
 _0815E624: .4byte 0x00003d34
 _0815E628: .4byte 0x00003d42
-_0815E62C: .4byte gUnknown_20370D0
+_0815E62C: .4byte gSpecialVar_Result
 _0815E630:
 	lsls r0, r1, 27
 	cmp r0, 0
@@ -1903,20 +1903,20 @@ _0815E630:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r1, _0815E644 @ =gUnknown_20370D0
+	ldr r1, _0815E644 @ =gSpecialVar_Result
 	movs r0, 0x1
 	b _0815E64C
 	.align 2, 0
-_0815E644: .4byte gUnknown_20370D0
+_0815E644: .4byte gSpecialVar_Result
 _0815E648:
-	ldr r1, _0815E654 @ =gUnknown_20370D0
+	ldr r1, _0815E654 @ =gSpecialVar_Result
 	movs r0, 0x2
 _0815E64C:
 	strh r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E654: .4byte gUnknown_20370D0
+_0815E654: .4byte gSpecialVar_Result
 	thumb_func_end sub_815E5F0
 
 	thumb_func_start sub_815E658
@@ -2187,7 +2187,7 @@ _0815E8B0: .4byte 0x00004001
 	thumb_func_start sub_815E8B4
 sub_815E8B4: @ 815E8B4
 	push {r4,lr}
-	ldr r4, _0815E8C8 @ =gUnknown_20370D0
+	ldr r4, _0815E8C8 @ =gSpecialVar_Result
 	bl GetMonsStateToDoubles
 	lsls r0, 24
 	lsrs r0, 24
@@ -2196,7 +2196,7 @@ sub_815E8B4: @ 815E8B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E8C8: .4byte gUnknown_20370D0
+_0815E8C8: .4byte gSpecialVar_Result
 	thumb_func_end sub_815E8B4
 
 	thumb_func_start sub_815E8CC
@@ -2213,22 +2213,22 @@ sub_815E8CC: @ 815E8CC
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	ldr r1, _0815E8F4 @ =gUnknown_20370D0
+	ldr r1, _0815E8F4 @ =gSpecialVar_Result
 	movs r0, 0x1
 	b _0815E8FC
 	.align 2, 0
 _0815E8EC: .4byte gUnknown_203F458
 _0815E8F0: .4byte gStringVar1
-_0815E8F4: .4byte gUnknown_20370D0
+_0815E8F4: .4byte gSpecialVar_Result
 _0815E8F8:
-	ldr r1, _0815E904 @ =gUnknown_20370D0
+	ldr r1, _0815E904 @ =gSpecialVar_Result
 	movs r0, 0
 _0815E8FC:
 	strh r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E904: .4byte gUnknown_20370D0
+_0815E904: .4byte gSpecialVar_Result
 	thumb_func_end sub_815E8CC
 
 	thumb_func_start sub_815E908
@@ -2245,23 +2245,23 @@ sub_815E908: @ 815E908
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _0815E938
-	ldr r0, _0815E934 @ =gUnknown_20370D0
+	ldr r0, _0815E934 @ =gSpecialVar_Result
 	strh r1, [r0]
 	b _0815E93E
 	.align 2, 0
 _0815E928: .4byte gMapHeader
 _0815E92C: .4byte 0x00000129
 _0815E930: .4byte 0x00004082
-_0815E934: .4byte gUnknown_20370D0
+_0815E934: .4byte gSpecialVar_Result
 _0815E938:
-	ldr r1, _0815E944 @ =gUnknown_20370D0
+	ldr r1, _0815E944 @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 _0815E93E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815E944: .4byte gUnknown_20370D0
+_0815E944: .4byte gSpecialVar_Result
 	thumb_func_end sub_815E908
 
 	thumb_func_start sub_815E948
@@ -2332,7 +2332,7 @@ _0815E9C4: .4byte gUnknown_847A2D2
 
 	thumb_func_start sub_815E9C8
 sub_815E9C8: @ 815E9C8
-	ldr r3, _0815E9EC @ =gUnknown_20370D0
+	ldr r3, _0815E9EC @ =gSpecialVar_Result
 	ldr r0, _0815E9F0 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r2, _0815E9F4 @ =0x00003d34
@@ -2350,7 +2350,7 @@ sub_815E9C8: @ 815E9C8
 	strh r0, [r3]
 	bx lr
 	.align 2, 0
-_0815E9EC: .4byte gUnknown_20370D0
+_0815E9EC: .4byte gSpecialVar_Result
 _0815E9F0: .4byte gSaveBlock1Ptr
 _0815E9F4: .4byte 0x00003d34
 _0815E9F8: .4byte 0x00003d42

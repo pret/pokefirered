@@ -677,7 +677,7 @@ sub_80E7AC4: @ 80E7AC4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E7B34
-	ldr r0, _080E7B20 @ =gUnknown_203AD30
+	ldr r0, _080E7B20 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	cmp r0, 0xD
 	bne _080E7B34
@@ -701,13 +701,13 @@ sub_80E7AC4: @ 80E7AC4
 _080E7B14: .4byte gMain
 _080E7B18: .4byte sub_8011100
 _080E7B1C: .4byte gPaletteFade
-_080E7B20: .4byte gUnknown_203AD30
+_080E7B20: .4byte gSpecialVar_ItemId
 _080E7B24: .4byte gBattleTypeFlags
 _080E7B28: .4byte gUnknown_3004FE0
 _080E7B2C: .4byte gActiveBattler
 _080E7B30: .4byte sub_80E8704
 _080E7B34:
-	ldr r0, _080E7B48 @ =gUnknown_203AD30
+	ldr r0, _080E7B48 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
@@ -716,7 +716,7 @@ _080E7B42:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E7B48: .4byte gUnknown_203AD30
+_080E7B48: .4byte gSpecialVar_ItemId
 	thumb_func_end sub_80E7AC4
 
 	thumb_func_start sub_80E7B4C
@@ -2341,7 +2341,7 @@ _080E8880:
 	cmp r4, 0
 	bne _080E88AA
 	bl sub_80EB524
-	ldr r0, _080E88B8 @ =gUnknown_203AD30
+	ldr r0, _080E88B8 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
@@ -2357,7 +2357,7 @@ _080E88AA:
 	bx r0
 	.align 2, 0
 _080E88B4: .4byte gPaletteFade
-_080E88B8: .4byte gUnknown_203AD30
+_080E88B8: .4byte gSpecialVar_ItemId
 _080E88BC: .4byte gBattleStruct
 	thumb_func_end sub_80E8704
 

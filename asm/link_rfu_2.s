@@ -142,7 +142,7 @@ sub_80F86F4: @ 80F86F4
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _080F8722
-	ldr r0, _080F8734 @ =gUnknown_202271A
+	ldr r0, _080F8734 @ =gLinkType
 	strh r1, [r0]
 	movs r0, 0
 	bl sub_80FB128
@@ -158,7 +158,7 @@ _080F8722:
 _080F8728: .4byte gUnknown_3001190
 _080F872C: .4byte 0x00000e64
 _080F8730: .4byte gIntrTable + 0x4
-_080F8734: .4byte gUnknown_202271A
+_080F8734: .4byte gLinkType
 	thumb_func_end sub_80F86F4
 
 	thumb_func_start sub_80F8738
@@ -2543,7 +2543,7 @@ _080F99DA:
 	orrs r0, r3
 	str r0, [r1]
 	movs r4, 0
-	ldr r0, _080F9A8C @ =gUnknown_2022118
+	ldr r0, _080F9A8C @ =gBlockRecvBuffer
 	mov r9, r0
 	mov r12, r2
 	mov r1, r8
@@ -2617,12 +2617,12 @@ _080F9A78:
 	beq _080F9A80
 	b _080F9BF8
 _080F9A80:
-	ldr r0, _080F9A8C @ =gUnknown_2022118
+	ldr r0, _080F9A8C @ =gBlockRecvBuffer
 	bl sub_80FAA58
 	b _080F9BF8
 	.align 2, 0
 _080F9A88: .4byte gUnknown_3005450
-_080F9A8C: .4byte gUnknown_2022118
+_080F9A8C: .4byte gBlockRecvBuffer
 _080F9A90: .4byte gUnknown_3003ED0
 _080F9A94: .4byte gUnknown_843EBD4
 _080F9A98: .4byte gUnknown_3003F64
@@ -3204,7 +3204,7 @@ _080F9EC0:
 	str r7, [r5, 0x70]
 	b _080F9F14
 _080F9F02:
-	ldr r4, _080F9F38 @ =gUnknown_2022618
+	ldr r4, _080F9F38 @ =gBlockSendBuffer
 	cmp r7, r4
 	beq _080F9F12
 	adds r0, r4, 0
@@ -3232,7 +3232,7 @@ _080F9F2A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F9F38: .4byte gUnknown_2022618
+_080F9F38: .4byte gBlockSendBuffer
 _080F9F3C: .4byte gUnknown_3005450
 _080F9F40: .4byte rfufunc_80F9F44
 	thumb_func_end sub_80F9E60
@@ -4872,7 +4872,7 @@ _080FAB70:
 	adds r0, r4, 0
 	bl ResetBlockReceivedFlag
 	lsls r2, r4, 8
-	ldr r0, _080FAB9C @ =gUnknown_2022118
+	ldr r0, _080FAB9C @ =gBlockRecvBuffer
 	adds r2, r0
 	ldr r1, _080FABA0 @ =gLinkPlayers
 	lsls r0, r4, 3
@@ -4890,10 +4890,10 @@ _080FAB70:
 	bl sub_800B284
 	b _080FAC2E
 	.align 2, 0
-_080FAB9C: .4byte gUnknown_2022118
+_080FAB9C: .4byte gBlockRecvBuffer
 _080FABA0: .4byte gLinkPlayers
 _080FABA4:
-	ldr r5, _080FAC40 @ =gUnknown_2022618
+	ldr r5, _080FAC40 @ =gBlockSendBuffer
 	adds r1, r5, 0
 	ldr r0, _080FAC44 @ =gUnknown_843EDE4	"PokemonSioInfo"
 	ldm r0!, {r2-r4}
@@ -4931,7 +4931,7 @@ _080FABC6:
 	adds r0, 0x1
 	strh r0, [r1, 0x8]
 _080FABEE:
-	ldr r5, _080FAC40 @ =gUnknown_2022618
+	ldr r5, _080FAC40 @ =gBlockSendBuffer
 	ldr r1, _080FAC48 @ =gUnknown_3005450
 	ldrb r0, [r1, 0xD]
 	strb r0, [r5, 0xF]
@@ -4955,7 +4955,7 @@ _080FAC04:
 	mov r1, r12
 	movs r2, 0x8C
 	bl memcpy
-	ldr r1, _080FAC40 @ =gUnknown_2022618
+	ldr r1, _080FAC40 @ =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0xA0
 	bl SendBlock
@@ -4973,7 +4973,7 @@ _080FAC36:
 	strh r0, [r1, 0x8]
 	b _080FACD6
 	.align 2, 0
-_080FAC40: .4byte gUnknown_2022618
+_080FAC40: .4byte gBlockSendBuffer
 _080FAC44: .4byte gUnknown_843EDE4
 _080FAC48: .4byte gUnknown_3005450
 _080FAC4C: .4byte 0x00000996
@@ -5008,7 +5008,7 @@ _080FAC78:
 	mov r0, sp
 	movs r4, 0
 	strh r4, [r0]
-	ldr r1, _080FACE0 @ =gUnknown_2022118
+	ldr r1, _080FACE0 @ =gBlockRecvBuffer
 	ldr r2, _080FACE4 @ =0x0100007e
 	bl CpuSet
 	movs r0, 0
@@ -5046,7 +5046,7 @@ _080FACD6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FACE0: .4byte gUnknown_2022118
+_080FACE0: .4byte gBlockRecvBuffer
 _080FACE4: .4byte 0x0100007e
 _080FACE8: .4byte gUnknown_3005450
 _080FACEC: .4byte 0x0000099e
@@ -5095,13 +5095,13 @@ _080FAD3A:
 	cmp r0, 0
 	beq _080FAD8A
 	bl sub_800B0B4
-	ldr r1, _080FAD50 @ =gUnknown_2022618
+	ldr r1, _080FAD50 @ =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0x3C
 	bl SendBlock
 	b _080FAD5E
 	.align 2, 0
-_080FAD50: .4byte gUnknown_2022618
+_080FAD50: .4byte gBlockSendBuffer
 _080FAD54:
 	bl sub_800A4BC
 	lsls r0, 24
@@ -5119,7 +5119,7 @@ _080FAD66:
 	ands r1, r0
 	cmp r1, 0
 	beq _080FAD8A
-	ldr r0, _080FAD90 @ =gUnknown_2022118
+	ldr r0, _080FAD90 @ =gBlockRecvBuffer
 	bl sub_80FA9FC
 	movs r0, 0
 	bl ResetBlockReceivedFlag
@@ -5132,7 +5132,7 @@ _080FAD8A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FAD90: .4byte gUnknown_2022118
+_080FAD90: .4byte gBlockRecvBuffer
 _080FAD94: .4byte gUnknown_3003F64
 	thumb_func_end sub_80FACF0
 
@@ -6870,7 +6870,7 @@ sub_80FBA78: @ 80FBA78
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FBAEC
-	ldr r1, _080FBAF8 @ =gUnknown_202271A
+	ldr r1, _080FBAF8 @ =gLinkType
 	ldr r2, _080FBAFC @ =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -6907,7 +6907,7 @@ _080FBAEC:
 	bx r0
 	.align 2, 0
 _080FBAF4: .4byte sub_80FBA64
-_080FBAF8: .4byte gUnknown_202271A
+_080FBAF8: .4byte gLinkType
 _080FBAFC: .4byte 0x00001111
 _080FBB00: .4byte gMain
 _080FBB04: .4byte gSaveBlock2Ptr

@@ -89,8 +89,8 @@ _0809C7BC: .4byte 0x000030ec
 _0809C7C0: .4byte 0x0100001a
 	thumb_func_end sub_809C794
 
-	thumb_func_start sub_809C7C4
-sub_809C7C4: @ 809C7C4
+	thumb_func_start SetEnigmaBerry
+SetEnigmaBerry: @ 809C7C4
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	bl sub_809C794
@@ -144,7 +144,7 @@ _0809C828: .4byte 0x000030ec
 _0809C82C: .4byte 0x00003108
 _0809C830: .4byte 0x00000516
 _0809C834: .4byte 0x00000529
-	thumb_func_end sub_809C7C4
+	thumb_func_end SetEnigmaBerry
 
 	thumb_func_start GetEnigmaBerryChecksum
 GetEnigmaBerryChecksum: @ 809C838

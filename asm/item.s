@@ -326,13 +326,13 @@ sub_8099FAC: @ 8099FAC
 	.align 2, 0
 _08099FC0: .4byte 0x0000016d
 _08099FC4:
-	ldr r1, _08099FD0 @ =gUnknown_20370D0
+	ldr r1, _08099FD0 @ =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	movs r0, 0x1
 	b _08099FF6
 	.align 2, 0
-_08099FD0: .4byte gUnknown_20370D0
+_08099FD0: .4byte gSpecialVar_Result
 _08099FD4:
 	movs r4, 0x85
 _08099FD6:
@@ -349,7 +349,7 @@ _08099FD6:
 	cmp r4, 0xAF
 	bls _08099FD6
 _08099FF0:
-	ldr r0, _08099FFC @ =gUnknown_20370D0
+	ldr r0, _08099FFC @ =gSpecialVar_Result
 	strh r1, [r0]
 	movs r0, 0
 _08099FF6:
@@ -357,7 +357,7 @@ _08099FF6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08099FFC: .4byte gUnknown_20370D0
+_08099FFC: .4byte gSpecialVar_Result
 	thumb_func_end sub_8099FAC
 
 	thumb_func_start sub_809A000

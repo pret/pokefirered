@@ -31,7 +31,7 @@ npc_before_player_of_type: @ 80C97A8
 	ldrb r0, [r2, 0x5]
 	cmp r0, r5
 	bne _080C97F4
-	ldr r1, _080C97F0 @ =gUnknown_20370D2
+	ldr r1, _080C97F0 @ =gSpecialVar_LastTalked
 	ldrb r0, [r2, 0x8]
 	strh r0, [r1]
 	movs r0, 0x1
@@ -39,7 +39,7 @@ npc_before_player_of_type: @ 80C97A8
 	.align 2, 0
 _080C97E8: .4byte gUnknown_2039A04
 _080C97EC: .4byte gMapObjects
-_080C97F0: .4byte gUnknown_20370D2
+_080C97F0: .4byte gSpecialVar_LastTalked
 _080C97F4:
 	movs r0, 0
 _080C97F6:

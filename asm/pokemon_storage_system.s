@@ -1139,7 +1139,7 @@ _0808C1DC: .4byte gPlayerParty
 	thumb_func_start CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 CountPartyAliveNonEggMons_IgnoreVar0x8004Slot: @ 808C1E0
 	push {lr}
-	ldr r0, _0808C1F4 @ =gUnknown_20370C0
+	ldr r0, _0808C1F4 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl CountPartyAliveNonEggMonsExcept
 	lsls r0, 24
@@ -1147,7 +1147,7 @@ CountPartyAliveNonEggMons_IgnoreVar0x8004Slot: @ 808C1E0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808C1F4: .4byte gUnknown_20370C0
+_0808C1F4: .4byte gSpecialVar_0x8004
 	thumb_func_end CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 
 	thumb_func_start CountPartyMons
@@ -6609,7 +6609,7 @@ _0808EF08: .4byte sub_808CE60
 sub_808EF0C: @ 808EF0C
 	push {lr}
 	sub sp, 0x4
-	ldr r0, _0808EF40 @ =gUnknown_203AD30
+	ldr r0, _0808EF40 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	mov r0, sp
 	strh r1, [r0]
@@ -6631,7 +6631,7 @@ sub_808EF0C: @ 808EF0C
 	bl SetMonData
 	b _0808EF56
 	.align 2, 0
-_0808EF40: .4byte gUnknown_203AD30
+_0808EF40: .4byte gSpecialVar_ItemId
 _0808EF44: .4byte gUnknown_20397B4
 _0808EF48: .4byte gPlayerParty
 _0808EF4C:

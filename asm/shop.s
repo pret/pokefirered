@@ -3280,7 +3280,7 @@ sub_809C4A8: @ 809C4A8
 	adds r0, r1, 0x4
 	adds r1, 0x6
 	bl PlayerGetDestCoords
-	ldr r0, _0809C4E8 @ =gUnknown_20370C0
+	ldr r0, _0809C4E8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0809C4EC
@@ -3290,7 +3290,7 @@ sub_809C4A8: @ 809C4A8
 	.align 2, 0
 _0809C4E0: .4byte sub_809C500
 _0809C4E4: .4byte gTasks
-_0809C4E8: .4byte gUnknown_20370C0
+_0809C4E8: .4byte gSpecialVar_0x8004
 _0809C4EC:
 	ldrh r0, [r4, 0xC]
 	subs r0, 0x1

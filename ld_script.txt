@@ -182,7 +182,7 @@ SECTIONS {
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
         src/save.o(.text);
-        asm/mystery_event_script.o(.text);
+        src/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/battle_anim_sound_tasks.o(.text);
         asm/battle_controller_safari.o(.text);
@@ -243,9 +243,10 @@ SECTIONS {
         asm/roamer.o(.text);
         asm/mystery_gift_menu.o(.text);
         asm/link_rfu_4.o(.text);
-        asm/mevent.o(.text);
-        asm/mevent_server.o(.text);
-        asm/mevent_8145654.o(.text);
+        src/mevent.o(.text);
+        src/mevent_server_helpers.o(.text);
+        src/mevent_server.o(.text);
+        src/mevent_8145654.o(.text);
         src/menews_jisan.o(.text);
         asm/seagallop.o(.text);
         asm/unk_8147500.o(.text);
@@ -378,11 +379,18 @@ SECTIONS {
         data/data_83FECCC.o(.rodata.8456C74);
         src/fame_checker.o(.rodata);
         data/data_845FD54.o(.rodata);
+        src/mevent.o(.rodata);
+        src/mevent_server_helpers.o(.rodata);
+        src/mevent_server.o(.rodata);
+        src/mevent_8145654.o(.rodata);
+        data/data_8466FB8.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
         data/data_8468C98.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);
+        src/mystery_event_msg.o(.rodata);
+        data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

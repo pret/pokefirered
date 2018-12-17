@@ -214,10 +214,10 @@ AddHatchedMonToParty: @ 8046D60
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	ldr r1, _08046E1C @ =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNick
@@ -258,13 +258,13 @@ _08046E1C: .4byte gStringVar1
 	thumb_func_start ScriptHatchMon
 ScriptHatchMon: @ 8046E20
 	push {lr}
-	ldr r0, _08046E30 @ =gUnknown_20370C0
+	ldr r0, _08046E30 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl AddHatchedMonToParty
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046E30: .4byte gUnknown_20370C0
+_08046E30: .4byte gSpecialVar_0x8004
 	thumb_func_end ScriptHatchMon
 
 	thumb_func_start sub_8046E34
@@ -332,7 +332,7 @@ sub_8046EAC: @ 8046EAC
 	movs r1, 0xBE
 	lsls r1, 6
 	adds r0, r1
-	ldr r1, _08046ECC @ =gUnknown_20370C0
+	ldr r1, _08046ECC @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_8046E34
 	lsls r0, 24
@@ -341,7 +341,7 @@ sub_8046EAC: @ 8046EAC
 	bx r1
 	.align 2, 0
 _08046EC8: .4byte gSaveBlock1Ptr
-_08046ECC: .4byte gUnknown_20370C0
+_08046ECC: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8046EAC
 
 	thumb_func_start sub_8046ED0
@@ -566,7 +566,7 @@ _08047090:
 	str r0, [r4]
 	bl AllocateMonSpritesGfx
 	ldr r2, [r4]
-	ldr r0, _0804714C @ =gUnknown_20370C0
+	ldr r0, _0804714C @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	movs r1, 0
 	strb r0, [r2, 0x4]
@@ -626,7 +626,7 @@ _08047090:
 	b _0804724A
 	.align 2, 0
 _08047148: .4byte gUnknown_3000E74
-_0804714C: .4byte gUnknown_20370C0
+_0804714C: .4byte gSpecialVar_0x8004
 _08047150: .4byte sub_8046FC0
 _08047154: .4byte gSpecialVar_0x8005
 _08047158: .4byte gUnknown_826019C
@@ -770,7 +770,7 @@ _0804729C: .4byte gUnknown_3000E74
 	thumb_func_start EggHatchSetMonNickname
 EggHatchSetMonNickname: @ 80472A0
 	push {lr}
-	ldr r0, _080472D0 @ =gUnknown_20370C0
+	ldr r0, _080472D0 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -789,7 +789,7 @@ EggHatchSetMonNickname: @ 80472A0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080472D0: .4byte gUnknown_20370C0
+_080472D0: .4byte gSpecialVar_0x8004
 _080472D4: .4byte gPlayerParty
 _080472D8: .4byte gStringVar3
 _080472DC: .4byte gUnknown_3000E74

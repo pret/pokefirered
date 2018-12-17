@@ -63,7 +63,7 @@ struct VsSeekerStruct
     u8 responseCode:5;
 };
 
-extern u16 gUnknown_20370D2;
+extern u16 gSpecialVar_LastTalked;
 extern struct MapObject gMapObjects[MAP_OBJECTS_COUNT];
 extern u8 gUnknown_3005074;
 
@@ -588,7 +588,7 @@ void Task_VsSeeker_0(u8 taskId)
     }
     else if (respval == 2)
     {
-        sub_80A2294(4, 0, gUnknown_203AD30, 0xffff);
+        sub_80A2294(4, 0, gSpecialVar_ItemId, 0xffff);
         FieldEffectStart(FLDEFF_UNK_41); // TODO: name this enum
         gTasks[taskId].func = Task_VsSeeker_1;
         gTasks[taskId].data[0] = 15;
@@ -1078,7 +1078,7 @@ static bool8 sub_810CD80(const VsSeekerData *vsSeekerData, u16 trainerBattleOppo
         return FALSE;
     if (rematchIdx >= 0 && rematchIdx < ARRAY_COUNT(sVsSeekerData))
     {
-        if (IsThisTrainerRematchable(gUnknown_20370D2))
+        if (IsThisTrainerRematchable(gSpecialVar_LastTalked))
             return TRUE;
     }
     return FALSE;
@@ -1097,7 +1097,7 @@ static bool8 HasRematchTrainerAlreadyBeenFought(const VsSeekerData *vsSeekerData
 
 void sub_810CDE8(void)
 {
-    gSaveBlock1Ptr->trainerRematches[gUnknown_20370D2] = 0;
+    gSaveBlock1Ptr->trainerRematches[gSpecialVar_LastTalked] = 0;
     sub_80803FC();
 }
 
@@ -1148,7 +1148,7 @@ static bool8 sub_810CED0(const VsSeekerData * a0, u16 a1)
         return FALSE;
     if ((u32)r1 >= ARRAY_COUNT(sVsSeekerData))
         return FALSE;
-    if (!IsThisTrainerRematchable(gUnknown_20370D2))
+    if (!IsThisTrainerRematchable(gSpecialVar_LastTalked))
         return FALSE;
     return TRUE;
 }

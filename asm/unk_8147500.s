@@ -8,9 +8,9 @@
 	thumb_func_start sub_8147500
 sub_8147500: @ 8147500
 	push {lr}
-	ldr r0, _08147518 @ =gUnknown_20370C0
+	ldr r0, _08147518 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
-	ldr r0, _0814751C @ =gUnknown_20370C4
+	ldr r0, _0814751C @ =gSpecialVar_0x8006
 	ldrh r2, [r0]
 	cmp r1, 0x8
 	beq _08147512
@@ -20,8 +20,8 @@ _08147512:
 	movs r0, 0x1
 	b _0814758E
 	.align 2, 0
-_08147518: .4byte gUnknown_20370C0
-_0814751C: .4byte gUnknown_20370C4
+_08147518: .4byte gSpecialVar_0x8004
+_0814751C: .4byte gSpecialVar_0x8006
 _08147520:
 	cmp r1, 0
 	beq _08147528

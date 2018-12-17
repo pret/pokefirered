@@ -8,7 +8,7 @@
 	thumb_func_start sub_80CA3D8
 sub_80CA3D8: @ 80CA3D8
 	push {lr}
-	ldr r0, _080CA3F4 @ =gUnknown_20370C0
+	ldr r0, _080CA3F4 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080CA3FC
@@ -20,7 +20,7 @@ sub_80CA3D8: @ 80CA3D8
 	bl sub_8088EDC
 	b _080CA40C
 	.align 2, 0
-_080CA3F4: .4byte gUnknown_20370C0
+_080CA3F4: .4byte gSpecialVar_0x8004
 _080CA3F8: .4byte gSpecialVar_0x8005
 _080CA3FC:
 	movs r0, 0
@@ -30,7 +30,7 @@ _080CA3FC:
 	movs r0, 0x1
 	bl pokedex_count
 _080CA40C:
-	ldr r1, _080CA420 @ =gUnknown_20370C4
+	ldr r1, _080CA420 @ =gSpecialVar_0x8006
 	strh r0, [r1]
 	bl sub_806E25C
 	lsls r0, 16
@@ -39,7 +39,7 @@ _080CA40C:
 	bx r1
 	.align 2, 0
 _080CA41C: .4byte gSpecialVar_0x8005
-_080CA420: .4byte gUnknown_20370C4
+_080CA420: .4byte gSpecialVar_0x8006
 	thumb_func_end sub_80CA3D8
 
 	thumb_func_start sub_80CA424
@@ -47,7 +47,7 @@ sub_80CA424: @ 80CA424
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r1, _080CA440 @ =gUnknown_20370D0
+	ldr r1, _080CA440 @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	cmp r2, 0x9
@@ -59,7 +59,7 @@ _080CA436:
 	ldr r0, _080CA444 @ =gUnknown_81A6D6D
 	b _080CA51A
 	.align 2, 0
-_080CA440: .4byte gUnknown_20370D0
+_080CA440: .4byte gSpecialVar_Result
 _080CA444: .4byte gUnknown_81A6D6D
 _080CA448:
 	cmp r2, 0x1D
@@ -155,7 +155,7 @@ _080CA4D8:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CA500
@@ -165,10 +165,10 @@ _080CA4F6:
 	.align 2, 0
 _080CA4FC: .4byte gUnknown_81A7137
 _080CA500:
-	ldr r1, _080CA504 @ =gUnknown_20370D0
+	ldr r1, _080CA504 @ =gSpecialVar_Result
 	b _080CA514
 	.align 2, 0
-_080CA504: .4byte gUnknown_20370D0
+_080CA504: .4byte gSpecialVar_Result
 _080CA508:
 	cmp r2, 0x97
 	beq _080CA514
@@ -191,14 +191,14 @@ _080CA520: .4byte gUnknown_81A7175
 	thumb_func_start sub_80CA524
 sub_80CA524: @ 80CA524
 	push {lr}
-	ldr r0, _080CA538 @ =gUnknown_20370C0
+	ldr r0, _080CA538 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl sub_80CA424
 	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA538: .4byte gUnknown_20370C0
+_080CA538: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80CA524
 
 	.align 2, 0 @ Don't pad with nop.

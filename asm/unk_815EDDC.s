@@ -138,7 +138,7 @@ sub_815EEB0: @ 815EEB0
 	ldr r1, _0815EED0 @ =0x00000af8
 	adds r0, r1
 	bl sub_815EE3C
-	ldr r1, _0815EED4 @ =gUnknown_20370C0
+	ldr r1, _0815EED4 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	cmp r0, r1
 	bcc _0815EED8
@@ -147,7 +147,7 @@ sub_815EEB0: @ 815EEB0
 	.align 2, 0
 _0815EECC: .4byte gSaveBlock2Ptr
 _0815EED0: .4byte 0x00000af8
-_0815EED4: .4byte gUnknown_20370C0
+_0815EED4: .4byte gSpecialVar_0x8004
 _0815EED8:
 	movs r0, 0
 _0815EEDA:
@@ -227,7 +227,7 @@ sub_815EF5C: @ 815EF5C
 	ldr r0, [r0]
 	ldr r1, _0815EF90 @ =0x00000af8
 	adds r4, r0, r1
-	ldr r5, _0815EF94 @ =gUnknown_20370C0
+	ldr r5, _0815EF94 @ =gSpecialVar_0x8004
 	ldrh r0, [r5]
 	bl sub_815EE88
 	lsls r0, 24
@@ -245,7 +245,7 @@ sub_815EF5C: @ 815EF5C
 	.align 2, 0
 _0815EF8C: .4byte gSaveBlock2Ptr
 _0815EF90: .4byte 0x00000af8
-_0815EF94: .4byte gUnknown_20370C0
+_0815EF94: .4byte gSpecialVar_0x8004
 _0815EF98:
 	movs r0, 0
 _0815EF9A:

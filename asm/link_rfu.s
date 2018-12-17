@@ -3504,7 +3504,7 @@ sub_80FEE24: @ 80FEE24
 	thumb_func_start sub_80FEE44
 sub_80FEE44: @ 80FEE44
 	push {lr}
-	ldr r0, _080FEE58 @ =gUnknown_20370C0
+	ldr r0, _080FEE58 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0xE
 	bhi _080FEF12
@@ -3514,7 +3514,7 @@ sub_80FEE44: @ 80FEE44
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080FEE58: .4byte gUnknown_20370C0
+_080FEE58: .4byte gSpecialVar_0x8004
 _080FEE5C: .4byte _080FEE60
 	.align 2, 0
 _080FEE60:
@@ -3585,7 +3585,7 @@ _080FEEF4:
 	ldr r1, [r2]
 	adds r1, r0
 _080FEF08:
-	ldr r0, _080FEF24 @ =gUnknown_20370C0
+	ldr r0, _080FEF24 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	ldr r2, _080FEF28 @ =sub_80568C4
 	bl sub_80FEBAC
@@ -3596,14 +3596,14 @@ _080FEF12:
 _080FEF18: .4byte gSaveBlock1Ptr
 _080FEF1C: .4byte gSpecialVar_0x8005
 _080FEF20: .4byte 0x00002cd0
-_080FEF24: .4byte gUnknown_20370C0
+_080FEF24: .4byte gSpecialVar_0x8004
 _080FEF28: .4byte sub_80568C4
 	thumb_func_end sub_80FEE44
 
 	thumb_func_start sub_80FEF2C
 sub_80FEF2C: @ 80FEF2C
 	push {r4,lr}
-	ldr r4, _080FEF44 @ =gUnknown_20370C0
+	ldr r4, _080FEF44 @ =gSpecialVar_0x8004
 	ldr r0, _080FEF48 @ =gUnknown_843F29C
 	movs r1, 0x4
 	bl sub_80FFEDC
@@ -3614,14 +3614,14 @@ sub_80FEF2C: @ 80FEF2C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FEF44: .4byte gUnknown_20370C0
+_080FEF44: .4byte gSpecialVar_0x8004
 _080FEF48: .4byte gUnknown_843F29C
 	thumb_func_end sub_80FEF2C
 
 	thumb_func_start sub_80FEF4C
 sub_80FEF4C: @ 80FEF4C
 	push {r4,lr}
-	ldr r4, _080FEF64 @ =gUnknown_20370C0
+	ldr r4, _080FEF64 @ =gSpecialVar_0x8004
 	ldr r0, _080FEF68 @ =gUnknown_843F2A4
 	movs r1, 0x4
 	bl sub_80FFEDC
@@ -3632,7 +3632,7 @@ sub_80FEF4C: @ 80FEF4C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FEF64: .4byte gUnknown_20370C0
+_080FEF64: .4byte gSpecialVar_0x8004
 _080FEF68: .4byte gUnknown_843F2A4
 	thumb_func_end sub_80FEF4C
 
@@ -4384,12 +4384,12 @@ _080FF4C8:
 	.align 2, 0
 _080FF4D8: .4byte gUnknown_203ACE8
 _080FF4DC:
-	ldr r0, _080FF4E4 @ =gUnknown_20370D0
+	ldr r0, _080FF4E4 @ =gSpecialVar_Result
 	strh r1, [r0]
 	movs r0, 0x17
 	b _080FF4EA
 	.align 2, 0
-_080FF4E4: .4byte gUnknown_20370D0
+_080FF4E4: .4byte gSpecialVar_Result
 _080FF4E8:
 	movs r0, 0
 _080FF4EA:
@@ -4425,7 +4425,7 @@ _080FF510:
 	.align 2, 0
 _080FF520: .4byte gUnknown_203ACE8
 _080FF524:
-	ldr r4, _080FF538 @ =gUnknown_20370D0
+	ldr r4, _080FF538 @ =gSpecialVar_Result
 	bl sub_80FF78C
 	lsls r0, 24
 	lsrs r0, 24
@@ -4434,7 +4434,7 @@ _080FF524:
 	movs r0, 0x17
 	b _080FF53E
 	.align 2, 0
-_080FF538: .4byte gUnknown_20370D0
+_080FF538: .4byte gSpecialVar_Result
 _080FF53C:
 	movs r0, 0
 _080FF53E:

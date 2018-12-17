@@ -556,7 +556,7 @@ gExpandedPlaceholder_Green:: @ 8415A5C
 gText_EggNickname:: @ 8415A62
 	.incbin "baserom.gba", 0x415A62, 0x4
 
-gUnknown_8415A66:: @ 8415A66
+gText_Pokemon:: @ 8415A66
 	.incbin "baserom.gba", 0x415A66, 0x8
 
 gUnknown_8415A6E:: @ 8415A6E
@@ -1956,67 +1956,88 @@ gUnknown_841D198:: @ 841D198
 	.incbin "baserom.gba", 0x41D198, 0xCB8
 
 gUnknown_841DE50:: @ 841DE50
-	.incbin "baserom.gba", 0x41DE50, 0x1
+	.string "$"
 
 gUnknown_841DE51:: @ 841DE51
-	.incbin "baserom.gba", 0x41DE51, 0x1
+	.string "$"
 
 gUnknown_841DE52:: @ 841DE52
-	.incbin "baserom.gba", 0x41DE52, 0x1
+	.string "$"
 
 gUnknown_841DE53:: @ 841DE53
-	.incbin "baserom.gba", 0x41DE53, 0x1
+	.string "$"
 
 gUnknown_841DE54:: @ 841DE54
-	.incbin "baserom.gba", 0x41DE54, 0x28
+	.string "$"
+
+gUnknown_841DE55:: @ 841DE55
+	.incbin "baserom.gba", 0x41DE55, 0x27 @ japanese
 
 gUnknown_841DE7C:: @ 841DE7C
-	.incbin "baserom.gba", 0x41DE7C, 0x1
+	.string "$"
 
 gUnknown_841DE7D:: @ 841DE7D
-	.incbin "baserom.gba", 0x41DE7D, 0x18
+	.string "$"
+
+gUnknown_841DE7E:: @ 841DE7E
+	.incbin "baserom.gba", 0x0041de7e, 0x17 @ japanese
 
 gUnknown_841DE95:: @ 841DE95
-	.incbin "baserom.gba", 0x41DE95, 0x1
+	.string "$"
 
 gUnknown_841DE96:: @ 841DE96
-	.incbin "baserom.gba", 0x41DE96, 0x1
+	.string "$"
 
 gUnknown_841DE97:: @ 841DE97
-	.incbin "baserom.gba", 0x41DE97, 0x1
+	.string "$"
 
 gUnknown_841DE98:: @ 841DE98
-	.incbin "baserom.gba", 0x41DE98, 0x1
+	.string "$"
 
 gUnknown_841DE99:: @ 841DE99
-	.incbin "baserom.gba", 0x41DE99, 0x1
+	.string "$"
 
 gUnknown_841DE9A:: @ 841DE9A
-	.incbin "baserom.gba", 0x41DE9A, 0x1
+	.string "$"
 
 gUnknown_841DE9B:: @ 841DE9B
-	.incbin "baserom.gba", 0x41DE9B, 0x1
+	.string "$"
 
 gUnknown_841DE9C:: @ 841DE9C
-	.incbin "baserom.gba", 0x41DE9C, 0x1
+	.string "$"
 
 gUnknown_841DE9D:: @ 841DE9D
-	.incbin "baserom.gba", 0x41DE9D, 0x53
+	.string "Communication error…\n"
+	.string "Please check all connections,\n"
+	.string "then turn the power OFF and ON.$"
 
 gUnknown_841DEF0:: @ 841DEF0
-	.incbin "baserom.gba", 0x41DEF0, 0x15
+	.string "Communication error…$"
 
 gUnknown_841DF05:: @ 841DF05
-	.incbin "baserom.gba", 0x41DF05, 0x47
+	.string "Move closer to your link partner(s).\n"
+	.string "Avoid obstacles between partners.$"
 
 gUnknown_841DF4C:: @ 841DF4C
-	.incbin "baserom.gba", 0x41DF4C, 0x1F
+	.string "A Button: Registration Counter$"
 
 gUnknown_841DF6B:: @ 841DF6B
-	.incbin "baserom.gba", 0x41DF6B, 0x17
+	.string "A Button: Title Screen$"
 
 gUnknown_841DF82:: @ 841DF82
-	.incbin "baserom.gba", 0x41DF82, 0x23
+	.string "{STR_VAR_1}P LINK$"
+
+gUnknown_841DF8B:: @ 841DF8B
+	.string "BRONZE$"
+
+gUnknown_841DF92:: @ 841DF92
+	.string "COPPER$"
+
+gUnknown_841DF99:: @ 841DF99
+	.string "SILVER$"
+
+gUnknown_841DFA0:: @ 841DFA0
+	.string "GOLD$"
 
 gUnknown_841DFA5:: @ 841DFA5
 	.incbin "baserom.gba", 0x41DFA5, 0x7
@@ -3155,7 +3176,10 @@ gUnknown_8459580:: @ 8459580
 	.incbin "baserom.gba", 0x459580, 0x8
 
 gUnknown_8459588:: @ 8459588
-	.incbin "baserom.gba", 0x459588, 0xAC
+	.incbin "baserom.gba", 0x459588, 0x64
+
+gUnknown_84595EC::
+	.incbin "baserom.gba", 0x4595EC, 0x48
 
 gUnknown_8459634:: @ 8459634
 	.incbin "baserom.gba", 0x459634, 0x8

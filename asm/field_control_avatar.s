@@ -938,13 +938,13 @@ _0806CFBC:
 	ble _0806CFB0
 	ldr r0, _0806CFE8 @ =gUnknown_3005074
 	strb r3, [r0]
-	ldr r1, _0806CFEC @ =gUnknown_20370D2
+	ldr r1, _0806CFEC @ =gSpecialVar_LastTalked
 	adds r0, r2, r3
 	lsls r0, 2
 	adds r0, r5
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, _0806CFF0 @ =gUnknown_20370D4
+	ldr r0, _0806CFF0 @ =gSpecialVar_Facing
 	strh r6, [r0]
 	adds r0, r3, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
@@ -955,8 +955,8 @@ _0806CFDE:
 	.align 2, 0
 _0806CFE4: .4byte gUnknown_2031DEC
 _0806CFE8: .4byte gUnknown_3005074
-_0806CFEC: .4byte gUnknown_20370D2
-_0806CFF0: .4byte gUnknown_20370D4
+_0806CFEC: .4byte gSpecialVar_LastTalked
+_0806CFF0: .4byte gSpecialVar_Facing
 	thumb_func_end sub_806CF38
 
 	thumb_func_start sub_806CFF4
@@ -1046,14 +1046,14 @@ _0806D09C: .4byte gUnknown_826D2D8
 _0806D0A0:
 	ldr r0, _0806D0D4 @ =gUnknown_3005074
 	strb r5, [r0]
-	ldr r4, _0806D0D8 @ =gUnknown_20370D2
+	ldr r4, _0806D0D8 @ =gSpecialVar_LastTalked
 	ldr r1, _0806D0DC @ =gMapObjects
 	adds r0, r6, r5
 	lsls r0, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x8]
 	strh r0, [r4]
-	ldr r0, _0806D0E0 @ =gUnknown_20370D4
+	ldr r0, _0806D0E0 @ =gSpecialVar_Facing
 	mov r1, r8
 	strh r1, [r0]
 	adds r0, r5, 0
@@ -1070,9 +1070,9 @@ _0806D0C8:
 	bx r1
 	.align 2, 0
 _0806D0D4: .4byte gUnknown_3005074
-_0806D0D8: .4byte gUnknown_20370D2
+_0806D0D8: .4byte gSpecialVar_LastTalked
 _0806D0DC: .4byte gMapObjects
-_0806D0E0: .4byte gUnknown_20370D4
+_0806D0E0: .4byte gSpecialVar_Facing
 	thumb_func_end sub_806CFF4
 
 	thumb_func_start sub_806D0E4
@@ -1165,12 +1165,12 @@ _0806D17A:
 	ldr r0, [r5, 0x8]
 	movs r1, 0x1
 	bl sub_80CC44C
-	ldr r4, _0806D1C8 @ =gUnknown_20370C0
+	ldr r4, _0806D1C8 @ =gSpecialVar_0x8004
 	strh r0, [r4]
 	ldr r0, [r5, 0x8]
 	movs r1, 0x2
 	bl sub_80CC44C
-	ldr r1, _0806D1CC @ =gUnknown_20370C4
+	ldr r1, _0806D1CC @ =gSpecialVar_0x8006
 	strh r0, [r1]
 	ldrh r0, [r4]
 	bl FlagGet
@@ -1178,22 +1178,22 @@ _0806D17A:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806D164
-	ldr r0, _0806D1D0 @ =gUnknown_20370D4
+	ldr r0, _0806D1D0 @ =gSpecialVar_Facing
 	strh r6, [r0]
 	ldr r0, _0806D1D4 @ =gUnknown_81A6843
 	b _0806D1E6
 	.align 2, 0
 _0806D1C4: .4byte gSpecialVar_0x8005
-_0806D1C8: .4byte gUnknown_20370C0
-_0806D1CC: .4byte gUnknown_20370C4
-_0806D1D0: .4byte gUnknown_20370D4
+_0806D1C8: .4byte gSpecialVar_0x8004
+_0806D1CC: .4byte gSpecialVar_0x8006
+_0806D1D0: .4byte gSpecialVar_Facing
 _0806D1D4: .4byte gUnknown_81A6843
 _0806D1D8:
 	cmp r2, 0xFF
 	beq _0806D1E0
 	bl sub_8069A20
 _0806D1E0:
-	ldr r0, _0806D1EC @ =gUnknown_20370D4
+	ldr r0, _0806D1EC @ =gSpecialVar_Facing
 	strh r6, [r0]
 	ldr r0, [r5, 0x8]
 _0806D1E6:
@@ -1201,7 +1201,7 @@ _0806D1E6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806D1EC: .4byte gUnknown_20370D4
+_0806D1EC: .4byte gSpecialVar_Facing
 	thumb_func_end sub_806D0E4
 
 	thumb_func_start sub_806D1F0
@@ -1211,7 +1211,7 @@ sub_806D1F0: @ 806D1F0
 	lsrs r4, r1, 24
 	lsls r2, 24
 	lsrs r5, r2, 24
-	ldr r0, _0806D210 @ =gUnknown_20370D4
+	ldr r0, _0806D210 @ =gSpecialVar_Facing
 	strh r5, [r0]
 	adds r0, r4, 0
 	bl MetatileBehavior_IsPC
@@ -1222,7 +1222,7 @@ sub_806D1F0: @ 806D1F0
 	ldr r0, _0806D214 @ =gUnknown_81A6955
 	b _0806D53E
 	.align 2, 0
-_0806D210: .4byte gUnknown_20370D4
+_0806D210: .4byte gSpecialVar_Facing
 _0806D214: .4byte gUnknown_81A6955
 _0806D218:
 	adds r0, r4, 0
@@ -2114,7 +2114,7 @@ sub_806D908: @ 806D908
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, _0806D924 @ =gUnknown_20370D4
+	ldr r2, _0806D924 @ =gSpecialVar_Facing
 	strh r1, [r2]
 	bl ScriptContext1_SetupScript
 	bl sub_80699E0
@@ -2122,7 +2122,7 @@ sub_806D908: @ 806D908
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806D924: .4byte gUnknown_20370D4
+_0806D924: .4byte gSpecialVar_Facing
 	thumb_func_end sub_806D908
 
 	thumb_func_start sub_806D928

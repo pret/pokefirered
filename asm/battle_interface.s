@@ -3770,7 +3770,7 @@ sub_804981C: @ 804981C
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804991C

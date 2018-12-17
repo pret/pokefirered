@@ -129,7 +129,7 @@ _080CD338:
 	bl sub_80CD628
 	ldr r0, _080CD350 @ =sub_80CD38C
 	bl SetVBlankCallback
-	ldr r0, _080CD354 @ =gUnknown_20370C0
+	ldr r0, _080CD354 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080CD358
@@ -137,7 +137,7 @@ _080CD338:
 	b _080CD35C
 	.align 2, 0
 _080CD350: .4byte sub_80CD38C
-_080CD354: .4byte gUnknown_20370C0
+_080CD354: .4byte gSpecialVar_0x8004
 _080CD358:
 	bl sub_80CDBE4
 _080CD35C:

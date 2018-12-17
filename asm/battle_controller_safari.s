@@ -431,7 +431,7 @@ CompleteWhenChosePokeblock: @ 80DD85C
 	ands r0, r1
 	cmp r0, 0
 	bne _080DD882
-	ldr r0, _080DD894 @ =gUnknown_203AD30
+	ldr r0, _080DD894 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
@@ -443,7 +443,7 @@ _080DD882:
 _080DD888: .4byte gMain
 _080DD88C: .4byte sub_8011100
 _080DD890: .4byte gPaletteFade
-_080DD894: .4byte gUnknown_203AD30
+_080DD894: .4byte gSpecialVar_ItemId
 	thumb_func_end CompleteWhenChosePokeblock
 
 	thumb_func_start CompleteOnFinishedBattleAnimation_3

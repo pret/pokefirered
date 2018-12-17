@@ -84,10 +84,12 @@ clean: tidy
 	rm -f sound/direct_sound_samples/*.bin
 	rm -f $(SONG_OBJS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	@$(MAKE) -C berry_fix clean
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
 	rm -r build/*
+	@$(MAKE) -C berry_fix tidy
 
 include graphics_file_rules.mk
 
@@ -164,8 +166,11 @@ $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_comm
 	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" > ld_script.ld
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
-	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
+	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+
+berry_fix/berry_fix.gba:
+	@$(MAKE) -C berry_fix

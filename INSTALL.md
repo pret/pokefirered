@@ -1,18 +1,11 @@
-Install [devkitARM](https://devkitpro.org/wiki/Getting_Started) (if you are on **Windows 10**, [do this instead](#windows-10)).
-
 Run the following commands (first, see [this](#macos) if you are on **macOS** or [this](#old-windows) if you are on **old Windows**):
 
-	export DEVKITPRO=/opt/devkitpro
-	echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
-	export DEVKITARM=$DEVKITPRO/devkitARM
-	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
-
 	git clone https://github.com/pret/pokefirered
-	git clone https://github.com/pret/agbcc
+	git clone https://github.com/pikalaxalt/agbcc -b new_layout_with_libs
 
 	cd agbcc
-	./build.sh
-	./install.sh ../pokefirered
+	make
+	make install prefix=../pokefirered
 
 	cd ../pokefirered
 
@@ -49,7 +42,7 @@ If the command for building pokefirered.gba does not work, run `nproc` and use t
 
 ## Windows 10
 
-Install the [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10), then install [devkitARM](https://devkitpro.org/wiki/Getting_Started) inside the subsystem, and run the commands.
+Install the [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10), and run the commands.
 
 ## Important note for all users
 

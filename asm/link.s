@@ -3354,14 +3354,14 @@ _0800AE18: .4byte sub_800AF2C
 sub_800AE1C: @ 800AE1C
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r1, _0800AEB8 @ =gUnknown_8231EE4
+	ldr r1, _0800AEB8 @ =gWirelessLinkDisplay4bpp
 	movs r5, 0
 	str r5, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl sub_80F696C
-	ldr r1, _0800AEBC @ =gUnknown_823238C
+	ldr r1, _0800AEBC @ =gWirelessLinkDisplayBin
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
@@ -3416,8 +3416,8 @@ sub_800AE1C: @ 800AE1C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800AEB8: .4byte gUnknown_8231EE4
-_0800AEBC: .4byte gUnknown_823238C
+_0800AEB8: .4byte gWirelessLinkDisplay4bpp
+_0800AEBC: .4byte gWirelessLinkDisplayBin
 _0800AEC0: .4byte gUnknown_8231EC4
 _0800AEC4: .4byte gUnknown_8234610
 _0800AEC8: .4byte gUnknown_841DEF0

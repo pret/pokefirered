@@ -3410,15 +3410,15 @@ _080DFCCE:
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080DFD1C @ =gUnknown_8D2A8C0
+	ldr r1, _080DFD1C @ =gFile_graphics_battle_anims_masks_morning_sun_tilemap
 	bl sub_807543C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080DFD20 @ =gUnknown_8D2A808
+	ldr r1, _080DFD20 @ =gFile_graphics_battle_anims_masks_morning_sun_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080DFD24 @ =gUnknown_8D2A8A8
+	ldr r0, _080DFD24 @ =gFile_graphics_battle_anims_masks_morning_sun_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -3439,9 +3439,9 @@ _080DFCCE:
 	b _080DFD58
 	.align 2, 0
 _080DFD18: .4byte 0x00003f42
-_080DFD1C: .4byte gUnknown_8D2A8C0
-_080DFD20: .4byte gUnknown_8D2A808
-_080DFD24: .4byte gUnknown_8D2A8A8
+_080DFD1C: .4byte gFile_graphics_battle_anims_masks_morning_sun_tilemap
+_080DFD20: .4byte gFile_graphics_battle_anims_masks_morning_sun_sheet
+_080DFD24: .4byte gFile_graphics_battle_anims_masks_morning_sun_palette
 _080DFD28: .4byte gUnknown_2022978
 _080DFD2C: .4byte 0x0000ffc8
 _080DFD30:
@@ -4052,15 +4052,15 @@ _080E01FC:
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080E0250 @ =gUnknown_8D2A8C0
+	ldr r1, _080E0250 @ =gFile_graphics_battle_anims_masks_morning_sun_tilemap
 	bl sub_807543C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080E0254 @ =gUnknown_8D2A808
+	ldr r1, _080E0254 @ =gFile_graphics_battle_anims_masks_morning_sun_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080E0258 @ =gUnknown_8D2A8A8
+	ldr r0, _080E0258 @ =gFile_graphics_battle_anims_masks_morning_sun_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -4083,9 +4083,9 @@ _080E01FC:
 	.align 2, 0
 _080E0248: .4byte 0x00003f42
 _080E024C: .4byte 0x00000d03
-_080E0250: .4byte gUnknown_8D2A8C0
-_080E0254: .4byte gUnknown_8D2A808
-_080E0258: .4byte gUnknown_8D2A8A8
+_080E0250: .4byte gFile_graphics_battle_anims_masks_morning_sun_tilemap
+_080E0254: .4byte gFile_graphics_battle_anims_masks_morning_sun_sheet
+_080E0258: .4byte gFile_graphics_battle_anims_masks_morning_sun_palette
 _080E025C: .4byte gUnknown_2022978
 _080E0260: .4byte 0x0000ffc8
 _080E0264:
@@ -7994,11 +7994,11 @@ sub_80E2084: @ 80E2084
 	str r1, [sp, 0x8]
 	movs r1, 0x1E
 	str r1, [sp, 0xC]
-	ldr r1, _080E20C8 @ =gUnknown_8D2DE3C
+	ldr r1, _080E20C8 @ =gFile_graphics_battle_anims_masks_cure_bubbles_sheet
 	str r1, [sp, 0x10]
-	ldr r1, _080E20CC @ =gUnknown_8D2DF98
+	ldr r1, _080E20CC @ =gFile_graphics_battle_anims_masks_cure_bubbles_tilemap
 	str r1, [sp, 0x14]
-	ldr r1, _080E20D0 @ =gUnknown_8D2DF78
+	ldr r1, _080E20D0 @ =gFile_graphics_battle_anims_masks_cure_bubbles_palette
 	str r1, [sp, 0x18]
 	movs r1, 0
 	bl sub_80BBA20
@@ -8008,9 +8008,9 @@ sub_80E2084: @ 80E2084
 	.align 2, 0
 _080E20C0: .4byte gUnknown_2037F1A
 _080E20C4: .4byte gUnknown_2037F02
-_080E20C8: .4byte gUnknown_8D2DE3C
-_080E20CC: .4byte gUnknown_8D2DF98
-_080E20D0: .4byte gUnknown_8D2DF78
+_080E20C8: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_sheet
+_080E20CC: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_tilemap
+_080E20D0: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_palette
 	thumb_func_end sub_80E2084
 
 	thumb_func_start sub_80E20D4

@@ -15161,7 +15161,7 @@ _080A96CC:
 	lsls r2, 1
 	adds r0, r2
 	str r1, [r0]
-	ldr r0, _080A975C @ =gUnknown_8D227E4
+	ldr r0, _080A975C @ =gFile_graphics_battle_anims_sprites_206_palette
 	bl LZDecompressWram
 	movs r4, 0
 _080A9700:
@@ -15206,7 +15206,7 @@ _080A9700:
 _080A9750: .4byte 0x000027de
 _080A9754: .4byte 0x00002710
 _080A9758: .4byte gMonSpritesGfxPtr
-_080A975C: .4byte gUnknown_8D227E4
+_080A975C: .4byte gFile_graphics_battle_anims_sprites_206_palette
 	thumb_func_end sub_80A96B4
 
 	thumb_func_start sub_80A9760
@@ -15955,15 +15955,15 @@ _080A9D2A:
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080A9DAC @ =gUnknown_8D23F4C
+	ldr r1, _080A9DAC @ =gFile_graphics_battle_anims_backgrounds_attract_tilemap
 	bl sub_807543C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080A9DB0 @ =gUnknown_8D234B4
+	ldr r1, _080A9DB0 @ =gFile_graphics_battle_anims_backgrounds_attract_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080A9DB4 @ =gUnknown_8D23F24
+	ldr r0, _080A9DB4 @ =gFile_graphics_battle_anims_backgrounds_attract_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -15995,9 +15995,9 @@ _080A9D88:
 _080A9DA0: .4byte 0x00003f42
 _080A9DA4: .4byte gUnknown_2022978
 _080A9DA8: .4byte gUnknown_202297A
-_080A9DAC: .4byte gUnknown_8D23F4C
-_080A9DB0: .4byte gUnknown_8D234B4
-_080A9DB4: .4byte gUnknown_8D23F24
+_080A9DAC: .4byte gFile_graphics_battle_anims_backgrounds_attract_tilemap
+_080A9DB0: .4byte gFile_graphics_battle_anims_backgrounds_attract_sheet
+_080A9DB4: .4byte gFile_graphics_battle_anims_backgrounds_attract_palette
 _080A9DB8: .4byte gTasks
 _080A9DBC: .4byte sub_80A9DC0
 	thumb_func_end sub_80A9CE8
@@ -16214,7 +16214,7 @@ _080A9F52:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9F98
-	ldr r0, _080A9F94 @ =gUnknown_8E7F874
+	ldr r0, _080A9F94 @ =gFile_graphics_battle_anims_backgrounds_scary_face_contest_tilemap
 	ldr r1, [sp, 0x4]
 	bl LZDecompressVram
 	b _080A9FC6
@@ -16222,7 +16222,7 @@ _080A9F52:
 _080A9F88: .4byte 0x00003f42
 _080A9F8C: .4byte gUnknown_2022978
 _080A9F90: .4byte gUnknown_202297A
-_080A9F94: .4byte gUnknown_8E7F874
+_080A9F94: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_contest_tilemap
 _080A9F98:
 	ldr r0, _080A9FB4 @ =gUnknown_2037F1B
 	ldrb r0, [r0]
@@ -16233,25 +16233,25 @@ _080A9F98:
 	bne _080A9FBC
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080A9FB8 @ =gUnknown_8E7F4AC
+	ldr r1, _080A9FB8 @ =gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap
 	bl sub_807543C
 	b _080A9FC6
 	.align 2, 0
 _080A9FB4: .4byte gUnknown_2037F1B
-_080A9FB8: .4byte gUnknown_8E7F4AC
+_080A9FB8: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap
 _080A9FBC:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AA010 @ =gUnknown_8E7F690
+	ldr r1, _080AA010 @ =gFile_graphics_battle_anims_backgrounds_scary_face_opponent_tilemap
 	bl sub_807543C
 _080A9FC6:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AA014 @ =gUnknown_8D24BCC
+	ldr r1, _080AA014 @ =gFile_graphics_battle_anims_backgrounds_scary_face_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080AA018 @ =gUnknown_8D24BA4
+	ldr r0, _080AA018 @ =gFile_graphics_battle_anims_backgrounds_scary_face_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -16280,9 +16280,9 @@ _080A9FFA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AA010: .4byte gUnknown_8E7F690
-_080AA014: .4byte gUnknown_8D24BCC
-_080AA018: .4byte gUnknown_8D24BA4
+_080AA010: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_opponent_tilemap
+_080AA014: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_sheet
+_080AA018: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_palette
 _080AA01C: .4byte gTasks
 _080AA020: .4byte sub_80AA024
 	thumb_func_end sub_80A9F10
@@ -18865,23 +18865,23 @@ sub_80AB38C: @ 80AB38C
 	bne _080AB408
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AB404 @ =gUnknown_8E81D14
+	ldr r1, _080AB404 @ =gFile_graphics_unknown_unknown_E81D14_tilemap
 	bl sub_807543C
 	b _080AB42E
 	.align 2, 0
 _080AB3FC: .4byte 0x00003f42
 _080AB400: .4byte gUnknown_2037F1A
-_080AB404: .4byte gUnknown_8E81D14
+_080AB404: .4byte gFile_graphics_unknown_unknown_E81D14_tilemap
 _080AB408:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AB414 @ =gUnknown_8E81FE4
+	ldr r1, _080AB414 @ =gFile_graphics_unknown_unknown_E81FE4_tilemap
 	bl sub_807543C
 	b _080AB42E
 	.align 2, 0
-_080AB414: .4byte gUnknown_8E81FE4
+_080AB414: .4byte gFile_graphics_unknown_unknown_E81FE4_tilemap
 _080AB418:
-	ldr r0, _080AB458 @ =gUnknown_8E822B8
+	ldr r0, _080AB458 @ =gFile_graphics_unknown_unknown_E822B8_tilemap
 	ldr r1, [sp, 0x4]
 	bl LZDecompressVram
 	mov r0, sp
@@ -18893,7 +18893,7 @@ _080AB418:
 _080AB42E:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AB45C @ =gUnknown_8E809CC
+	ldr r1, _080AB45C @ =gFile_graphics_battle_anims_backgrounds_water_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
@@ -18902,7 +18902,7 @@ _080AB42E:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080AB468
-	ldr r0, _080AB464 @ =gUnknown_8E81CEC
+	ldr r0, _080AB464 @ =gFile_graphics_battle_anims_backgrounds_water_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -18910,12 +18910,12 @@ _080AB42E:
 	bl LoadCompressedPalette
 	b _080AB476
 	.align 2, 0
-_080AB458: .4byte gUnknown_8E822B8
-_080AB45C: .4byte gUnknown_8E809CC
+_080AB458: .4byte gFile_graphics_unknown_unknown_E822B8_tilemap
+_080AB45C: .4byte gFile_graphics_battle_anims_backgrounds_water_sheet
 _080AB460: .4byte gUnknown_2037F02
-_080AB464: .4byte gUnknown_8E81CEC
+_080AB464: .4byte gFile_graphics_battle_anims_backgrounds_water_palette
 _080AB468:
-	ldr r0, _080AB4E0 @ =gUnknown_8E7BAB0
+	ldr r0, _080AB4E0 @ =gFile_graphics_battle_anims_backgrounds_water_muddy_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -18973,7 +18973,7 @@ _080AB476:
 	strh r0, [r7, 0xE]
 	b _080AB552
 	.align 2, 0
-_080AB4E0: .4byte gUnknown_8E7BAB0
+_080AB4E0: .4byte gFile_graphics_battle_anims_backgrounds_water_muddy_palette
 _080AB4E4: .4byte sub_80AB79C
 _080AB4E8: .4byte gTasks
 _080AB4EC: .4byte 0x0000ffb0
@@ -28163,7 +28163,7 @@ _080AFB26:
 	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AFBB0 @ =gUnknown_8E7F1F4
+	ldr r1, _080AFBB0 @ =gFile_graphics_battle_anims_backgrounds_fog_tilemap
 	bl sub_807543C
 	ldr r0, _080AFBB4 @ =gUnknown_83C2CE0
 	mov r1, sp
@@ -28198,7 +28198,7 @@ _080AFBA0: .4byte 0x00003f42
 _080AFBA4: .4byte gUnknown_2022978
 _080AFBA8: .4byte gUnknown_202297A
 _080AFBAC: .4byte gUnknown_83C3540
-_080AFBB0: .4byte gUnknown_8E7F1F4
+_080AFBB0: .4byte gFile_graphics_battle_anims_backgrounds_fog_tilemap
 _080AFBB4: .4byte gUnknown_83C2CE0
 _080AFBB8: .4byte gTasks
 _080AFBBC: .4byte sub_80AFBC0
@@ -28474,7 +28474,7 @@ _080AFDC2:
 	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080AFE50 @ =gUnknown_8E7F1F4
+	ldr r1, _080AFE50 @ =gFile_graphics_battle_anims_backgrounds_fog_tilemap
 	bl sub_807543C
 	ldr r0, _080AFE54 @ =gUnknown_83C2CE0
 	mov r1, sp
@@ -28511,7 +28511,7 @@ _080AFE40: .4byte 0x00003f42
 _080AFE44: .4byte gUnknown_2022978
 _080AFE48: .4byte gUnknown_202297A
 _080AFE4C: .4byte gUnknown_83C3540
-_080AFE50: .4byte gUnknown_8E7F1F4
+_080AFE50: .4byte gFile_graphics_battle_anims_backgrounds_fog_tilemap
 _080AFE54: .4byte gUnknown_83C2CE0
 _080AFE58: .4byte gTasks
 _080AFE5C: .4byte 0x0000ffff
@@ -38100,15 +38100,15 @@ _080B4854:
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080B48F0 @ =gUnknown_8E79354
+	ldr r1, _080B48F0 @ =gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap
 	bl sub_807543C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080B48F4 @ =gUnknown_8E794D0
+	ldr r1, _080B48F4 @ =gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080B48F8 @ =gUnknown_8E799FC
+	ldr r0, _080B48F8 @ =gFile_graphics_battle_anims_sprites_261_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -38154,9 +38154,9 @@ _080B48CA:
 _080B48E4: .4byte 0x00003f42
 _080B48E8: .4byte gUnknown_2022978
 _080B48EC: .4byte gUnknown_202297A
-_080B48F0: .4byte gUnknown_8E79354
-_080B48F4: .4byte gUnknown_8E794D0
-_080B48F8: .4byte gUnknown_8E799FC
+_080B48F0: .4byte gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap
+_080B48F4: .4byte gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet
+_080B48F8: .4byte gFile_graphics_battle_anims_sprites_261_palette
 _080B48FC: .4byte gUnknown_2037F02
 _080B4900: .4byte gUnknown_2037F1A
 _080B4904: .4byte gTasks
@@ -42800,11 +42800,11 @@ _080B6D28:
 	bl sub_80752C8
 	add r0, sp, 0xC
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080B6D84 @ =gUnknown_8D24BCC
+	ldr r1, _080B6D84 @ =gFile_graphics_battle_anims_backgrounds_scary_face_sheet
 	add r2, sp, 0xC
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080B6D88 @ =gUnknown_8D24BA4
+	ldr r0, _080B6D88 @ =gFile_graphics_battle_anims_backgrounds_scary_face_palette
 	add r1, sp, 0xC
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -42814,8 +42814,8 @@ _080B6D28:
 	.align 2, 0
 _080B6D7C: .4byte gUnknown_202297C
 _080B6D80: .4byte gUnknown_202297E
-_080B6D84: .4byte gUnknown_8D24BCC
-_080B6D88: .4byte gUnknown_8D24BA4
+_080B6D84: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_sheet
+_080B6D88: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_palette
 _080B6D8C:
 	add r0, sp, 0xC
 	movs r1, 0x2
@@ -42830,7 +42830,7 @@ _080B6D8C:
 	lsls r4, 1
 	adds r0, r4
 	str r1, [r0]
-	ldr r0, _080B6E00 @ =gUnknown_8E7F4AC
+	ldr r0, _080B6E00 @ =gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap
 	bl LZDecompressWram
 	add r0, sp, 0xC
 	ldrb r0, [r0, 0x8]
@@ -42867,7 +42867,7 @@ _080B6D8C:
 	b _080B6F1E
 	.align 2, 0
 _080B6DFC: .4byte gMonSpritesGfxPtr
-_080B6E00: .4byte gUnknown_8E7F4AC
+_080B6E00: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap
 _080B6E04:
 	ldrh r0, [r6, 0xA]
 	adds r0, 0x1
@@ -46190,15 +46190,15 @@ _080B8828:
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080B88C4 @ =gUnknown_8D1D388
+	ldr r1, _080B88C4 @ =gFile_graphics_battle_anims_masks_metal_shine_tilemap
 	bl sub_807543C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080B88C8 @ =gUnknown_8D1D224
+	ldr r1, _080B88C8 @ =gFile_graphics_battle_anims_masks_metal_shine_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080B88CC @ =gUnknown_8D1D360
+	ldr r0, _080B88CC @ =gFile_graphics_battle_anims_masks_metal_shine_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -46236,9 +46236,9 @@ _080B8828:
 _080B88B8: .4byte gBattlerPartyIndexes
 _080B88BC: .4byte gPlayerParty
 _080B88C0: .4byte gUnknown_2037F1A
-_080B88C4: .4byte gUnknown_8D1D388
-_080B88C8: .4byte gUnknown_8D1D224
-_080B88CC: .4byte gUnknown_8D1D360
+_080B88C4: .4byte gFile_graphics_battle_anims_masks_metal_shine_tilemap
+_080B88C8: .4byte gFile_graphics_battle_anims_masks_metal_shine_sheet
+_080B88CC: .4byte gFile_graphics_battle_anims_masks_metal_shine_palette
 _080B88D0: .4byte gUnknown_2022978
 _080B88D4: .4byte gSprites
 _080B88D8: .4byte gUnknown_202297A
@@ -51145,7 +51145,7 @@ _080BAE5C:
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080BAF18 @ =gUnknown_8D20858
+	ldr r1, _080BAF18 @ =gFile_graphics_battle_anims_masks_curse_tilemap
 	bl sub_807543C
 	bl sub_8073788
 	lsls r0, 24
@@ -51160,7 +51160,7 @@ _080BAE5C:
 _080BAEAC:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080BAF1C @ =gUnknown_8D2083C
+	ldr r1, _080BAF1C @ =gFile_graphics_battle_anims_masks_curse_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
@@ -51207,8 +51207,8 @@ _080BAEAC:
 _080BAF0C: .4byte gBattlerPartyIndexes
 _080BAF10: .4byte gPlayerParty
 _080BAF14: .4byte gUnknown_2037F1A
-_080BAF18: .4byte gUnknown_8D20858
-_080BAF1C: .4byte gUnknown_8D2083C
+_080BAF18: .4byte gFile_graphics_battle_anims_masks_curse_tilemap
+_080BAF1C: .4byte gFile_graphics_battle_anims_masks_curse_sheet
 _080BAF20: .4byte gUnknown_83E7CC8
 _080BAF24: .4byte gUnknown_2022978
 _080BAF28: .4byte gSprites
@@ -51659,17 +51659,17 @@ _080BB2E2:
 	bne _080BB30C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080BB308 @ =gUnknown_8D2DB04
+	ldr r1, _080BB308 @ =gFile_graphics_battle_anims_masks_stat_tilemap_1_tilemap
 	bl sub_807543C
 	b _080BB316
 	.align 2, 0
 _080BB300: .4byte gUnknown_2023D44
 _080BB304: .4byte gUnknown_20399B4
-_080BB308: .4byte gUnknown_8D2DB04
+_080BB308: .4byte gFile_graphics_battle_anims_masks_stat_tilemap_1_tilemap
 _080BB30C:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080BB354 @ =gUnknown_8D2DC20
+	ldr r1, _080BB354 @ =gFile_graphics_battle_anims_masks_stat_tilemap_2_tilemap
 	bl sub_807543C
 _080BB316:
 	bl sub_8073788
@@ -51685,7 +51685,7 @@ _080BB316:
 _080BB32E:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080BB358 @ =gUnknown_8D2D8F4
+	ldr r1, _080BB358 @ =gFile_graphics_battle_anims_masks_stat_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
@@ -51701,8 +51701,8 @@ _080BB32E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080BB354: .4byte gUnknown_8D2DC20
-_080BB358: .4byte gUnknown_8D2D8F4
+_080BB354: .4byte gFile_graphics_battle_anims_masks_stat_tilemap_2_tilemap
+_080BB358: .4byte gFile_graphics_battle_anims_masks_stat_sheet
 _080BB35C: .4byte gUnknown_20399B4
 _080BB360: .4byte _080BB364
 	.align 2, 0
@@ -51715,37 +51715,37 @@ _080BB364:
 	.4byte _080BB3A8
 	.4byte _080BB3B0
 _080BB380:
-	ldr r0, _080BB384 @ =gUnknown_8D2DD5C
+	ldr r0, _080BB384 @ =gFile_graphics_battle_anims_masks_stat2_palette
 	b _080BB3B2
 	.align 2, 0
-_080BB384: .4byte gUnknown_8D2DD5C
+_080BB384: .4byte gFile_graphics_battle_anims_masks_stat2_palette
 _080BB388:
-	ldr r0, _080BB38C @ =gUnknown_8D2DD3C
+	ldr r0, _080BB38C @ =gFile_graphics_battle_anims_masks_stat1_palette
 	b _080BB3B2
 	.align 2, 0
-_080BB38C: .4byte gUnknown_8D2DD3C
+_080BB38C: .4byte gFile_graphics_battle_anims_masks_stat1_palette
 _080BB390:
-	ldr r0, _080BB394 @ =gUnknown_8D2DD7C
+	ldr r0, _080BB394 @ =gFile_graphics_battle_anims_masks_stat3_palette
 	b _080BB3B2
 	.align 2, 0
-_080BB394: .4byte gUnknown_8D2DD7C
+_080BB394: .4byte gFile_graphics_battle_anims_masks_stat3_palette
 _080BB398:
-	ldr r0, _080BB39C @ =gUnknown_8D2DD9C
+	ldr r0, _080BB39C @ =gFile_graphics_battle_anims_masks_stat4_palette
 	b _080BB3B2
 	.align 2, 0
-_080BB39C: .4byte gUnknown_8D2DD9C
+_080BB39C: .4byte gFile_graphics_battle_anims_masks_stat4_palette
 _080BB3A0:
-	ldr r0, _080BB3A4 @ =gUnknown_8D2DDDC
+	ldr r0, _080BB3A4 @ =gFile_graphics_battle_anims_masks_stat6_palette
 	b _080BB3B2
 	.align 2, 0
-_080BB3A4: .4byte gUnknown_8D2DDDC
+_080BB3A4: .4byte gFile_graphics_battle_anims_masks_stat6_palette
 _080BB3A8:
-	ldr r0, _080BB3AC @ =gUnknown_8D2DDFC
+	ldr r0, _080BB3AC @ =gFile_graphics_battle_anims_masks_stat7_palette
 	b _080BB3B2
 	.align 2, 0
-_080BB3AC: .4byte gUnknown_8D2DDFC
+_080BB3AC: .4byte gFile_graphics_battle_anims_masks_stat7_palette
 _080BB3B0:
-	ldr r0, _080BB3C0 @ =gUnknown_8D2DE1C
+	ldr r0, _080BB3C0 @ =gFile_graphics_battle_anims_masks_stat8_palette
 _080BB3B2:
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
@@ -51754,9 +51754,9 @@ _080BB3B2:
 	bl LoadCompressedPalette
 	b _080BB3D2
 	.align 2, 0
-_080BB3C0: .4byte gUnknown_8D2DE1C
+_080BB3C0: .4byte gFile_graphics_battle_anims_masks_stat8_palette
 _080BB3C4:
-	ldr r0, _080BB3FC @ =gUnknown_8D2DDBC
+	ldr r0, _080BB3FC @ =gFile_graphics_battle_anims_masks_stat5_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -51785,7 +51785,7 @@ _080BB3D2:
 	ldr r1, _080BB410 @ =0x0000fffd
 	b _080BB420
 	.align 2, 0
-_080BB3FC: .4byte gUnknown_8D2DDBC
+_080BB3FC: .4byte gFile_graphics_battle_anims_masks_stat5_palette
 _080BB400: .4byte gUnknown_2022978
 _080BB404: .4byte gUnknown_202297A
 _080BB408: .4byte gUnknown_20399B4

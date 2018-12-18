@@ -298,7 +298,7 @@ LoadBattleTextboxAndBackground: @ 800F420
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZDecompressVram
-	ldr r1, _0800F458 @ =gUnknown_8D0051C
+	ldr r1, _0800F458 @ =gFile_graphics_interface_menu_map_tilemap
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
@@ -315,7 +315,7 @@ LoadBattleTextboxAndBackground: @ 800F420
 	bx r0
 	.align 2, 0
 _0800F454: .4byte gUnknown_8D00000
-_0800F458: .4byte gUnknown_8D0051C
+_0800F458: .4byte gFile_graphics_interface_menu_map_tilemap
 _0800F45C: .4byte gUnknown_8D004D8
 	thumb_func_end LoadBattleTextboxAndBackground
 
@@ -1152,13 +1152,13 @@ sub_800FAE0: @ 800FAE0
 	ands r0, r1
 	cmp r0, 0
 	beq _0800FB94
-	ldr r0, _0800FB68 @ =gUnknown_8E7737C
+	ldr r0, _0800FB68 @ =gFile_graphics_battle_transitions_vs_frame_sheet
 	ldr r1, _0800FB6C @ =0x06004000
 	bl LZDecompressVram
-	ldr r0, _0800FB70 @ =gUnknown_8E77598
+	ldr r0, _0800FB70 @ =gFile_graphics_battle_transitions_vs_sheet
 	ldr r1, _0800FB74 @ =0x06010000
 	bl LZDecompressVram
-	ldr r0, _0800FB78 @ =gUnknown_8E77570
+	ldr r0, _0800FB78 @ =gFile_graphics_battle_transitions_vs_frame_palette
 	movs r1, 0x60
 	movs r2, 0x20
 	bl LoadCompressedPalette
@@ -1169,7 +1169,7 @@ sub_800FAE0: @ 800FAE0
 	ldr r1, _0800FB7C @ =0x00005c04
 	movs r0, 0xA
 	bl SetGpuReg
-	ldr r4, _0800FB80 @ =gUnknown_8E77464
+	ldr r4, _0800FB80 @ =gFile_graphics_battle_transitions_vs_frame_tilemap
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0
@@ -1201,13 +1201,13 @@ sub_800FAE0: @ 800FAE0
 	b _0800FC26
 	.align 2, 0
 _0800FB64: .4byte gBattleTypeFlags
-_0800FB68: .4byte gUnknown_8E7737C
+_0800FB68: .4byte gFile_graphics_battle_transitions_vs_frame_sheet
 _0800FB6C: .4byte 0x06004000
-_0800FB70: .4byte gUnknown_8E77598
+_0800FB70: .4byte gFile_graphics_battle_transitions_vs_sheet
 _0800FB74: .4byte 0x06010000
-_0800FB78: .4byte gUnknown_8E77570
+_0800FB78: .4byte gFile_graphics_battle_transitions_vs_frame_palette
 _0800FB7C: .4byte 0x00005c04
-_0800FB80: .4byte gUnknown_8E77464
+_0800FB80: .4byte gFile_graphics_battle_transitions_vs_frame_tilemap
 _0800FB84: .4byte gUnknown_202297A
 _0800FB88: .4byte 0x0000ff5c
 _0800FB8C: .4byte gUnknown_202297E
@@ -1393,7 +1393,7 @@ _0800FCEC:
 	.align 2, 0
 _0800FCF8: .4byte gUnknown_8D00000
 _0800FCFC:
-	ldr r1, _0800FD10 @ =gUnknown_8D0051C
+	ldr r1, _0800FD10 @ =gFile_graphics_interface_menu_map_tilemap
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
@@ -1402,7 +1402,7 @@ _0800FCFC:
 	bl CopyBgTilemapBufferToVram
 	b _0800FD94
 	.align 2, 0
-_0800FD10: .4byte gUnknown_8D0051C
+_0800FD10: .4byte gFile_graphics_interface_menu_map_tilemap
 _0800FD14:
 	ldr r0, _0800FD20 @ =gUnknown_8D004D8
 	movs r1, 0

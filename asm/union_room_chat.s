@@ -797,7 +797,7 @@ _08128A80:
 	strh r0, [r1, 0x6]
 	b _08128A94
 _08128A86:
-	ldr r0, _08128A9C @ =gUnknown_3003F64
+	ldr r0, _08128A9C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128A94
@@ -808,7 +808,7 @@ _08128A94:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08128A9C: .4byte gUnknown_3003F64
+_08128A9C: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_81288D4
 
 	thumb_func_start sub_8128AA0
@@ -948,7 +948,7 @@ _08128BC4:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _08128BD0:
-	ldr r0, _08128BE4 @ =gUnknown_3003F64
+	ldr r0, _08128BE4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128BFC
@@ -959,7 +959,7 @@ _08128BDA:
 	strh r0, [r1, 0x6]
 	b _08128BFC
 	.align 2, 0
-_08128BE4: .4byte gUnknown_3003F64
+_08128BE4: .4byte gReceivedRemoteLinkPlayers
 _08128BE8:
 	ldr r1, [r2]
 	ldrh r0, [r1, 0xA]
@@ -1035,7 +1035,7 @@ _08128C6E:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _08128C78:
-	ldr r0, _08128C8C @ =gUnknown_3003F64
+	ldr r0, _08128C8C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128CA2
@@ -1047,7 +1047,7 @@ _08128C82:
 	strh r0, [r1, 0x6]
 	b _08128CA2
 	.align 2, 0
-_08128C8C: .4byte gUnknown_3003F64
+_08128C8C: .4byte gReceivedRemoteLinkPlayers
 _08128C90:
 	ldrh r0, [r1, 0xA]
 	cmp r0, 0x95
@@ -1157,7 +1157,7 @@ _08128D64:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _08128D70:
-	ldr r0, _08128D84 @ =gUnknown_3003F64
+	ldr r0, _08128D84 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128D9C
@@ -1168,7 +1168,7 @@ _08128D7A:
 	strh r0, [r1, 0x6]
 	b _08128D9C
 	.align 2, 0
-_08128D84: .4byte gUnknown_3003F64
+_08128D84: .4byte gReceivedRemoteLinkPlayers
 _08128D88:
 	ldr r1, [r2]
 	ldrh r0, [r1, 0xA]
@@ -1211,7 +1211,7 @@ _08128DC4:
 	.4byte _08128E42
 	.4byte _08128E60
 _08128DD8:
-	ldr r0, _08128DE8 @ =gUnknown_3003F64
+	ldr r0, _08128DE8 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128DEC
@@ -1219,7 +1219,7 @@ _08128DD8:
 	bl sub_8129218
 	b _08128E70
 	.align 2, 0
-_08128DE8: .4byte gUnknown_3003F64
+_08128DE8: .4byte gReceivedRemoteLinkPlayers
 _08128DEC:
 	ldr r0, [r4]
 	movs r1, 0xC8
@@ -2740,7 +2740,7 @@ _08129924:
 	.4byte _08129AD8
 	.4byte _08129A7C
 _08129944:
-	ldr r0, _08129978 @ =gUnknown_3003F64
+	ldr r0, _08129978 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0812994E
@@ -2767,7 +2767,7 @@ _08129952:
 	strb r2, [r0, 0xD]
 	b _08129B08
 	.align 2, 0
-_08129978: .4byte gUnknown_3003F64
+_08129978: .4byte gReceivedRemoteLinkPlayers
 _0812997C: .4byte gUnknown_203B0E0
 _08129980:
 	bl GetBlockReceivedStatus

@@ -3326,7 +3326,7 @@ _0814D488:
 	bl sub_800AAC0
 	b _0814D4B8
 _0814D498:
-	ldr r0, _0814D4B4 @ =gUnknown_3003F64
+	ldr r0, _0814D4B4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0814D4BE
@@ -3339,7 +3339,7 @@ _0814D498:
 	strb r4, [r5, 0xC]
 	b _0814D4BE
 	.align 2, 0
-_0814D4B4: .4byte gUnknown_3003F64
+_0814D4B4: .4byte gReceivedRemoteLinkPlayers
 _0814D4B8:
 	ldrb r0, [r5, 0xC]
 	adds r0, 0x1

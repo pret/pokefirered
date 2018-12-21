@@ -211,7 +211,7 @@ u32 sub_8143770(u8 * r4, u16 * r5)
             }
             else if (IsLinkConnectionEstablished())
             {
-                if (gUnknown_3003F64)
+                if (gReceivedRemoteLinkPlayers)
                 {
                     if (IsLinkPlayerDataExchangeComplete())
                     {
@@ -230,7 +230,7 @@ u32 sub_8143770(u8 * r4, u16 * r5)
             *r4 = 5;
             break;
         case 5:
-            if (!gUnknown_3003F64)
+            if (!gReceivedRemoteLinkPlayers)
             {
                 *r4 = 0;
                 return 4;
@@ -428,7 +428,7 @@ void sub_8143910(u8 taskId)
             data->t08 = 16;
             break;
         case 16:
-            if (!gUnknown_3003F64)
+            if (!gReceivedRemoteLinkPlayers)
             {
                 if (data->t0E == 1)
                     data->t08 = 17;

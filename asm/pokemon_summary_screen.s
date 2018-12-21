@@ -1293,7 +1293,7 @@ _08134FC8:
 	ands r0, r1
 	cmp r0, 0
 	bne _08135004
-	ldr r0, _08134FFC @ =gUnknown_3003F64
+	ldr r0, _08134FFC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08135004
@@ -1304,7 +1304,7 @@ _08134FC8:
 _08134FF0: .4byte gUnknown_8419C39
 _08134FF4: .4byte gMain
 _08134FF8: .4byte 0x00000439
-_08134FFC: .4byte gUnknown_3003F64
+_08134FFC: .4byte gReceivedRemoteLinkPlayers
 _08135000: .4byte gUnknown_8419C92
 _08135004:
 	ldr r0, _0813500C @ =gUnknown_8419CA2
@@ -8439,7 +8439,7 @@ sub_8138B4C: @ 8138B4C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08138B84
-	ldr r0, _08138B7C @ =gUnknown_3003F64
+	ldr r0, _08138B7C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08138B84
@@ -8453,7 +8453,7 @@ _08138B76:
 	movs r0, 0x1
 	b _08138B86
 	.align 2, 0
-_08138B7C: .4byte gUnknown_3003F64
+_08138B7C: .4byte gReceivedRemoteLinkPlayers
 _08138B80: .4byte gUnknown_203B16C
 _08138B84:
 	movs r0, 0
@@ -8931,7 +8931,7 @@ _08138EE0:
 	beq _08138EF0
 	b _08139094
 _08138EF0:
-	ldr r0, _08138F10 @ =gUnknown_3003F64
+	ldr r0, _08138F10 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08138EFA
@@ -8946,7 +8946,7 @@ _08138EFA:
 _08138F04: .4byte 0x00003268
 _08138F08: .4byte 0x00003024
 _08138F0C: .4byte 0x00000439
-_08138F10: .4byte gUnknown_3003F64
+_08138F10: .4byte gReceivedRemoteLinkPlayers
 _08138F14: .4byte gUnknown_203B16E
 _08138F18:
 	strb r4, [r2]
@@ -13242,7 +13242,7 @@ _0813B198:
 	bl sub_805642C
 	cmp r0, 0
 	bne _0813B1C4
-	ldr r0, _0813B1C0 @ =gUnknown_3003F64
+	ldr r0, _0813B1C0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0813B1C4
@@ -13256,7 +13256,7 @@ _0813B198:
 	bl sub_813B38C
 	b _0813B1CC
 	.align 2, 0
-_0813B1C0: .4byte gUnknown_3003F64
+_0813B1C0: .4byte gReceivedRemoteLinkPlayers
 _0813B1C4:
 	lsls r0, r5, 24
 	asrs r0, 24

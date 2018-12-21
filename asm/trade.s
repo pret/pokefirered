@@ -246,7 +246,7 @@ _0804C80A:
 	bl sub_804F5BC
 	movs r0, 0
 	bl ShowBg
-	ldr r0, _0804C86C @ =gUnknown_3003F64
+	ldr r0, _0804C86C @ =gReceivedRemoteLinkPlayers
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _0804C8B4
@@ -258,7 +258,7 @@ _0804C80A:
 	ldr r0, [r0]
 	adds r0, 0xA8
 	strb r2, [r0]
-	ldr r0, _0804C87C @ =gUnknown_3003F3C
+	ldr r0, _0804C87C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C880
@@ -269,11 +269,11 @@ _0804C80A:
 	.align 2, 0
 _0804C864: .4byte gPaletteFade
 _0804C868: .4byte gEnemyParty
-_0804C86C: .4byte gUnknown_3003F64
+_0804C86C: .4byte gReceivedRemoteLinkPlayers
 _0804C870: .4byte gLinkType
 _0804C874: .4byte 0x00001122
 _0804C878: .4byte gUnknown_2031DA8
-_0804C87C: .4byte gUnknown_3003F3C
+_0804C87C: .4byte gWirelessCommType
 _0804C880:
 	bl sub_8009804
 	ldr r1, _0804C8A8 @ =gMain
@@ -284,7 +284,7 @@ _0804C880:
 	adds r0, 0x1
 	strb r0, [r1]
 _0804C892:
-	ldr r0, _0804C8AC @ =gUnknown_3003F3C
+	ldr r0, _0804C8AC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C89C
@@ -296,7 +296,7 @@ _0804C89C:
 	b _0804CEE6
 	.align 2, 0
 _0804C8A8: .4byte gMain
-_0804C8AC: .4byte gUnknown_3003F3C
+_0804C8AC: .4byte gWirelessCommType
 _0804C8B0: .4byte sub_8081A90
 _0804C8B4:
 	ldr r0, _0804C8C4 @ =gMain
@@ -375,7 +375,7 @@ _0804C940:
 	.align 2, 0
 _0804C94C: .4byte gMain
 _0804C950:
-	ldr r0, _0804C9A0 @ =gUnknown_3003F64
+	ldr r0, _0804C9A0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0804C95A
@@ -402,7 +402,7 @@ _0804C968:
 	ldr r0, [r0]
 	adds r0, 0xA8
 	strb r2, [r0]
-	ldr r0, _0804C9AC @ =gUnknown_3003F3C
+	ldr r0, _0804C9AC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0804C992
@@ -413,12 +413,12 @@ _0804C992:
 	bl sub_800AB9C
 	b _0804CEE6
 	.align 2, 0
-_0804C9A0: .4byte gUnknown_3003F64
+_0804C9A0: .4byte gReceivedRemoteLinkPlayers
 _0804C9A4: .4byte gMain
 _0804C9A8: .4byte gUnknown_2031DA8
-_0804C9AC: .4byte gUnknown_3003F3C
+_0804C9AC: .4byte gWirelessCommType
 _0804C9B0:
-	ldr r0, _0804C9E0 @ =gUnknown_3003F3C
+	ldr r0, _0804C9E0 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C9E8
@@ -441,7 +441,7 @@ _0804C9C4:
 	bl sub_80FCD74
 	b _0804CEE6
 	.align 2, 0
-_0804C9E0: .4byte gUnknown_3003F3C
+_0804C9E0: .4byte gWirelessCommType
 _0804C9E4: .4byte gMain
 _0804C9E8:
 	movs r2, 0x87
@@ -1130,7 +1130,7 @@ _0804CFC8:
 	.align 2, 0
 _0804CFD8: .4byte gMain
 _0804CFDC:
-	ldr r0, _0804CFFC @ =gUnknown_3003F3C
+	ldr r0, _0804CFFC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804CFF0
@@ -1145,7 +1145,7 @@ _0804CFF0:
 	adds r1, r3
 	b _0804D4B4
 	.align 2, 0
-_0804CFFC: .4byte gUnknown_3003F3C
+_0804CFFC: .4byte gWirelessCommType
 _0804D000: .4byte gMain
 _0804D004:
 	movs r5, 0x87
@@ -1795,7 +1795,7 @@ sub_804D548: @ 804D548
 	adds r0, 0x7E
 	ldrb r0, [r0]
 	strb r0, [r1, 0x1]
-	ldr r0, _0804D58C @ =gUnknown_3003F3C
+	ldr r0, _0804D58C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D590
@@ -1808,7 +1808,7 @@ sub_804D548: @ 804D548
 _0804D580: .4byte gPaletteFade
 _0804D584: .4byte gUnknown_2031DA4
 _0804D588: .4byte gUnknown_2031DA8
-_0804D58C: .4byte gUnknown_3003F3C
+_0804D58C: .4byte gWirelessCommType
 _0804D590:
 	movs r0, 0x20
 	bl sub_800AA80
@@ -1828,7 +1828,7 @@ sub_804D5A4: @ 804D5A4
 	ldr r5, _0804D5E4 @ =gMain
 	ldr r0, _0804D5E8 @ =sub_804C718
 	str r0, [r5, 0x8]
-	ldr r0, _0804D5EC @ =gUnknown_3003F3C
+	ldr r0, _0804D5EC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D5FC
@@ -1852,12 +1852,12 @@ sub_804D5A4: @ 804D5A4
 	.align 2, 0
 _0804D5E4: .4byte gMain
 _0804D5E8: .4byte sub_804C718
-_0804D5EC: .4byte gUnknown_3003F3C
+_0804D5EC: .4byte gWirelessCommType
 _0804D5F0: .4byte gUnknown_2031C90
 _0804D5F4: .4byte gUnknown_2031DA8
 _0804D5F8: .4byte sub_8050138
 _0804D5FC:
-	ldr r0, _0804D628 @ =gUnknown_3003F64
+	ldr r0, _0804D628 @ =gReceivedRemoteLinkPlayers
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _0804D620
@@ -1876,7 +1876,7 @@ _0804D620:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D628: .4byte gUnknown_3003F64
+_0804D628: .4byte gReceivedRemoteLinkPlayers
 _0804D62C: .4byte gUnknown_2031C90
 _0804D630: .4byte gUnknown_2031DA8
 _0804D634: .4byte sub_8050138
@@ -4253,7 +4253,7 @@ sub_804E908: @ 804E908
 	ands r0, r1
 	cmp r0, 0
 	bne _0804E93C
-	ldr r0, _0804E928 @ =gUnknown_3003F3C
+	ldr r0, _0804E928 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804E92C
@@ -4261,7 +4261,7 @@ sub_804E908: @ 804E908
 	b _0804E932
 	.align 2, 0
 _0804E924: .4byte gPaletteFade
-_0804E928: .4byte gUnknown_3003F3C
+_0804E928: .4byte gWirelessCommType
 _0804E92C:
 	movs r0, 0xC
 	bl sub_800AA80
@@ -4281,7 +4281,7 @@ _0804E940: .4byte gUnknown_2031DA8
 	thumb_func_start sub_804E944
 sub_804E944: @ 804E944
 	push {lr}
-	ldr r0, _0804E978 @ =gUnknown_3003F3C
+	ldr r0, _0804E978 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804E988
@@ -4301,12 +4301,12 @@ sub_804E944: @ 804E944
 	bl SetMainCallback2
 	b _0804E9AA
 	.align 2, 0
-_0804E978: .4byte gUnknown_3003F3C
+_0804E978: .4byte gWirelessCommType
 _0804E97C: .4byte gUnknown_2031C90
 _0804E980: .4byte gUnknown_2031DA8
 _0804E984: .4byte c2_8056854
 _0804E988:
-	ldr r0, _0804E9B0 @ =gUnknown_3003F64
+	ldr r0, _0804E9B0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0804E9AA
@@ -4323,7 +4323,7 @@ _0804E9AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804E9B0: .4byte gUnknown_3003F64
+_0804E9B0: .4byte gReceivedRemoteLinkPlayers
 _0804E9B4: .4byte gUnknown_2031C90
 _0804E9B8: .4byte gUnknown_2031DA8
 _0804E9BC: .4byte c2_8056854
@@ -6573,7 +6573,7 @@ _0804FB24:
 	thumb_func_start sub_804FB34
 sub_804FB34: @ 804FB34
 	push {r4-r7,lr}
-	ldr r0, _0804FBB4 @ =gUnknown_3003F64
+	ldr r0, _0804FBB4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804FBC0
@@ -6634,7 +6634,7 @@ _0804FB6E:
 	movs r0, 0x2
 	b _0804FBC2
 	.align 2, 0
-_0804FBB4: .4byte gUnknown_3003F64
+_0804FBB4: .4byte gReceivedRemoteLinkPlayers
 _0804FBB8: .4byte gLinkPlayers
 _0804FBBC:
 	movs r0, 0x1
@@ -7209,14 +7209,14 @@ _0804FFC0: .4byte c2_800ACD4
 	thumb_func_start sub_804FFC4
 sub_804FFC4: @ 804FFC4
 	push {lr}
-	ldr r0, _0804FFD4 @ =gUnknown_3003F64
+	ldr r0, _0804FFD4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0804FFD8
 	movs r0, 0
 	b _0804FFE0
 	.align 2, 0
-_0804FFD4: .4byte gUnknown_3003F64
+_0804FFD4: .4byte gReceivedRemoteLinkPlayers
 _0804FFD8:
 	bl GetMultiplayerId
 	lsls r0, 24
@@ -7424,7 +7424,7 @@ _08050160:
 	.4byte _08050430
 	.4byte _0805044C
 _08050194:
-	ldr r0, _08050228 @ =gUnknown_3003F64
+	ldr r0, _08050228 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080501A8
@@ -7490,14 +7490,14 @@ _080501A8:
 	strh r2, [r0]
 	b _08050472
 	.align 2, 0
-_08050228: .4byte gUnknown_3003F64
+_08050228: .4byte gReceivedRemoteLinkPlayers
 _0805022C: .4byte gLinkType
 _08050230: .4byte 0x00001144
 _08050234: .4byte gUnknown_2031DAC
 _08050238: .4byte sub_804FF0C
 _0805023C: .4byte gMain
 _08050240:
-	ldr r0, _08050270 @ =gUnknown_3003F64
+	ldr r0, _08050270 @ =gReceivedRemoteLinkPlayers
 	ldrb r5, [r0]
 	cmp r5, 0
 	bne _0805027C
@@ -7520,7 +7520,7 @@ _08050240:
 	str r5, [r0, 0x64]
 	b _08050472
 	.align 2, 0
-_08050270: .4byte gUnknown_3003F64
+_08050270: .4byte gReceivedRemoteLinkPlayers
 _08050274: .4byte gUnknown_2031DAC
 _08050278: .4byte gMain
 _0805027C:
@@ -7585,7 +7585,7 @@ _080502EC:
 	b _08050472
 _080502F2:
 	bl sub_804FF4C
-	ldr r0, _08050318 @ =gUnknown_3003F64
+	ldr r0, _08050318 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _08050300
@@ -7604,7 +7604,7 @@ _0805030E:
 	adds r1, r2
 	b _08050440
 	.align 2, 0
-_08050318: .4byte gUnknown_3003F64
+_08050318: .4byte gReceivedRemoteLinkPlayers
 _0805031C: .4byte gMain
 _08050320:
 	ldr r2, _08050340 @ =gUnknown_2031DAC
@@ -7745,7 +7745,7 @@ _0805044C:
 	ands r0, r1
 	cmp r0, 0
 	bne _08050472
-	ldr r0, _08050494 @ =gUnknown_3003F3C
+	ldr r0, _08050494 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805046C
@@ -7768,7 +7768,7 @@ _08050472:
 	bx r0
 	.align 2, 0
 _08050490: .4byte gPaletteFade
-_08050494: .4byte gUnknown_3003F3C
+_08050494: .4byte gWirelessCommType
 _08050498: .4byte sub_8053D84
 	thumb_func_end sub_8050138
 
@@ -8236,7 +8236,7 @@ _080508A2:
 _080508B8:
 	mov r0, r9
 	bl sub_80507A0
-	ldr r0, _080508F0 @ =gUnknown_3003F64
+	ldr r0, _080508F0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080508CA
@@ -8256,7 +8256,7 @@ _080508E0: .4byte gSaveBlock1Ptr
 _080508E4: .4byte 0x00002cd0
 _080508E8: .4byte gUnknown_2031DAC
 _080508EC: .4byte gUnknown_2031CCC
-_080508F0: .4byte gUnknown_3003F64
+_080508F0: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_805080C
 
 	thumb_func_start sub_80508F4
@@ -14476,7 +14476,7 @@ _08054120:
 	movs r0, 0x15
 	bl IncrementGameStat
 _08054132:
-	ldr r0, _08054178 @ =gUnknown_3003F3C
+	ldr r0, _08054178 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805415A
@@ -14508,7 +14508,7 @@ _0805415A:
 	b _080541F2
 	.align 2, 0
 _08054174: .4byte gUnknown_2031DAC
-_08054178: .4byte gUnknown_3003F3C
+_08054178: .4byte gWirelessCommType
 _0805417C: .4byte gLinkPlayers
 _08054180: .4byte gMain
 _08054184:
@@ -14707,7 +14707,7 @@ _08054304:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08054396
-	ldr r0, _08054328 @ =gUnknown_3003F3C
+	ldr r0, _08054328 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08054334
@@ -14719,7 +14719,7 @@ _08054304:
 	bl sub_800AB9C
 	b _08054338
 	.align 2, 0
-_08054328: .4byte gUnknown_3003F3C
+_08054328: .4byte gWirelessCommType
 _0805432C: .4byte gMain
 _08054330: .4byte sub_804C718
 _08054334:
@@ -14737,7 +14737,7 @@ _08054340:
 	.align 2, 0
 _08054348: .4byte gMain
 _0805434C:
-	ldr r0, _08054374 @ =gUnknown_3003F3C
+	ldr r0, _08054374 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08054384
@@ -14756,12 +14756,12 @@ _0805434C:
 	bl SetMainCallback2
 	b _08054396
 	.align 2, 0
-_08054374: .4byte gUnknown_3003F3C
+_08054374: .4byte gWirelessCommType
 _08054378: .4byte sub_804C718
 _0805437C: .4byte gSoftResetDisabled
 _08054380: .4byte sub_80543C4
 _08054384:
-	ldr r0, _080543B8 @ =gUnknown_3003F64
+	ldr r0, _080543B8 @ =gReceivedRemoteLinkPlayers
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _08054396
@@ -14784,7 +14784,7 @@ _080543A4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080543B8: .4byte gUnknown_3003F64
+_080543B8: .4byte gReceivedRemoteLinkPlayers
 _080543BC: .4byte gSoftResetDisabled
 _080543C0: .4byte sub_80543C4
 	thumb_func_end sub_8053E8C
@@ -14815,7 +14815,7 @@ sub_80543C4: @ 80543C4
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
-	ldr r0, _08054438 @ =gUnknown_3003F3C
+	ldr r0, _08054438 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08054412
@@ -14835,7 +14835,7 @@ _0805441A:
 	.align 2, 0
 _08054430: .4byte gPaletteFade
 _08054434: .4byte gUnknown_2031DAC
-_08054438: .4byte gUnknown_3003F3C
+_08054438: .4byte gWirelessCommType
 _0805443C: .4byte gMain
 	thumb_func_end sub_80543C4
 

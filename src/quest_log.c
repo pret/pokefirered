@@ -165,7 +165,7 @@ u16 sub_81132A0(struct Var4038Struct *);
 void sub_81132E0(struct Var4038Struct *);
 bool16 sub_811337C(struct Var4038Struct *);
 void sub_8113390(struct Var4038Struct *);
-void sub_8113414(u8 (*)[16], u8, u8);
+void sub_8113414(struct LinkBattleRecords *, u8, u8);
 void sub_81134CC(struct Var4038Struct *);
 bool8 sub_8113508(struct Var4038Struct * );
 void sub_8113524(struct Var4038Struct *);
@@ -2693,13 +2693,13 @@ void sub_81133A4(void)
             r3 = 1;
             break;
     }
-    sub_8113414(gSaveBlock2Ptr->unk_A98, r3, r2);
+    sub_8113414(&gSaveBlock2Ptr->linkBattleRecords, r3, r2);
 }
 
-void sub_8113414(u8 (* a0)[16], u8 a1, u8 a2)
+void sub_8113414(struct LinkBattleRecords * a0, u8 a1, u8 a2)
 {
     u8 * str;
-    const u8 * src = a0[a1];
+    const u8 * src = a0->entries[a1].name;
     if (src[0] == EOS)
     {
         switch (a2)

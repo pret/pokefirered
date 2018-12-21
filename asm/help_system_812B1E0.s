@@ -357,14 +357,14 @@ _0812B458: .4byte gUnknown_203B0EE
 	thumb_func_start sub_812B45C
 sub_812B45C: @ 812B45C
 	push {lr}
-	ldr r0, _0812B46C @ =gUnknown_3003F64
+	ldr r0, _0812B46C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0812B470
 	movs r0, 0x1
 	b _0812B472
 	.align 2, 0
-_0812B46C: .4byte gUnknown_3003F64
+_0812B46C: .4byte gReceivedRemoteLinkPlayers
 _0812B470:
 	movs r0, 0
 _0812B472:

@@ -1004,7 +1004,7 @@ _08010590:
 	movs r0, 0x1
 	strb r0, [r1]
 _080105BC:
-	ldr r0, _080105D0 @ =gUnknown_3003F3C
+	ldr r0, _080105D0 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080105C6
@@ -1014,7 +1014,7 @@ _080105C6:
 	b _080108B8
 	.align 2, 0
 _080105CC: .4byte gUnknown_2023E82
-_080105D0: .4byte gUnknown_3003F3C
+_080105D0: .4byte gWirelessCommType
 _080105D4:
 	ldr r2, _08010640 @ =gBattleTypeFlags
 	ldr r1, [r2]
@@ -1023,7 +1023,7 @@ _080105D4:
 	ands r0, r6
 	cmp r0, 0
 	beq _08010658
-	ldr r0, _08010644 @ =gUnknown_3003F64
+	ldr r0, _08010644 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080105EC
@@ -1056,7 +1056,7 @@ _080105EC:
 	ldr r0, _08010650 @ =gUnknown_2023E82
 	strb r6, [r0]
 _0801062A:
-	ldr r0, _08010654 @ =gUnknown_3003F3C
+	ldr r0, _08010654 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08010634
@@ -1068,11 +1068,11 @@ _08010634:
 	b _080108B8
 	.align 2, 0
 _08010640: .4byte gBattleTypeFlags
-_08010644: .4byte gUnknown_3003F64
+_08010644: .4byte gReceivedRemoteLinkPlayers
 _08010648: .4byte gBattleStruct
 _0801064C: .4byte 0x00000185
 _08010650: .4byte gUnknown_2023E82
-_08010654: .4byte gUnknown_3003F3C
+_08010654: .4byte gWirelessCommType
 _08010658:
 	movs r0, 0x4
 	orrs r1, r0
@@ -1515,7 +1515,7 @@ _08010A14:
 _08010A1E:
 	b _08010B82
 _08010A20:
-	ldr r0, _08010A58 @ =gUnknown_3003F64
+	ldr r0, _08010A58 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08010A2A
@@ -1542,7 +1542,7 @@ _08010A36:
 	strb r0, [r5]
 	b _08010B82
 	.align 2, 0
-_08010A58: .4byte gUnknown_3003F64
+_08010A58: .4byte gReceivedRemoteLinkPlayers
 _08010A5C:
 	bl GetBlockReceivedStatus
 	movs r1, 0xF
@@ -1628,7 +1628,7 @@ _08010AFC:
 	bne _08010B82
 	movs r0, 0x3
 	strb r0, [r5]
-	ldr r0, _08010B20 @ =gUnknown_3003F3C
+	ldr r0, _08010B20 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08010B24
@@ -1636,12 +1636,12 @@ _08010AFC:
 	b _08010B82
 	.align 2, 0
 _08010B1C: .4byte gPaletteFade
-_08010B20: .4byte gUnknown_3003F3C
+_08010B20: .4byte gWirelessCommType
 _08010B24:
 	bl sub_800AAC0
 	b _08010B82
 _08010B2A:
-	ldr r0, _08010B54 @ =gUnknown_3003F3C
+	ldr r0, _08010B54 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08010B64
@@ -1661,12 +1661,12 @@ _08010B2A:
 	bl SetMainCallback2
 	b _08010B82
 	.align 2, 0
-_08010B54: .4byte gUnknown_3003F3C
+_08010B54: .4byte gWirelessCommType
 _08010B58: .4byte gBattleTypeFlags
 _08010B5C: .4byte gMain
 _08010B60: .4byte sub_800FE24
 _08010B64:
-	ldr r0, _08010B90 @ =gUnknown_3003F64
+	ldr r0, _08010B90 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08010B82
@@ -1688,7 +1688,7 @@ _08010B82:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010B90: .4byte gUnknown_3003F64
+_08010B90: .4byte gReceivedRemoteLinkPlayers
 _08010B94: .4byte gBattleTypeFlags
 _08010B98: .4byte gMain
 _08010B9C: .4byte sub_800FE24
@@ -1757,7 +1757,7 @@ _08010C18:
 	movs r0, 0x1
 	strb r0, [r1]
 _08010C44:
-	ldr r0, _08010C58 @ =gUnknown_3003F3C
+	ldr r0, _08010C58 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08010C4E
@@ -1767,9 +1767,9 @@ _08010C4E:
 	b _080110F0
 	.align 2, 0
 _08010C54: .4byte gUnknown_2023E82
-_08010C58: .4byte gUnknown_3003F3C
+_08010C58: .4byte gWirelessCommType
 _08010C5C:
-	ldr r0, _08010CC0 @ =gUnknown_3003F64
+	ldr r0, _08010CC0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08010C66
@@ -1805,7 +1805,7 @@ _08010C66:
 	adds r0, 0x1
 	strb r0, [r1]
 _08010CAA:
-	ldr r0, _08010CD0 @ =gUnknown_3003F3C
+	ldr r0, _08010CD0 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08010CB4
@@ -1816,11 +1816,11 @@ _08010CB4:
 	bl sub_80FCD74
 	b _080110F0
 	.align 2, 0
-_08010CC0: .4byte gUnknown_3003F64
+_08010CC0: .4byte gReceivedRemoteLinkPlayers
 _08010CC4: .4byte gBattleStruct
 _08010CC8: .4byte 0x00000185
 _08010CCC: .4byte gUnknown_2023E82
-_08010CD0: .4byte gUnknown_3003F3C
+_08010CD0: .4byte gWirelessCommType
 _08010CD4:
 	bl GetBlockReceivedStatus
 	movs r1, 0xF
@@ -11647,7 +11647,7 @@ _08015B74:
 	ands r0, r5
 	cmp r0, 0
 	beq _08015B86
-	ldr r0, _08015BE4 @ =gUnknown_3003F64
+	ldr r0, _08015BE4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08015BD4
@@ -11696,7 +11696,7 @@ _08015BD4:
 	.align 2, 0
 _08015BDC: .4byte gBattleTypeFlags
 _08015BE0: .4byte gPlayerParty
-_08015BE4: .4byte gUnknown_3003F64
+_08015BE4: .4byte gReceivedRemoteLinkPlayers
 _08015BE8: .4byte gSpecialVar_Result
 _08015BEC: .4byte gUnknown_2023E8A
 _08015BF0: .4byte gMain

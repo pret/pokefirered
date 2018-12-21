@@ -324,11 +324,11 @@ _08077A14:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl ActionSelectionCreateCursorAt
-	ldr r0, _08077A54 @ =gUnknown_3003F3C
+	ldr r0, _08077A54 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08077A8A
-	ldr r0, _08077A58 @ =gUnknown_3003F64
+	ldr r0, _08077A58 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08077A8A
@@ -342,8 +342,8 @@ _08077A44: .4byte gBattlerPartyIndexes
 _08077A48: .4byte gEnemyParty
 _08077A4C: .4byte gUnknown_2023FF8
 _08077A50: .4byte gBattlerInMenuId
-_08077A54: .4byte gUnknown_3003F3C
-_08077A58: .4byte gUnknown_3003F64
+_08077A54: .4byte gWirelessCommType
+_08077A58: .4byte gReceivedRemoteLinkPlayers
 _08077A5C:
 	ldr r0, _08077A9C @ =sub_80116F4
 	bl SetVBlankCallback

@@ -67,11 +67,11 @@ sub_814B754: @ 814B754
 	adds r4, r0, 0
 	movs r0, 0
 	mov r8, r0
-	ldr r0, _0814B784 @ =gUnknown_3003F64
+	ldr r0, _0814B784 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0814B772
-	ldr r0, _0814B788 @ =gUnknown_3003F3C
+	ldr r0, _0814B788 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0814B790
@@ -84,8 +84,8 @@ _0814B772:
 	strh r1, [r0, 0x12]
 	b _0814B7DC
 	.align 2, 0
-_0814B784: .4byte gUnknown_3003F64
-_0814B788: .4byte gUnknown_3003F3C
+_0814B784: .4byte gReceivedRemoteLinkPlayers
+_0814B788: .4byte gWirelessCommType
 _0814B78C: .4byte gUnknown_3005450
 _0814B790:
 	bl GetLinkPlayerCount

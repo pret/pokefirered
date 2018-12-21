@@ -224,6 +224,23 @@ struct BerryCrush
 
 #define PLAYER_NAME_LENGTH  8
 
+#define LINK_B_RECORDS_COUNT 5
+
+struct LinkBattleRecord
+{
+	u8 name[PLAYER_NAME_LENGTH];
+	u16 trainerId;
+	u16 wins;
+	u16 losses;
+	u16 draws;
+};
+
+struct LinkBattleRecords
+{
+	struct LinkBattleRecord entries[LINK_B_RECORDS_COUNT];
+	u8 languages[LINK_B_RECORDS_COUNT];
+};
+
 struct UnknownSaveBlock2Struct
 {
     u8 field_0;
@@ -243,6 +260,21 @@ struct UnknownSaveBlock2Struct
     u8 field_EA;
     u8 field_EB;
 }; // sizeof = 0xEC
+
+struct UnkSaveBlock2Substruct_55C
+{
+	/* 0x000:0x55C */ u8 unk_00_0:1;
+	                  u8 unk_00_1:1;
+	/* 0x001:0x55D */ u8 unk_01;
+	/* 0x002:0x55E */ u8 unk_02[2];
+	/* 0x004:0x560 */ u16 unk_04[2];
+	/* 0x008:0x564 */ u16 unk_08[2];
+	/* 0x00C:0x568 */ u16 unk_0C[2];
+	/* 0x010:0x56C */ u8 unk_10;
+	/* 0x011:0x56D */ u8 unk_11[3];
+	/* 0x014:0x570 */ u16 unk_14;
+	/* 0x016:0x572 */ u8 unk_16;
+}; // size: 0x018
 
 struct SaveBlock2
 {
@@ -268,9 +300,11 @@ struct SaveBlock2
     /*0x0A8*/ u32 field_A8;
     /*0x0AC*/ u8 filler_AC[0x3F4];
     /*0x4A0*/ u32 unk_4A0[0x2F];
-    /*0x55c*/ u8 filler_55C[0x53C];
-    /*0xA98*/ u8 unk_A98[2][16];
-    /*0xAB8*/ u8 filler_AB8[0x468];
+    /*0x55c*/ struct UnkSaveBlock2Substruct_55C unk_55C;
+    /*0x574*/ u8 filler_574[0x524];
+    /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
+    /*0xAF0*/ struct BerryCrush berryCrush;
+    /*0xB00*/ u8 filler_B00[0x420];
     /*0xF20*/ u32 encryptionKey;
 };
 
@@ -436,15 +470,6 @@ struct RecordMixing_UnknownStruct
     struct RecordMixing_UnknownStructSub data[2];
     u32 unk70;
     u16 unk74[0x2];
-};
-
-struct LinkBattleRecord
-{
-    u8 name[8];
-    u16 trainerId;
-    u16 wins;
-    u16 losses;
-    u16 draws;
 };
 
 struct RecordMixingGiftData

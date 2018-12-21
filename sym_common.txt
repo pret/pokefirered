@@ -60,7 +60,7 @@ gUnknown_3003F34: @ 3003F34
 gUnknown_3003F38: @ 3003F38
 	.space 0x4
 
-gUnknown_3003F3C: @ 3003F3C
+gWirelessCommType: @ 3003F3C
 	.space 0x4
 
 gUnknown_3003F40: @ 3003F40
@@ -72,7 +72,7 @@ gUnknown_3003F50: @ 3003F50
 gUnknown_3003F60: @ 3003F60
 	.space 0x4
 
-gUnknown_3003F64: @ 3003F64
+gReceivedRemoteLinkPlayers: @ 3003F64
 	.space 0xC
 
 gUnknown_3003F70: @ 3003F70

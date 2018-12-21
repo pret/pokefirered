@@ -1925,7 +1925,7 @@ _0806FC14:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r0, _0806FC78 @ =gUnknown_3003F3C
+	ldr r0, _0806FC78 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0806FC7C
@@ -1936,7 +1936,7 @@ _0806FC14:
 	b _0806FCE6
 	.align 2, 0
 _0806FC74: .4byte gUnknown_8419F54
-_0806FC78: .4byte gUnknown_3003F3C
+_0806FC78: .4byte gWirelessCommType
 _0806FC7C:
 	movs r0, 0x1
 	b _0806FCE6

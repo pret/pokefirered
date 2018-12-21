@@ -3727,7 +3727,7 @@ c2_8056854: @ 8056854
 	ldr r0, _08056878 @ =c1_link_related
 	bl sub_80565E0
 	bl sub_80578D8
-	ldr r0, _0805687C @ =gUnknown_3003F3C
+	ldr r0, _0805687C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056888
@@ -3736,7 +3736,7 @@ c2_8056854: @ 8056854
 	b _0805688C
 	.align 2, 0
 _08056878: .4byte c1_link_related
-_0805687C: .4byte gUnknown_3003F3C
+_0805687C: .4byte gWirelessCommType
 _08056880: .4byte gUnknown_3005020
 _08056884: .4byte sub_807DE58
 _08056888:
@@ -3892,7 +3892,7 @@ sub_80569BC: @ 80569BC
 	bne _080569CE
 	bl sub_80098B8
 _080569CE:
-	ldr r0, _080569E4 @ =gUnknown_3003F3C
+	ldr r0, _080569E4 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080569E8
@@ -3902,7 +3902,7 @@ _080569CE:
 	bl DisableInterrupts
 	b _080569F4
 	.align 2, 0
-_080569E4: .4byte gUnknown_3003F3C
+_080569E4: .4byte gWirelessCommType
 _080569E8:
 	movs r0, 0x2
 	bl DisableInterrupts
@@ -4054,7 +4054,7 @@ _08056B36:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
 	b _08056B62
 _08056B3C:
-	ldr r0, _08056B54 @ =gUnknown_3003F3C
+	ldr r0, _08056B54 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056B62
@@ -4064,7 +4064,7 @@ _08056B3C:
 	bl sub_80FCD74
 	b _08056B62
 	.align 2, 0
-_08056B54: .4byte gUnknown_3003F3C
+_08056B54: .4byte gWirelessCommType
 _08056B58:
 	bl map_post_load_hook_exec
 	lsls r0, 24
@@ -4385,7 +4385,7 @@ _08056E12:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
 	b _08056E3E
 _08056E18:
-	ldr r0, _08056E30 @ =gUnknown_3003F3C
+	ldr r0, _08056E30 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056E3E
@@ -4395,7 +4395,7 @@ _08056E18:
 	bl sub_80FCD74
 	b _08056E3E
 	.align 2, 0
-_08056E30: .4byte gUnknown_3003F3C
+_08056E30: .4byte gWirelessCommType
 _08056E34:
 	bl map_post_load_hook_exec
 	lsls r0, 24
@@ -5636,7 +5636,7 @@ _08057880: .4byte sub_805671C
 	thumb_func_start c1_link_related
 c1_link_related: @ 8057884
 	push {r4,lr}
-	ldr r0, _080578C8 @ =gUnknown_3003F3C
+	ldr r0, _080578C8 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805789E
@@ -5665,7 +5665,7 @@ _080578C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080578C8: .4byte gUnknown_3003F3C
+_080578C8: .4byte gWirelessCommType
 _080578CC: .4byte gUnknown_300502C
 _080578D0: .4byte gUnknown_3003E60
 _080578D4: .4byte gUnknown_3000E84
@@ -5710,7 +5710,7 @@ _0805790C: .4byte gUnknown_3000E84
 	thumb_func_start sub_8057910
 sub_8057910: @ 8057910
 	push {lr}
-	ldr r0, _08057934 @ =gUnknown_3003F3C
+	ldr r0, _08057934 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805792E
@@ -5727,7 +5727,7 @@ _0805792E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057934: .4byte gUnknown_3003F3C
+_08057934: .4byte gWirelessCommType
 _08057938: .4byte gUnknown_3000E89
 	thumb_func_end sub_8057910
 
@@ -6137,7 +6137,7 @@ _08057C6C:
 	movs r0, 0x11
 	strh r0, [r1]
 _08057C72:
-	ldr r0, _08057CB4 @ =gUnknown_3003F3C
+	ldr r0, _08057CB4 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08057CA8
@@ -6168,7 +6168,7 @@ _08057CA8:
 	bx r0
 	.align 2, 0
 _08057CB0: .4byte gUnknown_3005028
-_08057CB4: .4byte gUnknown_3003F3C
+_08057CB4: .4byte gWirelessCommType
 	thumb_func_end sub_8057C4C
 
 	thumb_func_start sub_8057CB8
@@ -7089,7 +7089,7 @@ _08058312:
 	thumb_func_start sub_8058318
 sub_8058318: @ 8058318
 	push {lr}
-	ldr r0, _08058330 @ =gUnknown_3003F3C
+	ldr r0, _08058330 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08058334
@@ -7099,7 +7099,7 @@ sub_8058318: @ 8058318
 	movs r0, 0x1
 	b _08058336
 	.align 2, 0
-_08058330: .4byte gUnknown_3003F3C
+_08058330: .4byte gWirelessCommType
 _08058334:
 	movs r0, 0
 _08058336:
@@ -7110,7 +7110,7 @@ _08058336:
 	thumb_func_start sub_805833C
 sub_805833C: @ 805833C
 	push {lr}
-	ldr r0, _08058350 @ =gUnknown_3003F3C
+	ldr r0, _08058350 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805835C
@@ -7120,7 +7120,7 @@ sub_805833C: @ 805833C
 	ldrb r0, [r0]
 	b _08058364
 	.align 2, 0
-_08058350: .4byte gUnknown_3003F3C
+_08058350: .4byte gWirelessCommType
 _08058354: .4byte gUnknown_3003FB0
 _08058358: .4byte 0x00000339
 _0805835C:

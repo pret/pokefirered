@@ -11,7 +11,7 @@ sub_8147AA8: @ 8147AA8
 	adds r6, r1, 0
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, _08147B20 @ =gUnknown_3003F64
+	ldr r0, _08147B20 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08147B3C
@@ -59,7 +59,7 @@ sub_8147AA8: @ 8147AA8
 	bl SetMainCallback2
 	b _08147B42
 	.align 2, 0
-_08147B20: .4byte gUnknown_3003F64
+_08147B20: .4byte gReceivedRemoteLinkPlayers
 _08147B24: .4byte gUnknown_203F3D4
 _08147B28: .4byte 0x000083b0
 _08147B2C: .4byte sub_8147DA0
@@ -2548,14 +2548,14 @@ _08148DFE:
 _08148E08: .4byte gPaletteFade
 _08148E0C: .4byte gUnknown_203F3D4
 _08148E10:
-	ldr r0, _08148E1C @ =gUnknown_3003F64
+	ldr r0, _08148E1C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08148E20
 	movs r0, 0
 	b _08148E22
 	.align 2, 0
-_08148E1C: .4byte gUnknown_3003F64
+_08148E1C: .4byte gReceivedRemoteLinkPlayers
 _08148E20:
 	movs r0, 0x1
 _08148E22:

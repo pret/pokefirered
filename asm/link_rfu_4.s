@@ -1649,7 +1649,7 @@ _081430B2:
 	strb r0, [r5, 0x8]
 	b _081435C6
 _081430B8:
-	ldr r0, _081430D0 @ =gUnknown_3003F64
+	ldr r0, _081430D0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081430D4
@@ -1660,7 +1660,7 @@ _081430B8:
 	bl mevent_srv_ish_do_init
 	b _081435C6
 	.align 2, 0
-_081430D0: .4byte gUnknown_3003F64
+_081430D0: .4byte gReceivedRemoteLinkPlayers
 _081430D4:
 	ldr r0, _081430E8 @ =gSpecialVar_Result
 	ldrh r0, [r0]
@@ -2160,7 +2160,7 @@ _08143492:
 	strb r0, [r5, 0x8]
 	b _081435C6
 _0814349C:
-	ldr r0, _081434B0 @ =gUnknown_3003F64
+	ldr r0, _081434B0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081434B4
@@ -2170,7 +2170,7 @@ _0814349C:
 	strb r0, [r5, 0x8]
 	b _081435C6
 	.align 2, 0
-_081434B0: .4byte gUnknown_3003F64
+_081434B0: .4byte gReceivedRemoteLinkPlayers
 _081434B4:
 	ldr r0, _081434CC @ =gSpecialVar_Result
 	ldrh r0, [r0]

@@ -1490,7 +1490,7 @@ _0807E6D4:
 	strh r0, [r4]
 	b _0807E6F4
 _0807E6DC:
-	ldr r0, _0807E6FC @ =gUnknown_3003F64
+	ldr r0, _0807E6FC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807E6F4
@@ -1504,7 +1504,7 @@ _0807E6F4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E6FC: .4byte gUnknown_3003F64
+_0807E6FC: .4byte gReceivedRemoteLinkPlayers
 _0807E700: .4byte sub_805671C
 	thumb_func_end sub_807E678
 

@@ -1034,7 +1034,7 @@ sub_8080F78: @ 8080F78
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _08080FAC @ =gUnknown_3003F64
+	ldr r0, _08080FAC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08080FA6
@@ -1055,7 +1055,7 @@ _08080FA6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080FAC: .4byte gUnknown_3003F64
+_08080FAC: .4byte gReceivedRemoteLinkPlayers
 _08080FB0: .4byte gTasks
 	thumb_func_end sub_8080F78
 
@@ -1472,7 +1472,7 @@ sub_80812D8: @ 80812D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08081308 @ =gUnknown_3003F64
+	ldr r0, _08081308 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08081300
@@ -1490,7 +1490,7 @@ _08081300:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081308: .4byte gUnknown_3003F64
+_08081308: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_80812D8
 
 	thumb_func_start sub_808130C
@@ -1567,7 +1567,7 @@ _0808139C:
 	bl sub_800AAC0
 	b _080813AA
 _080813A2:
-	ldr r0, _080813B4 @ =gUnknown_3003F64
+	ldr r0, _080813B4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 _080813A6:
 	cmp r0, 0
@@ -1578,7 +1578,7 @@ _080813AA:
 	strh r0, [r4, 0x8]
 	b _0808143A
 	.align 2, 0
-_080813B4: .4byte gUnknown_3003F64
+_080813B4: .4byte gReceivedRemoteLinkPlayers
 _080813B8:
 	ldr r0, _080813CC @ =gLinkPlayers
 	ldr r0, [r0, 0x4]
@@ -1936,7 +1936,7 @@ sub_8081668: @ 8081668
 	movs r5, 0x1
 	eors r0, r5
 	bl sub_80CD98C
-	ldr r0, _080816C0 @ =gUnknown_3003F3C
+	ldr r0, _080816C0 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808170A
@@ -1952,7 +1952,7 @@ _080816B0: .4byte gBattleTypeFlags
 _080816B4: .4byte 0x0000ffdf
 _080816B8: .4byte gSpecialVar_0x8004
 _080816BC: .4byte gUnknown_300502C
-_080816C0: .4byte gUnknown_3003F3C
+_080816C0: .4byte gWirelessCommType
 _080816C4: .4byte gUnknown_2023E8A
 _080816C8:
 	ldr r4, _080816E8 @ =gLinkPlayers
@@ -2207,7 +2207,7 @@ _080818B8:
 	.align 2, 0
 _080818C0: .4byte gUnknown_2031DA4
 _080818C4:
-	ldr r0, _080818E0 @ =gUnknown_3003F64
+	ldr r0, _080818E0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080818D8
@@ -2220,7 +2220,7 @@ _080818D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080818E0: .4byte gUnknown_3003F64
+_080818E0: .4byte gReceivedRemoteLinkPlayers
 _080818E4: .4byte sub_804C718
 	thumb_func_end sub_8081850
 
@@ -2299,7 +2299,7 @@ _08081970:
 	thumb_func_start sub_8081978
 sub_8081978: @ 8081978
 	push {lr}
-	ldr r0, _0808198C @ =gUnknown_3003F3C
+	ldr r0, _0808198C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08081994
@@ -2307,7 +2307,7 @@ sub_8081978: @ 8081978
 	bl sub_8081828
 	b _0808199A
 	.align 2, 0
-_0808198C: .4byte gUnknown_3003F3C
+_0808198C: .4byte gWirelessCommType
 _08081990: .4byte sub_80818E8
 _08081994:
 	ldr r0, _080819A0 @ =sub_8081850
@@ -2347,7 +2347,7 @@ sub_80819C8: @ 80819C8
 	ldr r2, _080819E8 @ =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _080819EC @ =gUnknown_3003F3C
+	ldr r0, _080819EC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080819F4
@@ -2357,7 +2357,7 @@ sub_80819C8: @ 80819C8
 	.align 2, 0
 _080819E4: .4byte gLinkType
 _080819E8: .4byte 0x00002211
-_080819EC: .4byte gUnknown_3003F3C
+_080819EC: .4byte gWirelessCommType
 _080819F0: .4byte sub_8081454
 _080819F4:
 	ldr r0, _08081A00 @ =sub_8081318
@@ -2465,7 +2465,7 @@ sub_8081A90: @ 8081A90
 	adds r0, r4, 0
 	bl DestroyTask
 _08081AC2:
-	ldr r0, _08081AE0 @ =gUnknown_3003F64
+	ldr r0, _08081AE0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08081AD0
@@ -2478,7 +2478,7 @@ _08081AD0:
 	.align 2, 0
 _08081AD8: .4byte gTasks
 _08081ADC: .4byte c2_800ACD4
-_08081AE0: .4byte gUnknown_3003F64
+_08081AE0: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_8081A90
 
 	thumb_func_start sub_8081AE4
@@ -2486,7 +2486,7 @@ sub_8081AE4: @ 8081AE4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08081B04 @ =gUnknown_3003F64
+	ldr r0, _08081B04 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08081AFC
@@ -2498,7 +2498,7 @@ _08081AFC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081B04: .4byte gUnknown_3003F64
+_08081B04: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_8081AE4
 
 	thumb_func_start sub_8081B08

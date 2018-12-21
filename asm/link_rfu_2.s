@@ -1470,12 +1470,12 @@ _080F91B0:
 	cmp r4, 0
 	bne _080F91CC
 	bl sub_80F8DC0
-	ldr r0, _080F91C8 @ =gUnknown_3003F64
+	ldr r0, _080F91C8 @ =gReceivedRemoteLinkPlayers
 	strb r4, [r0]
 	b _080F91F6
 	.align 2, 0
 _080F91C4: .4byte gUnknown_3005E10
-_080F91C8: .4byte gUnknown_3003F64
+_080F91C8: .4byte gReceivedRemoteLinkPlayers
 _080F91CC:
 	bl sub_80F8FD4
 	ldr r0, _080F91E4 @ =gUnknown_3005450
@@ -1972,7 +1972,7 @@ _080F9538:
 	bl sub_80FB9E4
 _080F95B0:
 	bl rfu_clearAllSlot
-	ldr r1, _080F9650 @ =gUnknown_3003F64
+	ldr r1, _080F9650 @ =gReceivedRemoteLinkPlayers
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _080F9644 @ =gUnknown_3005450
@@ -2043,7 +2043,7 @@ _080F9640: .4byte gUnknown_3005E10
 _080F9644: .4byte gUnknown_3005450
 _080F9648: .4byte 0x0000099c
 _080F964C: .4byte gUnknown_3007460
-_080F9650: .4byte gUnknown_3003F64
+_080F9650: .4byte gReceivedRemoteLinkPlayers
 _080F9654: .4byte 0x00000988
 _080F9658: .4byte gUnknown_3003F50
 	thumb_func_end sub_80F9514
@@ -2240,7 +2240,7 @@ _080F97B4: .4byte 0x000008f6
 	thumb_func_start rfu_func_080F97B8
 rfu_func_080F97B8: @ 80F97B8
 	push {lr}
-	ldr r0, _080F97F0 @ =gUnknown_3003F64
+	ldr r0, _080F97F0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080F97EA
@@ -2267,7 +2267,7 @@ _080F97EA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F97F0: .4byte gUnknown_3003F64
+_080F97F0: .4byte gReceivedRemoteLinkPlayers
 _080F97F4: .4byte gUnknown_3005028
 _080F97F8: .4byte gLinkTransferringData
 _080F97FC: .4byte gUnknown_3001188
@@ -2429,7 +2429,7 @@ _080F9902:
 	ldrb r0, [r4, 0xC]
 	cmp r0, 0
 	bne _080F9914
-	ldr r0, _080F9940 @ =gUnknown_3003F64
+	ldr r0, _080F9940 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080F9914
@@ -2457,7 +2457,7 @@ _080F9924:
 	b _080F9BF8
 	.align 2, 0
 _080F993C: .4byte gUnknown_3005450
-_080F9940: .4byte gUnknown_3003F64
+_080F9940: .4byte gReceivedRemoteLinkPlayers
 _080F9944: .4byte gUnknown_3007460
 _080F9948: .4byte gUnknown_3003ED2
 _080F994C: .4byte gUnknown_3003ED4
@@ -2606,7 +2606,7 @@ _080F9A4C:
 	beq _080F9A6E
 	b _080F9BF8
 _080F9A6E:
-	ldr r0, _080F9A98 @ =gUnknown_3003F64
+	ldr r0, _080F9A98 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F9A78
@@ -2625,7 +2625,7 @@ _080F9A88: .4byte gUnknown_3005450
 _080F9A8C: .4byte gBlockRecvBuffer
 _080F9A90: .4byte gUnknown_3003ED0
 _080F9A94: .4byte gUnknown_843EBD4
-_080F9A98: .4byte gUnknown_3003F64
+_080F9A98: .4byte gReceivedRemoteLinkPlayers
 _080F9A9C:
 	ldr r2, _080F9AB8 @ =gUnknown_843EC64
 	ldr r3, _080F9ABC @ =gUnknown_3003ED2
@@ -2679,7 +2679,7 @@ _080F9B00:
 	ldrb r2, [r7, 0xC]
 	cmp r2, 0
 	bne _080F9B68
-	ldr r3, _080F9B50 @ =gUnknown_3003F64
+	ldr r3, _080F9B50 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r3]
 	mov r6, r8
 	adds r6, 0x1
@@ -2713,7 +2713,7 @@ _080F9B38:
 	b _080F9BF8
 	.align 2, 0
 _080F9B4C: .4byte gUnknown_3005450
-_080F9B50: .4byte gUnknown_3003F64
+_080F9B50: .4byte gReceivedRemoteLinkPlayers
 _080F9B54: .4byte gUnknown_3003ED2
 _080F9B58: .4byte gUnknown_3007460
 _080F9B5C: .4byte gUnknown_3003ED4
@@ -3482,7 +3482,7 @@ sub_80FA114: @ 80FA114
 	push {lr}
 	bl rfu_clearAllSlot
 	bl sub_80FD52C
-	ldr r1, _080FA138 @ =gUnknown_3003F64
+	ldr r1, _080FA138 @ =gReceivedRemoteLinkPlayers
 	movs r0, 0
 	strb r0, [r1]
 	ldr r2, _080FA13C @ =gUnknown_3005450
@@ -3495,7 +3495,7 @@ sub_80FA114: @ 80FA114
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FA138: .4byte gUnknown_3003F64
+_080FA138: .4byte gReceivedRemoteLinkPlayers
 _080FA13C: .4byte gUnknown_3005450
 	thumb_func_end sub_80FA114
 
@@ -4515,7 +4515,7 @@ _080FA8B4:
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0x1
 	bne _080FA8F4
-	ldr r0, _080FA8CC @ =gUnknown_3003F64
+	ldr r0, _080FA8CC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080FA8D0
@@ -4524,7 +4524,7 @@ _080FA8B4:
 	bl sub_80F9D04
 	b _080FA8D8
 	.align 2, 0
-_080FA8CC: .4byte gUnknown_3003F64
+_080FA8CC: .4byte gReceivedRemoteLinkPlayers
 _080FA8D0:
 	movs r0, 0xEE
 	lsls r0, 7
@@ -4609,7 +4609,7 @@ _080FA968: .4byte gTasks
 _080FA96C:
 	adds r0, r6, 0
 	bl DestroyTask
-	ldr r1, _080FA9C4 @ =gUnknown_3003F64
+	ldr r1, _080FA9C4 @ =gReceivedRemoteLinkPlayers
 	movs r0, 0x1
 	strb r0, [r1]
 	movs r0, 0x9A
@@ -4652,7 +4652,7 @@ _080FA9BC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FA9C4: .4byte gUnknown_3003F64
+_080FA9C4: .4byte gReceivedRemoteLinkPlayers
 _080FA9C8: .4byte 0x0000099e
 _080FA9CC: .4byte 0x0000099d
 	thumb_func_end sub_80FA834
@@ -5123,7 +5123,7 @@ _080FAD66:
 	bl sub_80FA9FC
 	movs r0, 0
 	bl ResetBlockReceivedFlag
-	ldr r0, _080FAD94 @ =gUnknown_3003F64
+	ldr r0, _080FAD94 @ =gReceivedRemoteLinkPlayers
 	strb r4, [r0]
 	adds r0, r5, 0
 	bl DestroyTask
@@ -5133,7 +5133,7 @@ _080FAD8A:
 	bx r0
 	.align 2, 0
 _080FAD90: .4byte gBlockRecvBuffer
-_080FAD94: .4byte gUnknown_3003F64
+_080FAD94: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_80FACF0
 
 	thumb_func_start sub_80FAD98
@@ -5155,7 +5155,7 @@ sub_80FAD98: @ 80FAD98
 	ldr r0, _080FAE1C @ =sub_814208C
 	cmp r1, r0
 	bne _080FADC0
-	ldr r1, _080FAE20 @ =gUnknown_3003F3C
+	ldr r1, _080FAE20 @ =gWirelessCommType
 	movs r0, 0x2
 	strb r0, [r1]
 _080FADC0:
@@ -5200,7 +5200,7 @@ _080FAE10: .4byte gUnknown_3005450
 _080FAE14: .4byte gUnknown_3005E10
 _080FAE18: .4byte gMain
 _080FAE1C: .4byte sub_814208C
-_080FAE20: .4byte gUnknown_3003F3C
+_080FAE20: .4byte gWirelessCommType
 _080FAE24: .4byte c2_800ACD4
 _080FAE28: .4byte 0x0000069e
 _080FAE2C: .4byte 0x000008d2
@@ -5871,7 +5871,7 @@ _080FB2E4:
 	bics r3, r2
 	adds r2, r3, 0
 	strb r2, [r1]
-	ldr r0, _080FB320 @ =gUnknown_3003F64
+	ldr r0, _080FB320 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080FB328
@@ -5884,7 +5884,7 @@ _080FB2E4:
 _080FB314: .4byte gUnknown_3005450
 _080FB318: .4byte 0x0000099a
 _080FB31C: .4byte gUnknown_3005E10
-_080FB320: .4byte gUnknown_3003F64
+_080FB320: .4byte gReceivedRemoteLinkPlayers
 _080FB324:
 	bl sub_80FB174
 _080FB328:
@@ -6101,7 +6101,7 @@ _080FB4BC:
 	movs r1, 0x5
 	movs r2, 0x5
 	bl nullsub_87
-	ldr r0, _080FB4E4 @ =gUnknown_3003F64
+	ldr r0, _080FB4E4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080FB556
@@ -6112,7 +6112,7 @@ _080FB4BC:
 _080FB4D8: .4byte gUnknown_3005450
 _080FB4DC: .4byte 0x0000093e
 _080FB4E0: .4byte gUnknown_843EDF8
-_080FB4E4: .4byte gUnknown_3003F64
+_080FB4E4: .4byte gReceivedRemoteLinkPlayers
 _080FB4E8:
 	ldr r0, _080FB4FC @ =gUnknown_3005450
 	adds r0, 0xF0
@@ -6635,7 +6635,7 @@ _080FB8D8:
 	ldrb r0, [r2, 0xC]
 	cmp r0, 0x1
 	bne _080FB916
-	ldr r0, _080FB904 @ =gUnknown_3003F64
+	ldr r0, _080FB904 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080FB934
@@ -6653,7 +6653,7 @@ _080FB8D8:
 	b _080FB934
 	.align 2, 0
 _080FB900: .4byte gUnknown_3005450
-_080FB904: .4byte gUnknown_3003F64
+_080FB904: .4byte gReceivedRemoteLinkPlayers
 _080FB908: .4byte 0x0000099a
 _080FB90C: .4byte gUnknown_3005E10
 _080FB910:
@@ -6665,7 +6665,7 @@ _080FB916:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _080FB934
-	ldr r0, _080FB968 @ =gUnknown_3003F64
+	ldr r0, _080FB968 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080FB934
@@ -6699,7 +6699,7 @@ _080FB95A:
 	b _080FB9C2
 	.align 2, 0
 _080FB964: .4byte 0x0000099c
-_080FB968: .4byte gUnknown_3003F64
+_080FB968: .4byte gReceivedRemoteLinkPlayers
 _080FB96C: .4byte gUnknown_3007460
 _080FB970: .4byte gUnknown_3005E10
 _080FB974: .4byte sub_80F8B34
@@ -9926,7 +9926,7 @@ sub_80FD1A0: @ 80FD1A0
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x20
-	ldr r0, _080FD1C4 @ =gUnknown_3003F3C
+	ldr r0, _080FD1C4 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080FD1B6
@@ -9938,7 +9938,7 @@ _080FD1B6:
 	movs r4, 0
 	b _080FD22C
 	.align 2, 0
-_080FD1C4: .4byte gUnknown_3003F3C
+_080FD1C4: .4byte gWirelessCommType
 _080FD1C8:
 	lsls r2, r4, 2
 	mov r0, sp

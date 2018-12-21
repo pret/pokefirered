@@ -200,11 +200,11 @@ _08089194:
 	bl sub_808AF74
 	b _08089214
 _0808919A:
-	ldr r0, _080891D0 @ =gUnknown_3003F3C
+	ldr r0, _080891D0 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080891B6
-	ldr r0, _080891D4 @ =gUnknown_3003F64
+	ldr r0, _080891D4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080891B6
@@ -224,8 +224,8 @@ _080891B6:
 	bl SetVBlankCallback
 	b _08089214
 	.align 2, 0
-_080891D0: .4byte gUnknown_3003F3C
-_080891D4: .4byte gUnknown_3003F64
+_080891D0: .4byte gWirelessCommType
+_080891D4: .4byte gReceivedRemoteLinkPlayers
 _080891D8: .4byte sub_8088FF0
 _080891DC:
 	bl UpdatePaletteFade
@@ -266,7 +266,7 @@ _08089218:
 	.align 2, 0
 _08089220: .4byte gUnknown_20397A4
 _08089224:
-	ldr r0, _08089270 @ =gUnknown_3003F64
+	ldr r0, _08089270 @ =gReceivedRemoteLinkPlayers
 	ldrb r5, [r0]
 	cmp r5, 0
 	bne _0808924A
@@ -301,7 +301,7 @@ _0808924A:
 	strb r0, [r1]
 	b _08089416
 	.align 2, 0
-_08089270: .4byte gUnknown_3003F64
+_08089270: .4byte gReceivedRemoteLinkPlayers
 _08089274: .4byte 0x00007bce
 _08089278: .4byte gMain
 _0808927C: .4byte gUnknown_20397A4
@@ -312,7 +312,7 @@ _08089280:
 	bne _0808928A
 	b _08089416
 _0808928A:
-	ldr r0, _080892B0 @ =gUnknown_3003F64
+	ldr r0, _080892B0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080892A4
@@ -331,7 +331,7 @@ _080892A4:
 	str r1, [sp]
 	b _080893C8
 	.align 2, 0
-_080892B0: .4byte gUnknown_3003F64
+_080892B0: .4byte gReceivedRemoteLinkPlayers
 _080892B4: .4byte gUnknown_20397A4
 _080892B8:
 	bl sub_808B1FC
@@ -361,7 +361,7 @@ _080892E4:
 	ands r0, r1
 	cmp r0, 0
 	beq _08089344
-	ldr r0, _08089320 @ =gUnknown_3003F64
+	ldr r0, _08089320 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08089324
@@ -373,7 +373,7 @@ _080892E4:
 	cmp r0, 0x1
 	beq _08089364
 _08089308:
-	ldr r0, _08089320 @ =gUnknown_3003F64
+	ldr r0, _08089320 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08089324
@@ -384,7 +384,7 @@ _08089308:
 	b _080893C8
 	.align 2, 0
 _0808931C: .4byte gMain
-_08089320: .4byte gUnknown_3003F64
+_08089320: .4byte gReceivedRemoteLinkPlayers
 _08089324:
 	movs r0, 0xA
 	bl sub_812B1F0
@@ -403,7 +403,7 @@ _08089344:
 	ands r0, r1
 	cmp r0, 0
 	beq _08089416
-	ldr r0, _0808936C @ =gUnknown_3003F64
+	ldr r0, _0808936C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08089370
@@ -420,7 +420,7 @@ _08089364:
 	strb r0, [r1]
 	b _08089416
 	.align 2, 0
-_0808936C: .4byte gUnknown_3003F64
+_0808936C: .4byte gReceivedRemoteLinkPlayers
 _08089370:
 	movs r0, 0x1
 	negs r0, r0
@@ -454,7 +454,7 @@ _0808937A:
 _080893B0: .4byte gUnknown_8419D89
 _080893B4: .4byte gUnknown_20397A4
 _080893B8:
-	ldr r0, _080893DC @ =gUnknown_3003F64
+	ldr r0, _080893DC @ =gReceivedRemoteLinkPlayers
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _08089416
@@ -472,7 +472,7 @@ _080893C8:
 	strb r0, [r1]
 	b _08089416
 	.align 2, 0
-_080893DC: .4byte gUnknown_3003F64
+_080893DC: .4byte gReceivedRemoteLinkPlayers
 _080893E0: .4byte gUnknown_20397A4
 _080893E4:
 	bl UpdatePaletteFade
@@ -1418,7 +1418,7 @@ sub_8089B64: @ 8089B64
 	movs r0, 0x40
 	movs r1, 0xF0
 	bl SetGpuReg
-	ldr r0, _08089BC8 @ =gUnknown_3003F64
+	ldr r0, _08089BC8 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08089BCC
@@ -1426,7 +1426,7 @@ sub_8089B64: @ 8089B64
 	bl EnableInterrupts
 	b _08089BD2
 	.align 2, 0
-_08089BC8: .4byte gUnknown_3003F64
+_08089BC8: .4byte gReceivedRemoteLinkPlayers
 _08089BCC:
 	movs r0, 0x3
 	bl EnableInterrupts
@@ -4482,7 +4482,7 @@ _0808B4B2:
 	ldrb r0, [r1, 0x4]
 	adds r0, 0x1
 	strb r0, [r1, 0x4]
-	ldr r0, _0808B4D4 @ =gUnknown_3003F64
+	ldr r0, _0808B4D4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808B3DC
@@ -4494,7 +4494,7 @@ _0808B4C4:
 	bx r1
 	.align 2, 0
 _0808B4D0: .4byte gUnknown_20397A4
-_0808B4D4: .4byte gUnknown_3003F64
+_0808B4D4: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_808B3C4
 
 	thumb_func_start sub_808B4D8
@@ -4946,7 +4946,7 @@ sub_808B838: @ 808B838
 	bl InUnionRoom
 	cmp r0, 0x1
 	bne _0808B8A4
-	ldr r0, _0808B898 @ =gUnknown_3003F64
+	ldr r0, _0808B898 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0808B8A4
@@ -4970,7 +4970,7 @@ _0808B888: .4byte gUnknown_83CD8F4
 _0808B88C: .4byte gUnknown_20397A4
 _0808B890: .4byte 0x0000045c
 _0808B894: .4byte 0x00000457
-_0808B898: .4byte gUnknown_3003F64
+_0808B898: .4byte gReceivedRemoteLinkPlayers
 _0808B89C: .4byte 0x000004ab
 _0808B8A0: .4byte gUnknown_83CD8EC
 _0808B8A4:

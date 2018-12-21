@@ -839,7 +839,7 @@ _080CE4C0: .4byte gSprites
 _080CE4C4: .4byte nullsub_10
 _080CE4C8: .4byte gMain
 _080CE4CC:
-	ldr r0, _080CE4FC @ =gUnknown_3003F3C
+	ldr r0, _080CE4FC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CE4E0
@@ -864,7 +864,7 @@ _080CE4F4:
 	strb r0, [r1]
 	b _080CE534
 	.align 2, 0
-_080CE4FC: .4byte gUnknown_3003F3C
+_080CE4FC: .4byte gWirelessCommType
 _080CE500: .4byte gMain
 _080CE504:
 	movs r0, 0x1
@@ -3687,7 +3687,7 @@ _080CFDAC:
 	beq _080CFDBA
 	b _080D003A
 _080CFDBA:
-	ldr r0, _080CFE18 @ =gUnknown_3003F3C
+	ldr r0, _080CFE18 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CFDC6
@@ -3725,7 +3725,7 @@ _080CFDC6:
 	b _080D003A
 	.align 2, 0
 _080CFE14: .4byte gPaletteFade
-_080CFE18: .4byte gUnknown_3003F3C
+_080CFE18: .4byte gWirelessCommType
 _080CFE1C: .4byte gPlayerParty
 _080CFE20: .4byte gTasks
 _080CFE24: .4byte gPlayerPartyCount

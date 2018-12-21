@@ -14,7 +14,7 @@ sub_81507FC: @ 81507FC
 	ldr r1, _081508A4 @ =gUnknown_3002044
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, _081508A8 @ =gUnknown_3003F64
+	ldr r0, _081508A8 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081508CC
@@ -81,7 +81,7 @@ sub_81507FC: @ 81507FC
 	b _081508D2
 	.align 2, 0
 _081508A4: .4byte gUnknown_3002044
-_081508A8: .4byte gUnknown_3003F64
+_081508A8: .4byte gReceivedRemoteLinkPlayers
 _081508AC: .4byte gUnknown_203F3E0
 _081508B0: .4byte 0x00003330
 _081508B4: .4byte 0x000032cc
@@ -389,7 +389,7 @@ _08150B16:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08150BFC
-	ldr r0, _08150B38 @ =gUnknown_3003F64
+	ldr r0, _08150B38 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08150BDC
@@ -399,7 +399,7 @@ _08150B16:
 	bl sub_80FCD74
 	b _08150BDC
 	.align 2, 0
-_08150B38: .4byte gUnknown_3003F64
+_08150B38: .4byte gReceivedRemoteLinkPlayers
 _08150B3C:
 	ldr r0, _08150B88 @ =gUnknown_203F3E0
 	ldr r0, [r0]
@@ -1633,7 +1633,7 @@ _081514CC:
 	strb r0, [r1, 0x10]
 	b _081514E4
 _081514D6:
-	ldr r0, _081514EC @ =gUnknown_3003F64
+	ldr r0, _081514EC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081514E4
@@ -1644,7 +1644,7 @@ _081514E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081514EC: .4byte gUnknown_3003F64
+_081514EC: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_8151488
 
 	thumb_func_start sub_81514F0
@@ -1852,7 +1852,7 @@ _0815169C:
 	bl sub_8154730
 	ldr r0, [r4]
 	bl sub_81508EC
-	ldr r0, _081516D8 @ =gUnknown_3003F64
+	ldr r0, _081516D8 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081516C2
@@ -1871,7 +1871,7 @@ _081516CC:
 	bx r0
 	.align 2, 0
 _081516D4: .4byte sub_81516DC
-_081516D8: .4byte gUnknown_3003F64
+_081516D8: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_815159C
 
 	thumb_func_start sub_81516DC
@@ -5743,7 +5743,7 @@ sub_81533C4: @ 81533C4
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _081533E4 @ =gUnknown_3003F64
+	ldr r0, _081533E4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081533F0
@@ -5756,7 +5756,7 @@ sub_81533C4: @ 81533C4
 	ldr r0, [r0]
 	b _081533F8
 	.align 2, 0
-_081533E4: .4byte gUnknown_3003F64
+_081533E4: .4byte gReceivedRemoteLinkPlayers
 _081533E8: .4byte gUnknown_203F3E0
 _081533EC: .4byte 0x000031a0
 _081533F0:

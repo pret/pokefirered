@@ -2330,11 +2330,11 @@ _0802F600:
 	thumb_func_start sub_802F610
 sub_802F610: @ 802F610
 	push {lr}
-	ldr r0, _0802F64C @ =gUnknown_3003F3C
+	ldr r0, _0802F64C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802F664
-	ldr r0, _0802F650 @ =gUnknown_3003F64
+	ldr r0, _0802F650 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802F694
@@ -2356,8 +2356,8 @@ sub_802F610: @ 802F610
 	bl FreeAllWindowBuffers
 	b _0802F694
 	.align 2, 0
-_0802F64C: .4byte gUnknown_3003F3C
-_0802F650: .4byte gUnknown_3003F64
+_0802F64C: .4byte gWirelessCommType
+_0802F650: .4byte gReceivedRemoteLinkPlayers
 _0802F654: .4byte gMain
 _0802F658: .4byte 0x00000439
 _0802F65C: .4byte gUnknown_3004F80
@@ -2408,7 +2408,7 @@ sub_802F6A8: @ 802F6A8
 	ands r0, r1
 	cmp r0, 0
 	beq _0802F6FC
-	ldr r0, _0802F6D8 @ =gUnknown_3003F3C
+	ldr r0, _0802F6D8 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802F6DC
@@ -2417,7 +2417,7 @@ sub_802F6A8: @ 802F6A8
 	.align 2, 0
 _0802F6D0: .4byte gPaletteFade
 _0802F6D4: .4byte gBattleTypeFlags
-_0802F6D8: .4byte gUnknown_3003F3C
+_0802F6D8: .4byte gWirelessCommType
 _0802F6DC:
 	bl sub_800AB9C
 _0802F6E0:

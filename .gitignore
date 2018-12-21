@@ -17,6 +17,7 @@
 sound/**/*.bin
 src/*.s
 tools/agbcc
+tools/binutils
 ld_script_ruby.txt
 ld_script_sapphire.txt
 *.map
@@ -39,4 +40,3 @@ build/
 .idea/
 *.DS_Store
 *.pl
-tools/

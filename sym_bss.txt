@@ -174,12 +174,9 @@ gUnknown_3002008: @ 3002008
 gUnknown_3002018: @ 3002018
 	.space 0x4
 
-gUnknown_300201C: @ 300201C
-	.space 0x4
+    .include "src/quest_log.o"
 
-gUnknown_3002020: @ 3002020
-	.space 0x4
-
+    .align 2
 gUnknown_3002024: @ 3002024
 	.space 0x4
 

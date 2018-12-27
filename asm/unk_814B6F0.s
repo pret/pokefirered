@@ -67,11 +67,11 @@ sub_814B754: @ 814B754
 	adds r4, r0, 0
 	movs r0, 0
 	mov r8, r0
-	ldr r0, _0814B784 @ =gUnknown_3003F64
+	ldr r0, _0814B784 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0814B772
-	ldr r0, _0814B788 @ =gUnknown_3003F3C
+	ldr r0, _0814B788 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0814B790
@@ -84,8 +84,8 @@ _0814B772:
 	strh r1, [r0, 0x12]
 	b _0814B7DC
 	.align 2, 0
-_0814B784: .4byte gUnknown_3003F64
-_0814B788: .4byte gUnknown_3003F3C
+_0814B784: .4byte gReceivedRemoteLinkPlayers
+_0814B788: .4byte gWirelessCommType
 _0814B78C: .4byte gUnknown_3005450
 _0814B790:
 	bl GetLinkPlayerCount
@@ -189,7 +189,7 @@ _0814B85C: .4byte sub_814BA98
 sub_814B860: @ 814B860
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r1, _0814B878 @ =gUnknown_203AD30
+	ldr r1, _0814B878 @ =gSpecialVar_ItemId
 	ldrh r0, [r1]
 	subs r0, 0x85
 	lsls r0, 16
@@ -200,7 +200,7 @@ sub_814B860: @ 814B860
 	strh r0, [r1]
 	b _0814B884
 	.align 2, 0
-_0814B878: .4byte gUnknown_203AD30
+_0814B878: .4byte gSpecialVar_ItemId
 _0814B87C:
 	ldrh r0, [r1]
 	movs r1, 0x1
@@ -211,7 +211,7 @@ _0814B884:
 	ldrb r0, [r2, 0x8]
 	lsls r0, 5
 	adds r0, r2, r0
-	ldr r1, _0814B8E4 @ =gUnknown_203AD30
+	ldr r1, _0814B8E4 @ =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	subs r1, 0x85
 	adds r0, 0xA4
@@ -250,7 +250,7 @@ _0814B884:
 	bx r0
 	.align 2, 0
 _0814B8E0: .4byte gUnknown_203F3DC
-_0814B8E4: .4byte gUnknown_203AD30
+_0814B8E4: .4byte gSpecialVar_ItemId
 _0814B8E8: .4byte sub_814BA98
 _0814B8EC: .4byte sub_814BA80
 	thumb_func_end sub_814B860
@@ -508,7 +508,7 @@ _0814BAC4:
 	lsls r1, r5, 3
 	subs r1, r5
 	lsls r1, 2
-	ldr r2, _0814BB2C @ =gUnknown_2022744
+	ldr r2, _0814BB2C @ =gLinkPlayers + 8
 	adds r1, r2
 	bl StringCopy
 	adds r4, r6, r4
@@ -555,7 +555,7 @@ _0814BB14:
 	beq _0814BB3A
 	b _0814BB46
 	.align 2, 0
-_0814BB2C: .4byte gUnknown_2022744
+_0814BB2C: .4byte gLinkPlayers + 8
 _0814BB30: .4byte gSaveBlock2Ptr
 _0814BB34:
 	cmp r0, 0x2

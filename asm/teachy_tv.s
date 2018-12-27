@@ -849,7 +849,7 @@ sub_815B274: @ 815B274
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0815B298 @ =gUnknown_2037AB8
+	ldr r0, _0815B298 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -863,7 +863,7 @@ sub_815B274: @ 815B274
 	bl SetMainCallback2
 	b _0815B2AC
 	.align 2, 0
-_0815B298: .4byte gUnknown_2037AB8
+_0815B298: .4byte gPaletteFade
 _0815B29C: .4byte gUnknown_203F450
 _0815B2A0:
 	bl sub_8055DC4
@@ -893,7 +893,7 @@ sub_815B2C0: @ 815B2C0
 	ldr r1, _0815B31C @ =gTasks+0x8
 	adds r6, r0, r1
 	bl sub_815B0CC
-	ldr r0, _0815B320 @ =gUnknown_2037AB8
+	ldr r0, _0815B320 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -915,7 +915,7 @@ sub_815B2C0: @ 815B2C0
 	beq _0815B30A
 	subs r0, r4, 0x6
 	ldr r1, [r0]
-	ldr r0, _0815B32C @ =sub_8107EB8
+	ldr r0, _0815B32C @ =UseFameCheckerFromMenu
 	cmp r1, r0
 	bne _0815B330
 _0815B30A:
@@ -929,10 +929,10 @@ _0815B30A:
 	b _0815B37A
 	.align 2, 0
 _0815B31C: .4byte gTasks+0x8
-_0815B320: .4byte gUnknown_2037AB8
+_0815B320: .4byte gPaletteFade
 _0815B324: .4byte gUnknown_203F44A
 _0815B328: .4byte gMain
-_0815B32C: .4byte sub_8107EB8
+_0815B32C: .4byte UseFameCheckerFromMenu
 _0815B330:
 	movs r0, 0x5
 	bl PlaySE
@@ -1864,7 +1864,7 @@ sub_815BA54: @ 815BA54
 	lsls r2, r1, 3
 	ldr r4, _0815BA8C @ =gTasks+0x8
 	adds r3, r2, r4
-	ldr r0, _0815BA90 @ =gUnknown_2037AB8
+	ldr r0, _0815BA90 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1887,7 +1887,7 @@ _0815BA86:
 	bx r0
 	.align 2, 0
 _0815BA8C: .4byte gTasks+0x8
-_0815BA90: .4byte gUnknown_2037AB8
+_0815BA90: .4byte gPaletteFade
 _0815BA94: .4byte gUnknown_8479390
 _0815BA98: .4byte gUnknown_203F444
 _0815BA9C: .4byte sub_815B4EC
@@ -2154,7 +2154,7 @@ sub_815BC90: @ 815BC90
 	ldr r1, _0815BCCC @ =gTasks+0x8
 	adds r5, r0, r1
 	bl sub_815B220
-	ldr r1, _0815BCD0 @ =gUnknown_20370C0
+	ldr r1, _0815BCD0 @ =gSpecialVar_0x8004
 	ldr r4, _0815BCD4 @ =gUnknown_203F444
 	ldrb r0, [r4, 0x5]
 	strh r0, [r1]
@@ -2172,7 +2172,7 @@ sub_815BC90: @ 815BC90
 	b _0815BCE2
 	.align 2, 0
 _0815BCCC: .4byte gTasks+0x8
-_0815BCD0: .4byte gUnknown_20370C0
+_0815BCD0: .4byte gSpecialVar_0x8004
 _0815BCD4: .4byte gUnknown_203F444
 _0815BCD8: .4byte gMain
 _0815BCDC: .4byte sub_815BD58

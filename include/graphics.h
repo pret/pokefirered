@@ -5,6 +5,8 @@
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
+#include "global.h"
+
 extern const u8 gInterfaceGfx_PokeBall[];
 extern const u8 gInterfacePal_PokeBall[];
 extern const u8 gInterfaceGfx_GreatBall[];
@@ -140,5 +142,12 @@ extern const u16 gUnknown_08DDA800[];
 extern const u8 gUnknown_08DDB020[];
 extern const u8 gUnknown_08DDB2C4[];
 extern const u16 gUnknown_08DDAFE0[];
+
+// fame_checker
+
+extern const u16 gFameCheckerBgPals[0x30];
+extern const u16 gFameCheckerBgTiles[0xa50];
+extern const u16 gFameCheckerBg3Tilemap[0x400];
+extern const u16 gFameCheckerBg2Tilemap[0x400];
 
 #endif //GUARD_GRAPHICS_H

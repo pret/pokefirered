@@ -464,7 +464,7 @@ _080E792A:
 	thumb_func_start sub_80E7930
 sub_80E7930: @ 80E7930
 	push {lr}
-	ldr r0, _080E7960 @ =gUnknown_2037AB8
+	ldr r0, _080E7960 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -487,7 +487,7 @@ _080E795A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E7960: .4byte gUnknown_2037AB8
+_080E7960: .4byte gPaletteFade
 _080E7964: .4byte gMain
 _080E7968: .4byte 0x00000439
 _080E796C: .4byte gUnknown_3004F80
@@ -536,7 +536,7 @@ _080E79B4: .4byte gActiveBattler
 	thumb_func_start sub_80E79B8
 sub_80E79B8: @ 80E79B8
 	push {r4,lr}
-	ldr r0, _080E79FC @ =gUnknown_2037AB8
+	ldr r0, _080E79FC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -568,7 +568,7 @@ _080E79F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E79FC: .4byte gUnknown_2037AB8
+_080E79FC: .4byte gPaletteFade
 _080E7A00: .4byte gUnknown_3004FE0
 _080E7A04: .4byte gActiveBattler
 _080E7A08: .4byte sub_80E7A14
@@ -584,7 +584,7 @@ sub_80E7A14: @ 80E7A14
 	ldr r0, _080E7A48 @ =sub_8011100
 	cmp r1, r0
 	bne _080E7A6A
-	ldr r0, _080E7A4C @ =gUnknown_2037AB8
+	ldr r0, _080E7A4C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -603,7 +603,7 @@ sub_80E7A14: @ 80E7A14
 	.align 2, 0
 _080E7A44: .4byte gMain
 _080E7A48: .4byte sub_8011100
-_080E7A4C: .4byte gUnknown_2037AB8
+_080E7A4C: .4byte gPaletteFade
 _080E7A50: .4byte gUnknown_203B0C0
 _080E7A54: .4byte gUnknown_203B0C1
 _080E7A58: .4byte gUnknown_203B0DC
@@ -622,7 +622,7 @@ _080E7A6A:
 	thumb_func_start sub_80E7A70
 sub_80E7A70: @ 80E7A70
 	push {lr}
-	ldr r0, _080E7AA8 @ =gUnknown_2037AB8
+	ldr r0, _080E7AA8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -646,7 +646,7 @@ sub_80E7A70: @ 80E7A70
 	bl sub_8107ECC
 	b _080E7AC0
 	.align 2, 0
-_080E7AA8: .4byte gUnknown_2037AB8
+_080E7AA8: .4byte gPaletteFade
 _080E7AAC: .4byte gUnknown_3004FE0
 _080E7AB0: .4byte gActiveBattler
 _080E7AB4: .4byte sub_80E7AC4
@@ -666,7 +666,7 @@ sub_80E7AC4: @ 80E7AC4
 	ldr r0, _080E7B18 @ =sub_8011100
 	cmp r1, r0
 	bne _080E7B42
-	ldr r0, _080E7B1C @ =gUnknown_2037AB8
+	ldr r0, _080E7B1C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -677,7 +677,7 @@ sub_80E7AC4: @ 80E7AC4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E7B34
-	ldr r0, _080E7B20 @ =gUnknown_203AD30
+	ldr r0, _080E7B20 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	cmp r0, 0xD
 	bne _080E7B34
@@ -700,14 +700,14 @@ sub_80E7AC4: @ 80E7AC4
 	.align 2, 0
 _080E7B14: .4byte gMain
 _080E7B18: .4byte sub_8011100
-_080E7B1C: .4byte gUnknown_2037AB8
-_080E7B20: .4byte gUnknown_203AD30
+_080E7B1C: .4byte gPaletteFade
+_080E7B20: .4byte gSpecialVar_ItemId
 _080E7B24: .4byte gBattleTypeFlags
 _080E7B28: .4byte gUnknown_3004FE0
 _080E7B2C: .4byte gActiveBattler
 _080E7B30: .4byte sub_80E8704
 _080E7B34:
-	ldr r0, _080E7B48 @ =gUnknown_203AD30
+	ldr r0, _080E7B48 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
@@ -716,7 +716,7 @@ _080E7B42:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E7B48: .4byte gUnknown_203AD30
+_080E7B48: .4byte gSpecialVar_ItemId
 	thumb_func_end sub_80E7AC4
 
 	thumb_func_start sub_80E7B4C
@@ -1731,7 +1731,7 @@ _080E8384:
 	.4byte _080E8500
 	.4byte _080E8530
 _080E83A8:
-	ldr r0, _080E83EC @ =gUnknown_2037AB8
+	ldr r0, _080E83EC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1763,9 +1763,9 @@ _080E83BA:
 	ldr r1, [r7]
 	b _080E8522
 	.align 2, 0
-_080E83EC: .4byte gUnknown_2037AB8
+_080E83EC: .4byte gPaletteFade
 _080E83F0:
-	ldr r0, _080E8404 @ =gUnknown_2037AB8
+	ldr r0, _080E8404 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1776,7 +1776,7 @@ _080E83FE:
 	bl sub_80EB30C
 	b _080E851E
 	.align 2, 0
-_080E8404: .4byte gUnknown_2037AB8
+_080E8404: .4byte gPaletteFade
 _080E8408:
 	ldr r0, _080E8418 @ =gUnknown_83FDAE2
 	bl BattleStringExpandPlaceholdersToDisplayedString
@@ -1823,7 +1823,7 @@ _080E8430:
 _080E8460: .4byte gBitTable
 _080E8464: .4byte gBattleStruct
 _080E8468:
-	ldr r0, _080E8484 @ =gUnknown_2037AB8
+	ldr r0, _080E8484 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1836,7 +1836,7 @@ _080E8468:
 	bl sub_80D87BC
 	b _080E851E
 	.align 2, 0
-_080E8484: .4byte gUnknown_2037AB8
+_080E8484: .4byte gPaletteFade
 _080E8488: .4byte gUnknown_83FDB92
 _080E848C: .4byte gDisplayedStringBattle
 _080E8490:
@@ -1873,7 +1873,7 @@ _080E8490:
 _080E84D0: .4byte gBitTable
 _080E84D4: .4byte gBattleStruct
 _080E84D8:
-	ldr r0, _080E84F4 @ =gUnknown_2037AB8
+	ldr r0, _080E84F4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1886,7 +1886,7 @@ _080E84D8:
 	bl sub_80D87BC
 	b _080E851E
 	.align 2, 0
-_080E84F4: .4byte gUnknown_2037AB8
+_080E84F4: .4byte gPaletteFade
 _080E84F8: .4byte gUnknown_83FDBEF
 _080E84FC: .4byte gDisplayedStringBattle
 _080E8500:
@@ -1915,7 +1915,7 @@ _080E8522:
 	.align 2, 0
 _080E852C: .4byte gBattleStruct
 _080E8530:
-	ldr r0, _080E8568 @ =gUnknown_2037AB8
+	ldr r0, _080E8568 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1940,7 +1940,7 @@ _080E855E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E8568: .4byte gUnknown_2037AB8
+_080E8568: .4byte gPaletteFade
 _080E856C: .4byte gBattleStruct
 	thumb_func_end sub_80E835C
 
@@ -2070,7 +2070,7 @@ _080E8634:
 	ldr r1, [r5]
 	b _080E86A6
 _080E865A:
-	ldr r0, _080E866C @ =gUnknown_2037AB8
+	ldr r0, _080E866C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2079,7 +2079,7 @@ _080E865A:
 	bl sub_80EB30C
 	b _080E86A2
 	.align 2, 0
-_080E866C: .4byte gUnknown_2037AB8
+_080E866C: .4byte gPaletteFade
 _080E8670:
 	adds r0, r2, 0
 	bl BattleStringExpandPlaceholdersToDisplayedString
@@ -2115,7 +2115,7 @@ _080E86A6:
 	.align 2, 0
 _080E86B0: .4byte gBattleStruct
 _080E86B4:
-	ldr r0, _080E86D8 @ =gUnknown_2037AB8
+	ldr r0, _080E86D8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2131,7 +2131,7 @@ _080E86B4:
 	bl WallyBufferExecCompleted
 	b _080E86E4
 	.align 2, 0
-_080E86D8: .4byte gUnknown_2037AB8
+_080E86D8: .4byte gPaletteFade
 _080E86DC: .4byte gActiveBattler
 _080E86E0:
 	bl OpponentBufferExecCompleted
@@ -2184,7 +2184,7 @@ _080E872C:
 	.4byte _080E8848
 	.4byte _080E8880
 _080E8748:
-	ldr r0, _080E8780 @ =gUnknown_2037AB8
+	ldr r0, _080E8780 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2211,10 +2211,10 @@ _080E875A:
 	ldr r1, [r5]
 	b _080E886C
 	.align 2, 0
-_080E8780: .4byte gUnknown_2037AB8
+_080E8780: .4byte gPaletteFade
 _080E8784: .4byte gActiveBattler
 _080E8788:
-	ldr r0, _080E87C8 @ =gUnknown_2037AB8
+	ldr r0, _080E87C8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2247,10 +2247,10 @@ _080E879A:
 	ldr r1, [r5]
 	b _080E886C
 	.align 2, 0
-_080E87C8: .4byte gUnknown_2037AB8
+_080E87C8: .4byte gPaletteFade
 _080E87CC: .4byte gBitTable
 _080E87D0:
-	ldr r0, _080E87E4 @ =gUnknown_2037AB8
+	ldr r0, _080E87E4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2259,7 +2259,7 @@ _080E87D0:
 	bl sub_80EB30C
 	b _080E8868
 	.align 2, 0
-_080E87E4: .4byte gUnknown_2037AB8
+_080E87E4: .4byte gPaletteFade
 _080E87E8:
 	ldr r0, _080E87F8 @ =gUnknown_83FDCD2
 	bl BattleStringExpandPlaceholdersToDisplayedString
@@ -2304,7 +2304,7 @@ _080E8800:
 _080E8840: .4byte gBitTable
 _080E8844: .4byte gBattleStruct
 _080E8848:
-	ldr r0, _080E8878 @ =gUnknown_2037AB8
+	ldr r0, _080E8878 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2329,10 +2329,10 @@ _080E886C:
 	strb r0, [r1]
 	b _080E88AA
 	.align 2, 0
-_080E8878: .4byte gUnknown_2037AB8
+_080E8878: .4byte gPaletteFade
 _080E887C: .4byte gBattleStruct
 _080E8880:
-	ldr r0, _080E88B4 @ =gUnknown_2037AB8
+	ldr r0, _080E88B4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2341,7 +2341,7 @@ _080E8880:
 	cmp r4, 0
 	bne _080E88AA
 	bl sub_80EB524
-	ldr r0, _080E88B8 @ =gUnknown_203AD30
+	ldr r0, _080E88B8 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
@@ -2356,8 +2356,8 @@ _080E88AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E88B4: .4byte gUnknown_2037AB8
-_080E88B8: .4byte gUnknown_203AD30
+_080E88B4: .4byte gPaletteFade
+_080E88B8: .4byte gSpecialVar_ItemId
 _080E88BC: .4byte gBattleStruct
 	thumb_func_end sub_80E8704
 

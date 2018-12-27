@@ -1,6 +1,8 @@
 #ifndef GUARD_METATILE_BEHAVIOR
 #define GUARD_METATILE_BEHAVIOR
 
+#include "global.h"
+
 bool8 MetatileBehavior_UnusedReturnTrue(u8 metatileBehavior);
 bool8 MetatileBehavior_IsJumpEast(u8 metatileBehavior);
 bool8 MetatileBehavior_IsJumpWest(u8 metatileBehavior);

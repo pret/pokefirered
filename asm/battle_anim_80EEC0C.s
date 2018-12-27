@@ -154,15 +154,15 @@ sub_80EEC0C: @ 80EEC0C
 	bl sub_80752A0
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080EEDD8 @ =gUnknown_8D2EC70
+	ldr r1, _080EEDD8 @ =gFile_graphics_battle_anims_masks_unknown_D2EC24_tilemap
 	bl sub_807543C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, _080EEDDC @ =gUnknown_8D2EC24
+	ldr r1, _080EEDDC @ =gFile_graphics_battle_anims_masks_unknown_D2EC24_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80753B4
-	ldr r0, _080EEDE0 @ =gUnknown_8D2DF78
+	ldr r0, _080EEDE0 @ =gFile_graphics_battle_anims_masks_cure_bubbles_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -212,9 +212,9 @@ _080EEDC8: .4byte 0x00003f42
 _080EEDCC: .4byte gUnknown_3004FF0
 _080EEDD0: .4byte gSprites
 _080EEDD4: .4byte SpriteCallbackDummy
-_080EEDD8: .4byte gUnknown_8D2EC70
-_080EEDDC: .4byte gUnknown_8D2EC24
-_080EEDE0: .4byte gUnknown_8D2DF78
+_080EEDD8: .4byte gFile_graphics_battle_anims_masks_unknown_D2EC24_tilemap
+_080EEDDC: .4byte gFile_graphics_battle_anims_masks_unknown_D2EC24_sheet
+_080EEDE0: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_palette
 _080EEDE4: .4byte gUnknown_2022978
 _080EEDE8: .4byte gUnknown_202297A
 _080EEDEC: .4byte gTasks
@@ -495,7 +495,7 @@ sub_80EEFC8: @ 80EEFC8
 	lsls r4, 4
 	orrs r4, r3
 	lsls r0, 1
-	ldr r1, _080EF0B0 @ =gUnknown_20371F8
+	ldr r1, _080EF0B0 @ =gPlttBufferUnfaded
 	mov r8, r1
 	add r0, r8
 	mov r2, r9
@@ -557,7 +557,7 @@ _080EF0A0: .4byte gUnknown_3004FF0
 _080EF0A4: .4byte gSprites
 _080EF0A8: .4byte 0x0000d709
 _080EF0AC: .4byte 0x0000d70a
-_080EF0B0: .4byte gUnknown_20371F8
+_080EF0B0: .4byte gPlttBufferUnfaded
 	thumb_func_end sub_80EEFC8
 
 	thumb_func_start sub_80EF0B4
@@ -2684,7 +2684,7 @@ _080F014E:
 	strh r0, [r4, 0x2E]
 	b _080F017C
 _080F0156:
-	ldr r0, _080F0184 @ =gUnknown_2037AB8
+	ldr r0, _080F0184 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2707,7 +2707,7 @@ _080F017C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F0184: .4byte gUnknown_2037AB8
+_080F0184: .4byte gPaletteFade
 _080F0188: .4byte sub_80F018C
 	thumb_func_end sub_80F00A4
 
@@ -4953,7 +4953,7 @@ sub_80F12E0: @ 80F12E0
 _080F1330: .4byte gTasks
 _080F1334: .4byte gUnknown_840C1C4
 _080F1338:
-	ldr r0, _080F1368 @ =gUnknown_2037AB8
+	ldr r0, _080F1368 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4977,7 +4977,7 @@ _080F1360:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F1368: .4byte gUnknown_2037AB8
+_080F1368: .4byte gPaletteFade
 _080F136C: .4byte 0x00007fff
 	thumb_func_end sub_80F12E0
 
@@ -4987,7 +4987,7 @@ sub_80F1370: @ 80F1370
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080F13B0 @ =gUnknown_2037AB8
+	ldr r0, _080F13B0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -5016,7 +5016,7 @@ _080F13A8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F13B0: .4byte gUnknown_2037AB8
+_080F13B0: .4byte gPaletteFade
 _080F13B4: .4byte gTasks
 _080F13B8: .4byte 0x00007fff
 _080F13BC: .4byte sub_80F13C0

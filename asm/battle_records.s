@@ -129,7 +129,7 @@ _080CD338:
 	bl sub_80CD628
 	ldr r0, _080CD350 @ =sub_80CD38C
 	bl SetVBlankCallback
-	ldr r0, _080CD354 @ =gUnknown_20370C0
+	ldr r0, _080CD354 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080CD358
@@ -137,7 +137,7 @@ _080CD338:
 	b _080CD35C
 	.align 2, 0
 _080CD350: .4byte sub_80CD38C
-_080CD354: .4byte gUnknown_20370C0
+_080CD354: .4byte gSpecialVar_0x8004
 _080CD358:
 	bl sub_80CDBE4
 _080CD35C:
@@ -189,7 +189,7 @@ sub_80CD3B8: @ 80CD3B8
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080CD3DC @ =gUnknown_2037AB8
+	ldr r0, _080CD3DC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -206,7 +206,7 @@ _080CD3D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CD3DC: .4byte gUnknown_2037AB8
+_080CD3DC: .4byte gPaletteFade
 _080CD3E0: .4byte gTasks
 _080CD3E4: .4byte sub_80CD3E8
 	thumb_func_end sub_80CD3B8
@@ -281,7 +281,7 @@ sub_80CD460: @ 80CD460
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080CD498 @ =gUnknown_2037AB8
+	ldr r0, _080CD498 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -302,7 +302,7 @@ _080CD490:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CD498: .4byte gUnknown_2037AB8
+_080CD498: .4byte gPaletteFade
 _080CD49C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _080CD4A0: .4byte gUnknown_2039A1C
 	thumb_func_end sub_80CD460

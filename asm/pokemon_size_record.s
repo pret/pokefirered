@@ -211,14 +211,14 @@ sub_80A082C: @ 80A082C
 	adds r7, r1, 0
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r1, _080A0844 @ =gUnknown_20370D0
+	ldr r1, _080A0844 @ =gSpecialVar_Result
 	ldrh r0, [r1]
 	cmp r0, 0x5
 	bls _080A0848
 	movs r0, 0
 	b _080A08C4
 	.align 2, 0
-_080A0844: .4byte gUnknown_20370D0
+_080A0844: .4byte gSpecialVar_Result
 _080A0848:
 	ldrh r1, [r1]
 	movs r0, 0x64
@@ -327,7 +327,7 @@ _080A0914: .4byte 0x0000403d
 sub_80A0918: @ 80A0918
 	push {lr}
 	ldr r0, _080A092C @ =0x0000403d
-	bl sub_806E454
+	bl GetVarPointer
 	adds r1, r0, 0
 	movs r0, 0xD6
 	bl sub_80A08CC
@@ -341,9 +341,9 @@ _080A092C: .4byte 0x0000403d
 sub_80A0930: @ 80A0930
 	push {r4,lr}
 	ldr r0, _080A0950 @ =0x0000403d
-	bl sub_806E454
+	bl GetVarPointer
 	adds r1, r0, 0
-	ldr r4, _080A0954 @ =gUnknown_20370D0
+	ldr r4, _080A0954 @ =gSpecialVar_Result
 	movs r0, 0xD6
 	bl sub_80A082C
 	lsls r0, 24
@@ -354,7 +354,7 @@ sub_80A0930: @ 80A0930
 	bx r0
 	.align 2, 0
 _080A0950: .4byte 0x0000403d
-_080A0954: .4byte gUnknown_20370D0
+_080A0954: .4byte gSpecialVar_Result
 	thumb_func_end sub_80A0930
 
 	thumb_func_start sub_80A0958
@@ -373,7 +373,7 @@ _080A0968: .4byte 0x00004040
 sub_80A096C: @ 80A096C
 	push {lr}
 	ldr r0, _080A0980 @ =0x00004040
-	bl sub_806E454
+	bl GetVarPointer
 	adds r1, r0, 0
 	movs r0, 0x81
 	bl sub_80A08CC
@@ -387,9 +387,9 @@ _080A0980: .4byte 0x00004040
 sub_80A0984: @ 80A0984
 	push {r4,lr}
 	ldr r0, _080A09A4 @ =0x00004040
-	bl sub_806E454
+	bl GetVarPointer
 	adds r1, r0, 0
-	ldr r4, _080A09A8 @ =gUnknown_20370D0
+	ldr r4, _080A09A8 @ =gSpecialVar_Result
 	movs r0, 0x81
 	bl sub_80A082C
 	lsls r0, 24
@@ -400,7 +400,7 @@ sub_80A0984: @ 80A0984
 	bx r0
 	.align 2, 0
 _080A09A4: .4byte 0x00004040
-_080A09A8: .4byte gUnknown_20370D0
+_080A09A8: .4byte gSpecialVar_Result
 	thumb_func_end sub_80A0984
 
 	thumb_func_start GiveGiftRibbonToParty

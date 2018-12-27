@@ -2040,14 +2040,14 @@ sub_813C828: @ 813C828
 	adds r2, r3
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, _0813C85C @ =gUnknown_841623B
+	ldr r0, _0813C85C @ =gFameCheckerText_ListMenuCursor
 	bl sub_813C4CC
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0813C858: .4byte gUnknown_203F190
-_0813C85C: .4byte gUnknown_841623B
+_0813C85C: .4byte gFameCheckerText_ListMenuCursor
 	thumb_func_end sub_813C828
 
 	thumb_func_start sub_813C860

@@ -3,9 +3,13 @@
 
 #include "global.h"
 
+#include "global.h"
+
 typedef void (*MainCallback)(void);
 typedef void (*IntrCallback)(void);
 typedef void (*IntrFunc)(void);
+
+extern IntrFunc gIntrTable[];
 
 struct Main
 {
@@ -60,5 +64,9 @@ void SetSerialCallback(IntrCallback callback);
 void InitFlashTimer(void);
 void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
+void RestoreSerialTimer3IntrHandlers(void);
+
+extern const char RomHeaderGameCode[4];
+extern const char RomHeaderSoftwareVersion;
 
 #endif // GUARD_MAIN_H

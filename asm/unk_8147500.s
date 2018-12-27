@@ -8,9 +8,9 @@
 	thumb_func_start sub_8147500
 sub_8147500: @ 8147500
 	push {lr}
-	ldr r0, _08147518 @ =gUnknown_20370C0
+	ldr r0, _08147518 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
-	ldr r0, _0814751C @ =gUnknown_20370C4
+	ldr r0, _0814751C @ =gSpecialVar_0x8006
 	ldrh r2, [r0]
 	cmp r1, 0x8
 	beq _08147512
@@ -20,8 +20,8 @@ _08147512:
 	movs r0, 0x1
 	b _0814758E
 	.align 2, 0
-_08147518: .4byte gUnknown_20370C0
-_0814751C: .4byte gUnknown_20370C4
+_08147518: .4byte gSpecialVar_0x8004
+_0814751C: .4byte gSpecialVar_0x8006
 _08147520:
 	cmp r1, 0
 	beq _08147528
@@ -704,7 +704,7 @@ sub_8147A34: @ 8147A34
 	lsls r1, 3
 	ldr r0, _08147A88 @ =gTasks+0x8
 	adds r4, r1, r0
-	ldr r0, _08147A8C @ =gUnknown_3003F64
+	ldr r0, _08147A8C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08147A98
@@ -737,7 +737,7 @@ _08147A5C:
 	b _08147A9E
 	.align 2, 0
 _08147A88: .4byte gTasks+0x8
-_08147A8C: .4byte gUnknown_3003F64
+_08147A8C: .4byte gReceivedRemoteLinkPlayers
 _08147A90: .4byte gUnknown_3003ED0
 _08147A94: .4byte 0x00007fff
 _08147A98:

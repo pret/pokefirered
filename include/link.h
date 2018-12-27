@@ -1,6 +1,8 @@
 #ifndef GUARD_LINK_H
 #define GUARD_LINK_H
 
+#include "global.h"
+
 #define MAX_LINK_PLAYERS 4
 #define MAX_RFU_PLAYERS 5
 #define CMD_LENGTH 8
@@ -144,6 +146,9 @@ extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
 
+extern u8 gUnknown_3003F84;
+extern u64 gUnknown_3003FB4;
+
 void Task_DestroySelf(u8);
 void OpenLink(void);
 void CloseLink(void);
@@ -162,7 +167,7 @@ void sub_8007E24(void);
 void sub_8007E4C(void);
 u8 GetMultiplayerId(void);
 u8 bitmask_all_link_players_but_self(void);
-bool8 SendBlock(u8, void *, u16);
+bool8 SendBlock(u8, const void *, u16);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
 void ResetBlockReceivedFlag(u8);
@@ -194,5 +199,12 @@ void sub_8011BD0(void);
 u8 sub_800ABAC(void);
 u8 sub_800ABBC(void);
 void sub_800AC34(void);
+void sub_8009804(void);
+bool8 sub_800AA48(void);
+void sub_800A5BC(void);
+void sub_800AA80(u8);
+void sub_80098D8(void);
+void sub_80098B8(void);
+bool8 sub_800A4BC(void);
 
 #endif // GUARD_LINK_H

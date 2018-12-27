@@ -60,7 +60,7 @@ gUnknown_3003F34: @ 3003F34
 gUnknown_3003F38: @ 3003F38
 	.space 0x4
 
-gUnknown_3003F3C: @ 3003F3C
+gWirelessCommType: @ 3003F3C
 	.space 0x4
 
 gUnknown_3003F40: @ 3003F40
@@ -72,7 +72,7 @@ gUnknown_3003F50: @ 3003F50
 gUnknown_3003F60: @ 3003F60
 	.space 0x4
 
-gUnknown_3003F64: @ 3003F64
+gReceivedRemoteLinkPlayers: @ 3003F64
 	.space 0xC
 
 gUnknown_3003F70: @ 3003F70
@@ -304,8 +304,7 @@ gUnknown_3005E60: @ 3005E60
 gUnknown_3005E70: @ 3005E70
 	.space 0x18
 
-gUnknown_3005E88: @ 3005E88
-	.space 0x4
+	.include "quest_log.o"
 
 gUnknown_3005E8C: @ 3005E8C
 	.space 0x4
@@ -325,18 +324,14 @@ gUnknown_3005E9C: @ 3005E9C
 gUnknown_3005EA0: @ 3005EA0
 	.space 0x10
 
-gUnknown_3005EB0: @ 3005EB0
-	.space 0x18
-
-gUnknown_3005EC8: @ 3005EC8
-	.space 0x4
+	.include "fame_checker.o"
 
 gUnknown_3005ECC: @ 3005ECC
 	.space 0x4
 
-gUnknown_3005ED0: @ 3005ED0
-	.space 0x10
+	.include "mevent.o"
 
+	.align 4
 gUnknown_3005EE0: @ 3005EE0
 	.space 0x10
 

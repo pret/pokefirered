@@ -1,6 +1,8 @@
 #ifndef GUARD_LIST_MENU_H
 #define GUARD_LIST_MENU_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations
@@ -16,22 +18,23 @@ struct ListMenu;
 struct ListMenuTemplate
 {
     const struct ListMenuItem *items;
-    void (* unk_04)(u32, bool8, struct ListMenu *);
-    void (* unk_08)(u8, s32, u8);
+    void (* moveCursorFunc)(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+    void (* itemPrintFunc)(u8 windowId, s32 itemId, u8 y);
     u16 totalItems;
     u16 maxShowed;
-    u8 unk_10;
-    u8 unk_11;
-    u8 unk_12;
-    u8 cursor_Y;
-    u32 upText_Y:4; // x1, x2, x4, x8 = xF
-    u32 cursorColor:4; // x10, x20, x40, x80 = xF0
-    u32 fillColor:4; // x100, x200, x400, x800 = xF00
-    u32 cursorShadowColor:4; // x1000, x2000, x4000, x8000 = xF000
-    u32 unk_16_0:1; // x10000
-    u32 spaceBetweenItems:6; // x20000, x40000, x80000, x100000, x200000, x400000 = x7E0000
-    u32 unk_16_7:1; // x800000
-    u32 unk_17_0:6; // x1000000, x2000000, x4000000, x8000000, x10000000, x20000000 = x3F000000
+    u8 windowId;
+    u8 header_X;
+    u8 item_X;
+    u8 cursor_X;
+    u8 upText_Y:4; // x1, x2, x4, x8 = xF
+    u8 cursorPal:4; // x10, x20, x40, x80 = xF0
+    u8 fillValue:4; // x1, x2, x4, x8 = xF
+    u8 cursorShadowPal:4; // x10, x20, x40, x80 = xF0
+    u8 lettersSpacing:3;
+    u8 itemVerticalPadding:3;
+    u8 scrollMultiple:2; // x40, x80 = xC0
+    u8 fontId:6; // x1, x2, x4, x8, x10, x20 = x3F
+    u8 cursorKind:2; // x40, x80
 };
 
 struct ListMenu {
@@ -52,5 +55,7 @@ u8 ListMenuInit(struct ListMenuTemplate *template, u16 a1, u16 a2);
 s32 ListMenuHandleInput(u8 id);
 void get_coro_args_x18_x1A(u8 a0, u16 *a1, u16 *a2);
 void sub_81AE6C8(u8 a0, u16 *a1, u16 *a2);
+void sub_810713C(u8, u8, u8);
+u16 ListMenuGetYCoordForPrintingArrowCursor(u8);
 
 #endif //GUARD_LIST_MENU_H

@@ -1,6 +1,8 @@
 #ifndef GUARD_HEAL_LOCATION_H
 #define GUARD_HEAL_LOCATION_H
 
+#include "global.h"
+
 // Exported type declarations
 
 struct UnkStruct_0859F534 {

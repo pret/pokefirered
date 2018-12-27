@@ -49,13 +49,13 @@ _0812B21C: .4byte gUnknown_203B0EC
 	thumb_func_start sub_812B220
 sub_812B220: @ 812B220
 	ldr r0, _0812B22C @ =gUnknown_203B0EC
-	ldr r1, _0812B230 @ =gUnknown_20370C0
+	ldr r1, _0812B230 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
 _0812B22C: .4byte gUnknown_203B0EC
-_0812B230: .4byte gUnknown_20370C0
+_0812B230: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_812B220
 
 	thumb_func_start sub_812B234
@@ -357,14 +357,14 @@ _0812B458: .4byte gUnknown_203B0EE
 	thumb_func_start sub_812B45C
 sub_812B45C: @ 812B45C
 	push {lr}
-	ldr r0, _0812B46C @ =gUnknown_3003F64
+	ldr r0, _0812B46C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0812B470
 	movs r0, 0x1
 	b _0812B472
 	.align 2, 0
-_0812B46C: .4byte gUnknown_3003F64
+_0812B46C: .4byte gReceivedRemoteLinkPlayers
 _0812B470:
 	movs r0, 0
 _0812B472:

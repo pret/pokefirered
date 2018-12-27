@@ -13,7 +13,7 @@ sub_804C600: @ 804C600
 	bl FreeAllSpritePalettes
 	bl ResetTasks
 	bl ResetPaletteFade
-	ldr r2, _0804C6F8 @ =gUnknown_2037AB8
+	ldr r2, _0804C6F8 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -116,7 +116,7 @@ _0804C6F0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804C6F8: .4byte gUnknown_2037AB8
+_0804C6F8: .4byte gPaletteFade
 _0804C6FC: .4byte sub_804D4F8
 _0804C700: .4byte gUnknown_841F408
 _0804C704: .4byte gUnknown_8261F1C
@@ -219,7 +219,7 @@ _0804C7F0: .4byte gUnknown_2031C90
 _0804C7F4: .4byte gUnknown_2031C94
 _0804C7F8: .4byte gMain
 _0804C7FC:
-	ldr r2, _0804C864 @ =gUnknown_2037AB8
+	ldr r2, _0804C864 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -246,11 +246,11 @@ _0804C80A:
 	bl sub_804F5BC
 	movs r0, 0
 	bl ShowBg
-	ldr r0, _0804C86C @ =gUnknown_3003F64
+	ldr r0, _0804C86C @ =gReceivedRemoteLinkPlayers
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _0804C8B4
-	ldr r1, _0804C870 @ =gUnknown_202271A
+	ldr r1, _0804C870 @ =gLinkType
 	ldr r5, _0804C874 @ =0x00001122
 	adds r0, r5, 0
 	strh r0, [r1]
@@ -258,7 +258,7 @@ _0804C80A:
 	ldr r0, [r0]
 	adds r0, 0xA8
 	strb r2, [r0]
-	ldr r0, _0804C87C @ =gUnknown_3003F3C
+	ldr r0, _0804C87C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C880
@@ -267,13 +267,13 @@ _0804C80A:
 	bl sub_80FBB20
 	b _0804C892
 	.align 2, 0
-_0804C864: .4byte gUnknown_2037AB8
+_0804C864: .4byte gPaletteFade
 _0804C868: .4byte gEnemyParty
-_0804C86C: .4byte gUnknown_3003F64
-_0804C870: .4byte gUnknown_202271A
+_0804C86C: .4byte gReceivedRemoteLinkPlayers
+_0804C870: .4byte gLinkType
 _0804C874: .4byte 0x00001122
 _0804C878: .4byte gUnknown_2031DA8
-_0804C87C: .4byte gUnknown_3003F3C
+_0804C87C: .4byte gWirelessCommType
 _0804C880:
 	bl sub_8009804
 	ldr r1, _0804C8A8 @ =gMain
@@ -284,7 +284,7 @@ _0804C880:
 	adds r0, 0x1
 	strb r0, [r1]
 _0804C892:
-	ldr r0, _0804C8AC @ =gUnknown_3003F3C
+	ldr r0, _0804C8AC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C89C
@@ -296,7 +296,7 @@ _0804C89C:
 	b _0804CEE6
 	.align 2, 0
 _0804C8A8: .4byte gMain
-_0804C8AC: .4byte gUnknown_3003F3C
+_0804C8AC: .4byte gWirelessCommType
 _0804C8B0: .4byte sub_8081A90
 _0804C8B4:
 	ldr r0, _0804C8C4 @ =gMain
@@ -375,7 +375,7 @@ _0804C940:
 	.align 2, 0
 _0804C94C: .4byte gMain
 _0804C950:
-	ldr r0, _0804C9A0 @ =gUnknown_3003F64
+	ldr r0, _0804C9A0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0804C95A
@@ -402,7 +402,7 @@ _0804C968:
 	ldr r0, [r0]
 	adds r0, 0xA8
 	strb r2, [r0]
-	ldr r0, _0804C9AC @ =gUnknown_3003F3C
+	ldr r0, _0804C9AC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0804C992
@@ -413,12 +413,12 @@ _0804C992:
 	bl sub_800AB9C
 	b _0804CEE6
 	.align 2, 0
-_0804C9A0: .4byte gUnknown_3003F64
+_0804C9A0: .4byte gReceivedRemoteLinkPlayers
 _0804C9A4: .4byte gMain
 _0804C9A8: .4byte gUnknown_2031DA8
-_0804C9AC: .4byte gUnknown_3003F3C
+_0804C9AC: .4byte gWirelessCommType
 _0804C9B0:
-	ldr r0, _0804C9E0 @ =gUnknown_3003F3C
+	ldr r0, _0804C9E0 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C9E8
@@ -441,7 +441,7 @@ _0804C9C4:
 	bl sub_80FCD74
 	b _0804CEE6
 	.align 2, 0
-_0804C9E0: .4byte gUnknown_3003F3C
+_0804C9E0: .4byte gWirelessCommType
 _0804C9E4: .4byte gMain
 _0804C9E8:
 	movs r2, 0x87
@@ -664,7 +664,7 @@ _0804CB9C:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _0804CC20 @ =gUnknown_2022744
+	ldr r1, _0804CC20 @ =gLinkPlayers + 8
 	adds r0, r1
 	ldr r1, [r6, 0xC]
 	str r5, [sp]
@@ -702,7 +702,7 @@ _0804CB9C:
 _0804CC14: .4byte gSaveBlock2Ptr
 _0804CC18: .4byte gUnknown_2031C94
 _0804CC1C: .4byte gDecompressionBuffer
-_0804CC20: .4byte gUnknown_2022744
+_0804CC20: .4byte gLinkPlayers + 8
 _0804CC24: .4byte gUnknown_8261ECC
 _0804CC28: .4byte gMain
 _0804CC2C: .4byte gUnknown_2031DA8
@@ -762,7 +762,7 @@ _0804CC62:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _0804CD08 @ =gUnknown_2022744
+	ldr r1, _0804CD08 @ =gLinkPlayers + 8
 	adds r1, r0, r1
 	movs r0, 0x1
 	movs r2, 0
@@ -811,7 +811,7 @@ _0804CCC6:
 _0804CCFC: .4byte gSaveBlock2Ptr
 _0804CD00: .4byte gUnknown_8261E8A
 _0804CD04: .4byte gUnknown_8261CC8
-_0804CD08: .4byte gUnknown_2022744
+_0804CD08: .4byte gLinkPlayers + 8
 _0804CD0C: .4byte gMain
 _0804CD10:
 	ldr r4, _0804CDCC @ =gUnknown_8261CC8
@@ -1019,7 +1019,7 @@ _0804CEC2:
 	.align 2, 0
 _0804CECC: .4byte gMain
 _0804CED0:
-	ldr r0, _0804CF08 @ =gUnknown_2037AB8
+	ldr r0, _0804CF08 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1042,7 +1042,7 @@ _0804CEE6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804CF08: .4byte gUnknown_2037AB8
+_0804CF08: .4byte gPaletteFade
 _0804CF0C: .4byte sub_804DFF0
 _0804CF10: .4byte sub_804D638
 	thumb_func_end sub_804C728
@@ -1130,7 +1130,7 @@ _0804CFC8:
 	.align 2, 0
 _0804CFD8: .4byte gMain
 _0804CFDC:
-	ldr r0, _0804CFFC @ =gUnknown_3003F3C
+	ldr r0, _0804CFFC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804CFF0
@@ -1145,7 +1145,7 @@ _0804CFF0:
 	adds r1, r3
 	b _0804D4B4
 	.align 2, 0
-_0804CFFC: .4byte gUnknown_3003F3C
+_0804CFFC: .4byte gWirelessCommType
 _0804D000: .4byte gMain
 _0804D004:
 	movs r5, 0x87
@@ -1354,7 +1354,7 @@ _0804D19C:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _0804D220 @ =gUnknown_2022744
+	ldr r1, _0804D220 @ =gLinkPlayers + 8
 	adds r0, r1
 	ldr r1, [r6, 0xC]
 	str r5, [sp]
@@ -1393,7 +1393,7 @@ _0804D200:
 _0804D214: .4byte gSaveBlock2Ptr
 _0804D218: .4byte gUnknown_2031C94
 _0804D21C: .4byte gDecompressionBuffer
-_0804D220: .4byte gUnknown_2022744
+_0804D220: .4byte gLinkPlayers + 8
 _0804D224: .4byte gUnknown_8261ECC
 _0804D228: .4byte gMain
 _0804D22C: .4byte gUnknown_2031DA8
@@ -1459,7 +1459,7 @@ _0804D270:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _0804D318 @ =gUnknown_2022744
+	ldr r1, _0804D318 @ =gLinkPlayers + 8
 	adds r1, r0, r1
 	movs r0, 0x1
 	movs r2, 0
@@ -1508,7 +1508,7 @@ _0804D2D4:
 _0804D30C: .4byte gSaveBlock2Ptr
 _0804D310: .4byte gUnknown_8261E8A
 _0804D314: .4byte gUnknown_8261CC8
-_0804D318: .4byte gUnknown_2022744
+_0804D318: .4byte gLinkPlayers + 8
 _0804D31C: .4byte gMain
 _0804D320:
 	ldr r4, _0804D3B0 @ =gUnknown_8261CC8
@@ -1647,7 +1647,7 @@ _0804D41C:
 _0804D43C: .4byte gUnknown_2031DA8
 _0804D440: .4byte gMain
 _0804D444:
-	ldr r2, _0804D478 @ =gUnknown_2037AB8
+	ldr r2, _0804D478 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -1671,7 +1671,7 @@ _0804D444:
 	adds r1, r3
 	b _0804D4B4
 	.align 2, 0
-_0804D478: .4byte gUnknown_2037AB8
+_0804D478: .4byte gPaletteFade
 _0804D47C: .4byte gMain
 _0804D480:
 	movs r1, 0x82
@@ -1707,7 +1707,7 @@ _0804D4B4:
 	.align 2, 0
 _0804D4BC: .4byte gMain
 _0804D4C0:
-	ldr r0, _0804D4F0 @ =gUnknown_2037AB8
+	ldr r0, _0804D4F0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1727,7 +1727,7 @@ _0804D4D2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D4F0: .4byte gUnknown_2037AB8
+_0804D4F0: .4byte gPaletteFade
 _0804D4F4: .4byte sub_804D638
 	thumb_func_end sub_804CF14
 
@@ -1778,7 +1778,7 @@ _0804D544: .4byte gUnknown_2031DA8
 	thumb_func_start sub_804D548
 sub_804D548: @ 804D548
 	push {r4,lr}
-	ldr r0, _0804D580 @ =gUnknown_2037AB8
+	ldr r0, _0804D580 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1795,7 +1795,7 @@ sub_804D548: @ 804D548
 	adds r0, 0x7E
 	ldrb r0, [r0]
 	strb r0, [r1, 0x1]
-	ldr r0, _0804D58C @ =gUnknown_3003F3C
+	ldr r0, _0804D58C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D590
@@ -1805,10 +1805,10 @@ sub_804D548: @ 804D548
 	strb r0, [r1]
 	b _0804D59E
 	.align 2, 0
-_0804D580: .4byte gUnknown_2037AB8
+_0804D580: .4byte gPaletteFade
 _0804D584: .4byte gUnknown_2031DA4
 _0804D588: .4byte gUnknown_2031DA8
-_0804D58C: .4byte gUnknown_3003F3C
+_0804D58C: .4byte gWirelessCommType
 _0804D590:
 	movs r0, 0x20
 	bl sub_800AA80
@@ -1828,7 +1828,7 @@ sub_804D5A4: @ 804D5A4
 	ldr r5, _0804D5E4 @ =gMain
 	ldr r0, _0804D5E8 @ =sub_804C718
 	str r0, [r5, 0x8]
-	ldr r0, _0804D5EC @ =gUnknown_3003F3C
+	ldr r0, _0804D5EC @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D5FC
@@ -1852,12 +1852,12 @@ sub_804D5A4: @ 804D5A4
 	.align 2, 0
 _0804D5E4: .4byte gMain
 _0804D5E8: .4byte sub_804C718
-_0804D5EC: .4byte gUnknown_3003F3C
+_0804D5EC: .4byte gWirelessCommType
 _0804D5F0: .4byte gUnknown_2031C90
 _0804D5F4: .4byte gUnknown_2031DA8
 _0804D5F8: .4byte sub_8050138
 _0804D5FC:
-	ldr r0, _0804D628 @ =gUnknown_3003F64
+	ldr r0, _0804D628 @ =gReceivedRemoteLinkPlayers
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _0804D620
@@ -1876,7 +1876,7 @@ _0804D620:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D628: .4byte gUnknown_3003F64
+_0804D628: .4byte gReceivedRemoteLinkPlayers
 _0804D62C: .4byte gUnknown_2031C90
 _0804D630: .4byte gUnknown_2031DA8
 _0804D634: .4byte sub_8050138
@@ -2181,7 +2181,7 @@ _0804D860:
 	.4byte _0804DAE0
 	.4byte _0804DB14
 _0804D8B8:
-	ldr r0, _0804D8D8 @ =gUnknown_2022618
+	ldr r0, _0804D8D8 @ =gBlockSendBuffer
 	ldr r1, _0804D8DC @ =gPlayerParty
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2197,7 +2197,7 @@ _0804D8B8:
 	strb r2, [r0]
 	b _0804DB9E
 	.align 2, 0
-_0804D8D8: .4byte gUnknown_2022618
+_0804D8D8: .4byte gBlockSendBuffer
 _0804D8DC: .4byte gPlayerParty
 _0804D8E0: .4byte gUnknown_2031DA8
 _0804D8E4:
@@ -2247,7 +2247,7 @@ _0804D936:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804D958 @ =gUnknown_2022118
+	ldr r2, _0804D958 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2257,10 +2257,10 @@ _0804D936:
 	b _0804DB96
 	.align 2, 0
 _0804D954: .4byte gEnemyParty
-_0804D958: .4byte gUnknown_2022118
+_0804D958: .4byte gBlockRecvBuffer
 _0804D95C: .4byte gUnknown_2031DA8
 _0804D960:
-	ldr r0, _0804D970 @ =gUnknown_2022618
+	ldr r0, _0804D970 @ =gBlockSendBuffer
 	ldr r1, _0804D974 @ =gUnknown_202434C
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2268,7 +2268,7 @@ _0804D960:
 	ldr r1, [r0]
 	b _0804DB96
 	.align 2, 0
-_0804D970: .4byte gUnknown_2022618
+_0804D970: .4byte gBlockSendBuffer
 _0804D974: .4byte gUnknown_202434C
 _0804D978: .4byte gUnknown_2031DA8
 _0804D97C:
@@ -2295,7 +2295,7 @@ _0804D99E:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804D9C0 @ =gUnknown_2022118
+	ldr r2, _0804D9C0 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2305,10 +2305,10 @@ _0804D99E:
 	b _0804DB96
 	.align 2, 0
 _0804D9BC: .4byte gUnknown_20240F4
-_0804D9C0: .4byte gUnknown_2022118
+_0804D9C0: .4byte gBlockRecvBuffer
 _0804D9C4: .4byte gUnknown_2031DA8
 _0804D9C8:
-	ldr r0, _0804D9D8 @ =gUnknown_2022618
+	ldr r0, _0804D9D8 @ =gBlockSendBuffer
 	ldr r1, _0804D9DC @ =gUnknown_2024414
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2316,7 +2316,7 @@ _0804D9C8:
 	ldr r1, [r0]
 	b _0804DB96
 	.align 2, 0
-_0804D9D8: .4byte gUnknown_2022618
+_0804D9D8: .4byte gBlockSendBuffer
 _0804D9DC: .4byte gUnknown_2024414
 _0804D9E0: .4byte gUnknown_2031DA8
 _0804D9E4:
@@ -2343,7 +2343,7 @@ _0804DA06:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804DA28 @ =gUnknown_2022118
+	ldr r2, _0804DA28 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_804D814
@@ -2353,10 +2353,10 @@ _0804DA06:
 	b _0804DB96
 	.align 2, 0
 _0804DA24: .4byte gUnknown_20241BC
-_0804DA28: .4byte gUnknown_2022118
+_0804DA28: .4byte gBlockRecvBuffer
 _0804DA2C: .4byte gUnknown_2031DA8
 _0804DA30:
-	ldr r0, _0804DA48 @ =gUnknown_2022618
+	ldr r0, _0804DA48 @ =gBlockSendBuffer
 	ldr r1, _0804DA4C @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, _0804DA50 @ =0x00002cd0
@@ -2367,7 +2367,7 @@ _0804DA30:
 	ldr r1, [r0]
 	b _0804DB96
 	.align 2, 0
-_0804DA48: .4byte gUnknown_2022618
+_0804DA48: .4byte gBlockSendBuffer
 _0804DA4C: .4byte gSaveBlock1Ptr
 _0804DA50: .4byte 0x00002cd0
 _0804DA54: .4byte gUnknown_2031DA8
@@ -2395,7 +2395,7 @@ _0804DA7A:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804DA9C @ =gUnknown_2022118
+	ldr r2, _0804DA9C @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xD8
 	bl sub_804D814
@@ -2405,10 +2405,10 @@ _0804DA7A:
 	b _0804DB96
 	.align 2, 0
 _0804DA98: .4byte gUnknown_2031CCC
-_0804DA9C: .4byte gUnknown_2022118
+_0804DA9C: .4byte gBlockRecvBuffer
 _0804DAA0: .4byte gUnknown_2031DA8
 _0804DAA4:
-	ldr r0, _0804DABC @ =gUnknown_2022618
+	ldr r0, _0804DABC @ =gBlockSendBuffer
 	ldr r1, _0804DAC0 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, _0804DAC4 @ =0x0000309c
@@ -2419,7 +2419,7 @@ _0804DAA4:
 	ldr r1, [r0]
 	b _0804DB96
 	.align 2, 0
-_0804DABC: .4byte gUnknown_2022618
+_0804DABC: .4byte gBlockSendBuffer
 _0804DAC0: .4byte gSaveBlock1Ptr
 _0804DAC4: .4byte 0x0000309c
 _0804DAC8: .4byte gUnknown_2031DA8
@@ -2447,7 +2447,7 @@ _0804DAE0:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, _0804DB10 @ =gUnknown_2022118
+	ldr r2, _0804DB10 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xB
 	bl sub_804D814
@@ -2456,7 +2456,7 @@ _0804DAE0:
 	b _0804DB96
 	.align 2, 0
 _0804DB0C: .4byte gUnknown_2031DA8
-_0804DB10: .4byte gUnknown_2022118
+_0804DB10: .4byte gBlockRecvBuffer
 _0804DB14:
 	ldr r4, _0804DB68 @ =gEnemyParty
 	ldr r6, _0804DB6C @ =0x0000012f
@@ -2564,7 +2564,7 @@ sub_804DBD4: @ 804DBD4
 	ands r0, r2
 	cmp r0, 0
 	beq _0804DC58
-	ldr r0, _0804DBFC @ =gUnknown_2022118
+	ldr r0, _0804DBFC @ =gBlockRecvBuffer
 	ldrh r1, [r0]
 	ldr r0, _0804DC00 @ =0x0000bbbb
 	cmp r1, r0
@@ -2576,7 +2576,7 @@ sub_804DBD4: @ 804DBD4
 	beq _0804DC28
 	b _0804DC52
 	.align 2, 0
-_0804DBFC: .4byte gUnknown_2022118
+_0804DBFC: .4byte gBlockRecvBuffer
 _0804DC00: .4byte 0x0000bbbb
 _0804DC04: .4byte 0x0000aabb
 _0804DC08:
@@ -2626,7 +2626,7 @@ _0804DC58:
 	ands r0, r2
 	cmp r0, 0
 	beq _0804DCEA
-	ldr r3, _0804DC84 @ =gUnknown_2022118
+	ldr r3, _0804DC84 @ =gBlockRecvBuffer
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r3, r1
@@ -2642,7 +2642,7 @@ _0804DC58:
 	b _0804DCE4
 	.align 2, 0
 _0804DC80: .4byte gUnknown_2031DA8
-_0804DC84: .4byte gUnknown_2022118
+_0804DC84: .4byte gBlockRecvBuffer
 _0804DC88: .4byte 0x0000bbbb
 _0804DC8C: .4byte 0x0000aabb
 _0804DC90:
@@ -2712,7 +2712,7 @@ sub_804DCF4: @ 804DCF4
 	ands r0, r5
 	cmp r0, 0
 	beq _0804DDD6
-	ldr r2, _0804DD20 @ =gUnknown_2022118
+	ldr r2, _0804DD20 @ =gBlockRecvBuffer
 	ldrh r1, [r2]
 	ldr r0, _0804DD24 @ =0x0000ddee
 	cmp r1, r0
@@ -2727,7 +2727,7 @@ sub_804DCF4: @ 804DCF4
 	beq _0804DD6C
 	b _0804DDD0
 	.align 2, 0
-_0804DD20: .4byte gUnknown_2022118
+_0804DD20: .4byte gBlockRecvBuffer
 _0804DD24: .4byte 0x0000ddee
 _0804DD28: .4byte 0x0000ccdd
 _0804DD2C: .4byte 0x0000dddd
@@ -3669,7 +3669,7 @@ _0804E490: .4byte gMain
 sub_804E494: @ 804E494
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _0804E4CC @ =gUnknown_2037AB8
+	ldr r0, _0804E4CC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3695,7 +3695,7 @@ sub_804E494: @ 804E494
 	bl sub_81344F8
 	b _0804E4F8
 	.align 2, 0
-_0804E4CC: .4byte gUnknown_2037AB8
+_0804E4CC: .4byte gPaletteFade
 _0804E4D0: .4byte gUnknown_2031DA8
 _0804E4D4: .4byte gPlayerParty
 _0804E4D8: .4byte sub_804CF14
@@ -4247,21 +4247,21 @@ _0804E904: .4byte gSprites
 	thumb_func_start sub_804E908
 sub_804E908: @ 804E908
 	push {lr}
-	ldr r0, _0804E924 @ =gUnknown_2037AB8
+	ldr r0, _0804E924 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0804E93C
-	ldr r0, _0804E928 @ =gUnknown_3003F3C
+	ldr r0, _0804E928 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804E92C
 	bl sub_800AB9C
 	b _0804E932
 	.align 2, 0
-_0804E924: .4byte gUnknown_2037AB8
-_0804E928: .4byte gUnknown_3003F3C
+_0804E924: .4byte gPaletteFade
+_0804E928: .4byte gWirelessCommType
 _0804E92C:
 	movs r0, 0xC
 	bl sub_800AA80
@@ -4281,7 +4281,7 @@ _0804E940: .4byte gUnknown_2031DA8
 	thumb_func_start sub_804E944
 sub_804E944: @ 804E944
 	push {lr}
-	ldr r0, _0804E978 @ =gUnknown_3003F3C
+	ldr r0, _0804E978 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804E988
@@ -4301,12 +4301,12 @@ sub_804E944: @ 804E944
 	bl SetMainCallback2
 	b _0804E9AA
 	.align 2, 0
-_0804E978: .4byte gUnknown_3003F3C
+_0804E978: .4byte gWirelessCommType
 _0804E97C: .4byte gUnknown_2031C90
 _0804E980: .4byte gUnknown_2031DA8
 _0804E984: .4byte c2_8056854
 _0804E988:
-	ldr r0, _0804E9B0 @ =gUnknown_3003F64
+	ldr r0, _0804E9B0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0804E9AA
@@ -4323,7 +4323,7 @@ _0804E9AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804E9B0: .4byte gUnknown_3003F64
+_0804E9B0: .4byte gReceivedRemoteLinkPlayers
 _0804E9B4: .4byte gUnknown_2031C90
 _0804E9B8: .4byte gUnknown_2031DA8
 _0804E9BC: .4byte c2_8056854
@@ -5033,7 +5033,7 @@ _0804EF50:
 	adds r1, r0, 0
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _0804EF84 @ =gUnknown_8247094
+	ldr r0, _0804EF84 @ =gMoveNames
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringAppend
@@ -5049,7 +5049,7 @@ _0804EF6C:
 	b _0804EF9C
 	.align 2, 0
 _0804EF80: .4byte gUnknown_8261EB6
-_0804EF84: .4byte gUnknown_8247094
+_0804EF84: .4byte gMoveNames
 _0804EF88: .4byte gUnknown_8261EC7
 _0804EF8C:
 	ldr r1, _0804EFAC @ =gUnknown_8261EB6
@@ -6573,7 +6573,7 @@ _0804FB24:
 	thumb_func_start sub_804FB34
 sub_804FB34: @ 804FB34
 	push {r4-r7,lr}
-	ldr r0, _0804FBB4 @ =gUnknown_3003F64
+	ldr r0, _0804FBB4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804FBC0
@@ -6634,7 +6634,7 @@ _0804FB6E:
 	movs r0, 0x2
 	b _0804FBC2
 	.align 2, 0
-_0804FBB4: .4byte gUnknown_3003F64
+_0804FBB4: .4byte gReceivedRemoteLinkPlayers
 _0804FBB8: .4byte gLinkPlayers
 _0804FBBC:
 	movs r0, 0x1
@@ -7209,14 +7209,14 @@ _0804FFC0: .4byte c2_800ACD4
 	thumb_func_start sub_804FFC4
 sub_804FFC4: @ 804FFC4
 	push {lr}
-	ldr r0, _0804FFD4 @ =gUnknown_3003F64
+	ldr r0, _0804FFD4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0804FFD8
 	movs r0, 0
 	b _0804FFE0
 	.align 2, 0
-_0804FFD4: .4byte gUnknown_3003F64
+_0804FFD4: .4byte gReceivedRemoteLinkPlayers
 _0804FFD8:
 	bl GetMultiplayerId
 	lsls r0, 24
@@ -7424,11 +7424,11 @@ _08050160:
 	.4byte _08050430
 	.4byte _0805044C
 _08050194:
-	ldr r0, _08050228 @ =gUnknown_3003F64
+	ldr r0, _08050228 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080501A8
-	ldr r1, _0805022C @ =gUnknown_202271A
+	ldr r1, _0805022C @ =gLinkType
 	ldr r2, _08050230 @ =0x00001144
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -7490,14 +7490,14 @@ _080501A8:
 	strh r2, [r0]
 	b _08050472
 	.align 2, 0
-_08050228: .4byte gUnknown_3003F64
-_0805022C: .4byte gUnknown_202271A
+_08050228: .4byte gReceivedRemoteLinkPlayers
+_0805022C: .4byte gLinkType
 _08050230: .4byte 0x00001144
 _08050234: .4byte gUnknown_2031DAC
 _08050238: .4byte sub_804FF0C
 _0805023C: .4byte gMain
 _08050240:
-	ldr r0, _08050270 @ =gUnknown_3003F64
+	ldr r0, _08050270 @ =gReceivedRemoteLinkPlayers
 	ldrb r5, [r0]
 	cmp r5, 0
 	bne _0805027C
@@ -7520,7 +7520,7 @@ _08050240:
 	str r5, [r0, 0x64]
 	b _08050472
 	.align 2, 0
-_08050270: .4byte gUnknown_3003F64
+_08050270: .4byte gReceivedRemoteLinkPlayers
 _08050274: .4byte gUnknown_2031DAC
 _08050278: .4byte gMain
 _0805027C:
@@ -7585,7 +7585,7 @@ _080502EC:
 	b _08050472
 _080502F2:
 	bl sub_804FF4C
-	ldr r0, _08050318 @ =gUnknown_3003F64
+	ldr r0, _08050318 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _08050300
@@ -7604,7 +7604,7 @@ _0805030E:
 	adds r1, r2
 	b _08050440
 	.align 2, 0
-_08050318: .4byte gUnknown_3003F64
+_08050318: .4byte gReceivedRemoteLinkPlayers
 _0805031C: .4byte gMain
 _08050320:
 	ldr r2, _08050340 @ =gUnknown_2031DAC
@@ -7706,7 +7706,7 @@ _0805039C:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, _08050428 @ =gUnknown_2022744
+	ldr r0, _08050428 @ =gLinkPlayers + 8
 	adds r1, r0
 	adds r0, r4, 0
 	movs r2, 0x7
@@ -7721,7 +7721,7 @@ _08050418: .4byte gUnknown_2031DA4
 _0805041C: .4byte gPlayerParty
 _08050420: .4byte gUnknown_2031DAC
 _08050424: .4byte gEnemyParty
-_08050428: .4byte gUnknown_2022744
+_08050428: .4byte gLinkPlayers + 8
 _0805042C: .4byte gMain
 _08050430:
 	bl sub_805049C
@@ -7739,13 +7739,13 @@ _08050440:
 	.align 2, 0
 _08050448: .4byte gMain
 _0805044C:
-	ldr r0, _08050490 @ =gUnknown_2037AB8
+	ldr r0, _08050490 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08050472
-	ldr r0, _08050494 @ =gUnknown_3003F3C
+	ldr r0, _08050494 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805046C
@@ -7767,8 +7767,8 @@ _08050472:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050490: .4byte gUnknown_2037AB8
-_08050494: .4byte gUnknown_3003F3C
+_08050490: .4byte gPaletteFade
+_08050494: .4byte gWirelessCommType
 _08050498: .4byte sub_8053D84
 	thumb_func_end sub_8050138
 
@@ -7850,7 +7850,7 @@ sub_80504CC: @ 80504CC
 	movs r2, 0
 	movs r3, 0
 	bl sub_80F696C
-	ldr r0, _080505BC @ =gUnknown_8D0051C
+	ldr r0, _080505BC @ =gFile_graphics_interface_menu_map_tilemap
 	mov r8, r0
 	ldr r4, _080505C0 @ =gDecompressionBuffer
 	adds r1, r4, 0
@@ -7897,7 +7897,7 @@ sub_80504CC: @ 80504CC
 	.align 2, 0
 _080505B4: .4byte gUnknown_826D1D4
 _080505B8: .4byte gUnknown_8D00000
-_080505BC: .4byte gUnknown_8D0051C
+_080505BC: .4byte gFile_graphics_interface_menu_map_tilemap
 _080505C0: .4byte gDecompressionBuffer
 _080505C4: .4byte gUnknown_8D004D8
 _080505C8: .4byte gUnknown_826D1BC
@@ -7947,7 +7947,7 @@ _08050628:
 	strb r0, [r1]
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
-	ldr r4, _080506D4 @ =gUnknown_2022744
+	ldr r4, _080506D4 @ =gLinkPlayers + 8
 	ldr r0, _080506D8 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r4, 0
@@ -8014,7 +8014,7 @@ _08050628:
 	.align 2, 0
 _080506CC: .4byte gUnknown_2031DA4
 _080506D0: .4byte gSpecialVar_0x8005
-_080506D4: .4byte gUnknown_2022744
+_080506D4: .4byte gLinkPlayers + 8
 _080506D8: .4byte gSaveBlock2Ptr
 _080506DC: .4byte gEnemyParty
 _080506E0: .4byte gUnknown_2031DAC
@@ -8131,7 +8131,7 @@ sub_80507A0: @ 80507A0
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
 	adds r2, r5, 0
@@ -8236,7 +8236,7 @@ _080508A2:
 _080508B8:
 	mov r0, r9
 	bl sub_80507A0
-	ldr r0, _080508F0 @ =gUnknown_3003F64
+	ldr r0, _080508F0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080508CA
@@ -8256,7 +8256,7 @@ _080508E0: .4byte gSaveBlock1Ptr
 _080508E4: .4byte 0x00002cd0
 _080508E8: .4byte gUnknown_2031DAC
 _080508EC: .4byte gUnknown_2031CCC
-_080508F0: .4byte gUnknown_3003F64
+_080508F0: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_805080C
 
 	thumb_func_start sub_80508F4
@@ -8490,7 +8490,7 @@ _08050AC4:
 	ldr r1, _08050AF8 @ =0x00001241
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, _08050AFC @ =gUnknown_826BA5C
+	ldr r0, _08050AFC @ =gUnknown_3379A0Bin
 	ldr r1, _08050B00 @ =0x06002800
 	bl LZ77UnCompVram
 	movs r0, 0x8
@@ -8498,7 +8498,7 @@ _08050AC4:
 	.align 2, 0
 _08050AF4: .4byte gUnknown_2031DAC
 _08050AF8: .4byte 0x00001241
-_08050AFC: .4byte gUnknown_826BA5C
+_08050AFC: .4byte gUnknown_3379A0Bin
 _08050B00: .4byte 0x06002800
 _08050B04:
 	ldr r1, _08050B28 @ =0x00001241
@@ -8529,7 +8529,7 @@ _08050B3C:
 	movs r1, 0x30
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r0, _08050B70 @ =gUnknown_826BF7C
+	ldr r0, _08050B70 @ =gWirelessSignal4bpp
 	ldr r1, _08050B74 @ =0x06004000
 	bl LZ77UnCompVram
 	ldr r0, _08050B78 @ =gUnknown_826C60C
@@ -8548,7 +8548,7 @@ _08050B64:
 	b _08050DB4
 	.align 2, 0
 _08050B6C: .4byte gUnknown_826BF5C
-_08050B70: .4byte gUnknown_826BF7C
+_08050B70: .4byte gWirelessSignal4bpp
 _08050B74: .4byte 0x06004000
 _08050B78: .4byte gUnknown_826C60C
 _08050B7C: .4byte 0x06009000
@@ -8871,7 +8871,7 @@ sub_8050E24: @ 8050E24
 	lsls r1, r2, 3
 	subs r1, r2
 	lsls r1, 2
-	ldr r0, _08050E9C @ =gUnknown_2022744
+	ldr r0, _08050E9C @ =gLinkPlayers + 8
 	adds r1, r0
 	adds r0, r3, 0
 	bl StringCopy
@@ -8905,14 +8905,14 @@ sub_8050E24: @ 8050E24
 	.align 2, 0
 _08050E94: .4byte gUnknown_2031DAC
 _08050E98: .4byte gStringVar1
-_08050E9C: .4byte gUnknown_2022744
+_08050E9C: .4byte gLinkPlayers + 8
 _08050EA0: .4byte gUnknown_2031DA4
 _08050EA4: .4byte gEnemyParty
 _08050EA8: .4byte gStringVar3
 _08050EAC: .4byte gPlayerParty
 _08050EB0: .4byte gStringVar2
 _08050EB4:
-	ldr r0, _08050EF8 @ =gUnknown_20370C0
+	ldr r0, _08050EF8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -8944,7 +8944,7 @@ _08050EF0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050EF8: .4byte gUnknown_20370C0
+_08050EF8: .4byte gSpecialVar_0x8004
 _08050EFC: .4byte gUnknown_826CF8C
 _08050F00: .4byte gStringVar1
 _08050F04: .4byte gStringVar3
@@ -9519,7 +9519,7 @@ _08051598:
 	.align 2, 0
 _080515B8: .4byte gUnknown_2031DAC
 _080515BC:
-	ldr r0, _080515E8 @ =gUnknown_2037AB8
+	ldr r0, _080515E8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9537,7 +9537,7 @@ _080515CC:
 	bl CopyWindowToVram
 	bl _080522A8
 	.align 2, 0
-_080515E8: .4byte gUnknown_2037AB8
+_080515E8: .4byte gPaletteFade
 _080515EC:
 	movs r1, 0x1
 	negs r1, r1
@@ -9548,7 +9548,7 @@ _080515EC:
 	movs r3, 0
 	bl _080522A4
 _080515FE:
-	ldr r0, _0805161C @ =gUnknown_2037AB8
+	ldr r0, _0805161C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9562,7 +9562,7 @@ _0805160E:
 	strh r1, [r0]
 	bl _08052318
 	.align 2, 0
-_0805161C: .4byte gUnknown_2037AB8
+_0805161C: .4byte gPaletteFade
 _08051620:
 	ldr r4, _0805163C @ =gUnknown_2031DAC
 	ldr r0, [r4]
@@ -9808,7 +9808,7 @@ _08051808:
 	.align 2, 0
 _08051828: .4byte gUnknown_2031DAC
 _0805182C:
-	ldr r0, _08051870 @ =gUnknown_2037AB8
+	ldr r0, _08051870 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9838,7 +9838,7 @@ _0805183C:
 	ldr r1, [r7]
 	bl _080522AC
 	.align 2, 0
-_08051870: .4byte gUnknown_2037AB8
+_08051870: .4byte gPaletteFade
 _08051874: .4byte gSprites
 _08051878:
 	movs r1, 0x1
@@ -9874,7 +9874,7 @@ _08051878:
 _080518BC: .4byte gUnknown_826CE84
 _080518C0: .4byte gUnknown_2031DAC
 _080518C4:
-	ldr r0, _08051914 @ =gUnknown_2037AB8
+	ldr r0, _08051914 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9913,7 +9913,7 @@ _080518E2:
 	strh r1, [r0, 0x26]
 	bl _08052318
 	.align 2, 0
-_08051914: .4byte gUnknown_2037AB8
+_08051914: .4byte gPaletteFade
 _08051918: .4byte gUnknown_2031DAC
 _0805191C: .4byte gSprites
 _08051920:
@@ -10298,7 +10298,7 @@ _08051BF6:
 	.align 2, 0
 _08051C38: .4byte gSprites
 _08051C3C:
-	ldr r0, _08051CA4 @ =gUnknown_2037AB8
+	ldr r0, _08051CA4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10347,7 +10347,7 @@ _08051C4A:
 	bl StartSpriteAnim
 	b _08052318
 	.align 2, 0
-_08051CA4: .4byte gUnknown_2037AB8
+_08051CA4: .4byte gPaletteFade
 _08051CA8: .4byte gUnknown_826CE44
 _08051CAC: .4byte gUnknown_826CE84
 _08051CB0: .4byte gSprites
@@ -10365,7 +10365,7 @@ _08051CC4:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, _08051CE0 @ =gUnknown_2037AB8
+	ldr r0, _08051CE0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10375,7 +10375,7 @@ _08051CC4:
 _08051CDC:
 	b _080522A8
 	.align 2, 0
-_08051CE0: .4byte gUnknown_2037AB8
+_08051CE0: .4byte gPaletteFade
 _08051CE4:
 	ldr r2, _08051D30 @ =gSprites
 	ldr r4, [r7]
@@ -10635,7 +10635,7 @@ _08051EC4:
 	.align 2, 0
 _08051EE0: .4byte gUnknown_2031DAC
 _08051EE4:
-	ldr r4, _08051F08 @ =gUnknown_2037AB8
+	ldr r4, _08051F08 @ =gPaletteFade
 	ldrb r1, [r4, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10653,9 +10653,9 @@ _08051EF2:
 	strb r0, [r4, 0x8]
 	b _080522A8
 	.align 2, 0
-_08051F08: .4byte gUnknown_2037AB8
+_08051F08: .4byte gPaletteFade
 _08051F0C:
-	ldr r2, _08051F24 @ =gUnknown_2037AB8
+	ldr r2, _08051F24 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -10668,13 +10668,13 @@ _08051F0C:
 	movs r3, 0
 	b _080522A4
 	.align 2, 0
-_08051F24: .4byte gUnknown_2037AB8
+_08051F24: .4byte gPaletteFade
 _08051F28:
 	movs r1, 0xA2
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, _08051F44 @ =gUnknown_2037AB8
+	ldr r0, _08051F44 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10684,7 +10684,7 @@ _08051F28:
 _08051F40:
 	b _080522A8
 	.align 2, 0
-_08051F44: .4byte gUnknown_2037AB8
+_08051F44: .4byte gPaletteFade
 _08051F48:
 	ldr r0, _08051FDC @ =gUnknown_826CDE4
 	movs r2, 0x8
@@ -11107,7 +11107,7 @@ _080522AC:
 	.align 2, 0
 _080522B8: .4byte gUnknown_2031DAC
 _080522BC:
-	ldr r0, _08052324 @ =gUnknown_2037AB8
+	ldr r0, _08052324 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11149,7 +11149,7 @@ _0805231A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08052324: .4byte gUnknown_2037AB8
+_08052324: .4byte gPaletteFade
 _08052328: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8050F3C
 
@@ -11695,7 +11695,7 @@ _08052988:
 	.align 2, 0
 _080529A8: .4byte gUnknown_2031DAC
 _080529AC:
-	ldr r0, _080529D8 @ =gUnknown_2037AB8
+	ldr r0, _080529D8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11713,7 +11713,7 @@ _080529BC:
 	bl CopyWindowToVram
 	bl _08053704
 	.align 2, 0
-_080529D8: .4byte gUnknown_2037AB8
+_080529D8: .4byte gPaletteFade
 _080529DC:
 	movs r1, 0x1
 	negs r1, r1
@@ -11724,7 +11724,7 @@ _080529DC:
 	movs r3, 0
 	bl _08053700
 _080529EE:
-	ldr r0, _08052A0C @ =gUnknown_2037AB8
+	ldr r0, _08052A0C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11738,7 +11738,7 @@ _080529FE:
 	strh r1, [r0]
 	bl _08053774
 	.align 2, 0
-_08052A0C: .4byte gUnknown_2037AB8
+_08052A0C: .4byte gPaletteFade
 _08052A10:
 	ldr r4, _08052A2C @ =gUnknown_2031DAC
 	ldr r0, [r4]
@@ -11994,7 +11994,7 @@ _08052C18:
 	.align 2, 0
 _08052C38: .4byte gUnknown_2031DAC
 _08052C3C:
-	ldr r0, _08052C80 @ =gUnknown_2037AB8
+	ldr r0, _08052C80 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12024,7 +12024,7 @@ _08052C4C:
 	ldr r1, [r7]
 	bl _08053708
 	.align 2, 0
-_08052C80: .4byte gUnknown_2037AB8
+_08052C80: .4byte gPaletteFade
 _08052C84: .4byte gSprites
 _08052C88:
 	movs r1, 0x1
@@ -12060,7 +12060,7 @@ _08052C88:
 _08052CCC: .4byte gUnknown_826CE84
 _08052CD0: .4byte gUnknown_2031DAC
 _08052CD4:
-	ldr r0, _08052D24 @ =gUnknown_2037AB8
+	ldr r0, _08052D24 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12099,7 +12099,7 @@ _08052CF2:
 	strh r1, [r0, 0x26]
 	bl _08053774
 	.align 2, 0
-_08052D24: .4byte gUnknown_2037AB8
+_08052D24: .4byte gPaletteFade
 _08052D28: .4byte gUnknown_2031DAC
 _08052D2C: .4byte gSprites
 _08052D30:
@@ -12490,7 +12490,7 @@ _08053012:
 	.align 2, 0
 _08053054: .4byte gSprites
 _08053058:
-	ldr r0, _080530E4 @ =gUnknown_2037AB8
+	ldr r0, _080530E4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12557,7 +12557,7 @@ _08053066:
 	bl StartSpriteAnim
 	b _08053774
 	.align 2, 0
-_080530E4: .4byte gUnknown_2037AB8
+_080530E4: .4byte gPaletteFade
 _080530E8: .4byte gUnknown_826CE44
 _080530EC: .4byte gSprites
 _080530F0: .4byte sub_804FD48
@@ -12576,7 +12576,7 @@ _08053108:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, _08053124 @ =gUnknown_2037AB8
+	ldr r0, _08053124 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12586,7 +12586,7 @@ _08053108:
 _08053120:
 	b _08053704
 	.align 2, 0
-_08053124: .4byte gUnknown_2037AB8
+_08053124: .4byte gPaletteFade
 _08053128:
 	ldr r2, _0805317C @ =gSprites
 	ldr r4, [r7]
@@ -12860,7 +12860,7 @@ _08053320:
 	.align 2, 0
 _0805333C: .4byte gUnknown_2031DAC
 _08053340:
-	ldr r4, _08053364 @ =gUnknown_2037AB8
+	ldr r4, _08053364 @ =gPaletteFade
 	ldrb r1, [r4, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12878,9 +12878,9 @@ _0805334E:
 	strb r0, [r4, 0x8]
 	b _08053704
 	.align 2, 0
-_08053364: .4byte gUnknown_2037AB8
+_08053364: .4byte gPaletteFade
 _08053368:
-	ldr r2, _08053380 @ =gUnknown_2037AB8
+	ldr r2, _08053380 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -12893,13 +12893,13 @@ _08053368:
 	movs r3, 0
 	b _08053700
 	.align 2, 0
-_08053380: .4byte gUnknown_2037AB8
+_08053380: .4byte gPaletteFade
 _08053384:
 	movs r1, 0xA2
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, _080533A0 @ =gUnknown_2037AB8
+	ldr r0, _080533A0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12909,7 +12909,7 @@ _08053384:
 _0805339C:
 	b _08053704
 	.align 2, 0
-_080533A0: .4byte gUnknown_2037AB8
+_080533A0: .4byte gPaletteFade
 _080533A4:
 	ldr r0, _08053438 @ =gUnknown_826CDE4
 	movs r2, 0x8
@@ -13332,7 +13332,7 @@ _08053708:
 	.align 2, 0
 _08053714: .4byte gUnknown_2031DAC
 _08053718:
-	ldr r0, _08053780 @ =gUnknown_2037AB8
+	ldr r0, _08053780 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -13374,7 +13374,7 @@ _08053776:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08053780: .4byte gUnknown_2037AB8
+_08053780: .4byte gPaletteFade
 _08053784: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_805232C
 
@@ -13477,7 +13477,7 @@ sub_805383C: @ 805383C
 	ands r0, r6
 	cmp r0, 0
 	beq _0805387A
-	ldr r4, _080538A8 @ =gUnknown_2022118
+	ldr r4, _080538A8 @ =gBlockRecvBuffer
 	ldrh r1, [r4]
 	ldr r0, _080538AC @ =0x0000dcba
 	cmp r1, r0
@@ -13501,7 +13501,7 @@ _0805387A:
 	ands r0, r5
 	cmp r0, 0
 	beq _080538A2
-	ldr r0, _080538A8 @ =gUnknown_2022118
+	ldr r0, _080538A8 @ =gBlockRecvBuffer
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r1
@@ -13522,7 +13522,7 @@ _080538A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080538A8: .4byte gUnknown_2022118
+_080538A8: .4byte gBlockRecvBuffer
 _080538AC: .4byte 0x0000dcba
 _080538B0: .4byte sub_8053788
 _080538B4: .4byte 0x0000abcd
@@ -13782,7 +13782,7 @@ _08053A98: .4byte SpriteCallbackDummy
 	thumb_func_start sub_8053A9C
 sub_8053A9C: @ 8053A9C
 	push {r4-r6,lr}
-	ldr r0, _08053AD0 @ =gUnknown_20370C0
+	ldr r0, _08053AD0 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -13806,7 +13806,7 @@ sub_8053A9C: @ 8053A9C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08053AD0: .4byte gUnknown_20370C0
+_08053AD0: .4byte gSpecialVar_0x8004
 _08053AD4: .4byte gUnknown_826CF8C
 _08053AD8: .4byte gStringVar1
 _08053ADC: .4byte gSpeciesNames
@@ -13817,7 +13817,7 @@ _08053AE0: .4byte gStringVar2
 sub_8053AE4: @ 8053AE4
 	push {r4,lr}
 	sub sp, 0x20
-	ldr r0, _08053B2C @ =gUnknown_20370C0
+	ldr r0, _08053B2C @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -13848,7 +13848,7 @@ sub_8053AE4: @ 8053AE4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053B2C: .4byte gUnknown_20370C0
+_08053B2C: .4byte gSpecialVar_0x8004
 _08053B30: .4byte gUnknown_826CF8C
 _08053B34: .4byte gSpecialVar_0x8005
 _08053B38: .4byte gPlayerParty
@@ -14115,14 +14115,14 @@ sub_8053D68: @ 8053D68
 	push {lr}
 	ldr r0, _08053D7C @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
-	ldr r1, _08053D80 @ =gUnknown_20370C0
+	ldr r1, _08053D80 @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_8053B48
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08053D7C: .4byte gSpecialVar_0x8005
-_08053D80: .4byte gUnknown_20370C0
+_08053D80: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8053D68
 
 	thumb_func_start sub_8053D84
@@ -14476,7 +14476,7 @@ _08054120:
 	movs r0, 0x15
 	bl IncrementGameStat
 _08054132:
-	ldr r0, _08054178 @ =gUnknown_3003F3C
+	ldr r0, _08054178 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805415A
@@ -14508,7 +14508,7 @@ _0805415A:
 	b _080541F2
 	.align 2, 0
 _08054174: .4byte gUnknown_2031DAC
-_08054178: .4byte gUnknown_3003F3C
+_08054178: .4byte gWirelessCommType
 _0805417C: .4byte gLinkPlayers
 _08054180: .4byte gMain
 _08054184:
@@ -14685,7 +14685,7 @@ _080542C4:
 	bl BeginNormalPaletteFade
 	b _08054338
 _080542E0:
-	ldr r0, _080542FC @ =gUnknown_2037AB8
+	ldr r0, _080542FC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -14699,7 +14699,7 @@ _080542E0:
 	adds r1, r0
 	b _08054340
 	.align 2, 0
-_080542FC: .4byte gUnknown_2037AB8
+_080542FC: .4byte gPaletteFade
 _08054300: .4byte gMain
 _08054304:
 	bl IsBGMStopped
@@ -14707,7 +14707,7 @@ _08054304:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08054396
-	ldr r0, _08054328 @ =gUnknown_3003F3C
+	ldr r0, _08054328 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08054334
@@ -14719,7 +14719,7 @@ _08054304:
 	bl sub_800AB9C
 	b _08054338
 	.align 2, 0
-_08054328: .4byte gUnknown_3003F3C
+_08054328: .4byte gWirelessCommType
 _0805432C: .4byte gMain
 _08054330: .4byte sub_804C718
 _08054334:
@@ -14737,7 +14737,7 @@ _08054340:
 	.align 2, 0
 _08054348: .4byte gMain
 _0805434C:
-	ldr r0, _08054374 @ =gUnknown_3003F3C
+	ldr r0, _08054374 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08054384
@@ -14756,12 +14756,12 @@ _0805434C:
 	bl SetMainCallback2
 	b _08054396
 	.align 2, 0
-_08054374: .4byte gUnknown_3003F3C
+_08054374: .4byte gWirelessCommType
 _08054378: .4byte sub_804C718
 _0805437C: .4byte gSoftResetDisabled
 _08054380: .4byte sub_80543C4
 _08054384:
-	ldr r0, _080543B8 @ =gUnknown_3003F64
+	ldr r0, _080543B8 @ =gReceivedRemoteLinkPlayers
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _08054396
@@ -14784,7 +14784,7 @@ _080543A4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080543B8: .4byte gUnknown_3003F64
+_080543B8: .4byte gReceivedRemoteLinkPlayers
 _080543BC: .4byte gSoftResetDisabled
 _080543C0: .4byte sub_80543C4
 	thumb_func_end sub_8053E8C
@@ -14792,7 +14792,7 @@ _080543C0: .4byte sub_80543C4
 	thumb_func_start sub_80543C4
 sub_80543C4: @ 80543C4
 	push {r4,r5,lr}
-	ldr r0, _08054430 @ =gUnknown_2037AB8
+	ldr r0, _08054430 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -14815,7 +14815,7 @@ sub_80543C4: @ 80543C4
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
-	ldr r0, _08054438 @ =gUnknown_3003F3C
+	ldr r0, _08054438 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08054412
@@ -14833,9 +14833,9 @@ _0805441A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054430: .4byte gUnknown_2037AB8
+_08054430: .4byte gPaletteFade
 _08054434: .4byte gUnknown_2031DAC
-_08054438: .4byte gUnknown_3003F3C
+_08054438: .4byte gWirelessCommType
 _0805443C: .4byte gMain
 	thumb_func_end sub_80543C4
 
@@ -14867,7 +14867,7 @@ sub_8054470: @ 8054470
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0805449C @ =gUnknown_2037AB8
+	ldr r0, _0805449C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -14885,7 +14885,7 @@ _08054494:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805449C: .4byte gUnknown_2037AB8
+_0805449C: .4byte gPaletteFade
 _080544A0: .4byte sub_80505CC
 _080544A4: .4byte gUnknown_3005020
 _080544A8: .4byte sub_807DD24

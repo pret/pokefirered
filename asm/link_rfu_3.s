@@ -230,7 +230,7 @@ sub_8115A24: @ 8115A24
 	movs r0, 0
 	strb r0, [r1, 0xC]
 	strb r0, [r1, 0xD]
-	ldr r1, _08115A64 @ =gUnknown_20370D0
+	ldr r1, _08115A64 @ =gSpecialVar_Result
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -239,7 +239,7 @@ _08115A54: .4byte sub_8115A68
 _08115A58: .4byte gUnknown_203B05C
 _08115A5C: .4byte gTasks+0x8
 _08115A60: .4byte gUnknown_3002024
-_08115A64: .4byte gUnknown_20370D0
+_08115A64: .4byte gSpecialVar_Result
 	thumb_func_end sub_8115A24
 
 	thumb_func_start sub_8115A68
@@ -299,7 +299,7 @@ _08115A90:
 _08115B0C:
 	ldr r3, _08115B4C @ =gUnknown_203B058
 	ldr r2, _08115B50 @ =gUnknown_8456CD8
-	ldr r1, _08115B54 @ =gUnknown_20370C0
+	ldr r1, _08115B54 @ =gSpecialVar_0x8004
 	ldrh r0, [r1]
 	lsls r0, 2
 	adds r0, r2
@@ -328,7 +328,7 @@ _08115B0C:
 	.align 2, 0
 _08115B4C: .4byte gUnknown_203B058
 _08115B50: .4byte gUnknown_8456CD8
-_08115B54: .4byte gUnknown_20370C0
+_08115B54: .4byte gSpecialVar_0x8004
 _08115B58: .4byte gUnknown_203B059
 _08115B5C:
 	movs r0, 0x70
@@ -1083,22 +1083,22 @@ _0811617E:
 	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, _08116190 @ =gUnknown_20370D0
+	ldr r1, _08116190 @ =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	b _081161D8
 	.align 2, 0
-_08116190: .4byte gUnknown_20370D0
+_08116190: .4byte gSpecialVar_Result
 _08116194:
 	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, _081161A8 @ =gUnknown_20370D0
+	ldr r1, _081161A8 @ =gSpecialVar_Result
 	movs r0, 0x8
 	strh r0, [r1]
 	b _081161D8
 	.align 2, 0
-_081161A8: .4byte gUnknown_20370D0
+_081161A8: .4byte gSpecialVar_Result
 _081161AC:
 	bl sub_80FBA00
 	cmp r0, 0
@@ -1107,7 +1107,7 @@ _081161AC:
 	strb r0, [r5, 0xC]
 	b _081161D8
 _081161BA:
-	ldr r0, _081161E0 @ =gUnknown_3003F64
+	ldr r0, _081161E0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081161D8
@@ -1124,7 +1124,7 @@ _081161D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081161E0: .4byte gUnknown_3003F64
+_081161E0: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_8115A68
 
 	thumb_func_start sub_81161E4
@@ -1767,7 +1767,7 @@ BerryBlenderLinkJoinGroup: @ 81166F4
 	movs r0, 0
 	strb r0, [r1, 0x8]
 	strb r0, [r1, 0x9]
-	ldr r1, _08116734 @ =gUnknown_20370D0
+	ldr r1, _08116734 @ =gSpecialVar_Result
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -1776,7 +1776,7 @@ _08116724: .4byte sub_8116738
 _08116728: .4byte gUnknown_203B05C
 _0811672C: .4byte gTasks+0x8
 _08116730: .4byte gUnknown_3002028
-_08116734: .4byte gUnknown_20370D0
+_08116734: .4byte gSpecialVar_Result
 	thumb_func_end BerryBlenderLinkJoinGroup
 
 	thumb_func_start sub_8116738
@@ -1828,7 +1828,7 @@ _08116760:
 	.4byte _08116CEC
 _081167C0:
 	ldr r5, _08116800 @ =gUnknown_84570C8
-	ldr r4, _08116804 @ =gUnknown_20370C0
+	ldr r4, _08116804 @ =gSpecialVar_0x8004
 	ldrh r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1855,13 +1855,13 @@ _081167C0:
 	b _08116D06
 	.align 2, 0
 _08116800: .4byte gUnknown_84570C8
-_08116804: .4byte gUnknown_20370C0
+_08116804: .4byte gSpecialVar_0x8004
 _08116808: .4byte gUnknown_203B058
 _0811680C:
 	adds r0, r6, 0
 	adds r0, 0x9
 	ldr r2, _08116830 @ =gUnknown_84591B8
-	ldr r1, _08116834 @ =gUnknown_20370C0
+	ldr r1, _08116834 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	lsls r1, 2
 	adds r1, r2
@@ -1877,7 +1877,7 @@ _08116828:
 	b _08116D06
 	.align 2, 0
 _08116830: .4byte gUnknown_84591B8
-_08116834: .4byte gUnknown_20370C0
+_08116834: .4byte gSpecialVar_0x8004
 _08116838:
 	ldr r0, [r6, 0x4]
 	movs r1, 0x4
@@ -1886,7 +1886,7 @@ _08116838:
 	movs r1, 0x10
 	bl sub_811A5E4
 	ldr r0, [r6, 0x4]
-	ldr r1, _081168E8 @ =gUnknown_20370C0
+	ldr r1, _081168E8 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	bl sub_811A054
 	movs r4, 0
@@ -1950,7 +1950,7 @@ _08116838:
 	strb r0, [r6, 0x8]
 	b _08116D06
 	.align 2, 0
-_081168E8: .4byte gUnknown_20370C0
+_081168E8: .4byte gSpecialVar_0x8004
 _081168EC: .4byte gUnknown_8456CD0
 _081168F0: .4byte gUnknown_8456D4C
 _081168F4: .4byte gUnknown_8456D54
@@ -2082,7 +2082,7 @@ _081169FC: .4byte gStringVar4
 _08116A00: .4byte gUnknown_203B058
 _08116A04: .4byte gStringVar1
 _08116A08:
-	ldr r0, _08116A3C @ =gUnknown_3003F64
+	ldr r0, _08116A3C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08116AA4
@@ -2108,7 +2108,7 @@ _08116A08:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08116A3C: .4byte gUnknown_3003F64
+_08116A3C: .4byte gReceivedRemoteLinkPlayers
 _08116A40: .4byte gUnknown_203B058
 _08116A44: .4byte _08116A48
 	.align 2, 0
@@ -2361,19 +2361,19 @@ _08116C68:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08116D06
-	ldr r0, _08116C94 @ =gUnknown_20370D0
+	ldr r0, _08116C94 @ =gSpecialVar_Result
 	movs r1, 0x6
 	b _08116CDC
 	.align 2, 0
 _08116C90: .4byte gUnknown_8457754
-_08116C94: .4byte gUnknown_20370D0
+_08116C94: .4byte gSpecialVar_Result
 _08116C98:
 	bl sub_80FCE44
-	ldr r0, _08116CA4 @ =gUnknown_20370D0
+	ldr r0, _08116CA4 @ =gSpecialVar_Result
 	movs r1, 0x5
 	b _08116CDC
 	.align 2, 0
-_08116CA4: .4byte gUnknown_20370D0
+_08116CA4: .4byte gSpecialVar_Result
 _08116CA8:
 	bl sub_80FCE44
 	adds r5, r6, 0
@@ -2397,7 +2397,7 @@ _08116CCE:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08116D06
-	ldr r0, _08116CE8 @ =gUnknown_20370D0
+	ldr r0, _08116CE8 @ =gSpecialVar_Result
 	movs r1, 0x8
 _08116CDC:
 	strh r1, [r0]
@@ -2406,7 +2406,7 @@ _08116CDC:
 	b _08116D06
 	.align 2, 0
 _08116CE4: .4byte gStringVar4
-_08116CE8: .4byte gUnknown_20370D0
+_08116CE8: .4byte gSpecialVar_Result
 _08116CEC:
 	adds r0, r4, 0
 	bl DestroyTask
@@ -2499,7 +2499,7 @@ sub_8116D60: @ 8116D60
 	adds r0, r5, 0
 	bl ConvertInternationalString
 	ldr r1, _08116DD8 @ =gUnknown_84570C8
-	ldr r0, _08116DDC @ =gUnknown_20370C0
+	ldr r0, _08116DDC @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -2525,7 +2525,7 @@ sub_8116D60: @ 8116D60
 	.align 2, 0
 _08116DD4: .4byte gStringVar1
 _08116DD8: .4byte gUnknown_84570C8
-_08116DDC: .4byte gUnknown_20370C0
+_08116DDC: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8116D60
 
 	thumb_func_start sub_8116DE0
@@ -3028,7 +3028,7 @@ _0811719C:
 	eors r1, r2
 	lsls r1, 24
 	lsrs r1, 16
-	ldr r2, _081171D4 @ =gUnknown_2022118
+	ldr r2, _081171D4 @ =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0x64
 	bl memcpy
@@ -3038,9 +3038,9 @@ _0811719C:
 	b _081171FA
 	.align 2, 0
 _081171D0: .4byte gEnemyParty
-_081171D4: .4byte gUnknown_2022118
+_081171D4: .4byte gBlockRecvBuffer
 _081171D8:
-	ldr r4, _08117204 @ =gUnknown_2022618
+	ldr r4, _08117204 @ =gBlockSendBuffer
 	ldr r0, _08117208 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, _0811720C @ =0x00002cd0
@@ -3061,7 +3061,7 @@ _081171FA:
 	strh r0, [r5, 0x8]
 	b _0811725C
 	.align 2, 0
-_08117204: .4byte gUnknown_2022618
+_08117204: .4byte gBlockSendBuffer
 _08117208: .4byte gSaveBlock1Ptr
 _0811720C: .4byte 0x00002cd0
 _08117210:
@@ -3077,7 +3077,7 @@ _08117210:
 	eors r1, r0
 	lsls r1, 24
 	lsrs r1, 16
-	ldr r0, _0811726C @ =gUnknown_2022118
+	ldr r0, _0811726C @ =gBlockRecvBuffer
 	adds r1, r0
 	adds r0, r4, 0
 	movs r2, 0xD8
@@ -3104,7 +3104,7 @@ _0811725C:
 	bx r0
 	.align 2, 0
 _08117268: .4byte gUnknown_2031CCC
-_0811726C: .4byte gUnknown_2022118
+_0811726C: .4byte gBlockRecvBuffer
 _08117270: .4byte gUnknown_2031DA4
 _08117274: .4byte gMain
 _08117278: .4byte c2_exit_to_overworld_2_switch
@@ -3165,7 +3165,7 @@ _081172E0: .4byte gUnknown_2039624
 _081172E4: .4byte gLinkPlayers
 _081172E8:
 	lsls r0, r4, 8
-	ldr r1, _08117338 @ =gUnknown_2022118
+	ldr r1, _08117338 @ =gBlockRecvBuffer
 	adds r1, r0, r1
 	adds r0, r5, 0
 	movs r2, 0x60
@@ -3192,7 +3192,7 @@ _08117302:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 16
-	ldr r1, _08117338 @ =gUnknown_2022118
+	ldr r1, _08117338 @ =gBlockRecvBuffer
 	adds r1, r0, r1
 	adds r0, r1, 0
 	adds r0, 0x60
@@ -3200,7 +3200,7 @@ _08117302:
 	bl sub_81446D0
 	b _08117340
 	.align 2, 0
-_08117338: .4byte gUnknown_2022118
+_08117338: .4byte gBlockRecvBuffer
 _0811733C:
 	bl sub_81446C4
 _08117340:
@@ -3396,7 +3396,7 @@ sub_81174B4: @ 81174B4
 	lsrs r5, 24
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _08117524 @ =gUnknown_20370C0
+	ldr r0, _08117524 @ =gSpecialVar_0x8004
 	strh r1, [r0]
 	ldr r0, _08117528 @ =0x0000406f
 	bl VarSet
@@ -3432,7 +3432,7 @@ sub_81174B4: @ 81174B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08117524: .4byte gUnknown_20370C0
+_08117524: .4byte gSpecialVar_0x8004
 _08117528: .4byte 0x0000406f
 _0811752C: .4byte gUnknown_3005030
 _08117530: .4byte gUnknown_300502C
@@ -3657,7 +3657,7 @@ _08117798: .4byte gMain
 _0811779C: .4byte sub_811C1C8
 _081177A0:
 	bl sub_80563F0
-	ldr r0, _081177C4 @ =gUnknown_2022618
+	ldr r0, _081177C4 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	bl sp000_heal_pokemon
@@ -3670,13 +3670,13 @@ _081177A0:
 	movs r2, 0x6
 	b _0811782E
 	.align 2, 0
-_081177C4: .4byte gUnknown_2022618
+_081177C4: .4byte gBlockSendBuffer
 _081177C8:
 	bl sub_80563F0
 	bl sp000_heal_pokemon
 	bl SavePlayerParty
 	bl LoadPlayerBag
-	ldr r0, _081177EC @ =gUnknown_2022618
+	ldr r0, _081177EC @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	movs r0, 0x2
@@ -3686,13 +3686,13 @@ _081177C8:
 	movs r2, 0x6
 	b _0811782E
 	.align 2, 0
-_081177EC: .4byte gUnknown_2022618
+_081177EC: .4byte gBlockSendBuffer
 _081177F0:
 	bl sub_80563F0
 	bl sp000_heal_pokemon
 	bl SavePlayerParty
 	bl LoadPlayerBag
-	ldr r0, _08117814 @ =gUnknown_2022618
+	ldr r0, _08117814 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	movs r0, 0x5
@@ -3701,9 +3701,9 @@ _081177F0:
 	movs r1, 0x3
 	b _0811782C
 	.align 2, 0
-_08117814: .4byte gUnknown_2022618
+_08117814: .4byte gBlockSendBuffer
 _08117818:
-	ldr r0, _0811783C @ =gUnknown_2022618
+	ldr r0, _0811783C @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	bl sub_80563F0
@@ -3720,7 +3720,7 @@ _0811782E:
 	bl SetMainCallback2
 	b _081178E0
 	.align 2, 0
-_0811783C: .4byte gUnknown_2022618
+_0811783C: .4byte gBlockSendBuffer
 _08117840: .4byte sub_8117534
 _08117844:
 	ldr r0, _08117850 @ =sub_8117130
@@ -3746,14 +3746,14 @@ _08117872:
 	bl sub_8128420
 	b _081178E0
 _08117878:
-	ldr r0, _08117888 @ =gUnknown_2022618
+	ldr r0, _08117888 @ =gBlockSendBuffer
 	movs r1, 0
 	bl sub_8117594
 	ldr r0, _0811788C @ =sub_8117354
 	bl SetMainCallback2
 	b _081178E0
 	.align 2, 0
-_08117888: .4byte gUnknown_2022618
+_08117888: .4byte gBlockSendBuffer
 _0811788C: .4byte sub_8117354
 _08117890:
 	movs r0, 0x8
@@ -3791,7 +3791,7 @@ _081178C8:
 _081178E0:
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, _081178FC @ =gUnknown_20370D0
+	ldr r1, _081178FC @ =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	bl ScriptContext2_Disable
@@ -3801,7 +3801,7 @@ _081178E0:
 	bx r0
 	.align 2, 0
 _081178F8: .4byte sub_805671C
-_081178FC: .4byte gUnknown_20370D0
+_081178FC: .4byte gSpecialVar_Result
 	thumb_func_end sub_81175BC
 
 	thumb_func_start sub_8117900
@@ -3832,13 +3832,13 @@ _08117928:
 	beq _08117974
 	b _08117988
 _08117932:
-	ldr r1, _08117940 @ =gUnknown_20370D0
+	ldr r1, _08117940 @ =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	bl EnableBothScriptContexts
 	b _08117968
 	.align 2, 0
-_08117940: .4byte gUnknown_20370D0
+_08117940: .4byte gSpecialVar_Result
 _08117944:
 	bl ScriptContext1_IsScriptSetUp
 	lsls r0, 24
@@ -3849,7 +3849,7 @@ _08117944:
 	bl fade_screen
 	b _08117968
 _08117958:
-	ldr r0, _08117970 @ =gUnknown_2037AB8
+	ldr r0, _08117970 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3862,7 +3862,7 @@ _08117968:
 	strh r0, [r4]
 	b _08117988
 	.align 2, 0
-_08117970: .4byte gUnknown_2037AB8
+_08117970: .4byte gPaletteFade
 _08117974:
 	bl sub_800A4BC
 	lsls r0, 24
@@ -3931,7 +3931,7 @@ sub_81179CC: @ 81179CC
 	strb r2, [r1, 0xC]
 	strb r2, [r1, 0xD]
 	strb r4, [r1, 0x18]
-	ldr r0, _08117A08 @ =gUnknown_20370D0
+	ldr r0, _08117A08 @ =gSpecialVar_Result
 	strh r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -3940,7 +3940,7 @@ sub_81179CC: @ 81179CC
 _081179FC: .4byte sub_8117A0C
 _08117A00: .4byte gUnknown_203B05C
 _08117A04: .4byte gTasks+0x8
-_08117A08: .4byte gUnknown_20370D0
+_08117A08: .4byte gSpecialVar_Result
 	thumb_func_end sub_81179CC
 
 	thumb_func_start sub_8117A0C
@@ -4421,13 +4421,13 @@ _08117E26:
 	beq _08117ECA
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, _08117E48 @ =gUnknown_20370D0
+	ldr r1, _08117E48 @ =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	b _08117ECA
 	.align 2, 0
 _08117E44: .4byte gUnknown_84571B8
-_08117E48: .4byte gUnknown_20370D0
+_08117E48: .4byte gSpecialVar_Result
 _08117E4C:
 	bl sub_80FB9F4
 	lsls r0, 24
@@ -4444,7 +4444,7 @@ _08117E64:
 	strb r0, [r5, 0xC]
 	b _08117ECA
 _08117E6A:
-	ldr r0, _08117E7C @ =gUnknown_3003F64
+	ldr r0, _08117E7C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08117ECA
@@ -4452,7 +4452,7 @@ _08117E6A:
 	bl sub_80FAFE0
 	b _08117EB2
 	.align 2, 0
-_08117E7C: .4byte gUnknown_3003F64
+_08117E7C: .4byte gReceivedRemoteLinkPlayers
 _08117E80:
 	ldrb r0, [r5, 0x12]
 	movs r1, 0
@@ -4513,7 +4513,7 @@ sub_8117ED4: @ 8117ED4
 	strb r2, [r1, 0x9]
 	subs r4, 0x15
 	strb r4, [r1, 0x12]
-	ldr r0, _08117F1C @ =gUnknown_20370D0
+	ldr r0, _08117F1C @ =gSpecialVar_Result
 	strh r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -4523,7 +4523,7 @@ _08117F0C: .4byte sub_8117F20
 _08117F10: .4byte gUnknown_203B05C
 _08117F14: .4byte gTasks+0x8
 _08117F18: .4byte gUnknown_3002028
-_08117F1C: .4byte gUnknown_20370D0
+_08117F1C: .4byte gSpecialVar_Result
 	thumb_func_end sub_8117ED4
 
 	thumb_func_start sub_8117F20
@@ -4791,7 +4791,7 @@ _08118150:
 _08118184: .4byte gUnknown_8459238
 _08118188: .4byte gStringVar1
 _0811818C:
-	ldr r0, _081181C4 @ =gUnknown_3003F64
+	ldr r0, _081181C4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081181AA
@@ -4820,7 +4820,7 @@ _081181AA:
 	blt _08118288
 	b _081181D0
 	.align 2, 0
-_081181C4: .4byte gUnknown_3003F64
+_081181C4: .4byte gReceivedRemoteLinkPlayers
 _081181C8: .4byte gUnknown_203B058
 _081181CC:
 	cmp r0, 0x6
@@ -4883,13 +4883,13 @@ _08118252:
 	adds r0, r6, 0
 	bl DestroyTask
 	bl sub_80F8DC0
-	ldr r1, _08118268 @ =gUnknown_20370D0
+	ldr r1, _08118268 @ =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	b _08118288
 	.align 2, 0
 _08118264: .4byte gUnknown_84571B8
-_08118268: .4byte gUnknown_20370D0
+_08118268: .4byte gSpecialVar_Result
 _0811826C:
 	ldrb r0, [r5, 0x8]
 	adds r0, 0x1
@@ -4933,7 +4933,7 @@ sub_8118290: @ 8118290
 	strb r2, [r1, 0x9]
 	subs r4, 0x15
 	strb r4, [r1, 0x12]
-	ldr r0, _081182D8 @ =gUnknown_20370D0
+	ldr r0, _081182D8 @ =gSpecialVar_Result
 	strh r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -4943,7 +4943,7 @@ _081182C8: .4byte sub_81182DC
 _081182CC: .4byte gUnknown_203B05C
 _081182D0: .4byte gTasks+0x8
 _081182D4: .4byte gUnknown_3002028
-_081182D8: .4byte gUnknown_20370D0
+_081182D8: .4byte gSpecialVar_Result
 	thumb_func_end sub_8118290
 
 	thumb_func_start sub_81182DC
@@ -5188,7 +5188,7 @@ _081184C8:
 _081184FC: .4byte gUnknown_845928C
 _08118500: .4byte gStringVar1
 _08118504:
-	ldr r0, _0811853C @ =gUnknown_3003F64
+	ldr r0, _0811853C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08118522
@@ -5217,7 +5217,7 @@ _08118522:
 	blt _08118604
 	b _08118548
 	.align 2, 0
-_0811853C: .4byte gUnknown_3003F64
+_0811853C: .4byte gReceivedRemoteLinkPlayers
 _08118540: .4byte gUnknown_203B058
 _08118544:
 	cmp r0, 0x6
@@ -5288,13 +5288,13 @@ _081185C2:
 	adds r0, r4, 0
 	bl DestroyTask
 	bl sub_80F8DC0
-	ldr r1, _081185E4 @ =gUnknown_20370D0
+	ldr r1, _081185E4 @ =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	b _08118604
 	.align 2, 0
 _081185E0: .4byte gUnknown_845933C
-_081185E4: .4byte gUnknown_20370D0
+_081185E4: .4byte gSpecialVar_Result
 _081185E8:
 	ldrb r0, [r5, 0x8]
 	adds r0, 0x1
@@ -5334,7 +5334,7 @@ UnionRoomSpecial: @ 811860C
 	strb r1, [r0, 0x16]
 	strh r1, [r0, 0x10]
 	strh r1, [r0, 0x12]
-	ldr r0, _08118654 @ =gUnknown_20370D0
+	ldr r0, _08118654 @ =gSpecialVar_Result
 	strh r1, [r0]
 	movs r0, 0xD0
 	movs r1, 0x1
@@ -5346,7 +5346,7 @@ UnionRoomSpecial: @ 811860C
 _08118648: .4byte sub_81186E0
 _0811864C: .4byte gUnknown_203B05C
 _08118650: .4byte gUnknown_300202C
-_08118654: .4byte gUnknown_20370D0
+_08118654: .4byte gSpecialVar_Result
 	thumb_func_end UnionRoomSpecial
 
 	thumb_func_start sub_8118658
@@ -5593,14 +5593,14 @@ _0811887C:
 	ldr r0, [r6, 0xC]
 	movs r1, 0x4
 	bl sub_811A650
-	ldr r1, _081188C8 @ =gUnknown_20370D0
+	ldr r1, _081188C8 @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x3
 	bl _081198DA
 	.align 2, 0
 _081188C4: .4byte gUnknown_203B06C
-_081188C8: .4byte gUnknown_20370D0
+_081188C8: .4byte gSpecialVar_Result
 _081188CC:
 	bl sub_811FB18
 	lsls r0, 24
@@ -5703,7 +5703,7 @@ _081189A4:
 	movs r0, 0x4
 	bl _081198DA
 _081189AA:
-	ldr r4, _081189D8 @ =gUnknown_20370D0
+	ldr r4, _081189D8 @ =gSpecialVar_Result
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _08118A0E
@@ -5723,7 +5723,7 @@ _081189AA:
 	movs r0, 0x2A
 	b _08118A06
 	.align 2, 0
-_081189D8: .4byte gUnknown_20370D0
+_081189D8: .4byte gSpecialVar_Result
 _081189DC: .4byte gStringVar1
 _081189E0: .4byte gSaveBlock2Ptr
 _081189E4:
@@ -5941,13 +5941,13 @@ _08118BBC:
 	movs r0, 0x40
 	strb r0, [r1]
 _08118BC2:
-	ldr r0, _08118BEC @ =gUnknown_3003F64
+	ldr r0, _08118BEC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08118BCE
 	bl _081198DC
 _08118BCE:
-	ldr r0, _08118BF0 @ =gUnknown_2022618
+	ldr r0, _08118BF0 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	ldr r0, _08118BF4 @ =sub_8117280
@@ -5958,8 +5958,8 @@ _08118BCE:
 	.align 2, 0
 _08118BE4: .4byte gUnknown_8457F90
 _08118BE8: .4byte gUnknown_203B058
-_08118BEC: .4byte gUnknown_3003F64
-_08118BF0: .4byte gUnknown_2022618
+_08118BEC: .4byte gReceivedRemoteLinkPlayers
+_08118BF0: .4byte gBlockSendBuffer
 _08118BF4: .4byte sub_8117280
 _08118BF8:
 	ldr r0, _08118C1C @ =sub_8117280
@@ -5985,7 +5985,7 @@ _08118C28:
 	movs r0, 0x5
 	bl _081198DA
 _08118C2E:
-	ldr r0, _08118C54 @ =gUnknown_3003F64
+	ldr r0, _08118C54 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08118C3A
@@ -6002,7 +6002,7 @@ _08118C3A:
 	movs r0, 0x2
 	bl _081198DA
 	.align 2, 0
-_08118C54: .4byte gUnknown_3003F64
+_08118C54: .4byte gReceivedRemoteLinkPlayers
 _08118C58:
 	adds r0, r6, 0
 	adds r0, 0x16
@@ -6021,7 +6021,7 @@ _08118C58:
 	bne _08118C7C
 	bl _081198DC
 _08118C7C:
-	ldr r0, _08118C94 @ =gUnknown_3003F64
+	ldr r0, _08118C94 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08118C98
@@ -6030,7 +6030,7 @@ _08118C7C:
 	.align 2, 0
 _08118C8C: .4byte gUnknown_8456DF4
 _08118C90: .4byte gUnknown_8456E1C
-_08118C94: .4byte gUnknown_3003F64
+_08118C94: .4byte gReceivedRemoteLinkPlayers
 _08118C98:
 	adds r1, r6, 0
 	adds r1, 0x84
@@ -6168,7 +6168,7 @@ _08118DAA:
 	.align 2, 0
 _08118DD0: .4byte gUnknown_203B06C
 _08118DD4:
-	ldr r0, _08118DEC @ =gUnknown_3003F64
+	ldr r0, _08118DEC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08118DF8
@@ -6178,7 +6178,7 @@ _08118DD4:
 	movs r0, 0x1C
 	bl _081198DA
 	.align 2, 0
-_08118DEC: .4byte gUnknown_3003F64
+_08118DEC: .4byte gReceivedRemoteLinkPlayers
 _08118DF0: .4byte gStringVar4
 _08118DF4: .4byte gUnknown_8458434
 _08118DF8:
@@ -6293,7 +6293,7 @@ _08118ED6:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r4, _08118F24 @ =gUnknown_2022744
+	ldr r4, _08118F24 @ =gLinkPlayers + 8
 	adds r1, r4
 	adds r0, r5, 0
 	bl StringCopy
@@ -6312,7 +6312,7 @@ _08118ED6:
 	bl _081198DA
 	.align 2, 0
 _08118F20: .4byte gStringVar1
-_08118F24: .4byte gUnknown_2022744
+_08118F24: .4byte gLinkPlayers + 8
 _08118F28: .4byte gStringVar4
 _08118F2C: .4byte gUnknown_8457C20
 _08118F30:
@@ -6481,7 +6481,7 @@ _08119088:
 	movs r0, 0x1E
 	bl sub_8118664
 _08119096:
-	ldr r0, _081190AC @ =gUnknown_3003F64
+	ldr r0, _081190AC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081190A2
@@ -6491,7 +6491,7 @@ _081190A2:
 	bl _081198DA
 	.align 2, 0
 _081190A8: .4byte gUnknown_84585E8
-_081190AC: .4byte gUnknown_3003F64
+_081190AC: .4byte gReceivedRemoteLinkPlayers
 _081190B0:
 	movs r0, 0x42
 	bl PlaySE
@@ -6512,13 +6512,13 @@ _081190CA:
 	movs r0, 0x2
 	bl _081198DA
 _081190DE:
-	ldr r0, _08119100 @ =gUnknown_3003F64
+	ldr r0, _08119100 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081190EA
 	bl _081198DC
 _081190EA:
-	ldr r0, _08119104 @ =gUnknown_2022618
+	ldr r0, _08119104 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
 	ldr r0, _08119108 @ =sub_8117280
@@ -6527,8 +6527,8 @@ _081190EA:
 	movs r0, 0x27
 	bl _081198DA
 	.align 2, 0
-_08119100: .4byte gUnknown_3003F64
-_08119104: .4byte gUnknown_2022618
+_08119100: .4byte gReceivedRemoteLinkPlayers
+_08119104: .4byte gBlockSendBuffer
 _08119108: .4byte sub_8117280
 _0811910C:
 	adds r0, r6, 0
@@ -6543,7 +6543,7 @@ _08119122:
 	movs r0, 0x21
 	strb r0, [r6, 0x14]
 	ldr r0, _08119154 @ =gStringVar1
-	ldr r4, _08119158 @ =gUnknown_2022760
+	ldr r4, _08119158 @ =gLinkPlayers + 0x24
 	adds r1, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -6562,7 +6562,7 @@ _08119122:
 	.align 2, 0
 _08119150: .4byte sub_8117280
 _08119154: .4byte gStringVar1
-_08119158: .4byte gUnknown_2022760
+_08119158: .4byte gLinkPlayers + 0x24
 _0811915C: .4byte gStringVar4
 _08119160: .4byte gUnknown_8457BCC
 _08119164:
@@ -6743,7 +6743,7 @@ _081192E0:
 	movs r0, 0x24
 	b _081198DA
 _081192E8:
-	ldr r0, _08119318 @ =gUnknown_3003F64
+	ldr r0, _08119318 @ =gReceivedRemoteLinkPlayers
 	ldrb r4, [r0]
 	cmp r4, 0
 	beq _081192F2
@@ -6767,7 +6767,7 @@ _081192F2:
 	strh r4, [r0]
 	b _081198DC
 	.align 2, 0
-_08119318: .4byte gUnknown_3003F64
+_08119318: .4byte gReceivedRemoteLinkPlayers
 _0811931C: .4byte gUnknown_203B058
 _08119320: .4byte gStringVar4
 _08119324:
@@ -6990,7 +6990,7 @@ _081194F0:
 	movs r0, 0x36
 	b _081198DA
 _08119504:
-	ldr r0, _08119528 @ =gUnknown_2037AB8
+	ldr r0, _08119528 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -7009,7 +7009,7 @@ _08119512:
 	bl sub_81277F4
 	b _081198DC
 	.align 2, 0
-_08119528: .4byte gUnknown_2037AB8
+_08119528: .4byte gPaletteFade
 _0811952C: .4byte gUnknown_203B06C
 _08119530: .4byte gUnknown_3005020
 _08119534: .4byte sub_807DCE4
@@ -7463,14 +7463,14 @@ var_800D_set_xB: @ 81198EC
 	bl InUnionRoom
 	cmp r0, 0x1
 	bne _081198FC
-	ldr r1, _08119900 @ =gUnknown_20370D0
+	ldr r1, _08119900 @ =gSpecialVar_Result
 	movs r0, 0xB
 	strh r0, [r1]
 _081198FC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08119900: .4byte gUnknown_20370D0
+_08119900: .4byte gSpecialVar_Result
 	thumb_func_end var_800D_set_xB
 
 	thumb_func_start sub_8119904
@@ -9685,7 +9685,7 @@ sub_811A9B8: @ 811A9B8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x8
 	bne _0811A9F0
-	ldr r0, _0811A9EC @ =gUnknown_2037078
+	ldr r0, _0811A9EC @ =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _0811A9E6
@@ -9695,7 +9695,7 @@ _0811A9E6:
 	movs r0, 0x1
 	b _0811A9F2
 	.align 2, 0
-_0811A9EC: .4byte gUnknown_2037078
+_0811A9EC: .4byte gPlayerAvatar
 _0811A9F0:
 	movs r0, 0
 _0811A9F2:
@@ -11147,7 +11147,7 @@ _0811B500: .4byte gUnknown_8459580
 	thumb_func_start is_walking_or_running
 is_walking_or_running: @ 811B504
 	push {lr}
-	ldr r0, _0811B518 @ =gUnknown_2037078
+	ldr r0, _0811B518 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _0811B512
@@ -11157,7 +11157,7 @@ _0811B512:
 	movs r0, 0x1
 	b _0811B51E
 	.align 2, 0
-_0811B518: .4byte gUnknown_2037078
+_0811B518: .4byte gPlayerAvatar
 _0811B51C:
 	movs r0, 0
 _0811B51E:
@@ -13024,7 +13024,7 @@ _0811C3B0:
 	beq _0811C3BC
 	b _0811C516
 _0811C3BC:
-	ldr r4, _0811C3D8 @ =gUnknown_2022618
+	ldr r4, _0811C3D8 @ =gBlockSendBuffer
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
@@ -13037,13 +13037,13 @@ _0811C3BC:
 	movs r0, 0x52
 	b _0811C3E2
 	.align 2, 0
-_0811C3D8: .4byte gUnknown_2022618
+_0811C3D8: .4byte gBlockSendBuffer
 _0811C3DC: .4byte gUnknown_203B0D4
 _0811C3E0:
 	movs r0, 0x51
 _0811C3E2:
 	strb r0, [r4]
-	ldr r1, _0811C3F8 @ =gUnknown_2022618
+	ldr r1, _0811C3F8 @ =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0x20
 	bl SendBlock
@@ -13053,7 +13053,7 @@ _0811C3E2:
 	adds r1, r2
 	b _0811C4F2
 	.align 2, 0
-_0811C3F8: .4byte gUnknown_2022618
+_0811C3F8: .4byte gBlockSendBuffer
 _0811C3FC: .4byte gMain
 _0811C400:
 	bl GetBlockReceivedStatus
@@ -13063,7 +13063,7 @@ _0811C400:
 	beq _0811C40E
 	b _0811C516
 _0811C40E:
-	ldr r1, _0811C440 @ =gUnknown_2022118
+	ldr r1, _0811C440 @ =gBlockRecvBuffer
 	ldrh r0, [r1]
 	cmp r0, 0x51
 	bne _0811C448
@@ -13087,11 +13087,11 @@ _0811C40E:
 	movs r1, 0x32
 	b _0811C47E
 	.align 2, 0
-_0811C440: .4byte gUnknown_2022118
+_0811C440: .4byte gBlockRecvBuffer
 _0811C444: .4byte gMain
 _0811C448:
 	bl sub_800AAC0
-	ldr r4, _0811C46C @ =gUnknown_2022118
+	ldr r4, _0811C46C @ =gBlockRecvBuffer
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 16
@@ -13106,7 +13106,7 @@ _0811C448:
 	movs r1, 0x6
 	b _0811C47E
 	.align 2, 0
-_0811C46C: .4byte gUnknown_2022118
+_0811C46C: .4byte gBlockRecvBuffer
 _0811C470: .4byte gMain
 _0811C474:
 	ldr r0, _0811C488 @ =gMain
@@ -13159,7 +13159,7 @@ _0811C4D8: .4byte gUnknown_203B08C
 _0811C4DC: .4byte gUnknown_841E58D
 _0811C4E0: .4byte c2_exit_to_overworld_2_switch
 _0811C4E4:
-	ldr r0, _0811C4FC @ =gUnknown_3003F64
+	ldr r0, _0811C4FC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0811C516
@@ -13172,7 +13172,7 @@ _0811C4F2:
 	strb r0, [r1]
 	b _0811C516
 	.align 2, 0
-_0811C4FC: .4byte gUnknown_3003F64
+_0811C4FC: .4byte gReceivedRemoteLinkPlayers
 _0811C500:
 	ldr r0, _0811C534 @ =gUnknown_203B08C
 	ldr r0, [r0]

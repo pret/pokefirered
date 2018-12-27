@@ -78,7 +78,7 @@ _0806E164: .4byte 0x00000842
 sub_806E168: @ 806E168
 	push {lr}
 	ldr r0, _0806E184 @ =0x0000403c
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r1, _0806E188 @ =gSaveBlock2Ptr
 	ldr r2, [r1]
 	movs r1, 0
@@ -98,7 +98,7 @@ _0806E18C: .4byte 0x00000838
 sub_806E190: @ 806E190
 	push {lr}
 	ldr r0, _0806E1B0 @ =0x0000403c
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r1, _0806E1B4 @ =gSaveBlock2Ptr
 	ldr r2, [r1]
 	movs r1, 0xDA
@@ -154,7 +154,7 @@ _0806E1FE:
 sub_806E204: @ 806E204
 	push {lr}
 	ldr r0, _0806E224 @ =0x0000404e
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r1, _0806E228 @ =gSaveBlock2Ptr
 	ldr r2, [r1]
 	movs r1, 0
@@ -170,11 +170,11 @@ _0806E224: .4byte 0x0000404e
 _0806E228: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_806E204
 
-	thumb_func_start sub_806E22C
-sub_806E22C: @ 806E22C
+	thumb_func_start EnableNationalPokedex
+EnableNationalPokedex: @ 806E22C
 	push {lr}
 	ldr r0, _0806E250 @ =0x0000404e
-	bl sub_806E454
+	bl GetVarPointer
 	ldr r1, _0806E254 @ =gSaveBlock2Ptr
 	ldr r2, [r1]
 	movs r1, 0xB9
@@ -191,7 +191,7 @@ sub_806E22C: @ 806E22C
 _0806E250: .4byte 0x0000404e
 _0806E254: .4byte gSaveBlock2Ptr
 _0806E258: .4byte 0x00006258
-	thumb_func_end sub_806E22C
+	thumb_func_end EnableNationalPokedex
 
 	thumb_func_start sub_806E25C
 sub_806E25C: @ 806E25C
@@ -419,8 +419,8 @@ _0806E44E:
 	bx r1
 	thumb_func_end CanResetRTC
 
-	thumb_func_start sub_806E454
-sub_806E454: @ 806E454
+	thumb_func_start GetVarPointer
+GetVarPointer: @ 806E454
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -509,7 +509,7 @@ _0806E500: .4byte gUnknown_300507C
 _0806E504: .4byte gSaveBlock1Ptr
 _0806E508: .4byte 0xffff9000
 _0806E50C:
-	ldr r0, _0806E520 @ =gUnknown_815FD0C
+	ldr r0, _0806E520 @ =gSpecialVars
 	ldr r3, _0806E524 @ =0xffff8000
 	adds r1, r6, r3
 	lsls r1, 2
@@ -520,9 +520,9 @@ _0806E518:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806E520: .4byte gUnknown_815FD0C
+_0806E520: .4byte gSpecialVars
 _0806E524: .4byte 0xffff8000
-	thumb_func_end sub_806E454
+	thumb_func_end GetVarPointer
 
 	thumb_func_start sub_806E528
 sub_806E528: @ 806E528
@@ -569,7 +569,7 @@ VarGet: @ 806E568
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_806E454
+	bl GetVarPointer
 	cmp r0, 0
 	beq _0806E57C
 	ldrh r0, [r0]
@@ -589,7 +589,7 @@ VarSet: @ 806E584
 	lsrs r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	bl sub_806E454
+	bl GetVarPointer
 	cmp r0, 0
 	beq _0806E59C
 	strh r4, [r0]
@@ -796,38 +796,38 @@ _0806E6F6:
 
 	thumb_func_start sub_806E6FC
 sub_806E6FC: @ 806E6FC
-	ldr r1, _0806E754 @ =gUnknown_20370B8
+	ldr r1, _0806E754 @ =gSpecialVar_0x8000
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _0806E758 @ =gUnknown_20370BA
+	ldr r1, _0806E758 @ =gSpecialVar_0x8001
 	strh r0, [r1]
-	ldr r1, _0806E75C @ =gUnknown_20370BC
+	ldr r1, _0806E75C @ =gSpecialVar_0x8002
 	strh r0, [r1]
-	ldr r1, _0806E760 @ =gUnknown_20370BE
+	ldr r1, _0806E760 @ =gSpecialVar_0x8003
 	strh r0, [r1]
-	ldr r1, _0806E764 @ =gUnknown_20370C0
+	ldr r1, _0806E764 @ =gSpecialVar_0x8004
 	strh r0, [r1]
 	ldr r1, _0806E768 @ =gSpecialVar_0x8005
 	strh r0, [r1]
-	ldr r1, _0806E76C @ =gUnknown_20370C4
+	ldr r1, _0806E76C @ =gSpecialVar_0x8006
 	strh r0, [r1]
-	ldr r1, _0806E770 @ =gUnknown_20370C6
+	ldr r1, _0806E770 @ =gSpecialVar_0x8007
 	strh r0, [r1]
-	ldr r1, _0806E774 @ =gUnknown_20370C8
+	ldr r1, _0806E774 @ =gSpecialVar_0x8008
 	strh r0, [r1]
-	ldr r1, _0806E778 @ =gUnknown_20370CA
+	ldr r1, _0806E778 @ =gSpecialVar_0x8009
 	strh r0, [r1]
-	ldr r1, _0806E77C @ =gUnknown_20370CC
+	ldr r1, _0806E77C @ =gSpecialVar_0x800A
 	strh r0, [r1]
-	ldr r1, _0806E780 @ =gUnknown_20370CE
+	ldr r1, _0806E780 @ =gSpecialVar_0x800B
 	strh r0, [r1]
-	ldr r1, _0806E784 @ =gUnknown_20370D4
+	ldr r1, _0806E784 @ =gSpecialVar_Facing
 	strh r0, [r1]
-	ldr r1, _0806E788 @ =gUnknown_20370D0
+	ldr r1, _0806E788 @ =gSpecialVar_Result
 	strh r0, [r1]
-	ldr r1, _0806E78C @ =gUnknown_203AD30
+	ldr r1, _0806E78C @ =gSpecialVar_ItemId
 	strh r0, [r1]
-	ldr r1, _0806E790 @ =gUnknown_20370D2
+	ldr r1, _0806E790 @ =gSpecialVar_LastTalked
 	strh r0, [r1]
 	ldr r1, _0806E794 @ =gSpecialVar_MonBoxId
 	strh r0, [r1]
@@ -841,22 +841,22 @@ sub_806E6FC: @ 806E6FC
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_0806E754: .4byte gUnknown_20370B8
-_0806E758: .4byte gUnknown_20370BA
-_0806E75C: .4byte gUnknown_20370BC
-_0806E760: .4byte gUnknown_20370BE
-_0806E764: .4byte gUnknown_20370C0
+_0806E754: .4byte gSpecialVar_0x8000
+_0806E758: .4byte gSpecialVar_0x8001
+_0806E75C: .4byte gSpecialVar_0x8002
+_0806E760: .4byte gSpecialVar_0x8003
+_0806E764: .4byte gSpecialVar_0x8004
 _0806E768: .4byte gSpecialVar_0x8005
-_0806E76C: .4byte gUnknown_20370C4
-_0806E770: .4byte gUnknown_20370C6
-_0806E774: .4byte gUnknown_20370C8
-_0806E778: .4byte gUnknown_20370CA
-_0806E77C: .4byte gUnknown_20370CC
-_0806E780: .4byte gUnknown_20370CE
-_0806E784: .4byte gUnknown_20370D4
-_0806E788: .4byte gUnknown_20370D0
-_0806E78C: .4byte gUnknown_203AD30
-_0806E790: .4byte gUnknown_20370D2
+_0806E76C: .4byte gSpecialVar_0x8006
+_0806E770: .4byte gSpecialVar_0x8007
+_0806E774: .4byte gSpecialVar_0x8008
+_0806E778: .4byte gSpecialVar_0x8009
+_0806E77C: .4byte gSpecialVar_0x800A
+_0806E780: .4byte gSpecialVar_0x800B
+_0806E784: .4byte gSpecialVar_Facing
+_0806E788: .4byte gSpecialVar_Result
+_0806E78C: .4byte gSpecialVar_ItemId
+_0806E790: .4byte gSpecialVar_LastTalked
 _0806E794: .4byte gSpecialVar_MonBoxId
 _0806E798: .4byte gSpecialVar_MonBoxPos
 _0806E79C: .4byte gUnknown_20370DA

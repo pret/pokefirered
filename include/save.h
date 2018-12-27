@@ -1,6 +1,8 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
+#include "global.h"
+
 #define NUM_SECTORS 32 // defined in agb_flash but not in a header
 
 #define SAVE_STATUS_EMPTY 0
@@ -117,6 +119,8 @@ u8 sub_80DA45C(void);
 bool8 sub_80DA4A0(void);
 u8 Save_LoadGameData(u8 a1);
 u32 TryCopySpecialSaveSection(u8 sector, u8* dst);
+u32 sub_8153634(u8 sector, u8* src);
+void sub_8153688(u8 taskId);
 u32 sub_80DA5E0(u8 sector, u8* src);
 void sub_80DA634(u8 taskId);
 

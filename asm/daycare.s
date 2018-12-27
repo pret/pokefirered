@@ -458,7 +458,7 @@ TakePokemonFromDaycare: @ 8045728
 	movs r1, 0xBE
 	lsls r1, 6
 	adds r0, r1
-	ldr r1, _08045748 @ =gUnknown_20370C0
+	ldr r1, _08045748 @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl TakeSelectedPokemonMonFromDaycareShiftSlots
 	lsls r0, 16
@@ -467,7 +467,7 @@ TakePokemonFromDaycare: @ 8045728
 	bx r1
 	.align 2, 0
 _08045744: .4byte gSaveBlock1Ptr
-_08045748: .4byte gUnknown_20370C0
+_08045748: .4byte gSpecialVar_0x8004
 	thumb_func_end TakePokemonFromDaycare
 
 	thumb_func_start GetLevelAfterDaycareSteps
@@ -598,7 +598,7 @@ GetDaycareCost: @ 8045838
 	movs r1, 0xBE
 	lsls r1, 6
 	adds r0, r1
-	ldr r1, _08045858 @ =gUnknown_20370C0
+	ldr r1, _08045858 @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl GetDaycareCostForMon
 	ldr r1, _0804585C @ =gSpecialVar_0x8005
@@ -607,7 +607,7 @@ GetDaycareCost: @ 8045838
 	bx r0
 	.align 2, 0
 _08045854: .4byte gSaveBlock1Ptr
-_08045858: .4byte gUnknown_20370C0
+_08045858: .4byte gSpecialVar_0x8004
 _0804585C: .4byte gSpecialVar_0x8005
 	thumb_func_end GetDaycareCost
 
@@ -644,7 +644,7 @@ _08045894: .4byte 0x00003d20
 GetNumLevelsGainedFromDaycare: @ 8045898
 	push {r4-r6,lr}
 	ldr r6, _080458C0 @ =gSaveBlock1Ptr
-	ldr r5, _080458C4 @ =gUnknown_20370C0
+	ldr r5, _080458C4 @ =gSpecialVar_0x8004
 	ldrh r0, [r5]
 	movs r4, 0x8C
 	adds r1, r0, 0
@@ -662,7 +662,7 @@ GetNumLevelsGainedFromDaycare: @ 8045898
 	b _080458E0
 	.align 2, 0
 _080458C0: .4byte gSaveBlock1Ptr
-_080458C4: .4byte gUnknown_20370C0
+_080458C4: .4byte gSpecialVar_0x8004
 _080458C8:
 	ldrh r0, [r5]
 	adds r1, r0, 0
@@ -2076,13 +2076,13 @@ _08046350:
 	str r0, [sp]
 	cmp r0, 0
 	bne _08046390
-	ldr r0, _0804638C @ =gUnknown_20370C0
+	ldr r0, _0804638C @ =gSpecialVar_0x8004
 	strh r5, [r0]
 	movs r0, 0x1
 	b _080463AA
 	.align 2, 0
 _08046388: .4byte gPlayerParty
-_0804638C: .4byte gUnknown_20370C0
+_0804638C: .4byte gSpecialVar_0x8004
 _08046390:
 	subs r0, 0x1
 	str r0, [sp]
@@ -2990,13 +2990,13 @@ Task_HandleDaycareLevelMenuInput: @ 80469FC
 _08046A2C: .4byte gTasks
 _08046A30: .4byte gMain
 _08046A34:
-	ldr r0, _08046A3C @ =gUnknown_20370D0
+	ldr r0, _08046A3C @ =gSpecialVar_Result
 	strh r1, [r0]
 	b _08046A46
 	.align 2, 0
-_08046A3C: .4byte gUnknown_20370D0
+_08046A3C: .4byte gSpecialVar_Result
 _08046A40:
-	ldr r1, _08046A74 @ =gUnknown_20370D0
+	ldr r1, _08046A74 @ =gSpecialVar_Result
 	movs r0, 0x2
 	strh r0, [r1]
 _08046A46:
@@ -3019,7 +3019,7 @@ _08046A46:
 	bl EnableBothScriptContexts
 	b _08046AAC
 	.align 2, 0
-_08046A74: .4byte gUnknown_20370D0
+_08046A74: .4byte gSpecialVar_Result
 _08046A78: .4byte gTasks
 _08046A7C:
 	movs r1, 0x2
@@ -3027,7 +3027,7 @@ _08046A7C:
 	ands r0, r2
 	cmp r0, 0
 	beq _08046AAC
-	ldr r0, _08046AB4 @ =gUnknown_20370D0
+	ldr r0, _08046AB4 @ =gSpecialVar_Result
 	strh r1, [r0]
 	ldrb r0, [r4, 0x8]
 	movs r1, 0
@@ -3046,7 +3046,7 @@ _08046AAC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08046AB4: .4byte gUnknown_20370D0
+_08046AB4: .4byte gSpecialVar_Result
 	thumb_func_end Task_HandleDaycareLevelMenuInput
 
 	thumb_func_start ShowDaycareLevelMenu

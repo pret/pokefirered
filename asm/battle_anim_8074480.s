@@ -3149,8 +3149,8 @@ sub_8075B48: @ 8075B48
 	lsrs r0, 16
 	cmp r1, 0
 	bne _08075BC4
-	ldr r2, _08075BB8 @ =gUnknown_20371F8
-	ldr r1, _08075BBC @ =gUnknown_20375F8
+	ldr r2, _08075BB8 @ =gPlttBufferUnfaded
+	ldr r1, _08075BBC @ =gPlttBufferFaded
 	lsls r0, 1
 	adds r4, r0, r1
 	adds r5, r0, r2
@@ -3200,14 +3200,14 @@ _08075B60:
 	bge _08075B60
 	b _08075BD4
 	.align 2, 0
-_08075BB8: .4byte gUnknown_20371F8
-_08075BBC: .4byte gUnknown_20375F8
+_08075BB8: .4byte gPlttBufferUnfaded
+_08075BBC: .4byte gPlttBufferFaded
 _08075BC0: .4byte 0xfffffc1f
 _08075BC4:
 	lsls r1, r0, 1
-	ldr r0, _08075BDC @ =gUnknown_20371F8
+	ldr r0, _08075BDC @ =gPlttBufferUnfaded
 	adds r0, r1, r0
-	ldr r2, _08075BE0 @ =gUnknown_20375F8
+	ldr r2, _08075BE0 @ =gPlttBufferFaded
 	adds r1, r2
 	ldr r2, _08075BE4 @ =0x04000008
 	bl CpuSet
@@ -3216,8 +3216,8 @@ _08075BD4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08075BDC: .4byte gUnknown_20371F8
-_08075BE0: .4byte gUnknown_20375F8
+_08075BDC: .4byte gPlttBufferUnfaded
+_08075BE0: .4byte gPlttBufferFaded
 _08075BE4: .4byte 0x04000008
 	thumb_func_end sub_8075B48
 
@@ -5967,10 +5967,10 @@ _080770D4:
 _080770D6:
 	strh r0, [r5, 0x14]
 	lsls r0, r4, 1
-	ldr r1, _08077104 @ =gUnknown_20371F8
+	ldr r1, _08077104 @ =gPlttBufferUnfaded
 	adds r0, r1
 	lsls r1, r6, 1
-	ldr r2, _08077108 @ =gUnknown_20375F8
+	ldr r2, _08077108 @ =gPlttBufferFaded
 	adds r1, r2
 	ldr r2, _0807710C @ =0x04000008
 	bl CpuSet
@@ -5986,8 +5986,8 @@ _080770D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077104: .4byte gUnknown_20371F8
-_08077108: .4byte gUnknown_20375F8
+_08077104: .4byte gPlttBufferUnfaded
+_08077108: .4byte gPlttBufferFaded
 _0807710C: .4byte 0x04000008
 _08077110: .4byte gUnknown_2037F02
 _08077114: .4byte sub_8077118

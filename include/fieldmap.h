@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELDMAP_H
 #define GUARD_FIELDMAP_H
 
+#include "global.h"
+
 extern struct MapCoords {
     int width;
     int height;

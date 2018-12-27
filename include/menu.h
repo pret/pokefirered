@@ -1,6 +1,8 @@
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
+#include "global.h"
+
 #include "text.h"
 #include "window.h"
 
@@ -32,7 +34,7 @@ void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirs
 s8 ProcessMenuInputNoWrap_(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
-void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, s8 speed, const u8 *str);
+void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str);
 void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u16 a3);
 void sub_810F4D8(u8 windowId, bool32 someBool);
 

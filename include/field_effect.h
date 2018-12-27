@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_EFFECTS_H
 #define GUARD_FIELD_EFFECTS_H
 
+#include "global.h"
+
 enum FieldEffectScriptIdx
 {
     FLDEFF_EXCLAMATION_MARK_ICON_1,

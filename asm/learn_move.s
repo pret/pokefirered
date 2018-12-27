@@ -42,7 +42,7 @@ sub_80E4660: @ 80E4660
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080E468C @ =gUnknown_2037AB8
+	ldr r0, _080E468C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -60,7 +60,7 @@ _080E4684:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E468C: .4byte gUnknown_2037AB8
+_080E468C: .4byte gPaletteFade
 _080E4690: .4byte sub_80E478C
 _080E4694: .4byte gUnknown_3005020
 _080E4698: .4byte sub_807DD24
@@ -182,7 +182,7 @@ sub_80E478C: @ 80E478C
 	str r0, [r4]
 	bl sub_80E4F54
 	ldr r0, [r4]
-	ldr r1, _080E47F4 @ =gUnknown_20370C0
+	ldr r1, _080E47F4 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	movs r2, 0x98
 	lsls r2, 2
@@ -205,7 +205,7 @@ sub_80E478C: @ 80E478C
 	.align 2, 0
 _080E47EC: .4byte gUnknown_203AAB4
 _080E47F0: .4byte 0x00000a6c
-_080E47F4: .4byte gUnknown_20370C0
+_080E47F4: .4byte gSpecialVar_0x8004
 _080E47F8: .4byte sub_80E4620
 _080E47FC: .4byte sub_80E4870
 	thumb_func_end sub_80E478C
@@ -406,7 +406,7 @@ _080E49A8:
 _080E49EC: .4byte gUnknown_203AAB4
 _080E49F0: .4byte 0x0000025f
 _080E49F4:
-	ldr r0, _080E4A08 @ =gUnknown_2037AB8
+	ldr r0, _080E4A08 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -418,7 +418,7 @@ _080E4A02:
 	movs r0, 0x4
 	b _080E4ED8
 	.align 2, 0
-_080E4A08: .4byte gUnknown_2037AB8
+_080E4A08: .4byte gPaletteFade
 _080E4A0C:
 	ldr r1, [r7]
 	ldrb r0, [r1]
@@ -505,7 +505,7 @@ _080E4A88:
 	beq _080E4AE0
 	ldr r0, _080E4AD8 @ =gUnknown_841E405
 	bl sub_80E48C0
-	ldr r1, _080E4ADC @ =gUnknown_20370C0
+	ldr r1, _080E4ADC @ =gSpecialVar_0x8004
 	movs r0, 0x1
 	strh r0, [r1]
 	ldr r1, [r4]
@@ -517,7 +517,7 @@ _080E4ACC: .4byte gPlayerParty
 _080E4AD0: .4byte 0x00000a67
 _080E4AD4: .4byte 0xffff0000
 _080E4AD8: .4byte gUnknown_841E405
-_080E4ADC: .4byte gUnknown_20370C0
+_080E4ADC: .4byte gSpecialVar_0x8004
 _080E4AE0:
 	ldr r1, [r4]
 	movs r0, 0x10
@@ -567,11 +567,11 @@ _080E4B3A:
 	beq _080E4B4C
 	b _080E4EDA
 _080E4B40:
-	ldr r0, _080E4B48 @ =gUnknown_20370C0
+	ldr r0, _080E4B48 @ =gSpecialVar_0x8004
 	strh r1, [r0]
 	b _080E4ED2
 	.align 2, 0
-_080E4B48: .4byte gUnknown_20370C0
+_080E4B48: .4byte gSpecialVar_0x8004
 _080E4B4C:
 	ldr r0, _080E4B54 @ =gUnknown_203AAB4
 	ldr r1, [r0]
@@ -720,7 +720,7 @@ _080E4C5A:
 	bl BeginNormalPaletteFade
 	b _080E4EDA
 _080E4C70:
-	ldr r0, _080E4CC8 @ =gUnknown_2037AB8
+	ldr r0, _080E4CC8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -763,7 +763,7 @@ _080E4C7E:
 	movs r0, 0x1C
 	b _080E4ED8
 	.align 2, 0
-_080E4CC8: .4byte gUnknown_2037AB8
+_080E4CC8: .4byte gPaletteFade
 _080E4CCC: .4byte 0x00000263
 _080E4CD0: .4byte 0x00000a68
 _080E4CD4: .4byte 0x00000a6a
@@ -798,7 +798,7 @@ _080E4CFA:
 	.align 2, 0
 _080E4D14: .4byte gUnknown_203AAB4
 _080E4D18:
-	ldr r0, _080E4D3C @ =gUnknown_2037AB8
+	ldr r0, _080E4D3C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -814,7 +814,7 @@ _080E4D26:
 	bl SetMainCallback2
 	b _080E4EDA
 	.align 2, 0
-_080E4D3C: .4byte gUnknown_2037AB8
+_080E4D3C: .4byte gPaletteFade
 _080E4D40: .4byte gUnknown_203AAB4
 _080E4D44: .4byte c2_exit_to_overworld_2_switch
 _080E4D48:
@@ -844,7 +844,7 @@ _080E4D48:
 	.align 2, 0
 _080E4D88: .4byte gUnknown_203AAB4
 _080E4D8C:
-	ldr r0, _080E4DAC @ =gUnknown_2037AB8
+	ldr r0, _080E4DAC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -861,7 +861,7 @@ _080E4D9A:
 	movs r0, 0x18
 	b _080E4ED8
 	.align 2, 0
-_080E4DAC: .4byte gUnknown_2037AB8
+_080E4DAC: .4byte gPaletteFade
 _080E4DB0: .4byte 0x00000261
 _080E4DB4:
 	movs r4, 0x98
@@ -882,7 +882,7 @@ _080E4DB4:
 	mov r9, r1
 	mov r1, r9
 	muls r1, r0
-	ldr r3, _080E4E58 @ =gUnknown_8247094
+	ldr r3, _080E4E58 @ =gMoveNames
 	mov r8, r3
 	add r1, r8
 	adds r0, r2, 0
@@ -931,19 +931,19 @@ _080E4DB4:
 	ldr r1, [r7]
 	movs r0, 0x1E
 	strb r0, [r1]
-	ldr r1, _080E4E6C @ =gUnknown_20370C0
+	ldr r1, _080E4E6C @ =gSpecialVar_0x8004
 	movs r0, 0x1
 	strh r0, [r1]
 	b _080E4EDA
 	.align 2, 0
 _080E4E50: .4byte gPlayerParty
 _080E4E54: .4byte gStringVar3
-_080E4E58: .4byte gUnknown_8247094
+_080E4E58: .4byte gMoveNames
 _080E4E5C: .4byte 0x00000261
 _080E4E60: .4byte 0x00000a67
 _080E4E64: .4byte gStringVar2
 _080E4E68: .4byte gUnknown_841E493
-_080E4E6C: .4byte gUnknown_20370C0
+_080E4E6C: .4byte gSpecialVar_0x8004
 _080E4E70:
 	ldr r0, _080E4E88 @ =gUnknown_841E4C0
 	bl sub_80E48C0
@@ -1297,7 +1297,7 @@ _080E511A:
 	adds r1, r2
 	ldrh r1, [r1]
 	muls r1, r7
-	ldr r2, _080E51F0 @ =gUnknown_8247094
+	ldr r2, _080E51F0 @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 	adds r4, 0xD
@@ -1331,7 +1331,7 @@ _080E513C:
 	lsls r7, 1
 	adds r1, r7
 	adds r0, r1
-	ldr r1, _080E51F8 @ =gUnknown_84161C1
+	ldr r1, _080E51F8 @ =gFameCheckerText_Cancel
 	bl StringCopy
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x1A]
@@ -1367,7 +1367,7 @@ _080E51AA:
 	adds r0, r2, 0
 	adds r0, 0x20
 	adds r0, r3
-	ldr r1, _080E51F8 @ =gUnknown_84161C1
+	ldr r1, _080E51F8 @ =gFameCheckerText_Cancel
 	str r1, [r0]
 	adds r2, 0x24
 	adds r2, r3
@@ -1394,9 +1394,9 @@ _080E51AA:
 	.align 2, 0
 _080E51E8: .4byte gUnknown_203AAB4
 _080E51EC: .4byte gPlayerParty
-_080E51F0: .4byte gUnknown_8247094
+_080E51F0: .4byte gMoveNames
 _080E51F4: .4byte gStringVar1
-_080E51F8: .4byte gUnknown_84161C1
+_080E51F8: .4byte gFameCheckerText_Cancel
 _080E51FC: .4byte gUnknown_3005E70
 _080E5200: .4byte gUnknown_83FFA94
 	thumb_func_end sub_80E50CC

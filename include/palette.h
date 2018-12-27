@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#include "global.h"
+
 #define gPaletteFade_selectedPalettes (gPaletteFade.multipurpose1) // normal and fast fade
 #define gPaletteFade_blendCnt         (gPaletteFade.multipurpose1) // hardware fade
 #define gPaletteFade_delay            (gPaletteFade.multipurpose2) // normal and hardware fade
@@ -42,8 +44,8 @@ struct PaletteFadeControl
 extern struct PaletteFadeControl gPaletteFade;
 extern u32 gPlttBufferTransferPending;
 extern u8 gPaletteDecompressionBuffer[];
-extern u16 gPlttBufferUnfaded[];
-extern u16 gPlttBufferFaded[];
+extern u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE];
+extern u16 gPlttBufferFaded[PLTT_BUFFER_SIZE];
 
 void LoadCompressedPalette(const void *, u16, u16);
 void LoadPalette(const void *, u16, u16);
@@ -67,5 +69,8 @@ void BeginFastPaletteFade(u8);
 void BeginHardwarePaletteFade(u8, u8, u8, u8, u8);
 void BlendPalettes(u32, u8, u16);
 void BlendPalettesUnfaded(u32, u8, u16);
+void sub_80716F8(const u16 *, u16 *, u16, u8);
+
+extern struct PaletteFadeControl gPaletteFade;
 
 #endif // GUARD_PALETTE_H

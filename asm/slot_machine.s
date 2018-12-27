@@ -3683,7 +3683,7 @@ _0814142E:
 	b _08141450
 _08141436:
 	bl UpdatePaletteFade
-	ldr r0, _0814144C @ =gUnknown_2037AB8
+	ldr r0, _0814144C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3692,7 +3692,7 @@ _08141436:
 	movs r0, 0
 	b _08141452
 	.align 2, 0
-_0814144C: .4byte gUnknown_2037AB8
+_0814144C: .4byte gPaletteFade
 _08141450:
 	movs r0, 0x1
 _08141452:
@@ -3728,7 +3728,7 @@ _08141472:
 	strb r0, [r4]
 	b _081414A0
 _0814148A:
-	ldr r0, _0814149C @ =gUnknown_2037AB8
+	ldr r0, _0814149C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3737,7 +3737,7 @@ _0814148A:
 	movs r0, 0
 	b _081414A2
 	.align 2, 0
-_0814149C: .4byte gUnknown_2037AB8
+_0814149C: .4byte gPaletteFade
 _081414A0:
 	movs r0, 0x1
 _081414A2:
@@ -4503,9 +4503,9 @@ _08141A00:
 	bl BlendPalettes
 _08141A2C:
 	movs r4, 0
-	ldr r5, _08141A4C @ =gUnknown_20375F8
+	ldr r5, _08141A4C @ =gPlttBufferFaded
 	ldr r3, _08141A50 @ =gUnknown_8466C34
-	ldr r2, _08141A54 @ =gUnknown_20371F8
+	ldr r2, _08141A54 @ =gPlttBufferUnfaded
 _08141A34:
 	adds r0, r4, r3
 	ldrb r0, [r0]
@@ -4520,9 +4520,9 @@ _08141A34:
 	bls _08141A34
 	b _08141AA8
 	.align 2, 0
-_08141A4C: .4byte gUnknown_20375F8
+_08141A4C: .4byte gPlttBufferFaded
 _08141A50: .4byte gUnknown_8466C34
-_08141A54: .4byte gUnknown_20371F8
+_08141A54: .4byte gPlttBufferUnfaded
 _08141A58:
 	movs r4, 0
 _08141A5A:

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "dma3.h"
 
-IWRAM_DATA struct {
+static /*IWRAM_DATA*/ struct {
     /* 0x00 */ const u8 *src;
     /* 0x04 */ u8 *dest;
     /* 0x08 */ u16 size;

@@ -94,7 +94,7 @@ _08107E5A:
 	strb r0, [r2, 0x5]
 	movs r1, 0
 	ldr r4, _08107EA4 @ =gTextFlags
-	ldr r5, _08107EA8 @ =gUnknown_203AD30
+	ldr r5, _08107EA8 @ =gSpecialVar_ItemId
 	ldr r6, _08107EAC @ =sub_8107F10
 	ldr r3, _08107EB0 @ =gUnknown_203AD10
 	movs r2, 0
@@ -132,14 +132,14 @@ _08107E9A:
 	bx r0
 	.align 2, 0
 _08107EA4: .4byte gTextFlags
-_08107EA8: .4byte gUnknown_203AD30
+_08107EA8: .4byte gSpecialVar_ItemId
 _08107EAC: .4byte sub_8107F10
 _08107EB0: .4byte gUnknown_203AD10
 _08107EB4: .4byte gUnknown_203ACFC
 	thumb_func_end sub_8107DB4
 
-	thumb_func_start sub_8107EB8
-sub_8107EB8: @ 8107EB8
+	thumb_func_start UseFameCheckerFromMenu
+UseFameCheckerFromMenu: @ 8107EB8
 	push {lr}
 	ldr r2, _08107EC8 @ =sub_80568A8
 	movs r0, 0
@@ -149,7 +149,7 @@ sub_8107EB8: @ 8107EB8
 	bx r0
 	.align 2, 0
 _08107EC8: .4byte sub_80568A8
-	thumb_func_end sub_8107EB8
+	thumb_func_end UseFameCheckerFromMenu
 
 	thumb_func_start sub_8107ECC
 sub_8107ECC: @ 8107ECC
@@ -264,13 +264,13 @@ _08107FC0:
 	b _08108104
 _08107FC6:
 	bl ResetPaletteFade
-	ldr r2, _08107FD4 @ =gUnknown_2037AB8
+	ldr r2, _08107FD4 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
 	b _08108102
 	.align 2, 0
-_08107FD4: .4byte gUnknown_2037AB8
+_08107FD4: .4byte gPaletteFade
 _08107FD8:
 	bl ResetSpriteData
 	b _08108104
@@ -408,7 +408,7 @@ _081080F4:
 	movs r0, 0x9
 	bl sub_812B1F0
 _081080FA:
-	ldr r2, _08108114 @ =gUnknown_2037AB8
+	ldr r2, _08108114 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -424,7 +424,7 @@ _08108104:
 	strb r0, [r1]
 	b _08108134
 	.align 2, 0
-_08108114: .4byte gUnknown_2037AB8
+_08108114: .4byte gPaletteFade
 _08108118: .4byte gMain
 _0810811C:
 	ldr r0, _0810812C @ =sub_8107EFC
@@ -477,7 +477,7 @@ sub_8108178: @ 8108178
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _081081A4 @ =gUnknown_2037AB8
+	ldr r0, _081081A4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -494,7 +494,7 @@ _0810819C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081081A4: .4byte gUnknown_2037AB8
+_081081A4: .4byte gPaletteFade
 _081081A8: .4byte gUnknown_203ACFC
 	thumb_func_end sub_8108178
 
@@ -871,7 +871,7 @@ _0810848C:
 	bl StringCopy
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, _08108550 @ =gUnknown_84161C1
+	ldr r1, _08108550 @ =gFameCheckerText_Cancel
 	bl StringAppend
 	ldr r0, _08108548 @ =gUnknown_203AD18
 	ldr r2, [r0]
@@ -951,7 +951,7 @@ _08108540: .4byte gUnknown_203AD10
 _08108544: .4byte gUnknown_203AD1C
 _08108548: .4byte gUnknown_203AD18
 _0810854C: .4byte gUnknown_8452F60
-_08108550: .4byte gUnknown_84161C1
+_08108550: .4byte gFameCheckerText_Cancel
 _08108554: .4byte gUnknown_3005E70
 _08108558: .4byte sub_81085A4
 _0810855C: .4byte sub_8108654
@@ -1257,7 +1257,7 @@ bag_menu_print_cursor: @ 810878C
 	bl FillWindowPixelRect
 	b _081087DE
 _081087C8:
-	ldr r2, _081087E8 @ =gUnknown_841623B
+	ldr r2, _081087E8 @ =gFameCheckerText_ListMenuCursor
 	str r5, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -1273,7 +1273,7 @@ _081087DE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081087E8: .4byte gUnknown_841623B
+_081087E8: .4byte gFameCheckerText_ListMenuCursor
 	thumb_func_end bag_menu_print_cursor
 
 	thumb_func_start sub_81087EC
@@ -1780,7 +1780,7 @@ sub_8108B8C: @ 8108B8C
 	lsls r0, 3
 	ldr r1, _08108BE0 @ =gTasks+0x8
 	adds r4, r0, r1
-	ldr r0, _08108BE4 @ =gUnknown_2037AB8
+	ldr r0, _08108BE4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1812,7 +1812,7 @@ sub_8108B8C: @ 8108B8C
 	b _08108BFA
 	.align 2, 0
 _08108BE0: .4byte gTasks+0x8
-_08108BE4: .4byte gUnknown_2037AB8
+_08108BE4: .4byte gPaletteFade
 _08108BE8: .4byte sub_8108CFC
 _08108BEC: .4byte gUnknown_203ACFC
 _08108BF0: .4byte gUnknown_203AD10
@@ -2245,7 +2245,7 @@ sub_8108F0C: @ 8108F0C
 	lsls r0, 3
 	ldr r1, _08108F78 @ =gTasks+0x8
 	adds r7, r0, r1
-	ldr r0, _08108F7C @ =gUnknown_2037AB8
+	ldr r0, _08108F7C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2291,7 +2291,7 @@ _08108F4A:
 	b _08108FA0
 	.align 2, 0
 _08108F78: .4byte gTasks+0x8
-_08108F7C: .4byte gUnknown_2037AB8
+_08108F7C: .4byte gPaletteFade
 _08108F80: .4byte sub_8108CFC
 _08108F84: .4byte gUnknown_203ACFC
 _08108F88: .4byte gMain
@@ -2367,7 +2367,7 @@ _08109014: .4byte gUnknown_203ACFC
 _08109018:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _08109038 @ =gUnknown_203AD30
+	ldr r1, _08109038 @ =gSpecialVar_ItemId
 	movs r0, 0
 	strh r0, [r1]
 	bl sub_8108CB4
@@ -2379,7 +2379,7 @@ _08109018:
 	ldr r1, _08109040 @ =sub_8108B50
 	b _081090C4
 	.align 2, 0
-_08109038: .4byte gUnknown_203AD30
+_08109038: .4byte gSpecialVar_ItemId
 _0810903C: .4byte gTasks
 _08109040: .4byte sub_8108B50
 _08109044:
@@ -2393,7 +2393,7 @@ _08109044:
 	ldrb r0, [r0]
 	cmp r4, r0
 	bne _08109084
-	ldr r1, _08109078 @ =gUnknown_203AD30
+	ldr r1, _08109078 @ =gSpecialVar_ItemId
 	movs r0, 0
 	strh r0, [r1]
 	bl sub_8108CB4
@@ -2406,7 +2406,7 @@ _08109044:
 	b _081090C4
 	.align 2, 0
 _08109074: .4byte gUnknown_203AD10
-_08109078: .4byte gUnknown_203AD30
+_08109078: .4byte gSpecialVar_ItemId
 _0810907C: .4byte gTasks
 _08109080: .4byte sub_8108B50
 _08109084:
@@ -2430,7 +2430,7 @@ _08109084:
 	lsrs r0, 24
 	adds r1, r4, 0
 	bl sub_809A798
-	ldr r1, _081090D0 @ =gUnknown_203AD30
+	ldr r1, _081090D0 @ =gSpecialVar_ItemId
 	strh r0, [r1]
 	ldr r1, _081090D4 @ =gTasks
 	lsls r0, r6, 2
@@ -2446,7 +2446,7 @@ _081090C6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081090D0: .4byte gUnknown_203AD30
+_081090D0: .4byte gSpecialVar_ItemId
 _081090D4: .4byte gTasks
 _081090D8: .4byte sub_81090DC
 	thumb_func_end sub_8108F0C
@@ -3404,7 +3404,7 @@ _081098AC:
 	beq _08109924
 	b _0810993C
 _081098B6:
-	ldr r2, _081098D4 @ =gUnknown_203AD30
+	ldr r2, _081098D4 @ =gSpecialVar_ItemId
 	ldrh r1, [r2]
 	ldr r0, _081098D8 @ =0x0000016d
 	cmp r1, r0
@@ -3420,7 +3420,7 @@ _081098B6:
 	movs r0, 0x2
 	b _08109AD0
 	.align 2, 0
-_081098D4: .4byte gUnknown_203AD30
+_081098D4: .4byte gSpecialVar_ItemId
 _081098D8: .4byte 0x0000016d
 _081098DC: .4byte gUnknown_203AD20
 _081098E0: .4byte gUnknown_203AD24
@@ -3473,7 +3473,7 @@ _0810993C:
 	cmp r0, 0x1
 	bne _081099C4
 _08109950:
-	ldr r1, _08109970 @ =gUnknown_203AD30
+	ldr r1, _08109970 @ =gSpecialVar_ItemId
 	ldr r2, _08109974 @ =0xfffffe94
 	adds r0, r2, 0
 	ldrh r1, [r1]
@@ -3489,7 +3489,7 @@ _08109950:
 	movs r0, 0x2
 	b _08109AD0
 	.align 2, 0
-_08109970: .4byte gUnknown_203AD30
+_08109970: .4byte gSpecialVar_ItemId
 _08109974: .4byte 0xfffffe94
 _08109978: .4byte gUnknown_203AD24
 _0810997C: .4byte gUnknown_8452F2E
@@ -3549,7 +3549,7 @@ _081099EC:
 	ldr r4, _08109A0C @ =gUnknown_203AD28
 	movs r0, 0x4
 	strb r0, [r4]
-	ldr r0, _08109A10 @ =gUnknown_203AD30
+	ldr r0, _08109A10 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -3563,7 +3563,7 @@ _081099EC:
 	b _08109AD4
 	.align 2, 0
 _08109A0C: .4byte gUnknown_203AD28
-_08109A10: .4byte gUnknown_203AD30
+_08109A10: .4byte gSpecialVar_ItemId
 _08109A14: .4byte gUnknown_203AD24
 _08109A18: .4byte gUnknown_8452F24
 _08109A1C:
@@ -3591,7 +3591,7 @@ _08109A34:
 	ldr r0, [r0]
 	ldr r1, _08109A6C @ =0x00000296
 	adds r0, r1
-	ldr r1, _08109A70 @ =gUnknown_203AD30
+	ldr r1, _08109A70 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	adds r7, r3, 0
 	ldrh r3, [r1]
@@ -3605,7 +3605,7 @@ _08109A60: .4byte gUnknown_203AD20
 _08109A64: .4byte gUnknown_203AD28
 _08109A68: .4byte gSaveBlock1Ptr
 _08109A6C: .4byte 0x00000296
-_08109A70: .4byte gUnknown_203AD30
+_08109A70: .4byte gSpecialVar_ItemId
 _08109A74:
 	movs r0, 0x2
 _08109A76:
@@ -3722,7 +3722,7 @@ _08109AD4:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _08109BA8 @ =gUnknown_203AD30
+	ldr r0, _08109BA8 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _08109BAC @ =gStringVar1
 	bl sub_8099E90
@@ -3751,7 +3751,7 @@ _08109B98: .4byte gUnknown_203AD24
 _08109B9C: .4byte gUnknown_8452F18
 _08109BA0: .4byte gUnknown_203AD28
 _08109BA4: .4byte gUnknown_8452EB8
-_08109BA8: .4byte gUnknown_203AD30
+_08109BA8: .4byte gSpecialVar_ItemId
 _08109BAC: .4byte gStringVar1
 _08109BB0: .4byte gStringVar4
 _08109BB4: .4byte gUnknown_84162FF
@@ -3838,7 +3838,7 @@ sub_8109C50: @ 8109C50
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, _08109CA0 @ =gUnknown_203AD30
+	ldr r5, _08109CA0 @ =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl ItemId_GetFieldFunc
 	cmp r0, 0
@@ -3867,9 +3867,9 @@ sub_8109C50: @ 8109C50
 	bl sub_810A170
 	b _08109CB4
 	.align 2, 0
-_08109CA0: .4byte gUnknown_203AD30
+_08109CA0: .4byte gSpecialVar_ItemId
 _08109CA4:
-	ldr r0, _08109CBC @ =gUnknown_203AD30
+	ldr r0, _08109CBC @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
@@ -3880,7 +3880,7 @@ _08109CB4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109CBC: .4byte gUnknown_203AD30
+_08109CBC: .4byte gSpecialVar_ItemId
 	thumb_func_end sub_8109C50
 
 	thumb_func_start sub_8109CC0
@@ -4197,7 +4197,7 @@ sub_8109F44: @ 8109F44
 _08109F6E:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _08109FF4 @ =gUnknown_203AD30
+	ldr r0, _08109FF4 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r7, 0x10]
 	bl sub_809A1D8
@@ -4249,7 +4249,7 @@ _08109FE0:
 	.align 2, 0
 _08109FEC: .4byte gTasks+0x8
 _08109FF0: .4byte gMain
-_08109FF4: .4byte gUnknown_203AD30
+_08109FF4: .4byte gSpecialVar_ItemId
 _08109FF8: .4byte gUnknown_203ACFC
 _08109FFC: .4byte gUnknown_3005E70
 	thumb_func_end sub_8109F44
@@ -4444,7 +4444,7 @@ sub_810A18C: @ 810A18C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0810A1BC @ =gUnknown_203AD30
+	ldr r0, _0810A1BC @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _0810A1C0 @ =gStringVar1
 	bl sub_8099E90
@@ -4461,7 +4461,7 @@ sub_810A18C: @ 810A18C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A1BC: .4byte gUnknown_203AD30
+_0810A1BC: .4byte gSpecialVar_ItemId
 _0810A1C0: .4byte gStringVar1
 _0810A1C4: .4byte gStringVar4
 _0810A1C8: .4byte gUnknown_841635E
@@ -4634,7 +4634,7 @@ sub_810A324: @ 810A324
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, _0810A36C @ =gUnknown_203AD30
+	ldr r5, _0810A36C @ =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl ItemId_GetBattleFunc
 	cmp r0, 0
@@ -4660,7 +4660,7 @@ _0810A364:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A36C: .4byte gUnknown_203AD30
+_0810A36C: .4byte gSpecialVar_ItemId
 	thumb_func_end sub_810A324
 
 	thumb_func_start sub_810A370
@@ -4936,7 +4936,7 @@ sub_810A568: @ 810A568
 	lsls r0, 3
 	ldr r1, _0810A58C @ =gTasks+0x8
 	adds r4, r0, r1
-	ldr r6, _0810A590 @ =gUnknown_203AD30
+	ldr r6, _0810A590 @ =gSpecialVar_ItemId
 	ldrh r1, [r6]
 	movs r0, 0xB6
 	lsls r0, 1
@@ -4946,7 +4946,7 @@ sub_810A568: @ 810A568
 	b _0810A5A0
 	.align 2, 0
 _0810A58C: .4byte gTasks+0x8
-_0810A590: .4byte gUnknown_203AD30
+_0810A590: .4byte gSpecialVar_ItemId
 _0810A594: .4byte sub_810A654
 _0810A598:
 	ldr r0, _0810A5AC @ =0x0000016d
@@ -5394,7 +5394,7 @@ sub_810A940: @ 810A940
 	bl PutWindowTilemap
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r0, _0810A9B8 @ =gUnknown_203AD30
+	ldr r0, _0810A9B8 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _0810A9BC @ =gStringVar1
 	bl sub_8099E90
@@ -5432,7 +5432,7 @@ sub_810A940: @ 810A940
 	bx r0
 	.align 2, 0
 _0810A9B4: .4byte gTasks+0x8
-_0810A9B8: .4byte gUnknown_203AD30
+_0810A9B8: .4byte gSpecialVar_ItemId
 _0810A9BC: .4byte gStringVar1
 _0810A9C0: .4byte gStringVar3
 _0810A9C4: .4byte gUnknown_203ACFC
@@ -5460,7 +5460,7 @@ sub_810A9D4: @ 810A9D4
 	mov r8, r1
 	movs r0, 0xF8
 	bl PlaySE
-	ldr r5, _0810AADC @ =gUnknown_203AD30
+	ldr r5, _0810AADC @ =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	mov r2, r8
 	ldrh r1, [r2, 0x10]
@@ -5559,7 +5559,7 @@ sub_810A9D4: @ 810A9D4
 	bx r0
 	.align 2, 0
 _0810AAD8: .4byte gTasks+0x8
-_0810AADC: .4byte gUnknown_203AD30
+_0810AADC: .4byte gSpecialVar_ItemId
 _0810AAE0: .4byte gSaveBlock1Ptr
 _0810AAE4: .4byte gUnknown_203ACFC
 _0810AAE8: .4byte gUnknown_203AD10
@@ -5741,7 +5741,7 @@ sub_810AC40: @ 810AC40
 	mov r9, r0
 	mov r7, r8
 	add r7, r9
-	ldr r5, _0810ACD0 @ =gUnknown_203AD30
+	ldr r5, _0810ACD0 @ =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	ldrh r1, [r7, 0x10]
 	bl sub_809A3C8
@@ -5791,7 +5791,7 @@ sub_810AC40: @ 810AC40
 	b _0810ACF8
 	.align 2, 0
 _0810ACCC: .4byte gTasks+0x8
-_0810ACD0: .4byte gUnknown_203AD30
+_0810ACD0: .4byte gSpecialVar_ItemId
 _0810ACD4: .4byte 0x0000ffff
 _0810ACD8: .4byte gStringVar1
 _0810ACDC: .4byte gStringVar2
@@ -5817,8 +5817,8 @@ _0810AD08: .4byte gUnknown_84163BB
 _0810AD0C: .4byte sub_810A1D0
 	thumb_func_end sub_810AC40
 
-	thumb_func_start sub_810AD10
-sub_810AD10: @ 810AD10
+	thumb_func_start UseRegisteredKeyItemOnField
+UseRegisteredKeyItemOnField: @ 810AD10
 	push {r4-r6,lr}
 	bl InUnionRoom
 	cmp r0, 0x1
@@ -5848,7 +5848,7 @@ _0810AD1E:
 	bl player_bitmagic
 	bl sub_805C270
 	bl sub_805C780
-	ldr r2, _0810AD88 @ =gUnknown_203AD30
+	ldr r2, _0810AD88 @ =gSpecialVar_ItemId
 	ldr r0, [r4]
 	adds r0, r5
 	ldrh r1, [r0]
@@ -5869,7 +5869,7 @@ _0810AD1E:
 	.align 2, 0
 _0810AD80: .4byte gSaveBlock1Ptr
 _0810AD84: .4byte 0x00000296
-_0810AD88: .4byte gUnknown_203AD30
+_0810AD88: .4byte gSpecialVar_ItemId
 _0810AD8C: .4byte gTasks
 _0810AD90:
 	ldr r0, [r4]
@@ -5887,7 +5887,7 @@ _0810ADA0:
 	bx r1
 	.align 2, 0
 _0810ADA8: .4byte gUnknown_81A77A0
-	thumb_func_end sub_810AD10
+	thumb_func_end UseRegisteredKeyItemOnField
 
 	thumb_func_start sub_810ADAC
 sub_810ADAC: @ 810ADAC
@@ -6144,7 +6144,7 @@ sub_810AF9C: @ 810AF9C
 	lsls r6, r0, 3
 	ldr r7, _0810AFCC @ =gTasks+0x8
 	adds r5, r6, r7
-	ldr r0, _0810AFD0 @ =gUnknown_2037AB8
+	ldr r0, _0810AFD0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -6161,7 +6161,7 @@ sub_810AF9C: @ 810AF9C
 	b _0810B064
 	.align 2, 0
 _0810AFCC: .4byte gTasks+0x8
-_0810AFD0: .4byte gUnknown_2037AB8
+_0810AFD0: .4byte gPaletteFade
 _0810AFD4:
 	movs r0, 0x99
 	lsls r0, 1
@@ -6187,14 +6187,14 @@ _0810AFF6:
 	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
-	ldr r1, _0810B018 @ =gUnknown_203AD30
+	ldr r1, _0810B018 @ =gSpecialVar_ItemId
 	movs r0, 0x4
 	strh r0, [r1]
 	adds r0, r4, 0
 	bl sub_8109890
 	b _0810B064
 	.align 2, 0
-_0810B018: .4byte gUnknown_203AD30
+_0810B018: .4byte gSpecialVar_ItemId
 _0810B01C:
 	movs r0, 0x5
 	bl PlaySE
@@ -6269,7 +6269,7 @@ sub_810B0AC: @ 810B0AC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0810B0DC @ =gUnknown_2037AB8
+	ldr r0, _0810B0DC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -6289,7 +6289,7 @@ sub_810B0AC: @ 810B0AC
 	bl SetMainCallback2
 	b _0810B0F0
 	.align 2, 0
-_0810B0DC: .4byte gUnknown_2037AB8
+_0810B0DC: .4byte gPaletteFade
 _0810B0E0: .4byte sub_8108CFC
 _0810B0E4: .4byte gUnknown_203AD10
 _0810B0E8:
@@ -6417,7 +6417,7 @@ sub_810B1D4: @ 810B1D4
 	lsls r5, r0, 3
 	ldr r6, _0810B220 @ =gTasks+0x8
 	adds r7, r5, r6
-	ldr r0, _0810B224 @ =gUnknown_2037AB8
+	ldr r0, _0810B224 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -6450,7 +6450,7 @@ _0810B202:
 	b _0810B36C
 	.align 2, 0
 _0810B220: .4byte gTasks+0x8
-_0810B224: .4byte gUnknown_2037AB8
+_0810B224: .4byte gPaletteFade
 _0810B228:
 	movs r0, 0x99
 	lsls r0, 1
@@ -6493,7 +6493,7 @@ _0810B266:
 	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
-	ldr r1, _0810B28C @ =gUnknown_203AD30
+	ldr r1, _0810B28C @ =gSpecialVar_ItemId
 	movs r2, 0xB7
 	lsls r2, 1
 	adds r0, r2, 0
@@ -6502,7 +6502,7 @@ _0810B266:
 	bl sub_8109890
 	b _0810B36C
 	.align 2, 0
-_0810B28C: .4byte gUnknown_203AD30
+_0810B28C: .4byte gSpecialVar_ItemId
 _0810B290:
 	movs r0, 0x5
 	bl PlaySE
@@ -6514,7 +6514,7 @@ _0810B29E:
 	bl PlaySE
 	ldr r0, _0810B318 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
-	ldr r1, _0810B31C @ =gUnknown_203AD30
+	ldr r1, _0810B31C @ =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	ldr r2, _0810B320 @ =0x00000296
 	adds r0, r2
@@ -6562,7 +6562,7 @@ _0810B29E:
 	b _0810B36C
 	.align 2, 0
 _0810B318: .4byte gSaveBlock1Ptr
-_0810B31C: .4byte gUnknown_203AD30
+_0810B31C: .4byte gSpecialVar_ItemId
 _0810B320: .4byte 0x00000296
 _0810B324: .4byte gUnknown_203ACFC
 _0810B328: .4byte gUnknown_3005E70
@@ -6614,7 +6614,7 @@ sub_810B378: @ 810B378
 	lsls r6, r0, 3
 	ldr r7, _0810B3B0 @ =gTasks+0x8
 	adds r4, r6, r7
-	ldr r0, _0810B3B4 @ =gUnknown_2037AB8
+	ldr r0, _0810B3B4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -6633,7 +6633,7 @@ _0810B396:
 	b _0810B4B6
 	.align 2, 0
 _0810B3B0: .4byte gTasks+0x8
-_0810B3B4: .4byte gUnknown_2037AB8
+_0810B3B4: .4byte gPaletteFade
 _0810B3B8:
 	movs r0, 0x10
 	ldrsh r1, [r4, r0]
@@ -6713,14 +6713,14 @@ _0810B440:
 	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
-	ldr r1, _0810B464 @ =gUnknown_203AD30
+	ldr r1, _0810B464 @ =gSpecialVar_ItemId
 	movs r0, 0x4
 	strh r0, [r1]
 	adds r0, r5, 0
 	bl sub_8109890
 	b _0810B4B0
 	.align 2, 0
-_0810B464: .4byte gUnknown_203AD30
+_0810B464: .4byte gSpecialVar_ItemId
 _0810B468:
 	movs r0, 0x5
 	bl PlaySE
@@ -6775,7 +6775,7 @@ sub_810B4BC: @ 810B4BC
 	mov r9, r0
 	mov r5, r8
 	add r5, r9
-	ldr r0, _0810B508 @ =gUnknown_2037AB8
+	ldr r0, _0810B508 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r7, 0x80
 	adds r0, r7, 0
@@ -6795,7 +6795,7 @@ sub_810B4BC: @ 810B4BC
 	b _0810B5C6
 	.align 2, 0
 _0810B504: .4byte gTasks+0x8
-_0810B508: .4byte gUnknown_2037AB8
+_0810B508: .4byte gPaletteFade
 _0810B50C:
 	movs r0, 0x10
 	ldrsh r1, [r5, r0]
@@ -6829,14 +6829,14 @@ _0810B53C:
 	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
-	ldr r1, _0810B560 @ =gUnknown_203AD30
+	ldr r1, _0810B560 @ =gSpecialVar_ItemId
 	movs r0, 0xE
 	strh r0, [r1]
 	adds r0, r4, 0
 	bl sub_8109890
 	b _0810B5C0
 	.align 2, 0
-_0810B560: .4byte gUnknown_203AD30
+_0810B560: .4byte gSpecialVar_ItemId
 _0810B564:
 	movs r0, 0x5
 	bl PlaySE
@@ -6901,7 +6901,7 @@ sub_810B5D4: @ 810B5D4
 	mov r9, r0
 	mov r6, r8
 	add r6, r9
-	ldr r0, _0810B628 @ =gUnknown_2037AB8
+	ldr r0, _0810B628 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r7, 0x80
 	adds r0, r7, 0
@@ -6927,7 +6927,7 @@ sub_810B5D4: @ 810B5D4
 	b _0810B6E0
 	.align 2, 0
 _0810B624: .4byte gTasks+0x8
-_0810B628: .4byte gUnknown_2037AB8
+_0810B628: .4byte gPaletteFade
 _0810B62C:
 	movs r0, 0x99
 	lsls r0, 1
@@ -6962,7 +6962,7 @@ _0810B660:
 	bl bag_menu_print_cursor_
 	movs r0, 0x1
 	bl sub_8109140
-	ldr r1, _0810B688 @ =gUnknown_203AD30
+	ldr r1, _0810B688 @ =gSpecialVar_ItemId
 	movs r2, 0xB6
 	lsls r2, 1
 	adds r0, r2, 0
@@ -6971,7 +6971,7 @@ _0810B660:
 	bl sub_8109890
 	b _0810B6E0
 	.align 2, 0
-_0810B688: .4byte gUnknown_203AD30
+_0810B688: .4byte gSpecialVar_ItemId
 _0810B68C:
 	movs r0, 0x5
 	bl PlaySE

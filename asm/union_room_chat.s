@@ -155,7 +155,7 @@ _08128548:
 _08128550: .4byte sub_81285B4
 _08128554:
 	bl UpdatePaletteFade
-	ldr r0, _081285A0 @ =gUnknown_2037AB8
+	ldr r0, _081285A0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -187,7 +187,7 @@ _08128598:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081285A0: .4byte gUnknown_2037AB8
+_081285A0: .4byte gPaletteFade
 _081285A4: .4byte sub_81285CC
 _081285A8: .4byte sub_81285E8
 _081285AC: .4byte gUnknown_203B0E0
@@ -797,7 +797,7 @@ _08128A80:
 	strh r0, [r1, 0x6]
 	b _08128A94
 _08128A86:
-	ldr r0, _08128A9C @ =gUnknown_3003F64
+	ldr r0, _08128A9C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128A94
@@ -808,7 +808,7 @@ _08128A94:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08128A9C: .4byte gUnknown_3003F64
+_08128A9C: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_81288D4
 
 	thumb_func_start sub_8128AA0
@@ -948,7 +948,7 @@ _08128BC4:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _08128BD0:
-	ldr r0, _08128BE4 @ =gUnknown_3003F64
+	ldr r0, _08128BE4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128BFC
@@ -959,7 +959,7 @@ _08128BDA:
 	strh r0, [r1, 0x6]
 	b _08128BFC
 	.align 2, 0
-_08128BE4: .4byte gUnknown_3003F64
+_08128BE4: .4byte gReceivedRemoteLinkPlayers
 _08128BE8:
 	ldr r1, [r2]
 	ldrh r0, [r1, 0xA]
@@ -1035,7 +1035,7 @@ _08128C6E:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _08128C78:
-	ldr r0, _08128C8C @ =gUnknown_3003F64
+	ldr r0, _08128C8C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128CA2
@@ -1047,7 +1047,7 @@ _08128C82:
 	strh r0, [r1, 0x6]
 	b _08128CA2
 	.align 2, 0
-_08128C8C: .4byte gUnknown_3003F64
+_08128C8C: .4byte gReceivedRemoteLinkPlayers
 _08128C90:
 	ldrh r0, [r1, 0xA]
 	cmp r0, 0x95
@@ -1157,7 +1157,7 @@ _08128D64:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _08128D70:
-	ldr r0, _08128D84 @ =gUnknown_3003F64
+	ldr r0, _08128D84 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128D9C
@@ -1168,7 +1168,7 @@ _08128D7A:
 	strh r0, [r1, 0x6]
 	b _08128D9C
 	.align 2, 0
-_08128D84: .4byte gUnknown_3003F64
+_08128D84: .4byte gReceivedRemoteLinkPlayers
 _08128D88:
 	ldr r1, [r2]
 	ldrh r0, [r1, 0xA]
@@ -1211,7 +1211,7 @@ _08128DC4:
 	.4byte _08128E42
 	.4byte _08128E60
 _08128DD8:
-	ldr r0, _08128DE8 @ =gUnknown_3003F64
+	ldr r0, _08128DE8 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08128DEC
@@ -1219,7 +1219,7 @@ _08128DD8:
 	bl sub_8129218
 	b _08128E70
 	.align 2, 0
-_08128DE8: .4byte gUnknown_3003F64
+_08128DE8: .4byte gReceivedRemoteLinkPlayers
 _08128DEC:
 	ldr r0, [r4]
 	movs r1, 0xC8
@@ -1711,7 +1711,7 @@ _081291C8:
 	.align 2, 0
 _081291E4: .4byte gUnknown_203B0E0
 _081291E8:
-	ldr r0, _08129210 @ =gUnknown_2037AB8
+	ldr r0, _08129210 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1728,7 +1728,7 @@ _08129206:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08129210: .4byte gUnknown_2037AB8
+_08129210: .4byte gPaletteFade
 _08129214: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_8128FB8
 
@@ -2740,7 +2740,7 @@ _08129924:
 	.4byte _08129AD8
 	.4byte _08129A7C
 _08129944:
-	ldr r0, _08129978 @ =gUnknown_3003F64
+	ldr r0, _08129978 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0812994E
@@ -2767,7 +2767,7 @@ _08129952:
 	strb r2, [r0, 0xD]
 	b _08129B08
 	.align 2, 0
-_08129978: .4byte gUnknown_3003F64
+_08129978: .4byte gReceivedRemoteLinkPlayers
 _0812997C: .4byte gUnknown_203B0E0
 _08129980:
 	bl GetBlockReceivedStatus
@@ -2831,7 +2831,7 @@ _081299E6:
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	lsls r0, 8
-	ldr r1, _08129A0C @ =gUnknown_2022118
+	ldr r1, _08129A0C @ =gBlockRecvBuffer
 	adds r0, r1
 	ldrb r0, [r0]
 	subs r0, 0x1
@@ -2843,7 +2843,7 @@ _081299E6:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08129A0C: .4byte gUnknown_2022118
+_08129A0C: .4byte gBlockRecvBuffer
 _08129A10: .4byte _08129A14
 	.align 2, 0
 _08129A14:
@@ -2874,7 +2874,7 @@ _08129A3A:
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	lsls r1, 8
-	ldr r2, _08129A6C @ =gUnknown_2022118
+	ldr r2, _08129A6C @ =gBlockRecvBuffer
 	adds r1, r2
 	bl sub_812963C
 	cmp r0, 0
@@ -2889,7 +2889,7 @@ _08129A3A:
 	b _08129A72
 	.align 2, 0
 _08129A68: .4byte gUnknown_203B0E0
-_08129A6C: .4byte gUnknown_2022118
+_08129A6C: .4byte gBlockRecvBuffer
 _08129A70:
 	ldrh r0, [r4, 0xA]
 _08129A72:

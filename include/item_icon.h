@@ -5,6 +5,8 @@
 #ifndef GUARD_ITEM_ICON_H
 #define GUARD_ITEM_ICON_H
 
+#include "global.h"
+
 extern EWRAM_DATA void *gUnknown_0203CEBC;
 extern EWRAM_DATA void *gUnknown_0203CEC0;
 

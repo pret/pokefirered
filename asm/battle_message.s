@@ -473,7 +473,7 @@ _080D762C:
 	ldrh r2, [r2]
 	movs r1, 0xD
 	muls r1, r2
-	ldr r2, _080D764C @ =gUnknown_8247094
+	ldr r2, _080D764C @ =gMoveNames
 	adds r1, r2
 	bl StringCopy
 _080D763C:
@@ -483,7 +483,7 @@ _080D763C:
 	b _080D77DC
 	.align 2, 0
 _080D7648: .4byte gBattleTextBuff2
-_080D764C: .4byte gUnknown_8247094
+_080D764C: .4byte gMoveNames
 _080D7650: .4byte gUnknown_83FD57B
 _080D7654:
 	ldr r4, _080D7694 @ =gBattleTextBuff1
@@ -1505,11 +1505,11 @@ _080D7ED4:
 _080D7ED6:
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080D7EE0 @ =gUnknown_8247094
+	ldr r0, _080D7EE0 @ =gMoveNames
 	adds r4, r1, r0
 	b _080D8382
 	.align 2, 0
-_080D7EE0: .4byte gUnknown_8247094
+_080D7EE0: .4byte gMoveNames
 _080D7EE4:
 	ldr r0, _080D7F1C @ =gBattleTypeFlags
 	ldr r1, [r0]
@@ -1834,11 +1834,11 @@ _080D8162:
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
-	ldr r1, _080D8170 @ =gUnknown_2022744
+	ldr r1, _080D8170 @ =gLinkPlayers + 8
 	adds r4, r0, r1
 	b _080D8382
 	.align 2, 0
-_080D8170: .4byte gUnknown_2022744
+_080D8170: .4byte gLinkPlayers + 8
 _080D8174:
 	ldr r4, _080D8184 @ =gLinkPlayers
 	lsls r0, r7, 3
@@ -1888,12 +1888,12 @@ _080D81C8:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, _080D81D8 @ =gUnknown_2022744
+	ldr r0, _080D81D8 @ =gLinkPlayers + 8
 	adds r4, r1, r0
 	b _080D8382
 	.align 2, 0
 _080D81D4: .4byte gBattleScripting
-_080D81D8: .4byte gUnknown_2022744
+_080D81D8: .4byte gLinkPlayers + 8
 _080D81DC:
 	ldr r0, _080D81E4 @ =gSaveBlock2Ptr
 	ldr r4, [r0]
@@ -2294,11 +2294,11 @@ _080D84EC:
 	orrs r1, r0
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080D8500 @ =gUnknown_8247094
+	ldr r0, _080D8500 @ =gMoveNames
 	adds r1, r0
 	b _080D868E
 	.align 2, 0
-_080D8500: .4byte gUnknown_8247094
+_080D8500: .4byte gMoveNames
 _080D8504:
 	adds r0, r5, r7
 	ldrb r0, [r0, 0x1]
@@ -2958,7 +2958,7 @@ SetPpNumbersPaletteInMoveSelection: @ 80D89DC
 	ldrb r1, [r1]
 	bl GetCurrentPpToMaxPpState
 	lsls r0, 24
-	ldr r5, _080D8A48 @ =gUnknown_20371F8
+	ldr r5, _080D8A48 @ =gPlttBufferUnfaded
 	lsrs r0, 22
 	adds r0, r4
 	ldrh r1, [r0]
@@ -2968,7 +2968,7 @@ SetPpNumbersPaletteInMoveSelection: @ 80D89DC
 	ldrh r0, [r0, 0x2]
 	adds r5, 0xB6
 	strh r0, [r5]
-	ldr r4, _080D8A4C @ =gUnknown_20376B0
+	ldr r4, _080D8A4C @ =gPlttBufferFaded + 0xB8
 	adds r0, r2, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -2986,8 +2986,8 @@ _080D8A38: .4byte gActiveBattler
 _080D8A3C: .4byte gUnknown_2022BC8
 _080D8A40: .4byte gUnknown_8D2FBB4
 _080D8A44: .4byte gUnknown_2023FFC
-_080D8A48: .4byte gUnknown_20371F8
-_080D8A4C: .4byte gUnknown_20376B0
+_080D8A48: .4byte gPlttBufferUnfaded
+_080D8A4C: .4byte gPlttBufferFaded + 0xB8
 	thumb_func_end SetPpNumbersPaletteInMoveSelection
 
 	thumb_func_start GetCurrentPpToMaxPpState

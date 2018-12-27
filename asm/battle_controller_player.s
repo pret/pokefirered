@@ -2330,11 +2330,11 @@ _0802F600:
 	thumb_func_start sub_802F610
 sub_802F610: @ 802F610
 	push {lr}
-	ldr r0, _0802F64C @ =gUnknown_3003F3C
+	ldr r0, _0802F64C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802F664
-	ldr r0, _0802F650 @ =gUnknown_3003F64
+	ldr r0, _0802F650 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802F694
@@ -2356,8 +2356,8 @@ sub_802F610: @ 802F610
 	bl FreeAllWindowBuffers
 	b _0802F694
 	.align 2, 0
-_0802F64C: .4byte gUnknown_3003F3C
-_0802F650: .4byte gUnknown_3003F64
+_0802F64C: .4byte gWirelessCommType
+_0802F650: .4byte gReceivedRemoteLinkPlayers
 _0802F654: .4byte gMain
 _0802F658: .4byte 0x00000439
 _0802F65C: .4byte gUnknown_3004F80
@@ -2396,7 +2396,7 @@ _0802F6A4: .4byte sub_8011A1C
 	thumb_func_start sub_802F6A8
 sub_802F6A8: @ 802F6A8
 	push {lr}
-	ldr r0, _0802F6D0 @ =gUnknown_2037AB8
+	ldr r0, _0802F6D0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2408,16 +2408,16 @@ sub_802F6A8: @ 802F6A8
 	ands r0, r1
 	cmp r0, 0
 	beq _0802F6FC
-	ldr r0, _0802F6D8 @ =gUnknown_3003F3C
+	ldr r0, _0802F6D8 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802F6DC
 	bl sub_800AAC0
 	b _0802F6E0
 	.align 2, 0
-_0802F6D0: .4byte gUnknown_2037AB8
+_0802F6D0: .4byte gPaletteFade
 _0802F6D4: .4byte gBattleTypeFlags
-_0802F6D8: .4byte gUnknown_3003F3C
+_0802F6D8: .4byte gWirelessCommType
 _0802F6DC:
 	bl sub_800AB9C
 _0802F6E0:
@@ -4293,7 +4293,7 @@ _08030622:
 	thumb_func_start sub_8030628
 sub_8030628: @ 8030628
 	push {r4,lr}
-	ldr r0, _0803066C @ =gUnknown_2037AB8
+	ldr r0, _0803066C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4325,7 +4325,7 @@ _08030666:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803066C: .4byte gUnknown_2037AB8
+_0803066C: .4byte gPaletteFade
 _08030670: .4byte gUnknown_3004FE0
 _08030674: .4byte gActiveBattler
 _08030678: .4byte sub_8030684
@@ -4341,7 +4341,7 @@ sub_8030684: @ 8030684
 	ldr r0, _080306B8 @ =sub_8011100
 	cmp r1, r0
 	bne _080306F4
-	ldr r0, _080306BC @ =gUnknown_2037AB8
+	ldr r0, _080306BC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4360,7 +4360,7 @@ sub_8030684: @ 8030684
 	.align 2, 0
 _080306B4: .4byte gMain
 _080306B8: .4byte sub_8011100
-_080306BC: .4byte gUnknown_2037AB8
+_080306BC: .4byte gPaletteFade
 _080306C0: .4byte gUnknown_203B0C0
 _080306C4: .4byte gUnknown_203B0C1
 _080306C8: .4byte gUnknown_203B0DC
@@ -4395,7 +4395,7 @@ _080306FC: .4byte gActiveBattler
 	thumb_func_start sub_8030700
 sub_8030700: @ 8030700
 	push {lr}
-	ldr r0, _0803072C @ =gUnknown_2037AB8
+	ldr r0, _0803072C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4415,7 +4415,7 @@ _08030728:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803072C: .4byte gUnknown_2037AB8
+_0803072C: .4byte gPaletteFade
 _08030730: .4byte gUnknown_3004FE0
 _08030734: .4byte gActiveBattler
 _08030738: .4byte CompleteWhenChoseItem
@@ -4429,13 +4429,13 @@ CompleteWhenChoseItem: @ 803073C
 	ldr r0, _0803076C @ =sub_8011100
 	cmp r1, r0
 	bne _08030762
-	ldr r0, _08030770 @ =gUnknown_2037AB8
+	ldr r0, _08030770 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08030762
-	ldr r0, _08030774 @ =gUnknown_203AD30
+	ldr r0, _08030774 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl EmitOneReturnValue
@@ -4446,8 +4446,8 @@ _08030762:
 	.align 2, 0
 _08030768: .4byte gMain
 _0803076C: .4byte sub_8011100
-_08030770: .4byte gUnknown_2037AB8
-_08030774: .4byte gUnknown_203AD30
+_08030770: .4byte gPaletteFade
+_08030774: .4byte gSpecialVar_ItemId
 	thumb_func_end CompleteWhenChoseItem
 
 	thumb_func_start CompleteOnSpecialAnimDone
@@ -4570,7 +4570,7 @@ _08030848:
 	ldrh r1, [r4]
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080308A4 @ =gUnknown_8247094
+	ldr r0, _080308A4 @ =gMoveNames
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringAppend
@@ -4599,7 +4599,7 @@ _08030894: .4byte gUnknown_2022BC8
 _08030898: .4byte gUnknown_3004FF8
 _0803089C: .4byte gDisplayedStringBattle
 _080308A0: .4byte gUnknown_83FE770
-_080308A4: .4byte gUnknown_8247094
+_080308A4: .4byte gMoveNames
 	thumb_func_end sub_8030830
 
 	thumb_func_start MoveSelectionDisplayPpString

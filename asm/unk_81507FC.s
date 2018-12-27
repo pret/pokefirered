@@ -14,7 +14,7 @@ sub_81507FC: @ 81507FC
 	ldr r1, _081508A4 @ =gUnknown_3002044
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, _081508A8 @ =gUnknown_3003F64
+	ldr r0, _081508A8 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081508CC
@@ -81,7 +81,7 @@ sub_81507FC: @ 81507FC
 	b _081508D2
 	.align 2, 0
 _081508A4: .4byte gUnknown_3002044
-_081508A8: .4byte gUnknown_3003F64
+_081508A8: .4byte gReceivedRemoteLinkPlayers
 _081508AC: .4byte gUnknown_203F3E0
 _081508B0: .4byte 0x00003330
 _081508B4: .4byte 0x000032cc
@@ -389,7 +389,7 @@ _08150B16:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08150BFC
-	ldr r0, _08150B38 @ =gUnknown_3003F64
+	ldr r0, _08150B38 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08150BDC
@@ -399,7 +399,7 @@ _08150B16:
 	bl sub_80FCD74
 	b _08150BDC
 	.align 2, 0
-_08150B38: .4byte gUnknown_3003F64
+_08150B38: .4byte gReceivedRemoteLinkPlayers
 _08150B3C:
 	ldr r0, _08150B88 @ =gUnknown_203F3E0
 	ldr r0, [r0]
@@ -468,7 +468,7 @@ _08150BA2:
 _08150BC8: .4byte sub_8152034
 _08150BCC:
 	bl UpdatePaletteFade
-	ldr r0, _08150BE8 @ =gUnknown_2037AB8
+	ldr r0, _08150BE8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -483,7 +483,7 @@ _08150BE0:
 	strb r0, [r1, 0xC]
 	b _08150BFC
 	.align 2, 0
-_08150BE8: .4byte gUnknown_2037AB8
+_08150BE8: .4byte gPaletteFade
 _08150BEC: .4byte gUnknown_203F3E0
 _08150BF0:
 	adds r0, r1, 0
@@ -1150,7 +1150,7 @@ _081510F4:
 	beq _08151116
 	ldr r0, [r6]
 	adds r0, 0x4A
-	ldr r1, _08151148 @ =gUnknown_2022118
+	ldr r1, _08151148 @ =gBlockRecvBuffer
 	movs r2, 0x3C
 	bl memcpy
 	adds r0, r4, 0
@@ -1188,7 +1188,7 @@ _08151140:
 	strb r0, [r1, 0x10]
 	b _0815118A
 	.align 2, 0
-_08151148: .4byte gUnknown_2022118
+_08151148: .4byte gBlockRecvBuffer
 _0815114C: .4byte gUnknown_203F3E0
 _08151150:
 	movs r0, 0x1
@@ -1305,7 +1305,7 @@ _08151228:
 	lsls r0, 1
 	adds r2, r0
 	lsls r0, r4, 8
-	ldr r1, _08151294 @ =gUnknown_2022118
+	ldr r1, _08151294 @ =gBlockRecvBuffer
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
@@ -1350,7 +1350,7 @@ _0815128A:
 	strb r0, [r1, 0x10]
 	b _081512AA
 	.align 2, 0
-_08151294: .4byte gUnknown_2022118
+_08151294: .4byte gBlockRecvBuffer
 _08151298: .4byte gUnknown_203F3E0
 _0815129C:
 	bl sub_8155E68
@@ -1501,7 +1501,7 @@ _081513C4:
 	lsls r0, 1
 	adds r2, r0
 	lsls r0, r4, 8
-	ldr r1, _08151438 @ =gUnknown_2022118
+	ldr r1, _08151438 @ =gBlockRecvBuffer
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
@@ -1548,7 +1548,7 @@ _0815142A:
 	b _08151480
 	.align 2, 0
 _08151434: .4byte gUnknown_203F3E0
-_08151438: .4byte gUnknown_2022118
+_08151438: .4byte gBlockRecvBuffer
 _0815143C:
 	bl sub_81532B8
 	b _08151480
@@ -1633,7 +1633,7 @@ _081514CC:
 	strb r0, [r1, 0x10]
 	b _081514E4
 _081514D6:
-	ldr r0, _081514EC @ =gUnknown_3003F64
+	ldr r0, _081514EC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081514E4
@@ -1644,7 +1644,7 @@ _081514E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081514EC: .4byte gUnknown_3003F64
+_081514EC: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_8151488
 
 	thumb_func_start sub_81514F0
@@ -1678,7 +1678,7 @@ _08151512:
 	b _0815155E
 _08151524:
 	bl UpdatePaletteFade
-	ldr r0, _08151538 @ =gUnknown_2037AB8
+	ldr r0, _08151538 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1686,7 +1686,7 @@ _08151524:
 	bne _08151590
 	b _0815155E
 	.align 2, 0
-_08151538: .4byte gUnknown_2037AB8
+_08151538: .4byte gPaletteFade
 _0815153C:
 	bl sub_8154274
 	bl sub_8153ED8
@@ -1828,7 +1828,7 @@ _08151656:
 	b _08151686
 _08151676:
 	bl UpdatePaletteFade
-	ldr r0, _08151694 @ =gUnknown_2037AB8
+	ldr r0, _08151694 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1842,7 +1842,7 @@ _08151686:
 	strb r0, [r1, 0x10]
 	b _081516CC
 	.align 2, 0
-_08151694: .4byte gUnknown_2037AB8
+_08151694: .4byte gPaletteFade
 _08151698: .4byte gUnknown_203F3E0
 _0815169C:
 	ldrb r0, [r1, 0x4]
@@ -1852,7 +1852,7 @@ _0815169C:
 	bl sub_8154730
 	ldr r0, [r4]
 	bl sub_81508EC
-	ldr r0, _081516D8 @ =gUnknown_3003F64
+	ldr r0, _081516D8 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081516C2
@@ -1871,7 +1871,7 @@ _081516CC:
 	bx r0
 	.align 2, 0
 _081516D4: .4byte sub_81516DC
-_081516D8: .4byte gUnknown_3003F64
+_081516D8: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_815159C
 
 	thumb_func_start sub_81516DC
@@ -2016,7 +2016,7 @@ _081517D2:
 	ldr r0, _08151844 @ =0x0000318c
 	adds r2, r0
 	lsls r0, r4, 8
-	ldr r1, _08151848 @ =gUnknown_2022118
+	ldr r1, _08151848 @ =gBlockRecvBuffer
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
@@ -2063,7 +2063,7 @@ _08151836:
 	.align 2, 0
 _08151840: .4byte gUnknown_203F3E0
 _08151844: .4byte 0x0000318c
-_08151848: .4byte gUnknown_2022118
+_08151848: .4byte gBlockRecvBuffer
 	thumb_func_end sub_8151750
 
 	thumb_func_start sub_815184C
@@ -5743,7 +5743,7 @@ sub_81533C4: @ 81533C4
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _081533E4 @ =gUnknown_3003F64
+	ldr r0, _081533E4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081533F0
@@ -5756,20 +5756,20 @@ sub_81533C4: @ 81533C4
 	ldr r0, [r0]
 	b _081533F8
 	.align 2, 0
-_081533E4: .4byte gUnknown_3003F64
+_081533E4: .4byte gReceivedRemoteLinkPlayers
 _081533E8: .4byte gUnknown_203F3E0
 _081533EC: .4byte 0x000031a0
 _081533F0:
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
-	ldr r1, _08153400 @ =gUnknown_2022744
+	ldr r1, _08153400 @ =gLinkPlayers + 8
 _081533F8:
 	adds r0, r1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08153400: .4byte gUnknown_2022744
+_08153400: .4byte gLinkPlayers + 8
 	thumb_func_end sub_81533C4
 
 	thumb_func_start sub_8153404
@@ -6310,7 +6310,7 @@ _081537BC: .4byte gUnknown_203F3E0
 sub_81537C0: @ 81537C0
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r6, _081537F0 @ =gUnknown_20370D0
+	ldr r6, _081537F0 @ =gSpecialVar_Result
 _081537C6:
 	movs r0, 0x64
 	adds r1, r5, 0
@@ -6331,13 +6331,13 @@ _081537C6:
 	strh r0, [r6]
 	b _08153804
 	.align 2, 0
-_081537F0: .4byte gUnknown_20370D0
+_081537F0: .4byte gSpecialVar_Result
 _081537F4: .4byte gPlayerParty
 _081537F8:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _081537C6
-	ldr r1, _0815380C @ =gUnknown_20370D0
+	ldr r1, _0815380C @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 _08153804:
@@ -6345,7 +6345,7 @@ _08153804:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815380C: .4byte gUnknown_20370D0
+_0815380C: .4byte gSpecialVar_Result
 	thumb_func_end sub_81537C0
 
 	thumb_func_start sub_8153810
@@ -6605,7 +6605,7 @@ _08153A14:
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
-	ldr r1, _08153A94 @ =gUnknown_2022744
+	ldr r1, _08153A94 @ =gLinkPlayers + 8
 	adds r0, r1
 	lsls r1, r4, 2
 	adds r1, r5
@@ -6668,7 +6668,7 @@ _08153A7E:
 	.align 2, 0
 _08153A8C: .4byte gUnknown_203F3E0
 _08153A90: .4byte gUnknown_8475648
-_08153A94: .4byte gUnknown_2022744
+_08153A94: .4byte gLinkPlayers + 8
 _08153A98: .4byte gUnknown_8475608
 	thumb_func_end sub_8153A04
 
@@ -10348,7 +10348,7 @@ _0815579C:
 	ldr r0, [r3]
 	adds r0, r7
 	ldrb r0, [r0]
-	ldr r2, _08155860 @ =gUnknown_841623B
+	ldr r2, _08155860 @ =gFameCheckerText_ListMenuCursor
 	mov r1, r9
 	str r1, [sp]
 	str r5, [sp, 0x4]
@@ -10379,7 +10379,7 @@ _08155850: .4byte 0x00003009
 _08155854: .4byte gUnknown_841CDD7
 _08155858: .4byte gUnknown_8417938
 _0815585C: .4byte gUnknown_841793C
-_08155860: .4byte gUnknown_841623B
+_08155860: .4byte gFameCheckerText_ListMenuCursor
 _08155864: .4byte 0x00003014
 _08155868:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -10453,7 +10453,7 @@ _081558B0:
 	ldr r0, [r1]
 	adds r0, r4
 	ldrb r1, [r0]
-	ldr r2, _0815591C @ =gUnknown_841623B
+	ldr r2, _0815591C @ =gFameCheckerText_ListMenuCursor
 	cmp r7, 0x1
 	bne _08155920
 	mov r3, r8
@@ -10464,7 +10464,7 @@ _0815590C: .4byte 0x00003020
 _08155910: .4byte 0x00003009
 _08155914: .4byte gUnknown_8417938
 _08155918: .4byte gUnknown_841793C
-_0815591C: .4byte gUnknown_841623B
+_0815591C: .4byte gFameCheckerText_ListMenuCursor
 _08155920:
 	str r6, [sp]
 _08155922:

@@ -11,7 +11,7 @@ sub_8147AA8: @ 8147AA8
 	adds r6, r1, 0
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, _08147B20 @ =gUnknown_3003F64
+	ldr r0, _08147B20 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08147B3C
@@ -59,7 +59,7 @@ sub_8147AA8: @ 8147AA8
 	bl SetMainCallback2
 	b _08147B42
 	.align 2, 0
-_08147B20: .4byte gUnknown_3003F64
+_08147B20: .4byte gReceivedRemoteLinkPlayers
 _08147B24: .4byte gUnknown_203F3D4
 _08147B28: .4byte 0x000083b0
 _08147B2C: .4byte sub_8147DA0
@@ -497,7 +497,7 @@ _08147E98: .4byte sub_8147D58
 _08147E9C: .4byte gUnknown_203F3D4
 _08147EA0:
 	bl UpdatePaletteFade
-	ldr r0, _08147EC4 @ =gUnknown_2037AB8
+	ldr r0, _08147EC4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -515,7 +515,7 @@ _08147EBC:
 	strh r0, [r1, 0x8]
 	b _08147F04
 	.align 2, 0
-_08147EC4: .4byte gUnknown_2037AB8
+_08147EC4: .4byte gPaletteFade
 _08147EC8: .4byte gUnknown_203F3D4
 _08147ECC:
 	ldr r0, [r2]
@@ -2529,7 +2529,7 @@ _08148DC4:
 	ldr r1, [r4]
 	b _08148DFE
 _08148DEA:
-	ldr r0, _08148E08 @ =gUnknown_2037AB8
+	ldr r0, _08148E08 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2545,17 +2545,17 @@ _08148DFE:
 	strh r0, [r1, 0xA]
 	b _08148E20
 	.align 2, 0
-_08148E08: .4byte gUnknown_2037AB8
+_08148E08: .4byte gPaletteFade
 _08148E0C: .4byte gUnknown_203F3D4
 _08148E10:
-	ldr r0, _08148E1C @ =gUnknown_3003F64
+	ldr r0, _08148E1C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08148E20
 	movs r0, 0
 	b _08148E22
 	.align 2, 0
-_08148E1C: .4byte gUnknown_3003F64
+_08148E1C: .4byte gReceivedRemoteLinkPlayers
 _08148E20:
 	movs r0, 0x1
 _08148E22:
@@ -2687,7 +2687,7 @@ _08148EFA:
 	ldr r2, [sp]
 	cmp r0, 0
 	beq _08148F34
-	ldr r1, _08148F58 @ =gUnknown_2022744
+	ldr r1, _08148F58 @ =gLinkPlayers + 8
 	add r1, r9
 	adds r0, r7, 0
 	bl StringCopy
@@ -2723,7 +2723,7 @@ _08148F44:
 	bx r0
 	.align 2, 0
 _08148F54: .4byte 0x000082a8
-_08148F58: .4byte gUnknown_2022744
+_08148F58: .4byte gLinkPlayers + 8
 	thumb_func_end sub_8148E80
 
 	thumb_func_start sub_8148F5C
@@ -4267,17 +4267,17 @@ _08149A1C:
 	bl sub_8149A00
 	cmp r0, 0
 	beq _08149A54
-	ldr r1, _08149A50 @ =gUnknown_20370D0
+	ldr r1, _08149A50 @ =gSpecialVar_Result
 	movs r0, 0x1
 	b _08149A5E
 	.align 2, 0
 _08149A4C: .4byte gPlayerParty
-_08149A50: .4byte gUnknown_20370D0
+_08149A50: .4byte gSpecialVar_Result
 _08149A54:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _08149A1C
-	ldr r1, _08149A68 @ =gUnknown_20370D0
+	ldr r1, _08149A68 @ =gSpecialVar_Result
 	movs r0, 0
 _08149A5E:
 	strh r0, [r1]
@@ -4285,7 +4285,7 @@ _08149A5E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08149A68: .4byte gUnknown_20370D0
+_08149A68: .4byte gSpecialVar_Result
 	thumb_func_end sub_8149A18
 
 	thumb_func_start sub_8149A6C

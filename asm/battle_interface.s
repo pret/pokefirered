@@ -3770,7 +3770,7 @@ sub_804981C: @ 804981C
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804991C
@@ -4066,7 +4066,7 @@ _08049AF4:
 	movs r2, 0x2
 	bl FillPalette
 	lsls r4, 1
-	ldr r0, _08049BCC @ =gUnknown_20373F8
+	ldr r0, _08049BCC @ =gPlttBufferUnfaded + 0x200
 	adds r0, r4, r0
 	ldr r1, _08049BD0 @ =0x05000200
 	adds r4, r1
@@ -4145,7 +4145,7 @@ _08049BB6:
 	.align 2, 0
 _08049BC4: .4byte gSprites
 _08049BC8: .4byte gUnknown_826055A
-_08049BCC: .4byte gUnknown_20373F8
+_08049BCC: .4byte gPlttBufferUnfaded + 0x200
 _08049BD0: .4byte 0x05000200
 _08049BD4: .4byte 0x06010000
 _08049BD8: .4byte 0x04000018

@@ -2190,7 +2190,7 @@ sub_8055C74: @ 8055C74
 	adds r1, 0x7
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -2677,7 +2677,7 @@ sub_8055FE0: @ 8055FE0
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
 	bl MetatileBehavior_IsSurfable
@@ -3263,7 +3263,7 @@ sub_805644C: @ 805644C
 	mov r0, sp
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_806C8BC
+	bl FieldGetPlayerInput
 	mov r0, sp
 	bl sub_806CD30
 	bl ScriptContext2_IsEnabled
@@ -3409,7 +3409,7 @@ sub_80565A8: @ 80565A8
 	thumb_func_start sub_80565B4
 sub_80565B4: @ 80565B4
 	push {r4,lr}
-	ldr r0, _080565DC @ =gUnknown_2037AB8
+	ldr r0, _080565DC @ =gPaletteFade
 	ldrb r0, [r0, 0x7]
 	lsrs r0, 7
 	adds r4, r0, 0
@@ -3427,7 +3427,7 @@ _080565D4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080565DC: .4byte gUnknown_2037AB8
+_080565DC: .4byte gPaletteFade
 	thumb_func_end sub_80565B4
 
 	thumb_func_start sub_80565E0
@@ -3727,7 +3727,7 @@ c2_8056854: @ 8056854
 	ldr r0, _08056878 @ =c1_link_related
 	bl sub_80565E0
 	bl sub_80578D8
-	ldr r0, _0805687C @ =gUnknown_3003F3C
+	ldr r0, _0805687C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056888
@@ -3736,7 +3736,7 @@ c2_8056854: @ 8056854
 	b _0805688C
 	.align 2, 0
 _08056878: .4byte c1_link_related
-_0805687C: .4byte gUnknown_3003F3C
+_0805687C: .4byte gWirelessCommType
 _08056880: .4byte gUnknown_3005020
 _08056884: .4byte sub_807DE58
 _08056888:
@@ -3892,7 +3892,7 @@ sub_80569BC: @ 80569BC
 	bne _080569CE
 	bl sub_80098B8
 _080569CE:
-	ldr r0, _080569E4 @ =gUnknown_3003F3C
+	ldr r0, _080569E4 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080569E8
@@ -3902,7 +3902,7 @@ _080569CE:
 	bl DisableInterrupts
 	b _080569F4
 	.align 2, 0
-_080569E4: .4byte gUnknown_3003F3C
+_080569E4: .4byte gWirelessCommType
 _080569E8:
 	movs r0, 0x2
 	bl DisableInterrupts
@@ -4054,7 +4054,7 @@ _08056B36:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
 	b _08056B62
 _08056B3C:
-	ldr r0, _08056B54 @ =gUnknown_3003F3C
+	ldr r0, _08056B54 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056B62
@@ -4064,7 +4064,7 @@ _08056B3C:
 	bl sub_80FCD74
 	b _08056B62
 	.align 2, 0
-_08056B54: .4byte gUnknown_3003F3C
+_08056B54: .4byte gWirelessCommType
 _08056B58:
 	bl map_post_load_hook_exec
 	lsls r0, 24
@@ -4385,7 +4385,7 @@ _08056E12:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
 	b _08056E3E
 _08056E18:
-	ldr r0, _08056E30 @ =gUnknown_3003F3C
+	ldr r0, _08056E30 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056E3E
@@ -4395,7 +4395,7 @@ _08056E18:
 	bl sub_80FCD74
 	b _08056E3E
 	.align 2, 0
-_08056E30: .4byte gUnknown_3003F3C
+_08056E30: .4byte gWirelessCommType
 _08056E34:
 	bl map_post_load_hook_exec
 	lsls r0, 24
@@ -4735,7 +4735,7 @@ sub_8057100: @ 8057100
 sub_8057114: @ 8057114
 	push {lr}
 	ldr r2, _08057138 @ =gMapObjects
-	ldr r3, _0805713C @ =gUnknown_2037078
+	ldr r3, _0805713C @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4751,7 +4751,7 @@ sub_8057114: @ 8057114
 	bx r0
 	.align 2, 0
 _08057138: .4byte gMapObjects
-_0805713C: .4byte gUnknown_2037078
+_0805713C: .4byte gPlayerAvatar
 	thumb_func_end sub_8057114
 
 	thumb_func_start sub_8057140
@@ -5161,7 +5161,7 @@ _080574A0: .4byte sub_8056534
 	thumb_func_start sub_80574A4
 sub_80574A4: @ 80574A4
 	push {r4,lr}
-	ldr r0, _080574E8 @ =gUnknown_2037AB8
+	ldr r0, _080574E8 @ =gPaletteFade
 	ldrb r0, [r0, 0x7]
 	lsrs r0, 7
 	adds r4, r0, 0
@@ -5186,13 +5186,13 @@ _080574E0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080574E8: .4byte gUnknown_2037AB8
+_080574E8: .4byte gPaletteFade
 	thumb_func_end sub_80574A4
 
 	thumb_func_start sub_80574EC
 sub_80574EC: @ 80574EC
 	push {lr}
-	ldr r0, _08057500 @ =gUnknown_2037AB8
+	ldr r0, _08057500 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -5201,7 +5201,7 @@ sub_80574EC: @ 80574EC
 	movs r0, 0
 	b _08057506
 	.align 2, 0
-_08057500: .4byte gUnknown_2037AB8
+_08057500: .4byte gPaletteFade
 _08057504:
 	movs r0, 0x1
 _08057506:
@@ -5305,7 +5305,7 @@ _08057560:
 	ldrh r0, [r0, 0x4]
 	strh r0, [r1]
 	bl warp_in
-	ldr r2, _08057610 @ =gUnknown_2037AB8
+	ldr r2, _08057610 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -5333,7 +5333,7 @@ _08057600: .4byte 0xffff0000
 _08057604: .4byte 0x0000ffff
 _08057608: .4byte gUnknown_2031DBC
 _0805760C: .4byte gUnknown_2031DE8
-_08057610: .4byte gUnknown_2037AB8
+_08057610: .4byte gPaletteFade
 _08057614: .4byte gUnknown_3005024
 _08057618: .4byte sub_80574EC
 _0805761C: .4byte gMain
@@ -5443,7 +5443,7 @@ _0805770C:
 	b _0805772A
 _08057712:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
-	ldr r2, _08057734 @ =gUnknown_2037AB8
+	ldr r2, _08057734 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -5458,7 +5458,7 @@ _0805772A:
 	strb r0, [r4]
 	b _08057740
 	.align 2, 0
-_08057734: .4byte gUnknown_2037AB8
+_08057734: .4byte gPaletteFade
 _08057738: .4byte 0x3fffffff
 _0805773C:
 	movs r0, 0x1
@@ -5613,7 +5613,7 @@ sub_8057854: @ 8057854
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0805787C @ =gUnknown_2037AB8
+	ldr r0, _0805787C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -5629,14 +5629,14 @@ _08057876:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805787C: .4byte gUnknown_2037AB8
+_0805787C: .4byte gPaletteFade
 _08057880: .4byte sub_805671C
 	thumb_func_end sub_8057854
 
 	thumb_func_start c1_link_related
 c1_link_related: @ 8057884
 	push {r4,lr}
-	ldr r0, _080578C8 @ =gUnknown_3003F3C
+	ldr r0, _080578C8 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805789E
@@ -5665,7 +5665,7 @@ _080578C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080578C8: .4byte gUnknown_3003F3C
+_080578C8: .4byte gWirelessCommType
 _080578CC: .4byte gUnknown_300502C
 _080578D0: .4byte gUnknown_3003E60
 _080578D4: .4byte gUnknown_3000E84
@@ -5710,7 +5710,7 @@ _0805790C: .4byte gUnknown_3000E84
 	thumb_func_start sub_8057910
 sub_8057910: @ 8057910
 	push {lr}
-	ldr r0, _08057934 @ =gUnknown_3003F3C
+	ldr r0, _08057934 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805792E
@@ -5727,7 +5727,7 @@ _0805792E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057934: .4byte gUnknown_3003F3C
+_08057934: .4byte gWirelessCommType
 _08057938: .4byte gUnknown_3000E89
 	thumb_func_end sub_8057910
 
@@ -6137,7 +6137,7 @@ _08057C6C:
 	movs r0, 0x11
 	strh r0, [r1]
 _08057C72:
-	ldr r0, _08057CB4 @ =gUnknown_3003F3C
+	ldr r0, _08057CB4 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08057CA8
@@ -6168,7 +6168,7 @@ _08057CA8:
 	bx r0
 	.align 2, 0
 _08057CB0: .4byte gUnknown_3005028
-_08057CB4: .4byte gUnknown_3003F3C
+_08057CB4: .4byte gWirelessCommType
 	thumb_func_end sub_8057C4C
 
 	thumb_func_start sub_8057CB8
@@ -6640,7 +6640,7 @@ _08057F96:
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_8058F78
+	bl MapGridGetMetatileBehaviorAt
 	strh r0, [r6, 0xC]
 	add sp, 0x4
 	pop {r4-r6}
@@ -6913,7 +6913,7 @@ sub_80581C8: @ 80581C8
 	push {lr}
 	movs r0, 0x6
 	bl PlaySE
-	bl sub_806F258
+	bl ShowStartMenu
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
@@ -7029,7 +7029,7 @@ sub_8058274: @ 8058274
 	strb r1, [r0]
 	cmp r2, 0x1
 	beq _080582C0
-	ldr r2, _080582D4 @ =gUnknown_2037AB8
+	ldr r2, _080582D4 @ =gPaletteFade
 	ldrb r1, [r2, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -7048,7 +7048,7 @@ _080582C4: .4byte gUnknown_3000E84
 _080582C8: .4byte sub_8057DC8
 _080582CC: .4byte sub_8057DA4
 _080582D0: .4byte gUnknown_3000E88
-_080582D4: .4byte gUnknown_2037AB8
+_080582D4: .4byte gPaletteFade
 _080582D8:
 	movs r0, 0
 _080582DA:
@@ -7089,7 +7089,7 @@ _08058312:
 	thumb_func_start sub_8058318
 sub_8058318: @ 8058318
 	push {lr}
-	ldr r0, _08058330 @ =gUnknown_3003F3C
+	ldr r0, _08058330 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08058334
@@ -7099,7 +7099,7 @@ sub_8058318: @ 8058318
 	movs r0, 0x1
 	b _08058336
 	.align 2, 0
-_08058330: .4byte gUnknown_3003F3C
+_08058330: .4byte gWirelessCommType
 _08058334:
 	movs r0, 0
 _08058336:
@@ -7110,7 +7110,7 @@ _08058336:
 	thumb_func_start sub_805833C
 sub_805833C: @ 805833C
 	push {lr}
-	ldr r0, _08058350 @ =gUnknown_3003F3C
+	ldr r0, _08058350 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805835C
@@ -7120,7 +7120,7 @@ sub_805833C: @ 805833C
 	ldrb r0, [r0]
 	b _08058364
 	.align 2, 0
-_08058350: .4byte gUnknown_3003F3C
+_08058350: .4byte gWirelessCommType
 _08058354: .4byte gUnknown_3003FB0
 _08058358: .4byte 0x00000339
 _0805835C:

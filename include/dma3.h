@@ -1,6 +1,8 @@
 #ifndef GUARD_DMA3_H
 #define GUARD_DMA3_H
 
+#include "global.h"
+
 void ClearDma3Requests(void);
 void ProcessDma3Requests(void);
 int RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode);

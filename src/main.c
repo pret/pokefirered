@@ -98,7 +98,7 @@ static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 
 extern u16 gTrainerId;
 extern bool8 gUnknown_3005ECC;
-extern bool8 gUnknown_3003F3C;
+extern bool8 gWirelessCommType;
 extern bool8 gUnknown_3005E88;
 
 EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
@@ -348,7 +348,7 @@ extern void ProcessDma3Requests(void);
 
 static void VBlankIntr(void)
 {
-    if (gUnknown_3003F3C)
+    if (gWirelessCommType)
         RFUVSync();
     else if (!gLinkVSyncDisabled)
         LinkVSync();

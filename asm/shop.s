@@ -347,7 +347,7 @@ sub_809AD40: @ 809AD40
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0809AD70 @ =gUnknown_2037AB8
+	ldr r0, _0809AD70 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -365,7 +365,7 @@ _0809AD68:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809AD70: .4byte gUnknown_2037AB8
+_0809AD70: .4byte gPaletteFade
 	thumb_func_end sub_809AD40
 
 	thumb_func_start sub_809AD74
@@ -892,7 +892,7 @@ _0809B1F2:
 	muls r4, r0
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, _0809B2CC @ =gUnknown_84161C1
+	ldr r1, _0809B2CC @ =gFameCheckerText_Cancel
 	bl StringCopy
 	ldr r0, _0809B2D0 @ =gUnknown_2039964
 	ldr r2, [r0]
@@ -990,7 +990,7 @@ _0809B2BC:
 	b _0809B2E6
 	.align 2, 0
 _0809B2C8: .4byte gUnknown_2039968
-_0809B2CC: .4byte gUnknown_84161C1
+_0809B2CC: .4byte gFameCheckerText_Cancel
 _0809B2D0: .4byte gUnknown_2039964
 _0809B2D4: .4byte gUnknown_3005E70
 _0809B2D8: .4byte gUnknown_2039934
@@ -1259,7 +1259,7 @@ sub_809B494: @ 809B494
 	lsrs r0, 16
 	movs r1, 0xD
 	muls r1, r0
-	ldr r0, _0809B524 @ =gUnknown_8247094
+	ldr r0, _0809B524 @ =gMoveNames
 	adds r1, r0
 	adds r0, r5, 0
 	bl StringCopy
@@ -1280,7 +1280,7 @@ _0809B514: .4byte gStringVar1
 _0809B518: .4byte 0xfffffee0
 _0809B51C: .4byte gStringVar4
 _0809B520: .4byte gUnknown_8416226
-_0809B524: .4byte gUnknown_8247094
+_0809B524: .4byte gMoveNames
 _0809B528:
 	ldr r2, _0809B564 @ =gUnknown_8416213
 	movs r4, 0
@@ -1378,7 +1378,7 @@ sub_809B59C: @ 809B59C
 	bl CopyWindowToVram
 	b _0809B5F8
 _0809B5E0:
-	ldr r2, _0809B600 @ =gUnknown_841623B
+	ldr r2, _0809B600 @ =gFameCheckerText_ListMenuCursor
 	str r5, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -1395,7 +1395,7 @@ _0809B5F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B600: .4byte gUnknown_841623B
+_0809B600: .4byte gFameCheckerText_ListMenuCursor
 	thumb_func_end sub_809B59C
 
 	thumb_func_start sub_809B604
@@ -2157,7 +2157,7 @@ sub_809BBC0: @ 809BBC0
 	lsls r0, 3
 	ldr r1, _0809BC00 @ =gTasks+0x8
 	adds r5, r0, r1
-	ldr r0, _0809BC04 @ =gUnknown_2037AB8
+	ldr r0, _0809BC04 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2181,7 +2181,7 @@ sub_809BBC0: @ 809BBC0
 	b _0809BC8E
 	.align 2, 0
 _0809BC00: .4byte gTasks+0x8
-_0809BC04: .4byte gUnknown_2037AB8
+_0809BC04: .4byte gPaletteFade
 _0809BC08: .4byte gUnknown_2039942
 _0809BC0C:
 	movs r0, 0x5
@@ -2682,7 +2682,7 @@ sub_809C04C: @ 809C04C
 	lsls r0, 3
 	ldr r1, _0809C088 @ =gTasks+0x8
 	adds r2, r0, r1
-	ldr r0, _0809C08C @ =gUnknown_2037AB8
+	ldr r0, _0809C08C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2703,7 +2703,7 @@ _0809C082:
 	bx r0
 	.align 2, 0
 _0809C088: .4byte gTasks+0x8
-_0809C08C: .4byte gUnknown_2037AB8
+_0809C08C: .4byte gPaletteFade
 _0809C090: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_809C04C
 
@@ -3280,7 +3280,7 @@ sub_809C4A8: @ 809C4A8
 	adds r0, r1, 0x4
 	adds r1, 0x6
 	bl PlayerGetDestCoords
-	ldr r0, _0809C4E8 @ =gUnknown_20370C0
+	ldr r0, _0809C4E8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0809C4EC
@@ -3290,7 +3290,7 @@ sub_809C4A8: @ 809C4A8
 	.align 2, 0
 _0809C4E0: .4byte sub_809C500
 _0809C4E4: .4byte gTasks
-_0809C4E8: .4byte gUnknown_20370C0
+_0809C4E8: .4byte gSpecialVar_0x8004
 _0809C4EC:
 	ldrh r0, [r4, 0xC]
 	subs r0, 0x1

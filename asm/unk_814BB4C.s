@@ -89,7 +89,7 @@ sub_814BBB8: @ 814BBB8
 	lsls r4, 8
 	ldrb r2, [r1, 0x7]
 	orrs r4, r2
-	ldr r5, _0814BC0C @ =gUnknown_2037AB8
+	ldr r5, _0814BC0C @ =gPaletteFade
 	ldrb r3, [r5, 0x8]
 	movs r2, 0x7F
 	ands r2, r3
@@ -110,7 +110,7 @@ sub_814BBB8: @ 814BBB8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0814BC0C: .4byte gUnknown_2037AB8
+_0814BC0C: .4byte gPaletteFade
 	thumb_func_end sub_814BBB8
 
 	thumb_func_start sub_814BC10
@@ -540,7 +540,7 @@ _0814BF1A:
 	movs r3, 0
 	cmp r3, r4
 	bcs _0814BF7E
-	ldr r7, _0814BF9C @ =gUnknown_2022118
+	ldr r7, _0814BF9C @ =gBlockRecvBuffer
 	movs r6, 0
 	ldr r4, _0814BFA0 @ =gUnknown_83DFC9C
 _0814BF3C:
@@ -592,7 +592,7 @@ _0814BF7E:
 	b _0814BFC0
 	.align 2, 0
 _0814BF98: .4byte gUnknown_846E3C8
-_0814BF9C: .4byte gUnknown_2022118
+_0814BF9C: .4byte gBlockRecvBuffer
 _0814BFA0: .4byte gUnknown_83DFC9C
 _0814BFA4:
 	movs r0, 0
@@ -2299,7 +2299,7 @@ _0814CCB0:
 	adds r4, 0x42
 	cmp r8, r3
 	bcs _0814CCDE
-	ldr r2, _0814CCF8 @ =gUnknown_2022118
+	ldr r2, _0814CCF8 @ =gBlockRecvBuffer
 _0814CCBE:
 	mov r3, r8
 	lsls r1, r3, 5
@@ -2329,7 +2329,7 @@ _0814CCDE:
 	b _0814CF92
 	.align 2, 0
 _0814CCF4: .4byte gUnknown_846E3C8
-_0814CCF8: .4byte gUnknown_2022118
+_0814CCF8: .4byte gBlockRecvBuffer
 _0814CCFC:
 	movs r0, 0x6
 	b _0814CF92
@@ -2635,7 +2635,7 @@ _0814CF3C:
 	movs r1, 0
 	movs r2, 0x30
 	bl memset
-	ldr r1, _0814CF6C @ =gUnknown_2022118
+	ldr r1, _0814CF6C @ =gBlockRecvBuffer
 	adds r0, r4, 0
 	movs r2, 0x30
 	bl memcpy
@@ -2645,7 +2645,7 @@ _0814CF64:
 	strh r0, [r7, 0x10]
 	b _0814CF8E
 	.align 2, 0
-_0814CF6C: .4byte gUnknown_2022118
+_0814CF6C: .4byte gBlockRecvBuffer
 _0814CF70:
 	bl sub_814B930
 	movs r0, 0x12
@@ -3071,7 +3071,7 @@ _0814D296:
 	cmp r5, r3
 	bcs _0814D2D4
 	adds r1, r6, 0
-	ldr r2, _0814D2EC @ =gUnknown_2022118
+	ldr r2, _0814D2EC @ =gBlockRecvBuffer
 _0814D2BC:
 	lsls r0, r5, 8
 	adds r0, r2
@@ -3096,7 +3096,7 @@ _0814D2D4:
 	b _0814D2FA
 	.align 2, 0
 _0814D2E8: .4byte gUnknown_846E3C8
-_0814D2EC: .4byte gUnknown_2022118
+_0814D2EC: .4byte gBlockRecvBuffer
 _0814D2F0:
 	movs r0, 0x16
 	movs r1, 0x1
@@ -3326,7 +3326,7 @@ _0814D488:
 	bl sub_800AAC0
 	b _0814D4B8
 _0814D498:
-	ldr r0, _0814D4B4 @ =gUnknown_3003F64
+	ldr r0, _0814D4B4 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0814D4BE
@@ -3339,7 +3339,7 @@ _0814D498:
 	strb r4, [r5, 0xC]
 	b _0814D4BE
 	.align 2, 0
-_0814D4B4: .4byte gUnknown_3003F64
+_0814D4B4: .4byte gReceivedRemoteLinkPlayers
 _0814D4B8:
 	ldrb r0, [r5, 0xC]
 	adds r0, 0x1

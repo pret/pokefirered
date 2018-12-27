@@ -1307,7 +1307,7 @@ _08072E5E:
 	movs r0, 0x16
 	bl SetGpuReg
 	lsls r4, r7, 5
-	ldr r0, _08072F7C @ =gUnknown_20373F8
+	ldr r0, _08072F7C @ =gPlttBufferUnfaded + 0x200
 	adds r4, r0
 	add r0, sp, 0x10
 	ldrb r1, [r0, 0x8]
@@ -1353,7 +1353,7 @@ _08072F6C: .4byte gUnknown_2023D44
 _08072F70: .4byte gUnknown_2022978
 _08072F74: .4byte gSprites
 _08072F78: .4byte gUnknown_202297A
-_08072F7C: .4byte gUnknown_20373F8
+_08072F7C: .4byte gPlttBufferUnfaded + 0x200
 _08072F80: .4byte 0x04000008
 _08072F84:
 	ldr r1, _08073094 @ =0x06006000
@@ -1440,7 +1440,7 @@ _08072F84:
 	movs r0, 0x1A
 	bl SetGpuReg
 	lsls r4, r7, 5
-	ldr r0, _080730B4 @ =gUnknown_20373F8
+	ldr r0, _080730B4 @ =gPlttBufferUnfaded + 0x200
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x90
@@ -1487,7 +1487,7 @@ _080730A4: .4byte gUnknown_2023D44
 _080730A8: .4byte gUnknown_202297C
 _080730AC: .4byte gSprites
 _080730B0: .4byte gUnknown_202297E
-_080730B4: .4byte gUnknown_20373F8
+_080730B4: .4byte gPlttBufferUnfaded + 0x200
 _080730B8: .4byte 0x05000120
 _080730BC: .4byte 0x04000008
 	thumb_func_end sub_8072E48
@@ -1640,7 +1640,7 @@ task_pA_ma0A_obj_to_bg_pal: @ 8073174
 	adds r0, r5
 	strh r0, [r1]
 	lsls r0, r6, 5
-	ldr r2, _08073200 @ =gUnknown_20377F8
+	ldr r2, _08073200 @ =gPlttBufferFaded + 0x200
 	adds r0, r2
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
@@ -1656,7 +1656,7 @@ _080731F0: .4byte gTasks
 _080731F4: .4byte gSprites
 _080731F8: .4byte gUnknown_2022978
 _080731FC: .4byte gUnknown_202297A
-_08073200: .4byte gUnknown_20377F8
+_08073200: .4byte gPlttBufferFaded + 0x200
 _08073204: .4byte 0xfffffe00
 _08073208: .4byte 0x04000008
 _0807320C:
@@ -1673,7 +1673,7 @@ _0807320C:
 	adds r0, r5
 	strh r0, [r1]
 	lsls r0, r6, 5
-	ldr r1, _08073244 @ =gUnknown_20377F8
+	ldr r1, _08073244 @ =gPlttBufferFaded + 0x200
 	adds r0, r1
 	subs r1, 0xE0
 	ldr r2, _08073248 @ =0x04000008
@@ -1686,7 +1686,7 @@ _08073232:
 	.align 2, 0
 _0807323C: .4byte gUnknown_202297C
 _08073240: .4byte gUnknown_202297E
-_08073244: .4byte gUnknown_20377F8
+_08073244: .4byte gPlttBufferFaded + 0x200
 _08073248: .4byte 0x04000008
 	thumb_func_end task_pA_ma0A_obj_to_bg_pal
 
@@ -2536,7 +2536,7 @@ sub_8073850: @ 8073850
 	.align 2, 0
 _08073884: .4byte gTasks
 _08073888:
-	ldr r2, _080738A4 @ =gUnknown_2037AB8
+	ldr r2, _080738A4 @ =gPaletteFade
 	ldrb r1, [r2, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2551,7 +2551,7 @@ _08073888:
 	strb r0, [r1]
 	b _080738F0
 	.align 2, 0
-_080738A4: .4byte gUnknown_2037AB8
+_080738A4: .4byte gPaletteFade
 _080738A8: .4byte gUnknown_2037F17
 _080738AC:
 	cmp r3, 0x2

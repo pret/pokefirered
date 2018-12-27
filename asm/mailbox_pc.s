@@ -174,7 +174,7 @@ sub_810EC98: @ 810EC98
 	adds r6, r0, 0
 	movs r3, 0
 	ldr r7, _0810ED50 @ =gUnknown_203ADE0
-	ldr r0, _0810ED54 @ =gUnknown_84161C1
+	ldr r0, _0810ED54 @ =gFameCheckerText_Cancel
 	mov r12, r0
 	ldr r5, _0810ED58 @ =gUnknown_3005E70
 	ldr r1, _0810ED5C @ =gUnknown_203ADDC
@@ -262,7 +262,7 @@ _0810ECCE:
 	bx r1
 	.align 2, 0
 _0810ED50: .4byte gUnknown_203ADE0
-_0810ED54: .4byte gUnknown_84161C1
+_0810ED54: .4byte gFameCheckerText_Cancel
 _0810ED58: .4byte gUnknown_3005E70
 _0810ED5C: .4byte gUnknown_203ADDC
 _0810ED60: .4byte gUnknown_8454003

@@ -2,7 +2,7 @@
 
 	.align 2
 gUnknown_83FECCC:: @ 83FECCC
-	.incbin "baserom.gba", 0x3FECCC, 0x6
+	.byte 0x0c, 0x00, 0x1c, 0x00, 0x2c, 0x00
 
 gUnknown_83FECD2:: @ 83FECD2
 	.incbin "baserom.gba", 0x3FECD2, 0x4
@@ -556,7 +556,7 @@ gExpandedPlaceholder_Green:: @ 8415A5C
 gText_EggNickname:: @ 8415A62
 	.incbin "baserom.gba", 0x415A62, 0x4
 
-gUnknown_8415A66:: @ 8415A66
+gText_Pokemon:: @ 8415A66
 	.incbin "baserom.gba", 0x415A66, 0x8
 
 gUnknown_8415A6E:: @ 8415A6E
@@ -721,8 +721,8 @@ gUnknown_8416188:: @ 8416188
 gUnknown_8416190:: @ 8416190
 	.incbin "baserom.gba", 0x416190, 0x31
 
-gUnknown_84161C1:: @ 84161C1
-	.incbin "baserom.gba", 0x4161C1, 0x7
+gFameCheckerText_Cancel:: @ 84161C1
+	.string "CANCEL$"
 
 gUnknown_84161C8:: @ 84161C8
 	.incbin "baserom.gba", 0x4161C8, 0x5
@@ -766,8 +766,8 @@ gUnknown_8416226:: @ 8416226
 gUnknown_8416238:: @ 8416238
 	.incbin "baserom.gba", 0x416238, 0x3
 
-gUnknown_841623B:: @ 841623B
-	.incbin "baserom.gba", 0x41623B, 0x2
+gFameCheckerText_ListMenuCursor:: @ 841623B
+	.string "▶$"
 
 gUnknown_841623D:: @ 841623D
 	.incbin "baserom.gba", 0x41623D, 0x25
@@ -1237,11 +1237,14 @@ gUnknown_84181B6:: @ 84181B6
 gUnknown_84181BE:: @ 84181BE
 	.incbin "baserom.gba", 0x4181BE, 0x5
 
-gUnknown_84181C3:: @ 84181C3
-	.incbin "baserom.gba", 0x4181C3, 0x21
+gFameCheckerText_FameCheckerWillBeClosed:: @ 84181C3
+	.string "The FAME CHECKER will be closed.$"
 
-gUnknown_84181E4:: @ 84181E4
-	.incbin "baserom.gba", 0x4181E4, 0x4AC
+gFameCheckerText_ClearTextbox:: @ 84181E4
+	.string "\n                              $"
+
+gUnknown_8418204:: @ 8418204
+	.incbin "baserom.gba", 0x00418204, 0x48c
 
 gUnknown_8418690:: @ 8418690
 	.incbin "baserom.gba", 0x418690, 0x20
@@ -1265,13 +1268,23 @@ gUnknown_84189EE:: @ 84189EE
 	.incbin "baserom.gba", 0x4189EE, 0x22D
 
 gUnknown_8418C1B:: @ 8418C1B
-	.incbin "baserom.gba", 0x418C1B, 0x68
+	.string "POKéMON CENTER$"
+
+gUnknown_8418C2A:: @ 8418C2A
+	.incbin "baserom.gba", 0x418C2A, 0x59
 
 gUnknown_8418C83:: @ 8418C83
 	.incbin "baserom.gba", 0x418C83, 0x56
 
 gUnknown_8418CD9:: @ 8418CD9
-	.incbin "baserom.gba", 0x418CD9, 0x130
+	.string "The backup memory is damaged or\n"
+	.string "the game’s battery has run dry.\n"
+	.string "The game can be played, but its\n"
+	.string "progress cannot be saved.\n"
+	.string "“Please press the A Button.”$"
+
+gUnknown_8418D70:: @ 8418D70
+	.incbin "baserom.gba", 0x418D70, 0x99
 
 gUnknown_8418E09:: @ 8418E09
 	.incbin "baserom.gba", 0x418E09, 0x6E
@@ -1307,46 +1320,210 @@ gUnknown_8418EBC:: @ 8418EBC
 	.incbin "baserom.gba", 0x418EBC, 0x7
 
 gUnknown_8418EC3:: @ 8418EC3
-	.incbin "baserom.gba", 0x418EC3, 0x8BF
+	.string "No data$"
+
+gUnknown_8418ECB:: @ 8418ECB
+	@ Viridian Forest
+	.string "A deep and sprawling forest that\n"
+	.string "extends around VIRIDIAN CITY.\n"
+	.string "A natural maze, many people\n"
+	.string "become lost inside.$"
+
+gUnknown_8418F3A:: @ 8418F3A
+	@ Mt. Moon
+	.string "A mystical mountain that is known\n"
+	.string "for its frequent meteor falls.\n"
+	.string "The shards of stars that fall\n"
+	.string "here are known as MOON STONES.$"
+
+gUnknown_8418FB8:: @ 8418FB8
+	@ Diglett's Cave
+	.string "A seemingly plain tunnel that was\n"
+	.string "dug by wild DIGLETT.\n"
+	.string "It is famous for connecting\n"
+	.string "ROUTES 2 and 11.$"
+
+gUnknown_841901C:: @ 841901C
+	@ Victory Road
+	.string "A tunnel situated on ROUTE 23.\n"
+	.string "It earned its name because it\n"
+	.string "must be traveled by all TRAINERS\n"
+	.string "aiming for the top.$"
+
+gUnknown_841908E:: @ 841908E
+	@ Pokémon Mansion
+	.string "A decrepit, burned-down mansion\n"
+	.string "on CINNABAR ISLAND.\n"
+	.string "It got its name because a famous\n"
+	.string "POKéMON researcher lived there.$"
+
+gUnknown_8419103:: @ 8419103
+	@ Safari Zone
+	.string "An amusement park outside FUCHSIA\n"
+	.string "CITY where many rare POKéMON can\n"
+	.string "be observed in the wild.\n"
+	.string "Catch them in a popular game!$"
+
+gUnknown_841917D:: @ 841917D
+	@ Rock Tunnel
+	.string "A naturally formed underground\n"
+	.string "tunnel. Because it has not been\n"
+	.string "developed, it is inky dark inside.\n"
+	.string "A light is needed to get through.$"
+
+gUnknown_8419201:: @ 8419201
+	@ Seafoam Islands
+	.string "A pair of islands that is situated\n"
+	.string "on ROUTE 20.\n"
+	.string "The two islands are shaped the\n"
+	.string "same, as if they were twins.$"
+
+gUnknown_841926D:: @ 841926D
+	@ Pokémon Tower
+	.string "A tower that houses the graves of\n"
+	.string "countless POKéMON.\n"
+	.string "Many people visit it daily to pay\n"
+	.string "their respects to the fallen.$"
+
+gUnknown_84192E2:: @ 84192E2
+	@ Cerulean Cave
+	.string "A mysterious cave that is filled\n"
+	.string "with terribly tough POKéMON.\n"
+	.string "It is so dangerous, the POKéMON\n"
+	.string "LEAGUE is in charge of it.$"
+
+gUnknown_841935B:: @ 841935B
+	@ Power Plant
+	.string "A power plant that was abandoned\n"
+	.string "years ago, though some of the\n"
+	.string "machines still work. It is infested\n"
+	.string "with electric POKéMON.$"
+
+gUnknown_84193D5:: @ 84193D5
+	@ Mt. Ember
+	.string "Supposedly an inactive volcano.\n"
+	.string "However, there are persistent\n"
+	.string "reports that the peak blazes\n"
+	.string "with fire at night.$"
+
+gUnknown_8419444:: @ 8419444
+	@ Berry Forest
+	.string "A forest on a small islet off the\n"
+	.string "coast of THREE ISLAND. BERRIES\n"
+	.string "grow wildly in profusion, quickly\n"
+	.string "replenishing those that fall off.$"
+
+gUnknown_84194C9:: @ 84194C9
+	@ Icefall Cave
+	.string "A cave which is covered by water\n"
+	.string "and ice on FOUR ISLAND.\n"
+	.string "It seems like the end of the cave\n"
+	.string "is connected to the ocean.$"
+
+gUnknown_841953F:: @ 841953F
+	@ Lost Cave
+	.string "A bewildering cave off the coast\n"
+	.string "of RESORT GORGEOUS.\n"
+	.string "Some curious thrill seekers have\n"
+	.string "never emerged from it.$"
+
+gUnknown_84195AC:: @ 84195AC
+	@ Tanoby Ruins
+	.string "An ancient ruin that is rumored to\n"
+	.string "be home to a peculiar POKéMON.\n"
+	.string "However, so far, the POKéMON\n"
+	.string "remains an unconfirmed rumor.$"
+
+gUnknown_8419629:: @ 8419629
+	@ Altering Cave
+	.string "This island has been known by this\n"
+	.string "name since the distant past.\n"
+	.string "No one today knows where it got\n"
+	.string "this name, however.$"
+
+gUnknown_841969D:: @ 841969D
+	@ Pattern Bush
+	.string "A lush and bush-like area. \n"
+	.string "In it are patterns where no grass\n"
+	.string "grows. Some study it in the belief\n"
+	.string "that a secret is concealed.$"
+
+gUnknown_841971A:: @ 841971A
+	@ Dotted Hole
+	.string "A mysterious, just-discovered\n"
+	.string "ruin from an ancient time.\n"
+	.string "It got its name from the six dots\n"
+	.string "on its door.$"
 
 gUnknown_8419782:: @ 8419782
-	.incbin "baserom.gba", 0x419782, 0x1B
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a trade.$"
 
 gUnknown_841979D:: @ 841979D
-	.incbin "baserom.gba", 0x41979D, 0x1B
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a trade.$"
 
 gUnknown_84197B8:: @ 84197B8
-	.incbin "baserom.gba", 0x4197B8, 0x35
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a fateful encounter when\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84197ED:: @ 84197ED
-	.incbin "baserom.gba", 0x4197ED, 0x35
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in a fateful encounter when\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419822:: @ 8419822
-	.incbin "baserom.gba", 0x419822, 0x1F
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419841:: @ 8419841
-	.incbin "baserom.gba", 0x419841, 0x1F
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419860:: @ 8419860
-	.incbin "baserom.gba", 0x419860, 0x2A
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841988A:: @ 841988A
-	.incbin "baserom.gba", 0x41988A, 0x2A
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198B4:: @ 84198B4
-	.incbin "baserom.gba", 0x4198B4, 0x21
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198D5:: @ 84198D5
-	.incbin "baserom.gba", 0x4198D5, 0x5A
+	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "Hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+
+@ TODO: Replace this gibberish with the proper Hiragana
+gUnknown_84198F6:: @ 84198F6
+	.string "{UNKNOWN_F7 0x00}ßÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
+
+gUnknown_8419913:: @ 8419913
+	.string "{UNKNOWN_F7 0x00}ÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
 
 gUnknown_841992F:: @ 841992F
-	.incbin "baserom.gba", 0x41992F, 0x3E
+	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
+	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_841996D:: @ 841996D
-	.incbin "baserom.gba", 0x41996D, 0x3E
+	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
+	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
+	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199AB:: @ 84199AB
-	.incbin "baserom.gba", 0x4199AB, 0x49
+	.string "{UNKNOWN_F7 0x00} nature. Apparently met in\n"
+	.string "a fateful encounter (hatched:\n"
+	.string "{UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199F4:: @ 84199F4
 	.incbin "baserom.gba", 0x4199F4, 0x217
@@ -1454,193 +1631,41 @@ gUnknown_8419E57:: @ 8419E57
 	.incbin "baserom.gba", 0x419E57, 0xFD
 
 gUnknown_8419F54:: @ 8419F54
-	.incbin "baserom.gba", 0x419F54, 0x201
+	.string "SAVING…\n"
+	.string "DON’T TURN OFF THE POWER.$"
 
-gUnknown_841A155:: @ 841A155
-	.incbin "baserom.gba", 0x41A155, 0x1A
+// Start menu option descriptions
+gUnknown_8419F76:: @ 8419F76 // Pokedex
+	.string "A device that records POKéMON secrets\n"
+	.string "upon meeting or catching them.$"
 
-gUnknown_841A16F:: @ 841A16F
-	.incbin "baserom.gba", 0x41A16F, 0x24
+gUnknown_8419FBB:: @ 8419FBB // Pokemon
+	.string "Check and organize POKéMON that are\n"
+	.string "traveling with you in your party.$"
 
-gUnknown_841A193:: @ 841A193
-	.incbin "baserom.gba", 0x41A193, 0x3A
+gUnknown_841A001:: @ 841A001 // Bag
+	.string "Equipped with pockets for storing items\n"
+	.string "you bought, received, or found.$"
 
-gUnknown_841A1CD:: @ 841A1CD
-	.incbin "baserom.gba", 0x41A1CD, 0x1A
+gUnknown_841A049:: @ 841A049 // {PLAYER}
+	.string "Check your money and other game data.$"
 
-gUnknown_841A1E7:: @ 841A1E7
-	.incbin "baserom.gba", 0x41A1E7, 0x29
+gUnknown_841A06F:: @ 841A06F // Save
+	.string "Save your game with a complete record\n"
+	.string "of your progress to take a break.$"
 
-gUnknown_841A210:: @ 841A210
-	.incbin "baserom.gba", 0x41A210, 0x10
+gUnknown_841A0B7:: @ 841A0B7 // Options
+	.string "Adjust various game settings such as text\n"
+	.string "speed, game rules, etc.$"
 
-gUnknown_841A220:: @ 841A220
-	.incbin "baserom.gba", 0x41A220, 0x35
+gUnknown_841A0F9:: @ 841A0F9 // Quit
+	.string "Close this MENU window.$"
 
-gUnknown_841A255:: @ 841A255
-	.incbin "baserom.gba", 0x41A255, 0x22
+gUnknown_841A111:: @ 841A111 // Retire
+	.string "Retire from the SAFARI GAME and return to\n"
+	.string "the registration counter.$"
 
-gUnknown_841A277:: @ 841A277
-	.incbin "baserom.gba", 0x41A277, 0x39
-
-gUnknown_841A2B0:: @ 841A2B0
-	.incbin "baserom.gba", 0x41A2B0, 0x31
-
-gUnknown_841A2E1:: @ 841A2E1
-	.incbin "baserom.gba", 0x41A2E1, 0x31
-
-gUnknown_841A312:: @ 841A312
-	.incbin "baserom.gba", 0x41A312, 0x37
-
-gUnknown_841A349:: @ 841A349
-	.incbin "baserom.gba", 0x41A349, 0x48
-
-gUnknown_841A391:: @ 841A391
-	.incbin "baserom.gba", 0x41A391, 0x49
-
-gUnknown_841A3DA:: @ 841A3DA
-	.incbin "baserom.gba", 0x41A3DA, 0x25
-
-gUnknown_841A3FF:: @ 841A3FF
-	.incbin "baserom.gba", 0x41A3FF, 0x23
-
-gUnknown_841A422:: @ 841A422
-	.incbin "baserom.gba", 0x41A422, 0x55
-
-gUnknown_841A477:: @ 841A477
-	.incbin "baserom.gba", 0x41A477, 0x4F
-
-gUnknown_841A4C6:: @ 841A4C6
-	.incbin "baserom.gba", 0x41A4C6, 0x45
-
-gUnknown_841A50B:: @ 841A50B
-	.incbin "baserom.gba", 0x41A50B, 0x5B
-
-gUnknown_841A566:: @ 841A566
-	.incbin "baserom.gba", 0x41A566, 0x36
-
-gUnknown_841A59C:: @ 841A59C
-	.incbin "baserom.gba", 0x41A59C, 0x3D
-
-gUnknown_841A5D9:: @ 841A5D9
-	.incbin "baserom.gba", 0x41A5D9, 0x21
-
-gUnknown_841A5FA:: @ 841A5FA
-	.incbin "baserom.gba", 0x41A5FA, 0x10
-
-gUnknown_841A60A:: @ 841A60A
-	.incbin "baserom.gba", 0x41A60A, 0x28
-
-gUnknown_841A632:: @ 841A632
-	.incbin "baserom.gba", 0x41A632, 0x1D
-
-gUnknown_841A64F:: @ 841A64F
-	.incbin "baserom.gba", 0x41A64F, 0x1F
-
-gUnknown_841A66E:: @ 841A66E
-	.incbin "baserom.gba", 0x41A66E, 0x26
-
-gUnknown_841A694:: @ 841A694
-	.incbin "baserom.gba", 0x41A694, 0x11
-
-gUnknown_841A6A5:: @ 841A6A5
-	.incbin "baserom.gba", 0x41A6A5, 0x3C
-
-gUnknown_841A6E1:: @ 841A6E1
-	.incbin "baserom.gba", 0x41A6E1, 0x51
-
-gUnknown_841A732:: @ 841A732
-	.incbin "baserom.gba", 0x41A732, 0x38
-
-gUnknown_841A76A:: @ 841A76A
-	.incbin "baserom.gba", 0x41A76A, 0x46
-
-gUnknown_841A7B0:: @ 841A7B0
-	.incbin "baserom.gba", 0x41A7B0, 0x2D
-
-gUnknown_841A7DD:: @ 841A7DD
-	.incbin "baserom.gba", 0x41A7DD, 0x33
-
-gUnknown_841A810:: @ 841A810
-	.incbin "baserom.gba", 0x41A810, 0x48
-
-gUnknown_841A858:: @ 841A858
-	.incbin "baserom.gba", 0x41A858, 0x3E
-
-gUnknown_841A896:: @ 841A896
-	.incbin "baserom.gba", 0x41A896, 0x3E
-
-gUnknown_841A8D4:: @ 841A8D4
-	.incbin "baserom.gba", 0x41A8D4, 0x9
-
-gUnknown_841A8DD:: @ 841A8DD
-	.incbin "baserom.gba", 0x41A8DD, 0x5B
-
-gUnknown_841A938:: @ 841A938
-	.incbin "baserom.gba", 0x41A938, 0x2D
-
-gUnknown_841A965:: @ 841A965
-	.incbin "baserom.gba", 0x41A965, 0x44
-
-gUnknown_841A9A9:: @ 841A9A9
-	.incbin "baserom.gba", 0x41A9A9, 0x2B
-
-gUnknown_841A9D4:: @ 841A9D4
-	.incbin "baserom.gba", 0x41A9D4, 0x2D
-
-gUnknown_841AA01:: @ 841AA01
-	.incbin "baserom.gba", 0x41AA01, 0x2A
-
-gUnknown_841AA2B:: @ 841AA2B
-	.incbin "baserom.gba", 0x41AA2B, 0x4B
-
-gUnknown_841AA76:: @ 841AA76
-	.incbin "baserom.gba", 0x41AA76, 0x34
-
-gUnknown_841AAAA:: @ 841AAAA
-	.incbin "baserom.gba", 0x41AAAA, 0x42
-
-gUnknown_841AAEC:: @ 841AAEC
-	.incbin "baserom.gba", 0x41AAEC, 0x3D
-
-gUnknown_841AB29:: @ 841AB29
-	.incbin "baserom.gba", 0x41AB29, 0x4B
-
-gUnknown_841AB74:: @ 841AB74
-	.incbin "baserom.gba", 0x41AB74, 0x1A
-
-gUnknown_841AB8E:: @ 841AB8E
-	.incbin "baserom.gba", 0x41AB8E, 0x2BA
-
-gUnknown_841AE48:: @ 841AE48
-	.incbin "baserom.gba", 0x41AE48, 0x47
-
-gUnknown_841AE8F:: @ 841AE8F
-	.incbin "baserom.gba", 0x41AE8F, 0x7D
-
-gUnknown_841AF0C:: @ 841AF0C
-	.incbin "baserom.gba", 0x41AF0C, 0x32
-
-gUnknown_841AF3E:: @ 841AF3E
-	.incbin "baserom.gba", 0x41AF3E, 0x2F
-
-gUnknown_841AF6D:: @ 841AF6D
-	.incbin "baserom.gba", 0x41AF6D, 0x39
-
-gUnknown_841AFA6:: @ 841AFA6
-	.incbin "baserom.gba", 0x41AFA6, 0x99
-
-gUnknown_841B03F:: @ 841B03F
-	.incbin "baserom.gba", 0x41B03F, 0x25
-
-gUnknown_841B064:: @ 841B064
-	.incbin "baserom.gba", 0x41B064, 0xF
-
-gUnknown_841B073:: @ 841B073
-	.incbin "baserom.gba", 0x41B073, 0x2C
-
-gUnknown_841B09F:: @ 841B09F
-	.incbin "baserom.gba", 0x41B09F, 0x1E6
+	.include "data/text/quest_log.inc"
 
 gUnknown_841B285:: @ 841B285
 	.incbin "baserom.gba", 0x41B285, 0xE
@@ -1931,67 +1956,88 @@ gUnknown_841D198:: @ 841D198
 	.incbin "baserom.gba", 0x41D198, 0xCB8
 
 gUnknown_841DE50:: @ 841DE50
-	.incbin "baserom.gba", 0x41DE50, 0x1
+	.string "$"
 
 gUnknown_841DE51:: @ 841DE51
-	.incbin "baserom.gba", 0x41DE51, 0x1
+	.string "$"
 
 gUnknown_841DE52:: @ 841DE52
-	.incbin "baserom.gba", 0x41DE52, 0x1
+	.string "$"
 
 gUnknown_841DE53:: @ 841DE53
-	.incbin "baserom.gba", 0x41DE53, 0x1
+	.string "$"
 
 gUnknown_841DE54:: @ 841DE54
-	.incbin "baserom.gba", 0x41DE54, 0x28
+	.string "$"
+
+gUnknown_841DE55:: @ 841DE55
+	.incbin "baserom.gba", 0x41DE55, 0x27 @ japanese
 
 gUnknown_841DE7C:: @ 841DE7C
-	.incbin "baserom.gba", 0x41DE7C, 0x1
+	.string "$"
 
 gUnknown_841DE7D:: @ 841DE7D
-	.incbin "baserom.gba", 0x41DE7D, 0x18
+	.string "$"
+
+gUnknown_841DE7E:: @ 841DE7E
+	.incbin "baserom.gba", 0x0041de7e, 0x17 @ japanese
 
 gUnknown_841DE95:: @ 841DE95
-	.incbin "baserom.gba", 0x41DE95, 0x1
+	.string "$"
 
 gUnknown_841DE96:: @ 841DE96
-	.incbin "baserom.gba", 0x41DE96, 0x1
+	.string "$"
 
 gUnknown_841DE97:: @ 841DE97
-	.incbin "baserom.gba", 0x41DE97, 0x1
+	.string "$"
 
 gUnknown_841DE98:: @ 841DE98
-	.incbin "baserom.gba", 0x41DE98, 0x1
+	.string "$"
 
 gUnknown_841DE99:: @ 841DE99
-	.incbin "baserom.gba", 0x41DE99, 0x1
+	.string "$"
 
 gUnknown_841DE9A:: @ 841DE9A
-	.incbin "baserom.gba", 0x41DE9A, 0x1
+	.string "$"
 
 gUnknown_841DE9B:: @ 841DE9B
-	.incbin "baserom.gba", 0x41DE9B, 0x1
+	.string "$"
 
 gUnknown_841DE9C:: @ 841DE9C
-	.incbin "baserom.gba", 0x41DE9C, 0x1
+	.string "$"
 
 gUnknown_841DE9D:: @ 841DE9D
-	.incbin "baserom.gba", 0x41DE9D, 0x53
+	.string "Communication error…\n"
+	.string "Please check all connections,\n"
+	.string "then turn the power OFF and ON.$"
 
 gUnknown_841DEF0:: @ 841DEF0
-	.incbin "baserom.gba", 0x41DEF0, 0x15
+	.string "Communication error…$"
 
 gUnknown_841DF05:: @ 841DF05
-	.incbin "baserom.gba", 0x41DF05, 0x47
+	.string "Move closer to your link partner(s).\n"
+	.string "Avoid obstacles between partners.$"
 
 gUnknown_841DF4C:: @ 841DF4C
-	.incbin "baserom.gba", 0x41DF4C, 0x1F
+	.string "A Button: Registration Counter$"
 
 gUnknown_841DF6B:: @ 841DF6B
-	.incbin "baserom.gba", 0x41DF6B, 0x17
+	.string "A Button: Title Screen$"
 
 gUnknown_841DF82:: @ 841DF82
-	.incbin "baserom.gba", 0x41DF82, 0x23
+	.string "{STR_VAR_1}P LINK$"
+
+gUnknown_841DF8B:: @ 841DF8B
+	.string "BRONZE$"
+
+gUnknown_841DF92:: @ 841DF92
+	.string "COPPER$"
+
+gUnknown_841DF99:: @ 841DF99
+	.string "SILVER$"
+
+gUnknown_841DFA0:: @ 841DFA0
+	.string "GOLD$"
 
 gUnknown_841DFA5:: @ 841DFA5
 	.incbin "baserom.gba", 0x41DFA5, 0x7
@@ -2068,14 +2114,38 @@ gUnknown_841E572:: @ 841E572
 gUnknown_841E58D:: @ 841E58D
 	.incbin "baserom.gba", 0x41E58D, 0x17
 
-gUnknown_841E5A4:: @ 841E5A4
-	.incbin "baserom.gba", 0x41E5A4, 0x15
+gFameCheckerText_MainScreenUI:: @ 841E5A4
+	.string "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_A_BUTTON}OK$"
 
-gUnknown_841E5B9:: @ 841E5B9
-	.incbin "baserom.gba", 0x41E5B9, 0x19
+gFameCheckerText_PickScreenUI:: @ 841E5B9
+	.string "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
 
-gUnknown_841E5D2:: @ 841E5D2
-	.incbin "baserom.gba", 0x41E5D2, 0xCF
+gFameCheckerText_FlavorTextUI:: @ 841E5D2
+	.string "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {UNKNOWN_F8 0x01}CANCEL$"
+
+gFameCheckerOakName:: @ 841E5E9
+	.string "OAK$"
+
+gFameCheckerDaisyName:: @ 841E5ED
+	.string "DAISY$"
+
+gFameCheckerBillName:: @ 841E5F3
+	.string "BILL$"
+
+gFameCheckerMrFujiName:: @ 841E5F8
+	.string "FUJI$"
+
+gUnknown_841E5FD:: @ 841E5FD
+	.string "A variety of events will be imported\nover Wireless Communication.$"
+
+gUnknown_841E63F:: @ 841E63F
+	.string "Read the WONDER CARDS in your\npossession.$"
+
+gUnknown_841E669:: @ 841E669
+	.string "Read the NEWS that arrived.$"
+
+gUnknown_841E685:: @ 841E685
+	.string "Return to the title screen.$"
 
 gUnknown_841E6A1:: @ 841E6A1
 	.incbin "baserom.gba", 0x41E6A1, 0x3B
@@ -2739,78 +2809,9 @@ gUnknown_8454003:: @ 8454003
 gUnknown_8456618:: @ 8456618
 	.incbin "baserom.gba", 0x456618, 0x4
 
-gUnknown_845661C:: @ 845661C
-	.incbin "baserom.gba", 0x45661C, 0x18
-
-gUnknown_8456634:: @ 8456634
-	.incbin "baserom.gba", 0x456634, 0x4
-
-gUnknown_8456638:: @ 8456638
-	.incbin "baserom.gba", 0x456638, 0x60
-
-gUnknown_8456698:: @ 8456698
-	.incbin "baserom.gba", 0x456698, 0x4
-
-gUnknown_845669C:: @ 845669C
-	.incbin "baserom.gba", 0x45669C, 0x8
-
-gUnknown_84566A4:: @ 84566A4
-	.incbin "baserom.gba", 0x4566A4, 0x4
-
-gUnknown_84566A8:: @ 84566A8
-	.incbin "baserom.gba", 0x4566A8, 0x280
-
-gUnknown_8456928:: @ 8456928
-	.incbin "baserom.gba", 0x456928, 0x8
-
-gUnknown_8456930:: @ 8456930
-	.incbin "baserom.gba", 0x456930, 0x4
-
-gUnknown_8456934:: @ 8456934
-	.incbin "baserom.gba", 0x456934, 0x4
-
-gUnknown_8456938:: @ 8456938
-	.incbin "baserom.gba", 0x456938, 0x8
-
-gUnknown_8456940:: @ 8456940
-	.incbin "baserom.gba", 0x456940, 0x8
-
-gUnknown_8456948:: @ 8456948
-	.incbin "baserom.gba", 0x456948, 0xAC
-
-gUnknown_84569F4:: @ 84569F4
-	.incbin "baserom.gba", 0x4569F4, 0xAC
-
-gUnknown_8456AA0:: @ 8456AA0
-	.incbin "baserom.gba", 0x456AA0, 0x2C
-
-gUnknown_8456ACC:: @ 8456ACC
-	.incbin "baserom.gba", 0x456ACC, 0xC
-
-gUnknown_8456AD8:: @ 8456AD8
-	.incbin "baserom.gba", 0x456AD8, 0xC
-
-gUnknown_8456AE4:: @ 8456AE4
-	.incbin "baserom.gba", 0x456AE4, 0xC
-
-gUnknown_8456AF0:: @ 8456AF0
-	.incbin "baserom.gba", 0x456AF0, 0xCC
-
-gUnknown_8456BBC:: @ 8456BBC
-	.incbin "baserom.gba", 0x456BBC, 0x28
-
-gUnknown_8456BE4:: @ 8456BE4
-	.incbin "baserom.gba", 0x456BE4, 0x33
-
-gUnknown_8456C17:: @ 8456C17
-	.incbin "baserom.gba", 0x456C17, 0x9
-
-gUnknown_8456C20:: @ 8456C20
-	.incbin "baserom.gba", 0x456C20, 0x30
-
-gUnknown_8456C50:: @ 8456C50
-	.incbin "baserom.gba", 0x456C50, 0x24
-
+	@ quest_log.o
+	@ link_rfu_3.o
+	.section .rodata.8456C74
 gUnknown_8456C74:: @ 8456C74
 	.incbin "baserom.gba", 0x456C74, 0x5C
 
@@ -3175,7 +3176,10 @@ gUnknown_8459580:: @ 8459580
 	.incbin "baserom.gba", 0x459580, 0x8
 
 gUnknown_8459588:: @ 8459588
-	.incbin "baserom.gba", 0x459588, 0xAC
+	.incbin "baserom.gba", 0x459588, 0x64
+
+gUnknown_84595EC::
+	.incbin "baserom.gba", 0x4595EC, 0x48
 
 gUnknown_8459634:: @ 8459634
 	.incbin "baserom.gba", 0x459634, 0x8
@@ -3596,773 +3600,3 @@ gUnknown_845C5BC:: @ 845C5BC
 
 gUnknown_845C5CE:: @ 845C5CE
 	.incbin "baserom.gba", 0x45C5CE, 0x32
-
-gUnknown_845C600:: @ 845C600
-	.incbin "baserom.gba", 0x45C600, 0x1720
-
-gUnknown_845DD20:: @ 845DD20
-	.incbin "baserom.gba", 0x45DD20, 0x820
-
-gUnknown_845E540:: @ 845E540
-	.incbin "baserom.gba", 0x45E540, 0x820
-
-gUnknown_845ED60:: @ 845ED60
-	.incbin "baserom.gba", 0x45ED60, 0x820
-
-gUnknown_845F580:: @ 845F580
-	.incbin "baserom.gba", 0x45F580, 0x40
-
-gUnknown_845F5C0:: @ 845F5C0
-	.incbin "baserom.gba", 0x45F5C0, 0x20
-
-gUnknown_845F5E0:: @ 845F5E0
-	.incbin "baserom.gba", 0x45F5E0, 0x3
-
-gUnknown_845F5E3:: @ 845F5E3
-	.incbin "baserom.gba", 0x45F5E3, 0x3
-
-gUnknown_845F5E6:: @ 845F5E6
-	.incbin "baserom.gba", 0x45F5E6, 0x4
-
-gUnknown_845F5EA:: @ 845F5EA
-	.incbin "baserom.gba", 0x45F5EA, 0x22
-
-gUnknown_845F60C:: @ 845F60C
-	.incbin "baserom.gba", 0x45F60C, 0x10
-
-gUnknown_845F61C:: @ 845F61C
-	.incbin "baserom.gba", 0x45F61C, 0x20
-
-gUnknown_845F63C:: @ 845F63C
-	.incbin "baserom.gba", 0x45F63C, 0x80
-
-gUnknown_845F6BC:: @ 845F6BC
-	.incbin "baserom.gba", 0x45F6BC, 0x180
-
-gUnknown_845F83C:: @ 845F83C
-	.incbin "baserom.gba", 0x45F83C, 0x60
-
-gUnknown_845F89C:: @ 845F89C
-	.incbin "baserom.gba", 0x45F89C, 0x180
-
-gUnknown_845FA1C:: @ 845FA1C
-	.incbin "baserom.gba", 0x45FA1C, 0x180
-
-gUnknown_845FB9C:: @ 845FB9C
-	.incbin "baserom.gba", 0x45FB9C, 0x40
-
-gUnknown_845FBDC:: @ 845FBDC
-	.incbin "baserom.gba", 0x45FBDC, 0x18
-
-gUnknown_845FBF4:: @ 845FBF4
-	.incbin "baserom.gba", 0x45FBF4, 0x10
-
-gUnknown_845FC04:: @ 845FC04
-	.incbin "baserom.gba", 0x45FC04, 0x40
-
-gUnknown_845FC44:: @ 845FC44
-	.incbin "baserom.gba", 0x45FC44, 0x34
-
-gUnknown_845FC78:: @ 845FC78
-	.incbin "baserom.gba", 0x45FC78, 0x40
-
-gUnknown_845FCB8:: @ 845FCB8
-	.incbin "baserom.gba", 0x45FCB8, 0x2C
-
-gUnknown_845FCE4:: @ 845FCE4
-	.incbin "baserom.gba", 0x45FCE4, 0x18
-
-gUnknown_845FCFC:: @ 845FCFC
-	.incbin "baserom.gba", 0x45FCFC, 0x18
-
-gUnknown_845FD14:: @ 845FD14
-	.incbin "baserom.gba", 0x45FD14, 0x18
-
-gUnknown_845FD2C:: @ 845FD2C
-	.incbin "baserom.gba", 0x45FD2C, 0x18
-
-gUnknown_845FD44:: @ 845FD44
-	.incbin "baserom.gba", 0x45FD44, 0x10
-
-gUnknown_845FD54:: @ 845FD54
-	.incbin "baserom.gba", 0x45FD54, 0x814
-
-gUnknown_8460568:: @ 8460568
-	.incbin "baserom.gba", 0x460568, 0x80
-
-gUnknown_84605E8:: @ 84605E8
-	.incbin "baserom.gba", 0x4605E8, 0x5C0
-
-gUnknown_8460BA8:: @ 8460BA8
-	.incbin "baserom.gba", 0x460BA8, 0xFC
-
-gUnknown_8460CA4:: @ 8460CA4
-	.incbin "baserom.gba", 0x460CA4, 0x44
-
-gUnknown_8460CE8:: @ 8460CE8
-	.incbin "baserom.gba", 0x460CE8, 0xAC
-
-gUnknown_8460D94:: @ 8460D94
-	.incbin "baserom.gba", 0x460D94, 0xA0
-
-gUnknown_8460E34:: @ 8460E34
-	.incbin "baserom.gba", 0x460E34, 0xA0
-
-gUnknown_8460ED4:: @ 8460ED4
-	.incbin "baserom.gba", 0x460ED4, 0x40
-
-gUnknown_8460F14:: @ 8460F14
-	.incbin "baserom.gba", 0x460F14, 0x6E8
-
-gUnknown_84615FC:: @ 84615FC
-	.incbin "baserom.gba", 0x4615FC, 0x40
-
-gUnknown_846163C:: @ 846163C
-	.incbin "baserom.gba", 0x46163C, 0x698
-
-gUnknown_8461CD4:: @ 8461CD4
-	.incbin "baserom.gba", 0x461CD4, 0x40
-
-gUnknown_8461D14:: @ 8461D14
-	.incbin "baserom.gba", 0x461D14, 0x698
-
-gUnknown_84623AC:: @ 84623AC
-	.incbin "baserom.gba", 0x4623AC, 0x40
-
-gUnknown_84623EC:: @ 84623EC
-	.incbin "baserom.gba", 0x4623EC, 0xA6C
-
-gUnknown_8462E58:: @ 8462E58
-	.incbin "baserom.gba", 0x462E58, 0x5C
-
-gUnknown_8462EB4:: @ 8462EB4
-	.incbin "baserom.gba", 0x462EB4, 0xC
-
-gUnknown_8462EC0:: @ 8462EC0
-	.incbin "baserom.gba", 0x462EC0, 0x8
-
-gUnknown_8462EC8:: @ 8462EC8
-	.incbin "baserom.gba", 0x462EC8, 0x8
-
-gUnknown_8462ED0:: @ 8462ED0
-	.incbin "baserom.gba", 0x462ED0, 0x8
-
-gUnknown_8462ED8:: @ 8462ED8
-	.incbin "baserom.gba", 0x462ED8, 0x10
-
-gUnknown_8462EE8:: @ 8462EE8
-	.incbin "baserom.gba", 0x462EE8, 0x4
-
-gUnknown_8462EEC:: @ 8462EEC
-	.incbin "baserom.gba", 0x462EEC, 0x4
-
-gUnknown_8462EF0:: @ 8462EF0
-	.incbin "baserom.gba", 0x462EF0, 0xC
-
-gUnknown_8462EFC:: @ 8462EFC
-	.incbin "baserom.gba", 0x462EFC, 0x18
-
-gUnknown_8462F14:: @ 8462F14
-	.incbin "baserom.gba", 0x462F14, 0x8
-
-gUnknown_8462F1C:: @ 8462F1C
-	.incbin "baserom.gba", 0x462F1C, 0x8
-
-gUnknown_8462F24:: @ 8462F24
-	.incbin "baserom.gba", 0x462F24, 0x2C
-
-gUnknown_8462F50:: @ 8462F50
-	.incbin "baserom.gba", 0x462F50, 0xDC
-
-gUnknown_846302C:: @ 846302C
-	.incbin "baserom.gba", 0x46302C, 0x48
-
-gUnknown_8463074:: @ 8463074
-	.incbin "baserom.gba", 0x463074, 0x18
-
-gUnknown_846308C:: @ 846308C
-	.incbin "baserom.gba", 0x46308C, 0x4C
-
-gUnknown_84630D8:: @ 84630D8
-	.incbin "baserom.gba", 0x4630D8, 0x4C
-
-gUnknown_8463124:: @ 8463124
-	.incbin "baserom.gba", 0x463124, 0x10
-
-gUnknown_8463134:: @ 8463134
-	.incbin "baserom.gba", 0x463134, 0xC
-
-gUnknown_8463140:: @ 8463140
-	.incbin "baserom.gba", 0x463140, 0x10
-
-gUnknown_8463150:: @ 8463150
-	.incbin "baserom.gba", 0x463150, 0x18
-
-gUnknown_8463168:: @ 8463168
-	.incbin "baserom.gba", 0x463168, 0x3
-
-gUnknown_846316B:: @ 846316B
-	.incbin "baserom.gba", 0x46316B, 0x5
-
-gUnknown_8463170:: @ 8463170
-	.incbin "baserom.gba", 0x463170, 0x8
-
-gUnknown_8463178:: @ 8463178
-	.incbin "baserom.gba", 0x463178, 0x4
-
-gUnknown_846317C:: @ 846317C
-	.incbin "baserom.gba", 0x46317C, 0x4
-
-gUnknown_8463180:: @ 8463180
-	.incbin "baserom.gba", 0x463180, 0x4
-
-gUnknown_8463184:: @ 8463184
-	.incbin "baserom.gba", 0x463184, 0xC
-
-gUnknown_8463190:: @ 8463190
-	.incbin "baserom.gba", 0x463190, 0x50
-
-gUnknown_84631E0:: @ 84631E0
-	.incbin "baserom.gba", 0x4631E0, 0x8
-
-gUnknown_84631E8:: @ 84631E8
-	.incbin "baserom.gba", 0x4631E8, 0x30
-
-gUnknown_8463218:: @ 8463218
-	.incbin "baserom.gba", 0x463218, 0x8
-
-gUnknown_8463220:: @ 8463220
-	.incbin "baserom.gba", 0x463220, 0x18
-
-gUnknown_8463238:: @ 8463238
-	.incbin "baserom.gba", 0x463238, 0x24
-
-gUnknown_846325C:: @ 846325C
-	.incbin "baserom.gba", 0x46325C, 0x48
-
-gUnknown_84632A4:: @ 84632A4
-	.incbin "baserom.gba", 0x4632A4, 0x18
-
-gUnknown_84632BC:: @ 84632BC
-	.incbin "baserom.gba", 0x4632BC, 0x4
-
-gUnknown_84632C0:: @ 84632C0
-	.incbin "baserom.gba", 0x4632C0, 0x4
-
-gUnknown_84632C4:: @ 84632C4
-	.incbin "baserom.gba", 0x4632C4, 0x4
-
-gUnknown_84632C8:: @ 84632C8
-	.incbin "baserom.gba", 0x4632C8, 0x4
-
-gUnknown_84632CC:: @ 84632CC
-	.incbin "baserom.gba", 0x4632CC, 0x4
-
-gUnknown_84632D0:: @ 84632D0
-	.incbin "baserom.gba", 0x4632D0, 0x4
-
-gUnknown_84632D4:: @ 84632D4
-	.incbin "baserom.gba", 0x4632D4, 0x4
-
-gUnknown_84632D8:: @ 84632D8
-	.incbin "baserom.gba", 0x4632D8, 0x18
-
-gUnknown_84632F0:: @ 84632F0
-	.incbin "baserom.gba", 0x4632F0, 0x18
-
-gUnknown_8463308:: @ 8463308
-	.incbin "baserom.gba", 0x463308, 0x20
-
-gUnknown_8463328:: @ 8463328
-	.incbin "baserom.gba", 0x463328, 0x70
-
-gUnknown_8463398:: @ 8463398
-	.incbin "baserom.gba", 0x463398, 0x40
-
-gUnknown_84633D8:: @ 84633D8
-	.incbin "baserom.gba", 0x4633D8, 0x44
-
-gUnknown_846341C:: @ 846341C
-	.incbin "baserom.gba", 0x46341C, 0x20
-
-gUnknown_846343C:: @ 846343C
-	.incbin "baserom.gba", 0x46343C, 0x128
-
-gUnknown_8463564:: @ 8463564
-	.incbin "baserom.gba", 0x463564, 0x1C
-
-gUnknown_8463580:: @ 8463580
-	.incbin "baserom.gba", 0x463580, 0x140
-
-gUnknown_84636C0:: @ 84636C0
-	.incbin "baserom.gba", 0x4636C0, 0x20
-
-gUnknown_84636E0:: @ 84636E0
-	.incbin "baserom.gba", 0x4636E0, 0x20
-
-gUnknown_8463700:: @ 8463700
-	.incbin "baserom.gba", 0x463700, 0x20
-
-gUnknown_8463720:: @ 8463720
-	.incbin "baserom.gba", 0x463720, 0x20
-
-gUnknown_8463740:: @ 8463740
-	.incbin "baserom.gba", 0x463740, 0x12C
-
-gUnknown_846386C:: @ 846386C
-	.incbin "baserom.gba", 0x46386C, 0x120
-
-gUnknown_846398C:: @ 846398C
-	.incbin "baserom.gba", 0x46398C, 0x18
-
-gUnknown_84639A4:: @ 84639A4
-	.incbin "baserom.gba", 0x4639A4, 0x8
-
-gUnknown_84639AC:: @ 84639AC
-	.incbin "baserom.gba", 0x4639AC, 0x48
-
-gUnknown_84639F4:: @ 84639F4
-	.incbin "baserom.gba", 0x4639F4, 0x20
-
-gUnknown_8463A14:: @ 8463A14
-	.incbin "baserom.gba", 0x463A14, 0x68
-
-gUnknown_8463A7C:: @ 8463A7C
-	.incbin "baserom.gba", 0x463A7C, 0x70
-
-gUnknown_8463AEC:: @ 8463AEC
-	.incbin "baserom.gba", 0x463AEC, 0x10
-
-gUnknown_8463AFC:: @ 8463AFC
-	.incbin "baserom.gba", 0x463AFC, 0x4
-
-gUnknown_8463B00:: @ 8463B00
-	.incbin "baserom.gba", 0x463B00, 0x20
-
-gUnknown_8463B20:: @ 8463B20
-	.incbin "baserom.gba", 0x463B20, 0x10
-
-gUnknown_8463B30:: @ 8463B30
-	.incbin "baserom.gba", 0x463B30, 0x10
-
-gUnknown_8463B40:: @ 8463B40
-	.incbin "baserom.gba", 0x463B40, 0x4
-
-gUnknown_8463B44:: @ 8463B44
-	.incbin "baserom.gba", 0x463B44, 0x20
-
-gUnknown_8463B64:: @ 8463B64
-	.incbin "baserom.gba", 0x463B64, 0x24
-
-gUnknown_8463B88:: @ 8463B88
-	.incbin "baserom.gba", 0x463B88, 0xF8
-
-gUnknown_8463C80:: @ 8463C80
-	.incbin "baserom.gba", 0x463C80, 0x1E0
-
-gUnknown_8463E60:: @ 8463E60
-	.incbin "baserom.gba", 0x463E60, 0x64
-
-gUnknown_8463EC4:: @ 8463EC4
-	.incbin "baserom.gba", 0x463EC4, 0x10
-
-gUnknown_8463ED4:: @ 8463ED4
-	.incbin "baserom.gba", 0x463ED4, 0x1C
-
-gUnknown_8463EF0:: @ 8463EF0
-	.incbin "baserom.gba", 0x463EF0, 0xC
-
-gUnknown_8463EFC:: @ 8463EFC
-	.incbin "baserom.gba", 0x463EFC, 0x10
-
-gUnknown_8463F0C:: @ 8463F0C
-	.incbin "baserom.gba", 0x463F0C, 0x18
-
-gUnknown_8463F24:: @ 8463F24
-	.incbin "baserom.gba", 0x463F24, 0x18
-
-gUnknown_8463F3C:: @ 8463F3C
-	.incbin "baserom.gba", 0x463F3C, 0x20
-
-gUnknown_8463F5C:: @ 8463F5C
-	.incbin "baserom.gba", 0x463F5C, 0x20
-
-gUnknown_8463F7C:: @ 8463F7C
-	.incbin "baserom.gba", 0x463F7C, 0x20
-
-gUnknown_8463F9C:: @ 8463F9C
-	.incbin "baserom.gba", 0x463F9C, 0x8
-
-gUnknown_8463FA4:: @ 8463FA4
-	.incbin "baserom.gba", 0x463FA4, 0x3
-
-gUnknown_8463FA7:: @ 8463FA7
-	.incbin "baserom.gba", 0x463FA7, 0x11
-
-gUnknown_8463FB8:: @ 8463FB8
-	.incbin "baserom.gba", 0x463FB8, 0x6
-
-gUnknown_8463FBE:: @ 8463FBE
-	.incbin "baserom.gba", 0x463FBE, 0x3
-
-gUnknown_8463FC1:: @ 8463FC1
-	.incbin "baserom.gba", 0x463FC1, 0x5
-
-gUnknown_8463FC6:: @ 8463FC6
-	.incbin "baserom.gba", 0x463FC6, 0x7
-
-gUnknown_8463FCD:: @ 8463FCD
-	.incbin "baserom.gba", 0x463FCD, 0x7
-
-gUnknown_8463FD4:: @ 8463FD4
-	.incbin "baserom.gba", 0x463FD4, 0xB
-
-gUnknown_8463FDF:: @ 8463FDF
-	.incbin "baserom.gba", 0x463FDF, 0xB
-
-gUnknown_8463FEA:: @ 8463FEA
-	.incbin "baserom.gba", 0x463FEA, 0x12
-
-gUnknown_8463FFC:: @ 8463FFC
-	.incbin "baserom.gba", 0x463FFC, 0xC
-
-gUnknown_8464008:: @ 8464008
-	.incbin "baserom.gba", 0x464008, 0x120
-
-gUnknown_8464128:: @ 8464128
-	.incbin "baserom.gba", 0x464128, 0x20
-
-gUnknown_8464148:: @ 8464148
-	.incbin "baserom.gba", 0x464148, 0x174
-
-gUnknown_84642BC:: @ 84642BC
-	.incbin "baserom.gba", 0x4642BC, 0x4
-
-gUnknown_84642C0:: @ 84642C0
-	.incbin "baserom.gba", 0x4642C0, 0x34
-
-gUnknown_84642F4:: @ 84642F4
-	.incbin "baserom.gba", 0x4642F4, 0xC
-
-gUnknown_8464300:: @ 8464300
-	.incbin "baserom.gba", 0x464300, 0x4C
-
-gUnknown_846434C:: @ 846434C
-	.incbin "baserom.gba", 0x46434C, 0xC
-
-gUnknown_8464358:: @ 8464358
-	.incbin "baserom.gba", 0x464358, 0x14
-
-gUnknown_846436C:: @ 846436C
-	.incbin "baserom.gba", 0x46436C, 0x8
-
-gUnknown_8464374:: @ 8464374
-	.incbin "baserom.gba", 0x464374, 0x8
-
-gUnknown_846437C:: @ 846437C
-	.incbin "baserom.gba", 0x46437C, 0x28
-
-gUnknown_84643A4:: @ 84643A4
-	.incbin "baserom.gba", 0x4643A4, 0x4
-
-gUnknown_84643A8:: @ 84643A8
-	.incbin "baserom.gba", 0x4643A8, 0x4
-
-gUnknown_84643AC:: @ 84643AC
-	.incbin "baserom.gba", 0x4643AC, 0x4
-
-gUnknown_84643B0:: @ 84643B0
-	.incbin "baserom.gba", 0x4643B0, 0x4
-
-gUnknown_84643B4:: @ 84643B4
-	.incbin "baserom.gba", 0x4643B4, 0x4
-
-gUnknown_84643B8:: @ 84643B8
-	.incbin "baserom.gba", 0x4643B8, 0x20
-
-gUnknown_84643D8:: @ 84643D8
-	.incbin "baserom.gba", 0x4643D8, 0x18
-
-gUnknown_84643F0:: @ 84643F0
-	.incbin "baserom.gba", 0x4643F0, 0x8
-
-gUnknown_84643F8:: @ 84643F8
-	.incbin "baserom.gba", 0x4643F8, 0x8
-
-gUnknown_8464400:: @ 8464400
-	.incbin "baserom.gba", 0x464400, 0x48
-
-gUnknown_8464448:: @ 8464448
-	.incbin "baserom.gba", 0x464448, 0x60
-
-gUnknown_84644A8:: @ 84644A8
-	.incbin "baserom.gba", 0x4644A8, 0x8
-
-gUnknown_84644B0:: @ 84644B0
-	.incbin "baserom.gba", 0x4644B0, 0x8
-
-gUnknown_84644B8:: @ 84644B8
-	.incbin "baserom.gba", 0x4644B8, 0x32C
-
-gUnknown_84647E4:: @ 84647E4
-	.incbin "baserom.gba", 0x4647E4, 0x18
-
-gUnknown_84647FC:: @ 84647FC
-	.incbin "baserom.gba", 0x4647FC, 0x8
-
-gUnknown_8464804:: @ 8464804
-	.incbin "baserom.gba", 0x464804, 0x38
-
-gUnknown_846483C:: @ 846483C
-	.incbin "baserom.gba", 0x46483C, 0x40
-
-gUnknown_846487C:: @ 846487C
-	.incbin "baserom.gba", 0x46487C, 0x8
-
-gUnknown_8464884:: @ 8464884
-	.incbin "baserom.gba", 0x464884, 0xC
-
-gUnknown_8464890:: @ 8464890
-	.incbin "baserom.gba", 0x464890, 0x1E
-
-gUnknown_84648AE:: @ 84648AE
-	.incbin "baserom.gba", 0x4648AE, 0xF
-
-gUnknown_84648BD:: @ 84648BD
-	.incbin "baserom.gba", 0x4648BD, 0x15
-
-gUnknown_84648D2:: @ 84648D2
-	.incbin "baserom.gba", 0x4648D2, 0x54
-
-gUnknown_8464926:: @ 8464926
-	.incbin "baserom.gba", 0x464926, 0x40
-
-gUnknown_8464966:: @ 8464966
-	.incbin "baserom.gba", 0x464966, 0xC4A
-
-gUnknown_84655B0:: @ 84655B0
-	.incbin "baserom.gba", 0x4655B0, 0x18
-
-gUnknown_84655C8:: @ 84655C8
-	.incbin "baserom.gba", 0x4655C8, 0x40
-
-gUnknown_8465608:: @ 8465608
-	.incbin "baserom.gba", 0x465608, 0xE
-
-gUnknown_8465616:: @ 8465616
-	.incbin "baserom.gba", 0x465616, 0xC0
-
-gUnknown_84656D6:: @ 84656D6
-	.incbin "baserom.gba", 0x4656D6, 0x10E
-
-gUnknown_84657E4:: @ 84657E4
-	.incbin "baserom.gba", 0x4657E4, 0x98
-
-gUnknown_846587C:: @ 846587C
-	.incbin "baserom.gba", 0x46587C, 0x5C
-
-gUnknown_84658D8:: @ 84658D8
-	.incbin "baserom.gba", 0x4658D8, 0x18
-
-gUnknown_84658F0:: @ 84658F0
-	.incbin "baserom.gba", 0x4658F0, 0x40
-
-gUnknown_8465930:: @ 8465930
-	.incbin "baserom.gba", 0x465930, 0x20
-
-gUnknown_8465950:: @ 8465950
-	.incbin "baserom.gba", 0x465950, 0x80
-
-gUnknown_84659D0:: @ 84659D0
-	.incbin "baserom.gba", 0x4659D0, 0x804
-
-gUnknown_84661D4:: @ 84661D4
-	.incbin "baserom.gba", 0x4661D4, 0x2E8
-
-gUnknown_84664BC:: @ 84664BC
-	.incbin "baserom.gba", 0x4664BC, 0x20
-
-gUnknown_84664DC:: @ 84664DC
-	.incbin "baserom.gba", 0x4664DC, 0x60
-
-gUnknown_846653C:: @ 846653C
-	.incbin "baserom.gba", 0x46653C, 0x84
-
-gUnknown_84665C0:: @ 84665C0
-	.incbin "baserom.gba", 0x4665C0, 0x60
-
-gUnknown_8466620:: @ 8466620
-	.incbin "baserom.gba", 0x466620, 0x378
-
-gUnknown_8466998:: @ 8466998
-	.incbin "baserom.gba", 0x466998, 0x178
-
-gUnknown_8466B10:: @ 8466B10
-	.incbin "baserom.gba", 0x466B10, 0x10
-
-gUnknown_8466B20:: @ 8466B20
-	.incbin "baserom.gba", 0x466B20, 0xEC
-
-gUnknown_8466C0C:: @ 8466C0C
-	.incbin "baserom.gba", 0x466C0C, 0x28
-
-gUnknown_8466C34:: @ 8466C34
-	.incbin "baserom.gba", 0x466C34, 0x4
-
-gUnknown_8466C38:: @ 8466C38
-	.incbin "baserom.gba", 0x466C38, 0x8
-
-gUnknown_8466C40:: @ 8466C40
-	.incbin "baserom.gba", 0x466C40, 0x18
-
-gUnknown_8466C58:: @ 8466C58
-	.incbin "baserom.gba", 0x466C58, 0xB8
-
-gUnknown_8466D10:: @ 8466D10
-	.incbin "baserom.gba", 0x466D10, 0x20
-
-gUnknown_8466D30:: @ 8466D30
-	.incbin "baserom.gba", 0x466D30, 0x30
-
-gUnknown_8466D60:: @ 8466D60
-	.incbin "baserom.gba", 0x466D60, 0x10
-
-gUnknown_8466D70:: @ 8466D70
-	.incbin "baserom.gba", 0x466D70, 0x20
-
-gUnknown_8466D90:: @ 8466D90
-	.incbin "baserom.gba", 0x466D90, 0x8
-
-gUnknown_8466D98:: @ 8466D98
-	.incbin "baserom.gba", 0x466D98, 0x8
-
-gUnknown_8466DA0:: @ 8466DA0
-	.incbin "baserom.gba", 0x466DA0, 0x8
-
-gUnknown_8466DA8:: @ 8466DA8
-	.incbin "baserom.gba", 0x466DA8, 0x8
-
-gUnknown_8466DB0:: @ 8466DB0
-	.incbin "baserom.gba", 0x466DB0, 0x8
-
-gUnknown_8466DB8:: @ 8466DB8
-	.incbin "baserom.gba", 0x466DB8, 0x8
-
-gUnknown_8466DC0:: @ 8466DC0
-	.incbin "baserom.gba", 0x466DC0, 0x8
-
-gUnknown_8466DC8:: @ 8466DC8
-	.incbin "baserom.gba", 0x466DC8, 0x8
-
-gUnknown_8466DD0:: @ 8466DD0
-	.incbin "baserom.gba", 0x466DD0, 0x18
-
-gUnknown_8466DE8:: @ 8466DE8
-	.incbin "baserom.gba", 0x466DE8, 0x18
-
-gUnknown_8466E00:: @ 8466E00
-	.incbin "baserom.gba", 0x466E00, 0x78
-
-gUnknown_8466E78:: @ 8466E78
-	.incbin "baserom.gba", 0x466E78, 0x18
-
-gUnknown_8466E90:: @ 8466E90
-	.incbin "baserom.gba", 0x466E90, 0x18
-
-gUnknown_8466EA8:: @ 8466EA8
-	.incbin "baserom.gba", 0x466EA8, 0x18
-
-gUnknown_8466EC0:: @ 8466EC0
-	.incbin "baserom.gba", 0x466EC0, 0x28
-
-gUnknown_8466EE8:: @ 8466EE8
-	.incbin "baserom.gba", 0x466EE8, 0x8
-
-gUnknown_8466EF0:: @ 8466EF0
-	.incbin "baserom.gba", 0x466EF0, 0x10
-
-gUnknown_8466F00:: @ 8466F00
-	.incbin "baserom.gba", 0x466F00, 0x28
-
-	.align 2
-gUnknown_8466F28:: @ 8466F28
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent.c"
-
-	.align 2
-gUnknown_8466F5C:: @ 8466F5C
-	.asciz "0"
-
-	.align 2
-gUnknown_8466F60:: @ 8466F60
-	.incbin "baserom.gba", 0x466F60, 0x20
-
-	.align 2
-gUnknown_8466F80:: @ 8466F80
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c"
-
-	.align 2
-gUnknown_8466FB8:: @ 8466FB8
-	.asciz "size <= ME_SEND_BUF_SIZE"
-
-	.align 2
-gUnknown_8466FD4:: @ 8466FD4
-	.asciz "cmd->parameter == NULL"
-
-	.align 2
-gUnknown_8466FEC:: @ 8466FEC
-	.asciz "cmd->flag == FALSE"
-
-	.align 2
-gUnknown_8467000:: @ 8467000
-	.asciz "cmd->flag == FALSE && cmd->parameter == NULL"
-
-	.align 2
-gUnknown_8467030:: @ 8467030
-	.incbin "baserom.gba", 0x467030, 0x14
-
-	.align 2
-gUnknown_8467044:: @ 8467044
-	.asciz "svr->mainseqno < NELEMS(func_tbl)"
-
-	.align 2
-gUnknown_8467068:: @ 8467068
-	.incbin "baserom.gba", 0x467068, 0x8
-
-gUnknown_8467070:: @ 8467070
-	.incbin "baserom.gba", 0x467070, 0x4
-
-gUnknown_8467074:: @ 8467074
-	.incbin "baserom.gba", 0x467074, 0xEE4
-
-gUnknown_8467F58:: @ 8467F58
-	.incbin "baserom.gba", 0x467F58, 0x8
-
-gUnknown_8467F60:: @ 8467F60
-	.incbin "baserom.gba", 0x467F60, 0x40
-
-gUnknown_8467FA0:: @ 8467FA0
-	.incbin "baserom.gba", 0x467FA0, 0x18
-
-gUnknown_8467FB8:: @ 8467FB8
-	.incbin "baserom.gba", 0x467FB8, 0x80
-
-gUnknown_8468038:: @ 8468038
-	.incbin "baserom.gba", 0x468038, 0x8
-
-gUnknown_8468040:: @ 8468040
-	.incbin "baserom.gba", 0x468040, 0x10
-
-gUnknown_8468050:: @ 8468050
-	.incbin "baserom.gba", 0x468050, 0x6D0
-
-gUnknown_8468720:: @ 8468720
-	.incbin "baserom.gba", 0x468720, 0xC0
-
-gUnknown_84687E0:: @ 84687E0
-	.incbin "baserom.gba", 0x4687E0, 0x38C
-
-gUnknown_8468B6C:: @ 8468B6C
-	.incbin "baserom.gba", 0x468B6C, 0x60
-
-gUnknown_8468BCC:: @ 8468BCC
-	.incbin "baserom.gba", 0x468BCC, 0x90

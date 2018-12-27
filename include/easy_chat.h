@@ -1,6 +1,8 @@
 #ifndef GUARD_EASYCHAT_H
 #define GUARD_EASYCHAT_H
 
+#include "global.h"
+
 // Taken from Pokeruby, check if it's correct
 enum
 {
@@ -35,5 +37,7 @@ bool32 sub_811F8D8(u16 word);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
 void ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
 bool8 ECWord_CheckIfOutsideOfValidRange(u16 word);
+void sub_80BDE28(void);
+void EnableRareWord(u8);
 
 #endif // GUARD_EASYCHAT_H

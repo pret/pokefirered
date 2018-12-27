@@ -363,7 +363,7 @@ sub_80BF708: @ 80BF708
 	bl sub_805642C
 	cmp r0, 0x1
 	beq _080BF71A
-	ldr r0, _080BF720 @ =gUnknown_3003F64
+	ldr r0, _080BF720 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080BF724
@@ -371,7 +371,7 @@ _080BF71A:
 	movs r0, 0x1
 	b _080BF726
 	.align 2, 0
-_080BF720: .4byte gUnknown_3003F64
+_080BF720: .4byte gReceivedRemoteLinkPlayers
 _080BF724:
 	movs r0, 0
 _080BF726:

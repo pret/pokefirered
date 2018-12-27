@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_MAP_OBJ_H
 #define GUARD_FIELD_MAP_OBJ_H
 
+#include "global.h"
+
 #define NUM_OBJECT_GRAPHICS_INFO 239
 #define SPRITE_VAR 240
 
@@ -76,9 +78,16 @@ void MoveCoords(u8, s16 *, s16 *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
 u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
 u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
+void sub_8063E28(struct MapObject *, struct Sprite *);
+void sub_8063CA4(struct MapObject *, u8);
 void npc_coords_shift_still(struct MapObject *);
 void sub_805FE7C(struct MapObject *, u8);
 void npc_set_running_behaviour_etc(struct MapObject *, u8);
+u8 sub_80634F0(u8 direction);
+u8 sub_8063500(u8 a0);
+void sub_805F060(struct MapObject *mapObject, u8 a1);
+u8 sub_805EB44(u8, u8, s16, s16);
+void npc_paltag_set_load(u8 mode);
 
 // Exported data declarations
 

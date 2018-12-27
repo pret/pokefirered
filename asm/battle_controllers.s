@@ -14,13 +14,13 @@ sub_800D230: @ 800D230
 	ands r0, r1
 	cmp r0, 0
 	beq _0800D262
-	ldr r0, _0800D26C @ =gUnknown_3003F3C
+	ldr r0, _0800D26C @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800D24A
 	bl sub_800B1F4
 _0800D24A:
-	ldr r0, _0800D270 @ =gUnknown_3003F64
+	ldr r0, _0800D270 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800D256
@@ -35,8 +35,8 @@ _0800D262:
 	bx r0
 	.align 2, 0
 _0800D268: .4byte gBattleTypeFlags
-_0800D26C: .4byte gUnknown_3003F3C
-_0800D270: .4byte gUnknown_3003F64
+_0800D26C: .4byte gWirelessCommType
+_0800D270: .4byte gReceivedRemoteLinkPlayers
 _0800D274: .4byte sub_8081A90
 	thumb_func_end sub_800D230
 
@@ -1229,7 +1229,7 @@ _0800DBDE:
 	ldrh r0, [r1, 0x1E]
 	adds r0, 0x1
 	strh r0, [r1, 0x1E]
-	ldr r0, _0800DBF0 @ =gUnknown_3003F64
+	ldr r0, _0800DBF0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800DBEE
@@ -1237,7 +1237,7 @@ _0800DBDE:
 _0800DBEE:
 	b _0800DD1C
 	.align 2, 0
-_0800DBF0: .4byte gUnknown_3003F64
+_0800DBF0: .4byte gReceivedRemoteLinkPlayers
 _0800DBF4:
 	bl GetLinkPlayerCount_2
 	lsls r0, 24
@@ -1403,7 +1403,7 @@ sub_800DD28: @ 800DD28
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, _0800DD5C @ =gUnknown_3003F64
+	ldr r0, _0800DD5C @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800DE28
@@ -1420,15 +1420,15 @@ sub_800DD28: @ 800DD28
 	bne _0800DE28
 	bl sub_80FBB4C
 	movs r4, 0
-	ldr r0, _0800DD6C @ =gUnknown_2022118
+	ldr r0, _0800DD6C @ =gBlockRecvBuffer
 	mov r10, r0
 	b _0800DE1C
 	.align 2, 0
-_0800DD5C: .4byte gUnknown_3003F64
+_0800DD5C: .4byte gReceivedRemoteLinkPlayers
 _0800DD60: .4byte gBattleTypeFlags
 _0800DD64: .4byte gLinkPlayers
 _0800DD68: .4byte 0x00002211
-_0800DD6C: .4byte gUnknown_2022118
+_0800DD6C: .4byte gBlockRecvBuffer
 _0800DD70:
 	bl GetBlockReceivedStatus
 	lsls r0, 24
@@ -1447,7 +1447,7 @@ _0800DD70:
 	lsls r0, r4, 8
 	mov r4, r10
 	adds r3, r0, r4
-	ldr r1, _0800DE3C @ =gUnknown_202211C
+	ldr r1, _0800DE3C @ =gBlockRecvBuffer + 4
 	adds r0, r1
 	ldrh r6, [r0]
 	ldr r7, _0800DE40 @ =gTasks
@@ -1534,7 +1534,7 @@ _0800DE28:
 	bx r0
 	.align 2, 0
 _0800DE38: .4byte gBitTable
-_0800DE3C: .4byte gUnknown_202211C
+_0800DE3C: .4byte gBlockRecvBuffer + 4
 _0800DE40: .4byte gTasks
 _0800DE44: .4byte gUnknown_202286D
 _0800DE48: .4byte gUnknown_2023FF0

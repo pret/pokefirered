@@ -10,7 +10,7 @@ sub_80CA53C: @ 80CA53C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080CA56C @ =gUnknown_2037AB8
+	ldr r0, _080CA56C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -28,7 +28,7 @@ _080CA564:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA56C: .4byte gUnknown_2037AB8
+_080CA56C: .4byte gPaletteFade
 _080CA570: .4byte sub_80F2978
 	thumb_func_end sub_80CA53C
 
@@ -100,7 +100,7 @@ sub_80CA5F8: @ 80CA5F8
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080CA614 @ =gUnknown_2037AB8
+	ldr r0, _080CA614 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -112,7 +112,7 @@ _080CA610:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA614: .4byte gUnknown_2037AB8
+_080CA614: .4byte gPaletteFade
 	thumb_func_end sub_80CA5F8
 
 	.align 2, 0 @ Don't pad with nop.

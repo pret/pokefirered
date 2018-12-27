@@ -854,9 +854,9 @@ _0803443C:
 	movs r2, 0x6
 	bl BlendPalette
 	lsls r1, r7, 1
-	ldr r0, _0803448C @ =gUnknown_20375F8
+	ldr r0, _0803448C @ =gPlttBufferFaded
 	adds r0, r1, r0
-	ldr r2, _08034490 @ =gUnknown_20371F8
+	ldr r2, _08034490 @ =gPlttBufferUnfaded
 	adds r1, r2
 	ldr r2, _08034494 @ =0x04000008
 	bl CpuSet
@@ -875,8 +875,8 @@ _0803447C: .4byte gBattleStruct
 _08034480: .4byte gBattleMonForms
 _08034484: .4byte gUnknown_2024018
 _08034488: .4byte 0x00007fff
-_0803448C: .4byte gUnknown_20375F8
-_08034490: .4byte gUnknown_20371F8
+_0803448C: .4byte gPlttBufferFaded
+_08034490: .4byte gPlttBufferUnfaded
 _08034494: .4byte 0x04000008
 	thumb_func_end BattleLoadOpponentMonSpriteGfx
 
@@ -1059,9 +1059,9 @@ _080345FC:
 	movs r2, 0x6
 	bl BlendPalette
 	lsls r1, r7, 1
-	ldr r0, _0803464C @ =gUnknown_20375F8
+	ldr r0, _0803464C @ =gPlttBufferFaded
 	adds r0, r1, r0
-	ldr r2, _08034650 @ =gUnknown_20371F8
+	ldr r2, _08034650 @ =gPlttBufferUnfaded
 	adds r1, r2
 	ldr r2, _08034654 @ =0x04000008
 	bl CpuSet
@@ -1080,8 +1080,8 @@ _0803463C: .4byte gBattleStruct
 _08034640: .4byte gBattleMonForms
 _08034644: .4byte gUnknown_2024018
 _08034648: .4byte 0x00007fff
-_0803464C: .4byte gUnknown_20375F8
-_08034650: .4byte gUnknown_20371F8
+_0803464C: .4byte gPlttBufferFaded
+_08034650: .4byte gPlttBufferUnfaded
 _08034654: .4byte 0x04000008
 	thumb_func_end sub_8034498
 
@@ -1466,7 +1466,7 @@ _0803495A:
 	thumb_func_start LoadBattleBarGfx
 LoadBattleBarGfx: @ 8034964
 	push {lr}
-	ldr r0, _0803497C @ =gUnknown_8D093D8
+	ldr r0, _0803497C @ =gFile_graphics_interface_hp_numbers
 	ldr r1, _08034980 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	movs r2, 0xBA
@@ -1477,7 +1477,7 @@ LoadBattleBarGfx: @ 8034964
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803497C: .4byte gUnknown_8D093D8
+_0803497C: .4byte gFile_graphics_interface_hp_numbers
 _08034980: .4byte gMonSpritesGfxPtr
 	thumb_func_end LoadBattleBarGfx
 
@@ -2029,9 +2029,9 @@ _08034D88:
 	bl BlendPalette
 	mov r3, r10
 	lsls r1, r3, 1
-	ldr r0, _08034E40 @ =gUnknown_20375F8
+	ldr r0, _08034E40 @ =gPlttBufferFaded
 	adds r0, r1, r0
-	ldr r2, _08034E44 @ =gUnknown_20371F8
+	ldr r2, _08034E44 @ =gPlttBufferUnfaded
 	adds r1, r2
 	ldr r2, _08034E48 @ =0x04000008
 	bl CpuSet
@@ -2054,8 +2054,8 @@ _08034E30: .4byte gUnknown_2024018
 _08034E34: .4byte gBattleStruct
 _08034E38: .4byte gBattleMonForms
 _08034E3C: .4byte 0x00007fff
-_08034E40: .4byte gUnknown_20375F8
-_08034E44: .4byte gUnknown_20371F8
+_08034E40: .4byte gPlttBufferFaded
+_08034E44: .4byte gPlttBufferUnfaded
 _08034E48: .4byte 0x04000008
 _08034E4C:
 	mov r0, r9
@@ -2263,9 +2263,9 @@ _08034FFC:
 	bl BlendPalette
 	mov r2, r10
 	lsls r1, r2, 1
-	ldr r0, _080350AC @ =gUnknown_20375F8
+	ldr r0, _080350AC @ =gPlttBufferFaded
 	adds r0, r1, r0
-	ldr r2, _080350B0 @ =gUnknown_20371F8
+	ldr r2, _080350B0 @ =gPlttBufferUnfaded
 	adds r1, r2
 	ldr r2, _080350B4 @ =0x04000008
 	bl CpuSet
@@ -2327,8 +2327,8 @@ _0803509C: .4byte 0x00000181
 _080350A0: .4byte gBattleStruct
 _080350A4: .4byte gBattleMonForms
 _080350A8: .4byte 0x00007fff
-_080350AC: .4byte gUnknown_20375F8
-_080350B0: .4byte gUnknown_20371F8
+_080350AC: .4byte gPlttBufferFaded
+_080350B0: .4byte gPlttBufferUnfaded
 _080350B4: .4byte 0x04000008
 _080350B8: .4byte gUnknown_2024018
 	thumb_func_end sub_8034BF4
@@ -2351,7 +2351,7 @@ sub_80350BC: @ 80350BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080350FC
-	ldr r0, _080350F4 @ =gUnknown_8D2D0B4
+	ldr r0, _080350F4 @ =gFile_graphics_battle_anims_sprites_substitute_sheet
 	ldr r1, _080350F8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsls r4, r5, 2
@@ -2361,10 +2361,10 @@ sub_80350BC: @ 80350BC
 	bl LZDecompressVram
 	b _0803510E
 	.align 2, 0
-_080350F4: .4byte gUnknown_8D2D0B4
+_080350F4: .4byte gFile_graphics_battle_anims_sprites_substitute_sheet
 _080350F8: .4byte gMonSpritesGfxPtr
 _080350FC:
-	ldr r0, _08035144 @ =gUnknown_8D2D2F4
+	ldr r0, _08035144 @ =gFile_graphics_battle_anims_sprites_substitute_tilemap
 	ldr r1, _08035148 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsls r4, r5, 2
@@ -2375,7 +2375,7 @@ _080350FC:
 _0803510E:
 	movs r3, 0x1
 	lsls r6, 4
-	ldr r7, _0803514C @ =gUnknown_8D2D090
+	ldr r7, _0803514C @ =gFile_graphics_battle_anims_sprites_substitute_palette
 	ldr r0, _08035148 @ =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	adds r0, 0x4
@@ -2401,9 +2401,9 @@ _08035120:
 	bl LoadCompressedPalette
 	b _0803519A
 	.align 2, 0
-_08035144: .4byte gUnknown_8D2D2F4
+_08035144: .4byte gFile_graphics_battle_anims_sprites_substitute_tilemap
 _08035148: .4byte gMonSpritesGfxPtr
-_0803514C: .4byte gUnknown_8D2D090
+_0803514C: .4byte gFile_graphics_battle_anims_sprites_substitute_palette
 _08035150: .4byte 0x040000d4
 _08035154: .4byte 0x84000200
 _08035158:

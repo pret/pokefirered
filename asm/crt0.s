@@ -60,11 +60,11 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte  0x8245EE0 @ gSpeciesNames
 	.4byte  0x8247094 @ gMoveNames
 	.4byte  0x84556F8 @ gDecorations
-	.4byte      0xEE0
-	.4byte     0x1000
-	.4byte       0x18
-	.4byte      0x5F8
-	.4byte     0x3A18
+	.4byte      0xEE0 @ offsetof(struct SaveBlock1, flags)
+	.4byte     0x1000 @ offsetof(struct SaveBlock1, vars)
+	.4byte       0x18 @ offsetof(struct SaveBlock2, pokedex)
+	.4byte      0x5F8 @ offsetof(struct SaveBlock1, seen1)
+	.4byte     0x3A18 @ offsetof(struct SaveBlock1, seen2)
 	.4byte       0x3C
 	.4byte      0x838
 	.4byte      0x839
@@ -74,35 +74,36 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte  0xC121006
 	.4byte  0x8010B0F
 	.4byte        0xC
-	.4byte      0xF24
-	.4byte     0x3D68
-	.4byte       0x34
-	.4byte       0x38
-	.4byte          9
-	.4byte        0xA
-	.4byte          0
-	.4byte          8
-	.4byte       0xAD
-	.4byte       0xAD
+	.4byte      0xF24 @ sizeof(struct SaveBlock2)
+	.4byte     0x3D68 @ sizeof(struct SaveBlock1)
+	.4byte       0x34 @ offsetof(struct SaveBlock1, playerPartyCount)
+	.4byte       0x38 @ offsetof(struct SaveBlock1, playerParty)
+	.4byte          9 @ offsetof(struct SaveBlock2, specialSaveWarp)
+	.4byte        0xA @ offsetof(struct SaveBlock2, playerTrainerId)
+	.4byte          0 @ offsetof(struct SaveBlock2, playerName)
+	.4byte          8 @ offsetof(struct SaveBlock2, playerGender)
+
+	.4byte       0xAD @ offsetof(struct SaveBlock2, ?????? (0xAD))
+	.4byte       0xAD @ offsetof(struct SaveBlock2, ?????? (0xAD))
 	.4byte     0x30BB
 	.4byte     0x30A7
 	.4byte          0
-	.4byte  0x8254784
-	.4byte  0x824FC40
-	.4byte  0x824FB08
-	.4byte  0x83DB028
-	.4byte  0x8250C04
-	.4byte  0x826056C
-	.4byte  0x82605CC
+	.4byte  0x8254784 @ gBaseStats
+	.4byte  0x824FC40 @ gAbilityNames
+	.4byte  0x824FB08 @ gAbilityDescriptionPointers
+	.4byte  0x83DB028 @ gItems
+	.4byte  0x8250C04 @ gBattleMoves
+	.4byte  0x826056C @ gBallSpriteSheets
+	.4byte  0x82605CC @ gBallSpritePalettes
 	.4byte       0xA8
 	.4byte      0x82C
 	.4byte      0x83B
 	.4byte 0x3A0D1E2A
 	.4byte     0x1E2B
-	.4byte      0x298
-	.4byte     0x309C
-	.4byte     0x30EC
-	.4byte       0x34
+	.4byte      0x298 @ offsetof(struct SaveBlock1, pcItems)  // maybe all items were in a struct together?
+	.4byte     0x309C @ offsetof(struct SaveBlock1, giftRibbons)
+	.4byte     0x30EC @ offsetof(struct SaveBlock1, enigmaBerry)
+	.4byte       0x34 @ size of SaveBlock1 map header reconstruction data?
 	.4byte          0
 	.4byte 0xFFFFFFFF
 

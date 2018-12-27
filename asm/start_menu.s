@@ -631,8 +631,8 @@ _0806F24E:
 _0806F254: .4byte gUnknown_20370F0
 	thumb_func_end sub_806F1F0
 
-	thumb_func_start sub_806F258
-sub_806F258: @ 806F258
+	thumb_func_start ShowStartMenu
+ShowStartMenu: @ 806F258
 	push {lr}
 	bl sub_805642C
 	cmp r0, 0
@@ -648,7 +648,7 @@ _0806F26E:
 	bx r0
 	.align 2, 0
 _0806F27C: .4byte sub_806F1F0
-	thumb_func_end sub_806F258
+	thumb_func_end ShowStartMenu
 
 	thumb_func_start sub_806F280
 sub_806F280: @ 806F280
@@ -841,7 +841,7 @@ _0806F40A:
 	thumb_func_start sub_806F410
 sub_806F410: @ 806F410
 	push {lr}
-	ldr r0, _0806F424 @ =gUnknown_2037AB8
+	ldr r0, _0806F424 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -850,7 +850,7 @@ sub_806F410: @ 806F410
 	movs r0, 0
 	b _0806F442
 	.align 2, 0
-_0806F424: .4byte gUnknown_2037AB8
+_0806F424: .4byte gPaletteFade
 _0806F428:
 	movs r0, 0x29
 	bl IncrementGameStat
@@ -870,7 +870,7 @@ _0806F448: .4byte sub_810275C
 	thumb_func_start sub_806F44C
 sub_806F44C: @ 806F44C
 	push {lr}
-	ldr r0, _0806F460 @ =gUnknown_2037AB8
+	ldr r0, _0806F460 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -879,7 +879,7 @@ sub_806F44C: @ 806F44C
 	movs r0, 0
 	b _0806F478
 	.align 2, 0
-_0806F460: .4byte gUnknown_2037AB8
+_0806F460: .4byte gPaletteFade
 _0806F464:
 	bl play_some_sound
 	bl sub_806EF18
@@ -897,7 +897,7 @@ _0806F47C: .4byte CB2_PartyMenuFromStartMenu
 	thumb_func_start sub_806F480
 sub_806F480: @ 806F480
 	push {lr}
-	ldr r0, _0806F494 @ =gUnknown_2037AB8
+	ldr r0, _0806F494 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -906,25 +906,25 @@ sub_806F480: @ 806F480
 	movs r0, 0
 	b _0806F4AC
 	.align 2, 0
-_0806F494: .4byte gUnknown_2037AB8
+_0806F494: .4byte gPaletteFade
 _0806F498:
 	bl play_some_sound
 	bl sub_806EF18
 	bl sub_80563F0
-	ldr r0, _0806F4B0 @ =sub_8107EB8
+	ldr r0, _0806F4B0 @ =UseFameCheckerFromMenu
 	bl SetMainCallback2
 	movs r0, 0x1
 _0806F4AC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806F4B0: .4byte sub_8107EB8
+_0806F4B0: .4byte UseFameCheckerFromMenu
 	thumb_func_end sub_806F480
 
 	thumb_func_start sub_806F4B4
 sub_806F4B4: @ 806F4B4
 	push {lr}
-	ldr r0, _0806F4C8 @ =gUnknown_2037AB8
+	ldr r0, _0806F4C8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -933,7 +933,7 @@ sub_806F4B4: @ 806F4B4
 	movs r0, 0
 	b _0806F4E0
 	.align 2, 0
-_0806F4C8: .4byte gUnknown_2037AB8
+_0806F4C8: .4byte gPaletteFade
 _0806F4CC:
 	bl play_some_sound
 	bl sub_806EF18
@@ -963,7 +963,7 @@ _0806F4F8: .4byte sub_806F5A4
 	thumb_func_start sub_806F4FC
 sub_806F4FC: @ 806F4FC
 	push {lr}
-	ldr r0, _0806F510 @ =gUnknown_2037AB8
+	ldr r0, _0806F510 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -972,7 +972,7 @@ sub_806F4FC: @ 806F4FC
 	movs r0, 0
 	b _0806F52E
 	.align 2, 0
-_0806F510: .4byte gUnknown_2037AB8
+_0806F510: .4byte gPaletteFade
 _0806F514:
 	bl play_some_sound
 	bl sub_806EF18
@@ -1018,7 +1018,7 @@ sub_806F554: @ 806F554
 	thumb_func_start sub_806F56C
 sub_806F56C: @ 806F56C
 	push {lr}
-	ldr r0, _0806F580 @ =gUnknown_2037AB8
+	ldr r0, _0806F580 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1027,7 +1027,7 @@ sub_806F56C: @ 806F56C
 	movs r0, 0
 	b _0806F598
 	.align 2, 0
-_0806F580: .4byte gUnknown_2037AB8
+_0806F580: .4byte gPaletteFade
 _0806F584:
 	bl play_some_sound
 	bl sub_80563F0
@@ -1212,14 +1212,14 @@ task50_save_game: @ 806F6D4
 _0806F6F0:
 	cmp r1, 0x3
 	bgt _0806F704
-	ldr r1, _0806F6FC @ =gUnknown_20370D0
+	ldr r1, _0806F6FC @ =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	b _0806F704
 	.align 2, 0
-_0806F6FC: .4byte gUnknown_20370D0
+_0806F6FC: .4byte gSpecialVar_Result
 _0806F700:
-	ldr r0, _0806F718 @ =gUnknown_20370D0
+	ldr r0, _0806F718 @ =gSpecialVar_Result
 	strh r1, [r0]
 _0806F704:
 	adds r0, r4, 0
@@ -1231,7 +1231,7 @@ _0806F712:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806F718: .4byte gUnknown_20370D0
+_0806F718: .4byte gSpecialVar_Result
 	thumb_func_end task50_save_game
 
 	thumb_func_start sub_806F71C
@@ -1860,7 +1860,7 @@ sub_806FBB8: @ 806FBB8
 	lsls r0, 3
 	ldr r1, _0806FBEC @ =gTasks+0x8
 	adds r5, r0, r1
-	ldr r0, _0806FBF0 @ =gUnknown_2037AB8
+	ldr r0, _0806FBF0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1881,7 +1881,7 @@ _0806FBE2:
 	mov pc, r0
 	.align 2, 0
 _0806FBEC: .4byte gTasks+0x8
-_0806FBF0: .4byte gUnknown_2037AB8
+_0806FBF0: .4byte gPaletteFade
 _0806FBF4: .4byte _0806FBF8
 	.align 2, 0
 _0806FBF8:
@@ -1925,7 +1925,7 @@ _0806FC14:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r0, _0806FC78 @ =gUnknown_3003F3C
+	ldr r0, _0806FC78 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0806FC7C
@@ -1936,7 +1936,7 @@ _0806FC14:
 	b _0806FCE6
 	.align 2, 0
 _0806FC74: .4byte gUnknown_8419F54
-_0806FC78: .4byte gUnknown_3003F3C
+_0806FC78: .4byte gWirelessCommType
 _0806FC7C:
 	movs r0, 0x1
 	b _0806FCE6

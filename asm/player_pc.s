@@ -621,7 +621,7 @@ sub_80EBB70: @ 80EBB70
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080EBBA4 @ =gUnknown_2037AB8
+	ldr r0, _080EBBA4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -642,7 +642,7 @@ _080EBB9C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EBBA4: .4byte gUnknown_2037AB8
+_080EBBA4: .4byte gPaletteFade
 _080EBBA8: .4byte c2_exit_to_overworld_2_switch
 _080EBBAC: .4byte gUnknown_3005020
 _080EBBB0: .4byte sub_80EBC0C
@@ -802,7 +802,7 @@ sub_80EBCD8: @ 80EBCD8
 	lsls r0, 3
 	ldr r1, _080EBD0C @ =gTasks+0x8
 	adds r5, r0, r1
-	ldr r0, _080EBD10 @ =gUnknown_2037AB8
+	ldr r0, _080EBD10 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -820,7 +820,7 @@ _080EBD06:
 	bx r0
 	.align 2, 0
 _080EBD0C: .4byte gTasks+0x8
-_080EBD10: .4byte gUnknown_2037AB8
+_080EBD10: .4byte gPaletteFade
 _080EBD14: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_80EBCD8
 
@@ -1127,7 +1127,7 @@ sub_80EBF40: @ 80EBF40
 	mov r10, r0
 	mov r4, r9
 	add r4, r10
-	ldr r0, _080EBF98 @ =gUnknown_2037AB8
+	ldr r0, _080EBF98 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1153,7 +1153,7 @@ sub_80EBF40: @ 80EBF40
 	b _080EBFEA
 	.align 2, 0
 _080EBF94: .4byte gTasks+0x8
-_080EBF98: .4byte gUnknown_2037AB8
+_080EBF98: .4byte gPaletteFade
 _080EBF9C: .4byte gUnknown_203AAC6
 _080EBFA0:
 	movs r0, 0x5
@@ -1431,7 +1431,7 @@ sub_80EC1D4: @ 80EC1D4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080EC21C @ =gUnknown_2037AB8
+	ldr r0, _080EC21C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1462,7 +1462,7 @@ _080EC216:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC21C: .4byte gUnknown_2037AB8
+_080EC21C: .4byte gPaletteFade
 _080EC220: .4byte gSaveBlock1Ptr
 _080EC224: .4byte gUnknown_203AAC4
 _080EC228: .4byte 0x00002cd0
@@ -1746,7 +1746,7 @@ sub_80EC444: @ 80EC444
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080EC470 @ =gUnknown_2037AB8
+	ldr r0, _080EC470 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1762,7 +1762,7 @@ _080EC468:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC470: .4byte gUnknown_2037AB8
+_080EC470: .4byte gPaletteFade
 	thumb_func_end sub_80EC444
 
 	thumb_func_start sub_80EC474

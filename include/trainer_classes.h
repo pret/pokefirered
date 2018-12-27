@@ -1,6 +1,8 @@
 #ifndef GUARD_TRAINER_CLASSES_H
 #define GUARD_TRAINER_CLASSES_H
 
+#include "global.h"
+
 enum
 {
     CLASS_PKMN_TRAINER0, // 0

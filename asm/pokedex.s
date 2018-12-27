@@ -57,8 +57,8 @@ _08088E6C:
 _08088E70: .4byte gUnknown_844E850
 	thumb_func_end sub_8088E38
 
-	thumb_func_start sub_8088E74
-sub_8088E74: @ 8088E74
+	thumb_func_start GetSetPokedexFlag
+GetSetPokedexFlag: @ 8088E74
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -70,7 +70,7 @@ sub_8088E74: @ 8088E74
 	asrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8088E74
+	thumb_func_end GetSetPokedexFlag
 
 	thumb_func_start pokedex_count
 pokedex_count: @ 8088E8C
@@ -101,7 +101,7 @@ _08088EB2:
 	lsrs r0, 16
 	movs r1, 0x1
 _08088EBA:
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08088ECA
@@ -145,7 +145,7 @@ _08088EFC:
 	lsrs r0, 16
 	movs r1, 0x1
 _08088F04:
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08088F14
@@ -176,7 +176,7 @@ _08088F28:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08088F48
@@ -203,7 +203,7 @@ _08088F5C:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08088F74
@@ -230,7 +230,7 @@ _08088F88:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08088FD6
@@ -244,7 +244,7 @@ _08088FA4:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08088FD6
@@ -259,7 +259,7 @@ _08088FC2:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8088E74
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08088FE0

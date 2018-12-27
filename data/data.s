@@ -4,12 +4,15 @@
 gUnknown_8231EC4:: @ 8231EC4
 	.incbin "baserom.gba", 0x231EC4, 0x20
 
-gUnknown_8231EE4:: @ 8231EE4
-	.incbin "baserom.gba", 0x231EE4, 0x4A8
+	.align 2
+gWirelessLinkDisplay4bpp:: @ 8231EE4
+	.incbin "graphics/interface/wireless_link_display.4bpp.lz"
 
-gUnknown_823238C:: @ 823238C
-	.incbin "baserom.gba", 0x23238C, 0x1EC
+	.align 2
+gWirelessLinkDisplayBin:: @ 823238C
+	.incbin "graphics/interface/wireless_link_display.bin.lz"
 
+	.align 2
 gUnknown_8232578:: @ 8232578
 	.incbin "baserom.gba", 0x232578, 0x20
 
@@ -128,7 +131,7 @@ gSpeciesNames:: @ 8245EE0
 gUnknown_8246BE5:: @ 8246BE5
 	.incbin "baserom.gba", 0x246BE5, 0x4AF
 
-gUnknown_8247094:: @ 8247094
+gMoveNames:: @ 8247094
 	.incbin "baserom.gba", 0x247094, 0xF97
 
 gUnknown_824802B:: @ 824802B
@@ -656,8 +659,9 @@ gUnknown_8269A5C:: @ 8269A5C
 gUnknown_826AA5C:: @ 826AA5C
 	.incbin "baserom.gba", 0x26AA5C, 0x1000
 
-gUnknown_826BA5C:: @ 826BA5C
-	.incbin "baserom.gba", 0x26BA5C, 0x100
+	.align 2
+gUnknown_3379A0Bin:: @ 826BA5C
+	.incbin "graphics/trade/unknown_3379A0.bin.lz"
 
 gUnknown_826BB5C:: @ 826BB5C
 	.incbin "baserom.gba", 0x26BB5C, 0x200
@@ -668,8 +672,8 @@ gUnknown_826BD5C:: @ 826BD5C
 gUnknown_826BF5C:: @ 826BF5C
 	.incbin "baserom.gba", 0x26BF5C, 0x20
 
-gUnknown_826BF7C:: @ 826BF7C
-	.incbin "baserom.gba", 0x26BF7C, 0x690
+gWirelessSignal4bpp:: @ 826BF7C
+	.incbin "graphics/trade/wireless_signal.4bpp.lz"
 
 gUnknown_826C60C:: @ 826C60C
 	.incbin "baserom.gba", 0x26C60C, 0x7C8

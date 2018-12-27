@@ -1,6 +1,8 @@
 #ifndef GUARD_DECOMPRESS_H
 #define GUARD_DECOMPRESS_H
 
+#include "global.h"
+
 #include "sprite.h"
 
 extern u8 gDecompressionBuffer[0x4000];
@@ -29,5 +31,7 @@ void LoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *dest, s
 void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic);
 
 u32 sub_8034974(const u8 *ptr);
+
+void sub_800F034(const struct CompressedSpriteSheet *src);
 
 #endif // GUARD_DECOMPRESS_H

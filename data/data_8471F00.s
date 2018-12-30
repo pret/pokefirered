@@ -265,6 +265,8 @@ gUnknown_8479D10:: @ 8479D10
 gUnknown_8479D24:: @ 8479D24
 	.asciz "ttdata->id == 0"
 
+	// trainer_tower
+
 gUnknown_8479D34:: @ 8479D34
 	.incbin "baserom.gba", 0x479D34, 0x4
 
@@ -313,6 +315,8 @@ gUnknown_847A2FE:: @ 847A2FE
 gUnknown_847A30E:: @ 847A30E
 	.incbin "baserom.gba", 0x47A30E, 0x48E
 
+	// unk_815F138
+
 gUnknown_847A79C:: @ 847A79C
 	.incbin "baserom.gba", 0x47A79C, 0x8
 
@@ -325,8 +329,19 @@ gUnknown_847A860:: @ 847A860
 gUnknown_847A878:: @ 847A878
 	.incbin "baserom.gba", 0x47A878, 0x18
 
+	// berry_fix_program
+
 gUnknown_847A890:: @ 847A890
-	.incbin "baserom.gba", 0x47A890, 0x7F1C
+	.4byte gUnknown_8EA467C, gUnknown_8EA52B8, gUnknown_8EA463C
+	.4byte gUnknown_8EA5664, gUnknown_8EA60C8, gUnknown_8EA5604
+	.4byte gUnknown_8EA6408, gUnknown_8EA7028, gUnknown_8EA63C8
+	.4byte gUnknown_8EA7320, gUnknown_8EA8118, gUnknown_8EA72E0
+	.4byte gUnknown_8EA8408, gUnknown_8EA8CC8, gUnknown_8EA83C8
+	.4byte gUnknown_8EA8F40, gUnknown_8EA9588, gUnknown_8EA8F00
+
+	.incbin "baserom.gba", 0x47A8D8, 0x7ED4
+
+	// trainer_tower (again?)
 
 gUnknown_84827AC:: @ 84827AC
 	.incbin "baserom.gba", 0x4827AC, 0x8

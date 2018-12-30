@@ -268,16 +268,7 @@ gUnknown_8479D24:: @ 8479D24
 	// trainer_tower
 
 gUnknown_8479D34:: @ 8479D34
-	.incbin "baserom.gba", 0x479D34, 0x4
-
-gUnknown_8479D38:: @ 8479D38
-	.incbin "baserom.gba", 0x479D38, 0x8
-
-gUnknown_8479D40:: @ 8479D40
-	.incbin "baserom.gba", 0x479D40, 0x8
-
-gUnknown_8479D48:: @ 8479D48
-	.incbin "baserom.gba", 0x479D48, 0x190
+	.incbin "baserom.gba", 0x479D34, 0x1A4
 
 gUnknown_8479ED8:: @ 8479ED8
 	.incbin "baserom.gba", 0x479ED8, 0x14C

@@ -5,89 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_815D8C8
-sub_815D8C8: @ 815D8C8
-	push {r4,lr}
-	ldr r4, _0815D8F0 @ =0x00004023
-	adds r0, r4, 0
-	bl VarGet
-	lsls r0, 16
-	lsrs r1, r0, 16
-	ldr r0, _0815D8F4 @ =0x000005db
-	cmp r1, r0
-	bhi _0815D8E8
-	adds r1, 0x1
-	lsls r1, 16
-	lsrs r1, 16
-	adds r0, r4, 0
-	bl VarSet
-_0815D8E8:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815D8F0: .4byte 0x00004023
-_0815D8F4: .4byte 0x000005db
-	thumb_func_end sub_815D8C8
-
-	thumb_func_start sub_815D8F8
-sub_815D8F8: @ 815D8F8
-	push {r4-r6,lr}
-	movs r4, 0xFF
-	movs r2, 0
-	ldr r6, _0815D95C @ =gUnknown_8479D34
-	ldr r0, _0815D960 @ =gSaveBlock1Ptr
-	ldr r3, [r0]
-	movs r5, 0x4
-	ldrsb r5, [r3, r5]
-_0815D908:
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r0, 2
-	adds r1, r0, r6
-	movs r0, 0
-	ldrsb r0, [r1, r0]
-	cmp r0, r5
-	bne _0815D928
-	ldrb r1, [r1, 0x1]
-	lsls r1, 24
-	asrs r1, 24
-	movs r0, 0x5
-	ldrsb r0, [r3, r0]
-	cmp r1, r0
-	bne _0815D928
-	adds r4, r2, 0
-_0815D928:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0xE
-	bls _0815D908
-	cmp r4, 0xFF
-	beq _0815D956
-	ldr r4, _0815D964 @ =0x00004023
-	adds r0, r4, 0
-	bl VarGet
-	lsls r0, 16
-	ldr r1, _0815D968 @ =0x05db0000
-	cmp r0, r1
-	bls _0815D956
-	adds r0, r4, 0
-	movs r1, 0
-	bl VarSet
-	bl sub_815D838
-	bl sub_815D96C
-_0815D956:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815D95C: .4byte gUnknown_8479D34
-_0815D960: .4byte gSaveBlock1Ptr
-_0815D964: .4byte 0x00004023
-_0815D968: .4byte 0x05db0000
-	thumb_func_end sub_815D8F8
-
 	thumb_func_start sub_815D96C
 sub_815D96C: @ 815D96C
 	push {r4-r6,lr}
@@ -105,25 +22,25 @@ _0815D970:
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
-	ldr r1, _0815D990 @ =gUnknown_8479D38
+	ldr r1, _0815D990 @ =gUnknown_8479D34
 	b _0815D9B0
 	.align 2, 0
-_0815D990: .4byte gUnknown_8479D38
+_0815D990: .4byte gUnknown_8479D34 + 4
 _0815D994:
 	cmp r0, 0x3B
 	bls _0815D9A8
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
-	ldr r1, _0815D9A4 @ =gUnknown_8479D40
+	ldr r1, _0815D9A4 @ =gUnknown_8479D34 + 12
 	b _0815D9B0
 	.align 2, 0
-_0815D9A4: .4byte gUnknown_8479D40
+_0815D9A4: .4byte gUnknown_8479D34 + 12
 _0815D9A8:
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
-	ldr r1, _0815D9E4 @ =gUnknown_8479D48
+	ldr r1, _0815D9E4 @ =gUnknown_8479D34 + 20
 _0815D9B0:
 	adds r5, r0, r1
 	movs r4, 0
@@ -153,7 +70,7 @@ _0815D9CC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815D9E4: .4byte gUnknown_8479D48
+_0815D9E4: .4byte gUnknown_8479D34 + 20
 	thumb_func_end sub_815D96C
 
 	thumb_func_start sub_815D9E8

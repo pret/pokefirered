@@ -266,6 +266,7 @@ SECTIONS {
         asm/unk_815C980.o(.text);
         asm/ss_anne.o(.text);
         asm/cereader_tool.o(.text);
+        src/trainer_tower.o(.text);
         asm/trainer_tower.o(.text);
         asm/unk_815EDDC.o(.text);
         asm/unk_815F138.o(.text);

@@ -5,21 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_815DD2C
-sub_815DD2C: @ 815DD2C
-	push {r4,lr}
-	ldr r4, _0815DD40 @ =gUnknown_203F458
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815DD40: .4byte gUnknown_203F458
-	thumb_func_end sub_815DD2C
-
 	thumb_func_start sub_815DD44
 sub_815DD44: @ 815DD44
 	push {r4,lr}

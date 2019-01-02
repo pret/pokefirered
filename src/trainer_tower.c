@@ -393,3 +393,9 @@ void sub_815DC8C(void)
                 "_0815DD28: .4byte gUnknown_203F458");
 }
 #endif // NONMATCHING
+
+void sub_815DD2C(void)
+{
+    Free(gUnknown_203F458);
+    gUnknown_203F458 = NULL;
+}

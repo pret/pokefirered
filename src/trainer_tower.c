@@ -9,6 +9,7 @@
 #include "event_data.h"
 #include "random.h"
 #include "cereader_tool.h"
+#include "overworld.h"
 
 struct UnkStruct_8479D34
 {
@@ -78,6 +79,7 @@ void sub_815D96C(void);
 void sub_815DC8C(void);  // setup
 void sub_815DD2C(void);  // teardown
 void sub_815DD44(void);
+void sub_815DDB0(void);
 void sub_815DEFC(u16 * ecWords, u8 * dest);
 void sub_815DF54(void);
 void sub_815E068(u8 battleType, u8 facilityClass);
@@ -106,6 +108,7 @@ extern const struct UnkStruct_8479D34 gUnknown_8479D34[15];
 extern void (*const gUnknown_847A230[])(void);
 extern const struct Unk_203F458_Header gUnknown_84827AC;
 extern const struct UnkSubstruct_203F458_000C *const gUnknown_84827B4[][8];
+extern const u16 gUnknown_847A284[8][3];
 
 bool32 sub_815D7BC(void * dest, void * buffer)
 {
@@ -398,4 +401,19 @@ void sub_815DD2C(void)
 {
     Free(gUnknown_203F458);
     gUnknown_203F458 = NULL;
+}
+
+void sub_815DD44(void)
+{
+    if (gMapHeader.mapDataId - 0x129 > gUnknown_203F458->unk_0004.unk_0000.unk0)
+    {
+        gSpecialVar_Result = 3;
+        sub_8055D40(0x132);
+    }
+    else
+    {
+        gSpecialVar_Result = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
+        sub_8055D40(gUnknown_847A284[gUnknown_203F458->unk_0000][gSpecialVar_Result]);
+        sub_815DDB0();
+    }
 }

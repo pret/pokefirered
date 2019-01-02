@@ -5,59 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_815DD44
-sub_815DD44: @ 815DD44
-	push {r4,lr}
-	ldr r0, _0815DD68 @ =gMapHeader
-	ldrh r0, [r0, 0x12]
-	ldr r1, _0815DD6C @ =0xfffffed7
-	adds r0, r1
-	ldr r1, _0815DD70 @ =gUnknown_203F458
-	ldr r4, [r1]
-	ldrb r1, [r4, 0x4]
-	cmp r0, r1
-	ble _0815DD78
-	ldr r0, _0815DD74 @ =gSpecialVar_Result
-	movs r1, 0x3
-	strh r1, [r0]
-	movs r0, 0x99
-	lsls r0, 1
-	bl sub_8055D40
-	b _0815DDA2
-	.align 2, 0
-_0815DD68: .4byte gMapHeader
-_0815DD6C: .4byte 0xfffffed7
-_0815DD70: .4byte gUnknown_203F458
-_0815DD74: .4byte gSpecialVar_Result
-_0815DD78:
-	ldr r3, _0815DDA8 @ =gSpecialVar_Result
-	ldrb r1, [r4]
-	lsls r0, r1, 5
-	subs r0, r1
-	lsls r0, 5
-	adds r0, r4, r0
-	ldrb r0, [r0, 0xE]
-	strh r0, [r3]
-	ldr r2, _0815DDAC @ =gUnknown_847A284
-	ldrb r1, [r4]
-	lsls r0, r1, 1
-	adds r0, r1
-	ldrh r3, [r3]
-	adds r0, r3
-	lsls r0, 1
-	adds r0, r2
-	ldrh r0, [r0]
-	bl sub_8055D40
-	bl sub_815DDB0
-_0815DDA2:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815DDA8: .4byte gSpecialVar_Result
-_0815DDAC: .4byte gUnknown_847A284
-	thumb_func_end sub_815DD44
-
 	thumb_func_start sub_815DDB0
 sub_815DDB0: @ 815DDB0
 	push {r4-r6,lr}

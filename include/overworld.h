@@ -81,6 +81,8 @@ void sub_8055DC4(void);
 
 u8 sav1_map_get_name(void);
 
+void sub_8055D40(u16 mapDataId);
+
 extern u8 gUnknown_2031DD8;
 extern u8 gUnknown_2036E28;
 

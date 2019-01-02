@@ -9706,11 +9706,11 @@ sub_80C4D78: @ 80C4D78
 	bl sub_80C4D40
 	cmp r0, 0x1
 	bne _080C4DA4
-	ldr r1, _080C4DA0 @ =gUnknown_83EF22E
+	ldr r1, _080C4DA0 @ =gMapSecName_CeladonDept
 	b _080C4DAC
 	.align 2, 0
 _080C4D9C: .4byte 0xffa80000
-_080C4DA0: .4byte gUnknown_83EF22E
+_080C4DA0: .4byte gMapSecName_CeladonDept
 _080C4DA4:
 	ldr r0, _080C4DB8 @ =gUnknown_83F1CAC
 	lsls r1, r5, 2

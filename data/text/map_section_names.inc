@@ -1,327 +1,327 @@
-gUnknown_83EECFC::
+gMapSecName_PalletTown::
 	.string "PALLET TOWN$"
 
-gUnknown_83EED08:: @ 83EED08
+gMapSecName_ViridianCity::
 	.string "VIRIDIAN CITY$"
 
-gUnknown_83EED16:: @ 83EED16
+gMapSecName_PewterCity::
 	.string "PEWTER CITY$"
 
-gUnknown_83EED22:: @ 83EED22
+gMapSecName_CeruleanCity::
 	.string "CERULEAN CITY$"
 
-gUnknown_83EED30:: @ 83EED30
+gMapSecName_LavenderTown::
 	.string "LAVENDER TOWN$"
 
-gUnknown_83EED3E:: @ 83EED3E
+gMapSecName_VermilionCity::
 	.string "VERMILION CITY$"
 
-gUnknown_83EED4D:: @ 83EED4D
+gMapSecName_CeladonCity::
 	.string "CELADON CITY$"
 
-gUnknown_83EED5A:: @ 83EED5A
+gMapSecName_FuchsiaCity::
 	.string "FUCHSIA CITY$"
 
-gUnknown_83EED67:: @ 83EED67
+gMapSecName_CinnabarIsland::
 	.string "CINNABAR ISLAND$"
 
-gUnknown_83EED77:: @ 83EED77
+gMapSecName_IndigoPlateau::
 	.string "INDIGO PLATEAU$"
 
-gUnknown_83EED86:: @ 83EED86
+gMapSecName_SaffronCity::
 	.string "SAFFRON CITY$"
 
-gUnknown_83EED93:: @ 83EED93
+gMapSecName_Route4::
 	.string "ROUTE 4$"
 
-gUnknown_83EED9B:: @ 83EED9B
+gMapSecName_Route10::
 	.string "ROUTE 10$"
 
-gUnknown_83EEDA4:: @ 83EEDA4
+gMapSecName_Route1::
 	.string "ROUTE 1$"
 
-gUnknown_83EEDAC:: @ 83EEDAC
+gMapSecName_Route2::
 	.string "ROUTE 2$"
 
-gUnknown_83EEDB4:: @ 83EEDB4
+gMapSecName_Route3::
 	.string "ROUTE 3$"
 
-gUnknown_83EEDBC:: @ 83EEDBC
+gMapSecName_Route4_2::
 	.string "ROUTE 4$"
 
-gUnknown_83EEDC4:: @ 83EEDC4
+gMapSecName_Route5::
 	.string "ROUTE 5$"
 
-gUnknown_83EEDCC:: @ 83EEDCC
+gMapSecName_Route6::
 	.string "ROUTE 6$"
 
-gUnknown_83EEDD4:: @ 83EEDD4
+gMapSecName_Route7::
 	.string "ROUTE 7$"
 
-gUnknown_83EEDDC:: @ 83EEDDC
+gMapSecName_Route8::
 	.string "ROUTE 8$"
 
-gUnknown_83EEDE4:: @ 83EEDE4
+gMapSecName_Route9::
 	.string "ROUTE 9$"
 
-gUnknown_83EEDEC:: @ 83EEDEC
+gMapSecName_Route10_2::
 	.string "ROUTE 10$"
 
-gUnknown_83EEDF5:: @ 83EEDF5
+gMapSecName_Route11::
 	.string "ROUTE 11$"
 
-gUnknown_83EEDFE:: @ 83EEDFE
+gMapSecName_Route12::
 	.string "ROUTE 12$"
 
-gUnknown_83EEE07:: @ 83EEE07
+gMapSecName_Route13::
 	.string "ROUTE 13$"
 
-gUnknown_83EEE10:: @ 83EEE10
+gMapSecName_Route14::
 	.string "ROUTE 14$"
 
-gUnknown_83EEE19:: @ 83EEE19
+gMapSecName_Route15::
 	.string "ROUTE 15$"
 
-gUnknown_83EEE22:: @ 83EEE22
+gMapSecName_Route16::
 	.string "ROUTE 16$"
 
-gUnknown_83EEE2B:: @ 83EEE2B
+gMapSecName_Route17::
 	.string "ROUTE 17$"
 
-gUnknown_83EEE34:: @ 83EEE34
+gMapSecName_Route18::
 	.string "ROUTE 18$"
 
-gUnknown_83EEE3D:: @ 83EEE3D
+gMapSecName_Route19::
 	.string "ROUTE 19$"
 
-gUnknown_83EEE46:: @ 83EEE46
+gMapSecName_Route20::
 	.string "ROUTE 20$"
 
-gUnknown_83EEE4F:: @ 83EEE4F
+gMapSecName_Route21::
 	.string "ROUTE 21$"
 
-gUnknown_83EEE58:: @ 83EEE58
+gMapSecName_Route22::
 	.string "ROUTE 22$"
 
-gUnknown_83EEE61:: @ 83EEE61
+gMapSecName_Route23::
 	.string "ROUTE 23$"
 
-gUnknown_83EEE6A:: @ 83EEE6A
+gMapSecName_Route24::
 	.string "ROUTE 24$"
 
-gUnknown_83EEE73:: @ 83EEE73
+gMapSecName_Route25::
 	.string "ROUTE 25$"
 
-gUnknown_83EEE7C:: @ 83EEE7C
+gMapSecName_ViridianForest::
 	.string "VIRIDIAN FOREST$"
 
-gUnknown_83EEE8C:: @ 83EEE8C
+gMapSecName_MtMoon::
 	.string "MT. MOON$"
 
-gUnknown_83EEE95:: @ 83EEE95
+gMapSecName_SSAnne::
 	.string "S.S. ANNE$"
 
-gUnknown_83EEE9F:: @ 83EEE9F
+gMapSecName_UndergroundPath::
 	.string "UNDERGROUND PATH$"
 
-gUnknown_83EEEB0:: @ 83EEEB0
+gMapSecName_UndergroundPath_2::
 	.string "UNDERGROUND PATH$"
 
-gUnknown_83EEEC1:: @ 83EEEC1
+gMapSecName_DiglettsCave::
 	.string "DIGLETT’S CAVE$"
 
-gUnknown_83EEED0:: @ 83EEED0
+gMapSecName_VictoryRoad::
 	.string "VICTORY ROAD$"
 
-gUnknown_83EEEDD:: @ 83EEEDD
+gMapSecName_RocketHideout::
 	.string "ROCKET HIDEOUT$"
 
-gUnknown_83EEEEC:: @ 83EEEEC
+gMapSecName_SilphCo::
 	.string "SILPH CO.$"
 
-gUnknown_83EEEF6:: @ 83EEEF6
+gMapSecName_PokemonMansion::
 	.string "POKéMON MANSION$"
 
-gUnknown_83EEF06:: @ 83EEF06
+gMapSecName_SafariZone::
 	.string "SAFARI ZONE$"
 
-gUnknown_83EEF12:: @ 83EEF12
+gMapSecName_PokemonLeague::
 	.string "POKéMON LEAGUE$"
 
-gUnknown_83EEF21:: @ 83EEF21
+gMapSecName_RockTunnel::
 	.string "ROCK TUNNEL$"
 
-gUnknown_83EEF2D:: @ 83EEF2D
+gMapSecName_SeafoamIslands::
 	.string "SEAFOAM ISLANDS$"
 
-gUnknown_83EEF3D:: @ 83EEF3D
+gMapSecName_PokemonTower::
 	.string "POKéMON TOWER$"
 
-gUnknown_83EEF4B:: @ 83EEF4B
+gMapSecName_CeruleanCave::
 	.string "CERULEAN CAVE$"
 
-gUnknown_83EEF59:: @ 83EEF59
+gMapSecName_PowerPlant::
 	.string "POWER PLANT$"
 
-gUnknown_83EEF65:: @ 83EEF65
+gMapSecName_OneIsland::
 	.string "ONE ISLAND$"
 
-gUnknown_83EEF70:: @ 83EEF70
+gMapSecName_TwoIsland::
 	.string "TWO ISLAND$"
 
-gUnknown_83EEF7B:: @ 83EEF7B
+gMapSecName_ThreeIsland::
 	.string "THREE ISLAND$"
 
-gUnknown_83EEF88:: @ 83EEF88
+gMapSecName_FourIsland::
 	.string "FOUR ISLAND$"
 
-gUnknown_83EEF94:: @ 83EEF94
+gMapSecName_FiveIsland::
 	.string "FIVE ISLAND$"
 
-gUnknown_83EEFA0:: @ 83EEFA0
+gMapSecName_SevenIsland::
 	.string "SEVEN ISLAND$"
 
-gUnknown_83EEFAD:: @ 83EEFAD
+gMapSecName_SixIsland::
 	.string "SIX ISLAND$"
 
-gUnknown_83EEFB8:: @ 83EEFB8
+gMapSecName_KindleRoad::
 	.string "KINDLE ROAD$"
 
-gUnknown_83EEFC4:: @ 83EEFC4
+gMapSecName_TreasureBeach::
 	.string "TREASURE BEACH$"
 
-gUnknown_83EEFD3:: @ 83EEFD3
+gMapSecName_CapeBrink::
 	.string "CAPE BRINK$"
 
-gUnknown_83EEFDE:: @ 83EEFDE
+gMapSecName_BondBridge::
 	.string "BOND BRIDGE$"
 
-gUnknown_83EEFEA:: @ 83EEFEA
+gMapSecName_ThreeIslePort::
 	.string "THREE ISLE PORT$"
 
-gUnknown_83EEFFA:: @ 83EEFFA
+gMapSecName_SeviiIsle6::
 	.string "SEVII ISLE 6$"
 
-gUnknown_83EF007:: @ 83EF007
+gMapSecName_SeviiIsle7::
 	.string "SEVII ISLE 7$"
 
-gUnknown_83EF014:: @ 83EF014
+gMapSecName_SeviiIsle8::
 	.string "SEVII ISLE 8$"
 
-gUnknown_83EF021:: @ 83EF021
+gMapSecName_SeviiIsle9::
 	.string "SEVII ISLE 9$"
 
-gUnknown_83EF02E:: @ 83EF02E
+gMapSecName_ResortGorgeous::
 	.string "RESORT GORGEOUS$"
 
-gUnknown_83EF03E:: @ 83EF03E
+gMapSecName_WaterLabyrinth::
 	.string "WATER LABYRINTH$"
 
-gUnknown_83EF04E:: @ 83EF04E
+gMapSecName_FiveIsleMeadow::
 	.string "FIVE ISLE MEADOW$"
 
-gUnknown_83EF05F:: @ 83EF05F
+gMapSecName_MemorialPillar::
 	.string "MEMORIAL PILLAR$"
 
-gUnknown_83EF06F:: @ 83EF06F
+gMapSecName_OutcastIsland::
 	.string "OUTCAST ISLAND$"
 
-gUnknown_83EF07E:: @ 83EF07E
+gMapSecName_GreenPath::
 	.string "GREEN PATH$"
 
-gUnknown_83EF089:: @ 83EF089
+gMapSecName_WaterPath::
 	.string "WATER PATH$"
 
-gUnknown_83EF094:: @ 83EF094
+gMapSecName_RuinValley::
 	.string "RUIN VALLEY$"
 
-gUnknown_83EF0A0:: @ 83EF0A0
+gMapSecName_TrainerTower::
 	.string "TRAINER TOWER$"
 
-gUnknown_83EF0AE:: @ 83EF0AE
+gMapSecName_CanyonEntrance::
 	.string "CANYON ENTRANCE$"
 
-gUnknown_83EF0BE:: @ 83EF0BE
+gMapSecName_SevaultCanyon::
 	.string "SEVAULT CANYON$"
 
-gUnknown_83EF0CD:: @ 83EF0CD
+gMapSecName_TanobyRuins::
 	.string "TANOBY RUINS$"
 
-gUnknown_83EF0DA:: @ 83EF0DA
+gMapSecName_SeviiIsle22::
 	.string "SEVII ISLE 22$"
 
-gUnknown_83EF0E8:: @ 83EF0E8
+gMapSecName_SeviiIsle23::
 	.string "SEVII ISLE 23$"
 
-gUnknown_83EF0F6:: @ 83EF0F6
+gMapSecName_SeviiIsle24::
 	.string "SEVII ISLE 24$"
 
-gUnknown_83EF104:: @ 83EF104
+gMapSecName_NavelRock::
 	.string "NAVEL ROCK$"
 
-gUnknown_83EF10F:: @ 83EF10F
+gMapSecName_MtEmber::
 	.string "MT. EMBER$"
 
-gUnknown_83EF119:: @ 83EF119
+gMapSecName_BerryForest::
 	.string "BERRY FOREST$"
 
-gUnknown_83EF126:: @ 83EF126
+gMapSecName_IcefallCave::
 	.string "ICEFALL CAVE$"
 
-gUnknown_83EF133:: @ 83EF133
+gMapSecName_RocketWarehouse::
 	.string "ROCKET WAREHOUSE$"
 
-gUnknown_83EF144:: @ 83EF144
+gMapSecName_TrainerTower2::
 	.string "TRAINER TOWER$"
 
-gUnknown_83EF152:: @ 83EF152
+gMapSecName_DottedHole::
 	.string "DOTTED HOLE$"
 
-gUnknown_83EF15E:: @ 83EF15E
+gMapSecName_LostCave::
 	.string "LOST CAVE$"
 
-gUnknown_83EF168:: @ 83EF168
+gMapSecName_PatternBush::
 	.string "PATTERN BUSH$"
 
-gUnknown_83EF175:: @ 83EF175
+gMapSecName_AlteringCave::
 	.string "ALTERING CAVE$"
 
-gUnknown_83EF183:: @ 83EF183
+gMapSecName_TanobyChambers::
 	.string "TANOBY CHAMBERS$"
 
-gUnknown_83EF193:: @ 83EF193
+gMapSecName_ThreeIslePath::
 	.string "THREE ISLE PATH$"
 
-gUnknown_83EF1A3:: @ 83EF1A3
+gMapSecName_TanobyKey::
 	.string "TANOBY KEY$"
 
-gUnknown_83EF1AE:: @ 83EF1AE
+gMapSecName_BirthIsland::
 	.string "BIRTH ISLAND$"
 
-gUnknown_83EF1BB:: @ 83EF1BB
+gMapSecName_MoneanChamber::
 	.string "MONEAN CHAMBER$"
 
-gUnknown_83EF1CA:: @ 83EF1CA
+gMapSecName_LiptooChamber::
 	.string "LIPTOO CHAMBER$"
 
-gUnknown_83EF1D9:: @ 83EF1D9
+gMapSecName_WeepthChamber::
 	.string "WEEPTH CHAMBER$"
 
-gUnknown_83EF1E8:: @ 83EF1E8
+gMapSecName_DilfordChamber::
 	.string "DILFORD CHAMBER$"
 
-gUnknown_83EF1F8:: @ 83EF1F8
+gMapSecName_ScufibChamber::
 	.string "SCUFIB CHAMBER$"
 
-gUnknown_83EF207:: @ 83EF207
+gMapSecName_RixyChamber::
 	.string "RIXY CHAMBER$"
 
-gUnknown_83EF214:: @ 83EF214
+gMapSecName_ViapoisChamber::
 	.string "VIAPOIS CHAMBER$"
 
-gUnknown_83EF224:: @ 83EF224
+gMapSecName_EmberSpa::
 	.string "EMBER SPA$"
 
-gUnknown_83EF22E:: @ 83EF22E
+gMapSecName_CeladonDept::
 	.string "CELADON DEPT.$"
 

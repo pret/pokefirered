@@ -286,7 +286,27 @@ gUnknown_847A22C:: @ 847A22C
 	.incbin "baserom.gba", 0x47A22C, 0x4
 
 gUnknown_847A230:: @ 847A230
-	.incbin "baserom.gba", 0x47A230, 0x54
+	.4byte sub_815DD44
+	.4byte sub_815DF54
+	.4byte sub_815E160
+	.4byte sub_815E1C0
+	.4byte sub_815E1F0
+	.4byte sub_815E218
+	.4byte sub_815E28C
+	.4byte sub_815E394
+	.4byte sub_815E408
+	.4byte sub_815E4B0
+	.4byte sub_815E56C
+	.4byte sub_815E5C4
+	.4byte sub_815E5F0
+	.4byte sub_815E658
+	.4byte sub_815E720
+	.4byte sub_815E88C
+	.4byte sub_815E8B4
+	.4byte sub_815E8CC
+	.4byte sub_815E908
+	.4byte sub_815E948
+	.4byte sub_815E9C8
 
 gUnknown_847A284:: @ 847A284
 	.incbin "baserom.gba", 0x47A284, 0x30

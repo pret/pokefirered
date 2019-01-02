@@ -737,8 +737,9 @@ struct SaveBlock1
     /*0x3A48*/ u8 filler_3a48[4];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
-    /*0x3A94*/ u8 filler3A94[0x2A4];
-               u32 unkArray[4][3];
+    /*0x3A94*/ u8 filler3A94[0x2A0];
+    /*0x3D34*/ u32 unkArrayIdx;
+    /*0x3D38*/ u32 unkArray[4][3];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

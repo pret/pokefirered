@@ -1,4 +1,5 @@
 #include "global.h"
+#include "main.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
 #include "malloc.h"
@@ -18,17 +19,43 @@ struct UnkStruct_8479D34
     u8 flags3[8];
 };
 
+struct UnkSubstruct_203F458_000C_004
+{
+    /* 0x004 */ u8 unk_000[11];
+    /* 0x00F */ u8 unk_00B;
+    /* 0x010 */ u8 unk_00C;
+    /* 0x011 */ u8 unk_00D[13];
+    /* 0x01A */ u16 unk_01A[6];
+    /* 0x026 */ u16 unk_026[6];
+    /* 0x032 */ u8 filler_032[0x116];
+}; // size: 328
+
+struct UnkSubstruct_203F458_000C
+{
+    /* 0x000 */ u8 filler_000[2];
+    /* 0x002 */ u8 unk_002;
+    /* 0x003 */ u8 unk_003;
+    /* 0x004 */ struct UnkSubstruct_203F458_000C_004 unk_004[3];
+    /* 0x3DC */ u8 filler_3DC[4];
+};
+
 struct UnkStruct_203F458
 {
-    /* 0x0000 */ u8 filler_0000[0x1F0C];
+    /* 0x0000 */ u8 unk_0000;
+    /* 0x0001 */ u8 filler_0001[11];
+    /* 0x000C */ struct UnkSubstruct_203F458_000C unk_000C[8];
 };
 
 struct UnkStruct_203F45C
 {
     /* 0x00 */ u8 unk_00[11];
-    /* 0x0B */ u8 filler_0B[49];
+    /* 0x0C */ u16 unk_0C[6];
+    /* 0x18 */ u16 unk_18[6];
+    /* 0x24 */ u16 unk_24[6];
+    /* 0x30 */ u16 unk_30[6];
     /* 0x3C */ u8 unk_3C;
     /* 0x3D */ u8 unk_3D;
+    /* 0x3E */ u8 unk_3E;
 };
 
 EWRAM_DATA struct UnkStruct_203F458 * gUnknown_203F458 = NULL;
@@ -183,4 +210,38 @@ void sub_815DA28(u8 * dest)
 u8 sub_815DA3C(void)
 {
     return gFacilityClassToPicIndex[gUnknown_203F45C->unk_3D];
+}
+
+void sub_815DA54(void)
+{
+    u16 r10;
+    s32 r9;
+
+    sub_815DC8C();
+    gUnknown_203F45C = AllocZeroed(sizeof(*gUnknown_203F45C));
+    r10 = VarGet(VAR_0x4001);
+    StringCopyN(gUnknown_203F45C->unk_00, gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_000, 11);
+
+    for (r9 = 0; r9 < 6; r9++)
+    // r6 = r10 * 4
+    // r12 = r10 * 328
+    // r5 = (r10 + 1) * 328
+    {
+        // r8 = *gUnknown_203F45C
+        // r4 = r9 * 2
+        gUnknown_203F45C->unk_0C[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_01A[r9];
+        gUnknown_203F45C->unk_18[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_026[r9];
+
+        if (gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_002 == 1)
+        {
+            gUnknown_203F45C->unk_24[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_01A[r9];
+            gUnknown_203F45C->unk_30[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_026[r9];
+        }
+    }
+
+    gUnknown_203F45C->unk_3C = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_002;
+    gUnknown_203F45C->unk_3D = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_00B;
+    gUnknown_203F45C->unk_3E = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_00C;
+    SetVBlankCounter1Ptr(gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx]);
+    sub_815DD2C();
 }

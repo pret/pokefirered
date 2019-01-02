@@ -2002,10 +2002,9 @@ gUnknown_83EEC98:: @ 83EEC98
 	.incbin "baserom.gba", 0x3EEC98, 0x50
 
 gUnknown_83EECE8:: @ 83EECE8
-	.incbin "baserom.gba", 0x3EECE8, 0x546
+	.incbin "baserom.gba", 0x3EECE8, 0x14
 
-gUnknown_83EF22E:: @ 83EF22E
-	.incbin "baserom.gba", 0x3EF22E, 0xE
+	.include "data/text/map_section_names.inc"
 
 gUnknown_83EF23C:: @ 83EF23C
 	.incbin "baserom.gba", 0x3EF23C, 0x1E
@@ -2197,7 +2196,115 @@ gUnknown_83F1CA8:: @ 83F1CA8
 	.incbin "baserom.gba", 0x3F1CA8, 0x4
 
 gUnknown_83F1CAC:: @ 83F1CAC
-	.incbin "baserom.gba", 0x3F1CAC, 0x1B4
+	.4byte gUnknown_83EECFC
+	.4byte gUnknown_83EED08
+	.4byte gUnknown_83EED16
+	.4byte gUnknown_83EED22
+	.4byte gUnknown_83EED30
+	.4byte gUnknown_83EED3E
+	.4byte gUnknown_83EED4D
+	.4byte gUnknown_83EED5A
+	.4byte gUnknown_83EED67
+	.4byte gUnknown_83EED77
+	.4byte gUnknown_83EED86
+	.4byte gUnknown_83EED93
+	.4byte gUnknown_83EED9B
+	.4byte gUnknown_83EEDA4
+	.4byte gUnknown_83EEDAC
+	.4byte gUnknown_83EEDB4
+	.4byte gUnknown_83EEDBC
+	.4byte gUnknown_83EEDC4
+	.4byte gUnknown_83EEDCC
+	.4byte gUnknown_83EEDD4
+	.4byte gUnknown_83EEDDC
+	.4byte gUnknown_83EEDE4
+	.4byte gUnknown_83EEDEC
+	.4byte gUnknown_83EEDF5
+	.4byte gUnknown_83EEDFE
+	.4byte gUnknown_83EEE07
+	.4byte gUnknown_83EEE10
+	.4byte gUnknown_83EEE19
+	.4byte gUnknown_83EEE22
+	.4byte gUnknown_83EEE2B
+	.4byte gUnknown_83EEE34
+	.4byte gUnknown_83EEE3D
+	.4byte gUnknown_83EEE46
+	.4byte gUnknown_83EEE4F
+	.4byte gUnknown_83EEE58
+	.4byte gUnknown_83EEE61
+	.4byte gUnknown_83EEE6A
+	.4byte gUnknown_83EEE73
+	.4byte gUnknown_83EEE7C
+	.4byte gUnknown_83EEE8C
+	.4byte gUnknown_83EEE95
+	.4byte gUnknown_83EEE9F
+	.4byte gUnknown_83EEEB0
+	.4byte gUnknown_83EEEC1
+	.4byte gUnknown_83EEED0
+	.4byte gUnknown_83EEEDD
+	.4byte gUnknown_83EEEEC
+	.4byte gUnknown_83EEEF6
+	.4byte gUnknown_83EEF06
+	.4byte gUnknown_83EEF12
+	.4byte gUnknown_83EEF21
+	.4byte gUnknown_83EEF2D
+	.4byte gUnknown_83EEF3D
+	.4byte gUnknown_83EEF4B
+	.4byte gUnknown_83EEF59
+	.4byte gUnknown_83EEF65
+	.4byte gUnknown_83EEF70
+	.4byte gUnknown_83EEF7B
+	.4byte gUnknown_83EEF88
+	.4byte gUnknown_83EEF94
+	.4byte gUnknown_83EEFA0
+	.4byte gUnknown_83EEFAD
+	.4byte gUnknown_83EEFB8
+	.4byte gUnknown_83EEFC4
+	.4byte gUnknown_83EEFD3
+	.4byte gUnknown_83EEFDE
+	.4byte gUnknown_83EEFEA
+	.4byte gUnknown_83EEFFA
+	.4byte gUnknown_83EF007
+	.4byte gUnknown_83EF014
+	.4byte gUnknown_83EF021
+	.4byte gUnknown_83EF02E
+	.4byte gUnknown_83EF03E
+	.4byte gUnknown_83EF04E
+	.4byte gUnknown_83EF05F
+	.4byte gUnknown_83EF06F
+	.4byte gUnknown_83EF07E
+	.4byte gUnknown_83EF089
+	.4byte gUnknown_83EF094
+	.4byte gUnknown_83EF0A0
+	.4byte gUnknown_83EF0AE
+	.4byte gUnknown_83EF0BE
+	.4byte gUnknown_83EF0CD
+	.4byte gUnknown_83EF0DA
+	.4byte gUnknown_83EF0E8
+	.4byte gUnknown_83EF0F6
+	.4byte gUnknown_83EF104
+	.4byte gUnknown_83EF10F
+	.4byte gUnknown_83EF119
+	.4byte gUnknown_83EF126
+	.4byte gUnknown_83EF133
+	.4byte gUnknown_83EF144
+	.4byte gUnknown_83EF152
+	.4byte gUnknown_83EF15E
+	.4byte gUnknown_83EF168
+	.4byte gUnknown_83EF175
+	.4byte gUnknown_83EF183
+	.4byte gUnknown_83EF193
+	.4byte gUnknown_83EF1A3
+	.4byte gUnknown_83EF1AE
+	.4byte gUnknown_83EF1BB
+	.4byte gUnknown_83EF1CA
+	.4byte gUnknown_83EF1D9
+	.4byte gUnknown_83EF1E8
+	.4byte gUnknown_83EF1F8
+	.4byte gUnknown_83EF207
+	.4byte gUnknown_83EF214
+	.4byte gUnknown_83EF224
+	.4byte gUnknown_83EF22E
 
 gUnknown_83F1E60:: @ 83F1E60
 	.incbin "baserom.gba", 0x3F1E60, 0x318

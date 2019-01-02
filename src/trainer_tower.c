@@ -65,7 +65,9 @@ void sub_815D96C(void);
 void sub_815DC8C(void);  // setup
 void sub_815DD2C(void);  // teardown
 void sub_815DD44(void);
+void sub_815DEFC(u16 * ecWords, u8 * dest);
 void sub_815DF54(void);
+void sub_815E068(u8 battleType, u8 facilityClass);
 void sub_815E160(void);
 void sub_815E1C0(void);
 void sub_815E1F0(void);
@@ -223,12 +225,7 @@ void sub_815DA54(void)
     StringCopyN(gUnknown_203F45C->unk_00, gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_000, 11);
 
     for (r9 = 0; r9 < 6; r9++)
-    // r6 = r10 * 4
-    // r12 = r10 * 328
-    // r5 = (r10 + 1) * 328
     {
-        // r8 = *gUnknown_203F45C
-        // r4 = r9 * 2
         gUnknown_203F45C->unk_0C[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_01A[r9];
         gUnknown_203F45C->unk_18[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_026[r9];
 
@@ -244,4 +241,32 @@ void sub_815DA54(void)
     gUnknown_203F45C->unk_3E = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_00C;
     SetVBlankCounter1Ptr(gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx]);
     sub_815DD2C();
+}
+
+void sub_815DBDC(void)
+{
+    Free(gUnknown_203F45C);
+    gUnknown_203F45C = NULL;
+}
+
+void sub_815DBF4(u8 * dest, u8 opponentIdx)
+// TTower_GetBeforeBattleMessage?
+{
+    VarSet(VAR_0x4003, opponentIdx);
+    sub_815E068(gUnknown_203F45C->unk_3C, gUnknown_203F45C->unk_3D);
+    if (opponentIdx == 0)
+        sub_815DEFC(gUnknown_203F45C->unk_0C, dest);
+    else
+        sub_815DEFC(gUnknown_203F45C->unk_24, dest);
+}
+
+void sub_815DC40(u8 * dest, u8 opponentIdx)
+// TTower_GetAfterBattleMessage?
+{
+    VarSet(VAR_0x4003, opponentIdx);
+    sub_815E068(gUnknown_203F45C->unk_3C, gUnknown_203F45C->unk_3D);
+    if (opponentIdx == 0)
+        sub_815DEFC(gUnknown_203F45C->unk_18, dest);
+    else
+        sub_815DEFC(gUnknown_203F45C->unk_30, dest);
 }

@@ -121,6 +121,8 @@ $(C_BUILDDIR)/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/isagbprn.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/isagbprn.o: CFLAGS := -mthumb-interwork
 
+$(C_BUILDDIR)/trainer_tower.o: CFLAGS += -ffreestanding
+
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
 else

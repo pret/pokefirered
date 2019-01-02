@@ -354,8 +354,11 @@ gUnknown_847A890:: @ 847A890
 
 	// trainer_tower (again?)
 
+	.align 2
 gUnknown_84827AC:: @ 84827AC
-	.incbin "baserom.gba", 0x4827AC, 0x8
+	.byte 0x08, 0x01
+	.align 2
+	.4byte 0
 
 gUnknown_84827B4:: @ 84827B4
 	.incbin "baserom.gba", 0x4827B4, 0x5F34

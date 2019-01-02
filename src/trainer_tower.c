@@ -4,6 +4,7 @@
 #include "constants/vars.h"
 #include "malloc.h"
 #include "save.h"
+#include "util.h"
 #include "string_util.h"
 #include "event_data.h"
 #include "random.h"
@@ -39,11 +40,23 @@ struct UnkSubstruct_203F458_000C
     /* 0x3DC */ u8 filler_3DC[4];
 };
 
+struct Unk_203F458_Header
+{
+    u8 unk0;
+    u8 unk1;
+    u32 unk4;
+};
+
+struct UnkStruct_203F458_SaveBlock
+{
+    struct Unk_203F458_Header unk_0000;
+    struct UnkSubstruct_203F458_000C unk_0008[8];
+};
+
 struct UnkStruct_203F458
 {
     /* 0x0000 */ u8 unk_0000;
-    /* 0x0001 */ u8 filler_0001[11];
-    /* 0x000C */ struct UnkSubstruct_203F458_000C unk_000C[8];
+    /* 0x0004 */ struct UnkStruct_203F458_SaveBlock unk_0004;
 };
 
 struct UnkStruct_203F45C
@@ -87,9 +100,12 @@ void sub_815E8CC(void);
 void sub_815E908(void);
 void sub_815E948(void);
 void sub_815E9C8(void);
+void sub_815EC0C(void);
 
 extern const struct UnkStruct_8479D34 gUnknown_8479D34[15];
 extern void (*const gUnknown_847A230[])(void);
+extern const struct Unk_203F458_Header gUnknown_84827AC;
+extern const struct UnkSubstruct_203F458_000C *const gUnknown_84827B4[][8];
 
 bool32 sub_815D7BC(void * dest, void * buffer)
 {
@@ -222,23 +238,23 @@ void sub_815DA54(void)
     sub_815DC8C();
     gUnknown_203F45C = AllocZeroed(sizeof(*gUnknown_203F45C));
     r10 = VarGet(VAR_0x4001);
-    StringCopyN(gUnknown_203F45C->unk_00, gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_000, 11);
+    StringCopyN(gUnknown_203F45C->unk_00, gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_000, 11);
 
     for (r9 = 0; r9 < 6; r9++)
     {
-        gUnknown_203F45C->unk_0C[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_01A[r9];
-        gUnknown_203F45C->unk_18[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_026[r9];
+        gUnknown_203F45C->unk_0C[r9] = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_01A[r9];
+        gUnknown_203F45C->unk_18[r9] = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_026[r9];
 
-        if (gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_002 == 1)
+        if (gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002 == 1)
         {
-            gUnknown_203F45C->unk_24[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_01A[r9];
-            gUnknown_203F45C->unk_30[r9] = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_026[r9];
+            gUnknown_203F45C->unk_24[r9] = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_01A[r9];
+            gUnknown_203F45C->unk_30[r9] = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_026[r9];
         }
     }
 
-    gUnknown_203F45C->unk_3C = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_002;
-    gUnknown_203F45C->unk_3D = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_00B;
-    gUnknown_203F45C->unk_3E = gUnknown_203F458->unk_000C[gUnknown_203F458->unk_0000].unk_004[r10].unk_00C;
+    gUnknown_203F45C->unk_3C = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
+    gUnknown_203F45C->unk_3D = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_00B;
+    gUnknown_203F45C->unk_3E = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_00C;
     SetVBlankCounter1Ptr(gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx]);
     sub_815DD2C();
 }
@@ -270,3 +286,110 @@ void sub_815DC40(u8 * dest, u8 opponentIdx)
     else
         sub_815DEFC(gUnknown_203F45C->unk_30, dest);
 }
+
+#ifdef NONMATCHING
+void sub_815DC8C(void) // fakematching
+{
+    u32 whichTimer = gSaveBlock1Ptr->unkArrayIdx;
+    s32 r4;
+    const struct UnkSubstruct_203F458_000C *const * r7;
+
+    gUnknown_203F458 = AllocZeroed(sizeof(*gUnknown_203F458));
+    gUnknown_203F458->unk_0000 = gMapHeader.mapDataId - 0x2A;
+    if (sub_815D834() == TRUE)
+        sub_815D80C(&gUnknown_203F458->unk_0004);
+    else
+    {
+        struct UnkStruct_203F458 * r0_ = gUnknown_203F458;
+        const struct Unk_203F458_Header * r1 = &gUnknown_84827AC;
+//        *r0_ = *r1;
+        memcpy(&r0_->unk_0004.unk_0000, r1, sizeof(struct Unk_203F458_Header));
+//        gUnknown_203F458->unk_0004.unk_0000 = gUnknown_84827AC;
+        r7 = gUnknown_84827B4[whichTimer];
+        for (r4 = 0; r4 < 8; r4++)
+        {
+            void * r0 = gUnknown_203F458;
+            r0 = r4 * sizeof(struct UnkSubstruct_203F458_000C) + r0;
+            r0 += offsetof(struct UnkStruct_203F458, unk_0004.unk_0008);
+            memcpy(r0, r7[r4], sizeof(struct UnkSubstruct_203F458_000C));
+//            r0[r4] = *r7[r4];
+        }
+        gUnknown_203F458->unk_0004.unk_0000.unk4 = CalcByteArraySum((void *)gUnknown_203F458->unk_0004.unk_0008, sizeof(gUnknown_203F458->unk_0004.unk_0008));
+        sub_815EC0C();
+    }
+}
+#else
+NAKED
+void sub_815DC8C(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tldr r0, _0815DCBC @ =gSaveBlock1Ptr\n"
+                "\tldr r0, [r0]\n"
+                "\tldr r1, _0815DCC0 @ =0x00003d34\n"
+                "\tadds r0, r1\n"
+                "\tldr r5, [r0]\n"
+                "\tldr r4, _0815DCC4 @ =gUnknown_203F458\n"
+                "\tldr r0, _0815DCC8 @ =0x00001f0c\n"
+                "\tbl AllocZeroed\n"
+                "\tstr r0, [r4]\n"
+                "\tldr r1, _0815DCCC @ =gMapHeader\n"
+                "\tldrb r1, [r1, 0x12]\n"
+                "\tsubs r1, 0x2A\n"
+                "\tstrb r1, [r0]\n"
+                "\tbl sub_815D834\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _0815DCD0\n"
+                "\tldr r0, [r4]\n"
+                "\tadds r0, 0x4\n"
+                "\tbl sub_815D80C\n"
+                "\tb _0815DD18\n"
+                "\t.align 2, 0\n"
+                "_0815DCBC: .4byte gSaveBlock1Ptr\n"
+                "_0815DCC0: .4byte 0x00003d34\n"
+                "_0815DCC4: .4byte gUnknown_203F458\n"
+                "_0815DCC8: .4byte 0x00001f0c\n"
+                "_0815DCCC: .4byte gMapHeader\n"
+                "_0815DCD0:\n"
+                "\tldr r0, [r4]\n"
+                "\tldr r1, _0815DD20 @ =gUnknown_84827AC\n"
+                "\tadds r0, 0x4\n"
+                "\tmovs r2, 0x8\n"
+                "\tbl memcpy\n"
+                "\tlsls r1, r5, 5\n"
+                "\tldr r0, _0815DD24 @ =gUnknown_84827B4\n"
+                "\tadds r7, r1, r0\n"
+                "\tmovs r5, 0\n"
+                "\tmovs r4, 0x7\n"
+                "_0815DCE6:\n"
+                "\tldr r6, _0815DD28 @ =gUnknown_203F458\n"
+                "\tldr r0, [r6]\n"
+                "\tadds r0, r5, r0\n"
+                "\tadds r0, 0xC\n"
+                "\tldm r7!, {r1}\n"
+                "\tmovs r2, 0xF8\n"
+                "\tlsls r2, 2\n"
+                "\tbl memcpy\n"
+                "\tmovs r0, 0xF8\n"
+                "\tlsls r0, 2\n"
+                "\tadds r5, r0\n"
+                "\tsubs r4, 0x1\n"
+                "\tcmp r4, 0\n"
+                "\tbge _0815DCE6\n"
+                "\tldr r0, [r6]\n"
+                "\tadds r0, 0xC\n"
+                "\tmovs r1, 0xF8\n"
+                "\tlsls r1, 5\n"
+                "\tbl CalcByteArraySum\n"
+                "\tldr r1, [r6]\n"
+                "\tstr r0, [r1, 0x8]\n"
+                "\tbl sub_815EC0C\n"
+                "_0815DD18:\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_0815DD20: .4byte gUnknown_84827AC\n"
+                "_0815DD24: .4byte gUnknown_84827B4\n"
+                "_0815DD28: .4byte gUnknown_203F458");
+}
+#endif // NONMATCHING

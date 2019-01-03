@@ -331,7 +331,7 @@ gUnknown_847AF8C::
 	trainerid 130, 0 @ OT ID
 	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000082 @ personality
-	.string "MR。{TRANSPARENT}MIME$", 11
+	.string "MR. MIME$", 11
 	.byte 255 @ friendship
 
 	.string "$", 11
@@ -744,7 +744,7 @@ gUnknown_847B36C::
 	.align 2
 gUnknown_847B74C::
 	.byte 0x04, 0x08, 0x01, 0x09
-	.string "JOS{TRANSPARENT}を{TRANSPARENT}ANNE$", 11
+	.string "JOS & ANNE$", 11
 	.byte 0x7f, 0x07, 0x00
 
 	.2byte EC_WORD_I, EC_WORD_CAN_T, EC_WORD_LOSE, EC_WORD_TO, EC_WORD_YOU, EC_WORD_HERE
@@ -824,7 +824,7 @@ gUnknown_847B74C::
 	.string "CROBAT$", 11
 	.byte 255 @ friendship
 
-	.string "JOS{TRANSPARENT}を{TRANSPARENT}ANNE$", 11
+	.string "JOS & ANNE$", 11
 	.byte 0x7f, 0x07, 0x00
 
 	.2byte EC_WORD_HERE_GOES, EC_WORD_EXCL_EXCL, EC_WORD_GET, EC_WORD_READY, EC_WORD_TO, EC_WORD_LOSE
@@ -989,7 +989,7 @@ gUnknown_847B74C::
 	.align 2
 gUnknown_847BB2C::
 	.byte 0x05, 0x08, 0x01, 0x04
-	.string "EMY{TRANSPARENT}を{TRANSPARENT}ALEK$", 11
+	.string "EMY & ALEK$", 11
 	.byte 0x80, 0x01, 0x00
 
 	.2byte EC_WORD_I_AM, EC_WORD_SO, EC_WORD_LOST, EC_WORD_IN, EC_WORD_LOVEY_DOVEY, EC_WORD_HAPPINESS
@@ -1069,7 +1069,7 @@ gUnknown_847BB2C::
 	.string "URSARING$", 11
 	.byte 255 @ friendship
 
-	.string "EMY{TRANSPARENT}を{TRANSPARENT}ALEK$", 11
+	.string "EMY & ALEK$", 11
 	.byte 0x80, 0x01, 0x00
 
 	.2byte EC_WORD_I_AM, EC_WORD_GIDDY, EC_WORD_WITH, EC_WORD_LOVEY_DOVEY, EC_WORD_JOY, EC_WORD_EXCL_EXCL
@@ -1234,7 +1234,7 @@ gUnknown_847BB2C::
 	.align 2
 gUnknown_847BF0C::
 	.byte 0x06, 0x08, 0x01, 0x00
-	.string "JO{TRANSPARENT}を{TRANSPARENT}HALEY$", 11
+	.string "JO & HALEY$", 11
 	.byte 0x81, 0x05, 0x00
 
 	.2byte EC_WORD_WE_RE, EC_WORD_USING, EC_WORD_THAT, EC_WORD_STRATEGY, EC_WORD_OKAY, EC_WORD_QUES
@@ -1311,10 +1311,10 @@ gUnknown_847BF0C::
 	trainerid 0, 4096 @ OT ID
 	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000005 @ personality
-	.string "MR。{TRANSPARENT}MIME$", 11
+	.string "MR. MIME$", 11
 	.byte 255 @ friendship
 
-	.string "JO{TRANSPARENT}を{TRANSPARENT}HALEY$", 11
+	.string "JO & HALEY$", 11
 	.byte 0x81, 0x05, 0x00
 
 	.2byte EC_WORD_YOU, EC_WORD_YOU, EC_WORD_YOU, EC_WORD_BETTER, EC_WORD_NOT, EC_WORD_WIN
@@ -2704,7 +2704,7 @@ gUnknown_847D26C::
 	.align 2
 gUnknown_847D64C::
 	.byte 0x0c, 0x08, 0x01, 0x02
-	.string "RIC{TRANSPARENT}を{TRANSPARENT}RENE$", 11
+	.string "RIC & RENE$", 11
 	.byte 0x81, 0x05, 0x00
 
 	.2byte EC_WORD_MY, EC_WORD_BIG, EC_WORD_BROTHER, EC_WORD_IS, EC_WORD_REALLY, EC_WORD_AWESOME
@@ -2784,7 +2784,7 @@ gUnknown_847D64C::
 	.string "POLIWRATH$", 11
 	.byte 255 @ friendship
 
-	.string "RIC{TRANSPARENT}を{TRANSPARENT}RENE$", 11
+	.string "RIC & RENE$", 11
 	.byte 0x81, 0x05, 0x00
 
 	.2byte EC_WORD_I_AM, EC_WORD_REALLY, EC_WORD_AWESOME, EC_WORD_EXCL, 0xFFFF, 0xFFFF
@@ -2949,7 +2949,7 @@ gUnknown_847D64C::
 	.align 2
 gUnknown_847DA2C::
 	.byte 0x0d, 0x08, 0x01, 0x0d
-	.string "JEN{TRANSPARENT}を{TRANSPARENT}KIRA$", 11
+	.string "JEN & KIRA$", 11
 	.byte 0x7e, 0x05, 0x00
 
 	.2byte EC_WORD_I_AM, EC_WORD_GOING, EC_WORD_TO, EC_WORD_TRY, EC_WORD_HARD, EC_WORD_EXCL
@@ -3029,7 +3029,7 @@ gUnknown_847DA2C::
 	.string "UMBREON$", 11
 	.byte 255 @ friendship
 
-	.string "JEN{TRANSPARENT}を{TRANSPARENT}KIRA$", 11
+	.string "JEN & KIRA$", 11
 	.byte 0x7e, 0x03, 0x00
 
 	.2byte EC_WORD_LET_S, EC_WORD_TRY, EC_WORD_HARD, EC_WORD_EXCL, 0xFFFF, 0xFFFF
@@ -3194,7 +3194,7 @@ gUnknown_847DA2C::
 	.align 2
 gUnknown_847DE0C::
 	.byte 0x0e, 0x08, 0x01, 0x08
-	.string "ISAC{TRANSPARENT}を{TRANSPARENT}MAG$", 11
+	.string "ISAC & MAG$", 11
 	.byte 0x7f, 0x01, 0x00
 
 	.2byte EC_WORD_OUR, EC_MOVE(EARTHQUAKE), EC_WORD_WILL, EC_WORD_MAKE, EC_WORD_YOU, EC_WORD_SHAKY
@@ -3274,7 +3274,7 @@ gUnknown_847DE0C::
 	.string "STEELIX$", 11
 	.byte 255 @ friendship
 
-	.string "ISAC{TRANSPARENT}を{TRANSPARENT}MAG$", 11
+	.string "ISAC & MAG$", 11
 	.byte 0x7f, 0x01, 0x00
 
 	.2byte EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_DOESN_T, EC_WORD_GET, EC_WORD_ALL, EC_WORD_SHAKY
@@ -4664,7 +4664,7 @@ gUnknown_847F16C::
 	.align 2
 gUnknown_847F54C::
 	.byte 0x14, 0x08, 0x01, 0x0c
-	.string "KAT{TRANSPARENT}を{TRANSPARENT}KIPP$", 11
+	.string "KAT & KIPP$", 11
 	.byte 0x82, 0x04, 0x00
 
 	.2byte EC_WORD_I_AM, EC_WORD_GOING, EC_WORD_TO, EC_WORD_TRY, EC_WORD_MY, EC_WORD_BEST
@@ -4744,7 +4744,7 @@ gUnknown_847F54C::
 	.string "SANDSLASH$", 11
 	.byte 255 @ friendship
 
-	.string "KAT{TRANSPARENT}を{TRANSPARENT}KIPP$", 11
+	.string "KAT & KIPP$", 11
 	.byte 0x82, 0x04, 0x00
 
 	.2byte EC_WORD_FUFUFU, EC_WORD_ELLIPSIS, EC_WORD_WE, EC_WORD_NEVER, EC_WORD_LOSE, EC_WORD_EXCL
@@ -4909,7 +4909,7 @@ gUnknown_847F54C::
 	.align 2
 gUnknown_847F92C::
 	.byte 0x15, 0x08, 0x01, 0x08
-	.string "GEBをMEGAN$", 11
+	.string "GEB&MEGAN$", 11
 	.byte 0x7f, 0x07, 0x00
 
 	.2byte EC_WORD_YOU_RE, EC_WORD_OUR, EC_WORD_OPPONENT, EC_WORD_QUES, EC_WORD_PUSHOVER, EC_WORD_HAHAHA
@@ -4989,7 +4989,7 @@ gUnknown_847F92C::
 	.string "GIRAFARIG$", 11
 	.byte 255 @ friendship
 
-	.string "GEBをMEGAN$", 11
+	.string "GEB&MEGAN$", 11
 	.byte 0x7f, 0x07, 0x00
 
 	.2byte EC_WORD_YOU_RE, EC_WORD_OUR, EC_WORD_FOE, EC_WORD_QUES, EC_WORD_GIGGLE, EC_WORD_ELLIPSIS
@@ -5154,7 +5154,7 @@ gUnknown_847F92C::
 	.align 2
 gUnknown_847FD0C::
 	.byte 0x16, 0x08, 0x01, 0x05
-	.string "LISAをLEAH$", 11
+	.string "LISA&LEAH$", 11
 	.byte 0x7e, 0x01, 0x00
 
 	.2byte EC_WORD_ABSOLUTELY, EC_WORD_WE_RE, EC_WORD_GOING, EC_WORD_TO, EC_WORD_WIN, EC_WORD_EXCL
@@ -5234,7 +5234,7 @@ gUnknown_847FD0C::
 	.string "HORSEA$", 11
 	.byte 255 @ friendship
 
-	.string "LISAをLEAH$", 11
+	.string "LISA&LEAH$", 11
 	.byte 0x7e, 0x01, 0x00
 
 	.2byte EC_WORD_CAN, EC_WORD_WE, EC_WORD_WIN, EC_WORD_QUES, EC_WORD_IT_S, EC_WORD_EXCITING
@@ -6396,7 +6396,7 @@ gUnknown_848106C::
 	trainerid 0, 4096 @ OT ID
 	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
-	.string "MR。{TRANSPARENT}MIME$", 11
+	.string "MR. MIME$", 11
 	.byte 255 @ friendship
 
 	.align 2
@@ -6624,7 +6624,7 @@ gUnknown_848106C::
 	.align 2
 gUnknown_848144C::
 	.byte 0x1c, 0x08, 0x01, 0x0b
-	.string "NIA{TRANSPARENT}を{TRANSPARENT}CARL$", 11
+	.string "NIA & CARL$", 11
 	.byte 0x7f, 0x04, 0x00
 
 	.2byte EC_WORD_HERE_GOES, EC_WORD_MY, EC_WORD_DIGITAL, EC_WORD_ROMANTIC, EC_WORD_HERO, EC_WORD_STRATEGY
@@ -6704,7 +6704,7 @@ gUnknown_848144C::
 	.string "RAICHU$", 11
 	.byte 255 @ friendship
 
-	.string "NIA{TRANSPARENT}を{TRANSPARENT}CARL$", 11
+	.string "NIA & CARL$", 11
 	.byte 0x7f, 0x04, 0x00
 
 	.2byte EC_WORD_MASTER, EC_WORD_COMPLETE, EC_WORD_FASHION, EC_WORD_SYSTEM, EC_WORD_START, EC_WORD_EXCL
@@ -6869,7 +6869,7 @@ gUnknown_848144C::
 	.align 2
 gUnknown_848182C::
 	.byte 0x1d, 0x08, 0x01, 0x03
-	.string "AXE{TRANSPARENT}を{TRANSPARENT}REN$", 11
+	.string "AXE & REN$", 11
 	.byte 0x82, 0x02, 0x00
 
 	.2byte EC_WORD_IT_S, EC_WORD_GOING, EC_WORD_TO, EC_WORD_GET, EC_WORD_AWFULLY, EC_WORD_COLD
@@ -6949,7 +6949,7 @@ gUnknown_848182C::
 	.string "GYARADOS$", 11
 	.byte 255 @ friendship
 
-	.string "AXE{TRANSPARENT}を{TRANSPARENT}REN$", 11
+	.string "AXE & REN$", 11
 	.byte 0x82, 0x02, 0x00
 
 	.2byte EC_WORD_OUR, EC_WORD_SWIFT_SWIM, EC_WORD_LEFT, EC_WORD_ME, EC_WORD_FEELING, EC_WORD_COLD
@@ -7114,7 +7114,7 @@ gUnknown_848182C::
 	.align 2
 gUnknown_8481C0C::
 	.byte 0x1e, 0x08, 0x01, 0x05
-	.string "KATI{TRANSPARENT}を{TRANSPARENT}GEB$", 11
+	.string "KATI & GEB$", 11
 	.byte 0x80, 0x02, 0x00
 
 	.2byte EC_WORD_WELCOME, EC_WORD_TO, EC_WORD_OUR, EC_WORD_LOVEY_DOVEY, EC_MOVE2(THUNDER_WAVE), EC_MOVE(SANDSTORM)
@@ -7194,7 +7194,7 @@ gUnknown_8481C0C::
 	.string "GOLDUCK$", 11
 	.byte 255 @ friendship
 
-	.string "KATI{TRANSPARENT}を{TRANSPARENT}GEB$", 11
+	.string "KATI & GEB$", 11
 	.byte 0x80, 0x02, 0x00
 
 	.2byte EC_WORD_I_AM, EC_WORD_PLUS, EC_WORD_YOU_RE, EC_WORD_MINUS, EC_WORD_LOVEY_DOVEY, EC_WORD_MAGNET_PULL

@@ -25,13 +25,15 @@ struct UnkStruct_8479D34
 
 struct UnkSubstruct_203F458_000C_004
 {
-    /* 0x004 */ u8 unk_000[11];
-    /* 0x00F */ u8 unk_00B;
-    /* 0x010 */ u8 unk_00C;
-    /* 0x011 */ u8 unk_00D[13];
+    /* 0x000 */ u8 unk_000[11];
+    /* 0x00B */ u8 unk_00B;
+    /* 0x00C */ u8 unk_00C;
+    /* 0x00D */ u8 unk_00D;
+    /* 0x00E */ u16 unk_00E[6];
     /* 0x01A */ u16 unk_01A[6];
     /* 0x026 */ u16 unk_026[6];
-    /* 0x032 */ u8 filler_032[0x116];
+    /* 0x032 */ u16 unk_032[6];
+    /* 0x040 */ struct BattleTowerPokemon unk_040[PARTY_SIZE];
 }; // size: 328
 
 struct UnkSubstruct_203F458_000C

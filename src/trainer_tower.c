@@ -9,6 +9,8 @@
 #include "event_data.h"
 #include "random.h"
 #include "cereader_tool.h"
+#include "easy_chat.h"
+#include "text.h"
 #include "overworld.h"
 
 struct UnkStruct_8479D34
@@ -72,6 +74,22 @@ struct UnkStruct_203F45C
     /* 0x3E */ u8 unk_3E;
 };
 
+struct UnkStruct_8479ED8
+{
+    u8 unk0;
+    u8 unk1;
+    bool8 unk2;
+};
+
+struct UnkStruct_847A024
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    bool8 unk3;
+    bool8 unk4;
+};
+
 EWRAM_DATA struct UnkStruct_203F458 * gUnknown_203F458 = NULL;
 EWRAM_DATA struct UnkStruct_203F45C * gUnknown_203F45C = NULL;
 
@@ -109,6 +127,8 @@ extern void (*const gUnknown_847A230[])(void);
 extern const struct Unk_203F458_Header gUnknown_84827AC;
 extern const struct UnkSubstruct_203F458_000C *const gUnknown_84827B4[][8];
 extern const u16 gUnknown_847A284[8][3];
+extern const struct UnkStruct_8479ED8 gUnknown_8479ED8[83];
+extern const struct UnkStruct_847A024 gUnknown_847A024[10];
 
 bool32 sub_815D7BC(void * dest, void * buffer)
 {
@@ -415,5 +435,89 @@ void sub_815DD44(void)
         gSpecialVar_Result = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
         sub_8055D40(gUnknown_847A284[gUnknown_203F458->unk_0000][gSpecialVar_Result]);
         sub_815DDB0();
+    }
+}
+
+void sub_815DDB0(void)
+{
+    s32 r3, r4;
+    u8 r1, r2, r4_;
+    switch (gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002)
+    {
+        case 0:
+            r2 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[0].unk_00B;
+            for (r3 = 0; r3 < NELEMS(gUnknown_8479ED8); r3++)
+            {
+                if (gUnknown_8479ED8[r3].unk1 == r2)
+                    break;
+            }
+            if (r3 != NELEMS(gUnknown_8479ED8))
+                r1 = gUnknown_8479ED8[r3].unk0;
+            else
+                r1 = 18;
+            VarSet(VAR_0x4011, r1);
+            break;
+        case 1:
+            r2 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[0].unk_00B;
+            for (r3 = 0; r3 < NELEMS(gUnknown_847A024); r3++)
+            {
+                if (gUnknown_847A024[r3].unk2 == r2)
+                    break;
+            }
+            if (r3 != NELEMS(gUnknown_847A024))
+            {
+                r1  = gUnknown_847A024[r3].unk0;
+                r4_ = gUnknown_847A024[r3].unk1;
+            }
+            else
+            {
+                r1  = 18;
+                r4_ = 18;
+            }
+            VarSet(VAR_0x4010, r1);
+            VarSet(VAR_0x4013, r4_);
+            break;
+        case 2:
+            for (r4 = 0; r4 < 3; r4++)
+            {
+                r2 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_00B;
+                for (r3 = 0; r3 < NELEMS(gUnknown_8479ED8); r3++)
+                {
+                    if (gUnknown_8479ED8[r3].unk1 == r2)
+                        break;
+                }
+                if (r3 != NELEMS(gUnknown_8479ED8))
+                    r1 = gUnknown_8479ED8[r3].unk0;
+                else
+                    r1 = 18;
+                switch (r4)
+                {
+                    case 0:
+                        VarSet(VAR_0x4012, r1);
+                        break;
+                    case 1:
+                        VarSet(VAR_0x4010, r1);
+                        break;
+                    case 2:
+                        VarSet(VAR_0x4011, r1);
+                        break;
+                }
+            }
+    }
+}
+
+void sub_815DEFC(u16 * ecWords, u8 * dest)
+{
+    s32 r1;
+    ConvertEasyChatWordsToString(dest, ecWords, 3, 2);
+    if ((unsigned)GetStringWidth(2, dest, -1) > 196)
+    {
+        ConvertEasyChatWordsToString(dest, ecWords, 2, 3);
+        r1 = 0;
+        while (dest[r1++] != CHAR_NEWLINE)
+            ;
+        while (dest[r1] != CHAR_NEWLINE)
+            r1++;
+        dest[r1] = CHAR_PROMPT_SCROLL;
     }
 }

@@ -271,7 +271,7 @@ gMapSecName_IcefallCave::
 gMapSecName_RocketWarehouse::
 	.string "ROCKET WAREHOUSE$"
 
-gMapSecName_TrainerTower2::
+gMapSecName_TrainerTower_2::
 	.string "TRAINER TOWER$"
 
 gMapSecName_DottedHole::

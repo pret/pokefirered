@@ -2287,7 +2287,7 @@ gUnknown_83F1CAC:: @ 83F1CAC
 	.4byte gMapSecName_BerryForest
 	.4byte gMapSecName_IcefallCave
 	.4byte gMapSecName_RocketWarehouse
-	.4byte gMapSecName_TrainerTower2
+	.4byte gMapSecName_TrainerTower_2
 	.4byte gMapSecName_DottedHole
 	.4byte gMapSecName_LostCave
 	.4byte gMapSecName_PatternBush

@@ -1,3 +1,11 @@
+	.macro ivs hp, atk, def, speed, spatk, spdef, altability
+	.4byte \hp | (\atk << 5) | (\def << 10) | (\speed << 15) | (\spatk << 20) | (\spdef << 25) | (\altability << 31)
+	.endm
+
+	.macro trainerid id, secret
+	.4byte \id | (\secret << 16)
+	.endm
+
 	.align 2
 gUnknown_847ABAC::
 	.byte 0x01, 0x08, 0x00, 0x07
@@ -15,8 +23,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 200, 0, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "RATICATE$", 11
 	.byte 255 @ friendship
@@ -27,8 +35,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 0, 0, 210, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000056 @ personality
 	.string "MAGMAR$", 11
 	.byte 255 @ friendship
@@ -39,8 +47,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 200, 0, 0, 200, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "MAGCARGO$", 11
 	.byte 255 @ friendship
@@ -51,8 +59,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 0, 0, 210, 200, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000087 @ personality
 	.string "PRIMEAPE$", 11
 	.byte 255 @ friendship
@@ -63,8 +71,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 200, 0, 110, 200, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000081 @ personality
 	.string "GOLBAT$", 11
 	.byte 255 @ friendship
@@ -75,8 +83,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 0, 100, 0, 210, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "SLOWBRO$", 11
 	.byte 255 @ friendship
@@ -95,8 +103,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -107,8 +115,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -119,8 +127,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -131,8 +139,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -143,8 +151,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -155,8 +163,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -175,8 +183,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -187,8 +195,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -199,8 +207,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -211,8 +219,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -223,8 +231,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -235,8 +243,8 @@ gUnknown_847ABAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -260,8 +268,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 110, 0, 200, 0, 0 @ EVs
 	.align 2
-	.4byte 138 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 138, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "MEOWTH$", 11
 	.byte 255 @ friendship
@@ -272,8 +280,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 200, 0, 200, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "FLAREON$", 11
 	.byte 255 @ friendship
@@ -284,8 +292,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 0, 210, 0, 200, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "PORYGON$", 11
 	.byte 255 @ friendship
@@ -296,8 +304,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000010 @ personality
 	.string "CHANSEY$", 11
 	.byte 255 @ friendship
@@ -308,8 +316,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 100, 100, 100, 0, 110 @ EVs
 	.align 2
-	.4byte 133 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 133, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000085 @ personality
 	.string "FARFETCH’D$", 11
 	.byte 255 @ friendship
@@ -320,8 +328,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 130 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 130, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000082 @ personality
 	.string "MR。{TRANSPARENT}MIME$", 11
 	.byte 255 @ friendship
@@ -340,8 +348,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -352,8 +360,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -364,8 +372,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -376,8 +384,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -388,8 +396,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -400,8 +408,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -420,8 +428,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -432,8 +440,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -444,8 +452,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -456,8 +464,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -468,8 +476,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -480,8 +488,8 @@ gUnknown_847AF8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -505,8 +513,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000008 @ personality
 	.string "CHANSEY$", 11
 	.byte 255 @ friendship
@@ -517,8 +525,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 200, 0, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "CLEFABLE$", 11
 	.byte 255 @ friendship
@@ -529,8 +537,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "TOGETIC$", 11
 	.byte 255 @ friendship
@@ -541,8 +549,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000020 @ personality
 	.string "TOGETIC$", 11
 	.byte 255 @ friendship
@@ -553,8 +561,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "CHANSEY$", 11
 	.byte 255 @ friendship
@@ -565,8 +573,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 200, 0, 200, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x000000C0 @ personality
 	.string "CLEFABLE$", 11
 	.byte 255 @ friendship
@@ -585,8 +593,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -597,8 +605,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -609,8 +617,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -621,8 +629,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -633,8 +641,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -645,8 +653,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -665,8 +673,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -677,8 +685,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -689,8 +697,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -701,8 +709,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -713,8 +721,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -725,8 +733,8 @@ gUnknown_847B36C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -750,8 +758,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 100, 0, 110, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x00000010 @ personality
 	.string "RAPIDASH$", 11
 	.byte 255 @ friendship
@@ -762,8 +770,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 0, 200, 200, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000015 @ personality
 	.string "NINETALES$", 11
 	.byte 255 @ friendship
@@ -774,8 +782,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 0, 0, 210, 100, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "MISDREAVUS$", 11
 	.byte 255 @ friendship
@@ -786,8 +794,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "ALAKAZAM$", 11
 	.byte 255 @ friendship
@@ -798,8 +806,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "BLISSEY$", 11
 	.byte 255 @ friendship
@@ -810,8 +818,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 0, 100, 210, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000017 @ personality
 	.string "CROBAT$", 11
 	.byte 255 @ friendship
@@ -830,8 +838,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x00000082 @ personality
 	.string "HOUNDOOM$", 11
 	.byte 255 @ friendship
@@ -842,8 +850,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x00000033 @ personality
 	.string "AERODACTYL$", 11
 	.byte 255 @ friendship
@@ -854,8 +862,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 0, 0, 200, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000056 @ personality
 	.string "ARCANINE$", 11
 	.byte 255 @ friendship
@@ -866,8 +874,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 100, 100, 0, 100, 110 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x0000008E @ personality
 	.string "WEEZING$", 11
 	.byte 255 @ friendship
@@ -878,8 +886,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 110, 0, 100, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000033 @ personality
 	.string "CHARIZARD$", 11
 	.byte 255 @ friendship
@@ -890,8 +898,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 55, 0, 100, 255, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000087 @ personality
 	.string "GENGAR$", 11
 	.byte 255 @ friendship
@@ -910,8 +918,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -922,8 +930,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -934,8 +942,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -946,8 +954,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -958,8 +966,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -970,8 +978,8 @@ gUnknown_847B74C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -995,8 +1003,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "TAUROS$", 11
 	.byte 255 @ friendship
@@ -1007,8 +1015,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "KANGASKHAN$", 11
 	.byte 255 @ friendship
@@ -1019,8 +1027,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 210, 100, 0, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000094 @ personality
 	.string "FEAROW$", 11
 	.byte 255 @ friendship
@@ -1031,8 +1039,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000024 @ personality
 	.string "TOGETIC$", 11
 	.byte 255 @ friendship
@@ -1043,8 +1051,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 110, 100, 100, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "PIDGEOT$", 11
 	.byte 255 @ friendship
@@ -1055,8 +1063,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "URSARING$", 11
 	.byte 255 @ friendship
@@ -1075,8 +1083,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 100, 255, 0, 55, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "LICKITUNG$", 11
 	.byte 255 @ friendship
@@ -1087,8 +1095,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000B @ personality
 	.string "NOCTOWL$", 11
 	.byte 255 @ friendship
@@ -1099,8 +1107,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000E @ personality
 	.string "FURRET$", 11
 	.byte 255 @ friendship
@@ -1111,8 +1119,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "RATICATE$", 11
 	.byte 255 @ friendship
@@ -1123,8 +1131,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000B @ personality
 	.string "WIGGLYTUFF$", 11
 	.byte 255 @ friendship
@@ -1135,8 +1143,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "PORYGON2$", 11
 	.byte 255 @ friendship
@@ -1155,8 +1163,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1167,8 +1175,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1179,8 +1187,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1191,8 +1199,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1203,8 +1211,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1215,8 +1223,8 @@ gUnknown_847BB2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1240,8 +1248,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 0, 50, 210, 0, 50 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "SNEASEL$", 11
 	.byte 255 @ friendship
@@ -1252,8 +1260,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "ALAKAZAM$", 11
 	.byte 255 @ friendship
@@ -1264,8 +1272,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 210, 0, 200, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000008 @ personality
 	.string "HITMONTOP$", 11
 	.byte 255 @ friendship
@@ -1276,8 +1284,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "GIRAFARIG$", 11
 	.byte 255 @ friendship
@@ -1288,8 +1296,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 100, 100, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "XATU$", 11
 	.byte 255 @ friendship
@@ -1300,8 +1308,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 200, 200, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "MR。{TRANSPARENT}MIME$", 11
 	.byte 255 @ friendship
@@ -1320,8 +1328,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000087 @ personality
 	.string "HYPNO$", 11
 	.byte 255 @ friendship
@@ -1332,8 +1340,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "HITMONCHAN$", 11
 	.byte 255 @ friendship
@@ -1344,8 +1352,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000043 @ personality
 	.string "MACHAMP$", 11
 	.byte 255 @ friendship
@@ -1356,8 +1364,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000087 @ personality
 	.string "HOUNDOOM$", 11
 	.byte 255 @ friendship
@@ -1368,8 +1376,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 0, 100, 100, 110, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000008C @ personality
 	.string "PRIMEAPE$", 11
 	.byte 255 @ friendship
@@ -1380,8 +1388,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 200, 0, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000085 @ personality
 	.string "HERACROSS$", 11
 	.byte 255 @ friendship
@@ -1400,8 +1408,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1412,8 +1420,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1424,8 +1432,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1436,8 +1444,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1448,8 +1456,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1460,8 +1468,8 @@ gUnknown_847BF0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -1485,8 +1493,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 30, 30, 0, 210, 30 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000043 @ personality
 	.string "MAGBY$", 11
 	.byte 0 @ friendship
@@ -1497,8 +1505,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 210, 30, 0, 30, 30 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x000000CA @ personality
 	.string "CLEFFA$", 11
 	.byte 255 @ friendship
@@ -1509,8 +1517,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 0, 45, 210, 0, 45 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x000000D2 @ personality
 	.string "IGGLYBUFF$", 11
 	.byte 255 @ friendship
@@ -1521,8 +1529,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 0, 45, 0, 210, 45 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "SMOOCHUM$", 11
 	.byte 255 @ friendship
@@ -1533,8 +1541,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 210, 45, 0, 0, 45 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000034 @ personality
 	.string "TOGEPI$", 11
 	.byte 0 @ friendship
@@ -1545,8 +1553,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 0, 45, 0, 210, 45 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000008E @ personality
 	.string "PICHU$", 11
 	.byte 0 @ friendship
@@ -1565,8 +1573,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 210, 45, 0, 0, 45 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x000000CA @ personality
 	.string "CLEFFA$", 11
 	.byte 0 @ friendship
@@ -1577,8 +1585,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 90, 210, 0, 0, 210, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000004D @ personality
 	.string "MAGBY$", 11
 	.byte 0 @ friendship
@@ -1589,8 +1597,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 210, 45, 0, 0, 45 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000034 @ personality
 	.string "TOGEPI$", 11
 	.byte 0 @ friendship
@@ -1601,8 +1609,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 90, 0, 210, 0, 0, 210 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "SMOOCHUM$", 11
 	.byte 0 @ friendship
@@ -1613,8 +1621,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 0, 45, 210, 0, 45 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "IGGLYBUFF$", 11
 	.byte 0 @ friendship
@@ -1625,8 +1633,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 90, 210, 0, 210, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "PICHU$", 11
 	.byte 0 @ friendship
@@ -1645,8 +1653,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 90, 210, 0, 0, 210, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000081 @ personality
 	.string "PICHU$", 11
 	.byte 0 @ friendship
@@ -1657,8 +1665,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 210, 0, 0, 0, 90 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000033 @ personality
 	.string "TOGEPI$", 11
 	.byte 0 @ friendship
@@ -1669,8 +1677,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 0, 150, 0, 0, 150 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x000000CF @ personality
 	.string "CLEFFA$", 11
 	.byte 0 @ friendship
@@ -1681,8 +1689,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 0, 210, 0, 0, 90 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x000000CF @ personality
 	.string "IGGLYBUFF$", 11
 	.byte 0 @ friendship
@@ -1693,8 +1701,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 200, 0, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "SMOOCHUM$", 11
 	.byte 0 @ friendship
@@ -1705,8 +1713,8 @@ gUnknown_847C2EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 90, 210, 0, 0, 210, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000004D @ personality
 	.string "MAGBY$", 11
 	.byte 0 @ friendship
@@ -1730,8 +1738,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 210, 0, 100, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "PINSIR$", 11
 	.byte 255 @ friendship
@@ -1742,8 +1750,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 200, 0, 110, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000035 @ personality
 	.string "CHARIZARD$", 11
 	.byte 255 @ friendship
@@ -1754,8 +1762,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 210, 200, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000009 @ personality
 	.string "RHYDON$", 11
 	.byte 255 @ friendship
@@ -1766,8 +1774,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 200, 0, 200, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000003F @ personality
 	.string "ARCANINE$", 11
 	.byte 255 @ friendship
@@ -1778,8 +1786,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 210, 200, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "GOLEM$", 11
 	.byte 255 @ friendship
@@ -1790,8 +1798,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 110, 200, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x9EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 1 @ IVs, ability
 	.4byte 0x00000008 @ personality
 	.string "HOUNDOOM$", 11
 	.byte 255 @ friendship
@@ -1810,8 +1818,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "SANDSLASH$", 11
 	.byte 255 @ friendship
@@ -1822,8 +1830,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "DRAGONAIR$", 11
 	.byte 255 @ friendship
@@ -1834,8 +1842,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 100, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x9EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 1 @ IVs, ability
 	.4byte 0x00000094 @ personality
 	.string "RAPIDASH$", 11
 	.byte 255 @ friendship
@@ -1846,8 +1854,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000021 @ personality
 	.string "FLAREON$", 11
 	.byte 255 @ friendship
@@ -1858,8 +1866,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 100, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000017 @ personality
 	.string "NIDOQUEEN$", 11
 	.byte 255 @ friendship
@@ -1870,8 +1878,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 200, 0, 200, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "PERSIAN$", 11
 	.byte 255 @ friendship
@@ -1890,8 +1898,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000008 @ personality
 	.string "HITMONLEE$", 11
 	.byte 255 @ friendship
@@ -1902,8 +1910,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000017 @ personality
 	.string "SCYTHER$", 11
 	.byte 255 @ friendship
@@ -1914,8 +1922,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 100, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000053 @ personality
 	.string "MAGMAR$", 11
 	.byte 255 @ friendship
@@ -1926,8 +1934,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000003F @ personality
 	.string "MACHAMP$", 11
 	.byte 255 @ friendship
@@ -1938,8 +1946,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 200, 110, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000008 @ personality
 	.string "PRIMEAPE$", 11
 	.byte 255 @ friendship
@@ -1950,8 +1958,8 @@ gUnknown_847C6CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 100, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "POLIWRATH$", 11
 	.byte 255 @ friendship
@@ -1975,8 +1983,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "MURKROW$", 11
 	.byte 255 @ friendship
@@ -1987,8 +1995,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "TAUROS$", 11
 	.byte 255 @ friendship
@@ -1999,8 +2007,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "SLOWBRO$", 11
 	.byte 255 @ friendship
@@ -2011,8 +2019,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "ARBOK$", 11
 	.byte 255 @ friendship
@@ -2023,8 +2031,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "NIDOKING$", 11
 	.byte 255 @ friendship
@@ -2035,8 +2043,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "RAPIDASH$", 11
 	.byte 255 @ friendship
@@ -2055,8 +2063,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2067,8 +2075,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2079,8 +2087,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2091,8 +2099,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2103,8 +2111,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2115,8 +2123,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2135,8 +2143,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2147,8 +2155,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2159,8 +2167,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2171,8 +2179,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2183,8 +2191,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2195,8 +2203,8 @@ gUnknown_847CAAC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2220,8 +2228,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "CLEFAIRY$", 11
 	.byte 255 @ friendship
@@ -2232,8 +2240,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "TOGEPI$", 11
 	.byte 255 @ friendship
@@ -2244,8 +2252,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "MEOWTH$", 11
 	.byte 255 @ friendship
@@ -2256,8 +2264,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "JIGGLYPUFF$", 11
 	.byte 255 @ friendship
@@ -2268,8 +2276,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000025 @ personality
 	.string "SNORLAX$", 11
 	.byte 255 @ friendship
@@ -2280,8 +2288,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "SNUBBULL$", 11
 	.byte 255 @ friendship
@@ -2300,8 +2308,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2312,8 +2320,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2324,8 +2332,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2336,8 +2344,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2348,8 +2356,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2360,8 +2368,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2380,8 +2388,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2392,8 +2400,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2404,8 +2412,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2416,8 +2424,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2428,8 +2436,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2440,8 +2448,8 @@ gUnknown_847CE8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2465,8 +2473,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "BUTTERFREE$", 11
 	.byte 255 @ friendship
@@ -2477,8 +2485,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "BEEDRILL$", 11
 	.byte 255 @ friendship
@@ -2489,8 +2497,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "PARASECT$", 11
 	.byte 255 @ friendship
@@ -2501,8 +2509,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x9EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 1 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "YANMA$", 11
 	.byte 255 @ friendship
@@ -2513,8 +2521,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "SHUCKLE$", 11
 	.byte 255 @ friendship
@@ -2525,8 +2533,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "FORRETRESS$", 11
 	.byte 255 @ friendship
@@ -2545,8 +2553,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2557,8 +2565,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2569,8 +2577,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2581,8 +2589,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2593,8 +2601,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2605,8 +2613,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2625,8 +2633,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2637,8 +2645,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2649,8 +2657,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2661,8 +2669,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2673,8 +2681,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2685,8 +2693,8 @@ gUnknown_847D26C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2710,8 +2718,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "HITMONLEE$", 11
 	.byte 255 @ friendship
@@ -2722,8 +2730,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000007F @ personality
 	.string "RHYDON$", 11
 	.byte 255 @ friendship
@@ -2734,8 +2742,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "GOLEM$", 11
 	.byte 255 @ friendship
@@ -2746,8 +2754,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000004F @ personality
 	.string "MAGMAR$", 11
 	.byte 255 @ friendship
@@ -2758,8 +2766,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000007F @ personality
 	.string "HERACROSS$", 11
 	.byte 255 @ friendship
@@ -2770,8 +2778,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000097 @ personality
 	.string "POLIWRATH$", 11
 	.byte 255 @ friendship
@@ -2790,8 +2798,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000004E @ personality
 	.string "MACHAMP$", 11
 	.byte 255 @ friendship
@@ -2802,8 +2810,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "PINSIR$", 11
 	.byte 255 @ friendship
@@ -2814,8 +2822,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "MAROWAK$", 11
 	.byte 255 @ friendship
@@ -2826,8 +2834,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "HITMONCHAN$", 11
 	.byte 255 @ friendship
@@ -2838,8 +2846,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000004F @ personality
 	.string "ELECTABUZZ$", 11
 	.byte 255 @ friendship
@@ -2850,8 +2858,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000097 @ personality
 	.string "POLIWRATH$", 11
 	.byte 255 @ friendship
@@ -2870,8 +2878,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2882,8 +2890,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2894,8 +2902,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2906,8 +2914,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2918,8 +2926,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2930,8 +2938,8 @@ gUnknown_847D64C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -2955,8 +2963,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000029 @ personality
 	.string "JOLTEON$", 11
 	.byte 255 @ friendship
@@ -2967,8 +2975,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000029 @ personality
 	.string "ESPEON$", 11
 	.byte 255 @ friendship
@@ -2979,8 +2987,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000033 @ personality
 	.string "FLAREON$", 11
 	.byte 255 @ friendship
@@ -2991,8 +2999,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000010 @ personality
 	.string "VAPOREON$", 11
 	.byte 255 @ friendship
@@ -3003,8 +3011,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000010 @ personality
 	.string "EEVEE$", 11
 	.byte 255 @ friendship
@@ -3015,8 +3023,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000010 @ personality
 	.string "UMBREON$", 11
 	.byte 255 @ friendship
@@ -3035,8 +3043,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 10 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 10, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "JOLTEON$", 11
 	.byte 255 @ friendship
@@ -3047,8 +3055,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 10 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 10, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "ESPEON$", 11
 	.byte 255 @ friendship
@@ -3059,8 +3067,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 13 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 13, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "FLAREON$", 11
 	.byte 255 @ friendship
@@ -3071,8 +3079,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 35 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 35, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000023 @ personality
 	.string "VAPOREON$", 11
 	.byte 255 @ friendship
@@ -3083,8 +3091,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 35 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 35, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000023 @ personality
 	.string "EEVEE$", 11
 	.byte 255 @ friendship
@@ -3095,8 +3103,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 35 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 35, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000023 @ personality
 	.string "UMBREON$", 11
 	.byte 255 @ friendship
@@ -3115,8 +3123,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3127,8 +3135,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3139,8 +3147,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3151,8 +3159,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3163,8 +3171,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3175,8 +3183,8 @@ gUnknown_847DA2C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3200,8 +3208,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "NIDOKING$", 11
 	.byte 255 @ friendship
@@ -3212,8 +3220,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "GLIGAR$", 11
 	.byte 255 @ friendship
@@ -3224,8 +3232,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "QUAGSIRE$", 11
 	.byte 0 @ friendship
@@ -3236,8 +3244,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "PILOSWINE$", 11
 	.byte 255 @ friendship
@@ -3248,8 +3256,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "GOLEM$", 11
 	.byte 255 @ friendship
@@ -3260,8 +3268,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "STEELIX$", 11
 	.byte 255 @ friendship
@@ -3280,8 +3288,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000B @ personality
 	.string "SKARMORY$", 11
 	.byte 255 @ friendship
@@ -3292,8 +3300,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000B @ personality
 	.string "MANTINE$", 11
 	.byte 255 @ friendship
@@ -3304,8 +3312,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000B @ personality
 	.string "JUMPLUFF$", 11
 	.byte 255 @ friendship
@@ -3316,8 +3324,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000B @ personality
 	.string "GENGAR$", 11
 	.byte 255 @ friendship
@@ -3328,8 +3336,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000B @ personality
 	.string "CROBAT$", 11
 	.byte 255 @ friendship
@@ -3340,8 +3348,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000B @ personality
 	.string "XATU$", 11
 	.byte 255 @ friendship
@@ -3360,8 +3368,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3372,8 +3380,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3384,8 +3392,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3396,8 +3404,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3408,8 +3416,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3420,8 +3428,8 @@ gUnknown_847DE0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -3445,8 +3453,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "VILEPLUME$", 11
 	.byte 255 @ friendship
@@ -3457,8 +3465,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x00000010 @ personality
 	.string "STARMIE$", 11
 	.byte 255 @ friendship
@@ -3469,8 +3477,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000001 @ personality
 	.string "URSARING$", 11
 	.byte 255 @ friendship
@@ -3481,8 +3489,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000001 @ personality
 	.string "NOCTOWL$", 11
 	.byte 255 @ friendship
@@ -3493,8 +3501,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000010 @ personality
 	.string "NINETALES$", 11
 	.byte 255 @ friendship
@@ -3505,8 +3513,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000001 @ personality
 	.string "LEDIAN$", 11
 	.byte 255 @ friendship
@@ -3525,8 +3533,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000088 @ personality
 	.string "GYARADOS$", 11
 	.byte 255 @ friendship
@@ -3537,8 +3545,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x0000008E @ personality
 	.string "VICTREEBEL$", 11
 	.byte 255 @ friendship
@@ -3549,8 +3557,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000097 @ personality
 	.string "DONPHAN$", 11
 	.byte 255 @ friendship
@@ -3561,8 +3569,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000097 @ personality
 	.string "FEAROW$", 11
 	.byte 255 @ friendship
@@ -3573,8 +3581,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x0000004F @ personality
 	.string "ARCANINE$", 11
 	.byte 255 @ friendship
@@ -3585,8 +3593,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000097 @ personality
 	.string "ARIADOS$", 11
 	.byte 255 @ friendship
@@ -3605,8 +3613,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000015 @ personality
 	.string "KINGDRA$", 11
 	.byte 255 @ friendship
@@ -3617,8 +3625,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x0000007F @ personality
 	.string "GOLEM$", 11
 	.byte 255 @ friendship
@@ -3629,8 +3637,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000001 @ personality
 	.string "DRAGONITE$", 11
 	.byte 255 @ friendship
@@ -3641,8 +3649,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000097 @ personality
 	.string "TYRANITAR$", 11
 	.byte 255 @ friendship
@@ -3653,8 +3661,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000013 @ personality
 	.string "AMPHAROS$", 11
 	.byte 255 @ friendship
@@ -3665,8 +3673,8 @@ gUnknown_847E1EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x0000002A @ personality
 	.string "VENUSAUR$", 11
 	.byte 255 @ friendship
@@ -3690,8 +3698,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "MURKROW$", 11
 	.byte 255 @ friendship
@@ -3702,8 +3710,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "RAPIDASH$", 11
 	.byte 255 @ friendship
@@ -3714,8 +3722,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "MILTANK$", 11
 	.byte 255 @ friendship
@@ -3726,8 +3734,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "GOLDUCK$", 11
 	.byte 255 @ friendship
@@ -3738,8 +3746,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "SANDSLASH$", 11
 	.byte 255 @ friendship
@@ -3750,8 +3758,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "NIDOQUEEN$", 11
 	.byte 255 @ friendship
@@ -3770,8 +3778,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "BELLOSSOM$", 11
 	.byte 255 @ friendship
@@ -3782,8 +3790,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "VICTREEBEL$", 11
 	.byte 255 @ friendship
@@ -3794,8 +3802,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "PARASECT$", 11
 	.byte 255 @ friendship
@@ -3806,8 +3814,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "VILEPLUME$", 11
 	.byte 255 @ friendship
@@ -3818,8 +3826,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "VENUSAUR$", 11
 	.byte 255 @ friendship
@@ -3830,8 +3838,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000025 @ personality
 	.string "MEGANIUM$", 11
 	.byte 255 @ friendship
@@ -3850,8 +3858,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "MAROWAK$", 11
 	.byte 255 @ friendship
@@ -3862,8 +3870,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "LAPRAS$", 11
 	.byte 255 @ friendship
@@ -3874,8 +3882,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000057 @ personality
 	.string "ARCANINE$", 11
 	.byte 255 @ friendship
@@ -3886,8 +3894,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000089 @ personality
 	.string "RAICHU$", 11
 	.byte 255 @ friendship
@@ -3898,8 +3906,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "TOGETIC$", 11
 	.byte 255 @ friendship
@@ -3910,8 +3918,8 @@ gUnknown_847E5CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 84, 84, 84, 84, 84, 84 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000C @ personality
 	.string "SNORLAX$", 11
 	.byte 255 @ friendship
@@ -3935,8 +3943,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 0, 110, 0, 200, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "VAPOREON$", 11
 	.byte 255 @ friendship
@@ -3947,8 +3955,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 255, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000091 @ personality
 	.string "SLOWBRO$", 11
 	.byte 255 @ friendship
@@ -3959,8 +3967,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 100, 110, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "POLITOED$", 11
 	.byte 255 @ friendship
@@ -3971,8 +3979,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 0, 110, 0, 200, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "TENTACRUEL$", 11
 	.byte 255 @ friendship
@@ -3983,8 +3991,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 200, 100, 0, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "RATICATE$", 11
 	.byte 255 @ friendship
@@ -3995,8 +4003,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 255, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000007F @ personality
 	.string "DUNSPARCE$", 11
 	.byte 255 @ friendship
@@ -4015,8 +4023,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4027,8 +4035,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4039,8 +4047,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4051,8 +4059,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4063,8 +4071,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4075,8 +4083,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4095,8 +4103,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4107,8 +4115,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4119,8 +4127,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4131,8 +4139,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4143,8 +4151,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4155,8 +4163,8 @@ gUnknown_847E9AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4180,8 +4188,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 255, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "STARMIE$", 11
 	.byte 255 @ friendship
@@ -4192,8 +4200,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 255, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000032 @ personality
 	.string "BLASTOISE$", 11
 	.byte 255 @ friendship
@@ -4204,8 +4212,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 0, 255, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x0000008C @ personality
 	.string "KINGDRA$", 11
 	.byte 255 @ friendship
@@ -4216,8 +4224,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 100, 100, 0, 155, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "QUAGSIRE$", 11
 	.byte 255 @ friendship
@@ -4228,8 +4236,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 0, 255, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "LAPRAS$", 11
 	.byte 255 @ friendship
@@ -4240,8 +4248,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 100, 0, 0, 155, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "DRAGONITE$", 11
 	.byte 255 @ friendship
@@ -4260,8 +4268,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4272,8 +4280,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4284,8 +4292,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4296,8 +4304,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4308,8 +4316,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4320,8 +4328,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4340,8 +4348,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4352,8 +4360,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4364,8 +4372,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4376,8 +4384,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4388,8 +4396,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4400,8 +4408,8 @@ gUnknown_847ED8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4425,8 +4433,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 100, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000032 @ personality
 	.string "FERALIGATR$", 11
 	.byte 255 @ friendship
@@ -4437,8 +4445,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 255, 0, 0, 0, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x9EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 1 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "POLIWRATH$", 11
 	.byte 255 @ friendship
@@ -4449,8 +4457,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 130, 0, 0, 125 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "KANGASKHAN$", 11
 	.byte 255 @ friendship
@@ -4461,8 +4469,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 155, 255, 0, 0, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "MILTANK$", 11
 	.byte 255 @ friendship
@@ -4473,8 +4481,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 100, 100, 0, 100, 210 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x9EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 1 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "GOLDUCK$", 11
 	.byte 255 @ friendship
@@ -4485,8 +4493,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 130, 0, 0, 125 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x000000CA @ personality
 	.string "GRANBULL$", 11
 	.byte 255 @ friendship
@@ -4505,8 +4513,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4517,8 +4525,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4529,8 +4537,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4541,8 +4549,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4553,8 +4561,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4565,8 +4573,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4585,8 +4593,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4597,8 +4605,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4609,8 +4617,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4621,8 +4629,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4633,8 +4641,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4645,8 +4653,8 @@ gUnknown_847F16C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4670,8 +4678,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 255, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "SNEASEL$", 11
 	.byte 255 @ friendship
@@ -4682,8 +4690,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000002D @ personality
 	.string "OMASTAR$", 11
 	.byte 255 @ friendship
@@ -4694,8 +4702,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 0, 100, 0, 0, 210 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "DEWGONG$", 11
 	.byte 255 @ friendship
@@ -4706,8 +4714,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 0, 110, 0, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000091 @ personality
 	.string "QUAGSIRE$", 11
 	.byte 255 @ friendship
@@ -4718,8 +4726,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 155, 0, 100, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000017 @ personality
 	.string "CORSOLA$", 11
 	.byte 255 @ friendship
@@ -4730,8 +4738,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000094 @ personality
 	.string "SANDSLASH$", 11
 	.byte 255 @ friendship
@@ -4750,8 +4758,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 100, 0, 0, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "FURRET$", 11
 	.byte 255 @ friendship
@@ -4762,8 +4770,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 155, 0, 100, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "AZUMARILL$", 11
 	.byte 255 @ friendship
@@ -4774,8 +4782,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000091 @ personality
 	.string "KINGLER$", 11
 	.byte 255 @ friendship
@@ -4786,8 +4794,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "CLOYSTER$", 11
 	.byte 255 @ friendship
@@ -4798,8 +4806,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 0, 110, 0, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000094 @ personality
 	.string "QUAGSIRE$", 11
 	.byte 255 @ friendship
@@ -4810,8 +4818,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000030 @ personality
 	.string "KABUTOPS$", 11
 	.byte 255 @ friendship
@@ -4830,8 +4838,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4842,8 +4850,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4854,8 +4862,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4866,8 +4874,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4878,8 +4886,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4890,8 +4898,8 @@ gUnknown_847F54C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -4915,8 +4923,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 0, 255, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000008C @ personality
 	.string "POLITOED$", 11
 	.byte 255 @ friendship
@@ -4927,8 +4935,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 155, 0, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "GYARADOS$", 11
 	.byte 255 @ friendship
@@ -4939,8 +4947,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 0, 255, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "LAPRAS$", 11
 	.byte 255 @ friendship
@@ -4951,8 +4959,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "NIDOQUEEN$", 11
 	.byte 255 @ friendship
@@ -4963,8 +4971,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 155, 0, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "JYNX$", 11
 	.byte 255 @ friendship
@@ -4975,8 +4983,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 210, 0, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000008C @ personality
 	.string "GIRAFARIG$", 11
 	.byte 255 @ friendship
@@ -4995,8 +5003,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000094 @ personality
 	.string "MAROWAK$", 11
 	.byte 255 @ friendship
@@ -5007,8 +5015,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 155, 0, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "URSARING$", 11
 	.byte 255 @ friendship
@@ -5019,8 +5027,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 110, 0, 0, 200, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "SLOWKING$", 11
 	.byte 255 @ friendship
@@ -5031,8 +5039,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 200, 0, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000041 @ personality
 	.string "ALAKAZAM$", 11
 	.byte 255 @ friendship
@@ -5043,8 +5051,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "NIDOKING$", 11
 	.byte 255 @ friendship
@@ -5055,8 +5063,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000093 @ personality
 	.string "RHYDON$", 11
 	.byte 255 @ friendship
@@ -5075,8 +5083,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5087,8 +5095,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5099,8 +5107,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5111,8 +5119,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5123,8 +5131,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5135,8 +5143,8 @@ gUnknown_847F92C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5160,8 +5168,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 255, 0, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000087 @ personality
 	.string "POLIWAG$", 11
 	.byte 255 @ friendship
@@ -5172,8 +5180,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000002D @ personality
 	.string "SQUIRTLE$", 11
 	.byte 255 @ friendship
@@ -5184,8 +5192,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 255, 0, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "CHINCHOU$", 11
 	.byte 255 @ friendship
@@ -5196,8 +5204,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "NIDORAN♀$", 11
 	.byte 255 @ friendship
@@ -5208,8 +5216,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 100, 100, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "CLEFAIRY$", 11
 	.byte 255 @ friendship
@@ -5220,8 +5228,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 100, 100, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000002D @ personality
 	.string "HORSEA$", 11
 	.byte 255 @ friendship
@@ -5240,8 +5248,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000093 @ personality
 	.string "WOOPER$", 11
 	.byte 255 @ friendship
@@ -5252,8 +5260,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x9EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 1 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "PSYDUCK$", 11
 	.byte 255 @ friendship
@@ -5264,8 +5272,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 100, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "SNUBBULL$", 11
 	.byte 255 @ friendship
@@ -5276,8 +5284,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "JIGGLYPUFF$", 11
 	.byte 255 @ friendship
@@ -5288,8 +5296,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "NIDORAN♂$", 11
 	.byte 255 @ friendship
@@ -5300,8 +5308,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 100, 100, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000002D @ personality
 	.string "TOTODILE$", 11
 	.byte 255 @ friendship
@@ -5320,8 +5328,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5332,8 +5340,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5344,8 +5352,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5356,8 +5364,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5368,8 +5376,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5380,8 +5388,8 @@ gUnknown_847FD0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5405,8 +5413,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "GOLDEEN$", 11
 	.byte 0 @ friendship
@@ -5417,8 +5425,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "SEAKING$", 11
 	.byte 0 @ friendship
@@ -5429,8 +5437,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 100, 100, 210 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000008C @ personality
 	.string "LANTURN$", 11
 	.byte 0 @ friendship
@@ -5441,8 +5449,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 100, 100, 210 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "LANTURN$", 11
 	.byte 0 @ friendship
@@ -5453,8 +5461,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "GOLDEEN$", 11
 	.byte 0 @ friendship
@@ -5465,8 +5473,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "SEAKING$", 11
 	.byte 0 @ friendship
@@ -5485,8 +5493,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 55, 0, 100, 0, 100, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "OCTILLERY$", 11
 	.byte 255 @ friendship
@@ -5497,8 +5505,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 0, 0, 0, 100, 210 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "QWILFISH$", 11
 	.byte 255 @ friendship
@@ -5509,8 +5517,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "REMORAID$", 11
 	.byte 255 @ friendship
@@ -5521,8 +5529,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "REMORAID$", 11
 	.byte 255 @ friendship
@@ -5533,8 +5541,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 155, 100, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000093 @ personality
 	.string "OCTILLERY$", 11
 	.byte 255 @ friendship
@@ -5545,8 +5553,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 100, 0, 0, 100, 210 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "QWILFISH$", 11
 	.byte 255 @ friendship
@@ -5565,8 +5573,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "MANTINE$", 11
 	.byte 255 @ friendship
@@ -5577,8 +5585,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "MAGIKARP$", 11
 	.byte 255 @ friendship
@@ -5589,8 +5597,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 255, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "MANTINE$", 11
 	.byte 255 @ friendship
@@ -5601,8 +5609,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "GYARADOS$", 11
 	.byte 255 @ friendship
@@ -5613,8 +5621,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000094 @ personality
 	.string "MAGIKARP$", 11
 	.byte 255 @ friendship
@@ -5625,8 +5633,8 @@ gUnknown_84800EC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "GYARADOS$", 11
 	.byte 255 @ friendship
@@ -5650,8 +5658,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 0, 100, 255 @ EVs
 	.align 2
-	.4byte 15 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 15, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "LAPRAS$", 11
 	.byte 255 @ friendship
@@ -5662,8 +5670,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 255, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000008C @ personality
 	.string "KINGDRA$", 11
 	.byte 255 @ friendship
@@ -5674,8 +5682,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 130, 0, 0, 125 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000004E @ personality
 	.string "MACHAMP$", 11
 	.byte 255 @ friendship
@@ -5686,8 +5694,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "CHANSEY$", 11
 	.byte 255 @ friendship
@@ -5698,8 +5706,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 100, 100, 100, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "TAUROS$", 11
 	.byte 255 @ friendship
@@ -5710,8 +5718,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000021 @ personality
 	.string "SNORLAX$", 11
 	.byte 255 @ friendship
@@ -5730,8 +5738,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 100, 0, 100, 100, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "CHINCHOU$", 11
 	.byte 255 @ friendship
@@ -5742,8 +5750,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 100, 100, 100, 100 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "DRATINI$", 11
 	.byte 255 @ friendship
@@ -5754,8 +5762,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 255, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "SLOWPOKE$", 11
 	.byte 255 @ friendship
@@ -5766,8 +5774,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 0, 255 @ EVs
 	.align 2
-	.4byte 23 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 23, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000017 @ personality
 	.string "MAGIKARP$", 11
 	.byte 255 @ friendship
@@ -5778,8 +5786,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 23 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 23, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000017 @ personality
 	.string "SEAKING$", 11
 	.byte 255 @ friendship
@@ -5790,8 +5798,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000096 @ personality
 	.string "TENTACRUEL$", 11
 	.byte 255 @ friendship
@@ -5810,8 +5818,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 255, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "VAPOREON$", 11
 	.byte 255 @ friendship
@@ -5822,8 +5830,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 110, 0, 200, 0, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "ESPEON$", 11
 	.byte 255 @ friendship
@@ -5834,8 +5842,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 255, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "BLISSEY$", 11
 	.byte 255 @ friendship
@@ -5846,8 +5854,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 100, 0, 0, 155 @ EVs
 	.align 2
-	.4byte 20 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 20, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "STARMIE$", 11
 	.byte 255 @ friendship
@@ -5858,8 +5866,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 130, 0, 0, 125 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "PERSIAN$", 11
 	.byte 255 @ friendship
@@ -5870,8 +5878,8 @@ gUnknown_84804CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 0, 255, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "AZUMARILL$", 11
 	.byte 255 @ friendship
@@ -5895,8 +5903,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 10, 150, 100, 150, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "ELECTRODE$", 11
 	.byte 255 @ friendship
@@ -5907,8 +5915,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 255, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x0000000D @ personality
 	.string "VOLTORB$", 11
 	.byte 255 @ friendship
@@ -5919,8 +5927,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 200, 155, 0, 0, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "WEEZING$", 11
 	.byte 255 @ friendship
@@ -5931,8 +5939,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 100, 0, 0, 150 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000007F @ personality
 	.string "GOLEM$", 11
 	.byte 255 @ friendship
@@ -5943,8 +5951,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "EXEGGCUTE$", 11
 	.byte 255 @ friendship
@@ -5955,8 +5963,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 100, 155, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000084 @ personality
 	.string "FORRETRESS$", 11
 	.byte 255 @ friendship
@@ -5975,8 +5983,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5987,8 +5995,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -5999,8 +6007,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6011,8 +6019,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6023,8 +6031,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6035,8 +6043,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6055,8 +6063,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6067,8 +6075,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6079,8 +6087,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6091,8 +6099,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6103,8 +6111,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6115,8 +6123,8 @@ gUnknown_84808AC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6140,8 +6148,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 125, 255, 0, 130 @ EVs
 	.align 2
-	.4byte 10 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 10, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "MAGNETON$", 11
 	.byte 255 @ friendship
@@ -6152,8 +6160,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 150, 0, 255, 105 @ EVs
 	.align 2
-	.4byte 15 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 15, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "PIKACHU$", 11
 	.byte 255 @ friendship
@@ -6164,8 +6172,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 100, 0, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000037 @ personality
 	.string "JOLTEON$", 11
 	.byte 255 @ friendship
@@ -6176,8 +6184,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "BLISSEY$", 11
 	.byte 255 @ friendship
@@ -6188,8 +6196,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 125, 0, 255, 130 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "PORYGON2$", 11
 	.byte 255 @ friendship
@@ -6200,8 +6208,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 5 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 5, 0 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "PORYGON$", 11
 	.byte 255 @ friendship
@@ -6220,8 +6228,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6232,8 +6240,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6244,8 +6252,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6256,8 +6264,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6268,8 +6276,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6280,8 +6288,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6300,8 +6308,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6312,8 +6320,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6324,8 +6332,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6336,8 +6344,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6348,8 +6356,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6360,8 +6368,8 @@ gUnknown_8480C8C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6385,8 +6393,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 100, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "MR。{TRANSPARENT}MIME$", 11
 	.byte 255 @ friendship
@@ -6397,8 +6405,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 0, 200, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000008C @ personality
 	.string "HYPNO$", 11
 	.byte 255 @ friendship
@@ -6409,8 +6417,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 150, 155, 50 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "ALAKAZAM$", 11
 	.byte 255 @ friendship
@@ -6421,8 +6429,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 200, 0, 100, 55, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000088 @ personality
 	.string "GENGAR$", 11
 	.byte 255 @ friendship
@@ -6433,8 +6441,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 100, 100, 155, 0, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x9EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 1 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "GIRAFARIG$", 11
 	.byte 255 @ friendship
@@ -6445,8 +6453,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 55, 250, 150, 55 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "STARMIE$", 11
 	.byte 255 @ friendship
@@ -6465,8 +6473,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6477,8 +6485,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6489,8 +6497,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6501,8 +6509,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6513,8 +6521,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6525,8 +6533,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6545,8 +6553,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6557,8 +6565,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6569,8 +6577,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6581,8 +6589,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6593,8 +6601,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6605,8 +6613,8 @@ gUnknown_848106C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6630,8 +6638,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 155, 0, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "MUK$", 11
 	.byte 255 @ friendship
@@ -6642,8 +6650,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 155, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000015 @ personality
 	.string "GENGAR$", 11
 	.byte 255 @ friendship
@@ -6654,8 +6662,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "ALAKAZAM$", 11
 	.byte 255 @ friendship
@@ -6666,8 +6674,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 50, 100, 160, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "JOLTEON$", 11
 	.byte 255 @ friendship
@@ -6678,8 +6686,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 55, 0, 100, 100, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "ELECTRODE$", 11
 	.byte 255 @ friendship
@@ -6690,8 +6698,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 55, 255, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "RAICHU$", 11
 	.byte 255 @ friendship
@@ -6710,8 +6718,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 105, 0, 0, 150 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "KANGASKHAN$", 11
 	.byte 255 @ friendship
@@ -6722,8 +6730,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 100, 0, 0, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "TAUROS$", 11
 	.byte 255 @ friendship
@@ -6734,8 +6742,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 155, 50, 250, 0, 55 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "MILTANK$", 11
 	.byte 255 @ friendship
@@ -6746,8 +6754,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "RHYDON$", 11
 	.byte 255 @ friendship
@@ -6758,8 +6766,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 255, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x3FFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 0 @ IVs, ability
 	.4byte 0x00000091 @ personality
 	.string "DRAGONITE$", 11
 	.byte 255 @ friendship
@@ -6770,8 +6778,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 0, 255, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xBFFFFFFF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 31, 31, 31, 31, 31, 31, 1 @ IVs, ability
 	.4byte 0x00000091 @ personality
 	.string "LAPRAS$", 11
 	.byte 255 @ friendship
@@ -6790,8 +6798,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6802,8 +6810,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6814,8 +6822,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6826,8 +6834,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6838,8 +6846,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6850,8 +6858,8 @@ gUnknown_848144C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -6875,8 +6883,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 255, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "LANTURN$", 11
 	.byte 255 @ friendship
@@ -6887,8 +6895,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 155, 100, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "MANTINE$", 11
 	.byte 255 @ friendship
@@ -6899,8 +6907,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 100, 100, 0, 255, 55 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "DEWGONG$", 11
 	.byte 255 @ friendship
@@ -6911,8 +6919,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "CLOYSTER$", 11
 	.byte 255 @ friendship
@@ -6923,8 +6931,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 100, 100, 255, 55 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "TENTACRUEL$", 11
 	.byte 255 @ friendship
@@ -6935,8 +6943,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "GYARADOS$", 11
 	.byte 255 @ friendship
@@ -6955,8 +6963,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 155, 155, 100, 100, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000040 @ personality
 	.string "ELECTABUZZ$", 11
 	.byte 255 @ friendship
@@ -6967,8 +6975,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 255, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "MAGNETON$", 11
 	.byte 255 @ friendship
@@ -6979,8 +6987,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 255, 0, 0, 0, 255, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "PORYGON$", 11
 	.byte 255 @ friendship
@@ -6991,8 +6999,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 50, 155, 255, 50 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "DRAGONAIR$", 11
 	.byte 255 @ friendship
@@ -7003,8 +7011,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 155, 0, 200, 155, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000B @ personality
 	.string "PERSIAN$", 11
 	.byte 255 @ friendship
@@ -7015,8 +7023,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 95, 255, 100, 60 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "STARMIE$", 11
 	.byte 255 @ friendship
@@ -7035,8 +7043,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7047,8 +7055,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7059,8 +7067,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7071,8 +7079,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7083,8 +7091,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7095,8 +7103,8 @@ gUnknown_848182C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7120,8 +7128,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000084 @ personality
 	.string "FLAAFFY$", 11
 	.byte 255 @ friendship
@@ -7132,8 +7140,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 100, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000093 @ personality
 	.string "QUAGSIRE$", 11
 	.byte 255 @ friendship
@@ -7144,8 +7152,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 155, 100, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "PIKACHU$", 11
 	.byte 255 @ friendship
@@ -7156,8 +7164,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 150, 255, 0, 105 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000046 @ personality
 	.string "ELECTABUZZ$", 11
 	.byte 255 @ friendship
@@ -7168,8 +7176,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x0000002D @ personality
 	.string "TOGETIC$", 11
 	.byte 255 @ friendship
@@ -7180,8 +7188,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 155, 50, 255, 0, 50 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "GOLDUCK$", 11
 	.byte 255 @ friendship
@@ -7200,8 +7208,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 255, 0, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000003 @ personality
 	.string "PICHU$", 11
 	.byte 255 @ friendship
@@ -7212,8 +7220,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 130, 0, 0, 125 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "ELEKID$", 11
 	.byte 255 @ friendship
@@ -7224,8 +7232,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "TOGEPI$", 11
 	.byte 255 @ friendship
@@ -7236,8 +7244,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "PSYDUCK$", 11
 	.byte 255 @ friendship
@@ -7248,8 +7256,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x14A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "MAREEP$", 11
 	.byte 255 @ friendship
@@ -7260,8 +7268,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x94A5294A @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "WOOPER$", 11
 	.byte 255 @ friendship
@@ -7280,8 +7288,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7292,8 +7300,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7304,8 +7312,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7316,8 +7324,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7328,8 +7336,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7340,8 +7348,8 @@ gUnknown_8481C0C::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 0, 0, 0 @ EVs
 	.align 2
-	.4byte 0 @ OT ID
-	.4byte 0x00000000 @ IVs, ability
+	trainerid 0, 0 @ OT ID
+	ivs 0, 0, 0, 0, 0, 0, 0 @ IVs, ability
 	.4byte 0x00000000 @ personality
 	.string "$$$$$$$$$$$", 11
 	.byte 0 @ friendship
@@ -7365,8 +7373,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 55, 255, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "ELECTRODE$", 11
 	.byte 255 @ friendship
@@ -7377,8 +7385,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 155, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000F @ personality
 	.string "ELECTABUZZ$", 11
 	.byte 255 @ friendship
@@ -7389,8 +7397,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 125, 0, 255, 130 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000008E @ personality
 	.string "LANTURN$", 11
 	.byte 255 @ friendship
@@ -7401,8 +7409,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 200, 255, 0, 55 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000014 @ personality
 	.string "MAGNETON$", 11
 	.byte 255 @ friendship
@@ -7413,8 +7421,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 80, 100, 0, 75 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000008A @ personality
 	.string "RAICHU$", 11
 	.byte 255 @ friendship
@@ -7425,8 +7433,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 200, 150, 0, 10, 150 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "AMPHAROS$", 11
 	.byte 255 @ friendship
@@ -7445,8 +7453,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 55, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "GRANBULL$", 11
 	.byte 255 @ friendship
@@ -7457,8 +7465,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 100, 55, 255, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "PERSIAN$", 11
 	.byte 255 @ friendship
@@ -7469,8 +7477,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 200, 255, 0, 0, 55, 0 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "LICKITUNG$", 11
 	.byte 255 @ friendship
@@ -7481,8 +7489,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 100, 50, 0, 105 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000094 @ personality
 	.string "RATICATE$", 11
 	.byte 255 @ friendship
@@ -7493,8 +7501,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 130, 0, 0, 125 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "PRIMEAPE$", 11
 	.byte 255 @ friendship
@@ -7505,8 +7513,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 100, 155, 0, 100, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "KANGASKHAN$", 11
 	.byte 255 @ friendship
@@ -7525,8 +7533,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 0, 0, 155, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "WEEZING$", 11
 	.byte 255 @ friendship
@@ -7537,8 +7545,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 150, 0, 255, 105 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0xA94A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 1 @ IVs, ability
 	.4byte 0x00000084 @ personality
 	.string "MUK$", 11
 	.byte 255 @ friendship
@@ -7549,8 +7557,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 250, 155, 105 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "GENGAR$", 11
 	.byte 255 @ friendship
@@ -7561,8 +7569,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 0, 150, 105, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x0000000A @ personality
 	.string "MISDREAVUS$", 11
 	.byte 255 @ friendship
@@ -7573,8 +7581,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 200, 110, 0, 200 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000087 @ personality
 	.string "CROBAT$", 11
 	.byte 255 @ friendship
@@ -7585,8 +7593,8 @@ gUnknown_8481FEC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 100, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x294A5294 @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 20, 20, 20, 20, 20, 20, 0 @ IVs, ability
 	.4byte 0x00000091 @ personality
 	.string "HAUNTER$", 11
 	.byte 255 @ friendship
@@ -7610,8 +7618,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000005 @ personality
 	.string "PICHU$", 11
 	.byte 255 @ friendship
@@ -7622,8 +7630,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "MAREEP$", 11
 	.byte 255 @ friendship
@@ -7634,8 +7642,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "IGGLYBUFF$", 11
 	.byte 255 @ friendship
@@ -7646,8 +7654,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "CLEFFA$", 11
 	.byte 255 @ friendship
@@ -7658,8 +7666,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "NIDORAN♀$", 11
 	.byte 255 @ friendship
@@ -7670,8 +7678,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 255, 0, 0, 255 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "NIDORAN♂$", 11
 	.byte 255 @ friendship
@@ -7690,8 +7698,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 0, 255, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "NIDORINO$", 11
 	.byte 255 @ friendship
@@ -7702,8 +7710,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 155, 0, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "NIDORINA$", 11
 	.byte 255 @ friendship
@@ -7714,8 +7722,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 200, 0, 255, 55 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000011 @ personality
 	.string "PIKACHU$", 11
 	.byte 255 @ friendship
@@ -7726,8 +7734,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 100, 0, 0, 150 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "FLAAFFY$", 11
 	.byte 255 @ friendship
@@ -7738,8 +7746,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 150, 0, 0, 105 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000016 @ personality
 	.string "JIGGLYPUFF$", 11
 	.byte 255 @ friendship
@@ -7750,8 +7758,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 100, 0, 0, 155 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "CLEFAIRY$", 11
 	.byte 255 @ friendship
@@ -7770,8 +7778,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 0, 155, 0, 255, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x000000CF @ personality
 	.string "WIGGLYTUFF$", 11
 	.byte 255 @ friendship
@@ -7782,8 +7790,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 100, 0, 0, 150 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x000000CF @ personality
 	.string "CLEFABLE$", 11
 	.byte 255 @ friendship
@@ -7794,8 +7802,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 200, 110, 0, 100, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000007 @ personality
 	.string "NIDOQUEEN$", 11
 	.byte 255 @ friendship
@@ -7806,8 +7814,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 150, 0, 0, 100 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000002 @ personality
 	.string "NIDOKING$", 11
 	.byte 255 @ friendship
@@ -7818,8 +7826,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 155, 150, 100, 0, 105 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "RAICHU$", 11
 	.byte 255 @ friendship
@@ -7830,8 +7838,8 @@ gUnknown_84823CC::
 	.byte 0, 0x00 @ level, ppBonuses
 	.byte 0, 255, 150, 0, 0, 105 @ EVs
 	.align 2
-	.4byte 268435456 @ OT ID
-	.4byte 0x1EF7BDEF @ IVs, ability
+	trainerid 0, 4096 @ OT ID
+	ivs 15, 15, 15, 15, 15, 15, 0 @ IVs, ability
 	.4byte 0x00000080 @ personality
 	.string "AMPHAROS$", 11
 	.byte 255 @ friendship

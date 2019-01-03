@@ -1,5 +1,11 @@
+#include "constants/species.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/easy_chat.h"
+
+#define NULL 0
+
 	.include "asm/macros.inc"
-	.include "constants/constants.inc"
 
 	.section .rodata
 
@@ -366,101 +372,8 @@ gUnknown_847A890:: @ 847A890
 
 	// trainer_tower (again?)
 
-gUnknown_847ABAC::
-	.incbin "baserom.gba", 0x47ABAC, 0x3E0
-
-gUnknown_847AF8C::
-	.incbin "baserom.gba", 0x47AF8C, 0x3E0
-
-gUnknown_847B36C::
-	.incbin "baserom.gba", 0x47B36C, 0x3E0
-
-gUnknown_847B74C::
-	.incbin "baserom.gba", 0x47B74C, 0x3E0
-
-gUnknown_847BB2C::
-	.incbin "baserom.gba", 0x47BB2C, 0x3E0
-
-gUnknown_847BF0C::
-	.incbin "baserom.gba", 0x47BF0C, 0x3E0
-
-gUnknown_847C2EC::
-	.incbin "baserom.gba", 0x47C2EC, 0x3E0
-
-gUnknown_847C6CC::
-	.incbin "baserom.gba", 0x47C6CC, 0x3E0
-
-gUnknown_847CAAC::
-	.incbin "baserom.gba", 0x47CAAC, 0x3E0
-
-gUnknown_847CE8C::
-	.incbin "baserom.gba", 0x47CE8C, 0x3E0
-
-gUnknown_847D26C::
-	.incbin "baserom.gba", 0x47D26C, 0x3E0
-
-gUnknown_847D64C::
-	.incbin "baserom.gba", 0x47D64C, 0x3E0
-
-gUnknown_847DA2C::
-	.incbin "baserom.gba", 0x47DA2C, 0x3E0
-
-gUnknown_847DE0C::
-	.incbin "baserom.gba", 0x47DE0C, 0x3E0
-
-gUnknown_847E1EC::
-	.incbin "baserom.gba", 0x47E1EC, 0x3E0
-
-gUnknown_847E5CC::
-	.incbin "baserom.gba", 0x47E5CC, 0x3E0
-
-gUnknown_847E9AC::
-	.incbin "baserom.gba", 0x47E9AC, 0x3E0
-
-gUnknown_847ED8C::
-	.incbin "baserom.gba", 0x47ED8C, 0x3E0
-
-gUnknown_847F16C::
-	.incbin "baserom.gba", 0x47F16C, 0x3E0
-
-gUnknown_847F54C::
-	.incbin "baserom.gba", 0x47F54C, 0x3E0
-
-gUnknown_847F92C::
-	.incbin "baserom.gba", 0x47F92C, 0x3E0
-
-gUnknown_847FD0C::
-	.incbin "baserom.gba", 0x47FD0C, 0x3E0
-
-gUnknown_84800EC::
-	.incbin "baserom.gba", 0x4800EC, 0x3E0
-
-gUnknown_84804CC::
-	.incbin "baserom.gba", 0x4804CC, 0x3E0
-
-gUnknown_84808AC::
-	.incbin "baserom.gba", 0x4808AC, 0x3E0
-
-gUnknown_8480C8C::
-	.incbin "baserom.gba", 0x480C8C, 0x3E0
-
-gUnknown_848106C::
-	.incbin "baserom.gba", 0x48106C, 0x3E0
-
-gUnknown_848144C::
-	.incbin "baserom.gba", 0x48144C, 0x3E0
-
-gUnknown_848182C::
-	.incbin "baserom.gba", 0x48182C, 0x3E0
-
-gUnknown_8481C0C::
-	.incbin "baserom.gba", 0x481C0C, 0x3E0
-
-gUnknown_8481FEC::
-	.incbin "baserom.gba", 0x481FEC, 0x3E0
-
-gUnknown_84823CC::
-	.incbin "baserom.gba", 0x4823CC, 0x3E0
+	@ 847ABAC
+	.include "data/trainer_tower/trainers.inc"
 
 	.align 2
 gUnknown_84827AC:: @ 84827AC

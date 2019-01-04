@@ -2,6 +2,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/easy_chat.h"
+#include "constants/facility_trainer_classes.h"
 
 #define NULL 0
 

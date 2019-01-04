@@ -1,3 +1,13 @@
+#include "constants/species.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/easy_chat.h"
+#include "constants/facility_trainer_classes.h"
+
+#define NULL 0
+
+	.include "asm/macros.inc"
+
 	.section .rodata
 
 	.align 2
@@ -265,74 +275,148 @@ gUnknown_8479D10:: @ 8479D10
 gUnknown_8479D24:: @ 8479D24
 	.asciz "ttdata->id == 0"
 
-gUnknown_8479D34:: @ 8479D34
-	.incbin "baserom.gba", 0x479D34, 0x4
+	// trainer_tower
 
-gUnknown_8479D38:: @ 8479D38
-	.incbin "baserom.gba", 0x479D38, 0x8
+	.section .rodata.after_trainer_tower
 
-gUnknown_8479D40:: @ 8479D40
-	.incbin "baserom.gba", 0x479D40, 0x8
+	// unk_815F138
 
-gUnknown_8479D48:: @ 8479D48
-	.incbin "baserom.gba", 0x479D48, 0x190
+gUnknown_847A328::
+	.incbin "data/graphics/unk_847a348.gbapal"
 
-gUnknown_8479ED8:: @ 8479ED8
-	.incbin "baserom.gba", 0x479ED8, 0x14C
-
-gUnknown_847A024:: @ 847A024
-	.incbin "baserom.gba", 0x47A024, 0x50
-
-gUnknown_847A074:: @ 847A074
-	.incbin "baserom.gba", 0x47A074, 0x1A4
-
-gUnknown_847A218:: @ 847A218
-	.incbin "baserom.gba", 0x47A218, 0x14
-
-gUnknown_847A22C:: @ 847A22C
-	.incbin "baserom.gba", 0x47A22C, 0x4
-
-gUnknown_847A230:: @ 847A230
-	.incbin "baserom.gba", 0x47A230, 0x54
-
-gUnknown_847A284:: @ 847A284
-	.incbin "baserom.gba", 0x47A284, 0x30
-
-gUnknown_847A2B4:: @ 847A2B4
-	.incbin "baserom.gba", 0x47A2B4, 0x1E
-
-gUnknown_847A2D2:: @ 847A2D2
-	.incbin "baserom.gba", 0x47A2D2, 0x1C
-
-gUnknown_847A2EE:: @ 847A2EE
-	.incbin "baserom.gba", 0x47A2EE, 0x10
-
-gUnknown_847A2FE:: @ 847A2FE
-	.incbin "baserom.gba", 0x47A2FE, 0x10
-
-gUnknown_847A30E:: @ 847A30E
-	.incbin "baserom.gba", 0x47A30E, 0x48E
+gUnknown_847A348::
+	.incbin "data/graphics/unk_847a348.4bpp.lz"
 
 gUnknown_847A79C:: @ 847A79C
-	.incbin "baserom.gba", 0x47A79C, 0x8
+	obj_tiles gUnknown_847A348, 0xE00, 0
 
 gUnknown_847A7A4:: @ 847A7A4
-	.incbin "baserom.gba", 0x47A7A4, 0xBC
+	obj_pal gUnknown_847A328, 0
+
+gOamData_847A7AC::
+	.4byte 0x80000300, 0x00000000
+
+gOamData_847A7B4::
+	.4byte 0xc0004000, 0x00000000
+
+gUnknown_847A7BC::
+	obj_image_anim_frame  0, 1
+	obj_image_anim_end
+
+gUnknown_847A7C4::
+	obj_image_anim_frame 16, 1
+	obj_image_anim_end
+
+gUnknown_847A7CC::
+	obj_image_anim_frame 32, 1
+	obj_image_anim_end
+
+gUnknown_847A7D4::
+	.4byte gUnknown_847A7BC
+	.4byte gUnknown_847A7C4
+	.4byte gUnknown_847A7CC
+
+gUnknown_847A7E0::
+	obj_image_anim_frame 48, 1
+	obj_image_anim_end
+
+gUnknown_847A7E8::
+	obj_image_anim_frame 80, 1
+	obj_image_anim_end
+
+gUnknown_847A7F0::
+	.4byte gUnknown_847A7E0
+	.4byte gUnknown_847A7E8
+
+gUnknown_847A7F8::
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_end
+
+gUnknown_847A808::
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_frame  0x10, -0x10, 0, 8
+	obj_rot_scal_anim_end
+
+gUnknown_847A820::
+	obj_rot_scal_anim_frame -0x12,  0x12, 0, 8
+	obj_rot_scal_anim_end
+
+gUnknown_847A830::
+	obj_rot_scal_anim_frame   0x6,  -0x6, 0, 8
+	obj_rot_scal_anim_frame  -0x4,   0x4, 0, 8
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_end
+
+gUnknown_847A850::
+	.4byte gUnknown_847A7F8
+	.4byte gUnknown_847A808
+	.4byte gUnknown_847A820
+	.4byte gUnknown_847A830
 
 gUnknown_847A860:: @ 847A860
-	.incbin "baserom.gba", 0x47A860, 0x18
+	spr_template 0, 0, gOamData_847A7AC, gUnknown_847A7D4, NULL, gUnknown_847A850, SpriteCallbackDummy
 
 gUnknown_847A878:: @ 847A878
-	.incbin "baserom.gba", 0x47A878, 0x18
+	spr_template 0, 0, gOamData_847A7B4, gUnknown_847A7F0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+	// berry_fix_program
 
 gUnknown_847A890:: @ 847A890
-	.incbin "baserom.gba", 0x47A890, 0x7F1C
+	.4byte gUnknown_8EA467C, gUnknown_8EA52B8, gUnknown_8EA463C
+	.4byte gUnknown_8EA5664, gUnknown_8EA60C8, gUnknown_8EA5604
+	.4byte gUnknown_8EA6408, gUnknown_8EA7028, gUnknown_8EA63C8
+	.4byte gUnknown_8EA7320, gUnknown_8EA8118, gUnknown_8EA72E0
+	.4byte gUnknown_8EA8408, gUnknown_8EA8CC8, gUnknown_8EA83C8
+	.4byte gUnknown_8EA8F40, gUnknown_8EA9588, gUnknown_8EA8F00
 
+	.incbin "baserom.gba", 0x47A8D8, 0x2D4
+
+	// trainer_tower (again?)
+
+	@ 847ABAC
+	.include "data/trainer_tower/trainers.inc"
+
+	.align 2
 gUnknown_84827AC:: @ 84827AC
-	.incbin "baserom.gba", 0x4827AC, 0x8
+	.byte 0x08, 0x01
+	.align 2
+	.4byte 0
 
 gUnknown_84827B4:: @ 84827B4
-	.incbin "baserom.gba", 0x4827B4, 0x5F34
+	.4byte gUnknown_847F16C
+	.4byte gUnknown_847D26C
+	.4byte gUnknown_84808AC
+	.4byte gUnknown_847ABAC
+	.4byte gUnknown_847CAAC
+	.4byte gUnknown_847E9AC
+	.4byte gUnknown_847AF8C
+	.4byte gUnknown_847CE8C
+	.4byte gUnknown_847DA2C
+	.4byte gUnknown_847BF0C
+	.4byte gUnknown_847D64C
+	.4byte gUnknown_847DE0C
+	.4byte gUnknown_847B74C
+	.4byte gUnknown_847BB2C
+	.4byte gUnknown_848182C
+	.4byte gUnknown_847F92C
+	.4byte gUnknown_847C2EC
+	.4byte gUnknown_847C6CC
+	.4byte gUnknown_847E5CC
+	.4byte gUnknown_84804CC
+	.4byte gUnknown_84823CC
+	.4byte gUnknown_8481FEC
+	.4byte gUnknown_84800EC
+	.4byte gUnknown_847E1EC
+	.4byte gUnknown_847ED8C
+	.4byte gUnknown_848106C
+	.4byte gUnknown_8480C8C
+	.4byte gUnknown_847F92C
+	.4byte gUnknown_847F54C
+	.4byte gUnknown_847E1EC
+	.4byte gUnknown_847D64C
+	.4byte gUnknown_847C6CC
+
+	.include "data/text/move_descriptions.inc"
 
 gUnknown_84886E8:: @ 84886E8
 	.incbin "baserom.gba", 0x4886E8, 0x588

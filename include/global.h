@@ -94,7 +94,7 @@ enum LanguageId {
     LANGUAGE_ITALIAN = 4,
     LANGUAGE_GERMAN = 5,
     // 6 goes unused but the theory is it was meant to be Korean
-    LANGUAGE_SPANISH = 7,
+        LANGUAGE_SPANISH = 7,
 };
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
@@ -228,17 +228,44 @@ struct BerryCrush
 
 struct LinkBattleRecord
 {
-	u8 name[PLAYER_NAME_LENGTH];
-	u16 trainerId;
-	u16 wins;
-	u16 losses;
-	u16 draws;
+    u8 name[PLAYER_NAME_LENGTH];
+    u16 trainerId;
+    u16 wins;
+    u16 losses;
+    u16 draws;
 };
 
 struct LinkBattleRecords
 {
-	struct LinkBattleRecord entries[LINK_B_RECORDS_COUNT];
-	u8 languages[LINK_B_RECORDS_COUNT];
+    struct LinkBattleRecord entries[LINK_B_RECORDS_COUNT];
+    u8 languages[LINK_B_RECORDS_COUNT];
+};
+
+struct BattleTowerPokemon
+{
+    u16 species;
+    u16 heldItem;
+    u16 moves[4];
+    u8 level;
+    u8 ppBonuses;
+    u8 hpEV;
+    u8 attackEV;
+    u8 defenseEV;
+    u8 speedEV;
+    u8 spAttackEV;
+    u8 spDefenseEV;
+    u32 otId;
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 gap:1;
+    u32 altAbility:1;
+    u32 personality;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 friendship;
 };
 
 struct UnknownSaveBlock2Struct
@@ -263,17 +290,17 @@ struct UnknownSaveBlock2Struct
 
 struct UnkSaveBlock2Substruct_55C
 {
-	/* 0x000:0x55C */ u8 unk_00_0:1;
-	                  u8 unk_00_1:1;
-	/* 0x001:0x55D */ u8 unk_01;
-	/* 0x002:0x55E */ u8 unk_02[2];
-	/* 0x004:0x560 */ u16 unk_04[2];
-	/* 0x008:0x564 */ u16 unk_08[2];
-	/* 0x00C:0x568 */ u16 unk_0C[2];
-	/* 0x010:0x56C */ u8 unk_10;
-	/* 0x011:0x56D */ u8 unk_11[3];
-	/* 0x014:0x570 */ u16 unk_14;
-	/* 0x016:0x572 */ u8 unk_16;
+    /* 0x000:0x55C */ u8 unk_00_0:1;
+    u8 unk_00_1:1;
+    /* 0x001:0x55D */ u8 unk_01;
+    /* 0x002:0x55E */ u8 unk_02[2];
+    /* 0x004:0x560 */ u16 unk_04[2];
+    /* 0x008:0x564 */ u16 unk_08[2];
+    /* 0x00C:0x568 */ u16 unk_0C[2];
+    /* 0x010:0x56C */ u8 unk_10;
+    /* 0x011:0x56D */ u8 unk_11[3];
+    /* 0x014:0x570 */ u16 unk_14;
+    /* 0x016:0x572 */ u8 unk_16;
 }; // size: 0x018
 
 struct SaveBlock2
@@ -288,11 +315,11 @@ struct SaveBlock2
     /*0x012*/ u8 playTimeVBlanks;
     /*0x013*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
     /*0x014*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
-              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-              u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
-              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
-              u16 regionMapZoom:1; // whether the map is zoomed in
+    u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
+    u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
+    u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+    u16 optionsBattleSceneOff:1; // whether battle animations are disabled
+    u16 regionMapZoom:1; // whether the map is zoomed in
     /*0x018*/ struct Pokedex pokedex;
     /*0x090*/ u8 filler_90[0x8];
     /*0x098*/ struct Time localTimeOffset;
@@ -422,14 +449,14 @@ struct MailStruct
 
 struct UnkMauvilleOldManStruct
 {
-               u8 unk_2D94;
-               u8 unk_2D95;
+    u8 unk_2D94;
+    u8 unk_2D95;
     /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
     /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
     /*0x2DAE*/ u8 playerName[8];
     /*0x2DB6*/ u8 filler_2DB6[0x3];
     /*0x2DB9*/ u8 playerTrainerId[4];
-               u8 unk_2DBD;
+    u8 unk_2DBD;
 }; /*size = 0x2C*/
 
 struct UnkMauvilleOldManStruct2
@@ -578,8 +605,8 @@ union QuestLogMovement
 {
     u16 ident_raw;
     struct {
-    	u16 ident:12;
-    	u16 flags:4;
+        u16 ident:12;
+        u16 flags:4;
     } ident_struct;
 };
 
@@ -606,9 +633,9 @@ struct QuestLog
 
 struct FameCheckerSaveData
 {
-	/*3a54*/ u16 pickState:2;
-	         u16 flavorTextFlags:12;
-	         u16 unk_0_E:2;
+    /*3a54*/ u16 pickState:2;
+    u16 flavorTextFlags:12;
+    u16 unk_0_E:2;
 };
 
 #define MAP_OBJECTS_COUNT  16
@@ -622,64 +649,64 @@ struct FameCheckerSaveData
 
 struct MEventBuffer_3120_Sub
 {
-	u16 unk_00;
-	u8 unk_02;
-	u8 unk_03;
-	u8 unk_04[40];
-	u8 unk_2C[10][40];
+    u16 unk_00;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04[40];
+    u8 unk_2C[10][40];
 };
 
 struct MEventBuffer_3120
 {
-	u32 crc;
-	struct MEventBuffer_3120_Sub data;
+    u32 crc;
+    struct MEventBuffer_3120_Sub data;
 };
 
 struct MEventBuffer_32E0_Sub
 {
-	u16 unk_00;
-	u16 unk_02;
-	u32 unk_04;
-	u8 unk_08_0:2;
-	u8 unk_08_2:4;
-	u8 unk_08_6:2;
-	u8 unk_09;
-	u8 unk_0A[40];
-	u8 unk_32[40];
-	u8 unk_5A[4][40];
-	u8 unk_FA[40];
-	u8 unk_122[40];
+    u16 unk_00;
+    u16 unk_02;
+    u32 unk_04;
+    u8 unk_08_0:2;
+    u8 unk_08_2:4;
+    u8 unk_08_6:2;
+    u8 unk_09;
+    u8 unk_0A[40];
+    u8 unk_32[40];
+    u8 unk_5A[4][40];
+    u8 unk_FA[40];
+    u8 unk_122[40];
 };
 
 struct MEventBuffer_32E0
 {
-	u32 crc;
-	struct MEventBuffer_32E0_Sub data;
+    u32 crc;
+    struct MEventBuffer_32E0_Sub data;
 };
 
 struct MEventBuffer_3430_Sub
 {
-	u16 unk_00;
-	u16 unk_02;
-	u16 unk_04;
-	u16 unk_06;
-	u16 unk_08[2][7];
+    u16 unk_00;
+    u16 unk_02;
+    u16 unk_04;
+    u16 unk_06;
+    u16 unk_08[2][7];
 };
 
 struct MEventBuffer_3430
 {
-	u32 crc;
-	struct MEventBuffer_3430_Sub data;
+    u32 crc;
+    struct MEventBuffer_3430_Sub data;
 };
 
 struct MEventBuffers
 {
-	/*0x000 0x3120*/ struct MEventBuffer_3120 buffer_000;
-	/*0x1c0 0x32e0*/ struct MEventBuffer_32E0 buffer_1c0;
-	/*0x310 0x3430*/ struct MEventBuffer_3430 buffer_310;
-	/*0x338 0x3458*/ u16 unk_338[4];
-	/*0x340 0x3460*/ struct MysteryEventStruct unk_340;
-	/*0x344 0x3464*/ u32 unk_344[2][5];
+    /*0x000 0x3120*/ struct MEventBuffer_3120 buffer_000;
+    /*0x1c0 0x32e0*/ struct MEventBuffer_32E0 buffer_1c0;
+    /*0x310 0x3430*/ struct MEventBuffer_3430 buffer_310;
+    /*0x338 0x3458*/ u16 unk_338[4];
+    /*0x340 0x3460*/ struct MysteryEventStruct unk_340;
+    /*0x344 0x3464*/ u32 unk_344[2][5];
 }; // 0x36C 0x348C
 
 struct SaveBlock1
@@ -707,8 +734,8 @@ struct SaveBlock1
     /*0x0464*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     /*0x054c*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x05F8*/ u8 seen1[DEX_FLAGS_NO];
-	/*0x062C*/ u16 berryBlenderRecords[3]; // unused
-	/*0x0632*/ u8 field_632[6]; // unused?
+    /*0x062C*/ u16 berryBlenderRecords[3]; // unused
+    /*0x0632*/ u8 field_632[6]; // unused?
     /*0x0638*/ u8 trainerRematchStepCounter;
     /*0x063A*/ u8 ALIGNED(2) trainerRematches[100];
     /*0x06A0*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
@@ -717,10 +744,10 @@ struct SaveBlock1
     /*0x1000*/ u16 vars[VARS_COUNT];
     /*0x1200*/ u32 gameStats[NUM_GAME_STATS];
     /*0x1300*/ struct QuestLog questLog[4];
-	/*0x2CA0*/ u16 unk2CA0[6];
-	/*0x2CAC*/ u16 unk2CAC[6];
-	/*0x2CB8*/ u16 unk2CB8[6];
-	/*0x2CC4*/ u16 unk2CC4[6];
+    /*0x2CA0*/ u16 unk2CA0[6];
+    /*0x2CAC*/ u16 unk2CAC[6];
+    /*0x2CB8*/ u16 unk2CB8[6];
+    /*0x2CC4*/ u16 unk2CC4[6];
     /*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];
     /*0x2F10*/ u8 additionalPhrases[EASY_CHAT_EXTRA_PHRASES_SIZE];
     /*0x2F18*/ OldMan oldMan; // unused
@@ -737,8 +764,9 @@ struct SaveBlock1
     /*0x3A48*/ u8 filler_3a48[4];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
-    /*0x3A94*/ u8 filler3A94[0x2A4];
-               u32 unkArray[4][3];
+    /*0x3A94*/ u8 filler3A94[0x2A0];
+    /*0x3D34*/ u32 unkArrayIdx;
+    /*0x3D38*/ u32 unkArray[4][3];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

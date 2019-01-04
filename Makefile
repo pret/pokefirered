@@ -121,6 +121,8 @@ $(C_BUILDDIR)/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/isagbprn.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/isagbprn.o: CFLAGS := -mthumb-interwork
 
+#$(C_BUILDDIR)/trainer_tower.o: CFLAGS += -ffreestanding
+
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
 else
@@ -149,7 +151,7 @@ $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) $(DATA_ASM_SUBDIR)/$*.s)
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
-	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) -I include -nostdinc -undef - | $(AS) $(ASFLAGS) -o $@
 
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<

@@ -2002,10 +2002,9 @@ gUnknown_83EEC98:: @ 83EEC98
 	.incbin "baserom.gba", 0x3EEC98, 0x50
 
 gUnknown_83EECE8:: @ 83EECE8
-	.incbin "baserom.gba", 0x3EECE8, 0x546
+	.incbin "baserom.gba", 0x3EECE8, 0x14
 
-gUnknown_83EF22E:: @ 83EF22E
-	.incbin "baserom.gba", 0x3EF22E, 0xE
+	.include "data/text/map_section_names.inc"
 
 gUnknown_83EF23C:: @ 83EF23C
 	.incbin "baserom.gba", 0x3EF23C, 0x1E
@@ -2197,7 +2196,115 @@ gUnknown_83F1CA8:: @ 83F1CA8
 	.incbin "baserom.gba", 0x3F1CA8, 0x4
 
 gUnknown_83F1CAC:: @ 83F1CAC
-	.incbin "baserom.gba", 0x3F1CAC, 0x1B4
+	.4byte gMapSecName_PalletTown
+	.4byte gMapSecName_ViridianCity
+	.4byte gMapSecName_PewterCity
+	.4byte gMapSecName_CeruleanCity
+	.4byte gMapSecName_LavenderTown
+	.4byte gMapSecName_VermilionCity
+	.4byte gMapSecName_CeladonCity
+	.4byte gMapSecName_FuchsiaCity
+	.4byte gMapSecName_CinnabarIsland
+	.4byte gMapSecName_IndigoPlateau
+	.4byte gMapSecName_SaffronCity
+	.4byte gMapSecName_Route4
+	.4byte gMapSecName_Route10
+	.4byte gMapSecName_Route1
+	.4byte gMapSecName_Route2
+	.4byte gMapSecName_Route3
+	.4byte gMapSecName_Route4_2
+	.4byte gMapSecName_Route5
+	.4byte gMapSecName_Route6
+	.4byte gMapSecName_Route7
+	.4byte gMapSecName_Route8
+	.4byte gMapSecName_Route9
+	.4byte gMapSecName_Route10_2
+	.4byte gMapSecName_Route11
+	.4byte gMapSecName_Route12
+	.4byte gMapSecName_Route13
+	.4byte gMapSecName_Route14
+	.4byte gMapSecName_Route15
+	.4byte gMapSecName_Route16
+	.4byte gMapSecName_Route17
+	.4byte gMapSecName_Route18
+	.4byte gMapSecName_Route19
+	.4byte gMapSecName_Route20
+	.4byte gMapSecName_Route21
+	.4byte gMapSecName_Route22
+	.4byte gMapSecName_Route23
+	.4byte gMapSecName_Route24
+	.4byte gMapSecName_Route25
+	.4byte gMapSecName_ViridianForest
+	.4byte gMapSecName_MtMoon
+	.4byte gMapSecName_SSAnne
+	.4byte gMapSecName_UndergroundPath
+	.4byte gMapSecName_UndergroundPath_2
+	.4byte gMapSecName_DiglettsCave
+	.4byte gMapSecName_VictoryRoad
+	.4byte gMapSecName_RocketHideout
+	.4byte gMapSecName_SilphCo
+	.4byte gMapSecName_PokemonMansion
+	.4byte gMapSecName_SafariZone
+	.4byte gMapSecName_PokemonLeague
+	.4byte gMapSecName_RockTunnel
+	.4byte gMapSecName_SeafoamIslands
+	.4byte gMapSecName_PokemonTower
+	.4byte gMapSecName_CeruleanCave
+	.4byte gMapSecName_PowerPlant
+	.4byte gMapSecName_OneIsland
+	.4byte gMapSecName_TwoIsland
+	.4byte gMapSecName_ThreeIsland
+	.4byte gMapSecName_FourIsland
+	.4byte gMapSecName_FiveIsland
+	.4byte gMapSecName_SevenIsland
+	.4byte gMapSecName_SixIsland
+	.4byte gMapSecName_KindleRoad
+	.4byte gMapSecName_TreasureBeach
+	.4byte gMapSecName_CapeBrink
+	.4byte gMapSecName_BondBridge
+	.4byte gMapSecName_ThreeIslePort
+	.4byte gMapSecName_SeviiIsle6
+	.4byte gMapSecName_SeviiIsle7
+	.4byte gMapSecName_SeviiIsle8
+	.4byte gMapSecName_SeviiIsle9
+	.4byte gMapSecName_ResortGorgeous
+	.4byte gMapSecName_WaterLabyrinth
+	.4byte gMapSecName_FiveIsleMeadow
+	.4byte gMapSecName_MemorialPillar
+	.4byte gMapSecName_OutcastIsland
+	.4byte gMapSecName_GreenPath
+	.4byte gMapSecName_WaterPath
+	.4byte gMapSecName_RuinValley
+	.4byte gMapSecName_TrainerTower
+	.4byte gMapSecName_CanyonEntrance
+	.4byte gMapSecName_SevaultCanyon
+	.4byte gMapSecName_TanobyRuins
+	.4byte gMapSecName_SeviiIsle22
+	.4byte gMapSecName_SeviiIsle23
+	.4byte gMapSecName_SeviiIsle24
+	.4byte gMapSecName_NavelRock
+	.4byte gMapSecName_MtEmber
+	.4byte gMapSecName_BerryForest
+	.4byte gMapSecName_IcefallCave
+	.4byte gMapSecName_RocketWarehouse
+	.4byte gMapSecName_TrainerTower_2
+	.4byte gMapSecName_DottedHole
+	.4byte gMapSecName_LostCave
+	.4byte gMapSecName_PatternBush
+	.4byte gMapSecName_AlteringCave
+	.4byte gMapSecName_TanobyChambers
+	.4byte gMapSecName_ThreeIslePath
+	.4byte gMapSecName_TanobyKey
+	.4byte gMapSecName_BirthIsland
+	.4byte gMapSecName_MoneanChamber
+	.4byte gMapSecName_LiptooChamber
+	.4byte gMapSecName_WeepthChamber
+	.4byte gMapSecName_DilfordChamber
+	.4byte gMapSecName_ScufibChamber
+	.4byte gMapSecName_RixyChamber
+	.4byte gMapSecName_ViapoisChamber
+	.4byte gMapSecName_EmberSpa
+	.4byte gMapSecName_CeladonDept
 
 gUnknown_83F1E60:: @ 83F1E60
 	.incbin "baserom.gba", 0x3F1E60, 0x318

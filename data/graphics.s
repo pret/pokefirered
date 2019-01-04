@@ -16222,58 +16222,58 @@ gUnknown_8EA1D68:: @ 8EA1D68
 	.incbin "baserom.gba", 0xEA1D68, 0x28D4
 
 gUnknown_8EA463C:: @ 8EA463C
-	.incbin "baserom.gba", 0xEA463C, 0x40 @UNKNOWN
+	.incbin "graphics/berry_fix/gba_small.gbapal"
 
 gUnknown_8EA467C:: @ 8EA467C
-	.incbin "baserom.gba", 0xEA467C, 0xC3C
+	.incbin "graphics/berry_fix/gba_small.4bpp.lz"
 
 gUnknown_8EA52B8:: @ 8EA52B8
-	.incbin "baserom.gba", 0xEA52B8, 0x34C
+	.incbin "graphics/berry_fix/gba_small.bin.lz"
 
 gUnknown_8EA5604:: @ 8EA5604
-	.incbin "baserom.gba", 0xEA5604, 0x60 @UNKNOWN
+	.incbin "graphics/berry_fix/logo.gbapal"
 
 gUnknown_8EA5664:: @ 8EA5664
-	.incbin "baserom.gba", 0xEA5664, 0xA64
+	.incbin "graphics/berry_fix/logo.4bpp.lz"
 
 gUnknown_8EA60C8:: @ 8EA60C8
-	.incbin "baserom.gba", 0xEA60C8, 0x300
+	.incbin "graphics/berry_fix/logo.bin.lz"
 
 gUnknown_8EA63C8:: @ 8EA63C8
-	.incbin "baserom.gba", 0xEA63C8, 0x40 @UNKNOWN
+	.incbin "graphics/berry_fix/gba_transfer.gbapal"
 
 gUnknown_8EA6408:: @ 8EA6408
-	.incbin "baserom.gba", 0xEA6408, 0xC20
+	.incbin "graphics/berry_fix/gba_transfer.4bpp.lz"
 
 gUnknown_8EA7028:: @ 8EA7028
-	.incbin "baserom.gba", 0xEA7028, 0x2B8
+	.incbin "graphics/berry_fix/gba_transfer.bin.lz"
 
 gUnknown_8EA72E0:: @ 8EA72E0
-	.incbin "baserom.gba", 0xEA72E0, 0x40 @UNKNOWN
+	.incbin "graphics/berry_fix/gba_transfer_highlight.gbapal"
 
 gUnknown_8EA7320:: @ 8EA7320
-	.incbin "baserom.gba", 0xEA7320, 0xDF8
+	.incbin "graphics/berry_fix/gba_transfer_highlight.4bpp.lz"
 
 gUnknown_8EA8118:: @ 8EA8118
-	.incbin "baserom.gba", 0xEA8118, 0x2B0
+	.incbin "graphics/berry_fix/gba_transfer_highlight.bin.lz"
 
 gUnknown_8EA83C8:: @ 8EA83C8
-	.incbin "baserom.gba", 0xEA83C8, 0x40 @UNKNOWN
+	.incbin "graphics/berry_fix/gba_transfer_error.gbapal"
 
 gUnknown_8EA8408:: @ 8EA8408
-	.incbin "baserom.gba", 0xEA8408, 0x8C0
+	.incbin "graphics/berry_fix/gba_transfer_error.4bpp.lz"
 
 gUnknown_8EA8CC8:: @ 8EA8CC8
-	.incbin "baserom.gba", 0xEA8CC8, 0x238
+	.incbin "graphics/berry_fix/gba_transfer_error.bin.lz"
 
 gUnknown_8EA8F00:: @ 8EA8F00
-	.incbin "baserom.gba", 0xEA8F00, 0x40 @UNKNOWN
+	.incbin "graphics/berry_fix/window.gbapal"
 
 gUnknown_8EA8F40:: @ 8EA8F40
-	.incbin "baserom.gba", 0xEA8F40, 0x648
+	.incbin "graphics/berry_fix/window.4bpp.lz"
 
 gUnknown_8EA9588:: @ 8EA9588
-	.incbin "baserom.gba", 0xEA9588, 0x26C
+	.incbin "graphics/berry_fix/window.bin.lz"
 
 gUnknown_8EA97F4:: @ 8EA97F4
 	.incbin "baserom.gba", 0xEA97F4, 0x120 @UNKNOWN

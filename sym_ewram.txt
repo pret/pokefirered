@@ -1753,11 +1753,10 @@ gUnknown_203F450: @ 203F450
 gUnknown_203F454: @ 203F454
 	.space 0x4
 
-gUnknown_203F458: @ 203F458
-	.space 0x4
+	.include "src/trainer_tower.o"
 
-gUnknown_203F45C: @ 203F45C
-	.space 0x8
+gUnknown_203F460: @ 203F460
+	.space 0x4
 
 gUnknown_203F464: @ 203F464
 	.space 0x1

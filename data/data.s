@@ -1,3 +1,6 @@
+#include "constants/region_map.h"
+#include "constants/trainer_classes.h"
+
 	.section .rodata
 
 	.align 2

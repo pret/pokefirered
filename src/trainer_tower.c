@@ -523,3 +523,172 @@ void sub_815DEFC(u16 * ecWords, u8 * dest)
         dest[r1] = CHAR_PROMPT_SCROLL;
     }
 }
+
+#ifdef NONMATCHING
+void sub_815DF54(void)
+{
+    u16 r4 = gSpecialVar_0x8006;
+    u8 r1;
+    u8 r5 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
+    // HOW DO I MATCH THIS CONTROL FLOW?!?!
+    r1 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r5 == 1 ? 0 : r4].unk_00B;
+    switch (gSpecialVar_0x8005)
+    {
+        case 2:
+            sub_815E068(r5, r1);
+            sub_815DEFC(gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_00E, gStringVar4);
+            break;
+        case 3:
+            sub_815E068(r5, r1);
+            sub_815DEFC(gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_01A, gStringVar4);
+            break;
+        case 4:
+            sub_815E068(r5, r1);
+            sub_815DEFC(gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_026, gStringVar4);
+            break;
+        case 5:
+            sub_815DEFC(gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_032, gStringVar4);
+            break;
+    }
+}
+#else
+NAKED
+void sub_815DF54(void)
+{
+    asm_unified("\tpush {r4,r5,lr}\n"
+                "\tldr r0, _0815DF90 @ =gSpecialVar_0x8006\n"
+                "\tldrh r4, [r0]\n"
+                "\tldr r2, _0815DF94 @ =gUnknown_203F458\n"
+                "\tldr r3, [r2]\n"
+                "\tldrb r1, [r3]\n"
+                "\tlsls r0, r1, 5\n"
+                "\tsubs r0, r1\n"
+                "\tlsls r1, r0, 5\n"
+                "\tadds r0, r3, r1\n"
+                "\tldrb r5, [r0, 0xE]\n"
+                "\tcmp r5, 0x1\n"
+                "\tbeq _0815DF7C\n"
+                "\tlsls r0, r4, 2\n"
+                "\tadds r0, r4\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r4\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, r3, r0\n"
+                "_0815DF7C:\n"
+                "\tldrb r1, [r0, 0x1B]\n"
+                "\tldr r0, _0815DF98 @ =gSpecialVar_0x8005\n"
+                "\tldrh r0, [r0]\n"
+                "\tcmp r0, 0x3\n"
+                "\tbeq _0815DFD4\n"
+                "\tcmp r0, 0x3\n"
+                "\tbgt _0815DF9C\n"
+                "\tcmp r0, 0x2\n"
+                "\tbeq _0815DFA6\n"
+                "\tb _0815E05C\n"
+                "\t.align 2, 0\n"
+                "_0815DF90: .4byte gSpecialVar_0x8006\n"
+                "_0815DF94: .4byte gUnknown_203F458\n"
+                "_0815DF98: .4byte gSpecialVar_0x8005\n"
+                "_0815DF9C:\n"
+                "\tcmp r0, 0x4\n"
+                "\tbeq _0815E000\n"
+                "\tcmp r0, 0x5\n"
+                "\tbeq _0815E038\n"
+                "\tb _0815E05C\n"
+                "_0815DFA6:\n"
+                "\tadds r0, r5, 0\n"
+                "\tbl sub_815E068\n"
+                "\tldr r0, _0815DFD0 @ =gUnknown_203F458\n"
+                "\tldr r0, [r0]\n"
+                "\tldrb r2, [r0]\n"
+                "\tlsls r1, r2, 5\n"
+                "\tsubs r1, r2\n"
+                "\tlsls r1, 5\n"
+                "\tadds r1, 0xC\n"
+                "\tadds r0, r1\n"
+                "\tlsls r1, r4, 2\n"
+                "\tadds r1, r4\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, r4\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, 0x4\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, 0xE\n"
+                "\tb _0815E026\n"
+                "\t.align 2, 0\n"
+                "_0815DFD0: .4byte gUnknown_203F458\n"
+                "_0815DFD4:\n"
+                "\tadds r0, r5, 0\n"
+                "\tbl sub_815E068\n"
+                "\tldr r0, _0815DFFC @ =gUnknown_203F458\n"
+                "\tldr r0, [r0]\n"
+                "\tldrb r2, [r0]\n"
+                "\tlsls r1, r2, 5\n"
+                "\tsubs r1, r2\n"
+                "\tlsls r1, 5\n"
+                "\tadds r1, 0xC\n"
+                "\tadds r0, r1\n"
+                "\tlsls r1, r4, 2\n"
+                "\tadds r1, r4\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, r4\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, 0x4\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, 0x1A\n"
+                "\tb _0815E026\n"
+                "\t.align 2, 0\n"
+                "_0815DFFC: .4byte gUnknown_203F458\n"
+                "_0815E000:\n"
+                "\tadds r0, r5, 0\n"
+                "\tbl sub_815E068\n"
+                "\tldr r0, _0815E030 @ =gUnknown_203F458\n"
+                "\tldr r0, [r0]\n"
+                "\tldrb r2, [r0]\n"
+                "\tlsls r1, r2, 5\n"
+                "\tsubs r1, r2\n"
+                "\tlsls r1, 5\n"
+                "\tadds r1, 0xC\n"
+                "\tadds r0, r1\n"
+                "\tlsls r1, r4, 2\n"
+                "\tadds r1, r4\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, r4\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, 0x4\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, 0x26\n"
+                "_0815E026:\n"
+                "\tldr r1, _0815E034 @ =gStringVar4\n"
+                "\tbl sub_815DEFC\n"
+                "\tb _0815E05C\n"
+                "\t.align 2, 0\n"
+                "_0815E030: .4byte gUnknown_203F458\n"
+                "_0815E034: .4byte gStringVar4\n"
+                "_0815E038:\n"
+                "\tldr r0, [r2]\n"
+                "\tldrb r2, [r0]\n"
+                "\tlsls r1, r2, 5\n"
+                "\tsubs r1, r2\n"
+                "\tlsls r1, 5\n"
+                "\tadds r1, 0xC\n"
+                "\tadds r0, r1\n"
+                "\tlsls r1, r4, 2\n"
+                "\tadds r1, r4\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, r4\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, 0x4\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, 0x32\n"
+                "\tldr r1, _0815E064 @ =gStringVar4\n"
+                "\tbl sub_815DEFC\n"
+                "_0815E05C:\n"
+                "\tpop {r4,r5}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_0815E064: .4byte gStringVar4");
+}
+#endif // NONMATCHING

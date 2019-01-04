@@ -5111,4 +5111,3 @@ gUnknown_84823CC::
 	.byte 255 @ friendship
 
 	.byte 0x80, 0x6b, 0x01
-

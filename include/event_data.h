@@ -59,4 +59,7 @@ extern u16 gSpecialVar_0x8014;
 extern u16 gSpecialVar_Result;
 extern u16 gSpecialVar_0x8004;
 
+extern u16 gUnknown_20370DA;
+extern u16 gUnknown_20370DC;
+
 #endif // GUARD_EVENT_DATA_H

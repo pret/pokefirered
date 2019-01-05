@@ -714,6 +714,14 @@ struct TrainerTowerLog
     u32 unk0;
     u32 unk4;
     u8 unk8;
+    u8 unk9;
+    u8 unkA_0:1;
+    u8 unkA_1:1;
+    u8 unkA_2:1;
+    u8 unkA_3:1;
+    u8 unkA_4:1;
+    u8 unkA_5:1;
+    u8 unkA_6:2;
 };
 
 struct SaveBlock1

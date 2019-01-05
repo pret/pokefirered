@@ -5,61 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_815EDDC
-sub_815EDDC: @ 815EDDC
-	ldr r1, _0815EDF0 @ =gSaveBlock2Ptr
-	ldr r1, [r1]
-	movs r2, 0xF2
-	lsls r2, 4
-	adds r1, r2
-	ldr r0, [r0]
-	ldr r1, [r1]
-	eors r0, r1
-	bx lr
-	.align 2, 0
-_0815EDF0: .4byte gSaveBlock2Ptr
-	thumb_func_end sub_815EDDC
-
-	thumb_func_start sub_815EDF4
-sub_815EDF4: @ 815EDF4
-	ldr r2, _0815EE08 @ =gSaveBlock2Ptr
-	ldr r2, [r2]
-	movs r3, 0xF2
-	lsls r3, 4
-	adds r2, r3
-	ldr r2, [r2]
-	eors r2, r1
-	str r2, [r0]
-	bx lr
-	.align 2, 0
-_0815EE08: .4byte gSaveBlock2Ptr
-	thumb_func_end sub_815EDF4
-
-	thumb_func_start sub_815EE0C
-sub_815EE0C: @ 815EE0C
-	push {r4-r6,lr}
-	ldr r6, _0815EE30 @ =gSaveBlock1Ptr
-	ldr r5, _0815EE34 @ =0x00003d38
-	movs r4, 0x3
-_0815EE14:
-	ldr r0, [r6]
-	adds r0, r5
-	adds r0, 0x4
-	ldr r1, _0815EE38 @ =0x00034bbf
-	bl sub_815EDF4
-	adds r5, 0xC
-	subs r4, 0x1
-	cmp r4, 0
-	bge _0815EE14
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815EE30: .4byte gSaveBlock1Ptr
-_0815EE34: .4byte 0x00003d38
-_0815EE38: .4byte 0x00034bbf
-	thumb_func_end sub_815EE0C
-
 	thumb_func_start sub_815EE3C
 sub_815EE3C: @ 815EE3C
 	ldr r1, _0815EE50 @ =gSaveBlock2Ptr

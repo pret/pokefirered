@@ -5,494 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_815E218
-sub_815E218: @ 815E218
-	push {lr}
-	ldr r0, _0815E260 @ =gMapHeader
-	ldrh r0, [r0, 0x12]
-	mov r12, r0
-	ldr r3, _0815E264 @ =0xfffffed6
-	add r3, r12
-	ldr r0, _0815E268 @ =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r2, _0815E26C @ =0x00003d34
-	adds r0, r1, r2
-	ldr r2, [r0]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0
-	movs r0, 0xF5
-	lsls r0, 6
-	adds r1, r0
-	ldrb r1, [r1]
-	cmp r3, r1
-	bne _0815E27C
-	ldr r3, _0815E270 @ =0xfffffed7
-	add r3, r12
-	ldr r0, _0815E274 @ =gUnknown_203F458
-	ldr r1, [r0]
-	ldrb r2, [r1]
-	lsls r0, r2, 5
-	subs r0, r2
-	lsls r0, 5
-	adds r1, r0
-	ldrb r1, [r1, 0xD]
-	cmp r3, r1
-	bgt _0815E27C
-	ldr r1, _0815E278 @ =gSpecialVar_Result
-	movs r0, 0
-	b _0815E280
-	.align 2, 0
-_0815E260: .4byte gMapHeader
-_0815E264: .4byte 0xfffffed6
-_0815E268: .4byte gSaveBlock1Ptr
-_0815E26C: .4byte 0x00003d34
-_0815E270: .4byte 0xfffffed7
-_0815E274: .4byte gUnknown_203F458
-_0815E278: .4byte gSpecialVar_Result
-_0815E27C:
-	ldr r1, _0815E288 @ =gSpecialVar_Result
-	movs r0, 0x1
-_0815E280:
-	strh r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815E288: .4byte gSpecialVar_Result
-	thumb_func_end sub_815E218
-
-	thumb_func_start sub_815E28C
-sub_815E28C: @ 815E28C
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	ldr r4, _0815E2D0 @ =gSaveBlock1Ptr
-	ldr r0, [r4]
-	ldr r5, _0815E2D4 @ =0x00003d34
-	adds r1, r0, r5
-	ldr r0, _0815E2D8 @ =gSpecialVar_0x8005
-	ldrh r0, [r0]
-	str r0, [r1]
-	cmp r0, 0x3
-	bls _0815E2A8
-	movs r0, 0
-	str r0, [r1]
-_0815E2A8:
-	bl sub_815EC0C
-	bl sub_815D834
-	cmp r0, 0
-	bne _0815E2E0
-	ldr r1, [r4]
-	adds r0, r1, r5
-	ldr r2, [r0]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0
-	ldr r0, _0815E2DC @ =0x00003d42
-	adds r1, r0
-	ldrb r0, [r1]
-	movs r2, 0x20
-	orrs r0, r2
-	b _0815E2FA
-	.align 2, 0
-_0815E2D0: .4byte gSaveBlock1Ptr
-_0815E2D4: .4byte 0x00003d34
-_0815E2D8: .4byte gSpecialVar_0x8005
-_0815E2DC: .4byte 0x00003d42
-_0815E2E0:
-	ldr r1, [r4]
-	adds r0, r1, r5
-	ldr r2, [r0]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0
-	ldr r0, _0815E384 @ =0x00003d42
-	adds r1, r0
-	ldrb r2, [r1]
-	movs r0, 0x21
-	negs r0, r0
-	ands r0, r2
-_0815E2FA:
-	strb r0, [r1]
-	ldr r6, _0815E388 @ =gSaveBlock1Ptr
-	ldr r2, [r6]
-	ldr r5, _0815E38C @ =0x00003d34
-	adds r0, r2, r5
-	ldr r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r2, r0
-	movs r0, 0xF5
-	lsls r0, 6
-	adds r2, r0
-	movs r0, 0
-	mov r8, r0
-	mov r0, r8
-	strb r0, [r2]
-	ldr r0, [r6]
-	adds r1, r0, r5
-	ldr r2, [r1]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	ldr r4, _0815E390 @ =0x00003d38
-	adds r1, r4
-	adds r0, r1
-	bl SetVBlankCounter1Ptr
-	ldr r2, [r6]
-	adds r3, r2, r5
-	ldr r1, [r3]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r4, r2, r4
-	adds r4, r0
-	mov r0, r8
-	str r0, [r4]
-	ldr r1, [r3]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r2, r0
-	ldr r3, _0815E384 @ =0x00003d42
-	adds r2, r3
-	ldrb r1, [r2]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r2]
-	ldr r1, [r6]
-	adds r5, r1, r5
-	ldr r2, [r5]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0
-	adds r1, r3
-	ldrb r2, [r1]
-	movs r0, 0x3
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815E384: .4byte 0x00003d42
-_0815E388: .4byte gSaveBlock1Ptr
-_0815E38C: .4byte 0x00003d34
-_0815E390: .4byte 0x00003d38
-	thumb_func_end sub_815E28C
-
-	thumb_func_start sub_815E394
-sub_815E394: @ 815E394
-	push {lr}
-	bl DisableVBlankCounter1
-	ldr r3, _0815E3F8 @ =gSpecialVar_Result
-	movs r0, 0
-	strh r0, [r3]
-	ldr r0, _0815E3FC @ =gSaveBlock1Ptr
-	ldr r2, [r0]
-	ldr r1, _0815E400 @ =0x00003d34
-	adds r0, r2, r1
-	ldr r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r2, r0
-	ldr r0, _0815E404 @ =0x00003d42
-	adds r2, r0
-	ldrb r0, [r2]
-	lsls r0, 29
-	cmp r0, 0
-	bge _0815E3C2
-	movs r0, 0x1
-	strh r0, [r3]
-_0815E3C2:
-	ldrb r2, [r2]
-	lsls r0, r2, 31
-	cmp r0, 0
-	beq _0815E3D6
-	lsls r0, r2, 30
-	cmp r0, 0
-	bge _0815E3D6
-	ldrh r0, [r3]
-	adds r0, 0x1
-	strh r0, [r3]
-_0815E3D6:
-	ldr r0, _0815E3FC @ =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r2, _0815E400 @ =0x00003d34
-	adds r0, r1, r2
-	ldr r2, [r0]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0
-	ldr r0, _0815E404 @ =0x00003d42
-	adds r1, r0
-	ldrb r0, [r1]
-	movs r2, 0x4
-	orrs r0, r2
-	strb r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815E3F8: .4byte gSpecialVar_Result
-_0815E3FC: .4byte gSaveBlock1Ptr
-_0815E400: .4byte 0x00003d34
-_0815E404: .4byte 0x00003d42
-	thumb_func_end sub_815E394
-
-	thumb_func_start sub_815E408
-sub_815E408: @ 815E408
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	ldr r1, _0815E444 @ =gUnknown_847A2B4
-	ldr r0, _0815E448 @ =gUnknown_203F458
-	ldr r0, [r0]
-	ldrb r0, [r0, 0xF]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r4, [r0]
-	ldr r0, _0815E44C @ =gSaveBlock1Ptr
-	mov r8, r0
-	ldr r2, [r0]
-	ldr r7, _0815E450 @ =0x00003d34
-	adds r0, r2, r7
-	ldr r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r2, r0
-	ldr r6, _0815E454 @ =0x00003d42
-	adds r2, r6
-	ldrb r0, [r2]
-	lsls r0, 31
-	lsrs r5, r0, 31
-	cmp r5, 0
-	beq _0815E45C
-	ldr r1, _0815E458 @ =gSpecialVar_Result
-	movs r0, 0x2
-	b _0815E4A0
-	.align 2, 0
-_0815E444: .4byte gUnknown_847A2B4
-_0815E448: .4byte gUnknown_203F458
-_0815E44C: .4byte gSaveBlock1Ptr
-_0815E450: .4byte 0x00003d34
-_0815E454: .4byte 0x00003d42
-_0815E458: .4byte gSpecialVar_Result
-_0815E45C:
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl sub_809A084
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0815E49C
-	ldr r1, _0815E494 @ =gStringVar2
-	adds r0, r4, 0
-	bl sub_8099E90
-	mov r0, r8
-	ldr r1, [r0]
-	adds r0, r1, r7
-	ldr r2, [r0]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0
-	adds r1, r6
-	ldrb r0, [r1]
-	movs r2, 0x1
-	orrs r0, r2
-	strb r0, [r1]
-	ldr r0, _0815E498 @ =gSpecialVar_Result
-	strh r5, [r0]
-	b _0815E4A2
-	.align 2, 0
-_0815E494: .4byte gStringVar2
-_0815E498: .4byte gSpecialVar_Result
-_0815E49C:
-	ldr r1, _0815E4AC @ =gSpecialVar_Result
-	movs r0, 0x1
-_0815E4A0:
-	strh r0, [r1]
-_0815E4A2:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815E4AC: .4byte gSpecialVar_Result
-	thumb_func_end sub_815E408
-
-	thumb_func_start sub_815E4B0
-sub_815E4B0: @ 815E4B0
-	push {r4-r6,lr}
-	ldr r6, _0815E4D8 @ =gSaveBlock1Ptr
-	ldr r2, [r6]
-	ldr r1, _0815E4DC @ =0x00003d34
-	adds r0, r2, r1
-	ldr r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r1, r0, 2
-	adds r0, r2, r1
-	ldr r3, _0815E4E0 @ =0x00003d42
-	adds r0, r3
-	ldrb r0, [r0]
-	lsls r0, 30
-	lsrs r5, r0, 31
-	cmp r5, 0
-	beq _0815E4E8
-	ldr r1, _0815E4E4 @ =gSpecialVar_Result
-	movs r0, 0x2
-	b _0815E534
-	.align 2, 0
-_0815E4D8: .4byte gSaveBlock1Ptr
-_0815E4DC: .4byte 0x00003d34
-_0815E4E0: .4byte 0x00003d42
-_0815E4E4: .4byte gSpecialVar_Result
-_0815E4E8:
-	ldr r4, _0815E520 @ =0x00003d38
-	adds r0, r1, r4
-	adds r0, r2, r0
-	adds r0, 0x4
-	bl sub_815EDDC
-	ldr r3, [r6]
-	ldr r2, _0815E524 @ =0x00003d34
-	adds r1, r3, r2
-	ldr r2, [r1]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	adds r4, r3, r4
-	adds r4, r1
-	ldr r4, [r4]
-	cmp r0, r4
-	bls _0815E530
-	adds r0, r1, r3
-	ldr r3, _0815E528 @ =0x00003d3c
-	adds r0, r3
-	adds r1, r4, 0
-	bl sub_815EDF4
-	ldr r0, _0815E52C @ =gSpecialVar_Result
-	strh r5, [r0]
-	b _0815E536
-	.align 2, 0
-_0815E520: .4byte 0x00003d38
-_0815E524: .4byte 0x00003d34
-_0815E528: .4byte 0x00003d3c
-_0815E52C: .4byte gSpecialVar_Result
-_0815E530:
-	ldr r1, _0815E55C @ =gSpecialVar_Result
-	movs r0, 0x1
-_0815E534:
-	strh r0, [r1]
-_0815E536:
-	ldr r0, _0815E560 @ =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r2, _0815E564 @ =0x00003d34
-	adds r0, r1, r2
-	ldr r2, [r0]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0
-	ldr r3, _0815E568 @ =0x00003d42
-	adds r1, r3
-	ldrb r0, [r1]
-	movs r2, 0x2
-	orrs r0, r2
-	strb r0, [r1]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815E55C: .4byte gSpecialVar_Result
-_0815E560: .4byte gSaveBlock1Ptr
-_0815E564: .4byte 0x00003d34
-_0815E568: .4byte 0x00003d42
-	thumb_func_end sub_815E4B0
-
-	thumb_func_start sub_815E56C
-sub_815E56C: @ 815E56C
-	push {r4,lr}
-	ldr r0, _0815E5A0 @ =gSaveBlock1Ptr
-	ldr r4, [r0]
-	ldr r1, _0815E5A4 @ =0x00003d34
-	adds r0, r4, r1
-	ldr r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r3, r0, 2
-	adds r0, r4, r3
-	ldr r1, _0815E5A8 @ =0x00003d42
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 29
-	cmp r0, 0
-	blt _0815E5BA
-	subs r1, 0xA
-	adds r0, r4, r1
-	adds r2, r0, r3
-	ldr r1, [r2]
-	ldr r0, _0815E5AC @ =0x00034bbe
-	cmp r1, r0
-	bls _0815E5B0
-	adds r0, 0x1
-	str r0, [r2]
-	b _0815E5BA
-	.align 2, 0
-_0815E5A0: .4byte gSaveBlock1Ptr
-_0815E5A4: .4byte 0x00003d34
-_0815E5A8: .4byte 0x00003d42
-_0815E5AC: .4byte 0x00034bbe
-_0815E5B0:
-	ldr r1, _0815E5C0 @ =0x00003d38
-	adds r0, r3, r1
-	adds r0, r4, r0
-	bl SetVBlankCounter1Ptr
-_0815E5BA:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815E5C0: .4byte 0x00003d38
-	thumb_func_end sub_815E56C
-
-	thumb_func_start sub_815E5C4
-sub_815E5C4: @ 815E5C4
-	ldr r0, _0815E5E4 @ =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r2, _0815E5E8 @ =0x00003d34
-	adds r0, r1, r2
-	ldr r2, [r0]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0
-	ldr r0, _0815E5EC @ =0x00003d42
-	adds r1, r0
-	ldrb r0, [r1]
-	movs r2, 0x8
-	orrs r0, r2
-	strb r0, [r1]
-	bx lr
-	.align 2, 0
-_0815E5E4: .4byte gSaveBlock1Ptr
-_0815E5E8: .4byte 0x00003d34
-_0815E5EC: .4byte 0x00003d42
-	thumb_func_end sub_815E5C4
-
 	thumb_func_start sub_815E5F0
 sub_815E5F0: @ 815E5F0
 	push {lr}
@@ -1449,5 +961,60 @@ _0815EDD0: .4byte gStringVar4
 _0815EDD4: .4byte gUnknown_83FE998
 _0815EDD8: .4byte gUnknown_83FE9C4
 	thumb_func_end sub_815EC8C
+
+	thumb_func_start sub_815EDDC
+sub_815EDDC: @ 815EDDC
+	ldr r1, _0815EDF0 @ =gSaveBlock2Ptr
+	ldr r1, [r1]
+	movs r2, 0xF2
+	lsls r2, 4
+	adds r1, r2
+	ldr r0, [r0]
+	ldr r1, [r1]
+	eors r0, r1
+	bx lr
+	.align 2, 0
+_0815EDF0: .4byte gSaveBlock2Ptr
+	thumb_func_end sub_815EDDC
+
+	thumb_func_start sub_815EDF4
+sub_815EDF4: @ 815EDF4
+	ldr r2, _0815EE08 @ =gSaveBlock2Ptr
+	ldr r2, [r2]
+	movs r3, 0xF2
+	lsls r3, 4
+	adds r2, r3
+	ldr r2, [r2]
+	eors r2, r1
+	str r2, [r0]
+	bx lr
+	.align 2, 0
+_0815EE08: .4byte gSaveBlock2Ptr
+	thumb_func_end sub_815EDF4
+
+	thumb_func_start sub_815EE0C
+sub_815EE0C: @ 815EE0C
+	push {r4-r6,lr}
+	ldr r6, _0815EE30 @ =gSaveBlock1Ptr
+	ldr r5, _0815EE34 @ =0x00003d38
+	movs r4, 0x3
+_0815EE14:
+	ldr r0, [r6]
+	adds r0, r5
+	adds r0, 0x4
+	ldr r1, _0815EE38 @ =0x00034bbf
+	bl sub_815EDF4
+	adds r5, 0xC
+	subs r4, 0x1
+	cmp r4, 0
+	bge _0815EE14
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0815EE30: .4byte gSaveBlock1Ptr
+_0815EE34: .4byte 0x00003d38
+_0815EE38: .4byte 0x00034bbf
+	thumb_func_end sub_815EE0C
 
 	.align 2, 0 @ Don't pad with nop.

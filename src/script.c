@@ -19,7 +19,7 @@ enum
 };
 
 EWRAM_DATA u8 gUnknown_20370A0 = 0;
-EWRAM_DATA u8 *gUnknown_20370A4 = NULL;
+EWRAM_DATA const u8 *gRAMScriptPtr = NULL;
 
 // ewram bss
 /*IWRAM_DATA*/ static u8 sScriptContext1Status;
@@ -485,7 +485,7 @@ bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objec
 u8 *GetRamScript(u8 objectId, u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    gUnknown_20370A4 = NULL;
+    gRAMScriptPtr = NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return script;
     if (scriptData->mapGroup != gSaveBlock1Ptr->location.mapGroup)
@@ -501,7 +501,7 @@ u8 *GetRamScript(u8 objectId, u8 *script)
     }
     else
     {
-        gUnknown_20370A4 = script;
+        gRAMScriptPtr = script;
         return scriptData->script;
     }
 }

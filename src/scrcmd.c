@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gba/isagbprint.h"
 #include "script.h"
+#include "mystery_event_script.h"
 #include "event_data.h"
 
 extern u16 (*const gSpecials[])(void);
@@ -212,6 +213,101 @@ SCRCMD_DEF(ScrCmd_callstd_if)
         if (script < gStdScriptsEnd)
             ScriptCall(ctx, *script);
     }
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_gotoram)
+{
+    ScriptJump(ctx, gRAMScriptPtr);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_killscript)
+{
+    ClearRamScript();
+    StopScript(ctx);
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_setmysteryeventstatus)
+{
+    SetMysteryEventScriptStatus(ScriptReadByte(ctx));
+    return FALSE;
+}
+
+SCRCMD_DEF(sub_806A28C)
+{
+    const u8 * script = sub_8069E48();
+    if (script != NULL)
+    {
+        gRAMScriptPtr = ctx->scriptPtr;
+        ScriptJump(ctx, script);
+    }
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_loadword)
+{
+    u8 which = ScriptReadByte(ctx);
+    ctx->data[which] = ScriptReadWord(ctx);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_loadbytefromaddr)
+{
+    u8 which = ScriptReadByte(ctx);
+    ctx->data[which] = *(const u8 *)ScriptReadWord(ctx);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_writebytetoaddr)
+{
+    u8 value = ScriptReadByte(ctx);
+    *(u8 *)ScriptReadWord(ctx) = value;
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_loadbyte)
+{
+    u8 which = ScriptReadByte(ctx);
+    ctx->data[which] = ScriptReadByte(ctx);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setptrbyte)
+{
+    u8 which = ScriptReadByte(ctx);
+    *(u8 *)ScriptReadWord(ctx) = ctx->data[which];
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_copylocal)
+{
+    u8 whichDst = ScriptReadByte(ctx);
+    u8 whichSrc = ScriptReadByte(ctx);
+    ctx->data[whichDst] = ctx->data[whichSrc];
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_copybyte)
+{
+    u8 * dest = (u8 *)ScriptReadWord(ctx);
+    *dest = *(const u8 *)ScriptReadWord(ctx);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setvar)
+{
+    u16 * varPtr = GetVarPointer(ScriptReadHalfword(ctx));
+    *varPtr = ScriptReadHalfword(ctx);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_copyvar)
+{
+    u16 * destPtr = GetVarPointer(ScriptReadHalfword(ctx));
+    u16 * srcPtr = GetVarPointer(ScriptReadHalfword(ctx));
+    *destPtr = *srcPtr;
     return FALSE;
 }
 

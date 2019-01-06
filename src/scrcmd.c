@@ -2228,3 +2228,43 @@ SCRCMD_DEF(takecoins)
         gSpecialVar_Result = 1;
     return FALSE;
 }
+
+SCRCMD_DEF(cmdCA)
+{
+    sub_8069A20();
+    return FALSE;
+}
+
+SCRCMD_DEF(cmdCB)
+{
+    sub_8069A2C();
+    return FALSE;
+}
+
+// This command will force the Pokémon to be obedient, you don't get to make it disobedient.
+SCRCMD_DEF(setmonobedient)
+{
+    bool8 obedient = TRUE;
+    u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    SetMonData(&gPlayerParty[partyIndex], MON_DATA_OBEDIENCE, &obedient);
+    return FALSE;
+}
+
+SCRCMD_DEF(checkmonobedience)
+{
+    u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OBEDIENCE, NULL);
+    return FALSE;
+}
+
+SCRCMD_DEF(setmonmetlocation)
+{
+    u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
+    u8 location = ScriptReadByte(ctx);
+
+    if (partyIndex < PARTY_SIZE)
+        SetMonData(&gPlayerParty[partyIndex], MON_DATA_MET_LOCATION, &location);
+    return FALSE;
+}

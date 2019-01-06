@@ -104,7 +104,6 @@ SECTIONS {
         asm/text_window_graphics.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);
-        asm/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         asm/event_data.o(.text);
         asm/coord_event_weather.o(.text);

@@ -70,6 +70,8 @@ void sub_80699F8(void);
 void sub_8069964(void);
 void sub_80699A4(void);
 void sub_8069970(void);
+void sub_8069A20(void);
+void sub_8069A2C(void);
 
 extern const u8 *gRAMScriptPtr;
 

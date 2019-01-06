@@ -825,7 +825,7 @@ _08055232:
 get_mapheader_by_bank_and_number: @ 8055238
 	lsls r0, 16
 	lsls r1, 16
-	ldr r2, _0805524C @ =gUnknown_83526A8
+	ldr r2, _0805524C @ =gMapGroups
 	lsrs r0, 14
 	adds r0, r2
 	ldr r0, [r0]
@@ -834,7 +834,7 @@ get_mapheader_by_bank_and_number: @ 8055238
 	ldr r0, [r1]
 	bx lr
 	.align 2, 0
-_0805524C: .4byte gUnknown_83526A8
+_0805524C: .4byte gMapGroups
 	thumb_func_end get_mapheader_by_bank_and_number
 
 	thumb_func_start warp1_get_mapheader

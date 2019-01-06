@@ -930,10 +930,12 @@ gUnknown_82E55CC:: @ 82E55CC
 	.incbin "baserom.gba", 0x2E55CC, 0x695C0
 
 gUnknown_834EB8C:: @ 834EB8C
-	.incbin "baserom.gba", 0x34EB8C, 0x3B1C
+	.incbin "baserom.gba", 0x34EB8C, 0x5FC
 
-gUnknown_83526A8:: @ 83526A8
-	.incbin "baserom.gba", 0x3526A8, 0x844
+    .include "data/maps/groups.inc"
+
+gUnknown_8352754:: @ 8352754
+	.incbin "baserom.gba", 0x352754, 0x798
 
 gUnknown_8352EEC:: @ 8352EEC
 	.incbin "baserom.gba", 0x352EEC, 0x4

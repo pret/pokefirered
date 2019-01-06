@@ -88,6 +88,8 @@ void SetCurrentMapLayout(u16 mapDataId);
 void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
 
 void ResetInitialPlayerAvatarState(void);
+void sub_8055D40(u16 mapDataId);
+void sub_80563F0(void);
 
 extern u8 gUnknown_2031DD8;
 extern u8 gUnknown_2036E28;

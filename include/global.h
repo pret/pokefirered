@@ -709,6 +709,21 @@ struct MEventBuffers
     /*0x344 0x3464*/ u32 unk_344[2][5];
 }; // 0x36C 0x348C
 
+struct TrainerTowerLog
+{
+    u32 unk0;
+    u32 unk4;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA_0:1;
+    u8 unkA_1:1;
+    u8 unkA_2:1;
+    u8 unkA_3:1;
+    u8 unkA_4:1;
+    u8 unkA_5:1;
+    u8 unkA_6:2;
+};
+
 struct SaveBlock1
 {
     /*0x0000*/ struct Coords16 pos;
@@ -766,7 +781,7 @@ struct SaveBlock1
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
     /*0x3A94*/ u8 filler3A94[0x2A0];
     /*0x3D34*/ u32 unkArrayIdx;
-    /*0x3D38*/ u32 unkArray[4][3];
+    /*0x3D38*/ struct TrainerTowerLog unkArray[4];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

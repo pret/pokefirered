@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "task.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
 #include "malloc.h"
@@ -11,7 +12,12 @@
 #include "cereader_tool.h"
 #include "easy_chat.h"
 #include "text.h"
+#include "battle_setup.h"
+#include "battle_transition.h"
+#include "battle.h"
+#include "battle_2.h"
 #include "overworld.h"
+#include "item.h"
 
 struct UnkStruct_8479D34
 {
@@ -28,7 +34,6 @@ struct UnkSubstruct_203F458_000C_004
     /* 0x000 */ u8 unk_000[11];
     /* 0x00B */ u8 unk_00B;
     /* 0x00C */ u8 unk_00C;
-    /* 0x00D */ u8 unk_00D;
     /* 0x00E */ u16 unk_00E[6];
     /* 0x01A */ u16 unk_01A[6];
     /* 0x026 */ u16 unk_026[6];
@@ -38,7 +43,8 @@ struct UnkSubstruct_203F458_000C_004
 
 struct UnkSubstruct_203F458_000C
 {
-    /* 0x000 */ u8 filler_000[2];
+    /* 0x000 */ u8 unk_000;
+    /* 0x000 */ u8 unk_001;
     /* 0x002 */ u8 unk_002;
     /* 0x003 */ u8 unk_003;
     /* 0x004 */ struct UnkSubstruct_203F458_000C_004 unk_004[3];
@@ -122,15 +128,19 @@ void sub_815E8CC(void);
 void sub_815E908(void);
 void sub_815E948(void);
 void sub_815E9C8(void);
+void sub_815E9FC(void);
 void sub_815EC0C(void);
+u32 sub_815EDDC(u32 *);
+void sub_815EDF4(u32 *, u32);
 
 extern const struct UnkStruct_8479D34 gUnknown_8479D34[15];
+extern const struct UnkStruct_8479ED8 gUnknown_8479ED8[83];
+extern const struct UnkStruct_847A024 gUnknown_847A024[10];
 extern void (*const gUnknown_847A230[])(void);
 extern const struct Unk_203F458_Header gUnknown_84827AC;
 extern const struct UnkSubstruct_203F458_000C *const gUnknown_84827B4[][8];
 extern const u16 gUnknown_847A284[8][3];
-extern const struct UnkStruct_8479ED8 gUnknown_8479ED8[83];
-extern const struct UnkStruct_847A024 gUnknown_847A024[10];
+extern const u16 gUnknown_847A2B4[];
 
 bool32 sub_815D7BC(void * dest, void * buffer)
 {
@@ -280,7 +290,7 @@ void sub_815DA54(void)
     gUnknown_203F45C->unk_3C = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
     gUnknown_203F45C->unk_3D = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_00B;
     gUnknown_203F45C->unk_3E = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_00C;
-    SetVBlankCounter1Ptr(gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx]);
+    SetVBlankCounter1Ptr(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
     sub_815DD2C();
 }
 
@@ -692,3 +702,159 @@ void sub_815DF54(void)
                 "_0815E064: .4byte gStringVar4");
 }
 #endif // NONMATCHING
+
+void sub_815E068(u8 battleType, u8 facilityClass)
+{
+    u16 r5 = FALSE;
+    s32 r4;
+    switch (battleType)
+    {
+        case 0:
+        case 2:
+            for (r4 = 0; r4 < NELEMS(gUnknown_8479ED8); r4++)
+            {
+                if (gUnknown_8479ED8[r4].unk1 == facilityClass)
+                    break;
+            }
+            if (r4 != NELEMS(gUnknown_8479ED8))
+                r5 = gUnknown_8479ED8[r4].unk2;
+            break;
+        case 1:
+            for (r4 = 0; r4 < NELEMS(gUnknown_847A024); r4++)
+            {
+                if (gUnknown_847A024[r4].unk2 == facilityClass)
+                    break;
+            }
+            if (r4 != NELEMS(gUnknown_847A024))
+            {
+                if (VarGet(VAR_0x4003))
+                    r5 = gUnknown_847A024[r4].unk4;
+                else
+                    r5 = gUnknown_847A024[r4].unk3;
+            }
+            break;
+    }
+    gUnknown_20370DC = gUnknown_20370DA;
+    gUnknown_20370DA = r5;
+}
+
+void sub_815E114(void)
+{
+    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+}
+
+void sub_815E124(u8 taskId)
+{
+    if (sub_80D08F8() == TRUE)
+    {
+        gMain.savedCallback = sub_815E114;
+        sub_80563F0();
+        SetMainCallback2(sub_800FD9C);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_815E160(void)
+{
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FACTORY;
+    if (gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002 == 1)
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+    gTrainerBattleOpponent_A = 0;
+    sub_815E9FC();
+    CreateTask(sub_815E124, 1);
+    PlayMapChosenOrBattleBGM(0);
+    sub_80D08B8(sub_8080060());
+}
+
+void sub_815E1C0(void)
+{
+    if (!gSpecialVar_0x8005)
+        gSpecialVar_Result = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
+}
+
+void sub_815E1F0(void)
+{
+    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8++;
+}
+
+void sub_815E218(void)
+{
+    u16 mapDataId = gMapHeader.mapDataId;
+    if (mapDataId - 0x12A == gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 && mapDataId - 0x129 <= gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_001)
+        gSpecialVar_Result = FALSE;
+    else
+        gSpecialVar_Result = TRUE;
+}
+
+void sub_815E28C(void)
+{
+    gSaveBlock1Ptr->unkArrayIdx = gSpecialVar_0x8005;
+    if (gSaveBlock1Ptr->unkArrayIdx >= NELEMS(gSaveBlock1Ptr->unkArray))
+        gSaveBlock1Ptr->unkArrayIdx = 0;
+    sub_815EC0C();
+    if (!sub_815D834())
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_5 = TRUE;
+    else
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_5 = FALSE;
+    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 = 0;
+    SetVBlankCounter1Ptr(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
+    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 = 0;
+    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2 = FALSE;
+    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1 = FALSE;
+}
+
+void sub_815E394(void)
+{
+    DisableVBlankCounter1();
+    gSpecialVar_Result = 0;
+    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2)
+        gSpecialVar_Result++;
+    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 && gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1)
+        gSpecialVar_Result++;
+    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2 = TRUE;
+}
+
+void sub_815E408(void)
+{
+    u16 itemId = gUnknown_847A2B4[gUnknown_203F458->unk_0004.unk_0008->unk_003];
+    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0)
+        gSpecialVar_Result = 2;
+    else if (AddBagItem(itemId, 1) == 1)
+    {
+        sub_8099E90(itemId, gStringVar2);
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 = TRUE;
+        gSpecialVar_Result = 0;
+    }
+    else
+        gSpecialVar_Result = 1;
+}
+
+void sub_815E4B0(void)
+{
+    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1)
+        gSpecialVar_Result = 2;
+    else if (sub_815EDDC(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4) > gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0)
+    {
+        sub_815EDF4(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4, gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
+        gSpecialVar_Result = 0;
+    }
+    else
+        gSpecialVar_Result = 1;
+    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1 = TRUE;
+}
+
+void sub_815E56C(void)
+{
+    if (!gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2)
+    {
+        if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 >= 215999)
+            gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 = 215999;
+        else
+            SetVBlankCounter1Ptr(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
+    }
+}
+
+void sub_815E5C4(void)
+{
+    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_3 = 1;
+}

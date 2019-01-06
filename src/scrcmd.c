@@ -53,32 +53,32 @@ const u8 sScriptConditionTable[6][3] =
 
 
 
-#define SCRCMD_DEF(name) bool8 name(struct ScriptContext *ctx)
+#define SCRCMD_DEF(name) bool8 ScrCmd_##name(struct ScriptContext *ctx)
 
-SCRCMD_DEF(ScrCmd_nop)
+SCRCMD_DEF(nop)
 {
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_nop1)
+SCRCMD_DEF(nop1)
 {
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_end)
+SCRCMD_DEF(end)
 {
     StopScript(ctx);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_gotonative)
+SCRCMD_DEF(gotonative)
 {
     bool8 (*func)(void) = (bool8 (*)(void))ScriptReadWord(ctx);
     SetupNativeScript(ctx, func);
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_special)
+SCRCMD_DEF(special)
 {
     u16 (*const *specialPtr)(void) = gSpecials + ScriptReadHalfword(ctx);
     if (specialPtr < gSpecialsEnd)
@@ -88,7 +88,7 @@ SCRCMD_DEF(ScrCmd_special)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_specialvar)
+SCRCMD_DEF(specialvar)
 {
     u16 * varPtr = GetVarPointer(ScriptReadHalfword(ctx));
     u16 (*const *specialPtr)(void) = gSpecials + ScriptReadHalfword(ctx);
@@ -99,40 +99,40 @@ SCRCMD_DEF(ScrCmd_specialvar)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_callnative)
+SCRCMD_DEF(callnative)
 {
     void (*func )(void) = ((void (*)(void))ScriptReadWord(ctx));
     func();
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_waitstate)
+SCRCMD_DEF(waitstate)
 {
     ScriptContext1_Stop();
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_goto)
+SCRCMD_DEF(goto)
 {
     const u8 * scrptr = (const u8 *)ScriptReadWord(ctx);
     ScriptJump(ctx, scrptr);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_return)
+SCRCMD_DEF(return)
 {
     ScriptReturn(ctx);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_call)
+SCRCMD_DEF(call)
 {
     const u8 * scrptr = (const u8 *)ScriptReadWord(ctx);
     ScriptCall(ctx, scrptr);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_goto_if)
+SCRCMD_DEF(goto_if)
 {
     u8 condition = ScriptReadByte(ctx);
     const u8 * scrptr = (const u8 *)ScriptReadWord(ctx);
@@ -141,7 +141,7 @@ SCRCMD_DEF(ScrCmd_goto_if)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_call_if)
+SCRCMD_DEF(call_if)
 {
     u8 condition = ScriptReadByte(ctx);
     const u8 * scrptr = (const u8 *)ScriptReadWord(ctx);
@@ -150,7 +150,7 @@ SCRCMD_DEF(ScrCmd_call_if)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setvaddress)
+SCRCMD_DEF(setvaddress)
 {
     u32 addr1 = (u32)ctx->scriptPtr - 1;
     u32 addr2 = ScriptReadWord(ctx);
@@ -159,21 +159,21 @@ SCRCMD_DEF(ScrCmd_setvaddress)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_vgoto)
+SCRCMD_DEF(vgoto)
 {
     const u8 * scrptr = (const u8 *)ScriptReadWord(ctx);
     ScriptJump(ctx, scrptr - gVScriptOffset);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_vcall)
+SCRCMD_DEF(vcall)
 {
     const u8 * scrptr = (const u8 *)ScriptReadWord(ctx);
     ScriptCall(ctx, scrptr - gVScriptOffset);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_vgoto_if)
+SCRCMD_DEF(vgoto_if)
 {
     u8 condition = ScriptReadByte(ctx);
     const u8 * scrptr = (const u8 *)ScriptReadWord(ctx) - gVScriptOffset;
@@ -182,7 +182,7 @@ SCRCMD_DEF(ScrCmd_vgoto_if)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_vcall_if)
+SCRCMD_DEF(vcall_if)
 {
     u8 condition = ScriptReadByte(ctx);
     const u8 * scrptr = (const u8 *)ScriptReadWord(ctx) - gVScriptOffset;
@@ -191,7 +191,7 @@ SCRCMD_DEF(ScrCmd_vcall_if)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_gotostd)
+SCRCMD_DEF(gotostd)
 {
     u8 stdIdx = ScriptReadByte(ctx);
     const u8 *const * script = gStdScripts + stdIdx;
@@ -200,7 +200,7 @@ SCRCMD_DEF(ScrCmd_gotostd)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_callstd)
+SCRCMD_DEF(callstd)
 {
     u8 stdIdx = ScriptReadByte(ctx);
     const u8 *const * script = gStdScripts + stdIdx;
@@ -209,7 +209,7 @@ SCRCMD_DEF(ScrCmd_callstd)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_gotostd_if)
+SCRCMD_DEF(gotostd_if)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 stdIdx = ScriptReadByte(ctx);
@@ -222,7 +222,7 @@ SCRCMD_DEF(ScrCmd_gotostd_if)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_callstd_if)
+SCRCMD_DEF(callstd_if)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 stdIdx = ScriptReadByte(ctx);
@@ -235,26 +235,26 @@ SCRCMD_DEF(ScrCmd_callstd_if)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_gotoram)
+SCRCMD_DEF(gotoram)
 {
     ScriptJump(ctx, gRAMScriptPtr);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_killscript)
+SCRCMD_DEF(killscript)
 {
     ClearRamScript();
     StopScript(ctx);
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_setmysteryeventstatus)
+SCRCMD_DEF(setmysteryeventstatus)
 {
     SetMysteryEventScriptStatus(ScriptReadByte(ctx));
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_cmdCF)
+SCRCMD_DEF(cmdCF)
 {
     const u8 * script = sub_8069E48();
     if (script != NULL)
@@ -265,42 +265,42 @@ SCRCMD_DEF(ScrCmd_cmdCF)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_loadword)
+SCRCMD_DEF(loadword)
 {
     u8 which = ScriptReadByte(ctx);
     ctx->data[which] = ScriptReadWord(ctx);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_loadbytefromaddr)
+SCRCMD_DEF(loadbytefromaddr)
 {
     u8 which = ScriptReadByte(ctx);
     ctx->data[which] = *(const u8 *)ScriptReadWord(ctx);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_writebytetoaddr)
+SCRCMD_DEF(writebytetoaddr)
 {
     u8 value = ScriptReadByte(ctx);
     *(u8 *)ScriptReadWord(ctx) = value;
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_loadbyte)
+SCRCMD_DEF(loadbyte)
 {
     u8 which = ScriptReadByte(ctx);
     ctx->data[which] = ScriptReadByte(ctx);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setptrbyte)
+SCRCMD_DEF(setptrbyte)
 {
     u8 which = ScriptReadByte(ctx);
     *(u8 *)ScriptReadWord(ctx) = ctx->data[which];
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_copylocal)
+SCRCMD_DEF(copylocal)
 {
     u8 whichDst = ScriptReadByte(ctx);
     u8 whichSrc = ScriptReadByte(ctx);
@@ -308,21 +308,21 @@ SCRCMD_DEF(ScrCmd_copylocal)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_copybyte)
+SCRCMD_DEF(copybyte)
 {
     u8 * dest = (u8 *)ScriptReadWord(ctx);
     *dest = *(const u8 *)ScriptReadWord(ctx);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setvar)
+SCRCMD_DEF(setvar)
 {
     u16 * varPtr = GetVarPointer(ScriptReadHalfword(ctx));
     *varPtr = ScriptReadHalfword(ctx);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_copyvar)
+SCRCMD_DEF(copyvar)
 {
     u16 * destPtr = GetVarPointer(ScriptReadHalfword(ctx));
     u16 * srcPtr = GetVarPointer(ScriptReadHalfword(ctx));
@@ -330,7 +330,7 @@ SCRCMD_DEF(ScrCmd_copyvar)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setorcopyvar)
+SCRCMD_DEF(setorcopyvar)
 {
     u16 * destPtr = GetVarPointer(ScriptReadHalfword(ctx));
     *destPtr = VarGet(ScriptReadHalfword(ctx));
@@ -355,7 +355,7 @@ u8 compare_012(u16 left, u16 right)
 }
 
 // comparelocaltolocal
-SCRCMD_DEF(ScrCmd_compare_local_to_local)
+SCRCMD_DEF(compare_local_to_local)
 {
     const u8 value1 = ctx->data[ScriptReadByte(ctx)];
     const u8 value2 = ctx->data[ScriptReadByte(ctx)];
@@ -365,7 +365,7 @@ SCRCMD_DEF(ScrCmd_compare_local_to_local)
 }
 
 // comparelocaltoimm
-SCRCMD_DEF(ScrCmd_compare_local_to_value)
+SCRCMD_DEF(compare_local_to_value)
 {
     const u8 value1 = ctx->data[ScriptReadByte(ctx)];
     const u8 value2 = ScriptReadByte(ctx);
@@ -374,7 +374,7 @@ SCRCMD_DEF(ScrCmd_compare_local_to_value)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_compare_local_to_addr)
+SCRCMD_DEF(compare_local_to_addr)
 {
     const u8 value1 = ctx->data[ScriptReadByte(ctx)];
     const u8 value2 = *(const u8 *)ScriptReadWord(ctx);
@@ -383,7 +383,7 @@ SCRCMD_DEF(ScrCmd_compare_local_to_addr)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_compare_addr_to_local)
+SCRCMD_DEF(compare_addr_to_local)
 {
     const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
     const u8 value2 = ctx->data[ScriptReadByte(ctx)];
@@ -392,7 +392,7 @@ SCRCMD_DEF(ScrCmd_compare_addr_to_local)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_compare_addr_to_value)
+SCRCMD_DEF(compare_addr_to_value)
 {
     const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
     const u8 value2 = ScriptReadByte(ctx);
@@ -401,7 +401,7 @@ SCRCMD_DEF(ScrCmd_compare_addr_to_value)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_compare_addr_to_addr)
+SCRCMD_DEF(compare_addr_to_addr)
 {
     const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
     const u8 value2 = *(const u8 *)ScriptReadWord(ctx);
@@ -410,7 +410,7 @@ SCRCMD_DEF(ScrCmd_compare_addr_to_addr)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_compare_var_to_value)
+SCRCMD_DEF(compare_var_to_value)
 {
     const u16 value1 = *GetVarPointer(ScriptReadHalfword(ctx));
     const u16 value2 = ScriptReadHalfword(ctx);
@@ -419,7 +419,7 @@ SCRCMD_DEF(ScrCmd_compare_var_to_value)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_compare_var_to_var)
+SCRCMD_DEF(compare_var_to_var)
 {
     const u16 *ptr1 = GetVarPointer(ScriptReadHalfword(ctx));
     const u16 *ptr2 = GetVarPointer(ScriptReadHalfword(ctx));
@@ -428,21 +428,21 @@ SCRCMD_DEF(ScrCmd_compare_var_to_var)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_addvar)
+SCRCMD_DEF(addvar)
 {
     u16 *ptr = GetVarPointer(ScriptReadHalfword(ctx));
     *ptr += ScriptReadHalfword(ctx);
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_subvar)
+SCRCMD_DEF(subvar)
 {
     u16 *ptr = GetVarPointer(ScriptReadHalfword(ctx));
     *ptr -= VarGet(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_random)
+SCRCMD_DEF(random)
 {
     u16 max = VarGet(ScriptReadHalfword(ctx));
 
@@ -450,7 +450,7 @@ SCRCMD_DEF(ScrCmd_random)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_giveitem)
+SCRCMD_DEF(giveitem)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
@@ -460,7 +460,7 @@ SCRCMD_DEF(ScrCmd_giveitem)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_takeitem)
+SCRCMD_DEF(takeitem)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
@@ -469,7 +469,7 @@ SCRCMD_DEF(ScrCmd_takeitem)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_checkitemspace)
+SCRCMD_DEF(checkitemspace)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
@@ -478,7 +478,7 @@ SCRCMD_DEF(ScrCmd_checkitemspace)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_checkitem)
+SCRCMD_DEF(checkitem)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
@@ -487,7 +487,7 @@ SCRCMD_DEF(ScrCmd_checkitem)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_checkitemtype)
+SCRCMD_DEF(checkitemtype)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
 
@@ -495,7 +495,7 @@ SCRCMD_DEF(ScrCmd_checkitemtype)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_givepcitem)
+SCRCMD_DEF(givepcitem)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
@@ -504,7 +504,7 @@ SCRCMD_DEF(ScrCmd_givepcitem)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_checkpcitem)
+SCRCMD_DEF(checkpcitem)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
@@ -513,7 +513,7 @@ SCRCMD_DEF(ScrCmd_checkpcitem)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_givedecoration)
+SCRCMD_DEF(givedecoration)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
@@ -521,7 +521,7 @@ SCRCMD_DEF(ScrCmd_givedecoration)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_takedecoration)
+SCRCMD_DEF(takedecoration)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
@@ -529,7 +529,7 @@ SCRCMD_DEF(ScrCmd_takedecoration)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_checkdecorspace)
+SCRCMD_DEF(checkdecorspace)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
@@ -537,7 +537,7 @@ SCRCMD_DEF(ScrCmd_checkdecorspace)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_checkdecor)
+SCRCMD_DEF(checkdecor)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
@@ -545,31 +545,31 @@ SCRCMD_DEF(ScrCmd_checkdecor)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setflag)
+SCRCMD_DEF(setflag)
 {
     FlagSet(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_clearflag)
+SCRCMD_DEF(clearflag)
 {
     FlagClear(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_checkflag)
+SCRCMD_DEF(checkflag)
 {
     ctx->comparisonResult = FlagGet(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_incrementgamestat)
+SCRCMD_DEF(incrementgamestat)
 {
     IncrementGameStat(ScriptReadByte(ctx));
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_comparestattoword)
+SCRCMD_DEF(comparestattoword)
 {
     u8 statIdx = ScriptReadByte(ctx);
     u32 value = ScriptReadWord(ctx);
@@ -584,7 +584,7 @@ SCRCMD_DEF(ScrCmd_comparestattoword)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_cmdD0)
+SCRCMD_DEF(cmdD0)
 {
     u16 value = ScriptReadHalfword(ctx);
     sub_8115748(value);
@@ -592,14 +592,14 @@ SCRCMD_DEF(ScrCmd_cmdD0)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_animateflash)
+SCRCMD_DEF(animateflash)
 {
     sub_807F028(ScriptReadByte(ctx));
     ScriptContext1_Stop();
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_setflashradius)
+SCRCMD_DEF(setflashradius)
 {
     u16 flashLevel = VarGet(ScriptReadHalfword(ctx));
 
@@ -615,14 +615,14 @@ static bool8 IsPaletteNotActive(void)
         return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_fadescreen)
+SCRCMD_DEF(fadescreen)
 {
     fade_screen(ScriptReadByte(ctx), 0);
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_fadescreenspeed)
+SCRCMD_DEF(fadescreenspeed)
 {
     u8 mode = ScriptReadByte(ctx);
     u8 speed = ScriptReadByte(ctx);
@@ -642,14 +642,14 @@ static bool8 RunPauseTimer(void)
         return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_delay)
+SCRCMD_DEF(delay)
 {
     sPauseCounter = ScriptReadHalfword(ctx);
     SetupNativeScript(ctx, RunPauseTimer);
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_initclock)
+SCRCMD_DEF(initclock)
 {
 //    u8 hour = VarGet(ScriptReadHalfword(ctx));
 //    u8 minute = VarGet(ScriptReadHalfword(ctx));
@@ -658,13 +658,13 @@ SCRCMD_DEF(ScrCmd_initclock)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_dodailyevents)
+SCRCMD_DEF(dodailyevents)
 {
 //    DoTimeBasedEvents();
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_gettime)
+SCRCMD_DEF(gettime)
 {
 //    RtcCalcLocalTime();
 //    gSpecialVar_0x8000 = gLocalTime.hours;
@@ -676,7 +676,7 @@ SCRCMD_DEF(ScrCmd_gettime)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setweather)
+SCRCMD_DEF(setweather)
 {
     u16 weather = VarGet(ScriptReadHalfword(ctx));
 
@@ -684,25 +684,25 @@ SCRCMD_DEF(ScrCmd_setweather)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_resetweather)
+SCRCMD_DEF(resetweather)
 {
     SetSav1WeatherFromCurrMapHeader();
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_doweather)
+SCRCMD_DEF(doweather)
 {
     DoCurrentWeather();
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setstepcallback)
+SCRCMD_DEF(setstepcallback)
 {
     ActivatePerStepCallback(ScriptReadByte(ctx));
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setmaplayoutindex)
+SCRCMD_DEF(setmaplayoutindex)
 {
     u16 value = VarGet(ScriptReadHalfword(ctx));
 
@@ -710,7 +710,7 @@ SCRCMD_DEF(ScrCmd_setmaplayoutindex)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_warp)
+SCRCMD_DEF(warp)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -724,7 +724,7 @@ SCRCMD_DEF(ScrCmd_warp)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_warpsilent)
+SCRCMD_DEF(warpsilent)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -738,7 +738,7 @@ SCRCMD_DEF(ScrCmd_warpsilent)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_warpdoor)
+SCRCMD_DEF(warpdoor)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -752,7 +752,7 @@ SCRCMD_DEF(ScrCmd_warpdoor)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_warphole)
+SCRCMD_DEF(warphole)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -769,7 +769,7 @@ SCRCMD_DEF(ScrCmd_warphole)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_warpteleport)
+SCRCMD_DEF(warpteleport)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -783,7 +783,7 @@ SCRCMD_DEF(ScrCmd_warpteleport)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_warpD1)
+SCRCMD_DEF(warpD1)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -798,7 +798,7 @@ SCRCMD_DEF(ScrCmd_warpD1)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_setwarp)
+SCRCMD_DEF(setwarp)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -810,7 +810,7 @@ SCRCMD_DEF(ScrCmd_setwarp)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setdynamicwarp)
+SCRCMD_DEF(setdynamicwarp)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -822,7 +822,7 @@ SCRCMD_DEF(ScrCmd_setdynamicwarp)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setdivewarp)
+SCRCMD_DEF(setdivewarp)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -834,7 +834,7 @@ SCRCMD_DEF(ScrCmd_setdivewarp)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setholewarp)
+SCRCMD_DEF(setholewarp)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -846,7 +846,7 @@ SCRCMD_DEF(ScrCmd_setholewarp)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setescapewarp)
+SCRCMD_DEF(setescapewarp)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -858,7 +858,7 @@ SCRCMD_DEF(ScrCmd_setescapewarp)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_getplayerxy)
+SCRCMD_DEF(getplayerxy)
 {
     u16 *pX = GetVarPointer(ScriptReadHalfword(ctx));
     u16 *pY = GetVarPointer(ScriptReadHalfword(ctx));
@@ -868,13 +868,13 @@ SCRCMD_DEF(ScrCmd_getplayerxy)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_getpartysize)
+SCRCMD_DEF(getpartysize)
 {
     gSpecialVar_Result = CalculatePlayerPartyCount();
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_playse)
+SCRCMD_DEF(playse)
 {
     PlaySE(ScriptReadHalfword(ctx));
     return FALSE;
@@ -888,13 +888,13 @@ static bool8 WaitForSoundEffectFinish(void)
         return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_waitse)
+SCRCMD_DEF(waitse)
 {
     SetupNativeScript(ctx, WaitForSoundEffectFinish);
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_playfanfare)
+SCRCMD_DEF(playfanfare)
 {
     PlayFanfare(ScriptReadHalfword(ctx));
     return FALSE;
@@ -905,13 +905,13 @@ static bool8 WaitForFanfareFinish(void)
     return IsFanfareTaskInactive();
 }
 
-SCRCMD_DEF(ScrCmd_waitfanfare)
+SCRCMD_DEF(waitfanfare)
 {
     SetupNativeScript(ctx, WaitForFanfareFinish);
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_playbgm)
+SCRCMD_DEF(playbgm)
 {
     u16 songId = ScriptReadHalfword(ctx);
     bool8 val = ScriptReadByte(ctx);
@@ -924,13 +924,13 @@ SCRCMD_DEF(ScrCmd_playbgm)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_savebgm)
+SCRCMD_DEF(savebgm)
 {
     Overworld_SetSavedMusic(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_fadedefaultbgm)
+SCRCMD_DEF(fadedefaultbgm)
 {
     if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
         return FALSE;
@@ -938,7 +938,7 @@ SCRCMD_DEF(ScrCmd_fadedefaultbgm)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_fadenewbgm)
+SCRCMD_DEF(fadenewbgm)
 {
     u16 music = ScriptReadHalfword(ctx);
     if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
@@ -947,7 +947,7 @@ SCRCMD_DEF(ScrCmd_fadenewbgm)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_fadeoutbgm)
+SCRCMD_DEF(fadeoutbgm)
 {
     u8 speed = ScriptReadByte(ctx);
 
@@ -961,7 +961,7 @@ SCRCMD_DEF(ScrCmd_fadeoutbgm)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_fadeinbgm)
+SCRCMD_DEF(fadeinbgm)
 {
     u8 speed = ScriptReadByte(ctx);
 
@@ -974,7 +974,7 @@ SCRCMD_DEF(ScrCmd_fadeinbgm)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_applymovement)
+SCRCMD_DEF(applymovement)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     const void *movementScript = (const void *)ScriptReadWord(ctx);
@@ -984,7 +984,7 @@ SCRCMD_DEF(ScrCmd_applymovement)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_applymovement_at)
+SCRCMD_DEF(applymovement_at)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     const void *movementScript = (const void *)ScriptReadWord(ctx);
@@ -1001,7 +1001,7 @@ static bool8 WaitForMovementFinish(void)
     return ScriptMovement_IsObjectMovementFinished(sMovingNpcId, sMovingNpcMapId, sMovingNpcMapBank);
 }
 
-SCRCMD_DEF(ScrCmd_waitmovement)
+SCRCMD_DEF(waitmovement)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
@@ -1013,7 +1013,7 @@ SCRCMD_DEF(ScrCmd_waitmovement)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_waitmovement_at)
+SCRCMD_DEF(waitmovement_at)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapBank;
@@ -1029,7 +1029,7 @@ SCRCMD_DEF(ScrCmd_waitmovement_at)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_removeobject)
+SCRCMD_DEF(removeobject)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
@@ -1037,7 +1037,7 @@ SCRCMD_DEF(ScrCmd_removeobject)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_removeobject_at)
+SCRCMD_DEF(removeobject_at)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1047,7 +1047,7 @@ SCRCMD_DEF(ScrCmd_removeobject_at)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_addobject)
+SCRCMD_DEF(addobject)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
 
@@ -1055,7 +1055,7 @@ SCRCMD_DEF(ScrCmd_addobject)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_addobject_at)
+SCRCMD_DEF(addobject_at)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1065,7 +1065,7 @@ SCRCMD_DEF(ScrCmd_addobject_at)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setobjectxy)
+SCRCMD_DEF(setobjectxy)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u16 x = VarGet(ScriptReadHalfword(ctx));
@@ -1075,7 +1075,7 @@ SCRCMD_DEF(ScrCmd_setobjectxy)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setobjectxyperm)
+SCRCMD_DEF(setobjectxyperm)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u16 x = VarGet(ScriptReadHalfword(ctx));
@@ -1085,7 +1085,7 @@ SCRCMD_DEF(ScrCmd_setobjectxyperm)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_moveobjectoffscreen)
+SCRCMD_DEF(moveobjectoffscreen)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
@@ -1093,7 +1093,7 @@ SCRCMD_DEF(ScrCmd_moveobjectoffscreen)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_showobject_at)
+SCRCMD_DEF(showobject_at)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1103,7 +1103,7 @@ SCRCMD_DEF(ScrCmd_showobject_at)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_hideobject_at)
+SCRCMD_DEF(hideobject_at)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1113,7 +1113,7 @@ SCRCMD_DEF(ScrCmd_hideobject_at)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setobjectpriority)
+SCRCMD_DEF(setobjectpriority)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1124,7 +1124,7 @@ SCRCMD_DEF(ScrCmd_setobjectpriority)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_resetobjectpriority)
+SCRCMD_DEF(resetobjectpriority)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1134,7 +1134,7 @@ SCRCMD_DEF(ScrCmd_resetobjectpriority)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_faceplayer)
+SCRCMD_DEF(faceplayer)
 {
     if (gMapObjects[gSelectedEventObject].active)
     {
@@ -1144,7 +1144,7 @@ SCRCMD_DEF(ScrCmd_faceplayer)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_turnobject)
+SCRCMD_DEF(turnobject)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 direction = ScriptReadByte(ctx);
@@ -1153,7 +1153,7 @@ SCRCMD_DEF(ScrCmd_turnobject)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_setobjectmovementtype)
+SCRCMD_DEF(setobjectmovementtype)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 movementType = ScriptReadByte(ctx);
@@ -1162,7 +1162,7 @@ SCRCMD_DEF(ScrCmd_setobjectmovementtype)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_createvobject)
+SCRCMD_DEF(createvobject)
 {
     u8 graphicsId = ScriptReadByte(ctx);
     u8 v2 = ScriptReadByte(ctx);
@@ -1175,7 +1175,7 @@ SCRCMD_DEF(ScrCmd_createvobject)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_turnvobject)
+SCRCMD_DEF(turnvobject)
 {
     u8 v1 = ScriptReadByte(ctx);
     u8 direction = ScriptReadByte(ctx);
@@ -1184,7 +1184,7 @@ SCRCMD_DEF(ScrCmd_turnvobject)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_lockall)
+SCRCMD_DEF(lockall)
 {
     if (is_c1_link_related_active())
     {
@@ -1198,7 +1198,7 @@ SCRCMD_DEF(ScrCmd_lockall)
     }
 }
 
-SCRCMD_DEF(ScrCmd_lock)
+SCRCMD_DEF(lock)
 {
     if (is_c1_link_related_active())
     {
@@ -1220,7 +1220,7 @@ SCRCMD_DEF(ScrCmd_lock)
     }
 }
 
-SCRCMD_DEF(ScrCmd_releaseall)
+SCRCMD_DEF(releaseall)
 {
     u8 playerObjectId;
 
@@ -1232,7 +1232,7 @@ SCRCMD_DEF(ScrCmd_releaseall)
     return FALSE;
 }
 
-SCRCMD_DEF(ScrCmd_release)
+SCRCMD_DEF(release)
 {
     u8 playerObjectId;
 
@@ -1243,5 +1243,12 @@ SCRCMD_DEF(ScrCmd_release)
     FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[playerObjectId]);
     sub_80974D8();
     UnfreezeMapObjects();
+    return FALSE;
+}
+
+SCRCMD_DEF(cmdC7)
+{
+    gUnknown_20370DC = gUnknown_20370DA;
+    gUnknown_20370DA = ScriptReadByte(ctx);
     return FALSE;
 }

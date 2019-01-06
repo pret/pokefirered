@@ -5,24 +5,6 @@
 
 	.text
 
-	thumb_func_start ScrCmd_cmdC7
-ScrCmd_cmdC7: @ 806B7EC
-	ldr r2, _0806B804 @ =gUnknown_20370DC
-	ldr r3, _0806B808 @ =gUnknown_20370DA
-	ldrh r1, [r3]
-	strh r1, [r2]
-	ldr r1, [r0, 0x8]
-	ldrb r2, [r1]
-	strh r2, [r3]
-	adds r1, 0x1
-	str r1, [r0, 0x8]
-	movs r0, 0
-	bx lr
-	.align 2, 0
-_0806B804: .4byte gUnknown_20370DC
-_0806B808: .4byte gUnknown_20370DA
-	thumb_func_end ScrCmd_cmdC7
-
 	thumb_func_start ScrCmd_message
 ScrCmd_message: @ 806B80C
 	push {r4,lr}

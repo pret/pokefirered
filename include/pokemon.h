@@ -670,4 +670,6 @@ void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, 
 void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
 void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
 
+void PlayMapChosenOrBattleBGM(u16 songId);
+
 #endif // GUARD_POKEMON_H

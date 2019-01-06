@@ -3218,7 +3218,7 @@ sub_80E724C: @ 80E724C
 	adds r1, r0
 	ldrh r0, [r1]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1

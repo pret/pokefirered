@@ -2036,7 +2036,7 @@ sub_810E418: @ 810E418
 	lsrs r4, r0, 16
 	ldrh r1, [r5, 0x10]
 	adds r0, r4, 0
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

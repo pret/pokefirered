@@ -4200,7 +4200,7 @@ _08109F6E:
 	ldr r0, _08109FF4 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r7, 0x10]
-	bl sub_809A1D8
+	bl RemoveBagItem
 	movs r0, 0x6
 	bl sub_810BA3C
 	ldrb r0, [r7]
@@ -5464,7 +5464,7 @@ sub_810A9D4: @ 810A9D4
 	ldrh r0, [r5]
 	mov r2, r8
 	ldrh r1, [r2, 0x10]
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r3, _0810AAE0 @ =gSaveBlock1Ptr
 	ldr r4, [r3]
 	movs r7, 0xA4
@@ -5744,7 +5744,7 @@ sub_810AC40: @ 810AC40
 	ldr r5, _0810ACD0 @ =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	ldrh r1, [r7, 0x10]
-	bl sub_809A3C8
+	bl AddPCItem
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x1
@@ -5839,7 +5839,7 @@ _0810AD1E:
 	cmp r0, 0
 	beq _0810AD98
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x1
@@ -6120,10 +6120,10 @@ sub_810AF74: @ 810AF74
 	bl sub_810ADD8
 	movs r0, 0xD
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	movs r0, 0x4
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldr r2, _0810AF98 @ =sub_8030AEC
 	movs r0, 0x6
 	movs r1, 0
@@ -6317,27 +6317,27 @@ sub_810B108: @ 810B108
 	bl sub_810ADD8
 	movs r0, 0xD
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	movs r0, 0xE
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	movs r0, 0xB7
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	movs r0, 0xB6
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	movs r0, 0x4
 	movs r1, 0x5
-	bl sub_809A084
+	bl AddBagItem
 	movs r0, 0x3
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	movs r0, 0x8
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	cmp r4, 0x7
 	beq _0810B160
 	cmp r4, 0x8

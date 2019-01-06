@@ -69,17 +69,17 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte sub_806AF10
 	.4byte ScrCmd_getplayerxy
 	.4byte ScrCmd_getpartysize
-	.4byte sub_806A610
+	.4byte ScrCmd_giveitem
 	.4byte ScrCmd_takeitem
-	.4byte sub_806A6A0
-	.4byte sub_806A6E4
+	.4byte ScrCmd_checkitemspace
+	.4byte ScrCmd_checkitem
 	.4byte ScrCmd_checkitemtype
 	.4byte ScrCmd_givepcitem
 	.4byte ScrCmd_checkpcitem
-	.4byte sub_806A7DC
-	.4byte sub_806A7F0
-	.4byte sub_806A818
-	.4byte sub_806A804
+	.4byte ScrCmd_givedecoration
+	.4byte ScrCmd_takedecoration
+	.4byte ScrCmd_checkdecor
+	.4byte ScrCmd_checkdecorspace
 	.4byte ScrCmd_applymovement
 	.4byte ScrCmd_applymovement_at
 	.4byte ScrCmd_waitmovement

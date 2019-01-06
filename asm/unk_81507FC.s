@@ -6240,7 +6240,7 @@ _08153754: .4byte gUnknown_203F3E0
 _08153758:
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_809A000
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815376A
@@ -6249,10 +6249,10 @@ _08153758:
 _0815376A:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_809A000
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	beq _08153784

@@ -252,8 +252,8 @@ _08099F3C:
 	bx r1
 	thumb_func_end sub_8099F08
 
-	thumb_func_start sub_8099F40
-sub_8099F40: @ 8099F40
+	thumb_func_start CheckBagHasItem
+CheckBagHasItem: @ 8099F40
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -310,14 +310,14 @@ _08099FA6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8099F40
+	thumb_func_end CheckBagHasItem
 
 	thumb_func_start sub_8099FAC
 sub_8099FAC: @ 8099FAC
 	push {r4,lr}
 	ldr r0, _08099FC0 @ =0x0000016d
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -338,7 +338,7 @@ _08099FD4:
 _08099FD6:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -360,8 +360,8 @@ _08099FF6:
 _08099FFC: .4byte gSpecialVar_Result
 	thumb_func_end sub_8099FAC
 
-	thumb_func_start sub_809A000
-sub_809A000: @ 809A000
+	thumb_func_start CheckBagHasSpace
+CheckBagHasSpace: @ 809A000
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -428,10 +428,10 @@ _0809A07C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809A000
+	thumb_func_end CheckBagHasSpace
 
-	thumb_func_start sub_809A084
-sub_809A084: @ 809A084
+	thumb_func_start AddBagItem
+AddBagItem: @ 809A084
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -494,7 +494,7 @@ _0809A0F4:
 	lsls r4, 1
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809A132
@@ -522,7 +522,7 @@ _0809A132:
 	ldr r4, _0809A1B0 @ =0x0000016d
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809A174
@@ -595,10 +595,10 @@ _0809A1CC:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809A084
+	thumb_func_end AddBagItem
 
-	thumb_func_start sub_809A1D8
-sub_809A1D8: @ 809A1D8
+	thumb_func_start RemoveBagItem
+RemoveBagItem: @ 809A1D8
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -667,7 +667,7 @@ _0809A25A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809A1D8
+	thumb_func_end RemoveBagItem
 
 	thumb_func_start GetPocketByItemId
 GetPocketByItemId: @ 809A260
@@ -832,8 +832,8 @@ _0809A35C:
 _0809A370: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_809A33C
 
-	thumb_func_start sub_809A374
-sub_809A374: @ 809A374
+	thumb_func_start CheckPCHasItem
+CheckPCHasItem: @ 809A374
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -875,10 +875,10 @@ _0809A3C0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809A374
+	thumb_func_end CheckPCHasItem
 
-	thumb_func_start sub_809A3C8
-sub_809A3C8: @ 809A3C8
+	thumb_func_start AddPCItem
+AddPCItem: @ 809A3C8
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -955,7 +955,7 @@ _0809A458:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809A3C8
+	thumb_func_end AddPCItem
 
 	thumb_func_start sub_809A460
 sub_809A460: @ 809A460

@@ -104,7 +104,7 @@ sub_807F6CC: @ 807F6CC
 	bhi _0807F6FC
 	ldr r0, _0807F6F8 @ =0x00000167
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F6FC
@@ -356,7 +356,7 @@ sub_807F904: @ 807F904
 	str r0, [r1, 0x8]
 	ldr r0, _0807F94C @ =0x00000167
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807F958

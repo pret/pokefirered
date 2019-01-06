@@ -2497,7 +2497,7 @@ _0813E18A:
 	ldr r0, _0813E1F4 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r5, 0x10]
-	bl sub_809A1D8
+	bl RemoveBagItem
 	movs r0, 0x9
 	bl sub_813EA98
 	ldrb r0, [r5]
@@ -3250,7 +3250,7 @@ sub_813E7F0: @ 813E7F0
 	ldrh r0, [r5]
 	mov r2, r8
 	ldrh r1, [r2, 0x10]
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r7, _0813E8C4 @ =gSaveBlock1Ptr
 	ldr r4, [r7]
 	movs r3, 0xA4

@@ -3,6 +3,8 @@
 #include "script.h"
 #include "mystery_event_script.h"
 #include "event_data.h"
+#include "random.h"
+#include "item.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -311,9 +313,218 @@ SCRCMD_DEF(ScrCmd_copyvar)
     return FALSE;
 }
 
+SCRCMD_DEF(ScrCmd_setorcopyvar)
+{
+    u16 * destPtr = GetVarPointer(ScriptReadHalfword(ctx));
+    *destPtr = VarGet(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
 u8 * const sScriptStringVars[] =
 {
     gStringVar1,
     gStringVar2,
     gStringVar3,
 };
+
+u8 compare_012(u16 left, u16 right)
+{
+    if (left < right)
+        return 0;
+    else if (left == right)
+        return 1;
+    else
+        return 2;
+}
+
+// comparelocaltolocal
+SCRCMD_DEF(ScrCmd_compare_local_to_local)
+{
+    const u8 value1 = ctx->data[ScriptReadByte(ctx)];
+    const u8 value2 = ctx->data[ScriptReadByte(ctx)];
+
+    ctx->comparisonResult = compare_012(value1, value2);
+    return FALSE;
+}
+
+// comparelocaltoimm
+SCRCMD_DEF(ScrCmd_compare_local_to_value)
+{
+    const u8 value1 = ctx->data[ScriptReadByte(ctx)];
+    const u8 value2 = ScriptReadByte(ctx);
+
+    ctx->comparisonResult = compare_012(value1, value2);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_compare_local_to_addr)
+{
+    const u8 value1 = ctx->data[ScriptReadByte(ctx)];
+    const u8 value2 = *(const u8 *)ScriptReadWord(ctx);
+
+    ctx->comparisonResult = compare_012(value1, value2);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_compare_addr_to_local)
+{
+    const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
+    const u8 value2 = ctx->data[ScriptReadByte(ctx)];
+
+    ctx->comparisonResult = compare_012(value1, value2);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_compare_addr_to_value)
+{
+    const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
+    const u8 value2 = ScriptReadByte(ctx);
+
+    ctx->comparisonResult = compare_012(value1, value2);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_compare_addr_to_addr)
+{
+    const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
+    const u8 value2 = *(const u8 *)ScriptReadWord(ctx);
+
+    ctx->comparisonResult = compare_012(value1, value2);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_compare_var_to_value)
+{
+    const u16 value1 = *GetVarPointer(ScriptReadHalfword(ctx));
+    const u16 value2 = ScriptReadHalfword(ctx);
+
+    ctx->comparisonResult = compare_012(value1, value2);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_compare_var_to_var)
+{
+    const u16 *ptr1 = GetVarPointer(ScriptReadHalfword(ctx));
+    const u16 *ptr2 = GetVarPointer(ScriptReadHalfword(ctx));
+
+    ctx->comparisonResult = compare_012(*ptr1, *ptr2);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_addvar)
+{
+    u16 *ptr = GetVarPointer(ScriptReadHalfword(ctx));
+    *ptr += ScriptReadHalfword(ctx);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_subvar)
+{
+    u16 *ptr = GetVarPointer(ScriptReadHalfword(ctx));
+    *ptr -= VarGet(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_random)
+{
+    u16 max = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = Random() % max;
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_giveitem)
+{
+    u16 itemId = VarGet(ScriptReadHalfword(ctx));
+    u32 quantity = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = AddBagItem(itemId, (u8)quantity);
+    sub_809A824(itemId);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_takeitem)
+{
+    u16 itemId = VarGet(ScriptReadHalfword(ctx));
+    u32 quantity = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = RemoveBagItem(itemId, (u8)quantity);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_checkitemspace)
+{
+    u16 itemId = VarGet(ScriptReadHalfword(ctx));
+    u32 quantity = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = CheckBagHasSpace(itemId, (u8)quantity);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_checkitem)
+{
+    u16 itemId = VarGet(ScriptReadHalfword(ctx));
+    u32 quantity = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = CheckBagHasItem(itemId, (u8)quantity);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_checkitemtype)
+{
+    u16 itemId = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = GetPocketByItemId(itemId);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_givepcitem)
+{
+    u16 itemId = VarGet(ScriptReadHalfword(ctx));
+    u16 quantity = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = AddPCItem(itemId, quantity);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_checkpcitem)
+{
+    u16 itemId = VarGet(ScriptReadHalfword(ctx));
+    u16 quantity = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = CheckPCHasItem(itemId, quantity);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_givedecoration)
+{
+    u32 decorId = VarGet(ScriptReadHalfword(ctx));
+
+//    gSpecialVar_Result = DecorationAdd(decorId);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_takedecoration)
+{
+    u32 decorId = VarGet(ScriptReadHalfword(ctx));
+
+//    gSpecialVar_Result = DecorationRemove(decorId);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_checkdecorspace)
+{
+    u32 decorId = VarGet(ScriptReadHalfword(ctx));
+
+//    gSpecialVar_Result = DecorationCheckSpace(decorId);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_checkdecor)
+{
+    u32 decorId = VarGet(ScriptReadHalfword(ctx));
+
+//    gSpecialVar_Result = CheckHasDecoration(decorId);
+    return FALSE;
+}
+

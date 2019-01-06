@@ -308,7 +308,7 @@ _080E77AC:
 	bhi _080E7838
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 _080E780A:
 	movs r0, 0x5
 	bl PlaySE

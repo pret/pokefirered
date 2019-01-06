@@ -2568,7 +2568,7 @@ sub_8132D34: @ 8132D34
 	ldrh r0, [r5]
 	mov r2, r8
 	ldrh r1, [r2, 0x10]
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r7, _08132DFC @ =gSaveBlock1Ptr
 	ldr r4, [r7]
 	movs r3, 0xA4
@@ -2729,16 +2729,16 @@ sub_8132E64: @ 8132E64
 	bl sub_81320AC
 	ldr r0, _08132F0C @ =0x00000121
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldr r0, _08132F10 @ =0x00000123
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldr r0, _08132F14 @ =0x00000129
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldr r0, _08132F18 @ =0x00000143
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldr r1, _08132F1C @ =sub_815ABFC
 	movs r0, 0x4
 	movs r2, 0

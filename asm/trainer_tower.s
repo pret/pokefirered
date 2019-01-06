@@ -518,7 +518,7 @@ _0815E458: .4byte gSpecialVar_Result
 _0815E45C:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -2300,14 +2300,14 @@ _08148BFC:
 	beq _08148C54
 	ldrh r0, [r1, 0x3E]
 	ldrh r1, [r2]
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _08148C54
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x3E]
 	movs r1, 0x1
-	bl sub_809A000
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	bne _08148C4C
@@ -4162,7 +4162,7 @@ _0814998A:
 	beq _0814999C
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_809A000
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	beq _08149984

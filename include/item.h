@@ -63,5 +63,6 @@ u16 itemid_get_market_price(u16 itemId);
 void sub_809A2DC(void);
 void sub_809A2A4(void);
 void sub_8099E90(u16, u8 *);
+void sub_809A824(u16 itemId);
 
 #endif // ITEM_H

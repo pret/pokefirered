@@ -1361,7 +1361,7 @@ sub_80A1A44: @ 80A1A44
 	ldr r4, _080A1A84 @ =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldrh r0, [r4]
 	bl ItemId_GetPocket
 	lsls r0, 24
@@ -1844,7 +1844,7 @@ sub_80A1E1C: @ 80A1E1C
 	ldr r0, _080A1E44 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	bl sub_8108CB4
 	adds r0, r4, 0
 	bl sub_8108B50
@@ -1959,7 +1959,7 @@ sub_80A1EF4: @ 80A1EF4
 	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	adds r0, r4, 0
 	bl sub_8042DA4
 	adds r2, r0, 0

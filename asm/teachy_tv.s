@@ -398,7 +398,7 @@ sub_815AEE8: @ 815AEE8
 	movs r0, 0xB6
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815AF30
@@ -443,7 +443,7 @@ sub_815AF5C: @ 815AF5C
 	movs r0, 0xB6
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815AF84

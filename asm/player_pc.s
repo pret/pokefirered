@@ -25,7 +25,7 @@ _080EB672:
 	ldrh r0, [r0]
 	adds r1, r6
 	ldrh r1, [r1]
-	bl sub_809A3C8
+	bl AddPCItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1649,7 +1649,7 @@ sub_80EC364: @ 80EC364
 	adds r5, r1, r0
 	ldrh r0, [r5, 0x20]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EC3B4

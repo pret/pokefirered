@@ -657,23 +657,7 @@ gUnknown_83A720C:: @ 83A720C
 gUnknown_83A7240:: @ 83A7240
 	.asciz "0"
 
-	.align 2
-gNullScriptPtr:: @ 83A7244
-	.incbin "baserom.gba", 0x3A7244, 0x4
-
-gUnknown_83A7248:: @ 83A7248
-	.incbin "baserom.gba", 0x3A7248, 0x14
-
-gUnknown_83A725C:: @ 83A725C
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c"
-
-	.align 2
-gUnknown_83A7290:: @ 83A7290
-	.asciz "0"
-
-	.align 2
-gUnknown_83A7294:: @ 83A7294
-	.incbin "baserom.gba", 0x3A7294, 0xC
+    .section .rodata.83A72A0
 
 gUnknown_83A72A0:: @ 83A72A0
 	.incbin "baserom.gba", 0x3A72A0, 0x2

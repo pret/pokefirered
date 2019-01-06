@@ -1,8 +1,8 @@
     .align 2
 
 gScriptCmdTable:: @ 815F9B4
-	.4byte sub_8069ED0
-	.4byte sub_8069ED4
+	.4byte ScrCmd_nop
+	.4byte ScrCmd_nop1
 	.4byte ScrCmd_end
 	.4byte ScrCmd_return
 	.4byte ScrCmd_call
@@ -38,9 +38,9 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_compare_var_to_var
 	.4byte ScrCmd_callnative
 	.4byte ScrCmd_gotonative
-	.4byte sub_8069EFC
-	.4byte sub_8069F3C
-	.4byte sub_8069FA4
+	.4byte ScrCmd_special
+	.4byte ScrCmd_specialvar
+	.4byte ScrCmd_waitstate
 	.4byte ScrCmd_delay
 	.4byte ScrCmd_setflag
 	.4byte ScrCmd_clearflag
@@ -216,4 +216,4 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte sub_806BD90
 
 gScriptCmdTableEnd:: @ 815FD08
-	.4byte sub_8069ED0
+	.4byte ScrCmd_nop

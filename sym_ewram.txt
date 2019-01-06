@@ -633,29 +633,9 @@ gUnknown_203709C: @ 203709C
 	.space 0x4
 
 	.include "src/script.o"
+    .include "src/scrcmd.o"
 
-	.align 2
-gUnknown_20370A8: @ 20370A8
-	.space 0x4
-
-gUnknown_20370AC: @ 20370AC
-	.space 0x2
-
-gUnknown_20370AE: @ 20370AE
-	.space 0x2
-
-gUnknown_20370B0: @ 20370B0
-	.space 0x2
-
-gUnknown_20370B2: @ 20370B2
-	.space 0x2
-
-gUnknown_20370B4: @ 20370B4
-	.space 0x2
-
-gUnknown_20370B6: @ 20370B6
-	.space 0x2
-
+    .align 2
 gSpecialVar_0x8000: @ 20370B8
 	.space 0x2
 

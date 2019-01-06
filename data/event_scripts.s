@@ -40,7 +40,7 @@ gStdScripts:: @ 8160450
 	.4byte gStdScript_81A676C
 	.4byte gStdScript_81A8E58
 	.4byte gStdScript_81A4E66
-gStdScripts_End::
+gStdScriptsEnd::
 
 gUnknown_8160478:: @ 8160478
 	.incbin "baserom.gba", 0x160478, 0x886C

@@ -20,6 +20,9 @@
 #include "field_map_obj_helpers.h"
 #include "map_obj_lock.h"
 #include "field_message_box.h"
+#include "new_menu_helpers.h"
+#include "window.h"
+#include "start_menu.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -1251,4 +1254,156 @@ SCRCMD_DEF(cmdC7)
     gUnknown_20370DC = gUnknown_20370DA;
     gUnknown_20370DA = ScriptReadByte(ctx);
     return FALSE;
+}
+
+SCRCMD_DEF(message)
+{
+    const u8 *msg = (const u8 *)ScriptReadWord(ctx);
+
+    if (msg == NULL)
+        msg = (const u8 *)ctx->data[0];
+    ShowFieldMessage(msg);
+    return FALSE;
+}
+
+SCRCMD_DEF(cmdC8)
+{
+    const u8 *msg = (const u8 *)ScriptReadWord(ctx);
+
+    if (msg == NULL)
+        msg = (const u8 *)ctx->data[0];
+    sub_80F7974(msg);
+    CopyWindowToVram(GetStartMenuWindowId(), 1);
+    return FALSE;
+}
+
+SCRCMD_DEF(cmdC9)
+{
+    sub_80F7998();
+    return FALSE;
+}
+
+SCRCMD_DEF(messageautoscroll)
+{
+    const u8 *msg = (const u8 *)ScriptReadWord(ctx);
+
+    if (msg == NULL)
+        msg = (const u8 *)ctx->data[0];
+    ShowFieldAutoScrollMessage(msg);
+    return FALSE;
+}
+
+SCRCMD_DEF(waitmessage)
+{
+    SetupNativeScript(ctx, IsFieldMessageBoxHidden);
+    return TRUE;
+}
+
+SCRCMD_DEF(closemessage)
+{
+    HideFieldMessageBox();
+    return FALSE;
+}
+
+extern IWRAM_DATA struct ScriptContext * gUnknown_3005070;
+
+bool8 sub_806B93C(struct ScriptContext * ctx);
+u8 sub_806B96C(struct ScriptContext * ctx);
+
+bool8 WaitForAorBPress(void)
+{
+    if (gMain.newKeys & A_BUTTON)
+        return TRUE;
+    if (gMain.newKeys & B_BUTTON)
+        return TRUE;
+
+    if (sub_806B93C(gUnknown_3005070) == TRUE)
+    {
+        u8 r4 = sub_806B96C(gUnknown_3005070);
+        sub_8069998(r4);
+        if (r4)
+        {
+            if (gUnknown_203ADFA != 2)
+            {
+                sub_80699F8();
+                if (r4 < 9 || r4 > 10)
+                    sub_8069964();
+                else
+                {
+                    sub_80699A4();
+                    sub_8069970();
+                }
+                return TRUE;
+            }
+        }
+    }
+    if (sub_8112CAC() == 1 || gUnknown_203ADFA == 2)
+    {
+        if (gUnknown_20370AC == 120)
+            return TRUE;
+        else
+            gUnknown_20370AC++;
+    }
+
+    return FALSE;
+}
+
+bool8 sub_806B93C(struct ScriptContext * ctx)
+{
+    const u8 * script = ctx->scriptPtr;
+    u8 nextCmd = *script;
+    if (nextCmd == 3) // return
+    {
+        script = ctx->stack[ctx->stackDepth - 1];
+        nextCmd = *script;
+    }
+    if (nextCmd < 0x6B || nextCmd > 0x6C) // releaseall or release
+        return FALSE;
+    else
+        return TRUE;
+}
+
+u8 sub_806B96C(struct ScriptContext * ctx)
+{
+    if (gMain.heldKeys & DPAD_UP && gSpecialVar_Facing != 2)
+        return 1;
+
+    if (gMain.heldKeys & DPAD_DOWN && gSpecialVar_Facing != 1)
+        return 2;
+
+    if (gMain.heldKeys & DPAD_LEFT && gSpecialVar_Facing != 3)
+        return 3;
+
+    if (gMain.heldKeys & DPAD_RIGHT && gSpecialVar_Facing != 4)
+        return 4;
+
+    if (gMain.newKeys & L_BUTTON)
+        return 5;
+
+    if (gMain.heldKeys & R_BUTTON)
+        return 6;
+
+    if (gMain.heldKeys & START_BUTTON)
+        return 7;
+
+    if (gMain.heldKeys & SELECT_BUTTON)
+        return 8;
+
+    if (gMain.newKeys & A_BUTTON)
+        return 9;
+
+    if (gMain.newKeys & B_BUTTON)
+        return 10;
+
+    return 0;
+}
+
+SCRCMD_DEF(waitbuttonpress)
+{
+    gUnknown_3005070 = ctx;
+
+    if (sub_8112CAC() == 1 || gUnknown_203ADFA == 2)
+        gUnknown_20370AC = 0;
+    SetupNativeScript(ctx, WaitForAorBPress);
+    return TRUE;
 }

@@ -95,5 +95,6 @@ extern u8 gUnknown_2031DD8;
 extern u8 gUnknown_2036E28;
 
 extern bool8 (* gUnknown_3005024)(void);
+void SetLastHealLocationWarp(u8 healLocaionId);
 
 #endif //GUARD_ROM4_H

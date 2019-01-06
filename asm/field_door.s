@@ -478,8 +478,8 @@ _0805B25C:
 _0805B264: .4byte gUnknown_835B4B0
 	thumb_func_end sub_805B210
 
-	thumb_func_start sub_805B268
-sub_805B268: @ 805B268
+	thumb_func_start FieldSetDoorOpened
+FieldSetDoorOpened: @ 805B268
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -504,10 +504,10 @@ _0805B292:
 	bx r0
 	.align 2, 0
 _0805B298: .4byte gUnknown_835B5D8
-	thumb_func_end sub_805B268
+	thumb_func_end FieldSetDoorOpened
 
-	thumb_func_start sub_805B29C
-sub_805B29C: @ 805B29C
+	thumb_func_start FieldSetDoorClosed
+FieldSetDoorClosed: @ 805B29C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -532,10 +532,10 @@ _0805B2C6:
 	bx r0
 	.align 2, 0
 _0805B2CC: .4byte gUnknown_835B5D8
-	thumb_func_end sub_805B29C
+	thumb_func_end FieldSetDoorClosed
 
-	thumb_func_start sub_805B2D0
-sub_805B2D0: @ 805B2D0
+	thumb_func_start FieldAnimateDoorClose
+FieldAnimateDoorClose: @ 805B2D0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -566,10 +566,10 @@ _0805B308:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805B2D0
+	thumb_func_end FieldAnimateDoorClose
 
-	thumb_func_start sub_805B310
-sub_805B310: @ 805B310
+	thumb_func_start FieldAnimateDoorOpen
+FieldAnimateDoorOpen: @ 805B310
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -600,10 +600,10 @@ _0805B348:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805B310
+	thumb_func_end FieldAnimateDoorOpen
 
-	thumb_func_start sub_805B350
-sub_805B350: @ 805B350
+	thumb_func_start FieldIsDoorAnimationRunning
+FieldIsDoorAnimationRunning: @ 805B350
 	push {lr}
 	ldr r0, _0805B360 @ =sub_805B028
 	bl FuncIsActiveTask
@@ -613,10 +613,10 @@ sub_805B350: @ 805B350
 	bx r1
 	.align 2, 0
 _0805B360: .4byte sub_805B028
-	thumb_func_end sub_805B350
+	thumb_func_end FieldIsDoorAnimationRunning
 
-	thumb_func_start sub_805B364
-sub_805B364: @ 805B364
+	thumb_func_start GetDoorSoundEffect
+GetDoorSoundEffect: @ 805B364
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -635,7 +635,7 @@ _0805B380:
 _0805B382:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805B364
+	thumb_func_end GetDoorSoundEffect
 
 	thumb_func_start sub_805B388
 sub_805B388: @ 805B388

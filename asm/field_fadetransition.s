@@ -661,7 +661,7 @@ _0807E028:
 	ldrsh r0, [r6, r2]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B268
+	bl FieldSetDoorOpened
 	movs r0, 0x1
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -691,7 +691,7 @@ _0807E074:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B364
+	bl GetDoorSoundEffect
 	lsls r0, 16
 	lsrs r0, 16
 	bl PlaySE
@@ -699,12 +699,12 @@ _0807E074:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B310
+	bl FieldAnimateDoorOpen
 	movs r0, 0x7
 	strh r0, [r4, 0x8]
 	b _0807E206
 _0807E0A2:
-	bl sub_805B350
+	bl FieldIsDoorAnimationRunning
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E0AE
@@ -750,7 +750,7 @@ _0807E0FC:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x22
 	ldrsh r1, [r4, r2]
-	bl sub_805B2D0
+	bl FieldAnimateDoorClose
 	movs r0, 0x9
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -762,7 +762,7 @@ _0807E10E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E206
-	bl sub_805B350
+	bl FieldIsDoorAnimationRunning
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807E206
@@ -822,7 +822,7 @@ _0807E198:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B2D0
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0xA]
@@ -1690,7 +1690,7 @@ _0807E85C:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805B364
+	bl GetDoorSoundEffect
 	lsls r0, 16
 	lsrs r0, 16
 	bl PlaySE
@@ -1699,7 +1699,7 @@ _0807E85C:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805B310
+	bl FieldAnimateDoorOpen
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1760,7 +1760,7 @@ _0807E8F4:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805B2D0
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]

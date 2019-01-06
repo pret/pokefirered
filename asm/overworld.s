@@ -1185,8 +1185,8 @@ sub_80554BC: @ 80554BC
 _080554C8: .4byte gUnknown_2031DBC
 	thumb_func_end sub_80554BC
 
-	thumb_func_start sub_80554CC
-sub_80554CC: @ 80554CC
+	thumb_func_start SetLastHealLocationWarp
+SetLastHealLocationWarp: @ 80554CC
 	push {r4,r5,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -1218,7 +1218,7 @@ _08055500:
 	bx r0
 	.align 2, 0
 _08055508: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_80554CC
+	thumb_func_end SetLastHealLocationWarp
 
 	thumb_func_start sub_805550C
 sub_805550C: @ 805550C

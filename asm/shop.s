@@ -2853,8 +2853,8 @@ _0809C198: .4byte gUnknown_203996C
 _0809C19C: .4byte gMapHeader
 	thumb_func_end CreatePokemartMenu
 
-	thumb_func_start sub_809C1A0
-sub_809C1A0: @ 809C1A0
+	thumb_func_start CreateDecorationShop1Menu
+CreateDecorationShop1Menu: @ 809C1A0
 	push {lr}
 	bl sub_809ABD8
 	movs r0, 0x2
@@ -2865,10 +2865,10 @@ sub_809C1A0: @ 809C1A0
 	bx r0
 	.align 2, 0
 _0809C1B8: .4byte EnableBothScriptContexts
-	thumb_func_end sub_809C1A0
+	thumb_func_end CreateDecorationShop1Menu
 
-	thumb_func_start sub_809C1BC
-sub_809C1BC: @ 809C1BC
+	thumb_func_start CreateDecorationShop2Menu
+CreateDecorationShop2Menu: @ 809C1BC
 	push {lr}
 	bl sub_809ABD8
 	movs r0, 0x3
@@ -2879,7 +2879,7 @@ sub_809C1BC: @ 809C1BC
 	bx r0
 	.align 2, 0
 _0809C1D4: .4byte EnableBothScriptContexts
-	thumb_func_end sub_809C1BC
+	thumb_func_end CreateDecorationShop2Menu
 
 	thumb_func_start sub_809C1D8
 sub_809C1D8: @ 809C1D8

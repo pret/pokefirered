@@ -175,7 +175,7 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_turnvobject
 	.4byte ScrCmd_opendoor
 	.4byte ScrCmd_closedoor
-	.4byte ScrCmd_waitdoranim
+	.4byte ScrCmd_waitdooranim
 	.4byte ScrCmd_setdooropen
 	.4byte ScrCmd_setdoorclosed
 	.4byte ScrCmd_addelevmenuitem

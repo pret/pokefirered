@@ -36,6 +36,10 @@
 #include "battle_setup.h"
 #include "shop.h"
 #include "script_pokemon_80F8.h"
+#include "slot_machine.h"
+#include "field_effect.h"
+#include "fieldmap.h"
+#include "field_door.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -48,7 +52,7 @@ EWRAM_DATA u16 sPauseCounter = 0;
 EWRAM_DATA u16 sMovingNpcId = 0;
 EWRAM_DATA u16 sMovingNpcMapBank = 0;
 EWRAM_DATA u16 sMovingNpcMapId = 0;
-EWRAM_DATA u16 gUnknown_20370B6 = 0;
+EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 extern u8 gSelectedEventObject;
 
@@ -1959,4 +1963,268 @@ SCRCMD_DEF(pokemart)
     CreatePokemartMenu(ptr);
     ScriptContext1_Stop();
     return TRUE;
+}
+
+SCRCMD_DEF(pokemartdecoration)
+{
+    const void *ptr = (void *)ScriptReadWord(ctx);
+
+    CreateDecorationShop1Menu(ptr);
+    ScriptContext1_Stop();
+    return TRUE;
+}
+
+SCRCMD_DEF(pokemartdecoration2)
+{
+    const void *ptr = (void *)ScriptReadWord(ctx);
+
+    CreateDecorationShop2Menu(ptr);
+    ScriptContext1_Stop();
+    return TRUE;
+}
+
+SCRCMD_DEF(playslotmachine)
+{
+    u8 slotMachineIndex = VarGet(ScriptReadHalfword(ctx));
+
+    PlaySlotMachine(slotMachineIndex, c2_exit_to_overworld_1_continue_scripts_restart_music);
+    ScriptContext1_Stop();
+    return TRUE;
+}
+
+SCRCMD_DEF(setberrytree)
+{
+//    u8 treeId = ScriptReadByte(ctx);
+//    u8 berry = ScriptReadByte(ctx);
+//    u8 growthStage = ScriptReadByte(ctx);
+//
+//    if (berry == 0)
+//        PlantBerryTree(treeId, 0, growthStage, FALSE);
+//    else
+//        PlantBerryTree(treeId, berry, growthStage, FALSE);
+    return FALSE;
+}
+
+SCRCMD_DEF(getpricereduction)
+{
+//    u16 value = VarGet(ScriptReadHalfword(ctx));
+//
+//    gSpecialVar_Result = GetPriceReduction(value);
+    return FALSE;
+}
+
+SCRCMD_DEF(choosecontestmon)
+{
+//    sub_81B9404();
+    ScriptContext1_Stop();
+    return TRUE;
+}
+
+
+SCRCMD_DEF(startcontest)
+{
+//    sub_80F840C();
+//    ScriptContext1_Stop();
+//    return TRUE;
+    return FALSE;
+}
+
+SCRCMD_DEF(showcontestresults)
+{
+//    sub_80F8484();
+//    ScriptContext1_Stop();
+//    return TRUE;
+    return FALSE;
+}
+
+SCRCMD_DEF(contestlinktransfer)
+{
+//    sub_80F84C4(gSpecialVar_ContestCategory);
+//    ScriptContext1_Stop();
+//    return TRUE;
+    return FALSE;
+}
+
+SCRCMD_DEF(dofieldeffect)
+{
+    u16 effectId = VarGet(ScriptReadHalfword(ctx));
+
+    sFieldEffectScriptId = effectId;
+    FieldEffectStart(sFieldEffectScriptId);
+    return FALSE;
+}
+
+SCRCMD_DEF(setfieldeffectarg)
+{
+    u8 argNum = ScriptReadByte(ctx);
+
+    gFieldEffectArguments[argNum] = (s16)VarGet(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+static bool8 WaitForFieldEffectFinish(void)
+{
+    if (!FieldEffectActiveListContains(sFieldEffectScriptId))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+SCRCMD_DEF(waitfieldeffect)
+{
+    sFieldEffectScriptId = VarGet(ScriptReadHalfword(ctx));
+    SetupNativeScript(ctx, WaitForFieldEffectFinish);
+    return TRUE;
+}
+
+SCRCMD_DEF(setrespawn)
+{
+    u16 healLocationId = VarGet(ScriptReadHalfword(ctx));
+
+    SetLastHealLocationWarp(healLocationId);
+    return FALSE;
+}
+
+SCRCMD_DEF(checkplayergender)
+{
+    gSpecialVar_Result = gSaveBlock2Ptr->playerGender;
+    return FALSE;
+}
+
+SCRCMD_DEF(playmoncry)
+{
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u16 mode = VarGet(ScriptReadHalfword(ctx));
+
+    PlayCry7(species, mode);
+    return FALSE;
+}
+
+SCRCMD_DEF(waitmoncry)
+{
+    SetupNativeScript(ctx, IsCryFinished);
+    return TRUE;
+}
+
+SCRCMD_DEF(setmetatile)
+{
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+    u16 tileId = VarGet(ScriptReadHalfword(ctx));
+    u16 v8 = VarGet(ScriptReadHalfword(ctx));
+
+    x += 7;
+    y += 7;
+    if (!v8)
+        MapGridSetMetatileIdAt(x, y, tileId);
+    else
+        MapGridSetMetatileIdAt(x, y, tileId | 0xC00);
+    return FALSE;
+}
+
+SCRCMD_DEF(opendoor)
+{
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    x += 7;
+    y += 7;
+    PlaySE(GetDoorSoundEffect(x, y));
+    FieldAnimateDoorOpen(x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(closedoor)
+{
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    x += 7;
+    y += 7;
+    FieldAnimateDoorClose(x, y);
+    return FALSE;
+}
+
+static bool8 IsDoorAnimationStopped(void)
+{
+    if (!FieldIsDoorAnimationRunning())
+        return TRUE;
+    else
+        return FALSE;
+}
+
+SCRCMD_DEF(waitdooranim)
+{
+    SetupNativeScript(ctx, IsDoorAnimationStopped);
+    return TRUE;
+}
+
+SCRCMD_DEF(setdooropen)
+{
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    x += 7;
+    y += 7;
+    FieldSetDoorOpened(x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(setdoorclosed)
+{
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    x += 7;
+    y += 7;
+    FieldSetDoorClosed(x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(addelevmenuitem)
+{
+//    u8 v3 = ScriptReadByte(ctx);
+//    u16 v5 = VarGet(ScriptReadHalfword(ctx));
+//    u16 v7 = VarGet(ScriptReadHalfword(ctx));
+//    u16 v9 = VarGet(ScriptReadHalfword(ctx));
+
+    //ScriptAddElevatorMenuItem(v3, v5, v7, v9);
+    return FALSE;
+}
+
+SCRCMD_DEF(showelevmenu)
+{
+    /*ScriptShowElevatorMenu();
+    ScriptContext1_Stop();
+    return TRUE;*/
+    return FALSE;
+}
+
+SCRCMD_DEF(checkcoins)
+{
+    u16 *ptr = GetVarPointer(ScriptReadHalfword(ctx));
+    *ptr = GetCoins();
+    return FALSE;
+}
+
+SCRCMD_DEF(givecoins)
+{
+    u16 coins = VarGet(ScriptReadHalfword(ctx));
+
+    if (GiveCoins(coins) == TRUE)
+        gSpecialVar_Result = 0;
+    else
+        gSpecialVar_Result = 1;
+    return FALSE;
+}
+
+SCRCMD_DEF(takecoins)
+{
+    u16 coins = VarGet(ScriptReadHalfword(ctx));
+
+    if (TakeCoins(coins) == TRUE)
+        gSpecialVar_Result = 0;
+    else
+        gSpecialVar_Result = 1;
+    return FALSE;
 }

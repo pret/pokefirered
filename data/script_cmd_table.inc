@@ -212,7 +212,7 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_cmdD0
 	.4byte ScrCmd_warpD1
 	.4byte ScrCmd_setmonmetlocation
-	.4byte ScrCmd_getstringwidth
+	.4byte ScrCmd_getbraillestringwidth
 	.4byte ScrCmd_cmdDA
 
 gScriptCmdTableEnd:: @ 815FD08

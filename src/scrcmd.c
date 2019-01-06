@@ -23,6 +23,7 @@
 #include "new_menu_helpers.h"
 #include "window.h"
 #include "start_menu.h"
+#include "script_menu.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -1406,4 +1407,171 @@ SCRCMD_DEF(waitbuttonpress)
         gUnknown_20370AC = 0;
     SetupNativeScript(ctx, WaitForAorBPress);
     return TRUE;
+}
+
+SCRCMD_DEF(yesnobox)
+{
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+
+    if (ScriptMenu_YesNo(left, top) == TRUE)
+    {
+        ScriptContext1_Stop();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+SCRCMD_DEF(multichoice)
+{
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 multichoiceId = ScriptReadByte(ctx);
+    u8 ignoreBPress = ScriptReadByte(ctx);
+
+    if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
+    {
+        ScriptContext1_Stop();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+SCRCMD_DEF(multichoicedefault)
+{
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 multichoiceId = ScriptReadByte(ctx);
+    u8 defaultChoice = ScriptReadByte(ctx);
+    u8 ignoreBPress = ScriptReadByte(ctx);
+
+    if (ScriptMenu_MultichoiceWithDefault(left, top, multichoiceId, ignoreBPress, defaultChoice) == TRUE)
+    {
+        ScriptContext1_Stop();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+SCRCMD_DEF(drawbox)
+{
+    /*u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 right = ScriptReadByte(ctx);
+    u8 bottom = ScriptReadByte(ctx);
+
+    MenuDrawTextWindow(left, top, right, bottom);*/
+    return FALSE;
+}
+
+SCRCMD_DEF(multichoicegrid)
+{
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 multichoiceId = ScriptReadByte(ctx);
+    u8 numColumns = ScriptReadByte(ctx);
+    u8 ignoreBPress = ScriptReadByte(ctx);
+
+    if (ScriptMenu_MultichoiceGrid(left, top, multichoiceId, ignoreBPress, numColumns) == TRUE)
+    {
+        ScriptContext1_Stop();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+SCRCMD_DEF(erasebox)
+{
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 right = ScriptReadByte(ctx);
+    u8 bottom = ScriptReadByte(ctx);
+
+    // MenuZeroFillWindowRect(left, top, right, bottom);
+    return FALSE;
+}
+
+SCRCMD_DEF(drawboxtext)
+{
+//    u8 left = ScriptReadByte(ctx);
+//    u8 top = ScriptReadByte(ctx);
+//    u8 multichoiceId = ScriptReadByte(ctx);
+//    u8 ignoreBPress = ScriptReadByte(ctx);
+
+    /*if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
+    {
+        ScriptContext1_Stop();
+        return TRUE;
+    }*/
+    return FALSE;
+}
+
+SCRCMD_DEF(showmonpic)
+{
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u8 x = ScriptReadByte(ctx);
+    u8 y = ScriptReadByte(ctx);
+
+    ScriptMenu_ShowPokemonPic(species, x, y);
+    PlayCry7(species, 0);
+    return FALSE;
+}
+
+SCRCMD_DEF(hidemonpic)
+{
+    bool8 (*func)(void) = ScriptMenu_GetPicboxWaitFunc();
+
+    if (func == NULL)
+        return FALSE;
+    SetupNativeScript(ctx, func);
+    return TRUE;
+}
+
+SCRCMD_DEF(showcontestwinner)
+{
+    u8 v1 = ScriptReadByte(ctx);
+
+    /*
+    if (v1)
+        sub_812FDA8(v1);
+    ShowContestWinner();
+    ScriptContext1_Stop();
+    return TRUE;
+     */
+
+    return FALSE;
+}
+
+SCRCMD_DEF(braillemessage)
+{
+    u8 *ptr = (u8 *)ScriptReadWord(ctx);
+    if (ptr == NULL)
+        ptr = (u8 *)ctx->data[0];
+
+    sub_80F6E9C();
+    sub_80F6EE4(0, 1);
+    AddTextPrinterParameterized(0, 6, ptr, 0, 1, 0, NULL);
+    return FALSE;
+}
+
+SCRCMD_DEF(getbraillestringwidth)
+{
+    u8 *ptr = (u8 *)ScriptReadWord(ctx);
+    if (ptr == NULL)
+        ptr = (u8 *)ctx->data[0];
+
+    gSpecialVar_0x8004 = GetStringWidth(6, ptr, -1);
+    return FALSE;
 }

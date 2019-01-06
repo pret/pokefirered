@@ -936,7 +936,7 @@ _0806CFBC:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0806CFB0
-	ldr r0, _0806CFE8 @ =gUnknown_3005074
+	ldr r0, _0806CFE8 @ =gSelectedEventObject
 	strb r3, [r0]
 	ldr r1, _0806CFEC @ =gSpecialVar_LastTalked
 	adds r0, r2, r3
@@ -954,7 +954,7 @@ _0806CFDE:
 	bx r1
 	.align 2, 0
 _0806CFE4: .4byte gUnknown_2031DEC
-_0806CFE8: .4byte gUnknown_3005074
+_0806CFE8: .4byte gSelectedEventObject
 _0806CFEC: .4byte gSpecialVar_LastTalked
 _0806CFF0: .4byte gSpecialVar_Facing
 	thumb_func_end sub_806CF38
@@ -1044,7 +1044,7 @@ _0806D092:
 _0806D098: .4byte gMapObjects
 _0806D09C: .4byte gUnknown_826D2D8
 _0806D0A0:
-	ldr r0, _0806D0D4 @ =gUnknown_3005074
+	ldr r0, _0806D0D4 @ =gSelectedEventObject
 	strb r5, [r0]
 	ldr r4, _0806D0D8 @ =gSpecialVar_LastTalked
 	ldr r1, _0806D0DC @ =gMapObjects
@@ -1069,7 +1069,7 @@ _0806D0C8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806D0D4: .4byte gUnknown_3005074
+_0806D0D4: .4byte gSelectedEventObject
 _0806D0D8: .4byte gSpecialVar_LastTalked
 _0806D0DC: .4byte gMapObjects
 _0806D0E0: .4byte gSpecialVar_Facing

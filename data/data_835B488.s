@@ -660,10 +660,13 @@ gUnknown_83A7240:: @ 83A7240
     .section .rodata.83A72A0
 
 gUnknown_83A72A0:: @ 83A72A0
-	.incbin "baserom.gba", 0x3A72A0, 0x2
+	.string "S$"
 
 gUnknown_83A72A2:: @ 83A72A2
-	.incbin "baserom.gba", 0x3A72A2, 0x6
+	.string "IES$"
+
+gUnknown_83A72A6:: @ 83A72A6
+	.string "  "
 
 gUnknown_83A72A8:: @ 83A72A8
 	.incbin "baserom.gba", 0x3A72A8, 0x68

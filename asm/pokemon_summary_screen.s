@@ -8431,7 +8431,7 @@ _08138B48: .4byte 0x00003208
 	thumb_func_start sub_8138B4C
 sub_8138B4C: @ 8138B4C
 	push {lr}
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0
 	bne _08138B84
 	bl sub_811FA20
@@ -13239,7 +13239,7 @@ _0813B16C:
 _0813B190: .4byte 0x000032f4
 _0813B194: .4byte 0x00003210
 _0813B198:
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0
 	bne _0813B1C4
 	ldr r0, _0813B1C0 @ =gReceivedRemoteLinkPlayers

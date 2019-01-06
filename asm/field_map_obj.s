@@ -1614,8 +1614,8 @@ _0805E9F0: .4byte 0x0000ffff
 _0805E9F4: .4byte gSprites
 	thumb_func_end AddPseudoFieldObject
 
-	thumb_func_start sub_805E9F8
-sub_805E9F8: @ 805E9F8
+	thumb_func_start sprite_new
+sprite_new: @ 805E9F8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1772,7 +1772,7 @@ _0805EB24:
 _0805EB38: .4byte sub_8068FA8
 _0805EB3C: .4byte 0x0000ffff
 _0805EB40: .4byte gSprites
-	thumb_func_end sub_805E9F8
+	thumb_func_end sprite_new
 
 	thumb_func_start sub_805EB44
 sub_805EB44: @ 805EB44

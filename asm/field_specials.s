@@ -3138,7 +3138,7 @@ _080CBDE4: .4byte gSpecialVar_0x8004
 
 	thumb_func_start sub_80CBDE8
 sub_80CBDE8: @ 80CBDE8
-	ldr r1, _080CBDF8 @ =gUnknown_3005074
+	ldr r1, _080CBDF8 @ =gSelectedEventObject
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, _080CBDFC @ =gUnknown_20370DA
@@ -3146,7 +3146,7 @@ sub_80CBDE8: @ 80CBDE8
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_080CBDF8: .4byte gUnknown_3005074
+_080CBDF8: .4byte gSelectedEventObject
 _080CBDFC: .4byte gUnknown_20370DA
 	thumb_func_end sub_80CBDE8
 
@@ -3157,7 +3157,7 @@ sub_80CBE00: @ 80CBE00
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	bne _080CBE44
-	ldr r1, _080CBE1C @ =gUnknown_3005074
+	ldr r1, _080CBE1C @ =gSelectedEventObject
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080CBE20
@@ -3165,7 +3165,7 @@ sub_80CBE00: @ 80CBE00
 	b _080CBE48
 	.align 2, 0
 _080CBE18: .4byte gUnknown_20370DA
-_080CBE1C: .4byte gUnknown_3005074
+_080CBE1C: .4byte gSelectedEventObject
 _080CBE20:
 	ldr r2, _080CBE4C @ =gMapObjects
 	ldrb r1, [r1]

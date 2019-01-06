@@ -11969,7 +11969,7 @@ _0811BADA:
 	str r0, [sp, 0x4]
 	movs r0, 0x19
 	adds r1, r4, 0
-	bl sub_805E9F8
+	bl sprite_new
 	ldr r1, [sp, 0x8]
 	adds r5, r1, r5
 	strb r0, [r5]

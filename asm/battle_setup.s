@@ -1512,7 +1512,7 @@ battle_80801F0: @ 80801F0
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	bl GetFieldObjectIdByLocalIdAndMap
-	ldr r1, _08080224 @ =gUnknown_3005074
+	ldr r1, _08080224 @ =gSelectedEventObject
 	strb r0, [r1]
 _08080212:
 	pop {r0}
@@ -1521,7 +1521,7 @@ _08080212:
 _08080218: .4byte gUnknown_20386B0
 _0808021C: .4byte gSpecialVar_LastTalked
 _08080220: .4byte gSaveBlock1Ptr
-_08080224: .4byte gUnknown_3005074
+_08080224: .4byte gSelectedEventObject
 	thumb_func_end battle_80801F0
 
 	thumb_func_start sub_8080228
@@ -1647,7 +1647,7 @@ TrainerWantsBattle: @ 8080334
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08080368 @ =gUnknown_3005074
+	ldr r2, _08080368 @ =gSelectedEventObject
 	strb r0, [r2]
 	ldr r4, _0808036C @ =gSpecialVar_LastTalked
 	ldr r3, _08080370 @ =gMapObjects
@@ -1667,7 +1667,7 @@ TrainerWantsBattle: @ 8080334
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080368: .4byte gUnknown_3005074
+_08080368: .4byte gSelectedEventObject
 _0808036C: .4byte gSpecialVar_LastTalked
 _08080370: .4byte gMapObjects
 _08080374: .4byte gUnknown_81A4EB4
@@ -1693,7 +1693,7 @@ GetTrainerFlagFromScriptPointer: @ 8080378
 	thumb_func_start sub_8080398
 sub_8080398: @ 8080398
 	push {r4,lr}
-	ldr r0, _080803C4 @ =gUnknown_3005074
+	ldr r0, _080803C4 @ =gSelectedEventObject
 	ldrb r0, [r0]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -1713,7 +1713,7 @@ sub_8080398: @ 8080398
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080803C4: .4byte gUnknown_3005074
+_080803C4: .4byte gSelectedEventObject
 _080803C8: .4byte gMapObjects
 	thumb_func_end sub_8080398
 

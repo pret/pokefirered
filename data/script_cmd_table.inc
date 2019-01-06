@@ -94,7 +94,7 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_faceplayer
 	.4byte ScrCmd_turnobject
 	.4byte ScrCmd_trainerbattle
-	.4byte sub_806C2D8
+	.4byte ScrCmd_dotrainerbattle
 	.4byte ScrCmd_ontrainerbattleend
 	.4byte ScrCmd_ontrainerbattleendgoto
 	.4byte ScrCmd_checktrainerflag
@@ -103,25 +103,25 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_setobjectxyperm
 	.4byte ScrCmd_moveobjectoffscreen
 	.4byte ScrCmd_setobjectmovementtype
-	.4byte sub_806B878
-	.4byte sub_806B80C
-	.4byte sub_806B88C
+	.4byte ScrCmd_waitmessage
+	.4byte ScrCmd_message
+	.4byte ScrCmd_closemessage
 	.4byte ScrCmd_lockall
 	.4byte ScrCmd_lock
 	.4byte ScrCmd_releaseall
 	.4byte ScrCmd_release
-	.4byte sub_806BA3C
+	.4byte ScrCmd_waitbuttonpress
 	.4byte ScrCmd_yesnobox
 	.4byte ScrCmd_multichoice
 	.4byte ScrCmd_multichoicedefault
 	.4byte ScrCmd_multichoicegrid
-	.4byte sub_806BB38
-	.4byte sub_806BB8C
-	.4byte sub_806BB98
-	.4byte sub_806BB9C
-	.4byte sub_806BBD8
-	.4byte sub_806BBF8
-	.4byte sub_806BC04
+	.4byte ScrCmd_drawbox
+	.4byte ScrCmd_erasebox
+	.4byte ScrCmd_drawboxtext
+	.4byte ScrCmd_showmonpic
+	.4byte ScrCmd_hidemonpic
+	.4byte ScrCmd_showcontestwinner
+	.4byte ScrCmd_braillemessage
 	.4byte ScrCmd_givemon
 	.4byte ScrCmd_giveegg
 	.4byte ScrCmd_setmonmove
@@ -130,33 +130,33 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_bufferleadmonspeciesname
 	.4byte ScrCmd_bufferpartymonnick
 	.4byte ScrCmd_bufferitemname
-	.4byte sub_806BE34
+	.4byte ScrCmd_bufferdecorationname
 	.4byte ScrCmd_buffermovename
 	.4byte ScrCmd_buffernumberstring
 	.4byte ScrCmd_bufferstdstring
 	.4byte ScrCmd_bufferstring
-	.4byte sub_806C3AC
-	.4byte sub_806C3C0
-	.4byte sub_806C3D4
+	.4byte ScrCmd_pokemart
+	.4byte ScrCmd_pokemartdecoration
+	.4byte ScrCmd_pokemartdecoration2
 	.4byte ScrCmd_playslotmachine
-	.4byte sub_806C410
-	.4byte sub_806C418
-	.4byte sub_806C424
-	.4byte sub_806C428
-	.4byte sub_806C42C
+	.4byte ScrCmd_setberrytree
+	.4byte ScrCmd_choosecontestmon
+	.4byte ScrCmd_startcontest
+	.4byte ScrCmd_showcontestresults
+	.4byte ScrCmd_contestlinktransfer
 	.4byte ScrCmd_random
 	.4byte ScrCmd_givemoney
 	.4byte ScrCmd_takemoney
 	.4byte ScrCmd_checkmoney
-	.4byte sub_806C1CC
-	.4byte sub_806C21C
-	.4byte sub_806C228
-	.4byte sub_806C414
+	.4byte ScrCmd_showmoneybox
+	.4byte ScrCmd_hidemoneybox
+	.4byte ScrCmd_updatemoneybox
+	.4byte ScrCmd_getpricereduction
 	.4byte ScrCmd_fadescreen
 	.4byte ScrCmd_fadescreenspeed
 	.4byte ScrCmd_setflashradius
 	.4byte ScrCmd_animateflash
-	.4byte sub_806B85C
+	.4byte ScrCmd_messageautoscroll
 	.4byte ScrCmd_dofieldeffect
 	.4byte ScrCmd_setfieldeffectarg
 	.4byte ScrCmd_waitfieldeffect
@@ -175,16 +175,16 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_turnvobject
 	.4byte ScrCmd_opendoor
 	.4byte ScrCmd_closedoor
-	.4byte sub_806C688
+	.4byte ScrCmd_waitdoranim
 	.4byte ScrCmd_setdooropen
 	.4byte ScrCmd_setdoorclosed
-	.4byte sub_806C724
-	.4byte sub_806C728
+	.4byte ScrCmd_addelevmenuitem
+	.4byte ScrCmd_showelevmenu
 	.4byte ScrCmd_checkcoins
 	.4byte ScrCmd_givecoins
 	.4byte ScrCmd_takecoins
 	.4byte ScrCmd_setwildbattle
-	.4byte sub_806C39C
+	.4byte ScrCmd_dowildbattle
 	.4byte ScrCmd_setvaddress
 	.4byte ScrCmd_vgoto
 	.4byte ScrCmd_vcall
@@ -193,27 +193,27 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_vmessage
 	.4byte ScrCmd_vloadword
 	.4byte ScrCmd_vbufferstring
-	.4byte sub_806C258
+	.4byte ScrCmd_showcoinsbox
 	.4byte ScrCmd_hidecoinsbox
 	.4byte ScrCmd_updatecoinsbox
 	.4byte ScrCmd_incrementgamestat
 	.4byte ScrCmd_setescapewarp
-	.4byte sub_806C540
+	.4byte ScrCmd_waitmoncry
 	.4byte ScrCmd_bufferboxname
-	.4byte sub_806B7EC
-	.4byte sub_806B828
-	.4byte sub_806B850
-	.4byte sub_806C7BC
-	.4byte sub_806C7C8
-	.4byte sub_806A888
+	.4byte ScrCmd_cmdC7
+	.4byte ScrCmd_cmdC8
+	.4byte ScrCmd_cmdC9
+	.4byte ScrCmd_cmdCA
+	.4byte ScrCmd_cmdCB
+	.4byte ScrCmd_comparestattoword
 	.4byte ScrCmd_setmonobedient
 	.4byte ScrCmd_checkmonobedience
-	.4byte sub_806A28C
-	.4byte sub_806A8C0
-	.4byte ScrCmd_warpD7
-	.4byte sub_806C844
-	.4byte sub_806BC40
-	.4byte sub_806BD90
+	.4byte ScrCmd_cmdCF
+	.4byte ScrCmd_cmdD0
+	.4byte ScrCmd_warpD1
+	.4byte ScrCmd_setmonmetlocation
+	.4byte ScrCmd_getstringwidth
+	.4byte ScrCmd_cmdDA
 
 gScriptCmdTableEnd:: @ 815FD08
 	.4byte ScrCmd_nop

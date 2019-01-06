@@ -15,6 +15,11 @@
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
 #include "sound.h"
+#include "script_movement.h"
+#include "field_map_obj.h"
+#include "field_map_obj_helpers.h"
+#include "map_obj_lock.h"
+#include "field_message_box.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -24,10 +29,12 @@ extern const u8 *const gStdScriptsEnd[];
 EWRAM_DATA ptrdiff_t gVScriptOffset = 0;
 EWRAM_DATA u8 gUnknown_20370AC = 0;
 EWRAM_DATA u16 sPauseCounter = 0;
-EWRAM_DATA u16 gUnknown_20370B0 = 0;
-EWRAM_DATA u16 gUnknown_20370B2 = 0;
-EWRAM_DATA u16 gUnknown_20370B4 = 0;
+EWRAM_DATA u16 sMovingNpcId = 0;
+EWRAM_DATA u16 sMovingNpcMapBank = 0;
+EWRAM_DATA u16 sMovingNpcMapId = 0;
 EWRAM_DATA u16 gUnknown_20370B6 = 0;
+
+extern u8 gSelectedEventObject;
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
@@ -247,7 +254,7 @@ SCRCMD_DEF(ScrCmd_setmysteryeventstatus)
     return FALSE;
 }
 
-SCRCMD_DEF(sub_806A28C)
+SCRCMD_DEF(ScrCmd_cmdCF)
 {
     const u8 * script = sub_8069E48();
     if (script != NULL)
@@ -562,7 +569,7 @@ SCRCMD_DEF(ScrCmd_incrementgamestat)
     return FALSE;
 }
 
-SCRCMD_DEF(sub_806A888)
+SCRCMD_DEF(ScrCmd_comparestattoword)
 {
     u8 statIdx = ScriptReadByte(ctx);
     u32 value = ScriptReadWord(ctx);
@@ -577,7 +584,7 @@ SCRCMD_DEF(sub_806A888)
     return FALSE;
 }
 
-SCRCMD_DEF(sub_806A8C0)
+SCRCMD_DEF(ScrCmd_cmdD0)
 {
     u16 value = ScriptReadHalfword(ctx);
     sub_8115748(value);
@@ -776,7 +783,7 @@ SCRCMD_DEF(ScrCmd_warpteleport)
     return TRUE;
 }
 
-SCRCMD_DEF(ScrCmd_warpD7)
+SCRCMD_DEF(ScrCmd_warpD1)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -964,5 +971,277 @@ SCRCMD_DEF(ScrCmd_fadeinbgm)
         FadeInBGM(4 * speed);
     else
         FadeInBGM(4);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_applymovement)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    const void *movementScript = (const void *)ScriptReadWord(ctx);
+
+    ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movementScript);
+    sMovingNpcId = localId;
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_applymovement_at)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    const void *movementScript = (const void *)ScriptReadWord(ctx);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+
+    ScriptMovement_StartObjectMovementScript(localId, mapNum, mapGroup, movementScript);
+    sMovingNpcId = localId;
+    return FALSE;
+}
+
+static bool8 WaitForMovementFinish(void)
+{
+    return ScriptMovement_IsObjectMovementFinished(sMovingNpcId, sMovingNpcMapId, sMovingNpcMapBank);
+}
+
+SCRCMD_DEF(ScrCmd_waitmovement)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+
+    if (localId != 0)
+        sMovingNpcId = localId;
+    sMovingNpcMapBank = gSaveBlock1Ptr->location.mapGroup;
+    sMovingNpcMapId = gSaveBlock1Ptr->location.mapNum;
+    SetupNativeScript(ctx, WaitForMovementFinish);
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_waitmovement_at)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 mapBank;
+    u8 mapId;
+
+    if (localId != 0)
+        sMovingNpcId = localId;
+    mapBank = ScriptReadByte(ctx);
+    mapId = ScriptReadByte(ctx);
+    sMovingNpcMapBank = mapBank;
+    sMovingNpcMapId = mapId;
+    SetupNativeScript(ctx, WaitForMovementFinish);
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_removeobject)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+
+    RemoveFieldObjectByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_removeobject_at)
+{
+    u16 objectId = VarGet(ScriptReadHalfword(ctx));
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+
+    RemoveFieldObjectByLocalIdAndMap(objectId, mapNum, mapGroup);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_addobject)
+{
+    u16 objectId = VarGet(ScriptReadHalfword(ctx));
+
+    show_sprite(objectId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_addobject_at)
+{
+    u16 objectId = VarGet(ScriptReadHalfword(ctx));
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+
+    show_sprite(objectId, mapNum, mapGroup);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setobjectxy)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    sub_805F7C4(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setobjectxyperm)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetMapObjTemplateCoords(localId, x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_moveobjectoffscreen)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+
+    sub_805FE94(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_showobject_at)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+
+    npc_by_local_id_and_map_set_field_1_bit_x20(localId, mapNum, mapGroup, 0);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_hideobject_at)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+
+    npc_by_local_id_and_map_set_field_1_bit_x20(localId, mapNum, mapGroup, 1);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setobjectpriority)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 priority = ScriptReadByte(ctx);
+
+    sub_805F3A8(localId, mapNum, mapGroup, priority + 83);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_resetobjectpriority)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+
+    sub_805F400(localId, mapNum, mapGroup);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_faceplayer)
+{
+    if (gMapObjects[gSelectedEventObject].active)
+    {
+        FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedEventObject],
+                                         player_get_direction_lower_nybble());
+    }
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_turnobject)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 direction = ScriptReadByte(ctx);
+
+    FieldObjectTurnByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, direction);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setobjectmovementtype)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 movementType = ScriptReadByte(ctx);
+
+    Overworld_SetMapObjTemplateMovementType(localId, movementType);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_createvobject)
+{
+    u8 graphicsId = ScriptReadByte(ctx);
+    u8 v2 = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u32 y = VarGet(ScriptReadHalfword(ctx));
+    u8 elevation = ScriptReadByte(ctx);
+    u8 direction = ScriptReadByte(ctx);
+
+    sprite_new(graphicsId, v2, x, y, elevation, direction);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_turnvobject)
+{
+    u8 v1 = ScriptReadByte(ctx);
+    u8 direction = ScriptReadByte(ctx);
+
+    sub_8069058(v1, direction);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_lockall)
+{
+    if (is_c1_link_related_active())
+    {
+        return FALSE;
+    }
+    else
+    {
+        ScriptFreezeMapObjects();
+        SetupNativeScript(ctx, sub_8069590);
+        return TRUE;
+    }
+}
+
+SCRCMD_DEF(ScrCmd_lock)
+{
+    if (is_c1_link_related_active())
+    {
+        return FALSE;
+    }
+    else
+    {
+        if (gMapObjects[gSelectedEventObject].active)
+        {
+            LockSelectedMapObject();
+            SetupNativeScript(ctx, sub_8069648);
+        }
+        else
+        {
+            ScriptFreezeMapObjects();
+            SetupNativeScript(ctx, sub_8069590);
+        }
+        return TRUE;
+    }
+}
+
+SCRCMD_DEF(ScrCmd_releaseall)
+{
+    u8 playerObjectId;
+
+    HideFieldMessageBox();
+    playerObjectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[playerObjectId]);
+    sub_80974D8();
+    UnfreezeMapObjects();
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_release)
+{
+    u8 playerObjectId;
+
+    HideFieldMessageBox();
+    if (gMapObjects[gSelectedEventObject].active)
+        FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedEventObject]);
+    playerObjectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[playerObjectId]);
+    sub_80974D8();
+    UnfreezeMapObjects();
     return FALSE;
 }

@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-extern const u8 *const gUnknown_0858BAF0[9];
+extern const u8 *const gStdStringPtrs[9];
 
 bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 var3, u8 var4);
 bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 var3, u8 var4, u8 var5);

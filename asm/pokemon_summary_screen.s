@@ -3587,7 +3587,7 @@ _08136338:
 	ldr r1, [r6]
 	ldr r2, _0813634C @ =0x00003074
 	adds r1, r2
-	bl sub_8099E90
+	bl CopyItemName
 _08136342:
 	add sp, 0x14
 	pop {r4-r7}

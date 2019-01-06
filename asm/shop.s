@@ -1023,7 +1023,7 @@ sub_809B300: @ 809B300
 	lsrs r5, 16
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8099E90
+	bl CopyItemName
 	str r6, [r4]
 	str r5, [r4, 0x4]
 	pop {r4-r6}
@@ -2232,7 +2232,7 @@ _0809BC78: .4byte sub_809BF98
 _0809BC7C:
 	ldr r1, _0809BC94 @ =gStringVar1
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r1, _0809BC98 @ =gUnknown_8416766
 	ldr r2, _0809BC9C @ =sub_809BCA0
 	adds r0, r6, 0
@@ -2408,7 +2408,7 @@ _0809BDD4:
 	bl PutWindowTilemap
 	ldrh r0, [r4, 0xA]
 	ldr r1, _0809BE40 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _0809BE44 @ =gStringVar2
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]

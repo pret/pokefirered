@@ -3237,7 +3237,7 @@ sub_810971C: @ 810971C
 	lsrs r0, 16
 	ldr r1, _081097D8 @ =gStringVar1
 	mov r10, r1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _081097DC @ =gStringVar4
 	mov r9, r0
 	adds r1, r6, 0
@@ -3725,7 +3725,7 @@ _08109AD4:
 	ldr r0, _08109BA8 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _08109BAC @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r6, _08109BB0 @ =gStringVar4
 	ldr r1, _08109BB4 @ =gUnknown_84162FF
 	adds r0, r6, 0
@@ -4125,7 +4125,7 @@ sub_8109EA8: @ 8109EA8
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08109F30 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _08109F34 @ =gStringVar2
 	movs r2, 0x10
 	ldrsh r1, [r6, r2]
@@ -4447,7 +4447,7 @@ sub_810A18C: @ 810A18C
 	ldr r0, _0810A1BC @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _0810A1C0 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r5, _0810A1C4 @ =gStringVar4
 	ldr r1, _0810A1C8 @ =gUnknown_841635E
 	adds r0, r5, 0
@@ -4969,7 +4969,7 @@ _0810A5B4:
 	bne _0810A5F8
 	ldrh r0, [r6]
 	ldr r1, _0810A5E8 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _0810A5EC @ =gStringVar4
 	ldr r1, _0810A5F0 @ =gUnknown_84168F1
 	adds r0, r4, 0
@@ -5007,7 +5007,7 @@ _0810A610:
 _0810A618:
 	ldrh r0, [r6]
 	ldr r1, _0810A644 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _0810A648 @ =gStringVar4
 	ldr r1, _0810A64C @ =gUnknown_8416911
 	adds r0, r4, 0
@@ -5397,7 +5397,7 @@ sub_810A940: @ 810A940
 	ldr r0, _0810A9B8 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _0810A9BC @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r6, _0810A9C0 @ =gStringVar3
 	ldr r0, _0810A9C4 @ =gUnknown_203ACFC
 	ldrb r0, [r0, 0x6]
@@ -5756,7 +5756,7 @@ sub_810AC40: @ 810AC40
 	bl sub_80A2294
 	ldrh r0, [r5]
 	ldr r1, _0810ACD8 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _0810ACDC @ =gStringVar2
 	movs r2, 0x10
 	ldrsh r1, [r7, r2]

@@ -149,8 +149,8 @@ _08099E88: .4byte gSaveBlock1Ptr
 _08099E8C: .4byte 0x0000054c
 	thumb_func_end sub_8099E44
 
-	thumb_func_start sub_8099E90
-sub_8099E90: @ 8099E90
+	thumb_func_start CopyItemName
+CopyItemName: @ 8099E90
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 16
@@ -177,7 +177,7 @@ _08099EC4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8099E90
+	thumb_func_end CopyItemName
 
 	thumb_func_start sub_8099ECC
 sub_8099ECC: @ 8099ECC

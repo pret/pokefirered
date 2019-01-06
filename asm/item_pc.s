@@ -1886,7 +1886,7 @@ sub_810E274: @ 810E274
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _0810E348 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r6, _0810E34C @ =gStringVar4
 	ldr r1, _0810E350 @ =gUnknown_84162FF
 	adds r0, r6, 0
@@ -2048,7 +2048,7 @@ sub_810E418: @ 810E418
 	bl sub_80A2294
 	ldr r1, _0810E4A4 @ =gStringVar1
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _0810E4A8 @ =gStringVar2
 	movs r2, 0x10
 	ldrsh r1, [r5, r2]
@@ -2241,7 +2241,7 @@ sub_810E5E0: @ 810E5E0
 	lsrs r0, 16
 	ldr r6, _0810E660 @ =gStringVar1
 	adds r1, r6, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r5, _0810E664 @ =gStringVar4
 	ldr r1, _0810E668 @ =gUnknown_84177AC
 	adds r0, r5, 0

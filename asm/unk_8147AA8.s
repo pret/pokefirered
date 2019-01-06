@@ -5613,7 +5613,7 @@ sub_814A468: @ 814A468
 	ldr r1, [r5]
 	adds r1, 0x26
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, [r5]
 	adds r0, 0x66
 	adds r1, r6, 0
@@ -5705,7 +5705,7 @@ sub_814A53C: @ 814A53C
 	ldr r4, _0814A5AC @ =gUnknown_203F3D8
 	ldr r1, [r4]
 	adds r1, 0x26
-	bl sub_8099E90
+	bl CopyItemName
 	bl UnkTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26
@@ -5760,7 +5760,7 @@ sub_814A5B4: @ 814A5B4
 	ldr r4, _0814A624 @ =gUnknown_203F3D8
 	ldr r1, [r4]
 	adds r1, 0x26
-	bl sub_8099E90
+	bl CopyItemName
 	bl UnkTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26

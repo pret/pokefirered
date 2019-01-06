@@ -1547,7 +1547,7 @@ gUnknown_83DFC9C:: @ 83DFC9C
 gUnknown_83E04B0:: @ 83E04B0
 	.incbin "baserom.gba", 0x3E04B0, 0x208
 
-gUnknown_83E06B8:: @ 83E06B8
+gStdStringPtrs:: @ 83E06B8
 	.incbin "baserom.gba", 0x3E06B8, 0x74
 
 gUnknown_83E072C:: @ 83E072C

@@ -821,7 +821,7 @@ void sub_815E408(void)
         gSpecialVar_Result = 2;
     else if (AddBagItem(itemId, 1) == 1)
     {
-        sub_8099E90(itemId, gStringVar2);
+        CopyItemName(itemId, gStringVar2);
         gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 = TRUE;
         gSpecialVar_Result = 0;
     }

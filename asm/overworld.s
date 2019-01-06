@@ -72,7 +72,7 @@ sub_8054C48: @ 8054C48
 	bl sub_8054C04
 	adds r4, r0, 0
 	ldr r5, _08054C6C @ =gStringVar1
-	bl sub_80CBF04
+	bl CountDigits
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

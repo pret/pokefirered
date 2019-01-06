@@ -1374,7 +1374,7 @@ sub_80A1A44: @ 80A1A44
 	bl sub_81089F4
 	ldrh r0, [r4]
 	ldr r1, _080A1A88 @ =gStringVar2
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _080A1A8C @ =gStringVar4
 	ldr r1, _080A1A90 @ =gUnknown_841658C
 	bl StringExpandPlaceholders
@@ -1409,7 +1409,7 @@ sub_80A1A94: @ 80A1A94
 	bl FlagClear
 	ldrh r0, [r5]
 	ldr r1, _080A1AE4 @ =gStringVar2
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _080A1AE8 @ =gStringVar4
 	ldr r1, _080A1AEC @ =gUnknown_84165D2
 	bl StringExpandPlaceholders
@@ -1435,7 +1435,7 @@ _080A1AF4:
 	bl FlagClear
 	ldrh r0, [r5]
 	ldr r1, _080A1B34 @ =gStringVar2
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _080A1B38 @ =gStringVar4
 	ldr r1, _080A1B3C @ =gUnknown_8416600
 	bl StringExpandPlaceholders

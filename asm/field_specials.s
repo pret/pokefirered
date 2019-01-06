@@ -3267,7 +3267,7 @@ TV_PrintIntToStringVar: @ 80CBED4
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_80CBF04
+	bl CountDigits
 	adds r3, r0, 0
 	ldr r0, _080CBF00 @ =gUnknown_83F5AF8
 	lsls r4, 2
@@ -3285,8 +3285,8 @@ TV_PrintIntToStringVar: @ 80CBED4
 _080CBF00: .4byte gUnknown_83F5AF8
 	thumb_func_end TV_PrintIntToStringVar
 
-	thumb_func_start sub_80CBF04
-sub_80CBF04: @ 80CBF04
+	thumb_func_start CountDigits
+CountDigits: @ 80CBF04
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0xA
@@ -3366,7 +3366,7 @@ _080CBF9A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CBF04
+	thumb_func_end CountDigits
 
 	thumb_func_start sub_80CBFA0
 sub_80CBFA0: @ 80CBFA0

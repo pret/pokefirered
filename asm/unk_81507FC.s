@@ -9989,7 +9989,7 @@ _08155480:
 	lsrs r0, 16
 	add r5, sp, 0x70
 	adds r1, r5, 0
-	bl sub_8099E90
+	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
 	bl UnkTextUtil_SetPtrI
@@ -10021,7 +10021,7 @@ _08155480:
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
-	bl sub_8099E90
+	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
 	bl UnkTextUtil_SetPtrI

@@ -733,7 +733,7 @@ sub_813D31C: @ 813D31C
 	bl StringAppend
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r1, _0813D394 @ =gUnknown_84643B4
 	adds r0, r4, 0
 	bl StringAppend
@@ -2736,7 +2736,7 @@ sub_813E37C: @ 813E37C
 	bne _0813E3D8
 	ldr r1, _0813E3C8 @ =gStringVar1
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _0813E3CC @ =gStringVar4
 	ldr r1, _0813E3D0 @ =gUnknown_8416374
 	adds r0, r4, 0
@@ -2815,7 +2815,7 @@ sub_813E428: @ 813E428
 	bne _0813E488
 	ldrh r0, [r6]
 	ldr r1, _0813E478 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _0813E47C @ =gStringVar4
 	ldr r1, _0813E480 @ =gUnknown_84168F1
 	adds r0, r4, 0
@@ -2855,7 +2855,7 @@ _0813E4A0:
 _0813E4A8:
 	ldrh r0, [r6]
 	ldr r1, _0813E4D4 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _0813E4D8 @ =gStringVar4
 	ldr r1, _0813E4DC @ =gUnknown_8416911
 	adds r0, r4, 0
@@ -3188,7 +3188,7 @@ sub_813E768: @ 813E768
 	ldr r0, _0813E7D8 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _0813E7DC @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r6, _0813E7E0 @ =gStringVar3
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x5

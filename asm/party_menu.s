@@ -3383,7 +3383,7 @@ _08120468:
 	bl GetMonNickname
 	ldr r1, _081204A0 @ =gStringVar2
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _081204A4 @ =gStringVar4
 	ldr r1, _081204A8 @ =gUnknown_8416C2A
 	adds r0, r4, 0
@@ -3424,7 +3424,7 @@ sub_81204AC: @ 81204AC
 	bl GetMonNickname
 	ldr r1, _08120500 @ =gStringVar2
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _08120504 @ =gStringVar4
 	ldr r1, _08120508 @ =gUnknown_8416CAC
 	adds r0, r4, 0
@@ -3458,7 +3458,7 @@ sub_812050C: @ 812050C
 	bl GetMonNickname
 	ldr r1, _0812054C @ =gStringVar2
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _08120550 @ =gStringVar4
 	ldr r1, _08120554 @ =gUnknown_8416C49
 	adds r0, r4, 0
@@ -3502,10 +3502,10 @@ sub_8120558: @ 8120558
 	bl sub_8124B60
 	ldr r1, _081205B8 @ =gStringVar1
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r1, _081205BC @ =gStringVar2
 	adds r0, r5, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _081205C0 @ =gStringVar4
 	ldr r1, _081205C4 @ =gUnknown_8416CEA
 	adds r0, r4, 0

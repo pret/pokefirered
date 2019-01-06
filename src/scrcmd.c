@@ -1,10 +1,16 @@
 #include "global.h"
 #include "gba/isagbprint.h"
+#include "palette.h"
 #include "script.h"
 #include "mystery_event_script.h"
 #include "event_data.h"
 #include "random.h"
 #include "item.h"
+#include "overworld.h"
+#include "field_screen_effect.h"
+#include "quest_log.h"
+#include "map_preview_screen.h"
+#include "field_weather.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -528,3 +534,89 @@ SCRCMD_DEF(ScrCmd_checkdecor)
     return FALSE;
 }
 
+SCRCMD_DEF(ScrCmd_setflag)
+{
+    FlagSet(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_clearflag)
+{
+    FlagClear(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_checkflag)
+{
+    ctx->comparisonResult = FlagGet(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_incrementgamestat)
+{
+    IncrementGameStat(ScriptReadByte(ctx));
+    return FALSE;
+}
+
+SCRCMD_DEF(sub_806A888)
+{
+    u8 statIdx = ScriptReadByte(ctx);
+    u32 value = ScriptReadWord(ctx);
+    u32 statValue = GetGameStat(statIdx);
+
+    if (statValue < value)
+        ctx ->comparisonResult = 0;
+    else if (statValue == value)
+        ctx->comparisonResult = 1;
+    else
+        ctx->comparisonResult = 2;
+    return FALSE;
+}
+
+SCRCMD_DEF(sub_806A8C0)
+{
+    u16 value = ScriptReadHalfword(ctx);
+    sub_8115748(value);
+    sub_80F85BC(value);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_animateflash)
+{
+    sub_807F028(ScriptReadByte(ctx));
+    ScriptContext1_Stop();
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_setflashradius)
+{
+    u16 flashLevel = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetFlashLevel(flashLevel);
+    return FALSE;
+}
+
+static bool8 IsPaletteNotActive(void)
+{
+    if (!gPaletteFade.active)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_fadescreen)
+{
+    fade_screen(ScriptReadByte(ctx), 0);
+    SetupNativeScript(ctx, IsPaletteNotActive);
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_fadescreenspeed)
+{
+    u8 mode = ScriptReadByte(ctx);
+    u8 speed = ScriptReadByte(ctx);
+
+    fade_screen(mode, speed);
+    SetupNativeScript(ctx, IsPaletteNotActive);
+    return TRUE;
+}

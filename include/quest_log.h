@@ -21,5 +21,6 @@ extern struct UnkStruct_203AE98 * gUnknown_3005E94;
 
 void sub_8112720(u8);
 void sub_8113550(u16, const u16 *);
+void sub_8115748(u16);
 
 #endif //GUARD_QUEST_LOG_H

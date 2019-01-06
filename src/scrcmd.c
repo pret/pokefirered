@@ -11,6 +11,10 @@
 #include "quest_log.h"
 #include "map_preview_screen.h"
 #include "field_weather.h"
+#include "field_tasks.h"
+#include "field_fadetransition.h"
+#include "field_player_avatar.h"
+#include "sound.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -19,7 +23,7 @@ extern const u8 *const gStdScriptsEnd[];
 
 EWRAM_DATA ptrdiff_t gVScriptOffset = 0;
 EWRAM_DATA u8 gUnknown_20370AC = 0;
-EWRAM_DATA u16 gUnknown_20370AE = 0;
+EWRAM_DATA u16 sPauseCounter = 0;
 EWRAM_DATA u16 gUnknown_20370B0 = 0;
 EWRAM_DATA u16 gUnknown_20370B2 = 0;
 EWRAM_DATA u16 gUnknown_20370B4 = 0;
@@ -619,4 +623,346 @@ SCRCMD_DEF(ScrCmd_fadescreenspeed)
     fade_screen(mode, speed);
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
+}
+
+static bool8 RunPauseTimer(void)
+{
+    sPauseCounter--;
+
+    if (sPauseCounter == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_delay)
+{
+    sPauseCounter = ScriptReadHalfword(ctx);
+    SetupNativeScript(ctx, RunPauseTimer);
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_initclock)
+{
+//    u8 hour = VarGet(ScriptReadHalfword(ctx));
+//    u8 minute = VarGet(ScriptReadHalfword(ctx));
+//
+//    RtcInitLocalTimeOffset(hour, minute);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_dodailyevents)
+{
+//    DoTimeBasedEvents();
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_gettime)
+{
+//    RtcCalcLocalTime();
+//    gSpecialVar_0x8000 = gLocalTime.hours;
+//    gSpecialVar_0x8001 = gLocalTime.minutes;
+//    gSpecialVar_0x8002 = gLocalTime.seconds;
+    gSpecialVar_0x8000 = 0;
+    gSpecialVar_0x8001 = 0;
+    gSpecialVar_0x8002 = 0;
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setweather)
+{
+    u16 weather = VarGet(ScriptReadHalfword(ctx));
+
+    SetSav1Weather(weather);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_resetweather)
+{
+    SetSav1WeatherFromCurrMapHeader();
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_doweather)
+{
+    DoCurrentWeather();
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setstepcallback)
+{
+    ActivatePerStepCallback(ScriptReadByte(ctx));
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setmaplayoutindex)
+{
+    u16 value = VarGet(ScriptReadHalfword(ctx));
+
+    SetCurrentMapLayout(value);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_warp)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    DoWarp();
+    ResetInitialPlayerAvatarState();
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_warpsilent)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    DoDiveWarp();
+    ResetInitialPlayerAvatarState();
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_warpdoor)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    DoDoorWarp();
+    ResetInitialPlayerAvatarState();
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_warphole)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u16 x;
+    u16 y;
+
+    PlayerGetDestCoords(&x, &y);
+    if (mapGroup == 0xFF && mapNum == 0xFF)
+        SetWarpDestinationToFixedHoleWarp(x - 7, y - 7);
+    else
+        Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
+    DoFallWarp();
+    ResetInitialPlayerAvatarState();
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_warpteleport)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    sub_807E59C();
+    ResetInitialPlayerAvatarState();
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_warpD7)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    sub_805DAE4(player_get_direction_lower_nybble());
+    sub_807E500();
+    ResetInitialPlayerAvatarState();
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_setwarp)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setdynamicwarp)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    SetDynamicWarpWithCoords(0, mapGroup, mapNum, warpId, x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setdivewarp)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    SetFixedDiveWarp(mapGroup, mapNum, warpId, x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setholewarp)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    SetFixedHoleWarp(mapGroup, mapNum, warpId, x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_setescapewarp)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    SetEscapeWarp(mapGroup, mapNum, warpId, x, y);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_getplayerxy)
+{
+    u16 *pX = GetVarPointer(ScriptReadHalfword(ctx));
+    u16 *pY = GetVarPointer(ScriptReadHalfword(ctx));
+
+    *pX = gSaveBlock1Ptr->pos.x;
+    *pY = gSaveBlock1Ptr->pos.y;
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_getpartysize)
+{
+    gSpecialVar_Result = CalculatePlayerPartyCount();
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_playse)
+{
+    PlaySE(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+static bool8 WaitForSoundEffectFinish(void)
+{
+    if (!IsSEPlaying())
+        return TRUE;
+    else
+        return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_waitse)
+{
+    SetupNativeScript(ctx, WaitForSoundEffectFinish);
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_playfanfare)
+{
+    PlayFanfare(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+static bool8 WaitForFanfareFinish(void)
+{
+    return IsFanfareTaskInactive();
+}
+
+SCRCMD_DEF(ScrCmd_waitfanfare)
+{
+    SetupNativeScript(ctx, WaitForFanfareFinish);
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_playbgm)
+{
+    u16 songId = ScriptReadHalfword(ctx);
+    bool8 val = ScriptReadByte(ctx);
+
+    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+        return FALSE;
+    if (val == TRUE)
+        Overworld_SetSavedMusic(songId);
+    PlayNewMapMusic(songId);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_savebgm)
+{
+    Overworld_SetSavedMusic(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_fadedefaultbgm)
+{
+    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+        return FALSE;
+    Overworld_ChangeMusicToDefault();
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_fadenewbgm)
+{
+    u16 music = ScriptReadHalfword(ctx);
+    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+        return FALSE;
+    Overworld_ChangeMusicTo(music);
+    return FALSE;
+}
+
+SCRCMD_DEF(ScrCmd_fadeoutbgm)
+{
+    u8 speed = ScriptReadByte(ctx);
+
+    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+        return FALSE;
+    if (speed != 0)
+        FadeOutBGMTemporarily(4 * speed);
+    else
+        FadeOutBGMTemporarily(4);
+    SetupNativeScript(ctx, IsBGMPausedOrStopped);
+    return TRUE;
+}
+
+SCRCMD_DEF(ScrCmd_fadeinbgm)
+{
+    u8 speed = ScriptReadByte(ctx);
+
+    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+        return FALSE;
+    if (speed != 0)
+        FadeInBGM(4 * speed);
+    else
+        FadeInBGM(4);
+    return FALSE;
 }

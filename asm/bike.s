@@ -745,9 +745,9 @@ _080BD5F8:
 	cmp r0, 0
 	beq _080BD618
 	adds r0, r4, 0
-	bl sub_8055E78
+	bl Overworld_SetSavedMusic
 	adds r0, r4, 0
-	bl sub_8055F48
+	bl Overworld_ChangeMusicTo
 _080BD618:
 	pop {r4}
 	pop {r0}

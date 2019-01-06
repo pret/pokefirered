@@ -3366,7 +3366,7 @@ sub_8117440: @ 8117440
 	str r5, [sp, 0x4]
 	movs r0, 0
 	mov r3, r8
-	bl saved_warp2_set_2
+	bl SetDynamicWarpWithCoords
 	bl warp_in
 	add sp, 0x8
 	pop {r3}

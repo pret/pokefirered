@@ -118,7 +118,7 @@ _08054C9C: .4byte gUnknown_826D29E
 	thumb_func_start sub_8054CA0
 sub_8054CA0: @ 8054CA0
 	push {lr}
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
 	lsls r0, 4
 	bl FlagClear
@@ -157,7 +157,7 @@ _08054D04: .4byte 0x0000404d
 	thumb_func_start sub_8054D08
 sub_8054D08: @ 8054D08
 	push {lr}
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
 	lsls r0, 4
 	bl FlagClear
@@ -196,7 +196,7 @@ _08054D6C: .4byte 0x0000404d
 	thumb_func_start sub_8054D70
 sub_8054D70: @ 8054D70
 	push {lr}
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
 	lsls r0, 4
 	bl FlagClear
@@ -235,7 +235,7 @@ _08054DD4: .4byte 0x0000404d
 	thumb_func_start sub_8054DD8
 sub_8054DD8: @ 8054DD8
 	push {lr}
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
 	lsls r0, 4
 	bl FlagClear
@@ -1084,8 +1084,8 @@ saved_warp2_set: @ 80553E8
 _08055418: .4byte gSaveBlock1Ptr
 	thumb_func_end saved_warp2_set
 
-	thumb_func_start saved_warp2_set_2
-saved_warp2_set_2: @ 805541C
+	thumb_func_start SetDynamicWarpWithCoords
+SetDynamicWarpWithCoords: @ 805541C
 	push {r4,r5,lr}
 	sub sp, 0x8
 	ldr r4, [sp, 0x14]
@@ -1112,7 +1112,7 @@ saved_warp2_set_2: @ 805541C
 	bx r0
 	.align 2, 0
 _08055450: .4byte gSaveBlock1Ptr
-	thumb_func_end saved_warp2_set_2
+	thumb_func_end SetDynamicWarpWithCoords
 
 	thumb_func_start copy_saved_warp2_bank_and_enter_x_to_warp1
 copy_saved_warp2_bank_and_enter_x_to_warp1: @ 8055454
@@ -1281,7 +1281,7 @@ sub_805550C: @ 805550C
 	lsls r4, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl sub_80555A0
+	bl SetEscapeWarp
 _08055590:
 	add sp, 0x4
 	pop {r4-r7}
@@ -1292,8 +1292,8 @@ _08055598: .4byte gUnknown_2031DBC
 _0805559C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_805550C
 
-	thumb_func_start sub_80555A0
-sub_80555A0: @ 80555A0
+	thumb_func_start SetEscapeWarp
+SetEscapeWarp: @ 80555A0
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1325,7 +1325,7 @@ sub_80555A0: @ 80555A0
 	bx r0
 	.align 2, 0
 _080555DC: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_80555A0
+	thumb_func_end SetEscapeWarp
 
 	thumb_func_start sub_80555E0
 sub_80555E0: @ 80555E0
@@ -1342,8 +1342,8 @@ _080555F0: .4byte gUnknown_2031DBC
 _080555F4: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_80555E0
 
-	thumb_func_start sub_80555F8
-sub_80555F8: @ 80555F8
+	thumb_func_start SetFixedDiveWarp
+SetFixedDiveWarp: @ 80555F8
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1373,7 +1373,7 @@ sub_80555F8: @ 80555F8
 	bx r0
 	.align 2, 0
 _08055630: .4byte gUnknown_2031DC4
-	thumb_func_end sub_80555F8
+	thumb_func_end SetFixedDiveWarp
 
 	thumb_func_start warp1_set_to_warp2
 warp1_set_to_warp2: @ 8055634
@@ -1389,8 +1389,8 @@ _08055644: .4byte gUnknown_2031DBC
 _08055648: .4byte gUnknown_2031DC4
 	thumb_func_end warp1_set_to_warp2
 
-	thumb_func_start sub_805564C
-sub_805564C: @ 805564C
+	thumb_func_start SetFixedHoleWarp
+SetFixedHoleWarp: @ 805564C
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1420,10 +1420,10 @@ sub_805564C: @ 805564C
 	bx r0
 	.align 2, 0
 _08055684: .4byte gUnknown_2031DCC
-	thumb_func_end sub_805564C
+	thumb_func_end SetFixedHoleWarp
 
-	thumb_func_start sub_8055688
-sub_8055688: @ 8055688
+	thumb_func_start SetWarpDestinationToFixedHoleWarp
+SetWarpDestinationToFixedHoleWarp: @ 8055688
 	push {r4-r6,lr}
 	sub sp, 0x4
 	lsls r0, 16
@@ -1464,7 +1464,7 @@ _080556D6:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8055688
+	thumb_func_end SetWarpDestinationToFixedHoleWarp
 
 	thumb_func_start warp1_set_to_sav1w
 warp1_set_to_sav1w: @ 80556E0
@@ -1712,7 +1712,7 @@ sub_8055864: @ 8055864
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_810C578
-	bl sub_807B140
+	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_805610C
 	bl sub_8055CB8
 	bl sav1_reset_battle_music_maybe
@@ -1784,7 +1784,7 @@ sub_8055920: @ 8055920
 	lsls r1, 16
 	lsrs r1, 16
 	bl sub_810C578
-	bl sub_807B140
+	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_805610C
 	cmp r4, 0
 	beq _08055974
@@ -1817,7 +1817,7 @@ sub_80559A8: @ 80559A8
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_5_or_6
 	bl TrySetMapSaveWarpStatus
-	bl sub_807B140
+	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_805610C
 	bl sub_8055CB8
 	bl sub_8110920
@@ -1830,8 +1830,8 @@ sub_80559A8: @ 80559A8
 _080559E0: .4byte gMapHeader
 	thumb_func_end sub_80559A8
 
-	thumb_func_start sub_80559E4
-sub_80559E4: @ 80559E4
+	thumb_func_start ResetInitialPlayerAvatarState
+ResetInitialPlayerAvatarState: @ 80559E4
 	ldr r0, _080559F4 @ =gUnknown_2031DD4
 	movs r2, 0
 	movs r1, 0x1
@@ -1841,7 +1841,7 @@ sub_80559E4: @ 80559E4
 	bx lr
 	.align 2, 0
 _080559F4: .4byte gUnknown_2031DD4
-	thumb_func_end sub_80559E4
+	thumb_func_end ResetInitialPlayerAvatarState
 
 	thumb_func_start sub_80559F8
 sub_80559F8: @ 80559F8
@@ -2295,8 +2295,8 @@ sav1_get_flash_used_on_map: @ 8055D30
 _08055D3C: .4byte gSaveBlock1Ptr
 	thumb_func_end sav1_get_flash_used_on_map
 
-	thumb_func_start sub_8055D40
-sub_8055D40: @ 8055D40
+	thumb_func_start SetCurrentMapLayout
+SetCurrentMapLayout: @ 8055D40
 	push {lr}
 	ldr r1, _08055D54 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
@@ -2309,7 +2309,7 @@ sub_8055D40: @ 8055D40
 	.align 2, 0
 _08055D54: .4byte gSaveBlock1Ptr
 _08055D58: .4byte gMapHeader
-	thumb_func_end sub_8055D40
+	thumb_func_end SetCurrentMapLayout
 
 	thumb_func_start sub_8055D5C
 sub_8055D5C: @ 8055D5C
@@ -2464,15 +2464,15 @@ _08055E6C:
 _08055E74: .4byte 0x00000131
 	thumb_func_end sub_8055DC4
 
-	thumb_func_start sub_8055E78
-sub_8055E78: @ 8055E78
+	thumb_func_start Overworld_SetSavedMusic
+Overworld_SetSavedMusic: @ 8055E78
 	ldr r1, _08055E80 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	strh r0, [r1, 0x2C]
 	bx lr
 	.align 2, 0
 _08055E80: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8055E78
+	thumb_func_end Overworld_SetSavedMusic
 
 	thumb_func_start sav1_reset_battle_music_maybe
 sav1_reset_battle_music_maybe: @ 8055E84
@@ -2573,8 +2573,8 @@ _08055F42:
 	bx r0
 	thumb_func_end Overworld_ChangeMusicToDefault
 
-	thumb_func_start sub_8055F48
-sub_8055F48: @ 8055F48
+	thumb_func_start Overworld_ChangeMusicTo
+Overworld_ChangeMusicTo: @ 8055F48
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -2590,7 +2590,7 @@ _08055F62:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8055F48
+	thumb_func_end Overworld_ChangeMusicTo
 
 	thumb_func_start GetMapMusicFadeoutSpeed
 GetMapMusicFadeoutSpeed: @ 8055F68
@@ -3494,7 +3494,7 @@ CB2_NewGame: @ 8056644
 	bl StopMapMusic
 	bl sub_8056420
 	bl sub_8054A60
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
@@ -4705,7 +4705,7 @@ mli4_mapscripts_and_other: @ 805709C
 	bl InitPlayerAvatar
 	ldrb r0, [r5]
 	bl SetPlayerAvatarTransitionFlags
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0
 	movs r1, 0
 	bl sub_805EC30

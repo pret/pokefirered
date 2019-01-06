@@ -1597,7 +1597,7 @@ sub_80A1C44: @ 80A1C44
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	bl sub_8085620
 	adds r0, r4, 0
 	bl DestroyTask

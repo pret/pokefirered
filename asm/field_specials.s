@@ -33,9 +33,9 @@ _080CA644:
 	movs r4, 0x8D
 	lsls r4, 1
 	adds r0, r4, 0
-	bl sub_8055E78
+	bl Overworld_SetSavedMusic
 	adds r0, r4, 0
-	bl sub_8055F48
+	bl Overworld_ChangeMusicTo
 	pop {r4}
 	pop {r0}
 	bx r0

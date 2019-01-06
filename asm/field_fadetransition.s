@@ -1153,8 +1153,8 @@ _0807E434:
 	bx r1
 	thumb_func_end sub_807E418
 
-	thumb_func_start sub_807E438
-sub_807E438: @ 807E438
+	thumb_func_start DoWarp
+DoWarp: @ 807E438
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055F88
@@ -1174,10 +1174,10 @@ sub_807E438: @ 807E438
 _0807E464: .4byte gUnknown_3005020
 _0807E468: .4byte sub_807DF64
 _0807E46C: .4byte sub_807E718
-	thumb_func_end sub_807E438
+	thumb_func_end DoWarp
 
-	thumb_func_start sp13E_warp_to_last_warp
-sp13E_warp_to_last_warp: @ 807E470
+	thumb_func_start DoDiveWarp
+DoDiveWarp: @ 807E470
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055F88
@@ -1195,7 +1195,7 @@ sp13E_warp_to_last_warp: @ 807E470
 _0807E494: .4byte gUnknown_3005020
 _0807E498: .4byte sub_807DF64
 _0807E49C: .4byte sub_807E718
-	thumb_func_end sp13E_warp_to_last_warp
+	thumb_func_end DoDiveWarp
 
 	thumb_func_start sub_807E4A0
 sub_807E4A0: @ 807E4A0
@@ -1228,8 +1228,8 @@ _0807E4D4: .4byte sub_807E980
 _0807E4D8: .4byte gTasks
 	thumb_func_end sub_807E4A0
 
-	thumb_func_start sub_807E4DC
-sub_807E4DC: @ 807E4DC
+	thumb_func_start DoDoorWarp
+DoDoorWarp: @ 807E4DC
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r0, _0807E4F4 @ =gUnknown_3005020
@@ -1244,7 +1244,7 @@ sub_807E4DC: @ 807E4DC
 _0807E4F4: .4byte gUnknown_3005020
 _0807E4F8: .4byte sub_807DF64
 _0807E4FC: .4byte sub_807E80C
-	thumb_func_end sub_807E4DC
+	thumb_func_end DoDoorWarp
 
 	thumb_func_start sub_807E500
 sub_807E500: @ 807E500
@@ -1282,10 +1282,10 @@ _0807E540: .4byte sub_807DF64
 _0807E544: .4byte sub_807E784
 	thumb_func_end sub_807E524
 
-	thumb_func_start sp13F_fall_to_last_warp
-sp13F_fall_to_last_warp: @ 807E548
+	thumb_func_start DoFallWarp
+DoFallWarp: @ 807E548
 	push {lr}
-	bl sp13E_warp_to_last_warp
+	bl DoDiveWarp
 	ldr r1, _0807E558 @ =gUnknown_3005020
 	ldr r0, _0807E55C @ =sub_8084454
 	str r0, [r1]
@@ -1294,7 +1294,7 @@ sp13F_fall_to_last_warp: @ 807E548
 	.align 2, 0
 _0807E558: .4byte gUnknown_3005020
 _0807E55C: .4byte sub_8084454
-	thumb_func_end sp13F_fall_to_last_warp
+	thumb_func_end DoFallWarp
 
 	thumb_func_start sub_807E560
 sub_807E560: @ 807E560

@@ -45,28 +45,28 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_setflag
 	.4byte ScrCmd_clearflag
 	.4byte ScrCmd_checkflag
-	.4byte sub_806A9D4
-	.4byte sub_806A9D8
-	.4byte sub_806A9DC
+	.4byte ScrCmd_initclock
+	.4byte ScrCmd_dodailyevents
+	.4byte ScrCmd_gettime
 	.4byte ScrCmd_playse
-	.4byte sub_806B094
+	.4byte ScrCmd_waitse
 	.4byte ScrCmd_playfanfare
-	.4byte sub_806B0CC
-	.4byte sub_806B0E0
-	.4byte sub_806B120
-	.4byte sub_806B134
-	.4byte sub_806B154
-	.4byte sub_806B17C
-	.4byte sub_806B1C8
+	.4byte ScrCmd_waitfanfare
+	.4byte ScrCmd_playbgm
+	.4byte ScrCmd_savebgm
+	.4byte ScrCmd_fadedefaultbgm
+	.4byte ScrCmd_fadenewbgm
+	.4byte ScrCmd_fadeoutbgm
+	.4byte ScrCmd_fadeinbgm
 	.4byte ScrCmd_warp
 	.4byte ScrCmd_warpsilent
 	.4byte ScrCmd_warpdoor
 	.4byte ScrCmd_warphole
-	.4byte sub_806AC70
+	.4byte ScrCmd_warpteleport
 	.4byte ScrCmd_setwarp
 	.4byte ScrCmd_setdynamicwarp
-	.4byte sub_806AE90
-	.4byte sub_806AF10
+	.4byte ScrCmd_setdivewarp
+	.4byte ScrCmd_setholewarp
 	.4byte ScrCmd_getplayerxy
 	.4byte ScrCmd_getpartysize
 	.4byte ScrCmd_giveitem
@@ -210,7 +210,7 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_checkmonobedience
 	.4byte sub_806A28C
 	.4byte sub_806A8C0
-	.4byte sub_806ACF8
+	.4byte ScrCmd_warpD7
 	.4byte sub_806C844
 	.4byte sub_806BC40
 	.4byte sub_806BD90

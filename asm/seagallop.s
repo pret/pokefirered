@@ -371,7 +371,7 @@ _08147150:
 	bl warp_in
 	ldr r0, _081471BC @ =sub_805671C
 	bl SetMainCallback2
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	bl sub_81473A0
 	ldr r0, _081471C0 @ =gUnknown_203F3D0
 	ldr r0, [r0]

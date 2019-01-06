@@ -2195,7 +2195,7 @@ mapheader_run_first_tag2_script_list_match_conditionally: @ 806D964
 	adds r1, r5, 0
 	adds r2, r7, 0
 	bl sub_806DC54
-	bl sub_807E438
+	bl DoWarp
 	movs r0, 0x1
 	b _0806DA02
 	.align 2, 0
@@ -2331,7 +2331,7 @@ _0806DAC4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806DAE4
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	ldr r0, _0806DAE0 @ =gUnknown_81C1361
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
@@ -2339,7 +2339,7 @@ _0806DAC4:
 	.align 2, 0
 _0806DAE0: .4byte gUnknown_81C1361
 _0806DAE4:
-	bl sub_807E438
+	bl DoWarp
 	movs r0, 0x1
 	b _0806DAEE
 _0806DAEC:
@@ -2638,7 +2638,7 @@ map_warp_consider_2_to_inside: @ 806DCD0
 	adds r1, r4, 0
 	adds r2, r6, 0
 	bl sub_806DC54
-	bl sub_807E4DC
+	bl DoDoorWarp
 	movs r0, 0x1
 	b _0806DD32
 	.align 2, 0
@@ -2990,7 +2990,7 @@ _0806DF98:
 	cmp r0, 0
 	beq _0806DFB0
 	bl sub_8055A08
-	bl sp13E_warp_to_last_warp
+	bl DoDiveWarp
 	movs r0, 0xE2
 	bl PlaySE
 	movs r0, 0x1

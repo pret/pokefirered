@@ -2804,8 +2804,8 @@ sav1_get_weather_probably: @ 807B130
 _0807B13C: .4byte gSaveBlock1Ptr
 	thumb_func_end sav1_get_weather_probably
 
-	thumb_func_start sub_807B140
-sub_807B140: @ 807B140
+	thumb_func_start SetSav1WeatherFromCurrMapHeader
+SetSav1WeatherFromCurrMapHeader: @ 807B140
 	push {r4,r5,lr}
 	ldr r4, _0807B16C @ =gSaveBlock1Ptr
 	ldr r0, [r4]
@@ -2828,7 +2828,7 @@ sub_807B140: @ 807B140
 	.align 2, 0
 _0807B16C: .4byte gSaveBlock1Ptr
 _0807B170: .4byte gMapHeader
-	thumb_func_end sub_807B140
+	thumb_func_end SetSav1WeatherFromCurrMapHeader
 
 	thumb_func_start SetWeather
 SetWeather: @ 807B174

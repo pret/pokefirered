@@ -1,5 +1,7 @@
+#include "constants/items.h"
 	.include "asm/macros.inc"
-	.include "constants/constants.inc"
+    .include "constants/gba_constants.inc"
+	.include "constants/misc_constants.inc"
 
 	.section .rodata
 
@@ -562,7 +564,21 @@ gUnknown_847A284:: @ 847A284
 	.2byte 0x0131, 0x0175, 0x017d
 
 gUnknown_847A2B4:: @ 847A2B4
-	.2byte 0x3f, 0x40, 0x41, 0x42, 0x43, 0x46, 0xb3, 0xb4, 0xb9, 0xba, 0xbb, 0xc6, 0xc7, 0xc9, 0xda
+	.2byte ITEM_HP_UP
+    .2byte ITEM_PROTEIN
+    .2byte ITEM_IRON
+    .2byte ITEM_CARBOS
+    .2byte ITEM_CALCIUM
+    .2byte ITEM_ZINC
+    .2byte ITEM_BRIGHT_POWDER
+    .2byte ITEM_WHITE_HERB
+    .2byte ITEM_MENTAL_HERB
+    .2byte ITEM_CHOICE_BAND
+    .2byte ITEM_KINGS_ROCK
+    .2byte ITEM_SCOPE_LENS
+    .2byte ITEM_METAL_COAT
+    .2byte ITEM_DRAGON_SCALE
+    .2byte ITEM_UP_GRADE
 
 gUnknown_847A2D2:: @ 847A2D2
 	.2byte 0x011d

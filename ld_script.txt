@@ -103,7 +103,7 @@ SECTIONS {
         asm/map_obj_lock.o(.text);
         asm/text_window_graphics.o(.text);
         src/script.o(.text);
-        asm/scrcmd.o(.text);
+        src/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         asm/event_data.o(.text);
         asm/coord_event_weather.o(.text);
@@ -370,6 +370,8 @@ SECTIONS {
         src/metatile_behavior.o(.rodata);
         data/metatile_behavior.o(.rodata);
         data/data_835B488.o(.rodata);
+        src/scrcmd.o(.rodata);
+        data/data_835B488.o(.rodata.83A72A0);
         src/battle_ai_script_commands.o(.rodata);
         data/data_83F5738.o(.rodata);
         src/save.o(.rodata);

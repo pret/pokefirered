@@ -287,7 +287,7 @@ void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
     int i;
 
     for(i = 0; i < 4; i++)
-        ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->unkArray[i][1], encryptionKey);
+        ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->unkArray[i].unk4, encryptionKey);
 
     sub_8054F38(encryptionKey);
     ApplyNewEncryptionKeyToBagItems_(encryptionKey);

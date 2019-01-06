@@ -3383,7 +3383,7 @@ _08120468:
 	bl GetMonNickname
 	ldr r1, _081204A0 @ =gStringVar2
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _081204A4 @ =gStringVar4
 	ldr r1, _081204A8 @ =gUnknown_8416C2A
 	adds r0, r4, 0
@@ -3424,7 +3424,7 @@ sub_81204AC: @ 81204AC
 	bl GetMonNickname
 	ldr r1, _08120500 @ =gStringVar2
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _08120504 @ =gStringVar4
 	ldr r1, _08120508 @ =gUnknown_8416CAC
 	adds r0, r4, 0
@@ -3458,7 +3458,7 @@ sub_812050C: @ 812050C
 	bl GetMonNickname
 	ldr r1, _0812054C @ =gStringVar2
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _08120550 @ =gStringVar4
 	ldr r1, _08120554 @ =gUnknown_8416C49
 	adds r0, r4, 0
@@ -3502,10 +3502,10 @@ sub_8120558: @ 8120558
 	bl sub_8124B60
 	ldr r1, _081205B8 @ =gStringVar1
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r1, _081205BC @ =gStringVar2
 	adds r0, r5, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _081205C0 @ =gStringVar4
 	ldr r1, _081205C4 @ =gUnknown_8416CEA
 	adds r0, r4, 0
@@ -3582,7 +3582,7 @@ sub_8120610: @ 8120610
 	b _0812064E
 _0812062C:
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812064C
@@ -4298,7 +4298,7 @@ _08120B86:
 	lsls r0, 16
 	lsrs r1, r0, 16
 	adds r0, r5, 0
-	bl pokemon_has_move
+	bl MonKnowsMove
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9943,7 +9943,7 @@ _081237CC:
 	beq _081237F8
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	movs r0, 0x9
 	ldrsb r0, [r5, r0]
 	mov r1, r8
@@ -10016,7 +10016,7 @@ sub_8123824: @ 8123824
 	bl sub_81205C8
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r1, _0812389C @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -10133,17 +10133,17 @@ _08123956:
 	ldr r5, _08123998 @ =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r6, _0812399C @ =gUnknown_203B0D8
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _081239AC
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldrh r0, [r6]
 	bl sub_8120658
 	ldr r0, _081239A0 @ =gStringVar4
@@ -10330,10 +10330,10 @@ sub_8123ACC: @ 8123ACC
 	bl SetMonData
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	mov r0, r8
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldrb r0, [r6, 0x8]
 	lsls r0, 28
 	lsrs r0, 28
@@ -10903,7 +10903,7 @@ _08123FAA:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12735,7 +12735,7 @@ sub_8124E48: @ 8124E48
 	bhi _08124EB0
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _08124EB0:
 	mov r1, r8
 	ldr r0, [r1]
@@ -12828,7 +12828,7 @@ sub_8124EFC: @ 8124EFC
 	bhi _08124F7C
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _08124F7C:
 	mov r1, r8
 	ldr r0, [r1]
@@ -13418,7 +13418,7 @@ _0812544C:
 	beq _0812547E
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	b _0812547E
 	.align 2, 0
 _08125474: .4byte gUnknown_203B0C0
@@ -13963,7 +13963,7 @@ sub_8125898: @ 8125898
 	bl PlaySE
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	movs r2, 0xE
 	ldrsh r1, [r5, r2]
 	adds r1, 0xD
@@ -14065,7 +14065,7 @@ _081259A0:
 	bl PlaySE
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	movs r0, 0
 	ldrsh r1, [r7, r0]
 	adds r1, 0xD
@@ -14185,8 +14185,8 @@ _08125ABC:
 	bx r1
 	thumb_func_end sub_8125A90
 
-	thumb_func_start pokemon_has_move
-pokemon_has_move: @ 8125AC0
+	thumb_func_start MonKnowsMove
+MonKnowsMove: @ 8125AC0
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 16
@@ -14212,7 +14212,7 @@ _08125AE8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_has_move
+	thumb_func_end MonKnowsMove
 
 	thumb_func_start sub_8125AF0
 sub_8125AF0: @ 8125AF0
@@ -14406,7 +14406,7 @@ sub_8125C48: @ 8125C48
 	bhi _08125C84
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _08125C84:
 	ldr r1, _08125CD8 @ =gStringVar1
 	adds r0, r5, 0
@@ -15276,7 +15276,7 @@ sub_8126350: @ 8126350
 	bl sub_8126440
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r1, _08126428 @ =gStringVar1
 	adds r0, r4, 0
 	bl GetMonNickname
@@ -16117,7 +16117,7 @@ _08126AB4:
 	ldr r0, _08126ADC @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _08126ABE:
 	ldr r1, _08126AE4 @ =gTasks
 	lsls r0, r4, 2
@@ -16269,7 +16269,7 @@ sub_8126BD4: @ 8126BD4
 	bl sub_80A2294
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -16971,7 +16971,7 @@ sub_812713C: @ 812713C
 	bl SetMonData
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	adds r0, r7, 0
 	bl sub_81273AC
 	ldr r0, [r6]
@@ -17117,7 +17117,7 @@ _0812728E:
 	ldr r6, _081272C4 @ =gUnknown_203B0D8
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _081272CC
@@ -17240,7 +17240,7 @@ _0812739C: .4byte gUnknown_203B0A0
 _081273A0:
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _081273A8:
 	pop {r0}
 	bx r0
@@ -17257,14 +17257,14 @@ sub_81273AC: @ 81273AC
 	beq _081273C8
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A3C8
+	bl AddPCItem
 	b _081273D0
 	.align 2, 0
 _081273C4: .4byte gUnknown_203B0A0
 _081273C8:
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 _081273D0:
 	lsls r0, 24
 	lsrs r0, 24

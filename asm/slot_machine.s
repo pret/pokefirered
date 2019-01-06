@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_813F804
-sub_813F804: @ 813F804
+	thumb_func_start PlaySlotMachine
+PlaySlotMachine: @ 813F804
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 16
@@ -39,7 +39,7 @@ _0813F840:
 	bx r0
 	.align 2, 0
 _0813F848: .4byte sub_813F898
-	thumb_func_end sub_813F804
+	thumb_func_end PlaySlotMachine
 
 	thumb_func_start sub_813F84C
 sub_813F84C: @ 813F84C

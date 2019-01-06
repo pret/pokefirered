@@ -101,7 +101,7 @@ _080695F6:
 	cmp r0, 0
 	bne _0806961E
 	ldr r2, _08069640 @ =gMapObjects
-	ldr r0, _08069644 @ =gUnknown_3005074
+	ldr r0, _08069644 @ =gSelectedEventObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -133,7 +133,7 @@ _08069634:
 	.align 2, 0
 _0806963C: .4byte gTasks
 _08069640: .4byte gMapObjects
-_08069644: .4byte gUnknown_3005074
+_08069644: .4byte gSelectedEventObject
 	thumb_func_end sub_80695CC
 
 	thumb_func_start sub_8069648
@@ -159,7 +159,7 @@ _08069666:
 	thumb_func_start LockSelectedMapObject
 LockSelectedMapObject: @ 806966C
 	push {r4,r5,lr}
-	ldr r4, _080696B0 @ =gUnknown_3005074
+	ldr r4, _080696B0 @ =gSelectedEventObject
 	ldrb r0, [r4]
 	bl FreezeMapObjectsExceptOne
 	ldr r0, _080696B4 @ =sub_80695CC
@@ -191,7 +191,7 @@ _080696AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080696B0: .4byte gUnknown_3005074
+_080696B0: .4byte gSelectedEventObject
 _080696B4: .4byte sub_80695CC
 _080696B8: .4byte gMapObjects
 _080696BC: .4byte gTasks
@@ -225,7 +225,7 @@ _080696EC: .4byte gMapObjects
 sub_80696F0: @ 80696F0
 	push {r4,lr}
 	ldr r4, _08069738 @ =gMapObjects
-	ldr r0, _0806973C @ =gUnknown_3005074
+	ldr r0, _0806973C @ =gSelectedEventObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -257,13 +257,13 @@ _0806970E:
 	bx r0
 	.align 2, 0
 _08069738: .4byte gMapObjects
-_0806973C: .4byte gUnknown_3005074
+_0806973C: .4byte gSelectedEventObject
 	thumb_func_end sub_80696F0
 
 	thumb_func_start sub_8069740
 sub_8069740: @ 8069740
 	push {lr}
-	ldr r0, _0806975C @ =gUnknown_3005074
+	ldr r0, _0806975C @ =gSelectedEventObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -276,7 +276,7 @@ sub_8069740: @ 8069740
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806975C: .4byte gUnknown_3005074
+_0806975C: .4byte gSelectedEventObject
 _08069760: .4byte gMapObjects
 _08069764: .4byte gSpecialVar_Facing
 	thumb_func_end sub_8069740
@@ -284,7 +284,7 @@ _08069764: .4byte gSpecialVar_Facing
 	thumb_func_start sub_8069768
 sub_8069768: @ 8069768
 	push {lr}
-	ldr r0, _08069780 @ =gUnknown_3005074
+	ldr r0, _08069780 @ =gSelectedEventObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -295,7 +295,7 @@ sub_8069768: @ 8069768
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08069780: .4byte gUnknown_3005074
+_08069780: .4byte gSelectedEventObject
 _08069784: .4byte gMapObjects
 	thumb_func_end sub_8069768
 

@@ -967,7 +967,7 @@ _0812B98C: .4byte 0x00000829
 _0812B990:
 	ldr r0, _0812B99C @ =0x00000169
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	b _0812BAF6
 	.align 2, 0
 _0812B99C: .4byte 0x00000169

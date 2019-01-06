@@ -6240,7 +6240,7 @@ _08153754: .4byte gUnknown_203F3E0
 _08153758:
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_809A000
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815376A
@@ -6249,10 +6249,10 @@ _08153758:
 _0815376A:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_809A000
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	beq _08153784
@@ -9989,7 +9989,7 @@ _08155480:
 	lsrs r0, 16
 	add r5, sp, 0x70
 	adds r1, r5, 0
-	bl sub_8099E90
+	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
 	bl UnkTextUtil_SetPtrI
@@ -10021,7 +10021,7 @@ _08155480:
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
-	bl sub_8099E90
+	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
 	bl UnkTextUtil_SetPtrI

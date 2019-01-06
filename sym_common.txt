@@ -175,7 +175,7 @@ gUnknown_300506C: @ 300506C
 gUnknown_3005070: @ 3005070
 	.space 0x4
 
-gUnknown_3005074: @ 3005074
+gSelectedEventObject: @ 3005074
 	.space 0x4
 
 gUnknown_3005078: @ 3005078

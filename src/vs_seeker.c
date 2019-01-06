@@ -65,7 +65,7 @@ struct VsSeekerStruct
 
 extern u16 gSpecialVar_LastTalked;
 extern struct MapObject gMapObjects[MAP_OBJECTS_COUNT];
-extern u8 gUnknown_3005074;
+extern u8 gSelectedEventObject;
 
 // static declarations
 static EWRAM_DATA struct VsSeekerStruct *sVsSeeker = NULL;
@@ -1012,7 +1012,7 @@ void sub_810CB90(void)
                 sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
                 sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->mapobj_unk_18]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
-                if (gUnknown_3005074 == sp0)
+                if (gSelectedEventObject == sp0)
                     r4_2->animPattern = gUnknown_8453F67[r4_2->mapobj_unk_18];
                 else
                     r4_2->animPattern = 0x08;

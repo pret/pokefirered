@@ -785,7 +785,7 @@ gUnknown_84162B9:: @ 84162B9
 	.incbin "baserom.gba", 0x4162B9, 0x4
 
 gUnknown_84162BD:: @ 84162BD
-	.incbin "baserom.gba", 0x4162BD, 0x7
+	.string " BERRY$"
 
 gText_Coins:: @ 84162C4
 	.incbin "baserom.gba", 0x4162C4, 0x24

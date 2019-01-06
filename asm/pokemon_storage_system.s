@@ -5151,7 +5151,7 @@ _0808E2E8:
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E314
@@ -5504,7 +5504,7 @@ _0808E5E0:
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6643,7 +6643,7 @@ _0808EF56:
 	mov r0, sp
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _0808EF60:
 	add sp, 0x4
 	pop {r0}

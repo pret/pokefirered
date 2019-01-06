@@ -33,9 +33,9 @@ _080CA644:
 	movs r4, 0x8D
 	lsls r4, 1
 	adds r0, r4, 0
-	bl sub_8055E78
+	bl Overworld_SetSavedMusic
 	adds r0, r4, 0
-	bl sub_8055F48
+	bl Overworld_ChangeMusicTo
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3138,7 +3138,7 @@ _080CBDE4: .4byte gSpecialVar_0x8004
 
 	thumb_func_start sub_80CBDE8
 sub_80CBDE8: @ 80CBDE8
-	ldr r1, _080CBDF8 @ =gUnknown_3005074
+	ldr r1, _080CBDF8 @ =gSelectedEventObject
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, _080CBDFC @ =gUnknown_20370DA
@@ -3146,7 +3146,7 @@ sub_80CBDE8: @ 80CBDE8
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_080CBDF8: .4byte gUnknown_3005074
+_080CBDF8: .4byte gSelectedEventObject
 _080CBDFC: .4byte gUnknown_20370DA
 	thumb_func_end sub_80CBDE8
 
@@ -3157,7 +3157,7 @@ sub_80CBE00: @ 80CBE00
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	bne _080CBE44
-	ldr r1, _080CBE1C @ =gUnknown_3005074
+	ldr r1, _080CBE1C @ =gSelectedEventObject
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080CBE20
@@ -3165,7 +3165,7 @@ sub_80CBE00: @ 80CBE00
 	b _080CBE48
 	.align 2, 0
 _080CBE18: .4byte gUnknown_20370DA
-_080CBE1C: .4byte gUnknown_3005074
+_080CBE1C: .4byte gSelectedEventObject
 _080CBE20:
 	ldr r2, _080CBE4C @ =gMapObjects
 	ldrb r1, [r1]
@@ -3267,7 +3267,7 @@ TV_PrintIntToStringVar: @ 80CBED4
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_80CBF04
+	bl CountDigits
 	adds r3, r0, 0
 	ldr r0, _080CBF00 @ =gUnknown_83F5AF8
 	lsls r4, 2
@@ -3285,8 +3285,8 @@ TV_PrintIntToStringVar: @ 80CBED4
 _080CBF00: .4byte gUnknown_83F5AF8
 	thumb_func_end TV_PrintIntToStringVar
 
-	thumb_func_start sub_80CBF04
-sub_80CBF04: @ 80CBF04
+	thumb_func_start CountDigits
+CountDigits: @ 80CBF04
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0xA
@@ -3366,7 +3366,7 @@ _080CBF9A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CBF04
+	thumb_func_end CountDigits
 
 	thumb_func_start sub_80CBFA0
 sub_80CBFA0: @ 80CBFA0

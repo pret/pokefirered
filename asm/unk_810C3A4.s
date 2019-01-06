@@ -180,7 +180,7 @@ sub_810C4EC: @ 810C4EC
 	movs r0, 0xB5
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

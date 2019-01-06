@@ -2818,7 +2818,7 @@ PartyHasMonWithSurf: @ 805C83C
 _0805C84E:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_has_move
+	bl MonKnowsMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C860

@@ -170,8 +170,8 @@ _080A0196:
 	bx r1
 	thumb_func_end ScriptGiveMon
 
-	thumb_func_start sub_80A01AC
-sub_80A01AC: @ 80A01AC
+	thumb_func_start ScriptGiveEgg
+ScriptGiveEgg: @ 80A01AC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -202,7 +202,7 @@ sub_80A01AC: @ 80A01AC
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A01AC
+	thumb_func_end ScriptGiveEgg
 
 	thumb_func_start CheckForAlivePartyMons
 CheckForAlivePartyMons: @ 80A01F4

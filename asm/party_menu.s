@@ -4298,7 +4298,7 @@ _08120B86:
 	lsls r0, 16
 	lsrs r1, r0, 16
 	adds r0, r5, 0
-	bl pokemon_has_move
+	bl MonKnowsMove
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -14185,8 +14185,8 @@ _08125ABC:
 	bx r1
 	thumb_func_end sub_8125A90
 
-	thumb_func_start pokemon_has_move
-pokemon_has_move: @ 8125AC0
+	thumb_func_start MonKnowsMove
+MonKnowsMove: @ 8125AC0
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 16
@@ -14212,7 +14212,7 @@ _08125AE8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_has_move
+	thumb_func_end MonKnowsMove
 
 	thumb_func_start sub_8125AF0
 sub_8125AF0: @ 8125AF0

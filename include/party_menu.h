@@ -12,7 +12,7 @@ enum {
     AILMENT_BRN
 };
 
-bool8 pokemon_has_move(struct Pokemon *, u16);
+bool8 MonKnowsMove(struct Pokemon *, u16);
 void sub_81B58A8(void);
 void DoWallyTutorialBagMenu(void);
 u8 pokemon_ailments_get_primary(u32 status);

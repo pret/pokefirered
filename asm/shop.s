@@ -2826,8 +2826,8 @@ _0809C15A:
 _0809C160: .4byte gUnknown_203996C
 	thumb_func_end sub_809C138
 
-	thumb_func_start sub_809C164
-sub_809C164: @ 809C164
+	thumb_func_start CreatePokemartMenu
+CreatePokemartMenu: @ 809C164
 	push {r4,lr}
 	bl sub_809ABD8
 	movs r0, 0
@@ -2851,7 +2851,7 @@ sub_809C164: @ 809C164
 _0809C194: .4byte EnableBothScriptContexts
 _0809C198: .4byte gUnknown_203996C
 _0809C19C: .4byte gMapHeader
-	thumb_func_end sub_809C164
+	thumb_func_end CreatePokemartMenu
 
 	thumb_func_start sub_809C1A0
 sub_809C1A0: @ 809C1A0

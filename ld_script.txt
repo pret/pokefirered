@@ -92,7 +92,6 @@ SECTIONS {
         asm/new_game.o(.text);
         asm/overworld.o(.text);
         src/fieldmap.o(.text);
-        asm/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
         asm/field_door.o(.text);

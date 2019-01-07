@@ -509,7 +509,7 @@ u32 GetBehaviorByMetatileIdAndMapData(struct MapData *mapData, u16 metatile, u8 
 {
     u32 * attributes;
 
-    if (metatile < 0x280)
+    if (metatile < NUM_METATILES_IN_PRIMARY)
     {
         attributes = mapData->primaryTileset->metatileAttributes;
         return sub_8058F1C(attributes[metatile], attr);
@@ -517,7 +517,7 @@ u32 GetBehaviorByMetatileIdAndMapData(struct MapData *mapData, u16 metatile, u8 
     else if (metatile < 0x400)
     {
         attributes = mapData->secondaryTileset->metatileAttributes;
-        return sub_8058F1C(attributes[metatile - 0x280], attr);
+        return sub_8058F1C(attributes[metatile - NUM_METATILES_IN_PRIMARY], attr);
     }
     else
     {
@@ -931,4 +931,94 @@ void sub_80598CC(u16 a0, u16 a1)
             return;
     }
     CpuCopy16(gPlttBufferUnfaded + a0, gPlttBufferFaded + a0, a1 * sizeof(u16));
+}
+
+void sub_8059948(u8 a0, u8 a1)
+{
+    switch (gUnknown_2036E28)
+    {
+        case 0:
+            return;
+        case 1:
+            TintPalette_GrayScale(gPlttBufferUnfaded + a0 * 16, a1 * 16);
+            break;
+        case 2:
+            TintPalette_SepiaTone(gPlttBufferUnfaded + a0 * 16, a1 * 16);
+            break;
+        case 3:
+            sub_8111F38(a0 * 16, a1 * 16);
+            TintPalette_GrayScale(gPlttBufferUnfaded + a0 * 16, a1 * 16);
+            break;
+        default:
+            return;
+    }
+    CpuFastCopy(gPlttBufferUnfaded + a0 * 16, gPlttBufferFaded + a0 * 16, a1 * 16 * sizeof(u16));
+}
+
+void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u16 size)
+{
+    u16 black = RGB_BLACK;
+
+    if (tileset)
+    {
+        if (tileset->isSecondary == FALSE)
+        {
+            LoadPalette(&black, destOffset, 2);
+            LoadPalette(((u16*)tileset->palettes) + 1, destOffset + 1, size - 2);
+            sub_80598CC(destOffset + 1, (size - 2) >> 1);
+        }
+        else if (tileset->isSecondary == TRUE)
+        {
+            LoadPalette(((u16*)tileset->palettes) + (NUM_PALS_IN_PRIMARY * 16), destOffset, size);
+            sub_80598CC(destOffset, size >> 1);
+        }
+        else
+        {
+            LoadCompressedPalette((u32*)tileset->palettes, destOffset, size);
+            sub_80598CC(destOffset, size >> 1);
+        }
+    }
+}
+
+void copy_map_tileset1_to_vram(const struct MapData *mapData)
+{
+    copy_tileset_patterns_to_vram(mapData->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+}
+
+void copy_map_tileset2_to_vram(const struct MapData *mapData)
+{
+    copy_tileset_patterns_to_vram(mapData->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+}
+
+void copy_map_tileset2_to_vram_2(const struct MapData *mapData)
+{
+    copy_tileset_patterns_to_vram2(mapData->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+}
+
+void apply_map_tileset1_palette(const struct MapData *mapData)
+{
+    apply_map_tileset_palette(mapData->primaryTileset, 0, NUM_PALS_IN_PRIMARY * 16 * 2);
+}
+
+void apply_map_tileset2_palette(const struct MapData *mapData)
+{
+    apply_map_tileset_palette(mapData->secondaryTileset, NUM_PALS_IN_PRIMARY * 16, (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * 16 * 2);
+}
+
+void copy_map_tileset1_tileset2_to_vram(struct MapData const *mapData)
+{
+    if (mapData)
+    {
+        copy_tileset_patterns_to_vram2(mapData->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+        copy_tileset_patterns_to_vram2(mapData->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+    }
+}
+
+void apply_map_tileset1_tileset2_palette(struct MapData const *mapData)
+{
+    if (mapData)
+    {
+        apply_map_tileset1_palette(mapData);
+        apply_map_tileset2_palette(mapData);
+    }
 }

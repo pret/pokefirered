@@ -1723,7 +1723,7 @@ sub_8055864: @ 8055864
 	ldr r0, [r4]
 	bl copy_map_tileset2_to_vram_2
 	ldr r0, [r4]
-	bl sub_8059AA0
+	bl apply_map_tileset2_palette
 	movs r4, 0x7
 _080558D4:
 	lsls r0, r4, 24
@@ -4024,14 +4024,14 @@ _08056AEE:
 _08056AF4:
 	ldr r0, _08056B00 @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _08056B62
 	.align 2, 0
 _08056B00: .4byte gMapHeader
 _08056B04:
 	ldr r0, _08056B10 @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _08056B62
 	.align 2, 0
 _08056B10: .4byte gMapHeader
@@ -4166,14 +4166,14 @@ _08056C2A:
 _08056C30:
 	ldr r0, _08056C3C @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _08056CCA
 	.align 2, 0
 _08056C3C: .4byte gMapHeader
 _08056C40:
 	ldr r0, _08056C4C @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _08056CCA
 	.align 2, 0
 _08056C4C: .4byte gMapHeader
@@ -4355,14 +4355,14 @@ _08056DCA:
 _08056DD0:
 	ldr r0, _08056DDC @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _08056E3E
 	.align 2, 0
 _08056DDC: .4byte gMapHeader
 _08056DE0:
 	ldr r0, _08056DEC @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _08056E3E
 	.align 2, 0
 _08056DEC: .4byte gMapHeader
@@ -5066,14 +5066,14 @@ _080573C2:
 _080573C8:
 	ldr r0, _080573D4 @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _08057412
 	.align 2, 0
 _080573D4: .4byte gMapHeader
 _080573D8:
 	ldr r0, _080573E4 @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _08057412
 	.align 2, 0
 _080573E4: .4byte gMapHeader
@@ -5415,14 +5415,14 @@ _080576CC:
 _080576D2:
 	ldr r0, _080576DC @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _0805772A
 	.align 2, 0
 _080576DC: .4byte gMapHeader
 _080576E0:
 	ldr r0, _080576EC @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _0805772A
 	.align 2, 0
 _080576EC: .4byte gMapHeader

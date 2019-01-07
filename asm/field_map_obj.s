@@ -12332,7 +12332,7 @@ npc_block_way: @ 80636AC
 _080636E2:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063724
@@ -12432,7 +12432,7 @@ sub_8063770: @ 8063770
 	lsrs r4, r1, 31
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	cmp r0, 0
 	bne _080637E8

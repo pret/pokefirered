@@ -544,7 +544,7 @@ _080A13D4:
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A13D0

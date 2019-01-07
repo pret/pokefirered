@@ -380,7 +380,7 @@ sub_8097B50: @ 8097B50
 	asrs r0, 16
 	lsrs r7, r1, 16
 	asrs r1, 16
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r1, _08097B84 @ =gUnknown_83D4100

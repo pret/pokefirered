@@ -7829,7 +7829,7 @@ _08058854:
 	bls _08058810
 	asrs r0, r3, 16
 	asrs r1, r5, 16
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	lsrs r0, 24
 _0805886A:

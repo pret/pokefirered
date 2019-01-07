@@ -1632,7 +1632,7 @@ _0809B7B2:
 	movs r3, 0
 	ldrsh r1, [r2, r3]
 	adds r1, r7
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	lsls r0, 16
 	lsrs r5, r0, 16
 	mov r0, sp
@@ -2940,7 +2940,7 @@ _0809C238:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	movs r2, 0
 	ldrsh r1, [r7, r2]
 	lsls r0, 16
@@ -3006,7 +3006,7 @@ _0809C2B8:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	movs r1, 0x2
 	subs r1, r7
 	lsls r1, 1

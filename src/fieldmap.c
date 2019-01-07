@@ -73,9 +73,9 @@ void map_copy_with_padding(u16 *map, u16 width, u16 height)
 
 void mapheader_copy_mapdata_of_adjacent_maps(struct MapHeader *mapHeader)
 {
-    int count;
+    s32 count;
     struct MapConnection *connection;
-    int i;
+    s32 i;
 
     gMapConnectionFlags = sDummyConnectionFlags;
 
@@ -119,10 +119,10 @@ void mapheader_copy_mapdata_of_adjacent_maps(struct MapHeader *mapHeader)
 
 void sub_8058B54(s32 x, s32 y, const struct MapHeader *connectedMapHeader, s32 x2, s32 y2, s32 width, s32 height)
 {
-    int i;
+    s32 i;
     u16 *src;
     u16 *dest;
-    int mapWidth;
+    s32 mapWidth;
 
     mapWidth = connectedMapHeader->mapData->width;
     src = &connectedMapHeader->mapData->map[mapWidth * y2 + x2];
@@ -135,13 +135,13 @@ void sub_8058B54(s32 x, s32 y, const struct MapHeader *connectedMapHeader, s32 x
         src += mapWidth;
     }
 }
-           
+
 void fillSouthConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset)
 {
-    int x, y;
-    int x2;
-    int width;
-    int cWidth;
+    s32 x, y;
+    s32 x2;
+    s32 width;
+    s32 cWidth;
 
     if (connectedMapHeader)
     {
@@ -185,10 +185,10 @@ void fillSouthConnection(struct MapHeader const *mapHeader, struct MapHeader con
 
 void fillNorthConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset)
 {
-    int x;
-    int x2, y2;
-    int width;
-    int cWidth, cHeight;
+    s32 x;
+    s32 x2, y2;
+    s32 width;
+    s32 cWidth, cHeight;
 
     if (connectedMapHeader)
     {
@@ -234,10 +234,10 @@ void fillNorthConnection(struct MapHeader const *mapHeader, struct MapHeader con
 
 void fillWestConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset)
 {
-    int y;
-    int x2, y2;
-    int height;
-    int cWidth, cHeight;
+    s32 y;
+    s32 x2, y2;
+    s32 height;
+    s32 cWidth, cHeight;
     if (connectedMapHeader)
     {
         cWidth = connectedMapHeader->mapData->width;
@@ -280,10 +280,10 @@ void fillWestConnection(struct MapHeader const *mapHeader, struct MapHeader cons
 
 void fillEastConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset)
 {
-    int x, y;
-    int y2;
-    int height;
-    int cHeight;
+    s32 x, y;
+    s32 y2;
+    s32 height;
+    s32 cHeight;
     if (connectedMapHeader)
     {
         cHeight = connectedMapHeader->mapData->height;
@@ -321,4 +321,100 @@ void fillEastConnection(struct MapHeader const *mapHeader, struct MapHeader cons
             /*x2*/ 0, y2,
             /*width*/ 8, height);
     }
+}
+
+union Block
+{
+    struct
+    {
+        u16 block:10;
+        u16 collision:2;
+        u16 elevation:4;
+    } block;
+    u16 value;
+};
+
+#define MapGridGetBorderTileAt(x, y) ({                            \
+        u16 block;                                                 \
+        s32 xprime;                                                \
+        s32 yprime;                                                \
+                                                                   \
+        struct MapData *mapData = gMapHeader.mapData;              \
+                                                                   \
+        xprime = x - 7;                                            \
+        xprime += 8 * mapData->unk18;                              \
+        xprime %= mapData->unk18;                                  \
+                                                                   \
+        yprime = y - 7;                                            \
+        yprime += 8 * mapData->unk19;                              \
+        yprime %= mapData->unk19;                                  \
+                                                                   \
+        block = mapData->border[xprime + yprime * mapData->unk18]; \
+        block |= 0xC00;                                            \
+        block;                                                     \
+})
+
+#define MapGridGetBorderTileAt2(x, y) ({                            \
+        u16 block;                                                 \
+        s32 xprime;                                                \
+        s32 yprime;                                                \
+                                                                   \
+        struct MapData *mapData = gMapHeader.mapData;              \
+                                                                   \
+        xprime = x - 7;                                            \
+        xprime += 8 * mapData->unk18;                              \
+        xprime %= mapData->unk18;                                  \
+                                                                   \
+        yprime = y - 7;                                            \
+        yprime += 8 * mapData->unk19;                              \
+        yprime %= mapData->unk19;                                  \
+                                                                   \
+        block = mapData->border[xprime + yprime * mapData->unk18] | 0xC00;                                           \
+        block;                                                     \
+})
+
+#define MapGridGetTileAt(x, y) ({              \
+    u16 block;                                 \
+    if (x >= 0 && x < VMap.Xsize               \
+        && y >= 0 && y < VMap.Ysize)           \
+        block = VMap.map[x + VMap.Xsize * y];  \
+    else                                       \
+        block = MapGridGetBorderTileAt2(x, y); \
+    block;                                     \
+})
+
+u8 MapGridGetZCoordAt(s32 x, s32 y)
+{
+    u16 block = MapGridGetTileAt(x, y);
+
+    if (block == 0x3ff)
+    {
+        return 0;
+    }
+
+    return block >> 12;
+}
+
+u8 MapGridIsImpassableAt(s32 x, s32 y)
+{
+
+    u16 block = MapGridGetTileAt(x, y);
+
+    if (block == 0x3ff)
+    {
+        return 1;
+    }
+
+    return (block & 0xc00) >> 10;
+}
+
+u32 MapGridGetMetatileIdAt(s32 x, s32 y)
+{
+    u16 block = MapGridGetTileAt(x, y);
+
+    if (block == 0x3FF)
+    {
+        return MapGridGetBorderTileAt(x, y) & 0x3FF;
+    }
+    return block & 0x3FF;
 }

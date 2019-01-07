@@ -22,5 +22,6 @@ void sub_80F6EE4(u8 windowId, bool8 transfer);
 void sub_80F7974(const u8 *);
 u8 GetStartMenuWindowId(void);
 void sub_80F7998(void);
+void sub_80F69E8(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

@@ -337,7 +337,7 @@ sub_805B158: @ 805B158
 	adds r6, r2, 0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -392,7 +392,7 @@ sub_805B1B8: @ 805B1B8
 	adds r6, r2, 0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -439,7 +439,7 @@ sub_805B210: @ 805B210
 	adds r6, r2, 0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -643,7 +643,7 @@ sub_805B388: @ 805B388
 	adds r4, r0, 0
 	adds r0, r1, 0
 	adds r1, r2, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16

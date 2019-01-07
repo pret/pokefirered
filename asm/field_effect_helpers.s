@@ -845,7 +845,7 @@ unc_grass_normal: @ 80DB3EC
 	lsrs r4, r0, 8
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r3, _080DB498 @ =gUnknown_2036E18
+	ldr r3, _080DB498 @ =gCamera
 	ldrb r1, [r3]
 	movs r0, 0x1
 	ands r0, r1
@@ -921,7 +921,7 @@ _080DB48C:
 	bl FieldEffectStop
 	b _080DB4E4
 	.align 2, 0
-_080DB498: .4byte gUnknown_2036E18
+_080DB498: .4byte gCamera
 _080DB49C: .4byte gSaveBlock1Ptr
 _080DB4A0:
 	mov r0, sp
@@ -1196,7 +1196,7 @@ unc_grass_tall: @ 80DB69C
 	lsrs r7, r0, 8
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r3, _080DB748 @ =gUnknown_2036E18
+	ldr r3, _080DB748 @ =gCamera
 	ldrb r1, [r3]
 	movs r0, 0x1
 	ands r0, r1
@@ -1272,7 +1272,7 @@ _080DB73C:
 	bl FieldEffectStop
 	b _080DB786
 	.align 2, 0
-_080DB748: .4byte gUnknown_2036E18
+_080DB748: .4byte gCamera
 _080DB74C: .4byte gSaveBlock1Ptr
 _080DB750:
 	mov r0, sp

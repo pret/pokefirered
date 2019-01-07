@@ -884,7 +884,7 @@ sub_806CF38: @ 806CF38
 	ldrh r1, [r4, 0x2]
 	b _0806CF7E
 _0806CF60:
-	ldr r1, _0806CFA4 @ =gUnknown_826D2D8
+	ldr r1, _0806CFA4 @ =gDirectionToVectors
 	lsls r2, r6, 3
 	adds r0, r2, r1
 	ldr r3, [r0]
@@ -919,7 +919,7 @@ _0806CF9E:
 	movs r0, 0
 	b _0806CFDE
 	.align 2, 0
-_0806CFA4: .4byte gUnknown_826D2D8
+_0806CFA4: .4byte gDirectionToVectors
 _0806CFA8: .4byte gMapObjects
 _0806CFAC:
 	movs r4, 0
@@ -994,7 +994,7 @@ _0806D02A:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D092
-	ldr r1, _0806D09C @ =gUnknown_826D2D8
+	ldr r1, _0806D09C @ =gDirectionToVectors
 	mov r0, r8
 	lsls r2, r0, 3
 	adds r0, r2, r1
@@ -1042,7 +1042,7 @@ _0806D092:
 	b _0806D0C8
 	.align 2, 0
 _0806D098: .4byte gMapObjects
-_0806D09C: .4byte gUnknown_826D2D8
+_0806D09C: .4byte gDirectionToVectors
 _0806D0A0:
 	ldr r0, _0806D0D4 @ =gSelectedEventObject
 	strb r5, [r0]

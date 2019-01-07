@@ -593,17 +593,7 @@ gUnknown_2031DEA: @ 2031DEA
 gUnknown_2031DEC: @ 2031DEC
 	.space 0x10
 
-gUnknown_2031DFC: @ 2031DFC
-	.space 0x5000
-
-gMapHeader: @ 2036DFC
-	.space 0x1C
-
-gUnknown_2036E18: @ 2036E18
-	.space 0xC
-
-gUnknown_2036E24: @ 2036E24
-	.space 0x4
+	.include "src/fieldmap.o"
 
 gUnknown_2036E28: @ 2036E28
 	.space 0x4

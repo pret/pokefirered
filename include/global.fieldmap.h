@@ -51,8 +51,8 @@ struct Tileset
     /*0x04*/ void *tiles;
     /*0x08*/ void *palettes;
     /*0x0c*/ void *metatiles;
-    /*0x10*/ void *metatileAttributes;
     /*0x14*/ TilesetCB callback;
+    /*0x10*/ void *metatileAttributes;
 };
 
 struct MapData
@@ -63,12 +63,14 @@ struct MapData
     /*0x0c*/ u16 *map;
     /*0x10*/ struct Tileset *primaryTileset;
     /*0x14*/ struct Tileset *secondaryTileset;
+    /*0x18*/ u8 unk18;
+    /*0x19*/ u8 unk19;
 };
 
 struct BackupMapData
 {
-    s32 width;
-    s32 height;
+    s32 Xsize;
+    s32 Ysize;
     u16 *map;
 };
 
@@ -149,9 +151,9 @@ struct MapEvents
 struct MapConnection
 {
  /*0x00*/ u8 direction;
- /*0x01*/ u32 offset;
- /*0x05*/ u8 mapGroup;
- /*0x06*/ u8 mapNum;
+ /*0x04*/ u32 offset;
+ /*0x08*/ u8 mapGroup;
+ /*0x09*/ u8 mapNum;
 };
 
 struct MapConnections

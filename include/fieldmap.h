@@ -11,10 +11,7 @@
 #define NUM_PALS_TOTAL 13
 #define VIRTUAL_MAP_SIZE 0x2800
 
-extern struct MapCoords {
-    int width;
-    int height;
-} gUnknown_03005DC0;
+extern struct BackupMapData VMap;
 
 u32 MapGridGetMetatileIdAt(int, int);
 u32 MapGridGetMetatileBehaviorAt(int, int);

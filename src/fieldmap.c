@@ -31,6 +31,7 @@ bool8 sub_80596BC(s32 x, s32 src_width, s32 dest_width, s32 offset);
 struct BackupMapData VMap;
 EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
 EWRAM_DATA struct MapHeader gMapHeader = {};
+EWRAM_DATA struct Camera gCamera = {};
 EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
 
 const struct ConnectionFlags sDummyConnectionFlags = {};

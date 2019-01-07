@@ -3,6 +3,12 @@
 
 #include "global.h"
 
+#define NUM_TILES_IN_PRIMARY 512
+#define NUM_TILES_TOTAL 1024
+#define NUM_METATILES_IN_PRIMARY 512
+#define NUM_METATILES_TOTAL 1024
+#define NUM_PALS_IN_PRIMARY 6
+#define NUM_PALS_TOTAL 13
 #define VIRTUAL_MAP_SIZE 0x2800
 
 extern struct MapCoords {
@@ -18,6 +24,6 @@ void GetCameraCoords(u16*, u16*);
 bool8 MapGridIsImpassableAt(s32, s32);
 s32 GetMapBorderIdAt(s16, s16);
 bool32 CanCameraMoveInDirection(u8);
-u16 GetBehaviorByMetatileId(u16 metatileId);
+u32 GetBehaviorByMetatileIdAndMapData(struct MapData *mapData, u16 metatile, u8 attr);
 
 #endif //GUARD_FIELDMAP_H

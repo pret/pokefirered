@@ -51,8 +51,8 @@ struct Tileset
     /*0x04*/ void *tiles;
     /*0x08*/ void *palettes;
     /*0x0c*/ void *metatiles;
-    /*0x10*/ void *metatileAttributes;
     /*0x14*/ TilesetCB callback;
+    /*0x10*/ void *metatileAttributes;
 };
 
 struct MapData

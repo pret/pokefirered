@@ -1109,7 +1109,7 @@ _0806F61E:
 	thumb_func_start sub_806F624
 sub_806F624: @ 806F624
 	push {lr}
-	bl sub_80590D8
+	bl save_serialize_map
 	ldr r1, _0806F63C @ =gUnknown_3000FA4
 	ldr r0, _0806F640 @ =sub_806F7A8
 	str r0, [r1]

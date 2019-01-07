@@ -18,8 +18,7 @@ void fillSouthConnection(struct MapHeader const *mapHeader, struct MapHeader con
 void fillNorthConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 void fillWestConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 void fillEastConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
-u32 sub_8059080(struct MapData *mapData, u16 metatileId, u8 z);
-void sub_80591C4(void);
+void LoadSavedMapView(void);
 
 struct BackupMapData VMap;
 EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
@@ -64,7 +63,7 @@ void not_trainer_hill_battle_pyramid(void)
 void sub_80589E8(void)
 {
     sub_8058A00(&gMapHeader);
-    sub_80591C4();
+    LoadSavedMapView();
     mapheader_run_script_with_tag_x1();
 }
 
@@ -453,7 +452,7 @@ u32 sub_8058F1C(u32 original, u8 bit)
 u32 sub_8058F48(s16 x, s16 y, u8 z)
 {
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
-    return sub_8059080(gMapHeader.mapData, metatileId, z);
+    return GetBehaviorByMetatileIdAndMapData(gMapHeader.mapData, metatileId, z);
 }
 
 u32 MapGridGetMetatileBehaviorAt(s32 x, s32 y)
@@ -468,7 +467,7 @@ u8 MapGridGetMetatileLayerTypeAt(s32 x, s32 y)
 
 void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatile)
 {
-    int i;
+    s32 i;
     if (x >= 0 && x < VMap.Xsize
         && y >= 0 && y < VMap.Ysize)
     {
@@ -479,7 +478,7 @@ void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatile)
 
 void MapGridSetMetatileEntryAt(s32 x, s32 y, u16 metatile)
 {
-    int i;
+    s32 i;
     if (x >= 0 && x < VMap.Xsize
         && y >= 0 && y < VMap.Ysize)
     {
@@ -502,4 +501,143 @@ void sub_8059024(s32 x, s32 y, bool32 arg2)
             VMap.map[x + VMap.Xsize * y] &= ~0x0C00;
         }
     }
+}
+
+u32 GetBehaviorByMetatileIdAndMapData(struct MapData *mapData, u16 metatile, u8 attr)
+{
+    u32 * attributes;
+
+    if (metatile < 0x280)
+    {
+        attributes = mapData->primaryTileset->metatileAttributes;
+        return sub_8058F1C(attributes[metatile], attr);
+    }
+    else if (metatile < 0x400)
+    {
+        attributes = mapData->secondaryTileset->metatileAttributes;
+        return sub_8058F1C(attributes[metatile - 0x280], attr);
+    }
+    else
+    {
+        return 0xFF;
+    }
+}
+
+void save_serialize_map(void)
+{
+    s32 i, j;
+    s32 x, y;
+    u16 *mapView;
+    s32 width;
+    mapView = gSaveBlock2Ptr->mapView;
+    width = VMap.Xsize;
+    x = gSaveBlock1Ptr->pos.x;
+    y = gSaveBlock1Ptr->pos.y;
+    for (i = y; i < y + 14; i++)
+    {
+        for (j = x; j < x + 15; j++)
+        {
+            *mapView++ = gBackupMapData[width * i + j];
+        }
+    }
+}
+
+bool32 SavedMapViewIsEmpty(void)
+{
+    u16 i;
+    u32 marker = 0;
+
+    // BUG: This loop extends past the bounds of the mapView array. Its size is only 0x100.
+    for (i = 0; i < 0x200; i++)
+        marker |= gSaveBlock2Ptr->mapView[i];
+
+    if (marker == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void ClearSavedMapView(void)
+{
+    CpuFill16(0, gSaveBlock2Ptr->mapView, sizeof(gSaveBlock2Ptr->mapView));
+}
+
+void LoadSavedMapView(void)
+{
+    s32 i, j;
+    s32 x, y;
+    u16 *mapView;
+    s32 width;
+    mapView = gSaveBlock2Ptr->mapView;
+    if (!SavedMapViewIsEmpty())
+    {
+        width = VMap.Xsize;
+        x = gSaveBlock1Ptr->pos.x;
+        y = gSaveBlock1Ptr->pos.y;
+        for (i = y; i < y + 14; i++)
+        {
+            for (j = x; j < x + 15; j++)
+            {
+                gBackupMapData[j + width * i] = *mapView;
+                mapView++;
+            }
+        }
+        ClearSavedMapView();
+    }
+}
+
+void sub_8059250(u8 a1)
+{
+    s32 width;
+    u16 *mapView;
+    s32 x0, y0;
+    s32 x2, y2;
+    u16 *src, *dest;
+    s32 srci, desti;
+    s32 r9, r8;
+    s32 x, y;
+    s32 i, j;
+    mapView = gSaveBlock2Ptr->mapView;
+    width = VMap.Xsize;
+    r9 = 0;
+    r8 = 0;
+    x0 = gSaveBlock1Ptr->pos.x;
+    y0 = gSaveBlock1Ptr->pos.y;
+    x2 = 15;
+    y2 = 14;
+    switch (a1)
+    {
+        case CONNECTION_NORTH:
+            y0 += 1;
+            y2 = 13;
+            break;
+        case CONNECTION_SOUTH:
+            r8 = 1;
+            y2 = 13;
+            break;
+        case CONNECTION_WEST:
+            x0 += 1;
+            x2 = 14;
+            break;
+        case CONNECTION_EAST:
+            r9 = 1;
+            x2 = 14;
+            break;
+    }
+    for (y = 0; y < y2; y++)
+    {
+        i = 0;
+        j = 0;
+        for (x = 0; x < x2; x++)
+        {
+            desti = width * (y + y0);
+            srci = (y + r8) * 15 + r9;
+            src = &mapView[srci + i];
+            dest = &gBackupMapData[x0 + desti + j];
+            *dest = *src;
+            i++;
+            j++;
+        }
+    }
+    ClearSavedMapView();
 }

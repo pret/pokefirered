@@ -22,7 +22,7 @@ void MapGridSetMetatileIdAt(int, int, u16);
 void MapGridSetMetatileEntryAt(int, int, u16);
 void GetCameraCoords(u16*, u16*);
 bool8 MapGridIsImpassableAt(s32, s32);
-s32 GetMapBorderIdAt(s16, s16);
+s32 GetMapBorderIdAt(s32, s32);
 bool32 CanCameraMoveInDirection(u8);
 u32 GetBehaviorByMetatileIdAndMapData(struct MapData *mapData, u16 metatile, u8 attr);
 

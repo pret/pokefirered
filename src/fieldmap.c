@@ -395,15 +395,7 @@ union Block
     block;                                                             \
 })
 
-#define MapGridGetTileAt(x, y) ({              \
-    u16 block;                                 \
-    if (x >= 0 && x < VMap.Xsize               \
-        && y >= 0 && y < VMap.Ysize)           \
-        block = VMap.map[x + VMap.Xsize * y];  \
-    else                                       \
-        block = MapGridGetBorderTileAt2(x, y); \
-    block;                                     \
-})
+#define MapGridGetTileAt(x, y) ((x >= 0 && x < VMap.Xsize && y >= 0 && y < VMap.Ysize) ? VMap.map[x + VMap.Xsize * y] : MapGridGetBorderTileAt2(x, y))
 
 u8 MapGridGetZCoordAt(s32 x, s32 y)
 {
@@ -640,4 +632,50 @@ void sub_8059250(u8 a1)
         }
     }
     ClearSavedMapView();
+}
+
+s32 GetMapBorderIdAt(s32 x, s32 y)
+{
+    if (MapGridGetTileAt(x, y) == 0x3FF)
+    {
+        return -1;
+    }
+
+    if (x >= VMap.Xsize - 8)
+    {
+        if (!gMapConnectionFlags.east)
+        {
+            return -1;
+        }
+        return CONNECTION_EAST;
+    }
+
+    if (x < 7)
+    {
+        if (!gMapConnectionFlags.west)
+        {
+            return -1;
+        }
+        return CONNECTION_WEST;
+    }
+
+    if (y >= VMap.Ysize - 7)
+    {
+        if (!gMapConnectionFlags.south)
+        {
+            return -1;
+        }
+        return CONNECTION_SOUTH;
+    }
+
+    if (y < 7)
+    {
+        if (!gMapConnectionFlags.north)
+        {
+            return -1;
+        }
+        return CONNECTION_NORTH;
+    }
+
+    return 0;
 }

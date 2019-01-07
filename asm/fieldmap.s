@@ -5,144 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8059334
-sub_8059334: @ 8059334
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r7, r0, 0
-	mov r8, r1
-	cmp r7, 0
-	blt _08059374
-	ldr r1, _0805936C @ =VMap
-	ldr r2, [r1]
-	cmp r7, r2
-	bge _08059374
-	mov r0, r8
-	cmp r0, 0
-	blt _08059374
-	ldr r0, [r1, 0x4]
-	cmp r8, r0
-	bge _08059374
-	mov r0, r8
-	muls r0, r2
-	adds r0, r7, r0
-	ldr r1, [r1, 0x8]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	ldr r0, _08059370 @ =0x000003ff
-	cmp r1, r0
-	beq _08059422
-	b _080593B0
-	.align 2, 0
-_0805936C: .4byte VMap
-_08059370: .4byte 0x000003ff
-_08059374:
-	ldr r0, _080593CC @ =gMapHeader
-	ldr r6, [r0]
-	subs r0, r7, 0x7
-	ldrb r5, [r6, 0x18]
-	lsls r1, r5, 3
-	adds r0, r1
-	adds r1, r5, 0
-	bl __modsi3
-	adds r4, r0, 0
-	mov r0, r8
-	subs r0, 0x7
-	ldrb r1, [r6, 0x19]
-	lsls r2, r1, 3
-	adds r0, r2
-	bl __modsi3
-	muls r0, r5
-	adds r4, r0
-	ldr r0, [r6, 0x8]
-	lsls r4, 1
-	adds r4, r0
-	ldrh r1, [r4]
-	movs r2, 0xC0
-	lsls r2, 4
-	adds r0, r2, 0
-	orrs r0, r1
-	ldr r1, _080593D0 @ =0x000003ff
-	cmp r0, r1
-	beq _08059422
-_080593B0:
-	ldr r1, _080593D4 @ =VMap
-	ldr r0, [r1]
-	subs r0, 0x8
-	cmp r7, r0
-	blt _080593DC
-	ldr r0, _080593D8 @ =gMapConnectionFlags
-	ldrb r1, [r0]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _08059422
-	movs r0, 0x4
-	b _08059432
-	.align 2, 0
-_080593CC: .4byte gMapHeader
-_080593D0: .4byte 0x000003ff
-_080593D4: .4byte VMap
-_080593D8: .4byte gMapConnectionFlags
-_080593DC:
-	cmp r7, 0x6
-	bgt _080593F4
-	ldr r0, _080593F0 @ =gMapConnectionFlags
-	ldrb r1, [r0]
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	beq _08059422
-	movs r0, 0x3
-	b _08059432
-	.align 2, 0
-_080593F0: .4byte gMapConnectionFlags
-_080593F4:
-	ldr r0, [r1, 0x4]
-	subs r0, 0x7
-	cmp r8, r0
-	blt _08059410
-	ldr r0, _0805940C @ =gMapConnectionFlags
-	ldrb r1, [r0]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08059422
-	movs r0, 0x1
-	b _08059432
-	.align 2, 0
-_0805940C: .4byte gMapConnectionFlags
-_08059410:
-	mov r0, r8
-	cmp r0, 0x6
-	bgt _08059430
-	ldr r0, _08059428 @ =gMapConnectionFlags
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	bne _0805942C
-_08059422:
-	movs r0, 0x1
-	negs r0, r0
-	b _08059432
-	.align 2, 0
-_08059428: .4byte gMapConnectionFlags
-_0805942C:
-	movs r0, 0x2
-	b _08059432
-_08059430:
-	movs r0, 0
-_08059432:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8059334
-
 	thumb_func_start GetPostCameraMoveMapBorderId
 GetPostCameraMoveMapBorderId: @ 805943C
 	push {r4,lr}
@@ -158,7 +20,7 @@ GetPostCameraMoveMapBorderId: @ 805943C
 	adds r3, 0x7
 	adds r1, r3
 	adds r0, r2, 0
-	bl sub_8059334
+	bl GetMapBorderIdAt
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -187,7 +49,7 @@ CanCameraMoveInDirection: @ 8059464
 	adds r0, 0x7
 	adds r1, r0
 	adds r0, r3, 0
-	bl sub_8059334
+	bl GetMapBorderIdAt
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1

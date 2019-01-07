@@ -12338,7 +12338,7 @@ _080636E2:
 	bne _08063724
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8059334
+	bl GetMapBorderIdAt
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1
@@ -12438,7 +12438,7 @@ sub_8063770: @ 8063770
 	bne _080637E8
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8059334
+	bl GetMapBorderIdAt
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1

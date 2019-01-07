@@ -3,9 +3,9 @@
 
 #include "global.h"
 
-bool8 sub_80983C4(void);
+bool8 sub_8069590(void);
 void ScriptFreezeMapObjects(void);
-bool8 sub_809847C(void);
+bool8 sub_8069648(void);
 void LockSelectedMapObject(void);
 void sub_8098630(void);
 bool8 sub_8098734(void);

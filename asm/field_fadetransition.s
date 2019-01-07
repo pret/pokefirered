@@ -661,7 +661,7 @@ _0807E028:
 	ldrsh r0, [r6, r2]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B268
+	bl FieldSetDoorOpened
 	movs r0, 0x1
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -691,7 +691,7 @@ _0807E074:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B364
+	bl GetDoorSoundEffect
 	lsls r0, 16
 	lsrs r0, 16
 	bl PlaySE
@@ -699,12 +699,12 @@ _0807E074:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B310
+	bl FieldAnimateDoorOpen
 	movs r0, 0x7
 	strh r0, [r4, 0x8]
 	b _0807E206
 _0807E0A2:
-	bl sub_805B350
+	bl FieldIsDoorAnimationRunning
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E0AE
@@ -750,7 +750,7 @@ _0807E0FC:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x22
 	ldrsh r1, [r4, r2]
-	bl sub_805B2D0
+	bl FieldAnimateDoorClose
 	movs r0, 0x9
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -762,7 +762,7 @@ _0807E10E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E206
-	bl sub_805B350
+	bl FieldIsDoorAnimationRunning
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807E206
@@ -822,7 +822,7 @@ _0807E198:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B2D0
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0xA]
@@ -1153,8 +1153,8 @@ _0807E434:
 	bx r1
 	thumb_func_end sub_807E418
 
-	thumb_func_start sub_807E438
-sub_807E438: @ 807E438
+	thumb_func_start DoWarp
+DoWarp: @ 807E438
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055F88
@@ -1174,10 +1174,10 @@ sub_807E438: @ 807E438
 _0807E464: .4byte gUnknown_3005020
 _0807E468: .4byte sub_807DF64
 _0807E46C: .4byte sub_807E718
-	thumb_func_end sub_807E438
+	thumb_func_end DoWarp
 
-	thumb_func_start sp13E_warp_to_last_warp
-sp13E_warp_to_last_warp: @ 807E470
+	thumb_func_start DoDiveWarp
+DoDiveWarp: @ 807E470
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055F88
@@ -1195,7 +1195,7 @@ sp13E_warp_to_last_warp: @ 807E470
 _0807E494: .4byte gUnknown_3005020
 _0807E498: .4byte sub_807DF64
 _0807E49C: .4byte sub_807E718
-	thumb_func_end sp13E_warp_to_last_warp
+	thumb_func_end DoDiveWarp
 
 	thumb_func_start sub_807E4A0
 sub_807E4A0: @ 807E4A0
@@ -1228,8 +1228,8 @@ _0807E4D4: .4byte sub_807E980
 _0807E4D8: .4byte gTasks
 	thumb_func_end sub_807E4A0
 
-	thumb_func_start sub_807E4DC
-sub_807E4DC: @ 807E4DC
+	thumb_func_start DoDoorWarp
+DoDoorWarp: @ 807E4DC
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r0, _0807E4F4 @ =gUnknown_3005020
@@ -1244,7 +1244,7 @@ sub_807E4DC: @ 807E4DC
 _0807E4F4: .4byte gUnknown_3005020
 _0807E4F8: .4byte sub_807DF64
 _0807E4FC: .4byte sub_807E80C
-	thumb_func_end sub_807E4DC
+	thumb_func_end DoDoorWarp
 
 	thumb_func_start sub_807E500
 sub_807E500: @ 807E500
@@ -1282,10 +1282,10 @@ _0807E540: .4byte sub_807DF64
 _0807E544: .4byte sub_807E784
 	thumb_func_end sub_807E524
 
-	thumb_func_start sp13F_fall_to_last_warp
-sp13F_fall_to_last_warp: @ 807E548
+	thumb_func_start DoFallWarp
+DoFallWarp: @ 807E548
 	push {lr}
-	bl sp13E_warp_to_last_warp
+	bl DoDiveWarp
 	ldr r1, _0807E558 @ =gUnknown_3005020
 	ldr r0, _0807E55C @ =sub_8084454
 	str r0, [r1]
@@ -1294,7 +1294,7 @@ sp13F_fall_to_last_warp: @ 807E548
 	.align 2, 0
 _0807E558: .4byte gUnknown_3005020
 _0807E55C: .4byte sub_8084454
-	thumb_func_end sp13F_fall_to_last_warp
+	thumb_func_end DoFallWarp
 
 	thumb_func_start sub_807E560
 sub_807E560: @ 807E560
@@ -1690,7 +1690,7 @@ _0807E85C:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805B364
+	bl GetDoorSoundEffect
 	lsls r0, 16
 	lsrs r0, 16
 	bl PlaySE
@@ -1699,7 +1699,7 @@ _0807E85C:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805B310
+	bl FieldAnimateDoorOpen
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1760,7 +1760,7 @@ _0807E8F4:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805B2D0
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]

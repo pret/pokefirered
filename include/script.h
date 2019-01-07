@@ -65,5 +65,14 @@ void sub_80992A0(u8 *script, u16 scriptSize);
 bool32 sub_8069DFC(void);
 void sub_8069EA4(u8 * script, u16 scriptSize);
 u8 * sub_8069E48(void);
+void sub_8069998(u8 var);
+void sub_80699F8(void);
+void sub_8069964(void);
+void sub_80699A4(void);
+void sub_8069970(void);
+void sub_8069A20(void);
+void sub_8069A2C(void);
+
+extern const u8 *gRAMScriptPtr;
 
 #endif // GUARD_SCRIPT_H

@@ -4312,7 +4312,7 @@ u16 * sub_8114C68(u16 * a0, const u16 * a1)
 const u16 * sub_8114C8C(const u16 * a0)
 {
     const u16 *r4 = sub_8113E88(28, a0);
-    sub_8099E90(r4[0], gStringVar1);
+    CopyItemName(r4[0], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gUnknown_841A391);
     return r4 + 1;
 }
@@ -4329,7 +4329,7 @@ u16 * sub_8114CC0(u16 * a0, const u16 * a1)
 const u16 * sub_8114CE4(const u16 * a0)
 {
     const u16 *r4 = sub_8113E88(29, a0);
-    sub_8099E90(r4[0], gStringVar1);
+    CopyItemName(r4[0], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gUnknown_841A3DA);
     return r4 + 1;
 }

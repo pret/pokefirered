@@ -1023,7 +1023,7 @@ sub_809B300: @ 809B300
 	lsrs r5, 16
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8099E90
+	bl CopyItemName
 	str r6, [r4]
 	str r5, [r4, 0x4]
 	pop {r4-r6}
@@ -1632,7 +1632,7 @@ _0809B7B2:
 	movs r3, 0
 	ldrsh r1, [r2, r3]
 	adds r1, r7
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	lsls r0, 16
 	lsrs r5, r0, 16
 	mov r0, sp
@@ -1645,7 +1645,7 @@ _0809B7B2:
 	adds r1, r7, r1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F8C
+	bl MapGridGetMetatileLayerTypeAt
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, _0809B808 @ =0x0000027f
@@ -2232,7 +2232,7 @@ _0809BC78: .4byte sub_809BF98
 _0809BC7C:
 	ldr r1, _0809BC94 @ =gStringVar1
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r1, _0809BC98 @ =gUnknown_8416766
 	ldr r2, _0809BC9C @ =sub_809BCA0
 	adds r0, r6, 0
@@ -2408,7 +2408,7 @@ _0809BDD4:
 	bl PutWindowTilemap
 	ldrh r0, [r4, 0xA]
 	ldr r1, _0809BE40 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _0809BE44 @ =gStringVar2
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -2485,7 +2485,7 @@ sub_809BEA4: @ 809BEA4
 	bl PutWindowTilemap
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r4, 0x2]
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2826,8 +2826,8 @@ _0809C15A:
 _0809C160: .4byte gUnknown_203996C
 	thumb_func_end sub_809C138
 
-	thumb_func_start sub_809C164
-sub_809C164: @ 809C164
+	thumb_func_start CreatePokemartMenu
+CreatePokemartMenu: @ 809C164
 	push {r4,lr}
 	bl sub_809ABD8
 	movs r0, 0
@@ -2851,10 +2851,10 @@ sub_809C164: @ 809C164
 _0809C194: .4byte EnableBothScriptContexts
 _0809C198: .4byte gUnknown_203996C
 _0809C19C: .4byte gMapHeader
-	thumb_func_end sub_809C164
+	thumb_func_end CreatePokemartMenu
 
-	thumb_func_start sub_809C1A0
-sub_809C1A0: @ 809C1A0
+	thumb_func_start CreateDecorationShop1Menu
+CreateDecorationShop1Menu: @ 809C1A0
 	push {lr}
 	bl sub_809ABD8
 	movs r0, 0x2
@@ -2865,10 +2865,10 @@ sub_809C1A0: @ 809C1A0
 	bx r0
 	.align 2, 0
 _0809C1B8: .4byte EnableBothScriptContexts
-	thumb_func_end sub_809C1A0
+	thumb_func_end CreateDecorationShop1Menu
 
-	thumb_func_start sub_809C1BC
-sub_809C1BC: @ 809C1BC
+	thumb_func_start CreateDecorationShop2Menu
+CreateDecorationShop2Menu: @ 809C1BC
 	push {lr}
 	bl sub_809ABD8
 	movs r0, 0x3
@@ -2879,7 +2879,7 @@ sub_809C1BC: @ 809C1BC
 	bx r0
 	.align 2, 0
 _0809C1D4: .4byte EnableBothScriptContexts
-	thumb_func_end sub_809C1BC
+	thumb_func_end CreateDecorationShop2Menu
 
 	thumb_func_start sub_809C1D8
 sub_809C1D8: @ 809C1D8
@@ -2940,7 +2940,7 @@ _0809C238:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	movs r2, 0
 	ldrsh r1, [r7, r2]
 	lsls r0, 16
@@ -3006,7 +3006,7 @@ _0809C2B8:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	movs r1, 0x2
 	subs r1, r7
 	lsls r1, 1

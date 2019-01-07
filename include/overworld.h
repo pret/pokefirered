@@ -24,6 +24,8 @@ struct UCoords32
     u32 x, y;
 };
 
+extern struct UCoords32 gDirectionToVectors[];
+
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern MainCallback gFieldCallback;
 
@@ -35,7 +37,10 @@ void Overworld_SetMapObjTemplateMovementType(u8, u8);
 void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
-void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetDynamicWarpWithCoords(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void Overworld_SetHealLocationWarp(u8);
 void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8084E2C(s8, s8, s8, s8, s8);
@@ -81,6 +86,10 @@ void sub_8055DC4(void);
 
 u8 sav1_map_get_name(void);
 
+void SetCurrentMapLayout(u16 mapDataId);
+void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
+
+void ResetInitialPlayerAvatarState(void);
 void sub_8055D40(u16 mapDataId);
 void sub_80563F0(void);
 
@@ -88,5 +97,7 @@ extern u8 gUnknown_2031DD8;
 extern u8 gUnknown_2036E28;
 
 extern bool8 (* gUnknown_3005024)(void);
+void SetLastHealLocationWarp(u8 healLocaionId);
+void sub_8055864(u8 mapGroup, u8 mapNum);
 
 #endif //GUARD_ROM4_H

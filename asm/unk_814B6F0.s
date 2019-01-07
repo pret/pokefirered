@@ -204,7 +204,7 @@ _0814B878: .4byte gSpecialVar_ItemId
 _0814B87C:
 	ldrh r0, [r1]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _0814B884:
 	ldr r4, _0814B8E0 @ =gUnknown_203F3DC
 	ldr r2, [r4]

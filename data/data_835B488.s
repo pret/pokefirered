@@ -657,29 +657,16 @@ gUnknown_83A720C:: @ 83A720C
 gUnknown_83A7240:: @ 83A7240
 	.asciz "0"
 
-	.align 2
-gNullScriptPtr:: @ 83A7244
-	.incbin "baserom.gba", 0x3A7244, 0x4
-
-gUnknown_83A7248:: @ 83A7248
-	.incbin "baserom.gba", 0x3A7248, 0x14
-
-gUnknown_83A725C:: @ 83A725C
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c"
-
-	.align 2
-gUnknown_83A7290:: @ 83A7290
-	.asciz "0"
-
-	.align 2
-gUnknown_83A7294:: @ 83A7294
-	.incbin "baserom.gba", 0x3A7294, 0xC
+    .section .rodata.83A72A0
 
 gUnknown_83A72A0:: @ 83A72A0
-	.incbin "baserom.gba", 0x3A72A0, 0x2
+	.string "S$"
 
 gUnknown_83A72A2:: @ 83A72A2
-	.incbin "baserom.gba", 0x3A72A2, 0x6
+	.string "IES$"
+
+gUnknown_83A72A6:: @ 83A72A6
+	.string "  "
 
 gUnknown_83A72A8:: @ 83A72A8
 	.incbin "baserom.gba", 0x3A72A8, 0x68
@@ -1560,7 +1547,7 @@ gUnknown_83DFC9C:: @ 83DFC9C
 gUnknown_83E04B0:: @ 83E04B0
 	.incbin "baserom.gba", 0x3E04B0, 0x208
 
-gUnknown_83E06B8:: @ 83E06B8
+gStdStringPtrs:: @ 83E06B8
 	.incbin "baserom.gba", 0x3E06B8, 0x74
 
 gUnknown_83E072C:: @ 83E072C

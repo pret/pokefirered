@@ -673,7 +673,7 @@ sub_805E2E8: @ 805E2E8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E37C
-	ldr r1, _0805E374 @ =gUnknown_3005040
+	ldr r1, _0805E374 @ =VMap
 	ldr r0, [r1]
 	adds r3, r0, 0
 	subs r3, 0x10
@@ -736,7 +736,7 @@ _0805E36A:
 	movs r0, 0
 	b _0805E37E
 	.align 2, 0
-_0805E374: .4byte gUnknown_3005040
+_0805E374: .4byte VMap
 _0805E378: .4byte gSaveBlock1Ptr
 _0805E37C:
 	movs r0, 0x1
@@ -1614,8 +1614,8 @@ _0805E9F0: .4byte 0x0000ffff
 _0805E9F4: .4byte gSprites
 	thumb_func_end AddPseudoFieldObject
 
-	thumb_func_start sub_805E9F8
-sub_805E9F8: @ 805E9F8
+	thumb_func_start sprite_new
+sprite_new: @ 805E9F8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1772,7 +1772,7 @@ _0805EB24:
 _0805EB38: .4byte sub_8068FA8
 _0805EB3C: .4byte 0x0000ffff
 _0805EB40: .4byte gSprites
-	thumb_func_end sub_805E9F8
+	thumb_func_end sprite_new
 
 	thumb_func_start sub_805EB44
 sub_805EB44: @ 805EB44
@@ -3516,7 +3516,7 @@ npc_coords_shift_still: @ 805F818
 	thumb_func_start UpdateFieldObjectCoordsForCameraUpdate
 UpdateFieldObjectCoordsForCameraUpdate: @ 805F82C
 	push {r4,r5,lr}
-	ldr r2, _0805F88C @ =gUnknown_2036E18
+	ldr r2, _0805F88C @ =gCamera
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -3566,7 +3566,7 @@ _0805F884:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F88C: .4byte gUnknown_2036E18
+_0805F88C: .4byte gCamera
 _0805F890: .4byte gMapObjects
 	thumb_func_end UpdateFieldObjectCoordsForCameraUpdate
 
@@ -12332,13 +12332,13 @@ npc_block_way: @ 80636AC
 _080636E2:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063724
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8059334
+	bl GetMapBorderIdAt
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1
@@ -12432,13 +12432,13 @@ sub_8063770: @ 8063770
 	lsrs r4, r1, 31
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	cmp r0, 0
 	bne _080637E8
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8059334
+	bl GetMapBorderIdAt
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1

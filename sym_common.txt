@@ -160,9 +160,9 @@ gUnknown_300502C: @ 300502C
 gUnknown_3005030: @ 3005030
 	.space 0x10
 
-gUnknown_3005040: @ 3005040
-	.space 0x10
+	.include "fieldmap.o"
 
+	.align 4
 gUnknown_3005050: @ 3005050
 	.space 0x18
 
@@ -175,7 +175,7 @@ gUnknown_300506C: @ 300506C
 gUnknown_3005070: @ 3005070
 	.space 0x4
 
-gUnknown_3005074: @ 3005074
+gSelectedEventObject: @ 3005074
 	.space 0x4
 
 gUnknown_3005078: @ 3005078

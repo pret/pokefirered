@@ -908,7 +908,7 @@ gUnknown_826D29E:: @ 826D29E
 gUnknown_826D2B0:: @ 826D2B0
 	.incbin "baserom.gba", 0x26D2B0, 0x28
 
-gUnknown_826D2D8:: @ 826D2D8
+gDirectionToVectors:: @ 826D2D8
 	.incbin "baserom.gba", 0x26D2D8, 0x48
 
 gUnknown_826D320:: @ 826D320
@@ -933,23 +933,3 @@ gUnknown_834EB8C:: @ 834EB8C
 	.incbin "baserom.gba", 0x34EB8C, 0x5FC
 
     .include "data/maps/groups.inc"
-
-gUnknown_8352754:: @ 8352754
-	.incbin "baserom.gba", 0x352754, 0x798
-
-gUnknown_8352EEC:: @ 8352EEC
-	.incbin "baserom.gba", 0x352EEC, 0x4
-
-gUnknown_8352EF0:: @ 8352EF0
-	.incbin "baserom.gba", 0x352EF0, 0x20
-
-gUnknown_8352F10:: @ 8352F10
-	.incbin "baserom.gba", 0x352F10, 0x8
-
-	.align 2
-gUnknown_8352F18:: @ 8352F18
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/fieldmap.c"
-
-	.align 2
-gUnknown_8352F4C:: @ 8352F4C
-	.asciz "VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE"

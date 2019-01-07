@@ -544,7 +544,7 @@ _080A13D4:
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A13D0
@@ -1361,7 +1361,7 @@ sub_80A1A44: @ 80A1A44
 	ldr r4, _080A1A84 @ =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldrh r0, [r4]
 	bl ItemId_GetPocket
 	lsls r0, 24
@@ -1374,7 +1374,7 @@ sub_80A1A44: @ 80A1A44
 	bl sub_81089F4
 	ldrh r0, [r4]
 	ldr r1, _080A1A88 @ =gStringVar2
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _080A1A8C @ =gStringVar4
 	ldr r1, _080A1A90 @ =gUnknown_841658C
 	bl StringExpandPlaceholders
@@ -1409,7 +1409,7 @@ sub_80A1A94: @ 80A1A94
 	bl FlagClear
 	ldrh r0, [r5]
 	ldr r1, _080A1AE4 @ =gStringVar2
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _080A1AE8 @ =gStringVar4
 	ldr r1, _080A1AEC @ =gUnknown_84165D2
 	bl StringExpandPlaceholders
@@ -1435,7 +1435,7 @@ _080A1AF4:
 	bl FlagClear
 	ldrh r0, [r5]
 	ldr r1, _080A1B34 @ =gStringVar2
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _080A1B38 @ =gStringVar4
 	ldr r1, _080A1B3C @ =gUnknown_8416600
 	bl StringExpandPlaceholders
@@ -1597,7 +1597,7 @@ sub_80A1C44: @ 80A1C44
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	bl sub_8085620
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1844,7 +1844,7 @@ sub_80A1E1C: @ 80A1E1C
 	ldr r0, _080A1E44 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	bl sub_8108CB4
 	adds r0, r4, 0
 	bl sub_8108B50
@@ -1959,7 +1959,7 @@ sub_80A1EF4: @ 80A1EF4
 	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	adds r0, r4, 0
 	bl sub_8042DA4
 	adds r2, r0, 0

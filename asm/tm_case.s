@@ -1855,7 +1855,7 @@ sub_8132714: @ 8132714
 	ldr r0, _08132744 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _08132748 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r5, _0813274C @ =gStringVar4
 	ldr r1, _08132750 @ =gUnknown_841635E
 	adds r0, r5, 0
@@ -2093,7 +2093,7 @@ sub_8132908: @ 8132908
 	bne _08132968
 	ldrh r0, [r6]
 	ldr r1, _08132958 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _0813295C @ =gStringVar4
 	ldr r1, _08132960 @ =gUnknown_84168F1
 	adds r0, r4, 0
@@ -2133,7 +2133,7 @@ _08132980:
 _08132988:
 	ldrh r0, [r6]
 	ldr r1, _081329B4 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _081329B8 @ =gStringVar4
 	ldr r1, _081329BC @ =gUnknown_8416911
 	adds r0, r4, 0
@@ -2506,7 +2506,7 @@ sub_8132CAC: @ 8132CAC
 	ldr r0, _08132D1C @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _08132D20 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r6, _08132D24 @ =gStringVar3
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x4
@@ -2568,7 +2568,7 @@ sub_8132D34: @ 8132D34
 	ldrh r0, [r5]
 	mov r2, r8
 	ldrh r1, [r2, 0x10]
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r7, _08132DFC @ =gSaveBlock1Ptr
 	ldr r4, [r7]
 	movs r3, 0xA4
@@ -2729,16 +2729,16 @@ sub_8132E64: @ 8132E64
 	bl sub_81320AC
 	ldr r0, _08132F0C @ =0x00000121
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldr r0, _08132F10 @ =0x00000123
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldr r0, _08132F14 @ =0x00000129
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldr r0, _08132F18 @ =0x00000143
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldr r1, _08132F1C @ =sub_815ABFC
 	movs r0, 0x4
 	movs r2, 0

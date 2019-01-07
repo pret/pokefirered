@@ -3218,7 +3218,7 @@ sub_80E724C: @ 80E724C
 	adds r1, r0
 	ldrh r0, [r1]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
@@ -3229,7 +3229,7 @@ sub_80E724C: @ 80E724C
 	adds r0, r1
 	ldrh r0, [r0]
 	ldr r1, _080E7290 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _080E7294 @ =gSpecialVar_Result
 	strh r4, [r0]
 	b _080E72AA

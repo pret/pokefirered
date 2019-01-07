@@ -6955,7 +6955,7 @@ sub_8086944: @ 8086944
 	cmp r0, 0
 	beq _08086978
 	adds r0, r4, 0
-	bl sub_8055F48
+	bl Overworld_ChangeMusicTo
 _08086978:
 	movs r0, 0
 	pop {r4}

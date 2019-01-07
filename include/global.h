@@ -328,7 +328,8 @@ struct SaveBlock2
     /*0x0AC*/ u8 filler_AC[0x3F4];
     /*0x4A0*/ u32 unk_4A0[0x2F];
     /*0x55c*/ struct UnkSaveBlock2Substruct_55C unk_55C;
-    /*0x574*/ u8 filler_574[0x524];
+    /*0x574*/ u8 filler_574[0x324];
+    /*0x898*/ u16 mapView[0x100];
     /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
     /*0xAF0*/ struct BerryCrush berryCrush;
     /*0xB00*/ u8 filler_B00[0x420];

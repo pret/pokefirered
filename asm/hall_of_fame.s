@@ -1459,8 +1459,8 @@ sub_80F2934: @ 80F2934
 	movs r1, 0x9
 	movs r3, 0xB
 	bl Overworld_SetWarpDestination
-	bl sub_807E438
-	bl sub_80559E4
+	bl DoWarp
+	bl ResetInitialPlayerAvatarState
 	add sp, 0x4
 	pop {r0}
 	bx r0

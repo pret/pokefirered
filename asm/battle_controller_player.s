@@ -381,7 +381,7 @@ _0802E5A8:
 	bhi _0802E634
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 _0802E606:
 	movs r0, 0x5
 	bl PlaySE

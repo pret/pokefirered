@@ -334,7 +334,7 @@ itemid_80BF6D8_mail_related: @ 80BF6D8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0x1
 	beq _080BF6EE
 	bl InUnionRoom
@@ -360,7 +360,7 @@ _080BF702:
 	thumb_func_start sub_80BF708
 sub_80BF708: @ 80BF708
 	push {lr}
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0x1
 	beq _080BF71A
 	ldr r0, _080BF720 @ =gReceivedRemoteLinkPlayers

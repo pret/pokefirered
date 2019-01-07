@@ -440,12 +440,12 @@ void sub_815DD44(void)
     if (gMapHeader.mapDataId - 0x129 > gUnknown_203F458->unk_0004.unk_0000.unk0)
     {
         gSpecialVar_Result = 3;
-        sub_8055D40(0x132);
+        SetCurrentMapLayout(0x132);
     }
     else
     {
         gSpecialVar_Result = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
-        sub_8055D40(gUnknown_847A284[gUnknown_203F458->unk_0000][gSpecialVar_Result]);
+        SetCurrentMapLayout(gUnknown_847A284[gUnknown_203F458->unk_0000][gSpecialVar_Result]);
         sub_815DDB0();
     }
 }
@@ -819,9 +819,9 @@ void sub_815E408(void)
     u16 itemId = gUnknown_847A2B4[gUnknown_203F458->unk_0004.unk_0008->unk_003];
     if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0)
         gSpecialVar_Result = 2;
-    else if (sub_809A084(itemId, 1) == 1)
+    else if (AddBagItem(itemId, 1) == 1)
     {
-        sub_8099E90(itemId, gStringVar2);
+        CopyItemName(itemId, gStringVar2);
         gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 = TRUE;
         gSpecialVar_Result = 0;
     }

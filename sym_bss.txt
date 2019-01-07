@@ -111,22 +111,22 @@ gUnknown_3000FA9: @ 3000FA9
 gUnknown_3000FAC: @ 3000FAC
 	.space 0x2
 
-gUnknown_3000FAE: @ 3000FAE
+sPrimaryTilesetCBCounter: @ 3000FAE
 	.space 0x2
 
-gUnknown_3000FB0: @ 3000FB0
+sPrimaryTilesetCBBufferSize: @ 3000FB0
 	.space 0x2
 
-gUnknown_3000FB2: @ 3000FB2
+sSecondaryTilesetCBCounter: @ 3000FB2
 	.space 0x2
 
-gUnknown_3000FB4: @ 3000FB4
+sSecondaryTilesetCBBufferSize: @ 3000FB4
 	.space 0x4
 
-gUnknown_3000FB8: @ 3000FB8
+sPrimaryTilesetCB: @ 3000FB8
 	.space 0x4
 
-gUnknown_3000FBC: @ 3000FBC
+sSecondaryTilesetCB: @ 3000FBC
 	.space 0x4
 
 	.include "src/sound.o"

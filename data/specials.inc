@@ -327,8 +327,8 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special sub_807B6C0
-	def_special sp13E_warp_to_last_warp
-	def_special sp13F_fall_to_last_warp
+	def_special DoDiveWarp
+	def_special DoFallWarp
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special sub_80E5E70

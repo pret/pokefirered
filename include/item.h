@@ -62,7 +62,8 @@ u8 ItemId_GetSecondaryId(u16 itemId);
 u16 itemid_get_market_price(u16 itemId);
 void sub_809A2DC(void);
 void sub_809A2A4(void);
-void sub_8099E90(u16, u8 *);
-bool8 sub_809A084(u16 itemId, u16 amount);
+void CopyItemName(u16, u8 *);
+void sub_809A824(u16 itemId);
+bool8 AddBagItem(u16 itemId, u16 amount);
 
 #endif // ITEM_H

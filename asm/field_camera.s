@@ -557,7 +557,7 @@ _0805A98C:
 	asrs r0, 16
 	lsls r1, r7, 16
 	asrs r1, 16
-	bl sub_8058F8C
+	bl MapGridGetMetatileLayerTypeAt
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r4, 4

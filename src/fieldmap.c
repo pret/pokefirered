@@ -18,6 +18,7 @@ void fillSouthConnection(struct MapHeader const *mapHeader, struct MapHeader con
 void fillNorthConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 void fillWestConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 void fillEastConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
+u32 sub_8059080(struct MapData *mapData, u16 metatileId, u8 z);
 void sub_80591C4(void);
 
 struct BackupMapData VMap;
@@ -25,7 +26,29 @@ EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
 EWRAM_DATA struct MapHeader gMapHeader = {};
 EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
 
-extern const struct ConnectionFlags sDummyConnectionFlags;
+const struct ConnectionFlags sDummyConnectionFlags = {};
+
+const u32 gUnknown_8352EF0[] = {
+    0x1ff,
+    0x3e00,
+    0x3c000,
+    0xfc0000,
+    0x7000000,
+    0x18000000,
+    0x60000000,
+    0x80000000
+};
+
+const u8 gUnknown_8352F10[] = {
+    0,
+    9,
+    14,
+    18,
+    24,
+    27,
+    29,
+    31
+};
 
 const struct MapHeader * mapconnection_get_mapheader(struct MapConnection * connection)
 {
@@ -334,43 +357,43 @@ union Block
     u16 value;
 };
 
-#define MapGridGetBorderTileAt(x, y) ({                            \
-        u16 block;                                                 \
-        s32 xprime;                                                \
-        s32 yprime;                                                \
-                                                                   \
-        struct MapData *mapData = gMapHeader.mapData;              \
-                                                                   \
-        xprime = x - 7;                                            \
-        xprime += 8 * mapData->unk18;                              \
-        xprime %= mapData->unk18;                                  \
-                                                                   \
-        yprime = y - 7;                                            \
-        yprime += 8 * mapData->unk19;                              \
-        yprime %= mapData->unk19;                                  \
-                                                                   \
-        block = mapData->border[xprime + yprime * mapData->unk18]; \
-        block |= 0xC00;                                            \
-        block;                                                     \
+#define MapGridGetBorderTileAt(x, y) ({                        \
+    u16 block;                                                 \
+    s32 xprime;                                                \
+    s32 yprime;                                                \
+                                                               \
+    struct MapData *mapData = gMapHeader.mapData;              \
+                                                               \
+    xprime = x - 7;                                            \
+    xprime += 8 * mapData->unk18;                              \
+    xprime %= mapData->unk18;                                  \
+                                                               \
+    yprime = y - 7;                                            \
+    yprime += 8 * mapData->unk19;                              \
+    yprime %= mapData->unk19;                                  \
+                                                               \
+    block = mapData->border[xprime + yprime * mapData->unk18]; \
+    block |= 0xC00;                                            \
+    block;                                                     \
 })
 
-#define MapGridGetBorderTileAt2(x, y) ({                            \
-        u16 block;                                                 \
-        s32 xprime;                                                \
-        s32 yprime;                                                \
-                                                                   \
-        struct MapData *mapData = gMapHeader.mapData;              \
-                                                                   \
-        xprime = x - 7;                                            \
-        xprime += 8 * mapData->unk18;                              \
-        xprime %= mapData->unk18;                                  \
-                                                                   \
-        yprime = y - 7;                                            \
-        yprime += 8 * mapData->unk19;                              \
-        yprime %= mapData->unk19;                                  \
-                                                                   \
-        block = mapData->border[xprime + yprime * mapData->unk18] | 0xC00;                                           \
-        block;                                                     \
+#define MapGridGetBorderTileAt2(x, y) ({                               \
+    u16 block;                                                         \
+    s32 xprime;                                                        \
+    s32 yprime;                                                        \
+                                                                       \
+    struct MapData *mapData = gMapHeader.mapData;                      \
+                                                                       \
+    xprime = x - 7;                                                    \
+    xprime += 8 * mapData->unk18;                                      \
+    xprime %= mapData->unk18;                                          \
+                                                                       \
+    yprime = y - 7;                                                    \
+    yprime += 8 * mapData->unk19;                                      \
+    yprime %= mapData->unk19;                                          \
+                                                                       \
+    block = mapData->border[xprime + yprime * mapData->unk18] | 0xC00; \
+    block;                                                             \
 })
 
 #define MapGridGetTileAt(x, y) ({              \
@@ -417,4 +440,66 @@ u32 MapGridGetMetatileIdAt(s32 x, s32 y)
         return MapGridGetBorderTileAt(x, y) & 0x3FF;
     }
     return block & 0x3FF;
+}
+
+u32 sub_8058F1C(u32 original, u8 bit)
+{
+    if (bit >= 8)
+        return original;
+
+    return (original & gUnknown_8352EF0[bit]) >> gUnknown_8352F10[bit];
+}
+
+u32 sub_8058F48(s16 x, s16 y, u8 z)
+{
+    u16 metatileId = MapGridGetMetatileIdAt(x, y);
+    return sub_8059080(gMapHeader.mapData, metatileId, z);
+}
+
+u32 MapGridGetMetatileBehaviorAt(s32 x, s32 y)
+{
+    return sub_8058F48(x, y, 0);
+}
+
+u8 MapGridGetMetatileLayerTypeAt(s32 x, s32 y)
+{
+    return sub_8058F48(x, y, 6);
+}
+
+void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatile)
+{
+    int i;
+    if (x >= 0 && x < VMap.Xsize
+        && y >= 0 && y < VMap.Ysize)
+    {
+        i = x + y * VMap.Xsize;
+        VMap.map[i] = (VMap.map[i] & 0xf000) | (metatile & 0xfff);
+    }
+}
+
+void MapGridSetMetatileEntryAt(s32 x, s32 y, u16 metatile)
+{
+    int i;
+    if (x >= 0 && x < VMap.Xsize
+        && y >= 0 && y < VMap.Ysize)
+    {
+        i = x + VMap.Xsize * y;
+        VMap.map[i] = metatile;
+    }
+}
+
+void sub_8059024(s32 x, s32 y, bool32 arg2)
+{
+    if (x >= 0 && x < VMap.Xsize
+        && y >= 0 && y < VMap.Ysize)
+    {
+        if (arg2)
+        {
+            VMap.map[x + VMap.Xsize * y] |= 0x0C00;
+        }
+        else
+        {
+            VMap.map[x + VMap.Xsize * y] &= ~0x0C00;
+        }
+    }
 }

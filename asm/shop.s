@@ -1645,7 +1645,7 @@ _0809B7B2:
 	adds r1, r7, r1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F8C
+	bl MapGridGetMetatileLayerTypeAt
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, _0809B808 @ =0x0000027f

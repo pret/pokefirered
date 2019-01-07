@@ -1,6 +1,11 @@
 #include "global.h"
+#include "bg.h"
+#include "palette.h"
 #include "overworld.h"
 #include "script.h"
+#include "menu.h"
+#include "new_menu_helpers.h"
+#include "quest_log.h"
 #include "fieldmap.h"
 
 struct ConnectionFlags
@@ -19,6 +24,9 @@ void fillNorthConnection(struct MapHeader const *mapHeader, struct MapHeader con
 void fillWestConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 void fillEastConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 void LoadSavedMapView(void);
+struct MapConnection *sub_8059600(u8 direction, s32 x, s32 y);
+bool8 sub_8059658(u8 direction, s32 x, s32 y, struct MapConnection *connection);
+bool8 sub_80596BC(s32 x, s32 src_width, s32 dest_width, s32 offset);
 
 struct BackupMapData VMap;
 EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
@@ -395,7 +403,9 @@ union Block
     block;                                                             \
 })
 
-#define MapGridGetTileAt(x, y) ((x >= 0 && x < VMap.Xsize && y >= 0 && y < VMap.Ysize) ? VMap.map[x + VMap.Xsize * y] : MapGridGetBorderTileAt2(x, y))
+#define AreCoordsWithinMapGridBounds(x, y) (x >= 0 && x < VMap.Xsize && y >= 0 && y < VMap.Ysize)
+
+#define MapGridGetTileAt(x, y) (AreCoordsWithinMapGridBounds(x, y) ? VMap.map[x + VMap.Xsize * y] : MapGridGetBorderTileAt2(x, y))
 
 u8 MapGridGetZCoordAt(s32 x, s32 y)
 {
@@ -678,4 +688,247 @@ s32 GetMapBorderIdAt(s32 x, s32 y)
     }
 
     return 0;
+}
+
+s32 GetPostCameraMoveMapBorderId(s32 x, s32 y)
+{
+    return GetMapBorderIdAt(7 + gSaveBlock1Ptr->pos.x + x, 7 + gSaveBlock1Ptr->pos.y + y);
+}
+
+bool32 CanCameraMoveInDirection(s32 direction)
+{
+    s32 x, y;
+    
+    x = gSaveBlock1Ptr->pos.x + 7 + gDirectionToVectors[direction].x;
+    y = gSaveBlock1Ptr->pos.y + 7 + gDirectionToVectors[direction].y;
+    if (GetMapBorderIdAt(x, y) == -1)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_80594AC(struct MapConnection *connection, int direction, s32 x, s32 y)
+{
+    struct MapHeader const *mapHeader;
+    mapHeader = mapconnection_get_mapheader(connection);
+    switch (direction)
+    {
+        case CONNECTION_EAST:
+            gSaveBlock1Ptr->pos.x = -x;
+            gSaveBlock1Ptr->pos.y -= connection->offset;
+            break;
+        case CONNECTION_WEST:
+            gSaveBlock1Ptr->pos.x = mapHeader->mapData->width;
+            gSaveBlock1Ptr->pos.y -= connection->offset;
+            break;
+        case CONNECTION_SOUTH:
+            gSaveBlock1Ptr->pos.x -= connection->offset;
+            gSaveBlock1Ptr->pos.y = -y;
+            break;
+        case CONNECTION_NORTH:
+            gSaveBlock1Ptr->pos.x -= connection->offset;
+            gSaveBlock1Ptr->pos.y = mapHeader->mapData->height;
+            break;
+    }
+}
+
+bool8 CameraMove(s32 x, s32 y)
+{
+    u32 direction;
+    struct MapConnection *connection;
+    s32 old_x, old_y;
+    gCamera.active = FALSE;
+    direction = GetPostCameraMoveMapBorderId(x, y);
+    if (direction + 1 <= 1)
+    {
+        gSaveBlock1Ptr->pos.x += x;
+        gSaveBlock1Ptr->pos.y += y;
+    }
+    else
+    {
+        save_serialize_map();
+        old_x = gSaveBlock1Ptr->pos.x;
+        old_y = gSaveBlock1Ptr->pos.y;
+        connection = sub_8059600(direction, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
+        sub_80594AC(connection, direction, x, y);
+        sub_8055864(connection->mapGroup, connection->mapNum);
+        gCamera.active = TRUE;
+        gCamera.x = old_x - gSaveBlock1Ptr->pos.x;
+        gCamera.y = old_y - gSaveBlock1Ptr->pos.y;
+        gSaveBlock1Ptr->pos.x += x;
+        gSaveBlock1Ptr->pos.y += y;
+        sub_8059250(direction);
+    }
+    return gCamera.active;
+}
+
+struct MapConnection *sub_8059600(u8 direction, s32 x, s32 y)
+{
+    s32 count;
+    struct MapConnection *connection;
+    s32 i;
+    count = gMapHeader.connections->count;
+    connection = gMapHeader.connections->connections;
+    for (i = 0; i < count; i++, connection++)
+    {
+        if (connection->direction == direction && sub_8059658(direction, x, y, connection) == TRUE)
+            return connection;
+    }
+    return NULL;
+
+}
+
+bool8 sub_8059658(u8 direction, s32 x, s32 y, struct MapConnection *connection)
+{
+    struct MapHeader const *mapHeader;
+    mapHeader = mapconnection_get_mapheader(connection);
+    switch (direction)
+    {
+        case CONNECTION_SOUTH:
+        case CONNECTION_NORTH:
+            return sub_80596BC(x, gMapHeader.mapData->width, mapHeader->mapData->width, connection->offset);
+        case CONNECTION_WEST:
+        case CONNECTION_EAST:
+            return sub_80596BC(y, gMapHeader.mapData->height, mapHeader->mapData->height, connection->offset);
+    }
+    return FALSE;
+}
+
+bool8 sub_80596BC(s32 x, s32 src_width, s32 dest_width, s32 offset)
+{
+    s32 offset2 = max(offset, 0);
+
+    if (dest_width + offset < src_width)
+        src_width = dest_width + offset;
+
+    if (offset2 <= x && x <= src_width)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool32 sub_80596E8(s32 x, s32 width)
+{
+    if (x >= 0 && x < width)
+        return TRUE;
+
+    return FALSE;
+}
+
+s32 sub_80596FC(struct MapConnection *connection, s32 x, s32 y)
+{
+    struct MapHeader const *mapHeader;
+    mapHeader = mapconnection_get_mapheader(connection);
+    switch (connection->direction)
+    {
+        case CONNECTION_SOUTH:
+        case CONNECTION_NORTH:
+            return sub_80596E8(x - connection->offset, mapHeader->mapData->width);
+        case CONNECTION_WEST:
+        case CONNECTION_EAST:
+            return sub_80596E8(y - connection->offset, mapHeader->mapData->height);
+    }
+    return FALSE;
+}
+
+struct MapConnection *sub_805973C(s16 x, s16 y)
+{
+    s32 count;
+    struct MapConnection *connection;
+    s32 i;
+    u8 direction;
+    if (!gMapHeader.connections)
+    {
+        return NULL;
+    }
+    else
+    {
+        count = gMapHeader.connections->count;
+        connection = gMapHeader.connections->connections;
+        for (i = 0; i < count; i++, connection++)
+        {
+            direction = connection->direction;
+            if ((direction == CONNECTION_DIVE || direction == CONNECTION_EMERGE)
+                || (direction == CONNECTION_NORTH && y > 6)
+                || (direction == CONNECTION_SOUTH && y < gMapHeader.mapData->height + 7)
+                || (direction == CONNECTION_WEST && x > 6)
+                || (direction == CONNECTION_EAST && x < gMapHeader.mapData->width + 7))
+            {
+                continue;
+            }
+            if (sub_80596FC(connection, x - 7, y - 7) == TRUE)
+            {
+                return connection;
+            }
+        }
+    }
+    return NULL;
+}
+
+void SetCameraFocusCoords(u16 x, u16 y)
+{
+    gSaveBlock1Ptr->pos.x = x - 7;
+    gSaveBlock1Ptr->pos.y = y - 7;
+}
+
+void GetCameraFocusCoords(u16 *x, u16 *y)
+{
+    *x = gSaveBlock1Ptr->pos.x + 7;
+    *y = gSaveBlock1Ptr->pos.y + 7;
+}
+
+void SetCameraCoords(u16 x, u16 y)
+{
+    gSaveBlock1Ptr->pos.x = x;
+    gSaveBlock1Ptr->pos.y = y;
+}
+
+void GetCameraCoords(u16 *x, u16 *y)
+{
+    *x = gSaveBlock1Ptr->pos.x;
+    *y = gSaveBlock1Ptr->pos.y;
+}
+void copy_tileset_patterns_to_vram(struct Tileset const *tileset, u16 numTiles, u16 offset)
+{
+    if (tileset)
+    {
+        if (!tileset->isCompressed)
+            LoadBgTiles(2, tileset->tiles, numTiles * 32, offset);
+        else
+            sub_80F68F0(2, tileset->tiles, numTiles * 32, offset, 0);
+    }
+}
+
+void copy_tileset_patterns_to_vram2(struct Tileset const *tileset, u16 numTiles, u16 offset)
+{
+    if (tileset)
+    {
+        if (!tileset->isCompressed)
+            LoadBgTiles(2, tileset->tiles, numTiles * 32, offset);
+        else
+            sub_80F69E8(2, tileset->tiles, numTiles * 32, offset, 0);
+    }
+}
+
+void sub_80598CC(u16 a0, u16 a1)
+{
+    switch (gUnknown_2036E28)
+    {
+        case 0:
+            return;
+        case 1:
+            TintPalette_GrayScale(gPlttBufferUnfaded + a0, a1);
+            break;
+        case 2:
+            TintPalette_SepiaTone(gPlttBufferUnfaded + a0, a1);
+            break;
+        case 3:
+            sub_8111F38(a0, a1);
+            TintPalette_GrayScale(gPlttBufferUnfaded + a0, a1);
+            break;
+        default:
+            return;
+    }
+    CpuCopy16(gPlttBufferUnfaded + a0, gPlttBufferFaded + a0, a1 * sizeof(u16));
 }

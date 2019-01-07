@@ -70,6 +70,8 @@ void BeginHardwarePaletteFade(u8, u8, u8, u8, u8);
 void BlendPalettes(u32, u8, u16);
 void BlendPalettesUnfaded(u32, u8, u16);
 void sub_80716F8(const u16 *, u16 *, u16, u8);
+void TintPalette_GrayScale(u16 *, u16);
+void TintPalette_SepiaTone(u16 *, u16);
 
 extern struct PaletteFadeControl gPaletteFade;
 

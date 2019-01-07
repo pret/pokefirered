@@ -24,6 +24,8 @@ struct UCoords32
     u32 x, y;
 };
 
+extern struct UCoords32 gDirectionToVectors[];
+
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern MainCallback gFieldCallback;
 
@@ -96,5 +98,6 @@ extern u8 gUnknown_2036E28;
 
 extern bool8 (* gUnknown_3005024)(void);
 void SetLastHealLocationWarp(u8 healLocaionId);
+void sub_8055864(u8 mapGroup, u8 mapNum);
 
 #endif //GUARD_ROM4_H

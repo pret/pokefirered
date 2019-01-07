@@ -4690,7 +4690,7 @@ mli4_mapscripts_and_other: @ 805709C
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sav1_camera_get_focus_coords
+	bl GetCameraFocusCoords
 	bl sub_8055A6C
 	adds r5, r0, 0
 	mov r0, sp
@@ -4792,7 +4792,7 @@ sub_8057178: @ 8057178
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sav1_camera_get_focus_coords
+	bl GetCameraFocusCoords
 	mov r2, sp
 	ldr r0, _080571A4 @ =gUnknown_300502C
 	ldrb r1, [r0]
@@ -4801,7 +4801,7 @@ sub_8057178: @ 8057178
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r4]
-	bl sub_80597EC
+	bl SetCameraFocusCoords
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -4820,7 +4820,7 @@ sub_80571A8: @ 80571A8
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sav1_camera_get_focus_coords
+	bl GetCameraFocusCoords
 	mov r3, sp
 	mov r2, sp
 	ldr r0, _08057224 @ =gUnknown_300502C
@@ -6748,7 +6748,7 @@ _08058074:
 	ldr r1, [r4, 0x8]
 	str r0, [sp]
 	str r1, [sp, 0x4]
-	ldr r3, _080580E4 @ =gUnknown_826D2D8
+	ldr r3, _080580E4 @ =gDirectionToVectors
 	ldrb r0, [r4, 0x3]
 	lsls r0, 3
 	adds r0, r3
@@ -6801,7 +6801,7 @@ _080580E0:
 	ldr r0, _080580F8 @ =gUnknown_81BB9A3
 	b _08058122
 	.align 2, 0
-_080580E4: .4byte gUnknown_826D2D8
+_080580E4: .4byte gDirectionToVectors
 _080580E8: .4byte 0xffff0000
 _080580EC: .4byte 0x0000ffff
 _080580F0: .4byte 0xffffff00

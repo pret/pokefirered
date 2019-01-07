@@ -599,7 +599,7 @@ gBackupMapData: @ 2031DFC
 gMapHeader: @ 2036DFC
 	.space 0x1C
 
-gUnknown_2036E18: @ 2036E18
+gCamera: @ 2036E18
 	.space 0xC
 
 gMapConnectionFlags: @ 2036E24

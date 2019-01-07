@@ -3516,7 +3516,7 @@ npc_coords_shift_still: @ 805F818
 	thumb_func_start UpdateFieldObjectCoordsForCameraUpdate
 UpdateFieldObjectCoordsForCameraUpdate: @ 805F82C
 	push {r4,r5,lr}
-	ldr r2, _0805F88C @ =gUnknown_2036E18
+	ldr r2, _0805F88C @ =gCamera
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -3566,7 +3566,7 @@ _0805F884:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F88C: .4byte gUnknown_2036E18
+_0805F88C: .4byte gCamera
 _0805F890: .4byte gMapObjects
 	thumb_func_end UpdateFieldObjectCoordsForCameraUpdate
 

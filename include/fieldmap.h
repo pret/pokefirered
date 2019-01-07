@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#define VIRTUAL_MAP_SIZE 0x2800
+
 extern struct MapCoords {
     int width;
     int height;

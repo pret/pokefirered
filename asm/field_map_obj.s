@@ -673,7 +673,7 @@ sub_805E2E8: @ 805E2E8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E37C
-	ldr r1, _0805E374 @ =gUnknown_3005040
+	ldr r1, _0805E374 @ =VMap
 	ldr r0, [r1]
 	adds r3, r0, 0
 	subs r3, 0x10
@@ -736,7 +736,7 @@ _0805E36A:
 	movs r0, 0
 	b _0805E37E
 	.align 2, 0
-_0805E374: .4byte gUnknown_3005040
+_0805E374: .4byte VMap
 _0805E378: .4byte gSaveBlock1Ptr
 _0805E37C:
 	movs r0, 0x1

@@ -593,7 +593,7 @@ gUnknown_2031DEA: @ 2031DEA
 gUnknown_2031DEC: @ 2031DEC
 	.space 0x10
 
-gUnknown_2031DFC: @ 2031DFC
+gBackupMapData: @ 2031DFC
 	.space 0x5000
 
 gMapHeader: @ 2036DFC

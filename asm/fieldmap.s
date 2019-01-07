@@ -5,93 +5,6 @@
 
 	.text
 
-	thumb_func_start mapconnection_get_mapheader
-mapconnection_get_mapheader: @ 80589C4
-	push {lr}
-	ldrb r2, [r0, 0x8]
-	ldrb r1, [r0, 0x9]
-	adds r0, r2, 0
-	bl get_mapheader_by_bank_and_number
-	pop {r1}
-	bx r1
-	thumb_func_end mapconnection_get_mapheader
-
-	thumb_func_start not_trainer_hill_battle_pyramid
-not_trainer_hill_battle_pyramid: @ 80589D4
-	push {lr}
-	ldr r0, _080589E4 @ =gMapHeader
-	bl sub_8058A00
-	bl mapheader_run_script_with_tag_x1
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080589E4: .4byte gMapHeader
-	thumb_func_end not_trainer_hill_battle_pyramid
-
-	thumb_func_start sub_80589E8
-sub_80589E8: @ 80589E8
-	push {lr}
-	ldr r0, _080589FC @ =gMapHeader
-	bl sub_8058A00
-	bl sub_80591C4
-	bl mapheader_run_script_with_tag_x1
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080589FC: .4byte gMapHeader
-	thumb_func_end sub_80589E8
-
-	thumb_func_start sub_8058A00
-sub_8058A00: @ 8058A00
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r6, r0, 0
-	ldr r5, [r6]
-	ldr r0, _08058A58 @ =0x03ff03ff
-	str r0, [sp]
-	ldr r4, _08058A5C @ =gUnknown_2031DFC
-	ldr r2, _08058A60 @ =0x01001400
-	mov r0, sp
-	adds r1, r4, 0
-	bl CpuFastSet
-	ldr r2, _08058A64 @ =gUnknown_3005040
-	str r4, [r2, 0x8]
-	ldr r1, [r5]
-	adds r1, 0xF
-	str r1, [r2]
-	ldr r0, [r5, 0x4]
-	adds r0, 0xE
-	str r0, [r2, 0x4]
-	muls r1, r0
-	movs r0, 0xA0
-	lsls r0, 6
-	cmp r1, r0
-	ble _08058A3E
-	ldr r0, _08058A68 @ =gUnknown_8352F18	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/fieldmap.c"
-	ldr r2, _08058A6C @ =gUnknown_8352F4C	"VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE"
-	movs r1, 0x9E
-	movs r3, 0x1
-	bl AGBAssert
-_08058A3E:
-	ldr r0, [r5, 0xC]
-	ldrh r1, [r5]
-	ldrh r2, [r5, 0x4]
-	bl map_copy_with_padding
-	adds r0, r6, 0
-	bl mapheader_copy_mapdata_of_adjacent_maps
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08058A58: .4byte 0x03ff03ff
-_08058A5C: .4byte gUnknown_2031DFC
-_08058A60: .4byte 0x01001400
-_08058A64: .4byte gUnknown_3005040
-_08058A68: .4byte gUnknown_8352F18
-_08058A6C: .4byte gUnknown_8352F4C
-	thumb_func_end sub_8058A00
-
 	thumb_func_start map_copy_with_padding
 map_copy_with_padding: @ 8058A70
 	push {r4-r7,lr}
@@ -104,7 +17,7 @@ map_copy_with_padding: @ 8058A70
 	mov r8, r1
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r0, _08058AC4 @ =gUnknown_3005040
+	ldr r0, _08058AC4 @ =VMap
 	ldr r4, [r0, 0x8]
 	ldr r1, [r0]
 	lsls r0, r1, 3
@@ -138,7 +51,7 @@ _08058AB8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058AC4: .4byte gUnknown_3005040
+_08058AC4: .4byte VMap
 	thumb_func_end map_copy_with_padding
 
 	thumb_func_start mapheader_copy_mapdata_of_adjacent_maps
@@ -231,7 +144,7 @@ sub_8058B54: @ 8058B54
 	lsls r2, 1
 	ldr r3, [r4, 0xC]
 	adds r6, r3, r2
-	ldr r3, _08058BB0 @ =gUnknown_3005040
+	ldr r3, _08058BB0 @ =VMap
 	ldr r2, [r3]
 	muls r1, r2
 	adds r1, r0
@@ -251,7 +164,7 @@ _08058B86:
 	mov r3, r8
 	ands r2, r3
 	bl CpuSet
-	ldr r0, _08058BB0 @ =gUnknown_3005040
+	ldr r0, _08058BB0 @ =VMap
 	ldr r0, [r0]
 	lsls r0, 1
 	adds r5, r0
@@ -267,7 +180,7 @@ _08058BA6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058BB0: .4byte gUnknown_3005040
+_08058BB0: .4byte VMap
 _08058BB4: .4byte 0x001fffff
 	thumb_func_end sub_8058B54
 
@@ -289,7 +202,7 @@ fillSouthConnection: @ 8058BB8
 	bge _08058BEC
 	negs r6, r2
 	adds r2, r4
-	ldr r0, _08058BE8 @ =gUnknown_3005040
+	ldr r0, _08058BE8 @ =VMap
 	ldr r3, [r0]
 	cmp r2, r3
 	bge _08058BE2
@@ -298,11 +211,11 @@ _08058BE2:
 	movs r2, 0
 	b _08058BFC
 	.align 2, 0
-_08058BE8: .4byte gUnknown_3005040
+_08058BE8: .4byte VMap
 _08058BEC:
 	movs r6, 0
 	adds r0, r2, r4
-	ldr r1, _08058C1C @ =gUnknown_3005040
+	ldr r1, _08058C1C @ =VMap
 	ldr r1, [r1]
 	subs r3, r1, r2
 	cmp r0, r1
@@ -325,7 +238,7 @@ _08058C12:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058C1C: .4byte gUnknown_3005040
+_08058C1C: .4byte VMap
 	thumb_func_end fillSouthConnection
 
 	thumb_func_start fillNorthConnection
@@ -344,7 +257,7 @@ fillNorthConnection: @ 8058C20
 	bge _08058C50
 	negs r6, r2
 	adds r2, r4
-	ldr r0, _08058C4C @ =gUnknown_3005040
+	ldr r0, _08058C4C @ =VMap
 	ldr r3, [r0]
 	cmp r2, r3
 	bge _08058C46
@@ -353,11 +266,11 @@ _08058C46:
 	movs r2, 0
 	b _08058C60
 	.align 2, 0
-_08058C4C: .4byte gUnknown_3005040
+_08058C4C: .4byte VMap
 _08058C50:
 	movs r6, 0
 	adds r0, r2, r4
-	ldr r1, _08058C7C @ =gUnknown_3005040
+	ldr r1, _08058C7C @ =VMap
 	ldr r1, [r1]
 	subs r3, r1, r2
 	cmp r0, r1
@@ -379,7 +292,7 @@ _08058C74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058C7C: .4byte gUnknown_3005040
+_08058C7C: .4byte VMap
 	thumb_func_end fillNorthConnection
 
 	thumb_func_start fillWestConnection
@@ -398,7 +311,7 @@ fillWestConnection: @ 8058C80
 	bge _08058CB0
 	negs r6, r2
 	adds r1, r2, r4
-	ldr r0, _08058CAC @ =gUnknown_3005040
+	ldr r0, _08058CAC @ =VMap
 	ldr r3, [r0, 0x4]
 	cmp r1, r3
 	bge _08058CA6
@@ -407,11 +320,11 @@ _08058CA6:
 	movs r2, 0
 	b _08058CC0
 	.align 2, 0
-_08058CAC: .4byte gUnknown_3005040
+_08058CAC: .4byte VMap
 _08058CB0:
 	movs r6, 0
 	adds r0, r2, r4
-	ldr r1, _08058CDC @ =gUnknown_3005040
+	ldr r1, _08058CDC @ =VMap
 	ldr r1, [r1, 0x4]
 	subs r3, r1, r2
 	cmp r0, r1
@@ -433,7 +346,7 @@ _08058CD4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058CDC: .4byte gUnknown_3005040
+_08058CDC: .4byte VMap
 	thumb_func_end fillWestConnection
 
 	thumb_func_start fillEastConnection
@@ -454,7 +367,7 @@ fillEastConnection: @ 8058CE0
 	bge _08058D14
 	negs r6, r2
 	adds r1, r2, r4
-	ldr r0, _08058D10 @ =gUnknown_3005040
+	ldr r0, _08058D10 @ =VMap
 	ldr r3, [r0, 0x4]
 	cmp r1, r3
 	bge _08058D0A
@@ -463,11 +376,11 @@ _08058D0A:
 	movs r2, 0
 	b _08058D24
 	.align 2, 0
-_08058D10: .4byte gUnknown_3005040
+_08058D10: .4byte VMap
 _08058D14:
 	movs r6, 0
 	adds r0, r2, r4
-	ldr r1, _08058D40 @ =gUnknown_3005040
+	ldr r1, _08058D40 @ =VMap
 	ldr r1, [r1, 0x4]
 	subs r3, r1, r2
 	cmp r0, r1
@@ -489,7 +402,7 @@ _08058D38:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058D40: .4byte gUnknown_3005040
+_08058D40: .4byte VMap
 	thumb_func_end fillEastConnection
 
 	thumb_func_start MapGridGetZCoordAt
@@ -499,7 +412,7 @@ MapGridGetZCoordAt: @ 8058D44
 	adds r7, r1, 0
 	cmp r2, 0
 	blt _08058D74
-	ldr r1, _08058D70 @ =gUnknown_3005040
+	ldr r1, _08058D70 @ =VMap
 	ldr r3, [r1]
 	cmp r2, r3
 	bge _08058D74
@@ -517,7 +430,7 @@ MapGridGetZCoordAt: @ 8058D44
 	ldrh r1, [r0]
 	b _08058DA8
 	.align 2, 0
-_08058D70: .4byte gUnknown_3005040
+_08058D70: .4byte VMap
 _08058D74:
 	ldr r0, _08058DB4 @ =gMapHeader
 	ldr r6, [r0]
@@ -567,7 +480,7 @@ sub_8058DC4: @ 8058DC4
 	adds r7, r1, 0
 	cmp r2, 0
 	blt _08058DF4
-	ldr r1, _08058DF0 @ =gUnknown_3005040
+	ldr r1, _08058DF0 @ =VMap
 	ldr r3, [r1]
 	cmp r2, r3
 	bge _08058DF4
@@ -585,7 +498,7 @@ sub_8058DC4: @ 8058DC4
 	ldrh r1, [r0]
 	b _08058E28
 	.align 2, 0
-_08058DF0: .4byte gUnknown_3005040
+_08058DF0: .4byte VMap
 _08058DF4:
 	ldr r0, _08058E38 @ =gMapHeader
 	ldr r6, [r0]
@@ -641,7 +554,7 @@ sub_8058E48: @ 8058E48
 	mov r9, r1
 	cmp r0, 0
 	blt _08058E80
-	ldr r1, _08058E7C @ =gUnknown_3005040
+	ldr r1, _08058E7C @ =VMap
 	ldr r2, [r1]
 	cmp r8, r2
 	bge _08058E80
@@ -660,7 +573,7 @@ sub_8058E48: @ 8058E48
 	ldrh r7, [r0]
 	b _08058EBA
 	.align 2, 0
-_08058E7C: .4byte gUnknown_3005040
+_08058E7C: .4byte VMap
 _08058E80:
 	ldr r0, _08058EC8 @ =gMapHeader
 	ldr r6, [r0]
@@ -825,7 +738,7 @@ MapGridSetMetatileIdAt: @ 8058FA4
 	lsrs r5, r2, 16
 	cmp r3, 0
 	blt _08058FDC
-	ldr r2, _08058FE4 @ =gUnknown_3005040
+	ldr r2, _08058FE4 @ =VMap
 	ldr r4, [r2]
 	cmp r3, r4
 	bge _08058FDC
@@ -852,7 +765,7 @@ _08058FDC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058FE4: .4byte gUnknown_3005040
+_08058FE4: .4byte VMap
 _08058FE8: .4byte 0x00000fff
 	thumb_func_end MapGridSetMetatileIdAt
 
@@ -864,7 +777,7 @@ MapGridSetMetatileEntryAt: @ 8058FEC
 	lsrs r5, r2, 16
 	cmp r3, 0
 	blt _08059018
-	ldr r2, _08059020 @ =gUnknown_3005040
+	ldr r2, _08059020 @ =VMap
 	ldr r4, [r2]
 	cmp r3, r4
 	bge _08059018
@@ -885,7 +798,7 @@ _08059018:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059020: .4byte gUnknown_3005040
+_08059020: .4byte VMap
 	thumb_func_end MapGridSetMetatileEntryAt
 
 	thumb_func_start sub_8059024
@@ -896,7 +809,7 @@ sub_8059024: @ 8059024
 	adds r5, r2, 0
 	cmp r4, 0
 	blt _08059076
-	ldr r2, _08059060 @ =gUnknown_3005040
+	ldr r2, _08059060 @ =VMap
 	ldr r1, [r2]
 	cmp r4, r1
 	bge _08059076
@@ -921,7 +834,7 @@ sub_8059024: @ 8059024
 	strh r1, [r0]
 	b _08059076
 	.align 2, 0
-_08059060: .4byte gUnknown_3005040
+_08059060: .4byte VMap
 _08059064:
 	muls r1, r3
 	adds r1, r4, r1
@@ -999,7 +912,7 @@ sub_80590D8: @ 80590D8
 	ldr r0, [r0]
 	ldr r1, _08059148 @ =0x00000898
 	adds r4, r0, r1
-	ldr r0, _0805914C @ =gUnknown_3005040
+	ldr r0, _0805914C @ =VMap
 	ldr r0, [r0]
 	mov r8, r0
 	ldr r0, _08059150 @ =gSaveBlock1Ptr
@@ -1013,7 +926,7 @@ sub_80590D8: @ 80590D8
 	cmp r0, r1
 	bge _08059138
 	mov r12, r1
-	ldr r2, _08059154 @ =gUnknown_2031DFC
+	ldr r2, _08059154 @ =gBackupMapData
 	mov r9, r2
 	lsls r7, r6, 1
 _0805910A:
@@ -1052,9 +965,9 @@ _08059138:
 	.align 2, 0
 _08059144: .4byte gSaveBlock2Ptr
 _08059148: .4byte 0x00000898
-_0805914C: .4byte gUnknown_3005040
+_0805914C: .4byte VMap
 _08059150: .4byte gSaveBlock1Ptr
-_08059154: .4byte gUnknown_2031DFC
+_08059154: .4byte gBackupMapData
 	thumb_func_end sub_80590D8
 
 	thumb_func_start sub_8059158
@@ -1129,7 +1042,7 @@ sub_80591C4: @ 80591C4
 	bl sub_8059158
 	cmp r0, 0
 	bne _08059230
-	ldr r0, _08059244 @ =gUnknown_3005040
+	ldr r0, _08059244 @ =VMap
 	ldr r0, [r0]
 	mov r8, r0
 	ldr r0, _08059248 @ =gSaveBlock1Ptr
@@ -1143,7 +1056,7 @@ sub_80591C4: @ 80591C4
 	cmp r0, r1
 	bge _0805922C
 	mov r12, r1
-	ldr r2, _0805924C @ =gUnknown_2031DFC
+	ldr r2, _0805924C @ =gBackupMapData
 	mov r9, r2
 	lsls r7, r6, 1
 _080591FE:
@@ -1184,9 +1097,9 @@ _08059230:
 	.align 2, 0
 _0805923C: .4byte gSaveBlock2Ptr
 _08059240: .4byte 0x00000898
-_08059244: .4byte gUnknown_3005040
+_08059244: .4byte VMap
 _08059248: .4byte gSaveBlock1Ptr
-_0805924C: .4byte gUnknown_2031DFC
+_0805924C: .4byte gBackupMapData
 	thumb_func_end sub_80591C4
 
 	thumb_func_start sub_8059250
@@ -1205,7 +1118,7 @@ sub_8059250: @ 8059250
 	ldr r3, _080592A0 @ =0x00000898
 	adds r3, r0, r3
 	str r3, [sp, 0x4]
-	ldr r0, _080592A4 @ =gUnknown_3005040
+	ldr r0, _080592A4 @ =VMap
 	ldr r0, [r0]
 	str r0, [sp]
 	movs r4, 0
@@ -1231,7 +1144,7 @@ sub_8059250: @ 8059250
 	.align 2, 0
 _0805929C: .4byte gSaveBlock2Ptr
 _080592A0: .4byte 0x00000898
-_080592A4: .4byte gUnknown_3005040
+_080592A4: .4byte VMap
 _080592A8: .4byte gSaveBlock1Ptr
 _080592AC:
 	cmp r2, 0x3
@@ -1264,7 +1177,7 @@ _080592D6:
 	movs r1, 0
 	cmp r1, r12
 	bge _0805931A
-	ldr r0, _08059330 @ =gUnknown_2031DFC
+	ldr r0, _08059330 @ =gBackupMapData
 	mov r10, r0
 _080592E0:
 	adds r4, r1, 0x1
@@ -1309,7 +1222,7 @@ _0805931A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059330: .4byte gUnknown_2031DFC
+_08059330: .4byte gBackupMapData
 	thumb_func_end sub_8059250
 
 	thumb_func_start sub_8059334
@@ -1321,7 +1234,7 @@ sub_8059334: @ 8059334
 	mov r8, r1
 	cmp r7, 0
 	blt _08059374
-	ldr r1, _0805936C @ =gUnknown_3005040
+	ldr r1, _0805936C @ =VMap
 	ldr r2, [r1]
 	cmp r7, r2
 	bge _08059374
@@ -1343,7 +1256,7 @@ sub_8059334: @ 8059334
 	beq _08059422
 	b _080593B0
 	.align 2, 0
-_0805936C: .4byte gUnknown_3005040
+_0805936C: .4byte VMap
 _08059370: .4byte 0x000003ff
 _08059374:
 	ldr r0, _080593CC @ =gMapHeader
@@ -1375,7 +1288,7 @@ _08059374:
 	cmp r0, r1
 	beq _08059422
 _080593B0:
-	ldr r1, _080593D4 @ =gUnknown_3005040
+	ldr r1, _080593D4 @ =VMap
 	ldr r0, [r1]
 	subs r0, 0x8
 	cmp r7, r0
@@ -1391,7 +1304,7 @@ _080593B0:
 	.align 2, 0
 _080593CC: .4byte gMapHeader
 _080593D0: .4byte 0x000003ff
-_080593D4: .4byte gUnknown_3005040
+_080593D4: .4byte VMap
 _080593D8: .4byte gUnknown_2036E24
 _080593DC:
 	cmp r7, 0x6

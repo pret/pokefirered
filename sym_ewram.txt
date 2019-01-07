@@ -602,7 +602,7 @@ gMapHeader: @ 2036DFC
 gUnknown_2036E18: @ 2036E18
 	.space 0xC
 
-gUnknown_2036E24: @ 2036E24
+gMapConnectionFlags: @ 2036E24
 	.space 0x4
 
 gUnknown_2036E28: @ 2036E28

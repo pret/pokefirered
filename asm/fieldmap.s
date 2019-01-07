@@ -5,406 +5,6 @@
 
 	.text
 
-	thumb_func_start map_copy_with_padding
-map_copy_with_padding: @ 8058A70
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	adds r7, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	mov r8, r1
-	lsls r2, 16
-	lsrs r2, 16
-	ldr r0, _08058AC4 @ =VMap
-	ldr r4, [r0, 0x8]
-	ldr r1, [r0]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 1
-	adds r0, 0xE
-	adds r4, r0
-	cmp r2, 0
-	beq _08058AB8
-	mov r0, r8
-	lsls r6, r0, 1
-	adds r5, r2, 0
-	movs r0, 0x1E
-	adds r0, r6
-	mov r9, r0
-_08058AA4:
-	adds r0, r7, 0
-	adds r1, r4, 0
-	mov r2, r8
-	bl CpuSet
-	add r4, r9
-	adds r7, r6
-	subs r5, 0x1
-	cmp r5, 0
-	bne _08058AA4
-_08058AB8:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08058AC4: .4byte VMap
-	thumb_func_end map_copy_with_padding
-
-	thumb_func_start mapheader_copy_mapdata_of_adjacent_maps
-mapheader_copy_mapdata_of_adjacent_maps: @ 8058AC8
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	ldr r2, _08058B00 @ =gUnknown_2036E24
-	ldr r0, _08058B04 @ =gUnknown_8352EEC
-	ldr r0, [r0]
-	str r0, [r2]
-	ldr r0, [r6, 0xC]
-	cmp r0, 0
-	beq _08058B4C
-	ldr r1, [r0]
-	ldr r5, [r0, 0x4]
-	cmp r1, 0
-	ble _08058B4C
-	adds r4, r2, 0
-	adds r7, r1, 0
-_08058AE6:
-	adds r0, r5, 0
-	bl mapconnection_get_mapheader
-	adds r1, r0, 0
-	ldr r2, [r5, 0x4]
-	ldrb r0, [r5]
-	cmp r0, 0x2
-	beq _08058B1E
-	cmp r0, 0x2
-	bgt _08058B08
-	cmp r0, 0x1
-	beq _08058B12
-	b _08058B44
-	.align 2, 0
-_08058B00: .4byte gUnknown_2036E24
-_08058B04: .4byte gUnknown_8352EEC
-_08058B08:
-	cmp r0, 0x3
-	beq _08058B2A
-	cmp r0, 0x4
-	beq _08058B36
-	b _08058B44
-_08058B12:
-	adds r0, r6, 0
-	bl fillSouthConnection
-	ldrb r0, [r4]
-	movs r1, 0x1
-	b _08058B40
-_08058B1E:
-	adds r0, r6, 0
-	bl fillNorthConnection
-	ldrb r0, [r4]
-	movs r1, 0x2
-	b _08058B40
-_08058B2A:
-	adds r0, r6, 0
-	bl fillWestConnection
-	ldrb r0, [r4]
-	movs r1, 0x4
-	b _08058B40
-_08058B36:
-	adds r0, r6, 0
-	bl fillEastConnection
-	ldrb r0, [r4]
-	movs r1, 0x8
-_08058B40:
-	orrs r0, r1
-	strb r0, [r4]
-_08058B44:
-	subs r7, 0x1
-	adds r5, 0xC
-	cmp r7, 0
-	bne _08058AE6
-_08058B4C:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end mapheader_copy_mapdata_of_adjacent_maps
-
-	thumb_func_start sub_8058B54
-sub_8058B54: @ 8058B54
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	ldr r5, [sp, 0x18]
-	ldr r4, [r2]
-	ldr r7, [r4]
-	adds r2, r7, 0
-	muls r2, r5
-	adds r2, r3
-	lsls r2, 1
-	ldr r3, [r4, 0xC]
-	adds r6, r3, r2
-	ldr r3, _08058BB0 @ =VMap
-	ldr r2, [r3]
-	muls r1, r2
-	adds r1, r0
-	lsls r1, 1
-	ldr r0, [r3, 0x8]
-	adds r5, r0, r1
-	ldr r0, [sp, 0x20]
-	cmp r0, 0
-	ble _08058BA6
-	adds r4, r0, 0
-	ldr r3, _08058BB4 @ =0x001fffff
-	mov r8, r3
-_08058B86:
-	adds r0, r6, 0
-	adds r1, r5, 0
-	ldr r2, [sp, 0x1C]
-	mov r3, r8
-	ands r2, r3
-	bl CpuSet
-	ldr r0, _08058BB0 @ =VMap
-	ldr r0, [r0]
-	lsls r0, 1
-	adds r5, r0
-	lsls r0, r7, 1
-	adds r6, r0
-	subs r4, 0x1
-	cmp r4, 0
-	bne _08058B86
-_08058BA6:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08058BB0: .4byte VMap
-_08058BB4: .4byte 0x001fffff
-	thumb_func_end sub_8058B54
-
-	thumb_func_start fillSouthConnection
-fillSouthConnection: @ 8058BB8
-	push {r4-r7,lr}
-	sub sp, 0xC
-	adds r3, r0, 0
-	adds r5, r1, 0
-	cmp r5, 0
-	beq _08058C12
-	ldr r0, [r5]
-	ldr r4, [r0]
-	adds r2, 0x7
-	ldr r0, [r3]
-	ldr r0, [r0, 0x4]
-	adds r7, r0, 0x7
-	cmp r2, 0
-	bge _08058BEC
-	negs r6, r2
-	adds r2, r4
-	ldr r0, _08058BE8 @ =VMap
-	ldr r3, [r0]
-	cmp r2, r3
-	bge _08058BE2
-	adds r3, r2, 0
-_08058BE2:
-	movs r2, 0
-	b _08058BFC
-	.align 2, 0
-_08058BE8: .4byte VMap
-_08058BEC:
-	movs r6, 0
-	adds r0, r2, r4
-	ldr r1, _08058C1C @ =VMap
-	ldr r1, [r1]
-	subs r3, r1, r2
-	cmp r0, r1
-	bge _08058BFC
-	adds r3, r4, 0
-_08058BFC:
-	movs r0, 0
-	str r0, [sp]
-	str r3, [sp, 0x4]
-	movs r0, 0x7
-	str r0, [sp, 0x8]
-	adds r0, r2, 0
-	adds r1, r7, 0
-	adds r2, r5, 0
-	adds r3, r6, 0
-	bl sub_8058B54
-_08058C12:
-	add sp, 0xC
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08058C1C: .4byte VMap
-	thumb_func_end fillSouthConnection
-
-	thumb_func_start fillNorthConnection
-fillNorthConnection: @ 8058C20
-	push {r4-r7,lr}
-	sub sp, 0xC
-	adds r5, r1, 0
-	cmp r5, 0
-	beq _08058C74
-	ldr r0, [r5]
-	ldr r4, [r0]
-	ldr r0, [r0, 0x4]
-	adds r2, 0x7
-	subs r7, r0, 0x7
-	cmp r2, 0
-	bge _08058C50
-	negs r6, r2
-	adds r2, r4
-	ldr r0, _08058C4C @ =VMap
-	ldr r3, [r0]
-	cmp r2, r3
-	bge _08058C46
-	adds r3, r2, 0
-_08058C46:
-	movs r2, 0
-	b _08058C60
-	.align 2, 0
-_08058C4C: .4byte VMap
-_08058C50:
-	movs r6, 0
-	adds r0, r2, r4
-	ldr r1, _08058C7C @ =VMap
-	ldr r1, [r1]
-	subs r3, r1, r2
-	cmp r0, r1
-	bge _08058C60
-	adds r3, r4, 0
-_08058C60:
-	str r7, [sp]
-	str r3, [sp, 0x4]
-	movs r0, 0x7
-	str r0, [sp, 0x8]
-	adds r0, r2, 0
-	movs r1, 0
-	adds r2, r5, 0
-	adds r3, r6, 0
-	bl sub_8058B54
-_08058C74:
-	add sp, 0xC
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08058C7C: .4byte VMap
-	thumb_func_end fillNorthConnection
-
-	thumb_func_start fillWestConnection
-fillWestConnection: @ 8058C80
-	push {r4-r7,lr}
-	sub sp, 0xC
-	adds r5, r1, 0
-	cmp r5, 0
-	beq _08058CD4
-	ldr r0, [r5]
-	ldr r1, [r0]
-	ldr r4, [r0, 0x4]
-	adds r2, 0x7
-	subs r7, r1, 0x7
-	cmp r2, 0
-	bge _08058CB0
-	negs r6, r2
-	adds r1, r2, r4
-	ldr r0, _08058CAC @ =VMap
-	ldr r3, [r0, 0x4]
-	cmp r1, r3
-	bge _08058CA6
-	adds r3, r1, 0
-_08058CA6:
-	movs r2, 0
-	b _08058CC0
-	.align 2, 0
-_08058CAC: .4byte VMap
-_08058CB0:
-	movs r6, 0
-	adds r0, r2, r4
-	ldr r1, _08058CDC @ =VMap
-	ldr r1, [r1, 0x4]
-	subs r3, r1, r2
-	cmp r0, r1
-	bge _08058CC0
-	adds r3, r4, 0
-_08058CC0:
-	str r6, [sp]
-	movs r0, 0x7
-	str r0, [sp, 0x4]
-	str r3, [sp, 0x8]
-	movs r0, 0
-	adds r1, r2, 0
-	adds r2, r5, 0
-	adds r3, r7, 0
-	bl sub_8058B54
-_08058CD4:
-	add sp, 0xC
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08058CDC: .4byte VMap
-	thumb_func_end fillWestConnection
-
-	thumb_func_start fillEastConnection
-fillEastConnection: @ 8058CE0
-	push {r4-r7,lr}
-	sub sp, 0xC
-	adds r3, r0, 0
-	adds r5, r1, 0
-	cmp r5, 0
-	beq _08058D38
-	ldr r0, [r5]
-	ldr r4, [r0, 0x4]
-	ldr r0, [r3]
-	ldr r0, [r0]
-	adds r7, r0, 0x7
-	adds r2, 0x7
-	cmp r2, 0
-	bge _08058D14
-	negs r6, r2
-	adds r1, r2, r4
-	ldr r0, _08058D10 @ =VMap
-	ldr r3, [r0, 0x4]
-	cmp r1, r3
-	bge _08058D0A
-	adds r3, r1, 0
-_08058D0A:
-	movs r2, 0
-	b _08058D24
-	.align 2, 0
-_08058D10: .4byte VMap
-_08058D14:
-	movs r6, 0
-	adds r0, r2, r4
-	ldr r1, _08058D40 @ =VMap
-	ldr r1, [r1, 0x4]
-	subs r3, r1, r2
-	cmp r0, r1
-	bge _08058D24
-	adds r3, r4, 0
-_08058D24:
-	str r6, [sp]
-	movs r0, 0x8
-	str r0, [sp, 0x4]
-	str r3, [sp, 0x8]
-	adds r0, r7, 0
-	adds r1, r2, 0
-	adds r2, r5, 0
-	movs r3, 0
-	bl sub_8058B54
-_08058D38:
-	add sp, 0xC
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08058D40: .4byte VMap
-	thumb_func_end fillEastConnection
-
 	thumb_func_start MapGridGetZCoordAt
 MapGridGetZCoordAt: @ 8058D44
 	push {r4-r7,lr}
@@ -1293,7 +893,7 @@ _080593B0:
 	subs r0, 0x8
 	cmp r7, r0
 	blt _080593DC
-	ldr r0, _080593D8 @ =gUnknown_2036E24
+	ldr r0, _080593D8 @ =gMapConnectionFlags
 	ldrb r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -1305,11 +905,11 @@ _080593B0:
 _080593CC: .4byte gMapHeader
 _080593D0: .4byte 0x000003ff
 _080593D4: .4byte VMap
-_080593D8: .4byte gUnknown_2036E24
+_080593D8: .4byte gMapConnectionFlags
 _080593DC:
 	cmp r7, 0x6
 	bgt _080593F4
-	ldr r0, _080593F0 @ =gUnknown_2036E24
+	ldr r0, _080593F0 @ =gMapConnectionFlags
 	ldrb r1, [r0]
 	movs r0, 0x4
 	ands r0, r1
@@ -1318,13 +918,13 @@ _080593DC:
 	movs r0, 0x3
 	b _08059432
 	.align 2, 0
-_080593F0: .4byte gUnknown_2036E24
+_080593F0: .4byte gMapConnectionFlags
 _080593F4:
 	ldr r0, [r1, 0x4]
 	subs r0, 0x7
 	cmp r8, r0
 	blt _08059410
-	ldr r0, _0805940C @ =gUnknown_2036E24
+	ldr r0, _0805940C @ =gMapConnectionFlags
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -1333,12 +933,12 @@ _080593F4:
 	movs r0, 0x1
 	b _08059432
 	.align 2, 0
-_0805940C: .4byte gUnknown_2036E24
+_0805940C: .4byte gMapConnectionFlags
 _08059410:
 	mov r0, r8
 	cmp r0, 0x6
 	bgt _08059430
-	ldr r0, _08059428 @ =gUnknown_2036E24
+	ldr r0, _08059428 @ =gMapConnectionFlags
 	ldrb r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1349,7 +949,7 @@ _08059422:
 	negs r0, r0
 	b _08059432
 	.align 2, 0
-_08059428: .4byte gUnknown_2036E24
+_08059428: .4byte gMapConnectionFlags
 _0805942C:
 	movs r0, 0x2
 	b _08059432

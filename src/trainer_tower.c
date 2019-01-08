@@ -3,6 +3,7 @@
 #include "task.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
+#include "constants/species.h"
 #include "malloc.h"
 #include "save.h"
 #include "util.h"
@@ -139,7 +140,7 @@ void sub_815E908(void);
 void sub_815E948(void);
 void sub_815E9C8(void);
 void sub_815E9FC(void);
-s32 sub_815EBB8(void);
+static s32 GetPartyMaxLevel(void);
 void sub_815EC0C(void);
 u32 sub_815EDDC(u32 *);
 void sub_815EDF4(u32 *, u32);
@@ -153,6 +154,7 @@ extern const struct UnkStruct_8479ED8 gUnknown_8479ED8[83];
 extern const struct UnkStruct_847A024 gUnknown_847A024[10];
 extern const struct UnkStruct_847A074 gUnknown_847A074[105];
 extern const struct WindowTemplate gUnknown_847A218;
+extern const struct TextColor gUnknown_847A22C;
 extern void (*const gUnknown_847A230[])(void);
 extern const struct Unk_203F458_Header gUnknown_84827AC;
 extern const struct UnkSubstruct_203F458_000C *const gUnknown_84827B4[][8];
@@ -1018,7 +1020,7 @@ void sub_815E9C8(void)
 void sub_815E9FC(void)
 {
     u16 r4 = VarGet(VAR_0x4001);
-    s32 r9 = sub_815EBB8();
+    s32 r9 = GetPartyMaxLevel();
     u8 r5 = gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8;
     s32 r6;
     u8 r2;
@@ -1030,12 +1032,6 @@ void sub_815E9FC(void)
         case 0:
         default:
             for (r6 = 0; r6 < 2; r6++)
-            /*
-             * sp+0 := r5 * 2
-             * r5 := gUnknown_203F458
-             * r7 := r4 * 72
-             * r8 := r7 + 4
-             */
             {
                 r2 = gUnknown_847A2EE[r5][r6];
                 gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
@@ -1055,5 +1051,76 @@ void sub_815E9FC(void)
             gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
             sub_803E0A4(&gEnemyParty[0], &gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
             break;
+    }
+}
+
+static s32 GetPartyMaxLevel(void)
+{
+    s32 topLevel = 0;
+    s32 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) != 0 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG)
+        {
+            s32 currLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL);
+            if (currLevel > topLevel)
+                topLevel = currLevel;
+        }
+    }
+
+    return topLevel;
+}
+
+void sub_815EC0C(void)
+{
+    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 != gUnknown_203F458->unk_0004.unk_0000.unk1)
+    {
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 = gUnknown_203F458->unk_0004.unk_0000.unk1;
+        sub_815EDF4(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4, 215999);
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 = FALSE;
+    }
+}
+
+void sub_815EC8C(void)
+{
+    s32 i;
+    u8 windowId = 0;
+
+    sub_815DC8C();
+    FillWindowPixelRect(0, 0, 0, 0, 0xd8, 0x90);
+    sub_815EC0C();
+    box_print(0, 2, 0x4a, 0, &gUnknown_847A22C, 0, gUnknown_83FE982);
+
+    for (i = 0; i < 4; i++)
+    {
+        PRINT_TOWER_TIME(sub_815EDDC(&gSaveBlock1Ptr->unkArray[i].unk4));
+        StringExpandPlaceholders(gStringVar4, gUnknown_83FE998);
+        box_print(windowId, 2, 0x18, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gUnknown_83FE9C4[i]);
+        box_print(windowId, 2, 0x60, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gStringVar4);
+    }
+
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+    sub_815DD2C();
+}
+
+u32 sub_815EDDC(u32 * counter)
+{
+    return *counter ^ gSaveBlock2Ptr->encryptionKey;
+}
+
+void sub_815EDF4(u32 * counter, u32 value)
+{
+    *counter = value ^ gSaveBlock2Ptr->encryptionKey;
+}
+
+void sub_815EE0C(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        sub_815EDF4(&gSaveBlock1Ptr->unkArray[i].unk4, 215999);
     }
 }

@@ -394,7 +394,6 @@ SECTIONS {
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);
         src/trainer_tower.o(.rodata);
-        data/trainer_tower.o(.rodata);
         data/data_8471F00.o(.rodata.after_trainer_tower);
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);

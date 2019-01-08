@@ -926,13 +926,29 @@ gUnknown_826D330:: @ 826D330
 	.incbin "baserom.gba", 0x26D330, 0xC
 
 gUnknown_826D33C:: @ 826D33C
-	.incbin "baserom.gba", 0x26D33C, 0xC
+	.4byte sub_8058684
+	.4byte sub_80586A4
+	.4byte sub_80586A8
 
 gUnknown_826D348:: @ 826D348
-	.incbin "baserom.gba", 0x26D348, 0x2C
+	.4byte sub_80586C8
+	.4byte sub_80586CC
+	.4byte sub_80586CC
+	.4byte sub_80586CC
+	.4byte sub_80586CC
+	.4byte sub_80586C8
+	.4byte sub_80586C8
+	.4byte sub_8058734
+	.4byte sub_8058734
+	.4byte sub_8058734
+	.4byte sub_8058734
 
 gUnknown_826D374:: @ 826D374
-	.incbin "baserom.gba", 0x26D374, 0x78258
+	.4byte sub_805874C
+	.4byte sub_8058754
+
+gUnknown_826D37C:: @ 826D37C
+	.incbin "baserom.gba", 0x26D37C, 0x78250
 
 gUnknown_82E55CC:: @ 82E55CC
 	.incbin "baserom.gba", 0x2E55CC, 0x695C0

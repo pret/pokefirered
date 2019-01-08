@@ -671,5 +671,6 @@ void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u
 void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
 
 void PlayMapChosenOrBattleBGM(u16 songId);
+u8 GetMonsStateToDoubles(void);
 
 #endif // GUARD_POKEMON_H

@@ -18,6 +18,10 @@
 #include "battle_2.h"
 #include "overworld.h"
 #include "item.h"
+#include "window.h"
+#include "menu.h"
+#include "new_menu_helpers.h"
+#include "sound.h"
 
 struct UnkStruct_8479D34
 {
@@ -98,6 +102,12 @@ struct UnkStruct_847A024
     bool8 unk4;
 };
 
+struct UnkStruct_847A074
+{
+    u8 unk0;
+    u8 unk1;
+};
+
 EWRAM_DATA struct UnkStruct_203F458 * gUnknown_203F458 = NULL;
 EWRAM_DATA struct UnkStruct_203F45C * gUnknown_203F45C = NULL;
 
@@ -133,14 +143,21 @@ void sub_815EC0C(void);
 u32 sub_815EDDC(u32 *);
 void sub_815EDF4(u32 *, u32);
 
+extern const u8 gUnknown_83FE982[];
+extern const u8 gUnknown_83FE998[];
+extern const u8 *const gUnknown_83FE9C4[];
+
 extern const struct UnkStruct_8479D34 gUnknown_8479D34[15];
 extern const struct UnkStruct_8479ED8 gUnknown_8479ED8[83];
 extern const struct UnkStruct_847A024 gUnknown_847A024[10];
+extern const struct UnkStruct_847A074 gUnknown_847A074[105];
+extern const struct WindowTemplate gUnknown_847A218;
 extern void (*const gUnknown_847A230[])(void);
 extern const struct Unk_203F458_Header gUnknown_84827AC;
 extern const struct UnkSubstruct_203F458_000C *const gUnknown_84827B4[][8];
 extern const u16 gUnknown_847A284[8][3];
 extern const u16 gUnknown_847A2B4[];
+extern const u16 gUnknown_847A2D2[];
 
 bool32 sub_815D7BC(void * dest, void * buffer)
 {
@@ -857,4 +874,134 @@ void sub_815E56C(void)
 void sub_815E5C4(void)
 {
     gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_3 = 1;
+}
+
+void sub_815E5F0(void)
+{
+    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_3)
+    {
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_3 = FALSE;
+        gSpecialVar_Result = 0;
+    }
+    else if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_4)
+    {
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_4 = FALSE;
+        gSpecialVar_Result = 1;
+    }
+    else
+    {
+        gSpecialVar_Result = 2;
+    }
+}
+
+#define PRINT_TOWER_TIME(src) ({                                                           \
+    s32 minutes, seconds, centiseconds, frames;                                            \
+                                                                                           \
+    frames = (src);                                                                        \
+                                                                                           \
+    minutes = frames / 3600;                                                               \
+    frames %= 3600;                                                                        \
+    seconds = frames / 60;                                                                 \
+    frames %= 60;                                                                          \
+    centiseconds = frames * 168 / 100;                                                     \
+                                                                                           \
+    ConvertIntToDecimalStringN(gStringVar1, minutes, STR_CONV_MODE_RIGHT_ALIGN, 2);        \
+    ConvertIntToDecimalStringN(gStringVar2, seconds, STR_CONV_MODE_RIGHT_ALIGN, 2);        \
+    ConvertIntToDecimalStringN(gStringVar3, centiseconds, STR_CONV_MODE_LEADING_ZEROS, 2); \
+})
+
+void sub_815E658(void)
+{
+    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 >= 215999)
+    {
+        DisableVBlankCounter1();
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 = 215999;
+    }
+
+    PRINT_TOWER_TIME(gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
+}
+
+void sub_815E720(void)
+{
+    u8 windowId;
+    s32 i;
+    s32 minutes, seconds, centiseconds;
+
+    sub_815EC0C();
+    windowId = AddWindow(&gUnknown_847A218);
+    sub_80F6E9C();
+    sub_80F6F1C(windowId, FALSE);
+    AddTextPrinterParameterized(windowId, 2, gUnknown_83FE982, 0x4A, 0, 0xFF, NULL);
+
+    for (i = 0; i < 4; i++)
+    {
+        PRINT_TOWER_TIME(sub_815EDDC(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4));
+
+        StringExpandPlaceholders(gStringVar4, gUnknown_83FE998);
+        AddTextPrinterParameterized(windowId, 2, gUnknown_83FE9C4[i - 1], 0x18, 0x24 + 0x14 * i, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gStringVar4, 0x60, 0x2E + 0x14 * i, 0xFF, NULL);
+    }
+
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+    VarSet(VAR_0x4001, windowId);
+}
+
+void sub_815E88C(void)
+{
+    u8 windowId = VarGet(VAR_0x4001);
+    sub_810F4D8(windowId, TRUE);
+    RemoveWindow(windowId);
+}
+
+void sub_815E8B4(void)
+{
+    gSpecialVar_Result = GetMonsStateToDoubles();
+}
+
+void sub_815E8CC(void)
+{
+    if (gUnknown_203F458->unk_0004.unk_0000.unk0 != gUnknown_203F458->unk_0004.unk_0008[0].unk_001)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gUnknown_203F458->unk_0004.unk_0000.unk0, STR_CONV_MODE_LEFT_ALIGN, 1);
+        gSpecialVar_Result = TRUE;
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
+    }
+}
+
+void sub_815E908(void)
+{
+    if (gMapHeader.mapDataId == 0x0129 && VarGet(VAR_0x4082) == 0)
+    {
+        gSpecialVar_Result = FALSE;
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
+    }
+}
+
+void sub_815E948(void)
+{
+    s32 i;
+    u16 var_4001 = VarGet(VAR_0x4001);
+    u8 r1 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[var_4001].unk_00B;
+
+    for (i = 0; i < NELEMS(gUnknown_847A074); i++)
+    {
+        if (gUnknown_847A074[i].unk0 == gFacilityClassToTrainerClass[r1])
+            break;
+    }
+    if (i != NELEMS(gUnknown_847A074))
+    {
+        var_4001 = gUnknown_847A074[i].unk1;
+    }
+    else
+    {
+        var_4001 = 0;
+    }
+    PlayNewMapMusic(gUnknown_847A2D2[var_4001]);
 }

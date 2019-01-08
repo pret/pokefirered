@@ -295,8 +295,6 @@
 	@ In FireRed, this command is a nop.
 	.macro initclock hour minute
 	.byte 0x2c
-	.byte \hour
-	.byte \minute
 	.endm
 
 	@ In FireRed, this command is a nop.
@@ -304,7 +302,7 @@
 	.byte 0x2d
 	.endm
 
-	@ Resets the values of variables 0x8000, 0x8001, and 0x8002. Related to RTC in RSE?
+	@ Resets the values of variables 0x8000, 0x8001, and 0x8002.
 	.macro gettime
 	.byte 0x2e
 	.endm
@@ -492,7 +490,7 @@
 	.endm
 
 	@ Adds a quantity amount of item index to the player's PC. Both arguments can be variables.
-	.macro addpcitem index, quantity
+	.macro givepcitem index, quantity
 	.byte 0x49
 	.2byte \index
 	.2byte \quantity
@@ -506,27 +504,27 @@
 	.endm
 
 	@ In FireRed, this command is a nop. (The argument is read, but not used for anything.)
-	.macro adddecor a
+	.macro adddecor decoration
 	.byte 0x4b
-	.2byte \a
+	.2byte \decoration
 	.endm
 
 	@ In FireRed, this command is a nop. (The argument is read, but not used for anything.)
-	.macro removedecor a
+	.macro removedecor decoration
 	.byte 0x4c
-	.2byte \a
+	.2byte \decoration
 	.endm
 
 	@ In FireRed, this command is a nop. (The argument is read, but not used for anything.)
-	.macro hasdecor a
+	.macro hasdecor decoration
 	.byte 0x4d
-	.2byte \a
+	.2byte \decoration
 	.endm
 
 	@ In FireRed, this command is a nop. (The argument is read, but not used for anything.)
-	.macro checkdecor a
+	.macro checkdecor decoration
 	.byte 0x4e
-	.2byte \a
+	.2byte \decoration
 	.endm
 
 	@ Applies the movement data at movements to the specified (index) Person event. Also closes any standard message boxes that are still open.
@@ -584,36 +582,35 @@
 		.endif
 	.endm
 
-	.macro setobjectxy word1, word2, word3
-		.byte 0x57
-		.2byte \word1
-		.2byte \word2
-		.2byte \word3
+	@ Sets the specified (index) Object's position on the current map.
+	.macro setobjectxy index, x, y
+	.byte 0x57
+	.2byte \index
+	.2byte \x
+	.2byte \y
 	.endm
 
-	.macro showobject word, byte1, byte2
-		.byte 0x58
-		.2byte \word
-		.byte \byte1
-		.byte \byte2
+	.macro showobject index, map
+	.byte 0x58
+	.2byte \index
+	map \map
 	.endm
 
-	.macro hideobject word, byte1, byte2
-		.byte 0x59
-		.2byte \word
-		.byte \byte1
-		.byte \byte2
+	.macro hideobject index, map
+	.byte 0x59
+	.2byte \index
+	map \map
 	.endm
 
-	@ If the script was called by a Person event, then that Person will turn to face toward the tile that the player is stepping off of.
+	@ If the script was called by an Object, then that Object will turn to face toward the metatile that the player is standing on.
 	.macro faceplayer
-		.byte 0x5a
+	.byte 0x5a
 	.endm
 
-	.macro turnobject word, byte
-		.byte 0x5b
-		.2byte \word
-		.byte \byte
+	.macro turnobject index, direction
+	.byte 0x5b
+	.2byte \index
+	.byte \direction
 	.endm
 
 	@ If the Trainer flag for Trainer index is not set, this command does absolutely nothing.
@@ -691,16 +688,16 @@
 	.2byte \trainer
 	.endm
 
-	.macro setobjectxyperm word1, word2, word3
+	.macro setobjectxyperm index, x, y
 	.byte 0x63
-	.2byte \word1
-	.2byte \word2
-	.2byte \word3
+	.2byte \index
+	.2byte \x
+	.2byte \y
 	.endm
 
-	.macro moveobjectoffscreen word
+	.macro moveobjectoffscreen index
 	.byte 0x64
-	.2byte \word
+	.2byte \index
 	.endm
 
 	.macro setobjectmovementtype word, byte
@@ -725,73 +722,69 @@
 	.byte 0x68
 	.endm
 
-	@ Ceases movement for all OWs on-screen.
+	@ Ceases movement for all Objects on-screen.
 	.macro lockall
 	.byte 0x69
 	.endm
 
-	@ If the script was called by a Person event, then that Person's movement will cease.
+	@ If the script was called by an Object, then that Object's movement will cease.
 	.macro lock
 	.byte 0x6a
 	.endm
 
-	@ Resumes normal movement for all OWs on-screen, and closes any standard message boxes that are still open.
+	@ Resumes normal movement for all Objects on-screen, and closes any standard message boxes that are still open.
 	.macro releaseall
 	.byte 0x6b
 	.endm
 
-	@ If the script was called by a Person event, then that Person's movement will resume. This command also closes any standard message boxes that are still open.
+	@ If the script was called by an Object, then that Object's movement will resume. This command also closes any standard message boxes that are still open.
 	.macro release
 	.byte 0x6c
 	.endm
 
 	@ Blocks script execution until the player presses any key.
-	.macro waitbutton
+	.macro waitbuttonpress
 	.byte 0x6d
 	.endm
 
 	@ Displays a YES/NO multichoice box at the specified coordinates, and blocks script execution until the user makes a selection. Their selection is stored in variable 0x800D (LASTRESULT); 0x0000 for "NO" or if the user pressed B, and 0x0001 for "YES".
-	.macro yesnobox X, Y
+	.macro yesnobox x, y
 	.byte 0x6e
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
 	.endm
 
-	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. If B is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
-	.macro multichoice X, Y, list, B
+	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. If b is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	.macro multichoice x, y, list, b
 	.byte 0x6f
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
 	.byte \list
-	.byte \B
+	.byte \b
 	.endm
 
-	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. The default argument determines the initial position of the cursor when the box is first opened; it is zero-indexed, and if it is too large, it is treated as 0x00. If B is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
-	.macro multichoicedefault X, Y, list, default, B
+	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. The default argument determines the initial position of the cursor when the box is first opened; it is zero-indexed, and if it is too large, it is treated as 0x00. If b is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	.macro multichoicedefault x, y, list, default, b
 	.byte 0x70
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
 	.byte \list
 	.byte \default
-	.byte \B
+	.byte \b
 	.endm
 
 	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. The per_row argument determines how many list items will be shown on a single row of the box.
-	.macro multichoicegrid X, Y, list, per_row, B
+	.macro multichoicegrid x, y, list, per_row, B
 	.byte 0x71
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
 	.byte \list
 	.byte \per_row
 	.byte \B
 	.endm
 
-	.macro drawbox byte1, byte2, byte3, byte4
+	.macro drawbox
 	.byte 0x72
-	.byte \byte1
-	.byte \byte2
-	.byte \byte3
-	.byte \byte4
 	.endm
 
 	.macro erasebox byte1, byte2, byte3, byte4
@@ -802,28 +795,24 @@
 	.byte \byte4
 	.endm
 
-	.macro drawboxtext byte1, byte2, byte3, byte4
+	.macro drawboxtext
 	.byte 0x74
-	.byte \byte1
-	.byte \byte2
-	.byte \byte3
-	.byte \byte4
 	.endm
 
-	@ Displays a box containing the front sprite for the specified (species) Pokmon species.
-	.macro drawpokepic species, X, Y
+	@ Displays a box containing the front sprite for the specified (species) Pokemon species.
+	.macro drawmonpic species, x, y
 	.byte 0x75
 	.2byte \species
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
 	.endm
 
-	@ Hides all boxes displayed with showpokepic.
-	.macro erasepokepic
+	@ Hides all boxes displayed with drawmonpic.
+	.macro erasemonpic
 	.byte 0x76
 	.endm
 
-	@ In FireRed, this command is a nop. (The argument is discarded.)
+	@ Draws an image of the winner of the contest. In FireRed, this command is a nop. (The argument is discarded.)
 	.macro drawcontestwinner a
 	.byte 0x77
 	.byte \a
@@ -846,9 +835,9 @@
 	.byte \unknown3
 	.endm
 
-	.macro giveegg word
+	.macro giveegg species
 	.byte 0x7a
-	.2byte \word
+	.2byte \species
 	.endm
 
 	.macro setpokemove byte1, byte2, word
@@ -858,26 +847,26 @@
 	.2byte \word
 	.endm
 
-	@ Checks if at least one Pokmon in the player's party knows the specified (index) attack. If so, variable 0x800D (LASTRESULT) is set to the (zero-indexed) slot number of the Pokmon that knows the move. If not, LASTRESULT is set to 0x0006.
-	.macro checkpokemove index
+	@ Checks if at least one Pokémon in the player's party knows the specified (index) attack. If so, variable 0x800D (LASTRESULT) is set to the (zero-indexed) slot number of the first Pokémon that knows the move. If not, LASTRESULT is set to 0x0006. Variable 0x8004 is also set to this Pokémon's species.
+	.macro checkpartymove index
 	.byte 0x7c
 	.2byte \index
 	.endm
 
-	@ Writes the name of the Pokmon at index species to the specified buffer.
+	@ Writes the name of the Pokemon at index species to the specified buffer.
 	.macro getspeciesname out, species
 	.byte 0x7d
 	.byte \out
 	.2byte \species
 	.endm
 
-	@ Writes the name of the first Pokmon in the player's party to the specified buffer.
+	@ Writes the name of the species of the first Pokémon in the player's party to the specified buffer.
 	.macro getfirstpartypokename out
 	.byte 0x7e
 	.byte \out
 	.endm
 
-	@ Writes the name of the Pokmon in slot slot (zero-indexed) of the player's party to the specified buffer. If an empty or invalid slot is specified, ten spaces ("") are written to the buffer.
+	@ Writes the nickname of the Pokemon in slot slot (zero-indexed) of the player's party to the specified buffer. If an empty or invalid slot is specified, ten spaces ("") are written to the buffer.
 	.macro getpartypokename out, slot
 	.byte 0x7f
 	.byte \out
@@ -891,18 +880,18 @@
 	.2byte \item
 	.endm
 
-	@ In FireRed, this command is a nop. (The first argument is discarded immediately. The second argument is read, but not used for anything.)
-	.macro getdecorname a, b
+	@ Writes the name of the decoration at index decoration to the specified buffer. In FireRed, this command is a nop.
+	.macro getdecorname out, decoration
 	.byte 0x81
-	.byte \a
-	.2byte \b
+	.byte \out
+	.2byte \decoration
 	.endm
 
-	@ Writes the name of the attack at index attack to the specified buffer.
-	.macro getmovename out, attack
+	@ Writes the name of the move at index move to the specified buffer.
+	.macro getmovename out, move
 	.byte 0x82
 	.byte \out
-	.2byte \attack
+	.2byte \move
 	.endm
 
 	@ Converts the value of input to a decimal string, and writes that string to the specified buffer.
@@ -912,7 +901,7 @@
 	.2byte \input
 	.endm
 
-	@ Writes the standard string identified by index to the specified buffer. Specifying an invalid standard string (e.x. 0x2B) can and usually will cause data corruption (I've observed destruction of the stored player name and crashes when entering/exiting certain menu screens).
+	@ Writes the standard string identified by index to the specified buffer. This command has no protections in place at all, so specifying an invalid standard string (e.x. 0x2B) can and usually will cause data corruption.
 	.macro getstdstring out, index
 	.byte 0x84
 	.byte \out
@@ -944,15 +933,15 @@
 	.4byte \products
 	.endm
 
+	@ Starts up the slot machine minigame.
 	.macro playslotmachine word
 	.byte 0x89
 	.2byte \word
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro plantberrytree byte1, byte2, byte3
+	.macro plantberrytree
 	.byte 0x8a
-	.byte \byte1, \byte2, \byte3
 	.endm
 
 	@ In FireRed, this command sets the byte at 0x03000EA8 to 0x01. I do not know what that means.
@@ -1003,30 +992,29 @@
 	.endm
 
 	@ Spawns a secondary box showing how much money the player has.
-	.macro showmoneybox X, Y
+	.macro showmoneybox x, y, check
 	.byte 0x93
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
+	.byte \check
 	.endm
 
 	@ Hides the secondary box spawned by showmoney.
-	.macro hidemoneybox X, Y
+	.macro hidemoneybox
 	.byte 0x94
-	.byte \X
-	.byte \Y
 	.endm
 
-	@ Updates the secondary box spawned by showmoney. (What does it do with its arguments?)
-	.macro updatemoneybox X, Y
+	@ Updates the secondary box spawned by showmoney. Consumes but does not use arguments.
+	.macro updatemoneybox x, y, check
 	.byte 0x95
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
+	.byte \check
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro getpricereduction word
+	.macro getpricereduction
 	.byte 0x96
-	.2byte \word
 	.endm
 
 	@ Fades the screen to black or back, using the specified effect. Effect 0x00 fades in, and effect 0x01 fades out. I don't know if other effects exist.
@@ -1035,18 +1023,19 @@
 	.byte \effect
 	.endm
 
-	.macro fadescreendelay byte1, byte2
+	@ Fades the screen to and from black and white. Mode 0x00 fades from black, mode 0x01 fades out to black, mode 0x2 fades in from white, and mode 0x3 fades out to white. Other modes may exist.
+	.macro fadescreenspeed effect, speed
 	.byte 0x98
-	.byte \byte1
-	.byte \byte2
+	.byte \effect
+	.byte \speed
 	.endm
 
-	.macro setdarklevel word
+	.macro setflashradius word
 	.byte 0x99
 	.2byte \word
 	.endm
 
-	.macro animdarklevel byte
+	.macro animateflash byte
 	.byte 0x9a
 	.byte \byte
 	.endm
@@ -1062,11 +1051,11 @@
 	.2byte \animation
 	.endm
 
-	@ Tells the game which party Pokmon to use for the next field move animation.
-	.macro setfieldeffect animation, slot
+	@ Sets up the field effect argument argument with the value value.
+	.macro setfieldeffectarg argument, param
 	.byte 0x9d
-	.byte \animation
-	.2byte \slot
+	.byte \argument
+	.2byte \param
 	.endm
 
 	@ Blocks script execution until all playing field move animations complete.
@@ -1075,8 +1064,8 @@
 	.2byte \animation
 	.endm
 
-	@ Sets which healing place the player will return to if all of the Pokmon in their party faint. A list of available healing places can be found on PokeCommunity.
-	.macro sethealplace flightspot
+	@ Sets which healing place the player will return to if all of the Pokemon in their party faint.
+	.macro setrespawn flightspot
 	.byte 0x9f
 	.2byte \flightspot
 	.endm
@@ -1086,19 +1075,19 @@
 	.byte 0xa0
 	.endm
 
-	@ Plays the specified (species) Pokmon's cry. You can use waitcry to block script execution until the sound finishes.
-	.macro playpokecry species, effect
+	@ Plays the specified (species) Pokemon's cry. You can use waitcry to block script execution until the sound finishes.
+	.macro playmoncry species, effect
 	.byte 0xa1
 	.2byte \species
 	.2byte \effect
 	.endm
 
-	@ Changes the tile at (X, Y) on the current map.
-	.macro setmaptile X, Y, tile_number, tile_attrib
+	@ Changes the metatile at (x, y) on the current map.
+	.macro setmetatile x, y, metatile_number, tile_attrib
 	.byte 0xa2
-	.2byte \X
-	.2byte \Y
-	.2byte \tile_number
+	.2byte \x
+	.2byte \y
+	.2byte \metatile_number
 	.2byte \tile_attrib
 	.endm
 
@@ -1119,98 +1108,100 @@
 	.endm
 
 	@ This command manages cases in which maps have tiles that change state when stepped on (specifically, cracked/breakable floors).
-	.macro tileeffect subroutine
+	.macro setstepcallback subroutine
 	.byte 0xa6
 	.byte \subroutine
 	.endm
 
-	.macro setmaplayoutindex word
+	.macro setmaplayoutindex index
 	.byte 0xa7
-	.2byte \word
+	.2byte \index
 	.endm
 
-	.macro setobjectpriority word, byte1, byte2, byte3
+	.macro setobjectpriority index, map, priority
 	.byte 0xa8
-	.2byte \word
-	.byte \byte1
-	.byte \byte2
-	.byte \byte3
+	.2byte \index
+	map \map
+	.byte \priority
 	.endm
 
-	.macro resetobjectpriority word, byte1, byte2
+	.macro resetobjectpriority index, map
 	.byte 0xa9
-	.2byte \word
-	.byte \byte1
-	.byte \byte2
+	.2byte \index
+	map \map
 	.endm
 
-	.macro createvobject byte1, byte2, word1, word2, byte3, byte4
+	.macro createvobject sprite, byte2, x, y, elevation, direction
 	.byte 0xaa
-	.byte \byte1
+	.byte \sprite
 	.byte \byte2
-	.2byte \word1
-	.2byte \word2
-	.byte \byte3
-	.byte \byte4
+	.2byte \x
+	.2byte \y
+	.byte \elevation
+	.byte \direction
 	.endm
 
-	.macro turnvobject byte1, byte2
+	.macro turnvobject index, direction
 	.byte 0xab
-	.byte \byte1
-	.byte \byte2
+	.byte \index
+	.byte \direction
 	.endm
 
-	@ Queues the opening of the door tile at (X, Y) with an animation.
-	.macro opendoor X, Y
+	@ Opens the door metatile at (X, Y) with an animation.
+	.macro opendoor x, y
 	.byte 0xac
-	.2byte \X
-	.2byte \Y
+	.2byte \x
+	.2byte \y
 	.endm
 
-	@ Queues the closing of the door tile at (X, Y) with an animation.
-	.macro closedoor X, Y
+	@ Closes the door metatile at (X, Y) with an animation.
+	.macro closedoor x, y
 	.byte 0xad
-	.2byte \X
-	.2byte \Y
+	.2byte \x
+	.2byte \y
 	.endm
 
-	@ Executes the state changes queued with setdooropened, setdoorclosed, setdooropened2, and setdoorclosed2.
+	@ Waits for the door animation started with opendoor or closedoor to finish.
 	.macro waitdooranim
 	.byte 0xae
 	.endm
 
-	@ Queues the opening of the door tile at (X, Y) without an animation.
-	.macro setdooropen X, Y
+	@ Sets the door tile at (x, y) to be open without an animation.
+	.macro setdooropen x, y
 	.byte 0xaf
-	.2byte \X
-	.2byte \Y
+	.2byte \x
+	.2byte \y
 	.endm
 
-	@ Queues the closing of the door tile at (X, Y) without an animation.
-	.macro setdoorclosed X, Y
+	@ Sets the door tile at (x, y) to be closed without an animation.
+	.macro setdoorclosed2 x, y
 	.byte 0xb0
-	.2byte \X
-	.2byte \Y
+	.2byte \x
+	.2byte \y
 	.endm
 
-	@ In FireRed, this command is a nop.
-	.macro addelevmenuitem
+	@ In Emerald, this command consumes its parameters and does nothing. In FireRed, this command is a nop.
+	.macro addelevmenuitem a, b, c, d
 	.byte 0xb1
+	.byte \a
+	.2byte \b
+	.2byte \c
+	.2byte \d
 	.endm
 
-	@ In FireRed, this command is a nop.
+	@ In FireRed and Emerald, this command is a nop.
 	.macro showelevmenu
 	.byte 0xb2
 	.endm
 
-	.macro checkcoins word
+	.macro checkcoins out
 	.byte 0xb3
-	.2byte \word
+	.2byte \out
 	.endm
 
-	.macro givecoins word
+	.macro givecoins count
 	.byte 0xb4
-	.2byte \word
+	.2byte \count
 	.endm
 
 	.macro takecoins word
@@ -1226,7 +1217,7 @@
 	.2byte \item
 	.endm
 
-	@ Starts a wild battle against the Pokmon generated by setwildbattle. Blocks script execution until the battle finishes.
+	@ Starts a wild battle against the Pokemon generated by setwildbattle. Blocks script execution until the battle finishes.
 	.macro dowildbattle
 	.byte 0xb7
 	.endm
@@ -1264,55 +1255,55 @@
 	.4byte \pointer
 	.endm
 
-	.macro vloadword pointer
+	.macro vloadptr pointer
 	.byte 0xbe
 	.4byte \pointer
 	.endm
 
-	.macro vgetstring byte, pointer
+	.macro vbufferstring byte, pointer
 	.byte 0xbf
 	.byte \byte
 	.4byte \pointer
 	.endm
 
 	@ Spawns a secondary box showing how many Coins the player has.
-	.macro showcoinsbox X, Y
+	.macro showcoinsbox x, y
 	.byte 0xc0
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
 	.endm
 
-	@ Hides the secondary box spawned by showcoins. It doesn't appear to use its arguments, but they are still required.
-	.macro hidecoinsbox X, Y
+	@ Hides the secondary box spawned by showcoins. It consumes its arguments but doesn't use them.
+	.macro hidecoinsbox x, y
 	.byte 0xc1
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
 	.endm
 
-	@ Updates the secondary box spawned by showcoins. (What does it do with its arguments?)
-	.macro updatecoinsbox X, Y
+	@ Updates the secondary box spawned by showcoins. It consumes its arguments but doesn't use them.
+	.macro updatecoinsbox x, y
 	.byte 0xc2
-	.byte \X
-	.byte \Y
+	.byte \x
+	.byte \y
 	.endm
 
-	@ Increases the value of the specified hidden variable by 1. The hidden variable's value will not be allowed to exceed 0x00FFFFFF.
-	.macro incrementgamestat a
+	@ Increases the value of the specified game stat by 1. The stat's value will not be allowed to exceed 0x00FFFFFF.
+	.macro incrementgamestat stat
 	.byte 0xc3
-	.byte \a
+	.byte \stat
 	.endm
 
-	@ Clone of warp... Except that it doesn't appear to have any effect when used in some of FireRed's default level scripts. (If it did, Berry Forest would be impossible to enter...)
-	.macro setescapewarp map, warp, X, Y
+	@ Sets the destination that using an Escape Rope or Dig will take the player to.
+	.macro setescapewarp map, warp, x, y
 	.byte 0xc4
 	map \map
 	.byte \warp
-	.2byte \X
-	.2byte \Y
+	.2byte \x
+	.2byte \y
 	.endm
 
 	@ Blocks script execution until cry finishes.
-	.macro waitpokecry
+	.macro waitmoncry
 	.byte 0xc5
 	.endm
 
@@ -1357,128 +1348,52 @@
 	.4byte \value
 	.endm
 
-	@ Makes the Pokmon in the specified slot of the player's party obedient. It will not randomly disobey orders in battle.
-	.macro setobedience slot
+	@ Makes the Pokemon in the specified slot of the player's party obedient. It will not randomly disobey orders in battle.
+	.macro setmonobedient slot
 	.byte 0xcd
 	.2byte \slot
 	.endm
 
-	@ Checks if the Pokmon in the specified slot of the player's party is obedient. If the Pokmon is disobedient, 0x0001 is written to script variable 0x800D (LASTRESULT). If the Pokmon is obedient (or if the specified slot is empty or invalid), 0x0000 is written.
-	.macro checkobedience slot
+	@ Checks if the Pokemon in the specified slot of the player's party is obedient. If the Pokemon is disobedient, 0x0001 is written to script variable 0x800D (LASTRESULT). If the Pokemon is obedient (or if the specified slot is empty or invalid), 0x0000 is written.
+	.macro checkmonobedience slot
 	.byte 0xce
 	.2byte \slot
 	.endm
 
-	@ Depending on factors I haven't managed to understand yet, this command may cause script execution to jump to the offset specified by the pointer at 0x020370A4.
+	@ Depending on factors I haven't managed to understand yet, this command may cause script execution to jump to the offset specified by the pointer at 0x020375C0.
 	.macro execram
 	.byte 0xcf
 	.endm
 
 	@ Sets worldmapflag to 1. This allows the player to Fly to the corresponding map, if that map has a flightspot.
-	.macro setworldflag worldmapflag
+	.macro setworldmapflag worldmapflag
 	.byte 0xd0
 	.2byte \worldmapflag
 	.endm
 
 	@ Clone of warpteleport? It is apparently only used in FR/LG, and only with specials.[source]
-	.macro warpteleport2 map, warp, X, Y
+	.macro warpteleport2 map, warp, x, y
 	.byte 0xd1
 	map \map
 	.byte \warp
-	.2byte \X
-	.2byte \Y
+	.2byte \x
+	.2byte \y
 	.endm
 
-	@ Changes the location where the player caught the Pokmon in the specified slot of their party. A list of valid catch locations can be found on PokeCommunity.
-	.macro setcatchlocale slot, location
+	@ Changes the location where the player caught the Pokemon in the specified slot of their party.
+	.macro setmonmetlocation slot, location
 	.byte 0xd2
 	.2byte \slot
 	.byte \location
 	.endm
 
-	.macro event_d3 unknown
+	.macro getbraillestringwidth pointer
 	.byte 0xd3
-	.2byte \unknown
+	.4byte \pointer
 	.endm
 
-	.macro event_d4
+	.macro bufferitemnameplural out, item, quantity
 	.byte 0xd4
-	.endm
-
-	@ In FireRed, this command is a nop.
-	.macro event_d5 var
-	.byte 0xd5
-	.2byte \var
-	.endm
-
-	.macro event_d6
-	.byte 0xd6
-	.endm
-
-	.macro warp7 map, byte, word1, word2
-	.byte 0xd7
-	map \map
-	.byte \byte
-	.2byte \word1
-	.2byte \word2
-	.endm
-
-	.macro event_d8
-	.byte 0xd8
-	.endm
-
-	.macro event_d9
-	.byte 0xd9
-	.endm
-
-	.macro hidebox2
-	.byte 0xda
-	.endm
-
-	.macro message3 pointer
-	.byte 0xdb
-	.4byte \pointer
-	.endm
-
-	.macro fadescreen3 byte
-	.byte 0xdc
-	.byte \byte
-	.endm
-
-	.macro buffertrainerclass byte, word
-	.byte 0xdd
-	.byte \byte
-	.2byte \word
-	.endm
-
-	.macro buffertrainername byte, word
-	.byte 0xde
-	.byte \byte
-	.2byte \word
-	.endm
-
-	.macro pokenavcall pointer
-	.byte 0xdf
-	.4byte \pointer
-	.endm
-
-	.macro warp8 map, byte, word1, word2
-	.byte 0xe0
-	map \map
-	.byte \byte
-	.2byte \word1
-	.2byte \word2
-	.endm
-
-	.macro buffercontesttype byte, word
-	.byte 0xe1
-	.byte \byte
-	.2byte \word
-	.endm
-
-	@ Writes the name of the specified (item) item to the specified buffer. If the specified item is a Berry (0x85 - 0xAE) or Poke Ball (0x4) and if the quantity is 2 or more, the buffered string will be pluralized ("IES" or "S" appended). If the specified item is the Enigma Berry, I have no idea what this command does (but testing showed no pluralization). If the specified index is larger than the number of items in the game (0x176), the name of item 0 ("????????") is buffered instead.
-	.macro storeitems out, item, quantity
-	.byte 0xe2
 	.byte \out
 	.2byte \item
 	.2byte \quantity
@@ -1515,9 +1430,4 @@
 	setorcopyvar 0x8000, \item
 	setorcopyvar 0x8001, \amount
 	callstd \function
-	.endm
-
-	.macro givedecoration decoration
-	setorcopyvar 0x8000, \decoration
-	callstd 7
 	.endm

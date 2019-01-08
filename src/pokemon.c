@@ -351,7 +351,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
     CalculateMonStats(mon);
 }
 
-void sub_803E0A4(struct Pokemon *mon, struct UnknownPokemonStruct *src)
+void sub_803E0A4(struct Pokemon *mon, struct BattleTowerPokemon *src)
 {
     s32 i;
     u8 value;
@@ -410,7 +410,7 @@ void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u
     SetMonData(mon, MON_DATA_OBEDIENCE, &obedient);
 }
 
-void sub_803E23C(struct Pokemon *mon, struct UnknownPokemonStruct *dest)
+void sub_803E23C(struct Pokemon *mon, struct BattleTowerPokemon *dest)
 {
     s32 i;
     u16 heldItem;

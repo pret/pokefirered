@@ -139,6 +139,7 @@ void sub_815E908(void);
 void sub_815E948(void);
 void sub_815E9C8(void);
 void sub_815E9FC(void);
+s32 sub_815EBB8(void);
 void sub_815EC0C(void);
 u32 sub_815EDDC(u32 *);
 void sub_815EDF4(u32 *, u32);
@@ -158,6 +159,9 @@ extern const struct UnkSubstruct_203F458_000C *const gUnknown_84827B4[][8];
 extern const u16 gUnknown_847A284[8][3];
 extern const u16 gUnknown_847A2B4[];
 extern const u16 gUnknown_847A2D2[];
+extern const u8 gUnknown_847A2EE[][2];
+extern const u8 gUnknown_847A2FE[][2];
+extern const u8 gUnknown_847A30E[][3];
 
 bool32 sub_815D7BC(void * dest, void * buffer)
 {
@@ -1004,4 +1008,52 @@ void sub_815E948(void)
         var_4001 = 0;
     }
     PlayNewMapMusic(gUnknown_847A2D2[var_4001]);
+}
+
+void sub_815E9C8(void)
+{
+    gSpecialVar_Result = gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2;
+}
+
+void sub_815E9FC(void)
+{
+    u16 r4 = VarGet(VAR_0x4001);
+    s32 r9 = sub_815EBB8();
+    u8 r5 = gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8;
+    s32 r6;
+    u8 r2;
+
+    ZeroEnemyPartyMons();
+
+    switch (gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002)
+    {
+        case 0:
+        default:
+            for (r6 = 0; r6 < 2; r6++)
+            /*
+             * sp+0 := r5 * 2
+             * r5 := gUnknown_203F458
+             * r7 := r4 * 72
+             * r8 := r7 + 4
+             */
+            {
+                r2 = gUnknown_847A2EE[r5][r6];
+                gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
+                sub_803E0A4(&gEnemyParty[r6], &gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
+            }
+            break;
+        case 1:
+            r2 = gUnknown_847A2FE[r5][0];
+            gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2].level = r9;
+            sub_803E0A4(&gEnemyParty[0], &gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2]);
+            r2 = gUnknown_847A2FE[r5][1];
+            gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2].level = r9;
+            sub_803E0A4(&gEnemyParty[1], &gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2]);
+            break;
+        case 2:
+            r2 = gUnknown_847A30E[r5][r4];
+            gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
+            sub_803E0A4(&gEnemyParty[0], &gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
+            break;
+    }
 }

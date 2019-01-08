@@ -909,7 +909,15 @@ gUnknown_826D2B0:: @ 826D2B0
 	.incbin "baserom.gba", 0x26D2B0, 0x28
 
 gDirectionToVectors:: @ 826D2D8
-	.incbin "baserom.gba", 0x26D2D8, 0x48
+	.4byte  0,  0
+	.4byte  0,  1
+	.4byte  0, -1
+	.4byte -1,  0
+	.4byte  1,  0
+	.4byte -1,  1
+	.4byte  1,  1
+	.4byte -1, -1
+	.4byte  1, -1
 
 gUnknown_826D320:: @ 826D320
 	.incbin "baserom.gba", 0x26D320, 0x10

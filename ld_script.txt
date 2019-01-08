@@ -367,7 +367,7 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         data/data.o(.rodata);
-        data/fieldmap.o(.rodata);
+        data/connections.o(.rodata);
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
         data/metatile_behavior.o(.rodata);

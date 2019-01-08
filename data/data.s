@@ -909,7 +909,15 @@ gUnknown_826D2B0:: @ 826D2B0
 	.incbin "baserom.gba", 0x26D2B0, 0x28
 
 gDirectionToVectors:: @ 826D2D8
-	.incbin "baserom.gba", 0x26D2D8, 0x48
+	.4byte  0,  0
+	.4byte  0,  1
+	.4byte  0, -1
+	.4byte -1,  0
+	.4byte  1,  0
+	.4byte -1,  1
+	.4byte  1,  1
+	.4byte -1, -1
+	.4byte  1, -1
 
 gUnknown_826D320:: @ 826D320
 	.incbin "baserom.gba", 0x26D320, 0x10
@@ -918,13 +926,29 @@ gUnknown_826D330:: @ 826D330
 	.incbin "baserom.gba", 0x26D330, 0xC
 
 gUnknown_826D33C:: @ 826D33C
-	.incbin "baserom.gba", 0x26D33C, 0xC
+	.4byte sub_8058684
+	.4byte sub_80586A4
+	.4byte sub_80586A8
 
 gUnknown_826D348:: @ 826D348
-	.incbin "baserom.gba", 0x26D348, 0x2C
+	.4byte sub_80586C8
+	.4byte sub_80586CC
+	.4byte sub_80586CC
+	.4byte sub_80586CC
+	.4byte sub_80586CC
+	.4byte sub_80586C8
+	.4byte sub_80586C8
+	.4byte sub_8058734
+	.4byte sub_8058734
+	.4byte sub_8058734
+	.4byte sub_8058734
 
 gUnknown_826D374:: @ 826D374
-	.incbin "baserom.gba", 0x26D374, 0x78258
+	.4byte sub_805874C
+	.4byte sub_8058754
+
+gUnknown_826D37C:: @ 826D37C
+	.incbin "baserom.gba", 0x26D37C, 0x78250
 
 gUnknown_82E55CC:: @ 82E55CC
 	.incbin "baserom.gba", 0x2E55CC, 0x695C0

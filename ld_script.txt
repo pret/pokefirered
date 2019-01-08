@@ -267,7 +267,6 @@ SECTIONS {
         asm/ss_anne.o(.text);
         asm/cereader_tool.o(.text);
         src/trainer_tower.o(.text);
-        asm/trainer_tower.o(.text);
         asm/unk_815EDDC.o(.text);
         asm/unk_815F138.o(.text);
         asm/berry_fix_program.o(.text);
@@ -367,7 +366,7 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         data/data.o(.rodata);
-        data/fieldmap.o(.rodata);
+        data/connections.o(.rodata);
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
         data/metatile_behavior.o(.rodata);
@@ -395,7 +394,6 @@ SECTIONS {
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);
         src/trainer_tower.o(.rodata);
-        data/trainer_tower.o(.rodata);
         data/data_8471F00.o(.rodata.after_trainer_tower);
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);

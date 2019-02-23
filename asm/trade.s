@@ -2487,7 +2487,7 @@ _0804DB1A:
 	bne _0804DB5A
 	adds r0, r4, 0
 	movs r1, 0x2
-	ldr r2, _0804DB74 @ =gUnknown_8246BE5
+	ldr r2, _0804DB74 @ = gSpeciesNames + 0xD05
 	bl SetMonData
 _0804DB5A:
 	adds r4, 0x64
@@ -2500,7 +2500,7 @@ _0804DB5A:
 _0804DB68: .4byte gEnemyParty
 _0804DB6C: .4byte 0x0000012f
 _0804DB70: .4byte gUnknown_8262034
-_0804DB74: .4byte gUnknown_8246BE5
+_0804DB74: .4byte gSpeciesNames+0xD05
 _0804DB78:
 	ldr r2, _0804DBA8 @ =gUnknown_2031DA8
 	ldr r1, [r2]

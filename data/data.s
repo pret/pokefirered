@@ -129,10 +129,7 @@ gTrainers:: @ 823EAD8
 	.incbin "baserom.gba", 0x23EAC8, 0x7418
 
 gSpeciesNames:: @ 8245EE0
-	.incbin "baserom.gba", 0x245EE0, 0xD05
-
-gUnknown_8246BE5:: @ 8246BE5
-	.incbin "baserom.gba", 0x246BE5, 0x4AF
+	.include "data/text/species_names.inc"
 
 gMoveNames:: @ 8247094
 	.incbin "baserom.gba", 0x247094, 0xF97

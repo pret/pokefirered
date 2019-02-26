@@ -1,1788 +1,1788 @@
-gMap_00_00:: @ 834F188
+UnknownMap_00_00:: @ 834F188
 	.incbin "baserom.gba", 0x34F188, 0x1C
 
-gMap_00_01:: @ 834F1A4
+UnknownMap_00_01:: @ 834F1A4
 	.incbin "baserom.gba", 0x34F1A4, 0x1C
 
-gMap_00_02:: @ 834F1C0
+UnknownMap_00_02:: @ 834F1C0
 	.incbin "baserom.gba", 0x34F1C0, 0x1C
 
-gMap_00_03:: @ 834F1DC
+UnknownMap_00_03:: @ 834F1DC
 	.incbin "baserom.gba", 0x34F1DC, 0x1C
 
-gMap_00_04:: @ 834F1F8
+UnknownMap_00_04:: @ 834F1F8
 	.incbin "baserom.gba", 0x34F1F8, 0x1C
 
-gMap_01_00:: @ 834F214
+ViridianForest:: @ 834F214
 	.incbin "baserom.gba", 0x34F214, 0x1C
 
-gMap_01_01:: @ 834F230
+MtMoon_1F:: @ 834F230
 	.incbin "baserom.gba", 0x34F230, 0x1C
 
-gMap_01_02:: @ 834F24C
+MtMoon_B1F:: @ 834F24C
 	.incbin "baserom.gba", 0x34F24C, 0x1C
 
-gMap_01_03:: @ 834F268
+MtMoon_B2F:: @ 834F268
 	.incbin "baserom.gba", 0x34F268, 0x1C
 
-gMap_01_04:: @ 834F284
+SSAnne_Exterior:: @ 834F284
 	.incbin "baserom.gba", 0x34F284, 0x1C
 
-gMap_01_05:: @ 834F2A0
+SSAnne_1F_Corridor:: @ 834F2A0
 	.incbin "baserom.gba", 0x34F2A0, 0x1C
 
-gMap_01_06:: @ 834F2BC
+SSAnne_2F_Corridor:: @ 834F2BC
 	.incbin "baserom.gba", 0x34F2BC, 0x1C
 
-gMap_01_07:: @ 834F2D8
+SSAnne_3F_Corridor:: @ 834F2D8
 	.incbin "baserom.gba", 0x34F2D8, 0x1C
 
-gMap_01_08:: @ 834F2F4
+SSAnne_B1F_Corridor:: @ 834F2F4
 	.incbin "baserom.gba", 0x34F2F4, 0x1C
 
-gMap_01_09:: @ 834F310
+SSAnne_Deck:: @ 834F310
 	.incbin "baserom.gba", 0x34F310, 0x1C
 
-gMap_01_10:: @ 834F32C
+SSAnne_Kitchen:: @ 834F32C
 	.incbin "baserom.gba", 0x34F32C, 0x1C
 
-gMap_01_11:: @ 834F348
+SSAnne_CaptainsOffice:: @ 834F348
 	.incbin "baserom.gba", 0x34F348, 0x1C
 
-gMap_01_12:: @ 834F364
+SSAnne_1F_Room1:: @ 834F364
 	.incbin "baserom.gba", 0x34F364, 0x1C
 
-gMap_01_13:: @ 834F380
+SSAnne_1F_Room2:: @ 834F380
 	.incbin "baserom.gba", 0x34F380, 0x1C
 
-gMap_01_14:: @ 834F39C
+SSAnne_1F_Room3:: @ 834F39C
 	.incbin "baserom.gba", 0x34F39C, 0x1C
 
-gMap_01_15:: @ 834F3B8
+SSAnne_1F_Room4:: @ 834F3B8
 	.incbin "baserom.gba", 0x34F3B8, 0x1C
 
-gMap_01_16:: @ 834F3D4
+SSAnne_1F_Room5:: @ 834F3D4
 	.incbin "baserom.gba", 0x34F3D4, 0x1C
 
-gMap_01_17:: @ 834F3F0
+SSAnne_1F_Room7:: @ 834F3F0
 	.incbin "baserom.gba", 0x34F3F0, 0x1C
 
-gMap_01_18:: @ 834F40C
+SSAnne_2F_Room1:: @ 834F40C
 	.incbin "baserom.gba", 0x34F40C, 0x1C
 
-gMap_01_19:: @ 834F428
+SSAnne_2F_Room2:: @ 834F428
 	.incbin "baserom.gba", 0x34F428, 0x1C
 
-gMap_01_20:: @ 834F444
+SSAnne_2F_Room3:: @ 834F444
 	.incbin "baserom.gba", 0x34F444, 0x1C
 
-gMap_01_21:: @ 834F460
+SSAnne_2F_Room4:: @ 834F460
 	.incbin "baserom.gba", 0x34F460, 0x1C
 
-gMap_01_22:: @ 834F47C
+SSAnne_2F_Room5:: @ 834F47C
 	.incbin "baserom.gba", 0x34F47C, 0x1C
 
-gMap_01_23:: @ 834F498
+SSAnne_2F_Room6:: @ 834F498
 	.incbin "baserom.gba", 0x34F498, 0x1C
 
-gMap_01_24:: @ 834F4B4
+SSAnne_B1F_Room1:: @ 834F4B4
 	.incbin "baserom.gba", 0x34F4B4, 0x1C
 
-gMap_01_25:: @ 834F4D0
+SSAnne_B1F_Room2:: @ 834F4D0
 	.incbin "baserom.gba", 0x34F4D0, 0x1C
 
-gMap_01_26:: @ 834F4EC
+SSAnne_B1F_Room3:: @ 834F4EC
 	.incbin "baserom.gba", 0x34F4EC, 0x1C
 
-gMap_01_27:: @ 834F508
+SSAnne_B1F_Room4:: @ 834F508
 	.incbin "baserom.gba", 0x34F508, 0x1C
 
-gMap_01_28:: @ 834F524
+SSAnne_B1F_Room5:: @ 834F524
 	.incbin "baserom.gba", 0x34F524, 0x1C
 
-gMap_01_29:: @ 834F540
+SSAnne_1F_Room6:: @ 834F540
 	.incbin "baserom.gba", 0x34F540, 0x1C
 
-gMap_01_30:: @ 834F55C
+UndergroundPath_NorthEntrance:: @ 834F55C
 	.incbin "baserom.gba", 0x34F55C, 0x1C
 
-gMap_01_31:: @ 834F578
+UndergroundPath_NorthSouthTunnel:: @ 834F578
 	.incbin "baserom.gba", 0x34F578, 0x1C
 
-gMap_01_32:: @ 834F594
+UndergroundPath_SouthEntrance:: @ 834F594
 	.incbin "baserom.gba", 0x34F594, 0x1C
 
-gMap_01_33:: @ 834F5B0
+UndergroundPath_WestEntrance:: @ 834F5B0
 	.incbin "baserom.gba", 0x34F5B0, 0x1C
 
-gMap_01_34:: @ 834F5CC
+UndergroundPath_EastWestTunnel:: @ 834F5CC
 	.incbin "baserom.gba", 0x34F5CC, 0x1C
 
-gMap_01_35:: @ 834F5E8
+UndergroundPath_EastEntrance:: @ 834F5E8
 	.incbin "baserom.gba", 0x34F5E8, 0x1C
 
-gMap_01_36:: @ 834F604
+DiglettsCave_NorthEntrance:: @ 834F604
 	.incbin "baserom.gba", 0x34F604, 0x1C
 
-gMap_01_37:: @ 834F620
+DiglettsCave_B1F:: @ 834F620
 	.incbin "baserom.gba", 0x34F620, 0x1C
 
-gMap_01_38:: @ 834F63C
+DiglettsCave_SouthEntrance:: @ 834F63C
 	.incbin "baserom.gba", 0x34F63C, 0x1C
 
-gMap_01_39:: @ 834F658
+VictoryRoad_1F:: @ 834F658
 	.incbin "baserom.gba", 0x34F658, 0x1C
 
-gMap_01_40:: @ 834F674
+VictoryRoad_2F:: @ 834F674
 	.incbin "baserom.gba", 0x34F674, 0x1C
 
-gMap_01_41:: @ 834F690
+VictoryRoad_3F:: @ 834F690
 	.incbin "baserom.gba", 0x34F690, 0x1C
 
-gMap_01_42:: @ 834F6AC
+RocketHideout_B1F:: @ 834F6AC
 	.incbin "baserom.gba", 0x34F6AC, 0x1C
 
-gMap_01_43:: @ 834F6C8
+RocketHideout_B2F:: @ 834F6C8
 	.incbin "baserom.gba", 0x34F6C8, 0x1C
 
-gMap_01_44:: @ 834F6E4
+RocketHideout_B3F:: @ 834F6E4
 	.incbin "baserom.gba", 0x34F6E4, 0x1C
 
-gMap_01_45:: @ 834F700
+RocketHideout_B4F:: @ 834F700
 	.incbin "baserom.gba", 0x34F700, 0x1C
 
-gMap_01_46:: @ 834F71C
+RocketHideout_Elevator:: @ 834F71C
 	.incbin "baserom.gba", 0x34F71C, 0x1C
 
-gMap_01_47:: @ 834F738
+SilphCo_1F:: @ 834F738
 	.incbin "baserom.gba", 0x34F738, 0x1C
 
-gMap_01_48:: @ 834F754
+SilphCo_2F:: @ 834F754
 	.incbin "baserom.gba", 0x34F754, 0x1C
 
-gMap_01_49:: @ 834F770
+SilphCo_3F:: @ 834F770
 	.incbin "baserom.gba", 0x34F770, 0x1C
 
-gMap_01_50:: @ 834F78C
+SilphCo_4F:: @ 834F78C
 	.incbin "baserom.gba", 0x34F78C, 0x1C
 
-gMap_01_51:: @ 834F7A8
+SilphCo_5F:: @ 834F7A8
 	.incbin "baserom.gba", 0x34F7A8, 0x1C
 
-gMap_01_52:: @ 834F7C4
+SilphCo_6F:: @ 834F7C4
 	.incbin "baserom.gba", 0x34F7C4, 0x1C
 
-gMap_01_53:: @ 834F7E0
+SilphCo_7F:: @ 834F7E0
 	.incbin "baserom.gba", 0x34F7E0, 0x1C
 
-gMap_01_54:: @ 834F7FC
+SilphCo_8F:: @ 834F7FC
 	.incbin "baserom.gba", 0x34F7FC, 0x1C
 
-gMap_01_55:: @ 834F818
+SilphCo_9F:: @ 834F818
 	.incbin "baserom.gba", 0x34F818, 0x1C
 
-gMap_01_56:: @ 834F834
+SilphCo_10F:: @ 834F834
 	.incbin "baserom.gba", 0x34F834, 0x1C
 
-gMap_01_57:: @ 834F850
+SilphCo_11F:: @ 834F850
 	.incbin "baserom.gba", 0x34F850, 0x1C
 
-gMap_01_58:: @ 834F86C
+SilphCo_Elevator:: @ 834F86C
 	.incbin "baserom.gba", 0x34F86C, 0x1C
 
-gMap_01_59:: @ 834F888
+PokemonMansion_1F:: @ 834F888
 	.incbin "baserom.gba", 0x34F888, 0x1C
 
-gMap_01_60:: @ 834F8A4
+PokemonMansion_2F:: @ 834F8A4
 	.incbin "baserom.gba", 0x34F8A4, 0x1C
 
-gMap_01_61:: @ 834F8C0
+PokemonMansion_3F:: @ 834F8C0
 	.incbin "baserom.gba", 0x34F8C0, 0x1C
 
-gMap_01_62:: @ 834F8DC
+PokemonMansion_B1F:: @ 834F8DC
 	.incbin "baserom.gba", 0x34F8DC, 0x1C
 
-gMap_01_63:: @ 834F8F8
+SafariZone_Center:: @ 834F8F8
 	.incbin "baserom.gba", 0x34F8F8, 0x1C
 
-gMap_01_64:: @ 834F914
+SafariZone_East:: @ 834F914
 	.incbin "baserom.gba", 0x34F914, 0x1C
 
-gMap_01_65:: @ 834F930
+SafariZone_North:: @ 834F930
 	.incbin "baserom.gba", 0x34F930, 0x1C
 
-gMap_01_66:: @ 834F94C
+SafariZone_West:: @ 834F94C
 	.incbin "baserom.gba", 0x34F94C, 0x1C
 
-gMap_01_67:: @ 834F968
+SafariZone_Building1:: @ 834F968
 	.incbin "baserom.gba", 0x34F968, 0x1C
 
-gMap_01_68:: @ 834F984
+SafariZone_Building2:: @ 834F984
 	.incbin "baserom.gba", 0x34F984, 0x1C
 
-gMap_01_69:: @ 834F9A0
+SafariZone_Building3:: @ 834F9A0
 	.incbin "baserom.gba", 0x34F9A0, 0x1C
 
-gMap_01_70:: @ 834F9BC
+SafariZone_Building4:: @ 834F9BC
 	.incbin "baserom.gba", 0x34F9BC, 0x1C
 
-gMap_01_71:: @ 834F9D8
+SafariZone_SecretHouse:: @ 834F9D8
 	.incbin "baserom.gba", 0x34F9D8, 0x1C
 
-gMap_01_72:: @ 834F9F4
+CeruleanCave_1F:: @ 834F9F4
 	.incbin "baserom.gba", 0x34F9F4, 0x1C
 
-gMap_01_73:: @ 834FA10
+CeruleanCave_2F:: @ 834FA10
 	.incbin "baserom.gba", 0x34FA10, 0x1C
 
-gMap_01_74:: @ 834FA2C
+CeruleanCave_B1F:: @ 834FA2C
 	.incbin "baserom.gba", 0x34FA2C, 0x1C
 
-gMap_01_75:: @ 834FA48
+PokemonLeague_LoreleisRoom:: @ 834FA48
 	.incbin "baserom.gba", 0x34FA48, 0x1C
 
-gMap_01_76:: @ 834FA64
+PokemonLeague_BrunosRoom:: @ 834FA64
 	.incbin "baserom.gba", 0x34FA64, 0x1C
 
-gMap_01_77:: @ 834FA80
+PokemonLeague_AgathasRoom:: @ 834FA80
 	.incbin "baserom.gba", 0x34FA80, 0x1C
 
-gMap_01_78:: @ 834FA9C
+PokemonLeague_LancesRoom:: @ 834FA9C
 	.incbin "baserom.gba", 0x34FA9C, 0x1C
 
-gMap_01_79:: @ 834FAB8
+PokemonLeague_ChampionsRoom:: @ 834FAB8
 	.incbin "baserom.gba", 0x34FAB8, 0x1C
 
-gMap_01_80:: @ 834FAD4
+PokemonLeague_HallOfFame:: @ 834FAD4
 	.incbin "baserom.gba", 0x34FAD4, 0x1C
 
-gMap_01_81:: @ 834FAF0
+RockTunnel_1F:: @ 834FAF0
 	.incbin "baserom.gba", 0x34FAF0, 0x1C
 
-gMap_01_82:: @ 834FB0C
+RockTunnel_B1F:: @ 834FB0C
 	.incbin "baserom.gba", 0x34FB0C, 0x1C
 
-gMap_01_83:: @ 834FB28
+SeafoamIslands_1F:: @ 834FB28
 	.incbin "baserom.gba", 0x34FB28, 0x1C
 
-gMap_01_84:: @ 834FB44
+SeafoamIslands_B1F:: @ 834FB44
 	.incbin "baserom.gba", 0x34FB44, 0x1C
 
-gMap_01_85:: @ 834FB60
+SeafoamIslands_B2F:: @ 834FB60
 	.incbin "baserom.gba", 0x34FB60, 0x1C
 
-gMap_01_86:: @ 834FB7C
+SeafoamIslands_B3F:: @ 834FB7C
 	.incbin "baserom.gba", 0x34FB7C, 0x1C
 
-gMap_01_87:: @ 834FB98
+SeafoamIslands_B4F:: @ 834FB98
 	.incbin "baserom.gba", 0x34FB98, 0x1C
 
-gMap_01_88:: @ 834FBB4
+PokemonTower_1F:: @ 834FBB4
 	.incbin "baserom.gba", 0x34FBB4, 0x1C
 
-gMap_01_89:: @ 834FBD0
+PokemonTower_2F:: @ 834FBD0
 	.incbin "baserom.gba", 0x34FBD0, 0x1C
 
-gMap_01_90:: @ 834FBEC
+PokemonTower_3F:: @ 834FBEC
 	.incbin "baserom.gba", 0x34FBEC, 0x1C
 
-gMap_01_91:: @ 834FC08
+PokemonTower_4F:: @ 834FC08
 	.incbin "baserom.gba", 0x34FC08, 0x1C
 
-gMap_01_92:: @ 834FC24
+PokemonTower_5F:: @ 834FC24
 	.incbin "baserom.gba", 0x34FC24, 0x1C
 
-gMap_01_93:: @ 834FC40
+PokemonTower_6F:: @ 834FC40
 	.incbin "baserom.gba", 0x34FC40, 0x1C
 
-gMap_01_94:: @ 834FC5C
+PokemonTower_7F:: @ 834FC5C
 	.incbin "baserom.gba", 0x34FC5C, 0x1C
 
-gMap_01_95:: @ 834FC78
+PowerPlant:: @ 834FC78
 	.incbin "baserom.gba", 0x34FC78, 0x1C
 
-gMap_01_96:: @ 834FC94
+MtEmber_RubyPath_B4F:: @ 834FC94
 	.incbin "baserom.gba", 0x34FC94, 0x1C
 
-gMap_01_97:: @ 834FCB0
+MtEmber_Exterior:: @ 834FCB0
 	.incbin "baserom.gba", 0x34FCB0, 0x1C
 
-gMap_01_98:: @ 834FCCC
+MtEmber_SummitPath_1F:: @ 834FCCC
 	.incbin "baserom.gba", 0x34FCCC, 0x1C
 
-gMap_01_99:: @ 834FCE8
+MtEmber_SummitPath_2F:: @ 834FCE8
 	.incbin "baserom.gba", 0x34FCE8, 0x1C
 
-gMap_01_100:: @ 834FD04
+MtEmber_SummitPath_3F:: @ 834FD04
 	.incbin "baserom.gba", 0x34FD04, 0x1C
 
-gMap_01_101:: @ 834FD20
+MtEmber_Summit:: @ 834FD20
 	.incbin "baserom.gba", 0x34FD20, 0x1C
 
-gMap_01_102:: @ 834FD3C
+MtEmber_RubyPath_B5F:: @ 834FD3C
 	.incbin "baserom.gba", 0x34FD3C, 0x1C
 
-gMap_01_103:: @ 834FD58
+SSAnne_Kitchen3:: @ 834FD58
 	.incbin "baserom.gba", 0x34FD58, 0x1C
 
-gMap_01_104:: @ 834FD74
+MtEmber_RubyPath_B1F:: @ 834FD74
 	.incbin "baserom.gba", 0x34FD74, 0x1C
 
-gMap_01_105:: @ 834FD90
+MtEmber_RubyPath_B2F:: @ 834FD90
 	.incbin "baserom.gba", 0x34FD90, 0x1C
 
-gMap_01_106:: @ 834FDAC
+MtEmber_RubyPath_B3F:: @ 834FDAC
 	.incbin "baserom.gba", 0x34FDAC, 0x1C
 
-gMap_01_107:: @ 834FDC8
+MtEmber_RubyPath_B1F_Stairs:: @ 834FDC8
 	.incbin "baserom.gba", 0x34FDC8, 0x1C
 
-gMap_01_108:: @ 834FDE4
+MtEmber_RubyPath_B2F_Stairs:: @ 834FDE4
 	.incbin "baserom.gba", 0x34FDE4, 0x1C
 
-gMap_01_109:: @ 834FE00
+ThreeIsland_BerryForest:: @ 834FE00
 	.incbin "baserom.gba", 0x34FE00, 0x1C
 
-gMap_01_110:: @ 834FE1C
+FourIsland_IcefallCave_Entrance:: @ 834FE1C
 	.incbin "baserom.gba", 0x34FE1C, 0x1C
 
-gMap_01_111:: @ 834FE38
+FourIsland_IcefallCave_1F:: @ 834FE38
 	.incbin "baserom.gba", 0x34FE38, 0x1C
 
-gMap_01_112:: @ 834FE54
+SSAnne_CaptainsOffice2:: @ 834FE54
 	.incbin "baserom.gba", 0x34FE54, 0x1C
 
-gMap_01_113:: @ 834FE70
+SSAnne_CaptainsOffice3:: @ 834FE70
 	.incbin "baserom.gba", 0x34FE70, 0x1C
 
-gMap_01_114:: @ 834FE8C
+SSAnne_CaptainsOffice4:: @ 834FE8C
 	.incbin "baserom.gba", 0x34FE8C, 0x1C
 
-gMap_01_115:: @ 834FEA8
+SSAnne_CaptainsOffice5:: @ 834FEA8
 	.incbin "baserom.gba", 0x34FEA8, 0x1C
 
-gMap_01_116:: @ 834FEC4
+SixIsland_DottedHole_B1F:: @ 834FEC4
 	.incbin "baserom.gba", 0x34FEC4, 0x1C
 
-gMap_01_117:: @ 834FEE0
+SixIsland_DottedHole_B2F:: @ 834FEE0
 	.incbin "baserom.gba", 0x34FEE0, 0x1C
 
-gMap_01_118:: @ 834FEFC
+SixIsland_DottedHole_B3F:: @ 834FEFC
 	.incbin "baserom.gba", 0x34FEFC, 0x1C
 
-gMap_01_119:: @ 834FF18
+SSAnne_CaptainsOffice9:: @ 834FF18
 	.incbin "baserom.gba", 0x34FF18, 0x1C
 
-gMap_01_120:: @ 834FF34
+SixIsland_DottedHole_SapphireRoom:: @ 834FF34
 	.incbin "baserom.gba", 0x34FF34, 0x1C
 
-gMap_01_121:: @ 834FF50
+SSAnne_1F_Room11:: @ 834FF50
 	.incbin "baserom.gba", 0x34FF50, 0x1C
 
-gMap_01_122:: @ 834FF6C
+SSAnne_1F_Room12:: @ 834FF6C
 	.incbin "baserom.gba", 0x34FF6C, 0x1C
 
-gMap_02_00:: @ 834FF88
+NavelRock_Exterior:: @ 834FF88
 	.incbin "baserom.gba", 0x34FF88, 0x1C
 
-gMap_02_01:: @ 834FFA4
+SevenIsland_TrainerTower_1F:: @ 834FFA4
 	.incbin "baserom.gba", 0x34FFA4, 0x1C
 
-gMap_02_02:: @ 834FFC0
+SevenIsland_TrainerTower_2F:: @ 834FFC0
 	.incbin "baserom.gba", 0x34FFC0, 0x1C
 
-gMap_02_03:: @ 834FFDC
+SevenIsland_TrainerTower_3F:: @ 834FFDC
 	.incbin "baserom.gba", 0x34FFDC, 0x1C
 
-gMap_02_04:: @ 834FFF8
+SevenIsland_TrainerTower_4F:: @ 834FFF8
 	.incbin "baserom.gba", 0x34FFF8, 0x1C
 
-gMap_02_05:: @ 8350014
+SevenIsland_TrainerTower_5F:: @ 8350014
 	.incbin "baserom.gba", 0x350014, 0x1C
 
-gMap_02_06:: @ 8350030
+SevenIsland_TrainerTower_6F:: @ 8350030
 	.incbin "baserom.gba", 0x350030, 0x1C
 
-gMap_02_07:: @ 835004C
+SevenIsland_TrainerTower_7F:: @ 835004C
 	.incbin "baserom.gba", 0x35004C, 0x1C
 
-gMap_02_08:: @ 8350068
+SevenIsland_TrainerTower_8F:: @ 8350068
 	.incbin "baserom.gba", 0x350068, 0x1C
 
-gMap_02_09:: @ 8350084
+SevenIsland_TrainerTower_Roof:: @ 8350084
 	.incbin "baserom.gba", 0x350084, 0x1C
 
-gMap_02_10:: @ 83500A0
+SevenIsland_TrainerTower_Lobby:: @ 83500A0
 	.incbin "baserom.gba", 0x3500A0, 0x1C
 
-gMap_02_11:: @ 83500BC
+SevenIsland_TrainerTower_Elevator:: @ 83500BC
 	.incbin "baserom.gba", 0x3500BC, 0x1C
 
-gMap_02_12:: @ 83500D8
+FiveIsland_LostCave_Entrance:: @ 83500D8
 	.incbin "baserom.gba", 0x3500D8, 0x1C
 
-gMap_02_13:: @ 83500F4
+FiveIsland_LostCave_Room1:: @ 83500F4
 	.incbin "baserom.gba", 0x3500F4, 0x1C
 
-gMap_02_14:: @ 8350110
+FiveIsland_LostCave_Room2:: @ 8350110
 	.incbin "baserom.gba", 0x350110, 0x1C
 
-gMap_02_15:: @ 835012C
+FiveIsland_LostCave_Room3:: @ 835012C
 	.incbin "baserom.gba", 0x35012C, 0x1C
 
-gMap_02_16:: @ 8350148
+FiveIsland_LostCave_Room4:: @ 8350148
 	.incbin "baserom.gba", 0x350148, 0x1C
 
-gMap_02_17:: @ 8350164
+FiveIsland_LostCave_Room5:: @ 8350164
 	.incbin "baserom.gba", 0x350164, 0x1C
 
-gMap_02_18:: @ 8350180
+FiveIsland_LostCave_Room6:: @ 8350180
 	.incbin "baserom.gba", 0x350180, 0x1C
 
-gMap_02_19:: @ 835019C
+FiveIsland_LostCave_Room7:: @ 835019C
 	.incbin "baserom.gba", 0x35019C, 0x1C
 
-gMap_02_20:: @ 83501B8
+FiveIsland_LostCave_Room8:: @ 83501B8
 	.incbin "baserom.gba", 0x3501B8, 0x1C
 
-gMap_02_21:: @ 83501D4
+FiveIsland_LostCave_Room9:: @ 83501D4
 	.incbin "baserom.gba", 0x3501D4, 0x1C
 
-gMap_02_22:: @ 83501F0
+FiveIsland_LostCave_Room10:: @ 83501F0
 	.incbin "baserom.gba", 0x3501F0, 0x1C
 
-gMap_02_23:: @ 835020C
+FiveIsland_LostCave_Room11:: @ 835020C
 	.incbin "baserom.gba", 0x35020C, 0x1C
 
-gMap_02_24:: @ 8350228
+FiveIsland_LostCave_Room12:: @ 8350228
 	.incbin "baserom.gba", 0x350228, 0x1C
 
-gMap_02_25:: @ 8350244
+FiveIsland_LostCave_Room13:: @ 8350244
 	.incbin "baserom.gba", 0x350244, 0x1C
 
-gMap_02_26:: @ 8350260
+FiveIsland_LostCave_Room14:: @ 8350260
 	.incbin "baserom.gba", 0x350260, 0x1C
 
-gMap_02_27:: @ 835027C
+SevenIsland_TanobyRuins_MoneanChamber:: @ 835027C
 	.incbin "baserom.gba", 0x35027C, 0x1C
 
-gMap_02_28:: @ 8350298
+SevenIsland_TanobyRuins_LiptooChamber:: @ 8350298
 	.incbin "baserom.gba", 0x350298, 0x1C
 
-gMap_02_29:: @ 83502B4
+SevenIsland_TanobyRuins_WeepthChamber:: @ 83502B4
 	.incbin "baserom.gba", 0x3502B4, 0x1C
 
-gMap_02_30:: @ 83502D0
+SevenIsland_TanobyRuins_DilfordChamber:: @ 83502D0
 	.incbin "baserom.gba", 0x3502D0, 0x1C
 
-gMap_02_31:: @ 83502EC
+SevenIsland_TanobyRuins_ScufibChamber:: @ 83502EC
 	.incbin "baserom.gba", 0x3502EC, 0x1C
 
-gMap_02_32:: @ 8350308
+SevenIsland_TanobyRuins_RixyChamber:: @ 8350308
 	.incbin "baserom.gba", 0x350308, 0x1C
 
-gMap_02_33:: @ 8350324
+SevenIsland_TanobyRuins_ViapoisChamber:: @ 8350324
 	.incbin "baserom.gba", 0x350324, 0x1C
 
-gMap_02_34:: @ 8350340
+ThreeIsland_DunsparceTunnel:: @ 8350340
 	.incbin "baserom.gba", 0x350340, 0x1C
 
-gMap_02_35:: @ 835035C
+SevenIsland_SeavaultCanyon_TanobyKey:: @ 835035C
 	.incbin "baserom.gba", 0x35035C, 0x1C
 
-gMap_02_36:: @ 8350378
+NavelRock_1F:: @ 8350378
 	.incbin "baserom.gba", 0x350378, 0x1C
 
-gMap_02_37:: @ 8350394
+NavelRock_Summit:: @ 8350394
 	.incbin "baserom.gba", 0x350394, 0x1C
 
-gMap_02_38:: @ 83503B0
+NavelRock_Base:: @ 83503B0
 	.incbin "baserom.gba", 0x3503B0, 0x1C
 
-gMap_02_39:: @ 83503CC
+NavelRock_SummitPath_2F:: @ 83503CC
 	.incbin "baserom.gba", 0x3503CC, 0x1C
 
-gMap_02_40:: @ 83503E8
+NavelRock_SummitPath_3F:: @ 83503E8
 	.incbin "baserom.gba", 0x3503E8, 0x1C
 
-gMap_02_41:: @ 8350404
+NavelRock_SummitPath_4F:: @ 8350404
 	.incbin "baserom.gba", 0x350404, 0x1C
 
-gMap_02_42:: @ 8350420
+NavelRock_SummitPath_5F:: @ 8350420
 	.incbin "baserom.gba", 0x350420, 0x1C
 
-gMap_02_43:: @ 835043C
+NavelRock_BasePath_B1F:: @ 835043C
 	.incbin "baserom.gba", 0x35043C, 0x1C
 
-gMap_02_44:: @ 8350458
+NavelRock_BasePath_B2F:: @ 8350458
 	.incbin "baserom.gba", 0x350458, 0x1C
 
-gMap_02_45:: @ 8350474
+NavelRock_BasePath_B3F:: @ 8350474
 	.incbin "baserom.gba", 0x350474, 0x1C
 
-gMap_02_46:: @ 8350490
+NavelRock_BasePath_B4F:: @ 8350490
 	.incbin "baserom.gba", 0x350490, 0x1C
 
-gMap_02_47:: @ 83504AC
+NavelRock_BasePath_B5F:: @ 83504AC
 	.incbin "baserom.gba", 0x3504AC, 0x1C
 
-gMap_02_48:: @ 83504C8
+NavelRock_BasePath_B6F:: @ 83504C8
 	.incbin "baserom.gba", 0x3504C8, 0x1C
 
-gMap_02_49:: @ 83504E4
+NavelRock_BasePath_B7F:: @ 83504E4
 	.incbin "baserom.gba", 0x3504E4, 0x1C
 
-gMap_02_50:: @ 8350500
+NavelRock_BasePath_B8F:: @ 8350500
 	.incbin "baserom.gba", 0x350500, 0x1C
 
-gMap_02_51:: @ 835051C
+NavelRock_BasePath_B9F:: @ 835051C
 	.incbin "baserom.gba", 0x35051C, 0x1C
 
-gMap_02_52:: @ 8350538
+NavelRock_BasePath_B10F:: @ 8350538
 	.incbin "baserom.gba", 0x350538, 0x1C
 
-gMap_02_53:: @ 8350554
+NavelRock_BasePath_B11F:: @ 8350554
 	.incbin "baserom.gba", 0x350554, 0x1C
 
-gMap_02_54:: @ 8350570
+NavelRock_B1F:: @ 8350570
 	.incbin "baserom.gba", 0x350570, 0x1C
 
-gMap_02_55:: @ 835058C
+NavelRock_Fork:: @ 835058C
 	.incbin "baserom.gba", 0x35058C, 0x1C
 
-gMap_02_56:: @ 83505A8
+BirthIsland_Exterior:: @ 83505A8
 	.incbin "baserom.gba", 0x3505A8, 0x1C
 
-gMap_02_57:: @ 83505C4
+OneIsland_KindleRoad_EmberSpa:: @ 83505C4
 	.incbin "baserom.gba", 0x3505C4, 0x1C
 
-gMap_02_58:: @ 83505E0
+BirthIsland_Harbor:: @ 83505E0
 	.incbin "baserom.gba", 0x3505E0, 0x1C
 
-gMap_02_59:: @ 83505FC
+NavelRock_Harbor:: @ 83505FC
 	.incbin "baserom.gba", 0x3505FC, 0x1C
 
-gMap_03_00:: @ 8350618
+PalletTown:: @ 8350618
 	.incbin "baserom.gba", 0x350618, 0x1C
 
-gMap_03_01:: @ 8350634
+ViridianCity:: @ 8350634
 	.incbin "baserom.gba", 0x350634, 0x1C
 
-gMap_03_02:: @ 8350650
+PewterCity:: @ 8350650
 	.incbin "baserom.gba", 0x350650, 0x1C
 
-gMap_03_03:: @ 835066C
+CeruleanCity:: @ 835066C
 	.incbin "baserom.gba", 0x35066C, 0x1C
 
-gMap_03_04:: @ 8350688
+LavenderTown:: @ 8350688
 	.incbin "baserom.gba", 0x350688, 0x1C
 
-gMap_03_05:: @ 83506A4
+VermilionCity:: @ 83506A4
 	.incbin "baserom.gba", 0x3506A4, 0x1C
 
-gMap_03_06:: @ 83506C0
+CeladonCity:: @ 83506C0
 	.incbin "baserom.gba", 0x3506C0, 0x1C
 
-gMap_03_07:: @ 83506DC
+FuchsiaCity:: @ 83506DC
 	.incbin "baserom.gba", 0x3506DC, 0x1C
 
-gMap_03_08:: @ 83506F8
+CinnabarIsland:: @ 83506F8
 	.incbin "baserom.gba", 0x3506F8, 0x1C
 
-gMap_03_09:: @ 8350714
+IndigoPlateau_Exterior:: @ 8350714
 	.incbin "baserom.gba", 0x350714, 0x1C
 
-gMap_03_10:: @ 8350730
+SaffronCity:: @ 8350730
 	.incbin "baserom.gba", 0x350730, 0x1C
 
-gMap_03_11:: @ 835074C
+SaffronCity_Duplicate:: @ 835074C
 	.incbin "baserom.gba", 0x35074C, 0x1C
 
-gMap_03_12:: @ 8350768
+OneIsland:: @ 8350768
 	.incbin "baserom.gba", 0x350768, 0x1C
 
-gMap_03_13:: @ 8350784
+TwoIsland:: @ 8350784
 	.incbin "baserom.gba", 0x350784, 0x1C
 
-gMap_03_14:: @ 83507A0
+ThreeIsland:: @ 83507A0
 	.incbin "baserom.gba", 0x3507A0, 0x1C
 
-gMap_03_15:: @ 83507BC
+FourIsland:: @ 83507BC
 	.incbin "baserom.gba", 0x3507BC, 0x1C
 
-gMap_03_16:: @ 83507D8
+FiveIsland:: @ 83507D8
 	.incbin "baserom.gba", 0x3507D8, 0x1C
 
-gMap_03_17:: @ 83507F4
+SevenIsland:: @ 83507F4
 	.incbin "baserom.gba", 0x3507F4, 0x1C
 
-gMap_03_18:: @ 8350810
+SixIsland:: @ 8350810
 	.incbin "baserom.gba", 0x350810, 0x1C
 
-gMap_03_19:: @ 835082C
+Route1:: @ 835082C
 	.incbin "baserom.gba", 0x35082C, 0x1C
 
-gMap_03_20:: @ 8350848
+Route2:: @ 8350848
 	.incbin "baserom.gba", 0x350848, 0x1C
 
-gMap_03_21:: @ 8350864
+Route3:: @ 8350864
 	.incbin "baserom.gba", 0x350864, 0x1C
 
-gMap_03_22:: @ 8350880
+Route4:: @ 8350880
 	.incbin "baserom.gba", 0x350880, 0x1C
 
-gMap_03_23:: @ 835089C
+Route5:: @ 835089C
 	.incbin "baserom.gba", 0x35089C, 0x1C
 
-gMap_03_24:: @ 83508B8
+Route6:: @ 83508B8
 	.incbin "baserom.gba", 0x3508B8, 0x1C
 
-gMap_03_25:: @ 83508D4
+Route7:: @ 83508D4
 	.incbin "baserom.gba", 0x3508D4, 0x1C
 
-gMap_03_26:: @ 83508F0
+Route8:: @ 83508F0
 	.incbin "baserom.gba", 0x3508F0, 0x1C
 
-gMap_03_27:: @ 835090C
+Route9:: @ 835090C
 	.incbin "baserom.gba", 0x35090C, 0x1C
 
-gMap_03_28:: @ 8350928
+Route10:: @ 8350928
 	.incbin "baserom.gba", 0x350928, 0x1C
 
-gMap_03_29:: @ 8350944
+Route11:: @ 8350944
 	.incbin "baserom.gba", 0x350944, 0x1C
 
-gMap_03_30:: @ 8350960
+Route12:: @ 8350960
 	.incbin "baserom.gba", 0x350960, 0x1C
 
-gMap_03_31:: @ 835097C
+Route13:: @ 835097C
 	.incbin "baserom.gba", 0x35097C, 0x1C
 
-gMap_03_32:: @ 8350998
+Route14:: @ 8350998
 	.incbin "baserom.gba", 0x350998, 0x1C
 
-gMap_03_33:: @ 83509B4
+Route15:: @ 83509B4
 	.incbin "baserom.gba", 0x3509B4, 0x1C
 
-gMap_03_34:: @ 83509D0
+Route16:: @ 83509D0
 	.incbin "baserom.gba", 0x3509D0, 0x1C
 
-gMap_03_35:: @ 83509EC
+Route17:: @ 83509EC
 	.incbin "baserom.gba", 0x3509EC, 0x1C
 
-gMap_03_36:: @ 8350A08
+Route18:: @ 8350A08
 	.incbin "baserom.gba", 0x350A08, 0x1C
 
-gMap_03_37:: @ 8350A24
+Route19:: @ 8350A24
 	.incbin "baserom.gba", 0x350A24, 0x1C
 
-gMap_03_38:: @ 8350A40
+Route20:: @ 8350A40
 	.incbin "baserom.gba", 0x350A40, 0x1C
 
-gMap_03_39:: @ 8350A5C
+Route21_North:: @ 8350A5C
 	.incbin "baserom.gba", 0x350A5C, 0x1C
 
-gMap_03_40:: @ 8350A78
+Route21_South:: @ 8350A78
 	.incbin "baserom.gba", 0x350A78, 0x1C
 
-gMap_03_41:: @ 8350A94
+Route22:: @ 8350A94
 	.incbin "baserom.gba", 0x350A94, 0x1C
 
-gMap_03_42:: @ 8350AB0
+Route23:: @ 8350AB0
 	.incbin "baserom.gba", 0x350AB0, 0x1C
 
-gMap_03_43:: @ 8350ACC
+Route24:: @ 8350ACC
 	.incbin "baserom.gba", 0x350ACC, 0x1C
 
-gMap_03_44:: @ 8350AE8
+Route25:: @ 8350AE8
 	.incbin "baserom.gba", 0x350AE8, 0x1C
 
-gMap_03_45:: @ 8350B04
+OneIsland_KindleRoad:: @ 8350B04
 	.incbin "baserom.gba", 0x350B04, 0x1C
 
-gMap_03_46:: @ 8350B20
+OneIsland_TreasureBeach:: @ 8350B20
 	.incbin "baserom.gba", 0x350B20, 0x1C
 
-gMap_03_47:: @ 8350B3C
+TwoIsland_CapeBrink:: @ 8350B3C
 	.incbin "baserom.gba", 0x350B3C, 0x1C
 
-gMap_03_48:: @ 8350B58
+ThreeIsland_BondBridge:: @ 8350B58
 	.incbin "baserom.gba", 0x350B58, 0x1C
 
-gMap_03_49:: @ 8350B74
+ThreeIsland_Port:: @ 8350B74
 	.incbin "baserom.gba", 0x350B74, 0x1C
 
-gMap_03_50:: @ 8350B90
+UnknownMap_03_50:: @ 8350B90
 	.incbin "baserom.gba", 0x350B90, 0x1C
 
-gMap_03_51:: @ 8350BAC
+UnknownMap_03_51:: @ 8350BAC
 	.incbin "baserom.gba", 0x350BAC, 0x1C
 
-gMap_03_52:: @ 8350BC8
+UnknownMap_03_52:: @ 8350BC8
 	.incbin "baserom.gba", 0x350BC8, 0x1C
 
-gMap_03_53:: @ 8350BE4
+UnknownMap_03_53:: @ 8350BE4
 	.incbin "baserom.gba", 0x350BE4, 0x1C
 
-gMap_03_54:: @ 8350C00
+FiveIsland_ResortGorgeous:: @ 8350C00
 	.incbin "baserom.gba", 0x350C00, 0x1C
 
-gMap_03_55:: @ 8350C1C
+FiveIsland_WaterLabyrinth:: @ 8350C1C
 	.incbin "baserom.gba", 0x350C1C, 0x1C
 
-gMap_03_56:: @ 8350C38
+FiveIsland_Meadow:: @ 8350C38
 	.incbin "baserom.gba", 0x350C38, 0x1C
 
-gMap_03_57:: @ 8350C54
+FiveIsland_MemorialPillar:: @ 8350C54
 	.incbin "baserom.gba", 0x350C54, 0x1C
 
-gMap_03_58:: @ 8350C70
+SixIsland_OutcastIsland:: @ 8350C70
 	.incbin "baserom.gba", 0x350C70, 0x1C
 
-gMap_03_59:: @ 8350C8C
+SixIsland_GreenPath:: @ 8350C8C
 	.incbin "baserom.gba", 0x350C8C, 0x1C
 
-gMap_03_60:: @ 8350CA8
+SixIsland_WaterPath:: @ 8350CA8
 	.incbin "baserom.gba", 0x350CA8, 0x1C
 
-gMap_03_61:: @ 8350CC4
+SixIsland_RuinValley:: @ 8350CC4
 	.incbin "baserom.gba", 0x350CC4, 0x1C
 
-gMap_03_62:: @ 8350CE0
+SevenIsland_TrainerTower:: @ 8350CE0
 	.incbin "baserom.gba", 0x350CE0, 0x1C
 
-gMap_03_63:: @ 8350CFC
+SevenIsland_SevaultCanyon_Entrance:: @ 8350CFC
 	.incbin "baserom.gba", 0x350CFC, 0x1C
 
-gMap_03_64:: @ 8350D18
+SevenIsland_SevaultCanyon:: @ 8350D18
 	.incbin "baserom.gba", 0x350D18, 0x1C
 
-gMap_03_65:: @ 8350D34
+SevenIsland_TanobyRuins:: @ 8350D34
 	.incbin "baserom.gba", 0x350D34, 0x1C
 
-gMap_04_00:: @ 8350D50
+PalletTown_PlayersHouse_1F:: @ 8350D50
 	.incbin "baserom.gba", 0x350D50, 0x1C
 
-gMap_04_01:: @ 8350D6C
+PalletTown_PlayersHouse_2F:: @ 8350D6C
 	.incbin "baserom.gba", 0x350D6C, 0x1C
 
-gMap_04_02:: @ 8350D88
+PalletTown_GarysHouse:: @ 8350D88
 	.incbin "baserom.gba", 0x350D88, 0x1C
 
-gMap_04_03:: @ 8350DA4
+PalletTown_ProfessorOaksLab:: @ 8350DA4
 	.incbin "baserom.gba", 0x350DA4, 0x1C
 
-gMap_05_00:: @ 8350DC0
+ViridianCity_House1:: @ 8350DC0
 	.incbin "baserom.gba", 0x350DC0, 0x1C
 
-gMap_05_01:: @ 8350DDC
+ViridianCity_Gym:: @ 8350DDC
 	.incbin "baserom.gba", 0x350DDC, 0x1C
 
-gMap_05_02:: @ 8350DF8
+ViridianCity_House2:: @ 8350DF8
 	.incbin "baserom.gba", 0x350DF8, 0x1C
 
-gMap_05_03:: @ 8350E14
+ViridianCity_Mart:: @ 8350E14
 	.incbin "baserom.gba", 0x350E14, 0x1C
 
-gMap_05_04:: @ 8350E30
+ViridianCity_PokemonCenter_1F:: @ 8350E30
 	.incbin "baserom.gba", 0x350E30, 0x1C
 
-gMap_05_05:: @ 8350E4C
+ViridianCity_PokemonCenter_2F:: @ 8350E4C
 	.incbin "baserom.gba", 0x350E4C, 0x1C
 
-gMap_06_00:: @ 8350E68
+PewterCity_Museum_1F:: @ 8350E68
 	.incbin "baserom.gba", 0x350E68, 0x1C
 
-gMap_06_01:: @ 8350E84
+PewterCity_Museum_2F:: @ 8350E84
 	.incbin "baserom.gba", 0x350E84, 0x1C
 
-gMap_06_02:: @ 8350EA0
+PewterCity_Gym:: @ 8350EA0
 	.incbin "baserom.gba", 0x350EA0, 0x1C
 
-gMap_06_03:: @ 8350EBC
+PewterCity_Mart:: @ 8350EBC
 	.incbin "baserom.gba", 0x350EBC, 0x1C
 
-gMap_06_04:: @ 8350ED8
+PewterCity_House1:: @ 8350ED8
 	.incbin "baserom.gba", 0x350ED8, 0x1C
 
-gMap_06_05:: @ 8350EF4
+PewterCity_PokemonCenter_1F:: @ 8350EF4
 	.incbin "baserom.gba", 0x350EF4, 0x1C
 
-gMap_06_06:: @ 8350F10
+PewterCity_PokemonCenter_2F:: @ 8350F10
 	.incbin "baserom.gba", 0x350F10, 0x1C
 
-gMap_06_07:: @ 8350F2C
+PewterCity_House2:: @ 8350F2C
 	.incbin "baserom.gba", 0x350F2C, 0x1C
 
-gMap_07_00:: @ 8350F48
+CeruleanCity_House1:: @ 8350F48
 	.incbin "baserom.gba", 0x350F48, 0x1C
 
-gMap_07_01:: @ 8350F64
+CeruleanCity_House2:: @ 8350F64
 	.incbin "baserom.gba", 0x350F64, 0x1C
 
-gMap_07_02:: @ 8350F80
+CeruleanCity_House3:: @ 8350F80
 	.incbin "baserom.gba", 0x350F80, 0x1C
 
-gMap_07_03:: @ 8350F9C
+CeruleanCity_PokemonCenter_1F:: @ 8350F9C
 	.incbin "baserom.gba", 0x350F9C, 0x1C
 
-gMap_07_04:: @ 8350FB8
+CeruleanCity_PokemonCenter_2F:: @ 8350FB8
 	.incbin "baserom.gba", 0x350FB8, 0x1C
 
-gMap_07_05:: @ 8350FD4
+CeruleanCity_Gym:: @ 8350FD4
 	.incbin "baserom.gba", 0x350FD4, 0x1C
 
-gMap_07_06:: @ 8350FF0
+CeruleanCity_BikeShop:: @ 8350FF0
 	.incbin "baserom.gba", 0x350FF0, 0x1C
 
-gMap_07_07:: @ 835100C
+CeruleanCity_Mart:: @ 835100C
 	.incbin "baserom.gba", 0x35100C, 0x1C
 
-gMap_07_08:: @ 8351028
+CeruleanCity_House4:: @ 8351028
 	.incbin "baserom.gba", 0x351028, 0x1C
 
-gMap_07_09:: @ 8351044
+CeruleanCity_House5:: @ 8351044
 	.incbin "baserom.gba", 0x351044, 0x1C
 
-gMap_08_00:: @ 8351060
+LavenderTown_PokemonCenter_1F:: @ 8351060
 	.incbin "baserom.gba", 0x351060, 0x1C
 
-gMap_08_01:: @ 835107C
+LavenderTown_PokemonCenter_2F:: @ 835107C
 	.incbin "baserom.gba", 0x35107C, 0x1C
 
-gMap_08_02:: @ 8351098
+LavenderTown_VolunteerPokemonHouse:: @ 8351098
 	.incbin "baserom.gba", 0x351098, 0x1C
 
-gMap_08_03:: @ 83510B4
+LavenderTown_House1:: @ 83510B4
 	.incbin "baserom.gba", 0x3510B4, 0x1C
 
-gMap_08_04:: @ 83510D0
+LavenderTown_House2:: @ 83510D0
 	.incbin "baserom.gba", 0x3510D0, 0x1C
 
-gMap_08_05:: @ 83510EC
+LavenderTown_Mart:: @ 83510EC
 	.incbin "baserom.gba", 0x3510EC, 0x1C
 
-gMap_09_00:: @ 8351108
+VermilionCity_House1:: @ 8351108
 	.incbin "baserom.gba", 0x351108, 0x1C
 
-gMap_09_01:: @ 8351124
+VermilionCity_PokemonCenter_1F:: @ 8351124
 	.incbin "baserom.gba", 0x351124, 0x1C
 
-gMap_09_02:: @ 8351140
+VermilionCity_PokemonCenter_2F:: @ 8351140
 	.incbin "baserom.gba", 0x351140, 0x1C
 
-gMap_09_03:: @ 835115C
+VermilionCity_PokemonFanClub:: @ 835115C
 	.incbin "baserom.gba", 0x35115C, 0x1C
 
-gMap_09_04:: @ 8351178
+VermilionCity_House2:: @ 8351178
 	.incbin "baserom.gba", 0x351178, 0x1C
 
-gMap_09_05:: @ 8351194
+VermilionCity_Mart:: @ 8351194
 	.incbin "baserom.gba", 0x351194, 0x1C
 
-gMap_09_06:: @ 83511B0
+VermilionCity_Gym:: @ 83511B0
 	.incbin "baserom.gba", 0x3511B0, 0x1C
 
-gMap_09_07:: @ 83511CC
+VermilionCity_House3:: @ 83511CC
 	.incbin "baserom.gba", 0x3511CC, 0x1C
 
-gMap_10_00:: @ 83511E8
+CeladonCity_DepartmentStore_1F:: @ 83511E8
 	.incbin "baserom.gba", 0x3511E8, 0x1C
 
-gMap_10_01:: @ 8351204
+CeladonCity_DepartmentStore_2F:: @ 8351204
 	.incbin "baserom.gba", 0x351204, 0x1C
 
-gMap_10_02:: @ 8351220
+CeladonCity_DepartmentStore_3F:: @ 8351220
 	.incbin "baserom.gba", 0x351220, 0x1C
 
-gMap_10_03:: @ 835123C
+CeladonCity_DepartmentStore_4F:: @ 835123C
 	.incbin "baserom.gba", 0x35123C, 0x1C
 
-gMap_10_04:: @ 8351258
+CeladonCity_DepartmentStore_5F:: @ 8351258
 	.incbin "baserom.gba", 0x351258, 0x1C
 
-gMap_10_05:: @ 8351274
+CeladonCity_DepartmentStore_Roof:: @ 8351274
 	.incbin "baserom.gba", 0x351274, 0x1C
 
-gMap_10_06:: @ 8351290
+CeladonCity_DepartmentStore_Elevator:: @ 8351290
 	.incbin "baserom.gba", 0x351290, 0x1C
 
-gMap_10_07:: @ 83512AC
+CeladonCity_Condominiums_1F:: @ 83512AC
 	.incbin "baserom.gba", 0x3512AC, 0x1C
 
-gMap_10_08:: @ 83512C8
+CeladonCity_Condominiums_2F:: @ 83512C8
 	.incbin "baserom.gba", 0x3512C8, 0x1C
 
-gMap_10_09:: @ 83512E4
+CeladonCity_Condominiums_3F:: @ 83512E4
 	.incbin "baserom.gba", 0x3512E4, 0x1C
 
-gMap_10_10:: @ 8351300
+CeladonCity_Condominiums_Roof:: @ 8351300
 	.incbin "baserom.gba", 0x351300, 0x1C
 
-gMap_10_11:: @ 835131C
+CeladonCity_Condominiums_RoofRoom:: @ 835131C
 	.incbin "baserom.gba", 0x35131C, 0x1C
 
-gMap_10_12:: @ 8351338
+CeladonCity_PokemonCenter_1F:: @ 8351338
 	.incbin "baserom.gba", 0x351338, 0x1C
 
-gMap_10_13:: @ 8351354
+CeladonCity_PokemonCenter_2F:: @ 8351354
 	.incbin "baserom.gba", 0x351354, 0x1C
 
-gMap_10_14:: @ 8351370
+CeladonCity_GameCorner:: @ 8351370
 	.incbin "baserom.gba", 0x351370, 0x1C
 
-gMap_10_15:: @ 835138C
+CeladonCity_GameCorner_PrizeRoom:: @ 835138C
 	.incbin "baserom.gba", 0x35138C, 0x1C
 
-gMap_10_16:: @ 83513A8
+CeladonCity_Gym:: @ 83513A8
 	.incbin "baserom.gba", 0x3513A8, 0x1C
 
-gMap_10_17:: @ 83513C4
+CeladonCity_Restaurant:: @ 83513C4
 	.incbin "baserom.gba", 0x3513C4, 0x1C
 
-gMap_10_18:: @ 83513E0
+CeladonCity_House1:: @ 83513E0
 	.incbin "baserom.gba", 0x3513E0, 0x1C
 
-gMap_10_19:: @ 83513FC
+CeladonCity_Hotel:: @ 83513FC
 	.incbin "baserom.gba", 0x3513FC, 0x1C
 
-gMap_11_00:: @ 8351418
+FuchsiaCity_SafariZone_Entrance:: @ 8351418
 	.incbin "baserom.gba", 0x351418, 0x1C
 
-gMap_11_01:: @ 8351434
+FuchsiaCity_Mart:: @ 8351434
 	.incbin "baserom.gba", 0x351434, 0x1C
 
-gMap_11_02:: @ 8351450
+FuchsiaCity_ZooBuilding:: @ 8351450
 	.incbin "baserom.gba", 0x351450, 0x1C
 
-gMap_11_03:: @ 835146C
+FuchsiaCity_Gym:: @ 835146C
 	.incbin "baserom.gba", 0x35146C, 0x1C
 
-gMap_11_04:: @ 8351488
+FuchsiaCity_House1:: @ 8351488
 	.incbin "baserom.gba", 0x351488, 0x1C
 
-gMap_11_05:: @ 83514A4
+FuchsiaCity_PokemonCenter_1F:: @ 83514A4
 	.incbin "baserom.gba", 0x3514A4, 0x1C
 
-gMap_11_06:: @ 83514C0
+FuchsiaCity_PokemonCenter_2F:: @ 83514C0
 	.incbin "baserom.gba", 0x3514C0, 0x1C
 
-gMap_11_07:: @ 83514DC
+FuchsiaCity_Building1:: @ 83514DC
 	.incbin "baserom.gba", 0x3514DC, 0x1C
 
-gMap_11_08:: @ 83514F8
+FuchsiaCity_House2:: @ 83514F8
 	.incbin "baserom.gba", 0x3514F8, 0x1C
 
-gMap_11_09:: @ 8351514
+FuchsiaCity_House3:: @ 8351514
 	.incbin "baserom.gba", 0x351514, 0x1C
 
-gMap_12_00:: @ 8351530
+CinnabarIsland_Gym:: @ 8351530
 	.incbin "baserom.gba", 0x351530, 0x1C
 
-gMap_12_01:: @ 835154C
+CinnabarIsland_PokemonLab_Entrance:: @ 835154C
 	.incbin "baserom.gba", 0x35154C, 0x1C
 
-gMap_12_02:: @ 8351568
+CinnabarIsland_PokemonLab_Lounge:: @ 8351568
 	.incbin "baserom.gba", 0x351568, 0x1C
 
-gMap_12_03:: @ 8351584
+CinnabarIsland_PokemonLab_ResearchRoom:: @ 8351584
 	.incbin "baserom.gba", 0x351584, 0x1C
 
-gMap_12_04:: @ 83515A0
+CinnabarIsland_PokemonLab_ExperimentRoom:: @ 83515A0
 	.incbin "baserom.gba", 0x3515A0, 0x1C
 
-gMap_12_05:: @ 83515BC
+CinnabarIsland_PokemonCenter_1F:: @ 83515BC
 	.incbin "baserom.gba", 0x3515BC, 0x1C
 
-gMap_12_06:: @ 83515D8
+CinnabarIsland_PokemonCenter_2F:: @ 83515D8
 	.incbin "baserom.gba", 0x3515D8, 0x1C
 
-gMap_12_07:: @ 83515F4
+CinnabarIsland_Mart:: @ 83515F4
 	.incbin "baserom.gba", 0x3515F4, 0x1C
 
-gMap_13_00:: @ 8351610
+IndigoPlateau_PokemonCenter_1F:: @ 8351610
 	.incbin "baserom.gba", 0x351610, 0x1C
 
-gMap_13_01:: @ 835162C
+IndigoPlateau_PokemonCenter_2F:: @ 835162C
 	.incbin "baserom.gba", 0x35162C, 0x1C
 
-gMap_14_00:: @ 8351648
+SaffronCity_House1_1F:: @ 8351648
 	.incbin "baserom.gba", 0x351648, 0x1C
 
-gMap_14_01:: @ 8351664
+SaffronCity_House1_2F:: @ 8351664
 	.incbin "baserom.gba", 0x351664, 0x1C
 
-gMap_14_02:: @ 8351680
+SaffronCity_Dojo:: @ 8351680
 	.incbin "baserom.gba", 0x351680, 0x1C
 
-gMap_14_03:: @ 835169C
+SaffronCity_Gym:: @ 835169C
 	.incbin "baserom.gba", 0x35169C, 0x1C
 
-gMap_14_04:: @ 83516B8
+SaffronCity_House2:: @ 83516B8
 	.incbin "baserom.gba", 0x3516B8, 0x1C
 
-gMap_14_05:: @ 83516D4
+SaffronCity_Mart:: @ 83516D4
 	.incbin "baserom.gba", 0x3516D4, 0x1C
 
-gMap_14_06:: @ 83516F0
+SaffronCity_PokemonCenter_1F:: @ 83516F0
 	.incbin "baserom.gba", 0x3516F0, 0x1C
 
-gMap_14_07:: @ 835170C
+SaffronCity_PokemonCenter_2F:: @ 835170C
 	.incbin "baserom.gba", 0x35170C, 0x1C
 
-gMap_14_08:: @ 8351728
+SaffronCity_House3:: @ 8351728
 	.incbin "baserom.gba", 0x351728, 0x1C
 
-gMap_14_09:: @ 8351744
+SaffronCity_PokemonTrainerFanClub:: @ 8351744
 	.incbin "baserom.gba", 0x351744, 0x1C
 
-gMap_15_00:: @ 8351760
+Route2_ViridianForest_SouthEntrance:: @ 8351760
 	.incbin "baserom.gba", 0x351760, 0x1C
 
-gMap_15_01:: @ 835177C
+Route2_House:: @ 835177C
 	.incbin "baserom.gba", 0x35177C, 0x1C
 
-gMap_15_02:: @ 8351798
+Route2_EastBuilding:: @ 8351798
 	.incbin "baserom.gba", 0x351798, 0x1C
 
-gMap_15_03:: @ 83517B4
+Route2_ViridianForest_NorthEntrance:: @ 83517B4
 	.incbin "baserom.gba", 0x3517B4, 0x1C
 
-gMap_16_00:: @ 83517D0
+Route4_PokemonCenter_1F:: @ 83517D0
 	.incbin "baserom.gba", 0x3517D0, 0x1C
 
-gMap_16_01:: @ 83517EC
+Route4_PokemonCenter_2F:: @ 83517EC
 	.incbin "baserom.gba", 0x3517EC, 0x1C
 
-gMap_17_00:: @ 8351808
+Route5_PokemonDayCare:: @ 8351808
 	.incbin "baserom.gba", 0x351808, 0x1C
 
-gMap_17_01:: @ 8351824
+Route5_SouthEntrance:: @ 8351824
 	.incbin "baserom.gba", 0x351824, 0x1C
 
-gMap_18_00:: @ 8351840
+Route6_NorthEntrance:: @ 8351840
 	.incbin "baserom.gba", 0x351840, 0x1C
 
-gMap_18_01:: @ 835185C
+UnknownMap_18_01:: @ 835185C
 	.incbin "baserom.gba", 0x35185C, 0x1C
 
-gMap_19_00:: @ 8351878
+Route7_EastEntrance:: @ 8351878
 	.incbin "baserom.gba", 0x351878, 0x1C
 
-gMap_20_00:: @ 8351894
+Route8_WestEntrance:: @ 8351894
 	.incbin "baserom.gba", 0x351894, 0x1C
 
-gMap_21_00:: @ 83518B0
+Route10_PokemonCenter_1F:: @ 83518B0
 	.incbin "baserom.gba", 0x3518B0, 0x1C
 
-gMap_21_01:: @ 83518CC
+Route10_PokemonCenter_2F:: @ 83518CC
 	.incbin "baserom.gba", 0x3518CC, 0x1C
 
-gMap_22_00:: @ 83518E8
+Route11_EastEntrance_1F:: @ 83518E8
 	.incbin "baserom.gba", 0x3518E8, 0x1C
 
-gMap_22_01:: @ 8351904
+Route11_EastEntrance_2F:: @ 8351904
 	.incbin "baserom.gba", 0x351904, 0x1C
 
-gMap_23_00:: @ 8351920
+Route12_NorthEntrance_1F:: @ 8351920
 	.incbin "baserom.gba", 0x351920, 0x1C
 
-gMap_23_01:: @ 835193C
+Route12_NorthEntrance_2F:: @ 835193C
 	.incbin "baserom.gba", 0x35193C, 0x1C
 
-gMap_23_02:: @ 8351958
+Route12_FishingHouse:: @ 8351958
 	.incbin "baserom.gba", 0x351958, 0x1C
 
-gMap_24_00:: @ 8351974
+Route15_WestEntrance_1F:: @ 8351974
 	.incbin "baserom.gba", 0x351974, 0x1C
 
-gMap_24_01:: @ 8351990
+Route15_WestEntrance_2F:: @ 8351990
 	.incbin "baserom.gba", 0x351990, 0x1C
 
-gMap_25_00:: @ 83519AC
+Route16_House:: @ 83519AC
 	.incbin "baserom.gba", 0x3519AC, 0x1C
 
-gMap_25_01:: @ 83519C8
+Route16_NorthEntrance_1F:: @ 83519C8
 	.incbin "baserom.gba", 0x3519C8, 0x1C
 
-gMap_25_02:: @ 83519E4
+Route16_NorthEntrance_2F:: @ 83519E4
 	.incbin "baserom.gba", 0x3519E4, 0x1C
 
-gMap_26_00:: @ 8351A00
+Route18_EastEntrance_1F:: @ 8351A00
 	.incbin "baserom.gba", 0x351A00, 0x1C
 
-gMap_26_01:: @ 8351A1C
+Route18_EastEntrance_2F:: @ 8351A1C
 	.incbin "baserom.gba", 0x351A1C, 0x1C
 
-gMap_27_00:: @ 8351A38
+UnusedHouse_27_00:: @ 8351A38
 	.incbin "baserom.gba", 0x351A38, 0x1C
 
-gMap_28_00:: @ 8351A54
+Route22_NorthEntrance:: @ 8351A54
 	.incbin "baserom.gba", 0x351A54, 0x1C
 
-gMap_29_00:: @ 8351A70
+UnusedHouse_29_00:: @ 8351A70
 	.incbin "baserom.gba", 0x351A70, 0x1C
 
-gMap_30_00:: @ 8351A8C
+Route25_SeaCottage:: @ 8351A8C
 	.incbin "baserom.gba", 0x351A8C, 0x1C
 
-gMap_31_00:: @ 8351AA8
+SevenIsland_House_Room1:: @ 8351AA8
 	.incbin "baserom.gba", 0x351AA8, 0x1C
 
-gMap_31_01:: @ 8351AC4
+SevenIsland_House_Room2:: @ 8351AC4
 	.incbin "baserom.gba", 0x351AC4, 0x1C
 
-gMap_31_02:: @ 8351AE0
+SevenIsland_Mart:: @ 8351AE0
 	.incbin "baserom.gba", 0x351AE0, 0x1C
 
-gMap_31_03:: @ 8351AFC
+SevenIsland_PokemonCenter_1F:: @ 8351AFC
 	.incbin "baserom.gba", 0x351AFC, 0x1C
 
-gMap_31_04:: @ 8351B18
+SevenIsland_PokemonCenter_2F:: @ 8351B18
 	.incbin "baserom.gba", 0x351B18, 0x1C
 
-gMap_31_05:: @ 8351B34
+UnusedHouse_31_05:: @ 8351B34
 	.incbin "baserom.gba", 0x351B34, 0x1C
 
-gMap_31_06:: @ 8351B50
+SevenIsland_Harbor:: @ 8351B50
 	.incbin "baserom.gba", 0x351B50, 0x1C
 
-gMap_32_00:: @ 8351B6C
+OneIsland_PokemonCenter_1F:: @ 8351B6C
 	.incbin "baserom.gba", 0x351B6C, 0x1C
 
-gMap_32_01:: @ 8351B88
+OneIsland_PokemonCenter_2F:: @ 8351B88
 	.incbin "baserom.gba", 0x351B88, 0x1C
 
-gMap_32_02:: @ 8351BA4
+OneIsland_House1:: @ 8351BA4
 	.incbin "baserom.gba", 0x351BA4, 0x1C
 
-gMap_32_03:: @ 8351BC0
+OneIsland_House2:: @ 8351BC0
 	.incbin "baserom.gba", 0x351BC0, 0x1C
 
-gMap_32_04:: @ 8351BDC
+OneIsland_Harbor:: @ 8351BDC
 	.incbin "baserom.gba", 0x351BDC, 0x1C
 
-gMap_33_00:: @ 8351BF8
+TwoIsland_JoyfulGameCorner:: @ 8351BF8
 	.incbin "baserom.gba", 0x351BF8, 0x1C
 
-gMap_33_01:: @ 8351C14
+TwoIsland_House:: @ 8351C14
 	.incbin "baserom.gba", 0x351C14, 0x1C
 
-gMap_33_02:: @ 8351C30
+TwoIsland_PokemonCenter_1F:: @ 8351C30
 	.incbin "baserom.gba", 0x351C30, 0x1C
 
-gMap_33_03:: @ 8351C4C
+TwoIsland_PokemonCenter_2F:: @ 8351C4C
 	.incbin "baserom.gba", 0x351C4C, 0x1C
 
-gMap_33_04:: @ 8351C68
+TwoIsland_Harbor:: @ 8351C68
 	.incbin "baserom.gba", 0x351C68, 0x1C
 
-gMap_34_00:: @ 8351C84
+ThreeIsland_House1:: @ 8351C84
 	.incbin "baserom.gba", 0x351C84, 0x1C
 
-gMap_34_01:: @ 8351CA0
+ThreeIsland_PokemonCenter_1F:: @ 8351CA0
 	.incbin "baserom.gba", 0x351CA0, 0x1C
 
-gMap_34_02:: @ 8351CBC
+ThreeIsland_PokemonCenter_2F:: @ 8351CBC
 	.incbin "baserom.gba", 0x351CBC, 0x1C
 
-gMap_34_03:: @ 8351CD8
+ThreeIsland_Mart:: @ 8351CD8
 	.incbin "baserom.gba", 0x351CD8, 0x1C
 
-gMap_34_04:: @ 8351CF4
+ThreeIsland_House2:: @ 8351CF4
 	.incbin "baserom.gba", 0x351CF4, 0x1C
 
-gMap_34_05:: @ 8351D10
+ThreeIsland_House3:: @ 8351D10
 	.incbin "baserom.gba", 0x351D10, 0x1C
 
-gMap_34_06:: @ 8351D2C
+ThreeIsland_House4:: @ 8351D2C
 	.incbin "baserom.gba", 0x351D2C, 0x1C
 
-gMap_34_07:: @ 8351D48
+ThreeIsland_House5:: @ 8351D48
 	.incbin "baserom.gba", 0x351D48, 0x1C
 
-gMap_35_00:: @ 8351D64
+FourIsland_PokemonDayCare:: @ 8351D64
 	.incbin "baserom.gba", 0x351D64, 0x1C
 
-gMap_35_01:: @ 8351D80
+FourIsland_PokemonCenter_1F:: @ 8351D80
 	.incbin "baserom.gba", 0x351D80, 0x1C
 
-gMap_35_02:: @ 8351D9C
+FourIsland_PokemonCenter_2F:: @ 8351D9C
 	.incbin "baserom.gba", 0x351D9C, 0x1C
 
-gMap_35_03:: @ 8351DB8
+FourIsland_House1:: @ 8351DB8
 	.incbin "baserom.gba", 0x351DB8, 0x1C
 
-gMap_35_04:: @ 8351DD4
+FourIsland_LoreleisHouse:: @ 8351DD4
 	.incbin "baserom.gba", 0x351DD4, 0x1C
 
-gMap_35_05:: @ 8351DF0
+FourIsland_Harbor:: @ 8351DF0
 	.incbin "baserom.gba", 0x351DF0, 0x1C
 
-gMap_35_06:: @ 8351E0C
+FourIsland_House2:: @ 8351E0C
 	.incbin "baserom.gba", 0x351E0C, 0x1C
 
-gMap_35_07:: @ 8351E28
+FourIsland_Mart:: @ 8351E28
 	.incbin "baserom.gba", 0x351E28, 0x1C
 
-gMap_36_00:: @ 8351E44
+FiveIsland_PokemonCenter_1F:: @ 8351E44
 	.incbin "baserom.gba", 0x351E44, 0x1C
 
-gMap_36_01:: @ 8351E60
+FiveIsland_PokemonCenter_2F:: @ 8351E60
 	.incbin "baserom.gba", 0x351E60, 0x1C
 
-gMap_36_02:: @ 8351E7C
+FiveIsland_Harbor:: @ 8351E7C
 	.incbin "baserom.gba", 0x351E7C, 0x1C
 
-gMap_36_03:: @ 8351E98
+FiveIsland_House1:: @ 8351E98
 	.incbin "baserom.gba", 0x351E98, 0x1C
 
-gMap_36_04:: @ 8351EB4
+FiveIsland_House2:: @ 8351EB4
 	.incbin "baserom.gba", 0x351EB4, 0x1C
 
-gMap_37_00:: @ 8351ED0
+SixIsland_PokemonCenter_1F:: @ 8351ED0
 	.incbin "baserom.gba", 0x351ED0, 0x1C
 
-gMap_37_01:: @ 8351EEC
+SixIsland_PokemonCenter_2F:: @ 8351EEC
 	.incbin "baserom.gba", 0x351EEC, 0x1C
 
-gMap_37_02:: @ 8351F08
+SixIsland_Harbor:: @ 8351F08
 	.incbin "baserom.gba", 0x351F08, 0x1C
 
-gMap_37_03:: @ 8351F24
+SixIsland_House:: @ 8351F24
 	.incbin "baserom.gba", 0x351F24, 0x1C
 
-gMap_37_04:: @ 8351F40
+SixIsland_Mart:: @ 8351F40
 	.incbin "baserom.gba", 0x351F40, 0x1C
 
-gMap_38_00:: @ 8351F5C
+ThreeIsland_Harbor:: @ 8351F5C
 	.incbin "baserom.gba", 0x351F5C, 0x1C
 
-gMap_39_00:: @ 8351F78
+FiveIsland_ResortGorgeous_House:: @ 8351F78
 	.incbin "baserom.gba", 0x351F78, 0x1C
 
-gMap_40_00:: @ 8351F94
+TwoIsland_CapeBrink_House:: @ 8351F94
 	.incbin "baserom.gba", 0x351F94, 0x1C
 
-gMap_41_00:: @ 8351FB0
+SixIsland_WaterPath_House1:: @ 8351FB0
 	.incbin "baserom.gba", 0x351FB0, 0x1C
 
-gMap_41_01:: @ 8351FCC
+SixIsland_WaterPath_House2:: @ 8351FCC
 	.incbin "baserom.gba", 0x351FCC, 0x1C
 
-gMap_42_00:: @ 8351FE8
+SevenIsland_SevaultCanyon_House:: @ 8351FE8
 	.incbin "baserom.gba", 0x351FE8, 0x1C
 
 gMapGroup_00:: @ 8352004
-	.4byte gMap_00_00
-	.4byte gMap_00_01
-	.4byte gMap_00_02
-	.4byte gMap_00_03
-	.4byte gMap_00_04
+	.4byte UnknownMap_00_00
+	.4byte UnknownMap_00_01
+	.4byte UnknownMap_00_02
+	.4byte UnknownMap_00_03
+	.4byte UnknownMap_00_04
 
 gMapGroup_01:: @ 8352018
-	.4byte gMap_01_00
-	.4byte gMap_01_01
-	.4byte gMap_01_02
-	.4byte gMap_01_03
-	.4byte gMap_01_04
-	.4byte gMap_01_05
-	.4byte gMap_01_06
-	.4byte gMap_01_07
-	.4byte gMap_01_08
-	.4byte gMap_01_09
-	.4byte gMap_01_10
-	.4byte gMap_01_11
-	.4byte gMap_01_12
-	.4byte gMap_01_13
-	.4byte gMap_01_14
-	.4byte gMap_01_15
-	.4byte gMap_01_16
-	.4byte gMap_01_17
-	.4byte gMap_01_18
-	.4byte gMap_01_19
-	.4byte gMap_01_20
-	.4byte gMap_01_21
-	.4byte gMap_01_22
-	.4byte gMap_01_23
-	.4byte gMap_01_24
-	.4byte gMap_01_25
-	.4byte gMap_01_26
-	.4byte gMap_01_27
-	.4byte gMap_01_28
-	.4byte gMap_01_29
-	.4byte gMap_01_30
-	.4byte gMap_01_31
-	.4byte gMap_01_32
-	.4byte gMap_01_33
-	.4byte gMap_01_34
-	.4byte gMap_01_35
-	.4byte gMap_01_36
-	.4byte gMap_01_37
-	.4byte gMap_01_38
-	.4byte gMap_01_39
-	.4byte gMap_01_40
-	.4byte gMap_01_41
-	.4byte gMap_01_42
-	.4byte gMap_01_43
-	.4byte gMap_01_44
-	.4byte gMap_01_45
-	.4byte gMap_01_46
-	.4byte gMap_01_47
-	.4byte gMap_01_48
-	.4byte gMap_01_49
-	.4byte gMap_01_50
-	.4byte gMap_01_51
-	.4byte gMap_01_52
-	.4byte gMap_01_53
-	.4byte gMap_01_54
-	.4byte gMap_01_55
-	.4byte gMap_01_56
-	.4byte gMap_01_57
-	.4byte gMap_01_58
-	.4byte gMap_01_59
-	.4byte gMap_01_60
-	.4byte gMap_01_61
-	.4byte gMap_01_62
-	.4byte gMap_01_63
-	.4byte gMap_01_64
-	.4byte gMap_01_65
-	.4byte gMap_01_66
-	.4byte gMap_01_67
-	.4byte gMap_01_68
-	.4byte gMap_01_69
-	.4byte gMap_01_70
-	.4byte gMap_01_71
-	.4byte gMap_01_72
-	.4byte gMap_01_73
-	.4byte gMap_01_74
-	.4byte gMap_01_75
-	.4byte gMap_01_76
-	.4byte gMap_01_77
-	.4byte gMap_01_78
-	.4byte gMap_01_79
-	.4byte gMap_01_80
-	.4byte gMap_01_81
-	.4byte gMap_01_82
-	.4byte gMap_01_83
-	.4byte gMap_01_84
-	.4byte gMap_01_85
-	.4byte gMap_01_86
-	.4byte gMap_01_87
-	.4byte gMap_01_88
-	.4byte gMap_01_89
-	.4byte gMap_01_90
-	.4byte gMap_01_91
-	.4byte gMap_01_92
-	.4byte gMap_01_93
-	.4byte gMap_01_94
-	.4byte gMap_01_95
-	.4byte gMap_01_96
-	.4byte gMap_01_97
-	.4byte gMap_01_98
-	.4byte gMap_01_99
-	.4byte gMap_01_100
-	.4byte gMap_01_101
-	.4byte gMap_01_102
-	.4byte gMap_01_103
-	.4byte gMap_01_104
-	.4byte gMap_01_105
-	.4byte gMap_01_106
-	.4byte gMap_01_107
-	.4byte gMap_01_108
-	.4byte gMap_01_109
-	.4byte gMap_01_110
-	.4byte gMap_01_111
-	.4byte gMap_01_112
-	.4byte gMap_01_113
-	.4byte gMap_01_114
-	.4byte gMap_01_115
-	.4byte gMap_01_116
-	.4byte gMap_01_117
-	.4byte gMap_01_118
-	.4byte gMap_01_119
-	.4byte gMap_01_120
-	.4byte gMap_01_121
-	.4byte gMap_01_122
+	.4byte ViridianForest
+	.4byte MtMoon_1F
+	.4byte MtMoon_B1F
+	.4byte MtMoon_B2F
+	.4byte SSAnne_Exterior
+	.4byte SSAnne_1F_Corridor
+	.4byte SSAnne_2F_Corridor
+	.4byte SSAnne_3F_Corridor
+	.4byte SSAnne_B1F_Corridor
+	.4byte SSAnne_Deck
+	.4byte SSAnne_Kitchen
+	.4byte SSAnne_CaptainsOffice
+	.4byte SSAnne_1F_Room1
+	.4byte SSAnne_1F_Room2
+	.4byte SSAnne_1F_Room3
+	.4byte SSAnne_1F_Room4
+	.4byte SSAnne_1F_Room5
+	.4byte SSAnne_1F_Room7
+	.4byte SSAnne_2F_Room1
+	.4byte SSAnne_2F_Room2
+	.4byte SSAnne_2F_Room3
+	.4byte SSAnne_2F_Room4
+	.4byte SSAnne_2F_Room5
+	.4byte SSAnne_2F_Room6
+	.4byte SSAnne_B1F_Room1
+	.4byte SSAnne_B1F_Room2
+	.4byte SSAnne_B1F_Room3
+	.4byte SSAnne_B1F_Room4
+	.4byte SSAnne_B1F_Room5
+	.4byte SSAnne_1F_Room6
+	.4byte UndergroundPath_NorthEntrance
+	.4byte UndergroundPath_NorthSouthTunnel
+	.4byte UndergroundPath_SouthEntrance
+	.4byte UndergroundPath_WestEntrance
+	.4byte UndergroundPath_EastWestTunnel
+	.4byte UndergroundPath_EastEntrance
+	.4byte DiglettsCave_NorthEntrance
+	.4byte DiglettsCave_B1F
+	.4byte DiglettsCave_SouthEntrance
+	.4byte VictoryRoad_1F
+	.4byte VictoryRoad_2F
+	.4byte VictoryRoad_3F
+	.4byte RocketHideout_B1F
+	.4byte RocketHideout_B2F
+	.4byte RocketHideout_B3F
+	.4byte RocketHideout_B4F
+	.4byte RocketHideout_Elevator
+	.4byte SilphCo_1F
+	.4byte SilphCo_2F
+	.4byte SilphCo_3F
+	.4byte SilphCo_4F
+	.4byte SilphCo_5F
+	.4byte SilphCo_6F
+	.4byte SilphCo_7F
+	.4byte SilphCo_8F
+	.4byte SilphCo_9F
+	.4byte SilphCo_10F
+	.4byte SilphCo_11F
+	.4byte SilphCo_Elevator
+	.4byte PokemonMansion_1F
+	.4byte PokemonMansion_2F
+	.4byte PokemonMansion_3F
+	.4byte PokemonMansion_B1F
+	.4byte SafariZone_Center
+	.4byte SafariZone_East
+	.4byte SafariZone_North
+	.4byte SafariZone_West
+	.4byte SafariZone_Building1
+	.4byte SafariZone_Building2
+	.4byte SafariZone_Building3
+	.4byte SafariZone_Building4
+	.4byte SafariZone_SecretHouse
+	.4byte CeruleanCave_1F
+	.4byte CeruleanCave_2F
+	.4byte CeruleanCave_B1F
+	.4byte PokemonLeague_LoreleisRoom
+	.4byte PokemonLeague_BrunosRoom
+	.4byte PokemonLeague_AgathasRoom
+	.4byte PokemonLeague_LancesRoom
+	.4byte PokemonLeague_ChampionsRoom
+	.4byte PokemonLeague_HallOfFame
+	.4byte RockTunnel_1F
+	.4byte RockTunnel_B1F
+	.4byte SeafoamIslands_1F
+	.4byte SeafoamIslands_B1F
+	.4byte SeafoamIslands_B2F
+	.4byte SeafoamIslands_B3F
+	.4byte SeafoamIslands_B4F
+	.4byte PokemonTower_1F
+	.4byte PokemonTower_2F
+	.4byte PokemonTower_3F
+	.4byte PokemonTower_4F
+	.4byte PokemonTower_5F
+	.4byte PokemonTower_6F
+	.4byte PokemonTower_7F
+	.4byte PowerPlant
+	.4byte MtEmber_RubyPath_B4F
+	.4byte MtEmber_Exterior
+	.4byte MtEmber_SummitPath_1F
+	.4byte MtEmber_SummitPath_2F
+	.4byte MtEmber_SummitPath_3F
+	.4byte MtEmber_Summit
+	.4byte MtEmber_RubyPath_B5F
+	.4byte SSAnne_Kitchen3
+	.4byte MtEmber_RubyPath_B1F
+	.4byte MtEmber_RubyPath_B2F
+	.4byte MtEmber_RubyPath_B3F
+	.4byte MtEmber_RubyPath_B1F_Stairs
+	.4byte MtEmber_RubyPath_B2F_Stairs
+	.4byte ThreeIsland_BerryForest
+	.4byte FourIsland_IcefallCave_Entrance
+	.4byte FourIsland_IcefallCave_1F
+	.4byte SSAnne_CaptainsOffice2
+	.4byte SSAnne_CaptainsOffice3
+	.4byte SSAnne_CaptainsOffice4
+	.4byte SSAnne_CaptainsOffice5
+	.4byte SixIsland_DottedHole_B1F
+	.4byte SixIsland_DottedHole_B2F
+	.4byte SixIsland_DottedHole_B3F
+	.4byte SSAnne_CaptainsOffice9
+	.4byte SixIsland_DottedHole_SapphireRoom
+	.4byte SSAnne_1F_Room11
+	.4byte SSAnne_1F_Room12
 
 gMapGroup_02:: @ 8352204
-	.4byte gMap_02_00
-	.4byte gMap_02_01
-	.4byte gMap_02_02
-	.4byte gMap_02_03
-	.4byte gMap_02_04
-	.4byte gMap_02_05
-	.4byte gMap_02_06
-	.4byte gMap_02_07
-	.4byte gMap_02_08
-	.4byte gMap_02_09
-	.4byte gMap_02_10
-	.4byte gMap_02_11
-	.4byte gMap_02_12
-	.4byte gMap_02_13
-	.4byte gMap_02_14
-	.4byte gMap_02_15
-	.4byte gMap_02_16
-	.4byte gMap_02_17
-	.4byte gMap_02_18
-	.4byte gMap_02_19
-	.4byte gMap_02_20
-	.4byte gMap_02_21
-	.4byte gMap_02_22
-	.4byte gMap_02_23
-	.4byte gMap_02_24
-	.4byte gMap_02_25
-	.4byte gMap_02_26
-	.4byte gMap_02_27
-	.4byte gMap_02_28
-	.4byte gMap_02_29
-	.4byte gMap_02_30
-	.4byte gMap_02_31
-	.4byte gMap_02_32
-	.4byte gMap_02_33
-	.4byte gMap_02_34
-	.4byte gMap_02_35
-	.4byte gMap_02_36
-	.4byte gMap_02_37
-	.4byte gMap_02_38
-	.4byte gMap_02_39
-	.4byte gMap_02_40
-	.4byte gMap_02_41
-	.4byte gMap_02_42
-	.4byte gMap_02_43
-	.4byte gMap_02_44
-	.4byte gMap_02_45
-	.4byte gMap_02_46
-	.4byte gMap_02_47
-	.4byte gMap_02_48
-	.4byte gMap_02_49
-	.4byte gMap_02_50
-	.4byte gMap_02_51
-	.4byte gMap_02_52
-	.4byte gMap_02_53
-	.4byte gMap_02_54
-	.4byte gMap_02_55
-	.4byte gMap_02_56
-	.4byte gMap_02_57
-	.4byte gMap_02_58
-	.4byte gMap_02_59
+	.4byte NavelRock_Exterior
+	.4byte SevenIsland_TrainerTower_1F
+	.4byte SevenIsland_TrainerTower_2F
+	.4byte SevenIsland_TrainerTower_3F
+	.4byte SevenIsland_TrainerTower_4F
+	.4byte SevenIsland_TrainerTower_5F
+	.4byte SevenIsland_TrainerTower_6F
+	.4byte SevenIsland_TrainerTower_7F
+	.4byte SevenIsland_TrainerTower_8F
+	.4byte SevenIsland_TrainerTower_Roof
+	.4byte SevenIsland_TrainerTower_Lobby
+	.4byte SevenIsland_TrainerTower_Elevator
+	.4byte FiveIsland_LostCave_Entrance
+	.4byte FiveIsland_LostCave_Room1
+	.4byte FiveIsland_LostCave_Room2
+	.4byte FiveIsland_LostCave_Room3
+	.4byte FiveIsland_LostCave_Room4
+	.4byte FiveIsland_LostCave_Room5
+	.4byte FiveIsland_LostCave_Room6
+	.4byte FiveIsland_LostCave_Room7
+	.4byte FiveIsland_LostCave_Room8
+	.4byte FiveIsland_LostCave_Room9
+	.4byte FiveIsland_LostCave_Room10
+	.4byte FiveIsland_LostCave_Room11
+	.4byte FiveIsland_LostCave_Room12
+	.4byte FiveIsland_LostCave_Room13
+	.4byte FiveIsland_LostCave_Room14
+	.4byte SevenIsland_TanobyRuins_MoneanChamber
+	.4byte SevenIsland_TanobyRuins_LiptooChamber
+	.4byte SevenIsland_TanobyRuins_WeepthChamber
+	.4byte SevenIsland_TanobyRuins_DilfordChamber
+	.4byte SevenIsland_TanobyRuins_ScufibChamber
+	.4byte SevenIsland_TanobyRuins_RixyChamber
+	.4byte SevenIsland_TanobyRuins_ViapoisChamber
+	.4byte ThreeIsland_DunsparceTunnel
+	.4byte SevenIsland_SeavaultCanyon_TanobyKey
+	.4byte NavelRock_1F
+	.4byte NavelRock_Summit
+	.4byte NavelRock_Base
+	.4byte NavelRock_SummitPath_2F
+	.4byte NavelRock_SummitPath_3F
+	.4byte NavelRock_SummitPath_4F
+	.4byte NavelRock_SummitPath_5F
+	.4byte NavelRock_BasePath_B1F
+	.4byte NavelRock_BasePath_B2F
+	.4byte NavelRock_BasePath_B3F
+	.4byte NavelRock_BasePath_B4F
+	.4byte NavelRock_BasePath_B5F
+	.4byte NavelRock_BasePath_B6F
+	.4byte NavelRock_BasePath_B7F
+	.4byte NavelRock_BasePath_B8F
+	.4byte NavelRock_BasePath_B9F
+	.4byte NavelRock_BasePath_B10F
+	.4byte NavelRock_BasePath_B11F
+	.4byte NavelRock_B1F
+	.4byte NavelRock_Fork
+	.4byte BirthIsland_Exterior
+	.4byte OneIsland_KindleRoad_EmberSpa
+	.4byte BirthIsland_Harbor
+	.4byte NavelRock_Harbor
 
 gMapGroup_03:: @ 83522F4
-	.4byte gMap_03_00
-	.4byte gMap_03_01
-	.4byte gMap_03_02
-	.4byte gMap_03_03
-	.4byte gMap_03_04
-	.4byte gMap_03_05
-	.4byte gMap_03_06
-	.4byte gMap_03_07
-	.4byte gMap_03_08
-	.4byte gMap_03_09
-	.4byte gMap_03_10
-	.4byte gMap_03_11
-	.4byte gMap_03_12
-	.4byte gMap_03_13
-	.4byte gMap_03_14
-	.4byte gMap_03_15
-	.4byte gMap_03_16
-	.4byte gMap_03_17
-	.4byte gMap_03_18
-	.4byte gMap_03_19
-	.4byte gMap_03_20
-	.4byte gMap_03_21
-	.4byte gMap_03_22
-	.4byte gMap_03_23
-	.4byte gMap_03_24
-	.4byte gMap_03_25
-	.4byte gMap_03_26
-	.4byte gMap_03_27
-	.4byte gMap_03_28
-	.4byte gMap_03_29
-	.4byte gMap_03_30
-	.4byte gMap_03_31
-	.4byte gMap_03_32
-	.4byte gMap_03_33
-	.4byte gMap_03_34
-	.4byte gMap_03_35
-	.4byte gMap_03_36
-	.4byte gMap_03_37
-	.4byte gMap_03_38
-	.4byte gMap_03_39
-	.4byte gMap_03_40
-	.4byte gMap_03_41
-	.4byte gMap_03_42
-	.4byte gMap_03_43
-	.4byte gMap_03_44
-	.4byte gMap_03_45
-	.4byte gMap_03_46
-	.4byte gMap_03_47
-	.4byte gMap_03_48
-	.4byte gMap_03_49
-	.4byte gMap_03_50
-	.4byte gMap_03_51
-	.4byte gMap_03_52
-	.4byte gMap_03_53
-	.4byte gMap_03_54
-	.4byte gMap_03_55
-	.4byte gMap_03_56
-	.4byte gMap_03_57
-	.4byte gMap_03_58
-	.4byte gMap_03_59
-	.4byte gMap_03_60
-	.4byte gMap_03_61
-	.4byte gMap_03_62
-	.4byte gMap_03_63
-	.4byte gMap_03_64
-	.4byte gMap_03_65
+	.4byte PalletTown
+	.4byte ViridianCity
+	.4byte PewterCity
+	.4byte CeruleanCity
+	.4byte LavenderTown
+	.4byte VermilionCity
+	.4byte CeladonCity
+	.4byte FuchsiaCity
+	.4byte CinnabarIsland
+	.4byte IndigoPlateau_Exterior
+	.4byte SaffronCity
+	.4byte SaffronCity_Duplicate
+	.4byte OneIsland
+	.4byte TwoIsland
+	.4byte ThreeIsland
+	.4byte FourIsland
+	.4byte FiveIsland
+	.4byte SevenIsland
+	.4byte SixIsland
+	.4byte Route1
+	.4byte Route2
+	.4byte Route3
+	.4byte Route4
+	.4byte Route5
+	.4byte Route6
+	.4byte Route7
+	.4byte Route8
+	.4byte Route9
+	.4byte Route10
+	.4byte Route11
+	.4byte Route12
+	.4byte Route13
+	.4byte Route14
+	.4byte Route15
+	.4byte Route16
+	.4byte Route17
+	.4byte Route18
+	.4byte Route19
+	.4byte Route20
+	.4byte Route21_North
+	.4byte Route21_South
+	.4byte Route22
+	.4byte Route23
+	.4byte Route24
+	.4byte Route25
+	.4byte OneIsland_KindleRoad
+	.4byte OneIsland_TreasureBeach
+	.4byte TwoIsland_CapeBrink
+	.4byte ThreeIsland_BondBridge
+	.4byte ThreeIsland_Port
+	.4byte UnknownMap_03_50
+	.4byte UnknownMap_03_51
+	.4byte UnknownMap_03_52
+	.4byte UnknownMap_03_53
+	.4byte FiveIsland_ResortGorgeous
+	.4byte FiveIsland_WaterLabyrinth
+	.4byte FiveIsland_Meadow
+	.4byte FiveIsland_MemorialPillar
+	.4byte SixIsland_OutcastIsland
+	.4byte SixIsland_GreenPath
+	.4byte SixIsland_WaterPath
+	.4byte SixIsland_RuinValley
+	.4byte SevenIsland_TrainerTower
+	.4byte SevenIsland_SevaultCanyon_Entrance
+	.4byte SevenIsland_SevaultCanyon
+	.4byte SevenIsland_TanobyRuins
 
 gMapGroup_04:: @ 83523FC
-	.4byte gMap_04_00
-	.4byte gMap_04_01
-	.4byte gMap_04_02
-	.4byte gMap_04_03
+	.4byte PalletTown_PlayersHouse_1F
+	.4byte PalletTown_PlayersHouse_2F
+	.4byte PalletTown_GarysHouse
+	.4byte PalletTown_ProfessorOaksLab
 
 gMapGroup_05:: @ 835240C
-	.4byte gMap_05_00
-	.4byte gMap_05_01
-	.4byte gMap_05_02
-	.4byte gMap_05_03
-	.4byte gMap_05_04
-	.4byte gMap_05_05
+	.4byte ViridianCity_House1
+	.4byte ViridianCity_Gym
+	.4byte ViridianCity_House2
+	.4byte ViridianCity_Mart
+	.4byte ViridianCity_PokemonCenter_1F
+	.4byte ViridianCity_PokemonCenter_2F
 
 gMapGroup_06:: @ 8352424
-	.4byte gMap_06_00
-	.4byte gMap_06_01
-	.4byte gMap_06_02
-	.4byte gMap_06_03
-	.4byte gMap_06_04
-	.4byte gMap_06_05
-	.4byte gMap_06_06
-	.4byte gMap_06_07
+	.4byte PewterCity_Museum_1F
+	.4byte PewterCity_Museum_2F
+	.4byte PewterCity_Gym
+	.4byte PewterCity_Mart
+	.4byte PewterCity_House1
+	.4byte PewterCity_PokemonCenter_1F
+	.4byte PewterCity_PokemonCenter_2F
+	.4byte PewterCity_House2
 
 gMapGroup_07:: @ 8352444
-	.4byte gMap_07_00
-	.4byte gMap_07_01
-	.4byte gMap_07_02
-	.4byte gMap_07_03
-	.4byte gMap_07_04
-	.4byte gMap_07_05
-	.4byte gMap_07_06
-	.4byte gMap_07_07
-	.4byte gMap_07_08
-	.4byte gMap_07_09
+	.4byte CeruleanCity_House1
+	.4byte CeruleanCity_House2
+	.4byte CeruleanCity_House3
+	.4byte CeruleanCity_PokemonCenter_1F
+	.4byte CeruleanCity_PokemonCenter_2F
+	.4byte CeruleanCity_Gym
+	.4byte CeruleanCity_BikeShop
+	.4byte CeruleanCity_Mart
+	.4byte CeruleanCity_House4
+	.4byte CeruleanCity_House5
 
 gMapGroup_08:: @ 835246C
-	.4byte gMap_08_00
-	.4byte gMap_08_01
-	.4byte gMap_08_02
-	.4byte gMap_08_03
-	.4byte gMap_08_04
-	.4byte gMap_08_05
+	.4byte LavenderTown_PokemonCenter_1F
+	.4byte LavenderTown_PokemonCenter_2F
+	.4byte LavenderTown_VolunteerPokemonHouse
+	.4byte LavenderTown_House1
+	.4byte LavenderTown_House2
+	.4byte LavenderTown_Mart
 
 gMapGroup_09:: @ 8352484
-	.4byte gMap_09_00
-	.4byte gMap_09_01
-	.4byte gMap_09_02
-	.4byte gMap_09_03
-	.4byte gMap_09_04
-	.4byte gMap_09_05
-	.4byte gMap_09_06
-	.4byte gMap_09_07
+	.4byte VermilionCity_House1
+	.4byte VermilionCity_PokemonCenter_1F
+	.4byte VermilionCity_PokemonCenter_2F
+	.4byte VermilionCity_PokemonFanClub
+	.4byte VermilionCity_House2
+	.4byte VermilionCity_Mart
+	.4byte VermilionCity_Gym
+	.4byte VermilionCity_House3
 
 gMapGroup_10:: @ 83524A4
-	.4byte gMap_10_00
-	.4byte gMap_10_01
-	.4byte gMap_10_02
-	.4byte gMap_10_03
-	.4byte gMap_10_04
-	.4byte gMap_10_05
-	.4byte gMap_10_06
-	.4byte gMap_10_07
-	.4byte gMap_10_08
-	.4byte gMap_10_09
-	.4byte gMap_10_10
-	.4byte gMap_10_11
-	.4byte gMap_10_12
-	.4byte gMap_10_13
-	.4byte gMap_10_14
-	.4byte gMap_10_15
-	.4byte gMap_10_16
-	.4byte gMap_10_17
-	.4byte gMap_10_18
-	.4byte gMap_10_19
+	.4byte CeladonCity_DepartmentStore_1F
+	.4byte CeladonCity_DepartmentStore_2F
+	.4byte CeladonCity_DepartmentStore_3F
+	.4byte CeladonCity_DepartmentStore_4F
+	.4byte CeladonCity_DepartmentStore_5F
+	.4byte CeladonCity_DepartmentStore_Roof
+	.4byte CeladonCity_DepartmentStore_Elevator
+	.4byte CeladonCity_Condominiums_1F
+	.4byte CeladonCity_Condominiums_2F
+	.4byte CeladonCity_Condominiums_3F
+	.4byte CeladonCity_Condominiums_Roof
+	.4byte CeladonCity_Condominiums_RoofRoom
+	.4byte CeladonCity_PokemonCenter_1F
+	.4byte CeladonCity_PokemonCenter_2F
+	.4byte CeladonCity_GameCorner
+	.4byte CeladonCity_GameCorner_PrizeRoom
+	.4byte CeladonCity_Gym
+	.4byte CeladonCity_Restaurant
+	.4byte CeladonCity_House1
+	.4byte CeladonCity_Hotel
 
 gMapGroup_11:: @ 83524F4
-	.4byte gMap_11_00
-	.4byte gMap_11_01
-	.4byte gMap_11_02
-	.4byte gMap_11_03
-	.4byte gMap_11_04
-	.4byte gMap_11_05
-	.4byte gMap_11_06
-	.4byte gMap_11_07
-	.4byte gMap_11_08
-	.4byte gMap_11_09
+	.4byte FuchsiaCity_SafariZone_Entrance
+	.4byte FuchsiaCity_Mart
+	.4byte FuchsiaCity_ZooBuilding
+	.4byte FuchsiaCity_Gym
+	.4byte FuchsiaCity_House1
+	.4byte FuchsiaCity_PokemonCenter_1F
+	.4byte FuchsiaCity_PokemonCenter_2F
+	.4byte FuchsiaCity_Building1
+	.4byte FuchsiaCity_House2
+	.4byte FuchsiaCity_House3
 
 gMapGroup_12:: @ 835251C
-	.4byte gMap_12_00
-	.4byte gMap_12_01
-	.4byte gMap_12_02
-	.4byte gMap_12_03
-	.4byte gMap_12_04
-	.4byte gMap_12_05
-	.4byte gMap_12_06
-	.4byte gMap_12_07
+	.4byte CinnabarIsland_Gym
+	.4byte CinnabarIsland_PokemonLab_Entrance
+	.4byte CinnabarIsland_PokemonLab_Lounge
+	.4byte CinnabarIsland_PokemonLab_ResearchRoom
+	.4byte CinnabarIsland_PokemonLab_ExperimentRoom
+	.4byte CinnabarIsland_PokemonCenter_1F
+	.4byte CinnabarIsland_PokemonCenter_2F
+	.4byte CinnabarIsland_Mart
 
 gMapGroup_13:: @ 835253C
-	.4byte gMap_13_00
-	.4byte gMap_13_01
+	.4byte IndigoPlateau_PokemonCenter_1F
+	.4byte IndigoPlateau_PokemonCenter_2F
 
 gMapGroup_14:: @ 8352544
-	.4byte gMap_14_00
-	.4byte gMap_14_01
-	.4byte gMap_14_02
-	.4byte gMap_14_03
-	.4byte gMap_14_04
-	.4byte gMap_14_05
-	.4byte gMap_14_06
-	.4byte gMap_14_07
-	.4byte gMap_14_08
-	.4byte gMap_14_09
+	.4byte SaffronCity_House1_1F
+	.4byte SaffronCity_House1_2F
+	.4byte SaffronCity_Dojo
+	.4byte SaffronCity_Gym
+	.4byte SaffronCity_House2
+	.4byte SaffronCity_Mart
+	.4byte SaffronCity_PokemonCenter_1F
+	.4byte SaffronCity_PokemonCenter_2F
+	.4byte SaffronCity_House3
+	.4byte SaffronCity_PokemonTrainerFanClub
 
 gMapGroup_15:: @ 835256C
-	.4byte gMap_15_00
-	.4byte gMap_15_01
-	.4byte gMap_15_02
-	.4byte gMap_15_03
+	.4byte Route2_ViridianForest_SouthEntrance
+	.4byte Route2_House
+	.4byte Route2_EastBuilding
+	.4byte Route2_ViridianForest_NorthEntrance
 
 gMapGroup_16:: @ 835257C
-	.4byte gMap_16_00
-	.4byte gMap_16_01
+	.4byte Route4_PokemonCenter_1F
+	.4byte Route4_PokemonCenter_2F
 
 gMapGroup_17:: @ 8352584
-	.4byte gMap_17_00
-	.4byte gMap_17_01
+	.4byte Route5_PokemonDayCare
+	.4byte Route5_SouthEntrance
 
 gMapGroup_18:: @ 835258C
-	.4byte gMap_18_00
-	.4byte gMap_18_01
+	.4byte Route6_NorthEntrance
+	.4byte UnknownMap_18_01
 
 gMapGroup_19:: @ 8352594
-	.4byte gMap_19_00
+	.4byte Route7_EastEntrance
 
 gMapGroup_20:: @ 8352598
-	.4byte gMap_20_00
+	.4byte Route8_WestEntrance
 
 gMapGroup_21:: @ 835259C
-	.4byte gMap_21_00
-	.4byte gMap_21_01
+	.4byte Route10_PokemonCenter_1F
+	.4byte Route10_PokemonCenter_2F
 
 gMapGroup_22:: @ 83525A4
-	.4byte gMap_22_00
-	.4byte gMap_22_01
+	.4byte Route11_EastEntrance_1F
+	.4byte Route11_EastEntrance_2F
 
 gMapGroup_23:: @ 83525AC
-	.4byte gMap_23_00
-	.4byte gMap_23_01
-	.4byte gMap_23_02
+	.4byte Route12_NorthEntrance_1F
+	.4byte Route12_NorthEntrance_2F
+	.4byte Route12_FishingHouse
 
 gMapGroup_24:: @ 83525B8
-	.4byte gMap_24_00
-	.4byte gMap_24_01
+	.4byte Route15_WestEntrance_1F
+	.4byte Route15_WestEntrance_2F
 
 gMapGroup_25:: @ 83525C0
-	.4byte gMap_25_00
-	.4byte gMap_25_01
-	.4byte gMap_25_02
+	.4byte Route16_House
+	.4byte Route16_NorthEntrance_1F
+	.4byte Route16_NorthEntrance_2F
 
 gMapGroup_26:: @ 83525CC
-	.4byte gMap_26_00
-	.4byte gMap_26_01
+	.4byte Route18_EastEntrance_1F
+	.4byte Route18_EastEntrance_2F
 
 gMapGroup_27:: @ 83525D4
-	.4byte gMap_27_00
+	.4byte UnusedHouse_27_00
 
 gMapGroup_28:: @ 83525D8
-	.4byte gMap_28_00
+	.4byte Route22_NorthEntrance
 
 gMapGroup_29:: @ 83525DC
-	.4byte gMap_29_00
+	.4byte UnusedHouse_29_00
 
 gMapGroup_30:: @ 83525E0
-	.4byte gMap_30_00
+	.4byte Route25_SeaCottage
 
 gMapGroup_31:: @ 83525E4
-	.4byte gMap_31_00
-	.4byte gMap_31_01
-	.4byte gMap_31_02
-	.4byte gMap_31_03
-	.4byte gMap_31_04
-	.4byte gMap_31_05
-	.4byte gMap_31_06
+	.4byte SevenIsland_House_Room1
+	.4byte SevenIsland_House_Room2
+	.4byte SevenIsland_Mart
+	.4byte SevenIsland_PokemonCenter_1F
+	.4byte SevenIsland_PokemonCenter_2F
+	.4byte UnusedHouse_31_05
+	.4byte SevenIsland_Harbor
 
 gMapGroup_32:: @ 8352600
-	.4byte gMap_32_00
-	.4byte gMap_32_01
-	.4byte gMap_32_02
-	.4byte gMap_32_03
-	.4byte gMap_32_04
+	.4byte OneIsland_PokemonCenter_1F
+	.4byte OneIsland_PokemonCenter_2F
+	.4byte OneIsland_House1
+	.4byte OneIsland_House2
+	.4byte OneIsland_Harbor
 
 gMapGroup_33:: @ 8352614
-	.4byte gMap_33_00
-	.4byte gMap_33_01
-	.4byte gMap_33_02
-	.4byte gMap_33_03
-	.4byte gMap_33_04
+	.4byte TwoIsland_JoyfulGameCorner
+	.4byte TwoIsland_House
+	.4byte TwoIsland_PokemonCenter_1F
+	.4byte TwoIsland_PokemonCenter_2F
+	.4byte TwoIsland_Harbor
 
 gMapGroup_34:: @ 8352628
-	.4byte gMap_34_00
-	.4byte gMap_34_01
-	.4byte gMap_34_02
-	.4byte gMap_34_03
-	.4byte gMap_34_04
-	.4byte gMap_34_05
-	.4byte gMap_34_06
-	.4byte gMap_34_07
+	.4byte ThreeIsland_House1
+	.4byte ThreeIsland_PokemonCenter_1F
+	.4byte ThreeIsland_PokemonCenter_2F
+	.4byte ThreeIsland_Mart
+	.4byte ThreeIsland_House2
+	.4byte ThreeIsland_House3
+	.4byte ThreeIsland_House4
+	.4byte ThreeIsland_House5
 
 gMapGroup_35:: @ 8352648
-	.4byte gMap_35_00
-	.4byte gMap_35_01
-	.4byte gMap_35_02
-	.4byte gMap_35_03
-	.4byte gMap_35_04
-	.4byte gMap_35_05
-	.4byte gMap_35_06
-	.4byte gMap_35_07
+	.4byte FourIsland_PokemonDayCare
+	.4byte FourIsland_PokemonCenter_1F
+	.4byte FourIsland_PokemonCenter_2F
+	.4byte FourIsland_House1
+	.4byte FourIsland_LoreleisHouse
+	.4byte FourIsland_Harbor
+	.4byte FourIsland_House2
+	.4byte FourIsland_Mart
 
 gMapGroup_36:: @ 8352668
-	.4byte gMap_36_00
-	.4byte gMap_36_01
-	.4byte gMap_36_02
-	.4byte gMap_36_03
-	.4byte gMap_36_04
+	.4byte FiveIsland_PokemonCenter_1F
+	.4byte FiveIsland_PokemonCenter_2F
+	.4byte FiveIsland_Harbor
+	.4byte FiveIsland_House1
+	.4byte FiveIsland_House2
 
 gMapGroup_37:: @ 835267C
-	.4byte gMap_37_00
-	.4byte gMap_37_01
-	.4byte gMap_37_02
-	.4byte gMap_37_03
-	.4byte gMap_37_04
+	.4byte SixIsland_PokemonCenter_1F
+	.4byte SixIsland_PokemonCenter_2F
+	.4byte SixIsland_Harbor
+	.4byte SixIsland_House
+	.4byte SixIsland_Mart
 
 gMapGroup_38:: @ 8352690
-	.4byte gMap_38_00
+	.4byte ThreeIsland_Harbor
 
 gMapGroup_39:: @ 8352694
-	.4byte gMap_39_00
+	.4byte FiveIsland_ResortGorgeous_House
 
 gMapGroup_40:: @ 8352698
-	.4byte gMap_40_00
+	.4byte TwoIsland_CapeBrink_House
 
 gMapGroup_41:: @ 835269C
-	.4byte gMap_41_00
-	.4byte gMap_41_01
+	.4byte SixIsland_WaterPath_House1
+	.4byte SixIsland_WaterPath_House2
 
 gMapGroup_42:: @ 83526A4
-	.4byte gMap_42_00
+	.4byte SevenIsland_SevaultCanyon_House
 
 gMapGroups:: @ 0x83526A8
 	.4byte gMapGroup_00

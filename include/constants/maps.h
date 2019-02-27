@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_MAPS_H
 #define GUARD_CONSTANTS_MAPS_H
 
+#include "constants/map_groups.h"
+
 #define MAP_NONE (0x7F | (0x7F << 8))
 #define MAP_UNDEFINED (0xFF | (0xFF << 8))
 

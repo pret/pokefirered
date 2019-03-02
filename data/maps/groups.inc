@@ -592,10 +592,10 @@ CinnabarIsland:: @ 83506F8
 IndigoPlateau_Exterior:: @ 8350714
 	.incbin "baserom.gba", 0x350714, 0x1C
 
-SaffronCity:: @ 8350730
+SaffronCity_Duplicate:: @ 8350730
 	.incbin "baserom.gba", 0x350730, 0x1C
 
-SaffronCity_Duplicate:: @ 835074C
+SaffronCity:: @ 835074C
 	.incbin "baserom.gba", 0x35074C, 0x1C
 
 OneIsland:: @ 8350768
@@ -1478,8 +1478,8 @@ gMapGroup_03:: @ 83522F4
 	.4byte FuchsiaCity
 	.4byte CinnabarIsland
 	.4byte IndigoPlateau_Exterior
-	.4byte SaffronCity
 	.4byte SaffronCity_Duplicate
+	.4byte SaffronCity
 	.4byte OneIsland
 	.4byte TwoIsland
 	.4byte ThreeIsland

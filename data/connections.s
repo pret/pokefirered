@@ -187,14 +187,14 @@ gUnknown_8352A54:: @ 8352A54
 
 gUnknown_8352A5C:: @ 8352A5C
 	connection up, 0, MAP_CERULEANCITY
-	connection down, 0, MAP_SAFFRONCITY_DUPLICATE
+	connection down, 0, MAP_SAFFRONCITY
 
 gUnknown_8352A74:: @ 8352A74
 	.4byte 2
 	.4byte gUnknown_8352A5C
 
 gUnknown_8352A7C:: @ 8352A7C
-	connection up, 0, MAP_SAFFRONCITY_DUPLICATE
+	connection up, 0, MAP_SAFFRONCITY
 	connection down, -12, MAP_VERMILIONCITY
 
 gUnknown_8352A94:: @ 8352A94
@@ -203,14 +203,14 @@ gUnknown_8352A94:: @ 8352A94
 
 gUnknown_8352A9C:: @ 8352A9C
 	connection left, -10, MAP_CELADONCITY
-	connection right, -10, MAP_SAFFRONCITY_DUPLICATE
+	connection right, -10, MAP_SAFFRONCITY
 
 gUnknown_8352AB4:: @ 8352AB4
 	.4byte 2
 	.4byte gUnknown_8352A9C
 
 gUnknown_8352ABC:: @ 8352ABC
-	connection left, -10, MAP_SAFFRONCITY_DUPLICATE
+	connection left, -10, MAP_SAFFRONCITY
 	connection right, 0, MAP_LAVENDERTOWN
 
 gUnknown_8352AD4:: @ 8352AD4

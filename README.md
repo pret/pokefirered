@@ -15,7 +15,7 @@ Other disassembly and/or decompilation projects:
 * [**Pokémon Red and Blue**](https://github.com/pret/pokered)
 * [**Pokémon Gold and Silver (Space World '97 demo)**](https://github.com/pret/pokegold-spaceworld)
 * [**Pokémon Yellow**](https://github.com/pret/pokeyellow)
-* [**Pokémon TCG**](https://github.com/pret/poketcg)
+* [**Pokémon Trading Card Game**](https://github.com/pret/poketcg)
 * [**Pokémon Pinball**](https://github.com/pret/pokepinball)
 * [**Pokémon Stadium**](https://github.com/pret/pokestadium)
 * [**Pokémon Gold and Silver**](https://github.com/pret/pokegold)

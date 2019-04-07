@@ -20,9 +20,10 @@ To set up the repository:
 	git clone https://github.com/pret/pokefirered
 	git clone https://github.com/luckytyphlosion/agbcc -b new_layout_with_libs
 
-	cd agbcc
+	cd ./agbcc
 	make
 	make install prefix=../pokefirered
+	make install-sdk prefix=../pokefirered
 
 	cd ../pokefirered
 	./build_tools.sh
@@ -30,6 +31,10 @@ To set up the repository:
 To build **pokefirered.gba**:
 
 	make -j$(nproc)
+
+To confirm it matches the official ROM image while building, do this instead:
+
+	make compare -j$(nproc)
 
 **Note:** If only `.c` or `.s` files were changed, turn off the dependency scanning temporarily. Changes to any other files will be ignored and the build will either fail or not reflect those changes.
 

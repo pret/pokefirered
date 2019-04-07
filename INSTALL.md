@@ -8,9 +8,9 @@ Until further notice, this repository requires a **baserom.gba** file, which mus
 
 **macOS:** Get the [Xcode command-line tools](https://developer.apple.com/library/archive/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_MACOS_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_).
 
-**Windows 10 (1709+):** Get the [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10). For **Windows 10 (1607 & 1703)**, go [here](https://docs.microsoft.com/windows/wsl/install-legacy) instead.
+**Windows 10 (1709+):** Get the [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10).
 
-**Windows Vista, 7, 8, 8.1, and 10 (1507 & 1511):** Get [Cygwin](https://cygwin.com/install.html) and [include](https://cygwin.com/cygwin-ug-net/setup-net.html#setup-packages) the `make`, `git`, `gcc-core`, `gcc-g++`, `libpng-devel` packages.
+**Windows Vista, 7, 8, 8.1, and 10 (1507, 1511, 1607, 1703):** Get [Cygwin](https://cygwin.com/install.html) and [include](https://cygwin.com/cygwin-ug-net/setup-net.html#setup-packages) the `make`, `git`, `gcc-core`, `gcc-g++`, and `libpng-devel` packages. If you're on Windows 10 1607 or 1703 and use [the prerelease version of the Linux subsystem](https://docs.microsoft.com/windows/wsl/install-legacy), consider uninstalling it.
 
 
 ## Installation

@@ -17358,7 +17358,7 @@ _08026244:
 	.4byte _08026380
 	.4byte _080263C4
 _0802626C:
-	ldr r1, _08026290 @ =gUnknown_202297E
+	ldr r1, _08026290 @ =gBattle_BG2_Y
 	movs r0, 0x60
 	strh r0, [r1]
 	movs r0, 0x2
@@ -17373,7 +17373,7 @@ _0802626C:
 	strb r0, [r1, 0x1E]
 	b _080263F6
 	.align 2, 0
-_08026290: .4byte gUnknown_202297E
+_08026290: .4byte gBattle_BG2_Y
 _08026294: .4byte gBattleScripting
 _08026298:
 	bl sub_80264D0
@@ -17389,10 +17389,10 @@ _080262A4:
 	.align 2, 0
 _080262AC: .4byte gBattleScripting
 _080262B0:
-	ldr r1, _080262F8 @ =gUnknown_2022978
+	ldr r1, _080262F8 @ =gBattle_BG1_X
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _080262FC @ =gUnknown_202297A
+	ldr r1, _080262FC @ =gBattle_BG1_Y
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
@@ -17421,8 +17421,8 @@ _080262B0:
 	strb r0, [r1, 0x1E]
 	b _080263F6
 	.align 2, 0
-_080262F8: .4byte gUnknown_2022978
-_080262FC: .4byte gUnknown_202297A
+_080262F8: .4byte gBattle_BG1_X
+_080262FC: .4byte gBattle_BG1_Y
 _08026300: .4byte gBattleScripting
 _08026304:
 	bl sub_8026404
@@ -17438,11 +17438,11 @@ _08026318:
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080263F6
-	ldr r0, _0802632C @ =gUnknown_202297A
+	ldr r0, _0802632C @ =gBattle_BG1_Y
 	strh r1, [r0]
 	b _0802636E
 	.align 2, 0
-_0802632C: .4byte gUnknown_202297A
+_0802632C: .4byte gBattle_BG1_Y
 _08026330:
 	ldr r0, _0802634C @ =gMain
 	ldrh r0, [r0, 0x2E]
@@ -17601,10 +17601,10 @@ _0802647C: .4byte gPlayerParty
 	thumb_func_start sub_8026480
 sub_8026480: @ 8026480
 	push {lr}
-	ldr r1, _080264C0 @ =gUnknown_202297E
+	ldr r1, _080264C0 @ =gBattle_BG2_Y
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _080264C4 @ =gUnknown_202297C
+	ldr r1, _080264C4 @ =gBattle_BG2_X
 	movs r2, 0xD0
 	lsls r2, 1
 	adds r0, r2, 0
@@ -17627,8 +17627,8 @@ sub_8026480: @ 8026480
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080264C0: .4byte gUnknown_202297E
-_080264C4: .4byte gUnknown_202297C
+_080264C0: .4byte gBattle_BG2_Y
+_080264C4: .4byte gBattle_BG2_X
 _080264C8: .4byte gUnknown_82506D0
 _080264CC: .4byte gUnknown_82506F0
 	thumb_func_end sub_8026480
@@ -17643,7 +17643,7 @@ sub_80264D0: @ 80264D0
 	movs r0, 0x1
 	b _0802651A
 _080264E0:
-	ldr r4, _080264F0 @ =gUnknown_202297C
+	ldr r4, _080264F0 @ =gBattle_BG2_X
 	ldrh r1, [r4]
 	movs r5, 0x80
 	lsls r5, 2
@@ -17652,7 +17652,7 @@ _080264E0:
 	movs r0, 0
 	b _0802651A
 	.align 2, 0
-_080264F0: .4byte gUnknown_202297C
+_080264F0: .4byte gBattle_BG2_X
 _080264F4:
 	movs r0, 0xD0
 	lsls r0, 1
@@ -17823,7 +17823,7 @@ _08026624:
 	thumb_func_start sub_8026648
 sub_8026648: @ 8026648
 	push {lr}
-	ldr r0, _0802665C @ =gUnknown_202297C
+	ldr r0, _0802665C @ =gBattle_BG2_X
 	ldrh r1, [r0]
 	movs r3, 0xD0
 	lsls r3, 1
@@ -17833,7 +17833,7 @@ sub_8026648: @ 8026648
 	movs r0, 0
 	b _08026684
 	.align 2, 0
-_0802665C: .4byte gUnknown_202297C
+_0802665C: .4byte gBattle_BG2_X
 _08026660:
 	ldrh r0, [r2]
 	adds r1, r0, 0
@@ -17930,7 +17930,7 @@ PutMonIconOnLvlUpBox: @ 8026688
 	adds r1, r2
 	movs r0, 0
 	strh r0, [r1, 0x2E]
-	ldr r0, _08026750 @ =gUnknown_202297C
+	ldr r0, _08026750 @ =gBattle_BG2_X
 	ldrh r0, [r0]
 	strh r0, [r1, 0x30]
 	add sp, 0x10
@@ -17948,14 +17948,14 @@ _08026740: .4byte 0xd75a0000
 _08026744: .4byte 0x0000d75a
 _08026748: .4byte gUnknown_82507C8
 _0802674C: .4byte gSprites
-_08026750: .4byte gUnknown_202297C
+_08026750: .4byte gBattle_BG2_X
 	thumb_func_end PutMonIconOnLvlUpBox
 
 	thumb_func_start SpriteCB_MonIconOnLvlUpBox
 SpriteCB_MonIconOnLvlUpBox: @ 8026754
 	push {r4,lr}
 	adds r2, r0, 0
-	ldr r0, _08026770 @ =gUnknown_202297C
+	ldr r0, _08026770 @ =gBattle_BG2_X
 	ldrh r1, [r2, 0x30]
 	ldrh r0, [r0]
 	subs r1, r0
@@ -17967,7 +17967,7 @@ SpriteCB_MonIconOnLvlUpBox: @ 8026754
 	strh r0, [r2, 0x2E]
 	b _08026790
 	.align 2, 0
-_08026770: .4byte gUnknown_202297C
+_08026770: .4byte gBattle_BG2_X
 _08026774:
 	movs r1, 0x2E
 	ldrsh r0, [r2, r1]
@@ -32507,14 +32507,14 @@ _0802DAC4: .4byte sub_80116F4
 _0802DAC8:
 	bl sub_800F34C
 	bl LoadBattleTextboxAndBackground
-	ldr r1, _0802DADC @ =gUnknown_2022980
+	ldr r1, _0802DADC @ =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
 	b _0802DB34
 	.align 2, 0
-_0802DADC: .4byte gUnknown_2022980
+_0802DADC: .4byte gBattle_BG3_X
 _0802DAE0:
 	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24

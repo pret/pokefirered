@@ -92,7 +92,7 @@ sub_814F1E4: @ 814F1E4
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl m4aSoundVSyncOn
 	ldr r0, _0814F31C @ =sub_814F1C0
 	bl SetVBlankCallback

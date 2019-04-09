@@ -5113,10 +5113,10 @@ _080384AC:
 	thumb_func_start sub_80384BC
 sub_80384BC: @ 80384BC
 	push {r4,lr}
-	ldr r0, _080384F0 @ =gUnknown_2022974
+	ldr r0, _080384F0 @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080384F4 @ =gUnknown_2022976
+	ldr r0, _080384F4 @ =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, _080384F8 @ =gActiveBattler
 	ldrb r0, [r0]
@@ -5135,8 +5135,8 @@ sub_80384BC: @ 80384BC
 	bl sub_80D87BC
 	b _0803850C
 	.align 2, 0
-_080384F0: .4byte gUnknown_2022974
-_080384F4: .4byte gUnknown_2022976
+_080384F0: .4byte gBattle_BG0_X
+_080384F4: .4byte gBattle_BG0_Y
 _080384F8: .4byte gActiveBattler
 _080384FC: .4byte gUnknown_2022BC6
 _08038500: .4byte gDisplayedStringBattle

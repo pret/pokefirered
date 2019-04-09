@@ -621,7 +621,7 @@ _08047090:
 	bl FreeAllSpritePalettes
 	bl ResetSpriteData
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl m4aSoundVSyncOn
 	b _0804724A
 	.align 2, 0

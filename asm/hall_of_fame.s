@@ -3070,7 +3070,7 @@ _080F36B8: .4byte gUnknown_840C39C
 	thumb_func_start sub_80F36BC
 sub_80F36BC: @ 80F36BC
 	push {lr}
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl reset_temp_tile_data_buffers
@@ -3353,7 +3353,7 @@ _080F38EE:
 	movs r1, 0x3
 	ands r0, r1
 	adds r0, 0x8
-	ldr r1, _080F392C @ =gUnknown_825E074
+	ldr r1, _080F392C @ =gSineTable
 	lsls r4, 1
 	adds r4, r1
 	movs r2, 0
@@ -3373,7 +3373,7 @@ _080F3926:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F392C: .4byte gUnknown_825E074
+_080F392C: .4byte gSineTable
 	thumb_func_end sub_80F38D8
 
 	thumb_func_start sub_80F3930

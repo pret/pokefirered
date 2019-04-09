@@ -64,7 +64,7 @@ _081420D6:
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0x1
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _081421E0 @ =gUnknown_8466D60

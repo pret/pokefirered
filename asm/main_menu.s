@@ -113,7 +113,7 @@ sub_800C318: @ 800C318
 	ldr r0, _0800C4B0 @ =0x810001ff
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes

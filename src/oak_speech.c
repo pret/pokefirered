@@ -1,14 +1,37 @@
 #include "global.h"
 #include "main.h"
 #include "task.h"
+#include "malloc.h"
 #include "gpu_regs.h"
 #include "wild_encounter.h"
 #include "palette.h"
 #include "text.h"
+#include "window.h"
+#include "text_window.h"
+#include "bg.h"
+#include "menu.h"
+#include "help_system.h"
+#include "new_menu_helpers.h"
+#include "pokemon_3.h"
+#include "sound.h"
+#include "scanline_effect.h"
 #include "constants/species.h"
+
+struct OakSpeechResources
+{
+    u8 filler_0000[0x1F];
+    u8 unk_001F;
+    u8 filler_0020[0x1800];
+    u8 bg2TilemapBuffer[0x400];
+    u8 bg1TilemapBuffer[0x800];
+}; //size=0x2420
+
+EWRAM_DATA struct OakSpeechResources * sOakSpeechResources = NULL;
 
 void sub_812E9F8(u8 taskId);
 void sub_812EB58(u8 taskId);
+void sub_812EEB0(void);
+void sub_812F0B0(u8 taskId);
 
 const u8 gUnknown_845FD54[][5] = {
     [SPECIES_BULBASAUR - 1] = {0x16, 0x1b, 0x30, 0x16, 0x29},
@@ -426,6 +449,11 @@ const u8 gUnknown_845FD54[][5] = {
     [SPECIES_OLD_UNOWN_QMARK - 1] = {0x20, 0x23, 0x08, 0x20, 0x2d}
 };
 
+ALIGNED(4) const u16 gUnknown_8460568[] = INCBIN_U16("data/oak_speech/unk_8460568.gbapal");
+const u32 gUnknown_84605E8[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz");
+
+extern const struct BgTemplate gUnknown_8462E58[3];
+
 void sub_812E944(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 {
     u8 taskId = CreateTask(sub_812E9F8, a5);
@@ -530,4 +558,93 @@ void sub_812EB2C(void)
     gPlttBufferFaded[0]   = RGB_BLACK;
     CreateTask(sub_812EB58, 0);
     SetMainCallback2(sub_812EB10);
+}
+
+void sub_812EB58(u8 taskId)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        SetHBlankCallback(NULL);
+        DmaFill16(3, 0, VRAM, VRAM_SIZE);
+        DmaFill32(3, 0, OAM, OAM_SIZE);
+        DmaFill16(3, 0, PLTT + sizeof(u16), PLTT_SIZE - 2);
+        ResetPaletteFade();
+        ScanlineEffect_Stop();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        reset_temp_tile_data_buffers();
+        sub_812B1F0(2);
+        break;
+    case 1:
+        sOakSpeechResources = AllocZeroed(sizeof(*sOakSpeechResources));
+        sub_8044AF0(1, 1);
+        break;
+    case 2:
+        SetGpuReg(REG_OFFSET_WIN0H, 0);
+        SetGpuReg(REG_OFFSET_WIN0V, 0);
+        SetGpuReg(REG_OFFSET_WIN1H, 0);
+        SetGpuReg(REG_OFFSET_WIN1V, 0);
+        SetGpuReg(REG_OFFSET_WININ, 0);
+        SetGpuReg(REG_OFFSET_WINOUT, 0);
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        break;
+    case 3:
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(1, gUnknown_8462E58, NELEMS(gUnknown_8462E58));
+        SetBgTilemapBuffer(1, sOakSpeechResources->bg1TilemapBuffer);
+        SetBgTilemapBuffer(2, sOakSpeechResources->bg2TilemapBuffer);
+        ChangeBgX(1, 0, 0);
+        ChangeBgY(1, 0, 0);
+        ChangeBgX(2, 0, 0);
+        ChangeBgY(2, 0, 0);
+        gSpriteCoordOffsetX = 0;
+        gSpriteCoordOffsetY = 0;
+        break;
+    case 4:
+        gPaletteFade.bufferTransferDisabled = TRUE;
+        sub_80F6C6C();
+        sub_80F6C98();
+        sub_80F77CC(0xD0);
+        LoadPalette(gUnknown_8460568, 0x000, 0x080);
+        LoadPalette(stdpal_get(2) + 15, 0x000, 0x002);
+        break;
+    case 5:
+        sOakSpeechResources->unk_001F = sub_80F78A8();
+        gTextFlags.flag_0 = TRUE;
+        decompress_and_copy_tile_data_to_vram(1, gUnknown_84605E8, 0, 0, 0);
+        break;
+    case 6:
+        if (free_temp_tile_data_buffers_if_possible())
+            return;
+        sub_80F6F54(0, 1);
+        FillBgTilemapBufferRect_Palette0(1, 0x0000,  0,  0, 32, 32);
+        CopyBgTilemapBufferToVram(1);
+        break;
+    case 7:
+        sub_810F558(0, 30, 0, 13, 0x1C4);
+        FillBgTilemapBufferRect_Palette0(1, 0xD00F,  0,  0, 30, 2);
+        FillBgTilemapBufferRect_Palette0(1, 0xD002,  0,  2, 30, 1);
+        FillBgTilemapBufferRect_Palette0(1, 0xD00E,  0, 19, 30, 1);
+        sub_812EEB0();
+        gPaletteFade.bufferTransferDisabled = FALSE;
+        gTasks[taskId].data[5] = sub_8006300(0, 0xE6, 0x95, 0, 0);
+        BlendPalettes(0xFFFFFFFF, 0x10, 0x00);
+        break;
+    case 10:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+        ShowBg(0);
+        ShowBg(1);
+        SetVBlankCallback(sub_812EAFC);
+        PlayBGM(323);
+        gTasks[taskId].func = sub_812F0B0;
+        gMain.state = 0;
+        return;
+    }
+
+    gMain.state++;
 }

@@ -500,7 +500,7 @@ _0815F4DC:
 	adds r0, 0x1
 	strh r0, [r4]
 _0815F4FA:
-	ldr r0, _0815F50C @ =gUnknown_825E074
+	ldr r0, _0815F50C @ =gSineTable
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	lsls r1, 1
@@ -510,7 +510,7 @@ _0815F4FA:
 	asrs r0, 4
 	b _0815F53E
 	.align 2, 0
-_0815F50C: .4byte gUnknown_825E074
+_0815F50C: .4byte gSineTable
 _0815F510:
 	ldrh r0, [r4, 0x2]
 	adds r0, 0x10
@@ -527,7 +527,7 @@ _0815F510:
 	adds r0, 0x1
 	strh r0, [r4]
 _0815F52E:
-	ldr r1, _0815F544 @ =gUnknown_825E074
+	ldr r1, _0815F544 @ =gSineTable
 	movs r2, 0x2
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -540,7 +540,7 @@ _0815F53E:
 	strh r0, [r5, 0x26]
 	b _0815F55A
 	.align 2, 0
-_0815F544: .4byte gUnknown_825E074
+_0815F544: .4byte gSineTable
 _0815F548:
 	ldrh r0, [r4, 0x2]
 	adds r0, 0x1

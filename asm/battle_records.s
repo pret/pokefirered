@@ -471,7 +471,7 @@ _080CD604: .4byte 0x81000800
 	thumb_func_start sub_80CD608
 sub_80CD608: @ 80CD608
 	push {lr}
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl dp13_810BB8C

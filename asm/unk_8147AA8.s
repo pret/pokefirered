@@ -7393,7 +7393,7 @@ _0814B1EC:
 	movs r0, 0
 	strh r0, [r5, 0x30]
 _0814B1FE:
-	ldr r1, _0814B22C @ =gUnknown_825E074
+	ldr r1, _0814B22C @ =gSineTable
 	movs r2, 0x30
 	ldrsh r0, [r5, r2]
 	lsls r0, 1
@@ -7417,7 +7417,7 @@ _0814B1FE:
 	strh r1, [r5, 0x2E]
 	b _0814B234
 	.align 2, 0
-_0814B22C: .4byte gUnknown_825E074
+_0814B22C: .4byte gSineTable
 _0814B230:
 	ldr r0, _0814B23C @ =SpriteCallbackDummy
 	str r0, [r5, 0x1C]

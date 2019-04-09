@@ -9,7 +9,7 @@
 Sin: @ 8044E30
 	lsls r1, 16
 	asrs r1, 16
-	ldr r2, _08044E48 @ =gUnknown_825E074
+	ldr r2, _08044E48 @ =gSineTable
 	lsls r0, 16
 	asrs r0, 15
 	adds r0, r2
@@ -20,14 +20,14 @@ Sin: @ 8044E30
 	asrs r0, 16
 	bx lr
 	.align 2, 0
-_08044E48: .4byte gUnknown_825E074
+_08044E48: .4byte gSineTable
 	thumb_func_end Sin
 
 	thumb_func_start Cos
 Cos: @ 8044E4C
 	lsls r1, 16
 	asrs r1, 16
-	ldr r2, _08044E68 @ =gUnknown_825E074
+	ldr r2, _08044E68 @ =gSineTable
 	lsls r0, 16
 	asrs r0, 15
 	adds r0, 0x80
@@ -39,7 +39,7 @@ Cos: @ 8044E4C
 	asrs r0, 16
 	bx lr
 	.align 2, 0
-_08044E68: .4byte gUnknown_825E074
+_08044E68: .4byte gSineTable
 	thumb_func_end Cos
 
 	thumb_func_start Sin2

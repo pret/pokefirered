@@ -547,7 +547,7 @@ gUnknown_825E032:: @ 825E032
 gUnknown_825E05C:: @ 825E05C
 	.incbin "baserom.gba", 0x25E05C, 0x18
 
-gUnknown_825E074:: @ 825E074
+gSineTable:: @ 825E074
 	.incbin "baserom.gba", 0x25E074, 0x280
 
 gUnknown_825E2F4:: @ 825E2F4

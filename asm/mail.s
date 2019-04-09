@@ -200,7 +200,7 @@ _080BED40:
 _080BED8C:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg

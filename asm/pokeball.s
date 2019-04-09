@@ -2276,7 +2276,7 @@ _0804BB22:
 	ldrsh r0, [r4, r7]
 	cmp r0, 0x7F
 	bgt _0804BB64
-	ldr r1, _0804BB60 @ =gUnknown_825E074
+	ldr r1, _0804BB60 @ =gSineTable
 	lsls r0, r2, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -2297,7 +2297,7 @@ _0804BB48:
 	b _0804BB72
 	.align 2, 0
 _0804BB5C: .4byte gSprites
-_0804BB60: .4byte gUnknown_825E074
+_0804BB60: .4byte gSineTable
 _0804BB64:
 	ldrh r0, [r4, 0x38]
 	strh r0, [r5, 0x20]

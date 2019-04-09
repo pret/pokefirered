@@ -279,7 +279,7 @@ sub_80F4E24: @ 80F4E24
 	bl ResetPaletteFade
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F4E24

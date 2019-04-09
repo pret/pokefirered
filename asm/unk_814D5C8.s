@@ -49,7 +49,7 @@ _0814D61C:
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl reset_temp_tile_data_buffers
 	b _0814D878
 _0814D63A:

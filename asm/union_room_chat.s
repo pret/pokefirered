@@ -200,7 +200,7 @@ sub_81285B4: @ 81285B4
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_8087F54
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81285B4
@@ -3046,7 +3046,7 @@ sub_8129B88: @ 8129B88
 	str r0, [r4]
 _08129B9E:
 	bl FreeAllWindowBuffers
-	ldr r1, _08129BB4 @ =gUnknown_2039600
+	ldr r1, _08129BB4 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	pop {r4}
@@ -3054,7 +3054,7 @@ _08129B9E:
 	bx r0
 	.align 2, 0
 _08129BB0: .4byte gUnknown_203B0E4
-_08129BB4: .4byte gUnknown_2039600
+_08129BB4: .4byte gScanlineEffect
 	thumb_func_end sub_8129B88
 
 	thumb_func_start sub_8129BB8
@@ -5384,13 +5384,13 @@ sub_812AD50: @ 812AD50
 	strh r1, [r0, 0x20]
 	str r1, [sp, 0xC]
 	add r0, sp, 0xC
-	ldr r1, _0812AD98 @ =gUnknown_2038700
+	ldr r1, _0812AD98 @ =gScanlineEffectRegBuffers
 	ldr r2, _0812AD9C @ =0x010003c0
 	bl CpuFastSet
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -5398,7 +5398,7 @@ sub_812AD50: @ 812AD50
 _0812AD8C: .4byte 0xa2600001
 _0812AD90: .4byte 0x04000014
 _0812AD94: .4byte gUnknown_203B0E4
-_0812AD98: .4byte gUnknown_2038700
+_0812AD98: .4byte gScanlineEffectRegBuffers
 _0812AD9C: .4byte 0x010003c0
 	thumb_func_end sub_812AD50
 
@@ -5410,12 +5410,12 @@ sub_812ADA0: @ 812ADA0
 	lsrs r0, 16
 	mov r1, sp
 	strh r0, [r1]
-	ldr r5, _0812ADE8 @ =gUnknown_2039600
+	ldr r5, _0812ADE8 @ =gScanlineEffect
 	ldrb r0, [r5, 0x14]
 	lsls r1, r0, 4
 	subs r1, r0
 	lsls r1, 7
-	ldr r4, _0812ADEC @ =gUnknown_2038700
+	ldr r4, _0812ADEC @ =gScanlineEffectRegBuffers
 	adds r1, r4
 	ldr r2, _0812ADF0 @ =0x01000090
 	mov r0, sp
@@ -5439,8 +5439,8 @@ sub_812ADA0: @ 812ADA0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812ADE8: .4byte gUnknown_2039600
-_0812ADEC: .4byte gUnknown_2038700
+_0812ADE8: .4byte gScanlineEffect
+_0812ADEC: .4byte gScanlineEffectRegBuffers
 _0812ADF0: .4byte 0x01000090
 _0812ADF4: .4byte 0x01000010
 	thumb_func_end sub_812ADA0
@@ -5457,7 +5457,7 @@ sub_812ADF8: @ 812ADF8
 	lsrs r4, 16
 	mov r0, sp
 	strh r4, [r0]
-	ldr r5, _0812AE64 @ =gUnknown_2038700
+	ldr r5, _0812AE64 @ =gScanlineEffectRegBuffers
 	ldr r0, _0812AE68 @ =0x01000090
 	mov r9, r0
 	mov r0, sp
@@ -5498,7 +5498,7 @@ sub_812ADF8: @ 812ADF8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812AE64: .4byte gUnknown_2038700
+_0812AE64: .4byte gScanlineEffectRegBuffers
 _0812AE68: .4byte 0x01000090
 _0812AE6C: .4byte 0x01000010
 	thumb_func_end sub_812ADF8

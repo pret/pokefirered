@@ -90,7 +90,7 @@ sub_815F74C: @ 815F74C
 	ldr r0, [r0, 0x8]
 	bl ResetSpriteData
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r0, _0815F7D4 @ =gUnknown_3005ECC
 	strb r4, [r0]
 	ldr r0, _0815F7D8 @ =sub_815F7F0

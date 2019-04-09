@@ -5,367 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_812EB58
-sub_812EB58: @ 812EB58
-	push {r4-r6,lr}
-	sub sp, 0x10
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r0, _0812EB7C @ =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0xA
-	bls _0812EB70
-	b _0812EE94
-_0812EB70:
-	lsls r0, 2
-	ldr r1, _0812EB80 @ =_0812EB84
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0812EB7C: .4byte gMain
-_0812EB80: .4byte _0812EB84
-	.align 2, 0
-_0812EB84:
-	.4byte _0812EBB0
-	.4byte _0812EC28
-	.4byte _0812EC44
-	.4byte _0812EC8E
-	.4byte _0812ED00
-	.4byte _0812ED3C
-	.4byte _0812ED6C
-	.4byte _0812ED9A
-	.4byte _0812EE94
-	.4byte _0812EE94
-	.4byte _0812EE30
-_0812EBB0:
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r0, 0
-	bl SetHBlankCallback
-	add r1, sp, 0x8
-	movs r0, 0
-	strh r0, [r1]
-	ldr r1, _0812EC14 @ =0x040000d4
-	add r0, sp, 0x8
-	str r0, [r1]
-	movs r0, 0xC0
-	lsls r0, 19
-	str r0, [r1, 0x4]
-	ldr r0, _0812EC18 @ =0x8100c000
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	movs r2, 0
-	str r2, [sp, 0xC]
-	add r0, sp, 0xC
-	str r0, [r1]
-	movs r0, 0xE0
-	lsls r0, 19
-	str r0, [r1, 0x4]
-	ldr r0, _0812EC1C @ =0x85000100
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	add r0, sp, 0x8
-	strh r2, [r0]
-	str r0, [r1]
-	ldr r0, _0812EC20 @ =0x05000002
-	str r0, [r1, 0x4]
-	ldr r0, _0812EC24 @ =0x810001ff
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	bl ResetPaletteFade
-	bl remove_some_task
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	bl reset_temp_tile_data_buffers
-	movs r0, 0x2
-	bl sub_812B1F0
-	b _0812EE94
-	.align 2, 0
-_0812EC14: .4byte 0x040000d4
-_0812EC18: .4byte 0x8100c000
-_0812EC1C: .4byte 0x85000100
-_0812EC20: .4byte 0x05000002
-_0812EC24: .4byte 0x810001ff
-_0812EC28:
-	ldr r4, _0812EC3C @ =gUnknown_203B108
-	ldr r0, _0812EC40 @ =0x00002420
-	bl AllocZeroed
-	str r0, [r4]
-	movs r0, 0x1
-	movs r1, 0x1
-	bl sub_8044AF0
-	b _0812EE94
-	.align 2, 0
-_0812EC3C: .4byte gUnknown_203B108
-_0812EC40: .4byte 0x00002420
-_0812EC44:
-	movs r0, 0x40
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x44
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x42
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x46
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x48
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x4A
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x50
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x52
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x54
-	movs r1, 0
-	bl SetGpuReg
-	b _0812EE94
-_0812EC8E:
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, _0812ECF0 @ =gUnknown_8462E58
-	movs r0, 0x1
-	movs r2, 0x3
-	bl InitBgsFromTemplates
-	ldr r4, _0812ECF4 @ =gUnknown_203B108
-	ldr r1, [r4]
-	movs r0, 0xE1
-	lsls r0, 5
-	adds r1, r0
-	movs r0, 0x1
-	bl SetBgTilemapBuffer
-	ldr r1, [r4]
-	movs r0, 0xC1
-	lsls r0, 5
-	adds r1, r0
-	movs r0, 0x2
-	bl SetBgTilemapBuffer
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgX
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	movs r0, 0x2
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgX
-	movs r0, 0x2
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	ldr r0, _0812ECF8 @ =gSpriteCoordOffsetX
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, _0812ECFC @ =gSpriteCoordOffsetY
-	strh r1, [r0]
-	b _0812EE94
-	.align 2, 0
-_0812ECF0: .4byte gUnknown_8462E58
-_0812ECF4: .4byte gUnknown_203B108
-_0812ECF8: .4byte gSpriteCoordOffsetX
-_0812ECFC: .4byte gSpriteCoordOffsetY
-_0812ED00:
-	ldr r2, _0812ED34 @ =gPaletteFade
-	ldrb r0, [r2, 0x8]
-	movs r1, 0x80
-	orrs r0, r1
-	strb r0, [r2, 0x8]
-	bl sub_80F6C6C
-	bl sub_80F6C98
-	movs r0, 0xD0
-	bl sub_80F77CC
-	ldr r0, _0812ED38 @ =gUnknown_8460568
-	movs r1, 0
-	movs r2, 0x80
-	bl LoadPalette
-	movs r0, 0x2
-	bl stdpal_get
-	adds r0, 0x1E
-	movs r1, 0
-	movs r2, 0x2
-	bl LoadPalette
-	b _0812EE94
-	.align 2, 0
-_0812ED34: .4byte gPaletteFade
-_0812ED38: .4byte gUnknown_8460568
-_0812ED3C:
-	bl sub_80F78A8
-	ldr r1, _0812ED60 @ =gUnknown_203B108
-	ldr r1, [r1]
-	movs r3, 0
-	strb r0, [r1, 0x1F]
-	ldr r2, _0812ED64 @ =gTextFlags
-	ldrb r0, [r2]
-	movs r1, 0x1
-	orrs r0, r1
-	strb r0, [r2]
-	ldr r1, _0812ED68 @ =gUnknown_84605E8
-	str r3, [sp]
-	movs r0, 0x1
-	movs r2, 0
-	bl decompress_and_copy_tile_data_to_vram
-	b _0812EE94
-	.align 2, 0
-_0812ED60: .4byte gUnknown_203B108
-_0812ED64: .4byte gTextFlags
-_0812ED68: .4byte gUnknown_84605E8
-_0812ED6C:
-	bl free_temp_tile_data_buffers_if_possible
-	lsls r0, 24
-	cmp r0, 0
-	beq _0812ED78
-	b _0812EEA2
-_0812ED78:
-	movs r0, 0
-	movs r1, 0x1
-	bl sub_80F6F54
-	movs r0, 0x20
-	str r0, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect_Palette0
-	movs r0, 0x1
-	bl CopyBgTilemapBufferToVram
-	b _0812EE94
-_0812ED9A:
-	movs r0, 0xE2
-	lsls r0, 1
-	str r0, [sp]
-	movs r0, 0
-	movs r1, 0x1E
-	movs r2, 0
-	movs r3, 0xD
-	bl sub_810F558
-	ldr r1, _0812EE1C @ =0x0000d00f
-	movs r4, 0x1E
-	str r4, [sp]
-	movs r0, 0x2
-	str r0, [sp, 0x4]
-	movs r0, 0x1
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect_Palette0
-	ldr r1, _0812EE20 @ =0x0000d002
-	str r4, [sp]
-	movs r5, 0x1
-	str r5, [sp, 0x4]
-	movs r0, 0x1
-	movs r2, 0
-	movs r3, 0x2
-	bl FillBgTilemapBufferRect_Palette0
-	ldr r1, _0812EE24 @ =0x0000d00e
-	str r4, [sp]
-	str r5, [sp, 0x4]
-	movs r0, 0x1
-	movs r2, 0
-	movs r3, 0x13
-	bl FillBgTilemapBufferRect_Palette0
-	bl sub_812EEB0
-	ldr r2, _0812EE28 @ =gPaletteFade
-	ldrb r1, [r2, 0x8]
-	movs r0, 0x7F
-	ands r0, r1
-	strb r0, [r2, 0x8]
-	movs r0, 0
-	str r0, [sp]
-	movs r1, 0xE6
-	movs r2, 0x95
-	movs r3, 0
-	bl sub_8006300
-	ldr r2, _0812EE2C @ =gTasks
-	lsls r1, r6, 2
-	adds r1, r6
-	lsls r1, 3
-	adds r1, r2
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r1, 0x12]
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	b _0812EE94
-	.align 2, 0
-_0812EE1C: .4byte 0x0000d00f
-_0812EE20: .4byte 0x0000d002
-_0812EE24: .4byte 0x0000d00e
-_0812EE28: .4byte gPaletteFade
-_0812EE2C: .4byte gTasks
-_0812EE30:
-	movs r0, 0x1
-	negs r0, r0
-	movs r4, 0
-	str r4, [sp]
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	movs r1, 0x82
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	movs r0, 0
-	bl ShowBg
-	movs r0, 0x1
-	bl ShowBg
-	ldr r0, _0812EE80 @ =sub_812EAFC
-	bl SetVBlankCallback
-	ldr r0, _0812EE84 @ =0x00000143
-	bl PlayBGM
-	ldr r1, _0812EE88 @ =gTasks
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0812EE8C @ =sub_812F0B0
-	str r1, [r0]
-	ldr r0, _0812EE90 @ =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r0, r1
-	strb r4, [r0]
-	b _0812EEA2
-	.align 2, 0
-_0812EE80: .4byte sub_812EAFC
-_0812EE84: .4byte 0x00000143
-_0812EE88: .4byte gTasks
-_0812EE8C: .4byte sub_812F0B0
-_0812EE90: .4byte gMain
-_0812EE94:
-	ldr r1, _0812EEAC @ =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_0812EEA2:
-	add sp, 0x10
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0812EEAC: .4byte gMain
-	thumb_func_end sub_812EB58
-
 	thumb_func_start sub_812EEB0
 sub_812EEB0: @ 812EEB0
 	push {r4-r6,lr}
@@ -378,7 +17,7 @@ sub_812EEB0: @ 812EEB0
 	movs r3, 0
 	bl sub_810F650
 	ldr r1, _0812EF40 @ =gUnknown_8462EB4
-	ldr r4, _0812EF44 @ =gUnknown_203B108
+	ldr r4, _0812EF44 @ =sOakSpeechResources
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x12]
 	lsls r0, 2
@@ -432,7 +71,7 @@ sub_812EEB0: @ 812EEB0
 _0812EF38: .4byte gUnknown_8415D2C
 _0812EF3C: .4byte gUnknown_8415D48
 _0812EF40: .4byte gUnknown_8462EB4
-_0812EF44: .4byte gUnknown_203B108
+_0812EF44: .4byte sOakSpeechResources
 _0812EF48: .4byte gUnknown_8462EE8
 _0812EF4C: .4byte gUnknown_81C582D
 	thumb_func_end sub_812EEB0
@@ -449,7 +88,7 @@ sub_812EF50: @ 812EF50
 	lsrs r0, 24
 	mov r8, r0
 	movs r6, 0
-	ldr r4, _0812EF80 @ =gUnknown_203B108
+	ldr r4, _0812EF80 @ =sOakSpeechResources
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x12]
 	subs r0, r1, 0x1
@@ -463,7 +102,7 @@ sub_812EF50: @ 812EF50
 	mov r10, r0
 	b _0812F06A
 	.align 2, 0
-_0812EF80: .4byte gUnknown_203B108
+_0812EF80: .4byte sOakSpeechResources
 _0812EF84:
 	ldr r0, _0812F038 @ =gUnknown_8415D50
 	movs r1, 0
@@ -533,7 +172,7 @@ _0812EF9A:
 	lsrs r6, r0, 24
 	cmp r6, 0x2
 	bls _0812EF9A
-	ldr r0, _0812F048 @ =gUnknown_203B108
+	ldr r0, _0812F048 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x12]
 	cmp r0, 0x1
@@ -553,7 +192,7 @@ _0812F038: .4byte gUnknown_8415D50
 _0812F03C: .4byte gUnknown_8462EB4
 _0812F040: .4byte gUnknown_8462EE8
 _0812F044: .4byte gUnknown_8463074
-_0812F048: .4byte gUnknown_203B108
+_0812F048: .4byte sOakSpeechResources
 _0812F04C: .4byte gUnknown_8460D94
 _0812F050:
 	ldr r1, _0812F0A0 @ =gUnknown_8460E34
@@ -630,7 +269,7 @@ sub_812F0B0: @ 812F0B0
 	lsls r0, 3
 	adds r0, r1
 	strh r3, [r0, 0x26]
-	ldr r0, _0812F118 @ =gUnknown_203B108
+	ldr r0, _0812F118 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x12]
 	adds r4, r2, 0
@@ -651,10 +290,10 @@ sub_812F0B0: @ 812F0B0
 _0812F10C: .4byte gPaletteFade
 _0812F110: .4byte gMain
 _0812F114: .4byte gTasks
-_0812F118: .4byte gUnknown_203B108
+_0812F118: .4byte sOakSpeechResources
 _0812F11C: .4byte 0xffffdfff
 _0812F120:
-	ldr r0, _0812F16C @ =gUnknown_203B108
+	ldr r0, _0812F16C @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x12]
 	cmp r0, 0
@@ -691,7 +330,7 @@ _0812F162:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812F16C: .4byte gUnknown_203B108
+_0812F16C: .4byte sOakSpeechResources
 _0812F170: .4byte gTasks
 _0812F174: .4byte 0x0000ffff
 _0812F178: .4byte 0xffffdfff
@@ -715,7 +354,7 @@ sub_812F180: @ 812F180
 	ands r0, r1
 	cmp r0, 0
 	bne _0812F260
-	ldr r1, _0812F1B4 @ =gUnknown_203B108
+	ldr r1, _0812F1B4 @ =sOakSpeechResources
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x12]
 	adds r5, r1, 0
@@ -726,7 +365,7 @@ sub_812F180: @ 812F180
 	b _0812F1C4
 	.align 2, 0
 _0812F1B0: .4byte gPaletteFade
-_0812F1B4: .4byte gUnknown_203B108
+_0812F1B4: .4byte sOakSpeechResources
 _0812F1B8:
 	cmp r0, 0
 	blt _0812F1C4
@@ -838,7 +477,7 @@ sub_812F274: @ 812F274
 	ands r0, r1
 	cmp r0, 0
 	bne _0812F320
-	ldr r5, _0812F330 @ =gUnknown_203B108
+	ldr r5, _0812F330 @ =sOakSpeechResources
 _0812F292:
 	ldr r0, [r5]
 	lsls r4, r6, 1
@@ -892,7 +531,7 @@ _0812F292:
 	adds r4, r0
 	ldrb r0, [r4, 0x12]
 	bl sub_8006398
-	ldr r0, _0812F330 @ =gUnknown_203B108
+	ldr r0, _0812F330 @ =sOakSpeechResources
 	ldr r0, [r0]
 	strh r7, [r0, 0x14]
 	adds r0, 0x14
@@ -912,7 +551,7 @@ _0812F320:
 	bx r0
 	.align 2, 0
 _0812F32C: .4byte gPaletteFade
-_0812F330: .4byte gUnknown_203B108
+_0812F330: .4byte sOakSpeechResources
 _0812F334: .4byte gTasks
 _0812F338: .4byte sub_812F33C
 	thumb_func_end sub_812F274
@@ -959,7 +598,7 @@ _0812F374:
 	add r1, sp, 0x14
 	bl malloc_and_decompress
 	adds r1, r0, 0
-	ldr r4, _0812F48C @ =gUnknown_203B108
+	ldr r4, _0812F48C @ =sOakSpeechResources
 	ldr r0, [r4]
 	str r1, [r0, 0x8]
 	movs r0, 0x1E
@@ -1072,7 +711,7 @@ _0812F476:
 	.align 2, 0
 _0812F484: .4byte gUnknown_8415D48
 _0812F488: .4byte gUnknown_8460BA8
-_0812F48C: .4byte gUnknown_203B108
+_0812F48C: .4byte sOakSpeechResources
 _0812F490: .4byte gUnknown_8462EC0
 _0812F494: .4byte gMain
 _0812F498: .4byte gUnknown_8462EEC
@@ -1159,15 +798,15 @@ _0812F544:
 	ands r0, r1
 	cmp r0, 0
 	beq _0812F55C
-	ldr r0, _0812F558 @ =gUnknown_203B108
+	ldr r0, _0812F558 @ =sOakSpeechResources
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x12]
 	adds r0, 0x1
 	b _0812F56A
 	.align 2, 0
-_0812F558: .4byte gUnknown_203B108
+_0812F558: .4byte sOakSpeechResources
 _0812F55C:
-	ldr r0, _0812F58C @ =gUnknown_203B108
+	ldr r0, _0812F58C @ =sOakSpeechResources
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x12]
 	cmp r0, 0
@@ -1179,7 +818,7 @@ _0812F56A:
 	strh r0, [r1, 0x12]
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _0812F58C @ =gUnknown_203B108
+	ldr r0, _0812F58C @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x12]
 	cmp r0, 0x3
@@ -1192,7 +831,7 @@ _0812F56A:
 	strb r1, [r0]
 	b _0812F71C
 	.align 2, 0
-_0812F58C: .4byte gUnknown_203B108
+_0812F58C: .4byte sOakSpeechResources
 _0812F590: .4byte gMain
 _0812F594:
 	ldr r1, _0812F5B0 @ =0x00000241
@@ -1239,7 +878,7 @@ _0812F5D6:
 	str r1, [sp, 0x8]
 	str r2, [sp, 0xC]
 	ldr r2, _0812F624 @ =gUnknown_8462EF0
-	ldr r4, _0812F628 @ =gUnknown_203B108
+	ldr r4, _0812F628 @ =sOakSpeechResources
 	ldr r1, [r4]
 	ldrh r1, [r1, 0x12]
 	lsls r1, 2
@@ -1263,7 +902,7 @@ _0812F5D6:
 	.align 2, 0
 _0812F620: .4byte gUnknown_8462EEC
 _0812F624: .4byte gUnknown_8462EF0
-_0812F628: .4byte gUnknown_203B108
+_0812F628: .4byte sOakSpeechResources
 _0812F62C: .4byte gUnknown_8415D48
 _0812F630:
 	bl sub_810F71C
@@ -1343,7 +982,7 @@ _0812F6C0:
 	b _0812F71C
 _0812F6D0:
 	strb r4, [r3]
-	ldr r0, _0812F724 @ =gUnknown_203B108
+	ldr r0, _0812F724 @ =sOakSpeechResources
 	ldr r0, [r0]
 	strh r4, [r0, 0x12]
 	movs r0, 0x40
@@ -1380,7 +1019,7 @@ _0812F71C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812F724: .4byte gUnknown_203B108
+_0812F724: .4byte sOakSpeechResources
 _0812F728: .4byte sub_812F72C
 	thumb_func_end sub_812F4A8
 
@@ -1483,7 +1122,7 @@ _0812F7F0:
 	add r1, sp, 0x4
 	bl malloc_and_decompress
 	adds r1, r0, 0
-	ldr r0, _0812F874 @ =gUnknown_203B108
+	ldr r0, _0812F874 @ =sOakSpeechResources
 	ldr r0, [r0]
 	str r1, [r0]
 	ldr r2, [sp, 0x4]
@@ -1535,7 +1174,7 @@ _0812F862:
 	bx r0
 	.align 2, 0
 _0812F870: .4byte gUnknown_8460CA4
-_0812F874: .4byte gUnknown_203B108
+_0812F874: .4byte sOakSpeechResources
 _0812F878: .4byte gUnknown_8460CE8
 _0812F87C: .4byte sub_812F880
 	thumb_func_end sub_812F7C0
@@ -1579,7 +1218,7 @@ _0812F8B8:
 	adds r0, r5, 0
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
-	ldr r0, _0812F8F8 @ =gUnknown_203B108
+	ldr r0, _0812F8F8 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -1597,9 +1236,9 @@ _0812F8B8:
 	.align 2, 0
 _0812F8F0: .4byte gUnknown_81C5C78
 _0812F8F4: .4byte gStringVar4
-_0812F8F8: .4byte gUnknown_203B108
+_0812F8F8: .4byte sOakSpeechResources
 _0812F8FC:
-	ldr r0, _0812F938 @ =gUnknown_203B108
+	ldr r0, _0812F938 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -1629,7 +1268,7 @@ _0812F92E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812F938: .4byte gUnknown_203B108
+_0812F938: .4byte sOakSpeechResources
 _0812F93C: .4byte gTasks
 _0812F940: .4byte sub_812F944
 	thumb_func_end sub_812F880
@@ -1656,7 +1295,7 @@ sub_812F944: @ 812F944
 	adds r0, r5, 0
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
-	ldr r0, _0812F99C @ =gUnknown_203B108
+	ldr r0, _0812F99C @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -1674,9 +1313,9 @@ sub_812F944: @ 812F944
 	.align 2, 0
 _0812F994: .4byte gUnknown_81C5D06
 _0812F998: .4byte gStringVar4
-_0812F99C: .4byte gUnknown_203B108
+_0812F99C: .4byte sOakSpeechResources
 _0812F9A0:
-	ldr r0, _0812F9E0 @ =gUnknown_203B108
+	ldr r0, _0812F9E0 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -1708,7 +1347,7 @@ _0812F9D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812F9E0: .4byte gUnknown_203B108
+_0812F9E0: .4byte sOakSpeechResources
 _0812F9E4: .4byte gTasks
 _0812F9E8: .4byte sub_812F9EC
 	thumb_func_end sub_812F944
@@ -1833,7 +1472,7 @@ _0812FAA0:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
-	ldr r0, _0812FB10 @ =gUnknown_203B108
+	ldr r0, _0812FB10 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r5, [sp]
@@ -1854,9 +1493,9 @@ _0812FB00: .4byte sub_812FB4C
 _0812FB04: .4byte 0x00003fff
 _0812FB08: .4byte gUnknown_81C5D12
 _0812FB0C: .4byte gStringVar4
-_0812FB10: .4byte gUnknown_203B108
+_0812FB10: .4byte sOakSpeechResources
 _0812FB14:
-	ldr r0, _0812FB48 @ =gUnknown_203B108
+	ldr r0, _0812FB48 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r5, [sp]
@@ -1882,7 +1521,7 @@ _0812FB40:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812FB48: .4byte gUnknown_203B108
+_0812FB48: .4byte sOakSpeechResources
 	thumb_func_end sub_812FA78
 
 	thumb_func_start sub_812FB4C
@@ -1907,7 +1546,7 @@ sub_812FB4C: @ 812FB4C
 	adds r0, r5, 0
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
-	ldr r0, _0812FBA4 @ =gUnknown_203B108
+	ldr r0, _0812FBA4 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -1925,9 +1564,9 @@ sub_812FB4C: @ 812FB4C
 	.align 2, 0
 _0812FB9C: .4byte gUnknown_81C5D4B
 _0812FBA0: .4byte gStringVar4
-_0812FBA4: .4byte gUnknown_203B108
+_0812FBA4: .4byte sOakSpeechResources
 _0812FBA8:
-	ldr r0, _0812FBE4 @ =gUnknown_203B108
+	ldr r0, _0812FBE4 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -1957,7 +1596,7 @@ _0812FBDA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812FBE4: .4byte gUnknown_203B108
+_0812FBE4: .4byte sOakSpeechResources
 _0812FBE8: .4byte gTasks
 _0812FBEC: .4byte sub_812FBF0
 	thumb_func_end sub_812FB4C
@@ -2097,7 +1736,7 @@ _0812FCEC:
 	adds r0, r5, 0
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
-	ldr r0, _0812FD2C @ =gUnknown_203B108
+	ldr r0, _0812FD2C @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -2115,9 +1754,9 @@ _0812FCEC:
 	.align 2, 0
 _0812FD24: .4byte gUnknown_81C5DBD
 _0812FD28: .4byte gStringVar4
-_0812FD2C: .4byte gUnknown_203B108
+_0812FD2C: .4byte sOakSpeechResources
 _0812FD30:
-	ldr r0, _0812FD6C @ =gUnknown_203B108
+	ldr r0, _0812FD6C @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -2147,7 +1786,7 @@ _0812FD62:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812FD6C: .4byte gUnknown_203B108
+_0812FD6C: .4byte sOakSpeechResources
 _0812FD70: .4byte gTasks
 _0812FD74: .4byte sub_812FD78
 	thumb_func_end sub_812FC68
@@ -2230,7 +1869,7 @@ _0812FDF0:
 	adds r0, r5, 0
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
-	ldr r0, _0812FE3C @ =gUnknown_203B108
+	ldr r0, _0812FE3C @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -2248,9 +1887,9 @@ _0812FDF0:
 	.align 2, 0
 _0812FE34: .4byte gUnknown_81C59D5
 _0812FE38: .4byte gStringVar4
-_0812FE3C: .4byte gUnknown_203B108
+_0812FE3C: .4byte sOakSpeechResources
 _0812FE40:
-	ldr r0, _0812FE7C @ =gUnknown_203B108
+	ldr r0, _0812FE7C @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -2280,7 +1919,7 @@ _0812FE72:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812FE7C: .4byte gUnknown_203B108
+_0812FE7C: .4byte sOakSpeechResources
 _0812FE80: .4byte gTasks
 _0812FE84: .4byte sub_812FE88
 	thumb_func_end sub_812FDC0
@@ -2327,7 +1966,7 @@ sub_812FE88: @ 812FE88
 	lsrs r0, 24
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r4, _0812FF94 @ =gUnknown_203B108
+	ldr r4, _0812FF94 @ =sOakSpeechResources
 	ldr r0, [r4]
 	movs r1, 0x1
 	mov r9, r1
@@ -2410,7 +2049,7 @@ _0812FF7E:
 	.align 2, 0
 _0812FF8C: .4byte gUnknown_8462EC8
 _0812FF90: .4byte gTasks
-_0812FF94: .4byte gUnknown_203B108
+_0812FF94: .4byte sOakSpeechResources
 _0812FF98: .4byte gUnknown_8415D93
 _0812FF9C: .4byte gUnknown_8415D97
 _0812FFA0: .4byte sub_812FFA4
@@ -2581,7 +2220,7 @@ _081300D0:
 	adds r0, r5, 0
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
-	ldr r0, _08130114 @ =gUnknown_203B108
+	ldr r0, _08130114 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -2599,9 +2238,9 @@ _081300D0:
 	.align 2, 0
 _0813010C: .4byte gUnknown_81C5DEA
 _08130110: .4byte gStringVar4
-_08130114: .4byte gUnknown_203B108
+_08130114: .4byte sOakSpeechResources
 _08130118:
-	ldr r0, _08130154 @ =gUnknown_203B108
+	ldr r0, _08130154 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	str r4, [sp]
@@ -2631,7 +2270,7 @@ _0813014A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08130154: .4byte gUnknown_203B108
+_08130154: .4byte sOakSpeechResources
 _08130158: .4byte gTasks
 _0813015C: .4byte sub_8130160
 	thumb_func_end sub_81300A0
@@ -2655,7 +2294,7 @@ sub_8130160: @ 8130160
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _081301A4 @ =gUnknown_203B108
+	ldr r0, _081301A4 @ =sOakSpeechResources
 	ldr r0, [r0]
 	strh r4, [r0, 0x10]
 	ldr r1, _081301A8 @ =gTasks
@@ -2671,7 +2310,7 @@ _0813019A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081301A4: .4byte gUnknown_203B108
+_081301A4: .4byte sOakSpeechResources
 _081301A8: .4byte gTasks
 _081301AC: .4byte sub_81303B4
 	thumb_func_end sub_8130160
@@ -2716,7 +2355,7 @@ _081301F8: .4byte gTasks+0x8
 _081301FC: .4byte gSpriteCoordOffsetX
 _08130200:
 	strh r1, [r4, 0x2]
-	ldr r0, _08130220 @ =gUnknown_203B108
+	ldr r0, _08130220 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x10]
 	adds r0, r5, 0
@@ -2731,7 +2370,7 @@ _08130218:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08130220: .4byte gUnknown_203B108
+_08130220: .4byte sOakSpeechResources
 _08130224: .4byte sub_8130324
 	thumb_func_end sub_81301B0
 
@@ -2741,7 +2380,7 @@ sub_8130228: @ 8130228
 	sub sp, 0x10
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, _08130278 @ =gUnknown_203B108
+	ldr r4, _08130278 @ =sOakSpeechResources
 	ldr r0, [r4]
 	ldrb r1, [r0, 0x10]
 	adds r0, r6, 0
@@ -2774,7 +2413,7 @@ sub_8130228: @ 8130228
 	bl AddTextPrinterParametrized
 	b _0813029C
 	.align 2, 0
-_08130278: .4byte gUnknown_203B108
+_08130278: .4byte sOakSpeechResources
 _0813027C: .4byte gUnknown_81C5DEA
 _08130280: .4byte gStringVar4
 _08130284:
@@ -2883,7 +2522,7 @@ sub_8130324: @ 8130324
 	bl sub_810F4D8
 	ldrb r0, [r5, 0x1A]
 	bl RemoveWindow
-	ldr r0, _08130380 @ =gUnknown_203B108
+	ldr r0, _08130380 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x10]
 	subs r1, r4, 0x1
@@ -2899,7 +2538,7 @@ sub_8130324: @ 8130324
 	b _081303A6
 	.align 2, 0
 _0813037C: .4byte gTasks+0x8
-_08130380: .4byte gUnknown_203B108
+_08130380: .4byte sOakSpeechResources
 _08130384: .4byte sub_8130464
 _08130388:
 	movs r0, 0x5
@@ -2940,7 +2579,7 @@ sub_81303B4: @ 81303B4
 	lsrs r5, r0, 24
 	cmp r5, 0
 	bne _0813044C
-	ldr r4, _081303FC @ =gUnknown_203B108
+	ldr r4, _081303FC @ =sOakSpeechResources
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x10]
 	movs r1, 0
@@ -2961,7 +2600,7 @@ sub_81303B4: @ 81303B4
 	b _08130440
 	.align 2, 0
 _081303F8: .4byte gPaletteFade
-_081303FC: .4byte gUnknown_203B108
+_081303FC: .4byte sOakSpeechResources
 _08130400: .4byte gSaveBlock2Ptr
 _08130404: .4byte sub_8130C64
 _08130408:
@@ -3028,7 +2667,7 @@ sub_8130464: @ 8130464
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x1
 	bne _08130500
-	ldr r0, _081304A8 @ =gUnknown_203B108
+	ldr r0, _081304A8 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x10]
 	cmp r0, 0
@@ -3040,7 +2679,7 @@ sub_8130464: @ 8130464
 	.align 2, 0
 _081304A0: .4byte gTasks+0x8
 _081304A4: .4byte gPaletteFade
-_081304A8: .4byte gUnknown_203B108
+_081304A8: .4byte sOakSpeechResources
 _081304AC: .4byte gStringVar4
 _081304B0: .4byte gUnknown_81C5E13
 _081304B4:
@@ -3052,7 +2691,7 @@ _081304BC:
 	movs r1, 0
 	bl sub_80F6EE4
 	ldr r2, _081304F4 @ =gStringVar4
-	ldr r0, _081304FC @ =gUnknown_203B108
+	ldr r0, _081304FC @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	movs r4, 0
@@ -3076,7 +2715,7 @@ _081304BC:
 	.align 2, 0
 _081304F4: .4byte gStringVar4
 _081304F8: .4byte gUnknown_81C5EB5
-_081304FC: .4byte gUnknown_203B108
+_081304FC: .4byte sOakSpeechResources
 _08130500:
 	movs r0, 0
 	bl IsTextPrinterActive
@@ -3152,7 +2791,7 @@ _0813057C:
 	adds r6, r0, r1
 	movs r0, 0x28
 	strh r0, [r6, 0xE]
-	ldr r7, _081305B4 @ =gUnknown_203B108
+	ldr r7, _081305B4 @ =sOakSpeechResources
 	ldr r0, [r7]
 	ldrh r0, [r0, 0x10]
 	cmp r0, 0
@@ -3168,7 +2807,7 @@ _0813057C:
 	b _0813063E
 	.align 2, 0
 _081305B0: .4byte gTasks
-_081305B4: .4byte gUnknown_203B108
+_081305B4: .4byte sOakSpeechResources
 _081305B8: .4byte sub_8130650
 _081305BC:
 	ldr r4, _081305F8 @ =gStringVar4
@@ -3204,7 +2843,7 @@ _08130600: .4byte sub_8130694
 _08130604:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _08130624 @ =gUnknown_203B108
+	ldr r0, _08130624 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x10]
 	cmp r0, 0
@@ -3217,7 +2856,7 @@ _08130604:
 	ldr r0, _0813062C @ =sub_8130160
 	b _0813063C
 	.align 2, 0
-_08130624: .4byte gUnknown_203B108
+_08130624: .4byte sOakSpeechResources
 _08130628: .4byte gTasks
 _0813062C: .4byte sub_8130160
 _08130630:
@@ -3370,7 +3009,7 @@ sub_813071C: @ 813071C
 	adds r0, r4, 0
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
-	ldr r0, _0813077C @ =gUnknown_203B108
+	ldr r0, _0813077C @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	movs r0, 0
@@ -3390,9 +3029,9 @@ sub_813071C: @ 813071C
 _08130770: .4byte gTasks+0x8
 _08130774: .4byte gUnknown_81C5E2E
 _08130778: .4byte gStringVar4
-_0813077C: .4byte gUnknown_203B108
+_0813077C: .4byte sOakSpeechResources
 _08130780:
-	ldr r0, _081307C4 @ =gUnknown_203B108
+	ldr r0, _081307C4 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	movs r0, 0
@@ -3410,7 +3049,7 @@ _0813079E:
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
-	ldr r0, _081307C4 @ =gUnknown_203B108
+	ldr r0, _081307C4 @ =sOakSpeechResources
 	ldr r1, [r0]
 	movs r0, 0x1
 	strh r0, [r1, 0x10]
@@ -3427,7 +3066,7 @@ _081307BC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081307C4: .4byte gUnknown_203B108
+_081307C4: .4byte sOakSpeechResources
 _081307C8: .4byte gTasks
 _081307CC: .4byte sub_81301B0
 	thumb_func_end sub_813071C
@@ -3523,7 +3162,7 @@ sub_8130858: @ 8130858
 	movs r0, 0
 	movs r1, 0
 	bl sub_80F6EE4
-	ldr r0, _081308C8 @ =gUnknown_203B108
+	ldr r0, _081308C8 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x1F]
 	movs r0, 0
@@ -3554,7 +3193,7 @@ _081308B4:
 _081308BC: .4byte gTasks
 _081308C0: .4byte gStringVar4
 _081308C4: .4byte gUnknown_81C5EF4
-_081308C8: .4byte gUnknown_203B108
+_081308C8: .4byte sOakSpeechResources
 _081308CC: .4byte sub_81308D0
 	thumb_func_end sub_8130858
 
@@ -3602,7 +3241,7 @@ sub_8130914: @ 8130914
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0813093C @ =gUnknown_203B108
+	ldr r0, _0813093C @ =sOakSpeechResources
 	ldr r1, [r0]
 	movs r0, 0
 	strh r0, [r1, 0x12]
@@ -3616,7 +3255,7 @@ sub_8130914: @ 8130914
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813093C: .4byte gUnknown_203B108
+_0813093C: .4byte sOakSpeechResources
 	thumb_func_end sub_8130914
 
 	thumb_func_start sub_8130940
@@ -3667,7 +3306,7 @@ sub_8130980: @ 8130980
 	ldr r0, _08130A2C @ =gTasks+0x8
 	mov r8, r0
 	adds r5, r7, r0
-	ldr r0, _08130A30 @ =gUnknown_203B108
+	ldr r0, _08130A30 @ =sOakSpeechResources
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x12]
 	adds r0, 0x1
@@ -3739,7 +3378,7 @@ _08130A1E:
 	bx r0
 	.align 2, 0
 _08130A2C: .4byte gTasks+0x8
-_08130A30: .4byte gUnknown_203B108
+_08130A30: .4byte sOakSpeechResources
 _08130A34: .4byte sub_8130BA8
 	thumb_func_end sub_8130980
 
@@ -4007,7 +3646,7 @@ sub_8130C20: @ 8130C20
 	lsrs r4, 24
 	bl FreeAllWindowBuffers
 	bl sub_8044D80
-	ldr r5, _08130C58 @ =gUnknown_203B108
+	ldr r5, _08130C58 @ =sOakSpeechResources
 	ldr r0, [r5]
 	bl Free
 	movs r0, 0
@@ -4025,7 +3664,7 @@ sub_8130C20: @ 8130C20
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08130C58: .4byte gUnknown_203B108
+_08130C58: .4byte sOakSpeechResources
 _08130C5C: .4byte gTextFlags
 _08130C60: .4byte CB2_NewGame
 	thumb_func_end sub_8130C20
@@ -4095,7 +3734,7 @@ _08130CAC:
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
 	bl ResetPaletteFade
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	bl reset_temp_tile_data_buffers
@@ -4113,7 +3752,7 @@ _08130D18:
 	movs r0, 0x1
 	movs r2, 0x3
 	bl InitBgsFromTemplates
-	ldr r4, _08130D74 @ =gUnknown_203B108
+	ldr r4, _08130D74 @ =sOakSpeechResources
 	ldr r1, [r4]
 	movs r0, 0xE1
 	lsls r0, 5
@@ -4145,7 +3784,7 @@ _08130D18:
 	b _08130F10
 	.align 2, 0
 _08130D70: .4byte gUnknown_8462E58
-_08130D74: .4byte gUnknown_203B108
+_08130D74: .4byte sOakSpeechResources
 _08130D78:
 	movs r0, 0x40
 	movs r1, 0
@@ -4232,7 +3871,7 @@ _08130E38:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _08130E60 @ =gUnknown_203B108
+	ldr r0, _08130E60 @ =sOakSpeechResources
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x10]
 	cmp r0, 0
@@ -4246,7 +3885,7 @@ _08130E38:
 	b _08130E6A
 	.align 2, 0
 _08130E5C: .4byte sub_8130464
-_08130E60: .4byte gUnknown_203B108
+_08130E60: .4byte sOakSpeechResources
 _08130E64: .4byte gSaveBlock2Ptr
 _08130E68:
 	movs r0, 0x1
@@ -4742,7 +4381,7 @@ _0813126C:
 _08131280:
 	movs r0, 0x60
 	bl AllocZeroed
-	ldr r2, _0813130C @ =gUnknown_203B108
+	ldr r2, _0813130C @ =sOakSpeechResources
 	ldr r1, [r2]
 	str r0, [r1, 0x4]
 	movs r1, 0
@@ -4765,7 +4404,7 @@ _08131290:
 	movs r2, 0
 	movs r3, 0
 	bl FillBgTilemapBufferRect
-	ldr r4, _0813130C @ =gUnknown_203B108
+	ldr r4, _0813130C @ =sOakSpeechResources
 	ldr r0, [r4]
 	ldr r1, [r0, 0x4]
 	movs r3, 0x8
@@ -4804,7 +4443,7 @@ _081312F6:
 _08131300: .4byte gUnknown_8461CD4
 _08131304: .4byte gUnknown_8461D14
 _08131308: .4byte 0x06000600
-_0813130C: .4byte gUnknown_203B108
+_0813130C: .4byte sOakSpeechResources
 	thumb_func_end sub_81311F4
 
 	thumb_func_start sub_8131310

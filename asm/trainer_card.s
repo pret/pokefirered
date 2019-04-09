@@ -18,7 +18,7 @@ sub_8088FF0: @ 8088FF0
 	cmp r0, 0
 	beq _08089020
 	ldr r1, _08089028 @ =0x040000d4
-	ldr r0, _0808902C @ =gUnknown_2038700
+	ldr r0, _0808902C @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -33,7 +33,7 @@ _08089020:
 	.align 2, 0
 _08089024: .4byte gUnknown_20397A4
 _08089028: .4byte 0x040000d4
-_0808902C: .4byte gUnknown_2038700
+_0808902C: .4byte gScanlineEffectRegBuffers
 _08089030: .4byte 0x800000a0
 	thumb_func_end sub_8088FF0
 
@@ -44,7 +44,7 @@ sub_8089034: @ 8089034
 	ldrh r3, [r4]
 	movs r0, 0
 	strh r0, [r4]
-	ldr r1, _08089064 @ =gUnknown_2038700
+	ldr r1, _08089064 @ =gScanlineEffectRegBuffers
 	ldr r0, _08089068 @ =0x04000006
 	ldrh r2, [r0]
 	movs r0, 0xFF
@@ -63,7 +63,7 @@ sub_8089034: @ 8089034
 	bx r0
 	.align 2, 0
 _08089060: .4byte 0x04000208
-_08089064: .4byte gUnknown_2038700
+_08089064: .4byte gScanlineEffectRegBuffers
 _08089068: .4byte 0x04000006
 _0808906C: .4byte 0x04000012
 	thumb_func_end sub_8089034
@@ -1658,7 +1658,7 @@ _08089DA0: .4byte sub_8089070
 sub_8089DA4: @ 8089DA4
 	push {lr}
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r0, _08089DC4 @ =sub_80890C0
 	movs r1, 0
 	bl CreateTask
@@ -4179,10 +4179,10 @@ sub_808B254: @ 808B254
 	bl HideBg
 	movs r0, 0x3
 	bl HideBg
-	bl remove_some_task
-	bl dp12_8087EA4
+	bl ScanlineEffect_Stop
+	bl ScanlineEffect_Clear
 	movs r1, 0
-	ldr r0, _0808B290 @ =gUnknown_2038700
+	ldr r0, _0808B290 @ =gScanlineEffectRegBuffers
 	movs r2, 0
 	movs r3, 0xF0
 	lsls r3, 3
@@ -4201,7 +4201,7 @@ _0808B278:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808B290: .4byte gUnknown_2038700
+_0808B290: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_808B254
 
 	thumb_func_start sub_808B294
@@ -4271,7 +4271,7 @@ _0808B2CA:
 	movs r2, 0
 	cmp r2, r7
 	bcs _0808B334
-	ldr r3, _0808B3C0 @ =gUnknown_2038700
+	ldr r3, _0808B3C0 @ =gScanlineEffectRegBuffers
 _0808B31C:
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -4296,7 +4296,7 @@ _0808B334:
 	lsrs r7, r4, 16
 	cmp r1, r0
 	bge _0808B36C
-	ldr r0, _0808B3C0 @ =gUnknown_2038700
+	ldr r0, _0808B3C0 @ =gScanlineEffectRegBuffers
 	mov r12, r0
 	adds r4, r3, 0
 _0808B34E:
@@ -4321,7 +4321,7 @@ _0808B36C:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _0808B38A
-	ldr r2, _0808B3C0 @ =gUnknown_2038700
+	ldr r2, _0808B3C0 @ =gScanlineEffectRegBuffers
 _0808B378:
 	asrs r0, r1, 16
 	lsls r1, r0, 1
@@ -4359,7 +4359,7 @@ _0808B3A2:
 _0808B3B4: .4byte gUnknown_20397A4
 _0808B3B8: .4byte 0x00007bcc
 _0808B3BC: .4byte 0xffff0000
-_0808B3C0: .4byte gUnknown_2038700
+_0808B3C0: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_808B294
 
 	thumb_func_start sub_808B3C4
@@ -4612,7 +4612,7 @@ _0808B572:
 	movs r2, 0
 	cmp r2, r7
 	bcs _0808B5DC
-	ldr r3, _0808B668 @ =gUnknown_2038700
+	ldr r3, _0808B668 @ =gScanlineEffectRegBuffers
 _0808B5C4:
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -4637,7 +4637,7 @@ _0808B5DC:
 	lsrs r7, r4, 16
 	cmp r1, r0
 	bge _0808B612
-	ldr r0, _0808B668 @ =gUnknown_2038700
+	ldr r0, _0808B668 @ =gScanlineEffectRegBuffers
 	mov r12, r0
 	adds r4, r3, 0
 _0808B5F6:
@@ -4661,7 +4661,7 @@ _0808B612:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _0808B630
-	ldr r2, _0808B668 @ =gUnknown_2038700
+	ldr r2, _0808B668 @ =gScanlineEffectRegBuffers
 _0808B61E:
 	asrs r0, r1, 16
 	lsls r1, r0, 1
@@ -4699,7 +4699,7 @@ _0808B648:
 _0808B65C: .4byte gUnknown_20397A4
 _0808B660: .4byte 0x00007bcc
 _0808B664: .4byte 0xffff0000
-_0808B668: .4byte gUnknown_2038700
+_0808B668: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_808B540
 
 	thumb_func_start sub_808B66C

@@ -104,8 +104,8 @@ sub_800FE24: @ 800FE24
 	strh r0, [r1]
 	ldr r0, _0800FF34 @ =gUnknown_2022986
 	strh r4, [r0]
-	bl dp12_8087EA4
-	ldr r0, _0800FF38 @ =gUnknown_2038700
+	bl ScanlineEffect_Clear
+	ldr r0, _0800FF38 @ =gScanlineEffectRegBuffers
 	movs r3, 0xF0
 	movs r1, 0xF0
 	lsls r1, 3
@@ -121,7 +121,7 @@ _0800FE88:
 	bge _0800FE88
 	movs r1, 0x50
 	ldr r4, _0800FF3C @ =gUnknown_824EFE4
-	ldr r0, _0800FF38 @ =gUnknown_2038700
+	ldr r0, _0800FF38 @ =gScanlineEffectRegBuffers
 	ldr r3, _0800FF40 @ =0x0000ff10
 	movs r5, 0x82
 	lsls r5, 4
@@ -138,24 +138,24 @@ _0800FEA6:
 	ldr r0, [r4]
 	ldr r1, [r4, 0x4]
 	ldr r2, [r4, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	bl ResetPaletteFade
-	ldr r0, _0800FF44 @ =gUnknown_2022974
+	ldr r0, _0800FF44 @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _0800FF48 @ =gUnknown_2022976
+	ldr r0, _0800FF48 @ =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r0, _0800FF4C @ =gUnknown_2022978
+	ldr r0, _0800FF4C @ =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r0, _0800FF50 @ =gUnknown_202297A
+	ldr r0, _0800FF50 @ =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, _0800FF54 @ =gUnknown_202297C
+	ldr r0, _0800FF54 @ =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r0, _0800FF58 @ =gUnknown_202297E
+	ldr r0, _0800FF58 @ =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r0, _0800FF5C @ =gUnknown_2022980
+	ldr r0, _0800FF5C @ =gBattle_BG3_X
 	strh r1, [r0]
-	ldr r0, _0800FF60 @ =gUnknown_2022982
+	ldr r0, _0800FF60 @ =gBattle_BG3_Y
 	strh r1, [r0]
 	bl sub_807FC5C
 	ldr r1, _0800FF64 @ =gUnknown_2022B50
@@ -186,17 +186,17 @@ _0800FF28: .4byte 0x05006000
 _0800FF2C: .4byte 0x00005051
 _0800FF30: .4byte gUnknown_2022984
 _0800FF34: .4byte gUnknown_2022986
-_0800FF38: .4byte gUnknown_2038700
+_0800FF38: .4byte gScanlineEffectRegBuffers
 _0800FF3C: .4byte gUnknown_824EFE4
 _0800FF40: .4byte 0x0000ff10
-_0800FF44: .4byte gUnknown_2022974
-_0800FF48: .4byte gUnknown_2022976
-_0800FF4C: .4byte gUnknown_2022978
-_0800FF50: .4byte gUnknown_202297A
-_0800FF54: .4byte gUnknown_202297C
-_0800FF58: .4byte gUnknown_202297E
-_0800FF5C: .4byte gUnknown_2022980
-_0800FF60: .4byte gUnknown_2022982
+_0800FF44: .4byte gBattle_BG0_X
+_0800FF48: .4byte gBattle_BG0_Y
+_0800FF4C: .4byte gBattle_BG1_X
+_0800FF50: .4byte gBattle_BG1_Y
+_0800FF54: .4byte gBattle_BG2_X
+_0800FF58: .4byte gBattle_BG2_Y
+_0800FF5C: .4byte gBattle_BG3_X
+_0800FF60: .4byte gBattle_BG3_Y
 _0800FF64: .4byte gUnknown_2022B50
 _0800FF68: .4byte gReservedSpritePaletteCount
 _0800FF6C: .4byte sub_80116F4
@@ -2410,7 +2410,7 @@ FreeRestoreBattleData: @ 8011174
 	ldr r0, _080111B0 @ =gUnknown_3004F80
 	ldr r0, [r0]
 	str r0, [r1]
-	ldr r2, _080111B4 @ =gUnknown_2039600
+	ldr r2, _080111B4 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r2, 0x15]
 	ldr r0, _080111B8 @ =0x00000439
@@ -2431,7 +2431,7 @@ FreeRestoreBattleData: @ 8011174
 	.align 2, 0
 _080111AC: .4byte gMain
 _080111B0: .4byte gUnknown_3004F80
-_080111B4: .4byte gUnknown_2039600
+_080111B4: .4byte gScanlineEffect
 _080111B8: .4byte 0x00000439
 	thumb_func_end FreeRestoreBattleData
 
@@ -3125,35 +3125,35 @@ _080116F0: .4byte 0x04000008
 sub_80116F4: @ 80116F4
 	push {lr}
 	bl Random
-	ldr r0, _08011788 @ =gUnknown_2022974
+	ldr r0, _08011788 @ =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, _0801178C @ =gUnknown_2022976
+	ldr r0, _0801178C @ =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r0, _08011790 @ =gUnknown_2022978
+	ldr r0, _08011790 @ =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, _08011794 @ =gUnknown_202297A
+	ldr r0, _08011794 @ =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
-	ldr r0, _08011798 @ =gUnknown_202297C
+	ldr r0, _08011798 @ =gBattle_BG2_X
 	ldrh r1, [r0]
 	movs r0, 0x18
 	bl SetGpuReg
-	ldr r0, _0801179C @ =gUnknown_202297E
+	ldr r0, _0801179C @ =gBattle_BG2_Y
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, _080117A0 @ =gUnknown_2022980
+	ldr r0, _080117A0 @ =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, _080117A4 @ =gUnknown_2022982
+	ldr r0, _080117A4 @ =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
@@ -3176,18 +3176,18 @@ sub_80116F4: @ 80116F4
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_8087F54
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011788: .4byte gUnknown_2022974
-_0801178C: .4byte gUnknown_2022976
-_08011790: .4byte gUnknown_2022978
-_08011794: .4byte gUnknown_202297A
-_08011798: .4byte gUnknown_202297C
-_0801179C: .4byte gUnknown_202297E
-_080117A0: .4byte gUnknown_2022980
-_080117A4: .4byte gUnknown_2022982
+_08011788: .4byte gBattle_BG0_X
+_0801178C: .4byte gBattle_BG0_Y
+_08011790: .4byte gBattle_BG1_X
+_08011794: .4byte gBattle_BG1_Y
+_08011798: .4byte gBattle_BG2_X
+_0801179C: .4byte gBattle_BG2_Y
+_080117A0: .4byte gBattle_BG3_X
+_080117A4: .4byte gBattle_BG3_Y
 _080117A8: .4byte gUnknown_2022984
 _080117AC: .4byte gUnknown_2022986
 _080117B0: .4byte gUnknown_2022988
@@ -3548,8 +3548,8 @@ sub_8011A1C: @ 8011A1C
 	strh r0, [r1]
 	ldr r0, _08011B4C @ =gUnknown_2022986
 	strh r4, [r0]
-	bl dp12_8087EA4
-	ldr r0, _08011B50 @ =gUnknown_2038700
+	bl ScanlineEffect_Clear
+	ldr r0, _08011B50 @ =gScanlineEffectRegBuffers
 	movs r3, 0xF0
 	movs r1, 0xF0
 	lsls r1, 3
@@ -3564,7 +3564,7 @@ _08011A80:
 	cmp r1, 0
 	bge _08011A80
 	movs r1, 0x50
-	ldr r0, _08011B50 @ =gUnknown_2038700
+	ldr r0, _08011B50 @ =gScanlineEffectRegBuffers
 	ldr r3, _08011B54 @ =0x0000ff10
 	movs r4, 0x82
 	lsls r4, 4
@@ -3579,22 +3579,22 @@ _08011A9C:
 	cmp r1, 0x9F
 	ble _08011A9C
 	bl ResetPaletteFade
-	ldr r0, _08011B58 @ =gUnknown_2022974
+	ldr r0, _08011B58 @ =gBattle_BG0_X
 	movs r4, 0
 	strh r4, [r0]
-	ldr r0, _08011B5C @ =gUnknown_2022976
+	ldr r0, _08011B5C @ =gBattle_BG0_Y
 	strh r4, [r0]
-	ldr r0, _08011B60 @ =gUnknown_2022978
+	ldr r0, _08011B60 @ =gBattle_BG1_X
 	strh r4, [r0]
-	ldr r0, _08011B64 @ =gUnknown_202297A
+	ldr r0, _08011B64 @ =gBattle_BG1_Y
 	strh r4, [r0]
-	ldr r0, _08011B68 @ =gUnknown_202297C
+	ldr r0, _08011B68 @ =gBattle_BG2_X
 	strh r4, [r0]
-	ldr r0, _08011B6C @ =gUnknown_202297E
+	ldr r0, _08011B6C @ =gBattle_BG2_Y
 	strh r4, [r0]
-	ldr r0, _08011B70 @ =gUnknown_2022980
+	ldr r0, _08011B70 @ =gBattle_BG3_X
 	strh r4, [r0]
-	ldr r0, _08011B74 @ =gUnknown_2022982
+	ldr r0, _08011B74 @ =gBattle_BG3_Y
 	strh r4, [r0]
 	bl sub_800F34C
 	ldr r0, _08011B78 @ =gUnknown_8D004D8
@@ -3645,16 +3645,16 @@ _08011B40: .4byte 0x05006000
 _08011B44: .4byte 0x00005051
 _08011B48: .4byte gUnknown_2022984
 _08011B4C: .4byte gUnknown_2022986
-_08011B50: .4byte gUnknown_2038700
+_08011B50: .4byte gScanlineEffectRegBuffers
 _08011B54: .4byte 0x0000ff10
-_08011B58: .4byte gUnknown_2022974
-_08011B5C: .4byte gUnknown_2022976
-_08011B60: .4byte gUnknown_2022978
-_08011B64: .4byte gUnknown_202297A
-_08011B68: .4byte gUnknown_202297C
-_08011B6C: .4byte gUnknown_202297E
-_08011B70: .4byte gUnknown_2022980
-_08011B74: .4byte gUnknown_2022982
+_08011B58: .4byte gBattle_BG0_X
+_08011B5C: .4byte gBattle_BG0_Y
+_08011B60: .4byte gBattle_BG1_X
+_08011B64: .4byte gBattle_BG1_Y
+_08011B68: .4byte gBattle_BG2_X
+_08011B6C: .4byte gBattle_BG2_Y
+_08011B70: .4byte gBattle_BG3_X
+_08011B74: .4byte gBattle_BG3_Y
 _08011B78: .4byte gUnknown_8D004D8
 _08011B7C: .4byte gReservedSpritePaletteCount
 _08011B80: .4byte sub_80116F4
@@ -12610,10 +12610,10 @@ sub_8016374: @ 8016374
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r3]
-	ldr r0, _080163EC @ =gUnknown_2022974
+	ldr r0, _080163EC @ =gBattle_BG0_X
 	movs r2, 0
 	strh r2, [r0]
-	ldr r0, _080163F0 @ =gUnknown_2022976
+	ldr r0, _080163F0 @ =gBattle_BG0_Y
 	strh r2, [r0]
 	ldr r1, _080163F4 @ =gUnknown_2023FF8
 	ldrb r0, [r3]
@@ -12661,8 +12661,8 @@ _080163DA:
 _080163E0: .4byte sBattler_AI
 _080163E4: .4byte gUnknown_2023BDE
 _080163E8: .4byte gUnknown_2023BE2
-_080163EC: .4byte gUnknown_2022974
-_080163F0: .4byte gUnknown_2022976
+_080163EC: .4byte gBattle_BG0_X
+_080163F0: .4byte gBattle_BG0_Y
 _080163F4: .4byte gUnknown_2023FF8
 _080163F8: .4byte gUnknown_2023FFC
 _080163FC: .4byte gBattleTextBuff1
@@ -12690,10 +12690,10 @@ sub_8016418: @ 8016418
 	ldrb r0, [r0]
 	strb r0, [r2]
 	strb r0, [r4]
-	ldr r0, _08016484 @ =gUnknown_2022974
+	ldr r0, _08016484 @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _08016488 @ =gUnknown_2022976
+	ldr r0, _08016488 @ =gBattle_BG0_Y
 	strh r1, [r0]
 	ldrb r0, [r4]
 	bl ClearFuryCutterDestinyBondGrudge
@@ -12726,8 +12726,8 @@ _08016474: .4byte sBattler_AI
 _08016478: .4byte gBattlerTarget
 _0801647C: .4byte gUnknown_2023BDE
 _08016480: .4byte gUnknown_2023BE2
-_08016484: .4byte gUnknown_2022974
-_08016488: .4byte gUnknown_2022976
+_08016484: .4byte gBattle_BG0_X
+_08016488: .4byte gBattle_BG0_Y
 _0801648C: .4byte gUnknown_2023D68
 _08016490: .4byte gUnknown_20233C4
 _08016494: .4byte gUnknown_2023D74
@@ -13391,10 +13391,10 @@ sub_80169E8: @ 80169E8
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r0, _08016A50 @ =gUnknown_2022974
+	ldr r0, _08016A50 @ =gBattle_BG0_X
 	movs r5, 0
 	strh r5, [r0]
-	ldr r0, _08016A54 @ =gUnknown_2022976
+	ldr r0, _08016A54 @ =gBattle_BG0_Y
 	strh r5, [r0]
 	ldr r4, _08016A58 @ =gBattleStruct
 	ldr r1, [r4]
@@ -13431,8 +13431,8 @@ sub_80169E8: @ 80169E8
 _08016A44: .4byte sBattler_AI
 _08016A48: .4byte gUnknown_2023BDE
 _08016A4C: .4byte gUnknown_2023BE2
-_08016A50: .4byte gUnknown_2022974
-_08016A54: .4byte gUnknown_2022976
+_08016A50: .4byte gBattle_BG0_X
+_08016A54: .4byte gBattle_BG0_Y
 _08016A58: .4byte gBattleStruct
 _08016A5C: .4byte gEnemyParty
 _08016A60: .4byte gBaseStats
@@ -13492,10 +13492,10 @@ sub_8016AC0: @ 8016AC0
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r0, _08016B04 @ =gUnknown_2022974
+	ldr r0, _08016B04 @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _08016B08 @ =gUnknown_2022976
+	ldr r0, _08016B08 @ =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r1, _08016B0C @ =gUnknown_2039994
 	ldrb r0, [r1]
@@ -13516,8 +13516,8 @@ sub_8016AC0: @ 8016AC0
 _08016AF8: .4byte sBattler_AI
 _08016AFC: .4byte gUnknown_2023BDE
 _08016B00: .4byte gUnknown_2023BE2
-_08016B04: .4byte gUnknown_2022974
-_08016B08: .4byte gUnknown_2022976
+_08016B04: .4byte gBattle_BG0_X
+_08016B08: .4byte gBattle_BG0_Y
 _08016B0C: .4byte gUnknown_2039994
 _08016B10: .4byte gUnknown_2023D68
 _08016B14: .4byte gUnknown_2023D74
@@ -13535,10 +13535,10 @@ sub_8016B20: @ 8016B20
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r0, _08016BA8 @ =gUnknown_2022974
+	ldr r0, _08016BA8 @ =gBattle_BG0_X
 	movs r7, 0
 	strh r7, [r0]
-	ldr r0, _08016BAC @ =gUnknown_2022976
+	ldr r0, _08016BAC @ =gBattle_BG0_Y
 	strh r7, [r0]
 	bl Random
 	ldr r6, _08016BB0 @ =gBattleStruct
@@ -13592,8 +13592,8 @@ _08016B86:
 _08016B9C: .4byte sBattler_AI
 _08016BA0: .4byte gUnknown_2023BDE
 _08016BA4: .4byte gUnknown_2023BE2
-_08016BA8: .4byte gUnknown_2022974
-_08016BAC: .4byte gUnknown_2022976
+_08016BA8: .4byte gBattle_BG0_X
+_08016BAC: .4byte gBattle_BG0_Y
 _08016BB0: .4byte gBattleStruct
 _08016BB4: .4byte gUnknown_2023D74
 _08016BB8: .4byte gUnknown_81D9A04
@@ -13610,10 +13610,10 @@ sub_8016BC0: @ 8016BC0
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r0, _08016C48 @ =gUnknown_2022974
+	ldr r0, _08016C48 @ =gBattle_BG0_X
 	movs r7, 0
 	strh r7, [r0]
-	ldr r0, _08016C4C @ =gUnknown_2022976
+	ldr r0, _08016C4C @ =gBattle_BG0_Y
 	strh r7, [r0]
 	bl Random
 	ldr r6, _08016C50 @ =gBattleStruct
@@ -13667,8 +13667,8 @@ _08016C26:
 _08016C3C: .4byte sBattler_AI
 _08016C40: .4byte gUnknown_2023BDE
 _08016C44: .4byte gUnknown_2023BE2
-_08016C48: .4byte gUnknown_2022974
-_08016C4C: .4byte gUnknown_2022976
+_08016C48: .4byte gBattle_BG0_X
+_08016C4C: .4byte gBattle_BG0_Y
 _08016C50: .4byte gBattleStruct
 _08016C54: .4byte gUnknown_2023D74
 _08016C58: .4byte gUnknown_81D9A04
@@ -13713,10 +13713,10 @@ HandleAction_Action9: @ 8016C9C
 	adds r0, r1
 	ldrb r2, [r0]
 	strb r2, [r3]
-	ldr r0, _08016CF4 @ =gUnknown_2022974
+	ldr r0, _08016CF4 @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _08016CF8 @ =gUnknown_2022976
+	ldr r0, _08016CF8 @ =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r1, _08016CFC @ =gBattleTextBuff1
 	movs r0, 0xFD
@@ -13747,8 +13747,8 @@ HandleAction_Action9: @ 8016C9C
 _08016CE8: .4byte sBattler_AI
 _08016CEC: .4byte gUnknown_2023BDE
 _08016CF0: .4byte gUnknown_2023BE2
-_08016CF4: .4byte gUnknown_2022974
-_08016CF8: .4byte gUnknown_2022976
+_08016CF4: .4byte gBattle_BG0_X
+_08016CF8: .4byte gBattle_BG0_Y
 _08016CFC: .4byte gBattleTextBuff1
 _08016D00: .4byte gBattlerPartyIndexes
 _08016D04: .4byte gUnknown_2023D74

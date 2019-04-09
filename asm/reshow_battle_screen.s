@@ -123,7 +123,7 @@ _08077860:
 _08077866:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl sub_800F324
 	movs r0, 0x1
 	movs r1, 0x1
@@ -142,33 +142,33 @@ _08077866:
 	movs r0, 0x3
 	bl ShowBg
 	bl ResetPaletteFade
-	ldr r0, _080778C8 @ =gUnknown_2022974
+	ldr r0, _080778C8 @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080778CC @ =gUnknown_2022976
+	ldr r0, _080778CC @ =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r0, _080778D0 @ =gUnknown_2022978
+	ldr r0, _080778D0 @ =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r0, _080778D4 @ =gUnknown_202297A
+	ldr r0, _080778D4 @ =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, _080778D8 @ =gUnknown_202297C
+	ldr r0, _080778D8 @ =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r0, _080778DC @ =gUnknown_202297E
+	ldr r0, _080778DC @ =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r0, _080778E0 @ =gUnknown_2022980
+	ldr r0, _080778E0 @ =gBattle_BG3_X
 	strh r1, [r0]
-	ldr r0, _080778E4 @ =gUnknown_2022982
+	ldr r0, _080778E4 @ =gBattle_BG3_Y
 	strh r1, [r0]
 	b _08077A8A
 	.align 2, 0
-_080778C8: .4byte gUnknown_2022974
-_080778CC: .4byte gUnknown_2022976
-_080778D0: .4byte gUnknown_2022978
-_080778D4: .4byte gUnknown_202297A
-_080778D8: .4byte gUnknown_202297C
-_080778DC: .4byte gUnknown_202297E
-_080778E0: .4byte gUnknown_2022980
-_080778E4: .4byte gUnknown_2022982
+_080778C8: .4byte gBattle_BG0_X
+_080778CC: .4byte gBattle_BG0_Y
+_080778D0: .4byte gBattle_BG1_X
+_080778D4: .4byte gBattle_BG1_Y
+_080778D8: .4byte gBattle_BG2_X
+_080778DC: .4byte gBattle_BG2_Y
+_080778E0: .4byte gBattle_BG3_X
+_080778E4: .4byte gBattle_BG3_Y
 _080778E8:
 	movs r0, 0
 	str r0, [sp, 0x4]

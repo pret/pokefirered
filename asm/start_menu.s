@@ -1713,7 +1713,7 @@ _0806FA88:
 	bl SetGpuReg
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r2, 0xA0
 	lsls r2, 19
 	mov r1, sp
@@ -1767,7 +1767,7 @@ _0806FB00:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	b _0806FB64
 _0806FB12:
 	movs r0, 0

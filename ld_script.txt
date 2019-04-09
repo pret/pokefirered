@@ -128,7 +128,7 @@ SECTIONS {
         asm/trainer_see.o(.text);
         asm/wild_encounter.o(.text);
         asm/field_effect.o(.text);
-        asm/unknown_task.o(.text);
+        src/scanline_effect.o(.text);
         asm/option_menu.o(.text);
         asm/pokedex.o(.text);
         asm/trainer_card.o(.text);

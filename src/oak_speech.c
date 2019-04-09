@@ -14,12 +14,16 @@
 #include "new_menu_helpers.h"
 #include "pokemon_3.h"
 #include "sound.h"
+#include "event_scripts.h"
 #include "scanline_effect.h"
 #include "constants/species.h"
 
 struct OakSpeechResources
 {
-    u8 filler_0000[0x1F];
+    u8 filler_0000[0x12];
+    u16 unk_0012;
+    u16 unk_0014;
+    u8 filler_0016[9];
     u8 unk_001F;
     u8 filler_0020[0x1800];
     u8 bg2TilemapBuffer[0x400];
@@ -32,6 +36,9 @@ void sub_812E9F8(u8 taskId);
 void sub_812EB58(u8 taskId);
 void sub_812EEB0(void);
 void sub_812F0B0(u8 taskId);
+
+extern const u8 gUnknown_8415D2C[];
+extern const u8 gUnknown_8415D48[];
 
 const u8 gUnknown_845FD54[][5] = {
     [SPECIES_BULBASAUR - 1] = {0x16, 0x1b, 0x30, 0x16, 0x29},
@@ -453,6 +460,8 @@ ALIGNED(4) const u16 gUnknown_8460568[] = INCBIN_U16("data/oak_speech/unk_846056
 const u32 gUnknown_84605E8[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz");
 
 extern const struct BgTemplate gUnknown_8462E58[3];
+extern const struct WindowTemplate *const gUnknown_8462EB4[3];
+extern const struct TextColor gUnknown_8462EE8;
 
 void sub_812E944(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 {
@@ -647,4 +656,16 @@ void sub_812EB58(u8 taskId)
     }
 
     gMain.state++;
+}
+
+void sub_812EEB0(void)
+{
+    sub_810F650(gUnknown_8415D2C, gUnknown_8415D48, 0, 0, 1);
+    sOakSpeechResources->unk_0014 = AddWindow(gUnknown_8462EB4[sOakSpeechResources->unk_0012]);
+    PutWindowTilemap(sOakSpeechResources->unk_0014);
+    FillWindowPixelBuffer(sOakSpeechResources->unk_0014, 0x00);
+    AddTextPrinterParametrized2(sOakSpeechResources->unk_0014, 2, 2, 0, 1, 1, &gUnknown_8462EE8, 0, gUnknown_81C582D);
+    CopyWindowToVram(sOakSpeechResources->unk_0014, 3);
+    FillBgTilemapBufferRect_Palette0(1, 0x3000, 1, 3, 5, 16);
+    CopyBgTilemapBufferToVram(1);
 }

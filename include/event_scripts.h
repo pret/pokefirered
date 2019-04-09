@@ -705,4 +705,6 @@ extern const u8 gFameCheckerFlavorTextOriginObjectName_Giovanni3[];
 extern const u8 gFameCheckerFlavorTextOriginObjectName_Giovanni4[];
 extern const u8 gFameCheckerFlavorTextOriginObjectName_Giovanni5[];
 
+extern const u8 gUnknown_81C582D[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

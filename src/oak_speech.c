@@ -22,8 +22,8 @@ struct OakSpeechResources
 {
     u8 filler_0000[0x12];
     u16 unk_0012;
-    u16 unk_0014;
-    u8 filler_0016[9];
+    u16 unk_0014[3];
+    u8 filler_001A[5];
     u8 unk_001F;
     u8 filler_0020[0x1800];
     u8 bg2TilemapBuffer[0x400];
@@ -39,6 +39,7 @@ void sub_812F0B0(u8 taskId);
 
 extern const u8 gUnknown_8415D2C[];
 extern const u8 gUnknown_8415D48[];
+extern const u8 gUnknown_8415D50[];
 
 const u8 gUnknown_845FD54[][5] = {
     [SPECIES_BULBASAUR - 1] = {0x16, 0x1b, 0x30, 0x16, 0x29},
@@ -459,9 +460,13 @@ const u8 gUnknown_845FD54[][5] = {
 ALIGNED(4) const u16 gUnknown_8460568[] = INCBIN_U16("data/oak_speech/unk_8460568.gbapal");
 const u32 gUnknown_84605E8[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz");
 
+extern const u16 gUnknown_8460D94[];
+extern const u16 gUnknown_8460E34[];
+
 extern const struct BgTemplate gUnknown_8462E58[3];
 extern const struct WindowTemplate *const gUnknown_8462EB4[3];
 extern const struct TextColor gUnknown_8462EE8;
+extern const u8 *const gUnknown_8463074[];
 
 void sub_812E944(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 {
@@ -661,11 +666,45 @@ void sub_812EB58(u8 taskId)
 void sub_812EEB0(void)
 {
     sub_810F650(gUnknown_8415D2C, gUnknown_8415D48, 0, 0, 1);
-    sOakSpeechResources->unk_0014 = AddWindow(gUnknown_8462EB4[sOakSpeechResources->unk_0012]);
-    PutWindowTilemap(sOakSpeechResources->unk_0014);
-    FillWindowPixelBuffer(sOakSpeechResources->unk_0014, 0x00);
-    AddTextPrinterParametrized2(sOakSpeechResources->unk_0014, 2, 2, 0, 1, 1, &gUnknown_8462EE8, 0, gUnknown_81C582D);
-    CopyWindowToVram(sOakSpeechResources->unk_0014, 3);
+    sOakSpeechResources->unk_0014[0] = AddWindow(gUnknown_8462EB4[sOakSpeechResources->unk_0012]);
+    PutWindowTilemap(sOakSpeechResources->unk_0014[0]);
+    FillWindowPixelBuffer(sOakSpeechResources->unk_0014[0], 0x00);
+    AddTextPrinterParametrized2(sOakSpeechResources->unk_0014[0], 2, 2, 0, 1, 1, &gUnknown_8462EE8, 0, gUnknown_81C582D);
+    CopyWindowToVram(sOakSpeechResources->unk_0014[0], 3);
     FillBgTilemapBufferRect_Palette0(1, 0x3000, 1, 3, 5, 16);
     CopyBgTilemapBufferToVram(1);
+}
+
+void sub_812EF50(u8 taskId)
+{
+    u8 i = 0;
+    u8 r7 = sOakSpeechResources->unk_0012 - 1;
+    if (sOakSpeechResources->unk_0012 == 0)
+    {
+        sub_812EEB0();
+    }
+    else
+    {
+        sub_810F5E8(gUnknown_8415D50, 0, 1);
+        for (i = 0; i < 3; i++)
+        {
+            sOakSpeechResources->unk_0014[i] = AddWindow(&gUnknown_8462EB4[sOakSpeechResources->unk_0012][i]);
+            PutWindowTilemap(sOakSpeechResources->unk_0014[i]);
+            FillWindowPixelBuffer(sOakSpeechResources->unk_0014[i], 0x00);
+            AddTextPrinterParametrized2(sOakSpeechResources->unk_0014[i], 2, 6, 0, 1, 1, &gUnknown_8462EE8, 0, gUnknown_8463074[i + r7 * 3]);
+            CopyWindowToVram(sOakSpeechResources->unk_0014[i], 3);
+        }
+
+        if (sOakSpeechResources->unk_0012 == 1)
+        {
+            CopyToBgTilemapBufferRect(1, gUnknown_8460D94, 1, 3, 5, 16);
+        }
+        else
+        {
+            CopyToBgTilemapBufferRect(1, gUnknown_8460E34, 1, 3, 5, 16);
+        }
+        CopyBgTilemapBufferToVram(1);
+    }
+    BeginNormalPaletteFade(0xFFFFDFFF, -1, 16, 0, stdpal_get(2)[15]);
+    gTasks[taskId].func = sub_812F0B0;
 }

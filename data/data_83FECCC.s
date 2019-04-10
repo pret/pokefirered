@@ -599,8 +599,9 @@ gUnknown_8415D48:: @ 8415D48
 
 	.align 2
 gUnknown_8415D50:: @ 8415D50
-	.incbin "baserom.gba", 0x415D50, 0x10
+	.string "{KEYGFX_A_BUTTON}NEXT {KEYGFX_B_BUTTON}BACK$"
 
+	.align 2
 gUnknown_8415D60:: @ 8415D60
 	.incbin "baserom.gba", 0x415D60, 0x18
 

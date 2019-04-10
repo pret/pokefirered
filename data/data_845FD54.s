@@ -5,12 +5,6 @@
 
 	.align 2
 	// oak_speech
-gUnknown_8460CA4:: @ 8460CA4
-	.incbin "baserom.gba", 0x460CA4, 0x44
-
-gUnknown_8460CE8:: @ 8460CE8
-	.incbin "baserom.gba", 0x460CE8, 0xAC
-
 gUnknown_8460D94:: @ 8460D94
 	.incbin "baserom.gba", 0x460D94, 0xA0
 

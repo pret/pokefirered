@@ -16,12 +16,15 @@
 #include "sound.h"
 #include "event_scripts.h"
 #include "scanline_effect.h"
+#include "string_util.h"
+#include "pokeball.h"
 #include "constants/species.h"
 #include "constants/songs.h"
 
 struct OakSpeechResources
 {
-    u8 filler_0000[0x8];
+    void * unk_0000;
+    u8 filler_0004[0x4];
     void * unk_0008;
     u8 filler_000C[6];
     u16 unk_0012;
@@ -44,11 +47,31 @@ void sub_812F274(u8 taskId);
 void sub_812F33C(u8 taskId);
 void sub_812F4A8(u8 taskId);
 void sub_812F72C(u8 taskId);
+void sub_812F7C0(u8 taskId);
+void sub_812F880(u8 taskId);
+void sub_812F880(u8 taskId);
+void sub_812F944(u8 taskId);
+void sub_812F9EC(u8 taskId);
+void sub_812FA78(u8 taskId);
+void sub_812FB4C(u8 taskId);
+void sub_812FBF0(u8 taskId);
+void sub_812FC68(u8 taskId);
+void sub_812FD78(u8 taskId);
+void sub_812FDC0(u8 taskId);
+void sub_8130F2C(u8 taskId);
 void sub_8130FD4(u8 taskId, u8 state);
+void sub_8131168(u8 taskId, u8 state);
+void sub_81311F4(u8 taskId, u8 state);
+void sub_813144C(u8 taskId, u8 state);
 
 extern const u8 gUnknown_8415D2C[];
 extern const u8 gUnknown_8415D48[];
 extern const u8 gUnknown_8415D50[];
+extern const u8 gUnknown_81C5C78[];
+extern const u8 gUnknown_81C5D06[];
+extern const u8 gUnknown_81C5D12[];
+extern const u8 gUnknown_81C5D4B[];
+extern const u8 gUnknown_81C5DBD[];
 
 const u8 gUnknown_845FD54[][5] = {
     [SPECIES_BULBASAUR - 1] = {0x16, 0x1b, 0x30, 0x16, 0x29},
@@ -469,6 +492,8 @@ const u8 gUnknown_845FD54[][5] = {
 ALIGNED(4) const u16 gUnknown_8460568[] = INCBIN_U16("data/oak_speech/unk_8460568.gbapal");
 const u32 gUnknown_84605E8[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz");
 const u32 gUnknown_8460BA8[] = INCBIN_U32("data/oak_speech/unk_8460BA8.bin.lz");
+const u32 gUnknown_8460CA4[] = INCBIN_U32("data/oak_speech/unk_8460CA4.4bpp.lz");
+const u32 gUnknown_8460CE8[] = INCBIN_U32("data/oak_speech/unk_8460CE8.bin.lz");
 
 extern const u16 gUnknown_8460D94[];
 extern const u16 gUnknown_8460E34[];
@@ -943,5 +968,195 @@ void sub_812F4A8(u8 taskId)
             gTasks[taskId].func = sub_812F72C;
         }
         break;
+    }
+}
+
+void sub_812F72C(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!gPaletteFade.active)
+    {
+        sub_810F740();
+        FillWindowPixelBuffer(data[14], 0x00);
+        ClearWindowTilemap(data[14]);
+        CopyWindowToVram(data[14], 3);
+        RemoveWindow(data[14]);
+        data[14] = 0;
+        FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 30, 20);
+        CopyBgTilemapBufferToVram(1);
+        sub_8131168(taskId, 0);
+        data[3] = 80;
+        gTasks[taskId].func = sub_812F7C0;
+    }
+}
+
+void sub_812F7C0(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u32 size = 0;
+
+    if (data[3] != 0)
+        data[3]--;
+    else
+    {
+        sOakSpeechResources->unk_0000 = malloc_and_decompress(gUnknown_8460CA4, &size);
+        LoadBgTiles(1, sOakSpeechResources->unk_0000, size, 0);
+        CopyToBgTilemapBuffer(1, gUnknown_8460CE8, 0, 0);
+        CopyBgTilemapBufferToVram(1);
+        sub_8130F2C(taskId);
+        sub_81311F4(3, 0);
+        sub_8130FD4(taskId, 1);
+        PlayBGM(292);
+        BeginNormalPaletteFade(0xFFFFFFFF, 5, 16, 0, RGB_BLACK);
+        data[3] = 80;
+        ShowBg(2);
+        gTasks[taskId].func = sub_812F880;
+    }
+}
+
+#define OaksSpeechPrintMessage(str) ({ \
+    sub_80F6EE4(0, FALSE);\
+    if (str != gStringVar4) \
+    { \
+        StringExpandPlaceholders(gStringVar4, str); \
+        AddTextPrinterParametrized(0, 4, gStringVar4, sOakSpeechResources->unk_001F, NULL, 2, 1, 3); \
+    } \
+    else \
+    { \
+        AddTextPrinterParametrized(0, 4, str, sOakSpeechResources->unk_001F, NULL, 2, 1, 3); \
+    } \
+    CopyWindowToVram(0, 3); \
+})
+
+void sub_812F880(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!gPaletteFade.active)
+    {
+        if (data[3] != 0)
+            data[3]--;
+        else
+        {
+            OaksSpeechPrintMessage(gUnknown_81C5C78);
+            gTasks[taskId].func = sub_812F944;
+        }
+    }
+}
+
+void sub_812F944(u8 taskId)
+{
+    if (!IsTextPrinterActive(0))
+    {
+        OaksSpeechPrintMessage(gUnknown_81C5D06);
+        gTasks[taskId].data[3] = 30;
+        gTasks[taskId].func = sub_812F9EC;
+    }
+}
+
+void sub_812F9EC(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 spriteId;
+
+    if (!IsTextPrinterActive(0))
+    {
+        if (data[3] != 0)
+            data[3]--;
+        // else {
+        spriteId = gTasks[taskId].data[4];
+        gSprites[spriteId].invisible = FALSE;
+        gSprites[spriteId].data[0] = 0;
+        CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 0x64, 0x42, 0, 0, 32, 0xFFFF1FFF);
+        gTasks[taskId].func = sub_812FA78;
+        gTasks[taskId].data[3] = 0;
+        // }
+    }
+}
+
+void sub_812FA78(u8 taskId)
+{
+    if (IsCryFinished())
+    {
+        if (gTasks[taskId].data[3] >= 96)
+            gTasks[taskId].func = sub_812FB4C;
+    }
+    if (gTasks[taskId].data[3] < 0x4000)
+    {
+        gTasks[taskId].data[3]++;
+        if (gTasks[taskId].data[3] == 32)
+        {
+            OaksSpeechPrintMessage(gUnknown_81C5D12);
+            PlayCry1(SPECIES_NIDORAN_F, 0);
+        }
+    }
+}
+
+void sub_812FB4C(u8 taskId)
+{
+    if (!IsTextPrinterActive(0))
+    {
+        OaksSpeechPrintMessage(gUnknown_81C5D4B);
+        gTasks[taskId].func = sub_812FBF0;
+    }
+}
+
+void sub_812FBF0(u8 taskId)
+{
+    u8 spriteId;
+
+    if (!IsTextPrinterActive(0))
+    {
+        sub_80F6F54(0, 1);
+        spriteId = gTasks[taskId].data[4];
+        gTasks[taskId].data[6] = sub_804BB98(spriteId, gSprites[spriteId].oam.paletteNum, 0x64, 0x42, 0, 0, 32, 0xFFFF1F3F);
+        gTasks[taskId].data[3] = 48;
+        gTasks[taskId].data[0] = 64;
+        gTasks[taskId].func = sub_812FC68;
+    }
+}
+
+void sub_812FC68(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (data[0] != 0)
+    {
+        if (data[0] < 24)
+        {
+            gSprites[data[4]].pos1.y--;
+        }
+        data[0]--;
+    }
+    else
+    {
+        if (data[3] == 48)
+        {
+            DestroySprite(&gSprites[data[4]]);
+            DestroySprite(&gSprites[data[6]]);
+        }
+        if (data[3] != 0)
+        {
+            data[3]--;
+        }
+        else
+        {
+            OaksSpeechPrintMessage(gUnknown_81C5DBD);
+            gTasks[taskId].func = sub_812FD78;
+        }
+    }
+}
+
+void sub_812FD78(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!IsTextPrinterActive(0))
+    {
+        sub_80F6F54(0, 1);
+        sub_813144C(taskId, 2);
+        data[3] = 48;
+        gTasks[taskId].func = sub_812FDC0;
     }
 }

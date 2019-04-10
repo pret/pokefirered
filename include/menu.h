@@ -43,5 +43,6 @@ void sub_810F650(const u8 *, const u8 *, u8, u32, u8);
 void sub_810F5E8(const u8 *, u32, u8);
 void sub_810F71C(void);
 void sub_810F740(void);
+void sub_810F7D8(u8, u8, u8, u8, u8, u8, u8);
 
 #endif // GUARD_MENU_H

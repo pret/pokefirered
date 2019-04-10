@@ -28,5 +28,6 @@ void sub_80F6C6C(void);
 void sub_80F6C98(void);
 void sub_80F77CC(u16);
 void * malloc_and_decompress(const void * src, u32 * size);
+u16 sub_80F796C(void);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

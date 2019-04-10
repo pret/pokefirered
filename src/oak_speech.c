@@ -26,10 +26,11 @@ struct OakSpeechResources
     void * unk_0000;
     u8 filler_0004[0x4];
     void * unk_0008;
-    u8 filler_000C[6];
+    u8 filler_000C[4];
+    u16 unk_0010;
     u16 unk_0012;
-    u16 unk_0014[3];
-    u8 filler_001A[5];
+    u16 unk_0014[4];
+    u8 unk_001C[3];
     u8 unk_001F;
     u8 filler_0020[0x1800];
     u8 bg2TilemapBuffer[0x400];
@@ -58,20 +59,30 @@ void sub_812FBF0(u8 taskId);
 void sub_812FC68(u8 taskId);
 void sub_812FD78(u8 taskId);
 void sub_812FDC0(u8 taskId);
+void sub_812FE88(u8 taskId);
+void sub_812FFA4(u8 taskId);
+void sub_812FFF0(u8 taskId);
+void sub_8130050(u8 taskId);
+void sub_81300A0(u8 taskId);
+void sub_8130160(u8 taskId);
+void sub_8130324(u8 taskId);
+void sub_81303B4(u8 taskId);
+void sub_8130464(u8 taskId);
 void sub_8130F2C(u8 taskId);
 void sub_8130FD4(u8 taskId, u8 state);
 void sub_8131168(u8 taskId, u8 state);
-void sub_81311F4(u8 taskId, u8 state);
+void sub_81311F4(u8 arg0, u8 state);
+void sub_8131310(void);
 void sub_813144C(u8 taskId, u8 state);
+void sub_81315CC(u8 taskId, u8 state);
+void sub_8131660(u8 taskId, u8 state);
+void sub_8131754(u8 arg0, u8 namePick);
 
 extern const u8 gUnknown_8415D2C[];
 extern const u8 gUnknown_8415D48[];
 extern const u8 gUnknown_8415D50[];
-extern const u8 gUnknown_81C5C78[];
-extern const u8 gUnknown_81C5D06[];
-extern const u8 gUnknown_81C5D12[];
-extern const u8 gUnknown_81C5D4B[];
-extern const u8 gUnknown_81C5DBD[];
+extern const u8 gUnknown_8415D93[];
+extern const u8 gUnknown_8415D97[];
 
 const u8 gUnknown_845FD54[][5] = {
     [SPECIES_BULBASAUR - 1] = {0x16, 0x1b, 0x30, 0x16, 0x29},
@@ -501,6 +512,7 @@ extern const u16 gUnknown_8460E34[];
 extern const struct BgTemplate gUnknown_8462E58[3];
 extern const struct WindowTemplate *const gUnknown_8462EB4[3];
 extern const struct WindowTemplate gUnknown_8462EC0;
+extern const struct WindowTemplate gUnknown_8462EC8;
 extern const struct TextColor gUnknown_8462EE8;
 extern const struct TextColor gUnknown_8462EEC;
 extern const u8 *const gUnknown_8462EF0[];
@@ -1015,16 +1027,16 @@ void sub_812F7C0(u8 taskId)
     }
 }
 
-#define OaksSpeechPrintMessage(str) ({ \
+#define OaksSpeechPrintMessage(str, speed) ({ \
     sub_80F6EE4(0, FALSE);\
     if (str != gStringVar4) \
     { \
         StringExpandPlaceholders(gStringVar4, str); \
-        AddTextPrinterParametrized(0, 4, gStringVar4, sOakSpeechResources->unk_001F, NULL, 2, 1, 3); \
+        AddTextPrinterParametrized(0, 4, gStringVar4, speed, NULL, 2, 1, 3); \
     } \
     else \
     { \
-        AddTextPrinterParametrized(0, 4, str, sOakSpeechResources->unk_001F, NULL, 2, 1, 3); \
+        AddTextPrinterParametrized(0, 4, str, speed, NULL, 2, 1, 3); \
     } \
     CopyWindowToVram(0, 3); \
 })
@@ -1039,7 +1051,7 @@ void sub_812F880(u8 taskId)
             data[3]--;
         else
         {
-            OaksSpeechPrintMessage(gUnknown_81C5C78);
+            OaksSpeechPrintMessage(gUnknown_81C5C78, sOakSpeechResources->unk_001F);
             gTasks[taskId].func = sub_812F944;
         }
     }
@@ -1049,7 +1061,7 @@ void sub_812F944(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
-        OaksSpeechPrintMessage(gUnknown_81C5D06);
+        OaksSpeechPrintMessage(gUnknown_81C5D06, sOakSpeechResources->unk_001F);
         gTasks[taskId].data[3] = 30;
         gTasks[taskId].func = sub_812F9EC;
     }
@@ -1087,7 +1099,7 @@ void sub_812FA78(u8 taskId)
         gTasks[taskId].data[3]++;
         if (gTasks[taskId].data[3] == 32)
         {
-            OaksSpeechPrintMessage(gUnknown_81C5D12);
+            OaksSpeechPrintMessage(gUnknown_81C5D12, sOakSpeechResources->unk_001F);
             PlayCry1(SPECIES_NIDORAN_F, 0);
         }
     }
@@ -1097,7 +1109,7 @@ void sub_812FB4C(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
-        OaksSpeechPrintMessage(gUnknown_81C5D4B);
+        OaksSpeechPrintMessage(gUnknown_81C5D4B, sOakSpeechResources->unk_001F);
         gTasks[taskId].func = sub_812FBF0;
     }
 }
@@ -1142,7 +1154,7 @@ void sub_812FC68(u8 taskId)
         }
         else
         {
-            OaksSpeechPrintMessage(gUnknown_81C5DBD);
+            OaksSpeechPrintMessage(gUnknown_81C5DBD, sOakSpeechResources->unk_001F);
             gTasks[taskId].func = sub_812FD78;
         }
     }
@@ -1160,3 +1172,246 @@ void sub_812FD78(u8 taskId)
         gTasks[taskId].func = sub_812FDC0;
     }
 }
+
+void sub_812FDC0(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (data[2] != 0)
+    {
+        if (data[3] != 0)
+            data[3]--;
+        else
+        {
+            data[1] = -60;
+            sub_8131310();
+            OaksSpeechPrintMessage(gUnknown_81C59D5, sOakSpeechResources->unk_001F);
+            gTasks[taskId].func = sub_812FE88;
+        }
+    }
+}
+
+void sub_812FE88(u8 taskId)
+{
+    if (!IsTextPrinterActive(0))
+    {
+        gTasks[taskId].data[13] = AddWindow(&gUnknown_8462EC8);
+        PutWindowTilemap(gTasks[taskId].data[13]);
+        SetWindowBorderStyle(gTasks[taskId].data[13], 1, sub_80F796C(), 14);
+        FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
+        sOakSpeechResources->unk_001C[0] = 1;
+        sOakSpeechResources->unk_001C[1] = 2;
+        sOakSpeechResources->unk_001C[2] = 3;
+        box_print(gTasks[taskId].data[13], 2, 8, 1, sOakSpeechResources->unk_001C, 0, gUnknown_8415D93);
+        sOakSpeechResources->unk_001C[0] = 1;
+        sOakSpeechResources->unk_001C[1] = 2;
+        sOakSpeechResources->unk_001C[2] = 3;
+        box_print(gTasks[taskId].data[13], 2, 8, 17, sOakSpeechResources->unk_001C, 0, gUnknown_8415D97);
+        sub_810F7D8(gTasks[taskId].data[13], 2, 0, 1, GetFontAttribute(2, 1) + 2, 2, 0);
+        CopyWindowToVram(gTasks[taskId].data[13], 3);
+        gTasks[taskId].func = sub_812FFA4;
+    }
+}
+
+void sub_812FFA4(u8 taskId)
+{
+    s8 input = ProcessMenuInputNoWrapAround();
+    switch (input)
+    {
+    case 0:
+        gSaveBlock2Ptr->playerGender = MALE;
+        break;
+    case 1:
+        gSaveBlock2Ptr->playerGender = FEMALE;
+        break;
+    case -1:
+    case -2:
+        return;
+    }
+    gTasks[taskId].func = sub_812FFF0;
+
+}
+
+void sub_812FFF0(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    sub_810F4D8(data[13], 1);
+    RemoveWindow(data[13]);
+    data[13] = 0;
+    sub_80F6F54(0, 1);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    CopyBgTilemapBufferToVram(0);
+    gTasks[taskId].func = sub_8130050;
+}
+
+void sub_8130050(u8 taskId)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        sub_81311F4(MALE, 0);
+    else
+        sub_81311F4(FEMALE, 0);
+    sub_81315CC(taskId, 2);
+    gTasks[taskId].data[3] = 32;
+    gTasks[taskId].func = sub_81300A0;
+}
+
+void sub_81300A0(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (data[2] != 0)
+    {
+        if (data[3] != 0)
+            data[3]--;
+        else
+        {
+            data[1] = 0;
+            OaksSpeechPrintMessage(gUnknown_81C5DEA, sOakSpeechResources->unk_001F);
+            gTasks[taskId].func = sub_8130160;
+        }
+    }
+}
+
+void sub_8130160(u8 taskId)
+{
+    if (!IsTextPrinterActive(0))
+    {
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        sOakSpeechResources->unk_0010 = 0;
+        gTasks[taskId].func = sub_81303B4;
+    }
+}
+void sub_81301B0(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!IsTextPrinterActive(0))
+    {
+        if (data[1] > -60)
+        {
+            data[1] -= 2;
+            gSpriteCoordOffsetX += 2;
+            ChangeBgX(2, 0x200, 2);
+        }
+        else
+        {
+            data[1] = -60;
+            sub_8131660(taskId, sOakSpeechResources->unk_0010);
+            gTasks[taskId].func = sub_8130324;
+        }
+    }
+}
+
+void sub_8130228(u8 taskId)
+{
+    sub_8131660(taskId, sOakSpeechResources->unk_0010);
+    if (sOakSpeechResources->unk_0010 == 0)
+    {
+        OaksSpeechPrintMessage(gUnknown_81C5DEA, 0);
+    }
+    else
+    {
+        OaksSpeechPrintMessage(gUnknown_81C5E91, 0);
+    }
+    gTasks[taskId].func = sub_8130324;
+}
+
+#ifdef NONMATCHING
+// switch case uses blt, should use ble
+void sub_8130324(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    s8 input = ProcessMenuInput();
+
+    switch (input)
+    {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        PlaySE(SE_SELECT);
+        sub_810F4D8(data[13], TRUE);
+        RemoveWindow(data[13]);
+        sub_8131754(sOakSpeechResources->unk_0010, input - 1);
+        data[15] = 1;
+        gTasks[taskId].func = sub_8130464;
+        break;
+    case 0:
+        PlaySE(SE_SELECT);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        gTasks[taskId].func = sub_81303B4;
+        break;
+    }
+}
+#else
+NAKED
+void sub_8130324(u8 taskId)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tsub sp, 0x4\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tlsls r1, r0, 2\n"
+                "\tadds r1, r0\n"
+                "\tlsls r6, r1, 3\n"
+                "\tldr r7, _0813037C @ =gTasks+0x8\n"
+                "\tadds r5, r6, r7\n"
+                "\tbl ProcessMenuInput\n"
+                "\tlsls r0, 24\n"
+                "\tasrs r4, r0, 24\n"
+                "\tcmp r4, 0\n"
+                "\tbeq _08130388\n"
+                "\tcmp r4, 0\n"
+                "\tble _081303A8\n"
+                "\tcmp r4, 0x4\n"
+                "\tbgt _081303A8\n"
+                "\tmovs r0, 0x5\n"
+                "\tbl PlaySE\n"
+                "\tldrb r0, [r5, 0x1A]\n"
+                "\tmovs r1, 0x1\n"
+                "\tbl sub_810F4D8\n"
+                "\tldrb r0, [r5, 0x1A]\n"
+                "\tbl RemoveWindow\n"
+                "\tldr r0, _08130380 @ =sOakSpeechResources\n"
+                "\tldr r0, [r0]\n"
+                "\tldrb r0, [r0, 0x10]\n"
+                "\tsubs r1, r4, 0x1\n"
+                "\tlsls r1, 24\n"
+                "\tlsrs r1, 24\n"
+                "\tbl sub_8131754\n"
+                "\tmovs r0, 0x1\n"
+                "\tstrh r0, [r5, 0x1E]\n"
+                "\tadds r0, r7, 0\n"
+                "\tsubs r0, 0x8\n"
+                "\tadds r0, r6, r0\n"
+                "\tldr r1, _08130384 @ =sub_8130464\n"
+                "\tb _081303A6\n"
+                "\t.align 2, 0\n"
+                "_0813037C: .4byte gTasks+0x8\n"
+                "_08130380: .4byte sOakSpeechResources\n"
+                "_08130384: .4byte sub_8130464\n"
+                "_08130388:\n"
+                "\tmovs r0, 0x5\n"
+                "\tbl PlaySE\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tstr r4, [sp]\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0x10\n"
+                "\tbl BeginNormalPaletteFade\n"
+                "\tadds r0, r7, 0\n"
+                "\tsubs r0, 0x8\n"
+                "\tadds r0, r6, r0\n"
+                "\tldr r1, _081303B0 @ =sub_81303B4\n"
+                "_081303A6:\n"
+                "\tstr r1, [r0]\n"
+                "_081303A8:\n"
+                "\tadd sp, 0x4\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_081303B0: .4byte sub_81303B4");
+}
+#endif //NONMATCHING

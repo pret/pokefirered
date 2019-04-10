@@ -429,49 +429,239 @@ gUnknown_81C566A:: @ 81C566A
 	.incbin "baserom.gba", 0x1C566A, 0xE5
 
 gUnknown_81C574F:: @ 81C574F
-	.incbin "baserom.gba", 0x1C574F, 0xDE
+	.string "NEW NAME$"
+
+gUnknown_81C5758:: @ 81C5758
+	.string "GREEN$"
+
+gUnknown_81C575E:: @ 81C575E
+	.string "RED$"
+
+gUnknown_81C5762:: @ 81C5762
+	.string "LEAF$"
+
+gUnknown_81C5767:: @ 81C5767
+	.string "FIRE$"
+
+gUnknown_81C576C:: @ 81C576C
+	.string "GARY$"
+
+gUnknown_81C5771:: @ 81C5771
+	.string "KAZ$"
+
+gUnknown_81C5775:: @ 81C5775
+	.string "TORU$"
+
+gUnknown_81C577A:: @ 81C577A
+	.string "ASH$"
+
+gUnknown_81C577E:: @ 81C577E
+	.string "KENE$"
+
+gUnknown_81C5783:: @ 81C5783
+	.string "GEKI$"
+
+gUnknown_81C5788:: @ 81C5788
+	.string "JAK$"
+
+gUnknown_81C578C:: @ 81C578C
+	.string "JANNE$"
+
+gUnknown_81C5792:: @ 81C5792
+	.string "JONN$"
+
+gUnknown_81C5797:: @ 81C5797
+	.string "KAMON$"
+
+gUnknown_81C579D:: @ 81C579D
+	.string "KARL$"
+
+gUnknown_81C57A2:: @ 81C57A2
+	.string "TAYLOR$"
+
+gUnknown_81C57A9:: @ 81C57A9
+	.string "OSCAR$"
+
+gUnknown_81C57AF:: @ 81C57AF
+	.string "HIRO$"
+
+gUnknown_81C57B4:: @ 81C57B4
+	.string "MAX$"
+
+gUnknown_81C57B8:: @ 81C57B8
+	.string "JON$"
+
+gUnknown_81C57BC:: @ 81C57BC
+	.string "RALPH$"
+
+gUnknown_81C57C2:: @ 81C57C2
+	.string "KAY$"
+
+gUnknown_81C57C6:: @ 81C57C6
+	.string "TOSH$"
+
+gUnknown_81C57CB:: @ 81C57CB
+	.string "ROAK$"
+
+gUnknown_81C57D0:: @ 81C57D0
+	.string "OMI$"
+
+gUnknown_81C57D4:: @ 81C57D4
+	.string "JODI$"
+
+gUnknown_81C57D9:: @ 81C57D9
+	.string "AMANDA$"
+
+gUnknown_81C57E0:: @ 81C57E0
+	.string "HILLARY$"
+
+gUnknown_81C57E8:: @ 81C57E8
+	.string "MAKEY$"
+
+gUnknown_81C57EE:: @ 81C57EE
+	.string "MICHI$"
+
+gUnknown_81C57F4:: @ 81C57F4
+	.string "PAULA$"
+
+gUnknown_81C57FA:: @ 81C57FA
+	.string "JUNE$"
+
+gUnknown_81C57FF:: @ 81C57FF
+	.string "CASSIE$"
+
+gUnknown_81C5806:: @ 81C5806
+	.string "REY$"
+
+gUnknown_81C580A:: @ 81C580A
+	.string "SEDA$"
+
+gUnknown_81C580F:: @ 81C580F
+	.string "KIKO$"
+
+gUnknown_81C5814:: @ 81C5814
+	.string "MINA$"
+
+gUnknown_81C5819:: @ 81C5819
+	.string "NORIE$"
+
+gUnknown_81C581F:: @ 81C581F
+	.string "SAI$"
+
+gUnknown_81C5823:: @ 81C5823
+	.string "MOMO$"
+
+gUnknown_81C5828:: @ 81C5828
+	.string "SUZI$"
 
 gUnknown_81C582D:: @ 81C582D
-	.incbin "baserom.gba", 0x1C582D, 0x1A8
+	.string "The various buttons will be explained in\n"
+	.string "the order of their importance.$"
+
+gUnknown_81C5875:: @ 81C5875
+	.string "Moves the main character.\n"
+	.string "Also used to choose various data\n"
+	.string "headings.$"
+
+gUnknown_81C58BA:: @ 81C58BA
+	.string "Used to confirm a choice, check\n"
+	.string "things, chat, and scroll text.$"
+
+gUnknown_81C58F9:: @ 81C58F9
+	.string "Used to exit, cancel a choice,\n"
+	.string "and cancel a mode.$"
+
+gUnknown_81C592B:: @ 81C592B
+	.string "Press this button to open the\n"
+	.string "MENU.$"
+
+gUnknown_81C594F:: @ 81C594F
+	.string "Used to shift items and to use\n"
+	.string "a registered item.$"
+
+gUnknown_81C5981:: @ 81C5981
+	.string "If you need help playing the\n"
+	.string "game, or on how to do things,\n"
+	.string "press the L or R Button.$"
 
 gUnknown_81C59D5:: @ 81C59D5
-	.incbin "baserom.gba", 0x1C59D5, 0x2A3
+	.string "Now tell me. Are you a boy?\n"
+	.string "Or are you a girl?$"
+
+gUnknown_81C5A04::
+	.string "In the world which you are about to\n"
+	.string "enter, you will embark on a grand\n"
+	.string "adventure with you as the hero.\n"
+	.string "\n"
+	.string "Speak to people and check things\n"
+	.string "wherever you go, be it towns, roads,\n"
+	.string "or caves. Gather information and\n"
+	.string "hints from every source.$"
+
+gUnknown_81C5AEB::
+	.string "New paths will open to you by helping\n"
+	.string "people in need, overcoming challenges,\n"
+	.string "and solving mysteries.\n"
+	.string "\n"
+	.string "At times, you will be challenged by\n"
+	.string "others and attacked by wild creatures.\n"
+	.string "Be brave and keep pushing on.$"
+
+gUnknown_81C5BB9::
+	.string "Through your adventure, we hope\n"
+	.string "that you will interact with all sorts\n"
+	.string "of people and achieve personal growth.\n"
+	.string "That is our biggest objective.\n"
+	.string "\n"
+	.string "Press the A Button, and let your\n"
+	.string "adventure begin!$"
 
 gUnknown_81C5C78:: @ 81C5C78
-	.incbin "baserom.gba", 0x1C5C78, 0x8E
+	.string "Hello, there!\n"
+	.string "Glad to meet you!\pWelcome to the world of POKéMON!\pMy name is OAK.\pPeople affectionately refer to me\n"
+	.string "as the POKéMON PROFESSOR.\p$"
 
 gUnknown_81C5D06:: @ 81C5D06
-	.incbin "baserom.gba", 0x1C5D06, 0xC
+	.string "This world…$"
 
 gUnknown_81C5D12:: @ 81C5D12
-	.incbin "baserom.gba", 0x1C5D12, 0x39
+	.string "…is inhabited far and wide by\n"
+	.string "creatures called POKéMON.\p$"
 
 gUnknown_81C5D4B:: @ 81C5D4B
-	.incbin "baserom.gba", 0x1C5D4B, 0x72
+	.string "For some people, POKéMON are pets.\n"
+	.string "Others use them for battling.\pAs for myself…\pI study POKéMON as a profession.\p$"
 
 gUnknown_81C5DBD:: @ 81C5DBD
-	.incbin "baserom.gba", 0x1C5DBD, 0x2D
+	.string "But first, tell me a little about\n"
+	.string "yourself.\p$"
 
 gUnknown_81C5DEA:: @ 81C5DEA
-	.incbin "baserom.gba", 0x1C5DEA, 0x29
+	.string "Let’s begin with your name.\n"
+	.string "What is it?\p$"
 
 gUnknown_81C5E13:: @ 81C5E13
-	.incbin "baserom.gba", 0x1C5E13, 0x1B
+	.string "Right…\n"
+	.string "So your name is {PLAYER}.$"
 
 gUnknown_81C5E2E:: @ 81C5E2E
-	.incbin "baserom.gba", 0x1C5E2E, 0x63
+	.string "This is my grandson.\pHe’s been your rival since you both\n"
+	.string "were babies.\p…Erm, what was his name now?$"
 
 gUnknown_81C5E91:: @ 81C5E91
-	.incbin "baserom.gba", 0x1C5E91, 0x24
+	.string "Your rival’s name, what was it now?$"
 
 gUnknown_81C5EB5:: @ 81C5EB5
-	.incbin "baserom.gba", 0x1C5EB5, 0x10
+	.string "…Er, was it {RIVAL}?$"
 
 gUnknown_81C5EC5:: @ 81C5EC5
-	.incbin "baserom.gba", 0x1C5EC5, 0x2F
+	.string "That’s right! I remember now!\n"
+	.string "His name is {RIVAL}!\p$"
 
 gUnknown_81C5EF4:: @ 81C5EF4
-	.incbin "baserom.gba", 0x1C5EF4, 0x75
+	.string "{PLAYER}!\pYour very own POKéMON legend is\n"
+	.string "about to unfold!\pA world of dreams and adventures\n"
+	.string "with POKéMON awaits! Let’s go!$"
 
 @ pokedude data
 	.incbin "baserom.gba", 0x1C5F69, 0x983

@@ -5,9 +5,6 @@
 
 	.align 2
 	// oak_speech
-gUnknown_8460BA8:: @ 8460BA8
-	.incbin "baserom.gba", 0x460BA8, 0xFC
-
 gUnknown_8460CA4:: @ 8460CA4
 	.incbin "baserom.gba", 0x460CA4, 0x44
 
@@ -83,7 +80,7 @@ gUnknown_8462EB4:: @ 8462EB4
 	.4byte gUnknown_8462E94
 
 gUnknown_8462EC0:: @ 8462EC0
-	.incbin "baserom.gba", 0x462EC0, 0x8
+	window_template 0x00, 0x01, 0x04, 0x1c, 0x0f, 0x0f, 0x0001
 
 gUnknown_8462EC8:: @ 8462EC8
 	.incbin "baserom.gba", 0x462EC8, 0x8
@@ -94,14 +91,19 @@ gUnknown_8462ED0:: @ 8462ED0
 gUnknown_8462ED8:: @ 8462ED8
 	.incbin "baserom.gba", 0x462ED8, 0x10
 
+	.align 2
 gUnknown_8462EE8:: @ 8462EE8
-	.incbin "baserom.gba", 0x462EE8, 0x4
+	.byte 0x00, 0x01, 0x02
 
+	.align 2
 gUnknown_8462EEC:: @ 8462EEC
-	.incbin "baserom.gba", 0x462EEC, 0x4
+	.byte 0x00, 0x02, 0x03
 
+	.align 2
 gUnknown_8462EF0:: @ 8462EF0
-	.incbin "baserom.gba", 0x462EF0, 0xC
+	.4byte gUnknown_81C5A04
+	.4byte gUnknown_81C5AEB
+	.4byte gUnknown_81C5BB9
 
 gUnknown_8462EFC:: @ 8462EFC
 	.incbin "baserom.gba", 0x462EFC, 0x18

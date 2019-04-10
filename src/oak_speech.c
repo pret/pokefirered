@@ -17,10 +17,13 @@
 #include "event_scripts.h"
 #include "scanline_effect.h"
 #include "constants/species.h"
+#include "constants/songs.h"
 
 struct OakSpeechResources
 {
-    u8 filler_0000[0x12];
+    u8 filler_0000[0x8];
+    void * unk_0008;
+    u8 filler_000C[6];
     u16 unk_0012;
     u16 unk_0014[3];
     u8 filler_001A[5];
@@ -36,6 +39,11 @@ void sub_812E9F8(u8 taskId);
 void sub_812EB58(u8 taskId);
 void sub_812EEB0(void);
 void sub_812F0B0(u8 taskId);
+void sub_812F180(u8 taskId);
+void sub_812F274(u8 taskId);
+void sub_812F33C(u8 taskId);
+void sub_812F4A8(u8 taskId);
+void sub_8130FD4(u8 taskId, u8 state);
 
 extern const u8 gUnknown_8415D2C[];
 extern const u8 gUnknown_8415D48[];
@@ -459,13 +467,17 @@ const u8 gUnknown_845FD54[][5] = {
 
 ALIGNED(4) const u16 gUnknown_8460568[] = INCBIN_U16("data/oak_speech/unk_8460568.gbapal");
 const u32 gUnknown_84605E8[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz");
+const u32 gUnknown_8460BA8[] = INCBIN_U32("data/oak_speech/unk_8460BA8.bin.lz");
 
 extern const u16 gUnknown_8460D94[];
 extern const u16 gUnknown_8460E34[];
 
 extern const struct BgTemplate gUnknown_8462E58[3];
 extern const struct WindowTemplate *const gUnknown_8462EB4[3];
+extern const struct WindowTemplate gUnknown_8462EC0;
 extern const struct TextColor gUnknown_8462EE8;
+extern const struct TextColor gUnknown_8462EEC;
+extern const u8 *const gUnknown_8462EF0[];
 extern const u8 *const gUnknown_8463074[];
 
 void sub_812E944(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
@@ -707,4 +719,128 @@ void sub_812EF50(u8 taskId)
     }
     BeginNormalPaletteFade(0xFFFFDFFF, -1, 16, 0, stdpal_get(2)[15]);
     gTasks[taskId].func = sub_812F0B0;
+}
+
+void sub_812F0B0(u8 taskId)
+{
+    if (!gPaletteFade.active && JOY_NEW((A_BUTTON | B_BUTTON)))
+    {
+        if (JOY_NEW(A_BUTTON))
+        {
+            gTasks[taskId].data[15] = 1;
+            if (sOakSpeechResources->unk_0012 < 2)
+            {
+                BeginNormalPaletteFade(0xFFFFDFFF, -1, 0, 16, stdpal_get(2)[15]);
+            }
+        }
+        else
+        {
+            if (sOakSpeechResources->unk_0012 != 0)
+            {
+                gTasks[taskId].data[15] = -1;
+                BeginNormalPaletteFade(0xFFFFDFFF, -1, 0, 16, stdpal_get(2)[15]);
+            }
+            else
+                return;
+        }
+    }
+    else
+        return;
+    PlaySE(SE_SELECT);
+    gTasks[taskId].func = sub_812F180;
+}
+
+void sub_812F180(u8 taskId)
+{
+    u8 r8 = 0;
+    u8 i;
+
+    if (!gPaletteFade.active)
+    {
+        switch (sOakSpeechResources->unk_0012) {
+        case 0:
+            r8 = 1;
+            break;
+        case 1:
+        case 2:
+            r8 = 3;
+            break;
+        }
+        sOakSpeechResources->unk_0012 += gTasks[taskId].data[15];
+        if (sOakSpeechResources->unk_0012 < 3)
+        {
+            for (i = 0; i < r8; i++)
+            {
+                FillWindowPixelBuffer(sOakSpeechResources->unk_0014[i], 0x00);
+                ClearWindowTilemap(sOakSpeechResources->unk_0014[i]);
+                CopyWindowToVram(sOakSpeechResources->unk_0014[i], 3);
+                RemoveWindow(sOakSpeechResources->unk_0014[i]);
+                sOakSpeechResources->unk_0014[i] = 0;
+            }
+            gTasks[taskId].func = sub_812EF50;
+        }
+        else
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, 0);
+            gTasks[taskId].func = sub_812F274;
+        }
+    }
+}
+
+void sub_812F274(u8 taskId)
+{
+    u8 i = 0;
+
+    if (!gPaletteFade.active)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            FillWindowPixelBuffer(sOakSpeechResources->unk_0014[i], 0x00);
+            ClearWindowTilemap(sOakSpeechResources->unk_0014[i]);
+            CopyWindowToVram(sOakSpeechResources->unk_0014[i], 3);
+            RemoveWindow(sOakSpeechResources->unk_0014[i]);
+            sOakSpeechResources->unk_0014[i] = 0;
+        }
+        FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 2, 30, 18);
+        CopyBgTilemapBufferToVram(1);
+        sub_8006398(gTasks[taskId].data[5]);
+        sOakSpeechResources->unk_0014[0] = RGB_BLACK;
+        LoadPalette(sOakSpeechResources->unk_0014, 0, 2);
+        gTasks[taskId].data[3] = 32;
+        gTasks[taskId].func = sub_812F33C;
+    }
+}
+
+void sub_812F33C(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u32 sp14 = 0;
+
+    if (data[3] != 0)
+        data[3]--;
+    else
+    {
+        PlayBGM(324);
+        sub_810F71C();
+        sub_810F5E8(gUnknown_8415D48, 0, 1);
+        sOakSpeechResources->unk_0008 = malloc_and_decompress(gUnknown_8460BA8, &sp14);
+        CopyToBgTilemapBufferRect(1, sOakSpeechResources->unk_0008, 0, 2, 30, 19);
+        CopyBgTilemapBufferToVram(1);
+        Free(sOakSpeechResources->unk_0008);
+        sOakSpeechResources->unk_0008 = NULL;
+        data[14] = AddWindow(&gUnknown_8462EC0);
+        PutWindowTilemap(data[14]);
+        FillWindowPixelBuffer(data[14], 0x00);
+        CopyWindowToVram(data[14], 3);
+        sOakSpeechResources->unk_0012 = 0;
+        gMain.state = 0;
+        data[15] = 16;
+        AddTextPrinterParametrized2(data[14], 2, 3, 5, 1, 0, &gUnknown_8462EEC, 0, gUnknown_8462EF0[0]);
+        data[5] = sub_8006300(0, 0xe2, 0x91, 0, 0);
+        gSprites[data[5]].oam.objMode = ST_OAM_OBJ_BLEND;
+        gSprites[data[5]].oam.priority = 0;
+        sub_8130FD4(taskId, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 2, 16, 0, 0);
+        gTasks[taskId].func = sub_812F4A8;
+    }
 }

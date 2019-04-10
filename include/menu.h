@@ -41,5 +41,6 @@ void *sub_80F68F0(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 void sub_810F558(u8, u8, u8, u8, u16);
 void sub_810F650(const u8 *, const u8 *, u8, u32, u8);
 void sub_810F5E8(const u8 *, u32, u8);
+void sub_810F71C(void);
 
 #endif // GUARD_MENU_H

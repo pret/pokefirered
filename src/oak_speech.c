@@ -43,6 +43,7 @@ void sub_812F180(u8 taskId);
 void sub_812F274(u8 taskId);
 void sub_812F33C(u8 taskId);
 void sub_812F4A8(u8 taskId);
+void sub_812F72C(u8 taskId);
 void sub_8130FD4(u8 taskId, u8 state);
 
 extern const u8 gUnknown_8415D2C[];
@@ -842,5 +843,105 @@ void sub_812F33C(u8 taskId)
         sub_8130FD4(taskId, 0);
         BeginNormalPaletteFade(0xFFFFFFFF, 2, 16, 0, 0);
         gTasks[taskId].func = sub_812F4A8;
+    }
+}
+
+void sub_812F4A8(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    switch (gMain.state)
+    {
+    case 0:
+        if (!gPaletteFade.active)
+        {
+            SetGpuReg(REG_OFFSET_WIN0H, 0x00F0);
+            SetGpuReg(REG_OFFSET_WIN0V, 0x10A0);
+            SetGpuReg(REG_OFFSET_WININ, 0x003F);
+            SetGpuReg(REG_OFFSET_WINOUT, 0x001F);
+            SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+            gMain.state = 1;
+        }
+        break;
+    case 1:
+        if (JOY_NEW((A_BUTTON | B_BUTTON)))
+        {
+            if (JOY_NEW(A_BUTTON))
+            {
+                sOakSpeechResources->unk_0012++;
+            }
+            else if (sOakSpeechResources->unk_0012 != 0)
+            {
+                sOakSpeechResources->unk_0012--;
+            }
+            else
+            {
+                break;
+            }
+            PlaySE(SE_SELECT);
+            if (sOakSpeechResources->unk_0012 == 3)
+            {
+                gMain.state = 4;
+            }
+            else
+            {
+                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1);
+                SetGpuReg(REG_OFFSET_BLDALPHA, (16 - data[15]) | data[15]);
+                gMain.state++;
+            }
+        }
+        break;
+    case 2:
+        data[15] -= 2;
+        SetGpuReg(REG_OFFSET_BLDALPHA, ((16 - data[15]) << 8) | data[15]);
+        if (data[15] <= 0)
+        {
+            FillWindowPixelBuffer(data[14], 0x00);
+            AddTextPrinterParametrized2(data[14], 2, 3, 5, 1, 0, &gUnknown_8462EEC, 0, gUnknown_8462EF0[sOakSpeechResources->unk_0012]);
+            if (sOakSpeechResources->unk_0012 == 0)
+            {
+                sub_810F71C();
+                sub_810F5E8(gUnknown_8415D48, 0, 1);
+            }
+            else
+            {
+                sub_810F71C();
+                sub_810F5E8(gUnknown_8415D50, 0, 1);
+            }
+            gMain.state++;
+        }
+        break;
+    case 3:
+        data[15] += 2;
+        SetGpuReg(REG_OFFSET_BLDALPHA, ((16 - data[15]) << 8) | data[15]);
+        if (data[15] >= 16)
+        {
+            data[15] = 16;
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+            gMain.state = 1;
+        }
+        break;
+    case 4:
+        sub_8006398(gTasks[taskId].data[5]);
+        PlayBGM(325);
+        data[15] = 24;
+        gMain.state++;
+        break;
+    default:
+        if (data[15] != 0)
+            data[15]--;
+        else
+        {
+            gMain.state = 0;
+            sOakSpeechResources->unk_0012 = 0;
+            SetGpuReg(REG_OFFSET_WIN0H, 0);
+            SetGpuReg(REG_OFFSET_WIN0V, 0);
+            SetGpuReg(REG_OFFSET_WININ, 0);
+            SetGpuReg(REG_OFFSET_WINOUT, 0);
+            ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+            BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = sub_812F72C;
+        }
+        break;
     }
 }

@@ -91,7 +91,7 @@ sub_80807E8: @ 80807E8
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

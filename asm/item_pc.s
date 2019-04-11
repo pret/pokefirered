@@ -257,7 +257,7 @@ _0810D608:
 	b _0810D674
 _0810D60E:
 	movs r0, 0x1D
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0810D674
 _0810D616:
 	ldr r0, _0810D62C @ =gUnknown_203ADCC
@@ -1880,7 +1880,7 @@ sub_810E274: @ 810E274
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	ldrh r0, [r6, 0x2]
 	bl sub_810DD68
 	lsls r0, 16
@@ -2884,7 +2884,7 @@ sub_810EB30: @ 810EB30
 	adds r6, r2, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0xEB

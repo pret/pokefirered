@@ -4299,7 +4299,7 @@ sub_812A424: @ 812A424
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 _0812A4F0:
 	add sp, 0x14
 	pop {r3}
@@ -5000,7 +5000,7 @@ sub_812AA10: @ 812AA10
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x3
 	bl PutWindowTilemap
 	add sp, 0xC

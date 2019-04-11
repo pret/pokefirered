@@ -2542,7 +2542,7 @@ sub_8084708: @ 8084708
 	movs r0, 0x8
 	bl SetPlayerAvatarTransitionFlags
 	movs r0, 0x16
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _08084760:
 	ldr r0, _08084780 @ =sub_8084484
 	bl FindTaskIdByFunc
@@ -7213,7 +7213,7 @@ sub_8086B30: @ 8086B30
 	lsrs r0, 24
 	bl DestroyTask
 	movs r0, 0x16
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _08086B96:
 	pop {r4,r5}
 	pop {r0}

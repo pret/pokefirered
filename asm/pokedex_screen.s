@@ -309,7 +309,7 @@ sub_810275C: @ 810275C
 	ldr r0, _08102794 @ =sub_81024D4
 	bl SetMainCallback2
 	movs r0, 0x4
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	pop {r0}
 	bx r0
 	.align 2, 0

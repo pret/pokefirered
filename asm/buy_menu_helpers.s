@@ -141,7 +141,7 @@ sub_813F75C: @ 813F75C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	str r4, [sp]

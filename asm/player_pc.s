@@ -187,7 +187,7 @@ _080EB77E:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r1, _080EB814 @ =gTasks
@@ -361,11 +361,11 @@ _080EB940:
 	cmp r0, 0
 	bne _080EB95C
 	movs r0, 0x22
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080EB962
 _080EB95C:
 	movs r0, 0x1E
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080EB962:
 	ldr r0, _080EB990 @ =gUnknown_203AAC4
 	ldrb r0, [r0, 0x5]
@@ -376,7 +376,7 @@ _080EB962:
 	bne _080EB99C
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	adds r0, r5, 0
 	bl sub_80EBEB0
 	ldr r0, _080EB994 @ =gTasks
@@ -449,14 +449,14 @@ sub_80EB9E8: @ 80EB9E8
 	cmp r0, 0
 	bne _080EBA18
 	movs r0, 0x21
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080EBA1E
 	.align 2, 0
 _080EBA10: .4byte gTasks+0x8
 _080EBA14: .4byte gUnknown_203AAC4
 _080EBA18:
 	movs r0, 0x1D
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080EBA1E:
 	ldr r0, _080EBA80 @ =gUnknown_8402258
 	bl AddWindow
@@ -488,7 +488,7 @@ _080EBA1E:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r1, _080EBA88 @ =gUnknown_84021DC
@@ -513,7 +513,7 @@ sub_80EBA8C: @ 80EBA8C
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -702,7 +702,7 @@ sub_80EBC0C: @ 80EBC0C
 	bl sub_80F6E9C
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r0, _080EBC34 @ =sub_80EBBDC
 	movs r1, 0
 	bl CreateTask
@@ -777,7 +777,7 @@ sub_80EBCAC: @ 80EBCAC
 	bl sub_80F6E9C
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r0, _080EBCD4 @ =sub_80EBBDC
 	movs r1, 0
 	bl CreateTask
@@ -1341,7 +1341,7 @@ sub_80EC0D8: @ 80EC0D8
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r1, _080EC154 @ =gTasks
@@ -1503,13 +1503,13 @@ sub_80EC260: @ 80EC260
 	cmp r0, 0
 	bne _080EC278
 	movs r0, 0x22
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080EC27E
 	.align 2, 0
 _080EC274: .4byte gUnknown_203AAC4
 _080EC278:
 	movs r0, 0x1E
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080EC27E:
 	bl sub_80F6E9C
 	ldr r0, _080EC2A8 @ =sub_80EC230
@@ -1773,13 +1773,13 @@ sub_80EC474: @ 80EC474
 	cmp r0, 0
 	bne _080EC48C
 	movs r0, 0x22
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080EC492
 	.align 2, 0
 _080EC488: .4byte gUnknown_203AAC4
 _080EC48C:
 	movs r0, 0x1E
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080EC492:
 	ldr r0, _080EC4E8 @ =sub_80EC230
 	movs r1, 0
@@ -1871,7 +1871,7 @@ sub_80EC53C: @ 80EC53C
 	lsrs r4, 24
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	adds r0, r4, 0
 	bl sub_80EBEB0
 	movs r0, 0

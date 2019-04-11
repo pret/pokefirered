@@ -58,7 +58,7 @@ void sub_8145D18(u8 whichWindow);
 void sub_8146060(void);
 void sub_81461D8(void);
 
-extern const struct OamData gUnknown_83AC9F8;
+extern const struct OamData gOamData_83AC9F8;
 
 const struct TextColor gUnknown_8467068[] = {
     {0, 2, 3},
@@ -113,7 +113,7 @@ const struct SpritePalette gUnknown_8467F60[] = {
     {gUnknown_8467ED4, 0x8000}
 };
 const struct SpriteTemplate gUnknown_8467FA0 = {
-    0x8000, 0x8000, &gUnknown_83AC9F8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    0x8000, 0x8000, &gOamData_83AC9F8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 const struct UnkStruct_8467FB8 gUnknown_8467FB8[8] = {
     {1, 0, 0, 0, gUnknown_846718C, gUnknown_8467288, gUnknown_846708C},

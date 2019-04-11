@@ -203,7 +203,7 @@ sub_80A112C: @ 80A112C
 	lsrs r4, 24
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	adds r0, r4, 0
 	bl DestroyTask
 	bl sub_80696C0

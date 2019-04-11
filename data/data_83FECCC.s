@@ -586,7 +586,7 @@ gUnknown_8415C64:: @ 8415C64
 gUnknown_8415CE8:: @ 8415CE8
 	.incbin "baserom.gba", 0x415CE8, 0x44
 
-gUnknown_8415D2C:: @ 8415D2C
+gText_Controls:: @ 8415D2C
 	.string "CONTROLS$"
 
 	.align 2
@@ -594,28 +594,30 @@ gUnknown_8415D38:: @ 8415D2C
 	.string "{KEYGFX_DPAD_UP_DOWN}えらぶ {KEYGFX_A_BUTTON}けってい$"
 
 	.align 2
-gUnknown_8415D48:: @ 8415D48
+gText_ABUTTONNext:: @ 8415D48
 	.string "{KEYGFX_A_BUTTON}NEXT$"
 
 	.align 2
-gUnknown_8415D50:: @ 8415D50
+gText_ABUTTONNext_BBUTTONBack:: @ 8415D50
 	.string "{KEYGFX_A_BUTTON}NEXT {KEYGFX_B_BUTTON}BACK$"
 
 	.align 2
-gUnknown_8415D60:: @ 8415D60
-	.incbin "baserom.gba", 0x415D60, 0x18
+gText_UPDOWNPick_ABUTTONNext_BBUTTONBack:: @ 8415D60
+	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}NEXT {KEYGFX_B_BUTTON}CANCEL$"
 
-gUnknown_8415D78:: @ 8415D78
-	.incbin "baserom.gba", 0x415D78, 0x14
+	.align 2
+gText_UPDOWNPick_ABUTTONBBUTTONCancel:: @ 8415D78
+	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}{KEYGFX_B_BUTTON}CANCEL$"
 
-gUnknown_8415D8C:: @ 8415D8C
-	.incbin "baserom.gba", 0x415D8C, 0x7
+	.align 2
+gText_ABUTTONExit:: @ 8415D8C
+	.string "{KEYGFX_A_BUTTON}EXIT$"
 
-gUnknown_8415D93:: @ 8415D93
-	.incbin "baserom.gba", 0x415D93, 0x4
+gText_Boy:: @ 8415D93
+	.string "BOY$"
 
-gUnknown_8415D97:: @ 8415D97
-	.incbin "baserom.gba", 0x415D97, 0x5
+gText_Girl:: @ 8415D97
+	.string "GIRL$"
 
 gUnknown_8415D9C:: @ 8415D9C
 	.incbin "baserom.gba", 0x415D9C, 0x1C

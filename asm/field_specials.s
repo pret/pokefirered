@@ -3078,7 +3078,7 @@ _080CBD7C: .4byte gTasks
 sub_80CBD80: @ 80CBD80
 	push {lr}
 	movs r0, 0x16
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	movs r0, 0x8
 	bl SetPlayerAvatarTransitionFlags
 	pop {r0}
@@ -5542,7 +5542,7 @@ sub_80CD098: @ 80CD098
 	str r3, [sp]
 	movs r0, 0
 	movs r3, 0
-	bl sub_8006300
+	bl CreateTextCursorSpriteForOakSpeech
 	ldr r1, _080CD0DC @ =gUnknown_2039A1B
 	strb r0, [r1]
 	b _080CD0E8

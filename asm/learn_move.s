@@ -296,7 +296,7 @@ sub_80E48C0: @ 80E48C0
 	ldr r4, _080E48F0 @ =gStringVar4
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]

@@ -420,7 +420,7 @@ _0811ED96:
 _0811EDA8: .4byte gUnknown_203B09C
 _0811EDAC:
 	movs r0, 0x5
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0811EDFC
 _0811EDB4:
 	ldr r4, _0811EDCC @ =gUnknown_203B09C
@@ -6888,7 +6888,7 @@ sub_8121FC0: @ 8121FC0
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -6990,7 +6990,7 @@ sub_8122084: @ 8122084
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -13684,7 +13684,7 @@ _08125680:
 	mov r1, r8
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x10

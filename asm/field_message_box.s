@@ -83,7 +83,7 @@ _080693D4:
 _080693DA:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 _080693E2:
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -250,7 +250,7 @@ HideFieldMessageBox: @ 80694F4
 	bl task_del_textbox
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	ldr r1, _0806950C @ =gUnknown_203709C
 	movs r0, 0
 	strb r0, [r1]
@@ -293,7 +293,7 @@ sub_8069538: @ 8069538
 	bl task_del_textbox
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldr r1, _08069550 @ =gUnknown_203709C
 	movs r0, 0
 	strb r0, [r1]

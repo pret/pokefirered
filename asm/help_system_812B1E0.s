@@ -16,8 +16,8 @@ sub_812B1E0: @ 812B1E0
 _0812B1EC: .4byte gUnknown_203B0EC
 	thumb_func_end sub_812B1E0
 
-	thumb_func_start sub_812B1F0
-sub_812B1F0: @ 812B1F0
+	thumb_func_start HelpSystem_SetSomeVariable2
+HelpSystem_SetSomeVariable2: @ 812B1F0
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -44,7 +44,7 @@ _0812B218:
 	bx r0
 	.align 2, 0
 _0812B21C: .4byte gUnknown_203B0EC
-	thumb_func_end sub_812B1F0
+	thumb_func_end HelpSystem_SetSomeVariable2
 
 	thumb_func_start sub_812B220
 sub_812B220: @ 812B220
@@ -240,7 +240,7 @@ sub_812B35C: @ 812B35C
 	cmp r0, 0
 	beq _0812B376
 	movs r0, 0x16
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0812B406
 _0812B376:
 	bl sub_812B2C4
@@ -248,7 +248,7 @@ _0812B376:
 	cmp r0, 0
 	beq _0812B388
 	movs r0, 0x15
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0812B406
 _0812B388:
 	ldr r0, _0812B3B0 @ =gMapHeader
@@ -268,7 +268,7 @@ _0812B388:
 	bne _0812B3B8
 _0812B3A8:
 	movs r0, 0xE
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0812B406
 	.align 2, 0
 _0812B3B0: .4byte gMapHeader
@@ -279,36 +279,36 @@ _0812B3B8:
 	cmp r1, r0
 	bne _0812B3C8
 	movs r0, 0xF
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0812B406
 _0812B3C8:
 	bl IsCurMapPokeCenter
 	cmp r0, 0x1
 	bne _0812B3D8
 	movs r0, 0x10
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0812B406
 _0812B3D8:
 	bl sub_812B25C
 	cmp r0, 0x1
 	bne _0812B3E8
 	movs r0, 0x11
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0812B406
 _0812B3E8:
 	bl sub_812B26C
 	cmp r0, 0x1
 	bne _0812B3F8
 	movs r0, 0x12
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0812B406
 _0812B3F8:
 	movs r0, 0x13
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0812B406
 _0812B400:
 	movs r0, 0x14
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _0812B406:
 	pop {r0}
 	bx r0

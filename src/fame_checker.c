@@ -779,7 +779,7 @@ static void GetPickModeText(void)
         if (HasUnlockedAllFlavorTextsForCurrentPerson() == TRUE)
             offset = NUM_FAMECHECKER_PERSONS;
         StringExpandPlaceholders(gStringVar4, sFameCheckerNameAndQuotesPointers[sFameCheckerData->unlockedPersons[who] + offset]);
-        AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
+        AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
         FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
     }
 }
@@ -790,7 +790,7 @@ static void PrintSelectedNameInBrightGreen(u8 taskId)
     u16 cursorPos = FameCheckerGetCursorY();
     FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
     StringExpandPlaceholders(gStringVar4, sFameCheckerFlavorTextPointers[sFameCheckerData->unlockedPersons[cursorPos] * 6 + data[1]]);
-    AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
+    AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
 }
 
@@ -803,7 +803,7 @@ static void WipeMsgBoxAndTransfer(void)
 static void Setup_DrawMsgAndListBoxes(void)
 {
     sub_80F6E9C();
-    sub_80F6EE4(FCWINDOWID_MSGBOX, TRUE);
+    DrawDialogueFrame(FCWINDOWID_MSGBOX, TRUE);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_LIST);
 }

@@ -253,7 +253,7 @@ sub_800F380: @ 800F380
 	cmp r0, 0
 	beq _0800F3EA
 	movs r0, 0x70
-	bl sub_80F77CC
+	bl Menu_LoadStdPalAt
 	movs r0, 0
 	movs r1, 0x30
 	movs r2, 0x70

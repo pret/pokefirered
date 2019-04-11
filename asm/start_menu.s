@@ -158,7 +158,7 @@ sub_806EE7C: @ 806EE7C
 	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldr r0, _0806EEFC @ =gStringVar1
 	ldr r1, _0806EF00 @ =gUnknown_2039996
 	ldrh r1, [r1]
@@ -390,7 +390,7 @@ _0806F06C:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldr r1, _0806F08C @ =gUnknown_20370FF
 	b _0806F0B8
 	.align 2, 0
@@ -438,7 +438,7 @@ _0806F0C4:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	strb r0, [r4]
 	bl sub_80BF708
 	lsls r0, 24
@@ -1049,7 +1049,7 @@ sub_806F5A4: @ 806F5A4
 	push {lr}
 	bl sub_812B234
 	movs r0, 0xC
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl sub_806F624
 	ldr r1, _0806F5C0 @ =gUnknown_20370F0
 	ldr r0, _0806F5C4 @ =sub_806F5C8
@@ -1156,7 +1156,7 @@ sub_806F67C: @ 806F67C
 	push {lr}
 	bl sub_812B234
 	movs r0, 0xC
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl sub_806F624
 	ldr r0, _0806F698 @ =task50_save_game
 	movs r1, 0x50
@@ -1239,7 +1239,7 @@ sub_806F71C: @ 806F71C
 	push {lr}
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806F71C
@@ -1328,7 +1328,7 @@ sub_806F7A8: @ 806F7A8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	bl remove_start_menu_window_maybe
 	movs r0, 0
 	bl sub_8112EDC
@@ -2178,7 +2178,7 @@ sub_806FE84: @ 806FE84
 	ldr r4, _0806FE9C @ =gUnknown_2037104
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -2197,7 +2197,7 @@ sub_806FEA0: @ 806FEA0
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	bl remove_start_menu_window_maybe
 	bl sub_80696C0
 	bl ScriptContext2_Disable

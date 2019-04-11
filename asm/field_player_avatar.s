@@ -4769,7 +4769,7 @@ _0805D748:
 	strh r6, [r0, 0x26]
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	ldrh r0, [r5, 0xA]
 	adds r0, 0x1
 	strh r0, [r5, 0xA]
@@ -5043,7 +5043,7 @@ sub_805D980: @ 805D980
 	bl UnfreezeMapObjects
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	ldr r0, _0805D9C0 @ =sub_805D304
 	bl FindTaskIdByFunc
 	lsls r0, 24

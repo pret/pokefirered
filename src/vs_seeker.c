@@ -663,7 +663,7 @@ static void Task_VsSeeker_3(u8 taskId)
         {
             if (sVsSeeker->responseCode == 2)
                 StartAllRespondantIdleMovements();
-            sub_80F6F54(0, 1);
+            ClearDialogWindowAndFrame(0, 1);
             sub_80696C0();
             ScriptContext2_Disable();
             DestroyTask(taskId);

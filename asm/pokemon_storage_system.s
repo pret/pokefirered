@@ -1412,7 +1412,7 @@ _0808C3CC:
 	.4byte _0808C680
 _0808C3E0:
 	movs r0, 0x1C
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldrb r0, [r5, 0xA]
 	adds r1, r5, 0
 	adds r1, 0x26
@@ -1420,7 +1420,7 @@ _0808C3E0:
 	bl sub_80F6E9C
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -1557,12 +1557,12 @@ _0808C508: .4byte gUnknown_83CDA20
 _0808C50C:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	bl ScriptContext2_Disable
 	bl EnableBothScriptContexts
 	adds r0, r4, 0
@@ -1833,7 +1833,7 @@ sub_808C72C: @ 808C72C
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	movs r0, 0x2
 	movs r1, 0
 	bl GetMenuCursorDimensionByFont
@@ -1861,7 +1861,7 @@ sub_808C72C: @ 808C72C
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	mov r0, r10
 	strh r5, [r0]
 	add sp, 0xC
@@ -2716,7 +2716,7 @@ _0808CE18:
 	ldr r1, [r4]
 	strb r0, [r1, 0x4]
 	movs r0, 0x1C
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl StorageGetCurrentBox
 	ldr r1, _0808CE58 @ =gUnknown_20397B8
 	strb r0, [r1]
@@ -2767,7 +2767,7 @@ _0808CE8C:
 	ldr r1, [r4]
 	strb r0, [r1, 0x4]
 	movs r0, 0x1C
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, _0808CEC4 @ =c2_Box
 	bl SetMainCallback2
 _0808CEB6:
@@ -18961,7 +18961,7 @@ sub_8094E88: @ 8094E88
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r0, [r5]

@@ -785,8 +785,8 @@ _08044AE8: .4byte gUnknown_825E05C
 _08044AEC: .4byte gUnknown_82349BC
 	thumb_func_end sub_8044A40
 
-	thumb_func_start sub_8044AF0
-sub_8044AF0: @ 8044AF0
+	thumb_func_start SetUpMonSpriteManagerMaybe
+SetUpMonSpriteManagerMaybe: @ 8044AF0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1124,7 +1124,7 @@ _08044D70:
 	bx r1
 	.align 2, 0
 _08044D7C: .4byte gUnknown_20244F4
-	thumb_func_end sub_8044AF0
+	thumb_func_end SetUpMonSpriteManagerMaybe
 
 	thumb_func_start sub_8044D80
 sub_8044D80: @ 8044D80

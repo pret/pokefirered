@@ -10657,7 +10657,7 @@ _08155A9C:
 _08155AA6:
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _08155ACC @ =gUnknown_8419F54
 	str r4, [sp]
 	movs r0, 0x2
@@ -11276,8 +11276,8 @@ _08155EC6:
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0

@@ -81,7 +81,7 @@ sub_813ED18: @ 813ED18
 	lsrs r4, 24
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	bl sub_80696C0
 	bl ScriptContext2_Disable
 	adds r0, r4, 0
@@ -970,7 +970,7 @@ sub_813F380: @ 813F380
 	bl sub_813F3FC
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	bl sub_80696C0
 	bl ScriptContext2_Disable
 	adds r0, r4, 0

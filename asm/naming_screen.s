@@ -401,8 +401,8 @@ _0809DBD6:
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 _0809DCA4:
 	lsls r0, r4, 3
 	ldr r1, _0809DD50 @ =gUnknown_83E22A0
@@ -493,7 +493,7 @@ sub_809DD60: @ 809DD60
 	bl SetMainCallback2
 	bl sub_812B234
 	movs r0, 0x3
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -959,13 +959,13 @@ _0809E156:
 	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _0809E1D0 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

@@ -1974,7 +1974,7 @@ _0813DC86:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x6
 	bl sub_813EA08
 	adds r4, r0, 0
@@ -3642,7 +3642,7 @@ sub_813EB20: @ 813EB20
 	bl AddWindow
 	strb r0, [r4, 0x5]
 _0813EB44:
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4, 0x5]

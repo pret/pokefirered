@@ -1586,7 +1586,7 @@ _08132468:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x80
 	lsls r0, 1
 	bl Alloc
@@ -3291,7 +3291,7 @@ sub_813337C: @ 813337C
 	lsrs r5, 24
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	str r4, [sp]

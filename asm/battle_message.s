@@ -2863,7 +2863,7 @@ _080D894A:
 	movs r3, 0x1
 	b _080D8960
 _080D8958:
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r3, r0, 24
 _080D8960:

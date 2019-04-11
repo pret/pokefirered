@@ -809,7 +809,7 @@ sub_8078FC4: @ 8078FC4
 	b _08079094
 _08078FD6:
 	movs r0, 0x1
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, _0807902C @ =sub_807941C
 	movs r1, 0
 	bl CreateTask

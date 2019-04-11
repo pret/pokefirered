@@ -738,13 +738,22 @@ sFanfares:: @ 83AC990
 	.incbin "baserom.gba", 0x3AC990, 0x40
 
 gUnknown_83AC9D0:: @ 83AC9D0
-	.incbin "baserom.gba", 0x3AC9D0, 0x28
+	.incbin "baserom.gba", 0x3AC9D0, 0x8
+
+gUnknown_83AC9D8::
+	.incbin "baserom.gba", 0x3AC9D8, 0x10
+
+gUnknown_83AC9E8::
+	.incbin "baserom.gba", 0x3AC9E8, 0x10
 
 gUnknown_83AC9F8::
 	.incbin "baserom.gba", 0x3AC9F8, 0x8
 
 gUnknown_83ACA00::
-	.incbin "baserom.gba", 0x3ACA00, 0x208
+	.incbin "baserom.gba", 0x3ACA00, 0xF8
+
+gUnknown_83ACAF8::
+	.incbin "baserom.gba", 0x3ACAF8, 0x110
 
 gUnknown_83ACC08:: @ 83ACC08
 	.incbin "baserom.gba", 0x3ACC08, 0x440

@@ -168,12 +168,12 @@ sub_80EEC0C: @ 80EEC0C
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	ldr r1, _080EEDE4 @ =gUnknown_2022978
+	ldr r1, _080EEDE4 @ =gBattle_BG1_X
 	ldrh r0, [r7, 0x20]
 	negs r0, r0
 	adds r0, 0x20
 	strh r0, [r1]
-	ldr r1, _080EEDE8 @ =gUnknown_202297A
+	ldr r1, _080EEDE8 @ =gBattle_BG1_Y
 	ldrh r0, [r7, 0x22]
 	negs r0, r0
 	subs r0, 0x20
@@ -215,8 +215,8 @@ _080EEDD4: .4byte SpriteCallbackDummy
 _080EEDD8: .4byte gFile_graphics_battle_anims_masks_unknown_D2EC24_tilemap
 _080EEDDC: .4byte gFile_graphics_battle_anims_masks_unknown_D2EC24_sheet
 _080EEDE0: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_palette
-_080EEDE4: .4byte gUnknown_2022978
-_080EEDE8: .4byte gUnknown_202297A
+_080EEDE4: .4byte gBattle_BG1_X
+_080EEDE8: .4byte gBattle_BG1_Y
 _080EEDEC: .4byte gTasks
 _080EEDF0: .4byte sub_80EEDF4
 	thumb_func_end sub_80EEC0C
@@ -241,7 +241,7 @@ sub_80EEDF4: @ 80EEDF4
 	adds r1, r0
 	movs r3, 0
 	strh r1, [r5, 0x22]
-	ldr r2, _080EEE44 @ =gUnknown_202297A
+	ldr r2, _080EEE44 @ =gBattle_BG1_Y
 	lsls r0, r1, 16
 	lsrs r0, 24
 	ldrh r4, [r2]
@@ -262,7 +262,7 @@ sub_80EEDF4: @ 80EEDF4
 	.align 2, 0
 _080EEE3C: .4byte gUnknown_2037F1A
 _080EEE40: .4byte gTasks
-_080EEE44: .4byte gUnknown_202297A
+_080EEE44: .4byte gBattle_BG1_Y
 _080EEE48:
 	cmp r0, 0x2
 	beq _080EEE9C

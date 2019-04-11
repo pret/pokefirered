@@ -587,14 +587,21 @@ gUnknown_8415CE8:: @ 8415CE8
 	.incbin "baserom.gba", 0x415CE8, 0x44
 
 gUnknown_8415D2C:: @ 8415D2C
-	.incbin "baserom.gba", 0x415D2C, 0x1C
+	.string "CONTROLS$"
 
+	.align 2
+gUnknown_8415D38:: @ 8415D2C
+	.string "{KEYGFX_DPAD_UP_DOWN}えらぶ {KEYGFX_A_BUTTON}けってい$"
+
+	.align 2
 gUnknown_8415D48:: @ 8415D48
-	.incbin "baserom.gba", 0x415D48, 0x8
+	.string "{KEYGFX_A_BUTTON}NEXT$"
 
+	.align 2
 gUnknown_8415D50:: @ 8415D50
-	.incbin "baserom.gba", 0x415D50, 0x10
+	.string "{KEYGFX_A_BUTTON}NEXT {KEYGFX_B_BUTTON}BACK$"
 
+	.align 2
 gUnknown_8415D60:: @ 8415D60
 	.incbin "baserom.gba", 0x415D60, 0x18
 

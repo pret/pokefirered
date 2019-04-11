@@ -3400,7 +3400,7 @@ sub_811DFC0: @ 811DFC0
 	strh r0, [r3, 0x4]
 	movs r5, 0x4
 	ldrsh r1, [r3, r5]
-	ldr r2, _0811E018 @ =gUnknown_825E074
+	ldr r2, _0811E018 @ =gSineTable
 	movs r5, 0x2
 	ldrsh r0, [r3, r5]
 	adds r0, 0x40
@@ -3424,7 +3424,7 @@ sub_811DFC0: @ 811DFC0
 	strh r0, [r4, 0x26]
 	b _0811E036
 	.align 2, 0
-_0811E018: .4byte gUnknown_825E074
+_0811E018: .4byte gSineTable
 _0811E01C:
 	ldr r2, _0811E03C @ =gTasks
 	movs r5, 0xE
@@ -3958,7 +3958,7 @@ _0811E3E0:
 	lsls r0, 16
 	lsrs r0, 16
 	adds r0, 0x46
-	ldr r3, _0811E4BC @ =gUnknown_825E074
+	ldr r3, _0811E4BC @ =gSineTable
 	movs r4, 0xA
 	ldrsh r2, [r5, r4]
 	adds r1, r2, 0
@@ -4035,7 +4035,7 @@ _0811E4A4:
 	strh r0, [r5]
 	b _0811E4DC
 	.align 2, 0
-_0811E4BC: .4byte gUnknown_825E074
+_0811E4BC: .4byte gSineTable
 _0811E4C0: .4byte gUnknown_8459B30
 _0811E4C4: .4byte gSprites
 _0811E4C8:

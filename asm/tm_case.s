@@ -152,7 +152,7 @@ _08131934:
 	bl clear_scheduled_bg_copies_to_vram
 	b _08131A52
 _0813193E:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _08131A52
 _08131944:
 	bl FreeAllSpritePalettes

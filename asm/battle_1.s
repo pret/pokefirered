@@ -908,7 +908,7 @@ _0800F8F0:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	beq _0800F958
-	ldr r4, _0800F944 @ =gUnknown_2022978
+	ldr r4, _0800F944 @ =gBattle_BG1_X
 	ldrh r0, [r5, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -923,7 +923,7 @@ _0800F90A:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, _0800F948 @ =gUnknown_202297C
+	ldr r4, _0800F948 @ =gBattle_BG2_X
 	ldrh r0, [r5, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -938,21 +938,21 @@ _0800F928:
 	adds r0, r3, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r0, _0800F94C @ =gUnknown_202297A
+	ldr r0, _0800F94C @ =gBattle_BG1_Y
 	ldr r2, _0800F950 @ =0x0000ffdc
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, _0800F954 @ =gUnknown_202297E
+	ldr r0, _0800F954 @ =gBattle_BG2_Y
 	strh r1, [r0]
 	b _0800F9C4
 	.align 2, 0
-_0800F944: .4byte gUnknown_2022978
-_0800F948: .4byte gUnknown_202297C
-_0800F94C: .4byte gUnknown_202297A
+_0800F944: .4byte gBattle_BG1_X
+_0800F948: .4byte gBattle_BG2_X
+_0800F94C: .4byte gBattle_BG1_Y
 _0800F950: .4byte 0x0000ffdc
-_0800F954: .4byte gUnknown_202297E
+_0800F954: .4byte gBattle_BG2_Y
 _0800F958:
-	ldr r4, _0800F9E8 @ =gUnknown_2022978
+	ldr r4, _0800F9E8 @ =gBattle_BG1_X
 	ldrh r0, [r5, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -967,7 +967,7 @@ _0800F96A:
 	adds r0, r3, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, _0800F9EC @ =gUnknown_202297A
+	ldr r4, _0800F9EC @ =gBattle_BG1_Y
 	ldrh r0, [r5, 0xA]
 	bl Cos2
 	lsls r0, 16
@@ -979,7 +979,7 @@ _0800F988:
 	asrs r0, 5
 	subs r0, 0xA4
 	strh r0, [r4]
-	ldr r4, _0800F9F0 @ =gUnknown_202297C
+	ldr r4, _0800F9F0 @ =gBattle_BG2_X
 	ldrh r0, [r5, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -994,7 +994,7 @@ _0800F9A0:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, _0800F9F4 @ =gUnknown_202297E
+	ldr r4, _0800F9F4 @ =gBattle_BG2_Y
 	ldrh r0, [r5, 0xC]
 	bl Cos2
 	lsls r0, 16
@@ -1025,10 +1025,10 @@ _0800F9C4:
 	strh r0, [r1, 0xA]
 	b _0800FAC4
 	.align 2, 0
-_0800F9E8: .4byte gUnknown_2022978
-_0800F9EC: .4byte gUnknown_202297A
-_0800F9F0: .4byte gUnknown_202297C
-_0800F9F4: .4byte gUnknown_202297E
+_0800F9E8: .4byte gBattle_BG1_X
+_0800F9EC: .4byte gBattle_BG1_Y
+_0800F9F0: .4byte gBattle_BG2_X
+_0800F9F4: .4byte gBattle_BG2_Y
 _0800F9F8: .4byte gTasks
 _0800F9FC:
 	movs r3, 0x12
@@ -1190,11 +1190,11 @@ sub_800FAE0: @ 800FAE0
 	movs r0, 0x4A
 	movs r1, 0x36
 	bl SetGpuReg
-	ldr r0, _0800FB84 @ =gUnknown_202297A
+	ldr r0, _0800FB84 @ =gBattle_BG1_Y
 	ldr r2, _0800FB88 @ =0x0000ff5c
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, _0800FB8C @ =gUnknown_202297E
+	ldr r0, _0800FB8C @ =gBattle_BG2_Y
 	strh r1, [r0]
 	ldr r0, _0800FB90 @ =gUnknown_8248318
 	bl sub_800F034
@@ -1208,9 +1208,9 @@ _0800FB74: .4byte 0x06010000
 _0800FB78: .4byte gFile_graphics_battle_transitions_vs_frame_palette
 _0800FB7C: .4byte 0x00005c04
 _0800FB80: .4byte gFile_graphics_battle_transitions_vs_frame_tilemap
-_0800FB84: .4byte gUnknown_202297A
+_0800FB84: .4byte gBattle_BG1_Y
 _0800FB88: .4byte 0x0000ff5c
-_0800FB8C: .4byte gUnknown_202297E
+_0800FB8C: .4byte gBattle_BG2_Y
 _0800FB90: .4byte gUnknown_8248318
 _0800FB94:
 	movs r0, 0x80

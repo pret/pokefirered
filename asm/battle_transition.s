@@ -463,7 +463,7 @@ sub_80D0C0C: @ 80D0C0C
 	sub sp, 0x8
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	movs r0, 0x1
 	negs r0, r0
 	movs r4, 0
@@ -472,7 +472,7 @@ sub_80D0C0C: @ 80D0C0C
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _080D0C68 @ =gUnknown_2038E80
+	ldr r0, _080D0C68 @ =gScanlineEffectRegBuffers + 0x780
 	ldr r1, _080D0C6C @ =gUnknown_2039A2C
 	ldr r1, [r1]
 	movs r2, 0x14
@@ -498,7 +498,7 @@ sub_80D0C0C: @ 80D0C0C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0C68: .4byte gUnknown_2038E80
+_080D0C68: .4byte gScanlineEffectRegBuffers + 0x780
 _080D0C6C: .4byte gUnknown_2039A2C
 _080D0C70: .4byte sub_80D0CF0
 _080D0C74: .4byte sub_80D0D28
@@ -519,7 +519,7 @@ sub_80D0C78: @ 80D0C78
 	ldrh r1, [r0, 0xC]
 	adds r1, 0x8
 	strh r1, [r0, 0xC]
-	ldr r3, _080D0CE4 @ =gUnknown_2038700
+	ldr r3, _080D0CE4 @ =gScanlineEffectRegBuffers
 	ldr r1, [r4]
 	movs r2, 0x14
 	ldrsh r1, [r1, r2]
@@ -557,7 +557,7 @@ _080D0CCA:
 	bx r1
 	.align 2, 0
 _080D0CE0: .4byte gUnknown_2039A2C
-_080D0CE4: .4byte gUnknown_2038700
+_080D0CE4: .4byte gScanlineEffectRegBuffers
 _080D0CE8: .4byte gPaletteFade
 _080D0CEC: .4byte sub_80D0BD4
 	thumb_func_end sub_80D0C78
@@ -572,7 +572,7 @@ sub_80D0CF0: @ 80D0CF0
 	cmp r0, 0
 	beq _080D0D14
 	ldr r1, _080D0D1C @ =0x040000d4
-	ldr r0, _080D0D20 @ =gUnknown_2038700
+	ldr r0, _080D0D20 @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -587,13 +587,13 @@ _080D0D14:
 	.align 2, 0
 _080D0D18: .4byte gUnknown_2039A2C
 _080D0D1C: .4byte 0x040000d4
-_080D0D20: .4byte gUnknown_2038700
+_080D0D20: .4byte gScanlineEffectRegBuffers
 _080D0D24: .4byte 0x800000a0
 	thumb_func_end sub_80D0CF0
 
 	thumb_func_start sub_80D0D28
 sub_80D0D28: @ 80D0D28
-	ldr r1, _080D0D48 @ =gUnknown_2038700
+	ldr r1, _080D0D48 @ =gScanlineEffectRegBuffers
 	ldr r0, _080D0D4C @ =0x04000006
 	ldrh r0, [r0]
 	lsls r0, 1
@@ -610,7 +610,7 @@ sub_80D0D28: @ 80D0D28
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
-_080D0D48: .4byte gUnknown_2038700
+_080D0D48: .4byte gScanlineEffectRegBuffers
 _080D0D4C: .4byte 0x04000006
 _080D0D50: .4byte 0x04000014
 	thumb_func_end sub_80D0D28
@@ -651,7 +651,7 @@ sub_80D0D8C: @ 80D0D8C
 	sub sp, 0x4
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -662,7 +662,7 @@ sub_80D0D8C: @ 80D0D8C
 	bl BeginNormalPaletteFade
 	ldr r0, _080D0DE0 @ =gUnknown_2039A2C
 	ldr r1, [r0]
-	ldr r0, _080D0DE4 @ =gUnknown_2038E80
+	ldr r0, _080D0DE4 @ =gScanlineEffectRegBuffers + 0x780
 	movs r2, 0x16
 	ldrsh r1, [r1, r2]
 	movs r2, 0xA0
@@ -684,7 +684,7 @@ sub_80D0D8C: @ 80D0D8C
 	bx r1
 	.align 2, 0
 _080D0DE0: .4byte gUnknown_2039A2C
-_080D0DE4: .4byte gUnknown_2038E80
+_080D0DE4: .4byte gScanlineEffectRegBuffers + 0x780
 _080D0DE8: .4byte sub_80D0E80
 _080D0DEC: .4byte sub_80D0EB8
 	thumb_func_end sub_80D0D8C
@@ -715,7 +715,7 @@ _080D0E18:
 	lsrs r0, r4, 8
 	asrs r1, r7, 16
 	bl Sin
-	ldr r1, _080D0E74 @ =gUnknown_2038700
+	ldr r1, _080D0E74 @ =gScanlineEffectRegBuffers
 	lsls r2, r5, 1
 	adds r2, r1
 	ldr r6, _080D0E70 @ =gUnknown_2039A2C
@@ -756,7 +756,7 @@ _080D0E5E:
 	bx r1
 	.align 2, 0
 _080D0E70: .4byte gUnknown_2039A2C
-_080D0E74: .4byte gUnknown_2038700
+_080D0E74: .4byte gScanlineEffectRegBuffers
 _080D0E78: .4byte gPaletteFade
 _080D0E7C: .4byte sub_80D0D54
 	thumb_func_end sub_80D0DF0
@@ -771,7 +771,7 @@ sub_80D0E80: @ 80D0E80
 	cmp r0, 0
 	beq _080D0EA4
 	ldr r1, _080D0EAC @ =0x040000d4
-	ldr r0, _080D0EB0 @ =gUnknown_2038700
+	ldr r0, _080D0EB0 @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -786,13 +786,13 @@ _080D0EA4:
 	.align 2, 0
 _080D0EA8: .4byte gUnknown_2039A2C
 _080D0EAC: .4byte 0x040000d4
-_080D0EB0: .4byte gUnknown_2038700
+_080D0EB0: .4byte gScanlineEffectRegBuffers
 _080D0EB4: .4byte 0x800000a0
 	thumb_func_end sub_80D0E80
 
 	thumb_func_start sub_80D0EB8
 sub_80D0EB8: @ 80D0EB8
-	ldr r1, _080D0ED8 @ =gUnknown_2038700
+	ldr r1, _080D0ED8 @ =gScanlineEffectRegBuffers
 	ldr r0, _080D0EDC @ =0x04000006
 	ldrh r0, [r0]
 	lsls r0, 1
@@ -809,7 +809,7 @@ sub_80D0EB8: @ 80D0EB8
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
-_080D0ED8: .4byte gUnknown_2038700
+_080D0ED8: .4byte gScanlineEffectRegBuffers
 _080D0EDC: .4byte 0x04000006
 _080D0EE0: .4byte 0x04000016
 	thumb_func_end sub_80D0EB8
@@ -850,7 +850,7 @@ sub_80D0F1C: @ 80D0F1C
 	sub sp, 0xC
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	movs r1, 0
 	movs r0, 0x10
 	strh r0, [r4, 0xA]
@@ -878,7 +878,7 @@ sub_80D0F1C: @ 80D0F1C
 	movs r1, 0
 	add r5, sp, 0x4
 	add r6, sp, 0x8
-	ldr r3, _080D0FC0 @ =gUnknown_2038E80
+	ldr r3, _080D0FC0 @ =gScanlineEffectRegBuffers + 0x780
 	movs r2, 0xF0
 _080D0F64:
 	lsls r0, r1, 1
@@ -921,7 +921,7 @@ _080D0F64:
 	.align 2, 0
 _080D0FB8: .4byte gUnknown_2039A2C
 _080D0FBC: .4byte 0x00003f41
-_080D0FC0: .4byte gUnknown_2038E80
+_080D0FC0: .4byte gScanlineEffectRegBuffers + 0x780
 _080D0FC4: .4byte sub_80D1370
 _080D0FC8: .4byte 0x01000400
 _080D0FCC: .4byte gUnknown_83F87A0
@@ -943,7 +943,7 @@ sub_80D0FD4: @ 80D0FD4
 	movs r1, 0
 	ldr r0, [sp, 0x8]
 	mov r9, r0
-	ldr r6, _080D1060 @ =gUnknown_2038700
+	ldr r6, _080D1060 @ =gScanlineEffectRegBuffers
 	mov r8, r6
 	movs r0, 0xF0
 	lsls r0, 8
@@ -1000,7 +1000,7 @@ _080D1000:
 	bx r1
 	.align 2, 0
 _080D105C: .4byte gUnknown_83FA784
-_080D1060: .4byte gUnknown_2038700
+_080D1060: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D0FD4
 
 	thumb_func_start sub_80D1064
@@ -1053,7 +1053,7 @@ _080D10AE:
 	ldrh r5, [r3, 0x12]
 	adds r1, r5
 	strh r1, [r3, 0x12]
-	ldr r0, _080D10F4 @ =gUnknown_2038700
+	ldr r0, _080D10F4 @ =gScanlineEffectRegBuffers
 	movs r5, 0x10
 	ldrsh r2, [r3, r5]
 	lsls r1, 16
@@ -1077,7 +1077,7 @@ _080D10AE:
 	.align 2, 0
 _080D10EC: .4byte gUnknown_2039A2C
 _080D10F0: .4byte 0xfffffe80
-_080D10F4: .4byte gUnknown_2038700
+_080D10F4: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D1064
 
 	thumb_func_start sub_80D10F8
@@ -1139,7 +1139,7 @@ _080D1160:
 	movs r0, 0
 _080D1162:
 	strh r0, [r3, 0x12]
-	ldr r0, _080D1194 @ =gUnknown_2038700
+	ldr r0, _080D1194 @ =gScanlineEffectRegBuffers
 	movs r1, 0x10
 	ldrsh r2, [r3, r1]
 	ldrh r1, [r3, 0x12]
@@ -1163,7 +1163,7 @@ _080D1162:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1194: .4byte gUnknown_2038700
+_080D1194: .4byte gScanlineEffectRegBuffers
 _080D1198: .4byte gUnknown_2039A2C
 	thumb_func_end sub_80D10F8
 
@@ -1195,7 +1195,7 @@ _080D11C8: .4byte 0xfffffe80
 _080D11CC:
 	strh r2, [r4, 0x12]
 _080D11CE:
-	ldr r0, _080D1218 @ =gUnknown_2038700
+	ldr r0, _080D1218 @ =gScanlineEffectRegBuffers
 	movs r3, 0x10
 	ldrsh r2, [r4, r3]
 	ldrh r1, [r4, 0x12]
@@ -1233,7 +1233,7 @@ _080D1202:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1218: .4byte gUnknown_2038700
+_080D1218: .4byte gScanlineEffectRegBuffers
 _080D121C: .4byte gUnknown_2039A2C
 	thumb_func_end sub_80D119C
 
@@ -1272,7 +1272,7 @@ _080D1242:
 	bge _080D125E
 	strh r3, [r4, 0xA]
 _080D125E:
-	ldr r0, _080D12CC @ =gUnknown_2038700
+	ldr r0, _080D12CC @ =gScanlineEffectRegBuffers
 	movs r1, 0xA
 	ldrsh r3, [r4, r1]
 	movs r1, 0x78
@@ -1322,7 +1322,7 @@ _080D12AE:
 	.align 2, 0
 _080D12C4: .4byte gUnknown_2039A2C
 _080D12C8: .4byte 0x000007ff
-_080D12CC: .4byte gUnknown_2038700
+_080D12CC: .4byte gScanlineEffectRegBuffers
 _080D12D0: .4byte 0x040000b0
 _080D12D4: .4byte 0x0000c5ff
 _080D12D8: .4byte 0x00007fff
@@ -1350,7 +1350,7 @@ sub_80D12E4: @ 80D12E4
 	cmp r0, 0
 	beq _080D131C
 	ldr r1, _080D1364 @ =0x040000d4
-	ldr r0, _080D1368 @ =gUnknown_2038700
+	ldr r0, _080D1368 @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -1389,7 +1389,7 @@ _080D1358: .4byte 0x0000c5ff
 _080D135C: .4byte 0x00007fff
 _080D1360: .4byte gUnknown_2039A2C
 _080D1364: .4byte 0x040000d4
-_080D1368: .4byte gUnknown_2038700
+_080D1368: .4byte gScanlineEffectRegBuffers
 _080D136C: .4byte 0x800000a0
 	thumb_func_end sub_80D12E4
 
@@ -1398,7 +1398,7 @@ sub_80D1370: @ 80D1370
 	push {lr}
 	bl sub_80D12E4
 	ldr r1, _080D138C @ =0x040000b0
-	ldr r0, _080D1390 @ =gUnknown_2038E80
+	ldr r0, _080D1390 @ =gScanlineEffectRegBuffers + 0x780
 	str r0, [r1]
 	ldr r0, _080D1394 @ =0x04000010
 	str r0, [r1, 0x4]
@@ -1409,7 +1409,7 @@ sub_80D1370: @ 80D1370
 	bx r0
 	.align 2, 0
 _080D138C: .4byte 0x040000b0
-_080D1390: .4byte gUnknown_2038E80
+_080D1390: .4byte gScanlineEffectRegBuffers + 0x780
 _080D1394: .4byte 0x04000010
 _080D1398: .4byte 0xa2400001
 	thumb_func_end sub_80D1370
@@ -1419,7 +1419,7 @@ sub_80D139C: @ 80D139C
 	push {lr}
 	bl sub_80D12E4
 	ldr r1, _080D13B8 @ =0x040000b0
-	ldr r0, _080D13BC @ =gUnknown_2038E80
+	ldr r0, _080D13BC @ =gScanlineEffectRegBuffers + 0x780
 	str r0, [r1]
 	ldr r0, _080D13C0 @ =0x04000040
 	str r0, [r1, 0x4]
@@ -1430,7 +1430,7 @@ sub_80D139C: @ 80D139C
 	bx r0
 	.align 2, 0
 _080D13B8: .4byte 0x040000b0
-_080D13BC: .4byte gUnknown_2038E80
+_080D13BC: .4byte gScanlineEffectRegBuffers + 0x780
 _080D13C0: .4byte 0x04000040
 _080D13C4: .4byte 0xa2400001
 	thumb_func_end sub_80D139C
@@ -1782,7 +1782,7 @@ sub_80D1670: @ 80D1670
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	ldr r0, _080D16C4 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r0, 0
@@ -1794,7 +1794,7 @@ sub_80D1670: @ 80D1670
 	movs r0, 0xA0
 	strh r0, [r1, 0x8]
 	movs r1, 0
-	ldr r3, _080D16CC @ =gUnknown_2038E80
+	ldr r3, _080D16CC @ =gScanlineEffectRegBuffers + 0x780
 	ldr r2, _080D16D0 @ =0x0000f3f4
 _080D1696:
 	lsls r0, r1, 1
@@ -1821,7 +1821,7 @@ _080D1696:
 	.align 2, 0
 _080D16C4: .4byte gUnknown_2039A2C
 _080D16C8: .4byte 0x0000f0f1
-_080D16CC: .4byte gUnknown_2038E80
+_080D16CC: .4byte gScanlineEffectRegBuffers + 0x780
 _080D16D0: .4byte 0x0000f3f4
 _080D16D4: .4byte sub_80D1ABC
 	thumb_func_end sub_80D1670
@@ -1850,7 +1850,7 @@ sub_80D16D8: @ 80D16D8
 	movs r1, 0x78
 	movs r2, 0x50
 	bl sub_80D4088
-	ldr r5, _080D1764 @ =gUnknown_2038700
+	ldr r5, _080D1764 @ =gScanlineEffectRegBuffers
 _080D1708:
 	ldr r4, _080D1760 @ =gUnknown_2039A2C
 	ldr r0, [r4]
@@ -1898,7 +1898,7 @@ _080D174C:
 	bx r1
 	.align 2, 0
 _080D1760: .4byte gUnknown_2039A2C
-_080D1764: .4byte gUnknown_2038700
+_080D1764: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D16D8
 
 	thumb_func_start sub_80D1768
@@ -1947,7 +1947,7 @@ _080D17A6:
 	ldrh r1, [r3, 0x28]
 	movs r4, 0xF0
 _080D17BE:
-	ldr r6, _080D17F0 @ =gUnknown_2038700
+	ldr r6, _080D17F0 @ =gScanlineEffectRegBuffers
 	movs r0, 0x2A
 	ldrsh r2, [r3, r0]
 	lsls r2, 1
@@ -1970,7 +1970,7 @@ _080D17BE:
 	b _080D17A6
 	.align 2, 0
 _080D17EC: .4byte gUnknown_2039A2C
-_080D17F0: .4byte gUnknown_2038700
+_080D17F0: .4byte gScanlineEffectRegBuffers
 _080D17F4:
 	ldr r1, [r7]
 	ldrh r0, [r1, 0x2E]
@@ -2051,7 +2051,7 @@ sub_80D185C: @ 80D185C
 	movs r1, 0x78
 	movs r2, 0x50
 	bl sub_80D4088
-	ldr r5, _080D18E0 @ =gUnknown_2038700
+	ldr r5, _080D18E0 @ =gScanlineEffectRegBuffers
 _080D188A:
 	ldr r4, _080D18DC @ =gUnknown_2039A2C
 	ldr r0, [r4]
@@ -2096,7 +2096,7 @@ _080D18C8:
 	bx r1
 	.align 2, 0
 _080D18DC: .4byte gUnknown_2039A2C
-_080D18E0: .4byte gUnknown_2038700
+_080D18E0: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D185C
 
 	thumb_func_start sub_80D18E4
@@ -2129,7 +2129,7 @@ sub_80D18E4: @ 80D18E4
 	movs r2, 0x50
 	movs r3, 0
 	bl sub_80D4088
-	ldr r7, _080D1970 @ =gUnknown_2038700
+	ldr r7, _080D1970 @ =gScanlineEffectRegBuffers
 	mov r10, r7
 	ldr r0, _080D196C @ =gUnknown_2039A2C
 	mov r8, r0
@@ -2171,7 +2171,7 @@ _080D1948:
 	b _080D1928
 	.align 2, 0
 _080D196C: .4byte gUnknown_2039A2C
-_080D1970: .4byte gUnknown_2038700
+_080D1970: .4byte gScanlineEffectRegBuffers
 _080D1974:
 	mov r0, r8
 	ldr r2, [r0]
@@ -2193,7 +2193,7 @@ _080D1992:
 	ldrsh r0, [r2, r4]
 	cmp r0, r3
 	ble _080D19BC
-	ldr r6, _080D19DC @ =gUnknown_2038700
+	ldr r6, _080D19DC @ =gScanlineEffectRegBuffers
 	adds r3, r1, 0
 	ldr r5, _080D19E0 @ =gUnknown_2039A2C
 _080D19A0:
@@ -2228,7 +2228,7 @@ _080D19BC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D19DC: .4byte gUnknown_2038700
+_080D19DC: .4byte gScanlineEffectRegBuffers
 _080D19E0: .4byte gUnknown_2039A2C
 	thumb_func_end sub_80D18E4
 
@@ -2254,7 +2254,7 @@ sub_80D19E4: @ 80D19E4
 	movs r1, 0x78
 	movs r2, 0x50
 	bl sub_80D4088
-	ldr r6, _080D1A78 @ =gUnknown_2038700
+	ldr r6, _080D1A78 @ =gScanlineEffectRegBuffers
 _080D1A10:
 	movs r2, 0x78
 	ldr r5, _080D1A74 @ =gUnknown_2039A2C
@@ -2308,7 +2308,7 @@ _080D1A5E:
 	bx r1
 	.align 2, 0
 _080D1A74: .4byte gUnknown_2039A2C
-_080D1A78: .4byte gUnknown_2038700
+_080D1A78: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D19E4
 
 	thumb_func_start sub_80D1A7C
@@ -2360,7 +2360,7 @@ sub_80D1ABC: @ 80D1ABC
 	cmp r0, 0
 	beq _080D1AF4
 	ldr r1, _080D1B44 @ =0x040000d4
-	ldr r0, _080D1B48 @ =gUnknown_2038700
+	ldr r0, _080D1B48 @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -2382,7 +2382,7 @@ _080D1AF4:
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r4, _080D1B48 @ =gUnknown_2038700
+	ldr r4, _080D1B48 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r4, r0
@@ -2404,7 +2404,7 @@ _080D1B38: .4byte 0x0000c5ff
 _080D1B3C: .4byte 0x00007fff
 _080D1B40: .4byte gUnknown_2039A2C
 _080D1B44: .4byte 0x040000d4
-_080D1B48: .4byte gUnknown_2038700
+_080D1B48: .4byte gScanlineEffectRegBuffers
 _080D1B4C: .4byte 0x800000a0
 _080D1B50: .4byte 0x04000040
 _080D1B54: .4byte 0xa2400001
@@ -2445,9 +2445,9 @@ sub_80D1B90: @ 80D1B90
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	movs r2, 0
-	ldr r4, _080D1BD8 @ =gUnknown_2038E80
+	ldr r4, _080D1BD8 @ =gScanlineEffectRegBuffers + 0x780
 	ldr r3, _080D1BDC @ =gUnknown_2039A2C
 _080D1BA2:
 	lsls r1, r2, 1
@@ -2474,7 +2474,7 @@ _080D1BA2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1BD8: .4byte gUnknown_2038E80
+_080D1BD8: .4byte gScanlineEffectRegBuffers + 0x780
 _080D1BDC: .4byte gUnknown_2039A2C
 _080D1BE0: .4byte sub_80D1CC8
 _080D1BE4: .4byte sub_80D1D00
@@ -2519,7 +2519,7 @@ _080D1C28:
 	lsrs r0, r4, 8
 	asrs r1, r7, 16
 	bl Sin
-	ldr r1, _080D1CBC @ =gUnknown_2038700
+	ldr r1, _080D1CBC @ =gScanlineEffectRegBuffers
 	lsls r2, r5, 1
 	adds r2, r1
 	ldr r1, _080D1CB4 @ =gUnknown_2039A2C
@@ -2587,7 +2587,7 @@ _080D1C9A:
 	.align 2, 0
 _080D1CB4: .4byte gUnknown_2039A2C
 _080D1CB8: .4byte 0x1fff0000
-_080D1CBC: .4byte gUnknown_2038700
+_080D1CBC: .4byte gScanlineEffectRegBuffers
 _080D1CC0: .4byte gPaletteFade
 _080D1CC4: .4byte sub_80D1B58
 	thumb_func_end sub_80D1BE8
@@ -2602,7 +2602,7 @@ sub_80D1CC8: @ 80D1CC8
 	cmp r0, 0
 	beq _080D1CEC
 	ldr r1, _080D1CF4 @ =0x040000d4
-	ldr r0, _080D1CF8 @ =gUnknown_2038700
+	ldr r0, _080D1CF8 @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -2617,13 +2617,13 @@ _080D1CEC:
 	.align 2, 0
 _080D1CF0: .4byte gUnknown_2039A2C
 _080D1CF4: .4byte 0x040000d4
-_080D1CF8: .4byte gUnknown_2038700
+_080D1CF8: .4byte gScanlineEffectRegBuffers
 _080D1CFC: .4byte 0x800000a0
 	thumb_func_end sub_80D1CC8
 
 	thumb_func_start sub_80D1D00
 sub_80D1D00: @ 80D1D00
-	ldr r1, _080D1D20 @ =gUnknown_2038700
+	ldr r1, _080D1D20 @ =gScanlineEffectRegBuffers
 	ldr r0, _080D1D24 @ =0x04000006
 	ldrh r0, [r0]
 	lsls r0, 1
@@ -2640,7 +2640,7 @@ sub_80D1D00: @ 80D1D00
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
-_080D1D20: .4byte gUnknown_2038700
+_080D1D20: .4byte gScanlineEffectRegBuffers
 _080D1D24: .4byte 0x04000006
 _080D1D28: .4byte 0x04000016
 	thumb_func_end sub_80D1D00
@@ -2680,7 +2680,7 @@ sub_80D1D64: @ 80D1D64
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	ldr r0, _080D1DB0 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r2, 0
@@ -2692,7 +2692,7 @@ sub_80D1D64: @ 80D1D64
 	movs r0, 0xA0
 	strh r0, [r1, 0x8]
 	movs r1, 0
-	ldr r3, _080D1DB4 @ =gUnknown_2038E80
+	ldr r3, _080D1DB4 @ =gScanlineEffectRegBuffers + 0x780
 	movs r2, 0xF2
 _080D1D8A:
 	lsls r0, r1, 1
@@ -2714,7 +2714,7 @@ _080D1D8A:
 	bx r1
 	.align 2, 0
 _080D1DB0: .4byte gUnknown_2039A2C
-_080D1DB4: .4byte gUnknown_2038E80
+_080D1DB4: .4byte gScanlineEffectRegBuffers + 0x780
 _080D1DB8: .4byte sub_80D1E98
 	thumb_func_end sub_80D1D64
 
@@ -2729,7 +2729,7 @@ sub_80D1DBC: @ 80D1DBC
 	ldrb r0, [r1]
 	movs r0, 0
 	strb r0, [r1]
-	ldr r7, _080D1E54 @ =gUnknown_2038700
+	ldr r7, _080D1E54 @ =gScanlineEffectRegBuffers
 	ldrh r0, [r4, 0xC]
 	ldrb r5, [r4, 0xC]
 	adds r0, 0x10
@@ -2799,7 +2799,7 @@ _080D1E36:
 	bx r1
 	.align 2, 0
 _080D1E50: .4byte gUnknown_2039A2C
-_080D1E54: .4byte gUnknown_2038700
+_080D1E54: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D1DBC
 
 	thumb_func_start sub_80D1E58
@@ -2851,7 +2851,7 @@ sub_80D1E98: @ 80D1E98
 	cmp r0, 0
 	beq _080D1ED0
 	ldr r1, _080D1F14 @ =0x040000d4
-	ldr r0, _080D1F18 @ =gUnknown_2038700
+	ldr r0, _080D1F18 @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -2873,7 +2873,7 @@ _080D1ED0:
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r0, _080D1F20 @ =gUnknown_2038E80
+	ldr r0, _080D1F20 @ =gScanlineEffectRegBuffers + 0x780
 	str r0, [r4]
 	ldr r0, _080D1F24 @ =0x04000040
 	str r0, [r4, 0x4]
@@ -2889,9 +2889,9 @@ _080D1F08: .4byte 0x0000c5ff
 _080D1F0C: .4byte 0x00007fff
 _080D1F10: .4byte gUnknown_2039A2C
 _080D1F14: .4byte 0x040000d4
-_080D1F18: .4byte gUnknown_2038700
+_080D1F18: .4byte gScanlineEffectRegBuffers
 _080D1F1C: .4byte 0x800000a0
-_080D1F20: .4byte gUnknown_2038E80
+_080D1F20: .4byte gScanlineEffectRegBuffers + 0x780
 _080D1F24: .4byte 0x04000040
 _080D1F28: .4byte 0xa2400001
 	thumb_func_end sub_80D1E98
@@ -2946,7 +2946,7 @@ sub_80D1F64: @ 80D1F64
 	mov r10, r0
 	movs r1, 0xA0
 	lsls r1, 17
-	ldr r4, _080D1FD8 @ =gUnknown_2038E80
+	ldr r4, _080D1FD8 @ =gScanlineEffectRegBuffers + 0x780
 	ldr r3, _080D1FDC @ =0x000003bf
 	movs r2, 0x78
 _080D1F8E:
@@ -2988,7 +2988,7 @@ _080D1FAE:
 	adds r0, r1, 0
 	b _080D1FE6
 	.align 2, 0
-_080D1FD8: .4byte gUnknown_2038E80
+_080D1FD8: .4byte gScanlineEffectRegBuffers + 0x780
 _080D1FDC: .4byte 0x000003bf
 _080D1FE0:
 	lsls r0, r3, 16
@@ -3104,7 +3104,7 @@ _080D2092:
 	lsls r4, 1
 	adds r0, r2, r4
 	lsls r0, 1
-	ldr r1, _080D20E8 @ =gUnknown_2038E80
+	ldr r1, _080D20E8 @ =gScanlineEffectRegBuffers + 0x780
 	adds r0, r1
 	strh r7, [r0]
 	lsls r0, r5, 16
@@ -3131,7 +3131,7 @@ _080D20C4:
 	subs r0, r2, 0x1
 	b _080D20FC
 	.align 2, 0
-_080D20E8: .4byte gUnknown_2038E80
+_080D20E8: .4byte gScanlineEffectRegBuffers + 0x780
 _080D20EC:
 	lsls r0, r3, 16
 	asrs r0, 16
@@ -3150,7 +3150,7 @@ _080D2100:
 	cmp r1, 0
 	bge _080D212C
 	asrs r2, r6, 16
-	ldr r3, _080D2128 @ =gUnknown_2038E80
+	ldr r3, _080D2128 @ =gScanlineEffectRegBuffers + 0x780
 _080D210C:
 	asrs r1, r0, 16
 	adds r0, r2, r1
@@ -3166,12 +3166,12 @@ _080D210C:
 	blt _080D210C
 	b _080D21F8
 	.align 2, 0
-_080D2128: .4byte gUnknown_2038E80
+_080D2128: .4byte gScanlineEffectRegBuffers + 0x780
 _080D212C:
 	cmp r1, 0
 	ble _080D21F8
 	asrs r2, r6, 16
-	ldr r3, _080D2154 @ =gUnknown_2038E80
+	ldr r3, _080D2154 @ =gScanlineEffectRegBuffers + 0x780
 _080D2134:
 	lsls r1, r5, 16
 	asrs r1, 16
@@ -3189,13 +3189,13 @@ _080D2134:
 	bgt _080D2134
 	b _080D21F8
 	.align 2, 0
-_080D2154: .4byte gUnknown_2038E80
+_080D2154: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2158:
 	movs r1, 0xF0
 	lsls r1, 1
 	adds r0, r2, r1
 	lsls r0, 1
-	ldr r2, _080D2190 @ =gUnknown_2038E80
+	ldr r2, _080D2190 @ =gScanlineEffectRegBuffers + 0x780
 	adds r0, r2
 	strh r7, [r0]
 	lsls r0, r5, 16
@@ -3220,7 +3220,7 @@ _080D2158:
 	subs r0, r2, 0x1
 	b _080D21A4
 	.align 2, 0
-_080D2190: .4byte gUnknown_2038E80
+_080D2190: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2194:
 	lsls r0, r3, 16
 	asrs r0, 16
@@ -3239,7 +3239,7 @@ _080D21A8:
 	cmp r1, 0
 	bge _080D21D4
 	asrs r2, r6, 16
-	ldr r3, _080D21D0 @ =gUnknown_2038E80
+	ldr r3, _080D21D0 @ =gScanlineEffectRegBuffers + 0x780
 _080D21B4:
 	asrs r1, r0, 16
 	adds r0, r2, r1
@@ -3255,12 +3255,12 @@ _080D21B4:
 	blt _080D21B4
 	b _080D21F8
 	.align 2, 0
-_080D21D0: .4byte gUnknown_2038E80
+_080D21D0: .4byte gScanlineEffectRegBuffers + 0x780
 _080D21D4:
 	cmp r1, 0
 	ble _080D21F8
 	asrs r2, r6, 16
-	ldr r3, _080D2270 @ =gUnknown_2038E80
+	ldr r3, _080D2270 @ =gScanlineEffectRegBuffers + 0x780
 _080D21DC:
 	lsls r1, r5, 16
 	asrs r1, 16
@@ -3307,7 +3307,7 @@ _080D221A:
 _080D222C:
 	movs r2, 0
 	mov r9, r2
-	ldr r4, _080D2270 @ =gUnknown_2038E80
+	ldr r4, _080D2270 @ =gScanlineEffectRegBuffers + 0x780
 	movs r5, 0xA0
 	lsls r5, 1
 _080D2236:
@@ -3341,7 +3341,7 @@ _080D2236:
 	ble _080D2236
 	b _080D251C
 	.align 2, 0
-_080D2270: .4byte gUnknown_2038E80
+_080D2270: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2274:
 	ldr r1, [sp, 0xC]
 	asrs r4, r1, 16
@@ -3396,7 +3396,7 @@ _080D22CA:
 	adds r0, r5, r0
 	movs r3, 0
 	ldrsh r4, [r0, r3]
-	ldr r6, _080D2324 @ =gUnknown_2038E80
+	ldr r6, _080D2324 @ =gScanlineEffectRegBuffers + 0x780
 _080D22D4:
 	ldr r0, _080D2328 @ =gUnknown_2039A2C
 	ldr r5, [r0]
@@ -3437,7 +3437,7 @@ _080D22D4:
 	b _080D2334
 	.align 2, 0
 _080D2320: .4byte gUnknown_83FA444
-_080D2324: .4byte gUnknown_2038E80
+_080D2324: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2328: .4byte gUnknown_2039A2C
 _080D232C:
 	ldrh r0, [r3]
@@ -3474,7 +3474,7 @@ _080D2360:
 	adds r0, r5, r0
 	movs r3, 0
 	ldrsh r4, [r0, r3]
-	ldr r6, _080D23C0 @ =gUnknown_2038E80
+	ldr r6, _080D23C0 @ =gScanlineEffectRegBuffers + 0x780
 _080D236A:
 	ldr r0, _080D23C4 @ =gUnknown_2039A2C
 	ldr r3, [r0]
@@ -3519,7 +3519,7 @@ _080D23A6:
 	b _080D24DA
 	.align 2, 0
 _080D23BC: .4byte gUnknown_83FA444
-_080D23C0: .4byte gUnknown_2038E80
+_080D23C0: .4byte gScanlineEffectRegBuffers + 0x780
 _080D23C4: .4byte gUnknown_2039A2C
 _080D23C8: .4byte 0xffff0000
 _080D23CC:
@@ -3539,7 +3539,7 @@ _080D23DA:
 	adds r0, r5, r0
 	movs r6, 0
 	ldrsh r4, [r0, r6]
-	ldr r6, _080D2440 @ =gUnknown_2038E80
+	ldr r6, _080D2440 @ =gScanlineEffectRegBuffers + 0x780
 _080D23EC:
 	ldr r0, _080D2444 @ =gUnknown_2039A2C
 	ldr r5, [r0]
@@ -3581,7 +3581,7 @@ _080D23EC:
 	.align 2, 0
 _080D2438: .4byte 0x0000ffb1
 _080D243C: .4byte gUnknown_83FA444
-_080D2440: .4byte gUnknown_2038E80
+_080D2440: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2444: .4byte gUnknown_2039A2C
 _080D2448:
 	ldrh r0, [r3]
@@ -3619,7 +3619,7 @@ _080D2474:
 	ldrsh r4, [r0, r3]
 	ldr r6, _080D2534 @ =gUnknown_2039A2C
 	mov r8, r6
-	ldr r6, _080D2538 @ =gUnknown_2038E80
+	ldr r6, _080D2538 @ =gScanlineEffectRegBuffers + 0x780
 _080D248A:
 	mov r0, r8
 	ldr r3, [r0]
@@ -3665,7 +3665,7 @@ _080D24C6:
 _080D24DA:
 	movs r4, 0
 	mov r9, r4
-	ldr r4, _080D2538 @ =gUnknown_2038E80
+	ldr r4, _080D2538 @ =gScanlineEffectRegBuffers + 0x780
 	movs r5, 0xA0
 	lsls r5, 1
 _080D24E4:
@@ -3710,7 +3710,7 @@ _080D251C:
 _080D252C: .4byte 0x0000ffb1
 _080D2530: .4byte gUnknown_83FA444
 _080D2534: .4byte gUnknown_2039A2C
-_080D2538: .4byte gUnknown_2038E80
+_080D2538: .4byte gScanlineEffectRegBuffers + 0x780
 	thumb_func_end sub_80D1F64
 
 	thumb_func_start sub_80D253C
@@ -3718,7 +3718,7 @@ sub_80D253C: @ 80D253C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	ldr r0, _080D25A0 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r4, 0
@@ -3741,7 +3741,7 @@ sub_80D253C: @ 80D253C
 	movs r2, 0x1
 	bl sub_80D1F64
 	ldr r1, _080D25B0 @ =0x040000d4
-	ldr r0, _080D25B4 @ =gUnknown_2038E80
+	ldr r0, _080D25B4 @ =gScanlineEffectRegBuffers + 0x780
 	str r0, [r1]
 	ldr r2, _080D25B8 @ =0xfffff880
 	adds r0, r2
@@ -3766,7 +3766,7 @@ _080D25A4: .4byte 0x00007878
 _080D25A8: .4byte 0x00003070
 _080D25AC: .4byte 0x00001090
 _080D25B0: .4byte 0x040000d4
-_080D25B4: .4byte gUnknown_2038E80
+_080D25B4: .4byte gScanlineEffectRegBuffers + 0x780
 _080D25B8: .4byte 0xfffff880
 _080D25BC: .4byte 0x80000140
 _080D25C0: .4byte sub_80D2698
@@ -3919,7 +3919,7 @@ _080D26E4:
 	cmp r0, 0
 	beq _080D2700
 	ldr r1, _080D274C @ =0x040000d4
-	ldr r0, _080D2750 @ =gUnknown_2038E80
+	ldr r0, _080D2750 @ =gScanlineEffectRegBuffers + 0x780
 	str r0, [r1]
 	ldr r6, _080D2754 @ =0xfffff880
 	adds r0, r6
@@ -3946,7 +3946,7 @@ _080D2700:
 	ldrh r1, [r0, 0xC]
 	movs r0, 0x46
 	bl SetGpuReg
-	ldr r4, _080D275C @ =gUnknown_2038700
+	ldr r4, _080D275C @ =gScanlineEffectRegBuffers
 	ldrh r1, [r4]
 	movs r0, 0x40
 	bl SetGpuReg
@@ -3965,10 +3965,10 @@ _080D2746:
 	bx r0
 	.align 2, 0
 _080D274C: .4byte 0x040000d4
-_080D2750: .4byte gUnknown_2038E80
+_080D2750: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2754: .4byte 0xfffff880
 _080D2758: .4byte 0x80000140
-_080D275C: .4byte gUnknown_2038700
+_080D275C: .4byte gScanlineEffectRegBuffers
 _080D2760: .4byte 0x04000040
 _080D2764: .4byte 0xa6400001
 	thumb_func_end sub_80D2698
@@ -4103,7 +4103,7 @@ Phase2_Mugshot_Func1: @ 80D2840
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	adds r0, r4, 0
 	bl sub_80D2EA4
 	movs r0, 0
@@ -4121,7 +4121,7 @@ Phase2_Mugshot_Func1: @ 80D2840
 	movs r0, 0xA0
 	strh r0, [r1, 0x8]
 	movs r1, 0
-	ldr r3, _080D289C @ =gUnknown_2038E80
+	ldr r3, _080D289C @ =gScanlineEffectRegBuffers + 0x780
 	ldr r2, _080D28A0 @ =0x0000f0f1
 _080D2874:
 	lsls r0, r1, 1
@@ -4143,7 +4143,7 @@ _080D2874:
 	bx r1
 	.align 2, 0
 _080D2898: .4byte gUnknown_2039A2C
-_080D289C: .4byte gUnknown_2038E80
+_080D289C: .4byte gScanlineEffectRegBuffers + 0x780
 _080D28A0: .4byte 0x0000f0f1
 _080D28A4: .4byte sub_80D2D50
 	thumb_func_end Phase2_Mugshot_Func1
@@ -4248,7 +4248,7 @@ sub_80D2968: @ 80D2968
 	ldrb r0, [r1]
 	movs r0, 0
 	strb r0, [r1]
-	ldr r7, _080D2A50 @ =gUnknown_2038700
+	ldr r7, _080D2A50 @ =gScanlineEffectRegBuffers
 	ldrh r0, [r4, 0xA]
 	ldrb r5, [r4, 0xA]
 	adds r0, 0x10
@@ -4364,7 +4364,7 @@ _080D2A2A:
 	bx r1
 	.align 2, 0
 _080D2A4C: .4byte gUnknown_2039A2C
-_080D2A50: .4byte gUnknown_2038700
+_080D2A50: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D2968
 
 	thumb_func_start sub_80D2A54
@@ -4376,7 +4376,7 @@ sub_80D2A54: @ 80D2A54
 	ldrb r0, [r1]
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, _080D2ACC @ =gUnknown_2038700
+	ldr r1, _080D2ACC @ =gScanlineEffectRegBuffers
 	adds r5, r2, 0
 	movs r2, 0xF0
 _080D2A68:
@@ -4425,7 +4425,7 @@ _080D2A68:
 	bx r1
 	.align 2, 0
 _080D2AC8: .4byte gUnknown_2039A2C
-_080D2ACC: .4byte gUnknown_2038700
+_080D2ACC: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D2A54
 
 	thumb_func_start sub_80D2AD0
@@ -4499,7 +4499,7 @@ sub_80D2B0C: @ 80D2B0C
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	ldr r4, _080D2BBC @ =gUnknown_2038700
+	ldr r4, _080D2BBC @ =gScanlineEffectRegBuffers
 	movs r5, 0xA0
 	lsls r5, 1
 	adds r0, r4, 0
@@ -4542,7 +4542,7 @@ _080D2BAC: .4byte gUnknown_2039A2C
 _080D2BB0: .4byte 0x040000b0
 _080D2BB4: .4byte 0x0000c5ff
 _080D2BB8: .4byte 0x00007fff
-_080D2BBC: .4byte gUnknown_2038700
+_080D2BBC: .4byte gScanlineEffectRegBuffers
 _080D2BC0: .4byte sub_80D2DEC
 	thumb_func_end sub_80D2B0C
 
@@ -4593,7 +4593,7 @@ _080D2BFE:
 	cmp r0, 0
 	blt _080D2C60
 	movs r7, 0x50
-	ldr r5, _080D2C88 @ =gUnknown_2038700
+	ldr r5, _080D2C88 @ =gScanlineEffectRegBuffers
 _080D2C1C:
 	lsls r0, r2, 16
 	asrs r3, r0, 16
@@ -4652,7 +4652,7 @@ _080D2C6E:
 	bx r1
 	.align 2, 0
 _080D2C84: .4byte gUnknown_2039A2C
-_080D2C88: .4byte gUnknown_2038700
+_080D2C88: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D2BC4
 
 	thumb_func_start sub_80D2C8C
@@ -4697,7 +4697,7 @@ sub_80D2CC4: @ 80D2CC4
 	ldrh r0, [r4, 0xE]
 	adds r0, 0x1
 	strh r0, [r4, 0xE]
-	ldr r0, _080D2D0C @ =gUnknown_2038700
+	ldr r0, _080D2D0C @ =gScanlineEffectRegBuffers
 	movs r2, 0xE
 	ldrsh r1, [r4, r2]
 	movs r2, 0xA0
@@ -4722,7 +4722,7 @@ _080D2CF4:
 	bx r1
 	.align 2, 0
 _080D2D08: .4byte gUnknown_2039A2C
-_080D2D0C: .4byte gUnknown_2038700
+_080D2D0C: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D2CC4
 
 	thumb_func_start sub_80D2D10
@@ -4775,7 +4775,7 @@ sub_80D2D50: @ 80D2D50
 	cmp r0, 0
 	beq _080D2D88
 	ldr r1, _080D2DD4 @ =0x040000d4
-	ldr r0, _080D2DD8 @ =gUnknown_2038700
+	ldr r0, _080D2DD8 @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -4801,7 +4801,7 @@ _080D2D88:
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r0, _080D2DE0 @ =gUnknown_2038E80
+	ldr r0, _080D2DE0 @ =gScanlineEffectRegBuffers + 0x780
 	str r0, [r4]
 	ldr r0, _080D2DE4 @ =0x04000040
 	str r0, [r4, 0x4]
@@ -4817,9 +4817,9 @@ _080D2DC8: .4byte 0x0000c5ff
 _080D2DCC: .4byte 0x00007fff
 _080D2DD0: .4byte gUnknown_2039A2C
 _080D2DD4: .4byte 0x040000d4
-_080D2DD8: .4byte gUnknown_2038700
+_080D2DD8: .4byte gScanlineEffectRegBuffers
 _080D2DDC: .4byte 0x800000a0
-_080D2DE0: .4byte gUnknown_2038E80
+_080D2DE0: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2DE4: .4byte 0x04000040
 _080D2DE8: .4byte 0xa2400001
 	thumb_func_end sub_80D2D50
@@ -4844,7 +4844,7 @@ sub_80D2DEC: @ 80D2DEC
 	cmp r0, 0
 	beq _080D2E24
 	ldr r1, _080D2E54 @ =0x040000d4
-	ldr r0, _080D2E58 @ =gUnknown_2038700
+	ldr r0, _080D2E58 @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r3, 0xF0
 	lsls r3, 3
@@ -4858,7 +4858,7 @@ _080D2E24:
 	ldrh r1, [r0, 0xE]
 	movs r0, 0x50
 	bl SetGpuReg
-	ldr r0, _080D2E60 @ =gUnknown_2038E80
+	ldr r0, _080D2E60 @ =gScanlineEffectRegBuffers + 0x780
 	str r0, [r4]
 	ldr r0, _080D2E64 @ =0x04000054
 	str r0, [r4, 0x4]
@@ -4874,9 +4874,9 @@ _080D2E48: .4byte 0x0000c5ff
 _080D2E4C: .4byte 0x00007fff
 _080D2E50: .4byte gUnknown_2039A2C
 _080D2E54: .4byte 0x040000d4
-_080D2E58: .4byte gUnknown_2038700
+_080D2E58: .4byte gScanlineEffectRegBuffers
 _080D2E5C: .4byte 0x800000a0
-_080D2E60: .4byte gUnknown_2038E80
+_080D2E60: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2E64: .4byte 0x04000054
 _080D2E68: .4byte 0xa2400001
 	thumb_func_end sub_80D2DEC
@@ -5321,7 +5321,7 @@ sub_80D31A4: @ 80D31A4
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	movs r3, 0
 	movs r0, 0x80
 	lsls r0, 1
@@ -5335,7 +5335,7 @@ sub_80D31A4: @ 80D31A4
 	strh r3, [r1, 0x4]
 	movs r0, 0xA0
 	strh r0, [r1, 0x8]
-	ldr r4, _080D3214 @ =gUnknown_2038E80
+	ldr r4, _080D3214 @ =gScanlineEffectRegBuffers + 0x780
 	adds r6, r2, 0
 	movs r2, 0xF0
 _080D31D0:
@@ -5369,7 +5369,7 @@ _080D31D0:
 	bx r1
 	.align 2, 0
 _080D3210: .4byte gUnknown_2039A2C
-_080D3214: .4byte gUnknown_2038E80
+_080D3214: .4byte gScanlineEffectRegBuffers + 0x780
 _080D3218: .4byte sub_80D332C
 _080D321C: .4byte sub_80D33C0
 	thumb_func_end sub_80D31A4
@@ -5417,7 +5417,7 @@ _080D325E:
 	strh r0, [r3, 0xE]
 _080D326A:
 	movs r5, 0
-	ldr r7, _080D32A4 @ =gUnknown_2038700
+	ldr r7, _080D32A4 @ =gScanlineEffectRegBuffers
 	movs r1, 0xA0
 	lsls r1, 1
 	adds r1, r7
@@ -5444,7 +5444,7 @@ _080D3278:
 	.align 2, 0
 _080D329C: .4byte gUnknown_2039A2C
 _080D32A0: .4byte 0x00000fff
-_080D32A4: .4byte gUnknown_2038700
+_080D32A4: .4byte gScanlineEffectRegBuffers
 _080D32A8:
 	ldr r0, [r6]
 	ldrh r0, [r0, 0x14]
@@ -5545,7 +5545,7 @@ sub_80D332C: @ 80D332C
 	cmp r0, 0
 	beq _080D3382
 	ldr r1, _080D33A8 @ =0x040000d4
-	ldr r0, _080D33AC @ =gUnknown_2038700
+	ldr r0, _080D33AC @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -5555,7 +5555,7 @@ sub_80D332C: @ 80D332C
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
 _080D3382:
-	ldr r0, _080D33B4 @ =gUnknown_2038FC0
+	ldr r0, _080D33B4 @ =gScanlineEffectRegBuffers + 0x8C0
 	str r0, [r5]
 	ldr r0, _080D33B8 @ =0x04000040
 	str r0, [r5, 0x4]
@@ -5571,16 +5571,16 @@ _080D339C: .4byte 0x0000c5ff
 _080D33A0: .4byte 0x00007fff
 _080D33A4: .4byte gUnknown_2039A2C
 _080D33A8: .4byte 0x040000d4
-_080D33AC: .4byte gUnknown_2038700
+_080D33AC: .4byte gScanlineEffectRegBuffers
 _080D33B0: .4byte 0x80000140
-_080D33B4: .4byte gUnknown_2038FC0
+_080D33B4: .4byte gScanlineEffectRegBuffers + 0x8C0
 _080D33B8: .4byte 0x04000040
 _080D33BC: .4byte 0xa2400001
 	thumb_func_end sub_80D332C
 
 	thumb_func_start sub_80D33C0
 sub_80D33C0: @ 80D33C0
-	ldr r1, _080D33E0 @ =gUnknown_2038700
+	ldr r1, _080D33E0 @ =gScanlineEffectRegBuffers
 	ldr r0, _080D33E4 @ =0x04000006
 	ldrh r0, [r0]
 	lsls r0, 1
@@ -5597,7 +5597,7 @@ sub_80D33C0: @ 80D33C0
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
-_080D33E0: .4byte gUnknown_2038700
+_080D33E0: .4byte gScanlineEffectRegBuffers
 _080D33E4: .4byte 0x04000006
 _080D33E8: .4byte 0x04000014
 	thumb_func_end sub_80D33C0
@@ -5637,7 +5637,7 @@ sub_80D3424: @ 80D3424
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	ldr r0, _080D348C @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r2, 0
@@ -5651,7 +5651,7 @@ sub_80D3424: @ 80D3424
 	movs r0, 0xA0
 	strh r0, [r1, 0x8]
 	movs r1, 0
-	ldr r2, _080D3490 @ =gUnknown_2038E80
+	ldr r2, _080D3490 @ =gScanlineEffectRegBuffers + 0x780
 	movs r4, 0
 	movs r3, 0xF0
 _080D3450:
@@ -5683,7 +5683,7 @@ _080D3450:
 	bx r1
 	.align 2, 0
 _080D348C: .4byte gUnknown_2039A2C
-_080D3490: .4byte gUnknown_2038E80
+_080D3490: .4byte gScanlineEffectRegBuffers + 0x780
 _080D3494: .4byte sub_80D36E0
 _080D3498: .4byte sub_80D35F4
 	thumb_func_end sub_80D3424
@@ -5896,7 +5896,7 @@ sub_80D35F4: @ 80D35F4
 	cmp r0, 0
 	beq _080D3654
 	ldr r1, _080D3678 @ =0x040000d4
-	ldr r0, _080D367C @ =gUnknown_2038700
+	ldr r0, _080D367C @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -5906,7 +5906,7 @@ sub_80D35F4: @ 80D35F4
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
 _080D3654:
-	ldr r0, _080D3684 @ =gUnknown_2038FC0
+	ldr r0, _080D3684 @ =gScanlineEffectRegBuffers + 0x8C0
 	str r0, [r5]
 	ldr r0, _080D3688 @ =0x04000040
 	str r0, [r5, 0x4]
@@ -5922,9 +5922,9 @@ _080D366C: .4byte 0x0000c5ff
 _080D3670: .4byte 0x00007fff
 _080D3674: .4byte gUnknown_2039A2C
 _080D3678: .4byte 0x040000d4
-_080D367C: .4byte gUnknown_2038700
+_080D367C: .4byte gScanlineEffectRegBuffers
 _080D3680: .4byte 0x80000140
-_080D3684: .4byte gUnknown_2038FC0
+_080D3684: .4byte gScanlineEffectRegBuffers + 0x8C0
 _080D3688: .4byte 0x04000040
 _080D368C: .4byte 0xa2400001
 	thumb_func_end sub_80D35F4
@@ -5981,7 +5981,7 @@ sub_80D36E0: @ 80D36E0
 	strh r0, [r1]
 _080D36F8:
 	ldr r2, _080D3718 @ =0x04000054
-	ldr r1, _080D371C @ =gUnknown_2038700
+	ldr r1, _080D371C @ =gScanlineEffectRegBuffers
 	mov r0, sp
 	ldrh r0, [r0]
 	lsls r0, 1
@@ -5997,7 +5997,7 @@ _080D36F8:
 	.align 2, 0
 _080D3714: .4byte 0x04000006
 _080D3718: .4byte 0x04000054
-_080D371C: .4byte gUnknown_2038700
+_080D371C: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80D36E0
 
 	thumb_func_start sub_80D3720
@@ -6027,7 +6027,7 @@ _080D374C:
 	movs r2, 0x22
 	ldrsh r0, [r3, r2]
 	lsls r0, 1
-	ldr r1, _080D3810 @ =gUnknown_2038700
+	ldr r1, _080D3810 @ =gScanlineEffectRegBuffers
 	adds r7, r0, r1
 	movs r2, 0xA0
 	lsls r2, 1
@@ -6131,7 +6131,7 @@ _080D380A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D3810: .4byte gUnknown_2038700
+_080D3810: .4byte gScanlineEffectRegBuffers
 _080D3814: .4byte gUnknown_2039A2C
 	thumb_func_end sub_80D3720
 
@@ -6308,7 +6308,7 @@ sub_80D3960: @ 80D3960
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80D3DD0
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	ldr r0, _080D39B8 @ =gUnknown_2039A2C
 	ldr r1, [r0]
 	movs r2, 0
@@ -6318,7 +6318,7 @@ sub_80D3960: @ 80D3960
 	movs r0, 0xA0
 	strh r0, [r1, 0x8]
 	movs r1, 0
-	ldr r2, _080D39BC @ =gUnknown_2038700
+	ldr r2, _080D39BC @ =gScanlineEffectRegBuffers
 	movs r3, 0xF0
 	adds r4, r2, 0
 _080D3984:
@@ -6347,7 +6347,7 @@ _080D3984:
 	bx r1
 	.align 2, 0
 _080D39B8: .4byte gUnknown_2039A2C
-_080D39BC: .4byte gUnknown_2038700
+_080D39BC: .4byte gScanlineEffectRegBuffers
 _080D39C0: .4byte sub_80D3BA4
 	thumb_func_end sub_80D3960
 
@@ -6428,10 +6428,10 @@ sub_80D3A40: @ 80D3A40
 	strb r0, [r1]
 	mov r8, r0
 	movs r7, 0
-	ldr r0, _080D3A94 @ =gUnknown_2038700
+	ldr r0, _080D3A94 @ =gScanlineEffectRegBuffers
 	mov r9, r0
 _080D3A5C:
-	ldr r1, _080D3A94 @ =gUnknown_2038700
+	ldr r1, _080D3A94 @ =gScanlineEffectRegBuffers
 	ldr r0, _080D3A90 @ =gUnknown_2039A2C
 	ldr r2, [r0]
 	movs r3, 0x2A
@@ -6460,7 +6460,7 @@ _080D3A84:
 	b _080D3AB0
 	.align 2, 0
 _080D3A90: .4byte gUnknown_2039A2C
-_080D3A94: .4byte gUnknown_2038700
+_080D3A94: .4byte gScanlineEffectRegBuffers
 _080D3A98:
 	lsls r0, r5, 16
 	asrs r0, 16
@@ -6626,7 +6626,7 @@ sub_80D3BA4: @ 80D3BA4
 	cmp r0, 0
 	beq _080D3BDC
 	ldr r1, _080D3C2C @ =0x040000d4
-	ldr r0, _080D3C30 @ =gUnknown_2038700
+	ldr r0, _080D3C30 @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -6648,7 +6648,7 @@ _080D3BDC:
 	ldrh r1, [r0, 0x8]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r4, _080D3C30 @ =gUnknown_2038700
+	ldr r4, _080D3C30 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r4, r0
@@ -6670,7 +6670,7 @@ _080D3C20: .4byte 0x0000c5ff
 _080D3C24: .4byte 0x00007fff
 _080D3C28: .4byte gUnknown_2039A2C
 _080D3C2C: .4byte 0x040000d4
-_080D3C30: .4byte gUnknown_2038700
+_080D3C30: .4byte gScanlineEffectRegBuffers
 _080D3C34: .4byte 0x800000a0
 _080D3C38: .4byte 0x04000040
 _080D3C3C: .4byte 0xa2400001

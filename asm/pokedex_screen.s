@@ -58,7 +58,7 @@ sub_810250C: @ 810250C
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0x1
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _08102598 @ =gUnknown_8451EBC

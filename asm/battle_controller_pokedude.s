@@ -5055,10 +5055,10 @@ _08158A7C:
 	thumb_func_start sub_8158A88
 sub_8158A88: @ 8158A88
 	push {r4,lr}
-	ldr r0, _08158ABC @ =gUnknown_2022974
+	ldr r0, _08158ABC @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _08158AC0 @ =gUnknown_2022976
+	ldr r0, _08158AC0 @ =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, _08158AC4 @ =gActiveBattler
 	ldrb r4, [r0]
@@ -5077,8 +5077,8 @@ sub_8158A88: @ 8158A88
 	bl sub_80D87BC
 	b _08158AD8
 	.align 2, 0
-_08158ABC: .4byte gUnknown_2022974
-_08158AC0: .4byte gUnknown_2022976
+_08158ABC: .4byte gBattle_BG0_X
+_08158AC0: .4byte gBattle_BG0_Y
 _08158AC4: .4byte gActiveBattler
 _08158AC8: .4byte gUnknown_2022BC6
 _08158ACC: .4byte gDisplayedStringBattle
@@ -5132,9 +5132,9 @@ sub_8158B20: @ 8158B20
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08158B46
-	ldr r0, _08158B4C @ =gUnknown_2022974
+	ldr r0, _08158B4C @ =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, _08158B50 @ =gUnknown_2022976
+	ldr r1, _08158B50 @ =gBattle_BG0_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, _08158B54 @ =gUnknown_3004FE0
@@ -5148,8 +5148,8 @@ _08158B46:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08158B4C: .4byte gUnknown_2022974
-_08158B50: .4byte gUnknown_2022976
+_08158B4C: .4byte gBattle_BG0_X
+_08158B50: .4byte gBattle_BG0_Y
 _08158B54: .4byte gUnknown_3004FE0
 _08158B58: .4byte gActiveBattler
 _08158B5C: .4byte sub_8156140
@@ -5238,9 +5238,9 @@ sub_8158C04: @ 8158C04
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08158C2E
-	ldr r0, _08158C34 @ =gUnknown_2022974
+	ldr r0, _08158C34 @ =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, _08158C38 @ =gUnknown_2022976
+	ldr r1, _08158C38 @ =gBattle_BG0_Y
 	movs r2, 0xA0
 	lsls r2, 1
 	adds r0, r2, 0
@@ -5256,8 +5256,8 @@ _08158C2E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08158C34: .4byte gUnknown_2022974
-_08158C38: .4byte gUnknown_2022976
+_08158C34: .4byte gBattle_BG0_X
+_08158C38: .4byte gBattle_BG0_Y
 _08158C3C: .4byte gUnknown_3004FE0
 _08158C40: .4byte gActiveBattler
 _08158C44: .4byte sub_81564E4
@@ -7250,7 +7250,7 @@ _08159C14:
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, [r0]
-	ldr r0, _08159C40 @ =gUnknown_2022976
+	ldr r0, _08159C40 @ =gBattle_BG0_Y
 	ldrh r0, [r0]
 	strb r0, [r1, 0x4]
 	bl sub_80EB30C
@@ -7260,9 +7260,9 @@ _08159C14:
 	b _08159C9E
 	.align 2, 0
 _08159C3C: .4byte gPaletteFade
-_08159C40: .4byte gUnknown_2022976
+_08159C40: .4byte gBattle_BG0_Y
 _08159C44:
-	ldr r1, _08159C5C @ =gUnknown_2022976
+	ldr r1, _08159C5C @ =gBattle_BG0_Y
 	movs r0, 0
 	strh r0, [r1]
 	bl sub_8159EF0
@@ -7272,7 +7272,7 @@ _08159C44:
 	bl sub_80D87BC
 	b _08159C94
 	.align 2, 0
-_08159C5C: .4byte gUnknown_2022976
+_08159C5C: .4byte gBattle_BG0_Y
 _08159C60: .4byte gDisplayedStringBattle
 _08159C64:
 	movs r0, 0x18
@@ -7331,7 +7331,7 @@ _08159CB4:
 	ldr r0, _08159CFC @ =0x00000137
 	bl PlayBGM
 _08159CD8:
-	ldr r1, _08159D00 @ =gUnknown_2022976
+	ldr r1, _08159D00 @ =gBattle_BG0_Y
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r5
@@ -7348,7 +7348,7 @@ _08159CEE:
 	.align 2, 0
 _08159CF8: .4byte gPaletteFade
 _08159CFC: .4byte 0x00000137
-_08159D00: .4byte gUnknown_2022976
+_08159D00: .4byte gBattle_BG0_Y
 	thumb_func_end sub_8159BA8
 
 	thumb_func_start sub_8159D04

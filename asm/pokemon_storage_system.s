@@ -10686,7 +10686,7 @@ _08090EC6:
 	ldr r0, [r4]
 	ldr r0, [r0]
 	mov r8, r0
-	ldr r5, _08090FB8 @ =gUnknown_825E074
+	ldr r5, _08090FB8 @ =gSineTable
 	mov r0, r9
 	adds r1, r3, r0
 	ldrb r0, [r1]
@@ -10803,7 +10803,7 @@ _08090FA0:
 _08090FAC: .4byte 0x00000c59
 _08090FB0: .4byte 0x00000afc
 _08090FB4: .4byte 0x00000a68
-_08090FB8: .4byte gUnknown_825E074
+_08090FB8: .4byte gSineTable
 _08090FBC: .4byte sub_80911B0
 _08090FC0: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8090E74
@@ -22569,7 +22569,7 @@ _08096AA2:
 	lsls r0, 16
 	asrs r0, 20
 	strh r0, [r4, 0x22]
-	ldr r1, _08096B08 @ =gUnknown_825E074
+	ldr r1, _08096B08 @ =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
 	lsls r0, 4
@@ -22605,7 +22605,7 @@ _08096B00:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08096B08: .4byte gUnknown_825E074
+_08096B08: .4byte gSineTable
 _08096B0C: .4byte sub_80969BC
 	thumb_func_end sub_8096A74
 
@@ -22650,7 +22650,7 @@ _08096B3E:
 	lsls r1, 16
 	asrs r1, 20
 	strh r1, [r4, 0x22]
-	ldr r1, _08096BA4 @ =gUnknown_825E074
+	ldr r1, _08096BA4 @ =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
 	lsls r0, 4
@@ -22687,7 +22687,7 @@ _08096B9E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08096BA4: .4byte gUnknown_825E074
+_08096BA4: .4byte gSineTable
 _08096BA8: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8096B10
 

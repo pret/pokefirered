@@ -2250,7 +2250,7 @@ _0807AD14:
 	movs r1, 0x7F
 	ands r0, r1
 	strh r0, [r2]
-	ldr r1, _0807AD5C @ =gUnknown_825E074
+	ldr r1, _0807AD5C @ =gSineTable
 	movs r3, 0
 	ldrsh r0, [r2, r3]
 	lsls r0, 1
@@ -2278,7 +2278,7 @@ _0807AD54:
 	strh r0, [r4]
 	b _0807ADA0
 	.align 2, 0
-_0807AD5C: .4byte gUnknown_825E074
+_0807AD5C: .4byte gSineTable
 _0807AD60: .4byte 0x0000073c
 _0807AD64: .4byte 0x0000073e
 _0807AD68:

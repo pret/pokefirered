@@ -18,6 +18,8 @@ void LoadCompressedObjectPalette(const struct CompressedSpritePalette *src);
 void LoadCompressedObjectPaletteOverrideBuffer(const struct CompressedSpritePalette *a, void *buffer);
 bool8 LoadCompressedObjectPaletteUsingHeap(const struct CompressedSpritePalette *src);
 
+bool8 sub_800F078(const struct CompressedSpritePalette *src);
+
 void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void* buffer, s32 species);
 void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, void* buffer, s32 species);
 void DecompressPicFromTable_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void* buffer, s32 species);

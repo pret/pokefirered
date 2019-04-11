@@ -116,28 +116,28 @@ gUnknown_2022870: @ 2022870
 gUnknown_2022874: @ 2022874
 	.space 0x100
 
-gUnknown_2022974: @ 2022974
+gBattle_BG0_X: @ 2022974
 	.space 0x2
 
-gUnknown_2022976: @ 2022976
+gBattle_BG0_Y: @ 2022976
 	.space 0x2
 
-gUnknown_2022978: @ 2022978
+gBattle_BG1_X: @ 2022978
 	.space 0x2
 
-gUnknown_202297A: @ 202297A
+gBattle_BG1_Y: @ 202297A
 	.space 0x2
 
-gUnknown_202297C: @ 202297C
+gBattle_BG2_X: @ 202297C
 	.space 0x2
 
-gUnknown_202297E: @ 202297E
+gBattle_BG2_Y: @ 202297E
 	.space 0x2
 
-gUnknown_2022980: @ 2022980
+gBattle_BG3_X: @ 2022980
 	.space 0x2
 
-gUnknown_2022982: @ 2022982
+gBattle_BG3_Y: @ 2022982
 	.space 0x2
 
 gUnknown_2022984: @ 2022984
@@ -869,30 +869,9 @@ gUnknown_20386DC: @ 20386DC
 gFieldEffectArguments: @ 20386E0
 	.space 0x20
 
-gUnknown_2038700: @ 2038700
-	.space 0x2
+	.include "src/scanline_effect.o"
 
-gUnknown_2038702: @ 2038702
-	.space 0x2
-
-gUnknown_2038704: @ 2038704
-	.space 0x27C
-
-gUnknown_2038980: @ 2038980
-	.space 0x500
-
-gUnknown_2038E80: @ 2038E80
-	.space 0x140
-
-gUnknown_2038FC0: @ 2038FC0
-	.space 0x640
-
-gUnknown_2039600: @ 2039600
-	.space 0x1C
-
-gUnknown_203961C: @ 203961C
-	.space 0x4
-
+	.align 2
 gUnknown_2039620: @ 2039620
 	.space 0x4
 
@@ -1531,9 +1510,7 @@ gUnknown_203B0EE: @ 203B0EE
 	.space 0x2
 
 	.include "src/fame_checker.o"
-
-gUnknown_203B108: @ 203B108
-	.space 0x4
+	.include "src/oak_speech.o"
 
 gUnknown_203B10C: @ 203B10C
 	.space 0xA

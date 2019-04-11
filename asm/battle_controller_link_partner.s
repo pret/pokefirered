@@ -4573,10 +4573,10 @@ _080D67BC:
 	thumb_func_start sub_80D67CC
 sub_80D67CC: @ 80D67CC
 	push {r4,lr}
-	ldr r0, _080D6800 @ =gUnknown_2022974
+	ldr r0, _080D6800 @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080D6804 @ =gUnknown_2022976
+	ldr r0, _080D6804 @ =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, _080D6808 @ =gActiveBattler
 	ldrb r4, [r0]
@@ -4595,8 +4595,8 @@ sub_80D67CC: @ 80D67CC
 	bl sub_80D87BC
 	b _080D681C
 	.align 2, 0
-_080D6800: .4byte gUnknown_2022974
-_080D6804: .4byte gUnknown_2022976
+_080D6800: .4byte gBattle_BG0_X
+_080D6804: .4byte gBattle_BG0_Y
 _080D6808: .4byte gActiveBattler
 _080D680C: .4byte gUnknown_2022BC6
 _080D6810: .4byte gDisplayedStringBattle

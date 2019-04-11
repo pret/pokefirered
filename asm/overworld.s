@@ -3933,7 +3933,7 @@ VBlankCB_Field: @ 8056A14
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_8087F54
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	bl FieldUpdateBgTilemapScroll
 	bl TransferPlttBuffer
 	bl TransferTilesetAnimsBuffer
@@ -3954,7 +3954,7 @@ sub_8056A34: @ 8056A34
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 _08056A52:
 	pop {r0}
 	bx r0
@@ -4451,7 +4451,7 @@ sub_8056E80: @ 8056E80
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r2, _08056EF8 @ =0x05000002
 	mov r1, sp
 	movs r0, 0
@@ -4630,7 +4630,7 @@ sub_8057024: @ 8057024
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl dp13_810BB8C
 	bl ResetCameraUpdateInfo
 	bl InstallCameraPanAheadCallback
@@ -5395,7 +5395,7 @@ _08057690:
 	bl sub_8055920
 	b _0805772A
 _0805769C:
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl dp13_810BB8C
 	bl ResetCameraUpdateInfo
 	bl InstallCameraPanAheadCallback

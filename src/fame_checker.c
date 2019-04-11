@@ -1009,7 +1009,7 @@ static void FCSetup_ClearVideoRegisters(void)
 
 static void FCSetup_ResetTasksAndSpriteResources(void)
 {
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     dp13_810BB8C();

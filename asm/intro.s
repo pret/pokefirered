@@ -166,7 +166,7 @@ _080EC65E:
 	movs r0, 0
 	movs r2, 0
 	bl load_copyright_graphics
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
@@ -3369,7 +3369,7 @@ _080EE114:
 _080EE11C:
 	movs r4, 0x6
 	ldrsh r3, [r5, r4]
-	ldr r4, _080EE15C @ =gUnknown_825E074
+	ldr r4, _080EE15C @ =gSineTable
 	adds r0, r3, 0
 	adds r0, 0x40
 	lsls r0, 1
@@ -3400,7 +3400,7 @@ _080EE156:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EE15C: .4byte gUnknown_825E074
+_080EE15C: .4byte gSineTable
 	thumb_func_end sub_80EE024
 
 	thumb_func_start sub_80EE160
@@ -3587,7 +3587,7 @@ sub_80EE29C: @ 80EE29C
 	lsls r1, 16
 	asrs r1, 20
 	strh r1, [r5, 0x22]
-	ldr r1, _080EE340 @ =gUnknown_825E074
+	ldr r1, _080EE340 @ =gSineTable
 	lsls r0, 16
 	asrs r0, 20
 	adds r0, 0x40
@@ -3646,7 +3646,7 @@ _080EE336:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EE340: .4byte gUnknown_825E074
+_080EE340: .4byte gSineTable
 _080EE344: .4byte gUnknown_203AB16
 _080EE348: .4byte 0x41c64e6d
 _080EE34C: .4byte 0x00006073
@@ -4208,7 +4208,7 @@ _080EE740:
 	lsls r1, 16
 	asrs r1, 20
 	strh r1, [r4, 0x24]
-	ldr r1, _080EE7B0 @ =gUnknown_825E074
+	ldr r1, _080EE7B0 @ =gSineTable
 	movs r3, 0x34
 	ldrsh r0, [r4, r3]
 	lsls r0, 1
@@ -4253,7 +4253,7 @@ _080EE78C:
 	strh r0, [r4, 0x3C]
 	b _080EE818
 	.align 2, 0
-_080EE7B0: .4byte gUnknown_825E074
+_080EE7B0: .4byte gSineTable
 _080EE7B4: .4byte gUnknown_203AB04
 _080EE7B8: .4byte gUnknown_203AB08
 _080EE7BC: .4byte gUnknown_203AB06
@@ -4585,7 +4585,7 @@ _080EEA08:
 	lsls r1, 16
 	asrs r1, 20
 	strh r1, [r4, 0x24]
-	ldr r1, _080EEA48 @ =gUnknown_825E074
+	ldr r1, _080EEA48 @ =gSineTable
 	lsls r0, 16
 	asrs r0, 20
 	lsls r0, 1
@@ -4599,7 +4599,7 @@ _080EEA08:
 	strh r0, [r4, 0x26]
 	b _080EEA88
 	.align 2, 0
-_080EEA48: .4byte gUnknown_825E074
+_080EEA48: .4byte gSineTable
 _080EEA4C:
 	ldrh r0, [r4, 0x32]
 	lsrs r0, 4
@@ -4775,7 +4775,7 @@ _080EEB84:
 	asrs r0, 20
 	negs r1, r0
 	strh r1, [r4, 0x24]
-	ldr r1, _080EEBD4 @ =gUnknown_825E074
+	ldr r1, _080EEBD4 @ =gSineTable
 	lsls r0, 1
 	adds r0, r1
 	movs r3, 0
@@ -4810,7 +4810,7 @@ _080EEBCE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EEBD4: .4byte gUnknown_825E074
+_080EEBD4: .4byte gSineTable
 _080EEBD8: .4byte gUnknown_203AB04
 _080EEBDC: .4byte gUnknown_203AB08
 _080EEBE0: .4byte SpriteCallbackDummy

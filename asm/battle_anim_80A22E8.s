@@ -3962,7 +3962,7 @@ sub_80A414C: @ 80A414C
 	strh r0, [r4, 0x3C]
 	movs r1, 0x30
 	ldrsh r2, [r4, r1]
-	ldr r1, _080A41A0 @ =gUnknown_825E074
+	ldr r1, _080A41A0 @ =gSineTable
 	movs r5, 0x2E
 	ldrsh r0, [r4, r5]
 	lsls r0, 1
@@ -3995,7 +3995,7 @@ sub_80A414C: @ 80A414C
 	ble _080A41BC
 	b _080A41B6
 	.align 2, 0
-_080A41A0: .4byte gUnknown_825E074
+_080A41A0: .4byte gSineTable
 _080A41A4:
 	movs r1, 0x24
 	ldrsh r0, [r4, r1]
@@ -8720,7 +8720,7 @@ _080A6558:
 	.align 2, 0
 _080A657C: .4byte gTasks
 _080A6580:
-	ldr r4, _080A65C8 @ =gUnknown_825E074
+	ldr r4, _080A65C8 @ =gSineTable
 	movs r1, 0x2E
 	ldrsh r0, [r5, r1]
 	lsls r0, 1
@@ -8755,7 +8755,7 @@ _080A65C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A65C8: .4byte gUnknown_825E074
+_080A65C8: .4byte gSineTable
 	thumb_func_end sub_80A653C
 
 	thumb_func_start sub_80A65CC
@@ -9762,7 +9762,7 @@ _080A6D62:
 	adds r1, 0x43
 	strb r0, [r1]
 _080A6D72:
-	ldr r1, _080A6D8C @ =gUnknown_825E074
+	ldr r1, _080A6D8C @ =gSineTable
 	movs r3, 0x30
 	ldrsh r0, [r2, r3]
 	lsls r0, 1
@@ -9777,7 +9777,7 @@ _080A6D88:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A6D8C: .4byte gUnknown_825E074
+_080A6D8C: .4byte gSineTable
 	thumb_func_end sub_80A6D20
 
 	thumb_func_start sub_80A6D90
@@ -13284,7 +13284,7 @@ sub_80A8874: @ 80A8874
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080A88D4
-	ldr r0, _080A88CC @ =gUnknown_2022978
+	ldr r0, _080A88CC @ =gBattle_BG1_X
 	ldrh r0, [r0]
 	strh r0, [r5, 0x14]
 	ldr r0, _080A88D0 @ =0x04000014
@@ -13292,10 +13292,10 @@ sub_80A8874: @ 80A8874
 	.align 2, 0
 _080A88C4: .4byte gTasks
 _080A88C8: .4byte gUnknown_2037F1B
-_080A88CC: .4byte gUnknown_2022978
+_080A88CC: .4byte gBattle_BG1_X
 _080A88D0: .4byte 0x04000014
 _080A88D4:
-	ldr r0, _080A8940 @ =gUnknown_202297C
+	ldr r0, _080A8940 @ =gBattle_BG2_X
 	ldrh r0, [r0]
 	strh r0, [r5, 0x14]
 	ldr r0, _080A8944 @ =0x04000018
@@ -13308,7 +13308,7 @@ _080A88DC:
 	lsls r0, 16
 	cmp r2, r0
 	bgt _080A891A
-	ldr r4, _080A8948 @ =gUnknown_2038700
+	ldr r4, _080A8948 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r4, r0
@@ -13345,7 +13345,7 @@ _080A891A:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	ldr r0, _080A8950 @ =sub_80A8954
 	str r0, [r5]
 	add sp, 0xC
@@ -13353,9 +13353,9 @@ _080A891A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A8940: .4byte gUnknown_202297C
+_080A8940: .4byte gBattle_BG2_X
 _080A8944: .4byte 0x04000018
-_080A8948: .4byte gUnknown_2038700
+_080A8948: .4byte gScanlineEffectRegBuffers
 _080A894C: .4byte 0xa2600001
 _080A8950: .4byte sub_80A8954
 	thumb_func_end sub_80A8874
@@ -13431,7 +13431,7 @@ _080A89CC:
 	ldrsh r0, [r3, r1]
 	cmp r0, 0
 	blt _080A89F0
-	ldr r2, _080A8A14 @ =gUnknown_2038700
+	ldr r2, _080A8A14 @ =gScanlineEffectRegBuffers
 	lsls r0, 1
 	adds r0, r2
 	ldrh r1, [r3, 0x14]
@@ -13455,7 +13455,7 @@ _080A89F0:
 	ldrsh r1, [r3, r2]
 	cmp r0, r1
 	blt _080A8A0E
-	ldr r1, _080A8A18 @ =gUnknown_2039600
+	ldr r1, _080A8A18 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	adds r0, r4, 0
@@ -13465,8 +13465,8 @@ _080A8A0E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A8A14: .4byte gUnknown_2038700
-_080A8A18: .4byte gUnknown_2039600
+_080A8A14: .4byte gScanlineEffectRegBuffers
+_080A8A18: .4byte gScanlineEffect
 	thumb_func_end sub_80A8954
 
 	thumb_func_start sub_80A8A1C
@@ -15940,10 +15940,10 @@ sub_80A9CE8: @ 80A9CE8
 	movs r2, 0x1
 	bl SetAnimBgAttribute
 _080A9D2A:
-	ldr r0, _080A9DA4 @ =gUnknown_2022978
+	ldr r0, _080A9DA4 @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, _080A9DA8 @ =gUnknown_202297A
+	ldr r4, _080A9DA8 @ =gBattle_BG1_Y
 	strh r1, [r4]
 	movs r0, 0x14
 	movs r1, 0
@@ -15993,8 +15993,8 @@ _080A9D88:
 	bx r0
 	.align 2, 0
 _080A9DA0: .4byte 0x00003f42
-_080A9DA4: .4byte gUnknown_2022978
-_080A9DA8: .4byte gUnknown_202297A
+_080A9DA4: .4byte gBattle_BG1_X
+_080A9DA8: .4byte gBattle_BG1_Y
 _080A9DAC: .4byte gFile_graphics_battle_anims_backgrounds_attract_tilemap
 _080A9DB0: .4byte gFile_graphics_battle_anims_backgrounds_attract_sheet
 _080A9DB4: .4byte gFile_graphics_battle_anims_backgrounds_attract_palette
@@ -16197,10 +16197,10 @@ sub_80A9F10: @ 80A9F10
 	movs r2, 0x1
 	bl SetAnimBgAttribute
 _080A9F52:
-	ldr r0, _080A9F8C @ =gUnknown_2022978
+	ldr r0, _080A9F8C @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, _080A9F90 @ =gUnknown_202297A
+	ldr r4, _080A9F90 @ =gBattle_BG1_Y
 	strh r1, [r4]
 	movs r0, 0x14
 	movs r1, 0
@@ -16220,8 +16220,8 @@ _080A9F52:
 	b _080A9FC6
 	.align 2, 0
 _080A9F88: .4byte 0x00003f42
-_080A9F8C: .4byte gUnknown_2022978
-_080A9F90: .4byte gUnknown_202297A
+_080A9F8C: .4byte gBattle_BG1_X
+_080A9F90: .4byte gBattle_BG1_Y
 _080A9F94: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_contest_tilemap
 _080A9F98:
 	ldr r0, _080A9FB4 @ =gUnknown_2037F1B
@@ -18959,11 +18959,11 @@ _080AB476:
 	beq _080AB4F8
 	ldr r1, _080AB4EC @ =0x0000ffb0
 	adds r0, r1, 0
-	ldr r2, _080AB4F0 @ =gUnknown_2022978
+	ldr r2, _080AB4F0 @ =gBattle_BG1_X
 	strh r0, [r2]
 	adds r1, 0x20
 	adds r0, r1, 0
-	ldr r2, _080AB4F4 @ =gUnknown_202297A
+	ldr r2, _080AB4F4 @ =gBattle_BG1_Y
 	strh r0, [r2]
 	movs r0, 0x2
 	strh r0, [r6, 0x8]
@@ -18977,8 +18977,8 @@ _080AB4E0: .4byte gFile_graphics_battle_anims_backgrounds_water_muddy_palette
 _080AB4E4: .4byte sub_80AB79C
 _080AB4E8: .4byte gTasks
 _080AB4EC: .4byte 0x0000ffb0
-_080AB4F0: .4byte gUnknown_2022978
-_080AB4F4: .4byte gUnknown_202297A
+_080AB4F0: .4byte gBattle_BG1_X
+_080AB4F4: .4byte gBattle_BG1_Y
 _080AB4F8:
 	ldr r0, _080AB528 @ =gUnknown_2037F1A
 	ldrb r0, [r0]
@@ -18989,12 +18989,12 @@ _080AB4F8:
 	bne _080AB53C
 	ldr r2, _080AB52C @ =0x0000ff20
 	adds r0, r2, 0
-	ldr r2, _080AB530 @ =gUnknown_2022978
+	ldr r2, _080AB530 @ =gBattle_BG1_X
 	strh r0, [r2]
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
-	ldr r2, _080AB534 @ =gUnknown_202297A
+	ldr r2, _080AB534 @ =gBattle_BG1_Y
 	strh r0, [r2]
 	movs r0, 0x2
 	strh r0, [r6, 0x8]
@@ -19005,15 +19005,15 @@ _080AB4F8:
 	.align 2, 0
 _080AB528: .4byte gUnknown_2037F1A
 _080AB52C: .4byte 0x0000ff20
-_080AB530: .4byte gUnknown_2022978
-_080AB534: .4byte gUnknown_202297A
+_080AB530: .4byte gBattle_BG1_X
+_080AB534: .4byte gBattle_BG1_Y
 _080AB538: .4byte 0x0000ffff
 _080AB53C:
-	ldr r0, _080AB584 @ =gUnknown_2022978
+	ldr r0, _080AB584 @ =gBattle_BG1_X
 	strh r4, [r0]
 	ldr r1, _080AB588 @ =0x0000ffd0
 	adds r0, r1, 0
-	ldr r2, _080AB58C @ =gUnknown_202297A
+	ldr r2, _080AB58C @ =gBattle_BG1_Y
 	strh r0, [r2]
 	ldr r0, _080AB590 @ =0x0000fffe
 	strh r0, [r6, 0x8]
@@ -19021,11 +19021,11 @@ _080AB53C:
 	strh r0, [r6, 0xA]
 	strh r4, [r7, 0xE]
 _080AB552:
-	ldr r0, _080AB584 @ =gUnknown_2022978
+	ldr r0, _080AB584 @ =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r2, _080AB58C @ =gUnknown_202297A
+	ldr r2, _080AB58C @ =gBattle_BG1_Y
 	ldrh r1, [r2]
 	movs r0, 0x16
 	bl SetGpuReg
@@ -19044,9 +19044,9 @@ _080AB552:
 	movs r0, 0x70
 	b _080AB59C
 	.align 2, 0
-_080AB584: .4byte gUnknown_2022978
+_080AB584: .4byte gBattle_BG1_X
 _080AB588: .4byte 0x0000ffd0
-_080AB58C: .4byte gUnknown_202297A
+_080AB58C: .4byte gBattle_BG1_Y
 _080AB590: .4byte 0x0000fffe
 _080AB594: .4byte gTasks
 _080AB598:
@@ -19082,8 +19082,8 @@ sub_80AB5C8: @ 80AB5C8
 	sub sp, 0x10
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080AB6F4 @ =gUnknown_2022978
-	ldr r2, _080AB6F8 @ =gUnknown_202297A
+	ldr r1, _080AB6F4 @ =gBattle_BG1_X
+	ldr r2, _080AB6F8 @ =gBattle_BG1_Y
 	ldr r0, _080AB6FC @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
@@ -19233,8 +19233,8 @@ _080AB6EC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AB6F4: .4byte gUnknown_2022978
-_080AB6F8: .4byte gUnknown_202297A
+_080AB6F4: .4byte gBattle_BG1_X
+_080AB6F8: .4byte gBattle_BG1_Y
 _080AB6FC: .4byte gTasks
 _080AB700: .4byte gPlttBufferFaded
 _080AB704: .4byte sub_80AB708
@@ -19248,8 +19248,8 @@ sub_80AB708: @ 80AB708
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r7, _080AB740 @ =gUnknown_2022978
-	ldr r0, _080AB744 @ =gUnknown_202297A
+	ldr r7, _080AB740 @ =gBattle_BG1_X
+	ldr r0, _080AB744 @ =gBattle_BG1_Y
 	mov r8, r0
 	ldr r6, _080AB748 @ =gTasks
 	lsls r0, r5, 2
@@ -19269,8 +19269,8 @@ sub_80AB708: @ 80AB708
 	strh r0, [r4, 0x8]
 	b _080AB78E
 	.align 2, 0
-_080AB740: .4byte gUnknown_2022978
-_080AB744: .4byte gUnknown_202297A
+_080AB740: .4byte gBattle_BG1_X
+_080AB744: .4byte gBattle_BG1_Y
 _080AB748: .4byte gTasks
 _080AB74C:
 	bl sub_8073788
@@ -19346,7 +19346,7 @@ _080AB7D0:
 	movs r3, 0
 	movs r2, 0x10
 	ldrsh r0, [r4, r2]
-	ldr r1, _080AB8A0 @ =gUnknown_2038700
+	ldr r1, _080AB8A0 @ =gScanlineEffectRegBuffers
 	mov r12, r1
 	cmp r3, r0
 	bge _080AB80E
@@ -19383,7 +19383,7 @@ _080AB80E:
 	ldrsh r0, [r4, r3]
 	cmp r1, r0
 	bge _080AB848
-	ldr r5, _080AB8A0 @ =gUnknown_2038700
+	ldr r5, _080AB8A0 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -19412,7 +19412,7 @@ _080AB848:
 	asrs r0, r2, 16
 	cmp r0, 0x9F
 	bgt _080AB87E
-	ldr r5, _080AB8A0 @ =gUnknown_2038700
+	ldr r5, _080AB8A0 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -19453,7 +19453,7 @@ _080AB87E:
 	ldrh r0, [r4, 0xA]
 	b _080AB8BE
 	.align 2, 0
-_080AB8A0: .4byte gUnknown_2038700
+_080AB8A0: .4byte gScanlineEffectRegBuffers
 _080AB8A4: .4byte 0x0000ffff
 _080AB8A8:
 	lsls r0, r3, 16
@@ -19482,7 +19482,7 @@ _080AB8BE:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -19521,8 +19521,8 @@ _080AB91C:
 	ldrsh r0, [r4, r1]
 	cmp r3, r0
 	bge _080AB950
-	ldr r6, _080AB9B4 @ =gUnknown_2038700
-	ldr r5, _080AB9B8 @ =gUnknown_2039600
+	ldr r6, _080AB9B4 @ =gScanlineEffectRegBuffers
+	ldr r5, _080AB9B8 @ =gScanlineEffect
 _080AB92A:
 	lsls r1, r3, 16
 	asrs r1, 16
@@ -19551,8 +19551,8 @@ _080AB950:
 	ldrsh r0, [r4, r3]
 	cmp r1, r0
 	bge _080AB984
-	ldr r6, _080AB9B4 @ =gUnknown_2038700
-	ldr r5, _080AB9B8 @ =gUnknown_2039600
+	ldr r6, _080AB9B4 @ =gScanlineEffectRegBuffers
+	ldr r5, _080AB9B8 @ =gScanlineEffect
 _080AB962:
 	asrs r3, r2, 16
 	lsls r2, r3, 1
@@ -19577,8 +19577,8 @@ _080AB984:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _080ABA66
-	ldr r6, _080AB9B4 @ =gUnknown_2038700
-	ldr r5, _080AB9B8 @ =gUnknown_2039600
+	ldr r6, _080AB9B4 @ =gScanlineEffectRegBuffers
+	ldr r5, _080AB9B8 @ =gScanlineEffect
 _080AB992:
 	asrs r3, r1, 16
 	lsls r2, r3, 1
@@ -19597,16 +19597,16 @@ _080AB992:
 	ble _080AB992
 	b _080ABA66
 	.align 2, 0
-_080AB9B4: .4byte gUnknown_2038700
-_080AB9B8: .4byte gUnknown_2039600
+_080AB9B4: .4byte gScanlineEffectRegBuffers
+_080AB9B8: .4byte gScanlineEffect
 _080AB9BC:
 	movs r3, 0
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	cmp r3, r0
 	bge _080AB9F0
-	ldr r6, _080ABA70 @ =gUnknown_2038700
-	ldr r5, _080ABA74 @ =gUnknown_2039600
+	ldr r6, _080ABA70 @ =gScanlineEffectRegBuffers
+	ldr r5, _080ABA74 @ =gScanlineEffect
 _080AB9CA:
 	lsls r1, r3, 16
 	asrs r1, 16
@@ -19635,8 +19635,8 @@ _080AB9F0:
 	ldrsh r0, [r4, r3]
 	cmp r1, r0
 	bge _080ABA24
-	ldr r6, _080ABA70 @ =gUnknown_2038700
-	ldr r5, _080ABA74 @ =gUnknown_2039600
+	ldr r6, _080ABA70 @ =gScanlineEffectRegBuffers
+	ldr r5, _080ABA74 @ =gScanlineEffect
 _080ABA02:
 	asrs r3, r2, 16
 	lsls r2, r3, 1
@@ -19661,8 +19661,8 @@ _080ABA24:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _080ABA50
-	ldr r6, _080ABA70 @ =gUnknown_2038700
-	ldr r5, _080ABA74 @ =gUnknown_2039600
+	ldr r6, _080ABA70 @ =gScanlineEffectRegBuffers
+	ldr r5, _080ABA74 @ =gScanlineEffect
 _080ABA32:
 	asrs r3, r1, 16
 	lsls r2, r3, 1
@@ -19686,7 +19686,7 @@ _080ABA50:
 	negs r0, r0
 	cmp r1, r0
 	bne _080ABA66
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	adds r0, r7, 0
 	bl DestroyTask
 _080ABA66:
@@ -19695,8 +19695,8 @@ _080ABA66:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ABA70: .4byte gUnknown_2038700
-_080ABA74: .4byte gUnknown_2039600
+_080ABA70: .4byte gScanlineEffectRegBuffers
+_080ABA74: .4byte gScanlineEffect
 	thumb_func_end sub_80AB79C
 
 	thumb_func_start sub_80ABA78
@@ -20603,7 +20603,7 @@ sub_80AC160: @ 80AC160
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r6, r1, 24
-	ldr r1, _080AC1EC @ =gUnknown_825E074
+	ldr r1, _080AC1EC @ =gSineTable
 	movs r2, 0x18
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -20668,7 +20668,7 @@ _080AC1BA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AC1EC: .4byte gUnknown_825E074
+_080AC1EC: .4byte gSineTable
 _080AC1F0: .4byte gUnknown_83E5AE0
 _080AC1F4: .4byte gSprites
 _080AC1F8: .4byte sub_80AC204
@@ -24355,7 +24355,7 @@ _080ADE02:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
-	ldr r7, _080ADEA0 @ =gUnknown_825E074
+	ldr r7, _080ADEA0 @ =gSineTable
 	ldr r6, _080ADEA4 @ =gUnknown_2037F02
 	movs r1, 0
 	ldrsh r0, [r6, r1]
@@ -24430,7 +24430,7 @@ _080ADE66:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ADEA0: .4byte gUnknown_825E074
+_080ADEA0: .4byte gSineTable
 _080ADEA4: .4byte gUnknown_2037F02
 _080ADEA8: .4byte gOamMatrices
 _080ADEAC: .4byte sub_80B1D3C
@@ -28140,10 +28140,10 @@ sub_80AFAE4: @ 80AFAE4
 	movs r2, 0x1
 	bl SetAnimBgAttribute
 _080AFB26:
-	ldr r0, _080AFBA4 @ =gUnknown_2022978
+	ldr r0, _080AFBA4 @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, _080AFBA8 @ =gUnknown_202297A
+	ldr r4, _080AFBA8 @ =gBattle_BG1_Y
 	strh r1, [r4]
 	movs r0, 0x14
 	movs r1, 0
@@ -28195,8 +28195,8 @@ _080AFB88:
 	bx r0
 	.align 2, 0
 _080AFBA0: .4byte 0x00003f42
-_080AFBA4: .4byte gUnknown_2022978
-_080AFBA8: .4byte gUnknown_202297A
+_080AFBA4: .4byte gBattle_BG1_X
+_080AFBA8: .4byte gBattle_BG1_Y
 _080AFBAC: .4byte gUnknown_83C3540
 _080AFBB0: .4byte gFile_graphics_battle_anims_backgrounds_fog_tilemap
 _080AFBB4: .4byte gUnknown_83C2CE0
@@ -28210,7 +28210,7 @@ sub_80AFBC0: @ 80AFBC0
 	sub sp, 0x10
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _080AFBF4 @ =gUnknown_2022978
+	ldr r1, _080AFBF4 @ =gBattle_BG1_X
 	ldr r2, _080AFBF8 @ =0x0000ffff
 	adds r0, r2, 0
 	ldrh r2, [r1]
@@ -28234,7 +28234,7 @@ _080AFBEA:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080AFBF4: .4byte gUnknown_2022978
+_080AFBF4: .4byte gBattle_BG1_X
 _080AFBF8: .4byte 0x0000ffff
 _080AFBFC: .4byte gTasks
 _080AFC00: .4byte _080AFC04
@@ -28366,10 +28366,10 @@ _080AFCF8:
 	movs r2, 0
 	bl SetAnimBgAttribute
 _080AFD0C:
-	ldr r0, _080AFD44 @ =gUnknown_2022978
+	ldr r0, _080AFD44 @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080AFD48 @ =gUnknown_202297A
+	ldr r0, _080AFD48 @ =gBattle_BG1_Y
 	strh r1, [r0]
 	movs r0, 0x50
 	movs r1, 0
@@ -28390,8 +28390,8 @@ _080AFD36:
 	bx r0
 	.align 2, 0
 _080AFD40: .4byte gTasks
-_080AFD44: .4byte gUnknown_2022978
-_080AFD48: .4byte gUnknown_202297A
+_080AFD44: .4byte gBattle_BG1_X
+_080AFD48: .4byte gBattle_BG1_Y
 	thumb_func_end sub_80AFBC0
 
 	thumb_func_start sub_80AFD4C
@@ -28451,10 +28451,10 @@ sub_80AFD80: @ 80AFD80
 	movs r2, 0x1
 	bl SetAnimBgAttribute
 _080AFDC2:
-	ldr r0, _080AFE44 @ =gUnknown_2022978
+	ldr r0, _080AFE44 @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, _080AFE48 @ =gUnknown_202297A
+	ldr r4, _080AFE48 @ =gBattle_BG1_Y
 	strh r1, [r4]
 	movs r0, 0x14
 	movs r1, 0
@@ -28508,8 +28508,8 @@ _080AFE24:
 	bx r0
 	.align 2, 0
 _080AFE40: .4byte 0x00003f42
-_080AFE44: .4byte gUnknown_2022978
-_080AFE48: .4byte gUnknown_202297A
+_080AFE44: .4byte gBattle_BG1_X
+_080AFE48: .4byte gBattle_BG1_Y
 _080AFE4C: .4byte gUnknown_83C3540
 _080AFE50: .4byte gFile_graphics_battle_anims_backgrounds_fog_tilemap
 _080AFE54: .4byte gUnknown_83C2CE0
@@ -28524,7 +28524,7 @@ sub_80AFE64: @ 80AFE64
 	sub sp, 0x10
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _080AFE94 @ =gUnknown_2022978
+	ldr r2, _080AFE94 @ =gBattle_BG1_X
 	ldr r3, _080AFE98 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -28546,7 +28546,7 @@ _080AFE8A:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080AFE94: .4byte gUnknown_2022978
+_080AFE94: .4byte gBattle_BG1_X
 _080AFE98: .4byte gTasks
 _080AFE9C: .4byte _080AFEA0
 	.align 2, 0
@@ -28667,10 +28667,10 @@ _080AFF80:
 	movs r2, 0
 	bl SetAnimBgAttribute
 _080AFF94:
-	ldr r0, _080AFFCC @ =gUnknown_2022978
+	ldr r0, _080AFFCC @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080AFFD0 @ =gUnknown_202297A
+	ldr r0, _080AFFD0 @ =gBattle_BG1_Y
 	strh r1, [r0]
 	movs r0, 0x50
 	movs r1, 0
@@ -28691,8 +28691,8 @@ _080AFFBE:
 	bx r0
 	.align 2, 0
 _080AFFC8: .4byte gTasks
-_080AFFCC: .4byte gUnknown_2022978
-_080AFFD0: .4byte gUnknown_202297A
+_080AFFCC: .4byte gBattle_BG1_X
+_080AFFD0: .4byte gBattle_BG1_Y
 	thumb_func_end sub_80AFE64
 
 	thumb_func_start sub_80AFFD4
@@ -28898,7 +28898,7 @@ _080B0168:
 _080B016A:
 	adds r0, r4, 0
 	bl sub_80755E0
-	ldr r1, _080B0194 @ =gUnknown_825E074
+	ldr r1, _080B0194 @ =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -28917,7 +28917,7 @@ _080B016A:
 	subs r0, 0x8
 	b _080B019C
 	.align 2, 0
-_080B0194: .4byte gUnknown_825E074
+_080B0194: .4byte gSineTable
 _080B0198:
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x8
@@ -28974,7 +28974,7 @@ _080B0200:
 _080B0202:
 	movs r0, 0
 	strh r0, [r4, 0x26]
-	ldr r1, _080B022C @ =gUnknown_825E074
+	ldr r1, _080B022C @ =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -28992,11 +28992,11 @@ _080B0202:
 	bl obj_translate_based_on_private_1_2_3_4
 	b _080B0380
 	.align 2, 0
-_080B022C: .4byte gUnknown_825E074
+_080B022C: .4byte gSineTable
 _080B0230:
 	adds r0, r4, 0
 	bl sub_80755E0
-	ldr r1, _080B028C @ =gUnknown_825E074
+	ldr r1, _080B028C @ =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -29038,7 +29038,7 @@ _080B0230:
 	asrs r1, 24
 	b _080B0298
 	.align 2, 0
-_080B028C: .4byte gUnknown_825E074
+_080B028C: .4byte gSineTable
 _080B0290:
 	ldrh r1, [r4, 0x3C]
 	lsls r1, 16
@@ -31514,7 +31514,7 @@ _080B158E:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B15C4
-	ldr r1, _080B15C0 @ =gUnknown_2022980
+	ldr r1, _080B15C0 @ =gBattle_BG3_X
 	ldrh r0, [r4, 0x1A]
 	lsls r0, 16
 	asrs r0, 24
@@ -31525,9 +31525,9 @@ _080B158E:
 	b _080B15D4
 	.align 2, 0
 _080B15BC: .4byte gUnknown_2037F1B
-_080B15C0: .4byte gUnknown_2022980
+_080B15C0: .4byte gBattle_BG3_X
 _080B15C4:
-	ldr r2, _080B1614 @ =gUnknown_2022980
+	ldr r2, _080B1614 @ =gBattle_BG3_X
 	ldrh r1, [r4, 0x1A]
 	lsls r1, 16
 	asrs r1, 24
@@ -31536,7 +31536,7 @@ _080B15C4:
 	strh r0, [r2]
 	adds r7, r2, 0
 _080B15D4:
-	ldr r3, _080B1618 @ =gUnknown_2022982
+	ldr r3, _080B1618 @ =gBattle_BG3_Y
 	ldrh r2, [r4, 0x1C]
 	lsls r0, r2, 16
 	asrs r0, 24
@@ -31567,8 +31567,8 @@ _080B160C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B1614: .4byte gUnknown_2022980
-_080B1618: .4byte gUnknown_2022982
+_080B1614: .4byte gBattle_BG3_X
+_080B1618: .4byte gBattle_BG3_Y
 _080B161C: .4byte gUnknown_2037F02
 	thumb_func_end sub_80B1530
 
@@ -32731,7 +32731,7 @@ _080B1F1E:
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r5]
-	ldr r3, _080B1F88 @ =gUnknown_825E074
+	ldr r3, _080B1F88 @ =gSineTable
 	ldrh r0, [r5, 0x2]
 	lsls r0, 1
 	adds r0, r3
@@ -32777,7 +32777,7 @@ _080B1F1E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B1F88: .4byte gUnknown_825E074
+_080B1F88: .4byte gSineTable
 _080B1F8C: .4byte gOamMatrices
 _080B1F90: .4byte sub_80B1F94
 	thumb_func_end sub_80B1D88
@@ -33395,7 +33395,7 @@ _080B23F0:
 	adds r0, 0xC
 	adds r0, r1
 	ldrb r1, [r0]
-	ldr r3, _080B2478 @ =gUnknown_825E074
+	ldr r3, _080B2478 @ =gSineTable
 	mov r2, r12
 	lsls r0, r2, 1
 	adds r0, r3
@@ -33456,7 +33456,7 @@ _080B23F0:
 	strh r0, [r4, 0x2]
 	b _080B2490
 	.align 2, 0
-_080B2478: .4byte gUnknown_825E074
+_080B2478: .4byte gSineTable
 _080B247C: .4byte gOamMatrices
 _080B2480:
 	ldrh r0, [r4, 0x4]
@@ -33629,7 +33629,7 @@ _080B25C4:
 	adds r0, r5
 	strh r0, [r4, 0x3C]
 _080B25D8:
-	ldr r5, _080B2680 @ =gUnknown_825E074
+	ldr r5, _080B2680 @ =gSineTable
 	ldrh r3, [r4, 0x30]
 	movs r1, 0xFF
 	ands r1, r3
@@ -33714,7 +33714,7 @@ _080B2672:
 	bx r0
 	.align 2, 0
 _080B267C: .4byte gUnknown_2037F1B
-_080B2680: .4byte gUnknown_825E074
+_080B2680: .4byte gSineTable
 _080B2684: .4byte gOamMatrices
 _080B2688: .4byte sub_80B268C
 	thumb_func_end sub_80B2514
@@ -36385,17 +36385,17 @@ _080B3AD6:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B3AFC
-	ldr r0, _080B3AF4 @ =gUnknown_2022978
+	ldr r0, _080B3AF4 @ =gBattle_BG1_X
 	ldrh r0, [r0]
 	strh r0, [r4, 0x1C]
 	ldr r0, _080B3AF8 @ =0x04000014
 	b _080B3B04
 	.align 2, 0
 _080B3AF0: .4byte gUnknown_2037F1B
-_080B3AF4: .4byte gUnknown_2022978
+_080B3AF4: .4byte gBattle_BG1_X
 _080B3AF8: .4byte 0x04000014
 _080B3AFC:
-	ldr r0, _080B3B64 @ =gUnknown_202297C
+	ldr r0, _080B3B64 @ =gBattle_BG2_X
 	ldrh r0, [r0]
 	strh r0, [r4, 0x1C]
 	ldr r0, _080B3B68 @ =0x04000018
@@ -36409,7 +36409,7 @@ _080B3B04:
 	adds r0, 0x40
 	cmp r1, r0
 	bgt _080B3B3E
-	ldr r5, _080B3B6C @ =gUnknown_2038700
+	ldr r5, _080B3B6C @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -36442,7 +36442,7 @@ _080B3B3E:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	ldr r0, _080B3B74 @ =sub_80B3B78
 	str r0, [r4]
 	add sp, 0xC
@@ -36450,9 +36450,9 @@ _080B3B3E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B3B64: .4byte gUnknown_202297C
+_080B3B64: .4byte gBattle_BG2_X
 _080B3B68: .4byte 0x04000018
-_080B3B6C: .4byte gUnknown_2038700
+_080B3B6C: .4byte gScanlineEffectRegBuffers
 _080B3B70: .4byte 0xa2600001
 _080B3B74: .4byte sub_80B3B78
 	thumb_func_end sub_80B3A58
@@ -36494,10 +36494,10 @@ _080B3BAA:
 	ldrsh r0, [r5, r2]
 	cmp r1, r0
 	bgt _080B3C42
-	ldr r0, _080B3BF4 @ =gUnknown_825E074
+	ldr r0, _080B3BF4 @ =gSineTable
 	mov r9, r0
 	movs r7, 0x3
-	ldr r1, _080B3BF8 @ =gUnknown_2038700
+	ldr r1, _080B3BF8 @ =gScanlineEffectRegBuffers
 	mov r12, r1
 	movs r2, 0xF0
 	lsls r2, 3
@@ -36524,8 +36524,8 @@ _080B3BCC:
 	adds r0, r3, r0
 	b _080B3C08
 	.align 2, 0
-_080B3BF4: .4byte gUnknown_825E074
-_080B3BF8: .4byte gUnknown_2038700
+_080B3BF4: .4byte gSineTable
+_080B3BF8: .4byte gScanlineEffectRegBuffers
 _080B3BFC:
 	cmp r3, 0
 	bge _080B3C0C
@@ -36574,7 +36574,7 @@ _080B3C42:
 	ble _080B3C6A
 	b _080B3C58
 _080B3C52:
-	ldr r1, _080B3C60 @ =gUnknown_2039600
+	ldr r1, _080B3C60 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080B3C58:
@@ -36583,7 +36583,7 @@ _080B3C58:
 	strh r0, [r5, 0x8]
 	b _080B3C6A
 	.align 2, 0
-_080B3C60: .4byte gUnknown_2039600
+_080B3C60: .4byte gScanlineEffect
 _080B3C64:
 	adds r0, r2, 0
 	bl DestroyAnimVisualTask
@@ -36749,7 +36749,7 @@ _080B3DAA:
 	ldrh r0, [r4, 0xA]
 	adds r0, 0x4
 	strh r0, [r4, 0xA]
-	ldr r1, _080B3DF8 @ =gUnknown_825E074
+	ldr r1, _080B3DF8 @ =gSineTable
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -36783,12 +36783,12 @@ _080B3DAA:
 	bne _080B3E7C
 	b _080B3E5E
 	.align 2, 0
-_080B3DF8: .4byte gUnknown_825E074
+_080B3DF8: .4byte gSineTable
 _080B3DFC:
 	ldrh r0, [r4, 0xA]
 	subs r0, 0x4
 	strh r0, [r4, 0xA]
-	ldr r1, _080B3E48 @ =gUnknown_825E074
+	ldr r1, _080B3E48 @ =gSineTable
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -36822,7 +36822,7 @@ _080B3DFC:
 	bne _080B3E7C
 	b _080B3E5E
 	.align 2, 0
-_080B3E48: .4byte gUnknown_825E074
+_080B3E48: .4byte gSineTable
 _080B3E4C:
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
@@ -38086,9 +38086,9 @@ do_boulder_dust: @ 80B4810
 	movs r2, 0x1
 	bl SetAnimBgAttribute
 _080B4854:
-	ldr r0, _080B48E8 @ =gUnknown_2022978
+	ldr r0, _080B48E8 @ =gBattle_BG1_X
 	strh r5, [r0]
-	ldr r4, _080B48EC @ =gUnknown_202297A
+	ldr r4, _080B48EC @ =gBattle_BG1_Y
 	strh r5, [r4]
 	movs r0, 0x14
 	movs r1, 0
@@ -38152,8 +38152,8 @@ _080B48CA:
 	bx r0
 	.align 2, 0
 _080B48E4: .4byte 0x00003f42
-_080B48E8: .4byte gUnknown_2022978
-_080B48EC: .4byte gUnknown_202297A
+_080B48E8: .4byte gBattle_BG1_X
+_080B48EC: .4byte gBattle_BG1_Y
 _080B48F0: .4byte gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap
 _080B48F4: .4byte gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet
 _080B48F8: .4byte gFile_graphics_battle_anims_sprites_261_palette
@@ -38179,7 +38179,7 @@ sub_80B490C: @ 80B490C
 	adds r2, r1, 0
 	cmp r0, 0
 	bne _080B4940
-	ldr r1, _080B4938 @ =gUnknown_2022978
+	ldr r1, _080B4938 @ =gBattle_BG1_X
 	ldr r3, _080B493C @ =0x0000fffa
 	adds r0, r3, 0
 	ldrh r3, [r1]
@@ -38187,15 +38187,15 @@ sub_80B490C: @ 80B490C
 	b _080B4946
 	.align 2, 0
 _080B4934: .4byte gTasks
-_080B4938: .4byte gUnknown_2022978
+_080B4938: .4byte gBattle_BG1_X
 _080B493C: .4byte 0x0000fffa
 _080B4940:
-	ldr r1, _080B4974 @ =gUnknown_2022978
+	ldr r1, _080B4974 @ =gBattle_BG1_X
 	ldrh r0, [r1]
 	adds r0, 0x6
 _080B4946:
 	strh r0, [r1]
-	ldr r1, _080B4978 @ =gUnknown_202297A
+	ldr r1, _080B4978 @ =gBattle_BG1_Y
 	ldr r3, _080B497C @ =0x0000ffff
 	adds r0, r3, 0
 	ldrh r3, [r1]
@@ -38218,8 +38218,8 @@ _080B4968:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080B4974: .4byte gUnknown_2022978
-_080B4978: .4byte gUnknown_202297A
+_080B4974: .4byte gBattle_BG1_X
+_080B4978: .4byte gBattle_BG1_Y
 _080B497C: .4byte 0x0000ffff
 _080B4980: .4byte _080B4984
 	.align 2, 0
@@ -38336,10 +38336,10 @@ _080B4A58:
 	movs r2, 0
 	bl SetAnimBgAttribute
 _080B4A6C:
-	ldr r0, _080B4AA0 @ =gUnknown_2022978
+	ldr r0, _080B4AA0 @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080B4AA4 @ =gUnknown_202297A
+	ldr r0, _080B4AA4 @ =gBattle_BG1_Y
 	strh r1, [r0]
 	movs r0, 0x50
 	movs r1, 0
@@ -38359,8 +38359,8 @@ _080B4A96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B4AA0: .4byte gUnknown_2022978
-_080B4AA4: .4byte gUnknown_202297A
+_080B4AA0: .4byte gBattle_BG1_X
+_080B4AA4: .4byte gBattle_BG1_Y
 	thumb_func_end sub_80B490C
 
 	thumb_func_start sub_80B4AA8
@@ -39279,7 +39279,7 @@ sub_80B5188: @ 80B5188
 	movs r0, 0xC8
 	strh r0, [r5, 0xA]
 _080B51AA:
-	ldr r4, _080B51E8 @ =gUnknown_2022982
+	ldr r4, _080B51E8 @ =gBattle_BG3_Y
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
 	movs r1, 0xA
@@ -39307,7 +39307,7 @@ _080B51D6:
 	bx r0
 	.align 2, 0
 _080B51E4: .4byte gTasks
-_080B51E8: .4byte gUnknown_2022982
+_080B51E8: .4byte gBattle_BG3_Y
 	thumb_func_end sub_80B5188
 
 	thumb_func_start sub_80B51EC
@@ -39330,7 +39330,7 @@ sub_80B51EC: @ 80B51EC
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
-	ldr r0, _080B525C @ =gUnknown_2022982
+	ldr r0, _080B525C @ =gBattle_BG3_Y
 	ldrh r0, [r0]
 	strh r0, [r4, 0xC]
 _080B5218:
@@ -39339,7 +39339,7 @@ _080B5218:
 	movs r1, 0xFF
 	ands r0, r1
 	strh r0, [r4, 0xA]
-	ldr r6, _080B525C @ =gUnknown_2022982
+	ldr r6, _080B525C @ =gBattle_BG3_Y
 	movs r2, 0xA
 	ldrsh r1, [r4, r2]
 	movs r0, 0x4
@@ -39365,7 +39365,7 @@ _080B5250:
 	bx r0
 	.align 2, 0
 _080B5258: .4byte gTasks
-_080B525C: .4byte gUnknown_2022982
+_080B525C: .4byte gBattle_BG3_Y
 _080B5260: .4byte gUnknown_2037F02
 _080B5264: .4byte 0x00000fff
 	thumb_func_end sub_80B51EC
@@ -40713,7 +40713,7 @@ _080B5CB0:
 _080B5CC8:
 	movs r2, 0x2
 	movs r3, 0x6
-	bl sub_8088230
+	bl ScanlineEffect_InitWave
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x1C]
@@ -40789,7 +40789,7 @@ sub_80B5D38: @ 80B5D38
 	strh r0, [r4, 0x12]
 	cmp r0, 0
 	bne _080B5D70
-	ldr r1, _080B5DC4 @ =gUnknown_825E074
+	ldr r1, _080B5DC4 @ =gSineTable
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -40804,7 +40804,7 @@ _080B5D70:
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x1
 	bne _080B5D92
-	ldr r1, _080B5DC4 @ =gUnknown_825E074
+	ldr r1, _080B5DC4 @ =gSineTable
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -40841,7 +40841,7 @@ _080B5DBA:
 	bx r0
 	.align 2, 0
 _080B5DC0: .4byte gTasks
-_080B5DC4: .4byte gUnknown_825E074
+_080B5DC4: .4byte gSineTable
 _080B5DC8: .4byte sub_80B5DCC
 	thumb_func_end sub_80B5D38
 
@@ -40877,7 +40877,7 @@ _080B5E04:
 	beq _080B5E4C
 	b _080B5EB4
 _080B5E0A:
-	ldr r1, _080B5E28 @ =gUnknown_2039600
+	ldr r1, _080B5E28 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	movs r0, 0x1
@@ -40891,7 +40891,7 @@ _080B5E0A:
 	lsls r1, 2
 	b _080B5E30
 	.align 2, 0
-_080B5E28: .4byte gUnknown_2039600
+_080B5E28: .4byte gScanlineEffect
 _080B5E2C:
 	movs r1, 0x80
 	lsls r1, 3
@@ -42784,10 +42784,10 @@ _080B6D28:
 	movs r1, 0
 	movs r2, 0
 	bl SetAnimBgAttribute
-	ldr r0, _080B6D7C @ =gUnknown_202297C
+	ldr r0, _080B6D7C @ =gBattle_BG2_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, _080B6D80 @ =gUnknown_202297E
+	ldr r4, _080B6D80 @ =gBattle_BG2_Y
 	strh r1, [r4]
 	movs r0, 0x18
 	movs r1, 0
@@ -42812,8 +42812,8 @@ _080B6D28:
 	bl LoadCompressedPalette
 	b _080B6F1E
 	.align 2, 0
-_080B6D7C: .4byte gUnknown_202297C
-_080B6D80: .4byte gUnknown_202297E
+_080B6D7C: .4byte gBattle_BG2_X
+_080B6D80: .4byte gBattle_BG2_Y
 _080B6D84: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_sheet
 _080B6D88: .4byte gFile_graphics_battle_anims_backgrounds_scary_face_palette
 _080B6D8C:
@@ -42979,7 +42979,7 @@ _080B6EC4:
 	movs r2, 0x4
 _080B6EDE:
 	movs r3, 0x8
-	bl sub_8088230
+	bl ScanlineEffect_InitWave
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x1C]
@@ -43041,7 +43041,7 @@ sub_80B6F30: @ 80B6F30
 	strh r0, [r4, 0x18]
 	cmp r0, 0
 	bne _080B6F68
-	ldr r1, _080B6FBC @ =gUnknown_825E074
+	ldr r1, _080B6FBC @ =gSineTable
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -43056,7 +43056,7 @@ _080B6F68:
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x1
 	bne _080B6F8A
-	ldr r1, _080B6FBC @ =gUnknown_825E074
+	ldr r1, _080B6FBC @ =gSineTable
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -43093,7 +43093,7 @@ _080B6FB2:
 	bx r0
 	.align 2, 0
 _080B6FB8: .4byte gTasks
-_080B6FBC: .4byte gUnknown_825E074
+_080B6FBC: .4byte gSineTable
 _080B6FC0: .4byte sub_80B6FC4
 	thumb_func_end sub_80B6F30
 
@@ -43130,7 +43130,7 @@ _080B6FF0:
 	.4byte _080B709C
 	.4byte _080B70E8
 _080B7008:
-	ldr r1, _080B701C @ =gUnknown_2039600
+	ldr r1, _080B701C @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	ldrh r0, [r6, 0x16]
@@ -43140,7 +43140,7 @@ _080B7008:
 	bl BlendPalette
 	b _080B7148
 	.align 2, 0
-_080B701C: .4byte gUnknown_2039600
+_080B701C: .4byte gScanlineEffect
 _080B7020: .4byte 0x000066e0
 _080B7024:
 	ldr r1, _080B7040 @ =0x00003f44
@@ -43879,17 +43879,17 @@ sub_80B75E0: @ 80B75E0
 	bne _080B761C
 	ldr r0, _080B7614 @ =0x04000014
 	str r0, [sp]
-	ldr r0, _080B7618 @ =gUnknown_2022978
+	ldr r0, _080B7618 @ =gBattle_BG1_X
 	b _080B7622
 	.align 2, 0
 _080B760C: .4byte gTasks
 _080B7610: .4byte gUnknown_2037F1A
 _080B7614: .4byte 0x04000014
-_080B7618: .4byte gUnknown_2022978
+_080B7618: .4byte gBattle_BG1_X
 _080B761C:
 	ldr r0, _080B7698 @ =0x04000018
 	str r0, [sp]
-	ldr r0, _080B769C @ =gUnknown_202297C
+	ldr r0, _080B769C @ =gBattle_BG2_X
 _080B7622:
 	ldrh r0, [r0]
 	strh r0, [r4, 0xC]
@@ -43920,7 +43920,7 @@ _080B7652:
 	ldrsh r0, [r4, r1]
 	cmp r3, r0
 	bgt _080B7680
-	ldr r5, _080B76A8 @ =gUnknown_2038700
+	ldr r5, _080B76A8 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -43943,7 +43943,7 @@ _080B7680:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	ldr r0, _080B76AC @ =sub_80B76B0
 	str r0, [r4]
 	add sp, 0xC
@@ -43952,10 +43952,10 @@ _080B7680:
 	bx r0
 	.align 2, 0
 _080B7698: .4byte 0x04000018
-_080B769C: .4byte gUnknown_202297C
+_080B769C: .4byte gBattle_BG2_X
 _080B76A0: .4byte 0xa2600001
 _080B76A4: .4byte gUnknown_2037F1A
-_080B76A8: .4byte gUnknown_2038700
+_080B76A8: .4byte gScanlineEffectRegBuffers
 _080B76AC: .4byte sub_80B76B0
 	thumb_func_end sub_80B75E0
 
@@ -44040,7 +44040,7 @@ _080B7746:
 	bl sub_80B776C
 	b _080B7766
 _080B774E:
-	ldr r1, _080B775C @ =gUnknown_2039600
+	ldr r1, _080B775C @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	ldrh r0, [r2, 0x8]
@@ -44048,7 +44048,7 @@ _080B774E:
 	strh r0, [r2, 0x8]
 	b _080B7766
 	.align 2, 0
-_080B775C: .4byte gUnknown_2039600
+_080B775C: .4byte gScanlineEffect
 _080B7760:
 	adds r0, r3, 0
 	bl DestroyAnimVisualTask
@@ -44069,11 +44069,11 @@ sub_80B776C: @ 80B776C
 	ldrsh r0, [r5, r1]
 	cmp r4, r0
 	bgt _080B77C2
-	ldr r7, _080B77D8 @ =gUnknown_2038700
+	ldr r7, _080B77D8 @ =gScanlineEffectRegBuffers
 	mov r12, r7
-	ldr r0, _080B77DC @ =gUnknown_825E074
+	ldr r0, _080B77DC @ =gSineTable
 	mov r8, r0
-	ldr r6, _080B77E0 @ =gUnknown_2039600
+	ldr r6, _080B77E0 @ =gScanlineEffect
 _080B778A:
 	lsls r2, r4, 1
 	ldrb r1, [r6, 0x14]
@@ -44115,9 +44115,9 @@ _080B77C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B77D8: .4byte gUnknown_2038700
-_080B77DC: .4byte gUnknown_825E074
-_080B77E0: .4byte gUnknown_2039600
+_080B77D8: .4byte gScanlineEffectRegBuffers
+_080B77DC: .4byte gSineTable
+_080B77E0: .4byte gScanlineEffect
 	thumb_func_end sub_80B776C
 
 	thumb_func_start sub_80B77E4
@@ -44926,7 +44926,7 @@ _080B7E16:
 	add r4, sp, 0xC
 	adds r0, r4, 0
 	bl sub_80752A0
-	ldr r0, _080B7E68 @ =gUnknown_202297A
+	ldr r0, _080B7E68 @ =gBattle_BG1_Y
 	ldrh r0, [r0]
 	strh r0, [r5, 0x1C]
 	ldr r1, _080B7E6C @ =0x00003f42
@@ -44944,17 +44944,17 @@ _080B7E16:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B7EA8
-	ldr r1, _080B7E74 @ =gUnknown_202297C
+	ldr r1, _080B7E74 @ =gBattle_BG2_X
 	b _080B7EA2
 	.align 2, 0
 _080B7E60: .4byte 0x0000ffc0
 _080B7E64: .4byte gUnknown_2037F1A
-_080B7E68: .4byte gUnknown_202297A
+_080B7E68: .4byte gBattle_BG1_Y
 _080B7E6C: .4byte 0x00003f42
 _080B7E70: .4byte 0x04000016
-_080B7E74: .4byte gUnknown_202297C
+_080B7E74: .4byte gBattle_BG2_X
 _080B7E78:
-	ldr r0, _080B7F30 @ =gUnknown_202297E
+	ldr r0, _080B7F30 @ =gBattle_BG2_Y
 	ldrh r0, [r0]
 	strh r0, [r5, 0x1C]
 	ldr r1, _080B7F34 @ =0x00003f44
@@ -44971,7 +44971,7 @@ _080B7E78:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B7EA8
-	ldr r1, _080B7F3C @ =gUnknown_2022978
+	ldr r1, _080B7F3C @ =gBattle_BG1_X
 _080B7EA2:
 	ldrh r0, [r1]
 	adds r0, 0xF0
@@ -44994,7 +44994,7 @@ _080B7EA8:
 	movs r0, 0x3
 	bl sub_80B856C
 	movs r3, 0
-	ldr r4, _080B7F44 @ =gUnknown_2038700
+	ldr r4, _080B7F44 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r4, r0
@@ -45014,7 +45014,7 @@ _080B7ED4:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	movs r0, 0x3F
 	eors r7, r0
 	movs r1, 0xFC
@@ -45043,12 +45043,12 @@ _080B7ED4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B7F30: .4byte gUnknown_202297E
+_080B7F30: .4byte gBattle_BG2_Y
 _080B7F34: .4byte 0x00003f44
 _080B7F38: .4byte 0x0400001a
-_080B7F3C: .4byte gUnknown_2022978
+_080B7F3C: .4byte gBattle_BG1_X
 _080B7F40: .4byte 0xa2600001
-_080B7F44: .4byte gUnknown_2038700
+_080B7F44: .4byte gScanlineEffectRegBuffers
 _080B7F48: .4byte 0x00003f3f
 _080B7F4C: .4byte gUnknown_2022984
 _080B7F50: .4byte gUnknown_2022986
@@ -45182,7 +45182,7 @@ _080B8036:
 	.align 2, 0
 _080B804C: .4byte gUnknown_2022984
 _080B8050:
-	ldr r1, _080B8060 @ =gUnknown_2039600
+	ldr r1, _080B8060 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080B8056:
@@ -45191,7 +45191,7 @@ _080B8056:
 	strh r0, [r4, 0x8]
 	b _080B806A
 	.align 2, 0
-_080B8060: .4byte gUnknown_2039600
+_080B8060: .4byte gScanlineEffect
 _080B8064:
 	adds r0, r2, 0
 	bl DestroyAnimVisualTask
@@ -45270,17 +45270,17 @@ _080B80F0:
 	ldr r1, _080B8114 @ =0x00003f42
 	movs r0, 0x50
 	bl SetGpuReg
-	ldr r1, _080B8118 @ =gUnknown_202297C
+	ldr r1, _080B8118 @ =gBattle_BG2_X
 	b _080B8126
 	.align 2, 0
 _080B8110: .4byte gUnknown_2037F1B
 _080B8114: .4byte 0x00003f42
-_080B8118: .4byte gUnknown_202297C
+_080B8118: .4byte gBattle_BG2_X
 _080B811C:
 	ldr r1, _080B8130 @ =0x00003f44
 	movs r0, 0x50
 	bl SetGpuReg
-	ldr r1, _080B8134 @ =gUnknown_2022978
+	ldr r1, _080B8134 @ =gBattle_BG1_X
 _080B8126:
 	ldrh r0, [r1]
 	adds r0, 0xF0
@@ -45288,7 +45288,7 @@ _080B8126:
 	b _080B823C
 	.align 2, 0
 _080B8130: .4byte 0x00003f44
-_080B8134: .4byte gUnknown_2022978
+_080B8134: .4byte gBattle_BG1_X
 _080B8138:
 	movs r1, 0xE
 	ldrsh r0, [r5, r1]
@@ -45296,7 +45296,7 @@ _080B8138:
 	bne _080B8160
 	mov r0, sp
 	bl sub_80752A0
-	ldr r0, _080B815C @ =gUnknown_202297A
+	ldr r0, _080B815C @ =gBattle_BG1_Y
 	ldrh r0, [r0]
 	strh r0, [r5, 0x1C]
 	mov r0, sp
@@ -45307,9 +45307,9 @@ _080B8138:
 	bl FillPalette
 	b _080B8170
 	.align 2, 0
-_080B815C: .4byte gUnknown_202297A
+_080B815C: .4byte gBattle_BG1_Y
 _080B8160:
-	ldr r0, _080B8178 @ =gUnknown_202297E
+	ldr r0, _080B8178 @ =gBattle_BG2_Y
 	ldrh r0, [r0]
 	strh r0, [r5, 0x1C]
 	movs r0, 0
@@ -45321,7 +45321,7 @@ _080B8170:
 	bl sub_80B856C
 	b _080B823C
 	.align 2, 0
-_080B8178: .4byte gUnknown_202297E
+_080B8178: .4byte gBattle_BG2_Y
 _080B817C:
 	ldr r4, _080B81C8 @ =gUnknown_2037F1B
 	ldrb r0, [r4]
@@ -45389,7 +45389,7 @@ _080B81FA:
 	str r0, [sp, 0x10]
 	movs r3, 0
 	add r4, sp, 0x10
-	ldr r6, _080B8248 @ =gUnknown_2038700
+	ldr r6, _080B8248 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r7, r6, r0
@@ -45418,7 +45418,7 @@ _080B8208:
 	strb r2, [r4, 0x9]
 	ldr r0, [sp, 0x10]
 	ldr r2, [r4, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 _080B823C:
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -45426,7 +45426,7 @@ _080B823C:
 	b _080B829E
 	.align 2, 0
 _080B8244: .4byte 0x0400001a
-_080B8248: .4byte gUnknown_2038700
+_080B8248: .4byte gScanlineEffectRegBuffers
 _080B824C: .4byte 0xa2600001
 _080B8250:
 	movs r1, 0xE
@@ -45640,7 +45640,7 @@ _080B83D2:
 	bne _080B842A
 	b _080B83FC
 _080B83F6:
-	ldr r1, _080B8404 @ =gUnknown_2039600
+	ldr r1, _080B8404 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080B83FC:
@@ -45649,7 +45649,7 @@ _080B83FC:
 	strh r0, [r4, 0x8]
 	b _080B842A
 	.align 2, 0
-_080B8404: .4byte gUnknown_2039600
+_080B8404: .4byte gScanlineEffect
 _080B8408:
 	ldr r0, _080B8430 @ =gUnknown_2022984
 	movs r1, 0
@@ -45699,9 +45699,9 @@ sub_80B843C: @ 80B843C
 	movs r4, 0
 	cmp r0, 0
 	ble _080B849C
-	ldr r0, _080B8528 @ =gUnknown_2038700
+	ldr r0, _080B8528 @ =gScanlineEffectRegBuffers
 	mov r12, r0
-	ldr r7, _080B852C @ =gUnknown_2039600
+	ldr r7, _080B852C @ =gScanlineEffect
 _080B8470:
 	lsls r2, r4, 16
 	asrs r2, 16
@@ -45733,9 +45733,9 @@ _080B849C:
 	ldrsh r0, [r6, r2]
 	cmp r1, r0
 	bgt _080B84E6
-	ldr r0, _080B8528 @ =gUnknown_2038700
+	ldr r0, _080B8528 @ =gScanlineEffectRegBuffers
 	mov r12, r0
-	ldr r7, _080B852C @ =gUnknown_2039600
+	ldr r7, _080B852C @ =gScanlineEffect
 _080B84B0:
 	asrs r4, r3, 16
 	cmp r4, 0
@@ -45776,8 +45776,8 @@ _080B84E6:
 	ldrsh r0, [r6, r3]
 	cmp r1, r0
 	bge _080B855E
-	ldr r7, _080B8528 @ =gUnknown_2038700
-	ldr r4, _080B852C @ =gUnknown_2039600
+	ldr r7, _080B8528 @ =gScanlineEffectRegBuffers
+	ldr r4, _080B852C @ =gScanlineEffect
 _080B84FE:
 	asrs r3, r2, 16
 	cmp r3, 0
@@ -45801,15 +45801,15 @@ _080B8516:
 	blt _080B84FE
 	b _080B855E
 	.align 2, 0
-_080B8528: .4byte gUnknown_2038700
-_080B852C: .4byte gUnknown_2039600
+_080B8528: .4byte gScanlineEffectRegBuffers
+_080B852C: .4byte gScanlineEffect
 _080B8530:
 	movs r1, 0x1C
 	ldrsh r0, [r6, r1]
 	adds r5, r0, 0
 	adds r5, 0x9F
 	movs r4, 0
-	ldr r3, _080B8568 @ =gUnknown_2038700
+	ldr r3, _080B8568 @ =gScanlineEffectRegBuffers
 	movs r2, 0xF0
 	lsls r2, 3
 	adds r6, r3, r2
@@ -45835,7 +45835,7 @@ _080B855E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B8568: .4byte gUnknown_2038700
+_080B8568: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80B843C
 
 	thumb_func_start sub_80B856C
@@ -46204,7 +46204,7 @@ _080B8828:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	ldr r2, _080B88D0 @ =gUnknown_2022978
+	ldr r2, _080B88D0 @ =gBattle_BG1_X
 	ldr r0, _080B88D4 @ =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
@@ -46214,7 +46214,7 @@ _080B8828:
 	negs r0, r0
 	adds r0, 0x60
 	strh r0, [r2]
-	ldr r2, _080B88D8 @ =gUnknown_202297A
+	ldr r2, _080B88D8 @ =gBattle_BG1_Y
 	ldrh r0, [r1, 0x22]
 	negs r0, r0
 	adds r0, 0x20
@@ -46239,9 +46239,9 @@ _080B88C0: .4byte gUnknown_2037F1A
 _080B88C4: .4byte gFile_graphics_battle_anims_masks_metal_shine_tilemap
 _080B88C8: .4byte gFile_graphics_battle_anims_masks_metal_shine_sheet
 _080B88CC: .4byte gFile_graphics_battle_anims_masks_metal_shine_palette
-_080B88D0: .4byte gUnknown_2022978
+_080B88D0: .4byte gBattle_BG1_X
 _080B88D4: .4byte gSprites
-_080B88D8: .4byte gUnknown_202297A
+_080B88D8: .4byte gBattle_BG1_Y
 _080B88DC: .4byte gUnknown_2037F02
 _080B88E0:
 	lsls r0, r1, 4
@@ -46292,7 +46292,7 @@ sub_80B8920: @ 80B8920
 	adds r0, 0x4
 	movs r5, 0
 	strh r0, [r4, 0x1C]
-	ldr r2, _080B89EC @ =gUnknown_2022978
+	ldr r2, _080B89EC @ =gBattle_BG1_X
 	ldrh r3, [r2]
 	subs r1, r3, 0x4
 	strh r1, [r2]
@@ -46376,7 +46376,7 @@ _080B8990:
 	b _080B8A5E
 	.align 2, 0
 _080B89E8: .4byte gTasks
-_080B89EC: .4byte gUnknown_2022978
+_080B89EC: .4byte gBattle_BG1_X
 _080B89F0: .4byte gSprites
 _080B89F4: .4byte gUnknown_2023D44
 _080B89F8: .4byte gUnknown_2037F1A
@@ -47039,20 +47039,20 @@ _080B8F14:
 	strh r0, [r4, 0x1E]
 	cmp r0, 0x1
 	bne _080B8F48
-	ldr r0, _080B8F40 @ =gUnknown_2022978
+	ldr r0, _080B8F40 @ =gBattle_BG1_X
 	ldrh r0, [r0]
 	strh r0, [r4, 0x20]
-	ldr r0, _080B8F44 @ =gUnknown_202297A
+	ldr r0, _080B8F44 @ =gBattle_BG1_Y
 	b _080B8F50
 	.align 2, 0
 _080B8F3C: .4byte gUnknown_2037F1A
-_080B8F40: .4byte gUnknown_2022978
-_080B8F44: .4byte gUnknown_202297A
+_080B8F40: .4byte gBattle_BG1_X
+_080B8F44: .4byte gBattle_BG1_Y
 _080B8F48:
-	ldr r0, _080B8F8C @ =gUnknown_202297C
+	ldr r0, _080B8F8C @ =gBattle_BG2_X
 	ldrh r0, [r0]
 	strh r0, [r4, 0x20]
-	ldr r0, _080B8F90 @ =gUnknown_202297E
+	ldr r0, _080B8F90 @ =gBattle_BG2_Y
 _080B8F50:
 	ldrh r0, [r0]
 	strh r0, [r4, 0x22]
@@ -47085,8 +47085,8 @@ _080B8F72:
 	strb r1, [r0]
 	b _080B9056
 	.align 2, 0
-_080B8F8C: .4byte gUnknown_202297C
-_080B8F90: .4byte gUnknown_202297E
+_080B8F8C: .4byte gBattle_BG2_X
+_080B8F90: .4byte gBattle_BG2_Y
 _080B8F94: .4byte gUnknown_2037F1A
 _080B8F98: .4byte gSprites
 _080B8F9C:
@@ -47116,7 +47116,7 @@ _080B8FAC:
 	adds r0, 0x1
 	strh r0, [r4, 0xE]
 _080B8FCE:
-	ldr r1, _080B8FF0 @ =gUnknown_825E074
+	ldr r1, _080B8FF0 @ =gSineTable
 	movs r2, 0xC
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -47131,13 +47131,13 @@ _080B8FCE:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x1
 	bne _080B8FF8
-	ldr r1, _080B8FF4 @ =gUnknown_202297A
+	ldr r1, _080B8FF4 @ =gBattle_BG1_Y
 	b _080B8FFA
 	.align 2, 0
-_080B8FF0: .4byte gUnknown_825E074
-_080B8FF4: .4byte gUnknown_202297A
+_080B8FF0: .4byte gSineTable
+_080B8FF4: .4byte gBattle_BG1_Y
 _080B8FF8:
-	ldr r1, _080B901C @ =gUnknown_202297E
+	ldr r1, _080B901C @ =gBattle_BG2_Y
 _080B8FFA:
 	ldrh r0, [r4, 0x22]
 	subs r0, r2
@@ -47154,13 +47154,13 @@ _080B8FFA:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
 	bne _080B9024
-	ldr r1, _080B9020 @ =gUnknown_202297A
+	ldr r1, _080B9020 @ =gBattle_BG1_Y
 	b _080B9026
 	.align 2, 0
-_080B901C: .4byte gUnknown_202297E
-_080B9020: .4byte gUnknown_202297A
+_080B901C: .4byte gBattle_BG2_Y
+_080B9020: .4byte gBattle_BG1_Y
 _080B9024:
-	ldr r1, _080B9048 @ =gUnknown_202297E
+	ldr r1, _080B9048 @ =gBattle_BG2_Y
 _080B9026:
 	ldrh r0, [r4, 0x22]
 	subs r0, r2
@@ -47180,10 +47180,10 @@ _080B9026:
 	strh r0, [r1, 0x24]
 	b _080B9056
 	.align 2, 0
-_080B9048: .4byte gUnknown_202297E
+_080B9048: .4byte gBattle_BG2_Y
 _080B904C: .4byte gSprites
 _080B9050:
-	ldr r1, _080B9060 @ =gUnknown_2039600
+	ldr r1, _080B9060 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080B9056:
@@ -47192,7 +47192,7 @@ _080B9056:
 	strh r0, [r4, 0x8]
 	b _080B9082
 	.align 2, 0
-_080B9060: .4byte gUnknown_2039600
+_080B9060: .4byte gScanlineEffect
 _080B9064:
 	adds r0, r2, 0
 	bl DestroyAnimVisualTask
@@ -47246,14 +47246,14 @@ sub_80B908C: @ 80B908C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B90D8
-	ldr r0, _080B90D4 @ =gUnknown_202297A
+	ldr r0, _080B90D4 @ =gBattle_BG1_Y
 	b _080B90DA
 	.align 2, 0
 _080B90CC: .4byte gSprites
 _080B90D0: .4byte gUnknown_2037F1A
-_080B90D4: .4byte gUnknown_202297A
+_080B90D4: .4byte gBattle_BG1_Y
 _080B90D8:
-	ldr r0, _080B90E8 @ =gUnknown_202297E
+	ldr r0, _080B90E8 @ =gBattle_BG2_Y
 _080B90DA:
 	strh r4, [r0]
 	adds r0, r5, 0
@@ -47262,7 +47262,7 @@ _080B90DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B90E8: .4byte gUnknown_202297E
+_080B90E8: .4byte gBattle_BG2_Y
 	thumb_func_end sub_80B908C
 
 	thumb_func_start sub_80B90EC
@@ -47412,13 +47412,13 @@ _080B91F0:
 	strh r0, [r4, 0x1E]
 	cmp r0, 0x1
 	bne _080B921C
-	ldr r0, _080B9218 @ =gUnknown_2022978
+	ldr r0, _080B9218 @ =gBattle_BG1_X
 	b _080B921E
 	.align 2, 0
 _080B9214: .4byte gUnknown_2037F1A
-_080B9218: .4byte gUnknown_2022978
+_080B9218: .4byte gBattle_BG1_X
 _080B921C:
-	ldr r0, _080B923C @ =gUnknown_202297C
+	ldr r0, _080B923C @ =gBattle_BG2_X
 _080B921E:
 	ldrh r0, [r0]
 	strh r0, [r4, 0x20]
@@ -47434,7 +47434,7 @@ _080B921E:
 	strh r0, [r4, 0x26]
 	b _080B929A
 	.align 2, 0
-_080B923C: .4byte gUnknown_202297C
+_080B923C: .4byte gBattle_BG2_X
 _080B9240: .4byte gUnknown_2037F1A
 _080B9244:
 	ldrb r0, [r4, 0x1E]
@@ -47477,7 +47477,7 @@ _080B926C:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080B92B2
-	ldr r1, _080B92A8 @ =gUnknown_2039600
+	ldr r1, _080B92A8 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080B929A:
@@ -47487,7 +47487,7 @@ _080B929A:
 	b _080B92B2
 	.align 2, 0
 _080B92A4: .4byte gSprites
-_080B92A8: .4byte gUnknown_2039600
+_080B92A8: .4byte gScanlineEffect
 _080B92AC:
 	adds r0, r2, 0
 	bl DestroyAnimVisualTask
@@ -47509,15 +47509,15 @@ sub_80B92B8: @ 80B92B8
 	lsrs r4, r2, 16
 	cmp r0, 0x1
 	bne _080B92DC
-	ldr r0, _080B92D4 @ =gUnknown_2022978
+	ldr r0, _080B92D4 @ =gBattle_BG1_X
 	ldrh r3, [r0]
 	ldr r0, _080B92D8 @ =0x04000014
 	b _080B92E2
 	.align 2, 0
-_080B92D4: .4byte gUnknown_2022978
+_080B92D4: .4byte gBattle_BG1_X
 _080B92D8: .4byte 0x04000014
 _080B92DC:
-	ldr r0, _080B9368 @ =gUnknown_202297C
+	ldr r0, _080B9368 @ =gBattle_BG2_X
 	ldrh r3, [r0]
 	ldr r0, _080B936C @ =0x04000018
 _080B92E2:
@@ -47532,7 +47532,7 @@ _080B92EC:
 	asrs r4, r0, 16
 	cmp r2, r0
 	bge _080B9318
-	ldr r5, _080B9370 @ =gUnknown_2038700
+	ldr r5, _080B9370 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -47555,7 +47555,7 @@ _080B9318:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _080B9346
-	ldr r4, _080B9370 @ =gUnknown_2038700
+	ldr r4, _080B9370 @ =gScanlineEffectRegBuffers
 	lsls r0, r3, 16
 	asrs r0, 16
 	adds r3, r0, 0
@@ -47587,15 +47587,15 @@ _080B9346:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B9368: .4byte gUnknown_202297C
+_080B9368: .4byte gBattle_BG2_X
 _080B936C: .4byte 0x04000018
-_080B9370: .4byte gUnknown_2038700
+_080B9370: .4byte gScanlineEffectRegBuffers
 _080B9374: .4byte 0xa2600001
 	thumb_func_end sub_80B92B8
 
@@ -47795,14 +47795,14 @@ _080B94EC:
 	beq _080B9518
 	cmp r0, 0x5
 	bne _080B9558
-	ldr r0, _080B9510 @ =gUnknown_2022980
+	ldr r0, _080B9510 @ =gBattle_BG3_X
 	ldrh r0, [r0]
 	strh r0, [r4, 0x22]
 	ldr r0, _080B9514 @ =sub_80B9584
 	b _080B9576
 	.align 2, 0
 _080B950C: .4byte gUnknown_2037EEC
-_080B9510: .4byte gUnknown_2022980
+_080B9510: .4byte gBattle_BG3_X
 _080B9514: .4byte sub_80B9584
 _080B9518:
 	movs r0, 0
@@ -47903,16 +47903,16 @@ _080B95B2:
 	ands r0, r1
 	cmp r0, 0
 	bne _080B95DC
-	ldr r1, _080B95D8 @ =gUnknown_2022980
+	ldr r1, _080B95D8 @ =gBattle_BG3_X
 	ldrh r0, [r3, 0x26]
 	ldrh r2, [r3, 0x22]
 	adds r0, r2
 	strh r0, [r1]
 	b _080B95E6
 	.align 2, 0
-_080B95D8: .4byte gUnknown_2022980
+_080B95D8: .4byte gBattle_BG3_X
 _080B95DC:
-	ldr r0, _080B9604 @ =gUnknown_2022980
+	ldr r0, _080B9604 @ =gBattle_BG3_X
 	ldrh r1, [r3, 0x22]
 	ldrh r2, [r3, 0x26]
 	subs r1, r2
@@ -47934,7 +47934,7 @@ _080B95E6:
 	strh r0, [r3, 0x24]
 	b _080B965C
 	.align 2, 0
-_080B9604: .4byte gUnknown_2022980
+_080B9604: .4byte gBattle_BG3_X
 _080B9608:
 	ldrh r0, [r3, 0xA]
 	adds r0, 0x1
@@ -47949,16 +47949,16 @@ _080B9608:
 	ands r1, r0
 	cmp r1, 0
 	bne _080B9634
-	ldr r1, _080B9630 @ =gUnknown_2022980
+	ldr r1, _080B9630 @ =gBattle_BG3_X
 	ldrh r0, [r3, 0x24]
 	ldrh r2, [r3, 0x22]
 	adds r0, r2
 	strh r0, [r1]
 	b _080B963E
 	.align 2, 0
-_080B9630: .4byte gUnknown_2022980
+_080B9630: .4byte gBattle_BG3_X
 _080B9634:
-	ldr r0, _080B9664 @ =gUnknown_2022980
+	ldr r0, _080B9664 @ =gBattle_BG3_X
 	ldrh r1, [r3, 0x22]
 	ldrh r2, [r3, 0x24]
 	subs r1, r2
@@ -47985,9 +47985,9 @@ _080B965C:
 	strh r0, [r3, 0x8]
 	b _080B9674
 	.align 2, 0
-_080B9664: .4byte gUnknown_2022980
+_080B9664: .4byte gBattle_BG3_X
 _080B9668:
-	ldr r1, _080B9678 @ =gUnknown_2022980
+	ldr r1, _080B9678 @ =gBattle_BG3_X
 	ldrh r0, [r3, 0x22]
 	strh r0, [r1]
 	adds r0, r2, 0
@@ -47996,7 +47996,7 @@ _080B9674:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B9678: .4byte gUnknown_2022980
+_080B9678: .4byte gBattle_BG3_X
 	thumb_func_end sub_80B9584
 
 	thumb_func_start sub_80B967C
@@ -48271,10 +48271,10 @@ _080B9832:
 	movs r0, 0xFF
 	ands r1, r0
 	strh r1, [r4, 0xC]
-	ldr r2, _080B98A0 @ =gUnknown_2022980
+	ldr r2, _080B98A0 @ =gBattle_BG3_X
 	ldrh r0, [r4, 0xA]
 	strh r0, [r2]
-	ldr r0, _080B98A4 @ =gUnknown_2022982
+	ldr r0, _080B98A4 @ =gBattle_BG3_Y
 	strh r1, [r0]
 	ldrh r0, [r6, 0x4]
 	strh r0, [r4, 0xE]
@@ -48288,8 +48288,8 @@ _080B9890: .4byte gUnknown_2037F1A
 _080B9894: .4byte sub_80B98A8
 _080B9898: .4byte gTasks
 _080B989C: .4byte 0x000001ff
-_080B98A0: .4byte gUnknown_2022980
-_080B98A4: .4byte gUnknown_2022982
+_080B98A0: .4byte gBattle_BG3_X
+_080B98A4: .4byte gBattle_BG3_Y
 	thumb_func_end sub_80B9800
 
 	thumb_func_start sub_80B98A8
@@ -48309,10 +48309,10 @@ sub_80B98A8: @ 80B98A8
 	ldrsh r0, [r2, r4]
 	cmp r1, r0
 	bne _080B98E8
-	ldr r0, _080B98E0 @ =gUnknown_2022980
+	ldr r0, _080B98E0 @ =gBattle_BG3_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080B98E4 @ =gUnknown_2022982
+	ldr r0, _080B98E4 @ =gBattle_BG3_Y
 	strh r1, [r0]
 	adds r0, r3, 0
 	bl DestroyTask
@@ -48320,13 +48320,13 @@ sub_80B98A8: @ 80B98A8
 	.align 2, 0
 _080B98D8: .4byte gTasks
 _080B98DC: .4byte gUnknown_2037F02
-_080B98E0: .4byte gUnknown_2022980
-_080B98E4: .4byte gUnknown_2022982
+_080B98E0: .4byte gBattle_BG3_X
+_080B98E4: .4byte gBattle_BG3_Y
 _080B98E8:
-	ldr r1, _080B98FC @ =gUnknown_2022980
+	ldr r1, _080B98FC @ =gBattle_BG3_X
 	ldrh r0, [r2, 0xA]
 	strh r0, [r1]
-	ldr r1, _080B9900 @ =gUnknown_2022982
+	ldr r1, _080B9900 @ =gBattle_BG3_Y
 	ldrh r0, [r2, 0xC]
 	strh r0, [r1]
 _080B98F4:
@@ -48334,8 +48334,8 @@ _080B98F4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B98FC: .4byte gUnknown_2022980
-_080B9900: .4byte gUnknown_2022982
+_080B98FC: .4byte gBattle_BG3_X
+_080B9900: .4byte gBattle_BG3_Y
 	thumb_func_end sub_80B98A8
 
 	thumb_func_start sub_80B9904
@@ -49629,15 +49629,15 @@ _080BA2B4:
 	beq _080BA2CC
 	b _080BA2DC
 _080BA2BA:
-	ldr r1, _080BA2C0 @ =gUnknown_2022980
+	ldr r1, _080BA2C0 @ =gBattle_BG3_X
 	b _080BA2CE
 	.align 2, 0
-_080BA2C0: .4byte gUnknown_2022980
+_080BA2C0: .4byte gBattle_BG3_X
 _080BA2C4:
-	ldr r1, _080BA2C8 @ =gUnknown_2022982
+	ldr r1, _080BA2C8 @ =gBattle_BG3_Y
 	b _080BA2CE
 	.align 2, 0
-_080BA2C8: .4byte gUnknown_2022982
+_080BA2C8: .4byte gBattle_BG3_Y
 _080BA2CC:
 	ldr r1, _080BA2D8 @ =gSpriteCoordOffsetX
 _080BA2CE:
@@ -49883,10 +49883,10 @@ sub_80BA47C: @ 80BA47C
 	strh r1, [r2, 0xE]
 	ldrh r1, [r3, 0x6]
 	strh r1, [r2, 0x18]
-	ldr r4, _080BA4C4 @ =gUnknown_2022980
+	ldr r4, _080BA4C4 @ =gBattle_BG3_X
 	ldrh r1, [r3]
 	strh r1, [r4]
-	ldr r4, _080BA4C8 @ =gUnknown_2022982
+	ldr r4, _080BA4C8 @ =gBattle_BG3_Y
 	ldrh r1, [r3, 0x2]
 	strh r1, [r4]
 	ldr r1, _080BA4CC @ =sub_80BA4D0
@@ -49898,8 +49898,8 @@ sub_80BA47C: @ 80BA47C
 	.align 2, 0
 _080BA4BC: .4byte gTasks
 _080BA4C0: .4byte gUnknown_2037F02
-_080BA4C4: .4byte gUnknown_2022980
-_080BA4C8: .4byte gUnknown_2022982
+_080BA4C4: .4byte gBattle_BG3_X
+_080BA4C8: .4byte gBattle_BG3_Y
 _080BA4CC: .4byte sub_80BA4D0
 	thumb_func_end sub_80BA47C
 
@@ -49919,7 +49919,7 @@ sub_80BA4D0: @ 80BA4D0
 	mov r12, r1
 	cmp r0, 0
 	bne _080BA556
-	ldr r0, _080BA504 @ =gUnknown_2022980
+	ldr r0, _080BA504 @ =gBattle_BG3_X
 	ldrh r2, [r0]
 	movs r7, 0x8
 	ldrsh r1, [r3, r7]
@@ -49931,12 +49931,12 @@ sub_80BA4D0: @ 80BA4D0
 	b _080BA50A
 	.align 2, 0
 _080BA500: .4byte gTasks
-_080BA504: .4byte gUnknown_2022980
+_080BA504: .4byte gBattle_BG3_X
 _080BA508:
 	ldrh r0, [r3, 0x8]
 _080BA50A:
 	strh r0, [r6]
-	ldr r2, _080BA528 @ =gUnknown_2022982
+	ldr r2, _080BA528 @ =gBattle_BG3_Y
 	ldrh r3, [r2]
 	lsls r1, r5, 2
 	adds r0, r1, r5
@@ -49950,7 +49950,7 @@ _080BA50A:
 	movs r0, 0
 	b _080BA530
 	.align 2, 0
-_080BA528: .4byte gUnknown_2022982
+_080BA528: .4byte gBattle_BG3_Y
 _080BA52C:
 	ldrh r0, [r4, 0xA]
 	negs r0, r0
@@ -51171,7 +51171,7 @@ _080BAEAC:
 	adds r1, 0x1
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r2, _080BAF24 @ =gUnknown_2022978
+	ldr r2, _080BAF24 @ =gBattle_BG1_X
 	ldr r0, _080BAF28 @ =gSprites
 	lsls r1, r5, 4
 	adds r1, r5
@@ -51181,7 +51181,7 @@ _080BAEAC:
 	negs r0, r0
 	adds r0, 0x20
 	strh r0, [r2]
-	ldr r2, _080BAF2C @ =gUnknown_202297A
+	ldr r2, _080BAF2C @ =gBattle_BG1_Y
 	ldrh r0, [r1, 0x22]
 	negs r0, r0
 	adds r0, 0x20
@@ -51210,9 +51210,9 @@ _080BAF14: .4byte gUnknown_2037F1A
 _080BAF18: .4byte gFile_graphics_battle_anims_masks_curse_tilemap
 _080BAF1C: .4byte gFile_graphics_battle_anims_masks_curse_sheet
 _080BAF20: .4byte gUnknown_83E7CC8
-_080BAF24: .4byte gUnknown_2022978
+_080BAF24: .4byte gBattle_BG1_X
 _080BAF28: .4byte gSprites
-_080BAF2C: .4byte gUnknown_202297A
+_080BAF2C: .4byte gBattle_BG1_Y
 _080BAF30: .4byte gTasks
 _080BAF34: .4byte sub_80BAF38
 	thumb_func_end sub_80BACEC
@@ -51236,7 +51236,7 @@ sub_80BAF38: @ 80BAF38
 	movs r1, 0
 	mov r8, r1
 	strh r0, [r5, 0x1C]
-	ldr r7, _080BB06C @ =gUnknown_202297A
+	ldr r7, _080BB06C @ =gBattle_BG1_Y
 	ldrh r2, [r7]
 	subs r1, r2, 0x4
 	strh r1, [r7]
@@ -51360,7 +51360,7 @@ _080BB05A:
 	bx r0
 	.align 2, 0
 _080BB068: .4byte gTasks
-_080BB06C: .4byte gUnknown_202297A
+_080BB06C: .4byte gBattle_BG1_Y
 _080BB070: .4byte gUnknown_2022984
 _080BB074: .4byte gUnknown_2022986
 _080BB078: .4byte 0x00003f3f
@@ -51763,10 +51763,10 @@ _080BB3C4:
 	movs r2, 0x20
 	bl LoadCompressedPalette
 _080BB3D2:
-	ldr r3, _080BB400 @ =gUnknown_2022978
+	ldr r3, _080BB400 @ =gBattle_BG1_X
 	movs r2, 0
 	strh r2, [r3]
-	ldr r0, _080BB404 @ =gUnknown_202297A
+	ldr r0, _080BB404 @ =gBattle_BG1_Y
 	strh r2, [r0]
 	ldr r1, _080BB408 @ =gUnknown_20399B4
 	ldr r0, [r1]
@@ -51786,8 +51786,8 @@ _080BB3D2:
 	b _080BB420
 	.align 2, 0
 _080BB3FC: .4byte gFile_graphics_battle_anims_masks_stat5_palette
-_080BB400: .4byte gUnknown_2022978
-_080BB404: .4byte gUnknown_202297A
+_080BB400: .4byte gBattle_BG1_X
+_080BB404: .4byte gBattle_BG1_Y
 _080BB408: .4byte gUnknown_20399B4
 _080BB40C: .4byte gTasks
 _080BB410: .4byte 0x0000fffd
@@ -51880,7 +51880,7 @@ sub_80BB4B8: @ 80BB4B8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r2, _080BB4E4 @ =gUnknown_202297A
+	ldr r2, _080BB4E4 @ =gBattle_BG1_Y
 	ldr r1, _080BB4E8 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
@@ -51900,7 +51900,7 @@ sub_80BB4B8: @ 80BB4B8
 	beq _080BB4F6
 	b _080BB644
 	.align 2, 0
-_080BB4E4: .4byte gUnknown_202297A
+_080BB4E4: .4byte gBattle_BG1_Y
 _080BB4E8: .4byte gTasks
 _080BB4EC:
 	cmp r2, 0x2
@@ -52406,13 +52406,13 @@ sub_80BB8A4: @ 80BB8A4
 	ldrh r7, [r1, 0x1E]
 	adds r2, r7
 	strh r2, [r1, 0x1E]
-	ldr r6, _080BB914 @ =gUnknown_2022980
+	ldr r6, _080BB914 @ =gBattle_BG3_X
 	lsls r0, r3, 16
 	asrs r0, 24
 	ldrh r4, [r6]
 	adds r0, r4
 	strh r0, [r6]
-	ldr r4, _080BB918 @ =gUnknown_2022982
+	ldr r4, _080BB918 @ =gBattle_BG3_Y
 	lsls r0, r2, 16
 	asrs r0, 24
 	ldrh r7, [r4]
@@ -52443,8 +52443,8 @@ _080BB90A:
 	bx r0
 	.align 2, 0
 _080BB910: .4byte gTasks
-_080BB914: .4byte gUnknown_2022980
-_080BB918: .4byte gUnknown_2022982
+_080BB914: .4byte gBattle_BG3_X
+_080BB918: .4byte gBattle_BG3_Y
 _080BB91C: .4byte gUnknown_2037F02
 	thumb_func_end sub_80BB8A4
 
@@ -52772,10 +52772,10 @@ _080BBBA8:
 	ldr r0, [sp, 0x5C]
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	ldr r0, _080BBC1C @ =gUnknown_2022978
+	ldr r0, _080BBC1C @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080BBC20 @ =gUnknown_202297A
+	ldr r0, _080BBC20 @ =gBattle_BG1_Y
 	strh r1, [r0]
 	ldr r1, _080BBC24 @ =gTasks
 	mov r2, r9
@@ -52814,8 +52814,8 @@ _080BBBA8:
 _080BBC10: .4byte gBattlerPartyIndexes
 _080BBC14: .4byte gPlayerParty
 _080BBC18: .4byte gUnknown_2023D44
-_080BBC1C: .4byte gUnknown_2022978
-_080BBC20: .4byte gUnknown_202297A
+_080BBC1C: .4byte gBattle_BG1_X
+_080BBC20: .4byte gBattle_BG1_Y
 _080BBC24: .4byte gTasks
 _080BBC28: .4byte sub_80BBC2C
 	thumb_func_end sub_80BBA20
@@ -52845,7 +52845,7 @@ _080BBC4A:
 	ldrsh r0, [r3, r1]
 	cmp r0, 0
 	bge _080BBC70
-	ldr r2, _080BBC6C @ =gUnknown_202297A
+	ldr r2, _080BBC6C @ =gBattle_BG1_Y
 	lsls r1, r4, 16
 	asrs r1, 24
 	ldrh r0, [r2]
@@ -52854,9 +52854,9 @@ _080BBC4A:
 	b _080BBC7C
 	.align 2, 0
 _080BBC68: .4byte gTasks
-_080BBC6C: .4byte gUnknown_202297A
+_080BBC6C: .4byte gBattle_BG1_Y
 _080BBC70:
-	ldr r1, _080BBCA0 @ =gUnknown_202297A
+	ldr r1, _080BBCA0 @ =gBattle_BG1_Y
 	lsls r0, r4, 16
 	asrs r0, 24
 	ldrh r2, [r1]
@@ -52882,7 +52882,7 @@ _080BBC7C:
 	beq _080BBCAA
 	b _080BBDD8
 	.align 2, 0
-_080BBCA0: .4byte gUnknown_202297A
+_080BBCA0: .4byte gBattle_BG1_Y
 _080BBCA4:
 	cmp r0, 0x2
 	beq _080BBD00
@@ -53860,14 +53860,14 @@ sub_80BC41C: @ 80BC41C
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
-	ldr r0, _080BC468 @ =gUnknown_2022978
+	ldr r0, _080BC468 @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080BC46C @ =gUnknown_202297A
+	ldr r0, _080BC46C @ =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, _080BC470 @ =gUnknown_202297C
+	ldr r0, _080BC470 @ =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r0, _080BC474 @ =gUnknown_202297E
+	ldr r0, _080BC474 @ =gBattle_BG2_Y
 	strh r1, [r0]
 	movs r0, 0x50
 	movs r1, 0
@@ -53889,10 +53889,10 @@ sub_80BC41C: @ 80BC41C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BC468: .4byte gUnknown_2022978
-_080BC46C: .4byte gUnknown_202297A
-_080BC470: .4byte gUnknown_202297C
-_080BC474: .4byte gUnknown_202297E
+_080BC468: .4byte gBattle_BG1_X
+_080BC46C: .4byte gBattle_BG1_Y
+_080BC470: .4byte gBattle_BG2_X
+_080BC474: .4byte gBattle_BG2_Y
 _080BC478: .4byte 0x00003f3f
 	thumb_func_end sub_80BC41C
 
@@ -53905,7 +53905,7 @@ task_battle_intro_80BC47C: @ 80BC47C
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _080BC4B4 @ =gUnknown_2022978
+	ldr r1, _080BC4B4 @ =gBattle_BG1_X
 	ldrh r0, [r1]
 	adds r0, 0x6
 	strh r0, [r1]
@@ -53927,7 +53927,7 @@ _080BC4A8:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080BC4B4: .4byte gUnknown_2022978
+_080BC4B4: .4byte gBattle_BG1_X
 _080BC4B8: .4byte gTasks
 _080BC4BC: .4byte _080BC4C0
 	.align 2, 0
@@ -54040,7 +54040,7 @@ _080BC590:
 	ldrsh r0, [r2, r1]
 	cmp r0, 0x1
 	bne _080BC5B0
-	ldr r2, _080BC5A8 @ =gUnknown_202297A
+	ldr r2, _080BC5A8 @ =gBattle_BG1_Y
 	ldrh r1, [r2]
 	ldr r0, _080BC5AC @ =0x0000ffb0
 	cmp r1, r0
@@ -54048,10 +54048,10 @@ _080BC590:
 	subs r0, r1, 0x2
 	b _080BC5BC
 	.align 2, 0
-_080BC5A8: .4byte gUnknown_202297A
+_080BC5A8: .4byte gBattle_BG1_Y
 _080BC5AC: .4byte 0x0000ffb0
 _080BC5B0:
-	ldr r2, _080BC690 @ =gUnknown_202297A
+	ldr r2, _080BC690 @ =gBattle_BG1_Y
 	ldrh r1, [r2]
 	ldr r0, _080BC694 @ =0x0000ffc8
 	cmp r1, r0
@@ -54085,9 +54085,9 @@ _080BC5D2:
 	strh r0, [r1, 0xC]
 _080BC5EA:
 	movs r3, 0
-	ldr r5, _080BC6A0 @ =gUnknown_2039600
+	ldr r5, _080BC6A0 @ =gScanlineEffect
 	mov r9, r5
-	ldr r7, _080BC6A4 @ =gUnknown_2038700
+	ldr r7, _080BC6A4 @ =gScanlineEffectRegBuffers
 	mov r6, r9
 	adds r5, r1, 0
 _080BC5F6:
@@ -54105,8 +54105,8 @@ _080BC5F6:
 	ble _080BC5F6
 	cmp r3, 0x9F
 	bgt _080BC63A
-	ldr r7, _080BC6A4 @ =gUnknown_2038700
-	ldr r6, _080BC6A0 @ =gUnknown_2039600
+	ldr r7, _080BC6A4 @ =gScanlineEffectRegBuffers
+	ldr r6, _080BC6A0 @ =gScanlineEffect
 	ldr r1, _080BC6A8 @ =gTasks
 	mov r2, r12
 	adds r0, r2, r4
@@ -54165,12 +54165,12 @@ _080BC63A:
 	bl SetGpuReg
 	b _080BC6BA
 	.align 2, 0
-_080BC690: .4byte gUnknown_202297A
+_080BC690: .4byte gBattle_BG1_Y
 _080BC694: .4byte 0x0000ffc8
 _080BC698: .4byte gUnknown_2022986
 _080BC69C: .4byte 0xfffffc04
-_080BC6A0: .4byte gUnknown_2039600
-_080BC6A4: .4byte gUnknown_2038700
+_080BC6A0: .4byte gScanlineEffect
+_080BC6A4: .4byte gScanlineEffectRegBuffers
 _080BC6A8: .4byte gTasks
 _080BC6AC: .4byte 0x0600e000
 _080BC6B0: .4byte 0x05000200
@@ -54216,14 +54216,14 @@ _080BC6F8:
 	cmp r0, 0x4
 	bne _080BC710
 _080BC6FC:
-	ldr r1, _080BC704 @ =gUnknown_2022978
+	ldr r1, _080BC704 @ =gBattle_BG1_X
 	ldrh r0, [r1]
 	adds r0, 0x8
 	b _080BC70E
 	.align 2, 0
-_080BC704: .4byte gUnknown_2022978
+_080BC704: .4byte gBattle_BG1_X
 _080BC708:
-	ldr r1, _080BC74C @ =gUnknown_2022978
+	ldr r1, _080BC74C @ =gBattle_BG1_X
 	ldrh r0, [r1]
 	adds r0, 0x6
 _080BC70E:
@@ -54238,7 +54238,7 @@ _080BC710:
 	adds r6, r0, 0
 	cmp r1, 0x4
 	bne _080BC774
-	ldr r7, _080BC750 @ =gUnknown_202297A
+	ldr r7, _080BC750 @ =gBattle_BG1_Y
 	ldrh r0, [r4, 0x14]
 	bl Cos2
 	lsls r0, 16
@@ -54259,8 +54259,8 @@ _080BC736:
 	adds r0, r1, 0x4
 	b _080BC75A
 	.align 2, 0
-_080BC74C: .4byte gUnknown_2022978
-_080BC750: .4byte gUnknown_202297A
+_080BC74C: .4byte gBattle_BG1_X
+_080BC750: .4byte gBattle_BG1_Y
 _080BC754: .4byte 0x000001ff
 _080BC758:
 	adds r0, r1, 0x6
@@ -54459,9 +54459,9 @@ _080BC8CC:
 	strh r0, [r1, 0xC]
 _080BC8E2:
 	movs r3, 0
-	ldr r0, _080BC994 @ =gUnknown_2039600
+	ldr r0, _080BC994 @ =gScanlineEffect
 	mov r8, r0
-	ldr r2, _080BC998 @ =gUnknown_2038700
+	ldr r2, _080BC998 @ =gScanlineEffectRegBuffers
 	mov r12, r2
 	mov r7, r8
 	adds r4, r1, 0
@@ -54480,9 +54480,9 @@ _080BC8F0:
 	ble _080BC8F0
 	cmp r3, 0x9F
 	bgt _080BC934
-	ldr r0, _080BC998 @ =gUnknown_2038700
+	ldr r0, _080BC998 @ =gScanlineEffectRegBuffers
 	mov r12, r0
-	ldr r7, _080BC994 @ =gUnknown_2039600
+	ldr r7, _080BC994 @ =gScanlineEffect
 	ldr r1, _080BC990 @ =gTasks
 	adds r0, r6, r5
 	lsls r0, 3
@@ -54542,8 +54542,8 @@ _080BC934:
 _080BC988: .4byte gUnknown_2022986
 _080BC98C: .4byte 0xfffffc04
 _080BC990: .4byte gTasks
-_080BC994: .4byte gUnknown_2039600
-_080BC998: .4byte gUnknown_2038700
+_080BC994: .4byte gScanlineEffect
+_080BC998: .4byte gScanlineEffectRegBuffers
 _080BC99C: .4byte 0x0600e000
 _080BC9A0: .4byte 0x05000200
 _080BC9A4:
@@ -54580,7 +54580,7 @@ task_battle_intro_anim: @ 80BC9D4
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _080BCA08 @ =gUnknown_2022978
+	ldr r1, _080BCA08 @ =gBattle_BG1_X
 	ldrh r0, [r1]
 	adds r0, 0x8
 	strh r0, [r1]
@@ -54602,7 +54602,7 @@ _080BC9FE:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080BCA08: .4byte gUnknown_2022978
+_080BCA08: .4byte gBattle_BG1_X
 _080BCA0C: .4byte gTasks
 _080BCA10: .4byte _080BCA14
 	.align 2, 0
@@ -54768,9 +54768,9 @@ _080BCB46:
 	strh r0, [r1, 0xC]
 _080BCB5C:
 	movs r3, 0
-	ldr r6, _080BCC08 @ =gUnknown_2039600
+	ldr r6, _080BCC08 @ =gScanlineEffect
 	mov r8, r6
-	ldr r7, _080BCC0C @ =gUnknown_2038700
+	ldr r7, _080BCC0C @ =gScanlineEffectRegBuffers
 	adds r4, r1, 0
 _080BCB66:
 	lsls r2, r3, 1
@@ -54787,8 +54787,8 @@ _080BCB66:
 	ble _080BCB66
 	cmp r3, 0x9F
 	bgt _080BCBAA
-	ldr r7, _080BCC0C @ =gUnknown_2038700
-	ldr r6, _080BCC08 @ =gUnknown_2039600
+	ldr r7, _080BCC0C @ =gScanlineEffectRegBuffers
+	ldr r6, _080BCC08 @ =gScanlineEffect
 	ldr r1, _080BCC10 @ =gTasks
 	mov r2, r12
 	adds r0, r2, r5
@@ -54849,8 +54849,8 @@ _080BCBAA:
 	.align 2, 0
 _080BCC00: .4byte gUnknown_2022986
 _080BCC04: .4byte 0xfffffc04
-_080BCC08: .4byte gUnknown_2039600
-_080BCC0C: .4byte gUnknown_2038700
+_080BCC08: .4byte gScanlineEffect
+_080BCC0C: .4byte gScanlineEffectRegBuffers
 _080BCC10: .4byte gTasks
 _080BCC14: .4byte 0x0600e000
 _080BCC18: .4byte 0x05000200
@@ -54903,7 +54903,7 @@ sub_80BCC4C: @ 80BCC4C
 	ldrsh r0, [r7, r2]
 	cmp r0, 0
 	bne _080BCCC2
-	ldr r2, _080BCC9C @ =gUnknown_2022978
+	ldr r2, _080BCC9C @ =gBattle_BG1_X
 	ldrh r1, [r2]
 	movs r0, 0x80
 	lsls r0, 8
@@ -54917,15 +54917,15 @@ sub_80BCC4C: @ 80BCC4C
 _080BCC8A:
 	adds r0, r1, 0x3
 	strh r0, [r2]
-	ldr r1, _080BCCA0 @ =gUnknown_202297C
+	ldr r1, _080BCCA0 @ =gBattle_BG2_X
 	ldrh r0, [r1]
 	subs r0, 0x3
 	strh r0, [r1]
 	b _080BCCC2
 	.align 2, 0
 _080BCC98: .4byte gTasks
-_080BCC9C: .4byte gUnknown_2022978
-_080BCCA0: .4byte gUnknown_202297C
+_080BCC9C: .4byte gBattle_BG1_X
+_080BCCA0: .4byte gBattle_BG2_X
 _080BCCA4:
 	str r5, [sp]
 	ldr r1, _080BCCE4 @ =0x0600e000
@@ -55120,9 +55120,9 @@ _080BCE1C:
 	strh r0, [r1, 0xC]
 _080BCE32:
 	movs r3, 0
-	ldr r0, _080BCED4 @ =gUnknown_2039600
+	ldr r0, _080BCED4 @ =gScanlineEffect
 	mov r12, r0
-	ldr r2, _080BCED8 @ =gUnknown_2038700
+	ldr r2, _080BCED8 @ =gScanlineEffectRegBuffers
 	mov r8, r2
 	mov r7, r12
 	adds r4, r1, 0
@@ -55141,9 +55141,9 @@ _080BCE40:
 	ble _080BCE40
 	cmp r3, 0x9F
 	bgt _080BCE84
-	ldr r0, _080BCED8 @ =gUnknown_2038700
+	ldr r0, _080BCED8 @ =gScanlineEffectRegBuffers
 	mov r8, r0
-	ldr r7, _080BCED4 @ =gUnknown_2039600
+	ldr r7, _080BCED4 @ =gScanlineEffect
 	ldr r1, _080BCEDC @ =gTasks
 	adds r0, r5, r6
 	lsls r0, 3
@@ -55197,8 +55197,8 @@ _080BCE84:
 	.align 2, 0
 _080BCECC: .4byte gUnknown_2022986
 _080BCED0: .4byte 0xfffffc04
-_080BCED4: .4byte gUnknown_2039600
-_080BCED8: .4byte gUnknown_2038700
+_080BCED4: .4byte gScanlineEffect
+_080BCED8: .4byte gScanlineEffectRegBuffers
 _080BCEDC: .4byte gTasks
 _080BCEE0:
 	adds r0, r6, 0

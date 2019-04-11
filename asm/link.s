@@ -3252,7 +3252,7 @@ c2_800ACD4: @ 800ACD4
 	movs r2, 0x2
 	bl FillPalette
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r1, _0800ADF0 @ =gWirelessCommType
 	ldrb r0, [r1]
 	cmp r0, 0

@@ -187,7 +187,7 @@ _0813CED0:
 	bl clear_scheduled_bg_copies_to_vram
 	b _0813CFD2
 _0813CEDA:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _0813CFD2
 _0813CEE0:
 	bl FreeAllSpritePalettes

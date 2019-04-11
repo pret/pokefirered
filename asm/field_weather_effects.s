@@ -1972,7 +1972,7 @@ sub_807C1AC: @ 807C1AC
 	movs r1, 0xFF
 	ands r0, r1
 	strh r0, [r4, 0x34]
-	ldr r1, _0807C224 @ =gUnknown_825E074
+	ldr r1, _0807C224 @ =gSineTable
 	movs r3, 0x34
 	ldrsh r0, [r4, r3]
 	lsls r0, 1
@@ -2020,7 +2020,7 @@ _0807C210:
 	subs r0, r1
 	b _0807C23C
 	.align 2, 0
-_0807C224: .4byte gUnknown_825E074
+_0807C224: .4byte gSineTable
 _0807C228: .4byte gSpriteCoordOffsetX
 _0807C22C: .4byte 0x000001ff
 _0807C230: .4byte 0xffffff00
@@ -4417,7 +4417,7 @@ sub_807D4C4: @ 807D4C4
 	ldr r2, [r0]
 	ldr r0, _0807D52C @ =0x00000704
 	adds r4, r2, r0
-	ldr r6, _0807D530 @ =gUnknown_825E074
+	ldr r6, _0807D530 @ =gSineTable
 	ldr r1, _0807D534 @ =0x00000712
 	adds r5, r2, r1
 	ldrh r0, [r5]
@@ -4465,7 +4465,7 @@ sub_807D4C4: @ 807D4C4
 	.align 2, 0
 _0807D528: .4byte gUnknown_83C2BBC
 _0807D52C: .4byte 0x00000704
-_0807D530: .4byte gUnknown_825E074
+_0807D530: .4byte gSineTable
 _0807D534: .4byte 0x00000712
 _0807D538: .4byte gSpriteCoordOffsetX
 _0807D53C: .4byte 0x0000070e
@@ -4856,7 +4856,7 @@ SandstormSpriteCallback3: @ 807D81C
 _0807D83A:
 	movs r0, 0x2E
 	ldrsh r4, [r5, r0]
-	ldr r3, _0807D88C @ =gUnknown_825E074
+	ldr r3, _0807D88C @ =gSineTable
 	movs r2, 0x30
 	ldrsh r1, [r5, r2]
 	lsls r0, r1, 1
@@ -4897,7 +4897,7 @@ _0807D886:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D88C: .4byte gUnknown_825E074
+_0807D88C: .4byte gSineTable
 	thumb_func_end SandstormSpriteCallback3
 
 	thumb_func_start Weather11_InitVars

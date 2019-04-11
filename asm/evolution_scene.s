@@ -171,25 +171,25 @@ EvolutionScene: @ 80CDDF4
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetPaletteFade
-	ldr r0, _080CE080 @ =gUnknown_2022974
+	ldr r0, _080CE080 @ =gBattle_BG0_X
 	movs r2, 0
 	strh r2, [r0]
-	ldr r0, _080CE084 @ =gUnknown_2022976
+	ldr r0, _080CE084 @ =gBattle_BG0_Y
 	strh r2, [r0]
-	ldr r0, _080CE088 @ =gUnknown_2022978
+	ldr r0, _080CE088 @ =gBattle_BG1_X
 	strh r2, [r0]
-	ldr r0, _080CE08C @ =gUnknown_202297A
+	ldr r0, _080CE08C @ =gBattle_BG1_Y
 	strh r2, [r0]
-	ldr r0, _080CE090 @ =gUnknown_202297C
+	ldr r0, _080CE090 @ =gBattle_BG2_X
 	strh r2, [r0]
-	ldr r0, _080CE094 @ =gUnknown_202297E
+	ldr r0, _080CE094 @ =gBattle_BG2_Y
 	strh r2, [r0]
-	ldr r1, _080CE098 @ =gUnknown_2022980
+	ldr r1, _080CE098 @ =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _080CE09C @ =gUnknown_2022982
+	ldr r0, _080CE09C @ =gBattle_BG3_Y
 	movs r1, 0
 	strh r1, [r0]
 	ldr r1, _080CE0A0 @ =gUnknown_2022B50
@@ -198,7 +198,7 @@ EvolutionScene: @ 80CDDF4
 	bl sub_800F34C
 	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl FreeAllSpritePalettes
 	ldr r0, _080CE0A4 @ =gReservedSpritePaletteCount
@@ -401,14 +401,14 @@ EvolutionScene: @ 80CDDF4
 	bx r0
 	.align 2, 0
 _080CE07C: .4byte 0x05006000
-_080CE080: .4byte gUnknown_2022974
-_080CE084: .4byte gUnknown_2022976
-_080CE088: .4byte gUnknown_2022978
-_080CE08C: .4byte gUnknown_202297A
-_080CE090: .4byte gUnknown_202297C
-_080CE094: .4byte gUnknown_202297E
-_080CE098: .4byte gUnknown_2022980
-_080CE09C: .4byte gUnknown_2022982
+_080CE080: .4byte gBattle_BG0_X
+_080CE084: .4byte gBattle_BG0_Y
+_080CE088: .4byte gBattle_BG1_X
+_080CE08C: .4byte gBattle_BG1_Y
+_080CE090: .4byte gBattle_BG2_X
+_080CE094: .4byte gBattle_BG2_Y
+_080CE098: .4byte gBattle_BG3_X
+_080CE09C: .4byte gBattle_BG3_Y
 _080CE0A0: .4byte gUnknown_2022B50
 _080CE0A4: .4byte gReservedSpritePaletteCount
 _080CE0A8: .4byte gUnknown_2039A20
@@ -494,24 +494,24 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetPaletteFade
-	ldr r0, _080CE290 @ =gUnknown_2022974
+	ldr r0, _080CE290 @ =gBattle_BG0_X
 	strh r4, [r0]
-	ldr r0, _080CE294 @ =gUnknown_2022976
+	ldr r0, _080CE294 @ =gBattle_BG0_Y
 	strh r4, [r0]
-	ldr r0, _080CE298 @ =gUnknown_2022978
+	ldr r0, _080CE298 @ =gBattle_BG1_X
 	strh r4, [r0]
-	ldr r0, _080CE29C @ =gUnknown_202297A
+	ldr r0, _080CE29C @ =gBattle_BG1_Y
 	strh r4, [r0]
-	ldr r0, _080CE2A0 @ =gUnknown_202297C
+	ldr r0, _080CE2A0 @ =gBattle_BG2_X
 	strh r4, [r0]
-	ldr r0, _080CE2A4 @ =gUnknown_202297E
+	ldr r0, _080CE2A4 @ =gBattle_BG2_Y
 	strh r4, [r0]
-	ldr r1, _080CE2A8 @ =gUnknown_2022980
+	ldr r1, _080CE2A8 @ =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _080CE2AC @ =gUnknown_2022982
+	ldr r0, _080CE2AC @ =gBattle_BG3_Y
 	strh r4, [r0]
 	ldr r1, _080CE2B0 @ =gUnknown_2022B50
 	movs r0, 0x9
@@ -608,14 +608,14 @@ _080CE280: .4byte gTasks
 _080CE284: .4byte gUnknown_2039A20
 _080CE288: .4byte gPlayerParty
 _080CE28C: .4byte 0x05006000
-_080CE290: .4byte gUnknown_2022974
-_080CE294: .4byte gUnknown_2022976
-_080CE298: .4byte gUnknown_2022978
-_080CE29C: .4byte gUnknown_202297A
-_080CE2A0: .4byte gUnknown_202297C
-_080CE2A4: .4byte gUnknown_202297E
-_080CE2A8: .4byte gUnknown_2022980
-_080CE2AC: .4byte gUnknown_2022982
+_080CE290: .4byte gBattle_BG0_X
+_080CE294: .4byte gBattle_BG0_Y
+_080CE298: .4byte gBattle_BG1_X
+_080CE29C: .4byte gBattle_BG1_Y
+_080CE2A0: .4byte gBattle_BG2_X
+_080CE2A4: .4byte gBattle_BG2_Y
+_080CE2A8: .4byte gBattle_BG3_X
+_080CE2AC: .4byte gBattle_BG3_Y
 _080CE2B0: .4byte gUnknown_2022B50
 _080CE2B4: .4byte gReservedSpritePaletteCount
 _080CE2B8: .4byte gUnknown_82350AC
@@ -691,37 +691,37 @@ _080CE34C:
 	ldr r1, _080CE398 @ =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r0, _080CE39C @ =gUnknown_2022974
+	ldr r0, _080CE39C @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080CE3A0 @ =gUnknown_2022976
+	ldr r0, _080CE3A0 @ =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r0, _080CE3A4 @ =gUnknown_2022978
+	ldr r0, _080CE3A4 @ =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r0, _080CE3A8 @ =gUnknown_202297A
+	ldr r0, _080CE3A8 @ =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, _080CE3AC @ =gUnknown_202297C
+	ldr r0, _080CE3AC @ =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r0, _080CE3B0 @ =gUnknown_202297E
+	ldr r0, _080CE3B0 @ =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r2, _080CE3B4 @ =gUnknown_2022980
+	ldr r2, _080CE3B4 @ =gBattle_BG3_X
 	movs r3, 0x80
 	lsls r3, 1
 	adds r0, r3, 0
 	strh r0, [r2]
-	ldr r0, _080CE3B8 @ =gUnknown_2022982
+	ldr r0, _080CE3B8 @ =gBattle_BG3_Y
 	strh r1, [r0]
 	b _080CE4EC
 	.align 2, 0
 _080CE398: .4byte gReservedSpritePaletteCount
-_080CE39C: .4byte gUnknown_2022974
-_080CE3A0: .4byte gUnknown_2022976
-_080CE3A4: .4byte gUnknown_2022978
-_080CE3A8: .4byte gUnknown_202297A
-_080CE3AC: .4byte gUnknown_202297C
-_080CE3B0: .4byte gUnknown_202297E
-_080CE3B4: .4byte gUnknown_2022980
-_080CE3B8: .4byte gUnknown_2022982
+_080CE39C: .4byte gBattle_BG0_X
+_080CE3A0: .4byte gBattle_BG0_Y
+_080CE3A4: .4byte gBattle_BG1_X
+_080CE3A8: .4byte gBattle_BG1_Y
+_080CE3AC: .4byte gBattle_BG2_X
+_080CE3B0: .4byte gBattle_BG2_Y
+_080CE3B4: .4byte gBattle_BG3_X
+_080CE3B8: .4byte gBattle_BG3_Y
 _080CE3BC:
 	bl ResetPaletteFade
 	ldr r0, _080CE3D8 @ =nullsub_76
@@ -1027,24 +1027,24 @@ TradeEvolutionScene: @ 80CE540
 	mov r1, sp
 	ldrh r1, [r1, 0x14]
 	strh r1, [r0, 0x1C]
-	ldr r0, _080CE6E4 @ =gUnknown_2022974
+	ldr r0, _080CE6E4 @ =gBattle_BG0_X
 	strh r4, [r0]
-	ldr r0, _080CE6E8 @ =gUnknown_2022976
+	ldr r0, _080CE6E8 @ =gBattle_BG0_Y
 	strh r4, [r0]
-	ldr r0, _080CE6EC @ =gUnknown_2022978
+	ldr r0, _080CE6EC @ =gBattle_BG1_X
 	strh r4, [r0]
-	ldr r0, _080CE6F0 @ =gUnknown_202297A
+	ldr r0, _080CE6F0 @ =gBattle_BG1_Y
 	strh r4, [r0]
-	ldr r0, _080CE6F4 @ =gUnknown_202297C
+	ldr r0, _080CE6F4 @ =gBattle_BG2_X
 	strh r4, [r0]
-	ldr r0, _080CE6F8 @ =gUnknown_202297E
+	ldr r0, _080CE6F8 @ =gBattle_BG2_Y
 	strh r4, [r0]
-	ldr r1, _080CE6FC @ =gUnknown_2022980
+	ldr r1, _080CE6FC @ =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _080CE700 @ =gUnknown_2022982
+	ldr r0, _080CE700 @ =gBattle_BG3_Y
 	strh r4, [r0]
 	ldr r2, _080CE704 @ =gTextFlags
 	ldrb r0, [r2]
@@ -1077,14 +1077,14 @@ _080CE6D4: .4byte gSprites
 _080CE6D8: .4byte nullsub_10
 _080CE6DC: .4byte sub_80CF53C
 _080CE6E0: .4byte gTasks
-_080CE6E4: .4byte gUnknown_2022974
-_080CE6E8: .4byte gUnknown_2022976
-_080CE6EC: .4byte gUnknown_2022978
-_080CE6F0: .4byte gUnknown_202297A
-_080CE6F4: .4byte gUnknown_202297C
-_080CE6F8: .4byte gUnknown_202297E
-_080CE6FC: .4byte gUnknown_2022980
-_080CE700: .4byte gUnknown_2022982
+_080CE6E4: .4byte gBattle_BG0_X
+_080CE6E8: .4byte gBattle_BG0_Y
+_080CE6EC: .4byte gBattle_BG1_X
+_080CE6F0: .4byte gBattle_BG1_Y
+_080CE6F4: .4byte gBattle_BG2_X
+_080CE6F8: .4byte gBattle_BG2_Y
+_080CE6FC: .4byte gBattle_BG3_X
+_080CE700: .4byte gBattle_BG3_Y
 _080CE704: .4byte gTextFlags
 _080CE708: .4byte sub_80D00D8
 _080CE70C: .4byte sub_80CE72C
@@ -3981,105 +3981,105 @@ nullsub_76: @ 80D004C
 	thumb_func_start sub_80D0050
 sub_80D0050: @ 80D0050
 	push {lr}
-	ldr r0, _080D00B8 @ =gUnknown_2022974
+	ldr r0, _080D00B8 @ =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, _080D00BC @ =gUnknown_2022976
+	ldr r0, _080D00BC @ =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r0, _080D00C0 @ =gUnknown_2022978
+	ldr r0, _080D00C0 @ =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, _080D00C4 @ =gUnknown_202297A
+	ldr r0, _080D00C4 @ =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
-	ldr r0, _080D00C8 @ =gUnknown_202297C
+	ldr r0, _080D00C8 @ =gBattle_BG2_X
 	ldrh r1, [r0]
 	movs r0, 0x18
 	bl SetGpuReg
-	ldr r0, _080D00CC @ =gUnknown_202297E
+	ldr r0, _080D00CC @ =gBattle_BG2_Y
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, _080D00D0 @ =gUnknown_2022980
+	ldr r0, _080D00D0 @ =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, _080D00D4 @ =gUnknown_2022982
+	ldr r0, _080D00D4 @ =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_8087F54
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D00B8: .4byte gUnknown_2022974
-_080D00BC: .4byte gUnknown_2022976
-_080D00C0: .4byte gUnknown_2022978
-_080D00C4: .4byte gUnknown_202297A
-_080D00C8: .4byte gUnknown_202297C
-_080D00CC: .4byte gUnknown_202297E
-_080D00D0: .4byte gUnknown_2022980
-_080D00D4: .4byte gUnknown_2022982
+_080D00B8: .4byte gBattle_BG0_X
+_080D00BC: .4byte gBattle_BG0_Y
+_080D00C0: .4byte gBattle_BG1_X
+_080D00C4: .4byte gBattle_BG1_Y
+_080D00C8: .4byte gBattle_BG2_X
+_080D00CC: .4byte gBattle_BG2_Y
+_080D00D0: .4byte gBattle_BG3_X
+_080D00D4: .4byte gBattle_BG3_Y
 	thumb_func_end sub_80D0050
 
 	thumb_func_start sub_80D00D8
 sub_80D00D8: @ 80D00D8
 	push {lr}
-	ldr r0, _080D0140 @ =gUnknown_2022974
+	ldr r0, _080D0140 @ =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, _080D0144 @ =gUnknown_2022976
+	ldr r0, _080D0144 @ =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r0, _080D0148 @ =gUnknown_2022978
+	ldr r0, _080D0148 @ =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, _080D014C @ =gUnknown_202297A
+	ldr r0, _080D014C @ =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
-	ldr r0, _080D0150 @ =gUnknown_202297C
+	ldr r0, _080D0150 @ =gBattle_BG2_X
 	ldrh r1, [r0]
 	movs r0, 0x18
 	bl SetGpuReg
-	ldr r0, _080D0154 @ =gUnknown_202297E
+	ldr r0, _080D0154 @ =gBattle_BG2_Y
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, _080D0158 @ =gUnknown_2022980
+	ldr r0, _080D0158 @ =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, _080D015C @ =gUnknown_2022982
+	ldr r0, _080D015C @ =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_8087F54
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0140: .4byte gUnknown_2022974
-_080D0144: .4byte gUnknown_2022976
-_080D0148: .4byte gUnknown_2022978
-_080D014C: .4byte gUnknown_202297A
-_080D0150: .4byte gUnknown_202297C
-_080D0154: .4byte gUnknown_202297E
-_080D0158: .4byte gUnknown_2022980
-_080D015C: .4byte gUnknown_2022982
+_080D0140: .4byte gBattle_BG0_X
+_080D0144: .4byte gBattle_BG0_Y
+_080D0148: .4byte gBattle_BG1_X
+_080D014C: .4byte gBattle_BG1_Y
+_080D0150: .4byte gBattle_BG2_X
+_080D0154: .4byte gBattle_BG2_Y
+_080D0158: .4byte gBattle_BG3_X
+_080D015C: .4byte gBattle_BG3_Y
 	thumb_func_end sub_80D00D8
 
 	thumb_func_start sub_80D0160
@@ -4225,9 +4225,9 @@ sub_80D025C: @ 80D025C
 	push {r6,r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _080D0288 @ =gUnknown_2022978
+	ldr r0, _080D0288 @ =gBattle_BG1_X
 	mov r8, r0
-	ldr r1, _080D028C @ =gUnknown_202297A
+	ldr r1, _080D028C @ =gBattle_BG1_Y
 	mov r9, r1
 	ldr r1, _080D0290 @ =gTasks
 	lsls r0, r5, 2
@@ -4238,18 +4238,18 @@ sub_80D025C: @ 80D025C
 	ldrsh r0, [r0, r2]
 	cmp r0, 0
 	bne _080D029C
-	ldr r7, _080D0294 @ =gUnknown_202297C
-	ldr r6, _080D0298 @ =gUnknown_202297E
+	ldr r7, _080D0294 @ =gBattle_BG2_X
+	ldr r6, _080D0298 @ =gBattle_BG2_Y
 	b _080D02A0
 	.align 2, 0
-_080D0288: .4byte gUnknown_2022978
-_080D028C: .4byte gUnknown_202297A
+_080D0288: .4byte gBattle_BG1_X
+_080D028C: .4byte gBattle_BG1_Y
 _080D0290: .4byte gTasks
-_080D0294: .4byte gUnknown_202297C
-_080D0298: .4byte gUnknown_202297E
+_080D0294: .4byte gBattle_BG2_X
+_080D0298: .4byte gBattle_BG2_Y
 _080D029C:
-	ldr r7, _080D0328 @ =gUnknown_2022980
-	ldr r6, _080D032C @ =gUnknown_2022982
+	ldr r7, _080D0328 @ =gBattle_BG3_X
+	ldr r6, _080D032C @ =gBattle_BG3_Y
 _080D02A0:
 	lsls r4, r5, 2
 	adds r4, r5
@@ -4314,8 +4314,8 @@ _080D031A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0328: .4byte gUnknown_2022980
-_080D032C: .4byte gUnknown_2022982
+_080D0328: .4byte gBattle_BG3_X
+_080D032C: .4byte gBattle_BG3_Y
 _080D0330: .4byte sub_80D0160
 	thumb_func_end sub_80D025C
 
@@ -4527,12 +4527,12 @@ sub_80D04E8: @ 80D04E8
 	movs r0, 0x50
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, _080D0544 @ =gUnknown_2022978
+	ldr r0, _080D0544 @ =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080D0548 @ =gUnknown_202297A
+	ldr r0, _080D0548 @ =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, _080D054C @ =gUnknown_202297C
+	ldr r0, _080D054C @ =gBattle_BG2_X
 	strh r1, [r0]
 	movs r0, 0x1
 	movs r1, 0x5
@@ -4562,9 +4562,9 @@ sub_80D04E8: @ 80D04E8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0544: .4byte gUnknown_2022978
-_080D0548: .4byte gUnknown_202297A
-_080D054C: .4byte gUnknown_202297C
+_080D0544: .4byte gBattle_BG1_X
+_080D0548: .4byte gBattle_BG1_Y
+_080D054C: .4byte gBattle_BG2_X
 _080D0550: .4byte gUnknown_2039A24
 	thumb_func_end sub_80D04E8
 

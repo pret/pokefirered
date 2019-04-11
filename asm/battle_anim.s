@@ -1037,10 +1037,10 @@ _08072C88:
 	strh r1, [r2, 0xC]
 	cmp r7, 0
 	bne _08072CF4
-	ldr r0, _08072CEC @ =gUnknown_2022978
+	ldr r0, _08072CEC @ =gBattle_BG1_X
 	ldrh r0, [r0]
 	strh r0, [r2, 0xE]
-	ldr r0, _08072CF0 @ =gUnknown_202297A
+	ldr r0, _08072CF0 @ =gBattle_BG1_Y
 	b _08072CFC
 	.align 2, 0
 _08072CD8: .4byte gUnknown_2037F1B
@@ -1048,13 +1048,13 @@ _08072CDC: .4byte gUnknown_2023D44
 _08072CE0: .4byte task_pA_ma0A_obj_to_bg_pal
 _08072CE4: .4byte gTasks
 _08072CE8: .4byte gSprites
-_08072CEC: .4byte gUnknown_2022978
-_08072CF0: .4byte gUnknown_202297A
+_08072CEC: .4byte gBattle_BG1_X
+_08072CF0: .4byte gBattle_BG1_Y
 _08072CF4:
-	ldr r0, _08072D8C @ =gUnknown_202297C
+	ldr r0, _08072D8C @ =gBattle_BG2_X
 	ldrh r0, [r0]
 	strh r0, [r2, 0xE]
-	ldr r0, _08072D90 @ =gUnknown_202297E
+	ldr r0, _08072D90 @ =gBattle_BG2_Y
 _08072CFC:
 	ldrh r0, [r0]
 	strh r0, [r2, 0x10]
@@ -1121,26 +1121,26 @@ _08072D3E:
 	strh r1, [r2, 0xC]
 	cmp r7, 0
 	bne _08072DB0
-	ldr r0, _08072DA8 @ =gUnknown_2022978
+	ldr r0, _08072DA8 @ =gBattle_BG1_X
 	ldrh r0, [r0]
 	strh r0, [r2, 0xE]
-	ldr r0, _08072DAC @ =gUnknown_202297A
+	ldr r0, _08072DAC @ =gBattle_BG1_Y
 	b _08072DB8
 	.align 2, 0
-_08072D8C: .4byte gUnknown_202297C
-_08072D90: .4byte gUnknown_202297E
+_08072D8C: .4byte gBattle_BG2_X
+_08072D90: .4byte gBattle_BG2_Y
 _08072D94: .4byte gTasks
 _08072D98: .4byte gUnknown_2037F14
 _08072D9C: .4byte gUnknown_2023D44
 _08072DA0: .4byte task_pA_ma0A_obj_to_bg_pal
 _08072DA4: .4byte gSprites
-_08072DA8: .4byte gUnknown_2022978
-_08072DAC: .4byte gUnknown_202297A
+_08072DA8: .4byte gBattle_BG1_X
+_08072DAC: .4byte gBattle_BG1_Y
 _08072DB0:
-	ldr r0, _08072DDC @ =gUnknown_202297C
+	ldr r0, _08072DDC @ =gBattle_BG2_X
 	ldrh r0, [r0]
 	strh r0, [r2, 0xE]
-	ldr r0, _08072DE0 @ =gUnknown_202297E
+	ldr r0, _08072DE0 @ =gBattle_BG2_Y
 _08072DB8:
 	ldrh r0, [r0]
 	strh r0, [r2, 0x10]
@@ -1162,8 +1162,8 @@ _08072DCE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08072DDC: .4byte gUnknown_202297C
-_08072DE0: .4byte gUnknown_202297E
+_08072DDC: .4byte gBattle_BG2_X
+_08072DE0: .4byte gBattle_BG2_Y
 _08072DE4: .4byte gTasks
 _08072DE8: .4byte gUnknown_2037F14
 _08072DEC: .4byte gUnknown_2037ED4
@@ -1271,7 +1271,7 @@ _08072E5E:
 	ldr r2, _08072F6C @ =gUnknown_2023D44
 	adds r2, r7, r2
 	ldrb r0, [r2]
-	ldr r5, _08072F70 @ =gUnknown_2022978
+	ldr r5, _08072F70 @ =gBattle_BG1_X
 	ldr r3, _08072F74 @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
@@ -1283,7 +1283,7 @@ _08072E5E:
 	negs r0, r0
 	adds r0, 0x20
 	strh r0, [r5]
-	ldr r4, _08072F78 @ =gUnknown_202297A
+	ldr r4, _08072F78 @ =gBattle_BG1_Y
 	ldrh r0, [r1, 0x26]
 	ldrh r1, [r1, 0x22]
 	adds r0, r1
@@ -1350,9 +1350,9 @@ _08072F60: .4byte 0x0600e000
 _08072F64: .4byte 0x01000800
 _08072F68: .4byte 0x01000400
 _08072F6C: .4byte gUnknown_2023D44
-_08072F70: .4byte gUnknown_2022978
+_08072F70: .4byte gBattle_BG1_X
 _08072F74: .4byte gSprites
-_08072F78: .4byte gUnknown_202297A
+_08072F78: .4byte gBattle_BG1_Y
 _08072F7C: .4byte gPlttBufferUnfaded + 0x200
 _08072F80: .4byte 0x04000008
 _08072F84:
@@ -1404,7 +1404,7 @@ _08072F84:
 	ldr r2, _080730A4 @ =gUnknown_2023D44
 	adds r2, r7, r2
 	ldrb r0, [r2]
-	ldr r5, _080730A8 @ =gUnknown_202297C
+	ldr r5, _080730A8 @ =gBattle_BG2_X
 	ldr r3, _080730AC @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
@@ -1416,7 +1416,7 @@ _08072F84:
 	negs r0, r0
 	adds r0, 0x20
 	strh r0, [r5]
-	ldr r4, _080730B0 @ =gUnknown_202297E
+	ldr r4, _080730B0 @ =gBattle_BG2_Y
 	ldrh r0, [r1, 0x26]
 	ldrh r1, [r1, 0x22]
 	adds r0, r1
@@ -1484,9 +1484,9 @@ _08073098: .4byte 0x0600f000
 _0807309C: .4byte 0x01000800
 _080730A0: .4byte 0x01000400
 _080730A4: .4byte gUnknown_2023D44
-_080730A8: .4byte gUnknown_202297C
+_080730A8: .4byte gBattle_BG2_X
 _080730AC: .4byte gSprites
-_080730B0: .4byte gUnknown_202297E
+_080730B0: .4byte gBattle_BG2_Y
 _080730B4: .4byte gPlttBufferUnfaded + 0x200
 _080730B8: .4byte 0x05000120
 _080730BC: .4byte 0x04000008
@@ -1563,21 +1563,21 @@ sub_8073128: @ 8073128
 	bne _08073154
 	movs r0, 0x1
 	bl sub_8075358
-	ldr r0, _0807314C @ =gUnknown_2022978
+	ldr r0, _0807314C @ =gBattle_BG1_X
 	strh r4, [r0]
-	ldr r0, _08073150 @ =gUnknown_202297A
+	ldr r0, _08073150 @ =gBattle_BG1_Y
 	strh r4, [r0]
 	b _08073164
 	.align 2, 0
-_0807314C: .4byte gUnknown_2022978
-_08073150: .4byte gUnknown_202297A
+_0807314C: .4byte gBattle_BG1_X
+_08073150: .4byte gBattle_BG1_Y
 _08073154:
 	movs r0, 0x2
 	bl sub_8075358
-	ldr r0, _0807316C @ =gUnknown_202297C
+	ldr r0, _0807316C @ =gBattle_BG2_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _08073170 @ =gUnknown_202297E
+	ldr r0, _08073170 @ =gBattle_BG2_Y
 	strh r1, [r0]
 _08073164:
 	add sp, 0x10
@@ -1585,8 +1585,8 @@ _08073164:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807316C: .4byte gUnknown_202297C
-_08073170: .4byte gUnknown_202297E
+_0807316C: .4byte gBattle_BG2_X
+_08073170: .4byte gBattle_BG2_Y
 	thumb_func_end sub_8073128
 
 	thumb_func_start task_pA_ma0A_obj_to_bg_pal
@@ -1627,13 +1627,13 @@ task_pA_ma0A_obj_to_bg_pal: @ 8073174
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0807320C
-	ldr r1, _080731F8 @ =gUnknown_2022978
+	ldr r1, _080731F8 @ =gBattle_BG1_X
 	lsls r0, r3, 16
 	asrs r0, 16
 	ldrh r3, [r5, 0xE]
 	adds r0, r3
 	strh r0, [r1]
-	ldr r1, _080731FC @ =gUnknown_202297A
+	ldr r1, _080731FC @ =gBattle_BG1_Y
 	lsls r0, r2, 16
 	asrs r0, 16
 	ldrh r5, [r5, 0x10]
@@ -1654,19 +1654,19 @@ task_pA_ma0A_obj_to_bg_pal: @ 8073174
 	.align 2, 0
 _080731F0: .4byte gTasks
 _080731F4: .4byte gSprites
-_080731F8: .4byte gUnknown_2022978
-_080731FC: .4byte gUnknown_202297A
+_080731F8: .4byte gBattle_BG1_X
+_080731FC: .4byte gBattle_BG1_Y
 _08073200: .4byte gPlttBufferFaded + 0x200
 _08073204: .4byte 0xfffffe00
 _08073208: .4byte 0x04000008
 _0807320C:
-	ldr r1, _0807323C @ =gUnknown_202297C
+	ldr r1, _0807323C @ =gBattle_BG2_X
 	lsls r0, r3, 16
 	asrs r0, 16
 	ldrh r3, [r5, 0xE]
 	adds r0, r3
 	strh r0, [r1]
-	ldr r1, _08073240 @ =gUnknown_202297E
+	ldr r1, _08073240 @ =gBattle_BG2_Y
 	lsls r0, r2, 16
 	asrs r0, 16
 	ldrh r5, [r5, 0x10]
@@ -1684,8 +1684,8 @@ _08073232:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807323C: .4byte gUnknown_202297C
-_08073240: .4byte gUnknown_202297E
+_0807323C: .4byte gBattle_BG2_X
+_08073240: .4byte gBattle_BG2_Y
 _08073244: .4byte gPlttBufferFaded + 0x200
 _08073248: .4byte 0x04000008
 	thumb_func_end task_pA_ma0A_obj_to_bg_pal

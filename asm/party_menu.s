@@ -281,7 +281,7 @@ _0811EC80:
 	bl clear_scheduled_bg_copies_to_vram
 	b _0811EDFC
 _0811EC8E:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _0811EDFC
 _0811EC94:
 	bl ResetPaletteFade

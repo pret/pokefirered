@@ -128,7 +128,7 @@ SECTIONS {
         asm/trainer_see.o(.text);
         asm/wild_encounter.o(.text);
         asm/field_effect.o(.text);
-        asm/unknown_task.o(.text);
+        src/scanline_effect.o(.text);
         asm/option_menu.o(.text);
         asm/pokedex.o(.text);
         asm/trainer_card.o(.text);
@@ -228,7 +228,7 @@ SECTIONS {
         src/quest_log_battle.o(.text);
         src/fame_checker.o(.text);
         asm/menu2.o(.text);
-        asm/oak_speech.o(.text);
+        src/oak_speech.o(.text);
         asm/tm_case.o(.text);
         asm/menu_indicators.o(.text);
         asm/pokedex_area_markers.o(.text);
@@ -382,6 +382,7 @@ SECTIONS {
         src/quest_log.o(.rodata);
         data/data_83FECCC.o(.rodata.8456C74);
         src/fame_checker.o(.rodata);
+        src/oak_speech.o(.rodata);
         data/data_845FD54.o(.rodata);
         src/mevent.o(.rodata);
         src/mevent_server_helpers.o(.rodata);

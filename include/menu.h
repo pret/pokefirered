@@ -38,5 +38,12 @@ void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSp
 void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u16 a3);
 void sub_810F4D8(u8 windowId, bool32 someBool);
 void *sub_80F68F0(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
+void sub_810F558(u8, u8, u8, u8, u16);
+void sub_810F650(const u8 *, const u8 *, u8, u32, u8);
+void sub_810F5E8(const u8 *, u32, u8);
+void sub_810F71C(void);
+void sub_810F740(void);
+void sub_810F7D8(u8, u8, u8, u8, u8, u8, u8);
+void sub_810FF60(const struct WindowTemplate *, u8, u8, u8, u16, u8, u8);
 
 #endif // GUARD_MENU_H

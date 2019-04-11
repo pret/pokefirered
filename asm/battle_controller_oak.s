@@ -5776,10 +5776,10 @@ _080EA520:
 	thumb_func_start sub_80EA52C
 sub_80EA52C: @ 80EA52C
 	push {r4,lr}
-	ldr r0, _080EA55C @ =gUnknown_2022974
+	ldr r0, _080EA55C @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080EA560 @ =gUnknown_2022976
+	ldr r0, _080EA560 @ =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, _080EA564 @ =gActiveBattler
 	ldrb r0, [r0]
@@ -5799,8 +5799,8 @@ sub_80EA52C: @ 80EA52C
 	bl WallyBufferExecCompleted
 	b _080EA65A
 	.align 2, 0
-_080EA55C: .4byte gUnknown_2022974
-_080EA560: .4byte gUnknown_2022976
+_080EA55C: .4byte gBattle_BG0_X
+_080EA560: .4byte gBattle_BG0_Y
 _080EA564: .4byte gActiveBattler
 _080EA568: .4byte gUnknown_2022BC6
 _080EA56C: .4byte gBattleTypeFlags
@@ -5951,9 +5951,9 @@ sub_80EA690: @ 80EA690
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080EA6EA
-	ldr r0, _080EA6C4 @ =gUnknown_2022974
+	ldr r0, _080EA6C4 @ =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, _080EA6C8 @ =gUnknown_2022976
+	ldr r1, _080EA6C8 @ =gBattle_BG0_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r0, _080EA6CC @ =gBattleTypeFlags
@@ -5970,8 +5970,8 @@ sub_80EA690: @ 80EA690
 	ldr r1, _080EA6D8 @ =sub_80E763C
 	b _080EA6E8
 	.align 2, 0
-_080EA6C4: .4byte gUnknown_2022974
-_080EA6C8: .4byte gUnknown_2022976
+_080EA6C4: .4byte gBattle_BG0_X
+_080EA6C8: .4byte gBattle_BG0_Y
 _080EA6CC: .4byte gBattleTypeFlags
 _080EA6D0: .4byte gUnknown_3004FE0
 _080EA6D4: .4byte gActiveBattler
@@ -6074,9 +6074,9 @@ sub_80EA798: @ 80EA798
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080EA7C2
-	ldr r0, _080EA7C8 @ =gUnknown_2022974
+	ldr r0, _080EA7C8 @ =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, _080EA7CC @ =gUnknown_2022976
+	ldr r1, _080EA7CC @ =gBattle_BG0_Y
 	movs r2, 0xA0
 	lsls r2, 1
 	adds r0, r2, 0
@@ -6092,8 +6092,8 @@ _080EA7C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EA7C8: .4byte gUnknown_2022974
-_080EA7CC: .4byte gUnknown_2022976
+_080EA7C8: .4byte gBattle_BG0_X
+_080EA7CC: .4byte gBattle_BG0_Y
 _080EA7D0: .4byte gUnknown_3004FE0
 _080EA7D4: .4byte gActiveBattler
 _080EA7D8: .4byte sub_80E7988

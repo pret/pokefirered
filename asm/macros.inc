@@ -147,3 +147,8 @@
 	.2byte MAP_\map_name
 	.space 2
 	.endm
+
+	.macro window_template bg, top, left, height, width, palno, baseBlock
+	.byte \bg, \top, \left, \height, \width, \palno
+	.2byte \baseBlock
+	.endm

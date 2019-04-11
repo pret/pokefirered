@@ -4424,7 +4424,7 @@ _08141984:
 	ldrsh r0, [r5, r2]
 	cmp r0, 0
 	bne _081419C4
-	ldr r1, _081419BC @ =gUnknown_825E074
+	ldr r1, _081419BC @ =gSineTable
 	movs r2, 0x4
 	ldrsh r0, [r5, r2]
 	lsls r0, 1
@@ -4447,7 +4447,7 @@ _08141984:
 	movs r0, 0x8
 	b _081419C6
 	.align 2, 0
-_081419BC: .4byte gUnknown_825E074
+_081419BC: .4byte gSineTable
 _081419C0: .4byte gUnknown_84664DC
 _081419C4:
 	subs r0, r1, 0x1
@@ -4462,7 +4462,7 @@ _081419C6:
 	movs r1, 0x7F
 	ands r0, r1
 	strh r0, [r5, 0x8]
-	ldr r1, _081419FC @ =gUnknown_825E074
+	ldr r1, _081419FC @ =gSineTable
 	movs r2, 0x8
 	ldrsh r0, [r5, r2]
 	lsls r0, 1
@@ -4478,7 +4478,7 @@ _081419C6:
 	bl BlendPalettes
 	b _08141A2C
 	.align 2, 0
-_081419FC: .4byte gUnknown_825E074
+_081419FC: .4byte gSineTable
 _08141A00:
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1

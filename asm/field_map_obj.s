@@ -21605,7 +21605,7 @@ _080677EA:
 	ands r0, r1
 	strb r0, [r5, 0x1]
 _08067822:
-	ldr r1, _08067850 @ =gUnknown_825E074
+	ldr r1, _08067850 @ =gSineTable
 	movs r2, 0x3A
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -21629,7 +21629,7 @@ _08067822:
 	strb r0, [r5]
 	b _080678B6
 	.align 2, 0
-_08067850: .4byte gUnknown_825E074
+_08067850: .4byte gSineTable
 _08067854:
 	ldrh r0, [r4, 0x36]
 	adds r0, 0x1
@@ -21697,7 +21697,7 @@ sub_80678C0: @ 80678C0
 	movs r0, 0xFF
 	ands r2, r0
 	strh r2, [r1, 0x3C]
-	ldr r3, _080678EC @ =gUnknown_825E074
+	ldr r3, _080678EC @ =gSineTable
 	movs r4, 0x3C
 	ldrsh r0, [r1, r4]
 	lsls r0, 1
@@ -21715,7 +21715,7 @@ _080678E6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080678EC: .4byte gUnknown_825E074
+_080678EC: .4byte gSineTable
 	thumb_func_end sub_80678C0
 
 	thumb_func_start sub_80678F0

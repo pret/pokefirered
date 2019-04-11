@@ -1487,7 +1487,7 @@ sub_80C0A6C: @ 80C0A6C
 	bl ResetPaletteFade
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80C0A6C

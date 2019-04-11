@@ -849,10 +849,10 @@ sub_80DDB94: @ 80DDB94
 	thumb_func_start sub_80DDBA0
 sub_80DDBA0: @ 80DDBA0
 	push {r4,lr}
-	ldr r0, _080DDBD4 @ =gUnknown_2022974
+	ldr r0, _080DDBD4 @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080DDBD8 @ =gUnknown_2022976
+	ldr r0, _080DDBD8 @ =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, _080DDBDC @ =gActiveBattler
 	ldrb r4, [r0]
@@ -871,8 +871,8 @@ sub_80DDBA0: @ 80DDBA0
 	bl sub_80D87BC
 	b _080DDBF0
 	.align 2, 0
-_080DDBD4: .4byte gUnknown_2022974
-_080DDBD8: .4byte gUnknown_2022976
+_080DDBD4: .4byte gBattle_BG0_X
+_080DDBD8: .4byte gBattle_BG0_Y
 _080DDBDC: .4byte gActiveBattler
 _080DDBE0: .4byte gUnknown_2022BC6
 _080DDBE4: .4byte gDisplayedStringBattle
@@ -926,9 +926,9 @@ sub_80DDC38: @ 80DDC38
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080DDC5E
-	ldr r0, _080DDC64 @ =gUnknown_2022974
+	ldr r0, _080DDC64 @ =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, _080DDC68 @ =gUnknown_2022976
+	ldr r1, _080DDC68 @ =gBattle_BG0_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, _080DDC6C @ =gUnknown_3004FE0
@@ -942,8 +942,8 @@ _080DDC5E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DDC64: .4byte gUnknown_2022974
-_080DDC68: .4byte gUnknown_2022976
+_080DDC64: .4byte gBattle_BG0_X
+_080DDC68: .4byte gBattle_BG0_Y
 _080DDC6C: .4byte gUnknown_3004FE0
 _080DDC70: .4byte gActiveBattler
 _080DDC74: .4byte HandleInputChooseAction_0

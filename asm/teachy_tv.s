@@ -122,7 +122,7 @@ _0815AC48:
 	strb r1, [r0]
 	bl sub_80BF768
 	bl clear_scheduled_bg_copies_to_vram
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl ResetSpriteData

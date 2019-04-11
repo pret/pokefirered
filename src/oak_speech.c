@@ -45,64 +45,64 @@ struct OakSpeechResources
 
 EWRAM_DATA struct OakSpeechResources * sOakSpeechResources = NULL;
 
-void sub_812E9F8(u8 taskId);
-void sub_812EB58(u8 taskId);
-void sub_812EEB0(void);
-void sub_812F0B0(u8 taskId);
-void sub_812F180(u8 taskId);
-void sub_812F274(u8 taskId);
-void sub_812F33C(u8 taskId);
-void sub_812F4A8(u8 taskId);
-void sub_812F72C(u8 taskId);
-void sub_812F7C0(u8 taskId);
-void sub_812F880(u8 taskId);
-void sub_812F880(u8 taskId);
-void sub_812F944(u8 taskId);
-void sub_812F9EC(u8 taskId);
-void sub_812FA78(u8 taskId);
-void sub_812FB4C(u8 taskId);
-void sub_812FBF0(u8 taskId);
-void sub_812FC68(u8 taskId);
-void sub_812FD78(u8 taskId);
-void sub_812FDC0(u8 taskId);
-void sub_812FE88(u8 taskId);
-void sub_812FFA4(u8 taskId);
-void sub_812FFF0(u8 taskId);
-void sub_8130050(u8 taskId);
-void sub_81300A0(u8 taskId);
-void sub_8130160(u8 taskId);
-void sub_8130324(u8 taskId);
-void sub_81303B4(u8 taskId);
-void sub_8130464(u8 taskId);
-void sub_8130554(u8 taskId);
-void sub_8130650(u8 taskId);
-void sub_8130694(u8 taskId);
-void sub_81306D4(u8 taskId);
-void sub_813071C(u8 taskId);
-void sub_81307D0(u8 taskId);
-void sub_8130858(u8 taskId);
-void sub_81308D0(u8 taskId);
-void sub_8130914(u8 taskId);
-void sub_8130940(u8 taskId);
-void sub_8130980(u8 taskId);
-void sub_8130A38(u8 taskId);
-void sub_8130A80(u8 taskId);
-void sub_8130ADC(u8 taskId);
-void sub_8130B10(u8 taskId);
-void sub_8130BA8(u8 taskId);
-void sub_8130BF0(u8 taskId);
-void sub_8130C20(u8 taskId);
+static void sub_812E9F8(u8 taskId);
+static void sub_812EB58(u8 taskId);
+static void sub_812EEB0(void);
+static void sub_812F0B0(u8 taskId);
+static void sub_812F180(u8 taskId);
+static void sub_812F274(u8 taskId);
+static void sub_812F33C(u8 taskId);
+static void sub_812F4A8(u8 taskId);
+static void sub_812F72C(u8 taskId);
+static void sub_812F7C0(u8 taskId);
+static void sub_812F880(u8 taskId);
+static void sub_812F880(u8 taskId);
+static void sub_812F944(u8 taskId);
+static void sub_812F9EC(u8 taskId);
+static void sub_812FA78(u8 taskId);
+static void sub_812FB4C(u8 taskId);
+static void sub_812FBF0(u8 taskId);
+static void sub_812FC68(u8 taskId);
+static void sub_812FD78(u8 taskId);
+static void sub_812FDC0(u8 taskId);
+static void sub_812FE88(u8 taskId);
+static void sub_812FFA4(u8 taskId);
+static void sub_812FFF0(u8 taskId);
+static void sub_8130050(u8 taskId);
+static void sub_81300A0(u8 taskId);
+static void sub_8130160(u8 taskId);
+static void sub_8130324(u8 taskId);
+static void sub_81303B4(u8 taskId);
+static void sub_8130464(u8 taskId);
+static void sub_8130554(u8 taskId);
+static void sub_8130650(u8 taskId);
+static void sub_8130694(u8 taskId);
+static void sub_81306D4(u8 taskId);
+static void sub_813071C(u8 taskId);
+static void sub_81307D0(u8 taskId);
+static void sub_8130858(u8 taskId);
+static void sub_81308D0(u8 taskId);
+static void sub_8130914(u8 taskId);
+static void sub_8130940(u8 taskId);
+static void sub_8130980(u8 taskId);
+static void sub_8130A38(u8 taskId);
+static void sub_8130A80(u8 taskId);
+static void sub_8130ADC(u8 taskId);
+static void sub_8130B10(u8 taskId);
+static void sub_8130BA8(u8 taskId);
+static void sub_8130BF0(u8 taskId);
+static void sub_8130C20(u8 taskId);
 
 static void CB2_ReturnFromNamingScreen(void);
 static void CreateNidoranFSprite(u8 taskId);
-void sub_8130FD4(u8 taskId, u8 state);
-void sub_8131168(u8 taskId, u8 state);
-void sub_81311F4(u16 whichPic, u16 tileOffset);
-void sub_8131310(void);
-void sub_813144C(u8 taskId, u8 state);
-void sub_81315CC(u8 taskId, u8 state);
-void sub_8131660(u8 taskId, u8 state);
-void sub_8131754(u8 arg0, u8 namePick);
+static void sub_8130FD4(u8 taskId, u8 state);
+static void sub_8131168(u8 taskId, u8 state);
+static void sub_81311F4(u16 whichPic, u16 tileOffset);
+static void sub_8131310(void);
+static void sub_813144C(u8 taskId, u8 state);
+static void sub_81315CC(u8 taskId, u8 state);
+static void sub_8131660(u8 taskId, u8 state);
+static void sub_8131754(u8 arg0, u8 namePick);
 
 extern const u8 gUnknown_8415D2C[];
 extern const u8 gUnknown_8415D48[];
@@ -113,7 +113,7 @@ extern const u8 gUnknown_8415D97[];
 extern const struct CompressedSpriteSheet gUnknown_8235194[];
 extern const struct CompressedSpritePalette gUnknown_82373F4;
 
-const u8 gUnknown_845FD54[][5] = {
+static const u8 gUnknown_845FD54[][5] = {
     [SPECIES_BULBASAUR - 1] = {0x16, 0x1b, 0x30, 0x16, 0x29},
     [SPECIES_IVYSAUR - 1] = {0x14, 0x1b, 0x30, 0x15, 0x2a},
     [SPECIES_VENUSAUR - 1] = {0x1b, 0x20, 0x20, 0x1b, 0x33},
@@ -530,28 +530,28 @@ const u8 gUnknown_845FD54[][5] = {
 };
 
 ALIGNED(4) const u16 gUnknown_8460568[] = INCBIN_U16("data/oak_speech/unk_8460568.gbapal");
-const u32 gUnknown_84605E8[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz");
-const u32 gUnknown_8460BA8[] = INCBIN_U32("data/oak_speech/unk_8460BA8.bin.lz");
-const u32 gUnknown_8460CA4[] = INCBIN_U32("data/oak_speech/unk_8460CA4.4bpp.lz");
-const u32 gUnknown_8460CE8[] = INCBIN_U32("data/oak_speech/unk_8460CE8.bin.lz");
-const u16 gUnknown_8460D94[] = INCBIN_U16("data/oak_speech/unk_8460D94.bin");
-const u16 gUnknown_8460E34[] = INCBIN_U16("data/oak_speech/unk_8460E34.bin");
-const u16 gUnknown_8460ED4[] = INCBIN_U16("data/oak_speech/unk_8460ED4.gbapal");
-const u32 gUnknown_8460F14[] = INCBIN_U32("data/oak_speech/unk_8460F14.8bpp.lz");
-const u16 gUnknown_84615FC[] = INCBIN_U16("data/oak_speech/unk_84615FC.gbapal");
-const u32 gUnknown_846163C[] = INCBIN_U32("data/oak_speech/unk_846163C.8bpp.lz");
-const u16 gUnknown_8461CD4[] = INCBIN_U16("data/oak_speech/unk_8461CD4.gbapal");
-const u32 gUnknown_8461D14[] = INCBIN_U32("data/oak_speech/unk_8461D14.8bpp.lz");
-const u16 gUnknown_84623AC[] = INCBIN_U16("data/oak_speech/unk_84623AC.gbapal");
-const u32 gUnknown_84623EC[] = INCBIN_U32("data/oak_speech/unk_84623EC.8bpp.lz");
-const u16 gUnknown_84629D0[] = INCBIN_U16("data/oak_speech/unk_84629D0.gbapal");
-const u16 gUnknown_84629F0[] = INCBIN_U16("data/oak_speech/unk_84629F0.gbapal");
-const u32 gUnknown_8462A10[] = INCBIN_U32("data/oak_speech/unk_8462A10.4bpp.lz");
-const u32 gUnknown_8462B74[] = INCBIN_U32("data/oak_speech/unk_8462B74.4bpp.lz");
-const u32 gUnknown_8462D34[] = INCBIN_U32("data/oak_speech/unk_8462D34.4bpp.lz");
-const u32 gUnknown_8462E18[] = INCBIN_U32("data/oak_speech/unk_8462E18.4bpp.lz");
+static const u32 gUnknown_84605E8[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz");
+static const u32 gUnknown_8460BA8[] = INCBIN_U32("data/oak_speech/unk_8460BA8.bin.lz");
+static const u32 gUnknown_8460CA4[] = INCBIN_U32("data/oak_speech/unk_8460CA4.4bpp.lz");
+static const u32 gUnknown_8460CE8[] = INCBIN_U32("data/oak_speech/unk_8460CE8.bin.lz");
+static const u16 gUnknown_8460D94[] = INCBIN_U16("data/oak_speech/unk_8460D94.bin");
+static const u16 gUnknown_8460E34[] = INCBIN_U16("data/oak_speech/unk_8460E34.bin");
+static const u16 gUnknown_8460ED4[] = INCBIN_U16("data/oak_speech/unk_8460ED4.gbapal");
+static const u32 gUnknown_8460F14[] = INCBIN_U32("data/oak_speech/unk_8460F14.8bpp.lz");
+static const u16 gUnknown_84615FC[] = INCBIN_U16("data/oak_speech/unk_84615FC.gbapal");
+static const u32 gUnknown_846163C[] = INCBIN_U32("data/oak_speech/unk_846163C.8bpp.lz");
+static const u16 gUnknown_8461CD4[] = INCBIN_U16("data/oak_speech/unk_8461CD4.gbapal");
+static const u32 gUnknown_8461D14[] = INCBIN_U32("data/oak_speech/unk_8461D14.8bpp.lz");
+static const u16 gUnknown_84623AC[] = INCBIN_U16("data/oak_speech/unk_84623AC.gbapal");
+static const u32 gUnknown_84623EC[] = INCBIN_U32("data/oak_speech/unk_84623EC.8bpp.lz");
+static const u16 gUnknown_84629D0[] = INCBIN_U16("data/oak_speech/unk_84629D0.gbapal");
+static const u16 gUnknown_84629F0[] = INCBIN_U16("data/oak_speech/unk_84629F0.gbapal");
+static const u32 gUnknown_8462A10[] = INCBIN_U32("data/oak_speech/unk_8462A10.4bpp.lz");
+static const u32 gUnknown_8462B74[] = INCBIN_U32("data/oak_speech/unk_8462B74.4bpp.lz");
+static const u32 gUnknown_8462D34[] = INCBIN_U32("data/oak_speech/unk_8462D34.4bpp.lz");
+static const u32 gUnknown_8462E18[] = INCBIN_U32("data/oak_speech/unk_8462E18.4bpp.lz");
 
-const struct BgTemplate gUnknown_8462E58[3] = {
+static const struct BgTemplate gUnknown_8462E58[3] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -579,7 +579,7 @@ const struct BgTemplate gUnknown_8462E58[3] = {
     }
 };
 
-const struct WindowTemplate gUnknown_8462E64[] = {
+static const struct WindowTemplate gUnknown_8462E64[] = {
     {
         .priority = 0x00,
         .tilemapLeft = 0x00,
@@ -591,7 +591,7 @@ const struct WindowTemplate gUnknown_8462E64[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate gUnknown_8462E74[] = {
+static const struct WindowTemplate gUnknown_8462E74[] = {
     {
         .priority = 0x00,
         .tilemapLeft = 0x06,
@@ -619,7 +619,7 @@ const struct WindowTemplate gUnknown_8462E74[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate gUnknown_8462E94[] = {
+static const struct WindowTemplate gUnknown_8462E94[] = {
     {
         .priority = 0x00,
         .tilemapLeft = 0x06,
@@ -647,13 +647,13 @@ const struct WindowTemplate gUnknown_8462E94[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate *const gUnknown_8462EB4[3] = {
+static const struct WindowTemplate *const gUnknown_8462EB4[3] = {
     gUnknown_8462E64,
     gUnknown_8462E74,
     gUnknown_8462E94
 };
 
-const struct WindowTemplate gUnknown_8462EC0[] = {
+static const struct WindowTemplate gUnknown_8462EC0[] = {
     {
         .priority = 0x00,
         .tilemapLeft = 0x01,
@@ -697,69 +697,69 @@ ALIGNED(4) const struct TextColor gUnknown_8462EEC = {
     0x00, 0x02, 0x03
 };
 
-const u8 *const gUnknown_8462EF0[] = {
+static const u8 *const gUnknown_8462EF0[] = {
     gUnknown_81C5A04,
     gUnknown_81C5AEB,
     gUnknown_81C5BB9
 };
 
-const struct CompressedSpriteSheet gUnknown_8462EFC[3] = {
+static const struct CompressedSpriteSheet gUnknown_8462EFC[3] = {
     { (const void *)gUnknown_8462B74, 0x0400, 0x1001 },
     { (const void *)gUnknown_8462D34, 0x0200, 0x1002 },
     { (const void *)gUnknown_8462E18, 0x0080, 0x1003 },
 };
 
-const struct CompressedSpriteSheet gUnknown_8462F14 = {
+static const struct CompressedSpriteSheet gUnknown_8462F14 = {
     (const void *)gUnknown_8462A10, 0x0600, 0x1000
 };
 
-const struct SpritePalette gUnknown_8462F1C = {
+static const struct SpritePalette gUnknown_8462F1C = {
     (const void *)gUnknown_84629F0, 0x1001
 };
-const struct SpritePalette gUnknown_8462F24 = {
+static const struct SpritePalette gUnknown_8462F24 = {
     (const void *)gUnknown_84629D0, 0x1000
 };
 
-const union AnimCmd gUnknown_8462F2C[] = {
+static const union AnimCmd gUnknown_8462F2C[] = {
     ANIMCMD_FRAME( 0, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8462F34[] = {
+static const union AnimCmd gUnknown_8462F34[] = {
     ANIMCMD_FRAME(16, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8462F3C[] = {
+static const union AnimCmd gUnknown_8462F3C[] = {
     ANIMCMD_FRAME(32, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_8462F44[] = {
+static const union AnimCmd *const gUnknown_8462F44[] = {
     gUnknown_8462F2C
 };
-const union AnimCmd *const gUnknown_8462F48[] = {
+static const union AnimCmd *const gUnknown_8462F48[] = {
     gUnknown_8462F34
 };
-const union AnimCmd *const gUnknown_8462F4C[] = {
+static const union AnimCmd *const gUnknown_8462F4C[] = {
     gUnknown_8462F3C
 };
 
 extern const struct OamData gUnknown_83ACAF8;
 
-const struct SpriteTemplate gUnknown_8462F50[3] = {
+static const struct SpriteTemplate gUnknown_8462F50[3] = {
     { 0x1000, 0x1000, &gUnknown_83ACAF8, gUnknown_8462F44, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
     { 0x1000, 0x1000, &gUnknown_83ACAF8, gUnknown_8462F48, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
     { 0x1000, 0x1000, &gUnknown_83ACAF8, gUnknown_8462F4C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
 };
 
-const union AnimCmd gUnknown_8462F98[] = {
+static const union AnimCmd gUnknown_8462F98[] = {
     ANIMCMD_FRAME( 0, 30),
     ANIMCMD_FRAME(16, 30),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gUnknown_8462FA4[] = {
+static const union AnimCmd gUnknown_8462FA4[] = {
     ANIMCMD_FRAME(0, 60),
     ANIMCMD_FRAME(0, 60),
     ANIMCMD_FRAME(0, 60),
@@ -778,7 +778,7 @@ const union AnimCmd gUnknown_8462FA4[] = {
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gUnknown_8462FE4[] = {
+static const union AnimCmd gUnknown_8462FE4[] = {
     ANIMCMD_FRAME(0, 60),
     ANIMCMD_FRAME(0, 60),
     ANIMCMD_FRAME(0, 60),
@@ -796,13 +796,13 @@ const union AnimCmd gUnknown_8462FE4[] = {
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const gUnknown_8463020[] = {
+static const union AnimCmd *const gUnknown_8463020[] = {
     gUnknown_8462F98
 };
-const union AnimCmd *const gUnknown_8463024[] = {
+static const union AnimCmd *const gUnknown_8463024[] = {
     gUnknown_8462FA4
 };
-const union AnimCmd *const gUnknown_8463028[] = {
+static const union AnimCmd *const gUnknown_8463028[] = {
     gUnknown_8462FE4
 };
 
@@ -810,13 +810,13 @@ extern const struct OamData gUnknown_83AC9D8;
 extern const struct OamData gUnknown_83AC9F8;
 extern const struct OamData gUnknown_83AC9E8;
 
-const struct SpriteTemplate gUnknown_846302C[3] = {
+static const struct SpriteTemplate gUnknown_846302C[3] = {
     { 0x1001, 0x1001, &gUnknown_83AC9D8, gUnknown_8463020, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
     { 0x1002, 0x1001, &gUnknown_83AC9F8, gUnknown_8463024, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
     { 0x1003, 0x1001, &gUnknown_83AC9E8, gUnknown_8463028, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy }
 };
 
-const u8 *const gUnknown_8463074[] = {
+static const u8 *const gUnknown_8463074[] = {
     gUnknown_81C5875,
     gUnknown_81C58BA,
     gUnknown_81C58F9,
@@ -825,7 +825,7 @@ const u8 *const gUnknown_8463074[] = {
     gUnknown_81C5981
 };
 
-const u8 *const gUnknown_846308C[] = {
+static const u8 *const gUnknown_846308C[] = {
     gUnknown_81C575E,
     gUnknown_81C5767,
     gUnknown_81C577A,
@@ -847,7 +847,7 @@ const u8 *const gUnknown_846308C[] = {
     gUnknown_81C57CB
 };
 
-const u8 *const gUnknown_84630D8[] = {
+static const u8 *const gUnknown_84630D8[] = {
     gUnknown_81C575E,
     gUnknown_81C5767,
     gUnknown_81C57D0,
@@ -869,7 +869,7 @@ const u8 *const gUnknown_84630D8[] = {
     gUnknown_81C5828
 };
 
-const u8 *const gUnknown_8463124[] = {
+static const u8 *const gUnknown_8463124[] = {
     gUnknown_81C5758,
     gUnknown_81C576C,
     gUnknown_81C5771,
@@ -895,7 +895,7 @@ bool8 sub_812E9E4(void)
     return FuncIsActiveTask(sub_812E9F8);
 }
 
-void sub_812E9F8(u8 taskId)
+static void sub_812E9F8(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -959,14 +959,14 @@ s8 sub_812EAE4(u16 species, u32 personality, u8 a2)
     return sub_812EA78(species, personality, a2) - 32;
 }
 
-void sub_812EAFC(void)
+static void sub_812EAFC(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_812EB10(void)
+static void sub_812EB10(void)
 {
     RunTasks();
     RunTextPrinters();
@@ -983,7 +983,7 @@ void sub_812EB2C(void)
     SetMainCallback2(sub_812EB10);
 }
 
-void sub_812EB58(u8 taskId)
+static void sub_812EB58(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -1072,7 +1072,7 @@ void sub_812EB58(u8 taskId)
     gMain.state++;
 }
 
-void sub_812EEB0(void)
+static void sub_812EEB0(void)
 {
     sub_810F650(gUnknown_8415D2C, gUnknown_8415D48, 0, 0, 1);
     sOakSpeechResources->unk_0014[0] = AddWindow(gUnknown_8462EB4[sOakSpeechResources->unk_0012]);
@@ -1084,7 +1084,7 @@ void sub_812EEB0(void)
     CopyBgTilemapBufferToVram(1);
 }
 
-void sub_812EF50(u8 taskId)
+static void sub_812EF50(u8 taskId)
 {
     u8 i = 0;
     u8 r7 = sOakSpeechResources->unk_0012 - 1;
@@ -1118,7 +1118,7 @@ void sub_812EF50(u8 taskId)
     gTasks[taskId].func = sub_812F0B0;
 }
 
-void sub_812F0B0(u8 taskId)
+static void sub_812F0B0(u8 taskId)
 {
     if (!gPaletteFade.active && JOY_NEW((A_BUTTON | B_BUTTON)))
     {
@@ -1147,7 +1147,7 @@ void sub_812F0B0(u8 taskId)
     gTasks[taskId].func = sub_812F180;
 }
 
-void sub_812F180(u8 taskId)
+static void sub_812F180(u8 taskId)
 {
     u8 r8 = 0;
     u8 i;
@@ -1184,7 +1184,7 @@ void sub_812F180(u8 taskId)
     }
 }
 
-void sub_812F274(u8 taskId)
+static void sub_812F274(u8 taskId)
 {
     u8 i = 0;
 
@@ -1208,7 +1208,7 @@ void sub_812F274(u8 taskId)
     }
 }
 
-void sub_812F33C(u8 taskId)
+static void sub_812F33C(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u32 sp14 = 0;
@@ -1242,7 +1242,7 @@ void sub_812F33C(u8 taskId)
     }
 }
 
-void sub_812F4A8(u8 taskId)
+static void sub_812F4A8(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     switch (gMain.state)
@@ -1342,7 +1342,7 @@ void sub_812F4A8(u8 taskId)
     }
 }
 
-void sub_812F72C(u8 taskId)
+static void sub_812F72C(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1362,7 +1362,7 @@ void sub_812F72C(u8 taskId)
     }
 }
 
-void sub_812F7C0(u8 taskId)
+static void sub_812F7C0(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u32 size = 0;
@@ -1400,7 +1400,7 @@ void sub_812F7C0(u8 taskId)
     CopyWindowToVram(0, 3); \
 })
 
-void sub_812F880(u8 taskId)
+static void sub_812F880(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1416,7 +1416,7 @@ void sub_812F880(u8 taskId)
     }
 }
 
-void sub_812F944(u8 taskId)
+static void sub_812F944(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
@@ -1426,7 +1426,7 @@ void sub_812F944(u8 taskId)
     }
 }
 
-void sub_812F9EC(u8 taskId)
+static void sub_812F9EC(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 spriteId;
@@ -1446,7 +1446,7 @@ void sub_812F9EC(u8 taskId)
     }
 }
 
-void sub_812FA78(u8 taskId)
+static void sub_812FA78(u8 taskId)
 {
     if (IsCryFinished())
     {
@@ -1464,7 +1464,7 @@ void sub_812FA78(u8 taskId)
     }
 }
 
-void sub_812FB4C(u8 taskId)
+static void sub_812FB4C(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
@@ -1473,7 +1473,7 @@ void sub_812FB4C(u8 taskId)
     }
 }
 
-void sub_812FBF0(u8 taskId)
+static void sub_812FBF0(u8 taskId)
 {
     u8 spriteId;
 
@@ -1488,7 +1488,7 @@ void sub_812FBF0(u8 taskId)
     }
 }
 
-void sub_812FC68(u8 taskId)
+static void sub_812FC68(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1519,7 +1519,7 @@ void sub_812FC68(u8 taskId)
     }
 }
 
-void sub_812FD78(u8 taskId)
+static void sub_812FD78(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1532,7 +1532,7 @@ void sub_812FD78(u8 taskId)
     }
 }
 
-void sub_812FDC0(u8 taskId)
+static void sub_812FDC0(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1550,7 +1550,7 @@ void sub_812FDC0(u8 taskId)
     }
 }
 
-void sub_812FE88(u8 taskId)
+static void sub_812FE88(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
@@ -1572,7 +1572,7 @@ void sub_812FE88(u8 taskId)
     }
 }
 
-void sub_812FFA4(u8 taskId)
+static void sub_812FFA4(u8 taskId)
 {
     s8 input = ProcessMenuInputNoWrapAround();
     switch (input)
@@ -1591,7 +1591,7 @@ void sub_812FFA4(u8 taskId)
 
 }
 
-void sub_812FFF0(u8 taskId)
+static void sub_812FFF0(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     sub_810F4D8(data[13], 1);
@@ -1603,7 +1603,7 @@ void sub_812FFF0(u8 taskId)
     gTasks[taskId].func = sub_8130050;
 }
 
-void sub_8130050(u8 taskId)
+static void sub_8130050(u8 taskId)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
         sub_81311F4(MALE, 0);
@@ -1614,7 +1614,7 @@ void sub_8130050(u8 taskId)
     gTasks[taskId].func = sub_81300A0;
 }
 
-void sub_81300A0(u8 taskId)
+static void sub_81300A0(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1631,7 +1631,7 @@ void sub_81300A0(u8 taskId)
     }
 }
 
-void sub_8130160(u8 taskId)
+static void sub_8130160(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
@@ -1640,7 +1640,7 @@ void sub_8130160(u8 taskId)
         gTasks[taskId].func = sub_81303B4;
     }
 }
-void sub_81301B0(u8 taskId)
+static void sub_81301B0(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1661,7 +1661,7 @@ void sub_81301B0(u8 taskId)
     }
 }
 
-void sub_8130228(u8 taskId)
+static void sub_8130228(u8 taskId)
 {
     sub_8131660(taskId, sOakSpeechResources->unk_0010);
     if (sOakSpeechResources->unk_0010 == 0)
@@ -1675,7 +1675,7 @@ void sub_8130228(u8 taskId)
     gTasks[taskId].func = sub_8130324;
 }
 
-void sub_8130324(u8 taskId)
+static void sub_8130324(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s8 input = ProcessMenuInput();
@@ -1702,7 +1702,7 @@ void sub_8130324(u8 taskId)
     }
 }
 
-void sub_81303B4(u8 taskId)
+static void sub_81303B4(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1722,7 +1722,7 @@ void sub_81303B4(u8 taskId)
     }
 }
 
-void sub_8130464(u8 taskId)
+static void sub_8130464(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1755,7 +1755,7 @@ void sub_8130464(u8 taskId)
     }
 }
 
-void sub_8130554(u8 taskId)
+static void sub_8130554(u8 taskId)
 {
     s8 input = ProcessMenuInputNoWrap_();
     switch (input)
@@ -1787,7 +1787,7 @@ void sub_8130554(u8 taskId)
     }
 }
 
-void sub_8130650(u8 taskId)
+static void sub_8130650(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1801,7 +1801,7 @@ void sub_8130650(u8 taskId)
     }
 }
 
-void sub_8130694(u8 taskId)
+static void sub_8130694(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
@@ -1811,7 +1811,7 @@ void sub_8130694(u8 taskId)
     }
 }
 
-void sub_81306D4(u8 taskId)
+static void sub_81306D4(u8 taskId)
 {
     ChangeBgX(2, 0, 0);
     gTasks[taskId].data[1] = 0;
@@ -1821,7 +1821,7 @@ void sub_81306D4(u8 taskId)
     gTasks[taskId].func = sub_813071C;
 }
 
-void sub_813071C(u8 taskId)
+static void sub_813071C(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1833,7 +1833,7 @@ void sub_813071C(u8 taskId)
     }
 }
 
-void sub_81307D0(u8 taskId)
+static void sub_81307D0(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1857,7 +1857,7 @@ void sub_81307D0(u8 taskId)
     }
 }
 
-void sub_8130858(u8 taskId)
+static void sub_8130858(u8 taskId)
 {
     if (gTasks[taskId].data[2] != 0)
     {
@@ -1868,7 +1868,7 @@ void sub_8130858(u8 taskId)
     }
 }
 
-void sub_81308D0(u8 taskId)
+static void sub_81308D0(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
@@ -1882,7 +1882,7 @@ void sub_81308D0(u8 taskId)
     }
 }
 
-void sub_8130914(u8 taskId)
+static void sub_8130914(u8 taskId)
 {
     sOakSpeechResources->unk_0012 = 0;
     sub_8130A38(taskId);
@@ -1890,7 +1890,7 @@ void sub_8130914(u8 taskId)
     sub_8130940(taskId);
 }
 
-void sub_8130940(u8 taskId)
+static void sub_8130940(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     SetBgAttribute(2, 6, 1);
@@ -1901,7 +1901,7 @@ void sub_8130940(u8 taskId)
     gTasks[taskId].func = sub_8130980;
 }
 
-void sub_8130980(u8 taskId)
+static void sub_8130980(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s16 x, y;
@@ -1926,7 +1926,7 @@ void sub_8130980(u8 taskId)
     }
 }
 
-void sub_8130A38(u8 taskId)
+static void sub_8130A38(u8 taskId)
 {
     u8 taskId2 = CreateTask(sub_8130A80, 1);
     s16 * data = gTasks[taskId2].data;
@@ -1937,7 +1937,7 @@ void sub_8130A38(u8 taskId)
     BeginNormalPaletteFade(0xFFFF0FCF, 4, 0, 16, RGB_BLACK);
 }
 
-void sub_8130A80(u8 taskId)
+static void sub_8130A80(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     if (!gPaletteFade.active)
@@ -1955,7 +1955,7 @@ void sub_8130A80(u8 taskId)
     }
 }
 
-void sub_8130ADC(u8 taskId)
+static void sub_8130ADC(u8 taskId)
 {
     u8 taskId2 = CreateTask(sub_8130B10, 2);
     s16 * data = gTasks[taskId2].data;
@@ -1966,7 +1966,7 @@ void sub_8130ADC(u8 taskId)
     data[15] = 0;
 }
 
-void sub_8130B10(u8 taskId)
+static void sub_8130B10(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 i;
@@ -1993,7 +1993,7 @@ void sub_8130B10(u8 taskId)
     }
 }
 
-void sub_8130BA8(u8 taskId)
+static void sub_8130BA8(u8 taskId)
 {
     if (gTasks[taskId].data[0] != 0)
         gTasks[taskId].data[0]--;
@@ -2004,7 +2004,7 @@ void sub_8130BA8(u8 taskId)
     }
 }
 
-void sub_8130BF0(u8 taskId)
+static void sub_8130BF0(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2012,7 +2012,7 @@ void sub_8130BF0(u8 taskId)
     }
 }
 
-void sub_8130C20(u8 taskId)
+static void sub_8130C20(u8 taskId)
 {
     FreeAllWindowBuffers();
     sub_8044D80();
@@ -2124,12 +2124,12 @@ static void CreateNidoranFSprite(u8 taskId)
     gTasks[taskId].data[4] = spriteId;
 }
 
-void sub_8130FB8(struct Sprite * sprite)
+static void sub_8130FB8(struct Sprite * sprite)
 {
     sprite->pos2.y = gSprites[sprite->data[0]].animCmdIndex;
 }
 
-void sub_8130FD4(u8 taskId, u8 state)
+static void sub_8130FD4(u8 taskId, u8 state)
 {
     u8 spriteId;
     u8 i = 0;
@@ -2170,7 +2170,7 @@ void sub_8130FD4(u8 taskId, u8 state)
     }
 }
 
-void sub_8131168(u8 taskId, u8 state)
+static void sub_8131168(u8 taskId, u8 state)
 {
     u8 i;
 
@@ -2194,7 +2194,7 @@ void sub_8131168(u8 taskId, u8 state)
     }
 }
 
-void sub_81311F4(u16 whichPic, u16 tileOffset)
+static void sub_81311F4(u16 whichPic, u16 tileOffset)
 {
     u32 i;
 
@@ -2230,13 +2230,13 @@ void sub_81311F4(u16 whichPic, u16 tileOffset)
     sOakSpeechResources->unk_0004 = 0;
 }
 
-void sub_8131310(void)
+static void sub_8131310(void)
 {
     FillBgTilemapBufferRect(2, 0x000, 11, 1, 8, 12, 0x10);
     CopyBgTilemapBufferToVram(2);
 }
 
-void sub_8131338(u8 taskId)
+static void sub_8131338(u8 taskId)
 {
     u8 i = 0;
     if (gTasks[taskId].data[1] == 0)
@@ -2269,7 +2269,7 @@ void sub_8131338(u8 taskId)
     }
 }
 
-void sub_813144C(u8 taskId, u8 state)
+static void sub_813144C(u8 taskId, u8 state)
 {
     u8 taskId2;
     u8 i = 0;
@@ -2290,7 +2290,7 @@ void sub_813144C(u8 taskId, u8 state)
     }
 }
 
-void sub_81314DC(u8 taskId)
+static void sub_81314DC(u8 taskId)
 {
     u8 i = 0;
 
@@ -2323,7 +2323,7 @@ void sub_81314DC(u8 taskId)
     }
 }
 
-void sub_81315CC(u8 taskId, u8 state)
+static void sub_81315CC(u8 taskId, u8 state)
 {
     u8 taskId2;
     u8 i = 0;
@@ -2344,7 +2344,7 @@ void sub_81315CC(u8 taskId, u8 state)
     }
 }
 
-void sub_8131660(u8 taskId, u8 state)
+static void sub_8131660(u8 taskId, u8 state)
 {
     s16 * data = gTasks[taskId].data;
     const u8 *const * textPtrs;
@@ -2367,7 +2367,7 @@ void sub_8131660(u8 taskId, u8 state)
     CopyWindowToVram(data[13], 3);
 }
 
-void sub_8131754(u8 arg0, u8 namePick)
+static void sub_8131754(u8 arg0, u8 namePick)
 {
     const u8 * src;
     u8 * dest;

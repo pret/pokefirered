@@ -5,56 +5,10 @@
 
 	.align 2
 	// oak_speech
-gUnknown_8460D94:: @ 8460D94
-	.incbin "baserom.gba", 0x460D94, 0xA0
-
-gUnknown_8460E34:: @ 8460E34
-	.incbin "baserom.gba", 0x460E34, 0xA0
-
-gUnknown_8460ED4:: @ 8460ED4
-	.incbin "baserom.gba", 0x460ED4, 0x40
-
-gUnknown_8460F14:: @ 8460F14
-	.incbin "baserom.gba", 0x460F14, 0x6E8
-
-gUnknown_84615FC:: @ 84615FC
-	.incbin "baserom.gba", 0x4615FC, 0x40
-
-gUnknown_846163C:: @ 846163C
-	.incbin "baserom.gba", 0x46163C, 0x698
-
-gUnknown_8461CD4:: @ 8461CD4
-	.incbin "baserom.gba", 0x461CD4, 0x40
-
-gUnknown_8461D14:: @ 8461D14
-	.incbin "baserom.gba", 0x461D14, 0x698
-
-gUnknown_84623AC:: @ 84623AC
-	.incbin "baserom.gba", 0x4623AC, 0x40
-
-gUnknown_84623EC:: @ 84623EC
-	.incbin "baserom.gba", 0x4623EC, 0x5E4
-
-gUnknown_84629D0::
-	.incbin "data/oak_speech/unk_84629D0.gbapal"
-
-gUnknown_84629F0::
-	.incbin "data/oak_speech/unk_84629F0.gbapal"
-
-gUnknown_8462A10::
-	.incbin "data/oak_speech/unk_8462A10.4bpp.lz"
-
-gUnknown_8462B74::
-	.incbin "data/oak_speech/unk_8462B74.4bpp.lz"
-
-gUnknown_8462D34::
-	.incbin "data/oak_speech/unk_8462D34.4bpp.lz"
-
-gUnknown_8462E18::
-	.incbin "data/oak_speech/unk_8462E18.4bpp.lz"
-
 gUnknown_8462E58:: @ 8462E58
-	.incbin "baserom.gba", 0x462E58, 0xC
+	.4byte 0x000001f8
+	.4byte 0x000021e1
+	.4byte 0x00001bc2
 
 gUnknown_8462E64:: @ 8462E64
 	window_template 0x00, 0x00, 0x07, 0x1e, 0x04, 0x0f, 0x0001

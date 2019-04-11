@@ -29,7 +29,7 @@
 struct OakSpeechResources
 {
     void * unk_0000;
-    u8 filler_0004[0x4];
+    void * unk_0004;
     void * unk_0008;
     u8 filler_000C[4];
     u16 unk_0010;
@@ -96,7 +96,7 @@ static void CB2_ReturnFromNamingScreen(void);
 static void CreateNidoranFSprite(u8 taskId);
 void sub_8130FD4(u8 taskId, u8 state);
 void sub_8131168(u8 taskId, u8 state);
-void sub_81311F4(u8 arg0, u8 state);
+void sub_81311F4(u16 whichPic, u16 tileOffset);
 void sub_8131310(void);
 void sub_813144C(u8 taskId, u8 state);
 void sub_81315CC(u8 taskId, u8 state);
@@ -533,9 +533,22 @@ const u32 gUnknown_84605E8[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz")
 const u32 gUnknown_8460BA8[] = INCBIN_U32("data/oak_speech/unk_8460BA8.bin.lz");
 const u32 gUnknown_8460CA4[] = INCBIN_U32("data/oak_speech/unk_8460CA4.4bpp.lz");
 const u32 gUnknown_8460CE8[] = INCBIN_U32("data/oak_speech/unk_8460CE8.bin.lz");
-
-extern const u16 gUnknown_8460D94[];
-extern const u16 gUnknown_8460E34[];
+const u16 gUnknown_8460D94[] = INCBIN_U16("data/oak_speech/unk_8460D94.bin");
+const u16 gUnknown_8460E34[] = INCBIN_U16("data/oak_speech/unk_8460E34.bin");
+const u16 gUnknown_8460ED4[] = INCBIN_U16("data/oak_speech/unk_8460ED4.gbapal");
+const u32 gUnknown_8460F14[] = INCBIN_U32("data/oak_speech/unk_8460F14.8bpp.lz");
+const u16 gUnknown_84615FC[] = INCBIN_U16("data/oak_speech/unk_84615FC.gbapal");
+const u32 gUnknown_846163C[] = INCBIN_U32("data/oak_speech/unk_846163C.8bpp.lz");
+const u16 gUnknown_8461CD4[] = INCBIN_U16("data/oak_speech/unk_8461CD4.gbapal");
+const u32 gUnknown_8461D14[] = INCBIN_U32("data/oak_speech/unk_8461D14.8bpp.lz");
+const u16 gUnknown_84623AC[] = INCBIN_U16("data/oak_speech/unk_84623AC.gbapal");
+const u32 gUnknown_84623EC[] = INCBIN_U32("data/oak_speech/unk_84623EC.8bpp.lz");
+const u16 gUnknown_84629D0[] = INCBIN_U16("data/oak_speech/unk_84629D0.gbapal");
+const u16 gUnknown_84629F0[] = INCBIN_U16("data/oak_speech/unk_84629F0.gbapal");
+const u32 gUnknown_8462A10[] = INCBIN_U32("data/oak_speech/unk_8462A10.4bpp.lz");
+const u32 gUnknown_8462B74[] = INCBIN_U32("data/oak_speech/unk_8462B74.4bpp.lz");
+const u32 gUnknown_8462D34[] = INCBIN_U32("data/oak_speech/unk_8462D34.4bpp.lz");
+const u32 gUnknown_8462E18[] = INCBIN_U32("data/oak_speech/unk_8462E18.4bpp.lz");
 
 extern const struct BgTemplate gUnknown_8462E58[3];
 extern const struct WindowTemplate *const gUnknown_8462EB4[3];
@@ -1843,5 +1856,104 @@ void sub_8130FD4(u8 taskId, u8 state)
             gTasks[taskId].data[7 + i] = spriteId;
         }
         break;
+    }
+}
+
+void sub_8131168(u8 taskId, u8 state)
+{
+    u8 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        DestroySprite(&gSprites[gTasks[taskId].data[7 + i]]);
+    }
+
+    switch (state)
+    {
+    case 0:
+        FreeSpriteTilesByTag(0x1003);
+        FreeSpriteTilesByTag(0x1002);
+        FreeSpriteTilesByTag(0x1001);
+        FreeSpritePaletteByTag(0x1001);
+        break;
+    case 1:
+        FreeSpriteTilesByTag(0x1000);
+        FreeSpritePaletteByTag(0x1000);
+        break;
+    }
+}
+
+void sub_81311F4(u16 whichPic, u16 tileOffset)
+{
+    u32 i;
+
+    switch (whichPic)
+    {
+    case 0: // FIRE
+        LoadPalette(gUnknown_84615FC, 0x40, 0x40);
+        LZ77UnCompVram(gUnknown_846163C, (void *)0x06000600 + tileOffset);
+        break;
+    case 1: // LEAF
+        LoadPalette(gUnknown_8460ED4, 0x40, 0x40);
+        LZ77UnCompVram(gUnknown_8460F14, (void *)0x06000600 + tileOffset);
+        break;
+    case 2: // BLUE
+        LoadPalette(gUnknown_84623AC, 0x60, 0x40);
+        LZ77UnCompVram(gUnknown_84623EC, (void *)0x06000600 + tileOffset);
+        break;
+    case 3: // OAK
+        LoadPalette(gUnknown_8461CD4, 0x60, 0x40);
+        LZ77UnCompVram(gUnknown_8461D14, (void *)0x06000600 + tileOffset);
+        break;
+    default:
+        return;
+    }
+
+    sOakSpeechResources->unk_0004 = AllocZeroed(0x60);
+    for (i = 0; i < 0x60; i++)
+        ((u8 *)sOakSpeechResources->unk_0004)[i] = i;
+    FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x10);
+    CopyRectToBgTilemapBufferRect(2, sOakSpeechResources->unk_0004, 0, 0, 8, 12, 11, 2, 8, 12, 0x10, (tileOffset / 64) + 0x18, 0x00);
+    CopyBgTilemapBufferToVram(2);
+    Free(sOakSpeechResources->unk_0004);
+    sOakSpeechResources->unk_0004 = 0;
+}
+
+void sub_8131310(void)
+{
+    FillBgTilemapBufferRect(2, 0x000, 11, 1, 8, 12, 0x10);
+    CopyBgTilemapBufferToVram(2);
+}
+
+void sub_8131338(u8 taskId)
+{
+    u8 i = 0;
+    if (gTasks[taskId].data[1] == 0)
+    {
+        gTasks[gTasks[taskId].data[0]].data[2] = 1;
+        DestroyTask(taskId);
+        for (i = 0; i < 3; i++)
+        {
+            gSprites[gTasks[taskId].data[7 + i]].invisible = TRUE;
+        }
+    }
+    else
+    {
+        if (gTasks[taskId].data[4] != 0)
+            gTasks[taskId].data[4]--;
+        else
+        {
+            gTasks[taskId].data[4] = gTasks[taskId].data[3];
+            gTasks[taskId].data[1]--;
+            gTasks[taskId].data[2]++;
+            if (gTasks[taskId].data[1] == 8)
+            {
+                for (i = 0; i < 3; i++)
+                {
+                    gSprites[gTasks[taskId].data[7 + i]].invisible ^= TRUE;
+                }
+            }
+            SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[2] * 256) + gTasks[taskId].data[1]);
+        }
     }
 }

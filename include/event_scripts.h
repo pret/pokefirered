@@ -705,6 +705,7 @@ extern const u8 gFameCheckerFlavorTextOriginObjectName_Giovanni3[];
 extern const u8 gFameCheckerFlavorTextOriginObjectName_Giovanni4[];
 extern const u8 gFameCheckerFlavorTextOriginObjectName_Giovanni5[];
 
+extern const u8 gUnknown_81C574F[];
 extern const u8 gUnknown_81C582D[];
 extern const u8 gUnknown_81C59D5[];
 extern const u8 gUnknown_81C5C78[];

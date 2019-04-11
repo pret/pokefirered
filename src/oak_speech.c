@@ -23,6 +23,7 @@
 #include "naming_screen.h"
 #include "math_util.h"
 #include "overworld.h"
+#include "random.h"
 #include "constants/species.h"
 #include "constants/songs.h"
 
@@ -555,6 +556,7 @@ extern const struct WindowTemplate *const gUnknown_8462EB4[3];
 extern const struct WindowTemplate gUnknown_8462EC0;
 extern const struct WindowTemplate gUnknown_8462EC8;
 extern const struct WindowTemplate gUnknown_8462ED0;
+extern const struct WindowTemplate gUnknown_8462ED8;
 extern const struct TextColor gUnknown_8462EE8;
 extern const struct TextColor gUnknown_8462EEC;
 extern const u8 *const gUnknown_8462EF0[];
@@ -565,6 +567,9 @@ extern const struct SpritePalette gUnknown_8462F24;
 extern const struct SpriteTemplate gUnknown_8462F50[3];
 extern const struct SpriteTemplate gUnknown_846302C[3];
 extern const u8 *const gUnknown_8463074[];
+extern const u8 *const gUnknown_846308C[];
+extern const u8 *const gUnknown_84630D8[];
+extern const u8 *const gUnknown_8463124[];
 
 void sub_812E944(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 {
@@ -1956,4 +1961,127 @@ void sub_8131338(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[2] * 256) + gTasks[taskId].data[1]);
         }
     }
+}
+
+void sub_813144C(u8 taskId, u8 state)
+{
+    u8 taskId2;
+    u8 i = 0;
+
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_OBJ);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0x10);
+    SetGpuReg(REG_OFFSET_BLDY, 0);
+    gTasks[taskId].data[2] = 0;
+    taskId2 = CreateTask(sub_8131338, 0);
+    gTasks[taskId2].data[0] = taskId;
+    gTasks[taskId2].data[1] = 16;
+    gTasks[taskId2].data[2] = 0;
+    gTasks[taskId2].data[3] = state;
+    gTasks[taskId2].data[4] = state;
+    for (i = 0; i < 3; i++)
+    {
+        gTasks[taskId2].data[7 + i] = gTasks[taskId].data[7 + i];
+    }
+}
+
+void sub_81314DC(u8 taskId)
+{
+    u8 i = 0;
+
+    if (gTasks[taskId].data[1] == 16)
+    {
+        if (!gPaletteFade.active)
+        {
+            gTasks[gTasks[taskId].data[0]].data[2] = 1;
+            DestroyTask(taskId);
+        }
+    }
+    else
+    {
+        if (gTasks[taskId].data[4] != 0)
+            gTasks[taskId].data[4]--;
+        else
+        {
+            gTasks[taskId].data[4] = gTasks[taskId].data[3];
+            gTasks[taskId].data[1] += 2;
+            gTasks[taskId].data[2] -= 2;
+            if (gTasks[taskId].data[1] == 8)
+            {
+                for (i = 0; i < 3; i++)
+                {
+                    gSprites[gTasks[taskId].data[7 + i]].invisible ^= TRUE;
+                }
+            }
+            SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[2] * 256) + gTasks[taskId].data[1]);
+        }
+    }
+}
+
+void sub_81315CC(u8 taskId, u8 state)
+{
+    u8 taskId2;
+    u8 i = 0;
+
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_OBJ);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0x1000);
+    SetGpuReg(REG_OFFSET_BLDY, 0);
+    gTasks[taskId].data[2] = 0;
+    taskId2 = CreateTask(sub_81314DC, 0);
+    gTasks[taskId2].data[0] = taskId;
+    gTasks[taskId2].data[1] = 0;
+    gTasks[taskId2].data[2] = 16;
+    gTasks[taskId2].data[3] = state;
+    gTasks[taskId2].data[4] = state;
+    for (i = 0; i < 3; i++)
+    {
+        gTasks[taskId2].data[7 + i] = gTasks[taskId].data[7 + i];
+    }
+}
+
+void sub_8131660(u8 taskId, u8 state)
+{
+    s16 * data = gTasks[taskId].data;
+    const u8 *const * textPtrs;
+    u8 i;
+
+    data[13] = AddWindow(&gUnknown_8462ED8);
+    PutWindowTilemap(data[13]);
+    SetWindowBorderStyle(data[13], 1, sub_80F796C(), 14);
+    FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
+    AddTextPrinterParameterized(data[13], 2, gUnknown_81C574F, 8, 1, 0, NULL);
+    if (state == 0)
+        textPtrs = gSaveBlock2Ptr->playerGender == MALE ? gUnknown_846308C : gUnknown_84630D8;
+    else
+        textPtrs = gUnknown_8463124;
+    for (i = 0; i < 4; i++)
+    {
+        AddTextPrinterParameterized(data[13], 2, textPtrs[i], 8, 16 * (i + 1) + 1, 0, NULL);
+    }
+    sub_810F7D8(data[13], 2, 0, 1, 16, 5, 0);
+    CopyWindowToVram(data[13], 3);
+}
+
+void sub_8131754(u8 arg0, u8 namePick)
+{
+    const u8 * src;
+    u8 * dest;
+    u8 i;
+
+    if (arg0 == 0)
+    {
+        if (gSaveBlock2Ptr->playerGender == MALE)
+            src = gUnknown_846308C[Random() % 19];
+        else
+            src = gUnknown_84630D8[Random() % 19];
+        dest = gSaveBlock2Ptr->playerName;
+    }
+    else
+    {
+        src = gUnknown_8463124[namePick];
+        dest = gSaveBlock1Ptr->rivalName;
+    }
+    for (i = 0; i < PLAYER_NAME_LENGTH - 1 && src[i] != EOS; i++)
+        dest[i] = src[i];
+    for (; i < PLAYER_NAME_LENGTH; i++)
+        dest[i] = EOS;
 }

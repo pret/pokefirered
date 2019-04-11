@@ -551,25 +551,331 @@ const u32 gUnknown_8462B74[] = INCBIN_U32("data/oak_speech/unk_8462B74.4bpp.lz")
 const u32 gUnknown_8462D34[] = INCBIN_U32("data/oak_speech/unk_8462D34.4bpp.lz");
 const u32 gUnknown_8462E18[] = INCBIN_U32("data/oak_speech/unk_8462E18.4bpp.lz");
 
-extern const struct BgTemplate gUnknown_8462E58[3];
-extern const struct WindowTemplate *const gUnknown_8462EB4[3];
-extern const struct WindowTemplate gUnknown_8462EC0;
-extern const struct WindowTemplate gUnknown_8462EC8;
-extern const struct WindowTemplate gUnknown_8462ED0;
-extern const struct WindowTemplate gUnknown_8462ED8;
-extern const struct TextColor gUnknown_8462EE8;
-extern const struct TextColor gUnknown_8462EEC;
-extern const u8 *const gUnknown_8462EF0[];
-extern const struct CompressedSpriteSheet gUnknown_8462EFC[3];
-extern const struct CompressedSpriteSheet gUnknown_8462F14;
-extern const struct SpritePalette gUnknown_8462F1C;
-extern const struct SpritePalette gUnknown_8462F24;
-extern const struct SpriteTemplate gUnknown_8462F50[3];
-extern const struct SpriteTemplate gUnknown_846302C[3];
-extern const u8 *const gUnknown_8463074[];
-extern const u8 *const gUnknown_846308C[];
-extern const u8 *const gUnknown_84630D8[];
-extern const u8 *const gUnknown_8463124[];
+const struct BgTemplate gUnknown_8462E58[3] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }, {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x000
+    }, {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 28,
+        .screenSize = 1,
+        .paletteMode = 1,
+        .priority = 1,
+        .baseTile = 0x000
+    }
+};
+
+const struct WindowTemplate gUnknown_8462E64[] = {
+    {
+        .priority = 0x00,
+        .tilemapLeft = 0x00,
+        .tilemapTop = 0x07,
+        .width = 0x1e,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0001
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate gUnknown_8462E74[] = {
+    {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x03,
+        .width = 0x18,
+        .height = 0x06,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0001
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0a,
+        .width = 0x18,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0092
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x18,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x00f3
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate gUnknown_8462E94[] = {
+    {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x03,
+        .width = 0x18,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0001
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x08,
+        .width = 0x18,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0062
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0d,
+        .width = 0x18,
+        .height = 0x06,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x00c3
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate *const gUnknown_8462EB4[3] = {
+    gUnknown_8462E64,
+    gUnknown_8462E74,
+    gUnknown_8462E94
+};
+
+const struct WindowTemplate gUnknown_8462EC0[] = {
+    {
+        .priority = 0x00,
+        .tilemapLeft = 0x01,
+        .tilemapTop = 0x04,
+        .width = 0x1c,
+        .height = 0x0f,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0001
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x12,
+        .tilemapTop = 0x09,
+        .width = 0x09,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0174
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x02,
+        .tilemapTop = 0x02,
+        .width = 0x06,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0180
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x02,
+        .tilemapTop = 0x02,
+        .width = 0x0c,
+        .height = 0x0a,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0001
+    }, DUMMY_WIN_TEMPLATE
+};
+
+ALIGNED(4) const struct TextColor gUnknown_8462EE8 = {
+    0x00, 0x01, 0x02
+};
+
+ALIGNED(4) const struct TextColor gUnknown_8462EEC = {
+    0x00, 0x02, 0x03
+};
+
+const u8 *const gUnknown_8462EF0[] = {
+    gUnknown_81C5A04,
+    gUnknown_81C5AEB,
+    gUnknown_81C5BB9
+};
+
+const struct CompressedSpriteSheet gUnknown_8462EFC[3] = {
+    { (const void *)gUnknown_8462B74, 0x0400, 0x1001 },
+    { (const void *)gUnknown_8462D34, 0x0200, 0x1002 },
+    { (const void *)gUnknown_8462E18, 0x0080, 0x1003 },
+};
+
+const struct CompressedSpriteSheet gUnknown_8462F14 = {
+    (const void *)gUnknown_8462A10, 0x0600, 0x1000
+};
+
+const struct SpritePalette gUnknown_8462F1C = {
+    (const void *)gUnknown_84629F0, 0x1001
+};
+const struct SpritePalette gUnknown_8462F24 = {
+    (const void *)gUnknown_84629D0, 0x1000
+};
+
+const union AnimCmd gUnknown_8462F2C[] = {
+    ANIMCMD_FRAME( 0, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8462F34[] = {
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8462F3C[] = {
+    ANIMCMD_FRAME(32, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_8462F44[] = {
+    gUnknown_8462F2C
+};
+const union AnimCmd *const gUnknown_8462F48[] = {
+    gUnknown_8462F34
+};
+const union AnimCmd *const gUnknown_8462F4C[] = {
+    gUnknown_8462F3C
+};
+
+extern const struct OamData gUnknown_83ACAF8;
+
+const struct SpriteTemplate gUnknown_8462F50[3] = {
+    { 0x1000, 0x1000, &gUnknown_83ACAF8, gUnknown_8462F44, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1000, 0x1000, &gUnknown_83ACAF8, gUnknown_8462F48, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1000, 0x1000, &gUnknown_83ACAF8, gUnknown_8462F4C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+};
+
+const union AnimCmd gUnknown_8462F98[] = {
+    ANIMCMD_FRAME( 0, 30),
+    ANIMCMD_FRAME(16, 30),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gUnknown_8462FA4[] = {
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(8, 12),
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_FRAME(8, 12),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(8, 12),
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_FRAME(8, 12),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gUnknown_8462FE4[] = {
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(2,  8),
+    ANIMCMD_FRAME(0,  8),
+    ANIMCMD_FRAME(2,  8),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(2,  8),
+    ANIMCMD_FRAME(0,  8),
+    ANIMCMD_FRAME(2,  8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gUnknown_8463020[] = {
+    gUnknown_8462F98
+};
+const union AnimCmd *const gUnknown_8463024[] = {
+    gUnknown_8462FA4
+};
+const union AnimCmd *const gUnknown_8463028[] = {
+    gUnknown_8462FE4
+};
+
+extern const struct OamData gUnknown_83AC9D8;
+extern const struct OamData gUnknown_83AC9F8;
+extern const struct OamData gUnknown_83AC9E8;
+
+const struct SpriteTemplate gUnknown_846302C[3] = {
+    { 0x1001, 0x1001, &gUnknown_83AC9D8, gUnknown_8463020, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1002, 0x1001, &gUnknown_83AC9F8, gUnknown_8463024, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1003, 0x1001, &gUnknown_83AC9E8, gUnknown_8463028, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy }
+};
+
+const u8 *const gUnknown_8463074[] = {
+    gUnknown_81C5875,
+    gUnknown_81C58BA,
+    gUnknown_81C58F9,
+    gUnknown_81C592B,
+    gUnknown_81C594F,
+    gUnknown_81C5981
+};
+
+const u8 *const gUnknown_846308C[] = {
+    gUnknown_81C575E,
+    gUnknown_81C5767,
+    gUnknown_81C577A,
+    gUnknown_81C577E,
+    gUnknown_81C5783,
+    gUnknown_81C5788,
+    gUnknown_81C578C,
+    gUnknown_81C5792,
+    gUnknown_81C5797,
+    gUnknown_81C579D,
+    gUnknown_81C57A2,
+    gUnknown_81C57A9,
+    gUnknown_81C57AF,
+    gUnknown_81C57B4,
+    gUnknown_81C57B8,
+    gUnknown_81C57BC,
+    gUnknown_81C57C2,
+    gUnknown_81C57C6,
+    gUnknown_81C57CB
+};
+
+const u8 *const gUnknown_84630D8[] = {
+    gUnknown_81C575E,
+    gUnknown_81C5767,
+    gUnknown_81C57D0,
+    gUnknown_81C57D4,
+    gUnknown_81C57D9,
+    gUnknown_81C57E0,
+    gUnknown_81C57E8,
+    gUnknown_81C57EE,
+    gUnknown_81C57F4,
+    gUnknown_81C57FA,
+    gUnknown_81C57FF,
+    gUnknown_81C5806,
+    gUnknown_81C580A,
+    gUnknown_81C580F,
+    gUnknown_81C5814,
+    gUnknown_81C5819,
+    gUnknown_81C581F,
+    gUnknown_81C5823,
+    gUnknown_81C5828
+};
+
+const u8 *const gUnknown_8463124[] = {
+    gUnknown_81C5758,
+    gUnknown_81C576C,
+    gUnknown_81C5771,
+    gUnknown_81C5775
+};
+
 
 void sub_812E944(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 {
@@ -919,7 +1225,7 @@ void sub_812F33C(u8 taskId)
         CopyBgTilemapBufferToVram(1);
         Free(sOakSpeechResources->unk_0008);
         sOakSpeechResources->unk_0008 = NULL;
-        data[14] = AddWindow(&gUnknown_8462EC0);
+        data[14] = AddWindow(&gUnknown_8462EC0[0]);
         PutWindowTilemap(data[14]);
         FillWindowPixelBuffer(data[14], 0x00);
         CopyWindowToVram(data[14], 3);
@@ -1248,7 +1554,7 @@ void sub_812FE88(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
-        gTasks[taskId].data[13] = AddWindow(&gUnknown_8462EC8);
+        gTasks[taskId].data[13] = AddWindow(&gUnknown_8462EC0[1]);
         PutWindowTilemap(gTasks[taskId].data[13]);
         SetWindowBorderStyle(gTasks[taskId].data[13], 1, sub_80F796C(), 14);
         FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
@@ -1442,7 +1748,7 @@ void sub_8130464(u8 taskId)
                 data[3]--;
             else
             {
-                sub_810FF60(&gUnknown_8462ED0, 2, 0, 2, sub_80F796C(), 14, 0);
+                sub_810FF60(&gUnknown_8462EC0[2], 2, 0, 2, sub_80F796C(), 14, 0);
                 gTasks[taskId].func = sub_8130554;
             }
         }
@@ -2044,7 +2350,7 @@ void sub_8131660(u8 taskId, u8 state)
     const u8 *const * textPtrs;
     u8 i;
 
-    data[13] = AddWindow(&gUnknown_8462ED8);
+    data[13] = AddWindow(&gUnknown_8462EC0[3]);
     PutWindowTilemap(data[13]);
     SetWindowBorderStyle(data[13], 1, sub_80F796C(), 14);
     FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);

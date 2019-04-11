@@ -768,7 +768,7 @@ void sub_819A080(void * a0, void * a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u
 #define tEvWhich data[6]
 #define tEvStepCount data[8]
 
-void OakSpeech_StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority)
+void StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority)
 {
     u8 taskId = CreateTask(Task_SmoothBlendLayers, priority);
     gTasks[taskId].tEvA = eva_start << 8;
@@ -781,7 +781,7 @@ void OakSpeech_StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end
     SetGpuReg(REG_OFFSET_BLDALPHA, (evb_start << 8) | eva_start);
 }
 
-bool8 OakSpeech_IsBlendTaskActive(void)
+bool8 IsBlendTaskActive(void)
 {
     return FuncIsActiveTask(Task_SmoothBlendLayers);
 }

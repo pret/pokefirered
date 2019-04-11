@@ -45,7 +45,7 @@ sub_8077764: @ 8077764
 	cmp r1, 0
 	beq _080777BC
 	movs r0, 0x19
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080777DA
 	.align 2, 0
 _080777B0: .4byte gPaletteFade
@@ -53,7 +53,7 @@ _080777B4: .4byte gBattleScripting
 _080777B8: .4byte gBattleTypeFlags
 _080777BC:
 	movs r0, 0x18
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080777DA
 _080777C4:
 	movs r0, 0x80
@@ -61,11 +61,11 @@ _080777C4:
 	cmp r1, 0
 	beq _080777D4
 	movs r0, 0x1A
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080777DA
 _080777D4:
 	movs r0, 0x17
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080777DA:
 	ldr r0, _080777E4 @ =sub_80777E8
 	bl SetMainCallback2

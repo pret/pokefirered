@@ -983,7 +983,7 @@ _0800CB2E:
 	bl FreeAllWindowBuffers
 	adds r0, r6, 0
 	bl DestroyTask
-	bl sub_812EB2C
+	bl StartNewGameScene
 	b _0800CB84
 	.align 2, 0
 _0800CB44: .4byte gUnknown_2031DE0

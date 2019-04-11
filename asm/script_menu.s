@@ -301,7 +301,7 @@ _0809CB7A:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	ldr r0, [sp, 0x18]
 	adds r1, r7, 0
 	adds r2, r5, 0
@@ -1138,7 +1138,7 @@ _0809D1FA:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	mov r1, r9
 	adds r2, r6, 0
@@ -1946,7 +1946,7 @@ _0809D844:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	mov r1, r9
 	adds r2, r7, 0

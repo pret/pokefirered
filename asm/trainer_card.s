@@ -291,7 +291,7 @@ _0808924A:
 	cmp r0, 0
 	beq _08089280
 	movs r0, 0xB
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl sub_808B1D4
 	movs r0, 0xF2
 	bl PlaySE
@@ -387,7 +387,7 @@ _0808931C: .4byte gMain
 _08089320: .4byte gReceivedRemoteLinkPlayers
 _08089324:
 	movs r0, 0xA
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl sub_808B1D4
 	ldr r0, _08089340 @ =gUnknown_20397A4
 	ldr r1, [r0]
@@ -431,7 +431,7 @@ _0808937A:
 	bl sub_800AAC0
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _080893B0 @ =gUnknown_8419D89
 	movs r0, 0x1
 	str r0, [sp]
@@ -1647,7 +1647,7 @@ sub_8089D8C: @ 8089D8C
 	ldr r0, _08089DA0 @ =sub_8089070
 	bl SetMainCallback2
 	movs r0, 0xA
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	pop {r0}
 	bx r0
 	.align 2, 0

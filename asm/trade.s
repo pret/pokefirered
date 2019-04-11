@@ -3390,7 +3390,7 @@ _0804E208:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1

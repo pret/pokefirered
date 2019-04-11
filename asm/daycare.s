@@ -3011,7 +3011,7 @@ _08046A46:
 	bl sub_810713C
 	ldrb r0, [r4, 0xA]
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r4, 0xA]
 	bl RemoveWindow
 	adds r0, r5, 0
@@ -3035,7 +3035,7 @@ _08046A7C:
 	bl sub_810713C
 	ldrb r0, [r4, 0xA]
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r4, 0xA]
 	bl RemoveWindow
 	adds r0, r5, 0
@@ -3060,7 +3060,7 @@ ShowDaycareLevelMenu: @ 8046AB8
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	mov r1, sp
 	ldr r0, _08046B1C @ =gUnknown_825F814
 	ldm r0!, {r2,r3,r5}

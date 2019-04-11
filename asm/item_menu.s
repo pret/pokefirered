@@ -400,13 +400,13 @@ _081080DE:
 	cmp r0, 0x3
 	bne _081080F4
 	movs r0, 0x1D
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _081080FA
 	.align 2, 0
 _081080F0: .4byte gUnknown_203ACFC
 _081080F4:
 	movs r0, 0x9
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _081080FA:
 	ldr r2, _08108114 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
@@ -2177,7 +2177,7 @@ sub_8108E70: @ 8108E70
 	strh r0, [r4, 0x14]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4, 0x14]
@@ -3715,7 +3715,7 @@ _08109AD4:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x6
 	movs r1, 0
 	bl sub_810B9DC

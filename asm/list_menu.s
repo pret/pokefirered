@@ -126,7 +126,7 @@ _08106FA8:
 	bgt _08106FBA
 	ldrb r0, [r5, 0x5]
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 _08106FBA:
 	ldr r0, _08106FC8 @ =gUnknown_203ACF4
 	ldrb r0, [r0, 0x5]

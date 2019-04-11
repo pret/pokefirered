@@ -756,7 +756,7 @@ sub_80CAB78: @ 80CAB78
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80CBD94
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r6, r0, 16
 	bl CalculatePlayerPartyCount
@@ -3078,15 +3078,15 @@ _080CBD7C: .4byte gTasks
 sub_80CBD80: @ 80CBD80
 	push {lr}
 	movs r0, 0x16
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	movs r0, 0x8
 	bl SetPlayerAvatarTransitionFlags
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80CBD80
 
-	thumb_func_start sub_80CBD94
-sub_80CBD94: @ 80CBD94
+	thumb_func_start GetStarterPokemon
+GetStarterPokemon: @ 80CBD94
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -3094,31 +3094,31 @@ sub_80CBD94: @ 80CBD94
 	bls _080CBDA0
 	movs r1, 0
 _080CBDA0:
-	ldr r0, _080CBDAC @ =gUnknown_83F5D2C
+	ldr r0, _080CBDAC @ =sStarterMon
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CBDAC: .4byte gUnknown_83F5D2C
-	thumb_func_end sub_80CBD94
+_080CBDAC: .4byte sStarterMon
+	thumb_func_end GetStarterPokemon
 
-	thumb_func_start sub_80CBDB0
-sub_80CBDB0: @ 80CBDB0
+	thumb_func_start ScrSpecial_GetStarter
+ScrSpecial_GetStarter: @ 80CBDB0
 	push {lr}
 	ldr r0, _080CBDC8 @ =0x00004031
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80CBD94
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
 	bx r1
 	.align 2, 0
 _080CBDC8: .4byte 0x00004031
-	thumb_func_end sub_80CBDB0
+	thumb_func_end ScrSpecial_GetStarter
 
 	thumb_func_start sub_80CBDCC
 sub_80CBDCC: @ 80CBDCC
@@ -5542,7 +5542,7 @@ sub_80CD098: @ 80CD098
 	str r3, [sp]
 	movs r0, 0
 	movs r3, 0
-	bl sub_8006300
+	bl CreateTextCursorSpriteForOakSpeech
 	ldr r1, _080CD0DC @ =gUnknown_2039A1B
 	strb r0, [r1]
 	b _080CD0E8

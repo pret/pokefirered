@@ -933,8 +933,8 @@ sub_810F510: @ 810F510
 	bx r0
 	thumb_func_end sub_810F510
 
-	thumb_func_start sub_810F558
-sub_810F558: @ 810F558
+	thumb_func_start CreateWindow_SnapRight_StdPal
+CreateWindow_SnapRight_StdPal: @ 810F558
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1005,10 +1005,10 @@ _0810F5C4:
 	bx r1
 	.align 2, 0
 _0810F5E4: .4byte gUnknown_203ADF4
-	thumb_func_end sub_810F558
+	thumb_func_end CreateWindow_SnapRight_StdPal
 
-	thumb_func_start sub_810F5E8
-sub_810F5E8: @ 810F5E8
+	thumb_func_start PrintTextOnRightSnappedWindow
+PrintTextOnRightSnappedWindow: @ 810F5E8
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r5, r0, 0
@@ -1055,10 +1055,10 @@ _0810F63E:
 	.align 2, 0
 _0810F648: .4byte gUnknown_203ADF4
 _0810F64C: .4byte gUnknown_8456618
-	thumb_func_end sub_810F5E8
+	thumb_func_end PrintTextOnRightSnappedWindow
 
-	thumb_func_start sub_810F650
-sub_810F650: @ 810F650
+	thumb_func_start Menu_PrintHelpSystemUIHeader
+Menu_PrintHelpSystemUIHeader: @ 810F650
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1145,7 +1145,7 @@ _0810F6F6:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810F650
+	thumb_func_end Menu_PrintHelpSystemUIHeader
 
 	thumb_func_start sub_810F704
 sub_810F704: @ 810F704
@@ -1264,8 +1264,8 @@ _0810F7BE:
 _0810F7D4: .4byte gUnknown_203ADE4
 	thumb_func_end sub_810F774
 
-	thumb_func_start sub_810F7D8
-sub_810F7D8: @ 810F7D8
+	thumb_func_start ProgramAndPlaceMenuCursorOnWindow
+ProgramAndPlaceMenuCursorOnWindow: @ 810F7D8
 	push {r4-r6,lr}
 	sub sp, 0x10
 	ldr r4, [sp, 0x20]
@@ -1297,7 +1297,7 @@ sub_810F7D8: @ 810F7D8
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F7D8
+	thumb_func_end ProgramAndPlaceMenuCursorOnWindow
 
 	thumb_func_start sub_810F818
 sub_810F818: @ 810F818
@@ -1336,7 +1336,7 @@ sub_810F818: @ 810F818
 	adds r1, r6, 0
 	ldr r2, [sp, 0xC]
 	ldr r3, [sp, 0x10]
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x14
@@ -2410,7 +2410,7 @@ sub_810FF60: @ 810FF60
 	adds r1, r6, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3

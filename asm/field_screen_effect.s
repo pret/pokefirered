@@ -869,7 +869,7 @@ _0807F4A8:
 	adds r7, r0, r1
 	strh r5, [r7, 0xA]
 	movs r0, 0xF0
-	bl sub_80F77CC
+	bl Menu_LoadStdPalAt
 	adds r0, r5, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer

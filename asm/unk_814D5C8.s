@@ -186,8 +186,8 @@ _0814D768:
 	beq _0814D774
 	b _0814D87E
 _0814D774:
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 	adds r0, r5, 0
 	bl sub_814EB38
 	adds r0, r5, 0

@@ -1638,10 +1638,10 @@ gUnknown_203F3A0: @ 203F3A0
 gUnknown_203F3A4: @ 203F3A4
 	.space 0x4
 
-gUnknown_203F3A8: @ 203F3A8
+sLocationHistory: @ 203F3A8
 	.space 0x6
 
-gUnknown_203F3AE: @ 203F3AE
+sRoamerLocation: @ 203F3AE
 	.space 0x2
 
 gUnknown_203F3B0: @ 203F3B0

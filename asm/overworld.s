@@ -3117,8 +3117,8 @@ sub_80562B0: @ 80562B0
 	ldr r1, [r5]
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 	bl sub_8069348
 	pop {r3}
 	mov r8, r3
@@ -3181,8 +3181,8 @@ sub_8056354: @ 8056354
 	ldr r1, [r5]
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 	bl sub_8069348
 	pop {r3}
 	mov r8, r3

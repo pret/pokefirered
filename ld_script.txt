@@ -240,7 +240,7 @@ SECTIONS {
         asm/itemfinder.o(.text);
         asm/buy_menu_helpers.o(.text);
         asm/slot_machine.o(.text);
-        asm/roamer.o(.text);
+        src/roamer.o(.text);
         asm/mystery_gift_menu.o(.text);
         asm/link_rfu_4.o(.text);
         src/mevent.o(.text);
@@ -395,7 +395,7 @@ SECTIONS {
         data/itemfinder.o(.rodata);
         data/buy_menu_helpers.o(.rodata);
         data/slot_machine.o(.rodata);
-        data/roamer.o(.rodata);
+        src/roamer.o(.rodata);
         data/mystery_gift_menu.o(.rodata);
         data/link_rfu_4.o(.rodata);
         src/mevent.o(.rodata);

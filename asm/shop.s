@@ -74,7 +74,7 @@ _0809AAF8:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	ldrb r0, [r4]

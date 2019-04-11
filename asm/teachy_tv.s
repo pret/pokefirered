@@ -774,7 +774,7 @@ sub_815B1DC: @ 815B1DC
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

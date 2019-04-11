@@ -1336,7 +1336,7 @@ void sub_815E720(void)
     sub_815EC0C();
     windowId = AddWindow(gUnknown_847A218);
     sub_80F6E9C();
-    sub_80F6F1C(windowId, FALSE);
+    DrawStdWindowFrame(windowId, FALSE);
     AddTextPrinterParameterized(windowId, 2, gUnknown_83FE982, 0x4A, 0, 0xFF, NULL);
 
     for (i = 0; i < 4; i++)

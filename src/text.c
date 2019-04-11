@@ -1791,7 +1791,7 @@ void sub_80062B0(struct Sprite *sprite)
     }
 }
 
-u8 sub_8006300(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority)
+u8 CreateTextCursorSpriteForOakSpeech(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority)
 {
     u8 spriteId;
     LoadSpriteSheet(&gUnknown_81EA68C[sheetId & 1]);

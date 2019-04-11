@@ -30,15 +30,15 @@
 
 struct OakSpeechResources
 {
-    void * unk_0000;
-    void * unk_0004;
+    void * solidColorsGfx;
+    void * trainerPicTilemapBuffer;
     void * unk_0008;
     u8 filler_000C[4];
     u16 unk_0010;
     u16 unk_0012;
     u16 unk_0014[4];
     u8 unk_001C[3];
-    u8 unk_001F;
+    u8 textSpeed;
     u8 filler_0020[0x1800];
     u8 bg2TilemapBuffer[0x400];
     u8 bg1TilemapBuffer[0x800];
@@ -46,96 +46,96 @@ struct OakSpeechResources
 
 EWRAM_DATA struct OakSpeechResources * sOakSpeechResources = NULL;
 
-static void sub_812EB58(u8 taskId);
-static void sub_812EEB0(void);
-static void sub_812F0B0(u8 taskId);
-static void sub_812F180(u8 taskId);
-static void sub_812F274(u8 taskId);
-static void sub_812F33C(u8 taskId);
-static void sub_812F4A8(u8 taskId);
-static void sub_812F72C(u8 taskId);
-static void sub_812F7C0(u8 taskId);
-static void sub_812F880(u8 taskId);
-static void sub_812F880(u8 taskId);
-static void sub_812F944(u8 taskId);
-static void sub_812F9EC(u8 taskId);
-static void sub_812FA78(u8 taskId);
-static void sub_812FB4C(u8 taskId);
-static void sub_812FBF0(u8 taskId);
-static void sub_812FC68(u8 taskId);
-static void sub_812FD78(u8 taskId);
-static void sub_812FDC0(u8 taskId);
-static void sub_812FE88(u8 taskId);
-static void sub_812FFA4(u8 taskId);
-static void sub_812FFF0(u8 taskId);
-static void sub_8130050(u8 taskId);
-static void sub_81300A0(u8 taskId);
-static void sub_8130160(u8 taskId);
-static void sub_8130324(u8 taskId);
-static void sub_81303B4(u8 taskId);
-static void sub_8130464(u8 taskId);
-static void sub_8130554(u8 taskId);
-static void sub_8130650(u8 taskId);
-static void sub_8130694(u8 taskId);
-static void sub_81306D4(u8 taskId);
-static void sub_813071C(u8 taskId);
-static void sub_81307D0(u8 taskId);
-static void sub_8130858(u8 taskId);
-static void sub_81308D0(u8 taskId);
-static void sub_8130914(u8 taskId);
-static void sub_8130940(u8 taskId);
-static void sub_8130980(u8 taskId);
-static void sub_8130A38(u8 taskId);
-static void sub_8130A80(u8 taskId);
-static void sub_8130ADC(u8 taskId);
-static void sub_8130B10(u8 taskId);
-static void sub_8130BA8(u8 taskId);
-static void sub_8130BF0(u8 taskId);
-static void sub_8130C20(u8 taskId);
+static void Task_OaksSpeech1(u8 taskId);
+static void CreateHelpDocsPage1(void);
+static void Task_OaksSpeech2(u8 taskId);
+static void Task_OakSpeech3(u8 taskId);
+static void Task_OakSpeech5(u8 taskId);
+static void Task_OakSpeech6(u8 taskId);
+static void Task_OakSpeech7(u8 taskId);
+static void Task_OakSpeech8(u8 taskId);
+static void Task_OakSpeech9(u8 taskId);
+static void Task_OakSpeech10(u8 taskId);
+static void Task_OakSpeech10(u8 taskId);
+static void Task_OakSpeech11(u8 taskId);
+static void Task_OakSpeech12(u8 taskId);
+static void Task_OakSpeech13(u8 taskId);
+static void Task_OakSpeech14(u8 taskId);
+static void Task_OakSpeech15(u8 taskId);
+static void Task_OakSpeech16(u8 taskId);
+static void Task_OakSpeech17(u8 taskId);
+static void Task_OakSpeech18(u8 taskId);
+static void Task_OakSpeech19(u8 taskId);
+static void Task_OakSpeech20(u8 taskId);
+static void Task_OakSpeech21(u8 taskId);
+static void Task_OakSpeech22(u8 taskId);
+static void Task_OakSpeech23(u8 taskId);
+static void Task_OakSpeech24(u8 taskId);
+static void Task_OakSpeech29(u8 taskId);
+static void Task_OakSpeech25(u8 taskId);
+static void Task_OakSpeech26(u8 taskId);
+static void Task_OakSpeech27(u8 taskId);
+static void Task_OakSpeech30(u8 taskId);
+static void Task_OakSpeech31(u8 taskId);
+static void Task_OakSpeech32(u8 taskId);
+static void Task_OakSpeech34(u8 taskId);
+static void Task_OakSpeech33(u8 taskId);
+static void Task_OakSpeech36(u8 taskId);
+static void Task_OakSpeech37(u8 taskId);
+static void Task_OakSpeech38(u8 taskId);
+static void Task_OakSpeech38_3(u8 taskId);
+static void Task_OakSpeech39(u8 taskId);
+static void Task_OakSpeech38_1(u8 taskId);
+static void Task_OakSpeech38_sub1(u8 taskId);
+static void Task_OakSpeech38_2(u8 taskId);
+static void Task_OakSpeech38_sub2(u8 taskId);
+static void Task_OakSpeech40(u8 taskId);
+static void Task_OakSpeech41(u8 taskId);
+static void Task_OakSpeech42(u8 taskId);
 
 static void CB2_ReturnFromNamingScreen(void);
 static void CreateNidoranFSprite(u8 taskId);
-static void sub_8130FD4(u8 taskId, u8 state);
-static void sub_8131168(u8 taskId, u8 state);
-static void sub_81311F4(u16 whichPic, u16 tileOffset);
-static void sub_8131310(void);
-static void sub_813144C(u8 taskId, u8 state);
-static void sub_81315CC(u8 taskId, u8 state);
-static void sub_8131660(u8 taskId, u8 state);
-static void sub_8131754(u8 arg0, u8 namePick);
+static void CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(u8 taskId, u8 state);
+static void DestroyLinkedPikaOrGrassPlatformSprites(u8 taskId, u8 state);
+static void LoadOaksSpeechTrainerPic(u16 whichPic, u16 tileOffset);
+static void DestroyOaksSpeechTrainerPic(void);
+static void CreateFadeInTask(u8 taskId, u8 state);
+static void CreateFadeOutTask(u8 taskId, u8 state);
+static void PrintNameChoiceOptions(u8 taskId, u8 state);
+static void GetDefaultName(u8 arg0, u8 namePick);
 
-extern const u8 gUnknown_8415D2C[];
-extern const u8 gUnknown_8415D48[];
-extern const u8 gUnknown_8415D50[];
-extern const u8 gUnknown_8415D93[];
-extern const u8 gUnknown_8415D97[];
+extern const u8 gText_Controls[];
+extern const u8 gText_ABUTTONNext[];
+extern const u8 gText_ABUTTONNext_BBUTTONBack[];
+extern const u8 gText_Boy[];
+extern const u8 gText_Girl[];
 
 extern const struct CompressedSpriteSheet gUnknown_8235194[];
 extern const struct CompressedSpritePalette gUnknown_82373F4;
 
-ALIGNED(4) const u16 gUnknown_8460568[] = INCBIN_U16("data/oak_speech/unk_8460568.gbapal");
-static const u32 gUnknown_84605E8[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz");
-static const u32 gUnknown_8460BA8[] = INCBIN_U32("data/oak_speech/unk_8460BA8.bin.lz");
-static const u32 gUnknown_8460CA4[] = INCBIN_U32("data/oak_speech/unk_8460CA4.4bpp.lz");
-static const u32 gUnknown_8460CE8[] = INCBIN_U32("data/oak_speech/unk_8460CE8.bin.lz");
-static const u16 gUnknown_8460D94[] = INCBIN_U16("data/oak_speech/unk_8460D94.bin");
-static const u16 gUnknown_8460E34[] = INCBIN_U16("data/oak_speech/unk_8460E34.bin");
-static const u16 gUnknown_8460ED4[] = INCBIN_U16("data/oak_speech/unk_8460ED4.gbapal");
-static const u32 gUnknown_8460F14[] = INCBIN_U32("data/oak_speech/unk_8460F14.8bpp.lz");
-static const u16 gUnknown_84615FC[] = INCBIN_U16("data/oak_speech/unk_84615FC.gbapal");
-static const u32 gUnknown_846163C[] = INCBIN_U32("data/oak_speech/unk_846163C.8bpp.lz");
-static const u16 gUnknown_8461CD4[] = INCBIN_U16("data/oak_speech/unk_8461CD4.gbapal");
-static const u32 gUnknown_8461D14[] = INCBIN_U32("data/oak_speech/unk_8461D14.8bpp.lz");
-static const u16 gUnknown_84623AC[] = INCBIN_U16("data/oak_speech/unk_84623AC.gbapal");
-static const u32 gUnknown_84623EC[] = INCBIN_U32("data/oak_speech/unk_84623EC.8bpp.lz");
-static const u16 gUnknown_84629D0[] = INCBIN_U16("data/oak_speech/unk_84629D0.gbapal");
-static const u16 gUnknown_84629F0[] = INCBIN_U16("data/oak_speech/unk_84629F0.gbapal");
-static const u32 gUnknown_8462A10[] = INCBIN_U32("data/oak_speech/unk_8462A10.4bpp.lz");
-static const u32 gUnknown_8462B74[] = INCBIN_U32("data/oak_speech/unk_8462B74.4bpp.lz");
-static const u32 gUnknown_8462D34[] = INCBIN_U32("data/oak_speech/unk_8462D34.4bpp.lz");
-static const u32 gUnknown_8462E18[] = INCBIN_U32("data/oak_speech/unk_8462E18.4bpp.lz");
+ALIGNED(4) const u16 sHelpDocsPalette[] = INCBIN_U16("data/oak_speech/unk_8460568.gbapal");
+static const u32 sOakSpeechGfx_GameStartHelpUI[] = INCBIN_U32("data/oak_speech/unk_84605E8.4bpp.lz");
+static const u32 sNewGameAdventureIntroTilemap[] = INCBIN_U32("data/oak_speech/unk_8460BA8.bin.lz");
+static const u32 sOakSpeechGfx_SolidColors[] = INCBIN_U32("data/oak_speech/unk_8460CA4.4bpp.lz");
+static const u32 sOakSpeech_BackgroundTilemap[] = INCBIN_U32("data/oak_speech/unk_8460CE8.bin.lz");
+static const u16 sHelpDocsPage2Tilemap[] = INCBIN_U16("data/oak_speech/unk_8460D94.bin");
+static const u16 sHelpDocsPage3Tilemap[] = INCBIN_U16("data/oak_speech/unk_8460E34.bin");
+static const u16 sOakSpeechGfx_LeafPal[] = INCBIN_U16("data/oak_speech/unk_8460ED4.gbapal");
+static const u32 sOakSpeechGfx_LeafPic[] = INCBIN_U32("data/oak_speech/unk_8460F14.8bpp.lz");
+static const u16 sOakSpeechGfx_RedPal[] = INCBIN_U16("data/oak_speech/unk_84615FC.gbapal");
+static const u32 sOakSpeechGfx_RedPic[] = INCBIN_U32("data/oak_speech/unk_846163C.8bpp.lz");
+static const u16 sOakSpeechGfx_OakPal[] = INCBIN_U16("data/oak_speech/unk_8461CD4.gbapal");
+static const u32 sOakSpeechGfx_OakPic[] = INCBIN_U32("data/oak_speech/unk_8461D14.8bpp.lz");
+static const u16 sOakSpeechGfx_RivalPal[] = INCBIN_U16("data/oak_speech/unk_84623AC.gbapal");
+static const u32 sOakSpeechGfx_RivalPic[] = INCBIN_U32("data/oak_speech/unk_84623EC.8bpp.lz");
+static const u16 sOakSpeech_GrassPlatformPalette[] = INCBIN_U16("data/oak_speech/unk_84629D0.gbapal");
+static const u16 sOakSpeech_PikaPalette[] = INCBIN_U16("data/oak_speech/unk_84629F0.gbapal");
+static const u32 sOakSpeechGfx_GrassPlatform[] = INCBIN_U32("data/oak_speech/unk_8462A10.4bpp.lz");
+static const u32 sOakSpeechGfx_Pika1[] = INCBIN_U32("data/oak_speech/unk_8462B74.4bpp.lz");
+static const u32 sOakSpeechGfx_Pika2[] = INCBIN_U32("data/oak_speech/unk_8462D34.4bpp.lz");
+static const u32 sOakSpeechGfx_PikaEyes[] = INCBIN_U32("data/oak_speech/unk_8462E18.4bpp.lz");
 
-static const struct BgTemplate gUnknown_8462E58[3] = {
+static const struct BgTemplate sBgTemplates[3] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -163,7 +163,7 @@ static const struct BgTemplate gUnknown_8462E58[3] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_8462E64[] = {
+static const struct WindowTemplate sHelpDocsWindowTemplates1[] = {
     {
         .priority = 0x00,
         .tilemapLeft = 0x00,
@@ -175,7 +175,7 @@ static const struct WindowTemplate gUnknown_8462E64[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate gUnknown_8462E74[] = {
+static const struct WindowTemplate sHelpDocsWindowTemplates2[] = {
     {
         .priority = 0x00,
         .tilemapLeft = 0x06,
@@ -203,7 +203,7 @@ static const struct WindowTemplate gUnknown_8462E74[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate gUnknown_8462E94[] = {
+static const struct WindowTemplate sHelpDocsWindowTemplates3[] = {
     {
         .priority = 0x00,
         .tilemapLeft = 0x06,
@@ -231,13 +231,13 @@ static const struct WindowTemplate gUnknown_8462E94[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate *const gUnknown_8462EB4[3] = {
-    gUnknown_8462E64,
-    gUnknown_8462E74,
-    gUnknown_8462E94
+static const struct WindowTemplate *const sHelpDocsWindowTemplatePtrs[3] = {
+    sHelpDocsWindowTemplates1,
+    sHelpDocsWindowTemplates2,
+    sHelpDocsWindowTemplates3
 };
 
-static const struct WindowTemplate gUnknown_8462EC0[] = {
+static const struct WindowTemplate sNewGameAdventureIntroWindowTemplates[] = {
     {
         .priority = 0x00,
         .tilemapLeft = 0x01,
@@ -273,77 +273,78 @@ static const struct WindowTemplate gUnknown_8462EC0[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-ALIGNED(4) const struct TextColor gUnknown_8462EE8 = {
+ALIGNED(4) const struct TextColor sTextColor_HelpSystem = {
     0x00, 0x01, 0x02
 };
 
-ALIGNED(4) const struct TextColor gUnknown_8462EEC = {
+ALIGNED(4) const struct TextColor sTextColor_OakSpeech = {
     0x00, 0x02, 0x03
 };
 
-static const u8 *const gUnknown_8462EF0[] = {
-    gUnknown_81C5A04,
-    gUnknown_81C5AEB,
-    gUnknown_81C5BB9
+static const u8 *const sNewGameAdventureIntroTextPointers[] = {
+    gNewGameAdventureIntro1,
+    gNewGameAdventureIntro2,
+    gNewGameAdventureIntro3
 };
 
-static const struct CompressedSpriteSheet gUnknown_8462EFC[3] = {
-    { (const void *)gUnknown_8462B74, 0x0400, 0x1001 },
-    { (const void *)gUnknown_8462D34, 0x0200, 0x1002 },
-    { (const void *)gUnknown_8462E18, 0x0080, 0x1003 },
+static const struct CompressedSpriteSheet sOakSpeech_PikaSpriteSheets[3] = {
+    { (const void *)sOakSpeechGfx_Pika1, 0x0400, 0x1001 },
+    { (const void *)sOakSpeechGfx_Pika2, 0x0200, 0x1002 },
+    { (const void *)sOakSpeechGfx_PikaEyes, 0x0080, 0x1003 },
 };
 
-static const struct CompressedSpriteSheet gUnknown_8462F14 = {
-    (const void *)gUnknown_8462A10, 0x0600, 0x1000
+static const struct CompressedSpriteSheet sOakSpeech_GrassPlatformSpriteSheet = {
+    (const void *)sOakSpeechGfx_GrassPlatform, 0x0600, 0x1000
 };
 
-static const struct SpritePalette gUnknown_8462F1C = {
-    (const void *)gUnknown_84629F0, 0x1001
-};
-static const struct SpritePalette gUnknown_8462F24 = {
-    (const void *)gUnknown_84629D0, 0x1000
+static const struct SpritePalette sOakSpeech_PikaSpritePal = {
+    (const void *)sOakSpeech_PikaPalette, 0x1001
 };
 
-static const union AnimCmd gUnknown_8462F2C[] = {
+static const struct SpritePalette sOakSpeech_GrassPlatformSpritePal = {
+    (const void *)sOakSpeech_GrassPlatformPalette, 0x1000
+};
+
+static const union AnimCmd sGrassPlatformAnim1[] = {
     ANIMCMD_FRAME( 0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8462F34[] = {
+static const union AnimCmd sGrassPlatformAnim2[] = {
     ANIMCMD_FRAME(16, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8462F3C[] = {
+static const union AnimCmd sGrassPlatformAnim3[] = {
     ANIMCMD_FRAME(32, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_8462F44[] = {
-    gUnknown_8462F2C
+static const union AnimCmd *const sGrassPlatformAnims1[] = {
+    sGrassPlatformAnim1
 };
-static const union AnimCmd *const gUnknown_8462F48[] = {
-    gUnknown_8462F34
+static const union AnimCmd *const sGrassPlatformAnims2[] = {
+    sGrassPlatformAnim2
 };
-static const union AnimCmd *const gUnknown_8462F4C[] = {
-    gUnknown_8462F3C
-};
-
-extern const struct OamData gUnknown_83ACAF8;
-
-static const struct SpriteTemplate gUnknown_8462F50[3] = {
-    { 0x1000, 0x1000, &gUnknown_83ACAF8, gUnknown_8462F44, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
-    { 0x1000, 0x1000, &gUnknown_83ACAF8, gUnknown_8462F48, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
-    { 0x1000, 0x1000, &gUnknown_83ACAF8, gUnknown_8462F4C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+static const union AnimCmd *const sGrassPlatformAnims3[] = {
+    sGrassPlatformAnim3
 };
 
-static const union AnimCmd gUnknown_8462F98[] = {
+extern const struct OamData gOamData_83ACAF8;
+
+static const struct SpriteTemplate sOakSpeech_GrassPlatformSpriteTemplates[3] = {
+    { 0x1000, 0x1000, &gOamData_83ACAF8, sGrassPlatformAnims1, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1000, 0x1000, &gOamData_83ACAF8, sGrassPlatformAnims2, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1000, 0x1000, &gOamData_83ACAF8, sGrassPlatformAnims3, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+};
+
+static const union AnimCmd sPikaAnim1[] = {
     ANIMCMD_FRAME( 0, 30),
     ANIMCMD_FRAME(16, 30),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gUnknown_8462FA4[] = {
+static const union AnimCmd sPikaAnim2[] = {
     ANIMCMD_FRAME(0, 60),
     ANIMCMD_FRAME(0, 60),
     ANIMCMD_FRAME(0, 60),
@@ -362,7 +363,7 @@ static const union AnimCmd gUnknown_8462FA4[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gUnknown_8462FE4[] = {
+static const union AnimCmd sPikaAnim3[] = {
     ANIMCMD_FRAME(0, 60),
     ANIMCMD_FRAME(0, 60),
     ANIMCMD_FRAME(0, 60),
@@ -380,94 +381,90 @@ static const union AnimCmd gUnknown_8462FE4[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const gUnknown_8463020[] = {
-    gUnknown_8462F98
+static const union AnimCmd *const sPikaAnims1[] = {
+    sPikaAnim1
 };
-static const union AnimCmd *const gUnknown_8463024[] = {
-    gUnknown_8462FA4
+static const union AnimCmd *const sPikaAnims2[] = {
+    sPikaAnim2
 };
-static const union AnimCmd *const gUnknown_8463028[] = {
-    gUnknown_8462FE4
-};
-
-extern const struct OamData gUnknown_83AC9D8;
-extern const struct OamData gUnknown_83AC9F8;
-extern const struct OamData gUnknown_83AC9E8;
-
-static const struct SpriteTemplate gUnknown_846302C[3] = {
-    { 0x1001, 0x1001, &gUnknown_83AC9D8, gUnknown_8463020, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
-    { 0x1002, 0x1001, &gUnknown_83AC9F8, gUnknown_8463024, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
-    { 0x1003, 0x1001, &gUnknown_83AC9E8, gUnknown_8463028, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy }
+static const union AnimCmd *const sPikaAnims3[] = {
+    sPikaAnim3
 };
 
-static const u8 *const gUnknown_8463074[] = {
-    gUnknown_81C5875,
-    gUnknown_81C58BA,
-    gUnknown_81C58F9,
-    gUnknown_81C592B,
-    gUnknown_81C594F,
-    gUnknown_81C5981
+extern const struct OamData gOamData_83AC9D8;
+extern const struct OamData gOamData_83AC9F8;
+extern const struct OamData gOamData_83AC9E8;
+
+static const struct SpriteTemplate sOakSpeech_PikaSpriteTemplates[3] = {
+    { 0x1001, 0x1001, &gOamData_83AC9D8, sPikaAnims1, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1002, 0x1001, &gOamData_83AC9F8, sPikaAnims2, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1003, 0x1001, &gOamData_83AC9E8, sPikaAnims3, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy }
 };
 
-static const u8 *const gUnknown_846308C[] = {
-    gUnknown_81C575E,
-    gUnknown_81C5767,
-    gUnknown_81C577A,
-    gUnknown_81C577E,
-    gUnknown_81C5783,
-    gUnknown_81C5788,
-    gUnknown_81C578C,
-    gUnknown_81C5792,
-    gUnknown_81C5797,
-    gUnknown_81C579D,
-    gUnknown_81C57A2,
-    gUnknown_81C57A9,
-    gUnknown_81C57AF,
-    gUnknown_81C57B4,
-    gUnknown_81C57B8,
-    gUnknown_81C57BC,
-    gUnknown_81C57C2,
-    gUnknown_81C57C6,
-    gUnknown_81C57CB
+static const u8 *const sHelpDocsPtrs[] = {
+    gNewGame_HelpDocs2, gNewGame_HelpDocs3, gNewGame_HelpDocs4,
+    gNewGame_HelpDocs5, gNewGame_HelpDocs6, gNewGame_HelpDocs7
 };
 
-static const u8 *const gUnknown_84630D8[] = {
-    gUnknown_81C575E,
-    gUnknown_81C5767,
-    gUnknown_81C57D0,
-    gUnknown_81C57D4,
-    gUnknown_81C57D9,
-    gUnknown_81C57E0,
-    gUnknown_81C57E8,
-    gUnknown_81C57EE,
-    gUnknown_81C57F4,
-    gUnknown_81C57FA,
-    gUnknown_81C57FF,
-    gUnknown_81C5806,
-    gUnknown_81C580A,
-    gUnknown_81C580F,
-    gUnknown_81C5814,
-    gUnknown_81C5819,
-    gUnknown_81C581F,
-    gUnknown_81C5823,
-    gUnknown_81C5828
+static const u8 *const sMaleNameChoices[] = {
+    gNameChoice_Red,
+    gNameChoice_Fire,
+    gNameChoice_Ash,
+    gNameChoice_Kene,
+    gNameChoice_Geki,
+    gNameChoice_Jak,
+    gNameChoice_Janne,
+    gNameChoice_Jonn,
+    gNameChoice_Kamon,
+    gNameChoice_Karl,
+    gNameChoice_Taylor,
+    gNameChoice_Oscar,
+    gNameChoice_Hiro,
+    gNameChoice_Max,
+    gNameChoice_Jon,
+    gNameChoice_Ralph,
+    gNameChoice_Kay,
+    gNameChoice_Tosh,
+    gNameChoice_Roak
 };
 
-static const u8 *const gUnknown_8463124[] = {
-    gUnknown_81C5758,
-    gUnknown_81C576C,
-    gUnknown_81C5771,
-    gUnknown_81C5775
+static const u8 *const sFemaleNameChoices[] = {
+    gNameChoice_Red,
+    gNameChoice_Fire,
+    gNameChoice_Omi,
+    gNameChoice_Jodi,
+    gNameChoice_Amanda,
+    gNameChoice_Hillary,
+    gNameChoice_Makey,
+    gNameChoice_Michi,
+    gNameChoice_Paula,
+    gNameChoice_June,
+    gNameChoice_Cassie,
+    gNameChoice_Rey,
+    gNameChoice_Seda,
+    gNameChoice_Kiko,
+    gNameChoice_Mina,
+    gNameChoice_Norie,
+    gNameChoice_Sai,
+    gNameChoice_Momo,
+    gNameChoice_Suzi
 };
 
-static void sub_812EAFC(void)
+static const u8 *const sRivalNameChoices[] = {
+    gNameChoice_Green,
+    gNameChoice_Gary,
+    gNameChoice_Kaz,
+    gNameChoice_Toru
+};
+
+static void VBlankCB_NewGameOaksSpeech(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void sub_812EB10(void)
+static void CB2_NewGameOaksSpeech(void)
 {
     RunTasks();
     RunTextPrinters();
@@ -476,15 +473,15 @@ static void sub_812EB10(void)
     UpdatePaletteFade();
 }
 
-void sub_812EB2C(void)
+void StartNewGameScene(void)
 {
     gPlttBufferUnfaded[0] = RGB_BLACK;
     gPlttBufferFaded[0]   = RGB_BLACK;
-    CreateTask(sub_812EB58, 0);
-    SetMainCallback2(sub_812EB10);
+    CreateTask(Task_OaksSpeech1, 0);
+    SetMainCallback2(CB2_NewGameOaksSpeech);
 }
 
-static void sub_812EB58(u8 taskId)
+static void Task_OaksSpeech1(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -499,11 +496,11 @@ static void sub_812EB58(u8 taskId)
         ResetSpriteData();
         FreeAllSpritePalettes();
         reset_temp_tile_data_buffers();
-        sub_812B1F0(2);
+        HelpSystem_SetSomeVariable2(2);
         break;
     case 1:
         sOakSpeechResources = AllocZeroed(sizeof(*sOakSpeechResources));
-        sub_8044AF0(1, 1);
+        SetUpMonSpriteManagerMaybe(1, 1);
         break;
     case 2:
         SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -518,7 +515,7 @@ static void sub_812EB58(u8 taskId)
         break;
     case 3:
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(1, gUnknown_8462E58, NELEMS(gUnknown_8462E58));
+        InitBgsFromTemplates(1, sBgTemplates, NELEMS(sBgTemplates));
         SetBgTilemapBuffer(1, sOakSpeechResources->bg1TilemapBuffer);
         SetBgTilemapBuffer(2, sOakSpeechResources->bg2TilemapBuffer);
         ChangeBgX(1, 0, 0);
@@ -530,32 +527,32 @@ static void sub_812EB58(u8 taskId)
         break;
     case 4:
         gPaletteFade.bufferTransferDisabled = TRUE;
-        sub_80F6C6C();
-        sub_80F6C98();
-        sub_80F77CC(0xD0);
-        LoadPalette(gUnknown_8460568, 0x000, 0x080);
+        InitStandardTextBoxWindows();
+        ResetBg0();
+        Menu_LoadStdPalAt(0xD0);
+        LoadPalette(sHelpDocsPalette, 0x000, 0x080);
         LoadPalette(stdpal_get(2) + 15, 0x000, 0x002);
         break;
     case 5:
-        sOakSpeechResources->unk_001F = sub_80F78A8();
+        sOakSpeechResources->textSpeed = GetTextSpeedSetting();
         gTextFlags.flag_0 = TRUE;
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_84605E8, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(1, sOakSpeechGfx_GameStartHelpUI, 0, 0, 0);
         break;
     case 6:
         if (free_temp_tile_data_buffers_if_possible())
             return;
-        sub_80F6F54(0, 1);
+        ClearDialogWindowAndFrame(0, 1);
         FillBgTilemapBufferRect_Palette0(1, 0x0000,  0,  0, 32, 32);
         CopyBgTilemapBufferToVram(1);
         break;
     case 7:
-        sub_810F558(0, 30, 0, 13, 0x1C4);
+        CreateWindow_SnapRight_StdPal(0, 30, 0, 13, 0x1C4);
         FillBgTilemapBufferRect_Palette0(1, 0xD00F,  0,  0, 30, 2);
         FillBgTilemapBufferRect_Palette0(1, 0xD002,  0,  2, 30, 1);
         FillBgTilemapBufferRect_Palette0(1, 0xD00E,  0, 19, 30, 1);
-        sub_812EEB0();
+        CreateHelpDocsPage1();
         gPaletteFade.bufferTransferDisabled = FALSE;
-        gTasks[taskId].data[5] = sub_8006300(0, 0xE6, 0x95, 0, 0);
+        gTasks[taskId].data[5] = CreateTextCursorSpriteForOakSpeech(0, 0xE6, 0x95, 0, 0);
         BlendPalettes(0xFFFFFFFF, 0x10, 0x00);
         break;
     case 10:
@@ -563,9 +560,9 @@ static void sub_812EB58(u8 taskId)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
         ShowBg(0);
         ShowBg(1);
-        SetVBlankCallback(sub_812EAFC);
+        SetVBlankCallback(VBlankCB_NewGameOaksSpeech);
         PlayBGM(323);
-        gTasks[taskId].func = sub_812F0B0;
+        gTasks[taskId].func = Task_OaksSpeech2;
         gMain.state = 0;
         return;
     }
@@ -573,53 +570,53 @@ static void sub_812EB58(u8 taskId)
     gMain.state++;
 }
 
-static void sub_812EEB0(void)
+static void CreateHelpDocsPage1(void)
 {
-    sub_810F650(gUnknown_8415D2C, gUnknown_8415D48, 0, 0, 1);
-    sOakSpeechResources->unk_0014[0] = AddWindow(gUnknown_8462EB4[sOakSpeechResources->unk_0012]);
+    Menu_PrintHelpSystemUIHeader(gText_Controls, gText_ABUTTONNext, 0, 0, 1);
+    sOakSpeechResources->unk_0014[0] = AddWindow(sHelpDocsWindowTemplatePtrs[sOakSpeechResources->unk_0012]);
     PutWindowTilemap(sOakSpeechResources->unk_0014[0]);
     FillWindowPixelBuffer(sOakSpeechResources->unk_0014[0], 0x00);
-    AddTextPrinterParametrized2(sOakSpeechResources->unk_0014[0], 2, 2, 0, 1, 1, &gUnknown_8462EE8, 0, gUnknown_81C582D);
+    AddTextPrinterParametrized2(sOakSpeechResources->unk_0014[0], 2, 2, 0, 1, 1, &sTextColor_HelpSystem, 0, gNewGame_HelpDocs1);
     CopyWindowToVram(sOakSpeechResources->unk_0014[0], 3);
     FillBgTilemapBufferRect_Palette0(1, 0x3000, 1, 3, 5, 16);
     CopyBgTilemapBufferToVram(1);
 }
 
-static void sub_812EF50(u8 taskId)
+static void Task_OakSpeech4(u8 taskId)
 {
     u8 i = 0;
     u8 r7 = sOakSpeechResources->unk_0012 - 1;
     if (sOakSpeechResources->unk_0012 == 0)
     {
-        sub_812EEB0();
+        CreateHelpDocsPage1();
     }
     else
     {
-        sub_810F5E8(gUnknown_8415D50, 0, 1);
+        PrintTextOnRightSnappedWindow(gText_ABUTTONNext_BBUTTONBack, 0, 1);
         for (i = 0; i < 3; i++)
         {
-            sOakSpeechResources->unk_0014[i] = AddWindow(&gUnknown_8462EB4[sOakSpeechResources->unk_0012][i]);
+            sOakSpeechResources->unk_0014[i] = AddWindow(&sHelpDocsWindowTemplatePtrs[sOakSpeechResources->unk_0012][i]);
             PutWindowTilemap(sOakSpeechResources->unk_0014[i]);
             FillWindowPixelBuffer(sOakSpeechResources->unk_0014[i], 0x00);
-            AddTextPrinterParametrized2(sOakSpeechResources->unk_0014[i], 2, 6, 0, 1, 1, &gUnknown_8462EE8, 0, gUnknown_8463074[i + r7 * 3]);
+            AddTextPrinterParametrized2(sOakSpeechResources->unk_0014[i], 2, 6, 0, 1, 1, &sTextColor_HelpSystem, 0, sHelpDocsPtrs[i + r7 * 3]);
             CopyWindowToVram(sOakSpeechResources->unk_0014[i], 3);
         }
 
         if (sOakSpeechResources->unk_0012 == 1)
         {
-            CopyToBgTilemapBufferRect(1, gUnknown_8460D94, 1, 3, 5, 16);
+            CopyToBgTilemapBufferRect(1, sHelpDocsPage2Tilemap, 1, 3, 5, 16);
         }
         else
         {
-            CopyToBgTilemapBufferRect(1, gUnknown_8460E34, 1, 3, 5, 16);
+            CopyToBgTilemapBufferRect(1, sHelpDocsPage3Tilemap, 1, 3, 5, 16);
         }
         CopyBgTilemapBufferToVram(1);
     }
     BeginNormalPaletteFade(0xFFFFDFFF, -1, 16, 0, stdpal_get(2)[15]);
-    gTasks[taskId].func = sub_812F0B0;
+    gTasks[taskId].func = Task_OaksSpeech2;
 }
 
-static void sub_812F0B0(u8 taskId)
+static void Task_OaksSpeech2(u8 taskId)
 {
     if (!gPaletteFade.active && JOY_NEW((A_BUTTON | B_BUTTON)))
     {
@@ -645,10 +642,10 @@ static void sub_812F0B0(u8 taskId)
     else
         return;
     PlaySE(SE_SELECT);
-    gTasks[taskId].func = sub_812F180;
+    gTasks[taskId].func = Task_OakSpeech3;
 }
 
-static void sub_812F180(u8 taskId)
+static void Task_OakSpeech3(u8 taskId)
 {
     u8 r8 = 0;
     u8 i;
@@ -675,17 +672,17 @@ static void sub_812F180(u8 taskId)
                 RemoveWindow(sOakSpeechResources->unk_0014[i]);
                 sOakSpeechResources->unk_0014[i] = 0;
             }
-            gTasks[taskId].func = sub_812EF50;
+            gTasks[taskId].func = Task_OakSpeech4;
         }
         else
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, 0);
-            gTasks[taskId].func = sub_812F274;
+            gTasks[taskId].func = Task_OakSpeech5;
         }
     }
 }
 
-static void sub_812F274(u8 taskId)
+static void Task_OakSpeech5(u8 taskId)
 {
     u8 i = 0;
 
@@ -705,11 +702,11 @@ static void sub_812F274(u8 taskId)
         sOakSpeechResources->unk_0014[0] = RGB_BLACK;
         LoadPalette(sOakSpeechResources->unk_0014, 0, 2);
         gTasks[taskId].data[3] = 32;
-        gTasks[taskId].func = sub_812F33C;
+        gTasks[taskId].func = Task_OakSpeech6;
     }
 }
 
-static void sub_812F33C(u8 taskId)
+static void Task_OakSpeech6(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u32 sp14 = 0;
@@ -720,30 +717,30 @@ static void sub_812F33C(u8 taskId)
     {
         PlayBGM(324);
         sub_810F71C();
-        sub_810F5E8(gUnknown_8415D48, 0, 1);
-        sOakSpeechResources->unk_0008 = malloc_and_decompress(gUnknown_8460BA8, &sp14);
+        PrintTextOnRightSnappedWindow(gText_ABUTTONNext, 0, 1);
+        sOakSpeechResources->unk_0008 = malloc_and_decompress(sNewGameAdventureIntroTilemap, &sp14);
         CopyToBgTilemapBufferRect(1, sOakSpeechResources->unk_0008, 0, 2, 30, 19);
         CopyBgTilemapBufferToVram(1);
         Free(sOakSpeechResources->unk_0008);
         sOakSpeechResources->unk_0008 = NULL;
-        data[14] = AddWindow(&gUnknown_8462EC0[0]);
+        data[14] = AddWindow(&sNewGameAdventureIntroWindowTemplates[0]);
         PutWindowTilemap(data[14]);
         FillWindowPixelBuffer(data[14], 0x00);
         CopyWindowToVram(data[14], 3);
         sOakSpeechResources->unk_0012 = 0;
         gMain.state = 0;
         data[15] = 16;
-        AddTextPrinterParametrized2(data[14], 2, 3, 5, 1, 0, &gUnknown_8462EEC, 0, gUnknown_8462EF0[0]);
-        data[5] = sub_8006300(0, 0xe2, 0x91, 0, 0);
+        AddTextPrinterParametrized2(data[14], 2, 3, 5, 1, 0, &sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[0]);
+        data[5] = CreateTextCursorSpriteForOakSpeech(0, 0xe2, 0x91, 0, 0);
         gSprites[data[5]].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[data[5]].oam.priority = 0;
-        sub_8130FD4(taskId, 0);
+        CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(taskId, 0);
         BeginNormalPaletteFade(0xFFFFFFFF, 2, 16, 0, 0);
-        gTasks[taskId].func = sub_812F4A8;
+        gTasks[taskId].func = Task_OakSpeech7;
     }
 }
 
-static void sub_812F4A8(u8 taskId)
+static void Task_OakSpeech7(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     switch (gMain.state)
@@ -793,16 +790,16 @@ static void sub_812F4A8(u8 taskId)
         if (data[15] <= 0)
         {
             FillWindowPixelBuffer(data[14], 0x00);
-            AddTextPrinterParametrized2(data[14], 2, 3, 5, 1, 0, &gUnknown_8462EEC, 0, gUnknown_8462EF0[sOakSpeechResources->unk_0012]);
+            AddTextPrinterParametrized2(data[14], 2, 3, 5, 1, 0, &sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[sOakSpeechResources->unk_0012]);
             if (sOakSpeechResources->unk_0012 == 0)
             {
                 sub_810F71C();
-                sub_810F5E8(gUnknown_8415D48, 0, 1);
+                PrintTextOnRightSnappedWindow(gText_ABUTTONNext, 0, 1);
             }
             else
             {
                 sub_810F71C();
-                sub_810F5E8(gUnknown_8415D50, 0, 1);
+                PrintTextOnRightSnappedWindow(gText_ABUTTONNext_BBUTTONBack, 0, 1);
             }
             gMain.state++;
         }
@@ -837,13 +834,13 @@ static void sub_812F4A8(u8 taskId)
             SetGpuReg(REG_OFFSET_WINOUT, 0);
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
             BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = sub_812F72C;
+            gTasks[taskId].func = Task_OakSpeech8;
         }
         break;
     }
 }
 
-static void sub_812F72C(u8 taskId)
+static void Task_OakSpeech8(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -857,13 +854,13 @@ static void sub_812F72C(u8 taskId)
         data[14] = 0;
         FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 30, 20);
         CopyBgTilemapBufferToVram(1);
-        sub_8131168(taskId, 0);
+        DestroyLinkedPikaOrGrassPlatformSprites(taskId, 0);
         data[3] = 80;
-        gTasks[taskId].func = sub_812F7C0;
+        gTasks[taskId].func = Task_OakSpeech9;
     }
 }
 
-static void sub_812F7C0(u8 taskId)
+static void Task_OakSpeech9(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u32 size = 0;
@@ -872,23 +869,23 @@ static void sub_812F7C0(u8 taskId)
         data[3]--;
     else
     {
-        sOakSpeechResources->unk_0000 = malloc_and_decompress(gUnknown_8460CA4, &size);
-        LoadBgTiles(1, sOakSpeechResources->unk_0000, size, 0);
-        CopyToBgTilemapBuffer(1, gUnknown_8460CE8, 0, 0);
+        sOakSpeechResources->solidColorsGfx = malloc_and_decompress(sOakSpeechGfx_SolidColors, &size);
+        LoadBgTiles(1, sOakSpeechResources->solidColorsGfx, size, 0);
+        CopyToBgTilemapBuffer(1, sOakSpeech_BackgroundTilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         CreateNidoranFSprite(taskId);
-        sub_81311F4(3, 0);
-        sub_8130FD4(taskId, 1);
+        LoadOaksSpeechTrainerPic(3, 0);
+        CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(taskId, 1);
         PlayBGM(292);
         BeginNormalPaletteFade(0xFFFFFFFF, 5, 16, 0, RGB_BLACK);
         data[3] = 80;
         ShowBg(2);
-        gTasks[taskId].func = sub_812F880;
+        gTasks[taskId].func = Task_OakSpeech10;
     }
 }
 
 #define OaksSpeechPrintMessage(str, speed) ({ \
-    sub_80F6EE4(0, FALSE);\
+    DrawDialogueFrame(0, FALSE);\
     if (str != gStringVar4) \
     { \
         StringExpandPlaceholders(gStringVar4, str); \
@@ -901,7 +898,7 @@ static void sub_812F7C0(u8 taskId)
     CopyWindowToVram(0, 3); \
 })
 
-static void sub_812F880(u8 taskId)
+static void Task_OakSpeech10(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -911,23 +908,23 @@ static void sub_812F880(u8 taskId)
             data[3]--;
         else
         {
-            OaksSpeechPrintMessage(gUnknown_81C5C78, sOakSpeechResources->unk_001F);
-            gTasks[taskId].func = sub_812F944;
+            OaksSpeechPrintMessage(gOakText_WelcomeToTheWorld, sOakSpeechResources->textSpeed);
+            gTasks[taskId].func = Task_OakSpeech11;
         }
     }
 }
 
-static void sub_812F944(u8 taskId)
+static void Task_OakSpeech11(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
-        OaksSpeechPrintMessage(gUnknown_81C5D06, sOakSpeechResources->unk_001F);
+        OaksSpeechPrintMessage(gOakText_WorldInhabited1, sOakSpeechResources->textSpeed);
         gTasks[taskId].data[3] = 30;
-        gTasks[taskId].func = sub_812F9EC;
+        gTasks[taskId].func = Task_OakSpeech12;
     }
 }
 
-static void sub_812F9EC(u8 taskId)
+static void Task_OakSpeech12(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 spriteId;
@@ -941,55 +938,55 @@ static void sub_812F9EC(u8 taskId)
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].data[0] = 0;
         CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 0x64, 0x42, 0, 0, 32, 0xFFFF1FFF);
-        gTasks[taskId].func = sub_812FA78;
+        gTasks[taskId].func = Task_OakSpeech13;
         gTasks[taskId].data[3] = 0;
         // }
     }
 }
 
-static void sub_812FA78(u8 taskId)
+static void Task_OakSpeech13(u8 taskId)
 {
     if (IsCryFinished())
     {
         if (gTasks[taskId].data[3] >= 96)
-            gTasks[taskId].func = sub_812FB4C;
+            gTasks[taskId].func = Task_OakSpeech14;
     }
     if (gTasks[taskId].data[3] < 0x4000)
     {
         gTasks[taskId].data[3]++;
         if (gTasks[taskId].data[3] == 32)
         {
-            OaksSpeechPrintMessage(gUnknown_81C5D12, sOakSpeechResources->unk_001F);
+            OaksSpeechPrintMessage(gOakText_WorldInhabited2, sOakSpeechResources->textSpeed);
             PlayCry1(SPECIES_NIDORAN_F, 0);
         }
     }
 }
 
-static void sub_812FB4C(u8 taskId)
+static void Task_OakSpeech14(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
-        OaksSpeechPrintMessage(gUnknown_81C5D4B, sOakSpeechResources->unk_001F);
-        gTasks[taskId].func = sub_812FBF0;
+        OaksSpeechPrintMessage(gOakText_PetsBattlingStudy, sOakSpeechResources->textSpeed);
+        gTasks[taskId].func = Task_OakSpeech15;
     }
 }
 
-static void sub_812FBF0(u8 taskId)
+static void Task_OakSpeech15(u8 taskId)
 {
     u8 spriteId;
 
     if (!IsTextPrinterActive(0))
     {
-        sub_80F6F54(0, 1);
+        ClearDialogWindowAndFrame(0, 1);
         spriteId = gTasks[taskId].data[4];
         gTasks[taskId].data[6] = sub_804BB98(spriteId, gSprites[spriteId].oam.paletteNum, 0x64, 0x42, 0, 0, 32, 0xFFFF1F3F);
         gTasks[taskId].data[3] = 48;
         gTasks[taskId].data[0] = 64;
-        gTasks[taskId].func = sub_812FC68;
+        gTasks[taskId].func = Task_OakSpeech16;
     }
 }
 
-static void sub_812FC68(u8 taskId)
+static void Task_OakSpeech16(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1014,26 +1011,26 @@ static void sub_812FC68(u8 taskId)
         }
         else
         {
-            OaksSpeechPrintMessage(gUnknown_81C5DBD, sOakSpeechResources->unk_001F);
-            gTasks[taskId].func = sub_812FD78;
+            OaksSpeechPrintMessage(gOakText_TellMeALittleAboutYourself, sOakSpeechResources->textSpeed);
+            gTasks[taskId].func = Task_OakSpeech17;
         }
     }
 }
 
-static void sub_812FD78(u8 taskId)
+static void Task_OakSpeech17(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
     if (!IsTextPrinterActive(0))
     {
-        sub_80F6F54(0, 1);
-        sub_813144C(taskId, 2);
+        ClearDialogWindowAndFrame(0, 1);
+        CreateFadeInTask(taskId, 2);
         data[3] = 48;
-        gTasks[taskId].func = sub_812FDC0;
+        gTasks[taskId].func = Task_OakSpeech18;
     }
 }
 
-static void sub_812FDC0(u8 taskId)
+static void Task_OakSpeech18(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1044,36 +1041,36 @@ static void sub_812FDC0(u8 taskId)
         else
         {
             data[1] = -60;
-            sub_8131310();
-            OaksSpeechPrintMessage(gUnknown_81C59D5, sOakSpeechResources->unk_001F);
-            gTasks[taskId].func = sub_812FE88;
+            DestroyOaksSpeechTrainerPic();
+            OaksSpeechPrintMessage(gOakText_AskPlayerGender, sOakSpeechResources->textSpeed);
+            gTasks[taskId].func = Task_OakSpeech19;
         }
     }
 }
 
-static void sub_812FE88(u8 taskId)
+static void Task_OakSpeech19(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
-        gTasks[taskId].data[13] = AddWindow(&gUnknown_8462EC0[1]);
+        gTasks[taskId].data[13] = AddWindow(&sNewGameAdventureIntroWindowTemplates[1]);
         PutWindowTilemap(gTasks[taskId].data[13]);
         SetWindowBorderStyle(gTasks[taskId].data[13], 1, sub_80F796C(), 14);
         FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
         sOakSpeechResources->unk_001C[0] = 1;
         sOakSpeechResources->unk_001C[1] = 2;
         sOakSpeechResources->unk_001C[2] = 3;
-        box_print(gTasks[taskId].data[13], 2, 8, 1, sOakSpeechResources->unk_001C, 0, gUnknown_8415D93);
+        box_print(gTasks[taskId].data[13], 2, 8, 1, sOakSpeechResources->unk_001C, 0, gText_Boy);
         sOakSpeechResources->unk_001C[0] = 1;
         sOakSpeechResources->unk_001C[1] = 2;
         sOakSpeechResources->unk_001C[2] = 3;
-        box_print(gTasks[taskId].data[13], 2, 8, 17, sOakSpeechResources->unk_001C, 0, gUnknown_8415D97);
-        sub_810F7D8(gTasks[taskId].data[13], 2, 0, 1, GetFontAttribute(2, 1) + 2, 2, 0);
+        box_print(gTasks[taskId].data[13], 2, 8, 17, sOakSpeechResources->unk_001C, 0, gText_Girl);
+        ProgramAndPlaceMenuCursorOnWindow(gTasks[taskId].data[13], 2, 0, 1, GetFontAttribute(2, 1) + 2, 2, 0);
         CopyWindowToVram(gTasks[taskId].data[13], 3);
-        gTasks[taskId].func = sub_812FFA4;
+        gTasks[taskId].func = Task_OakSpeech20;
     }
 }
 
-static void sub_812FFA4(u8 taskId)
+static void Task_OakSpeech20(u8 taskId)
 {
     s8 input = ProcessMenuInputNoWrapAround();
     switch (input)
@@ -1088,34 +1085,34 @@ static void sub_812FFA4(u8 taskId)
     case -2:
         return;
     }
-    gTasks[taskId].func = sub_812FFF0;
+    gTasks[taskId].func = Task_OakSpeech21;
 
 }
 
-static void sub_812FFF0(u8 taskId)
+static void Task_OakSpeech21(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     sub_810F4D8(data[13], 1);
     RemoveWindow(data[13]);
     data[13] = 0;
-    sub_80F6F54(0, 1);
+    ClearDialogWindowAndFrame(0, 1);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
     CopyBgTilemapBufferToVram(0);
-    gTasks[taskId].func = sub_8130050;
+    gTasks[taskId].func = Task_OakSpeech22;
 }
 
-static void sub_8130050(u8 taskId)
+static void Task_OakSpeech22(u8 taskId)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
-        sub_81311F4(MALE, 0);
+        LoadOaksSpeechTrainerPic(MALE, 0);
     else
-        sub_81311F4(FEMALE, 0);
-    sub_81315CC(taskId, 2);
+        LoadOaksSpeechTrainerPic(FEMALE, 0);
+    CreateFadeOutTask(taskId, 2);
     gTasks[taskId].data[3] = 32;
-    gTasks[taskId].func = sub_81300A0;
+    gTasks[taskId].func = Task_OakSpeech23;
 }
 
-static void sub_81300A0(u8 taskId)
+static void Task_OakSpeech23(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1126,22 +1123,22 @@ static void sub_81300A0(u8 taskId)
         else
         {
             data[1] = 0;
-            OaksSpeechPrintMessage(gUnknown_81C5DEA, sOakSpeechResources->unk_001F);
-            gTasks[taskId].func = sub_8130160;
+            OaksSpeechPrintMessage(gOakText_AskPlayerName, sOakSpeechResources->textSpeed);
+            gTasks[taskId].func = Task_OakSpeech24;
         }
     }
 }
 
-static void sub_8130160(u8 taskId)
+static void Task_OakSpeech24(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         sOakSpeechResources->unk_0010 = 0;
-        gTasks[taskId].func = sub_81303B4;
+        gTasks[taskId].func = Task_OakSpeech25;
     }
 }
-static void sub_81301B0(u8 taskId)
+static void Task_OakSpeech35(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1156,27 +1153,27 @@ static void sub_81301B0(u8 taskId)
         else
         {
             data[1] = -60;
-            sub_8131660(taskId, sOakSpeechResources->unk_0010);
-            gTasks[taskId].func = sub_8130324;
+            PrintNameChoiceOptions(taskId, sOakSpeechResources->unk_0010);
+            gTasks[taskId].func = Task_OakSpeech29;
         }
     }
 }
 
-static void sub_8130228(u8 taskId)
+static void Task_OakSpeech28(u8 taskId)
 {
-    sub_8131660(taskId, sOakSpeechResources->unk_0010);
+    PrintNameChoiceOptions(taskId, sOakSpeechResources->unk_0010);
     if (sOakSpeechResources->unk_0010 == 0)
     {
-        OaksSpeechPrintMessage(gUnknown_81C5DEA, 0);
+        OaksSpeechPrintMessage(gOakText_AskPlayerName, 0);
     }
     else
     {
-        OaksSpeechPrintMessage(gUnknown_81C5E91, 0);
+        OaksSpeechPrintMessage(gOakText_AskRivalName, 0);
     }
-    gTasks[taskId].func = sub_8130324;
+    gTasks[taskId].func = Task_OakSpeech29;
 }
 
-static void sub_8130324(u8 taskId)
+static void Task_OakSpeech29(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s8 input = ProcessMenuInput();
@@ -1189,25 +1186,25 @@ static void sub_8130324(u8 taskId)
         PlaySE(SE_SELECT);
         sub_810F4D8(data[13], TRUE);
         RemoveWindow(data[13]);
-        sub_8131754(sOakSpeechResources->unk_0010, input - 1);
+        GetDefaultName(sOakSpeechResources->unk_0010, input - 1);
         data[15] = 1;
-        gTasks[taskId].func = sub_8130464;
+        gTasks[taskId].func = Task_OakSpeech26;
         break;
     case 0:
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-        gTasks[taskId].func = sub_81303B4;
+        gTasks[taskId].func = Task_OakSpeech25;
         break;
     case -1:
         break;
     }
 }
 
-static void sub_81303B4(u8 taskId)
+static void Task_OakSpeech25(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        sub_8131754(sOakSpeechResources->unk_0010, 0);
+        GetDefaultName(sOakSpeechResources->unk_0010, 0);
         if (sOakSpeechResources->unk_0010 == 0)
         {
             DoNamingScreen(0, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen);
@@ -1218,12 +1215,12 @@ static void sub_81303B4(u8 taskId)
             RemoveWindow(gTasks[taskId].data[13]);
             DoNamingScreen(4, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
         }
-        sub_8131168(taskId, 1);
+        DestroyLinkedPikaOrGrassPlatformSprites(taskId, 1);
         FreeAllWindowBuffers();
     }
 }
 
-static void sub_8130464(u8 taskId)
+static void Task_OakSpeech26(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1233,13 +1230,13 @@ static void sub_8130464(u8 taskId)
         {
             if (sOakSpeechResources->unk_0010 == 0)
             {
-                StringExpandPlaceholders(gStringVar4, gUnknown_81C5E13);
+                StringExpandPlaceholders(gStringVar4, gOakText_FinalizePlayerName);
             }
             else
             {
-                StringExpandPlaceholders(gStringVar4, gUnknown_81C5EB5);
+                StringExpandPlaceholders(gStringVar4, gOakText_ConfirmRivalName);
             }
-            OaksSpeechPrintMessage(gStringVar4, sOakSpeechResources->unk_001F);
+            OaksSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
             data[15] = 0;
             data[3] = 25;
         }
@@ -1249,14 +1246,14 @@ static void sub_8130464(u8 taskId)
                 data[3]--;
             else
             {
-                sub_810FF60(&gUnknown_8462EC0[2], 2, 0, 2, sub_80F796C(), 14, 0);
-                gTasks[taskId].func = sub_8130554;
+                sub_810FF60(&sNewGameAdventureIntroWindowTemplates[2], 2, 0, 2, sub_80F796C(), 14, 0);
+                gTasks[taskId].func = Task_OakSpeech27;
             }
         }
     }
 }
 
-static void sub_8130554(u8 taskId)
+static void Task_OakSpeech27(u8 taskId)
 {
     s8 input = ProcessMenuInputNoWrap_();
     switch (input)
@@ -1266,110 +1263,110 @@ static void sub_8130554(u8 taskId)
         gTasks[taskId].data[3] = 40;
         if (sOakSpeechResources->unk_0010 == 0)
         {
-            sub_80F6F54(0, 1);
-            sub_813144C(taskId, 2);
-            gTasks[taskId].func = sub_8130650;
+            ClearDialogWindowAndFrame(0, 1);
+            CreateFadeInTask(taskId, 2);
+            gTasks[taskId].func = Task_OakSpeech30;
         }
         else
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_81C5EC5);
-            OaksSpeechPrintMessage(gStringVar4, sOakSpeechResources->unk_001F);
-            gTasks[taskId].func = sub_8130694;
+            StringExpandPlaceholders(gStringVar4, gOakText_RememberRivalName);
+            OaksSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
+            gTasks[taskId].func = Task_OakSpeech31;
         }
         break;
     case 1:
     case -1:
         PlaySE(SE_SELECT);
         if (sOakSpeechResources->unk_0010 == 0)
-            gTasks[taskId].func = sub_8130160;
+            gTasks[taskId].func = Task_OakSpeech24;
         else
-            gTasks[taskId].func = sub_8130228;
+            gTasks[taskId].func = Task_OakSpeech28;
         break;
     }
 }
 
-static void sub_8130650(u8 taskId)
+static void Task_OakSpeech30(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
     if (data[2] != 0)
     {
-        sub_8131310();
+        DestroyOaksSpeechTrainerPic();
         if (data[3] != 0)
             data[3]--;
         else
-            gTasks[taskId].func = sub_81306D4;
+            gTasks[taskId].func = Task_OakSpeech32;
     }
 }
 
-static void sub_8130694(u8 taskId)
+static void Task_OakSpeech31(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
-        sub_80F6F54(0, 1);
-        sub_813144C(taskId, 2);
-        gTasks[taskId].func = sub_81307D0;
+        ClearDialogWindowAndFrame(0, 1);
+        CreateFadeInTask(taskId, 2);
+        gTasks[taskId].func = Task_OakSpeech33;
     }
 }
 
-static void sub_81306D4(u8 taskId)
+static void Task_OakSpeech32(u8 taskId)
 {
     ChangeBgX(2, 0, 0);
     gTasks[taskId].data[1] = 0;
     gSpriteCoordOffsetX = 0;
-    sub_81311F4(2, 0);
-    sub_81315CC(taskId, 2);
-    gTasks[taskId].func = sub_813071C;
+    LoadOaksSpeechTrainerPic(2, 0);
+    CreateFadeOutTask(taskId, 2);
+    gTasks[taskId].func = Task_OakSpeech34;
 }
 
-static void sub_813071C(u8 taskId)
+static void Task_OakSpeech34(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
     if (data[2] != 0)
     {
-        OaksSpeechPrintMessage(gUnknown_81C5E2E, sOakSpeechResources->unk_001F);
+        OaksSpeechPrintMessage(gOakText_IntroduceRival, sOakSpeechResources->textSpeed);
         sOakSpeechResources->unk_0010 = 1;
-        gTasks[taskId].func = sub_81301B0;
+        gTasks[taskId].func = Task_OakSpeech35;
     }
 }
 
-static void sub_81307D0(u8 taskId)
+static void Task_OakSpeech33(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
     if (data[2] != 0)
     {
-        sub_8131310();
+        DestroyOaksSpeechTrainerPic();
         if (data[3] != 0)
             data[3]--;
         else
         {
             if (gSaveBlock2Ptr->playerGender == MALE)
-                sub_81311F4(MALE, 0);
+                LoadOaksSpeechTrainerPic(MALE, 0);
             else
-                sub_81311F4(FEMALE, 0);
+                LoadOaksSpeechTrainerPic(FEMALE, 0);
             gTasks[taskId].data[1] = 0;
             gSpriteCoordOffsetX = 0;
             ChangeBgX(2, 0, 0);
-            sub_81315CC(taskId, 2);
-            gTasks[taskId].func = sub_8130858;
+            CreateFadeOutTask(taskId, 2);
+            gTasks[taskId].func = Task_OakSpeech36;
         }
     }
 }
 
-static void sub_8130858(u8 taskId)
+static void Task_OakSpeech36(u8 taskId)
 {
     if (gTasks[taskId].data[2] != 0)
     {
-        StringExpandPlaceholders(gStringVar4, gUnknown_81C5EF4);
-        OaksSpeechPrintMessage(gStringVar4, sOakSpeechResources->unk_001F);
+        StringExpandPlaceholders(gStringVar4, gOakText_LegendAboutToUnfold);
+        OaksSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
         gTasks[taskId].data[3] = 30;
-        gTasks[taskId].func = sub_81308D0;
+        gTasks[taskId].func = Task_OakSpeech37;
     }
 }
 
-static void sub_81308D0(u8 taskId)
+static void Task_OakSpeech37(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
@@ -1378,20 +1375,20 @@ static void sub_81308D0(u8 taskId)
         else
         {
             FadeOutBGM(4);
-            gTasks[taskId].func = sub_8130914;
+            gTasks[taskId].func = Task_OakSpeech38;
         }
     }
 }
 
-static void sub_8130914(u8 taskId)
+static void Task_OakSpeech38(u8 taskId)
 {
     sOakSpeechResources->unk_0012 = 0;
-    sub_8130A38(taskId);
-    sub_8130ADC(taskId);
-    sub_8130940(taskId);
+    Task_OakSpeech38_1(taskId);
+    Task_OakSpeech38_2(taskId);
+    Task_OakSpeech38_3(taskId);
 }
 
-static void sub_8130940(u8 taskId)
+static void Task_OakSpeech38_3(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     SetBgAttribute(2, 6, 1);
@@ -1399,10 +1396,10 @@ static void sub_8130940(u8 taskId)
     data[1] = 0;
     data[2] = 256;
     data[15] = 0;
-    gTasks[taskId].func = sub_8130980;
+    gTasks[taskId].func = Task_OakSpeech39;
 }
 
-static void sub_8130980(u8 taskId)
+static void Task_OakSpeech39(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s16 x, y;
@@ -1422,14 +1419,14 @@ static void sub_8130980(u8 taskId)
         {
             data[15] = 1;
             data[0] = 36;
-            gTasks[taskId].func = sub_8130BA8;
+            gTasks[taskId].func = Task_OakSpeech40;
         }
     }
 }
 
-static void sub_8130A38(u8 taskId)
+static void Task_OakSpeech38_1(u8 taskId)
 {
-    u8 taskId2 = CreateTask(sub_8130A80, 1);
+    u8 taskId2 = CreateTask(Task_OakSpeech38_sub1, 1);
     s16 * data = gTasks[taskId2].data;
     data[0] = 0;
     data[1] = 0;
@@ -1438,7 +1435,7 @@ static void sub_8130A38(u8 taskId)
     BeginNormalPaletteFade(0xFFFF0FCF, 4, 0, 16, RGB_BLACK);
 }
 
-static void sub_8130A80(u8 taskId)
+static void Task_OakSpeech38_sub1(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     if (!gPaletteFade.active)
@@ -1446,7 +1443,7 @@ static void sub_8130A80(u8 taskId)
         if (data[1] != 0)
         {
             DestroyTask(taskId);
-            sub_8131168(taskId, 1);
+            DestroyLinkedPikaOrGrassPlatformSprites(taskId, 1);
         }
         else
         {
@@ -1456,9 +1453,9 @@ static void sub_8130A80(u8 taskId)
     }
 }
 
-static void sub_8130ADC(u8 taskId)
+static void Task_OakSpeech38_2(u8 taskId)
 {
-    u8 taskId2 = CreateTask(sub_8130B10, 2);
+    u8 taskId2 = CreateTask(Task_OakSpeech38_sub2, 2);
     s16 * data = gTasks[taskId2].data;
     data[0] = 8;
     data[1] = 0;
@@ -1467,7 +1464,7 @@ static void sub_8130ADC(u8 taskId)
     data[15] = 0;
 }
 
-static void sub_8130B10(u8 taskId)
+static void Task_OakSpeech38_sub2(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 i;
@@ -1494,26 +1491,26 @@ static void sub_8130B10(u8 taskId)
     }
 }
 
-static void sub_8130BA8(u8 taskId)
+static void Task_OakSpeech40(u8 taskId)
 {
     if (gTasks[taskId].data[0] != 0)
         gTasks[taskId].data[0]--;
     else
     {
         BeginNormalPaletteFade(0x00000030, 2, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = sub_8130BF0;
+        gTasks[taskId].func = Task_OakSpeech41;
     }
 }
 
-static void sub_8130BF0(u8 taskId)
+static void Task_OakSpeech41(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = sub_8130C20;
+        gTasks[taskId].func = Task_OakSpeech42;
     }
 }
 
-static void sub_8130C20(u8 taskId)
+static void Task_OakSpeech42(u8 taskId)
 {
     FreeAllWindowBuffers();
     sub_8044D80();
@@ -1543,7 +1540,7 @@ static void CB2_ReturnFromNamingScreen(void)
         break;
     case 1:
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(1, gUnknown_8462E58, NELEMS(gUnknown_8462E58));
+        InitBgsFromTemplates(1, sBgTemplates, NELEMS(sBgTemplates));
         SetBgTilemapBuffer(1, sOakSpeechResources->bg1TilemapBuffer);
         SetBgTilemapBuffer(2, sOakSpeechResources->bg2TilemapBuffer);
         ChangeBgX(1, 0, 0);
@@ -1562,37 +1559,37 @@ static void CB2_ReturnFromNamingScreen(void)
         break;
     case 3:
         FreeAllWindowBuffers();
-        sub_80F6C6C();
-        sub_80F6C98();
-        LoadPalette(gUnknown_8460568, 0, 0xe0);
+        InitStandardTextBoxWindows();
+        ResetBg0();
+        LoadPalette(sHelpDocsPalette, 0, 0xe0);
         break;
     case 4:
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_8460CA4, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(1, sOakSpeechGfx_SolidColors, 0, 0, 0);
         break;
     case 5:
         if (free_temp_tile_data_buffers_if_possible())
             return;
         FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 30, 20);
-        CopyToBgTilemapBuffer(1, gUnknown_8460CE8, 0, 0);
+        CopyToBgTilemapBuffer(1, sOakSpeech_BackgroundTilemap, 0, 0);
         FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, 30, 20);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         break;
     case 6:
-        taskId = CreateTask(sub_8130464, 0);
+        taskId = CreateTask(Task_OakSpeech26, 0);
         if (sOakSpeechResources->unk_0010 == 0)
         {
             if (gSaveBlock2Ptr->playerGender == MALE)
-                sub_81311F4(MALE, 0);
+                LoadOaksSpeechTrainerPic(MALE, 0);
             else
-                sub_81311F4(FEMALE, 0);
+                LoadOaksSpeechTrainerPic(FEMALE, 0);
         }
         else
-            sub_81311F4(2, 0);
+            LoadOaksSpeechTrainerPic(2, 0);
         gTasks[taskId].data[1] = -60;
         gSpriteCoordOffsetX += 60;
         ChangeBgX(2, -0x3C00, 0);
-        sub_8130FD4(taskId, 1);
+        CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(taskId, 1);
         gTasks[taskId].data[15] = 1;
         break;
     case 7:
@@ -1602,9 +1599,9 @@ static void CB2_ReturnFromNamingScreen(void)
         ShowBg(1);
         ShowBg(2);
         EnableInterrupts(INTR_FLAG_VBLANK);
-        SetVBlankCallback(sub_812EAFC);
+        SetVBlankCallback(VBlankCB_NewGameOaksSpeech);
         gTextFlags.flag_0 = TRUE;
-        SetMainCallback2(sub_812EB10);
+        SetMainCallback2(CB2_NewGameOaksSpeech);
         return;
     }
 
@@ -1625,12 +1622,12 @@ static void CreateNidoranFSprite(u8 taskId)
     gTasks[taskId].data[4] = spriteId;
 }
 
-static void sub_8130FB8(struct Sprite * sprite)
+static void SpriteCB_PikaSync(struct Sprite * sprite)
 {
     sprite->pos2.y = gSprites[sprite->data[0]].animCmdIndex;
 }
 
-static void sub_8130FD4(u8 taskId, u8 state)
+static void CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(u8 taskId, u8 state)
 {
     u8 spriteId;
     u8 i = 0;
@@ -1638,30 +1635,30 @@ static void sub_8130FD4(u8 taskId, u8 state)
     switch (state)
     {
     case 0:
-        LoadCompressedObjectPic(&gUnknown_8462EFC[0]);
-        LoadCompressedObjectPic(&gUnknown_8462EFC[1]);
-        LoadCompressedObjectPic(&gUnknown_8462EFC[2]);
-        LoadSpritePalette(&gUnknown_8462F1C);
-        spriteId = CreateSprite(&gUnknown_846302C[0], 0x10, 0x11, 2);
+        LoadCompressedObjectPic(&sOakSpeech_PikaSpriteSheets[0]);
+        LoadCompressedObjectPic(&sOakSpeech_PikaSpriteSheets[1]);
+        LoadCompressedObjectPic(&sOakSpeech_PikaSpriteSheets[2]);
+        LoadSpritePalette(&sOakSpeech_PikaSpritePal);
+        spriteId = CreateSprite(&sOakSpeech_PikaSpriteTemplates[0], 0x10, 0x11, 2);
         gSprites[spriteId].oam.priority = 0;
         gTasks[taskId].data[7] = spriteId;
-        spriteId = CreateSprite(&gUnknown_846302C[1], 0x10, 0x09, 3);
+        spriteId = CreateSprite(&sOakSpeech_PikaSpriteTemplates[1], 0x10, 0x09, 3);
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].data[0] = gTasks[taskId].data[7];
-        gSprites[spriteId].callback = sub_8130FB8;
+        gSprites[spriteId].callback = SpriteCB_PikaSync;
         gTasks[taskId].data[8] = spriteId;
-        spriteId = CreateSprite(&gUnknown_846302C[2], 0x18, 0x0D, 1);
+        spriteId = CreateSprite(&sOakSpeech_PikaSpriteTemplates[2], 0x18, 0x0D, 1);
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].data[0] = gTasks[taskId].data[7];
-        gSprites[spriteId].callback = sub_8130FB8;
+        gSprites[spriteId].callback = SpriteCB_PikaSync;
         gTasks[taskId].data[9] = spriteId;
         break;
     case 1:
-        LoadCompressedObjectPic(&gUnknown_8462F14);
-        LoadSpritePalette(&gUnknown_8462F24);
+        LoadCompressedObjectPic(&sOakSpeech_GrassPlatformSpriteSheet);
+        LoadSpritePalette(&sOakSpeech_GrassPlatformSpritePal);
         for (i = 0; i < 3; i++)
         {
-            spriteId = CreateSprite(&gUnknown_8462F50[i], i * 32 + 88, 0x70, 1);
+            spriteId = CreateSprite(&sOakSpeech_GrassPlatformSpriteTemplates[i], i * 32 + 88, 0x70, 1);
             gSprites[spriteId].oam.priority = 2;
             gSprites[spriteId].animPaused = TRUE;
             gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -1671,7 +1668,7 @@ static void sub_8130FD4(u8 taskId, u8 state)
     }
 }
 
-static void sub_8131168(u8 taskId, u8 state)
+static void DestroyLinkedPikaOrGrassPlatformSprites(u8 taskId, u8 state)
 {
     u8 i;
 
@@ -1695,49 +1692,49 @@ static void sub_8131168(u8 taskId, u8 state)
     }
 }
 
-static void sub_81311F4(u16 whichPic, u16 tileOffset)
+static void LoadOaksSpeechTrainerPic(u16 whichPic, u16 tileOffset)
 {
     u32 i;
 
     switch (whichPic)
     {
     case 0: // FIRE
-        LoadPalette(gUnknown_84615FC, 0x40, 0x40);
-        LZ77UnCompVram(gUnknown_846163C, (void *)0x06000600 + tileOffset);
+        LoadPalette(sOakSpeechGfx_RedPal, 0x40, 0x40);
+        LZ77UnCompVram(sOakSpeechGfx_RedPic, (void *)0x06000600 + tileOffset);
         break;
     case 1: // LEAF
-        LoadPalette(gUnknown_8460ED4, 0x40, 0x40);
-        LZ77UnCompVram(gUnknown_8460F14, (void *)0x06000600 + tileOffset);
+        LoadPalette(sOakSpeechGfx_LeafPal, 0x40, 0x40);
+        LZ77UnCompVram(sOakSpeechGfx_LeafPic, (void *)0x06000600 + tileOffset);
         break;
     case 2: // BLUE
-        LoadPalette(gUnknown_84623AC, 0x60, 0x40);
-        LZ77UnCompVram(gUnknown_84623EC, (void *)0x06000600 + tileOffset);
+        LoadPalette(sOakSpeechGfx_RivalPal, 0x60, 0x40);
+        LZ77UnCompVram(sOakSpeechGfx_RivalPic, (void *)0x06000600 + tileOffset);
         break;
     case 3: // OAK
-        LoadPalette(gUnknown_8461CD4, 0x60, 0x40);
-        LZ77UnCompVram(gUnknown_8461D14, (void *)0x06000600 + tileOffset);
+        LoadPalette(sOakSpeechGfx_OakPal, 0x60, 0x40);
+        LZ77UnCompVram(sOakSpeechGfx_OakPic, (void *)0x06000600 + tileOffset);
         break;
     default:
         return;
     }
 
-    sOakSpeechResources->unk_0004 = AllocZeroed(0x60);
+    sOakSpeechResources->trainerPicTilemapBuffer = AllocZeroed(0x60);
     for (i = 0; i < 0x60; i++)
-        ((u8 *)sOakSpeechResources->unk_0004)[i] = i;
+        ((u8 *)sOakSpeechResources->trainerPicTilemapBuffer)[i] = i;
     FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x10);
-    CopyRectToBgTilemapBufferRect(2, sOakSpeechResources->unk_0004, 0, 0, 8, 12, 11, 2, 8, 12, 0x10, (tileOffset / 64) + 0x18, 0x00);
+    CopyRectToBgTilemapBufferRect(2, sOakSpeechResources->trainerPicTilemapBuffer, 0, 0, 8, 12, 11, 2, 8, 12, 0x10, (tileOffset / 64) + 0x18, 0x00);
     CopyBgTilemapBufferToVram(2);
-    Free(sOakSpeechResources->unk_0004);
-    sOakSpeechResources->unk_0004 = 0;
+    Free(sOakSpeechResources->trainerPicTilemapBuffer);
+    sOakSpeechResources->trainerPicTilemapBuffer = 0;
 }
 
-static void sub_8131310(void)
+static void DestroyOaksSpeechTrainerPic(void)
 {
     FillBgTilemapBufferRect(2, 0x000, 11, 1, 8, 12, 0x10);
     CopyBgTilemapBufferToVram(2);
 }
 
-static void sub_8131338(u8 taskId)
+static void Task_SlowFadeIn(u8 taskId)
 {
     u8 i = 0;
     if (gTasks[taskId].data[1] == 0)
@@ -1770,7 +1767,7 @@ static void sub_8131338(u8 taskId)
     }
 }
 
-static void sub_813144C(u8 taskId, u8 state)
+static void CreateFadeInTask(u8 taskId, u8 state)
 {
     u8 taskId2;
     u8 i = 0;
@@ -1779,7 +1776,7 @@ static void sub_813144C(u8 taskId, u8 state)
     SetGpuReg(REG_OFFSET_BLDALPHA, 0x10);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     gTasks[taskId].data[2] = 0;
-    taskId2 = CreateTask(sub_8131338, 0);
+    taskId2 = CreateTask(Task_SlowFadeIn, 0);
     gTasks[taskId2].data[0] = taskId;
     gTasks[taskId2].data[1] = 16;
     gTasks[taskId2].data[2] = 0;
@@ -1791,7 +1788,7 @@ static void sub_813144C(u8 taskId, u8 state)
     }
 }
 
-static void sub_81314DC(u8 taskId)
+static void Task_SlowFadeOut(u8 taskId)
 {
     u8 i = 0;
 
@@ -1824,7 +1821,7 @@ static void sub_81314DC(u8 taskId)
     }
 }
 
-static void sub_81315CC(u8 taskId, u8 state)
+static void CreateFadeOutTask(u8 taskId, u8 state)
 {
     u8 taskId2;
     u8 i = 0;
@@ -1833,7 +1830,7 @@ static void sub_81315CC(u8 taskId, u8 state)
     SetGpuReg(REG_OFFSET_BLDALPHA, 0x1000);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     gTasks[taskId].data[2] = 0;
-    taskId2 = CreateTask(sub_81314DC, 0);
+    taskId2 = CreateTask(Task_SlowFadeOut, 0);
     gTasks[taskId2].data[0] = taskId;
     gTasks[taskId2].data[1] = 0;
     gTasks[taskId2].data[2] = 16;
@@ -1845,30 +1842,30 @@ static void sub_81315CC(u8 taskId, u8 state)
     }
 }
 
-static void sub_8131660(u8 taskId, u8 state)
+static void PrintNameChoiceOptions(u8 taskId, u8 state)
 {
     s16 * data = gTasks[taskId].data;
     const u8 *const * textPtrs;
     u8 i;
 
-    data[13] = AddWindow(&gUnknown_8462EC0[3]);
+    data[13] = AddWindow(&sNewGameAdventureIntroWindowTemplates[3]);
     PutWindowTilemap(data[13]);
     SetWindowBorderStyle(data[13], 1, sub_80F796C(), 14);
     FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
-    AddTextPrinterParameterized(data[13], 2, gUnknown_81C574F, 8, 1, 0, NULL);
+    AddTextPrinterParameterized(data[13], 2, gOtherText_NewName, 8, 1, 0, NULL);
     if (state == 0)
-        textPtrs = gSaveBlock2Ptr->playerGender == MALE ? gUnknown_846308C : gUnknown_84630D8;
+        textPtrs = gSaveBlock2Ptr->playerGender == MALE ? sMaleNameChoices : sFemaleNameChoices;
     else
-        textPtrs = gUnknown_8463124;
+        textPtrs = sRivalNameChoices;
     for (i = 0; i < 4; i++)
     {
         AddTextPrinterParameterized(data[13], 2, textPtrs[i], 8, 16 * (i + 1) + 1, 0, NULL);
     }
-    sub_810F7D8(data[13], 2, 0, 1, 16, 5, 0);
+    ProgramAndPlaceMenuCursorOnWindow(data[13], 2, 0, 1, 16, 5, 0);
     CopyWindowToVram(data[13], 3);
 }
 
-static void sub_8131754(u8 arg0, u8 namePick)
+static void GetDefaultName(u8 arg0, u8 namePick)
 {
     const u8 * src;
     u8 * dest;
@@ -1877,14 +1874,14 @@ static void sub_8131754(u8 arg0, u8 namePick)
     if (arg0 == 0)
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
-            src = gUnknown_846308C[Random() % 19];
+            src = sMaleNameChoices[Random() % 19];
         else
-            src = gUnknown_84630D8[Random() % 19];
+            src = sFemaleNameChoices[Random() % 19];
         dest = gSaveBlock2Ptr->playerName;
     }
     else
     {
-        src = gUnknown_8463124[namePick];
+        src = sRivalNameChoices[namePick];
         dest = gSaveBlock1Ptr->rivalName;
     }
     for (i = 0; i < PLAYER_NAME_LENGTH - 1 && src[i] != EOS; i++)

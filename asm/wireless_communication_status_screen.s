@@ -130,7 +130,7 @@ sub_814F1E4: @ 814F1E4
 	movs r2, 0x20
 	bl LoadPalette
 	movs r0, 0xF0
-	bl sub_80F77CC
+	bl Menu_LoadStdPalAt
 	bl UnkTextUtil_Reset
 	movs r0, 0x20
 	str r0, [sp]

@@ -201,7 +201,7 @@ _0814BC98:
 _0814BCA2:
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldrb r1, [r5, 0x1]
 	movs r0, 0x2
 	mov r8, r0
@@ -287,7 +287,7 @@ _0814BD48:
 	beq _0814BD5A
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 _0814BD5A:
 	ldrb r0, [r7, 0xE]
 	movs r1, 0x1
@@ -597,7 +597,7 @@ _0814BFA0: .4byte gUnknown_83DFC9C
 _0814BFA4:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	movs r0, 0xA
 	movs r1, 0x1
 	movs r2, 0
@@ -2855,7 +2855,7 @@ _0814D106:
 	beq _0814D17E
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _0814D148 @ =gUnknown_8419F54
 	movs r0, 0
 	str r0, [sp]
@@ -2979,7 +2979,7 @@ _0814D204:
 _0814D206:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	movs r4, 0
 	str r4, [sp]
 	adds r0, r6, 0
@@ -3159,7 +3159,7 @@ _0814D34A:
 _0814D356:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	adds r0, r5, 0
 	bl sub_814DA04
 	movs r0, 0x1
@@ -3217,7 +3217,7 @@ _0814D3BA:
 _0814D3C0:
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldrh r1, [r5, 0x14]
 	cmp r1, 0x3
 	bne _0814D3F0

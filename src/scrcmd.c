@@ -1567,7 +1567,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
         ptr = (u8 *)ctx->data[0];
 
     sub_80F6E9C();
-    sub_80F6EE4(0, 1);
+    DrawDialogueFrame(0, 1);
     AddTextPrinterParameterized(0, 6, ptr, 0, 1, 0, NULL);
     return FALSE;
 }

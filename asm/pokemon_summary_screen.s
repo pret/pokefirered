@@ -107,7 +107,7 @@ _081345D0:
 	beq _08134604
 _081345D4:
 	movs r0, 0x6
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r2, _081345F8 @ =gUnknown_203B140
 	ldr r0, [r2]
 	ldr r3, _081345FC @ =0x00003214
@@ -128,7 +128,7 @@ _081345FC: .4byte 0x00003214
 _08134600: .4byte 0x00003234
 _08134604:
 	movs r0, 0x6
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, [r4]
 	ldr r3, _08134628 @ =0x00003214
 	adds r0, r3
@@ -149,7 +149,7 @@ _0813462C: .4byte 0x0000321c
 _08134630: .4byte 0x00003234
 _08134634:
 	movs r0, 0x8
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, [r4]
 	ldr r3, _08134710 @ =0x00003214
 	adds r0, r3
@@ -7608,7 +7608,7 @@ _0813846C:
 _08138470:
 	movs r0, 0x7
 _08138472:
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _08138476:
 	pop {r0}
 	bx r0

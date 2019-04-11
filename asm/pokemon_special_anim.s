@@ -1727,7 +1727,7 @@ sub_811D2EC: @ 811D2EC
 	lsrs r7, r0, 16
 	movs r0, 0
 	mov r8, r0
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0

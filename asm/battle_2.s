@@ -45,11 +45,11 @@ _0800FDD8:
 	cmp r1, 0
 	beq _0800FDFE
 	movs r0, 0x19
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0800FE1C
 _0800FDFE:
 	movs r0, 0x18
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0800FE1C
 _0800FE06:
 	movs r0, 0x80
@@ -57,11 +57,11 @@ _0800FE06:
 	cmp r1, 0
 	beq _0800FE16
 	movs r0, 0x1A
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0800FE1C
 _0800FE16:
 	movs r0, 0x17
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _0800FE1C:
 	pop {r4}
 	pop {r0}

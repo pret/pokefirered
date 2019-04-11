@@ -401,7 +401,7 @@ _08115B5C:
 	bl CopyWindowToVram
 	ldrb r0, [r5, 0xF]
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldr r0, _08115C58 @ =gUnknown_3005E70
 	adds r2, r0, 0
 	ldr r1, _08115C5C @ =gUnknown_8456D34
@@ -417,7 +417,7 @@ _08115B5C:
 	strb r0, [r5, 0x12]
 	ldrb r0, [r5, 0x11]
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldrb r0, [r5, 0x11]
 	bl PutWindowTilemap
 	ldrb r0, [r5, 0x11]
@@ -1135,7 +1135,7 @@ sub_81161E4: @ 81161E4
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x11]
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r4, 0x12]
 	movs r1, 0
 	movs r2, 0
@@ -1144,7 +1144,7 @@ sub_81161E4: @ 81161E4
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0xF]
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r4, 0x11]
@@ -1919,7 +1919,7 @@ _08116838:
 	bl CopyWindowToVram
 	ldrb r0, [r6, 0xB]
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldr r0, _081168FC @ =gUnknown_3005E70
 	adds r2, r0, 0
 	ldr r1, _08116900 @ =gUnknown_8456DDC
@@ -1935,7 +1935,7 @@ _08116838:
 	strb r0, [r6, 0xE]
 	ldrb r0, [r6, 0xD]
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldrb r0, [r6, 0xD]
 	bl PutWindowTilemap
 	ldrb r0, [r6, 0xD]
@@ -2318,7 +2318,7 @@ _08116C10:
 	bl ClearWindowTilemap
 	ldrb r0, [r6, 0xD]
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r6, 0xE]
 	movs r1, 0
 	movs r2, 0
@@ -2327,7 +2327,7 @@ _08116C10:
 	bl ClearWindowTilemap
 	ldrb r0, [r6, 0xB]
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r6, 0xD]
@@ -8485,7 +8485,7 @@ sub_811A0B4: @ 811A0B4
 	bl sub_80F6E9C
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r0, _0811A0DC @ =gStringVar4
 	adds r1, r4, 0
 	bl StringExpandPlaceholders
@@ -8531,7 +8531,7 @@ _0811A10A:
 	bl sub_80F6E9C
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r0, _0811A12C @ =gStringVar4
 	adds r1, r5, 0
 	bl StringExpandPlaceholders
@@ -8624,7 +8624,7 @@ sub_811A1AC: @ 811A1AC
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	adds r0, r4, 0
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
@@ -8659,7 +8659,7 @@ sub_811A1FC: @ 811A1FC
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	adds r0, r4, 0
 	bl RemoveWindow
 	pop {r4}
@@ -8688,7 +8688,7 @@ _0811A234:
 	strb r0, [r5]
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldr r0, _0811A270 @ =gUnknown_3005E70
 	adds r2, r0, 0
 	ldr r1, [sp, 0x1C]
@@ -8729,7 +8729,7 @@ _0811A274:
 	bl sub_810713C
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r5]
 	bl RemoveWindow
 	movs r0, 0
@@ -8750,7 +8750,7 @@ _0811A2B0:
 	bl sub_810713C
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r5]
 	bl RemoveWindow
 	strb r4, [r7]
@@ -8794,7 +8794,7 @@ _0811A308:
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldr r0, _0811A354 @ =gUnknown_3005E70
 	adds r2, r0, 0
 	ldr r1, [sp, 0x20]
@@ -8845,7 +8845,7 @@ _0811A37E:
 	bl sub_810713C
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r4]
 	bl RemoveWindow
 	ldrb r0, [r7]
@@ -8870,7 +8870,7 @@ _0811A3AC:
 	bl sub_810713C
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r4]
 	bl RemoveWindow
 	ldrb r0, [r7]

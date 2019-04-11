@@ -221,13 +221,13 @@ sub_813CB5C: @ 813CB5C
 	ldr r0, _0813CBBC @ =gUnknown_84642F4
 	lsls r4, 2
 	adds r4, r0
-	bl sub_80CBDB0
+	bl ScrSpecial_GetStarter
 	ldrh r1, [r4, 0x2]
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r1, r0
 	bne _0813CBC4
-	bl sub_8142044
+	bl GetRoamerLocationMapSectionId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0

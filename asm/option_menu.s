@@ -93,7 +93,7 @@ _080883FA:
 	cmp r3, 0x5
 	bls _080883E6
 	movs r0, 0xD
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, _0808842C @ =sub_8088454
 	bl SetMainCallback2
 	pop {r4-r6}

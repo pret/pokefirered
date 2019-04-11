@@ -306,7 +306,7 @@ gSpecials:: @ 815FD60
 	def_special ScrSpecial_AreLeadMonEVsMaxedOut
 	def_special sub_8069740
 	def_special sub_8069768
-	def_special sub_8141D9C
+	def_special InitRoamer
 	def_special nullsub_75
 	def_special sub_80CA804
 	def_special nullsub_75
@@ -363,7 +363,7 @@ gSpecials:: @ 815FD60
 	def_special GetDaycarePokemonCount
 	def_special sub_80CB63C
 	def_special sub_80CBD80
-	def_special sub_80CBDB0
+	def_special ScrSpecial_GetStarter
 	def_special sub_80CBDCC
 	def_special sub_810C444
 	def_special sub_80CC7B4

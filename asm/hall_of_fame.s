@@ -508,7 +508,7 @@ _080F21B2:
 	bl memcpy
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _080F2214 @ =gUnknown_8419F54
 	movs r0, 0
 	str r0, [sp]
@@ -723,7 +723,7 @@ _080F22F2:
 	strh r0, [r1]
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	adds r4, r5
 	ldr r0, _080F239C @ =sub_80F23A0
 	str r0, [r4]
@@ -1265,7 +1265,7 @@ _080F27AC:
 	bl sub_80F33DC
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _080F27FC @ =gUnknown_84160C8
 	str r5, [sp]
 	movs r0, 0x2
@@ -1607,7 +1607,7 @@ sub_80F2AA4: @ 80F2AA4
 	movs r1, 0x1E
 	movs r2, 0
 	movs r3, 0xC
-	bl sub_810F558
+	bl CreateWindow_SnapRight_StdPal
 	movs r0, 0x3
 	bl Save_LoadGameData
 	lsls r0, 24
@@ -1888,13 +1888,13 @@ _080F2CB4:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bgt _080F2D24
-	ldr r1, _080F2D20 @ =gUnknown_8415D78
+	ldr r1, _080F2D20 @ =gText_UPDOWNPick_ABUTTONBBUTTONCancel
 	movs r0, 0x1
 	str r0, [sp]
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F650
+	bl Menu_PrintHelpSystemUIHeader
 	b _080F2D34
 	.align 2, 0
 _080F2D08: .4byte 0xffff0000
@@ -1903,15 +1903,15 @@ _080F2D10: .4byte gStringVar1
 _080F2D14: .4byte gTasks
 _080F2D18: .4byte gStringVar4
 _080F2D1C: .4byte gUnknown_84160B4
-_080F2D20: .4byte gUnknown_8415D78
+_080F2D20: .4byte gText_UPDOWNPick_ABUTTONBBUTTONCancel
 _080F2D24:
-	ldr r1, _080F2D54 @ =gUnknown_8415D60
+	ldr r1, _080F2D54 @ =gText_UPDOWNPick_ABUTTONNext_BBUTTONBack
 	movs r0, 0x1
 	str r0, [sp]
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F650
+	bl Menu_PrintHelpSystemUIHeader
 _080F2D34:
 	ldr r0, _080F2D58 @ =gTasks
 	ldr r1, [sp, 0x14]
@@ -1929,7 +1929,7 @@ _080F2D34:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2D54: .4byte gUnknown_8415D60
+_080F2D54: .4byte gText_UPDOWNPick_ABUTTONNext_BBUTTONBack
 _080F2D58: .4byte gTasks
 _080F2D5C: .4byte Task_HofPC_PrintMonInfo
 	thumb_func_end sub_80F2B6C
@@ -2339,13 +2339,13 @@ sub_80F30A4: @ 80F30A4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080F30FC @ =gUnknown_8415D8C
+	ldr r0, _080F30FC @ =gText_ABUTTONExit
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_810F5E8
+	bl PrintTextOnRightSnappedWindow
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _080F3100 @ =gUnknown_8416090
 	movs r0, 0
 	str r0, [sp]
@@ -2374,7 +2374,7 @@ sub_80F30A4: @ 80F30A4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F30FC: .4byte gUnknown_8415D8C
+_080F30FC: .4byte gText_ABUTTONExit
 _080F3100: .4byte gUnknown_8416090
 _080F3104: .4byte gTasks
 _080F3108: .4byte Task_HofPC_ExitOnButtonPress
@@ -3223,8 +3223,8 @@ _080F37C8:
 	bl CopyBgTilemapBufferToVram
 	b _080F3854
 _080F381E:
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 	b _080F3854
 _080F3828:
 	movs r1, 0x82

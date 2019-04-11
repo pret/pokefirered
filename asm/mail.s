@@ -209,13 +209,13 @@ _080BED8C:
 	cmp r0, 0
 	bne _080BEDB4
 	movs r0, 0x22
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080BF0F4
 	.align 2, 0
 _080BEDB0: .4byte gUnknown_203AAC4
 _080BEDB4:
 	movs r0, 0x1E
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080BF0F4
 _080BEDBC:
 	add r1, sp, 0x8

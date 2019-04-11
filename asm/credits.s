@@ -241,7 +241,7 @@ _080F3B5E:
 	bl sub_80F3A74
 	bl sub_80F3AA4
 	movs r0, 0xF0
-	bl sub_80F77CC
+	bl Menu_LoadStdPalAt
 	ldr r0, _080F3BC8 @ =gPlttBufferUnfaded
 	movs r2, 0xFF
 	lsls r2, 1
@@ -325,7 +325,7 @@ _080F3C64:
 	bl sub_80F3AA4
 	bl sub_80F3AC4
 	movs r0, 0xF0
-	bl sub_80F77CC
+	bl Menu_LoadStdPalAt
 	ldr r0, _080F3C8C @ =gPlttBufferUnfaded
 	movs r2, 0xFF
 	lsls r2, 1

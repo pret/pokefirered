@@ -672,8 +672,8 @@ sub_80F6C14: @ 80F6C14
 	bx r0
 	thumb_func_end sub_80F6C14
 
-	thumb_func_start sub_80F6C6C
-sub_80F6C6C: @ 80F6C6C
+	thumb_func_start InitStandardTextBoxWindows
+InitStandardTextBoxWindows: @ 80F6C6C
 	push {lr}
 	ldr r0, _080F6C84 @ =gUnknown_841F42C
 	bl InitWindows
@@ -686,7 +686,7 @@ sub_80F6C6C: @ 80F6C6C
 	.align 2, 0
 _080F6C84: .4byte gUnknown_841F42C
 _080F6C88: .4byte gUnknown_203ABE0
-	thumb_func_end sub_80F6C6C
+	thumb_func_end InitStandardTextBoxWindows
 
 	thumb_func_start sub_80F6C8C
 sub_80F6C8C: @ 80F6C8C
@@ -696,8 +696,8 @@ sub_80F6C8C: @ 80F6C8C
 	bx r0
 	thumb_func_end sub_80F6C8C
 
-	thumb_func_start sub_80F6C98
-sub_80F6C98: @ 80F6C98
+	thumb_func_start ResetBg0
+ResetBg0: @ 80F6C98
 	push {lr}
 	movs r0, 0
 	movs r1, 0
@@ -711,7 +711,7 @@ sub_80F6C98: @ 80F6C98
 	bl sub_80F6E9C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80F6C98
+	thumb_func_end ResetBg0
 
 	thumb_func_start sub_80F6CBC
 sub_80F6CBC: @ 80F6CBC
@@ -819,7 +819,7 @@ sub_80F6D5C: @ 80F6D5C
 	lsrs r0, 24
 	cmp r0, 0
 	bne _080F6DB0
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -840,7 +840,7 @@ _080F6DAC: .4byte gStringVar4
 _080F6DB0:
 	cmp r0, 0x1
 	bne _080F6DDC
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -858,7 +858,7 @@ _080F6DB0:
 	.align 2, 0
 _080F6DD8: .4byte gStringVar4
 _080F6DDC:
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -896,7 +896,7 @@ sub_80F6E08: @ 80F6E08
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r3]
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -995,8 +995,8 @@ _080F6ED4:
 	bx r0
 	thumb_func_end sub_80F6E9C
 
-	thumb_func_start sub_80F6EE4
-sub_80F6EE4: @ 80F6EE4
+	thumb_func_start DrawDialogueFrame
+DrawDialogueFrame: @ 80F6EE4
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1022,10 +1022,10 @@ _080F6F12:
 	bx r0
 	.align 2, 0
 _080F6F18: .4byte sub_80F7124
-	thumb_func_end sub_80F6EE4
+	thumb_func_end DrawDialogueFrame
 
-	thumb_func_start sub_80F6F1C
-sub_80F6F1C: @ 80F6F1C
+	thumb_func_start DrawStdWindowFrame
+DrawStdWindowFrame: @ 80F6F1C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1051,10 +1051,10 @@ _080F6F4A:
 	bx r0
 	.align 2, 0
 _080F6F50: .4byte sub_80F6FD4
-	thumb_func_end sub_80F6F1C
+	thumb_func_end DrawStdWindowFrame
 
-	thumb_func_start sub_80F6F54
-sub_80F6F54: @ 80F6F54
+	thumb_func_start ClearDialogWindowAndFrame
+ClearDialogWindowAndFrame: @ 80F6F54
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1087,10 +1087,10 @@ _080F6F8E:
 	.align 2, 0
 _080F6F94: .4byte sub_80F76CC
 _080F6F98: .4byte gUnknown_203ADFA
-	thumb_func_end sub_80F6F54
+	thumb_func_end ClearDialogWindowAndFrame
 
-	thumb_func_start sub_80F6F9C
-sub_80F6F9C: @ 80F6F9C
+	thumb_func_start ClearStdWindowAndFrame
+ClearStdWindowAndFrame: @ 80F6F9C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1116,7 +1116,7 @@ _080F6FCA:
 	bx r0
 	.align 2, 0
 _080F6FD0: .4byte sub_80F7684
-	thumb_func_end sub_80F6F9C
+	thumb_func_end ClearStdWindowAndFrame
 
 	thumb_func_start sub_80F6FD4
 sub_80F6FD4: @ 80F6FD4
@@ -2059,8 +2059,8 @@ sub_80F77B8: @ 80F77B8
 _080F77C8: .4byte gUnknown_841F408
 	thumb_func_end sub_80F77B8
 
-	thumb_func_start sub_80F77CC
-sub_80F77CC: @ 80F77CC
+	thumb_func_start Menu_LoadStdPalAt
+Menu_LoadStdPalAt: @ 80F77CC
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 16
@@ -2072,7 +2072,7 @@ sub_80F77CC: @ 80F77CC
 	bx r0
 	.align 2, 0
 _080F77E0: .4byte gUnknown_841F408
-	thumb_func_end sub_80F77CC
+	thumb_func_end Menu_LoadStdPalAt
 
 	thumb_func_start sub_80F77E4
 sub_80F77E4: @ 80F77E4
@@ -2116,7 +2116,7 @@ DisplayItemMessageOnField: @ 80F7808
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_80F6E9C
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0x80
@@ -2187,8 +2187,8 @@ sub_80F7880: @ 80F7880
 _080F78A4: .4byte gUnknown_841F43C
 	thumb_func_end sub_80F7880
 
-	thumb_func_start sub_80F78A8
-sub_80F78A8: @ 80F78A8
+	thumb_func_start GetTextSpeedSetting
+GetTextSpeedSetting: @ 80F78A8
 	push {lr}
 	ldr r3, _080F78D8 @ =gSaveBlock2Ptr
 	ldr r2, [r3]
@@ -2216,7 +2216,7 @@ _080F78C4:
 	.align 2, 0
 _080F78D8: .4byte gSaveBlock2Ptr
 _080F78DC: .4byte gUnknown_841F428
-	thumb_func_end sub_80F78A8
+	thumb_func_end GetTextSpeedSetting
 
 	thumb_func_start sub_80F78E0
 sub_80F78E0: @ 80F78E0

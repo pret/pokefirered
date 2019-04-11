@@ -132,13 +132,16 @@ gUnknown_8462F24:: @ 8462F14
 	obj_pal gUnknown_84629D0, 0x1000
 
 gUnknown_8462F2C::
-	.incbin "baserom.gba", 0x462F2C, 0x8
+	obj_image_anim_frame  0, 0
+	obj_image_anim_end
 
 gUnknown_8462F34::
-	.incbin "baserom.gba", 0x462F34, 0x8
+	obj_image_anim_frame 16, 0
+	obj_image_anim_end
 
 gUnknown_8462F3C::
-	.incbin "baserom.gba", 0x462F3C, 0x8
+	obj_image_anim_frame 32, 0
+	obj_image_anim_end
 
 gUnknown_8462F44::
 	.4byte gUnknown_8462F2C
@@ -155,13 +158,44 @@ gUnknown_8462F50:: @ 8462F50
 	spr_template 0x1000, 0x1000, gUnknown_83ACAF8, gUnknown_8462F4C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_8462F98::
-	.incbin "baserom.gba", 0x462F98, 0xC
+	obj_image_anim_frame 0x00, 30
+	obj_image_anim_frame 0x10, 30
+	obj_image_anim_jump 0
 
 gUnknown_8462FA4::
-	.incbin "baserom.gba", 0x462FA4, 0x40
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 8, 12
+	obj_image_anim_frame 0, 12
+	obj_image_anim_frame 8, 12
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 8, 12
+	obj_image_anim_frame 0, 12
+	obj_image_anim_frame 8, 12
+	obj_image_anim_jump 0
 
 gUnknown_8462FE4::
-	.incbin "baserom.gba", 0x462FE4, 0x3C
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 2,  8
+	obj_image_anim_frame 0,  8
+	obj_image_anim_frame 2,  8
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 0, 60
+	obj_image_anim_frame 2,  8
+	obj_image_anim_frame 0,  8
+	obj_image_anim_frame 2,  8
+	obj_image_anim_jump 0
 
 gUnknown_8463020::
 	.4byte gUnknown_8462F98

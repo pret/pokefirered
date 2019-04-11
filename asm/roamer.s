@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8141C54
-sub_8141C54: @ 8141C54
+	thumb_func_start ClearRoamerData
+ClearRoamerData: @ 8141C54
 	push {lr}
 	ldr r0, _08141C84 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -15,13 +15,13 @@ sub_8141C54: @ 8141C54
 	movs r1, 0
 	movs r2, 0x1C
 	bl memset
-	ldr r1, _08141C8C @ =gUnknown_203F3AE
+	ldr r1, _08141C8C @ =sRoamerLocation
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
 	movs r1, 0
 	movs r2, 0
-	ldr r0, _08141C90 @ =gUnknown_203F3A8
+	ldr r0, _08141C90 @ =sLocationHistory
 _08141C74:
 	strb r2, [r0]
 	strb r2, [r0, 0x1]
@@ -34,31 +34,31 @@ _08141C74:
 	.align 2, 0
 _08141C84: .4byte gSaveBlock1Ptr
 _08141C88: .4byte 0x000030d0
-_08141C8C: .4byte gUnknown_203F3AE
-_08141C90: .4byte gUnknown_203F3A8
-	thumb_func_end sub_8141C54
+_08141C8C: .4byte sRoamerLocation
+_08141C90: .4byte sLocationHistory
+	thumb_func_end ClearRoamerData
 
-	thumb_func_start sub_8141C94
-sub_8141C94: @ 8141C94
+	thumb_func_start CreateInitialRoamerMon
+CreateInitialRoamerMon: @ 8141C94
 	push {r4-r7,lr}
 	sub sp, 0x10
 	ldr r7, _08141CB0 @ =gEnemyParty
-	bl sub_80CBDB0
+	bl ScrSpecial_GetStarter
 	lsls r0, 16
 	lsrs r0, 16
-	cmp r0, 0x1
+	cmp r0, 0x1 @ SPECIES_BULBASAUR
 	beq _08141CB4
-	cmp r0, 0x4
+	cmp r0, 0x4 @ SPECIES_CHARMANDER
 	beq _08141CB8
-	movs r6, 0xF3
+	movs r6, 0xF3 @ SPECIES_RAIKOU
 	b _08141CBA
 	.align 2, 0
 _08141CB0: .4byte gEnemyParty
 _08141CB4:
-	movs r6, 0xF4
+	movs r6, 0xF4 @ SPECIES_ENTEI
 	b _08141CBA
 _08141CB8:
-	movs r6, 0xF5
+	movs r6, 0xF5 @ SPECIES_SUICUNE
 _08141CBA:
 	movs r0, 0
 	str r0, [sp]
@@ -133,11 +133,11 @@ _08141CBA:
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1, 0x12]
-	ldr r5, _08141D94 @ =gUnknown_203F3AE
+	ldr r5, _08141D94 @ =sRoamerLocation
 	movs r0, 0x3
 	strb r0, [r5]
 	bl Random
-	ldr r4, _08141D98 @ =gUnknown_8466C58
+	ldr r4, _08141D98 @ =sRoamerLocations
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
@@ -156,22 +156,22 @@ _08141CBA:
 	.align 2, 0
 _08141D8C: .4byte gSaveBlock1Ptr
 _08141D90: .4byte 0x000030d0
-_08141D94: .4byte gUnknown_203F3AE
-_08141D98: .4byte gUnknown_8466C58
-	thumb_func_end sub_8141C94
+_08141D94: .4byte sRoamerLocation
+_08141D98: .4byte sRoamerLocations
+	thumb_func_end CreateInitialRoamerMon
 
-	thumb_func_start sub_8141D9C
-sub_8141D9C: @ 8141D9C
+	thumb_func_start InitRoamer
+InitRoamer: @ 8141D9C
 	push {lr}
-	bl sub_8141C54
-	bl sub_8141C94
+	bl ClearRoamerData
+	bl CreateInitialRoamerMon
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8141D9C
+	thumb_func_end InitRoamer
 
 	thumb_func_start UpdateLocationHistoryForRoamer
 UpdateLocationHistoryForRoamer: @ 8141DAC
-	ldr r0, _08141DCC @ =gUnknown_203F3A8
+	ldr r0, _08141DCC @ =sLocationHistory
 	ldrb r1, [r0, 0x2]
 	strb r1, [r0, 0x4]
 	ldrb r1, [r0, 0x3]
@@ -188,7 +188,7 @@ UpdateLocationHistoryForRoamer: @ 8141DAC
 	strb r1, [r0, 0x1]
 	bx lr
 	.align 2, 0
-_08141DCC: .4byte gUnknown_203F3A8
+_08141DCC: .4byte sLocationHistory
 _08141DD0: .4byte gSaveBlock1Ptr
 	thumb_func_end UpdateLocationHistoryForRoamer
 
@@ -202,10 +202,10 @@ RoamerMoveToOtherLocationSet: @ 8141DD4
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08141E10
-	ldr r1, _08141E20 @ =gUnknown_203F3AE
+	ldr r1, _08141E20 @ =sRoamerLocation
 	movs r0, 0x3
 	strb r0, [r1]
-	ldr r5, _08141E24 @ =gUnknown_8466C58
+	ldr r5, _08141E24 @ =sRoamerLocations
 	adds r4, r1, 0
 _08141DEE:
 	bl Random
@@ -230,8 +230,8 @@ _08141E10:
 	.align 2, 0
 _08141E18: .4byte gSaveBlock1Ptr
 _08141E1C: .4byte 0x000030d0
-_08141E20: .4byte gUnknown_203F3AE
-_08141E24: .4byte gUnknown_8466C58
+_08141E20: .4byte sRoamerLocation
+_08141E24: .4byte sRoamerLocations
 	thumb_func_end RoamerMoveToOtherLocationSet
 
 	thumb_func_start RoamerMove
@@ -255,9 +255,9 @@ _08141E42:
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08141EB2
-	ldr r7, _08141E9C @ =gUnknown_203F3AE
+	ldr r7, _08141E9C @ =sRoamerLocation
 _08141E52:
-	ldr r3, _08141EA0 @ =gUnknown_8466C58
+	ldr r3, _08141EA0 @ =sRoamerLocations
 	lsls r0, r4, 3
 	subs r2, r0, r4
 	adds r1, r2, r3
@@ -267,7 +267,7 @@ _08141E52:
 	bne _08141EA8
 	adds r6, r3, 0
 	adds r5, r2, 0x1
-	ldr r4, _08141EA4 @ =gUnknown_203F3A8
+	ldr r4, _08141EA4 @ =sLocationHistory
 _08141E68:
 	bl Random
 	lsls r0, 16
@@ -293,9 +293,9 @@ _08141E8C:
 	.align 2, 0
 _08141E94: .4byte gSaveBlock1Ptr
 _08141E98: .4byte 0x000030d0
-_08141E9C: .4byte gUnknown_203F3AE
-_08141EA0: .4byte gUnknown_8466C58
-_08141EA4: .4byte gUnknown_203F3A8
+_08141E9C: .4byte sRoamerLocation
+_08141EA0: .4byte sRoamerLocations
+_08141EA4: .4byte sLocationHistory
 _08141EA8:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -322,7 +322,7 @@ IsRoamerAt: @ 8141EB8
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08141EF0
-	ldr r0, _08141EEC @ =gUnknown_203F3AE
+	ldr r0, _08141EEC @ =sRoamerLocation
 	ldrb r3, [r0]
 	cmp r2, r3
 	bne _08141EF0
@@ -334,7 +334,7 @@ IsRoamerAt: @ 8141EB8
 	.align 2, 0
 _08141EE4: .4byte gSaveBlock1Ptr
 _08141EE8: .4byte 0x000030d0
-_08141EEC: .4byte gUnknown_203F3AE
+_08141EEC: .4byte sRoamerLocation
 _08141EF0:
 	movs r0, 0
 _08141EF2:
@@ -491,18 +491,18 @@ _08142030: .4byte 0x000030d0
 
 	thumb_func_start GetRoamerLocation
 GetRoamerLocation: @ 8142034
-	ldr r3, _08142040 @ =gUnknown_203F3AE
+	ldr r3, _08142040 @ =sRoamerLocation
 	ldrb r2, [r3]
 	strb r2, [r0]
 	ldrb r0, [r3, 0x1]
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_08142040: .4byte gUnknown_203F3AE
+_08142040: .4byte sRoamerLocation
 	thumb_func_end GetRoamerLocation
 
-	thumb_func_start sub_8142044
-sub_8142044: @ 8142044
+	thumb_func_start GetRoamerLocationMapSectionId
+GetRoamerLocationMapSectionId: @ 8142044
 	push {lr}
 	ldr r0, _08142064 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -511,7 +511,7 @@ sub_8142044: @ 8142044
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08142070
-	ldr r1, _0814206C @ =gUnknown_203F3AE
+	ldr r1, _0814206C @ =sRoamerLocation
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
 	bl get_mapheader_by_bank_and_number
@@ -520,12 +520,12 @@ sub_8142044: @ 8142044
 	.align 2, 0
 _08142064: .4byte gSaveBlock1Ptr
 _08142068: .4byte 0x000030d0
-_0814206C: .4byte gUnknown_203F3AE
+_0814206C: .4byte sRoamerLocation
 _08142070:
 	movs r0, 0xC5
 _08142072:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8142044
+	thumb_func_end GetRoamerLocationMapSectionId
 
 	.align 2, 0 @ Don't pad with nop.

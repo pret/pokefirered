@@ -54,7 +54,7 @@
 #define VAR_0x402F                 0x402F
 
 #define VAR_0x4030                 0x4030
-#define VAR_0x4031                 0x4031
+#define VAR_STARTER_MON            0x4031
 #define VAR_0x4032                 0x4032
 #define VAR_ENIGMA_BERRY_AVAILABLE 0x4033
 

@@ -55,7 +55,7 @@ gUnknown_83F5BCC:: @ 83F5BCC
 gUnknown_83F5D1C:: @ 83F5D1C
 	.incbin "baserom.gba", 0x3F5D1C, 0x10
 
-gUnknown_83F5D2C:: @ 83F5D2C
+sStarterMon:: @ 83F5D2C
 	.incbin "baserom.gba", 0x3F5D2C, 0x6
 
 gUnknown_83F5D32:: @ 83F5D32

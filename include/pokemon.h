@@ -673,5 +673,6 @@ void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
 void PlayMapChosenOrBattleBGM(u16 songId);
 u8 GetMonsStateToDoubles(void);
 void sub_803E0A4(struct Pokemon *mon, struct BattleTowerPokemon *src);
+void sub_803F7D4(u16 trainerSpriteId, u8 battlerPosition);
 
 #endif // GUARD_POKEMON_H

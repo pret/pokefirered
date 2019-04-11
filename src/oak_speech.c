@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "decompress.h"
 #include "task.h"
 #include "malloc.h"
 #include "gpu_regs.h"
@@ -90,8 +91,9 @@ void sub_8130B10(u8 taskId);
 void sub_8130BA8(u8 taskId);
 void sub_8130BF0(u8 taskId);
 void sub_8130C20(u8 taskId);
-void sub_8130C64(void);
-void sub_8130F2C(u8 taskId);
+
+static void CB2_ReturnFromNamingScreen(void);
+static void CreateNidoranFSprite(u8 taskId);
 void sub_8130FD4(u8 taskId, u8 state);
 void sub_8131168(u8 taskId, u8 state);
 void sub_81311F4(u8 arg0, u8 state);
@@ -106,6 +108,9 @@ extern const u8 gUnknown_8415D48[];
 extern const u8 gUnknown_8415D50[];
 extern const u8 gUnknown_8415D93[];
 extern const u8 gUnknown_8415D97[];
+
+extern const struct CompressedSpriteSheet gUnknown_8235194[];
+extern const struct CompressedSpritePalette gUnknown_82373F4;
 
 const u8 gUnknown_845FD54[][5] = {
     [SPECIES_BULBASAUR - 1] = {0x16, 0x1b, 0x30, 0x16, 0x29},
@@ -1040,7 +1045,7 @@ void sub_812F7C0(u8 taskId)
         LoadBgTiles(1, sOakSpeechResources->unk_0000, size, 0);
         CopyToBgTilemapBuffer(1, gUnknown_8460CE8, 0, 0);
         CopyBgTilemapBufferToVram(1);
-        sub_8130F2C(taskId);
+        CreateNidoranFSprite(taskId);
         sub_81311F4(3, 0);
         sub_8130FD4(taskId, 1);
         PlayBGM(292);
@@ -1374,13 +1379,13 @@ void sub_81303B4(u8 taskId)
         sub_8131754(sOakSpeechResources->unk_0010, 0);
         if (sOakSpeechResources->unk_0010 == 0)
         {
-            DoNamingScreen(0, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, sub_8130C64);
+            DoNamingScreen(0, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen);
         }
         else
         {
             sub_810F4D8(gTasks[taskId].data[13], 1);
             RemoveWindow(gTasks[taskId].data[13]);
-            DoNamingScreen(4, gSaveBlock1Ptr->rivalName, 0, 0, 0, sub_8130C64);
+            DoNamingScreen(4, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
         }
         sub_8131168(taskId, 1);
         FreeAllWindowBuffers();
@@ -1686,4 +1691,105 @@ void sub_8130C20(u8 taskId)
     gTextFlags.flag_0 = FALSE;
     SetMainCallback2(CB2_NewGame);
     DestroyTask(taskId);
+}
+
+static void CB2_ReturnFromNamingScreen(void)
+{
+    u8 taskId;
+
+    switch (gMain.state)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        DmaFill16(3, 0, VRAM, VRAM_SIZE);
+        DmaFill32(3, 0, OAM, OAM_SIZE);
+        DmaFill16(3, RGB_BLACK, PLTT + sizeof(u16), PLTT_SIZE - sizeof(u16));
+        ResetPaletteFade();
+        ScanlineEffect_Stop();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        reset_temp_tile_data_buffers();
+        break;
+    case 1:
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(1, gUnknown_8462E58, NELEMS(gUnknown_8462E58));
+        SetBgTilemapBuffer(1, sOakSpeechResources->bg1TilemapBuffer);
+        SetBgTilemapBuffer(2, sOakSpeechResources->bg2TilemapBuffer);
+        ChangeBgX(1, 0, 0);
+        ChangeBgY(1, 0, 0);
+        ChangeBgX(2, 0, 0);
+        ChangeBgY(2, 0, 0);
+        break;
+    case 2:
+        SetGpuReg(REG_OFFSET_WIN0H, 0);
+        SetGpuReg(REG_OFFSET_WIN0V, 0);
+        SetGpuReg(REG_OFFSET_WININ, 0);
+        SetGpuReg(REG_OFFSET_WINOUT, 0);
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        break;
+    case 3:
+        FreeAllWindowBuffers();
+        sub_80F6C6C();
+        sub_80F6C98();
+        LoadPalette(gUnknown_8460568, 0, 0xe0);
+        break;
+    case 4:
+        decompress_and_copy_tile_data_to_vram(1, gUnknown_8460CA4, 0, 0, 0);
+        break;
+    case 5:
+        if (free_temp_tile_data_buffers_if_possible())
+            return;
+        FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 30, 20);
+        CopyToBgTilemapBuffer(1, gUnknown_8460CE8, 0, 0);
+        FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, 30, 20);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(2);
+        break;
+    case 6:
+        taskId = CreateTask(sub_8130464, 0);
+        if (sOakSpeechResources->unk_0010 == 0)
+        {
+            if (gSaveBlock2Ptr->playerGender == MALE)
+                sub_81311F4(MALE, 0);
+            else
+                sub_81311F4(FEMALE, 0);
+        }
+        else
+            sub_81311F4(2, 0);
+        gTasks[taskId].data[1] = -60;
+        gSpriteCoordOffsetX += 60;
+        ChangeBgX(2, -0x3C00, 0);
+        sub_8130FD4(taskId, 1);
+        gTasks[taskId].data[15] = 1;
+        break;
+    case 7:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+        ShowBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        EnableInterrupts(INTR_FLAG_VBLANK);
+        SetVBlankCallback(sub_812EAFC);
+        gTextFlags.flag_0 = TRUE;
+        SetMainCallback2(sub_812EB10);
+        return;
+    }
+
+    gMain.state++;
+}
+
+static void CreateNidoranFSprite(u8 taskId)
+{
+    u8 spriteId;
+
+    DecompressPicFromTable(gUnknown_8235194, sub_8044E00(0), SPECIES_NIDORAN_F);
+    sub_800F078(&gUnknown_82373F4);
+    sub_803F7D4(SPECIES_NIDORAN_F, 0);
+    spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x60, 0x60, 1);
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].invisible = TRUE;
+    gTasks[taskId].data[4] = spriteId;
 }

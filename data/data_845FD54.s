@@ -33,7 +33,25 @@ gUnknown_84623AC:: @ 84623AC
 	.incbin "baserom.gba", 0x4623AC, 0x40
 
 gUnknown_84623EC:: @ 84623EC
-	.incbin "baserom.gba", 0x4623EC, 0xA6C
+	.incbin "baserom.gba", 0x4623EC, 0x5E4
+
+gUnknown_84629D0::
+	.incbin "data/oak_speech/unk_84629D0.gbapal"
+
+gUnknown_84629F0::
+	.incbin "data/oak_speech/unk_84629F0.gbapal"
+
+gUnknown_8462A10::
+	.incbin "data/oak_speech/unk_8462A10.4bpp.lz"
+
+gUnknown_8462B74::
+	.incbin "data/oak_speech/unk_8462B74.4bpp.lz"
+
+gUnknown_8462D34::
+	.incbin "data/oak_speech/unk_8462D34.4bpp.lz"
+
+gUnknown_8462E18::
+	.incbin "data/oak_speech/unk_8462E18.4bpp.lz"
 
 gUnknown_8462E58:: @ 8462E58
 	.incbin "baserom.gba", 0x462E58, 0xC
@@ -100,22 +118,64 @@ gUnknown_8462EF0:: @ 8462EF0
 	.4byte gUnknown_81C5BB9
 
 gUnknown_8462EFC:: @ 8462EFC
-	.incbin "baserom.gba", 0x462EFC, 0x18
+	obj_tiles gUnknown_8462B74, 0x0400, 0x1001
+	obj_tiles gUnknown_8462D34, 0x0200, 0x1002
+	obj_tiles gUnknown_8462E18, 0x0080, 0x1003
 
 gUnknown_8462F14:: @ 8462F14
-	.incbin "baserom.gba", 0x462F14, 0x8
+	obj_tiles gUnknown_8462A10, 0x0600, 0x1000
 
 gUnknown_8462F1C:: @ 8462F1C
-	.incbin "baserom.gba", 0x462F1C, 0x8
+	obj_pal gUnknown_84629F0, 0x1001
 
-gUnknown_8462F24:: @ 8462F24
-	.incbin "baserom.gba", 0x462F24, 0x2C
+gUnknown_8462F24:: @ 8462F14
+	obj_pal gUnknown_84629D0, 0x1000
+
+gUnknown_8462F2C::
+	.incbin "baserom.gba", 0x462F2C, 0x8
+
+gUnknown_8462F34::
+	.incbin "baserom.gba", 0x462F34, 0x8
+
+gUnknown_8462F3C::
+	.incbin "baserom.gba", 0x462F3C, 0x8
+
+gUnknown_8462F44::
+	.4byte gUnknown_8462F2C
+
+gUnknown_8462F48::
+	.4byte gUnknown_8462F34
+
+gUnknown_8462F4C::
+	.4byte gUnknown_8462F3C
 
 gUnknown_8462F50:: @ 8462F50
-	.incbin "baserom.gba", 0x462F50, 0xDC
+	spr_template 0x1000, 0x1000, gUnknown_83ACAF8, gUnknown_8462F44, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x1000, 0x1000, gUnknown_83ACAF8, gUnknown_8462F48, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x1000, 0x1000, gUnknown_83ACAF8, gUnknown_8462F4C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+gUnknown_8462F98::
+	.incbin "baserom.gba", 0x462F98, 0xC
+
+gUnknown_8462FA4::
+	.incbin "baserom.gba", 0x462FA4, 0x40
+
+gUnknown_8462FE4::
+	.incbin "baserom.gba", 0x462FE4, 0x3C
+
+gUnknown_8463020::
+	.4byte gUnknown_8462F98
+
+gUnknown_8463024::
+	.4byte gUnknown_8462FA4
+
+gUnknown_8463028::
+	.4byte gUnknown_8462FE4
 
 gUnknown_846302C:: @ 846302C
-	.incbin "baserom.gba", 0x46302C, 0x48
+	spr_template 0x1001, 0x1001, gUnknown_83AC9D8, gUnknown_8463020, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x1002, 0x1001, gUnknown_83AC9F8, gUnknown_8463024, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x1003, 0x1001, gUnknown_83AC9E8, gUnknown_8463028, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_8463074:: @ 8463074
 	.incbin "baserom.gba", 0x463074, 0x18

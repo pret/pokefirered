@@ -545,6 +545,12 @@ extern const struct WindowTemplate gUnknown_8462ED0;
 extern const struct TextColor gUnknown_8462EE8;
 extern const struct TextColor gUnknown_8462EEC;
 extern const u8 *const gUnknown_8462EF0[];
+extern const struct CompressedSpriteSheet gUnknown_8462EFC[3];
+extern const struct CompressedSpriteSheet gUnknown_8462F14;
+extern const struct SpritePalette gUnknown_8462F1C;
+extern const struct SpritePalette gUnknown_8462F24;
+extern const struct SpriteTemplate gUnknown_8462F50[3];
+extern const struct SpriteTemplate gUnknown_846302C[3];
 extern const u8 *const gUnknown_8463074[];
 
 void sub_812E944(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
@@ -1792,4 +1798,50 @@ static void CreateNidoranFSprite(u8 taskId)
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].invisible = TRUE;
     gTasks[taskId].data[4] = spriteId;
+}
+
+void sub_8130FB8(struct Sprite * sprite)
+{
+    sprite->pos2.y = gSprites[sprite->data[0]].animCmdIndex;
+}
+
+void sub_8130FD4(u8 taskId, u8 state)
+{
+    u8 spriteId;
+    u8 i = 0;
+
+    switch (state)
+    {
+    case 0:
+        LoadCompressedObjectPic(&gUnknown_8462EFC[0]);
+        LoadCompressedObjectPic(&gUnknown_8462EFC[1]);
+        LoadCompressedObjectPic(&gUnknown_8462EFC[2]);
+        LoadSpritePalette(&gUnknown_8462F1C);
+        spriteId = CreateSprite(&gUnknown_846302C[0], 0x10, 0x11, 2);
+        gSprites[spriteId].oam.priority = 0;
+        gTasks[taskId].data[7] = spriteId;
+        spriteId = CreateSprite(&gUnknown_846302C[1], 0x10, 0x09, 3);
+        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].data[0] = gTasks[taskId].data[7];
+        gSprites[spriteId].callback = sub_8130FB8;
+        gTasks[taskId].data[8] = spriteId;
+        spriteId = CreateSprite(&gUnknown_846302C[2], 0x18, 0x0D, 1);
+        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].data[0] = gTasks[taskId].data[7];
+        gSprites[spriteId].callback = sub_8130FB8;
+        gTasks[taskId].data[9] = spriteId;
+        break;
+    case 1:
+        LoadCompressedObjectPic(&gUnknown_8462F14);
+        LoadSpritePalette(&gUnknown_8462F24);
+        for (i = 0; i < 3; i++)
+        {
+            spriteId = CreateSprite(&gUnknown_8462F50[i], i * 32 + 88, 0x70, 1);
+            gSprites[spriteId].oam.priority = 2;
+            gSprites[spriteId].animPaused = TRUE;
+            gSprites[spriteId].coordOffsetEnabled = TRUE;
+            gTasks[taskId].data[7 + i] = spriteId;
+        }
+        break;
+    }
 }

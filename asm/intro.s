@@ -898,7 +898,7 @@ _080ECCF6:
 	movs r1, 0x10
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_812E944
+	bl OakSpeech_StartBlendTask
 	b _080ECD36
 	.align 2, 0
 _080ECD14: .4byte 0x00003f44
@@ -907,7 +907,7 @@ _080ECD18:
 	bl ShowBg
 	b _080ECD36
 _080ECD20:
-	bl sub_812E9E4
+	bl OakSpeech_IsBlendTaskActive
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -980,7 +980,7 @@ _080ECD9C:
 	movs r1, 0x10
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_812E944
+	bl OakSpeech_StartBlendTask
 	strh r4, [r6, 0x8]
 	strh r5, [r6, 0xA]
 	strh r4, [r6, 0x12]
@@ -992,7 +992,7 @@ _080ECDC4:
 	str r0, [r6, 0x14]
 	b _080ECE70
 _080ECDCC:
-	bl sub_812E9E4
+	bl OakSpeech_IsBlendTaskActive
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ECE96
@@ -1051,10 +1051,10 @@ _080ECE26:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_812E944
+	bl OakSpeech_StartBlendTask
 	b _080ECE70
 _080ECE52:
-	bl sub_812E9E4
+	bl OakSpeech_IsBlendTaskActive
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ECE96

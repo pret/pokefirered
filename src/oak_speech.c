@@ -5,6 +5,7 @@
 #include "gpu_regs.h"
 #include "wild_encounter.h"
 #include "palette.h"
+#include "blend_palette.h"
 #include "text.h"
 #include "window.h"
 #include "text_window.h"
@@ -19,6 +20,8 @@
 #include "string_util.h"
 #include "pokeball.h"
 #include "naming_screen.h"
+#include "math_util.h"
+#include "overworld.h"
 #include "constants/species.h"
 #include "constants/songs.h"
 
@@ -75,6 +78,18 @@ void sub_8130694(u8 taskId);
 void sub_81306D4(u8 taskId);
 void sub_813071C(u8 taskId);
 void sub_81307D0(u8 taskId);
+void sub_8130858(u8 taskId);
+void sub_81308D0(u8 taskId);
+void sub_8130914(u8 taskId);
+void sub_8130940(u8 taskId);
+void sub_8130980(u8 taskId);
+void sub_8130A38(u8 taskId);
+void sub_8130A80(u8 taskId);
+void sub_8130ADC(u8 taskId);
+void sub_8130B10(u8 taskId);
+void sub_8130BA8(u8 taskId);
+void sub_8130BF0(u8 taskId);
+void sub_8130C20(u8 taskId);
 void sub_8130C64(void);
 void sub_8130F2C(u8 taskId);
 void sub_8130FD4(u8 taskId, u8 state);
@@ -1469,4 +1484,206 @@ void sub_81306D4(u8 taskId)
     sub_81311F4(2, 0);
     sub_81315CC(taskId, 2);
     gTasks[taskId].func = sub_813071C;
+}
+
+void sub_813071C(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (data[2] != 0)
+    {
+        OaksSpeechPrintMessage(gUnknown_81C5E2E, sOakSpeechResources->unk_001F);
+        sOakSpeechResources->unk_0010 = 1;
+        gTasks[taskId].func = sub_81301B0;
+    }
+}
+
+void sub_81307D0(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (data[2] != 0)
+    {
+        sub_8131310();
+        if (data[3] != 0)
+            data[3]--;
+        else
+        {
+            if (gSaveBlock2Ptr->playerGender == MALE)
+                sub_81311F4(MALE, 0);
+            else
+                sub_81311F4(FEMALE, 0);
+            gTasks[taskId].data[1] = 0;
+            gSpriteCoordOffsetX = 0;
+            ChangeBgX(2, 0, 0);
+            sub_81315CC(taskId, 2);
+            gTasks[taskId].func = sub_8130858;
+        }
+    }
+}
+
+void sub_8130858(u8 taskId)
+{
+    if (gTasks[taskId].data[2] != 0)
+    {
+        StringExpandPlaceholders(gStringVar4, gUnknown_81C5EF4);
+        OaksSpeechPrintMessage(gStringVar4, sOakSpeechResources->unk_001F);
+        gTasks[taskId].data[3] = 30;
+        gTasks[taskId].func = sub_81308D0;
+    }
+}
+
+void sub_81308D0(u8 taskId)
+{
+    if (!IsTextPrinterActive(0))
+    {
+        if (gTasks[taskId].data[3] != 0)
+            gTasks[taskId].data[3]--;
+        else
+        {
+            FadeOutBGM(4);
+            gTasks[taskId].func = sub_8130914;
+        }
+    }
+}
+
+void sub_8130914(u8 taskId)
+{
+    sOakSpeechResources->unk_0012 = 0;
+    sub_8130A38(taskId);
+    sub_8130ADC(taskId);
+    sub_8130940(taskId);
+}
+
+void sub_8130940(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    SetBgAttribute(2, 6, 1);
+    data[0] = 0;
+    data[1] = 0;
+    data[2] = 256;
+    data[15] = 0;
+    gTasks[taskId].func = sub_8130980;
+}
+
+void sub_8130980(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    s16 x, y;
+    u16 r0;
+
+    sOakSpeechResources->unk_0012++;
+    if (sOakSpeechResources->unk_0012 % 20 == 0)
+    {
+        if (sOakSpeechResources->unk_0012 == 40)
+            PlaySE(SE_FU_ZUZUZU);
+        r0 = data[2];
+        data[2] -= 32;
+        x = sub_80D8B90(r0 - 8);
+        y = sub_80D8B90(data[2] - 16);
+        SetBgAffine(2, 0x7800, 0x5400, 0x78, 0x54, x, y, 0);
+        if (data[2] <= 96)
+        {
+            data[15] = 1;
+            data[0] = 36;
+            gTasks[taskId].func = sub_8130BA8;
+        }
+    }
+}
+
+void sub_8130A38(u8 taskId)
+{
+    u8 taskId2 = CreateTask(sub_8130A80, 1);
+    s16 * data = gTasks[taskId2].data;
+    data[0] = 0;
+    data[1] = 0;
+    data[2] = 0;
+    data[15] = 0;
+    BeginNormalPaletteFade(0xFFFF0FCF, 4, 0, 16, RGB_BLACK);
+}
+
+void sub_8130A80(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    if (!gPaletteFade.active)
+    {
+        if (data[1] != 0)
+        {
+            DestroyTask(taskId);
+            sub_8131168(taskId, 1);
+        }
+        else
+        {
+            data[1]++;
+            BeginNormalPaletteFade(0x0000F000, 0, 0, 16, RGB_BLACK);
+        }
+    }
+}
+
+void sub_8130ADC(u8 taskId)
+{
+    u8 taskId2 = CreateTask(sub_8130B10, 2);
+    s16 * data = gTasks[taskId2].data;
+    data[0] = 8;
+    data[1] = 0;
+    data[2] = 8;
+    data[14] = 0;
+    data[15] = 0;
+}
+
+void sub_8130B10(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 i;
+
+    if (data[0] != 0)
+        data[0]--;
+    else
+    {
+        if (data[1] <= 0 && data[2] != 0)
+            data[2]--;
+        BlendPalette(0x40, 0x20, data[14], RGB_WHITE);
+        data[14]++;
+        data[1]--;
+        data[0] = data[2];
+        if (data[14] > 14)
+        {
+            for (i = 0; i < 32; i++)
+            {
+                gPlttBufferFaded[i + 0x40] = RGB_WHITE;
+                gPlttBufferUnfaded[i + 0x40] = RGB_WHITE;
+            }
+            DestroyTask(taskId);
+        }
+    }
+}
+
+void sub_8130BA8(u8 taskId)
+{
+    if (gTasks[taskId].data[0] != 0)
+        gTasks[taskId].data[0]--;
+    else
+    {
+        BeginNormalPaletteFade(0x00000030, 2, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = sub_8130BF0;
+    }
+}
+
+void sub_8130BF0(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        gTasks[taskId].func = sub_8130C20;
+    }
+}
+
+void sub_8130C20(u8 taskId)
+{
+    FreeAllWindowBuffers();
+    sub_8044D80();
+    Free(sOakSpeechResources);
+    sOakSpeechResources = NULL;
+    gTextFlags.flag_0 = FALSE;
+    SetMainCallback2(CB2_NewGame);
+    DestroyTask(taskId);
 }

@@ -714,8 +714,10 @@ extern const u8 gUnknown_81C5D4B[];
 extern const u8 gUnknown_81C5DBD[];
 extern const u8 gUnknown_81C5DEA[];
 extern const u8 gUnknown_81C5E13[];
+extern const u8 gUnknown_81C5E2E[];
 extern const u8 gUnknown_81C5E91[];
 extern const u8 gUnknown_81C5EB5[];
 extern const u8 gUnknown_81C5EC5[];
+extern const u8 gUnknown_81C5EF4[];
 
 #endif //GUARD_EVENT_SCRIPTS_H

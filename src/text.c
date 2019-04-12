@@ -9,7 +9,7 @@
 extern u8 gGlyphInfo[0x90];
 extern u8 gUnknown_203ADFA;
 extern u16 gUnknown_841F408[];
-extern const struct OamData gUnknown_83AC9D0;
+extern const struct OamData gOamData_83AC9D0;
 
 extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 extern void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height);
@@ -60,7 +60,7 @@ const struct SpriteTemplate gUnknown_81EA6B4 =
 {
     .tileTag = 0x8000,
     .paletteTag = 0x8000,
-    .oam = &gUnknown_83AC9D0,
+    .oam = &gOamData_83AC9D0,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,

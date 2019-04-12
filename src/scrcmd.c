@@ -1636,8 +1636,8 @@ bool8 ScrCmd_bufferitemname(struct ScriptContext *ctx)
     return FALSE;
 }
 
-extern const u8 gUnknown_83A72A0[];
-extern const u8 gUnknown_83A72A2[];
+const u8 gUnknown_83A72A0[] = _("S");
+const u8 gUnknown_83A72A2[] = _("IES");
 
 bool8 ScrCmd_bufferitemnameplural(struct ScriptContext *ctx)
 {

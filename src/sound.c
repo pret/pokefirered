@@ -40,7 +40,23 @@ extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_SE3;
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable2[];
-extern const struct Fanfare sFanfares[];
+
+static const struct Fanfare sFanfares[] = {
+    { MUS_FANFA1,                80 },
+    { MUS_FANFA4,               160 },
+    { MUS_FANFA5,               220 },
+    { MUS_ME_WAZA,              220 },
+    { MUS_ME_ASA,               160 },
+    { MUS_ME_BACHI,             340 },
+    { MUS_ME_WASURE,            180 },
+    { MUS_ME_KINOMI,            120 },
+    { MUS_ME_B_BIG,             250 },
+    { MUS_ME_B_SMALL,           150 },
+    { MUS_ME_ZANNEN,            160 },
+    { BGM_FRLG_FLUTE,           450 },
+    { BGM_FRLG_ME_KEYITEM,      170 },
+    { BGM_FRLG_ME_POKEDEX_EVAL, 196 }
+};
 
 extern u16 SpeciesToCryId(u16);
 

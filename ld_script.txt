@@ -377,6 +377,11 @@ SECTIONS {
         data/map_obj_80688E4.o(.rodata);
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
+        data/field_tasks.o(.rodata);
+        data/start_menu.o(.rodata);
+        data/tileset_anims.o(.rodata);
+        data/palette.o(.rodata);
+        src/sound.o(.rodata);
         data/data_835B488.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data_83F5738.o(.rodata);

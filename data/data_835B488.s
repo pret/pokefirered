@@ -1,70 +1,7 @@
 	.section .rodata
 	.align 2
-gUnknown_83A7310:: @ 83A7310
-	.incbin "baserom.gba", 0x3A7310, 0x20
-
-gUnknown_83A7330:: @ 83A7330
-	.incbin "baserom.gba", 0x3A7330, 0x14
-
-gUnknown_83A7344:: @ 83A7344
-	.incbin "baserom.gba", 0x3A7344, 0x48
-
-gUnknown_83A738C:: @ 83A738C
-	.incbin "baserom.gba", 0x3A738C, 0x8
-
-gUnknown_83A7394:: @ 83A7394
-	.incbin "baserom.gba", 0x3A7394, 0x24
-
-gUnknown_83A73B8:: @ 83A73B8
-	.incbin "baserom.gba", 0x3A73B8, 0x4
-
-gUnknown_83A73BC:: @ 83A73BC
-	.incbin "baserom.gba", 0x3A73BC, 0x10
-
-gUnknown_83A73CC:: @ 83A73CC
-	.incbin "baserom.gba", 0x3A73CC, 0x8
-
-gUnknown_83A73D4:: @ 83A73D4
-	.incbin "baserom.gba", 0x3A73D4, 0x4
-
-gUnknown_83A73D8:: @ 83A73D8
-	.incbin "baserom.gba", 0x3A73D8, 0x4
-
-gUnknown_83A73DC:: @ 83A73DC
-	.incbin "baserom.gba", 0x3A73DC, 0x284
-
-gUnknown_83A7660:: @ 83A7660
-	.incbin "baserom.gba", 0x3A7660, 0x2FF4
-
-gUnknown_83AA654:: @ 83AA654
-	.incbin "baserom.gba", 0x3AA654, 0x1220
-
-gUnknown_83AB874:: @ 83AB874
-	.incbin "baserom.gba", 0x3AB874, 0x540
-
-gUnknown_83ABDB4:: @ 83ABDB4
-	.incbin "baserom.gba", 0x3ABDB4, 0x434
-
-gUnknown_83AC1E8:: @ 83AC1E8
-	.incbin "baserom.gba", 0x3AC1E8, 0x410
-
-gUnknown_83AC5F8:: @ 83AC5F8
-	.incbin "baserom.gba", 0x3AC5F8, 0x1D0
-
-gUnknown_83AC7C8:: @ 83AC7C8
-	.incbin "baserom.gba", 0x3AC7C8, 0x188
-
-gUnknown_83AC950:: @ 83AC950
-	.incbin "baserom.gba", 0x3AC950, 0x10
-
-gUnknown_83AC960:: @ 83AC960
-	.incbin "baserom.gba", 0x3AC960, 0x10
-
-gUnknown_83AC970:: @ 83AC970
-	.incbin "baserom.gba", 0x3AC970, 0x20
-
-sFanfares:: @ 83AC990
-	.incbin "baserom.gba", 0x3AC990, 0x40
+gOamData_83AC9C0::
+	.4byte 0x00000000, 0x00000800
 
 gUnknown_83AC9D0:: @ 83AC9D0
 	.incbin "baserom.gba", 0x3AC9D0, 0x8

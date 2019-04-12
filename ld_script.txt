@@ -106,7 +106,7 @@ SECTIONS {
         src/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         asm/event_data.o(.text);
-        asm/coord_event_weather.o(.text);
+        src/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
         asm/start_menu.o(.text);
         asm/tileset_anims.o(.text);
@@ -376,6 +376,7 @@ SECTIONS {
         data/field_ground_effect.o(.rodata);
         data/map_obj_80688E4.o(.rodata);
         src/scrcmd.o(.rodata);
+        src/coord_event_weather.o(.rodata);
         data/data_835B488.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data_83F5738.o(.rodata);

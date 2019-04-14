@@ -11,6 +11,12 @@
 #include "new_menu_helpers.h"
 #include "list_menu.h"
 #include "item.h"
+#include "item_menu.h"
+#include "link.h"
+#include "money.h"
+#include "shop.h"
+#include "teachy_tv.h"
+#include "pokemon_storage_system.h"
 #include "string_util.h"
 #include "party_menu.h"
 #include "data2.h"
@@ -39,7 +45,8 @@ struct UnkStruct_203B118
     u8 unk_07;
     u8 unk_08;
     u16 unk_0a;
-    u8 filler_0c[6];
+    const u8 * unk_0c;
+    u8 unk_10;
     s16 unk_12;
     u8 filler_14[8];
 };
@@ -78,34 +85,70 @@ void sub_8132120(void);
 void sub_8132170(void);
 void sub_813226C(u8 taskId);
 void sub_81322D4(u8 taskId);
+void sub_8132568(u8 taskId);
+void sub_81326F8(u8 taskId);
+void sub_8132714(u8 taskId);
+void sub_8132758(u8 taskId);
+void sub_8132780(u8 taskId);
+void sub_81329C4(u8 taskId);
+void sub_8132A34(u8 taskId);
+void sub_8132AAC(u8 taskId);
+void sub_8132B5C(s16 quantity, s32 value);
+void sub_8132BC8(u8 taskId);
+void sub_8132D34(u8 taskId);
+void sub_8132E0C(u8 taskId);
 void sub_8132F20(u8 taskId);
+void sub_8132F60(u8 taskId);
 void sub_8133244(void);
 void sub_81332EC(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
+void sub_8133354(u8 windowId);
+void sub_8133368(u8 windowId);
+void sub_813337C(u8 taskId, u8 windowId, const u8 * str, TaskFunc func);
 void sub_81333C4(void);
 void sub_8133404(void);
 void sub_8133444(u16 itemId);
 void sub_81335B0(u8 windowId, u8 x, u8 y);
+void sub_81335E0(void);
+void sub_8133604(u8 taskId, const u8 *const *ptrs);
+u8 sub_8133630(u8 * a0, u8 a1);
+void sub_8133664(u8 * a0);
 u8 sub_813368C(u16 itemId);
 void sub_81337E4(u8 a0, u16 itemId);
 void sub_81338A8(void);
 
+// event scripts
+extern const u8 gUnknown_8416226[];
+extern const u8 gFameCheckerText_ListMenuCursor[];
+extern const u8 gUnknown_84162B9[];
+extern const u8 gUnknown_8416301[];
+extern const u8 gUnknown_841632A[];
+extern const u8 gUnknown_841635E[];
+extern const u8 gUnknown_84166DB[];
+extern const u8 gUnknown_84166E1[];
+extern const u8 gUnknown_84166FF[];
+extern const u8 gUnknown_8416703[];
+extern const u8 gUnknown_84168F1[];
+extern const u8 gUnknown_8416911[];
+extern const u8 gUnknown_8416936[];
+extern const u8 gUnknown_8416959[];
+
+// my rodata
 extern const struct BgTemplate gUnknown_8463134[3];
+extern void (*const gUnknown_8463140[])(u8 taskId);
+extern const struct MenuAction gUnknown_8463150[];
+extern const u8 gUnknown_8463168[];
+extern const u8 gUnknown_846316B[];
+extern const u8 *const gUnknown_8463170[];
+extern const u8 gUnknown_8463178[];
+extern const u8 gUnknown_846317C[];
+extern const struct CompressedSpriteSheet gUnknown_8463218;
+
+// graphics
 extern const u32 gUnknown_8E845D8[];
 extern const u32 gUnknown_8E84A24[];
 extern const u32 gUnknown_8E84B70[];
 extern const u32 gUnknown_8E84CB0[];
 extern const u32 gUnknown_8E84D20[];
-extern const struct CompressedSpriteSheet gUnknown_8463218;
-extern const u8 gUnknown_8463178[];
-extern const u8 gUnknown_846317C[];
-
-extern const u8 gUnknown_8416226[];
-extern const u8 gFameCheckerText_ListMenuCursor[];
-extern const u8 gUnknown_84162B9[];
-extern const u8 gUnknown_84166DB[];
-extern const u8 gUnknown_84166E1[];
-extern const u8 gUnknown_84166FF[];
-extern const u8 gUnknown_8416703[];
 
 void sub_81317F8(u8 a0, void (* a1)(void), u8 a2)
 {
@@ -563,5 +606,440 @@ void sub_813226C(u8 taskId)
         sub_813208C();
         sub_81321D4();
         DestroyTask(taskId);
+    }
+}
+
+void sub_81322D4(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    s32 input;
+
+    if (!gPaletteFade.active)
+    {
+        if (sub_80BF72C() != TRUE)
+        {
+            input = ListMenuHandleInput(data[0]);
+            get_coro_args_x18_x1A(data[0], &gUnknown_203B10C.unk_0a, &gUnknown_203B10C.unk_08);
+            if (JOY_NEW(SELECT_BUTTON) && gUnknown_203B10C.unk_05 == 1)
+            {
+                PlaySE(SE_SELECT);
+                gSpecialVar_ItemId = ITEM_NONE;
+                sub_8132230(taskId);
+            }
+            else
+            {
+                switch (input)
+                {
+                case -1:
+                    break;
+                case -2:
+                    PlaySE(SE_SELECT);
+                    gSpecialVar_ItemId = 0;
+                    sub_8132230(taskId);
+                    break;
+                default:
+                    PlaySE(SE_SELECT);
+                    sub_8131F64(1);
+                    sub_813208C();
+                    sub_8131F90(data[0], 2);
+                    data[1] = input;
+                    data[2] = sub_809A7B4(POCKET_TM_CASE, input);
+                    gSpecialVar_ItemId = sub_809A798(POCKET_TM_CASE, input);
+                    gTasks[taskId].func = gUnknown_8463140[gUnknown_203B10C.unk_04];
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void sub_81323E4(u8 taskId)
+{
+    sub_8131F64(0);
+    sub_8132018();
+    gTasks[taskId].func = sub_81322D4;
+}
+
+void sub_8132414(u8 taskId)
+{
+    u8 * strbuf;
+    sub_8133368(2);
+    if (!sub_80BF708() && InUnionRoom() != TRUE)
+    {
+        sub_8133630(&gUnknown_203B118->unk_07, 0);
+        gUnknown_203B118->unk_0c = gUnknown_8463168;
+        gUnknown_203B118->unk_10 = 3;
+    }
+    else
+    {
+        sub_8133630(&gUnknown_203B118->unk_07, 1);
+        gUnknown_203B118->unk_0c = gUnknown_846316B;
+        gUnknown_203B118->unk_10 = 2;
+    }
+    AddItemMenuActionTextPrinters(gUnknown_203B118->unk_07, 2, GetMenuCursorDimensionByFont(2, 0), 2, 0, GetFontAttribute(2, 1) + 2, gUnknown_203B118->unk_10, gUnknown_8463150, gUnknown_203B118->unk_0c);
+    ProgramAndPlaceMenuCursorOnWindow(gUnknown_203B118->unk_07, 2, 0, 2, GetFontAttribute(2, 1) + 2, gUnknown_203B118->unk_10, 0);
+    strbuf = Alloc(256);
+    sub_8131D48(strbuf, gSpecialVar_ItemId);
+    StringAppend(strbuf, gUnknown_8416301);
+    sub_81332EC(2, 2, strbuf, 0, 2, 1, 0, 0, 1);
+    Free(strbuf);
+    if (itemid_is_unique(gSpecialVar_ItemId))
+    {
+        sub_81335B0(2, 0, 2);
+        CopyWindowToVram(2, 2);
+    }
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    gTasks[taskId].func = sub_8132568;
+}
+
+void sub_8132568(u8 taskId)
+{
+    s8 input;
+
+    if (sub_80BF72C() != TRUE)
+    {
+        input = ProcessMenuInputNoWrapAround();
+        switch (input)
+        {
+        case -1:
+            PlaySE(SE_SELECT);
+            gUnknown_8463150[gUnknown_203B118->unk_0c[gUnknown_203B118->unk_10 - 1]].func.void_u8(taskId);
+            break;
+        case -2:
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            gUnknown_8463150[gUnknown_203B118->unk_0c[input]].func.void_u8(taskId);
+            break;
+        }
+    }
+}
+
+void sub_81325F0(u8 taskId)
+{
+    sub_8133664(&gUnknown_203B118->unk_07);
+    sub_810F4D8(2, 0);
+    ClearWindowTilemap(2);
+    PutWindowTilemap(0);
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    if (CalculatePlayerPartyCount() == 0)
+    {
+        sub_81326F8(taskId);
+    }
+    else
+    {
+        gUnknown_3005E98 = sub_8125B40;
+        gUnknown_203B118->unk_00 = sub_8124C8C;
+        sub_8132230(taskId);
+    }
+}
+
+void sub_813265C(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u16 itemId = sub_809A798(POCKET_TM_CASE, data[1]);
+    sub_8133664(&gUnknown_203B118->unk_07);
+    sub_810F4D8(2, 0);
+    ClearWindowTilemap(2);
+    PutWindowTilemap(1);
+    PutWindowTilemap(4);
+    PutWindowTilemap(5);
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    if (!itemid_is_unique(itemId))
+    {
+        if (CalculatePlayerPartyCount() == 0)
+        {
+            sub_81326F8(taskId);
+        }
+        else
+        {
+            gUnknown_203B118->unk_00 = sub_8126EDC;
+            sub_8132230(taskId);
+        }
+    }
+    else
+    {
+        sub_8132714(taskId);
+    }
+}
+
+void sub_81326F8(u8 taskId)
+{
+    sub_813337C(taskId, 2, gUnknown_841632A, sub_8132758);
+}
+
+void sub_8132714(u8 taskId)
+{
+    CopyItemName(gSpecialVar_ItemId, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gUnknown_841635E);
+    sub_813337C(taskId, 2, gStringVar4, sub_8132758);
+}
+
+void sub_8132758(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_8132780(taskId);
+    }
+}
+
+void sub_8132780(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    sub_810713C(data[0], &gUnknown_203B10C.unk_0a, &gUnknown_203B10C.unk_08);
+    data[0] = ListMenuInit(&gUnknown_3005E70, gUnknown_203B10C.unk_0a, gUnknown_203B10C.unk_08);
+    sub_8131F90(data[0], 1);
+    sub_810F260(6, 0);
+    ClearWindowTilemap(6);
+    PutWindowTilemap(1);
+    PutWindowTilemap(4);
+    PutWindowTilemap(5);
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    sub_81323E4(taskId);
+}
+
+void sub_81327FC(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    sub_8133664(&gUnknown_203B118->unk_07);
+    sub_810F4D8(2, 0);
+    ClearWindowTilemap(2);
+    PutWindowTilemap(0);
+    sub_8131F90(data[0], 1);
+    PutWindowTilemap(1);
+    PutWindowTilemap(4);
+    PutWindowTilemap(5);
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    sub_81323E4(taskId);
+}
+
+void sub_8132868(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!itemid_is_unique(sub_809A798(POCKET_TM_CASE, data[1])))
+    {
+        gUnknown_203B118->unk_00 = c2_8123744;
+        sub_8132230(taskId);
+    }
+    else
+    {
+        sub_8132714(taskId);
+    }
+}
+
+void sub_81328B8(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!itemid_is_unique(sub_809A798(POCKET_TM_CASE, data[1])))
+    {
+        gUnknown_203B118->unk_00 = sub_808CE60;
+        sub_8132230(taskId);
+    }
+    else
+    {
+        sub_8132714(taskId);
+    }
+}
+
+void sub_8132908(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (itemid_get_market_price(gSpecialVar_ItemId) == 0)
+    {
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gUnknown_84168F1);
+        sub_813337C(taskId, sub_80BF8E4(), gStringVar4, sub_8132780);
+    }
+    else
+    {
+        data[8] = 1;
+        if (data[2] == 1)
+        {
+            sub_81335E0();
+            sub_81329C4(taskId);
+        }
+        else
+        {
+            if (data[2] > 99)
+                data[2] = 99;
+            CopyItemName(gSpecialVar_ItemId, gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gUnknown_8416911);
+            sub_813337C(taskId, sub_80BF8E4(), gStringVar4, sub_8132AAC);
+        }
+    }
+}
+
+void sub_81329C4(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    ConvertIntToDecimalStringN(gStringVar3, itemid_get_market_price(sub_809A798(POCKET_TM_CASE, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    StringExpandPlaceholders(gStringVar4, gUnknown_8416936);
+    sub_813337C(taskId, sub_80BF8E4(), gStringVar4, sub_8132A34);
+}
+
+void sub_8132A34(u8 taskId)
+{
+    sub_8133604(taskId, gUnknown_8463170);
+}
+
+void sub_8132A48(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    sub_810F4D8(8, 0);
+    sub_810F260(6, 0);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    PutWindowTilemap(3);
+    PutWindowTilemap(4);
+    PutWindowTilemap(5);
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    sub_8131F90(data[0], 1);
+    sub_81323E4(taskId);
+}
+
+void sub_8132AAC(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    sub_8133354(7);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringExpandPlaceholders(gStringVar4, gUnknown_84162B9);
+    sub_81332EC(7, 0, gStringVar4, 4, 10, 1, 0, 0, 1);
+    sub_8132B5C(1, itemid_get_market_price(sub_809A798(POCKET_TM_CASE, data[1])) / 2 * data[8]);
+    sub_81335E0();
+    sub_8132054();
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    gTasks[taskId].func = sub_8132BC8;
+}
+
+void sub_8132B5C(s16 quantity, s32 amount)
+{
+    FillWindowPixelBuffer(7, 0x11);
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringExpandPlaceholders(gStringVar4, gUnknown_84162B9);
+    sub_81332EC(7, 0, gStringVar4, 4, 10, 1, 0, 0, 1);
+    PrintMoneyAmount(7, 0x38, 0x0A, amount, 0);
+}
+
+void sub_8132BC8(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (sub_80BF848(&data[8], data[2]) == 1)
+    {
+        sub_8132B5C(data[8], itemid_get_market_price(sub_809A798(POCKET_TM_CASE, data[1])) / 2 * data[8]);
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810F4D8(7, 0);
+        schedule_bg_copy_tilemap_to_vram(0);
+        schedule_bg_copy_tilemap_to_vram(1);
+        sub_813208C();
+        sub_81329C4(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810F4D8(7, 0);
+        sub_810F4D8(8, 0);
+        sub_810F260(6, 0);
+        PutWindowTilemap(3);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        schedule_bg_copy_tilemap_to_vram(0);
+        schedule_bg_copy_tilemap_to_vram(1);
+        sub_813208C();
+        sub_8131F90(data[0], 1);
+        sub_81323E4(taskId);
+    }
+}
+
+void sub_8132CAC(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    PutWindowTilemap(0);
+    schedule_bg_copy_tilemap_to_vram(0);
+    CopyItemName(gSpecialVar_ItemId, gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar3, itemid_get_market_price(sub_809A798(POCKET_TM_CASE, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    StringExpandPlaceholders(gStringVar4, gUnknown_8416959);
+    sub_813337C(taskId, 2, gStringVar4, sub_8132D34);
+}
+
+void sub_8132D34(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    PlaySE(0xF8);
+    RemoveBagItem(gSpecialVar_ItemId, data[8]);
+    AddMoney(&gSaveBlock1Ptr->money, itemid_get_market_price(gSpecialVar_ItemId) / 2 * data[8]);
+    sub_809C09C(gSpecialVar_ItemId, data[8], 2);
+    sub_810713C(data[0], &gUnknown_203B10C.unk_0a, &gUnknown_203B10C.unk_08);
+    sub_81320BC();
+    sub_8132120();
+    sub_8131C50();
+    data[0] = ListMenuInit(&gUnknown_3005E70, gUnknown_203B10C.unk_0a, gUnknown_203B10C.unk_08);
+    sub_8131F90(data[0], 2);
+    PrintMoneyAmountInMoneyBox(8, GetMoney(&gSaveBlock1Ptr->money), 0);
+    gTasks[taskId].func = sub_8132E0C;
+}
+
+void sub_8132E0C(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810F4D8(8, 0);
+        sub_810F260(6, 0);
+        PutWindowTilemap(1);
+        PutWindowTilemap(3);
+        PutWindowTilemap(4);
+        PutWindowTilemap(5);
+        sub_8132780(taskId);
+    }
+}
+
+void sub_8132E64(void)
+{
+    gUnknown_203B11C = AllocZeroed(sizeof(*gUnknown_203B11C));
+    memcpy(gUnknown_203B11C->bagPocket_TMHM, gSaveBlock1Ptr->bagPocket_TMHM, sizeof(gSaveBlock1Ptr->bagPocket_TMHM));
+    memcpy(gUnknown_203B11C->bagPocket_KeyItems, gSaveBlock1Ptr->bagPocket_KeyItems, sizeof(gSaveBlock1Ptr->bagPocket_KeyItems));
+    gUnknown_203B11C->unk_160 = gUnknown_203B10C.unk_08;
+    gUnknown_203B11C->unk_162 = gUnknown_203B10C.unk_0a;
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_TMHM, NELEMS(gSaveBlock1Ptr->bagPocket_TMHM));
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_KeyItems, NELEMS(gSaveBlock1Ptr->bagPocket_KeyItems));
+    sub_81320AC();
+    AddBagItem(ITEM_TM01, 1);
+    AddBagItem(ITEM_TM03, 1);
+    AddBagItem(ITEM_TM09, 1);
+    AddBagItem(ITEM_TM35, 1);
+    sub_81317F8(4, sub_815ABFC, 0);
+}
+
+void sub_8132F20(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!gPaletteFade.active)
+    {
+        data[8] = 0;
+        data[9] = 0;
+        gTasks[taskId].func = sub_8132F60;
     }
 }

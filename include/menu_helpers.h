@@ -22,5 +22,7 @@ bool8 sub_80BF72C(void);
 bool8 sub_80BF708(void);
 void sub_80BF768(void);
 void sub_80BF7C8(void);
+u8 sub_80BF8E4(void);
+u8 sub_80BF848(s16 * a0, u16 a1);
 
 #endif //GUARD_MENU_HELPERS_H

@@ -229,6 +229,7 @@ SECTIONS {
         src/fame_checker.o(.text);
         src/menu2.o(.text);
         src/oak_speech.o(.text);
+        src/tm_case.o(.text);
         asm/tm_case.o(.text);
         asm/menu_indicators.o(.text);
         asm/pokedex_area_markers.o(.text);

@@ -28,6 +28,7 @@ struct BagPocket
 };
 
 extern struct BagPocket gBagPockets[];
+extern struct BagPocket gUnknown_20398A4;
 
 void GetBerryCountString(u8* dst, const u8* berryName, u32 quantity);
 void CopyItemName(u16 itemId, u8 *string);
@@ -65,5 +66,8 @@ void sub_809A2A4(void);
 void CopyItemName(u16, u8 *);
 void sub_809A824(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 amount);
+
+void sub_809A5E4(struct BagPocket *);
+u16 sub_809A798(u8 a0, u16 a1);
 
 #endif // ITEM_H

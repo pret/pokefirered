@@ -48,6 +48,7 @@ struct ListMenu {
 };
 
 extern struct ListMenuTemplate gUnknown_03006310;
+extern struct ListMenuTemplate gUnknown_3005E70;
 
 // Exported ROM declarations
 

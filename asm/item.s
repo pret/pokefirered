@@ -61,7 +61,7 @@ ApplyNewEncryptionKeyToBagItems: @ 8099DE0
 	sub sp, 0x4
 	mov r8, r0
 	movs r1, 0
-	ldr r0, _08099E34 @ =gUnknown_203988C
+	ldr r0, _08099E34 @ =gBagPockets
 	mov r9, r0
 _08099DF2:
 	movs r6, 0
@@ -72,7 +72,7 @@ _08099DF2:
 	ldrb r0, [r0, 0x4]
 	cmp r6, r0
 	bcs _08099E20
-	ldr r2, _08099E34 @ =gUnknown_203988C
+	ldr r2, _08099E34 @ =gBagPockets
 _08099E04:
 	adds r4, r5, r2
 	lsls r1, r6, 2
@@ -99,7 +99,7 @@ _08099E20:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08099E34: .4byte gUnknown_203988C
+_08099E34: .4byte gBagPockets
 	thumb_func_end ApplyNewEncryptionKeyToBagItems
 
 	thumb_func_start ApplyNewEncryptionKeyToBagItems_
@@ -112,7 +112,7 @@ ApplyNewEncryptionKeyToBagItems_: @ 8099E38
 
 	thumb_func_start sub_8099E44
 sub_8099E44: @ 8099E44
-	ldr r1, _08099E84 @ =gUnknown_203988C
+	ldr r1, _08099E84 @ =gBagPockets
 	ldr r0, _08099E88 @ =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r3, 0xC4
@@ -144,7 +144,7 @@ sub_8099E44: @ 8099E44
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_08099E84: .4byte gUnknown_203988C
+_08099E84: .4byte gBagPockets
 _08099E88: .4byte gSaveBlock1Ptr
 _08099E8C: .4byte 0x0000054c
 	thumb_func_end sub_8099E44
@@ -184,7 +184,7 @@ sub_8099ECC: @ 8099ECC
 	push {lr}
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, _08099EF0 @ =gUnknown_203988C
+	ldr r1, _08099EF0 @ =gBagPockets
 	lsrs r0, 21
 	adds r0, r1
 	ldrb r1, [r0, 0x4]
@@ -201,7 +201,7 @@ _08099EE0:
 	asrs r0, 24
 	b _08099F02
 	.align 2, 0
-_08099EF0: .4byte gUnknown_203988C
+_08099EF0: .4byte gBagPockets
 _08099EF4:
 	adds r0, r2, 0x1
 	lsls r0, 16
@@ -221,7 +221,7 @@ sub_8099F08: @ 8099F08
 	push {lr}
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, _08099F2C @ =gUnknown_203988C
+	ldr r1, _08099F2C @ =gBagPockets
 	lsrs r0, 21
 	subs r0, 0x8
 	adds r0, r1
@@ -238,7 +238,7 @@ _08099F1E:
 	movs r0, 0x1
 	b _08099F3C
 	.align 2, 0
-_08099F2C: .4byte gUnknown_203988C
+_08099F2C: .4byte gBagPockets
 _08099F30:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -274,7 +274,7 @@ _08099F5C:
 	subs r0, 0x1
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, _08099F94 @ =gUnknown_203988C
+	ldr r1, _08099F94 @ =gBagPockets
 	lsrs r0, 21
 	adds r0, r1
 	ldrb r1, [r0, 0x4]
@@ -296,7 +296,7 @@ _08099F76:
 	bcs _08099F58
 	b _08099FA4
 	.align 2, 0
-_08099F94: .4byte gUnknown_203988C
+_08099F94: .4byte gBagPockets
 _08099F98:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -378,7 +378,7 @@ CheckBagHasSpace: @ 809A000
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r2, 0
-	ldr r1, _0809A054 @ =gUnknown_203988C
+	ldr r1, _0809A054 @ =gBagPockets
 	lsls r0, r5, 3
 	adds r0, r1
 	ldrb r1, [r0, 0x4]
@@ -404,7 +404,7 @@ _0809A050:
 	movs r0, 0
 	b _0809A07C
 	.align 2, 0
-_0809A054: .4byte gUnknown_203988C
+_0809A054: .4byte gBagPockets
 _0809A058: .4byte 0x000003e7
 _0809A05C:
 	adds r0, r2, 0x1
@@ -453,7 +453,7 @@ _0809A0A2:
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r2, 0
-	ldr r1, _0809A0E0 @ =gUnknown_203988C
+	ldr r1, _0809A0E0 @ =gBagPockets
 	lsls r0, r7, 3
 	adds r0, r1
 	ldrb r1, [r0, 0x4]
@@ -478,7 +478,7 @@ _0809A0BE:
 	ble _0809A1B8
 	b _0809A1CA
 	.align 2, 0
-_0809A0E0: .4byte gUnknown_203988C
+_0809A0E0: .4byte gBagPockets
 _0809A0E4: .4byte 0x000003e7
 _0809A0E8:
 	adds r0, r2, 0x1
@@ -506,7 +506,7 @@ _0809A0F4:
 	negs r0, r0
 	cmp r1, r0
 	beq _0809A1CA
-	ldr r2, _0809A1AC @ =gUnknown_203988C
+	ldr r2, _0809A1AC @ =gBagPockets
 	ldr r0, [r2, 0x8]
 	lsls r1, 2
 	adds r0, r1, r0
@@ -534,7 +534,7 @@ _0809A132:
 	negs r0, r0
 	cmp r1, r0
 	beq _0809A1CA
-	ldr r2, _0809A1AC @ =gUnknown_203988C
+	ldr r2, _0809A1AC @ =gBagPockets
 	ldr r0, [r2, 0x8]
 	lsls r1, 2
 	adds r0, r1, r0
@@ -561,7 +561,7 @@ _0809A180:
 	negs r0, r0
 	cmp r2, r0
 	beq _0809A1CA
-	ldr r0, _0809A1AC @ =gUnknown_203988C
+	ldr r0, _0809A1AC @ =gBagPockets
 	lsls r1, r7, 3
 	adds r1, r0
 	ldr r0, [r1]
@@ -574,7 +574,7 @@ _0809A180:
 	mov r1, r8
 	b _0809A1C2
 	.align 2, 0
-_0809A1AC: .4byte gUnknown_203988C
+_0809A1AC: .4byte gBagPockets
 _0809A1B0: .4byte 0x0000016d
 _0809A1B4: .4byte 0x00000847
 _0809A1B8:
@@ -616,7 +616,7 @@ RemoveBagItem: @ 809A1D8
 	subs r0, 0x1
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, _0809A248 @ =gUnknown_203988C
+	ldr r1, _0809A248 @ =gBagPockets
 	lsrs r0, 21
 	adds r0, r1
 	ldrb r1, [r0, 0x4]
@@ -653,7 +653,7 @@ _0809A242:
 	movs r0, 0x1
 	b _0809A25A
 	.align 2, 0
-_0809A248: .4byte gUnknown_203988C
+_0809A248: .4byte gBagPockets
 _0809A24C:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -745,7 +745,7 @@ _0809A2D8: .4byte gSaveBlock1Ptr
 sub_809A2DC: @ 809A2DC
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _0809A300 @ =gUnknown_203988C
+	ldr r5, _0809A300 @ =gBagPockets
 _0809A2E2:
 	lsls r1, r4, 3
 	adds r1, r5
@@ -761,7 +761,7 @@ _0809A2E2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809A300: .4byte gUnknown_203988C
+_0809A300: .4byte gBagPockets
 	thumb_func_end sub_809A2DC
 
 	thumb_func_start sub_809A304
@@ -1408,7 +1408,7 @@ _0809A786:
 sub_809A798: @ 809A798
 	lsls r0, 24
 	lsls r1, 16
-	ldr r2, _0809A7B0 @ =gUnknown_203988C
+	ldr r2, _0809A7B0 @ =gBagPockets
 	lsrs r0, 21
 	subs r0, 0x8
 	adds r0, r2
@@ -1418,7 +1418,7 @@ sub_809A798: @ 809A798
 	ldrh r0, [r1]
 	bx lr
 	.align 2, 0
-_0809A7B0: .4byte gUnknown_203988C
+_0809A7B0: .4byte gBagPockets
 	thumb_func_end sub_809A798
 
 	thumb_func_start sub_809A7B4
@@ -1426,7 +1426,7 @@ sub_809A7B4: @ 809A7B4
 	push {lr}
 	lsls r0, 24
 	lsls r1, 16
-	ldr r2, _0809A7D8 @ =gUnknown_203988C
+	ldr r2, _0809A7D8 @ =gBagPockets
 	lsrs r0, 21
 	subs r0, 0x8
 	adds r0, r2
@@ -1440,7 +1440,7 @@ sub_809A7B4: @ 809A7B4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A7D8: .4byte gUnknown_203988C
+_0809A7D8: .4byte gBagPockets
 	thumb_func_end sub_809A7B4
 
 	thumb_func_start sub_809A7DC

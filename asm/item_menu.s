@@ -817,7 +817,7 @@ sub_810842C: @ 810842C
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r1, r7, 3
-	ldr r0, _0810853C @ =gUnknown_203988C
+	ldr r0, _0810853C @ =gBagPockets
 	adds r1, r0
 	mov r8, r1
 	movs r6, 0
@@ -946,7 +946,7 @@ _0810848C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810853C: .4byte gUnknown_203988C
+_0810853C: .4byte gBagPockets
 _08108540: .4byte gUnknown_203AD10
 _08108544: .4byte gUnknown_203AD1C
 _08108548: .4byte gUnknown_203AD18
@@ -2065,7 +2065,7 @@ sub_8108DC8: @ 8108DC8
 	lsls r0, 24
 	lsrs r5, r0, 24
 	lsls r1, r5, 3
-	ldr r0, _08108E3C @ =gUnknown_203988C
+	ldr r0, _08108E3C @ =gBagPockets
 	adds r4, r1, r0
 	ldr r0, [r4]
 	ldrb r1, [r4, 0x4]
@@ -2120,7 +2120,7 @@ _08108E1C:
 	strb r1, [r0]
 	b _08108E4C
 	.align 2, 0
-_08108E3C: .4byte gUnknown_203988C
+_08108E3C: .4byte gBagPockets
 _08108E40: .4byte gUnknown_203AD10
 _08108E44:
 	adds r0, r1, 0
@@ -3063,7 +3063,7 @@ _081095DA:
 	.align 2, 0
 _081095E4: .4byte gTasks+0x8
 _081095E8:
-	ldr r1, _0810966C @ =gUnknown_203988C
+	ldr r1, _0810966C @ =gBagPockets
 	ldr r4, _08109670 @ =gUnknown_203ACFC
 	ldrh r0, [r4, 0x6]
 	lsls r0, 3
@@ -3125,7 +3125,7 @@ _0810965C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810966C: .4byte gUnknown_203988C
+_0810966C: .4byte gBagPockets
 _08109670: .4byte gUnknown_203ACFC
 _08109674: .4byte gUnknown_3005E70
 _08109678: .4byte sub_8108F0C

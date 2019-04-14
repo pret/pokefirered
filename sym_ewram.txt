@@ -971,14 +971,8 @@ gUnknown_2039884: @ 2039884
 gUnknown_2039888: @ 2039888
 	.space 0x4
 
-gUnknown_203988C: @ 203988C
-	.space 0x18
-
-gUnknown_20398A4: @ 20398A4
-	.space 0x8
-
-gUnknown_20398AC: @ 20398AC
-	.space 0x8
+gBagPockets: @ 203988C
+	.space 0x28
 
 gUnknown_20398B4: @ 20398B4
 	.space 0x4

@@ -573,7 +573,7 @@ sub_813D204: @ 813D204
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, _0813D280 @ =gUnknown_20398AC
+	ldr r0, _0813D280 @ =gBagPockets + 0x20
 	mov r8, r0
 	movs r6, 0
 	ldr r0, _0813D284 @ =gUnknown_203F36C
@@ -633,7 +633,7 @@ _0813D254:
 	adds r2, r1, 0
 	b _0813D2A6
 	.align 2, 0
-_0813D280: .4byte gUnknown_20398AC
+_0813D280: .4byte gBagPockets + 0x20
 _0813D284: .4byte gUnknown_203F36C
 _0813D288: .4byte gUnknown_203F380
 _0813D28C: .4byte gUnknown_203F37C
@@ -1441,7 +1441,7 @@ _0813D8A4:
 	thumb_func_start sub_813D8AC
 sub_813D8AC: @ 813D8AC
 	push {r4,lr}
-	ldr r4, _0813D904 @ =gUnknown_20398AC
+	ldr r4, _0813D904 @ =gBagPockets + 0x20
 	adds r0, r4, 0
 	bl sub_809A720
 	ldr r3, _0813D908 @ =gUnknown_203F36C
@@ -1485,7 +1485,7 @@ _0813D8EE:
 	adds r1, r0, 0
 	b _0813D916
 	.align 2, 0
-_0813D904: .4byte gUnknown_20398AC
+_0813D904: .4byte gBagPockets + 0x20
 _0813D908: .4byte gUnknown_203F36C
 _0813D90C: .4byte gUnknown_203F370
 _0813D910:

@@ -32,7 +32,7 @@ struct UnkStruct_203B10C
 
 struct UnkStruct_203B118
 {
-    u32 unk_00;
+    void (* unk_00)(void);
     u8 unk_04;
     u8 unk_05;
     u8 unk_06;
@@ -76,6 +76,7 @@ void sub_8132018(void);
 void sub_81320BC(void);
 void sub_8132120(void);
 void sub_8132170(void);
+void sub_813226C(u8 taskId);
 void sub_81322D4(u8 taskId);
 void sub_8132F20(u8 taskId);
 void sub_8133244(void);
@@ -510,5 +511,57 @@ void sub_8132120(void)
             gUnknown_203B10C.unk_08 = 0;
         else
             gUnknown_203B10C.unk_08 = gUnknown_203B118->unk_06;
+    }
+}
+
+void sub_8132170(void)
+{
+    u8 i;
+    if (gUnknown_203B10C.unk_08 > 3)
+    {
+        for (i = 0; i <= gUnknown_203B10C.unk_08 - 3 && gUnknown_203B10C.unk_0a + gUnknown_203B118->unk_05 != gUnknown_203B118->unk_06 + 1; i++)
+        {
+            do {} while (0);
+            gUnknown_203B10C.unk_08--;
+            gUnknown_203B10C.unk_0a++;
+        }
+    }
+}
+
+void sub_81321D4(void)
+{
+    if (gUnknown_203B118 != NULL)
+        Free(gUnknown_203B118);
+    if (gUnknown_203B120 != NULL)
+        Free(gUnknown_203B120);
+    if (gUnknown_203B124 != NULL)
+        Free(gUnknown_203B124);
+    if (gUnknown_203B128 != NULL)
+        Free(gUnknown_203B128);
+    if (gUnknown_203B12C != NULL)
+        Free(gUnknown_203B12C);
+    FreeAllWindowBuffers();
+}
+
+void sub_8132230(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = sub_813226C;
+}
+
+void sub_813226C(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!gPaletteFade.active)
+    {
+        sub_810713C(data[0], &gUnknown_203B10C.unk_0a, &gUnknown_203B10C.unk_08);
+        if (gUnknown_203B118->unk_00 != NULL)
+            SetMainCallback2(gUnknown_203B118->unk_00);
+        else
+            SetMainCallback2(gUnknown_203B10C.unk_00);
+        sub_813208C();
+        sub_81321D4();
+        DestroyTask(taskId);
     }
 }

@@ -853,7 +853,7 @@ static void Task_DestroyAssetsAndCloseFameChecker(u8 taskId)
         FreeQuestionMarkSpriteResources();
         FreeListMenuSelectorArrowPairResources();
         SetMainCallback2(sFameCheckerData->savedCallback);
-        sub_810713C(sFameCheckerData->listMenuTaskId, 0, 0);
+        sub_810713C(sFameCheckerData->listMenuTaskId, NULL, NULL);
         Free(sBg3TilemapBuffer);
         Free(sBg1TilemapBuffer);
         Free(sBg2TilemapBuffer);

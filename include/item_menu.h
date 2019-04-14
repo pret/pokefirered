@@ -12,6 +12,7 @@ extern u16 gSpecialVar_ItemId;
 // Exported ROM declarations
 void sub_81AAC50(void);
 void sub_81AAC70(void);
+void sub_8108CF0(void);
 void UseFameCheckerFromMenu(void);
 
 #endif //GUARD_ITEM_MENU_H

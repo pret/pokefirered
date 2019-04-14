@@ -131,6 +131,8 @@ extern const u8 gUnknown_84168F1[];
 extern const u8 gUnknown_8416911[];
 extern const u8 gUnknown_8416936[];
 extern const u8 gUnknown_8416959[];
+extern const u8 gUnknown_841C587[];
+extern const u8 gUnknown_841C693[];
 
 // my rodata
 extern const struct BgTemplate gUnknown_8463134[3];
@@ -1041,5 +1043,134 @@ void sub_8132F20(u8 taskId)
         data[8] = 0;
         data[9] = 0;
         gTasks[taskId].func = sub_8132F60;
+    }
+}
+
+void sub_8132F60(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        if (data[8] < 21)
+        {
+            data[8] = 21;
+            sub_815AC20();
+        }
+    }
+
+    switch (data[8])
+    {
+    case 0:
+        BeginNormalPaletteFade(0xFFFF8405, 4, 0, 6, 0);
+        sub_8131F64(1);
+        data[8]++;
+        break;
+    case 1:
+    case 11:
+        if (!gPaletteFade.active)
+        {
+            data[9]++;
+            if (data[9] > 0x65)
+            {
+                data[9] = 0;
+                data[8]++;
+            }
+        }
+        break;
+    case 2:
+    case 3:
+    case 4:
+    case 12:
+    case 13:
+    case 14:
+        if (data[9] == 0)
+        {
+            gMain.newKeys = 0;
+            gMain.newAndRepeatedKeys = DPAD_DOWN;
+            ListMenuHandleInput(data[0]);
+        }
+        data[9]++;
+        if (data[9] > 0x65)
+        {
+            data[9] = 0;
+            data[8]++;
+        }
+        break;
+    case 5:
+    case 6:
+    case 7:
+    case 15:
+    case 16:
+    case 17:
+        if (data[9] == 0)
+        {
+            gMain.newKeys = 0;
+            gMain.newAndRepeatedKeys = DPAD_UP;
+            ListMenuHandleInput(data[0]);
+        }
+        data[9]++;
+        if (data[9] > 0x65)
+        {
+            data[9] = 0;
+            data[8]++;
+        }
+        break;
+    case 8:
+        sub_8131F64(1);
+        sub_813337C(taskId, 4, gUnknown_841C587, 0);
+        gTasks[taskId].func = sub_8132F60;
+        data[8]++;
+        break;
+    case 9:
+    case 19:
+        RunTextPrinters();
+        if (!IsTextPrinterActive(6))
+            data[8]++;
+        break;
+    case 10:
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            sub_8131F64(0);
+            BeginNormalPaletteFade(0x00000400, 0, 6, 0, 0);
+            sub_810F260(6, 0);
+            schedule_bg_copy_tilemap_to_vram(1);
+            data[8]++;
+        }
+        break;
+    case 18:
+        sub_8131F64(1);
+        sub_813337C(taskId, 4, gUnknown_841C693, 0);
+        gTasks[taskId].func = sub_8132F60;
+        data[8]++;
+        break;
+    case 20:
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+            data[8]++;
+        break;
+    case 21:
+        if (!gPaletteFade.active)
+        {
+            memcpy(gSaveBlock1Ptr->bagPocket_TMHM, gUnknown_203B11C->bagPocket_TMHM, sizeof(gSaveBlock1Ptr->bagPocket_TMHM));
+            memcpy(gSaveBlock1Ptr->bagPocket_KeyItems, gUnknown_203B11C->bagPocket_KeyItems, sizeof(gSaveBlock1Ptr->bagPocket_KeyItems));
+            sub_810713C(data[0], NULL, NULL);
+            gUnknown_203B10C.unk_08 = gUnknown_203B11C->unk_160;
+            gUnknown_203B10C.unk_0a = gUnknown_203B11C->unk_162;
+            Free(gUnknown_203B11C);
+            CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
+            sub_8108CF0();
+            BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, 0);
+            data[8]++;
+        }
+        break;
+    default:
+        if (!gPaletteFade.active)
+        {
+            SetMainCallback2(gUnknown_203B10C.unk_00);
+            sub_813208C();
+            sub_81321D4();
+            DestroyTask(taskId);
+        }
+        break;
     }
 }

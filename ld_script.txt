@@ -399,7 +399,7 @@ SECTIONS {
         src/fame_checker.o(.rodata);
         src/menu2.o(.rodata);
         src/oak_speech.o(.rodata);
-        data/tm_case.o(.rodata);
+        src/tm_case.o(.rodata);
         data/menu_indicators.o(.rodata);
         data/pokedex_area_markers.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);

@@ -728,13 +728,28 @@ gUnknown_8416188:: @ 8416188
 	.incbin "baserom.gba", 0x416188, 0x8
 
 gUnknown_8416190:: @ 8416190
-	.incbin "baserom.gba", 0x416190, 0x10
+	.string "TIME$"
+
+gUnknown_8416195::
+	.string "どこへ とびますか?$"
 
 gUnknown_84161A0::
-	.incbin "baserom.gba", 0x4161a0, 0x12
+	.string "USE$"
+
+gUnknown_84161A4::
+	.string "TOSS$"
+
+gUnknown_84161A9::
+	.string "REGISTER$"
 
 gUnknown_84161B2::
-	.incbin "baserom.gba", 0x4161b2, 0xf
+	.string "GIVE$"
+
+gUnknown_84161B7::
+	.string "けってい$"
+
+gUnknown_84161BC::
+	.string "WALK$"
 
 gFameCheckerText_Cancel:: @ 84161C1
 	.string "CANCEL$"

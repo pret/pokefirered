@@ -4,6 +4,7 @@
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "palette.h"
+#include "graphics.h"
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
@@ -86,16 +87,25 @@ void sub_8132120(void);
 void sub_8132170(void);
 void sub_813226C(u8 taskId);
 void sub_81322D4(u8 taskId);
+void sub_8132414(u8 taskId);
 void sub_8132568(u8 taskId);
+void sub_81325F0(u8 taskId);
+void sub_813265C(u8 taskId);
 void sub_81326F8(u8 taskId);
 void sub_8132714(u8 taskId);
 void sub_8132758(u8 taskId);
 void sub_8132780(u8 taskId);
+void sub_81327FC(u8 taskId);
+void sub_8132868(u8 taskId);
+void sub_81328B8(u8 taskId);
+void sub_8132908(u8 taskId);
 void sub_81329C4(u8 taskId);
 void sub_8132A34(u8 taskId);
+void sub_8132A48(u8 taskId);
 void sub_8132AAC(u8 taskId);
 void sub_8132B5C(s16 quantity, s32 value);
 void sub_8132BC8(u8 taskId);
+void sub_8132CAC(u8 taskId);
 void sub_8132D34(u8 taskId);
 void sub_8132E0C(u8 taskId);
 void sub_8132F20(u8 taskId);
@@ -122,6 +132,9 @@ void sub_8133810(struct Sprite * sprite);
 void sub_81338A8(void);
 
 // data_83FECCC
+extern const u8 gUnknown_84161A0[];
+extern const u8 gUnknown_84161B2[];
+extern const u8 gUnknown_84161C8[];
 extern const u8 gUnknown_8416213[];
 extern const u8 gUnknown_8416226[];
 extern const u8 gFameCheckerText_ListMenuCursor[];
@@ -144,32 +157,139 @@ extern const u8 gUnknown_841C693[];
 extern const u16 gUnknown_841F408[];
 
 // my rodata
-extern const struct BgTemplate gUnknown_8463134[3];
-extern void (*const gUnknown_8463140[])(u8 taskId);
-extern const struct MenuAction gUnknown_8463150[];
-extern const u8 gUnknown_8463168[];
-extern const u8 gUnknown_846316B[];
-extern const TaskFunc gUnknown_8463170[];
-extern const u8 gUnknown_8463178[];
-extern const u8 gUnknown_846317C[];
-extern const u16 gUnknown_8463180[];
-extern const struct TextColor gUnknown_8463184[];
-extern const struct WindowTemplate gUnknown_8463190[];
-extern const struct WindowTemplate gUnknown_84631E0;
-extern const struct WindowTemplate gUnknown_84631E8[];
-extern const struct CompressedSpriteSheet gUnknown_8463218;
-extern const struct SpriteTemplate gUnknown_8463220;
-extern const u16 gUnknown_8463238[];
+const struct BgTemplate gUnknown_8463134[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0x000
+    }, {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }, {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x000
+    }
+};
 
-// graphics
-extern const u32 gUnknown_8E845D8[];
-extern const u32 gUnknown_8E84A24[];
-extern const u32 gUnknown_8E84B70[];
-extern const u32 gUnknown_8E84CB0[];
-extern const u32 gUnknown_8E84D20[];
-extern const u32 gUnknown_8E84F20[];
-extern const u32 gUnknown_8E85068[];
-extern const u8 gUnknown_8E99118[];
+void (*const gUnknown_8463140[])(u8 taskId) = {
+    sub_8132414,
+    sub_8132868,
+    sub_8132908,
+    sub_81328B8
+};
+
+const struct MenuAction gUnknown_8463150[] = {
+    {gUnknown_84161A0, sub_81325F0},
+    {gUnknown_84161B2, sub_813265C},
+    {gUnknown_84161C8, sub_81327FC},
+};
+
+const u8 gUnknown_8463168[] = {0, 1, 2};
+const u8 gUnknown_846316B[] = {1, 2, 0};
+const TaskFunc gUnknown_8463170[] = {sub_8132CAC, sub_8132A48};
+
+const u8 gUnknown_8463178[] = _("{CLEAR_TO 18}");
+const u8 gUnknown_846317C[] = _(" ");
+
+ALIGNED(4) const u16 gUnknown_8463180[] = {RGB(8, 8, 8), RGB(30, 16, 6)};
+
+const struct TextColor gUnknown_8463184[] = {
+    {0, 1, 2},
+    {0, 2, 3},
+    {0, 3, 6},
+    {0, 14, 10}
+};
+
+const struct WindowTemplate gUnknown_8463190[] = {
+    {0x00, 0x0a, 0x01, 0x13, 0x0a, 0x0f, 0x0081},
+    {0x00, 0x0c, 0x0c, 0x12, 0x08, 0x0a, 0x013f},
+    {0x01, 0x05, 0x0f, 0x0f, 0x04, 0x0d, 0x01f9},
+    {0x00, 0x00, 0x01, 0x0a, 0x02, 0x0f, 0x0235},
+    {0x00, 0x01, 0x0d, 0x05, 0x06, 0x0c, 0x0249},
+    {0x00, 0x07, 0x0d, 0x05, 0x06, 0x0c, 0x0267},
+    {0x01, 0x02, 0x0f, 0x1a, 0x04, 0x0b, 0x0285},
+    {0x01, 0x11, 0x09, 0x0c, 0x04, 0x0f, 0x02ed},
+    {0x01, 0x01, 0x01, 0x08, 0x03, 0x0d, 0x031d},
+    DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate gUnknown_84631E0 = {0x01, 0x15, 0x09, 0x06, 0x04, 0x0f, 0x0335};
+
+const struct WindowTemplate gUnknown_84631E8[] = {
+    {0x01, 0x16, 0x0d, 0x07, 0x06, 0x0f, 0x01cf},
+    {0x01, 0x16, 0x0f, 0x07, 0x04, 0x0f, 0x01cf}
+};
+
+const struct OamData gOamData_84631F8 = {
+    .size = 2,
+    .priority = 2
+};
+
+const union AnimCmd gUnknown_8463200[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8463208[] = {
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_8463210[] = {
+    gUnknown_8463200,
+    gUnknown_8463208
+};
+
+const struct CompressedSpriteSheet gUnknown_8463218 = {
+    (const void *)gUnknown_8E84D90,
+    0x400,
+    400
+};
+
+const struct SpriteTemplate gUnknown_8463220 = {
+    400,
+    400,
+    &gOamData_84631F8,
+    gUnknown_8463210,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+const u16 gUnknown_8463238[] = {
+    0x000,
+    0x090,
+    0x080,
+    0x0c0,
+    0x060,
+    0x050,
+    0x0b0,
+    0x0a0,
+    0x0e0,
+    0x000,
+    0x010,
+    0x020,
+    0x030,
+    0x040,
+    0x0d0,
+    0x070,
+    0x100,
+    0x0f0
+};
 
 void sub_81317F8(u8 a0, void (* a1)(void), u8 a2)
 {

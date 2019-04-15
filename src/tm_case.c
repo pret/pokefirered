@@ -121,7 +121,7 @@ void sub_81337E4(u8 a0, u16 itemId);
 void sub_8133810(struct Sprite * sprite);
 void sub_81338A8(void);
 
-// event scripts
+// data_83FECCC
 extern const u8 gUnknown_8416213[];
 extern const u8 gUnknown_8416226[];
 extern const u8 gFameCheckerText_ListMenuCursor[];

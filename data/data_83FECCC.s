@@ -728,7 +728,13 @@ gUnknown_8416188:: @ 8416188
 	.incbin "baserom.gba", 0x416188, 0x8
 
 gUnknown_8416190:: @ 8416190
-	.incbin "baserom.gba", 0x416190, 0x31
+	.incbin "baserom.gba", 0x416190, 0x10
+
+gUnknown_84161A0::
+	.incbin "baserom.gba", 0x4161a0, 0x12
+
+gUnknown_84161B2::
+	.incbin "baserom.gba", 0x4161b2, 0xf
 
 gFameCheckerText_Cancel:: @ 84161C1
 	.string "CANCEL$"

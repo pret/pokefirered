@@ -33,7 +33,7 @@ sub_815ABC4: @ 815ABC4
 	lsls r0, 24
 	lsrs r0, 24
 	adds r2, r0, 0
-	ldr r3, _0815ABF4 @ =gUnknown_203F444
+	ldr r3, _0815ABF4 @ =gTeachyTV_StaticResources
 	movs r4, 0
 	strb r2, [r3, 0x4]
 	str r1, [r3]
@@ -54,14 +54,14 @@ _0815ABE6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815ABF4: .4byte gUnknown_203F444
+_0815ABF4: .4byte gTeachyTV_StaticResources
 _0815ABF8: .4byte sub_815AC2C
 	thumb_func_end sub_815ABC4
 
-	thumb_func_start sub_815ABFC
-sub_815ABFC: @ 815ABFC
+	thumb_func_start CB2_ReturnToTeachyTV
+CB2_ReturnToTeachyTV: @ 815ABFC
 	push {lr}
-	ldr r1, _0815AC10 @ =gUnknown_203F444
+	ldr r1, _0815AC10 @ =gTeachyTV_StaticResources
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0x1
 	bne _0815AC14
@@ -70,7 +70,7 @@ sub_815ABFC: @ 815ABFC
 	bl sub_815ABC4
 	b _0815AC1C
 	.align 2, 0
-_0815AC10: .4byte gUnknown_203F444
+_0815AC10: .4byte gTeachyTV_StaticResources
 _0815AC14:
 	ldr r1, [r1]
 	movs r0, 0x2
@@ -78,16 +78,16 @@ _0815AC14:
 _0815AC1C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815ABFC
+	thumb_func_end CB2_ReturnToTeachyTV
 
 	thumb_func_start sub_815AC20
 sub_815AC20: @ 815AC20
-	ldr r1, _0815AC28 @ =gUnknown_203F444
+	ldr r1, _0815AC28 @ =gTeachyTV_StaticResources
 	movs r0, 0x1
 	strb r0, [r1, 0x4]
 	bx lr
 	.align 2, 0
-_0815AC28: .4byte gUnknown_203F444
+_0815AC28: .4byte gTeachyTV_StaticResources
 	thumb_func_end sub_815AC20
 
 	thumb_func_start sub_815AC2C
@@ -145,7 +145,7 @@ _0815AC9C:
 	beq _0815AD6E
 	bl sub_815AEB8
 	bl sub_815AFEC
-	ldr r0, _0815ACE0 @ =gUnknown_203F444
+	ldr r0, _0815ACE0 @ =gTeachyTV_StaticResources
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0x2
 	bne _0815ACEC
@@ -167,7 +167,7 @@ _0815AC9C:
 	bl sub_815B118
 	b _0815AD26
 	.align 2, 0
-_0815ACE0: .4byte gUnknown_203F444
+_0815ACE0: .4byte gTeachyTV_StaticResources
 _0815ACE4: .4byte sub_815BA54
 _0815ACE8: .4byte gTasks
 _0815ACEC:
@@ -384,7 +384,7 @@ _0815AEE4: .4byte gUnknown_84792F0
 	thumb_func_start sub_815AEE8
 sub_815AEE8: @ 815AEE8
 	push {r4,r5,lr}
-	ldr r4, _0815AF48 @ =gUnknown_3005E70
+	ldr r4, _0815AF48 @ =gMultiuseListMenuTemplate
 	adds r1, r4, 0
 	ldr r0, _0815AF4C @ =gUnknown_8479368
 	ldm r0!, {r2,r3,r5}
@@ -419,7 +419,7 @@ sub_815AEE8: @ 815AEE8
 	orrs r0, r1
 	strb r0, [r4, 0x14]
 _0815AF30:
-	ldr r0, _0815AF58 @ =gUnknown_203F444
+	ldr r0, _0815AF58 @ =gTeachyTV_StaticResources
 	ldrh r1, [r0, 0x6]
 	ldrh r2, [r0, 0x8]
 	adds r0, r4, 0
@@ -430,11 +430,11 @@ _0815AF30:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0815AF48: .4byte gUnknown_3005E70
+_0815AF48: .4byte gMultiuseListMenuTemplate
 _0815AF4C: .4byte gUnknown_8479368
 _0815AF50: .4byte sub_815AFD8
 _0815AF54: .4byte gUnknown_8479340
-_0815AF58: .4byte gUnknown_203F444
+_0815AF58: .4byte gTeachyTV_StaticResources
 	thumb_func_end sub_815AEE8
 
 	thumb_func_start sub_815AF5C
@@ -694,7 +694,7 @@ sub_815B118: @ 815B118
 	movs r0, 0x1
 	bl ClearWindowTilemap
 	bl sub_815B0B4
-	ldr r0, _0815B198 @ =gUnknown_203F444
+	ldr r0, _0815B198 @ =gTeachyTV_StaticResources
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0
 	blt _0815B1B8
@@ -732,7 +732,7 @@ sub_815B118: @ 815B118
 	.align 2, 0
 _0815B190: .4byte gTasks+0x8
 _0815B194: .4byte gSprites
-_0815B198: .4byte gUnknown_203F444
+_0815B198: .4byte gTeachyTV_StaticResources
 _0815B19C: .4byte gUnknown_203F450
 _0815B1A0: .4byte 0x00004004
 _0815B1A4: .4byte 0x00004005
@@ -867,7 +867,7 @@ _0815B298: .4byte gPaletteFade
 _0815B29C: .4byte gUnknown_203F450
 _0815B2A0:
 	bl sub_8055DC4
-	ldr r0, _0815B2BC @ =gUnknown_203F444
+	ldr r0, _0815B2BC @ =gTeachyTV_StaticResources
 	ldr r0, [r0]
 	bl SetMainCallback2
 _0815B2AC:
@@ -879,7 +879,7 @@ _0815B2B6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815B2BC: .4byte gUnknown_203F444
+_0815B2BC: .4byte gTeachyTV_StaticResources
 	thumb_func_end sub_815B274
 
 	thumb_func_start sub_815B2C0
@@ -942,13 +942,13 @@ _0815B330:
 _0815B33E:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r2, _0815B380 @ =gUnknown_203F444
+	ldr r2, _0815B380 @ =gTeachyTV_StaticResources
 	movs r4, 0
 	strb r5, [r2, 0x5]
 	ldrb r0, [r6]
 	adds r1, r2, 0x6
 	adds r2, 0x8
-	bl sub_810713C
+	bl DestroyListMenu
 	bl sub_815B0B4
 	movs r0, 0x1
 	bl ClearWindowTilemap
@@ -969,7 +969,7 @@ _0815B37A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815B380: .4byte gUnknown_203F444
+_0815B380: .4byte gTeachyTV_StaticResources
 _0815B384: .4byte gTasks
 _0815B388: .4byte sub_815B4EC
 	thumb_func_end sub_815B2C0
@@ -1208,7 +1208,7 @@ _0815B554: .4byte 0x00004006
 _0815B558: .4byte sub_815B92C
 _0815B55C:
 	ldr r1, _0815B580 @ =gUnknown_8479548
-	ldr r0, _0815B584 @ =gUnknown_203F444
+	ldr r0, _0815B584 @ =gTeachyTV_StaticResources
 	ldrb r0, [r0, 0x5]
 	lsls r0, 2
 	adds r0, r1
@@ -1226,7 +1226,7 @@ _0815B578:
 	bx r0
 	.align 2, 0
 _0815B580: .4byte gUnknown_8479548
-_0815B584: .4byte gUnknown_203F444
+_0815B584: .4byte gTeachyTV_StaticResources
 	thumb_func_end sub_815B4EC
 
 	thumb_func_start sub_815B588
@@ -1240,7 +1240,7 @@ sub_815B588: @ 815B588
 	ldr r0, _0815B5B4 @ =gTasks+0x8
 	adds r4, r0
 	ldr r1, _0815B5B8 @ =gUnknown_8479560
-	ldr r0, _0815B5BC @ =gUnknown_203F444
+	ldr r0, _0815B5BC @ =gTeachyTV_StaticResources
 	ldrb r0, [r0, 0x5]
 	lsls r0, 2
 	adds r0, r1
@@ -1255,7 +1255,7 @@ sub_815B588: @ 815B588
 	.align 2, 0
 _0815B5B4: .4byte gTasks+0x8
 _0815B5B8: .4byte gUnknown_8479560
-_0815B5BC: .4byte gUnknown_203F444
+_0815B5BC: .4byte gTeachyTV_StaticResources
 	thumb_func_end sub_815B588
 
 	thumb_func_start sub_815B5C0
@@ -1269,7 +1269,7 @@ sub_815B5C0: @ 815B5C0
 	ldr r0, _0815B5EC @ =gTasks+0x8
 	adds r4, r0
 	ldr r1, _0815B5F0 @ =gUnknown_8479578
-	ldr r0, _0815B5F4 @ =gUnknown_203F444
+	ldr r0, _0815B5F4 @ =gTeachyTV_StaticResources
 	ldrb r0, [r0, 0x5]
 	lsls r0, 2
 	adds r0, r1
@@ -1284,7 +1284,7 @@ sub_815B5C0: @ 815B5C0
 	.align 2, 0
 _0815B5EC: .4byte gTasks+0x8
 _0815B5F0: .4byte gUnknown_8479578
-_0815B5F4: .4byte gUnknown_203F444
+_0815B5F4: .4byte gTeachyTV_StaticResources
 	thumb_func_end sub_815B5C0
 
 	thumb_func_start sub_815B5F8
@@ -1806,7 +1806,7 @@ sub_815B9F0: @ 815B9F0
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r2, r1, 0
-	ldr r0, _0815BA0C @ =gUnknown_203F444
+	ldr r0, _0815BA0C @ =gTeachyTV_StaticResources
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0
 	blt _0815BA22
@@ -1816,7 +1816,7 @@ sub_815B9F0: @ 815B9F0
 	bl sub_815BC90
 	b _0815BA22
 	.align 2, 0
-_0815BA0C: .4byte gUnknown_203F444
+_0815BA0C: .4byte gTeachyTV_StaticResources
 _0815BA10:
 	cmp r0, 0x5
 	bgt _0815BA22
@@ -1837,7 +1837,7 @@ _0815BA2C: .4byte sub_815BA30
 	thumb_func_start sub_815BA30
 sub_815BA30: @ 815BA30
 	push {lr}
-	ldr r0, _0815BA44 @ =gUnknown_203F444
+	ldr r0, _0815BA44 @ =gTeachyTV_StaticResources
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0x4
 	bne _0815BA48
@@ -1845,7 +1845,7 @@ sub_815BA30: @ 815BA30
 	bl sub_810B108
 	b _0815BA4E
 	.align 2, 0
-_0815BA44: .4byte gUnknown_203F444
+_0815BA44: .4byte gTeachyTV_StaticResources
 _0815BA48:
 	movs r0, 0x9
 	bl sub_810B108
@@ -1871,7 +1871,7 @@ sub_815BA54: @ 815BA54
 	cmp r0, 0
 	bne _0815BA86
 	ldr r1, _0815BA94 @ =gUnknown_8479390
-	ldr r0, _0815BA98 @ =gUnknown_203F444
+	ldr r0, _0815BA98 @ =gTeachyTV_StaticResources
 	ldrb r0, [r0, 0x5]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1889,7 +1889,7 @@ _0815BA86:
 _0815BA8C: .4byte gTasks+0x8
 _0815BA90: .4byte gPaletteFade
 _0815BA94: .4byte gUnknown_8479390
-_0815BA98: .4byte gUnknown_203F444
+_0815BA98: .4byte gTeachyTV_StaticResources
 _0815BA9C: .4byte sub_815B4EC
 	thumb_func_end sub_815BA54
 
@@ -2155,7 +2155,7 @@ sub_815BC90: @ 815BC90
 	adds r5, r0, r1
 	bl sub_815B220
 	ldr r1, _0815BCD0 @ =gSpecialVar_0x8004
-	ldr r4, _0815BCD4 @ =gUnknown_203F444
+	ldr r4, _0815BCD4 @ =gTeachyTV_StaticResources
 	ldrb r0, [r4, 0x5]
 	strh r0, [r1]
 	ldr r1, _0815BCD8 @ =gMain
@@ -2173,7 +2173,7 @@ sub_815BC90: @ 815BC90
 	.align 2, 0
 _0815BCCC: .4byte gTasks+0x8
 _0815BCD0: .4byte gSpecialVar_0x8004
-_0815BCD4: .4byte gUnknown_203F444
+_0815BCD4: .4byte gTeachyTV_StaticResources
 _0815BCD8: .4byte gMain
 _0815BCDC: .4byte sub_815BD58
 _0815BCE0:
@@ -2257,7 +2257,7 @@ _0815BD70:
 	lsls r0, 1
 	bl PlayNewMapMusic
 _0815BD78:
-	bl sub_815ABFC
+	bl CB2_ReturnToTeachyTV
 	pop {r0}
 	bx r0
 	thumb_func_end sub_815BD58

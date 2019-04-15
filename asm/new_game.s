@@ -183,7 +183,7 @@ sub_8054A28: @ 8054A28
 	bl ZeroPlayerPartyMons
 	bl ZeroEnemyPartyMons
 	bl sub_81089BC
-	bl sub_81320AC
+	bl ResetTMCaseCursorPos
 	bl sub_813D6E4
 	bl sub_811089C
 	bl Random

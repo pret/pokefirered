@@ -3308,7 +3308,7 @@ _0800AD30:
 	lsls r1, 8
 	movs r0, 0
 	bl ClearGpuRegBits
-	ldr r0, _0800AE08 @ =gUnknown_841F408
+	ldr r0, _0800AE08 @ =gTMCaseMainWindowPalette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -3343,7 +3343,7 @@ _0800ADF8: .4byte sub_800978C
 _0800ADFC: .4byte gUnknown_82345E8
 _0800AE00: .4byte gUnknown_2022860
 _0800AE04: .4byte gUnknown_82345F0
-_0800AE08: .4byte gUnknown_841F408
+_0800AE08: .4byte gTMCaseMainWindowPalette
 _0800AE0C: .4byte gSoftResetDisabled
 _0800AE10: .4byte sub_80094D4
 _0800AE14: .4byte gMain

@@ -971,14 +971,8 @@ gUnknown_2039884: @ 2039884
 gUnknown_2039888: @ 2039888
 	.space 0x4
 
-gUnknown_203988C: @ 203988C
-	.space 0x18
-
-gUnknown_20398A4: @ 20398A4
-	.space 0x8
-
-gUnknown_20398AC: @ 20398AC
-	.space 0x8
+gBagPockets: @ 203988C
+	.space 0x28
 
 gUnknown_20398B4: @ 20398B4
 	.space 0x4
@@ -1511,30 +1505,7 @@ gUnknown_203B0EE: @ 203B0EE
 
 	.include "src/fame_checker.o"
 	.include "src/oak_speech.o"
-
-gUnknown_203B10C: @ 203B10C
-	.space 0xA
-
-gUnknown_203B116: @ 203B116
-	.space 0x2
-
-gUnknown_203B118: @ 203B118
-	.space 0x4
-
-gUnknown_203B11C: @ 203B11C
-	.space 0x4
-
-gUnknown_203B120: @ 203B120
-	.space 0x4
-
-gUnknown_203B124: @ 203B124
-	.space 0x4
-
-gUnknown_203B128: @ 203B128
-	.space 0x4
-
-gUnknown_203B12C: @ 203B12C
-	.space 0x4
+	.include "src/tm_case.o"
 
 gUnknown_203B130: @ 203B130
 	.space 0x10
@@ -1688,7 +1659,7 @@ gUnknown_203F43C: @ 203F43C
 gUnknown_203F440: @ 203F440
 	.space 0x4
 
-gUnknown_203F444: @ 203F444
+gTeachyTV_StaticResources: @ 203F444
 	.space 0x6
 
 gUnknown_203F44A: @ 203F44A

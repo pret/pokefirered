@@ -209,7 +209,7 @@ sub_813F7D8: @ 813F7D8
 	str r3, [sp, 0xC]
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_80BF5D0
+	bl CreateYesNoMenuWithCallbacks
 	add sp, 0x10
 	pop {r0}
 	bx r0

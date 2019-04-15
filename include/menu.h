@@ -48,5 +48,7 @@ void sub_810FF60(const struct WindowTemplate *, u8, u8, u8, u16, u8, u8);
 
 void StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority);
 bool8 IsBlendTaskActive(void);
+void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a8);
+void sub_810F260(u8 windowId, u8 a1);
 
 #endif // GUARD_MENU_H

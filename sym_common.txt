@@ -301,7 +301,7 @@ gUnknown_3005E20: @ 3005E20
 gUnknown_3005E60: @ 3005E60
 	.space 0x10
 
-gUnknown_3005E70: @ 3005E70
+gMultiuseListMenuTemplate: @ 3005E70
 	.space 0x18
 
 	.include "quest_log.o"

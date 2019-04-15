@@ -754,7 +754,7 @@ _08102B24:
 	adds r1, r2, 0
 	adds r1, 0x12
 	adds r2, 0x10
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0x20
 	str r0, [sp]
 	movs r0, 0x14
@@ -804,7 +804,7 @@ _08102B94:
 	adds r1, r2, 0
 	adds r1, 0x12
 	adds r2, 0x10
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0x1
 	bl HideBg
 	ldr r0, [r4]
@@ -832,7 +832,7 @@ _08102BD8:
 	adds r1, r2, 0
 	adds r1, 0x12
 	adds r2, 0x10
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0x1
 	bl HideBg
 	ldr r0, [r4]
@@ -2467,7 +2467,7 @@ _0810399C:
 	adds r1, r2, 0
 	adds r1, 0x36
 	adds r2, 0x34
-	bl sub_810713C
+	bl DestroyListMenu
 	b _081039E8
 	.align 2, 0
 _081039B4: .4byte gUnknown_203ACF0
@@ -2480,7 +2480,7 @@ _081039B8:
 	adds r1, r2, 0
 	adds r1, 0x3A
 	adds r2, 0x38
-	bl sub_810713C
+	bl DestroyListMenu
 	b _081039E8
 	.align 2, 0
 _081039D0: .4byte gUnknown_203ACF0
@@ -2493,7 +2493,7 @@ _081039D4:
 	adds r1, r2, 0
 	adds r1, 0x3E
 	adds r2, 0x3C
-	bl sub_810713C
+	bl DestroyListMenu
 _081039E8:
 	pop {r0}
 	bx r0
@@ -2572,7 +2572,7 @@ sub_8103A40: @ 8103A40
 	movs r1, 0
 	movs r2, 0x28
 	adds r3, r6, 0
-	bl sub_8107D68
+	bl blit_move_info_icon
 	ldr r0, _08103AC4 @ =gBaseStats
 	lsls r4, r5, 3
 	subs r4, r5
@@ -2587,7 +2587,7 @@ sub_8103A40: @ 8103A40
 	lsrs r1, 24
 	movs r2, 0x78
 	adds r3, r6, 0
-	bl sub_8107D68
+	bl blit_move_info_icon
 	ldrb r1, [r4, 0x7]
 	cmp r5, r1
 	beq _08103AB6
@@ -2599,7 +2599,7 @@ sub_8103A40: @ 8103A40
 	lsrs r1, 24
 	movs r2, 0x98
 	adds r3, r6, 0
-	bl sub_8107D68
+	bl blit_move_info_icon
 _08103AB6:
 	add sp, 0x4
 	pop {r4-r7}
@@ -7753,7 +7753,7 @@ _08106478:
 	lsrs r1, 24
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_8107D68
+	bl blit_move_info_icon
 	ldrb r1, [r4, 0x7]
 	cmp r5, r1
 	beq _08106504
@@ -7765,7 +7765,7 @@ _08106478:
 	lsrs r1, 24
 	movs r2, 0x20
 	movs r3, 0x1
-	bl sub_8107D68
+	bl blit_move_info_icon
 _08106504:
 	ldr r7, _081066B8 @ =gUnknown_203ACF0
 	ldr r0, [r7]

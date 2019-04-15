@@ -5355,14 +5355,14 @@ sub_812AD20: @ 812AD20
 	movs r1, 0xA
 	movs r2, 0x20
 	bl sub_814FF2C
-	ldr r0, _0812AD4C @ =gUnknown_841F408
+	ldr r0, _0812AD4C @ =gTMCaseMainWindowPalette
 	movs r1, 0xE0
 	movs r2, 0x20
 	bl LoadPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812AD4C: .4byte gUnknown_841F408
+_0812AD4C: .4byte gTMCaseMainWindowPalette
 	thumb_func_end sub_812AD20
 
 	thumb_func_start sub_812AD50

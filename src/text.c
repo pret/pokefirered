@@ -8,7 +8,7 @@
 
 extern u8 gGlyphInfo[0x90];
 extern u8 gUnknown_203ADFA;
-extern u16 gUnknown_841F408[];
+extern u16 gTMCaseMainWindowPalette[];
 extern const struct OamData gOamData_83AC9D0;
 
 extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
@@ -52,7 +52,7 @@ const struct SpriteSheet gUnknown_81EA68C[] =
 
 const struct SpritePalette gUnknown_81EA6A4[] =
 {
-    {gUnknown_841F408, 0x8000},
+    {gTMCaseMainWindowPalette, 0x8000},
     {NULL}
 };
 

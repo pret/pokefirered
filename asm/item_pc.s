@@ -233,7 +233,7 @@ _0810D5CC:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0810D5FC @ =gUnknown_3005E70
+	ldr r0, _0810D5FC @ =gMultiuseListMenuTemplate
 	ldr r2, _0810D600 @ =gUnknown_203ADCC
 	ldrh r1, [r2, 0x4]
 	ldrh r2, [r2, 0x6]
@@ -249,7 +249,7 @@ _0810D5CC:
 	b _0810D674
 	.align 2, 0
 _0810D5F8: .4byte sub_810DEA0
-_0810D5FC: .4byte gUnknown_3005E70
+_0810D5FC: .4byte gMultiuseListMenuTemplate
 _0810D600: .4byte gUnknown_203ADCC
 _0810D604: .4byte gTasks
 _0810D608:
@@ -594,7 +594,7 @@ _0810D8A4:
 	movs r1, 0x2
 	negs r1, r1
 	str r1, [r0, 0x4]
-	ldr r2, _0810D948 @ =gUnknown_3005E70
+	ldr r2, _0810D948 @ =gMultiuseListMenuTemplate
 	str r3, [r2]
 	ldr r0, _0810D940 @ =gUnknown_203ADBC
 	ldr r3, [r0]
@@ -658,7 +658,7 @@ _0810D938: .4byte gSaveBlock1Ptr
 _0810D93C: .4byte gUnknown_203ADC4
 _0810D940: .4byte gUnknown_203ADBC
 _0810D944: .4byte gFameCheckerText_Cancel
-_0810D948: .4byte gUnknown_3005E70
+_0810D948: .4byte gMultiuseListMenuTemplate
 _0810D94C: .4byte sub_810D954
 _0810D950: .4byte sub_810DA20
 	thumb_func_end sub_810D878
@@ -804,7 +804,7 @@ _0810DA58:
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0810DAAC @ =gStringVar4
-	ldr r1, _0810DAB0 @ =gUnknown_84162B9
+	ldr r1, _0810DAB0 @ =gText_TimesStrVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	str r5, [sp]
@@ -828,7 +828,7 @@ _0810DA9E:
 	.align 2, 0
 _0810DAA8: .4byte gStringVar1
 _0810DAAC: .4byte gStringVar4
-_0810DAB0: .4byte gUnknown_84162B9
+_0810DAB0: .4byte gText_TimesStrVar1
 	thumb_func_end sub_810DA20
 
 	thumb_func_start sub_810DAB4
@@ -1154,7 +1154,7 @@ sub_810DCE4: @ 810DCE4
 	ldr r4, _0810DD30 @ =gUnknown_203ADD0
 	adds r2, r4, 0x2
 	adds r1, r4, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldr r0, _0810DD34 @ =gUnknown_203ADBC
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -1731,7 +1731,7 @@ _0810E194:
 	ldr r5, _0810E1F4 @ =gUnknown_203ADD0
 	adds r2, r5, 0x2
 	adds r1, r5, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
 	cmp r0, r4
@@ -1742,7 +1742,7 @@ _0810E194:
 	strh r0, [r1, 0x6]
 _0810E1C0:
 	bl sub_810D878
-	ldr r0, _0810E1F8 @ =gUnknown_3005E70
+	ldr r0, _0810E1F8 @ =gMultiuseListMenuTemplate
 	subs r2, r5, 0x4
 	ldrh r1, [r2, 0x4]
 	ldrh r2, [r2, 0x6]
@@ -1766,7 +1766,7 @@ _0810E1E6:
 	.align 2, 0
 _0810E1F0: .4byte gSaveBlock1Ptr
 _0810E1F4: .4byte gUnknown_203ADD0
-_0810E1F8: .4byte gUnknown_3005E70
+_0810E1F8: .4byte gMultiuseListMenuTemplate
 _0810E1FC: .4byte sub_810DEA0
 	thumb_func_end sub_810E160
 
@@ -1788,7 +1788,7 @@ sub_810E200: @ 810E200
 	ldr r5, _0810E268 @ =gUnknown_203ADD0
 	adds r2, r5, 0x2
 	adds r1, r5, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
 	cmp r0, r4
@@ -1799,7 +1799,7 @@ sub_810E200: @ 810E200
 	strh r0, [r1, 0x6]
 _0810E234:
 	bl sub_810D878
-	ldr r0, _0810E26C @ =gUnknown_3005E70
+	ldr r0, _0810E26C @ =gMultiuseListMenuTemplate
 	subs r2, r5, 0x4
 	ldrh r1, [r2, 0x4]
 	ldrh r2, [r2, 0x6]
@@ -1822,7 +1822,7 @@ _0810E234:
 	.align 2, 0
 _0810E264: .4byte gTasks+0x8
 _0810E268: .4byte gUnknown_203ADD0
-_0810E26C: .4byte gUnknown_3005E70
+_0810E26C: .4byte gMultiuseListMenuTemplate
 _0810E270: .4byte sub_810DEA0
 	thumb_func_end sub_810E200
 
@@ -2205,11 +2205,11 @@ sub_810E578: @ 810E578
 	ldr r4, _0810E5D8 @ =gUnknown_203ADD0
 	adds r2, r4, 0x2
 	adds r1, r4, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	bl sub_810DDA4
 	bl sub_810DBF0
 	bl sub_810D878
-	ldr r0, _0810E5DC @ =gUnknown_3005E70
+	ldr r0, _0810E5DC @ =gMultiuseListMenuTemplate
 	subs r4, 0x4
 	ldrh r1, [r4, 0x4]
 	ldrh r2, [r4, 0x6]
@@ -2227,7 +2227,7 @@ sub_810E578: @ 810E578
 	.align 2, 0
 _0810E5D4: .4byte gTasks+0x8
 _0810E5D8: .4byte gUnknown_203ADD0
-_0810E5DC: .4byte gUnknown_3005E70
+_0810E5DC: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_810E578
 
 	thumb_func_start sub_810E5E0
@@ -2263,7 +2263,7 @@ sub_810E5E0: @ 810E5E0
 	movs r2, 0x2
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
-	ldr r1, _0810E66C @ =gUnknown_84162B9
+	ldr r1, _0810E66C @ =gText_TimesStrVar1
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x3
@@ -2290,7 +2290,7 @@ sub_810E5E0: @ 810E5E0
 _0810E660: .4byte gStringVar1
 _0810E664: .4byte gStringVar4
 _0810E668: .4byte gUnknown_84177AC
-_0810E66C: .4byte gUnknown_84162B9
+_0810E66C: .4byte gText_TimesStrVar1
 	thumb_func_end sub_810E5E0
 
 	thumb_func_start sub_810E670
@@ -2317,7 +2317,7 @@ sub_810E670: @ 810E670
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0810E6D0 @ =gStringVar4
-	ldr r1, _0810E6D4 @ =gUnknown_84162B9
+	ldr r1, _0810E6D4 @ =gText_TimesStrVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0xA
@@ -2340,7 +2340,7 @@ sub_810E670: @ 810E670
 	.align 2, 0
 _0810E6CC: .4byte gStringVar1
 _0810E6D0: .4byte gStringVar4
-_0810E6D4: .4byte gUnknown_84162B9
+_0810E6D4: .4byte gText_TimesStrVar1
 	thumb_func_end sub_810E670
 
 	thumb_func_start sub_810E6D8
@@ -2444,13 +2444,13 @@ sub_810E79C: @ 810E79C
 	bl ClearWindowTilemap
 	movs r0, 0
 	bl PutWindowTilemap
-	ldr r1, _0810E7D4 @ =gUnknown_841632A
+	ldr r1, _0810E7D4 @ =gText_ThereIsNoPokemon
 	ldr r2, _0810E7D8 @ =sub_810E848
 	adds r0, r4, 0
 	bl sub_810EB30
 	b _0810E7EA
 	.align 2, 0
-_0810E7D4: .4byte gUnknown_841632A
+_0810E7D4: .4byte gText_ThereIsNoPokemon
 _0810E7D8: .4byte sub_810E848
 _0810E7DC:
 	ldr r0, _0810E7F0 @ =gUnknown_203ADBC
@@ -2610,7 +2610,7 @@ sub_810E8F0: @ 810E8F0
 	movs r1, 0xD0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r0, _0810E97C @ =gUnknown_841F408
+	ldr r0, _0810E97C @ =gTMCaseMainWindowPalette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -2647,7 +2647,7 @@ _0810E95C:
 	.align 2, 0
 _0810E974: .4byte gUnknown_8453F98
 _0810E978: .4byte 0x000003a3
-_0810E97C: .4byte gUnknown_841F408
+_0810E97C: .4byte gTMCaseMainWindowPalette
 _0810E980: .4byte gUnknown_203ADD8
 	thumb_func_end sub_810E8F0
 

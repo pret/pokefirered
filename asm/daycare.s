@@ -2714,7 +2714,7 @@ _080467C8:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	bl StringAppend
-	ldr r1, _08046830 @ =gUnknown_84161C8
+	ldr r1, _08046830 @ =gOtherText_Exit
 	adds r0, r7, 0
 	bl StringAppend
 	add sp, 0x28
@@ -2726,7 +2726,7 @@ _080467C8:
 	bx r0
 	.align 2, 0
 _0804682C: .4byte gUnknown_825F83C
-_08046830: .4byte gUnknown_84161C8
+_08046830: .4byte gOtherText_Exit
 	thumb_func_end GetDaycareLevelMenuText
 
 	thumb_func_start GetDaycareLevelMenuLevelText
@@ -3008,7 +3008,7 @@ _08046A46:
 	ldrb r0, [r4, 0x8]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r4, 0xA]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -3032,7 +3032,7 @@ _08046A7C:
 	ldrb r0, [r4, 0x8]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r4, 0xA]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame

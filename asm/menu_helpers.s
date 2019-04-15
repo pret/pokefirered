@@ -182,8 +182,8 @@ _080BF5C8: .4byte gTasks
 _080BF5CC: .4byte gUnknown_20399C8
 	thumb_func_end sub_80BF560
 
-	thumb_func_start sub_80BF5D0
-sub_80BF5D0: @ 80BF5D0
+	thumb_func_start CreateYesNoMenuWithCallbacks
+CreateYesNoMenuWithCallbacks: @ 80BF5D0
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
@@ -228,7 +228,7 @@ sub_80BF5D0: @ 80BF5D0
 _080BF624: .4byte gUnknown_20399C8
 _080BF628: .4byte gTasks
 _080BF62C: .4byte sub_80BF560
-	thumb_func_end sub_80BF5D0
+	thumb_func_end CreateYesNoMenuWithCallbacks
 
 	thumb_func_start GetLRKeysState
 GetLRKeysState: @ 80BF630

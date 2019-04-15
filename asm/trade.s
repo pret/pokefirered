@@ -20,7 +20,7 @@ sub_804C600: @ 804C600
 	strb r0, [r2, 0x8]
 	ldr r0, _0804C6FC @ =sub_804D4F8
 	bl SetVBlankCallback
-	ldr r4, _0804C700 @ =gUnknown_841F408
+	ldr r4, _0804C700 @ =gTMCaseMainWindowPalette
 	adds r0, r4, 0
 	movs r1, 0xF0
 	movs r2, 0x14
@@ -118,7 +118,7 @@ _0804C6F0:
 	.align 2, 0
 _0804C6F8: .4byte gPaletteFade
 _0804C6FC: .4byte sub_804D4F8
-_0804C700: .4byte gUnknown_841F408
+_0804C700: .4byte gTMCaseMainWindowPalette
 _0804C704: .4byte gUnknown_8261F1C
 _0804C708: .4byte gUnknown_2031DA8
 _0804C70C: .4byte gUnknown_8261F2C

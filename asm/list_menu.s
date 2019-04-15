@@ -62,7 +62,7 @@ _08106F24:
 	ldr r1, [sp, 0x4]
 	bl sub_8150048
 _08106F34:
-	ldr r0, _08106F64 @ =gUnknown_3005E70
+	ldr r0, _08106F64 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp]
 	ldm r1!, {r3-r5}
@@ -84,7 +84,7 @@ _08106F34:
 	b _08106FE4
 	.align 2, 0
 _08106F60: .4byte gUnknown_203ACF4
-_08106F64: .4byte gUnknown_3005E70
+_08106F64: .4byte gMultiuseListMenuTemplate
 _08106F68:
 	ldrb r0, [r5, 0x6]
 	bl ListMenuHandleInput
@@ -139,7 +139,7 @@ _08106FCC:
 	ldrb r0, [r5, 0x6]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r5, 0x5]
 	bl RemoveWindow
 	movs r0, 0
@@ -340,8 +340,8 @@ _08107136:
 	bx r1
 	thumb_func_end ListMenuHandleInput
 
-	thumb_func_start sub_810713C
-sub_810713C: @ 810713C
+	thumb_func_start DestroyListMenu
+DestroyListMenu: @ 810713C
 	push {r4,lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -377,7 +377,7 @@ _08107170:
 	bx r0
 	.align 2, 0
 _0810717C: .4byte gTasks+0x8
-	thumb_func_end sub_810713C
+	thumb_func_end DestroyListMenu
 
 	thumb_func_start sub_8107180
 sub_8107180: @ 8107180
@@ -1976,8 +1976,8 @@ _08107D56:
 _08107D64: .4byte gUnknown_8E95DBC
 	thumb_func_end sub_8107D38
 
-	thumb_func_start sub_8107D68
-sub_8107D68: @ 8107D68
+	thumb_func_start blit_move_info_icon
+blit_move_info_icon: @ 8107D68
 	push {r4,r5,lr}
 	sub sp, 0x18
 	lsls r0, 24
@@ -2014,6 +2014,6 @@ sub_8107D68: @ 8107D68
 	.align 2, 0
 _08107DAC: .4byte gUnknown_8452C94
 _08107DB0: .4byte gUnknown_8E95DDC
-	thumb_func_end sub_8107D68
+	thumb_func_end blit_move_info_icon
 
 	.align 2, 0 @ Don't pad with nop.

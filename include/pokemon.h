@@ -445,6 +445,8 @@ struct BattleMove
     u8 flags;
 };
 
+extern const struct BattleMove gBattleMoves[];
+
 #define FLAG_MAKES_CONTACT          0x1
 #define FLAG_PROTECT_AFFECTED       0x2
 #define FLAG_MAGICCOAT_AFFECTED     0x4

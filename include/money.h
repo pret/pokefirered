@@ -10,13 +10,14 @@ void AddMoney(u32* moneyPtr, u32 toAdd);
 void RemoveMoney(u32* moneyPtr, u32 toSub);
 bool8 IsEnoughForCostInVar0x8005(void);
 void SubtractMoneyFromVar0x8005(void);
-void PrintMoneyAmountInMoneyBoxInMoneyBox(u8 windowId, int amount, u8 speed);
-void PrintMoneyAmountInMoneyBox(u8 windowId, u8 x, u8 y, int amount, u8 speed);
-void PrintMoneyAmountInMoneyBoxInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount);
+void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed);
+void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed);
+void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount);
 void ChangeAmountInMoneyBox(int amount);
 void DrawMoneyBox(int amount, u8 x, u8 y);
 void HideMoneyBox(void);
 void AddMoneyLabelObject(u16 x, u16 y);
 void RemoveMoneyLabelObject(void);
+void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed);
 
 #endif // GUARD_MONEY_H

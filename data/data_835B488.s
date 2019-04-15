@@ -568,7 +568,7 @@ gUnknown_83D427C:: @ 83D427C
 gUnknown_83D4294:: @ 83D4294
 	.incbin "baserom.gba", 0x3D4294, 0x6D94
 
-gUnknown_83DB028:: @ 83DB028
+gItems:: @ 83DB028
 	.incbin "baserom.gba", 0x3DB028, 0x4074
 
 gUnknown_83DF09C:: @ 83DF09C

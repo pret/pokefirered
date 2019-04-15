@@ -1925,7 +1925,7 @@ _0809D844:
 	bl AddTextPrinterParameterized
 	adds r0, r6, 0x1
 	lsls r0, 24
-	ldr r2, _0809D8BC @ =gUnknown_84161C8
+	ldr r2, _0809D8BC @ =gOtherText_Exit
 	lsrs r0, 20
 	adds r0, 0x2
 	lsls r0, 24
@@ -1964,7 +1964,7 @@ _0809D8A8:
 	bx r0
 	.align 2, 0
 _0809D8B8: .4byte gUnknown_8417DED
-_0809D8BC: .4byte gUnknown_84161C8
+_0809D8BC: .4byte gOtherText_Exit
 	thumb_func_end sub_809D764
 
 	thumb_func_start sub_809D8C0

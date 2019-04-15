@@ -4879,12 +4879,12 @@ sub_8120FB0: @ 8120FB0
 	bl FreeRestoreBattleData
 	bl LoadPlayerParty
 	bl sub_815AC20
-	ldr r0, _08120FC8 @ =sub_815ABFC
+	ldr r0, _08120FC8 @ =CB2_ReturnToTeachyTV
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08120FC8: .4byte sub_815ABFC
+_08120FC8: .4byte CB2_ReturnToTeachyTV
 	thumb_func_end sub_8120FB0
 
 	thumb_func_start sub_8120FCC
@@ -5149,7 +5149,7 @@ _081211E4: .4byte gUnknown_203B0A0
 _081211E8: .4byte gFameCheckerText_Cancel
 _081211EC: .4byte gUnknown_8459FFC
 _081211F0:
-	ldr r4, _08121240 @ =gUnknown_84161C8
+	ldr r4, _08121240 @ =gOtherText_Exit
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -5187,7 +5187,7 @@ _08121238:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08121240: .4byte gUnknown_84161C8
+_08121240: .4byte gOtherText_Exit
 _08121244: .4byte gUnknown_8459FFC
 	thumb_func_end sub_81210F8
 
@@ -12606,7 +12606,7 @@ sub_8124DA0: @ 8124DA0
 	movs r0, 0x5
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_81317F8
+	bl InitTMCase
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8124DA0

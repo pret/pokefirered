@@ -13953,28 +13953,28 @@ gFile_graphics_interface_bag_swap_palette:: @ 8E845C8
 
 	.align 2
 gUnknown_8E845D8:: @ 8E845D8
-	.incbin "baserom.gba", 0xE845D8, 0x44C
+	.incbin "graphics/tm_case/unk_8E845D8.4bpp.lz"
 
 gUnknown_8E84A24:: @ 8E84A24
-	.incbin "baserom.gba", 0xE84A24, 0x14C
+	.incbin "graphics/tm_case/unk_8E84A24.bin.lz"
 
 gUnknown_8E84B70:: @ 8E84B70
-	.incbin "baserom.gba", 0xE84B70, 0x140
+	.incbin "graphics/tm_case/unk_8E84B70.bin.lz"
 
 gUnknown_8E84CB0:: @ 8E84CB0
-	.incbin "baserom.gba", 0xE84CB0, 0x70
+	.incbin "graphics/tm_case/unk_8E84CB0.gbapal.lz"
 
 gUnknown_8E84D20:: @ 8E84D20
-	.incbin "baserom.gba", 0xE84D20, 0x70
+	.incbin "graphics/tm_case/unk_8E84D20.gbapal.lz"
 	
-gUnknown_8E84D90:: @ 8E84D90
-	.incbin "baserom.gba", 0xE84D90, 0x190
+gTMCase_TMSpriteGfx:: @ 8E84D90
+	.incbin "graphics/tm_case/unk_8E84D90.4bpp.lz"
 
 gUnknown_8E84F20:: @ 8E84F20
-	.incbin "baserom.gba", 0xE84F20, 0x148
+	.incbin "graphics/tm_case/unk_8E84F20.gbapal.lz"
 
 gUnknown_8E85068:: @ 8E85068
-	.incbin "baserom.gba", 0xE85068, 0x28
+	.incbin "graphics/tm_case/unk_8E85068.gbapal.lz"
 
 gUnknown_8E85090:: @ 8E85090
 	.incbin "baserom.gba", 0xE85090, 0x378
@@ -16072,7 +16072,10 @@ gUnknown_8E985D8:: @ 8E985D8
 	.incbin "baserom.gba", 0xE985D8, 0xB40 @UNKNOWN, FALSEPOSITIVE?
 
 gUnknown_8E99118:: @ 8E99118
-	.incbin "baserom.gba", 0xE99118, 0xE0 @UNKNOWN
+	.incbin "graphics/tm_case/unk_8E99118.4bpp"
+
+gUnknown_8E99198::
+	.incbin "baserom.gba", 0xE99198, 0x60 @UNKNOWN
 
 gUnknown_8E991F8:: @ 8E991F8
 	.incbin "baserom.gba", 0xE991F8, 0x674

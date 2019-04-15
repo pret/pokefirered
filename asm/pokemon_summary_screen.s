@@ -4180,7 +4180,7 @@ _08136812:
 	adds r1, r4, r3
 	ldr r0, [r6]
 	adds r0, r1
-	ldr r5, _081368A4 @ =gUnknown_8416213
+	ldr r5, _081368A4 @ =gText_ThreeHyphens
 	adds r1, r5, 0
 	bl StringCopy
 	ldr r0, _081368A8 @ =0x00003188
@@ -4209,7 +4209,7 @@ _08136894: .4byte gUnknown_841620E
 _08136898: .4byte 0x000030b8
 _0813689C: .4byte gUnknown_8416210
 _081368A0: .4byte 0x0000316c
-_081368A4: .4byte gUnknown_8416213
+_081368A4: .4byte gText_ThreeHyphens
 _081368A8: .4byte 0x00003188
 _081368AC: .4byte gUnknown_203B144
 _081368B0:
@@ -4399,7 +4399,7 @@ _081369D0:
 	ldr r1, _08136A68 @ =0x0000316c
 	adds r0, r1
 	adds r0, r6, r0
-	ldr r1, _08136A6C @ =gUnknown_8416213
+	ldr r1, _08136A6C @ =gText_ThreeHyphens
 	bl StringCopy
 	b _08136A84
 	.align 2, 0
@@ -4411,7 +4411,7 @@ _08136A5C: .4byte 0x00003258
 _08136A60: .4byte gUnknown_203B144
 _08136A64: .4byte gBattleMoves
 _08136A68: .4byte 0x0000316c
-_08136A6C: .4byte gUnknown_8416213
+_08136A6C: .4byte gText_ThreeHyphens
 _08136A70:
 	lsls r4, r7, 2
 	adds r0, r4, r7
@@ -4441,7 +4441,7 @@ _08136A84:
 	ldr r2, _08136AC0 @ =0x00003188
 	adds r0, r2
 	adds r0, r3, r0
-	ldr r1, _08136AC4 @ =gUnknown_8416213
+	ldr r1, _08136AC4 @ =gText_ThreeHyphens
 	bl StringCopy
 	b _08136ADA
 	.align 2, 0
@@ -4450,7 +4450,7 @@ _08136AB4: .4byte gBattleMoves
 _08136AB8: .4byte gUnknown_203B140
 _08136ABC: .4byte 0x00003258
 _08136AC0: .4byte 0x00003188
-_08136AC4: .4byte gUnknown_8416213
+_08136AC4: .4byte gText_ThreeHyphens
 _08136AC8:
 	adds r0, r4, r7
 	ldr r4, _08136AE8 @ =0x00003188
@@ -6636,7 +6636,7 @@ _08137CA4:
 	adds r3, r2
 	lsrs r3, 16
 	movs r2, 0x3
-	bl sub_8107D68
+	bl blit_move_info_icon
 _08137CDE:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -6660,7 +6660,7 @@ _08137CDE:
 	lsrs r1, 24
 	movs r2, 0x3
 	movs r3, 0x75
-	bl sub_8107D68
+	bl blit_move_info_icon
 _08137D0E:
 	pop {r4,r5}
 	pop {r0}
@@ -8325,7 +8325,7 @@ _08138A62:
 	lsrs r1, 24
 	movs r2, 0x2F
 	movs r3, 0x23
-	bl sub_8107D68
+	bl blit_move_info_icon
 	ldr r1, [r6]
 	adds r4, r1, r4
 	ldr r3, _08138AB8 @ =0x00003221
@@ -8342,7 +8342,7 @@ _08138A62:
 	lsrs r1, 24
 	movs r2, 0x53
 	movs r3, 0x23
-	bl sub_8107D68
+	bl blit_move_info_icon
 	b _08138B0E
 	.align 2, 0
 _08138AB0: .4byte 0x00003003
@@ -8365,7 +8365,7 @@ _08138ABC:
 	lsrs r1, 24
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8107D68
+	bl blit_move_info_icon
 	ldr r2, [r6]
 	adds r4, r2, r4
 	ldr r1, _08138B1C @ =0x00003221
@@ -8381,7 +8381,7 @@ _08138ABC:
 	lsrs r1, 24
 	movs r2, 0x24
 	movs r3, 0x3
-	bl sub_8107D68
+	bl blit_move_info_icon
 _08138B04:
 	ldr r0, [r6]
 	adds r0, r5

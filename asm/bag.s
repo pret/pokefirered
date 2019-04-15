@@ -356,7 +356,7 @@ sub_810BAE8: @ 810BAE8
 	str r3, [sp, 0xC]
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_80BF5D0
+	bl CreateYesNoMenuWithCallbacks
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -381,7 +381,7 @@ sub_810BB14: @ 810BB14
 	str r3, [sp, 0xC]
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_80BF5D0
+	bl CreateYesNoMenuWithCallbacks
 	add sp, 0x10
 	pop {r0}
 	bx r0

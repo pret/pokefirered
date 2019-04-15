@@ -92,4 +92,27 @@ extern const u8 gText_Coins[];
 extern const u8 gText_EggNickname[];
 extern const u8 gText_Pokemon[];
 
+extern const u8 gOtherText_Use[];
+extern const u8 gOtherText_Give[];
+extern const u8 gOtherText_Exit[];
+extern const u8 gText_ThreeHyphens[];
+extern const u8 gOtherText_UnkF9_08_Clear_01[];
+extern const u8 gFameCheckerText_ListMenuCursor[];
+extern const u8 gText_TimesStrVar1[];
+extern const u8 gText_IsSelected[];
+extern const u8 gText_ThereIsNoPokemon[];
+extern const u8 gText_ItemCantBeHeld[];
+extern const u8 gText_TMCase[];
+extern const u8 gText_Close[];
+extern const u8 gText_TMCaseWillBePutAway[];
+extern const u8 gText_FontSize0[];
+extern const u8 gText_FontSize2[];
+extern const u8 gText_OhNoICantBuyThat[];
+extern const u8 gText_HowManyWouldYouLikeToSell[];
+extern const u8 gText_ICanPayThisMuch_WouldThatBeOkay[];
+extern const u8 gText_TurnedOverItemsWorthYen[];
+extern const u8 gPokeDudeText_TMTypes[];
+extern const u8 gPokeDudeText_ReadTMDescription[];
+extern const u16 gTMCaseMainWindowPalette[];
+
 #endif //GUARD_STRINGS_H

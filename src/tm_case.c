@@ -85,10 +85,10 @@ static void TMCase_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
 static void TMCase_ItemPrintFunc(u8 windowId, s32 itemId, u8 y);
 static void TMCase_MoveCursor_UpdatePrintedDescription(s32 itemIndex);
 static void PrintListMenuCursorAt_WithColorIdx(u8 a0, u8 a1);
-static void sub_8132018(void);
-static void sub_81320BC(void);
-static void sub_8132120(void);
-static void sub_8132170(void);
+static void CreateTMCaseScrollIndicatorArrowPair_Main(void);
+static void TMCaseSetup_GetTMCount(void);
+static void TMCaseSetup_InitListMenuPositions(void);
+static void TMCaseSetup_UpdateVisualMenuOffset(void);
 static void Task_FadeOutAndCloseTMCase(u8 taskId);
 static void Task_TMCaseMain(u8 taskId);
 static void Task_SelectTMAction_FromFieldBag(u8 taskId);
@@ -97,18 +97,18 @@ static void TMHMContextMenuAction_Use(u8 taskId);
 static void TMHMContextMenuAction_Give(u8 taskId);
 static void PrintError_ThereIsNoPokemon(u8 taskId);
 static void PrintError_ItemCantBeHeld(u8 taskId);
-static void sub_8132758(u8 taskId);
-static void sub_8132780(u8 taskId);
+static void Task_WaitButtonAfterErrorPrint(u8 taskId);
+static void Subtask_CloseContextMenuAndReturnToMain(u8 taskId);
 static void TMHMContextMenuAction_Exit(u8 taskId);
-static void sub_8132868(u8 taskId);
-static void sub_81328B8(u8 taskId);
+static void Task_SelectTMAction_Type1(u8 taskId);
+static void Task_SelectTMAction_Type3(u8 taskId);
 static void Task_SelectTMAction_FromSellMenu(u8 taskId);
 static void Task_AskConfirmSaleWithAmount(u8 taskId);
 static void Task_PlaceYesNoBox(u8 taskId);
 static void Task_SaleOfTMsCancelled(u8 taskId);
 static void Task_InitQuantitySelectUI(u8 taskId);
-static void sub_8132B5C(s16 quantity, s32 value);
-static void sub_8132BC8(u8 taskId);
+static void SellTM_PrintQuantityAndSalePrice(s16 quantity, s32 value);
+static void Task_QuantitySelect_HandleInput(u8 taskId);
 static void Task_PrintSaleConfirmedText(u8 taskId);
 static void Task_DoSaleOfTMs(u8 taskId);
 static void Task_AfterSale_ReturnToList(u8 taskId);
@@ -165,9 +165,9 @@ static const struct BgTemplate sBGTemplates[] = {
 
 static void (*const sSelectTMActionTasks[])(u8 taskId) = {
     Task_SelectTMAction_FromFieldBag,
-    sub_8132868,
+    Task_SelectTMAction_Type1,
     Task_SelectTMAction_FromSellMenu,
-    sub_81328B8
+    Task_SelectTMAction_Type3
 };
 
 static const struct MenuAction sMenuActions_UseGiveExit[] = {
@@ -363,9 +363,9 @@ static bool8 DoSetUpTMCaseUI(void)
         gMain.state++;
         break;
     case 10:
-        sub_81320BC();
-        sub_8132120();
-        sub_8132170();
+        TMCaseSetup_GetTMCount();
+        TMCaseSetup_InitListMenuPositions();
+        TMCaseSetup_UpdateVisualMenuOffset();
         gMain.state++;
         break;
     case 11:
@@ -390,7 +390,7 @@ static bool8 DoSetUpTMCaseUI(void)
         gMain.state++;
         break;
     case 15:
-        sub_8132018();
+        CreateTMCaseScrollIndicatorArrowPair_Main();
         gMain.state++;
         break;
     case 16:
@@ -617,12 +617,12 @@ static void PrintListMenuCursorAt_WithColorIdx(u8 a0, u8 a1)
     }
 }
 
-static void sub_8132018(void)
+static void CreateTMCaseScrollIndicatorArrowPair_Main(void)
 {
     sTMCaseDynamicResources->scrollIndicatorArrowPairId = AddScrollIndicatorArrowPairParametrized(2, 0xA0, 0x08, 0x58, sTMCaseDynamicResources->numTMs - sTMCaseDynamicResources->maxTMsShown + 1, 0x6E, 0x6E, &sTMCaseStaticResources.scrollOffset);
 }
 
-static void sub_8132054(void)
+static void CreateTMCaseScrollIndicatorArrowPair_SellQuantitySelect(void)
 {
     sTMCaseDynamicResources->currItem = 1;
     sTMCaseDynamicResources->scrollIndicatorArrowPairId = AddScrollIndicatorArrowPairParametrized(2, 0x98, 0x48, 0x68, 2, 0x6E, 0x6E, &sTMCaseDynamicResources->currItem);
@@ -643,7 +643,7 @@ void ResetTMCaseCursorPos(void)
     sTMCaseStaticResources.scrollOffset = 0;
 }
 
-static void sub_81320BC(void)
+static void TMCaseSetup_GetTMCount(void)
 {
     struct BagPocket * pocket = &gBagPockets[POCKET_TM_CASE - 1];
     u16 i;
@@ -659,7 +659,7 @@ static void sub_81320BC(void)
     sTMCaseDynamicResources->maxTMsShown = min(sTMCaseDynamicResources->numTMs + 1, 5);
 }
 
-static void sub_8132120(void)
+static void TMCaseSetup_InitListMenuPositions(void)
 {
     if (sTMCaseStaticResources.scrollOffset != 0)
     {
@@ -675,7 +675,7 @@ static void sub_8132120(void)
     }
 }
 
-static void sub_8132170(void)
+static void TMCaseSetup_UpdateVisualMenuOffset(void)
 {
     u8 i;
     if (sTMCaseStaticResources.selectedRow > 3)
@@ -774,7 +774,7 @@ static void Task_TMCaseMain(u8 taskId)
 static void Subtask_ReturnToTMCaseMain(u8 taskId)
 {
     FillBG2RowWithPalette_2timesNplus1(0);
-    sub_8132018();
+    CreateTMCaseScrollIndicatorArrowPair_Main();
     gTasks[taskId].func = Task_TMCaseMain;
 }
 
@@ -886,26 +886,26 @@ static void TMHMContextMenuAction_Give(u8 taskId)
 
 static void PrintError_ThereIsNoPokemon(u8 taskId)
 {
-    TMCase_PrintMessageWithFollowupTask(taskId, 2, gText_ThereIsNoPokemon, sub_8132758);
+    TMCase_PrintMessageWithFollowupTask(taskId, 2, gText_ThereIsNoPokemon, Task_WaitButtonAfterErrorPrint);
 }
 
 static void PrintError_ItemCantBeHeld(u8 taskId)
 {
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_ItemCantBeHeld);
-    TMCase_PrintMessageWithFollowupTask(taskId, 2, gStringVar4, sub_8132758);
+    TMCase_PrintMessageWithFollowupTask(taskId, 2, gStringVar4, Task_WaitButtonAfterErrorPrint);
 }
 
-static void sub_8132758(u8 taskId)
+static void Task_WaitButtonAfterErrorPrint(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        sub_8132780(taskId);
+        Subtask_CloseContextMenuAndReturnToMain(taskId);
     }
 }
 
-static void sub_8132780(u8 taskId)
+static void Subtask_CloseContextMenuAndReturnToMain(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -939,7 +939,7 @@ static void TMHMContextMenuAction_Exit(u8 taskId)
     Subtask_ReturnToTMCaseMain(taskId);
 }
 
-static void sub_8132868(u8 taskId)
+static void Task_SelectTMAction_Type1(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -954,7 +954,7 @@ static void sub_8132868(u8 taskId)
     }
 }
 
-static void sub_81328B8(u8 taskId)
+static void Task_SelectTMAction_Type3(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -977,7 +977,7 @@ static void Task_SelectTMAction_FromSellMenu(u8 taskId)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_OhNoICantBuyThat);
-        TMCase_PrintMessageWithFollowupTask(taskId, sub_80BF8E4(), gStringVar4, sub_8132780);
+        TMCase_PrintMessageWithFollowupTask(taskId, sub_80BF8E4(), gStringVar4, Subtask_CloseContextMenuAndReturnToMain);
     }
     else
     {
@@ -1037,15 +1037,15 @@ static void Task_InitQuantitySelectUI(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
     AddTextPrinterParameterized_ColorByIndex(7, 0, gStringVar4, 4, 10, 1, 0, 0, 1);
-    sub_8132B5C(1, itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])) / 2 * data[8]);
+    SellTM_PrintQuantityAndSalePrice(1, itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])) / 2 * data[8]);
     HandlePrintMoneyOnHand();
-    sub_8132054();
+    CreateTMCaseScrollIndicatorArrowPair_SellQuantitySelect();
     schedule_bg_copy_tilemap_to_vram(0);
     schedule_bg_copy_tilemap_to_vram(1);
-    gTasks[taskId].func = sub_8132BC8;
+    gTasks[taskId].func = Task_QuantitySelect_HandleInput;
 }
 
-static void sub_8132B5C(s16 quantity, s32 amount)
+static void SellTM_PrintQuantityAndSalePrice(s16 quantity, s32 amount)
 {
     FillWindowPixelBuffer(7, 0x11);
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -1054,13 +1054,13 @@ static void sub_8132B5C(s16 quantity, s32 amount)
     PrintMoneyAmount(7, 0x38, 0x0A, amount, 0);
 }
 
-static void sub_8132BC8(u8 taskId)
+static void Task_QuantitySelect_HandleInput(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
     if (sub_80BF848(&data[8], data[2]) == 1)
     {
-        sub_8132B5C(data[8], itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])) / 2 * data[8]);
+        SellTM_PrintQuantityAndSalePrice(data[8], itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])) / 2 * data[8]);
     }
     else if (JOY_NEW(A_BUTTON))
     {
@@ -1109,8 +1109,8 @@ static void Task_DoSaleOfTMs(u8 taskId)
     AddMoney(&gSaveBlock1Ptr->money, itemid_get_market_price(gSpecialVar_ItemId) / 2 * data[8]);
     sub_809C09C(gSpecialVar_ItemId, data[8], 2);
     DestroyListMenu(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
-    sub_81320BC();
-    sub_8132120();
+    TMCaseSetup_GetTMCount();
+    TMCaseSetup_InitListMenuPositions();
     InitTMCaseListMenuItems();
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sTMCaseStaticResources.scrollOffset, sTMCaseStaticResources.selectedRow);
     PrintListMenuCursorByID_WithColorIdx(data[0], 2);
@@ -1129,7 +1129,7 @@ static void Task_AfterSale_ReturnToList(u8 taskId)
         PutWindowTilemap(3);
         PutWindowTilemap(4);
         PutWindowTilemap(5);
-        sub_8132780(taskId);
+        Subtask_CloseContextMenuAndReturnToMain(taskId);
     }
 }
 

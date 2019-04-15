@@ -4835,7 +4835,7 @@ _0810A4BC: .4byte gUnknown_841630F
 _0810A4C0: .4byte sub_810A1D0
 _0810A4C4:
 	movs r0, 0xB6
-	lsls r0, 1
+	lsls r0, 1 @ ITEM_TM_CASE
 	cmp r4, r0
 	bne _0810A4D4
 	ldr r0, _0810A4D0 @ =sub_810A52C
@@ -4843,7 +4843,7 @@ _0810A4C4:
 	.align 2, 0
 _0810A4D0: .4byte sub_810A52C
 _0810A4D4:
-	ldr r0, _0810A4E8 @ =0x0000016d
+	ldr r0, _0810A4E8 @ =0x0000016d @ ITEM_BERRY_POUCH
 	cmp r4, r0
 	bne _0810A4F0
 	ldr r0, _0810A4EC @ =sub_810A540

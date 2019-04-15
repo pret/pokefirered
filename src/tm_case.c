@@ -6,6 +6,7 @@
 #include "palette.h"
 #include "task.h"
 #include "text.h"
+#include "text_window.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
@@ -109,20 +110,26 @@ void sub_8133404(void);
 void sub_8133444(u16 itemId);
 void sub_81335B0(u8 windowId, u8 x, u8 y);
 void sub_81335E0(void);
-void sub_8133604(u8 taskId, const u8 *const *ptrs);
+void sub_8133604(u8 taskId, const TaskFunc * ptrs);
 u8 sub_8133630(u8 * a0, u8 a1);
 void sub_8133664(u8 * a0);
 u8 sub_813368C(u16 itemId);
+void sub_8133714(struct Sprite * sprite, u8 var);
+void sub_8133730(u8 type);
+void sub_8133790(struct Sprite * sprite, u8 var);
 void sub_81337E4(u8 a0, u16 itemId);
+void sub_8133810(struct Sprite * sprite);
 void sub_81338A8(void);
 
 // event scripts
+extern const u8 gUnknown_8416213[];
 extern const u8 gUnknown_8416226[];
 extern const u8 gFameCheckerText_ListMenuCursor[];
 extern const u8 gUnknown_84162B9[];
 extern const u8 gUnknown_8416301[];
 extern const u8 gUnknown_841632A[];
 extern const u8 gUnknown_841635E[];
+extern const u8 gUnknown_84166D3[];
 extern const u8 gUnknown_84166DB[];
 extern const u8 gUnknown_84166E1[];
 extern const u8 gUnknown_84166FF[];
@@ -134,16 +141,25 @@ extern const u8 gUnknown_8416959[];
 extern const u8 gUnknown_841C587[];
 extern const u8 gUnknown_841C693[];
 
+extern const u16 gUnknown_841F408[];
+
 // my rodata
 extern const struct BgTemplate gUnknown_8463134[3];
 extern void (*const gUnknown_8463140[])(u8 taskId);
 extern const struct MenuAction gUnknown_8463150[];
 extern const u8 gUnknown_8463168[];
 extern const u8 gUnknown_846316B[];
-extern const u8 *const gUnknown_8463170[];
+extern const TaskFunc gUnknown_8463170[];
 extern const u8 gUnknown_8463178[];
 extern const u8 gUnknown_846317C[];
+extern const u16 gUnknown_8463180[];
+extern const struct TextColor gUnknown_8463184[];
+extern const struct WindowTemplate gUnknown_8463190[];
+extern const struct WindowTemplate gUnknown_84631E0;
+extern const struct WindowTemplate gUnknown_84631E8[];
 extern const struct CompressedSpriteSheet gUnknown_8463218;
+extern const struct SpriteTemplate gUnknown_8463220;
+extern const u16 gUnknown_8463238[];
 
 // graphics
 extern const u32 gUnknown_8E845D8[];
@@ -151,6 +167,9 @@ extern const u32 gUnknown_8E84A24[];
 extern const u32 gUnknown_8E84B70[];
 extern const u32 gUnknown_8E84CB0[];
 extern const u32 gUnknown_8E84D20[];
+extern const u32 gUnknown_8E84F20[];
+extern const u32 gUnknown_8E85068[];
+extern const u8 gUnknown_8E99118[];
 
 void sub_81317F8(u8 a0, void (* a1)(void), u8 a2)
 {
@@ -1173,4 +1192,249 @@ void sub_8132F60(u8 taskId)
         }
         break;
     }
+}
+
+void sub_8133244(void)
+{
+    u8 i;
+
+    InitWindows(gUnknown_8463190);
+    DeactivateAllTextPrinters();
+    sub_815001C(0, 0x5B, 0xE0);
+    sub_814FEAC(0, 0x64, 0xB0);
+    sub_814FF2C(0, 0x78, 0xD0);
+    LoadPalette(gUnknown_841F408, 0xF0, 0x20);
+    LoadPalette(gUnknown_841F408, 0xA0, 0x20);
+    LoadPalette(gUnknown_8463180, 0xF6, 0x04);
+    LoadPalette(gUnknown_8463180, 0xD6, 0x04);
+    sub_8107D38(0xc0, 0x01);
+    for (i = 0; i < 9; i++)
+        FillWindowPixelBuffer(i, 0x00);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    PutWindowTilemap(3);
+    PutWindowTilemap(4);
+    PutWindowTilemap(5);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_81332EC(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
+{
+    AddTextPrinterParametrized2(windowId, fontId, x, y, letterSpacing, lineSpacing, &gUnknown_8463184[colorIdx], speed, str);
+}
+
+void sub_8133354(u8 windowId)
+{
+    SetWindowBorderStyle(windowId, FALSE, 0x5B, 0x0E);
+}
+
+void sub_8133368(u8 windowId)
+{
+    SetWindowBorderStyle(windowId, FALSE, 0x78, 0x0D);
+}
+
+void sub_813337C(u8 taskId, u8 windowId, const u8 * str, TaskFunc func)
+{
+    DisplayMessageAndContinueTask(taskId, 6, 0x64, 0x0B, windowId, GetTextSpeedSetting(), str, func);
+    schedule_bg_copy_tilemap_to_vram(1);
+}
+
+void sub_81333C4(void)
+{
+    u32 distance = 72 - GetStringWidth(1, gUnknown_84166D3, 0);
+    box_print(3, 1, distance / 2, 1, &gUnknown_8463184[0], 0, gUnknown_84166D3);
+}
+
+void sub_8133404(void)
+{
+    sub_8107D68(4, 19, 0, 0);
+    sub_8107D68(4, 20, 0, 12);
+    sub_8107D68(4, 21, 0, 24);
+    sub_8107D68(4, 22, 0, 36);
+    CopyWindowToVram(4, 2);
+}
+
+void sub_8133444(u16 itemId)
+{
+    u8 i;
+    u16 move;
+    const u8 * str;
+
+    FillWindowPixelRect(5, 0, 0, 0, 40, 48);
+    if (itemId == ITEM_NONE)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            sub_81332EC(5, 3, gUnknown_8416213, 7, 12 * i, 0, 0, 0xFF, 3);
+        }
+        CopyWindowToVram(5, 2);
+    }
+    else
+    {
+        move = ItemIdToBattleMoveId(itemId);
+        sub_8107D68(5, gBattleMoves[move].type + 1, 0, 0);
+        if (gBattleMoves[move].power < 2)
+            str = gUnknown_8416213;
+        else
+        {
+            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            str = gStringVar1;
+        }
+        sub_81332EC(5, 3, str, 7, 12, 0, 0, 0xFF, 3);
+        if (gBattleMoves[move].accuracy == 0)
+            str = gUnknown_8416213;
+        else
+        {
+            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            str = gStringVar1;
+        }
+        sub_81332EC(5, 3, str, 7, 24, 0, 0, 0xFF, 3);
+        ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        sub_81332EC(5, 3, gStringVar1, 7, 36, 0, 0, 0xFF, 3);
+        CopyWindowToVram(5, 2);
+    }
+}
+
+void sub_81335B0(u8 windowId, u8 x, u8 y)
+{
+    BlitBitmapToWindow(windowId, gUnknown_8E99118, x, y, 16, 12);
+}
+
+void sub_81335E0(void)
+{
+    PrintMoneyAmountInMoneyBoxWithBorder(8, 0x78, 0xD, GetMoney(&gSaveBlock1Ptr->money));
+}
+
+void sub_8133604(u8 taskId, const TaskFunc *ptrs)
+{
+    sub_80BF5D0(taskId, &gUnknown_84631E0, 2, 0, 2, 0x5B, 0x0E, ptrs);
+}
+
+u8 sub_8133630(u8 * a0, u8 a1)
+{
+    if (*a0 == 0xFF)
+    {
+        *a0 = AddWindow(&gUnknown_84631E8[a1]);
+        sub_8133354(*a0);
+        schedule_bg_copy_tilemap_to_vram(0);
+    }
+    return *a0;
+}
+
+void sub_8133664(u8 * a0)
+{
+    sub_810F4D8(*a0, FALSE);
+    ClearWindowTilemap(*a0);
+    RemoveWindow(*a0);
+    schedule_bg_copy_tilemap_to_vram(0);
+    *a0 = 0xFF;
+}
+
+u8 sub_813368C(u16 itemId)
+{
+    u8 spriteId = CreateSprite(&gUnknown_8463220, 0x29, 0x2E, 0);
+    u8 r5;
+    if (itemId == ITEM_NONE)
+    {
+        sub_8133790(&gSprites[spriteId], 0xFF);
+        return spriteId;
+    }
+    else
+    {
+        r5 = itemId - 33;
+        sub_8133714(&gSprites[spriteId], r5);
+        sub_8133730(gBattleMoves[ItemIdToBattleMoveId(itemId)].type);
+        sub_8133790(&gSprites[spriteId], r5);
+        return spriteId;
+    }
+}
+
+void sub_8133714(struct Sprite * sprite, u8 idx)
+{
+    if (idx >= 50)
+        StartSpriteAnim(sprite, 1);
+    else
+        StartSpriteAnim(sprite, 0);
+}
+
+void sub_8133730(u8 type)
+{
+    u8 palIndex = IndexOfSpritePaletteTag(400) << 4;
+    LoadPalette(gUnknown_203B12C + gUnknown_8463238[type], 0x100 | palIndex, 0x20);
+    if (gUnknown_203B10C.unk_04 == 4)
+    {
+        BlendPalettes(1 << (0x10 + palIndex), 4, RGB_BLACK);
+    }
+}
+
+void sub_8133790(struct Sprite * sprite, u8 var)
+{
+    s32 x, y;
+    if (var == 0xFF)
+    {
+        x = 0x1B;
+        y = 0x36;
+        sprite->pos2.y = 0x14;
+    }
+    else
+    {
+        if (var >= 50)
+            var -= 50;
+        else
+            var += 8;
+        x = 0x29 - (((0xE00 * var) / 58) >> 8);
+        y = 0x2E + (((0x800 * var) / 58) >> 8);
+    }
+    sprite->pos1.x = x;
+    sprite->pos1.y = y;
+}
+
+void sub_81337E4(u8 spriteId, u16 itemId)
+{
+    gSprites[spriteId].data[0] = itemId;
+    gSprites[spriteId].data[1] = 0;
+    gSprites[spriteId].callback = sub_8133810;
+}
+
+void sub_8133810(struct Sprite * sprite)
+{
+    switch (sprite->data[1])
+    {
+    case 0:
+        if (sprite->pos2.y >= 20)
+        {
+            if (sprite->data[0] != ITEM_NONE)
+            {
+                sprite->data[1]++;
+                sub_8133730(gBattleMoves[ItemIdToBattleMoveId(sprite->data[0])].type);
+                sprite->data[0] -= ITEM_TM01;
+                sub_8133714(sprite, sprite->data[0]);
+                sub_8133790(sprite, sprite->data[0]);
+            }
+            else
+                sprite->callback = SpriteCallbackDummy;
+        }
+        else
+        {
+            sprite->pos2.y += 10;
+        }
+        break;
+    case 1:
+        if (sprite->pos2.y <= 0)
+            sprite->callback = SpriteCallbackDummy;
+        else
+            sprite->pos2.y -= 10;
+    }
+}
+
+void sub_81338A8(void)
+{
+    struct SpritePalette spritePalette;
+
+    gUnknown_203B12C = Alloc(0x110 * sizeof(u16));
+    LZDecompressWram(gUnknown_8E84F20, gUnknown_203B12C);
+    LZDecompressWram(gUnknown_8E85068, gUnknown_203B12C + 0x100);
+    spritePalette.data = gUnknown_203B12C + 0x110;
+    spritePalette.tag = 400;
+    LoadSpritePalette(&spritePalette);
 }

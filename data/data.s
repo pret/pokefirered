@@ -918,4 +918,4 @@ gUnknown_826D374:: @ 826D374
 	.4byte sub_8058754
 
 gUnknown_826D37C:: @ 826D37C
-	.incbin "baserom.gba", 0x26D37C, 0x67E84
+	.incbin "baserom.gba", 0x26D37C, 0x67718

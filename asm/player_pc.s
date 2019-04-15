@@ -1174,7 +1174,7 @@ _080EBFB6:
 	ldrb r0, [r4, 0x16]
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	mov r1, r8
@@ -1288,7 +1288,7 @@ sub_80EC094: @ 80EC094
 	ldrb r0, [r4, 0x16]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	bl sub_810EDB0
@@ -1852,14 +1852,14 @@ sub_80EC520: @ 80EC520
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080EC534 @ =gUnknown_841632A
+	ldr r2, _080EC534 @ =gText_ThereIsNoPokemon
 	ldr r3, _080EC538 @ =sub_80EC574
 	movs r1, 0x2
 	bl DisplayItemMessageOnField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC534: .4byte gUnknown_841632A
+_080EC534: .4byte gText_ThereIsNoPokemon
 _080EC538: .4byte sub_80EC574
 	thumb_func_end sub_80EC520
 

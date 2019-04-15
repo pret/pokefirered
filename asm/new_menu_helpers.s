@@ -2049,14 +2049,14 @@ _080F77A4:
 	thumb_func_start sub_80F77B8
 sub_80F77B8: @ 80F77B8
 	push {lr}
-	ldr r0, _080F77C8 @ =gUnknown_841F408
+	ldr r0, _080F77C8 @ =gTMCaseMainWindowPalette
 	movs r1, 0xE0
 	movs r2, 0x14
 	bl LoadPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F77C8: .4byte gUnknown_841F408
+_080F77C8: .4byte gTMCaseMainWindowPalette
 	thumb_func_end sub_80F77B8
 
 	thumb_func_start Menu_LoadStdPalAt
@@ -2065,21 +2065,21 @@ Menu_LoadStdPalAt: @ 80F77CC
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _080F77E0 @ =gUnknown_841F408
+	ldr r0, _080F77E0 @ =gTMCaseMainWindowPalette
 	movs r2, 0x14
 	bl LoadPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F77E0: .4byte gUnknown_841F408
+_080F77E0: .4byte gTMCaseMainWindowPalette
 	thumb_func_end Menu_LoadStdPalAt
 
 	thumb_func_start sub_80F77E4
 sub_80F77E4: @ 80F77E4
-	ldr r0, _080F77E8 @ =gUnknown_841F408
+	ldr r0, _080F77E8 @ =gTMCaseMainWindowPalette
 	bx lr
 	.align 2, 0
-_080F77E8: .4byte gUnknown_841F408
+_080F77E8: .4byte gTMCaseMainWindowPalette
 	thumb_func_end sub_80F77E4
 
 	thumb_func_start sub_80F77EC
@@ -2091,14 +2091,14 @@ sub_80F77EC: @ 80F77EC
 	bls _080F77F8
 	movs r1, 0
 _080F77F8:
-	ldr r0, _080F7804 @ =gUnknown_841F408
+	ldr r0, _080F7804 @ =gTMCaseMainWindowPalette
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F7804: .4byte gUnknown_841F408
+_080F7804: .4byte gTMCaseMainWindowPalette
 	thumb_func_end sub_80F77EC
 
 	thumb_func_start DisplayItemMessageOnField

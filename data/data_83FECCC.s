@@ -734,7 +734,7 @@ gUnknown_8416190:: @ 8416190
 gUnknown_8416195::
 	.string "どこへ とびますか?$"
 
-gUnknown_84161A0::
+gOtherText_Use::
 	.string "USE$"
 
 gUnknown_84161A4::
@@ -743,7 +743,7 @@ gUnknown_84161A4::
 gUnknown_84161A9::
 	.string "REGISTER$"
 
-gUnknown_84161B2::
+gOtherText_Give::
 	.string "GIVE$"
 
 gUnknown_84161B7::
@@ -755,7 +755,7 @@ gUnknown_84161BC::
 gFameCheckerText_Cancel:: @ 84161C1
 	.string "CANCEL$"
 
-gUnknown_84161C8:: @ 84161C8
+gOtherText_Exit:: @ 84161C8
 	.string "EXIT$"
 
 gUnknown_84161CD:: @ 84161CD
@@ -803,7 +803,7 @@ gUnknown_841620E:: @ 841620E
 gUnknown_8416210:: @ 8416210
 	.string "--$"
 
-gUnknown_8416213:: @ 8416213
+gText_ThreeHyphens:: @ 8416213
 	.string "---$"
 
 gUnknown_8416217:: @ 8416217
@@ -818,7 +818,7 @@ gUnknown_8416221:: @ 8416221
 gUnknown_8416223:: @ 8416223
 	.string "{UNKNOWN_F9 0x05}$"
 
-gUnknown_8416226:: @ 8416226
+gOtherText_UnkF9_08_Clear_01:: @ 8416226
 	.string "{UNKNOWN_F9 0x08}{CLEAR 0x01}$"
 
 gUnknown_841622C::
@@ -872,7 +872,7 @@ gUnknown_84162A2::
 gUnknown_84162A9:: @ 84162A9
 	.string "{STR_VAR_1}/{STR_VAR_2}\nBALLS  {STR_VAR_3}$"
 
-gUnknown_84162B9:: @ 84162B9
+gText_TimesStrVar1:: @ 84162B9
 	.string "×{STR_VAR_1}$"
 
 gUnknown_84162BD:: @ 84162BD
@@ -890,20 +890,21 @@ gUnknown_84162F5:: @ 84162F5
 gUnknown_84162FF:: @ 84162FF
 	.incbin "baserom.gba", 0x4162FF, 0x2
 
-gUnknown_8416301:: @ 8416301
-	.incbin "baserom.gba", 0x416301, 0xE
+gText_IsSelected:: @ 8416301
+	.string " is\nselected.$"
 
 gUnknown_841630F:: @ 841630F
 	.incbin "baserom.gba", 0x41630F, 0x1B
 
-gUnknown_841632A:: @ 841632A
-	.incbin "baserom.gba", 0x41632A, 0x15
+gText_ThereIsNoPokemon:: @ 841632A
+	.string "There is no\n"
+	.string "POKéMON.$"
 
 gUnknown_841633F:: @ 841633F
 	.incbin "baserom.gba", 0x41633F, 0x1F
 
-gUnknown_841635E:: @ 841635E
-	.incbin "baserom.gba", 0x41635E, 0x16
+gText_ItemCantBeHeld:: @ 841635E
+	.string "The {STR_VAR_1} can’t be held.$"
 
 gUnknown_8416374:: @ 8416374
 	.incbin "baserom.gba", 0x416374, 0x1B
@@ -974,20 +975,24 @@ gUnknown_8416690:: @ 8416690
 gUnknown_84166A7:: @ 84166A7
 	.incbin "baserom.gba", 0x4166A7, 0x2C
 
-gUnknown_84166D3:: @ 84166D3
-	.incbin "baserom.gba", 0x4166D3, 0x8
+gText_TMCase:: @ 84166D3
+	.string "TM CASE$"
 
-gUnknown_84166DB:: @ 84166DB
-	.incbin "baserom.gba", 0x4166DB, 0x6
+gText_Close:: @ 84166DB
+	.string "CLOSE$"
 
-gUnknown_84166E1:: @ 84166E1
-	.incbin "baserom.gba", 0x4166E1, 0x1E
+gText_TMCaseWillBePutAway:: @ 84166E1
+	.string "The TM CASE will be\n"
+	.string "put away.$"
 
-gUnknown_84166FF:: @ 84166FF
-	.incbin "baserom.gba", 0x4166FF, 0x4
+gText_FontSize0:: @ 84166FF
+	.string "{SIZE 0}$"
 
-gUnknown_8416703:: @ 8416703
-	.incbin "baserom.gba", 0x416703, 0x7
+gText_FontSize2:: @ 8416703
+	.string "{SIZE 2}$"
+
+gUnknown_8416707:: @ 8416707
+	.string "  $"
 
 gUnknown_841670A:: @ 841670A
 	.incbin "baserom.gba", 0x41670A, 0xC
@@ -1019,16 +1024,19 @@ gUnknown_8416861:: @ 8416861
 gUnknown_841689E:: @ 841689E
 	.incbin "baserom.gba", 0x41689E, 0x53
 
-gUnknown_84168F1:: @ 84168F1
-	.incbin "baserom.gba", 0x4168F1, 0x20
+gText_OhNoICantBuyThat:: @ 84168F1
+	.string "{STR_VAR_1}? Oh, no.\n"
+	.string "I can’t buy that.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416911:: @ 8416911
-	.incbin "baserom.gba", 0x416911, 0x25
+gText_HowManyWouldYouLikeToSell:: @ 8416911
+	.string "{STR_VAR_1}?\n"
+	.string "How many would you like to sell?$"
 
-gUnknown_8416936:: @ 8416936
-	.incbin "baserom.gba", 0x416936, 0x23
+gText_ICanPayThisMuch_WouldThatBeOkay:: @ 8416936
+	.string "I can pay ¥{STR_VAR_3}.\n"
+	.string "Would that be okay?$"
 
-gUnknown_8416959:: @ 8416959
+gText_TurnedOverItemsWorthYen:: @ 8416959
 	.incbin "baserom.gba", 0x416959, 0x21
 
 gText_PokedollarVar1:: @ 841697A
@@ -1894,13 +1902,211 @@ gUnknown_841B779:: @ 841B779
 	.incbin "baserom.gba", 0x41B779, 0xC4
 
 gUnknown_841B83D:: @ 841B83D
-	.incbin "baserom.gba", 0x41B83D, 0xD4A
+	.string "Hey, all you TRAINERS out there!\n"
+	.string "HELLO, TRAINERS!\p"
+	.string "……… ……… ………\p"
+	.string "Come on, let me hear you!\n"
+	.string "HELLO, TRAINERS!\l"
+	.string "It’s me, the POKé DUDE!\p"
+	.string "$"
 
-gUnknown_841C587:: @ 841C587
-	.incbin "baserom.gba", 0x41C587, 0x10C
+gUnknown_841B8BF:: @ 841B8BF
+	.string "Today, the POKé DUDE’s here to\n"
+	.string "tell you about how you can battle\l"
+	.string "POKéMON!\p"
+	.string "Say you’re out for a stroll when,\n"
+	.string "suddenly, a wild POKéMON appears!\p"
+	.string "It’s up to you to smartly use your\n"
+	.string "POKéMON and their moves to reduce\l"
+	.string "the opponent’s HP to nothing, and\l"
+	.string "claim victory!\p"
+	.string "I’ll show you how to do that in\n"
+	.string "person and for sure!\p"
+	.string "All righty, here goes!\p"
+	.string "Keep your eyes glued to the super\n"
+	.string "POKé DUDE SHOW!$"
 
-gUnknown_841C693:: @ 841C693
-	.incbin "baserom.gba", 0x41C693, 0x4A9
+gUnknown_841BA41:: @ 841BA41
+	.string "Well, did you get that?\p"
+	.string "Even if your own POKéMON’s HP\n"
+	.string "falls to zero, and it becomes\l"
+	.string "unable to battle, not to worry!\p"
+	.string "Just take it to any POKéMON\n"
+	.string "CENTER and heal it!\p"
+	.string "All righty, be seeing you!\p"
+	.string "Remember, TRAINERS, a good deed\n"
+	.string "a day brings happiness to stay!$"
+
+gUnknown_841BB40:: @ 841BB40
+	.string "Today, the POKé DUDE’s here to\n"
+	.string "tell you about status problems!\p"
+	.string "Status problems include poisoning,\n"
+	.string "paralysis, sleep, burn…\p"
+	.string "There are a couple others, but\n"
+	.string "they really are trouble.\p"
+	.string "Get any one, and your POKéMON\n"
+	.string "may become useless in battle.\p"
+	.string "You know, it hurts the POKé DUDE\n"
+	.string "to see a POKéMON suffer…\p"
+	.string "So, what should you do if your\n"
+	.string "POKéMON gets a status problem?\p"
+	.string "Well, you’ve got me to show you!\p"
+	.string "All righty, here goes!\p"
+	.string "Keep your eyes glued to the super\n"
+	.string "POKé DUDE SHOW!$"
+
+gUnknown_841BD10:: @ 841BD10
+	.string "Poisoning or paralysis don’t go\n"
+	.string "away after a battle.\p"
+	.string "If a POKéMON is poisoned, it loses\n"
+	.string "HP even while you’re walking.\p"
+	.string "You should heal POKéMON of these\n"
+	.string "kinds of problems right away.\p"
+	.string "Use an item, or try to get to a\n"
+	.string "POKéMON CENTER for healing.\p"
+	.string "That wasn’t hard, was it?\n"
+	.string "All righty, be seeing you!\p"
+	.string "Remember, TRAINERS, a good deed\n"
+	.string "a day brings happiness to stay!$"
+
+gUnknown_841BE76:: @ 841BE76
+	.string "Does everyone know about type\n"
+	.string "matchups?\p"
+	.string "POKéMON and their moves all\n"
+	.string "belong to certain types.\p"
+	.string "For example, there are such types\n"
+	.string "as GRASS and WATER.\p"
+	.string "You need to consider the type of\n"
+	.string "the move used to attack…\p"
+	.string "And, the type of the POKéMON that\n"
+	.string "is hit by that attack.\p"
+	.string "Depending on how those two types\n"
+	.string "match up, the damage can change.\p"
+	.string "You see, it depends on whether\n"
+	.string "the type matchup is good or bad.\p"
+	.string "If you don’t know how matchups\n"
+	.string "work, battles will be tough.\p"
+	.string "So, let me demonstrate exactly\n"
+	.string "what I mean.\p"
+	.string "All righty, here goes!\p"
+	.string "Keep your eyes glued to the super\n"
+	.string "POKé DUDE SHOW!$"
+
+gUnknown_841C0AF:: @ 841C0AF
+	.string "Is it possible to launch an attack\n"
+	.string "that will inflict heavy damage?\p"
+	.string "Does the opposing POKéMON pose\n"
+	.string "a threat to your POKéMON?\p"
+	.string "Is there any chance that it may\n"
+	.string "have disastrously tough moves?\p"
+	.string "Watch the type matchups to gain\n"
+	.string "the upper hand!\p"
+	.string "All righty, be seeing you!\p"
+	.string "Oh, for the COOL-type POKé DUDE,\n"
+	.string "AWESOME-type kids like you match\l"
+	.string "up perfectly!\p"
+	.string "Remember, a good deed a day\n"
+	.string "brings happiness to stay!$"
+
+gUnknown_841C23B:: @ 841C23B
+	.string "Today, the POKé DUDE’s going to\n"
+	.string "show you how to catch POKéMON!\p"
+	.string "Just imagine… A groovy POKéMON\n"
+	.string "suddenly appearing in the wild!\p"
+	.string "Oh, you want it!\n"
+	.string "You just can’t help it!\p"
+	.string "Oh, you have to catch it!\n"
+	.string "You gotta have it!\p"
+	.string "Let me show you how you can make\n"
+	.string "it happen!\p"
+	.string "All righty, here goes!\p"
+	.string "Keep your eyes glued to the super\n"
+	.string "POKé DUDE SHOW!$"
+
+gUnknown_841C384:: @ 841C384
+	.string "If your first POKé BALL fails to\n"
+	.string "catch the POKéMON, don’t give up!\p"
+	.string "Keep throwing POKé BALLS…\n"
+	.string "It’s bound to work sometime!\p"
+	.string "All righty, be seeing you!\p"
+	.string "Remember, TRAINERS, a good deed\n"
+	.string "a day brings happiness to stay!$"
+
+gUnknown_841C459:: @ 841C459
+	.string "Hey, everyone!\n"
+	.string "Do you all have TMs?\p"
+	.string "A TM, Technical Machine, is an\n"
+	.string "amazingly great item!\p"
+	.string "It teaches POKéMON a move that\n"
+	.string "it may not learn when leveling up!\p"
+	.string "Isn’t that just great? What a\n"
+	.string "convenient world we live in!\p"
+	.string "Open the TM CASE and check out\n"
+	.string "the TMs you have.\p"
+	.string "You can check them out in detail,\n"
+	.string "too.$"
+
+gPokeDudeText_TMTypes:: @ 841C587
+	.string "POKé DUDE: NORMAL, WATER, GRASS…\n"
+	.string "TMs also come in types.\p"
+	.string "Check the type and teach it to\n"
+	.string "a POKéMON that matches up well.\p"
+	.string "For example, WATER PULSE is\n"
+	.string "suitable for WATER-type POKéMON.\p"
+	.string "BULLET SEED is a move that most\n"
+	.string "GRASS-type POKéMON can learn.\p"
+	.string "There’s one other thing!$"
+
+gPokeDudeText_ReadTMDescription:: @ 841C693
+	.string "Don’t just look at the type, read\n"
+	.string "the description, too.\p"
+	.string "It will contain hints about what\n"
+	.string "POKéMON might learn the move.\p"
+	.string "For example, take a move like\n"
+	.string "FOCUS PUNCH.\p"
+	.string "It doesn’t sound like anything a\n"
+	.string "bird or fish POKéMON can learn.\p"
+	.string "So, try using it on POKéMON with\n"
+	.string "arms that can throw punches!$"
+
+gUnknown_841C7B4:: @ 841C7B4
+	.string "Wow, I talked a lot today!\n"
+	.string "All righty, be seeing you!\p"
+	.string "Remember, TRAINERS, a good deed\n"
+	.string "a day brings happiness to stay!$"
+
+gUnknown_841C82A:: @ 841C82A
+	.string "A TRAINER’s BAG has a bunch of\n"
+	.string "nifty, convenient features!\p"
+	.string "Take stuff in the KEY ITEMS\n"
+	.string "POCKET, for instance.\p"
+	.string "You can use a key item without\n"
+	.string "opening the BAG every time.\p"
+	.string "For example, let’s pretend I have\n"
+	.string "a TEACHY TV in my BAG.\p"
+	.string "I can register it for instant use,\n"
+	.string "and I’ll show you how!\p"
+	.string "All righty, here goes!\p"
+	.string "Keep your eyes glued to the sorta\n"
+	.string "super POKé DUDE SHOW!$"
+
+gUnknown_841C994:: @ 841C994
+	.string "And now, your TEACHY TV is\n"
+	.string "registered.\p"
+	.string "How do you use it?\n"
+	.string "Well, here’s how it works.\p"
+	.string "Once an item in the KEY ITEMS\n"
+	.string "POKCET is registered, you can use\l"
+	.string "it by pressing SELECT.\p"
+	.string "So, you’ve given yourself\n"
+	.string "one-touch access to TEACHY TV.\p"
+	.string "All it takes for you to see me is\n"
+	.string "pressing one button!\p"
+	.string "That kind of attention is a little\n"
+	.string "embarrassing!\p"
+	.string "All righty, be seeing you!\p"
+	.string "Remember, TRAINERS, a good deed\n"
+	.string "a day brings happiness to stay!$"
 
 gUnknown_841CB3C:: @ 841CB3C
 	.incbin "baserom.gba", 0x41CB3C, 0x5
@@ -2407,8 +2613,8 @@ gUnknown_841EF10:: @ 841EF10
 gUnknown_841F1C8:: @ 841F1C8
 	.incbin "baserom.gba", 0x41F1C8, 0x240
 
-gUnknown_841F408:: @ 841F408
-	.incbin "baserom.gba", 0x41F408, 0x20
+gTMCaseMainWindowPalette:: @ 841F408
+	.incbin "graphics/tm_case/unk_841F408.gbapal"
 
 gUnknown_841F428:: @ 841F428
 	.incbin "baserom.gba", 0x41F428, 0x4

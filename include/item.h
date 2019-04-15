@@ -67,8 +67,8 @@ void sub_809A824(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 amount);
 
 void sub_809A5E4(struct BagPocket *);
-u16 sub_809A798(u8 a0, u16 a1);
-u16 sub_809A7B4(u8 a0, u16 a1);
+u16 BagGetItemIdByPocketPosition(u8 a0, u16 a1);
+u16 BagGetQuantityByPocketPosition(u8 a0, u16 a1);
 bool8 itemid_is_unique(u16 itemId);
 void sub_809A584(struct ItemSlot * slots, u8 capacity);
 

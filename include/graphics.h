@@ -156,7 +156,7 @@ extern const u32 gUnknown_8E84A24[];
 extern const u32 gUnknown_8E84B70[];
 extern const u32 gUnknown_8E84CB0[];
 extern const u32 gUnknown_8E84D20[];
-extern const u32 gUnknown_8E84D90[];
+extern const u32 gTMCase_TMSpriteGfx[];
 extern const u32 gUnknown_8E84F20[];
 extern const u32 gUnknown_8E85068[];
 extern const u8 gUnknown_8E99118[];

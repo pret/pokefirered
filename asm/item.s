@@ -1404,8 +1404,8 @@ _0809A786:
 	bx r0
 	thumb_func_end sub_809A720
 
-	thumb_func_start sub_809A798
-sub_809A798: @ 809A798
+	thumb_func_start BagGetItemIdByPocketPosition
+BagGetItemIdByPocketPosition: @ 809A798
 	lsls r0, 24
 	lsls r1, 16
 	ldr r2, _0809A7B0 @ =gBagPockets
@@ -1419,10 +1419,10 @@ sub_809A798: @ 809A798
 	bx lr
 	.align 2, 0
 _0809A7B0: .4byte gBagPockets
-	thumb_func_end sub_809A798
+	thumb_func_end BagGetItemIdByPocketPosition
 
-	thumb_func_start sub_809A7B4
-sub_809A7B4: @ 809A7B4
+	thumb_func_start BagGetQuantityByPocketPosition
+BagGetQuantityByPocketPosition: @ 809A7B4
 	push {lr}
 	lsls r0, 24
 	lsls r1, 16
@@ -1441,7 +1441,7 @@ sub_809A7B4: @ 809A7B4
 	bx r1
 	.align 2, 0
 _0809A7D8: .4byte gBagPockets
-	thumb_func_end sub_809A7B4
+	thumb_func_end BagGetQuantityByPocketPosition
 
 	thumb_func_start sub_809A7DC
 sub_809A7DC: @ 809A7DC

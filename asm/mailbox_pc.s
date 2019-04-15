@@ -176,7 +176,7 @@ sub_810EC98: @ 810EC98
 	ldr r7, _0810ED50 @ =gUnknown_203ADE0
 	ldr r0, _0810ED54 @ =gFameCheckerText_Cancel
 	mov r12, r0
-	ldr r5, _0810ED58 @ =gUnknown_3005E70
+	ldr r5, _0810ED58 @ =gMultiuseListMenuTemplate
 	ldr r1, _0810ED5C @ =gUnknown_203ADDC
 	mov r8, r1
 	ldrb r0, [r6, 0x5]
@@ -263,7 +263,7 @@ _0810ECCE:
 	.align 2, 0
 _0810ED50: .4byte gUnknown_203ADE0
 _0810ED54: .4byte gFameCheckerText_Cancel
-_0810ED58: .4byte gUnknown_3005E70
+_0810ED58: .4byte gMultiuseListMenuTemplate
 _0810ED5C: .4byte gUnknown_203ADDC
 _0810ED60: .4byte gUnknown_8454003
 _0810ED64: .4byte sub_810ED6C

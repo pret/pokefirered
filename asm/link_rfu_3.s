@@ -402,7 +402,7 @@ _08115B5C:
 	ldrb r0, [r5, 0xF]
 	movs r1, 0
 	bl DrawStdWindowFrame
-	ldr r0, _08115C58 @ =gUnknown_3005E70
+	ldr r0, _08115C58 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _08115C5C @ =gUnknown_8456D34
 	ldm r1!, {r3,r6,r7}
@@ -434,7 +434,7 @@ _08115C48: .4byte gUnknown_8456CD0
 _08115C4C: .4byte gUnknown_8456CFC
 _08115C50: .4byte gUnknown_8456D04
 _08115C54: .4byte gUnknown_845747C
-_08115C58: .4byte gUnknown_3005E70
+_08115C58: .4byte gMultiuseListMenuTemplate
 _08115C5C: .4byte gUnknown_8456D34
 _08115C60:
 	ldr r0, _08115C98 @ =gStringVar1
@@ -1139,7 +1139,7 @@ sub_81161E4: @ 81161E4
 	ldrb r0, [r4, 0x12]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r4, 0x10]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0xF]
@@ -1920,7 +1920,7 @@ _08116838:
 	ldrb r0, [r6, 0xB]
 	movs r1, 0
 	bl DrawStdWindowFrame
-	ldr r0, _081168FC @ =gUnknown_3005E70
+	ldr r0, _081168FC @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _08116900 @ =gUnknown_8456DDC
 	ldm r1!, {r3,r5,r7}
@@ -1955,7 +1955,7 @@ _081168EC: .4byte gUnknown_8456CD0
 _081168F0: .4byte gUnknown_8456D4C
 _081168F4: .4byte gUnknown_8456D54
 _081168F8: .4byte gUnknown_8458FC8
-_081168FC: .4byte gUnknown_3005E70
+_081168FC: .4byte gMultiuseListMenuTemplate
 _08116900: .4byte gUnknown_8456DDC
 _08116904:
 	bl sub_8116FE4
@@ -2322,7 +2322,7 @@ _08116C10:
 	ldrb r0, [r6, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r6, 0xC]
 	bl ClearWindowTilemap
 	ldrb r0, [r6, 0xB]
@@ -4068,7 +4068,7 @@ _08117AB8:
 	strb r0, [r5, 0xF]
 	ldrb r0, [r5, 0xF]
 	bl sub_814240C
-	ldr r0, _08117B74 @ =gUnknown_3005E70
+	ldr r0, _08117B74 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _08117B78 @ =gUnknown_8456D34
 	ldm r1!, {r3,r4,r6}
@@ -4089,7 +4089,7 @@ _08117AB8:
 	.align 2, 0
 _08117B6C: .4byte gUnknown_8456CFC
 _08117B70: .4byte 0x0000ffff
-_08117B74: .4byte gUnknown_3005E70
+_08117B74: .4byte gMultiuseListMenuTemplate
 _08117B78: .4byte gUnknown_8456D34
 _08117B7C:
 	ldr r0, _08117B9C @ =gStringVar1
@@ -4398,7 +4398,7 @@ _08117DEE:
 	ldrb r0, [r5, 0x12]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xF]
@@ -4457,7 +4457,7 @@ _08117E80:
 	ldrb r0, [r5, 0x12]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xF]
@@ -4624,7 +4624,7 @@ _08117FC0:
 	strb r0, [r5, 0xD]
 	ldrb r0, [r5, 0xB]
 	bl sub_814240C
-	ldr r0, _08118068 @ =gUnknown_3005E70
+	ldr r0, _08118068 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _0811806C @ =gUnknown_8456DDC
 	ldm r1!, {r3,r6,r7}
@@ -4659,7 +4659,7 @@ _08117FC0:
 _0811805C: .4byte gUnknown_8456D4C
 _08118060: .4byte 0x0000ffff
 _08118064: .4byte gUnknown_8456D54
-_08118068: .4byte gUnknown_3005E70
+_08118068: .4byte gMultiuseListMenuTemplate
 _0811806C: .4byte gUnknown_8456DDC
 _08118070:
 	bl sub_8116FE4
@@ -4842,7 +4842,7 @@ _081181EC:
 	ldrb r0, [r5, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xD]
@@ -5042,7 +5042,7 @@ _08118380:
 	strb r0, [r5, 0xB]
 	ldrb r0, [r5, 0xB]
 	bl sub_814240C
-	ldr r0, _08118400 @ =gUnknown_3005E70
+	ldr r0, _08118400 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _08118404 @ =gUnknown_8456DDC
 	ldm r1!, {r3,r4,r6}
@@ -5066,7 +5066,7 @@ _081183EC:
 	.align 2, 0
 _081183F8: .4byte gUnknown_8456D4C
 _081183FC: .4byte 0x0000ffff
-_08118400: .4byte gUnknown_3005E70
+_08118400: .4byte gMultiuseListMenuTemplate
 _08118404: .4byte gUnknown_8456DDC
 _08118408:
 	bl sub_8116FE4
@@ -5242,7 +5242,7 @@ _08118564:
 	ldrb r0, [r5, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xB]
@@ -8689,7 +8689,7 @@ _0811A234:
 	ldrb r0, [r5]
 	movs r1, 0
 	bl DrawStdWindowFrame
-	ldr r0, _0811A270 @ =gUnknown_3005E70
+	ldr r0, _0811A270 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp, 0x1C]
 	ldm r1!, {r3,r4,r6}
@@ -8711,7 +8711,7 @@ _0811A234:
 	strb r0, [r7]
 	b _0811A2DA
 	.align 2, 0
-_0811A270: .4byte gUnknown_3005E70
+_0811A270: .4byte gMultiuseListMenuTemplate
 _0811A274:
 	mov r3, r9
 	ldrb r0, [r3]
@@ -8726,7 +8726,7 @@ _0811A274:
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -8747,7 +8747,7 @@ _0811A2B0:
 	ldrb r0, [r6]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -8795,7 +8795,7 @@ _0811A308:
 	ldrb r0, [r4]
 	movs r1, 0
 	bl DrawStdWindowFrame
-	ldr r0, _0811A354 @ =gUnknown_3005E70
+	ldr r0, _0811A354 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp, 0x20]
 	ldm r1!, {r3,r6,r7}
@@ -8818,7 +8818,7 @@ _0811A308:
 	b _0811A3E6
 	.align 2, 0
 _0811A350: .4byte gUnknown_8456F1C
-_0811A354: .4byte gUnknown_3005E70
+_0811A354: .4byte gMultiuseListMenuTemplate
 _0811A358:
 	ldrb r0, [r5]
 	bl ListMenuHandleInput
@@ -8842,7 +8842,7 @@ _0811A37E:
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -8867,7 +8867,7 @@ _0811A3AC:
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -9999,7 +9999,7 @@ _0811AC3C:
 	adds r0, r6, 0
 	movs r2, 0x44
 	adds r3, r5, 0
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0xB
 	mov r2, r8
 	muls r2, r0

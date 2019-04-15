@@ -2854,7 +2854,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsrs r0, 24
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldr r0, _080CBC28 @ =gUnknown_2039A14
 	ldr r0, [r0]
 	bl Free

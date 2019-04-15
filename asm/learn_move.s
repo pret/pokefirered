@@ -1373,7 +1373,7 @@ _080E51AA:
 	adds r2, r3
 	movs r0, 0xFE
 	str r0, [r2]
-	ldr r2, _080E51FC @ =gUnknown_3005E70
+	ldr r2, _080E51FC @ =gMultiuseListMenuTemplate
 	adds r1, r2, 0
 	ldr r0, _080E5200 @ =gUnknown_83FFA94
 	ldm r0!, {r3,r5,r6}
@@ -1397,7 +1397,7 @@ _080E51EC: .4byte gPlayerParty
 _080E51F0: .4byte gMoveNames
 _080E51F4: .4byte gStringVar1
 _080E51F8: .4byte gFameCheckerText_Cancel
-_080E51FC: .4byte gUnknown_3005E70
+_080E51FC: .4byte gMultiuseListMenuTemplate
 _080E5200: .4byte gUnknown_83FFA94
 	thumb_func_end sub_80E50CC
 
@@ -1523,7 +1523,7 @@ _080E52FA:
 	thumb_func_start sub_80E5300
 sub_80E5300: @ 80E5300
 	push {r4,lr}
-	ldr r0, _080E5330 @ =gUnknown_3005E70
+	ldr r0, _080E5330 @ =gMultiuseListMenuTemplate
 	ldr r4, _080E5334 @ =gUnknown_203AAB4
 	ldr r2, [r4]
 	ldr r3, _080E5338 @ =0x00000a68
@@ -1544,7 +1544,7 @@ sub_80E5300: @ 80E5300
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E5330: .4byte gUnknown_3005E70
+_080E5330: .4byte gMultiuseListMenuTemplate
 _080E5334: .4byte gUnknown_203AAB4
 _080E5338: .4byte 0x00000a68
 _080E533C: .4byte 0x00000263
@@ -1568,11 +1568,11 @@ sub_80E5340: @ 80E5340
 	movs r0, 0x2
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8107D68
+	bl blit_move_info_icon
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0x1
 	bhi _080E5388
-	ldr r1, _080E5384 @ =gUnknown_8416213
+	ldr r1, _080E5384 @ =gText_ThreeHyphens
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -1583,7 +1583,7 @@ sub_80E5340: @ 80E5340
 	b _080E53A6
 	.align 2, 0
 _080E5380: .4byte gBattleMoves
-_080E5384: .4byte gUnknown_8416213
+_080E5384: .4byte gText_ThreeHyphens
 _080E5388:
 	ldrb r1, [r4, 0x1]
 	add r0, sp, 0x8
@@ -1608,7 +1608,7 @@ _080E53A6:
 	adds r4, r1, 0
 	cmp r2, 0
 	bne _080E53D4
-	ldr r1, _080E53D0 @ =gUnknown_8416213
+	ldr r1, _080E53D0 @ =gText_ThreeHyphens
 	str r2, [sp]
 	movs r0, 0x1
 	str r0, [sp, 0x4]
@@ -1619,7 +1619,7 @@ _080E53A6:
 	b _080E53F4
 	.align 2, 0
 _080E53CC: .4byte gBattleMoves
-_080E53D0: .4byte gUnknown_8416213
+_080E53D0: .4byte gText_ThreeHyphens
 _080E53D4:
 	ldrb r1, [r0, 0x3]
 	add r0, sp, 0x8
@@ -1680,27 +1680,27 @@ sub_80E5444: @ 80E5444
 	movs r1, 0x13
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0x1
 	movs r1, 0x14
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0x1
 	movs r1, 0x15
 	movs r2, 0
 	movs r3, 0x13
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x1
 	movs r3, 0x13
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0
 	movs r1, 0x17
 	movs r2, 0x1
 	movs r3, 0x22
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x1

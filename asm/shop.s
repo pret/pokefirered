@@ -477,7 +477,7 @@ _0809AE2C:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0809AE9C @ =gUnknown_3005E70
+	ldr r0, _0809AE9C @ =gMultiuseListMenuTemplate
 	movs r1, 0
 	movs r2, 0
 	bl ListMenuInit
@@ -510,7 +510,7 @@ _0809AE2C:
 _0809AE90: .4byte gMain
 _0809AE94: .4byte gUnknown_2039934
 _0809AE98: .4byte sub_809BBC0
-_0809AE9C: .4byte gUnknown_3005E70
+_0809AE9C: .4byte gMultiuseListMenuTemplate
 _0809AEA0: .4byte gTasks
 _0809AEA4: .4byte sub_809AE00
 _0809AEA8: .4byte sub_809ADE4
@@ -904,7 +904,7 @@ _0809B1F2:
 	movs r0, 0x2
 	negs r0, r0
 	str r0, [r1, 0x4]
-	ldr r5, _0809B2D4 @ =gUnknown_3005E70
+	ldr r5, _0809B2D4 @ =gMultiuseListMenuTemplate
 	str r2, [r5]
 	ldr r6, _0809B2D8 @ =gUnknown_2039934
 	ldrh r0, [r6, 0x10]
@@ -992,7 +992,7 @@ _0809B2BC:
 _0809B2C8: .4byte gUnknown_2039968
 _0809B2CC: .4byte gFameCheckerText_Cancel
 _0809B2D0: .4byte gUnknown_2039964
-_0809B2D4: .4byte gUnknown_3005E70
+_0809B2D4: .4byte gMultiuseListMenuTemplate
 _0809B2D8: .4byte gUnknown_2039934
 _0809B2DC: .4byte sub_809B320
 _0809B2E0: .4byte sub_809B408
@@ -1000,7 +1000,7 @@ _0809B2E4:
 	strh r0, [r5, 0xE]
 _0809B2E6:
 	ldr r0, _0809B2F8 @ =gUnknown_2039934
-	ldr r1, _0809B2FC @ =gUnknown_3005E70
+	ldr r1, _0809B2FC @ =gMultiuseListMenuTemplate
 	ldrh r1, [r1, 0xE]
 	strh r1, [r0, 0x12]
 	movs r0, 0x1
@@ -1010,7 +1010,7 @@ _0809B2F0:
 	bx r1
 	.align 2, 0
 _0809B2F8: .4byte gUnknown_2039934
-_0809B2FC: .4byte gUnknown_3005E70
+_0809B2FC: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_809B188
 
 	thumb_func_start sub_809B300
@@ -1233,7 +1233,7 @@ sub_809B494: @ 809B494
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r5, _0809B51C @ =gStringVar4
-	ldr r1, _0809B520 @ =gUnknown_8416226
+	ldr r1, _0809B520 @ =gOtherText_UnkF9_08_Clear_01
 	adds r0, r5, 0
 	bl StringCopy
 	adds r0, r5, 0
@@ -1279,10 +1279,10 @@ sub_809B494: @ 809B494
 _0809B514: .4byte gStringVar1
 _0809B518: .4byte 0xfffffee0
 _0809B51C: .4byte gStringVar4
-_0809B520: .4byte gUnknown_8416226
+_0809B520: .4byte gOtherText_UnkF9_08_Clear_01
 _0809B524: .4byte gMoveNames
 _0809B528:
-	ldr r2, _0809B564 @ =gUnknown_8416213
+	ldr r2, _0809B564 @ =gText_ThreeHyphens
 	movs r4, 0
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1312,7 +1312,7 @@ _0809B55C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B564: .4byte gUnknown_8416213
+_0809B564: .4byte gText_ThreeHyphens
 _0809B568: .4byte gUnknown_8416217
 	thumb_func_end sub_809B494
 
@@ -2119,7 +2119,7 @@ sub_809BB44: @ 809BB44
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0809BBB8 @ =gStringVar4
-	ldr r1, _0809BBBC @ =gUnknown_84162B9
+	ldr r1, _0809BBBC @ =gText_TimesStrVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0xA
@@ -2144,7 +2144,7 @@ _0809BBAC: .4byte gTasks+0x8
 _0809BBB0: .4byte gUnknown_2039934
 _0809BBB4: .4byte gStringVar1
 _0809BBB8: .4byte gStringVar4
-_0809BBBC: .4byte gUnknown_84162B9
+_0809BBBC: .4byte gText_TimesStrVar1
 	thumb_func_end sub_809BB44
 
 	thumb_func_start sub_809BBC0
@@ -2691,7 +2691,7 @@ sub_809C04C: @ 809C04C
 	ldrb r0, [r2, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	bl sub_809B604
 	ldr r0, _0809C090 @ =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2

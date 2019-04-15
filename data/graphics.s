@@ -13967,7 +13967,7 @@ gUnknown_8E84CB0:: @ 8E84CB0
 gUnknown_8E84D20:: @ 8E84D20
 	.incbin "graphics/tm_case/unk_8E84D20.gbapal.lz"
 	
-gUnknown_8E84D90:: @ 8E84D90
+gTMCase_TMSpriteGfx:: @ 8E84D90
 	.incbin "graphics/tm_case/unk_8E84D90.4bpp.lz"
 
 gUnknown_8E84F20:: @ 8E84F20

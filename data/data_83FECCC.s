@@ -755,64 +755,124 @@ gFameCheckerText_Cancel:: @ 84161C1
 	.string "CANCEL$"
 
 gUnknown_84161C8:: @ 84161C8
-	.incbin "baserom.gba", 0x4161C8, 0x5
+	.string "EXIT$"
 
 gUnknown_84161CD:: @ 84161CD
-	.incbin "baserom.gba", 0x4161CD, 0x22
+	.string "$"
+
+gUnknown_84161CE::
+	.string "キャンセル$"
+
+gUnknown_84161D4::
+	.string "ITEM$"
+
+gUnknown_84161D9::
+	.string "MAIL$"
+
+gUnknown_84161DE::
+	.string "TAKE$"
+
+gUnknown_84161E3::
+	.string "STORE$"
+
+gUnknown_84161E9::
+	.string "CHECK$"
 
 gUnknown_84161EF:: @ 84161EF
-	.incbin "baserom.gba", 0x4161EF, 0x13
+	.string "NONE$"
+
+gUnknown_84161F4::
+	.string "OPEN$"
+
+gUnknown_84161F9::
+	.string "DESELECT$"
 
 gUnknown_8416202:: @ 8416202
-	.incbin "baserom.gba", 0x416202, 0xA
+	.string "???$"
+
+gUnknown_8416206::
+	.string "?????$"
 
 gUnknown_841620C:: @ 841620C
-	.incbin "baserom.gba", 0x41620C, 0x2
+	.string "/$"
 
 gUnknown_841620E:: @ 841620E
-	.incbin "baserom.gba", 0x41620E, 0x2
+	.string "-$"
 
 gUnknown_8416210:: @ 8416210
-	.incbin "baserom.gba", 0x416210, 0x3
+	.string "--$"
 
 gUnknown_8416213:: @ 8416213
-	.incbin "baserom.gba", 0x416213, 0x4
+	.string "---$"
 
 gUnknown_8416217:: @ 8416217
-	.incbin "baserom.gba", 0x416217, 0x8
+	.string "-------$"
 
 gUnknown_841621F:: @ 841621F
-	.incbin "baserom.gba", 0x41621F, 0x2
+	.string "♂$"
 
 gUnknown_8416221:: @ 8416221
-	.incbin "baserom.gba", 0x416221, 0x2
+	.string "♀$"
 
 gUnknown_8416223:: @ 8416223
-	.incbin "baserom.gba", 0x416223, 0x3
+	.string "{UNKNOWN_F9 0x05}$"
 
 gUnknown_8416226:: @ 8416226
-	.incbin "baserom.gba", 0x416226, 0x12
+	.string "{UNKNOWN_F9 0x08}{CLEAR 0x01}$"
+
+gUnknown_841622C::
+	.string "{UNKNOWN_F9 0x04}$"
+
+gUnknown_841622F::
+	.string "{ESCAPE 0x03}$"
+
+gUnknown_8416233::
+	.string "{UNKNOWN_F9 0x07}{UNKNOWN_F9 0x08}$"
 
 gUnknown_8416238:: @ 8416238
-	.incbin "baserom.gba", 0x416238, 0x3
+	.string "{UNKNOWN_F9 0x06}$"
 
 gFameCheckerText_ListMenuCursor:: @ 841623B
 	.string "▶$"
 
 gUnknown_841623D:: @ 841623D
-	.incbin "baserom.gba", 0x41623D, 0x25
+	.string "YES\nNO$"
+
+gUnknown_8416244::
+	.string "Go back to the\nprevious menu.$"
 
 gUnknown_8416262:: @ 8416262
-	.incbin "baserom.gba", 0x416262, 0x23
+	.string "What would you like to do?$"
+
+gUnknown_841627D::
+	.string "POKéDEX$"
 
 gUnknown_8416285:: @ 8416285
-	.incbin "baserom.gba", 0x416285, 0x24
+	.string "BAG$"
+
+gUnknown_8416289::
+	.string "ポケナビ$"
+
+gUnknown_841628E::
+	.string "{PLAYER}$"
+
+gUnknown_8416291::
+	.string "SAVE$"
+
+gUnknown_8416296::
+	.string "OPTION$"
+
+gUnknown_841629D::
+	.string "EXIT$"
+
+gUnknown_84162A2::
+	.string "RETIRE$"
 
 gUnknown_84162A9:: @ 84162A9
-	.incbin "baserom.gba", 0x4162A9, 0x10
+	.string "{STR_VAR_1}/{STR_VAR_2}\nBALLS  {STR_VAR_3}$"
 
 gUnknown_84162B9:: @ 84162B9
-	.incbin "baserom.gba", 0x4162B9, 0x4
+	.string "×{STR_VAR_1}$"
 
 gUnknown_84162BD:: @ 84162BD
 	.string " BERRY$"

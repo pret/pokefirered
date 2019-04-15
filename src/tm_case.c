@@ -87,7 +87,7 @@ void sub_8132120(void);
 void sub_8132170(void);
 void sub_813226C(u8 taskId);
 void sub_81322D4(u8 taskId);
-void sub_8132414(u8 taskId);
+void SelectTMAction_FromFieldBag(u8 taskId);
 void sub_8132568(u8 taskId);
 void sub_81325F0(u8 taskId);
 void sub_813265C(u8 taskId);
@@ -98,7 +98,7 @@ void sub_8132780(u8 taskId);
 void sub_81327FC(u8 taskId);
 void sub_8132868(u8 taskId);
 void sub_81328B8(u8 taskId);
-void sub_8132908(u8 taskId);
+void SelectTMAction_FromSellMenu(u8 taskId);
 void sub_81329C4(u8 taskId);
 void sub_8132A34(u8 taskId);
 void sub_8132A48(u8 taskId);
@@ -186,9 +186,9 @@ const struct BgTemplate gUnknown_8463134[] = {
 };
 
 void (*const gUnknown_8463140[])(u8 taskId) = {
-    sub_8132414,
+    SelectTMAction_FromFieldBag,
     sub_8132868,
-    sub_8132908,
+    SelectTMAction_FromSellMenu,
     sub_81328B8
 };
 
@@ -801,7 +801,7 @@ void sub_81323E4(u8 taskId)
     gTasks[taskId].func = sub_81322D4;
 }
 
-void sub_8132414(u8 taskId)
+void SelectTMAction_FromFieldBag(u8 taskId)
 {
     u8 * strbuf;
     sub_8133368(2);
@@ -992,7 +992,7 @@ void sub_81328B8(u8 taskId)
     }
 }
 
-void sub_8132908(u8 taskId)
+void SelectTMAction_FromSellMenu(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 

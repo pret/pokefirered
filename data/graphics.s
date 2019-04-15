@@ -16072,7 +16072,10 @@ gUnknown_8E985D8:: @ 8E985D8
 	.incbin "baserom.gba", 0xE985D8, 0xB40 @UNKNOWN, FALSEPOSITIVE?
 
 gUnknown_8E99118:: @ 8E99118
-	.incbin "baserom.gba", 0xE99118, 0xE0 @UNKNOWN
+	.incbin "graphics/tm_case/unk_8E99118.4bpp"
+
+gUnknown_8E99198::
+	.incbin "baserom.gba", 0xE99198, 0x60 @UNKNOWN
 
 gUnknown_8E991F8:: @ 8E991F8
 	.incbin "baserom.gba", 0xE991F8, 0x674

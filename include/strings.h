@@ -92,4 +92,27 @@ extern const u8 gText_Coins[];
 extern const u8 gText_EggNickname[];
 extern const u8 gText_Pokemon[];
 
+extern const u8 gUnknown_84161A0[];
+extern const u8 gUnknown_84161B2[];
+extern const u8 gUnknown_84161C8[];
+extern const u8 gUnknown_8416213[];
+extern const u8 gUnknown_8416226[];
+extern const u8 gFameCheckerText_ListMenuCursor[];
+extern const u8 gUnknown_84162B9[];
+extern const u8 gUnknown_8416301[];
+extern const u8 gUnknown_841632A[];
+extern const u8 gUnknown_841635E[];
+extern const u8 gUnknown_84166D3[];
+extern const u8 gUnknown_84166DB[];
+extern const u8 gUnknown_84166E1[];
+extern const u8 gUnknown_84166FF[];
+extern const u8 gUnknown_8416703[];
+extern const u8 gUnknown_84168F1[];
+extern const u8 gUnknown_8416911[];
+extern const u8 gUnknown_8416936[];
+extern const u8 gUnknown_8416959[];
+extern const u8 gUnknown_841C587[];
+extern const u8 gUnknown_841C693[];
+extern const u16 gUnknown_841F408[];
+
 #endif //GUARD_STRINGS_H

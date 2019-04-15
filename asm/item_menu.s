@@ -4763,7 +4763,7 @@ sub_810A434: @ 810A434
 	ldr r1, _0810A444 @ =sub_810A45C
 	movs r0, 0x1
 	movs r2, 0
-	bl sub_81317F8
+	bl InitTMCase
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4892,7 +4892,7 @@ sub_810A52C: @ 810A52C
 	ldr r1, _0810A53C @ =sub_810A554
 	movs r0, 0x3
 	movs r2, 0
-	bl sub_81317F8
+	bl InitTMCase
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5037,7 +5037,7 @@ sub_810A654: @ 810A654
 	ldr r1, _0810A664 @ =sub_810A67C
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_81317F8
+	bl InitTMCase
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6993,7 +6993,7 @@ _0810B68C:
 	bl sub_810AECC
 	ldr r0, _0810B6D4 @ =gUnknown_203AD10
 	ldr r1, [r0]
-	ldr r0, _0810B6D8 @ =sub_8132E64
+	ldr r0, _0810B6D8 @ =PokeDude_InitTMCase
 	str r0, [r1]
 	mov r0, r9
 	subs r0, 0x8
@@ -7003,7 +7003,7 @@ _0810B68C:
 	b _0810B6E6
 	.align 2, 0
 _0810B6D4: .4byte gUnknown_203AD10
-_0810B6D8: .4byte sub_8132E64
+_0810B6D8: .4byte PokeDude_InitTMCase
 _0810B6DC: .4byte sub_810B070
 _0810B6E0:
 	ldrh r0, [r6, 0x10]

@@ -12606,7 +12606,7 @@ sub_8124DA0: @ 8124DA0
 	movs r0, 0x5
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_81317F8
+	bl InitTMCase
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8124DA0

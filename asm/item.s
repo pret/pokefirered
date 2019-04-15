@@ -1577,12 +1577,12 @@ ItemId_GetItem: @ 809A8BC
 	lsrs r0, 16
 	movs r1, 0x2C
 	muls r0, r1
-	ldr r1, _0809A8D8 @ =gUnknown_83DB028
+	ldr r1, _0809A8D8 @ =gItems
 	adds r0, r1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A8D8: .4byte gUnknown_83DB028
+_0809A8D8: .4byte gItems
 	thumb_func_end ItemId_GetItem
 
 	thumb_func_start itemid_get_number
@@ -1590,7 +1590,7 @@ itemid_get_number: @ 809A8DC
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809A8FC @ =gUnknown_83DB028
+	ldr r4, _0809A8FC @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1602,7 +1602,7 @@ itemid_get_number: @ 809A8DC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A8FC: .4byte gUnknown_83DB028
+_0809A8FC: .4byte gItems
 	thumb_func_end itemid_get_number
 
 	thumb_func_start itemid_get_market_price
@@ -1610,7 +1610,7 @@ itemid_get_market_price: @ 809A900
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809A920 @ =gUnknown_83DB028
+	ldr r4, _0809A920 @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1622,7 +1622,7 @@ itemid_get_market_price: @ 809A900
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A920: .4byte gUnknown_83DB028
+_0809A920: .4byte gItems
 	thumb_func_end itemid_get_market_price
 
 	thumb_func_start ItemId_GetHoldEffect
@@ -1630,7 +1630,7 @@ ItemId_GetHoldEffect: @ 809A924
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809A944 @ =gUnknown_83DB028
+	ldr r4, _0809A944 @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1642,7 +1642,7 @@ ItemId_GetHoldEffect: @ 809A924
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A944: .4byte gUnknown_83DB028
+_0809A944: .4byte gItems
 	thumb_func_end ItemId_GetHoldEffect
 
 	thumb_func_start ItemId_GetHoldEffectParam
@@ -1650,7 +1650,7 @@ ItemId_GetHoldEffectParam: @ 809A948
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809A968 @ =gUnknown_83DB028
+	ldr r4, _0809A968 @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1662,7 +1662,7 @@ ItemId_GetHoldEffectParam: @ 809A948
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A968: .4byte gUnknown_83DB028
+_0809A968: .4byte gItems
 	thumb_func_end ItemId_GetHoldEffectParam
 
 	thumb_func_start ItemId_GetDescription
@@ -1670,7 +1670,7 @@ ItemId_GetDescription: @ 809A96C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809A98C @ =gUnknown_83DB028
+	ldr r4, _0809A98C @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1683,7 +1683,7 @@ ItemId_GetDescription: @ 809A96C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A98C: .4byte gUnknown_83DB028
+_0809A98C: .4byte gItems
 	thumb_func_end ItemId_GetDescription
 
 	thumb_func_start itemid_is_unique
@@ -1691,7 +1691,7 @@ itemid_is_unique: @ 809A990
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809A9B0 @ =gUnknown_83DB028
+	ldr r4, _0809A9B0 @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1703,7 +1703,7 @@ itemid_is_unique: @ 809A990
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A9B0: .4byte gUnknown_83DB028
+_0809A9B0: .4byte gItems
 	thumb_func_end itemid_is_unique
 
 	thumb_func_start itemid_get_x19
@@ -1711,7 +1711,7 @@ itemid_get_x19: @ 809A9B4
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809A9D4 @ =gUnknown_83DB028
+	ldr r4, _0809A9D4 @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1723,7 +1723,7 @@ itemid_get_x19: @ 809A9B4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A9D4: .4byte gUnknown_83DB028
+_0809A9D4: .4byte gItems
 	thumb_func_end itemid_get_x19
 
 	thumb_func_start ItemId_GetPocket
@@ -1731,7 +1731,7 @@ ItemId_GetPocket: @ 809A9D8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809A9F8 @ =gUnknown_83DB028
+	ldr r4, _0809A9F8 @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1743,7 +1743,7 @@ ItemId_GetPocket: @ 809A9D8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809A9F8: .4byte gUnknown_83DB028
+_0809A9F8: .4byte gItems
 	thumb_func_end ItemId_GetPocket
 
 	thumb_func_start ItemId_GetType
@@ -1751,7 +1751,7 @@ ItemId_GetType: @ 809A9FC
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809AA1C @ =gUnknown_83DB028
+	ldr r4, _0809AA1C @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1763,7 +1763,7 @@ ItemId_GetType: @ 809A9FC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809AA1C: .4byte gUnknown_83DB028
+_0809AA1C: .4byte gItems
 	thumb_func_end ItemId_GetType
 
 	thumb_func_start ItemId_GetFieldFunc
@@ -1771,7 +1771,7 @@ ItemId_GetFieldFunc: @ 809AA20
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809AA40 @ =gUnknown_83DB028
+	ldr r4, _0809AA40 @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1784,7 +1784,7 @@ ItemId_GetFieldFunc: @ 809AA20
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809AA40: .4byte gUnknown_83DB028
+_0809AA40: .4byte gItems
 	thumb_func_end ItemId_GetFieldFunc
 
 	thumb_func_start ItemId_GetBattleUsage
@@ -1792,7 +1792,7 @@ ItemId_GetBattleUsage: @ 809AA44
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809AA64 @ =gUnknown_83DB028
+	ldr r4, _0809AA64 @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1805,7 +1805,7 @@ ItemId_GetBattleUsage: @ 809AA44
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809AA64: .4byte gUnknown_83DB028
+_0809AA64: .4byte gItems
 	thumb_func_end ItemId_GetBattleUsage
 
 	thumb_func_start ItemId_GetBattleFunc
@@ -1813,7 +1813,7 @@ ItemId_GetBattleFunc: @ 809AA68
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809AA88 @ =gUnknown_83DB028
+	ldr r4, _0809AA88 @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1826,7 +1826,7 @@ ItemId_GetBattleFunc: @ 809AA68
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809AA88: .4byte gUnknown_83DB028
+_0809AA88: .4byte gItems
 	thumb_func_end ItemId_GetBattleFunc
 
 	thumb_func_start ItemId_GetSecondaryId
@@ -1834,7 +1834,7 @@ ItemId_GetSecondaryId: @ 809AA8C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, _0809AAAC @ =gUnknown_83DB028
+	ldr r4, _0809AAAC @ =gItems
 	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
@@ -1847,7 +1847,7 @@ ItemId_GetSecondaryId: @ 809AA8C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809AAAC: .4byte gUnknown_83DB028
+_0809AAAC: .4byte gItems
 	thumb_func_end ItemId_GetSecondaryId
 
 	.align 2, 0 @ Don't pad with nop.

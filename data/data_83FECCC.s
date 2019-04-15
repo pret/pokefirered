@@ -517,6 +517,7 @@ gUnknown_8415A08:: @ 8415A08
 gUnknown_8415A10:: @ 8415A10
 	.incbin "baserom.gba", 0x415A10, 0x10
 
+	@ strings
 gExpandedPlaceholder_Empty:: @ 8415A20
 	.incbin "baserom.gba", 0x415A20, 0x1
 
@@ -2376,8 +2377,9 @@ gUnknown_841EDCA:: @ 841EDCA
 	.incbin "baserom.gba", 0x41EDCA, 0x61
 
 gUnknown_841EE2B:: @ 841EE2B
-	.incbin "baserom.gba", 0x41EE2B, 0x19
+	.incbin "baserom.gba", 0x41EE2B, 0x17
 
+	.align 2
 gUnknown_841EE44:: @ 841EE44
 	.incbin "baserom.gba", 0x41EE44, 0x20
 

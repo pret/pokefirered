@@ -1048,7 +1048,7 @@ sub_80A17D4: @ 80A17D4
 	ldr r1, _080A17E4 @ =UseFameCheckerFromMenu
 	movs r0, 0
 	movs r2, 0
-	bl sub_81317F8
+	bl InitTMCase
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1071,7 +1071,7 @@ sub_80A17E8: @ 80A17E8
 	ldr r1, _080A181C @ =c2_exit_to_overworld_2_switch
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_81317F8
+	bl InitTMCase
 	adds r0, r4, 0
 	bl DestroyTask
 _080A1812:

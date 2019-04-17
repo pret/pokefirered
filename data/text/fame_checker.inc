@@ -1680,21 +1680,3 @@ gUnknown_81B280F:: @ 81B280F
 	.string "Oh, no, no can do.\p"
 	.string "You’re practically a living legend.\n"
 	.string "I have no SITCKERS left to give.$"
-
-gUnknown_81B2867:: @ 81B2867
-
-gUnknown_81B2E1C:: @ 81B2E1C
-	.incbin "baserom.gba", 0x001b2867, 0x5b5
-	.string "How do I do this?$"
-
-gUnknown_81B2E2E:: @ 81B2E2E
-	.string "What does this term mean?$"
-
-gUnknown_81B2E48:: @ 81B2E48
-	.string "About this game$"
-
-gUnknown_81B2E58:: @ 81B2E58
-	.string "Type Matchup List$"
-
-gUnknown_81B2E6A:: @ 81B2E6A
-	.string "EXIT$"

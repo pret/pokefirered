@@ -246,12 +246,12 @@ _080A117E:
 
 	thumb_func_start sub_80A1184
 sub_80A1184: @ 80A1184
-	ldr r1, _080A118C @ =gUnknown_3005024
+	ldr r1, _080A118C @ =gFieldCallback2
 	ldr r0, _080A1190 @ =sub_80A1194
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080A118C: .4byte gUnknown_3005024
+_080A118C: .4byte gFieldCallback2
 _080A1190: .4byte sub_80A1194
 	thumb_func_end sub_80A1184
 

@@ -1,7 +1,8 @@
 #ifndef GUARD_PARTY_MENU_H
 #define GUARD_PARTY_MENU_H
 
-#include "global.h"
+#include "main.h"
+#include "task.h"
 
 enum {
     AILMENT_NONE,
@@ -14,6 +15,7 @@ enum {
 
 extern void (*gUnknown_3005E98)(u8 taskId, TaskFunc func);
 
+bool8 FieldCallback_PrepareFadeInFromMenu(void);
 bool8 MonKnowsMove(struct Pokemon *, u16);
 void sub_81B58A8(void);
 void DoWallyTutorialBagMenu(void);
@@ -23,5 +25,6 @@ void sub_8125B40(u8 taskId, TaskFunc func);
 void sub_8124C8C(void);
 void sub_8126EDC(void);
 void c2_8123744(void);
+u8 GetCursorSelectionMonId(void);
 
 #endif // GUARD_PARTY_MENU_H

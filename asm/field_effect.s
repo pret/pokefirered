@@ -5156,8 +5156,8 @@ _08085B58:
 _08085B60: .4byte sub_8085A24
 	thumb_func_end sub_8085A80
 
-	thumb_func_start sub_8085B64
-sub_8085B64: @ 8085B64
+	thumb_func_start CreateTeleportFieldEffectTask
+CreateTeleportFieldEffectTask: @ 8085B64
 	push {lr}
 	ldr r0, _08085B74 @ =sub_8085B78
 	movs r1, 0
@@ -5166,7 +5166,7 @@ sub_8085B64: @ 8085B64
 	bx r0
 	.align 2, 0
 _08085B74: .4byte sub_8085B78
-	thumb_func_end sub_8085B64
+	thumb_func_end CreateTeleportFieldEffectTask
 
 	thumb_func_start sub_8085B78
 sub_8085B78: @ 8085B78

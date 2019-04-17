@@ -568,13 +568,13 @@ sub_806F1D4: @ 806F1D4
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
-	ldr r1, _0806F1E8 @ =gUnknown_3005024
+	ldr r1, _0806F1E8 @ =gFieldCallback2
 	ldr r0, _0806F1EC @ =sub_806F1B8
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _0806F1E4: .4byte gUnknown_20370FF
-_0806F1E8: .4byte gUnknown_3005024
+_0806F1E8: .4byte gFieldCallback2
 _0806F1EC: .4byte sub_806F1B8
 	thumb_func_end sub_806F1D4
 

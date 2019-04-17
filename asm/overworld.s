@@ -154,8 +154,8 @@ _08054D00: .4byte 0x00000808
 _08054D04: .4byte 0x0000404d
 	thumb_func_end sub_8054CA0
 
-	thumb_func_start sub_8054D08
-sub_8054D08: @ 8054D08
+	thumb_func_start Overworld_ResetStateAfterTeleport
+Overworld_ResetStateAfterTeleport: @ 8054D08
 	push {lr}
 	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
@@ -191,7 +191,7 @@ _08054D60: .4byte 0x00000805
 _08054D64: .4byte 0x00000806
 _08054D68: .4byte 0x00000808
 _08054D6C: .4byte 0x0000404d
-	thumb_func_end sub_8054D08
+	thumb_func_end Overworld_ResetStateAfterTeleport
 
 	thumb_func_start sub_8054D70
 sub_8054D70: @ 8054D70
@@ -2958,8 +2958,8 @@ _080561F8:
 	bx r1
 	thumb_func_end is_light_level_1_2_3_5_or_6
 
-	thumb_func_start is_light_level_1_2_3_or_6
-is_light_level_1_2_3_or_6: @ 80561FC
+	thumb_func_start Overworld_MapTypeAllowsTeleportAndFly
+Overworld_MapTypeAllowsTeleportAndFly: @ 80561FC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2979,7 +2979,7 @@ _08056216:
 _08056218:
 	pop {r1}
 	bx r1
-	thumb_func_end is_light_level_1_2_3_or_6
+	thumb_func_end Overworld_MapTypeAllowsTeleportAndFly
 
 	thumb_func_start is_light_level_8_or_9
 is_light_level_8_or_9: @ 805621C
@@ -3442,7 +3442,7 @@ _080565E8: .4byte gMain
 	thumb_func_start map_post_load_hook_exec
 map_post_load_hook_exec: @ 80565EC
 	push {r4,lr}
-	ldr r4, _08056604 @ =gUnknown_3005024
+	ldr r4, _08056604 @ =gFieldCallback2
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _08056618
@@ -3453,7 +3453,7 @@ map_post_load_hook_exec: @ 80565EC
 	movs r0, 0
 	b _08056638
 	.align 2, 0
-_08056604: .4byte gUnknown_3005024
+_08056604: .4byte gFieldCallback2
 _08056608:
 	movs r1, 0
 	str r1, [r4]
@@ -3501,7 +3501,7 @@ CB2_NewGame: @ 8056644
 	ldr r1, _0805668C @ =gUnknown_3005020
 	ldr r0, _08056690 @ =sub_807DF7C
 	str r0, [r1]
-	ldr r1, _08056694 @ =gUnknown_3005024
+	ldr r1, _08056694 @ =gFieldCallback2
 	movs r0, 0
 	str r0, [r1]
 	ldr r0, _08056698 @ =gMain + 0x438
@@ -3516,7 +3516,7 @@ CB2_NewGame: @ 8056644
 	.align 2, 0
 _0805668C: .4byte gUnknown_3005020
 _08056690: .4byte sub_807DF7C
-_08056694: .4byte gUnknown_3005024
+_08056694: .4byte gFieldCallback2
 _08056698: .4byte gMain + 0x438
 _0805669C: .4byte sub_8056534
 _080566A0: .4byte sub_80565B4
@@ -3758,14 +3758,14 @@ _080568A4: .4byte sub_807DDD0
 sub_80568A8: @ 80568A8
 	push {lr}
 	bl sub_80569BC
-	ldr r1, _080568BC @ =gUnknown_3005024
+	ldr r1, _080568BC @ =gFieldCallback2
 	ldr r0, _080568C0 @ =sub_807E3BC
 	str r0, [r1]
 	bl c2_exit_to_overworld_2_switch
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080568BC: .4byte gUnknown_3005024
+_080568BC: .4byte gFieldCallback2
 _080568C0: .4byte sub_807E3BC
 	thumb_func_end sub_80568A8
 
@@ -3847,7 +3847,7 @@ sub_8056938: @ 8056938
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, _08056990 @ =gUnknown_3005024
+	ldr r1, _08056990 @ =gFieldCallback2
 	movs r0, 0
 	str r0, [r1]
 	ldr r1, _08056994 @ =gUnknown_2031DE0
@@ -3863,7 +3863,7 @@ sub_8056938: @ 8056938
 	bl SetMainCallback2
 	b _080569AC
 	.align 2, 0
-_08056990: .4byte gUnknown_3005024
+_08056990: .4byte gFieldCallback2
 _08056994: .4byte gUnknown_2031DE0
 _08056998: .4byte sub_805671C
 _0805699C:
@@ -5314,7 +5314,7 @@ _08057560:
 	bl ScriptContext2_Disable
 	movs r0, 0
 	bl sub_80565E0
-	ldr r1, _08057614 @ =gUnknown_3005024
+	ldr r1, _08057614 @ =gFieldCallback2
 	ldr r0, _08057618 @ =sub_80574EC
 	str r0, [r1]
 	ldr r0, _0805761C @ =gMain
@@ -5334,7 +5334,7 @@ _08057604: .4byte 0x0000ffff
 _08057608: .4byte gUnknown_2031DBC
 _0805760C: .4byte gUnknown_2031DE8
 _08057610: .4byte gPaletteFade
-_08057614: .4byte gUnknown_3005024
+_08057614: .4byte gFieldCallback2
 _08057618: .4byte sub_80574EC
 _0805761C: .4byte gMain
 _08057620:

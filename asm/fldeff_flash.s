@@ -17,10 +17,10 @@ sub_80C9B2C: @ 80C9B2C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C9B6C
-	ldr r1, _080C9B5C @ =gUnknown_3005024
-	ldr r0, _080C9B60 @ =hm_add_c3_launch_phase_2
+	ldr r1, _080C9B5C @ =gFieldCallback2
+	ldr r0, _080C9B60 @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _080C9B64 @ =gUnknown_203B0C4
+	ldr r1, _080C9B64 @ =gPostMenuFieldCallback
 	ldr r0, _080C9B68 @ =sub_80C9B74
 	str r0, [r1]
 	movs r0, 0x1
@@ -28,9 +28,9 @@ sub_80C9B2C: @ 80C9B2C
 	.align 2, 0
 _080C9B54: .4byte gMapHeader
 _080C9B58: .4byte 0x00000806
-_080C9B5C: .4byte gUnknown_3005024
-_080C9B60: .4byte hm_add_c3_launch_phase_2
-_080C9B64: .4byte gUnknown_203B0C4
+_080C9B5C: .4byte gFieldCallback2
+_080C9B60: .4byte FieldCallback_PrepareFadeInFromMenu
+_080C9B64: .4byte gPostMenuFieldCallback
 _080C9B68: .4byte sub_80C9B74
 _080C9B6C:
 	movs r0, 0

@@ -44,34 +44,34 @@ sub_8097898: @ 8097898
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08097904
-	ldr r1, _080978D0 @ =gUnknown_3005024
-	ldr r0, _080978D4 @ =hm_add_c3_launch_phase_2
+	ldr r1, _080978D0 @ =gFieldCallback2
+	ldr r0, _080978D4 @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _080978D8 @ =gUnknown_203B0C4
+	ldr r1, _080978D8 @ =gPostMenuFieldCallback
 	ldr r0, _080978DC @ =sub_80979D0
 	b _080978EC
 	.align 2, 0
 _080978CC: .4byte gUnknown_2039874
-_080978D0: .4byte gUnknown_3005024
-_080978D4: .4byte hm_add_c3_launch_phase_2
-_080978D8: .4byte gUnknown_203B0C4
+_080978D0: .4byte gFieldCallback2
+_080978D4: .4byte FieldCallback_PrepareFadeInFromMenu
+_080978D8: .4byte gPostMenuFieldCallback
 _080978DC: .4byte sub_80979D0
 _080978E0:
 	strb r0, [r4]
 _080978E2:
-	ldr r1, _080978F4 @ =gUnknown_3005024
-	ldr r0, _080978F8 @ =hm_add_c3_launch_phase_2
+	ldr r1, _080978F4 @ =gFieldCallback2
+	ldr r0, _080978F8 @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _080978FC @ =gUnknown_203B0C4
+	ldr r1, _080978FC @ =gPostMenuFieldCallback
 	ldr r0, _08097900 @ =sub_8097984
 _080978EC:
 	str r0, [r1]
 	movs r0, 0x1
 	b _08097970
 	.align 2, 0
-_080978F4: .4byte gUnknown_3005024
-_080978F8: .4byte hm_add_c3_launch_phase_2
-_080978FC: .4byte gUnknown_203B0C4
+_080978F4: .4byte gFieldCallback2
+_080978F8: .4byte FieldCallback_PrepareFadeInFromMenu
+_080978FC: .4byte gPostMenuFieldCallback
 _08097900: .4byte sub_8097984
 _08097904:
 	ldr r4, _0809797C @ =gUnknown_2039A04

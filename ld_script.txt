@@ -201,7 +201,7 @@ SECTIONS {
         asm/save_failed_screen.o(.text);
         asm/clear_save_data_screen.o(.text);
         asm/evolution_graphics.o(.text);
-        asm/fldeff_teleport.o(.text);
+        src/fldeff_teleport.o(.text);
         asm/new_menu_helpers.o(.text);
         asm/box_party_pokemon_dropdown.o(.text);
         asm/save_menu_util.o(.text);

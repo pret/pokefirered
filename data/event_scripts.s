@@ -1,3 +1,7 @@
+	.include "asm/macros.inc"
+	.include "asm/macros/event.inc"
+	.include "constants/constants.inc"
+
 	.section script_data, "aw", %progbits
 
     .include "data/script_cmd_table.inc"

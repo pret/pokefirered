@@ -1,17 +1,19 @@
 gMapScripts_UnknownMap_00_00:: @ 8160478
-	.incbin "baserom.gba", 0x160478, 0x1
+	.byte 0
 
 gMapScripts_UnknownMap_00_01:: @ 8160479
-	.incbin "baserom.gba", 0x160479, 0x1
+	.byte 0
 
 gMapScripts_UnknownMap_00_02:: @ 816047A
-	.incbin "baserom.gba", 0x16047A, 0x1
+	.byte 0
 
 gMapScripts_UnknownMap_00_03:: @ 816047B
-	.incbin "baserom.gba", 0x16047B, 0x1
+	.byte 0
 
 gMapScripts_UnknownMap_00_04:: @ 816047C
-	.incbin "baserom.gba", 0x16047C, 0xB
+	map_script 5, UnknownMap_00_04_MapScript1_160487
+	map_script 3, UnknownMap_00_04_MapScript2_1604BB
+	.byte 0
 
 UnknownMap_00_04_MapScript1_160487:: @ 8160487
 	.incbin "baserom.gba", 0x160487, 0x34
@@ -47,13 +49,15 @@ UnknownMap_00_04_EventScript_16050C:: @ 816050C
 	.incbin "baserom.gba", 0x16050C, 0x13
 
 gMapScripts_ViridianForest:: @ 816051F
-	.incbin "baserom.gba", 0x16051F, 0x6
+	map_script 3, ViridianForest_MapScript1_160525
+	.byte 0
 
 ViridianForest_MapScript1_160525:: @ 8160525
 	.incbin "baserom.gba", 0x160525, 0xBF
 
 gMapScripts_MtMoon_1F:: @ 81605E4
-	.incbin "baserom.gba", 0x1605E4, 0x6
+	map_script 3, MtMoon_1F_MapScript1_1605EA
+	.byte 0
 
 MtMoon_1F_MapScript1_1605EA:: @ 81605EA
 	.incbin "baserom.gba", 0x1605EA, 0x4
@@ -83,10 +87,11 @@ MtMoon_1F_EventScript_160681:: @ 8160681
 	.incbin "baserom.gba", 0x160681, 0x17
 
 gMapScripts_MtMoon_B1F:: @ 8160698
-	.incbin "baserom.gba", 0x160698, 0x1
+	.byte 0
 
 gMapScripts_MtMoon_B2F:: @ 8160699
-	.incbin "baserom.gba", 0x160699, 0x6
+	map_script 3, MtMoon_B2F_MapScript1_16069F
+	.byte 0
 
 MtMoon_B2F_MapScript1_16069F:: @ 816069F
 	.incbin "baserom.gba", 0x16069F, 0x11
@@ -116,7 +121,9 @@ MtMoon_B2F_EventScript_160829:: @ 8160829
 	.incbin "baserom.gba", 0x160829, 0x17
 
 gMapScripts_SSAnne_Exterior:: @ 8160840
-	.incbin "baserom.gba", 0x160840, 0xB
+	map_script 3, SSAnne_Exterior_MapScript1_16084B
+	map_script 2, SSAnne_Exterior_MapScript2_16084F
+	.byte 0
 
 SSAnne_Exterior_MapScript1_16084B:: @ 816084B
 	.incbin "baserom.gba", 0x16084B, 0x4
@@ -125,7 +132,7 @@ SSAnne_Exterior_MapScript2_16084F:: @ 816084F
 	.incbin "baserom.gba", 0x16084F, 0x7C
 
 gMapScripts_SSAnne_1F_Corridor:: @ 81608CB
-	.incbin "baserom.gba", 0x1608CB, 0x1
+	.byte 0
 
 SSAnne_1F_Corridor_EventScript_1608CC:: @ 81608CC
 	.incbin "baserom.gba", 0x1608CC, 0x9
@@ -134,19 +141,22 @@ SSAnne_1F_Corridor_EventScript_1608D5:: @ 81608D5
 	.incbin "baserom.gba", 0x1608D5, 0x9
 
 gMapScripts_SSAnne_2F_Corridor:: @ 81608DE
-	.incbin "baserom.gba", 0x1608DE, 0x17F
+	.byte 0
+
+SSAnne_2F_Corridor_EventScript_1608DF:: @ 81608DF
+	.incbin "baserom.gba", 0x1608DF, 0x17E
 
 gMapScripts_SSAnne_3F_Corridor:: @ 8160A5D
-	.incbin "baserom.gba", 0x160A5D, 0x1
+	.byte 0
 
 SSAnne_3F_Corridor_EventScript_160A5E:: @ 8160A5E
 	.incbin "baserom.gba", 0x160A5E, 0x9
 
 gMapScripts_SSAnne_B1F_Corridor:: @ 8160A67
-	.incbin "baserom.gba", 0x160A67, 0x1
+	.byte 0
 
 gMapScripts_SSAnne_Deck:: @ 8160A68
-	.incbin "baserom.gba", 0x160A68, 0x1
+	.byte 0
 
 SSAnne_Deck_EventScript_160A69:: @ 8160A69
 	.incbin "baserom.gba", 0x160A69, 0x9
@@ -164,10 +174,13 @@ SSAnne_Deck_EventScript_160A9B:: @ 8160A9B
 	.incbin "baserom.gba", 0x160A9B, 0x17
 
 gMapScripts_SSAnne_Kitchen:: @ 8160AB2
-	.incbin "baserom.gba", 0x160AB2, 0x87
+	.byte 0
+
+SSAnne_Kitchen_EventScript_160AB3:: @ 8160AB3
+	.incbin "baserom.gba", 0x160AB3, 0x86
 
 gMapScripts_SSAnne_CaptainsOffice:: @ 8160B39
-	.incbin "baserom.gba", 0x160B39, 0x1
+	.byte 0
 
 SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 	.incbin "baserom.gba", 0x160B3A, 0x8F
@@ -179,10 +192,13 @@ SSAnne_CaptainsOffice_EventScript_160BD2:: @ 8160BD2
 	.incbin "baserom.gba", 0x160BD2, 0x9
 
 gMapScripts_SSAnne_1F_Room1:: @ 8160BDB
-	.incbin "baserom.gba", 0x160BDB, 0xA
+	.byte 0
+
+SSAnne_1F_Room1_EventScript_160BDC:: @ 8160BDC
+	.incbin "baserom.gba", 0x160BDC, 0x9
 
 gMapScripts_SSAnne_1F_Room2:: @ 8160BE5
-	.incbin "baserom.gba", 0x160BE5, 0x1
+	.byte 0
 
 SSAnne_1F_Room2_EventScript_160BE6:: @ 8160BE6
 	.incbin "baserom.gba", 0x160BE6, 0x9
@@ -194,28 +210,37 @@ SSAnne_1F_Room2_EventScript_160C06:: @ 8160C06
 	.incbin "baserom.gba", 0x160C06, 0x17
 
 gMapScripts_SSAnne_1F_Room3:: @ 8160C1D
-	.incbin "baserom.gba", 0x160C1D, 0x26
+	.byte 0
+
+SSAnne_1F_Room3_EventScript_160C1E:: @ 8160C1E
+	.incbin "baserom.gba", 0x160C1E, 0x25
 
 gMapScripts_SSAnne_1F_Room4:: @ 8160C43
-	.incbin "baserom.gba", 0x160C43, 0x1
+	.byte 0
 
 SSAnne_1F_Room4_EventScript_160C44:: @ 8160C44
 	.incbin "baserom.gba", 0x160C44, 0x22
 
 gMapScripts_SSAnne_1F_Room5:: @ 8160C66
-	.incbin "baserom.gba", 0x160C66, 0x18
+	.byte 0
+
+SSAnne_1F_Room5_EventScript_160C67:: @ 8160C67
+	.incbin "baserom.gba", 0x160C67, 0x17
 
 gMapScripts_SSAnne_1F_Room7:: @ 8160C7E
-	.incbin "baserom.gba", 0x160C7E, 0x1
+	.byte 0
 
 SSAnne_1F_Room7_EventScript_160C7F:: @ 8160C7F
 	.incbin "baserom.gba", 0x160C7F, 0x17
 
 gMapScripts_SSAnne_2F_Room1:: @ 8160C96
-	.incbin "baserom.gba", 0x160C96, 0x1A
+	.byte 0
+
+SSAnne_2F_Room1_EventScript_160C97:: @ 8160C97
+	.incbin "baserom.gba", 0x160C97, 0x19
 
 gMapScripts_SSAnne_2F_Room2:: @ 8160CB0
-	.incbin "baserom.gba", 0x160CB0, 0x1
+	.byte 0
 
 SSAnne_2F_Room2_EventScript_160CB1:: @ 8160CB1
 	.incbin "baserom.gba", 0x160CB1, 0x17
@@ -224,10 +249,13 @@ SSAnne_2F_Room2_EventScript_160CC8:: @ 8160CC8
 	.incbin "baserom.gba", 0x160CC8, 0x17
 
 gMapScripts_SSAnne_2F_Room3:: @ 8160CDF
-	.incbin "baserom.gba", 0x160CDF, 0x13
+	.byte 0
+
+SSAnne_2F_Room3_EventScript_160CE0:: @ 8160CE0
+	.incbin "baserom.gba", 0x160CE0, 0x12
 
 gMapScripts_SSAnne_2F_Room4:: @ 8160CF2
-	.incbin "baserom.gba", 0x160CF2, 0x1
+	.byte 0
 
 SSAnne_2F_Room4_EventScript_160CF3:: @ 8160CF3
 	.incbin "baserom.gba", 0x160CF3, 0x17
@@ -236,10 +264,13 @@ SSAnne_2F_Room4_EventScript_160D0A:: @ 8160D0A
 	.incbin "baserom.gba", 0x160D0A, 0x17
 
 gMapScripts_SSAnne_2F_Room5:: @ 8160D21
-	.incbin "baserom.gba", 0x160D21, 0x13
+	.byte 0
+
+SSAnne_2F_Room5_EventScript_160D22:: @ 8160D22
+	.incbin "baserom.gba", 0x160D22, 0x12
 
 gMapScripts_SSAnne_2F_Room6:: @ 8160D34
-	.incbin "baserom.gba", 0x160D34, 0x1
+	.byte 0
 
 SSAnne_2F_Room6_EventScript_160D35:: @ 8160D35
 	.incbin "baserom.gba", 0x160D35, 0x9
@@ -248,19 +279,25 @@ SSAnne_2F_Room6_EventScript_160D3E:: @ 8160D3E
 	.incbin "baserom.gba", 0x160D3E, 0x9
 
 gMapScripts_SSAnne_B1F_Room1:: @ 8160D47
-	.incbin "baserom.gba", 0x160D47, 0x2F
+	.byte 0
+
+SSAnne_B1F_Room1_EventScript_160D48:: @ 8160D48
+	.incbin "baserom.gba", 0x160D48, 0x2E
 
 gMapScripts_SSAnne_B1F_Room2:: @ 8160D76
-	.incbin "baserom.gba", 0x160D76, 0x1
+	.byte 0
 
 SSAnne_B1F_Room2_EventScript_160D77:: @ 8160D77
 	.incbin "baserom.gba", 0x160D77, 0x17
 
 gMapScripts_SSAnne_B1F_Room3:: @ 8160D8E
-	.incbin "baserom.gba", 0x160D8E, 0x18
+	.byte 0
+
+SSAnne_B1F_Room3_EventScript_160D8F:: @ 8160D8F
+	.incbin "baserom.gba", 0x160D8F, 0x17
 
 gMapScripts_SSAnne_B1F_Room4:: @ 8160DA6
-	.incbin "baserom.gba", 0x160DA6, 0x1
+	.byte 0
 
 SSAnne_B1F_Room4_EventScript_160DA7:: @ 8160DA7
 	.incbin "baserom.gba", 0x160DA7, 0x17
@@ -269,58 +306,78 @@ SSAnne_B1F_Room4_EventScript_160DBE:: @ 8160DBE
 	.incbin "baserom.gba", 0x160DBE, 0x17
 
 gMapScripts_SSAnne_B1F_Room5:: @ 8160DD5
-	.incbin "baserom.gba", 0x160DD5, 0x1D
+	.byte 0
+
+SSAnne_B1F_Room5_EventScript_160DD6:: @ 8160DD6
+	.incbin "baserom.gba", 0x160DD6, 0x1C
 
 gMapScripts_SSAnne_1F_Room6:: @ 8160DF2
-	.incbin "baserom.gba", 0x160DF2, 0x1
+	.byte 0
 
 SSAnne_1F_Room6_EventScript_160DF3:: @ 8160DF3
 	.incbin "baserom.gba", 0x160DF3, 0x45
 
 gMapScripts_UndergroundPath_NorthEntrance:: @ 8160E38
-	.incbin "baserom.gba", 0x160E38, 0x7D
+	.byte 0
+
+UndergroundPath_NorthEntrance_EventScript_160E39:: @ 8160E39
+	.incbin "baserom.gba", 0x160E39, 0x7C
 
 gMapScripts_UndergroundPath_NorthSouthTunnel:: @ 8160EB5
-	.incbin "baserom.gba", 0x160EB5, 0x6
+	map_script 3, UndergroundPath_NorthSouthTunnel_MapScript1_160EBB
+	.byte 0
 
 UndergroundPath_NorthSouthTunnel_MapScript1_160EBB:: @ 8160EBB
 	.incbin "baserom.gba", 0x160EBB, 0x4
 
 gMapScripts_UndergroundPath_SouthEntrance:: @ 8160EBF
-	.incbin "baserom.gba", 0x160EBF, 0xA
+	.byte 0
+
+UndergroundPath_SouthEntrance_EventScript_160EC0:: @ 8160EC0
+	.incbin "baserom.gba", 0x160EC0, 0x9
 
 gMapScripts_UndergroundPath_WestEntrance:: @ 8160EC9
-	.incbin "baserom.gba", 0x160EC9, 0x1
+	.byte 0
 
 UndergroundPath_WestEntrance_EventScript_160ECA:: @ 8160ECA
 	.incbin "baserom.gba", 0x160ECA, 0x9
 
 gMapScripts_UndergroundPath_EastWestTunnel:: @ 8160ED3
-	.incbin "baserom.gba", 0x160ED3, 0x6
+	map_script 3, UndergroundPath_EastWestTunnel_MapScript1_160ED9
+	.byte 0
 
 UndergroundPath_EastWestTunnel_MapScript1_160ED9:: @ 8160ED9
 	.incbin "baserom.gba", 0x160ED9, 0x4
 
 gMapScripts_UndergroundPath_EastEntrance:: @ 8160EDD
-	.incbin "baserom.gba", 0x160EDD, 0x1
+	.byte 0
 
 UndergroundPath_EastEntrance_EventScript_160EDE:: @ 8160EDE
 	.incbin "baserom.gba", 0x160EDE, 0x9
 
 gMapScripts_DiglettsCave_NorthEntrance:: @ 8160EE7
-	.incbin "baserom.gba", 0x160EE7, 0xA
+	.byte 0
+
+DiglettsCave_NorthEntrance_EventScript_160EE8:: @ 8160EE8
+	.incbin "baserom.gba", 0x160EE8, 0x9
 
 gMapScripts_DiglettsCave_B1F:: @ 8160EF1
-	.incbin "baserom.gba", 0x160EF1, 0x6
+	map_script 3, DiglettsCave_B1F_MapScript1_160EF7
+	.byte 0
 
 DiglettsCave_B1F_MapScript1_160EF7:: @ 8160EF7
 	.incbin "baserom.gba", 0x160EF7, 0x4
 
 gMapScripts_DiglettsCave_SouthEntrance:: @ 8160EFB
-	.incbin "baserom.gba", 0x160EFB, 0xA
+	.byte 0
+
+DiglettsCave_SouthEntrance_EventScript_160EFC:: @ 8160EFC
+	.incbin "baserom.gba", 0x160EFC, 0x9
 
 gMapScripts_VictoryRoad_1F:: @ 8160F05
-	.incbin "baserom.gba", 0x160F05, 0xB
+	map_script 1, VictoryRoad_1F_MapScript1_160F10
+	map_script 3, VictoryRoad_1F_MapScript2_160F2F
+	.byte 0
 
 VictoryRoad_1F_MapScript1_160F10:: @ 8160F10
 	.incbin "baserom.gba", 0x160F10, 0x1F
@@ -338,13 +395,15 @@ VictoryRoad_1F_EventScript_160F7B:: @ 8160F7B
 	.incbin "baserom.gba", 0x160F7B, 0x17
 
 gMapScripts_VictoryRoad_2F:: @ 8160F92
-	.incbin "baserom.gba", 0x160F92, 0x6
+	map_script 1, VictoryRoad_2F_MapScript1_160F98
+	.byte 0
 
 VictoryRoad_2F_MapScript1_160F98:: @ 8160F98
 	.incbin "baserom.gba", 0x160F98, 0x112
 
 gMapScripts_VictoryRoad_3F:: @ 81610AA
-	.incbin "baserom.gba", 0x1610AA, 0x6
+	map_script 1, VictoryRoad_3F_MapScript1_1610B0
+	.byte 0
 
 VictoryRoad_3F_MapScript1_1610B0:: @ 81610B0
 	.incbin "baserom.gba", 0x1610B0, 0x1F
@@ -371,7 +430,9 @@ VictoryRoad_3F_EventScript_16117A:: @ 816117A
 	.incbin "baserom.gba", 0x16117A, 0x1B
 
 gMapScripts_RocketHideout_B1F:: @ 8161195
-	.incbin "baserom.gba", 0x161195, 0xB
+	map_script 1, RocketHideout_B1F_MapScript1_1611A0
+	map_script 3, RocketHideout_B1F_MapScript2_1611AA
+	.byte 0
 
 RocketHideout_B1F_MapScript1_1611A0:: @ 81611A0
 	.incbin "baserom.gba", 0x1611A0, 0xA
@@ -380,16 +441,20 @@ RocketHideout_B1F_MapScript2_1611AA:: @ 81611AA
 	.incbin "baserom.gba", 0x1611AA, 0xF7
 
 gMapScripts_RocketHideout_B2F:: @ 81612A1
-	.incbin "baserom.gba", 0x1612A1, 0x1
+	.byte 0
 
 RocketHideout_B2F_EventScript_1612A2:: @ 81612A2
 	.incbin "baserom.gba", 0x1612A2, 0x17
 
 gMapScripts_RocketHideout_B3F:: @ 81612B9
-	.incbin "baserom.gba", 0x1612B9, 0x2F
+	.byte 0
+
+RocketHideout_B3F_EventScript_1612BA:: @ 81612BA
+	.incbin "baserom.gba", 0x1612BA, 0x2E
 
 gMapScripts_RocketHideout_B4F:: @ 81612E8
-	.incbin "baserom.gba", 0x1612E8, 0x6
+	map_script 1, RocketHideout_B4F_MapScript1_1612EE
+	.byte 0
 
 RocketHideout_B4F_MapScript1_1612EE:: @ 81612EE
 	.incbin "baserom.gba", 0x1612EE, 0x29
@@ -413,10 +478,14 @@ RocketHideout_B4F_EventScript_161418:: @ 8161418
 	.incbin "baserom.gba", 0x161418, 0xC0
 
 gMapScripts_RocketHideout_Elevator:: @ 81614D8
-	.incbin "baserom.gba", 0x1614D8, 0x14D
+	.byte 0
+
+RocketHideout_Elevator_EventScript_1614D9:: @ 81614D9
+	.incbin "baserom.gba", 0x1614D9, 0x14C
 
 gMapScripts_SilphCo_1F:: @ 8161625
-	.incbin "baserom.gba", 0x161625, 0x6
+	map_script 3, SilphCo_1F_MapScript1_16162B
+	.byte 0
 
 SilphCo_1F_MapScript1_16162B:: @ 816162B
 	.incbin "baserom.gba", 0x16162B, 0x4
@@ -428,13 +497,15 @@ SilphCo_1F_EventScript_161638:: @ 8161638
 	.incbin "baserom.gba", 0x161638, 0x9
 
 gMapScripts_SilphCo_2F:: @ 8161641
-	.incbin "baserom.gba", 0x161641, 0x6
+	map_script 1, SilphCo_2F_MapScript1_161647
+	.byte 0
 
 SilphCo_2F_MapScript1_161647:: @ 8161647
 	.incbin "baserom.gba", 0x161647, 0x7E
 
 gMapScripts_SilphCo_3F:: @ 81616C5
-	.incbin "baserom.gba", 0x1616C5, 0x6
+	map_script 1, SilphCo_3F_MapScript1_1616CB
+	.byte 0
 
 SilphCo_3F_MapScript1_1616CB:: @ 81616CB
 	.incbin "baserom.gba", 0x1616CB, 0x13
@@ -452,13 +523,15 @@ SilphCo_3F_EventScript_16171F:: @ 816171F
 	.incbin "baserom.gba", 0x16171F, 0x17
 
 gMapScripts_SilphCo_4F:: @ 8161736
-	.incbin "baserom.gba", 0x161736, 0x6
+	map_script 1, SilphCo_4F_MapScript1_16173C
+	.byte 0
 
 SilphCo_4F_MapScript1_16173C:: @ 816173C
 	.incbin "baserom.gba", 0x16173C, 0x82
 
 gMapScripts_SilphCo_5F:: @ 81617BE
-	.incbin "baserom.gba", 0x1617BE, 0x6
+	map_script 1, SilphCo_5F_MapScript1_1617C4
+	.byte 0
 
 SilphCo_5F_MapScript1_1617C4:: @ 81617C4
 	.incbin "baserom.gba", 0x1617C4, 0x1C
@@ -491,13 +564,16 @@ SilphCo_5F_EventScript_16186A:: @ 816186A
 	.incbin "baserom.gba", 0x16186A, 0x17
 
 gMapScripts_SilphCo_6F:: @ 8161881
-	.incbin "baserom.gba", 0x161881, 0x6
+	map_script 1, SilphCo_6F_MapScript1_161887
+	.byte 0
 
 SilphCo_6F_MapScript1_161887:: @ 8161887
 	.incbin "baserom.gba", 0x161887, 0xFD
 
 gMapScripts_SilphCo_7F:: @ 8161984
-	.incbin "baserom.gba", 0x161984, 0xB
+	map_script 1, SilphCo_7F_MapScript1_16198F
+	map_script 3, SilphCo_7F_MapScript2_1619AB
+	.byte 0
 
 SilphCo_7F_MapScript1_16198F:: @ 816198F
 	.incbin "baserom.gba", 0x16198F, 0x1C
@@ -539,13 +615,15 @@ SilphCo_7F_EventScript_161C48:: @ 8161C48
 	.incbin "baserom.gba", 0x161C48, 0x17
 
 gMapScripts_SilphCo_8F:: @ 8161C5F
-	.incbin "baserom.gba", 0x161C5F, 0x6
+	map_script 1, SilphCo_8F_MapScript1_161C65
+	.byte 0
 
 SilphCo_8F_MapScript1_161C65:: @ 8161C65
 	.incbin "baserom.gba", 0x161C65, 0x79
 
 gMapScripts_SilphCo_9F:: @ 8161CDE
-	.incbin "baserom.gba", 0x161CDE, 0x6
+	map_script 1, SilphCo_9F_MapScript1_161CE4
+	.byte 0
 
 SilphCo_9F_MapScript1_161CE4:: @ 8161CE4
 	.incbin "baserom.gba", 0x161CE4, 0x25
@@ -566,13 +644,15 @@ SilphCo_9F_EventScript_161D6F:: @ 8161D6F
 	.incbin "baserom.gba", 0x161D6F, 0x17
 
 gMapScripts_SilphCo_10F:: @ 8161D86
-	.incbin "baserom.gba", 0x161D86, 0x6
+	map_script 1, SilphCo_10F_MapScript1_161D8C
+	.byte 0
 
 SilphCo_10F_MapScript1_161D8C:: @ 8161D8C
 	.incbin "baserom.gba", 0x161D8C, 0x62
 
 gMapScripts_SilphCo_11F:: @ 8161DEE
-	.incbin "baserom.gba", 0x161DEE, 0x6
+	map_script 1, SilphCo_11F_MapScript1_161DF4
+	.byte 0
 
 SilphCo_11F_MapScript1_161DF4:: @ 8161DF4
 	.incbin "baserom.gba", 0x161DF4, 0xA
@@ -599,10 +679,15 @@ SilphCo_11F_EventScript_161F57:: @ 8161F57
 	.incbin "baserom.gba", 0x161F57, 0x17
 
 gMapScripts_SilphCo_Elevator:: @ 8161F6E
-	.incbin "baserom.gba", 0x161F6E, 0x28B
+	.byte 0
+
+SilphCo_Elevator_EventScript_161F6F:: @ 8161F6F
+	.incbin "baserom.gba", 0x161F6F, 0x28A
 
 gMapScripts_PokemonMansion_1F:: @ 81621F9
-	.incbin "baserom.gba", 0x1621F9, 0xB
+	map_script 1, PokemonMansion_1F_MapScript1_162204
+	map_script 3, PokemonMansion_1F_MapScript2_16220E
+	.byte 0
 
 PokemonMansion_1F_MapScript1_162204:: @ 8162204
 	.incbin "baserom.gba", 0x162204, 0xA
@@ -620,13 +705,15 @@ PokemonMansion_1F_EventScript_16223D:: @ 816223D
 	.incbin "baserom.gba", 0x16223D, 0x17
 
 gMapScripts_PokemonMansion_2F:: @ 8162254
-	.incbin "baserom.gba", 0x162254, 0x6
+	map_script 1, PokemonMansion_2F_MapScript1_16225A
+	.byte 0
 
 PokemonMansion_2F_MapScript1_16225A:: @ 816225A
 	.incbin "baserom.gba", 0x16225A, 0x47
 
 gMapScripts_PokemonMansion_3F:: @ 81622A1
-	.incbin "baserom.gba", 0x1622A1, 0x6
+	map_script 1, PokemonMansion_3F_MapScript1_1622A7
+	.byte 0
 
 PokemonMansion_3F_MapScript1_1622A7:: @ 81622A7
 	.incbin "baserom.gba", 0x1622A7, 0xA
@@ -644,13 +731,15 @@ PokemonMansion_3F_EventScript_1622E5:: @ 81622E5
 	.incbin "baserom.gba", 0x1622E5, 0x17
 
 gMapScripts_PokemonMansion_B1F:: @ 81622FC
-	.incbin "baserom.gba", 0x1622FC, 0x6
+	map_script 1, PokemonMansion_B1F_MapScript1_162302
+	.byte 0
 
 PokemonMansion_B1F_MapScript1_162302:: @ 8162302
 	.incbin "baserom.gba", 0x162302, 0x55
 
 gMapScripts_SafariZone_Center:: @ 8162357
-	.incbin "baserom.gba", 0x162357, 0x6
+	map_script 3, SafariZone_Center_MapScript1_16235D
+	.byte 0
 
 SafariZone_Center_MapScript1_16235D:: @ 816235D
 	.incbin "baserom.gba", 0x16235D, 0x4
@@ -665,10 +754,13 @@ SafariZone_Center_EventScript_162373:: @ 8162373
 	.incbin "baserom.gba", 0x162373, 0x9
 
 gMapScripts_SafariZone_East:: @ 816237C
-	.incbin "baserom.gba", 0x16237C, 0x1C
+	.byte 0
+
+SafariZone_East_EventScript_16237D:: @ 816237D
+	.incbin "baserom.gba", 0x16237D, 0x1B
 
 gMapScripts_SafariZone_North:: @ 8162398
-	.incbin "baserom.gba", 0x162398, 0x1
+	.byte 0
 
 SafariZone_North_EventScript_162399:: @ 8162399
 	.incbin "baserom.gba", 0x162399, 0x9
@@ -686,10 +778,13 @@ SafariZone_North_EventScript_1623BD:: @ 81623BD
 	.incbin "baserom.gba", 0x1623BD, 0x9
 
 gMapScripts_SafariZone_West:: @ 81623C6
-	.incbin "baserom.gba", 0x1623C6, 0x25
+	.byte 0
+
+SafariZone_West_EventScript_1623C7:: @ 81623C7
+	.incbin "baserom.gba", 0x1623C7, 0x24
 
 gMapScripts_SafariZone_Building1:: @ 81623EB
-	.incbin "baserom.gba", 0x1623EB, 0x1
+	.byte 0
 
 SafariZone_Building1_EventScript_1623EC:: @ 81623EC
 	.incbin "baserom.gba", 0x1623EC, 0x9
@@ -698,10 +793,13 @@ SafariZone_Building1_EventScript_1623F5:: @ 81623F5
 	.incbin "baserom.gba", 0x1623F5, 0x9
 
 gMapScripts_SafariZone_Building2:: @ 81623FE
-	.incbin "baserom.gba", 0x1623FE, 0x1C
+	.byte 0
+
+SafariZone_Building2_EventScript_1623FF:: @ 81623FF
+	.incbin "baserom.gba", 0x1623FF, 0x1B
 
 gMapScripts_SafariZone_Building3:: @ 816241A
-	.incbin "baserom.gba", 0x16241A, 0x1
+	.byte 0
 
 SafariZone_Building3_EventScript_16241B:: @ 816241B
 	.incbin "baserom.gba", 0x16241B, 0x9
@@ -713,25 +811,31 @@ SafariZone_Building3_EventScript_16242D:: @ 816242D
 	.incbin "baserom.gba", 0x16242D, 0x9
 
 gMapScripts_SafariZone_Building4:: @ 8162436
-	.incbin "baserom.gba", 0x162436, 0x1C
+	.byte 0
+
+SafariZone_Building4_EventScript_162437:: @ 8162437
+	.incbin "baserom.gba", 0x162437, 0x1B
 
 gMapScripts_SafariZone_SecretHouse:: @ 8162452
-	.incbin "baserom.gba", 0x162452, 0x1
+	.byte 0
 
 SafariZone_SecretHouse_EventScript_162453:: @ 8162453
 	.incbin "baserom.gba", 0x162453, 0x60
 
 gMapScripts_CeruleanCave_1F:: @ 81624B3
-	.incbin "baserom.gba", 0x1624B3, 0x6
+	map_script 3, CeruleanCave_1F_MapScript1_1624B9
+	.byte 0
 
 CeruleanCave_1F_MapScript1_1624B9:: @ 81624B9
 	.incbin "baserom.gba", 0x1624B9, 0x4
 
 gMapScripts_CeruleanCave_2F:: @ 81624BD
-	.incbin "baserom.gba", 0x1624BD, 0x1
+	.byte 0
 
 gMapScripts_CeruleanCave_B1F:: @ 81624BE
-	.incbin "baserom.gba", 0x1624BE, 0xB
+	map_script 5, CeruleanCave_B1F_MapScript1_1624C9
+	map_script 3, CeruleanCave_B1F_MapScript2_1624E7
+	.byte 0
 
 CeruleanCave_B1F_MapScript1_1624C9:: @ 81624C9
 	.incbin "baserom.gba", 0x1624C9, 0x1E
@@ -740,7 +844,12 @@ CeruleanCave_B1F_MapScript2_1624E7:: @ 81624E7
 	.incbin "baserom.gba", 0x1624E7, 0x85
 
 gMapScripts_PokemonLeague_LoreleisRoom:: @ 816256C
-	.incbin "baserom.gba", 0x16256C, 0x1A
+	map_script 5, PokemonLeague_LoreleisRoom_MapScript1_162586
+	map_script 1, PokemonLeague_LoreleisRoom_MapScript2_162591
+	map_script 3, PokemonLeague_LoreleisRoom_MapScript3_1625B2
+	map_script 4, PokemonLeague_LoreleisRoom_MapScript4_1625B6
+	map_script 2, PokemonLeague_LoreleisRoom_MapScript5_1625C5
+	.byte 0
 
 PokemonLeague_LoreleisRoom_MapScript1_162586:: @ 8162586
 	.incbin "baserom.gba", 0x162586, 0xB
@@ -761,7 +870,11 @@ PokemonLeague_LoreleisRoom_EventScript_1625DC:: @ 81625DC
 	.incbin "baserom.gba", 0x1625DC, 0xA9
 
 gMapScripts_PokemonLeague_BrunosRoom:: @ 8162685
-	.incbin "baserom.gba", 0x162685, 0x15
+	map_script 5, PokemonLeague_BrunosRoom_MapScript1_16269A
+	map_script 1, PokemonLeague_BrunosRoom_MapScript2_1626A5
+	map_script 4, PokemonLeague_BrunosRoom_MapScript3_1626C6
+	map_script 2, PokemonLeague_BrunosRoom_MapScript4_1626D5
+	.byte 0
 
 PokemonLeague_BrunosRoom_MapScript1_16269A:: @ 816269A
 	.incbin "baserom.gba", 0x16269A, 0xB
@@ -776,7 +889,11 @@ PokemonLeague_BrunosRoom_MapScript4_1626D5:: @ 81626D5
 	.incbin "baserom.gba", 0x1626D5, 0x13B
 
 gMapScripts_PokemonLeague_AgathasRoom:: @ 8162810
-	.incbin "baserom.gba", 0x162810, 0x15
+	map_script 5, PokemonLeague_AgathasRoom_MapScript1_162825
+	map_script 1, PokemonLeague_AgathasRoom_MapScript2_162830
+	map_script 4, PokemonLeague_AgathasRoom_MapScript3_162851
+	map_script 2, PokemonLeague_AgathasRoom_MapScript4_162860
+	.byte 0
 
 PokemonLeague_AgathasRoom_MapScript1_162825:: @ 8162825
 	.incbin "baserom.gba", 0x162825, 0xB
@@ -794,7 +911,11 @@ PokemonLeague_AgathasRoom_EventScript_162877:: @ 8162877
 	.incbin "baserom.gba", 0x162877, 0xB6
 
 gMapScripts_PokemonLeague_LancesRoom:: @ 816292D
-	.incbin "baserom.gba", 0x16292D, 0x15
+	map_script 5, PokemonLeague_LancesRoom_MapScript1_162942
+	map_script 1, PokemonLeague_LancesRoom_MapScript2_16294D
+	map_script 4, PokemonLeague_LancesRoom_MapScript3_16296E
+	map_script 2, PokemonLeague_LancesRoom_MapScript4_16297D
+	.byte 0
 
 PokemonLeague_LancesRoom_MapScript1_162942:: @ 8162942
 	.incbin "baserom.gba", 0x162942, 0xB
@@ -809,7 +930,10 @@ PokemonLeague_LancesRoom_MapScript4_16297D:: @ 816297D
 	.incbin "baserom.gba", 0x16297D, 0x165
 
 gMapScripts_PokemonLeague_ChampionsRoom:: @ 8162AE2
-	.incbin "baserom.gba", 0x162AE2, 0x10
+	map_script 4, PokemonLeague_ChampionsRoom_MapScript1_162B5D
+	map_script 5, PokemonLeague_ChampionsRoom_MapScript2_162AF2
+	map_script 2, PokemonLeague_ChampionsRoom_MapScript3_162B6C
+	.byte 0
 
 PokemonLeague_ChampionsRoom_MapScript2_162AF2:: @ 8162AF2
 	.incbin "baserom.gba", 0x162AF2, 0x6B
@@ -821,7 +945,9 @@ PokemonLeague_ChampionsRoom_MapScript3_162B6C:: @ 8162B6C
 	.incbin "baserom.gba", 0x162B6C, 0x1E0
 
 gMapScripts_PokemonLeague_HallOfFame:: @ 8162D4C
-	.incbin "baserom.gba", 0x162D4C, 0xB
+	map_script 2, PokemonLeague_HallOfFame_MapScript1_162D66
+	map_script 4, PokemonLeague_HallOfFame_MapScript2_162D57
+	.byte 0
 
 PokemonLeague_HallOfFame_MapScript2_162D57:: @ 8162D57
 	.incbin "baserom.gba", 0x162D57, 0xF
@@ -830,7 +956,8 @@ PokemonLeague_HallOfFame_MapScript1_162D66:: @ 8162D66
 	.incbin "baserom.gba", 0x162D66, 0x70
 
 gMapScripts_RockTunnel_1F:: @ 8162DD6
-	.incbin "baserom.gba", 0x162DD6, 0x6
+	map_script 3, RockTunnel_1F_MapScript1_162DDC
+	.byte 0
 
 RockTunnel_1F_MapScript1_162DDC:: @ 8162DDC
 	.incbin "baserom.gba", 0x162DDC, 0x4
@@ -860,22 +987,28 @@ RockTunnel_1F_EventScript_162E73:: @ 8162E73
 	.incbin "baserom.gba", 0x162E73, 0x17
 
 gMapScripts_RockTunnel_B1F:: @ 8162E8A
-	.incbin "baserom.gba", 0x162E8A, 0xB9
+	.byte 0
+
+RockTunnel_B1F_EventScript_162E8B:: @ 8162E8B
+	.incbin "baserom.gba", 0x162E8B, 0xB8
 
 gMapScripts_SeafoamIslands_1F:: @ 8162F43
-	.incbin "baserom.gba", 0x162F43, 0x6
+	map_script 3, SeafoamIslands_1F_MapScript1_162F49
+	.byte 0
 
 SeafoamIslands_1F_MapScript1_162F49:: @ 8162F49
 	.incbin "baserom.gba", 0x162F49, 0x4
 
 gMapScripts_SeafoamIslands_B1F:: @ 8162F4D
-	.incbin "baserom.gba", 0x162F4D, 0x1
+	.byte 0
 
 gMapScripts_SeafoamIslands_B2F:: @ 8162F4E
-	.incbin "baserom.gba", 0x162F4E, 0x1
+	.byte 0
 
 gMapScripts_SeafoamIslands_B3F:: @ 8162F4F
-	.incbin "baserom.gba", 0x162F4F, 0xB
+	map_script 3, SeafoamIslands_B3F_MapScript1_162F5A
+	map_script 2, SeafoamIslands_B3F_MapScript2_162F98
+	.byte 0
 
 SeafoamIslands_B3F_MapScript1_162F5A:: @ 8162F5A
 	.incbin "baserom.gba", 0x162F5A, 0x3E
@@ -884,7 +1017,12 @@ SeafoamIslands_B3F_MapScript2_162F98:: @ 8162F98
 	.incbin "baserom.gba", 0x162F98, 0x96
 
 gMapScripts_SeafoamIslands_B4F:: @ 816302E
-	.incbin "baserom.gba", 0x16302E, 0x1A
+	map_script 3, SeafoamIslands_B4F_MapScript1_163066
+	map_script 5, SeafoamIslands_B4F_MapScript2_163048
+	map_script 1, SeafoamIslands_B4F_MapScript3_1630B1
+	map_script 4, SeafoamIslands_B4F_MapScript4_1630E7
+	map_script 2, SeafoamIslands_B4F_MapScript5_1630F9
+	.byte 0
 
 SeafoamIslands_B4F_MapScript2_163048:: @ 8163048
 	.incbin "baserom.gba", 0x163048, 0x1E
@@ -914,13 +1052,14 @@ SeafoamIslands_B4F_EventScript_16322C:: @ 816322C
 	.incbin "baserom.gba", 0x16322C, 0x9
 
 gMapScripts_PokemonTower_1F:: @ 8163235
-	.incbin "baserom.gba", 0x163235, 0x6
+	map_script 3, PokemonTower_1F_MapScript1_16323B
+	.byte 0
 
 PokemonTower_1F_MapScript1_16323B:: @ 816323B
 	.incbin "baserom.gba", 0x16323B, 0x4A
 
 gMapScripts_PokemonTower_2F:: @ 8163285
-	.incbin "baserom.gba", 0x163285, 0x1
+	.byte 0
 
 PokemonTower_2F_EventScript_163286:: @ 8163286
 	.incbin "baserom.gba", 0x163286, 0x9
@@ -932,10 +1071,13 @@ PokemonTower_2F_EventScript_16329B:: @ 816329B
 	.incbin "baserom.gba", 0x16329B, 0x10B
 
 gMapScripts_PokemonTower_3F:: @ 81633A6
-	.incbin "baserom.gba", 0x1633A6, 0x46
+	.byte 0
+
+PokemonTower_3F_EventScript_1633A7:: @ 81633A7
+	.incbin "baserom.gba", 0x1633A7, 0x45
 
 gMapScripts_PokemonTower_4F:: @ 81633EC
-	.incbin "baserom.gba", 0x1633EC, 0x1
+	.byte 0
 
 PokemonTower_4F_EventScript_1633ED:: @ 81633ED
 	.incbin "baserom.gba", 0x1633ED, 0x17
@@ -947,10 +1089,13 @@ PokemonTower_4F_EventScript_16341B:: @ 816341B
 	.incbin "baserom.gba", 0x16341B, 0x17
 
 gMapScripts_PokemonTower_5F:: @ 8163432
-	.incbin "baserom.gba", 0x163432, 0x85
+	.byte 0
+
+PokemonTower_5F_EventScript_163433:: @ 8163433
+	.incbin "baserom.gba", 0x163433, 0x84
 
 gMapScripts_PokemonTower_6F:: @ 81634B7
-	.incbin "baserom.gba", 0x1634B7, 0x1
+	.byte 0
 
 PokemonTower_6F_EventScript_1634B8:: @ 81634B8
 	.incbin "baserom.gba", 0x1634B8, 0x5C
@@ -965,10 +1110,15 @@ PokemonTower_6F_EventScript_163542:: @ 8163542
 	.incbin "baserom.gba", 0x163542, 0x17
 
 gMapScripts_PokemonTower_7F:: @ 8163559
-	.incbin "baserom.gba", 0x163559, 0x20B
+	.byte 0
+
+PokemonTower_7F_EventScript_16355A:: @ 816355A
+	.incbin "baserom.gba", 0x16355A, 0x20A
 
 gMapScripts_PowerPlant:: @ 8163764
-	.incbin "baserom.gba", 0x163764, 0xB
+	map_script 5, PowerPlant_MapScript1_16376F
+	map_script 3, PowerPlant_MapScript2_16378D
+	.byte 0
 
 PowerPlant_MapScript1_16376F:: @ 816376F
 	.incbin "baserom.gba", 0x16376F, 0x1E
@@ -986,10 +1136,15 @@ PowerPlant_EventScript_16388D:: @ 816388D
 	.incbin "baserom.gba", 0x16388D, 0x5E
 
 gMapScripts_MtEmber_RubyPath_B4F:: @ 81638EB
-	.incbin "baserom.gba", 0x1638EB, 0x5B
+	.byte 0
+
+MtEmber_RubyPath_B4F_EventScript_1638EC:: @ 81638EC
+	.incbin "baserom.gba", 0x1638EC, 0x5A
 
 gMapScripts_MtEmber_Exterior:: @ 8163946
-	.incbin "baserom.gba", 0x163946, 0xB
+	map_script 3, MtEmber_Exterior_MapScript1_163951
+	map_script 1, MtEmber_Exterior_MapScript2_163969
+	.byte 0
 
 MtEmber_Exterior_MapScript1_163951:: @ 8163951
 	.incbin "baserom.gba", 0x163951, 0x18
@@ -1016,16 +1171,18 @@ MtEmber_Exterior_EventScript_163AE2:: @ 8163AE2
 	.incbin "baserom.gba", 0x163AE2, 0x17
 
 gMapScripts_MtEmber_SummitPath_1F:: @ 8163AF9
-	.incbin "baserom.gba", 0x163AF9, 0x1
+	.byte 0
 
 gMapScripts_MtEmber_SummitPath_2F:: @ 8163AFA
-	.incbin "baserom.gba", 0x163AFA, 0x1
+	.byte 0
 
 gMapScripts_MtEmber_SummitPath_3F:: @ 8163AFB
-	.incbin "baserom.gba", 0x163AFB, 0x1
+	.byte 0
 
 gMapScripts_MtEmber_Summit:: @ 8163AFC
-	.incbin "baserom.gba", 0x163AFC, 0xB
+	map_script 3, MtEmber_Summit_MapScript1_163B25
+	map_script 5, MtEmber_Summit_MapScript2_163B07
+	.byte 0
 
 MtEmber_Summit_MapScript2_163B07:: @ 8163B07
 	.incbin "baserom.gba", 0x163B07, 0x1E
@@ -1037,28 +1194,35 @@ MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	.incbin "baserom.gba", 0x163B33, 0x77
 
 gMapScripts_MtEmber_RubyPath_B5F:: @ 8163BAA
-	.incbin "baserom.gba", 0x163BAA, 0x9B
+	.byte 0
+
+MtEmber_RubyPath_B5F_EventScript_163BAB:: @ 8163BAB
+	.incbin "baserom.gba", 0x163BAB, 0x9A
 
 gMapScripts_SSAnne_Kitchen3:: @ 8163C45
-	.incbin "baserom.gba", 0x163C45, 0x1
+	.byte 0
 
 gMapScripts_MtEmber_RubyPath_B1F:: @ 8163C46
-	.incbin "baserom.gba", 0x163C46, 0x1
+	.byte 0
 
 gMapScripts_MtEmber_RubyPath_B2F:: @ 8163C47
-	.incbin "baserom.gba", 0x163C47, 0x1
+	.byte 0
 
 gMapScripts_MtEmber_RubyPath_B3F:: @ 8163C48
-	.incbin "baserom.gba", 0x163C48, 0x27
+	.byte 0
+
+MtEmber_RubyPath_B3F_EventScript_163C49:: @ 8163C49
+	.incbin "baserom.gba", 0x163C49, 0x26
 
 gMapScripts_MtEmber_RubyPath_B1F_Stairs:: @ 8163C6F
-	.incbin "baserom.gba", 0x163C6F, 0x1
+	.byte 0
 
 gMapScripts_MtEmber_RubyPath_B2F_Stairs:: @ 8163C70
-	.incbin "baserom.gba", 0x163C70, 0x1
+	.byte 0
 
 gMapScripts_ThreeIsland_BerryForest:: @ 8163C71
-	.incbin "baserom.gba", 0x163C71, 0x6
+	map_script 3, ThreeIsland_BerryForest_MapScript1_163C77
+	.byte 0
 
 ThreeIsland_BerryForest_MapScript1_163C77:: @ 8163C77
 	.incbin "baserom.gba", 0x163C77, 0xC
@@ -1073,13 +1237,17 @@ ThreeIsland_BerryForest_EventScript_163D31:: @ 8163D31
 	.incbin "baserom.gba", 0x163D31, 0x9
 
 gMapScripts_FourIsland_IcefallCave_Entrance:: @ 8163D3A
-	.incbin "baserom.gba", 0x163D3A, 0x6
+	map_script 3, FourIsland_IcefallCave_Entrance_MapScript1_163D40
+	.byte 0
 
 FourIsland_IcefallCave_Entrance_MapScript1_163D40:: @ 8163D40
 	.incbin "baserom.gba", 0x163D40, 0x4
 
 gMapScripts_FourIsland_IcefallCave_1F:: @ 8163D44
-	.incbin "baserom.gba", 0x163D44, 0x10
+	map_script 5, FourIsland_IcefallCave_1F_MapScript1_163D54
+	map_script 1, FourIsland_IcefallCave_1F_MapScript2_163D57
+	map_script 2, FourIsland_IcefallCave_1F_MapScript3_163D5B
+	.byte 0
 
 FourIsland_IcefallCave_1F_MapScript1_163D54:: @ 8163D54
 	.incbin "baserom.gba", 0x163D54, 0x3
@@ -1091,10 +1259,11 @@ FourIsland_IcefallCave_1F_MapScript3_163D5B:: @ 8163D5B
 	.incbin "baserom.gba", 0x163D5B, 0x26
 
 gMapScripts_SSAnne_CaptainsOffice2:: @ 8163D81
-	.incbin "baserom.gba", 0x163D81, 0x1
+	.byte 0
 
 gMapScripts_SSAnne_CaptainsOffice3:: @ 8163D82
-	.incbin "baserom.gba", 0x163D82, 0x6
+	map_script 3, SSAnne_CaptainsOffice3_MapScript1_163D88
+	.byte 0
 
 SSAnne_CaptainsOffice3_MapScript1_163D88:: @ 8163D88
 	.incbin "baserom.gba", 0x163D88, 0x10
@@ -1106,7 +1275,9 @@ SSAnne_CaptainsOffice3_EventScript_163F25:: @ 8163F25
 	.incbin "baserom.gba", 0x163F25, 0x9
 
 gMapScripts_SSAnne_CaptainsOffice4:: @ 8163F2E
-	.incbin "baserom.gba", 0x163F2E, 0xB
+	map_script 1, SSAnne_CaptainsOffice4_MapScript1_163F3D
+	map_script 3, SSAnne_CaptainsOffice4_MapScript2_163F39
+	.byte 0
 
 SSAnne_CaptainsOffice4_MapScript2_163F39:: @ 8163F39
 	.incbin "baserom.gba", 0x163F39, 0x4
@@ -1115,7 +1286,8 @@ SSAnne_CaptainsOffice4_MapScript1_163F3D:: @ 8163F3D
 	.incbin "baserom.gba", 0x163F3D, 0x245
 
 gMapScripts_SSAnne_CaptainsOffice5:: @ 8164182
-	.incbin "baserom.gba", 0x164182, 0x6
+	map_script 3, SSAnne_CaptainsOffice5_MapScript1_164188
+	.byte 0
 
 SSAnne_CaptainsOffice5_MapScript1_164188:: @ 8164188
 	.incbin "baserom.gba", 0x164188, 0xD
@@ -1127,22 +1299,26 @@ SixIsland_DottedHole_B2F_EventScript_1641A7:: @ 81641A7
 	.incbin "baserom.gba", 0x1641A7, 0x9
 
 gMapScripts_SixIsland_DottedHole_B1F:: @ 81641B0
-	.incbin "baserom.gba", 0x1641B0, 0x1
+	.byte 0
 
 gMapScripts_SixIsland_DottedHole_B2F:: @ 81641B1
-	.incbin "baserom.gba", 0x1641B1, 0x1
+	.byte 0
 
 gMapScripts_SixIsland_DottedHole_B3F:: @ 81641B2
-	.incbin "baserom.gba", 0x1641B2, 0x1
+	.byte 0
 
 gMapScripts_SSAnne_CaptainsOffice9:: @ 81641B3
-	.incbin "baserom.gba", 0x1641B3, 0x1
+	.byte 0
 
 gMapScripts_SixIsland_DottedHole_SapphireRoom:: @ 81641B4
-	.incbin "baserom.gba", 0x1641B4, 0x3A5
+	.byte 0
+
+SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
+	.incbin "baserom.gba", 0x1641B5, 0x3A4
 
 gMapScripts_SSAnne_1F_Room11:: @ 8164559
-	.incbin "baserom.gba", 0x164559, 0x6
+	map_script 3, SSAnne_1F_Room11_MapScript1_16455F
+	.byte 0
 
 SSAnne_1F_Room11_MapScript1_16455F:: @ 816455F
 	.incbin "baserom.gba", 0x16455F, 0x31
@@ -1184,19 +1360,24 @@ SSAnne_1F_Room11_EventScript_16468D:: @ 816468D
 	.incbin "baserom.gba", 0x16468D, 0x17
 
 gMapScripts_SSAnne_1F_Room12:: @ 81646A4
-	.incbin "baserom.gba", 0x1646A4, 0x6
+	map_script 3, SSAnne_1F_Room12_MapScript1_1646AA
+	.byte 0
 
 SSAnne_1F_Room12_MapScript1_1646AA:: @ 81646AA
 	.incbin "baserom.gba", 0x1646AA, 0x4
 
 gMapScripts_NavelRock_Exterior:: @ 81646AE
-	.incbin "baserom.gba", 0x1646AE, 0x6
+	map_script 3, NavelRock_Exterior_MapScript1_1646B4
+	.byte 0
 
 NavelRock_Exterior_MapScript1_1646B4:: @ 81646B4
 	.incbin "baserom.gba", 0x1646B4, 0x4
 
 gMapScripts_SevenIsland_TrainerTower_1F:: @ 81646B8
-	.incbin "baserom.gba", 0x1646B8, 0x10
+	map_script 5, SevenIsland_TrainerTower_1F_MapScript1_1C4F54
+	map_script 3, SevenIsland_TrainerTower_1F_MapScript2_1C4F62
+	map_script 2, SevenIsland_TrainerTower_1F_MapScript3_1C5046
+	.byte 0
 
 SevenIsland_TrainerTower_2F_EventScript_1646C8:: @ 81646C8
 SevenIsland_TrainerTower_4F_EventScript_1646C8:: @ 81646C8
@@ -1229,31 +1410,83 @@ SevenIsland_TrainerTower_8F_EventScript_1646E0:: @ 81646E0
 	.incbin "baserom.gba", 0x1646E0, 0x6
 
 gMapScripts_SevenIsland_TrainerTower_2F:: @ 81646E6
-	.incbin "baserom.gba", 0x1646E6, 0x2E
+	map_script 5, SevenIsland_TrainerTower_2F_MapScript1_1C4F54
+	map_script 3, SevenIsland_TrainerTower_2F_MapScript2_1C4F62
+	map_script 2, SevenIsland_TrainerTower_2F_MapScript3_1C5046
+	.byte 0
+
+SevenIsland_TrainerTower_2F_EventScript_1646F6:: @ 81646F6
+	.incbin "baserom.gba", 0x1646F6, 0x1E
 
 gMapScripts_SevenIsland_TrainerTower_3F:: @ 8164714
-	.incbin "baserom.gba", 0x164714, 0x2E
+	map_script 5, SevenIsland_TrainerTower_3F_MapScript1_1C4F54
+	map_script 3, SevenIsland_TrainerTower_3F_MapScript2_1C4F62
+	map_script 2, SevenIsland_TrainerTower_3F_MapScript3_1C5046
+	.byte 0
+
+SevenIsland_TrainerTower_3F_EventScript_164724:: @ 8164724
+	.incbin "baserom.gba", 0x164724, 0x1E
 
 gMapScripts_SevenIsland_TrainerTower_4F:: @ 8164742
-	.incbin "baserom.gba", 0x164742, 0x2E
+	map_script 5, SevenIsland_TrainerTower_4F_MapScript1_1C4F54
+	map_script 3, SevenIsland_TrainerTower_4F_MapScript2_1C4F62
+	map_script 2, SevenIsland_TrainerTower_4F_MapScript3_1C5046
+	.byte 0
+
+SevenIsland_TrainerTower_4F_EventScript_164752:: @ 8164752
+	.incbin "baserom.gba", 0x164752, 0x1E
 
 gMapScripts_SevenIsland_TrainerTower_5F:: @ 8164770
-	.incbin "baserom.gba", 0x164770, 0x2E
+	map_script 5, SevenIsland_TrainerTower_5F_MapScript1_1C4F54
+	map_script 3, SevenIsland_TrainerTower_5F_MapScript2_1C4F62
+	map_script 2, SevenIsland_TrainerTower_5F_MapScript3_1C5046
+	.byte 0
+
+SevenIsland_TrainerTower_5F_EventScript_164780:: @ 8164780
+	.incbin "baserom.gba", 0x164780, 0x1E
 
 gMapScripts_SevenIsland_TrainerTower_6F:: @ 816479E
-	.incbin "baserom.gba", 0x16479E, 0x2E
+	map_script 5, SevenIsland_TrainerTower_6F_MapScript1_1C4F54
+	map_script 3, SevenIsland_TrainerTower_6F_MapScript2_1C4F62
+	map_script 2, SevenIsland_TrainerTower_6F_MapScript3_1C5046
+	.byte 0
+
+SevenIsland_TrainerTower_6F_EventScript_1647AE:: @ 81647AE
+	.incbin "baserom.gba", 0x1647AE, 0x1E
 
 gMapScripts_SevenIsland_TrainerTower_7F:: @ 81647CC
-	.incbin "baserom.gba", 0x1647CC, 0x2E
+	map_script 5, SevenIsland_TrainerTower_7F_MapScript1_1C4F54
+	map_script 3, SevenIsland_TrainerTower_7F_MapScript2_1C4F62
+	map_script 2, SevenIsland_TrainerTower_7F_MapScript3_1C5046
+	.byte 0
+
+SevenIsland_TrainerTower_7F_EventScript_1647DC:: @ 81647DC
+	.incbin "baserom.gba", 0x1647DC, 0x1E
 
 gMapScripts_SevenIsland_TrainerTower_8F:: @ 81647FA
-	.incbin "baserom.gba", 0x1647FA, 0x2E
+	map_script 5, SevenIsland_TrainerTower_8F_MapScript1_1C4F54
+	map_script 3, SevenIsland_TrainerTower_8F_MapScript2_1C4F62
+	map_script 2, SevenIsland_TrainerTower_8F_MapScript3_1C5046
+	.byte 0
+
+SevenIsland_TrainerTower_8F_EventScript_16480A:: @ 816480A
+	.incbin "baserom.gba", 0x16480A, 0x1E
 
 gMapScripts_SevenIsland_TrainerTower_Roof:: @ 8164828
-	.incbin "baserom.gba", 0x164828, 0x11
+	map_script 5, SevenIsland_TrainerTower_Roof_MapScript1_1C4F54
+	map_script 2, SevenIsland_TrainerTower_Roof_MapScript2_1C5046
+	.byte 0
+
+SevenIsland_TrainerTower_Roof_EventScript_164833:: @ 8164833
+	.incbin "baserom.gba", 0x164833, 0x6
 
 gMapScripts_SevenIsland_TrainerTower_Lobby:: @ 8164839
-	.incbin "baserom.gba", 0x164839, 0x1A
+	map_script 5, SevenIsland_TrainerTower_Lobby_MapScript1_164853
+	map_script 7, SevenIsland_TrainerTower_Lobby_MapScript2_164887
+	map_script 3, SevenIsland_TrainerTower_Lobby_MapScript3_1648AD
+	map_script 1, SevenIsland_TrainerTower_Lobby_MapScript4_164897
+	map_script 2, SevenIsland_TrainerTower_Lobby_MapScript5_1648B6
+	.byte 0
 
 SevenIsland_TrainerTower_Lobby_MapScript1_164853:: @ 8164853
 	.incbin "baserom.gba", 0x164853, 0x34
@@ -1292,46 +1525,57 @@ SevenIsland_TrainerTower_Lobby_EventScript_164AEF:: @ 8164AEF
 	.incbin "baserom.gba", 0x164AEF, 0x9
 
 gMapScripts_SevenIsland_TrainerTower_Elevator:: @ 8164AF8
-	.incbin "baserom.gba", 0x164AF8, 0xF4
+	map_script 5, SevenIsland_TrainerTower_Elevator_MapScript1_1C4F54
+	map_script 2, SevenIsland_TrainerTower_Elevator_MapScript2_1C5046
+	.byte 0
+
+SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
+	.incbin "baserom.gba", 0x164B03, 0xE9
 
 gMapScripts_FiveIsland_LostCave_Entrance:: @ 8164BEC
-	.incbin "baserom.gba", 0x164BEC, 0x6
+	map_script 3, FiveIsland_LostCave_Entrance_MapScript1_164BF2
+	.byte 0
 
 FiveIsland_LostCave_Entrance_MapScript1_164BF2:: @ 8164BF2
 	.incbin "baserom.gba", 0x164BF2, 0x4
 
 gMapScripts_FiveIsland_LostCave_Room1:: @ 8164BF6
-	.incbin "baserom.gba", 0x164BF6, 0x18
+	.byte 0
+
+FiveIsland_LostCave_Room1_EventScript_164BF7:: @ 8164BF7
+	.incbin "baserom.gba", 0x164BF7, 0x17
 
 gMapScripts_FiveIsland_LostCave_Room2:: @ 8164C0E
-	.incbin "baserom.gba", 0x164C0E, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room3:: @ 8164C0F
-	.incbin "baserom.gba", 0x164C0F, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room4:: @ 8164C10
-	.incbin "baserom.gba", 0x164C10, 0x1
+	.byte 0
 
 FiveIsland_LostCave_Room4_EventScript_164C11:: @ 8164C11
 	.incbin "baserom.gba", 0x164C11, 0x17
 
 gMapScripts_FiveIsland_LostCave_Room5:: @ 8164C28
-	.incbin "baserom.gba", 0x164C28, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room6:: @ 8164C29
-	.incbin "baserom.gba", 0x164C29, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room7:: @ 8164C2A
-	.incbin "baserom.gba", 0x164C2A, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room8:: @ 8164C2B
-	.incbin "baserom.gba", 0x164C2B, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room9:: @ 8164C2C
-	.incbin "baserom.gba", 0x164C2C, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room10:: @ 8164C2D
-	.incbin "baserom.gba", 0x164C2D, 0xB
+	map_script 5, FiveIsland_LostCave_Room10_MapScript1_164C38
+	map_script 2, FiveIsland_LostCave_Room10_MapScript2_164C48
+	.byte 0
 
 FiveIsland_LostCave_Room10_MapScript1_164C38:: @ 8164C38
 	.incbin "baserom.gba", 0x164C38, 0x10
@@ -1340,61 +1584,69 @@ FiveIsland_LostCave_Room10_MapScript2_164C48:: @ 8164C48
 	.incbin "baserom.gba", 0x164C48, 0x83
 
 gMapScripts_FiveIsland_LostCave_Room11:: @ 8164CCB
-	.incbin "baserom.gba", 0x164CCB, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room12:: @ 8164CCC
-	.incbin "baserom.gba", 0x164CCC, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room13:: @ 8164CCD
-	.incbin "baserom.gba", 0x164CCD, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_LostCave_Room14:: @ 8164CCE
-	.incbin "baserom.gba", 0x164CCE, 0x1
+	.byte 0
 
 gMapScripts_SevenIsland_TanobyRuins_MoneanChamber:: @ 8164CCF
-	.incbin "baserom.gba", 0x164CCF, 0x6
+	map_script 3, SevenIsland_TanobyRuins_MoneanChamber_MapScript1_164CD5
+	.byte 0
 
 SevenIsland_TanobyRuins_MoneanChamber_MapScript1_164CD5:: @ 8164CD5
 	.incbin "baserom.gba", 0x164CD5, 0x9
 
 gMapScripts_SevenIsland_TanobyRuins_LiptooChamber:: @ 8164CDE
-	.incbin "baserom.gba", 0x164CDE, 0x6
+	map_script 3, SevenIsland_TanobyRuins_LiptooChamber_MapScript1_164CE4
+	.byte 0
 
 SevenIsland_TanobyRuins_LiptooChamber_MapScript1_164CE4:: @ 8164CE4
 	.incbin "baserom.gba", 0x164CE4, 0x6
 
 gMapScripts_SevenIsland_TanobyRuins_WeepthChamber:: @ 8164CEA
-	.incbin "baserom.gba", 0x164CEA, 0x6
+	map_script 3, SevenIsland_TanobyRuins_WeepthChamber_MapScript1_164CF0
+	.byte 0
 
 SevenIsland_TanobyRuins_WeepthChamber_MapScript1_164CF0:: @ 8164CF0
 	.incbin "baserom.gba", 0x164CF0, 0x6
 
 gMapScripts_SevenIsland_TanobyRuins_DilfordChamber:: @ 8164CF6
-	.incbin "baserom.gba", 0x164CF6, 0x6
+	map_script 3, SevenIsland_TanobyRuins_DilfordChamber_MapScript1_164CFC
+	.byte 0
 
 SevenIsland_TanobyRuins_DilfordChamber_MapScript1_164CFC:: @ 8164CFC
 	.incbin "baserom.gba", 0x164CFC, 0x6
 
 gMapScripts_SevenIsland_TanobyRuins_ScufibChamber:: @ 8164D02
-	.incbin "baserom.gba", 0x164D02, 0x6
+	map_script 3, SevenIsland_TanobyRuins_ScufibChamber_MapScript1_164D08
+	.byte 0
 
 SevenIsland_TanobyRuins_ScufibChamber_MapScript1_164D08:: @ 8164D08
 	.incbin "baserom.gba", 0x164D08, 0x6
 
 gMapScripts_SevenIsland_TanobyRuins_RixyChamber:: @ 8164D0E
-	.incbin "baserom.gba", 0x164D0E, 0x6
+	map_script 3, SevenIsland_TanobyRuins_RixyChamber_MapScript1_164D14
+	.byte 0
 
 SevenIsland_TanobyRuins_RixyChamber_MapScript1_164D14:: @ 8164D14
 	.incbin "baserom.gba", 0x164D14, 0x6
 
 gMapScripts_SevenIsland_TanobyRuins_ViapoisChamber:: @ 8164D1A
-	.incbin "baserom.gba", 0x164D1A, 0x6
+	map_script 3, SevenIsland_TanobyRuins_ViapoisChamber_MapScript1_164D20
+	.byte 0
 
 SevenIsland_TanobyRuins_ViapoisChamber_MapScript1_164D20:: @ 8164D20
 	.incbin "baserom.gba", 0x164D20, 0x6
 
 gMapScripts_ThreeIsland_DunsparceTunnel:: @ 8164D26
-	.incbin "baserom.gba", 0x164D26, 0x6
+	map_script 3, ThreeIsland_DunsparceTunnel_MapScript1_164D2C
+	.byte 0
 
 ThreeIsland_DunsparceTunnel_MapScript1_164D2C:: @ 8164D2C
 	.incbin "baserom.gba", 0x164D2C, 0x34
@@ -1403,16 +1655,19 @@ ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 	.incbin "baserom.gba", 0x164D60, 0x6C
 
 gMapScripts_SevenIsland_SeavaultCanyon_TanobyKey:: @ 8164DCC
-	.incbin "baserom.gba", 0x164DCC, 0x6
+	map_script 3, SevenIsland_SeavaultCanyon_TanobyKey_MapScript1_164DD2
+	.byte 0
 
 SevenIsland_SeavaultCanyon_TanobyKey_MapScript1_164DD2:: @ 8164DD2
 	.incbin "baserom.gba", 0x164DD2, 0x1CC
 
 gMapScripts_NavelRock_1F:: @ 8164F9E
-	.incbin "baserom.gba", 0x164F9E, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_Summit:: @ 8164F9F
-	.incbin "baserom.gba", 0x164F9F, 0xB
+	map_script 3, NavelRock_Summit_MapScript1_164FAA
+	map_script 5, NavelRock_Summit_MapScript2_164FDD
+	.byte 0
 
 NavelRock_Summit_MapScript1_164FAA:: @ 8164FAA
 	.incbin "baserom.gba", 0x164FAA, 0x33
@@ -1421,7 +1676,9 @@ NavelRock_Summit_MapScript2_164FDD:: @ 8164FDD
 	.incbin "baserom.gba", 0x164FDD, 0x10A
 
 gMapScripts_NavelRock_Base:: @ 81650E7
-	.incbin "baserom.gba", 0x1650E7, 0xB
+	map_script 3, NavelRock_Base_MapScript1_1650F2
+	map_script 5, NavelRock_Base_MapScript2_165116
+	.byte 0
 
 NavelRock_Base_MapScript1_1650F2:: @ 81650F2
 	.incbin "baserom.gba", 0x1650F2, 0x24
@@ -1433,58 +1690,61 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	.incbin "baserom.gba", 0x165134, 0xBE
 
 gMapScripts_NavelRock_SummitPath_2F:: @ 81651F2
-	.incbin "baserom.gba", 0x1651F2, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_SummitPath_3F:: @ 81651F3
-	.incbin "baserom.gba", 0x1651F3, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_SummitPath_4F:: @ 81651F4
-	.incbin "baserom.gba", 0x1651F4, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_SummitPath_5F:: @ 81651F5
-	.incbin "baserom.gba", 0x1651F5, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B1F:: @ 81651F6
-	.incbin "baserom.gba", 0x1651F6, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B2F:: @ 81651F7
-	.incbin "baserom.gba", 0x1651F7, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B3F:: @ 81651F8
-	.incbin "baserom.gba", 0x1651F8, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B4F:: @ 81651F9
-	.incbin "baserom.gba", 0x1651F9, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B5F:: @ 81651FA
-	.incbin "baserom.gba", 0x1651FA, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B6F:: @ 81651FB
-	.incbin "baserom.gba", 0x1651FB, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B7F:: @ 81651FC
-	.incbin "baserom.gba", 0x1651FC, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B8F:: @ 81651FD
-	.incbin "baserom.gba", 0x1651FD, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B9F:: @ 81651FE
-	.incbin "baserom.gba", 0x1651FE, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B10F:: @ 81651FF
-	.incbin "baserom.gba", 0x1651FF, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_BasePath_B11F:: @ 8165200
-	.incbin "baserom.gba", 0x165200, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_B1F:: @ 8165201
-	.incbin "baserom.gba", 0x165201, 0x1
+	.byte 0
 
 gMapScripts_NavelRock_Fork:: @ 8165202
-	.incbin "baserom.gba", 0x165202, 0x1
+	.byte 0
 
 gMapScripts_BirthIsland_Exterior:: @ 8165203
-	.incbin "baserom.gba", 0x165203, 0x10
+	map_script 3, BirthIsland_Exterior_MapScript1_165217
+	map_script 5, BirthIsland_Exterior_MapScript2_165253
+	map_script 7, BirthIsland_Exterior_MapScript3_165213
+	.byte 0
 
 BirthIsland_Exterior_MapScript3_165213:: @ 8165213
 	.incbin "baserom.gba", 0x165213, 0x4
@@ -1499,19 +1759,27 @@ BirthIsland_Exterior_EventScript_165271:: @ 8165271
 	.incbin "baserom.gba", 0x165271, 0xEA
 
 gMapScripts_OneIsland_KindleRoad_EmberSpa:: @ 816535B
-	.incbin "baserom.gba", 0x16535B, 0x8B
+	.byte 0
+
+OneIsland_KindleRoad_EmberSpa_EventScript_16535C:: @ 816535C
+	.incbin "baserom.gba", 0x16535C, 0x8A
 
 gMapScripts_BirthIsland_Harbor:: @ 81653E6
-	.incbin "baserom.gba", 0x1653E6, 0x1
+	.byte 0
 
 BirthIsland_Harbor_EventScript_1653E7:: @ 81653E7
 	.incbin "baserom.gba", 0x1653E7, 0x39
 
 gMapScripts_NavelRock_Harbor:: @ 8165420
-	.incbin "baserom.gba", 0x165420, 0x3A
+	.byte 0
+
+NavelRock_Harbor_EventScript_165421:: @ 8165421
+	.incbin "baserom.gba", 0x165421, 0x39
 
 gMapScripts_PalletTown:: @ 816545A
-	.incbin "baserom.gba", 0x16545A, 0xB
+	map_script 3, PalletTown_MapScript1_165465
+	map_script 2, PalletTown_MapScript2_1654CE
+	.byte 0
 
 PalletTown_MapScript1_165465:: @ 8165465
 	.incbin "baserom.gba", 0x165465, 0x69
@@ -1550,13 +1818,15 @@ PalletTown_EventScript_16587B:: @ 816587B
 	.incbin "baserom.gba", 0x16587B, 0x58
 
 gMapScripts_ViridianCity:: @ 81658D3
-	.incbin "baserom.gba", 0x1658D3, 0x6
+	map_script 3, ViridianCity_MapScript1_1658D9
+	.byte 0
 
 ViridianCity_MapScript1_1658D9:: @ 81658D9
 	.incbin "baserom.gba", 0x1658D9, 0x2B5
 
 gMapScripts_PewterCity:: @ 8165B8E
-	.incbin "baserom.gba", 0x165B8E, 0x6
+	map_script 3, PewterCity_MapScript1_165B94
+	.byte 0
 
 PewterCity_MapScript1_165B94:: @ 8165B94
 	.incbin "baserom.gba", 0x165B94, 0x9
@@ -1616,13 +1886,15 @@ PewterCity_EventScript_1662D1:: @ 81662D1
 	.incbin "baserom.gba", 0x1662D1, 0x1A0
 
 gMapScripts_CeruleanCity:: @ 8166471
-	.incbin "baserom.gba", 0x166471, 0x6
+	map_script 3, CeruleanCity_MapScript1_166477
+	.byte 0
 
 CeruleanCity_MapScript1_166477:: @ 8166477
 	.incbin "baserom.gba", 0x166477, 0x3F4
 
 gMapScripts_LavenderTown:: @ 816686B
-	.incbin "baserom.gba", 0x16686B, 0x6
+	map_script 3, LavenderTown_MapScript1_166871
+	.byte 0
 
 LavenderTown_MapScript1_166871:: @ 8166871
 	.incbin "baserom.gba", 0x166871, 0xC
@@ -1649,7 +1921,9 @@ LavenderTown_EventScript_1668D3:: @ 81668D3
 	.incbin "baserom.gba", 0x1668D3, 0x9
 
 gMapScripts_VermilionCity:: @ 81668DC
-	.incbin "baserom.gba", 0x1668DC, 0xB
+	map_script 3, VermilionCity_MapScript1_166906
+	map_script 2, VermilionCity_MapScript2_1668E7
+	.byte 0
 
 VermilionCity_MapScript2_1668E7:: @ 81668E7
 	.incbin "baserom.gba", 0x1668E7, 0x1F
@@ -1658,7 +1932,8 @@ VermilionCity_MapScript1_166906:: @ 8166906
 	.incbin "baserom.gba", 0x166906, 0x389
 
 gMapScripts_CeladonCity:: @ 8166C8F
-	.incbin "baserom.gba", 0x166C8F, 0x6
+	map_script 3, CeladonCity_MapScript1_166C95
+	.byte 0
 
 CeladonCity_MapScript1_166C95:: @ 8166C95
 	.incbin "baserom.gba", 0x166C95, 0x4
@@ -1721,13 +1996,16 @@ CeladonCity_EventScript_166D6C:: @ 8166D6C
 	.incbin "baserom.gba", 0x166D6C, 0x9
 
 gMapScripts_FuchsiaCity:: @ 8166D75
-	.incbin "baserom.gba", 0x166D75, 0x6
+	map_script 3, FuchsiaCity_MapScript1_166D7B
+	.byte 0
 
 FuchsiaCity_MapScript1_166D7B:: @ 8166D7B
 	.incbin "baserom.gba", 0x166D7B, 0x15B
 
 gMapScripts_CinnabarIsland:: @ 8166ED6
-	.incbin "baserom.gba", 0x166ED6, 0xB
+	map_script 3, CinnabarIsland_MapScript1_166EE1
+	map_script 2, CinnabarIsland_MapScript2_166F6E
+	.byte 0
 
 CinnabarIsland_MapScript1_166EE1:: @ 8166EE1
 	.incbin "baserom.gba", 0x166EE1, 0x8D
@@ -1754,7 +2032,9 @@ CinnabarIsland_EventScript_167223:: @ 8167223
 	.incbin "baserom.gba", 0x167223, 0x18
 
 gMapScripts_IndigoPlateau_Exterior:: @ 816723B
-	.incbin "baserom.gba", 0x16723B, 0xB
+	map_script 3, IndigoPlateau_Exterior_MapScript1_167246
+	map_script 2, IndigoPlateau_Exterior_MapScript2_16725A
+	.byte 0
 
 IndigoPlateau_Exterior_MapScript1_167246:: @ 8167246
 	.incbin "baserom.gba", 0x167246, 0x14
@@ -1763,7 +2043,8 @@ IndigoPlateau_Exterior_MapScript2_16725A:: @ 816725A
 	.incbin "baserom.gba", 0x16725A, 0x105
 
 gMapScripts_SaffronCity_Duplicate:: @ 816735F
-	.incbin "baserom.gba", 0x16735F, 0x6
+	map_script 3, SaffronCity_Duplicate_MapScript1_167365
+	.byte 0
 
 SaffronCity_Duplicate_MapScript1_167365:: @ 8167365
 	.incbin "baserom.gba", 0x167365, 0x15
@@ -1838,10 +2119,12 @@ SaffronCity_Duplicate_EventScript_16747A:: @ 816747A
 	.incbin "baserom.gba", 0x16747A, 0x9
 
 gMapScripts_SaffronCity:: @ 8167483
-	.incbin "baserom.gba", 0x167483, 0x1
+	.byte 0
 
 gMapScripts_OneIsland:: @ 8167484
-	.incbin "baserom.gba", 0x167484, 0xB
+	map_script 3, OneIsland_MapScript1_16748F
+	map_script 2, OneIsland_MapScript2_167493
+	.byte 0
 
 OneIsland_MapScript1_16748F:: @ 816748F
 	.incbin "baserom.gba", 0x16748F, 0x4
@@ -1862,13 +2145,15 @@ OneIsland_EventScript_16755B:: @ 816755B
 	.incbin "baserom.gba", 0x16755B, 0x9
 
 gMapScripts_TwoIsland:: @ 8167564
-	.incbin "baserom.gba", 0x167564, 0x6
+	map_script 3, TwoIsland_MapScript1_16756A
+	.byte 0
 
 TwoIsland_MapScript1_16756A:: @ 816756A
 	.incbin "baserom.gba", 0x16756A, 0x243
 
 gMapScripts_ThreeIsland:: @ 81677AD
-	.incbin "baserom.gba", 0x1677AD, 0x6
+	map_script 3, ThreeIsland_MapScript1_1677B3
+	.byte 0
 
 ThreeIsland_MapScript1_1677B3:: @ 81677B3
 	.incbin "baserom.gba", 0x1677B3, 0x25
@@ -1916,7 +2201,9 @@ ThreeIsland_EventScript_167CA5:: @ 8167CA5
 	.incbin "baserom.gba", 0x167CA5, 0x9
 
 gMapScripts_FourIsland:: @ 8167CAE
-	.incbin "baserom.gba", 0x167CAE, 0xB
+	map_script 3, FourIsland_MapScript1_167CB9
+	map_script 2, FourIsland_MapScript2_167CE2
+	.byte 0
 
 FourIsland_MapScript1_167CB9:: @ 8167CB9
 	.incbin "baserom.gba", 0x167CB9, 0x29
@@ -1925,7 +2212,8 @@ FourIsland_MapScript2_167CE2:: @ 8167CE2
 	.incbin "baserom.gba", 0x167CE2, 0x1AC
 
 gMapScripts_FiveIsland:: @ 8167E8E
-	.incbin "baserom.gba", 0x167E8E, 0x6
+	map_script 3, FiveIsland_MapScript1_167E94
+	.byte 0
 
 FiveIsland_MapScript1_167E94:: @ 8167E94
 	.incbin "baserom.gba", 0x167E94, 0x4
@@ -1940,13 +2228,15 @@ FiveIsland_EventScript_167EAA:: @ 8167EAA
 	.incbin "baserom.gba", 0x167EAA, 0x9
 
 gMapScripts_SevenIsland:: @ 8167EB3
-	.incbin "baserom.gba", 0x167EB3, 0x6
+	map_script 3, SevenIsland_MapScript1_167EB9
+	.byte 0
 
 SevenIsland_MapScript1_167EB9:: @ 8167EB9
 	.incbin "baserom.gba", 0x167EB9, 0x1F
 
 gMapScripts_SixIsland:: @ 8167ED8
-	.incbin "baserom.gba", 0x167ED8, 0x6
+	map_script 3, SixIsland_MapScript1_167EDE
+	.byte 0
 
 SixIsland_MapScript1_167EDE:: @ 8167EDE
 	.incbin "baserom.gba", 0x167EDE, 0x4
@@ -1961,10 +2251,13 @@ SixIsland_EventScript_167EF4:: @ 8167EF4
 	.incbin "baserom.gba", 0x167EF4, 0x9
 
 gMapScripts_Route1:: @ 8167EFD
-	.incbin "baserom.gba", 0x167EFD, 0x67
+	.byte 0
+
+Route1_EventScript_167EFE:: @ 8167EFE
+	.incbin "baserom.gba", 0x167EFE, 0x66
 
 gMapScripts_Route2:: @ 8167F64
-	.incbin "baserom.gba", 0x167F64, 0x1
+	.byte 0
 
 Route2_EventScript_167F65:: @ 8167F65
 	.incbin "baserom.gba", 0x167F65, 0x9
@@ -1973,10 +2266,16 @@ Route2_EventScript_167F6E:: @ 8167F6E
 	.incbin "baserom.gba", 0x167F6E, 0x9
 
 gMapScripts_Route3:: @ 8167F77
-	.incbin "baserom.gba", 0x167F77, 0x13
+	.byte 0
+
+Route3_EventScript_167F78:: @ 8167F78
+	.incbin "baserom.gba", 0x167F78, 0x12
 
 gMapScripts_Route4:: @ 8167F8A
-	.incbin "baserom.gba", 0x167F8A, 0x2
+	.byte 0
+
+Route4_EventScript_167F8B:: @ 8167F8B
+	.incbin "baserom.gba", 0x167F8B, 0x1
 
 Route4_EventScript_167F8C:: @ 8167F8C
 	.incbin "baserom.gba", 0x167F8C, 0x9
@@ -1988,28 +2287,40 @@ Route4_EventScript_167F9E:: @ 8167F9E
 	.incbin "baserom.gba", 0x167F9E, 0x9
 
 gMapScripts_Route5:: @ 8167FA7
-	.incbin "baserom.gba", 0x167FA7, 0xA
+	.byte 0
+
+Route5_EventScript_167FA8:: @ 8167FA8
+	.incbin "baserom.gba", 0x167FA8, 0x9
 
 gMapScripts_Route6:: @ 8167FB1
-	.incbin "baserom.gba", 0x167FB1, 0x1
+	.byte 0
 
 Route6_EventScript_167FB2:: @ 8167FB2
 	.incbin "baserom.gba", 0x167FB2, 0x9
 
 gMapScripts_Route7:: @ 8167FBB
-	.incbin "baserom.gba", 0x167FBB, 0xA
+	.byte 0
+
+Route7_EventScript_167FBC:: @ 8167FBC
+	.incbin "baserom.gba", 0x167FBC, 0x9
 
 gMapScripts_Route8:: @ 8167FC5
-	.incbin "baserom.gba", 0x167FC5, 0x1
+	.byte 0
 
 Route8_EventScript_167FC6:: @ 8167FC6
 	.incbin "baserom.gba", 0x167FC6, 0x9
 
 gMapScripts_Route9:: @ 8167FCF
-	.incbin "baserom.gba", 0x167FCF, 0xA
+	.byte 0
+
+Route9_EventScript_167FD0:: @ 8167FD0
+	.incbin "baserom.gba", 0x167FD0, 0x9
 
 gMapScripts_Route10:: @ 8167FD9
-	.incbin "baserom.gba", 0x167FD9, 0x2
+	.byte 0
+
+Route10_EventScript_167FDA:: @ 8167FDA
+	.incbin "baserom.gba", 0x167FDA, 0x1
 
 Route10_EventScript_167FDB:: @ 8167FDB
 	.incbin "baserom.gba", 0x167FDB, 0x9
@@ -2021,10 +2332,14 @@ Route10_EventScript_167FED:: @ 8167FED
 	.incbin "baserom.gba", 0x167FED, 0x9
 
 gMapScripts_Route11:: @ 8167FF6
-	.incbin "baserom.gba", 0x167FF6, 0xA
+	.byte 0
+
+Route11_EventScript_167FF7:: @ 8167FF7
+	.incbin "baserom.gba", 0x167FF7, 0x9
 
 gMapScripts_Route12:: @ 8168000
-	.incbin "baserom.gba", 0x168000, 0x6
+	map_script 5, Route12_MapScript1_168006
+	.byte 0
 
 Route12_MapScript1_168006:: @ 8168006
 	.incbin "baserom.gba", 0x168006, 0xE
@@ -2039,19 +2354,28 @@ Route12_EventScript_1680AC:: @ 81680AC
 	.incbin "baserom.gba", 0x1680AC, 0x9
 
 gMapScripts_Route13:: @ 81680B5
-	.incbin "baserom.gba", 0x1680B5, 0x1C
+	.byte 0
+
+Route13_EventScript_1680B6:: @ 81680B6
+	.incbin "baserom.gba", 0x1680B6, 0x1B
 
 gMapScripts_Route14:: @ 81680D1
-	.incbin "baserom.gba", 0x1680D1, 0x1
+	.byte 0
 
 Route14_EventScript_1680D2:: @ 81680D2
 	.incbin "baserom.gba", 0x1680D2, 0x9
 
 gMapScripts_Route15:: @ 81680DB
-	.incbin "baserom.gba", 0x1680DB, 0xA
+	.byte 0
+
+Route15_EventScript_1680DC:: @ 81680DC
+	.incbin "baserom.gba", 0x1680DC, 0x9
 
 gMapScripts_Route16:: @ 81680E5
-	.incbin "baserom.gba", 0x1680E5, 0x10
+	map_script 5, Route16_MapScript1_1680F5
+	map_script 3, Route16_MapScript2_168103
+	map_script 4, Route16_MapScript3_168113
+	.byte 0
 
 Route16_MapScript1_1680F5:: @ 81680F5
 	.incbin "baserom.gba", 0x1680F5, 0xE
@@ -2072,10 +2396,15 @@ Route16_EventScript_1681B6:: @ 81681B6
 	.incbin "baserom.gba", 0x1681B6, 0x9
 
 gMapScripts_Route17:: @ 81681BF
-	.incbin "baserom.gba", 0x1681BF, 0x37
+	.byte 0
+
+Route17_EventScript_1681C0:: @ 81681C0
+	.incbin "baserom.gba", 0x1681C0, 0x36
 
 gMapScripts_Route18:: @ 81681F6
-	.incbin "baserom.gba", 0x1681F6, 0xB
+	map_script 3, Route18_MapScript1_168201
+	map_script 4, Route18_MapScript2_168211
+	.byte 0
 
 Route18_MapScript1_168201:: @ 8168201
 	.incbin "baserom.gba", 0x168201, 0x10
@@ -2090,10 +2419,14 @@ Route18_EventScript_168228:: @ 8168228
 	.incbin "baserom.gba", 0x168228, 0x9
 
 gMapScripts_Route19:: @ 8168231
-	.incbin "baserom.gba", 0x168231, 0xA
+	.byte 0
+
+Route19_EventScript_168232:: @ 8168232
+	.incbin "baserom.gba", 0x168232, 0x9
 
 gMapScripts_Route20:: @ 816823B
-	.incbin "baserom.gba", 0x16823B, 0x6
+	map_script 3, Route20_MapScript1_168241
+	.byte 0
 
 Route20_MapScript1_168241:: @ 8168241
 	.incbin "baserom.gba", 0x168241, 0x3F
@@ -2102,16 +2435,20 @@ Route20_EventScript_168280:: @ 8168280
 	.incbin "baserom.gba", 0x168280, 0x9
 
 gMapScripts_Route21_North:: @ 8168289
-	.incbin "baserom.gba", 0x168289, 0x1
+	.byte 0
 
 gMapScripts_Route21_South:: @ 816828A
-	.incbin "baserom.gba", 0x16828A, 0x1
+	.byte 0
 
 gMapScripts_Route22:: @ 816828B
-	.incbin "baserom.gba", 0x16828B, 0x260
+	.byte 0
+
+Route22_EventScript_16828C:: @ 816828C
+	.incbin "baserom.gba", 0x16828C, 0x25F
 
 gMapScripts_Route23:: @ 81684EB
-	.incbin "baserom.gba", 0x1684EB, 0x6
+	map_script 3, Route23_MapScript1_1684F1
+	.byte 0
 
 Route23_MapScript1_1684F1:: @ 81684F1
 	.incbin "baserom.gba", 0x1684F1, 0x1B
@@ -2162,10 +2499,13 @@ Route23_EventScript_168616:: @ 8168616
 	.incbin "baserom.gba", 0x168616, 0x9
 
 gMapScripts_Route24:: @ 816861F
-	.incbin "baserom.gba", 0x16861F, 0x126
+	.byte 0
+
+Route24_EventScript_168620:: @ 8168620
+	.incbin "baserom.gba", 0x168620, 0x125
 
 gMapScripts_Route25:: @ 8168745
-	.incbin "baserom.gba", 0x168745, 0x1
+	.byte 0
 
 Route25_EventScript_168746:: @ 8168746
 	.incbin "baserom.gba", 0x168746, 0x9
@@ -2174,19 +2514,22 @@ Route25_EventScript_16874F:: @ 816874F
 	.incbin "baserom.gba", 0x16874F, 0x9
 
 gMapScripts_OneIsland_KindleRoad:: @ 8168758
-	.incbin "baserom.gba", 0x168758, 0x13
+	.byte 0
+
+OneIsland_KindleRoad_EventScript_168759:: @ 8168759
+	.incbin "baserom.gba", 0x168759, 0x12
 
 gMapScripts_OneIsland_TreasureBeach:: @ 816876B
-	.incbin "baserom.gba", 0x16876B, 0x1
+	.byte 0
 
 OneIsland_TreasureBeach_EventScript_16876C:: @ 816876C
 	.incbin "baserom.gba", 0x16876C, 0x9
 
 gMapScripts_TwoIsland_CapeBrink:: @ 8168775
-	.incbin "baserom.gba", 0x168775, 0x1
+	.byte 0
 
 gMapScripts_ThreeIsland_BondBridge:: @ 8168776
-	.incbin "baserom.gba", 0x168776, 0x1
+	.byte 0
 
 ThreeIsland_BondBridge_EventScript_168777:: @ 8168777
 	.incbin "baserom.gba", 0x168777, 0x9
@@ -2195,25 +2538,28 @@ ThreeIsland_BondBridge_EventScript_168780:: @ 8168780
 	.incbin "baserom.gba", 0x168780, 0x9
 
 gMapScripts_ThreeIsland_Port:: @ 8168789
-	.incbin "baserom.gba", 0x168789, 0x6
+	map_script 3, ThreeIsland_Port_MapScript1_16878F
+	.byte 0
 
 ThreeIsland_Port_MapScript1_16878F:: @ 816878F
 	.incbin "baserom.gba", 0x16878F, 0x51
 
 gMapScripts_UnknownMap_03_50:: @ 81687E0
-	.incbin "baserom.gba", 0x1687E0, 0x1
+	.byte 0
 
 gMapScripts_UnknownMap_03_51:: @ 81687E1
-	.incbin "baserom.gba", 0x1687E1, 0x1
+	.byte 0
 
 gMapScripts_UnknownMap_03_52:: @ 81687E2
-	.incbin "baserom.gba", 0x1687E2, 0x1
+	.byte 0
 
 gMapScripts_UnknownMap_03_53:: @ 81687E3
-	.incbin "baserom.gba", 0x1687E3, 0x1
+	.byte 0
 
 gMapScripts_FiveIsland_ResortGorgeous:: @ 81687E4
-	.incbin "baserom.gba", 0x1687E4, 0xB
+	map_script 4, FiveIsland_ResortGorgeous_MapScript1_1687EF
+	map_script 2, FiveIsland_ResortGorgeous_MapScript2_1687FE
+	.byte 0
 
 FiveIsland_ResortGorgeous_MapScript1_1687EF:: @ 81687EF
 	.incbin "baserom.gba", 0x1687EF, 0xF
@@ -2225,10 +2571,14 @@ FiveIsland_ResortGorgeous_EventScript_168844:: @ 8168844
 	.incbin "baserom.gba", 0x168844, 0x9
 
 gMapScripts_FiveIsland_WaterLabyrinth:: @ 816884D
-	.incbin "baserom.gba", 0x16884D, 0xE5
+	.byte 0
+
+FiveIsland_WaterLabyrinth_EventScript_16884E:: @ 816884E
+	.incbin "baserom.gba", 0x16884E, 0xE4
 
 gMapScripts_FiveIsland_Meadow:: @ 8168932
-	.incbin "baserom.gba", 0x168932, 0x6
+	map_script 1, FiveIsland_Meadow_MapScript1_168938
+	.byte 0
 
 FiveIsland_Meadow_MapScript1_168938:: @ 8168938
 	.incbin "baserom.gba", 0x168938, 0xA
@@ -2246,19 +2596,25 @@ FiveIsland_Meadow_EventScript_1689BB:: @ 81689BB
 	.incbin "baserom.gba", 0x1689BB, 0x17
 
 gMapScripts_FiveIsland_MemorialPillar:: @ 81689D2
-	.incbin "baserom.gba", 0x1689D2, 0x143
+	.byte 0
+
+FiveIsland_MemorialPillar_EventScript_1689D3:: @ 81689D3
+	.incbin "baserom.gba", 0x1689D3, 0x142
 
 gMapScripts_SixIsland_OutcastIsland:: @ 8168B15
-	.incbin "baserom.gba", 0x168B15, 0x1
+	.byte 0
 
 SixIsland_OutcastIsland_EventScript_168B16:: @ 8168B16
 	.incbin "baserom.gba", 0x168B16, 0x17
 
 gMapScripts_SixIsland_GreenPath:: @ 8168B2D
-	.incbin "baserom.gba", 0x168B2D, 0x13
+	.byte 0
+
+SixIsland_GreenPath_EventScript_168B2E:: @ 8168B2E
+	.incbin "baserom.gba", 0x168B2E, 0x12
 
 gMapScripts_SixIsland_WaterPath:: @ 8168B40
-	.incbin "baserom.gba", 0x168B40, 0x1
+	.byte 0
 
 SixIsland_WaterPath_EventScript_168B41:: @ 8168B41
 	.incbin "baserom.gba", 0x168B41, 0x9
@@ -2267,13 +2623,15 @@ SixIsland_WaterPath_EventScript_168B4A:: @ 8168B4A
 	.incbin "baserom.gba", 0x168B4A, 0x9
 
 gMapScripts_SixIsland_RuinValley:: @ 8168B53
-	.incbin "baserom.gba", 0x168B53, 0x6
+	map_script 1, SixIsland_RuinValley_MapScript1_168B59
+	.byte 0
 
 SixIsland_RuinValley_MapScript1_168B59:: @ 8168B59
 	.incbin "baserom.gba", 0x168B59, 0x7C
 
 gMapScripts_SevenIsland_TrainerTower:: @ 8168BD5
-	.incbin "baserom.gba", 0x168BD5, 0x6
+	map_script 3, SevenIsland_TrainerTower_MapScript1_168BDB
+	.byte 0
 
 SevenIsland_TrainerTower_MapScript1_168BDB:: @ 8168BDB
 	.incbin "baserom.gba", 0x168BDB, 0x6
@@ -2285,19 +2643,22 @@ SevenIsland_TrainerTower_EventScript_168BEA:: @ 8168BEA
 	.incbin "baserom.gba", 0x168BEA, 0x9
 
 gMapScripts_SevenIsland_SevaultCanyon_Entrance:: @ 8168BF3
-	.incbin "baserom.gba", 0x168BF3, 0xA
+	.byte 0
+
+SevenIsland_SevaultCanyon_Entrance_EventScript_168BF4:: @ 8168BF4
+	.incbin "baserom.gba", 0x168BF4, 0x9
 
 gMapScripts_SevenIsland_SevaultCanyon:: @ 8168BFD
-	.incbin "baserom.gba", 0x168BFD, 0x1
+	.byte 0
 
 SevenIsland_SevaultCanyon_EventScript_168BFE:: @ 8168BFE
 	.incbin "baserom.gba", 0x168BFE, 0x9
 
 gMapScripts_SevenIsland_TanobyRuins:: @ 8168C07
-	.incbin "baserom.gba", 0x168C07, 0x1
+	.byte 0
 
 gMapScripts_PalletTown_PlayersHouse_1F:: @ 8168C08
-	.incbin "baserom.gba", 0x168C08, 0x1
+	.byte 0
 
 PalletTown_PlayersHouse_1F_EventScript_168C09:: @ 8168C09
 	.incbin "baserom.gba", 0x168C09, 0x59
@@ -2306,7 +2667,9 @@ PalletTown_PlayersHouse_1F_EventScript_168C62:: @ 8168C62
 	.incbin "baserom.gba", 0x168C62, 0x41
 
 gMapScripts_PalletTown_PlayersHouse_2F:: @ 8168CA3
-	.incbin "baserom.gba", 0x168CA3, 0xB
+	map_script 3, PalletTown_PlayersHouse_2F_MapScript1_168CAE
+	map_script 4, PalletTown_PlayersHouse_2F_MapScript2_168CBE
+	.byte 0
 
 PalletTown_PlayersHouse_2F_MapScript1_168CAE:: @ 8168CAE
 	.incbin "baserom.gba", 0x168CAE, 0x10
@@ -2321,7 +2684,8 @@ gUnknown_8168D17:: @ 8168D17
 	.incbin "baserom.gba", 0x168D17, 0x10
 
 gMapScripts_PalletTown_GarysHouse:: @ 8168D27
-	.incbin "baserom.gba", 0x168D27, 0x6
+	map_script 3, PalletTown_GarysHouse_MapScript1_168D2D
+	.byte 0
 
 PalletTown_GarysHouse_MapScript1_168D2D:: @ 8168D2D
 	.incbin "baserom.gba", 0x168D2D, 0x29
@@ -2339,7 +2703,10 @@ PalletTown_GarysHouse_EventScript_168F75:: @ 8168F75
 	.incbin "baserom.gba", 0x168F75, 0x9
 
 gMapScripts_PalletTown_ProfessorOaksLab:: @ 8168F7E
-	.incbin "baserom.gba", 0x168F7E, 0x10
+	map_script 3, PalletTown_ProfessorOaksLab_MapScript1_168F8E
+	map_script 4, PalletTown_ProfessorOaksLab_MapScript2_168FE1
+	map_script 2, PalletTown_ProfessorOaksLab_MapScript3_168FF0
+	.byte 0
 
 PalletTown_ProfessorOaksLab_MapScript1_168F8E:: @ 8168F8E
 	.incbin "baserom.gba", 0x168F8E, 0x53
@@ -2351,7 +2718,7 @@ PalletTown_ProfessorOaksLab_MapScript3_168FF0:: @ 8168FF0
 	.incbin "baserom.gba", 0x168FF0, 0xEAA
 
 gMapScripts_ViridianCity_House1:: @ 8169E9A
-	.incbin "baserom.gba", 0x169E9A, 0x1
+	.byte 0
 
 ViridianCity_House1_EventScript_169E9B:: @ 8169E9B
 	.incbin "baserom.gba", 0x169E9B, 0x9
@@ -2366,10 +2733,13 @@ ViridianCity_House1_EventScript_169EC0:: @ 8169EC0
 	.incbin "baserom.gba", 0x169EC0, 0x9
 
 gMapScripts_ViridianCity_Gym:: @ 8169EC9
-	.incbin "baserom.gba", 0x169EC9, 0x1B3
+	.byte 0
+
+ViridianCity_Gym_EventScript_169ECA:: @ 8169ECA
+	.incbin "baserom.gba", 0x169ECA, 0x1B2
 
 gMapScripts_ViridianCity_House2:: @ 816A07C
-	.incbin "baserom.gba", 0x16A07C, 0x1
+	.byte 0
 
 ViridianCity_House2_EventScript_16A07D:: @ 816A07D
 	.incbin "baserom.gba", 0x16A07D, 0x17
@@ -2384,7 +2754,9 @@ ViridianCity_House2_EventScript_16A11D:: @ 816A11D
 	.incbin "baserom.gba", 0x16A11D, 0xB6
 
 gMapScripts_ViridianCity_Mart:: @ 816A1D3
-	.incbin "baserom.gba", 0x16A1D3, 0xB
+	map_script 1, ViridianCity_Mart_MapScript1_16A1DE
+	map_script 2, ViridianCity_Mart_MapScript2_16A1FB
+	.byte 0
 
 ViridianCity_Mart_MapScript1_16A1DE:: @ 816A1DE
 	.incbin "baserom.gba", 0x16A1DE, 0x1D
@@ -2393,7 +2765,9 @@ ViridianCity_Mart_MapScript2_16A1FB:: @ 816A1FB
 	.incbin "baserom.gba", 0x16A1FB, 0xC5
 
 gMapScripts_ViridianCity_PokemonCenter_1F:: @ 816A2C0
-	.incbin "baserom.gba", 0x16A2C0, 0xB
+	map_script 3, ViridianCity_PokemonCenter_1F_MapScript1_16A2CB
+	map_script 5, ViridianCity_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 ViridianCity_PokemonCenter_1F_MapScript1_16A2CB:: @ 816A2CB
 	.incbin "baserom.gba", 0x16A2CB, 0x4
@@ -2411,10 +2785,17 @@ ViridianCity_PokemonCenter_1F_EventScript_16A2EA:: @ 816A2EA
 	.incbin "baserom.gba", 0x16A2EA, 0x9
 
 gMapScripts_ViridianCity_PokemonCenter_2F:: @ 816A2F3
-	.incbin "baserom.gba", 0x16A2F3, 0x27
+	map_script 2, ViridianCity_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, ViridianCity_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, ViridianCity_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, ViridianCity_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+ViridianCity_PokemonCenter_2F_EventScript_16A308:: @ 816A308
+	.incbin "baserom.gba", 0x16A308, 0x12
 
 gMapScripts_PewterCity_Museum_1F:: @ 816A31A
-	.incbin "baserom.gba", 0x16A31A, 0x1
+	.byte 0
 
 PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
 	.incbin "baserom.gba", 0x16A31B, 0x74
@@ -2447,10 +2828,13 @@ PewterCity_Museum_1F_EventScript_16A532:: @ 816A532
 	.incbin "baserom.gba", 0x16A532, 0x20
 
 gMapScripts_PewterCity_Museum_2F:: @ 816A552
-	.incbin "baserom.gba", 0x16A552, 0x40
+	.byte 0
+
+PewterCity_Museum_2F_EventScript_16A553:: @ 816A553
+	.incbin "baserom.gba", 0x16A553, 0x3F
 
 gMapScripts_PewterCity_Gym:: @ 816A592
-	.incbin "baserom.gba", 0x16A592, 0x1
+	.byte 0
 
 PewterCity_Gym_EventScript_16A593:: @ 816A593
 	.incbin "baserom.gba", 0x16A593, 0xAB
@@ -2465,10 +2849,13 @@ PewterCity_Gym_EventScript_16A6AF:: @ 816A6AF
 	.incbin "baserom.gba", 0x16A6AF, 0x1E
 
 gMapScripts_PewterCity_Mart:: @ 816A6CD
-	.incbin "baserom.gba", 0x16A6CD, 0x4F
+	.byte 0
+
+PewterCity_Mart_EventScript_16A6CE:: @ 816A6CE
+	.incbin "baserom.gba", 0x16A6CE, 0x4E
 
 gMapScripts_PewterCity_House1:: @ 816A71C
-	.incbin "baserom.gba", 0x16A71C, 0x1
+	.byte 0
 
 PewterCity_House1_EventScript_16A71D:: @ 816A71D
 	.incbin "baserom.gba", 0x16A71D, 0x9
@@ -2480,28 +2867,43 @@ PewterCity_House1_EventScript_16A736:: @ 816A736
 	.incbin "baserom.gba", 0x16A736, 0x2A
 
 gMapScripts_PewterCity_PokemonCenter_1F:: @ 816A760
-	.incbin "baserom.gba", 0x16A760, 0xB
+	map_script 3, PewterCity_PokemonCenter_1F_MapScript1_16A76B
+	map_script 5, PewterCity_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 PewterCity_PokemonCenter_1F_MapScript1_16A76B:: @ 816A76B
 	.incbin "baserom.gba", 0x16A76B, 0x4A
 
 gMapScripts_PewterCity_PokemonCenter_2F:: @ 816A7B5
-	.incbin "baserom.gba", 0x16A7B5, 0x27
+	map_script 2, PewterCity_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, PewterCity_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, PewterCity_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, PewterCity_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+PewterCity_PokemonCenter_2F_EventScript_16A7CA:: @ 816A7CA
+	.incbin "baserom.gba", 0x16A7CA, 0x12
 
 gMapScripts_PewterCity_House2:: @ 816A7DC
-	.incbin "baserom.gba", 0x16A7DC, 0x13
+	.byte 0
+
+PewterCity_House2_EventScript_16A7DD:: @ 816A7DD
+	.incbin "baserom.gba", 0x16A7DD, 0x12
 
 gMapScripts_CeruleanCity_House1:: @ 816A7EF
-	.incbin "baserom.gba", 0x16A7EF, 0x1
+	.byte 0
 
 CeruleanCity_House1_EventScript_16A7F0:: @ 816A7F0
 	.incbin "baserom.gba", 0x16A7F0, 0x185
 
 gMapScripts_CeruleanCity_House2:: @ 816A975
-	.incbin "baserom.gba", 0x16A975, 0x32
+	.byte 0
+
+CeruleanCity_House2_EventScript_16A976:: @ 816A976
+	.incbin "baserom.gba", 0x16A976, 0x31
 
 gMapScripts_CeruleanCity_House3:: @ 816A9A7
-	.incbin "baserom.gba", 0x16A9A7, 0x1
+	.byte 0
 
 CeruleanCity_House3_EventScript_16A9A8:: @ 816A9A8
 	.incbin "baserom.gba", 0x16A9A8, 0x9
@@ -2510,19 +2912,31 @@ CeruleanCity_House3_EventScript_16A9B1:: @ 816A9B1
 	.incbin "baserom.gba", 0x16A9B1, 0x7C
 
 gMapScripts_CeruleanCity_PokemonCenter_1F:: @ 816AA2D
-	.incbin "baserom.gba", 0x16AA2D, 0xB
+	map_script 3, CeruleanCity_PokemonCenter_1F_MapScript1_16AA38
+	map_script 5, CeruleanCity_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 CeruleanCity_PokemonCenter_1F_MapScript1_16AA38:: @ 816AA38
 	.incbin "baserom.gba", 0x16AA38, 0x41
 
 gMapScripts_CeruleanCity_PokemonCenter_2F:: @ 816AA79
-	.incbin "baserom.gba", 0x16AA79, 0x27
+	map_script 2, CeruleanCity_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, CeruleanCity_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, CeruleanCity_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, CeruleanCity_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+CeruleanCity_PokemonCenter_2F_EventScript_16AA8E:: @ 816AA8E
+	.incbin "baserom.gba", 0x16AA8E, 0x12
 
 gMapScripts_CeruleanCity_Gym:: @ 816AAA0
-	.incbin "baserom.gba", 0x16AAA0, 0x11C
+	.byte 0
+
+CeruleanCity_Gym_EventScript_16AAA1:: @ 816AAA1
+	.incbin "baserom.gba", 0x16AAA1, 0x11B
 
 gMapScripts_CeruleanCity_BikeShop:: @ 816ABBC
-	.incbin "baserom.gba", 0x16ABBC, 0x1
+	.byte 0
 
 CeruleanCity_BikeShop_EventScript_16ABBD:: @ 816ABBD
 	.incbin "baserom.gba", 0x16ABBD, 0xAF
@@ -2537,19 +2951,27 @@ CeruleanCity_BikeShop_EventScript_16AC94:: @ 816AC94
 	.incbin "baserom.gba", 0x16AC94, 0x9
 
 gMapScripts_CeruleanCity_Mart:: @ 816AC9D
-	.incbin "baserom.gba", 0x16AC9D, 0x51
+	.byte 0
+
+CeruleanCity_Mart_EventScript_16AC9E:: @ 816AC9E
+	.incbin "baserom.gba", 0x16AC9E, 0x50
 
 gMapScripts_CeruleanCity_House4:: @ 816ACEE
-	.incbin "baserom.gba", 0x16ACEE, 0x1
+	.byte 0
 
 CeruleanCity_House4_EventScript_16ACEF:: @ 816ACEF
 	.incbin "baserom.gba", 0x16ACEF, 0x160
 
 gMapScripts_CeruleanCity_House5:: @ 816AE4F
-	.incbin "baserom.gba", 0x16AE4F, 0x2A0
+	.byte 0
+
+CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
+	.incbin "baserom.gba", 0x16AE50, 0x29F
 
 gMapScripts_LavenderTown_PokemonCenter_1F:: @ 816B0EF
-	.incbin "baserom.gba", 0x16B0EF, 0xB
+	map_script 3, LavenderTown_PokemonCenter_1F_MapScript1_16B0FA
+	map_script 5, LavenderTown_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 LavenderTown_PokemonCenter_1F_MapScript1_16B0FA:: @ 816B0FA
 	.incbin "baserom.gba", 0x16B0FA, 0x4
@@ -2567,10 +2989,17 @@ LavenderTown_PokemonCenter_1F_EventScript_16B119:: @ 816B119
 	.incbin "baserom.gba", 0x16B119, 0x9
 
 gMapScripts_LavenderTown_PokemonCenter_2F:: @ 816B122
-	.incbin "baserom.gba", 0x16B122, 0x27
+	map_script 2, LavenderTown_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, LavenderTown_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, LavenderTown_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, LavenderTown_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+LavenderTown_PokemonCenter_2F_EventScript_16B137:: @ 816B137
+	.incbin "baserom.gba", 0x16B137, 0x12
 
 gMapScripts_LavenderTown_VolunteerPokemonHouse:: @ 816B149
-	.incbin "baserom.gba", 0x16B149, 0x1
+	.byte 0
 
 LavenderTown_VolunteerPokemonHouse_EventScript_16B14A:: @ 816B14A
 	.incbin "baserom.gba", 0x16B14A, 0x60
@@ -2597,46 +3026,69 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B229:: @ 816B229
 	.incbin "baserom.gba", 0x16B229, 0x9
 
 gMapScripts_LavenderTown_House1:: @ 816B232
-	.incbin "baserom.gba", 0x16B232, 0x33
+	.byte 0
+
+LavenderTown_House1_EventScript_16B233:: @ 816B233
+	.incbin "baserom.gba", 0x16B233, 0x32
 
 gMapScripts_LavenderTown_House2:: @ 816B265
-	.incbin "baserom.gba", 0x16B265, 0x1
+	.byte 0
 
 LavenderTown_House2_EventScript_16B266:: @ 816B266
 	.incbin "baserom.gba", 0x16B266, 0xE9
 
 gMapScripts_LavenderTown_Mart:: @ 816B34F
-	.incbin "baserom.gba", 0x16B34F, 0x57
+	.byte 0
+
+LavenderTown_Mart_EventScript_16B350:: @ 816B350
+	.incbin "baserom.gba", 0x16B350, 0x56
 
 gMapScripts_VermilionCity_House1:: @ 816B3A6
-	.incbin "baserom.gba", 0x16B3A6, 0x1
+	.byte 0
 
 VermilionCity_House1_EventScript_16B3A7:: @ 816B3A7
 	.incbin "baserom.gba", 0x16B3A7, 0x7D
 
 gMapScripts_VermilionCity_PokemonCenter_1F:: @ 816B424
-	.incbin "baserom.gba", 0x16B424, 0xB
+	map_script 3, VermilionCity_PokemonCenter_1F_MapScript1_16B42F
+	map_script 5, VermilionCity_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 VermilionCity_PokemonCenter_1F_MapScript1_16B42F:: @ 816B42F
 	.incbin "baserom.gba", 0x16B42F, 0x28
 
 gMapScripts_VermilionCity_PokemonCenter_2F:: @ 816B457
-	.incbin "baserom.gba", 0x16B457, 0x27
+	map_script 2, VermilionCity_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, VermilionCity_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, VermilionCity_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, VermilionCity_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+VermilionCity_PokemonCenter_2F_EventScript_16B46C:: @ 816B46C
+	.incbin "baserom.gba", 0x16B46C, 0x12
 
 gMapScripts_VermilionCity_PokemonFanClub:: @ 816B47E
-	.incbin "baserom.gba", 0x16B47E, 0x158
+	.byte 0
+
+VermilionCity_PokemonFanClub_EventScript_16B47F:: @ 816B47F
+	.incbin "baserom.gba", 0x16B47F, 0x157
 
 gMapScripts_VermilionCity_House2:: @ 816B5D6
-	.incbin "baserom.gba", 0x16B5D6, 0x1
+	.byte 0
 
 VermilionCity_House2_EventScript_16B5D7:: @ 816B5D7
 	.incbin "baserom.gba", 0x16B5D7, 0x7C
 
 gMapScripts_VermilionCity_Mart:: @ 816B653
-	.incbin "baserom.gba", 0x16B653, 0x4B
+	.byte 0
+
+VermilionCity_Mart_EventScript_16B654:: @ 816B654
+	.incbin "baserom.gba", 0x16B654, 0x4A
 
 gMapScripts_VermilionCity_Gym:: @ 816B69E
-	.incbin "baserom.gba", 0x16B69E, 0xB
+	map_script 1, VermilionCity_Gym_MapScript1_16B6A9
+	map_script 3, VermilionCity_Gym_MapScript2_16B772
+	.byte 0
 
 VermilionCity_Gym_MapScript1_16B6A9:: @ 816B6A9
 	.incbin "baserom.gba", 0x16B6A9, 0xC9
@@ -2708,10 +3160,13 @@ VermilionCity_Gym_EventScript_16BA8B:: @ 816BA8B
 	.incbin "baserom.gba", 0x16BA8B, 0x1E
 
 gMapScripts_VermilionCity_House3:: @ 816BAA9
-	.incbin "baserom.gba", 0x16BAA9, 0x2F
+	.byte 0
+
+VermilionCity_House3_EventScript_16BAAA:: @ 816BAAA
+	.incbin "baserom.gba", 0x16BAAA, 0x2E
 
 gMapScripts_CeladonCity_DepartmentStore_1F:: @ 816BAD8
-	.incbin "baserom.gba", 0x16BAD8, 0x1
+	.byte 0
 
 CeladonCity_DepartmentStore_1F_EventScript_16BAD9:: @ 816BAD9
 	.incbin "baserom.gba", 0x16BAD9, 0x9
@@ -2723,10 +3178,13 @@ CeladonCity_DepartmentStore_1F_EventScript_16BAEB:: @ 816BAEB
 	.incbin "baserom.gba", 0x16BAEB, 0x9
 
 gMapScripts_CeladonCity_DepartmentStore_2F:: @ 816BAF4
-	.incbin "baserom.gba", 0x16BAF4, 0x90
+	.byte 0
+
+CeladonCity_DepartmentStore_2F_EventScript_16BAF5:: @ 816BAF5
+	.incbin "baserom.gba", 0x16BAF5, 0x8F
 
 gMapScripts_CeladonCity_DepartmentStore_3F:: @ 816BB84
-	.incbin "baserom.gba", 0x16BB84, 0x1
+	.byte 0
 
 CeladonCity_DepartmentStore_3F_EventScript_16BB85:: @ 816BB85
 	.incbin "baserom.gba", 0x16BB85, 0x6
@@ -2765,10 +3223,13 @@ CeladonCity_DepartmentStore_3F_EventScript_16BBE5:: @ 816BBE5
 	.incbin "baserom.gba", 0x16BBE5, 0x9
 
 gMapScripts_CeladonCity_DepartmentStore_4F:: @ 816BBEE
-	.incbin "baserom.gba", 0x16BBEE, 0x52
+	.byte 0
+
+CeladonCity_DepartmentStore_4F_EventScript_16BBEF:: @ 816BBEF
+	.incbin "baserom.gba", 0x16BBEF, 0x51
 
 gMapScripts_CeladonCity_DepartmentStore_5F:: @ 816BC40
-	.incbin "baserom.gba", 0x16BC40, 0x1
+	.byte 0
 
 CeladonCity_DepartmentStore_5F_EventScript_16BC41:: @ 816BC41
 	.incbin "baserom.gba", 0x16BC41, 0x9
@@ -2786,37 +3247,51 @@ CeladonCity_DepartmentStore_5F_EventScript_16BC96:: @ 816BC96
 	.incbin "baserom.gba", 0x16BC96, 0x36
 
 gMapScripts_CeladonCity_DepartmentStore_Roof:: @ 816BCCC
-	.incbin "baserom.gba", 0x16BCCC, 0x486
+	.byte 0
+
+CeladonCity_DepartmentStore_Roof_EventScript_16BCCD:: @ 816BCCD
+	.incbin "baserom.gba", 0x16BCCD, 0x485
 
 gMapScripts_CeladonCity_DepartmentStore_Elevator:: @ 816C152
-	.incbin "baserom.gba", 0x16C152, 0x1
+	.byte 0
 
 CeladonCity_DepartmentStore_Elevator_EventScript_16C153:: @ 816C153
 	.incbin "baserom.gba", 0x16C153, 0x1CD
 
 gMapScripts_CeladonCity_Condominiums_1F:: @ 816C320
-	.incbin "baserom.gba", 0x16C320, 0xB0
+	.byte 0
+
+CeladonCity_Condominiums_1F_EventScript_16C321:: @ 816C321
+	.incbin "baserom.gba", 0x16C321, 0xAF
 
 gMapScripts_CeladonCity_Condominiums_2F:: @ 816C3D0
-	.incbin "baserom.gba", 0x16C3D0, 0x1
+	.byte 0
 
 CeladonCity_Condominiums_2F_EventScript_16C3D1:: @ 816C3D1
 	.incbin "baserom.gba", 0x16C3D1, 0x9
 
 gMapScripts_CeladonCity_Condominiums_3F:: @ 816C3DA
-	.incbin "baserom.gba", 0x16C3DA, 0x7F
+	.byte 0
+
+CeladonCity_Condominiums_3F_EventScript_16C3DB:: @ 816C3DB
+	.incbin "baserom.gba", 0x16C3DB, 0x7E
 
 gMapScripts_CeladonCity_Condominiums_Roof:: @ 816C459
-	.incbin "baserom.gba", 0x16C459, 0x1
+	.byte 0
 
 CeladonCity_Condominiums_Roof_EventScript_16C45A:: @ 816C45A
 	.incbin "baserom.gba", 0x16C45A, 0x9
 
 gMapScripts_CeladonCity_Condominiums_RoofRoom:: @ 816C463
-	.incbin "baserom.gba", 0x16C463, 0x189
+	.byte 0
+
+CeladonCity_Condominiums_RoofRoom_EventScript_16C464:: @ 816C464
+	.incbin "baserom.gba", 0x16C464, 0x188
 
 gMapScripts_CeladonCity_PokemonCenter_1F:: @ 816C5EC
-	.incbin "baserom.gba", 0x16C5EC, 0xB
+	map_script 3, CeladonCity_PokemonCenter_1F_MapScript1_16C5F7
+	map_script 5, CeladonCity_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 CeladonCity_PokemonCenter_1F_MapScript1_16C5F7:: @ 816C5F7
 	.incbin "baserom.gba", 0x16C5F7, 0x4
@@ -2834,10 +3309,18 @@ CeladonCity_PokemonCenter_1F_EventScript_16C616:: @ 816C616
 	.incbin "baserom.gba", 0x16C616, 0x9
 
 gMapScripts_CeladonCity_PokemonCenter_2F:: @ 816C61F
-	.incbin "baserom.gba", 0x16C61F, 0x27
+	map_script 2, CeladonCity_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, CeladonCity_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, CeladonCity_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, CeladonCity_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+CeladonCity_PokemonCenter_2F_EventScript_16C634:: @ 816C634
+	.incbin "baserom.gba", 0x16C634, 0x12
 
 gMapScripts_CeladonCity_GameCorner:: @ 816C646
-	.incbin "baserom.gba", 0x16C646, 0x6
+	map_script 1, CeladonCity_GameCorner_MapScript1_16C64C
+	.byte 0
 
 CeladonCity_GameCorner_MapScript1_16C64C:: @ 816C64C
 	.incbin "baserom.gba", 0x16C64C, 0x38
@@ -2945,10 +3428,13 @@ CeladonCity_GameCorner_EventScript_16CB6C:: @ 816CB6C
 	.incbin "baserom.gba", 0x16CB6C, 0x9
 
 gMapScripts_CeladonCity_GameCorner_PrizeRoom:: @ 816CB75
-	.incbin "baserom.gba", 0x16CB75, 0x4EB
+	.byte 0
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_16CB76:: @ 816CB76
+	.incbin "baserom.gba", 0x16CB76, 0x4EA
 
 gMapScripts_CeladonCity_Gym:: @ 816D060
-	.incbin "baserom.gba", 0x16D060, 0x1
+	.byte 0
 
 CeladonCity_Gym_EventScript_16D061:: @ 816D061
 	.incbin "baserom.gba", 0x16D061, 0xB0
@@ -2978,10 +3464,13 @@ CeladonCity_Gym_EventScript_16D1CC:: @ 816D1CC
 	.incbin "baserom.gba", 0x16D1CC, 0x1E
 
 gMapScripts_CeladonCity_Restaurant:: @ 816D1EA
-	.incbin "baserom.gba", 0x16D1EA, 0x7D
+	.byte 0
+
+CeladonCity_Restaurant_EventScript_16D1EB:: @ 816D1EB
+	.incbin "baserom.gba", 0x16D1EB, 0x7C
 
 gMapScripts_CeladonCity_House1:: @ 816D267
-	.incbin "baserom.gba", 0x16D267, 0x1
+	.byte 0
 
 CeladonCity_House1_EventScript_16D268:: @ 816D268
 	.incbin "baserom.gba", 0x16D268, 0x9
@@ -2993,10 +3482,14 @@ CeladonCity_House1_EventScript_16D27A:: @ 816D27A
 	.incbin "baserom.gba", 0x16D27A, 0x9
 
 gMapScripts_CeladonCity_Hotel:: @ 816D283
-	.incbin "baserom.gba", 0x16D283, 0x25
+	.byte 0
+
+CeladonCity_Hotel_EventScript_16D284:: @ 816D284
+	.incbin "baserom.gba", 0x16D284, 0x24
 
 gMapScripts_FuchsiaCity_SafariZone_Entrance:: @ 816D2A8
-	.incbin "baserom.gba", 0x16D2A8, 0x6
+	map_script 2, FuchsiaCity_SafariZone_Entrance_MapScript1_16D2AE
+	.byte 0
 
 FuchsiaCity_SafariZone_Entrance_MapScript1_16D2AE:: @ 816D2AE
 	.incbin "baserom.gba", 0x16D2AE, 0xBF
@@ -3014,10 +3507,13 @@ FuchsiaCity_SafariZone_Entrance_EventScript_16D4B7:: @ 816D4B7
 	.incbin "baserom.gba", 0x16D4B7, 0x29
 
 gMapScripts_FuchsiaCity_Mart:: @ 816D4E0
-	.incbin "baserom.gba", 0x16D4E0, 0x48
+	.byte 0
+
+FuchsiaCity_Mart_EventScript_16D4E1:: @ 816D4E1
+	.incbin "baserom.gba", 0x16D4E1, 0x47
 
 gMapScripts_FuchsiaCity_ZooBuilding:: @ 816D528
-	.incbin "baserom.gba", 0x16D528, 0x1
+	.byte 0
 
 FuchsiaCity_ZooBuilding_EventScript_16D529:: @ 816D529
 	.incbin "baserom.gba", 0x16D529, 0x9
@@ -3032,10 +3528,13 @@ FuchsiaCity_ZooBuilding_EventScript_16D544:: @ 816D544
 	.incbin "baserom.gba", 0x16D544, 0x9
 
 gMapScripts_FuchsiaCity_Gym:: @ 816D54D
-	.incbin "baserom.gba", 0x16D54D, 0x178
+	.byte 0
+
+FuchsiaCity_Gym_EventScript_16D54E:: @ 816D54E
+	.incbin "baserom.gba", 0x16D54E, 0x177
 
 gMapScripts_FuchsiaCity_House1:: @ 816D6C5
-	.incbin "baserom.gba", 0x16D6C5, 0x1
+	.byte 0
 
 FuchsiaCity_House1_EventScript_16D6C6:: @ 816D6C6
 	.incbin "baserom.gba", 0x16D6C6, 0x9
@@ -3047,28 +3546,44 @@ FuchsiaCity_House1_EventScript_16D6E8:: @ 816D6E8
 	.incbin "baserom.gba", 0x16D6E8, 0x9
 
 gMapScripts_FuchsiaCity_PokemonCenter_1F:: @ 816D6F1
-	.incbin "baserom.gba", 0x16D6F1, 0xB
+	map_script 3, FuchsiaCity_PokemonCenter_1F_MapScript1_16D6FC
+	map_script 5, FuchsiaCity_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 FuchsiaCity_PokemonCenter_1F_MapScript1_16D6FC:: @ 816D6FC
 	.incbin "baserom.gba", 0x16D6FC, 0x28
 
 gMapScripts_FuchsiaCity_PokemonCenter_2F:: @ 816D724
-	.incbin "baserom.gba", 0x16D724, 0x27
+	map_script 2, FuchsiaCity_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, FuchsiaCity_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, FuchsiaCity_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, FuchsiaCity_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+FuchsiaCity_PokemonCenter_2F_EventScript_16D739:: @ 816D739
+	.incbin "baserom.gba", 0x16D739, 0x12
 
 gMapScripts_FuchsiaCity_Building1:: @ 816D74B
-	.incbin "baserom.gba", 0x16D74B, 0xCB
+	.byte 0
+
+FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
+	.incbin "baserom.gba", 0x16D74C, 0xCA
 
 gMapScripts_FuchsiaCity_House2:: @ 816D816
-	.incbin "baserom.gba", 0x16D816, 0x1
+	.byte 0
 
 FuchsiaCity_House2_EventScript_16D817:: @ 816D817
 	.incbin "baserom.gba", 0x16D817, 0x7D
 
 gMapScripts_FuchsiaCity_House3:: @ 816D894
-	.incbin "baserom.gba", 0x16D894, 0xB7
+	.byte 0
+
+FuchsiaCity_House3_EventScript_16D895:: @ 816D895
+	.incbin "baserom.gba", 0x16D895, 0xB6
 
 gMapScripts_CinnabarIsland_Gym:: @ 816D94B
-	.incbin "baserom.gba", 0x16D94B, 0x6
+	map_script 1, CinnabarIsland_Gym_MapScript1_16D951
+	.byte 0
 
 CinnabarIsland_Gym_MapScript1_16D951:: @ 816D951
 	.incbin "baserom.gba", 0x16D951, 0x83
@@ -3140,13 +3655,14 @@ CinnabarIsland_Gym_EventScript_16E04C:: @ 816E04C
 	.incbin "baserom.gba", 0x16E04C, 0x227
 
 gMapScripts_CinnabarIsland_PokemonLab_Entrance:: @ 816E273
-	.incbin "baserom.gba", 0x16E273, 0x6
+	map_script 3, CinnabarIsland_PokemonLab_Entrance_MapScript1_16E279
+	.byte 0
 
 CinnabarIsland_PokemonLab_Entrance_MapScript1_16E279:: @ 816E279
 	.incbin "baserom.gba", 0x16E279, 0x3F
 
 gMapScripts_CinnabarIsland_PokemonLab_Lounge:: @ 816E2B8
-	.incbin "baserom.gba", 0x16E2B8, 0x1
+	.byte 0
 
 CinnabarIsland_PokemonLab_Lounge_EventScript_16E2B9:: @ 816E2B9
 	.incbin "baserom.gba", 0x16E2B9, 0x9
@@ -3158,10 +3674,13 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	.incbin "baserom.gba", 0x16E33E, 0xA0
 
 gMapScripts_CinnabarIsland_PokemonLab_ResearchRoom:: @ 816E3DE
-	.incbin "baserom.gba", 0x16E3DE, 0x22
+	.byte 0
+
+CinnabarIsland_PokemonLab_ResearchRoom_EventScript_16E3DF:: @ 816E3DF
+	.incbin "baserom.gba", 0x16E3DF, 0x21
 
 gMapScripts_CinnabarIsland_PokemonLab_ExperimentRoom:: @ 816E400
-	.incbin "baserom.gba", 0x16E400, 0x1
+	.byte 0
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E401:: @ 816E401
 	.incbin "baserom.gba", 0x16E401, 0x7C
@@ -3170,19 +3689,33 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E47D:: @ 816E47D
 	.incbin "baserom.gba", 0x16E47D, 0x45A
 
 gMapScripts_CinnabarIsland_PokemonCenter_1F:: @ 816E8D7
-	.incbin "baserom.gba", 0x16E8D7, 0xB
+	map_script 3, CinnabarIsland_PokemonCenter_1F_MapScript1_16E8E2
+	map_script 5, CinnabarIsland_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 CinnabarIsland_PokemonCenter_1F_MapScript1_16E8E2:: @ 816E8E2
 	.incbin "baserom.gba", 0x16E8E2, 0x106
 
 gMapScripts_CinnabarIsland_PokemonCenter_2F:: @ 816E9E8
-	.incbin "baserom.gba", 0x16E9E8, 0x27
+	map_script 2, CinnabarIsland_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, CinnabarIsland_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, CinnabarIsland_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, CinnabarIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+CinnabarIsland_PokemonCenter_2F_EventScript_16E9FD:: @ 816E9FD
+	.incbin "baserom.gba", 0x16E9FD, 0x12
 
 gMapScripts_CinnabarIsland_Mart:: @ 816EA0F
-	.incbin "baserom.gba", 0x16EA0F, 0x4B
+	.byte 0
+
+CinnabarIsland_Mart_EventScript_16EA10:: @ 816EA10
+	.incbin "baserom.gba", 0x16EA10, 0x4A
 
 gMapScripts_IndigoPlateau_PokemonCenter_1F:: @ 816EA5A
-	.incbin "baserom.gba", 0x16EA5A, 0xB
+	map_script 3, IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65
+	map_script 5, IndigoPlateau_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65:: @ 816EA65
 	.incbin "baserom.gba", 0x16EA65, 0x25
@@ -3200,10 +3733,17 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EB06:: @ 816EB06
 	.incbin "baserom.gba", 0x16EB06, 0x9
 
 gMapScripts_IndigoPlateau_PokemonCenter_2F:: @ 816EB0F
-	.incbin "baserom.gba", 0x16EB0F, 0x27
+	map_script 2, IndigoPlateau_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, IndigoPlateau_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, IndigoPlateau_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, IndigoPlateau_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+IndigoPlateau_PokemonCenter_2F_EventScript_16EB24:: @ 816EB24
+	.incbin "baserom.gba", 0x16EB24, 0x12
 
 gMapScripts_SaffronCity_House1_1F:: @ 816EB36
-	.incbin "baserom.gba", 0x16EB36, 0x1
+	.byte 0
 
 SaffronCity_House1_1F_EventScript_16EB37:: @ 816EB37
 	.incbin "baserom.gba", 0x16EB37, 0x9
@@ -3215,10 +3755,13 @@ SaffronCity_House1_1F_EventScript_16EB49:: @ 816EB49
 	.incbin "baserom.gba", 0x16EB49, 0x13
 
 gMapScripts_SaffronCity_House1_2F:: @ 816EB5C
-	.incbin "baserom.gba", 0x16EB5C, 0x7F
+	.byte 0
+
+SaffronCity_House1_2F_EventScript_16EB5D:: @ 816EB5D
+	.incbin "baserom.gba", 0x16EB5D, 0x7E
 
 gMapScripts_SaffronCity_Dojo:: @ 816EBDB
-	.incbin "baserom.gba", 0x16EBDB, 0x1
+	.byte 0
 
 SaffronCity_Dojo_EventScript_16EBDC:: @ 816EBDC
 	.incbin "baserom.gba", 0x16EBDC, 0x12
@@ -3257,10 +3800,13 @@ SaffronCity_Dojo_EventScript_16EDA2:: @ 816EDA2
 	.incbin "baserom.gba", 0x16EDA2, 0x35
 
 gMapScripts_SaffronCity_Gym:: @ 816EDD7
-	.incbin "baserom.gba", 0x16EDD7, 0x19C
+	.byte 0
+
+SaffronCity_Gym_EventScript_16EDD8:: @ 816EDD8
+	.incbin "baserom.gba", 0x16EDD8, 0x19B
 
 gMapScripts_SaffronCity_House2:: @ 816EF73
-	.incbin "baserom.gba", 0x16EF73, 0x1
+	.byte 0
 
 SaffronCity_House2_EventScript_16EF74:: @ 816EF74
 	.incbin "baserom.gba", 0x16EF74, 0x9
@@ -3275,10 +3821,15 @@ SaffronCity_House2_EventScript_16EF99:: @ 816EF99
 	.incbin "baserom.gba", 0x16EF99, 0x9
 
 gMapScripts_SaffronCity_Mart:: @ 816EFA2
-	.incbin "baserom.gba", 0x16EFA2, 0x4A
+	.byte 0
+
+SaffronCity_Mart_EventScript_16EFA3:: @ 816EFA3
+	.incbin "baserom.gba", 0x16EFA3, 0x49
 
 gMapScripts_SaffronCity_PokemonCenter_1F:: @ 816EFEC
-	.incbin "baserom.gba", 0x16EFEC, 0xB
+	map_script 3, SaffronCity_PokemonCenter_1F_MapScript1_16EFF7
+	map_script 5, SaffronCity_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 SaffronCity_PokemonCenter_1F_MapScript1_16EFF7:: @ 816EFF7
 	.incbin "baserom.gba", 0x16EFF7, 0x4
@@ -3296,16 +3847,25 @@ SaffronCity_PokemonCenter_1F_EventScript_16F016:: @ 816F016
 	.incbin "baserom.gba", 0x16F016, 0x21
 
 gMapScripts_SaffronCity_PokemonCenter_2F:: @ 816F037
-	.incbin "baserom.gba", 0x16F037, 0x27
+	map_script 2, SaffronCity_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, SaffronCity_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, SaffronCity_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, SaffronCity_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+SaffronCity_PokemonCenter_2F_EventScript_16F04C:: @ 816F04C
+	.incbin "baserom.gba", 0x16F04C, 0x12
 
 gMapScripts_SaffronCity_House3:: @ 816F05E
-	.incbin "baserom.gba", 0x16F05E, 0x1
+	.byte 0
 
 SaffronCity_House3_EventScript_16F05F:: @ 816F05F
 	.incbin "baserom.gba", 0x16F05F, 0x60
 
 gMapScripts_SaffronCity_PokemonTrainerFanClub:: @ 816F0BF
-	.incbin "baserom.gba", 0x16F0BF, 0xB
+	map_script 2, SaffronCity_PokemonTrainerFanClub_MapScript1_16F0CA
+	map_script 3, SaffronCity_PokemonTrainerFanClub_MapScript2_16F144
+	.byte 0
 
 SaffronCity_PokemonTrainerFanClub_MapScript1_16F0CA:: @ 816F0CA
 	.incbin "baserom.gba", 0x16F0CA, 0x7A
@@ -3314,7 +3874,7 @@ SaffronCity_PokemonTrainerFanClub_MapScript2_16F144:: @ 816F144
 	.incbin "baserom.gba", 0x16F144, 0x4A1
 
 gMapScripts_Route2_ViridianForest_SouthEntrance:: @ 816F5E5
-	.incbin "baserom.gba", 0x16F5E5, 0x1
+	.byte 0
 
 Route2_ViridianForest_SouthEntrance_EventScript_16F5E6:: @ 816F5E6
 	.incbin "baserom.gba", 0x16F5E6, 0x9
@@ -3323,10 +3883,13 @@ Route2_ViridianForest_SouthEntrance_EventScript_16F5EF:: @ 816F5EF
 	.incbin "baserom.gba", 0x16F5EF, 0x9
 
 gMapScripts_Route2_House:: @ 816F5F8
-	.incbin "baserom.gba", 0x16F5F8, 0x86
+	.byte 0
+
+Route2_House_EventScript_16F5F9:: @ 816F5F9
+	.incbin "baserom.gba", 0x16F5F9, 0x85
 
 gMapScripts_Route2_EastBuilding:: @ 816F67E
-	.incbin "baserom.gba", 0x16F67E, 0x1
+	.byte 0
 
 Route2_EastBuilding_EventScript_16F67F:: @ 816F67F
 	.incbin "baserom.gba", 0x16F67F, 0x95
@@ -3335,10 +3898,15 @@ Route2_EastBuilding_EventScript_16F714:: @ 816F714
 	.incbin "baserom.gba", 0x16F714, 0x9
 
 gMapScripts_Route2_ViridianForest_NorthEntrance:: @ 816F71D
-	.incbin "baserom.gba", 0x16F71D, 0x1C
+	.byte 0
+
+Route2_ViridianForest_NorthEntrance_EventScript_16F71E:: @ 816F71E
+	.incbin "baserom.gba", 0x16F71E, 0x1B
 
 gMapScripts_Route4_PokemonCenter_1F:: @ 816F739
-	.incbin "baserom.gba", 0x16F739, 0xB
+	map_script 3, Route4_PokemonCenter_1F_MapScript1_16F744
+	map_script 5, Route4_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 Route4_PokemonCenter_1F_MapScript1_16F744:: @ 816F744
 	.incbin "baserom.gba", 0x16F744, 0x7
@@ -3362,16 +3930,26 @@ Route4_PokemonCenter_1F_EventScript_16F8CD:: @ 816F8CD
 	.incbin "baserom.gba", 0x16F8CD, 0xB
 
 gMapScripts_Route4_PokemonCenter_2F:: @ 816F8D8
-	.incbin "baserom.gba", 0x16F8D8, 0x27
+	map_script 2, Route4_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, Route4_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, Route4_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, Route4_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+Route4_PokemonCenter_2F_EventScript_16F8ED:: @ 816F8ED
+	.incbin "baserom.gba", 0x16F8ED, 0x12
 
 gMapScripts_Route5_PokemonDayCare:: @ 816F8FF
-	.incbin "baserom.gba", 0x16F8FF, 0x1
+	.byte 0
 
 gMapScripts_Route5_SouthEntrance:: @ 816F900
-	.incbin "baserom.gba", 0x16F900, 0xC6
+	.byte 0
+
+Route5_SouthEntrance_EventScript_16F901:: @ 816F901
+	.incbin "baserom.gba", 0x16F901, 0xC5
 
 gMapScripts_Route6_NorthEntrance:: @ 816F9C6
-	.incbin "baserom.gba", 0x16F9C6, 0x1
+	.byte 0
 
 Route6_NorthEntrance_EventScript_16F9C7:: @ 816F9C7
 	.incbin "baserom.gba", 0x16F9C7, 0x9
@@ -3386,10 +3964,10 @@ Route6_NorthEntrance_EventScript_16F9E8:: @ 816F9E8
 	.incbin "baserom.gba", 0x16F9E8, 0xA4
 
 gMapScripts_UnknownMap_18_01:: @ 816FA8C
-	.incbin "baserom.gba", 0x16FA8C, 0x1
+	.byte 0
 
 gMapScripts_Route7_EastEntrance:: @ 816FA8D
-	.incbin "baserom.gba", 0x16FA8D, 0x1
+	.byte 0
 
 Route7_EastEntrance_EventScript_16FA8E:: @ 816FA8E
 	.incbin "baserom.gba", 0x16FA8E, 0x9
@@ -3404,10 +3982,15 @@ Route7_EastEntrance_EventScript_16FAAF:: @ 816FAAF
 	.incbin "baserom.gba", 0x16FAAF, 0xA4
 
 gMapScripts_Route8_WestEntrance:: @ 816FB53
-	.incbin "baserom.gba", 0x16FB53, 0xDC
+	.byte 0
+
+Route8_WestEntrance_EventScript_16FB54:: @ 816FB54
+	.incbin "baserom.gba", 0x16FB54, 0xDB
 
 gMapScripts_Route10_PokemonCenter_1F:: @ 816FC2F
-	.incbin "baserom.gba", 0x16FC2F, 0xB
+	map_script 3, Route10_PokemonCenter_1F_MapScript1_16FC3A
+	map_script 5, Route10_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 Route10_PokemonCenter_1F_MapScript1_16FC3A:: @ 816FC3A
 	.incbin "baserom.gba", 0x16FC3A, 0x7
@@ -3428,10 +4011,17 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	.incbin "baserom.gba", 0x16FC65, 0x95
 
 gMapScripts_Route10_PokemonCenter_2F:: @ 816FCFA
-	.incbin "baserom.gba", 0x16FCFA, 0x27
+	map_script 2, Route10_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, Route10_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, Route10_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, Route10_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+Route10_PokemonCenter_2F_EventScript_16FD0F:: @ 816FD0F
+	.incbin "baserom.gba", 0x16FD0F, 0x12
 
 gMapScripts_Route11_EastEntrance_1F:: @ 816FD21
-	.incbin "baserom.gba", 0x16FD21, 0x1
+	.byte 0
 
 Route11_EastEntrance_1F_EventScript_16FD22:: @ 816FD22
 	.incbin "baserom.gba", 0x16FD22, 0x9
@@ -3440,19 +4030,25 @@ Route11_EastEntrance_1F_EventScript_16FD2B:: @ 816FD2B
 	.incbin "baserom.gba", 0x16FD2B, 0x9
 
 gMapScripts_Route11_EastEntrance_2F:: @ 816FD34
-	.incbin "baserom.gba", 0x16FD34, 0x139
+	.byte 0
+
+Route11_EastEntrance_2F_EventScript_16FD35:: @ 816FD35
+	.incbin "baserom.gba", 0x16FD35, 0x138
 
 gMapScripts_Route12_NorthEntrance_1F:: @ 816FE6D
-	.incbin "baserom.gba", 0x16FE6D, 0x1
+	.byte 0
 
 Route12_NorthEntrance_1F_EventScript_16FE6E:: @ 816FE6E
 	.incbin "baserom.gba", 0x16FE6E, 0x9
 
 gMapScripts_Route12_NorthEntrance_2F:: @ 816FE77
-	.incbin "baserom.gba", 0x16FE77, 0x94
+	.byte 0
+
+Route12_NorthEntrance_2F_EventScript_16FE78:: @ 816FE78
+	.incbin "baserom.gba", 0x16FE78, 0x93
 
 gMapScripts_Route12_FishingHouse:: @ 816FF0B
-	.incbin "baserom.gba", 0x16FF0B, 0x1
+	.byte 0
 
 Route12_FishingHouse_EventScript_16FF0C:: @ 816FF0C
 	.incbin "baserom.gba", 0x16FF0C, 0x15B
@@ -3461,10 +4057,13 @@ Route12_FishingHouse_EventScript_170067:: @ 8170067
 	.incbin "baserom.gba", 0x170067, 0x21
 
 gMapScripts_Route15_WestEntrance_1F:: @ 8170088
-	.incbin "baserom.gba", 0x170088, 0xA
+	.byte 0
+
+Route15_WestEntrance_1F_EventScript_170089:: @ 8170089
+	.incbin "baserom.gba", 0x170089, 0x9
 
 gMapScripts_Route15_WestEntrance_2F:: @ 8170092
-	.incbin "baserom.gba", 0x170092, 0x1
+	.byte 0
 
 Route15_WestEntrance_2F_EventScript_170093:: @ 8170093
 	.incbin "baserom.gba", 0x170093, 0x1D
@@ -3476,10 +4075,14 @@ Route15_WestEntrance_2F_EventScript_1700B9:: @ 81700B9
 	.incbin "baserom.gba", 0x1700B9, 0x95
 
 gMapScripts_Route16_House:: @ 817014E
-	.incbin "baserom.gba", 0x17014E, 0x74
+	.byte 0
+
+Route16_House_EventScript_17014F:: @ 817014F
+	.incbin "baserom.gba", 0x17014F, 0x73
 
 gMapScripts_Route16_NorthEntrance_1F:: @ 81701C2
-	.incbin "baserom.gba", 0x1701C2, 0x6
+	map_script 3, Route16_NorthEntrance_1F_MapScript1_1701C8
+	.byte 0
 
 Route16_NorthEntrance_1F_MapScript1_1701C8:: @ 81701C8
 	.incbin "baserom.gba", 0x1701C8, 0x13
@@ -3506,10 +4109,14 @@ Route16_NorthEntrance_1F_EventScript_1702B5:: @ 81702B5
 	.incbin "baserom.gba", 0x1702B5, 0x9
 
 gMapScripts_Route16_NorthEntrance_2F:: @ 81702BE
-	.incbin "baserom.gba", 0x1702BE, 0xBA
+	.byte 0
+
+Route16_NorthEntrance_2F_EventScript_1702BF:: @ 81702BF
+	.incbin "baserom.gba", 0x1702BF, 0xB9
 
 gMapScripts_Route18_EastEntrance_1F:: @ 8170378
-	.incbin "baserom.gba", 0x170378, 0x6
+	map_script 3, Route18_EastEntrance_1F_MapScript1_17037E
+	.byte 0
 
 Route18_EastEntrance_1F_MapScript1_17037E:: @ 817037E
 	.incbin "baserom.gba", 0x17037E, 0x13
@@ -3533,25 +4140,34 @@ Route18_EastEntrance_1F_EventScript_1703CA:: @ 81703CA
 	.incbin "baserom.gba", 0x1703CA, 0xA1
 
 gMapScripts_Route18_EastEntrance_2F:: @ 817046B
-	.incbin "baserom.gba", 0x17046B, 0x8F
+	.byte 0
+
+Route18_EastEntrance_2F_EventScript_17046C:: @ 817046C
+	.incbin "baserom.gba", 0x17046C, 0x8E
 
 gMapScripts_UnusedHouse_27_00:: @ 81704FA
-	.incbin "baserom.gba", 0x1704FA, 0x1
+	.byte 0
 
 gMapScripts_Route22_NorthEntrance:: @ 81704FB
-	.incbin "baserom.gba", 0x1704FB, 0x27
+	.byte 0
+
+Route22_NorthEntrance_EventScript_1704FC:: @ 81704FC
+	.incbin "baserom.gba", 0x1704FC, 0x26
 
 gMapScripts_UnusedHouse_29_00:: @ 8170522
-	.incbin "baserom.gba", 0x170522, 0x1
+	.byte 0
 
 gMapScripts_Route25_SeaCottage:: @ 8170523
-	.incbin "baserom.gba", 0x170523, 0x6
+	map_script 3, Route25_SeaCottage_MapScript1_170529
+	.byte 0
 
 Route25_SeaCottage_MapScript1_170529:: @ 8170529
 	.incbin "baserom.gba", 0x170529, 0x361
 
 gMapScripts_SevenIsland_House_Room1:: @ 817088A
-	.incbin "baserom.gba", 0x17088A, 0xB
+	map_script 3, SevenIsland_House_Room1_MapScript1_170895
+	map_script 2, SevenIsland_House_Room1_MapScript2_1708CF
+	.byte 0
 
 SevenIsland_House_Room1_MapScript1_170895:: @ 8170895
 	.incbin "baserom.gba", 0x170895, 0x3A
@@ -3566,7 +4182,9 @@ SevenIsland_House_Room1_EventScript_170A75:: @ 8170A75
 	.incbin "baserom.gba", 0x170A75, 0x9
 
 gMapScripts_SevenIsland_House_Room2:: @ 8170A7E
-	.incbin "baserom.gba", 0x170A7E, 0xB
+	map_script 3, SevenIsland_House_Room2_MapScript1_170A89
+	map_script 2, SevenIsland_House_Room2_MapScript2_170A8D
+	.byte 0
 
 SevenIsland_House_Room2_MapScript1_170A89:: @ 8170A89
 	.incbin "baserom.gba", 0x170A89, 0x4
@@ -3575,7 +4193,7 @@ SevenIsland_House_Room2_MapScript2_170A8D:: @ 8170A8D
 	.incbin "baserom.gba", 0x170A8D, 0xA3
 
 gMapScripts_SevenIsland_Mart:: @ 8170B30
-	.incbin "baserom.gba", 0x170B30, 0x1
+	.byte 0
 
 SevenIsland_Mart_EventScript_170B31:: @ 8170B31
 	.incbin "baserom.gba", 0x170B31, 0x3D
@@ -3590,25 +4208,38 @@ SevenIsland_Mart_EventScript_170B80:: @ 8170B80
 	.incbin "baserom.gba", 0x170B80, 0x9
 
 gMapScripts_SevenIsland_PokemonCenter_1F:: @ 8170B89
-	.incbin "baserom.gba", 0x170B89, 0xB
+	map_script 3, SevenIsland_PokemonCenter_1F_MapScript1_170B94
+	map_script 5, SevenIsland_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 SevenIsland_PokemonCenter_1F_MapScript1_170B94:: @ 8170B94
 	.incbin "baserom.gba", 0x170B94, 0x28
 
 gMapScripts_SevenIsland_PokemonCenter_2F:: @ 8170BBC
-	.incbin "baserom.gba", 0x170BBC, 0x27
+	map_script 2, SevenIsland_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, SevenIsland_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, SevenIsland_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, SevenIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+SevenIsland_PokemonCenter_2F_EventScript_170BD1:: @ 8170BD1
+	.incbin "baserom.gba", 0x170BD1, 0x12
 
 gMapScripts_UnusedHouse_31_05:: @ 8170BE3
-	.incbin "baserom.gba", 0x170BE3, 0x1
+	.byte 0
 
 gMapScripts_SevenIsland_Harbor:: @ 8170BE4
-	.incbin "baserom.gba", 0x170BE4, 0x1
+	.byte 0
 
 SevenIsland_Harbor_EventScript_170BE5:: @ 8170BE5
 	.incbin "baserom.gba", 0x170BE5, 0x13
 
 gMapScripts_OneIsland_PokemonCenter_1F:: @ 8170BF8
-	.incbin "baserom.gba", 0x170BF8, 0x15
+	map_script 3, OneIsland_PokemonCenter_1F_MapScript1_170C4E
+	map_script 5, OneIsland_PokemonCenter_1F_MapScript2_1BC05C
+	map_script 1, OneIsland_PokemonCenter_1F_MapScript3_170C0D
+	map_script 2, OneIsland_PokemonCenter_1F_MapScript4_170CA7
+	.byte 0
 
 OneIsland_PokemonCenter_1F_MapScript3_170C0D:: @ 8170C0D
 	.incbin "baserom.gba", 0x170C0D, 0x41
@@ -3620,19 +4251,31 @@ OneIsland_PokemonCenter_1F_MapScript4_170CA7:: @ 8170CA7
 	.incbin "baserom.gba", 0x170CA7, 0x68D
 
 gMapScripts_OneIsland_PokemonCenter_2F:: @ 8171334
-	.incbin "baserom.gba", 0x171334, 0x27
+	map_script 2, OneIsland_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, OneIsland_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, OneIsland_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, OneIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+OneIsland_PokemonCenter_2F_EventScript_171349:: @ 8171349
+	.incbin "baserom.gba", 0x171349, 0x12
 
 gMapScripts_OneIsland_House1:: @ 817135B
-	.incbin "baserom.gba", 0x17135B, 0x13
+	.byte 0
+
+OneIsland_House1_EventScript_17135C:: @ 817135C
+	.incbin "baserom.gba", 0x17135C, 0x12
 
 gMapScripts_OneIsland_House2:: @ 817136E
-	.incbin "baserom.gba", 0x17136E, 0x1
+	.byte 0
 
 OneIsland_House2_EventScript_17136F:: @ 817136F
 	.incbin "baserom.gba", 0x17136F, 0x9
 
 gMapScripts_OneIsland_Harbor:: @ 8171378
-	.incbin "baserom.gba", 0x171378, 0xB
+	map_script 4, OneIsland_Harbor_MapScript1_171383
+	map_script 2, OneIsland_Harbor_MapScript2_171392
+	.byte 0
 
 OneIsland_Harbor_MapScript1_171383:: @ 8171383
 	.incbin "baserom.gba", 0x171383, 0xF
@@ -3641,7 +4284,11 @@ OneIsland_Harbor_MapScript2_171392:: @ 8171392
 	.incbin "baserom.gba", 0x171392, 0x3E
 
 gMapScripts_TwoIsland_JoyfulGameCorner:: @ 81713D0
-	.incbin "baserom.gba", 0x1713D0, 0x15
+	map_script 3, TwoIsland_JoyfulGameCorner_MapScript1_1713E5
+	map_script 4, TwoIsland_JoyfulGameCorner_MapScript2_171404
+	map_script 2, TwoIsland_JoyfulGameCorner_MapScript3_17141B
+	map_script 1, TwoIsland_JoyfulGameCorner_MapScript4_1BB237
+	.byte 0
 
 TwoIsland_JoyfulGameCorner_MapScript1_1713E5:: @ 81713E5
 	.incbin "baserom.gba", 0x1713E5, 0x1F
@@ -3662,10 +4309,15 @@ TwoIsland_JoyfulGameCorner_EventScript_17160C:: @ 817160C
 	.incbin "baserom.gba", 0x17160C, 0xC
 
 gMapScripts_TwoIsland_House:: @ 8171618
-	.incbin "baserom.gba", 0x171618, 0x19C
+	.byte 0
+
+TwoIsland_House_EventScript_171619:: @ 8171619
+	.incbin "baserom.gba", 0x171619, 0x19B
 
 gMapScripts_TwoIsland_PokemonCenter_1F:: @ 81717B4
-	.incbin "baserom.gba", 0x1717B4, 0xB
+	map_script 3, TwoIsland_PokemonCenter_1F_MapScript1_1717BF
+	map_script 5, TwoIsland_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 TwoIsland_PokemonCenter_1F_MapScript1_1717BF:: @ 81717BF
 	.incbin "baserom.gba", 0x1717BF, 0x4
@@ -3680,19 +4332,31 @@ TwoIsland_PokemonCenter_1F_EventScript_1717D5:: @ 81717D5
 	.incbin "baserom.gba", 0x1717D5, 0x9
 
 gMapScripts_TwoIsland_PokemonCenter_2F:: @ 81717DE
-	.incbin "baserom.gba", 0x1717DE, 0x27
+	map_script 2, TwoIsland_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, TwoIsland_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, TwoIsland_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, TwoIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+TwoIsland_PokemonCenter_2F_EventScript_1717F3:: @ 81717F3
+	.incbin "baserom.gba", 0x1717F3, 0x12
 
 gMapScripts_TwoIsland_Harbor:: @ 8171805
-	.incbin "baserom.gba", 0x171805, 0x1
+	.byte 0
 
 TwoIsland_Harbor_EventScript_171806:: @ 8171806
 	.incbin "baserom.gba", 0x171806, 0x13
 
 gMapScripts_ThreeIsland_House1:: @ 8171819
-	.incbin "baserom.gba", 0x171819, 0x19
+	.byte 0
+
+ThreeIsland_House1_EventScript_17181A:: @ 817181A
+	.incbin "baserom.gba", 0x17181A, 0x18
 
 gMapScripts_ThreeIsland_PokemonCenter_1F:: @ 8171832
-	.incbin "baserom.gba", 0x171832, 0xB
+	map_script 3, ThreeIsland_PokemonCenter_1F_MapScript1_17183D
+	map_script 5, ThreeIsland_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 ThreeIsland_PokemonCenter_1F_MapScript1_17183D:: @ 817183D
 	.incbin "baserom.gba", 0x17183D, 0x4
@@ -3710,10 +4374,17 @@ ThreeIsland_PokemonCenter_1F_EventScript_17185C:: @ 817185C
 	.incbin "baserom.gba", 0x17185C, 0x9
 
 gMapScripts_ThreeIsland_PokemonCenter_2F:: @ 8171865
-	.incbin "baserom.gba", 0x171865, 0x27
+	map_script 2, ThreeIsland_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, ThreeIsland_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, ThreeIsland_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, ThreeIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+ThreeIsland_PokemonCenter_2F_EventScript_17187A:: @ 817187A
+	.incbin "baserom.gba", 0x17187A, 0x12
 
 gMapScripts_ThreeIsland_Mart:: @ 817188C
-	.incbin "baserom.gba", 0x17188C, 0x1
+	.byte 0
 
 ThreeIsland_Mart_EventScript_17188D:: @ 817188D
 	.incbin "baserom.gba", 0x17188D, 0x37
@@ -3728,28 +4399,39 @@ ThreeIsland_Mart_EventScript_1718D6:: @ 81718D6
 	.incbin "baserom.gba", 0x1718D6, 0x9
 
 gMapScripts_ThreeIsland_House2:: @ 81718DF
-	.incbin "baserom.gba", 0x1718DF, 0x23
+	.byte 0
+
+ThreeIsland_House2_EventScript_1718E0:: @ 81718E0
+	.incbin "baserom.gba", 0x1718E0, 0x22
 
 gMapScripts_ThreeIsland_House3:: @ 8171902
-	.incbin "baserom.gba", 0x171902, 0x1
+	.byte 0
 
 ThreeIsland_House3_EventScript_171903:: @ 8171903
 	.incbin "baserom.gba", 0x171903, 0x9
 
 gMapScripts_ThreeIsland_House4:: @ 817190C
-	.incbin "baserom.gba", 0x17190C, 0x13
+	.byte 0
+
+ThreeIsland_House4_EventScript_17190D:: @ 817190D
+	.incbin "baserom.gba", 0x17190D, 0x12
 
 gMapScripts_ThreeIsland_House5:: @ 817191F
-	.incbin "baserom.gba", 0x17191F, 0x1
+	.byte 0
 
 ThreeIsland_House5_EventScript_171920:: @ 8171920
 	.incbin "baserom.gba", 0x171920, 0x1F
 
 gMapScripts_FourIsland_PokemonDayCare:: @ 817193F
-	.incbin "baserom.gba", 0x17193F, 0x2AB
+	.byte 0
+
+FourIsland_PokemonDayCare_EventScript_171940:: @ 8171940
+	.incbin "baserom.gba", 0x171940, 0x2AA
 
 gMapScripts_FourIsland_PokemonCenter_1F:: @ 8171BEA
-	.incbin "baserom.gba", 0x171BEA, 0xB
+	map_script 3, FourIsland_PokemonCenter_1F_MapScript1_171BF5
+	map_script 5, FourIsland_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 FourIsland_PokemonCenter_1F_MapScript1_171BF5:: @ 8171BF5
 	.incbin "baserom.gba", 0x171BF5, 0x4
@@ -3767,31 +4449,39 @@ FourIsland_PokemonCenter_1F_EventScript_171C14:: @ 8171C14
 	.incbin "baserom.gba", 0x171C14, 0x9
 
 gMapScripts_FourIsland_PokemonCenter_2F:: @ 8171C1D
-	.incbin "baserom.gba", 0x171C1D, 0x27
+	map_script 2, FourIsland_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, FourIsland_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, FourIsland_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, FourIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+FourIsland_PokemonCenter_2F_EventScript_171C32:: @ 8171C32
+	.incbin "baserom.gba", 0x171C32, 0x12
 
 gMapScripts_FourIsland_House1:: @ 8171C44
-	.incbin "baserom.gba", 0x171C44, 0x1
+	.byte 0
 
 FourIsland_House1_EventScript_171C45:: @ 8171C45
 	.incbin "baserom.gba", 0x171C45, 0x9
 
 gMapScripts_FourIsland_LoreleisHouse:: @ 8171C4E
-	.incbin "baserom.gba", 0x171C4E, 0x6
+	map_script 3, FourIsland_LoreleisHouse_MapScript1_171C54
+	.byte 0
 
 FourIsland_LoreleisHouse_MapScript1_171C54:: @ 8171C54
 	.incbin "baserom.gba", 0x171C54, 0x44
 
 gMapScripts_FourIsland_Harbor:: @ 8171C98
-	.incbin "baserom.gba", 0x171C98, 0x1
+	.byte 0
 
 FourIsland_Harbor_EventScript_171C99:: @ 8171C99
 	.incbin "baserom.gba", 0x171C99, 0x13
 
 gMapScripts_FourIsland_House2:: @ 8171CAC
-	.incbin "baserom.gba", 0x171CAC, 0x1
+	.byte 0
 
 gMapScripts_FourIsland_Mart:: @ 8171CAD
-	.incbin "baserom.gba", 0x171CAD, 0x1
+	.byte 0
 
 FourIsland_Mart_EventScript_171CAE:: @ 8171CAE
 	.incbin "baserom.gba", 0x171CAE, 0x3A
@@ -3800,28 +4490,46 @@ FourIsland_Mart_EventScript_171CE8:: @ 8171CE8
 	.incbin "baserom.gba", 0x171CE8, 0x9
 
 gMapScripts_FiveIsland_PokemonCenter_1F:: @ 8171CF1
-	.incbin "baserom.gba", 0x171CF1, 0xB
+	map_script 3, FiveIsland_PokemonCenter_1F_MapScript1_171CFC
+	map_script 5, FiveIsland_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 FiveIsland_PokemonCenter_1F_MapScript1_171CFC:: @ 8171CFC
 	.incbin "baserom.gba", 0x171CFC, 0x1F
 
 gMapScripts_FiveIsland_PokemonCenter_2F:: @ 8171D1B
-	.incbin "baserom.gba", 0x171D1B, 0x27
+	map_script 2, FiveIsland_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, FiveIsland_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, FiveIsland_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, FiveIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+FiveIsland_PokemonCenter_2F_EventScript_171D30:: @ 8171D30
+	.incbin "baserom.gba", 0x171D30, 0x12
 
 gMapScripts_FiveIsland_Harbor:: @ 8171D42
-	.incbin "baserom.gba", 0x171D42, 0x14
+	.byte 0
+
+FiveIsland_Harbor_EventScript_171D43:: @ 8171D43
+	.incbin "baserom.gba", 0x171D43, 0x13
 
 gMapScripts_FiveIsland_House1:: @ 8171D56
-	.incbin "baserom.gba", 0x171D56, 0x1
+	.byte 0
 
 FiveIsland_House1_EventScript_171D57:: @ 8171D57
 	.incbin "baserom.gba", 0x171D57, 0x9
 
 gMapScripts_FiveIsland_House2:: @ 8171D60
-	.incbin "baserom.gba", 0x171D60, 0xA
+	.byte 0
+
+FiveIsland_House2_EventScript_171D61:: @ 8171D61
+	.incbin "baserom.gba", 0x171D61, 0x9
 
 gMapScripts_SixIsland_PokemonCenter_1F:: @ 8171D6A
-	.incbin "baserom.gba", 0x171D6A, 0x10
+	map_script 3, SixIsland_PokemonCenter_1F_MapScript1_171D7A
+	map_script 5, SixIsland_PokemonCenter_1F_MapScript2_1BC05C
+	map_script 2, SixIsland_PokemonCenter_1F_MapScript3_171D8D
+	.byte 0
 
 SixIsland_PokemonCenter_1F_MapScript1_171D7A:: @ 8171D7A
 	.incbin "baserom.gba", 0x171D7A, 0x13
@@ -3839,19 +4547,29 @@ SixIsland_PokemonCenter_1F_EventScript_171E17:: @ 8171E17
 	.incbin "baserom.gba", 0x171E17, 0x9
 
 gMapScripts_SixIsland_PokemonCenter_2F:: @ 8171E20
-	.incbin "baserom.gba", 0x171E20, 0x27
+	map_script 2, SixIsland_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script 4, SixIsland_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script 1, SixIsland_PokemonCenter_2F_MapScript3_1BB237
+	map_script 3, SixIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	.byte 0
+
+SixIsland_PokemonCenter_2F_EventScript_171E35:: @ 8171E35
+	.incbin "baserom.gba", 0x171E35, 0x12
 
 gMapScripts_SixIsland_Harbor:: @ 8171E47
-	.incbin "baserom.gba", 0x171E47, 0x1
+	.byte 0
 
 SixIsland_Harbor_EventScript_171E48:: @ 8171E48
 	.incbin "baserom.gba", 0x171E48, 0x13
 
 gMapScripts_SixIsland_House:: @ 8171E5B
-	.incbin "baserom.gba", 0x171E5B, 0xA
+	.byte 0
+
+SixIsland_House_EventScript_171E5C:: @ 8171E5C
+	.incbin "baserom.gba", 0x171E5C, 0x9
 
 gMapScripts_SixIsland_Mart:: @ 8171E65
-	.incbin "baserom.gba", 0x171E65, 0x1
+	.byte 0
 
 SixIsland_Mart_EventScript_171E66:: @ 8171E66
 	.incbin "baserom.gba", 0x171E66, 0x3A
@@ -3860,10 +4578,13 @@ SixIsland_Mart_EventScript_171EA0:: @ 8171EA0
 	.incbin "baserom.gba", 0x171EA0, 0x9
 
 gMapScripts_ThreeIsland_Harbor:: @ 8171EA9
-	.incbin "baserom.gba", 0x171EA9, 0x14
+	.byte 0
+
+ThreeIsland_Harbor_EventScript_171EAA:: @ 8171EAA
+	.incbin "baserom.gba", 0x171EAA, 0x13
 
 gMapScripts_FiveIsland_ResortGorgeous_House:: @ 8171EBD
-	.incbin "baserom.gba", 0x171EBD, 0x1
+	.byte 0
 
 FiveIsland_ResortGorgeous_House_EventScript_171EBE:: @ 8171EBE
 	.incbin "baserom.gba", 0x171EBE, 0x1A4
@@ -3872,10 +4593,10 @@ FiveIsland_ResortGorgeous_House_EventScript_172062:: @ 8172062
 	.incbin "baserom.gba", 0x172062, 0x9
 
 gMapScripts_TwoIsland_CapeBrink_House:: @ 817206B
-	.incbin "baserom.gba", 0x17206B, 0x1
+	.byte 0
 
 gMapScripts_SixIsland_WaterPath_House1:: @ 817206C
-	.incbin "baserom.gba", 0x17206C, 0x1
+	.byte 0
 
 SixIsland_WaterPath_House1_EventScript_17206D:: @ 817206D
 	.incbin "baserom.gba", 0x17206D, 0xEA
@@ -3884,10 +4605,13 @@ SixIsland_WaterPath_House1_EventScript_172157:: @ 8172157
 	.incbin "baserom.gba", 0x172157, 0x21
 
 gMapScripts_SixIsland_WaterPath_House2:: @ 8172178
-	.incbin "baserom.gba", 0x172178, 0xA
+	.byte 0
+
+SixIsland_WaterPath_House2_EventScript_172179:: @ 8172179
+	.incbin "baserom.gba", 0x172179, 0x9
 
 gMapScripts_SevenIsland_SevaultCanyon_House:: @ 8172182
-	.incbin "baserom.gba", 0x172182, 0x1
+	.byte 0
 
 SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	.incbin "baserom.gba", 0x172183, 0xBF

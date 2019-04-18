@@ -152,7 +152,6 @@ SECTIONS {
         asm/pc_screen_effect.o(.text);
         asm/fldeff_poison.o(.text);
         src/fldeff_berrytree.o(.text);
-        asm/fldeff_berrytree.o(.text);
         asm/field_special_scene.o(.text);
         asm/safari_zone.o(.text);
         asm/item_use.o(.text);

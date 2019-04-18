@@ -30,7 +30,7 @@ SECTIONS {
 <BSS>
 
         /* .bss.code starts at 0x30028E0 */
-        src/m4a_2.o(.bss.code);
+        src/m4a.o(.bss.code);
 
         /* COMMON starts at 0x30030E0 */
 <COMMON>
@@ -289,9 +289,7 @@ SECTIONS {
     {
         asm/libgcnmultiboot.o(.text);
         asm/m4a_1.o(.text);
-        src/m4a_2.o(.text);
-        asm/m4a_3.o(.text);
-        src/m4a_4.o(.text);
+        src/m4a.o(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);

@@ -13,12 +13,8 @@
     @ 2D4A94
     .include "data/tilesets/headers.inc"
 
-@ players house border and blockdata
-@gUnknown_82D50F4::
-@    .incbin "baserom.gba", 0x2D50F4, 0x10C
-
 	.include "data/layouts/layouts.inc"
 	.include "data/layouts/layouts_table.inc"
-@	.include "data/maps/headers.inc"
+	.include "data/maps/headers.inc"
 	.include "data/maps/groups.inc"
-@	.include "data/maps/connections.inc"
+	.include "data/maps/connections.inc"

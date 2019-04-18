@@ -14,7 +14,7 @@ UnknownMap_00_00_MapCoordEvents:
 	coord_event 3, 5, 3, 0, 16384, 0, 0, UnknownMap_00_00_EventScript_1BB8C3
 	coord_event 10, 5, 3, 0, 16384, 0, 0, UnknownMap_00_00_EventScript_1BB8CF
 
-gMapEvents_UnknownMap_00_00::
+UnknownMap_00_00_MapEvents::
 	map_events UnknownMap_00_00_EventObjects, UnknownMap_00_00_MapWarps, UnknownMap_00_00_MapCoordEvents, 0x0
 
 UnknownMap_00_01_EventObjects:
@@ -28,7 +28,7 @@ UnknownMap_00_01_MapCoordEvents:
 	coord_event 4, 5, 3, 0, 16384, 0, 0, UnknownMap_00_01_EventScript_1BB950
 	coord_event 7, 5, 3, 0, 16384, 0, 0, UnknownMap_00_01_EventScript_1BB95C
 
-gMapEvents_UnknownMap_00_01::
+UnknownMap_00_01_MapEvents::
 	map_events UnknownMap_00_01_EventObjects, UnknownMap_00_01_MapWarps, UnknownMap_00_01_MapCoordEvents, 0x0
 
 UnknownMap_00_02_EventObjects:
@@ -46,7 +46,7 @@ UnknownMap_00_02_MapCoordEvents:
 	coord_event 13, 4, 3, 0, 16384, 0, 0, UnknownMap_00_02_EventScript_1BB980
 	coord_event 13, 6, 3, 0, 16384, 0, 0, UnknownMap_00_02_EventScript_1BB980
 
-gMapEvents_UnknownMap_00_02::
+UnknownMap_00_02_MapEvents::
 	map_events UnknownMap_00_02_EventObjects, UnknownMap_00_02_MapWarps, UnknownMap_00_02_MapCoordEvents, 0x0
 
 
@@ -62,7 +62,7 @@ UnknownMap_00_03_MapCoordEvents:
 	coord_event 10, 4, 3, 0, 16384, 0, 0, UnknownMap_00_03_EventScript_1BB8F8
 	coord_event 10, 6, 3, 0, 16384, 0, 0, UnknownMap_00_03_EventScript_1BB932
 
-gMapEvents_UnknownMap_00_03::
+UnknownMap_00_03_MapEvents::
 	map_events 0x0, UnknownMap_00_03_MapWarps, UnknownMap_00_03_MapCoordEvents, 0x0
 
 UnknownMap_00_04_EventObjects:
@@ -79,7 +79,7 @@ UnknownMap_00_04_EventObjects:
 UnknownMap_00_04_MapWarps:
 	warp_def 7, 11, 3, 127, 32639
 
-gMapEvents_UnknownMap_00_04::
+UnknownMap_00_04_MapEvents::
 	map_events UnknownMap_00_04_EventObjects, UnknownMap_00_04_MapWarps, 0x0, 0x0
 
 ViridianForest_EventObjects:
@@ -113,7 +113,7 @@ ViridianForest_MapBGEvents:
 	bg_event 3, 22, 3, 7, 0, 13, 0, 1
 	bg_event 28, 57, 0, 7, 0, 14, 1, 1
 
-gMapEvents_ViridianForest::
+ViridianForest_MapEvents::
 	map_events ViridianForest_EventObjects, ViridianForest_MapWarps, 0x0, ViridianForest_MapBGEvents
 
 MtMoon_1F_EventObjects:
@@ -141,7 +141,7 @@ MtMoon_1F_MapWarps:
 MtMoon_1F_MapBGEvents:
 	bg_event 19, 26, 0, 0, 0, MtMoon_1F_EventScript_1605EE
 
-gMapEvents_MtMoon_1F::
+MtMoon_1F_MapEvents::
 	map_events MtMoon_1F_EventObjects, MtMoon_1F_MapWarps, 0x0, MtMoon_1F_MapBGEvents
 
 
@@ -163,7 +163,7 @@ MtMoon_B1F_MapBGEvents:
 	bg_event 6, 12, 0, 7, 0, 104, 88, 1
 	bg_event 25, 34, 0, 7, 0, 104, 89, 1
 
-gMapEvents_MtMoon_B1F::
+MtMoon_B1F_MapEvents::
 	map_events 0x0, MtMoon_B1F_MapWarps, 0x0, MtMoon_B1F_MapBGEvents
 
 MtMoon_B2F_EventObjects:
@@ -192,7 +192,7 @@ MtMoon_B2F_MapBGEvents:
 	bg_event 20, 16, 3, 7, 0, 94, 2, 1
 	bg_event 39, 11, 3, 7, 0, 34, 3, 1
 
-gMapEvents_MtMoon_B2F::
+MtMoon_B2F_MapEvents::
 	map_events MtMoon_B2F_EventObjects, MtMoon_B2F_MapWarps, MtMoon_B2F_MapCoordEvents, MtMoon_B2F_MapBGEvents
 
 SSAnne_Exterior_EventObjects:
@@ -208,7 +208,7 @@ SSAnne_Exterior_MapWarps:
 SSAnne_Exterior_MapBGEvents:
 	bg_event 58, 28, 3, 7, 0, 38, 190, 1
 
-gMapEvents_SSAnne_Exterior::
+SSAnne_Exterior_MapEvents::
 	map_events SSAnne_Exterior_EventObjects, SSAnne_Exterior_MapWarps, 0x0, SSAnne_Exterior_MapBGEvents
 
 SSAnne_1F_Corridor_EventObjects:
@@ -230,7 +230,7 @@ SSAnne_1F_Corridor_MapWarps:
 	warp_def 23, 10, 3, 0, 273
 	warp_def 20, 10, 3, 0, 285
 
-gMapEvents_SSAnne_1F_Corridor::
+SSAnne_1F_Corridor_MapEvents::
 	map_events SSAnne_1F_Corridor_EventObjects, SSAnne_1F_Corridor_MapWarps, 0x0, 0x0
 
 SSAnne_2F_Corridor_EventObjects:
@@ -253,7 +253,7 @@ SSAnne_2F_Corridor_MapCoordEvents:
 	coord_event 31, 6, 3, 0, 16475, 0, 0, SSAnne_2F_Corridor_EventScript_1608EB
 	coord_event 32, 6, 3, 0, 16475, 0, 0, SSAnne_2F_Corridor_EventScript_1608F7
 
-gMapEvents_SSAnne_2F_Corridor::
+SSAnne_2F_Corridor_MapEvents::
 	map_events SSAnne_2F_Corridor_EventObjects, SSAnne_2F_Corridor_MapWarps, SSAnne_2F_Corridor_MapCoordEvents, 0x0
 
 SSAnne_3F_Corridor_EventObjects:
@@ -264,7 +264,7 @@ SSAnne_3F_Corridor_MapWarps:
 	warp_def 18, 2, 3, 1, 262
 	warp_def 0, 5, 0, 0, 265
 
-gMapEvents_SSAnne_3F_Corridor::
+SSAnne_3F_Corridor_MapEvents::
 	map_events SSAnne_3F_Corridor_EventObjects, SSAnne_3F_Corridor_MapWarps, 0x0, 0x0
 
 
@@ -279,7 +279,7 @@ SSAnne_B1F_Corridor_MapWarps:
 SSAnne_B1F_Corridor_MapBGEvents:
 	bg_event 21, 5, 3, 7, 0, 21, 8, 1
 
-gMapEvents_SSAnne_B1F_Corridor::
+SSAnne_B1F_Corridor_MapEvents::
 	map_events 0x0, SSAnne_B1F_Corridor_MapWarps, 0x0, SSAnne_B1F_Corridor_MapBGEvents
 
 SSAnne_Deck_EventObjects:
@@ -293,7 +293,7 @@ SSAnne_Deck_MapWarps:
 	warp_def 16, 8, 3, 0, 263
 	warp_def 16, 9, 3, 0, 263
 
-gMapEvents_SSAnne_Deck::
+SSAnne_Deck_MapEvents::
 	map_events SSAnne_Deck_EventObjects, SSAnne_Deck_MapWarps, 0x0, 0x0
 
 SSAnne_Kitchen_EventObjects:
@@ -314,7 +314,7 @@ SSAnne_Kitchen_MapBGEvents:
 	bg_event 14, 4, 0, 7, 0, 135, 120, 1
 	bg_event 14, 6, 0, 7, 0, 133, 121, 1
 
-gMapEvents_SSAnne_Kitchen::
+SSAnne_Kitchen_MapEvents::
 	map_events SSAnne_Kitchen_EventObjects, SSAnne_Kitchen_MapWarps, 0x0, SSAnne_Kitchen_MapBGEvents
 
 SSAnne_CaptainsOffice_EventObjects:
@@ -328,7 +328,7 @@ SSAnne_CaptainsOffice_MapBGEvents:
 	bg_event 5, 3, 0, 0, 0, SSAnne_CaptainsOffice_EventScript_160BC9
 	bg_event 2, 3, 0, 0, 0, SSAnne_CaptainsOffice_EventScript_160BD2
 
-gMapEvents_SSAnne_CaptainsOffice::
+SSAnne_CaptainsOffice_MapEvents::
 	map_events SSAnne_CaptainsOffice_EventObjects, SSAnne_CaptainsOffice_MapWarps, 0x0, SSAnne_CaptainsOffice_MapBGEvents
 
 SSAnne_1F_Room1_EventObjects:
@@ -337,7 +337,7 @@ SSAnne_1F_Room1_EventObjects:
 SSAnne_1F_Room1_MapWarps:
 	warp_def 2, 1, 0, 6, 261
 
-gMapEvents_SSAnne_1F_Room1::
+SSAnne_1F_Room1_MapEvents::
 	map_events SSAnne_1F_Room1_EventObjects, SSAnne_1F_Room1_MapWarps, 0x0, 0x0
 
 SSAnne_1F_Room2_EventObjects:
@@ -349,7 +349,7 @@ SSAnne_1F_Room2_EventObjects:
 SSAnne_1F_Room2_MapWarps:
 	warp_def 2, 1, 0, 7, 261
 
-gMapEvents_SSAnne_1F_Room2::
+SSAnne_1F_Room2_MapEvents::
 	map_events SSAnne_1F_Room2_EventObjects, SSAnne_1F_Room2_MapWarps, 0x0, 0x0
 
 SSAnne_1F_Room3_EventObjects:
@@ -360,7 +360,7 @@ SSAnne_1F_Room3_EventObjects:
 SSAnne_1F_Room3_MapWarps:
 	warp_def 2, 1, 0, 8, 261
 
-gMapEvents_SSAnne_1F_Room3::
+SSAnne_1F_Room3_MapEvents::
 	map_events SSAnne_1F_Room3_EventObjects, SSAnne_1F_Room3_MapWarps, 0x0, 0x0
 
 SSAnne_1F_Room4_EventObjects:
@@ -369,7 +369,7 @@ SSAnne_1F_Room4_EventObjects:
 SSAnne_1F_Room4_MapWarps:
 	warp_def 2, 1, 0, 9, 261
 
-gMapEvents_SSAnne_1F_Room4::
+SSAnne_1F_Room4_MapEvents::
 	map_events SSAnne_1F_Room4_EventObjects, SSAnne_1F_Room4_MapWarps, 0x0, 0x0
 
 SSAnne_1F_Room5_EventObjects:
@@ -378,7 +378,7 @@ SSAnne_1F_Room5_EventObjects:
 SSAnne_1F_Room5_MapWarps:
 	warp_def 2, 1, 0, 10, 261
 
-gMapEvents_SSAnne_1F_Room5::
+SSAnne_1F_Room5_MapEvents::
 	map_events SSAnne_1F_Room5_EventObjects, SSAnne_1F_Room5_MapWarps, 0x0, 0x0
 
 SSAnne_1F_Room7_EventObjects:
@@ -387,7 +387,7 @@ SSAnne_1F_Room7_EventObjects:
 SSAnne_1F_Room7_MapWarps:
 	warp_def 2, 1, 0, 11, 261
 
-gMapEvents_SSAnne_1F_Room7::
+SSAnne_1F_Room7_MapEvents::
 	map_events SSAnne_1F_Room7_EventObjects, SSAnne_1F_Room7_MapWarps, 0x0, 0x0
 
 SSAnne_2F_Room1_EventObjects:
@@ -396,7 +396,7 @@ SSAnne_2F_Room1_EventObjects:
 SSAnne_2F_Room1_MapWarps:
 	warp_def 4, 7, 3, 3, 262
 
-gMapEvents_SSAnne_2F_Room1::
+SSAnne_2F_Room1_MapEvents::
 	map_events SSAnne_2F_Room1_EventObjects, SSAnne_2F_Room1_MapWarps, 0x0, 0x0
 
 SSAnne_2F_Room2_EventObjects:
@@ -407,7 +407,7 @@ SSAnne_2F_Room2_EventObjects:
 SSAnne_2F_Room2_MapWarps:
 	warp_def 4, 7, 3, 4, 262
 
-gMapEvents_SSAnne_2F_Room2::
+SSAnne_2F_Room2_MapEvents::
 	map_events SSAnne_2F_Room2_EventObjects, SSAnne_2F_Room2_MapWarps, 0x0, 0x0
 
 SSAnne_2F_Room3_EventObjects:
@@ -417,7 +417,7 @@ SSAnne_2F_Room3_EventObjects:
 SSAnne_2F_Room3_MapWarps:
 	warp_def 4, 7, 3, 5, 262
 
-gMapEvents_SSAnne_2F_Room3::
+SSAnne_2F_Room3_MapEvents::
 	map_events SSAnne_2F_Room3_EventObjects, SSAnne_2F_Room3_MapWarps, 0x0, 0x0
 
 SSAnne_2F_Room4_EventObjects:
@@ -428,7 +428,7 @@ SSAnne_2F_Room4_EventObjects:
 SSAnne_2F_Room4_MapWarps:
 	warp_def 4, 7, 3, 6, 262
 
-gMapEvents_SSAnne_2F_Room4::
+SSAnne_2F_Room4_MapEvents::
 	map_events SSAnne_2F_Room4_EventObjects, SSAnne_2F_Room4_MapWarps, 0x0, 0x0
 
 SSAnne_2F_Room5_EventObjects:
@@ -438,7 +438,7 @@ SSAnne_2F_Room5_EventObjects:
 SSAnne_2F_Room5_MapWarps:
 	warp_def 4, 7, 3, 7, 262
 
-gMapEvents_SSAnne_2F_Room5::
+SSAnne_2F_Room5_MapEvents::
 	map_events SSAnne_2F_Room5_EventObjects, SSAnne_2F_Room5_MapWarps, 0x0, 0x0
 
 SSAnne_2F_Room6_EventObjects:
@@ -448,7 +448,7 @@ SSAnne_2F_Room6_EventObjects:
 SSAnne_2F_Room6_MapWarps:
 	warp_def 4, 7, 3, 8, 262
 
-gMapEvents_SSAnne_2F_Room6::
+SSAnne_2F_Room6_MapEvents::
 	map_events SSAnne_2F_Room6_EventObjects, SSAnne_2F_Room6_MapWarps, 0x0, 0x0
 
 SSAnne_B1F_Room1_EventObjects:
@@ -458,7 +458,7 @@ SSAnne_B1F_Room1_EventObjects:
 SSAnne_B1F_Room1_MapWarps:
 	warp_def 4, 7, 3, 1, 264
 
-gMapEvents_SSAnne_B1F_Room1::
+SSAnne_B1F_Room1_MapEvents::
 	map_events SSAnne_B1F_Room1_EventObjects, SSAnne_B1F_Room1_MapWarps, 0x0, 0x0
 
 SSAnne_B1F_Room2_EventObjects:
@@ -468,7 +468,7 @@ SSAnne_B1F_Room2_EventObjects:
 SSAnne_B1F_Room2_MapWarps:
 	warp_def 4, 7, 3, 2, 264
 
-gMapEvents_SSAnne_B1F_Room2::
+SSAnne_B1F_Room2_MapEvents::
 	map_events SSAnne_B1F_Room2_EventObjects, SSAnne_B1F_Room2_MapWarps, 0x0, 0x0
 
 SSAnne_B1F_Room3_EventObjects:
@@ -478,7 +478,7 @@ SSAnne_B1F_Room3_EventObjects:
 SSAnne_B1F_Room3_MapWarps:
 	warp_def 4, 7, 3, 3, 264
 
-gMapEvents_SSAnne_B1F_Room3::
+SSAnne_B1F_Room3_MapEvents::
 	map_events SSAnne_B1F_Room3_EventObjects, SSAnne_B1F_Room3_MapWarps, 0x0, 0x0
 
 SSAnne_B1F_Room4_EventObjects:
@@ -488,7 +488,7 @@ SSAnne_B1F_Room4_EventObjects:
 SSAnne_B1F_Room4_MapWarps:
 	warp_def 4, 7, 3, 4, 264
 
-gMapEvents_SSAnne_B1F_Room4::
+SSAnne_B1F_Room4_MapEvents::
 	map_events SSAnne_B1F_Room4_EventObjects, SSAnne_B1F_Room4_MapWarps, 0x0, 0x0
 
 SSAnne_B1F_Room5_EventObjects:
@@ -499,7 +499,7 @@ SSAnne_B1F_Room5_EventObjects:
 SSAnne_B1F_Room5_MapWarps:
 	warp_def 4, 7, 3, 5, 264
 
-gMapEvents_SSAnne_B1F_Room5::
+SSAnne_B1F_Room5_MapEvents::
 	map_events SSAnne_B1F_Room5_EventObjects, SSAnne_B1F_Room5_MapWarps, 0x0, 0x0
 
 SSAnne_1F_Room6_EventObjects:
@@ -508,7 +508,7 @@ SSAnne_1F_Room6_EventObjects:
 SSAnne_1F_Room6_MapWarps:
 	warp_def 2, 1, 0, 12, 261
 
-gMapEvents_SSAnne_1F_Room6::
+SSAnne_1F_Room6_MapEvents::
 	map_events SSAnne_1F_Room6_EventObjects, SSAnne_1F_Room6_MapWarps, 0x0, 0x0
 
 UndergroundPath_NorthEntrance_EventObjects:
@@ -520,7 +520,7 @@ UndergroundPath_NorthEntrance_MapWarps:
 	warp_def 7, 8, 3, 0, 791
 	warp_def 7, 4, 3, 0, 287
 
-gMapEvents_UndergroundPath_NorthEntrance::
+UndergroundPath_NorthEntrance_MapEvents::
 	map_events UndergroundPath_NorthEntrance_EventObjects, UndergroundPath_NorthEntrance_MapWarps, 0x0, 0x0
 
 
@@ -537,7 +537,7 @@ UndergroundPath_NorthSouthTunnel_MapBGEvents:
 	bg_event 3, 15, 3, 7, 0, 18, 72, 1
 	bg_event 3, 39, 3, 7, 0, 34, 76, 1
 
-gMapEvents_UndergroundPath_NorthSouthTunnel::
+UndergroundPath_NorthSouthTunnel_MapEvents::
 	map_events 0x0, UndergroundPath_NorthSouthTunnel_MapWarps, 0x0, UndergroundPath_NorthSouthTunnel_MapBGEvents
 
 UndergroundPath_SouthEntrance_EventObjects:
@@ -549,7 +549,7 @@ UndergroundPath_SouthEntrance_MapWarps:
 	warp_def 7, 8, 3, 0, 792
 	warp_def 7, 4, 3, 1, 287
 
-gMapEvents_UndergroundPath_SouthEntrance::
+UndergroundPath_SouthEntrance_MapEvents::
 	map_events UndergroundPath_SouthEntrance_EventObjects, UndergroundPath_SouthEntrance_MapWarps, 0x0, 0x0
 
 UndergroundPath_WestEntrance_EventObjects:
@@ -561,7 +561,7 @@ UndergroundPath_WestEntrance_MapWarps:
 	warp_def 7, 8, 3, 0, 793
 	warp_def 7, 4, 3, 1, 290
 
-gMapEvents_UndergroundPath_WestEntrance::
+UndergroundPath_WestEntrance_MapEvents::
 	map_events UndergroundPath_WestEntrance_EventObjects, UndergroundPath_WestEntrance_MapWarps, 0x0, 0x0
 
 
@@ -578,7 +578,7 @@ UndergroundPath_EastWestTunnel_MapBGEvents:
 	bg_event 55, 2, 3, 7, 0, 34, 83, 1
 	bg_event 62, 5, 3, 7, 0, 14, 78, 1
 
-gMapEvents_UndergroundPath_EastWestTunnel::
+UndergroundPath_EastWestTunnel_MapEvents::
 	map_events 0x0, UndergroundPath_EastWestTunnel_MapWarps, 0x0, UndergroundPath_EastWestTunnel_MapBGEvents
 
 UndergroundPath_EastEntrance_EventObjects:
@@ -590,7 +590,7 @@ UndergroundPath_EastEntrance_MapWarps:
 	warp_def 7, 8, 3, 0, 794
 	warp_def 7, 4, 3, 0, 290
 
-gMapEvents_UndergroundPath_EastEntrance::
+UndergroundPath_EastEntrance_MapEvents::
 	map_events UndergroundPath_EastEntrance_EventObjects, UndergroundPath_EastEntrance_MapWarps, 0x0, 0x0
 
 DiglettsCave_NorthEntrance_EventObjects:
@@ -600,7 +600,7 @@ DiglettsCave_NorthEntrance_MapWarps:
 	warp_def 6, 4, 3, 0, 293
 	warp_def 4, 6, 3, 3, 788
 
-gMapEvents_DiglettsCave_NorthEntrance::
+DiglettsCave_NorthEntrance_MapEvents::
 	map_events DiglettsCave_NorthEntrance_EventObjects, DiglettsCave_NorthEntrance_MapWarps, 0x0, 0x0
 
 
@@ -608,7 +608,7 @@ DiglettsCave_B1F_MapWarps:
 	warp_def 3, 3, 3, 0, 292
 	warp_def 82, 71, 3, 1, 294
 
-gMapEvents_DiglettsCave_B1F::
+DiglettsCave_B1F_MapEvents::
 	map_events 0x0, DiglettsCave_B1F_MapWarps, 0x0, 0x0
 
 DiglettsCave_SouthEntrance_EventObjects:
@@ -618,7 +618,7 @@ DiglettsCave_SouthEntrance_MapWarps:
 	warp_def 4, 6, 3, 0, 797
 	warp_def 6, 4, 3, 1, 293
 
-gMapEvents_DiglettsCave_SouthEntrance::
+DiglettsCave_SouthEntrance_MapEvents::
 	map_events DiglettsCave_SouthEntrance_EventObjects, DiglettsCave_SouthEntrance_MapWarps, 0x0, 0x0
 
 VictoryRoad_1F_EventObjects:
@@ -641,7 +641,7 @@ VictoryRoad_1F_MapBGEvents:
 	bg_event 12, 12, 0, 7, 0, 2, 37, 1
 	bg_event 16, 1, 0, 7, 0, 19, 38, 1
 
-gMapEvents_VictoryRoad_1F::
+VictoryRoad_1F_MapEvents::
 	map_events VictoryRoad_1F_EventObjects, VictoryRoad_1F_MapWarps, VictoryRoad_1F_MapCoordEvents, VictoryRoad_1F_MapBGEvents
 
 VictoryRoad_2F_EventObjects:
@@ -674,7 +674,7 @@ VictoryRoad_2F_MapCoordEvents:
 	coord_event 2, 19, 3, 0, 16485, 99, 0, VictoryRoad_2F_EventScript_160FD5
 	coord_event 14, 19, 3, 0, 16486, 99, 0, VictoryRoad_2F_EventScript_161006
 
-gMapEvents_VictoryRoad_2F::
+VictoryRoad_2F_MapEvents::
 	map_events VictoryRoad_2F_EventObjects, VictoryRoad_2F_MapWarps, VictoryRoad_2F_MapCoordEvents, 0x0
 
 VictoryRoad_3F_EventObjects:
@@ -701,7 +701,7 @@ VictoryRoad_3F_MapWarps:
 VictoryRoad_3F_MapCoordEvents:
 	coord_event 7, 7, 3, 0, 16487, 99, 0, VictoryRoad_3F_EventScript_1610CF
 
-gMapEvents_VictoryRoad_3F::
+VictoryRoad_3F_MapEvents::
 	map_events VictoryRoad_3F_EventObjects, VictoryRoad_3F_MapWarps, VictoryRoad_3F_MapCoordEvents, 0x0
 
 RocketHideout_B1F_EventObjects:
@@ -724,7 +724,7 @@ RocketHideout_B1F_MapWarps:
 RocketHideout_B1F_MapBGEvents:
 	bg_event 16, 17, 0, 7, 0, 69, 11, 1
 
-gMapEvents_RocketHideout_B1F::
+RocketHideout_B1F_MapEvents::
 	map_events RocketHideout_B1F_EventObjects, RocketHideout_B1F_MapWarps, 0x0, RocketHideout_B1F_MapBGEvents
 
 RocketHideout_B2F_EventObjects:
@@ -741,7 +741,7 @@ RocketHideout_B2F_MapWarps:
 	warp_def 28, 16, 0, 1, 302
 	warp_def 29, 16, 0, 1, 302
 
-gMapEvents_RocketHideout_B2F::
+RocketHideout_B2F_MapEvents::
 	map_events RocketHideout_B2F_EventObjects, RocketHideout_B2F_MapWarps, 0x0, 0x0
 
 RocketHideout_B3F_EventObjects:
@@ -758,7 +758,7 @@ RocketHideout_B3F_MapWarps:
 RocketHideout_B3F_MapBGEvents:
 	bg_event 1, 3, 3, 7, 0, 110, 12, 1
 
-gMapEvents_RocketHideout_B3F::
+RocketHideout_B3F_MapEvents::
 	map_events RocketHideout_B3F_EventObjects, RocketHideout_B3F_MapWarps, 0x0, RocketHideout_B3F_MapBGEvents
 
 RocketHideout_B4F_EventObjects:
@@ -781,7 +781,7 @@ RocketHideout_B4F_MapBGEvents:
 	bg_event 22, 6, 3, 7, 0, 8, 13, 1
 	bg_event 16, 6, 3, 7, 0, 6, 134, 1
 
-gMapEvents_RocketHideout_B4F::
+RocketHideout_B4F_MapEvents::
 	map_events RocketHideout_B4F_EventObjects, RocketHideout_B4F_MapWarps, 0x0, RocketHideout_B4F_MapBGEvents
 
 
@@ -792,7 +792,7 @@ RocketHideout_Elevator_MapWarps:
 RocketHideout_Elevator_MapBGEvents:
 	bg_event 0, 2, 0, 0, 0, RocketHideout_Elevator_EventScript_1614D9
 
-gMapEvents_RocketHideout_Elevator::
+RocketHideout_Elevator_MapEvents::
 	map_events 0x0, RocketHideout_Elevator_MapWarps, 0x0, RocketHideout_Elevator_MapBGEvents
 
 SilphCo_1F_EventObjects:
@@ -808,7 +808,7 @@ SilphCo_1F_MapWarps:
 SilphCo_1F_MapBGEvents:
 	bg_event 30, 1, 0, 0, 0, SilphCo_1F_EventScript_161638
 
-gMapEvents_SilphCo_1F::
+SilphCo_1F_MapEvents::
 	map_events SilphCo_1F_EventObjects, SilphCo_1F_MapWarps, 0x0, SilphCo_1F_MapBGEvents
 
 SilphCo_2F_EventObjects:
@@ -839,7 +839,7 @@ SilphCo_2F_MapBGEvents:
 	bg_event 11, 21, 0, 7, 0, 2, 135, 1
 	bg_event 29, 1, 0, 0, 0, SilphCo_2F_EventScript_161660
 
-gMapEvents_SilphCo_2F::
+SilphCo_2F_MapEvents::
 	map_events SilphCo_2F_EventObjects, SilphCo_2F_MapWarps, 0x0, SilphCo_2F_MapBGEvents
 
 SilphCo_3F_EventObjects:
@@ -872,7 +872,7 @@ SilphCo_3F_MapBGEvents:
 	bg_event 34, 18, 0, 7, 0, 64, 136, 1
 	bg_event 29, 1, 0, 0, 0, SilphCo_3F_EventScript_1616FF
 
-gMapEvents_SilphCo_3F::
+SilphCo_3F_MapEvents::
 	map_events SilphCo_3F_EventObjects, SilphCo_3F_MapWarps, 0x0, SilphCo_3F_MapBGEvents
 
 SilphCo_4F_EventObjects:
@@ -906,7 +906,7 @@ SilphCo_4F_MapBGEvents:
 	bg_event 35, 20, 0, 7, 0, 65, 137, 1
 	bg_event 29, 1, 0, 0, 0, SilphCo_4F_EventScript_161770
 
-gMapEvents_SilphCo_4F::
+SilphCo_4F_MapEvents::
 	map_events SilphCo_4F_EventObjects, SilphCo_4F_MapWarps, 0x0, SilphCo_4F_MapBGEvents
 
 SilphCo_5F_EventObjects:
@@ -949,7 +949,7 @@ SilphCo_5F_MapBGEvents:
 	bg_event 32, 9, 0, 7, 0, 69, 138, 1
 	bg_event 29, 1, 0, 0, 0, SilphCo_5F_EventScript_16181C
 
-gMapEvents_SilphCo_5F::
+SilphCo_5F_MapEvents::
 	map_events SilphCo_5F_EventObjects, SilphCo_5F_MapWarps, 0x0, SilphCo_5F_MapBGEvents
 
 SilphCo_6F_EventObjects:
@@ -979,7 +979,7 @@ SilphCo_6F_MapBGEvents:
 	bg_event 1, 8, 0, 7, 0, 66, 139, 1
 	bg_event 25, 1, 0, 0, 0, SilphCo_6F_EventScript_161936
 
-gMapEvents_SilphCo_6F::
+SilphCo_6F_MapEvents::
 	map_events SilphCo_6F_EventObjects, SilphCo_6F_MapWarps, 0x0, SilphCo_6F_MapBGEvents
 
 SilphCo_7F_EventObjects:
@@ -1023,7 +1023,7 @@ SilphCo_7F_MapBGEvents:
 	bg_event 22, 11, 0, 7, 0, 70, 140, 1
 	bg_event 20, 1, 0, 0, 0, SilphCo_7F_EventScript_161BFA
 
-gMapEvents_SilphCo_7F::
+SilphCo_7F_MapEvents::
 	map_events SilphCo_7F_EventObjects, SilphCo_7F_MapWarps, SilphCo_7F_MapCoordEvents, SilphCo_7F_MapBGEvents
 
 SilphCo_8F_EventObjects:
@@ -1051,7 +1051,7 @@ SilphCo_8F_MapBGEvents:
 	bg_event 29, 10, 0, 7, 0, 110, 141, 1
 	bg_event 27, 1, 0, 0, 0, SilphCo_8F_EventScript_161C90
 
-gMapEvents_SilphCo_8F::
+SilphCo_8F_MapEvents::
 	map_events SilphCo_8F_EventObjects, SilphCo_8F_MapWarps, 0x0, SilphCo_8F_MapBGEvents
 
 SilphCo_9F_EventObjects:
@@ -1088,7 +1088,7 @@ SilphCo_9F_MapBGEvents:
 	bg_event 5, 8, 0, 7, 0, 67, 142, 1
 	bg_event 17, 1, 0, 0, 0, SilphCo_9F_EventScript_161D38
 
-gMapEvents_SilphCo_9F::
+SilphCo_9F_MapEvents::
 	map_events SilphCo_9F_EventObjects, SilphCo_9F_MapWarps, 0x0, SilphCo_9F_MapBGEvents
 
 SilphCo_10F_EventObjects:
@@ -1115,7 +1115,7 @@ SilphCo_10F_MapBGEvents:
 	bg_event 9, 9, 0, 7, 0, 63, 143, 1
 	bg_event 7, 1, 0, 0, 0, SilphCo_10F_EventScript_161DB7
 
-gMapEvents_SilphCo_10F::
+SilphCo_10F_MapEvents::
 	map_events SilphCo_10F_EventObjects, SilphCo_10F_MapWarps, 0x0, SilphCo_10F_MapBGEvents
 
 SilphCo_11F_EventObjects:
@@ -1143,7 +1143,7 @@ SilphCo_11F_MapBGEvents:
 	bg_event 10, 18, 0, 7, 0, 24, 144, 1
 	bg_event 8, 1, 0, 0, 0, SilphCo_11F_EventScript_161F37
 
-gMapEvents_SilphCo_11F::
+SilphCo_11F_MapEvents::
 	map_events SilphCo_11F_EventObjects, SilphCo_11F_MapWarps, SilphCo_11F_MapCoordEvents, SilphCo_11F_MapBGEvents
 
 
@@ -1153,7 +1153,7 @@ SilphCo_Elevator_MapWarps:
 SilphCo_Elevator_MapBGEvents:
 	bg_event 0, 2, 3, 0, 0, SilphCo_Elevator_EventScript_161F6F
 
-gMapEvents_SilphCo_Elevator::
+SilphCo_Elevator_MapEvents::
 	map_events 0x0, SilphCo_Elevator_MapWarps, 0x0, SilphCo_Elevator_MapBGEvents
 
 PokemonMansion_1F_EventObjects:
@@ -1179,7 +1179,7 @@ PokemonMansion_1F_MapBGEvents:
 	bg_event 5, 5, 0, 1, 0, PokemonMansion_1F_EventScript_162212
 	bg_event 2, 21, 0, 7, 0, 94, 31, 1
 
-gMapEvents_PokemonMansion_1F::
+PokemonMansion_1F_MapEvents::
 	map_events PokemonMansion_1F_EventObjects, PokemonMansion_1F_MapWarps, 0x0, PokemonMansion_1F_MapBGEvents
 
 PokemonMansion_2F_EventObjects:
@@ -1200,7 +1200,7 @@ PokemonMansion_2F_MapBGEvents:
 	bg_event 6, 31, 0, 0, 0, PokemonMansion_2F_EventScript_162281
 	bg_event 25, 4, 0, 0, 0, PokemonMansion_2F_EventScript_162278
 
-gMapEvents_PokemonMansion_2F::
+PokemonMansion_2F_MapEvents::
 	map_events PokemonMansion_2F_EventObjects, PokemonMansion_2F_MapWarps, 0x0, PokemonMansion_2F_MapBGEvents
 
 PokemonMansion_3F_EventObjects:
@@ -1224,7 +1224,7 @@ PokemonMansion_3F_MapBGEvents:
 	bg_event 12, 5, 0, 1, 0, PokemonMansion_3F_EventScript_1622B1
 	bg_event 36, 13, 3, 7, 0, 68, 32, 1
 
-gMapEvents_PokemonMansion_3F::
+PokemonMansion_3F_MapEvents::
 	map_events PokemonMansion_3F_EventObjects, PokemonMansion_3F_MapWarps, 0x0, PokemonMansion_3F_MapBGEvents
 
 PokemonMansion_B1F_EventObjects:
@@ -1244,7 +1244,7 @@ PokemonMansion_B1F_MapBGEvents:
 	bg_event 27, 5, 0, 1, 0, PokemonMansion_B1F_EventScript_16230C
 	bg_event 35, 5, 3, 7, 0, 36, 33, 1
 
-gMapEvents_PokemonMansion_B1F::
+PokemonMansion_B1F_MapEvents::
 	map_events PokemonMansion_B1F_EventObjects, PokemonMansion_B1F_MapWarps, 0x0, PokemonMansion_B1F_MapBGEvents
 
 SafariZone_Center_EventObjects:
@@ -1271,7 +1271,7 @@ SafariZone_Center_MapBGEvents:
 	bg_event 27, 15, 3, 7, 0, 98, 22, 1
 	bg_event 33, 20, 0, 0, 0, SafariZone_Center_EventScript_162373
 
-gMapEvents_SafariZone_Center::
+SafariZone_Center_MapEvents::
 	map_events SafariZone_Center_EventObjects, SafariZone_Center_MapWarps, 0x0, SafariZone_Center_MapBGEvents
 
 SafariZone_East_EventObjects:
@@ -1294,7 +1294,7 @@ SafariZone_East_MapBGEvents:
 	bg_event 43, 15, 0, 0, 0, SafariZone_East_EventScript_16237D
 	bg_event 17, 8, 0, 0, 0, SafariZone_East_EventScript_162386
 
-gMapEvents_SafariZone_East::
+SafariZone_East_MapEvents::
 	map_events SafariZone_East_EventObjects, SafariZone_East_MapWarps, 0x0, SafariZone_East_MapBGEvents
 
 SafariZone_North_EventObjects:
@@ -1324,7 +1324,7 @@ SafariZone_North_MapBGEvents:
 	bg_event 34, 28, 0, 0, 0, SafariZone_North_EventScript_1623BD
 	bg_event 44, 9, 0, 0, 0, SafariZone_North_EventScript_162399
 
-gMapEvents_SafariZone_North::
+SafariZone_North_MapEvents::
 	map_events SafariZone_North_EventObjects, SafariZone_North_MapWarps, 0x0, SafariZone_North_MapBGEvents
 
 SafariZone_West_EventObjects:
@@ -1353,7 +1353,7 @@ SafariZone_West_MapBGEvents:
 	bg_event 22, 19, 0, 0, 0, SafariZone_West_EventScript_1623C7
 	bg_event 13, 11, 3, 7, 0, 24, 23, 1
 
-gMapEvents_SafariZone_West::
+SafariZone_West_MapEvents::
 	map_events SafariZone_West_EventObjects, SafariZone_West_MapWarps, 0x0, SafariZone_West_MapBGEvents
 
 SafariZone_Building1_EventObjects:
@@ -1365,7 +1365,7 @@ SafariZone_Building1_MapWarps:
 	warp_def 4, 9, 3, 12, 319
 	warp_def 5, 9, 3, 12, 319
 
-gMapEvents_SafariZone_Building1::
+SafariZone_Building1_MapEvents::
 	map_events SafariZone_Building1_EventObjects, SafariZone_Building1_MapWarps, 0x0, 0x0
 
 SafariZone_Building2_EventObjects:
@@ -1378,7 +1378,7 @@ SafariZone_Building2_MapWarps:
 	warp_def 4, 9, 3, 6, 320
 	warp_def 5, 9, 3, 6, 320
 
-gMapEvents_SafariZone_Building2::
+SafariZone_Building2_MapEvents::
 	map_events SafariZone_Building2_EventObjects, SafariZone_Building2_MapWarps, 0x0, 0x0
 
 SafariZone_Building3_EventObjects:
@@ -1392,7 +1392,7 @@ SafariZone_Building3_MapWarps:
 	warp_def 4, 9, 3, 12, 321
 	warp_def 5, 9, 3, 12, 321
 
-gMapEvents_SafariZone_Building3::
+SafariZone_Building3_MapEvents::
 	map_events SafariZone_Building3_EventObjects, SafariZone_Building3_MapWarps, 0x0, 0x0
 
 SafariZone_Building4_EventObjects:
@@ -1405,7 +1405,7 @@ SafariZone_Building4_MapWarps:
 	warp_def 4, 9, 3, 10, 322
 	warp_def 5, 9, 3, 10, 322
 
-gMapEvents_SafariZone_Building4::
+SafariZone_Building4_MapEvents::
 	map_events SafariZone_Building4_EventObjects, SafariZone_Building4_MapWarps, 0x0, 0x0
 
 SafariZone_SecretHouse_EventObjects:
@@ -1416,7 +1416,7 @@ SafariZone_SecretHouse_MapWarps:
 	warp_def 4, 9, 3, 9, 322
 	warp_def 5, 9, 3, 9, 322
 
-gMapEvents_SafariZone_SecretHouse::
+SafariZone_SecretHouse_MapEvents::
 	map_events SafariZone_SecretHouse_EventObjects, SafariZone_SecretHouse_MapWarps, 0x0, 0x0
 
 CeruleanCave_1F_EventObjects:
@@ -1443,7 +1443,7 @@ CeruleanCave_1F_MapWarps:
 CeruleanCave_1F_MapBGEvents:
 	bg_event 12, 2, 3, 7, 0, 2, 39, 1
 
-gMapEvents_CeruleanCave_1F::
+CeruleanCave_1F_MapEvents::
 	map_events CeruleanCave_1F_EventObjects, CeruleanCave_1F_MapWarps, 0x0, CeruleanCave_1F_MapBGEvents
 
 CeruleanCave_2F_EventObjects:
@@ -1469,7 +1469,7 @@ CeruleanCave_2F_MapWarps:
 	warp_def 23, 10, 3, 6, 328
 	warp_def 5, 6, 3, 7, 328
 
-gMapEvents_CeruleanCave_2F::
+CeruleanCave_2F_MapEvents::
 	map_events CeruleanCave_2F_EventObjects, CeruleanCave_2F_MapWarps, 0x0, 0x0
 
 CeruleanCave_B1F_EventObjects:
@@ -1489,7 +1489,7 @@ CeruleanCave_B1F_EventObjects:
 CeruleanCave_B1F_MapWarps:
 	warp_def 5, 7, 3, 2, 328
 
-gMapEvents_CeruleanCave_B1F::
+CeruleanCave_B1F_MapEvents::
 	map_events CeruleanCave_B1F_EventObjects, CeruleanCave_B1F_MapWarps, 0x0, 0x0
 
 PokemonLeague_LoreleisRoom_EventObjects:
@@ -1499,7 +1499,7 @@ PokemonLeague_LoreleisRoom_MapWarps:
 	warp_def 6, 12, 0, 1, 3328
 	warp_def 6, 2, 0, 0, 332
 
-gMapEvents_PokemonLeague_LoreleisRoom::
+PokemonLeague_LoreleisRoom_MapEvents::
 	map_events PokemonLeague_LoreleisRoom_EventObjects, PokemonLeague_LoreleisRoom_MapWarps, 0x0, 0x0
 
 PokemonLeague_BrunosRoom_EventObjects:
@@ -1509,7 +1509,7 @@ PokemonLeague_BrunosRoom_MapWarps:
 	warp_def 6, 12, 0, 1, 331
 	warp_def 6, 2, 0, 0, 333
 
-gMapEvents_PokemonLeague_BrunosRoom::
+PokemonLeague_BrunosRoom_MapEvents::
 	map_events PokemonLeague_BrunosRoom_EventObjects, PokemonLeague_BrunosRoom_MapWarps, 0x0, 0x0
 
 PokemonLeague_AgathasRoom_EventObjects:
@@ -1519,7 +1519,7 @@ PokemonLeague_AgathasRoom_MapWarps:
 	warp_def 6, 12, 0, 1, 332
 	warp_def 6, 2, 0, 0, 334
 
-gMapEvents_PokemonLeague_AgathasRoom::
+PokemonLeague_AgathasRoom_MapEvents::
 	map_events PokemonLeague_AgathasRoom_EventObjects, PokemonLeague_AgathasRoom_MapWarps, 0x0, 0x0
 
 PokemonLeague_LancesRoom_EventObjects:
@@ -1529,7 +1529,7 @@ PokemonLeague_LancesRoom_MapWarps:
 	warp_def 23, 13, 3, 1, 333
 	warp_def 6, 5, 0, 0, 335
 
-gMapEvents_PokemonLeague_LancesRoom::
+PokemonLeague_LancesRoom_MapEvents::
 	map_events PokemonLeague_LancesRoom_EventObjects, PokemonLeague_LancesRoom_MapWarps, 0x0, 0x0
 
 PokemonLeague_ChampionsRoom_EventObjects:
@@ -1540,7 +1540,7 @@ PokemonLeague_ChampionsRoom_MapWarps:
 	warp_def 6, 19, 3, 1, 334
 	warp_def 6, 2, 3, 0, 336
 
-gMapEvents_PokemonLeague_ChampionsRoom::
+PokemonLeague_ChampionsRoom_MapEvents::
 	map_events PokemonLeague_ChampionsRoom_EventObjects, PokemonLeague_ChampionsRoom_MapWarps, 0x0, 0x0
 
 PokemonLeague_HallOfFame_EventObjects:
@@ -1549,7 +1549,7 @@ PokemonLeague_HallOfFame_EventObjects:
 PokemonLeague_HallOfFame_MapWarps:
 	warp_def 5, 12, 3, 1, 335
 
-gMapEvents_PokemonLeague_HallOfFame::
+PokemonLeague_HallOfFame_MapEvents::
 	map_events PokemonLeague_HallOfFame_EventObjects, PokemonLeague_HallOfFame_MapWarps, 0x0, 0x0
 
 RockTunnel_1F_EventObjects:
@@ -1575,7 +1575,7 @@ RockTunnel_1F_MapWarps:
 RockTunnel_1F_MapBGEvents:
 	bg_event 14, 33, 3, 0, 0, RockTunnel_1F_EventScript_162DE0
 
-gMapEvents_RockTunnel_1F::
+RockTunnel_1F_MapEvents::
 	map_events RockTunnel_1F_EventObjects, RockTunnel_1F_MapWarps, 0x0, RockTunnel_1F_MapBGEvents
 
 RockTunnel_B1F_EventObjects:
@@ -1612,7 +1612,7 @@ RockTunnel_B1F_MapWarps:
 	warp_def 27, 12, 3, 3, 337
 	warp_def 2, 3, 3, 4, 337
 
-gMapEvents_RockTunnel_B1F::
+RockTunnel_B1F_MapEvents::
 	map_events RockTunnel_B1F_EventObjects, RockTunnel_B1F_MapWarps, 0x0, 0x0
 
 SeafoamIslands_1F_EventObjects:
@@ -1629,7 +1629,7 @@ SeafoamIslands_1F_MapWarps:
 	warp_def 21, 8, 3, 9, 340
 	warp_def 30, 8, 3, 10, 340
 
-gMapEvents_SeafoamIslands_1F::
+SeafoamIslands_1F_MapEvents::
 	map_events SeafoamIslands_1F_EventObjects, SeafoamIslands_1F_MapWarps, 0x0, 0x0
 
 SeafoamIslands_B1F_EventObjects:
@@ -1651,7 +1651,7 @@ SeafoamIslands_B1F_MapWarps:
 	warp_def 21, 8, 3, 5, 339
 	warp_def 29, 8, 3, 6, 339
 
-gMapEvents_SeafoamIslands_B1F::
+SeafoamIslands_B1F_MapEvents::
 	map_events SeafoamIslands_B1F_EventObjects, SeafoamIslands_B1F_MapWarps, 0x0, 0x0
 
 SeafoamIslands_B2F_EventObjects:
@@ -1672,7 +1672,7 @@ SeafoamIslands_B2F_MapWarps:
 	warp_def 24, 8, 3, 5, 342
 	warp_def 27, 8, 3, 6, 342
 
-gMapEvents_SeafoamIslands_B2F::
+SeafoamIslands_B2F_MapEvents::
 	map_events SeafoamIslands_B2F_EventObjects, SeafoamIslands_B2F_MapWarps, 0x0, 0x0
 
 SeafoamIslands_B3F_EventObjects:
@@ -1697,7 +1697,7 @@ SeafoamIslands_B3F_MapWarps:
 SeafoamIslands_B3F_MapBGEvents:
 	bg_event 5, 12, 0, 7, 0, 110, 29, 1
 
-gMapEvents_SeafoamIslands_B3F::
+SeafoamIslands_B3F_MapEvents::
 	map_events SeafoamIslands_B3F_EventObjects, SeafoamIslands_B3F_MapWarps, 0x0, SeafoamIslands_B3F_MapBGEvents
 
 SeafoamIslands_B4F_EventObjects:
@@ -1722,7 +1722,7 @@ SeafoamIslands_B4F_MapBGEvents:
 	bg_event 30, 2, 0, 0, 0, SeafoamIslands_B4F_EventScript_16322C
 	bg_event 14, 18, 0, 0, 0, SeafoamIslands_B4F_EventScript_163223
 
-gMapEvents_SeafoamIslands_B4F::
+SeafoamIslands_B4F_MapEvents::
 	map_events SeafoamIslands_B4F_EventObjects, SeafoamIslands_B4F_MapWarps, SeafoamIslands_B4F_MapCoordEvents, SeafoamIslands_B4F_MapBGEvents
 
 PokemonTower_1F_EventObjects:
@@ -1738,7 +1738,7 @@ PokemonTower_1F_MapWarps:
 	warp_def 12, 19, 3, 0, 772
 	warp_def 18, 9, 3, 1, 345
 
-gMapEvents_PokemonTower_1F::
+PokemonTower_1F_MapEvents::
 	map_events PokemonTower_1F_EventObjects, PokemonTower_1F_MapWarps, 0x0, 0x0
 
 PokemonTower_2F_EventObjects:
@@ -1753,7 +1753,7 @@ PokemonTower_2F_MapCoordEvents:
 	coord_event 17, 5, 3, 0, 16477, 0, 0, PokemonTower_2F_EventScript_16328F
 	coord_event 16, 6, 3, 0, 16477, 0, 0, PokemonTower_2F_EventScript_16329B
 
-gMapEvents_PokemonTower_2F::
+PokemonTower_2F_MapEvents::
 	map_events PokemonTower_2F_EventObjects, PokemonTower_2F_MapWarps, PokemonTower_2F_MapCoordEvents, 0x0
 
 PokemonTower_3F_EventObjects:
@@ -1766,7 +1766,7 @@ PokemonTower_3F_MapWarps:
 	warp_def 4, 10, 3, 0, 345
 	warp_def 18, 10, 3, 1, 347
 
-gMapEvents_PokemonTower_3F::
+PokemonTower_3F_MapEvents::
 	map_events PokemonTower_3F_EventObjects, PokemonTower_3F_MapWarps, 0x0, 0x0
 
 PokemonTower_4F_EventObjects:
@@ -1781,7 +1781,7 @@ PokemonTower_4F_MapWarps:
 	warp_def 4, 10, 3, 0, 348
 	warp_def 18, 10, 3, 1, 346
 
-gMapEvents_PokemonTower_4F::
+PokemonTower_4F_MapEvents::
 	map_events PokemonTower_4F_EventObjects, PokemonTower_4F_MapWarps, 0x0, 0x0
 
 PokemonTower_5F_EventObjects:
@@ -1819,7 +1819,7 @@ PokemonTower_5F_MapCoordEvents:
 PokemonTower_5F_MapBGEvents:
 	bg_event 7, 3, 3, 7, 0, 104, 14, 1
 
-gMapEvents_PokemonTower_5F::
+PokemonTower_5F_MapEvents::
 	map_events PokemonTower_5F_EventObjects, PokemonTower_5F_MapWarps, PokemonTower_5F_MapCoordEvents, PokemonTower_5F_MapBGEvents
 
 PokemonTower_6F_EventObjects:
@@ -1837,7 +1837,7 @@ PokemonTower_6F_MapCoordEvents:
 	coord_event 11, 15, 3, 0, 16473, 0, 0, PokemonTower_6F_EventScript_1634B8
 	coord_event 12, 16, 3, 0, 16473, 0, 0, PokemonTower_6F_EventScript_1634B8
 
-gMapEvents_PokemonTower_6F::
+PokemonTower_6F_MapEvents::
 	map_events PokemonTower_6F_EventObjects, PokemonTower_6F_MapWarps, PokemonTower_6F_MapCoordEvents, 0x0
 
 PokemonTower_7F_EventObjects:
@@ -1852,7 +1852,7 @@ PokemonTower_7F_MapWarps:
 PokemonTower_7F_MapBGEvents:
 	bg_event 11, 4, 3, 7, 0, 184, 159, 129
 
-gMapEvents_PokemonTower_7F::
+PokemonTower_7F_MapEvents::
 	map_events PokemonTower_7F_EventObjects, PokemonTower_7F_MapWarps, 0x0, PokemonTower_7F_MapBGEvents
 
 PowerPlant_EventObjects:
@@ -1876,7 +1876,7 @@ PowerPlant_MapBGEvents:
 	bg_event 29, 16, 3, 7, 0, 37, 27, 1
 	bg_event 8, 12, 3, 7, 0, 96, 28, 1
 
-gMapEvents_PowerPlant::
+PowerPlant_MapEvents::
 	map_events PowerPlant_EventObjects, PowerPlant_MapWarps, 0x0, PowerPlant_MapBGEvents
 
 
@@ -1912,7 +1912,7 @@ MtEmber_RubyPath_B4F_MapBGEvents:
 	bg_event 9, 13, 0, 1, 0, MtEmber_RubyPath_B4F_EventScript_16392B
 	bg_event 8, 13, 0, 1, 0, MtEmber_RubyPath_B4F_EventScript_16392B
 
-gMapEvents_MtEmber_RubyPath_B4F::
+MtEmber_RubyPath_B4F_MapEvents::
 	map_events 0x0, MtEmber_RubyPath_B4F_MapWarps, 0x0, MtEmber_RubyPath_B4F_MapBGEvents
 
 MtEmber_Exterior_EventObjects:
@@ -1954,7 +1954,7 @@ MtEmber_Exterior_MapBGEvents:
 	bg_event 18, 17, 0, 7, 0, 95, 158, 1
 	bg_event 8, 30, 3, 7, 0, 2, 162, 1
 
-gMapEvents_MtEmber_Exterior::
+MtEmber_Exterior_MapEvents::
 	map_events MtEmber_Exterior_EventObjects, MtEmber_Exterior_MapWarps, MtEmber_Exterior_MapCoordEvents, MtEmber_Exterior_MapBGEvents
 
 
@@ -1962,7 +1962,7 @@ MtEmber_SummitPath_1F_MapWarps:
 	warp_def 2, 15, 0, 2, 353
 	warp_def 11, 1, 0, 0, 355
 
-gMapEvents_MtEmber_SummitPath_1F::
+MtEmber_SummitPath_1F_MapEvents::
 	map_events 0x0, MtEmber_SummitPath_1F_MapWarps, 0x0, 0x0
 
 MtEmber_SummitPath_2F_EventObjects:
@@ -1980,7 +1980,7 @@ MtEmber_SummitPath_2F_MapWarps:
 	warp_def 8, 39, 0, 1, 354
 	warp_def 39, 6, 3, 0, 356
 
-gMapEvents_MtEmber_SummitPath_2F::
+MtEmber_SummitPath_2F_MapEvents::
 	map_events MtEmber_SummitPath_2F_EventObjects, MtEmber_SummitPath_2F_MapWarps, 0x0, 0x0
 
 
@@ -1988,7 +1988,7 @@ MtEmber_SummitPath_3F_MapWarps:
 	warp_def 2, 4, 0, 1, 355
 	warp_def 11, 8, 0, 3, 353
 
-gMapEvents_MtEmber_SummitPath_3F::
+MtEmber_SummitPath_3F_MapEvents::
 	map_events 0x0, MtEmber_SummitPath_3F_MapWarps, 0x0, 0x0
 
 MtEmber_Summit_EventObjects:
@@ -2001,7 +2001,7 @@ MtEmber_Summit_EventObjects:
 MtEmber_Summit_MapWarps:
 	warp_def 9, 15, 0, 4, 353
 
-gMapEvents_MtEmber_Summit::
+MtEmber_Summit_MapEvents::
 	map_events MtEmber_Summit_EventObjects, MtEmber_Summit_MapWarps, 0x0, 0x0
 
 MtEmber_RubyPath_B5F_EventObjects:
@@ -2013,7 +2013,7 @@ MtEmber_RubyPath_B5F_MapWarps:
 MtEmber_RubyPath_B5F_MapBGEvents:
 	bg_event 7, 2, 0, 1, 0, MtEmber_RubyPath_B5F_EventScript_163BAB
 
-gMapEvents_MtEmber_RubyPath_B5F::
+MtEmber_RubyPath_B5F_MapEvents::
 	map_events MtEmber_RubyPath_B5F_EventObjects, MtEmber_RubyPath_B5F_MapWarps, 0x0, MtEmber_RubyPath_B5F_MapBGEvents
 
 SSAnne_Kitchen3_EventObjects:
@@ -2028,7 +2028,7 @@ SSAnne_Kitchen3_MapWarps:
 	warp_def 1, 1, 0, 0, 360
 	warp_def 24, 5, 0, 1, 364
 
-gMapEvents_SSAnne_Kitchen3::
+SSAnne_Kitchen3_MapEvents::
 	map_events SSAnne_Kitchen3_EventObjects, SSAnne_Kitchen3_MapWarps, 0x0, 0x0
 
 MtEmber_RubyPath_B1F_EventObjects:
@@ -2041,7 +2041,7 @@ MtEmber_RubyPath_B1F_MapWarps:
 	warp_def 9, 21, 0, 1, 359
 	warp_def 6, 1, 0, 0, 361
 
-gMapEvents_MtEmber_RubyPath_B1F::
+MtEmber_RubyPath_B1F_MapEvents::
 	map_events MtEmber_RubyPath_B1F_EventObjects, MtEmber_RubyPath_B1F_MapWarps, 0x0, 0x0
 
 MtEmber_RubyPath_B2F_EventObjects:
@@ -2057,7 +2057,7 @@ MtEmber_RubyPath_B2F_MapWarps:
 	warp_def 1, 7, 3, 1, 360
 	warp_def 13, 9, 3, 0, 362
 
-gMapEvents_MtEmber_RubyPath_B2F::
+MtEmber_RubyPath_B2F_MapEvents::
 	map_events MtEmber_RubyPath_B2F_EventObjects, MtEmber_RubyPath_B2F_MapWarps, 0x0, 0x0
 
 MtEmber_RubyPath_B3F_EventObjects:
@@ -2077,7 +2077,7 @@ MtEmber_RubyPath_B3F_MapWarps:
 	warp_def 19, 19, 3, 0, 363
 	warp_def 5, 19, 3, 1, 352
 
-gMapEvents_MtEmber_RubyPath_B3F::
+MtEmber_RubyPath_B3F_MapEvents::
 	map_events MtEmber_RubyPath_B3F_EventObjects, MtEmber_RubyPath_B3F_MapWarps, 0x0, 0x0
 
 MtEmber_RubyPath_B1F_Stairs_EventObjects:
@@ -2087,7 +2087,7 @@ MtEmber_RubyPath_B1F_Stairs_MapWarps:
 	warp_def 4, 1, 0, 1, 362
 	warp_def 1, 5, 0, 0, 364
 
-gMapEvents_MtEmber_RubyPath_B1F_Stairs::
+MtEmber_RubyPath_B1F_Stairs_MapEvents::
 	map_events MtEmber_RubyPath_B1F_Stairs_EventObjects, MtEmber_RubyPath_B1F_Stairs_MapWarps, 0x0, 0x0
 
 MtEmber_RubyPath_B2F_Stairs_EventObjects:
@@ -2098,7 +2098,7 @@ MtEmber_RubyPath_B2F_Stairs_MapWarps:
 	warp_def 6, 1, 0, 1, 363
 	warp_def 1, 4, 0, 2, 359
 
-gMapEvents_MtEmber_RubyPath_B2F_Stairs::
+MtEmber_RubyPath_B2F_Stairs_MapEvents::
 	map_events MtEmber_RubyPath_B2F_Stairs_EventObjects, MtEmber_RubyPath_B2F_Stairs_MapWarps, 0x0, 0x0
 
 ThreeIsland_BerryForest_EventObjects:
@@ -2139,7 +2139,7 @@ ThreeIsland_BerryForest_MapBGEvents:
 	bg_event 43, 16, 3, 7, 0, 152, 101, 1
 	bg_event 8, 5, 3, 7, 0, 141, 102, 1
 
-gMapEvents_ThreeIsland_BerryForest::
+ThreeIsland_BerryForest_MapEvents::
 	map_events ThreeIsland_BerryForest_EventObjects, ThreeIsland_BerryForest_MapWarps, 0x0, ThreeIsland_BerryForest_MapBGEvents
 
 
@@ -2148,7 +2148,7 @@ FourIsland_IcefallCave_Entrance_MapWarps:
 	warp_def 10, 21, 3, 0, 367
 	warp_def 9, 7, 3, 1, 367
 
-gMapEvents_FourIsland_IcefallCave_Entrance::
+FourIsland_IcefallCave_Entrance_MapEvents::
 	map_events 0x0, FourIsland_IcefallCave_Entrance_MapWarps, 0x0, 0x0
 
 FourIsland_IcefallCave_1F_EventObjects:
@@ -2163,7 +2163,7 @@ FourIsland_IcefallCave_1F_MapWarps:
 	warp_def 15, 16, 3, 2, 368
 	warp_def 3, 6, 3, 0, 369
 
-gMapEvents_FourIsland_IcefallCave_1F::
+FourIsland_IcefallCave_1F_MapEvents::
 	map_events FourIsland_IcefallCave_1F_EventObjects, FourIsland_IcefallCave_1F_MapWarps, 0x0, 0x0
 
 SSAnne_CaptainsOffice2_EventObjects:
@@ -2175,7 +2175,7 @@ SSAnne_CaptainsOffice2_MapWarps:
 	warp_def 12, 3, 3, 3, 367
 	warp_def 15, 16, 3, 4, 367
 
-gMapEvents_SSAnne_CaptainsOffice2::
+SSAnne_CaptainsOffice2_MapEvents::
 	map_events SSAnne_CaptainsOffice2_EventObjects, SSAnne_CaptainsOffice2_MapWarps, 0x0, 0x0
 
 SSAnne_CaptainsOffice3_EventObjects:
@@ -2192,7 +2192,7 @@ SSAnne_CaptainsOffice3_MapCoordEvents:
 	coord_event 12, 18, 3, 0, 16512, 0, 0, SSAnne_CaptainsOffice3_EventScript_163D98
 	coord_event 13, 18, 3, 0, 16512, 0, 0, SSAnne_CaptainsOffice3_EventScript_163D98
 
-gMapEvents_SSAnne_CaptainsOffice3::
+SSAnne_CaptainsOffice3_MapEvents::
 	map_events SSAnne_CaptainsOffice3_EventObjects, SSAnne_CaptainsOffice3_MapWarps, SSAnne_CaptainsOffice3_MapCoordEvents, 0x0
 
 SSAnne_CaptainsOffice4_EventObjects:
@@ -2242,7 +2242,7 @@ SSAnne_CaptainsOffice4_MapBGEvents:
 	bg_event 2, 5, 0, 0, 0, SSAnne_CaptainsOffice4_EventScript_163F5A
 	bg_event 3, 5, 0, 0, 0, SSAnne_CaptainsOffice4_EventScript_163F5A
 
-gMapEvents_SSAnne_CaptainsOffice4::
+SSAnne_CaptainsOffice4_MapEvents::
 	map_events SSAnne_CaptainsOffice4_EventObjects, SSAnne_CaptainsOffice4_MapWarps, SSAnne_CaptainsOffice4_MapCoordEvents, SSAnne_CaptainsOffice4_MapBGEvents
 
 
@@ -2252,7 +2252,7 @@ SSAnne_CaptainsOffice5_MapWarps:
 	warp_def 13, 5, 3, 0, 376
 	warp_def 6, 7, 3, 2, 372
 
-gMapEvents_SSAnne_CaptainsOffice5::
+SSAnne_CaptainsOffice5_MapEvents::
 	map_events 0x0, SSAnne_CaptainsOffice5_MapWarps, 0x0, 0x0
 
 
@@ -2266,7 +2266,7 @@ SixIsland_DottedHole_B1F_MapWarps:
 SixIsland_DottedHole_B1F_MapBGEvents:
 	bg_event 6, 5, 0, 1, 0, SixIsland_DottedHole_B1F_EventScript_16418C
 
-gMapEvents_SixIsland_DottedHole_B1F::
+SixIsland_DottedHole_B1F_MapEvents::
 	map_events 0x0, SixIsland_DottedHole_B1F_MapWarps, 0x0, SixIsland_DottedHole_B1F_MapBGEvents
 
 
@@ -2280,7 +2280,7 @@ SixIsland_DottedHole_B2F_MapWarps:
 SixIsland_DottedHole_B2F_MapBGEvents:
 	bg_event 6, 5, 0, 1, 0, SixIsland_DottedHole_B2F_EventScript_1641A7
 
-gMapEvents_SixIsland_DottedHole_B2F::
+SixIsland_DottedHole_B2F_MapEvents::
 	map_events 0x0, SixIsland_DottedHole_B2F_MapWarps, 0x0, SixIsland_DottedHole_B2F_MapBGEvents
 
 
@@ -2294,7 +2294,7 @@ SixIsland_DottedHole_B3F_MapWarps:
 SixIsland_DottedHole_B3F_MapBGEvents:
 	bg_event 6, 5, 0, 1, 0, SixIsland_DottedHole_B3F_EventScript_16419E
 
-gMapEvents_SixIsland_DottedHole_B3F::
+SixIsland_DottedHole_B3F_MapEvents::
 	map_events 0x0, SixIsland_DottedHole_B3F_MapWarps, 0x0, SixIsland_DottedHole_B3F_MapBGEvents
 
 
@@ -2308,7 +2308,7 @@ SSAnne_CaptainsOffice9_MapWarps:
 SSAnne_CaptainsOffice9_MapBGEvents:
 	bg_event 6, 5, 0, 1, 0, SSAnne_CaptainsOffice9_EventScript_164195
 
-gMapEvents_SSAnne_CaptainsOffice9::
+SSAnne_CaptainsOffice9_MapEvents::
 	map_events 0x0, SSAnne_CaptainsOffice9_MapWarps, 0x0, SSAnne_CaptainsOffice9_MapBGEvents
 
 SixIsland_DottedHole_SapphireRoom_EventObjects:
@@ -2322,7 +2322,7 @@ SixIsland_DottedHole_SapphireRoom_MapWarps:
 SixIsland_DottedHole_SapphireRoom_MapBGEvents:
 	bg_event 7, 2, 0, 1, 0, SixIsland_DottedHole_SapphireRoom_EventScript_16441F
 
-gMapEvents_SixIsland_DottedHole_SapphireRoom::
+SixIsland_DottedHole_SapphireRoom_MapEvents::
 	map_events SixIsland_DottedHole_SapphireRoom_EventObjects, SixIsland_DottedHole_SapphireRoom_MapWarps, 0x0, SixIsland_DottedHole_SapphireRoom_MapBGEvents
 
 SSAnne_1F_Room11_EventObjects:
@@ -2347,14 +2347,14 @@ SSAnne_1F_Room11_MapWarps:
 	warp_def 4, 26, 3, 2, 827
 	warp_def 5, 26, 3, 3, 827
 
-gMapEvents_SSAnne_1F_Room11::
+SSAnne_1F_Room11_MapEvents::
 	map_events SSAnne_1F_Room11_EventObjects, SSAnne_1F_Room11_MapWarps, 0x0, 0x0
 
 
 SSAnne_1F_Room12_MapWarps:
 	warp_def 18, 22, 3, 0, 826
 
-gMapEvents_SSAnne_1F_Room12::
+SSAnne_1F_Room12_MapEvents::
 	map_events 0x0, SSAnne_1F_Room12_MapWarps, 0x0, 0x0
 
 
@@ -2362,7 +2362,7 @@ NavelRock_Exterior_MapWarps:
 	warp_def 9, 8, 3, 1, 548
 	warp_def 9, 16, 3, 0, 571
 
-gMapEvents_NavelRock_Exterior::
+NavelRock_Exterior_MapEvents::
 	map_events 0x0, NavelRock_Exterior_MapWarps, 0x0, 0x0
 
 SevenIsland_TrainerTower_1F_EventObjects:
@@ -2381,7 +2381,7 @@ SevenIsland_TrainerTower_1F_MapCoordEvents:
 	coord_event 9, 12, 0, 0, 16399, 0, 0, SevenIsland_TrainerTower_1F_EventScript_1C54B4
 	coord_event 9, 13, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_1F_EventScript_1C54EA
 
-gMapEvents_SevenIsland_TrainerTower_1F::
+SevenIsland_TrainerTower_1F_MapEvents::
 	map_events SevenIsland_TrainerTower_1F_EventObjects, SevenIsland_TrainerTower_1F_MapWarps, SevenIsland_TrainerTower_1F_MapCoordEvents, 0x0
 
 SevenIsland_TrainerTower_2F_EventObjects:
@@ -2401,7 +2401,7 @@ SevenIsland_TrainerTower_2F_MapCoordEvents:
 	coord_event 9, 12, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_2F_EventScript_1C54B4
 	coord_event 9, 13, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_2F_EventScript_1C54EA
 
-gMapEvents_SevenIsland_TrainerTower_2F::
+SevenIsland_TrainerTower_2F_MapEvents::
 	map_events SevenIsland_TrainerTower_2F_EventObjects, SevenIsland_TrainerTower_2F_MapWarps, SevenIsland_TrainerTower_2F_MapCoordEvents, 0x0
 
 SevenIsland_TrainerTower_3F_EventObjects:
@@ -2421,7 +2421,7 @@ SevenIsland_TrainerTower_3F_MapCoordEvents:
 	coord_event 9, 12, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_3F_EventScript_1C54B4
 	coord_event 9, 13, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_3F_EventScript_1C54EA
 
-gMapEvents_SevenIsland_TrainerTower_3F::
+SevenIsland_TrainerTower_3F_MapEvents::
 	map_events SevenIsland_TrainerTower_3F_EventObjects, SevenIsland_TrainerTower_3F_MapWarps, SevenIsland_TrainerTower_3F_MapCoordEvents, 0x0
 
 SevenIsland_TrainerTower_4F_EventObjects:
@@ -2441,7 +2441,7 @@ SevenIsland_TrainerTower_4F_MapCoordEvents:
 	coord_event 9, 12, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_4F_EventScript_1C54B4
 	coord_event 9, 13, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_4F_EventScript_1C54EA
 
-gMapEvents_SevenIsland_TrainerTower_4F::
+SevenIsland_TrainerTower_4F_MapEvents::
 	map_events SevenIsland_TrainerTower_4F_EventObjects, SevenIsland_TrainerTower_4F_MapWarps, SevenIsland_TrainerTower_4F_MapCoordEvents, 0x0
 
 SevenIsland_TrainerTower_5F_EventObjects:
@@ -2461,7 +2461,7 @@ SevenIsland_TrainerTower_5F_MapCoordEvents:
 	coord_event 9, 12, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_5F_EventScript_1C54B4
 	coord_event 9, 13, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_5F_EventScript_1C54EA
 
-gMapEvents_SevenIsland_TrainerTower_5F::
+SevenIsland_TrainerTower_5F_MapEvents::
 	map_events SevenIsland_TrainerTower_5F_EventObjects, SevenIsland_TrainerTower_5F_MapWarps, SevenIsland_TrainerTower_5F_MapCoordEvents, 0x0
 
 SevenIsland_TrainerTower_6F_EventObjects:
@@ -2481,7 +2481,7 @@ SevenIsland_TrainerTower_6F_MapCoordEvents:
 	coord_event 9, 12, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_6F_EventScript_1C54B4
 	coord_event 9, 13, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_6F_EventScript_1C54EA
 
-gMapEvents_SevenIsland_TrainerTower_6F::
+SevenIsland_TrainerTower_6F_MapEvents::
 	map_events SevenIsland_TrainerTower_6F_EventObjects, SevenIsland_TrainerTower_6F_MapWarps, SevenIsland_TrainerTower_6F_MapCoordEvents, 0x0
 
 SevenIsland_TrainerTower_7F_EventObjects:
@@ -2501,7 +2501,7 @@ SevenIsland_TrainerTower_7F_MapCoordEvents:
 	coord_event 9, 12, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_7F_EventScript_1C54B4
 	coord_event 9, 13, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_7F_EventScript_1C54EA
 
-gMapEvents_SevenIsland_TrainerTower_7F::
+SevenIsland_TrainerTower_7F_MapEvents::
 	map_events SevenIsland_TrainerTower_7F_EventObjects, SevenIsland_TrainerTower_7F_MapWarps, SevenIsland_TrainerTower_7F_MapCoordEvents, 0x0
 
 SevenIsland_TrainerTower_8F_EventObjects:
@@ -2521,7 +2521,7 @@ SevenIsland_TrainerTower_8F_MapCoordEvents:
 	coord_event 9, 12, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_8F_EventScript_1C54B4
 	coord_event 9, 13, 3, 0, 16399, 0, 0, SevenIsland_TrainerTower_8F_EventScript_1C54EA
 
-gMapEvents_SevenIsland_TrainerTower_8F::
+SevenIsland_TrainerTower_8F_MapEvents::
 	map_events SevenIsland_TrainerTower_8F_EventObjects, SevenIsland_TrainerTower_8F_MapWarps, SevenIsland_TrainerTower_8F_MapCoordEvents, 0x0
 
 SevenIsland_TrainerTower_Roof_EventObjects:
@@ -2531,7 +2531,7 @@ SevenIsland_TrainerTower_Roof_MapWarps:
 	warp_def 13, 5, 0, 0, 523
 	warp_def 4, 6, 3, 0, 520
 
-gMapEvents_SevenIsland_TrainerTower_Roof::
+SevenIsland_TrainerTower_Roof_MapEvents::
 	map_events SevenIsland_TrainerTower_Roof_EventObjects, SevenIsland_TrainerTower_Roof_MapWarps, 0x0, 0x0
 
 SevenIsland_TrainerTower_Lobby_EventObjects:
@@ -2552,7 +2552,7 @@ SevenIsland_TrainerTower_Lobby_MapCoordEvents:
 SevenIsland_TrainerTower_Lobby_MapBGEvents:
 	bg_event 8, 10, 0, 1, 0, SevenIsland_TrainerTower_Lobby_EventScript_164AD8
 
-gMapEvents_SevenIsland_TrainerTower_Lobby::
+SevenIsland_TrainerTower_Lobby_MapEvents::
 	map_events SevenIsland_TrainerTower_Lobby_EventObjects, SevenIsland_TrainerTower_Lobby_MapWarps, SevenIsland_TrainerTower_Lobby_MapCoordEvents, SevenIsland_TrainerTower_Lobby_MapBGEvents
 
 
@@ -2562,7 +2562,7 @@ SevenIsland_TrainerTower_Elevator_MapWarps:
 SevenIsland_TrainerTower_Elevator_MapBGEvents:
 	bg_event 0, 2, 0, 0, 0, SevenIsland_TrainerTower_Elevator_EventScript_164B03
 
-gMapEvents_SevenIsland_TrainerTower_Elevator::
+SevenIsland_TrainerTower_Elevator_MapEvents::
 	map_events 0x0, SevenIsland_TrainerTower_Elevator_MapWarps, 0x0, SevenIsland_TrainerTower_Elevator_MapBGEvents
 
 
@@ -2570,7 +2570,7 @@ FiveIsland_LostCave_Entrance_MapWarps:
 	warp_def 5, 8, 3, 0, 822
 	warp_def 5, 5, 3, 0, 525
 
-gMapEvents_FiveIsland_LostCave_Entrance::
+FiveIsland_LostCave_Entrance_MapEvents::
 	map_events 0x0, FiveIsland_LostCave_Entrance_MapWarps, 0x0, 0x0
 
 FiveIsland_LostCave_Room1_EventObjects:
@@ -2583,7 +2583,7 @@ FiveIsland_LostCave_Room1_MapWarps:
 	warp_def 5, 8, 3, 1, 525
 	warp_def 2, 5, 3, 2, 525
 
-gMapEvents_FiveIsland_LostCave_Room1::
+FiveIsland_LostCave_Room1_MapEvents::
 	map_events FiveIsland_LostCave_Room1_EventObjects, FiveIsland_LostCave_Room1_MapWarps, 0x0, 0x0
 
 
@@ -2593,7 +2593,7 @@ FiveIsland_LostCave_Room2_MapWarps:
 	warp_def 5, 8, 3, 0, 535
 	warp_def 2, 5, 3, 2, 525
 
-gMapEvents_FiveIsland_LostCave_Room2::
+FiveIsland_LostCave_Room2_MapEvents::
 	map_events 0x0, FiveIsland_LostCave_Room2_MapWarps, 0x0, 0x0
 
 
@@ -2603,7 +2603,7 @@ FiveIsland_LostCave_Room3_MapWarps:
 	warp_def 5, 8, 3, 0, 528
 	warp_def 2, 5, 3, 2, 525
 
-gMapEvents_FiveIsland_LostCave_Room3::
+FiveIsland_LostCave_Room3_MapEvents::
 	map_events 0x0, FiveIsland_LostCave_Room3_MapWarps, 0x0, 0x0
 
 FiveIsland_LostCave_Room4_EventObjects:
@@ -2615,7 +2615,7 @@ FiveIsland_LostCave_Room4_MapWarps:
 	warp_def 5, 8, 3, 0, 529
 	warp_def 2, 5, 3, 2, 525
 
-gMapEvents_FiveIsland_LostCave_Room4::
+FiveIsland_LostCave_Room4_MapEvents::
 	map_events FiveIsland_LostCave_Room4_EventObjects, FiveIsland_LostCave_Room4_MapWarps, 0x0, 0x0
 
 
@@ -2625,7 +2625,7 @@ FiveIsland_LostCave_Room5_MapWarps:
 	warp_def 5, 8, 3, 1, 525
 	warp_def 2, 5, 3, 2, 525
 
-gMapEvents_FiveIsland_LostCave_Room5::
+FiveIsland_LostCave_Room5_MapEvents::
 	map_events 0x0, FiveIsland_LostCave_Room5_MapWarps, 0x0, 0x0
 
 
@@ -2635,7 +2635,7 @@ FiveIsland_LostCave_Room6_MapWarps:
 	warp_def 5, 8, 3, 1, 525
 	warp_def 2, 5, 3, 1, 531
 
-gMapEvents_FiveIsland_LostCave_Room6::
+FiveIsland_LostCave_Room6_MapEvents::
 	map_events 0x0, FiveIsland_LostCave_Room6_MapWarps, 0x0, 0x0
 
 
@@ -2645,7 +2645,7 @@ FiveIsland_LostCave_Room7_MapWarps:
 	warp_def 5, 8, 3, 0, 532
 	warp_def 2, 5, 3, 2, 525
 
-gMapEvents_FiveIsland_LostCave_Room7::
+FiveIsland_LostCave_Room7_MapEvents::
 	map_events 0x0, FiveIsland_LostCave_Room7_MapWarps, 0x0, 0x0
 
 
@@ -2655,7 +2655,7 @@ FiveIsland_LostCave_Room8_MapWarps:
 	warp_def 5, 8, 3, 1, 525
 	warp_def 2, 5, 3, 0, 538
 
-gMapEvents_FiveIsland_LostCave_Room8::
+FiveIsland_LostCave_Room8_MapEvents::
 	map_events 0x0, FiveIsland_LostCave_Room8_MapWarps, 0x0, 0x0
 
 
@@ -2665,7 +2665,7 @@ FiveIsland_LostCave_Room9_MapWarps:
 	warp_def 5, 8, 3, 1, 525
 	warp_def 2, 5, 3, 2, 525
 
-gMapEvents_FiveIsland_LostCave_Room9::
+FiveIsland_LostCave_Room9_MapEvents::
 	map_events 0x0, FiveIsland_LostCave_Room9_MapWarps, 0x0, 0x0
 
 FiveIsland_LostCave_Room10_EventObjects:
@@ -2675,7 +2675,7 @@ FiveIsland_LostCave_Room10_EventObjects:
 FiveIsland_LostCave_Room10_MapWarps:
 	warp_def 5, 8, 3, 1, 525
 
-gMapEvents_FiveIsland_LostCave_Room10::
+FiveIsland_LostCave_Room10_MapEvents::
 	map_events FiveIsland_LostCave_Room10_EventObjects, FiveIsland_LostCave_Room10_MapWarps, 0x0, 0x0
 
 FiveIsland_LostCave_Room11_EventObjects:
@@ -2684,7 +2684,7 @@ FiveIsland_LostCave_Room11_EventObjects:
 FiveIsland_LostCave_Room11_MapWarps:
 	warp_def 5, 1, 3, 3, 525
 
-gMapEvents_FiveIsland_LostCave_Room11::
+FiveIsland_LostCave_Room11_MapEvents::
 	map_events FiveIsland_LostCave_Room11_EventObjects, FiveIsland_LostCave_Room11_MapWarps, 0x0, 0x0
 
 FiveIsland_LostCave_Room12_EventObjects:
@@ -2693,7 +2693,7 @@ FiveIsland_LostCave_Room12_EventObjects:
 FiveIsland_LostCave_Room12_MapWarps:
 	warp_def 5, 8, 3, 1, 525
 
-gMapEvents_FiveIsland_LostCave_Room12::
+FiveIsland_LostCave_Room12_MapEvents::
 	map_events FiveIsland_LostCave_Room12_EventObjects, FiveIsland_LostCave_Room12_MapWarps, 0x0, 0x0
 
 FiveIsland_LostCave_Room13_EventObjects:
@@ -2702,7 +2702,7 @@ FiveIsland_LostCave_Room13_EventObjects:
 FiveIsland_LostCave_Room13_MapWarps:
 	warp_def 2, 5, 3, 2, 525
 
-gMapEvents_FiveIsland_LostCave_Room13::
+FiveIsland_LostCave_Room13_MapEvents::
 	map_events FiveIsland_LostCave_Room13_EventObjects, FiveIsland_LostCave_Room13_MapWarps, 0x0, 0x0
 
 FiveIsland_LostCave_Room14_EventObjects:
@@ -2711,56 +2711,56 @@ FiveIsland_LostCave_Room14_EventObjects:
 FiveIsland_LostCave_Room14_MapWarps:
 	warp_def 8, 5, 3, 4, 525
 
-gMapEvents_FiveIsland_LostCave_Room14::
+FiveIsland_LostCave_Room14_MapEvents::
 	map_events FiveIsland_LostCave_Room14_EventObjects, FiveIsland_LostCave_Room14_MapWarps, 0x0, 0x0
 
 
 SevenIsland_TanobyRuins_MoneanChamber_MapWarps:
 	warp_def 11, 15, 3, 0, 833
 
-gMapEvents_SevenIsland_TanobyRuins_MoneanChamber::
+SevenIsland_TanobyRuins_MoneanChamber_MapEvents::
 	map_events 0x0, SevenIsland_TanobyRuins_MoneanChamber_MapWarps, 0x0, 0x0
 
 
 SevenIsland_TanobyRuins_LiptooChamber_MapWarps:
 	warp_def 11, 15, 3, 1, 833
 
-gMapEvents_SevenIsland_TanobyRuins_LiptooChamber::
+SevenIsland_TanobyRuins_LiptooChamber_MapEvents::
 	map_events 0x0, SevenIsland_TanobyRuins_LiptooChamber_MapWarps, 0x0, 0x0
 
 
 SevenIsland_TanobyRuins_WeepthChamber_MapWarps:
 	warp_def 11, 15, 3, 2, 833
 
-gMapEvents_SevenIsland_TanobyRuins_WeepthChamber::
+SevenIsland_TanobyRuins_WeepthChamber_MapEvents::
 	map_events 0x0, SevenIsland_TanobyRuins_WeepthChamber_MapWarps, 0x0, 0x0
 
 
 SevenIsland_TanobyRuins_DilfordChamber_MapWarps:
 	warp_def 11, 15, 3, 3, 833
 
-gMapEvents_SevenIsland_TanobyRuins_DilfordChamber::
+SevenIsland_TanobyRuins_DilfordChamber_MapEvents::
 	map_events 0x0, SevenIsland_TanobyRuins_DilfordChamber_MapWarps, 0x0, 0x0
 
 
 SevenIsland_TanobyRuins_ScufibChamber_MapWarps:
 	warp_def 11, 15, 3, 4, 833
 
-gMapEvents_SevenIsland_TanobyRuins_ScufibChamber::
+SevenIsland_TanobyRuins_ScufibChamber_MapEvents::
 	map_events 0x0, SevenIsland_TanobyRuins_ScufibChamber_MapWarps, 0x0, 0x0
 
 
 SevenIsland_TanobyRuins_RixyChamber_MapWarps:
 	warp_def 11, 15, 3, 5, 833
 
-gMapEvents_SevenIsland_TanobyRuins_RixyChamber::
+SevenIsland_TanobyRuins_RixyChamber_MapEvents::
 	map_events 0x0, SevenIsland_TanobyRuins_RixyChamber_MapWarps, 0x0, 0x0
 
 
 SevenIsland_TanobyRuins_ViapoisChamber_MapWarps:
 	warp_def 11, 15, 3, 6, 833
 
-gMapEvents_SevenIsland_TanobyRuins_ViapoisChamber::
+SevenIsland_TanobyRuins_ViapoisChamber_MapEvents::
 	map_events 0x0, SevenIsland_TanobyRuins_ViapoisChamber_MapWarps, 0x0, 0x0
 
 ThreeIsland_DunsparceTunnel_EventObjects:
@@ -2773,7 +2773,7 @@ ThreeIsland_DunsparceTunnel_MapWarps:
 ThreeIsland_DunsparceTunnel_MapBGEvents:
 	bg_event 21, 3, 0, 7, 0, 110, 163, 1
 
-gMapEvents_ThreeIsland_DunsparceTunnel::
+ThreeIsland_DunsparceTunnel_MapEvents::
 	map_events ThreeIsland_DunsparceTunnel_EventObjects, ThreeIsland_DunsparceTunnel_MapWarps, 0x0, ThreeIsland_DunsparceTunnel_MapBGEvents
 
 SevenIsland_SeavaultCanyon_TanobyKey_EventObjects:
@@ -2797,7 +2797,7 @@ SevenIsland_SeavaultCanyon_TanobyKey_MapCoordEvents:
 	coord_event 10, 4, 3, 0, 16387, 99, 0, SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164E7F
 	coord_event 4, 4, 3, 0, 16386, 99, 0, SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164E5C
 
-gMapEvents_SevenIsland_SeavaultCanyon_TanobyKey::
+SevenIsland_SeavaultCanyon_TanobyKey_MapEvents::
 	map_events SevenIsland_SeavaultCanyon_TanobyKey_EventObjects, SevenIsland_SeavaultCanyon_TanobyKey_MapWarps, SevenIsland_SeavaultCanyon_TanobyKey_MapCoordEvents, 0x0
 
 
@@ -2805,7 +2805,7 @@ NavelRock_1F_MapWarps:
 	warp_def 8, 4, 3, 0, 566
 	warp_def 8, 23, 3, 0, 512
 
-gMapEvents_NavelRock_1F::
+NavelRock_1F_MapEvents::
 	map_events 0x0, NavelRock_1F_MapWarps, 0x0, 0x0
 
 NavelRock_Summit_EventObjects:
@@ -2820,7 +2820,7 @@ NavelRock_Summit_MapCoordEvents:
 NavelRock_Summit_MapBGEvents:
 	bg_event 9, 11, 3, 7, 0, 45, 160, 129
 
-gMapEvents_NavelRock_Summit::
+NavelRock_Summit_MapEvents::
 	map_events NavelRock_Summit_EventObjects, NavelRock_Summit_MapWarps, NavelRock_Summit_MapCoordEvents, NavelRock_Summit_MapBGEvents
 
 NavelRock_Base_EventObjects:
@@ -2829,7 +2829,7 @@ NavelRock_Base_EventObjects:
 NavelRock_Base_MapWarps:
 	warp_def 13, 20, 3, 1, 565
 
-gMapEvents_NavelRock_Base::
+NavelRock_Base_MapEvents::
 	map_events NavelRock_Base_EventObjects, NavelRock_Base_MapWarps, 0x0, 0x0
 
 
@@ -2837,7 +2837,7 @@ NavelRock_SummitPath_2F_MapWarps:
 	warp_def 4, 4, 3, 1, 567
 	warp_def 2, 2, 3, 0, 552
 
-gMapEvents_NavelRock_SummitPath_2F::
+NavelRock_SummitPath_2F_MapEvents::
 	map_events 0x0, NavelRock_SummitPath_2F_MapWarps, 0x0, 0x0
 
 
@@ -2845,7 +2845,7 @@ NavelRock_SummitPath_3F_MapWarps:
 	warp_def 2, 2, 3, 1, 551
 	warp_def 4, 4, 3, 0, 553
 
-gMapEvents_NavelRock_SummitPath_3F::
+NavelRock_SummitPath_3F_MapEvents::
 	map_events 0x0, NavelRock_SummitPath_3F_MapWarps, 0x0, 0x0
 
 
@@ -2853,7 +2853,7 @@ NavelRock_SummitPath_4F_MapWarps:
 	warp_def 4, 4, 3, 1, 552
 	warp_def 2, 2, 3, 0, 554
 
-gMapEvents_NavelRock_SummitPath_4F::
+NavelRock_SummitPath_4F_MapEvents::
 	map_events 0x0, NavelRock_SummitPath_4F_MapWarps, 0x0, 0x0
 
 
@@ -2861,7 +2861,7 @@ NavelRock_SummitPath_5F_MapWarps:
 	warp_def 2, 2, 3, 1, 553
 	warp_def 4, 4, 3, 0, 549
 
-gMapEvents_NavelRock_SummitPath_5F::
+NavelRock_SummitPath_5F_MapEvents::
 	map_events 0x0, NavelRock_SummitPath_5F_MapWarps, 0x0, 0x0
 
 
@@ -2869,7 +2869,7 @@ NavelRock_BasePath_B1F_MapWarps:
 	warp_def 2, 2, 3, 2, 567
 	warp_def 4, 4, 3, 0, 556
 
-gMapEvents_NavelRock_BasePath_B1F::
+NavelRock_BasePath_B1F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B1F_MapWarps, 0x0, 0x0
 
 
@@ -2877,7 +2877,7 @@ NavelRock_BasePath_B2F_MapWarps:
 	warp_def 4, 4, 3, 1, 555
 	warp_def 2, 2, 3, 0, 557
 
-gMapEvents_NavelRock_BasePath_B2F::
+NavelRock_BasePath_B2F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B2F_MapWarps, 0x0, 0x0
 
 
@@ -2885,7 +2885,7 @@ NavelRock_BasePath_B3F_MapWarps:
 	warp_def 2, 2, 3, 1, 556
 	warp_def 4, 4, 3, 0, 558
 
-gMapEvents_NavelRock_BasePath_B3F::
+NavelRock_BasePath_B3F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B3F_MapWarps, 0x0, 0x0
 
 
@@ -2893,7 +2893,7 @@ NavelRock_BasePath_B4F_MapWarps:
 	warp_def 4, 4, 3, 1, 557
 	warp_def 2, 2, 3, 0, 559
 
-gMapEvents_NavelRock_BasePath_B4F::
+NavelRock_BasePath_B4F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B4F_MapWarps, 0x0, 0x0
 
 
@@ -2901,7 +2901,7 @@ NavelRock_BasePath_B5F_MapWarps:
 	warp_def 2, 2, 3, 1, 558
 	warp_def 4, 4, 3, 0, 560
 
-gMapEvents_NavelRock_BasePath_B5F::
+NavelRock_BasePath_B5F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B5F_MapWarps, 0x0, 0x0
 
 
@@ -2909,7 +2909,7 @@ NavelRock_BasePath_B6F_MapWarps:
 	warp_def 4, 4, 3, 1, 559
 	warp_def 2, 2, 3, 0, 561
 
-gMapEvents_NavelRock_BasePath_B6F::
+NavelRock_BasePath_B6F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B6F_MapWarps, 0x0, 0x0
 
 
@@ -2917,7 +2917,7 @@ NavelRock_BasePath_B7F_MapWarps:
 	warp_def 2, 2, 3, 1, 560
 	warp_def 4, 4, 3, 0, 562
 
-gMapEvents_NavelRock_BasePath_B7F::
+NavelRock_BasePath_B7F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B7F_MapWarps, 0x0, 0x0
 
 
@@ -2925,7 +2925,7 @@ NavelRock_BasePath_B8F_MapWarps:
 	warp_def 4, 4, 3, 1, 561
 	warp_def 2, 2, 3, 0, 563
 
-gMapEvents_NavelRock_BasePath_B8F::
+NavelRock_BasePath_B8F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B8F_MapWarps, 0x0, 0x0
 
 
@@ -2933,7 +2933,7 @@ NavelRock_BasePath_B9F_MapWarps:
 	warp_def 2, 2, 3, 1, 562
 	warp_def 4, 4, 3, 0, 564
 
-gMapEvents_NavelRock_BasePath_B9F::
+NavelRock_BasePath_B9F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B9F_MapWarps, 0x0, 0x0
 
 
@@ -2941,7 +2941,7 @@ NavelRock_BasePath_B10F_MapWarps:
 	warp_def 4, 4, 3, 1, 563
 	warp_def 2, 2, 3, 0, 565
 
-gMapEvents_NavelRock_BasePath_B10F::
+NavelRock_BasePath_B10F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B10F_MapWarps, 0x0, 0x0
 
 
@@ -2949,7 +2949,7 @@ NavelRock_BasePath_B11F_MapWarps:
 	warp_def 2, 2, 3, 1, 564
 	warp_def 4, 4, 3, 0, 550
 
-gMapEvents_NavelRock_BasePath_B11F::
+NavelRock_BasePath_B11F_MapEvents::
 	map_events 0x0, NavelRock_BasePath_B11F_MapWarps, 0x0, 0x0
 
 
@@ -2957,7 +2957,7 @@ NavelRock_B1F_MapWarps:
 	warp_def 4, 2, 3, 0, 548
 	warp_def 11, 5, 3, 0, 567
 
-gMapEvents_NavelRock_B1F::
+NavelRock_B1F_MapEvents::
 	map_events 0x0, NavelRock_B1F_MapWarps, 0x0, 0x0
 
 
@@ -2966,7 +2966,7 @@ NavelRock_Fork_MapWarps:
 	warp_def 3, 1, 3, 0, 551
 	warp_def 26, 1, 3, 0, 555
 
-gMapEvents_NavelRock_Fork::
+NavelRock_Fork_MapEvents::
 	map_events 0x0, NavelRock_Fork_MapWarps, 0x0, 0x0
 
 BirthIsland_Exterior_EventObjects:
@@ -2976,7 +2976,7 @@ BirthIsland_Exterior_EventObjects:
 BirthIsland_Exterior_MapWarps:
 	warp_def 15, 24, 3, 0, 570
 
-gMapEvents_BirthIsland_Exterior::
+BirthIsland_Exterior_MapEvents::
 	map_events BirthIsland_Exterior_EventObjects, BirthIsland_Exterior_MapWarps, 0x0, 0x0
 
 OneIsland_KindleRoad_EmberSpa_EventObjects:
@@ -2993,7 +2993,7 @@ OneIsland_KindleRoad_EmberSpa_MapWarps:
 OneIsland_KindleRoad_EmberSpa_MapCoordEvents:
 	coord_event 13, 13, 3, 0, 16385, 0, 0, OneIsland_KindleRoad_EmberSpa_EventScript_1653CF
 
-gMapEvents_OneIsland_KindleRoad_EmberSpa::
+OneIsland_KindleRoad_EmberSpa_MapEvents::
 	map_events OneIsland_KindleRoad_EmberSpa_EventObjects, OneIsland_KindleRoad_EmberSpa_MapWarps, OneIsland_KindleRoad_EmberSpa_MapCoordEvents, 0x0
 
 BirthIsland_Harbor_EventObjects:
@@ -3003,7 +3003,7 @@ BirthIsland_Harbor_EventObjects:
 BirthIsland_Harbor_MapWarps:
 	warp_def 8, 2, 3, 0, 568
 
-gMapEvents_BirthIsland_Harbor::
+BirthIsland_Harbor_MapEvents::
 	map_events BirthIsland_Harbor_EventObjects, BirthIsland_Harbor_MapWarps, 0x0, 0x0
 
 NavelRock_Harbor_EventObjects:
@@ -3013,7 +3013,7 @@ NavelRock_Harbor_EventObjects:
 NavelRock_Harbor_MapWarps:
 	warp_def 8, 2, 3, 1, 512
 
-gMapEvents_NavelRock_Harbor::
+NavelRock_Harbor_MapEvents::
 	map_events NavelRock_Harbor_EventObjects, NavelRock_Harbor_MapWarps, 0x0, 0x0
 
 PalletTown_EventObjects:
@@ -3038,7 +3038,7 @@ PalletTown_MapBGEvents:
 	bg_event 9, 11, 0, 0, 0, PalletTown_EventScript_165862
 	bg_event 5, 14, 0, 0, 0, PalletTown_EventScript_16586B
 
-gMapEvents_PalletTown::
+PalletTown_MapEvents::
 	map_events PalletTown_EventObjects, PalletTown_MapWarps, PalletTown_MapCoordEvents, PalletTown_MapBGEvents
 
 ViridianCity_EventObjects:
@@ -3072,7 +3072,7 @@ ViridianCity_MapBGEvents:
 	bg_event 20, 16, 0, 0, 0, ViridianCity_EventScript_165994
 	bg_event 36, 10, 0, 0, 0, ViridianCity_EventScript_1659B8
 
-gMapEvents_ViridianCity::
+ViridianCity_MapEvents::
 	map_events ViridianCity_EventObjects, ViridianCity_MapWarps, ViridianCity_MapCoordEvents, ViridianCity_MapBGEvents
 
 PewterCity_EventObjects:
@@ -3110,7 +3110,7 @@ PewterCity_MapBGEvents:
 	bg_event 31, 25, 0, 0, 0, PewterCity_EventScript_1662A0
 	bg_event 6, 3, 3, 7, 0, 4, 112, 1
 
-gMapEvents_PewterCity::
+PewterCity_MapEvents::
 	map_events PewterCity_EventObjects, PewterCity_MapWarps, PewterCity_MapCoordEvents, PewterCity_MapBGEvents
 
 CeruleanCity_EventObjects:
@@ -3160,7 +3160,7 @@ CeruleanCity_MapBGEvents:
 	bg_event 11, 27, 0, 0, 0, CeruleanCity_EventScript_16AC94
 	bg_event 11, 26, 0, 0, 0, CeruleanCity_EventScript_16AC94
 
-gMapEvents_CeruleanCity::
+CeruleanCity_MapEvents::
 	map_events CeruleanCity_EventObjects, CeruleanCity_MapWarps, CeruleanCity_MapCoordEvents, CeruleanCity_MapBGEvents
 
 LavenderTown_EventObjects:
@@ -3182,7 +3182,7 @@ LavenderTown_MapBGEvents:
 	bg_event 21, 7, 0, 0, 0, LavenderTown_EventScript_1668D3
 	bg_event 7, 11, 0, 0, 0, LavenderTown_EventScript_1668CA
 
-gMapEvents_LavenderTown::
+LavenderTown_MapEvents::
 	map_events LavenderTown_EventObjects, LavenderTown_MapWarps, 0x0, LavenderTown_MapBGEvents
 
 VermilionCity_EventObjects:
@@ -3221,7 +3221,7 @@ VermilionCity_MapBGEvents:
 	bg_event 45, 17, 3, 0, 0, VermilionCity_EventScript_166C5C
 	bg_event 14, 11, 3, 7, 0, 35, 48, 1
 
-gMapEvents_VermilionCity::
+VermilionCity_MapEvents::
 	map_events VermilionCity_EventObjects, VermilionCity_MapWarps, VermilionCity_MapCoordEvents, VermilionCity_MapBGEvents
 
 CeladonCity_EventObjects:
@@ -3267,7 +3267,7 @@ CeladonCity_MapBGEvents:
 	bg_event 16, 31, 0, 0, 0, CeladonCity_EventScript_166D30
 	bg_event 55, 20, 3, 7, 0, 69, 47, 1
 
-gMapEvents_CeladonCity::
+CeladonCity_MapEvents::
 	map_events CeladonCity_EventObjects, CeladonCity_MapWarps, 0x0, CeladonCity_MapBGEvents
 
 FuchsiaCity_EventObjects:
@@ -3315,7 +3315,7 @@ FuchsiaCity_MapBGEvents:
 	bg_event 22, 7, 0, 0, 0, FuchsiaCity_EventScript_166DEC
 	bg_event 33, 26, 3, 7, 0, 25, 133, 1
 
-gMapEvents_FuchsiaCity::
+FuchsiaCity_MapEvents::
 	map_events FuchsiaCity_EventObjects, FuchsiaCity_MapWarps, 0x0, FuchsiaCity_MapBGEvents
 
 CinnabarIsland_EventObjects:
@@ -3340,7 +3340,7 @@ CinnabarIsland_MapBGEvents:
 	bg_event 22, 5, 0, 0, 0, CinnabarIsland_EventScript_167223
 	bg_event 10, 9, 0, 0, 0, CinnabarIsland_EventScript_16721A
 
-gMapEvents_CinnabarIsland::
+CinnabarIsland_MapEvents::
 	map_events CinnabarIsland_EventObjects, CinnabarIsland_MapWarps, CinnabarIsland_MapCoordEvents, CinnabarIsland_MapBGEvents
 
 IndigoPlateau_Exterior_EventObjects:
@@ -3350,7 +3350,7 @@ IndigoPlateau_Exterior_EventObjects:
 IndigoPlateau_Exterior_MapWarps:
 	warp_def 11, 6, 0, 0, 3328
 
-gMapEvents_IndigoPlateau_Exterior::
+IndigoPlateau_Exterior_MapEvents::
 	map_events IndigoPlateau_Exterior_EventObjects, IndigoPlateau_Exterior_MapWarps, 0x0, 0x0
 
 SaffronCity_Duplicate_EventObjects:
@@ -3398,11 +3398,11 @@ SaffronCity_Duplicate_MapBGEvents:
 	bg_event 40, 38, 0, 0, 0, SaffronCity_Duplicate_EventScript_167468
 	bg_event 49, 22, 0, 0, 0, SaffronCity_Duplicate_EventScript_16747A
 
-gMapEvents_SaffronCity_Duplicate::
+SaffronCity_Duplicate_MapEvents::
 	map_events SaffronCity_Duplicate_EventObjects, SaffronCity_Duplicate_MapWarps, 0x0, SaffronCity_Duplicate_MapBGEvents
 
 
-gMapEvents_SaffronCity::
+SaffronCity_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 
 OneIsland_EventObjects:
@@ -3420,7 +3420,7 @@ OneIsland_MapBGEvents:
 	bg_event 14, 13, 0, 0, 0, OneIsland_EventScript_167552
 	bg_event 15, 6, 0, 0, 0, OneIsland_EventScript_16755B
 
-gMapEvents_OneIsland::
+OneIsland_MapEvents::
 	map_events OneIsland_EventObjects, OneIsland_MapWarps, 0x0, OneIsland_MapBGEvents
 
 TwoIsland_EventObjects:
@@ -3445,7 +3445,7 @@ TwoIsland_MapBGEvents:
 	bg_event 40, 10, 0, 0, 0, TwoIsland_EventScript_16779B
 	bg_event 8, 3, 0, 0, 0, TwoIsland_EventScript_1677A4
 
-gMapEvents_TwoIsland::
+TwoIsland_MapEvents::
 	map_events TwoIsland_EventObjects, TwoIsland_MapWarps, 0x0, TwoIsland_MapBGEvents
 
 ThreeIsland_EventObjects:
@@ -3489,7 +3489,7 @@ ThreeIsland_MapBGEvents:
 	bg_event 12, 31, 0, 0, 0, ThreeIsland_EventScript_167C9C
 	bg_event 5, 13, 3, 7, 0, 69, 164, 1
 
-gMapEvents_ThreeIsland::
+ThreeIsland_MapEvents::
 	map_events ThreeIsland_EventObjects, ThreeIsland_MapWarps, ThreeIsland_MapCoordEvents, ThreeIsland_MapBGEvents
 
 FourIsland_EventObjects:
@@ -3522,7 +3522,7 @@ FourIsland_MapBGEvents:
 	bg_event 6, 21, 3, 7, 0, 2, 169, 1
 	bg_event 31, 23, 0, 0, 0, FourIsland_EventScript_167E85
 
-gMapEvents_FourIsland::
+FourIsland_MapEvents::
 	map_events FourIsland_EventObjects, FourIsland_MapWarps, 0x0, FourIsland_MapBGEvents
 
 FiveIsland_EventObjects:
@@ -3539,7 +3539,7 @@ FiveIsland_MapWarps:
 FiveIsland_MapBGEvents:
 	bg_event 20, 8, 0, 0, 0, FiveIsland_EventScript_167E98
 
-gMapEvents_FiveIsland::
+FiveIsland_MapEvents::
 	map_events FiveIsland_EventObjects, FiveIsland_MapWarps, 0x0, FiveIsland_MapBGEvents
 
 SevenIsland_EventObjects:
@@ -3556,7 +3556,7 @@ SevenIsland_MapWarps:
 SevenIsland_MapBGEvents:
 	bg_event 17, 9, 0, 0, 0, SevenIsland_EventScript_167EBD
 
-gMapEvents_SevenIsland::
+SevenIsland_MapEvents::
 	map_events SevenIsland_EventObjects, SevenIsland_MapWarps, 0x0, SevenIsland_MapBGEvents
 
 SixIsland_EventObjects:
@@ -3573,7 +3573,7 @@ SixIsland_MapBGEvents:
 	bg_event 9, 17, 0, 0, 0, SixIsland_EventScript_167EF4
 	bg_event 9, 7, 3, 7, 0, 138, 184, 1
 
-gMapEvents_SixIsland::
+SixIsland_MapEvents::
 	map_events SixIsland_EventObjects, SixIsland_MapWarps, 0x0, SixIsland_MapBGEvents
 
 Route1_EventObjects:
@@ -3583,7 +3583,7 @@ Route1_EventObjects:
 Route1_MapBGEvents:
 	bg_event 9, 31, 0, 0, 0, Route1_EventScript_167F5B
 
-gMapEvents_Route1::
+Route1_MapEvents::
 	map_events Route1_EventObjects, 0x0, 0x0, Route1_MapBGEvents
 
 Route2_EventObjects:
@@ -3611,7 +3611,7 @@ Route2_MapBGEvents:
 	bg_event 14, 12, 0, 0, 0, Route2_EventScript_167F6E
 	bg_event 7, 73, 0, 0, 0, Route2_EventScript_167F65
 
-gMapEvents_Route2::
+Route2_MapEvents::
 	map_events Route2_EventObjects, Route2_MapWarps, 0x0, Route2_MapBGEvents
 
 Route3_EventObjects:
@@ -3629,7 +3629,7 @@ Route3_MapBGEvents:
 	bg_event 72, 11, 0, 0, 0, Route3_EventScript_167F81
 	bg_event 26, 9, 3, 7, 0, 139, 113, 1
 
-gMapEvents_Route3::
+Route3_MapEvents::
 	map_events Route3_EventObjects, 0x0, 0x0, Route3_MapBGEvents
 
 Route4_EventObjects:
@@ -3653,7 +3653,7 @@ Route4_MapBGEvents:
 	bg_event 5, 4, 3, 7, 0, 140, 114, 1
 	bg_event 67, 17, 3, 7, 0, 148, 156, 1
 
-gMapEvents_Route4::
+Route4_MapEvents::
 	map_events Route4_EventObjects, Route4_MapWarps, 0x0, Route4_MapBGEvents
 
 
@@ -3666,7 +3666,7 @@ Route5_MapWarps:
 Route5_MapBGEvents:
 	bg_event 32, 32, 0, 0, 0, Route5_EventScript_167FA8
 
-gMapEvents_Route5::
+Route5_MapEvents::
 	map_events 0x0, Route5_MapWarps, 0x0, Route5_MapBGEvents
 
 Route6_EventObjects:
@@ -3687,7 +3687,7 @@ Route6_MapBGEvents:
 	bg_event 5, 5, 3, 7, 0, 142, 118, 1
 	bg_event 19, 5, 3, 7, 0, 68, 119, 1
 
-gMapEvents_Route6::
+Route6_MapEvents::
 	map_events Route6_EventObjects, Route6_MapWarps, 0x0, Route6_MapBGEvents
 
 Route7_EventObjects:
@@ -3701,7 +3701,7 @@ Route7_MapBGEvents:
 	bg_event 5, 14, 0, 0, 0, Route7_EventScript_167FBC
 	bg_event 16, 15, 3, 7, 0, 151, 152, 1
 
-gMapEvents_Route7::
+Route7_MapEvents::
 	map_events Route7_EventObjects, Route7_MapWarps, 0x0, Route7_MapBGEvents
 
 Route8_EventObjects:
@@ -3731,7 +3731,7 @@ Route8_MapBGEvents:
 	bg_event 38, 11, 3, 7, 0, 141, 128, 1
 	bg_event 42, 15, 3, 7, 0, 138, 129, 1
 
-gMapEvents_Route8::
+Route8_MapEvents::
 	map_events Route8_EventObjects, Route8_MapWarps, 0x0, Route8_MapBGEvents
 
 Route9_EventObjects:
@@ -3754,7 +3754,7 @@ Route9_MapBGEvents:
 	bg_event 63, 2, 3, 7, 0, 68, 123, 1
 	bg_event 48, 2, 3, 7, 0, 134, 150, 1
 
-gMapEvents_Route9::
+Route9_MapEvents::
 	map_events Route9_EventObjects, 0x0, 0x0, Route9_MapBGEvents
 
 Route10_EventObjects:
@@ -3786,7 +3786,7 @@ Route10_MapBGEvents:
 	bg_event 17, 29, 3, 7, 0, 140, 125, 1
 	bg_event 20, 57, 3, 7, 0, 150, 151, 1
 
-gMapEvents_Route10::
+Route10_MapEvents::
 	map_events Route10_EventObjects, Route10_MapWarps, 0x0, Route10_MapBGEvents
 
 Route11_EventObjects:
@@ -3813,7 +3813,7 @@ Route11_MapBGEvents:
 	bg_event 3, 7, 3, 0, 0, Route11_EventScript_167FF7
 	bg_event 58, 5, 0, 7, 0, 85, 41, 1
 
-gMapEvents_Route11::
+Route11_MapEvents::
 	map_events Route11_EventObjects, Route11_MapWarps, 0x0, Route11_MapBGEvents
 
 Route12_EventObjects:
@@ -3845,7 +3845,7 @@ Route12_MapBGEvents:
 	bg_event 14, 70, 3, 7, 0, 200, 131, 129
 	bg_event 9, 116, 3, 7, 0, 68, 130, 1
 
-gMapEvents_Route12::
+Route12_MapEvents::
 	map_events Route12_EventObjects, Route12_MapWarps, 0x0, Route12_MapBGEvents
 
 Route13_EventObjects:
@@ -3867,7 +3867,7 @@ Route13_MapBGEvents:
 	bg_event 21, 14, 0, 0, 0, Route13_EventScript_1680B6
 	bg_event 23, 14, 3, 7, 0, 69, 15, 1
 
-gMapEvents_Route13::
+Route13_MapEvents::
 	map_events Route13_EventObjects, 0x0, 0x0, Route13_MapBGEvents
 
 Route14_EventObjects:
@@ -3892,7 +3892,7 @@ Route14_MapBGEvents:
 	bg_event 9, 20, 3, 7, 0, 70, 149, 1
 	bg_event 19, 53, 3, 7, 0, 152, 157, 1
 
-gMapEvents_Route14::
+Route14_MapEvents::
 	map_events Route14_EventObjects, 0x0, 0x0, Route14_MapBGEvents
 
 Route15_EventObjects:
@@ -3918,7 +3918,7 @@ Route15_MapWarps:
 Route15_MapBGEvents:
 	bg_event 41, 11, 0, 0, 0, Route15_EventScript_1680DC
 
-gMapEvents_Route15::
+Route15_MapEvents::
 	map_events Route15_EventObjects, Route15_MapWarps, 0x0, Route15_MapBGEvents
 
 Route16_EventObjects:
@@ -3945,7 +3945,7 @@ Route16_MapBGEvents:
 	bg_event 33, 11, 0, 0, 0, Route16_EventScript_1681AD
 	bg_event 31, 13, 3, 7, 0, 200, 132, 129
 
-gMapEvents_Route16::
+Route16_MapEvents::
 	map_events Route16_EventObjects, Route16_MapWarps, 0x0, Route16_MapBGEvents
 
 Route17_EventObjects:
@@ -3973,7 +3973,7 @@ Route17_MapBGEvents:
 	bg_event 4, 125, 3, 7, 0, 25, 20, 1
 	bg_event 14, 157, 3, 7, 0, 37, 21, 1
 
-gMapEvents_Route17::
+Route17_MapEvents::
 	map_events Route17_EventObjects, 0x0, 0x0, Route17_MapBGEvents
 
 Route18_EventObjects:
@@ -3989,7 +3989,7 @@ Route18_MapBGEvents:
 	bg_event 37, 7, 0, 0, 0, Route18_EventScript_168228
 	bg_event 52, 7, 0, 0, 0, Route18_EventScript_16821F
 
-gMapEvents_Route18::
+Route18_MapEvents::
 	map_events Route18_EventObjects, Route18_MapWarps, 0x0, Route18_MapBGEvents
 
 Route19_EventObjects:
@@ -4009,7 +4009,7 @@ Route19_EventObjects:
 Route19_MapBGEvents:
 	bg_event 13, 12, 0, 0, 0, Route19_EventScript_168232
 
-gMapEvents_Route19::
+Route19_MapEvents::
 	map_events Route19_EventObjects, 0x0, 0x0, Route19_MapBGEvents
 
 Route20_EventObjects:
@@ -4034,7 +4034,7 @@ Route20_MapBGEvents:
 	bg_event 64, 8, 0, 0, 0, Route20_EventScript_168280
 	bg_event 23, 6, 3, 7, 0, 108, 153, 1
 
-gMapEvents_Route20::
+Route20_MapEvents::
 	map_events Route20_EventObjects, Route20_MapWarps, 0x0, Route20_MapBGEvents
 
 Route21_North_EventObjects:
@@ -4048,7 +4048,7 @@ Route21_North_EventObjects:
 Route21_North_MapBGEvents:
 	bg_event 17, 42, 3, 7, 0, 106, 154, 1
 
-gMapEvents_Route21_North::
+Route21_North_MapEvents::
 	map_events Route21_North_EventObjects, 0x0, 0x0, Route21_North_MapBGEvents
 
 Route21_South_EventObjects:
@@ -4058,7 +4058,7 @@ Route21_South_EventObjects:
 	object_event 4, 43, 0, 15, 0, 38, 0, 1, 9, 17, 0, 1, 0, 3, 0, Route21_South_EventScript_1ABAE9, 0, 0, 0
 	object_event 5, 43, 0, 10, 0, 29, 0, 1, 2, 34, 0, 1, 0, 4, 0, Route21_South_EventScript_1ABB27, 0, 0, 0
 
-gMapEvents_Route21_South::
+Route21_South_MapEvents::
 	map_events Route21_South_EventObjects, 0x0, 0x0, 0x0
 
 Route22_EventObjects:
@@ -4079,7 +4079,7 @@ Route22_MapCoordEvents:
 Route22_MapBGEvents:
 	bg_event 7, 12, 0, 0, 0, Route22_EventScript_1684E2
 
-gMapEvents_Route22::
+Route22_MapEvents::
 	map_events Route22_EventObjects, Route22_MapWarps, Route22_MapCoordEvents, Route22_MapBGEvents
 
 Route23_EventObjects:
@@ -4152,7 +4152,7 @@ Route23_MapBGEvents:
 	bg_event 9, 8, 3, 7, 0, 37, 155, 1
 	bg_event 3, 31, 0, 0, 0, Route23_EventScript_168616
 
-gMapEvents_Route23::
+Route23_MapEvents::
 	map_events Route23_EventObjects, Route23_MapWarps, Route23_MapCoordEvents, Route23_MapBGEvents
 
 Route24_EventObjects:
@@ -4172,7 +4172,7 @@ Route24_MapCoordEvents:
 Route24_MapBGEvents:
 	bg_event 19, 4, 3, 7, 0, 135, 115, 1
 
-gMapEvents_Route24::
+Route24_MapEvents::
 	map_events Route24_EventObjects, 0x0, Route24_MapCoordEvents, Route24_MapBGEvents
 
 Route25_EventObjects:
@@ -4200,7 +4200,7 @@ Route25_MapBGEvents:
 	bg_event 33, 8, 3, 7, 0, 139, 116, 1
 	bg_event 40, 3, 3, 7, 0, 149, 117, 1
 
-gMapEvents_Route25::
+Route25_MapEvents::
 	map_events Route25_EventObjects, Route25_MapWarps, 0x0, Route25_MapBGEvents
 
 OneIsland_KindleRoad_EventObjects:
@@ -4243,7 +4243,7 @@ OneIsland_KindleRoad_MapBGEvents:
 	bg_event 13, 59, 0, 0, 0, OneIsland_KindleRoad_EventScript_168762
 	bg_event 8, 115, 0, 0, 0, OneIsland_KindleRoad_EventScript_168759
 
-gMapEvents_OneIsland_KindleRoad::
+OneIsland_KindleRoad_MapEvents::
 	map_events OneIsland_KindleRoad_EventObjects, OneIsland_KindleRoad_MapWarps, 0x0, OneIsland_KindleRoad_MapBGEvents
 
 OneIsland_TreasureBeach_EventObjects:
@@ -4260,7 +4260,7 @@ OneIsland_TreasureBeach_MapBGEvents:
 	bg_event 15, 29, 3, 7, 0, 109, 109, 1
 	bg_event 8, 27, 3, 7, 0, 107, 110, 1
 
-gMapEvents_OneIsland_TreasureBeach::
+OneIsland_TreasureBeach_MapEvents::
 	map_events OneIsland_TreasureBeach_EventObjects, 0x0, 0x0, OneIsland_TreasureBeach_MapBGEvents
 
 
@@ -4271,7 +4271,7 @@ TwoIsland_CapeBrink_MapBGEvents:
 	bg_event 16, 28, 3, 7, 0, 71, 161, 129
 	bg_event 15, 13, 3, 7, 0, 68, 111, 1
 
-gMapEvents_TwoIsland_CapeBrink::
+TwoIsland_CapeBrink_MapEvents::
 	map_events 0x0, TwoIsland_CapeBrink_MapWarps, 0x0, TwoIsland_CapeBrink_MapBGEvents
 
 ThreeIsland_BondBridge_EventObjects:
@@ -4296,7 +4296,7 @@ ThreeIsland_BondBridge_MapBGEvents:
 	bg_event 33, 7, 3, 7, 0, 108, 167, 1
 	bg_event 91, 9, 0, 0, 0, ThreeIsland_BondBridge_EventScript_168780
 
-gMapEvents_ThreeIsland_BondBridge::
+ThreeIsland_BondBridge_MapEvents::
 	map_events ThreeIsland_BondBridge_EventObjects, ThreeIsland_BondBridge_MapWarps, 0x0, ThreeIsland_BondBridge_MapBGEvents
 
 ThreeIsland_Port_EventObjects:
@@ -4309,23 +4309,23 @@ ThreeIsland_Port_MapWarps:
 	warp_def 38, 5, 3, 1, 546
 	warp_def 12, 13, 3, 0, 9728
 
-gMapEvents_ThreeIsland_Port::
+ThreeIsland_Port_MapEvents::
 	map_events ThreeIsland_Port_EventObjects, ThreeIsland_Port_MapWarps, 0x0, 0x0
 
 
-gMapEvents_UnknownMap_03_50::
+UnknownMap_03_50_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 
 
-gMapEvents_UnknownMap_03_51::
+UnknownMap_03_51_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 
 
-gMapEvents_UnknownMap_03_52::
+UnknownMap_03_52_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 
 
-gMapEvents_UnknownMap_03_53::
+UnknownMap_03_53_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 
 FiveIsland_ResortGorgeous_EventObjects:
@@ -4349,14 +4349,14 @@ FiveIsland_ResortGorgeous_MapBGEvents:
 	bg_event 27, 5, 3, 7, 0, 108, 177, 1
 	bg_event 42, 9, 0, 0, 0, FiveIsland_ResortGorgeous_EventScript_168844
 
-gMapEvents_FiveIsland_ResortGorgeous::
+FiveIsland_ResortGorgeous_MapEvents::
 	map_events FiveIsland_ResortGorgeous_EventObjects, FiveIsland_ResortGorgeous_MapWarps, 0x0, FiveIsland_ResortGorgeous_MapBGEvents
 
 FiveIsland_WaterLabyrinth_EventObjects:
 	object_event 1, 61, 0, 14, 0, 11, 0, 3, 8, 17, 0, 0, 0, 0, 0, FiveIsland_WaterLabyrinth_EventScript_16884E, 0, 0, 0
 	object_event 2, 28, 0, 9, 0, 7, 0, 3, 2, 17, 0, 1, 0, 1, 0, FiveIsland_WaterLabyrinth_EventScript_1AC2D9, 0, 0, 0
 
-gMapEvents_FiveIsland_WaterLabyrinth::
+FiveIsland_WaterLabyrinth_MapEvents::
 	map_events FiveIsland_WaterLabyrinth_EventObjects, 0x0, 0x0, 0x0
 
 FiveIsland_Meadow_EventObjects:
@@ -4374,7 +4374,7 @@ FiveIsland_Meadow_MapWarps:
 FiveIsland_Meadow_MapBGEvents:
 	bg_event 12, 21, 0, 0, 0, FiveIsland_Meadow_EventScript_168942
 
-gMapEvents_FiveIsland_Meadow::
+FiveIsland_Meadow_MapEvents::
 	map_events FiveIsland_Meadow_EventObjects, FiveIsland_Meadow_MapWarps, 0x0, FiveIsland_Meadow_MapBGEvents
 
 FiveIsland_MemorialPillar_EventObjects:
@@ -4391,7 +4391,7 @@ FiveIsland_MemorialPillar_MapBGEvents:
 	bg_event 17, 22, 3, 7, 0, 142, 172, 1
 	bg_event 14, 25, 3, 7, 0, 149, 173, 1
 
-gMapEvents_FiveIsland_MemorialPillar::
+FiveIsland_MemorialPillar_MapEvents::
 	map_events FiveIsland_MemorialPillar_EventObjects, 0x0, 0x0, FiveIsland_MemorialPillar_MapBGEvents
 
 SixIsland_OutcastIsland_EventObjects:
@@ -4410,7 +4410,7 @@ SixIsland_OutcastIsland_MapBGEvents:
 	bg_event 16, 23, 3, 7, 0, 109, 178, 1
 	bg_event 6, 24, 3, 7, 0, 6, 179, 1
 
-gMapEvents_SixIsland_OutcastIsland::
+SixIsland_OutcastIsland_MapEvents::
 	map_events SixIsland_OutcastIsland_EventObjects, SixIsland_OutcastIsland_MapWarps, 0x0, SixIsland_OutcastIsland_MapBGEvents
 
 SixIsland_GreenPath_EventObjects:
@@ -4427,7 +4427,7 @@ SixIsland_GreenPath_MapBGEvents:
 	bg_event 69, 10, 0, 0, 0, SixIsland_GreenPath_EventScript_168B2E
 	bg_event 12, 9, 3, 7, 0, 2, 180, 1
 
-gMapEvents_SixIsland_GreenPath::
+SixIsland_GreenPath_MapEvents::
 	map_events SixIsland_GreenPath_EventObjects, SixIsland_GreenPath_MapWarps, 0x0, SixIsland_GreenPath_MapBGEvents
 
 SixIsland_WaterPath_EventObjects:
@@ -4452,7 +4452,7 @@ SixIsland_WaterPath_MapBGEvents:
 	bg_event 13, 63, 3, 7, 0, 152, 183, 1
 	bg_event 12, 54, 0, 0, 0, SixIsland_WaterPath_EventScript_168B4A
 
-gMapEvents_SixIsland_WaterPath::
+SixIsland_WaterPath_MapEvents::
 	map_events SixIsland_WaterPath_EventObjects, SixIsland_WaterPath_MapWarps, 0x0, SixIsland_WaterPath_MapBGEvents
 
 SixIsland_RuinValley_EventObjects:
@@ -4480,7 +4480,7 @@ SixIsland_RuinValley_MapWarps:
 SixIsland_RuinValley_MapBGEvents:
 	bg_event 24, 24, 3, 0, 0, SixIsland_RuinValley_EventScript_168B94
 
-gMapEvents_SixIsland_RuinValley::
+SixIsland_RuinValley_MapEvents::
 	map_events SixIsland_RuinValley_EventObjects, SixIsland_RuinValley_MapWarps, 0x0, SixIsland_RuinValley_MapBGEvents
 
 SevenIsland_TrainerTower_EventObjects:
@@ -4497,7 +4497,7 @@ SevenIsland_TrainerTower_MapBGEvents:
 	bg_event 56, 8, 0, 0, 0, SevenIsland_TrainerTower_EventScript_168BE1
 	bg_event 50, 30, 0, 0, 0, SevenIsland_TrainerTower_EventScript_168BEA
 
-gMapEvents_SevenIsland_TrainerTower::
+SevenIsland_TrainerTower_MapEvents::
 	map_events SevenIsland_TrainerTower_EventObjects, SevenIsland_TrainerTower_MapWarps, 0x0, SevenIsland_TrainerTower_MapBGEvents
 
 SevenIsland_SevaultCanyon_Entrance_EventObjects:
@@ -4513,7 +4513,7 @@ SevenIsland_SevaultCanyon_Entrance_MapBGEvents:
 	bg_event 8, 29, 5, 7, 0, 136, 188, 1
 	bg_event 14, 26, 0, 0, 0, SevenIsland_SevaultCanyon_Entrance_EventScript_168BF4
 
-gMapEvents_SevenIsland_SevaultCanyon_Entrance::
+SevenIsland_SevaultCanyon_Entrance_MapEvents::
 	map_events SevenIsland_SevaultCanyon_Entrance_EventObjects, 0x0, 0x0, SevenIsland_SevaultCanyon_Entrance_MapBGEvents
 
 SevenIsland_SevaultCanyon_EventObjects:
@@ -4546,7 +4546,7 @@ SevenIsland_SevaultCanyon_MapBGEvents:
 	bg_event 15, 66, 3, 7, 0, 133, 63, 1
 	bg_event 16, 71, 0, 0, 0, SevenIsland_SevaultCanyon_EventScript_168BFE
 
-gMapEvents_SevenIsland_SevaultCanyon::
+SevenIsland_SevaultCanyon_MapEvents::
 	map_events SevenIsland_SevaultCanyon_EventObjects, SevenIsland_SevaultCanyon_MapWarps, 0x0, SevenIsland_SevaultCanyon_MapBGEvents
 
 SevenIsland_TanobyRuins_EventObjects:
@@ -4570,7 +4570,7 @@ SevenIsland_TanobyRuins_MapBGEvents:
 	bg_event 125, 5, 3, 7, 0, 111, 67, 1
 	bg_event 8, 2, 3, 7, 0, 111, 64, 1
 
-gMapEvents_SevenIsland_TanobyRuins::
+SevenIsland_TanobyRuins_MapEvents::
 	map_events SevenIsland_TanobyRuins_EventObjects, SevenIsland_TanobyRuins_MapWarps, 0x0, SevenIsland_TanobyRuins_MapBGEvents
 
 PalletTown_PlayersHouse_1F_EventObjects:
@@ -4585,7 +4585,7 @@ PalletTown_PlayersHouse_1F_MapWarps:
 PalletTown_PlayersHouse_1F_MapBGEvents:
 	bg_event 6, 1, 0, 0, 0, PalletTown_PlayersHouse_1F_EventScript_168C62
 
-gMapEvents_PalletTown_PlayersHouse_1F::
+PalletTown_PlayersHouse_1F_MapEvents::
 	map_events PalletTown_PlayersHouse_1F_EventObjects, PalletTown_PlayersHouse_1F_MapWarps, 0x0, PalletTown_PlayersHouse_1F_MapBGEvents
 
 
@@ -4597,7 +4597,7 @@ PalletTown_PlayersHouse_2F_MapBGEvents:
 	bg_event 1, 1, 0, 0, 0, PalletTown_PlayersHouse_2F_EventScript_168CE4
 	bg_event 11, 1, 0, 0, 0, PalletTown_PlayersHouse_2F_EventScript_168CDB
 
-gMapEvents_PalletTown_PlayersHouse_2F::
+PalletTown_PlayersHouse_2F_MapEvents::
 	map_events 0x0, PalletTown_PlayersHouse_2F_MapWarps, 0x0, PalletTown_PlayersHouse_2F_MapBGEvents
 
 PalletTown_GarysHouse_EventObjects:
@@ -4614,7 +4614,7 @@ PalletTown_GarysHouse_MapBGEvents:
 	bg_event 11, 1, 0, 0, 0, PalletTown_GarysHouse_EventScript_168F6C
 	bg_event 9, 1, 0, 0, 0, PalletTown_GarysHouse_EventScript_168F75
 
-gMapEvents_PalletTown_GarysHouse::
+PalletTown_GarysHouse_MapEvents::
 	map_events PalletTown_GarysHouse_EventObjects, PalletTown_GarysHouse_MapWarps, 0x0, PalletTown_GarysHouse_MapBGEvents
 
 PalletTown_ProfessorOaksLab_EventObjects:
@@ -4648,7 +4648,7 @@ PalletTown_ProfessorOaksLab_MapBGEvents:
 	bg_event 6, 1, 0, 0, 0, PalletTown_ProfessorOaksLab_EventScript_169E71
 	bg_event 7, 1, 0, 0, 0, PalletTown_ProfessorOaksLab_EventScript_169E7A
 
-gMapEvents_PalletTown_ProfessorOaksLab::
+PalletTown_ProfessorOaksLab_MapEvents::
 	map_events PalletTown_ProfessorOaksLab_EventObjects, PalletTown_ProfessorOaksLab_MapWarps, PalletTown_ProfessorOaksLab_MapCoordEvents, PalletTown_ProfessorOaksLab_MapBGEvents
 
 ViridianCity_House1_EventObjects:
@@ -4664,7 +4664,7 @@ ViridianCity_House1_MapWarps:
 ViridianCity_House1_MapBGEvents:
 	bg_event 7, 1, 0, 0, 0, ViridianCity_House1_EventScript_169EC0
 
-gMapEvents_ViridianCity_House1::
+ViridianCity_House1_MapEvents::
 	map_events ViridianCity_House1_EventObjects, ViridianCity_House1_MapWarps, 0x0, ViridianCity_House1_MapBGEvents
 
 ViridianCity_Gym_EventObjects:
@@ -4689,7 +4689,7 @@ ViridianCity_Gym_MapBGEvents:
 	bg_event 19, 20, 0, 0, 0, ViridianCity_Gym_EventScript_16A05E
 	bg_event 2, 2, 3, 7, 0, 181, 189, 129
 
-gMapEvents_ViridianCity_Gym::
+ViridianCity_Gym_MapEvents::
 	map_events ViridianCity_Gym_EventObjects, ViridianCity_Gym_MapWarps, 0x0, ViridianCity_Gym_MapBGEvents
 
 ViridianCity_House2_EventObjects:
@@ -4708,7 +4708,7 @@ ViridianCity_House2_MapBGEvents:
 	bg_event 9, 2, 0, 1, 0, ViridianCity_House2_EventScript_1ACD65
 	bg_event 8, 2, 0, 1, 0, ViridianCity_House2_EventScript_1ACD65
 
-gMapEvents_ViridianCity_House2::
+ViridianCity_House2_MapEvents::
 	map_events ViridianCity_House2_EventObjects, ViridianCity_House2_MapWarps, 0x0, ViridianCity_House2_MapBGEvents
 
 ViridianCity_Mart_EventObjects:
@@ -4721,7 +4721,7 @@ ViridianCity_Mart_MapWarps:
 	warp_def 4, 7, 3, 4, 769
 	warp_def 5, 7, 3, 4, 769
 
-gMapEvents_ViridianCity_Mart::
+ViridianCity_Mart_MapEvents::
 	map_events ViridianCity_Mart_EventObjects, ViridianCity_Mart_MapWarps, 0x0, 0x0
 
 ViridianCity_PokemonCenter_1F_EventObjects:
@@ -4736,7 +4736,7 @@ ViridianCity_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 3, 0, 769
 	warp_def 1, 6, 4, 0, 1285
 
-gMapEvents_ViridianCity_PokemonCenter_1F::
+ViridianCity_PokemonCenter_1F_MapEvents::
 	map_events ViridianCity_PokemonCenter_1F_EventObjects, ViridianCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 ViridianCity_PokemonCenter_2F_EventObjects:
@@ -4750,7 +4750,7 @@ ViridianCity_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_ViridianCity_PokemonCenter_2F::
+ViridianCity_PokemonCenter_2F_MapEvents::
 	map_events ViridianCity_PokemonCenter_2F_EventObjects, ViridianCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 PewterCity_Museum_1F_EventObjects:
@@ -4780,7 +4780,7 @@ PewterCity_Museum_1F_MapBGEvents:
 	bg_event 27, 1, 0, 1, 0, PewterCity_Museum_1F_EventScript_1ACE1C
 	bg_event 26, 1, 0, 1, 0, PewterCity_Museum_1F_EventScript_1ACE1C
 
-gMapEvents_PewterCity_Museum_1F::
+PewterCity_Museum_1F_MapEvents::
 	map_events PewterCity_Museum_1F_EventObjects, PewterCity_Museum_1F_MapWarps, PewterCity_Museum_1F_MapCoordEvents, PewterCity_Museum_1F_MapBGEvents
 
 PewterCity_Museum_2F_EventObjects:
@@ -4803,7 +4803,7 @@ PewterCity_Museum_2F_MapBGEvents:
 	bg_event 16, 4, 0, 0, 0, PewterCity_Museum_2F_EventScript_16A580
 	bg_event 3, 5, 0, 0, 0, PewterCity_Museum_2F_EventScript_16A589
 
-gMapEvents_PewterCity_Museum_2F::
+PewterCity_Museum_2F_MapEvents::
 	map_events PewterCity_Museum_2F_EventObjects, PewterCity_Museum_2F_MapWarps, 0x0, PewterCity_Museum_2F_MapBGEvents
 
 PewterCity_Gym_EventObjects:
@@ -4820,7 +4820,7 @@ PewterCity_Gym_MapBGEvents:
 	bg_event 4, 12, 0, 0, 0, PewterCity_Gym_EventScript_16A6AF
 	bg_event 8, 12, 0, 0, 0, PewterCity_Gym_EventScript_16A6AF
 
-gMapEvents_PewterCity_Gym::
+PewterCity_Gym_MapEvents::
 	map_events PewterCity_Gym_EventObjects, PewterCity_Gym_MapWarps, 0x0, PewterCity_Gym_MapBGEvents
 
 PewterCity_Mart_EventObjects:
@@ -4833,7 +4833,7 @@ PewterCity_Mart_MapWarps:
 	warp_def 4, 7, 3, 3, 770
 	warp_def 5, 7, 3, 3, 770
 
-gMapEvents_PewterCity_Mart::
+PewterCity_Mart_MapEvents::
 	map_events PewterCity_Mart_EventObjects, PewterCity_Mart_MapWarps, 0x0, 0x0
 
 PewterCity_House1_EventObjects:
@@ -4846,7 +4846,7 @@ PewterCity_House1_MapWarps:
 	warp_def 4, 7, 0, 4, 770
 	warp_def 5, 7, 0, 4, 770
 
-gMapEvents_PewterCity_House1::
+PewterCity_House1_MapEvents::
 	map_events PewterCity_House1_EventObjects, PewterCity_House1_MapWarps, 0x0, 0x0
 
 PewterCity_PokemonCenter_1F_EventObjects:
@@ -4864,7 +4864,7 @@ PewterCity_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 0, 5, 770
 	warp_def 1, 6, 4, 0, 1542
 
-gMapEvents_PewterCity_PokemonCenter_1F::
+PewterCity_PokemonCenter_1F_MapEvents::
 	map_events PewterCity_PokemonCenter_1F_EventObjects, PewterCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 PewterCity_PokemonCenter_2F_EventObjects:
@@ -4878,7 +4878,7 @@ PewterCity_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_PewterCity_PokemonCenter_2F::
+PewterCity_PokemonCenter_2F_MapEvents::
 	map_events PewterCity_PokemonCenter_2F_EventObjects, PewterCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 PewterCity_House2_EventObjects:
@@ -4890,7 +4890,7 @@ PewterCity_House2_MapWarps:
 	warp_def 4, 7, 0, 6, 770
 	warp_def 5, 7, 0, 6, 770
 
-gMapEvents_PewterCity_House2::
+PewterCity_House2_MapEvents::
 	map_events PewterCity_House2_EventObjects, PewterCity_House2_MapWarps, 0x0, 0x0
 
 CeruleanCity_House1_EventObjects:
@@ -4902,7 +4902,7 @@ CeruleanCity_House1_MapWarps:
 	warp_def 4, 9, 0, 0, 771
 	warp_def 3, 1, 3, 8, 771
 
-gMapEvents_CeruleanCity_House1::
+CeruleanCity_House1_MapEvents::
 	map_events CeruleanCity_House1_EventObjects, CeruleanCity_House1_MapWarps, 0x0, 0x0
 
 CeruleanCity_House2_EventObjects:
@@ -4918,7 +4918,7 @@ CeruleanCity_House2_MapWarps:
 CeruleanCity_House2_MapBGEvents:
 	bg_event 4, 1, 0, 0, 0, CeruleanCity_House2_EventScript_16A99E
 
-gMapEvents_CeruleanCity_House2::
+CeruleanCity_House2_MapEvents::
 	map_events CeruleanCity_House2_EventObjects, CeruleanCity_House2_MapWarps, 0x0, CeruleanCity_House2_MapBGEvents
 
 CeruleanCity_House3_EventObjects:
@@ -4930,7 +4930,7 @@ CeruleanCity_House3_MapWarps:
 	warp_def 4, 7, 0, 2, 771
 	warp_def 5, 7, 0, 2, 771
 
-gMapEvents_CeruleanCity_House3::
+CeruleanCity_House3_MapEvents::
 	map_events CeruleanCity_House3_EventObjects, CeruleanCity_House3_MapWarps, 0x0, 0x0
 
 CeruleanCity_PokemonCenter_1F_EventObjects:
@@ -4948,7 +4948,7 @@ CeruleanCity_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 0, 3, 771
 	warp_def 1, 6, 4, 0, 1796
 
-gMapEvents_CeruleanCity_PokemonCenter_1F::
+CeruleanCity_PokemonCenter_1F_MapEvents::
 	map_events CeruleanCity_PokemonCenter_1F_EventObjects, CeruleanCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 CeruleanCity_PokemonCenter_2F_EventObjects:
@@ -4962,7 +4962,7 @@ CeruleanCity_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_CeruleanCity_PokemonCenter_2F::
+CeruleanCity_PokemonCenter_2F_MapEvents::
 	map_events CeruleanCity_PokemonCenter_2F_EventObjects, CeruleanCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 CeruleanCity_Gym_EventObjects:
@@ -4980,7 +4980,7 @@ CeruleanCity_Gym_MapBGEvents:
 	bg_event 6, 17, 0, 0, 0, CeruleanCity_Gym_EventScript_16AB9E
 	bg_event 10, 17, 0, 0, 0, CeruleanCity_Gym_EventScript_16AB9E
 
-gMapEvents_CeruleanCity_Gym::
+CeruleanCity_Gym_MapEvents::
 	map_events CeruleanCity_Gym_EventObjects, CeruleanCity_Gym_MapWarps, 0x0, CeruleanCity_Gym_MapBGEvents
 
 CeruleanCity_BikeShop_EventObjects:
@@ -5003,7 +5003,7 @@ CeruleanCity_BikeShop_MapBGEvents:
 	bg_event 2, 7, 0, 0, 0, CeruleanCity_BikeShop_EventScript_16AC94
 	bg_event 2, 8, 0, 0, 0, CeruleanCity_BikeShop_EventScript_16AC94
 
-gMapEvents_CeruleanCity_BikeShop::
+CeruleanCity_BikeShop_MapEvents::
 	map_events CeruleanCity_BikeShop_EventObjects, CeruleanCity_BikeShop_MapWarps, 0x0, CeruleanCity_BikeShop_MapBGEvents
 
 CeruleanCity_Mart_EventObjects:
@@ -5016,7 +5016,7 @@ CeruleanCity_Mart_MapWarps:
 	warp_def 4, 7, 3, 6, 771
 	warp_def 5, 7, 3, 6, 771
 
-gMapEvents_CeruleanCity_Mart::
+CeruleanCity_Mart_MapEvents::
 	map_events CeruleanCity_Mart_EventObjects, CeruleanCity_Mart_MapWarps, 0x0, 0x0
 
 CeruleanCity_House4_EventObjects:
@@ -5025,7 +5025,7 @@ CeruleanCity_House4_EventObjects:
 CeruleanCity_House4_MapWarps:
 	warp_def 4, 7, 3, 12, 771
 
-gMapEvents_CeruleanCity_House4::
+CeruleanCity_House4_MapEvents::
 	map_events CeruleanCity_House4_EventObjects, CeruleanCity_House4_MapWarps, 0x0, 0x0
 
 CeruleanCity_House5_EventObjects:
@@ -5037,7 +5037,7 @@ CeruleanCity_House5_MapWarps:
 CeruleanCity_House5_MapBGEvents:
 	bg_event 3, 1, 0, 0, 0, CeruleanCity_House5_EventScript_16B0DA
 
-gMapEvents_CeruleanCity_House5::
+CeruleanCity_House5_MapEvents::
 	map_events CeruleanCity_House5_EventObjects, CeruleanCity_House5_MapWarps, 0x0, CeruleanCity_House5_MapBGEvents
 
 LavenderTown_PokemonCenter_1F_EventObjects:
@@ -5053,7 +5053,7 @@ LavenderTown_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 3, 1, 772
 	warp_def 1, 6, 4, 0, 2049
 
-gMapEvents_LavenderTown_PokemonCenter_1F::
+LavenderTown_PokemonCenter_1F_MapEvents::
 	map_events LavenderTown_PokemonCenter_1F_EventObjects, LavenderTown_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 LavenderTown_PokemonCenter_2F_EventObjects:
@@ -5067,7 +5067,7 @@ LavenderTown_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_LavenderTown_PokemonCenter_2F::
+LavenderTown_PokemonCenter_2F_MapEvents::
 	map_events LavenderTown_PokemonCenter_2F_EventObjects, LavenderTown_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 LavenderTown_VolunteerPokemonHouse_EventObjects:
@@ -5088,7 +5088,7 @@ LavenderTown_VolunteerPokemonHouse_MapBGEvents:
 	bg_event 3, 1, 0, 0, 0, LavenderTown_VolunteerPokemonHouse_EventScript_16B229
 	bg_event 4, 1, 0, 0, 0, LavenderTown_VolunteerPokemonHouse_EventScript_16B229
 
-gMapEvents_LavenderTown_VolunteerPokemonHouse::
+LavenderTown_VolunteerPokemonHouse_MapEvents::
 	map_events LavenderTown_VolunteerPokemonHouse_EventObjects, LavenderTown_VolunteerPokemonHouse_MapWarps, 0x0, LavenderTown_VolunteerPokemonHouse_MapBGEvents
 
 LavenderTown_House1_EventObjects:
@@ -5100,7 +5100,7 @@ LavenderTown_House1_MapWarps:
 	warp_def 4, 7, 3, 3, 772
 	warp_def 5, 7, 3, 3, 772
 
-gMapEvents_LavenderTown_House1::
+LavenderTown_House1_MapEvents::
 	map_events LavenderTown_House1_EventObjects, LavenderTown_House1_MapWarps, 0x0, 0x0
 
 LavenderTown_House2_EventObjects:
@@ -5111,7 +5111,7 @@ LavenderTown_House2_MapWarps:
 	warp_def 4, 7, 3, 4, 772
 	warp_def 5, 7, 3, 4, 772
 
-gMapEvents_LavenderTown_House2::
+LavenderTown_House2_MapEvents::
 	map_events LavenderTown_House2_EventObjects, LavenderTown_House2_MapWarps, 0x0, 0x0
 
 LavenderTown_Mart_EventObjects:
@@ -5125,7 +5125,7 @@ LavenderTown_Mart_MapWarps:
 	warp_def 4, 7, 3, 5, 772
 	warp_def 5, 7, 3, 5, 772
 
-gMapEvents_LavenderTown_Mart::
+LavenderTown_Mart_MapEvents::
 	map_events LavenderTown_Mart_EventObjects, LavenderTown_Mart_MapWarps, 0x0, 0x0
 
 VermilionCity_House1_EventObjects:
@@ -5136,7 +5136,7 @@ VermilionCity_House1_MapWarps:
 	warp_def 4, 7, 3, 3, 773
 	warp_def 5, 7, 3, 3, 773
 
-gMapEvents_VermilionCity_House1::
+VermilionCity_House1_MapEvents::
 	map_events VermilionCity_House1_EventObjects, VermilionCity_House1_MapWarps, 0x0, 0x0
 
 VermilionCity_PokemonCenter_1F_EventObjects:
@@ -5154,7 +5154,7 @@ VermilionCity_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 3, 4, 773
 	warp_def 1, 6, 4, 0, 2306
 
-gMapEvents_VermilionCity_PokemonCenter_1F::
+VermilionCity_PokemonCenter_1F_MapEvents::
 	map_events VermilionCity_PokemonCenter_1F_EventObjects, VermilionCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 VermilionCity_PokemonCenter_2F_EventObjects:
@@ -5168,7 +5168,7 @@ VermilionCity_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_VermilionCity_PokemonCenter_2F::
+VermilionCity_PokemonCenter_2F_MapEvents::
 	map_events VermilionCity_PokemonCenter_2F_EventObjects, VermilionCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 VermilionCity_PokemonFanClub_EventObjects:
@@ -5188,7 +5188,7 @@ VermilionCity_PokemonFanClub_MapBGEvents:
 	bg_event 2, 1, 0, 0, 0, VermilionCity_PokemonFanClub_EventScript_16B5C4
 	bg_event 9, 1, 0, 0, 0, VermilionCity_PokemonFanClub_EventScript_16B5CD
 
-gMapEvents_VermilionCity_PokemonFanClub::
+VermilionCity_PokemonFanClub_MapEvents::
 	map_events VermilionCity_PokemonFanClub_EventObjects, VermilionCity_PokemonFanClub_MapWarps, 0x0, VermilionCity_PokemonFanClub_MapBGEvents
 
 VermilionCity_House2_EventObjects:
@@ -5199,7 +5199,7 @@ VermilionCity_House2_MapWarps:
 	warp_def 4, 7, 3, 6, 773
 	warp_def 5, 7, 3, 6, 773
 
-gMapEvents_VermilionCity_House2::
+VermilionCity_House2_MapEvents::
 	map_events VermilionCity_House2_EventObjects, VermilionCity_House2_MapWarps, 0x0, 0x0
 
 VermilionCity_Mart_EventObjects:
@@ -5212,7 +5212,7 @@ VermilionCity_Mart_MapWarps:
 	warp_def 4, 7, 3, 7, 773
 	warp_def 5, 7, 3, 7, 773
 
-gMapEvents_VermilionCity_Mart::
+VermilionCity_Mart_MapEvents::
 	map_events VermilionCity_Mart_EventObjects, VermilionCity_Mart_MapWarps, 0x0, 0x0
 
 VermilionCity_Gym_EventObjects:
@@ -5246,7 +5246,7 @@ VermilionCity_Gym_MapBGEvents:
 	bg_event 7, 14, 0, 0, 0, VermilionCity_Gym_EventScript_16B82B
 	bg_event 9, 14, 0, 0, 0, VermilionCity_Gym_EventScript_16B837
 
-gMapEvents_VermilionCity_Gym::
+VermilionCity_Gym_MapEvents::
 	map_events VermilionCity_Gym_EventObjects, VermilionCity_Gym_MapWarps, 0x0, VermilionCity_Gym_MapBGEvents
 
 VermilionCity_House3_EventObjects:
@@ -5263,7 +5263,7 @@ VermilionCity_House3_MapWarps:
 VermilionCity_House3_MapBGEvents:
 	bg_event 6, 4, 3, 0, 0, VermilionCity_House3_EventScript_16BACF
 
-gMapEvents_VermilionCity_House3::
+VermilionCity_House3_MapEvents::
 	map_events VermilionCity_House3_EventObjects, VermilionCity_House3_MapWarps, 0x0, VermilionCity_House3_MapBGEvents
 
 CeladonCity_DepartmentStore_1F_EventObjects:
@@ -5283,7 +5283,7 @@ CeladonCity_DepartmentStore_1F_MapBGEvents:
 	bg_event 9, 11, 0, 0, 0, CeladonCity_DepartmentStore_1F_EventScript_16BAE2
 	bg_event 8, 1, 0, 0, 0, CeladonCity_DepartmentStore_1F_EventScript_16BAEB
 
-gMapEvents_CeladonCity_DepartmentStore_1F::
+CeladonCity_DepartmentStore_1F_MapEvents::
 	map_events CeladonCity_DepartmentStore_1F_EventObjects, CeladonCity_DepartmentStore_1F_MapWarps, 0x0, CeladonCity_DepartmentStore_1F_MapBGEvents
 
 CeladonCity_DepartmentStore_2F_EventObjects:
@@ -5300,7 +5300,7 @@ CeladonCity_DepartmentStore_2F_MapWarps:
 CeladonCity_DepartmentStore_2F_MapBGEvents:
 	bg_event 4, 1, 0, 0, 0, CeladonCity_DepartmentStore_2F_EventScript_16BB07
 
-gMapEvents_CeladonCity_DepartmentStore_2F::
+CeladonCity_DepartmentStore_2F_MapEvents::
 	map_events CeladonCity_DepartmentStore_2F_EventObjects, CeladonCity_DepartmentStore_2F_MapWarps, 0x0, CeladonCity_DepartmentStore_2F_MapBGEvents
 
 CeladonCity_DepartmentStore_3F_EventObjects:
@@ -5328,7 +5328,7 @@ CeladonCity_DepartmentStore_3F_MapBGEvents:
 	bg_event 2, 4, 0, 1, 0, CeladonCity_DepartmentStore_3F_EventScript_16BBE5
 	bg_event 0, 4, 0, 1, 0, CeladonCity_DepartmentStore_3F_EventScript_16BBE5
 
-gMapEvents_CeladonCity_DepartmentStore_3F::
+CeladonCity_DepartmentStore_3F_MapEvents::
 	map_events CeladonCity_DepartmentStore_3F_EventObjects, CeladonCity_DepartmentStore_3F_MapWarps, 0x0, CeladonCity_DepartmentStore_3F_MapBGEvents
 
 CeladonCity_DepartmentStore_4F_EventObjects:
@@ -5344,7 +5344,7 @@ CeladonCity_DepartmentStore_4F_MapWarps:
 CeladonCity_DepartmentStore_4F_MapBGEvents:
 	bg_event 4, 1, 0, 0, 0, CeladonCity_DepartmentStore_4F_EventScript_16BC01
 
-gMapEvents_CeladonCity_DepartmentStore_4F::
+CeladonCity_DepartmentStore_4F_MapEvents::
 	map_events CeladonCity_DepartmentStore_4F_EventObjects, CeladonCity_DepartmentStore_4F_MapWarps, 0x0, CeladonCity_DepartmentStore_4F_MapBGEvents
 
 CeladonCity_DepartmentStore_5F_EventObjects:
@@ -5361,7 +5361,7 @@ CeladonCity_DepartmentStore_5F_MapWarps:
 CeladonCity_DepartmentStore_5F_MapBGEvents:
 	bg_event 8, 1, 0, 0, 0, CeladonCity_DepartmentStore_5F_EventScript_16BC53
 
-gMapEvents_CeladonCity_DepartmentStore_5F::
+CeladonCity_DepartmentStore_5F_MapEvents::
 	map_events CeladonCity_DepartmentStore_5F_EventObjects, CeladonCity_DepartmentStore_5F_MapWarps, 0x0, CeladonCity_DepartmentStore_5F_MapBGEvents
 
 CeladonCity_DepartmentStore_Roof_EventObjects:
@@ -5377,7 +5377,7 @@ CeladonCity_DepartmentStore_Roof_MapBGEvents:
 	bg_event 11, 3, 0, 0, 0, CeladonCity_DepartmentStore_Roof_EventScript_16C034
 	bg_event 12, 3, 0, 0, 0, CeladonCity_DepartmentStore_Roof_EventScript_16C034
 
-gMapEvents_CeladonCity_DepartmentStore_Roof::
+CeladonCity_DepartmentStore_Roof_MapEvents::
 	map_events CeladonCity_DepartmentStore_Roof_EventObjects, CeladonCity_DepartmentStore_Roof_MapWarps, 0x0, CeladonCity_DepartmentStore_Roof_MapBGEvents
 
 
@@ -5389,7 +5389,7 @@ CeladonCity_DepartmentStore_Elevator_MapBGEvents:
 	bg_event 0, 2, 0, 0, 0, CeladonCity_DepartmentStore_Elevator_EventScript_16C153
 	bg_event 4, 1, 0, 0, 0, CeladonCity_DepartmentStore_Elevator_EventScript_16C153
 
-gMapEvents_CeladonCity_DepartmentStore_Elevator::
+CeladonCity_DepartmentStore_Elevator_MapEvents::
 	map_events 0x0, CeladonCity_DepartmentStore_Elevator_MapWarps, 0x0, CeladonCity_DepartmentStore_Elevator_MapBGEvents
 
 CeladonCity_Condominiums_1F_EventObjects:
@@ -5410,7 +5410,7 @@ CeladonCity_Condominiums_1F_MapBGEvents:
 	bg_event 8, 12, 0, 0, 0, CeladonCity_Condominiums_1F_EventScript_16C3C7
 	bg_event 7, 12, 0, 0, 0, CeladonCity_Condominiums_1F_EventScript_16C3C7
 
-gMapEvents_CeladonCity_Condominiums_1F::
+CeladonCity_Condominiums_1F_MapEvents::
 	map_events CeladonCity_Condominiums_1F_EventObjects, CeladonCity_Condominiums_1F_MapWarps, 0x0, CeladonCity_Condominiums_1F_MapBGEvents
 
 CeladonCity_Condominiums_2F_EventObjects:
@@ -5427,7 +5427,7 @@ CeladonCity_Condominiums_2F_MapBGEvents:
 	bg_event 8, 12, 0, 0, 0, CeladonCity_Condominiums_2F_EventScript_16C3D1
 	bg_event 7, 12, 0, 0, 0, CeladonCity_Condominiums_2F_EventScript_16C3D1
 
-gMapEvents_CeladonCity_Condominiums_2F::
+CeladonCity_Condominiums_2F_MapEvents::
 	map_events CeladonCity_Condominiums_2F_EventObjects, CeladonCity_Condominiums_2F_MapWarps, 0x0, CeladonCity_Condominiums_2F_MapBGEvents
 
 CeladonCity_Condominiums_3F_EventObjects:
@@ -5452,7 +5452,7 @@ CeladonCity_Condominiums_3F_MapBGEvents:
 	bg_event 0, 9, 0, 1, 0, CeladonCity_Condominiums_3F_EventScript_16C43E
 	bg_event 4, 9, 0, 1, 0, CeladonCity_Condominiums_3F_EventScript_16C447
 
-gMapEvents_CeladonCity_Condominiums_3F::
+CeladonCity_Condominiums_3F_MapEvents::
 	map_events CeladonCity_Condominiums_3F_EventObjects, CeladonCity_Condominiums_3F_MapWarps, 0x0, CeladonCity_Condominiums_3F_MapBGEvents
 
 
@@ -5465,7 +5465,7 @@ CeladonCity_Condominiums_Roof_MapBGEvents:
 	bg_event 4, 12, 0, 0, 0, CeladonCity_Condominiums_Roof_EventScript_16C45A
 	bg_event 3, 12, 0, 0, 0, CeladonCity_Condominiums_Roof_EventScript_16C45A
 
-gMapEvents_CeladonCity_Condominiums_Roof::
+CeladonCity_Condominiums_Roof_MapEvents::
 	map_events 0x0, CeladonCity_Condominiums_Roof_MapWarps, 0x0, CeladonCity_Condominiums_Roof_MapBGEvents
 
 CeladonCity_Condominiums_RoofRoom_EventObjects:
@@ -5482,7 +5482,7 @@ CeladonCity_Condominiums_RoofRoom_MapBGEvents:
 	bg_event 5, 1, 0, 0, 0, CeladonCity_Condominiums_RoofRoom_EventScript_16C522
 	bg_event 4, 4, 0, 0, 0, CeladonCity_Condominiums_RoofRoom_EventScript_16C519
 
-gMapEvents_CeladonCity_Condominiums_RoofRoom::
+CeladonCity_Condominiums_RoofRoom_MapEvents::
 	map_events CeladonCity_Condominiums_RoofRoom_EventObjects, CeladonCity_Condominiums_RoofRoom_MapWarps, 0x0, CeladonCity_Condominiums_RoofRoom_MapBGEvents
 
 CeladonCity_PokemonCenter_1F_EventObjects:
@@ -5497,7 +5497,7 @@ CeladonCity_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 3, 4, 774
 	warp_def 1, 6, 4, 0, 2573
 
-gMapEvents_CeladonCity_PokemonCenter_1F::
+CeladonCity_PokemonCenter_1F_MapEvents::
 	map_events CeladonCity_PokemonCenter_1F_EventObjects, CeladonCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 CeladonCity_PokemonCenter_2F_EventObjects:
@@ -5511,7 +5511,7 @@ CeladonCity_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_CeladonCity_PokemonCenter_2F::
+CeladonCity_PokemonCenter_2F_MapEvents::
 	map_events CeladonCity_PokemonCenter_2F_EventObjects, CeladonCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 CeladonCity_GameCorner_EventObjects:
@@ -5571,7 +5571,7 @@ CeladonCity_GameCorner_MapBGEvents:
 	bg_event 11, 1, 0, 0, 0, CeladonCity_GameCorner_EventScript_16CAAA
 	bg_event 17, 13, 0, 3, 0, CeladonCity_GameCorner_EventScript_1B2867
 
-gMapEvents_CeladonCity_GameCorner::
+CeladonCity_GameCorner_MapEvents::
 	map_events CeladonCity_GameCorner_EventObjects, CeladonCity_GameCorner_MapWarps, 0x0, CeladonCity_GameCorner_MapBGEvents
 
 CeladonCity_GameCorner_PrizeRoom_EventObjects:
@@ -5586,7 +5586,7 @@ CeladonCity_GameCorner_PrizeRoom_MapWarps:
 	warp_def 4, 8, 3, 5, 774
 	warp_def 5, 9, 0, 5, 774
 
-gMapEvents_CeladonCity_GameCorner_PrizeRoom::
+CeladonCity_GameCorner_PrizeRoom_MapEvents::
 	map_events CeladonCity_GameCorner_PrizeRoom_EventObjects, CeladonCity_GameCorner_PrizeRoom_MapWarps, 0x0, 0x0
 
 CeladonCity_Gym_EventObjects:
@@ -5611,7 +5611,7 @@ CeladonCity_Gym_MapBGEvents:
 	bg_event 4, 16, 0, 0, 0, CeladonCity_Gym_EventScript_16D1CC
 	bg_event 8, 16, 0, 0, 0, CeladonCity_Gym_EventScript_16D1CC
 
-gMapEvents_CeladonCity_Gym::
+CeladonCity_Gym_MapEvents::
 	map_events CeladonCity_Gym_EventObjects, CeladonCity_Gym_MapWarps, 0x0, CeladonCity_Gym_MapBGEvents
 
 CeladonCity_Restaurant_EventObjects:
@@ -5626,7 +5626,7 @@ CeladonCity_Restaurant_MapWarps:
 	warp_def 6, 9, 0, 7, 774
 	warp_def 7, 9, 0, 7, 774
 
-gMapEvents_CeladonCity_Restaurant::
+CeladonCity_Restaurant_MapEvents::
 	map_events CeladonCity_Restaurant_EventObjects, CeladonCity_Restaurant_MapWarps, 0x0, 0x0
 
 CeladonCity_House1_EventObjects:
@@ -5639,7 +5639,7 @@ CeladonCity_House1_MapWarps:
 	warp_def 4, 7, 3, 8, 774
 	warp_def 5, 7, 3, 8, 774
 
-gMapEvents_CeladonCity_House1::
+CeladonCity_House1_MapEvents::
 	map_events CeladonCity_House1_EventObjects, CeladonCity_House1_MapWarps, 0x0, 0x0
 
 CeladonCity_Hotel_EventObjects:
@@ -5653,7 +5653,7 @@ CeladonCity_Hotel_MapWarps:
 	warp_def 4, 9, 0, 9, 774
 	warp_def 5, 10, 0, 9, 774
 
-gMapEvents_CeladonCity_Hotel::
+CeladonCity_Hotel_MapEvents::
 	map_events CeladonCity_Hotel_EventObjects, CeladonCity_Hotel_MapWarps, 0x0, 0x0
 
 FuchsiaCity_SafariZone_Entrance_EventObjects:
@@ -5671,7 +5671,7 @@ FuchsiaCity_SafariZone_Entrance_MapCoordEvents:
 	coord_event 5, 3, 3, 0, 16385, 0, 0, FuchsiaCity_SafariZone_Entrance_EventScript_16D379
 	coord_event 3, 3, 3, 0, 16385, 0, 0, FuchsiaCity_SafariZone_Entrance_EventScript_16D385
 
-gMapEvents_FuchsiaCity_SafariZone_Entrance::
+FuchsiaCity_SafariZone_Entrance_MapEvents::
 	map_events FuchsiaCity_SafariZone_Entrance_EventObjects, FuchsiaCity_SafariZone_Entrance_MapWarps, FuchsiaCity_SafariZone_Entrance_MapCoordEvents, 0x0
 
 FuchsiaCity_Mart_EventObjects:
@@ -5684,7 +5684,7 @@ FuchsiaCity_Mart_MapWarps:
 	warp_def 4, 7, 3, 2, 775
 	warp_def 5, 7, 3, 2, 775
 
-gMapEvents_FuchsiaCity_Mart::
+FuchsiaCity_Mart_MapEvents::
 	map_events FuchsiaCity_Mart_EventObjects, FuchsiaCity_Mart_MapWarps, 0x0, 0x0
 
 FuchsiaCity_ZooBuilding_EventObjects:
@@ -5698,7 +5698,7 @@ FuchsiaCity_ZooBuilding_MapWarps:
 	warp_def 6, 9, 0, 3, 775
 	warp_def 7, 9, 3, 3, 775
 
-gMapEvents_FuchsiaCity_ZooBuilding::
+FuchsiaCity_ZooBuilding_MapEvents::
 	map_events FuchsiaCity_ZooBuilding_EventObjects, FuchsiaCity_ZooBuilding_MapWarps, 0x0, 0x0
 
 FuchsiaCity_Gym_EventObjects:
@@ -5720,7 +5720,7 @@ FuchsiaCity_Gym_MapBGEvents:
 	bg_event 4, 19, 0, 0, 0, FuchsiaCity_Gym_EventScript_16D6A7
 	bg_event 10, 19, 0, 0, 0, FuchsiaCity_Gym_EventScript_16D6A7
 
-gMapEvents_FuchsiaCity_Gym::
+FuchsiaCity_Gym_MapEvents::
 	map_events FuchsiaCity_Gym_EventObjects, FuchsiaCity_Gym_MapWarps, 0x0, FuchsiaCity_Gym_MapBGEvents
 
 FuchsiaCity_House1_EventObjects:
@@ -5733,7 +5733,7 @@ FuchsiaCity_House1_MapWarps:
 	warp_def 4, 7, 3, 5, 775
 	warp_def 5, 7, 3, 5, 775
 
-gMapEvents_FuchsiaCity_House1::
+FuchsiaCity_House1_MapEvents::
 	map_events FuchsiaCity_House1_EventObjects, FuchsiaCity_House1_MapWarps, 0x0, 0x0
 
 FuchsiaCity_PokemonCenter_1F_EventObjects:
@@ -5748,7 +5748,7 @@ FuchsiaCity_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 3, 6, 775
 	warp_def 1, 6, 4, 0, 2822
 
-gMapEvents_FuchsiaCity_PokemonCenter_1F::
+FuchsiaCity_PokemonCenter_1F_MapEvents::
 	map_events FuchsiaCity_PokemonCenter_1F_EventObjects, FuchsiaCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 FuchsiaCity_PokemonCenter_2F_EventObjects:
@@ -5762,7 +5762,7 @@ FuchsiaCity_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_FuchsiaCity_PokemonCenter_2F::
+FuchsiaCity_PokemonCenter_2F_MapEvents::
 	map_events FuchsiaCity_PokemonCenter_2F_EventObjects, FuchsiaCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 FuchsiaCity_Building1_EventObjects:
@@ -5782,7 +5782,7 @@ FuchsiaCity_Building1_MapBGEvents:
 	bg_event 5, 4, 0, 0, 0, FuchsiaCity_Building1_EventScript_16D804
 	bg_event 6, 4, 0, 0, 0, FuchsiaCity_Building1_EventScript_16D80D
 
-gMapEvents_FuchsiaCity_Building1::
+FuchsiaCity_Building1_MapEvents::
 	map_events FuchsiaCity_Building1_EventObjects, FuchsiaCity_Building1_MapWarps, 0x0, FuchsiaCity_Building1_MapBGEvents
 
 FuchsiaCity_House2_EventObjects:
@@ -5794,7 +5794,7 @@ FuchsiaCity_House2_MapWarps:
 	warp_def 4, 9, 0, 7, 775
 	warp_def 3, 1, 3, 8, 775
 
-gMapEvents_FuchsiaCity_House2::
+FuchsiaCity_House2_MapEvents::
 	map_events FuchsiaCity_House2_EventObjects, FuchsiaCity_House2_MapWarps, 0x0, 0x0
 
 FuchsiaCity_House3_EventObjects:
@@ -5803,7 +5803,7 @@ FuchsiaCity_House3_EventObjects:
 FuchsiaCity_House3_MapWarps:
 	warp_def 4, 7, 3, 10, 775
 
-gMapEvents_FuchsiaCity_House3::
+FuchsiaCity_House3_MapEvents::
 	map_events FuchsiaCity_House3_EventObjects, FuchsiaCity_House3_MapWarps, 0x0, 0x0
 
 CinnabarIsland_Gym_EventObjects:
@@ -5839,7 +5839,7 @@ CinnabarIsland_Gym_MapBGEvents:
 	bg_event 2, 10, 0, 1, 0, CinnabarIsland_Gym_EventScript_16E04C
 	bg_event 3, 1, 0, 1, 0, CinnabarIsland_Gym_EventScript_1ACF07
 
-gMapEvents_CinnabarIsland_Gym::
+CinnabarIsland_Gym_MapEvents::
 	map_events CinnabarIsland_Gym_EventObjects, CinnabarIsland_Gym_MapWarps, 0x0, CinnabarIsland_Gym_MapBGEvents
 
 CinnabarIsland_PokemonLab_Entrance_EventObjects:
@@ -5859,7 +5859,7 @@ CinnabarIsland_PokemonLab_Entrance_MapBGEvents:
 	bg_event 18, 5, 0, 0, 0, CinnabarIsland_PokemonLab_Entrance_EventScript_16E2A6
 	bg_event 24, 5, 0, 0, 0, CinnabarIsland_PokemonLab_Entrance_EventScript_16E2AF
 
-gMapEvents_CinnabarIsland_PokemonLab_Entrance::
+CinnabarIsland_PokemonLab_Entrance_MapEvents::
 	map_events CinnabarIsland_PokemonLab_Entrance_EventObjects, CinnabarIsland_PokemonLab_Entrance_MapWarps, 0x0, CinnabarIsland_PokemonLab_Entrance_MapBGEvents
 
 CinnabarIsland_PokemonLab_Lounge_EventObjects:
@@ -5870,7 +5870,7 @@ CinnabarIsland_PokemonLab_Lounge_EventObjects:
 CinnabarIsland_PokemonLab_Lounge_MapWarps:
 	warp_def 7, 9, 3, 3, 3073
 
-gMapEvents_CinnabarIsland_PokemonLab_Lounge::
+CinnabarIsland_PokemonLab_Lounge_MapEvents::
 	map_events CinnabarIsland_PokemonLab_Lounge_EventObjects, CinnabarIsland_PokemonLab_Lounge_MapWarps, 0x0, 0x0
 
 CinnabarIsland_PokemonLab_ResearchRoom_EventObjects:
@@ -5884,7 +5884,7 @@ CinnabarIsland_PokemonLab_ResearchRoom_MapBGEvents:
 	bg_event 6, 1, 0, 0, 0, CinnabarIsland_PokemonLab_ResearchRoom_EventScript_16E3F7
 	bg_event 3, 1, 0, 0, 0, CinnabarIsland_PokemonLab_ResearchRoom_EventScript_16E3EE
 
-gMapEvents_CinnabarIsland_PokemonLab_ResearchRoom::
+CinnabarIsland_PokemonLab_ResearchRoom_MapEvents::
 	map_events CinnabarIsland_PokemonLab_ResearchRoom_EventObjects, CinnabarIsland_PokemonLab_ResearchRoom_MapWarps, 0x0, CinnabarIsland_PokemonLab_ResearchRoom_MapBGEvents
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventObjects:
@@ -5894,7 +5894,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventObjects:
 CinnabarIsland_PokemonLab_ExperimentRoom_MapWarps:
 	warp_def 7, 9, 3, 5, 3073
 
-gMapEvents_CinnabarIsland_PokemonLab_ExperimentRoom::
+CinnabarIsland_PokemonLab_ExperimentRoom_MapEvents::
 	map_events CinnabarIsland_PokemonLab_ExperimentRoom_EventObjects, CinnabarIsland_PokemonLab_ExperimentRoom_MapWarps, 0x0, 0x0
 
 CinnabarIsland_PokemonCenter_1F_EventObjects:
@@ -5912,7 +5912,7 @@ CinnabarIsland_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 0, 3, 776
 	warp_def 1, 6, 4, 0, 3078
 
-gMapEvents_CinnabarIsland_PokemonCenter_1F::
+CinnabarIsland_PokemonCenter_1F_MapEvents::
 	map_events CinnabarIsland_PokemonCenter_1F_EventObjects, CinnabarIsland_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 CinnabarIsland_PokemonCenter_2F_EventObjects:
@@ -5926,7 +5926,7 @@ CinnabarIsland_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_CinnabarIsland_PokemonCenter_2F::
+CinnabarIsland_PokemonCenter_2F_MapEvents::
 	map_events CinnabarIsland_PokemonCenter_2F_EventObjects, CinnabarIsland_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 CinnabarIsland_Mart_EventObjects:
@@ -5939,7 +5939,7 @@ CinnabarIsland_Mart_MapWarps:
 	warp_def 4, 7, 3, 4, 776
 	warp_def 5, 7, 3, 4, 776
 
-gMapEvents_CinnabarIsland_Mart::
+CinnabarIsland_Mart_MapEvents::
 	map_events CinnabarIsland_Mart_EventObjects, CinnabarIsland_Mart_MapWarps, 0x0, 0x0
 
 IndigoPlateau_PokemonCenter_1F_EventObjects:
@@ -5957,7 +5957,7 @@ IndigoPlateau_PokemonCenter_1F_MapWarps:
 	warp_def 4, 1, 3, 0, 331
 	warp_def 1, 14, 4, 0, 3329
 
-gMapEvents_IndigoPlateau_PokemonCenter_1F::
+IndigoPlateau_PokemonCenter_1F_MapEvents::
 	map_events IndigoPlateau_PokemonCenter_1F_EventObjects, IndigoPlateau_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 IndigoPlateau_PokemonCenter_2F_EventObjects:
@@ -5971,7 +5971,7 @@ IndigoPlateau_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_IndigoPlateau_PokemonCenter_2F::
+IndigoPlateau_PokemonCenter_2F_MapEvents::
 	map_events IndigoPlateau_PokemonCenter_2F_EventObjects, IndigoPlateau_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 SaffronCity_House1_1F_EventObjects:
@@ -5985,7 +5985,7 @@ SaffronCity_House1_1F_MapWarps:
 	warp_def 5, 8, 3, 1, 778
 	warp_def 10, 2, 3, 0, 3585
 
-gMapEvents_SaffronCity_House1_1F::
+SaffronCity_House1_1F_MapEvents::
 	map_events SaffronCity_House1_1F_EventObjects, SaffronCity_House1_1F_MapWarps, 0x0, 0x0
 
 SaffronCity_House1_2F_EventObjects:
@@ -6002,7 +6002,7 @@ SaffronCity_House1_2F_MapBGEvents:
 	bg_event 3, 5, 0, 0, 0, SaffronCity_House1_2F_EventScript_16EBD2
 	bg_event 2, 1, 0, 7, 0, 110, 26, 1
 
-gMapEvents_SaffronCity_House1_2F::
+SaffronCity_House1_2F_MapEvents::
 	map_events SaffronCity_House1_2F_EventObjects, SaffronCity_House1_2F_MapWarps, 0x0, SaffronCity_House1_2F_MapBGEvents
 
 SaffronCity_Dojo_EventObjects:
@@ -6029,7 +6029,7 @@ SaffronCity_Dojo_MapBGEvents:
 	bg_event 5, 2, 0, 0, 0, SaffronCity_Dojo_EventScript_16ED34
 	bg_event 7, 2, 0, 0, 0, SaffronCity_Dojo_EventScript_16ED3D
 
-gMapEvents_SaffronCity_Dojo::
+SaffronCity_Dojo_MapEvents::
 	map_events SaffronCity_Dojo_EventObjects, SaffronCity_Dojo_MapWarps, SaffronCity_Dojo_MapCoordEvents, SaffronCity_Dojo_MapBGEvents
 
 SaffronCity_Gym_EventObjects:
@@ -6082,7 +6082,7 @@ SaffronCity_Gym_MapBGEvents:
 	bg_event 12, 20, 0, 0, 0, SaffronCity_Gym_EventScript_16EF55
 	bg_event 16, 20, 0, 0, 0, SaffronCity_Gym_EventScript_16EF55
 
-gMapEvents_SaffronCity_Gym::
+SaffronCity_Gym_MapEvents::
 	map_events SaffronCity_Gym_EventObjects, SaffronCity_Gym_MapWarps, 0x0, SaffronCity_Gym_MapBGEvents
 
 SaffronCity_House2_EventObjects:
@@ -6099,7 +6099,7 @@ SaffronCity_House2_MapWarps:
 SaffronCity_House2_MapBGEvents:
 	bg_event 5, 4, 3, 0, 0, SaffronCity_House2_EventScript_16EF99
 
-gMapEvents_SaffronCity_House2::
+SaffronCity_House2_MapEvents::
 	map_events SaffronCity_House2_EventObjects, SaffronCity_House2_MapWarps, 0x0, SaffronCity_House2_MapBGEvents
 
 SaffronCity_Mart_EventObjects:
@@ -6112,7 +6112,7 @@ SaffronCity_Mart_MapWarps:
 	warp_def 4, 7, 3, 5, 778
 	warp_def 5, 7, 3, 5, 778
 
-gMapEvents_SaffronCity_Mart::
+SaffronCity_Mart_MapEvents::
 	map_events SaffronCity_Mart_EventObjects, SaffronCity_Mart_MapWarps, 0x0, 0x0
 
 SaffronCity_PokemonCenter_1F_EventObjects:
@@ -6129,7 +6129,7 @@ SaffronCity_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 3, 6, 778
 	warp_def 1, 6, 4, 0, 3591
 
-gMapEvents_SaffronCity_PokemonCenter_1F::
+SaffronCity_PokemonCenter_1F_MapEvents::
 	map_events SaffronCity_PokemonCenter_1F_EventObjects, SaffronCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 SaffronCity_PokemonCenter_2F_EventObjects:
@@ -6143,7 +6143,7 @@ SaffronCity_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_SaffronCity_PokemonCenter_2F::
+SaffronCity_PokemonCenter_2F_MapEvents::
 	map_events SaffronCity_PokemonCenter_2F_EventObjects, SaffronCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 SaffronCity_House3_EventObjects:
@@ -6154,7 +6154,7 @@ SaffronCity_House3_MapWarps:
 	warp_def 4, 7, 3, 7, 778
 	warp_def 5, 7, 3, 7, 778
 
-gMapEvents_SaffronCity_House3::
+SaffronCity_House3_MapEvents::
 	map_events SaffronCity_House3_EventObjects, SaffronCity_House3_MapWarps, 0x0, 0x0
 
 SaffronCity_PokemonTrainerFanClub_EventObjects:
@@ -6172,7 +6172,7 @@ SaffronCity_PokemonTrainerFanClub_EventObjects:
 SaffronCity_PokemonTrainerFanClub_MapWarps:
 	warp_def 5, 15, 3, 14, 778
 
-gMapEvents_SaffronCity_PokemonTrainerFanClub::
+SaffronCity_PokemonTrainerFanClub_MapEvents::
 	map_events SaffronCity_PokemonTrainerFanClub_EventObjects, SaffronCity_PokemonTrainerFanClub_MapWarps, 0x0, 0x0
 
 Route2_ViridianForest_SouthEntrance_EventObjects:
@@ -6185,7 +6185,7 @@ Route2_ViridianForest_SouthEntrance_MapWarps:
 	warp_def 8, 10, 3, 2, 788
 	warp_def 7, 1, 3, 0, 256
 
-gMapEvents_Route2_ViridianForest_SouthEntrance::
+Route2_ViridianForest_SouthEntrance_MapEvents::
 	map_events Route2_ViridianForest_SouthEntrance_EventObjects, Route2_ViridianForest_SouthEntrance_MapWarps, 0x0, 0x0
 
 Route2_House_EventObjects:
@@ -6197,7 +6197,7 @@ Route2_House_MapWarps:
 	warp_def 4, 7, 0, 4, 788
 	warp_def 5, 7, 0, 4, 788
 
-gMapEvents_Route2_House::
+Route2_House_MapEvents::
 	map_events Route2_House_EventObjects, Route2_House_MapWarps, 0x0, 0x0
 
 Route2_EastBuilding_EventObjects:
@@ -6210,7 +6210,7 @@ Route2_EastBuilding_MapWarps:
 	warp_def 8, 10, 3, 5, 788
 	warp_def 7, 1, 3, 6, 788
 
-gMapEvents_Route2_EastBuilding::
+Route2_EastBuilding_MapEvents::
 	map_events Route2_EastBuilding_EventObjects, Route2_EastBuilding_MapWarps, 0x0, 0x0
 
 Route2_ViridianForest_NorthEntrance_EventObjects:
@@ -6224,7 +6224,7 @@ Route2_ViridianForest_NorthEntrance_MapWarps:
 	warp_def 8, 10, 3, 2, 256
 	warp_def 7, 1, 3, 0, 788
 
-gMapEvents_Route2_ViridianForest_NorthEntrance::
+Route2_ViridianForest_NorthEntrance_MapEvents::
 	map_events Route2_ViridianForest_NorthEntrance_EventObjects, Route2_ViridianForest_NorthEntrance_MapWarps, 0x0, 0x0
 
 Route4_PokemonCenter_1F_EventObjects:
@@ -6241,7 +6241,7 @@ Route4_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 3, 2, 790
 	warp_def 1, 6, 4, 0, 4097
 
-gMapEvents_Route4_PokemonCenter_1F::
+Route4_PokemonCenter_1F_MapEvents::
 	map_events Route4_PokemonCenter_1F_EventObjects, Route4_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 Route4_PokemonCenter_2F_EventObjects:
@@ -6255,7 +6255,7 @@ Route4_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_Route4_PokemonCenter_2F::
+Route4_PokemonCenter_2F_MapEvents::
 	map_events Route4_PokemonCenter_2F_EventObjects, Route4_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 Route5_PokemonDayCare_EventObjects:
@@ -6266,7 +6266,7 @@ Route5_PokemonDayCare_MapWarps:
 	warp_def 4, 7, 0, 1, 791
 	warp_def 5, 7, 0, 1, 791
 
-gMapEvents_Route5_PokemonDayCare::
+Route5_PokemonDayCare_MapEvents::
 	map_events Route5_PokemonDayCare_EventObjects, Route5_PokemonDayCare_MapWarps, 0x0, 0x0
 
 Route5_SouthEntrance_EventObjects:
@@ -6283,7 +6283,7 @@ Route5_SouthEntrance_MapCoordEvents:
 	coord_event 4, 5, 3, 0, 16482, 0, 0, Route5_SouthEntrance_EventScript_16F916
 	coord_event 5, 5, 3, 0, 16482, 0, 0, Route5_SouthEntrance_EventScript_16F922
 
-gMapEvents_Route5_SouthEntrance::
+Route5_SouthEntrance_MapEvents::
 	map_events Route5_SouthEntrance_EventObjects, Route5_SouthEntrance_MapWarps, Route5_SouthEntrance_MapCoordEvents, 0x0
 
 Route6_NorthEntrance_EventObjects:
@@ -6300,11 +6300,11 @@ Route6_NorthEntrance_MapCoordEvents:
 	coord_event 4, 5, 3, 0, 16482, 0, 0, Route6_NorthEntrance_EventScript_16F9DC
 	coord_event 5, 5, 3, 0, 16482, 0, 0, Route6_NorthEntrance_EventScript_16F9E8
 
-gMapEvents_Route6_NorthEntrance::
+Route6_NorthEntrance_MapEvents::
 	map_events Route6_NorthEntrance_EventObjects, Route6_NorthEntrance_MapWarps, Route6_NorthEntrance_MapCoordEvents, 0x0
 
 
-gMapEvents_UnknownMap_18_01::
+UnknownMap_18_01_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 
 Route7_EastEntrance_EventObjects:
@@ -6321,7 +6321,7 @@ Route7_EastEntrance_MapCoordEvents:
 	coord_event 6, 5, 3, 0, 16482, 0, 0, Route7_EastEntrance_EventScript_16FAA3
 	coord_event 6, 6, 3, 0, 16482, 0, 0, Route7_EastEntrance_EventScript_16FAAF
 
-gMapEvents_Route7_EastEntrance::
+Route7_EastEntrance_MapEvents::
 	map_events Route7_EastEntrance_EventObjects, Route7_EastEntrance_MapWarps, Route7_EastEntrance_MapCoordEvents, 0x0
 
 Route8_WestEntrance_EventObjects:
@@ -6338,7 +6338,7 @@ Route8_WestEntrance_MapCoordEvents:
 	coord_event 6, 5, 3, 0, 16482, 0, 0, Route8_WestEntrance_EventScript_16FB69
 	coord_event 6, 6, 3, 0, 16482, 0, 0, Route8_WestEntrance_EventScript_16FB75
 
-gMapEvents_Route8_WestEntrance::
+Route8_WestEntrance_MapEvents::
 	map_events Route8_WestEntrance_EventObjects, Route8_WestEntrance_MapWarps, Route8_WestEntrance_MapCoordEvents, 0x0
 
 Route10_PokemonCenter_1F_EventObjects:
@@ -6354,7 +6354,7 @@ Route10_PokemonCenter_1F_MapWarps:
 	warp_def 8, 8, 3, 3, 796
 	warp_def 1, 6, 4, 0, 5377
 
-gMapEvents_Route10_PokemonCenter_1F::
+Route10_PokemonCenter_1F_MapEvents::
 	map_events Route10_PokemonCenter_1F_EventObjects, Route10_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 Route10_PokemonCenter_2F_EventObjects:
@@ -6368,7 +6368,7 @@ Route10_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_Route10_PokemonCenter_2F::
+Route10_PokemonCenter_2F_MapEvents::
 	map_events Route10_PokemonCenter_2F_EventObjects, Route10_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 Route11_EastEntrance_1F_EventObjects:
@@ -6382,7 +6382,7 @@ Route11_EastEntrance_1F_MapWarps:
 	warp_def 11, 7, 3, 2, 797
 	warp_def 9, 10, 3, 0, 5633
 
-gMapEvents_Route11_EastEntrance_1F::
+Route11_EastEntrance_1F_MapEvents::
 	map_events Route11_EastEntrance_1F_EventObjects, Route11_EastEntrance_1F_MapWarps, 0x0, 0x0
 
 Route11_EastEntrance_2F_EventObjects:
@@ -6396,7 +6396,7 @@ Route11_EastEntrance_2F_MapBGEvents:
 	bg_event 4, 1, 0, 0, 0, Route11_EastEntrance_2F_EventScript_16FD35
 	bg_event 8, 1, 0, 0, 0, Route11_EastEntrance_2F_EventScript_16FD53
 
-gMapEvents_Route11_EastEntrance_2F::
+Route11_EastEntrance_2F_MapEvents::
 	map_events Route11_EastEntrance_2F_EventObjects, Route11_EastEntrance_2F_MapWarps, 0x0, Route11_EastEntrance_2F_MapBGEvents
 
 Route12_NorthEntrance_1F_EventObjects:
@@ -6409,7 +6409,7 @@ Route12_NorthEntrance_1F_MapWarps:
 	warp_def 6, 11, 3, 3, 798
 	warp_def 8, 10, 3, 0, 5889
 
-gMapEvents_Route12_NorthEntrance_1F::
+Route12_NorthEntrance_1F_MapEvents::
 	map_events Route12_NorthEntrance_1F_EventObjects, Route12_NorthEntrance_1F_MapWarps, 0x0, 0x0
 
 Route12_NorthEntrance_2F_EventObjects:
@@ -6422,7 +6422,7 @@ Route12_NorthEntrance_2F_MapBGEvents:
 	bg_event 4, 1, 0, 0, 0, Route12_NorthEntrance_2F_EventScript_16FE78
 	bg_event 8, 1, 0, 0, 0, Route12_NorthEntrance_2F_EventScript_16FE81
 
-gMapEvents_Route12_NorthEntrance_2F::
+Route12_NorthEntrance_2F_MapEvents::
 	map_events Route12_NorthEntrance_2F_EventObjects, Route12_NorthEntrance_2F_MapWarps, 0x0, Route12_NorthEntrance_2F_MapBGEvents
 
 Route12_FishingHouse_EventObjects:
@@ -6436,7 +6436,7 @@ Route12_FishingHouse_MapWarps:
 Route12_FishingHouse_MapBGEvents:
 	bg_event 9, 1, 0, 0, 0, Route12_FishingHouse_EventScript_170067
 
-gMapEvents_Route12_FishingHouse::
+Route12_FishingHouse_MapEvents::
 	map_events Route12_FishingHouse_EventObjects, Route12_FishingHouse_MapWarps, 0x0, Route12_FishingHouse_MapBGEvents
 
 Route15_WestEntrance_1F_EventObjects:
@@ -6449,7 +6449,7 @@ Route15_WestEntrance_1F_MapWarps:
 	warp_def 11, 7, 3, 1, 801
 	warp_def 9, 10, 3, 0, 6145
 
-gMapEvents_Route15_WestEntrance_1F::
+Route15_WestEntrance_1F_MapEvents::
 	map_events Route15_WestEntrance_1F_EventObjects, Route15_WestEntrance_1F_MapWarps, 0x0, 0x0
 
 Route15_WestEntrance_2F_EventObjects:
@@ -6462,7 +6462,7 @@ Route15_WestEntrance_2F_MapBGEvents:
 	bg_event 4, 1, 0, 0, 0, Route15_WestEntrance_2F_EventScript_170093
 	bg_event 8, 1, 0, 0, 0, Route15_WestEntrance_2F_EventScript_1700B0
 
-gMapEvents_Route15_WestEntrance_2F::
+Route15_WestEntrance_2F_MapEvents::
 	map_events Route15_WestEntrance_2F_EventObjects, Route15_WestEntrance_2F_MapWarps, 0x0, Route15_WestEntrance_2F_MapBGEvents
 
 Route16_House_EventObjects:
@@ -6474,7 +6474,7 @@ Route16_House_MapWarps:
 	warp_def 4, 7, 3, 0, 802
 	warp_def 5, 7, 3, 0, 802
 
-gMapEvents_Route16_House::
+Route16_House_MapEvents::
 	map_events Route16_House_EventObjects, Route16_House_MapWarps, 0x0, 0x0
 
 Route16_NorthEntrance_1F_EventObjects:
@@ -6501,7 +6501,7 @@ Route16_NorthEntrance_1F_MapCoordEvents:
 	coord_event 6, 13, 3, 0, 16385, 0, 0, Route16_NorthEntrance_1F_EventScript_170208
 	coord_event 6, 14, 3, 0, 16385, 0, 0, Route16_NorthEntrance_1F_EventScript_170214
 
-gMapEvents_Route16_NorthEntrance_1F::
+Route16_NorthEntrance_1F_MapEvents::
 	map_events Route16_NorthEntrance_1F_EventObjects, Route16_NorthEntrance_1F_MapWarps, Route16_NorthEntrance_1F_MapCoordEvents, 0x0
 
 Route16_NorthEntrance_2F_EventObjects:
@@ -6516,7 +6516,7 @@ Route16_NorthEntrance_2F_MapBGEvents:
 	bg_event 4, 1, 0, 0, 0, Route16_NorthEntrance_2F_EventScript_1702D1
 	bg_event 8, 1, 0, 0, 0, Route16_NorthEntrance_2F_EventScript_1702DA
 
-gMapEvents_Route16_NorthEntrance_2F::
+Route16_NorthEntrance_2F_MapEvents::
 	map_events Route16_NorthEntrance_2F_EventObjects, Route16_NorthEntrance_2F_MapWarps, 0x0, Route16_NorthEntrance_2F_MapBGEvents
 
 Route18_EastEntrance_1F_EventObjects:
@@ -6540,7 +6540,7 @@ Route18_EastEntrance_1F_MapCoordEvents:
 	coord_event 1, 5, 3, 0, 16478, 0, 0, Route18_EastEntrance_1F_EventScript_1A77C1
 	coord_event 1, 7, 3, 0, 16478, 0, 0, Route18_EastEntrance_1F_EventScript_1A77C1
 
-gMapEvents_Route18_EastEntrance_1F::
+Route18_EastEntrance_1F_MapEvents::
 	map_events Route18_EastEntrance_1F_EventObjects, Route18_EastEntrance_1F_MapWarps, Route18_EastEntrance_1F_MapCoordEvents, 0x0
 
 Route18_EastEntrance_2F_EventObjects:
@@ -6553,11 +6553,11 @@ Route18_EastEntrance_2F_MapBGEvents:
 	bg_event 4, 1, 0, 0, 0, Route18_EastEntrance_2F_EventScript_17046C
 	bg_event 8, 1, 0, 0, 0, Route18_EastEntrance_2F_EventScript_170475
 
-gMapEvents_Route18_EastEntrance_2F::
+Route18_EastEntrance_2F_MapEvents::
 	map_events Route18_EastEntrance_2F_EventObjects, Route18_EastEntrance_2F_MapWarps, 0x0, Route18_EastEntrance_2F_MapBGEvents
 
 
-gMapEvents_UnusedHouse_27_00::
+UnusedHouse_27_00_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 
 Route22_NorthEntrance_EventObjects:
@@ -6572,11 +6572,11 @@ Route22_NorthEntrance_MapWarps:
 Route22_NorthEntrance_MapCoordEvents:
 	coord_event 7, 2, 3, 0, 16479, 0, 0, Route22_NorthEntrance_EventScript_17050D
 
-gMapEvents_Route22_NorthEntrance::
+Route22_NorthEntrance_MapEvents::
 	map_events Route22_NorthEntrance_EventObjects, Route22_NorthEntrance_MapWarps, Route22_NorthEntrance_MapCoordEvents, 0x0
 
 
-gMapEvents_UnusedHouse_29_00::
+UnusedHouse_29_00_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 
 Route25_SeaCottage_EventObjects:
@@ -6591,7 +6591,7 @@ Route25_SeaCottage_MapWarps:
 Route25_SeaCottage_MapBGEvents:
 	bg_event 4, 5, 0, 1, 0, Route25_SeaCottage_EventScript_1706DD
 
-gMapEvents_Route25_SeaCottage::
+Route25_SeaCottage_MapEvents::
 	map_events Route25_SeaCottage_EventObjects, Route25_SeaCottage_MapWarps, 0x0, Route25_SeaCottage_MapBGEvents
 
 SevenIsland_House_Room1_EventObjects:
@@ -6604,7 +6604,7 @@ SevenIsland_House_Room1_MapWarps:
 SevenIsland_House_Room1_MapBGEvents:
 	bg_event 4, 1, 0, 0, 0, SevenIsland_House_Room1_EventScript_170A75
 
-gMapEvents_SevenIsland_House_Room1::
+SevenIsland_House_Room1_MapEvents::
 	map_events SevenIsland_House_Room1_EventObjects, SevenIsland_House_Room1_MapWarps, 0x0, SevenIsland_House_Room1_MapBGEvents
 
 SevenIsland_House_Room2_EventObjects:
@@ -6613,7 +6613,7 @@ SevenIsland_House_Room2_EventObjects:
 SevenIsland_House_Room2_MapWarps:
 	warp_def 3, 1, 0, 1, 7936
 
-gMapEvents_SevenIsland_House_Room2::
+SevenIsland_House_Room2_MapEvents::
 	map_events SevenIsland_House_Room2_EventObjects, SevenIsland_House_Room2_MapWarps, 0x0, 0x0
 
 SevenIsland_Mart_EventObjects:
@@ -6625,7 +6625,7 @@ SevenIsland_Mart_EventObjects:
 SevenIsland_Mart_MapWarps:
 	warp_def 4, 7, 3, 1, 785
 
-gMapEvents_SevenIsland_Mart::
+SevenIsland_Mart_MapEvents::
 	map_events SevenIsland_Mart_EventObjects, SevenIsland_Mart_MapWarps, 0x0, 0x0
 
 SevenIsland_PokemonCenter_1F_EventObjects:
@@ -6640,7 +6640,7 @@ SevenIsland_PokemonCenter_1F_MapWarps:
 	warp_def 7, 8, 3, 2, 785
 	warp_def 1, 6, 4, 0, 7940
 
-gMapEvents_SevenIsland_PokemonCenter_1F::
+SevenIsland_PokemonCenter_1F_MapEvents::
 	map_events SevenIsland_PokemonCenter_1F_EventObjects, SevenIsland_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 SevenIsland_PokemonCenter_2F_EventObjects:
@@ -6654,11 +6654,11 @@ SevenIsland_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_SevenIsland_PokemonCenter_2F::
+SevenIsland_PokemonCenter_2F_MapEvents::
 	map_events SevenIsland_PokemonCenter_2F_EventObjects, SevenIsland_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 
-gMapEvents_UnusedHouse_31_05::
+UnusedHouse_31_05_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 
 SevenIsland_Harbor_EventObjects:
@@ -6668,7 +6668,7 @@ SevenIsland_Harbor_EventObjects:
 SevenIsland_Harbor_MapWarps:
 	warp_def 8, 2, 3, 3, 785
 
-gMapEvents_SevenIsland_Harbor::
+SevenIsland_Harbor_MapEvents::
 	map_events SevenIsland_Harbor_EventObjects, SevenIsland_Harbor_MapWarps, 0x0, 0x0
 
 OneIsland_PokemonCenter_1F_EventObjects:
@@ -6700,7 +6700,7 @@ OneIsland_PokemonCenter_1F_MapBGEvents:
 	bg_event 16, 5, 0, 0, 0, OneIsland_PokemonCenter_1F_EventScript_171179
 	bg_event 17, 5, 0, 0, 0, OneIsland_PokemonCenter_1F_EventScript_171179
 
-gMapEvents_OneIsland_PokemonCenter_1F::
+OneIsland_PokemonCenter_1F_MapEvents::
 	map_events OneIsland_PokemonCenter_1F_EventObjects, OneIsland_PokemonCenter_1F_MapWarps, OneIsland_PokemonCenter_1F_MapCoordEvents, OneIsland_PokemonCenter_1F_MapBGEvents
 
 OneIsland_PokemonCenter_2F_EventObjects:
@@ -6714,7 +6714,7 @@ OneIsland_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_OneIsland_PokemonCenter_2F::
+OneIsland_PokemonCenter_2F_MapEvents::
 	map_events OneIsland_PokemonCenter_2F_EventObjects, OneIsland_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 OneIsland_House1_EventObjects:
@@ -6724,7 +6724,7 @@ OneIsland_House1_EventObjects:
 OneIsland_House1_MapWarps:
 	warp_def 4, 7, 3, 1, 780
 
-gMapEvents_OneIsland_House1::
+OneIsland_House1_MapEvents::
 	map_events OneIsland_House1_EventObjects, OneIsland_House1_MapWarps, 0x0, 0x0
 
 OneIsland_House2_EventObjects:
@@ -6733,7 +6733,7 @@ OneIsland_House2_EventObjects:
 OneIsland_House2_MapWarps:
 	warp_def 4, 7, 3, 2, 780
 
-gMapEvents_OneIsland_House2::
+OneIsland_House2_MapEvents::
 	map_events OneIsland_House2_EventObjects, OneIsland_House2_MapWarps, 0x0, 0x0
 
 OneIsland_Harbor_EventObjects:
@@ -6743,7 +6743,7 @@ OneIsland_Harbor_EventObjects:
 OneIsland_Harbor_MapWarps:
 	warp_def 8, 2, 3, 3, 780
 
-gMapEvents_OneIsland_Harbor::
+OneIsland_Harbor_MapEvents::
 	map_events OneIsland_Harbor_EventObjects, OneIsland_Harbor_MapWarps, 0x0, 0x0
 
 TwoIsland_JoyfulGameCorner_EventObjects:
@@ -6759,7 +6759,7 @@ TwoIsland_JoyfulGameCorner_MapBGEvents:
 	bg_event 1, 1, 0, 0, 0, TwoIsland_JoyfulGameCorner_EventScript_1BC2E7
 	bg_event 0, 1, 0, 0, 0, TwoIsland_JoyfulGameCorner_EventScript_1BC2FC
 
-gMapEvents_TwoIsland_JoyfulGameCorner::
+TwoIsland_JoyfulGameCorner_MapEvents::
 	map_events TwoIsland_JoyfulGameCorner_EventObjects, TwoIsland_JoyfulGameCorner_MapWarps, 0x0, TwoIsland_JoyfulGameCorner_MapBGEvents
 
 TwoIsland_House_EventObjects:
@@ -6768,7 +6768,7 @@ TwoIsland_House_EventObjects:
 TwoIsland_House_MapWarps:
 	warp_def 4, 7, 3, 1, 781
 
-gMapEvents_TwoIsland_House::
+TwoIsland_House_MapEvents::
 	map_events TwoIsland_House_EventObjects, TwoIsland_House_MapWarps, 0x0, 0x0
 
 TwoIsland_PokemonCenter_1F_EventObjects:
@@ -6780,7 +6780,7 @@ TwoIsland_PokemonCenter_1F_MapWarps:
 	warp_def 7, 8, 3, 2, 781
 	warp_def 1, 6, 4, 0, 8451
 
-gMapEvents_TwoIsland_PokemonCenter_1F::
+TwoIsland_PokemonCenter_1F_MapEvents::
 	map_events TwoIsland_PokemonCenter_1F_EventObjects, TwoIsland_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 TwoIsland_PokemonCenter_2F_EventObjects:
@@ -6794,7 +6794,7 @@ TwoIsland_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_TwoIsland_PokemonCenter_2F::
+TwoIsland_PokemonCenter_2F_MapEvents::
 	map_events TwoIsland_PokemonCenter_2F_EventObjects, TwoIsland_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 TwoIsland_Harbor_EventObjects:
@@ -6804,7 +6804,7 @@ TwoIsland_Harbor_EventObjects:
 TwoIsland_Harbor_MapWarps:
 	warp_def 8, 2, 3, 3, 781
 
-gMapEvents_TwoIsland_Harbor::
+TwoIsland_Harbor_MapEvents::
 	map_events TwoIsland_Harbor_EventObjects, TwoIsland_Harbor_MapWarps, 0x0, 0x0
 
 ThreeIsland_House1_EventObjects:
@@ -6816,7 +6816,7 @@ ThreeIsland_House1_MapWarps:
 ThreeIsland_House1_MapBGEvents:
 	bg_event 2, 1, 0, 0, 0, ThreeIsland_House1_EventScript_171829
 
-gMapEvents_ThreeIsland_House1::
+ThreeIsland_House1_MapEvents::
 	map_events ThreeIsland_House1_EventObjects, ThreeIsland_House1_MapWarps, 0x0, ThreeIsland_House1_MapBGEvents
 
 ThreeIsland_PokemonCenter_1F_EventObjects:
@@ -6829,7 +6829,7 @@ ThreeIsland_PokemonCenter_1F_MapWarps:
 	warp_def 7, 8, 3, 1, 782
 	warp_def 1, 6, 4, 0, 8706
 
-gMapEvents_ThreeIsland_PokemonCenter_1F::
+ThreeIsland_PokemonCenter_1F_MapEvents::
 	map_events ThreeIsland_PokemonCenter_1F_EventObjects, ThreeIsland_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 ThreeIsland_PokemonCenter_2F_EventObjects:
@@ -6843,7 +6843,7 @@ ThreeIsland_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_ThreeIsland_PokemonCenter_2F::
+ThreeIsland_PokemonCenter_2F_MapEvents::
 	map_events ThreeIsland_PokemonCenter_2F_EventObjects, ThreeIsland_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 ThreeIsland_Mart_EventObjects:
@@ -6855,7 +6855,7 @@ ThreeIsland_Mart_EventObjects:
 ThreeIsland_Mart_MapWarps:
 	warp_def 4, 7, 3, 2, 782
 
-gMapEvents_ThreeIsland_Mart::
+ThreeIsland_Mart_MapEvents::
 	map_events ThreeIsland_Mart_EventObjects, ThreeIsland_Mart_MapWarps, 0x0, 0x0
 
 ThreeIsland_House2_EventObjects:
@@ -6865,7 +6865,7 @@ ThreeIsland_House2_EventObjects:
 ThreeIsland_House2_MapWarps:
 	warp_def 4, 7, 3, 3, 782
 
-gMapEvents_ThreeIsland_House2::
+ThreeIsland_House2_MapEvents::
 	map_events ThreeIsland_House2_EventObjects, ThreeIsland_House2_MapWarps, 0x0, 0x0
 
 ThreeIsland_House3_EventObjects:
@@ -6874,7 +6874,7 @@ ThreeIsland_House3_EventObjects:
 ThreeIsland_House3_MapWarps:
 	warp_def 4, 7, 3, 4, 782
 
-gMapEvents_ThreeIsland_House3::
+ThreeIsland_House3_MapEvents::
 	map_events ThreeIsland_House3_EventObjects, ThreeIsland_House3_MapWarps, 0x0, 0x0
 
 ThreeIsland_House4_EventObjects:
@@ -6884,7 +6884,7 @@ ThreeIsland_House4_EventObjects:
 ThreeIsland_House4_MapWarps:
 	warp_def 4, 7, 3, 5, 782
 
-gMapEvents_ThreeIsland_House4::
+ThreeIsland_House4_MapEvents::
 	map_events ThreeIsland_House4_EventObjects, ThreeIsland_House4_MapWarps, 0x0, 0x0
 
 ThreeIsland_House5_EventObjects:
@@ -6893,7 +6893,7 @@ ThreeIsland_House5_EventObjects:
 ThreeIsland_House5_MapWarps:
 	warp_def 4, 7, 3, 6, 782
 
-gMapEvents_ThreeIsland_House5::
+ThreeIsland_House5_MapEvents::
 	map_events ThreeIsland_House5_EventObjects, ThreeIsland_House5_MapWarps, 0x0, 0x0
 
 FourIsland_PokemonDayCare_EventObjects:
@@ -6902,7 +6902,7 @@ FourIsland_PokemonDayCare_EventObjects:
 FourIsland_PokemonDayCare_MapWarps:
 	warp_def 4, 7, 3, 1, 783
 
-gMapEvents_FourIsland_PokemonDayCare::
+FourIsland_PokemonDayCare_MapEvents::
 	map_events FourIsland_PokemonDayCare_EventObjects, FourIsland_PokemonDayCare_MapWarps, 0x0, 0x0
 
 FourIsland_PokemonCenter_1F_EventObjects:
@@ -6919,7 +6919,7 @@ FourIsland_PokemonCenter_1F_MapBGEvents:
 	bg_event 3, 1, 0, 1, 0, FourIsland_PokemonCenter_1F_EventScript_1ACDD0
 	bg_event 2, 1, 0, 1, 0, FourIsland_PokemonCenter_1F_EventScript_1ACDD0
 
-gMapEvents_FourIsland_PokemonCenter_1F::
+FourIsland_PokemonCenter_1F_MapEvents::
 	map_events FourIsland_PokemonCenter_1F_EventObjects, FourIsland_PokemonCenter_1F_MapWarps, 0x0, FourIsland_PokemonCenter_1F_MapBGEvents
 
 FourIsland_PokemonCenter_2F_EventObjects:
@@ -6933,7 +6933,7 @@ FourIsland_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_FourIsland_PokemonCenter_2F::
+FourIsland_PokemonCenter_2F_MapEvents::
 	map_events FourIsland_PokemonCenter_2F_EventObjects, FourIsland_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 FourIsland_House1_EventObjects:
@@ -6943,7 +6943,7 @@ FourIsland_House1_EventObjects:
 FourIsland_House1_MapWarps:
 	warp_def 4, 7, 3, 2, 783
 
-gMapEvents_FourIsland_House1::
+FourIsland_House1_MapEvents::
 	map_events FourIsland_House1_EventObjects, FourIsland_House1_MapWarps, 0x0, 0x0
 
 FourIsland_LoreleisHouse_EventObjects:
@@ -6966,7 +6966,7 @@ FourIsland_LoreleisHouse_EventObjects:
 FourIsland_LoreleisHouse_MapWarps:
 	warp_def 4, 7, 3, 4, 783
 
-gMapEvents_FourIsland_LoreleisHouse::
+FourIsland_LoreleisHouse_MapEvents::
 	map_events FourIsland_LoreleisHouse_EventObjects, FourIsland_LoreleisHouse_MapWarps, 0x0, 0x0
 
 FourIsland_Harbor_EventObjects:
@@ -6976,7 +6976,7 @@ FourIsland_Harbor_EventObjects:
 FourIsland_Harbor_MapWarps:
 	warp_def 8, 2, 3, 6, 783
 
-gMapEvents_FourIsland_Harbor::
+FourIsland_Harbor_MapEvents::
 	map_events FourIsland_Harbor_EventObjects, FourIsland_Harbor_MapWarps, 0x0, 0x0
 
 FourIsland_House2_EventObjects:
@@ -6985,7 +6985,7 @@ FourIsland_House2_EventObjects:
 FourIsland_House2_MapWarps:
 	warp_def 4, 7, 3, 5, 783
 
-gMapEvents_FourIsland_House2::
+FourIsland_House2_MapEvents::
 	map_events FourIsland_House2_EventObjects, FourIsland_House2_MapWarps, 0x0, 0x0
 
 FourIsland_Mart_EventObjects:
@@ -6996,7 +6996,7 @@ FourIsland_Mart_EventObjects:
 FourIsland_Mart_MapWarps:
 	warp_def 4, 7, 3, 7, 783
 
-gMapEvents_FourIsland_Mart::
+FourIsland_Mart_MapEvents::
 	map_events FourIsland_Mart_EventObjects, FourIsland_Mart_MapWarps, 0x0, 0x0
 
 FiveIsland_PokemonCenter_1F_EventObjects:
@@ -7010,7 +7010,7 @@ FiveIsland_PokemonCenter_1F_MapWarps:
 	warp_def 7, 8, 3, 1, 784
 	warp_def 1, 6, 4, 0, 9217
 
-gMapEvents_FiveIsland_PokemonCenter_1F::
+FiveIsland_PokemonCenter_1F_MapEvents::
 	map_events FiveIsland_PokemonCenter_1F_EventObjects, FiveIsland_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 FiveIsland_PokemonCenter_2F_EventObjects:
@@ -7024,7 +7024,7 @@ FiveIsland_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_FiveIsland_PokemonCenter_2F::
+FiveIsland_PokemonCenter_2F_MapEvents::
 	map_events FiveIsland_PokemonCenter_2F_EventObjects, FiveIsland_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 FiveIsland_Harbor_EventObjects:
@@ -7034,7 +7034,7 @@ FiveIsland_Harbor_EventObjects:
 FiveIsland_Harbor_MapWarps:
 	warp_def 8, 2, 3, 0, 784
 
-gMapEvents_FiveIsland_Harbor::
+FiveIsland_Harbor_MapEvents::
 	map_events FiveIsland_Harbor_EventObjects, FiveIsland_Harbor_MapWarps, 0x0, 0x0
 
 FiveIsland_House1_EventObjects:
@@ -7043,7 +7043,7 @@ FiveIsland_House1_EventObjects:
 FiveIsland_House1_MapWarps:
 	warp_def 4, 7, 3, 2, 784
 
-gMapEvents_FiveIsland_House1::
+FiveIsland_House1_MapEvents::
 	map_events FiveIsland_House1_EventObjects, FiveIsland_House1_MapWarps, 0x0, 0x0
 
 FiveIsland_House2_EventObjects:
@@ -7052,7 +7052,7 @@ FiveIsland_House2_EventObjects:
 FiveIsland_House2_MapWarps:
 	warp_def 4, 7, 3, 3, 784
 
-gMapEvents_FiveIsland_House2::
+FiveIsland_House2_MapEvents::
 	map_events FiveIsland_House2_EventObjects, FiveIsland_House2_MapWarps, 0x0, 0x0
 
 SixIsland_PokemonCenter_1F_EventObjects:
@@ -7065,7 +7065,7 @@ SixIsland_PokemonCenter_1F_MapWarps:
 	warp_def 7, 8, 3, 1, 786
 	warp_def 1, 6, 4, 0, 9473
 
-gMapEvents_SixIsland_PokemonCenter_1F::
+SixIsland_PokemonCenter_1F_MapEvents::
 	map_events SixIsland_PokemonCenter_1F_EventObjects, SixIsland_PokemonCenter_1F_MapWarps, 0x0, 0x0
 
 SixIsland_PokemonCenter_2F_EventObjects:
@@ -7079,7 +7079,7 @@ SixIsland_PokemonCenter_2F_MapWarps:
 	warp_def 5, 1, 0, 0, 4
 	warp_def 9, 1, 0, 0, 1
 
-gMapEvents_SixIsland_PokemonCenter_2F::
+SixIsland_PokemonCenter_2F_MapEvents::
 	map_events SixIsland_PokemonCenter_2F_EventObjects, SixIsland_PokemonCenter_2F_MapWarps, 0x0, 0x0
 
 SixIsland_Harbor_EventObjects:
@@ -7089,7 +7089,7 @@ SixIsland_Harbor_EventObjects:
 SixIsland_Harbor_MapWarps:
 	warp_def 8, 2, 3, 0, 786
 
-gMapEvents_SixIsland_Harbor::
+SixIsland_Harbor_MapEvents::
 	map_events SixIsland_Harbor_EventObjects, SixIsland_Harbor_MapWarps, 0x0, 0x0
 
 SixIsland_House_EventObjects:
@@ -7098,7 +7098,7 @@ SixIsland_House_EventObjects:
 SixIsland_House_MapWarps:
 	warp_def 4, 7, 3, 2, 786
 
-gMapEvents_SixIsland_House::
+SixIsland_House_MapEvents::
 	map_events SixIsland_House_EventObjects, SixIsland_House_MapWarps, 0x0, 0x0
 
 SixIsland_Mart_EventObjects:
@@ -7109,7 +7109,7 @@ SixIsland_Mart_EventObjects:
 SixIsland_Mart_MapWarps:
 	warp_def 4, 7, 3, 3, 786
 
-gMapEvents_SixIsland_Mart::
+SixIsland_Mart_MapEvents::
 	map_events SixIsland_Mart_EventObjects, SixIsland_Mart_MapWarps, 0x0, 0x0
 
 ThreeIsland_Harbor_EventObjects:
@@ -7119,7 +7119,7 @@ ThreeIsland_Harbor_EventObjects:
 ThreeIsland_Harbor_MapWarps:
 	warp_def 8, 2, 3, 2, 817
 
-gMapEvents_ThreeIsland_Harbor::
+ThreeIsland_Harbor_MapEvents::
 	map_events ThreeIsland_Harbor_EventObjects, ThreeIsland_Harbor_MapWarps, 0x0, 0x0
 
 FiveIsland_ResortGorgeous_House_EventObjects:
@@ -7133,7 +7133,7 @@ FiveIsland_ResortGorgeous_House_MapBGEvents:
 	bg_event 9, 1, 0, 1, 0, FiveIsland_ResortGorgeous_House_EventScript_1ACF2C
 	bg_event 8, 1, 0, 1, 0, FiveIsland_ResortGorgeous_House_EventScript_1ACF2C
 
-gMapEvents_FiveIsland_ResortGorgeous_House::
+FiveIsland_ResortGorgeous_House_MapEvents::
 	map_events FiveIsland_ResortGorgeous_House_EventObjects, FiveIsland_ResortGorgeous_House_MapWarps, 0x0, FiveIsland_ResortGorgeous_House_MapBGEvents
 
 TwoIsland_CapeBrink_House_EventObjects:
@@ -7142,7 +7142,7 @@ TwoIsland_CapeBrink_House_EventObjects:
 TwoIsland_CapeBrink_House_MapWarps:
 	warp_def 4, 7, 3, 0, 815
 
-gMapEvents_TwoIsland_CapeBrink_House::
+TwoIsland_CapeBrink_House_MapEvents::
 	map_events TwoIsland_CapeBrink_House_EventObjects, TwoIsland_CapeBrink_House_MapWarps, 0x0, 0x0
 
 SixIsland_WaterPath_House1_EventObjects:
@@ -7154,7 +7154,7 @@ SixIsland_WaterPath_House1_MapWarps:
 SixIsland_WaterPath_House1_MapBGEvents:
 	bg_event 9, 1, 0, 0, 0, SixIsland_WaterPath_House1_EventScript_172157
 
-gMapEvents_SixIsland_WaterPath_House1::
+SixIsland_WaterPath_House1_MapEvents::
 	map_events SixIsland_WaterPath_House1_EventObjects, SixIsland_WaterPath_House1_MapWarps, 0x0, SixIsland_WaterPath_House1_MapBGEvents
 
 SixIsland_WaterPath_House2_EventObjects:
@@ -7163,7 +7163,7 @@ SixIsland_WaterPath_House2_EventObjects:
 SixIsland_WaterPath_House2_MapWarps:
 	warp_def 4, 7, 3, 1, 828
 
-gMapEvents_SixIsland_WaterPath_House2::
+SixIsland_WaterPath_House2_MapEvents::
 	map_events SixIsland_WaterPath_House2_EventObjects, SixIsland_WaterPath_House2_MapWarps, 0x0, 0x0
 
 SevenIsland_SevaultCanyon_House_EventObjects:
@@ -7174,6 +7174,6 @@ SevenIsland_SevaultCanyon_House_EventObjects:
 SevenIsland_SevaultCanyon_House_MapWarps:
 	warp_def 4, 7, 3, 1, 832
 
-gMapEvents_SevenIsland_SevaultCanyon_House::
+SevenIsland_SevaultCanyon_House_MapEvents::
 	map_events SevenIsland_SevaultCanyon_House_EventObjects, SevenIsland_SevaultCanyon_House_MapWarps, 0x0, 0x0
 

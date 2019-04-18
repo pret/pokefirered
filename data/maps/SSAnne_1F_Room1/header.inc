@@ -1,7 +1,7 @@
 SSAnne_1F_Room1:: @ 834F364
     .4byte SSAnne_Room1_Layout @ 0x8319E74
-    .4byte gMapEvents_SSAnne_1F_Room1 @ 0x83AECEC
-    .4byte gMapScripts_SSAnne_1F_Room1 @ 0x8160BDB
+    .4byte SSAnne_1F_Room1_MapEvents @ 0x83AECEC
+    .4byte SSAnne_1F_Room1_MapScripts @ 0x8160BDB
     .4byte NULL
     .2byte BGM_FRLG_SS_ANNE
     .2byte 177

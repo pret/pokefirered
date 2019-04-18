@@ -1,7 +1,7 @@
 VictoryRoad_1F:: @ 834F658
     .4byte VictoryRoad_1F_Layout @ 0x83043CC
-    .4byte gMapEvents_VictoryRoad_1F @ 0x83AF5C0
-    .4byte gMapScripts_VictoryRoad_1F @ 0x8160F05
+    .4byte VictoryRoad_1F_MapEvents @ 0x83AF5C0
+    .4byte VictoryRoad_1F_MapScripts @ 0x8160F05
     .4byte NULL
     .2byte BGM_FRLG_MT_MOON
     .2byte 125

@@ -1,7 +1,7 @@
 SixIsland_RuinValley:: @ 8350CC4
     .4byte SixIsland_RuinValley_Layout @ 0x83302D8
-    .4byte gMapEvents_SixIsland_RuinValley @ 0x83B92A0
-    .4byte gMapScripts_SixIsland_RuinValley @ 0x8168B53
+    .4byte SixIsland_RuinValley_MapEvents @ 0x83B92A0
+    .4byte SixIsland_RuinValley_MapScripts @ 0x8168B53
     .4byte SixIsland_RuinValley_MapConnections @ 0x8352E7C
     .2byte BGM_FRLG_SEVII_ISLANDS
     .2byte 253

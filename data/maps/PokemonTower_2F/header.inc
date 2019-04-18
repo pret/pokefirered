@@ -1,7 +1,7 @@
 PokemonTower_2F:: @ 834FBD0
     .4byte PokemonTower_2F_Layout @ 0x8316BD8
-    .4byte gMapEvents_PokemonTower_2F @ 0x83B22E4
-    .4byte gMapScripts_PokemonTower_2F @ 0x8163285
+    .4byte PokemonTower_2F_MapEvents @ 0x83B22E4
+    .4byte PokemonTower_2F_MapScripts @ 0x8163285
     .4byte NULL
     .2byte BGM_FRLG_POKEMON_TOWER
     .2byte 162

@@ -1,7 +1,7 @@
 NavelRock_Summit:: @ 8350394
     .4byte NavelRock_Summit_Layout @ 0x8348EB0
-    .4byte gMapEvents_NavelRock_Summit @ 0x83B4930
-    .4byte gMapScripts_NavelRock_Summit @ 0x8164F9F
+    .4byte NavelRock_Summit_MapEvents @ 0x83B4930
+    .4byte NavelRock_Summit_MapScripts @ 0x8164F9F
     .4byte NULL
     .2byte BGM_FRLG_MT_EMBER
     .2byte 345

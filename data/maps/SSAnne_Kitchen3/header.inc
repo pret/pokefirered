@@ -1,7 +1,7 @@
 SSAnne_Kitchen3:: @ 834FD58
     .4byte SSAnne_Kitchen3_Layout @ 0x833F304
-    .4byte gMapEvents_SSAnne_Kitchen3 @ 0x83B2EE0
-    .4byte gMapScripts_SSAnne_Kitchen3 @ 0x8163C45
+    .4byte SSAnne_Kitchen3_MapEvents @ 0x83B2EE0
+    .4byte SSAnne_Kitchen3_MapScripts @ 0x8163C45
     .4byte NULL
     .2byte BGM_FRLG_MT_EMBER
     .2byte 285

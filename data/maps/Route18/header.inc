@@ -1,7 +1,7 @@
 Route18:: @ 8350A08
     .4byte Route18_Layout @ 0x82F3750
-    .4byte gMapEvents_Route18 @ 0x83B7AA4
-    .4byte gMapScripts_Route18 @ 0x81681F6
+    .4byte Route18_MapEvents @ 0x83B7AA4
+    .4byte Route18_MapScripts @ 0x81681F6
     .4byte Route18_MapConnections @ 0x8352C20
     .2byte BGM_FRLG_ROUTE_3
     .2byte 106

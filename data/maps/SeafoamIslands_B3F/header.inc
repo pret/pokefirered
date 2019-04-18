@@ -1,7 +1,7 @@
 SeafoamIslands_B3F:: @ 834FB7C
     .4byte SeafoamIslands_B3F_Layout @ 0x8315CCC
-    .4byte gMapEvents_SeafoamIslands_B3F @ 0x83B20DC
-    .4byte gMapScripts_SeafoamIslands_B3F @ 0x8162F4F
+    .4byte SeafoamIslands_B3F_MapEvents @ 0x83B20DC
+    .4byte SeafoamIslands_B3F_MapScripts @ 0x8162F4F
     .4byte NULL
     .2byte BGM_FRLG_VIRIDIAN_FOREST
     .2byte 159

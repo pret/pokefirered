@@ -1,7 +1,7 @@
 SaffronCity_House2:: @ 83516B8
     .4byte House5_Layout @ 0x82D6AF0
-    .4byte gMapEvents_SaffronCity_House2 @ 0x83BD004
-    .4byte gMapScripts_SaffronCity_House2 @ 0x816EF73
+    .4byte SaffronCity_House2_MapEvents @ 0x83BD004
+    .4byte SaffronCity_House2_MapScripts @ 0x816EF73
     .4byte NULL
     .2byte BGM_FRLG_VIRIDIAN_CITY
     .2byte 21

@@ -1,7 +1,7 @@
 RocketHideout_B1F:: @ 834F6AC
     .4byte RocketHideout_B1F_Layout @ 0x8305C28
-    .4byte gMapEvents_RocketHideout_B1F @ 0x83AF9D8
-    .4byte gMapScripts_RocketHideout_B1F @ 0x8161195
+    .4byte RocketHideout_B1F_MapEvents @ 0x83AF9D8
+    .4byte RocketHideout_B1F_MapScripts @ 0x8161195
     .4byte NULL
     .2byte BGM_FRLG_ROCKET_HIDEOUT
     .2byte 128

@@ -1,7 +1,7 @@
 SilphCo_3F:: @ 834F770
     .4byte SilphCo_3F_Layout @ 0x8307E94
-    .4byte gMapEvents_SilphCo_3F @ 0x83AFF58
-    .4byte gMapScripts_SilphCo_3F @ 0x81616C5
+    .4byte SilphCo_3F_MapEvents @ 0x83AFF58
+    .4byte SilphCo_3F_MapScripts @ 0x81616C5
     .4byte NULL
     .2byte BGM_FRLG_SILPH
     .2byte 134

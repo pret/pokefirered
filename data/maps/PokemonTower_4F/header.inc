@@ -1,7 +1,7 @@
 PokemonTower_4F:: @ 834FC08
     .4byte PokemonTower_4F_Layout @ 0x83173A0
-    .4byte gMapEvents_PokemonTower_4F @ 0x83B241C
-    .4byte gMapScripts_PokemonTower_4F @ 0x81633EC
+    .4byte PokemonTower_4F_MapEvents @ 0x83B241C
+    .4byte PokemonTower_4F_MapScripts @ 0x81633EC
     .4byte NULL
     .2byte BGM_FRLG_POKEMON_TOWER
     .2byte 164

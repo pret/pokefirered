@@ -1,7 +1,7 @@
 VermilionCity_House2:: @ 8351178
     .4byte House1_Layout @ 0x82D5754
-    .4byte gMapEvents_VermilionCity_House2 @ 0x83BADEC
-    .4byte gMapScripts_VermilionCity_House2 @ 0x816B5D6
+    .4byte VermilionCity_House2_MapEvents @ 0x83BADEC
+    .4byte VermilionCity_House2_MapScripts @ 0x816B5D6
     .4byte NULL
     .2byte BGM_FRLG_VERMILION_CITY
     .2byte 6

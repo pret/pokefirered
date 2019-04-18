@@ -1,7 +1,7 @@
 FourIsland_PokemonDayCare:: @ 8351D64
     .4byte FourIsland_PokemonDayCare_Layout @ 0x833AFA8
-    .4byte gMapEvents_FourIsland_PokemonDayCare @ 0x83BEA64
-    .4byte gMapScripts_FourIsland_PokemonDayCare @ 0x817193F
+    .4byte FourIsland_PokemonDayCare_MapEvents @ 0x83BEA64
+    .4byte FourIsland_PokemonDayCare_MapScripts @ 0x817193F
     .4byte NULL
     .2byte BGM_FRLG_ISLAND_FOUR
     .2byte 277

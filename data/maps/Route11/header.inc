@@ -1,7 +1,7 @@
 Route11:: @ 8350944
     .4byte Route11_Layout @ 0x82ECF34
-    .4byte gMapEvents_Route11 @ 0x83B711C
-    .4byte gMapScripts_Route11 @ 0x8167FF6
+    .4byte Route11_MapEvents @ 0x83B711C
+    .4byte Route11_MapScripts @ 0x8167FF6
     .4byte Route11_MapConnections @ 0x8352B34
     .2byte BGM_FRLG_ROUTE_11
     .2byte 99

@@ -1,7 +1,7 @@
 CeruleanCity:: @ 835066C
     .4byte CeruleanCity_Layout @ 0x82E022C
-    .4byte gMapEvents_CeruleanCity @ 0x83B53E0
-    .4byte gMapScripts_CeruleanCity @ 0x8166471
+    .4byte CeruleanCity_MapEvents @ 0x83B53E0
+    .4byte CeruleanCity_MapScripts @ 0x8166471
     .4byte CeruleanCity_MapConnections @ 0x83527F0
     .2byte BGM_FRLG_CERULEAN_CITY
     .2byte 81

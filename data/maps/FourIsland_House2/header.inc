@@ -1,7 +1,7 @@
 FourIsland_House2:: @ 8351E0C
     .4byte House3_Layout @ 0x82D5CB8
-    .4byte gMapEvents_FourIsland_House2 @ 0x83BEDDC
-    .4byte gMapScripts_FourIsland_House2 @ 0x8171CAC
+    .4byte FourIsland_House2_MapEvents @ 0x83BEDDC
+    .4byte FourIsland_House2_MapScripts @ 0x8171CAC
     .4byte NULL
     .2byte BGM_FRLG_ISLAND_FOUR
     .2byte 11

@@ -1,7 +1,7 @@
 CinnabarIsland_PokemonLab_Lounge:: @ 8351568
     .4byte CinnabarIsland_PokemonLab_Lounge_Layout @ 0x831C974
-    .4byte gMapEvents_CinnabarIsland_PokemonLab_Lounge @ 0x83BC71C
-    .4byte gMapScripts_CinnabarIsland_PokemonLab_Lounge @ 0x816E2B8
+    .4byte CinnabarIsland_PokemonLab_Lounge_MapEvents @ 0x83BC71C
+    .4byte CinnabarIsland_PokemonLab_Lounge_MapScripts @ 0x816E2B8
     .4byte NULL
     .2byte BGM_FRLG_CINNABAR_ISLAND
     .2byte 204

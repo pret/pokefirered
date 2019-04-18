@@ -1,7 +1,7 @@
 SixIsland_DottedHole_B1F:: @ 834FEC4
     .4byte SixIsland_DottedHole_B1F_Layout @ 0x8343808
-    .4byte gMapEvents_SixIsland_DottedHole_B1F @ 0x83B3898
-    .4byte gMapScripts_SixIsland_DottedHole_B1F @ 0x81641B0
+    .4byte SixIsland_DottedHole_B1F_MapEvents @ 0x83B3898
+    .4byte SixIsland_DottedHole_B1F_MapScripts @ 0x81641B0
     .4byte NULL
     .2byte BGM_FRLG_TANOBY_RUINS
     .2byte 310

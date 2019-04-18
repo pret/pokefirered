@@ -1,7 +1,7 @@
 ViridianForest:: @ 834F214
     .4byte ViridianForest_Layout @ 0x82FE46C
-    .4byte gMapEvents_ViridianForest @ 0x83AE4D8
-    .4byte gMapScripts_ViridianForest @ 0x816051F
+    .4byte ViridianForest_MapEvents @ 0x83AE4D8
+    .4byte ViridianForest_MapScripts @ 0x816051F
     .4byte NULL
     .2byte BGM_FRLG_VIRIDIAN_FOREST
     .2byte 117

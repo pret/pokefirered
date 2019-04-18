@@ -1,7 +1,7 @@
 SafariZone_West:: @ 834F94C
     .4byte SafariZone_West_Layout @ 0x8310BC4
-    .4byte gMapEvents_SafariZone_West @ 0x83B1270
-    .4byte gMapScripts_SafariZone_West @ 0x81623C6
+    .4byte SafariZone_West_MapEvents @ 0x83B1270
+    .4byte SafariZone_West_MapScripts @ 0x81623C6
     .4byte NULL
     .2byte BGM_FRLG_SAFARI_ZONE
     .2byte 150

@@ -1,7 +1,7 @@
 DiglettsCave_NorthEntrance:: @ 834F604
     .4byte DiglettsCave_NorthEntrance_Layout @ 0x831EB94
-    .4byte gMapEvents_DiglettsCave_NorthEntrance @ 0x83AF46C
-    .4byte gMapScripts_DiglettsCave_NorthEntrance @ 0x8160EE7
+    .4byte DiglettsCave_NorthEntrance_MapEvents @ 0x83AF46C
+    .4byte DiglettsCave_NorthEntrance_MapScripts @ 0x8160EE7
     .4byte NULL
     .2byte BGM_FRLG_VIRIDIAN_FOREST
     .2byte 210

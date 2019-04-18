@@ -1,7 +1,7 @@
 SSAnne_1F_Room11:: @ 834FF50
     .4byte SSAnne_1F_Room11_Layout @ 0x8345030
-    .4byte gMapEvents_SSAnne_1F_Room11 @ 0x83B3B34
-    .4byte gMapScripts_SSAnne_1F_Room11 @ 0x8164559
+    .4byte SSAnne_1F_Room11_MapEvents @ 0x83B3B34
+    .4byte SSAnne_1F_Room11_MapScripts @ 0x8164559
     .4byte NULL
     .2byte BGM_FRLG_VIRIDIAN_FOREST
     .2byte 317

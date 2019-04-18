@@ -1,7 +1,7 @@
 Route7_EastEntrance:: @ 8351878
     .4byte SaffronCity_EastWestEntrance_Layout @ 0x831EAD0
-    .4byte gMapEvents_Route7_EastEntrance @ 0x83BD7D4
-    .4byte gMapScripts_Route7_EastEntrance @ 0x816FA8D
+    .4byte Route7_EastEntrance_MapEvents @ 0x83BD7D4
+    .4byte Route7_EastEntrance_MapScripts @ 0x816FA8D
     .4byte NULL
     .2byte BGM_FRLG_VIRIDIAN_CITY
     .2byte 209

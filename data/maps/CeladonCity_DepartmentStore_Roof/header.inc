@@ -1,7 +1,7 @@
 CeladonCity_DepartmentStore_Roof:: @ 8351274
     .4byte CeladonCity_DepartmentStore_Roof_Layout @ 0x831BEE4
-    .4byte gMapEvents_CeladonCity_DepartmentStore_Roof @ 0x83BB440
-    .4byte gMapScripts_CeladonCity_DepartmentStore_Roof @ 0x816BCCC
+    .4byte CeladonCity_DepartmentStore_Roof_MapEvents @ 0x83BB440
+    .4byte CeladonCity_DepartmentStore_Roof_MapScripts @ 0x816BCCC
     .4byte NULL
     .2byte BGM_FRLG_POKEMON_CENTER
     .2byte 197

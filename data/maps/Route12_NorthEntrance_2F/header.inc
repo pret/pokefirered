@@ -1,7 +1,7 @@
 Route12_NorthEntrance_2F:: @ 835193C
     .4byte Entrance_2F_Layout @ 0x8320804
-    .4byte gMapEvents_Route12_NorthEntrance_2F @ 0x83BDAF8
-    .4byte gMapScripts_Route12_NorthEntrance_2F @ 0x816FE77
+    .4byte Route12_NorthEntrance_2F_MapEvents @ 0x83BDAF8
+    .4byte Route12_NorthEntrance_2F_MapScripts @ 0x816FE77
     .4byte NULL
     .2byte BGM_FRLG_VIRIDIAN_CITY
     .2byte 220

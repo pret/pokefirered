@@ -1,7 +1,7 @@
 SevenIsland:: @ 83507F4
     .4byte SevenIsland_Layout @ 0x8323D48
-    .4byte gMapEvents_SevenIsland @ 0x83B657C
-    .4byte gMapScripts_SevenIsland @ 0x8167EB3
+    .4byte SevenIsland_MapEvents @ 0x83B657C
+    .4byte SevenIsland_MapScripts @ 0x8167EB3
     .4byte SevenIsland_MapConnections @ 0x83529C0
     .2byte BGM_FRLG_ISLAND_SIX
     .2byte 235

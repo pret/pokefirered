@@ -1,7 +1,7 @@
 PowerPlant:: @ 834FC78
     .4byte PowerPlant_Layout @ 0x8318EC0
-    .4byte gMapEvents_PowerPlant @ 0x83B285C
-    .4byte gMapScripts_PowerPlant @ 0x8163764
+    .4byte PowerPlant_MapEvents @ 0x83B285C
+    .4byte PowerPlant_MapScripts @ 0x8163764
     .4byte NULL
     .2byte BGM_FRLG_POKEMON_MANSION
     .2byte 168

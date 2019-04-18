@@ -1,7 +1,7 @@
 FourIsland_IcefallCave_Entrance:: @ 834FE1C
     .4byte FourIsland_IcefallCave_Entrance_Layout @ 0x8340E38
-    .4byte gMapEvents_FourIsland_IcefallCave_Entrance @ 0x83B3438
-    .4byte gMapScripts_FourIsland_IcefallCave_Entrance @ 0x8163D3A
+    .4byte FourIsland_IcefallCave_Entrance_MapEvents @ 0x83B3438
+    .4byte FourIsland_IcefallCave_Entrance_MapScripts @ 0x8163D3A
     .4byte NULL
     .2byte BGM_FRLG_MT_EMBER
     .2byte 293

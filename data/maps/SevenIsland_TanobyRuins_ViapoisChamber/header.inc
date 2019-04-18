@@ -1,7 +1,7 @@
 SevenIsland_TanobyRuins_ViapoisChamber:: @ 8350324
     .4byte SevenIsland_TanobyRuins_ViapoisChamber_Layout @ 0x834A0FC
-    .4byte gMapEvents_SevenIsland_TanobyRuins_ViapoisChamber @ 0x83B4740
-    .4byte gMapScripts_SevenIsland_TanobyRuins_ViapoisChamber @ 0x8164D1A
+    .4byte SevenIsland_TanobyRuins_ViapoisChamber_MapEvents @ 0x83B4740
+    .4byte SevenIsland_TanobyRuins_ViapoisChamber_MapScripts @ 0x8164D1A
     .4byte NULL
     .2byte BGM_FRLG_TANOBY_RUINS
     .2byte 363

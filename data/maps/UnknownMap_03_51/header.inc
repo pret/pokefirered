@@ -1,7 +1,7 @@
 UnknownMap_03_51:: @ 8350BAC
     .4byte UnknownMap_03_51_Layout @ 0x83283D0
-    .4byte gMapEvents_UnknownMap_03_51 @ 0x83B8B38
-    .4byte gMapScripts_UnknownMap_03_51 @ 0x81687E1
+    .4byte UnknownMap_03_51_MapEvents @ 0x83B8B38
+    .4byte UnknownMap_03_51_MapScripts @ 0x81687E1
     .4byte UnknownMap_03_51_MapConnections @ 0x8352DA0
     .2byte BGM_FRLG_SEVII_ISLANDS
     .2byte 243

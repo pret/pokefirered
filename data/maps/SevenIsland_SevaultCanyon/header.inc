@@ -1,7 +1,7 @@
 SevenIsland_SevaultCanyon:: @ 8350D18
     .4byte SevenIsland_SevaultCanyon_Layout @ 0x8333F44
-    .4byte gMapEvents_SevenIsland_SevaultCanyon @ 0x83B9618
-    .4byte gMapScripts_SevenIsland_SevaultCanyon @ 0x8168BFD
+    .4byte SevenIsland_SevaultCanyon_MapEvents @ 0x83B9618
+    .4byte SevenIsland_SevaultCanyon_MapScripts @ 0x8168BFD
     .4byte SevenIsland_SevaultCanyon_MapConnections @ 0x8352ED0
     .2byte BGM_FRLG_SEVII_ISLANDS
     .2byte 256

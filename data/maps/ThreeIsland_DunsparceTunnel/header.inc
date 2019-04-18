@@ -1,7 +1,7 @@
 ThreeIsland_DunsparceTunnel:: @ 8350340
     .4byte ThreeIsland_DunsparceTunnel_Layout @ 0x83451F8
-    .4byte gMapEvents_ThreeIsland_DunsparceTunnel @ 0x83B4788
-    .4byte gMapScripts_ThreeIsland_DunsparceTunnel @ 0x8164D26
+    .4byte ThreeIsland_DunsparceTunnel_MapEvents @ 0x83B4788
+    .4byte ThreeIsland_DunsparceTunnel_MapScripts @ 0x8164D26
     .4byte NULL
     .2byte BGM_FRLG_VIRIDIAN_FOREST
     .2byte 318

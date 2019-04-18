@@ -1,7 +1,7 @@
 SilphCo_Elevator:: @ 834F86C
     .4byte SilphCo_Elevator_Layout @ 0x8321330
-    .4byte gMapEvents_SilphCo_Elevator @ 0x83B0B6C
-    .4byte gMapScripts_SilphCo_Elevator @ 0x8161F6E
+    .4byte SilphCo_Elevator_MapEvents @ 0x83B0B6C
+    .4byte SilphCo_Elevator_MapScripts @ 0x8161F6E
     .4byte NULL
     .2byte BGM_FRLG_SILPH
     .2byte 229

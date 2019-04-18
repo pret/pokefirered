@@ -1,7 +1,7 @@
 SSAnne_1F_Room12:: @ 834FF6C
     .4byte SSAnne_1F_Room12_Layout @ 0x8347A50
-    .4byte gMapEvents_SSAnne_1F_Room12 @ 0x83B3B50
-    .4byte gMapScripts_SSAnne_1F_Room12 @ 0x81646A4
+    .4byte SSAnne_1F_Room12_MapEvents @ 0x83B3B50
+    .4byte SSAnne_1F_Room12_MapScripts @ 0x81646A4
     .4byte NULL
     .2byte BGM_FRLG_MT_EMBER
     .2byte 340

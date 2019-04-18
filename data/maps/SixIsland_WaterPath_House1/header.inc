@@ -1,7 +1,7 @@
 SixIsland_WaterPath_House1:: @ 8351FB0
     .4byte House4_Layout @ 0x82D6070
-    .4byte gMapEvents_SixIsland_WaterPath_House1 @ 0x83BF334
-    .4byte gMapScripts_SixIsland_WaterPath_House1 @ 0x817206C
+    .4byte SixIsland_WaterPath_House1_MapEvents @ 0x83BF334
+    .4byte SixIsland_WaterPath_House1_MapScripts @ 0x817206C
     .4byte NULL
     .2byte BGM_FRLG_CERULEAN_CITY
     .2byte 13

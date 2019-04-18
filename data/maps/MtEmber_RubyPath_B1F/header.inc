@@ -1,7 +1,7 @@
 MtEmber_RubyPath_B1F:: @ 834FD74
     .4byte MtEmber_RubyPath_B1F_Layout @ 0x833F524
-    .4byte gMapEvents_MtEmber_RubyPath_B1F @ 0x83B2F64
-    .4byte gMapScripts_MtEmber_RubyPath_B1F @ 0x8163C46
+    .4byte MtEmber_RubyPath_B1F_MapEvents @ 0x83B2F64
+    .4byte MtEmber_RubyPath_B1F_MapScripts @ 0x8163C46
     .4byte NULL
     .2byte BGM_FRLG_MT_EMBER
     .2byte 286

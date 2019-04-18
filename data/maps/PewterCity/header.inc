@@ -1,7 +1,7 @@
 PewterCity:: @ 8350650
     .4byte PewterCity_Layout @ 0x82DF308
-    .4byte gMapEvents_PewterCity @ 0x83B518C
-    .4byte gMapScripts_PewterCity @ 0x8165B8E
+    .4byte PewterCity_MapEvents @ 0x83B518C
+    .4byte PewterCity_MapScripts @ 0x8165B8E
     .4byte PewterCity_MapConnections @ 0x83527B8
     .2byte BGM_FRLG_VIRIDIAN_CITY
     .2byte 80

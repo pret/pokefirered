@@ -1,7 +1,7 @@
 SevenIsland_TanobyRuins_LiptooChamber:: @ 8350298
     .4byte SevenIsland_TanobyRuins_LiptooChamber_Layout @ 0x8346A90
-    .4byte gMapEvents_SevenIsland_TanobyRuins_LiptooChamber @ 0x83B46B4
-    .4byte gMapScripts_SevenIsland_TanobyRuins_LiptooChamber @ 0x8164CDE
+    .4byte SevenIsland_TanobyRuins_LiptooChamber_MapEvents @ 0x83B46B4
+    .4byte SevenIsland_TanobyRuins_LiptooChamber_MapScripts @ 0x8164CDE
     .4byte NULL
     .2byte BGM_FRLG_TANOBY_RUINS
     .2byte 336

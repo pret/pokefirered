@@ -1,7 +1,7 @@
 PokemonMansion_B1F:: @ 834F8DC
     .4byte PokemonMansion_B1F_Layout @ 0x830CEB8
-    .4byte gMapEvents_PokemonMansion_B1F @ 0x83B0ED4
-    .4byte gMapScripts_PokemonMansion_B1F @ 0x81622FC
+    .4byte PokemonMansion_B1F_MapEvents @ 0x83B0ED4
+    .4byte PokemonMansion_B1F_MapScripts @ 0x81622FC
     .4byte NULL
     .2byte BGM_FRLG_POKEMON_MANSION
     .2byte 146

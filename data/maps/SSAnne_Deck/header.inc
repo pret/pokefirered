@@ -1,7 +1,7 @@
 SSAnne_Deck:: @ 834F310
     .4byte SSAnne_Deck_Layout @ 0x8300624
-    .4byte gMapEvents_SSAnne_Deck @ 0x83AEB60
-    .4byte gMapScripts_SSAnne_Deck @ 0x8160A68
+    .4byte SSAnne_Deck_MapEvents @ 0x83AEB60
+    .4byte SSAnne_Deck_MapScripts @ 0x8160A68
     .4byte NULL
     .2byte BGM_FRLG_SS_ANNE
     .2byte 123

@@ -1,7 +1,7 @@
 Route4:: @ 8350880
     .4byte Route4_Layout @ 0x82E8338
-    .4byte gMapEvents_Route4 @ 0x83B6980
-    .4byte gMapScripts_Route4 @ 0x8167F8A
+    .4byte Route4_MapEvents @ 0x83B6980
+    .4byte Route4_MapScripts @ 0x8167F8A
     .4byte Route4_MapConnections @ 0x8352A54
     .2byte BGM_FRLG_ROUTE_3
     .2byte 92

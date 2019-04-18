@@ -1,7 +1,7 @@
 PokemonMansion_3F:: @ 834F8C0
     .4byte PokemonMansion_3F_Layout @ 0x830C430
-    .4byte gMapEvents_PokemonMansion_3F @ 0x83B0DF8
-    .4byte gMapScripts_PokemonMansion_3F @ 0x81622A1
+    .4byte PokemonMansion_3F_MapEvents @ 0x83B0DF8
+    .4byte PokemonMansion_3F_MapScripts @ 0x81622A1
     .4byte NULL
     .2byte BGM_FRLG_POKEMON_MANSION
     .2byte 145

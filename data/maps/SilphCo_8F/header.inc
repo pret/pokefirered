@@ -1,7 +1,7 @@
 SilphCo_8F:: @ 834F7FC
     .4byte SilphCo_8F_Layout @ 0x830997C
-    .4byte gMapEvents_SilphCo_8F @ 0x83B0784
-    .4byte gMapScripts_SilphCo_8F @ 0x8161C5F
+    .4byte SilphCo_8F_MapEvents @ 0x83B0784
+    .4byte SilphCo_8F_MapScripts @ 0x8161C5F
     .4byte NULL
     .2byte BGM_FRLG_SILPH
     .2byte 139

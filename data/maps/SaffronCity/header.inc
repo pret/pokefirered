@@ -1,7 +1,7 @@
 SaffronCity:: @ 835074C
     .4byte SaffronCity_Layout @ 0x82E4E28
-    .4byte gMapEvents_SaffronCity @ 0x83B5EB0
-    .4byte gMapScripts_SaffronCity @ 0x8167483
+    .4byte SaffronCity_MapEvents @ 0x83B5EB0
+    .4byte SaffronCity_MapScripts @ 0x8167483
     .4byte SaffronCity_MapConnections @ 0x835292C
     .2byte BGM_FRLG_VIRIDIAN_CITY
     .2byte 88

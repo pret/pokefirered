@@ -1,7 +1,7 @@
 TwoIsland_CapeBrink:: @ 8350B3C
     .4byte TwoIsland_CapeBrink_Layout @ 0x8326CB8
-    .4byte gMapEvents_TwoIsland_CapeBrink @ 0x83B8964
-    .4byte gMapScripts_TwoIsland_CapeBrink @ 0x8168775
+    .4byte TwoIsland_CapeBrink_MapEvents @ 0x83B8964
+    .4byte TwoIsland_CapeBrink_MapScripts @ 0x8168775
     .4byte TwoIsland_CapeBrink_MapConnections @ 0x8352D50
     .2byte BGM_FRLG_ROUTE_3
     .2byte 239

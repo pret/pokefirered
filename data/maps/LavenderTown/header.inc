@@ -1,7 +1,7 @@
 LavenderTown:: @ 8350688
     .4byte LavenderTown_Layout @ 0x82E0610
-    .4byte gMapEvents_LavenderTown @ 0x83B549C
-    .4byte gMapScripts_LavenderTown @ 0x816686B
+    .4byte LavenderTown_MapEvents @ 0x83B549C
+    .4byte LavenderTown_MapScripts @ 0x816686B
     .4byte LavenderTown_MapConnections @ 0x835281C
     .2byte BGM_FRLG_LAVENDER_TOWN
     .2byte 82

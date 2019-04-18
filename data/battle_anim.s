@@ -259,4 +259,4 @@ gUnknown_83AE054:: @ 83AE054
 	.incbin "baserom.gba", 0x3AE054, 0x30
 
 gUnknown_83AE084:: @ 0x83AE084
-	.incbin "baserom.gba", 0x3AE084, 0x58
+	.incbin "baserom.gba", 0x3AE084, 0x10

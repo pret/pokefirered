@@ -1,0 +1,2 @@
+UnknownMap_03_52_MapEvents::
+    map_events 0x0, 0x0, 0x0, 0x0

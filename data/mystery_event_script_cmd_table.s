@@ -1,5 +1,6 @@
 	.section script_data, "aw", %progbits
 
+	.align 2
 gMysteryEventScriptCmdTable:: @ 81DBCF0
 	.4byte MEScrCmd_nop
 	.4byte MEScrCmd_checkcompat

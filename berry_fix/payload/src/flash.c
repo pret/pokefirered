@@ -1,5 +1,5 @@
-#include <gba/gba.h>
-#include <agb_flash.h>
+#include "gba/gba.h"
+#include "gba/flash_internal.h"
 #include "constants/vars.h"
 #include "global.h"
 #include "main.h"

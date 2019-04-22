@@ -1,7 +1,7 @@
 #ifndef GUARD_MAIN_H
 #define GUARD_MAIN_H
 
-#include <gba/gba.h>
+#include "gba/gba.h"
 
 enum RomHeaderValidationResult
 {

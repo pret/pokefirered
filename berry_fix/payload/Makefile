@@ -16,7 +16,7 @@ CPPFLAGS := -I ../../tools/agbcc/include -I ../../tools/agbcc -iquote include -n
 ROM := payload.gba
 OBJ_DIR := build
 CC1             := ../../tools/agbcc/bin/agbcc$(EXE)
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
 
 ELF = $(ROM:.gba=.elf)
@@ -34,7 +34,7 @@ ASFLAGS := -mcpu=arm7tdmi
 
 LDFLAGS = -Map ../$(MAP)
 
-LIB := -L ../../../tools/agbcc/lib -lagb_flash -lsiirtc -lagbsyscall -lgcc
+LIB := -L ../../../tools/agbcc/lib -lgcc
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := ../../tools/gbagfx/gbagfx$(EXE)
@@ -79,6 +79,12 @@ SUBDIRS  := $(sort $(dir $(OBJS)))
 
 $(shell mkdir -p $(SUBDIRS))
 
+$(C_BUILDDIR)/siirtc.o: CC1FLAGS := -mthumb-interwork
+$(C_BUILDDIR)/agb_flash.o:    CC1FLAGS := -O1 -mthumb-interwork
+$(C_BUILDDIR)/agb_flash_1m.o: CC1FLAGS := -O1 -mthumb-interwork
+$(C_BUILDDIR)/agb_flash_mx.o: CC1FLAGS := -O1 -mthumb-interwork
+$(C_BUILDDIR)/agb_flash_le.o: CC1FLAGS := -O1 -mthumb-interwork
+
 rom: $(ROM)
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
@@ -116,7 +122,7 @@ endif
 
 $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
 	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
-	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
+	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 
 ifeq ($(NODEP),1)

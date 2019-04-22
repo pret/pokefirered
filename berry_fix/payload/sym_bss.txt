@@ -1,5 +1,5 @@
     .include "src/main.o"
     .include "src/rtc.o"
     .include "src/flash.o"
-	.include "*libagb_flash.a:agb_flash.o"
-    .include "*libsiirtc.a:siirtc.o"
+	.include "src/agb_flash.o"
+    .include "src/siirtc.o"

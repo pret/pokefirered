@@ -662,3 +662,6 @@ $(FAMECHECKERGFXDIR)/img_845cf00.4bpp: %.4bpp: %.png
 
 $(GLOBALGFXDIR)/fame_checker_bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 165
+
+data/seagallop/unk_8468C98.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 41

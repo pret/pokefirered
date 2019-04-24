@@ -9,4 +9,6 @@
 #define MAP_GROUP(map) (MAP_##map >> 8)
 #define MAP_NUM(map) (MAP_##map & 0xFF)
 
+#define MAP(map) MAP_GROUP(map), MAP_NUM(map)
+
 #endif  // GUARD_CONSTANTS_MAPS_H

@@ -16,4 +16,6 @@ enum SeaGallopDestinations
     SEAGALLOP_BIRTH_ISLAND
 };
 
+void ScrSpecial_SeaGallopFerry(void);
+
 #endif //GUARD_SEAGALLOP_H

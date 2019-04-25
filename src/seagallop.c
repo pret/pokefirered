@@ -18,36 +18,41 @@
 #include "constants/maps.h"
 #include "seagallop.h"
 
-EWRAM_DATA void * gUnknown_203F3D0 = NULL;
+#define TILESTAG_FERRY 3000
+#define TILESTAG_WAKE  4000
 
-void sub_8146E94(void);
-void sub_8147058(void);
-void sub_814706C(void);
-void sub_8147084(u8 taskId);
-void sub_81470CC(u8 taskId);
-void sub_8147108(u8 taskId);
-void sub_8147140(void);
-void sub_81471C4(void);
-void sub_81472FC(void);
-void sub_814731C(void);
-void sub_814732C(void);
-void sub_8147384(void);
-void sub_81473A0(void);
-void sub_81473C4(void);
-void sub_8147418(struct Sprite * sprite);
-void sub_814746C(s16 x);
-void sub_81474B0(struct Sprite * sprite);
-bool8 sub_81474CC(void);
+#define PALTAG_FERRY_WAKE 3000
 
-const u16 gUnknown_8468C98[] = INCBIN_U16("data/seagallop/unk_8468C98.4bpp");
-const u16 gUnknown_84691B8[] = INCBIN_U16("data/seagallop/unk_84691B8.gbapal");
-const u16 gUnknown_84691D8[] = INCBIN_U16("data/seagallop/unk_84691D8.bin");
-const u16 gUnknown_84699D8[] = INCBIN_U16("data/seagallop/unk_84699D8.bin");
-const u16 gUnknown_846A1D8[] = INCBIN_U16("data/seagallop/unk_846A1D8.4bpp");
-const u16 gUnknown_846A6D8[] = INCBIN_U16("data/seagallop/unk_846A6D8.gbapal");
-const u16 gUnknown_846A6F8[] = INCBIN_U16("data/seagallop/unk_846A6F8.4bpp");
+static EWRAM_DATA void * sBg3TilemapBuffer = NULL;
 
-const struct BgTemplate gUnknown_846AEF8[] = {
+static void CB2_SetUpSeaGallopScene(void);
+static void VBlankCB_SeaGallop(void);
+static void MainCB2_SeaGallop(void);
+static void Task_SeaGallop_0(u8 taskId);
+static void Task_SeaGallop_1(u8 taskId);
+static void Task_SeaGallop_2(u8 taskId);
+static void Task_SeaGallop_3(void);
+static void ResetGPU(void);
+static void ResetAllAssets(void);
+static void SetDispcnt(void);
+static void ResetBGPos(void);
+static void LoadFerrySpriteResources(void);
+static void FreeFerrySpriteResources(void);
+static void CreateFerrySprite(void);
+static void SpriteCB_Ferry(struct Sprite * sprite);
+static void CreateWakeSprite(s16 x);
+static void SpriteCB_Wake(struct Sprite * sprite);
+static bool8 GetDirectionOfTravel(void);
+
+static const u16 sWaterTiles[] = INCBIN_U16("data/seagallop/unk_8468C98.4bpp");
+static const u16 sWaterPal[] = INCBIN_U16("data/seagallop/unk_84691B8.gbapal");
+static const u16 sWaterTilemap_WB[] = INCBIN_U16("data/seagallop/unk_84691D8.bin");
+static const u16 sWaterTilemap_EB[] = INCBIN_U16("data/seagallop/unk_84699D8.bin");
+static const u16 sFerrySpriteTiles[] = INCBIN_U16("data/seagallop/unk_846A1D8.4bpp");
+static const u16 sFerryAndWakePal[] = INCBIN_U16("data/seagallop/unk_846A6D8.gbapal");
+static const u16 sWakeSpriteTiles[] = INCBIN_U16("data/seagallop/unk_846A6F8.4bpp");
+
+static const struct BgTemplate sBGTemplates[] = {
     {
         .bg = 3,
         .charBaseIndex = 3,
@@ -59,153 +64,164 @@ const struct BgTemplate gUnknown_846AEF8[] = {
     }
 };
 
-const s8 gUnknown_846AEFC[][4] = {
-    {MAP(VERMILIONCITY), 0x17, 0x20},
-    {MAP(ONEISLAND_HARBOR), 0x08, 0x05},
-    {MAP(TWOISLAND_HARBOR), 0x08, 0x05},
-    {MAP(THREEISLAND_HARBOR), 0x08, 0x05},
-    {MAP(FOURISLAND_HARBOR), 0x08, 0x05},
-    {MAP(FIVEISLAND_HARBOR), 0x08, 0x05},
-    {MAP(SIXISLAND_HARBOR), 0x08, 0x05},
-    {MAP(SEVENISLAND_HARBOR), 0x08, 0x05},
-    {MAP(CINNABARISLAND), 0x15, 0x07},
-    {MAP(NAVELROCK_HARBOR), 0x08, 0x05},
-    {MAP(BIRTHISLAND_HARBOR), 0x08, 0x05}
+static const s8 sSeaGallopSpawnTable[][4] = {
+                                   // Map                     X     Y
+    [SEAGALLOP_VERMILION_CITY]  = {MAP(VERMILIONCITY),      0x17, 0x20},
+    [SEAGALLOP_ONE_ISLAND]      = {MAP(ONEISLAND_HARBOR),   0x08, 0x05},
+    [SEAGALLOP_TWO_ISLAND]      = {MAP(TWOISLAND_HARBOR),   0x08, 0x05},
+    [SEAGALLOP_THREE_ISLAND]    = {MAP(THREEISLAND_HARBOR), 0x08, 0x05},
+    [SEAGALLOP_FOUR_ISLAND]     = {MAP(FOURISLAND_HARBOR),  0x08, 0x05},
+    [SEAGALLOP_FIVE_ISLAND]     = {MAP(FIVEISLAND_HARBOR),  0x08, 0x05},
+    [SEAGALLOP_SIX_ISLAND]      = {MAP(SIXISLAND_HARBOR),   0x08, 0x05},
+    [SEAGALLOP_SEVEN_ISLAND]    = {MAP(SEVENISLAND_HARBOR), 0x08, 0x05},
+    [SEAGALLOP_CINNABAR_ISLAND] = {MAP(CINNABARISLAND),     0x15, 0x07},
+    [SEAGALLOP_NAVEL_ROCK]      = {MAP(NAVELROCK_HARBOR),   0x08, 0x05},
+    [SEAGALLOP_BIRTH_ISLAND]    = {MAP(BIRTHISLAND_HARBOR), 0x08, 0x05}
 };
 
-const u16 gUnknown_846AF28[] = {
-    0x06fe,
-    0x06fc,
-    0x06f8,
-    0x06f0,
-    0x06e0,
-    0x04c0,
-    0x0400,
-    0x0440,
-    0x07ff,
-    0x06e0,
-    0x0000
+// Bitpacked array.  In the commented section, right-most bit is the
+// flag for traveling from (row port) to Vermilion City, and so on.
+// Flags follow these enums:
+
+enum TravelDirections
+{
+    DIRN_WESTBOUND = 0,
+    DIRN_EASTBOUND = 1
 };
 
-const union AnimCmd gUnknown_846AF40[] = {
+static const u16 sTravelDirectionMatrix[] = {
+    [SEAGALLOP_VERMILION_CITY]  = 0x6fe, // 11011111110
+    [SEAGALLOP_ONE_ISLAND]      = 0x6fc, // 11011111100
+    [SEAGALLOP_TWO_ISLAND]      = 0x6f8, // 11011111000
+    [SEAGALLOP_THREE_ISLAND]    = 0x6f0, // 11011110000
+    [SEAGALLOP_FOUR_ISLAND]     = 0x6e0, // 11011100000
+    [SEAGALLOP_FIVE_ISLAND]     = 0x4c0, // 10011000000
+    [SEAGALLOP_SIX_ISLAND]      = 0x400, // 10000000000
+    [SEAGALLOP_SEVEN_ISLAND]    = 0x440, // 10001000000
+    [SEAGALLOP_CINNABAR_ISLAND] = 0x7ff, // 11111111111
+    [SEAGALLOP_NAVEL_ROCK]      = 0x6e0, // 11011100000
+    [SEAGALLOP_BIRTH_ISLAND]    = 0x000  // 00000000000
+};
+
+static const union AnimCmd sSpriteAnims_Ferry_WB[] = {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_846AF48[] = {
+static const union AnimCmd sSpriteAnims_Ferry_EB[] = {
     ANIMCMD_FRAME(0, 10, .hFlip = TRUE),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_846AF50[] = {
-    gUnknown_846AF40,
-    gUnknown_846AF48
+static const union AnimCmd *const sSpriteAnimTable_Ferry[] = {
+    sSpriteAnims_Ferry_WB,
+    sSpriteAnims_Ferry_EB
 };
 
-const struct OamData gOamData_846AF58 = {
+static const struct OamData sOamData_Ferry = {
     .size = 3
 };
 
-const struct SpriteTemplate gUnknown_846AF60 = {
-    3000,
-    3000,
-    &gOamData_846AF58,
-    gUnknown_846AF50,
+static const struct SpriteTemplate sFerrySpriteTemplate = {
+    TILESTAG_FERRY,
+    PALTAG_FERRY_WAKE,
+    &sOamData_Ferry,
+    sSpriteAnimTable_Ferry,
     NULL,
     gDummySpriteAffineAnimTable,
-    sub_8147418
+    SpriteCB_Ferry
 };
 
-const struct SpriteSheet gUnknown_846AF78[] = {
-    {(void *)gUnknown_846A6F8, 0x0800, 4000},
-    {(void *)gUnknown_846A1D8, 0x0500, 3000},
+static const struct SpriteSheet sFerryAndWakeSpriteSheets[] = {
+    {(const void *)sWakeSpriteTiles,  sizeof(sWakeSpriteTiles),  TILESTAG_WAKE},
+    {(const void *)sFerrySpriteTiles, sizeof(sFerrySpriteTiles), TILESTAG_FERRY},
     {}
 };
 
-const struct SpritePalette gUnknown_846AF90[] = {
-    {gUnknown_846A6D8, 3000},
+static const struct SpritePalette sFerryAndWakeSpritePalettes[] = {
+    {sFerryAndWakePal, PALTAG_FERRY_WAKE},
     {}
 };
 
-const union AnimCmd gUnknown_846AFA0[] = {
+static const union AnimCmd sSpriteAnims_Wake_WB[] = {
     ANIMCMD_FRAME(0x00, 0x14),
     ANIMCMD_FRAME(0x10, 0x14),
     ANIMCMD_FRAME(0x20, 0x0f),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_846AFB0[] = {
+static const union AnimCmd sSpriteAnims_Wake_EB[] = {
     ANIMCMD_FRAME(0x00, 0x14, .hFlip = TRUE),
     ANIMCMD_FRAME(0x10, 0x14, .hFlip = TRUE),
     ANIMCMD_FRAME(0x20, 0x0f, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_846AFC0[] = {
-    gUnknown_846AFA0,
-    gUnknown_846AFB0
+static const union AnimCmd *const sSpriteAnimTable_Wake[] = {
+    sSpriteAnims_Wake_WB,
+    sSpriteAnims_Wake_EB
 };
 
-const struct OamData gOamData_846AFC8 = {
+static const struct OamData sOamData_Wake = {
     .size = 2
 };
 
-const struct SpriteTemplate gUnknown_846AFD0 = {
-    4000,
-    3000,
-    &gOamData_846AFC8,
-    gUnknown_846AFC0,
+static const struct SpriteTemplate sWakeSpriteTemplate = {
+    TILESTAG_WAKE,
+    PALTAG_FERRY_WAKE,
+    &sOamData_Wake,
+    sSpriteAnimTable_Wake,
     NULL,
     gDummySpriteAffineAnimTable,
-    sub_81474B0
+    SpriteCB_Wake
 };
 
-void sub_8146E78(void)
+void ScrSpecial_SeaGallopFerry(void)
 {
     SetVBlankCallback(NULL);
     sub_812B478();
-    SetMainCallback2(sub_8146E94);
+    SetMainCallback2(CB2_SetUpSeaGallopScene);
 }
 
-void sub_8146E94(void)
+static void CB2_SetUpSeaGallopScene(void)
 {
     void ** ptr;
     switch (gMain.state)
     {
     case 0:
         SetVBlankCallback(NULL); // redundant since the setup routine already did this
-        sub_81471C4();
+        ResetGPU();
         gMain.state++;
         break;
     case 1:
-        sub_81472FC();
+        ResetAllAssets();
         gMain.state++;
         break;
     case 2:
-        ptr = &gUnknown_203F3D0;
+        ptr = &sBg3TilemapBuffer;
         *ptr = AllocZeroed(0x800);
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_846AEF8, NELEMS(gUnknown_846AEF8));
+        InitBgsFromTemplates(0, sBGTemplates, NELEMS(sBGTemplates));
         SetBgTilemapBuffer(3, *ptr);
-        sub_814732C();
+        ResetBGPos();
         gMain.state++;
         break;
     case 3:
-        LoadBgTiles(3, gUnknown_8468C98, sizeof(gUnknown_8468C98), 0);
-        if (sub_81474CC() == TRUE)
+        LoadBgTiles(3, sWaterTiles, sizeof(sWaterTiles), 0);
+        if (GetDirectionOfTravel() == DIRN_EASTBOUND)
         {
-            CopyToBgTilemapBufferRect(3, gUnknown_84699D8, 0, 0, 32, 32);
+            CopyToBgTilemapBufferRect(3, sWaterTilemap_EB, 0, 0, 32, 32);
         }
         else
         {
-            CopyToBgTilemapBufferRect(3, gUnknown_84691D8, 0, 0, 32, 32);
+            CopyToBgTilemapBufferRect(3, sWaterTilemap_WB, 0, 0, 32, 32);
         }
-        LoadPalette(gUnknown_84691B8, 0x40, 0x20);
+        LoadPalette(sWaterPal, 0x40, 0x20);
         LoadPalette(stdpal_get(2), 0xF0, 0x20);
         gMain.state++;
         break;
     case 4:
-        if (IsDma3ManagerBusyWithBgCopy() != TRUE)
+        if (IsDma3ManagerBusyWithBgCopy() != DIRN_EASTBOUND)
         {
             ShowBg(0);
             ShowBg(3);
@@ -214,7 +230,7 @@ void sub_8146E94(void)
         }
         break;
     case 5:
-        sub_8147384();
+        LoadFerrySpriteResources();
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         gMain.state++;
         break;
@@ -223,30 +239,30 @@ void sub_8146E94(void)
         gMain.state++;
         break;
     case 7:
-        sub_814731C();
-        SetVBlankCallback(sub_8147058);
+        SetDispcnt();
+        SetVBlankCallback(VBlankCB_SeaGallop);
         PlaySE(SE_NAMINORI);
-        sub_81473C4();
+        CreateFerrySprite();
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         SetGpuReg(REG_OFFSET_WININ, 0x3F);
         SetGpuReg(REG_OFFSET_WINOUT, 0x00);
         SetGpuReg(REG_OFFSET_WIN0H, 0x00F0);
         SetGpuReg(REG_OFFSET_WIN0V, 0x1888);
-        CreateTask(sub_8147084, 8);
-        SetMainCallback2(sub_814706C);
+        CreateTask(Task_SeaGallop_0, 8);
+        SetMainCallback2(MainCB2_SeaGallop);
         gMain.state = 0;
         break;
     }
 }
 
-void sub_8147058(void)
+static void VBlankCB_SeaGallop(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_814706C(void)
+static void MainCB2_SeaGallop(void)
 {
     RunTasks();
     AnimateSprites();
@@ -254,14 +270,14 @@ void sub_814706C(void)
     UpdatePaletteFade();
 }
 
-void sub_8147084(u8 taskId)
+static void Task_SeaGallop_0(u8 taskId)
 {
-    gTasks[taskId].func = sub_81470CC;
+    gTasks[taskId].func = Task_SeaGallop_1;
 }
 
-void sub_81470A0(void)
+static void ScrollBG(void)
 {
-    if (sub_81474CC() == TRUE)
+    if (GetDirectionOfTravel() == DIRN_EASTBOUND)
     {
         ChangeBgX(3, 0x600, 1);
     }
@@ -271,38 +287,38 @@ void sub_81470A0(void)
     }
 }
 
-void sub_81470CC(u8 taskId)
+static void Task_SeaGallop_1(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
 
-    sub_81470A0();
+    ScrollBG();
     if (++task->data[1] == 140)
     {
         Overworld_FadeOutMapMusic();
         sub_807DC18();
-        task->func = sub_8147108;
+        task->func = Task_SeaGallop_2;
     }
 }
 
-void sub_8147108(u8 taskId)
+static void Task_SeaGallop_2(u8 taskId)
 {
-    sub_81470A0();
+    ScrollBG();
     if (sub_8055FC4() && !gPaletteFade.active)
     {
-        sub_8147140();
+        Task_SeaGallop_3();
         sub_812B484();
         DestroyTask(taskId);
     }
 }
 
-void sub_8147140(void)
+static void Task_SeaGallop_3(void)
 {
     const s8 * warpInfo;
 
-    if (gSpecialVar_0x8006 >= NELEMS(gUnknown_846AEFC))
+    if (gSpecialVar_0x8006 >= NELEMS(sSeaGallopSpawnTable))
         gSpecialVar_0x8006 = 0;
 
-    warpInfo = gUnknown_846AEFC[gSpecialVar_0x8006];
+    warpInfo = sSeaGallopSpawnTable[gSpecialVar_0x8006];
     Overworld_SetWarpDestination(warpInfo[0], warpInfo[1], -1, warpInfo[2], warpInfo[3]);
     play_some_sound();
     PlaySE(SE_KAIDAN);
@@ -310,12 +326,12 @@ void sub_8147140(void)
     warp_in();
     SetMainCallback2(sub_805671C);
     ResetInitialPlayerAvatarState();
-    sub_81473A0();
-    Free(gUnknown_203F3D0);
+    FreeFerrySpriteResources();
+    Free(sBg3TilemapBuffer);
     FreeAllWindowBuffers();
 }
 
-void sub_81471C4(void)
+static void ResetGPU(void)
 {
     void * dest = (void *) VRAM;
     DmaClearLarge16(3, dest, VRAM_SIZE, 0x1000);
@@ -344,7 +360,7 @@ void sub_81471C4(void)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 }
 
-void sub_81472FC(void)
+static void ResetAllAssets(void)
 {
     ScanlineEffect_Stop();
     ResetTasks();
@@ -354,12 +370,12 @@ void sub_81472FC(void)
     FreeAllSpritePalettes();
 }
 
-void sub_814731C(void)
+static void SetDispcnt(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON);
 }
 
-void sub_814732C(void)
+static void ResetBGPos(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
@@ -371,24 +387,24 @@ void sub_814732C(void)
     ChangeBgY(3, 0, 0);
 }
 
-void sub_8147384(void)
+static void LoadFerrySpriteResources(void)
 {
-    LoadSpriteSheets(gUnknown_846AF78);
-    LoadSpritePalettes(gUnknown_846AF90);
+    LoadSpriteSheets(sFerryAndWakeSpriteSheets);
+    LoadSpritePalettes(sFerryAndWakeSpritePalettes);
 }
 
-void sub_81473A0(void)
+static void FreeFerrySpriteResources(void)
 {
-    FreeSpriteTilesByTag(3000);
-    FreeSpriteTilesByTag(4000);
-    FreeSpritePaletteByTag(3000);
+    FreeSpriteTilesByTag(TILESTAG_FERRY);
+    FreeSpriteTilesByTag(TILESTAG_WAKE);
+    FreeSpritePaletteByTag(PALTAG_FERRY_WAKE);
 }
 
-void sub_81473C4(void)
+static void CreateFerrySprite(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_846AF60, 0, 92, 0);
+    u8 spriteId = CreateSprite(&sFerrySpriteTemplate, 0, 92, 0);
     gSprites[spriteId].data[0] = 48;
-    if (sub_81474CC() == TRUE)
+    if (GetDirectionOfTravel() == DIRN_EASTBOUND)
     {
         StartSpriteAnim(&gSprites[spriteId], 1);
     }
@@ -399,13 +415,13 @@ void sub_81473C4(void)
     }
 }
 
-void sub_8147418(struct Sprite * sprite)
+static void SpriteCB_Ferry(struct Sprite * sprite)
 {
     sprite->data[1] += sprite->data[0];
     sprite->pos2.x = sprite->data[1] >> 4;
     if (sprite->data[2] % 5 == 0)
     {
-        sub_814746C(sprite->pos1.x + sprite->pos2.x);
+        CreateWakeSprite(sprite->pos1.x + sprite->pos2.x);
     }
     sprite->data[2]++;
     if ((u16)(300 + sprite->pos2.x) > 600)
@@ -414,19 +430,19 @@ void sub_8147418(struct Sprite * sprite)
     }
 }
 
-void sub_814746C(s16 x)
+static void CreateWakeSprite(s16 x)
 {
-    u8 spriteId = CreateSprite(&gUnknown_846AFD0, x, 92, 8);
+    u8 spriteId = CreateSprite(&sWakeSpriteTemplate, x, 92, 8);
     if (spriteId != MAX_SPRITES)
     {
-        if (sub_81474CC() == TRUE)
+        if (GetDirectionOfTravel() == DIRN_EASTBOUND)
         {
             StartSpriteAnim(&gSprites[spriteId], 1);
         }
     }
 }
 
-void sub_81474B0(struct Sprite * sprite)
+static void SpriteCB_Wake(struct Sprite * sprite)
 {
     if (sprite->animEnded)
     {
@@ -434,11 +450,11 @@ void sub_81474B0(struct Sprite * sprite)
     }
 }
 
-bool8 sub_81474CC(void)
+static bool8 GetDirectionOfTravel(void)
 {
-    if (gSpecialVar_0x8004 >= NELEMS(gUnknown_846AF28))
+    if (gSpecialVar_0x8004 >= NELEMS(sTravelDirectionMatrix))
     {
-        return TRUE;
+        return DIRN_EASTBOUND;
     }
-    return (gUnknown_846AF28[gSpecialVar_0x8004] >> gSpecialVar_0x8006) & 1;
+    return (sTravelDirectionMatrix[gSpecialVar_0x8004] >> gSpecialVar_0x8006) & 1;
 }

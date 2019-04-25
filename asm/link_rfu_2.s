@@ -5152,7 +5152,7 @@ sub_80FAD98: @ 80FAD98
 	bne _080FAE30
 	ldr r6, _080FAE18 @ =gMain
 	ldr r1, [r6, 0x4]
-	ldr r0, _080FAE1C @ =sub_814208C
+	ldr r0, _080FAE1C @ =c2_mystery_gift_e_reader_run
 	cmp r1, r0
 	bne _080FADC0
 	ldr r1, _080FAE20 @ =gWirelessCommType
@@ -5199,7 +5199,7 @@ _080FADF8:
 _080FAE10: .4byte gUnknown_3005450
 _080FAE14: .4byte gUnknown_3005E10
 _080FAE18: .4byte gMain
-_080FAE1C: .4byte sub_814208C
+_080FAE1C: .4byte c2_mystery_gift_e_reader_run
 _080FAE20: .4byte gWirelessCommType
 _080FAE24: .4byte c2_800ACD4
 _080FAE28: .4byte 0x0000069e

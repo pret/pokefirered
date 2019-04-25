@@ -3369,7 +3369,7 @@ _0804E208:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -5876,7 +5876,7 @@ sub_804F5BC: @ 804F5BC
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0

@@ -5,492 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_814240C
-sub_814240C: @ 814240C
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x1
-	movs r2, 0xF
-	bl sub_8150048
-	pop {r0}
-	bx r0
-	thumb_func_end sub_814240C
-
-	thumb_func_start sub_8142420
-sub_8142420: @ 8142420
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0xC
-	movs r0, 0
-	mov r8, r0
-	movs r0, 0x20
-	str r0, [sp]
-	movs r0, 0x2
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0x3
-	movs r1, 0x3
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect
-	movs r4, 0x1
-	movs r1, 0x11
-	mov r10, r1
-_0814244E:
-	movs r7, 0
-	mov r0, r8
-	adds r0, 0x2
-	movs r1, 0x1
-	add r1, r8
-	mov r9, r1
-	lsls r5, r0, 24
-	movs r6, 0
-_0814245E:
-	mov r1, r8
-	ands r1, r4
-	adds r0, r7, 0
-	ands r0, r4
-	cmp r1, r0
-	beq _08142480
-	lsrs r2, r6, 24
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	mov r0, r10
-	str r0, [sp, 0x8]
-	movs r0, 0x3
-	movs r1, 0x1
-	lsrs r3, r5, 24
-	bl FillBgTilemapBufferRect
-	b _08142494
-_08142480:
-	lsrs r2, r6, 24
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	mov r1, r10
-	str r1, [sp, 0x8]
-	movs r0, 0x3
-	movs r1, 0x2
-	lsrs r3, r5, 24
-	bl FillBgTilemapBufferRect
-_08142494:
-	movs r0, 0x80
-	lsls r0, 17
-	adds r6, r0
-	adds r7, 0x1
-	cmp r7, 0x1F
-	ble _0814245E
-	mov r8, r9
-	mov r1, r8
-	cmp r1, 0x11
-	ble _0814244E
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8142420
-
-	thumb_func_start sub_81424B8
-sub_81424B8: @ 81424B8
-	push {lr}
-	sub sp, 0xC
-	cmp r0, 0
-	beq _081424C6
-	cmp r0, 0x1
-	beq _081424DE
-	b _081424F6
-_081424C6:
-	movs r0, 0x20
-	str r0, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect
-	b _081424F6
-_081424DE:
-	movs r0, 0x20
-	str r0, [sp]
-	movs r0, 0x1E
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x2
-	bl FillBgTilemapBufferRect
-_081424F6:
-	movs r0, 0
-	bl CopyBgTilemapBufferToVram
-	add sp, 0xC
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81424B8
-
-	thumb_func_start sub_8142504
-sub_8142504: @ 8142504
-	push {r4,lr}
-	sub sp, 0x14
-	adds r1, r0, 0
-	ldr r4, _08142558 @ =gStringVar4
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	movs r0, 0x1
-	movs r1, 0x11
-	bl FillWindowPixelBuffer
-	movs r1, 0
-	str r1, [sp]
-	movs r0, 0x2
-	str r0, [sp, 0x4]
-	ldr r0, _0814255C @ =gUnknown_8466EF0
-	str r0, [sp, 0x8]
-	str r1, [sp, 0xC]
-	str r4, [sp, 0x10]
-	movs r0, 0x1
-	movs r1, 0x2
-	movs r2, 0
-	movs r3, 0x2
-	bl AddTextPrinterParametrized2
-	movs r0, 0x1
-	movs r1, 0x1
-	movs r2, 0xF
-	bl sub_8150048
-	movs r0, 0x1
-	bl PutWindowTilemap
-	movs r0, 0x1
-	movs r1, 0x3
-	bl CopyWindowToVram
-	add sp, 0x14
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08142558: .4byte gStringVar4
-_0814255C: .4byte gUnknown_8466EF0
-	thumb_func_end sub_8142504
-
-	thumb_func_start sub_8142560
-sub_8142560: @ 8142560
-	push {lr}
-	movs r0, 0x1
-	bl rbox_fill_rectangle
-	movs r0, 0x1
-	bl ClearWindowTilemap
-	movs r0, 0x1
-	movs r1, 0x1
-	bl CopyWindowToVram
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8142560
-
-	thumb_func_start mevent_0814257C
-mevent_0814257C: @ 814257C
-	push {r4,lr}
-	sub sp, 0xC
-	adds r4, r0, 0
-	adds r0, r1, 0
-	ldrb r2, [r4]
-	cmp r2, 0x1
-	beq _081425A4
-	cmp r2, 0x1
-	bgt _08142594
-	cmp r2, 0
-	beq _0814259E
-	b _08142604
-_08142594:
-	cmp r2, 0x2
-	beq _081425D8
-	cmp r2, 0xFF
-	beq _08142600
-	b _08142604
-_0814259E:
-	bl sub_8142504
-	b _081425C8
-_081425A4:
-	movs r0, 0
-	str r0, [sp]
-	ldr r0, _081425D0 @ =sDownArrowCounterAndYCoordIdx
-	str r0, [sp, 0x4]
-	adds r0, 0x1
-	str r0, [sp, 0x8]
-	movs r0, 0x1
-	movs r1, 0xD0
-	movs r2, 0x14
-	movs r3, 0x1
-	bl DrawDownArrow
-	ldr r0, _081425D4 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x3
-	ands r0, r1
-	cmp r0, 0
-	beq _08142604
-_081425C8:
-	ldrb r0, [r4]
-	adds r0, 0x1
-	b _08142602
-	.align 2, 0
-_081425D0: .4byte sDownArrowCounterAndYCoordIdx
-_081425D4: .4byte gMain
-_081425D8:
-	movs r0, 0x1
-	str r0, [sp]
-	ldr r0, _081425FC @ =sDownArrowCounterAndYCoordIdx
-	str r0, [sp, 0x4]
-	adds r0, 0x1
-	str r0, [sp, 0x8]
-	movs r0, 0x1
-	movs r1, 0xD0
-	movs r2, 0x14
-	movs r3, 0x1
-	bl DrawDownArrow
-	movs r0, 0
-	strb r0, [r4]
-	bl sub_8142560
-	movs r0, 0x1
-	b _08142606
-	.align 2, 0
-_081425FC: .4byte sDownArrowCounterAndYCoordIdx
-_08142600:
-	movs r0, 0x2
-_08142602:
-	strb r0, [r4]
-_08142604:
-	movs r0, 0
-_08142606:
-	add sp, 0xC
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end mevent_0814257C
-
-	thumb_func_start sub_8142610
-sub_8142610: @ 8142610
-	push {lr}
-	sub sp, 0xC
-	movs r0, 0
-	str r0, [sp]
-	ldr r0, _08142634 @ =sDownArrowCounterAndYCoordIdx
-	str r0, [sp, 0x4]
-	adds r0, 0x1
-	str r0, [sp, 0x8]
-	movs r0, 0x1
-	movs r1, 0xD0
-	movs r2, 0x14
-	movs r3, 0x1
-	bl DrawDownArrow
-	add sp, 0xC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08142634: .4byte sDownArrowCounterAndYCoordIdx
-	thumb_func_end sub_8142610
-
-	thumb_func_start sub_8142638
-sub_8142638: @ 8142638
-	push {lr}
-	sub sp, 0xC
-	movs r0, 0x1
-	str r0, [sp]
-	ldr r0, _0814265C @ =sDownArrowCounterAndYCoordIdx
-	str r0, [sp, 0x4]
-	adds r0, 0x1
-	str r0, [sp, 0x8]
-	movs r0, 0x1
-	movs r1, 0xD0
-	movs r2, 0x14
-	movs r3, 0x1
-	bl DrawDownArrow
-	add sp, 0xC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0814265C: .4byte sDownArrowCounterAndYCoordIdx
-	thumb_func_end sub_8142638
-
-	thumb_func_start sub_8142660
-sub_8142660: @ 8142660
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrb r0, [r4]
-	cmp r0, 0
-	beq _08142670
-	cmp r0, 0x1
-	beq _0814268C
-	b _08142698
-_08142670:
-	bl sub_8142610
-	ldr r0, _08142688 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x3
-	ands r0, r1
-	cmp r0, 0
-	beq _08142698
-	ldrb r0, [r4]
-	adds r0, 0x1
-	strb r0, [r4]
-	b _08142698
-	.align 2, 0
-_08142688: .4byte gMain
-_0814268C:
-	bl sub_8142638
-	movs r0, 0
-	strb r0, [r4]
-	movs r0, 0x1
-	b _0814269A
-_08142698:
-	movs r0, 0
-_0814269A:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8142660
-
-	thumb_func_start sub_81426A0
-sub_81426A0: @ 81426A0
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrb r0, [r4]
-	cmp r0, 0
-	bne _081426B0
-	adds r0, r1, 0
-	bl sub_8142504
-_081426B0:
-	ldrb r0, [r4]
-	adds r0, 0x1
-	strb r0, [r4]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x78
-	bhi _081426C2
-	movs r0, 0
-	b _081426CC
-_081426C2:
-	movs r0, 0
-	strb r0, [r4]
-	bl sub_8142560
-	movs r0, 0x1
-_081426CC:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81426A0
-
-	thumb_func_start sub_81426D4
-sub_81426D4: @ 81426D4
-	push {r4-r7,lr}
-	sub sp, 0x24
-	lsls r2, 24
-	add r1, sp, 0x4
-	ldr r0, _081426F8 @ =gUnknown_8466E00
-	ldm r0!, {r3-r5}
-	stm r1!, {r3-r5}
-	ldm r0!, {r3-r5}
-	stm r1!, {r3-r5}
-	ldr r0, _081426FC @ =gUnknown_8466DA8
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [sp, 0x1C]
-	str r1, [sp, 0x20]
-	cmp r2, 0
-	bne _08142704
-	ldr r0, _08142700 @ =gUnknown_8466DD0
-	b _08142706
-	.align 2, 0
-_081426F8: .4byte gUnknown_8466E00
-_081426FC: .4byte gUnknown_8466DA8
-_08142700: .4byte gUnknown_8466DD0
-_08142704:
-	ldr r0, _08142794 @ =gUnknown_8466DE8
-_08142706:
-	str r0, [sp, 0x4]
-	movs r6, 0
-	movs r4, 0
-	add r0, sp, 0x4
-	add r7, sp, 0x1C
-	ldrh r0, [r0, 0xC]
-	cmp r6, r0
-	bcs _0814273A
-	add r5, sp, 0x4
-_08142718:
-	ldr r1, [sp, 0x4]
-	lsls r0, r4, 3
-	adds r0, r1
-	ldr r1, [r0]
-	ldrb r2, [r5, 0x16]
-	lsls r2, 29
-	lsrs r2, 29
-	movs r0, 0x2
-	bl GetStringWidth
-	cmp r0, r6
-	bls _08142732
-	adds r6, r0, 0
-_08142732:
-	adds r4, 0x1
-	ldrh r0, [r5, 0xC]
-	cmp r4, r0
-	bcc _08142718
-_0814273A:
-	adds r2, r6, 0
-	adds r2, 0x9
-	lsrs r2, 3
-	adds r2, 0x2
-	movs r0, 0x2
-	negs r0, r0
-	ands r2, r0
-	lsls r3, r2, 24
-	ldr r0, _08142798 @ =0x00ffffff
-	ldr r1, [sp, 0x1C]
-	ands r1, r0
-	orrs r1, r3
-	movs r0, 0x1E
-	subs r0, r2
-	lsls r0, 23
-	lsrs r0, 16
-	ldr r2, _0814279C @ =0xffff00ff
-	ands r1, r2
-	orrs r1, r0
-	str r1, [sp, 0x1C]
-	movs r0, 0xE0
-	str r0, [sp]
-	adds r0, r7, 0
-	add r1, sp, 0x4
-	movs r2, 0x1
-	movs r3, 0xA
-	bl DoMysteryGiftListMenu
-	adds r4, r0, 0
-	movs r0, 0x1
-	negs r0, r0
-	cmp r4, r0
-	beq _0814278A
-	movs r0, 0x2
-	bl ClearWindowTilemap
-	movs r0, 0x2
-	movs r1, 0x1
-	bl CopyWindowToVram
-_0814278A:
-	adds r0, r4, 0
-	add sp, 0x24
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08142794: .4byte gUnknown_8466DE8
-_08142798: .4byte 0x00ffffff
-_0814279C: .4byte 0xffff00ff
-	thumb_func_end sub_81426D4
-
 	thumb_func_start sub_81427A0
 sub_81427A0: @ 81427A0
 	push {r4-r6,lr}
@@ -539,7 +53,7 @@ _081427E2:
 	str r2, [sp]
 	movs r1, 0x2
 	str r1, [sp, 0x4]
-	ldr r1, _0814282C @ =gUnknown_8466EF0
+	ldr r1, _0814282C @ =sMG_Ereader_TextColor_2
 	str r1, [sp, 0x8]
 	str r2, [sp, 0xC]
 	ldr r1, _08142830 @ =gStringVar4
@@ -550,7 +64,7 @@ _081427E2:
 	ldrb r0, [r4]
 	movs r1, 0x1
 	movs r2, 0xF
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -559,7 +73,7 @@ _081427E2:
 	b _0814287E
 	.align 2, 0
 _08142828: .4byte gUnknown_8466D98
-_0814282C: .4byte gUnknown_8466EF0
+_0814282C: .4byte sMG_Ereader_TextColor_2
 _08142830: .4byte gStringVar4
 _08142834:
 	ldr r0, _08142850 @ =gUnknown_8466DB0
@@ -700,7 +214,7 @@ _08142934:
 	str r2, [sp]
 	movs r1, 0x2
 	str r1, [sp, 0x4]
-	ldr r1, _08142990 @ =gUnknown_8466EF0
+	ldr r1, _08142990 @ =sMG_Ereader_TextColor_2
 	str r1, [sp, 0x8]
 	str r2, [sp, 0xC]
 	ldr r1, _08142984 @ =gStringVar4
@@ -711,7 +225,7 @@ _08142934:
 	ldrb r0, [r5]
 	movs r1, 0x1
 	movs r2, 0xF
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -725,7 +239,7 @@ _08142934:
 _08142984: .4byte gStringVar4
 _08142988: .4byte gUnknown_841EAB7
 _0814298C: .4byte gUnknown_8466DA0
-_08142990: .4byte gUnknown_8466EF0
+_08142990: .4byte sMG_Ereader_TextColor_2
 _08142994:
 	cmp r3, 0
 	beq _081429BC
@@ -951,7 +465,7 @@ _08142B2C: .4byte gUnknown_841ED9C
 _08142B30:
 	ldr r1, _08142B3C @ =gUnknown_841ED7B
 _08142B32:
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -981,7 +495,7 @@ _08142B58:
 	.4byte _08142BA4
 _08142B6C:
 	ldr r0, _08142B74 @ =gUnknown_841ED2F
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	b _08142B98
 	.align 2, 0
 _08142B74: .4byte gUnknown_841ED2F
@@ -991,7 +505,7 @@ _08142B78:
 	b _08142B98
 _08142B80:
 	ldr r0, _08142B88 @ =gUnknown_841ED50
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	b _08142B98
 	.align 2, 0
 _08142B88: .4byte gUnknown_841ED50
@@ -1012,7 +526,7 @@ _08142BA0: .4byte gMain
 _08142BA4:
 	movs r0, 0
 	strb r0, [r4]
-	bl sub_8142560
+	bl ClearTextWindow
 	movs r0, 0x1
 	b _08142BB2
 _08142BB0:
@@ -1199,7 +713,7 @@ _08142D00:
 _08142D06:
 	cmp r0, 0
 	beq _08142D0E
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 _08142D0E:
 	movs r0, 0x81
 	lsls r0, 1
@@ -1226,7 +740,7 @@ _08142D30:
 	beq _08142D46
 	movs r0, 0
 	strb r0, [r6]
-	bl sub_8142560
+	bl ClearTextWindow
 	movs r0, 0x1
 	b _08142D48
 _08142D46:
@@ -1361,7 +875,7 @@ sub_8142E20: @ 8142E20
 	cmp r0, 0
 	bne _08142E46
 	adds r0, r4, 0
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	b _08142E4E
 _08142E46:
 	adds r0, r4, 0
@@ -1484,7 +998,7 @@ _08142F6A:
 	adds r0, 0x9
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_81426D4
+	bl MysteryGift_HandleThreeOptionMenu
 	adds r1, r0, 0
 	cmp r1, 0x1
 	beq _08142F94
@@ -1530,7 +1044,7 @@ _08142FC0:
 	adds r0, 0x9
 	ldr r1, _08142FE0 @ =gUnknown_841E6DC
 _08142FC6:
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	bne _08142FD0
 	b _081435C6
@@ -1548,13 +1062,13 @@ _08142FE4:
 	cmp r0, 0
 	bne _08142FF8
 	ldr r0, _08142FF4 @ =gUnknown_841E717
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	b _08142FFE
 	.align 2, 0
 _08142FF4: .4byte gUnknown_841E717
 _08142FF8:
 	ldr r0, _08143004 @ =gUnknown_841E741
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 _08142FFE:
 	movs r0, 0x4
 	strb r0, [r5, 0x8]
@@ -1566,7 +1080,7 @@ _08143008:
 	adds r0, 0x9
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_81426D4
+	bl MysteryGift_HandleThreeOptionMenu
 	adds r4, r0, 0
 	cmp r4, 0x1
 	beq _08143036
@@ -1578,20 +1092,20 @@ _08143008:
 	beq _08143042
 	b _081435C6
 _08143028:
-	bl sub_8142560
+	bl ClearTextWindow
 	movs r1, 0
 	movs r0, 0x5
 	strb r0, [r5, 0x8]
 	strb r1, [r5, 0xD]
 	b _081435C6
 _08143036:
-	bl sub_8142560
+	bl ClearTextWindow
 	movs r0, 0x5
 	strb r0, [r5, 0x8]
 	strb r4, [r5, 0xD]
 	b _081435C6
 _08143042:
-	bl sub_8142560
+	bl ClearTextWindow
 	ldrb r0, [r5, 0xC]
 	bl sub_8142A44
 	cmp r0, 0
@@ -1654,7 +1168,7 @@ _081430B8:
 	cmp r0, 0
 	beq _081430D4
 	movs r0, 0x1
-	bl sub_81424B8
+	bl ClearScreenInBg0
 	movs r0, 0x7
 	strb r0, [r5, 0x8]
 	bl mevent_srv_ish_do_init
@@ -1669,13 +1183,13 @@ _081430D4:
 	b _081435C6
 _081430DE:
 	movs r0, 0x1
-	bl sub_81424B8
+	bl ClearScreenInBg0
 	b _08143464
 	.align 2, 0
 _081430E8: .4byte gSpecialVar_Result
 _081430EC:
 	ldr r0, _081430F8 @ =gUnknown_841E794
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0x8
 	strb r0, [r5, 0x8]
 	b _081435C6
@@ -1760,7 +1274,7 @@ _08143198:
 	bl mevent_srv_ish_get_buffer
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	bne _081431AE
 	b _081435C6
@@ -1838,7 +1352,7 @@ _08143232:
 	adds r0, r5, 0
 	adds r0, 0x9
 	ldr r1, _08143258 @ =gUnknown_841E7A3
-	bl sub_81426A0
+	bl PrintStringAndWait2Seconds
 	cmp r0, 0
 	bne _08143242
 	b _081435C6
@@ -1879,7 +1393,7 @@ _08143278:
 _0814328A:
 	adds r0, r5, 0
 	adds r0, 0x9
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 _08143292:
 	adds r1, r0, 0
 	cmp r1, 0
@@ -2165,7 +1679,7 @@ _0814349C:
 	cmp r0, 0
 	beq _081434B4
 	movs r0, 0x1
-	bl sub_81424B8
+	bl ClearScreenInBg0
 	movs r0, 0x1F
 	strb r0, [r5, 0x8]
 	b _081435C6
@@ -2179,7 +1693,7 @@ _081434B4:
 	b _081435C6
 _081434BE:
 	movs r0, 0x1
-	bl sub_81424B8
+	bl ClearScreenInBg0
 _081434C4:
 	movs r0, 0x12
 	strb r0, [r5, 0x8]
@@ -2198,7 +1712,7 @@ _081434D0:
 	cmp r0, 0
 	bne _08143500
 	ldr r0, _081434FC @ =gUnknown_841EAE7
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	bl mevent_srv_common_do_init_2
 	b _0814350A
 	.align 2, 0
@@ -2208,7 +1722,7 @@ _081434F8: .4byte gStringVar3
 _081434FC: .4byte gUnknown_841EAE7
 _08143500:
 	ldr r0, _08143510 @ =gUnknown_841EB01
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	bl mevent_srv_common_do_init_1
 _0814350A:
 	movs r0, 0x20
@@ -2274,7 +1788,7 @@ _0814358C:
 	adds r0, r5, 0
 	adds r0, 0x9
 	ldr r1, _081435A8 @ =gUnknown_841E7BC
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 _08143596:
 	cmp r0, 0
 	beq _081435C6

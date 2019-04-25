@@ -25,5 +25,6 @@ void sub_814FF2C(u8 windowId, u16 tileStart, u8 palette);
 void sub_815001C(u8 windowId, u16 tileStart, u8 palette);
 void sub_814FE40(u8 windowId, u16 tileStart, u8 palette);
 void sub_814FDA0(u8 windowId, u16 tileStart, u8 palette);
+void DrawTextBorderOuter(u8 windowId, u16 tileStart, u8 palette);
 
 #endif // GUARD_TEXT_WINDOW_H

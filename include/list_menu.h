@@ -59,5 +59,6 @@ void sub_81AE6C8(u8 a0, u16 *a1, u16 *a2);
 void DestroyListMenu(u8, u16 *, u16 *);
 u16 ListMenuGetYCoordForPrintingArrowCursor(u8);
 void sub_8107D38(u8, u8);
+s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
 
 #endif //GUARD_LIST_MENU_H

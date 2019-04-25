@@ -4288,7 +4288,7 @@ sub_812A424: @ 812A424
 	ldrb r0, [r0, 0x18]
 	movs r1, 0x1
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x18]
 	movs r1, 0xE
@@ -4524,7 +4524,7 @@ _0812A6B0:
 	adds r0, r5, 0
 	movs r1, 0xA
 	movs r2, 0x2
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	ldrb r3, [r4, 0x5]
 	ldrb r0, [r4, 0x6]
 	str r0, [sp]
@@ -4980,7 +4980,7 @@ sub_812AA10: @ 812AA10
 	movs r0, 0x3
 	movs r1, 0x1
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	ldr r0, _0812AA60 @ =gUnknown_845ABEC
 	str r0, [sp]
 	movs r0, 0x3

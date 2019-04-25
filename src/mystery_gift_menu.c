@@ -14,10 +14,17 @@
 #include "sound.h"
 #include "mystery_gift_menu.h"
 #include "title_screen.h"
+#include "list_menu.h"
 #include "link_rfu.h"
+#include "string_util.h"
 #include "constants/songs.h"
 
-extern const struct TextColor gUnknown_8466EE8;
+extern const struct WindowTemplate sWindowTemplate_ThreeOptions;
+extern const struct ListMenuItem sListMenuItems_CardsOrNews[];
+extern const struct ListMenuItem sListMenuItems_WirelessOrFriend[];
+extern const struct ListMenuTemplate sListMenuTemplate_ThreeOptions;
+extern const struct TextColor sMG_Ereader_TextColor_1;
+extern const struct TextColor sMG_Ereader_TextColor_2;
 
 EWRAM_DATA u8 sDownArrowCounterAndYCoordIdx[8] = {};
 EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
@@ -170,7 +177,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 0x11);
         FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 0x11);
         FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);
-        sub_8142420();
+        MG_DrawCheckerboardPattern();
         PrintMysteryGiftOrEReaderTopMenu(mg_or_ereader, 0);
         gMain.state++;
         break;
@@ -238,16 +245,186 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 mg_or_ereader, bool32 usePickOkCance
     if (!mg_or_ereader)
     {
         src = usePickOkCancel == TRUE ? gUnknown_8415F51 : gUnknown_841EDCA;
-        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &gUnknown_8466EE8, 0, gUnknown_841EDBD);
+        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gUnknown_841EDBD);
         width = 222 - GetStringWidth(0, src, 0);
-        AddTextPrinterParametrized2(0, 0, width, 2, 0, 0, &gUnknown_8466EE8, 0, src);
+        AddTextPrinterParametrized2(0, 0, width, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, src);
     }
     else
     {
-        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &gUnknown_8466EE8, 0, gUnknown_841DE50);
-        AddTextPrinterParametrized2(0, 0, 0x78, 2, 0, 0, &gUnknown_8466EE8, 0, gUnknown_841DE51);
+        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gUnknown_841DE50);
+        AddTextPrinterParametrized2(0, 0, 0x78, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gUnknown_841DE51);
     }
     CopyWindowToVram(0, 2);
     PutWindowTilemap(0);
 }
+
+void MG_DrawTextBorder(u8 windowId)
+{
+    DrawTextBorderOuter(windowId, 0x01, 0xF);
+}
+
+void MG_DrawCheckerboardPattern(void)
+{
+    s32 i = 0, j;
+
+    FillBgTilemapBufferRect(3, 0x003, 0, 0, 32, 2, 0x11);
+
+    for (i = 0; i < 18; i++)
+    {
+        for (j = 0; j < 32; j++)
+        {
+            if ((i & 1) != (j & 1))
+            {
+                FillBgTilemapBufferRect(3, 1, j, i + 2, 1, 1, 0x11);
+            }
+            else
+            {
+                FillBgTilemapBufferRect(3, 2, j, i + 2, 1, 1, 0x11);
+            }
+        }
+    }
+}
+
+void ClearScreenInBg0(bool32 ignoreTopTwoRows)
+{
+    switch (ignoreTopTwoRows)
+    {
+    case 0:
+        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x11);
+        break;
+    case 1:
+        FillBgTilemapBufferRect(0, 0, 0, 2, 32, 30, 0x11);
+        break;
+    }
+    CopyBgTilemapBufferToVram(0);
+}
+
+void AddTextPrinterToWindow1(const u8 *str)
+{
+    StringExpandPlaceholders(gStringVar4, str);
+    FillWindowPixelBuffer(1, 0x11);
+    AddTextPrinterParametrized2(1, 2, 0, 2, 0, 2, &sMG_Ereader_TextColor_2, 0, gStringVar4);
+    DrawTextBorderOuter(1, 0x001, 0xF);
+    PutWindowTilemap(1);
+    CopyWindowToVram(1, 3);
+}
+
+void ClearTextWindow(void)
+{
+    rbox_fill_rectangle(1);
+    ClearWindowTilemap(1);
+    CopyWindowToVram(1, 1);
+}
+
+bool32 MG_PrintTextOnWindow1AndWaitButton(u8 *textState, const u8 *str)
+{
+    switch (*textState)
+    {
+    case 0:
+        AddTextPrinterToWindow1(str);
+        goto inc;
+    case 1:
+        DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            inc:
+            (*textState)++;
+        }
+        break;
+    case 2:
+        DrawDownArrow(1, 0xD0, 0x14, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+        *textState = 0;
+        ClearTextWindow();
+        return TRUE;
+    case 0xFF:
+        *textState = 2;
+        break;
+    }
+    return FALSE;
+}
+
+void HideDownArrow(void)
+{
+    DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+}
+
+void ShowDownArrow(void)
+{
+    DrawDownArrow(1, 0xD0, 0x14, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+}
+
+bool32 unref_HideDownArrowAndWaitButton(u8 * textState)
+{
+    switch (*textState)
+    {
+    case 0:
+        HideDownArrow();
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            (*textState)++;
+        }
+        break;
+    case 1:
+        ShowDownArrow();
+        *textState = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 PrintStringAndWait2Seconds(u8 * counter, const u8 * str)
+{
+    if (*counter == 0)
+    {
+        AddTextPrinterToWindow1(str);
+    }
+    if (++(*counter) > 120)
+    {
+        *counter = 0;
+        ClearTextWindow();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whichMenu)
+{
+    struct ListMenuTemplate listMenuTemplate = sListMenuTemplate_ThreeOptions;
+    struct WindowTemplate windowTemplate = sWindowTemplate_ThreeOptions;
+    u32 width;
+    s32 finalWidth;
+    s32 response;
+    u32 i;
+
+    if (whichMenu == 0)
+    {
+        listMenuTemplate.items = sListMenuItems_CardsOrNews;
+    }
+    else
+    {
+        listMenuTemplate.items = sListMenuItems_WirelessOrFriend;
+    }
+    width = 0;
+    for (i = 0; i < listMenuTemplate.totalItems; i++)
+    {
+        u32 curWidth = GetStringWidth(2, listMenuTemplate.items[i].unk_00, listMenuTemplate.lettersSpacing);
+        if (curWidth > width)
+            width = curWidth;
+    }
+    finalWidth = (((width + 9) / 8) + 2) & ~1;
+    windowTemplate.width = finalWidth;
+    windowTemplate.tilemapLeft = (30 - finalWidth) / 2;
+    response = DoMysteryGiftListMenu(&windowTemplate, &listMenuTemplate, 1, 0x00A, 0xE0);
+    if (response != -1)
+    {
+        ClearWindowTilemap(2);
+        CopyWindowToVram(2, 1);
+    }
+    return response;
+}
+
+
 

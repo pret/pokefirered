@@ -60,7 +60,7 @@ _08106F24:
 	lsls r2, 24
 	lsrs r2, 24
 	ldr r1, [sp, 0x4]
-	bl sub_8150048
+	bl DrawTextBorderOuter
 _08106F34:
 	ldr r0, _08106F64 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0

@@ -279,7 +279,7 @@ void sub_8143910(u8 taskId)
     switch (data->t08)
     {
         case 0:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE52))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE52))
                 data->t08 = 1;
             break;
         case 1:
@@ -301,9 +301,9 @@ void sub_8143910(u8 taskId)
                 data->t08 = 13;
             break;
         case 4:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE53))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE53))
             {
-                sub_8142504(gUnknown_841DE54);
+                AddTextPrinterToWindow1(gUnknown_841DE54);
                 sub_81438E8(&data->t00);
                 data->t08 = 5;
             }
@@ -350,11 +350,11 @@ void sub_8143910(u8 taskId)
             }
             break;
         case 7:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE7C))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE7C))
                 data->t08 = 4;
             break;
         case 8:
-            sub_8142504(gUnknown_841DE95);
+            AddTextPrinterToWindow1(gUnknown_841DE95);
             sub_81435DC(&gUnknown_3005ED0, gUnknownSerialData_End - gUnknownSerialData_Start, gUnknownSerialData_Start);
             data->t08 = 9;
             break;
@@ -370,7 +370,7 @@ void sub_8143910(u8 taskId)
             else if (data->t0E == 1)
             {
                 sub_81438E8(&data->t00);
-                sub_8142504(gUnknown_841DE9B);
+                AddTextPrinterToWindow1(gUnknown_841DE9B);
                 data->t08 = 11;
             }
             else
@@ -382,7 +382,7 @@ void sub_8143910(u8 taskId)
             break;
         case 12:
             sub_81436BC();
-            sub_8142504(gUnknown_841DE98);
+            AddTextPrinterToWindow1(gUnknown_841DE98);
             data->t08 = 13;
             break;
         case 13:
@@ -391,7 +391,7 @@ void sub_8143910(u8 taskId)
                 case 0:
                     break;
                 case 2:
-                    sub_8142504(gUnknown_841DE95);
+                    AddTextPrinterToWindow1(gUnknown_841DE95);
                     data->t08 = 14;
                     break;
                 case 1:
@@ -439,7 +439,7 @@ void sub_8143910(u8 taskId)
         case 17:
             if (sub_815D794(gDecompressionBuffer))
             {
-                sub_8142504(gUnknown_841DE99);
+                AddTextPrinterToWindow1(gUnknown_841DE99);
                 sub_81438E8(&data->t00);
                 data->t08 = 18;
             }
@@ -449,7 +449,7 @@ void sub_8143910(u8 taskId)
         case 18:
             if (sub_81438F0(&data->t00, 120))
             {
-                sub_8142504(gUnknown_841DE9A);
+                AddTextPrinterToWindow1(gUnknown_841DE9A);
                 PlayFanfare(258);
                 data->t08 = 19;
             }
@@ -459,19 +459,19 @@ void sub_8143910(u8 taskId)
                 data->t08 = 26;
             break;
         case 23:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE7D))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE7D))
                 data->t08 = 26;
             break;
         case 20:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE96))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE96))
                 data->t08 = 0;
             break;
         case 21:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE97))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE97))
                 data->t08 = 0;
             break;
         case 22:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE9C))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE9C))
                 data->t08 = 0;
             break;
         case 26:

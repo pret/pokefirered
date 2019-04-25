@@ -4067,7 +4067,7 @@ _08117AB8:
 	bl AddWindow
 	strb r0, [r5, 0xF]
 	ldrb r0, [r5, 0xF]
-	bl sub_814240C
+	bl MG_DrawTextBorder
 	ldr r0, _08117B74 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _08117B78 @ =gUnknown_8456D34
@@ -4113,7 +4113,7 @@ _08117BA4: .4byte gUnknown_203B058
 _08117BA8: .4byte gStringVar4
 _08117BAC:
 	ldr r0, _08117BB8 @ =gStringVar4
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0x4
 	strb r0, [r5, 0xC]
 	b _08117ECA
@@ -4142,7 +4142,7 @@ _08117BE4:
 	adds r0, r5, 0
 	adds r0, 0xD
 	ldr r1, _08117C08 @ =gUnknown_84577F8
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	bne _08117BF4
 	b _08117ECA
@@ -4346,7 +4346,7 @@ _08117D88:
 	b _08117ECA
 _08117D94:
 	ldr r0, _08117DA0 @ =gStringVar4
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0xA
 	strb r0, [r5, 0xC]
 	b _08117ECA
@@ -4416,7 +4416,7 @@ _08117E26:
 	adds r0, r5, 0
 	adds r0, 0xD
 	ldr r1, _08117E44 @ =gUnknown_84571B8
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	beq _08117ECA
 	adds r0, r4, 0
@@ -4585,7 +4585,7 @@ _08117F7C:
 	b _08118288
 _08117FB0:
 	ldr r0, _08117FBC @ =gUnknown_8458FE4
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0x2
 	strb r0, [r5, 0x8]
 	b _08118288
@@ -4623,7 +4623,7 @@ _08117FC0:
 	bl AddWindow
 	strb r0, [r5, 0xD]
 	ldrb r0, [r5, 0xB]
-	bl sub_814240C
+	bl MG_DrawTextBorder
 	ldr r0, _08118068 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _0811806C @ =gUnknown_8456DDC
@@ -4638,7 +4638,7 @@ _08117FC0:
 	bl ListMenuInit
 	strb r0, [r5, 0xE]
 	ldrb r0, [r5, 0xD]
-	bl sub_814240C
+	bl MG_DrawTextBorder
 	ldrb r0, [r5, 0xD]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -4766,7 +4766,7 @@ _08118146:
 _0811814C: .4byte gMain
 _08118150:
 	ldr r0, _08118184 @ =gUnknown_8459238
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	ldr r4, _08118188 @ =gStringVar1
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -4831,7 +4831,7 @@ _081181D0:
 	b _08118288
 _081181D6:
 	ldr r0, _081181E8 @ =gUnknown_84576AC
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0
 	movs r1, 0
 	bl sub_80FB9E4
@@ -4868,7 +4868,7 @@ _08118222:
 	adds r0, r4
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	beq _08118288
 	bl sub_80FCE44
@@ -4878,7 +4878,7 @@ _08118244: .4byte gUnknown_8457838
 _08118248:
 	bl sub_80FCE44
 	ldr r0, _08118264 @ =gUnknown_84571B8
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 _08118252:
 	adds r0, r6, 0
 	bl DestroyTask
@@ -5004,7 +5004,7 @@ _08118340:
 	b _08118604
 _0811836E:
 	ldr r0, _0811837C @ =gUnknown_84591DC
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0x2
 	strb r0, [r5, 0x8]
 	b _08118604
@@ -5041,7 +5041,7 @@ _08118380:
 	bl AddWindow
 	strb r0, [r5, 0xB]
 	ldrb r0, [r5, 0xB]
-	bl sub_814240C
+	bl MG_DrawTextBorder
 	ldr r0, _08118400 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _08118404 @ =gUnknown_8456DDC
@@ -5163,7 +5163,7 @@ _081184BC:
 _081184C4: .4byte gMain
 _081184C8:
 	ldr r0, _081184FC @ =gUnknown_845928C
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	ldr r4, _08118500 @ =gStringVar1
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -5228,7 +5228,7 @@ _08118548:
 	b _08118604
 _0811854E:
 	ldr r0, _08118560 @ =gUnknown_845777C
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0
 	movs r1, 0
 	bl sub_80FB9E4
@@ -5281,7 +5281,7 @@ _081185B4:
 	adds r1, r2
 	ldr r1, [r1]
 _081185C2:
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	beq _08118604
 	bl sub_80FCE44
@@ -12797,7 +12797,7 @@ _0811C168:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	str r5, [sp]
 	movs r0, 0
 	adds r1, r6, 0

@@ -440,8 +440,8 @@ sub_815001C: @ 815001C
 _08150044: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_815001C
 
-	thumb_func_start sub_8150048
-sub_8150048: @ 8150048
+	thumb_func_start DrawTextBorderOuter
+DrawTextBorderOuter: @ 8150048
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -625,7 +625,7 @@ sub_8150048: @ 8150048
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8150048
+	thumb_func_end DrawTextBorderOuter
 
 	thumb_func_start sub_81501D0
 sub_81501D0: @ 81501D0

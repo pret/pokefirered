@@ -656,7 +656,7 @@ s32 sub_8146604(bool32 flag)
             PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
             break;
         case 6:
-            sub_8142420();
+            MG_DrawCheckerboardPattern();
             CopyBgTilemapBufferToVram(0);
             CopyBgTilemapBufferToVram(3);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);

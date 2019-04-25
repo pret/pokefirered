@@ -11,7 +11,7 @@ gUnknown_8466D98:: @ 8466D98
 gUnknown_8466DA0:: @ 8466DA0
 	.incbin "baserom.gba", 0x466DA0, 0x8
 
-gUnknown_8466DA8:: @ 8466DA8
+sWindowTemplate_ThreeOptions:: @ 8466DA8
 	.incbin "baserom.gba", 0x466DA8, 0x8
 
 gUnknown_8466DB0:: @ 8466DB0
@@ -26,13 +26,13 @@ gUnknown_8466DC0:: @ 8466DC0
 gUnknown_8466DC8:: @ 8466DC8
 	.incbin "baserom.gba", 0x466DC8, 0x8
 
-gUnknown_8466DD0:: @ 8466DD0
+sListMenuItems_CardsOrNews:: @ 8466DD0
 	.incbin "baserom.gba", 0x466DD0, 0x18
 
-gUnknown_8466DE8:: @ 8466DE8
+sListMenuItems_WirelessOrFriend:: @ 8466DE8
 	.incbin "baserom.gba", 0x466DE8, 0x18
 
-gUnknown_8466E00:: @ 8466E00
+sListMenuTemplate_ThreeOptions:: @ 8466E00
 	.incbin "baserom.gba", 0x466E00, 0x78
 
 gUnknown_8466E78:: @ 8466E78
@@ -47,8 +47,8 @@ gUnknown_8466EA8:: @ 8466EA8
 gUnknown_8466EC0:: @ 8466EC0
 	.incbin "baserom.gba", 0x466EC0, 0x28
 
-gUnknown_8466EE8:: @ 8466EE8
+sMG_Ereader_TextColor_1:: @ 8466EE8
 	.incbin "baserom.gba", 0x466EE8, 0x8
 
-gUnknown_8466EF0:: @ 8466EF0
+sMG_Ereader_TextColor_2:: @ 8466EF0
 	.incbin "baserom.gba", 0x466EF0, 0x10

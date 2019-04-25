@@ -1912,7 +1912,7 @@ _0806FC14:
 	movs r0, 0
 	movs r1, 0x8
 	movs r2, 0xF
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0

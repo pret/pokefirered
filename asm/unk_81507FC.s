@@ -6478,7 +6478,7 @@ sub_81538D0: @ 81538D0
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	adds r0, r7, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

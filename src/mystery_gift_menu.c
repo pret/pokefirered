@@ -17,14 +17,8 @@
 #include "list_menu.h"
 #include "link_rfu.h"
 #include "string_util.h"
+#include "mevent.h"
 #include "constants/songs.h"
-
-extern const struct WindowTemplate sWindowTemplate_ThreeOptions;
-extern const struct ListMenuItem sListMenuItems_CardsOrNews[];
-extern const struct ListMenuItem sListMenuItems_WirelessOrFriend[];
-extern const struct ListMenuTemplate sListMenuTemplate_ThreeOptions;
-extern const struct TextColor sMG_Ereader_TextColor_1;
-extern const struct TextColor sMG_Ereader_TextColor_2;
 
 EWRAM_DATA u8 sDownArrowCounterAndYCoordIdx[8] = {};
 EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
@@ -116,6 +110,24 @@ static const struct WindowTemplate sMainWindows[] = {
         0xFF
     }
 };
+
+extern const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width28;
+extern const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width20;
+extern const struct WindowTemplate sMysteryGiftMenuWindowTemplate;
+extern const struct WindowTemplate sWindowTemplate_ThreeOptions;
+extern const struct WindowTemplate sWindowTemplate_YesNoBox;
+extern const struct WindowTemplate sWindowTemplate_7by8;
+extern const struct WindowTemplate sWindowTemplate_7by6;
+extern const struct WindowTemplate sWindowTemplate_7by4;
+extern const struct ListMenuItem sListMenuItems_CardsOrNews[];
+extern const struct ListMenuItem sListMenuItems_WirelessOrFriend[];
+extern const struct ListMenuTemplate sListMenuTemplate_ThreeOptions;
+extern const struct ListMenuTemplate sListMenu_ReceiveSendToss;
+extern const struct ListMenuTemplate sListMenu_ReceiveToss;
+extern const struct ListMenuTemplate sListMenu_ReceiveSend;
+extern const struct ListMenuTemplate sListMenu_Receive;
+extern const struct TextColor sMG_Ereader_TextColor_1;
+extern const struct TextColor sMG_Ereader_TextColor_2;
 
 void vblankcb_mystery_gift_e_reader_run(void)
 {
@@ -236,6 +248,8 @@ extern const u8 gUnknown_841EDCA[];
 extern const u8 gUnknown_841EDBD[];
 extern const u8 gUnknown_841DE50[];
 extern const u8 gUnknown_841DE51[];
+extern const u8 gText_WhatToDoWithCards[];
+extern const u8 gText_WhatToDoWithNews[];
 
 void PrintMysteryGiftOrEReaderTopMenu(bool8 mg_or_ereader, bool32 usePickOkCancel)
 {
@@ -426,5 +440,188 @@ u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whichMenu)
     return response;
 }
 
+s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, const u8 * str)
+{
+    struct WindowTemplate windowTemplate;
+    s8 input;
+
+    switch (*textState)
+    {
+    case 0:
+        StringExpandPlaceholders(gStringVar4, str);
+        if (yesNoBoxPlacement == 0)
+        {
+            *windowId = AddWindow(&sWindowTemplate_PromptYesOrNo_Width28);
+        }
+        else
+        {
+            *windowId = AddWindow(&sWindowTemplate_PromptYesOrNo_Width20);
+        }
+        FillWindowPixelBuffer(*windowId, 0x11);
+        AddTextPrinterParametrized2(*windowId, 2, 0, 2, 0, 2, &sMG_Ereader_TextColor_2, 0, gStringVar4);
+        DrawTextBorderOuter(*windowId, 0x001, 0x0F);
+        CopyWindowToVram(*windowId, 2);
+        PutWindowTilemap(*windowId);
+        (*textState)++;
+        break;
+    case 1:
+        windowTemplate = sWindowTemplate_YesNoBox;
+        if (yesNoBoxPlacement == 0)
+        {
+            windowTemplate.tilemapTop = 9;
+        }
+        else
+        {
+            windowTemplate.tilemapTop = 15;
+        }
+        sub_810FF60(&windowTemplate, 2, 0, 2, 10, 14, 0);
+        (*textState)++;
+        break;
+    case 2:
+        input = ProcessMenuInputNoWrap_();
+        if (input == -1 || input == 0 || input == 1)
+        {
+            *textState = 0;
+            rbox_fill_rectangle(*windowId);
+            ClearWindowTilemap(*windowId);
+            CopyWindowToVram(*windowId, 1);
+            RemoveWindow(*windowId);
+            return input;
+        }
+        break;
+    case 0xFF:
+        *textState = 0;
+        rbox_fill_rectangle(*windowId);
+        ClearWindowTilemap(*windowId);
+        CopyWindowToVram(*windowId, 1);
+        RemoveWindow(*windowId);
+        return -1;
+    }
+
+    return -2;
+}
+
+s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
+{
+    struct WindowTemplate windowTemplate;
+    s32 input;
+
+    switch (*textState)
+    {
+    case 0:
+        if (cannotToss == 0)
+        {
+            StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithCards);
+        }
+        else
+        {
+            StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithNews);
+        }
+        *windowId = AddWindow(&sMysteryGiftMenuWindowTemplate);
+        FillWindowPixelBuffer(*windowId, 0x11);
+        AddTextPrinterParametrized2(*windowId, 2, 0, 2, 0, 2, &sMG_Ereader_TextColor_2, 0, gStringVar4);
+        DrawTextBorderOuter(*windowId, 0x001, 0x0F);
+        CopyWindowToVram(*windowId, 2);
+        PutWindowTilemap(*windowId);
+        (*textState)++;
+        break;
+    case 1:
+        windowTemplate = sWindowTemplate_YesNoBox;
+        if (cannotSend)
+        {
+            if (cannotToss == 0)
+            {
+                input = DoMysteryGiftListMenu(&sWindowTemplate_7by6, &sListMenu_ReceiveToss, 1, 0x00A, 0xE0);
+            }
+            else
+            {
+                input = DoMysteryGiftListMenu(&sWindowTemplate_7by4, &sListMenu_Receive, 1, 0x00A, 0xE0);
+            }
+        }
+        else
+        {
+            if (cannotToss == 0)
+            {
+                input = DoMysteryGiftListMenu(&sWindowTemplate_7by8, &sListMenu_ReceiveSendToss, 1, 0x00A, 0xE0);
+            }
+            else
+            {
+                input = DoMysteryGiftListMenu(&sWindowTemplate_7by6, &sListMenu_ReceiveSend, 1, 0x00A, 0xE0);
+            }
+        }
+        if (input != -1)
+        {
+            *textState = 0;
+            rbox_fill_rectangle(*windowId);
+            ClearWindowTilemap(*windowId);
+            CopyWindowToVram(*windowId, 1);
+            RemoveWindow(*windowId);
+            return input;
+        }
+        break;
+    case 0xFF:
+        *textState = 0;
+        rbox_fill_rectangle(*windowId);
+        ClearWindowTilemap(*windowId);
+        CopyWindowToVram(*windowId, 1);
+        RemoveWindow(*windowId);
+        return -2;
+    }
+
+    return -1;
+}
+
+bool32 ValidateCardOrNews(bool32 cardOrNews)
+{
+    if (cardOrNews == 0)
+    {
+        return ValidateReceivedWonderNews();
+    }
+    else
+    {
+        return ValidateReceivedWonderCard();
+    }
+}
+
+bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
+{
+    s32 v0;
+
+    switch (*state)
+    {
+    case 0:
+        if (cardOrNews == 0)
+        {
+            InitWonderCardResources(GetSavedWonderCard(), sav1_get_mevent_buffer_2());
+        }
+        else
+        {
+            InitWonderNewsResources(GetSavedWonderNews());
+        }
+        (*state)++;
+        break;
+    case 1:
+        if (cardOrNews == 0)
+        {
+            v0 = FadeToWonderCardMenu();
+            check:
+            if (v0 != 0)
+            {
+                goto done;
+            }
+            break;
+        }
+        else
+        {
+            v0 = FadeToWonderNewsMenu();
+            goto check;
+        }
+    done:
+        *state = 0;
+        return TRUE;
+    }
+
+    return FALSE;
+}
 
 

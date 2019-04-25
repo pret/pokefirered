@@ -2516,10 +2516,10 @@ gUnknown_841EA3F:: @ 841EA3F
 gUnknown_841EA6F:: @ 841EA6F
 	.incbin "baserom.gba", 0x41EA6F, 0x17
 
-gUnknown_841EA86:: @ 841EA86
+gText_WhatToDoWithCards:: @ 841EA86
 	.incbin "baserom.gba", 0x41EA86, 0x31
 
-gUnknown_841EAB7:: @ 841EAB7
+gText_WhatToDoWithNews:: @ 841EAB7
 	.incbin "baserom.gba", 0x41EAB7, 0x30
 
 gUnknown_841EAE7:: @ 841EAE7

@@ -126,7 +126,7 @@ const struct UnkStruct_8467FB8 gUnknown_8467FB8[8] = {
     {1, 0, 0, 7, gUnknown_8467A7C, gUnknown_8467CAC, gUnknown_846716C}
 };
 
-bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
+bool32 InitWonderCardResources(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
 {
     if (r5 == NULL || r6 == NULL)
         return FALSE;
@@ -155,7 +155,7 @@ void sub_81456F0(void)
     }
 }
 
-s32 sub_814571C(void)
+s32 FadeToWonderCardMenu(void)
 {
     if (gUnknown_203F3C8 == NULL)
         return -1;
@@ -508,7 +508,7 @@ const struct UnkStruct_8467FB8 gUnknown_8468720[] = {
     {1, 0, 0, 0, gUnknown_84685B4, gUnknown_8468644, gUnknown_84680A0}
 };
 
-bool32 sub_8146288(const struct MEventBuffer_3120_Sub * a0)
+bool32 InitWonderNewsResources(const struct MEventBuffer_3120_Sub * a0)
 {
     if (a0 == NULL)
         return FALSE;
@@ -533,7 +533,7 @@ void sub_81462EC(void)
     }
 }
 
-s32 sub_8146318(void)
+s32 FadeToWonderNewsMenu(void)
 {
     if (gUnknown_203F3CC == NULL)
         return -1;

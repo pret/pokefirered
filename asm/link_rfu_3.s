@@ -4169,7 +4169,7 @@ _08117C12:
 	adds r1, 0x14
 	ldr r3, _08117C38 @ =gStringVar4
 	movs r2, 0
-	bl sub_81427A0
+	bl mevent_message_print_and_prompt_yes_no
 	lsls r0, 24
 	asrs r4, r0, 24
 	cmp r4, 0

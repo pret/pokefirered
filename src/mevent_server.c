@@ -526,12 +526,12 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 26:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 506);
-            memcpy(svr->mevent_32e0, sav1_get_mevent_buffer_1(), 332);
+            memcpy(svr->mevent_32e0, GetSavedWonderCard(), 332);
             sub_814410C(svr->mevent_32e0);
             break;
         case 27:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 512);
-            memcpy(svr->mevent_3120, sub_8143D58(), 444);
+            memcpy(svr->mevent_3120, GetSavedWonderNews(), 444);
             break;
         case 28:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 517);

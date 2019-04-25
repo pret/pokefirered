@@ -59,7 +59,7 @@ u16 sub_8146CE8(void)
     struct MysteryEventStruct *r4 = sub_8143D94();
     u16 r5;
 
-    if (!sub_806E2BC() || !sub_8143E1C())
+    if (!sub_806E2BC() || !ValidateReceivedWonderCard())
         return 0;
 
     r5 = sub_8146E0C(r4);

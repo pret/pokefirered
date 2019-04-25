@@ -5,389 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81427A0
-sub_81427A0: @ 81427A0
-	push {r4-r6,lr}
-	sub sp, 0x1C
-	adds r5, r0, 0
-	adds r4, r1, 0
-	adds r1, r3, 0
-	lsls r2, 24
-	lsrs r6, r2, 24
-	ldrb r0, [r5]
-	cmp r0, 0x1
-	beq _08142834
-	cmp r0, 0x1
-	bgt _081427BE
-	cmp r0, 0
-	beq _081427CA
-	b _081428E6
-_081427BE:
-	cmp r0, 0x2
-	beq _0814288C
-	cmp r0, 0xFF
-	bne _081427C8
-	b _081428C2
-_081427C8:
-	b _081428E6
-_081427CA:
-	ldr r0, _081427D8 @ =gStringVar4
-	bl StringExpandPlaceholders
-	cmp r6, 0
-	bne _081427E0
-	ldr r0, _081427DC @ =gUnknown_8466D90
-	b _081427E2
-	.align 2, 0
-_081427D8: .4byte gStringVar4
-_081427DC: .4byte gUnknown_8466D90
-_081427E0:
-	ldr r0, _08142828 @ =gUnknown_8466D98
-_081427E2:
-	bl AddWindow
-	strh r0, [r4]
-	ldrb r0, [r4]
-	movs r1, 0x11
-	bl FillWindowPixelBuffer
-	ldrb r0, [r4]
-	movs r2, 0
-	str r2, [sp]
-	movs r1, 0x2
-	str r1, [sp, 0x4]
-	ldr r1, _0814282C @ =sMG_Ereader_TextColor_2
-	str r1, [sp, 0x8]
-	str r2, [sp, 0xC]
-	ldr r1, _08142830 @ =gStringVar4
-	str r1, [sp, 0x10]
-	movs r1, 0x2
-	movs r3, 0x2
-	bl AddTextPrinterParametrized2
-	ldrb r0, [r4]
-	movs r1, 0x1
-	movs r2, 0xF
-	bl DrawTextBorderOuter
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl CopyWindowToVram
-	ldrb r0, [r4]
-	bl PutWindowTilemap
-	b _0814287E
-	.align 2, 0
-_08142828: .4byte gUnknown_8466D98
-_0814282C: .4byte sMG_Ereader_TextColor_2
-_08142830: .4byte gStringVar4
-_08142834:
-	ldr r0, _08142850 @ =gUnknown_8466DB0
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [sp, 0x14]
-	str r1, [sp, 0x18]
-	cmp r6, 0
-	bne _08142858
-	ldr r0, _08142854 @ =0xff00ffff
-	ldr r1, [sp, 0x14]
-	ands r1, r0
-	movs r0, 0x90
-	lsls r0, 12
-	b _08142862
-	.align 2, 0
-_08142850: .4byte gUnknown_8466DB0
-_08142854: .4byte 0xff00ffff
-_08142858:
-	ldr r0, _08142888 @ =0xff00ffff
-	ldr r1, [sp, 0x14]
-	ands r1, r0
-	movs r0, 0xF0
-	lsls r0, 12
-_08142862:
-	orrs r1, r0
-	str r1, [sp, 0x14]
-	movs r0, 0xA
-	str r0, [sp]
-	movs r0, 0xE
-	str r0, [sp, 0x4]
-	movs r0, 0
-	str r0, [sp, 0x8]
-	add r0, sp, 0x14
-	movs r1, 0x2
-	movs r2, 0
-	movs r3, 0x2
-	bl sub_810FF60
-_0814287E:
-	ldrb r0, [r5]
-	adds r0, 0x1
-	strb r0, [r5]
-	b _081428E6
-	.align 2, 0
-_08142888: .4byte 0xff00ffff
-_0814288C:
-	bl ProcessMenuInputNoWrap_
-	lsls r0, 24
-	asrs r6, r0, 24
-	movs r1, 0x80
-	lsls r1, 17
-	adds r0, r1
-	lsrs r0, 24
-	cmp r0, 0x2
-	bhi _081428E6
-	movs r0, 0
-	strb r0, [r5]
-	ldrb r0, [r4]
-	bl rbox_fill_rectangle
-	ldrb r0, [r4]
-	bl ClearWindowTilemap
-	ldrb r0, [r4]
-	movs r1, 0x1
-	bl CopyWindowToVram
-	ldrb r0, [r4]
-	bl RemoveWindow
-	adds r0, r6, 0
-	b _081428EA
-_081428C2:
-	movs r0, 0
-	strb r0, [r5]
-	ldrb r0, [r4]
-	bl rbox_fill_rectangle
-	ldrb r0, [r4]
-	bl ClearWindowTilemap
-	ldrb r0, [r4]
-	movs r1, 0x1
-	bl CopyWindowToVram
-	ldrb r0, [r4]
-	bl RemoveWindow
-	movs r0, 0x1
-	negs r0, r0
-	b _081428EA
-_081428E6:
-	movs r0, 0x2
-	negs r0, r0
-_081428EA:
-	add sp, 0x1C
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81427A0
-
-	thumb_func_start sub_81428F4
-sub_81428F4: @ 81428F4
-	push {r4-r6,lr}
-	sub sp, 0x14
-	adds r6, r0, 0
-	adds r5, r1, 0
-	ldrb r0, [r6]
-	cmp r0, 0x1
-	beq _08142994
-	cmp r0, 0x1
-	bgt _0814290C
-	cmp r0, 0
-	beq _08142914
-	b _08142A38
-_0814290C:
-	cmp r0, 0xFF
-	bne _08142912
-	b _08142A14
-_08142912:
-	b _08142A38
-_08142914:
-	cmp r2, 0
-	bne _0814292C
-	ldr r0, _08142924 @ =gStringVar4
-	ldr r1, _08142928 @ =gUnknown_841EA86
-	bl StringExpandPlaceholders
-	b _08142934
-	.align 2, 0
-_08142924: .4byte gStringVar4
-_08142928: .4byte gUnknown_841EA86
-_0814292C:
-	ldr r0, _08142984 @ =gStringVar4
-	ldr r1, _08142988 @ =gUnknown_841EAB7
-	bl StringExpandPlaceholders
-_08142934:
-	ldr r0, _0814298C @ =gUnknown_8466DA0
-	bl AddWindow
-	strh r0, [r5]
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x11
-	bl FillWindowPixelBuffer
-	ldrb r0, [r5]
-	movs r2, 0
-	str r2, [sp]
-	movs r1, 0x2
-	str r1, [sp, 0x4]
-	ldr r1, _08142990 @ =sMG_Ereader_TextColor_2
-	str r1, [sp, 0x8]
-	str r2, [sp, 0xC]
-	ldr r1, _08142984 @ =gStringVar4
-	str r1, [sp, 0x10]
-	movs r1, 0x2
-	movs r3, 0x2
-	bl AddTextPrinterParametrized2
-	ldrb r0, [r5]
-	movs r1, 0x1
-	movs r2, 0xF
-	bl DrawTextBorderOuter
-	ldrb r0, [r5]
-	movs r1, 0x2
-	bl CopyWindowToVram
-	ldrb r0, [r5]
-	bl PutWindowTilemap
-	ldrb r0, [r6]
-	adds r0, 0x1
-	strb r0, [r6]
-	b _08142A38
-	.align 2, 0
-_08142984: .4byte gStringVar4
-_08142988: .4byte gUnknown_841EAB7
-_0814298C: .4byte gUnknown_8466DA0
-_08142990: .4byte sMG_Ereader_TextColor_2
-_08142994:
-	cmp r3, 0
-	beq _081429BC
-	cmp r2, 0
-	bne _081429AC
-	ldr r0, _081429A4 @ =gUnknown_8466DC0
-	ldr r1, _081429A8 @ =gUnknown_8466E90
-	b _081429D4
-	.align 2, 0
-_081429A4: .4byte gUnknown_8466DC0
-_081429A8: .4byte gUnknown_8466E90
-_081429AC:
-	ldr r0, _081429B4 @ =gUnknown_8466DC8
-	ldr r1, _081429B8 @ =gUnknown_8466EC0
-	b _081429D4
-	.align 2, 0
-_081429B4: .4byte gUnknown_8466DC8
-_081429B8: .4byte gUnknown_8466EC0
-_081429BC:
-	cmp r2, 0
-	bne _081429D0
-	ldr r0, _081429C8 @ =gUnknown_8466DB8
-	ldr r1, _081429CC @ =gUnknown_8466E78
-	b _081429D4
-	.align 2, 0
-_081429C8: .4byte gUnknown_8466DB8
-_081429CC: .4byte gUnknown_8466E78
-_081429D0:
-	ldr r0, _08142A0C @ =gUnknown_8466DC0
-	ldr r1, _08142A10 @ =gUnknown_8466EA8
-_081429D4:
-	movs r2, 0xE0
-	str r2, [sp]
-	movs r2, 0x1
-	movs r3, 0xA
-	bl DoMysteryGiftListMenu
-	adds r4, r0, 0
-	movs r0, 0x1
-	negs r0, r0
-	cmp r4, r0
-	beq _08142A38
-	movs r0, 0
-	strb r0, [r6]
-	ldrb r0, [r5]
-	bl rbox_fill_rectangle
-	ldrb r0, [r5]
-	bl ClearWindowTilemap
-	ldrb r0, [r5]
-	movs r1, 0x1
-	bl CopyWindowToVram
-	ldrb r0, [r5]
-	bl RemoveWindow
-	adds r0, r4, 0
-	b _08142A3C
-	.align 2, 0
-_08142A0C: .4byte gUnknown_8466DC0
-_08142A10: .4byte gUnknown_8466EA8
-_08142A14:
-	movs r0, 0
-	strb r0, [r6]
-	ldrb r0, [r5]
-	bl rbox_fill_rectangle
-	ldrb r0, [r5]
-	bl ClearWindowTilemap
-	ldrb r0, [r5]
-	movs r1, 0x1
-	bl CopyWindowToVram
-	ldrb r0, [r5]
-	bl RemoveWindow
-	movs r0, 0x2
-	negs r0, r0
-	b _08142A3C
-_08142A38:
-	movs r0, 0x1
-	negs r0, r0
-_08142A3C:
-	add sp, 0x14
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81428F4
-
-	thumb_func_start sub_8142A44
-sub_8142A44: @ 8142A44
-	push {lr}
-	cmp r0, 0
-	beq _08142A50
-	bl sub_8143E1C
-	b _08142A54
-_08142A50:
-	bl sub_8143FC8
-_08142A54:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8142A44
-
-	thumb_func_start sub_8142A58
-sub_8142A58: @ 8142A58
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldrb r0, [r5]
-	cmp r0, 0
-	beq _08142A68
-	cmp r0, 0x1
-	beq _08142A90
-	b _08142AAC
-_08142A68:
-	cmp r1, 0
-	bne _08142A80
-	bl sav1_get_mevent_buffer_1
-	adds r4, r0, 0
-	bl sav1_get_mevent_buffer_2
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl sub_8145654
-	b _08142A88
-_08142A80:
-	bl sub_8143D58
-	bl sub_8146288
-_08142A88:
-	ldrb r0, [r5]
-	adds r0, 0x1
-	strb r0, [r5]
-	b _08142AAC
-_08142A90:
-	cmp r1, 0
-	bne _08142A9E
-	bl sub_814571C
-_08142A98:
-	cmp r0, 0
-	bne _08142AA4
-	b _08142AAC
-_08142A9E:
-	bl sub_8146318
-	b _08142A98
-_08142AA4:
-	movs r0, 0
-	strb r0, [r5]
-	movs r0, 0x1
-	b _08142AAE
-_08142AAC:
-	movs r0, 0
-_08142AAE:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8142A58
-
 	thumb_func_start sub_8142AB4
 sub_8142AB4: @ 8142AB4
 	push {lr}
@@ -444,7 +61,7 @@ _08142B0C:
 	ldr r3, _08142B1C @ =gUnknown_841EC99
 _08142B0E:
 	movs r2, 0x1
-	bl sub_81427A0
+	bl mevent_message_print_and_prompt_yes_no
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}
@@ -1012,11 +629,11 @@ _08142F6A:
 _08142F8A:
 	movs r0, 0
 	strb r0, [r5, 0xC]
-	bl sub_8143FC8
+	bl ValidateReceivedWonderNews
 	b _08142F9A
 _08142F94:
 	strb r1, [r5, 0xC]
-	bl sub_8143E1C
+	bl ValidateReceivedWonderCard
 _08142F9A:
 	cmp r0, 0x1
 	bne _08142FA0
@@ -1107,7 +724,7 @@ _08143036:
 _08143042:
 	bl ClearTextWindow
 	ldrb r0, [r5, 0xC]
-	bl sub_8142A44
+	bl ValidateCardOrNews
 	cmp r0, 0
 	beq _08143052
 	b _081434C4
@@ -1259,7 +876,7 @@ _08143174:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_81427A0
+	bl mevent_message_print_and_prompt_yes_no
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0x1
@@ -1286,7 +903,7 @@ _081431B0:
 	ldr r3, _081431D8 @ =gUnknown_841E7F2
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_81427A0
+	bl mevent_message_print_and_prompt_yes_no
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0x1
@@ -1310,7 +927,7 @@ _081431E0:
 	ldr r3, _08143204 @ =gUnknown_841E823
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_81427A0
+	bl mevent_message_print_and_prompt_yes_no
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0x1
@@ -1430,7 +1047,7 @@ _081432CC:
 	adds r0, r5, 0
 	adds r0, 0x9
 	ldrb r1, [r5, 0xC]
-	bl sub_8142A58
+	bl HandleLoadWonderCardOrNews
 	cmp r0, 0
 	bne _081432DC
 	b _081435C6
@@ -1507,7 +1124,7 @@ _0814335A:
 	adds r1, r5, 0
 	movs r3, 0x1
 _08143364:
-	bl sub_81428F4
+	bl HandleMysteryGiftListMenu
 	adds r1, r0, 0
 	cmp r1, 0x1
 	beq _08143386
@@ -1571,7 +1188,7 @@ _081433D2:
 	ldr r3, _081433F8 @ =gUnknown_841ECF9
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_81427A0
+	bl mevent_message_print_and_prompt_yes_no
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0x1

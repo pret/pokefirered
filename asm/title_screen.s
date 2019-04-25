@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8078914
-sub_8078914: @ 8078914
+	thumb_func_start CB2_InitTitleScreen
+CB2_InitTitleScreen: @ 8078914
 	push {r4-r6,lr}
 	sub sp, 0xC
 	ldr r0, _08078930 @ =gMain
@@ -230,7 +230,7 @@ _08078B26:
 	bx r0
 	.align 2, 0
 _08078B30: .4byte gMain
-	thumb_func_end sub_8078914
+	thumb_func_end CB2_InitTitleScreen
 
 	thumb_func_start sub_8078B34
 sub_8078B34: @ 8078B34

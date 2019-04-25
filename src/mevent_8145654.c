@@ -252,7 +252,7 @@ s32 sub_814593C(bool32 flag)
             FreeMonIconPalettes();
             break;
         case 5:
-            sub_8142344(gUnknown_203F3B8, flag);
+            PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
             break;
         case 6:
             CopyBgTilemapBufferToVram(0);
@@ -653,7 +653,7 @@ s32 sub_8146604(bool32 flag)
             }
             break;
         case 5:
-            sub_8142344(gUnknown_203F3B8, flag);
+            PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
             break;
         case 6:
             sub_8142420();

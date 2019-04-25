@@ -1005,7 +1005,7 @@ _0800CB64: .4byte gPlttBufferUnfaded
 _0800CB68: .4byte gPlttBufferFaded
 _0800CB6C: .4byte gUnknown_2031DE0
 _0800CB70:
-	ldr r0, _0800CB8C @ =sub_81422AC
+	ldr r0, _0800CB8C @ =c2_mystery_gift
 	bl SetMainCallback2
 	bl sub_812B478
 	bl FreeAllWindowBuffers
@@ -1017,7 +1017,7 @@ _0800CB84:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800CB8C: .4byte sub_81422AC
+_0800CB8C: .4byte c2_mystery_gift
 	thumb_func_end sub_800CA94
 
 	thumb_func_start sub_800CB90
@@ -1141,7 +1141,7 @@ sub_800CC68: @ 800CC68
 	ands r0, r1
 	cmp r0, 0
 	bne _0800CC86
-	ldr r0, _0800CC90 @ =sub_8078914
+	ldr r0, _0800CC90 @ =CB2_InitTitleScreen
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1151,7 +1151,7 @@ _0800CC86:
 	bx r0
 	.align 2, 0
 _0800CC8C: .4byte gPaletteFade
-_0800CC90: .4byte sub_8078914
+_0800CC90: .4byte CB2_InitTitleScreen
 	thumb_func_end sub_800CC68
 
 	thumb_func_start sub_800CC94

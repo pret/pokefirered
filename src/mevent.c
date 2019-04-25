@@ -240,7 +240,7 @@ u32 sub_8143770(u8 * r4, u16 * r5)
     return 0;
 }
 
-void sub_81438A0(void)
+void task_add_00_ereader(void)
 {
     u8 taskId = CreateTask(sub_8143910, 0);
     struct MEventTaskData1 *data = (struct MEventTaskData1 *)gTasks[taskId].data;
@@ -478,7 +478,7 @@ void sub_8143910(u8 taskId)
             sub_812B484();
             Free(data->t10);
             DestroyTask(taskId);
-            SetMainCallback2(sub_81422FC);
+            SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);
             break;
     }
 }

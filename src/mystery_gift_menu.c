@@ -9,14 +9,21 @@
 #include "text.h"
 #include "window.h"
 #include "text_window.h"
+#include "menu.h"
 #include "new_menu_helpers.h"
 #include "sound.h"
 #include "mystery_gift_menu.h"
+#include "title_screen.h"
 #include "link_rfu.h"
 #include "constants/songs.h"
 
+extern const struct TextColor gUnknown_8466EE8;
+
 EWRAM_DATA u8 sDownArrowCounterAndYCoordIdx[8] = {};
 EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
+
+void task_add_00_mystery_gift(void);
+void task_add_00_ereader(void);
 
 static const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
 static const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
@@ -164,7 +171,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 0x11);
         FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);
         sub_8142420();
-        sub_8142344(mg_or_ereader, 0);
+        PrintMysteryGiftOrEReaderTopMenu(mg_or_ereader, 0);
         gMain.state++;
         break;
     case 2:
@@ -184,5 +191,63 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
     }
 
     return FALSE;
+}
+
+void c2_mystery_gift(void)
+{
+    if (HandleMysteryGiftOrEReaderSetup(0))
+    {
+        SetMainCallback2(c2_mystery_gift_e_reader_run);
+        gGiftIsFromEReader = FALSE;
+        task_add_00_mystery_gift();
+    }
+}
+
+void c2_ereader(void)
+{
+    if (HandleMysteryGiftOrEReaderSetup(1))
+    {
+        SetMainCallback2(c2_mystery_gift_e_reader_run);
+        gGiftIsFromEReader = TRUE;
+        task_add_00_ereader();
+    }
+}
+
+void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void)
+{
+    gGiftIsFromEReader = FALSE;
+    FreeAllWindowBuffers();
+    Free(GetBgTilemapBuffer(0));
+    Free(GetBgTilemapBuffer(1));
+    Free(GetBgTilemapBuffer(2));
+    Free(GetBgTilemapBuffer(3));
+    SetMainCallback2(CB2_InitTitleScreen);
+}
+
+extern const u8 gUnknown_8415F51[];
+extern const u8 gUnknown_841EDCA[];
+extern const u8 gUnknown_841EDBD[];
+extern const u8 gUnknown_841DE50[];
+extern const u8 gUnknown_841DE51[];
+
+void PrintMysteryGiftOrEReaderTopMenu(bool8 mg_or_ereader, bool32 usePickOkCancel)
+{
+    const u8 * src;
+    s32 width;
+    FillWindowPixelBuffer(0, 0x00);
+    if (!mg_or_ereader)
+    {
+        src = usePickOkCancel == TRUE ? gUnknown_8415F51 : gUnknown_841EDCA;
+        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &gUnknown_8466EE8, 0, gUnknown_841EDBD);
+        width = 222 - GetStringWidth(0, src, 0);
+        AddTextPrinterParametrized2(0, 0, width, 2, 0, 0, &gUnknown_8466EE8, 0, src);
+    }
+    else
+    {
+        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &gUnknown_8466EE8, 0, gUnknown_841DE50);
+        AddTextPrinterParametrized2(0, 0, 0x78, 2, 0, 0, &gUnknown_8466EE8, 0, gUnknown_841DE51);
+    }
+    CopyWindowToVram(0, 2);
+    PutWindowTilemap(0);
 }
 

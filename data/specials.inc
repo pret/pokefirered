@@ -388,7 +388,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8046B94
 	def_special sub_8046BBC
 	def_special sub_8046BDC
-	def_special sub_8146E78
+	def_special ScrSpecial_SeaGallopFerry
 	def_special sub_80CC48C
 	def_special sub_812B220
 	def_special sub_812B234

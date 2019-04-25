@@ -248,7 +248,7 @@ SECTIONS {
         src/mevent_server.o(.text);
         src/mevent_8145654.o(.text);
         src/menews_jisan.o(.text);
-        asm/seagallop.o(.text);
+        src/seagallop.o(.text);
         asm/unk_8147500.o(.text);
         asm/unk_8147AA8.o(.text);
         asm/unk_814B6F0.o(.text);
@@ -418,6 +418,8 @@ SECTIONS {
         data/data_8466FB8.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
+        . = ALIGN(4);
+        src/seagallop.o(.rodata);
         data/data_8468C98.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);

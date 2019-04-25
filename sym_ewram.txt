@@ -1625,9 +1625,7 @@ gUnknown_203F3B8: @ 203F3B8
 	.include "src/mevent_server_helpers.o"
 	.include "src/mevent_server.o"
 	.include "src/mevent_8145654.o"
-
-gUnknown_203F3D0: @ 203F3D0
-	.space 0x4
+	.include "src/seagallop.o"
 
 gUnknown_203F3D4: @ 203F3D4
 	.space 0x4

@@ -1,38 +1,11 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
+
 	.section .rodata
 
 	.align 2
-gUnknown_8468C98:: @ 8468C98
-	.incbin "baserom.gba", 0x468C98, 0x520
-
-gUnknown_84691B8:: @ 84691B8
-	.incbin "baserom.gba", 0x4691B8, 0x20
-
-gUnknown_84691D8:: @ 84691D8
-	.incbin "baserom.gba", 0x4691D8, 0x800
-
-gUnknown_84699D8:: @ 84699D8
-	.incbin "baserom.gba", 0x4699D8, 0x1520
-
-gUnknown_846AEF8:: @ 846AEF8
-	.incbin "baserom.gba", 0x46AEF8, 0x4
-
-gUnknown_846AEFC:: @ 846AEFC
-	.incbin "baserom.gba", 0x46AEFC, 0x2C
-
-gUnknown_846AF28:: @ 846AF28
-	.incbin "baserom.gba", 0x46AF28, 0x38
-
-gUnknown_846AF60:: @ 846AF60
-	.incbin "baserom.gba", 0x46AF60, 0x18
-
-gUnknown_846AF78:: @ 846AF78
-	.incbin "baserom.gba", 0x46AF78, 0x18
-
-gUnknown_846AF90:: @ 846AF90
-	.incbin "baserom.gba", 0x46AF90, 0x40
-
-gUnknown_846AFD0:: @ 846AFD0
-	.incbin "baserom.gba", 0x46AFD0, 0x45C
+gUnknown_846AFE8:: @ 846AFE8
+	.incbin "baserom.gba", 0x46AFE8, 0x444
 
 gUnknown_846B42C:: @ 846B42C
 	.incbin "baserom.gba", 0x46B42C, 0x10

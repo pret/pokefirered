@@ -96,9 +96,15 @@ void sub_80563F0(void);
 extern u8 gUnknown_2031DD8;
 extern u8 gUnknown_2036E28;
 
+extern void (*gUnknown_3005020)(void);
+
 extern bool8 (* gUnknown_3005024)(void);
 void SetLastHealLocationWarp(u8 healLocaionId);
 void sub_8055864(u8 mapGroup, u8 mapNum);
 void CB2_NewGame(void);
+
+void Overworld_FadeOutMapMusic(void);
+void sub_805671C(void);
+bool8 sub_8055FC4(void);
 
 #endif //GUARD_ROM4_H

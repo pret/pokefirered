@@ -1635,8 +1635,8 @@ sub_8107A9C: @ 8107A9C
 _08107AE8: .4byte gUnknown_3005E60
 	thumb_func_end sub_8107A9C
 
-	thumb_func_start sub_8107AEC
-sub_8107AEC: @ 8107AEC
+	thumb_func_start ListMenuDefaultCursorMoveFunc
+ListMenuDefaultCursorMoveFunc: @ 8107AEC
 	push {lr}
 	lsls r1, 24
 	cmp r1, 0
@@ -1646,7 +1646,7 @@ sub_8107AEC: @ 8107AEC
 _08107AFA:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107AEC
+	thumb_func_end ListMenuDefaultCursorMoveFunc
 
 	thumb_func_start sub_8107B00
 sub_8107B00: @ 8107B00

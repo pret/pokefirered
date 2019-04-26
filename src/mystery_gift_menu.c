@@ -26,8 +26,30 @@ EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
 void task_add_00_mystery_gift(void);
 void task_add_00_ereader(void);
 
-static const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
-static const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
+extern const u8 gText_PickOKExit[];
+extern const u8 gText_PickOKCancel[];
+extern const u8 gText_MysteryGift[];
+extern const u8 gJPText_MysteryGift[];
+extern const u8 gJPText_DecideStop[];
+extern const u8 gText_WhatToDoWithCards[];
+extern const u8 gText_WhatToDoWithNews[];
+
+extern const u8 gText_WonderCards[];
+extern const u8 gText_WonderNews[];
+extern const u8 gText_Exit3[];
+extern const u8 gText_WirelessCommunication[];
+extern const u8 gText_Friend2[];
+extern const u8 gFameCheckerText_Cancel[];
+extern const u8 gText_Receive[];
+extern const u8 gText_Send[];
+extern const u8 gText_Toss[];
+extern const u8 gText_VarietyOfEventsImportedWireless[];
+extern const u8 gText_WonderCardsInPossession[];
+extern const u8 gText_ReadNewsThatArrived[];
+extern const u8 gText_ReturnToTitle[];
+
+const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
+const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
 
 struct MysteryGiftTaskData
 {
@@ -45,7 +67,7 @@ struct MysteryGiftTaskData
     u8 * buffer;
 };
 
-static const struct BgTemplate sBGTemplates[] = {
+const struct BgTemplate sBGTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -81,7 +103,7 @@ static const struct BgTemplate sBGTemplates[] = {
     }
 };
 
-static const struct WindowTemplate sMainWindows[] = {
+const struct WindowTemplate sMainWindows[] = {
     {
         .priority = 0x00,
         .tilemapLeft = 0x00,
@@ -111,23 +133,240 @@ static const struct WindowTemplate sMainWindows[] = {
     }
 };
 
-extern const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width28;
-extern const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width20;
-extern const struct WindowTemplate sMysteryGiftMenuWindowTemplate;
-extern const struct WindowTemplate sWindowTemplate_ThreeOptions;
-extern const struct WindowTemplate sWindowTemplate_YesNoBox;
-extern const struct WindowTemplate sWindowTemplate_7by8;
-extern const struct WindowTemplate sWindowTemplate_7by6;
-extern const struct WindowTemplate sWindowTemplate_7by4;
-extern const struct ListMenuItem sListMenuItems_CardsOrNews[];
-extern const struct ListMenuItem sListMenuItems_WirelessOrFriend[];
-extern const struct ListMenuTemplate sListMenuTemplate_ThreeOptions;
-extern const struct ListMenuTemplate sListMenu_ReceiveSendToss;
-extern const struct ListMenuTemplate sListMenu_ReceiveToss;
-extern const struct ListMenuTemplate sListMenu_ReceiveSend;
-extern const struct ListMenuTemplate sListMenu_Receive;
-extern const struct TextColor sMG_Ereader_TextColor_1;
-extern const struct TextColor sMG_Ereader_TextColor_2;
+const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width28 = {
+    .priority = 0x00,
+    .tilemapLeft = 0x01,
+    .tilemapTop = 0x0f,
+    .width = 0x1c,
+    .height = 0x04,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x00e5
+};
+
+const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width20 = {
+    .priority = 0x00,
+    .tilemapLeft = 0x01,
+    .tilemapTop = 0x0f,
+    .width = 0x14,
+    .height = 0x04,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x00e5
+};
+
+const struct WindowTemplate sMysteryGiftMenuWindowTemplate = {
+    .priority = 0x00,
+    .tilemapLeft = 0x01,
+    .tilemapTop = 0x0f,
+    .width = 0x13,
+    .height = 0x04,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x00e5
+};
+
+const struct WindowTemplate sWindowTemplate_ThreeOptions = {
+    .priority = 0x00,
+    .tilemapLeft = 0x08,
+    .tilemapTop = 0x05,
+    .width = 0x0e,
+    .height = 0x05,
+    .paletteNum = 0x0e,
+    .baseBlock = 0x0155
+};
+
+const struct WindowTemplate sWindowTemplate_YesNoBox = {
+    .priority = 0x00,
+    .tilemapLeft = 0x17,
+    .tilemapTop = 0x0f,
+    .width = 0x06,
+    .height = 0x04,
+    .paletteNum = 0x0e,
+    .baseBlock = 0x0155
+};
+
+const struct WindowTemplate sWindowTemplate_7by8 = {
+    .priority = 0x00,
+    .tilemapLeft = 0x16,
+    .tilemapTop = 0x0c,
+    .width = 0x07,
+    .height = 0x07,
+    .paletteNum = 0x0e,
+    .baseBlock = 0x0155
+};
+
+const struct WindowTemplate sWindowTemplate_7by6 = {
+    .priority = 0x00,
+    .tilemapLeft = 0x16,
+    .tilemapTop = 0x0e,
+    .width = 0x07,
+    .height = 0x05,
+    .paletteNum = 0x0e,
+    .baseBlock = 0x0155
+};
+
+const struct WindowTemplate sWindowTemplate_7by4 = {
+    .priority = 0x00,
+    .tilemapLeft = 0x16,
+    .tilemapTop = 0x0f,
+    .width = 0x07,
+    .height = 0x04,
+    .paletteNum = 0x0e,
+    .baseBlock = 0x0155
+};
+
+const struct ListMenuItem sListMenuItems_CardsOrNews[] = {
+    { gText_WonderCards,  0 },
+    { gText_WonderNews,   1 },
+    { gText_Exit3,       -2 }
+};
+
+const struct ListMenuItem sListMenuItems_WirelessOrFriend[] = {
+    { gText_WirelessCommunication,  0 },
+    { gText_Friend2,                1 },
+    { gFameCheckerText_Cancel,               -2 }
+};
+
+const struct ListMenuTemplate sListMenuTemplate_ThreeOptions = {
+    .items = NULL,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 3,
+    .maxShowed = 3,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+const struct ListMenuItem sListMenuItems_ReceiveSendToss[] = {
+    { gText_Receive,  0 },
+    { gText_Send,     1 },
+    { gText_Toss,     2 },
+    { gFameCheckerText_Cancel, -2 }
+};
+
+const struct ListMenuItem sListMenuItems_ReceiveToss[] = {
+    { gText_Receive,  0 },
+    { gText_Toss,     2 },
+    { gFameCheckerText_Cancel, -2 }
+};
+
+const struct ListMenuItem sListMenuItems_ReceiveSend[] = {
+    { gText_Receive,  0 },
+    { gText_Send,     1 },
+    { gFameCheckerText_Cancel, -2 }
+};
+
+const struct ListMenuItem sListMenuItems_Receive[] = {
+    { gText_Receive,  0 },
+    { gFameCheckerText_Cancel, -2 }
+};
+
+const struct ListMenuTemplate sListMenu_ReceiveSendToss = {
+    .items = sListMenuItems_ReceiveSendToss,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 4,
+    .maxShowed = 4,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 2,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+const struct ListMenuTemplate sListMenu_ReceiveToss = {
+    .items = sListMenuItems_ReceiveToss,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 3,
+    .maxShowed = 3,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+const struct ListMenuTemplate sListMenu_ReceiveSend = {
+    .items = sListMenuItems_ReceiveSend,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 3,
+    .maxShowed = 3,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+const struct ListMenuTemplate sListMenu_Receive = {
+    .items = sListMenuItems_Receive,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 2,
+    .maxShowed = 2,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 2,
+    .scrollMultiple = 0,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+const u8 *const Unref_08366ED8[] = {
+    gText_VarietyOfEventsImportedWireless,
+    gText_WonderCardsInPossession,
+    gText_ReadNewsThatArrived,
+    gText_ReturnToTitle
+};
+
+ALIGNED(4) const struct TextColor sMG_Ereader_TextColor_1      = { 0, 1, 2 };
+ALIGNED(4) const struct TextColor sMG_Ereader_TextColor_1_Copy = { 0, 1, 2 };
+ALIGNED(4) const struct TextColor sMG_Ereader_TextColor_2      = { 1, 2, 3 };
+
+const u8 gUnknown_8466EF3[] = _("テスト");
+const u8 gUnknown_8466EF7[] = _("むげんのチケット");
 
 void vblankcb_mystery_gift_e_reader_run(void)
 {
@@ -243,14 +482,6 @@ void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void)
     SetMainCallback2(CB2_InitTitleScreen);
 }
 
-extern const u8 gUnknown_8415F51[];
-extern const u8 gUnknown_841EDCA[];
-extern const u8 gUnknown_841EDBD[];
-extern const u8 gUnknown_841DE50[];
-extern const u8 gUnknown_841DE51[];
-extern const u8 gText_WhatToDoWithCards[];
-extern const u8 gText_WhatToDoWithNews[];
-
 void PrintMysteryGiftOrEReaderTopMenu(bool8 mg_or_ereader, bool32 usePickOkCancel)
 {
     const u8 * src;
@@ -258,15 +489,15 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 mg_or_ereader, bool32 usePickOkCance
     FillWindowPixelBuffer(0, 0x00);
     if (!mg_or_ereader)
     {
-        src = usePickOkCancel == TRUE ? gUnknown_8415F51 : gUnknown_841EDCA;
-        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gUnknown_841EDBD);
+        src = usePickOkCancel == TRUE ? gText_PickOKExit : gText_PickOKCancel;
+        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gText_MysteryGift);
         width = 222 - GetStringWidth(0, src, 0);
         AddTextPrinterParametrized2(0, 0, width, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, src);
     }
     else
     {
-        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gUnknown_841DE50);
-        AddTextPrinterParametrized2(0, 0, 0x78, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gUnknown_841DE51);
+        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gJPText_MysteryGift);
+        AddTextPrinterParametrized2(0, 0, 0x78, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gJPText_DecideStop);
     }
     CopyWindowToVram(0, 2);
     PutWindowTilemap(0);

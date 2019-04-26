@@ -410,7 +410,6 @@ SECTIONS {
         data/slot_machine.o(.rodata);
         src/roamer.o(.rodata);
         src/mystery_gift_menu.o(.rodata);
-        data/mystery_gift_menu.o(.rodata);
         src/mevent.o(.rodata);
         src/mevent_server_helpers.o(.rodata);
         src/mevent_server.o(.rodata);

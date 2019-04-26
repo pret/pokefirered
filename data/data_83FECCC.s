@@ -644,7 +644,7 @@ gUnknown_8415F3D:: @ 8415F3D
 gUnknown_8415F4A:: @ 8415F4A
 	.incbin "baserom.gba", 0x415F4A, 0x7
 
-gUnknown_8415F51:: @ 8415F51
+gText_PickOKExit:: @ 8415F51
 	.incbin "baserom.gba", 0x415F51, 0x15
 
 gUnknown_8415F66:: @ 8415F66
@@ -2252,10 +2252,10 @@ gUnknown_841D18D:: @ 841D18D
 gUnknown_841D198:: @ 841D198
 	.incbin "baserom.gba", 0x41D198, 0xCB8
 
-gUnknown_841DE50:: @ 841DE50
+gJPText_MysteryGift:: @ 841DE50
 	.string "$"
 
-gUnknown_841DE51:: @ 841DE51
+gJPText_DecideStop:: @ 841DE51
 	.string "$"
 
 gUnknown_841DE52:: @ 841DE52
@@ -2432,16 +2432,18 @@ gFameCheckerBillName:: @ 841E5F3
 gFameCheckerMrFujiName:: @ 841E5F8
 	.string "FUJI$"
 
-gUnknown_841E5FD:: @ 841E5FD
-	.string "A variety of events will be imported\nover Wireless Communication.$"
+gText_VarietyOfEventsImportedWireless:: @ 841E5FD
+	.string "A variety of events will be imported\n"
+	.string "over Wireless Communication.$"
 
-gUnknown_841E63F:: @ 841E63F
-	.string "Read the WONDER CARDS in your\npossession.$"
+gText_WonderCardsInPossession:: @ 841E63F
+	.string "Read the WONDER CARDS in your\n"
+	.string "possession.$"
 
-gUnknown_841E669:: @ 841E669
+gText_ReadNewsThatArrived:: @ 841E669
 	.string "Read the NEWS that arrived.$"
 
-gUnknown_841E685:: @ 841E685
+gText_ReturnToTitle:: @ 841E685
 	.string "Return to the title screen.$"
 
 gUnknown_841E6A1:: @ 841E6A1
@@ -2576,11 +2578,35 @@ gUnknown_841ED7B:: @ 841ED7B
 gUnknown_841ED9C:: @ 841ED9C
 	.incbin "baserom.gba", 0x41ED9C, 0x21
 
-gUnknown_841EDBD:: @ 841EDBD
-	.incbin "baserom.gba", 0x41EDBD, 0xD
+gText_MysteryGift:: @ 841EDBD
+	.string "MYSTERY GIFT$"
 
-gUnknown_841EDCA:: @ 841EDCA
-	.incbin "baserom.gba", 0x41EDCA, 0x61
+gText_PickOKCancel:: @ 841EDCA
+	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}EXIT$"
+
+gText_WonderCards::
+	.string "WONDER CARDS$"
+
+gText_WonderNews::
+	.string "WONDER NEWS$"
+
+gText_WirelessCommunication::
+	.string "WIRELESS COMMUNICATION$"
+
+gText_Friend2::
+	.string "FRIEND$"
+
+gText_Exit3::
+	.string "EXIT$"
+
+gText_Receive::
+	.string "RECEIVE$"
+
+gText_Send::
+	.string "SEND$"
+
+gText_Toss::
+	.string "TOSS$"
 
 gUnknown_841EE2B:: @ 841EE2B
 	.incbin "baserom.gba", 0x41EE2B, 0x17

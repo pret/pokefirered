@@ -10,7 +10,7 @@ static u32 sub_8146E0C(struct MysteryEventStruct *);
 static void sub_8146DA0(struct MysteryEventStruct *);
 static void sub_8146D94(struct MysteryEventStruct *);
 
-void sub_8146C30(u32 a0)
+void GenerateRandomNews(u32 a0)
 {
     struct MysteryEventStruct *r5 = sub_8143D94();
 

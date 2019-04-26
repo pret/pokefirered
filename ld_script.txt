@@ -242,7 +242,6 @@ SECTIONS {
         asm/slot_machine.o(.text);
         src/roamer.o(.text);
         src/mystery_gift_menu.o(.text);
-        asm/mystery_gift_menu.o(.text);
         src/mevent.o(.text);
         src/mevent_server_helpers.o(.text);
         src/mevent_server.o(.text);

@@ -294,7 +294,7 @@ void sub_8143910(u8 taskId)
         case 3:
             if (!sub_814374C())
             {
-                sub_80098B8();
+                CloseLink();
                 data->t08 = 4;
             }
             else
@@ -325,26 +325,26 @@ void sub_8143910(u8 taskId)
             if (JOY_NEW(B_BUTTON))
             {
                 PlaySE(SE_SELECT);
-                sub_80098B8();
+                CloseLink();
                 sub_81438E8(&data->t00);
                 data->t08 = 23;
             }
             else if (GetLinkPlayerCount_2() > 1)
             {
                 sub_81438E8(&data->t00);
-                sub_80098B8();
+                CloseLink();
                 data->t08 = 7;
             }
             else if (sub_81436EC())
             {
                 PlaySE(SE_SELECT);
-                sub_80098B8();
+                CloseLink();
                 sub_81438E8(&data->t00);
                 data->t08 = 8;
             }
             else if (sub_81438F0(&data->t00, 10))
             {
-                sub_80098B8();
+                CloseLink();
                 sub_81436BC();
                 sub_81438E8(&data->t00);
             }
@@ -396,16 +396,16 @@ void sub_8143910(u8 taskId)
                     break;
                 case 1:
                     PlaySE(SE_SELECT);
-                    sub_80098B8();
+                    CloseLink();
                     data->t08 = 23;
                     break;
                 case 5:
-                    sub_80098B8();
+                    CloseLink();
                     data->t08 = 21;
                     break;
                 case 3:
                 case 4:
-                    sub_80098B8();
+                    CloseLink();
                     data->t08 = 20;
                     break;
             }
@@ -413,7 +413,7 @@ void sub_8143910(u8 taskId)
         case 14:
             if (HasLinkErrorOccurred())
             {
-                sub_80098B8();
+                CloseLink();
                 data->t08 = 20;
             }
             else if (GetBlockReceivedStatus())
@@ -546,7 +546,7 @@ bool32 sub_8143E64(const struct MEventBuffer_3120_Sub * data)
     return TRUE;
 }
 
-bool32 sub_8143E78(void)
+bool32 WonderNews_Test_Unk_02(void)
 {
     const struct MEventBuffer_3120_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_000.data;
     if (data->unk_02 == 0)
@@ -632,7 +632,7 @@ bool32 sub_8144018(const struct MEventBuffer_32E0_Sub * data)
     return TRUE;
 }
 
-bool32 sub_8144054(void)
+bool32 WonderCard_Test_Unk_08_6(void)
 {
     const struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
     if (data->unk_08_6 == 0)
@@ -672,7 +672,7 @@ bool32 sub_8144124(u16 a0)
     return FALSE;
 }
 
-bool32 sub_8144144(void)
+bool32 CheckReceivedGiftFromWonderCard(void)
 {
     u16 value = sub_81440E8();
     if (!sub_8144124(value))

@@ -1645,7 +1645,7 @@ _08010B2A:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08010B64
-	bl sub_80FA4F8
+	bl IsNoOneConnected
 	lsls r0, 24
 	cmp r0, 0
 	beq _08010B82

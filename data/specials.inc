@@ -40,7 +40,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8081064
 	def_special sub_80810CC
 	def_special sub_80810F4
-	def_special sub_80098B8
+	def_special CloseLink
 	def_special sub_80819C8
 	def_special sub_8081978
 	def_special sub_80819B8

@@ -765,7 +765,7 @@ _08080D3C:
 	cmp r2, 0x9
 	bne _08080D54
 _08080D44:
-	bl sub_80098B8
+	bl CloseLink
 	bl HideFieldMessageBox
 	ldr r0, _08080D50 @ =sub_8080F78
 	b _08080D72
@@ -860,7 +860,7 @@ _08080DF6:
 	cmp r0, 0x9
 	bne _08080E20
 _08080DFE:
-	bl sub_80098B8
+	bl CloseLink
 _08080E02:
 	bl HideFieldMessageBox
 	ldr r0, _08080E18 @ =gTasks
@@ -2459,7 +2459,7 @@ sub_8081A90: @ 8081A90
 	lsls r0, 17
 	cmp r1, r0
 	ble _08081AC2
-	bl sub_80098B8
+	bl CloseLink
 	ldr r0, _08081ADC @ =c2_800ACD4
 	bl SetMainCallback2
 	adds r0, r4, 0

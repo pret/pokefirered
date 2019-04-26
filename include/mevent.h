@@ -60,5 +60,11 @@ void DestroyWonderCardResources(void);
 void DestroyWonderNewsResources(void);
 s32 FadeOutFromWonderCard(bool32 flag);
 s32 FadeOutFromWonderNews(bool32 flag);
+bool32 CheckReceivedGiftFromWonderCard(void);
+void MENews_AddScrollIndicatorArrowPair(void);
+void MENews_RemoveScrollIndicatorArrowPair(void);
+bool32 WonderNews_Test_Unk_02(void);
+bool32 WonderCard_Test_Unk_08_6(void);
+u32 MENews_GetInput(u16 input);
 
 #endif //GUARD_MEVENT_H

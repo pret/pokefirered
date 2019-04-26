@@ -671,7 +671,7 @@ s32 FadeOutFromWonderNews(bool32 flag)
     return 0;
 }
 
-void sub_81467EC(void)
+void MENews_RemoveScrollIndicatorArrowPair(void)
 {
     if (!gUnknown_203F3CC->unk_01C0_0 && gUnknown_203F3CC->unk_01C1 != 0xFF)
     {
@@ -682,7 +682,7 @@ void sub_81467EC(void)
 }
 
 
-void sub_8146834(void)
+void MENews_AddScrollIndicatorArrowPair(void)
 {
     if (gUnknown_203F3CC->unk_01C0_0)
     {
@@ -691,7 +691,7 @@ void sub_8146834(void)
     }
 }
 
-u8 sub_8146884(u16 input)
+u32 MENews_GetInput(u16 input)
 {
     if (gUnknown_203F3CC->unk_01C2_0)
     {

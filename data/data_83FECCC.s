@@ -2447,136 +2447,139 @@ gText_ReturnToTitle:: @ 841E685
 	.string "Return to the title screen.$"
 
 gText_DontHaveCardNewOneInput:: @ 841E6A1
-	.incbin "baserom.gba", 0x41E6A1, 0x3B
+	.string "You don’t have a WONDER CARD,\nso a new CARD will be input.$"
 
 gText_DontHaveNewsNewOneInput:: @ 841E6DC
-	.incbin "baserom.gba", 0x41E6DC, 0x3B
+	.string "You don’t have any WONDER NEWS,\nso new NEWS will be input.$"
 
 gText_WhereShouldCardBeAccessed:: @ 841E717
-	.incbin "baserom.gba", 0x41E717, 0x2A
+	.string "Where should the WONDER CARD\nbe accessed?$"
 
 gText_WhereShouldNewsBeAccessed:: @ 841E741
-	.incbin "baserom.gba", 0x41E741, 0x53
+	.string "Where should the WONDER NEWS\nbe accessed?$"
+
+gUnknown_841E76B:: @ 841E76B
+	.string "Link standby...\n... ... B Button: Cancel$"
 
 gText_Communicating:: @ 841E794
-	.incbin "baserom.gba", 0x41E794, 0xF
+	.string "Communicating…$"
 
 gText_CommunicationCompleted:: @ 841E7A3
-	.incbin "baserom.gba", 0x41E7A3, 0x19
+	.string "Communication completed.$"
 
 gText_CommunicationError:: @ 841E7BC
-	.incbin "baserom.gba", 0x41E7BC, 0x15
+	.string "Communication error.$"
 
 gText_CommunicationCanceled:: @ 841E7D1
-	.incbin "baserom.gba", 0x41E7D1, 0x21
+	.string "Communication has been canceled.$"
 
 gText_ThrowAwayWonderCard:: @ 841E7F2
-	.incbin "baserom.gba", 0x41E7F2, 0x31
+	.string "Throw away the WONDER CARD\nand input a new CARD?$"
 
 gText_HaventReceivedCardsGift:: @ 841E823
-	.incbin "baserom.gba", 0x41E823, 0x43
+	.string "You haven’t received the CARD’s gift\nyet. Input a new CARD anyway?$"
 
 gText_WonderCardReceivedFrom:: @ 841E866
-	.incbin "baserom.gba", 0x41E866, 0x29
+	.string "A WONDER CARD has been received\nfrom {STR_VAR_1}.$"
 
 gText_WonderNewsReceivedFrom:: @ 841E88F
-	.incbin "baserom.gba", 0x41E88F, 0x2E
+	.string "A WONDER NEWS item has been\nreceived from {STR_VAR_1}.$"
 
 gText_WonderCardReceived:: @ 841E8BD
-	.incbin "baserom.gba", 0x41E8BD, 0x25
+	.string "A new WONDER CARD has been\nreceived.$"
 
 gText_WonderNewsReceived:: @ 841E8E2
-	.incbin "baserom.gba", 0x41E8E2, 0x2A
+	.string "A new WONDER NEWS item has been\nreceived.$"
 
 gText_NewStampReceived:: @ 841E90C
-	.incbin "baserom.gba", 0x41E90C, 0x1F
+	.string "A new STAMP has been received.$"
 
 gText_NewTrainerReceived:: @ 841E92B
-	.incbin "baserom.gba", 0x41E92B, 0x1B
+	.string "A new TRAINER has arrived.$"
 
 gText_AlreadyHadCard:: @ 841E946
-	.incbin "baserom.gba", 0x41E946, 0x22
+	.string "You already had that\nWONDER CARD.$"
 
 gText_AlreadyHadNews:: @ 841E968
-	.incbin "baserom.gba", 0x41E968, 0x27
+	.string "You already had that\nWONDER NEWS item.$"
 
 gText_AlreadyHadStamp:: @ 841E98F
-	.incbin "baserom.gba", 0x41E98F, 0x1C
+	.string "You already had that\nSTAMP.$"
 
 gText_NoMoreRoomForStamps:: @ 841E9AB
-	.incbin "baserom.gba", 0x41E9AB, 0x28
+	.string "There’s no more room for adding\nSTAMPS.$"
 
 gText_RecordUploadedViaWireless:: @ 841E9D3
-	.incbin "baserom.gba", 0x41E9D3, 0x3A
+	.string "Your record has been uploaded via\nWIRELESS COMMUNICATION.$"
 
 gText_CantAcceptCardFromTrainer:: @ 841EA0D
-	.incbin "baserom.gba", 0x41EA0D, 0x32
+	.string "You can’t accept a WONDER CARD\nfrom this TRAINER.$"
 
 gText_CantAcceptNewsFromTrainer:: @ 841EA3F
-	.incbin "baserom.gba", 0x41EA3F, 0x30
+	.string "You can’t accept WONDER NEWS\nfrom this TRAINER.$"
 
 gText_NothingSentOver:: @ 841EA6F
-	.incbin "baserom.gba", 0x41EA6F, 0x17
+	.string "Nothing was sent over…$"
 
 gText_WhatToDoWithCards:: @ 841EA86
-	.incbin "baserom.gba", 0x41EA86, 0x31
+	.string "What would you like to do\nwith the WONDER CARDS?$"
 
 gText_WhatToDoWithNews:: @ 841EAB7
-	.incbin "baserom.gba", 0x41EAB7, 0x30
+	.string "What would you like to do\nwith the WONDER NEWS?$"
 
 gText_SendingWonderCard:: @ 841EAE7
-	.incbin "baserom.gba", 0x41EAE7, 0x1A
+	.string "Sending your WONDER CARD…$"
 
 gText_SendingWonderNews:: @ 841EB01
-	.incbin "baserom.gba", 0x41EB01, 0x1F
+	.string "Sending your WONDER NEWS item…$"
 
 gText_WonderCardSentTo:: @ 841EB20
-	.incbin "baserom.gba", 0x41EB20, 0x26
+	.string "Your WONDER CARD has been sent\nto {STR_VAR_1}.$"
 
 gText_WonderNewsSentTo:: @ 841EB46
-	.incbin "baserom.gba", 0x41EB46, 0x2B
+	.string "Your WONDER NEWS item has been\nsent to {STR_VAR_1}.$"
 
 gText_StampSentTo:: @ 841EB71
-	.incbin "baserom.gba", 0x41EB71, 0x1D
+	.string "A STAMP has been sent to {STR_VAR_1}.$"
 
 gText_GiftSentTo:: @ 841EB8E
-	.incbin "baserom.gba", 0x41EB8E, 0x1C
+	.string "A GIFT has been sent to {STR_VAR_1}.$"
 
 gText_OtherTrainerHasCard:: @ 841EBAA
-	.incbin "baserom.gba", 0x41EBAA, 0x34
+	.string "The other TRAINER has the same\nWONDER CARD already.$"
 
 gText_OtherTrainerHasNews:: @ 841EBDE
-	.incbin "baserom.gba", 0x41EBDE, 0x34
+	.string "The other TRAINER has the same\nWONDER NEWS already.$"
 
 gText_OtherTrainerHasStamp:: @ 841EC12
-	.incbin "baserom.gba", 0x41EC12, 0x2E
+	.string "The other TRAINER has the same\nSTAMP already.$"
 
 gText_OtherTrainerCanceled:: @ 841EC40
-	.incbin "baserom.gba", 0x41EC40, 0x2A
+	.string "The other TRAINER canceled\ncommunication.$"
 
 gText_CantSendGiftToTrainer:: @ 841EC6A
-	.incbin "baserom.gba", 0x41EC6A, 0x2F
+	.string "You can’t send a MYSTERY GIFT to\nthis TRAINER.$"
 
 gText_IfThrowAwayCardEventWontHappen:: @ 841EC99
-	.incbin "baserom.gba", 0x41EC99, 0x3A
+	.string "If you throw away the CARD,\nits event won’t happen. Okay?$"
 
 gText_OkayToDiscardNews:: @ 841ECD3
-	.incbin "baserom.gba", 0x41ECD3, 0x26
+	.string "Is it okay to discard this\nNEWS item?$"
 
 gText_HaventReceivedGiftOkayToDiscard:: @ 841ECF9
-	.incbin "baserom.gba", 0x41ECF9, 0x36
+	.string "You haven’t received the\nGIFT. Is it okay to discard?$"
 
 gText_DataWillBeSaved:: @ 841ED2F
-	.incbin "baserom.gba", 0x41ED2F, 0x21
+	.string "Data will be saved.\nPlease wait.$"
 
 gText_SaveCompletedPressA:: @ 841ED50
-	.incbin "baserom.gba", 0x41ED50, 0x2B
+	.string "Save completed.\nPlease press the A Button.$"
 
 gText_WonderCardThrownAway:: @ 841ED7B
-	.incbin "baserom.gba", 0x41ED7B, 0x21
+	.string "The WONDER CARD was thrown away.$"
 
 gText_WonderNewsThrownAway:: @ 841ED9C
-	.incbin "baserom.gba", 0x41ED9C, 0x21
+	.string "The WONDER NEWS was thrown away.$"
 
 gText_MysteryGift:: @ 841EDBD
 	.string "MYSTERY GIFT$"

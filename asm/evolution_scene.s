@@ -3691,7 +3691,7 @@ _080CFDBA:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CFDC6
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 _080CFDC6:
 	movs r0, 0x3
 	bl GetBgTilemapBuffer

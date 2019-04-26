@@ -360,7 +360,7 @@ _080983C6:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0

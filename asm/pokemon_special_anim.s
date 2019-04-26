@@ -1688,7 +1688,7 @@ sub_811D2A8: @ 811D2A8
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2285,7 +2285,7 @@ sub_811D764: @ 811D764
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0x2
 	str r0, [sp]
 	movs r0, 0x3

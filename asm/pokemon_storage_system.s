@@ -8311,7 +8311,7 @@ _0808FC7C:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1

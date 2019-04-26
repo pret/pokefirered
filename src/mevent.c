@@ -240,7 +240,7 @@ u32 sub_8143770(u8 * r4, u16 * r5)
     return 0;
 }
 
-void sub_81438A0(void)
+void task_add_00_ereader(void)
 {
     u8 taskId = CreateTask(sub_8143910, 0);
     struct MEventTaskData1 *data = (struct MEventTaskData1 *)gTasks[taskId].data;
@@ -279,7 +279,7 @@ void sub_8143910(u8 taskId)
     switch (data->t08)
     {
         case 0:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE52))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE52))
                 data->t08 = 1;
             break;
         case 1:
@@ -294,16 +294,16 @@ void sub_8143910(u8 taskId)
         case 3:
             if (!sub_814374C())
             {
-                sub_80098B8();
+                CloseLink();
                 data->t08 = 4;
             }
             else
                 data->t08 = 13;
             break;
         case 4:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE53))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE53))
             {
-                sub_8142504(gUnknown_841DE54);
+                AddTextPrinterToWindow1(gUnknown_841DE54);
                 sub_81438E8(&data->t00);
                 data->t08 = 5;
             }
@@ -325,36 +325,36 @@ void sub_8143910(u8 taskId)
             if (JOY_NEW(B_BUTTON))
             {
                 PlaySE(SE_SELECT);
-                sub_80098B8();
+                CloseLink();
                 sub_81438E8(&data->t00);
                 data->t08 = 23;
             }
             else if (GetLinkPlayerCount_2() > 1)
             {
                 sub_81438E8(&data->t00);
-                sub_80098B8();
+                CloseLink();
                 data->t08 = 7;
             }
             else if (sub_81436EC())
             {
                 PlaySE(SE_SELECT);
-                sub_80098B8();
+                CloseLink();
                 sub_81438E8(&data->t00);
                 data->t08 = 8;
             }
             else if (sub_81438F0(&data->t00, 10))
             {
-                sub_80098B8();
+                CloseLink();
                 sub_81436BC();
                 sub_81438E8(&data->t00);
             }
             break;
         case 7:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE7C))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE7C))
                 data->t08 = 4;
             break;
         case 8:
-            sub_8142504(gUnknown_841DE95);
+            AddTextPrinterToWindow1(gUnknown_841DE95);
             sub_81435DC(&gUnknown_3005ED0, gUnknownSerialData_End - gUnknownSerialData_Start, gUnknownSerialData_Start);
             data->t08 = 9;
             break;
@@ -370,7 +370,7 @@ void sub_8143910(u8 taskId)
             else if (data->t0E == 1)
             {
                 sub_81438E8(&data->t00);
-                sub_8142504(gUnknown_841DE9B);
+                AddTextPrinterToWindow1(gUnknown_841DE9B);
                 data->t08 = 11;
             }
             else
@@ -382,7 +382,7 @@ void sub_8143910(u8 taskId)
             break;
         case 12:
             sub_81436BC();
-            sub_8142504(gUnknown_841DE98);
+            AddTextPrinterToWindow1(gUnknown_841DE98);
             data->t08 = 13;
             break;
         case 13:
@@ -391,21 +391,21 @@ void sub_8143910(u8 taskId)
                 case 0:
                     break;
                 case 2:
-                    sub_8142504(gUnknown_841DE95);
+                    AddTextPrinterToWindow1(gUnknown_841DE95);
                     data->t08 = 14;
                     break;
                 case 1:
                     PlaySE(SE_SELECT);
-                    sub_80098B8();
+                    CloseLink();
                     data->t08 = 23;
                     break;
                 case 5:
-                    sub_80098B8();
+                    CloseLink();
                     data->t08 = 21;
                     break;
                 case 3:
                 case 4:
-                    sub_80098B8();
+                    CloseLink();
                     data->t08 = 20;
                     break;
             }
@@ -413,7 +413,7 @@ void sub_8143910(u8 taskId)
         case 14:
             if (HasLinkErrorOccurred())
             {
-                sub_80098B8();
+                CloseLink();
                 data->t08 = 20;
             }
             else if (GetBlockReceivedStatus())
@@ -439,7 +439,7 @@ void sub_8143910(u8 taskId)
         case 17:
             if (sub_815D794(gDecompressionBuffer))
             {
-                sub_8142504(gUnknown_841DE99);
+                AddTextPrinterToWindow1(gUnknown_841DE99);
                 sub_81438E8(&data->t00);
                 data->t08 = 18;
             }
@@ -449,7 +449,7 @@ void sub_8143910(u8 taskId)
         case 18:
             if (sub_81438F0(&data->t00, 120))
             {
-                sub_8142504(gUnknown_841DE9A);
+                AddTextPrinterToWindow1(gUnknown_841DE9A);
                 PlayFanfare(258);
                 data->t08 = 19;
             }
@@ -459,26 +459,26 @@ void sub_8143910(u8 taskId)
                 data->t08 = 26;
             break;
         case 23:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE7D))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE7D))
                 data->t08 = 26;
             break;
         case 20:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE96))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE96))
                 data->t08 = 0;
             break;
         case 21:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE97))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE97))
                 data->t08 = 0;
             break;
         case 22:
-            if (mevent_0814257C(&data->t09, gUnknown_841DE9C))
+            if (MG_PrintTextOnWindow1AndWaitButton(&data->t09, gUnknown_841DE9C))
                 data->t08 = 0;
             break;
         case 26:
             sub_812B484();
             Free(data->t10);
             DestroyTask(taskId);
-            SetMainCallback2(sub_81422FC);
+            SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);
             break;
     }
 }
@@ -490,12 +490,12 @@ void sub_8143D24(void)
     sub_80BDE28();
 }
 
-struct MEventBuffer_3120_Sub * sub_8143D58(void)
+struct MEventBuffer_3120_Sub * GetSavedWonderNews(void)
 {
     return &gSaveBlock1Ptr->unk_3120.buffer_000.data;
 }
 
-struct MEventBuffer_32E0_Sub * sav1_get_mevent_buffer_1(void)
+struct MEventBuffer_32E0_Sub * GetSavedWonderCard(void)
 {
     return &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
 }
@@ -515,7 +515,7 @@ u16 * sub_8143DA8(void)
     return gSaveBlock1Ptr->unk_3120.unk_338;
 }
 
-void sub_8143DBC(void)
+void DestroyWonderNews(void)
 {
     sub_8143E9C();
 }
@@ -530,7 +530,7 @@ bool32 sub_8143DC8(const struct MEventBuffer_3120_Sub * src)
     return TRUE;
 }
 
-bool32 sub_8143E1C(void)
+bool32 ValidateReceivedWonderNews(void)
 {
     if (CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_3120.buffer_000.data, sizeof(struct MEventBuffer_3120_Sub)) != gSaveBlock1Ptr->unk_3120.buffer_000.crc)
         return FALSE;
@@ -546,7 +546,7 @@ bool32 sub_8143E64(const struct MEventBuffer_3120_Sub * data)
     return TRUE;
 }
 
-bool32 sub_8143E78(void)
+bool32 WonderNews_Test_Unk_02(void)
 {
     const struct MEventBuffer_3120_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_000.data;
     if (data->unk_02 == 0)
@@ -556,7 +556,7 @@ bool32 sub_8143E78(void)
 
 void sub_8143E9C(void)
 {
-    CpuFill32(0, sub_8143D58(), sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data));
+    CpuFill32(0, GetSavedWonderNews(), sizeof(gSaveBlock1Ptr->unk_3120.buffer_000.data));
     gSaveBlock1Ptr->unk_3120.buffer_000.crc = 0;
 }
 
@@ -570,7 +570,7 @@ bool32 sub_8143EF4(const u8 * src)
 {
     const u8 * r5 = (const u8 *)&gSaveBlock1Ptr->unk_3120.buffer_000.data;
     u32 i;
-    if (!sub_8143E1C())
+    if (!ValidateReceivedWonderNews())
         return FALSE;
     for (i = 0; i < sizeof(struct MEventBuffer_3120_Sub); i++)
     {
@@ -580,7 +580,7 @@ bool32 sub_8143EF4(const u8 * src)
     return TRUE;
 }
 
-void sub_8143F38(void)
+void DestroyWonderCard(void)
 {
     sub_814407C();
     sub_81440B4();
@@ -597,7 +597,7 @@ bool32 sub_8143F68(const struct MEventBuffer_32E0_Sub * data)
     struct MEventBuffer_32E0_Sub * r1;
     if (!sub_8144018(data))
         return FALSE;
-    sub_8143F38();
+    DestroyWonderCard();
     memcpy(&gSaveBlock1Ptr->unk_3120.buffer_1c0.data, data, sizeof(struct MEventBuffer_32E0_Sub));
     gSaveBlock1Ptr->unk_3120.buffer_1c0.crc = CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_3120.buffer_1c0.data, sizeof(struct MEventBuffer_32E0_Sub));
     r2 = &gSaveBlock1Ptr->unk_3120.buffer_310.data;
@@ -606,7 +606,7 @@ bool32 sub_8143F68(const struct MEventBuffer_32E0_Sub * data)
     return TRUE;
 }
 
-bool32 sub_8143FC8(void)
+bool32 ValidateReceivedWonderCard(void)
 {
     if (gSaveBlock1Ptr->unk_3120.buffer_1c0.crc != CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_3120.buffer_1c0.data, sizeof(struct MEventBuffer_32E0_Sub)))
         return FALSE;
@@ -632,7 +632,7 @@ bool32 sub_8144018(const struct MEventBuffer_32E0_Sub * data)
     return TRUE;
 }
 
-bool32 sub_8144054(void)
+bool32 WonderCard_Test_Unk_08_6(void)
 {
     const struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
     if (data->unk_08_6 == 0)
@@ -654,7 +654,7 @@ void sub_81440B4(void)
 
 u16 sub_81440E8(void)
 {
-    if (sub_8143FC8())
+    if (ValidateReceivedWonderCard())
         return gSaveBlock1Ptr->unk_3120.buffer_1c0.data.unk_00;
     return 0;
 }
@@ -672,7 +672,7 @@ bool32 sub_8144124(u16 a0)
     return FALSE;
 }
 
-bool32 sub_8144144(void)
+bool32 CheckReceivedGiftFromWonderCard(void)
 {
     u16 value = sub_81440E8();
     if (!sub_8144124(value))
@@ -721,7 +721,7 @@ bool32 sub_81441F0(const u16 * data)
 s32 sub_8144218(void)
 {
     struct MEventBuffer_32E0_Sub * data;
-    if (!sub_8143FC8())
+    if (!ValidateReceivedWonderCard())
         return 0;
     data = &gSaveBlock1Ptr->unk_3120.buffer_1c0.data;
     if (data->unk_08_0 != 1)
@@ -759,11 +759,11 @@ void sub_81442CC(struct MEventStruct_Unk1442CC * data)
     data->unk_08 = 1;
     data->unk_0C = 1;
     data->unk_10 = 1;
-    if (sub_8143FC8())
+    if (ValidateReceivedWonderCard())
     {
-        data->unk_14 = sav1_get_mevent_buffer_1()->unk_00;
+        data->unk_14 = GetSavedWonderCard()->unk_00;
         data->unk_20 = *sav1_get_mevent_buffer_2();
-        data->unk_44 = sav1_get_mevent_buffer_1()->unk_09;
+        data->unk_44 = GetSavedWonderCard()->unk_09;
     }
     else
         data->unk_14 = 0;
@@ -945,7 +945,7 @@ bool32 sub_81446D0(u16 a0)
     gUnknown_203F3BC = FALSE;
     if (a0 == 0)
         return FALSE;
-    if (!sub_8143FC8())
+    if (!ValidateReceivedWonderCard())
         return FALSE;
     if (gSaveBlock1Ptr->unk_3120.buffer_1c0.data.unk_00 != a0)
         return FALSE;

@@ -126,7 +126,7 @@ const struct UnkStruct_8467FB8 gUnknown_8467FB8[8] = {
     {1, 0, 0, 7, gUnknown_8467A7C, gUnknown_8467CAC, gUnknown_846716C}
 };
 
-bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
+bool32 InitWonderCardResources(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
 {
     if (r5 == NULL || r6 == NULL)
         return FALSE;
@@ -145,7 +145,7 @@ bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_S
     return TRUE;
 }
 
-void sub_81456F0(void)
+void DestroyWonderCardResources(void)
 {
     if (gUnknown_203F3C8 != NULL)
     {
@@ -155,7 +155,7 @@ void sub_81456F0(void)
     }
 }
 
-s32 sub_814571C(void)
+s32 FadeToWonderCardMenu(void)
 {
     if (gUnknown_203F3C8 == NULL)
         return -1;
@@ -219,7 +219,7 @@ s32 sub_814571C(void)
     return 0;
 }
 
-s32 sub_814593C(bool32 flag)
+s32 FadeOutFromWonderCard(bool32 flag)
 {
     if (gUnknown_203F3C8 == NULL)
         return -1;
@@ -252,7 +252,7 @@ s32 sub_814593C(bool32 flag)
             FreeMonIconPalettes();
             break;
         case 5:
-            sub_8142344(gUnknown_203F3B8, flag);
+            PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
             break;
         case 6:
             CopyBgTilemapBufferToVram(0);
@@ -508,7 +508,7 @@ const struct UnkStruct_8467FB8 gUnknown_8468720[] = {
     {1, 0, 0, 0, gUnknown_84685B4, gUnknown_8468644, gUnknown_84680A0}
 };
 
-bool32 sub_8146288(const struct MEventBuffer_3120_Sub * a0)
+bool32 InitWonderNewsResources(const struct MEventBuffer_3120_Sub * a0)
 {
     if (a0 == NULL)
         return FALSE;
@@ -523,7 +523,7 @@ bool32 sub_8146288(const struct MEventBuffer_3120_Sub * a0)
     return TRUE;
 }
 
-void sub_81462EC(void)
+void DestroyWonderNewsResources(void)
 {
     if (gUnknown_203F3CC != NULL)
     {
@@ -533,7 +533,7 @@ void sub_81462EC(void)
     }
 }
 
-s32 sub_8146318(void)
+s32 FadeToWonderNewsMenu(void)
 {
     if (gUnknown_203F3CC == NULL)
         return -1;
@@ -608,7 +608,7 @@ s32 sub_8146318(void)
     return 0;
 }
 
-s32 sub_8146604(bool32 flag)
+s32 FadeOutFromWonderNews(bool32 flag)
 {
     if (gUnknown_203F3CC == NULL)
         return -1;
@@ -653,10 +653,10 @@ s32 sub_8146604(bool32 flag)
             }
             break;
         case 5:
-            sub_8142344(gUnknown_203F3B8, flag);
+            PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
             break;
         case 6:
-            sub_8142420();
+            MG_DrawCheckerboardPattern();
             CopyBgTilemapBufferToVram(0);
             CopyBgTilemapBufferToVram(3);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
@@ -671,7 +671,7 @@ s32 sub_8146604(bool32 flag)
     return 0;
 }
 
-void sub_81467EC(void)
+void MENews_RemoveScrollIndicatorArrowPair(void)
 {
     if (!gUnknown_203F3CC->unk_01C0_0 && gUnknown_203F3CC->unk_01C1 != 0xFF)
     {
@@ -682,7 +682,7 @@ void sub_81467EC(void)
 }
 
 
-void sub_8146834(void)
+void MENews_AddScrollIndicatorArrowPair(void)
 {
     if (gUnknown_203F3CC->unk_01C0_0)
     {
@@ -691,7 +691,7 @@ void sub_8146834(void)
     }
 }
 
-u8 sub_8146884(u16 input)
+u32 MENews_GetInput(u16 input)
 {
     if (gUnknown_203F3CC->unk_01C2_0)
     {

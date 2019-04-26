@@ -7855,7 +7855,7 @@ sub_8100E34: @ 8100E34
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl sub_8100E7C
 	movs r0, 0x1

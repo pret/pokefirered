@@ -422,7 +422,7 @@ _0804C9B0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C9E8
-	bl sub_80FA4F8
+	bl IsNoOneConnected
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804C9C4
@@ -1832,7 +1832,7 @@ sub_804D5A4: @ 804D5A4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D5FC
-	bl sub_80FA4F8
+	bl IsNoOneConnected
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D620
@@ -1845,7 +1845,7 @@ sub_804D5A4: @ 804D5A4
 	bl Free
 	movs r0, 0
 	str r0, [r5]
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	ldr r0, _0804D5F8 @ =sub_8050138
 	bl SetMainCallback2
 	b _0804D620
@@ -3369,7 +3369,7 @@ _0804E208:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -4296,7 +4296,7 @@ sub_804E944: @ 804E944
 	ldr r0, [r0]
 	bl Free
 	bl FreeAllWindowBuffers
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	ldr r0, _0804E984 @ =c2_8056854
 	bl SetMainCallback2
 	b _0804E9AA
@@ -5876,7 +5876,7 @@ sub_804F5BC: @ 804F5BC
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
@@ -7178,7 +7178,7 @@ _0804FF7A:
 	lsls r0, 1
 	cmp r1, r0
 	bls _0804FFAC
-	bl sub_80098B8
+	bl CloseLink
 	ldr r0, _0804FFC0 @ =c2_800ACD4
 	bl SetMainCallback2
 	ldr r1, [r4]
@@ -7432,7 +7432,7 @@ _08050194:
 	ldr r2, _08050230 @ =0x00001144
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_80098B8
+	bl CloseLink
 _080501A8:
 	ldr r4, _08050234 @ =gUnknown_2031DAC
 	movs r0, 0x88
@@ -14745,7 +14745,7 @@ _0805434C:
 	ldr r0, _08054378 @ =sub_804C718
 	cmp r1, r0
 	bne _08054384
-	bl sub_80FA4F8
+	bl IsNoOneConnected
 	lsls r0, 24
 	cmp r0, 0
 	beq _08054396
@@ -14819,7 +14819,7 @@ sub_80543C4: @ 80543C4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08054412
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 _08054412:
 	ldr r0, _0805443C @ =gMain
 	ldr r0, [r0, 0x8]

@@ -3890,7 +3890,7 @@ sub_80569BC: @ 80569BC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080569CE
-	bl sub_80098B8
+	bl CloseLink
 _080569CE:
 	ldr r0, _080569E4 @ =gWirelessCommType
 	ldrb r0, [r0]

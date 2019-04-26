@@ -424,7 +424,7 @@ _0814D962:
 	bl ClearGpuRegBits
 	b _0814D9BA
 _0814D9A2:
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	adds r0, r5, 0
 	bl sub_814EF10
 	bl sub_815C9F4

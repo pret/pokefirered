@@ -38,8 +38,8 @@ struct MEventBuffer_32E0_Sub * GetSavedWonderCard(void);
 struct MEventBuffer_3430_Sub * sav1_get_mevent_buffer_2(void);
 struct MysteryEventStruct * sub_8143D94(void);
 bool32 sub_8143DC8(const struct MEventBuffer_3120_Sub * src);
-bool32 ValidateReceivedWonderCard(void);
 bool32 ValidateReceivedWonderNews(void);
+bool32 ValidateReceivedWonderCard(void);
 bool32 sub_8143EF4(const u8 * src);
 bool32 sub_8143F68(const struct MEventBuffer_32E0_Sub * data);
 void sub_814410C(struct MEventBuffer_32E0_Sub * buffer);
@@ -54,5 +54,11 @@ bool32 InitWonderCardResources(struct MEventBuffer_32E0_Sub * r5, struct MEventB
 bool32 InitWonderNewsResources(const struct MEventBuffer_3120_Sub * a0);
 s32 FadeToWonderCardMenu(void);
 s32 FadeToWonderNewsMenu(void);
+void DestroyWonderCard(void);
+void DestroyWonderNews(void);
+void DestroyWonderCardResources(void);
+void DestroyWonderNewsResources(void);
+s32 FadeOutFromWonderCard(bool32 flag);
+s32 FadeOutFromWonderNews(bool32 flag);
 
 #endif //GUARD_MEVENT_H

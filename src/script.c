@@ -9,7 +9,7 @@ extern u8 gUnknown_203ADFA;
 
 extern void sub_80CBDE8(void); // field_specials
 extern u16 CalcCRC16WithTable(u8 *data, int length); // util
-extern bool32 ValidateReceivedWonderNews(void); // mevent
+extern bool32 ValidateReceivedWonderCard(void); // mevent
 
 enum
 {
@@ -525,7 +525,7 @@ bool32 sub_8069DFC(void)
 u8 *sub_8069E48(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    if (!ValidateReceivedWonderNews())
+    if (!ValidateReceivedWonderCard())
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;

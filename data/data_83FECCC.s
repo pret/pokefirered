@@ -2464,10 +2464,10 @@ gUnknown_841E794:: @ 841E794
 gUnknown_841E7A3:: @ 841E7A3
 	.incbin "baserom.gba", 0x41E7A3, 0x19
 
-gUnknown_841E7BC:: @ 841E7BC
+gText_CommunicationError:: @ 841E7BC
 	.incbin "baserom.gba", 0x41E7BC, 0x15
 
-gUnknown_841E7D1:: @ 841E7D1
+gText_CommunicationCanceled:: @ 841E7D1
 	.incbin "baserom.gba", 0x41E7D1, 0x21
 
 gUnknown_841E7F2:: @ 841E7F2
@@ -2476,46 +2476,46 @@ gUnknown_841E7F2:: @ 841E7F2
 gUnknown_841E823:: @ 841E823
 	.incbin "baserom.gba", 0x41E823, 0x43
 
-gUnknown_841E866:: @ 841E866
+gText_WonderCardReceivedFrom:: @ 841E866
 	.incbin "baserom.gba", 0x41E866, 0x29
 
-gUnknown_841E88F:: @ 841E88F
+gText_WonderNewsReceivedFrom:: @ 841E88F
 	.incbin "baserom.gba", 0x41E88F, 0x2E
 
-gUnknown_841E8BD:: @ 841E8BD
+gText_WonderCardReceived:: @ 841E8BD
 	.incbin "baserom.gba", 0x41E8BD, 0x25
 
-gUnknown_841E8E2:: @ 841E8E2
+gText_WonderNewsReceived:: @ 841E8E2
 	.incbin "baserom.gba", 0x41E8E2, 0x2A
 
-gUnknown_841E90C:: @ 841E90C
+gText_NewStampReceived:: @ 841E90C
 	.incbin "baserom.gba", 0x41E90C, 0x1F
 
-gUnknown_841E92B:: @ 841E92B
+gText_NewTrainerReceived:: @ 841E92B
 	.incbin "baserom.gba", 0x41E92B, 0x1B
 
-gUnknown_841E946:: @ 841E946
+gText_AlreadyHadCard:: @ 841E946
 	.incbin "baserom.gba", 0x41E946, 0x22
 
-gUnknown_841E968:: @ 841E968
+gText_AlreadyHadNews:: @ 841E968
 	.incbin "baserom.gba", 0x41E968, 0x27
 
-gUnknown_841E98F:: @ 841E98F
+gText_AlreadyHadStamp:: @ 841E98F
 	.incbin "baserom.gba", 0x41E98F, 0x1C
 
-gUnknown_841E9AB:: @ 841E9AB
+gText_NoMoreRoomForStamps:: @ 841E9AB
 	.incbin "baserom.gba", 0x41E9AB, 0x28
 
-gUnknown_841E9D3:: @ 841E9D3
+gText_RecordUploadedViaWireless:: @ 841E9D3
 	.incbin "baserom.gba", 0x41E9D3, 0x3A
 
-gUnknown_841EA0D:: @ 841EA0D
+gText_CantAcceptCardFromTrainer:: @ 841EA0D
 	.incbin "baserom.gba", 0x41EA0D, 0x32
 
-gUnknown_841EA3F:: @ 841EA3F
+gText_CantAcceptNewsFromTrainer:: @ 841EA3F
 	.incbin "baserom.gba", 0x41EA3F, 0x30
 
-gUnknown_841EA6F:: @ 841EA6F
+gText_NothingSentOver:: @ 841EA6F
 	.incbin "baserom.gba", 0x41EA6F, 0x17
 
 gText_WhatToDoWithCards:: @ 841EA86
@@ -2557,25 +2557,25 @@ gUnknown_841EC40:: @ 841EC40
 gUnknown_841EC6A:: @ 841EC6A
 	.incbin "baserom.gba", 0x41EC6A, 0x2F
 
-gUnknown_841EC99:: @ 841EC99
+gText_IfThrowAwayCardEventWontHappen:: @ 841EC99
 	.incbin "baserom.gba", 0x41EC99, 0x3A
 
-gUnknown_841ECD3:: @ 841ECD3
+gText_OkayToDiscardNews:: @ 841ECD3
 	.incbin "baserom.gba", 0x41ECD3, 0x26
 
 gUnknown_841ECF9:: @ 841ECF9
 	.incbin "baserom.gba", 0x41ECF9, 0x36
 
-gUnknown_841ED2F:: @ 841ED2F
+gText_DataWillBeSaved:: @ 841ED2F
 	.incbin "baserom.gba", 0x41ED2F, 0x21
 
-gUnknown_841ED50:: @ 841ED50
+gText_SaveCompletedPressA:: @ 841ED50
 	.incbin "baserom.gba", 0x41ED50, 0x2B
 
-gUnknown_841ED7B:: @ 841ED7B
+gText_WonderCardThrownAway:: @ 841ED7B
 	.incbin "baserom.gba", 0x41ED7B, 0x21
 
-gUnknown_841ED9C:: @ 841ED9C
+gText_WonderNewsThrownAway:: @ 841ED9C
 	.incbin "baserom.gba", 0x41ED9C, 0x21
 
 gText_MysteryGift:: @ 841EDBD

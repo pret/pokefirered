@@ -393,7 +393,7 @@ gSpecials:: @ 815FD60
 	def_special sub_812B220
 	def_special sub_812B234
 	def_special sub_812B248
-	def_special ValidateReceivedWonderNews
+	def_special ValidateReceivedWonderCard
 	def_special sub_810B810
 	def_special sub_811999C
 	def_special sp182_move_string

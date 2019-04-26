@@ -145,7 +145,7 @@ bool32 InitWonderCardResources(struct MEventBuffer_32E0_Sub * r5, struct MEventB
     return TRUE;
 }
 
-void sub_81456F0(void)
+void DestroyWonderCardResources(void)
 {
     if (gUnknown_203F3C8 != NULL)
     {
@@ -219,7 +219,7 @@ s32 FadeToWonderCardMenu(void)
     return 0;
 }
 
-s32 sub_814593C(bool32 flag)
+s32 FadeOutFromWonderCard(bool32 flag)
 {
     if (gUnknown_203F3C8 == NULL)
         return -1;
@@ -523,7 +523,7 @@ bool32 InitWonderNewsResources(const struct MEventBuffer_3120_Sub * a0)
     return TRUE;
 }
 
-void sub_81462EC(void)
+void DestroyWonderNewsResources(void)
 {
     if (gUnknown_203F3CC != NULL)
     {
@@ -608,7 +608,7 @@ s32 FadeToWonderNewsMenu(void)
     return 0;
 }
 
-s32 sub_8146604(bool32 flag)
+s32 FadeOutFromWonderNews(bool32 flag)
 {
     if (gUnknown_203F3CC == NULL)
         return -1;

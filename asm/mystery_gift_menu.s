@@ -5,310 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8142AB4
-sub_8142AB4: @ 8142AB4
-	push {lr}
-	cmp r0, 0
-	bne _08142AC0
-	bl sub_8143F38
-	b _08142AC4
-_08142AC0:
-	bl sub_8143DBC
-_08142AC4:
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8142AB4
-
-	thumb_func_start sub_8142ACC
-sub_8142ACC: @ 8142ACC
-	push {lr}
-	cmp r0, 0
-	bne _08142AE2
-	adds r0, r1, 0
-	bl sub_814593C
-	cmp r0, 0
-	beq _08142AEC
-	bl sub_81456F0
-	b _08142AF4
-_08142AE2:
-	adds r0, r1, 0
-	bl sub_8146604
-	cmp r0, 0
-	bne _08142AF0
-_08142AEC:
-	movs r0, 0
-	b _08142AF6
-_08142AF0:
-	bl sub_81462EC
-_08142AF4:
-	movs r0, 0x1
-_08142AF6:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8142ACC
-
-	thumb_func_start sub_8142AFC
-sub_8142AFC: @ 8142AFC
-	push {lr}
-	cmp r2, 0
-	beq _08142B0C
-	ldr r3, _08142B08 @ =gUnknown_841ECD3
-	b _08142B0E
-	.align 2, 0
-_08142B08: .4byte gUnknown_841ECD3
-_08142B0C:
-	ldr r3, _08142B1C @ =gUnknown_841EC99
-_08142B0E:
-	movs r2, 0x1
-	bl mevent_message_print_and_prompt_yes_no
-	lsls r0, 24
-	asrs r0, 24
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08142B1C: .4byte gUnknown_841EC99
-	thumb_func_end sub_8142AFC
-
-	thumb_func_start mevent_message_was_thrown_away
-mevent_message_was_thrown_away: @ 8142B20
-	push {lr}
-	cmp r1, 0
-	beq _08142B30
-	ldr r1, _08142B2C @ =gUnknown_841ED9C
-	b _08142B32
-	.align 2, 0
-_08142B2C: .4byte gUnknown_841ED9C
-_08142B30:
-	ldr r1, _08142B3C @ =gUnknown_841ED7B
-_08142B32:
-	bl MG_PrintTextOnWindow1AndWaitButton
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08142B3C: .4byte gUnknown_841ED7B
-	thumb_func_end mevent_message_was_thrown_away
-
-	thumb_func_start mevent_save_game
-mevent_save_game: @ 8142B40
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrb r0, [r4]
-	cmp r0, 0x4
-	bhi _08142BB0
-	lsls r0, 2
-	ldr r1, _08142B54 @ =_08142B58
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08142B54: .4byte _08142B58
-	.align 2, 0
-_08142B58:
-	.4byte _08142B6C
-	.4byte _08142B78
-	.4byte _08142B80
-	.4byte _08142B8C
-	.4byte _08142BA4
-_08142B6C:
-	ldr r0, _08142B74 @ =gUnknown_841ED2F
-	bl AddTextPrinterToWindow1
-	b _08142B98
-	.align 2, 0
-_08142B74: .4byte gUnknown_841ED2F
-_08142B78:
-	movs r0, 0
-	bl TrySavingData
-	b _08142B98
-_08142B80:
-	ldr r0, _08142B88 @ =gUnknown_841ED50
-	bl AddTextPrinterToWindow1
-	b _08142B98
-	.align 2, 0
-_08142B88: .4byte gUnknown_841ED50
-_08142B8C:
-	ldr r0, _08142BA0 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x3
-	ands r0, r1
-	cmp r0, 0
-	beq _08142BB0
-_08142B98:
-	ldrb r0, [r4]
-	adds r0, 0x1
-	strb r0, [r4]
-	b _08142BB0
-	.align 2, 0
-_08142BA0: .4byte gMain
-_08142BA4:
-	movs r0, 0
-	strb r0, [r4]
-	bl ClearTextWindow
-	movs r0, 0x1
-	b _08142BB2
-_08142BB0:
-	movs r0, 0
-_08142BB2:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end mevent_save_game
-
-	thumb_func_start mevent_message
-mevent_message: @ 8142BB8
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	lsls r1, 24
-	lsrs r6, r1, 24
-	lsls r2, 24
-	lsrs r5, r2, 24
-	movs r2, 0
-	str r2, [r4]
-	cmp r3, 0xE
-	bls _08142BCE
-	b _08142CE0
-_08142BCE:
-	lsls r0, r3, 2
-	ldr r1, _08142BD8 @ =_08142BDC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08142BD8: .4byte _08142BDC
-	.align 2, 0
-_08142BDC:
-	.4byte _08142C18
-	.4byte _08142C24
-	.4byte _08142C30
-	.4byte _08142C48
-	.4byte _08142C60
-	.4byte _08142C6C
-	.4byte _08142C78
-	.4byte _08142C84
-	.4byte _08142C90
-	.4byte _08142C9C
-	.4byte _08142CA8
-	.4byte _08142CC0
-	.4byte _08142CCC
-	.4byte _08142CD8
-	.4byte _08142CDC
-_08142C18:
-	movs r0, 0
-	str r0, [r4]
-	ldr r2, _08142C20 @ =gUnknown_841EA6F
-	b _08142CE0
-	.align 2, 0
-_08142C20: .4byte gUnknown_841EA6F
-_08142C24:
-	movs r0, 0
-	str r0, [r4]
-	ldr r2, _08142C2C @ =gUnknown_841E9D3
-	b _08142CE0
-	.align 2, 0
-_08142C2C: .4byte gUnknown_841E9D3
-_08142C30:
-	movs r0, 0x1
-	str r0, [r4]
-	ldr r2, _08142C40 @ =gUnknown_841E866
-	cmp r5, 0
-	bne _08142CE0
-	ldr r2, _08142C44 @ =gUnknown_841E8BD
-	b _08142CE0
-	.align 2, 0
-_08142C40: .4byte gUnknown_841E866
-_08142C44: .4byte gUnknown_841E8BD
-_08142C48:
-	movs r0, 0x1
-	str r0, [r4]
-	ldr r2, _08142C58 @ =gUnknown_841E88F
-	cmp r5, 0
-	bne _08142CE0
-	ldr r2, _08142C5C @ =gUnknown_841E8E2
-	b _08142CE0
-	.align 2, 0
-_08142C58: .4byte gUnknown_841E88F
-_08142C5C: .4byte gUnknown_841E8E2
-_08142C60:
-	movs r0, 0x1
-	str r0, [r4]
-	ldr r2, _08142C68 @ =gUnknown_841E90C
-	b _08142CE0
-	.align 2, 0
-_08142C68: .4byte gUnknown_841E90C
-_08142C6C:
-	movs r0, 0
-	str r0, [r4]
-	ldr r2, _08142C74 @ =gUnknown_841E946
-	b _08142CE0
-	.align 2, 0
-_08142C74: .4byte gUnknown_841E946
-_08142C78:
-	movs r0, 0
-	str r0, [r4]
-	ldr r2, _08142C80 @ =gUnknown_841E98F
-	b _08142CE0
-	.align 2, 0
-_08142C80: .4byte gUnknown_841E98F
-_08142C84:
-	movs r0, 0
-	str r0, [r4]
-	ldr r2, _08142C8C @ =gUnknown_841E968
-	b _08142CE0
-	.align 2, 0
-_08142C8C: .4byte gUnknown_841E968
-_08142C90:
-	movs r0, 0
-	str r0, [r4]
-	ldr r2, _08142C98 @ =gUnknown_841E9AB
-	b _08142CE0
-	.align 2, 0
-_08142C98: .4byte gUnknown_841E9AB
-_08142C9C:
-	movs r0, 0
-	str r0, [r4]
-	ldr r2, _08142CA4 @ =gUnknown_841E7D1
-	b _08142CE0
-	.align 2, 0
-_08142CA4: .4byte gUnknown_841E7D1
-_08142CA8:
-	movs r0, 0
-	str r0, [r4]
-	ldr r2, _08142CB8 @ =gUnknown_841EA3F
-	cmp r6, 0
-	bne _08142CE0
-	ldr r2, _08142CBC @ =gUnknown_841EA0D
-	b _08142CE0
-	.align 2, 0
-_08142CB8: .4byte gUnknown_841EA3F
-_08142CBC: .4byte gUnknown_841EA0D
-_08142CC0:
-	movs r0, 0
-	str r0, [r4]
-	ldr r2, _08142CC8 @ =gUnknown_841E7BC
-	b _08142CE0
-	.align 2, 0
-_08142CC8: .4byte gUnknown_841E7BC
-_08142CCC:
-	movs r0, 0x1
-	str r0, [r4]
-	ldr r2, _08142CD4 @ =gUnknown_841E92B
-	b _08142CE0
-	.align 2, 0
-_08142CD4: .4byte gUnknown_841E92B
-_08142CD8:
-	movs r0, 0x1
-	b _08142CDE
-_08142CDC:
-	movs r0, 0
-_08142CDE:
-	str r0, [r4]
-_08142CE0:
-	adds r0, r2, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end mevent_message
-
 	thumb_func_start mevent_08142CE8
 mevent_08142CE8: @ 8142CE8
 	push {r4-r6,lr}
@@ -372,7 +68,7 @@ _08142D48:
 mevent_message_stamp_card_etc_send_status: @ 8142D50
 	push {r4,lr}
 	adds r3, r0, 0
-	ldr r1, _08142D6C @ =gUnknown_841E7BC
+	ldr r1, _08142D6C @ =gText_CommunicationError
 	movs r0, 0
 	str r0, [r3]
 	adds r4, r1, 0
@@ -384,7 +80,7 @@ mevent_message_stamp_card_etc_send_status: @ 8142D50
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08142D6C: .4byte gUnknown_841E7BC
+_08142D6C: .4byte gText_CommunicationError
 _08142D70: .4byte _08142D74
 	.align 2, 0
 _08142D74:
@@ -404,15 +100,15 @@ _08142D74:
 	.4byte _08142E08
 	.4byte _08142E10
 _08142DB0:
-	ldr r1, _08142DB4 @ =gUnknown_841EA6F
+	ldr r1, _08142DB4 @ =gText_NothingSentOver
 	b _08142E12
 	.align 2, 0
-_08142DB4: .4byte gUnknown_841EA6F
+_08142DB4: .4byte gText_NothingSentOver
 _08142DB8:
-	ldr r1, _08142DBC @ =gUnknown_841E9D3
+	ldr r1, _08142DBC @ =gText_RecordUploadedViaWireless
 	b _08142E12
 	.align 2, 0
-_08142DBC: .4byte gUnknown_841E9D3
+_08142DBC: .4byte gText_RecordUploadedViaWireless
 _08142DC0:
 	ldr r1, _08142DC4 @ =gUnknown_841EB20
 	b _08142DCA
@@ -447,10 +143,10 @@ _08142DEC:
 	.align 2, 0
 _08142DF0: .4byte gUnknown_841EBDE
 _08142DF4:
-	ldr r1, _08142DF8 @ =gUnknown_841E9AB
+	ldr r1, _08142DF8 @ =gText_NoMoreRoomForStamps
 	b _08142E12
 	.align 2, 0
-_08142DF8: .4byte gUnknown_841E9AB
+_08142DF8: .4byte gText_NoMoreRoomForStamps
 _08142DFC:
 	ldr r1, _08142E00 @ =gUnknown_841EC40
 	b _08142E12
@@ -629,11 +325,11 @@ _08142F6A:
 _08142F8A:
 	movs r0, 0
 	strb r0, [r5, 0xC]
-	bl ValidateReceivedWonderNews
+	bl ValidateReceivedWonderCard
 	b _08142F9A
 _08142F94:
 	strb r1, [r5, 0xC]
-	bl ValidateReceivedWonderCard
+	bl ValidateReceivedWonderNews
 _08142F9A:
 	cmp r0, 0x1
 	bne _08142FA0
@@ -1163,7 +859,7 @@ _081433A2:
 	adds r0, 0x9
 	ldrb r2, [r5, 0xC]
 	adds r1, r5, 0
-	bl sub_8142AFC
+	bl mevent_message_prompt_discard
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _081433BE
@@ -1214,13 +910,13 @@ _08143402:
 _08143408:
 	ldrb r0, [r5, 0xC]
 	movs r1, 0x1
-	bl sub_8142ACC
+	bl TearDownCardOrNews_ReturnToTopMenu
 	cmp r0, 0
 	bne _08143416
 	b _081435C6
 _08143416:
 	ldrb r0, [r5, 0xC]
-	bl sub_8142AB4
+	bl DestroyNewsOrCard
 	movs r0, 0x19
 	strb r0, [r5, 0x8]
 	b _081435C6
@@ -1244,7 +940,7 @@ _08143436:
 _08143442:
 	ldrb r0, [r5, 0xC]
 	movs r1, 0
-	bl sub_8142ACC
+	bl TearDownCardOrNews_ReturnToTopMenu
 	cmp r0, 0
 	bne _08143450
 	b _081435C6
@@ -1255,7 +951,7 @@ _08143450:
 _08143456:
 	ldrb r0, [r5, 0xC]
 	movs r1, 0x1
-	bl sub_8142ACC
+	bl TearDownCardOrNews_ReturnToTopMenu
 	cmp r0, 0
 	bne _08143464
 	b _081435C6
@@ -1266,7 +962,7 @@ _08143464:
 _0814346A:
 	ldrb r0, [r5, 0xC]
 	movs r1, 0x1
-	bl sub_8142ACC
+	bl TearDownCardOrNews_ReturnToTopMenu
 	cmp r0, 0
 	bne _08143478
 	b _081435C6
@@ -1404,7 +1100,7 @@ _08143588: .4byte 0x00030100
 _0814358C:
 	adds r0, r5, 0
 	adds r0, 0x9
-	ldr r1, _081435A8 @ =gUnknown_841E7BC
+	ldr r1, _081435A8 @ =gText_CommunicationError
 	bl MG_PrintTextOnWindow1AndWaitButton
 _08143596:
 	cmp r0, 0
@@ -1417,7 +1113,7 @@ _0814359E:
 	bl PrintMysteryGiftOrEReaderTopMenu
 	b _081435C6
 	.align 2, 0
-_081435A8: .4byte gUnknown_841E7BC
+_081435A8: .4byte gText_CommunicationError
 _081435AC:
 	bl sub_80098B8
 	bl sub_812B484

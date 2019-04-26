@@ -18,6 +18,7 @@
 #include "link_rfu.h"
 #include "string_util.h"
 #include "mevent.h"
+#include "save.h"
 #include "constants/songs.h"
 
 EWRAM_DATA u8 sDownArrowCounterAndYCoordIdx[8] = {};
@@ -33,7 +34,12 @@ extern const u8 gJPText_MysteryGift[];
 extern const u8 gJPText_DecideStop[];
 extern const u8 gText_WhatToDoWithCards[];
 extern const u8 gText_WhatToDoWithNews[];
-
+extern const u8 gText_OkayToDiscardNews[];
+extern const u8 gText_IfThrowAwayCardEventWontHappen[];
+extern const u8 gText_WonderCardThrownAway[];
+extern const u8 gText_WonderNewsThrownAway[];
+extern const u8 gText_DataWillBeSaved[];
+extern const u8 gText_SaveCompletedPressA[];
 extern const u8 gText_WonderCards[];
 extern const u8 gText_WonderNews[];
 extern const u8 gText_Exit3[];
@@ -47,6 +53,22 @@ extern const u8 gText_VarietyOfEventsImportedWireless[];
 extern const u8 gText_WonderCardsInPossession[];
 extern const u8 gText_ReadNewsThatArrived[];
 extern const u8 gText_ReturnToTitle[];
+extern const u8 gText_NothingSentOver[];
+extern const u8 gText_RecordUploadedViaWireless[];
+extern const u8 gText_WonderCardReceived[];
+extern const u8 gText_WonderCardReceivedFrom[];
+extern const u8 gText_WonderNewsReceived[];
+extern const u8 gText_WonderNewsReceivedFrom[];
+extern const u8 gText_NewStampReceived[];
+extern const u8 gText_AlreadyHadCard[];
+extern const u8 gText_AlreadyHadStamp[];
+extern const u8 gText_AlreadyHadNews[];
+extern const u8 gText_NoMoreRoomForStamps[];
+extern const u8 gText_CommunicationCanceled[];
+extern const u8 gText_CantAcceptCardFromTrainer[];
+extern const u8 gText_CantAcceptNewsFromTrainer[];
+extern const u8 gText_CommunicationError[];
+extern const u8 gText_NewTrainerReceived[];
 
 const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
 const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
@@ -806,11 +828,11 @@ bool32 ValidateCardOrNews(bool32 cardOrNews)
 {
     if (cardOrNews == 0)
     {
-        return ValidateReceivedWonderNews();
+        return ValidateReceivedWonderCard();
     }
     else
     {
-        return ValidateReceivedWonderCard();
+        return ValidateReceivedWonderNews();
     }
 }
 
@@ -855,4 +877,168 @@ bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
     return FALSE;
 }
 
+bool32 DestroyNewsOrCard(bool32 cardOrNews)
+{
+    if (cardOrNews == 0)
+    {
+        DestroyWonderCard();
+    }
+    else
+    {
+        DestroyWonderNews();
+    }
+    return TRUE;
+}
 
+bool32 TearDownCardOrNews_ReturnToTopMenu(bool32 cardOrNews, bool32 arg1)
+{
+    if (cardOrNews == 0)
+    {
+        if (FadeOutFromWonderCard(arg1) != 0)
+        {
+            DestroyWonderCardResources();
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    else
+    {
+        if (FadeOutFromWonderNews(arg1) != 0)
+        {
+            DestroyWonderNewsResources();
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+}
+
+s32 mevent_message_prompt_discard(u8 * textState, u16 * windowId, bool32 cardOrNews)
+{
+    if (cardOrNews == 0)
+    {
+        return mevent_message_print_and_prompt_yes_no(textState, windowId, TRUE, gText_IfThrowAwayCardEventWontHappen);
+    }
+    else
+    {
+        return mevent_message_print_and_prompt_yes_no(textState, windowId, TRUE, gText_OkayToDiscardNews);
+    }
+}
+
+bool32 mevent_message_was_thrown_away(u8 * textState, bool32 cardOrNews)
+{
+    if (cardOrNews == 0)
+    {
+        return MG_PrintTextOnWindow1AndWaitButton(textState, gText_WonderCardThrownAway);
+    }
+    else
+    {
+        return MG_PrintTextOnWindow1AndWaitButton(textState, gText_WonderNewsThrownAway);
+    }
+}
+
+bool32 mevent_save_game(u8 * state)
+{
+    switch (*state)
+    {
+    case 0:
+        AddTextPrinterToWindow1(gText_DataWillBeSaved);
+        (*state)++;
+        break;
+    case 1:
+        TrySavingData(0);
+        (*state)++;
+        break;
+    case 2:
+        AddTextPrinterToWindow1(gText_SaveCompletedPressA);
+        (*state)++;
+        break;
+    case 3:
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            (*state)++;
+        }
+        break;
+    case 4:
+        *state = 0;
+        ClearTextWindow();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+const u8 * mevent_message(u32 * flag_p, u8 cardOrNews, u8 cardOrNewsSource, u32 msgId)
+{
+    const u8 * msg = NULL;
+    *flag_p = 0;
+
+    switch (msgId)
+    {
+    case 0:
+        *flag_p = 0;
+        msg = gText_NothingSentOver;
+        break;
+    case 1:
+        *flag_p = 0;
+        msg = gText_RecordUploadedViaWireless;
+        break;
+    case 2:
+        *flag_p = 1;
+        msg = cardOrNewsSource == 0 ? gText_WonderCardReceived : gText_WonderCardReceivedFrom;
+        break;
+    case 3:
+        *flag_p = 1;
+        msg = cardOrNewsSource == 0 ? gText_WonderNewsReceived : gText_WonderNewsReceivedFrom;
+        break;
+    case 4:
+        *flag_p = 1;
+        msg = gText_NewStampReceived;
+        break;
+    case 5:
+        *flag_p = 0;
+        msg = gText_AlreadyHadCard;
+        break;
+    case 6:
+        *flag_p = 0;
+        msg = gText_AlreadyHadStamp;
+        break;
+    case 7:
+        *flag_p = 0;
+        msg = gText_AlreadyHadNews;
+        break;
+    case 8:
+        *flag_p = 0;
+        msg = gText_NoMoreRoomForStamps;
+        break;
+    case 9:
+        *flag_p = 0;
+        msg = gText_CommunicationCanceled;
+        break;
+    case 10:
+        *flag_p = 0;
+        msg = cardOrNews == 0 ? gText_CantAcceptCardFromTrainer : gText_CantAcceptNewsFromTrainer;
+        break;
+    case 11:
+        *flag_p = 0;
+        msg = gText_CommunicationError;
+        break;
+    case 12:
+        *flag_p = 1;
+        msg = gText_NewTrainerReceived;
+        break;
+    case 13:
+        *flag_p = 1;
+        break;
+    case 14:
+        *flag_p = 0;
+        break;
+    }
+
+    return msg;
+}

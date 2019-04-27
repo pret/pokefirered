@@ -2,12 +2,10 @@
 #include "window.h"
 #include "malloc.h"
 #include "bg.h"
+#include "blit.h"
 
 EWRAM_DATA static struct Window* sWindowPtr = NULL;
 EWRAM_DATA static u16 sWindowSize = 0;
-
-extern void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey, u8 paletteNum);
-extern void FillBitmapRect8Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 
 static u8 GetNumActiveWindowsOnBg8Bit(u8 bgId);
 

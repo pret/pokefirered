@@ -1,7 +1,7 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
-#include <gba/gba.h>
+#include "gba/gba.h"
 
 // global.h from pokemon ruby
 

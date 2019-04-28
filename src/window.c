@@ -2,16 +2,12 @@
 #include "window.h"
 #include "malloc.h"
 #include "bg.h"
+#include "blit.h"
 
 u8 gWindowClearTile;
 void *gWindowBgTilemapBuffers[4];
 
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
-
-extern void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey);
-extern void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey, u8 paletteNum);
-extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
-extern void FillBitmapRect8Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 
 static u8 GetNumActiveWindowsOnBg(u8 bgId);
 

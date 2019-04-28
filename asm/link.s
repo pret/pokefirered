@@ -29,7 +29,7 @@ _08009498:
 	cmp r0, r1
 	beq _080094C4
 	bl sub_800B210
-	bl sub_80098B8
+	bl CloseLink
 	bl RestoreSerialTimer3IntrHandlers
 	movs r0, 0
 	b _080094CE
@@ -507,8 +507,8 @@ _080098B0: .4byte gUnknown_3003F30
 _080098B4: .4byte gUnknown_3003F2C
 	thumb_func_end sub_8009804
 
-	thumb_func_start sub_80098B8
-sub_80098B8: @ 80098B8
+	thumb_func_start CloseLink
+CloseLink: @ 80098B8
 	push {r4,lr}
 	ldr r0, _080098DC @ =gReceivedRemoteLinkPlayers
 	movs r4, 0
@@ -529,7 +529,7 @@ _080098CC:
 _080098DC: .4byte gReceivedRemoteLinkPlayers
 _080098E0: .4byte gWirelessCommType
 _080098E4: .4byte gLinkOpen
-	thumb_func_end sub_80098B8
+	thumb_func_end CloseLink
 
 	thumb_func_start TestBlockTransfer
 TestBlockTransfer: @ 80098E8
@@ -1596,7 +1596,7 @@ _0800A100:
 	bne _0800A112
 	ldr r0, _0800A11C @ =gUnknown_3003EAC
 	strb r4, [r0]
-	bl sub_80098B8
+	bl CloseLink
 _0800A112:
 	movs r6, 0
 	ldr r4, _0800A120 @ =gLinkPlayers
@@ -2122,7 +2122,7 @@ sub_800A4BC: @ 800A4BC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A4D4
-	bl sub_80FA4F8
+	bl IsNoOneConnected
 	lsls r0, 24
 	lsrs r0, 24
 	b _0800A4E2
@@ -2833,7 +2833,7 @@ _0800A9E6:
 	ldr r1, _0800AA1C @ =gUnknown_3003EAC
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_80098B8
+	bl CloseLink
 	ldr r0, _0800AA20 @ =c2_800ACD4
 	bl SetMainCallback2
 _0800A9F6:
@@ -3045,7 +3045,7 @@ _0800AB5C:
 	ldr r0, _0800AB90 @ =gLinkVSyncDisabled
 	movs r4, 0x1
 	strb r4, [r0]
-	bl sub_80098B8
+	bl CloseLink
 	ldr r1, _0800AB94 @ =gUnknown_3003F80
 	movs r0, 0
 	str r0, [r1]
@@ -3198,7 +3198,7 @@ _0800AC8E:
 	ldr r1, _0800ACB8 @ =gUnknown_3003EAC
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_80098B8
+	bl CloseLink
 _0800AC98:
 	pop {r0}
 	bx r0

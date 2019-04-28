@@ -5179,7 +5179,7 @@ _0814A124:
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0x17
 	movs r1, 0x7
 	movs r2, 0
@@ -5265,7 +5265,7 @@ _0814A1D0:
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 _0814A1F4:
@@ -5386,7 +5386,7 @@ _0814A2C0:
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 _0814A2E4:
@@ -5468,7 +5468,7 @@ _0814A364:
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 _0814A388:
@@ -5839,7 +5839,7 @@ _0814A652:
 	ldrb r0, [r0, 0x12]
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldr r1, [r4]
@@ -7934,7 +7934,7 @@ sub_814B5C4: @ 814B5C4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	adds r0, r4, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

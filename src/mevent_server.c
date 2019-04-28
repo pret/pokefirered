@@ -11,12 +11,12 @@
 #include "mevent.h"
 #include "mevent_server.h"
 
-EWRAM_DATA struct mevent_srv_ish * s_mevent_srv_ish_ptr = NULL;
+EWRAM_DATA struct mevent_client * s_mevent_client_ptr = NULL;
 EWRAM_DATA struct mevent_srv_common * s_mevent_srv_common_ptr = NULL;
 
-static void mevent_srv_ish_init(struct mevent_srv_ish *, u32, u32);
-static u32 mevent_srv_ish_exec(struct mevent_srv_ish *);
-static void mevent_srv_ish_free_resources(struct mevent_srv_ish *);
+static void mevent_client_init(struct mevent_client *, u32, u32);
+static u32 mevent_client_exec(struct mevent_client *);
+static void mevent_client_free_resources(struct mevent_client *);
 static void mevent_srv_init_common(struct mevent_srv_common *, const void *, u32, u32);
 static void mevent_srv_free_resources(struct mevent_srv_common *);
 static u32 mevent_srv_exec_common(struct mevent_srv_common *);
@@ -25,44 +25,44 @@ extern const u8 gUnknown_84687E0[];
 extern const struct mevent_cmd gUnknown_8468B6C[];
 extern const struct mevent_cmd gUnknown_8468BCC[];
 
-void mevent_srv_ish_do_init(void)
+void mevent_client_do_init(void)
 {
-    s_mevent_srv_ish_ptr = AllocZeroed(sizeof(struct mevent_srv_ish));
-    mevent_srv_ish_init(s_mevent_srv_ish_ptr, 1, 0);
+    s_mevent_client_ptr = AllocZeroed(sizeof(struct mevent_client));
+    mevent_client_init(s_mevent_client_ptr, 1, 0);
 }
 
-u32 mevent_srv_ish_do_exec(u16 * a0)
+u32 mevent_client_do_exec(u16 * a0)
 {
     u32 result;
-    if (s_mevent_srv_ish_ptr == NULL)
+    if (s_mevent_client_ptr == NULL)
         return 6;
-    result = mevent_srv_ish_exec(s_mevent_srv_ish_ptr);
+    result = mevent_client_exec(s_mevent_client_ptr);
     if (result == 6)
     {
-        *a0 = s_mevent_srv_ish_ptr->param;
-        mevent_srv_ish_free_resources(s_mevent_srv_ish_ptr);
-        Free(s_mevent_srv_ish_ptr);
-        s_mevent_srv_ish_ptr = NULL;
+        *a0 = s_mevent_client_ptr->param;
+        mevent_client_free_resources(s_mevent_client_ptr);
+        Free(s_mevent_client_ptr);
+        s_mevent_client_ptr = NULL;
     }
     return result;
 }
 
-void mevent_srv_ish_inc_flag(void)
+void mevent_client_inc_flag(void)
 {
-    s_mevent_srv_ish_ptr->flag++;
+    s_mevent_client_ptr->flag++;
 }
 
-void * mevent_srv_ish_get_buffer(void)
+void * mevent_client_get_buffer(void)
 {
-    return s_mevent_srv_ish_ptr->buffer;
+    return s_mevent_client_ptr->buffer;
 }
 
-void mevent_srv_ish_set_param(u32 a0)
+void mevent_client_set_param(u32 a0)
 {
-    s_mevent_srv_ish_ptr->param = a0;
+    s_mevent_client_ptr->param = a0;
 }
 
-static void mevent_srv_ish_init(struct mevent_srv_ish * svr, u32 sendPlayerNo, u32 recvPlayerNo)
+static void mevent_client_init(struct mevent_client * svr, u32 sendPlayerNo, u32 recvPlayerNo)
 {
     svr->unk_00 = 0;
     svr->mainseqno = 0;
@@ -74,7 +74,7 @@ static void mevent_srv_ish_init(struct mevent_srv_ish * svr, u32 sendPlayerNo, u
     mevent_srv_sub_init(&svr->manager, sendPlayerNo, recvPlayerNo);
 }
 
-static void mevent_srv_ish_free_resources(struct mevent_srv_ish * svr)
+static void mevent_client_free_resources(struct mevent_client * svr)
 {
     Free(svr->sendBuffer);
     Free(svr->recvBuffer);
@@ -82,20 +82,20 @@ static void mevent_srv_ish_free_resources(struct mevent_srv_ish * svr)
     Free(svr->buffer);
 }
 
-static void mevent_srv_ish_jmp_buffer(struct mevent_srv_ish * svr)
+static void mevent_client_jmp_buffer(struct mevent_client * svr)
 {
     memcpy(svr->cmdBuffer, svr->recvBuffer, ME_SEND_BUF_SIZE);
     svr->cmdidx = 0;
 }
 
-static void mevent_srv_ish_send_word(struct mevent_srv_ish * svr, u32 ident, u32 word)
+static void mevent_client_send_word(struct mevent_client * svr, u32 ident, u32 word)
 {
     CpuFill32(0, svr->sendBuffer, ME_SEND_BUF_SIZE);
     *(u32 *)svr->sendBuffer = word;
     mevent_srv_sub_init_send(&svr->manager, ident, svr->sendBuffer, sizeof(u32));
 }
 
-static u32 ish_mainseq_0(struct mevent_srv_ish * svr)
+static u32 ish_mainseq_0(struct mevent_client * svr)
 {
     // init
     memcpy(svr->cmdBuffer, gUnknown_84687E0, ME_SEND_BUF_SIZE);
@@ -105,13 +105,13 @@ static u32 ish_mainseq_0(struct mevent_srv_ish * svr)
     return 0;
 }
 
-static u32 ish_mainseq_1(struct mevent_srv_ish * svr)
+static u32 ish_mainseq_1(struct mevent_client * svr)
 {
     // done
     return 6;
 }
 
-static u32 ish_mainseq_2(struct mevent_srv_ish * svr)
+static u32 ish_mainseq_2(struct mevent_client * svr)
 {
     // do recv
     if (mevent_srv_sub_recv(&svr->manager))
@@ -122,7 +122,7 @@ static u32 ish_mainseq_2(struct mevent_srv_ish * svr)
     return 1;
 }
 
-static u32 ish_mainseq_3(struct mevent_srv_ish * svr)
+static u32 ish_mainseq_3(struct mevent_client * svr)
 {
     // do send
     if (mevent_srv_sub_send(&svr->manager))
@@ -133,7 +133,7 @@ static u32 ish_mainseq_3(struct mevent_srv_ish * svr)
     return 1;
 }
 
-static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
+static u32 ish_mainseq_4(struct mevent_client * svr)
 {
     // process command
     struct mevent_cmd_ish * cmd = &svr->cmdBuffer[svr->cmdidx];
@@ -162,20 +162,20 @@ static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
             svr->flag = 0;
             break;
         case 19:
-            mevent_srv_ish_send_word(svr, 0x12, GetGameStat(cmd->parameter));
+            mevent_client_send_word(svr, 0x12, GetGameStat(cmd->parameter));
             svr->mainseqno = 3;
             svr->flag = 0;
             break;
         case 6:
             if (svr->param == 0)
-                mevent_srv_ish_jmp_buffer(svr);
+                mevent_client_jmp_buffer(svr);
             break;
         case 7:
             if (svr->param == 1)
-                mevent_srv_ish_jmp_buffer(svr);
+                mevent_client_jmp_buffer(svr);
             break;
         case 4:
-            mevent_srv_ish_jmp_buffer(svr);
+            mevent_client_jmp_buffer(svr);
             break;
         case 5:
             memcpy(svr->buffer, svr->recvBuffer, 0x40);
@@ -201,7 +201,7 @@ static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
             mevent_srv_sub_init_send(&svr->manager, 0x11, svr->sendBuffer, sizeof(struct MEventStruct_Unk1442CC));
             break;
         case 14:
-            mevent_srv_ish_send_word(svr, 0x13, svr->param);
+            mevent_client_send_word(svr, 0x13, svr->param);
             break;
         case 10:
             sub_8143F68(svr->recvBuffer);
@@ -210,10 +210,10 @@ static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
             if (!sub_8143EF4(svr->recvBuffer))
             {
                 sub_8143DC8(svr->recvBuffer);
-                mevent_srv_ish_send_word(svr, 0x13, 0);
+                mevent_client_send_word(svr, 0x13, 0);
             }
             else
-                mevent_srv_ish_send_word(svr, 0x13, 1);
+                mevent_client_send_word(svr, 0x13, 1);
             break;
         case 15:
             svr->mainseqno = 6;
@@ -239,7 +239,7 @@ static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
     return 1;
 }
 
-static u32 ish_mainseq_5(struct mevent_srv_ish * svr)
+static u32 ish_mainseq_5(struct mevent_client * svr)
 {
     // wait flag
     if (svr->flag)
@@ -250,7 +250,7 @@ static u32 ish_mainseq_5(struct mevent_srv_ish * svr)
     return 1;
 }
 
-static u32 ish_mainseq_6(struct mevent_srv_ish * svr)
+static u32 ish_mainseq_6(struct mevent_client * svr)
 {
     // ???
     switch (svr->flag)
@@ -270,7 +270,7 @@ static u32 ish_mainseq_6(struct mevent_srv_ish * svr)
     return 1;
 }
 
-static u32 ish_mainseq_7(struct mevent_srv_ish * svr)
+static u32 ish_mainseq_7(struct mevent_client * svr)
 {
     // exec arbitrary code
     u32 (*func)(u32 *, struct SaveBlock2 *, struct SaveBlock1 *) = (void *)gDecompressionBuffer;
@@ -282,9 +282,9 @@ static u32 ish_mainseq_7(struct mevent_srv_ish * svr)
     return 1;
 }
 
-static u32 mevent_srv_ish_exec(struct mevent_srv_ish * svr)
+static u32 mevent_client_exec(struct mevent_client * svr)
 {
-    u32 (*funcs[])(struct mevent_srv_ish *) = {
+    u32 (*funcs[])(struct mevent_client *) = {
         ish_mainseq_0,
         ish_mainseq_1,
         ish_mainseq_2,
@@ -297,19 +297,19 @@ static u32 mevent_srv_ish_exec(struct mevent_srv_ish * svr)
     return funcs[svr->mainseqno](svr);
 }
 
-void mevent_srv_common_do_init_1(void)
+void mevent_srv_init_wnews(void)
 {
     s_mevent_srv_common_ptr = AllocZeroed(sizeof(struct mevent_srv_common));
     mevent_srv_init_common(s_mevent_srv_common_ptr, gUnknown_8468B6C, 0, 1);
 }
 
-void mevent_srv_common_do_init_2(void)
+void mevent_srv_new_wcard(void)
 {
     s_mevent_srv_common_ptr = AllocZeroed(sizeof(struct mevent_srv_common));
     mevent_srv_init_common(s_mevent_srv_common_ptr, gUnknown_8468BCC, 0, 1);
 }
 
-u32 mevent_srv_init_do_exec(u16 * a0)
+u32 mevent_srv_common_do_exec(u16 * a0)
 {
     u32 result;
     if (s_mevent_srv_common_ptr == NULL)
@@ -526,12 +526,12 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 26:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 506);
-            memcpy(svr->mevent_32e0, sav1_get_mevent_buffer_1(), 332);
+            memcpy(svr->mevent_32e0, GetSavedWonderCard(), 332);
             sub_814410C(svr->mevent_32e0);
             break;
         case 27:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 512);
-            memcpy(svr->mevent_3120, sub_8143D58(), 444);
+            memcpy(svr->mevent_3120, GetSavedWonderNews(), 444);
             break;
         case 28:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 517);

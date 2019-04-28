@@ -40,7 +40,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8081064
 	def_special sub_80810CC
 	def_special sub_80810F4
-	def_special sub_80098B8
+	def_special CloseLink
 	def_special sub_80819C8
 	def_special sub_8081978
 	def_special sub_80819B8
@@ -388,12 +388,12 @@ gSpecials:: @ 815FD60
 	def_special sub_8046B94
 	def_special sub_8046BBC
 	def_special sub_8046BDC
-	def_special sub_8146E78
+	def_special ScrSpecial_SeaGallopFerry
 	def_special sub_80CC48C
 	def_special sub_812B220
 	def_special sub_812B234
 	def_special sub_812B248
-	def_special sub_8143FC8
+	def_special ValidateReceivedWonderCard
 	def_special sub_810B810
 	def_special sub_811999C
 	def_special sp182_move_string

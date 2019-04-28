@@ -1071,7 +1071,7 @@ _0811615C:
 	.align 2, 0
 _08116164: .4byte gUnknown_8457610
 _08116168:
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	bl sub_80F8DC0
 	adds r0, r5, 0
 	bl sub_81161E4
@@ -2347,7 +2347,7 @@ _08116C10:
 	strb r0, [r6, 0x8]
 	b _08116D06
 _08116C68:
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	adds r5, r6, 0
 	adds r5, 0x9
 	ldr r4, _08116C90 @ =gUnknown_8457754
@@ -2368,14 +2368,14 @@ _08116C68:
 _08116C90: .4byte gUnknown_8457754
 _08116C94: .4byte gSpecialVar_Result
 _08116C98:
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	ldr r0, _08116CA4 @ =gSpecialVar_Result
 	movs r1, 0x5
 	b _08116CDC
 	.align 2, 0
 _08116CA4: .4byte gSpecialVar_Result
 _08116CA8:
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	adds r5, r6, 0
 	adds r5, 0x9
 	ldr r4, _08116CC4 @ =gUnknown_8457754
@@ -3911,8 +3911,8 @@ _081179C4: .4byte sub_81175BC
 _081179C8: .4byte gTasks
 	thumb_func_end sub_81179A4
 
-	thumb_func_start sub_81179CC
-sub_81179CC: @ 81179CC
+	thumb_func_start MEvent_CreateTask_Leader
+MEvent_CreateTask_Leader: @ 81179CC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _081179FC @ =sub_8117A0C
@@ -3941,7 +3941,7 @@ _081179FC: .4byte sub_8117A0C
 _08117A00: .4byte gUnknown_203B05C
 _08117A04: .4byte gTasks+0x8
 _08117A08: .4byte gSpecialVar_Result
-	thumb_func_end sub_81179CC
+	thumb_func_end MEvent_CreateTask_Leader
 
 	thumb_func_start sub_8117A0C
 sub_8117A0C: @ 8117A0C
@@ -4056,7 +4056,7 @@ _08117AB8:
 	ldr r0, [r0]
 	str r0, [sp]
 	str r1, [sp, 0x4]
-	bl sub_81435D4
+	bl GetMysteryGiftBaseBlock
 	lsls r0, 16
 	ldr r2, _08117B70 @ =0x0000ffff
 	ldr r1, [sp, 0x4]
@@ -4067,7 +4067,7 @@ _08117AB8:
 	bl AddWindow
 	strb r0, [r5, 0xF]
 	ldrb r0, [r5, 0xF]
-	bl sub_814240C
+	bl MG_DrawTextBorder
 	ldr r0, _08117B74 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _08117B78 @ =gUnknown_8456D34
@@ -4113,7 +4113,7 @@ _08117BA4: .4byte gUnknown_203B058
 _08117BA8: .4byte gStringVar4
 _08117BAC:
 	ldr r0, _08117BB8 @ =gStringVar4
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0x4
 	strb r0, [r5, 0xC]
 	b _08117ECA
@@ -4134,7 +4134,7 @@ _08117BBC:
 _08117BD4:
 	movs r0, 0xD
 	strb r0, [r5, 0xC]
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	b _08117ECA
 	.align 2, 0
 _08117BE0: .4byte gMain
@@ -4142,7 +4142,7 @@ _08117BE4:
 	adds r0, r5, 0
 	adds r0, 0xD
 	ldr r1, _08117C08 @ =gUnknown_84577F8
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	bne _08117BF4
 	b _08117ECA
@@ -4169,7 +4169,7 @@ _08117C12:
 	adds r1, 0x14
 	ldr r3, _08117C38 @ =gStringVar4
 	movs r2, 0
-	bl sub_81427A0
+	bl mevent_message_print_and_prompt_yes_no
 	lsls r0, 24
 	asrs r4, r0, 24
 	cmp r4, 0
@@ -4346,7 +4346,7 @@ _08117D88:
 	b _08117ECA
 _08117D94:
 	ldr r0, _08117DA0 @ =gStringVar4
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0xA
 	strb r0, [r5, 0xC]
 	b _08117ECA
@@ -4393,7 +4393,7 @@ _08117DE8:
 	strb r0, [r5, 0xC]
 	b _08117ECA
 _08117DEE:
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	bl sub_80F8DC0
 	ldrb r0, [r5, 0x12]
 	movs r1, 0
@@ -4416,7 +4416,7 @@ _08117E26:
 	adds r0, r5, 0
 	adds r0, 0xD
 	ldr r1, _08117E44 @ =gUnknown_84571B8
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	beq _08117ECA
 	adds r0, r4, 0
@@ -4490,8 +4490,8 @@ _08117ECA:
 	bx r0
 	thumb_func_end sub_8117A0C
 
-	thumb_func_start sub_8117ED4
-sub_8117ED4: @ 8117ED4
+	thumb_func_start MEvent_CreateTask_CardOrNewsWithFriend
+MEvent_CreateTask_CardOrNewsWithFriend: @ 8117ED4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _08117F0C @ =sub_8117F20
@@ -4524,7 +4524,7 @@ _08117F10: .4byte gUnknown_203B05C
 _08117F14: .4byte gTasks+0x8
 _08117F18: .4byte gUnknown_3002028
 _08117F1C: .4byte gSpecialVar_Result
-	thumb_func_end sub_8117ED4
+	thumb_func_end MEvent_CreateTask_CardOrNewsWithFriend
 
 	thumb_func_start sub_8117F20
 sub_8117F20: @ 8117F20
@@ -4585,7 +4585,7 @@ _08117F7C:
 	b _08118288
 _08117FB0:
 	ldr r0, _08117FBC @ =gUnknown_8458FE4
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0x2
 	strb r0, [r5, 0x8]
 	b _08118288
@@ -4609,7 +4609,7 @@ _08117FC0:
 	ldr r0, [r0]
 	str r0, [sp]
 	str r1, [sp, 0x4]
-	bl sub_81435D4
+	bl GetMysteryGiftBaseBlock
 	lsls r0, 16
 	ldr r2, _08118060 @ =0x0000ffff
 	ldr r1, [sp, 0x4]
@@ -4623,7 +4623,7 @@ _08117FC0:
 	bl AddWindow
 	strb r0, [r5, 0xD]
 	ldrb r0, [r5, 0xB]
-	bl sub_814240C
+	bl MG_DrawTextBorder
 	ldr r0, _08118068 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _0811806C @ =gUnknown_8456DDC
@@ -4638,7 +4638,7 @@ _08117FC0:
 	bl ListMenuInit
 	strb r0, [r5, 0xE]
 	ldrb r0, [r5, 0xD]
-	bl sub_814240C
+	bl MG_DrawTextBorder
 	ldrb r0, [r5, 0xD]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -4766,7 +4766,7 @@ _08118146:
 _0811814C: .4byte gMain
 _08118150:
 	ldr r0, _08118184 @ =gUnknown_8459238
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	ldr r4, _08118188 @ =gStringVar1
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -4831,7 +4831,7 @@ _081181D0:
 	b _08118288
 _081181D6:
 	ldr r0, _081181E8 @ =gUnknown_84576AC
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0
 	movs r1, 0
 	bl sub_80FB9E4
@@ -4868,17 +4868,17 @@ _08118222:
 	adds r0, r4
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	beq _08118288
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	b _08118252
 	.align 2, 0
 _08118244: .4byte gUnknown_8457838
 _08118248:
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	ldr r0, _08118264 @ =gUnknown_84571B8
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 _08118252:
 	adds r0, r6, 0
 	bl DestroyTask
@@ -4910,8 +4910,8 @@ _08118288:
 	bx r0
 	thumb_func_end sub_8117F20
 
-	thumb_func_start sub_8118290
-sub_8118290: @ 8118290
+	thumb_func_start MEvent_CreateTask_CardOrNewsOverWireless
+MEvent_CreateTask_CardOrNewsOverWireless: @ 8118290
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _081182C8 @ =sub_81182DC
@@ -4944,7 +4944,7 @@ _081182CC: .4byte gUnknown_203B05C
 _081182D0: .4byte gTasks+0x8
 _081182D4: .4byte gUnknown_3002028
 _081182D8: .4byte gSpecialVar_Result
-	thumb_func_end sub_8118290
+	thumb_func_end MEvent_CreateTask_CardOrNewsOverWireless
 
 	thumb_func_start sub_81182DC
 sub_81182DC: @ 81182DC
@@ -5004,7 +5004,7 @@ _08118340:
 	b _08118604
 _0811836E:
 	ldr r0, _0811837C @ =gUnknown_84591DC
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0x2
 	strb r0, [r5, 0x8]
 	b _08118604
@@ -5030,7 +5030,7 @@ _08118380:
 	ldr r0, [r0]
 	str r0, [sp]
 	str r1, [sp, 0x4]
-	bl sub_81435D4
+	bl GetMysteryGiftBaseBlock
 	lsls r0, 16
 	ldr r2, _081183FC @ =0x0000ffff
 	ldr r1, [sp, 0x4]
@@ -5041,7 +5041,7 @@ _08118380:
 	bl AddWindow
 	strb r0, [r5, 0xB]
 	ldrb r0, [r5, 0xB]
-	bl sub_814240C
+	bl MG_DrawTextBorder
 	ldr r0, _08118400 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, _08118404 @ =gUnknown_8456DDC
@@ -5163,7 +5163,7 @@ _081184BC:
 _081184C4: .4byte gMain
 _081184C8:
 	ldr r0, _081184FC @ =gUnknown_845928C
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	ldr r4, _08118500 @ =gStringVar1
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -5228,7 +5228,7 @@ _08118548:
 	b _08118604
 _0811854E:
 	ldr r0, _08118560 @ =gUnknown_845777C
-	bl sub_8142504
+	bl AddTextPrinterToWindow1
 	movs r0, 0
 	movs r1, 0
 	bl sub_80FB9E4
@@ -5281,10 +5281,10 @@ _081185B4:
 	adds r1, r2
 	ldr r1, [r1]
 _081185C2:
-	bl mevent_0814257C
+	bl MG_PrintTextOnWindow1AndWaitButton
 	cmp r0, 0
 	beq _08118604
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	adds r0, r4, 0
 	bl DestroyTask
 	bl sub_80F8DC0
@@ -12797,7 +12797,7 @@ _0811C168:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	str r5, [sp]
 	movs r0, 0
 	adds r1, r6, 0

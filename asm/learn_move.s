@@ -1016,7 +1016,7 @@ _080E4EF4:
 	lsrs r0, 24
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	adds r4, 0x1
 	cmp r4, 0x7
 	ble _080E4EF4

@@ -2411,7 +2411,7 @@ _08055DDC:
 	bgt _08055E24
 	ldr r0, _08055E1C @ =gMPlayInfo_BGM
 	ldr r1, [r0]
-	ldr r0, _08055E20 @ =gUnknown_86E6B0C
+	ldr r0, _08055E20 @ =gSong_86E6B0C
 	cmp r1, r0
 	bne _08055E24
 	movs r0, 0x4
@@ -2421,7 +2421,7 @@ _08055DDC:
 _08055E14: .4byte gSaveBlock1Ptr
 _08055E18: .4byte 0x00004f01
 _08055E1C: .4byte gMPlayInfo_BGM
-_08055E20: .4byte gUnknown_86E6B0C
+_08055E20: .4byte gSong_86E6B0C
 _08055E24:
 	bl sub_8055D8C
 	lsls r0, 16
@@ -3890,7 +3890,7 @@ sub_80569BC: @ 80569BC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080569CE
-	bl sub_80098B8
+	bl CloseLink
 _080569CE:
 	ldr r0, _080569E4 @ =gWirelessCommType
 	ldrb r0, [r0]

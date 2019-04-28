@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void sub_8146C30(u32 a0);
+void GenerateRandomNews(u32 a0);
 void sub_8146C88(void);
 void sub_8146CA4(void);
 

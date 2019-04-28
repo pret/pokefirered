@@ -423,7 +423,7 @@ sub_810BB74: @ 810BB74
 	lsrs r0, 24
 	movs r1, 0x64
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	pop {r0}
 	bx r0
 	thumb_func_end sub_810BB74

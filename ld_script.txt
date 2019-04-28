@@ -30,7 +30,7 @@ SECTIONS {
 <BSS>
 
         /* .bss.code starts at 0x30028E0 */
-        src/m4a_2.o(.bss.code);
+        src/m4a.o(.bss.code);
 
         /* COMMON starts at 0x30030E0 */
 <COMMON>
@@ -55,7 +55,7 @@ SECTIONS {
         src/text_printer.o(.text);
         asm/text_printer.o(.text);
         src/window.o(.text);
-        asm/blit.o(.text);
+        src/blit.o(.text);
         src/window_8bpp.o(.text);
         src/text.o(.text);
         src/sprite.o(.text);
@@ -241,14 +241,13 @@ SECTIONS {
         asm/buy_menu_helpers.o(.text);
         asm/slot_machine.o(.text);
         src/roamer.o(.text);
-        asm/mystery_gift_menu.o(.text);
-        asm/link_rfu_4.o(.text);
+        src/mystery_gift_menu.o(.text);
         src/mevent.o(.text);
         src/mevent_server_helpers.o(.text);
         src/mevent_server.o(.text);
         src/mevent_8145654.o(.text);
         src/menews_jisan.o(.text);
-        asm/seagallop.o(.text);
+        src/seagallop.o(.text);
         asm/unk_8147500.o(.text);
         asm/unk_8147AA8.o(.text);
         asm/unk_814B6F0.o(.text);
@@ -289,9 +288,7 @@ SECTIONS {
     {
         asm/libgcnmultiboot.o(.text);
         asm/m4a_1.o(.text);
-        src/m4a_2.o(.text);
-        asm/m4a_3.o(.text);
-        src/m4a_4.o(.text);
+        src/m4a.o(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
@@ -411,8 +408,7 @@ SECTIONS {
         data/buy_menu_helpers.o(.rodata);
         data/slot_machine.o(.rodata);
         src/roamer.o(.rodata);
-        data/mystery_gift_menu.o(.rodata);
-        data/link_rfu_4.o(.rodata);
+        src/mystery_gift_menu.o(.rodata);
         src/mevent.o(.rodata);
         src/mevent_server_helpers.o(.rodata);
         src/mevent_server.o(.rodata);
@@ -420,6 +416,8 @@ SECTIONS {
         data/data_8466FB8.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
+        . = ALIGN(4);
+        src/seagallop.o(.rodata);
         data/data_8468C98.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);

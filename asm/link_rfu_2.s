@@ -4012,8 +4012,8 @@ sub_80FA4EC: @ 80FA4EC
 _080FA4F4: .4byte gUnknown_3005450
 	thumb_func_end sub_80FA4EC
 
-	thumb_func_start sub_80FA4F8
-sub_80FA4F8: @ 80FA4F8
+	thumb_func_start IsNoOneConnected
+IsNoOneConnected: @ 80FA4F8
 	push {lr}
 	movs r1, 0
 	ldr r0, _080FA50C @ =gUnknown_3005450
@@ -4027,7 +4027,7 @@ _080FA506:
 	bx r1
 	.align 2, 0
 _080FA50C: .4byte gUnknown_3005450
-	thumb_func_end sub_80FA4F8
+	thumb_func_end IsNoOneConnected
 
 	thumb_func_start sub_80FA510
 sub_80FA510: @ 80FA510
@@ -5152,7 +5152,7 @@ sub_80FAD98: @ 80FAD98
 	bne _080FAE30
 	ldr r6, _080FAE18 @ =gMain
 	ldr r1, [r6, 0x4]
-	ldr r0, _080FAE1C @ =sub_814208C
+	ldr r0, _080FAE1C @ =c2_mystery_gift_e_reader_run
 	cmp r1, r0
 	bne _080FADC0
 	ldr r1, _080FAE20 @ =gWirelessCommType
@@ -5193,13 +5193,13 @@ _080FADF8:
 	ldrb r0, [r7]
 	movs r0, 0x2
 	strb r0, [r7]
-	bl sub_80098B8
+	bl CloseLink
 	b _080FAE62
 	.align 2, 0
 _080FAE10: .4byte gUnknown_3005450
 _080FAE14: .4byte gUnknown_3005E10
 _080FAE18: .4byte gMain
-_080FAE1C: .4byte sub_814208C
+_080FAE1C: .4byte c2_mystery_gift_e_reader_run
 _080FAE20: .4byte gWirelessCommType
 _080FAE24: .4byte c2_800ACD4
 _080FAE28: .4byte 0x0000069e
@@ -9466,8 +9466,8 @@ _080FCE3C: .4byte 0x00001234
 _080FCE40: .4byte gUnknown_843F274
 	thumb_func_end sub_80FCD74
 
-	thumb_func_start sub_80FCE44
-sub_80FCE44: @ 80FCE44
+	thumb_func_start DestroyWirelessStatusIndicatorSprite
+DestroyWirelessStatusIndicatorSprite: @ 80FCE44
 	push {r4,lr}
 	ldr r4, _080FCE90 @ =gSprites
 	ldr r3, _080FCE94 @ =gUnknown_203ACE4
@@ -9512,7 +9512,7 @@ _080FCE98: .4byte 0x00001234
 _080FCE9C: .4byte gMain
 _080FCEA0: .4byte gDummyOamData
 _080FCEA4: .4byte 0x070003e8
-	thumb_func_end sub_80FCE44
+	thumb_func_end DestroyWirelessStatusIndicatorSprite
 
 	thumb_func_start sub_80FCEA8
 sub_80FCEA8: @ 80FCEA8
@@ -9830,7 +9830,7 @@ _080FD072:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080FD106
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 _080FD106:
 	pop {r3}
 	mov r8, r3

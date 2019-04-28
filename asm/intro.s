@@ -2742,14 +2742,14 @@ _080EDC0C:
 	bl DisableInterrupts
 	movs r0, 0
 	bl SetHBlankCallback
-	ldr r0, _080EDC3C @ =sub_8078914
+	ldr r0, _080EDC3C @ =CB2_InitTitleScreen
 	bl SetMainCallback2
 _080EDC34:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EDC3C: .4byte sub_8078914
+_080EDC3C: .4byte CB2_InitTitleScreen
 	thumb_func_end sub_80EDBE8
 
 	thumb_func_start sub_80EDC40

@@ -5,13 +5,13 @@
 #include "window.h"
 #include "text.h"
 #include "sprite.h"
+#include "blit.h"
 
 extern u8 gGlyphInfo[0x90];
 extern u8 gUnknown_203ADFA;
 extern u16 gTMCaseMainWindowPalette[];
 extern const struct OamData gOamData_83AC9D0;
 
-extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 extern void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height);
 extern void BlitBitmapRectToWindow(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight);
 extern u8 GetKeypadIconWidth(u8 keypadIconId);

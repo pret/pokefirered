@@ -4215,7 +4215,7 @@ sub_81417E4: @ 81417E4
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xF
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r1, 0x2
 	str r1, [sp]
 	movs r0, 0xFF

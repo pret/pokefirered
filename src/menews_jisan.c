@@ -10,7 +10,7 @@ static u32 sub_8146E0C(struct MysteryEventStruct *);
 static void sub_8146DA0(struct MysteryEventStruct *);
 static void sub_8146D94(struct MysteryEventStruct *);
 
-void sub_8146C30(u32 a0)
+void GenerateRandomNews(u32 a0)
 {
     struct MysteryEventStruct *r5 = sub_8143D94();
 
@@ -59,7 +59,7 @@ u16 sub_8146CE8(void)
     struct MysteryEventStruct *r4 = sub_8143D94();
     u16 r5;
 
-    if (!sub_806E2BC() || !sub_8143E1C())
+    if (!sub_806E2BC() || !ValidateReceivedWonderNews())
         return 0;
 
     r5 = sub_8146E0C(r4);

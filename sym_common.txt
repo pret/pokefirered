@@ -347,7 +347,7 @@ gUnknown_3005EF8: @ 3005EF8
 gUnknown_3005F00: @ 3005F00
 	.space 0x50
 
-	.include "m4a_2.o"
+	.include "m4a.o"
 	.include "agb_flash.o"
 
 gRfuState: @ 3007438

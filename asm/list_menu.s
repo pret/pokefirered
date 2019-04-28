@@ -60,7 +60,7 @@ _08106F24:
 	lsls r2, 24
 	lsrs r2, 24
 	ldr r1, [sp, 0x4]
-	bl sub_8150048
+	bl DrawTextBorderOuter
 _08106F34:
 	ldr r0, _08106F64 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
@@ -1635,8 +1635,8 @@ sub_8107A9C: @ 8107A9C
 _08107AE8: .4byte gUnknown_3005E60
 	thumb_func_end sub_8107A9C
 
-	thumb_func_start sub_8107AEC
-sub_8107AEC: @ 8107AEC
+	thumb_func_start ListMenuDefaultCursorMoveFunc
+ListMenuDefaultCursorMoveFunc: @ 8107AEC
 	push {lr}
 	lsls r1, 24
 	cmp r1, 0
@@ -1646,7 +1646,7 @@ sub_8107AEC: @ 8107AEC
 _08107AFA:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107AEC
+	thumb_func_end ListMenuDefaultCursorMoveFunc
 
 	thumb_func_start sub_8107B00
 sub_8107B00: @ 8107B00

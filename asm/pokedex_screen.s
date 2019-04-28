@@ -1545,7 +1545,7 @@ sub_810317C: @ 810317C
 	movs r0, 0x1
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
-	ldr r0, _08103234 @ =gUnknown_8415F51
+	ldr r0, _08103234 @ =gText_PickOKExit
 	bl sub_8104C2C
 	movs r0, 0
 	movs r1, 0x2
@@ -1562,7 +1562,7 @@ _08103224: .4byte gUnknown_845216C
 _08103228: .4byte gUnknown_203ACF0
 _0810322C: .4byte gUnknown_8452174
 _08103230: .4byte gUnknown_8415F3D
-_08103234: .4byte gUnknown_8415F51
+_08103234: .4byte gText_PickOKExit
 	thumb_func_end sub_810317C
 
 	thumb_func_start sub_8103238
@@ -1874,7 +1874,7 @@ sub_810345C: @ 810345C
 	movs r0, 0x1
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
-	ldr r0, _08103514 @ =gUnknown_8415F51
+	ldr r0, _08103514 @ =gText_PickOKExit
 	bl sub_8104C2C
 	movs r0, 0
 	movs r1, 0x2
@@ -1891,7 +1891,7 @@ _08103504: .4byte gUnknown_845216C
 _08103508: .4byte gUnknown_203ACF0
 _0810350C: .4byte gUnknown_8452174
 _08103510: .4byte gUnknown_8415F4A
-_08103514: .4byte gUnknown_8415F51
+_08103514: .4byte gText_PickOKExit
 	thumb_func_end sub_810345C
 
 	thumb_func_start sub_8103518

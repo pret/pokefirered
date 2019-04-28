@@ -1,4 +1,4 @@
-#include <gba/gba.h>
+#include "gba/gba.h"
 #include "global.h"
 #include "main.h"
 #include "rtc.h"

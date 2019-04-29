@@ -32536,7 +32536,7 @@ _0802DAE0:
 	str r0, [sp, 0xC]
 	adds r0, r5, 0
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	str r4, [sp, 0x14]
 	add r0, sp, 0x14
 	ldr r1, _0802DB48 @ =gPlttBufferFaded

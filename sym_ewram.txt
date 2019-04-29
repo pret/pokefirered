@@ -1347,12 +1347,9 @@ gSpecialVar_ItemId: @ 203AD30
 	.include "src/bag.o"
 
 	.align 2
-gUnknown_203AD40: @ 203AD40
-	.space 0x18
+	.include "src/trainer_pokemon_sprites.o"
 
-gUnknown_203AD58: @ 203AD58
-	.space 0x60
-
+	.align 2
 	.include "src/vs_seeker.o"
 
 gUnknown_203ADBC: @ 203ADBC

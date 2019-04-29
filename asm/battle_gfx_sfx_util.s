@@ -756,7 +756,7 @@ _0803436C:
 	bl GetBattlerPosition
 	lsls r0, 24
 	lsls r2, r5, 3
-	ldr r1, _080343C4 @ =gUnknown_82350AC
+	ldr r1, _080343C4 @ =gMonFrontPicTable
 	adds r2, r1
 	ldr r1, _080343C8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -788,7 +788,7 @@ _0803436C:
 	b _080343DA
 	.align 2, 0
 _080343C0: .4byte gUnknown_2024008
-_080343C4: .4byte gUnknown_82350AC
+_080343C4: .4byte gMonFrontPicTable
 _080343C8: .4byte gMonSpritesGfxPtr
 _080343CC: .4byte gUnknown_2024018
 _080343D0:
@@ -946,7 +946,7 @@ _080344E4:
 	beq _08034548
 _0803451C:
 	lsls r0, r5, 3
-	ldr r1, _08034540 @ =gUnknown_823654C
+	ldr r1, _08034540 @ =gMonBackPicTable
 	adds r0, r1
 	ldr r1, _08034544 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -961,11 +961,11 @@ _0803451C:
 	.align 2, 0
 _08034538: .4byte gUnknown_2024008
 _0803453C: .4byte gUnknown_2024018
-_08034540: .4byte gUnknown_823654C
+_08034540: .4byte gMonBackPicTable
 _08034544: .4byte gMonSpritesGfxPtr
 _08034548:
 	lsls r0, r5, 3
-	ldr r1, _08034584 @ =gUnknown_823654C
+	ldr r1, _08034584 @ =gMonBackPicTable
 	adds r0, r1
 	ldr r1, _08034588 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -994,7 +994,7 @@ _08034562:
 	bl GetMonFrontSpritePal
 	b _0803459A
 	.align 2, 0
-_08034584: .4byte gUnknown_823654C
+_08034584: .4byte gMonBackPicTable
 _08034588: .4byte gMonSpritesGfxPtr
 _0803458C: .4byte gUnknown_2024018
 _08034590:
@@ -1149,7 +1149,7 @@ sub_80346C4: @ 80346C4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsls r5, 3
-	ldr r6, _0803473C @ =gUnknown_823957C
+	ldr r6, _0803473C @ =gTrainerFrontPicTable
 	adds r6, r5, r6
 	ldr r0, _08034740 @ =gMonSpritesGfxPtr
 	mov r8, r0
@@ -1181,7 +1181,7 @@ sub_80346C4: @ 80346C4
 	str r0, [sp, 0x4]
 	mov r0, sp
 	bl LoadSpriteSheet
-	ldr r0, _0803474C @ =gUnknown_8239A1C
+	ldr r0, _0803474C @ =gTrainerFrontPicPaletteTable
 	adds r5, r0
 	adds r0, r5, 0
 	bl sub_800F078
@@ -1192,11 +1192,11 @@ sub_80346C4: @ 80346C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803473C: .4byte gUnknown_823957C
+_0803473C: .4byte gTrainerFrontPicTable
 _08034740: .4byte gMonSpritesGfxPtr
 _08034744: .4byte 0xffff0000
 _08034748: .4byte 0x0000ffff
-_0803474C: .4byte gUnknown_8239A1C
+_0803474C: .4byte gTrainerFrontPicPaletteTable
 	thumb_func_end sub_80346C4
 
 	thumb_func_start sub_8034750
@@ -1231,12 +1231,12 @@ sub_803477C: @ 803477C
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
-	ldr r0, _080347A0 @ =gUnknown_8239A1C
+	ldr r0, _080347A0 @ =gTrainerFrontPicPaletteTable
 	lsrs r4, 13
 	adds r0, r4, r0
 	ldrh r0, [r0, 0x4]
 	bl FreeSpritePaletteByTag
-	ldr r0, _080347A4 @ =gUnknown_823957C
+	ldr r0, _080347A4 @ =gTrainerFrontPicTable
 	adds r4, r0
 	ldrh r0, [r4, 0x6]
 	bl FreeSpriteTilesByTag
@@ -1244,8 +1244,8 @@ sub_803477C: @ 803477C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080347A0: .4byte gUnknown_8239A1C
-_080347A4: .4byte gUnknown_823957C
+_080347A0: .4byte gTrainerFrontPicPaletteTable
+_080347A4: .4byte gTrainerFrontPicTable
 	thumb_func_end sub_803477C
 
 	thumb_func_start sub_80347A8
@@ -1852,7 +1852,7 @@ _08034C16:
 	adds r7, r0, 0
 	mov r1, r8
 	lsls r0, r1, 3
-	ldr r1, _08034D60 @ =gUnknown_82350AC
+	ldr r1, _08034D60 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r4, _08034D64 @ =gMonSpritesGfxPtr
 	ldr r1, [r4]
@@ -1961,7 +1961,7 @@ _08034C16:
 	.align 2, 0
 _08034D58: .4byte gBattlerPartyIndexes
 _08034D5C: .4byte gEnemyParty
-_08034D60: .4byte gUnknown_82350AC
+_08034D60: .4byte gMonFrontPicTable
 _08034D64: .4byte gMonSpritesGfxPtr
 _08034D68: .4byte gSprites
 _08034D6C: .4byte gUnknown_2023D44
@@ -2122,7 +2122,7 @@ _08034E90:
 	adds r7, r0, 0
 	mov r2, r8
 	lsls r0, r2, 3
-	ldr r1, _08034F04 @ =gUnknown_823654C
+	ldr r1, _08034F04 @ =gMonBackPicTable
 	adds r0, r1
 	ldr r1, _08034F08 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -2142,7 +2142,7 @@ _08034E90:
 	.align 2, 0
 _08034EFC: .4byte gBattlerPartyIndexes
 _08034F00: .4byte gPlayerParty
-_08034F04: .4byte gUnknown_823654C
+_08034F04: .4byte gMonBackPicTable
 _08034F08: .4byte gMonSpritesGfxPtr
 _08034F0C: .4byte gUnknown_2024008
 _08034F10:
@@ -2166,7 +2166,7 @@ _08034F10:
 	adds r7, r0, 0
 	mov r2, r8
 	lsls r0, r2, 3
-	ldr r1, _0803507C @ =gUnknown_82350AC
+	ldr r1, _0803507C @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _08035080 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -2315,7 +2315,7 @@ _08035062:
 	.align 2, 0
 _08035074: .4byte gBattlerPartyIndexes
 _08035078: .4byte gEnemyParty
-_0803507C: .4byte gUnknown_82350AC
+_0803507C: .4byte gMonFrontPicTable
 _08035080: .4byte gMonSpritesGfxPtr
 _08035084: .4byte gUnknown_2024008
 _08035088: .4byte gUnknown_2023D44

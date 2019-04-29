@@ -4953,7 +4953,7 @@ sub_80D2EA4: @ 80D2EA4
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_810C374
+	bl PlayerGenderToFrontTrainerPicId_Debug
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x88

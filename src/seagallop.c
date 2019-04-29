@@ -4,7 +4,7 @@
 #include "palette.h"
 #include "malloc.h"
 #include "scanline_effect.h"
-#include "battle_dome_cards.h"
+#include "trainer_pokemon_sprites.h"
 #include "window.h"
 #include "text_window.h"
 #include "sound.h"
@@ -365,7 +365,7 @@ static void ResetAllAssets(void)
     ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
-    dp13_810BB8C();
+    ResetAllPicSprites();
     ResetPaletteFade();
     FreeAllSpritePalettes();
 }

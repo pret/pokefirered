@@ -132,12 +132,12 @@ DecompressPicFromTable: @ 800EC8C
 	lsls r0, 1
 	cmp r5, r0
 	ble _0800ECAC
-	ldr r0, _0800ECA8 @ =gUnknown_82350AC
+	ldr r0, _0800ECA8 @ =gMonFrontPicTable
 	ldr r0, [r0]
 	bl LZ77UnCompWram
 	b _0800ECB4
 	.align 2, 0
-_0800ECA8: .4byte gUnknown_82350AC
+_0800ECA8: .4byte gMonFrontPicTable
 _0800ECAC:
 	ldr r0, [r3]
 	adds r1, r4, 0
@@ -158,7 +158,7 @@ sub_800ECC4: @ 800ECC4
 	adds r4, r0, 0
 	adds r5, r1, 0
 	lsls r0, r2, 3
-	ldr r1, _0800ECEC @ =gUnknown_82350AC
+	ldr r1, _0800ECEC @ =gMonFrontPicTable
 	adds r0, r1
 	movs r1, 0
 	cmp r4, r0
@@ -168,17 +168,17 @@ _0800ECDA:
 	str r1, [sp]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_800ECF0
+	bl LoadSpecialPokePic
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800ECEC: .4byte gUnknown_82350AC
+_0800ECEC: .4byte gMonFrontPicTable
 	thumb_func_end sub_800ECC4
 
-	thumb_func_start sub_800ECF0
-sub_800ECF0: @ 800ECF0
+	thumb_func_start LoadSpecialPokePic
+LoadSpecialPokePic: @ 800ECF0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -227,34 +227,34 @@ _0800ED48:
 	mov r0, r8
 	cmp r0, 0
 	bne _0800ED5C
-	ldr r0, _0800ED58 @ =gUnknown_823654C
+	ldr r0, _0800ED58 @ =gMonBackPicTable
 	lsls r1, 3
 	adds r1, r0
 	ldr r0, [r1]
 	b _0800ED78
 	.align 2, 0
-_0800ED58: .4byte gUnknown_823654C
+_0800ED58: .4byte gMonBackPicTable
 _0800ED5C:
-	ldr r0, _0800ED68 @ =gUnknown_82350AC
+	ldr r0, _0800ED68 @ =gMonFrontPicTable
 	lsls r1, 3
 	adds r1, r0
 	ldr r0, [r1]
 	b _0800ED78
 	.align 2, 0
-_0800ED68: .4byte gUnknown_82350AC
+_0800ED68: .4byte gMonFrontPicTable
 _0800ED6C:
 	movs r0, 0xCE
 	lsls r0, 1
 	cmp r7, r0
 	ble _0800ED84
-	ldr r0, _0800ED80 @ =gUnknown_82350AC
+	ldr r0, _0800ED80 @ =gMonFrontPicTable
 	ldr r0, [r0]
 _0800ED78:
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	b _0800ED8C
 	.align 2, 0
-_0800ED80: .4byte gUnknown_82350AC
+_0800ED80: .4byte gMonFrontPicTable
 _0800ED84:
 	ldr r0, [r6]
 	adds r1, r4, 0
@@ -274,7 +274,7 @@ _0800ED8C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800ECF0
+	thumb_func_end LoadSpecialPokePic
 
 	thumb_func_start sub_800EDAC
 sub_800EDAC: @ 800EDAC
@@ -748,12 +748,12 @@ DecompressPicFromTable_DontHandleDeoxys: @ 800F0E0
 	lsls r0, 1
 	cmp r2, r0
 	ble _0800F0FC
-	ldr r0, _0800F0F8 @ =gUnknown_82350AC
+	ldr r0, _0800F0F8 @ =gMonFrontPicTable
 	ldr r0, [r0]
 	bl LZ77UnCompWram
 	b _0800F102
 	.align 2, 0
-_0800F0F8: .4byte gUnknown_82350AC
+_0800F0F8: .4byte gMonFrontPicTable
 _0800F0FC:
 	ldr r0, [r3]
 	bl LZ77UnCompWram
@@ -769,7 +769,7 @@ HandleLoadSpecialPokePic_DontHandleDeoxys: @ 800F108
 	adds r4, r0, 0
 	adds r5, r1, 0
 	lsls r0, r2, 3
-	ldr r1, _0800F130 @ =gUnknown_82350AC
+	ldr r1, _0800F130 @ =gMonFrontPicTable
 	adds r0, r1
 	movs r1, 0
 	cmp r4, r0
@@ -785,7 +785,7 @@ _0800F11E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F130: .4byte gUnknown_82350AC
+_0800F130: .4byte gMonFrontPicTable
 	thumb_func_end HandleLoadSpecialPokePic_DontHandleDeoxys
 
 	thumb_func_start LoadSpecialPokePic_DontHandleDeoxys
@@ -838,34 +838,34 @@ _0800F18C:
 	mov r0, r8
 	cmp r0, 0
 	bne _0800F1A0
-	ldr r0, _0800F19C @ =gUnknown_823654C
+	ldr r0, _0800F19C @ =gMonBackPicTable
 	lsls r1, 3
 	adds r1, r0
 	ldr r0, [r1]
 	b _0800F1BC
 	.align 2, 0
-_0800F19C: .4byte gUnknown_823654C
+_0800F19C: .4byte gMonBackPicTable
 _0800F1A0:
-	ldr r0, _0800F1AC @ =gUnknown_82350AC
+	ldr r0, _0800F1AC @ =gMonFrontPicTable
 	lsls r1, 3
 	adds r1, r0
 	ldr r0, [r1]
 	b _0800F1BC
 	.align 2, 0
-_0800F1AC: .4byte gUnknown_82350AC
+_0800F1AC: .4byte gMonFrontPicTable
 _0800F1B0:
 	movs r0, 0xCE
 	lsls r0, 1
 	cmp r7, r0
 	ble _0800F1C8
-	ldr r0, _0800F1C4 @ =gUnknown_82350AC
+	ldr r0, _0800F1C4 @ =gMonFrontPicTable
 	ldr r0, [r0]
 _0800F1BC:
 	adds r1, r5, 0
 	bl LZ77UnCompWram
 	b _0800F1D0
 	.align 2, 0
-_0800F1C4: .4byte gUnknown_82350AC
+_0800F1C4: .4byte gMonFrontPicTable
 _0800F1C8:
 	ldr r0, [r6]
 	adds r1, r5, 0

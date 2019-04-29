@@ -7229,7 +7229,7 @@ sub_808F3F8: @ 808F3F8
 	cmp r2, 0
 	beq _0808F48C
 	lsls r0, r2, 3
-	ldr r1, _0808F470 @ =gUnknown_82350AC
+	ldr r1, _0808F470 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r5, _0808F474 @ =0x000022bc
 	adds r1, r4, r5
@@ -7270,7 +7270,7 @@ sub_808F3F8: @ 808F3F8
 	.align 2, 0
 _0808F468: .4byte gUnknown_20397B0
 _0808F46C: .4byte 0x00002238
-_0808F470: .4byte gUnknown_82350AC
+_0808F470: .4byte gMonFrontPicTable
 _0808F474: .4byte 0x000022bc
 _0808F478: .4byte 0x00000cd8
 _0808F47C: .4byte 0x0000223c

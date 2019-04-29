@@ -603,13 +603,13 @@ CreateTrainerSprite: @ 8083858
 	lsrs r0, 24
 	mov r9, r0
 	lsrs r4, 21
-	ldr r3, _080838E0 @ =gUnknown_8239A1C
+	ldr r3, _080838E0 @ =gTrainerFrontPicPaletteTable
 	mov r8, r3
 	add r8, r4
 	mov r0, r8
 	adds r1, r7, 0
 	bl LoadCompressedObjectPaletteOverrideBuffer
-	ldr r0, _080838E4 @ =gUnknown_823957C
+	ldr r0, _080838E4 @ =gTrainerFrontPicTable
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r7, 0
@@ -649,8 +649,8 @@ CreateTrainerSprite: @ 8083858
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080838E0: .4byte gUnknown_8239A1C
-_080838E4: .4byte gUnknown_823957C
+_080838E0: .4byte gTrainerFrontPicPaletteTable
+_080838E4: .4byte gTrainerFrontPicTable
 _080838E8: .4byte gUnknown_83CBE50
 _080838EC: .4byte gDummySpriteAnimTable
 _080838F0: .4byte gDummySpriteAffineAnimTable
@@ -666,12 +666,12 @@ LoadTrainerGfx_TrainerCard: @ 80838F8
 	lsls r4, 24
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r0, _08083928 @ =gUnknown_823957C
+	ldr r0, _08083928 @ =gTrainerFrontPicTable
 	lsrs r4, 21
 	adds r0, r4, r0
 	ldr r0, [r0]
 	bl LZDecompressVram
-	ldr r0, _0808392C @ =gUnknown_8239A1C
+	ldr r0, _0808392C @ =gTrainerFrontPicPaletteTable
 	adds r4, r0
 	ldr r0, [r4]
 	adds r1, r5, 0
@@ -681,8 +681,8 @@ LoadTrainerGfx_TrainerCard: @ 80838F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08083928: .4byte gUnknown_823957C
-_0808392C: .4byte gUnknown_8239A1C
+_08083928: .4byte gTrainerFrontPicTable
+_0808392C: .4byte gTrainerFrontPicPaletteTable
 	thumb_func_end LoadTrainerGfx_TrainerCard
 
 	thumb_func_start AddNewGameBirchObject
@@ -742,7 +742,7 @@ sub_8083970: @ 8083970
 	movs r1, 0
 	adds r2, r3, 0
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldrh r0, [r4, 0x4]
@@ -806,7 +806,7 @@ sub_80839D4: @ 80839D4
 	mov r1, r9
 	mov r2, r10
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 16
 	lsrs r4, r0, 16
 	mov r1, r8
@@ -854,7 +854,7 @@ sub_8083A5C: @ 8083A5C
 	bl FreeOamMatrix
 _08083A7A:
 	adds r0, r5, 0
-	bl sub_810C214
+	bl FreeAndDestroyMonPicSprite
 	pop {r4,r5}
 	pop {r0}
 	bx r0

@@ -4304,7 +4304,7 @@ _081583F0:
 	adds r0, r4
 	movs r1, 0x2
 	strh r1, [r0, 0x2E]
-	ldr r0, _08158524 @ =gUnknown_8239A1C
+	ldr r0, _08158524 @ =gTrainerFrontPicPaletteTable
 	mov r1, r8
 	lsls r6, r1, 3
 	adds r0, r6
@@ -4334,7 +4334,7 @@ _081583F0:
 	lsls r0, 22
 	lsrs r0, 22
 	strh r0, [r1, 0x38]
-	ldr r0, _08158528 @ =gUnknown_823957C
+	ldr r0, _08158528 @ =gTrainerFrontPicTable
 	adds r0, r6
 	ldrh r0, [r0, 0x6]
 	bl GetSpriteTileStartByTag
@@ -4390,8 +4390,8 @@ _08158514: .4byte gUnknown_823932C
 _08158518: .4byte gUnknown_2023D44
 _0815851C: .4byte gSprites
 _08158520: .4byte 0x0000ff10
-_08158524: .4byte gUnknown_8239A1C
-_08158528: .4byte gUnknown_823957C
+_08158524: .4byte gTrainerFrontPicPaletteTable
+_08158528: .4byte gTrainerFrontPicTable
 _0815852C: .4byte 0x000003ff
 _08158530: .4byte 0xfffffc00
 _08158534: .4byte sub_8033EEC

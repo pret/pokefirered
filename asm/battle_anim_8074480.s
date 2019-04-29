@@ -5050,7 +5050,7 @@ _0807694E:
 	beq _080769C4
 _0807699A:
 	lsls r0, r6, 3
-	ldr r1, _080769C0 @ =gUnknown_82350AC
+	ldr r1, _080769C0 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _080769B8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -5065,10 +5065,10 @@ _080769B0: .4byte gUnknown_83AE084
 _080769B4: .4byte gUnknown_83AE054
 _080769B8: .4byte gMonSpritesGfxPtr
 _080769BC: .4byte gUnknown_2024018
-_080769C0: .4byte gUnknown_82350AC
+_080769C0: .4byte gMonFrontPicTable
 _080769C4:
 	lsls r0, r6, 3
-	ldr r1, _080769E4 @ =gUnknown_82350AC
+	ldr r1, _080769E4 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _080769E8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -5080,10 +5080,10 @@ _080769C4:
 	str r2, [sp]
 	adds r2, r6, 0
 	mov r3, r8
-	bl sub_800ECF0
+	bl LoadSpecialPokePic
 	b _08076A7C
 	.align 2, 0
-_080769E4: .4byte gUnknown_82350AC
+_080769E4: .4byte gMonFrontPicTable
 _080769E8: .4byte gMonSpritesGfxPtr
 _080769EC:
 	adds r0, r6, 0
@@ -5120,7 +5120,7 @@ _080769EC:
 	beq _08076A60
 _08076A32:
 	lsls r0, r6, 3
-	ldr r1, _08076A58 @ =gUnknown_823654C
+	ldr r1, _08076A58 @ =gMonBackPicTable
 	adds r0, r1
 	ldr r1, _08076A5C @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -5137,11 +5137,11 @@ _08076A46:
 	b _08076A7C
 	.align 2, 0
 _08076A54: .4byte gUnknown_2024018
-_08076A58: .4byte gUnknown_823654C
+_08076A58: .4byte gMonBackPicTable
 _08076A5C: .4byte gMonSpritesGfxPtr
 _08076A60:
 	lsls r0, r6, 3
-	ldr r1, _08076AC8 @ =gUnknown_823654C
+	ldr r1, _08076AC8 @ =gMonBackPicTable
 	adds r0, r1
 	ldr r1, _08076ACC @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -5152,7 +5152,7 @@ _08076A60:
 	str r2, [sp]
 	adds r2, r6, 0
 	mov r3, r8
-	bl sub_800ECF0
+	bl LoadSpecialPokePic
 _08076A7C:
 	ldr r5, _08076ACC @ =gMonSpritesGfxPtr
 	ldr r0, [r5]
@@ -5190,7 +5190,7 @@ _08076A7C:
 	ldr r3, _08076AD8 @ =gUnknown_82349CC
 	b _08076AEE
 	.align 2, 0
-_08076AC8: .4byte gUnknown_823654C
+_08076AC8: .4byte gMonBackPicTable
 _08076ACC: .4byte gMonSpritesGfxPtr
 _08076AD0: .4byte 0x06010000
 _08076AD4: .4byte gUnknown_83AE054

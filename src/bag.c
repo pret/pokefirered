@@ -121,6 +121,84 @@ const struct WindowTemplate gUnknown_8453124 = {
     .baseBlock = 0x28a
 };
 
+const struct WindowTemplate gUnknown_845312C[] = {
+    {
+        .priority = 0x00,
+        .tilemapLeft = 0x02,
+        .tilemapTop = 0x0f,
+        .width = 0x1a,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x02a2
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x0e,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x02a2
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x0f,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x02da
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x10,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x0316
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x17,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x0356
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x11,
+        .width = 0x07,
+        .height = 0x02,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x020a
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x0f,
+        .width = 0x07,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x020a
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x0d,
+        .width = 0x07,
+        .height = 0x06,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x020a
+    }, {
+        .priority = 0x00,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x0b,
+        .width = 0x07,
+        .height = 0x08,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x020a
+    }
+};
+
+const u8 gUnknown_8453174[] = {16, 8, 4};
+
 EWRAM_DATA u8 gUnknown_203AD34[11] = {};
 
 void sub_810B858(void)

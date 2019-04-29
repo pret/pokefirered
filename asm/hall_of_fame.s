@@ -692,7 +692,7 @@ _080F22F2:
 	ldr r3, _080F238C @ =0x0000ffff
 	str r3, [sp, 0xC]
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _080F2390 @ =gSprites
@@ -1172,7 +1172,7 @@ sub_80F26D4: @ 80F26D4
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_810C374
+	bl PlayerGenderToFrontTrainerPicId_Debug
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -1182,7 +1182,7 @@ sub_80F26D4: @ 80F26D4
 	movs r1, 0x1
 	movs r2, 0x78
 	movs r3, 0x48
-	bl sub_810C2A4
+	bl CreateTrainerPicSprite
 	ldr r1, _080F2750 @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
@@ -1383,7 +1383,7 @@ _080F28AC:
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq _080F28B6
-	bl sub_810C214
+	bl FreeAndDestroyMonPicSprite
 _080F28B6:
 	adds r4, 0x2
 	subs r5, 0x1
@@ -1394,7 +1394,7 @@ _080F28B6:
 	lsls r1, 3
 	adds r1, r0
 	ldrh r0, [r1, 0x10]
-	bl sub_810C2E8
+	bl FreeAndDestroyTrainerPicSprite
 	movs r0, 0
 	bl HideBg
 	movs r0, 0x1
@@ -1825,7 +1825,7 @@ _080F2C4C:
 	ldr r3, _080F2CA0 @ =0x0000ffff
 	str r3, [sp, 0xC]
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, _080F2CA4 @ =gSprites
@@ -2118,7 +2118,7 @@ _080F2EC4:
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	beq _080F2ED6
-	bl sub_810C214
+	bl FreeAndDestroyMonPicSprite
 _080F2ED6:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -3074,7 +3074,7 @@ sub_80F36BC: @ 80F36BC
 	bl ResetTasks
 	bl ResetSpriteData
 	bl reset_temp_tile_data_buffers
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	bl FreeAllSpritePalettes
 	ldr r1, _080F36EC @ =gReservedSpritePaletteCount
 	movs r0, 0x8

@@ -76,7 +76,7 @@ gUnknown_82349BC:: @ 82349BC
 gUnknown_82349CC:: @ 82349CC
 	.incbin "baserom.gba", 0x2349CC, 0x6E0
 
-gUnknown_82350AC:: @ 82350AC
+gMonFrontPicTable:: @ 82350AC
 	.incbin "baserom.gba", 0x2350AC, 0xE8
 
 gUnknown_8235194:: @ 8235194
@@ -85,7 +85,7 @@ gUnknown_8235194:: @ 8235194
 gUnknown_8235E6C:: @ 8235E6C
 	.incbin "baserom.gba", 0x235E6C, 0x6E0
 
-gUnknown_823654C:: @ 823654C
+gMonBackPicTable:: @ 823654C
 	.incbin "baserom.gba", 0x23654C, 0xDC0
 
 gMonPaletteTable:: @ 823730C
@@ -103,10 +103,10 @@ gTrainerFrontAnimsPtrTable:: @ 82390DC
 gUnknown_823932C:: @ 823932C
 	.incbin "baserom.gba", 0x23932C, 0x250
 
-gUnknown_823957C:: @ 823957C
+gTrainerFrontPicTable:: @ 823957C
 	.incbin "baserom.gba", 0x23957C, 0x4A0
 
-gUnknown_8239A1C:: @ 8239A1C
+gTrainerFrontPicPaletteTable:: @ 8239A1C
 	.incbin "baserom.gba", 0x239A1C, 0x558
 
 gTrainerBackAnimsPtrTable:: @ 8239F74
@@ -115,7 +115,7 @@ gTrainerBackAnimsPtrTable:: @ 8239F74
 gUnknown_8239F8C:: @ 8239F8C
 	.incbin "baserom.gba", 0x239F8C, 0x18
 
-gUnknown_8239FA4:: @ 8239FA4
+gTrainerBackPicTable:: @ 8239FA4
 	.incbin "baserom.gba", 0x239FA4, 0x30
 
 gUnknown_8239FD4:: @ 8239FD4

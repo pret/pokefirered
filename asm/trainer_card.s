@@ -5019,7 +5019,7 @@ _0808B8FC:
 	adds r0, r1, r4
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl sub_810C374
+	bl PlayerGenderToFrontTrainerPicId_Debug
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r5, _0808B944 @ =gUnknown_83CD8EC

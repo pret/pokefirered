@@ -2441,7 +2441,7 @@ _0811D884:
 	cmp r4, 0
 	beq _0811D916
 	lsls r0, r7, 3
-	ldr r1, _0811D900 @ =gUnknown_82350AC
+	ldr r1, _0811D900 @ =gMonFrontPicTable
 	adds r0, r1
 	adds r1, r6, 0
 	adds r2, r7, 0
@@ -2474,7 +2474,7 @@ _0811D884:
 	bl sub_811DB14
 	b _0811D910
 	.align 2, 0
-_0811D900: .4byte gUnknown_82350AC
+_0811D900: .4byte gMonFrontPicTable
 _0811D904: .4byte gUnknown_8459A30
 _0811D908: .4byte gSprites
 _0811D90C:

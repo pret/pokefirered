@@ -239,7 +239,7 @@ EvolutionScene: @ 80CDDF4
 	bl GetMonData
 	mov r9, r0
 	lsls r0, r5, 3
-	ldr r1, _080CE0B8 @ =gUnknown_82350AC
+	ldr r1, _080CE0B8 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r2, _080CE0BC @ =gMonSpritesGfxPtr
 	ldr r1, [r2]
@@ -295,7 +295,7 @@ EvolutionScene: @ 80CDDF4
 	strb r0, [r1]
 	mov r1, r10
 	lsls r0, r1, 3
-	ldr r2, _080CE0B8 @ =gUnknown_82350AC
+	ldr r2, _080CE0B8 @ =gMonFrontPicTable
 	adds r0, r2
 	ldr r2, _080CE0BC @ =gMonSpritesGfxPtr
 	ldr r1, [r2]
@@ -415,7 +415,7 @@ _080CE0A8: .4byte gUnknown_2039A20
 _080CE0AC: .4byte gStringVar1
 _080CE0B0: .4byte gStringVar2
 _080CE0B4: .4byte gSpeciesNames
-_080CE0B8: .4byte gUnknown_82350AC
+_080CE0B8: .4byte gMonFrontPicTable
 _080CE0BC: .4byte gMonSpritesGfxPtr
 _080CE0C0: .4byte gMultiuseSpriteTemplate
 _080CE0C4: .4byte gDummySpriteAffineAnimTable
@@ -524,7 +524,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	movs r0, 0x4
 	strb r0, [r1]
 	lsls r0, r5, 3
-	ldr r1, _080CE2B8 @ =gUnknown_82350AC
+	ldr r1, _080CE2B8 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _080CE2BC @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -618,7 +618,7 @@ _080CE2A8: .4byte gBattle_BG3_X
 _080CE2AC: .4byte gBattle_BG3_Y
 _080CE2B0: .4byte gUnknown_2022B50
 _080CE2B4: .4byte gReservedSpritePaletteCount
-_080CE2B8: .4byte gUnknown_82350AC
+_080CE2B8: .4byte gMonFrontPicTable
 _080CE2BC: .4byte gMonSpritesGfxPtr
 _080CE2C0: .4byte gMultiuseSpriteTemplate
 _080CE2C4: .4byte gDummySpriteAffineAnimTable
@@ -770,7 +770,7 @@ _080CE414:
 	bl GetMonData
 	adds r4, r0, 0
 	lsls r0, r6, 3
-	ldr r1, _080CE454 @ =gUnknown_82350AC
+	ldr r1, _080CE454 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _080CE458 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -788,7 +788,7 @@ _080CE414:
 	bl LoadCompressedPalette
 	b _080CE4EC
 	.align 2, 0
-_080CE454: .4byte gUnknown_82350AC
+_080CE454: .4byte gMonFrontPicTable
 _080CE458: .4byte gMonSpritesGfxPtr
 _080CE45C:
 	adds r0, r6, 0
@@ -951,7 +951,7 @@ TradeEvolutionScene: @ 80CE540
 	movs r4, 0
 	strb r6, [r0]
 	lsls r0, r5, 3
-	ldr r1, _080CE6C4 @ =gUnknown_82350AC
+	ldr r1, _080CE6C4 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _080CE6C8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -1069,7 +1069,7 @@ _080CE6B4: .4byte gStringVar2
 _080CE6B8: .4byte gSpeciesNames
 _080CE6BC: .4byte gAffineAnimsDisabled
 _080CE6C0: .4byte gUnknown_2039A20
-_080CE6C4: .4byte gUnknown_82350AC
+_080CE6C4: .4byte gMonFrontPicTable
 _080CE6C8: .4byte gMonSpritesGfxPtr
 _080CE6CC: .4byte gMultiuseSpriteTemplate
 _080CE6D0: .4byte gDummySpriteAffineAnimTable

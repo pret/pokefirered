@@ -4251,7 +4251,7 @@ _08037D3A:
 	adds r0, r4
 	movs r1, 0x2
 	strh r1, [r0, 0x2E]
-	ldr r0, _08037E88 @ =gUnknown_8239A1C
+	ldr r0, _08037E88 @ =gTrainerFrontPicPaletteTable
 	mov r1, r9
 	lsls r6, r1, 3
 	adds r0, r6, r0
@@ -4283,7 +4283,7 @@ _08037D3A:
 	lsls r0, 22
 	lsrs r0, 22
 	strh r0, [r1, 0x38]
-	ldr r0, _08037E8C @ =gUnknown_823957C
+	ldr r0, _08037E8C @ =gTrainerFrontPicTable
 	adds r6, r0
 	ldrh r0, [r6, 0x6]
 	bl GetSpriteTileStartByTag
@@ -4344,8 +4344,8 @@ _08037E78: .4byte gUnknown_823932C
 _08037E7C: .4byte gUnknown_2023D44
 _08037E80: .4byte gSprites
 _08037E84: .4byte 0x0000ff10
-_08037E88: .4byte gUnknown_8239A1C
-_08037E8C: .4byte gUnknown_823957C
+_08037E88: .4byte gTrainerFrontPicPaletteTable
+_08037E8C: .4byte gTrainerFrontPicTable
 _08037E90: .4byte 0x000003ff
 _08037E94: .4byte 0xfffffc00
 _08037E98: .4byte sub_8033EEC
@@ -4473,7 +4473,7 @@ _08037F0E:
 	adds r0, r4
 	ldr r1, _08038058 @ =0x0000fffe
 	strh r1, [r0, 0x2E]
-	ldr r0, _0803805C @ =gUnknown_8239A1C
+	ldr r0, _0803805C @ =gTrainerFrontPicPaletteTable
 	mov r3, r9
 	lsls r6, r3, 3
 	adds r0, r6, r0
@@ -4505,7 +4505,7 @@ _08037F0E:
 	lsls r0, 22
 	lsrs r0, 22
 	strh r0, [r1, 0x38]
-	ldr r0, _08038060 @ =gUnknown_823957C
+	ldr r0, _08038060 @ =gTrainerFrontPicTable
 	adds r6, r0
 	ldrh r0, [r6, 0x6]
 	bl GetSpriteTileStartByTag
@@ -4564,8 +4564,8 @@ _0803804C: .4byte gUnknown_823932C
 _08038050: .4byte gUnknown_2023D44
 _08038054: .4byte gSprites
 _08038058: .4byte 0x0000fffe
-_0803805C: .4byte gUnknown_8239A1C
-_08038060: .4byte gUnknown_823957C
+_0803805C: .4byte gTrainerFrontPicPaletteTable
+_08038060: .4byte gTrainerFrontPicTable
 _08038064: .4byte 0x000003ff
 _08038068: .4byte 0xfffffc00
 _0803806C: .4byte sub_8033EEC

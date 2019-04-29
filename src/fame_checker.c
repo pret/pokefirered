@@ -8,7 +8,7 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "menu.h"
-#include "battle_dome_cards.h"
+#include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
 #include "new_menu_helpers.h"
 #include "item_menu.h"
@@ -1012,7 +1012,7 @@ static void FCSetup_ResetTasksAndSpriteResources(void)
     ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
-    dp13_810BB8C();
+    ResetAllPicSprites();
     ResetPaletteFade();
     npc_paltag_set_load(0);
     gReservedSpritePaletteCount = 7;
@@ -1181,7 +1181,7 @@ static u8 CreatePersonPicSprite(u8 fcPersonIdx)
     }
     else
     {
-        spriteId = sub_810C2A4(sFameCheckerTrainerPicIdxs[fcPersonIdx], 1, 0x94, 0x42, 6, 0xFFFF);
+        spriteId = CreateTrainerPicSprite(sFameCheckerTrainerPicIdxs[fcPersonIdx], 1, 0x94, 0x42, 6, 0xFFFF);
     }
     gSprites[spriteId].callback = SpriteCB_FCSpinningPokeball;
     if (gSaveBlock1Ptr->fameChecker[fcPersonIdx].pickState == FCPICKSTATE_SILHOUETTE)
@@ -1202,7 +1202,7 @@ static void DestroyPersonPicSprite(u8 taskId, u16 who)
     )
         DestroySprite(&gSprites[data[2]]);
     else
-        sub_810C2E8(data[2]);
+        FreeAndDestroyTrainerPicSprite(data[2]);
 }
 
 static void UpdateIconDescriptionBox(u8 whichText)

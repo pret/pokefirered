@@ -7285,7 +7285,7 @@ _08050040:
 	cmp r6, 0
 	bne _0805007C
 	lsls r0, r5, 3
-	ldr r1, _08050074 @ =gUnknown_82350AC
+	ldr r1, _08050074 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _08050078 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -7296,11 +7296,11 @@ _08050040:
 	movs r4, 0
 	b _0805009A
 	.align 2, 0
-_08050074: .4byte gUnknown_82350AC
+_08050074: .4byte gMonFrontPicTable
 _08050078: .4byte gMonSpritesGfxPtr
 _0805007C:
 	lsls r0, r5, 3
-	ldr r1, _080500BC @ =gUnknown_82350AC
+	ldr r1, _080500BC @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _080500C0 @ =gMonSpritesGfxPtr
 	ldr r2, [r1]
@@ -7329,7 +7329,7 @@ _0805009A:
 	str r7, [r1]
 	b _0805011E
 	.align 2, 0
-_080500BC: .4byte gUnknown_82350AC
+_080500BC: .4byte gMonFrontPicTable
 _080500C0: .4byte gMonSpritesGfxPtr
 _080500C4: .4byte gUnknown_2031DAC
 _080500C8:
@@ -10807,7 +10807,7 @@ _08052042:
 	adds r0, 0xF2
 	ldrh r2, [r0]
 	lsls r0, r2, 3
-	ldr r1, _08052068 @ =gUnknown_82350AC
+	ldr r1, _08052068 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _0805206C @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -10819,7 +10819,7 @@ _08052042:
 	.align 2, 0
 _08052060: .4byte gSprites
 _08052064: .4byte SpriteCallbackDummy
-_08052068: .4byte gUnknown_82350AC
+_08052068: .4byte gMonFrontPicTable
 _0805206C: .4byte gMonSpritesGfxPtr
 _08052070:
 	ldr r4, _0805211C @ =gSprites
@@ -13032,7 +13032,7 @@ _0805349E:
 	adds r0, 0xF2
 	ldrh r2, [r0]
 	lsls r0, r2, 3
-	ldr r1, _080534C4 @ =gUnknown_82350AC
+	ldr r1, _080534C4 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _080534C8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -13044,7 +13044,7 @@ _0805349E:
 	.align 2, 0
 _080534BC: .4byte gSprites
 _080534C0: .4byte SpriteCallbackDummy
-_080534C4: .4byte gUnknown_82350AC
+_080534C4: .4byte gMonFrontPicTable
 _080534C8: .4byte gMonSpritesGfxPtr
 _080534CC:
 	ldr r4, _08053578 @ =gSprites

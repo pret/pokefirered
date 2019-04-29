@@ -7777,7 +7777,7 @@ _08106504:
 	ldrb r0, [r0]
 	movs r1, 0x2
 	bl CopyWindowToVram
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	ldr r0, _081066BC @ =gUnknown_8452368
 	movs r1, 0x90
 	lsls r1, 1
@@ -7802,7 +7802,7 @@ _08106534:
 	ldr r0, [sp, 0x1C]
 	movs r1, 0x8
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	ldr r1, [r7]
 	adds r1, 0x58
 	strb r0, [r1]
@@ -7892,7 +7892,7 @@ _08106534:
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_810C374
+	bl PlayerGenderToFrontTrainerPicId_Debug
 	lsls r0, 16
 	lsrs r0, 16
 	movs r3, 0
@@ -7902,7 +7902,7 @@ _08106534:
 	movs r1, 0x1
 	movs r2, 0x50
 	movs r3, 0x68
-	bl sub_810C2A4
+	bl CreateTrainerPicSprite
 	ldr r1, [r7]
 	adds r1, 0x59
 	strb r0, [r1]
@@ -8114,7 +8114,7 @@ _081067CE:
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	beq _081067F2
-	bl sub_810C2E8
+	bl FreeAndDestroyTrainerPicSprite
 _081067F2:
 	ldr r0, [r4]
 	adds r1, r0, 0
@@ -8122,7 +8122,7 @@ _081067F2:
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	beq _08106802
-	bl sub_810C214
+	bl FreeAndDestroyMonPicSprite
 _08106802:
 	movs r0, 0
 	pop {r4,r5}

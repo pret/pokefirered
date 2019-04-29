@@ -10258,7 +10258,7 @@ sub_813995C: @ 813995C
 	adds r1, r4, 0
 	adds r2, r6, 0
 	movs r3, 0x1
-	bl sub_810C16C
+	bl CreateMonPicSprite
 	b _08139A40
 	.align 2, 0
 _081399CC: .4byte gUnknown_203B170
@@ -10290,7 +10290,7 @@ _081399E8:
 	adds r1, r4, 0
 	adds r2, r6, 0
 	movs r3, 0x1
-	bl sub_810C16C
+	bl CreateMonPicSprite
 	b _08139A40
 	.align 2, 0
 _08139A1C: .4byte gUnknown_203B16C
@@ -10308,7 +10308,7 @@ _08139A24:
 	adds r1, r4, 0
 	adds r2, r6, 0
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 _08139A40:
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -10593,7 +10593,7 @@ sub_8139C80: @ 8139C80
 	ldr r1, _08139CA8 @ =0x00003010
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_810C214
+	bl FreeAndDestroyMonPicSprite
 	ldr r4, _08139CAC @ =gUnknown_203B170
 	ldr r0, [r4]
 	bl Free

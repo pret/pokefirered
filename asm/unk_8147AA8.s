@@ -6877,7 +6877,7 @@ _0814AE2A:
 	beq _0814AEEC
 	ldrh r2, [r7]
 	lsls r0, r2, 3
-	ldr r1, _0814AED8 @ =gUnknown_82350AC
+	ldr r1, _0814AED8 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r3, [r7, 0x8]
 	mov r1, r8
@@ -6948,7 +6948,7 @@ _0814AE2A:
 	strb r1, [r0]
 	b _0814AEF8
 	.align 2, 0
-_0814AED8: .4byte gUnknown_82350AC
+_0814AED8: .4byte gMonFrontPicTable
 _0814AEDC: .4byte 0xffff0000
 _0814AEE0: .4byte 0x000081a8
 _0814AEE4: .4byte gSprites

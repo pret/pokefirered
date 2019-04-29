@@ -474,7 +474,7 @@ sub_80CD608: @ 80CD608
 	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	bl ResetPaletteFade
 	bl FreeAllSpritePalettes
 	pop {r0}

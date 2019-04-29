@@ -4631,7 +4631,7 @@ sub_8057024: @ 8057024
 	bl ResetSpriteData
 	bl ResetPaletteFade
 	bl ScanlineEffect_Clear
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	bl ResetCameraUpdateInfo
 	bl InstallCameraPanAheadCallback
 	cmp r4, 0
@@ -5396,7 +5396,7 @@ _08057690:
 	b _0805772A
 _0805769C:
 	bl ScanlineEffect_Clear
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	bl ResetCameraUpdateInfo
 	bl InstallCameraPanAheadCallback
 	bl FieldEffectActiveListClear

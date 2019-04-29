@@ -398,7 +398,7 @@ _08046F1C:
 	bl GetMonData
 	adds r3, r0, 0
 	lsls r0, r4, 3
-	ldr r1, _08046F64 @ =gUnknown_82350AC
+	ldr r1, _08046F64 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _08046F68 @ =gMonSpritesGfxPtr
 	ldr r2, [r1]
@@ -418,7 +418,7 @@ _08046F1C:
 	strh r4, [r0]
 	b _08046FA6
 	.align 2, 0
-_08046F64: .4byte gUnknown_82350AC
+_08046F64: .4byte gMonFrontPicTable
 _08046F68: .4byte gMonSpritesGfxPtr
 _08046F6C:
 	adds r0, r5, 0

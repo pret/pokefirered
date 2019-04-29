@@ -1,3 +1,5 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 	.section .rodata
 
 	.align 2
@@ -3078,33 +3080,6 @@ gUnknown_8453092:: @ 8453092
 
 gUnknown_8453094:: @ 8453094
 	.incbin "baserom.gba", 0x453094, 0x4
-
-gUnknown_8453098:: @ 8453098
-	.incbin "baserom.gba", 0x453098, 0x20
-
-gUnknown_84530B8:: @ 84530B8
-	.incbin "baserom.gba", 0x4530B8, 0xC
-
-gUnknown_84530C4:: @ 84530C4
-	.incbin "baserom.gba", 0x4530C4, 0x20
-
-gUnknown_84530E4:: @ 84530E4
-	.incbin "baserom.gba", 0x4530E4, 0x20
-
-gUnknown_8453104:: @ 8453104
-	.incbin "baserom.gba", 0x453104, 0x18
-
-gUnknown_845311C:: @ 845311C
-	.incbin "baserom.gba", 0x45311C, 0x8
-
-gUnknown_8453124:: @ 8453124
-	.incbin "baserom.gba", 0x453124, 0x54
-
-gUnknown_8453178:: @ 8453178
-	.incbin "baserom.gba", 0x453178, 0xC
-
-gUnknown_8453184:: @ 8453184
-	.incbin "baserom.gba", 0x453184, 0x8
 
 	.section .rodata.8453F6C
 

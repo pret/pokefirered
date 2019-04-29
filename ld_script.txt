@@ -212,8 +212,9 @@ SECTIONS {
         asm/list_menu.o(.text);
         asm/item_menu.o(.text);
         asm/save_location.o(.text);
+        src/bag.o(.text);
         asm/bag.o(.text);
-        asm/battle_dome_cards.o(.text);
+        asm/trainer_pokemon_sprites.o(.text);
         asm/unk_810C3A4.o(.text);
         src/vs_seeker.o(.text);
         asm/item_pc.o(.text);
@@ -389,6 +390,8 @@ SECTIONS {
         data/data_83F5738.o(.rodata);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
+        src/bag.o(.rodata);
+        data/trainer_pokemon_sprites.o(.rodata);
         src/vs_seeker.o(.rodata);
         data/data_83FECCC.o(.rodata.8453F6C);
         src/quest_log.o(.rodata);

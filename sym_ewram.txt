@@ -1343,9 +1343,10 @@ gUnknown_203AD2C: @ 203AD2C
 gSpecialVar_ItemId: @ 203AD30
 	.space 0x4
 
-gUnknown_203AD34: @ 203AD34
-	.space 0xC
+	.align 2
+	.include "src/bag.o"
 
+	.align 2
 gUnknown_203AD40: @ 203AD40
 	.space 0x18
 

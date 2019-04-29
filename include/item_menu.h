@@ -7,6 +7,18 @@
 
 // Exported RAM declarations
 
+struct BagStruct
+{
+    void (*bagCallback)(void);
+    u8 location;
+    u8 pocket;
+    u16 unk6;
+    u8 cursorPosition[6];
+    u8 scrollPosition[6];
+};
+
+extern struct BagStruct gUnknown_203ACFC;
+
 extern u16 gSpecialVar_ItemId;
 
 // Exported ROM declarations

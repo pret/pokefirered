@@ -291,10 +291,10 @@ SetUpFieldMove_RockSmash: @ 80C99D8
 	movs r0, 0
 	b _080C99FA
 _080C99EC:
-	ldr r1, _080C9A00 @ =gUnknown_3005024
-	ldr r0, _080C9A04 @ =hm_add_c3_launch_phase_2
+	ldr r1, _080C9A00 @ =gFieldCallback2
+	ldr r0, _080C9A04 @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _080C9A08 @ =gUnknown_203B0C4
+	ldr r1, _080C9A08 @ =gPostMenuFieldCallback
 	ldr r0, _080C9A0C @ =sub_80C9A10
 	str r0, [r1]
 	movs r0, 0x1
@@ -302,9 +302,9 @@ _080C99FA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080C9A00: .4byte gUnknown_3005024
-_080C9A04: .4byte hm_add_c3_launch_phase_2
-_080C9A08: .4byte gUnknown_203B0C4
+_080C9A00: .4byte gFieldCallback2
+_080C9A04: .4byte FieldCallback_PrepareFadeInFromMenu
+_080C9A08: .4byte gPostMenuFieldCallback
 _080C9A0C: .4byte sub_80C9A10
 	thumb_func_end SetUpFieldMove_RockSmash
 
@@ -373,10 +373,10 @@ SetUpFieldMove_Dig: @ 80C9A78
 	movs r0, 0
 	b _080C9A98
 _080C9A8A:
-	ldr r1, _080C9A9C @ =gUnknown_3005024
-	ldr r0, _080C9AA0 @ =hm_add_c3_launch_phase_2
+	ldr r1, _080C9A9C @ =gFieldCallback2
+	ldr r0, _080C9AA0 @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _080C9AA4 @ =gUnknown_203B0C4
+	ldr r1, _080C9AA4 @ =gPostMenuFieldCallback
 	ldr r0, _080C9AA8 @ =hm2_dig
 	str r0, [r1]
 	movs r0, 0x1
@@ -384,9 +384,9 @@ _080C9A98:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080C9A9C: .4byte gUnknown_3005024
-_080C9AA0: .4byte hm_add_c3_launch_phase_2
-_080C9AA4: .4byte gUnknown_203B0C4
+_080C9A9C: .4byte gFieldCallback2
+_080C9AA0: .4byte FieldCallback_PrepareFadeInFromMenu
+_080C9AA4: .4byte gPostMenuFieldCallback
 _080C9AA8: .4byte hm2_dig
 	thumb_func_end SetUpFieldMove_Dig
 

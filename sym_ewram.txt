@@ -1465,7 +1465,7 @@ gUnknown_203B0C0: @ 203B0C0
 gUnknown_203B0C1: @ 203B0C1
 	.space 0x3
 
-gUnknown_203B0C4: @ 203B0C4
+gPostMenuFieldCallback: @ 203B0C4
 	.space 0x4
 
 gUnknown_203B0C8: @ 203B0C8

@@ -97,11 +97,13 @@ extern u8 gUnknown_2031DD8;
 extern u8 gUnknown_2036E28;
 
 extern void (*gUnknown_3005020)(void);
+extern bool8 (* gFieldCallback2)(void);
 
-extern bool8 (* gUnknown_3005024)(void);
 void SetLastHealLocationWarp(u8 healLocaionId);
 void sub_8055864(u8 mapGroup, u8 mapNum);
 void CB2_NewGame(void);
+bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
+void Overworld_ResetStateAfterTeleport(void);
 
 void Overworld_FadeOutMapMusic(void);
 void sub_805671C(void);

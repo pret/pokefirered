@@ -20,18 +20,18 @@ _080DE0C4: .4byte gUnknown_203B0A0
 
 	thumb_func_start sub_80DE0C8
 sub_80DE0C8: @ 80DE0C8
-	ldr r1, _080DE0D8 @ =gUnknown_3005024
-	ldr r0, _080DE0DC @ =hm_add_c3_launch_phase_2
+	ldr r1, _080DE0D8 @ =gFieldCallback2
+	ldr r0, _080DE0DC @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _080DE0E0 @ =gUnknown_203B0C4
+	ldr r1, _080DE0E0 @ =gPostMenuFieldCallback
 	ldr r0, _080DE0E4 @ =hm2_sweet_scent
 	str r0, [r1]
 	movs r0, 0x1
 	bx lr
 	.align 2, 0
-_080DE0D8: .4byte gUnknown_3005024
-_080DE0DC: .4byte hm_add_c3_launch_phase_2
-_080DE0E0: .4byte gUnknown_203B0C4
+_080DE0D8: .4byte gFieldCallback2
+_080DE0DC: .4byte FieldCallback_PrepareFadeInFromMenu
+_080DE0E0: .4byte gPostMenuFieldCallback
 _080DE0E4: .4byte hm2_sweet_scent
 	thumb_func_end sub_80DE0C8
 

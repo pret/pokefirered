@@ -990,14 +990,14 @@ void sub_8111368(void)
     if (sub_8110AC8() == 1)
     {
         sub_8111274(gUnknown_203ADF8, 0);
-        gUnknown_3005024 = sub_8111038;
+        gFieldCallback2 = sub_8111038;
         SetMainCallback2(sub_80572A8);
     }
     else
     {
         sub_8111274(gUnknown_203ADF8, 1);
         warp_in();
-        gUnknown_3005024 = sub_8111000;
+        gFieldCallback2 = sub_8111000;
         SetMainCallback2(sub_805726C);
     }
 }
@@ -1237,7 +1237,7 @@ void sub_8111984(void)
     Save_ResetSaveCounters();
     Save_LoadGameData(0);
     SetMainCallback2(sub_8057430);
-    gUnknown_3005024 = sub_8111F60;
+    gFieldCallback2 = sub_8111F60;
     FreeAllWindowBuffers();
     gUnknown_203ADFA = 3;
     gUnknown_203AE8C = NULL;

@@ -11943,10 +11943,10 @@ _0812488C:
 	movs r0, 0x5
 	bl PlaySE
 _08124892:
-	ldr r0, _081248A8 @ =gUnknown_3005024
+	ldr r0, _081248A8 @ =gFieldCallback2
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, _081248AC @ =gUnknown_203B0C4
+	ldr r0, _081248AC @ =gPostMenuFieldCallback
 	str r1, [r0]
 	adds r0, r4, 0
 	bl sub_81203B8
@@ -11955,12 +11955,12 @@ _081248A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081248A8: .4byte gUnknown_3005024
-_081248AC: .4byte gUnknown_203B0C4
+_081248A8: .4byte gFieldCallback2
+_081248AC: .4byte gPostMenuFieldCallback
 	thumb_func_end sub_8124828
 
-	thumb_func_start hm_add_c3_launch_phase_2
-hm_add_c3_launch_phase_2: @ 81248B0
+	thumb_func_start FieldCallback_PrepareFadeInFromMenu
+FieldCallback_PrepareFadeInFromMenu: @ 81248B0
 	push {lr}
 	bl sub_807DC00
 	ldr r0, _081248C4 @ =task_launch_hm_phase_2
@@ -11971,7 +11971,7 @@ hm_add_c3_launch_phase_2: @ 81248B0
 	bx r1
 	.align 2, 0
 _081248C4: .4byte task_launch_hm_phase_2
-	thumb_func_end hm_add_c3_launch_phase_2
+	thumb_func_end FieldCallback_PrepareFadeInFromMenu
 
 	thumb_func_start task_launch_hm_phase_2
 task_launch_hm_phase_2: @ 81248C8
@@ -11988,7 +11988,7 @@ task_launch_hm_phase_2: @ 81248C8
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [r1]
-	ldr r0, _08124900 @ =gUnknown_203B0C4
+	ldr r0, _08124900 @ =gPostMenuFieldCallback
 	ldr r0, [r0]
 	bl _call_via_r0
 	adds r0, r4, 0
@@ -11999,7 +11999,7 @@ _081248F4:
 	bx r0
 	.align 2, 0
 _081248FC: .4byte gFieldEffectArguments
-_08124900: .4byte gUnknown_203B0C4
+_08124900: .4byte gPostMenuFieldCallback
 	thumb_func_end task_launch_hm_phase_2
 
 	thumb_func_start brm_get_selected_species
@@ -12118,18 +12118,18 @@ sub_8124998: @ 8124998
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08124A00
-	ldr r1, _081249F0 @ =gUnknown_3005024
-	ldr r0, _081249F4 @ =hm_add_c3_launch_phase_2
+	ldr r1, _081249F0 @ =gFieldCallback2
+	ldr r0, _081249F4 @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _081249F8 @ =gUnknown_203B0C4
+	ldr r1, _081249F8 @ =gPostMenuFieldCallback
 	ldr r0, _081249FC @ =hm_surf_run_dp02scr
 	str r0, [r1]
 	movs r0, 0x1
 	b _08124A02
 	.align 2, 0
-_081249F0: .4byte gUnknown_3005024
-_081249F4: .4byte hm_add_c3_launch_phase_2
-_081249F8: .4byte gUnknown_203B0C4
+_081249F0: .4byte gFieldCallback2
+_081249F4: .4byte FieldCallback_PrepareFadeInFromMenu
+_081249F8: .4byte gPostMenuFieldCallback
 _081249FC: .4byte hm_surf_run_dp02scr
 _08124A00:
 	movs r0, 0
@@ -12207,7 +12207,7 @@ sub_8124A8C: @ 8124A8C
 	push {lr}
 	ldr r0, _08124AA4 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12289,18 +12289,18 @@ hm_prepare_waterfall: @ 8124AF8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08124B54
-	ldr r1, _08124B44 @ =gUnknown_3005024
-	ldr r0, _08124B48 @ =hm_add_c3_launch_phase_2
+	ldr r1, _08124B44 @ =gFieldCallback2
+	ldr r0, _08124B48 @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _08124B4C @ =gUnknown_203B0C4
+	ldr r1, _08124B4C @ =gPostMenuFieldCallback
 	ldr r0, _08124B50 @ =hm2_waterfall
 	str r0, [r1]
 	movs r0, 0x1
 	b _08124B56
 	.align 2, 0
-_08124B44: .4byte gUnknown_3005024
-_08124B48: .4byte hm_add_c3_launch_phase_2
-_08124B4C: .4byte gUnknown_203B0C4
+_08124B44: .4byte gFieldCallback2
+_08124B48: .4byte FieldCallback_PrepareFadeInFromMenu
+_08124B4C: .4byte gPostMenuFieldCallback
 _08124B50: .4byte hm2_waterfall
 _08124B54:
 	movs r0, 0
@@ -19301,7 +19301,7 @@ _0812836C: .4byte gUnknown_2022B58
 sub_8128370: @ 8128370
 	push {lr}
 	sub sp, 0xC
-	ldr r1, _08128398 @ =gUnknown_3005024
+	ldr r1, _08128398 @ =gFieldCallback2
 	ldr r0, _0812839C @ =hm_add_c3_without_phase_2
 	str r0, [r1]
 	movs r0, 0xF
@@ -19319,7 +19319,7 @@ sub_8128370: @ 8128370
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08128398: .4byte gUnknown_3005024
+_08128398: .4byte gFieldCallback2
 _0812839C: .4byte hm_add_c3_without_phase_2
 _081283A0: .4byte sub_811FB28
 _081283A4: .4byte c2_exit_to_overworld_2_switch
@@ -19331,7 +19331,7 @@ sub_81283A8: @ 81283A8
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _081283D4 @ =gUnknown_3005024
+	ldr r2, _081283D4 @ =gFieldCallback2
 	ldr r1, _081283D8 @ =hm_add_c3_without_phase_2
 	str r1, [r2]
 	movs r1, 0
@@ -19348,7 +19348,7 @@ sub_81283A8: @ 81283A8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081283D4: .4byte gUnknown_3005024
+_081283D4: .4byte gFieldCallback2
 _081283D8: .4byte hm_add_c3_without_phase_2
 _081283DC: .4byte sub_811FB28
 _081283E0: .4byte c2_exit_to_overworld_2_switch

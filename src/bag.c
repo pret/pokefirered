@@ -10,7 +10,7 @@
 #include "money.h"
 #include "bag.h"
 
-extern const u8 gUnknown_84162E8[];
+extern const u8 gText_DepositItem[];
 
 const u16 gUnknown_8453098[] = INCBIN_U16("data/bag/bag_window_pal.gbapal");
 const struct TextColor gUnknown_84530B8[] = {
@@ -163,8 +163,8 @@ void sub_810B994(void)
 {
     u32 x;
     SetWindowBorderStyle(2, FALSE, 0x081, 0x0C);
-    x = 0x40 - GetStringWidth(0, gUnknown_84162E8, 0);
-    AddTextPrinterParameterized(2, 0, gUnknown_84162E8, x / 2, 1, 0, NULL);
+    x = 0x40 - GetStringWidth(0, gText_DepositItem, 0);
+    AddTextPrinterParameterized(2, 0, gText_DepositItem, x / 2, 1, 0, NULL);
 }
 
 u8 sub_810B9DC(u8 a0, u8 a1)

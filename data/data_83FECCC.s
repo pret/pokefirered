@@ -883,8 +883,8 @@ gUnknown_84162BD:: @ 84162BD
 gText_Coins:: @ 84162C4
 	.incbin "baserom.gba", 0x4162C4, 0x24
 
-gUnknown_84162E8:: @ 84162E8
-	.incbin "baserom.gba", 0x4162E8, 0xD
+gText_DepositItem:: @ 84162E8
+	.string "DEPOSIT ITEM$"
 
 gUnknown_84162F5:: @ 84162F5
 	.incbin "baserom.gba", 0x4162F5, 0xA

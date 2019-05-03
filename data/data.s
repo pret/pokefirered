@@ -555,8 +555,6 @@ gUnknown_825E2F4:: @ 825E2F4
 
 	.section .rodata.825EF0C
 
-	.incbin "baserom.gba", 0x25E70C, 0x800
-
 gUnknown_825EF0C:: @ 825EF0C
 	.incbin "baserom.gba", 0x25EF0C, 0x8E8
 

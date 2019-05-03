@@ -553,17 +553,9 @@ gSineTable:: @ 825E074
 gUnknown_825E2F4:: @ 825E2F4
 	.incbin "baserom.gba", 0x25E2F4, 0x168
 
-gBitTable:: @ 825E45C
-	.incbin "baserom.gba", 0x25E45C, 0x80
+	.section .rodata.825EF0C
 
-gUnknown_825E4DC:: @ 825E4DC
-	.incbin "baserom.gba", 0x25E4DC, 0x18
-
-gUnknown_825E4F4:: @ 825E4F4
-	.incbin "baserom.gba", 0x25E4F4, 0x18
-
-gUnknown_825E50C:: @ 825E50C
-	.incbin "baserom.gba", 0x25E50C, 0xA00
+	.incbin "baserom.gba", 0x25E70C, 0x800
 
 gUnknown_825EF0C:: @ 825EF0C
 	.incbin "baserom.gba", 0x25EF0C, 0x8E8

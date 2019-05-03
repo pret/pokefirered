@@ -79,7 +79,7 @@ SECTIONS {
         asm/pokemon_3.o(.text);
         asm/trig.o(.text);
         src/random.o(.text);
-        asm/util.o(.text);
+        src/util.o(.text);
         asm/blend_palette.o(.text);
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
@@ -363,6 +363,8 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         data/data.o(.rodata);
+        src/util.o(.rodata);
+        data/data.o(.rodata.825EF0C);
         data/connections.o(.rodata);
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);

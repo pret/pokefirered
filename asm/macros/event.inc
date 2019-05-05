@@ -824,8 +824,9 @@
 	.4byte \text
 	.endm
 
+	@ RENAMED!
 	@ Gives the player one of the specified (species) Pokmon at level level holding item. The unknown arguments should all be zeroes.
-	.macro givepoke species, level, item, unknown1, unknown2, unknown3
+	.macro givemon species, level, item, unknown1, unknown2, unknown3
 	.byte 0x79
 	.2byte \species
 	.byte \level
@@ -840,7 +841,8 @@
 	.2byte \species
 	.endm
 
-	.macro setpokemove byte1, byte2, word
+	@ RENAMED!
+	.macro setmonmove byte1, byte2, word
 	.byte 0x7b
 	.byte \byte1
 	.byte \byte2
@@ -860,14 +862,16 @@
 	.2byte \species
 	.endm
 
+	@ RENAMED!
 	@ Writes the name of the species of the first Pokémon in the player's party to the specified buffer.
-	.macro getfirstpartypokename out
+	.macro getfirstpartymonname out
 	.byte 0x7e
 	.byte \out
 	.endm
 
+	@ RENAMED!
 	@ Writes the nickname of the Pokemon in slot slot (zero-indexed) of the player's party to the specified buffer. If an empty or invalid slot is specified, ten spaces ("") are written to the buffer.
-	.macro getpartypokename out, slot
+	.macro getpartymonname out, slot
 	.byte 0x7f
 	.byte \out
 	.2byte \slot
@@ -1181,12 +1185,8 @@
 	.endm
 
 	@ In Emerald, this command consumes its parameters and does nothing. In FireRed, this command is a nop.
-	.macro addelevmenuitem a, b, c, d
+	.macro addelevmenuitem
 	.byte 0xb1
-	.byte \a
-	.2byte \b
-	.2byte \c
-	.2byte \d
 	.endm
 
 	@ In FireRed and Emerald, this command is a nop.

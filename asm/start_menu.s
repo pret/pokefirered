@@ -854,7 +854,7 @@ _0806F424: .4byte gPaletteFade
 _0806F428:
 	movs r0, 0x29
 	bl IncrementGameStat
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F448 @ =sub_810275C
@@ -881,7 +881,7 @@ sub_806F44C: @ 806F44C
 	.align 2, 0
 _0806F460: .4byte gPaletteFade
 _0806F464:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F47C @ =CB2_PartyMenuFromStartMenu
@@ -908,7 +908,7 @@ sub_806F480: @ 806F480
 	.align 2, 0
 _0806F494: .4byte gPaletteFade
 _0806F498:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F4B0 @ =UseFameCheckerFromMenu
@@ -935,7 +935,7 @@ sub_806F4B4: @ 806F4B4
 	.align 2, 0
 _0806F4C8: .4byte gPaletteFade
 _0806F4CC:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F4E4 @ =sub_80568A8
@@ -974,7 +974,7 @@ sub_806F4FC: @ 806F4FC
 	.align 2, 0
 _0806F510: .4byte gPaletteFade
 _0806F514:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
 	bl sub_80563F0
 	ldr r0, _0806F534 @ =sub_8088388
@@ -1029,7 +1029,7 @@ sub_806F56C: @ 806F56C
 	.align 2, 0
 _0806F580: .4byte gPaletteFade
 _0806F584:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_80563F0
 	ldr r0, _0806F59C @ =gUnknown_300502C
 	ldrb r0, [r0]

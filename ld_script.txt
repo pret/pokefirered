@@ -80,7 +80,7 @@ SECTIONS {
         asm/trig.o(.text);
         src/random.o(.text);
         src/util.o(.text);
-        asm/blend_palette.o(.text);
+        src/blend_palette.o(.text);
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
         asm/battle_interface.o(.text);

@@ -122,7 +122,7 @@ weather_set: @ 8079CF4
 	beq _08079D0A
 	cmp r4, 0xD
 	beq _08079D0A
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 _08079D0A:
 	ldr r1, _08079D4C @ =gUnknown_2037F34
 	ldr r2, _08079D50 @ =0x000006d1
@@ -170,7 +170,7 @@ sub_8079D60: @ 8079D60
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	ldr r0, _08079D84 @ =gUnknown_2037F34
 	movs r2, 0xDA
 	lsls r2, 3
@@ -193,7 +193,7 @@ sub_8079D8C: @ 8079D8C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	ldr r1, _08079DB8 @ =gUnknown_2037F34
 	movs r2, 0xDA
 	lsls r2, 3
@@ -2625,8 +2625,8 @@ _0807AFFA:
 _0807B000: .4byte 0x000006dd
 	thumb_func_end SetRainStrengthFromSoundEffect
 
-	thumb_func_start play_some_sound
-play_some_sound: @ 807B004
+	thumb_func_start PlayRainStoppingSoundEffect
+PlayRainStoppingSoundEffect: @ 807B004
 	push {lr}
 	bl IsSpecialSEPlaying
 	lsls r0, 24
@@ -2658,7 +2658,7 @@ _0807B03C:
 _0807B042:
 	pop {r0}
 	bx r0
-	thumb_func_end play_some_sound
+	thumb_func_end PlayRainStoppingSoundEffect
 
 	thumb_func_start sub_807B048
 sub_807B048: @ 807B048

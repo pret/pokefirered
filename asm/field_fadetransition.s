@@ -1159,7 +1159,7 @@ DoWarp: @ 807E438
 	bl ScriptContext2_Enable
 	bl sub_8055F88
 	bl sub_807DC18
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	movs r0, 0x9
 	bl PlaySE
 	ldr r0, _0807E464 @ =gUnknown_3005020
@@ -1182,7 +1182,7 @@ DoDiveWarp: @ 807E470
 	bl ScriptContext2_Enable
 	bl sub_8055F88
 	bl sub_807DC18
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	ldr r0, _0807E494 @ =gUnknown_3005020
 	ldr r1, _0807E498 @ =sub_807DF64
 	str r1, [r0]
@@ -1807,7 +1807,7 @@ _0807E95C:
 _0807E966:
 	bl sub_8055F88
 _0807E96A:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	movs r0, 0
 	strh r0, [r5, 0x8]
 	ldr r0, _0807E97C @ =sub_807E718
@@ -1891,7 +1891,7 @@ _0807EA00:
 	b _0807EAB0
 _0807EA10:
 	bl sub_8055F88
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	ldrb r1, [r7, 0x5]
 	movs r0, 0xD
 	negs r0, r0

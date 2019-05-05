@@ -12,6 +12,6 @@ void sub_80AEDBC(void);
 void DoCurrentWeather(void);
 void SetSav1WeatherFromCurrMapHeader(void);
 void sub_807B0C4(u16 *, u16 *, u32);
-void play_some_sound(void);
+void PlayRainStoppingSoundEffect(void);
 
 #endif // GUARD_WEATHER_H

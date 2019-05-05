@@ -535,7 +535,7 @@ static void Task_OaksSpeech1(u8 taskId)
         break;
     case 5:
         sOakSpeechResources->textSpeed = GetTextSpeedSetting();
-        gTextFlags.flag_0 = TRUE;
+        gTextFlags.canABSpeedUpPrint = TRUE;
         decompress_and_copy_tile_data_to_vram(1, sOakSpeechGfx_GameStartHelpUI, 0, 0, 0);
         break;
     case 6:
@@ -1516,7 +1516,7 @@ static void Task_OakSpeech42(u8 taskId)
     sub_8044D80();
     Free(sOakSpeechResources);
     sOakSpeechResources = NULL;
-    gTextFlags.flag_0 = FALSE;
+    gTextFlags.canABSpeedUpPrint = FALSE;
     SetMainCallback2(CB2_NewGame);
     DestroyTask(taskId);
 }
@@ -1600,7 +1600,7 @@ static void CB2_ReturnFromNamingScreen(void)
         ShowBg(2);
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB_NewGameOaksSpeech);
-        gTextFlags.flag_0 = TRUE;
+        gTextFlags.canABSpeedUpPrint = TRUE;
         SetMainCallback2(CB2_NewGameOaksSpeech);
         return;
     }

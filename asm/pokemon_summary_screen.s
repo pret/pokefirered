@@ -3549,7 +3549,7 @@ _08136264:
 	ldr r0, [r6]
 	ldr r4, _08136328 @ =0x00003088
 	adds r0, r4
-	ldr r1, _0813632C @ =gUnknown_8416223
+	ldr r1, _0813632C @ =gText_Lv
 	bl StringCopy
 	ldr r0, [r6]
 	adds r0, r4
@@ -3580,7 +3580,7 @@ _0813631C: .4byte 0x00003290
 _08136320: .4byte 0x0000ffff
 _08136324: .4byte 0x0000306c
 _08136328: .4byte 0x00003088
-_0813632C: .4byte gUnknown_8416223
+_0813632C: .4byte gText_Lv
 _08136330: .4byte 0x00003074
 _08136334: .4byte gUnknown_84161EF
 _08136338:

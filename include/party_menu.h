@@ -26,5 +26,6 @@ void sub_8124C8C(void);
 void sub_8126EDC(void);
 void c2_8123744(void);
 u8 GetCursorSelectionMonId(void);
+void sub_8128370(void);
 
 #endif // GUARD_PARTY_MENU_H

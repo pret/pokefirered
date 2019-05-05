@@ -1055,7 +1055,7 @@ void sub_8111438(void)
         {
             for (r6 = 0; r6 < 30; r6++)
             {
-                if (GetBoxMonDataFromAnyBox(r3, r6, MON_DATA_SANITY_BIT2))
+                if (GetBoxMonDataFromAnyBox(r3, r6, MON_DATA_SANITY_HAS_SPECIES))
                 {
                     sub_808BCB4(r3, r6);
                     r5--;
@@ -1074,7 +1074,7 @@ void sub_8111438(void)
             for (r6 = 0; r6 < IN_BOX_COUNT; r6++)
             {
                 struct BoxPokemon * boxMon = GetBoxedMonPtr(r3, r6);
-                if (!GetBoxMonData(boxMon, MON_DATA_SANITY_BIT2))
+                if (!GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES))
                 {
                     CopyMon(boxMon, &r9->mon.box, sizeof(struct BoxPokemon));
                     r5++;
@@ -1104,7 +1104,7 @@ u16 sub_8111618(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT2))
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES))
             count++;
     }
 
@@ -1120,7 +1120,7 @@ u16 sub_811164C(void)
     {
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
-            if (GetBoxMonDataFromAnyBox(i, j, MON_DATA_SANITY_BIT2))
+            if (GetBoxMonDataFromAnyBox(i, j, MON_DATA_SANITY_HAS_SPECIES))
                 count++;
         }
     }
@@ -1599,7 +1599,7 @@ void sub_81120AC(u8 taskId)
             gUnknown_203AE94 = (struct UnkStruct_203AE94){};
             sub_80696C0();
             ScriptContext2_Disable();
-            gTextFlags.flag_2 = FALSE;
+            gTextFlags.autoScroll = FALSE;
             gUnknown_2036E28 = 0;
             sub_8082740(0);
             gUnknown_3005ECC = 1;

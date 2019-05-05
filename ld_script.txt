@@ -81,7 +81,7 @@ SECTIONS {
         src/random.o(.text);
         src/util.o(.text);
         src/blend_palette.o(.text);
-        asm/daycare.o(.text);
+        src/daycare.o(.text);
         asm/egg_hatch.o(.text);
         asm/battle_interface.o(.text);
         asm/smokescreen.o(.text);
@@ -364,6 +364,7 @@ SECTIONS {
         src/string_util.o(.rodata);
         data/data.o(.rodata);
         src/util.o(.rodata);
+        src/daycare.o(.rodata);
         data/data.o(.rodata.825EF0C);
         data/connections.o(.rodata);
         src/fieldmap.o(.rodata);

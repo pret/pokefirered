@@ -453,7 +453,7 @@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (gTextFlags.flag_2 == 1)
+    if (gTextFlags.autoScroll == 1)
         subStruct->frames_visible_counter = 0;
     else
     {
@@ -467,7 +467,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
     const u8 *arrowTiles;
 
-    if (gTextFlags.flag_2 == 0)
+    if (gTextFlags.autoScroll == 0)
     {
         if (subStruct->field_1 != 0)
         {
@@ -483,7 +483,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 10,
                 12);
 
-            switch (gTextFlags.flag_1)
+            switch (gTextFlags.useAlternateDownArrow)
             {
                 case 0:
                 default:
@@ -544,7 +544,7 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 {
     bool8 result = FALSE;
-    if (gTextFlags.flag_2 != 0)
+    if (gTextFlags.autoScroll != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
@@ -563,7 +563,7 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 bool16 TextPrinterWait(struct TextPrinter *textPrinter)
 {
     bool16 result = FALSE;
-    if (gTextFlags.flag_2 != 0)
+    if (gTextFlags.autoScroll != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
@@ -591,7 +591,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
         FillWindowPixelRect(windowId, (bgColor << 4) | bgColor, x, y, 10, 12);
         if (drawArrow == 0)
         {
-            switch (gTextFlags.flag_1)
+            switch (gTextFlags.useAlternateDownArrow)
             {
                 case 0:
                 default:

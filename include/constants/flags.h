@@ -136,7 +136,7 @@
 #define FLAG_0x083               0x83
 #define FLAG_0x084               0x84
 #define FLAG_0x085               0x85
-#define FLAG_PENDING_DAYCARE_EGG 0x86
+#define FLAG_0x086               0x86
 #define FLAG_0x087               0x87
 #define FLAG_0x088               0x88
 #define FLAG_0x089               0x89
@@ -616,7 +616,7 @@
 #define FLAG_0x263               0x263
 #define FLAG_0x264               0x264
 #define FLAG_0x265               0x265
-#define FLAG_0x266               0x266
+#define FLAG_PENDING_DAYCARE_EGG 0x266
 #define FLAG_0x267               0x267
 #define FLAG_0x268               0x268
 #define FLAG_0x269               0x269

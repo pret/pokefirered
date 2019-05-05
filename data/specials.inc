@@ -191,7 +191,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special sub_80CA74C
 	def_special GetDaycareMonNicknames
-	def_special sub_80464B4
+	def_special GetDaycareState
 	def_special RejectEggFromDayCare
 	def_special GiveEggFromDaycare
 	def_special SetDaycareCompatibilityString
@@ -383,11 +383,11 @@ gSpecials:: @ 815FD60
 	def_special SetFlavorTextFlagFromSpecialVars
 	def_special UpdatePickStateFromSpecialVar8005
 	def_special sub_8054C48
-	def_special sub_8046B40
-	def_special sub_8046B70
-	def_special sub_8046B94
-	def_special sub_8046BBC
-	def_special sub_8046BDC
+	def_special PutMonInRoute5Daycare
+	def_special GetCostToWithdrawRoute5DaycareMon
+	def_special IsThereMonInRoute5Daycare
+	def_special GetNumLevelsGainedForRoute5DaycareMon
+	def_special TakePokemonFromRoute5Daycare
 	def_special ScrSpecial_SeaGallopFerry
 	def_special sub_80CC48C
 	def_special sub_812B220

@@ -515,21 +515,9 @@ gMultiuseSpriteTemplate: @ 20244DC
 gUnknown_20244F4: @ 20244F4
 	.space 0x4
 
-gUnknown_20244F8: @ 20244F8
-	.space 0x64
-
-gUnknown_202455C: @ 202455C
-	.space 0x8
-
-gUnknown_2024564: @ 2024564
-	.space 0x8
-
-gUnknown_202456C: @ 202456C
-	.space 0x14
-
-gUnknown_2024580: @ 2024580
-	.space 0x8
-
+	.align 2
+	.include "src/daycare.o"
+	.align 2
 	.include "src/load_save.o"
 
 	.align 2

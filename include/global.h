@@ -498,9 +498,9 @@ struct ContestWinner
     u8 contestRank;
 };
 
-struct DaycareMiscMon
+struct DayCareMail
 {
-    struct MailStruct mail;
+    struct MailStruct message;
     u8 OT_name[OT_NAME_LENGTH + 1];
     u8 monName[POKEMON_NAME_LENGTH + 1];
     u8 gameLanguage:4;
@@ -510,7 +510,7 @@ struct DaycareMiscMon
 struct DaycareMon
 {
     struct BoxPokemon mon;
-    struct DaycareMiscMon misc;
+    struct DayCareMail mail;
     u32 steps;
 };
 
@@ -519,14 +519,8 @@ struct DaycareMon
 struct DayCare
 {
     struct DaycareMon mons[DAYCARE_MON_COUNT];
-    u16 unk_118;
-    u8 unk_11A;
-};
-
-struct DayCareMail
-{
-    /*0x00*/ struct MailStruct message;
-    /*0x24*/ u8 names[19];
+    u16 offspringPersonality;
+    u8 stepCounter;
 };
 
 struct RecordMixingDayCareMail
@@ -753,7 +747,9 @@ struct SaveBlock1
     /*0x3A48*/ u8 filler_3a48[4];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
-    /*0x3A94*/ u8 filler3A94[0x2A0];
+    /*0x3A94*/ u8 filler3A94[0x204];
+    /*0x3C98*/ struct DaycareMon route5DayCareMon;
+    /*0x3D24*/ u8 filler3D24[0x10];
     /*0x3D34*/ u32 unkArrayIdx;
     /*0x3D38*/ struct TrainerTowerLog unkArray[4];
 };

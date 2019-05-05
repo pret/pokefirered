@@ -1415,13 +1415,13 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_LANGUAGE:
         retVal = boxMon->language;
         break;
-    case MON_DATA_SANITY_BIT1:
+    case MON_DATA_SANITY_IS_BAD_EGG:
         retVal = boxMon->isBadEgg;
         break;
-    case MON_DATA_SANITY_BIT2:
+    case MON_DATA_SANITY_HAS_SPECIES:
         retVal = boxMon->hasSpecies;
         break;
-    case MON_DATA_SANITY_BIT3:
+    case MON_DATA_SANITY_IS_EGG:
         retVal = boxMon->isEgg;
         break;
     case MON_DATA_OT_NAME:
@@ -1809,13 +1809,13 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_LANGUAGE:
         SET8(boxMon->language);
         break;
-    case MON_DATA_SANITY_BIT1:
+    case MON_DATA_SANITY_IS_BAD_EGG:
         SET8(boxMon->isBadEgg);
         break;
-    case MON_DATA_SANITY_BIT2:
+    case MON_DATA_SANITY_HAS_SPECIES:
         SET8(boxMon->hasSpecies);
         break;
-    case MON_DATA_SANITY_BIT3:
+    case MON_DATA_SANITY_IS_EGG:
         SET8(boxMon->isEgg);
         break;
     case MON_DATA_OT_NAME:
@@ -5223,7 +5223,7 @@ void sub_8043B48(struct Pokemon *mon, int species, u8 unused, u32 data)
     }
 }
 
-bool32 sub_8043B90(struct Pokemon *mon)
+bool8 TryIncrementMonLevel(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);

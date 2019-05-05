@@ -1828,7 +1828,7 @@ _0806D6EC:
 	.align 2, 0
 _0806D700: .4byte gUnknown_81A8DFD
 _0806D704:
-	bl sub_80463B8
+	bl ShouldEggHatch
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806D720

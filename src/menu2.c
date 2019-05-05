@@ -426,9 +426,9 @@ static const u8 gUnknown_845FD54[][5] = {
 
 void box_print(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * color, s8 speed, const u8 * str)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
-    printer.current_text_offset = str;
+    printer.currentChar = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.x = x;
@@ -437,8 +437,8 @@ void box_print(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * colo
     printer.currentY = printer.y;
     printer.letterSpacing = GetFontAttribute(fontId, 2);
     printer.lineSpacing = GetFontAttribute(fontId, 3);
-    printer.fontColor_l = 0;
-    printer.fontColor_h = color->bgColor;
+    printer.unk = 0;
+    printer.fgColor = color->bgColor;
     printer.bgColor = color->fgColor;
     printer.shadowColor = color->shadowColor;
     AddTextPrinter(&printer, speed, NULL);
@@ -446,9 +446,9 @@ void box_print(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * colo
 
 void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
-    printer.current_text_offset = str;
+    printer.currentChar = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.x = x;
@@ -457,18 +457,18 @@ void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSp
     printer.currentY = printer.y;
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
-    printer.fontColor_l = 0;
-    printer.fontColor_h = color->bgColor;
+    printer.unk = 0;
+    printer.fgColor = color->bgColor;
     printer.bgColor = color->fgColor;
     printer.shadowColor = color->shadowColor;
     AddTextPrinter(&printer, speed, NULL);
 }
 
-void sub_812E62C(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing)
+void sub_812E62C(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 letterSpacing, u8 lineSpacing)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
-    printer.current_text_offset = str;
+    printer.currentChar = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.x = x;
@@ -477,8 +477,8 @@ void sub_812E62C(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, vo
     printer.currentY = y;
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
-    printer.fontColor_l = 0;
-    printer.fontColor_h = GetFontAttribute(fontId, 5);
+    printer.unk = 0;
+    printer.fgColor = GetFontAttribute(fontId, 5);
     printer.bgColor = GetFontAttribute(fontId, 6);
     printer.shadowColor = GetFontAttribute(fontId, 7);
     AddTextPrinter(&printer, speed, callback);

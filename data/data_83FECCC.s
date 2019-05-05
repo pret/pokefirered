@@ -817,7 +817,7 @@ gUnknown_841621F:: @ 841621F
 gUnknown_8416221:: @ 8416221
 	.string "♀$"
 
-gUnknown_8416223:: @ 8416223
+gText_Lv:: @ 8416223
 	.string "{UNKNOWN_F9 0x05}$"
 
 gOtherText_UnkF9_08_Clear_01:: @ 8416226
@@ -2375,7 +2375,19 @@ gUnknown_841E234:: @ 841E234
 	.incbin "baserom.gba", 0x41E234, 0xF1
 
 gUnknown_841E325:: @ 841E325
-	.incbin "baserom.gba", 0x41E325, 0xBE
+	.string "Communication standby…$"
+
+gDaycareText_GetAlongVeryWell:: @ 841E33C
+	.string "The two seem to get along\nvery well.$"
+
+gDaycareText_GetAlong:: @ 841E361
+	.string "The two seem to get along.$"
+
+gDaycareText_DontLikeOther:: @ 841E37C
+	.string "The two don’t seem to like\neach other much.$"
+
+gDaycareText_PlayOther:: @ 841E3A8
+	.string "The two prefer to play with other\nPOKéMON than each other.$"
 
 gUnknown_841E3E3:: @ 841E3E3
 	.incbin "baserom.gba", 0x41E3E3, 0x18

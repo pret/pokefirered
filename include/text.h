@@ -106,9 +106,9 @@ struct TextPrinterSubStruct
     u8 active;
 };
 
-struct TextSubPrinter // TODO: Better name
+struct TextPrinterTemplate // TODO: Better name
 {
-    const u8* current_text_offset;
+    const u8* currentChar;
     u8 windowId;
     u8 fontId;
     u8 x;
@@ -117,17 +117,17 @@ struct TextSubPrinter // TODO: Better name
     u8 currentY;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 fontColor_l:4;   // 0xC
-    u8 fontColor_h:4;
+    u8 unk:4;   // 0xC
+    u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
 };
 
 struct TextPrinter
 {
-    struct TextSubPrinter subPrinter;
+    struct TextPrinterTemplate subPrinter;
 
-    void (*callback)(struct TextSubPrinter *, u16); // 0x10
+    void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
 
     union {
         struct TextPrinterSubStruct sub;
@@ -150,8 +150,8 @@ struct FontInfo
     u8 maxLetterHeight;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 fontColor_l:4;
-    u8 fontColor_h:4;
+    u8 unk:4;
+    u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
 };
@@ -172,10 +172,10 @@ struct KeypadIcon
 };
 
 typedef struct {
-    u8 flag_0:1;
-    u8 flag_1:1;
-    u8 flag_2:1;
-    u8 flag_3:1;
+    u8 canABSpeedUpPrint:1;
+    u8 useAlternateDownArrow:1;
+    u8 autoScroll:1;
+    u8 forceMidTextSpeed:1;
 } TextFlags;
 
 extern TextFlags gTextFlags;
@@ -194,8 +194,8 @@ extern u8 gStringVar4[];
 
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
-u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
-bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
+u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
+bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 void RunTextPrinters(void);
 bool16 IsTextPrinterActive(u8 id);
 u32 RenderFont(struct TextPrinter *textPrinter);

@@ -48,11 +48,11 @@ void DeactivateAllTextPrinters (void)
         sTextPrinters[printer].sub_union.sub.active = 0;
 }
 
-u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16))
+u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
-    struct TextSubPrinter subPrinter;
+    struct TextPrinterTemplate subPrinter;
 
-    subPrinter.current_text_offset = str;
+    subPrinter.currentChar = str;
     subPrinter.windowId = windowId;
     subPrinter.fontId = fontId;
     subPrinter.x = x;
@@ -61,14 +61,14 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 
     subPrinter.currentY = y;
     subPrinter.letterSpacing = gFonts[fontId].letterSpacing;
     subPrinter.lineSpacing = gFonts[fontId].lineSpacing;
-    subPrinter.fontColor_l = gFonts[fontId].fontColor_l;
-    subPrinter.fontColor_h = gFonts[fontId].fontColor_h;
+    subPrinter.unk = gFonts[fontId].unk;
+    subPrinter.fgColor = gFonts[fontId].fgColor;
     subPrinter.bgColor = gFonts[fontId].bgColor;
     subPrinter.shadowColor = gFonts[fontId].shadowColor;
     return AddTextPrinter(&subPrinter, speed, callback);
 }
 
-bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*callback)(struct TextSubPrinter *, u16))
+bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
     int i;
     u16 j;
@@ -92,7 +92,7 @@ bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*ca
     sTempTextPrinter.minLetterSpacing = 0;
     sTempTextPrinter.japanese = 0;
 
-    GenerateFontHalfRowLookupTable(textSubPrinter->fontColor_h, textSubPrinter->bgColor, textSubPrinter->shadowColor);
+    GenerateFontHalfRowLookupTable(textSubPrinter->fgColor, textSubPrinter->bgColor, textSubPrinter->shadowColor);
     if (speed != TEXT_SPEED_FF && speed != 0x0)
     {
         --sTempTextPrinter.text_speed;

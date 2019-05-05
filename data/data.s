@@ -555,23 +555,9 @@ gUnknown_825E2F4:: @ 825E2F4
 
 	.section .rodata.825EF0C
 
-gUnknown_825EF0C:: @ 825EF0C
-	.incbin "baserom.gba", 0x25EF0C, 0x8E8
-
-gUnknown_825F7F4:: @ 825F7F4
-	.incbin "baserom.gba", 0x25F7F4, 0x20
-
-gUnknown_825F814:: @ 825F814
-	.incbin "baserom.gba", 0x25F814, 0x18
-
-gUnknown_825F82C:: @ 825F82C
-	.incbin "baserom.gba", 0x25F82C, 0x10
-
-gUnknown_825F83C:: @ 825F83C
-	.incbin "baserom.gba", 0x25F83C, 0x2
-
-gUnknown_825F83E:: @ 825F83E
-	.incbin "baserom.gba", 0x25F83E, 0x8DE
+	.align 2
+gUnknown_825F844:: @ 825F842
+	.incbin "baserom.gba", 0x25f844, 0x8d8
 
 gUnknown_826011C:: @ 826011C
 	.incbin "baserom.gba", 0x26011C, 0x8
@@ -741,13 +727,13 @@ gUnknown_8261E8A:: @ 8261E8A
 gUnknown_8261EB6:: @ 8261EB6
 	.incbin "baserom.gba", 0x261EB6, 0xB
 
-gUnknown_8261EC1:: @ 8261EC1
+gText_MaleSymbol4:: @ 8261EC1
 	.incbin "baserom.gba", 0x261EC1, 0x2
 
-gUnknown_8261EC3:: @ 8261EC3
+gText_FemaleSymbol4:: @ 8261EC3
 	.incbin "baserom.gba", 0x261EC3, 0x2
 
-gUnknown_8261EC5:: @ 8261EC5
+gText_GenderlessSymbol:: @ 8261EC5
 	.incbin "baserom.gba", 0x261EC5, 0x2
 
 gUnknown_8261EC7:: @ 8261EC7

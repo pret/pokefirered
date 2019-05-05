@@ -5909,7 +5909,7 @@ sub_8121808: @ 8121808
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0812184C @ =gStringVar1
-	ldr r1, _08121850 @ =gUnknown_8416223
+	ldr r1, _08121850 @ =gText_Lv
 	adds r0, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -5927,7 +5927,7 @@ sub_8121808: @ 8121808
 	.align 2, 0
 _08121848: .4byte gStringVar2
 _0812184C: .4byte gStringVar1
-_08121850: .4byte gUnknown_8416223
+_08121850: .4byte gText_Lv
 	thumb_func_end sub_8121808
 
 	thumb_func_start sub_8121854

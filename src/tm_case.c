@@ -281,7 +281,7 @@ void InitTMCase(u8 type, void (* callback)(void), u8 a2)
         sTMCaseStaticResources.savedCallback = callback;
     if (a2 != 0xFF)
         sTMCaseStaticResources.unk_05 = a2;
-    gTextFlags.flag_2 = FALSE;
+    gTextFlags.autoScroll = FALSE;
     SetMainCallback2(CB2_SetUpTMCaseUI_Blocking);
 }
 

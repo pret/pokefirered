@@ -627,12 +627,12 @@ sub_80EBB70: @ 80EBB70
 	ands r0, r1
 	cmp r0, 0
 	bne _080EBB9C
-	bl sub_80563F0
-	ldr r2, _080EBBA8 @ =c2_exit_to_overworld_2_switch
+	bl CleanupOverworldWindowsAndTilemaps
+	ldr r2, _080EBBA8 @ =CB2_ReturnToField
 	movs r0, 0x3
 	movs r1, 0
 	bl sub_8107DB4
-	ldr r1, _080EBBAC @ =gUnknown_3005020
+	ldr r1, _080EBBAC @ =gFieldCallback
 	ldr r0, _080EBBB0 @ =sub_80EBC0C
 	str r0, [r1]
 	adds r0, r4, 0
@@ -643,8 +643,8 @@ _080EBB9C:
 	bx r0
 	.align 2, 0
 _080EBBA4: .4byte gPaletteFade
-_080EBBA8: .4byte c2_exit_to_overworld_2_switch
-_080EBBAC: .4byte gUnknown_3005020
+_080EBBA8: .4byte CB2_ReturnToField
+_080EBBAC: .4byte gFieldCallback
 _080EBBB0: .4byte sub_80EBC0C
 	thumb_func_end sub_80EBB70
 
@@ -740,14 +740,14 @@ sub_80EBC38: @ 80EBC38
 	adds r0, r6, r0
 	ldr r1, _080EBC70 @ =sub_80EBD18
 	str r1, [r0]
-	ldr r1, _080EBC74 @ =gUnknown_3005020
+	ldr r1, _080EBC74 @ =gFieldCallback
 	ldr r0, _080EBC78 @ =sub_80EBCAC
 	str r0, [r1]
 	b _080EBC9C
 	.align 2, 0
 _080EBC6C: .4byte gTasks+0x8
 _080EBC70: .4byte sub_80EBD18
-_080EBC74: .4byte gUnknown_3005020
+_080EBC74: .4byte gFieldCallback
 _080EBC78: .4byte sub_80EBCAC
 _080EBC7C:
 	ldrb r0, [r4, 0x14]
@@ -808,9 +808,9 @@ sub_80EBCD8: @ 80EBCD8
 	ands r0, r1
 	cmp r0, 0
 	bne _080EBD06
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldrb r0, [r5, 0xC]
-	ldr r1, _080EBD14 @ =c2_exit_to_overworld_2_switch
+	ldr r1, _080EBD14 @ =CB2_ReturnToField
 	bl sub_810D3F4
 	adds r0, r4, 0
 	bl DestroyTask
@@ -821,7 +821,7 @@ _080EBD06:
 	.align 2, 0
 _080EBD0C: .4byte gTasks+0x8
 _080EBD10: .4byte gPaletteFade
-_080EBD14: .4byte c2_exit_to_overworld_2_switch
+_080EBD14: .4byte CB2_ReturnToField
 	thumb_func_end sub_80EBCD8
 
 	thumb_func_start sub_80EBD18
@@ -1438,7 +1438,7 @@ sub_80EC1D4: @ 80EC1D4
 	cmp r0, 0
 	bne _080EC216
 	bl sub_810EDB0
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r2, _080EC220 @ =gSaveBlock1Ptr
 	ldr r1, _080EC224 @ =gUnknown_203AAC4
 	ldrh r0, [r1]
@@ -1543,17 +1543,17 @@ _080EC2B6:
 	thumb_func_start sub_80EC2C0
 sub_80EC2C0: @ 80EC2C0
 	push {lr}
-	ldr r0, _080EC2D4 @ =gUnknown_3005020
+	ldr r0, _080EC2D4 @ =gFieldCallback
 	ldr r1, _080EC2D8 @ =sub_80EC260
 	str r1, [r0]
-	ldr r0, _080EC2DC @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080EC2DC @ =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC2D4: .4byte gUnknown_3005020
+_080EC2D4: .4byte gFieldCallback
 _080EC2D8: .4byte sub_80EC260
-_080EC2DC: .4byte c2_exit_to_overworld_2_switch
+_080EC2DC: .4byte CB2_ReturnToField
 	thumb_func_end sub_80EC2C0
 
 	thumb_func_start sub_80EC2E0
@@ -1599,7 +1599,7 @@ sub_80EC324: @ 80EC324
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1
@@ -1753,7 +1753,7 @@ sub_80EC444: @ 80EC444
 	cmp r0, 0
 	bne _080EC468
 	bl sub_810EDB0
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	bl sub_81273D8
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1834,17 +1834,17 @@ _080EC4F6:
 	thumb_func_start sub_80EC500
 sub_80EC500: @ 80EC500
 	push {lr}
-	ldr r0, _080EC514 @ =gUnknown_3005020
+	ldr r0, _080EC514 @ =gFieldCallback
 	ldr r1, _080EC518 @ =sub_80EC474
 	str r1, [r0]
-	ldr r0, _080EC51C @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080EC51C @ =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC514: .4byte gUnknown_3005020
+_080EC514: .4byte gFieldCallback
 _080EC518: .4byte sub_80EC474
-_080EC51C: .4byte c2_exit_to_overworld_2_switch
+_080EC51C: .4byte CB2_ReturnToField
 	thumb_func_end sub_80EC500
 
 	thumb_func_start sub_80EC520

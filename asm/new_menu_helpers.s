@@ -272,8 +272,8 @@ _080F695E:
 	bx r1
 	thumb_func_end sub_80F68F0
 
-	thumb_func_start sub_80F696C
-sub_80F696C: @ 80F696C
+	thumb_func_start DecompressAndLoadBgGfxUsingHeap
+DecompressAndLoadBgGfxUsingHeap: @ 80F696C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -333,7 +333,7 @@ _080F69D2:
 	.align 2, 0
 _080F69E0: .4byte task_free_buf_after_copying_tile_data_to_vram
 _080F69E4: .4byte gTasks
-	thumb_func_end sub_80F696C
+	thumb_func_end DecompressAndLoadBgGfxUsingHeap
 
 	thumb_func_start sub_80F69E8
 sub_80F69E8: @ 80F69E8
@@ -2156,7 +2156,7 @@ sub_80F7858: @ 80F7858
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -2179,7 +2179,7 @@ sub_80F7880: @ 80F7880
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0

@@ -7071,7 +7071,7 @@ sub_80EAF34: @ 80EAF34
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _080EB094 @ =gMultiuseSpriteTemplate
 	mov r10, r0
 	adds r0, r6, 0

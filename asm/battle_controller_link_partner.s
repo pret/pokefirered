@@ -3370,7 +3370,7 @@ LinkPartnerHandleLoadPokeSprite: @ 80D5DB4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _080D5EB4 @ =gMultiuseSpriteTemplate
 	mov r8, r0
 	ldrb r0, [r6]
@@ -3562,7 +3562,7 @@ sub_80D5F40: @ 80D5F40
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _080D6098 @ =gMultiuseSpriteTemplate
 	mov r10, r0
 	adds r0, r6, 0

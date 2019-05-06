@@ -80,7 +80,7 @@ extern const u16 sHMMoves[];
 extern s8 gPokeblockFlavorCompatibilityTable[];
 
 // External functions
-extern u8 sav1_map_get_name(void); // overworld
+extern u8 GetCurrentRegionMapSectionId(void); // overworld
 extern const struct BattleMove gBattleMoves[];
 extern u8 sBattler_AI; // battle_ai
 extern void set_unknown_box_id(u8); // field_specials
@@ -194,7 +194,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_SPECIES, &species);
     SetBoxMonData(boxMon, MON_DATA_EXP, &gExperienceTables[gBaseStats[species].growthRate][level]);
     SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gBaseStats[species].friendship);
-    value = sav1_map_get_name();
+    value = GetCurrentRegionMapSectionId();
     SetBoxMonData(boxMon, MON_DATA_MET_LOCATION, &value);
     SetBoxMonData(boxMon, MON_DATA_MET_LEVEL, &level);
     SetBoxMonData(boxMon, MON_DATA_MET_GAME, &gGameVersion);
@@ -1122,7 +1122,7 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
         return MON_MALE;
 }
 
-void sub_803F7D4(u16 trainerSpriteId, u8 battlerPosition)
+void SetMultiuseSpriteTemplateToPokemon(u16 trainerSpriteId, u8 battlerPosition)
 {
     if(gMonSpritesGfxPtr != NULL)
     {
@@ -2769,7 +2769,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                             {
                                 if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
@@ -2794,7 +2794,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                             {
                                 if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
@@ -2818,7 +2818,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                             {
                                 if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
@@ -3320,7 +3320,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
                             {
                                 if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
@@ -3347,7 +3347,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
                             {
                                 if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
@@ -3373,7 +3373,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
                             {
                                 if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
@@ -5033,7 +5033,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             {
                 if (GetMonData(mon, MON_DATA_POKEBALL, 0) == ITEM_LUXURY_BALL)
                     friendship++;
-                if (GetMonData(mon, MON_DATA_MET_LOCATION, 0) == sav1_map_get_name())
+                if (GetMonData(mon, MON_DATA_MET_LOCATION, 0) == GetCurrentRegionMapSectionId())
                     friendship++;
             }
 

@@ -2033,7 +2033,7 @@ sub_80E68C4: @ 80E68C4
 	ldr r0, _080E68F4 @ =gMain
 	ldr r1, _080E68F8 @ =sub_80E6854
 	str r1, [r0, 0x8]
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _080E68FC @ =sub_800FD9C
 	bl SetMainCallback2
 	adds r0, r4, 0

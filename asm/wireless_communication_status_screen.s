@@ -80,7 +80,7 @@ sub_814F1E4: @ 814F1E4
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _0814F314 @ =gUnknown_846F8E0
 	movs r0, 0x1
 	movs r2, 0

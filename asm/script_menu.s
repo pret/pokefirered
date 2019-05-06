@@ -690,7 +690,7 @@ task_yes_no_maybe: @ 809CE54
 	.align 2, 0
 _0809CE74: .4byte gTasks
 _0809CE78:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x1

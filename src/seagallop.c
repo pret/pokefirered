@@ -322,7 +322,7 @@ static void Task_SeaGallop_3(void)
     Overworld_SetWarpDestination(warpInfo[0], warpInfo[1], -1, warpInfo[2], warpInfo[3]);
     PlayRainStoppingSoundEffect();
     PlaySE(SE_KAIDAN);
-    gUnknown_3005020 = sub_807DF64;
+    gFieldCallback = sub_807DF64;
     warp_in();
     SetMainCallback2(sub_805671C);
     ResetInitialPlayerAvatarState();

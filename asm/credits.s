@@ -177,7 +177,7 @@ sub_80F3B04: @ 80F3B04
 	beq _080F3B20
 	ldrb r0, [r1, 0xA]
 	bl RemoveWindow
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r1, [r4]
 	movs r0, 0
 	strb r0, [r1, 0xB]
@@ -1279,13 +1279,13 @@ _080F4374:
 	movs r0, 0x1
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _080F44B4 @ =gUnknown_840C650
 	str r4, [sp]
 	movs r0, 0x2
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _080F44B8 @ =gUnknown_8EAB30C
 	movs r2, 0xA0
 	lsls r2, 3
@@ -1293,14 +1293,14 @@ _080F4374:
 	str r4, [sp]
 	movs r0, 0x1
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _080F44BC @ =gUnknown_840CA54
 	movs r2, 0x80
 	lsls r2, 3
 	str r4, [sp]
 	movs r0, 0x2
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x9]
 	lsls r0, 5
@@ -1620,7 +1620,7 @@ _080F46A0:
 	str r5, [sp]
 	movs r0, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, [r6]
 	ldrb r1, [r0, 0x9]
 	lsls r0, r1, 1
@@ -1635,7 +1635,7 @@ _080F46A0:
 	str r0, [sp]
 	movs r0, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, [r6]
 	ldrb r1, [r0, 0x9]
 	lsls r0, r1, 1

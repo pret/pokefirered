@@ -63,7 +63,7 @@ void strange_npc_table_clear(void);
 const struct MapHeader *get_mapheader_by_bank_and_number(u16, u16);
 void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
-void c2_exit_to_overworld_2_switch(void);
+void CB2_ReturnToField(void);
 bool32 sub_8087598(void);
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 void warp_in(void);
@@ -84,19 +84,19 @@ void sub_805726C(void);
 void sub_8057430(void);
 void sub_8055DC4(void);
 
-u8 sav1_map_get_name(void);
+u8 GetCurrentRegionMapSectionId(void);
 
 void SetCurrentMapLayout(u16 mapDataId);
 void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
 
 void ResetInitialPlayerAvatarState(void);
 void sub_8055D40(u16 mapDataId);
-void sub_80563F0(void);
+void CleanupOverworldWindowsAndTilemaps(void);
 
 extern u8 gUnknown_2031DD8;
 extern u8 gUnknown_2036E28;
 
-extern void (*gUnknown_3005020)(void);
+extern void (*gFieldCallback)(void);
 extern bool8 (* gFieldCallback2)(void);
 
 void SetLastHealLocationWarp(u8 healLocaionId);

@@ -57,16 +57,16 @@ _080CA59C: .4byte sub_80CA53C
 	thumb_func_start sub_80CA5A0
 sub_80CA5A0: @ 80CA5A0
 	push {lr}
-	ldr r0, _080CA5B4 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080CA5B4 @ =CB2_ReturnToField
 	bl SetMainCallback2
-	ldr r1, _080CA5B8 @ =gUnknown_3005020
+	ldr r1, _080CA5B8 @ =gFieldCallback
 	ldr r0, _080CA5BC @ =sub_80CA5C0
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA5B4: .4byte c2_exit_to_overworld_2_switch
-_080CA5B8: .4byte gUnknown_3005020
+_080CA5B4: .4byte CB2_ReturnToField
+_080CA5B8: .4byte gFieldCallback
 _080CA5BC: .4byte sub_80CA5C0
 	thumb_func_end sub_80CA5A0
 

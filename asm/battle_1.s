@@ -294,7 +294,7 @@ sub_800F40C: @ 800F40C
 	thumb_func_start LoadBattleTextboxAndBackground
 LoadBattleTextboxAndBackground: @ 800F420
 	push {lr}
-	ldr r0, _0800F454 @ =gUnknown_8D00000
+	ldr r0, _0800F454 @ =gBattleTextboxTiles
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZDecompressVram
@@ -305,7 +305,7 @@ LoadBattleTextboxAndBackground: @ 800F420
 	bl CopyToBgTilemapBuffer
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, _0800F45C @ =gUnknown_8D004D8
+	ldr r0, _0800F45C @ =gBattleTextboxPalette
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
@@ -314,9 +314,9 @@ LoadBattleTextboxAndBackground: @ 800F420
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F454: .4byte gUnknown_8D00000
+_0800F454: .4byte gBattleTextboxTiles
 _0800F458: .4byte gFile_graphics_interface_menu_map_tilemap
-_0800F45C: .4byte gUnknown_8D004D8
+_0800F45C: .4byte gBattleTextboxPalette
 	thumb_func_end LoadBattleTextboxAndBackground
 
 	thumb_func_start sub_800F460
@@ -1385,13 +1385,13 @@ _0800FCD0:
 	.4byte _0800FD68
 	.4byte _0800FD8C
 _0800FCEC:
-	ldr r0, _0800FCF8 @ =gUnknown_8D00000
+	ldr r0, _0800FCF8 @ =gBattleTextboxTiles
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZDecompressVram
 	b _0800FD94
 	.align 2, 0
-_0800FCF8: .4byte gUnknown_8D00000
+_0800FCF8: .4byte gBattleTextboxTiles
 _0800FCFC:
 	ldr r1, _0800FD10 @ =gFile_graphics_interface_menu_map_tilemap
 	movs r0, 0
@@ -1404,13 +1404,13 @@ _0800FCFC:
 	.align 2, 0
 _0800FD10: .4byte gFile_graphics_interface_menu_map_tilemap
 _0800FD14:
-	ldr r0, _0800FD20 @ =gUnknown_8D004D8
+	ldr r0, _0800FD20 @ =gBattleTextboxPalette
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
 	b _0800FD94
 	.align 2, 0
-_0800FD20: .4byte gUnknown_8D004D8
+_0800FD20: .4byte gBattleTextboxPalette
 _0800FD24:
 	bl sub_800FC2C
 	lsls r0, 24

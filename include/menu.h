@@ -30,8 +30,8 @@ void reset_temp_tile_data_buffers(void);
 int decompress_and_copy_tile_data_to_vram(u8 bg_id, const void *src, int size, u16 offset, u8 mode);
 bool8 free_temp_tile_data_buffers_if_possible(void);
 u64 sub_8198A50(struct WindowTemplate*, u8, u8, u8, u8, u8, u8, u16); // returns something but it isn't used, fix when menu.s is decomp'd
-void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
-s8 ProcessMenuInputNoWrap_(void);
+//void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
+s8 Menu_ProcessInputNoWrapClearOnChoose(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
 void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str);
@@ -44,7 +44,7 @@ void PrintTextOnRightSnappedWindow(const u8 *, u32, u8);
 void sub_810F71C(void);
 void sub_810F740(void);
 u8 ProgramAndPlaceMenuCursorOnWindow(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPosition);
-void sub_810FF60(const struct WindowTemplate *, u8, u8, u8, u16, u8, u8);
+void CreateYesNoMenu(const struct WindowTemplate *, u8, u8, u8, u16, u8, u8);
 
 void StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority);
 bool8 IsBlendTaskActive(void);

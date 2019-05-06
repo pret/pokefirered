@@ -1631,7 +1631,7 @@ _08081410:
 _08081418:
 	str r0, [r1]
 _0808141A:
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r1, _08081444 @ =gTrainerBattleOpponent_A
 	movs r2, 0x80
 	lsls r2, 4
@@ -1854,7 +1854,7 @@ _080815E0:
 _080815E8:
 	str r0, [r1]
 _080815EA:
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r1, _08081614 @ =gTrainerBattleOpponent_A
 	movs r3, 0x80
 	lsls r3, 4
@@ -1905,14 +1905,14 @@ _0808164C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808165C
-	ldr r0, _08081664 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08081664 @ =CB2_ReturnToField
 	bl SetMainCallback2
 _0808165C:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081664: .4byte c2_exit_to_overworld_2_switch
+_08081664: .4byte CB2_ReturnToField
 	thumb_func_end sub_8081624
 
 	thumb_func_start sub_8081668

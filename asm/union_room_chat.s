@@ -1720,7 +1720,7 @@ _081291E8:
 	bl sub_812B4B8
 	bl sub_8129B88
 	bl sub_81284BC
-	ldr r0, _08129214 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08129214 @ =CB2_ReturnToField
 	bl SetMainCallback2
 _08129206:
 	add sp, 0x4
@@ -1729,7 +1729,7 @@ _08129206:
 	bx r0
 	.align 2, 0
 _08129210: .4byte gPaletteFade
-_08129214: .4byte c2_exit_to_overworld_2_switch
+_08129214: .4byte CB2_ReturnToField
 	thumb_func_end sub_8128FB8
 
 	thumb_func_start sub_8129218

@@ -82,7 +82,6 @@ SECTIONS {
         src/util.o(.text);
         src/blend_palette.o(.text);
         src/daycare.o(.text);
-        asm/egg_hatch.o(.text);
         asm/battle_interface.o(.text);
         asm/smokescreen.o(.text);
         asm/pokeball.o(.text);

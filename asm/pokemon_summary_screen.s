@@ -14088,7 +14088,7 @@ _0813B84E:
 sub_813B854: @ 813B854
 	push {lr}
 	sub sp, 0x4
-	ldr r3, _0813B86C @ =c2_exit_to_overworld_2_switch
+	ldr r3, _0813B86C @ =CB2_ReturnToField
 	movs r0, 0
 	str r0, [sp]
 	movs r1, 0
@@ -14098,7 +14098,7 @@ sub_813B854: @ 813B854
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813B86C: .4byte c2_exit_to_overworld_2_switch
+_0813B86C: .4byte CB2_ReturnToField
 	thumb_func_end sub_813B854
 
 	.align 2, 0 @ Don't pad with nop.

@@ -459,9 +459,9 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         SetBgTilemapBuffer(1, Alloc(0x800));
         SetBgTilemapBuffer(0, Alloc(0x800));
 
-        sub_814FE40(0, 10, 0xE0);
+        LoadUserWindowBorderGfx(0, 10, 0xE0);
         sub_814FDA0(0,  1, 0xF0);
-        sub_80F696C(3, gUnkTextboxBorderGfx, 0x100, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, gUnkTextboxBorderGfx, 0x100, 0, 0);
         InitWindows(sMainWindows);
         DeactivateAllTextPrinters();
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
@@ -753,11 +753,11 @@ s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 
         {
             windowTemplate.tilemapTop = 15;
         }
-        sub_810FF60(&windowTemplate, 2, 0, 2, 10, 14, 0);
+        CreateYesNoMenu(&windowTemplate, 2, 0, 2, 10, 14, 0);
         (*textState)++;
         break;
     case 2:
-        input = ProcessMenuInputNoWrap_();
+        input = Menu_ProcessInputNoWrapClearOnChoose();
         if (input == -1 || input == 0 || input == 1)
         {
             *textState = 0;

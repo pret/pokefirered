@@ -5060,14 +5060,14 @@ _0810A678: .4byte sub_810A67C
 	thumb_func_start sub_810A67C
 sub_810A67C: @ 810A67C
 	push {lr}
-	ldr r2, _0810A68C @ =c2_exit_to_overworld_2_switch
+	ldr r2, _0810A68C @ =CB2_ReturnToField
 	movs r0, 0x2
 	movs r1, 0x3
 	bl sub_8107DB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810A68C: .4byte c2_exit_to_overworld_2_switch
+_0810A68C: .4byte CB2_ReturnToField
 	thumb_func_end sub_810A67C
 
 	thumb_func_start sub_810A690

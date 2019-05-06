@@ -129,7 +129,7 @@ sub_80BF560: @ 80BF560
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -210,7 +210,7 @@ CreateYesNoMenuWithCallbacks: @ 80BF5D0
 	str r5, [sp, 0x4]
 	movs r4, 0
 	str r4, [sp, 0x8]
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080BF624 @ =gUnknown_20399C8
 	str r7, [r0]
 	ldr r1, _080BF628 @ =gTasks

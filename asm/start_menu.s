@@ -856,7 +856,7 @@ _0806F428:
 	bl IncrementGameStat
 	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F448 @ =sub_810275C
 	bl SetMainCallback2
 	movs r0, 0x1
@@ -883,7 +883,7 @@ _0806F460: .4byte gPaletteFade
 _0806F464:
 	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F47C @ =CB2_PartyMenuFromStartMenu
 	bl SetMainCallback2
 	movs r0, 0x1
@@ -910,7 +910,7 @@ _0806F494: .4byte gPaletteFade
 _0806F498:
 	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F4B0 @ =UseFameCheckerFromMenu
 	bl SetMainCallback2
 	movs r0, 0x1
@@ -937,7 +937,7 @@ _0806F4C8: .4byte gPaletteFade
 _0806F4CC:
 	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F4E4 @ =sub_80568A8
 	bl sub_808B698
 	movs r0, 0x1
@@ -976,7 +976,7 @@ _0806F510: .4byte gPaletteFade
 _0806F514:
 	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F534 @ =sub_8088388
 	bl SetMainCallback2
 	ldr r1, _0806F538 @ =gMain
@@ -1030,7 +1030,7 @@ sub_806F56C: @ 806F56C
 _0806F580: .4byte gPaletteFade
 _0806F584:
 	bl PlayRainStoppingSoundEffect
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F59C @ =gUnknown_300502C
 	ldrb r0, [r0]
 	ldr r1, _0806F5A0 @ =sub_80568A8
@@ -1362,7 +1362,7 @@ _0806F7F4: .4byte sub_806F7F8
 	thumb_func_start sub_806F7F8
 sub_806F7F8: @ 806F7F8
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1481,7 +1481,7 @@ _0806F8D8: .4byte sub_806F8DC
 	thumb_func_start sub_806F8DC
 sub_806F8DC: @ 806F8DC
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0

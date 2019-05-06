@@ -967,7 +967,7 @@ sub_8088B00: @ 8088B00
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _08088BBC @ =gUnknown_3005020
+	ldr r1, _08088BBC @ =gFieldCallback
 	ldr r0, _08088BC0 @ =sub_807DF64
 	str r0, [r1]
 	ldr r0, _08088BC4 @ =gMain
@@ -1050,7 +1050,7 @@ sub_8088B00: @ 8088B00
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08088BBC: .4byte gUnknown_3005020
+_08088BBC: .4byte gFieldCallback
 _08088BC0: .4byte sub_807DF64
 _08088BC4: .4byte gMain
 _08088BC8: .4byte gSaveBlock2Ptr

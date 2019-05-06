@@ -4875,7 +4875,7 @@ _08149DF0:
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xD0
-	bl sub_814FE40
+	bl LoadUserWindowBorderGfx
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
@@ -5961,7 +5961,7 @@ _0814A73C:
 	thumb_func_start sub_814A744
 sub_814A744: @ 814A744
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}
@@ -6075,7 +6075,7 @@ sub_814A7D0: @ 814A7D0
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0x14
 	pop {r4,r5}
 	pop {r0}

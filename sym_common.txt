@@ -145,7 +145,7 @@ gUnknown_3005018: @ 3005018
 gUnknown_300501C: @ 300501C
 	.space 0x4
 
-gUnknown_3005020: @ 3005020
+gFieldCallback: @ 3005020
 	.space 0x4
 
 gFieldCallback2: @ 3005024

@@ -152,7 +152,7 @@ _080F569C:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	b _080F56E2
@@ -204,7 +204,7 @@ sub_80F5708: @ 80F5708
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F578C
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x1

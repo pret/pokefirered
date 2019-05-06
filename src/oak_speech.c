@@ -1246,7 +1246,7 @@ static void Task_OakSpeech26(u8 taskId)
                 data[3]--;
             else
             {
-                sub_810FF60(&sNewGameAdventureIntroWindowTemplates[2], 2, 0, 2, sub_80F796C(), 14, 0);
+                CreateYesNoMenu(&sNewGameAdventureIntroWindowTemplates[2], 2, 0, 2, sub_80F796C(), 14, 0);
                 gTasks[taskId].func = Task_OakSpeech27;
             }
         }
@@ -1255,7 +1255,7 @@ static void Task_OakSpeech26(u8 taskId)
 
 static void Task_OakSpeech27(u8 taskId)
 {
-    s8 input = ProcessMenuInputNoWrap_();
+    s8 input = Menu_ProcessInputNoWrapClearOnChoose();
     switch (input)
     {
     case 0:
@@ -1614,7 +1614,7 @@ static void CreateNidoranFSprite(u8 taskId)
 
     DecompressPicFromTable(gUnknown_8235194, sub_8044E00(0), SPECIES_NIDORAN_F);
     sub_800F078(&gUnknown_82373F4);
-    sub_803F7D4(SPECIES_NIDORAN_F, 0);
+    SetMultiuseSpriteTemplateToPokemon(SPECIES_NIDORAN_F, 0);
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x60, 0x60, 1);
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].oam.priority = 1;

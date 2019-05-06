@@ -629,7 +629,7 @@ _0813FD00:
 	strh r0, [r4]
 	b _0813FD78
 _0813FD08:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3541,7 +3541,7 @@ _081411D0:
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xD0
-	bl sub_814FE40
+	bl LoadUserWindowBorderGfx
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xF0
@@ -4603,7 +4603,7 @@ sub_8141AD8: @ 8141AD8
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	lsls r4, 24
 	asrs r4, 24
 	adds r0, r4, 0

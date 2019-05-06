@@ -550,36 +550,6 @@ gUnknown_825E05C:: @ 825E05C
 	.section .rodata.825EF0C
 
 	.align 2
-gUnknown_825F844:: @ 825F842
-	.incbin "baserom.gba", 0x25f844, 0x8d8
-
-gUnknown_826011C:: @ 826011C
-	.incbin "baserom.gba", 0x26011C, 0x8
-
-gUnknown_8260124:: @ 8260124
-	.incbin "baserom.gba", 0x260124, 0x8
-
-gUnknown_826012C:: @ 826012C
-	.incbin "baserom.gba", 0x26012C, 0x8
-
-gUnknown_8260134:: @ 8260134
-	.incbin "baserom.gba", 0x260134, 0x50
-
-gUnknown_8260184:: @ 8260184
-	.incbin "baserom.gba", 0x260184, 0x18
-
-gUnknown_826019C:: @ 826019C
-	.incbin "baserom.gba", 0x26019C, 0x8
-
-gUnknown_82601A4:: @ 82601A4
-	.incbin "baserom.gba", 0x2601A4, 0x10
-
-gUnknown_82601B4:: @ 82601B4
-	.incbin "baserom.gba", 0x2601B4, 0x8
-
-gUnknown_82601BC:: @ 82601BC
-	.incbin "baserom.gba", 0x2601BC, 0x4C
-
 gUnknown_8260208:: @ 8260208
 	.incbin "baserom.gba", 0x260208, 0x8
 
@@ -763,7 +733,7 @@ gUnknown_8262055:: @ 8262055
 gUnknown_826407C:: @ 826407C
 	.incbin "baserom.gba", 0x26407C, 0x1FA0
 
-gUnknown_826601C:: @ 826601C
+gUnknown_08331F60:: @ 826601C
 	.incbin "baserom.gba", 0x26601C, 0x1000
 
 gUnknown_826701C:: @ 826701C

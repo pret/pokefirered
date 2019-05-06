@@ -1171,7 +1171,7 @@ void sub_815E124(u8 taskId)
     if (sub_80D08F8() == TRUE)
     {
         gMain.savedCallback = sub_815E114;
-        sub_80563F0();
+        CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(sub_800FD9C);
         DestroyTask(taskId);
     }

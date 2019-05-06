@@ -288,18 +288,18 @@ _0809ACD0: .4byte sub_809AD40
 	thumb_func_start sub_809ACD4
 sub_809ACD4: @ 809ACD4
 	push {lr}
-	ldr r2, _0809ACEC @ =c2_exit_to_overworld_2_switch
+	ldr r2, _0809ACEC @ =CB2_ReturnToField
 	movs r0, 0x2
 	movs r1, 0x3
 	bl sub_8107DB4
-	ldr r1, _0809ACF0 @ =gUnknown_3005020
+	ldr r1, _0809ACF0 @ =gFieldCallback
 	ldr r0, _0809ACF4 @ =sub_809AD74
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809ACEC: .4byte c2_exit_to_overworld_2_switch
-_0809ACF0: .4byte gUnknown_3005020
+_0809ACEC: .4byte CB2_ReturnToField
+_0809ACF0: .4byte gFieldCallback
 _0809ACF4: .4byte sub_809AD74
 	thumb_func_end sub_809ACD4
 
@@ -1452,17 +1452,17 @@ _0809B66C: .4byte gUnknown_2039968
 	thumb_func_start sub_809B670
 sub_809B670: @ 809B670
 	push {lr}
-	ldr r0, _0809B684 @ =gUnknown_3005020
+	ldr r0, _0809B684 @ =gFieldCallback
 	ldr r1, _0809B688 @ =sub_809AD74
 	str r1, [r0]
-	ldr r0, _0809B68C @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0809B68C @ =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B684: .4byte gUnknown_3005020
+_0809B684: .4byte gFieldCallback
 _0809B688: .4byte sub_809AD74
-_0809B68C: .4byte c2_exit_to_overworld_2_switch
+_0809B68C: .4byte CB2_ReturnToField
 	thumb_func_end sub_809B670
 
 	thumb_func_start sub_809B690
@@ -2644,7 +2644,7 @@ sub_809C004: @ 809C004
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _0809C03C @ =gUnknown_3005020
+	ldr r1, _0809C03C @ =gFieldCallback
 	ldr r0, _0809C040 @ =sub_809AD74
 	str r0, [r1]
 	movs r0, 0x1
@@ -2666,7 +2666,7 @@ sub_809C004: @ 809C004
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809C03C: .4byte gUnknown_3005020
+_0809C03C: .4byte gFieldCallback
 _0809C040: .4byte sub_809AD74
 _0809C044: .4byte gTasks
 _0809C048: .4byte sub_809C04C
@@ -2693,7 +2693,7 @@ sub_809C04C: @ 809C04C
 	movs r2, 0
 	bl DestroyListMenu
 	bl sub_809B604
-	ldr r0, _0809C090 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0809C090 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -2704,7 +2704,7 @@ _0809C082:
 	.align 2, 0
 _0809C088: .4byte gTasks+0x8
 _0809C08C: .4byte gPaletteFade
-_0809C090: .4byte c2_exit_to_overworld_2_switch
+_0809C090: .4byte CB2_ReturnToField
 	thumb_func_end sub_809C04C
 
 	thumb_func_start nullsub_52

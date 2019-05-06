@@ -50,8 +50,8 @@ sub_80E4660: @ 80E4660
 	bne _080E4684
 	ldr r0, _080E4690 @ =sub_80E478C
 	bl SetMainCallback2
-	ldr r1, _080E4694 @ =gUnknown_3005020
-	ldr r0, _080E4698 @ =sub_807DD24
+	ldr r1, _080E4694 @ =gFieldCallback
+	ldr r0, _080E4698 @ =FieldCallback_ReturnToEventScript2
 	str r0, [r1]
 	adds r0, r4, 0
 	bl DestroyTask
@@ -62,8 +62,8 @@ _080E4684:
 	.align 2, 0
 _080E468C: .4byte gPaletteFade
 _080E4690: .4byte sub_80E478C
-_080E4694: .4byte gUnknown_3005020
-_080E4698: .4byte sub_807DD24
+_080E4694: .4byte gFieldCallback
+_080E4698: .4byte FieldCallback_ReturnToEventScript2
 	thumb_func_end sub_80E4660
 
 	thumb_func_start sub_80E469C
@@ -133,7 +133,7 @@ _080E46C6:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _080E4788 @ =gUnknown_8E97EC4
 	movs r0, 0x1
 	movs r2, 0
@@ -454,7 +454,7 @@ _080E4A3E:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080E4A64 @ =gUnknown_203AAB4
 	ldr r1, [r0]
 	ldrb r0, [r1]
@@ -540,7 +540,7 @@ _080E4AF4:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080E4B1C @ =gUnknown_203AAB4
 	ldr r1, [r0]
 	ldrb r0, [r1]
@@ -601,7 +601,7 @@ _080E4B70:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080E4B94 @ =gUnknown_203AAB4
 	ldr r1, [r0]
 	movs r0, 0x12
@@ -665,7 +665,7 @@ _080E4BF4:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080E4C18 @ =gUnknown_203AAB4
 	ldr r1, [r0]
 	movs r0, 0x1A
@@ -810,13 +810,13 @@ _080E4D26:
 	ldr r0, _080E4D40 @ =gUnknown_203AAB4
 	ldr r0, [r0]
 	bl Free
-	ldr r0, _080E4D44 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080E4D44 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	b _080E4EDA
 	.align 2, 0
 _080E4D3C: .4byte gPaletteFade
 _080E4D40: .4byte gUnknown_203AAB4
-_080E4D44: .4byte c2_exit_to_overworld_2_switch
+_080E4D44: .4byte CB2_ReturnToField
 _080E4D48:
 	movs r0, 0x1
 	negs r0, r0
@@ -1814,7 +1814,7 @@ _080E5570: .4byte 0x00000a67
 	thumb_func_start sub_80E5574
 sub_80E5574: @ 80E5574
 	push {r4,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2

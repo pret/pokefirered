@@ -1888,10 +1888,10 @@ gUnknown_841B6EC:: @ 841B6EC
 gUnknown_841B6F3:: @ 841B6F3
 	.incbin "baserom.gba", 0x41B6F3, 0xA
 
-gUnknown_841B6FD:: @ 841B6FD
+gText_HatchedFromEgg:: @ 841B6FD
 	.incbin "baserom.gba", 0x41B6FD, 0x19
 
-gUnknown_841B716:: @ 841B716
+gText_NickHatchPrompt:: @ 841B716
 	.incbin "baserom.gba", 0x41B716, 0x31
 
 gUnknown_841B747:: @ 841B747

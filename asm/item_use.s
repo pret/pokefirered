@@ -83,7 +83,7 @@ sub_80A103C: @ 80A103C
 	ldrsh r0, [r0, r1]
 	cmp r0, 0x1
 	beq _080A1070
-	ldr r1, _080A1068 @ =gUnknown_3005020
+	ldr r1, _080A1068 @ =gFieldCallback
 	ldr r0, _080A106C @ =sub_80A1084
 	str r0, [r1]
 	adds r0, r2, 0
@@ -91,7 +91,7 @@ sub_80A103C: @ 80A103C
 	b _080A107A
 	.align 2, 0
 _080A1064: .4byte gTasks
-_080A1068: .4byte gUnknown_3005020
+_080A1068: .4byte gFieldCallback
 _080A106C: .4byte sub_80A1084
 _080A1070:
 	ldr r0, _080A1080 @ =gUnknown_2039998
@@ -1066,9 +1066,9 @@ sub_80A17E8: @ 80A17E8
 	ands r0, r1
 	cmp r0, 0
 	bne _080A1812
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	bl sub_80A1184
-	ldr r1, _080A181C @ =c2_exit_to_overworld_2_switch
+	ldr r1, _080A181C @ =CB2_ReturnToField
 	movs r0, 0
 	movs r2, 0x1
 	bl InitTMCase
@@ -1080,7 +1080,7 @@ _080A1812:
 	bx r0
 	.align 2, 0
 _080A1818: .4byte gPaletteFade
-_080A181C: .4byte c2_exit_to_overworld_2_switch
+_080A181C: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A17E8
 
 	thumb_func_start sub_80A1820
@@ -1144,9 +1144,9 @@ sub_80A1880: @ 80A1880
 	ands r0, r1
 	cmp r0, 0
 	bne _080A18AA
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	bl sub_80A1184
-	ldr r1, _080A18B4 @ =c2_exit_to_overworld_2_switch
+	ldr r1, _080A18B4 @ =CB2_ReturnToField
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_813CD50
@@ -1158,7 +1158,7 @@ _080A18AA:
 	bx r0
 	.align 2, 0
 _080A18B0: .4byte gPaletteFade
-_080A18B4: .4byte c2_exit_to_overworld_2_switch
+_080A18B4: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A1880
 
 	thumb_func_start sub_80A18B8
@@ -1259,9 +1259,9 @@ sub_80A1960: @ 80A1960
 	ands r0, r1
 	cmp r0, 0
 	bne _080A1988
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	bl sub_80A1184
-	ldr r1, _080A1994 @ =c2_exit_to_overworld_2_switch
+	ldr r1, _080A1994 @ =CB2_ReturnToField
 	movs r0, 0
 	bl sub_815ABC4
 	adds r0, r4, 0
@@ -1272,7 +1272,7 @@ _080A1988:
 	bx r0
 	.align 2, 0
 _080A1990: .4byte gPaletteFade
-_080A1994: .4byte c2_exit_to_overworld_2_switch
+_080A1994: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A1960
 
 	thumb_func_start sub_80A1998
@@ -1666,9 +1666,9 @@ sub_80A1CC0: @ 80A1CC0
 	ands r0, r1
 	cmp r0, 0
 	bne _080A1CE8
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	bl sub_80A1184
-	ldr r1, _080A1CF4 @ =c2_exit_to_overworld_2_switch
+	ldr r1, _080A1CF4 @ =CB2_ReturnToField
 	movs r0, 0
 	bl sub_80BFF50
 	adds r0, r4, 0
@@ -1679,7 +1679,7 @@ _080A1CE8:
 	bx r0
 	.align 2, 0
 _080A1CF0: .4byte gPaletteFade
-_080A1CF4: .4byte c2_exit_to_overworld_2_switch
+_080A1CF4: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A1CC0
 
 	thumb_func_start sub_80A1CF8
@@ -1749,9 +1749,9 @@ sub_80A1D68: @ 80A1D68
 	ands r0, r1
 	cmp r0, 0
 	bne _080A1D8E
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	bl sub_80A1184
-	ldr r0, _080A1D98 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080A1D98 @ =CB2_ReturnToField
 	bl UseFameChecker
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1761,7 +1761,7 @@ _080A1D8E:
 	bx r0
 	.align 2, 0
 _080A1D94: .4byte gPaletteFade
-_080A1D98: .4byte c2_exit_to_overworld_2_switch
+_080A1D98: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A1D68
 
 	thumb_func_start sub_80A1D9C

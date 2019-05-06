@@ -1737,7 +1737,7 @@ _0808C680:
 	ands r0, r1
 	cmp r0, 0
 	bne _0808C69C
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldrb r0, [r5, 0xC]
 	bl sub_808CDE4
 	adds r0, r4, 0
@@ -1883,18 +1883,18 @@ sub_808C7B4: @ 808C7B4
 	bl sub_808FDF0
 	ldr r1, _0808C7D0 @ =gUnknown_20397A8
 	strb r0, [r1]
-	ldr r1, _0808C7D4 @ =gUnknown_3005020
+	ldr r1, _0808C7D4 @ =gFieldCallback
 	ldr r0, _0808C7D8 @ =mapldr_0808C6D8
 	str r0, [r1]
-	ldr r0, _0808C7DC @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0808C7DC @ =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0808C7D0: .4byte gUnknown_20397A8
-_0808C7D4: .4byte gUnknown_3005020
+_0808C7D4: .4byte gFieldCallback
 _0808C7D8: .4byte mapldr_0808C6D8
-_0808C7DC: .4byte c2_exit_to_overworld_2_switch
+_0808C7DC: .4byte CB2_ReturnToField
 	thumb_func_end sub_808C7B4
 
 	thumb_func_start sub_808C7E0
@@ -4700,7 +4700,7 @@ _0808DF24:
 	adds r0, 0x1
 	strb r0, [r1]
 _0808DF3A:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -5479,7 +5479,7 @@ _0808E59C:
 	.align 2, 0
 _0808E5B8: .4byte gUnknown_20397B0
 _0808E5BC:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6284,7 +6284,7 @@ _0808EC40:
 	.align 2, 0
 _0808EC50: .4byte gMain
 _0808EC54:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6426,7 +6426,7 @@ _0808ED74:
 	.align 2, 0
 _0808ED84: .4byte gMain
 _0808ED88:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6681,7 +6681,7 @@ sub_808EF8C: @ 808EF8C
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, _0808EFC0 @ =gUnknown_83CE4D0
 	ldr r1, _0808EFC4 @ =0x0600f800
 	bl LZ77UnCompVram
@@ -6724,7 +6724,7 @@ sub_808EFE4: @ 808EFE4
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, _0808F038 @ =gUnknown_83CE5FC
 	ldr r5, _0808F03C @ =gUnknown_20397B0
 	ldr r1, [r5]
@@ -8345,7 +8345,7 @@ sub_808FCE8: @ 808FCE8
 	str r1, [sp, 0x8]
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	lsls r4, 24
 	asrs r4, 24
 	adds r0, r4, 0
@@ -12046,7 +12046,7 @@ _08091938:
 	str r0, [sp]
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	movs r0, 0x2
 	bl CopyBgTilemapBufferToVram
 	add sp, 0x4

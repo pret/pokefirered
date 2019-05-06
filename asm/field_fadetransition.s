@@ -273,8 +273,8 @@ _0807DD1C:
 	bx r0
 	thumb_func_end task0A_asap_script_env_2_enable_and_set_ctx_running
 
-	thumb_func_start sub_807DD24
-sub_807DD24: @ 807DD24
+	thumb_func_start FieldCallback_ReturnToEventScript2
+FieldCallback_ReturnToEventScript2: @ 807DD24
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055DC4
@@ -286,7 +286,7 @@ sub_807DD24: @ 807DD24
 	bx r0
 	.align 2, 0
 _0807DD40: .4byte task0A_asap_script_env_2_enable_and_set_ctx_running
-	thumb_func_end sub_807DD24
+	thumb_func_end FieldCallback_ReturnToEventScript2
 
 	thumb_func_start sub_807DD44
 sub_807DD44: @ 807DD44
@@ -1162,7 +1162,7 @@ DoWarp: @ 807E438
 	bl PlayRainStoppingSoundEffect
 	movs r0, 0x9
 	bl PlaySE
-	ldr r0, _0807E464 @ =gUnknown_3005020
+	ldr r0, _0807E464 @ =gFieldCallback
 	ldr r1, _0807E468 @ =sub_807DF64
 	str r1, [r0]
 	ldr r0, _0807E46C @ =sub_807E718
@@ -1171,7 +1171,7 @@ DoWarp: @ 807E438
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E464: .4byte gUnknown_3005020
+_0807E464: .4byte gFieldCallback
 _0807E468: .4byte sub_807DF64
 _0807E46C: .4byte sub_807E718
 	thumb_func_end DoWarp
@@ -1183,7 +1183,7 @@ DoDiveWarp: @ 807E470
 	bl sub_8055F88
 	bl sub_807DC18
 	bl PlayRainStoppingSoundEffect
-	ldr r0, _0807E494 @ =gUnknown_3005020
+	ldr r0, _0807E494 @ =gFieldCallback
 	ldr r1, _0807E498 @ =sub_807DF64
 	str r1, [r0]
 	ldr r0, _0807E49C @ =sub_807E718
@@ -1192,7 +1192,7 @@ DoDiveWarp: @ 807E470
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E494: .4byte gUnknown_3005020
+_0807E494: .4byte gFieldCallback
 _0807E498: .4byte sub_807DF64
 _0807E49C: .4byte sub_807E718
 	thumb_func_end DoDiveWarp
@@ -1232,7 +1232,7 @@ _0807E4D8: .4byte gTasks
 DoDoorWarp: @ 807E4DC
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r0, _0807E4F4 @ =gUnknown_3005020
+	ldr r0, _0807E4F4 @ =gFieldCallback
 	ldr r1, _0807E4F8 @ =sub_807DF64
 	str r1, [r0]
 	ldr r0, _0807E4FC @ =sub_807E80C
@@ -1241,7 +1241,7 @@ DoDoorWarp: @ 807E4DC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E4F4: .4byte gUnknown_3005020
+_0807E4F4: .4byte gFieldCallback
 _0807E4F8: .4byte sub_807DF64
 _0807E4FC: .4byte sub_807E80C
 	thumb_func_end DoDoorWarp
@@ -1253,14 +1253,14 @@ sub_807E500: @ 807E500
 	ldr r0, _0807E518 @ =sub_807E718
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, _0807E51C @ =gUnknown_3005020
+	ldr r1, _0807E51C @ =gFieldCallback
 	ldr r0, _0807E520 @ =sub_807DF94
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0807E518: .4byte sub_807E718
-_0807E51C: .4byte gUnknown_3005020
+_0807E51C: .4byte gFieldCallback
 _0807E520: .4byte sub_807DF94
 	thumb_func_end sub_807E500
 
@@ -1268,7 +1268,7 @@ _0807E520: .4byte sub_807DF94
 sub_807E524: @ 807E524
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r0, _0807E53C @ =gUnknown_3005020
+	ldr r0, _0807E53C @ =gFieldCallback
 	ldr r1, _0807E540 @ =sub_807DF64
 	str r1, [r0]
 	ldr r0, _0807E544 @ =sub_807E784
@@ -1277,7 +1277,7 @@ sub_807E524: @ 807E524
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E53C: .4byte gUnknown_3005020
+_0807E53C: .4byte gFieldCallback
 _0807E540: .4byte sub_807DF64
 _0807E544: .4byte sub_807E784
 	thumb_func_end sub_807E524
@@ -1286,13 +1286,13 @@ _0807E544: .4byte sub_807E784
 DoFallWarp: @ 807E548
 	push {lr}
 	bl DoDiveWarp
-	ldr r1, _0807E558 @ =gUnknown_3005020
+	ldr r1, _0807E558 @ =gFieldCallback
 	ldr r0, _0807E55C @ =sub_8084454
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E558: .4byte gUnknown_3005020
+_0807E558: .4byte gFieldCallback
 _0807E55C: .4byte sub_8084454
 	thumb_func_end DoFallWarp
 
@@ -1339,14 +1339,14 @@ sub_807E59C: @ 807E59C
 	ldr r0, _0807E5B8 @ =sub_807E784
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, _0807E5BC @ =gUnknown_3005020
+	ldr r1, _0807E5BC @ =gFieldCallback
 	ldr r0, _0807E5C0 @ =sub_807DF94
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0807E5B8: .4byte sub_807E784
-_0807E5BC: .4byte gUnknown_3005020
+_0807E5BC: .4byte gFieldCallback
 _0807E5C0: .4byte sub_807DF94
 	thumb_func_end sub_807E59C
 
@@ -1358,14 +1358,14 @@ sub_807E5C4: @ 807E5C4
 	ldr r0, _0807E5E0 @ =sub_807E718
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, _0807E5E4 @ =gUnknown_3005020
+	ldr r1, _0807E5E4 @ =gFieldCallback
 	ldr r0, _0807E5E8 @ =nullsub_60
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0807E5E0: .4byte sub_807E718
-_0807E5E4: .4byte gUnknown_3005020
+_0807E5E4: .4byte gFieldCallback
 _0807E5E8: .4byte nullsub_60
 	thumb_func_end sub_807E5C4
 
@@ -1954,7 +1954,7 @@ _0807EA92:
 	strh r0, [r5]
 	b _0807EAB0
 _0807EA9A:
-	ldr r0, _0807EAB8 @ =gUnknown_3005020
+	ldr r0, _0807EAB8 @ =gFieldCallback
 	ldr r1, _0807EABC @ =sub_807DF64
 	str r1, [r0]
 	bl warp_in
@@ -1968,7 +1968,7 @@ _0807EAB0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807EAB8: .4byte gUnknown_3005020
+_0807EAB8: .4byte gFieldCallback
 _0807EABC: .4byte sub_807DF64
 _0807EAC0: .4byte sub_805671C
 	thumb_func_end sub_807E980

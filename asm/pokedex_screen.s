@@ -95,7 +95,7 @@ sub_810250C: @ 810250C
 	movs r0, 0x3
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	b _081025AE
 	.align 2, 0
 _08102598: .4byte gUnknown_8451EBC
@@ -106,7 +106,7 @@ _081025A0:
 	movs r0, 0x3
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 _081025AE:
 	ldr r0, _081026A8 @ =gUnknown_8451ECC
 	bl InitWindows

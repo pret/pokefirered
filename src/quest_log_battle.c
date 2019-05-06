@@ -71,7 +71,7 @@ void sub_812BFDC(void)
                 playerEndingHP = gBattleMons[GetBattlerAtPosition(0)].hp;
                 playerMaxHP = gBattleMons[GetBattlerAtPosition(0)].maxHP;
             }
-            questLogTrainerBattleRecord->v7 = sav1_map_get_name();
+            questLogTrainerBattleRecord->v7 = GetCurrentRegionMapSectionId();
             questLogTrainerBattleRecord->v6 = 0;
             if (playerEndingHP < playerMaxHP / 3 * 2)
                 questLogTrainerBattleRecord->v6 = 1;
@@ -91,7 +91,7 @@ void sub_812BFDC(void)
                 questLogWildBattleRecord->v0 = SPECIES_NONE;
                 questLogWildBattleRecord->v2 = GetMonData(gEnemyParty + 0, MON_DATA_SPECIES);
             }
-            questLogWildBattleRecord->v4 = sav1_map_get_name();
+            questLogWildBattleRecord->v4 = GetCurrentRegionMapSectionId();
             sub_8113550(31, (const u16 *)questLogWildBattleRecord);
         }
         Free(questLogTrainerBattleRecord);

@@ -2272,8 +2272,8 @@ sub_810FF04: @ 810FF04
 	bx r1
 	thumb_func_end sub_810FF04
 
-	thumb_func_start sub_810FF60
-sub_810FF60: @ 810FF60
+	thumb_func_start CreateYesNoMenu
+CreateYesNoMenu: @ 810FF60
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2422,7 +2422,7 @@ sub_810FF60: @ 810FF60
 	.align 2, 0
 _0811009C: .4byte gUnknown_203ADF3
 _081100A0: .4byte gUnknown_841623D
-	thumb_func_end sub_810FF60
+	thumb_func_end CreateYesNoMenu
 
 	thumb_func_start sub_81100A4
 sub_81100A4: @ 81100A4
@@ -2439,14 +2439,14 @@ sub_81100A4: @ 81100A4
 	movs r2, 0
 	str r2, [sp, 0x8]
 	movs r3, 0
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81100A4
 
-	thumb_func_start ProcessMenuInputNoWrap_
-ProcessMenuInputNoWrap_: @ 81100C8
+	thumb_func_start Menu_ProcessInputNoWrapClearOnChoose
+Menu_ProcessInputNoWrapClearOnChoose: @ 81100C8
 	push {r4,lr}
 	bl ProcessMenuInputNoWrapAround
 	lsls r0, 24
@@ -2461,7 +2461,7 @@ _081100DE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end ProcessMenuInputNoWrap_
+	thumb_func_end Menu_ProcessInputNoWrapClearOnChoose
 
 	thumb_func_start sub_81100E8
 sub_81100E8: @ 81100E8

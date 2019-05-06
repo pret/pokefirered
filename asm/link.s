@@ -3360,7 +3360,7 @@ sub_800AE1C: @ 800AE1C
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _0800AEBC @ =gWirelessLinkDisplayBin
 	movs r0, 0x1
 	movs r2, 0

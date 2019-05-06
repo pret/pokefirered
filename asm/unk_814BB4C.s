@@ -2949,7 +2949,7 @@ _0814D1CA:
 	bl sub_80F7858
 	b _0814D230
 _0814D1D0:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2

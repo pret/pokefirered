@@ -633,6 +633,7 @@ void SetWildMonHeldItem(void);
 u16 GetMonEVCount(struct Pokemon *);
 
 const struct CompressedSpritePalette *sub_806E794(struct Pokemon *mon);
+const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon);
 const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);
 bool8 IsPokeSpriteNotFlipped(u16 species);
@@ -675,6 +676,6 @@ void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
 void PlayMapChosenOrBattleBGM(u16 songId);
 u8 GetMonsStateToDoubles(void);
 void sub_803E0A4(struct Pokemon *mon, struct BattleTowerPokemon *src);
-void sub_803F7D4(u16 trainerSpriteId, u8 battlerPosition);
+void SetMultiuseSpriteTemplateToPokemon(u16 trainerSpriteId, u8 battlerPosition);
 
 #endif // GUARD_POKEMON_H

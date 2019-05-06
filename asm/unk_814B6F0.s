@@ -39,7 +39,7 @@ _0814B716:
 	str r0, [r5]
 	adds r0, r4, 0
 	bl SetMainCallback2
-	ldr r0, _0814B748 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0814B748 @ =CB2_ReturnToField
 	cmp r4, r0
 	bne _0814B73E
 	ldr r0, _0814B74C @ =0x0000012f
@@ -53,7 +53,7 @@ _0814B740:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0814B748: .4byte c2_exit_to_overworld_2_switch
+_0814B748: .4byte CB2_ReturnToField
 _0814B74C: .4byte 0x0000012f
 _0814B750: .4byte sub_8056534
 	thumb_func_end sub_814B6FC

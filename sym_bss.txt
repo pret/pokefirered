@@ -60,8 +60,7 @@ gUnknown_3000E6B: @ 3000E6B
 gUnknown_3000E6C: @ 3000E6C
 	.space 0x8
 
-gUnknown_3000E74: @ 3000E74
-	.space 0x4
+	.include "src/daycare.o"
 
 gUnknown_3000E78: @ 3000E78
 	.space 0x4

@@ -203,7 +203,7 @@ gSpecials:: @ 815FD60
 	def_special GetDaycareCost
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
-	def_special sub_8046FD4
+	def_special EggHatch
 	def_special sub_8046EAC
 	def_special sub_80CD228
 	def_special IsEnoughForCostInVar0x8005

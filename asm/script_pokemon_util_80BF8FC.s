@@ -112,14 +112,14 @@ sub_80BF9BC: @ 80BF9BC
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _080BF9FC @ =c2_exit_to_overworld_2_switch
+	ldr r3, _080BF9FC @ =CB2_ReturnToField
 	movs r4, 0
 	str r4, [sp]
 	bl sub_8134738
 	movs r0, 0x3
 	bl sub_8138B38
-	ldr r1, _080BFA00 @ =gUnknown_3005020
-	ldr r0, _080BFA04 @ =sub_807DD24
+	ldr r1, _080BFA00 @ =gFieldCallback
+	ldr r0, _080BFA04 @ =FieldCallback_ReturnToEventScript2
 	str r0, [r1]
 	add sp, 0x4
 	pop {r4}
@@ -129,9 +129,9 @@ sub_80BF9BC: @ 80BF9BC
 _080BF9F0: .4byte gPlayerParty
 _080BF9F4: .4byte gSpecialVar_0x8004
 _080BF9F8: .4byte gPlayerPartyCount
-_080BF9FC: .4byte c2_exit_to_overworld_2_switch
-_080BFA00: .4byte gUnknown_3005020
-_080BFA04: .4byte sub_807DD24
+_080BF9FC: .4byte CB2_ReturnToField
+_080BFA00: .4byte gFieldCallback
+_080BFA04: .4byte FieldCallback_ReturnToEventScript2
 	thumb_func_end sub_80BF9BC
 
 	thumb_func_start ScrSpecial_CountPokemonMoves

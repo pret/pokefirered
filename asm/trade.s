@@ -3432,7 +3432,7 @@ _0804E2A6:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, [r4]
 	adds r0, 0x6F
 	movs r1, 0x4
@@ -3912,7 +3912,7 @@ _0804E670: .4byte 0x0000bbcc
 	thumb_func_start sub_804E674
 sub_804E674: @ 804E674
 	push {r4,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4019,7 +4019,7 @@ _0804E740: .4byte gUnknown_2031DA8
 	thumb_func_start sub_804E744
 sub_804E744: @ 804E744
 	push {r4,r5,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -4162,7 +4162,7 @@ sub_804E830: @ 804E830
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, [r4]
 	adds r0, 0xA8
 	strb r5, [r0]
@@ -7337,7 +7337,7 @@ _080500C8:
 	bl GetMonSpritePalStruct
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _08050128 @ =gMultiuseSpriteTemplate
 	movs r1, 0x78
 	movs r2, 0x3C
@@ -7841,7 +7841,7 @@ sub_80504CC: @ 80504CC
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
 	bl DeactivateAllTextPrinters
-	ldr r0, _080505B8 @ =gUnknown_8D00000
+	ldr r0, _080505B8 @ =gBattleTextboxTiles
 	mov r10, r0
 	movs r0, 0
 	mov r9, r0
@@ -7849,7 +7849,7 @@ sub_80504CC: @ 80504CC
 	mov r1, r10
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, _080505BC @ =gFile_graphics_interface_menu_map_tilemap
 	mov r8, r0
 	ldr r4, _080505C0 @ =gDecompressionBuffer
@@ -7860,7 +7860,7 @@ sub_80504CC: @ 80504CC
 	adds r2, r5, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r6, _080505C4 @ =gUnknown_8D004D8
+	ldr r6, _080505C4 @ =gBattleTextboxPalette
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0x20
@@ -7873,7 +7873,7 @@ sub_80504CC: @ 80504CC
 	mov r1, r10
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	mov r0, r8
 	adds r1, r4, 0
 	bl LZDecompressWram
@@ -7896,10 +7896,10 @@ sub_80504CC: @ 80504CC
 	bx r0
 	.align 2, 0
 _080505B4: .4byte gUnknown_826D1D4
-_080505B8: .4byte gUnknown_8D00000
+_080505B8: .4byte gBattleTextboxTiles
 _080505BC: .4byte gFile_graphics_interface_menu_map_tilemap
 _080505C0: .4byte gDecompressionBuffer
-_080505C4: .4byte gUnknown_8D004D8
+_080505C4: .4byte gBattleTextboxPalette
 _080505C8: .4byte gUnknown_826D1BC
 	thumb_func_end sub_80504CC
 
@@ -8360,11 +8360,11 @@ _080509A4:
 	ldr r1, _08050A00 @ =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, _08050A04 @ =gUnknown_8EAEA20
+	ldr r0, _08050A04 @ =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, _08050A08 @ =gUnknown_8EAEA80
+	ldr r3, _08050A08 @ =gTradeGba_Gfx
 	ldr r4, _08050A0C @ =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5
@@ -8388,8 +8388,8 @@ _080509E6:
 	.align 2, 0
 _080509FC: .4byte gUnknown_2031DAC
 _08050A00: .4byte 0x00005206
-_08050A04: .4byte gUnknown_8EAEA20
-_08050A08: .4byte gUnknown_8EAEA80
+_08050A04: .4byte gTradeGba2_Pal
+_08050A08: .4byte gTradeGba_Gfx
 _08050A0C: .4byte 0x06004000
 _08050A10: .4byte 0x040000d4
 _08050A14: .4byte 0x80000800
@@ -8436,7 +8436,7 @@ _08050A66:
 	ldr r1, _08050ABC @ =0x80000800
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	ldr r3, _08050AC0 @ =gUnknown_8EAEA80
+	ldr r3, _08050AC0 @ =gTradeGba_Gfx
 	movs r4, 0xC0
 	lsls r4, 19
 	movs r5, 0xA1
@@ -8471,7 +8471,7 @@ _08050AB0: .4byte gUnknown_8269A5C
 _08050AB4: .4byte 0x06002800
 _08050AB8: .4byte 0x040000d4
 _08050ABC: .4byte 0x80000800
-_08050AC0: .4byte gUnknown_8EAEA80
+_08050AC0: .4byte gTradeGba_Gfx
 _08050AC4:
 	ldr r0, _08050AF4 @ =gUnknown_2031DAC
 	ldr r2, [r0]
@@ -8769,11 +8769,11 @@ _08050D48:
 	ldr r1, _08050DC0 @ =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, _08050DC4 @ =gUnknown_8EAEA20
+	ldr r0, _08050DC4 @ =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, _08050DC8 @ =gUnknown_8EAEA80
+	ldr r3, _08050DC8 @ =gTradeGba_Gfx
 	ldr r4, _08050DCC @ =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5
@@ -8800,7 +8800,7 @@ _08050D98:
 	orrs r0, r7
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	ldr r1, _08050DD8 @ =gUnknown_826601C
+	ldr r1, _08050DD8 @ =gUnknown_08331F60
 	ldr r2, _08050DDC @ =0x06009000
 	ldr r0, _08050DD0 @ =0x040000d4
 	str r1, [r0]
@@ -8816,12 +8816,12 @@ _08050DB4:
 	.align 2, 0
 _08050DBC: .4byte gUnknown_2031DAC
 _08050DC0: .4byte 0x00005206
-_08050DC4: .4byte gUnknown_8EAEA20
-_08050DC8: .4byte gUnknown_8EAEA80
+_08050DC4: .4byte gTradeGba2_Pal
+_08050DC8: .4byte gTradeGba_Gfx
 _08050DCC: .4byte 0x06004000
 _08050DD0: .4byte 0x040000d4
 _08050DD4: .4byte 0x80000800
-_08050DD8: .4byte gUnknown_826601C
+_08050DD8: .4byte gUnknown_08331F60
 _08050DDC: .4byte 0x06009000
 	thumb_func_end sub_8050968
 
@@ -11137,7 +11137,7 @@ _080522BC:
 	bl Free
 	str r4, [r7]
 _0805230A:
-	ldr r0, _08052328 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08052328 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	bl sub_8053AE4
 	bl sub_812B484
@@ -11150,7 +11150,7 @@ _0805231A:
 	bx r1
 	.align 2, 0
 _08052324: .4byte gPaletteFade
-_08052328: .4byte c2_exit_to_overworld_2_switch
+_08052328: .4byte CB2_ReturnToField
 	thumb_func_end sub_8050F3C
 
 	thumb_func_start sub_805232C
@@ -13362,7 +13362,7 @@ _08053718:
 	bl Free
 	str r4, [r7]
 _08053766:
-	ldr r0, _08053784 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08053784 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	bl sub_8053AE4
 	bl sub_812B484
@@ -13375,7 +13375,7 @@ _08053776:
 	bx r1
 	.align 2, 0
 _08053780: .4byte gPaletteFade
-_08053784: .4byte c2_exit_to_overworld_2_switch
+_08053784: .4byte CB2_ReturnToField
 	thumb_func_end sub_805232C
 
 	thumb_func_start sub_8053788
@@ -14875,8 +14875,8 @@ sub_8054470: @ 8054470
 	bne _08054494
 	ldr r0, _080544A0 @ =sub_80505CC
 	bl SetMainCallback2
-	ldr r1, _080544A4 @ =gUnknown_3005020
-	ldr r0, _080544A8 @ =sub_807DD24
+	ldr r1, _080544A4 @ =gFieldCallback
+	ldr r0, _080544A8 @ =FieldCallback_ReturnToEventScript2
 	str r0, [r1]
 	adds r0, r4, 0
 	bl DestroyTask
@@ -14887,8 +14887,8 @@ _08054494:
 	.align 2, 0
 _0805449C: .4byte gPaletteFade
 _080544A0: .4byte sub_80505CC
-_080544A4: .4byte gUnknown_3005020
-_080544A8: .4byte sub_807DD24
+_080544A4: .4byte gFieldCallback
+_080544A8: .4byte FieldCallback_ReturnToEventScript2
 	thumb_func_end sub_8054470
 
 	thumb_func_start sub_80544AC

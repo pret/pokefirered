@@ -42,7 +42,7 @@ _0807F65E:
 	cmp r0, 0x1
 	bne _0807F686
 	bl sub_812B484
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0807F68C @ =sub_800FD9C
 	bl SetMainCallback2
 	bl sub_806D7E8
@@ -636,9 +636,9 @@ _0807FB74: .4byte 0x01000100
 _0807FB78: .4byte gUnknown_2023E8A
 _0807FB7C: .4byte c2_whiteout
 _0807FB80:
-	ldr r0, _0807FB94 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0807FB94 @ =CB2_ReturnToField
 	bl SetMainCallback2
-	ldr r1, _0807FB98 @ =gUnknown_3005020
+	ldr r1, _0807FB98 @ =gFieldCallback
 	ldr r0, _0807FB9C @ =sub_807E3EC
 	str r0, [r1]
 _0807FB8C:
@@ -646,8 +646,8 @@ _0807FB8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807FB94: .4byte c2_exit_to_overworld_2_switch
-_0807FB98: .4byte gUnknown_3005020
+_0807FB94: .4byte CB2_ReturnToField
+_0807FB98: .4byte gFieldCallback
 _0807FB9C: .4byte sub_807E3EC
 	thumb_func_end sub_807FB40
 

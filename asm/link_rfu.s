@@ -4359,7 +4359,7 @@ _080FF4A2:
 	thumb_func_start sub_80FF4A8
 sub_80FF4A8: @ 80FF4A8
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4400,7 +4400,7 @@ _080FF4EA:
 	thumb_func_start sub_80FF4F0
 sub_80FF4F0: @ 80FF4F0
 	push {r4,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4446,7 +4446,7 @@ _080FF53E:
 	thumb_func_start sub_80FF544
 sub_80FF544: @ 80FF544
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6079,7 +6079,7 @@ _08100038:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _08100068 @ =gUnknown_8E99E74
 	movs r0, 0x3
 	movs r2, 0
@@ -6106,7 +6106,7 @@ _0810006C:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 	b _08100104
@@ -7964,7 +7964,7 @@ sub_8100F18: @ 8100F18
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0

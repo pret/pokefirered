@@ -3597,7 +3597,7 @@ _08011A9C:
 	ldr r0, _08011B74 @ =gBattle_BG3_Y
 	strh r4, [r0]
 	bl sub_800F34C
-	ldr r0, _08011B78 @ =gUnknown_8D004D8
+	ldr r0, _08011B78 @ =gBattleTextboxPalette
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
@@ -3655,7 +3655,7 @@ _08011B68: .4byte gBattle_BG2_X
 _08011B6C: .4byte gBattle_BG2_Y
 _08011B70: .4byte gBattle_BG3_X
 _08011B74: .4byte gBattle_BG3_Y
-_08011B78: .4byte gUnknown_8D004D8
+_08011B78: .4byte gBattleTextboxPalette
 _08011B7C: .4byte gReservedSpritePaletteCount
 _08011B80: .4byte sub_80116F4
 _08011B84: .4byte sub_800F6FC

@@ -161,4 +161,11 @@ extern const u32 gUnknown_8E84F20[];
 extern const u32 gUnknown_8E85068[];
 extern const u8 gUnknown_8E99118[];
 
+// egg_hatch
+extern const u32 gBattleTextboxTiles[];
+extern const u32 gFile_graphics_interface_menu_map_tilemap[];
+extern const u32 gBattleTextboxPalette[];
+extern const u32 gTradeGba2_Pal[];
+extern const u32 gTradeGba_Gfx[];
+
 #endif //GUARD_GRAPHICS_H

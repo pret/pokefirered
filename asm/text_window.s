@@ -171,8 +171,8 @@ sub_814FDF4: @ 814FDF4
 _0814FE3C: .4byte gUnknown_8471E8C
 	thumb_func_end sub_814FDF4
 
-	thumb_func_start sub_814FE40
-sub_814FE40: @ 814FE40
+	thumb_func_start LoadUserWindowBorderGfx
+LoadUserWindowBorderGfx: @ 814FE40
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r3, r2, 0
@@ -193,7 +193,7 @@ sub_814FE40: @ 814FE40
 	bx r0
 	.align 2, 0
 _0814FE68: .4byte gSaveBlock2Ptr
-	thumb_func_end sub_814FE40
+	thumb_func_end LoadUserWindowBorderGfx
 
 	thumb_func_start sub_814FE6C
 sub_814FE6C: @ 814FE6C

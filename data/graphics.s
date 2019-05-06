@@ -1,9 +1,9 @@
 	.section gfx_data, "aw", %progbits
 
-gUnknown_8D00000:: @ 8D00000
+gBattleTextboxTiles:: @ 8D00000
 	.incbin "baserom.gba", 0xD00000, 0x4D8
 
-gUnknown_8D004D8:: @ 8D004D8
+gBattleTextboxPalette:: @ 8D004D8
 	.incbin "baserom.gba", 0xD004D8, 0x44
 
 	.align 2
@@ -16359,10 +16359,10 @@ gUnknown_8EAE900:: @ 8EAE900
 gUnknown_8EAEA00:: @ 8EAEA00
 	.incbin "baserom.gba", 0xEAEA00, 0x20 @UNKNOWN
 
-gUnknown_8EAEA20:: @ 8EAEA20
+gTradeGba2_Pal:: @ 8EAEA20
 	.incbin "baserom.gba", 0xEAEA20, 0x60 @UNKNOWN
 
-gUnknown_8EAEA80:: @ 8EAEA80
+gTradeGba_Gfx:: @ 8EAEA80
 	.incbin "baserom.gba", 0xEAEA80, 0x1420 @UNKNOWN
 
 gUnknown_8EAFEA0:: @ 8EAFEA0

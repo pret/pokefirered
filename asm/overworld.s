@@ -3022,8 +3022,8 @@ sav1_saved_warp2_map_get_name: @ 8056238
 _0805625C: .4byte gSaveBlock1Ptr
 	thumb_func_end sav1_saved_warp2_map_get_name
 
-	thumb_func_start sav1_map_get_name
-sav1_map_get_name: @ 8056260
+	thumb_func_start GetCurrentRegionMapSectionId
+GetCurrentRegionMapSectionId: @ 8056260
 	push {lr}
 	ldr r0, _08056284 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
@@ -3042,7 +3042,7 @@ sav1_map_get_name: @ 8056260
 	bx r1
 	.align 2, 0
 _08056284: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_map_get_name
+	thumb_func_end GetCurrentRegionMapSectionId
 
 	thumb_func_start sav1_map_get_battletype
 sav1_map_get_battletype: @ 8056288
@@ -3196,8 +3196,8 @@ _080563E8: .4byte gUnknown_3005014
 _080563EC: .4byte gUnknown_300501C
 	thumb_func_end sub_8056354
 
-	thumb_func_start sub_80563F0
-sub_80563F0: @ 80563F0
+	thumb_func_start CleanupOverworldWindowsAndTilemaps
+CleanupOverworldWindowsAndTilemaps: @ 80563F0
 	push {lr}
 	bl sub_80F6C8C
 	ldr r0, _08056414 @ =gUnknown_300501C
@@ -3215,7 +3215,7 @@ sub_80563F0: @ 80563F0
 _08056414: .4byte gUnknown_300501C
 _08056418: .4byte gUnknown_3005014
 _0805641C: .4byte gUnknown_3005018
-	thumb_func_end sub_80563F0
+	thumb_func_end CleanupOverworldWindowsAndTilemaps
 
 	thumb_func_start sub_8056420
 sub_8056420: @ 8056420
@@ -3457,24 +3457,24 @@ _08056604: .4byte gFieldCallback2
 _08056608:
 	movs r1, 0
 	str r1, [r4]
-	ldr r0, _08056614 @ =gUnknown_3005020
+	ldr r0, _08056614 @ =gFieldCallback
 	str r1, [r0]
 	b _08056636
 	.align 2, 0
-_08056614: .4byte gUnknown_3005020
+_08056614: .4byte gFieldCallback
 _08056618:
-	ldr r0, _08056628 @ =gUnknown_3005020
+	ldr r0, _08056628 @ =gFieldCallback
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0805662C
 	bl _call_via_r0
 	b _08056630
 	.align 2, 0
-_08056628: .4byte gUnknown_3005020
+_08056628: .4byte gFieldCallback
 _0805662C:
 	bl sub_807DF64
 _08056630:
-	ldr r1, _08056640 @ =gUnknown_3005020
+	ldr r1, _08056640 @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 _08056636:
@@ -3484,7 +3484,7 @@ _08056638:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08056640: .4byte gUnknown_3005020
+_08056640: .4byte gFieldCallback
 	thumb_func_end map_post_load_hook_exec
 
 	thumb_func_start CB2_NewGame
@@ -3498,7 +3498,7 @@ CB2_NewGame: @ 8056644
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, _0805668C @ =gUnknown_3005020
+	ldr r1, _0805668C @ =gFieldCallback
 	ldr r0, _08056690 @ =sub_807DF7C
 	str r0, [r1]
 	ldr r1, _08056694 @ =gFieldCallback2
@@ -3514,7 +3514,7 @@ CB2_NewGame: @ 8056644
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805668C: .4byte gUnknown_3005020
+_0805668C: .4byte gFieldCallback
 _08056690: .4byte sub_807DF7C
 _08056694: .4byte gFieldCallback2
 _08056698: .4byte gMain + 0x438
@@ -3545,7 +3545,7 @@ c2_whiteout: @ 80566A4
 	bl sub_80559F8
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, _0805670C @ =gUnknown_3005020
+	ldr r1, _0805670C @ =gFieldCallback
 	ldr r0, _08056710 @ =sub_807F5F0
 	str r0, [r1]
 	mov r1, sp
@@ -3565,7 +3565,7 @@ _08056702:
 	bx r0
 	.align 2, 0
 _08056708: .4byte gMain
-_0805670C: .4byte gUnknown_3005020
+_0805670C: .4byte gFieldCallback
 _08056710: .4byte sub_807F5F0
 _08056714: .4byte sub_8056534
 _08056718: .4byte sub_80565B4
@@ -3624,7 +3624,7 @@ _08056784: .4byte sub_80565B4
 sub_8056788: @ 8056788
 	push {lr}
 	bl sub_80569BC
-	ldr r0, _080567A0 @ =gUnknown_3005020
+	ldr r0, _080567A0 @ =gFieldCallback
 	ldr r1, _080567A4 @ =sub_807DE58
 	str r1, [r0]
 	ldr r0, _080567A8 @ =c2_80567AC
@@ -3632,7 +3632,7 @@ sub_8056788: @ 8056788
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080567A0: .4byte gUnknown_3005020
+_080567A0: .4byte gFieldCallback
 _080567A4: .4byte sub_807DE58
 _080567A8: .4byte c2_80567AC
 	thumb_func_end sub_8056788
@@ -3659,8 +3659,8 @@ _080567D4: .4byte c1_link_related
 _080567D8: .4byte sub_80565B4
 	thumb_func_end c2_80567AC
 
-	thumb_func_start c2_exit_to_overworld_2_switch
-c2_exit_to_overworld_2_switch: @ 80567DC
+	thumb_func_start CB2_ReturnToField
+CB2_ReturnToField: @ 80567DC
 	push {lr}
 	bl is_c1_link_related_active
 	cmp r0, 0x1
@@ -3679,7 +3679,7 @@ _080567FE:
 	bx r0
 	.align 2, 0
 _08056804: .4byte c2_exit_to_overworld_2_local
-	thumb_func_end c2_exit_to_overworld_2_switch
+	thumb_func_end CB2_ReturnToField
 
 	thumb_func_start c2_exit_to_overworld_2_local
 c2_exit_to_overworld_2_local: @ 8056808
@@ -3731,26 +3731,26 @@ c2_8056854: @ 8056854
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056888
-	ldr r1, _08056880 @ =gUnknown_3005020
+	ldr r1, _08056880 @ =gFieldCallback
 	ldr r0, _08056884 @ =sub_807DE58
 	b _0805688C
 	.align 2, 0
 _08056878: .4byte c1_link_related
 _0805687C: .4byte gWirelessCommType
-_08056880: .4byte gUnknown_3005020
+_08056880: .4byte gFieldCallback
 _08056884: .4byte sub_807DE58
 _08056888:
-	ldr r1, _080568A0 @ =gUnknown_3005020
+	ldr r1, _080568A0 @ =gFieldCallback
 	ldr r0, _080568A4 @ =sub_807DDD0
 _0805688C:
 	str r0, [r1]
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080568A0: .4byte gUnknown_3005020
+_080568A0: .4byte gFieldCallback
 _080568A4: .4byte sub_807DDD0
 	thumb_func_end c2_8056854
 
@@ -3761,7 +3761,7 @@ sub_80568A8: @ 80568A8
 	ldr r1, _080568BC @ =gFieldCallback2
 	ldr r0, _080568C0 @ =sub_807E3BC
 	str r0, [r1]
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3773,14 +3773,14 @@ _080568C0: .4byte sub_807E3BC
 sub_80568C4: @ 80568C4
 	push {lr}
 	bl sub_80569BC
-	ldr r1, _080568D8 @ =gUnknown_3005020
+	ldr r1, _080568D8 @ =gFieldCallback
 	ldr r0, _080568DC @ =sub_807DD44
 	str r0, [r1]
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080568D8: .4byte gUnknown_3005020
+_080568D8: .4byte gFieldCallback
 _080568DC: .4byte sub_807DD44
 	thumb_func_end sub_80568C4
 
@@ -3788,29 +3788,29 @@ _080568DC: .4byte sub_807DD44
 c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80568E0
 	push {lr}
 	bl sub_80569BC
-	ldr r1, _080568F4 @ =gUnknown_3005020
-	ldr r0, _080568F8 @ =sub_807DD24
+	ldr r1, _080568F4 @ =gFieldCallback
+	ldr r0, _080568F8 @ =FieldCallback_ReturnToEventScript2
 	str r0, [r1]
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080568F4: .4byte gUnknown_3005020
-_080568F8: .4byte sub_807DD24
+_080568F4: .4byte gFieldCallback
+_080568F8: .4byte FieldCallback_ReturnToEventScript2
 	thumb_func_end c2_exit_to_overworld_1_continue_scripts_restart_music
 
 	thumb_func_start sub_80568FC
 sub_80568FC: @ 80568FC
 	push {lr}
 	bl sub_80569BC
-	ldr r1, _08056910 @ =gUnknown_3005020
+	ldr r1, _08056910 @ =gFieldCallback
 	ldr r0, _08056914 @ =sub_807DF7C
 	str r0, [r1]
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056910: .4byte gUnknown_3005020
+_08056910: .4byte gFieldCallback
 _08056914: .4byte sub_807DF7C
 	thumb_func_end sub_80568FC
 
@@ -3867,17 +3867,17 @@ _08056990: .4byte gFieldCallback2
 _08056994: .4byte gUnknown_2031DE0
 _08056998: .4byte sub_805671C
 _0805699C:
-	ldr r0, _080569B0 @ =gUnknown_3005020
+	ldr r0, _080569B0 @ =gFieldCallback
 	ldr r1, _080569B4 @ =sub_8056918
 	str r1, [r0]
 	ldr r0, _080569B8 @ =sub_8056534
 	bl sub_80565E0
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 _080569AC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080569B0: .4byte gUnknown_3005020
+_080569B0: .4byte gFieldCallback
 _080569B4: .4byte sub_8056918
 _080569B8: .4byte sub_8056534
 	thumb_func_end sub_8056938
@@ -5150,7 +5150,7 @@ _0805748C: .4byte sub_805671C
 _08057490:
 	ldr r0, _080574A0 @ =sub_8056534
 	bl sub_80565E0
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 _0805749A:
 	pop {r0}
 	bx r0
@@ -5619,7 +5619,7 @@ sub_8057854: @ 8057854
 	ands r0, r1
 	cmp r0, 0
 	bne _08057876
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _08057880 @ =sub_805671C
 	bl SetMainCallback2
 	adds r0, r4, 0

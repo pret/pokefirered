@@ -257,7 +257,7 @@ EvolutionScene: @ 80CDDF4
 	bl LoadCompressedPalette
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _080CE0C0 @ =gMultiuseSpriteTemplate
 	mov r8, r0
 	ldr r1, _080CE0C4 @ =gDummySpriteAffineAnimTable
@@ -313,7 +313,7 @@ EvolutionScene: @ 80CDDF4
 	bl LoadCompressedPalette
 	mov r0, r10
 	movs r1, 0x3
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _080CE0C4 @ =gDummySpriteAffineAnimTable
 	mov r1, r8
 	str r0, [r1, 0x10]
@@ -542,7 +542,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	bl LoadCompressedPalette
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _080CE2C0 @ =gMultiuseSpriteTemplate
 	ldr r1, _080CE2C4 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
@@ -793,7 +793,7 @@ _080CE458: .4byte gMonSpritesGfxPtr
 _080CE45C:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _080CE4B4 @ =gMultiuseSpriteTemplate
 	ldr r1, _080CE4B8 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
@@ -969,7 +969,7 @@ TradeEvolutionScene: @ 80CE540
 	bl LoadCompressedPalette
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _080CE6CC @ =gMultiuseSpriteTemplate
 	ldr r1, _080CE6D0 @ =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
@@ -3567,7 +3567,7 @@ _080CFCAE:
 	movs r0, 0
 	movs r1, 0xA8
 	movs r2, 0xE0
-	bl sub_814FE40
+	bl LoadUserWindowBorderGfx
 	ldr r0, _080CFCF4 @ =gUnknown_826D1CC
 	movs r1, 0xA8
 	str r1, [sp]
@@ -3577,7 +3577,7 @@ _080CFCAE:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r3, _080CFCF8 @ =gUnknown_2023E82
 	strb r4, [r3, 0x1]
 	ldr r0, _080CFCF0 @ =gTasks
@@ -3597,7 +3597,7 @@ _080CFCF0: .4byte gTasks
 _080CFCF4: .4byte gUnknown_826D1CC
 _080CFCF8: .4byte gUnknown_2023E82
 _080CFCFC:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r4, r0, 24
 	cmp r4, 0
@@ -4388,7 +4388,7 @@ _080D03A0:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _080D0428 @ =gUnknown_83F73A8
 	movs r0, 0x1
 	movs r2, 0

@@ -3088,7 +3088,7 @@ _08117210:
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
 	ldr r1, _08117274 @ =gMain
-	ldr r0, _08117278 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08117278 @ =CB2_ReturnToField
 	str r0, [r1, 0x8]
 	ldr r0, _0811727C @ =sub_8050138
 	bl SetMainCallback2
@@ -3107,7 +3107,7 @@ _08117268: .4byte gUnknown_2031CCC
 _0811726C: .4byte gBlockRecvBuffer
 _08117270: .4byte gUnknown_2031DA4
 _08117274: .4byte gMain
-_08117278: .4byte c2_exit_to_overworld_2_switch
+_08117278: .4byte CB2_ReturnToField
 _0811727C: .4byte sub_8050138
 	thumb_func_end sub_8117130
 
@@ -3251,7 +3251,7 @@ _08117384:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _081173BC @ =c2_exit_to_overworld_2_switch
+	ldr r1, _081173BC @ =CB2_ReturnToField
 	bl sub_808B700
 _081173A2:
 	bl RunTasks
@@ -3263,7 +3263,7 @@ _081173A2:
 	bx r0
 	.align 2, 0
 _081173B8: .4byte sub_8117280
-_081173BC: .4byte c2_exit_to_overworld_2_switch
+_081173BC: .4byte CB2_ReturnToField
 	thumb_func_end sub_8117354
 
 	thumb_func_start sub_81173C0
@@ -3645,7 +3645,7 @@ _08117640:
 	.4byte _081178E0
 	.4byte _08117784
 _08117784:
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r1, _08117798 @ =gMain
 	ldr r0, _0811779C @ =sub_811C1C8
 	str r0, [r1, 0x8]
@@ -3656,7 +3656,7 @@ _08117784:
 _08117798: .4byte gMain
 _0811779C: .4byte sub_811C1C8
 _081177A0:
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _081177C4 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
@@ -3672,7 +3672,7 @@ _081177A0:
 	.align 2, 0
 _081177C4: .4byte gBlockSendBuffer
 _081177C8:
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	bl sp000_heal_pokemon
 	bl SavePlayerParty
 	bl LoadPlayerBag
@@ -3688,7 +3688,7 @@ _081177C8:
 	.align 2, 0
 _081177EC: .4byte gBlockSendBuffer
 _081177F0:
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	bl sp000_heal_pokemon
 	bl SavePlayerParty
 	bl LoadPlayerBag
@@ -3706,7 +3706,7 @@ _08117818:
 	ldr r0, _0811783C @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	movs r0, 0x3
 	str r0, [sp]
 	movs r0, 0
@@ -7001,19 +7001,19 @@ _08119512:
 	ldr r1, _0811952C @ =gUnknown_203B06C
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r1, _08119530 @ =gUnknown_3005020
+	ldr r1, _08119530 @ =gFieldCallback
 	ldr r0, _08119534 @ =sub_807DCE4
 	str r0, [r1]
-	ldr r1, _08119538 @ =c2_exit_to_overworld_2_switch
+	ldr r1, _08119538 @ =CB2_ReturnToField
 	movs r0, 0x8
 	bl sub_81277F4
 	b _081198DC
 	.align 2, 0
 _08119528: .4byte gPaletteFade
 _0811952C: .4byte gUnknown_203B06C
-_08119530: .4byte gUnknown_3005020
+_08119530: .4byte gFieldCallback
 _08119534: .4byte sub_807DCE4
-_08119538: .4byte c2_exit_to_overworld_2_switch
+_08119538: .4byte CB2_ReturnToField
 _0811953C:
 	adds r0, r6, 0
 	adds r0, 0x16
@@ -7354,10 +7354,10 @@ _081197CA:
 	lsls r0, 22
 	lsrs r0, 22
 	strh r0, [r2]
-	ldr r1, _08119834 @ =gUnknown_3005020
+	ldr r1, _08119834 @ =gFieldCallback
 	ldr r0, _08119838 @ =sub_807DCE4
 	str r0, [r1]
-	ldr r1, _0811983C @ =c2_exit_to_overworld_2_switch
+	ldr r1, _0811983C @ =CB2_ReturnToField
 	movs r0, 0x9
 	bl sub_81277F4
 	adds r0, r6, 0
@@ -7371,9 +7371,9 @@ _08119824: .4byte gUnknown_203B06C
 _08119828: .4byte gUnknown_203B064
 _0811982C: .4byte gUnknown_203B06A
 _08119830: .4byte gUnknown_203B068
-_08119834: .4byte gUnknown_3005020
+_08119834: .4byte gFieldCallback
 _08119838: .4byte sub_807DCE4
-_0811983C: .4byte c2_exit_to_overworld_2_switch
+_0811983C: .4byte CB2_ReturnToField
 _08119840:
 	ldr r1, _08119890 @ =gUnknown_203B058
 	movs r0, 0x44
@@ -8593,7 +8593,7 @@ _0811A174:
 	negs r0, r0
 	b _0811A1A4
 _0811A186:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r2, 0x80
@@ -13151,13 +13151,13 @@ _0811C4C0:
 	bl sub_811C150
 	cmp r0, 0
 	beq _0811C516
-	ldr r0, _0811C4E0 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0811C4E0 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	b _0811C516
 	.align 2, 0
 _0811C4D8: .4byte gUnknown_203B08C
 _0811C4DC: .4byte gUnknown_841E58D
-_0811C4E0: .4byte c2_exit_to_overworld_2_switch
+_0811C4E0: .4byte CB2_ReturnToField
 _0811C4E4:
 	ldr r0, _0811C4FC @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
@@ -13181,7 +13181,7 @@ _0811C500:
 	bl sub_811C150
 	cmp r0, 0
 	beq _0811C516
-	ldr r0, _0811C53C @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0811C53C @ =CB2_ReturnToField
 	bl SetMainCallback2
 _0811C516:
 	bl RunTasks
@@ -13197,7 +13197,7 @@ _0811C52A:
 	.align 2, 0
 _0811C534: .4byte gUnknown_203B08C
 _0811C538: .4byte gUnknown_841E572
-_0811C53C: .4byte c2_exit_to_overworld_2_switch
+_0811C53C: .4byte CB2_ReturnToField
 	thumb_func_end sub_811C1C8
 
 	.align 2, 0 @ Don't pad with nop.

@@ -2585,7 +2585,7 @@ sub_811FEA4: @ 811FEA4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4198,7 +4198,7 @@ sub_8120AC4: @ 8120AC4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6926,7 +6926,7 @@ sub_812200C: @ 812200C
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -10113,7 +10113,7 @@ sub_8123930: @ 8123930
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10752,7 +10752,7 @@ sub_8123E8C: @ 8123E8C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10871,7 +10871,7 @@ sub_8123F80: @ 8123F80
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -11790,7 +11790,7 @@ _08124754: .4byte gUnknown_203B0A0
 _08124758: .4byte sub_80C4EF8
 _0812475C:
 	ldr r1, _08124780 @ =gUnknown_203B0A0
-	ldr r0, _08124784 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08124784 @ =CB2_ReturnToField
 	str r0, [r1]
 	bl GetCursorSelectionMonId
 	lsls r0, 24
@@ -11807,7 +11807,7 @@ _08124778:
 	b _081247B4
 	.align 2, 0
 _08124780: .4byte gUnknown_203B0A0
-_08124784: .4byte c2_exit_to_overworld_2_switch
+_08124784: .4byte CB2_ReturnToField
 _08124788: .4byte gPlayerParty
 _0812478C:
 	cmp r4, 0
@@ -11897,7 +11897,7 @@ sub_8124828: @ 8124828
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -11915,7 +11915,7 @@ _08124848:
 	b _081248A2
 _0812484E:
 	ldr r1, _0812487C @ =gUnknown_203B0A0
-	ldr r0, _08124880 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08124880 @ =CB2_ReturnToField
 	str r0, [r1]
 	bl GetCursorSelectionMonId
 	lsls r0, 24
@@ -11936,7 +11936,7 @@ _0812484E:
 	b _081248A2
 	.align 2, 0
 _0812487C: .4byte gUnknown_203B0A0
-_08124880: .4byte c2_exit_to_overworld_2_switch
+_08124880: .4byte CB2_ReturnToField
 _08124884: .4byte gPlayerParty
 _08124888: .4byte gUnknown_203B09C
 _0812488C:
@@ -14561,7 +14561,7 @@ sub_8125DBC: @ 8125DBC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -15016,7 +15016,7 @@ sub_8126170: @ 8126170
 	muls r1, r0
 	ldr r0, _081261A4 @ =gPlayerParty
 	adds r4, r1, r0
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -17093,7 +17093,7 @@ sub_8127268: @ 8127268
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -19308,7 +19308,7 @@ sub_8128370: @ 8128370
 	str r0, [sp]
 	ldr r0, _081283A0 @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _081283A4 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _081283A4 @ =CB2_ReturnToField
 	str r0, [sp, 0x8]
 	movs r0, 0x6
 	movs r1, 0
@@ -19322,7 +19322,7 @@ sub_8128370: @ 8128370
 _08128398: .4byte gFieldCallback2
 _0812839C: .4byte hm_add_c3_without_phase_2
 _081283A0: .4byte sub_811FB28
-_081283A4: .4byte c2_exit_to_overworld_2_switch
+_081283A4: .4byte CB2_ReturnToField
 	thumb_func_end sub_8128370
 
 	thumb_func_start sub_81283A8
@@ -19338,7 +19338,7 @@ sub_81283A8: @ 81283A8
 	str r1, [sp]
 	ldr r1, _081283DC @ =sub_811FB28
 	str r1, [sp, 0x4]
-	ldr r1, _081283E0 @ =c2_exit_to_overworld_2_switch
+	ldr r1, _081283E0 @ =CB2_ReturnToField
 	str r1, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0xB
@@ -19351,7 +19351,7 @@ sub_81283A8: @ 81283A8
 _081283D4: .4byte gFieldCallback2
 _081283D8: .4byte hm_add_c3_without_phase_2
 _081283DC: .4byte sub_811FB28
-_081283E0: .4byte c2_exit_to_overworld_2_switch
+_081283E0: .4byte CB2_ReturnToField
 	thumb_func_end sub_81283A8
 
 	thumb_func_start hm_add_c3_without_phase_2

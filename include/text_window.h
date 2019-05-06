@@ -23,7 +23,7 @@ void sub_8098C6C(u8 bg, u16 destOffset, u8 palOffset);
 void sub_814FEAC(u8 windowId, u16 tileStart, u8 palette);
 void sub_814FF2C(u8 windowId, u16 tileStart, u8 palette);
 void sub_815001C(u8 windowId, u16 tileStart, u8 palette);
-void sub_814FE40(u8 windowId, u16 tileStart, u8 palette);
+void LoadUserWindowBorderGfx(u8 windowId, u16 tileStart, u8 palette);
 void sub_814FDA0(u8 windowId, u16 tileStart, u8 palette);
 void DrawTextBorderOuter(u8 windowId, u16 tileStart, u8 palette);
 

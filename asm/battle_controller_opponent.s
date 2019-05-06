@@ -3649,7 +3649,7 @@ _080378AA:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r6, _080379A0 @ =gMultiuseSpriteTemplate
 	ldrb r0, [r7]
 	movs r1, 0x2
@@ -3872,7 +3872,7 @@ sub_8037A28: @ 8037A28
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _08037B98 @ =gMultiuseSpriteTemplate
 	mov r9, r0
 	adds r0, r6, 0

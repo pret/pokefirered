@@ -17,7 +17,10 @@ gUnknown_846B494:: @ 846B494
 	.incbin "baserom.gba", 0x46B494, 0x18
 
 gUnknown_846B4AC:: @ 846B4AC
-	.incbin "baserom.gba", 0x46B4AC, 0x10
+	@ This is a 2D array with one row.
+	@ Why this was done this way is beyond me.
+	@ The data that follow this row are not at all function pointers.
+	.4byte sub_81477C0, sub_814784C, sub_81479D4, sub_8147A34
 
 gUnknown_846B4BC:: @ 846B4BC
 	.incbin "baserom.gba", 0x46B4BC, 0x190

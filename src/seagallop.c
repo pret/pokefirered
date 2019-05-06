@@ -458,3 +458,42 @@ static bool8 GetDirectionOfTravel(void)
     }
     return (sTravelDirectionMatrix[gSpecialVar_0x8004] >> gSpecialVar_0x8006) & 1;
 }
+
+u8 sub_8147500(void)
+{
+    u16 originId, destId;
+
+    originId = gSpecialVar_0x8004;
+    destId = gSpecialVar_0x8006;
+
+    if (originId == SEAGALLOP_CINNABAR_ISLAND || destId == SEAGALLOP_CINNABAR_ISLAND)
+        return 1;
+
+    if (originId == SEAGALLOP_VERMILION_CITY || destId == SEAGALLOP_VERMILION_CITY)
+        return 7;
+
+    if (originId == SEAGALLOP_NAVEL_ROCK || destId == SEAGALLOP_NAVEL_ROCK)
+        return 10;
+
+    if (originId == SEAGALLOP_BIRTH_ISLAND || destId == SEAGALLOP_BIRTH_ISLAND)
+        return 12;
+
+    if ((originId == SEAGALLOP_ONE_ISLAND || originId == SEAGALLOP_TWO_ISLAND || originId == SEAGALLOP_THREE_ISLAND) && (destId == SEAGALLOP_ONE_ISLAND || destId == SEAGALLOP_TWO_ISLAND || destId == SEAGALLOP_THREE_ISLAND))
+        return 2;
+
+    if ((originId == SEAGALLOP_FOUR_ISLAND || originId == SEAGALLOP_FIVE_ISLAND) && (destId == SEAGALLOP_FOUR_ISLAND || destId == SEAGALLOP_FIVE_ISLAND))
+        return 3;
+
+    if ((originId == SEAGALLOP_SIX_ISLAND || originId == SEAGALLOP_SEVEN_ISLAND) && (destId == SEAGALLOP_SIX_ISLAND || destId == SEAGALLOP_SEVEN_ISLAND))
+        return 5;
+
+    return 6;
+}
+
+bool8 sub_8147594(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(VERMILIONCITY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(VERMILIONCITY) && gSaveBlock1Ptr->pos.x < 24)
+        return TRUE;
+
+    return FALSE;
+}

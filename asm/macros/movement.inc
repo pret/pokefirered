@@ -5,7 +5,7 @@
 	.endm
 	.endm
 
-	enum_start
+	enum_start 0
 	create_movement step_00
 	create_movement step_01
 	create_movement step_02

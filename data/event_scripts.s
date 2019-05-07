@@ -1,6 +1,17 @@
+#include "constants/flags.h"
+#include "constants/decorations.h"
+#include "constants/items.h"
+#include "constants/layouts.h"
+#include "constants/maps.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/trainer_classes.h"
+#include "constants/vars.h"
+#include "constants/battle.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
-	.include "constants/constants.inc"
+@	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits
 

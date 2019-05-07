@@ -5,16 +5,53 @@
 
 	.align 2
 gUnknown_846AFE8:: @ 846AFE8
-	.incbin "baserom.gba", 0x46AFE8, 0x444
+	.incbin "graphics/misc/unk_846B008.gbapal"
+
+gUnknown_846B008:: @ 846B008
+	.incbin "graphics/misc/unk_846B008.4bpp.lz"
 
 gUnknown_846B42C:: @ 846B42C
-	.incbin "baserom.gba", 0x46B42C, 0x10
+	obj_tiles gUnknown_846B008, 0x0c00, 0x2000
+	null_obj_tiles
 
 gUnknown_846B43C:: @ 846B43C
-	.incbin "baserom.gba", 0x46B43C, 0x58
+	obj_pal gUnknown_846AFE8, 0x2000
+	null_obj_pal
+
+gUnknown_846B44C:: @ 846B44C
+	obj_image_anim_frame 0x00, 0
+	obj_image_anim_end
+
+gUnknown_846B454:: @ 846B454
+	obj_image_anim_frame 0x10, 0
+	obj_image_anim_end
+
+gUnknown_846B45C:: @ 846B45C
+	obj_image_anim_frame 0x20, 0
+	obj_image_anim_end
+
+gUnknown_846B464:: @ 846B464
+	obj_image_anim_frame 0x40, 0
+	obj_image_anim_end
+
+gUnknown_846B46C:: @ 846B46C
+	obj_image_anim_frame 0x30, 0
+	obj_image_anim_end
+
+gUnknown_846B474:: @ 846B474
+	obj_image_anim_frame 0x50, 0
+	obj_image_anim_end
+
+gUnknown_846B47C::
+	.4byte gUnknown_846B44C
+	.4byte gUnknown_846B454
+	.4byte gUnknown_846B45C
+	.4byte gUnknown_846B464
+	.4byte gUnknown_846B46C
+	.4byte gUnknown_846B474
 
 gUnknown_846B494:: @ 846B494
-	.incbin "baserom.gba", 0x46B494, 0x18
+	spr_template 0x2000, 0x2000, gOamData_83AC9D8, gUnknown_846B47C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_846B4AC:: @ 846B4AC
 	@ This is a 2D array with one row.

@@ -665,3 +665,6 @@ $(GLOBALGFXDIR)/fame_checker_bg.4bpp: %.4bpp: %.png
 
 data/seagallop/water.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 41
+
+$(MISCGFXDIR)/unk_846B008.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4

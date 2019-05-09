@@ -692,6 +692,12 @@ struct TrainerTowerLog
     u8 unkA_6:2;
 };
 
+struct TrainerRematchState
+{
+    u16 stepCounter;
+    u8 rematches[100];
+};
+
 struct SaveBlock1
 {
     /*0x0000*/ struct Coords16 pos;
@@ -719,7 +725,7 @@ struct SaveBlock1
     /*0x05F8*/ u8 seen1[DEX_FLAGS_NO];
     /*0x062C*/ u16 berryBlenderRecords[3]; // unused
     /*0x0632*/ u8 field_632[6]; // unused?
-    /*0x0638*/ u8 trainerRematchStepCounter;
+    /*0x0638*/ u16 trainerRematchStepCounter;
     /*0x063A*/ u8 ALIGNED(2) trainerRematches[100];
     /*0x06A0*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
     /*0x08E0*/ struct MapObjectTemplate mapObjectTemplates[64];

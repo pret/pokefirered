@@ -19,6 +19,7 @@
 #include "random.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
+#include "map_obj_80688E4.h"
 #include "map_obj_8097404.h"
 #include "unk_810c3a4.h"
 #include "constants/movement_commands.h"
@@ -70,6 +71,8 @@ extern u8 gSelectedEventObject;
 // static declarations
 static EWRAM_DATA struct VsSeekerStruct *sVsSeeker = NULL;
 
+static void sub_810C3B8(u8 taskId);
+static void sub_810C594(void);
 static void Task_VsSeeker_1(u8 taskId);
 static void Task_VsSeeker_2(u8 taskId);
 static void GatherNearbyTrainerInfo(void);
@@ -565,6 +568,229 @@ static const u8 gUnknown_8453F67[] = { 0x08, 0x08, 0x07, 0x09, 0x0a };
 
 
 // text
+
+
+void sub_810C3A4(void)
+{
+    CreateTask(sub_810C3B8, 80);
+}
+
+static void sub_810C3B8(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    u8 i;
+
+    if (task->data[0] == 0 && walkrun_is_standing_still() == TRUE)
+    {
+        sub_805C270();
+        task->data[0] = 1;
+    }
+
+    if (task->data[1] == 0)
+    {
+        for (i = 0; i < MAP_OBJECTS_COUNT; i++)
+        {
+            if (sub_810CF04(i) == TRUE)
+            {
+                if (gMapObjects[i].mapobj_bit_1)
+                    return;
+                FreezeMapObject(&gMapObjects[i]);
+            }
+        }
+    }
+
+    task->data[1] = 1;
+    if (task->data[0] != 0)
+    {
+        DestroyTask(taskId);
+        sub_805C780();
+        EnableBothScriptContexts();
+    }
+}
+
+void sub_810C444(void)
+{
+    struct MapObjectTemplate * templates = gSaveBlock1Ptr->mapObjectTemplates;
+    u8 i;
+    u8 r6;
+    u8 sp0;
+    struct MapObject * mapObject;
+
+    for (i = 0; i < gMapHeader.events->mapObjectCount; i++)
+    {
+        if ((templates[i].unkC == 1 || templates[i].unkC == 3) && (templates[i].movementType == 0x4D || templates[i].movementType == 0x4E || templates[i].movementType == 0x4F))
+        {
+            r6 = sub_810CF54();
+            TryGetFieldObjectIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
+            mapObject = &gMapObjects[sp0];
+            if (sub_810CF04(sp0) == TRUE)
+            {
+                npc_set_running_behaviour_etc(mapObject, r6);
+            }
+            templates[i].movementType = r6;
+        }
+    }
+}
+
+#ifdef NONMATCHING
+bool8 sub_810C4EC(void)
+{
+    if (CheckBagHasItem(ITEM_VS_SEEKER, 1) == TRUE)
+    {
+        if ((gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) < 100)
+            gSaveBlock1Ptr->trainerRematchStepCounter++;
+    }
+
+    if (FlagGet(0x801) == TRUE)
+    {
+        u16 x;
+        do {
+            x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
+        } while (0);
+        if (x < 100)
+        {
+            x++;
+            gSaveBlock1Ptr->trainerRematchStepCounter = ((u16)(x << 8)) | (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF);
+        }
+        do {
+            x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
+        } while (0);
+        if (x == 100)
+        {
+            FlagClear(0x801);
+            sub_810C640();
+            sub_810D0D0();
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+#else
+NAKED
+bool8 sub_810C4EC(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmovs r0, 0xB5\n"
+                "\tlsls r0, 1\n"
+                "\tmovs r1, 0x1\n"
+                "\tbl CheckBagHasItem\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _0810C516\n"
+                "\tldr r0, _0810C568 @ =gSaveBlock1Ptr\n"
+                "\tldr r0, [r0]\n"
+                "\tmovs r2, 0xC7\n"
+                "\tlsls r2, 3\n"
+                "\tadds r1, r0, r2\n"
+                "\tldrh r2, [r1]\n"
+                "\tldrb r0, [r1]\n"
+                "\tcmp r0, 0x63\n"
+                "\tbhi _0810C516\n"
+                "\tadds r0, r2, 0x1\n"
+                "\tstrh r0, [r1]\n"
+                "_0810C516:\n"
+                "\tldr r7, _0810C56C @ =0x00000801\n"
+                "\tadds r0, r7, 0\n"
+                "\tbl FlagGet\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _0810C570\n"
+                "\tldr r6, _0810C568 @ =gSaveBlock1Ptr\n"
+                "\tldr r0, [r6]\n"
+                "\tmovs r5, 0xC7\n"
+                "\tlsls r5, 3\n"
+                "\tadds r3, r0, r5\n"
+                "\tldrh r2, [r3]\n"
+                "\tlsrs r1, r2, 8\n"
+                "\tmovs r4, 0xFF\n"
+                "\tcmp r1, 0x63\n"
+                "\tbhi _0810C548\n"
+                "\tadds r1, 0x1\n"
+                "\tlsls r1, 24\n"
+                "\tmovs r0, 0xFF\n"
+                "\tands r0, r2\n"
+                "\tlsrs r1, 16\n"
+                "\torrs r0, r1\n"
+                "\tstrh r0, [r3]\n"
+                "_0810C548:\n"
+                "\tldr r0, [r6]\n"
+                "\tadds r0, r5\n"
+                "\tldrh r0, [r0]\n"
+                "\tlsrs r0, 8\n"
+                "\tands r0, r4\n"
+                "\tcmp r0, 0x64\n"
+                "\tbne _0810C570\n"
+                "\tadds r0, r7, 0\n"
+                "\tbl FlagClear\n"
+                "\tbl sub_810C640\n"
+                "\tbl sub_810D0D0\n"
+                "\tmovs r0, 0x1\n"
+                "\tb _0810C572\n"
+                "\t.align 2, 0\n"
+                "_0810C568: .4byte gSaveBlock1Ptr\n"
+                "_0810C56C: .4byte 0x00000801\n"
+                "_0810C570:\n"
+                "\tmovs r0, 0\n"
+                "_0810C572:\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r1}\n"
+                "\tbx r1");
+}
+#endif
+
+void sub_810C578(void)
+{
+    FlagClear(0x801);
+    sub_810C640();
+    sub_810D0D0();
+    sub_810C594();
+}
+
+static void sub_810C594(void)
+{
+    u8 i;
+
+    for (i = 0; i < MAP_OBJECTS_COUNT; i++)
+    {
+        struct MapObject * mapObject = &gMapObjects[i];
+        if (mapObject->animPattern == 0x4D || mapObject->animPattern == 0x4E || mapObject->animPattern == 0x4F)
+        {
+            u8 r3 = sub_810CF54();
+            if (mapObject->active && gSprites[mapObject->spriteId].data[0] == i)
+            {
+                gSprites[mapObject->spriteId].pos2.x = 0;
+                gSprites[mapObject->spriteId].pos2.y = 0;
+                npc_set_running_behaviour_etc(mapObject, r3);
+            }
+        }
+    }
+}
+
+void sub_810C604(void)
+{
+    gSaveBlock1Ptr->trainerRematchStepCounter &= 0xFF00;
+}
+
+void sub_810C620(void)
+{
+    gSaveBlock1Ptr->trainerRematchStepCounter &= 0xFF00;
+    gSaveBlock1Ptr->trainerRematchStepCounter |= 100;
+}
+
+void sub_810C640(void)
+{
+    gSaveBlock1Ptr->trainerRematchStepCounter &= 0x00FF;
+}
+
+void sub_810C654(void)
+{
+    gSaveBlock1Ptr->trainerRematchStepCounter &= 0x00FF;
+    gSaveBlock1Ptr->trainerRematchStepCounter |= (100 << 8);
+}
+
 void Task_VsSeeker_0(u8 taskId)
 {
     u8 i;
@@ -1225,7 +1451,7 @@ static u16 GetTrainerFlagFromScript(const u8 *script)
  * because the ARM processor requires shorts to be 16-bit
  * aligned, this function needs to perform explicit bitwise
  * operations to get the correct flag.
- * 
+ *
  * 5c XX YY ZZ ...
  *       -- --
  */
@@ -1360,7 +1586,7 @@ static void StartAllRespondantIdleMovements(void)
     u8 dummy = 0;
     s32 i;
     s32 j;
-    
+
     for (i = 0; i < sVsSeeker->numRematchableTrainers; i++)
     {
         for (j = 0; sVsSeeker->trainerInfo[j].localId != 0xFF; j++)

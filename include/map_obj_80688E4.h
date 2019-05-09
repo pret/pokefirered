@@ -4,5 +4,6 @@
 #include "global.h"
 
 void player_bitmagic(void);
+void FreezeMapObject(struct MapObject *);
 
 #endif //GUARD_MAP_OBJ_80688E4_H

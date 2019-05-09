@@ -247,7 +247,7 @@ SECTIONS {
         src/menews_jisan.o(.text);
         src/seagallop.o(.text);
         asm/pokemon_jump.o(.text);
-        asm/dodrio_berry_picking.o(.text);
+        asm/pokemon_jump_2.o(.text);
         asm/berry_crush.o(.text);
         asm/berry_crush_2.o(.text);
         asm/berry_crush_3.o(.text);
@@ -255,7 +255,7 @@ SECTIONS {
         asm/braille_text.o(.text);
         asm/text_window.o(.text);
         src/quest_log_8150454.o(.text);
-        asm/unk_81507FC.o(.text);
+        asm/dodrio_berry_picking.o(.text);
         asm/battle_controller_pokedude.o(.text);
         asm/unk_8159F40.o(.text);
         asm/teachy_tv.o(.text);

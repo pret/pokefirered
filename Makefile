@@ -93,6 +93,7 @@ tidy:
 	@$(MAKE) -C berry_fix tidy
 
 include graphics_file_rules.mk
+include tileset_rules.mk
 
 %.s: ;
 %.png: ;

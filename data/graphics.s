@@ -16212,7 +16212,7 @@ gUnknown_8EA1958:: @ 8EA1958
 gUnknown_8EA1A50:: @ 8EA1A50
 	.incbin "baserom.gba", 0xEA1A50, 0x118
 
-gUnknown_8EA1B68:: @ 8EA1B68
+gTilesetPalettes_8EA1B68:: @ 8EA1B68
 	.incbin "baserom.gba", 0xEA1B68, 0xE0 @UNKNOWN
 
 gUnknown_8EA1C48:: @ 8EA1C48
@@ -16221,7 +16221,7 @@ gUnknown_8EA1C48:: @ 8EA1C48
 gUnknown_8EA1CD8:: @ 8EA1CD8
 	.incbin "baserom.gba", 0xEA1CD8, 0x90 @UNKNOWN
 
-gUnknown_8EA1D68:: @ 8EA1D68
+gTilesetTiles_8EA1D68:: @ 8EA1D68
 	.incbin "baserom.gba", 0xEA1D68, 0x28D4
 
 gUnknown_8EA463C:: @ 8EA463C
@@ -16278,7 +16278,7 @@ gUnknown_8EA8F40:: @ 8EA8F40
 gUnknown_8EA9588:: @ 8EA9588
 	.incbin "graphics/berry_fix/window.bin.lz"
 
-gUnknown_8EA97F4:: @ 8EA97F4
+gTilesetPalettes_8EA97F4:: @ 8EA97F4
 	.incbin "baserom.gba", 0xEA97F4, 0x120 @UNKNOWN
 
 gUnknown_8EA9914:: @ 8EA9914
@@ -16287,13 +16287,13 @@ gUnknown_8EA9914:: @ 8EA9914
 gUnknown_8EA99A4:: @ 8EA99A4
 	.incbin "baserom.gba", 0xEA99A4, 0x50 @UNKNOWN
 
-gUnknown_8EA99F4:: @ 8EA99F4
+gTilesetTiles_8EA99F4:: @ 8EA99F4
 	.incbin "baserom.gba", 0xEA99F4, 0x394
 
-gUnknown_8EA9D88:: @ 8EA9D88
+gTilesetPalettes_8EA9D88:: @ 8EA9D88
 	.incbin "baserom.gba", 0xEA9D88, 0x200 @UNKNOWN
 
-gUnknown_8EA9F88:: @ 8EA9F88
+gTilesetTiles_8EA9F88:: @ 8EA9F88
 	.incbin "baserom.gba", 0xEA9F88, 0xA68
 
 gUnknown_8EAA9F0:: @ 8EAA9F0

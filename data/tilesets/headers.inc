@@ -1,272 +1,749 @@
+
 	.align 2
 gTileset_82D4A94::
-	.incbin "baserom.gba", 0x2D4A94, 0x18
+	.byte TRUE @ is compressed
+	.byte FALSE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8EA1D68
+	.4byte gTilesetPalettes_8EA1B68
+	.4byte gMetatiles_829F6C8
+	.4byte sub_8070154
+	.4byte gMetatileAttributes_82A1EC8
 
 	.align 2
 gTileset_82D4AAC::
-	.incbin "baserom.gba", 0x2D4AAC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_826D37C
+	.4byte gTilesetPalettes_826D7C0
+	.4byte gMetatiles_82A28C8
+	.4byte 0x0
+	.4byte gMetatileAttributes_82A2E58
 
 	.align 2
 gTileset_82D4AC4::
-	.incbin "baserom.gba", 0x2D4AC4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_826D9C0
+	.4byte gTilesetPalettes_826DFC0
+	.4byte gMetatiles_82A2FBC
+	.4byte 0x0
+	.4byte gMetatileAttributes_82A35AC
 
 	.align 2
 gTileset_82D4ADC::
-	.incbin "baserom.gba", 0x2D4ADC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_826E1C0
+	.4byte gTilesetPalettes_826EAB8
+	.4byte gMetatiles_82A3728
+	.4byte 0x0
+	.4byte gMetatileAttributes_82A3C18
 
 	.align 2
 gTileset_82D4AF4::
-	.incbin "baserom.gba", 0x2D4AF4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_826ECB8
+	.4byte gTilesetPalettes_826F4B8
+	.4byte gMetatiles_82A3D54
+	.4byte 0x0
+	.4byte gMetatileAttributes_82A45B4
 
 	.align 2
 gTileset_82D4B0C::
-	.incbin "baserom.gba", 0x2D4B0C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_826F6B8
+	.4byte gTilesetPalettes_8270438
+	.4byte gMetatiles_82A47CC
+	.4byte 0x0
+	.4byte gMetatileAttributes_82A556C
 
 	.align 2
 gTileset_82D4B24::
-	.incbin "baserom.gba", 0x2D4B24, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8270638
+	.4byte gTilesetPalettes_8270DA0
+	.4byte gMetatiles_82A58D4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82A6354
 
 	.align 2
 gTileset_82D4B3C::
-	.incbin "baserom.gba", 0x2D4B3C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8270FA0
+	.4byte gTilesetPalettes_8271C74
+	.4byte gMetatiles_82A65F4
+	.4byte sub_80701D8
+	.4byte gMetatileAttributes_82A74F4
 
 	.align 2
 gTileset_82D4B54::
-	.incbin "baserom.gba", 0x2D4B54, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8271E74
+	.4byte gTilesetPalettes_8272A5C
+	.4byte gMetatiles_82A78B4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82A84B4
 
 	.align 2
 gTileset_82D4B6C::
-	.incbin "baserom.gba", 0x2D4B6C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8272C5C
+	.4byte gTilesetPalettes_8273358
+	.4byte gMetatiles_82A87B4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82A8BB4
 
 	.align 2
 gTileset_82D4B84::
-	.incbin "baserom.gba", 0x2D4B84, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8273558
+	.4byte gTilesetPalettes_82742D0
+	.4byte gMetatiles_82A8CB4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82A97B4
 
 	.align 2
 gTileset_82D4B9C::
-	.incbin "baserom.gba", 0x2D4B9C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82744D0
+	.4byte gTilesetPalettes_8275094
+	.4byte gMetatiles_82A9A74
+	.4byte 0x0
+	.4byte gMetatileAttributes_82AA6F4
 
 	.align 2
 gTileset_82D4BB4::
-	.incbin "baserom.gba", 0x2D4BB4, 0x18
+	.byte TRUE @ is compressed
+	.byte FALSE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8275294
+	.4byte gTilesetPalettes_8277694
+	.4byte gMetatiles_82AD7B4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82AFFB4
 
 	.align 2
 gTileset_82D4BCC::
-	.incbin "baserom.gba", 0x2D4BCC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8277894
+	.4byte gTilesetPalettes_8277A5C
+	.4byte gMetatiles_82B3524
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B3954
 
 	.align 2
 gTileset_82D4BE4::
-	.incbin "baserom.gba", 0x2D4BE4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8277C5C
+	.4byte gTilesetPalettes_8278CC4
+	.4byte gMetatiles_82B3A60
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B4A50
 
 	.align 2
 gTileset_82D4BFC::
-	.incbin "baserom.gba", 0x2D4BFC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8278EC4
+	.4byte gTilesetPalettes_827A1A8
+	.4byte gMetatiles_82B502C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B5A3C
 
 	.align 2
 gTileset_82D4C14::
-	.incbin "baserom.gba", 0x2D4C14, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_827A3A8
+	.4byte gTilesetPalettes_827A3B8
+	.4byte gMetatiles_82B09B4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B09D4
 
 	.align 2
 gTileset_82D4C2C::
-	.incbin "baserom.gba", 0x2D4C2C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_827A5B8
+	.4byte gTilesetPalettes_827AE14
+	.4byte gMetatiles_82C5738
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C5FA8
 
 	.align 2
 gTileset_82D4C44::
-	.incbin "baserom.gba", 0x2D4C44, 0x18
+	.byte FALSE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_827B014
+	.4byte gTilesetPalettes_827FF14
+	.4byte gMetatiles_82C61C4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C71C4
 
 	.align 2
 gTileset_82D4C5C::
-	.incbin "baserom.gba", 0x2D4C5C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8280114
+	.4byte gTilesetPalettes_82804EC
+	.4byte gMetatiles_82B31DC
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B347C
 
 	.align 2
 gTileset_82D4C74::
-	.incbin "baserom.gba", 0x2D4C74, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8EA99F4
+	.4byte gTilesetPalettes_8EA97F4
+	.4byte gMetatiles_82B4E4C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B4FCC
 
 	.align 2
 gTileset_82D4C8C::
-	.incbin "baserom.gba", 0x2D4C8C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82806EC
+	.4byte gTilesetPalettes_8280D00
+	.4byte gMetatiles_82B68A0
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B7390
 
 	.align 2
 gTileset_82D4CA4::
-	.incbin "baserom.gba", 0x2D4CA4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8285350
+	.4byte gTilesetPalettes_82857A4
+	.4byte gMetatiles_82AC364
+	.4byte 0x0
+	.4byte gMetatileAttributes_82AC584
 
 	.align 2
 gTileset_82D4CBC::
-	.incbin "baserom.gba", 0x2D4CBC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82867D4
+	.4byte gTilesetPalettes_8286BC8
+	.4byte gMetatiles_82AD124
+	.4byte 0x0
+	.4byte gMetatileAttributes_82AD664
 
 	.align 2
 gTileset_82D4CD4::
-	.incbin "baserom.gba", 0x2D4CD4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8280F00
+	.4byte gTilesetPalettes_82823A4
+	.4byte gMetatiles_82B09DC
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B29DC
 
 	.align 2
 gTileset_82D4CEC::
-	.incbin "baserom.gba", 0x2D4CEC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82825A4
+	.4byte gTilesetPalettes_8282FBC
+	.4byte gMetatiles_82B5CC0
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B6640
 
 	.align 2
 gTileset_82D4D04::
-	.incbin "baserom.gba", 0x2D4D04, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82831BC
+	.4byte gTilesetPalettes_82839B0
+	.4byte gMetatiles_82AAA14
+	.4byte 0x0
+	.4byte gMetatileAttributes_82AB064
 
 	.align 2
 gTileset_82D4D1C::
-	.incbin "baserom.gba", 0x2D4D1C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8283BB0
+	.4byte gTilesetPalettes_8283FF8
+	.4byte gMetatiles_82AB1F8
+	.4byte 0x0
+	.4byte gMetatileAttributes_82AB738
 
 	.align 2
 gTileset_82D4D34::
-	.incbin "baserom.gba", 0x2D4D34, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82841F8
+	.4byte gTilesetPalettes_82849B8
+	.4byte gMetatiles_82AB888
+	.4byte sub_807031C
+	.4byte gMetatileAttributes_82ABD38
 
 	.align 2
 gTileset_82D4D4C::
-	.incbin "baserom.gba", 0x2D4D4C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8284BB8
+	.4byte gTilesetPalettes_8285150
+	.4byte gMetatiles_82ABE64
+	.4byte sub_8070380
+	.4byte gMetatileAttributes_82AC264
 
 	.align 2
 gTileset_82D4D64::
-	.incbin "baserom.gba", 0x2D4D64, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82859A4
+	.4byte gTilesetPalettes_8285D90
+	.4byte gMetatiles_82AC60C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82AC8EC
 
 	.align 2
 gTileset_82D4D7C::
-	.incbin "baserom.gba", 0x2D4D7C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8285F90
+	.4byte gTilesetPalettes_82865D4
+	.4byte gMetatiles_82AC9A4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82ACFA4
 
 	.align 2
 gTileset_82D4D94::
-	.incbin "baserom.gba", 0x2D4D94, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8286DC8
+	.4byte gTilesetPalettes_8287B80
+	.4byte gMetatiles_82B764C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B8B4C
 
 	.align 2
-gTileset_82D4DAC:: @ unreferenced
-	.incbin "baserom.gba", 0x2D4DAC, 0x18
+gTileset_82D4DAC::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8287D80
+	.4byte gTilesetPalettes_8287D94
+	.4byte gMetatiles_82B908C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B90AC
 
 	.align 2
 gTileset_82D4DC4::
-	.incbin "baserom.gba", 0x2D4DC4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8287F94
+	.4byte gTilesetPalettes_8288444
+	.4byte gMetatiles_82B90B4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B9364
 
 	.align 2
-gTileset_82D4DDC:: @ unused
-	.incbin "baserom.gba", 0x2D4DDC, 0x18
+gTileset_82D4DDC::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8288644
+	.4byte gTilesetPalettes_8288C60
+	.4byte gMetatiles_82B9410
+	.4byte 0x0
+	.4byte gMetatileAttributes_82B9B30
 
 	.align 2
 gTileset_82D4DF4::
-	.incbin "baserom.gba", 0x2D4DF4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8288E60
+	.4byte gTilesetPalettes_8289FC8
+	.4byte gMetatiles_82B9CF8
+	.4byte 0x0
+	.4byte gMetatileAttributes_82BA678
 
 	.align 2
 gTileset_82D4E0C::
-	.incbin "baserom.gba", 0x2D4E0C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_828A1C8
+	.4byte gTilesetPalettes_828B250
+	.4byte gMetatiles_82BA8D8
+	.4byte 0x0
+	.4byte gMetatileAttributes_82BB2A8
 
 	.align 2
 gTileset_82D4E24::
-	.incbin "baserom.gba", 0x2D4E24, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_828B450
+	.4byte gTilesetPalettes_828CAA0
+	.4byte gMetatiles_82BB51C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82BC49C
 
 	.align 2
-gTileset_82D4E3C:: @ unused
-	.incbin "baserom.gba", 0x2D4E3C, 0x18
+gTileset_82D4E3C::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_828CCA0
+	.4byte gTilesetPalettes_828D2BC
+	.4byte gMetatiles_82BC87C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82BCF9C
 
 	.align 2
 gTileset_82D4E54::
-	.incbin "baserom.gba", 0x2D4E54, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_828D4BC
+	.4byte gTilesetPalettes_828E3A4
+	.4byte gMetatiles_82BD164
+	.4byte 0x0
+	.4byte gMetatileAttributes_82BD9C4
 
 	.align 2
 gTileset_82D4E6C::
-	.incbin "baserom.gba", 0x2D4E6C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8EA9F88
+	.4byte gTilesetPalettes_8EA9D88
+	.4byte gMetatiles_82BDBDC
+	.4byte 0x0
+	.4byte gMetatileAttributes_82BEB3C
 
 	.align 2
 gTileset_82D4E84::
-	.incbin "baserom.gba", 0x2D4E84, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_828E5A4
+	.4byte gTilesetPalettes_828EC70
+	.4byte gMetatiles_82BEF14
+	.4byte 0x0
+	.4byte gMetatileAttributes_82BFA94
 
 	.align 2
 gTileset_82D4E9C::
-	.incbin "baserom.gba", 0x2D4E9C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_828EE70
+	.4byte gTilesetPalettes_828F378
+	.4byte gMetatiles_82BFD74
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C0704
 
 	.align 2
 gTileset_82D4EB4::
-	.incbin "baserom.gba", 0x2D4EB4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_828F578
+	.4byte gTilesetPalettes_828F9D8
+	.4byte gMetatiles_82C0968
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C0D18
 
 	.align 2
 gTileset_82D4ECC::
-	.incbin "baserom.gba", 0x2D4ECC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_828FBD8
+	.4byte gTilesetPalettes_8290DD0
+	.4byte gMetatiles_82C0E04
+	.4byte sub_8070250
+	.4byte gMetatileAttributes_82C25A4
 
 	.align 2
 gTileset_82D4EE4::
-	.incbin "baserom.gba", 0x2D4EE4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8290FD0
+	.4byte gTilesetPalettes_8291274
+	.4byte gMetatiles_82C2B8C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C300C
 
 	.align 2
 gTileset_82D4EFC::
-	.incbin "baserom.gba", 0x2D4EFC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8291474
+	.4byte gTilesetPalettes_8291AFC
+	.4byte gMetatiles_82C312C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C377C
 
 	.align 2
 gTileset_82D4F14::
-	.incbin "baserom.gba", 0x2D4F14, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8291CFC
+	.4byte gTilesetPalettes_82920F0
+	.4byte gMetatiles_82C3910
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C4110
 
 	.align 2
 gTileset_82D4F2C::
-	.incbin "baserom.gba", 0x2D4F2C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82922F0
+	.4byte gTilesetPalettes_8292FF0
+	.4byte gMetatiles_82C4310
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C5330
 
 	.align 2
 gTileset_82D4F44::
-	.incbin "baserom.gba", 0x2D4F44, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82931F0
+	.4byte gTilesetPalettes_8293660
+	.4byte gMetatiles_82C75C4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C7C44
 
 	.align 2
 gTileset_82D4F5C::
-	.incbin "baserom.gba", 0x2D4F5C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8293860
+	.4byte gTilesetPalettes_8293B0C
+	.4byte gMetatiles_82C7DE4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C80C4
 
 	.align 2
 gTileset_82D4F74::
-	.incbin "baserom.gba", 0x2D4F74, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8293D0C
+	.4byte gTilesetPalettes_8294144
+	.4byte gMetatiles_82C817C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C8C1C
 
 	.align 2
 gTileset_82D4F8C::
-	.incbin "baserom.gba", 0x2D4F8C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_828FBD8
+	.4byte gTilesetPalettes_8290DD0
+	.4byte gMetatiles_82C8EC4
+	.4byte 0x0
+	.4byte gMetatileAttributes_82C9C34
 
 	.align 2
 gTileset_82D4FA4::
-	.incbin "baserom.gba", 0x2D4FA4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8294344
+	.4byte gTilesetPalettes_8294D08
+	.4byte gMetatiles_82C9F90
+	.4byte 0x0
+	.4byte gMetatileAttributes_82CA320
 
 	.align 2
-gTileset_82D4FBC:: @ unused
-	.incbin "baserom.gba", 0x2D4FBC, 0x18
+gTileset_82D4FBC::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8294F08
+	.4byte gTilesetPalettes_8294F18
+	.4byte gMetatiles_82CA404
+	.4byte 0x0
+	.4byte gMetatileAttributes_82CA424
 
 	.align 2
-gTileset_82D4FD4:: @ unused
-	.incbin "baserom.gba", 0x2D4FD4, 0x18
+gTileset_82D4FD4::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8295118
+	.4byte gTilesetPalettes_829512C
+	.4byte gMetatiles_82CA42C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82CA44C
 
 	.align 2
 gTileset_82D4FEC::
-	.incbin "baserom.gba", 0x2D4FEC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_829532C
+	.4byte gTilesetPalettes_82967D4
+	.4byte gMetatiles_82CA454
+	.4byte sub_80702B4
+	.4byte gMetatileAttributes_82CB274
 
 	.align 2
 gTileset_82D5004::
-	.incbin "baserom.gba", 0x2D5004, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82969D4
+	.4byte gTilesetPalettes_8296E90
+	.4byte gMetatiles_82CB5FC
+	.4byte 0x0
+	.4byte gMetatileAttributes_82CB89C
 
 	.align 2
 gTileset_82D501C::
-	.incbin "baserom.gba", 0x2D501C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8297090
+	.4byte gTilesetPalettes_82983BC
+	.4byte gMetatiles_82CB944
+	.4byte 0x0
+	.4byte gMetatileAttributes_82CC704
 
 	.align 2
 gTileset_82D5034::
-	.incbin "baserom.gba", 0x2D5034, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_82985BC
+	.4byte gTilesetPalettes_8298970
+	.4byte gMetatiles_82CCA74
+	.4byte 0x0
+	.4byte gMetatileAttributes_82CD054
 
 	.align 2
 gTileset_82D504C::
-	.incbin "baserom.gba", 0x2D504C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8298B70
+	.4byte gTilesetPalettes_8299AA4
+	.4byte gMetatiles_82CD1CC
+	.4byte 0x0
+	.4byte gMetatileAttributes_82CE39C
 
 	.align 2
 gTileset_82D5064::
-	.incbin "baserom.gba", 0x2D5064, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_8299CA4
+	.4byte gTilesetPalettes_829AB04
+	.4byte gMetatiles_82CE810
+	.4byte 0x0
+	.4byte gMetatileAttributes_82CF190
 
 	.align 2
 gTileset_82D507C::
-	.incbin "baserom.gba", 0x2D507C, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_829AD04
+	.4byte gTilesetPalettes_829BD64
+	.4byte gMetatiles_82CF3F0
+	.4byte 0x0
+	.4byte gMetatileAttributes_82D02F0
 
 	.align 2
 gTileset_82D5094::
-	.incbin "baserom.gba", 0x2D5094, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_829BF64
+	.4byte gTilesetPalettes_829CEE4
+	.4byte gMetatiles_82D06B0
+	.4byte 0x0
+	.4byte gMetatileAttributes_82D18B0
 
 	.align 2
 gTileset_82D50AC::
-	.incbin "baserom.gba", 0x2D50AC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_829D0E4
+	.4byte gTilesetPalettes_829D894
+	.4byte gMetatiles_82D1D30
+	.4byte 0x0
+	.4byte gMetatileAttributes_82D2220
 
 	.align 2
 gTileset_82D50C4::
-	.incbin "baserom.gba", 0x2D50C4, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_829DA94
+	.4byte gTilesetPalettes_829EA50
+	.4byte gMetatiles_82D235C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82D3B5C
 
 	.align 2
 gTileset_82D50DC::
-	.incbin "baserom.gba", 0x2D50DC, 0x18
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_829EC50
+	.4byte gTilesetPalettes_829F4C8
+	.4byte gMetatiles_82D415C
+	.4byte 0x0
+	.4byte gMetatileAttributes_82D48BC
 

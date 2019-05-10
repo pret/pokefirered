@@ -42,7 +42,7 @@ EventScript_1630A5:: @ 81630A5
     return
 
 EventScript_1630A9:: @ 81630A9
-    setmaplayoutindex LAYOUT_UNUSEDLAYOUT_833BE30
+    setmaplayoutindex LAYOUT_UNUSED_LAYOUT_833BE30
     return
 
 EventScript_1630AD:: @ 81630AD

@@ -21,7 +21,7 @@ EventScript_17139C:: @ 817139C
     applymovement 255, Movement_1713B9
     waitmovement 0
     setvar VAR_0x4075, 2
-    warp MAP_ONEISLAND, 255, 12, 18
+    warp MAP_ONE_ISLAND, 255, 12, 18
     waitstate
     releaseall
     end

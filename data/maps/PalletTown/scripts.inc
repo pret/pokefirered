@@ -79,7 +79,7 @@ EventScript_1654D8:: @ 81654D8
     setvar VAR_0x4055, 7
     setvar VAR_0x4050, 3
     setflag FLAG_0x02C
-    warp MAP_PALLETTOWN_PROFESSOROAKSLAB, 255, 6, 12
+    warp MAP_PALLET_TOWN_PROFESSOROAKSLAB, 255, 6, 12
     waitstate
     releaseall
     end
@@ -230,7 +230,7 @@ EventScript_165605:: @ 8165605
     setvar VAR_0x4050, 1
     setflag FLAG_0x02C
     setflag FLAG_SPECIAL_FLAG_0x4001
-    warp MAP_PALLETTOWN_PROFESSOROAKSLAB, 255, 6, 12
+    warp MAP_PALLET_TOWN_PROFESSOROAKSLAB, 255, 6, 12
     waitstate
     releaseall
     end

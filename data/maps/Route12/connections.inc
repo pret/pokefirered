@@ -1,5 +1,5 @@
 Route12_MapConnectionsList: @ 8352B3C
-    connection up, 0, MAP_LAVENDERTOWN
+    connection up, 0, MAP_LAVENDER_TOWN
     connection down, -48, MAP_ROUTE13
     connection left, 60, MAP_ROUTE11
 

@@ -12,11 +12,11 @@ SSAnne_1F_Room11_MapScript1_16455F:: @ 816455F
     end
 
 EventScript_16457E:: @ 816457E
-    setescapewarp MAP_SIXISLAND_GREENPATH, 255, 64, 10
+    setescapewarp MAP_SIX_ISLAND_GREENPATH, 255, 64, 10
     return
 
 EventScript_164587:: @ 8164587
-    setescapewarp MAP_SIXISLAND_GREENPATH, 255, 45, 10
+    setescapewarp MAP_SIX_ISLAND_GREENPATH, 255, 45, 10
     return
 
 SSAnne_1F_Room11_EventScript_164590:: @ 8164590

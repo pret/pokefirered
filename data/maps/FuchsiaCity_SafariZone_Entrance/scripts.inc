@@ -59,7 +59,7 @@ EventScript_16D345:: @ 816D345
     closemessage
     applymovement 255, Movement_16D365
     waitmovement 0
-    warp MAP_SAFARIZONE_CENTER, 255, 26, 30
+    warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
     waitstate
     end
 
@@ -144,7 +144,7 @@ EventScript_16D3CA:: @ 816D3CA
     call_if 1, EventScript_16D457
     special sub_80A0EC4
     setvar VAR_0x406E, 2
-    warp MAP_SAFARIZONE_CENTER, 255, 26, 30
+    warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
     waitstate
     end
 

@@ -27,7 +27,7 @@ SSAnne_Exterior_160859:: @ 8160859
     waitmovement 0
     setvar VAR_0x407E, 2
     setvar VAR_0x4053, 0
-    warp MAP_VERMILIONCITY, 255, 23, 34
+    warp MAP_VERMILION_CITY, 255, 23, 34
     waitstate
     releaseall
     end

@@ -45,7 +45,7 @@ SilphCo_Elevator_EventScript_161F6F:: @ 8161F6F
 
 EventScript_16202F:: @ 816202F
     setvar VAR_0x8006, 4
-    setdynamicwarp MAP_SILPHCO_1F, 255, 22, 3
+    setdynamicwarp MAP_SILPH_CO_1F, 255, 22, 3
     compare_var_to_value VAR_0x403A, 4
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -57,7 +57,7 @@ EventScript_162056:: @ 8162056
 
 EventScript_162057:: @ 8162057
     setvar VAR_0x8006, 5
-    setdynamicwarp MAP_SILPHCO_2F, 255, 22, 3
+    setdynamicwarp MAP_SILPH_CO_2F, 255, 22, 3
     compare_var_to_value VAR_0x403A, 5
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -69,7 +69,7 @@ EventScript_16207E:: @ 816207E
 
 EventScript_16207F:: @ 816207F
     setvar VAR_0x8006, 6
-    setdynamicwarp MAP_SILPHCO_3F, 255, 22, 3
+    setdynamicwarp MAP_SILPH_CO_3F, 255, 22, 3
     compare_var_to_value VAR_0x403A, 6
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -81,7 +81,7 @@ EventScript_1620A6:: @ 81620A6
 
 EventScript_1620A7:: @ 81620A7
     setvar VAR_0x8006, 7
-    setdynamicwarp MAP_SILPHCO_4F, 255, 22, 3
+    setdynamicwarp MAP_SILPH_CO_4F, 255, 22, 3
     compare_var_to_value VAR_0x403A, 7
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -93,7 +93,7 @@ EventScript_1620CE:: @ 81620CE
 
 EventScript_1620CF:: @ 81620CF
     setvar VAR_0x8006, 8
-    setdynamicwarp MAP_SILPHCO_5F, 255, 22, 3
+    setdynamicwarp MAP_SILPH_CO_5F, 255, 22, 3
     compare_var_to_value VAR_0x403A, 8
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -105,7 +105,7 @@ EventScript_1620F6:: @ 81620F6
 
 EventScript_1620F7:: @ 81620F7
     setvar VAR_0x8006, 9
-    setdynamicwarp MAP_SILPHCO_6F, 255, 20, 3
+    setdynamicwarp MAP_SILPH_CO_6F, 255, 20, 3
     compare_var_to_value VAR_0x403A, 9
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -117,7 +117,7 @@ EventScript_16211E:: @ 816211E
 
 EventScript_16211F:: @ 816211F
     setvar VAR_0x8006, 10
-    setdynamicwarp MAP_SILPHCO_7F, 255, 23, 3
+    setdynamicwarp MAP_SILPH_CO_7F, 255, 23, 3
     compare_var_to_value VAR_0x403A, 10
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -129,7 +129,7 @@ EventScript_162146:: @ 8162146
 
 EventScript_162147:: @ 8162147
     setvar VAR_0x8006, 11
-    setdynamicwarp MAP_SILPHCO_8F, 255, 22, 3
+    setdynamicwarp MAP_SILPH_CO_8F, 255, 22, 3
     compare_var_to_value VAR_0x403A, 11
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -141,7 +141,7 @@ EventScript_16216E:: @ 816216E
 
 EventScript_16216F:: @ 816216F
     setvar VAR_0x8006, 12
-    setdynamicwarp MAP_SILPHCO_9F, 255, 24, 3
+    setdynamicwarp MAP_SILPH_CO_9F, 255, 24, 3
     compare_var_to_value VAR_0x403A, 12
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -153,7 +153,7 @@ EventScript_162196:: @ 8162196
 
 EventScript_162197:: @ 8162197
     setvar VAR_0x8006, 13
-    setdynamicwarp MAP_SILPHCO_10F, 255, 13, 3
+    setdynamicwarp MAP_SILPH_CO_10F, 255, 13, 3
     compare_var_to_value VAR_0x403A, 13
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC
@@ -165,7 +165,7 @@ EventScript_1621BE:: @ 81621BE
 
 EventScript_1621BF:: @ 81621BF
     setvar VAR_0x8006, 14
-    setdynamicwarp MAP_SILPHCO_11F, 255, 13, 3
+    setdynamicwarp MAP_SILPH_CO_11F, 255, 13, 3
     compare_var_to_value VAR_0x403A, 14
     goto_if 1, EventScript_1621E7
     call EventScript_1621EC

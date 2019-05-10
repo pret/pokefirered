@@ -35,7 +35,7 @@ EventScript_170A97:: @ 8170A97
     waitmovement 0
     special LoadPlayerParty
     setvar VAR_0x4001, 1
-    warp MAP_SEVENISLAND_HOUSE_ROOM1, 255, 4, 1
+    warp MAP_SEVEN_ISLAND_HOUSE_ROOM1, 255, 4, 1
     waitstate
     releaseall
     end

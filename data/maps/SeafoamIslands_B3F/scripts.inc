@@ -25,7 +25,7 @@ EventScript_162F90:: @ 8162F90
     return
 
 EventScript_162F94:: @ 8162F94
-    setmaplayoutindex LAYOUT_UNUSEDLAYOUT_833B6EC
+    setmaplayoutindex LAYOUT_UNUSED_LAYOUT_833B6EC
     return
 
 SeafoamIslands_B3F_MapScript2_162F98:: @ 8162F98
@@ -47,7 +47,7 @@ EventScript_162FA2:: @ 8162FA2
     compare_var_to_value VAR_0x8008, 24
     call_if 4, EventScript_163001
     setvar VAR_0x4063, 1
-    warp MAP_SEAFOAMISLANDS_B4F, 255, 27, 21
+    warp MAP_SEAFOAM_ISLANDS_B4F, 255, 27, 21
     waitstate
     releaseall
     end

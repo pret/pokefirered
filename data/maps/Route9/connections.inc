@@ -1,5 +1,5 @@
 Route9_MapConnectionsList: @ 8352ADC
-    connection left, -10, MAP_CERULEANCITY
+    connection left, -10, MAP_CERULEAN_CITY
     connection right, 0, MAP_ROUTE10
 
 Route9_MapConnections:: @ 8352AF4

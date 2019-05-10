@@ -1,5 +1,5 @@
 OneIsland_TreasureBeach_MapConnectionsList: @ 8352D30
-    connection up, 0, MAP_ONEISLAND
+    connection up, 0, MAP_ONE_ISLAND
 
 OneIsland_TreasureBeach_MapConnections:: @ 8352D3C
     .4byte 1

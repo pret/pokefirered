@@ -110,7 +110,7 @@ EventScript_162B76:: @ 8162B76
     applymovement 255, Movement_162D12
     waitmovement 0
     setvar VAR_0x4001, 1
-    warp MAP_POKEMONLEAGUE_HALLOFFAME, 255, 5, 12
+    warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 255, 5, 12
     waitstate
     releaseall
     end

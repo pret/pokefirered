@@ -15,7 +15,7 @@ EventScript_1708AF:: @ 81708AF
     setvar VAR_0x4001, 1
     setobjectxyperm 1, 4, 2
     setobjectmovementtype 1, 8
-    setmaplayoutindex LAYOUT_UNUSEDLAYOUT_8338B4C
+    setmaplayoutindex LAYOUT_UNUSED_LAYOUT_8338B4C
     return
 
 EventScript_1708C3:: @ 81708C3
@@ -122,7 +122,7 @@ EventScript_170987:: @ 8170987
     call_if 1, EventScript_170A3F
     compare_var_to_value VAR_FACING, 3
     call_if 1, EventScript_170A51
-    warp MAP_SEVENISLAND_HOUSE_ROOM2, 255, 3, 1
+    warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 255, 3, 1
     waitstate
     release
     end

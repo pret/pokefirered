@@ -1,5 +1,5 @@
 Route15_MapConnectionsList: @ 8352BA8
-    connection left, -10, MAP_FUCHSIACITY
+    connection left, -10, MAP_FUCHSIA_CITY
     connection right, -40, MAP_ROUTE14
 
 Route15_MapConnections:: @ 8352BC0

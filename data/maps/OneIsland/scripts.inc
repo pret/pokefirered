@@ -31,7 +31,7 @@ EventScript_16749D:: @ 816749D
     waitdooranim
     removeobject 1
     setvar VAR_0x4075, 3
-    warp MAP_ONEISLAND_POKEMONCENTER_1F, 255, 9, 9
+    warp MAP_ONE_ISLAND_POKEMONCENTER_1F, 255, 9, 9
     waitstate
     releaseall
     end

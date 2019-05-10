@@ -13,7 +13,7 @@ ThreeIsland_DunsparceTunnel_MapScript1_164D2C:: @ 8164D2C
     end
 
 EventScript_164D50:: @ 8164D50
-    setmaplayoutindex LAYOUT_UNUSEDLAYOUT_83453C0
+    setmaplayoutindex LAYOUT_UNUSED_LAYOUT_83453C0
     return
 
 EventScript_164D54:: @ 8164D54

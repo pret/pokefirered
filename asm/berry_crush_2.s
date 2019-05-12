@@ -1046,7 +1046,7 @@ sub_814C2FC: @ 814C2FC
 	mov r10, r3
 _0814C320:
 	lsls r0, r7, 4
-	ldr r1, _0814C3C4 @ =gUnknown_3003ED0
+	ldr r1, _0814C3C4 @ =gRecvCmds
 	adds r2, r0, r1
 	ldrh r1, [r2]
 	movs r0, 0xFF
@@ -1127,7 +1127,7 @@ _0814C320:
 	b _0814C3D6
 	.align 2, 0
 _0814C3C0: .4byte gUnknown_846E2E0
-_0814C3C4: .4byte gUnknown_3003ED0
+_0814C3C4: .4byte gRecvCmds
 _0814C3C8:
 	adds r0, r4, r6
 	adds r2, r0, 0
@@ -1671,7 +1671,7 @@ sub_814C7BC: @ 814C7BC
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r3, _0814C808 @ =gUnknown_3003ED0
+	ldr r3, _0814C808 @ =gRecvCmds
 	ldrb r0, [r5, 0x9]
 	cmp r4, r0
 	bcs _0814C7E0
@@ -1710,7 +1710,7 @@ _0814C7F8:
 	strb r0, [r2]
 	b _0814C84A
 	.align 2, 0
-_0814C808: .4byte gUnknown_3003ED0
+_0814C808: .4byte gRecvCmds
 _0814C80C:
 	adds r4, r5, 0
 	adds r4, 0x4E

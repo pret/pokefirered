@@ -1,6 +1,11 @@
 #ifndef GUARD_LINK_RFU_H
 #define GUARD_LINK_RFU_H
 
+struct Padded_U8
+{
+    u8 value;
+};
+
 void AddTextPrinterToWindow1(const u8 *str);
 bool32 MG_PrintTextOnWindow1AndWaitButton(u8 * cmdPtr, const u8 * src);
 void sub_80FA190(void);
@@ -11,5 +16,6 @@ void DestroyWirelessStatusIndicatorSprite(void);
 void MEvent_CreateTask_CardOrNewsWithFriend(u8);
 void MEvent_CreateTask_CardOrNewsOverWireless(u8);
 void MEvent_CreateTask_Leader(u8);
+void sub_80F9E2C(void * data);
 
 #endif //GUARD_LINK_RFU_H

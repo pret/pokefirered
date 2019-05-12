@@ -30,7 +30,7 @@ gUnknown_3003EBC: @ 3003EBC
 gUnknown_3003EC4: @ 3003EC4
 	.space 0xC
 
-gUnknown_3003ED0: @ 3003ED0
+gRecvCmds: @ 3003ED0
 	.space 0x2
 
 gUnknown_3003ED2: @ 3003ED2

@@ -870,7 +870,7 @@ _08009B7E:
 	movs r0, 0
 	strh r0, [r3]
 	lsls r4, r6, 4
-	ldr r5, _08009BCC @ =gUnknown_3003ED0
+	ldr r5, _08009BCC @ =gRecvCmds
 	adds r2, r4, r5
 	ldrh r0, [r2]
 	mov r12, r1
@@ -906,7 +906,7 @@ _08009BC4:
 	b _08009E3E
 	.align 2, 0
 _08009BC8: .4byte gUnknown_3003E60
-_08009BCC: .4byte gUnknown_3003ED0
+_08009BCC: .4byte gRecvCmds
 _08009BD0: .4byte 0x00005fff
 _08009BD4: .4byte 0x00004444
 _08009BD8: .4byte 0x00002222
@@ -1006,12 +1006,12 @@ _08009C94:
 	adds r1, r0
 	movs r2, 0
 	strh r2, [r1]
-	ldr r0, _08009CBC @ =gUnknown_3003ED0
+	ldr r0, _08009CBC @ =gRecvCmds
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r0, [r0]
 	strh r0, [r1, 0x2]
-	ldr r0, _08009CBC @ =gUnknown_3003ED0
+	ldr r0, _08009CBC @ =gRecvCmds
 	adds r0, 0x4
 	adds r0, r4, r0
 	ldrh r0, [r0]
@@ -1019,7 +1019,7 @@ _08009C94:
 	b _08009E3E
 	.align 2, 0
 _08009CB8: .4byte gUnknown_3000E18
-_08009CBC: .4byte gUnknown_3003ED0
+_08009CBC: .4byte gRecvCmds
 _08009CC0:
 	mov r3, r12
 	adds r0, r3, r6
@@ -1037,7 +1037,7 @@ _08009CC0:
 	mov r8, r0
 	movs r2, 0
 	adds r5, r3, 0
-	ldr r7, _08009D0C @ =gUnknown_3003ED0
+	ldr r7, _08009D0C @ =gRecvCmds
 	adds r3, r4, 0
 _08009CE4:
 	ldrh r1, [r5]
@@ -1059,13 +1059,13 @@ _08009CE4:
 	.align 2, 0
 _08009D04: .4byte gUnknown_3000E18
 _08009D08: .4byte gDecompressionBuffer
-_08009D0C: .4byte gUnknown_3003ED0
+_08009D0C: .4byte gRecvCmds
 _08009D10:
 	movs r2, 0
 	ldr r1, _08009DC4 @ =gBlockRecvBuffer
 	mov r9, r1
 	adds r7, r3, 0
-	ldr r3, _08009DC8 @ =gUnknown_3003ED0
+	ldr r3, _08009DC8 @ =gRecvCmds
 	mov r8, r3
 	lsls r5, r6, 8
 	adds r3, r4, 0
@@ -1153,7 +1153,7 @@ _08009DBC:
 	b _08009E3E
 	.align 2, 0
 _08009DC4: .4byte gBlockRecvBuffer
-_08009DC8: .4byte gUnknown_3003ED0
+_08009DC8: .4byte gRecvCmds
 _08009DCC: .4byte gUnknown_3003EB8
 _08009DD0: .4byte gLinkPlayers
 _08009DD4: .4byte gUnknown_82345C0
@@ -1187,7 +1187,7 @@ _08009E08:
 	b _08009E3E
 _08009E0E:
 	ldr r3, _08009E2C @ =gUnknown_8234598
-	ldr r0, _08009E30 @ =gUnknown_3003ED0
+	ldr r0, _08009E30 @ =gRecvCmds
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r2, [r0]
@@ -1202,9 +1202,9 @@ _08009E0E:
 	b _08009E3E
 	.align 2, 0
 _08009E2C: .4byte gUnknown_8234598
-_08009E30: .4byte gUnknown_3003ED0
+_08009E30: .4byte gRecvCmds
 _08009E34:
-	ldr r0, _08009E5C @ =gUnknown_3003ED0
+	ldr r0, _08009E5C @ =gRecvCmds
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r0, [r0]
@@ -1226,7 +1226,7 @@ _08009E4A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08009E5C: .4byte gUnknown_3003ED0
+_08009E5C: .4byte gRecvCmds
 	thumb_func_end sub_8009B70
 
 	thumb_func_start sub_8009E60
@@ -3779,7 +3779,7 @@ HandleLinkConnection: @ 800B178
 	bne _0800B1C8
 	ldr r0, _0800B1B4 @ =gUnknown_3003F84
 	ldr r1, _0800B1B8 @ =gUnknown_3003F50
-	ldr r2, _0800B1BC @ =gUnknown_3003ED0
+	ldr r2, _0800B1BC @ =gRecvCmds
 	bl LinkMain1
 	ldr r4, _0800B1C0 @ =gUnknown_3003F20
 	str r0, [r4]
@@ -3801,7 +3801,7 @@ _0800B1AA:
 _0800B1B0: .4byte gWirelessCommType
 _0800B1B4: .4byte gUnknown_3003F84
 _0800B1B8: .4byte gUnknown_3003F50
-_0800B1BC: .4byte gUnknown_3003ED0
+_0800B1BC: .4byte gRecvCmds
 _0800B1C0: .4byte gUnknown_3003F20
 _0800B1C4: .4byte gMain + 0x2C
 _0800B1C8:

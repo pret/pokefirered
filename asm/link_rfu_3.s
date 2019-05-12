@@ -7477,7 +7477,7 @@ _08119900: .4byte gSpecialVar_Result
 sub_8119904: @ 8119904
 	push {r4,r5,lr}
 	adds r2, r0, 0
-	ldr r3, _08119940 @ =gUnknown_3003ED0
+	ldr r3, _08119940 @ =gRecvCmds
 	ldrh r5, [r3, 0x12]
 	adds r4, r5, 0
 	cmp r4, 0
@@ -7506,7 +7506,7 @@ _08119938:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08119940: .4byte gUnknown_3003ED0
+_08119940: .4byte gRecvCmds
 	thumb_func_end sub_8119904
 
 	thumb_func_start sub_8119944
@@ -10578,7 +10578,7 @@ _0811B0A0: .4byte gUnknown_8457E0C
 sub_811B0A4: @ 811B0A4
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, _0811B0C4 @ =gUnknown_3003ED0
+	ldr r0, _0811B0C4 @ =gRecvCmds
 	ldrh r1, [r0, 0x2]
 	cmp r1, 0
 	beq _0811B0C8
@@ -10593,7 +10593,7 @@ _0811B0B8:
 	movs r0, 0x1
 	b _0811B0CA
 	.align 2, 0
-_0811B0C4: .4byte gUnknown_3003ED0
+_0811B0C4: .4byte gRecvCmds
 _0811B0C8:
 	movs r0, 0
 _0811B0CA:

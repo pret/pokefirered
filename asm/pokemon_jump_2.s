@@ -4313,7 +4313,7 @@ sub_8149A90: @ 8149A90
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r1, 0
-	ldr r3, _08149AC4 @ =gUnknown_3003ED0
+	ldr r3, _08149AC4 @ =gRecvCmds
 	lsls r2, r0, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -4337,7 +4337,7 @@ _08149AC0:
 	movs r0, 0
 	b _08149AD8
 	.align 2, 0
-_08149AC4: .4byte gUnknown_3003ED0
+_08149AC4: .4byte gRecvCmds
 _08149AC8:
 	mov r0, sp
 	ldrh r0, [r0, 0x2]
@@ -4443,7 +4443,7 @@ sub_8149B7C: @ 8149B7C
 	sub sp, 0xC
 	adds r5, r0, 0
 	adds r4, r1, 0
-	ldr r2, _08149BE4 @ =gUnknown_3003ED0
+	ldr r2, _08149BE4 @ =gRecvCmds
 	ldrh r0, [r2]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -4491,7 +4491,7 @@ sub_8149B7C: @ 8149B7C
 	movs r0, 0x1
 	b _08149BEA
 	.align 2, 0
-_08149BE4: .4byte gUnknown_3003ED0
+_08149BE4: .4byte gRecvCmds
 _08149BE8:
 	movs r0, 0
 _08149BEA:
@@ -4534,7 +4534,7 @@ sub_8149C24: @ 8149C24
 	adds r4, r0, 0
 	adds r5, r2, 0
 	adds r6, r3, 0
-	ldr r3, _08149C80 @ =gUnknown_3003ED0
+	ldr r3, _08149C80 @ =gRecvCmds
 	lsls r2, r1, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -4575,7 +4575,7 @@ sub_8149C24: @ 8149C24
 	movs r0, 0x1
 	b _08149C86
 	.align 2, 0
-_08149C80: .4byte gUnknown_3003ED0
+_08149C80: .4byte gRecvCmds
 _08149C84:
 	movs r0, 0
 _08149C86:
@@ -4590,7 +4590,7 @@ sub_8149C90: @ 8149C90
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
-	ldr r3, _08149CDC @ =gUnknown_3003ED0
+	ldr r3, _08149CDC @ =gRecvCmds
 	lsls r2, r1, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -4625,7 +4625,7 @@ sub_8149C90: @ 8149C90
 	movs r0, 0x1
 	b _08149CE2
 	.align 2, 0
-_08149CDC: .4byte gUnknown_3003ED0
+_08149CDC: .4byte gRecvCmds
 _08149CE0:
 	movs r0, 0
 _08149CE2:

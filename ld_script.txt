@@ -258,7 +258,8 @@ SECTIONS {
         asm/dodrio_berry_picking.o(.text);
         asm/battle_controller_pokedude.o(.text);
         src/unk_8159F40.o(.text);
-        asm/unk_8159F40.o(.text);
+        src/dodrio_berry_picking_2.o(.text);
+        asm/dodrio_berry_picking_2.o(.text);
         asm/teachy_tv.o(.text);
         asm/unk_815C27C.o(.text);
         asm/unk_815C980.o(.text);

@@ -1,0 +1,196 @@
+{
+  "id": "MAP_VIRIDIAN_CITY_GYM",
+  "name": "ViridianCity_Gym",
+  "layout": "LAYOUT_VIRIDIAN_CITY_GYM",
+  "music": "BGM_FRLG_GYM",
+  "region_map_section": "MAPSEC_VIRIDIAN_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_1",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "54",
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "ViridianCity_Gym_EventScript_169FD6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "41",
+      "x": 12,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "ViridianCity_Gym_EventScript_16A004",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "54",
+      "x": 11,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "ViridianCity_Gym_EventScript_169FA8",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "25",
+      "x": 10,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "ViridianCity_Gym_EventScript_169F7A",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "25",
+      "x": 2,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "ViridianCity_Gym_EventScript_169F91",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "54",
+      "x": 3,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "ViridianCity_Gym_EventScript_169FBF",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "41",
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "ViridianCity_Gym_EventScript_169FED",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "87",
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ViridianCity_Gym_EventScript_169ECA",
+      "flag": "85"
+    },
+    {
+      "graphics_id": "41",
+      "x": 13,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "ViridianCity_Gym_EventScript_16A01B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "91",
+      "x": 16,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ViridianCity_Gym_EventScript_16A032",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 16,
+      "y": 22,
+      "elevation": 3,
+      "dest_map": "MAP_VIRIDIAN_CITY",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 17,
+      "y": 22,
+      "elevation": 3,
+      "dest_map": "MAP_VIRIDIAN_CITY",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 18,
+      "y": 22,
+      "elevation": 3,
+      "dest_map": "MAP_VIRIDIAN_CITY",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 15,
+      "y": 20,
+      "elevation": 0,
+      "script": "ViridianCity_Gym_EventScript_16A05E"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 19,
+      "y": 20,
+      "elevation": 0,
+      "script": "ViridianCity_Gym_EventScript_16A05E"
+    },
+    {
+      "type": "hidden_item",
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "item": "ITEM_MACHO_BRACE",
+      "flag": "189",
+      "unknown": 129
+    }
+  ]
+}

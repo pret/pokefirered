@@ -1,0 +1,67 @@
+{
+  "id": "MAP_ROUTE5",
+  "name": "Route5",
+  "layout": "LAYOUT_ROUTE5",
+  "music": "BGM_FRLG_ROUTE_3",
+  "region_map_section": "MAPSEC_ROUTE_5",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_CERULEAN_CITY",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_SAFFRON_CITY",
+      "offset": 0,
+      "direction": "down"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 31,
+      "y": 31,
+      "elevation": 0,
+      "dest_map": "MAP_UNDERGROUND_PATH_NORTH_ENTRANCE",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 23,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE5_POKEMON_DAY_CARE",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 24,
+      "y": 32,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE5_SOUTH_ENTRANCE",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 25,
+      "y": 32,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE5_SOUTH_ENTRANCE",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 32,
+      "y": 32,
+      "elevation": 0,
+      "script": "Route5_EventScript_167FA8"
+    }
+  ]
+}

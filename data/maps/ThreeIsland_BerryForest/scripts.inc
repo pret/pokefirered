@@ -4,7 +4,7 @@ ThreeIsland_BerryForest_MapScripts:: @ 8163C71
 
 ThreeIsland_BerryForest_MapScript1_163C77:: @ 8163C77
     setworldmapflag 2231
-    setescapewarp MAP_THREE_ISLAND_BONDBRIDGE, 255, 12, 6
+    setescapewarp MAP_THREE_ISLAND_BOND_BRIDGE, 255, 12, 6
     end
 
 ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
@@ -45,7 +45,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
     setflag FLAG_0x07A
     setvar VAR_0x4079, 2
     clearflag FLAG_0x075
-    warp MAP_TWO_ISLAND_JOYFULGAMECORNER, 255, 6, 6
+    warp MAP_TWO_ISLAND_JOYFUL_GAME_CORNER, 255, 6, 6
     waitstate
     release
     end

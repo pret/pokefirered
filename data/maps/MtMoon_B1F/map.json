@@ -1,0 +1,131 @@
+{
+  "id": "MAP_MT_MOON_B1F",
+  "name": "MtMoon_B1F",
+  "layout": "LAYOUT_MT_MOON_B1F",
+  "music": "BGM_FRLG_MT_MOON",
+  "region_map_section": "MAPSEC_MT_MOON",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 1,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 25,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 43,
+      "y": 21,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_1F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 22,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_B2F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 17,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_B2F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 26,
+      "y": 36,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_B2F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 39,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_B2F",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 45,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE4",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 46,
+      "y": 2,
+      "elevation": 0,
+      "item": "ITEM_TINY_MUSHROOM",
+      "flag": "84",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 26,
+      "y": 2,
+      "elevation": 0,
+      "item": "ITEM_TINY_MUSHROOM",
+      "flag": "85",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 39,
+      "y": 34,
+      "elevation": 0,
+      "item": "ITEM_TINY_MUSHROOM",
+      "flag": "86",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 24,
+      "y": 35,
+      "elevation": 0,
+      "item": "ITEM_BIG_MUSHROOM",
+      "flag": "87",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 6,
+      "y": 12,
+      "elevation": 0,
+      "item": "ITEM_BIG_MUSHROOM",
+      "flag": "88",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 25,
+      "y": 34,
+      "elevation": 0,
+      "item": "ITEM_BIG_MUSHROOM",
+      "flag": "89",
+      "unknown": 1
+    }
+  ]
+}

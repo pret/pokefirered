@@ -34,7 +34,7 @@ EventScript_164C52:: @ 8164C52
     callstd 4
     closemessage
     call EventScript_164CA5
-    warp MAP_FIVE_ISLAND_RESORTGORGEOUS, 255, 39, 10
+    warp MAP_FIVE_ISLAND_RESORT_GORGEOUS, 255, 39, 10
     waitstate
     releaseall
     end

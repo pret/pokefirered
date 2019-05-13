@@ -1,0 +1,290 @@
+{
+  "id": "MAP_POKEMON_TOWER_5F",
+  "name": "PokemonTower_5F",
+  "layout": "LAYOUT_POKEMON_TOWER_5F",
+  "music": "BGM_FRLG_POKEMON_TOWER",
+  "region_map_section": "MAPSEC_POKEMON_TOWER",
+  "requires_flash": false,
+  "weather": "WEATHER_6",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 5,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_2",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "58",
+      "x": 11,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "PokemonTower_5F_EventScript_163472",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "58",
+      "x": 19,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "PokemonTower_5F_EventScript_16345B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "58",
+      "x": 7,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "PokemonTower_5F_EventScript_163489",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "58",
+      "x": 11,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "PokemonTower_5F_EventScript_1634A0",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "58",
+      "x": 12,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonTower_5F_EventScript_163433",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 6,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonTower_5F_EventScript_1BE789",
+      "flag": "379"
+    },
+    {
+      "graphics_id": "92",
+      "x": 11,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonTower_5F_EventScript_1BEBB3",
+      "flag": "464"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_POKEMON_TOWER_4F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 18,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_POKEMON_TOWER_6F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "PokemonTower_5F_EventScript_16343C"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "PokemonTower_5F_EventScript_16343C"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "PokemonTower_5F_EventScript_16343C"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "PokemonTower_5F_EventScript_16343C"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 1,
+      "script": "PokemonTower_5F_EventScript_163453"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "PokemonTower_5F_EventScript_16343C"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "PokemonTower_5F_EventScript_16343C"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "PokemonTower_5F_EventScript_16343C"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "PokemonTower_5F_EventScript_16343C"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 1,
+      "script": "PokemonTower_5F_EventScript_163453"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 1,
+      "script": "PokemonTower_5F_EventScript_163453"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 1,
+      "script": "PokemonTower_5F_EventScript_163453"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 1,
+      "script": "PokemonTower_5F_EventScript_163453"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_0x4001",
+      "var_value": 1,
+      "script": "PokemonTower_5F_EventScript_163453"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_0x4001",
+      "var_value": 1,
+      "script": "PokemonTower_5F_EventScript_163453"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_0x4001",
+      "var_value": 1,
+      "script": "PokemonTower_5F_EventScript_163453"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_0x4001",
+      "var_value": 1,
+      "script": "PokemonTower_5F_EventScript_163453"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 7,
+      "y": 3,
+      "elevation": 3,
+      "item": "ITEM_BIG_MUSHROOM",
+      "flag": "14",
+      "unknown": 1
+    }
+  ]
+}

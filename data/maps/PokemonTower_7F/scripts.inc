@@ -13,7 +13,7 @@ PokemonTower_7F_EventScript_16355A:: @ 816355A
     loadword 0, gUnknown_817A529
     callstd 4
     closemessage
-    warp MAP_LAVENDER_TOWN_VOLUNTEERPOKEMONHOUSE, 255, 4, 7
+    warp MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 255, 4, 7
     waitstate
     release
     end

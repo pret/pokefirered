@@ -1,0 +1,107 @@
+{
+  "id": "MAP_FIVE_ISLAND",
+  "name": "FiveIsland",
+  "layout": "LAYOUT_FIVE_ISLAND",
+  "music": "BGM_FRLG_ISLAND_FOUR",
+  "region_map_section": "MAPSEC_FIVE_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_1",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_FIVE_ISLAND_WATER_LABYRINTH",
+      "offset": -48,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_FIVE_ISLAND_MEADOW",
+      "offset": 0,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "57",
+      "x": 8,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "FiveIsland_EventScript_167EAA",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "20",
+      "x": 16,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "FiveIsland_EventScript_167EA1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "65375",
+      "x": 32,
+      "y": 9,
+      "elevation": 4,
+      "movement_type": "0",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 56,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "0x0",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_FIVE_ISLAND_HARBOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 18,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_FIVE_ISLAND_POKEMON_CENTER_1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 12,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_FIVE_ISLAND_HOUSE1",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 22,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_FIVE_ISLAND_HOUSE2",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 20,
+      "y": 8,
+      "elevation": 0,
+      "script": "FiveIsland_EventScript_167E98"
+    }
+  ]
+}

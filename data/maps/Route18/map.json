@@ -1,0 +1,100 @@
+{
+  "id": "MAP_ROUTE18",
+  "name": "Route18",
+  "layout": "LAYOUT_ROUTE18",
+  "music": "BGM_FRLG_ROUTE_3",
+  "region_map_section": "MAPSEC_ROUTE_18",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_ROUTE17",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_FUCHSIA_CITY",
+      "offset": -10,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "26",
+      "x": 46,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "Route18_EventScript_1AB3D3",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "26",
+      "x": 41,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "Route18_EventScript_1AB395",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "26",
+      "x": 39,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 6,
+      "script": "Route18_EventScript_1AB357",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 41,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE18_EAST_ENTRANCE_1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 48,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE18_EAST_ENTRANCE_1F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 37,
+      "y": 7,
+      "elevation": 0,
+      "script": "Route18_EventScript_168228"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 52,
+      "y": 7,
+      "elevation": 0,
+      "script": "Route18_EventScript_16821F"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "MAP_PALLET_TOWN_PLAYERS_HOUSE_2F",
+  "name": "PalletTown_PlayersHouse_2F",
+  "layout": "LAYOUT_PALLET_TOWN_PLAYERS_HOUSE_2F",
+  "music": "BGM_FRLG_PALLET_TOWN",
+  "region_map_section": "MAPSEC_PALLET_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_PALLET_TOWN_PLAYERS_HOUSE_1F",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 6,
+      "y": 5,
+      "elevation": 3,
+      "script": "PalletTown_PlayersHouse_2F_EventScript_168CD2"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 1,
+      "y": 1,
+      "elevation": 0,
+      "script": "PalletTown_PlayersHouse_2F_EventScript_168CE4"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 11,
+      "y": 1,
+      "elevation": 0,
+      "script": "PalletTown_PlayersHouse_2F_EventScript_168CDB"
+    }
+  ]
+}

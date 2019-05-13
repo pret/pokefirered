@@ -367,6 +367,7 @@ SECTIONS {
         src/util.o(.rodata);
         src/daycare.o(.rodata);
         data/data.o(.rodata.825EF0C);
+        data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);

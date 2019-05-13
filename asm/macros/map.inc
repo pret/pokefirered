@@ -53,6 +53,10 @@
 	inc _num_signs
 	.endm
 
+	.macro bg_hidden_item_event x, y, height, item, flag, unknown
+	bg_event \x, \y, \height, 7, 0, \item, \flag, \unknown
+	.endm
+
 	.macro map_events npcs, warps, traps, signs
 	.byte _num_npcs, _num_warps, _num_traps, _num_signs
 	.4byte \npcs, \warps, \traps, \signs

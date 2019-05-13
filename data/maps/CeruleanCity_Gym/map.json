@@ -1,0 +1,109 @@
+{
+  "id": "MAP_CERULEAN_CITY_GYM",
+  "name": "CeruleanCity_Gym",
+  "layout": "LAYOUT_CERULEAN_CITY_GYM",
+  "music": "BGM_FRLG_GYM",
+  "region_map_section": "MAPSEC_CERULEAN_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_1",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "43",
+      "x": 10,
+      "y": 12,
+      "elevation": 0,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "CeruleanCity_Gym_EventScript_16AB5B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "40",
+      "x": 4,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "CeruleanCity_Gym_EventScript_16AB44",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "81",
+      "x": 8,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCity_Gym_EventScript_16AAA1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "91",
+      "x": 7,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCity_Gym_EventScript_16AB7F",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CITY",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 8,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CITY",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 9,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CITY",
+      "dest_warp_id": 4
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 6,
+      "y": 17,
+      "elevation": 0,
+      "script": "CeruleanCity_Gym_EventScript_16AB9E"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 10,
+      "y": 17,
+      "elevation": 0,
+      "script": "CeruleanCity_Gym_EventScript_16AB9E"
+    }
+  ]
+}

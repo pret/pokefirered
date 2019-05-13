@@ -1,0 +1,147 @@
+{
+  "id": "MAP_LAVENDER_TOWN",
+  "name": "LavenderTown",
+  "layout": "LAYOUT_LAVENDER_TOWN",
+  "music": "BGM_FRLG_LAVENDER_TOWN",
+  "region_map_section": "MAPSEC_LAVENDER_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_1",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_ROUTE10",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_ROUTE12",
+      "offset": 0,
+      "direction": "down"
+    },
+    {
+      "map": "MAP_ROUTE8",
+      "offset": 0,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "17",
+      "x": 19,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LavenderTown_EventScript_16687D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "47",
+      "x": 12,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LavenderTown_EventScript_1668A6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "19",
+      "x": 10,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "14",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "LavenderTown_EventScript_1668AF",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 18,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_POKEMON_TOWER_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_LAVENDER_TOWN_POKEMON_CENTER_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 10,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 5,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_LAVENDER_TOWN_HOUSE1",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 10,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_LAVENDER_TOWN_HOUSE2",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 20,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_LAVENDER_TOWN_MART",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 4,
+      "elevation": 0,
+      "script": "LavenderTown_EventScript_1668C1"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 15,
+      "y": 11,
+      "elevation": 0,
+      "script": "LavenderTown_EventScript_1668B8"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 21,
+      "y": 7,
+      "elevation": 0,
+      "script": "LavenderTown_EventScript_1668D3"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 7,
+      "y": 11,
+      "elevation": 0,
+      "script": "LavenderTown_EventScript_1668CA"
+    }
+  ]
+}

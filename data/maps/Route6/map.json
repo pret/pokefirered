@@ -1,0 +1,157 @@
+{
+  "id": "MAP_ROUTE6",
+  "name": "Route6",
+  "layout": "LAYOUT_ROUTE6",
+  "music": "BGM_FRLG_ROUTE_3",
+  "region_map_section": "MAPSEC_ROUTE_6",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_SAFFRON_CITY",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_VERMILION_CITY",
+      "offset": -12,
+      "direction": "down"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "20",
+      "x": 3,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 5,
+      "script": "Route6_EventScript_1A9999",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "39",
+      "x": 12,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route6_EventScript_1A9A15",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "40",
+      "x": 13,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route6_EventScript_1A9A91",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "20",
+      "x": 20,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route6_EventScript_1A99D7",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "40",
+      "x": 13,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route6_EventScript_1A9ACF",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "39",
+      "x": 13,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route6_EventScript_1A9A53",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 19,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_UNDERGROUND_PATH_SOUTH_ENTRANCE",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 12,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 21,
+      "y": 15,
+      "elevation": 0,
+      "script": "Route6_EventScript_167FB2"
+    },
+    {
+      "type": "hidden_item",
+      "x": 5,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_SITRUS_BERRY",
+      "flag": "118",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 19,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_RARE_CANDY",
+      "flag": "119",
+      "unknown": 1
+    }
+  ]
+}

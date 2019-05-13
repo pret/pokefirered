@@ -1,0 +1,227 @@
+{
+  "id": "MAP_VERMILION_CITY_GYM",
+  "name": "VermilionCity_Gym",
+  "layout": "LAYOUT_VERMILION_CITY_GYM",
+  "music": "BGM_FRLG_GYM",
+  "region_map_section": "MAPSEC_VERMILION_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_1",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "82",
+      "x": 5,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VermilionCity_Gym_EventScript_16B94A",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "30",
+      "x": 2,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "VermilionCity_Gym_EventScript_16BA1E",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "62",
+      "x": 8,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "VermilionCity_Gym_EventScript_16B9FA",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "91",
+      "x": 4,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VermilionCity_Gym_EventScript_16BA6C",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "61",
+      "x": 7,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "VermilionCity_Gym_EventScript_16BA35",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 19,
+      "elevation": 3,
+      "dest_map": "MAP_VERMILION_CITY",
+      "dest_warp_id": 9
+    },
+    {
+      "x": 5,
+      "y": 19,
+      "elevation": 3,
+      "dest_map": "MAP_VERMILION_CITY",
+      "dest_warp_id": 9
+    },
+    {
+      "x": 6,
+      "y": 19,
+      "elevation": 3,
+      "dest_map": "MAP_VERMILION_CITY",
+      "dest_warp_id": 9
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 3,
+      "y": 17,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16BA8B"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 7,
+      "y": 17,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16BA8B"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 1,
+      "y": 10,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B78F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 3,
+      "y": 10,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B79B"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 5,
+      "y": 10,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B7A7"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 7,
+      "y": 10,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B7B3"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 9,
+      "y": 10,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B7BF"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 1,
+      "y": 12,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B7CB"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 3,
+      "y": 12,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B7D7"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 5,
+      "y": 12,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B7E3"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 7,
+      "y": 12,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B7EF"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 9,
+      "y": 12,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B7FB"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 1,
+      "y": 14,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B807"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 3,
+      "y": 14,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B813"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 5,
+      "y": 14,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B81F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 7,
+      "y": 14,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B82B"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 9,
+      "y": 14,
+      "elevation": 0,
+      "script": "VermilionCity_Gym_EventScript_16B837"
+    }
+  ]
+}

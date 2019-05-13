@@ -1,0 +1,194 @@
+{
+  "id": "MAP_TWO_ISLAND",
+  "name": "TwoIsland",
+  "layout": "LAYOUT_TWO_ISLAND",
+  "music": "BGM_FRLG_ISLAND_ONE",
+  "region_map_section": "MAPSEC_TWO_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_1",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_TWO_ISLAND_CAPE_BRINK",
+      "offset": 24,
+      "direction": "up"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "68",
+      "x": 28,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 2,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "TwoIsland_EventScript_16760F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "23",
+      "x": 31,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "TwoIsland_EventScript_167755",
+      "flag": "123"
+    },
+    {
+      "graphics_id": "29",
+      "x": 30,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "TwoIsland_EventScript_16775E",
+      "flag": "124"
+    },
+    {
+      "graphics_id": "62",
+      "x": 26,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "TwoIsland_EventScript_16774C",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "52",
+      "x": 27,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "TwoIsland_EventScript_167777",
+      "flag": "125"
+    },
+    {
+      "graphics_id": "95",
+      "x": 30,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "TwoIsland_EventScript_1BDF13",
+      "flag": "18"
+    },
+    {
+      "graphics_id": "92",
+      "x": 39,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "TwoIsland_EventScript_1BEAAF",
+      "flag": "442"
+    },
+    {
+      "graphics_id": "16",
+      "x": 37,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "TwoIsland_EventScript_167789",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "19",
+      "x": 24,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "TwoIsland_EventScript_167780",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 39,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_TWO_ISLAND_JOYFUL_GAME_CORNER",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 33,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_TWO_ISLAND_HOUSE",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 21,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_TWO_ISLAND_POKEMON_CENTER_1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_TWO_ISLAND_HARBOR",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 29,
+      "y": 8,
+      "elevation": 0,
+      "script": "TwoIsland_EventScript_167792"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 40,
+      "y": 10,
+      "elevation": 0,
+      "script": "TwoIsland_EventScript_16779B"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 8,
+      "y": 3,
+      "elevation": 0,
+      "script": "TwoIsland_EventScript_1677A4"
+    }
+  ]
+}

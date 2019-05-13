@@ -1,0 +1,216 @@
+{
+  "id": "MAP_SILPH_CO_3F",
+  "name": "SilphCo_3F",
+  "layout": "LAYOUT_SILPH_CO_3F",
+  "music": "BGM_FRLG_SILPH",
+  "region_map_section": "MAPSEC_SILPH_CO",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 7,
+  "elevator_flag": 3,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "49",
+      "x": 25,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SilphCo_3F_EventScript_16171F",
+      "flag": "83"
+    },
+    {
+      "graphics_id": "47",
+      "x": 31,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_3F_EventScript_1616DE",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "55",
+      "x": 4,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_3F_EventScript_161708",
+      "flag": "83"
+    },
+    {
+      "graphics_id": "92",
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_3F_EventScript_1BE866",
+      "flag": "396"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 28,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_2F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_5F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 13,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_7F",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 30,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_4F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 2,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_9F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 3,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_5F",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 29,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_3F",
+      "dest_warp_id": 7
+    },
+    {
+      "x": 32,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_3F",
+      "dest_warp_id": 6
+    },
+    {
+      "x": 33,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_2F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 22,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_SILPH_CO_ELEVATOR",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 10,
+      "y": 12,
+      "elevation": 3,
+      "script": "SilphCo_3F_EventScript_1A894F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 10,
+      "y": 13,
+      "elevation": 3,
+      "script": "SilphCo_3F_EventScript_1A894F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 21,
+      "y": 12,
+      "elevation": 3,
+      "script": "SilphCo_3F_EventScript_1A8969"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 21,
+      "y": 13,
+      "elevation": 3,
+      "script": "SilphCo_3F_EventScript_1A8969"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 9,
+      "y": 12,
+      "elevation": 3,
+      "script": "SilphCo_3F_EventScript_1A894F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 9,
+      "y": 13,
+      "elevation": 3,
+      "script": "SilphCo_3F_EventScript_1A894F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 20,
+      "y": 12,
+      "elevation": 3,
+      "script": "SilphCo_3F_EventScript_1A8969"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 20,
+      "y": 13,
+      "elevation": 3,
+      "script": "SilphCo_3F_EventScript_1A8969"
+    },
+    {
+      "type": "hidden_item",
+      "x": 34,
+      "y": 18,
+      "elevation": 0,
+      "item": "ITEM_PROTEIN",
+      "flag": "136",
+      "unknown": 1
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 29,
+      "y": 1,
+      "elevation": 0,
+      "script": "SilphCo_3F_EventScript_1616FF"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "id": "MAP_CELADON_CITY_DEPARTMENT_STORE_ROOF",
+  "name": "CeladonCity_DepartmentStore_Roof",
+  "layout": "LAYOUT_CELADON_CITY_DEPARTMENT_STORE_ROOF",
+  "music": "BGM_FRLG_POKEMON_CENTER",
+  "region_map_section": "MAPSEC_CELADON_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 4,
+  "elevator_flag": 127,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "41",
+      "x": 9,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C022",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "17",
+      "x": 5,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16BCCD",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 15,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_CELADON_CITY_DEPARTMENT_STORE_5F",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 14,
+      "y": 3,
+      "elevation": 0,
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C02B"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 10,
+      "y": 3,
+      "elevation": 0,
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C034"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 11,
+      "y": 3,
+      "elevation": 0,
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C034"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 3,
+      "elevation": 0,
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C034"
+    }
+  ]
+}

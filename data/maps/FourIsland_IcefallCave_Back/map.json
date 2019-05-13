@@ -1,0 +1,108 @@
+{
+  "id": "MAP_FOUR_ISLAND_ICEFALL_CAVE_BACK",
+  "name": "FourIsland_IcefallCave_Back",
+  "layout": "LAYOUT_FOUR_ISLAND_ICEFALL_CAVE_BACK",
+  "music": "BGM_FRLG_MT_EMBER",
+  "region_map_section": "MAPSEC_ICEFALL_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 1,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "49",
+      "x": 11,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "141"
+    },
+    {
+      "graphics_id": "49",
+      "x": 13,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "141"
+    },
+    {
+      "graphics_id": "77",
+      "x": 12,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_CaptainsOffice3_EventScript_163F25",
+      "flag": "139"
+    },
+    {
+      "graphics_id": "49",
+      "x": 10,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "141"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_FOUR_ISLAND_ICEFALL_CAVE_1F",
+      "dest_warp_id": 5
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_0x4080",
+      "var_value": 0,
+      "script": "SSAnne_CaptainsOffice3_EventScript_163D98"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_0x4080",
+      "var_value": 0,
+      "script": "SSAnne_CaptainsOffice3_EventScript_163D98"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_0x4080",
+      "var_value": 0,
+      "script": "SSAnne_CaptainsOffice3_EventScript_163D98"
+    }
+  ],
+  "bg_events": []
+}

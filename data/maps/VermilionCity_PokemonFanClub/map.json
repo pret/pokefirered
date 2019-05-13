@@ -1,0 +1,135 @@
+{
+  "id": "MAP_VERMILION_CITY_POKEMON_FAN_CLUB",
+  "name": "VermilionCity_PokemonFanClub",
+  "layout": "LAYOUT_VERMILION_CITY_POKEMON_FAN_CLUB",
+  "music": "BGM_FRLG_VERMILION_CITY",
+  "region_map_section": "MAPSEC_VERMILION_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "61",
+      "x": 5,
+      "y": 4,
+      "elevation": 4,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VermilionCity_PokemonFanClub_EventScript_16B47F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "48",
+      "x": 6,
+      "y": 4,
+      "elevation": 4,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VermilionCity_PokemonFanClub_EventScript_16B4FC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "120",
+      "x": 7,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VermilionCity_PokemonFanClub_EventScript_16B59E",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "126",
+      "x": 4,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VermilionCity_PokemonFanClub_EventScript_16B5B1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "23",
+      "x": 4,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VermilionCity_PokemonFanClub_EventScript_16B528",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "27",
+      "x": 7,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VermilionCity_PokemonFanClub_EventScript_16B563",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_VERMILION_CITY",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 5,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_VERMILION_CITY",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_VERMILION_CITY",
+      "dest_warp_id": 5
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "script": "VermilionCity_PokemonFanClub_EventScript_16B5C4"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 9,
+      "y": 1,
+      "elevation": 0,
+      "script": "VermilionCity_PokemonFanClub_EventScript_16B5CD"
+    }
+  ]
+}

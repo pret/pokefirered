@@ -1,0 +1,144 @@
+{
+  "id": "MAP_SIX_ISLAND_OUTCAST_ISLAND",
+  "name": "SixIsland_OutcastIsland",
+  "layout": "LAYOUT_SIX_ISLAND_OUTCAST_ISLAND",
+  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "region_map_section": "MAPSEC_OUTCAST_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_SIX_ISLAND_GREEN_PATH",
+      "offset": 0,
+      "direction": "down"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "49",
+      "x": 9,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_OutcastIsland_EventScript_168B16",
+      "flag": "136"
+    },
+    {
+      "graphics_id": "57",
+      "x": 12,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_OutcastIsland_EventScript_1AC3D1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "43",
+      "x": 13,
+      "y": 34,
+      "elevation": 1,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_OutcastIsland_EventScript_1AC40F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "44",
+      "x": 14,
+      "y": 61,
+      "elevation": 1,
+      "movement_type": "50",
+      "movement_range_x": 2,
+      "movement_range_y": 4,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_OutcastIsland_EventScript_1AC44D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "44",
+      "x": 10,
+      "y": 44,
+      "elevation": 1,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_OutcastIsland_EventScript_1AC48B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "36",
+      "x": 11,
+      "y": 44,
+      "elevation": 1,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_OutcastIsland_EventScript_1AC4D1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 11,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_OutcastIsland_EventScript_1BEC90",
+      "flag": "481"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 21,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_ALTERING_CAVE",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 16,
+      "y": 23,
+      "elevation": 3,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "178",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 6,
+      "y": 24,
+      "elevation": 3,
+      "item": "ITEM_NET_BALL",
+      "flag": "179",
+      "unknown": 1
+    }
+  ]
+}

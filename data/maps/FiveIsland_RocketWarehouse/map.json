@@ -1,0 +1,366 @@
+{
+  "id": "MAP_FIVE_ISLAND_ROCKET_WAREHOUSE",
+  "name": "FiveIsland_RocketWarehouse",
+  "layout": "LAYOUT_FIVE_ISLAND_ROCKET_WAREHOUSE",
+  "music": "BGM_FRLG_ROCKET_HIDEOUT",
+  "region_map_section": "MAPSEC_ROCKET_WAREHOUSE",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 5,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_3",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "49",
+      "x": 15,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "17",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163FE6",
+      "flag": "136"
+    },
+    {
+      "graphics_id": "49",
+      "x": 17,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163FFD",
+      "flag": "136"
+    },
+    {
+      "graphics_id": "50",
+      "x": 27,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SSAnne_CaptainsOffice4_EventScript_164087",
+      "flag": "136"
+    },
+    {
+      "graphics_id": "49",
+      "x": 25,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SSAnne_CaptainsOffice4_EventScript_164014",
+      "flag": "136"
+    },
+    {
+      "graphics_id": "50",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "16",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SSAnne_CaptainsOffice4_EventScript_164070",
+      "flag": "136"
+    },
+    {
+      "graphics_id": "55",
+      "x": 27,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F93",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 8,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_1BED87",
+      "flag": "500"
+    },
+    {
+      "graphics_id": "92",
+      "x": 17,
+      "y": 3,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_1BED94",
+      "flag": "501"
+    },
+    {
+      "graphics_id": "92",
+      "x": 1,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_1BEDA1",
+      "flag": "502"
+    },
+    {
+      "graphics_id": "92",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_1BEDAE",
+      "flag": "503"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 24,
+      "y": 25,
+      "elevation": 3,
+      "dest_map": "MAP_FIVE_ISLAND_MEADOW",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_0x4088",
+      "var_value": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F81"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_0x4088",
+      "var_value": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F81"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_0x4088",
+      "var_value": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F81"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 11,
+      "y": 2,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_3",
+      "x": 26,
+      "y": 11,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F78"
+    },
+    {
+      "type": "hidden_item",
+      "x": 27,
+      "y": 2,
+      "elevation": 0,
+      "item": "ITEM_NEST_BALL",
+      "flag": "68",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 7,
+      "y": 16,
+      "elevation": 0,
+      "item": "ITEM_NET_BALL",
+      "flag": "69",
+      "unknown": 1
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 2,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 10,
+      "y": 2,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 9,
+      "y": 2,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 8,
+      "y": 2,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 7,
+      "y": 2,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 11,
+      "y": 5,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 10,
+      "y": 5,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 11,
+      "y": 4,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 10,
+      "y": 4,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 8,
+      "y": 4,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 7,
+      "y": 4,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 8,
+      "y": 5,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 7,
+      "y": 5,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 5,
+      "y": 3,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 4,
+      "y": 3,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 5,
+      "y": 4,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 4,
+      "y": 4,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 3,
+      "y": 4,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 2,
+      "y": 4,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 2,
+      "y": 5,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 3,
+      "y": 5,
+      "elevation": 0,
+      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+    }
+  ]
+}

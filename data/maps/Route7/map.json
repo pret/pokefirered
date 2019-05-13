@@ -1,0 +1,76 @@
+{
+  "id": "MAP_ROUTE7",
+  "name": "Route7",
+  "layout": "LAYOUT_ROUTE7",
+  "music": "BGM_FRLG_ROUTE_3",
+  "region_map_section": "MAPSEC_ROUTE_7",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_CELADON_CITY",
+      "offset": -10,
+      "direction": "left"
+    },
+    {
+      "map": "MAP_SAFFRON_CITY",
+      "offset": -10,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "65375",
+      "x": 65528,
+      "y": 12,
+      "elevation": 10,
+      "movement_type": "0",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 6,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "0x0",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_UNDERGROUND_PATH_WEST_ENTRANCE",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 15,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE7_EAST_ENTRANCE",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 5,
+      "y": 14,
+      "elevation": 0,
+      "script": "Route7_EventScript_167FBC"
+    },
+    {
+      "type": "hidden_item",
+      "x": 16,
+      "y": 15,
+      "elevation": 3,
+      "item": "ITEM_WEPEAR_BERRY",
+      "flag": "152",
+      "unknown": 1
+    }
+  ]
+}

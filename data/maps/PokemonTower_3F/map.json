@@ -1,0 +1,87 @@
+{
+  "id": "MAP_POKEMON_TOWER_3F",
+  "name": "PokemonTower_3F",
+  "layout": "LAYOUT_POKEMON_TOWER_3F",
+  "music": "BGM_FRLG_POKEMON_TOWER",
+  "region_map_section": "MAPSEC_POKEMON_TOWER",
+  "requires_flash": false,
+  "weather": "WEATHER_6",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 5,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_2",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "58",
+      "x": 10,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "PokemonTower_3F_EventScript_1633A7",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "58",
+      "x": 9,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "PokemonTower_3F_EventScript_1633BE",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "58",
+      "x": 12,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "13",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "PokemonTower_3F_EventScript_1633D5",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 13,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonTower_3F_EventScript_1BE755",
+      "flag": "375"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_POKEMON_TOWER_2F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 18,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_POKEMON_TOWER_4F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

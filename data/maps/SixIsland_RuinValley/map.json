@@ -1,0 +1,263 @@
+{
+  "id": "MAP_SIX_ISLAND_RUIN_VALLEY",
+  "name": "SixIsland_RuinValley",
+  "layout": "LAYOUT_SIX_ISLAND_RUIN_VALLEY",
+  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "region_map_section": "MAPSEC_RUIN_VALLEY",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_SIX_ISLAND_WATER_PATH",
+      "offset": -80,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "55",
+      "x": 24,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_168B6D",
+      "flag": "142"
+    },
+    {
+      "graphics_id": "56",
+      "x": 32,
+      "y": 11,
+      "elevation": 5,
+      "movement_type": "17",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "SixIsland_RuinValley_EventScript_1AC717",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "56",
+      "x": 33,
+      "y": 16,
+      "elevation": 5,
+      "movement_type": "14",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SixIsland_RuinValley_EventScript_1AC755",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "56",
+      "x": 31,
+      "y": 24,
+      "elevation": 5,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_RuinValley_EventScript_1AC793",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "56",
+      "x": 14,
+      "y": 10,
+      "elevation": 5,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SixIsland_RuinValley_EventScript_1AC7D1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "52",
+      "x": 21,
+      "y": 29,
+      "elevation": 5,
+      "movement_type": "2",
+      "movement_range_x": 2,
+      "movement_range_y": 3,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_RuinValley_EventScript_1AC80F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 17,
+      "y": 10,
+      "elevation": 5,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 17,
+      "y": 12,
+      "elevation": 5,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 18,
+      "y": 11,
+      "elevation": 5,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 6,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 6,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 41,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 41,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 42,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 5,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BECC4",
+      "flag": "485"
+    },
+    {
+      "graphics_id": "92",
+      "x": 19,
+      "y": 11,
+      "elevation": 5,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BECB7",
+      "flag": "484"
+    },
+    {
+      "graphics_id": "92",
+      "x": 43,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SixIsland_RuinValley_EventScript_1BECD1",
+      "flag": "486"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 24,
+      "y": 24,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 24,
+      "y": 24,
+      "elevation": 3,
+      "script": "SixIsland_RuinValley_EventScript_168B94"
+    }
+  ]
+}

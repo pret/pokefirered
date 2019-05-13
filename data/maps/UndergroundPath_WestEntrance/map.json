@@ -1,0 +1,62 @@
+{
+  "id": "MAP_UNDERGROUND_PATH_WEST_ENTRANCE",
+  "name": "UndergroundPath_WestEntrance",
+  "layout": "LAYOUT_UNDERGROUND_PATH_ENTRANCE",
+  "music": "BGM_FRLG_VIRIDIAN_CITY",
+  "region_map_section": "MAPSEC_UNDERGROUND_PATH_2",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "30",
+      "x": 5,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "UndergroundPath_WestEntrance_EventScript_160ECA",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE7",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE7",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE7",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

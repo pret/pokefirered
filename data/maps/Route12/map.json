@@ -1,0 +1,289 @@
+{
+  "id": "MAP_ROUTE12",
+  "name": "Route12",
+  "layout": "LAYOUT_ROUTE12",
+  "music": "BGM_FRLG_ROUTE_11",
+  "region_map_section": "MAPSEC_ROUTE_12",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_LAVENDER_TOWN",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_ROUTE13",
+      "offset": -48,
+      "direction": "down"
+    },
+    {
+      "map": "MAP_ROUTE11",
+      "offset": 60,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "57",
+      "x": 17,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "13",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "Route12_EventScript_1AA451",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "57",
+      "x": 9,
+      "y": 40,
+      "elevation": 3,
+      "movement_type": "14",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "Route12_EventScript_1AA48F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "57",
+      "x": 16,
+      "y": 47,
+      "elevation": 3,
+      "movement_type": "17",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "Route12_EventScript_1AA4CD",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "57",
+      "x": 13,
+      "y": 59,
+      "elevation": 3,
+      "movement_type": "13",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "Route12_EventScript_1AA50B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "109",
+      "x": 14,
+      "y": 70,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route12_EventScript_168014",
+      "flag": "84"
+    },
+    {
+      "graphics_id": "26",
+      "x": 13,
+      "y": 92,
+      "elevation": 3,
+      "movement_type": "37",
+      "movement_range_x": 4,
+      "movement_range_y": 4,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "Route12_EventScript_1AA587",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "39",
+      "x": 10,
+      "y": 99,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "Route12_EventScript_1AA5C5",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "57",
+      "x": 18,
+      "y": 108,
+      "elevation": 3,
+      "movement_type": "14",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "Route12_EventScript_1AA549",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "95",
+      "x": 11,
+      "y": 100,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route12_EventScript_1BDF13",
+      "flag": "18"
+    },
+    {
+      "graphics_id": "92",
+      "x": 18,
+      "y": 36,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route12_EventScript_1BE7B0",
+      "flag": "382"
+    },
+    {
+      "graphics_id": "92",
+      "x": 9,
+      "y": 101,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route12_EventScript_1BE7BD",
+      "flag": "383"
+    },
+    {
+      "graphics_id": "29",
+      "x": 19,
+      "y": 64,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route12_EventScript_1AA649",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "25",
+      "x": 19,
+      "y": 63,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route12_EventScript_1AA603",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "95",
+      "x": 12,
+      "y": 111,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route12_EventScript_1BDF13",
+      "flag": "19"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 86,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE12_FISHING_HOUSE",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 14,
+      "y": 15,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE12_NORTH_ENTRANCE_1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 15,
+      "y": 15,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE12_NORTH_ENTRANCE_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 14,
+      "y": 21,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE12_NORTH_ENTRANCE_1F",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 17,
+      "y": 13,
+      "elevation": 0,
+      "script": "Route12_EventScript_1680A3"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 15,
+      "y": 69,
+      "elevation": 0,
+      "script": "Route12_EventScript_1680AC"
+    },
+    {
+      "type": "hidden_item",
+      "x": 18,
+      "y": 57,
+      "elevation": 3,
+      "item": "ITEM_HYPER_POTION",
+      "flag": "42",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 70,
+      "elevation": 3,
+      "item": "ITEM_LEFTOVERS",
+      "flag": "131",
+      "unknown": 129
+    },
+    {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 116,
+      "elevation": 3,
+      "item": "ITEM_RARE_CANDY",
+      "flag": "130",
+      "unknown": 1
+    }
+  ]
+}

@@ -45,7 +45,7 @@ EventScript_164B5E:: @ 8164B5E
 
 EventScript_164B90:: @ 8164B90
     setvar VAR_0x8006, 3
-    setdynamicwarp MAP_SEVEN_ISLAND_TRAINERTOWER_LOBBY, 255, 17, 8
+    setdynamicwarp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
     compare_var_to_value VAR_0x403A, 3
     goto_if 1, EventScript_164BD3
     call EventScript_164BD8
@@ -54,7 +54,7 @@ EventScript_164B90:: @ 8164B90
     delay 25
     applymovement 255, Movement_164BE5
     waitmovement 0
-    warp MAP_SEVEN_ISLAND_TRAINERTOWER_LOBBY, 255, 17, 8
+    warp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
     waitstate
     releaseall
     end

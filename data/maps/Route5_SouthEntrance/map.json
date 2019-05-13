@@ -1,0 +1,90 @@
+{
+  "id": "MAP_ROUTE5_SOUTH_ENTRANCE",
+  "name": "Route5_SouthEntrance",
+  "layout": "LAYOUT_SAFFRON_CITY_NORTH_SOUTH_ENTRANCE",
+  "music": "BGM_FRLG_VIRIDIAN_CITY",
+  "region_map_section": "MAPSEC_ROUTE_5",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 1,
+  "unknown_19": 2,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "60",
+      "x": 1,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route5_SouthEntrance_EventScript_16F901",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_warp_id": 9
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE5",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 4,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_warp_id": 9
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE5",
+      "dest_warp_id": 3
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_0x4062",
+      "var_value": 0,
+      "script": "Route5_SouthEntrance_EventScript_16F90A"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_0x4062",
+      "var_value": 0,
+      "script": "Route5_SouthEntrance_EventScript_16F916"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_0x4062",
+      "var_value": 0,
+      "script": "Route5_SouthEntrance_EventScript_16F922"
+    }
+  ],
+  "bg_events": []
+}

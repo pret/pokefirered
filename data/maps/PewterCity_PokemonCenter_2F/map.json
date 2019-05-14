@@ -1,0 +1,94 @@
+{
+  "id": "MAP_PEWTER_CITY_POKEMON_CENTER_2F",
+  "name": "PewterCity_PokemonCenter_2F",
+  "layout": "LAYOUT_POKEMON_CENTER_2F",
+  "music": "BGM_FRLG_POKEMON_CENTER",
+  "region_map_section": "MAPSEC_PEWTER_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "65",
+      "x": 6,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_PokemonCenter_2F_EventScript_1A8CF6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "65",
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_PokemonCenter_2F_EventScript_1A8CFC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "65",
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_PokemonCenter_2F_EventScript_1A8D02",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "69",
+      "x": 1,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_PokemonCenter_2F_EventScript_1BB1D2",
+      "flag": "112"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 1,
+      "y": 6,
+      "elevation": 4,
+      "dest_map": "MAP_PEWTER_CITY_POKEMON_CENTER_1F",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_UNKNOWN_MAP_00_04",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_UNKNOWN_MAP_00_01",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

@@ -1732,7 +1732,7 @@ sub_809D6B0: @ 809D6B0
 	thumb_func_start sub_809D6D4
 sub_809D6D4: @ 809D6D4
 	push {lr}
-	ldr r0, _0809D74C @ =gUnknown_81A7AE0
+	ldr r0, _0809D74C @ =EventScript_1A7AE0
 	bl ScriptContext1_SetupScript
 	ldr r0, _0809D750 @ =sub_809D288
 	bl FindTaskIdByFunc
@@ -1788,7 +1788,7 @@ _0809D748:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809D74C: .4byte gUnknown_81A7AE0
+_0809D74C: .4byte EventScript_1A7AE0
 _0809D750: .4byte sub_809D288
 _0809D754: .4byte gTasks+0x8
 _0809D758: .4byte gSprites

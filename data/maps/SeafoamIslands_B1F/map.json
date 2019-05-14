@@ -1,0 +1,150 @@
+{
+  "id": "MAP_SEAFOAM_ISLANDS_B1F",
+  "name": "SeafoamIslands_B1F",
+  "layout": "LAYOUT_SEAFOAM_ISLANDS_B1F",
+  "music": "BGM_FRLG_VIRIDIAN_FOREST",
+  "region_map_section": "MAPSEC_SEAFOAM_ISLANDS",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 1,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "97",
+      "x": 22,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 68,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SeafoamIslands_B1F_EventScript_1BE11D",
+      "flag": "66"
+    },
+    {
+      "graphics_id": "97",
+      "x": 30,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 69,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SeafoamIslands_B1F_EventScript_1BE11D",
+      "flag": "67"
+    },
+    {
+      "graphics_id": "92",
+      "x": 19,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SeafoamIslands_B1F_EventScript_1BEBF4",
+      "flag": "469"
+    },
+    {
+      "graphics_id": "92",
+      "x": 24,
+      "y": 14,
+      "elevation": 4,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SeafoamIslands_B1F_EventScript_1BEC01",
+      "flag": "470"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 6,
+      "elevation": 4,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 31,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 28,
+      "y": 19,
+      "elevation": 3,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_1F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_B2F",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 17,
+      "y": 9,
+      "elevation": 4,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_B2F",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 25,
+      "y": 19,
+      "elevation": 3,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_B2F",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 32,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_B2F",
+      "dest_warp_id": 6
+    },
+    {
+      "x": 23,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_B2F",
+      "dest_warp_id": 7
+    },
+    {
+      "x": 28,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_B2F",
+      "dest_warp_id": 8
+    },
+    {
+      "x": 21,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_1F",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 29,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_SEAFOAM_ISLANDS_1F",
+      "dest_warp_id": 6
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

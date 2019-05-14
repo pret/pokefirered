@@ -1,0 +1,56 @@
+{
+  "id": "MAP_SEVEN_ISLAND_HOUSE_ROOM1",
+  "name": "SevenIsland_House_Room1",
+  "layout": "LAYOUT_SEVEN_ISLAND_HOUSE_ROOM1",
+  "music": "BGM_FRLG_ISLAND_SIX",
+  "region_map_section": "MAPSEC_SEVEN_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_1",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "35",
+      "x": 4,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_House_Room1_EventScript_170958",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SEVEN_ISLAND",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_SEVEN_ISLAND_HOUSE_ROOM2",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "script": "SevenIsland_House_Room1_EventScript_170A75"
+    }
+  ]
+}

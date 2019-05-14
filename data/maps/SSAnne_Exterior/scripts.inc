@@ -1,0 +1,67 @@
+SSAnne_Exterior_MapScripts:: @ 8160840
+    map_script 3, SSAnne_Exterior_MapScript1_16084B
+    map_script 2, SSAnne_Exterior_MapScript2_16084F
+    .byte 0
+
+SSAnne_Exterior_MapScript1_16084B:: @ 816084B
+    setworldmapflag 2214
+    end
+
+SSAnne_Exterior_MapScript2_16084F:: @ 816084F
+    map_script_2 VAR_0x407E, 1, SSAnne_Exterior_160859
+    .2byte 0
+
+SSAnne_Exterior_160859:: @ 8160859
+    lockall
+    getplayerxy VAR_0x8004, VAR_0x8005
+    compare_var_to_value VAR_0x8005, 6
+    call_if 3, EventScript_1608A1
+    compare_var_to_value VAR_0x8005, 7
+    call_if 4, EventScript_1608AC
+    fadenewbgm BGM_FRLG_SURF
+    delay 50
+    special sub_815D334
+    waitstate
+    removeobject 1
+    applymovement 255, Movement_1608B7
+    waitmovement 0
+    setvar VAR_0x407E, 2
+    setvar VAR_0x4053, 0
+    warp MAP_VERMILION_CITY, 255, 23, 34
+    waitstate
+    releaseall
+    end
+
+EventScript_1608A1:: @ 81608A1
+    applymovement 255, Movement_1608C1
+    waitmovement 0
+    return
+
+EventScript_1608AC:: @ 81608AC
+    applymovement 255, Movement_1A75ED
+    waitmovement 0
+    return
+
+Movement_1608B7:: @ 81608B7
+    step_11
+    step_11
+    step_11
+    step_11
+    step_11
+    step_11
+    step_11
+    step_11
+    step_11
+    step_end
+
+Movement_1608C1:: @ 81608C1
+    step_10
+    step_10
+    step_10
+    step_10
+    step_10
+    step_10
+    step_10
+    step_10
+    step_10
+    step_end

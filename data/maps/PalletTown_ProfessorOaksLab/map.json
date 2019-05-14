@@ -1,0 +1,256 @@
+{
+  "id": "MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB",
+  "name": "PalletTown_ProfessorOaksLab",
+  "layout": "LAYOUT_PALLET_TOWN_PROFESSOR_OAKS_LAB",
+  "music": "BGM_FRLG_OAK_LAB",
+  "region_map_section": "MAPSEC_PALLET_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "55",
+      "x": 3,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169DEE",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "48",
+      "x": 2,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "3",
+      "movement_range_x": 0,
+      "movement_range_y": 4,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169E46",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "55",
+      "x": 11,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169E1A",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "71",
+      "x": 6,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169595",
+      "flag": "43"
+    },
+    {
+      "graphics_id": "92",
+      "x": 8,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169BAB",
+      "flag": "40"
+    },
+    {
+      "graphics_id": "92",
+      "x": 9,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169D78",
+      "flag": "41"
+    },
+    {
+      "graphics_id": "92",
+      "x": 10,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169DAE",
+      "flag": "42"
+    },
+    {
+      "graphics_id": "72",
+      "x": 5,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_16955F",
+      "flag": "45"
+    },
+    {
+      "graphics_id": "94",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169E5F",
+      "flag": "58"
+    },
+    {
+      "graphics_id": "94",
+      "x": 5,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169E5F",
+      "flag": "58"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_PALLET_TOWN",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 7,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_PALLET_TOWN",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 5,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_PALLET_TOWN",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4055",
+      "var_value": 2,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_1692C3"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4055",
+      "var_value": 2,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_1692C3"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4055",
+      "var_value": 2,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_1692C3"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4055",
+      "var_value": 3,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_1692E7"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4055",
+      "var_value": 3,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_1692F3"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4055",
+      "var_value": 3,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_1692FF"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169E68"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 3,
+      "y": 1,
+      "elevation": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169E68"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 6,
+      "y": 1,
+      "elevation": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169E71"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 7,
+      "y": 1,
+      "elevation": 0,
+      "script": "PalletTown_ProfessorOaksLab_EventScript_169E7A"
+    }
+  ]
+}

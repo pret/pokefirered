@@ -1,0 +1,89 @@
+{
+  "id": "MAP_CELADON_CITY_DEPARTMENT_STORE_4F",
+  "name": "CeladonCity_DepartmentStore_4F",
+  "layout": "LAYOUT_CELADON_CITY_DEPARTMENT_STORE_4F",
+  "music": "BGM_FRLG_POKEMON_CENTER",
+  "region_map_section": "MAPSEC_CELADON_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 4,
+  "elevator_flag": 4,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "25",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_DepartmentStore_4F_EventScript_16BBEF",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "18",
+      "x": 10,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_DepartmentStore_4F_EventScript_16BBF8",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "68",
+      "x": 3,
+      "y": 13,
+      "elevation": 0,
+      "movement_type": "7",
+      "movement_range_x": 3,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_DepartmentStore_4F_EventScript_16BC0A",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_CELADON_CITY_DEPARTMENT_STORE_3F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_CELADON_CITY_DEPARTMENT_STORE_5F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "script": "CeladonCity_DepartmentStore_4F_EventScript_16BC01"
+    }
+  ]
+}

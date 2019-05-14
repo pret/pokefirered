@@ -1,0 +1,326 @@
+{
+  "id": "MAP_SILPH_CO_7F",
+  "name": "SilphCo_7F",
+  "layout": "LAYOUT_SILPH_CO_7F",
+  "music": "BGM_FRLG_SILPH",
+  "region_map_section": "MAPSEC_SILPH_CO",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 7,
+  "elevator_flag": 7,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "72",
+      "x": 2,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "78"
+    },
+    {
+      "graphics_id": "47",
+      "x": 0,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_7F_EventScript_161AC8",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "49",
+      "x": 24,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "SilphCo_7F_EventScript_161C1A",
+      "flag": "83"
+    },
+    {
+      "graphics_id": "49",
+      "x": 24,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SilphCo_7F_EventScript_161C31",
+      "flag": "83"
+    },
+    {
+      "graphics_id": "49",
+      "x": 13,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SilphCo_7F_EventScript_161C48",
+      "flag": "83"
+    },
+    {
+      "graphics_id": "48",
+      "x": 10,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_7F_EventScript_161BD9",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "47",
+      "x": 13,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_7F_EventScript_161B97",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "47",
+      "x": 9,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "27",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_7F_EventScript_161BB8",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "55",
+      "x": 3,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SilphCo_7F_EventScript_161C03",
+      "flag": "83"
+    },
+    {
+      "graphics_id": "92",
+      "x": 0,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_7F_EventScript_1BE8DB",
+      "flag": "405"
+    },
+    {
+      "graphics_id": "92",
+      "x": 30,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_7F_EventScript_1BE8E8",
+      "flag": "406"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 19,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_6F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_11F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 25,
+      "y": 17,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_5F",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 27,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_8F",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_3F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 23,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_SILPH_CO_ELEVATOR",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_0x405C",
+      "var_value": 0,
+      "script": "SilphCo_7F_EventScript_1619BC"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_0x405C",
+      "var_value": 0,
+      "script": "SilphCo_7F_EventScript_1619C8"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 11,
+      "y": 8,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A1F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 8,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A1F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 11,
+      "y": 9,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A1F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 9,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A1F"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 24,
+      "y": 7,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A39"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 25,
+      "y": 7,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A39"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 25,
+      "y": 8,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A39"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 24,
+      "y": 8,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A39"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 25,
+      "y": 13,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A53"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 26,
+      "y": 13,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A53"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 25,
+      "y": 14,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A53"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 26,
+      "y": 14,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_1A8A53"
+    },
+    {
+      "type": "hidden_item",
+      "x": 22,
+      "y": 11,
+      "elevation": 0,
+      "item": "ITEM_ZINC",
+      "flag": "140",
+      "unknown": 1
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 20,
+      "y": 1,
+      "elevation": 0,
+      "script": "SilphCo_7F_EventScript_161BFA"
+    }
+  ]
+}

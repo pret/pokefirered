@@ -2273,7 +2273,7 @@ sub_815BD80: @ 815BD80
 	str r0, [sp, 0x4]
 	movs r0, 0
 	str r0, [sp, 0x10]
-	ldr r1, _0815BE1C @ =gUnknown_82E55CC
+	ldr r1, _0815BE1C @ =Route1_Layout
 	mov r8, r1
 	movs r0, 0x80
 	lsls r0, 4
@@ -2339,7 +2339,7 @@ _0815BDF0:
 	ldrh r0, [r6]
 	b _0815BE34
 	.align 2, 0
-_0815BE1C: .4byte gUnknown_82E55CC
+_0815BE1C: .4byte Route1_Layout
 _0815BE20: .4byte 0x000003ff
 _0815BE24:
 	adds r0, r3, 0x1

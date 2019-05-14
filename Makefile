@@ -45,6 +45,7 @@ SCANINC := tools/scaninc/scaninc
 PREPROC := tools/preproc/preproc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 FIX := tools/gbafix/gbafix
+MAPJSON := tools/mapjson/mapjson
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -56,7 +57,7 @@ FIX := tools/gbafix/gbafix
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: rom clean compare tidy
+.PHONY: rom tools clean compare tidy
 
 $(shell mkdir -p $(C_BUILDDIR) $(ASM_BUILDDIR) $(DATA_ASM_BUILDDIR) $(SONG_BUILDDIR))
 
@@ -75,6 +76,18 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
+tools:
+	@$(MAKE) -C tools/gbagfx
+	@$(MAKE) -C tools/scaninc
+	@$(MAKE) -C tools/preproc
+	@$(MAKE) -C tools/bin2c
+	@$(MAKE) -C tools/rsfont
+	@$(MAKE) -C tools/aif2pcm
+	@$(MAKE) -C tools/ramscrgen
+	@$(MAKE) -C tools/mid2agb
+	@$(MAKE) -C tools/gbafix
+	@$(MAKE) -C tools/mapjson
+
 rom: $(ROM)
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
@@ -85,6 +98,9 @@ clean: tidy
 	rm -f sound/direct_sound_samples/*.bin
 	rm -f $(SONG_OBJS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
+	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
+	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	@$(MAKE) -C berry_fix clean
 
 tidy:
@@ -93,6 +109,8 @@ tidy:
 	@$(MAKE) -C berry_fix tidy
 
 include graphics_file_rules.mk
+include tileset_rules.mk
+include map_data_rules.mk
 
 %.s: ;
 %.png: ;
@@ -150,7 +168,7 @@ $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I . $(DATA_ASM_SUBDIR)/
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
-	$(PREPROC) $< charmap.txt | $(CPP) -I include -nostdinc -undef - | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) -I include -nostdinc -undef -Wno-unicode - | $(AS) $(ASFLAGS) -o $@
 
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<

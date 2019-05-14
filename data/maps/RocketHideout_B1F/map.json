@@ -1,0 +1,164 @@
+{
+  "id": "MAP_ROCKET_HIDEOUT_B1F",
+  "name": "RocketHideout_B1F",
+  "layout": "LAYOUT_ROCKET_HIDEOUT_B1F",
+  "music": "BGM_FRLG_ROCKET_HIDEOUT",
+  "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 7,
+  "elevator_flag": -1,
+  "battle_scene": "BATTLE_SCENE_3",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "49",
+      "x": 4,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 5,
+      "script": "RocketHideout_B1F_EventScript_1611C5",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "49",
+      "x": 24,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "RocketHideout_B1F_EventScript_1611AE",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "49",
+      "x": 6,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "RocketHideout_B1F_EventScript_1611F3",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "49",
+      "x": 10,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "RocketHideout_B1F_EventScript_1611DC",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "49",
+      "x": 21,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "16",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "RocketHideout_B1F_EventScript_16120A",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "92",
+      "x": 5,
+      "y": 16,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B1F_EventScript_1BE6C6",
+      "flag": "364"
+    },
+    {
+      "graphics_id": "92",
+      "x": 1,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B1F_EventScript_1BE6D3",
+      "flag": "365"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_CELADON_CITY_GAME_CORNER",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 17,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_ROCKET_HIDEOUT_B2F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 15,
+      "y": 30,
+      "elevation": 3,
+      "dest_map": "MAP_ROCKET_HIDEOUT_B2F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 23,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 24,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 25,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 16,
+      "y": 17,
+      "elevation": 0,
+      "item": "ITEM_PP_UP",
+      "flag": "11",
+      "unknown": 1
+    }
+  ]
+}

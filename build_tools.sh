@@ -7,3 +7,4 @@ make -C tools/preproc CXX=${1:-g++}
 make -C tools/ramscrgen CXX=${1:-g++}
 make -C tools/rsfont CXX=${1:-g++}
 make -C tools/scaninc CXX=${1:-g++}
+make -C tools/mapjson CXX=${1:-g++}

@@ -1,0 +1,198 @@
+{
+  "id": "MAP_PEWTER_CITY_MUSEUM_1F",
+  "name": "PewterCity_Museum_1F",
+  "layout": "LAYOUT_PEWTER_CITY_MUSEUM_1F",
+  "music": "BGM_FRLG_VIRIDIAN_CITY",
+  "region_map_section": "MAPSEC_PEWTER_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "47",
+      "x": 16,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A31B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "32",
+      "x": 2,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A4A5",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "55",
+      "x": 21,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A4AE",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "101",
+      "x": 22,
+      "y": 3,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A509",
+      "flag": "86"
+    },
+    {
+      "graphics_id": "55",
+      "x": 26,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A49C",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "55",
+      "x": 26,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PewterCity_Museum_1F_EventScript_1C4BBE",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 14,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 15,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 21,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 22,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY_MUSEUM_2F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_0x4061",
+      "var_value": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A38F"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_0x4061",
+      "var_value": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A3A5"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_0x4061",
+      "var_value": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A3BB"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 4,
+      "y": 4,
+      "elevation": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A512"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "script": "PewterCity_Museum_1F_EventScript_16A532"
+    },
+    {
+      "type": "bg_event_type_1",
+      "x": 27,
+      "y": 1,
+      "elevation": 0,
+      "script": "PewterCity_Museum_1F_EventScript_1ACE1C"
+    },
+    {
+      "type": "bg_event_type_1",
+      "x": 26,
+      "y": 1,
+      "elevation": 0,
+      "script": "PewterCity_Museum_1F_EventScript_1ACE1C"
+    }
+  ]
+}

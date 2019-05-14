@@ -722,7 +722,7 @@ get_mapdata_header: @ 8055170
 	.align 2, 0
 _08055180: .4byte gSaveBlock1Ptr
 _08055184:
-	ldr r0, _08055194 @ =gUnknown_834EB8C
+	ldr r0, _08055194 @ =gMapLayouts
 	subs r1, 0x1
 	lsls r1, 2
 	adds r1, r0
@@ -731,7 +731,7 @@ _0805518E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08055194: .4byte gUnknown_834EB8C
+_08055194: .4byte gMapLayouts
 	thumb_func_end get_mapdata_header
 
 	thumb_func_start warp_shift

@@ -1,0 +1,182 @@
+{
+  "id": "MAP_ROUTE16_NORTH_ENTRANCE_1F",
+  "name": "Route16_NorthEntrance_1F",
+  "layout": "LAYOUT_ROUTE16_NORTH_ENTRANCE_1F",
+  "music": "BGM_FRLG_VIRIDIAN_CITY",
+  "region_map_section": "MAPSEC_ROUTE_16",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 1,
+  "unknown_19": 2,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "60",
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_1701DB",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "32",
+      "x": 7,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_1702B5",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 1,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE16",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 11,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE16",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 1,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE16",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 11,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE16",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 9,
+      "y": 16,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE16_NORTH_ENTRANCE_2F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_0x405E",
+      "var_value": 1,
+      "script": "Route16_NorthEntrance_1F_EventScript_1A77B6"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_0x405E",
+      "var_value": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_1A77C1"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_1701E4"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_1701F0"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_0x405E",
+      "var_value": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_1A77C1"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_0x405E",
+      "var_value": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_1A77C1"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_0x405E",
+      "var_value": 1,
+      "script": "Route16_NorthEntrance_1F_EventScript_1A77B6"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_0x405E",
+      "var_value": 1,
+      "script": "Route16_NorthEntrance_1F_EventScript_1A77B6"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_1701FC"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_170208"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 14,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "Route16_NorthEntrance_1F_EventScript_170214"
+    }
+  ],
+  "bg_events": []
+}

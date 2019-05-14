@@ -1,0 +1,139 @@
+{
+  "id": "MAP_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE",
+  "name": "SevenIsland_SevaultCanyon_Entrance",
+  "layout": "LAYOUT_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE",
+  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "region_map_section": "MAPSEC_CANYON_ENTRANCE",
+  "requires_flash": false,
+  "weather": "WEATHER_2",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_SEVEN_ISLAND",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_SEVEN_ISLAND_SEVAULT_CANYON",
+      "offset": 20,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "28",
+      "x": 12,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 5,
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC8C9",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "29",
+      "x": 3,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC907",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "25",
+      "x": 4,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC94D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "39",
+      "x": 11,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "20",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC9D1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "40",
+      "x": 10,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "19",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1ACA0F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "26",
+      "x": 11,
+      "y": 17,
+      "elevation": 5,
+      "movement_type": "23",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC993",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "65321",
+      "x": 7,
+      "y": 65534,
+      "elevation": 1,
+      "movement_type": "0",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 17,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "0x0",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 8,
+      "y": 29,
+      "elevation": 5,
+      "item": "ITEM_RAWST_BERRY",
+      "flag": "188",
+      "unknown": 1
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 14,
+      "y": 26,
+      "elevation": 0,
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_168BF4"
+    }
+  ]
+}

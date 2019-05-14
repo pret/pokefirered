@@ -1,0 +1,214 @@
+{
+  "id": "MAP_ONE_ISLAND_POKEMON_CENTER_1F",
+  "name": "OneIsland_PokemonCenter_1F",
+  "layout": "LAYOUT_ONE_ISLAND_POKEMON_CENTER_1F",
+  "music": "BGM_FRLG_POKEMON_NETWORK_CENTER",
+  "region_map_section": "MAPSEC_ONE_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "64",
+      "x": 5,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_170E94",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "73",
+      "x": 14,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_170E9D",
+      "flag": "114"
+    },
+    {
+      "graphics_id": "89",
+      "x": 15,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_170EC5",
+      "flag": "115"
+    },
+    {
+      "graphics_id": "16",
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171148",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "56",
+      "x": 3,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171151",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "24",
+      "x": 7,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_17115A",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 9,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_ONE_ISLAND",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "elevation": 4,
+      "dest_map": "MAP_ONE_ISLAND_POKEMON_CENTER_2F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_0x4076",
+      "var_value": 2,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_1711AA"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_0x4076",
+      "var_value": 2,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_1711B6"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_0x4076",
+      "var_value": 2,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_1711C2"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_0x4076",
+      "var_value": 2,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_1711CE"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 2,
+      "elevation": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171179"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 3,
+      "elevation": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171179"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 4,
+      "elevation": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171179"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 5,
+      "elevation": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171179"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 13,
+      "y": 5,
+      "elevation": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171179"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 15,
+      "y": 5,
+      "elevation": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171179"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 14,
+      "y": 5,
+      "elevation": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171179"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 16,
+      "y": 5,
+      "elevation": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171179"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 17,
+      "y": 5,
+      "elevation": 0,
+      "script": "OneIsland_PokemonCenter_1F_EventScript_171179"
+    }
+  ]
+}

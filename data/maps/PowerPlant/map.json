@@ -1,0 +1,179 @@
+{
+  "id": "MAP_POWER_PLANT",
+  "name": "PowerPlant",
+  "layout": "LAYOUT_POWER_PLANT",
+  "music": "BGM_FRLG_POKEMON_MANSION",
+  "region_map_section": "MAPSEC_POWER_PLANT",
+  "requires_flash": false,
+  "weather": "WEATHER_0",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_3",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "92",
+      "x": 7,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PowerPlant_EventScript_1BE91C",
+      "flag": "410"
+    },
+    {
+      "graphics_id": "92",
+      "x": 40,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PowerPlant_EventScript_1BE929",
+      "flag": "411"
+    },
+    {
+      "graphics_id": "92",
+      "x": 46,
+      "y": 37,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PowerPlant_EventScript_1BE936",
+      "flag": "412"
+    },
+    {
+      "graphics_id": "92",
+      "x": 45,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PowerPlant_EventScript_1BE943",
+      "flag": "413"
+    },
+    {
+      "graphics_id": "92",
+      "x": 26,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PowerPlant_EventScript_1BE950",
+      "flag": "414"
+    },
+    {
+      "graphics_id": "136",
+      "x": 5,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PowerPlant_EventScript_1637B8",
+      "flag": "93"
+    },
+    {
+      "graphics_id": "92",
+      "x": 36,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PowerPlant_EventScript_16388D",
+      "flag": "134"
+    },
+    {
+      "graphics_id": "92",
+      "x": 30,
+      "y": 38,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PowerPlant_EventScript_16382F",
+      "flag": "133"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 39,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE10",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 5,
+      "y": 38,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE10",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 6,
+      "y": 39,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE10",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 1,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE10",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 0,
+      "y": 13,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE10",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 29,
+      "y": 16,
+      "elevation": 3,
+      "item": "ITEM_MAX_ELIXIR",
+      "flag": "27",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 8,
+      "y": 12,
+      "elevation": 3,
+      "item": "ITEM_THUNDER_STONE",
+      "flag": "28",
+      "unknown": 1
+    }
+  ]
+}

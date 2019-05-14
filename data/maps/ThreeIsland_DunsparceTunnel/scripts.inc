@@ -3,7 +3,7 @@ ThreeIsland_DunsparceTunnel_MapScripts:: @ 8164D26
 	.byte 0
 
 ThreeIsland_DunsparceTunnel_MapScript1_164D2C:: @ 8164D2C
-	setworldmapflag 2240
+	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL
 	specialvar VAR_RESULT, sub_806E25C
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8008, 1

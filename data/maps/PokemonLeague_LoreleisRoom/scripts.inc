@@ -27,7 +27,7 @@ EventScript_1625AC:: @ 81625AC
 	return
 
 PokemonLeague_LoreleisRoom_MapScript3_1625B2:: @ 81625B2
-	setworldmapflag 2223
+	setworldmapflag FLAG_WORLD_MAP_POKEMON_LEAGUE_LORELEIS_ROOM
 	end
 
 PokemonLeague_LoreleisRoom_MapScript4_1625B6:: @ 81625B6

@@ -39,7 +39,7 @@ EventScript_1648A3:: @ 81648A3
 	return
 
 SevenIsland_TrainerTower_Lobby_MapScript3_1648AD:: @ 81648AD
-	setworldmapflag 2234
+	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY
 	getplayerxy VAR_0x400D, VAR_RESULT
 	end
 

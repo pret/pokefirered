@@ -3,7 +3,7 @@ TwoIsland_MapScripts:: @ 8167564
 	.byte 0
 
 TwoIsland_MapScript1_16756A:: @ 816756A
-	setworldmapflag 2204
+	setworldmapflag FLAG_WORLD_MAP_TWO_ISLAND
 	setflag FLAG_0x2A2
 	call EventScript_167576
 	end

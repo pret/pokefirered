@@ -4,7 +4,7 @@ SSAnne_Exterior_MapScripts:: @ 8160840
 	.byte 0
 
 SSAnne_Exterior_MapScript1_16084B:: @ 816084B
-	setworldmapflag 2214
+	setworldmapflag FLAG_WORLD_MAP_SSANNE_EXTERIOR
 	end
 
 SSAnne_Exterior_MapScript2_16084F:: @ 816084F

@@ -4,7 +4,7 @@ IndigoPlateau_Exterior_MapScripts:: @ 816723B
 	.byte 0
 
 IndigoPlateau_Exterior_MapScript1_167246:: @ 8167246
-	setworldmapflag 2201
+	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
 	compare_var_to_value VAR_0x4085, 1
 	call_if 1, EventScript_167255
 	end

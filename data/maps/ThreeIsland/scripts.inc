@@ -3,7 +3,7 @@ ThreeIsland_MapScripts:: @ 81677AD
 	.byte 0
 
 ThreeIsland_MapScript1_1677B3:: @ 81677B3
-	setworldmapflag 2205
+	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
 	checkflag FLAG_0x2A3
 	call_if 1, EventScript_1677CB
 	compare_var_to_value VAR_0x407B, 4

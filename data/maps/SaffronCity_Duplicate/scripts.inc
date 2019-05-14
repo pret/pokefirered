@@ -3,7 +3,7 @@ SaffronCity_Duplicate_MapScripts:: @ 816735F
 	.byte 0
 
 SaffronCity_Duplicate_MapScript1_167365:: @ 8167365
-	setworldmapflag 2202
+	setworldmapflag FLAG_WORLD_MAP_SAFFRON_CITY_DUPLICATE
 	checkflag FLAG_0x23C
 	call_if 0, EventScript_167372
 	end

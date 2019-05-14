@@ -3,7 +3,7 @@ MtMoon_1F_MapScripts:: @ 81605E4
 	.byte 0
 
 MtMoon_1F_MapScript1_1605EA:: @ 81605EA
-	setworldmapflag 2213
+	setworldmapflag FLAG_WORLD_MAP_MT_MOON_1F
 	end
 
 MtMoon_1F_EventScript_1605EE:: @ 81605EE

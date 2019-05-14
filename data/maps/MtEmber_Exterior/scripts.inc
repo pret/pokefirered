@@ -4,7 +4,7 @@ MtEmber_Exterior_MapScripts:: @ 8163946
 	.byte 0
 
 MtEmber_Exterior_MapScript1_163951:: @ 8163951
-	setworldmapflag 2230
+	setworldmapflag FLAG_WORLD_MAP_MT_EMBER_EXTERIOR
 	compare_var_to_value VAR_0x407F, 2
 	call_if 1, EventScript_163960
 	end

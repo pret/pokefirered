@@ -3,7 +3,7 @@ SixIsland_MapScripts:: @ 8167ED8
 	.byte 0
 
 SixIsland_MapScript1_167EDE:: @ 8167EDE
-	setworldmapflag 2209
+	setworldmapflag FLAG_WORLD_MAP_SIX_ISLAND
 	end
 
 SixIsland_EventScript_167EE2:: @ 8167EE2

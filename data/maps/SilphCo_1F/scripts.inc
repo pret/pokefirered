@@ -3,7 +3,7 @@ SilphCo_1F_MapScripts:: @ 8161625
 	.byte 0
 
 SilphCo_1F_MapScript1_16162B:: @ 816162B
-	setworldmapflag 2220
+	setworldmapflag FLAG_WORLD_MAP_SILPH_CO_1F
 	end
 
 SilphCo_1F_EventScript_16162F:: @ 816162F

@@ -3,5 +3,5 @@ NavelRock_Exterior_MapScripts:: @ 81646AE
 	.byte 0
 
 NavelRock_Exterior_MapScript1_1646B4:: @ 81646B4
-	setworldmapflag 2229
+	setworldmapflag FLAG_WORLD_MAP_NAVEL_ROCK_EXTERIOR
 	end

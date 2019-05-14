@@ -3,5 +3,5 @@ UndergroundPath_EastWestTunnel_MapScripts:: @ 8160ED3
 	.byte 0
 
 UndergroundPath_EastWestTunnel_MapScript1_160ED9:: @ 8160ED9
-	setworldmapflag 2216
+	setworldmapflag FLAG_WORLD_MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL
 	end

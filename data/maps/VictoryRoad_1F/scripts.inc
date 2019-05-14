@@ -14,7 +14,7 @@ EventScript_160F1C:: @ 8160F1C
 	return
 
 VictoryRoad_1F_MapScript2_160F2F:: @ 8160F2F
-	setworldmapflag 2218
+	setworldmapflag FLAG_WORLD_MAP_VICTORY_ROAD_1F
 	end
 
 VictoryRoad_1F_EventScript_160F33:: @ 8160F33

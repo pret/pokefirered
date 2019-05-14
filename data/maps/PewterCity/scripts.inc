@@ -3,7 +3,7 @@ PewterCity_MapScripts:: @ 8165B8E
 	.byte 0
 
 PewterCity_MapScript1_165B94:: @ 8165B94
-	setworldmapflag 2194
+	setworldmapflag FLAG_WORLD_MAP_PEWTER_CITY
 	setvar VAR_0x4061, 0
 	end
 

@@ -3,7 +3,7 @@ CeladonCity_MapScripts:: @ 8166C8F
 	.byte 0
 
 CeladonCity_MapScript1_166C95:: @ 8166C95
-	setworldmapflag 2198
+	setworldmapflag FLAG_WORLD_MAP_CELADON_CITY
 	end
 
 CeladonCity_EventScript_166C99:: @ 8166C99

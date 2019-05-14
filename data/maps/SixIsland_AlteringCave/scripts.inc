@@ -3,5 +3,5 @@ SixIsland_AlteringCave_MapScripts:: @ 81646A4
 	.byte 0
 
 SixIsland_AlteringCave_MapScript1_1646AA:: @ 81646AA
-	setworldmapflag 2238
+	setworldmapflag FLAG_WORLD_MAP_SIX_ISLAND_ALTERING_CAVE
 	end

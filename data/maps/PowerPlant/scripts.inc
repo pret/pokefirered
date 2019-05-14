@@ -16,7 +16,7 @@ EventScript_163779:: @ 8163779
 	return
 
 PowerPlant_MapScript2_16378D:: @ 816378D
-	setworldmapflag 2228
+	setworldmapflag FLAG_WORLD_MAP_POWER_PLANT
 	checkflag FLAG_0x2BF
 	call_if 0, EventScript_1637AC
 	checkflag FLAG_0x2D0

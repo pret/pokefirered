@@ -4,7 +4,7 @@ FiveIsland_RocketWarehouse_MapScripts:: @ 8163F2E
 	.byte 0
 
 FiveIsland_RocketWarehouse_MapScript2_163F39:: @ 8163F39
-	setworldmapflag 2233
+	setworldmapflag FLAG_WORLD_MAP_FIVE_ISLAND_ROCKET_WAREHOUSE
 	end
 
 FiveIsland_RocketWarehouse_MapScript1_163F3D:: @ 8163F3D

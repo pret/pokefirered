@@ -21,7 +21,7 @@ Movement_166903:: @ 8166903
 	step_end
 
 VermilionCity_MapScript1_166906:: @ 8166906
-	setworldmapflag 2197
+	setworldmapflag FLAG_WORLD_MAP_VERMILION_CITY
 	checkflag FLAG_0x2F9
 	call_if 1, EventScript_166913
 	end

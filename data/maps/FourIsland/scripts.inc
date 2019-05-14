@@ -4,7 +4,7 @@ FourIsland_MapScripts:: @ 8167CAE
 	.byte 0
 
 FourIsland_MapScript1_167CB9:: @ 8167CB9
-	setworldmapflag 2206
+	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
 	compare_var_to_value VAR_0x4086, 0
 	call_if 1, EventScript_167CCD
 	call EventScript_167CD1

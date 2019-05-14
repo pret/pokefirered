@@ -3,7 +3,7 @@ ViridianForest_MapScripts:: @ 816051F
 	.byte 0
 
 ViridianForest_MapScript1_160525:: @ 8160525
-	setworldmapflag 2212
+	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_FOREST
 	end
 
 ViridianForest_EventScript_160529:: @ 8160529

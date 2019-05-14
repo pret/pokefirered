@@ -3,7 +3,7 @@ SixIsland_DottedHole_1F_MapScripts:: @ 8164182
 	.byte 0
 
 SixIsland_DottedHole_1F_MapScript1_164188:: @ 8164188
-	setworldmapflag 2235
+	setworldmapflag FLAG_WORLD_MAP_SIX_ISLAND_DOTTED_HOLE_1F
 	end
 
 SixIsland_DottedHole_B1F_EventScript_16418C:: @ 816418C

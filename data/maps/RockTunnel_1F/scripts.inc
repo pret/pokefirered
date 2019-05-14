@@ -3,7 +3,7 @@ RockTunnel_1F_MapScripts:: @ 8162DD6
 	.byte 0
 
 RockTunnel_1F_MapScript1_162DDC:: @ 8162DDC
-	setworldmapflag 2224
+	setworldmapflag FLAG_WORLD_MAP_ROCK_TUNNEL_1F
 	end
 
 RockTunnel_1F_EventScript_162DE0:: @ 8162DE0

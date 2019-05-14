@@ -4,7 +4,7 @@ OneIsland_MapScripts:: @ 8167484
 	.byte 0
 
 OneIsland_MapScript1_16748F:: @ 816748F
-	setworldmapflag 2203
+	setworldmapflag FLAG_WORLD_MAP_ONE_ISLAND
 	end
 
 OneIsland_MapScript2_167493:: @ 8167493

@@ -4,7 +4,7 @@ CinnabarIsland_MapScripts:: @ 8166ED6
 	.byte 0
 
 CinnabarIsland_MapScript1_166EE1:: @ 8166EE1
-	setworldmapflag 2200
+	setworldmapflag FLAG_WORLD_MAP_CINNABAR_ISLAND
 	call EventScript_166F5E
 	compare_var_to_value VAR_0x4071, 1
 	call_if 1, EventScript_166F24

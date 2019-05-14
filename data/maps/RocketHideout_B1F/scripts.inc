@@ -9,7 +9,7 @@ RocketHideout_B1F_MapScript1_1611A0:: @ 81611A0
 	end
 
 RocketHideout_B1F_MapScript2_1611AA:: @ 81611AA
-	setworldmapflag 2219
+	setworldmapflag FLAG_WORLD_MAP_ROCKET_HIDEOUT_B1F
 	end
 
 RocketHideout_B1F_EventScript_1611AE:: @ 81611AE

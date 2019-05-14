@@ -3,7 +3,7 @@ FuchsiaCity_MapScripts:: @ 8166D75
 	.byte 0
 
 FuchsiaCity_MapScript1_166D7B:: @ 8166D7B
-	setworldmapflag 2199
+	setworldmapflag FLAG_WORLD_MAP_FUCHSIA_CITY
 	checkflag FLAG_0x272
 	call_if 1, EventScript_166D91
 	checkflag FLAG_0x272

@@ -3,7 +3,7 @@ PokemonTower_1F_MapScripts:: @ 8163235
 	.byte 0
 
 PokemonTower_1F_MapScript1_16323B:: @ 816323B
-	setworldmapflag 2226
+	setworldmapflag FLAG_WORLD_MAP_POKEMON_TOWER_1F
 	end
 
 PokemonTower_1F_EventScript_16323F:: @ 816323F

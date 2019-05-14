@@ -3,7 +3,7 @@ SixIsland_PatternBush_MapScripts:: @ 8164559
 	.byte 0
 
 SixIsland_PatternBush_MapScript1_16455F:: @ 816455F
-	setworldmapflag 2237
+	setworldmapflag FLAG_WORLD_MAP_SIX_ISLAND_PATTERN_BUSH
 	getplayerxy VAR_0x4001, VAR_0x4002
 	compare_var_to_value VAR_0x4001, 50
 	call_if 4, EventScript_16457E

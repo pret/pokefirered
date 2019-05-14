@@ -3,7 +3,7 @@ FiveIsland_MapScripts:: @ 8167E8E
 	.byte 0
 
 FiveIsland_MapScript1_167E94:: @ 8167E94
-	setworldmapflag 2207
+	setworldmapflag FLAG_WORLD_MAP_FIVE_ISLAND
 	end
 
 FiveIsland_EventScript_167E98:: @ 8167E98

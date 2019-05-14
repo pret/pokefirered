@@ -4,7 +4,7 @@ PalletTown_MapScripts:: @ 816545A
 	.byte 0
 
 PalletTown_MapScript1_165465:: @ 8165465
-	setworldmapflag 2192
+	setworldmapflag FLAG_WORLD_MAP_PALLET_TOWN
 	checkflag FLAG_0x291
 	call_if 1, EventScript_165488
 	compare_var_to_value VAR_0x4070, 0

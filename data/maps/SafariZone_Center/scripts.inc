@@ -3,7 +3,7 @@ SafariZone_Center_MapScripts:: @ 8162357
 	.byte 0
 
 SafariZone_Center_MapScript1_16235D:: @ 816235D
-	setworldmapflag 2222
+	setworldmapflag FLAG_WORLD_MAP_SAFARI_ZONE_CENTER
 	end
 
 SafariZone_Center_EventScript_162361:: @ 8162361

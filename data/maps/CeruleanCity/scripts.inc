@@ -3,7 +3,7 @@ CeruleanCity_MapScripts:: @ 8166471
 	.byte 0
 
 CeruleanCity_MapScript1_166477:: @ 8166477
-	setworldmapflag 2195
+	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
 	checkflag FLAG_0x234
 	call_if 0, EventScript_166484
 	end

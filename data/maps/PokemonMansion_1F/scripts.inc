@@ -9,7 +9,7 @@ PokemonMansion_1F_MapScript1_162204:: @ 8162204
 	end
 
 PokemonMansion_1F_MapScript2_16220E:: @ 816220E
-	setworldmapflag 2221
+	setworldmapflag FLAG_WORLD_MAP_POKEMON_MANSION_1F
 	end
 
 PokemonMansion_1F_EventScript_162212:: @ 8162212

@@ -4,7 +4,7 @@ Route10_PokemonCenter_1F_MapScripts:: @ 816FC2F
 	.byte 0
 
 Route10_PokemonCenter_1F_MapScript1_16FC3A:: @ 816FC3A
-	setworldmapflag 2211
+	setworldmapflag FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F
 	setrespawn 13
 	end
 

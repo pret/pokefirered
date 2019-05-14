@@ -200,17 +200,17 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_setescapewarp
 	.4byte ScrCmd_waitmoncry
 	.4byte ScrCmd_bufferboxname
-	.4byte ScrCmd_cmdC7
-	.4byte ScrCmd_cmdC8
-	.4byte ScrCmd_cmdC9
-	.4byte ScrCmd_cmdCA
-	.4byte ScrCmd_cmdCB
+	.4byte ScrCmd_textcolor
+	.4byte ScrCmd_loadhelp
+	.4byte ScrCmd_unloadhelp
+	.4byte ScrCmd_signmsg
+	.4byte ScrCmd_normalmsg
 	.4byte ScrCmd_comparestattoword
 	.4byte ScrCmd_setmonobedient
 	.4byte ScrCmd_checkmonobedience
-	.4byte ScrCmd_cmdCF
-	.4byte ScrCmd_cmdD0
-	.4byte ScrCmd_warpD1
+	.4byte ScrCmd_execram
+	.4byte ScrCmd_setworldmapflag
+	.4byte ScrCmd_warpteleport2
 	.4byte ScrCmd_setmonmetlocation
 	.4byte ScrCmd_getbraillestringwidth
 	.4byte ScrCmd_bufferitemnameplural

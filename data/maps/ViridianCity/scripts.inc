@@ -3,7 +3,7 @@ ViridianCity_MapScripts:: @ 81658D3
 	.byte 0
 
 ViridianCity_MapScript1_1658D9:: @ 81658D9
-	setworldmapflag 2193
+	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_CITY
 	compare_var_to_value VAR_0x4051, 0
 	call_if 1, EventScript_165920
 	compare_var_to_value VAR_0x4051, 1

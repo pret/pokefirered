@@ -1,100 +1,100 @@
 ViridianCity_Mart_MapScripts:: @ 816A1D3
-    map_script 1, ViridianCity_Mart_MapScript1_16A1DE
-    map_script 2, ViridianCity_Mart_MapScript2_16A1FB
-    .byte 0
+	map_script 1, ViridianCity_Mart_MapScript1_16A1DE
+	map_script 2, ViridianCity_Mart_MapScript2_16A1FB
+	.byte 0
 
 ViridianCity_Mart_MapScript1_16A1DE:: @ 816A1DE
-    checkflag 2089
-    goto_if 0, EventScript_16A1E8
-    end
+	checkflag 2089
+	goto_if 0, EventScript_16A1E8
+	end
 
 EventScript_16A1E8:: @ 816A1E8
-    setmetatile 1, 3, 703, 1
-    setmetatile 1, 4, 704, 1
-    end
+	setmetatile 1, 3, 703, 1
+	setmetatile 1, 4, 704, 1
+	end
 
 ViridianCity_Mart_MapScript2_16A1FB:: @ 816A1FB
-    map_script_2 VAR_0x4057, 0, EventScript_16A205
-    .2byte 0
+	map_script_2 VAR_0x4057, 0, EventScript_16A205
+	.2byte 0
 
 EventScript_16A205:: @ 816A205
-    lockall
-    textcolor 0
-    applymovement 1, Movement_1A75ED
-    waitmovement 0
-    loadword 0, gUnknown_819021A
-    callstd 4
-    closemessage
-    applymovement 1, Movement_16A262
-    applymovement 255, Movement_16A25C
-    waitmovement 0
-    loadword 0, gUnknown_819023A
-    callstd 4
-    setvar VAR_0x4057, 1
-    additem ITEM_OAKS_PARCEL, 1
-    loadword 0, gUnknown_8190289
-    setorcopyvar VAR_0x8000, 349
-    setorcopyvar VAR_0x8001, 1
-    setorcopyvar VAR_0x8002, 318
-    callstd 9
-    setvar VAR_0x4055, 5
-    releaseall
-    end
+	lockall
+	textcolor 0
+	applymovement 1, Movement_1A75ED
+	waitmovement 0
+	loadword 0, gUnknown_819021A
+	callstd 4
+	closemessage
+	applymovement 1, Movement_16A262
+	applymovement 255, Movement_16A25C
+	waitmovement 0
+	loadword 0, gUnknown_819023A
+	callstd 4
+	setvar VAR_0x4057, 1
+	additem ITEM_OAKS_PARCEL, 1
+	loadword 0, gUnknown_8190289
+	setorcopyvar VAR_0x8000, 349
+	setorcopyvar VAR_0x8001, 1
+	setorcopyvar VAR_0x8002, 318
+	callstd 9
+	setvar VAR_0x4055, 5
+	releaseall
+	end
 
 Movement_16A25C:: @ 816A25C
-    step_11
-    step_11
-    step_11
-    step_11
-    step_2f
-    step_end
+	step_11
+	step_11
+	step_11
+	step_11
+	step_2f
+	step_end
 
 Movement_16A262:: @ 816A262
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_30
-    step_end
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_30
+	step_end
 
 ViridianCity_Mart_EventScript_16A268:: @ 816A268
-    lock
-    faceplayer
-    compare_var_to_value VAR_0x4057, 1
-    goto_if 1, EventScript_16A2A4
-    special sub_8110AB4
-    compare_var_to_value VAR_RESULT, 2
-    goto_if 1, EventScript_1A7AE0
-    message Text_1A6211
-    waitmessage
-    pokemart Items_16A298
-    loadword 0, gUnknown_81A5190
-    callstd 4
-    release
-    end
+	lock
+	faceplayer
+	compare_var_to_value VAR_0x4057, 1
+	goto_if 1, EventScript_16A2A4
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	message Text_1A6211
+	waitmessage
+	pokemart Items_16A298
+	loadword 0, gUnknown_81A5190
+	callstd 4
+	release
+	end
 
-    .align 2
+	.align 2
 Items_16A298:: @ 816A298
-    .2byte ITEM_POKE_BALL
-    .2byte ITEM_POTION
-    .2byte ITEM_ANTIDOTE
-    .2byte ITEM_PARALYZE_HEAL
-    .2byte ITEM_NONE
-    release
-    end
+	.2byte ITEM_POKE_BALL
+	.2byte ITEM_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_NONE
+	release
+	end
 
 EventScript_16A2A4:: @ 816A2A4
-    loadword 0, Text_1902BF
-    callstd 4
-    release
-    end
+	loadword 0, Text_1902BF
+	callstd 4
+	release
+	end
 
 ViridianCity_Mart_EventScript_16A2AE:: @ 816A2AE
-    loadword 0, gUnknown_81902F5
-    callstd 2
-    end
+	loadword 0, gUnknown_81902F5
+	callstd 2
+	end
 
 ViridianCity_Mart_EventScript_16A2B7:: @ 816A2B7
-    loadword 0, gUnknown_819032C
-    callstd 2
-    end
+	loadword 0, gUnknown_819032C
+	callstd 2
+	end

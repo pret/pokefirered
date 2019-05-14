@@ -1,4 +1,4 @@
-    .align 2
+	.align 2
 
 gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_nop

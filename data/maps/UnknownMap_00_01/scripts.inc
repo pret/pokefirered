@@ -1,2 +1,2 @@
 UnknownMap_00_01_MapScripts:: @ 8160479
-    .byte 0
+	.byte 0

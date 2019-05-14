@@ -1,28 +1,28 @@
 CeruleanCity_House2_MapScripts:: @ 816A975
-    .byte 0
+	.byte 0
 
 CeruleanCity_House2_EventScript_16A976:: @ 816A976
-    lock
-    faceplayer
-    checkflag FLAG_0x23F
-    goto_if 1, EventScript_16A98B
-    loadword 0, gUnknown_8191E13
-    callstd 4
-    release
-    end
+	lock
+	faceplayer
+	checkflag FLAG_0x23F
+	goto_if 1, EventScript_16A98B
+	loadword 0, gUnknown_8191E13
+	callstd 4
+	release
+	end
 
 EventScript_16A98B:: @ 816A98B
-    loadword 0, gUnknown_8191ED8
-    callstd 4
-    release
-    end
+	loadword 0, gUnknown_8191ED8
+	callstd 4
+	release
+	end
 
 CeruleanCity_House2_EventScript_16A995:: @ 816A995
-    loadword 0, gUnknown_8191F2A
-    callstd 2
-    end
+	loadword 0, gUnknown_8191F2A
+	callstd 2
+	end
 
 CeruleanCity_House2_EventScript_16A99E:: @ 816A99E
-    loadword 0, gUnknown_8191F64
-    callstd 3
-    end
+	loadword 0, gUnknown_8191F64
+	callstd 3
+	end

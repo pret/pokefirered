@@ -1,150 +1,150 @@
 CinnabarIsland_PokemonCenter_1F_MapScripts:: @ 816E8D7
-    map_script 3, CinnabarIsland_PokemonCenter_1F_MapScript1_16E8E2
-    map_script 5, CinnabarIsland_PokemonCenter_1F_MapScript2_1BC05C
-    .byte 0
+	map_script 3, CinnabarIsland_PokemonCenter_1F_MapScript1_16E8E2
+	map_script 5, CinnabarIsland_PokemonCenter_1F_MapScript2_1BC05C
+	.byte 0
 
 CinnabarIsland_PokemonCenter_1F_MapScript1_16E8E2:: @ 816E8E2
-    setrespawn 9
-    end
+	setrespawn 9
+	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E8E6:: @ 816E8E6
-    lock
-    faceplayer
-    call EventScript_1A6578
-    release
-    end
+	lock
+	faceplayer
+	call EventScript_1A6578
+	release
+	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E8EF:: @ 816E8EF
-    loadword 0, gUnknown_819A5BE
-    callstd 2
-    end
+	loadword 0, gUnknown_819A5BE
+	callstd 2
+	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E8F8:: @ 816E8F8
-    loadword 0, gUnknown_819A4F8
-    callstd 2
-    end
+	loadword 0, gUnknown_819A4F8
+	callstd 2
+	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E901:: @ 816E901
-    loadword 0, gUnknown_819A6B1
-    callstd 2
-    end
+	loadword 0, gUnknown_819A6B1
+	callstd 2
+	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
-    lock
-    faceplayer
-    loadword 0, gUnknown_819A725
-    callstd 5
-    compare_var_to_value VAR_RESULT, 0
-    goto_if 1, EventScript_16E9A5
-    loadword 0, gUnknown_819A785
-    callstd 4
-    closemessage
-    playbgm BGM_FRLG_FOLLOW_ME, 1
-    savebgm BGM_FRLG_FOLLOW_ME
-    setflag FLAG_SPECIAL_FLAG_0x4001
-    setflag FLAG_0x0A2
-    delay 20
-    compare_var_to_value VAR_FACING, 1
-    call_if 1, EventScript_16E96F
-    compare_var_to_value VAR_FACING, 4
-    call_if 1, EventScript_16E981
-    compare_var_to_value VAR_FACING, 3
-    call_if 1, EventScript_16E993
-    removeobject 7
-    setvar VAR_0x408A, 1
-    clearflag FLAG_0x062
-    warp MAP_CINNABAR_ISLAND, 255, 14, 11
-    waitstate
-    release
-    end
+	lock
+	faceplayer
+	loadword 0, gUnknown_819A725
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_16E9A5
+	loadword 0, gUnknown_819A785
+	callstd 4
+	closemessage
+	playbgm BGM_FRLG_FOLLOW_ME, 1
+	savebgm BGM_FRLG_FOLLOW_ME
+	setflag FLAG_SPECIAL_FLAG_0x4001
+	setflag FLAG_0x0A2
+	delay 20
+	compare_var_to_value VAR_FACING, 1
+	call_if 1, EventScript_16E96F
+	compare_var_to_value VAR_FACING, 4
+	call_if 1, EventScript_16E981
+	compare_var_to_value VAR_FACING, 3
+	call_if 1, EventScript_16E993
+	removeobject 7
+	setvar VAR_0x408A, 1
+	clearflag FLAG_0x062
+	warp MAP_CINNABAR_ISLAND, 255, 14, 11
+	waitstate
+	release
+	end
 
 EventScript_16E96F:: @ 816E96F
-    applymovement 7, Movement_16E9AF
-    applymovement 255, Movement_16E9B9
-    waitmovement 0
-    return
+	applymovement 7, Movement_16E9AF
+	applymovement 255, Movement_16E9B9
+	waitmovement 0
+	return
 
 EventScript_16E981:: @ 816E981
-    applymovement 7, Movement_16E9C3
-    applymovement 255, Movement_16E9CF
-    waitmovement 0
-    return
+	applymovement 7, Movement_16E9C3
+	applymovement 255, Movement_16E9CF
+	waitmovement 0
+	return
 
 EventScript_16E993:: @ 816E993
-    applymovement 7, Movement_16E9AF
-    applymovement 255, Movement_16E9DE
-    waitmovement 0
-    return
+	applymovement 7, Movement_16E9AF
+	applymovement 255, Movement_16E9DE
+	waitmovement 0
+	return
 
 EventScript_16E9A5:: @ 816E9A5
-    loadword 0, gUnknown_819A766
-    callstd 4
-    release
-    end
+	loadword 0, gUnknown_819A766
+	callstd 4
+	release
+	end
 
 Movement_16E9AF:: @ 816E9AF
-    step_12
-    step_12
-    step_12
-    step_12
-    step_10
-    step_10
-    step_10
-    step_1b
-    step_60
-    step_end
+	step_12
+	step_12
+	step_12
+	step_12
+	step_10
+	step_10
+	step_10
+	step_1b
+	step_60
+	step_end
 
 Movement_16E9B9:: @ 816E9B9
-    step_10
-    step_12
-    step_12
-    step_12
-    step_12
-    step_10
-    step_10
-    step_1c
-    step_10
-    step_end
+	step_10
+	step_12
+	step_12
+	step_12
+	step_12
+	step_10
+	step_10
+	step_1c
+	step_10
+	step_end
 
 Movement_16E9C3:: @ 816E9C3
-    step_11
-    step_12
-    step_12
-    step_10
-    step_12
-    step_12
-    step_10
-    step_10
-    step_10
-    step_1b
-    step_60
-    step_end
+	step_11
+	step_12
+	step_12
+	step_10
+	step_12
+	step_12
+	step_10
+	step_10
+	step_10
+	step_1b
+	step_60
+	step_end
 
 Movement_16E9CF:: @ 816E9CF
-    step_1c
-    step_1c
-    step_1c
-    step_02
-    step_1c
-    step_12
-    step_12
-    step_12
-    step_10
-    step_10
-    step_1b
-    step_10
-    step_1b
-    step_60
-    step_end
+	step_1c
+	step_1c
+	step_1c
+	step_02
+	step_1c
+	step_12
+	step_12
+	step_12
+	step_10
+	step_10
+	step_1b
+	step_10
+	step_1b
+	step_60
+	step_end
 
 Movement_16E9DE:: @ 816E9DE
-    step_12
-    step_12
-    step_12
-    step_12
-    step_12
-    step_10
-    step_10
-    step_1c
-    step_10
-    step_end
+	step_12
+	step_12
+	step_12
+	step_12
+	step_12
+	step_10
+	step_10
+	step_1c
+	step_10
+	step_end

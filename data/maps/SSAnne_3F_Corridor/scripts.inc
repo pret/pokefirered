@@ -1,7 +1,7 @@
 SSAnne_3F_Corridor_MapScripts:: @ 8160A5D
-    .byte 0
+	.byte 0
 
 SSAnne_3F_Corridor_EventScript_160A5E:: @ 8160A5E
-    loadword 0, gUnknown_817320C
-    callstd 2
-    end
+	loadword 0, gUnknown_817320C
+	callstd 2
+	end

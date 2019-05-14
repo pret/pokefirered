@@ -3,7 +3,7 @@ LavenderTown_MapScripts:: @ 816686B
 	.byte 0
 
 LavenderTown_MapScript1_166871:: @ 8166871
-	setworldmapflag 2196
+	setworldmapflag FLAG_WORLD_MAP_LAVENDER_TOWN
 	setvar VAR_0x405B, 1
 	setflag FLAG_0x03D
 	end

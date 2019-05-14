@@ -1,38 +1,38 @@
 SaffronCity_Mart_MapScripts:: @ 816EFA2
-    .byte 0
+	.byte 0
 
 SaffronCity_Mart_EventScript_16EFA3:: @ 816EFA3
-    loadword 0, gUnknown_819BFF1
-    callstd 2
-    end
+	loadword 0, gUnknown_819BFF1
+	callstd 2
+	end
 
 SaffronCity_Mart_EventScript_16EFAC:: @ 816EFAC
-    loadword 0, gUnknown_819BF8F
-    callstd 2
-    end
+	loadword 0, gUnknown_819BF8F
+	callstd 2
+	end
 
 SaffronCity_Mart_EventScript_16EFB5:: @ 816EFB5
-    special sub_8110AB4
-    compare_var_to_value VAR_RESULT, 2
-    goto_if 1, EventScript_1A7AE0
-    lock
-    faceplayer
-    message Text_1A6211
-    waitmessage
-    pokemart Items_16EFDC
-    loadword 0, gUnknown_81A5190
-    callstd 4
-    release
-    end
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lock
+	faceplayer
+	message Text_1A6211
+	waitmessage
+	pokemart Items_16EFDC
+	loadword 0, gUnknown_81A5190
+	callstd 4
+	release
+	end
 
-    .align 2
+	.align 2
 Items_16EFDC:: @ 816EFDC
-    .2byte ITEM_GREAT_BALL
-    .2byte ITEM_HYPER_POTION
-    .2byte ITEM_REVIVE
-    .2byte ITEM_FULL_HEAL
-    .2byte ITEM_ESCAPE_ROPE
-    .2byte ITEM_MAX_REPEL
-    .2byte ITEM_NONE
-    release
-    end
+	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_HYPER_POTION
+	.2byte ITEM_REVIVE
+	.2byte ITEM_FULL_HEAL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_MAX_REPEL
+	.2byte ITEM_NONE
+	release
+	end

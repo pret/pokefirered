@@ -6,7 +6,7 @@ OneIsland_PokemonCenter_1F_MapScripts:: @ 8170BF8
 	.byte 0
 
 OneIsland_PokemonCenter_1F_MapScript3_170C0D:: @ 8170C0D
-	compare_var_to_value VAR_0x4076, 5
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	call_if 4, EventScript_170C22
 	checkflag 2116
 	call_if 1, EventScript_170C36
@@ -28,16 +28,16 @@ EventScript_170C36:: @ 8170C36
 
 OneIsland_PokemonCenter_1F_MapScript1_170C4E:: @ 8170C4E
 	setrespawn 14
-	compare_var_to_value VAR_0x4076, 6
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	call_if 1, EventScript_170C73
-	compare_var_to_value VAR_0x4076, 0
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 0
 	call_if 1, EventScript_170C79
-	compare_var_to_value VAR_0x4076, 2
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
 	call_if 1, EventScript_170C90
 	end
 
 EventScript_170C73:: @ 8170C73
-	setvar VAR_0x4076, 7
+	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 7
 	return
 
 EventScript_170C79:: @ 8170C79
@@ -55,7 +55,7 @@ EventScript_170C90:: @ 8170C90
 	return
 
 OneIsland_PokemonCenter_1F_MapScript4_170CA7:: @ 8170CA7
-	map_script_2 VAR_0x4076, 0, EventScript_170CB1
+	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 0, EventScript_170CB1
 	.2byte 0
 
 EventScript_170CB1:: @ 8170CB1
@@ -144,7 +144,7 @@ EventScript_170CB1:: @ 8170CB1
 	applymovement 3, Movement_1A75E9
 	waitmovement 0
 	setflag 2113
-	setvar VAR_0x4076, 1
+	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
 	releaseall
 	end
 
@@ -236,22 +236,22 @@ EventScript_170EB1:: @ 8170EB1
 OneIsland_PokemonCenter_1F_EventScript_170EC5:: @ 8170EC5
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4076, 7
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 7
 	goto_if 1, EventScript_170F35
-	compare_var_to_value VAR_0x4076, 6
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	goto_if 1, EventScript_170F9B
 	checkflag FLAG_0x2DC
 	goto_if 1, EventScript_170FA5
-	compare_var_to_value VAR_0x4076, 5
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if 1, EventScript_17103A
 	checkflag FLAG_0x2DD
 	goto_if 1, EventScript_171044
-	compare_var_to_value VAR_0x4076, 4
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if 1, EventScript_1710F2
 	specialvar VAR_RESULT, sub_806E25C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1710FC
-	compare_var_to_value VAR_0x4076, 3
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
 	goto_if 1, EventScript_171134
 	loadword 0, gUnknown_81A1321
 	callstd 4
@@ -340,7 +340,7 @@ EventScript_170FA5:: @ 8170FA5
 	setflag 2116
 	setflag FLAG_0x05C
 	setflag FLAG_0x08C
-	setvar VAR_0x4076, 6
+	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	special InitRoamer
 	release
 	end
@@ -389,7 +389,7 @@ EventScript_1710B2:: @ 81710B2
 	callstd 4
 	removeitem ITEM_RUBY, 1
 	removeitem ITEM_TRI_PASS, 1
-	setvar VAR_0x4076, 5
+	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	additem ITEM_RAINBOW_PASS, 1
 	setflag 2118
 	textcolor 3
@@ -423,7 +423,7 @@ EventScript_1710FC:: @ 81710FC
 	loadword 0, gUnknown_81A17DF
 	callstd 4
 	setvar VAR_0x407F, 1
-	setvar VAR_0x4076, 4
+	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	release
 	end
 
@@ -577,7 +577,7 @@ EventScript_1711DA:: @ 81711DA
 	waitmovement 0
 	playse SE_KAIDAN
 	setflag FLAG_0x072
-	setvar VAR_0x4076, 3
+	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
 	clearflag FLAG_0x062
 	setvar VAR_0x4071, 3
 	setvar VAR_0x8004, 1

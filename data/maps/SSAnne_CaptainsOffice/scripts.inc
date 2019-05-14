@@ -27,7 +27,7 @@ SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 	loadword 0, gUnknown_81737D2
 	callstd 4
 	setflag FLAG_0x237
-	setvar VAR_0x407E, 1
+	setvar VAR_MAP_SCENE_VERMILION_CITY, 1
 	release
 	end
 

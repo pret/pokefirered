@@ -32,7 +32,7 @@ PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	goto_if 1, EventScript_168F59
 	compare_var_to_value VAR_0x4058, 1
 	goto_if 1, EventScript_168EF6
-	compare_var_to_value VAR_0x4055, 1
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	goto_if 4, EventScript_168DAF
 	loadword 0, gUnknown_818D58C
 	callstd 4

@@ -4,7 +4,7 @@ SaffronCity_PokemonTrainerFanClub_MapScripts:: @ 816F0BF
 	.byte 0
 
 SaffronCity_PokemonTrainerFanClub_MapScript1_16F0CA:: @ 816F0CA
-	map_script_2 VAR_0x4073, 1, EventScript_16F0D4
+	map_script_2 VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1, EventScript_16F0D4
 	.2byte 0
 
 EventScript_16F0D4:: @ 816F0D4
@@ -26,7 +26,7 @@ EventScript_16F0D4:: @ 816F0D4
 	waitmovement 0
 	loadword 0, gUnknown_819C235
 	callstd 4
-	setvar VAR_0x4073, 2
+	setvar VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
 	releaseall
 	end
 
@@ -73,9 +73,9 @@ Movement_16F13E:: @ 816F13E
 	step_end
 
 SaffronCity_PokemonTrainerFanClub_MapScript2_16F144:: @ 816F144
-	compare_var_to_value VAR_0x4073, 1
+	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1
 	goto_if 1, EventScript_16F267
-	compare_var_to_value VAR_0x4073, 2
+	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
 	goto_if 1, EventScript_16F15B
 	end
 
@@ -168,7 +168,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F281:: @ 816F281
 	faceplayer
 	setvar VAR_0x8004, 0
 	special sub_81133A4
-	compare_var_to_value VAR_0x4073, 0
+	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if 1, EventScript_16F2EE
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 1
@@ -213,7 +213,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F2F8:: @ 816F2F8
 	faceplayer
 	setvar VAR_0x8004, 3
 	special sub_81133A4
-	compare_var_to_value VAR_0x4073, 0
+	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if 1, EventScript_16F365
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 1
@@ -258,7 +258,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F36F:: @ 816F36F
 	faceplayer
 	setvar VAR_0x8004, 1
 	special sub_81133A4
-	compare_var_to_value VAR_0x4073, 0
+	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if 1, EventScript_16F3DC
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 1
@@ -303,7 +303,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F3E6:: @ 816F3E6
 	faceplayer
 	setvar VAR_0x8004, 2
 	special sub_81133A4
-	compare_var_to_value VAR_0x4073, 0
+	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if 1, EventScript_16F453
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 1

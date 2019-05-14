@@ -15,7 +15,7 @@ EventScript_163960:: @ 8163960
 	return
 
 MtEmber_Exterior_MapScript2_163969:: @ 8163969
-	compare_var_to_value VAR_0x4076, 4
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	call_if 4, EventScript_163975
 	end
 
@@ -27,7 +27,7 @@ MtEmber_Exterior_EventScript_16397F:: @ 816397F
 	lock
 	checktrainerflag 537
 	goto_if 1, EventScript_16399E
-	compare_var_to_value VAR_0x4076, 4
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if 1, EventScript_1639A8
 	loadword 0, gUnknown_817A82A
 	callstd 4
@@ -70,7 +70,7 @@ MtEmber_Exterior_EventScript_1639F0:: @ 81639F0
 	faceplayer
 	checktrainerflag 538
 	goto_if 1, EventScript_163A1B
-	compare_var_to_value VAR_0x4076, 4
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if 1, EventScript_163A25
 	loadword 0, gUnknown_817A88C
 	callstd 4

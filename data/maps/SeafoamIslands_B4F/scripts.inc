@@ -65,7 +65,7 @@ EventScript_1630D4:: @ 81630D4
 	end
 
 SeafoamIslands_B4F_MapScript4_1630E7:: @ 81630E7
-	map_script_2 VAR_0x4063, 1, EventScript_1630F1
+	map_script_2 VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1, EventScript_1630F1
 	.2byte 0
 
 EventScript_1630F1:: @ 81630F1
@@ -74,7 +74,7 @@ EventScript_1630F1:: @ 81630F1
 	end
 
 SeafoamIslands_B4F_MapScript5_1630F9:: @ 81630F9
-	map_script_2 VAR_0x4063, 1, EventScript_16310B
+	map_script_2 VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1, EventScript_16310B
 	map_script_2 VAR_0x4001, 1, EventScript_163121
 	.2byte 0
 
@@ -82,7 +82,7 @@ EventScript_16310B:: @ 816310B
 	lockall
 	applymovement 255, Movement_16311D
 	waitmovement 0
-	setvar VAR_0x4063, 0
+	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 0
 	releaseall
 	end
 

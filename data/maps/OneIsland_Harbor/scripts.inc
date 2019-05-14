@@ -4,7 +4,7 @@ OneIsland_Harbor_MapScripts:: @ 8171378
 	.byte 0
 
 OneIsland_Harbor_MapScript1_171383:: @ 8171383
-	map_script_2 VAR_0x4075, 1, EventScript_17138D
+	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 1, EventScript_17138D
 	.2byte 0
 
 EventScript_17138D:: @ 817138D
@@ -12,7 +12,7 @@ EventScript_17138D:: @ 817138D
 	end
 
 OneIsland_Harbor_MapScript2_171392:: @ 8171392
-	map_script_2 VAR_0x4075, 1, EventScript_17139C
+	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 1, EventScript_17139C
 	.2byte 0
 
 EventScript_17139C:: @ 817139C
@@ -20,7 +20,7 @@ EventScript_17139C:: @ 817139C
 	textcolor 0
 	applymovement 255, Movement_1713B9
 	waitmovement 0
-	setvar VAR_0x4075, 2
+	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 2
 	warp MAP_ONE_ISLAND, 255, 12, 18
 	waitstate
 	releaseall

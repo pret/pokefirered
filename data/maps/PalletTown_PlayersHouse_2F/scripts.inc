@@ -4,7 +4,7 @@ PalletTown_PlayersHouse_2F_MapScripts:: @ 8168CA3
 	.byte 0
 
 PalletTown_PlayersHouse_2F_MapScript1_168CAE:: @ 8168CAE
-	compare_var_to_value VAR_0x4056, 0
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0
 	call_if 1, EventScript_168CBA
 	end
 
@@ -13,12 +13,12 @@ EventScript_168CBA:: @ 8168CBA
 	return
 
 PalletTown_PlayersHouse_2F_MapScript2_168CBE:: @ 8168CBE
-	map_script_2 VAR_0x4056, 0, EventScript_168CC8
+	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0, EventScript_168CC8
 	.2byte 0
 
 EventScript_168CC8:: @ 8168CC8
 	turnobject 255, 2
-	setvar VAR_0x4056, 1
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 1
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_168CD2:: @ 8168CD2

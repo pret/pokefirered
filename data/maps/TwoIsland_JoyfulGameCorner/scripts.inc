@@ -14,11 +14,11 @@ EventScript_1713EF:: @ 81713EF
 	setobjectxyperm 1, 6, 2
 	setobjectmovementtype 1, 8
 	setobjectmovementtype 3, 1
-	setvar VAR_0x4079, 4
+	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
 	return
 
 TwoIsland_JoyfulGameCorner_MapScript2_171404:: @ 8171404
-	map_script_2 VAR_0x4079, 2, EventScript_171416
+	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2, EventScript_171416
 	map_script_2 VAR_0x406F, 8, EventScript_1BB227
 	.2byte 0
 
@@ -27,8 +27,8 @@ EventScript_171416:: @ 8171416
 	end
 
 TwoIsland_JoyfulGameCorner_MapScript3_17141B:: @ 817141B
-	map_script_2 VAR_0x4079, 0, EventScript_17145F
-	map_script_2 VAR_0x4079, 2, EventScript_171435
+	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 0, EventScript_17145F
+	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2, EventScript_171435
 	map_script_2 VAR_0x406F, 8, EventScript_1BB2FD
 	.2byte 0
 
@@ -44,7 +44,7 @@ EventScript_171435:: @ 8171435
 	closemessage
 	applymovement 3, Movement_1A75ED
 	waitmovement 0
-	setvar VAR_0x4079, 3
+	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	releaseall
 	end
 
@@ -97,7 +97,7 @@ EventScript_17145F:: @ 817145F
 	callstd 4
 	clearflag FLAG_0x091
 	setvar VAR_0x407B, 2
-	setvar VAR_0x4079, 1
+	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 1
 	releaseall
 	end
 
@@ -133,7 +133,7 @@ Movement_17152F:: @ 817152F
 TwoIsland_JoyfulGameCorner_EventScript_171535:: @ 8171535
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4079, 4
+	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
 	goto_if 1, EventScript_1BC060
 	checkflag FLAG_0x2A3
 	goto_if 1, EventScript_171555
@@ -151,11 +151,11 @@ EventScript_171555:: @ 8171555
 TwoIsland_JoyfulGameCorner_EventScript_17155F:: @ 817155F
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4079, 4
+	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
 	goto_if 1, EventScript_1BC0CE
 	checkflag FLAG_0x2FB
 	goto_if 1, EventScript_1715F5
-	compare_var_to_value VAR_0x4079, 3
+	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	goto_if 1, EventScript_17158A
 	loadword 0, gUnknown_81A2743
 	callstd 4
@@ -167,7 +167,7 @@ EventScript_17158A:: @ 817158A
 	goto_if 1, EventScript_1715C4
 	loadword 0, gUnknown_81A296A
 	callstd 4
-	setvar VAR_0x4076, 2
+	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
 	textcolor 3
 	playfanfare MUS_ME_WAZA
 	message Text_1A29F7

@@ -6,11 +6,11 @@ PalletTown_ProfessorOaksLab_MapScripts:: @ 8168F7E
 
 PalletTown_ProfessorOaksLab_MapScript1_168F8E:: @ 8168F8E
 	setflag FLAG_0x2CF
-	compare_var_to_value VAR_0x4055, 1
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	call_if 1, EventScript_168FC6
-	compare_var_to_value VAR_0x4055, 7
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7
 	call_if 1, EventScript_168FD5
-	compare_var_to_value VAR_0x4055, 8
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
 	call_if 1, EventScript_168FC0
 	checkflag FLAG_0x247
 	call_if 1, EventScript_168FBC
@@ -21,7 +21,7 @@ EventScript_168FBC:: @ 8168FBC
 	return
 
 EventScript_168FC0:: @ 8168FC0
-	setvar VAR_0x4055, 9
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9
 	return
 
 EventScript_168FC6:: @ 8168FC6
@@ -36,7 +36,7 @@ EventScript_168FD5:: @ 8168FD5
 	return
 
 PalletTown_ProfessorOaksLab_MapScript2_168FE1:: @ 8168FE1
-	map_script_2 VAR_0x4055, 1, EventScript_168FEB
+	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, EventScript_168FEB
 	.2byte 0
 
 EventScript_168FEB:: @ 8168FEB
@@ -44,8 +44,8 @@ EventScript_168FEB:: @ 8168FEB
 	end
 
 PalletTown_ProfessorOaksLab_MapScript3_168FF0:: @ 8168FF0
-	map_script_2 VAR_0x4055, 1, EventScript_16923E
-	map_script_2 VAR_0x4055, 7, EventScript_169002
+	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, EventScript_16923E
+	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7, EventScript_169002
 	.2byte 0
 
 EventScript_169002:: @ 8169002 
@@ -137,7 +137,7 @@ EventScript_169035:: @ 8169035
 	call_if 1, EventScript_169B7B
 	removeobject 8
 	fadedefaultbgm
-	setvar VAR_0x4055, 8
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
 	releaseall
 	end
 
@@ -248,7 +248,7 @@ EventScript_16923E:: @ 816923E
 	callstd 4
 	loadword 0, gUnknown_818E0EA
 	callstd 4
-	setvar VAR_0x4055, 2
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	releaseall
 	end
 
@@ -515,7 +515,7 @@ EventScript_1694C2:: @ 81694C2
 	removeobject 8
 	playse SE_KAIDAN
 	fadedefaultbgm
-	setvar VAR_0x4055, 4
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 4
 	setflag FLAG_0x258
 	releaseall
 	end
@@ -588,9 +588,9 @@ Movement_169559:: @ 8169559
 PalletTown_ProfessorOaksLab_EventScript_16955F:: @ 816955F
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4055, 3
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 1, EventScript_16958B
-	compare_var_to_value VAR_0x4055, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if 1, EventScript_169581
 	loadword 0, gUnknown_818DC67
 	callstd 4
@@ -614,21 +614,21 @@ PalletTown_ProfessorOaksLab_EventScript_169595:: @ 8169595
 	faceplayer
 	checkflag FLAG_0x002
 	goto_if 1, EventScript_169600
-	compare_var_to_value VAR_0x4055, 9
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9
 	goto_if 1, EventScript_169903
-	compare_var_to_value VAR_0x4055, 8
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
 	goto_if 1, EventScript_169A6E
 	checkflag 2092
 	goto_if 1, EventScript_1699CE
 	compare_var_to_value VAR_0x4052, 1
 	goto_if 1, EventScript_169903
-	compare_var_to_value VAR_0x4055, 6
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	goto_if 1, EventScript_1698D6
-	compare_var_to_value VAR_0x4057, 1
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	goto_if 4, EventScript_16961E
-	compare_var_to_value VAR_0x4055, 4
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 4
 	goto_if 1, EventScript_169614
-	compare_var_to_value VAR_0x4055, 3
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 1, EventScript_16960A
 	loadword 0, gUnknown_818E116
 	callstd 4
@@ -776,8 +776,8 @@ EventScript_16961E:: @ 816961E
 	call_if 1, EventScript_169B7B
 	removeobject 8
 	fadedefaultbgm
-	setvar VAR_0x4055, 6
-	setvar VAR_0x4057, 2
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 2
 	setvar VAR_0x4051, 1
 	setvar VAR_0x4058, 1
 	setvar VAR_0x4054, 1
@@ -1196,9 +1196,9 @@ PalletTown_ProfessorOaksLab_EventScript_169BAB:: @ 8169BAB
 	setvar VAR_0x4002, 1
 	setvar VAR_0x4003, 4
 	setvar VAR_0x4004, 7
-	compare_var_to_value VAR_0x4055, 3
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 4, EventScript_169DE4
-	compare_var_to_value VAR_0x4055, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if 1, EventScript_169BE1
 	loadword 0, gUnknown_818EA19
 	callstd 4
@@ -1318,7 +1318,7 @@ EventScript_169D2F:: @ 8169D2F
 	waitmessage
 	playfanfare BGM_FRLG_ME_KEYITEM
 	waitfanfare
-	setvar VAR_0x4055, 3
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	checkflag 2110
 	call_if 1, EventScript_169D5C
 	release
@@ -1363,9 +1363,9 @@ PalletTown_ProfessorOaksLab_EventScript_169D78:: @ 8169D78
 	setvar VAR_0x4002, 7
 	setvar VAR_0x4003, 1
 	setvar VAR_0x4004, 5
-	compare_var_to_value VAR_0x4055, 3
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 4, EventScript_169DE4
-	compare_var_to_value VAR_0x4055, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if 1, EventScript_169BE1
 	loadword 0, gUnknown_818EA19
 	callstd 4
@@ -1379,9 +1379,9 @@ PalletTown_ProfessorOaksLab_EventScript_169DAE:: @ 8169DAE
 	setvar VAR_0x4002, 4
 	setvar VAR_0x4003, 7
 	setvar VAR_0x4004, 6
-	compare_var_to_value VAR_0x4055, 3
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 4, EventScript_169DE4
-	compare_var_to_value VAR_0x4055, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if 1, EventScript_169BE1
 	loadword 0, gUnknown_818EA19
 	callstd 4
@@ -1460,7 +1460,7 @@ PalletTown_ProfessorOaksLab_EventScript_169E71:: @ 8169E71
 
 PalletTown_ProfessorOaksLab_EventScript_169E7A:: @ 8169E7A
 	lockall
-	compare_var_to_value VAR_0x4055, 6
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	goto_if 4, EventScript_169E90
 	loadword 0, gUnknown_818EA84
 	callstd 4

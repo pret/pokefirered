@@ -46,7 +46,7 @@ EventScript_162FA2:: @ 8162FA2
 	call_if 0, EventScript_162FF6
 	compare_var_to_value VAR_0x8008, 24
 	call_if 4, EventScript_163001
-	setvar VAR_0x4063, 1
+	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1
 	warp MAP_SEAFOAM_ISLANDS_B4F, 255, 27, 21
 	waitstate
 	releaseall

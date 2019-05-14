@@ -6,7 +6,7 @@ SixIsland_PokemonCenter_1F_MapScripts:: @ 8171D6A
 
 SixIsland_PokemonCenter_1F_MapScript1_171D7A:: @ 8171D7A
 	setrespawn 20
-	compare_var_to_value VAR_0x4089, 0
+	compare_var_to_value VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0
 	call_if 1, EventScript_171D89
 	end
 
@@ -15,7 +15,7 @@ EventScript_171D89:: @ 8171D89
 	return
 
 SixIsland_PokemonCenter_1F_MapScript3_171D8D:: @ 8171D8D
-	map_script_2 VAR_0x4089, 0, EventScript_171D97
+	map_script_2 VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0, EventScript_171D97
 	.2byte 0
 
 EventScript_171D97:: @ 8171D97
@@ -41,8 +41,8 @@ EventScript_171D97:: @ 8171D97
 	playse SE_KAIDAN
 	delay 35
 	removeobject 2
-	setvar VAR_0x4089, 1
-	setvar VAR_0x4086, 1
+	setvar VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 1
+	setvar VAR_MAP_SCENE_FOUR_ISLAND, 1
 	releaseall
 	end
 

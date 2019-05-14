@@ -5,7 +5,7 @@ IndigoPlateau_Exterior_MapScripts:: @ 816723B
 
 IndigoPlateau_Exterior_MapScript1_167246:: @ 8167246
 	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
-	compare_var_to_value VAR_0x4085, 1
+	compare_var_to_value VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1
 	call_if 1, EventScript_167255
 	end
 
@@ -14,7 +14,7 @@ EventScript_167255:: @ 8167255
 	return
 
 IndigoPlateau_Exterior_MapScript2_16725A:: @ 816725A
-	map_script_2 VAR_0x4085, 1, EventScript_167264
+	map_script_2 VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1, EventScript_167264
 	.2byte 0
 
 EventScript_167264:: @ 8167264
@@ -56,7 +56,7 @@ EventScript_167264:: @ 8167264
 	applymovement 255, Movement_167311
 	waitmovement 0
 	special RemoveScriptFieldObject
-	setvar VAR_0x4085, 0
+	setvar VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 0
 	removeobject 1
 	removeobject 2
 	special sub_80F39B4

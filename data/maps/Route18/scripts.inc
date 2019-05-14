@@ -4,7 +4,7 @@ Route18_MapScripts:: @ 81681F6
 	.byte 0
 
 Route18_MapScript1_168201:: @ 8168201
-	compare_var_to_value VAR_0x405E, 1
+	compare_var_to_value VAR_MAP_SCENE_ROUTE16, 1
 	call_if 1, EventScript_16820D
 	end
 
@@ -13,7 +13,7 @@ EventScript_16820D:: @ 816820D
 	return
 
 Route18_MapScript2_168211:: @ 8168211
-	map_script_2 VAR_0x405E, 1, EventScript_16821B
+	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, EventScript_16821B
 	.2byte 0
 
 EventScript_16821B:: @ 816821B

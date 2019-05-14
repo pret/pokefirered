@@ -10,7 +10,7 @@ CinnabarIsland_MapScript1_166EE1:: @ 8166EE1
 	call_if 1, EventScript_166F24
 	compare_var_to_value VAR_0x4071, 3
 	call_if 1, EventScript_166F52
-	compare_var_to_value VAR_0x408A, 1
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 1
 	call_if 1, EventScript_166F0B
 	end
 
@@ -51,7 +51,7 @@ EventScript_166F68:: @ 8166F68
 	return
 
 CinnabarIsland_MapScript2_166F6E:: @ 8166F6E
-	map_script_2 VAR_0x408A, 1, EventScript_166F88
+	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND, 1, EventScript_166F88
 	map_script_2 VAR_0x4071, 1, EventScript_166FCD
 	map_script_2 VAR_0x4071, 3, EventScript_166FA0
 	.2byte 0
@@ -61,7 +61,7 @@ EventScript_166F88:: @ 8166F88
 	clearflag FLAG_SPECIAL_FLAG_0x4001
 	savebgm MUS_DUMMY
 	textcolor 0
-	setvar VAR_0x408A, 2
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
 	delay 20
 	call EventScript_1670E6
 	releaseall
@@ -224,7 +224,7 @@ EventScript_1670E6:: @ 81670E6
 	removeobject 3
 	delay 40
 	setflag FLAG_0x06B
-	setvar VAR_0x4075, 1
+	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 1
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8006, 1
 	goto EventScript_1A90DA

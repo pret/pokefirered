@@ -110,7 +110,7 @@
 #define VAR_LINK_CONTEST_ROOM_STATE 0x4086
 #define VAR_CABLE_CLUB_STATE        0x4087
 #define VAR_CONTEST_LOCATION        0x4088
-#define VAR_0x4089                  0x4089 // TODO: related to decorations
+#define VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F                  0x4089 // TODO: related to decorations
 #define VAR_CONTEST_PRIZE_PICKUP    0x408A
 
 #define VAR_LITTLEROOT_HOUSES_STATE_2 0x408C // TODO: needs more investigation

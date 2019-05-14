@@ -14,7 +14,7 @@ EventScript_1680FF:: @ 81680FF
 	return
 
 Route16_MapScript2_168103:: @ 8168103
-	compare_var_to_value VAR_0x405E, 1
+	compare_var_to_value VAR_MAP_SCENE_ROUTE16, 1
 	call_if 1, EventScript_16810F
 	end
 
@@ -23,7 +23,7 @@ EventScript_16810F:: @ 816810F
 	return
 
 Route16_MapScript3_168113:: @ 8168113
-	map_script_2 VAR_0x405E, 1, EventScript_16811D
+	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, EventScript_16811D
 	.2byte 0
 
 EventScript_16811D:: @ 816811D

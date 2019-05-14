@@ -14,7 +14,7 @@ EventScript_16A1E8:: @ 816A1E8
 	end
 
 ViridianCity_Mart_MapScript2_16A1FB:: @ 816A1FB
-	map_script_2 VAR_0x4057, 0, EventScript_16A205
+	map_script_2 VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 0, EventScript_16A205
 	.2byte 0
 
 EventScript_16A205:: @ 816A205
@@ -30,14 +30,14 @@ EventScript_16A205:: @ 816A205
 	waitmovement 0
 	loadword 0, gUnknown_819023A
 	callstd 4
-	setvar VAR_0x4057, 1
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	additem ITEM_OAKS_PARCEL, 1
 	loadword 0, gUnknown_8190289
 	setorcopyvar VAR_0x8000, 349
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
 	callstd 9
-	setvar VAR_0x4055, 5
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 5
 	releaseall
 	end
 
@@ -60,7 +60,7 @@ Movement_16A262:: @ 816A262
 ViridianCity_Mart_EventScript_16A268:: @ 816A268
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4057, 1
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	goto_if 1, EventScript_16A2A4
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2

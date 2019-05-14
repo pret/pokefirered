@@ -8,7 +8,7 @@ SSAnne_Exterior_MapScript1_16084B:: @ 816084B
 	end
 
 SSAnne_Exterior_MapScript2_16084F:: @ 816084F
-	map_script_2 VAR_0x407E, 1, SSAnne_Exterior_160859
+	map_script_2 VAR_MAP_SCENE_VERMILION_CITY, 1, SSAnne_Exterior_160859
 	.2byte 0
 
 SSAnne_Exterior_160859:: @ 8160859
@@ -25,7 +25,7 @@ SSAnne_Exterior_160859:: @ 8160859
 	removeobject 1
 	applymovement 255, Movement_1608B7
 	waitmovement 0
-	setvar VAR_0x407E, 2
+	setvar VAR_MAP_SCENE_VERMILION_CITY, 2
 	setvar VAR_0x4053, 0
 	warp MAP_VERMILION_CITY, 255, 23, 34
 	waitstate

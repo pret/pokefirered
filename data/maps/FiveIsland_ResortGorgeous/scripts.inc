@@ -4,7 +4,7 @@ FiveIsland_ResortGorgeous_MapScripts:: @ 81687E4
 	.byte 0
 
 FiveIsland_ResortGorgeous_MapScript1_1687EF:: @ 81687EF
-	map_script_2 VAR_0x4084, 1, EventScript_1687F9
+	map_script_2 VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 1, EventScript_1687F9
 	.2byte 0
 
 EventScript_1687F9:: @ 81687F9
@@ -12,7 +12,7 @@ EventScript_1687F9:: @ 81687F9
 	end
 
 FiveIsland_ResortGorgeous_MapScript2_1687FE:: @ 81687FE
-	map_script_2 VAR_0x4084, 1, EventScript_168808
+	map_script_2 VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 1, EventScript_168808
 	.2byte 0
 
 EventScript_168808:: @ 8168808
@@ -31,7 +31,7 @@ EventScript_168808:: @ 8168808
 	waitdooranim
 	removeobject 8
 	clearflag FLAG_0x095
-	setvar VAR_0x4084, 2
+	setvar VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 2
 	releaseall
 	end
 

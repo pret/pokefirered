@@ -5,7 +5,7 @@ FourIsland_MapScripts:: @ 8167CAE
 
 FourIsland_MapScript1_167CB9:: @ 8167CB9
 	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
-	compare_var_to_value VAR_0x4086, 0
+	compare_var_to_value VAR_MAP_SCENE_FOUR_ISLAND, 0
 	call_if 1, EventScript_167CCD
 	call EventScript_167CD1
 	end
@@ -23,7 +23,7 @@ EventScript_167CE1:: @ 8167CE1
 	return
 
 FourIsland_MapScript2_167CE2:: @ 8167CE2
-	map_script_2 VAR_0x4086, 0, EventScript_167CEC
+	map_script_2 VAR_MAP_SCENE_FOUR_ISLAND, 0, EventScript_167CEC
 	.2byte 0
 
 EventScript_167CEC:: @ 8167CEC
@@ -49,7 +49,7 @@ EventScript_167CEC:: @ 8167CEC
 	playse SE_KAIDAN
 	delay 35
 	removeobject 10
-	setvar VAR_0x4086, 1
+	setvar VAR_MAP_SCENE_FOUR_ISLAND, 1
 	releaseall
 	end
 

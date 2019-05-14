@@ -7,7 +7,7 @@ SevenIsland_House_Room1_MapScript1_170895:: @ 8170895
 	special ValidateEReaderTrainer
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_1708AF
-	compare_var_to_value VAR_0x4074, 0
+	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
 	call_if 5, EventScript_1708C3
 	end
 
@@ -24,9 +24,9 @@ EventScript_1708C3:: @ 81708C3
 	return
 
 SevenIsland_House_Room1_MapScript2_1708CF:: @ 81708CF
-	map_script_2 VAR_0x4074, 1, EventScript_1708E9
-	map_script_2 VAR_0x4074, 2, EventScript_1708E9
-	map_script_2 VAR_0x4074, 3, EventScript_1708E9
+	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1, EventScript_1708E9
+	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2, EventScript_1708E9
+	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3, EventScript_1708E9
 	.2byte 0
 
 EventScript_1708E9:: @ 1708E9
@@ -39,14 +39,14 @@ EventScript_1708E9:: @ 1708E9
 	moveobjectoffscreen 1
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
-	compare_var_to_value VAR_0x4074, 1
+	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
 	call_if 1, EventScript_170938
-	compare_var_to_value VAR_0x4074, 2
+	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
 	call_if 1, EventScript_170941
-	compare_var_to_value VAR_0x4074, 3
+	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
 	call_if 1, EventScript_17094A
 	special LoadPlayerParty
-	setvar VAR_0x4074, 0
+	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
 	releaseall
 	end
 

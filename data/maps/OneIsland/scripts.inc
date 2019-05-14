@@ -8,7 +8,7 @@ OneIsland_MapScript1_16748F:: @ 816748F
 	end
 
 OneIsland_MapScript2_167493:: @ 8167493
-	map_script_2 VAR_0x4075, 2, EventScript_16749D
+	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 2, EventScript_16749D
 	.2byte 0
 
 EventScript_16749D:: @ 816749D
@@ -30,7 +30,7 @@ EventScript_16749D:: @ 816749D
 	closedoor 14, 5
 	waitdooranim
 	removeobject 1
-	setvar VAR_0x4075, 3
+	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 3
 	warp MAP_ONE_ISLAND_POKEMON_CENTER_1F, 255, 9, 9
 	waitstate
 	releaseall

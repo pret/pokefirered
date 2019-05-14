@@ -4,14 +4,14 @@ VermilionCity_MapScripts:: @ 81668DC
 	.byte 0
 
 VermilionCity_MapScript2_1668E7:: @ 81668E7
-	map_script_2 VAR_0x407E, 2, EventScript_1668F1
+	map_script_2 VAR_MAP_SCENE_VERMILION_CITY, 2, EventScript_1668F1
 	.2byte 0
 
 EventScript_1668F1:: @ 81668F1
 	lockall
 	applymovement 255, Movement_166903
 	waitmovement 0
-	setvar VAR_0x407E, 3
+	setvar VAR_MAP_SCENE_VERMILION_CITY, 3
 	releaseall
 	end
 
@@ -38,7 +38,7 @@ VermilionCity_EventScript_166917:: @ 8166917
 VermilionCity_EventScript_166920:: @ 8166920
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x407E, 3
+	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if 1, EventScript_166937
 	loadword 0, gUnknown_817F776
 	callstd 4
@@ -54,7 +54,7 @@ EventScript_166937:: @ 8166937
 VermilionCity_EventScript_166941:: @ 8166941
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x407E, 3
+	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if 1, EventScript_166996
 	loadword 0, gUnknown_817FA22
 	callstd 4
@@ -81,9 +81,9 @@ EventScript_166977:: @ 8166977
 
 EventScript_166996:: @ 8166996
 	setvar VAR_0x8004, 0
-	compare_var_to_value VAR_0x4076, 5
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if 4, EventScript_1669BB
-	compare_var_to_value VAR_0x4076, 1
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
 	goto_if 4, EventScript_166B3B
 	loadword 0, gUnknown_817FB10
 	callstd 4
@@ -236,7 +236,7 @@ EventScript_166BA0:: @ 8166BA0
 	applymovement 6, Movement_1A75E7
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
-	compare_var_to_value VAR_0x407E, 3
+	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if 1, EventScript_166BED
 	loadword 0, gUnknown_817FA3C
 	callstd 4
@@ -257,9 +257,9 @@ EventScript_166BDE:: @ 8166BDE
 
 EventScript_166BED:: @ 8166BED
 	setvar VAR_0x8004, 0
-	compare_var_to_value VAR_0x4076, 5
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if 4, EventScript_1669BB
-	compare_var_to_value VAR_0x4076, 1
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
 	goto_if 4, EventScript_166B3B
 	loadword 0, gUnknown_817FB10
 	callstd 4

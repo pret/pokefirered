@@ -41,20 +41,20 @@ EventScript_170A97:: @ 8170A97
 	end
 
 EventScript_170AFE:: @ 8170AFE
-	setvar VAR_0x4074, 3
+	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
 	loadword 0, gUnknown_81A07EC
 	callstd 4
 	return
 
 EventScript_170B0C:: @ 8170B0C
-	setvar VAR_0x4074, 1
+	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
 	special sub_80CA68C
 	waitmessage
 	waitbuttonpress
 	return
 
 EventScript_170B17:: @ 8170B17
-	setvar VAR_0x4074, 2
+	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
 	special sub_80CA68C
 	waitmessage
 	waitbuttonpress

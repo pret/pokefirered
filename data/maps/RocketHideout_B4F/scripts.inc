@@ -4,9 +4,9 @@ RocketHideout_B4F_MapScripts:: @ 81612E8
 
 RocketHideout_B4F_MapScript1_1612EE:: @ 81612EE
 	setvar VAR_0x4001, 0
-	checktrainerflag 366
+	checktrainerflag FLAG_0x16E
 	call_if 1, EventScript_161311
-	checktrainerflag 367
+	checktrainerflag FLAG_0x16F
 	call_if 1, EventScript_161311
 	compare_var_to_value VAR_0x4001, 2
 	call_if 5, EventScript_16146A
@@ -90,9 +90,9 @@ RocketHideout_B4F_EventScript_1613CE:: @ 81613CE
 
 EventScript_1613E9:: @ 81613E9
 	setvar VAR_0x4001, 0
-	checktrainerflag 366
+	checktrainerflag FLAG_0x16E
 	call_if 1, EventScript_161311
-	checktrainerflag 367
+	checktrainerflag FLAG_0x16F
 	call_if 1, EventScript_161311
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_1614A1
@@ -109,9 +109,9 @@ RocketHideout_B4F_EventScript_161418:: @ 8161418
 
 EventScript_161433:: @ 8161433
 	setvar VAR_0x4001, 0
-	checktrainerflag 366
+	checktrainerflag FLAG_0x16E
 	call_if 1, EventScript_161311
-	checktrainerflag 367
+	checktrainerflag FLAG_0x16F
 	call_if 1, EventScript_161311
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_1614A1

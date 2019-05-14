@@ -63,15 +63,15 @@ PokemonLeague_LoreleisRoom_EventScript_1625DC:: @ 81625DC
 	setvar VAR_0x8004, 9
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
-	checkflag 2116
+	checkflag FLAG_0x844
 	call_if 0, EventScript_162641
-	checkflag 2116
+	checkflag FLAG_0x844
 	call_if 1, EventScript_16264A
 	setflag FLAG_0x003
 	setflag FLAG_0x005
-	checkflag 2116
+	checkflag FLAG_0x844
 	call_if 0, EventScript_162653
-	checkflag 2116
+	checkflag FLAG_0x844
 	call_if 1, EventScript_16265E
 	clearflag FLAG_0x005
 	goto EventScript_162673

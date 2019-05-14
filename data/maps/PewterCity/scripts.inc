@@ -1492,7 +1492,7 @@ EventScript_1662DE:: @ 81662DE
 	callstd 4
 	closemessage
 	removeobject 7
-	setflag 2095
+	setflag FLAG_0x82F
 	setvar VAR_0x406C, 2
 	return
 

@@ -4,7 +4,7 @@ CeruleanCave_B1F_MapScripts:: @ 81624BE
 	.byte 0
 
 CeruleanCave_B1F_MapScript1_1624C9:: @ 81624C9
-	checkflag 2055
+	checkflag FLAG_0x807
 	call_if 1, EventScript_1624D3
 	end
 
@@ -40,10 +40,10 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	playbgm BGM_FRLG_LEADER_EYE, 0
 	waitbuttonpress
 	setwildbattle SPECIES_MEWTWO, 70, ITEM_NONE
-	setflag 2055
+	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate
-	clearflag 2055
+	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_162558

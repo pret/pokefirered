@@ -5,7 +5,7 @@ Route16_MapScripts:: @ 81680E5
 	.byte 0
 
 Route16_MapScript1_1680F5:: @ 81680F5
-	checkflag 2055
+	checkflag FLAG_0x807
 	call_if 1, EventScript_1680FF
 	end
 
@@ -19,7 +19,7 @@ Route16_MapScript2_168103:: @ 8168103
 	end
 
 EventScript_16810F:: @ 816810F
-	setflag 2096
+	setflag FLAG_0x830
 	return
 
 Route16_MapScript3_168113:: @ 8168113
@@ -50,9 +50,9 @@ Route16_EventScript_168121:: @ 8168121
 	delay 40
 	waitmoncry
 	setflag FLAG_0x080
-	setflag 2055
+	setflag FLAG_0x807
 	dowildbattle
-	clearflag 2055
+	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_168199

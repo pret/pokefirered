@@ -31,15 +31,15 @@ EventScript_165920:: @ 8165920
 	return
 
 EventScript_165931:: @ 8165931
-	checkflag 2081
+	checkflag FLAG_0x821
 	goto_if 0, EventScript_1A77A9
-	checkflag 2082
+	checkflag FLAG_0x822
 	goto_if 0, EventScript_1A77A9
-	checkflag 2083
+	checkflag FLAG_0x823
 	goto_if 0, EventScript_1A77A9
 	checkflag FLAG_UNK824
 	goto_if 0, EventScript_1A77A9
-	checkflag 2085
+	checkflag FLAG_0x825
 	goto_if 0, EventScript_1A77A9
 	checkflag FLAG_UNK826
 	goto_if 0, EventScript_1A77A9

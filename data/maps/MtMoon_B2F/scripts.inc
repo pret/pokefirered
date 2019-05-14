@@ -25,7 +25,7 @@ MtMoon_B2F_EventScript_1606C2:: @ 81606C2
 	faceplayer
 	checkflag FLAG_0x232
 	goto_if 1, EventScript_160707
-	checktrainerflag 170
+	checktrainerflag FLAG_0x0AA
 	goto_if 1, EventScript_160711
 	call EventScript_1606DD
 	release

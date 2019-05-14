@@ -28,11 +28,11 @@ EventScript_165243:: @ 8165243
 	checkflag FLAG_0x2F7
 	goto_if 1, EventScript_1A77A9
 	clearflag FLAG_0x09A
-	clearflag 2120
+	clearflag FLAG_0x848
 	return
 
 BirthIsland_Exterior_MapScript2_165253:: @ 8165253
-	checkflag 2055
+	checkflag FLAG_0x807
 	call_if 1, EventScript_16525D
 	end
 
@@ -95,10 +95,10 @@ EventScript_1652C0:: @ 81652C0
 	setvar VAR_0x8005, 30
 	setvar VAR_0x8006, 0
 	special sub_8044838
-	setflag 2055
+	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate
-	clearflag 2055
+	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16533A

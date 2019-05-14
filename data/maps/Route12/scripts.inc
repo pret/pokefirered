@@ -3,7 +3,7 @@ Route12_MapScripts:: @ 8168000
 	.byte 0
 
 Route12_MapScript1_168006:: @ 8168006
-	checkflag 2055
+	checkflag FLAG_0x807
 	call_if 1, EventScript_168010
 	end
 
@@ -31,10 +31,10 @@ Route12_EventScript_168014:: @ 8168014
 	delay 40
 	waitmoncry
 	setflag FLAG_0x054
-	setflag 2055
+	setflag FLAG_0x807
 	setflag FLAG_0x253
 	dowildbattle
-	clearflag 2055
+	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16808F

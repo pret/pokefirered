@@ -4,7 +4,7 @@ FiveIsland_LostCave_Room10_MapScripts:: @ 8164C2D
 	.byte 0
 
 FiveIsland_LostCave_Room10_MapScript1_164C38:: @ 8164C38
-	checktrainerflag 606
+	checktrainerflag FLAG_0x25E
 	call_if 1, EventScript_164C42
 	end
 
@@ -47,7 +47,7 @@ EventScript_164CA5:: @ 8164CA5
 	return
 
 EventScript_164CB6:: @ 8164CB6
-	settrainerflag 606
+	settrainerflag FLAG_0x25E
 	call EventScript_164CA5
 	releaseall
 	end

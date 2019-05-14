@@ -23,7 +23,7 @@ EventScript_169F04:: @ 8169F04
 	special SetFlavorTextFlagFromSpecialVars
 	setflag FLAG_0x0AD
 	setflag FLAG_0x4B7
-	setflag 2087
+	setflag FLAG_0x827
 	setvar VAR_0x4054, 3
 	setvar VAR_0x8008, 8
 	call EventScript_1A6B18
@@ -123,7 +123,7 @@ EventScript_16A047:: @ 816A047
 
 ViridianCity_Gym_EventScript_16A05E:: @ 816A05E
 	lockall
-	checkflag 2087
+	checkflag FLAG_0x827
 	goto_if 1, EventScript_16A072
 	loadword 0, gUnknown_818FB8D
 	callstd 4

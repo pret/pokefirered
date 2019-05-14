@@ -4,7 +4,7 @@ PowerPlant_MapScripts:: @ 8163764
 	.byte 0
 
 PowerPlant_MapScript1_16376F:: @ 816376F
-	checkflag 2055
+	checkflag FLAG_0x807
 	call_if 1, EventScript_163779
 	end
 
@@ -53,10 +53,10 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 	delay 10
 	playbgm BGM_FRLG_LEADER_EYE, 0
 	waitbuttonpress
-	setflag 2055
+	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate
-	clearflag 2055
+	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16381B
@@ -89,9 +89,9 @@ PowerPlant_EventScript_16382F:: @ 816382F
 	playmoncry SPECIES_ELECTRODE, 2
 	delay 40
 	waitmoncry
-	setflag 2055
+	setflag FLAG_0x807
 	dowildbattle
-	clearflag 2055
+	clearflag FLAG_0x807
 	special sub_8112364
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
@@ -120,9 +120,9 @@ PowerPlant_EventScript_16388D:: @ 816388D
 	playmoncry SPECIES_ELECTRODE, 2
 	delay 40
 	waitmoncry
-	setflag 2055
+	setflag FLAG_0x807
 	dowildbattle
-	clearflag 2055
+	clearflag FLAG_0x807
 	special sub_8112364
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1

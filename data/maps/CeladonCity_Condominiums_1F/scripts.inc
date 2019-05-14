@@ -6,7 +6,7 @@ CeladonCity_Condominiums_1F_EventScript_16C321:: @ 816C321
 	faceplayer
 	checkflag FLAG_0x2F8
 	goto_if 1, EventScript_16C36A
-	checkflag 2092
+	checkflag FLAG_0x82C
 	goto_if 1, EventScript_16C374
 	checkflag FLAG_0x2A6
 	goto_if 1, EventScript_16C36A

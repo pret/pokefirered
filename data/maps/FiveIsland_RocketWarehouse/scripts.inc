@@ -8,7 +8,7 @@ FiveIsland_RocketWarehouse_MapScript2_163F39:: @ 8163F39
 	end
 
 FiveIsland_RocketWarehouse_MapScript1_163F3D:: @ 8163F3D
-	checktrainerflag 543
+	checktrainerflag FLAG_0x21F
 	call_if 1, EventScript_163F47
 	end
 
@@ -47,7 +47,7 @@ FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
 
 FiveIsland_RocketWarehouse_EventScript_163F93:: @ 8163F93
 	trainerbattle 2, 545, 0, Text_17BBAF, Text_17BC55, EventScript_163FCD
-	checkflag 2116
+	checkflag FLAG_0x844
 	goto_if 1, EventScript_163FB7
 	loadword 0, gUnknown_817BCA3
 	callstd 6

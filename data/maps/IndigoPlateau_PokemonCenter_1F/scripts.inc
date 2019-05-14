@@ -11,7 +11,7 @@ IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65:: @ 816EA65
 	end
 
 EventScript_16EA79:: @ 816EA79
-	checkflag 2116
+	checkflag FLAG_0x844
 	goto_if 1, EventScript_1A77A9
 	setobjectxyperm 4, 4, 2
 	return
@@ -28,7 +28,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EA8A:: @ 816EA8A
 	end
 
 EventScript_16EAA6:: @ 816EAA6
-	checkflag 2116
+	checkflag FLAG_0x844
 	goto_if 1, EventScript_16EAB9
 	loadword 0, gUnknown_819A943
 	callstd 4

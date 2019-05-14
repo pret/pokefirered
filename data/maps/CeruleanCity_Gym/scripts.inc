@@ -18,7 +18,7 @@ EventScript_16AAD3:: @ 816AAD3
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
 	setflag FLAG_0x4B1
-	setflag 2081
+	setflag FLAG_0x821
 	setrespawn 4
 	setvar VAR_0x8008, 2
 	call EventScript_1A6B18
@@ -82,7 +82,7 @@ EventScript_16AB94:: @ 816AB94
 
 CeruleanCity_Gym_EventScript_16AB9E:: @ 816AB9E
 	lockall
-	checkflag 2081
+	checkflag FLAG_0x821
 	goto_if 1, EventScript_16ABB2
 	loadword 0, gUnknown_81926E1
 	callstd 4

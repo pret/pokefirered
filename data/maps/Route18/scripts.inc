@@ -9,7 +9,7 @@ Route18_MapScript1_168201:: @ 8168201
 	end
 
 EventScript_16820D:: @ 816820D
-	setflag 2096
+	setflag FLAG_0x830
 	return
 
 Route18_MapScript2_168211:: @ 8168211

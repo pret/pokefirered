@@ -151,7 +151,7 @@ EventScript_167E19:: @ 8167E19
 FourIsland_EventScript_167E2E:: @ 8167E2E
 	lock
 	faceplayer
-	checkflag 2116
+	checkflag FLAG_0x844
 	goto_if 1, EventScript_167E43
 	loadword 0, gUnknown_8182A2B
 	callstd 4

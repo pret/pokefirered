@@ -3,7 +3,7 @@ ThreeIsland_Port_MapScripts:: @ 8168789
 	.byte 0
 
 ThreeIsland_Port_MapScript1_16878F:: @ 816878F
-	clearflag 2113
+	clearflag FLAG_0x841
 	setflag FLAG_0x2A1
 	end
 

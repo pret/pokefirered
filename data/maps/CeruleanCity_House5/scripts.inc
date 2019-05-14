@@ -10,7 +10,7 @@ CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
 	callstd 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AEAD
-	checkflag 2119
+	checkflag FLAG_0x847
 	goto_if 0, EventScript_16AEA3
 	loadword 0, gUnknown_8193003
 	callstd 4

@@ -22,7 +22,7 @@ EventScript_16D0A0:: @ 816D0A0
 	special SetFlavorTextFlagFromSpecialVars
 	clearflag FLAG_0x09E
 	setflag FLAG_0x4B3
-	setflag 2083
+	setflag FLAG_0x823
 	setvar VAR_0x8008, 4
 	call EventScript_1A6B18
 	goto EventScript_16D0C6
@@ -102,7 +102,7 @@ CeladonCity_Gym_EventScript_16D1B5:: @ 816D1B5
 
 CeladonCity_Gym_EventScript_16D1CC:: @ 816D1CC
 	lockall
-	checkflag 2083
+	checkflag FLAG_0x823
 	goto_if 1, EventScript_16D1E0
 	loadword 0, gUnknown_8197874
 	callstd 4

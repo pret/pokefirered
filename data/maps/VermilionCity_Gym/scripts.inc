@@ -232,7 +232,7 @@ EventScript_16B97C:: @ 816B97C
 	call_if 0, EventScript_16B9AB
 	clearflag FLAG_0x0A0
 	setflag FLAG_0x4B2
-	setflag 2082
+	setflag FLAG_0x822
 	setvar VAR_0x8008, 3
 	call EventScript_1A6B18
 	goto EventScript_16B9AF
@@ -315,7 +315,7 @@ EventScript_16BA81:: @ 816BA81
 
 VermilionCity_Gym_EventScript_16BA8B:: @ 816BA8B
 	lockall
-	checkflag 2082
+	checkflag FLAG_0x822
 	goto_if 1, EventScript_16BA9F
 	loadword 0, gUnknown_819520B
 	callstd 4

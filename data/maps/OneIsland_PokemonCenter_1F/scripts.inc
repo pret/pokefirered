@@ -8,7 +8,7 @@ OneIsland_PokemonCenter_1F_MapScripts:: @ 8170BF8
 OneIsland_PokemonCenter_1F_MapScript3_170C0D:: @ 8170C0D
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	call_if 4, EventScript_170C22
-	checkflag 2116
+	checkflag FLAG_0x844
 	call_if 1, EventScript_170C36
 	end
 
@@ -88,9 +88,9 @@ EventScript_170CB1:: @ 8170CB1
 	waitmovement 0
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
-	checkflag 2092
+	checkflag FLAG_0x82C
 	call_if 1, EventScript_170E34
-	checkflag 2092
+	checkflag FLAG_0x82C
 	call_if 0, EventScript_170E3D
 	applymovement 3, Movement_1A75ED
 	waitmovement 0
@@ -135,7 +135,7 @@ EventScript_170CB1:: @ 8170CB1
 	call_if 4, EventScript_170E46
 	compare_var_to_value VAR_0x4058, 2
 	call_if 0, EventScript_170E58
-	setflag 2117
+	setflag FLAG_0x845
 	loadword 0, gUnknown_81A1230
 	callstd 4
 	closemessage
@@ -143,7 +143,7 @@ EventScript_170CB1:: @ 8170CB1
 	waitmovement 0
 	applymovement 3, Movement_1A75E9
 	waitmovement 0
-	setflag 2113
+	setflag FLAG_0x841
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
 	releaseall
 	end
@@ -337,7 +337,7 @@ EventScript_170FA5:: @ 8170FA5
 	loadword 0, gUnknown_81A1D7D
 	callstd 4
 	special sub_810B82C
-	setflag 2116
+	setflag FLAG_0x844
 	setflag FLAG_0x05C
 	setflag FLAG_0x08C
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
@@ -391,7 +391,7 @@ EventScript_1710B2:: @ 81710B2
 	removeitem ITEM_TRI_PASS, 1
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	additem ITEM_RAINBOW_PASS, 1
-	setflag 2118
+	setflag FLAG_0x846
 	textcolor 3
 	playfanfare BGM_FRLG_ME_KEYITEM
 	message Text_1A1B56
@@ -460,7 +460,7 @@ OneIsland_PokemonCenter_1F_EventScript_171151:: @ 8171151
 OneIsland_PokemonCenter_1F_EventScript_17115A:: @ 817115A
 	lock
 	faceplayer
-	checkflag 2116
+	checkflag FLAG_0x844
 	goto_if 1, EventScript_17116F
 	loadword 0, gUnknown_81A218D
 	callstd 4
@@ -475,7 +475,7 @@ EventScript_17116F:: @ 817116F
 
 OneIsland_PokemonCenter_1F_EventScript_171179:: @ 8171179
 	lockall
-	checkflag 2116
+	checkflag FLAG_0x844
 	goto_if 1, EventScript_1711A0
 	checkflag FLAG_0x2A1
 	goto_if 1, EventScript_171196

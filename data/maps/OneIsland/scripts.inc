@@ -84,7 +84,7 @@ Movement_167514:: @ 8167514
 OneIsland_EventScript_167517:: @ 8167517
 	lock
 	faceplayer
-	checkflag 2116
+	checkflag FLAG_0x844
 	goto_if 1, EventScript_16753F
 	checkflag FLAG_0x2A1
 	goto_if 1, EventScript_167535

@@ -16,23 +16,23 @@ PokemonLeague_ChampionsRoom_MapScript2_162AF2:: @ 8162AF2
 	end
 
 EventScript_162B1E:: @ 8162B1E
-	checktrainerflag 438
+	checktrainerflag FLAG_0x1B6
 	goto_if 1, EventScript_162B57
-	checktrainerflag 739
+	checktrainerflag FLAG_0x2E3
 	goto_if 1, EventScript_162B57
 	return
 
 EventScript_162B31:: @ 8162B31
-	checktrainerflag 439
+	checktrainerflag FLAG_0x1B7
 	goto_if 1, EventScript_162B57
-	checktrainerflag 740
+	checktrainerflag FLAG_0x2E4
 	goto_if 1, EventScript_162B57
 	return
 
 EventScript_162B44:: @ 8162B44
-	checktrainerflag 440
+	checktrainerflag FLAG_0x1B8
 	goto_if 1, EventScript_162B57
-	checktrainerflag 741
+	checktrainerflag FLAG_0x2E5
 	goto_if 1, EventScript_162B57
 	return
 
@@ -59,9 +59,9 @@ EventScript_162B76:: @ 8162B76
 	applymovement 255, Movement_162D07
 	waitmovement 0
 	delay 20
-	checkflag 2092
+	checkflag FLAG_0x82C
 	call_if 0, EventScript_162CB3
-	checkflag 2092
+	checkflag FLAG_0x82C
 	call_if 1, EventScript_162CBC
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
@@ -69,9 +69,9 @@ EventScript_162B76:: @ 8162B76
 	setflag FLAG_0x003
 	setflag FLAG_0x005
 	savebgm BGM_FRLG_KACHI_LEADER
-	checkflag 2116
+	checkflag FLAG_0x844
 	call_if 0, EventScript_162C6F
-	checkflag 2116
+	checkflag FLAG_0x844
 	call_if 1, EventScript_162C91
 	setflag FLAG_0x004
 	clearflag FLAG_0x005

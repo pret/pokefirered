@@ -82,7 +82,7 @@ EventScript_16CC55:: @ 816CC55
 	end
 
 EventScript_16CC65:: @ 816CC65
-	getspeciesname 0, 16385
+	getspeciesname 0, VAR_0x4001
 	loadword 0, gUnknown_819709D
 	callstd 5
 	compare_var_to_value VAR_RESULT, 0
@@ -107,32 +107,32 @@ EventScript_16CC65:: @ 816CC65
 	end
 
 EventScript_16CCD4:: @ 816CCD4
-	givemon 16385, 9, ITEM_NONE, 0, 0, 0
+	givemon VAR_0x4001, 9, ITEM_NONE, 0, 0, 0
 	goto EventScript_16CD52
 	end
 
 EventScript_16CCE9:: @ 816CCE9
-	givemon 16385, 8, ITEM_NONE, 0, 0, 0
+	givemon VAR_0x4001, 8, ITEM_NONE, 0, 0, 0
 	goto EventScript_16CD52
 	end
 
 EventScript_16CCFE:: @ 816CCFE
-	givemon 16385, 18, ITEM_NONE, 0, 0, 0
+	givemon VAR_0x4001, 18, ITEM_NONE, 0, 0, 0
 	goto EventScript_16CD52
 	end
 
 EventScript_16CD13:: @ 816CD13
-	givemon 16385, 25, ITEM_NONE, 0, 0, 0
+	givemon VAR_0x4001, 25, ITEM_NONE, 0, 0, 0
 	goto EventScript_16CD52
 	end
 
 EventScript_16CD28:: @ 816CD28
-	givemon 16385, 26, ITEM_NONE, 0, 0, 0
+	givemon VAR_0x4001, 26, ITEM_NONE, 0, 0, 0
 	goto EventScript_16CD52
 	end
 
 EventScript_16CD3D:: @ 816CD3D
-	givemon 16385, 18, ITEM_NONE, 0, 0, 0
+	givemon VAR_0x4001, 18, ITEM_NONE, 0, 0, 0
 	goto EventScript_16CD52
 	end
 
@@ -177,7 +177,7 @@ EventScript_16CDA5:: @ 816CDA5
 EventScript_16CDB3:: @ 816CDB3
 	takecoins VAR_0x4002
 	updatecoinsbox 0, 5
-	getspeciesname 0, 16385
+	getspeciesname 0, VAR_0x4001
 	playfanfare MUS_FANFA1
 	message Text_1A5DF1
 	waitmessage
@@ -192,7 +192,7 @@ EventScript_16CDB3:: @ 816CDB3
 EventScript_16CDE0:: @ 816CDE0
 	takecoins VAR_0x4002
 	updatecoinsbox 0, 5
-	getspeciesname 0, 16385
+	getspeciesname 0, VAR_0x4001
 	playfanfare MUS_FANFA1
 	message Text_1A5DF1
 	waitmessage
@@ -289,7 +289,7 @@ EventScript_16CF09:: @ 816CF09
 	end
 
 EventScript_16CF22:: @ 816CF22
-	getitemname 0, 16385
+	getitemname 0, VAR_0x4001
 	loadword 0, gUnknown_819709D
 	callstd 5
 	compare_var_to_value VAR_RESULT, 0
@@ -298,11 +298,11 @@ EventScript_16CF22:: @ 816CF22
 	end
 
 EventScript_16CF3F:: @ 816CF3F
-	getitemname 0, 16385
+	getitemname 0, VAR_0x4001
 	checkcoins VAR_RESULT
 	compare_var_to_var VAR_RESULT, VAR_0x4002
 	goto_if 0, EventScript_16CDA5
-	checkitemspace 16385, 1
+	checkitemspace VAR_0x4001, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16CF79
 	takecoins VAR_0x4002

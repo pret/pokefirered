@@ -22,7 +22,7 @@ EventScript_16EE0A:: @ 816EE0A
 	special SetFlavorTextFlagFromSpecialVars
 	clearflag FLAG_0x0AE
 	setflag FLAG_0x4B5
-	setflag 2085
+	setflag FLAG_0x825
 	setvar VAR_0x8008, 6
 	call EventScript_1A6B18
 	goto EventScript_16EE3D
@@ -115,7 +115,7 @@ EventScript_16EF4B:: @ 816EF4B
 
 SaffronCity_Gym_EventScript_16EF55:: @ 816EF55
 	lockall
-	checkflag 2085
+	checkflag FLAG_0x825
 	goto_if 1, EventScript_16EF69
 	loadword 0, gUnknown_819BDFE
 	callstd 4

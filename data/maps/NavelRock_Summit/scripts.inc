@@ -24,7 +24,7 @@ EventScript_164FC6:: @ 8164FC6
 	return
 
 NavelRock_Summit_MapScript2_164FDD:: @ 8164FDD
-	checkflag 2055
+	checkflag FLAG_0x807
 	call_if 1, EventScript_164FE7
 	end
 
@@ -68,10 +68,10 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
 	special sub_8044838
-	setflag 2055
+	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate
-	clearflag 2055
+	clearflag FLAG_0x807
 	setvar VAR_LAST_TALKED, 1
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1

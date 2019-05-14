@@ -4,7 +4,7 @@ ViridianCity_Mart_MapScripts:: @ 816A1D3
 	.byte 0
 
 ViridianCity_Mart_MapScript1_16A1DE:: @ 816A1DE
-	checkflag 2089
+	checkflag FLAG_0x829
 	goto_if 0, EventScript_16A1E8
 	end
 

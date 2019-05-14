@@ -179,7 +179,7 @@ Movement_1665FB:: @ 81665FB
 CeruleanCity_EventScript_166603:: @ 8166603
 	lock
 	faceplayer
-	checktrainerflag 355
+	checktrainerflag FLAG_0x163
 	goto_if 1, EventScript_16662E
 	message Text_17EE0E
 	waitmessage

@@ -48,7 +48,7 @@ EventScript_16B4F2:: @ 816B4F2
 VermilionCity_PokemonFanClub_EventScript_16B4FC:: @ 816B4FC
 	lock
 	faceplayer
-	checkflag 2092
+	checkflag FLAG_0x82C
 	goto_if 1, EventScript_16B511
 	loadword 0, gUnknown_81948E6
 	callstd 4

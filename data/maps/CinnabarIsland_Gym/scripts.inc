@@ -299,7 +299,7 @@ EventScript_16DC68:: @ 816DC68
 
 EventScript_16DC6A:: @ 816DC6A
 	call EventScript_16DC34
-	checktrainerflag 213
+	checktrainerflag FLAG_0x0D5
 	goto_if 0, EventScript_16DC7A
 	releaseall
 	end
@@ -381,7 +381,7 @@ EventScript_16DD31:: @ 816DD31
 
 EventScript_16DD41:: @ 816DD41
 	call EventScript_16DC34
-	checktrainerflag 178
+	checktrainerflag FLAG_0x0B2
 	goto_if 0, EventScript_16DD51
 	releaseall
 	end
@@ -472,7 +472,7 @@ EventScript_16DE0F:: @ 816DE0F
 
 EventScript_16DE1F:: @ 816DE1F
 	call EventScript_16DC34
-	checktrainerflag 214
+	checktrainerflag FLAG_0x0D6
 	goto_if 0, EventScript_16DE2F
 	releaseall
 	end
@@ -554,7 +554,7 @@ EventScript_16DEE6:: @ 816DEE6
 
 EventScript_16DEF6:: @ 816DEF6
 	call EventScript_16DC34
-	checktrainerflag 179
+	checktrainerflag FLAG_0x0B3
 	goto_if 0, EventScript_16DF06
 	releaseall
 	end
@@ -636,7 +636,7 @@ EventScript_16DFBD:: @ 816DFBD
 
 EventScript_16DFCD:: @ 816DFCD
 	call EventScript_16DC34
-	checktrainerflag 215
+	checktrainerflag FLAG_0x0D7
 	goto_if 0, EventScript_16DFDD
 	releaseall
 	end
@@ -718,7 +718,7 @@ EventScript_16E094:: @ 816E094
 
 EventScript_16E0A4:: @ 816E0A4
 	call EventScript_16DC34
-	checktrainerflag 180
+	checktrainerflag FLAG_0x0B4
 	goto_if 0, EventScript_16E0B4
 	releaseall
 	end

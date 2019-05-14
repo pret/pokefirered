@@ -128,7 +128,7 @@ EventScript_17064A:: @ 817064A
 	setflag FLAG_0x235
 	setflag FLAG_0x031
 	setflag FLAG_0x234
-	setflag 2100
+	setflag FLAG_0x834
 	goto EventScript_170640
 	end
 

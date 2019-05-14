@@ -618,7 +618,7 @@ PalletTown_ProfessorOaksLab_EventScript_169595:: @ 8169595
 	goto_if 1, EventScript_169903
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
 	goto_if 1, EventScript_169A6E
-	checkflag 2092
+	checkflag FLAG_0x82C
 	goto_if 1, EventScript_1699CE
 	compare_var_to_value VAR_0x4052, 1
 	goto_if 1, EventScript_169903
@@ -734,7 +734,7 @@ EventScript_16961E:: @ 816961E
 	waitmessage
 	waitfanfare
 	call EventScript_1A6675
-	setflag 2089
+	setflag FLAG_0x829
 	special sub_810B810
 	setvar VAR_0x407C, 1
 	loadword 0, gUnknown_818E612
@@ -1208,7 +1208,7 @@ PalletTown_ProfessorOaksLab_EventScript_169BAB:: @ 8169BAB
 EventScript_169BE1:: @ 8169BE1
 	applymovement 4, Movement_1A75EF
 	waitmovement 0
-	drawmonpic 16386, 10, 3
+	drawmonpic VAR_0x4002, 10, 3
 	textcolor 0
 	compare_var_to_value VAR_0x4001, 0
 	goto_if 1, EventScript_169C14
@@ -1256,11 +1256,11 @@ EventScript_169C74:: @ 8169C74
 	loadword 0, gUnknown_818E2E5
 	callstd 4
 	call EventScript_1A6675
-	setflag 2088
+	setflag FLAG_0x828
 	setflag FLAG_0x291
-	givemon 16386, 5, ITEM_NONE, 0, 0, 0
+	givemon VAR_0x4002, 5, ITEM_NONE, 0, 0, 0
 	copyvar VAR_STARTER_MON, VAR_0x4001
-	getspeciesname 0, 16386
+	getspeciesname 0, VAR_0x4002
 	message Text_18E30D
 	waitmessage
 	playfanfare BGM_FRLG_ME_KEYITEM
@@ -1319,7 +1319,7 @@ EventScript_169D2F:: @ 8169D2F
 	playfanfare BGM_FRLG_ME_KEYITEM
 	waitfanfare
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
-	checkflag 2110
+	checkflag FLAG_0x83E
 	call_if 1, EventScript_169D5C
 	release
 	end
@@ -1397,7 +1397,7 @@ EventScript_169DE4:: @ 8169DE4
 PalletTown_ProfessorOaksLab_EventScript_169DEE:: @ 8169DEE
 	lock
 	faceplayer
-	checkflag 2092
+	checkflag FLAG_0x82C
 	goto_if 1, EventScript_169E03
 	loadword 0, gUnknown_818EBE6
 	callstd 4
@@ -1416,7 +1416,7 @@ EventScript_169E03:: @ 8169E03
 PalletTown_ProfessorOaksLab_EventScript_169E1A:: @ 8169E1A
 	lock
 	faceplayer
-	checkflag 2092
+	checkflag FLAG_0x82C
 	goto_if 1, EventScript_169E2F
 	loadword 0, gUnknown_818EBE6
 	callstd 4

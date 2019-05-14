@@ -21,7 +21,7 @@ EventScript_165109:: @ 8165109
 	return
 
 NavelRock_Base_MapScript2_165116:: @ 8165116
-	checkflag 2055
+	checkflag FLAG_0x807
 	call_if 1, EventScript_165120
 	end
 
@@ -64,10 +64,10 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
 	special sub_8044838
-	setflag 2055
+	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate
-	clearflag 2055
+	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1651D9

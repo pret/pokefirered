@@ -3,7 +3,7 @@ Route18_EastEntrance_1F_MapScripts:: @ 8170378
 	.byte 0
 
 Route18_EastEntrance_1F_MapScript1_17037E:: @ 817037E
-	clearflag 2096
+	clearflag FLAG_0x830
 	checkflag FLAG_0x271
 	call_if 1, EventScript_17038B
 	end

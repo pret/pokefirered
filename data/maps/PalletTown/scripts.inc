@@ -14,7 +14,7 @@ PalletTown_MapScript1_165465:: @ 8165465
 	end
 
 EventScript_165488:: @ 8165488
-	checkflag 2110
+	checkflag FLAG_0x83E
 	goto_if 0, EventScript_1A77A9
 	compare_var_to_value VAR_0x4070, 1
 	goto_if 4, EventScript_1A77A9
@@ -508,7 +508,7 @@ EventScript_165894:: @ 8165894
 	closemessage
 	delay 20
 	textcolor 3
-	setflag 2110
+	setflag FLAG_0x83E
 	setvar VAR_0x4070, 1
 	setvar VAR_0x4002, 0
 	special sub_80699E0

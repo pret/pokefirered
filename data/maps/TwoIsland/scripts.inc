@@ -9,9 +9,9 @@ TwoIsland_MapScript1_16756A:: @ 816756A
 	end
 
 EventScript_167576:: @ 8167576
-	checkflag 2116
+	checkflag FLAG_0x844
 	goto_if 1, EventScript_167597
-	checkflag 2092
+	checkflag FLAG_0x82C
 	goto_if 1, EventScript_1675B8
 	checkflag FLAG_0x2A3
 	goto_if 1, EventScript_1675D9

@@ -4,7 +4,7 @@ MtEmber_Summit_MapScripts:: @ 8163AFC
 	.byte 0
 
 MtEmber_Summit_MapScript2_163B07:: @ 8163B07
-	checkflag 2055
+	checkflag FLAG_0x807
 	call_if 1, EventScript_163B11
 	end
 
@@ -40,10 +40,10 @@ MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	delay 10
 	playbgm BGM_FRLG_LEADER_EYE, 0
 	waitbuttonpress
-	setflag 2055
+	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate
-	clearflag 2055
+	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_163B96

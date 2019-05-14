@@ -7,7 +7,7 @@ SeafoamIslands_B4F_MapScripts:: @ 816302E
 	.byte 0
 
 SeafoamIslands_B4F_MapScript2_163048:: @ 8163048
-	checkflag 2055
+	checkflag FLAG_0x807
 	call_if 1, EventScript_163052
 	end
 
@@ -178,10 +178,10 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	delay 10
 	playbgm BGM_FRLG_LEADER_EYE, 0
 	waitbuttonpress
-	setflag 2055
+	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate
-	clearflag 2055
+	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16320F

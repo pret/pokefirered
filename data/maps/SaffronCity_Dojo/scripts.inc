@@ -63,7 +63,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 
 EventScript_16EC82:: @ 816EC82
 	erasemonpic
-	givemon 16385, 25, ITEM_NONE, 0, 0, 0
+	givemon VAR_0x4001, 25, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16ECB5
 	compare_var_to_value VAR_RESULT, 1
@@ -75,7 +75,7 @@ EventScript_16EC82:: @ 816EC82
 
 EventScript_16ECB5:: @ 816ECB5
 	removeobject VAR_LAST_TALKED
-	getspeciesname 0, 16385
+	getspeciesname 0, VAR_0x4001
 	playfanfare MUS_FANFA1
 	message Text_19B473
 	waitmessage
@@ -92,7 +92,7 @@ EventScript_16ECB5:: @ 816ECB5
 
 EventScript_16ECEC:: @ 816ECEC
 	removeobject VAR_LAST_TALKED
-	getspeciesname 0, 16385
+	getspeciesname 0, VAR_0x4001
 	playfanfare MUS_FANFA1
 	message Text_19B473
 	waitmessage

@@ -4,7 +4,7 @@ RocketHideout_B1F_MapScripts:: @ 8161195
 	.byte 0
 
 RocketHideout_B1F_MapScript1_1611A0:: @ 81611A0
-	checktrainerflag 362
+	checktrainerflag FLAG_0x16A
 	call_if 0, EventScript_161233
 	end
 

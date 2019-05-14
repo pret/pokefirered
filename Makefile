@@ -57,7 +57,7 @@ MAPJSON := tools/mapjson/mapjson
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: rom clean compare tidy
+.PHONY: rom tools clean compare tidy
 
 $(shell mkdir -p $(C_BUILDDIR) $(ASM_BUILDDIR) $(DATA_ASM_BUILDDIR) $(SONG_BUILDDIR))
 
@@ -75,6 +75,18 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
+
+tools:
+	@$(MAKE) -C tools/gbagfx
+	@$(MAKE) -C tools/scaninc
+	@$(MAKE) -C tools/preproc
+	@$(MAKE) -C tools/bin2c
+	@$(MAKE) -C tools/rsfont
+	@$(MAKE) -C tools/aif2pcm
+	@$(MAKE) -C tools/ramscrgen
+	@$(MAKE) -C tools/mid2agb
+	@$(MAKE) -C tools/gbafix
+	@$(MAKE) -C tools/mapjson
 
 rom: $(ROM)
 

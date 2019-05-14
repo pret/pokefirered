@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_CaptainsOffice3_EventScript_163F25",
+      "script": "FourIsland_IcefallCave_Back_EventScript_163F25",
       "flag": "139"
     },
     {
@@ -83,7 +83,7 @@
       "elevation": 3,
       "var": "VAR_0x4080",
       "var_value": 0,
-      "script": "SSAnne_CaptainsOffice3_EventScript_163D98"
+      "script": "FourIsland_IcefallCave_Back_EventScript_163D98"
     },
     {
       "type": "trigger",
@@ -92,7 +92,7 @@
       "elevation": 3,
       "var": "VAR_0x4080",
       "var_value": 0,
-      "script": "SSAnne_CaptainsOffice3_EventScript_163D98"
+      "script": "FourIsland_IcefallCave_Back_EventScript_163D98"
     },
     {
       "type": "trigger",
@@ -101,7 +101,7 @@
       "elevation": 3,
       "var": "VAR_0x4080",
       "var_value": 0,
-      "script": "SSAnne_CaptainsOffice3_EventScript_163D98"
+      "script": "FourIsland_IcefallCave_Back_EventScript_163D98"
     }
   ],
   "bg_events": []

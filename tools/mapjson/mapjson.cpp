@@ -91,7 +91,6 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     else
         text << "\t.4byte " << map_data["name"].string_value() << "_MapScripts\n";
 
-    // fix this hack
     if (map_data.object_items().find("connections") != map_data.object_items().end()
      && map_data["connections"].array_items().size() > 0 && map_data["connections_no_include"] == Json())
         text << "\t.4byte " << map_data["name"].string_value() << "_MapConnections\n";
@@ -121,14 +120,8 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
              << "allow_run=" << map_data["allow_running"].bool_value() << ", "
              << "show_map_name=" << map_data["show_map_name"].bool_value() << "\n";
     }
-    // TODO: fix this!
     else if (version == "firered") {
-        // ((\show_map_name & 1) << 3) | ((\allow_run & 1) << 2) | ((\allow_escape_rope & 1) << 1) | \allow_bike
-        //int flags = map_data["flag_1"].bool_value() ? 1 : 0
-        //        | ((map_data["flag_2"].bool_value() ? 1 : 0) << 1)
-        //        | ((map_data["flag_3"].bool_value() ? 1 : 0) << 2)
-        //        | ((map_data["flag_4"].bool_value() ? 1 : 0) << 3);
-        text << "\t.byte " << map_data["elevator_flag"].int_value() << "\n";// cultivate your hunger
+        text << "\t.byte " << map_data["elevator_flag"].int_value() << "\n";
     }
 
      text << "\t.byte " << map_data["battle_scene"].string_value() << "\n\n";
@@ -278,26 +271,21 @@ string generate_firered_map_events_text(Json map_data) {
 
     if (map_data["object_events"].array_items().size() > 0) {
         objects_label = map_data["name"].string_value() + "_EventObjects";
-        text << objects_label << ":\n";
+        text << objects_label << "::\n";
         for (unsigned int i = 0; i < map_data["object_events"].array_items().size(); i++) {
             auto obj_event = map_data["object_events"].array_items()[i];
             text << "\tobject_event " << i + 1 << ", "
-                 << obj_event["graphics_id"].string_value() << ", 0, "
-                 << (obj_event["x"].int_value() & 0xFF) << ", " << (obj_event["x"].int_value() >> 8 & 0xFF) << ", "
-                 << (obj_event["y"].int_value() & 0xFF) << ", " << (obj_event["y"].int_value() >> 8 & 0xFF) << ", "
-                 //<< obj_event["x"].int_value() << ", "
-                 //<< obj_event["y"].int_value() << ", "
+                 << obj_event["graphics_id"].string_value() << ", "
+                 << obj_event["x"].int_value() << ", "
+                 << obj_event["y"].int_value() << ", "
                  << obj_event["elevation"].int_value() << ", "
                  << obj_event["movement_type"].string_value() << ", "
-                 << (obj_event["movement_range_x"].int_value() | (obj_event["movement_range_y"].int_value() << 4)) << ", 0, "
-                 //<< obj_event["movement_range_x"].int_value() << ", "
-                 //<< obj_event["movement_range_y"].int_value() << ", "
-                 << (obj_event["trainer_type"].int_value() & 0xFF) << ", " << (obj_event["trainer_type"].int_value() >> 8 & 0xFF) << ", "
-                 //<< obj_event["trainer_type"].string_value() << ", "
-                 << (obj_event["trainer_sight_or_berry_tree_id"].int_value() & 0xFF) << ", " << (obj_event["trainer_sight_or_berry_tree_id"].int_value() >> 8 & 0xFF) << ", "
-                 //<< obj_event["trainer_sight_or_berry_tree_id"].string_value() << ", "
+                 << obj_event["movement_range_x"].int_value() << ", "
+                 << obj_event["movement_range_y"].int_value() << ", "
+                 << obj_event["trainer_type"].int_value() << ", "
+                 << obj_event["trainer_sight_or_berry_tree_id"].int_value() << ", "
                  << obj_event["script"].string_value() << ", "
-                 << obj_event["flag"].string_value() << ", 0, 0\n";
+                 << obj_event["flag"].string_value() << "\n";
         }
         text << "\n";
     } else {
@@ -306,7 +294,7 @@ string generate_firered_map_events_text(Json map_data) {
 
     if (map_data["warp_events"].array_items().size() > 0) {
         warps_label = map_data["name"].string_value() + "_MapWarps";
-        text << warps_label << ":\n";
+        text << warps_label << "::\n";
         for (auto &warp_event : map_data["warp_events"].array_items()) {
             text << "\twarp_def "
                  << warp_event["x"].int_value() << ", "
@@ -322,7 +310,7 @@ string generate_firered_map_events_text(Json map_data) {
 
     if (map_data["coord_events"].array_items().size() > 0) {
         coords_label = map_data["name"].string_value() + "_MapCoordEvents";
-        text << coords_label << ":\n";
+        text << coords_label << "::\n";
         for (auto &coord_event : map_data["coord_events"].array_items()) {
             if (coord_event["type"].string_value() == "trigger") {
                 text << "\tcoord_event "
@@ -348,7 +336,7 @@ string generate_firered_map_events_text(Json map_data) {
 
     if (map_data["bg_events"].array_items().size() > 0) {
         bgs_label = map_data["name"].string_value() + "_MapBGEvents";
-        text << bgs_label << ":\n";
+        text << bgs_label << "::\n";
         for (auto &bg_event : map_data["bg_events"].array_items()) {
             if (bg_event["type"] == "hidden_item") {
                 text << "\tbg_hidden_item_event "
@@ -358,7 +346,6 @@ string generate_firered_map_events_text(Json map_data) {
                      << bg_event["item"].string_value() << ", "
                      << bg_event["flag"].string_value() << ", "
                      << bg_event["unknown"].int_value() << "\n";
-                     //<< bg_event["unknown_2"].int_value() << "\n";
             }
             else {
                 string type_string = bg_event["type"].string_value();

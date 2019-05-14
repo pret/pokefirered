@@ -1,8 +1,8 @@
 SixIsland_DottedHole_1F_MapScripts:: @ 8164182
-    map_script 3, SSAnne_CaptainsOffice5_MapScript1_164188
+    map_script 3, SixIsland_DottedHole_1F_MapScript1_164188
     .byte 0
 
-SSAnne_CaptainsOffice5_MapScript1_164188:: @ 8164188
+SixIsland_DottedHole_1F_MapScript1_164188:: @ 8164188
     setworldmapflag 2235
     end
 
@@ -13,7 +13,7 @@ SixIsland_DottedHole_B1F_EventScript_16418C:: @ 816418C
     releaseall
     end
 
-SSAnne_CaptainsOffice9_EventScript_164195:: @ 8164195
+SixIsland_DottedHole_B4F_EventScript_164195:: @ 8164195
     lockall
     braillemessage gUnknown_81A928B
     waitbuttonpress

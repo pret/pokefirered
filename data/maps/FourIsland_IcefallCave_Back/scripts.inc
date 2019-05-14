@@ -1,8 +1,8 @@
 FourIsland_IcefallCave_Back_MapScripts:: @ 8163D82
-    map_script 3, SSAnne_CaptainsOffice3_MapScript1_163D88
+    map_script 3, FourIsland_IcefallCave_Back_MapScript1_163D88
     .byte 0
 
-SSAnne_CaptainsOffice3_MapScript1_163D88:: @ 8163D88
+FourIsland_IcefallCave_Back_MapScript1_163D88:: @ 8163D88
     compare_var_to_value VAR_0x4080, 1
     call_if 1, EventScript_163D94
     end
@@ -11,7 +11,7 @@ EventScript_163D94:: @ 8163D94
     setflag FLAG_0x08B
     return
 
-SSAnne_CaptainsOffice3_EventScript_163D98:: @ 8163D98
+FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
     lockall
     textcolor 1
     loadword 0, gUnknown_817B04F
@@ -195,7 +195,7 @@ Movement_163F23:: @ 8163F23
     step_13
     step_end
 
-SSAnne_CaptainsOffice3_EventScript_163F25:: @ 8163F25
+FourIsland_IcefallCave_Back_EventScript_163F25:: @ 8163F25
     loadword 0, gUnknown_817B457
     callstd 2
     end

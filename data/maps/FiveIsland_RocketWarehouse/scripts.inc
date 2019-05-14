@@ -1,13 +1,13 @@
 FiveIsland_RocketWarehouse_MapScripts:: @ 8163F2E
-    map_script 1, SSAnne_CaptainsOffice4_MapScript1_163F3D
-    map_script 3, SSAnne_CaptainsOffice4_MapScript2_163F39
+    map_script 1, FiveIsland_RocketWarehouse_MapScript1_163F3D
+    map_script 3, FiveIsland_RocketWarehouse_MapScript2_163F39
     .byte 0
 
-SSAnne_CaptainsOffice4_MapScript2_163F39:: @ 8163F39
+FiveIsland_RocketWarehouse_MapScript2_163F39:: @ 8163F39
     setworldmapflag 2233
     end
 
-SSAnne_CaptainsOffice4_MapScript1_163F3D:: @ 8163F3D
+FiveIsland_RocketWarehouse_MapScript1_163F3D:: @ 8163F3D
     checktrainerflag 543
     call_if 1, EventScript_163F47
     end
@@ -17,7 +17,7 @@ EventScript_163F47:: @ 8163F47
     setmetatile 27, 20, 672, 0
     return
 
-SSAnne_CaptainsOffice4_EventScript_163F5A:: @ 8163F5A
+FiveIsland_RocketWarehouse_EventScript_163F5A:: @ 8163F5A
     lockall
     checkflag FLAG_0x2D5
     goto_if 1, EventScript_163F6E
@@ -32,12 +32,12 @@ EventScript_163F6E:: @ 8163F6E
     releaseall
     end
 
-SSAnne_CaptainsOffice4_EventScript_163F78:: @ 8163F78
+FiveIsland_RocketWarehouse_EventScript_163F78:: @ 8163F78
     loadword 0, gUnknown_817BB15
     callstd 3
     end
 
-SSAnne_CaptainsOffice4_EventScript_163F81:: @ 8163F81
+FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
     lockall
     applymovement 4, Movement_1A75E7
     waitmovement 0
@@ -45,7 +45,7 @@ SSAnne_CaptainsOffice4_EventScript_163F81:: @ 8163F81
     releaseall
     end
 
-SSAnne_CaptainsOffice4_EventScript_163F93:: @ 8163F93
+FiveIsland_RocketWarehouse_EventScript_163F93:: @ 8163F93
     trainerbattle 2, 545, 0, Text_17BBAF, Text_17BC55, EventScript_163FCD
     checkflag 2116
     goto_if 1, EventScript_163FB7
@@ -71,19 +71,19 @@ EventScript_163FCD:: @ 8163FCD
     release
     end
 
-SSAnne_CaptainsOffice4_EventScript_163FE6:: @ 8163FE6
+FiveIsland_RocketWarehouse_EventScript_163FE6:: @ 8163FE6
     trainerbattle 0, 541, 0, Text_17B54D, Text_17B585
     loadword 0, gUnknown_817B5A6
     callstd 6
     end
 
-SSAnne_CaptainsOffice4_EventScript_163FFD:: @ 8163FFD
+FiveIsland_RocketWarehouse_EventScript_163FFD:: @ 8163FFD
     trainerbattle 0, 542, 0, Text_17B677, Text_17B6D9
     loadword 0, gUnknown_817B6EF
     callstd 6
     end
 
-SSAnne_CaptainsOffice4_EventScript_164014:: @ 8164014
+FiveIsland_RocketWarehouse_EventScript_164014:: @ 8164014
     trainerbattle 2, 544, 0, Text_17B8DA, Text_17B9FB, EventScript_16402F
     loadword 0, gUnknown_817BA64
     callstd 6
@@ -113,13 +113,13 @@ EventScript_164065:: @ 8164065
     waitmovement 0
     return
 
-SSAnne_CaptainsOffice4_EventScript_164070:: @ 8164070
+FiveIsland_RocketWarehouse_EventScript_164070:: @ 8164070
     trainerbattle 0, 516, 0, Text_17B5D6, Text_17B62F
     loadword 0, gUnknown_817B642
     callstd 6
     end
 
-SSAnne_CaptainsOffice4_EventScript_164087:: @ 8164087
+FiveIsland_RocketWarehouse_EventScript_164087:: @ 8164087
     trainerbattle 2, 543, 0, Text_17B72D, Text_17B79C, EventScript_1640A2
     loadword 0, gUnknown_817B7FA
     callstd 6

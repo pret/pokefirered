@@ -423,10 +423,7 @@
 	.include "data/maps/SixIsland_WaterPath_House2/scripts.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon_House/scripts.inc"
 
-
-
-@ .begin event_scripts.s
-@ this section is text strings
+@ this section is a mixture of text strings and event scripts
 
 gUnknown_8172255:: @ 8172255
 	.incbin "baserom.gba", 0x172255, 0x72
@@ -7041,37 +7038,6 @@ gUnknown_81A4DF5:: @ 81A4DF5
 gUnknown_81A4E26:: @ 81A4E26
 	.incbin "baserom.gba", 0x1A4E26, 0x19
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 gStdScript_81A4E3F:: @ 81A4E3F
 	lock
 	faceplayer
@@ -9221,7 +9187,7 @@ MtEmber_Exterior_EventScript_1BE00C:: @ 81BE00C
 MtEmber_RubyPath_B1F_Stairs_EventScript_1BE00C:: @ 81BE00C
 MtEmber_RubyPath_B2F_EventScript_1BE00C:: @ 81BE00C
 MtEmber_SummitPath_2F_EventScript_1BE00C:: @ 81BE00C
-SSAnne_Kitchen3_EventScript_1BE00C:: @ 81BE00C
+MtEmber_RubyPath_1F_EventScript_1BE00C:: @ 81BE00C
 SevenIsland_SevaultCanyon_EventScript_1BE00C:: @ 81BE00C
 FourIsland_EventScript_1BE00C:: @ 81BE00C
 OneIsland_KindleRoad_EventScript_1BE00C:: @ 81BE00C
@@ -9732,22 +9698,22 @@ FourIsland_IcefallCave_1F_EventScript_1BED53:: @ 81BED53
 FourIsland_IcefallCave_1F_EventScript_1BED60:: @ 81BED60
 	.incbin "baserom.gba", 0x1BED60, 0xD
 
-SSAnne_CaptainsOffice2_EventScript_1BED6D:: @ 81BED6D
+FourIsland_IcefallCave_B1F_EventScript_1BED6D:: @ 81BED6D
 	.incbin "baserom.gba", 0x1BED6D, 0xD
 
-SSAnne_CaptainsOffice2_EventScript_1BED7A:: @ 81BED7A
+FourIsland_IcefallCave_B1F_EventScript_1BED7A:: @ 81BED7A
 	.incbin "baserom.gba", 0x1BED7A, 0xD
 
-SSAnne_CaptainsOffice4_EventScript_1BED87:: @ 81BED87
+FiveIsland_RocketWarehouse_EventScript_1BED87:: @ 81BED87
 	.incbin "baserom.gba", 0x1BED87, 0xD
 
-SSAnne_CaptainsOffice4_EventScript_1BED94:: @ 81BED94
+FiveIsland_RocketWarehouse_EventScript_1BED94:: @ 81BED94
 	.incbin "baserom.gba", 0x1BED94, 0xD
 
-SSAnne_CaptainsOffice4_EventScript_1BEDA1:: @ 81BEDA1
+FiveIsland_RocketWarehouse_EventScript_1BEDA1:: @ 81BEDA1
 	.incbin "baserom.gba", 0x1BEDA1, 0xD
 
-SSAnne_CaptainsOffice4_EventScript_1BEDAE:: @ 81BEDAE
+FiveIsland_RocketWarehouse_EventScript_1BEDAE:: @ 81BEDAE
 	.incbin "baserom.gba", 0x1BEDAE, 0xD
 
 FiveIsland_LostCave_Room10_EventScript_1BEDBB:: @ 81BEDBB

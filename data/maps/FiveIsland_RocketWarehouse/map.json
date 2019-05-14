@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163FE6",
+      "script": "FiveIsland_RocketWarehouse_EventScript_163FE6",
       "flag": "136"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163FFD",
+      "script": "FiveIsland_RocketWarehouse_EventScript_163FFD",
       "flag": "136"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SSAnne_CaptainsOffice4_EventScript_164087",
+      "script": "FiveIsland_RocketWarehouse_EventScript_164087",
       "flag": "136"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SSAnne_CaptainsOffice4_EventScript_164014",
+      "script": "FiveIsland_RocketWarehouse_EventScript_164014",
       "flag": "136"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SSAnne_CaptainsOffice4_EventScript_164070",
+      "script": "FiveIsland_RocketWarehouse_EventScript_164070",
       "flag": "136"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F93",
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F93",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_1BED87",
+      "script": "FiveIsland_RocketWarehouse_EventScript_1BED87",
       "flag": "500"
     },
     {
@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_1BED94",
+      "script": "FiveIsland_RocketWarehouse_EventScript_1BED94",
       "flag": "501"
     },
     {
@@ -127,7 +127,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_1BEDA1",
+      "script": "FiveIsland_RocketWarehouse_EventScript_1BEDA1",
       "flag": "502"
     },
     {
@@ -140,7 +140,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_1BEDAE",
+      "script": "FiveIsland_RocketWarehouse_EventScript_1BEDAE",
       "flag": "503"
     }
   ],
@@ -161,7 +161,7 @@
       "elevation": 3,
       "var": "VAR_0x4088",
       "var_value": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F81"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F81"
     },
     {
       "type": "trigger",
@@ -170,7 +170,7 @@
       "elevation": 3,
       "var": "VAR_0x4088",
       "var_value": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F81"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F81"
     },
     {
       "type": "trigger",
@@ -179,7 +179,7 @@
       "elevation": 3,
       "var": "VAR_0x4088",
       "var_value": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F81"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F81"
     }
   ],
   "bg_events": [
@@ -188,14 +188,14 @@
       "x": 11,
       "y": 2,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_3",
       "x": 26,
       "y": 11,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F78"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F78"
     },
     {
       "type": "hidden_item",
@@ -220,147 +220,147 @@
       "x": 12,
       "y": 2,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 10,
       "y": 2,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 9,
       "y": 2,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 2,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 2,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 5,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 10,
       "y": 5,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 4,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 10,
       "y": 4,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 4,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 4,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 5,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 5,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 5,
       "y": 3,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 3,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 5,
       "y": 4,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 4,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 3,
       "y": 4,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 4,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 5,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     },
     {
       "type": "bg_event_type_0",
       "x": 3,
       "y": 5,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice4_EventScript_163F5A"
+      "script": "FiveIsland_RocketWarehouse_EventScript_163F5A"
     }
   ]
 }

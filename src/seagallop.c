@@ -492,7 +492,7 @@ u8 sub_8147500(void)
 
 bool8 sub_8147594(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(VERMILIONCITY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(VERMILIONCITY) && gSaveBlock1Ptr->pos.x < 24)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(VERMILION_CITY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(VERMILION_CITY) && gSaveBlock1Ptr->pos.x < 24)
         return TRUE;
 
     return FALSE;

@@ -722,8 +722,8 @@ _0800F0BA:
 	bx r1
 	thumb_func_end sub_800F078
 
-	thumb_func_start sub_800F0C4
-sub_800F0C4: @ 800F0C4
+	thumb_func_start GetDecompressedDataSize
+GetDecompressedDataSize: @ 800F0C4
 	sub sp, 0x4
 	mov r3, sp
 	ldrb r2, [r0, 0x1]
@@ -738,7 +738,7 @@ sub_800F0C4: @ 800F0C4
 	ldr r0, [sp]
 	add sp, 0x4
 	bx lr
-	thumb_func_end sub_800F0C4
+	thumb_func_end GetDecompressedDataSize
 
 	thumb_func_start DecompressPicFromTable_DontHandleDeoxys
 DecompressPicFromTable_DontHandleDeoxys: @ 800F0E0

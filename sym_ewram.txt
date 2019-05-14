@@ -1647,9 +1647,9 @@ gUnknown_203F44A: @ 203F44A
 gUnknown_203F450: @ 203F450
 	.space 0x4
 
-gUnknown_203F454: @ 203F454
-	.space 0x4
-
+	.align 2
+	.include "src/unk_815C980.o"
+	.align 2
 	.include "src/trainer_tower.o"
 
 gUnknown_203F460: @ 203F460

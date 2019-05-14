@@ -77,7 +77,7 @@ _080F863E:
 	bl CpuSet
 	mov r0, r8
 	strh r5, [r0]
-	ldr r1, _080F86B4 @ =gUnknown_3003ED0
+	ldr r1, _080F86B4 @ =gRecvCmds
 	ldr r2, _080F86B8 @ =0x01000028
 	bl CpuSet
 	mov r0, r9
@@ -99,7 +99,7 @@ _080F86A4: .4byte gUnknown_30054BC
 _080F86A8: .4byte 0x00000634
 _080F86AC: .4byte gUnknown_3003F50
 _080F86B0: .4byte 0x01000008
-_080F86B4: .4byte gUnknown_3003ED0
+_080F86B4: .4byte gRecvCmds
 _080F86B8: .4byte 0x01000028
 _080F86BC: .4byte gLinkPlayers
 _080F86C0: .4byte 0x01000046
@@ -1228,7 +1228,7 @@ sub_80F8FD4: @ 80F8FD4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	movs r2, 0
-	ldr r7, _080F9028 @ =gUnknown_3003ED0
+	ldr r7, _080F9028 @ =gRecvCmds
 	ldr r0, _080F902C @ =gUnknown_3005450
 	adds r6, r7, 0
 	ldr r1, _080F9030 @ =0x0000093f
@@ -1268,7 +1268,7 @@ _080F8FF4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F9028: .4byte gUnknown_3003ED0
+_080F9028: .4byte gRecvCmds
 _080F902C: .4byte gUnknown_3005450
 _080F9030: .4byte 0x0000093f
 _080F9034: .4byte 0x01000028
@@ -1278,7 +1278,7 @@ _080F9034: .4byte 0x01000028
 sub_80F9038: @ 80F9038
 	push {lr}
 	ldr r3, _080F9064 @ =gUnknown_3003F50
-	ldr r2, _080F9068 @ =gUnknown_3003ED0
+	ldr r2, _080F9068 @ =gRecvCmds
 	movs r1, 0x6
 _080F9040:
 	ldrh r0, [r3]
@@ -1301,7 +1301,7 @@ _080F9056:
 	bx r0
 	.align 2, 0
 _080F9064: .4byte gUnknown_3003F50
-_080F9068: .4byte gUnknown_3003ED0
+_080F9068: .4byte gRecvCmds
 	thumb_func_end sub_80F9038
 
 	thumb_func_start sub_80F906C
@@ -1375,7 +1375,7 @@ _080F90E8:
 _080F90EC: .4byte gUnknown_3007460
 _080F90F0:
 	movs r3, 0
-	ldr r4, _080F9118 @ =gUnknown_3003ED0
+	ldr r4, _080F9118 @ =gRecvCmds
 _080F90F4:
 	movs r2, 0
 	lsls r0, r3, 4
@@ -1397,7 +1397,7 @@ _080F9110:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F9118: .4byte gUnknown_3003ED0
+_080F9118: .4byte gRecvCmds
 	thumb_func_end sub_80F90DC
 
 	thumb_func_start sub_80F911C
@@ -1664,7 +1664,7 @@ _080F9304:
 	str r2, [sp, 0x4]
 	adds r5, 0x1
 	str r5, [sp]
-	ldr r1, _080F9450 @ =gUnknown_3003ED0
+	ldr r1, _080F9450 @ =gRecvCmds
 	mov r9, r1
 	adds r5, r3, 0
 	adds r7, r4, 0
@@ -1791,7 +1791,7 @@ _080F93FA:
 _080F9444: .4byte gUnknown_3005450
 _080F9448: .4byte 0x000009a6
 _080F944C: .4byte gUnknown_3005DE6
-_080F9450: .4byte gUnknown_3003ED0
+_080F9450: .4byte gRecvCmds
 _080F9454: .4byte 0x0000099d
 _080F9458: .4byte 0x00000991
 _080F945C: .4byte gUnknown_203AC08
@@ -1904,7 +1904,7 @@ sub_80F9514: @ 80F9514
 	mov r1, sp
 	bl sub_80FC6E8
 	movs r1, 0
-	ldr r0, _080F963C @ =gUnknown_3003ED0
+	ldr r0, _080F963C @ =gRecvCmds
 	mov r12, r0
 _080F952A:
 	movs r4, 0
@@ -2038,7 +2038,7 @@ _080F9628:
 	bx r1
 	.align 2, 0
 _080F9638: .4byte gUnknown_3005574
-_080F963C: .4byte gUnknown_3003ED0
+_080F963C: .4byte gRecvCmds
 _080F9640: .4byte gUnknown_3005E10
 _080F9644: .4byte gUnknown_3005450
 _080F9648: .4byte 0x0000099c
@@ -2348,7 +2348,7 @@ sub_80F9868: @ 80F9868
 _080F9876:
 	mov r1, r8
 	lsls r5, r1, 4
-	ldr r2, _080F98B4 @ =gUnknown_3003ED0
+	ldr r2, _080F98B4 @ =gRecvCmds
 	adds r0, r5, r2
 	ldrh r7, [r0]
 	movs r3, 0xFF
@@ -2379,7 +2379,7 @@ _080F98A2:
 _080F98B0:
 	b _080F9BF4
 	.align 2, 0
-_080F98B4: .4byte gUnknown_3003ED0
+_080F98B4: .4byte gRecvCmds
 _080F98B8:
 	movs r0, 0xEE
 	lsls r0, 7
@@ -2562,7 +2562,7 @@ _080F99FE:
 	adds r2, r4, 0x1
 	lsls r0, r2, 1
 	adds r0, r3
-	ldr r4, _080F9A90 @ =gUnknown_3003ED0
+	ldr r4, _080F9A90 @ =gRecvCmds
 	adds r0, r4
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -2623,7 +2623,7 @@ _080F9A80:
 	.align 2, 0
 _080F9A88: .4byte gUnknown_3005450
 _080F9A8C: .4byte gBlockRecvBuffer
-_080F9A90: .4byte gUnknown_3003ED0
+_080F9A90: .4byte gRecvCmds
 _080F9A94: .4byte gUnknown_843EBD4
 _080F9A98: .4byte gReceivedRemoteLinkPlayers
 _080F9A9C:
@@ -2703,7 +2703,7 @@ _080F9B00:
 	adds r0, r7, r2
 	strb r1, [r0]
 _080F9B38:
-	ldr r0, _080F9B64 @ =gUnknown_3003ED0
+	ldr r0, _080F9B64 @ =gRecvCmds
 	adds r0, 0x6
 	adds r0, r5, r0
 	ldrh r0, [r0]
@@ -2718,7 +2718,7 @@ _080F9B54: .4byte gUnknown_3003ED2
 _080F9B58: .4byte gUnknown_3007460
 _080F9B5C: .4byte gUnknown_3003ED4
 _080F9B60: .4byte 0x0000099c
-_080F9B64: .4byte gUnknown_3003ED0
+_080F9B64: .4byte gRecvCmds
 _080F9B68:
 	movs r0, 0xEE
 	lsls r0, 8
@@ -2732,7 +2732,7 @@ _080F9B68:
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
-	ldr r0, _080F9B9C @ =gUnknown_3003ED0
+	ldr r0, _080F9B9C @ =gRecvCmds
 	adds r0, 0x6
 	adds r0, r5, r0
 	ldrh r0, [r0]
@@ -2742,7 +2742,7 @@ _080F9B68:
 _080F9B90: .4byte gUnknown_3003F50
 _080F9B94: .4byte gUnknown_3003ED2
 _080F9B98: .4byte gUnknown_3003ED4
-_080F9B9C: .4byte gUnknown_3003ED0
+_080F9B9C: .4byte gRecvCmds
 _080F9BA0:
 	ldr r4, _080F9BD0 @ =gUnknown_3005450
 	ldrb r0, [r4, 0xC]
@@ -3267,7 +3267,7 @@ _080F9F74: .4byte gUnknown_3003F50
 _080F9F78: .4byte gUnknown_3005450
 _080F9F7C:
 	bl GetMultiplayerId
-	ldr r1, _080F9FA0 @ =gUnknown_3003ED0
+	ldr r1, _080F9FA0 @ =gRecvCmds
 	lsls r0, 24
 	lsrs r0, 20
 	adds r0, r1
@@ -3285,7 +3285,7 @@ _080F9F98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F9FA0: .4byte gUnknown_3003ED0
+_080F9FA0: .4byte gRecvCmds
 _080F9FA4: .4byte sub_80F9FA8
 	thumb_func_end rfufunc_80F9F44
 
@@ -3378,7 +3378,7 @@ rfufunc_80FA020: @ 80FA020
 	strh r0, [r3]
 	movs r4, 0
 	mov r9, r5
-	ldr r0, _080FA0D4 @ =gUnknown_3003ED0
+	ldr r0, _080FA0D4 @ =gRecvCmds
 	mov r12, r0
 	lsls r5, r6, 4
 	adds r7, r2, 0
@@ -3441,7 +3441,7 @@ _080FA05C:
 _080FA0C8: .4byte gUnknown_3005450
 _080FA0CC: .4byte gUnknown_3003F50
 _080FA0D0: .4byte 0xffff8900
-_080FA0D4: .4byte gUnknown_3003ED0
+_080FA0D4: .4byte gRecvCmds
 _080FA0D8: .4byte gUnknown_843EBD4
 _080FA0DC: .4byte gUnknown_203AC08
 _080FA0E0:
@@ -6835,7 +6835,7 @@ sub_80FBA44: @ 80FBA44
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, _080FBA5C @ =gUnknown_3003ED0
+	ldr r1, _080FBA5C @ =gRecvCmds
 	ldr r2, _080FBA60 @ =0x05000014
 	mov r0, sp
 	bl CpuSet
@@ -6843,7 +6843,7 @@ sub_80FBA44: @ 80FBA44
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FBA5C: .4byte gUnknown_3003ED0
+_080FBA5C: .4byte gRecvCmds
 _080FBA60: .4byte 0x05000014
 	thumb_func_end sub_80FBA44
 

@@ -257,10 +257,12 @@ SECTIONS {
         src/quest_log_8150454.o(.text);
         asm/dodrio_berry_picking.o(.text);
         asm/battle_controller_pokedude.o(.text);
-        asm/unk_8159F40.o(.text);
+        src/unk_8159F40.o(.text);
+        src/dodrio_berry_picking_2.o(.text);
+        asm/dodrio_berry_picking_2.o(.text);
         asm/teachy_tv.o(.text);
-        asm/unk_815C27C.o(.text);
-        asm/unk_815C980.o(.text);
+        asm/ereader_helpers.o(.text);
+        src/unk_815C980.o(.text);
         asm/ss_anne.o(.text);
         asm/cereader_tool.o(.text);
         src/trainer_tower.o(.text);
@@ -426,6 +428,8 @@ SECTIONS {
         data/data_8468C98.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);
+        src/unk_815C980.o(.rodata);
+        data/data_8471F00.o(.rodata.8479668);
         src/trainer_tower.o(.rodata);
         data/data_8471F00.o(.rodata.after_trainer_tower);
         src/mystery_event_msg.o(.rodata);

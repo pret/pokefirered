@@ -230,15 +230,10 @@ gUnknown_3002072: @ 3002072
 gUnknown_3002074: @ 3002074
 	.space 0x4
 
-gUnknown_3002078: @ 3002078
-	.space 0x4
+	.align 3
+	.include "src/unk_815C980.o"
 
-gUnknown_300207C: @ 300207C
-	.space 0x4
-
-gUnknown_3002080: @ 3002080
-	.space 0x8
-
+	.align 3
 	.include "asm/m4a_1.o"
 	.include "src/agb_flash.o"
 

@@ -565,6 +565,12 @@ typedef union QuestLogScene QuestLogScene;
 
 // This name is a complete guess and may change.
 
+#define MAP_OBJECTS_COUNT  16
+#define BERRY_TREES_COUNT  128
+#define FLAGS_COUNT        288 // 300
+#define VARS_COUNT         256
+#define MAIL_COUNT         16
+
 // Declare here so that it can be recursively referenced.
 union QuestLogMovement;
 
@@ -578,6 +584,43 @@ union QuestLogMovement
     } ident_struct;
 };
 
+struct QuestLogMapObject
+{
+    /*0x00*/ u8 active:1;
+    /*0x00*/ u8 mapobj_bit_3:1;
+    /*0x00*/ u8 mapobj_bit_4:1;
+    /*0x00*/ u8 mapobj_bit_5:1;
+    /*0x00*/ u8 mapobj_bit_8:1;
+    /*0x00*/ u8 mapobj_bit_9:1;
+    /*0x00*/ u8 mapobj_bit_10:1;
+    /*0x00*/ u8 mapobj_bit_11:1;
+    /*0x01*/ u8 mapobj_bit_12:1;
+    /*0x01*/ u8 mapobj_bit_13:1;
+    /*0x01*/ u8 mapobj_bit_14:1;
+    /*0x01*/ u8 mapobj_bit_15:1;
+    /*0x01*/ u8 mapobj_bit_16:1;
+    /*0x01*/ u8 mapobj_bit_23:1;
+    /*0x01*/ u8 mapobj_bit_24:1;
+    /*0x01*/ u8 mapobj_bit_25:1;
+    /*0x02*/ u8 mapobj_bit_26:1;
+    /*0x02*/ u8 mapobj_unk_18:4;
+    /*0x02*/ u8 unused_02_5:3;
+    /*0x03*/ u8 mapobj_unk_0B_0:4;
+    /*0x03*/ u8 elevation:4;
+    /*0x04*/ u8 graphicsId;
+    /*0x05*/ u8 animPattern;
+    /*0x06*/ u8 trainerType;
+    /*0x07*/ u8 localId;
+    /*0x08*/ u8 mapNum;
+    /*0x09*/ u8 mapGroup;
+    /*0x0a*/ s16 x;
+    /*0x0c*/ s16 y;
+    /*0x0e*/ u8 trainerRange_berryTreeId;
+    /*0x0f*/ u8 mapobj_unk_1F;
+    /*0x10*/ u8 mapobj_unk_21;
+    /*0x11*/ u8 animId;
+};
+
 struct QuestLog
 {
     /*0x0000*/ u8 unk_000;
@@ -586,7 +629,7 @@ struct QuestLog
     /*0x0003*/ s8 unk_003;
     /*0x0004*/ s16 unk_004;
     /*0x0006*/ s16 unk_006;
-    /*0x0008*/ u8 filler_008[0x140];
+    /*0x0008*/ struct QuestLogMapObject unk_008[MAP_OBJECTS_COUNT];
 
     // These arrays hold the game state for
     // playing back the quest log
@@ -605,12 +648,6 @@ struct FameCheckerSaveData
     u16 flavorTextFlags:12;
     u16 unk_0_E:2;
 };
-
-#define MAP_OBJECTS_COUNT  16
-#define BERRY_TREES_COUNT  128
-#define FLAGS_COUNT        288 // 300
-#define VARS_COUNT         256
-#define MAIL_COUNT         16
 
 #define NUM_EASY_CHAT_EXTRA_PHRASES 33
 #define EASY_CHAT_EXTRA_PHRASES_SIZE ((NUM_EASY_CHAT_EXTRA_PHRASES >> 3) + (NUM_EASY_CHAT_EXTRA_PHRASES % 8 ? 1 : 0))

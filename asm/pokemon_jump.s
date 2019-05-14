@@ -596,7 +596,7 @@ sub_8147A34: @ 8147A34
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08147A98
-	ldr r1, _08147A90 @ =gUnknown_3003ED0
+	ldr r1, _08147A90 @ =gRecvCmds
 	ldrh r0, [r1, 0x2]
 	ldr r5, _08147A94 @ =0x00007fff
 	cmp r0, r5
@@ -626,7 +626,7 @@ _08147A5C:
 	.align 2, 0
 _08147A88: .4byte gTasks+0x8
 _08147A8C: .4byte gReceivedRemoteLinkPlayers
-_08147A90: .4byte gUnknown_3003ED0
+_08147A90: .4byte gRecvCmds
 _08147A94: .4byte 0x00007fff
 _08147A98:
 	ldrh r0, [r4, 0x16]

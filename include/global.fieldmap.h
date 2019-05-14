@@ -74,6 +74,14 @@ struct BackupMapData
     u16 *map;
 };
 
+union __attribute__((packed)) MapObjectRange {
+    u8 as_byte;
+    struct __attribute__((packed)) {
+        u8 x:4;
+        u8 y:4;
+    } __attribute__((aligned (1))) as_nybbles;
+} __attribute__((aligned (1)));
+
 struct MapObjectTemplate
 {
     /*0x00*/ u8 localId;
@@ -83,8 +91,7 @@ struct MapObjectTemplate
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
     /*0x09*/ u8 movementType;
-    /*0x0A*/ u8 unkA_0:4;
-             u8 unkA_4:4;
+    /*0x0A*/ union MapObjectRange range;
     ///*0x0B*/ u8 fillerB[1];
     /*0x0C*/ u16 unkC;
     /*0x0E*/ u16 unkE;
@@ -228,13 +235,7 @@ struct MapObject
     /*0x14*/ struct Coords16 coords3;
     /*0x18*/ u8 mapobj_unk_18:4;  //current direction?
     /*0x18*/ u8 placeholder18:4;
-    /*0x19*/ union __attribute__((packed)) {
-        u8 as_byte;
-        struct __attribute__((packed)) {
-            u8 x:4;
-            u8 y:4;
-        } __attribute__((aligned (1))) as_nybbles;
-    } __attribute__((aligned (1))) range;
+    /*0x19*/ union MapObjectRange range;
     /*0x1A*/ u8 mapobj_unk_1A;
     /*0x1B*/ u8 mapobj_unk_1B;
     /*0x1C*/ u8 mapobj_unk_1C;

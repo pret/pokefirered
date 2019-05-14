@@ -256,8 +256,11 @@ gUnknown_84795B8:: @ 84795B8
 gUnknown_84795C8:: @ 84795C8
 	.incbin "baserom.gba", 0x4795C8, 0x90
 
-gUnknown_8479658:: @ 8479658
-	.incbin "baserom.gba", 0x479658, 0x600
+	.section .rodata.8479668
+
+	.align 2
+gUnknown_8479668:: @ 8479668
+	.incbin "baserom.gba", 0x479668, 0x5F0
 
 gUnknown_8479C58:: @ 8479C58
 	.incbin "baserom.gba", 0x479C58, 0x30

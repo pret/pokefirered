@@ -7253,7 +7253,7 @@ EventScript_1A6675:: @ 81A6675
 gStdScript_81A667B:: @ 81A667B
 	copyvar VAR_MON_BOX_POS, VAR_MON_BOX_ID
 	textcolor 3
-	additem 32768, 32769
+	additem VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_1A6697
 	copyvar VAR_MON_BOX_ID, VAR_MON_BOX_POS
@@ -7261,7 +7261,7 @@ gStdScript_81A667B:: @ 81A667B
 
 EventScript_1A6697:: @ 81A6697
 	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
-	checkitemtype 32768
+	checkitemtype VAR_0x8000
 	call EventScript_1A66BC
 	compare_var_to_value VAR_0x8007, 1
 	call_if 1, EventScript_1A6749
@@ -7335,13 +7335,13 @@ EventScript_1A6768:: @ 81A6768
 	return
 
 gStdScript_81A676C:: @ 81A676C
-	adddecor 32768
+	adddecor VAR_0x8000
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_1A677A
 	return
 
 EventScript_1A677A:: @ 81A677A
-	getdecorname 1, 32768
+	getdecorname 1, VAR_0x8000
 	compare_var_to_value VAR_0x8007, 1
 	call_if 1, EventScript_1A6795
 	compare_var_to_value VAR_0x8007, 0
@@ -7368,10 +7368,10 @@ gStdScript_81A67B3:: @ 81A67B3
 	waitse
 	copyvar VAR_0x8004, VAR_0x8000
 	copyvar VAR_0x8005, VAR_0x8001
-	checkitemspace 32768, 32769
+	checkitemspace VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
-	getitemname 1, 32768
-	checkitemtype 32768
+	getitemname 1, VAR_0x8000
+	checkitemtype VAR_0x8000
 	call EventScript_1A66BC
 	compare_var_to_value VAR_0x8007, 1
 	call_if 1, EventScript_1A67EE
@@ -7382,7 +7382,7 @@ gStdScript_81A67B3:: @ 81A67B3
 
 EventScript_1A67EE:: @ 81A67EE
 	removeobject VAR_LAST_TALKED
-	additem 32772, 32773
+	additem VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, sub_80CC8CC
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8008, 1

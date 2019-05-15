@@ -5231,10 +5231,10 @@ gUnknown_81970D5:: @ 81970D5
 	.string "than that.$"
 
 gUnknown_81970FE:: @ 81970FE
-	.string "おきゃくさん もう もてないよ$"
+	.string "おきゃくさん もう もてないよ$" @ I'm sorry I don't have any more
 
 gUnknown_819710E:: @ 819710E
-	.string "あっ そう$"
+	.string "あっ そう$" @ I see
 
 Text_197114:: @ 8197114
 	.string "Hello…\n"

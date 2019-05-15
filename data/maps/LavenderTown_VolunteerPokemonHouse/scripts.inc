@@ -17,7 +17,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B14A:: @ 816B14A
 	setorcopyvar VAR_0x8000, 350
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_81937E5
 	callstd 4
 	release

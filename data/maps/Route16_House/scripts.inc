@@ -16,7 +16,7 @@ Route16_House_EventScript_17014F:: @ 817014F
 	setorcopyvar VAR_0x8000, 340
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_819F8E0
 	callstd 4
 	setflag FLAG_0x238

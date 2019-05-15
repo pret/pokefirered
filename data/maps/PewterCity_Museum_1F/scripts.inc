@@ -182,7 +182,7 @@ PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
 	setorcopyvar VAR_0x8000, 354
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	release
 	end
 

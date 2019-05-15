@@ -89,7 +89,7 @@ EventScript_16DA34:: @ 816DA34
 	setorcopyvar VAR_0x8000, 326
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x24E
 	loadword 0, gUnknown_8199652
 	callstd 4

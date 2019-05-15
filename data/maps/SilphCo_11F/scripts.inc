@@ -25,7 +25,7 @@ SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	setorcopyvar VAR_0x8000, 1
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_8176FEB
 	callstd 4
 	setflag FLAG_0x250

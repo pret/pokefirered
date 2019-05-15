@@ -23,7 +23,7 @@ SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 	setorcopyvar VAR_0x8000, 339
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_81737D2
 	callstd 4
 	setflag FLAG_0x237

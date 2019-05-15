@@ -43,7 +43,7 @@ EventScript_16AC22:: @ 816AC22
 	setorcopyvar VAR_0x8000, 360
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x271
 	additem ITEM_BICYCLE, 1
 	removeitem ITEM_BIKE_VOUCHER, 1

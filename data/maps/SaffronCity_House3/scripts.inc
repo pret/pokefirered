@@ -16,7 +16,7 @@ SaffronCity_House3_EventScript_16F05F:: @ 816F05F
 	setorcopyvar VAR_0x8000, 317
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_819C18F
 	callstd 4
 	setflag FLAG_0x245

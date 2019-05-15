@@ -36,10 +36,10 @@ EventScript_16D0C6:: @ 816D0C6
 	goto_if 1, EventScript_16D107
 	additem ITEM_TM19, 1
 	loadword 0, gUnknown_81973BA
-	setorcopyvar VAR_0x8000, 307
+	setorcopyvar VAR_0x8000, ITEM_TM19
 	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	setorcopyvar VAR_0x8002, MUS_FANFA1
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x293
 	loadword 0, gUnknown_81973D7
 	callstd 4

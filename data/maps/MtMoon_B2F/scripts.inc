@@ -69,7 +69,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	setorcopyvar VAR_0x8000, 358
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	closemessage
 	special sub_8112364
 	delay 10
@@ -107,7 +107,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	setorcopyvar VAR_0x8000, 357
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	closemessage
 	special sub_8112364
 	delay 10

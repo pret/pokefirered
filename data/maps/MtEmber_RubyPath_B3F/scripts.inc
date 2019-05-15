@@ -12,6 +12,6 @@ MtEmber_RubyPath_B5F_EventScript_163C49:: @ 8163C49
 	setorcopyvar VAR_0x8000, 373
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	release
 	end

@@ -33,7 +33,7 @@ EventScript_16B4B1:: @ 816B4B1
 	setorcopyvar VAR_0x8000, 352
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_819477C
 	callstd 4
 	release

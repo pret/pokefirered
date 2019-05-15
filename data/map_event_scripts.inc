@@ -5214,37 +5214,89 @@ gUnknown_8197057:: @ 8197057
 	.incbin "baserom.gba", 0x197057, 0x23
 
 Text_19707A:: @ 819707A
-	.incbin "baserom.gba", 0x19707A, 0x23
+	.string "Which prize would you like?$"
+
+gUnknown_8197096:: @ 8197096
+	.string "はい どうぞ$"
 
 gUnknown_819709D:: @ 819709D
-	.incbin "baserom.gba", 0x19709D, 0x15
+	.string "So, you want the {STR_VAR_1}?$"
 
 gUnknown_81970B2:: @ 81970B2
-	.incbin "baserom.gba", 0x1970B2, 0x23
+	.string "Okay, a TM of {STR_VAR_2}\n"
+	.string "is what you want?$"
 
 gUnknown_81970D5:: @ 81970D5
-	.incbin "baserom.gba", 0x1970D5, 0x3F
+	.string "Sorry, you’ll need more COINS\n"
+	.string "than that.$"
+
+gUnknown_81970FE:: @ 81970FE
+	.string "おきゃくさん もう もてないよ$"
+
+gUnknown_819710E:: @ 819710E
+	.string "あっ そう$"
 
 Text_197114:: @ 8197114
-	.incbin "baserom.gba", 0x197114, 0x14C
+	.string "Hello…\n"
+	.string "Lovely weather, isn’t it?\l"
+	.string "It’s so pleasant…\p"
+
+	.string "…Oh, dear…\n"
+	.string "I must have dozed off. Welcome.\p"
+
+	.string "My name is ERIKA.\n"
+	.string "I am the LEADER of CELADON GYM.\p"
+
+	.string "I am a student of the art of\n"
+	.string "flower arranging.\p"
+
+	.string "My POKéMON are solely of the\n"
+	.string "GRASS type.\p"
+
+	.string "…Oh, I’m sorry, I had no idea that\n"
+	.string "you wished to challenge me.\p"
+
+	.string "Very well, but I shall not lose.{PLAY_BGM BGM_FRLG_LEADER_EYE}$"
 
 Text_197260:: @ 8197260
-	.incbin "baserom.gba", 0x197260, 0x58
+	.string "Oh!\n"
+	.string "I concede defeat.\l"
+	.string "You are remarkably strong.\p"
+
+	.string "I must confer on you the\n"
+	.string "RAINBOWBADGE.$"
 
 gUnknown_81972B8:: @ 81972B8
-	.incbin "baserom.gba", 0x1972B8, 0x6F
+	.string "You are cataloging POKéMON?\n"
+	.string "I must say I’m impressed.\p"
+
+	.string "I would never collect POKéMON if\n"
+	.string "they were unattractive.$"
 
 gUnknown_8197327:: @ 8197327
-	.incbin "baserom.gba", 0x197327, 0x93
+	.string "The RAINBOWBADGE will make\n"
+	.string "POKéMON up to Lv. 50 obey.\p"
+
+	.string "It also allows POKéMON to use\n"
+	.string "STRENGTH in and out of battle.\p"
+
+	.string "Please also take this with you.$"
 
 gUnknown_81973BA:: @ 81973BA
-	.incbin "baserom.gba", 0x1973BA, 0x1D
+	.string "{PLAYER} received TM19\n"
+	.string "from ERIKA.$"
 
 gUnknown_81973D7:: @ 81973D7
-	.incbin "baserom.gba", 0x1973D7, 0x86
+	.string "TM19 contains GIGA DRAIN.\p"
+
+	.string "Half the damage it inflicts is\n"
+	.string "drained to heal your POKéMON.\p"
+
+	.string "Wouldn’t you agree that it’s a\n"
+	.string "wonderful move?$"
 
 gUnknown_819745D:: @ 819745D
-	.incbin "baserom.gba", 0x19745D, 0x1F
+	.string "You should make room for this.$"
 
 Text_19747C:: @ 819747C
 	.incbin "baserom.gba", 0x19747C, 0x48
@@ -7038,7 +7090,7 @@ gUnknown_81A4DF5:: @ 81A4DF5
 gUnknown_81A4E26:: @ 81A4E26
 	.incbin "baserom.gba", 0x1A4E26, 0x19
 
-gStdScript_81A4E3F:: @ 81A4E3F
+gStdScript_2:: @ 81A4E3F
 	lock
 	faceplayer
 	message 0x0
@@ -7047,7 +7099,7 @@ gStdScript_81A4E3F:: @ 81A4E3F
 	release
 	return
 
-gStdScript_81A4E4A:: @ 81A4E4A
+gStdScript_3:: @ 81A4E4A
 	lockall
 	message 0x0
 	waitmessage
@@ -7055,28 +7107,28 @@ gStdScript_81A4E4A:: @ 81A4E4A
 	releaseall
 	return
 
-gStdScript_81A4E54:: @ 81A4E54
+gStdScript_4:: @ 81A4E54
 	message 0x0
 	waitmessage
 	waitbuttonpress
 	return
 
-gStdScript_81A4E5C:: @ 81A4E5C
+gStdScript_5:: @ 81A4E5C
 	message 0x0
 	waitmessage
 	yesnobox 20, 8
 	return
 
-gStdScript_81A4E66:: @ 81A4E66
+gStdScript_ItemMessageAndFanfare:: @ 81A4E66
 	textcolor 3
-	compare_var_to_value VAR_0x8002, 257
+	compare_var_to_value VAR_0x8002, MUS_FANFA1
 	call_if 1, EventScript_1A4EA2
-	compare_var_to_value VAR_0x8002, 318
+	compare_var_to_value VAR_0x8002, BGM_FRLG_ME_KEYITEM
 	call_if 1, EventScript_1A4EA6
 	message 0x0
 	waitmessage
 	waitfanfare
-	compare_var_to_value VAR_0x8002, 257
+	compare_var_to_value VAR_0x8002, MUS_FANFA1
 	call_if 1, EventScript_1A4EAA
 	setorcopyvar VAR_0x8000, VAR_0x8000
 	setorcopyvar VAR_0x8001, VAR_0x8001
@@ -7126,7 +7178,7 @@ gUnknown_81A4F3E:: @ 81A4F3E
 gUnknown_81A4F73:: @ 81A4F73
 	.incbin "baserom.gba", 0x1A4F73, 0xAC
 
-gStdScript_81A501F:: @ 81A501F
+gStdScript_Message_WaitButton_AndRelease:: @ 81A501F
 	message 0x0
 	waitmessage
 	waitbuttonpress
@@ -7250,7 +7302,7 @@ EventScript_1A6578:: @ 81A6578
 EventScript_1A6675:: @ 81A6675
 	.incbin "baserom.gba", 0x1A6675, 0x6
 
-gStdScript_81A667B:: @ 81A667B
+gStdScript_0:: @ 81A667B
 	copyvar VAR_MON_BOX_POS, VAR_MON_BOX_ID
 	textcolor 3
 	additem VAR_0x8000, VAR_0x8001
@@ -7334,7 +7386,7 @@ EventScript_1A6768:: @ 81A6768
 	playfanfare MUS_FANFA1
 	return
 
-gStdScript_81A676C:: @ 81A676C
+gStdScript_7:: @ 81A676C
 	adddecor VAR_0x8000
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_1A677A
@@ -7362,7 +7414,7 @@ EventScript_1A67AD:: @ 81A67AD
 	setvar VAR_RESULT, 0
 	return
 
-gStdScript_81A67B3:: @ 81A67B3
+gStdScript_1:: @ 81A67B3
 	lock
 	faceplayer
 	waitse
@@ -7923,7 +7975,7 @@ gUnknown_81A8DD8:: @ 81A8DD8
 gUnknown_81A8DFD:: @ 81A8DFD
 	.incbin "baserom.gba", 0x1A8DFD, 0x5B
 
-gStdScript_81A8E58:: @ 81A8E58
+gStdScript_8:: @ 81A8E58
 	.incbin "baserom.gba", 0x1A8E58, 0x6D
 
 EventScript_1A8EC5:: @ 81A8EC5
@@ -10266,16 +10318,20 @@ gUnknown_81C5FDC::
 gUnknown_81C601C::
 	.string "My RATTATA reduced the foe’s HP\n"
 	.string "to zero, so it wins!\p"
+
 	.string "The POKéMON that took part in the\n"
 	.string "battle get EXP. Points.\p"
+
 	.string "When a POKéMON collects enough\n"
 	.string "EXP. Points, it levels up.\p"
+
 	.string "Leveling up makes your POKéMON\n"
 	.string "stronger than before.$"
 
 gUnknown_81C60FA::
 	.string "POKé DUDE: Uh-oh…\n"
 	.string "My RATTATA has been poisoned…\p"
+
 	.string "If a POKéMON is poisoned, it loses\n"
 	.string "HP steadily.$"
 
@@ -10286,6 +10342,7 @@ gUnknown_81C615A::
 gUnknown_81C6196::
 	.string "Using an item on a POKéMON uses\n"
 	.string "up one turn, though.\p"
+
 	.string "Now, it’s the opponent’s turn!$"
 
 gUnknown_81C61EA::
@@ -10295,41 +10352,53 @@ gUnknown_81C61EA::
 gUnknown_81C6202::
 	.string "POKé DUDE: The move BUBBLE is\n"
 	.string "a WATER-type attack.\p"
+
 	.string "The targeted ODDISH is a\n"
 	.string "GRASS/POISON-type POKéMON.\p"
+
 	.string "The WATER-type attack is absorbed\n"
 	.string "by the GRASS-type POKéMON…\p"
+
 	.string "As a result, the move becomes not\n"
 	.string "very effective, and inflicts only\l"
 	.string "half the usual damage.$"
 
 gUnknown_81C6301::
 	.string "Uh-oh, this is not good!\p"
+
 	.string "The ABSORB attack you just saw\n"
 	.string "is a GRASS-type move.\p"
+
 	.string "POLIWAG is a WATER-type POKéMON.\p"
+
 	.string "So, ABSORB becomes super\n"
 	.string "effective, doubling the damage.$"
 
 gUnknown_81C63A9::
 	.string "It’s not going to be easy to win\n"
 	.string "with this matchup…\p"
+
 	.string "Let’s try shifting POKéMON!$"
 
 gUnknown_81C63F9::
 	.string "Shifting POKéMON in and out uses\n"
 	.string "up one turn.\p"
+
 	.string "Now, it’s the opponent’s turn.$"
 
 gUnknown_81C6446::
 	.string "BUTTERFREE is a BUG/FLYING-type\n"
 	.string "POKéMON.\p"
+
 	.string "Against this POKéMON, a GRASS-\n"
 	.string "type attack…\p"
+
 	.string "…inflicts only half the usual\n"
 	.string "damage on a BUG-type POKéMON…\p"
+
 	.string "…And, it also causes only half the\n"
 	.string "damage on a FLYING-type POKéMON.\p"
+
 	.string "Therefore, BUTTERFREE, being a\n"
 	.string "BUG/FLYING POKéMON, only takes\l"
 	.string "one quarter of the usual damage.$"
@@ -10337,10 +10406,13 @@ gUnknown_81C6446::
 gUnknown_81C657A::
 	.string "ODDISH is a GRASS/POISON-type\n"
 	.string "POKéMON.\p"
+
 	.string "A FLYING- or PSYCHIC-type attack\n"
 	.string "is super effective against it.\p"
+
 	.string "One of those types of attacks will\n"
 	.string "inflict double the usual damage.\p"
+
 	.string "Okay, here we go!$"
 
 gUnknown_81C6637::
@@ -10351,14 +10423,17 @@ gUnknown_81C6645::
 	.string "POKé DUDE: When you’re trying to\n"
 	.string "catch a POKéMON, don’t throw any\l"
 	.string "POKé BALLS right away.\p"
+
 	.string "First, you need to weaken it by\n"
 	.string "reducing its HP.$"
 
 gUnknown_81C66CF::
 	.string "Okay, that should be good enough.\p"
+
 	.string "But, if it’s possible, it would be\n"
 	.string "best if the target has a status\l"
 	.string "problem.\p"
+
 	.string "For instance, it would be easier\n"
 	.string "to catch if it were asleep or\l"
 	.string "paralyzed.$"
@@ -10366,9 +10441,11 @@ gUnknown_81C66CF::
 gUnknown_81C6787::
 	.string "This will make the POKéMON a lot\n"
 	.string "easier to catch!\p"
+
 	.string "Oh, yes. If you paralyze a\n"
 	.string "POKéMON, you can’t make it fall\l"
 	.string "asleep on top of paralysis.\p"
+
 	.string "In other words, you can’t double\n"
 	.string "up status problems, okay?$"
 

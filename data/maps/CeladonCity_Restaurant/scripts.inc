@@ -26,7 +26,7 @@ CeladonCity_Restaurant_EventScript_16D1FD:: @ 816D1FD
 	setorcopyvar VAR_0x8000, 260
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x243
 	release
 	end

@@ -36,7 +36,7 @@ EventScript_16D780:: @ 816D780
 	setorcopyvar VAR_0x8000, 342
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x23A
 	removeitem ITEM_GOLD_TEETH, 1
 	release

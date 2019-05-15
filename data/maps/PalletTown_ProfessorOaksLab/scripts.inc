@@ -744,7 +744,7 @@ EventScript_16961E:: @ 816961E
 	setorcopyvar VAR_0x8000, 4
 	setorcopyvar VAR_0x8001, 5
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_818E6D0
 	callstd 4
 	setvar VAR_0x8004, 0
@@ -1053,7 +1053,7 @@ EventScript_169A45:: @ 8169A45
 	setorcopyvar VAR_0x8000, 4
 	setorcopyvar VAR_0x8001, 5
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x247
 	release
 	end

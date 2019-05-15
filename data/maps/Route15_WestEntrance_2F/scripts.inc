@@ -45,7 +45,7 @@ Route15_WestEntrance_2F_EventScript_1700B9:: @ 81700B9
 	setorcopyvar VAR_0x8000, 182
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x256
 	loadword 0, gUnknown_819F71F
 	callstd 4

@@ -62,7 +62,7 @@ EventScript_1686B9:: @ 81686B9
 	setorcopyvar VAR_0x8000, 110
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	message Text_188CDB
 	waitmessage
 	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0

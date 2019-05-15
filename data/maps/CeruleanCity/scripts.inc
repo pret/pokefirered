@@ -201,7 +201,7 @@ EventScript_16662E:: @ 816662E
 	setorcopyvar VAR_0x8000, 316
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_817EEED
 	callstd 4
 	closemessage

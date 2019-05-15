@@ -190,7 +190,7 @@ EventScript_1715C4:: @ 81715C4
 	setorcopyvar VAR_0x8000, 94
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	release
 	end
 

@@ -56,7 +56,7 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	setorcopyvar VAR_0x8000, 195
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x2FA
 	loadword 0, gUnknown_819E7AF
 	callstd 4

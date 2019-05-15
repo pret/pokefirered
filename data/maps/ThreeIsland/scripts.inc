@@ -57,7 +57,7 @@ EventScript_16781A:: @ 816781A
 	setorcopyvar VAR_0x8000, 19
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	additem ITEM_FULL_RESTORE, 1
 	setflag FLAG_0x2FC
 	loadword 0, gUnknown_81827F1

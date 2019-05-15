@@ -90,7 +90,7 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	setorcopyvar VAR_0x8000, 261
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x252
 	loadword 0, gUnknown_819EB59
 	callstd 4

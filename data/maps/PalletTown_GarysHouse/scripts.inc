@@ -185,7 +185,7 @@ EventScript_168EF6:: @ 8168EF6
 	setorcopyvar VAR_0x8000, 361
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	release
 	end
 

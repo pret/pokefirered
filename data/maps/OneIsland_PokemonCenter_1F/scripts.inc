@@ -117,7 +117,7 @@ EventScript_170CB1:: @ 8170CB1
 	setorcopyvar VAR_0x8000, 280
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	additem ITEM_METEORITE, 1
 	applymovement 3, Movement_1A75ED
 	waitmovement 0
@@ -128,7 +128,7 @@ EventScript_170CB1:: @ 8170CB1
 	setorcopyvar VAR_0x8000, 367
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_81A1150
 	callstd 4
 	compare_var_to_value VAR_0x4058, 2
@@ -175,7 +175,7 @@ EventScript_170E58:: @ 8170E58
 	setorcopyvar VAR_0x8000, 361
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	return
 
 Movement_170E7D:: @ 8170E7D

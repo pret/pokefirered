@@ -16,7 +16,7 @@ SafariZone_SecretHouse_EventScript_162453:: @ 8162453
 	setorcopyvar VAR_0x8000, 341
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	loadword 0, gUnknown_8177EB7
 	callstd 4
 	setflag FLAG_0x239

@@ -39,7 +39,7 @@ EventScript_16EE3D:: @ 816EE3D
 	setorcopyvar VAR_0x8000, 292
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 257
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x29A
 	loadword 0, gUnknown_819B685
 	callstd 4

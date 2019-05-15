@@ -124,7 +124,7 @@ EventScript_17064A:: @ 817064A
 	setorcopyvar VAR_0x8000, 265
 	setorcopyvar VAR_0x8001, 1
 	setorcopyvar VAR_0x8002, 318
-	callstd 9
+	callstd 9 @ gStdScript_ItemMessageAndFanfare
 	setflag FLAG_0x235
 	setflag FLAG_0x031
 	setflag FLAG_0x234

@@ -1402,8 +1402,8 @@
 
 @ Supplementary
 
-	.macrogoto_if_eq dest
-	goto_if_eq \dest
+	.macro goto_if_eq dest
+	goto_if 1, \dest
 	.endm
 
 	.macro switch var

@@ -29,6 +29,8 @@ extern struct UCoords32 gDirectionToVectors[];
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern MainCallback gFieldCallback;
 
+extern struct WarpData gUnknown_2031DBC;
+
 void IncrementGameStat(u8 index);
 
 void Overworld_SetMapObjTemplateCoords(u8, s16, s16);

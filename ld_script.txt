@@ -162,7 +162,6 @@ SECTIONS {
         asm/menu_helpers.o(.text);
         asm/script_pokemon_util_80BF8FC.o(.text);
         src/heal_location.o(.text);
-        asm/heal_location.o(.text);
         asm/region_map.o(.text);
         src/battle_ai_script_commands.o(.text);
         asm/rom6.o(.text);

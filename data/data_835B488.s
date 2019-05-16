@@ -1053,13 +1053,6 @@ gUnknown_83EEB68:: @ 83EEB68
 
 	.section .rodata.83EEC98
 
-	.align 2
-gUnknown_83EEC98:: @ 83EEC98
-	.incbin "baserom.gba", 0x3EEC98, 0x50
-
-gUnknown_83EECE8:: @ 83EECE8
-	.incbin "baserom.gba", 0x3EECE8, 0x14
-
 	.include "data/text/map_section_names.inc"
 
 gUnknown_83EF23C:: @ 83EF23C

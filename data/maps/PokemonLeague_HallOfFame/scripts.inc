@@ -35,7 +35,7 @@ EventScript_162D70:: @ 8162D70
 	delay 40
 	setvar VAR_0x4001, 1
 	call EventScript_1A651A
-	setrespawn 1
+	setrespawn SPAWN_PALLET_TOWN
 	fadescreenspeed 1, 24
 	special sub_80CA2E4
 	waitstate

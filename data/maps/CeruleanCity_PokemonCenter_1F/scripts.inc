@@ -4,7 +4,7 @@ CeruleanCity_PokemonCenter_1F_MapScripts:: @ 816AA2D
 	.byte 0
 
 CeruleanCity_PokemonCenter_1F_MapScript1_16AA38:: @ 816AA38
-	setrespawn 4
+	setrespawn SPAWN_CERULEAN_CITY
 	end
 
 CeruleanCity_PokemonCenter_1F_EventScript_16AA3C:: @ 816AA3C

@@ -27,7 +27,7 @@ EventScript_170C36:: @ 8170C36
 	return
 
 OneIsland_PokemonCenter_1F_MapScript1_170C4E:: @ 8170C4E
-	setrespawn 14
+	setrespawn SPAWN_ONE_ISLAND
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	call_if 1, EventScript_170C73
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 0

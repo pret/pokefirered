@@ -4,7 +4,7 @@ CinnabarIsland_PokemonCenter_1F_MapScripts:: @ 816E8D7
 	.byte 0
 
 CinnabarIsland_PokemonCenter_1F_MapScript1_16E8E2:: @ 816E8E2
-	setrespawn 9
+	setrespawn SPAWN_CINNABAR_ISLAND
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E8E6:: @ 816E8E6

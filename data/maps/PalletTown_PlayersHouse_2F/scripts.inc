@@ -9,7 +9,7 @@ PalletTown_PlayersHouse_2F_MapScript1_168CAE:: @ 8168CAE
 	end
 
 EventScript_168CBA:: @ 8168CBA
-	setrespawn 1
+	setrespawn SPAWN_PALLET_TOWN
 	return
 
 PalletTown_PlayersHouse_2F_MapScript2_168CBE:: @ 8168CBE

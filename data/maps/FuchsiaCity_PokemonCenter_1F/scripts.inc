@@ -4,7 +4,7 @@ FuchsiaCity_PokemonCenter_1F_MapScripts:: @ 816D6F1
 	.byte 0
 
 FuchsiaCity_PokemonCenter_1F_MapScript1_16D6FC:: @ 816D6FC
-	setrespawn 8
+	setrespawn SPAWN_FUCHSIA_CITY
 	end
 
 FuchsiaCity_PokemonCenter_1F_EventScript_16D700:: @ 816D700

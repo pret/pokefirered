@@ -4,7 +4,7 @@ VermilionCity_PokemonCenter_1F_MapScripts:: @ 816B424
 	.byte 0
 
 VermilionCity_PokemonCenter_1F_MapScript1_16B42F:: @ 816B42F
-	setrespawn 6
+	setrespawn SPAWN_VERMILION_CITY
 	end
 
 VermilionCity_PokemonCenter_1F_EventScript_16B433:: @ 816B433

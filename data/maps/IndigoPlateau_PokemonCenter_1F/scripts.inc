@@ -4,7 +4,7 @@ IndigoPlateau_PokemonCenter_1F_MapScripts:: @ 816EA5A
 	.byte 0
 
 IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65:: @ 816EA65
-	setrespawn 10
+	setrespawn SPAWN_INDIGO_PLATEAU
 	specialvar VAR_RESULT, sub_806E25C
 	compare_var_to_value VAR_RESULT, 1
 	call_if 1, EventScript_16EA79

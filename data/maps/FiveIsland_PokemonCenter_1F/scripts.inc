@@ -4,7 +4,7 @@ FiveIsland_PokemonCenter_1F_MapScripts:: @ 8171CF1
 	.byte 0
 
 FiveIsland_PokemonCenter_1F_MapScript1_171CFC:: @ 8171CFC
-	setrespawn 18
+	setrespawn SPAWN_FIVE_ISLAND
 	end
 
 FiveIsland_PokemonCenter_1F_EventScript_171D00:: @ 8171D00

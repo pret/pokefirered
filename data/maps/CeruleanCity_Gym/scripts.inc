@@ -18,7 +18,7 @@ EventScript_16AAD3:: @ 816AAD3
 	special SetFlavorTextFlagFromSpecialVars
 	setflag FLAG_0x4B1
 	setflag FLAG_0x821
-	setrespawn 4
+	setrespawn SPAWN_CERULEAN_CITY
 	setvar VAR_0x8008, 2
 	call EventScript_1A6B18
 	goto EventScript_16AAF9

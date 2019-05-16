@@ -4,7 +4,7 @@ ThreeIsland_PokemonCenter_1F_MapScripts:: @ 8171832
 	.byte 0
 
 ThreeIsland_PokemonCenter_1F_MapScript1_17183D:: @ 817183D
-	setrespawn 16
+	setrespawn SPAWN_THREE_ISLAND
 	end
 
 ThreeIsland_PokemonCenter_1F_EventScript_171841:: @ 8171841

@@ -5,7 +5,7 @@ Route4_PokemonCenter_1F_MapScripts:: @ 816F739
 
 Route4_PokemonCenter_1F_MapScript1_16F744:: @ 816F744
 	setworldmapflag FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F
-	setrespawn 12
+	setrespawn SPAWN_ROUTE4
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F74B:: @ 816F74B

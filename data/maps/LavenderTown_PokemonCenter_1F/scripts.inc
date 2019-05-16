@@ -4,7 +4,7 @@ LavenderTown_PokemonCenter_1F_MapScripts:: @ 816B0EF
 	.byte 0
 
 LavenderTown_PokemonCenter_1F_MapScript1_16B0FA:: @ 816B0FA
-	setrespawn 5
+	setrespawn SPAWN_LAVENDER_TOWN
 	end
 
 LavenderTown_PokemonCenter_1F_EventScript_16B0FE:: @ 816B0FE

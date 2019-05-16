@@ -4,7 +4,7 @@ CeladonCity_PokemonCenter_1F_MapScripts:: @ 816C5EC
 	.byte 0
 
 CeladonCity_PokemonCenter_1F_MapScript1_16C5F7:: @ 816C5F7
-	setrespawn 7
+	setrespawn SPAWN_CELADON_CITY
 	end
 
 CeladonCity_PokemonCenter_1F_EventScript_16C5FB:: @ 816C5FB

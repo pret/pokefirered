@@ -4,7 +4,7 @@ ViridianCity_PokemonCenter_1F_MapScripts:: @ 816A2C0
 	.byte 0
 
 ViridianCity_PokemonCenter_1F_MapScript1_16A2CB:: @ 816A2CB
-	setrespawn 2
+	setrespawn SPAWN_VIRIDIAN_CITY
 	end
 
 ViridianCity_PokemonCenter_1F_EventScript_16A2CF:: @ 816A2CF

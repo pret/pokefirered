@@ -4,7 +4,7 @@ FourIsland_PokemonCenter_1F_MapScripts:: @ 8171BEA
 	.byte 0
 
 FourIsland_PokemonCenter_1F_MapScript1_171BF5:: @ 8171BF5
-	setrespawn 17
+	setrespawn SPAWN_FOUR_ISLAND
 	end
 
 FourIsland_PokemonCenter_1F_EventScript_171BF9:: @ 8171BF9

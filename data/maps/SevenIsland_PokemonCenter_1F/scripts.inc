@@ -4,7 +4,7 @@ SevenIsland_PokemonCenter_1F_MapScripts:: @ 8170B89
 	.byte 0
 
 SevenIsland_PokemonCenter_1F_MapScript1_170B94:: @ 8170B94
-	setrespawn 19
+	setrespawn SPAWN_SEVEN_ISLAND
 	end
 
 SevenIsland_PokemonCenter_1F_EventScript_170B98:: @ 8170B98

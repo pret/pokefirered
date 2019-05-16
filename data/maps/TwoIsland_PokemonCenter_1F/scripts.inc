@@ -4,7 +4,7 @@ TwoIsland_PokemonCenter_1F_MapScripts:: @ 81717B4
 	.byte 0
 
 TwoIsland_PokemonCenter_1F_MapScript1_1717BF:: @ 81717BF
-	setrespawn 15
+	setrespawn SPAWN_TWO_ISLAND
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_1717C3:: @ 81717C3

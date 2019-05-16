@@ -69,7 +69,7 @@ EventScript_16DA06:: @ 816DA06
 	special SetFlavorTextFlagFromSpecialVars
 	setflag FLAG_0x4B6
 	setflag FLAG_UNK826
-	setrespawn 9
+	setrespawn SPAWN_CINNABAR_ISLAND
 	setvar VAR_0x4071, 1
 	clearflag FLAG_0x062
 	setvar VAR_0x8008, 7

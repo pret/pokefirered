@@ -4,7 +4,7 @@ SaffronCity_PokemonCenter_1F_MapScripts:: @ 816EFEC
 	.byte 0
 
 SaffronCity_PokemonCenter_1F_MapScript1_16EFF7:: @ 816EFF7
-	setrespawn 11
+	setrespawn SPAWN_SAFFRON_CITY
 	end
 
 SaffronCity_PokemonCenter_1F_EventScript_16EFFB:: @ 816EFFB

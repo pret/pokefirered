@@ -4,7 +4,7 @@ PewterCity_PokemonCenter_1F_MapScripts:: @ 816A760
 	.byte 0
 
 PewterCity_PokemonCenter_1F_MapScript1_16A76B:: @ 816A76B
-	setrespawn 3
+	setrespawn SPAWN_PEWTER_CITY
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A76F:: @ 816A76F

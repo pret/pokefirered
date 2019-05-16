@@ -25,7 +25,7 @@ Route11_EastEntrance_2F_EventScript_16FD5C:: @ 816FD5C
 	call EventScript_1A8CAD
 	checkflag FLAG_0x251
 	goto_if 1, EventScript_16FDCE
-	msgbox gUnknown_81A597B, 5
+	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16FDB6
 	call EventScript_1A8CBD
@@ -62,7 +62,7 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	call EventScript_16FE64
 	checkflag FLAG_0x252
 	goto_if 1, EventScript_16FE5A
-	msgbox gUnknown_819E9E5, 5
+	msgbox gUnknown_819E9E5, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7AD1
 	setvar VAR_0x8004, 0

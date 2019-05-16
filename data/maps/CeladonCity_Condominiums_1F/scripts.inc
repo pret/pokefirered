@@ -12,9 +12,7 @@ CeladonCity_Condominiums_1F_EventScript_16C321:: @ 816C321
 	goto_if 1, EventScript_16C36A
 	msgbox gUnknown_81960C9
 	setflag FLAG_0x2A6
-	setorcopyvar VAR_0x8000, 369
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_TEA
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A6BF9
 	msgbox gUnknown_8196109

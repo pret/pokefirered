@@ -1172,7 +1172,7 @@ EventScript_169BE1:: @ 8169BE1
 	end
 
 EventScript_169C14:: @ 8169C14
-	msgbox gUnknown_818E272, 5
+	msgbox gUnknown_818E272, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_169C74
 	compare_var_to_value VAR_RESULT, 0
@@ -1180,7 +1180,7 @@ EventScript_169C14:: @ 8169C14
 	end
 
 EventScript_169C33:: @ 8169C33
-	msgbox gUnknown_818E207, 5
+	msgbox gUnknown_818E207, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_169C74
 	compare_var_to_value VAR_RESULT, 0
@@ -1188,7 +1188,7 @@ EventScript_169C33:: @ 8169C33
 	end
 
 EventScript_169C52:: @ 8169C52
-	msgbox gUnknown_818E194, 5
+	msgbox gUnknown_818E194, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_169C74
 	compare_var_to_value VAR_RESULT, 0
@@ -1214,7 +1214,7 @@ EventScript_169C74:: @ 8169C74
 	waitmessage
 	playfanfare BGM_FRLG_ME_KEYITEM
 	waitfanfare
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_169CCC
 	compare_var_to_value VAR_RESULT, 0

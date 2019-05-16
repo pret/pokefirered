@@ -7,7 +7,7 @@ Route2_EastBuilding_EventScript_16F67F:: @ 816F67F
 	call EventScript_16F70B
 	checkflag FLAG_0x23B
 	goto_if 1, EventScript_16F701
-	msgbox gUnknown_819D64F, 5
+	msgbox gUnknown_819D64F, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7AD1
 	setvar VAR_0x8004, 0

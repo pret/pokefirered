@@ -53,7 +53,7 @@ EventScript_168DB9:: @ 8168DB9
 	special sub_8112364
 	compare_var_to_value VAR_MIRAGE_RND_L, 500
 	goto_if 0, EventScript_168E46
-	msgbox gUnknown_818D7D3, 5
+	msgbox gUnknown_818D7D3, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_168E3C
 	msgbox gUnknown_818D8B2

@@ -45,9 +45,7 @@ RocketHideout_B4F_EventScript_161363:: @ 8161363
 	lock
 	faceplayer
 	removeobject 2
-	setorcopyvar VAR_0x8000, 359
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_SILPH_SCOPE
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A6BF9
 	release
@@ -71,9 +69,7 @@ RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
 	faceplayer
 	setflag FLAG_0x2A5
 	removeobject 4
-	setorcopyvar VAR_0x8000, 356
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_LIFT_KEY
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A6BF9
 	release

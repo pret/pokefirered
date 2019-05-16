@@ -33,9 +33,7 @@ EventScript_16AD59:: @ 816AD59
 EventScript_16AD63:: @ 816AD63
 	call EventScript_16AE23
 	msgbox gUnknown_8192B43
-	setorcopyvar VAR_0x8000, VAR_0x8008
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem VAR_0x8008
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AE45
 	release
@@ -44,9 +42,7 @@ EventScript_16AD63:: @ 816AD63
 EventScript_16AD89:: @ 816AD89
 	call EventScript_16AE23
 	msgbox gUnknown_8192C07
-	setorcopyvar VAR_0x8000, VAR_0x8008
-	setorcopyvar VAR_0x8001, 4
-	callstd 0
+	giveitem VAR_0x8008, 4
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AE45
 	release
@@ -62,9 +58,7 @@ EventScript_16ADAF:: @ 816ADAF
 EventScript_16ADC3:: @ 816ADC3
 	call EventScript_16AE23
 	msgbox gUnknown_8192D4B
-	setorcopyvar VAR_0x8000, VAR_0x8008
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem VAR_0x8008
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AE45
 	release
@@ -73,9 +67,7 @@ EventScript_16ADC3:: @ 816ADC3
 EventScript_16ADE9:: @ 816ADE9
 	call EventScript_16AE23
 	msgbox gUnknown_8192DE3
-	setorcopyvar VAR_0x8000, VAR_0x8008
-	setorcopyvar VAR_0x8001, 4
-	callstd 0
+	giveitem VAR_0x8008, 4
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AE45
 	release

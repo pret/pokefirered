@@ -6,7 +6,7 @@ VermilionCity_House1_EventScript_16B3A7:: @ 816B3A7
 	faceplayer
 	checkflag FLAG_0x240
 	goto_if 1, EventScript_16B3CF
-	msgbox gUnknown_8193EC1, 5
+	msgbox gUnknown_8193EC1, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16B3D9
 	msgbox gUnknown_8194028

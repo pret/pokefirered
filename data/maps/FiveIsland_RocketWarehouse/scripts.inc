@@ -59,9 +59,7 @@ EventScript_163FB7:: @ 8163FB7
 EventScript_163FCD:: @ 8163FCD
 	msgbox gUnknown_817BC6C
 	setflag FLAG_0x2DC
-	setorcopyvar VAR_0x8000, 374
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_SAPPHIRE
 	release
 	end
 

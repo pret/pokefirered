@@ -222,7 +222,7 @@ EventScript_167A59:: @ 8167A59
 	applymovement 5, Movement_167C57
 	waitmovement 0
 	playbgm BGM_FRLG_BOY_EYE, 0
-	msgbox gUnknown_81823ED, 5
+	msgbox gUnknown_81823ED, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_167C35
 	msgbox gUnknown_818247D

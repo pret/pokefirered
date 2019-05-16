@@ -91,13 +91,13 @@ EventScript_17097D:: @ 817097D
 EventScript_170987:: @ 8170987
 	special SavePlayerParty
 	special sub_80CAAAC
-	msgbox gUnknown_81A0598, 5
+	msgbox gUnknown_81A0598, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_170A11
 	call EventScript_170A1E
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_170A11
-	msgbox gUnknown_81A0788, 5
+	msgbox gUnknown_81A0788, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_170A11
 	special LoadPlayerParty

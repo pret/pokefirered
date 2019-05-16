@@ -6,16 +6,14 @@ CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
 	faceplayer
 	checkflag FLAG_0x2BB
 	goto_if 1, EventScript_16AEB7
-	msgbox gUnknown_8192F67, 5
+	msgbox gUnknown_8192F67, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AEAD
 	checkflag FLAG_0x847
 	goto_if 0, EventScript_16AEA3
 	msgbox gUnknown_8193003
 	setflag FLAG_0x2BB
-	setorcopyvar VAR_0x8000, 372
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_POWDER_JAR
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A6BF9
 	msgbox gUnknown_8193033
@@ -157,22 +155,20 @@ EventScript_16B048:: @ 816B048
 	end
 
 EventScript_16B055:: @ 816B055
-	msgbox gUnknown_819331E, 5
+	msgbox gUnknown_819331E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AEC8
 	copyvar VAR_0x8004, VAR_0x8009
 	specialvar VAR_RESULT, sub_815EEB0
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16B0CC
-	setorcopyvar VAR_0x8000, VAR_0x8008
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem VAR_0x8008
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16B0BF
 	copyvar VAR_0x8004, VAR_0x8009
 	special sub_815EF5C
 	special sub_815F070
-	msgbox gUnknown_819337A, 5
+	msgbox gUnknown_819337A, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16AEC8
 	msgbox gUnknown_81933FB

@@ -6,7 +6,7 @@ Route12_FishingHouse_EventScript_16FF0C:: @ 816FF0C
 	faceplayer
 	checkflag FLAG_0x255
 	goto_if 1, EventScript_16FF7F
-	msgbox gUnknown_819EFE0, 5
+	msgbox gUnknown_819EFE0, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16FF34
 	msgbox gUnknown_819F1FA
@@ -89,9 +89,7 @@ EventScript_17001E:: @ 817001E
 EventScript_170031:: @ 8170031
 	setflag FLAG_0x29C
 	msgbox gUnknown_819F31B
-	setorcopyvar VAR_0x8000, 6
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_NET_BALL
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_17005D
 	msgbox gUnknown_819F395

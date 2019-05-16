@@ -6,7 +6,7 @@ FuchsiaCity_House2_EventScript_16D817:: @ 816D817
 	faceplayer
 	checkflag FLAG_0x244
 	goto_if 1, EventScript_16D83F
-	msgbox gUnknown_819918E, 5
+	msgbox gUnknown_819918E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16D849
 	msgbox gUnknown_8199337

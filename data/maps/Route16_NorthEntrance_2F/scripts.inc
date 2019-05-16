@@ -23,7 +23,7 @@ Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
 	call EventScript_17036F
 	checkflag FLAG_0x2FD
 	goto_if 1, EventScript_170365
-	msgbox gUnknown_819FB0E, 5
+	msgbox gUnknown_819FB0E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7AD1
 	setvar VAR_0x8004, 0

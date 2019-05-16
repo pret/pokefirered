@@ -33,7 +33,7 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	call EventScript_16FCF1
 	checkflag FLAG_0x2FA
 	goto_if 1, EventScript_16FCE7
-	msgbox gUnknown_819E5FB, 5
+	msgbox gUnknown_819E5FB, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7AD1
 	setvar VAR_0x8004, 0

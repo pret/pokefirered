@@ -90,10 +90,10 @@ FourIsland_EventScript_167D55:: @ 8167D55
 	end
 
 EventScript_167D9B:: @ 8167D9B
-	msgbox gUnknown_81BF5E3, 5
+	msgbox gUnknown_81BF5E3, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_167DD1
-	msgbox gUnknown_81BF7B6, 5
+	msgbox gUnknown_81BF7B6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_167DD1
 	msgbox gUnknown_81BF6CF

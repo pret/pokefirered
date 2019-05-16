@@ -329,14 +329,14 @@ EventScript_171044:: @ 8171044
 	delay 30
 	applymovement 3, Movement_1A75E1
 	waitmovement 0
-	msgbox gUnknown_81A19AA, 5
+	msgbox gUnknown_81A19AA, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_171099
 	goto EventScript_1710B2
 	end
 
 EventScript_171099:: @ 8171099
-	msgbox gUnknown_81A1A08, 5
+	msgbox gUnknown_81A1A08, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_171099
 	goto EventScript_1710B2

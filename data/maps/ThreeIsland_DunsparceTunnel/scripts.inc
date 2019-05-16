@@ -38,9 +38,7 @@ ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 
 EventScript_164D90:: @ 8164D90
 	msgbox gUnknown_817D1C9
-	setorcopyvar VAR_0x8000, 110
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_NUGGET
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_164DB8
 	setflag FLAG_0x2E2

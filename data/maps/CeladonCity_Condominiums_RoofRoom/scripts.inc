@@ -26,7 +26,7 @@ EventScript_16C4A6:: @ 816C4A6
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C514
 	call EventScript_1A8C27
@@ -41,7 +41,7 @@ EventScript_16C4DA:: @ 816C4DA
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C509
 	call EventScript_1A8C33

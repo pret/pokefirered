@@ -8,7 +8,7 @@ FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
 	goto_if 1, EventScript_16D7FA
 	checkflag FLAG_0x189
 	goto_if 1, EventScript_16D780
-	msgbox gUnknown_8198DF9, 5
+	msgbox gUnknown_8198DF9, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	call_if 1, EventScript_16D7E8
 	compare_var_to_value VAR_RESULT, 0

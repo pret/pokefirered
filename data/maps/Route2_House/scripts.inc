@@ -12,7 +12,7 @@ Route2_House_EventScript_16F602:: @ 816F602
 	call EventScript_1A8CAD
 	checkflag FLAG_0x248
 	goto_if 1, EventScript_16F674
-	msgbox gUnknown_81A597B, 5
+	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16F65C
 	call EventScript_1A8CBD

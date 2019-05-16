@@ -33,9 +33,7 @@ OneIsland_KindleRoad_EmberSpa_EventScript_165399:: @ 8165399
 	checkflag FLAG_0x2EF
 	goto_if 1, EventScript_1653C5
 	msgbox gUnknown_817D622
-	setorcopyvar VAR_0x8000, 344
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_HM06
 	setflag FLAG_0x2EF
 	msgbox gUnknown_817D6F3
 	release

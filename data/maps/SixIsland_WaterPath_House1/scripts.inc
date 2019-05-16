@@ -62,9 +62,7 @@ EventScript_17210E:: @ 817210E
 EventScript_172121:: @ 8172121
 	setflag FLAG_0x2D9
 	msgbox gUnknown_81A4A88
-	setorcopyvar VAR_0x8000, 8
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_NEST_BALL
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_17214D
 	msgbox gUnknown_81A4AD9

@@ -4,7 +4,7 @@ SSAnne_1F_Room6_MapScripts:: @ 8160DF2
 SSAnne_1F_Room6_EventScript_160DF3:: @ 8160DF3
 	lock
 	faceplayer
-	msgbox gUnknown_817445B, 5
+	msgbox gUnknown_817445B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_160E18
 	closemessage

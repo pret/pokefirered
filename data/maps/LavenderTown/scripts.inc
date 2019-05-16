@@ -11,7 +11,7 @@ LavenderTown_MapScript1_166871:: @ 8166871
 LavenderTown_EventScript_16687D:: @ 816687D
 	lock
 	faceplayer
-	msgbox gUnknown_817F52E, 5
+	msgbox gUnknown_817F52E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16689C
 	msgbox gUnknown_817F568

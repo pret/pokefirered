@@ -24,15 +24,15 @@ ViridianCity_House2_EventScript_16A094:: @ 816A094
 ViridianCity_House2_EventScript_16A0AB:: @ 816A0AB
 	lockall
 	msgbox gUnknown_818FC65
-	msgbox gUnknown_818FF19, 5
+	msgbox gUnknown_818FF19, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16A11B
 	msgbox gUnknown_818FD23
-	msgbox gUnknown_818FF19, 5
+	msgbox gUnknown_818FF19, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16A11B
 	msgbox gUnknown_818FDA8
-	msgbox gUnknown_818FF19, 5
+	msgbox gUnknown_818FF19, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16A11B
 	msgbox gUnknown_818FE5C

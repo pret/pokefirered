@@ -53,7 +53,7 @@ PewterCity_Gym_EventScript_16A655:: @ 816A655
 	faceplayer
 	checkflag FLAG_0x4B0
 	goto_if 1, EventScript_16A67F
-	msgbox gUnknown_8191298, 5
+	msgbox gUnknown_8191298, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16A689
 	compare_var_to_value VAR_RESULT, 0

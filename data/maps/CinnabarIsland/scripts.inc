@@ -107,7 +107,7 @@ EventScript_166FCD:: @ 8166FCD
 	checkflag FLAG_0x002
 	call_if 1, EventScript_167053
 	msgbox gUnknown_8180C90
-	msgbox gUnknown_8180CAA, 5
+	msgbox gUnknown_8180CAA, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_167068
 	compare_var_to_value VAR_RESULT, 0

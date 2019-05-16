@@ -32,12 +32,12 @@ Route4_PokemonCenter_1F_EventScript_16F75F:: @ 816F75F
 	end
 
 EventScript_16F786:: @ 816F786
-	msgbox gUnknown_819DA9A, 5
+	msgbox gUnknown_819DA9A, MSGBOX_YESNO
 	goto EventScript_16F7A2
 	end
 
 EventScript_16F794:: @ 816F794
-	msgbox gUnknown_819DB34, 5
+	msgbox gUnknown_819DB34, MSGBOX_YESNO
 	goto EventScript_16F7A2
 	end
 
@@ -60,7 +60,7 @@ EventScript_16F7A2:: @ 816F7A2
 
 EventScript_16F7F6:: @ 816F7F6
 	call EventScript_16F86F
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16F861
 	call EventScript_1A8C27
@@ -75,7 +75,7 @@ EventScript_16F7F6:: @ 816F7F6
 
 EventScript_16F822:: @ 816F822
 	call EventScript_16F86F
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16F84B
 	fadescreen 1

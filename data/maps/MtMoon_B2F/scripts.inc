@@ -56,7 +56,7 @@ EventScript_160711:: @ 8160711
 MtMoon_B2F_EventScript_16071B:: @ 816071B
 	lock
 	faceplayer
-	msgbox gUnknown_8172E77, 5
+	msgbox gUnknown_8172E77, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1607DE
 	removeobject 1
@@ -89,7 +89,7 @@ Movement_16077A:: @ 816077A
 MtMoon_B2F_EventScript_16077F:: @ 816077F
 	lock
 	faceplayer
-	msgbox gUnknown_8172E94, 5
+	msgbox gUnknown_8172E94, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1607DE
 	removeobject 2

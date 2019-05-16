@@ -80,7 +80,7 @@ EventScript_16CC55:: @ 816CC55
 
 EventScript_16CC65:: @ 816CC65
 	getspeciesname 0, VAR_0x4001
-	msgbox gUnknown_819709D, 5
+	msgbox gUnknown_819709D, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16CC10
 	checkcoins VAR_RESULT
@@ -175,7 +175,7 @@ EventScript_16CDB3:: @ 816CDB3
 	message Text_1A5DF1
 	waitmessage
 	waitfanfare
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16CD83
 	goto EventScript_16CC10
@@ -189,7 +189,7 @@ EventScript_16CDE0:: @ 816CDE0
 	message Text_1A5DF1
 	waitmessage
 	waitfanfare
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16CE12
 	call EventScript_1A8C33
@@ -271,7 +271,7 @@ EventScript_16CEF5:: @ 816CEF5
 	end
 
 EventScript_16CF09:: @ 816CF09
-	msgbox gUnknown_81970B2, 5
+	msgbox gUnknown_81970B2, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16CC10
 	goto EventScript_16CF3F
@@ -279,7 +279,7 @@ EventScript_16CF09:: @ 816CF09
 
 EventScript_16CF22:: @ 816CF22
 	getitemname 0, VAR_0x4001
-	msgbox gUnknown_819709D, 5
+	msgbox gUnknown_819709D, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16CC10
 	goto EventScript_16CF3F
@@ -295,9 +295,7 @@ EventScript_16CF3F:: @ 816CF3F
 	goto_if 1, EventScript_16CF79
 	takecoins VAR_0x4002
 	updatecoinsbox 0, 5
-	setorcopyvar VAR_0x8000, VAR_0x4001
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem VAR_0x4001
 	goto EventScript_16CC10
 	end
 

@@ -64,9 +64,7 @@ EventScript_1664CC:: @ 81664CC
 	msgbox gUnknown_817ECD4
 	setvar VAR_0x4052, 1
 	setflag FLAG_0x29B
-	setorcopyvar VAR_0x8000, 363
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_FAME_CHECKER
 	msgbox gUnknown_817ED5D
 	closemessage
 	applymovement 8, Movement_1665FB

@@ -118,7 +118,7 @@ ViridianCity_EventScript_1659F6:: @ 81659F6
 	end
 
 EventScript_165A23:: @ 8165A23
-	msgbox gUnknown_817E046, 5
+	msgbox gUnknown_817E046, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_165A40
 	msgbox gUnknown_817E0EA
@@ -165,7 +165,7 @@ EventScript_165A84:: @ 8165A84
 ViridianCity_EventScript_165A8F:: @ 8165A8F
 	lock
 	faceplayer
-	msgbox gUnknown_817DB98, 5
+	msgbox gUnknown_817DB98, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_165AB0
 	compare_var_to_value VAR_RESULT, 0
@@ -252,8 +252,6 @@ EventScript_165B4C:: @ 8165B4C
 	faceplayer
 	msgbox gUnknown_817DE9B
 	setvar VAR_0x4051, 2
-	setorcopyvar VAR_0x8000, 366
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_TEACHY_TV
 	msgbox gUnknown_817DEEB
 	return

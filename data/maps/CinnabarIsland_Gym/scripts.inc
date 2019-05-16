@@ -233,7 +233,7 @@ CinnabarIsland_Gym_EventScript_16DBF4:: @ 816DBF4
 
 EventScript_16DC00:: @ 816DC00
 	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199D5A, 5
+	msgbox gUnknown_8199D5A, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DC43
 	compare_var_to_value VAR_RESULT, 0
@@ -330,7 +330,7 @@ CinnabarIsland_Gym_EventScript_16DCE9:: @ 816DCE9
 
 EventScript_16DCF5:: @ 816DCF5
 	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199D79, 5
+	msgbox gUnknown_8199D79, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DD41
 	compare_var_to_value VAR_RESULT, 0
@@ -418,7 +418,7 @@ CinnabarIsland_Gym_EventScript_16DDC7:: @ 816DDC7
 
 EventScript_16DDD3:: @ 816DDD3
 	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199DA9, 5
+	msgbox gUnknown_8199DA9, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DE1F
 	compare_var_to_value VAR_RESULT, 0
@@ -497,7 +497,7 @@ CinnabarIsland_Gym_EventScript_16DE9E:: @ 816DE9E
 
 EventScript_16DEAA:: @ 816DEAA
 	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199DC6, 5
+	msgbox gUnknown_8199DC6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DEF6
 	compare_var_to_value VAR_RESULT, 0
@@ -576,7 +576,7 @@ CinnabarIsland_Gym_EventScript_16DF75:: @ 816DF75
 
 EventScript_16DF81:: @ 816DF81
 	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199E00, 5
+	msgbox gUnknown_8199E00, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DFA8
 	compare_var_to_value VAR_RESULT, 0
@@ -655,7 +655,7 @@ CinnabarIsland_Gym_EventScript_16E04C:: @ 816E04C
 
 EventScript_16E058:: @ 816E058
 	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199E36, 5
+	msgbox gUnknown_8199E36, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16E0A4
 	compare_var_to_value VAR_RESULT, 0

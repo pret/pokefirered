@@ -23,7 +23,7 @@ Route15_WestEntrance_2F_EventScript_1700B9:: @ 81700B9
 	call EventScript_170145
 	checkflag FLAG_0x256
 	goto_if 1, EventScript_17013B
-	msgbox gUnknown_819F5AB, 5
+	msgbox gUnknown_819F5AB, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7AD1
 	setvar VAR_0x8004, 0

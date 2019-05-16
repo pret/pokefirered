@@ -40,7 +40,7 @@ EventScript_16BD38:: @ 816BD38
 	return
 
 EventScript_16BD3E:: @ 816BD3E
-	msgbox gUnknown_8195D22, 5
+	msgbox gUnknown_8195D22, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C00C
 	textcolor 3
@@ -191,9 +191,7 @@ EventScript_16BF7C:: @ 816BF7C
 	message Text_195DAD
 	waitmessage
 	waitfanfare
-	setorcopyvar VAR_0x8000, VAR_0x8009
-	setorcopyvar VAR_0x8001, 1
-	callstd 8
+	giveitem VAR_0x8009, 1, 8
 	call EventScript_1A6675
 	compare_var_to_value VAR_0x8008, 26
 	call_if 1, EventScript_16BFDE

@@ -4,7 +4,7 @@ LavenderTown_House2_MapScripts:: @ 816B265
 LavenderTown_House2_EventScript_16B266:: @ 816B266
 	lock
 	faceplayer
-	msgbox gUnknown_8193A4B, 5
+	msgbox gUnknown_8193A4B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16B287
 	compare_var_to_value VAR_RESULT, 0
@@ -38,7 +38,7 @@ EventScript_16B2B4:: @ 816B2B4
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16B311
-	msgbox gUnknown_8193AD2, 5
+	msgbox gUnknown_8193AD2, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16B31B
 	compare_var_to_value VAR_RESULT, 0

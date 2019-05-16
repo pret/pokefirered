@@ -29,7 +29,7 @@ CinnabarIsland_PokemonCenter_1F_EventScript_16E901:: @ 816E901
 CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
 	lock
 	faceplayer
-	msgbox gUnknown_819A725, 5
+	msgbox gUnknown_819A725, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E9A5
 	msgbox gUnknown_819A785

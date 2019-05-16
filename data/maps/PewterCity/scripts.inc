@@ -1031,7 +1031,7 @@ PewterCity_EventScript_166075:: @ 8166075
 PewterCity_EventScript_16607E:: @ 816607E
 	lock
 	faceplayer
-	msgbox gUnknown_817E53E, 5
+	msgbox gUnknown_817E53E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_166136
 	msgbox gUnknown_817E589
@@ -1352,7 +1352,7 @@ PewterCity_EventScript_16622B:: @ 816622B
 PewterCity_EventScript_166244:: @ 8166244
 	lock
 	faceplayer
-	msgbox gUnknown_817E602, 5
+	msgbox gUnknown_817E602, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_166263
 	msgbox gUnknown_817E644

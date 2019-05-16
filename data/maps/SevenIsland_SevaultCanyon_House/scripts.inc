@@ -14,7 +14,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	waitmovement 0
 	msgbox gUnknown_81A4D72
 	textcolor 3
-	msgbox gUnknown_81A4DAF, 5
+	msgbox gUnknown_81A4DAF, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_172225
 	msgbox gUnknown_81A4DD8

@@ -29,9 +29,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
 	msgbox gUnknown_817AEE1
-	setorcopyvar VAR_0x8000, 147
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_IAPAPA_BERRY
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_163D19
 	special sub_80CA6DC

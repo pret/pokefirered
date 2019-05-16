@@ -151,7 +151,7 @@ EventScript_161B12:: @ 8161B12
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_161B7E
 	call EventScript_1A8C27
@@ -168,7 +168,7 @@ EventScript_161B45:: @ 8161B45
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_161B73
 	call EventScript_1A8C33

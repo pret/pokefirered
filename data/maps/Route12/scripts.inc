@@ -20,7 +20,7 @@ Route12_EventScript_168014:: @ 8168014
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
 	special sub_8112364
-	msgbox gUnknown_81853CC, 5
+	msgbox gUnknown_81853CC, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16808D
 	call EventScript_1A924B

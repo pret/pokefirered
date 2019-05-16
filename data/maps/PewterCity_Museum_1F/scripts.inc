@@ -15,7 +15,7 @@ PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
 	end
 
 EventScript_16A348:: @ 816A348
-	msgbox gUnknown_8190550, 5
+	msgbox gUnknown_8190550, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16A367
 	compare_var_to_value VAR_RESULT, 0
@@ -63,7 +63,7 @@ PewterCity_Museum_1F_EventScript_16A3BB:: @ 816A3BB
 EventScript_16A3D1:: @ 816A3D1
 	textcolor 0
 	showmoneybox 0, 0, 0
-	msgbox gUnknown_81904B5, 5
+	msgbox gUnknown_81904B5, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16A402
 	msgbox gUnknown_81904F9

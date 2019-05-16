@@ -16,7 +16,7 @@ Route18_EastEntrance_2F_EventScript_17047E:: @ 817047E
 	call EventScript_1A8CAD
 	checkflag FLAG_0x257
 	goto_if 1, EventScript_1704F0
-	msgbox gUnknown_81A597B, 5
+	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1704D8
 	call EventScript_1A8CBD

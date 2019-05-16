@@ -269,7 +269,7 @@ EventScript_16C96A:: @ 816C96A
 EventScript_16C96C:: @ 816C96C
 	checkflag FLAG_0x243
 	goto_if 0, EventScript_16CAA0
-	msgbox gUnknown_8196F46, 5
+	msgbox gUnknown_8196F46, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C96A
 	setfieldeffectarg 0, 255

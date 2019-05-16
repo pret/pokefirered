@@ -6,7 +6,7 @@ VermilionCity_PokemonFanClub_EventScript_16B47F:: @ 816B47F
 	faceplayer
 	checkflag FLAG_0x241
 	goto_if 1, EventScript_16B4A7
-	msgbox gUnknown_819457E, 5
+	msgbox gUnknown_819457E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16B4B1
 	msgbox gUnknown_8194860
@@ -134,7 +134,7 @@ VermilionCity_House2_EventScript_16B5D7:: @ 816B5D7
 	call EventScript_1A8CAD
 	checkflag FLAG_0x24D
 	goto_if 1, EventScript_16B649
-	msgbox gUnknown_81949CB, 5
+	msgbox gUnknown_81949CB, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16B631
 	call EventScript_1A8CBD

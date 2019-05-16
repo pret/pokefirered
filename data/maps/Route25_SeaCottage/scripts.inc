@@ -35,12 +35,12 @@ Route25_SeaCottage_EventScript_17054B:: @ 817054B
 	end
 
 EventScript_170580:: @ 8170580
-	msgbox gUnknown_819FDFA, 5
+	msgbox gUnknown_819FDFA, MSGBOX_YESNO
 	goto EventScript_17059C
 	end
 
 EventScript_17058E:: @ 817058E
-	msgbox gUnknown_819FEE6, 5
+	msgbox gUnknown_819FEE6, MSGBOX_YESNO
 	goto EventScript_17059C
 	end
 

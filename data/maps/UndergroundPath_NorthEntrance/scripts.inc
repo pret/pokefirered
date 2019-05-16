@@ -8,7 +8,7 @@ UndergroundPath_NorthEntrance_EventScript_160E39:: @ 8160E39
 	call EventScript_1A8CAD
 	checkflag FLAG_0x24B
 	goto_if 1, EventScript_160EAB
-	msgbox gUnknown_81A5AD6, 5
+	msgbox gUnknown_81A5AD6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_160E93
 	call EventScript_1A8CBD

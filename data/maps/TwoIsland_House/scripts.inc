@@ -45,7 +45,7 @@ EventScript_171696:: @ 8171696
 	end
 
 EventScript_1716A5:: @ 81716A5
-	msgbox gUnknown_81A2C63, 5
+	msgbox gUnknown_81A2C63, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_17179E
 	goto EventScript_1716BE

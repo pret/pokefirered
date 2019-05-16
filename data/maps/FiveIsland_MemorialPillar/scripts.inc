@@ -26,9 +26,7 @@ EventScript_168A18:: @ 8168A18
 
 EventScript_168A22:: @ 8168A22
 	msgbox gUnknown_818B282
-	setorcopyvar VAR_0x8000, 330
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_TM42
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_168AFE
 	call EventScript_168AE8
@@ -53,7 +51,7 @@ FiveIsland_MemorialPillar_EventScript_168A48:: @ 8168A48
 	end
 
 EventScript_168A86:: @ 8168A86
-	msgbox gUnknown_818B105, 5
+	msgbox gUnknown_818B105, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_168A9B
 	releaseall
@@ -70,9 +68,7 @@ EventScript_168A9B:: @ 8168A9B
 	waitmovement 0
 	textcolor 0
 	msgbox gUnknown_818B171
-	setorcopyvar VAR_0x8000, 330
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem ITEM_TM42
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_168AFE
 	call EventScript_168AE8

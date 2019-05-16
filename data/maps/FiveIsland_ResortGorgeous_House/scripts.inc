@@ -62,9 +62,7 @@ EventScript_171F34:: @ 8171F34
 	call_if 1, EventScript_17201A
 	moveobjectoffscreen 2
 	msgbox gUnknown_81A458E
-	setorcopyvar VAR_0x8000, VAR_0x403B
-	setorcopyvar VAR_0x8001, 1
-	callstd 0
+	giveitem VAR_0x403B
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_172025
 	setflag FLAG_0x002

@@ -27,7 +27,7 @@ SaffronCity_Dojo_EventScript_16EC00:: @ 816EC00
 	applymovement 5, Movement_1A75E9
 	waitmovement 0
 	textcolor 0
-	msgbox gUnknown_819B44E, 5
+	msgbox gUnknown_819B44E, MSGBOX_YESNO
 	call EventScript_1A6675
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16EC82
@@ -50,7 +50,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 	applymovement 5, Movement_1A75E9
 	waitmovement 0
 	textcolor 0
-	msgbox gUnknown_819B49E, 5
+	msgbox gUnknown_819B49E, MSGBOX_YESNO
 	call EventScript_1A6675
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16EC82
@@ -78,7 +78,7 @@ EventScript_16ECB5:: @ 816ECB5
 	waitmessage
 	waitfanfare
 	setflag FLAG_0x278
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16ED29
 	call EventScript_1A8C27
@@ -94,7 +94,7 @@ EventScript_16ECEC:: @ 816ECEC
 	waitmessage
 	waitfanfare
 	setflag FLAG_0x278
-	msgbox gUnknown_81A56A7, 5
+	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16ED1E
 	call EventScript_1A8C33

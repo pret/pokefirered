@@ -14,7 +14,7 @@ FourIsland_PokemonDayCare_EventScript_171940:: @ 8171940
 	goto_if 1, EventScript_171A52
 	compare_var_to_value VAR_RESULT, 3
 	goto_if 1, EventScript_171B86
-	msgbox gUnknown_81BF7E4, 5
+	msgbox gUnknown_81BF7E4, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171993
 	msgbox gUnknown_81BF916
@@ -53,7 +53,7 @@ EventScript_1719F7:: @ 81719F7
 	end
 
 EventScript_171A01:: @ 8171A01
-	msgbox gUnknown_81BF89F, 5
+	msgbox gUnknown_81BF89F, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171993
 	goto EventScript_1719F7
@@ -88,10 +88,10 @@ EventScript_171A52:: @ 8171A52
 	msgbox gUnknown_81BF988
 	setvar VAR_0x8004, 0
 	call EventScript_171A41
-	msgbox gUnknown_81BF89F, 5
+	msgbox gUnknown_81BF89F, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171993
-	msgbox gUnknown_81BFAE8, 5
+	msgbox gUnknown_81BFAE8, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171A90
 	goto EventScript_1719F7
@@ -115,7 +115,7 @@ EventScript_171A90:: @ 8171A90
 
 EventScript_171ACF:: @ 8171ACF
 	special GetDaycareCost
-	msgbox gUnknown_81BFA3B, 5
+	msgbox gUnknown_81BFA3B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171AEB
 	goto EventScript_1719F7
@@ -149,7 +149,7 @@ EventScript_171B05:: @ 8171B05
 	end
 
 EventScript_171B4E:: @ 8171B4E
-	msgbox gUnknown_81BF94F, 5
+	msgbox gUnknown_81BF94F, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171A90
 	goto EventScript_1719F7
@@ -191,7 +191,7 @@ EventScript_171B86:: @ 8171B86
 	call EventScript_171A41
 	setvar VAR_0x8004, 1
 	call EventScript_171A41
-	msgbox gUnknown_81BFAE8, 5
+	msgbox gUnknown_81BFAE8, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171A90
 	msgbox gUnknown_81BF976

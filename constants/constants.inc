@@ -10,4 +10,3 @@
 	.include "constants/battle.inc"
 	.include "constants/battle_text.inc"
 	.include "constants/contest_move_effects.inc"
-	.include "constants/map_constants.inc"

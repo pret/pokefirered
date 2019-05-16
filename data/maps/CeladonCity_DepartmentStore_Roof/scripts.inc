@@ -40,8 +40,7 @@ EventScript_16BD38:: @ 816BD38
 	return
 
 EventScript_16BD3E:: @ 816BD3E
-	loadword 0, gUnknown_8195D22
-	callstd 5
+	msgbox gUnknown_8195D22, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C00C
 	textcolor 3
@@ -157,8 +156,7 @@ EventScript_16BF19:: @ 816BF19
 	setvar VAR_0x8009, 304
 	checkflag FLAG_0x296
 	goto_if 1, EventScript_16C018
-	loadword 0, gUnknown_8195D75
-	callstd 4
+	msgbox gUnknown_8195D75
 	goto EventScript_16BF7C
 	end
 
@@ -167,8 +165,7 @@ EventScript_16BF3A:: @ 816BF3A
 	setvar VAR_0x8009, 308
 	checkflag FLAG_0x295
 	goto_if 1, EventScript_16C018
-	loadword 0, gUnknown_8195E33
-	callstd 4
+	msgbox gUnknown_8195E33
 	goto EventScript_16BF7C
 	end
 
@@ -177,8 +174,7 @@ EventScript_16BF5B:: @ 816BF5B
 	setvar VAR_0x8009, 321
 	checkflag FLAG_0x294
 	goto_if 1, EventScript_16C018
-	loadword 0, gUnknown_8195EBF
-	callstd 4
+	msgbox gUnknown_8195EBF
 	goto EventScript_16BF7C
 	end
 
@@ -210,25 +206,21 @@ EventScript_16BF7C:: @ 816BF7C
 
 EventScript_16BFDE:: @ 816BFDE
 	setflag FLAG_0x296
-	loadword 0, gUnknown_8195DD4
-	callstd 4
+	msgbox gUnknown_8195DD4
 	return
 
 EventScript_16BFEA:: @ 816BFEA
 	setflag FLAG_0x295
-	loadword 0, gUnknown_8195E68
-	callstd 4
+	msgbox gUnknown_8195E68
 	return
 
 EventScript_16BFF6:: @ 816BFF6
 	setflag FLAG_0x294
-	loadword 0, gUnknown_8195EF4
-	callstd 4
+	msgbox gUnknown_8195EF4
 	return
 
 EventScript_16C002:: @ 816C002
-	loadword 0, gUnknown_8195F4F
-	callstd 4
+	msgbox gUnknown_8195F4F
 	release
 	end
 
@@ -237,25 +229,21 @@ EventScript_16C00C:: @ 816C00C
 	end
 
 EventScript_16C00E:: @ 816C00E
-	loadword 0, gUnknown_8195FEF
-	callstd 4
+	msgbox gUnknown_8195FEF
 	release
 	end
 
 EventScript_16C018:: @ 816C018
-	loadword 0, gUnknown_8195F6E
-	callstd 4
+	msgbox gUnknown_8195F6E
 	release
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_16C022:: @ 816C022
-	loadword 0, gUnknown_8195F98
-	callstd 2
+	msgbox gUnknown_8195F98, 2
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_16C02B:: @ 816C02B
-	loadword 0, gUnknown_8196017
-	callstd 3
+	msgbox gUnknown_8196017, 3
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_16C034:: @ 816C034
@@ -276,8 +264,7 @@ EventScript_16C045:: @ 816C045
 	goto_if 1, EventScript_16C094
 	compare_var_to_value VAR_0x8000, 2
 	goto_if 1, EventScript_16C0A5
-	loadword 0, gUnknown_81960AE
-	callstd 4
+	msgbox gUnknown_81960AE
 	goto EventScript_16C14D
 	end
 
@@ -326,8 +313,7 @@ EventScript_16C0CB:: @ 816C0CB
 	updatemoneybox 0, 0, 0
 	getitemname 0, 16384
 	playse SE_C_PASI
-	loadword 0, gUnknown_8196076
-	callstd 4
+	msgbox gUnknown_8196076
 	additem 16384, 1
 	goto EventScript_16C125
 	end
@@ -339,14 +325,12 @@ EventScript_16C125:: @ 816C125
 	end
 
 EventScript_16C131:: @ 816C131
-	loadword 0, gUnknown_819605E
-	callstd 4
+	msgbox gUnknown_819605E
 	goto EventScript_16C14D
 	end
 
 EventScript_16C13F:: @ 816C13F
-	loadword 0, gUnknown_819608E
-	callstd 4
+	msgbox gUnknown_819608E
 	goto EventScript_16C14D
 	end
 

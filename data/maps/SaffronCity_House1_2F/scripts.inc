@@ -6,16 +6,14 @@ SaffronCity_House1_2F_EventScript_16EB5D:: @ 816EB5D
 	faceplayer
 	waitse
 	playmoncry SPECIES_DODUO, 0
-	loadword 0, gUnknown_819B030
-	callstd 4
+	msgbox gUnknown_819B030
 	waitmoncry
 	release
 	end
 
 SaffronCity_House1_2F_EventScript_16EB70:: @ 816EB70
 	lock
-	loadword 0, gUnknown_819B071
-	callstd 4
+	msgbox gUnknown_819B071
 	release
 	end
 
@@ -38,21 +36,17 @@ SaffronCity_House1_2F_EventScript_16EB7B:: @ 816EB7B
 	end
 
 EventScript_16EBB7:: @ 816EBB7
-	loadword 0, gUnknown_819AC60
-	callstd 4
+	msgbox gUnknown_819AC60
 	return
 
 EventScript_16EBC0:: @ 816EBC0
-	loadword 0, gUnknown_819ACF1
-	callstd 4
+	msgbox gUnknown_819ACF1
 	return
 
 SaffronCity_House1_2F_EventScript_16EBC9:: @ 816EBC9
-	loadword 0, gUnknown_819B0D0
-	callstd 3
+	msgbox gUnknown_819B0D0, 3
 	end
 
 SaffronCity_House1_2F_EventScript_16EBD2:: @ 816EBD2
-	loadword 0, gUnknown_819B0A0
-	callstd 3
+	msgbox gUnknown_819B0A0, 3
 	end

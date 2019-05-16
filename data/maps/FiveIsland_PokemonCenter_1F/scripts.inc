@@ -15,11 +15,9 @@ FiveIsland_PokemonCenter_1F_EventScript_171D00:: @ 8171D00
 	end
 
 FiveIsland_PokemonCenter_1F_EventScript_171D09:: @ 8171D09
-	loadword 0, gUnknown_81A3BBA
-	callstd 2
+	msgbox gUnknown_81A3BBA, 2
 	end
 
 FiveIsland_PokemonCenter_1F_EventScript_171D12:: @ 8171D12
-	loadword 0, gUnknown_81A3BFD
-	callstd 2
+	msgbox gUnknown_81A3BFD, 2
 	end

@@ -15,16 +15,13 @@ FuchsiaCity_PokemonCenter_1F_EventScript_16D700:: @ 816D700
 	end
 
 FuchsiaCity_PokemonCenter_1F_EventScript_16D709:: @ 816D709
-	loadword 0, gUnknown_8198CB7
-	callstd 2
+	msgbox gUnknown_8198CB7, 2
 	end
 
 FuchsiaCity_PokemonCenter_1F_EventScript_16D712:: @ 816D712
-	loadword 0, gUnknown_8198D2E
-	callstd 2
+	msgbox gUnknown_8198D2E, 2
 	end
 
 FuchsiaCity_PokemonCenter_1F_EventScript_16D71B:: @ 816D71B
-	loadword 0, gUnknown_8198D9B
-	callstd 2
+	msgbox gUnknown_8198D9B, 2
 	end

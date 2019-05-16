@@ -15,8 +15,7 @@ PewterCity_PokemonCenter_1F_EventScript_16A76F:: @ 816A76F
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A778:: @ 816A778
-	loadword 0, gUnknown_81916A9
-	callstd 2
+	msgbox gUnknown_81916A9, 2
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A781:: @ 816A781
@@ -32,18 +31,15 @@ PewterCity_PokemonCenter_1F_EventScript_16A781:: @ 816A781
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A798:: @ 816A798
-	loadword 0, gUnknown_8191701
-	callstd 2
+	msgbox gUnknown_8191701, 2
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A7A1:: @ 816A7A1
 	lock
-	loadword 0, gUnknown_8191743
-	callstd 4
+	msgbox gUnknown_8191743
 	release
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A7AC:: @ 816A7AC
-	loadword 0, gUnknown_8191780
-	callstd 2
+	msgbox gUnknown_8191780, 2
 	end

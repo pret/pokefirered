@@ -40,27 +40,23 @@ EventScript_1606DD:: @ 81606DD
 	setvar VAR_LAST_TALKED, 3
 	trainerbattle 3, 170, 0, Text_172B99
 	setvar VAR_0x408B, 1
-	loadword 0, gUnknown_8172BAB
-	callstd 4
+	msgbox gUnknown_8172BAB
 	return
 
 EventScript_160707:: @ 8160707
-	loadword 0, gUnknown_8172BFB
-	callstd 4
+	msgbox gUnknown_8172BFB
 	release
 	end
 
 EventScript_160711:: @ 8160711
-	loadword 0, gUnknown_8172BAB
-	callstd 4
+	msgbox gUnknown_8172BAB
 	release
 	end
 
 MtMoon_B2F_EventScript_16071B:: @ 816071B
 	lock
 	faceplayer
-	loadword 0, gUnknown_8172E77
-	callstd 5
+	msgbox gUnknown_8172E77, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1607DE
 	removeobject 1
@@ -93,8 +89,7 @@ Movement_16077A:: @ 816077A
 MtMoon_B2F_EventScript_16077F:: @ 816077F
 	lock
 	faceplayer
-	loadword 0, gUnknown_8172E94
-	callstd 5
+	msgbox gUnknown_8172E94, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1607DE
 	removeobject 2
@@ -129,24 +124,20 @@ Movement_1607E0:: @ 81607E0
 
 MtMoon_B2F_EventScript_1607E4:: @ 81607E4
 	trainerbattle 0, 351, 0, Text_172C5A, Text_172CB8
-	loadword 0, gUnknown_8172CCB
-	callstd 6
+	msgbox gUnknown_8172CCB, 6
 	end
 
 MtMoon_B2F_EventScript_1607FB:: @ 81607FB
 	trainerbattle 0, 352, 0, Text_172CFC, Text_172D46
-	loadword 0, gUnknown_8172D51
-	callstd 6
+	msgbox gUnknown_8172D51, 6
 	end
 
 MtMoon_B2F_EventScript_160812:: @ 8160812
 	trainerbattle 0, 353, 0, Text_172D82, Text_172DAF
-	loadword 0, gUnknown_8172DC1
-	callstd 6
+	msgbox gUnknown_8172DC1, 6
 	end
 
 MtMoon_B2F_EventScript_160829:: @ 8160829
 	trainerbattle 0, 354, 0, Text_172DF0, Text_172E3E
-	loadword 0, gUnknown_8172E4B
-	callstd 6
+	msgbox gUnknown_8172E4B, 6
 	end

@@ -59,8 +59,7 @@ CinnabarIsland_Gym_EventScript_16D9D4:: @ 816D9D4
 	trainerbattle 1, 419, 0, Text_199543, Text_1995FA, EventScript_16DA06
 	checkflag FLAG_0x24E
 	goto_if 0, EventScript_16DA34
-	loadword 0, gUnknown_819971D
-	callstd 4
+	msgbox gUnknown_819971D
 	release
 	end
 
@@ -79,35 +78,30 @@ EventScript_16DA06:: @ 816DA06
 	end
 
 EventScript_16DA34:: @ 816DA34
-	loadword 0, gUnknown_819969E
-	callstd 4
+	msgbox gUnknown_819969E
 	checkitemspace ITEM_TM38, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16DA75
 	additem ITEM_TM38, 1
 	giveitemfanfaremsg gUnknown_81996FF, ITEM_TM38
 	setflag FLAG_0x24E
-	loadword 0, gUnknown_8199652
-	callstd 4
+	msgbox gUnknown_8199652
 	release
 	end
 
 EventScript_16DA75:: @ 816DA75
-	loadword 0, gUnknown_8199789
-	callstd 4
+	msgbox gUnknown_8199789
 	release
 	end
 
 CinnabarIsland_Gym_EventScript_16DA7F:: @ 816DA7F
 	trainerbattle 0, 177, 0, Text_1997A5, Text_1997D6
-	loadword 0, gUnknown_81997EA
-	callstd 6
+	msgbox gUnknown_81997EA, 6
 	end
 
 CinnabarIsland_Gym_EventScript_16DA96:: @ 816DA96
 	trainerbattle 2, 178, 0, Text_1998BD, Text_1998ED, EventScript_16DAB1
-	loadword 0, gUnknown_8199911
-	callstd 6
+	msgbox gUnknown_8199911, 6
 	end
 
 EventScript_16DAB1:: @ 816DAB1
@@ -125,8 +119,7 @@ CinnabarIsland_Gym_EventScript_16DAC2:: @ 816DAC2
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_81999DF
-	callstd 6
+	msgbox gUnknown_81999DF, 6
 	end
 
 EventScript_16DAEA:: @ 816DAEA
@@ -141,8 +134,7 @@ EventScript_16DAF5:: @ 816DAF5
 
 CinnabarIsland_Gym_EventScript_16DAFB:: @ 816DAFB
 	trainerbattle 2, 180, 0, Text_199AFC, Text_199B16, EventScript_16DB16
-	loadword 0, gUnknown_8199B27
-	callstd 6
+	msgbox gUnknown_8199B27, 6
 	end
 
 EventScript_16DB16:: @ 816DB16
@@ -157,8 +149,7 @@ EventScript_16DB21:: @ 816DB21
 
 CinnabarIsland_Gym_EventScript_16DB27:: @ 816DB27
 	trainerbattle 2, 213, 0, Text_19983F, Text_199870, EventScript_16DB42
-	loadword 0, gUnknown_819987D
-	callstd 6
+	msgbox gUnknown_819987D, 6
 	end
 
 EventScript_16DB42:: @ 816DB42
@@ -173,8 +164,7 @@ EventScript_16DB4D:: @ 816DB4D
 
 CinnabarIsland_Gym_EventScript_16DB53:: @ 816DB53
 	trainerbattle 2, 214, 0, Text_199948, Text_199973, EventScript_16DB6E
-	loadword 0, gUnknown_8199986
-	callstd 6
+	msgbox gUnknown_8199986, 6
 	end
 
 EventScript_16DB6E:: @ 816DB6E
@@ -189,8 +179,7 @@ EventScript_16DB79:: @ 816DB79
 
 CinnabarIsland_Gym_EventScript_16DB7F:: @ 816DB7F
 	trainerbattle 2, 215, 0, Text_199A7F, Text_199AB9, EventScript_16DB9A
-	loadword 0, gUnknown_8199AC9
-	callstd 6
+	msgbox gUnknown_8199AC9, 6
 	end
 
 EventScript_16DB9A:: @ 816DB9A
@@ -208,14 +197,12 @@ CinnabarIsland_Gym_EventScript_16DBAB:: @ 816DBAB
 	faceplayer
 	checkflag FLAG_0x4B6
 	goto_if 1, EventScript_16DBC0
-	loadword 0, gUnknown_8199B81
-	callstd 4
+	msgbox gUnknown_8199B81
 	release
 	end
 
 EventScript_16DBC0:: @ 816DBC0
-	loadword 0, gUnknown_8199C0C
-	callstd 4
+	msgbox gUnknown_8199C0C
 	release
 	end
 
@@ -223,14 +210,12 @@ CinnabarIsland_Gym_EventScript_16DBCA:: @ 816DBCA
 	lockall
 	checkflag FLAG_UNK826
 	goto_if 1, EventScript_16DBDE
-	loadword 0, gUnknown_8199C29
-	callstd 4
+	msgbox gUnknown_8199C29
 	releaseall
 	end
 
 EventScript_16DBDE:: @ 816DBDE
-	loadword 0, gUnknown_8199C62
-	callstd 4
+	msgbox gUnknown_8199C62
 	releaseall
 	end
 
@@ -247,10 +232,8 @@ CinnabarIsland_Gym_EventScript_16DBF4:: @ 816DBF4
 	end
 
 EventScript_16DC00:: @ 816DC00
-	loadword 0, gUnknown_8199C9F
-	callstd 4
-	loadword 0, gUnknown_8199D5A
-	callstd 5
+	msgbox gUnknown_8199C9F
+	msgbox gUnknown_8199D5A, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DC43
 	compare_var_to_value VAR_RESULT, 0
@@ -260,16 +243,14 @@ EventScript_16DC00:: @ 816DC00
 EventScript_16DC27:: @ 816DC27
 	playfanfare MUS_FANFA1
 	waitfanfare
-	loadword 0, gUnknown_8199E4F
-	callstd 4
+	msgbox gUnknown_8199E4F
 	return
 
 EventScript_16DC34:: @ 816DC34
 	waitse
 	playse SE_BOO
 	waitse
-	loadword 0, gUnknown_8199E79
-	callstd 4
+	msgbox gUnknown_8199E79
 	closemessage
 	return
 
@@ -306,8 +287,7 @@ EventScript_16DC7A:: @ 816DC7A
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_16DCC6
 	textcolor 0
-	loadword 0, gUnknown_819983F
-	callstd 4
+	msgbox gUnknown_819983F
 	trainerbattle 3, 213, 0, Text_199870
 	checkflag FLAG_0x265
 	goto_if 1, EventScript_16DC68
@@ -349,10 +329,8 @@ CinnabarIsland_Gym_EventScript_16DCE9:: @ 816DCE9
 	end
 
 EventScript_16DCF5:: @ 816DCF5
-	loadword 0, gUnknown_8199C9F
-	callstd 4
-	loadword 0, gUnknown_8199D79
-	callstd 5
+	msgbox gUnknown_8199C9F
+	msgbox gUnknown_8199D79, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DD41
 	compare_var_to_value VAR_RESULT, 0
@@ -388,8 +366,7 @@ EventScript_16DD51:: @ 816DD51
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_16DD9D
 	textcolor 0
-	loadword 0, gUnknown_81998BD
-	callstd 4
+	msgbox gUnknown_81998BD
 	trainerbattle 3, 178, 0, Text_1998ED
 	checkflag FLAG_0x267
 	goto_if 1, EventScript_16DC68
@@ -440,10 +417,8 @@ CinnabarIsland_Gym_EventScript_16DDC7:: @ 816DDC7
 	end
 
 EventScript_16DDD3:: @ 816DDD3
-	loadword 0, gUnknown_8199C9F
-	callstd 4
-	loadword 0, gUnknown_8199DA9
-	callstd 5
+	msgbox gUnknown_8199C9F
+	msgbox gUnknown_8199DA9, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DE1F
 	compare_var_to_value VAR_RESULT, 0
@@ -479,8 +454,7 @@ EventScript_16DE2F:: @ 816DE2F
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_16DE7B
 	textcolor 0
-	loadword 0, gUnknown_8199948
-	callstd 4
+	msgbox gUnknown_8199948
 	trainerbattle 3, 214, 0, Text_199973
 	checkflag FLAG_0x268
 	goto_if 1, EventScript_16DC68
@@ -522,10 +496,8 @@ CinnabarIsland_Gym_EventScript_16DE9E:: @ 816DE9E
 	end
 
 EventScript_16DEAA:: @ 816DEAA
-	loadword 0, gUnknown_8199C9F
-	callstd 4
-	loadword 0, gUnknown_8199DC6
-	callstd 5
+	msgbox gUnknown_8199C9F
+	msgbox gUnknown_8199DC6, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DEF6
 	compare_var_to_value VAR_RESULT, 0
@@ -561,8 +533,7 @@ EventScript_16DF06:: @ 816DF06
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_16DF52
 	textcolor 0
-	loadword 0, gUnknown_81999B7
-	callstd 4
+	msgbox gUnknown_81999B7
 	trainerbattle 3, 179, 0, Text_1999DB
 	checkflag FLAG_0x269
 	goto_if 1, EventScript_16DC68
@@ -604,10 +575,8 @@ CinnabarIsland_Gym_EventScript_16DF75:: @ 816DF75
 	end
 
 EventScript_16DF81:: @ 816DF81
-	loadword 0, gUnknown_8199C9F
-	callstd 4
-	loadword 0, gUnknown_8199E00
-	callstd 5
+	msgbox gUnknown_8199C9F
+	msgbox gUnknown_8199E00, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16DFA8
 	compare_var_to_value VAR_RESULT, 0
@@ -643,8 +612,7 @@ EventScript_16DFDD:: @ 816DFDD
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_16E029
 	textcolor 0
-	loadword 0, gUnknown_8199A7F
-	callstd 4
+	msgbox gUnknown_8199A7F
 	trainerbattle 3, 215, 0, Text_199AB9
 	checkflag FLAG_0x26A
 	goto_if 1, EventScript_16DC68
@@ -686,10 +654,8 @@ CinnabarIsland_Gym_EventScript_16E04C:: @ 816E04C
 	end
 
 EventScript_16E058:: @ 816E058
-	loadword 0, gUnknown_8199C9F
-	callstd 4
-	loadword 0, gUnknown_8199E36
-	callstd 5
+	msgbox gUnknown_8199C9F
+	msgbox gUnknown_8199E36, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16E0A4
 	compare_var_to_value VAR_RESULT, 0
@@ -725,8 +691,7 @@ EventScript_16E0B4:: @ 816E0B4
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_16E100
 	textcolor 0
-	loadword 0, gUnknown_8199AFC
-	callstd 4
+	msgbox gUnknown_8199AFC
 	trainerbattle 3, 180, 0, Text_199B16
 	checkflag FLAG_0x26B
 	goto_if 1, EventScript_16DC68

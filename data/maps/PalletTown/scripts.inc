@@ -52,8 +52,7 @@ EventScript_1654D8:: @ 81654D8
 	waitmovement 0
 	checkflag FLAG_SYS_RIBBON_GET
 	goto_if 0, EventScript_1655A1
-	loadword 0, gUnknown_817D8BF
-	callstd 4
+	msgbox gUnknown_817D8BF
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, sub_80CA3D8
 	copyvar VAR_0x8008, VAR_0x8005
@@ -62,8 +61,7 @@ EventScript_1654D8:: @ 81654D8
 	getnumberstring 1, VAR_0x8009
 	compare_var_to_value VAR_0x8009, 60
 	goto_if 0, EventScript_165593
-	loadword 0, gUnknown_817D9AA
-	callstd 4
+	msgbox gUnknown_817D9AA
 	closemessage
 	playbgm BGM_FRLG_FOLLOW_ME, 0
 	applymovement 255, Movement_1655DD
@@ -94,14 +92,12 @@ EventScript_16557E:: @ 816557E
 	end
 
 EventScript_165593:: @ 8165593
-	loadword 0, gUnknown_817D925
-	callstd 4
+	msgbox gUnknown_817D925
 	goto EventScript_16557E
 	end
 
 EventScript_1655A1:: @ 81655A1
-	loadword 0, gUnknown_817DA16
-	callstd 4
+	msgbox gUnknown_817DA16
 	goto EventScript_16557E
 	end
 
@@ -210,8 +206,7 @@ EventScript_165605:: @ 8165605
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_1656C3
 	delay 30
-	loadword 0, gUnknown_817D74A
-	callstd 4
+	msgbox gUnknown_817D74A
 	closemessage
 	delay 30
 	compare_var_to_value VAR_0x4001, 0
@@ -389,8 +384,7 @@ PalletTown_EventScript_16575C:: @ 816575C
 	goto_if 1, EventScript_1658C2
 	checkflag FLAG_0x002
 	goto_if 1, EventScript_165801
-	loadword 0, gUnknown_81B1C8B
-	callstd 4
+	msgbox gUnknown_81B1C8B
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
 	playse SE_PIN
@@ -398,8 +392,7 @@ PalletTown_EventScript_16575C:: @ 816575C
 	waitmovement 0
 	applymovement 1, Movement_1A75DD
 	waitmovement 0
-	loadword 0, gUnknown_81B1C9F
-	callstd 4
+	msgbox gUnknown_81B1C9F
 	closemessage
 	compare_var_to_value VAR_FACING, 4
 	call_if 1, EventScript_1657D7
@@ -423,24 +416,21 @@ EventScript_1657E2:: @ 81657E2
 EventScript_1657ED:: @ 81657ED
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_817D7C8
-	callstd 4
+	msgbox gUnknown_817D7C8
 	release
 	end
 
 EventScript_165801:: @ 8165801
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_81B1CAF
-	callstd 4
+	msgbox gUnknown_81B1CAF
 	release
 	end
 
 EventScript_165815:: @ 8165815
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_81B1CEC
-	callstd 4
+	msgbox gUnknown_81B1CEC
 	release
 	end
 
@@ -455,8 +445,7 @@ Movement_16582C:: @ 816582C
 	step_end
 
 PalletTown_EventScript_16582F:: @ 816582F
-	loadword 0, gUnknown_817D80D
-	callstd 2
+	msgbox gUnknown_817D80D, 2
 	end
 
 PalletTown_EventScript_165838:: @ 8165838
@@ -464,30 +453,25 @@ PalletTown_EventScript_165838:: @ 8165838
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_817D866
-	callstd 4
+	msgbox gUnknown_817D866
 	releaseall
 	end
 
 PalletTown_EventScript_165850:: @ 8165850
-	loadword 0, gUnknown_817D87F
-	callstd 3
+	msgbox gUnknown_817D87F, 3
 	end
 
 PalletTown_EventScript_165859:: @ 8165859
-	loadword 0, gUnknown_817D88A
-	callstd 3
+	msgbox gUnknown_817D88A, 3
 	end
 
 PalletTown_EventScript_165862:: @ 8165862
-	loadword 0, gUnknown_817D895
-	callstd 3
+	msgbox gUnknown_817D895, 3
 	end
 
 PalletTown_EventScript_16586B:: @ 816586B
 	lockall
-	loadword 0, gUnknown_81B1CC1
-	callstd 4
+	msgbox gUnknown_81B1CC1
 	setvar VAR_0x4070, 1
 	releaseall
 	end
@@ -503,8 +487,7 @@ PalletTown_EventScript_16587B:: @ 816587B
 
 EventScript_165894:: @ 8165894
 	textcolor 1
-	loadword 0, gUnknown_81B1D0B
-	callstd 4
+	msgbox gUnknown_81B1D0B
 	closemessage
 	delay 20
 	textcolor 3
@@ -514,8 +497,7 @@ EventScript_165894:: @ 8165894
 	special sub_80699E0
 	special sub_80699BC
 	signmsg
-	loadword 0, gUnknown_81B1D51
-	callstd 4
+	msgbox gUnknown_81B1D51
 	normalmsg
 	return
 

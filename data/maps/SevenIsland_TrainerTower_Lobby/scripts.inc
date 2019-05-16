@@ -82,8 +82,7 @@ EventScript_164920:: @ 8164920
 	faceplayer
 	applymovement 255, Movement_164AD4
 	textcolor 1
-	loadword 0, gUnknown_817C937
-	callstd 4
+	msgbox gUnknown_817C937
 	goto EventScript_16494B
 
 EventScript_164938:: @ 8164938
@@ -91,8 +90,7 @@ EventScript_164938:: @ 8164938
 	faceplayer
 	applymovement 255, Movement_164AD4
 	textcolor 1
-	loadword 0, gUnknown_817C9C0
-	callstd 4
+	msgbox gUnknown_817C9C0
 
 EventScript_16494B:: @ 816494B
 	closemessage
@@ -118,13 +116,11 @@ SevenIsland_TrainerTower_Lobby_EventScript_164966:: @ 8164966
 	special sub_815D9E8
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_164988
-	loadword 0, gUnknown_817C9A2
-	callstd 4
+	msgbox gUnknown_817C9A2
 	goto EventScript_164990
 
 EventScript_164988:: @ 8164988
-	loadword 0, gUnknown_817CE1F
-	callstd 4
+	msgbox gUnknown_817CE1F
 
 EventScript_164990:: @ 8164990
 	release
@@ -139,8 +135,7 @@ SevenIsland_TrainerTower_Lobby_EventScript_164992:: @ 8164992
 	message Text_1A6211
 	waitmessage
 	pokemart Items_1649B8
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -163,19 +158,16 @@ SevenIsland_TrainerTower_Lobby_EventScript_1649CE:: @ 81649CE
 	lockall
 	applymovement 255, Movement_164AD4
 	textcolor 1
-	loadword 0, gUnknown_817C794
-	callstd 4
+	msgbox gUnknown_817C794
 	setvar VAR_0x8004, 17
 	special sub_815D9E8
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_164A00
-	loadword 0, gUnknown_817C7D9
-	callstd 4
+	msgbox gUnknown_817C7D9
 	goto EventScript_164A08
 
 EventScript_164A00:: @ 8164A00
-	loadword 0, gUnknown_817C850
-	callstd 4
+	msgbox gUnknown_817C850
 
 EventScript_164A08:: @ 8164A08
 	message Text_17C88D
@@ -193,8 +185,7 @@ EventScript_164A08:: @ 8164A08
 	end
 
 EventScript_164A45:: @ 8164A45
-	loadword 0, gUnknown_817CCC9
-	callstd 4
+	msgbox gUnknown_817CCC9
 	goto EventScript_164A08
 	end
 
@@ -219,16 +210,14 @@ EventScript_164AA0:: @ 8164AA0
 	copyvar VAR_0x8005, VAR_RESULT
 	setvar VAR_0x4082, 1
 	special sp000_heal_pokemon
-	loadword 0, gUnknown_817C8BF
-	callstd 4
+	msgbox gUnknown_817C8BF
 	setvar VAR_0x8004, 6
 	special sub_815D9E8
 	releaseall
 	end
 
 EventScript_164ABF:: @ 8164ABF
-	loadword 0, gUnknown_817C91D
-	callstd 4
+	msgbox gUnknown_817C91D
 	closemessage
 	applymovement 255, Movement_164AD6
 	waitmovement 0
@@ -253,11 +242,9 @@ SevenIsland_TrainerTower_Lobby_EventScript_164AD8:: @ 8164AD8
 	end
 
 SevenIsland_TrainerTower_Lobby_EventScript_164AE6:: @ 8164AE6
-	loadword 0, gUnknown_817CE38
-	callstd 2
+	msgbox gUnknown_817CE38, 2
 	end
 
 SevenIsland_TrainerTower_Lobby_EventScript_164AEF:: @ 8164AEF
-	loadword 0, gUnknown_817CE9F
-	callstd 2
+	msgbox gUnknown_817CE9F, 2
 	end

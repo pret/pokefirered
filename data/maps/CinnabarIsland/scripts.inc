@@ -70,8 +70,7 @@ EventScript_166F88:: @ 8166F88
 EventScript_166FA0:: @ 8166FA0
 	lockall
 	textcolor 0
-	loadword 0, gUnknown_8180F09
-	callstd 4
+	msgbox gUnknown_8180F09
 	closemessage
 	applymovement 3, Movement_166FC6
 	waitmovement 0
@@ -107,10 +106,8 @@ EventScript_166FCD:: @ 8166FCD
 	call_if 0, EventScript_167048
 	checkflag FLAG_0x002
 	call_if 1, EventScript_167053
-	loadword 0, gUnknown_8180C90
-	callstd 4
-	loadword 0, gUnknown_8180CAA
-	callstd 5
+	msgbox gUnknown_8180C90
+	msgbox gUnknown_8180CAA, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_167068
 	compare_var_to_value VAR_RESULT, 0
@@ -140,16 +137,14 @@ EventScript_167053:: @ 8167053
 	return
 
 EventScript_167068:: @ 8167068
-	loadword 0, gUnknown_8180DDD
-	callstd 4
+	msgbox gUnknown_8180DDD
 	closemessage
 	call EventScript_1670E6
 	releaseall
 	end
 
 EventScript_167078:: @ 8167078
-	loadword 0, gUnknown_8180DF8
-	callstd 4
+	msgbox gUnknown_8180DF8
 	closemessage
 	checkflag FLAG_0x002
 	call_if 0, EventScript_1670A0
@@ -213,8 +208,7 @@ EventScript_1670E6:: @ 81670E6
 	call_if 0, EventScript_167154
 	checkflag FLAG_0x002
 	call_if 1, EventScript_167166
-	loadword 0, gUnknown_8180EAD
-	callstd 4
+	msgbox gUnknown_8180EAD
 	closemessage
 	checkflag FLAG_0x002
 	call_if 0, EventScript_167171
@@ -335,8 +329,7 @@ CinnabarIsland_EventScript_1671CA:: @ 81671CA
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
 	delay 20
-	loadword 0, gUnknown_8180B20
-	callstd 4
+	msgbox gUnknown_8180B20
 	closemessage
 	applymovement 255, Movement_1671ED
 	waitmovement 0
@@ -353,24 +346,20 @@ CinnabarIsland_EventScript_1671EF:: @ 81671EF
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_8180B34
-	callstd 4
+	msgbox gUnknown_8180B34
 	release
 	end
 
 CinnabarIsland_EventScript_167208:: @ 8167208
-	loadword 0, gUnknown_8180BA0
-	callstd 2
+	msgbox gUnknown_8180BA0, 2
 	end
 
 CinnabarIsland_EventScript_167211:: @ 8167211
-	loadword 0, gUnknown_8180C0D
-	callstd 3
+	msgbox gUnknown_8180C0D, 3
 	end
 
 CinnabarIsland_EventScript_16721A:: @ 816721A
-	loadword 0, gUnknown_8180C3E
-	callstd 3
+	msgbox gUnknown_8180C3E, 3
 	end
 
 CinnabarIsland_EventScript_167223:: @ 8167223
@@ -378,7 +367,6 @@ CinnabarIsland_EventScript_167223:: @ 8167223
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_8180C4A
-	callstd 4
+	msgbox gUnknown_8180C4A
 	releaseall
 	end

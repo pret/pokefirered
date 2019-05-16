@@ -16,8 +16,7 @@ EventScript_16749D:: @ 816749D
 	textcolor 0
 	applymovement 255, Movement_167505
 	waitmovement 0
-	loadword 0, gUnknown_818161B
-	callstd 4
+	msgbox gUnknown_818161B
 	closemessage
 	applymovement 1, Movement_167507
 	applymovement 255, Movement_1674F4
@@ -88,34 +87,28 @@ OneIsland_EventScript_167517:: @ 8167517
 	goto_if 1, EventScript_16753F
 	checkflag FLAG_0x2A1
 	goto_if 1, EventScript_167535
-	loadword 0, gUnknown_818174E
-	callstd 4
+	msgbox gUnknown_818174E
 	release
 	end
 
 EventScript_167535:: @ 8167535
-	loadword 0, gUnknown_8181858
-	callstd 4
+	msgbox gUnknown_8181858
 	release
 	end
 
 EventScript_16753F:: @ 816753F
-	loadword 0, gUnknown_8181901
-	callstd 4
+	msgbox gUnknown_8181901
 	release
 	end
 
 OneIsland_EventScript_167549:: @ 8167549
-	loadword 0, gUnknown_8181A4A
-	callstd 2
+	msgbox gUnknown_8181A4A, 2
 	end
 
 OneIsland_EventScript_167552:: @ 8167552
-	loadword 0, gUnknown_81819E1
-	callstd 3
+	msgbox gUnknown_81819E1, 3
 	end
 
 OneIsland_EventScript_16755B:: @ 816755B
-	loadword 0, gUnknown_8181A0A
-	callstd 3
+	msgbox gUnknown_8181A0A, 3
 	end

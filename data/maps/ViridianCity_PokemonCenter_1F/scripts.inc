@@ -15,16 +15,13 @@ ViridianCity_PokemonCenter_1F_EventScript_16A2CF:: @ 816A2CF
 	end
 
 ViridianCity_PokemonCenter_1F_EventScript_16A2D8:: @ 816A2D8
-	loadword 0, gUnknown_81903E5
-	callstd 2
+	msgbox gUnknown_81903E5, 2
 	end
 
 ViridianCity_PokemonCenter_1F_EventScript_16A2E1:: @ 816A2E1
-	loadword 0, gUnknown_8190384
-	callstd 2
+	msgbox gUnknown_8190384, 2
 	end
 
 ViridianCity_PokemonCenter_1F_EventScript_16A2EA:: @ 816A2EA
-	loadword 0, gUnknown_8190450
-	callstd 2
+	msgbox gUnknown_8190450, 2
 	end

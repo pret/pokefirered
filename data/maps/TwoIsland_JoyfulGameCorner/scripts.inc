@@ -35,12 +35,10 @@ TwoIsland_JoyfulGameCorner_MapScript3_17141B:: @ 817141B
 EventScript_171435:: @ 8171435
 	lockall
 	textcolor 0
-	loadword 0, gUnknown_81A28B2
-	callstd 4
+	msgbox gUnknown_81A28B2
 	textcolor 1
 	special sub_80CA6DC
-	loadword 0, gUnknown_81A2931
-	callstd 4
+	msgbox gUnknown_81A2931
 	closemessage
 	applymovement 3, Movement_1A75ED
 	waitmovement 0
@@ -53,8 +51,7 @@ EventScript_17145F:: @ 817145F
 	textcolor 0
 	applymovement 1, Movement_171520
 	waitmovement 0
-	loadword 0, gUnknown_81A2408
-	callstd 4
+	msgbox gUnknown_81A2408
 	closemessage
 	applymovement 1, Movement_1A75ED
 	waitmovement 0
@@ -67,8 +64,7 @@ EventScript_17145F:: @ 817145F
 	waitmovement 0
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
-	loadword 0, gUnknown_81A2465
-	callstd 4
+	msgbox gUnknown_81A2465
 	closemessage
 	playse SE_DOOR
 	waitse
@@ -78,14 +74,11 @@ EventScript_17145F:: @ 817145F
 	addobject 2
 	applymovement 2, Movement_17152F
 	waitmovement 0
-	loadword 0, gUnknown_81A259A
-	callstd 4
+	msgbox gUnknown_81A259A
 	applymovement 2, Movement_1A75EB
 	waitmovement 0
-	loadword 0, gUnknown_81A2658
-	callstd 4
-	loadword 0, gUnknown_81A26D5
-	callstd 4
+	msgbox gUnknown_81A2658
+	msgbox gUnknown_81A26D5
 	closemessage
 	applymovement 2, Movement_1A75ED
 	waitmovement 0
@@ -93,8 +86,7 @@ EventScript_17145F:: @ 817145F
 	removeobject 2
 	fadedefaultbgm
 	delay 60
-	loadword 0, gUnknown_81A270C
-	callstd 4
+	msgbox gUnknown_81A270C
 	clearflag FLAG_0x091
 	setvar VAR_0x407B, 2
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 1
@@ -137,14 +129,12 @@ TwoIsland_JoyfulGameCorner_EventScript_171535:: @ 8171535
 	goto_if 1, EventScript_1BC060
 	checkflag FLAG_0x2A3
 	goto_if 1, EventScript_171555
-	loadword 0, gUnknown_81A285C
-	callstd 4
+	msgbox gUnknown_81A285C
 	release
 	end
 
 EventScript_171555:: @ 8171555
-	loadword 0, gUnknown_81A288A
-	callstd 4
+	msgbox gUnknown_81A288A
 	release
 	end
 
@@ -157,16 +147,14 @@ TwoIsland_JoyfulGameCorner_EventScript_17155F:: @ 817155F
 	goto_if 1, EventScript_1715F5
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	goto_if 1, EventScript_17158A
-	loadword 0, gUnknown_81A2743
-	callstd 4
+	msgbox gUnknown_81A2743
 	release
 	end
 
 EventScript_17158A:: @ 817158A
 	checkflag FLAG_0x2FE
 	goto_if 1, EventScript_1715C4
-	loadword 0, gUnknown_81A296A
-	callstd 4
+	msgbox gUnknown_81A296A
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
 	textcolor 3
 	playfanfare MUS_ME_WAZA
@@ -175,8 +163,7 @@ EventScript_17158A:: @ 817158A
 	waitfanfare
 	call EventScript_1A6675
 	removeitem ITEM_METEORITE, 1
-	loadword 0, gUnknown_81A2A24
-	callstd 4
+	msgbox gUnknown_81A2A24
 	goto EventScript_1715C4
 	end
 
@@ -191,22 +178,19 @@ EventScript_1715C4:: @ 81715C4
 	end
 
 EventScript_1715F5:: @ 81715F5
-	loadword 0, gUnknown_81A2AF5
-	callstd 4
+	msgbox gUnknown_81A2AF5
 	release
 	end
 
 EventScript_1715FF:: @ 81715FF
 	setflag FLAG_0x2FE
-	loadword 0, gUnknown_81A2ACA
-	callstd 4
+	msgbox gUnknown_81A2ACA
 	release
 	end
 
 TwoIsland_JoyfulGameCorner_EventScript_17160C:: @ 817160C
 	lock
 	faceplayer
-	loadword 0, gUnknown_81A2B53
-	callstd 4
+	msgbox gUnknown_81A2B53
 	release
 	end

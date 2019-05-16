@@ -7,16 +7,13 @@ SafariZone_Center_MapScript1_16235D:: @ 816235D
 	end
 
 SafariZone_Center_EventScript_162361:: @ 8162361
-	loadword 0, gUnknown_81777F2
-	callstd 3
+	msgbox gUnknown_81777F2, 3
 	end
 
 SafariZone_Center_EventScript_16236A:: @ 816236A
-	loadword 0, gUnknown_81777FD
-	callstd 3
+	msgbox gUnknown_81777FD, 3
 	end
 
 SafariZone_Center_EventScript_162373:: @ 8162373
-	loadword 0, gUnknown_817782F
-	callstd 3
+	msgbox gUnknown_817782F, 3
 	end

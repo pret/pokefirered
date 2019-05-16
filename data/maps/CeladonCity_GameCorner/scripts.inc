@@ -16,8 +16,7 @@ EventScript_16C656:: @ 816C656
 	return
 
 CeladonCity_GameCorner_EventScript_16C684:: @ 816C684
-	loadword 0, gUnknown_8196940
-	callstd 2
+	msgbox gUnknown_8196940, 2
 	end
 
 CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
@@ -80,8 +79,7 @@ EventScript_16C762:: @ 816C762
 	updatemoneybox 0, 0, 0
 	updatecoinsbox 0, 5
 	playse 248
-	loadword 0, gUnknown_8196A62
-	callstd 4
+	msgbox gUnknown_8196A62
 	goto EventScript_16C77A
 	end
 
@@ -94,34 +92,29 @@ EventScript_16C77A:: @ 816C77A
 	end
 
 EventScript_16C782:: @ 816C782
-	loadword 0, gUnknown_81969DC
-	callstd 4
+	msgbox gUnknown_81969DC
 	goto EventScript_16C77A
 	end
 
 EventScript_16C790:: @ 816C790
-	loadword 0, gUnknown_81969FB
-	callstd 4
+	msgbox gUnknown_81969FB
 	goto EventScript_16C77A
 	end
 
 EventScript_16C79E:: @ 816C79E
-	loadword 0, gUnknown_8196A26
-	callstd 4
+	msgbox gUnknown_8196A26
 	goto EventScript_16C77A
 	end
 
 EventScript_16C7AC:: @ 816C7AC
-	loadword 0, gUnknown_8196A46
-	callstd 4
+	msgbox gUnknown_8196A46
 	goto EventScript_16C77A
 	end
 
 CeladonCity_GameCorner_EventScript_16C7BA:: @ 816C7BA
 	lock
 	faceplayer
-	loadword 0, gUnknown_8196A82
-	callstd 4
+	msgbox gUnknown_8196A82
 	goto EventScript_16C7CA
 	end
 
@@ -135,8 +128,7 @@ EventScript_16C7CA:: @ 816C7CA
 CeladonCity_GameCorner_EventScript_16C7D7:: @ 816C7D7
 	lock
 	faceplayer
-	loadword 0, gUnknown_8196AC7
-	callstd 4
+	msgbox gUnknown_8196AC7
 	goto EventScript_16C7CA
 	end
 
@@ -145,8 +137,7 @@ CeladonCity_GameCorner_EventScript_16C7E7:: @ 816C7E7
 	faceplayer
 	checkflag FLAG_0x26E
 	goto_if 1, EventScript_16C849
-	loadword 0, gUnknown_8196AF3
-	callstd 4
+	msgbox gUnknown_8196AF3
 	checkflag FLAG_0x243
 	goto_if 0, EventScript_16C839
 	checkcoins VAR_0x4001
@@ -154,8 +145,7 @@ CeladonCity_GameCorner_EventScript_16C7E7:: @ 816C7E7
 	goto_if 4, EventScript_16C82B
 	givecoins 10
 	textcolor 3
-	loadword 0, gUnknown_8196B0D
-	callstd 4
+	msgbox gUnknown_8196B0D
 	playse 248
 	waitse
 	setflag FLAG_0x26E
@@ -163,21 +153,18 @@ CeladonCity_GameCorner_EventScript_16C7E7:: @ 816C7E7
 	end
 
 EventScript_16C82B:: @ 816C82B
-	loadword 0, gUnknown_8196B30
-	callstd 4
+	msgbox gUnknown_8196B30
 	goto EventScript_16C7CA
 	end
 
 EventScript_16C839:: @ 816C839
 	textcolor 3
-	loadword 0, gUnknown_8196F26
-	callstd 4
+	msgbox gUnknown_8196F26
 	goto EventScript_16C7CA
 	end
 
 EventScript_16C849:: @ 816C849
-	loadword 0, gUnknown_8196B49
-	callstd 4
+	msgbox gUnknown_8196B49
 	goto EventScript_16C7CA
 	end
 
@@ -186,30 +173,26 @@ CeladonCity_GameCorner_EventScript_16C857:: @ 816C857
 	faceplayer
 	checkflag FLAG_0x4B3
 	goto_if 1, EventScript_16C870
-	loadword 0, gUnknown_8196BAD
-	callstd 4
+	msgbox gUnknown_8196BAD
 	goto EventScript_16C7CA
 	end
 
 EventScript_16C870:: @ 816C870
-	loadword 0, gUnknown_8196CA1
-	callstd 4
+	msgbox gUnknown_8196CA1
 	goto EventScript_16C7CA
 	end
 
 CeladonCity_GameCorner_EventScript_16C87E:: @ 816C87E
 	lock
 	faceplayer
-	loadword 0, gUnknown_8196B7B
-	callstd 4
+	msgbox gUnknown_8196B7B
 	goto EventScript_16C7CA
 	end
 
 CeladonCity_GameCorner_EventScript_16C88E:: @ 816C88E
 	lock
 	faceplayer
-	loadword 0, gUnknown_8196CFE
-	callstd 4
+	msgbox gUnknown_8196CFE
 	goto EventScript_16C7CA
 	end
 
@@ -218,8 +201,7 @@ CeladonCity_GameCorner_EventScript_16C89E:: @ 816C89E
 	faceplayer
 	checkflag FLAG_0x26F
 	goto_if 1, EventScript_16C8F0
-	loadword 0, gUnknown_8196D2B
-	callstd 4
+	msgbox gUnknown_8196D2B
 	checkflag FLAG_0x243
 	goto_if 0, EventScript_16C839
 	checkcoins VAR_0x4001
@@ -227,8 +209,7 @@ CeladonCity_GameCorner_EventScript_16C89E:: @ 816C89E
 	goto_if 4, EventScript_16C8E2
 	givecoins 20
 	textcolor 3
-	loadword 0, gUnknown_8196D47
-	callstd 4
+	msgbox gUnknown_8196D47
 	playse 248
 	waitse
 	setflag FLAG_0x26F
@@ -236,14 +217,12 @@ CeladonCity_GameCorner_EventScript_16C89E:: @ 816C89E
 	end
 
 EventScript_16C8E2:: @ 816C8E2
-	loadword 0, gUnknown_8196D6F
-	callstd 4
+	msgbox gUnknown_8196D6F
 	goto EventScript_16C7CA
 	end
 
 EventScript_16C8F0:: @ 816C8F0
-	loadword 0, gUnknown_8196D87
-	callstd 4
+	msgbox gUnknown_8196D87
 	goto EventScript_16C7CA
 	end
 
@@ -252,8 +231,7 @@ CeladonCity_GameCorner_EventScript_16C8FE:: @ 816C8FE
 	faceplayer
 	checkflag FLAG_0x270
 	goto_if 1, EventScript_16C950
-	loadword 0, gUnknown_8196DB7
-	callstd 4
+	msgbox gUnknown_8196DB7
 	checkflag FLAG_0x243
 	goto_if 0, EventScript_16C839
 	checkcoins VAR_0x4001
@@ -261,8 +239,7 @@ CeladonCity_GameCorner_EventScript_16C8FE:: @ 816C8FE
 	goto_if 4, EventScript_16C942
 	givecoins 20
 	textcolor 3
-	loadword 0, gUnknown_8196DF8
-	callstd 4
+	msgbox gUnknown_8196DF8
 	playse 248
 	waitse
 	setflag FLAG_0x270
@@ -270,14 +247,12 @@ CeladonCity_GameCorner_EventScript_16C8FE:: @ 816C8FE
 	end
 
 EventScript_16C942:: @ 816C942
-	loadword 0, gUnknown_8196E1B
-	callstd 4
+	msgbox gUnknown_8196E1B
 	goto EventScript_16C7CA
 	end
 
 EventScript_16C950:: @ 816C950
-	loadword 0, gUnknown_8196E40
-	callstd 4
+	msgbox gUnknown_8196E40
 	goto EventScript_16C7CA
 	end
 
@@ -294,8 +269,7 @@ EventScript_16C96A:: @ 816C96A
 EventScript_16C96C:: @ 816C96C
 	checkflag FLAG_0x243
 	goto_if 0, EventScript_16CAA0
-	loadword 0, gUnknown_8196F46
-	callstd 5
+	msgbox gUnknown_8196F46, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C96A
 	setfieldeffectarg 0, 255
@@ -435,15 +409,13 @@ CeladonCity_GameCorner_EventScript_16CA94:: @ 816CA94
 	end
 
 EventScript_16CAA0:: @ 816CAA0
-	loadword 0, gUnknown_8196F0D
-	callstd 4
+	msgbox gUnknown_8196F0D
 	releaseall
 	end
 
 CeladonCity_GameCorner_EventScript_16CAAA:: @ 816CAAA
 	lockall
-	loadword 0, gUnknown_8196EDC
-	callstd 4
+	msgbox gUnknown_8196EDC
 	checkflag FLAG_0x26D
 	call_if 0, EventScript_16CABE
 	releaseall
@@ -462,13 +434,11 @@ EventScript_16CABE:: @ 816CABE
 
 CeladonCity_GameCorner_EventScript_16CAF5:: @ 816CAF5
 	trainerbattle 2, 357, 0, Text_196E69, Text_196E95, EventScript_16CB10
-	loadword 0, gUnknown_8196E9B
-	callstd 6
+	msgbox gUnknown_8196E9B, 6
 	end
 
 EventScript_16CB10:: @ 816CB10
-	loadword 0, gUnknown_8196E9B
-	callstd 4
+	msgbox gUnknown_8196E9B
 	closemessage
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_16CB34
@@ -509,16 +479,13 @@ Movement_16CB53:: @ 816CB53
 	step_end
 
 CeladonCity_GameCorner_EventScript_16CB5A:: @ 816CB5A
-	loadword 0, gUnknown_8196F64
-	callstd 3
+	msgbox gUnknown_8196F64, 3
 	end
 
 CeladonCity_GameCorner_EventScript_16CB63:: @ 816CB63
-	loadword 0, gUnknown_8196F81
-	callstd 3
+	msgbox gUnknown_8196F81, 3
 	end
 
 CeladonCity_GameCorner_EventScript_16CB6C:: @ 816CB6C
-	loadword 0, gUnknown_8196FA0
-	callstd 3
+	msgbox gUnknown_8196FA0, 3
 	end

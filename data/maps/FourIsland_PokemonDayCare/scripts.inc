@@ -14,12 +14,10 @@ FourIsland_PokemonDayCare_EventScript_171940:: @ 8171940
 	goto_if 1, EventScript_171A52
 	compare_var_to_value VAR_RESULT, 3
 	goto_if 1, EventScript_171B86
-	loadword 0, gUnknown_81BF7E4
-	callstd 5
+	msgbox gUnknown_81BF7E4, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171993
-	loadword 0, gUnknown_81BF916
-	callstd 4
+	msgbox gUnknown_81BF916
 	release
 	end
 
@@ -27,8 +25,7 @@ EventScript_171993:: @ 8171993
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171A1A
-	loadword 0, gUnknown_81BF839
-	callstd 4
+	msgbox gUnknown_81BF839
 	fadescreen 1
 	special ChooseSendDaycareMon
 	waitstate
@@ -40,8 +37,7 @@ EventScript_171993:: @ 8171993
 	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
 	waitse
 	playmoncry 32773, 0
-	loadword 0, gUnknown_81BF860
-	callstd 4
+	msgbox gUnknown_81BF860
 	waitmoncry
 	special StoreSelectedPokemonInDaycare
 	incrementgamestat 47
@@ -52,40 +48,34 @@ EventScript_171993:: @ 8171993
 	end
 
 EventScript_1719F7:: @ 81719F7
-	loadword 0, gUnknown_81BF976
-	callstd 4
+	msgbox gUnknown_81BF976
 	release
 	end
 
 EventScript_171A01:: @ 8171A01
-	loadword 0, gUnknown_81BF89F
-	callstd 5
+	msgbox gUnknown_81BF89F, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171993
 	goto EventScript_1719F7
 	end
 
 EventScript_171A1A:: @ 8171A1A
-	loadword 0, gUnknown_81BFAAD
-	callstd 4
+	msgbox gUnknown_81BFAAD
 	release
 	end
 
 EventScript_171A24:: @ 8171A24
-	loadword 0, gUnknown_81BFB09
-	callstd 4
+	msgbox gUnknown_81BFB09
 	release
 	end
 
 EventScript_171A2E:: @ 8171A2E
-	loadword 0, gUnknown_81BF8F6
-	callstd 4
+	msgbox gUnknown_81BF8F6
 	release
 	end
 
 EventScript_171A38:: @ 8171A38
-	loadword 0, gUnknown_81BF9CC
-	callstd 4
+	msgbox gUnknown_81BF9CC
 	return
 
 EventScript_171A41:: @ 8171A41
@@ -95,16 +85,13 @@ EventScript_171A41:: @ 8171A41
 	return
 
 EventScript_171A52:: @ 8171A52
-	loadword 0, gUnknown_81BF988
-	callstd 4
+	msgbox gUnknown_81BF988
 	setvar VAR_0x8004, 0
 	call EventScript_171A41
-	loadword 0, gUnknown_81BF89F
-	callstd 5
+	msgbox gUnknown_81BF89F, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171993
-	loadword 0, gUnknown_81BFAE8
-	callstd 5
+	msgbox gUnknown_81BFAE8, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171A90
 	goto EventScript_1719F7
@@ -128,8 +115,7 @@ EventScript_171A90:: @ 8171A90
 
 EventScript_171ACF:: @ 8171ACF
 	special GetDaycareCost
-	loadword 0, gUnknown_81BFA3B
-	callstd 5
+	msgbox gUnknown_81BFA3B, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171AEB
 	goto EventScript_1719F7
@@ -139,8 +125,7 @@ EventScript_171AEB:: @ 8171AEB
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171B05
-	loadword 0, gUnknown_81BF932
-	callstd 4
+	msgbox gUnknown_81BF932
 	release
 	end
 
@@ -150,13 +135,11 @@ EventScript_171B05:: @ 8171B05
 	specialvar VAR_RESULT, TakePokemonFromDaycare
 	special SubtractMoneyFromVar0x8005
 	playse SE_T_KAMI2
-	loadword 0, gUnknown_81BFA67
-	callstd 4
+	msgbox gUnknown_81BFA67
 	waitse
 	playmoncry 32781, 0
 	textcolor 3
-	loadword 0, gUnknown_81BFA85
-	callstd 4
+	msgbox gUnknown_81BFA85
 	call EventScript_1A6675
 	waitmoncry
 	specialvar VAR_RESULT, GetDaycareState
@@ -166,16 +149,14 @@ EventScript_171B05:: @ 8171B05
 	end
 
 EventScript_171B4E:: @ 8171B4E
-	loadword 0, gUnknown_81BF94F
-	callstd 5
+	msgbox gUnknown_81BF94F, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171A90
 	goto EventScript_1719F7
 	end
 
 EventScript_171B67:: @ 8171B67
-	loadword 0, gUnknown_81BF9EF
-	callstd 4
+	msgbox gUnknown_81BF9EF
 	release
 	end
 
@@ -205,18 +186,15 @@ EventScript_171B85:: @ 8171B85
 	end
 
 EventScript_171B86:: @ 8171B86
-	loadword 0, gUnknown_81BF988
-	callstd 4
+	msgbox gUnknown_81BF988
 	setvar VAR_0x8004, 0
 	call EventScript_171A41
 	setvar VAR_0x8004, 1
 	call EventScript_171A41
-	loadword 0, gUnknown_81BFAE8
-	callstd 5
+	msgbox gUnknown_81BFAE8, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_171A90
-	loadword 0, gUnknown_81BF976
-	callstd 4
+	msgbox gUnknown_81BF976
 	release
 	end
 
@@ -227,9 +205,7 @@ EventScript_171BBF:: @ 8171BBF
 	goto_if 1, EventScript_1719F7
 	copyvar VAR_0x8004, VAR_RESULT
 	specialvar VAR_RESULT, TakePokemonFromDaycare
-	loadword 0, gUnknown_81BFA67
-	callstd 4
-	loadword 0, gUnknown_81BF976
-	callstd 4
+	msgbox gUnknown_81BFA67
+	msgbox gUnknown_81BF976
 	release
 	end

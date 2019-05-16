@@ -2,8 +2,7 @@ Route8_WestEntrance_MapScripts:: @ 816FB53
 	.byte 0
 
 Route8_WestEntrance_EventScript_16FB54:: @ 816FB54
-	loadword 0, gUnknown_819E50F
-	callstd 2
+	msgbox gUnknown_819E50F, 2
 	end
 
 Route8_WestEntrance_EventScript_16FB5D:: @ 816FB5D
@@ -30,8 +29,7 @@ EventScript_16FB81:: @ 816FB81
 	waitmovement 0
 	checkflag FLAG_0x2A6
 	goto_if 1, EventScript_16FBAB
-	loadword 0, gUnknown_819E3ED
-	callstd 4
+	msgbox gUnknown_819E3ED
 	closemessage
 	applymovement 255, Movement_16FC2D
 	waitmovement 0
@@ -54,8 +52,7 @@ EventScript_16FBC1:: @ 816FBC1
 	end
 
 EventScript_16FBCC:: @ 816FBCC
-	loadword 0, gUnknown_819E43D
-	callstd 4
+	msgbox gUnknown_819E43D
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_16FC05
@@ -63,8 +60,7 @@ EventScript_16FBCC:: @ 816FBCC
 	call_if 1, EventScript_16FC10
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_16FC1B
-	loadword 0, gUnknown_819E463
-	callstd 4
+	msgbox gUnknown_819E463
 	setvar VAR_0x4062, 1
 	releaseall
 	end

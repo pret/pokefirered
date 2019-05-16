@@ -10,8 +10,7 @@ SixIsland_Mart_EventScript_171E66:: @ 8171E66
 	message Text_1A6211
 	waitmessage
 	pokemart Items_171E8C
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -30,6 +29,5 @@ Items_171E8C:: @ 8171E8C
 	end
 
 SixIsland_Mart_EventScript_171EA0:: @ 8171EA0
-	loadword 0, gUnknown_81A4271
-	callstd 2
+	msgbox gUnknown_81A4271, 2
 	end

@@ -35,22 +35,19 @@ Route25_SeaCottage_EventScript_17054B:: @ 817054B
 	end
 
 EventScript_170580:: @ 8170580
-	loadword 0, gUnknown_819FDFA
-	callstd 5
+	msgbox gUnknown_819FDFA, 5
 	goto EventScript_17059C
 	end
 
 EventScript_17058E:: @ 817058E
-	loadword 0, gUnknown_819FEE6
-	callstd 5
+	msgbox gUnknown_819FEE6, 5
 	goto EventScript_17059C
 	end
 
 EventScript_17059C:: @ 817059C
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_170600
-	loadword 0, gUnknown_819FFD3
-	callstd 4
+	msgbox gUnknown_819FFD3
 	closemessage
 	delay 10
 	compare_var_to_value VAR_FACING, 1
@@ -82,13 +79,11 @@ EventScript_170600:: @ 8170600
 	return
 
 EventScript_170618:: @ 8170618
-	loadword 0, gUnknown_81A0035
-	callstd 4
+	msgbox gUnknown_81A0035
 	return
 
 EventScript_170621:: @ 8170621
-	loadword 0, gUnknown_81A00B6
-	callstd 4
+	msgbox gUnknown_81A00B6
 	return
 
 EventScript_17062A:: @ 817062A
@@ -102,8 +97,7 @@ EventScript_170635:: @ 8170635
 	return
 
 EventScript_170640:: @ 8170640
-	loadword 0, gUnknown_81A02CF
-	callstd 4
+	msgbox gUnknown_81A02CF
 	release
 	end
 
@@ -129,24 +123,20 @@ EventScript_17064A:: @ 817064A
 	end
 
 EventScript_1706AC:: @ 81706AC
-	loadword 0, gUnknown_81A013B
-	callstd 4
+	msgbox gUnknown_81A013B
 	return
 
 EventScript_1706B5:: @ 81706B5
-	loadword 0, gUnknown_81A01E4
-	callstd 4
+	msgbox gUnknown_81A01E4
 	return
 
 EventScript_1706BE:: @ 81706BE
-	loadword 0, gUnknown_81A02B4
-	callstd 4
+	msgbox gUnknown_81A02B4
 	release
 	end
 
 EventScript_1706C8:: @ 81706C8
-	loadword 0, gUnknown_81A03AB
-	callstd 4
+	msgbox gUnknown_81A03AB
 	release
 	end
 
@@ -173,15 +163,13 @@ Route25_SeaCottage_EventScript_1706DD:: @ 81706DD
 	goto_if 1, EventScript_1707CA
 	checkflag FLAG_0x002
 	goto_if 1, EventScript_1706FA
-	loadword 0, gUnknown_81A0402
-	callstd 4
+	msgbox gUnknown_81A0402
 	releaseall
 	end
 
 EventScript_1706FA:: @ 81706FA
 	fadeoutbgm 0
-	loadword 0, gUnknown_81A042D
-	callstd 4
+	msgbox gUnknown_81A042D
 	closemessage
 	clearflag FLAG_0x002
 	setflag FLAG_0x233
@@ -255,8 +243,7 @@ Movement_1707C3:: @ 81707C3
 	step_end
 
 EventScript_1707CA:: @ 81707CA
-	loadword 0, gUnknown_81A045B
-	callstd 4
+	msgbox gUnknown_81A045B
 	goto EventScript_1707D8
 	end
 

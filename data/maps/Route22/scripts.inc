@@ -38,16 +38,14 @@ EventScript_1682BE:: @ 81682BE
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_16835B
 	delay 6
-	loadword 0, gUnknown_8188890
-	callstd 4
+	msgbox gUnknown_8188890
 	compare_var_to_value VAR_STARTER_MON, 2
 	call_if 1, EventScript_16836D
 	compare_var_to_value VAR_STARTER_MON, 1
 	call_if 1, EventScript_16837C
 	compare_var_to_value VAR_STARTER_MON, 0
 	call_if 1, EventScript_16838B
-	loadword 0, gUnknown_8188974
-	callstd 4
+	msgbox gUnknown_8188974
 	closemessage
 	delay 10
 	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
@@ -205,8 +203,7 @@ EventScript_16841F:: @ 816841F
 	call_if 1, EventScript_16849C
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_1684A7
-	loadword 0, gUnknown_8188A3C
-	callstd 4
+	msgbox gUnknown_8188A3C
 	setvar VAR_LAST_TALKED, 1
 	compare_var_to_value VAR_STARTER_MON, 2
 	call_if 1, EventScript_1684B9
@@ -214,8 +211,7 @@ EventScript_16841F:: @ 816841F
 	call_if 1, EventScript_1684C4
 	compare_var_to_value VAR_STARTER_MON, 0
 	call_if 1, EventScript_1684CF
-	loadword 0, gUnknown_8188B29
-	callstd 4
+	msgbox gUnknown_8188B29
 	closemessage
 	delay 10
 	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
@@ -261,6 +257,5 @@ Movement_1684DA:: @ 81684DA
 	step_end
 
 Route22_EventScript_1684E2:: @ 81684E2
-	loadword 0, gUnknown_8188BFF
-	callstd 3
+	msgbox gUnknown_8188BFF, 3
 	end

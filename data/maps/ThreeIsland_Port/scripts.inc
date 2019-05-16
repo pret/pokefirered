@@ -14,31 +14,26 @@ ThreeIsland_Port_EventScript_168796:: @ 8168796
 	goto_if 4, EventScript_1687B8
 	compare_var_to_value VAR_0x407B, 4
 	goto_if 4, EventScript_1687C2
-	loadword 0, gUnknown_818A307
-	callstd 4
+	msgbox gUnknown_818A307
 	release
 	end
 
 EventScript_1687B8:: @ 81687B8
-	loadword 0, gUnknown_818A38B
-	callstd 4
+	msgbox gUnknown_818A38B
 	release
 	end
 
 EventScript_1687C2:: @ 81687C2
-	loadword 0, gUnknown_818A339
-	callstd 4
+	msgbox gUnknown_818A339
 	release
 	end
 
 ThreeIsland_Port_EventScript_1687CC:: @ 81687CC
-	loadword 0, gUnknown_818A261
-	callstd 2
+	msgbox gUnknown_818A261, 2
 	end
 
 ThreeIsland_Port_EventScript_1687D5:: @ 81687D5
 	lock
-	loadword 0, gUnknown_818A2D8
-	callstd 4
+	msgbox gUnknown_818A2D8
 	release
 	end

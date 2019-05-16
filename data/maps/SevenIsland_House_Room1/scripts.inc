@@ -51,18 +51,15 @@ EventScript_1708E9:: @ 1708E9
 	end
 
 EventScript_170938:: @ 8170938
-	loadword 0, gUnknown_81A088C
-	callstd 4
+	msgbox gUnknown_81A088C
 	return
 
 EventScript_170941:: @ 8170941
-	loadword 0, gUnknown_81A0971
-	callstd 4
+	msgbox gUnknown_81A0971
 	return
 
 EventScript_17094A:: @ 817094A
-	loadword 0, gUnknown_81A0807
-	callstd 4
+	msgbox gUnknown_81A0807
 	return
 
 Movement_170953:: @ 8170953
@@ -82,29 +79,25 @@ SevenIsland_House_Room1_EventScript_170958:: @ 8170958
 	call_if 1, EventScript_17097D
 	compare_var_to_value VAR_0x4001, 1
 	goto_if 1, EventScript_170987
-	loadword 0, gUnknown_81A049B
-	callstd 4
+	msgbox gUnknown_81A049B
 	release
 	end
 
 EventScript_17097D:: @ 817097D
-	loadword 0, gUnknown_81A049B
-	callstd 4
+	msgbox gUnknown_81A049B
 	release
 	end
 
 EventScript_170987:: @ 8170987
 	special SavePlayerParty
 	special sub_80CAAAC
-	loadword 0, gUnknown_81A0598
-	callstd 5
+	msgbox gUnknown_81A0598, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_170A11
 	call EventScript_170A1E
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_170A11
-	loadword 0, gUnknown_81A0788
-	callstd 5
+	msgbox gUnknown_81A0788, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_170A11
 	special LoadPlayerParty
@@ -113,8 +106,7 @@ EventScript_170987:: @ 8170987
 	goto_if 1, EventScript_170A11
 	special SavePlayerParty
 	special sub_80A03D8
-	loadword 0, gUnknown_81A07C4
-	callstd 4
+	msgbox gUnknown_81A07C4
 	closemessage
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_170A2D
@@ -129,14 +121,12 @@ EventScript_170987:: @ 8170987
 
 EventScript_170A11:: @ 8170A11
 	special LoadPlayerParty
-	loadword 0, gUnknown_81A064E
-	callstd 4
+	msgbox gUnknown_81A064E
 	release
 	end
 
 EventScript_170A1E:: @ 8170A1E
-	loadword 0, gUnknown_81A06AB
-	callstd 4
+	msgbox gUnknown_81A06AB
 	fadescreen 1
 	special sub_80A0334
 	waitstate
@@ -189,6 +179,5 @@ Movement_170A72:: @ 8170A72
 	step_end
 
 SevenIsland_House_Room1_EventScript_170A75:: @ 8170A75
-	loadword 0, gUnknown_81A0567
-	callstd 3
+	msgbox gUnknown_81A0567, 3
 	end

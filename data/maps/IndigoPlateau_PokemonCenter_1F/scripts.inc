@@ -22,28 +22,24 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EA8A:: @ 816EA8A
 	specialvar VAR_RESULT, sub_806E25C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16EAA6
-	loadword 0, gUnknown_819A8D8
-	callstd 4
+	msgbox gUnknown_819A8D8
 	release
 	end
 
 EventScript_16EAA6:: @ 816EAA6
 	checkflag FLAG_0x844
 	goto_if 1, EventScript_16EAB9
-	loadword 0, gUnknown_819A943
-	callstd 4
+	msgbox gUnknown_819A943
 	release
 	end
 
 EventScript_16EAB9:: @ 816EAB9
-	loadword 0, gUnknown_819A8D8
-	callstd 4
+	msgbox gUnknown_819A8D8
 	release
 	end
 
 IndigoPlateau_PokemonCenter_1F_EventScript_16EAC3:: @ 816EAC3
-	loadword 0, gUnknown_819A837
-	callstd 2
+	msgbox gUnknown_819A837, 2
 	end
 
 IndigoPlateau_PokemonCenter_1F_EventScript_16EACC:: @ 816EACC
@@ -55,8 +51,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EACC:: @ 816EACC
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16EAF4
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 

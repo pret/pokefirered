@@ -2,8 +2,7 @@ Route6_NorthEntrance_MapScripts:: @ 816F9C6
 	.byte 0
 
 Route6_NorthEntrance_EventScript_16F9C7:: @ 816F9C7
-	loadword 0, gUnknown_819E2A3
-	callstd 2
+	msgbox gUnknown_819E2A3, 2
 	end
 
 Route6_NorthEntrance_EventScript_16F9D0:: @ 816F9D0
@@ -30,8 +29,7 @@ EventScript_16F9F4:: @ 816F9F4
 	waitmovement 0
 	checkflag FLAG_0x2A6
 	goto_if 1, EventScript_16FA1E
-	loadword 0, gUnknown_819E181
-	callstd 4
+	msgbox gUnknown_819E181
 	closemessage
 	applymovement 255, Movement_16FA8A
 	waitmovement 0
@@ -44,8 +42,7 @@ EventScript_16FA1E:: @ 816FA1E
 	end
 
 EventScript_16FA29:: @ 816FA29
-	loadword 0, gUnknown_819E1D1
-	callstd 4
+	msgbox gUnknown_819E1D1
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_16FA62
@@ -53,8 +50,7 @@ EventScript_16FA29:: @ 816FA29
 	call_if 1, EventScript_16FA6D
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_16FA78
-	loadword 0, gUnknown_819E1F7
-	callstd 4
+	msgbox gUnknown_819E1F7
 	setvar VAR_0x4062, 1
 	releaseall
 	end

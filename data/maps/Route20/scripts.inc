@@ -30,6 +30,5 @@ EventScript_16826D:: @ 816826D
 	return
 
 Route20_EventScript_168280:: @ 8168280
-	loadword 0, gUnknown_81882D1
-	callstd 3
+	msgbox gUnknown_81882D1, 3
 	end

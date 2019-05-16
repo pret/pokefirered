@@ -13,8 +13,7 @@ EventScript_17038B:: @ 817038B
 	return
 
 Route18_EastEntrance_1F_EventScript_170391:: @ 8170391
-	loadword 0, gUnknown_819FD3A
-	callstd 2
+	msgbox gUnknown_819FD3A, 2
 	end
 
 Route18_EastEntrance_1F_EventScript_17039A:: @ 817039A
@@ -49,8 +48,7 @@ Route18_EastEntrance_1F_EventScript_1703CA:: @ 81703CA
 
 EventScript_1703D6:: @ 81703D6
 	textcolor 0
-	loadword 0, gUnknown_819FD60
-	callstd 4
+	msgbox gUnknown_819FD60
 	closemessage
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
@@ -63,8 +61,7 @@ EventScript_1703D6:: @ 81703D6
 	call_if 1, EventScript_170445
 	compare_var_to_value VAR_0x8008, 4
 	call_if 1, EventScript_170450
-	loadword 0, gUnknown_819FD0C
-	callstd 4
+	msgbox gUnknown_819FD0C
 	closemessage
 	applymovement 255, Movement_170469
 	waitmovement 0

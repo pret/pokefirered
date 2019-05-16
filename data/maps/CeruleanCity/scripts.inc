@@ -41,8 +41,7 @@ EventScript_1664CC:: @ 81664CC
 	addobject 8
 	applymovement 8, Movement_1665D3
 	waitmovement 0
-	loadword 0, gUnknown_817EAD7
-	callstd 4
+	msgbox gUnknown_817EAD7
 	setvar VAR_LAST_TALKED, 8
 	compare_var_to_value VAR_STARTER_MON, 2
 	call_if 1, EventScript_166582
@@ -53,8 +52,7 @@ EventScript_1664CC:: @ 81664CC
 	setvar VAR_0x8004, 13
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_817EB95
-	callstd 4
+	msgbox gUnknown_817EB95
 	closemessage
 	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
 	compare_var_to_value VAR_0x4001, 0
@@ -63,15 +61,13 @@ EventScript_1664CC:: @ 81664CC
 	call_if 1, EventScript_1665A3
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_1665B5
-	loadword 0, gUnknown_817ECD4
-	callstd 4
+	msgbox gUnknown_817ECD4
 	setvar VAR_0x4052, 1
 	setflag FLAG_0x29B
 	setorcopyvar VAR_0x8000, 363
 	setorcopyvar VAR_0x8001, 1
 	callstd 0
-	loadword 0, gUnknown_817ED5D
-	callstd 4
+	msgbox gUnknown_817ED5D
 	closemessage
 	applymovement 8, Movement_1665FB
 	waitmovement 0
@@ -191,15 +187,13 @@ CeruleanCity_EventScript_166603:: @ 8166603
 	end
 
 EventScript_16662E:: @ 816662E
-	loadword 0, gUnknown_817EE9C
-	callstd 4
+	msgbox gUnknown_817EE9C
 	checkitemspace ITEM_TM28, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_166677
 	additem ITEM_TM28, 1
 	giveitemfanfaremsg gUnknown_817EEBF, ITEM_TM28
-	loadword 0, gUnknown_817EEED
-	callstd 4
+	msgbox gUnknown_817EEED
 	closemessage
 	fadescreen 1
 	removeobject 2
@@ -210,8 +204,7 @@ EventScript_16662E:: @ 816662E
 
 EventScript_166677:: @ 8166677
 	textcolor 0
-	loadword 0, gUnknown_817EF07
-	callstd 4
+	msgbox gUnknown_817EF07
 	release
 	end
 
@@ -237,8 +230,7 @@ CeruleanCity_EventScript_1666A3:: @ 81666A3
 
 EventScript_1666C3:: @ 81666C3
 	textcolor 0
-	loadword 0, Text_17EE0E
-	callstd 4
+	msgbox Text_17EE0E
 	setvar VAR_LAST_TALKED, 2
 	trainerbattle 3, 355, 0, Text_17EE70
 	setvar VAR_0x407D, 1
@@ -248,8 +240,7 @@ EventScript_1666C3:: @ 81666C3
 CeruleanCity_EventScript_1666E7:: @ 81666E7
 	lock
 	faceplayer
-	loadword 0, gUnknown_817F0F1
-	callstd 4
+	msgbox gUnknown_817F0F1
 	closemessage
 	applymovement 1, Movement_1A75E5
 	waitmovement 0
@@ -261,37 +252,31 @@ CeruleanCity_EventScript_1666FE:: @ 81666FE
 	faceplayer
 	checkflag FLAG_0x234
 	goto_if 1, EventScript_166713
-	loadword 0, gUnknown_817F01D
-	callstd 4
+	msgbox gUnknown_817F01D
 	release
 	end
 
 EventScript_166713:: @ 8166713
-	loadword 0, gUnknown_817EF89
-	callstd 4
+	msgbox gUnknown_817EF89
 	release
 	end
 
 CeruleanCity_EventScript_16671D:: @ 816671D
-	loadword 0, gUnknown_817F0B2
-	callstd 2
+	msgbox gUnknown_817F0B2, 2
 	end
 
 CeruleanCity_EventScript_166726:: @ 8166726
-	loadword 0, gUnknown_817EF3F
-	callstd 2
+	msgbox gUnknown_817EF3F, 2
 	end
 
 CeruleanCity_EventScript_16672F:: @ 816672F
-	loadword 0, gUnknown_817F319
-	callstd 2
+	msgbox gUnknown_817F319, 2
 	end
 
 CeruleanCity_EventScript_166738:: @ 8166738
 	lock
 	faceplayer
-	loadword 0, gUnknown_817F2CF
-	callstd 4
+	msgbox gUnknown_817F2CF
 	closemessage
 	applymovement 11, Movement_1A75E5
 	waitmovement 0
@@ -336,18 +321,15 @@ EventScript_1667BC:: @ 81667BC
 	return
 
 EventScript_1667C2:: @ 81667C2
-	loadword 0, gUnknown_817F1A1
-	callstd 4
+	msgbox gUnknown_817F1A1
 	return
 
 EventScript_1667CB:: @ 81667CB
-	loadword 0, gUnknown_817F1D2
-	callstd 4
+	msgbox gUnknown_817F1D2
 	return
 
 EventScript_1667D4:: @ 81667D4
-	loadword 0, gUnknown_817F1FC
-	callstd 4
+	msgbox gUnknown_817F1FC
 	return
 
 CeruleanCity_EventScript_1667DD:: @ 81667DD
@@ -366,38 +348,31 @@ CeruleanCity_EventScript_1667DD:: @ 81667DD
 	end
 
 EventScript_166814:: @ 8166814
-	loadword 0, gUnknown_817F270
-	callstd 4
+	msgbox gUnknown_817F270
 	return
 
 EventScript_16681D:: @ 816681D
-	loadword 0, gUnknown_817F287
-	callstd 4
+	msgbox gUnknown_817F287
 	return
 
 EventScript_166826:: @ 8166826
-	loadword 0, gUnknown_817F2A2
-	callstd 4
+	msgbox gUnknown_817F2A2
 	return
 
 EventScript_16682F:: @ 816682F
-	loadword 0, gUnknown_817F2B7
-	callstd 4
+	msgbox gUnknown_817F2B7
 	return
 
 CeruleanCity_EventScript_166838:: @ 8166838
-	loadword 0, gUnknown_817F420
-	callstd 3
+	msgbox gUnknown_817F420, 3
 	end
 
 CeruleanCity_EventScript_166841:: @ 8166841
-	loadword 0, gUnknown_817F453
-	callstd 3
+	msgbox gUnknown_817F453, 3
 	end
 
 CeruleanCity_EventScript_16684A:: @ 816684A
-	loadword 0, gUnknown_817F4C5
-	callstd 3
+	msgbox gUnknown_817F4C5, 3
 	end
 
 CeruleanCity_EventScript_166853:: @ 8166853
@@ -405,7 +380,6 @@ CeruleanCity_EventScript_166853:: @ 8166853
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_817F4EF
-	callstd 4
+	msgbox gUnknown_817F4EF
 	releaseall
 	end

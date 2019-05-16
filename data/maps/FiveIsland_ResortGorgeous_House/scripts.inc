@@ -14,21 +14,18 @@ FiveIsland_ResortGorgeous_House_EventScript_171EBE:: @ 8171EBE
 	goto_if 1, EventScript_171F0B
 	compare_var_to_value VAR_STORAGE_UNKNOWN, 0
 	goto_if 5, EventScript_171F19
-	loadword 0, gUnknown_81A42A0
-	callstd 4
+	msgbox gUnknown_81A42A0
 	goto EventScript_171EFE
 	end
 
 EventScript_171EFE:: @ 8171EFE
 	special sub_80CB0A8
-	loadword 0, gUnknown_81A4315
-	callstd 4
+	msgbox gUnknown_81A4315
 	release
 	end
 
 EventScript_171F0B:: @ 8171F0B
-	loadword 0, gUnknown_81A437A
-	callstd 4
+	msgbox gUnknown_81A437A
 	goto EventScript_171EFE
 	end
 
@@ -42,22 +39,18 @@ EventScript_171F19:: @ 8171F19
 
 EventScript_171F34:: @ 8171F34
 	special sub_80CB0A8
-	loadword 0, gUnknown_81A43F7
-	callstd 4
+	msgbox gUnknown_81A43F7
 	addobject 2
 	applymovement 2, Movement_172060
 	waitmovement 0
 	textcolor 0
-	loadword 0, gUnknown_81A450B
-	callstd 4
+	msgbox gUnknown_81A450B
 	applymovement 1, Movement_1A75E9
 	waitmovement 0
 	textcolor 1
-	loadword 0, gUnknown_81A4521
-	callstd 4
+	msgbox gUnknown_81A4521
 	textcolor 0
-	loadword 0, gUnknown_81A4566
-	callstd 4
+	msgbox gUnknown_81A4566
 	closemessage
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_171FCD
@@ -68,8 +61,7 @@ EventScript_171F34:: @ 8171F34
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_17201A
 	moveobjectoffscreen 2
-	loadword 0, gUnknown_81A458E
-	callstd 4
+	msgbox gUnknown_81A458E
 	setorcopyvar VAR_0x8000, VAR_0x403B
 	setorcopyvar VAR_0x8001, 1
 	callstd 0
@@ -110,19 +102,16 @@ EventScript_17201A:: @ 817201A
 
 EventScript_172025:: @ 8172025
 	textcolor 0
-	loadword 0, gUnknown_81A45E8
-	callstd 4
+	msgbox gUnknown_81A45E8
 	textcolor 1
-	loadword 0, gUnknown_81A461B
-	callstd 4
+	msgbox gUnknown_81A461B
 	setflag FLAG_0x002
 	setvar VAR_STORAGE_UNKNOWN, 0
 	release
 	end
 
 EventScript_172043:: @ 8172043
-	loadword 0, gUnknown_81A4632
-	callstd 4
+	msgbox gUnknown_81A4632
 	release
 	end
 
@@ -158,6 +147,5 @@ Movement_172060:: @ 8172060
 	step_end
 
 FiveIsland_ResortGorgeous_House_EventScript_172062:: @ 8172062
-	loadword 0, gUnknown_81A4657
-	callstd 2
+	msgbox gUnknown_81A4657, 2
 	end

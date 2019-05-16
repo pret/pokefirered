@@ -2,6 +2,5 @@ DiglettsCave_NorthEntrance_MapScripts:: @ 8160EE7
 	.byte 0
 
 DiglettsCave_NorthEntrance_EventScript_160EE8:: @ 8160EE8
-	loadword 0, gUnknown_817462C
-	callstd 2
+	msgbox gUnknown_817462C, 2
 	end

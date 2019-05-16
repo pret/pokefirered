@@ -24,12 +24,10 @@ PokemonMansion_1F_EventScript_162212:: @ 8162212
 
 PokemonMansion_1F_EventScript_162226:: @ 8162226
 	trainerbattle 0, 335, 0, Text_177364, Text_177391
-	loadword 0, gUnknown_8177397
-	callstd 6
+	msgbox gUnknown_8177397, 6
 	end
 
 PokemonMansion_1F_EventScript_16223D:: @ 816223D
 	trainerbattle 0, 534, 0, Text_1773C6, Text_1773FD
-	loadword 0, gUnknown_8177418
-	callstd 6
+	msgbox gUnknown_8177418, 6
 	end

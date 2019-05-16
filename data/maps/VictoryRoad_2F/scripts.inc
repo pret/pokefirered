@@ -57,30 +57,25 @@ EventScript_161035:: @ 8161035
 
 VictoryRoad_2F_EventScript_161037:: @ 8161037
 	trainerbattle 0, 167, 0, Text_1747EF, Text_17482C
-	loadword 0, gUnknown_817483E
-	callstd 6
+	msgbox gUnknown_817483E, 6
 	end
 
 VictoryRoad_2F_EventScript_16104E:: @ 816104E
 	trainerbattle 0, 325, 0, Text_174877, Text_1748B4
-	loadword 0, gUnknown_81748BB
-	callstd 6
+	msgbox gUnknown_81748BB, 6
 	end
 
 VictoryRoad_2F_EventScript_161065:: @ 8161065
 	trainerbattle 0, 287, 0, Text_1748EE, Text_17491B
-	loadword 0, gUnknown_8174927
-	callstd 6
+	msgbox gUnknown_8174927, 6
 	end
 
 VictoryRoad_2F_EventScript_16107C:: @ 816107C
 	trainerbattle 0, 290, 0, Text_174995, Text_1749B0
-	loadword 0, gUnknown_81749BB
-	callstd 6
+	msgbox gUnknown_81749BB, 6
 	end
 
 VictoryRoad_2F_EventScript_161093:: @ 8161093
 	trainerbattle 0, 298, 0, Text_174942, Text_17495A
-	loadword 0, gUnknown_8174969
-	callstd 6
+	msgbox gUnknown_8174969, 6
 	end

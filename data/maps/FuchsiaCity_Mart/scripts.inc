@@ -2,13 +2,11 @@ FuchsiaCity_Mart_MapScripts:: @ 816D4E0
 	.byte 0
 
 FuchsiaCity_Mart_EventScript_16D4E1:: @ 816D4E1
-	loadword 0, gUnknown_8198134
-	callstd 2
+	msgbox gUnknown_8198134, 2
 	end
 
 FuchsiaCity_Mart_EventScript_16D4EA:: @ 816D4EA
-	loadword 0, gUnknown_81980BC
-	callstd 2
+	msgbox gUnknown_81980BC, 2
 	end
 
 FuchsiaCity_Mart_EventScript_16D4F3:: @ 816D4F3
@@ -20,8 +18,7 @@ FuchsiaCity_Mart_EventScript_16D4F3:: @ 816D4F3
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16D518
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 

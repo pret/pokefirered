@@ -24,8 +24,7 @@ EventScript_162D70:: @ 8162D70
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
 	delay 18
-	loadword 0, gUnknown_817922F
-	callstd 4
+	msgbox gUnknown_817922F
 	closemessage
 	applymovement 1, Movement_1A75E9
 	applymovement 255, Movement_1A75E9

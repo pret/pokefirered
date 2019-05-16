@@ -22,14 +22,12 @@ EventScript_16A205:: @ 816A205
 	textcolor 0
 	applymovement 1, Movement_1A75ED
 	waitmovement 0
-	loadword 0, gUnknown_819021A
-	callstd 4
+	msgbox gUnknown_819021A
 	closemessage
 	applymovement 1, Movement_16A262
 	applymovement 255, Movement_16A25C
 	waitmovement 0
-	loadword 0, gUnknown_819023A
-	callstd 4
+	msgbox gUnknown_819023A
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	additem ITEM_OAKS_PARCEL, 1
 	giveitemfanfaremsg gUnknown_8190289, ITEM_OAKS_PARCEL, 1, BGM_FRLG_ME_KEYITEM
@@ -64,8 +62,7 @@ ViridianCity_Mart_EventScript_16A268:: @ 816A268
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16A298
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -80,17 +77,14 @@ Items_16A298:: @ 816A298
 	end
 
 EventScript_16A2A4:: @ 816A2A4
-	loadword 0, Text_1902BF
-	callstd 4
+	msgbox Text_1902BF
 	release
 	end
 
 ViridianCity_Mart_EventScript_16A2AE:: @ 816A2AE
-	loadword 0, gUnknown_81902F5
-	callstd 2
+	msgbox gUnknown_81902F5, 2
 	end
 
 ViridianCity_Mart_EventScript_16A2B7:: @ 816A2B7
-	loadword 0, gUnknown_819032C
-	callstd 2
+	msgbox gUnknown_819032C, 2
 	end

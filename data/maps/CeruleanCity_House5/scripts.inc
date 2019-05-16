@@ -6,41 +6,35 @@ CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
 	faceplayer
 	checkflag FLAG_0x2BB
 	goto_if 1, EventScript_16AEB7
-	loadword 0, gUnknown_8192F67
-	callstd 5
+	msgbox gUnknown_8192F67, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AEAD
 	checkflag FLAG_0x847
 	goto_if 0, EventScript_16AEA3
-	loadword 0, gUnknown_8193003
-	callstd 4
+	msgbox gUnknown_8193003
 	setflag FLAG_0x2BB
 	setorcopyvar VAR_0x8000, 372
 	setorcopyvar VAR_0x8001, 1
 	callstd 0
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A6BF9
-	loadword 0, gUnknown_8193033
-	callstd 4
+	msgbox gUnknown_8193033
 	release
 	end
 
 EventScript_16AEA3:: @ 816AEA3
-	loadword 0, gUnknown_819321D
-	callstd 4
+	msgbox gUnknown_819321D
 	release
 	end
 
 EventScript_16AEAD:: @ 816AEAD
-	loadword 0, gUnknown_819325E
-	callstd 4
+	msgbox gUnknown_819325E
 	release
 	end
 
 EventScript_16AEB7:: @ 816AEB7
 	special sub_815F094
-	loadword 0, gUnknown_81932C5
-	callstd 4
+	msgbox gUnknown_81932C5
 	goto EventScript_16AEC8
 	end
 
@@ -157,15 +151,13 @@ EventScript_16B034:: @ 816B034
 	end
 
 EventScript_16B048:: @ 816B048
-	loadword 0, gUnknown_819342F
-	callstd 4
+	msgbox gUnknown_819342F
 	special sub_815F114
 	release
 	end
 
 EventScript_16B055:: @ 816B055
-	loadword 0, gUnknown_819331E
-	callstd 5
+	msgbox gUnknown_819331E, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AEC8
 	copyvar VAR_0x8004, VAR_0x8009
@@ -180,26 +172,22 @@ EventScript_16B055:: @ 816B055
 	copyvar VAR_0x8004, VAR_0x8009
 	special sub_815EF5C
 	special sub_815F070
-	loadword 0, gUnknown_819337A
-	callstd 5
+	msgbox gUnknown_819337A, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16AEC8
-	loadword 0, gUnknown_81933FB
-	callstd 4
+	msgbox gUnknown_81933FB
 	special sub_815F114
 	release
 	end
 
 EventScript_16B0BF:: @ 816B0BF
-	loadword 0, gUnknown_81A5207
-	callstd 4
+	msgbox gUnknown_81A5207
 	special sub_815F114
 	release
 	end
 
 EventScript_16B0CC:: @ 816B0CC
-	loadword 0, gUnknown_8193352
-	callstd 4
+	msgbox gUnknown_8193352
 	goto EventScript_16AEC8
 	end
 

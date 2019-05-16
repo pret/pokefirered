@@ -6,8 +6,7 @@ Route1_EventScript_167EFE:: @ 8167EFE
 	faceplayer
 	checkflag FLAG_0x230
 	goto_if 1, EventScript_167F48
-	loadword 0, gUnknown_818329D
-	callstd 4
+	msgbox gUnknown_818329D
 	textcolor 3
 	checkitemspace ITEM_POTION, 1
 	compare_var_to_value VAR_RESULT, 0
@@ -18,25 +17,21 @@ Route1_EventScript_167EFE:: @ 8167EFE
 	waitmessage
 	waitfanfare
 	additem ITEM_POTION, 1
-	loadword 0, gUnknown_8183387
-	callstd 4
+	msgbox gUnknown_8183387
 	call EventScript_1A6675
 	setflag FLAG_0x230
 	release
 	end
 
 EventScript_167F48:: @ 8167F48
-	loadword 0, gUnknown_8183347
-	callstd 4
+	msgbox gUnknown_8183347
 	release
 	end
 
 Route1_EventScript_167F52:: @ 8167F52
-	loadword 0, gUnknown_81833B9
-	callstd 2
+	msgbox gUnknown_81833B9, 2
 	end
 
 Route1_EventScript_167F5B:: @ 8167F5B
-	loadword 0, gUnknown_818343A
-	callstd 3
+	msgbox gUnknown_818343A, 3
 	end

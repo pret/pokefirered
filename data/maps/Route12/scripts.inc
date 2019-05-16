@@ -20,8 +20,7 @@ Route12_EventScript_168014:: @ 8168014
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
 	special sub_8112364
-	loadword 0, gUnknown_81853CC
-	callstd 5
+	msgbox gUnknown_81853CC, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16808D
 	call EventScript_1A924B
@@ -50,23 +49,19 @@ EventScript_16808D:: @ 816808D
 	end
 
 EventScript_16808F:: @ 816808F
-	loadword 0, gUnknown_8185383
-	callstd 4
+	msgbox gUnknown_8185383
 	release
 	end
 
 EventScript_168099:: @ 8168099
-	loadword 0, gUnknown_8185317
-	callstd 4
+	msgbox gUnknown_8185317
 	release
 	end
 
 Route12_EventScript_1680A3:: @ 81680A3
-	loadword 0, gUnknown_8185797
-	callstd 3
+	msgbox gUnknown_8185797, 3
 	end
 
 Route12_EventScript_1680AC:: @ 81680AC
-	loadword 0, gUnknown_81857B3
-	callstd 3
+	msgbox gUnknown_81857B3, 3
 	end

@@ -2,13 +2,11 @@ SaffronCity_Mart_MapScripts:: @ 816EFA2
 	.byte 0
 
 SaffronCity_Mart_EventScript_16EFA3:: @ 816EFA3
-	loadword 0, gUnknown_819BFF1
-	callstd 2
+	msgbox gUnknown_819BFF1, 2
 	end
 
 SaffronCity_Mart_EventScript_16EFAC:: @ 816EFAC
-	loadword 0, gUnknown_819BF8F
-	callstd 2
+	msgbox gUnknown_819BF8F, 2
 	end
 
 SaffronCity_Mart_EventScript_16EFB5:: @ 816EFB5
@@ -20,8 +18,7 @@ SaffronCity_Mart_EventScript_16EFB5:: @ 816EFB5
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16EFDC
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 

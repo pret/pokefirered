@@ -24,14 +24,12 @@ EventScript_164C52:: @ 8164C52
 	delay 100
 	applymovement 1, Movement_164CC8
 	waitmovement 0
-	loadword 0, gUnknown_817D062
-	callstd 4
+	msgbox gUnknown_817D062
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_164CB6
 	trainerbattle 3, 606, 0, Text_17D086
-	loadword 0, gUnknown_817D0B2
-	callstd 4
+	msgbox gUnknown_817D0B2
 	closemessage
 	call EventScript_164CA5
 	warp MAP_FIVE_ISLAND_RESORT_GORGEOUS, 255, 39, 10

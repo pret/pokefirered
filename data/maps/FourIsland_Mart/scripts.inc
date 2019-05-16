@@ -10,8 +10,7 @@ FourIsland_Mart_EventScript_171CAE:: @ 8171CAE
 	message Text_1A6211
 	waitmessage
 	pokemart Items_171CD4
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -30,6 +29,5 @@ Items_171CD4:: @ 8171CD4
 	end
 
 FourIsland_Mart_EventScript_171CE8:: @ 8171CE8
-	loadword 0, gUnknown_81A3B14
-	callstd 2
+	msgbox gUnknown_81A3B14, 2
 	end

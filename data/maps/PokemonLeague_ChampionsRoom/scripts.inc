@@ -77,12 +77,10 @@ EventScript_162B76:: @ 8162B76
 	clearflag FLAG_0x005
 	setflag FLAG_0x4BC
 	setflag FLAG_0x004
-	loadword 0, gUnknown_8178F2F
-	callstd 4
+	msgbox gUnknown_8178F2F
 	playbgm BGM_FRLG_HALL_OF_FAME_PALLET_TOWN, 0
 	addobject 2
-	loadword 0, gUnknown_8178FC6
-	callstd 4
+	msgbox gUnknown_8178FC6
 	closemessage
 	applymovement 255, Movement_162D1F
 	applymovement 1, Movement_162D41
@@ -91,19 +89,16 @@ EventScript_162B76:: @ 8162B76
 	delay 25
 	specialvar VAR_RESULT, ScrSpecial_GetStarter
 	getspeciesname 0, 32781
-	loadword 0, gUnknown_8178FCF
-	callstd 4
+	msgbox gUnknown_8178FCF
 	applymovement 2, Movement_1A75EB
 	applymovement 1, Movement_1A75E7
 	waitmovement 0
-	loadword 0, gUnknown_817908F
-	callstd 4
+	msgbox gUnknown_817908F
 	closemessage
 	applymovement 2, Movement_1A75ED
 	waitmovement 0
 	delay 20
-	loadword 0, gUnknown_81791A3
-	callstd 4
+	msgbox gUnknown_81791A3
 	closemessage
 	delay 13
 	applymovement 2, Movement_162D37
@@ -139,13 +134,11 @@ EventScript_162C91:: @ 8162C91
 	return
 
 EventScript_162CB3:: @ 8162CB3
-	loadword 0, gUnknown_8178B6C
-	callstd 4
+	msgbox gUnknown_8178B6C
 	return
 
 EventScript_162CBC:: @ 8162CBC
-	loadword 0, gUnknown_8178CD4
-	callstd 4
+	msgbox gUnknown_8178CD4
 	return
 
 EventScript_162CC5:: @ 8162CC5

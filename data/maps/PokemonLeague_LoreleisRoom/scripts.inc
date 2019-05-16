@@ -80,13 +80,11 @@ EventScript_162640:: @ 8162640
 	end
 
 EventScript_162641:: @ 8162641
-	loadword 0, gUnknown_8177FA4
-	callstd 4
+	msgbox gUnknown_8177FA4
 	return
 
 EventScript_16264A:: @ 816264A
-	loadword 0, gUnknown_8178089
-	callstd 4
+	msgbox gUnknown_8178089
 	return
 
 EventScript_162653:: @ 8162653
@@ -98,15 +96,13 @@ EventScript_16265E:: @ 816265E
 	return
 
 EventScript_162669:: @ 8162669
-	loadword 0, gUnknown_81781B0
-	callstd 4
+	msgbox gUnknown_81781B0
 	release
 	end
 
 EventScript_162673:: @ 8162673
 	setflag FLAG_0x4B8
 	call EventScript_1A7506
-	loadword 0, gUnknown_81781B0
-	callstd 4
+	msgbox gUnknown_81781B0
 	release
 	end

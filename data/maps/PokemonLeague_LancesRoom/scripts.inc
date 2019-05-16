@@ -129,13 +129,11 @@ EventScript_162A78:: @ 8162A78
 	end
 
 EventScript_162A79:: @ 8162A79
-	loadword 0, gUnknown_8178764
-	callstd 4
+	msgbox gUnknown_8178764
 	return
 
 EventScript_162A82:: @ 8162A82
-	loadword 0, gUnknown_81788BD
-	callstd 4
+	msgbox gUnknown_81788BD
 	return
 
 EventScript_162A8B:: @ 8162A8B
@@ -147,8 +145,7 @@ EventScript_162A96:: @ 8162A96
 	return
 
 EventScript_162AA1:: @ 8162AA1
-	loadword 0, gUnknown_8178A52
-	callstd 4
+	msgbox gUnknown_8178A52
 	release
 	end
 
@@ -157,8 +154,7 @@ EventScript_162AAB:: @ 8162AAB
 	special sub_8113530
 	setflag FLAG_0x4BB
 	call EventScript_1A7563
-	loadword 0, gUnknown_8178A52
-	callstd 4
+	msgbox gUnknown_8178A52
 	closemessage
 	release
 	end

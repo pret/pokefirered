@@ -52,8 +52,7 @@ ViridianCity_EventScript_16596D:: @ 816596D
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
 	delay 20
-	loadword 0, gUnknown_817E2F5
-	callstd 4
+	msgbox gUnknown_817E2F5
 	closemessage
 	applymovement 255, Movement_165992
 	waitmovement 0
@@ -65,33 +64,27 @@ Movement_165992:: @ 8165992
 	step_end
 
 ViridianCity_EventScript_165994:: @ 8165994
-	loadword 0, gUnknown_817E1BB
-	callstd 3
+	msgbox gUnknown_817E1BB, 3
 	end
 
 ViridianCity_EventScript_16599D:: @ 816599D
-	loadword 0, gUnknown_817E1E7
-	callstd 3
+	msgbox gUnknown_817E1E7, 3
 	end
 
 ViridianCity_EventScript_1659A6:: @ 81659A6
-	loadword 0, gUnknown_817E24D
-	callstd 3
+	msgbox gUnknown_817E24D, 3
 	end
 
 ViridianCity_EventScript_1659AF:: @ 81659AF
-	loadword 0, gUnknown_817E2DB
-	callstd 3
+	msgbox gUnknown_817E2DB, 3
 	end
 
 ViridianCity_EventScript_1659B8:: @ 81659B8
-	loadword 0, gUnknown_817E2F5
-	callstd 3
+	msgbox gUnknown_817E2F5, 3
 	end
 
 ViridianCity_EventScript_1659C1:: @ 81659C1
-	loadword 0, gUnknown_817DABB
-	callstd 2
+	msgbox gUnknown_817DABB, 2
 	end
 
 ViridianCity_EventScript_1659CA:: @ 81659CA
@@ -99,8 +92,7 @@ ViridianCity_EventScript_1659CA:: @ 81659CA
 	faceplayer
 	compare_var_to_value VAR_0x405A, 1
 	goto_if 1, EventScript_1659EC
-	loadword 0, gUnknown_817DB39
-	callstd 4
+	msgbox gUnknown_817DB39
 	closemessage
 	applymovement 3, Movement_1A75E5
 	waitmovement 0
@@ -108,8 +100,7 @@ ViridianCity_EventScript_1659CA:: @ 81659CA
 	end
 
 EventScript_1659EC:: @ 81659EC
-	loadword 0, gUnknown_817DB78
-	callstd 4
+	msgbox gUnknown_817DB78
 	release
 	end
 
@@ -127,24 +118,20 @@ ViridianCity_EventScript_1659F6:: @ 81659F6
 	end
 
 EventScript_165A23:: @ 8165A23
-	loadword 0, gUnknown_817E046
-	callstd 5
+	msgbox gUnknown_817E046, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_165A40
-	loadword 0, gUnknown_817E0EA
-	callstd 4
+	msgbox gUnknown_817E0EA
 	release
 	end
 
 EventScript_165A40:: @ 8165A40
-	loadword 0, gUnknown_817E14E
-	callstd 4
+	msgbox gUnknown_817E14E
 	release
 	end
 
 EventScript_165A4A:: @ 8165A4A
-	loadword 0, gUnknown_817DF61
-	callstd 4
+	msgbox gUnknown_817DF61
 	release
 	end
 
@@ -154,14 +141,12 @@ EventScript_165A54:: @ 8165A54
 	end
 
 EventScript_165A5B:: @ 8165A5B
-	loadword 0, gUnknown_817DEEB
-	callstd 4
+	msgbox gUnknown_817DEEB
 	release
 	end
 
 EventScript_165A65:: @ 8165A65
-	loadword 0, gUnknown_817DE9B
-	callstd 4
+	msgbox gUnknown_817DE9B
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
@@ -172,8 +157,7 @@ EventScript_165A65:: @ 8165A65
 	end
 
 EventScript_165A84:: @ 8165A84
-	loadword 0, gUnknown_817DD03
-	callstd 4
+	msgbox gUnknown_817DD03
 	closemessage
 	release
 	end
@@ -181,8 +165,7 @@ EventScript_165A84:: @ 8165A84
 ViridianCity_EventScript_165A8F:: @ 8165A8F
 	lock
 	faceplayer
-	loadword 0, gUnknown_817DB98
-	callstd 5
+	msgbox gUnknown_817DB98, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_165AB0
 	compare_var_to_value VAR_RESULT, 0
@@ -190,14 +173,12 @@ ViridianCity_EventScript_165A8F:: @ 8165A8F
 	end
 
 EventScript_165AB0:: @ 8165AB0
-	loadword 0, gUnknown_817DBE4
-	callstd 4
+	msgbox gUnknown_817DBE4
 	release
 	end
 
 EventScript_165ABA:: @ 8165ABA
-	loadword 0, gUnknown_817DBD5
-	callstd 4
+	msgbox gUnknown_817DBD5
 	release
 	end
 
@@ -206,14 +187,12 @@ ViridianCity_EventScript_165AC4:: @ 8165AC4
 	faceplayer
 	compare_var_to_value VAR_0x4051, 0
 	goto_if 1, EventScript_165ADB
-	loadword 0, gUnknown_817DC99
-	callstd 4
+	msgbox gUnknown_817DC99
 	release
 	end
 
 EventScript_165ADB:: @ 8165ADB
-	loadword 0, gUnknown_817DC4E
-	callstd 4
+	msgbox gUnknown_817DC4E
 	closemessage
 	applymovement 5, Movement_1A75E5
 	waitmovement 0
@@ -227,8 +206,7 @@ ViridianCity_EventScript_165AF0:: @ 8165AF0
 ViridianCity_EventScript_165AF6:: @ 8165AF6
 	lockall
 	textcolor 0
-	loadword 0, gUnknown_817DD03
-	callstd 4
+	msgbox gUnknown_817DD03
 	closemessage
 	applymovement 255, Movement_165B0E
 	waitmovement 0
@@ -262,8 +240,7 @@ ViridianCity_EventScript_165B2E:: @ 8165B2E
 	end
 
 EventScript_165B4C:: @ 8165B4C
-	loadword 0, gUnknown_817DD4E
-	callstd 4
+	msgbox gUnknown_817DD4E
 	closemessage
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
@@ -273,12 +250,10 @@ EventScript_165B4C:: @ 8165B4C
 	waitstate
 	lock
 	faceplayer
-	loadword 0, gUnknown_817DE9B
-	callstd 4
+	msgbox gUnknown_817DE9B
 	setvar VAR_0x4051, 2
 	setorcopyvar VAR_0x8000, 366
 	setorcopyvar VAR_0x8001, 1
 	callstd 0
-	loadword 0, gUnknown_817DEEB
-	callstd 4
+	msgbox gUnknown_817DEEB
 	return

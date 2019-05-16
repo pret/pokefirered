@@ -18,8 +18,7 @@ FiveIsland_ResortGorgeous_MapScript2_1687FE:: @ 81687FE
 EventScript_168808:: @ 8168808
 	lockall
 	textcolor 1
-	loadword 0, gUnknown_818A7DB
-	callstd 4
+	msgbox gUnknown_818A7DB
 	closemessage
 	applymovement 8, Movement_1A75E9
 	waitmovement 0
@@ -41,6 +40,5 @@ Movement_168841:: @ 8168841
 	step_end
 
 FiveIsland_ResortGorgeous_EventScript_168844:: @ 8168844
-	loadword 0, gUnknown_818A7FE
-	callstd 3
+	msgbox gUnknown_818A7FE, 3
 	end

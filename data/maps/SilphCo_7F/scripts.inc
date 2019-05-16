@@ -45,14 +45,12 @@ EventScript_1619D4:: @ 81619D4
 	applymovement 255, Movement_1A75ED
 	applymovement 1, Movement_1A75DD
 	waitmovement 0
-	loadword 0, gUnknown_8176710
-	callstd 4
+	msgbox gUnknown_8176710
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_161A73
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_161A7F
-	loadword 0, gUnknown_8176727
-	callstd 4
+	msgbox gUnknown_8176727
 	setvar VAR_LAST_TALKED, 1
 	compare_var_to_value VAR_STARTER_MON, 2
 	call_if 1, EventScript_161A80
@@ -60,8 +58,7 @@ EventScript_1619D4:: @ 81619D4
 	call_if 1, EventScript_161A8B
 	compare_var_to_value VAR_STARTER_MON, 0
 	call_if 1, EventScript_161A96
-	loadword 0, gUnknown_8176827
-	callstd 4
+	msgbox gUnknown_8176827
 	closemessage
 	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
 	compare_var_to_value VAR_0x4001, 0
@@ -135,8 +132,7 @@ SilphCo_7F_EventScript_161AC8:: @ 8161AC8
 	faceplayer
 	checkflag FLAG_0x246
 	goto_if 1, EventScript_161B8D
-	loadword 0, gUnknown_8176266
-	callstd 4
+	msgbox gUnknown_8176266
 	setvar VAR_0x4001, 131
 	givemon SPECIES_LAPRAS, 25, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 0
@@ -155,8 +151,7 @@ EventScript_161B12:: @ 8161B12
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_161B7E
 	call EventScript_1A8C27
@@ -173,8 +168,7 @@ EventScript_161B45:: @ 8161B45
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_161B73
 	call EventScript_1A8C33
@@ -192,15 +186,13 @@ EventScript_161B7D:: @ 8161B7D
 
 EventScript_161B7E:: @ 8161B7E
 	textcolor 0
-	loadword 0, gUnknown_8176305
-	callstd 4
+	msgbox gUnknown_8176305
 	setflag FLAG_0x246
 	release
 	end
 
 EventScript_161B8D:: @ 8161B8D
-	loadword 0, gUnknown_81763DD
-	callstd 4
+	msgbox gUnknown_81763DD
 	release
 	end
 
@@ -209,14 +201,12 @@ SilphCo_7F_EventScript_161B97:: @ 8161B97
 	faceplayer
 	compare_var_to_value VAR_0x4060, 1
 	goto_if 4, EventScript_161BAE
-	loadword 0, gUnknown_8176444
-	callstd 4
+	msgbox gUnknown_8176444
 	release
 	end
 
 EventScript_161BAE:: @ 8161BAE
-	loadword 0, gUnknown_8176486
-	callstd 4
+	msgbox gUnknown_8176486
 	release
 	end
 
@@ -225,14 +215,12 @@ SilphCo_7F_EventScript_161BB8:: @ 8161BB8
 	faceplayer
 	compare_var_to_value VAR_0x4060, 1
 	goto_if 4, EventScript_161BCF
-	loadword 0, gUnknown_81764C2
-	callstd 4
+	msgbox gUnknown_81764C2
 	release
 	end
 
 EventScript_161BCF:: @ 8161BCF
-	loadword 0, gUnknown_8176501
-	callstd 4
+	msgbox gUnknown_8176501
 	release
 	end
 
@@ -241,42 +229,35 @@ SilphCo_7F_EventScript_161BD9:: @ 8161BD9
 	faceplayer
 	compare_var_to_value VAR_0x4060, 1
 	goto_if 4, EventScript_161BF0
-	loadword 0, gUnknown_8176532
-	callstd 4
+	msgbox gUnknown_8176532
 	release
 	end
 
 EventScript_161BF0:: @ 8161BF0
-	loadword 0, gUnknown_8176573
-	callstd 4
+	msgbox gUnknown_8176573
 	release
 	end
 
 SilphCo_7F_EventScript_161BFA:: @ 8161BFA
-	loadword 0, gUnknown_8176954
-	callstd 3
+	msgbox gUnknown_8176954, 3
 	end
 
 SilphCo_7F_EventScript_161C03:: @ 8161C03
 	trainerbattle 0, 342, 0, Text_1765E2, Text_17660C
-	loadword 0, gUnknown_8176616
-	callstd 6
+	msgbox gUnknown_8176616, 6
 	end
 
 SilphCo_7F_EventScript_161C1A:: @ 8161C1A
 	trainerbattle 0, 383, 0, Text_176643, Text_176669
-	loadword 0, gUnknown_8176681
-	callstd 6
+	msgbox gUnknown_8176681, 6
 	end
 
 SilphCo_7F_EventScript_161C31:: @ 8161C31
 	trainerbattle 0, 384, 0, Text_1766B3, Text_1766D7
-	loadword 0, gUnknown_81766E5
-	callstd 6
+	msgbox gUnknown_81766E5, 6
 	end
 
 SilphCo_7F_EventScript_161C48:: @ 8161C48
 	trainerbattle 0, 385, 0, Text_176586, Text_1765A5
-	loadword 0, gUnknown_81765B1
-	callstd 6
+	msgbox gUnknown_81765B1, 6
 	end

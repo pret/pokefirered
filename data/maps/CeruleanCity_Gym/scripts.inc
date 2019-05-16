@@ -8,8 +8,7 @@ CeruleanCity_Gym_EventScript_16AAA1:: @ 816AAA1
 	trainerbattle 1, 415, 0, Text_1921EF, Text_19242D, EventScript_16AAD3
 	checkflag FLAG_0x297
 	goto_if 0, EventScript_16AAF9
-	loadword 0, gUnknown_81922BF
-	callstd 4
+	msgbox gUnknown_81922BF
 	release
 	end
 
@@ -26,29 +25,25 @@ EventScript_16AAD3:: @ 816AAD3
 	end
 
 EventScript_16AAF9:: @ 816AAF9
-	loadword 0, gUnknown_81922F7
-	callstd 4
+	msgbox gUnknown_81922F7
 	checkitemspace ITEM_TM03, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16AB3A
 	additem ITEM_TM03, 1
 	giveitemfanfaremsg gUnknown_81923F1, ITEM_TM03
 	setflag FLAG_0x297
-	loadword 0, gUnknown_81922BF
-	callstd 4
+	msgbox gUnknown_81922BF
 	release
 	end
 
 EventScript_16AB3A:: @ 816AB3A
-	loadword 0, gUnknown_819240E
-	callstd 4
+	msgbox gUnknown_819240E
 	release
 	end
 
 CeruleanCity_Gym_EventScript_16AB44:: @ 816AB44
 	trainerbattle 0, 150, 0, Text_192481, Text_1924D0
-	loadword 0, gUnknown_81924E4
-	callstd 6
+	msgbox gUnknown_81924E4, 6
 	end
 
 CeruleanCity_Gym_EventScript_16AB5B:: @ 816AB5B
@@ -56,8 +51,7 @@ CeruleanCity_Gym_EventScript_16AB5B:: @ 816AB5B
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_8192556
-	callstd 6
+	msgbox gUnknown_8192556, 6
 	end
 
 CeruleanCity_Gym_EventScript_16AB7F:: @ 816AB7F
@@ -65,14 +59,12 @@ CeruleanCity_Gym_EventScript_16AB7F:: @ 816AB7F
 	faceplayer
 	checkflag FLAG_0x4B1
 	goto_if 1, EventScript_16AB94
-	loadword 0, gUnknown_81925AC
-	callstd 4
+	msgbox gUnknown_81925AC
 	release
 	end
 
 EventScript_16AB94:: @ 816AB94
-	loadword 0, gUnknown_8192688
-	callstd 4
+	msgbox gUnknown_8192688
 	release
 	end
 
@@ -80,13 +72,11 @@ CeruleanCity_Gym_EventScript_16AB9E:: @ 816AB9E
 	lockall
 	checkflag FLAG_0x821
 	goto_if 1, EventScript_16ABB2
-	loadword 0, gUnknown_81926E1
-	callstd 4
+	msgbox gUnknown_81926E1
 	releaseall
 	end
 
 EventScript_16ABB2:: @ 816ABB2
-	loadword 0, gUnknown_8192719
-	callstd 4
+	msgbox gUnknown_8192719
 	releaseall
 	end

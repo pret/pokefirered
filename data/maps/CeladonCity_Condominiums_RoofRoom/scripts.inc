@@ -2,8 +2,7 @@ CeladonCity_Condominiums_RoofRoom_MapScripts:: @ 816C463
 	.byte 0
 
 CeladonCity_Condominiums_RoofRoom_EventScript_16C464:: @ 816C464
-	loadword 0, gUnknown_81964D7
-	callstd 2
+	msgbox gUnknown_81964D7, 2
 	end
 
 CeladonCity_Condominiums_RoofRoom_EventScript_16C46D:: @ 816C46D
@@ -27,8 +26,7 @@ EventScript_16C4A6:: @ 816C4A6
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C514
 	call EventScript_1A8C27
@@ -43,8 +41,7 @@ EventScript_16C4DA:: @ 816C4DA
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C509
 	call EventScript_1A8C33
@@ -62,14 +59,12 @@ EventScript_16C514:: @ 816C514
 	end
 
 CeladonCity_Condominiums_RoofRoom_EventScript_16C519:: @ 816C519
-	loadword 0, gUnknown_81967E3
-	callstd 3
+	msgbox gUnknown_81967E3, 3
 	end
 
 CeladonCity_Condominiums_RoofRoom_EventScript_16C522:: @ 816C522
 	lockall
-	loadword 0, gUnknown_81965C2
-	callstd 4
+	msgbox gUnknown_81965C2
 	message Text_1965F4
 	waitmessage
 	setvar VAR_0x8004, 4
@@ -105,20 +100,17 @@ EventScript_16C578:: @ 816C578
 	end
 
 EventScript_16C5C0:: @ 816C5C0
-	loadword 0, gUnknown_8196617
-	callstd 4
+	msgbox gUnknown_8196617
 	goto EventScript_16C578
 	end
 
 EventScript_16C5CE:: @ 816C5CE
-	loadword 0, gUnknown_8196695
-	callstd 4
+	msgbox gUnknown_8196695
 	goto EventScript_16C578
 	end
 
 EventScript_16C5DC:: @ 816C5DC
-	loadword 0, gUnknown_819673C
-	callstd 4
+	msgbox gUnknown_819673C
 	goto EventScript_16C578
 	end
 

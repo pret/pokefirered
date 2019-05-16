@@ -14,13 +14,11 @@ EventScript_163D94:: @ 8163D94
 FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	lockall
 	textcolor 1
-	loadword 0, gUnknown_817B04F
-	callstd 4
+	msgbox gUnknown_817B04F
 	applymovement 1, Movement_163EE8
 	waitmovement 0
 	textcolor 0
-	loadword 0, gUnknown_817B0B9
-	callstd 4
+	msgbox gUnknown_817B0B9
 	closemessage
 	playse SE_PIN
 	applymovement 3, Movement_1A75DB
@@ -30,8 +28,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	applymovement 3, Movement_1A75DD
 	waitmovement 0
 	textcolor 1
-	loadword 0, gUnknown_817B109
-	callstd 4
+	msgbox gUnknown_817B109
 	closemessage
 	applymovement 3, Movement_1A75EB
 	waitmovement 0
@@ -47,18 +44,15 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	waitmovement 0
 	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0
 	textcolor 0
-	loadword 0, gUnknown_817B20B
-	callstd 4
+	msgbox gUnknown_817B20B
 	setvar VAR_LAST_TALKED, 4
 	trainerbattle 3, 539, 0, Text_17B251
 	applymovement 3, Movement_163F1B
 	waitmovement 0
 	textcolor 1
-	loadword 0, gUnknown_817B269
-	callstd 4
+	msgbox gUnknown_817B269
 	textcolor 0
-	loadword 0, gUnknown_817B2EF
-	callstd 4
+	msgbox gUnknown_817B2EF
 	textcolor 1
 	message Text_17B313
 	waitmessage
@@ -69,8 +63,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	applymovement 1, Movement_163EEE
 	waitmovement 0
 	textcolor 0
-	loadword 0, gUnknown_817B399
-	callstd 4
+	msgbox gUnknown_817B399
 	closemessage
 	applymovement 3, Movement_163F1D
 	applymovement 255, Movement_163EE2
@@ -87,8 +80,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	applymovement 255, Movement_1A75E7
 	waitmovement 0
 	textcolor 1
-	loadword 0, gUnknown_817B457
-	callstd 4
+	msgbox gUnknown_817B457
 	setflag FLAG_0x08E
 	clearflag FLAG_0x08C
 	setvar VAR_0x4080, 1
@@ -196,6 +188,5 @@ Movement_163F23:: @ 8163F23
 	step_end
 
 FourIsland_IcefallCave_Back_EventScript_163F25:: @ 8163F25
-	loadword 0, gUnknown_817B457
-	callstd 2
+	msgbox gUnknown_817B457, 2
 	end

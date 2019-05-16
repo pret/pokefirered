@@ -2,13 +2,11 @@ VermilionCity_Mart_MapScripts:: @ 816B653
 	.byte 0
 
 VermilionCity_Mart_EventScript_16B654:: @ 816B654
-	loadword 0, gUnknown_8194B65
-	callstd 2
+	msgbox gUnknown_8194B65, 2
 	end
 
 VermilionCity_Mart_EventScript_16B65D:: @ 816B65D
-	loadword 0, gUnknown_8194A77
-	callstd 2
+	msgbox gUnknown_8194A77, 2
 	end
 
 VermilionCity_Mart_EventScript_16B666:: @ 816B666
@@ -20,8 +18,7 @@ VermilionCity_Mart_EventScript_16B666:: @ 816B666
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16B68C
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 

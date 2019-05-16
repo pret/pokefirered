@@ -13,12 +13,10 @@ EventScript_168B63:: @ 8168B63
 
 SixIsland_RuinValley_EventScript_168B6D:: @ 8168B6D
 	lock
-	loadword 0, gUnknown_818BD47
-	callstd 4
+	msgbox gUnknown_818BD47
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_818BD7A
-	callstd 4
+	msgbox gUnknown_818BD7A
 	applymovement 1, Movement_1A75E5
 	waitmovement 0
 	release
@@ -28,25 +26,21 @@ SixIsland_RuinValley_EventScript_168B94:: @ 8168B94
 	lockall
 	checkflag FLAG_0x2E3
 	goto_if 1, EventScript_168BC1
-	loadword 0, gUnknown_818BDC0
-	callstd 5
+	msgbox gUnknown_818BDC0, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_168BCB
-	loadword 0, gUnknown_818BE11
-	callstd 4
+	msgbox gUnknown_818BE11
 	braillemessage gUnknown_81A929B
 	waitbuttonpress
 	releaseall
 	end
 
 EventScript_168BC1:: @ 8168BC1
-	loadword 0, gUnknown_818BE4B
-	callstd 4
+	msgbox gUnknown_818BE4B
 	releaseall
 	end
 
 EventScript_168BCB:: @ 8168BCB
-	loadword 0, gUnknown_818BDF9
-	callstd 4
+	msgbox gUnknown_818BDF9
 	releaseall
 	end

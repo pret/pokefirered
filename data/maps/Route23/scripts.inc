@@ -124,6 +124,5 @@ Route23_EventScript_168601:: @ 8168601
 	end
 
 Route23_EventScript_168616:: @ 8168616
-	loadword 0, gUnknown_8188C19
-	callstd 3
+	msgbox gUnknown_8188C19, 3
 	end

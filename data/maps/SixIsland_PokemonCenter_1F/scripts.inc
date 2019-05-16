@@ -31,8 +31,7 @@ EventScript_171D97:: @ 8171D97
 	delay 25
 	applymovement 2, Movement_171DF9
 	waitmovement 0
-	loadword 0, gUnknown_81A3F30
-	callstd 4
+	msgbox gUnknown_81A3F30
 	closemessage
 	applymovement 255, Movement_171E02
 	applymovement 2, Movement_171DFE
@@ -72,11 +71,9 @@ SixIsland_PokemonCenter_1F_EventScript_171E05:: @ 8171E05
 	end
 
 SixIsland_PokemonCenter_1F_EventScript_171E0E:: @ 8171E0E
-	loadword 0, gUnknown_81A3E02
-	callstd 2
+	msgbox gUnknown_81A3E02, 2
 	end
 
 SixIsland_PokemonCenter_1F_EventScript_171E17:: @ 8171E17
-	loadword 0, gUnknown_81A3E87
-	callstd 2
+	msgbox gUnknown_81A3E87, 2
 	end

@@ -2,8 +2,7 @@ CinnabarIsland_PokemonLab_Lounge_MapScripts:: @ 816E2B8
 	.byte 0
 
 CinnabarIsland_PokemonLab_Lounge_EventScript_16E2B9:: @ 816E2B9
-	loadword 0, gUnknown_8199FB3
-	callstd 2
+	msgbox gUnknown_8199FB3, 2
 	end
 
 CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
@@ -13,8 +12,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
 	call EventScript_1A8CAD
 	checkflag FLAG_0x274
 	goto_if 1, EventScript_16E334
-	loadword 0, gUnknown_81A59FE
-	callstd 5
+	msgbox gUnknown_81A59FE, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E31C
 	call EventScript_1A8CBD
@@ -24,28 +22,24 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
 	compare_var_to_var VAR_RESULT, VAR_0x8009
 	goto_if 5, EventScript_16E326
 	call EventScript_1A8CD9
-	loadword 0, gUnknown_81A5A9D
-	callstd 4
+	msgbox gUnknown_81A5A9D
 	setflag FLAG_0x274
 	release
 	end
 
 EventScript_16E31C:: @ 816E31C
-	loadword 0, gUnknown_81A5A4E
-	callstd 4
+	msgbox gUnknown_81A5A4E
 	release
 	end
 
 EventScript_16E326:: @ 816E326
 	getspeciesname 0, 32777
-	loadword 0, gUnknown_81A5A6A
-	callstd 4
+	msgbox gUnknown_81A5A6A
 	release
 	end
 
 EventScript_16E334:: @ 816E334
-	loadword 0, gUnknown_81A5AA5
-	callstd 4
+	msgbox gUnknown_81A5AA5
 	release
 	end
 
@@ -58,8 +52,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	copyvar VAR_0x8009, VAR_RESULT
 	checkflag FLAG_0x275
 	goto_if 1, EventScript_16E3D4
-	loadword 0, gUnknown_81A5AD6
-	callstd 5
+	msgbox gUnknown_81A5AD6, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E3BC
 	special sub_80BF8FC
@@ -77,27 +70,23 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	special sub_8053D68
 	special sub_8054440
 	waitstate
-	loadword 0, gUnknown_81A5B4A
-	callstd 4
+	msgbox gUnknown_81A5B4A
 	setflag FLAG_0x275
 	release
 	end
 
 EventScript_16E3BC:: @ 816E3BC
-	loadword 0, gUnknown_81A5B08
-	callstd 4
+	msgbox gUnknown_81A5B08
 	release
 	end
 
 EventScript_16E3C6:: @ 816E3C6
 	getspeciesname 0, 32777
-	loadword 0, gUnknown_81A5B18
-	callstd 4
+	msgbox gUnknown_81A5B18
 	release
 	end
 
 EventScript_16E3D4:: @ 816E3D4
-	loadword 0, gUnknown_81A5B60
-	callstd 4
+	msgbox gUnknown_81A5B60
 	release
 	end

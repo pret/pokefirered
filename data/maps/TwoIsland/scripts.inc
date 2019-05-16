@@ -132,8 +132,7 @@ EventScript_1676A6:: @ 81676A6
 
 EventScript_1676D3:: @ 81676D3
 	pokemart Items_1676E4
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -147,8 +146,7 @@ Items_1676E4:: @ 81676E4
 
 EventScript_1676EC:: @ 81676EC
 	pokemart Items_1676FC
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -164,8 +162,7 @@ Items_1676FC:: @ 81676FC
 
 EventScript_167708:: @ 8167708
 	pokemart Items_167718
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -183,8 +180,7 @@ Items_167718:: @ 8167718
 
 EventScript_167728:: @ 8167728
 	pokemart Items_167738
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -203,13 +199,11 @@ Items_167738:: @ 8167738
 	end
 
 TwoIsland_EventScript_16774C:: @ 816774C
-	loadword 0, gUnknown_8181D2F
-	callstd 2
+	msgbox gUnknown_8181D2F, 2
 	end
 
 TwoIsland_EventScript_167755:: @ 8167755
-	loadword 0, gUnknown_8181DCA
-	callstd 2
+	msgbox gUnknown_8181DCA, 2
 	end
 
 TwoIsland_EventScript_16775E:: @ 816775E
@@ -218,37 +212,30 @@ TwoIsland_EventScript_16775E:: @ 816775E
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_8181E47
-	callstd 4
+	msgbox gUnknown_8181E47
 	release
 	end
 
 TwoIsland_EventScript_167777:: @ 8167777
-	loadword 0, gUnknown_8181F28
-	callstd 2
+	msgbox gUnknown_8181F28, 2
 	end
 
 TwoIsland_EventScript_167780:: @ 8167780
-	loadword 0, gUnknown_8181F5D
-	callstd 2
+	msgbox gUnknown_8181F5D, 2
 	end
 
 TwoIsland_EventScript_167789:: @ 8167789
-	loadword 0, gUnknown_8181FCE
-	callstd 2
+	msgbox gUnknown_8181FCE, 2
 	end
 
 TwoIsland_EventScript_167792:: @ 8167792
-	loadword 0, gUnknown_8181A88
-	callstd 3
+	msgbox gUnknown_8181A88, 3
 	end
 
 TwoIsland_EventScript_16779B:: @ 816779B
-	loadword 0, gUnknown_8181AA7
-	callstd 3
+	msgbox gUnknown_8181AA7, 3
 	end
 
 TwoIsland_EventScript_1677A4:: @ 81677A4
-	loadword 0, gUnknown_8181AC8
-	callstd 3
+	msgbox gUnknown_8181AC8, 3
 	end

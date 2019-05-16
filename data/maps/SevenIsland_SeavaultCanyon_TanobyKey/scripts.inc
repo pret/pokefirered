@@ -137,8 +137,7 @@ EventScript_164F8A:: @ 8164F8A
 
 EventScript_164F8C:: @ 8164F8C
 	call EventScript_164F51
-	loadword 0, gUnknown_817D31B
-	callstd 4
+	msgbox gUnknown_817D31B
 	setflag FLAG_0x849
 	releaseall
 	end

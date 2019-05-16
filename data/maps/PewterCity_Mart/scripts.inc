@@ -2,13 +2,11 @@ PewterCity_Mart_MapScripts:: @ 816A6CD
 	.byte 0
 
 PewterCity_Mart_EventScript_16A6CE:: @ 816A6CE
-	loadword 0, gUnknown_81914DE
-	callstd 2
+	msgbox gUnknown_81914DE, 2
 	end
 
 PewterCity_Mart_EventScript_16A6D7:: @ 816A6D7
-	loadword 0, gUnknown_8191541
-	callstd 2
+	msgbox gUnknown_8191541, 2
 	end
 
 PewterCity_Mart_EventScript_16A6E0:: @ 816A6E0
@@ -20,8 +18,7 @@ PewterCity_Mart_EventScript_16A6E0:: @ 816A6E0
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16A708
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 

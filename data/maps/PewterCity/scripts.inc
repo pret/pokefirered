@@ -10,14 +10,12 @@ PewterCity_MapScript1_165B94:: @ 8165B94
 PewterCity_EventScript_165B9D:: @ 8165B9D
 	lock
 	faceplayer
-	loadword 0, gUnknown_817E67E
-	callstd 4
+	msgbox gUnknown_817E67E
 	closemessage
 	playbgm BGM_FRLG_FOLLOW_ME, 0
 	compare_var_to_value VAR_FACING, 4
 	call_if 1, EventScript_165BD3
-	loadword 0, gUnknown_817E6C7
-	callstd 4
+	msgbox gUnknown_817E6C7
 	closemessage
 	applymovement 5, Movement_165D83
 	waitmovement 0
@@ -444,8 +442,7 @@ PewterCity_EventScript_165DB2:: @ 8165DB2
 
 EventScript_165DBE:: @ 8165DBE
 	textcolor 0
-	loadword 0, gUnknown_817E67E
-	callstd 4
+	msgbox gUnknown_817E67E
 	closemessage
 	playbgm BGM_FRLG_FOLLOW_ME, 0
 	compare_var_to_value VAR_0x4001, 0
@@ -454,8 +451,7 @@ EventScript_165DBE:: @ 8165DBE
 	call_if 1, EventScript_165E26
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_165E42
-	loadword 0, gUnknown_817E6C7
-	callstd 4
+	msgbox gUnknown_817E6C7
 	closemessage
 	applymovement 5, Movement_165D83
 	waitmovement 0
@@ -1029,19 +1025,16 @@ Movement_166042:: @ 8166042
 	step_end
 
 PewterCity_EventScript_166075:: @ 8166075
-	loadword 0, gUnknown_817E436
-	callstd 2
+	msgbox gUnknown_817E436, 2
 	end
 
 PewterCity_EventScript_16607E:: @ 816607E
 	lock
 	faceplayer
-	loadword 0, gUnknown_817E53E
-	callstd 5
+	msgbox gUnknown_817E53E, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_166136
-	loadword 0, gUnknown_817E589
-	callstd 4
+	msgbox gUnknown_817E589
 	closemessage
 	delay 10
 	playbgm BGM_FRLG_FOLLOW_ME, 0
@@ -1053,8 +1046,7 @@ PewterCity_EventScript_16607E:: @ 816607E
 	call_if 1, EventScript_166112
 	compare_var_to_value VAR_FACING, 4
 	call_if 1, EventScript_166124
-	loadword 0, gUnknown_817E5AC
-	callstd 4
+	msgbox gUnknown_817E5AC
 	closemessage
 	delay 10
 	applymovement 2, Movement_16621C
@@ -1090,8 +1082,7 @@ EventScript_166124:: @ 8166124
 	return
 
 EventScript_166136:: @ 8166136
-	loadword 0, gUnknown_817E55C
-	callstd 4
+	msgbox gUnknown_817E55C
 	release
 	end
 
@@ -1354,42 +1345,35 @@ PewterCity_EventScript_16622B:: @ 816622B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_817E49F
-	callstd 4
+	msgbox gUnknown_817E49F
 	release
 	end
 
 PewterCity_EventScript_166244:: @ 8166244
 	lock
 	faceplayer
-	loadword 0, gUnknown_817E602
-	callstd 5
+	msgbox gUnknown_817E602, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_166263
-	loadword 0, gUnknown_817E644
-	callstd 4
+	msgbox gUnknown_817E644
 	release
 	end
 
 EventScript_166263:: @ 8166263
-	loadword 0, gUnknown_817E626
-	callstd 4
+	msgbox gUnknown_817E626
 	release
 	end
 
 PewterCity_EventScript_16626D:: @ 816626D
-	loadword 0, gUnknown_817E6F6
-	callstd 3
+	msgbox gUnknown_817E6F6, 3
 	end
 
 PewterCity_EventScript_166276:: @ 8166276
-	loadword 0, gUnknown_817E748
-	callstd 3
+	msgbox gUnknown_817E748, 3
 	end
 
 PewterCity_EventScript_16627F:: @ 816627F
-	loadword 0, gUnknown_817E7C5
-	callstd 3
+	msgbox gUnknown_817E7C5, 3
 	end
 
 PewterCity_EventScript_166288:: @ 8166288
@@ -1397,14 +1381,12 @@ PewterCity_EventScript_166288:: @ 8166288
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_817E7DE
-	callstd 4
+	msgbox gUnknown_817E7DE
 	releaseall
 	end
 
 PewterCity_EventScript_1662A0:: @ 81662A0
-	loadword 0, gUnknown_817E824
-	callstd 3
+	msgbox gUnknown_817E824, 3
 	end
 
 PewterCity_EventScript_1662A9:: @ 81662A9
@@ -1450,8 +1432,7 @@ EventScript_1662DE:: @ 81662DE
 	waitmovement 0
 	applymovement 7, Movement_1A75DD
 	waitmovement 0
-	loadword 0, gUnknown_817E902
-	callstd 4
+	msgbox gUnknown_817E902
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_1663D5
 	compare_var_to_value VAR_0x4001, 1
@@ -1460,23 +1441,19 @@ EventScript_1662DE:: @ 81662DE
 	call_if 1, EventScript_1663E6
 	compare_var_to_value VAR_0x4001, 3
 	call_if 1, EventScript_1663FC
-	loadword 0, gUnknown_817E90C
-	callstd 4
+	msgbox gUnknown_817E90C
 	textcolor 3
 	playfanfare BGM_FRLG_ME_KEYITEM
 	message Text_17E970
 	waitmessage
 	waitfanfare
-	loadword 0, gUnknown_817E99D
-	callstd 4
+	msgbox gUnknown_817E99D
 	special sub_80699BC
 	signmsg
-	loadword 0, gUnknown_817E9C7
-	callstd 4
+	msgbox gUnknown_817E9C7
 	normalmsg
 	call EventScript_1A6675
-	loadword 0, gUnknown_817EA06
-	callstd 4
+	msgbox gUnknown_817EA06
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_166412
@@ -1488,8 +1465,7 @@ EventScript_1662DE:: @ 81662DE
 	call_if 1, EventScript_166433
 	delay 30
 	textcolor 3
-	loadword 0, gUnknown_817EA36
-	callstd 4
+	msgbox gUnknown_817EA36
 	closemessage
 	removeobject 7
 	setflag FLAG_0x82F

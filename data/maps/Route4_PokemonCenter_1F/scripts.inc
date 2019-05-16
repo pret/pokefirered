@@ -9,14 +9,12 @@ Route4_PokemonCenter_1F_MapScript1_16F744:: @ 816F744
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F74B:: @ 816F74B
-	loadword 0, gUnknown_819D9D4
-	callstd 2
+	msgbox gUnknown_819D9D4, 2
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F754:: @ 816F754
 	lock
-	loadword 0, gUnknown_819DA3A
-	callstd 4
+	msgbox gUnknown_819DA3A
 	release
 	end
 
@@ -34,14 +32,12 @@ Route4_PokemonCenter_1F_EventScript_16F75F:: @ 816F75F
 	end
 
 EventScript_16F786:: @ 816F786
-	loadword 0, gUnknown_819DA9A
-	callstd 5
+	msgbox gUnknown_819DA9A, 5
 	goto EventScript_16F7A2
 	end
 
 EventScript_16F794:: @ 816F794
-	loadword 0, gUnknown_819DB34
-	callstd 5
+	msgbox gUnknown_819DB34, 5
 	goto EventScript_16F7A2
 	end
 
@@ -64,8 +60,7 @@ EventScript_16F7A2:: @ 816F7A2
 
 EventScript_16F7F6:: @ 816F7F6
 	call EventScript_16F86F
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16F861
 	call EventScript_1A8C27
@@ -80,8 +75,7 @@ EventScript_16F7F6:: @ 816F7F6
 
 EventScript_16F822:: @ 816F822
 	call EventScript_16F86F
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16F84B
 	fadescreen 1
@@ -128,8 +122,7 @@ EventScript_16F86F:: @ 816F86F
 	return
 
 EventScript_16F888:: @ 816F888
-	loadword 0, gUnknown_819DC07
-	callstd 4
+	msgbox gUnknown_819DC07
 	hidemoneybox
 	.byte 0
 	.byte 0
@@ -137,8 +130,7 @@ EventScript_16F888:: @ 816F888
 	end
 
 EventScript_16F895:: @ 816F895
-	loadword 0, gUnknown_819DC78
-	callstd 4
+	msgbox gUnknown_819DC78
 	hidemoneybox
 	.byte 0
 	.byte 0
@@ -146,15 +138,13 @@ EventScript_16F895:: @ 816F895
 	end
 
 EventScript_16F8A2:: @ 816F8A2
-	loadword 0, gUnknown_819DC9A
-	callstd 4
+	msgbox gUnknown_819DC9A
 	release
 	end
 
 EventScript_16F8AC:: @ 816F8AC
 	textcolor 0
-	loadword 0, gUnknown_819DC3E
-	callstd 4
+	msgbox gUnknown_819DC3E
 	hidemoneybox
 	.byte 0
 	.byte 0
@@ -169,13 +159,11 @@ Route4_PokemonCenter_1F_EventScript_16F8BB:: @ 816F8BB
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F8C4:: @ 816F8C4
-	loadword 0, gUnknown_819DCDB
-	callstd 2
+	msgbox gUnknown_819DCDB, 2
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F8CD:: @ 816F8CD
 	lock
-	loadword 0, gUnknown_819DD54
-	callstd 4
+	msgbox gUnknown_819DD54
 	release
 	end

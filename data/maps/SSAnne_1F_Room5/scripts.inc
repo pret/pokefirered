@@ -3,6 +3,5 @@ SSAnne_1F_Room5_MapScripts:: @ 8160C66
 
 SSAnne_1F_Room5_EventScript_160C67:: @ 8160C67
 	trainerbattle 0, 422, 0, Text_173BD1, Text_173BFA
-	loadword 0, gUnknown_8173C30
-	callstd 6
+	msgbox gUnknown_8173C30, 6
 	end

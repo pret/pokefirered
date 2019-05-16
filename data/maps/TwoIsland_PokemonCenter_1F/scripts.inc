@@ -15,11 +15,9 @@ TwoIsland_PokemonCenter_1F_EventScript_1717C3:: @ 81717C3
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_1717CC:: @ 81717CC
-	loadword 0, gUnknown_81A2E59
-	callstd 2
+	msgbox gUnknown_81A2E59, 2
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_1717D5:: @ 81717D5
-	loadword 0, gUnknown_81A2EBE
-	callstd 2
+	msgbox gUnknown_81A2EBE, 2
 	end

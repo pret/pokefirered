@@ -40,30 +40,26 @@ ThreeIsland_EventScript_1677E5:: @ 81677E5
 EventScript_167806:: @ 8167806
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_81827F1
-	callstd 4
+	msgbox gUnknown_81827F1
 	release
 	end
 
 EventScript_16781A:: @ 816781A
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_818275A
-	callstd 4
+	msgbox gUnknown_818275A
 	checkitemspace ITEM_FULL_RESTORE, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_167865
 	giveitemfanfaremsg gUnknown_81827BE, ITEM_FULL_RESTORE
 	additem ITEM_FULL_RESTORE, 1
 	setflag FLAG_0x2FC
-	loadword 0, gUnknown_81827F1
-	callstd 4
+	msgbox gUnknown_81827F1
 	release
 	end
 
 EventScript_167865:: @ 8167865
-	loadword 0, gUnknown_81827DB
-	callstd 4
+	msgbox gUnknown_81827DB
 	release
 	end
 
@@ -74,8 +70,7 @@ EventScript_16786F:: @ 816786F
 	call_if 1, EventScript_167947
 	applymovement 1, Movement_167A1B
 	waitmovement 0
-	loadword 0, gUnknown_81820C0
-	callstd 4
+	msgbox gUnknown_81820C0
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_167952
 	compare_var_to_value VAR_0x4001, 1
@@ -84,8 +79,7 @@ EventScript_16786F:: @ 816786F
 	call_if 1, EventScript_16795D
 	applymovement 5, Movement_167A19
 	waitmovement 0
-	loadword 0, gUnknown_8182125
-	callstd 4
+	msgbox gUnknown_8182125
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_167931
 	compare_var_to_value VAR_0x4001, 1
@@ -94,8 +88,7 @@ EventScript_16786F:: @ 816786F
 	call_if 1, EventScript_167973
 	applymovement 2, Movement_167A1B
 	waitmovement 0
-	loadword 0, gUnknown_81821A9
-	callstd 4
+	msgbox gUnknown_81821A9
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_167952
 	compare_var_to_value VAR_0x4001, 1
@@ -104,8 +97,7 @@ EventScript_16786F:: @ 816786F
 	call_if 1, EventScript_16795D
 	applymovement 4, Movement_167A19
 	waitmovement 0
-	loadword 0, gUnknown_81821DC
-	callstd 4
+	msgbox gUnknown_81821DC
 	return
 
 EventScript_167931:: @ 8167931
@@ -154,8 +146,7 @@ ThreeIsland_EventScript_167989:: @ 8167989
 EventScript_1679A1:: @ 81679A1
 	applymovement 2, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_8182823
-	callstd 4
+	msgbox gUnknown_8182823
 	release
 	end
 
@@ -164,24 +155,19 @@ ThreeIsland_EventScript_1679B5:: @ 81679B5
 	textcolor 0
 	applymovement 1, Movement_167A1B
 	waitmovement 0
-	loadword 0, gUnknown_81821F1
-	callstd 4
+	msgbox gUnknown_81821F1
 	applymovement 3, Movement_167A19
 	waitmovement 0
-	loadword 0, gUnknown_818221F
-	callstd 4
+	msgbox gUnknown_818221F
 	applymovement 1, Movement_167A1B
 	waitmovement 0
-	loadword 0, gUnknown_8182275
-	callstd 4
+	msgbox gUnknown_8182275
 	applymovement 3, Movement_167A19
 	waitmovement 0
-	loadword 0, gUnknown_81822FB
-	callstd 4
+	msgbox gUnknown_81822FB
 	applymovement 1, Movement_167A1B
 	waitmovement 0
-	loadword 0, gUnknown_81823C7
-	callstd 4
+	msgbox gUnknown_81823C7
 	setvar VAR_0x407B, 3
 	releaseall
 	end
@@ -236,36 +222,30 @@ EventScript_167A59:: @ 8167A59
 	applymovement 5, Movement_167C57
 	waitmovement 0
 	playbgm BGM_FRLG_BOY_EYE, 0
-	loadword 0, gUnknown_81823ED
-	callstd 5
+	msgbox gUnknown_81823ED, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_167C35
-	loadword 0, gUnknown_818247D
-	callstd 4
+	msgbox gUnknown_818247D
 	setvar VAR_LAST_TALKED, 5
 	trainerbattle 3, 527, 0, Text_1824B7
 	applymovement 5, Movement_167C5C
 	waitmovement 0
-	loadword 0, gUnknown_81824CF
-	callstd 4
+	msgbox gUnknown_81824CF
 	closemessage
 	applymovement 7, Movement_167C57
 	waitmovement 0
 	playbgm BGM_FRLG_BOY_EYE, 0
-	loadword 0, gUnknown_81824EF
-	callstd 4
+	msgbox gUnknown_81824EF
 	setvar VAR_LAST_TALKED, 7
 	trainerbattle 3, 528, 0, Text_182521
 	applymovement 7, Movement_167C5C
 	waitmovement 0
-	loadword 0, gUnknown_8182536
-	callstd 4
+	msgbox gUnknown_8182536
 	closemessage
 	applymovement 4, Movement_167C57
 	waitmovement 0
 	playbgm BGM_FRLG_BOY_EYE, 0
-	loadword 0, gUnknown_8182582
-	callstd 4
+	msgbox gUnknown_8182582
 	setvar VAR_LAST_TALKED, 4
 	trainerbattle 3, 529, 0, Text_1825D4
 	applymovement 4, Movement_1A75E7
@@ -273,8 +253,7 @@ EventScript_167A59:: @ 8167A59
 	applymovement 6, Movement_1A75ED
 	applymovement 8, Movement_1A75ED
 	waitmovement 0
-	loadword 0, gUnknown_81825E2
-	callstd 4
+	msgbox gUnknown_81825E2
 	closemessage
 	delay 45
 	compare_var_to_value VAR_0x4001, 0
@@ -288,12 +267,10 @@ EventScript_167A59:: @ 8167A59
 	compare_var_to_value VAR_0x4001, 4
 	call_if 1, EventScript_167C1C
 	playbgm BGM_FRLG_BOY_EYE, 0
-	loadword 0, gUnknown_8182623
-	callstd 4
+	msgbox gUnknown_8182623
 	setvar VAR_LAST_TALKED, 3
 	trainerbattle 3, 742, 0, Text_1826B7
-	loadword 0, gUnknown_818271D
-	callstd 4
+	msgbox gUnknown_818271D
 	closemessage
 	fadescreen 1
 	removeobject 3
@@ -342,8 +319,7 @@ EventScript_167C1C:: @ 8167C1C
 	return
 
 EventScript_167C35:: @ 8167C35
-	loadword 0, gUnknown_8182453
-	callstd 4
+	msgbox gUnknown_8182453
 	closemessage
 	applymovement 255, Movement_167C55
 	waitmovement 0
@@ -408,13 +384,11 @@ Movement_167C71:: @ 8167C71
 	step_end
 
 ThreeIsland_EventScript_167C77:: @ 8167C77
-	loadword 0, gUnknown_81828EB
-	callstd 2
+	msgbox gUnknown_81828EB, 2
 	end
 
 ThreeIsland_EventScript_167C80:: @ 8167C80
-	loadword 0, gUnknown_818298A
-	callstd 2
+	msgbox gUnknown_818298A, 2
 	end
 
 ThreeIsland_EventScript_167C89:: @ 8167C89
@@ -422,18 +396,15 @@ ThreeIsland_EventScript_167C89:: @ 8167C89
 	faceplayer
 	waitse
 	playmoncry SPECIES_DODUO, 0
-	loadword 0, gUnknown_81829F4
-	callstd 4
+	msgbox gUnknown_81829F4
 	waitmoncry
 	release
 	end
 
 ThreeIsland_EventScript_167C9C:: @ 8167C9C
-	loadword 0, gUnknown_8182061
-	callstd 3
+	msgbox gUnknown_8182061, 3
 	end
 
 ThreeIsland_EventScript_167CA5:: @ 8167CA5
-	loadword 0, gUnknown_818208B
-	callstd 2
+	msgbox gUnknown_818208B, 2
 	end

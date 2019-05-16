@@ -15,16 +15,13 @@ ThreeIsland_PokemonCenter_1F_EventScript_171841:: @ 8171841
 	end
 
 ThreeIsland_PokemonCenter_1F_EventScript_17184A:: @ 817184A
-	loadword 0, gUnknown_81A303B
-	callstd 2
+	msgbox gUnknown_81A303B, 2
 	end
 
 ThreeIsland_PokemonCenter_1F_EventScript_171853:: @ 8171853
-	loadword 0, gUnknown_81A30A3
-	callstd 2
+	msgbox gUnknown_81A30A3, 2
 	end
 
 ThreeIsland_PokemonCenter_1F_EventScript_17185C:: @ 817185C
-	loadword 0, gUnknown_81A2FB5
-	callstd 2
+	msgbox gUnknown_81A2FB5, 2
 	end

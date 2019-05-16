@@ -15,16 +15,13 @@ VermilionCity_PokemonCenter_1F_EventScript_16B433:: @ 816B433
 	end
 
 VermilionCity_PokemonCenter_1F_EventScript_16B43C:: @ 816B43C
-	loadword 0, gUnknown_8194145
-	callstd 2
+	msgbox gUnknown_8194145, 2
 	end
 
 VermilionCity_PokemonCenter_1F_EventScript_16B445:: @ 816B445
-	loadword 0, gUnknown_81940AF
-	callstd 2
+	msgbox gUnknown_81940AF, 2
 	end
 
 VermilionCity_PokemonCenter_1F_EventScript_16B44E:: @ 816B44E
-	loadword 0, gUnknown_8194180
-	callstd 2
+	msgbox gUnknown_8194180, 2
 	end

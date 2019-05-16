@@ -21,11 +21,9 @@ EventScript_16821B:: @ 816821B
 	end
 
 Route18_EventScript_16821F:: @ 816821F
-	loadword 0, gUnknown_8187757
-	callstd 3
+	msgbox gUnknown_8187757, 3
 	end
 
 Route18_EventScript_168228:: @ 8168228
-	loadword 0, gUnknown_818777C
-	callstd 3
+	msgbox gUnknown_818777C, 3
 	end

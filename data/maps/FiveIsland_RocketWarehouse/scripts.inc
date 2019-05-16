@@ -21,20 +21,17 @@ FiveIsland_RocketWarehouse_EventScript_163F5A:: @ 8163F5A
 	lockall
 	checkflag FLAG_0x2D5
 	goto_if 1, EventScript_163F6E
-	loadword 0, gUnknown_817B4E3
-	callstd 4
+	msgbox gUnknown_817B4E3
 	releaseall
 	end
 
 EventScript_163F6E:: @ 8163F6E
-	loadword 0, gUnknown_817B512
-	callstd 4
+	msgbox gUnknown_817B512
 	releaseall
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163F78:: @ 8163F78
-	loadword 0, gUnknown_817BB15
-	callstd 3
+	msgbox gUnknown_817BB15, 3
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
@@ -49,21 +46,18 @@ FiveIsland_RocketWarehouse_EventScript_163F93:: @ 8163F93
 	trainerbattle 2, 545, 0, Text_17BBAF, Text_17BC55, EventScript_163FCD
 	checkflag FLAG_0x844
 	goto_if 1, EventScript_163FB7
-	loadword 0, gUnknown_817BCA3
-	callstd 6
+	msgbox gUnknown_817BCA3, 6
 	end
 
 EventScript_163FB7:: @ 8163FB7
 	setvar VAR_0x8004, 15
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_817BCD7
-	callstd 6
+	msgbox gUnknown_817BCD7, 6
 	end
 
 EventScript_163FCD:: @ 8163FCD
-	loadword 0, gUnknown_817BC6C
-	callstd 4
+	msgbox gUnknown_817BC6C
 	setflag FLAG_0x2DC
 	setorcopyvar VAR_0x8000, 374
 	setorcopyvar VAR_0x8001, 1
@@ -73,28 +67,24 @@ EventScript_163FCD:: @ 8163FCD
 
 FiveIsland_RocketWarehouse_EventScript_163FE6:: @ 8163FE6
 	trainerbattle 0, 541, 0, Text_17B54D, Text_17B585
-	loadword 0, gUnknown_817B5A6
-	callstd 6
+	msgbox gUnknown_817B5A6, 6
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163FFD:: @ 8163FFD
 	trainerbattle 0, 542, 0, Text_17B677, Text_17B6D9
-	loadword 0, gUnknown_817B6EF
-	callstd 6
+	msgbox gUnknown_817B6EF, 6
 	end
 
 FiveIsland_RocketWarehouse_EventScript_164014:: @ 8164014
 	trainerbattle 2, 544, 0, Text_17B8DA, Text_17B9FB, EventScript_16402F
-	loadword 0, gUnknown_817BA64
-	callstd 6
+	msgbox gUnknown_817BA64, 6
 	end
 
 EventScript_16402F:: @ 816402F
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 24
 	call_if 3, EventScript_164065
-	loadword 0, gUnknown_817BA64
-	callstd 4
+	msgbox gUnknown_817BA64
 	closemessage
 	fadescreen 1
 	removeobject 1
@@ -115,14 +105,12 @@ EventScript_164065:: @ 8164065
 
 FiveIsland_RocketWarehouse_EventScript_164070:: @ 8164070
 	trainerbattle 0, 516, 0, Text_17B5D6, Text_17B62F
-	loadword 0, gUnknown_817B642
-	callstd 6
+	msgbox gUnknown_817B642, 6
 	end
 
 FiveIsland_RocketWarehouse_EventScript_164087:: @ 8164087
 	trainerbattle 2, 543, 0, Text_17B72D, Text_17B79C, EventScript_1640A2
-	loadword 0, gUnknown_817B7FA
-	callstd 6
+	msgbox gUnknown_817B7FA, 6
 	end
 
 EventScript_1640A2:: @ 81640A2
@@ -130,8 +118,7 @@ EventScript_1640A2:: @ 81640A2
 	specialvar VAR_RESULT, player_get_direction_lower_nybble
 	compare_var_to_value VAR_RESULT, 2
 	call_if 1, EventScript_16412E
-	loadword 0, gUnknown_817B7AE
-	callstd 4
+	msgbox gUnknown_817B7AE
 	closemessage
 	compare_var_to_value VAR_0x8004, 24
 	call_if 3, EventScript_164144
@@ -153,8 +140,7 @@ EventScript_1640A2:: @ 81640A2
 	call_if 1, EventScript_164165
 	compare_var_to_value VAR_0x8004, 27
 	call_if 1, EventScript_164170
-	loadword 0, gUnknown_817B7FA
-	callstd 4
+	msgbox gUnknown_817B7FA
 	release
 	end
 

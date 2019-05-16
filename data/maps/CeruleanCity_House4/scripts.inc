@@ -26,15 +26,13 @@ CeruleanCity_House4_EventScript_16ACEF:: @ 816ACEF
 	end
 
 EventScript_16AD59:: @ 816AD59
-	loadword 0, gUnknown_8192AF0
-	callstd 4
+	msgbox gUnknown_8192AF0
 	release
 	end
 
 EventScript_16AD63:: @ 816AD63
 	call EventScript_16AE23
-	loadword 0, gUnknown_8192B43
-	callstd 4
+	msgbox gUnknown_8192B43
 	setorcopyvar VAR_0x8000, VAR_0x8008
 	setorcopyvar VAR_0x8001, 1
 	callstd 0
@@ -45,8 +43,7 @@ EventScript_16AD63:: @ 816AD63
 
 EventScript_16AD89:: @ 816AD89
 	call EventScript_16AE23
-	loadword 0, gUnknown_8192C07
-	callstd 4
+	msgbox gUnknown_8192C07
 	setorcopyvar VAR_0x8000, VAR_0x8008
 	setorcopyvar VAR_0x8001, 4
 	callstd 0
@@ -58,15 +55,13 @@ EventScript_16AD89:: @ 816AD89
 EventScript_16ADAF:: @ 816ADAF
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_8192CD5
-	callstd 4
+	msgbox gUnknown_8192CD5
 	release
 	end
 
 EventScript_16ADC3:: @ 816ADC3
 	call EventScript_16AE23
-	loadword 0, gUnknown_8192D4B
-	callstd 4
+	msgbox gUnknown_8192D4B
 	setorcopyvar VAR_0x8000, VAR_0x8008
 	setorcopyvar VAR_0x8001, 1
 	callstd 0
@@ -77,8 +72,7 @@ EventScript_16ADC3:: @ 816ADC3
 
 EventScript_16ADE9:: @ 816ADE9
 	call EventScript_16AE23
-	loadword 0, gUnknown_8192DE3
-	callstd 4
+	msgbox gUnknown_8192DE3
 	setorcopyvar VAR_0x8000, VAR_0x8008
 	setorcopyvar VAR_0x8001, 4
 	callstd 0
@@ -90,8 +84,7 @@ EventScript_16ADE9:: @ 816ADE9
 EventScript_16AE0F:: @ 816AE0F
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_8192EC5
-	callstd 4
+	msgbox gUnknown_8192EC5
 	release
 	end
 
@@ -106,7 +99,6 @@ EventScript_16AE23:: @ 816AE23
 	return
 
 EventScript_16AE45:: @ 816AE45
-	loadword 0, gUnknown_8192F2A
-	callstd 4
+	msgbox gUnknown_8192F2A
 	release
 	end

@@ -22,13 +22,11 @@ EventScript_168CC8:: @ 8168CC8
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_168CD2:: @ 8168CD2
-	loadword 0, gUnknown_818D50B
-	callstd 3
+	msgbox gUnknown_818D50B, 3
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_168CDB:: @ 8168CDB
-	loadword 0, gUnknown_818D53B
-	callstd 3
+	msgbox gUnknown_818D53B, 3
 	end
 
 gUnknown_8168CE4:: @ 8168CE4
@@ -42,8 +40,7 @@ PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
 	setvar VAR_0x8004, 1
 	special sub_80CA86C
 	playse SE_PC_ON
-	loadword 0, gUnknown_81A5420
-	callstd 4
+	msgbox gUnknown_81A5420
 	special sub_80EB6AC
 	waitstate
 	special sub_812B35C

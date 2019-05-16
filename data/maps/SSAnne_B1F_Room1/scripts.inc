@@ -3,12 +3,10 @@ SSAnne_B1F_Room1_MapScripts:: @ 8160D47
 
 SSAnne_B1F_Room1_EventScript_160D48:: @ 8160D48
 	trainerbattle 0, 224, 0, Text_174177, Text_1741EF
-	loadword 0, gUnknown_817420E
-	callstd 6
+	msgbox gUnknown_817420E, 6
 	end
 
 SSAnne_B1F_Room1_EventScript_160D5F:: @ 8160D5F
 	trainerbattle 0, 140, 0, Text_1740F6, Text_174123
-	loadword 0, gUnknown_817413A
-	callstd 6
+	msgbox gUnknown_817413A, 6
 	end

@@ -2,13 +2,11 @@ CinnabarIsland_Mart_MapScripts:: @ 816EA0F
 	.byte 0
 
 CinnabarIsland_Mart_EventScript_16EA10:: @ 816EA10
-	loadword 0, gUnknown_819A7A0
-	callstd 2
+	msgbox gUnknown_819A7A0, 2
 	end
 
 CinnabarIsland_Mart_EventScript_16EA19:: @ 816EA19
-	loadword 0, gUnknown_819A7F1
-	callstd 2
+	msgbox gUnknown_819A7F1, 2
 	end
 
 CinnabarIsland_Mart_EventScript_16EA22:: @ 816EA22
@@ -20,8 +18,7 @@ CinnabarIsland_Mart_EventScript_16EA22:: @ 816EA22
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16EA48
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 

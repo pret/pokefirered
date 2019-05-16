@@ -42,8 +42,7 @@ EventScript_170A97:: @ 8170A97
 
 EventScript_170AFE:: @ 8170AFE
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
-	loadword 0, gUnknown_81A07EC
-	callstd 4
+	msgbox gUnknown_81A07EC
 	return
 
 EventScript_170B0C:: @ 8170B0C

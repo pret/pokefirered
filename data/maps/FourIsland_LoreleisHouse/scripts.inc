@@ -13,27 +13,23 @@ FourIsland_LoreleisHouse_EventScript_171C58:: @ 8171C58
 	goto_if 1, EventScript_171C83
 	checkflag FLAG_0x2D5
 	goto_if 1, EventScript_171C76
-	loadword 0, gUnknown_81A3826
-	callstd 4
+	msgbox gUnknown_81A3826
 	release
 	end
 
 EventScript_171C76:: @ 8171C76
 	setflag FLAG_0x2D4
-	loadword 0, gUnknown_81A390C
-	callstd 4
+	msgbox gUnknown_81A390C
 	release
 	end
 
 EventScript_171C83:: @ 8171C83
-	loadword 0, gUnknown_81A39D8
-	callstd 4
+	msgbox gUnknown_81A39D8
 	release
 	end
 
 FourIsland_LoreleisHouse_EventScript_171C8D:: @ 8171C8D
 	lock
-	loadword 0, gUnknown_81A3A42
-	callstd 4
+	msgbox gUnknown_81A3A42
 	release
 	end

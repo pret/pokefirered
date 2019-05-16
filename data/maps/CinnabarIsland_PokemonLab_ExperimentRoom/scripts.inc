@@ -8,8 +8,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E401:: @ 816E401
 	call EventScript_1A8CAD
 	checkflag FLAG_0x276
 	goto_if 1, EventScript_16E473
-	loadword 0, gUnknown_81A597B
-	callstd 5
+	msgbox gUnknown_81A597B, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E45B
 	call EventScript_1A8CBD
@@ -19,28 +18,24 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E401:: @ 816E401
 	compare_var_to_var VAR_RESULT, VAR_0x8009
 	goto_if 5, EventScript_16E465
 	call EventScript_1A8CD9
-	loadword 0, gUnknown_81A59DA
-	callstd 4
+	msgbox gUnknown_81A59DA
 	setflag FLAG_0x276
 	release
 	end
 
 EventScript_16E45B:: @ 816E45B
-	loadword 0, gUnknown_81A59B6
-	callstd 4
+	msgbox gUnknown_81A59B6
 	release
 	end
 
 EventScript_16E465:: @ 816E465
 	getspeciesname 0, 32777
-	loadword 0, gUnknown_81A59C6
-	callstd 4
+	msgbox gUnknown_81A59C6
 	release
 	end
 
 EventScript_16E473:: @ 816E473
-	loadword 0, gUnknown_81A59E7
-	callstd 4
+	msgbox gUnknown_81A59E7
 	release
 	end
 
@@ -65,8 +60,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E47D:: @ 816E47D
 	call EventScript_16E51C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16E5C8
-	loadword 0, gUnknown_819A282
-	callstd 4
+	msgbox gUnknown_819A282
 	goto EventScript_16E53A
 	end
 
@@ -99,8 +93,7 @@ EventScript_16E534:: @ 816E534
 	return
 
 EventScript_16E53A:: @ 816E53A
-	loadword 0, gUnknown_819A314
-	callstd 4
+	msgbox gUnknown_819A314
 	release
 	end
 
@@ -178,16 +171,13 @@ EventScript_16E631:: @ 816E631
 EventScript_16E668:: @ 816E668
 	getspeciesname 0, SPECIES_OMANYTE
 	getitemname 1, ITEM_HELIX_FOSSIL
-	loadword 0, gUnknown_819A3D4
-	callstd 5
+	msgbox gUnknown_819A3D4, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E722
-	loadword 0, gUnknown_819A45D
-	callstd 4
+	msgbox gUnknown_819A45D
 	textcolor 0
 	removeitem ITEM_HELIX_FOSSIL, 1
-	loadword 0, gUnknown_819A4AB
-	callstd 4
+	msgbox gUnknown_819A4AB
 	setvar VAR_0x406A, 1
 	setvar VAR_0x4069, 1
 	release
@@ -196,16 +186,13 @@ EventScript_16E668:: @ 816E668
 EventScript_16E6A6:: @ 816E6A6
 	getspeciesname 0, SPECIES_KABUTO
 	getitemname 1, ITEM_DOME_FOSSIL
-	loadword 0, gUnknown_819A3D4
-	callstd 5
+	msgbox gUnknown_819A3D4, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E722
-	loadword 0, gUnknown_819A45D
-	callstd 4
+	msgbox gUnknown_819A45D
 	textcolor 0
 	removeitem ITEM_DOME_FOSSIL, 1
-	loadword 0, gUnknown_819A4AB
-	callstd 4
+	msgbox gUnknown_819A4AB
 	setvar VAR_0x406A, 1
 	setvar VAR_0x4069, 2
 	release
@@ -214,30 +201,25 @@ EventScript_16E6A6:: @ 816E6A6
 EventScript_16E6E4:: @ 816E6E4
 	getspeciesname 0, SPECIES_AERODACTYL
 	getitemname 1, ITEM_OLD_AMBER
-	loadword 0, gUnknown_819A3D4
-	callstd 5
+	msgbox gUnknown_819A3D4, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E722
-	loadword 0, gUnknown_819A45D
-	callstd 4
+	msgbox gUnknown_819A45D
 	textcolor 0
 	removeitem ITEM_OLD_AMBER, 1
-	loadword 0, gUnknown_819A4AB
-	callstd 4
+	msgbox gUnknown_819A4AB
 	setvar VAR_0x406A, 1
 	setvar VAR_0x4069, 3
 	release
 	end
 
 EventScript_16E722:: @ 816E722
-	loadword 0, gUnknown_819A4E1
-	callstd 4
+	msgbox gUnknown_819A4E1
 	release
 	end
 
 EventScript_16E72C:: @ 816E72C
-	loadword 0, gUnknown_819A4AB
-	callstd 4
+	msgbox gUnknown_819A4AB
 	release
 	end
 
@@ -253,8 +235,7 @@ EventScript_16E736:: @ 816E736
 EventScript_16E758:: @ 816E758
 	setvar VAR_0x4001, 138
 	getspeciesname 0, SPECIES_OMANYTE
-	loadword 0, gUnknown_819A34F
-	callstd 4
+	msgbox gUnknown_819A34F
 	givemon SPECIES_OMANYTE, 5, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A927C
@@ -268,8 +249,7 @@ EventScript_16E758:: @ 816E758
 EventScript_16E79D:: @ 816E79D
 	setvar VAR_0x4001, 140
 	getspeciesname 0, SPECIES_KABUTO
-	loadword 0, gUnknown_819A34F
-	callstd 4
+	msgbox gUnknown_819A34F
 	givemon SPECIES_KABUTO, 5, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A927C
@@ -283,8 +263,7 @@ EventScript_16E79D:: @ 816E79D
 EventScript_16E7E2:: @ 816E7E2
 	setvar VAR_0x4001, 142
 	getspeciesname 0, SPECIES_AERODACTYL
-	loadword 0, gUnknown_819A34F
-	callstd 4
+	msgbox gUnknown_819A34F
 	givemon SPECIES_AERODACTYL, 5, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A927C
@@ -302,8 +281,7 @@ EventScript_16E827:: @ 816E827
 	waitmessage
 	waitfanfare
 	setvar VAR_0x406A, 0
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E895
 	call EventScript_1A8C27
@@ -318,8 +296,7 @@ EventScript_16E85B:: @ 816E85B
 	waitmessage
 	waitfanfare
 	setvar VAR_0x406A, 0
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E88A
 	call EventScript_1A8C33
@@ -336,8 +313,7 @@ EventScript_16E895:: @ 816E895
 	end
 
 EventScript_16E897:: @ 816E897
-	loadword 0, gUnknown_819A4E1
-	callstd 4
+	msgbox gUnknown_819A4E1
 	release
 	end
 

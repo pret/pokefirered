@@ -29,8 +29,7 @@ ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 	specialvar VAR_RESULT, sub_806E25C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_164D90
-	loadword 0, gUnknown_817D13B
-	callstd 4
+	msgbox gUnknown_817D13B
 	closemessage
 	applymovement 1, Movement_1A75E5
 	waitmovement 0
@@ -38,8 +37,7 @@ ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 	end
 
 EventScript_164D90:: @ 8164D90
-	loadword 0, gUnknown_817D1C9
-	callstd 4
+	msgbox gUnknown_817D1C9
 	setorcopyvar VAR_0x8000, 110
 	setorcopyvar VAR_0x8001, 1
 	callstd 0
@@ -50,13 +48,11 @@ EventScript_164D90:: @ 8164D90
 	end
 
 EventScript_164DB8:: @ 8164DB8
-	loadword 0, gUnknown_817D2DC
-	callstd 4
+	msgbox gUnknown_817D2DC
 	release
 	end
 
 EventScript_164DC2:: @ 8164DC2
-	loadword 0, gUnknown_817D28C
-	callstd 4
+	msgbox gUnknown_817D28C
 	release
 	end

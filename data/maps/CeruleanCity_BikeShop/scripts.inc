@@ -22,14 +22,12 @@ CeruleanCity_BikeShop_EventScript_16ABBD:: @ 816ABBD
 	end
 
 EventScript_16AC07:: @ 816AC07
-	loadword 0, gUnknown_8192796
-	callstd 4
+	msgbox gUnknown_8192796
 	goto EventScript_16AC15
 	end
 
 EventScript_16AC15:: @ 816AC15
-	loadword 0, gUnknown_819280E
-	callstd 4
+	msgbox gUnknown_819280E
 	hidemoneybox
 	.byte 0
 	.byte 0
@@ -37,32 +35,27 @@ EventScript_16AC15:: @ 816AC15
 	end
 
 EventScript_16AC22:: @ 816AC22
-	loadword 0, gUnknown_81927B2
-	callstd 4
+	msgbox gUnknown_81927B2
 	giveitemfanfaremsg gUnknown_81927E1, ITEM_BICYCLE, 1, BGM_FRLG_ME_KEYITEM
 	setflag FLAG_0x271
 	additem ITEM_BICYCLE, 1
 	removeitem ITEM_BIKE_VOUCHER, 1
-	loadword 0, gUnknown_819280E
-	callstd 4
+	msgbox gUnknown_819280E
 	release
 	end
 
 EventScript_16AC58:: @ 816AC58
-	loadword 0, gUnknown_8192833
-	callstd 4
+	msgbox gUnknown_8192833
 	release
 	end
 
 EventScript_16AC62:: @ 816AC62
-	loadword 0, gUnknown_81928A8
-	callstd 4
+	msgbox gUnknown_81928A8
 	release
 	end
 
 CeruleanCity_BikeShop_EventScript_16AC6C:: @ 816AC6C
-	loadword 0, gUnknown_81928CF
-	callstd 2
+	msgbox gUnknown_81928CF, 2
 	end
 
 CeruleanCity_BikeShop_EventScript_16AC75:: @ 816AC75
@@ -70,19 +63,16 @@ CeruleanCity_BikeShop_EventScript_16AC75:: @ 816AC75
 	faceplayer
 	checkflag FLAG_0x271
 	goto_if 1, EventScript_16AC8A
-	loadword 0, gUnknown_8192937
-	callstd 4
+	msgbox gUnknown_8192937
 	release
 	end
 
 EventScript_16AC8A:: @ 816AC8A
-	loadword 0, gUnknown_8192968
-	callstd 4
+	msgbox gUnknown_8192968
 	release
 	end
 
 CeruleanCity_BikeShop_EventScript_16AC94:: @ 816AC94
 CeruleanCity_EventScript_16AC94:: @ 816AC94
-	loadword 0, gUnknown_81929AD
-	callstd 3
+	msgbox gUnknown_81929AD, 3
 	end

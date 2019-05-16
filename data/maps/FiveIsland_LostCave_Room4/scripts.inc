@@ -3,6 +3,5 @@ FiveIsland_LostCave_Room4_MapScripts:: @ 8164C10
 
 FiveIsland_LostCave_Room4_EventScript_164C11:: @ 8164C11
 	trainerbattle 0, 608, 0, Text_17CFC1, Text_17CFFB
-	loadword 0, gUnknown_817D037
-	callstd 6
+	msgbox gUnknown_817D037, 6
 	end

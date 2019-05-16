@@ -75,13 +75,11 @@ EventScript_162750:: @ 8162750
 	end
 
 EventScript_162751:: @ 8162751
-	loadword 0, gUnknown_817820F
-	callstd 4
+	msgbox gUnknown_817820F
 	return
 
 EventScript_16275A:: @ 816275A
-	loadword 0, gUnknown_817830C
-	callstd 4
+	msgbox gUnknown_817830C
 	return
 
 EventScript_162763:: @ 8162763
@@ -93,8 +91,7 @@ EventScript_16276E:: @ 816276E
 	return
 
 EventScript_162779:: @ 8162779
-	loadword 0, gUnknown_8178420
-	callstd 4
+	msgbox gUnknown_8178420
 	closemessage
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_1627FA
@@ -110,8 +107,7 @@ EventScript_162779:: @ 8162779
 EventScript_1627B0:: @ 81627B0
 	setflag FLAG_0x4B9
 	call EventScript_1A7506
-	loadword 0, gUnknown_8178420
-	callstd 4
+	msgbox gUnknown_8178420
 	closemessage
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_1627FA

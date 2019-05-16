@@ -12,15 +12,12 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	delay 30
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_81A4D72
-	callstd 4
+	msgbox gUnknown_81A4D72
 	textcolor 3
-	loadword 0, gUnknown_81A4DAF
-	callstd 5
+	msgbox gUnknown_81A4DAF, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_172225
-	loadword 0, gUnknown_81A4DD8
-	callstd 4
+	msgbox gUnknown_81A4DD8
 	closemessage
 	call EventScript_1A6675
 	compare_var_to_value VAR_FACING, 1
@@ -32,8 +29,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	fadedefaultbgm
 	delay 30
 	call EventScript_1A6C26
-	loadword 0, gUnknown_81A4DF5
-	callstd 4
+	msgbox gUnknown_81A4DF5
 	setflag FLAG_0x002
 	release
 	end
@@ -46,15 +42,13 @@ EventScript_172206:: @ 8172206
 EventScript_172211:: @ 8172211
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_81A4D72
-	callstd 4
+	msgbox gUnknown_81A4D72
 	release
 	end
 
 EventScript_172225:: @ 8172225
 	textcolor 0
-	loadword 0, gUnknown_81A4DC8
-	callstd 4
+	msgbox gUnknown_81A4DC8
 	release
 	end
 
@@ -82,8 +76,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172242:: @ 8172242
 	faceplayer
 	waitse
 	playmoncry SPECIES_CHANSEY, 0
-	loadword 0, gUnknown_81A4E26
-	callstd 4
+	msgbox gUnknown_81A4E26
 	waitmoncry
 	release
 	end

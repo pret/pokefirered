@@ -6,27 +6,23 @@ SafariZone_SecretHouse_EventScript_162453:: @ 8162453
 	faceplayer
 	checkflag FLAG_0x239
 	goto_if 1, EventScript_1624A9
-	loadword 0, gUnknown_8177DC1
-	callstd 4
+	msgbox gUnknown_8177DC1
 	checkitemspace ITEM_HM03, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16249F
 	additem ITEM_HM03, 1
 	giveitemfanfaremsg gUnknown_8177E92, ITEM_HM03
-	loadword 0, gUnknown_8177EB7
-	callstd 4
+	msgbox gUnknown_8177EB7
 	setflag FLAG_0x239
 	release
 	end
 
 EventScript_16249F:: @ 816249F
-	loadword 0, gUnknown_8177F72
-	callstd 4
+	msgbox gUnknown_8177F72
 	release
 	end
 
 EventScript_1624A9:: @ 81624A9
-	loadword 0, gUnknown_8177EB7
-	callstd 4
+	msgbox gUnknown_8177EB7
 	release
 	end

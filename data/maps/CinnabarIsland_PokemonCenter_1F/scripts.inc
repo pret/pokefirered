@@ -15,29 +15,24 @@ CinnabarIsland_PokemonCenter_1F_EventScript_16E8E6:: @ 816E8E6
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E8EF:: @ 816E8EF
-	loadword 0, gUnknown_819A5BE
-	callstd 2
+	msgbox gUnknown_819A5BE, 2
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E8F8:: @ 816E8F8
-	loadword 0, gUnknown_819A4F8
-	callstd 2
+	msgbox gUnknown_819A4F8, 2
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E901:: @ 816E901
-	loadword 0, gUnknown_819A6B1
-	callstd 2
+	msgbox gUnknown_819A6B1, 2
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
 	lock
 	faceplayer
-	loadword 0, gUnknown_819A725
-	callstd 5
+	msgbox gUnknown_819A725, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16E9A5
-	loadword 0, gUnknown_819A785
-	callstd 4
+	msgbox gUnknown_819A785
 	closemessage
 	playbgm BGM_FRLG_FOLLOW_ME, 1
 	savebgm BGM_FRLG_FOLLOW_ME
@@ -77,8 +72,7 @@ EventScript_16E993:: @ 816E993
 	return
 
 EventScript_16E9A5:: @ 816E9A5
-	loadword 0, gUnknown_819A766
-	callstd 4
+	msgbox gUnknown_819A766
 	release
 	end
 

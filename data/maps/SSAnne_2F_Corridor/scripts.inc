@@ -41,8 +41,7 @@ EventScript_160903:: @ 8160903
 	call_if 1, EventScript_1609B8
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_1609CA
-	loadword 0, gUnknown_8173035
-	callstd 4
+	msgbox gUnknown_8173035
 	setvar VAR_LAST_TALKED, 1
 	compare_var_to_value VAR_STARTER_MON, 2
 	call_if 1, EventScript_1609DC
@@ -50,8 +49,7 @@ EventScript_160903:: @ 8160903
 	call_if 1, EventScript_1609E7
 	compare_var_to_value VAR_STARTER_MON, 0
 	call_if 1, EventScript_1609F2
-	loadword 0, gUnknown_8173164
-	callstd 4
+	msgbox gUnknown_8173164
 	closemessage
 	delay 10
 	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
@@ -182,6 +180,5 @@ Movement_160A4C:: @ 8160A4C
 	step_end
 
 SSAnne_2F_Corridor_EventScript_160A54:: @ 8160A54
-	loadword 0, gUnknown_8172FC3
-	callstd 2
+	msgbox gUnknown_8172FC3, 2
 	end

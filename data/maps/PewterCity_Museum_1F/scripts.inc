@@ -10,14 +10,12 @@ PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
 	goto_if 1, EventScript_16A348
 	compare_var_to_value VAR_FACING, 2
 	goto_if 1, EventScript_16A348
-	loadword 0, gUnknown_8190539
-	callstd 4
+	msgbox gUnknown_8190539
 	release
 	end
 
 EventScript_16A348:: @ 816A348
-	loadword 0, gUnknown_8190550
-	callstd 5
+	msgbox gUnknown_8190550, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16A367
 	compare_var_to_value VAR_RESULT, 0
@@ -25,16 +23,14 @@ EventScript_16A348:: @ 816A348
 	end
 
 EventScript_16A367:: @ 816A367
-	loadword 0, gUnknown_81905B1
-	callstd 4
+	msgbox gUnknown_81905B1
 	applymovement 1, Movement_1A75E5
 	waitmovement 0
 	release
 	end
 
 EventScript_16A37B:: @ 816A37B
-	loadword 0, gUnknown_8190627
-	callstd 4
+	msgbox gUnknown_8190627
 	applymovement 1, Movement_1A75E5
 	waitmovement 0
 	release
@@ -67,12 +63,10 @@ PewterCity_Museum_1F_EventScript_16A3BB:: @ 816A3BB
 EventScript_16A3D1:: @ 816A3D1
 	textcolor 0
 	showmoneybox 0, 0, 0
-	loadword 0, gUnknown_81904B5
-	callstd 5
+	msgbox gUnknown_81904B5, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16A402
-	loadword 0, gUnknown_81904F9
-	callstd 4
+	msgbox gUnknown_81904F9
 	closemessage
 	hidemoneybox
 	.byte 0
@@ -97,8 +91,7 @@ EventScript_16A402:: @ 816A402
 	takemoney 50, 0
 	updatemoneybox 0, 0, 0
 	waitse
-	loadword 0, gUnknown_8190505
-	callstd 4
+	msgbox gUnknown_8190505
 	setvar VAR_0x4061, 1
 	hidemoneybox
 	.byte 0
@@ -122,8 +115,7 @@ EventScript_16A46B:: @ 816A46B
 	return
 
 EventScript_16A476:: @ 816A476
-	loadword 0, gUnknown_819051C
-	callstd 4
+	msgbox gUnknown_819051C
 	closemessage
 	hidemoneybox
 	.byte 0
@@ -156,13 +148,11 @@ Movement_16A499:: @ 816A499
 	step_end
 
 PewterCity_Museum_1F_EventScript_16A49C:: @ 816A49C
-	loadword 0, gUnknown_81908CD
-	callstd 2
+	msgbox gUnknown_81908CD, 2
 	end
 
 PewterCity_Museum_1F_EventScript_16A4A5:: @ 816A4A5
-	loadword 0, gUnknown_81906B4
-	callstd 2
+	msgbox gUnknown_81906B4, 2
 	end
 
 PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
@@ -170,8 +160,7 @@ PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
 	faceplayer
 	checkflag FLAG_0x25E
 	goto_if 1, EventScript_16A4FF
-	loadword 0, gUnknown_8190717
-	callstd 4
+	msgbox gUnknown_8190717
 	checkitemspace ITEM_OLD_AMBER, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16A4F5
@@ -183,20 +172,17 @@ PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
 	end
 
 EventScript_16A4F5:: @ 816A4F5
-	loadword 0, gUnknown_81908AE
-	callstd 4
+	msgbox gUnknown_81908AE
 	release
 	end
 
 EventScript_16A4FF:: @ 816A4FF
-	loadword 0, gUnknown_819088E
-	callstd 4
+	msgbox gUnknown_819088E
 	release
 	end
 
 PewterCity_Museum_1F_EventScript_16A509:: @ 816A509
-	loadword 0, gUnknown_819090A
-	callstd 2
+	msgbox gUnknown_819090A, 2
 	end
 
 PewterCity_Museum_1F_EventScript_16A512:: @ 816A512
@@ -205,8 +191,7 @@ PewterCity_Museum_1F_EventScript_16A512:: @ 816A512
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
 	special sub_809D504
-	loadword 0, gUnknown_8190945
-	callstd 4
+	msgbox gUnknown_8190945
 	special sub_809D620
 	releaseall
 	end
@@ -217,8 +202,7 @@ PewterCity_Museum_1F_EventScript_16A532:: @ 816A532
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
 	special sub_809D504
-	loadword 0, gUnknown_8190975
-	callstd 4
+	msgbox gUnknown_8190975
 	special sub_809D620
 	releaseall
 	end

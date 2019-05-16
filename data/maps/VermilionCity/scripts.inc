@@ -31,8 +31,7 @@ EventScript_166913:: @ 8166913
 	return
 
 VermilionCity_EventScript_166917:: @ 8166917
-	loadword 0, gUnknown_817F723
-	callstd 2
+	msgbox gUnknown_817F723, 2
 	end
 
 VermilionCity_EventScript_166920:: @ 8166920
@@ -40,14 +39,12 @@ VermilionCity_EventScript_166920:: @ 8166920
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if 1, EventScript_166937
-	loadword 0, gUnknown_817F776
-	callstd 4
+	msgbox gUnknown_817F776
 	release
 	end
 
 EventScript_166937:: @ 8166937
-	loadword 0, gUnknown_817F7A6
-	callstd 4
+	msgbox gUnknown_817F7A6
 	release
 	end
 
@@ -56,8 +53,7 @@ VermilionCity_EventScript_166941:: @ 8166941
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if 1, EventScript_166996
-	loadword 0, gUnknown_817FA22
-	callstd 4
+	msgbox gUnknown_817FA22
 	release
 	end
 
@@ -85,8 +81,7 @@ EventScript_166996:: @ 8166996
 	goto_if 4, EventScript_1669BB
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
 	goto_if 4, EventScript_166B3B
-	loadword 0, gUnknown_817FB10
-	callstd 4
+	msgbox gUnknown_817FB10
 	release
 	end
 
@@ -129,8 +124,7 @@ EventScript_1669FD:: @ 81669FD
 
 EventScript_166A53:: @ 8166A53
 	setflag FLAG_0x2F0
-	loadword 0, gUnknown_817FC00
-	callstd 4
+	msgbox gUnknown_817FC00
 	return
 
 EventScript_166A5F:: @ 8166A5F
@@ -152,8 +146,7 @@ EventScript_166A5F:: @ 8166A5F
 
 EventScript_166AA5:: @ 8166AA5
 	setflag FLAG_0x2F1
-	loadword 0, gUnknown_817FC5F
-	callstd 4
+	msgbox gUnknown_817FC5F
 	return
 
 EventScript_166AB1:: @ 8166AB1
@@ -178,16 +171,14 @@ EventScript_166AB1:: @ 8166AB1
 	end
 
 EventScript_166B0B:: @ 8166B0B
-	loadword 0, gUnknown_817FCEC
-	callstd 4
+	msgbox gUnknown_817FCEC
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8006, 9
 	goto EventScript_1A90DA
 	end
 
 EventScript_166B23:: @ 8166B23
-	loadword 0, gUnknown_817FD5F
-	callstd 4
+	msgbox gUnknown_817FD5F
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8006, 10
 	goto EventScript_1A90DA
@@ -238,19 +229,16 @@ EventScript_166BA0:: @ 8166BA0
 	waitmovement 0
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if 1, EventScript_166BED
-	loadword 0, gUnknown_817FA3C
-	callstd 4
+	msgbox gUnknown_817FA3C
 	checkflag FLAG_0x234
 	goto_if 0, EventScript_166BDE
-	loadword 0, gUnknown_817FA77
-	callstd 4
+	msgbox gUnknown_817FA77
 	setvar VAR_0x4053, 1
 	releaseall
 	end
 
 EventScript_166BDE:: @ 8166BDE
-	loadword 0, gUnknown_817FABA
-	callstd 4
+	msgbox gUnknown_817FABA
 	closemessage
 	goto EventScript_1A9108
 	end
@@ -261,29 +249,25 @@ EventScript_166BED:: @ 8166BED
 	goto_if 4, EventScript_1669BB
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
 	goto_if 4, EventScript_166B3B
-	loadword 0, gUnknown_817FB10
-	callstd 4
+	msgbox gUnknown_817FB10
 	closemessage
 	goto EventScript_1A9108
 	end
 
 VermilionCity_EventScript_166C17:: @ 8166C17
-	loadword 0, gUnknown_817F8AC
-	callstd 2
+	msgbox gUnknown_817F8AC, 2
 	end
 
 VermilionCity_EventScript_166C20:: @ 8166C20
 	lock
 	faceplayer
 	setflag FLAG_0x2F9
-	loadword 0, gUnknown_817FDD2
-	callstd 4
+	msgbox gUnknown_817FDD2
 	release
 	end
 
 VermilionCity_EventScript_166C2F:: @ 8166C2F
-	loadword 0, gUnknown_817F7FD
-	callstd 2
+	msgbox gUnknown_817F7FD, 2
 	end
 
 VermilionCity_EventScript_166C38:: @ 8166C38
@@ -291,27 +275,22 @@ VermilionCity_EventScript_166C38:: @ 8166C38
 	faceplayer
 	waitse
 	playmoncry SPECIES_MACHOP, 0
-	loadword 0, gUnknown_817F871
-	callstd 4
+	msgbox gUnknown_817F871
 	waitmoncry
-	loadword 0, gUnknown_817F888
-	callstd 4
+	msgbox gUnknown_817F888
 	release
 	end
 
 VermilionCity_EventScript_166C53:: @ 8166C53
-	loadword 0, gUnknown_817F8FB
-	callstd 3
+	msgbox gUnknown_817F8FB, 3
 	end
 
 VermilionCity_EventScript_166C5C:: @ 8166C5C
-	loadword 0, gUnknown_817F928
-	callstd 3
+	msgbox gUnknown_817F928, 3
 	end
 
 VermilionCity_EventScript_166C65:: @ 8166C65
-	loadword 0, gUnknown_817F9A1
-	callstd 3
+	msgbox gUnknown_817F9A1, 3
 	end
 
 VermilionCity_EventScript_166C6E:: @ 8166C6E
@@ -319,12 +298,10 @@ VermilionCity_EventScript_166C6E:: @ 8166C6E
 	setvar VAR_0x8004, 4
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_817F9CC
-	callstd 4
+	msgbox gUnknown_817F9CC
 	releaseall
 	end
 
 VermilionCity_EventScript_166C86:: @ 8166C86
-	loadword 0, gUnknown_817FA11
-	callstd 3
+	msgbox gUnknown_817FA11, 3
 	end

@@ -4,8 +4,7 @@ CeruleanCity_House1_MapScripts:: @ 816A7EF
 CeruleanCity_House1_EventScript_16A7F0:: @ 816A7F0
 	lock
 	faceplayer
-	loadword 0, gUnknown_81918E7
-	callstd 4
+	msgbox gUnknown_81918E7
 	message Text_191967
 	waitmessage
 	setvar VAR_0x8004, 0
@@ -63,59 +62,50 @@ EventScript_16A87D:: @ 816A87D
 	end
 
 EventScript_16A8FB:: @ 816A8FB
-	loadword 0, gUnknown_81919BE
-	callstd 4
+	msgbox gUnknown_81919BE
 	goto EventScript_16A87D
 	end
 
 EventScript_16A909:: @ 816A909
-	loadword 0, gUnknown_8191A31
-	callstd 4
+	msgbox gUnknown_8191A31
 	goto EventScript_16A87D
 	end
 
 EventScript_16A917:: @ 816A917
-	loadword 0, gUnknown_8191AF9
-	callstd 4
+	msgbox gUnknown_8191AF9
 	goto EventScript_16A87D
 	end
 
 EventScript_16A925:: @ 816A925
-	loadword 0, gUnknown_8191B69
-	callstd 4
+	msgbox gUnknown_8191B69
 	goto EventScript_16A87D
 	end
 
 EventScript_16A933:: @ 816A933
-	loadword 0, gUnknown_8191C36
-	callstd 4
+	msgbox gUnknown_8191C36
 	goto EventScript_16A87D
 	end
 
 EventScript_16A941:: @ 816A941
-	loadword 0, gUnknown_8191CA9
-	callstd 4
+	msgbox gUnknown_8191CA9
 	goto EventScript_16A87D
 	end
 
 EventScript_16A94F:: @ 816A94F
-	loadword 0, gUnknown_8191D78
-	callstd 4
+	msgbox gUnknown_8191D78
 	goto EventScript_16A87D
 
 EventScript_16A95C:: @ 816A95C
 	end
 
 EventScript_16A95D:: @ 816A95D
-	loadword 0, gUnknown_8191DF8
-	callstd 4
+	msgbox gUnknown_8191DF8
 	goto EventScript_16A87D
 
 EventScript_16A96A:: @ 816A96A
 	end
 
 EventScript_16A96B:: @ 816A96B
-	loadword 0, gUnknown_819199E
-	callstd 4
+	msgbox gUnknown_819199E
 	release
 	end

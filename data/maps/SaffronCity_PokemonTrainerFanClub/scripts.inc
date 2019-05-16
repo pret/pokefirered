@@ -17,15 +17,13 @@ EventScript_16F0D4:: @ 816F0D4
 	waitmovement 0
 	applymovement 1, Movement_1A75DD
 	waitmovement 0
-	loadword 0, gUnknown_819C22B
-	callstd 4
+	msgbox gUnknown_819C22B
 	closemessage
 	applymovement 1, Movement_16F124
 	waitmovement 0
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
-	loadword 0, gUnknown_819C235
-	callstd 4
+	msgbox gUnknown_819C235
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
 	releaseall
 	end
@@ -176,8 +174,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F281:: @ 816F281
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 7
 	goto_if 1, EventScript_16F2E4
-	loadword 0, gUnknown_819C420
-	callstd 4
+	msgbox gUnknown_819C420
 	release
 	end
 
@@ -185,26 +182,22 @@ EventScript_16F2C0:: @ 816F2C0
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16F2DA
-	loadword 0, gUnknown_819C390
-	callstd 4
+	msgbox gUnknown_819C390
 	release
 	end
 
 EventScript_16F2DA:: @ 816F2DA
-	loadword 0, gUnknown_819C3BD
-	callstd 4
+	msgbox gUnknown_819C3BD
 	release
 	end
 
 EventScript_16F2E4:: @ 816F2E4
-	loadword 0, gUnknown_819C4A5
-	callstd 4
+	msgbox gUnknown_819C4A5
 	release
 	end
 
 EventScript_16F2EE:: @ 816F2EE
-	loadword 0, gUnknown_819C55C
-	callstd 4
+	msgbox gUnknown_819C55C
 	release
 	end
 
@@ -221,8 +214,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F2F8:: @ 816F2F8
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 7
 	goto_if 1, EventScript_16F35B
-	loadword 0, gUnknown_819CBD3
-	callstd 4
+	msgbox gUnknown_819CBD3
 	release
 	end
 
@@ -230,26 +222,22 @@ EventScript_16F337:: @ 816F337
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16F351
-	loadword 0, gUnknown_819CB32
-	callstd 4
+	msgbox gUnknown_819CB32
 	release
 	end
 
 EventScript_16F351:: @ 816F351
-	loadword 0, gUnknown_819CB62
-	callstd 4
+	msgbox gUnknown_819CB62
 	release
 	end
 
 EventScript_16F35B:: @ 816F35B
-	loadword 0, gUnknown_819CC2B
-	callstd 4
+	msgbox gUnknown_819CC2B
 	release
 	end
 
 EventScript_16F365:: @ 816F365
-	loadword 0, gUnknown_819CCC2
-	callstd 4
+	msgbox gUnknown_819CCC2
 	release
 	end
 
@@ -266,8 +254,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F36F:: @ 816F36F
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 7
 	goto_if 1, EventScript_16F3D2
-	loadword 0, gUnknown_819C6BA
-	callstd 4
+	msgbox gUnknown_819C6BA
 	release
 	end
 
@@ -275,26 +262,22 @@ EventScript_16F3AE:: @ 816F3AE
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16F3C8
-	loadword 0, gUnknown_819C5A9
-	callstd 4
+	msgbox gUnknown_819C5A9
 	release
 	end
 
 EventScript_16F3C8:: @ 816F3C8
-	loadword 0, gUnknown_819C600
-	callstd 4
+	msgbox gUnknown_819C600
 	release
 	end
 
 EventScript_16F3D2:: @ 816F3D2
-	loadword 0, gUnknown_819C73A
-	callstd 4
+	msgbox gUnknown_819C73A
 	release
 	end
 
 EventScript_16F3DC:: @ 816F3DC
-	loadword 0, gUnknown_819C7C8
-	callstd 4
+	msgbox gUnknown_819C7C8
 	release
 	end
 
@@ -311,8 +294,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F3E6:: @ 816F3E6
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 7
 	goto_if 1, EventScript_16F449
-	loadword 0, gUnknown_819C986
-	callstd 4
+	msgbox gUnknown_819C986
 	release
 	end
 
@@ -320,26 +302,22 @@ EventScript_16F425:: @ 816F425
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16F43F
-	loadword 0, gUnknown_819C81E
-	callstd 4
+	msgbox gUnknown_819C81E
 	release
 	end
 
 EventScript_16F43F:: @ 816F43F
-	loadword 0, gUnknown_819C8C1
-	callstd 4
+	msgbox gUnknown_819C8C1
 	release
 	end
 
 EventScript_16F449:: @ 816F449
-	loadword 0, gUnknown_819C9D5
-	callstd 4
+	msgbox gUnknown_819C9D5
 	release
 	end
 
 EventScript_16F453:: @ 816F453
-	loadword 0, gUnknown_819CA7C
-	callstd 4
+	msgbox gUnknown_819CA7C
 	release
 	end
 
@@ -354,8 +332,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F45D:: @ 816F45D
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 7
 	goto_if 1, EventScript_16F4B5
-	loadword 0, gUnknown_819D01F
-	callstd 4
+	msgbox gUnknown_819D01F
 	release
 	end
 
@@ -363,20 +340,17 @@ EventScript_16F491:: @ 816F491
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16F4AB
-	loadword 0, gUnknown_819CEDF
-	callstd 4
+	msgbox gUnknown_819CEDF
 	release
 	end
 
 EventScript_16F4AB:: @ 816F4AB
-	loadword 0, gUnknown_819CF6D
-	callstd 4
+	msgbox gUnknown_819CF6D
 	release
 	end
 
 EventScript_16F4B5:: @ 816F4B5
-	loadword 0, gUnknown_819D075
-	callstd 4
+	msgbox gUnknown_819D075
 	release
 	end
 
@@ -391,8 +365,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F4BF:: @ 816F4BF
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 7
 	goto_if 1, EventScript_16F517
-	loadword 0, gUnknown_819CDDA
-	callstd 4
+	msgbox gUnknown_819CDDA
 	release
 	end
 
@@ -400,20 +373,17 @@ EventScript_16F4F3:: @ 816F4F3
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16F50D
-	loadword 0, gUnknown_819CCF3
-	callstd 4
+	msgbox gUnknown_819CCF3
 	release
 	end
 
 EventScript_16F50D:: @ 816F50D
-	loadword 0, gUnknown_819CD4E
-	callstd 4
+	msgbox gUnknown_819CD4E
 	release
 	end
 
 EventScript_16F517:: @ 816F517
-	loadword 0, gUnknown_819CE3A
-	callstd 4
+	msgbox gUnknown_819CE3A
 	release
 	end
 
@@ -428,8 +398,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F521:: @ 816F521
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 7
 	goto_if 1, EventScript_16F579
-	loadword 0, gUnknown_819D1AE
-	callstd 4
+	msgbox gUnknown_819D1AE
 	release
 	end
 
@@ -437,20 +406,17 @@ EventScript_16F555:: @ 816F555
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16F56F
-	loadword 0, gUnknown_819D0E3
-	callstd 4
+	msgbox gUnknown_819D0E3
 	release
 	end
 
 EventScript_16F56F:: @ 816F56F
-	loadword 0, gUnknown_819D148
-	callstd 4
+	msgbox gUnknown_819D148
 	release
 	end
 
 EventScript_16F579:: @ 816F579
-	loadword 0, gUnknown_819D211
-	callstd 4
+	msgbox gUnknown_819D211
 	release
 	end
 
@@ -465,8 +431,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F583:: @ 816F583
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 7
 	goto_if 1, EventScript_16F5DB
-	loadword 0, gUnknown_819D3D2
-	callstd 4
+	msgbox gUnknown_819D3D2
 	release
 	end
 
@@ -474,19 +439,16 @@ EventScript_16F5B7:: @ 816F5B7
 	specialvar VAR_RESULT, sub_8113288
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16F5D1
-	loadword 0, gUnknown_819D2B4
-	callstd 4
+	msgbox gUnknown_819D2B4
 	release
 	end
 
 EventScript_16F5D1:: @ 816F5D1
-	loadword 0, gUnknown_819D31F
-	callstd 4
+	msgbox gUnknown_819D31F
 	release
 	end
 
 EventScript_16F5DB:: @ 816F5DB
-	loadword 0, gUnknown_819D477
-	callstd 4
+	msgbox gUnknown_819D477
 	release
 	end

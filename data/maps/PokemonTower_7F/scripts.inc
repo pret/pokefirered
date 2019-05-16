@@ -10,8 +10,7 @@ PokemonTower_7F_EventScript_16355A:: @ 816355A
 	setflag FLAG_0x034
 	clearflag FLAG_0x035
 	setflag FLAG_0x23C
-	loadword 0, gUnknown_817A529
-	callstd 4
+	msgbox gUnknown_817A529
 	closemessage
 	warp MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 255, 4, 7
 	waitstate
@@ -20,13 +19,11 @@ PokemonTower_7F_EventScript_16355A:: @ 816355A
 
 PokemonTower_7F_EventScript_163586:: @ 8163586
 	trainerbattle 2, 369, 0, Text_17A380, Text_17A3A4, EventScript_1635A1
-	loadword 0, gUnknown_817A3AF
-	callstd 6
+	msgbox gUnknown_817A3AF, 6
 	end
 
 EventScript_1635A1:: @ 81635A1
-	loadword 0, gUnknown_817A3AF
-	callstd 4
+	msgbox gUnknown_817A3AF
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 10
@@ -109,16 +106,14 @@ Movement_163633:: @ 8163633
 
 PokemonTower_7F_EventScript_16363D:: @ 816363D
 	trainerbattle 2, 370, 0, Text_17A3CD, Text_17A466, EventScript_163658
-	loadword 0, gUnknown_817A477
-	callstd 6
+	msgbox gUnknown_817A477, 6
 	end
 
 EventScript_163658:: @ 8163658
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_817A477
-	callstd 4
+	msgbox gUnknown_817A477
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 12
@@ -179,13 +174,11 @@ Movement_1636CD:: @ 81636CD
 
 PokemonTower_7F_EventScript_1636D6:: @ 81636D6
 	trainerbattle 2, 371, 0, Text_17A4CF, Text_17A4EE, EventScript_1636F1
-	loadword 0, gUnknown_817A506
-	callstd 6
+	msgbox gUnknown_817A506, 6
 	end
 
 EventScript_1636F1:: @ 81636F1
-	loadword 0, gUnknown_817A506
-	callstd 4
+	msgbox gUnknown_817A506
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 10

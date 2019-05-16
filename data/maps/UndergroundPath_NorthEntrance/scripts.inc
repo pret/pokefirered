@@ -8,8 +8,7 @@ UndergroundPath_NorthEntrance_EventScript_160E39:: @ 8160E39
 	call EventScript_1A8CAD
 	checkflag FLAG_0x24B
 	goto_if 1, EventScript_160EAB
-	loadword 0, gUnknown_81A5AD6
-	callstd 5
+	msgbox gUnknown_81A5AD6, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_160E93
 	call EventScript_1A8CBD
@@ -19,27 +18,23 @@ UndergroundPath_NorthEntrance_EventScript_160E39:: @ 8160E39
 	compare_var_to_var VAR_RESULT, VAR_0x8009
 	goto_if 5, EventScript_160E9D
 	call EventScript_1A8CD9
-	loadword 0, gUnknown_81A5B4A
-	callstd 4
+	msgbox gUnknown_81A5B4A
 	setflag FLAG_0x24B
 	release
 	end
 
 EventScript_160E93:: @ 8160E93
-	loadword 0, gUnknown_81A5B08
-	callstd 4
+	msgbox gUnknown_81A5B08
 	release
 	end
 
 EventScript_160E9D:: @ 8160E9D
 	getspeciesname 0, 32777
-	loadword 0, gUnknown_81A5B18
-	callstd 4
+	msgbox gUnknown_81A5B18
 	release
 	end
 
 EventScript_160EAB:: @ 8160EAB
-	loadword 0, gUnknown_81A5B60
-	callstd 4
+	msgbox gUnknown_81A5B60
 	release
 	end

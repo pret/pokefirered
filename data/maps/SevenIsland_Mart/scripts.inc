@@ -10,8 +10,7 @@ SevenIsland_Mart_EventScript_170B31:: @ 8170B31
 	message Text_1A6211
 	waitmessage
 	pokemart Items_170B58
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -31,16 +30,13 @@ Items_170B58:: @ 8170B58
 	end
 
 SevenIsland_Mart_EventScript_170B6E:: @ 8170B6E
-	loadword 0, gUnknown_81A0A4F
-	callstd 2
+	msgbox gUnknown_81A0A4F, 2
 	end
 
 SevenIsland_Mart_EventScript_170B77:: @ 8170B77
-	loadword 0, gUnknown_81A0ACC
-	callstd 2
+	msgbox gUnknown_81A0ACC, 2
 	end
 
 SevenIsland_Mart_EventScript_170B80:: @ 8170B80
-	loadword 0, gUnknown_81A0B09
-	callstd 2
+	msgbox gUnknown_81A0B09, 2
 	end

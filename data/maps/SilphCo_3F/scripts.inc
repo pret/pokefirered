@@ -14,30 +14,25 @@ SilphCo_3F_EventScript_1616DE:: @ 81616DE
 	faceplayer
 	compare_var_to_value VAR_0x4060, 1
 	goto_if 4, EventScript_1616F5
-	loadword 0, gUnknown_81758AD
-	callstd 4
+	msgbox gUnknown_81758AD
 	release
 	end
 
 EventScript_1616F5:: @ 81616F5
-	loadword 0, gUnknown_81758D3
-	callstd 4
+	msgbox gUnknown_81758D3
 	release
 	end
 
 SilphCo_3F_EventScript_1616FF:: @ 81616FF
-	loadword 0, gUnknown_81759DC
-	callstd 3
+	msgbox gUnknown_81759DC, 3
 	end
 
 SilphCo_3F_EventScript_161708:: @ 8161708
 	trainerbattle 0, 338, 0, Text_175948, Text_17597D
-	loadword 0, gUnknown_8175990
-	callstd 6
+	msgbox gUnknown_8175990, 6
 	end
 
 SilphCo_3F_EventScript_16171F:: @ 816171F
 	trainerbattle 0, 375, 0, Text_1758F6, Text_175911
-	loadword 0, gUnknown_817591C
-	callstd 6
+	msgbox gUnknown_817591C, 6
 	end

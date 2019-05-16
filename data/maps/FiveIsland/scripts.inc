@@ -7,16 +7,13 @@ FiveIsland_MapScript1_167E94:: @ 8167E94
 	end
 
 FiveIsland_EventScript_167E98:: @ 8167E98
-	loadword 0, gUnknown_8182DFB
-	callstd 3
+	msgbox gUnknown_8182DFB, 3
 	end
 
 FiveIsland_EventScript_167EA1:: @ 8167EA1
-	loadword 0, gUnknown_8182E26
-	callstd 2
+	msgbox gUnknown_8182E26, 2
 	end
 
 FiveIsland_EventScript_167EAA:: @ 8167EAA
-	loadword 0, gUnknown_8182E96
-	callstd 2
+	msgbox gUnknown_8182E96, 2
 	end

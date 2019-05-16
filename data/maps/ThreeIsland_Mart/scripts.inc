@@ -10,8 +10,7 @@ ThreeIsland_Mart_EventScript_17188D:: @ 817188D
 	message Text_1A6211
 	waitmessage
 	pokemart Items_1718B4
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -28,16 +27,13 @@ Items_1718B4:: @ 81718B4
 	end
 
 ThreeIsland_Mart_EventScript_1718C4:: @ 81718C4
-	loadword 0, gUnknown_81A3114
-	callstd 2
+	msgbox gUnknown_81A3114, 2
 	end
 
 ThreeIsland_Mart_EventScript_1718CD:: @ 81718CD
-	loadword 0, gUnknown_81A315C
-	callstd 2
+	msgbox gUnknown_81A315C, 2
 	end
 
 ThreeIsland_Mart_EventScript_1718D6:: @ 81718D6
-	loadword 0, gUnknown_81A31F0
-	callstd 2
+	msgbox gUnknown_81A31F0, 2
 	end

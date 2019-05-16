@@ -7,11 +7,9 @@ SevenIsland_TrainerTower_MapScript1_168BDB:: @ 8168BDB
 	end
 
 SevenIsland_TrainerTower_EventScript_168BE1:: @ 8168BE1
-	loadword 0, gUnknown_818C338
-	callstd 3
+	msgbox gUnknown_818C338, 3
 	end
 
 SevenIsland_TrainerTower_EventScript_168BEA:: @ 8168BEA
-	loadword 0, gUnknown_818C370
-	callstd 3
+	msgbox gUnknown_818C370, 3
 	end

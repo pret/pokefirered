@@ -2,8 +2,7 @@ Route5_SouthEntrance_MapScripts:: @ 816F900
 	.byte 0
 
 Route5_SouthEntrance_EventScript_16F901:: @ 816F901
-	loadword 0, gUnknown_819E16D
-	callstd 2
+	msgbox gUnknown_819E16D, 2
 	end
 
 Route5_SouthEntrance_EventScript_16F90A:: @ 816F90A
@@ -30,8 +29,7 @@ EventScript_16F92E:: @ 816F92E
 	waitmovement 0
 	checkflag FLAG_0x2A6
 	goto_if 1, EventScript_16F958
-	loadword 0, gUnknown_819E04B
-	callstd 4
+	msgbox gUnknown_819E04B
 	closemessage
 	applymovement 255, Movement_16F9C4
 	waitmovement 0
@@ -44,8 +42,7 @@ EventScript_16F958:: @ 816F958
 	end
 
 EventScript_16F963:: @ 816F963
-	loadword 0, gUnknown_819E09B
-	callstd 4
+	msgbox gUnknown_819E09B
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_16F99C
@@ -53,8 +50,7 @@ EventScript_16F963:: @ 816F963
 	call_if 1, EventScript_16F9A7
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_16F9B2
-	loadword 0, gUnknown_819E0C1
-	callstd 4
+	msgbox gUnknown_819E0C1
 	setvar VAR_0x4062, 1
 	releaseall
 	end

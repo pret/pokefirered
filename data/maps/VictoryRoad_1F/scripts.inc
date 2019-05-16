@@ -37,12 +37,10 @@ EventScript_160F62:: @ 8160F62
 
 VictoryRoad_1F_EventScript_160F64:: @ 8160F64
 	trainerbattle 0, 406, 0, Text_174710, Text_174738
-	loadword 0, gUnknown_8174744
-	callstd 6
+	msgbox gUnknown_8174744, 6
 	end
 
 VictoryRoad_1F_EventScript_160F7B:: @ 8160F7B
 	trainerbattle 0, 396, 0, Text_174784, Text_1747B8
-	loadword 0, gUnknown_81747C8
-	callstd 6
+	msgbox gUnknown_81747C8, 6
 	end

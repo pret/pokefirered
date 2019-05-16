@@ -15,16 +15,13 @@ FourIsland_PokemonCenter_1F_EventScript_171BF9:: @ 8171BF9
 	end
 
 FourIsland_PokemonCenter_1F_EventScript_171C02:: @ 8171C02
-	loadword 0, gUnknown_81A3627
-	callstd 2
+	msgbox gUnknown_81A3627, 2
 	end
 
 FourIsland_PokemonCenter_1F_EventScript_171C0B:: @ 8171C0B
-	loadword 0, gUnknown_81A3697
-	callstd 2
+	msgbox gUnknown_81A3697, 2
 	end
 
 FourIsland_PokemonCenter_1F_EventScript_171C14:: @ 8171C14
-	loadword 0, gUnknown_81A3734
-	callstd 2
+	msgbox gUnknown_81A3734, 2
 	end

@@ -6,8 +6,7 @@ Route24_EventScript_168620:: @ 8168620
 	faceplayer
 	compare_var_to_value VAR_0x406B, 1
 	goto_if 1, EventScript_168656
-	loadword 0, gUnknown_8188C3C
-	callstd 4
+	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16864C
@@ -16,14 +15,12 @@ Route24_EventScript_168620:: @ 8168620
 	end
 
 EventScript_16864C:: @ 816864C
-	loadword 0, gUnknown_8188CC2
-	callstd 4
+	msgbox gUnknown_8188CC2
 	release
 	end
 
 EventScript_168656:: @ 8168656
-	loadword 0, gUnknown_8188DF1
-	callstd 4
+	msgbox gUnknown_8188DF1
 	release
 	end
 
@@ -47,8 +44,7 @@ EventScript_168678:: @ 8168678
 	call_if 1, EventScript_168708
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
-	loadword 0, gUnknown_8188C3C
-	callstd 4
+	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_168713
@@ -65,8 +61,7 @@ EventScript_1686B9:: @ 81686B9
 	waitbuttonpress
 	setvar VAR_LAST_TALKED, 1
 	trainerbattle 3, 356, 0, Text_188DDC
-	loadword 0, gUnknown_8188DF1
-	callstd 4
+	msgbox gUnknown_8188DF1
 	setvar VAR_0x406B, 1
 	return
 
@@ -81,8 +76,7 @@ EventScript_168708:: @ 8168708
 	return
 
 EventScript_168713:: @ 8168713
-	loadword 0, gUnknown_8188CC2
-	callstd 4
+	msgbox gUnknown_8188CC2
 	closemessage
 	applymovement 255, Movement_168743
 	waitmovement 0

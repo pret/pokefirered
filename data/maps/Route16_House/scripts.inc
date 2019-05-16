@@ -6,28 +6,24 @@ Route16_House_EventScript_17014F:: @ 817014F
 	faceplayer
 	checkflag FLAG_0x238
 	goto_if 1, EventScript_1701A5
-	loadword 0, gUnknown_819F851
-	callstd 4
+	msgbox gUnknown_819F851
 	checkitemspace ITEM_HM02, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_17019B
 	additem ITEM_HM02, 1
 	giveitemfanfaremsg gUnknown_819F8C0, ITEM_HM02
-	loadword 0, gUnknown_819F8E0
-	callstd 4
+	msgbox gUnknown_819F8E0
 	setflag FLAG_0x238
 	release
 	end
 
 EventScript_17019B:: @ 817019B
-	loadword 0, gUnknown_819F92D
-	callstd 4
+	msgbox gUnknown_819F92D
 	release
 	end
 
 EventScript_1701A5:: @ 81701A5
-	loadword 0, gUnknown_819F8E0
-	callstd 4
+	msgbox gUnknown_819F8E0
 	release
 	end
 
@@ -36,8 +32,7 @@ Route16_House_EventScript_1701AF:: @ 81701AF
 	faceplayer
 	waitse
 	playmoncry SPECIES_FEAROW, 0
-	loadword 0, gUnknown_819F94F
-	callstd 4
+	msgbox gUnknown_819F94F
 	waitmoncry
 	release
 	end

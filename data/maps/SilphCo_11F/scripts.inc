@@ -22,37 +22,31 @@ SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	goto_if 1, EventScript_161E6B
 	additem ITEM_MASTER_BALL, 1
 	giveitemfanfaremsg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, BGM_FRLG_ME_KEYITEM
-	loadword 0, gUnknown_8176FEB
-	callstd 4
+	msgbox gUnknown_8176FEB
 	setflag FLAG_0x250
 	release
 	end
 
 EventScript_161E59:: @ 8161E59
-	loadword 0, gUnknown_8176E12
-	callstd 4
+	msgbox gUnknown_8176E12
 	return
 
 EventScript_161E62:: @ 8161E62
-	loadword 0, gUnknown_8176EE7
-	callstd 4
+	msgbox gUnknown_8176EE7
 	return
 
 EventScript_161E6B:: @ 8161E6B
-	loadword 0, gUnknown_817708E
-	callstd 4
+	msgbox gUnknown_817708E
 	release
 	end
 
 EventScript_161E75:: @ 8161E75
-	loadword 0, gUnknown_8176FEB
-	callstd 4
+	msgbox gUnknown_8176FEB
 	release
 	end
 
 SilphCo_11F_EventScript_161E7F:: @ 8161E7F
-	loadword 0, gUnknown_81770A9
-	callstd 2
+	msgbox gUnknown_81770A9, 2
 	end
 
 SilphCo_11F_EventScript_161E88:: @ 8161E88
@@ -76,8 +70,7 @@ EventScript_161EA0:: @ 8161EA0
 	applymovement 3, Movement_1A75ED
 	waitmovement 0
 	delay 25
-	loadword 0, gUnknown_8177108
-	callstd 4
+	msgbox gUnknown_8177108
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_161F00
@@ -85,8 +78,7 @@ EventScript_161EA0:: @ 8161EA0
 	call_if 1, EventScript_161F12
 	setvar VAR_LAST_TALKED, 3
 	trainerbattle 3, 349, 0, Text_1771AB
-	loadword 0, gUnknown_81771C2
-	callstd 4
+	msgbox gUnknown_81771C2
 	closemessage
 	fadescreen 1
 	removeobject 3
@@ -134,23 +126,19 @@ Movement_161F27:: @ 8161F27
 	step_end
 
 EventScript_161F2E:: @ 8161F2E
-	loadword 0, gUnknown_817732B
-	callstd 3
+	msgbox gUnknown_817732B, 3
 	end
 
 SilphCo_11F_EventScript_161F37:: @ 8161F37
-	loadword 0, gUnknown_817734A
-	callstd 3
+	msgbox gUnknown_817734A, 3
 	end
 
 SilphCo_11F_EventScript_161F40:: @ 8161F40
 	trainerbattle 0, 390, 0, Text_1772B8, Text_1772E7
-	loadword 0, gUnknown_81772F9
-	callstd 6
+	msgbox gUnknown_81772F9, 6
 	end
 
 SilphCo_11F_EventScript_161F57:: @ 8161F57
 	trainerbattle 0, 391, 0, Text_17726A, Text_17728C
-	loadword 0, gUnknown_817729B
-	callstd 6
+	msgbox gUnknown_817729B, 6
 	end

@@ -15,16 +15,13 @@ SevenIsland_PokemonCenter_1F_EventScript_170B98:: @ 8170B98
 	end
 
 SevenIsland_PokemonCenter_1F_EventScript_170BA1:: @ 8170BA1
-	loadword 0, gUnknown_81A0B98
-	callstd 2
+	msgbox gUnknown_81A0B98, 2
 	end
 
 SevenIsland_PokemonCenter_1F_EventScript_170BAA:: @ 8170BAA
-	loadword 0, gUnknown_81A0C1F
-	callstd 2
+	msgbox gUnknown_81A0C1F, 2
 	end
 
 SevenIsland_PokemonCenter_1F_EventScript_170BB3:: @ 8170BB3
-	loadword 0, gUnknown_81A0CA5
-	callstd 2
+	msgbox gUnknown_81A0CA5, 2
 	end

@@ -18,17 +18,14 @@ PokemonMansion_2F_EventScript_162264:: @ 8162264
 	end
 
 PokemonMansion_2F_EventScript_162278:: @ 8162278
-	loadword 0, gUnknown_817751F
-	callstd 3
+	msgbox gUnknown_817751F, 3
 	end
 
 PokemonMansion_2F_EventScript_162281:: @ 8162281
-	loadword 0, gUnknown_8177574
-	callstd 3
+	msgbox gUnknown_8177574, 3
 	end
 
 PokemonMansion_2F_EventScript_16228A:: @ 816228A
 	trainerbattle 0, 216, 0, Text_177498, Text_1774CB
-	loadword 0, gUnknown_81774E3
-	callstd 6
+	msgbox gUnknown_81774E3, 6
 	end

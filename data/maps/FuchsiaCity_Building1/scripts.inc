@@ -8,8 +8,7 @@ FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
 	goto_if 1, EventScript_16D7FA
 	checkflag FLAG_0x189
 	goto_if 1, EventScript_16D780
-	loadword 0, gUnknown_8198DF9
-	callstd 5
+	msgbox gUnknown_8198DF9, 5
 	compare_var_to_value VAR_RESULT, 1
 	call_if 1, EventScript_16D7E8
 	compare_var_to_value VAR_RESULT, 0
@@ -23,8 +22,7 @@ EventScript_16D780:: @ 816D780
 	message Text_198E84
 	waitmessage
 	waitfanfare
-	loadword 0, gUnknown_8198EAA
-	callstd 4
+	msgbox gUnknown_8198EAA
 	call EventScript_1A6675
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
@@ -39,37 +37,30 @@ EventScript_16D780:: @ 816D780
 	end
 
 EventScript_16D7D6:: @ 816D7D6
-	loadword 0, gUnknown_8198ECA
-	callstd 4
+	msgbox gUnknown_8198ECA
 	return
 
 EventScript_16D7DF:: @ 816D7DF
-	loadword 0, gUnknown_8198F96
-	callstd 4
+	msgbox gUnknown_8198F96
 	return
 
 EventScript_16D7E8:: @ 816D7E8
-	loadword 0, gUnknown_8198E3F
-	callstd 4
+	msgbox gUnknown_8198E3F
 	return
 
 EventScript_16D7F1:: @ 816D7F1
-	loadword 0, gUnknown_8198E63
-	callstd 4
+	msgbox gUnknown_8198E63
 	return
 
 EventScript_16D7FA:: @ 816D7FA
-	loadword 0, gUnknown_819908A
-	callstd 4
+	msgbox gUnknown_819908A
 	release
 	end
 
 FuchsiaCity_Building1_EventScript_16D804:: @ 816D804
-	loadword 0, gUnknown_819913C
-	callstd 3
+	msgbox gUnknown_819913C, 3
 	end
 
 FuchsiaCity_Building1_EventScript_16D80D:: @ 816D80D
-	loadword 0, gUnknown_8199167
-	callstd 3
+	msgbox gUnknown_8199167, 3
 	end

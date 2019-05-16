@@ -109,7 +109,6 @@ EventScript_16160E:: @ 816160E
 	return
 
 EventScript_16161B:: @ 816161B
-	loadword 0, gUnknown_81754DD
-	callstd 4
+	msgbox gUnknown_81754DD
 	releaseall
 	end

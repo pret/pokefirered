@@ -15,16 +15,13 @@ CeladonCity_PokemonCenter_1F_EventScript_16C5FB:: @ 816C5FB
 	end
 
 CeladonCity_PokemonCenter_1F_EventScript_16C604:: @ 816C604
-	loadword 0, gUnknown_819685B
-	callstd 2
+	msgbox gUnknown_819685B, 2
 	end
 
 CeladonCity_PokemonCenter_1F_EventScript_16C60D:: @ 816C60D
-	loadword 0, gUnknown_81968C2
-	callstd 2
+	msgbox gUnknown_81968C2, 2
 	end
 
 CeladonCity_PokemonCenter_1F_EventScript_16C616:: @ 816C616
-	loadword 0, gUnknown_8196913
-	callstd 2
+	msgbox gUnknown_8196913, 2
 	end

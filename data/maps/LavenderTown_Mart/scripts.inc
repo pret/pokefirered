@@ -2,18 +2,15 @@ LavenderTown_Mart_MapScripts:: @ 816B34F
 	.byte 0
 
 LavenderTown_Mart_EventScript_16B350:: @ 816B350
-	loadword 0, gUnknown_8193CE5
-	callstd 2
+	msgbox gUnknown_8193CE5, 2
 	end
 
 LavenderTown_Mart_EventScript_16B359:: @ 816B359
-	loadword 0, gUnknown_8193DB6
-	callstd 2
+	msgbox gUnknown_8193DB6, 2
 	end
 
 LavenderTown_Mart_EventScript_16B362:: @ 816B362
-	loadword 0, gUnknown_8193DF1
-	callstd 2
+	msgbox gUnknown_8193DF1, 2
 	end
 
 LavenderTown_Mart_EventScript_16B36B:: @ 816B36B
@@ -25,8 +22,7 @@ LavenderTown_Mart_EventScript_16B36B:: @ 816B36B
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16B390
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 

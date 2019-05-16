@@ -2,13 +2,11 @@ CeladonCity_GameCorner_PrizeRoom_MapScripts:: @ 816CB75
 	.byte 0
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CB76:: @ 816CB76
-	loadword 0, gUnknown_8196FC1
-	callstd 2
+	msgbox gUnknown_8196FC1, 2
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CB7F:: @ 816CB7F
-	loadword 0, gUnknown_8196FFF
-	callstd 2
+	msgbox gUnknown_8196FFF, 2
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CB88:: @ 816CB88
@@ -20,8 +18,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CB88:: @ 816CB88
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
 	showcoinsbox 0, 0
-	loadword 0, gUnknown_8197057
-	callstd 4
+	msgbox gUnknown_8197057
 	goto EventScript_16CBB2
 	end
 
@@ -83,8 +80,7 @@ EventScript_16CC55:: @ 816CC55
 
 EventScript_16CC65:: @ 816CC65
 	getspeciesname 0, VAR_0x4001
-	loadword 0, gUnknown_819709D
-	callstd 5
+	msgbox gUnknown_819709D, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16CC10
 	checkcoins VAR_RESULT
@@ -147,8 +143,7 @@ EventScript_16CD52:: @ 816CD52
 
 EventScript_16CD74:: @ 816CD74
 	textcolor 3
-	loadword 0, gUnknown_81A5E31
-	callstd 4
+	msgbox gUnknown_81A5E31
 	hidecoinsbox 0, 0
 	release
 	end
@@ -163,14 +158,12 @@ EventScript_16CD83:: @ 816CD83
 
 EventScript_16CD99:: @ 816CD99
 	textcolor 3
-	loadword 0, gUnknown_819703E
-	callstd 4
+	msgbox gUnknown_819703E
 	release
 	end
 
 EventScript_16CDA5:: @ 816CDA5
-	loadword 0, gUnknown_81970D5
-	callstd 4
+	msgbox gUnknown_81970D5
 	goto EventScript_16CC10
 	end
 
@@ -182,8 +175,7 @@ EventScript_16CDB3:: @ 816CDB3
 	message Text_1A5DF1
 	waitmessage
 	waitfanfare
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_16CD83
 	goto EventScript_16CC10
@@ -197,8 +189,7 @@ EventScript_16CDE0:: @ 816CDE0
 	message Text_1A5DF1
 	waitmessage
 	waitfanfare
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16CE12
 	call EventScript_1A8C33
@@ -219,8 +210,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CE1D:: @ 816CE1D
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
 	showcoinsbox 0, 0
-	loadword 0, gUnknown_8197057
-	callstd 4
+	msgbox gUnknown_8197057
 	goto EventScript_16CE47
 	end
 
@@ -281,8 +271,7 @@ EventScript_16CEF5:: @ 816CEF5
 	end
 
 EventScript_16CF09:: @ 816CF09
-	loadword 0, gUnknown_81970B2
-	callstd 5
+	msgbox gUnknown_81970B2, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16CC10
 	goto EventScript_16CF3F
@@ -290,8 +279,7 @@ EventScript_16CF09:: @ 816CF09
 
 EventScript_16CF22:: @ 816CF22
 	getitemname 0, VAR_0x4001
-	loadword 0, gUnknown_819709D
-	callstd 5
+	msgbox gUnknown_819709D, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16CC10
 	goto EventScript_16CF3F
@@ -315,8 +303,7 @@ EventScript_16CF3F:: @ 816CF3F
 
 EventScript_16CF79:: @ 816CF79
 	textcolor 3
-	loadword 0, gUnknown_81A5242
-	callstd 4
+	msgbox gUnknown_81A5242
 	hidecoinsbox 0, 0
 	release
 	end
@@ -330,8 +317,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CF88:: @ 816CF88
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
 	showcoinsbox 0, 0
-	loadword 0, gUnknown_8197057
-	callstd 4
+	msgbox gUnknown_8197057
 	goto EventScript_16CFB2
 	end
 

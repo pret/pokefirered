@@ -10,15 +10,13 @@ ThreeIsland_BerryForest_MapScript1_163C77:: @ 8163C77
 ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	lock
 	faceplayer
-	loadword 0, gUnknown_817ADD6
-	callstd 4
+	msgbox gUnknown_817ADD6
 	playse SE_PIN
 	applymovement 1, Movement_1A75DB
 	waitmovement 0
 	applymovement 1, Movement_163D22
 	waitmovement 0
-	loadword 0, gUnknown_817AE8E
-	callstd 4
+	msgbox gUnknown_817AE8E
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
@@ -30,16 +28,14 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	special sub_8112364
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
-	loadword 0, gUnknown_817AEE1
-	callstd 4
+	msgbox gUnknown_817AEE1
 	setorcopyvar VAR_0x8000, 147
 	setorcopyvar VAR_0x8001, 1
 	callstd 0
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_163D19
 	special sub_80CA6DC
-	loadword 0, gUnknown_817AF3B
-	callstd 4
+	msgbox gUnknown_817AF3B
 	closemessage
 	setflag FLAG_0x2A3
 	setflag FLAG_0x07A
@@ -51,8 +47,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	end
 
 EventScript_163D19:: @ 8163D19
-	loadword 0, gUnknown_817AF9F
-	callstd 4
+	msgbox gUnknown_817AF9F
 	return
 
 Movement_163D22:: @ 8163D22
@@ -64,11 +59,9 @@ Movement_163D22:: @ 8163D22
 	step_end
 
 ThreeIsland_BerryForest_EventScript_163D28:: @ 8163D28
-	loadword 0, gUnknown_817AFD6
-	callstd 3
+	msgbox gUnknown_817AFD6, 3
 	end
 
 ThreeIsland_BerryForest_EventScript_163D31:: @ 8163D31
-	loadword 0, gUnknown_817B029
-	callstd 3
+	msgbox gUnknown_817B029, 3
 	end

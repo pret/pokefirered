@@ -13,8 +13,7 @@ TwoIsland_House_EventScript_171619:: @ 8171619
 	clearflag FLAG_0x004
 	checkflag FLAG_0x001
 	goto_if 1, EventScript_17164F
-	loadword 0, gUnknown_81A2B88
-	callstd 4
+	msgbox gUnknown_81A2B88
 	setflag FLAG_0x001
 	goto EventScript_17164F
 	end
@@ -46,16 +45,14 @@ EventScript_171696:: @ 8171696
 	end
 
 EventScript_1716A5:: @ 81716A5
-	loadword 0, gUnknown_81A2C63
-	callstd 5
+	msgbox gUnknown_81A2C63, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_17179E
 	goto EventScript_1716BE
 	end
 
 EventScript_1716BE:: @ 81716BE
-	loadword 0, gUnknown_81A2CC3
-	callstd 4
+	msgbox gUnknown_81A2CC3
 	special sub_80BF93C
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
@@ -69,8 +66,7 @@ EventScript_1716BE:: @ 81716BE
 	end
 
 EventScript_1716F4:: @ 81716F4
-	loadword 0, gUnknown_81A2CE1
-	callstd 4
+	msgbox gUnknown_81A2CE1
 	special sub_80E4634
 	waitstate
 	compare_var_to_value VAR_0x8004, 0
@@ -86,8 +82,7 @@ EventScript_1716F4:: @ 81716F4
 EventScript_171727:: @ 8171727
 	removeitem ITEM_BIG_MUSHROOM, 1
 	textcolor 3
-	loadword 0, gUnknown_81A2DB3
-	callstd 4
+	msgbox gUnknown_81A2DB3
 	call EventScript_1A6675
 	goto EventScript_17179E
 	end
@@ -95,8 +90,7 @@ EventScript_171727:: @ 8171727
 EventScript_171741:: @ 8171741
 	removeitem ITEM_TINY_MUSHROOM, 2
 	textcolor 3
-	loadword 0, gUnknown_81A2D85
-	callstd 4
+	msgbox gUnknown_81A2D85
 	call EventScript_1A6675
 	goto EventScript_17179E
 	end
@@ -113,20 +107,17 @@ EventScript_17175B:: @ 817175B
 	end
 
 EventScript_171782:: @ 8171782
-	loadword 0, gUnknown_81A2CFC
-	callstd 4
+	msgbox gUnknown_81A2CFC
 	goto EventScript_1716BE
 	end
 
 EventScript_171790:: @ 8171790
-	loadword 0, gUnknown_81A2E20
-	callstd 4
+	msgbox gUnknown_81A2E20
 	goto EventScript_1716BE
 	end
 
 EventScript_17179E:: @ 817179E
-	loadword 0, gUnknown_81A2DE0
-	callstd 4
+	msgbox gUnknown_81A2DE0
 	release
 	end
 

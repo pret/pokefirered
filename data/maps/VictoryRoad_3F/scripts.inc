@@ -33,36 +33,30 @@ EventScript_161101:: @ 8161101
 
 VictoryRoad_3F_EventScript_161103:: @ 8161103
 	trainerbattle 0, 393, 0, Text_174B60, Text_174B83
-	loadword 0, gUnknown_8174B99
-	callstd 6
+	msgbox gUnknown_8174B99, 6
 	end
 
 VictoryRoad_3F_EventScript_16111A:: @ 816111A
 	trainerbattle 0, 394, 0, Text_174C8A, Text_174CA9
-	loadword 0, gUnknown_8174CBD
-	callstd 6
+	msgbox gUnknown_8174CBD, 6
 	end
 
 VictoryRoad_3F_EventScript_161131:: @ 8161131
 	trainerbattle 0, 403, 0, Text_174C30, Text_174C5A
-	loadword 0, gUnknown_8174C67
-	callstd 6
+	msgbox gUnknown_8174C67, 6
 	end
 
 VictoryRoad_3F_EventScript_161148:: @ 8161148
 	trainerbattle 0, 404, 0, Text_174BCA, Text_174BF4
-	loadword 0, gUnknown_8174C03
-	callstd 6
+	msgbox gUnknown_8174C03, 6
 	end
 
 VictoryRoad_3F_EventScript_16115F:: @ 816115F
 	trainerbattle 4, 485, 0, Text_174D0C, Text_174D45, Text_174D96
-	loadword 0, gUnknown_8174D64
-	callstd 6
+	msgbox gUnknown_8174D64, 6
 	end
 
 VictoryRoad_3F_EventScript_16117A:: @ 816117A
 	trainerbattle 4, 485, 0, Text_174E08, Text_174E39, Text_174E8D
-	loadword 0, gUnknown_8174E48
-	callstd 6
+	msgbox gUnknown_8174E48, 6
 	end

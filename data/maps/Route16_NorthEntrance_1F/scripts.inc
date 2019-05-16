@@ -13,8 +13,7 @@ EventScript_1701D5:: @ 81701D5
 	return
 
 Route16_NorthEntrance_1F_EventScript_1701DB:: @ 81701DB
-	loadword 0, gUnknown_819F98B
-	callstd 2
+	msgbox gUnknown_819F98B, 2
 	end
 
 Route16_NorthEntrance_1F_EventScript_1701E4:: @ 81701E4
@@ -49,8 +48,7 @@ Route16_NorthEntrance_1F_EventScript_170214:: @ 8170214
 
 EventScript_170220:: @ 8170220
 	textcolor 0
-	loadword 0, gUnknown_819F9CC
-	callstd 4
+	msgbox gUnknown_819F9CC
 	closemessage
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
@@ -63,8 +61,7 @@ EventScript_170220:: @ 8170220
 	call_if 1, EventScript_17028F
 	compare_var_to_value VAR_0x8008, 4
 	call_if 1, EventScript_17029A
-	loadword 0, gUnknown_819F95F
-	callstd 4
+	msgbox gUnknown_819F95F
 	closemessage
 	applymovement 255, Movement_1702B3
 	waitmovement 0
@@ -118,6 +115,5 @@ Movement_1702B3:: @ 81702B3
 	step_end
 
 Route16_NorthEntrance_1F_EventScript_1702B5:: @ 81702B5
-	loadword 0, gUnknown_819F9E8
-	callstd 2
+	msgbox gUnknown_819F9E8, 2
 	end

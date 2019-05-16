@@ -39,8 +39,7 @@ EventScript_167CEC:: @ 8167CEC
 	delay 25
 	applymovement 10, Movement_167D49
 	waitmovement 0
-	loadword 0, gUnknown_8182B37
-	callstd 4
+	msgbox gUnknown_8182B37
 	closemessage
 	applymovement 255, Movement_167D52
 	applymovement 10, Movement_167D4E
@@ -86,22 +85,18 @@ FourIsland_EventScript_167D55:: @ 8167D55
 	goto_if 1, EventScript_167E0C
 	compare_var_to_value VAR_RESULT, 3
 	goto_if 1, EventScript_167E19
-	loadword 0, gUnknown_81BF555
-	callstd 4
+	msgbox gUnknown_81BF555
 	release
 	end
 
 EventScript_167D9B:: @ 8167D9B
-	loadword 0, gUnknown_81BF5E3
-	callstd 5
+	msgbox gUnknown_81BF5E3, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_167DD1
-	loadword 0, gUnknown_81BF7B6
-	callstd 5
+	msgbox gUnknown_81BF7B6, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_167DD1
-	loadword 0, gUnknown_81BF6CF
-	callstd 4
+	msgbox gUnknown_81BF6CF
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	special RejectEggFromDayCare
 	release
@@ -111,8 +106,7 @@ EventScript_167DD1:: @ 8167DD1
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare_var_to_value VAR_RESULT, 6
 	goto_if 5, EventScript_167DEB
-	loadword 0, gUnknown_81BF6F0
-	callstd 4
+	msgbox gUnknown_81BF6F0
 	release
 	end
 
@@ -123,8 +117,7 @@ EventScript_167DEB:: @ 8167DEB
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress
-	loadword 0, gUnknown_81BF755
-	callstd 4
+	msgbox gUnknown_81BF755
 	special GiveEggFromDaycare
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	release
@@ -132,15 +125,13 @@ EventScript_167DEB:: @ 8167DEB
 
 EventScript_167E0C:: @ 8167E0C
 	special GetDaycareMonNicknames
-	loadword 0, gUnknown_81BF69A
-	callstd 4
+	msgbox gUnknown_81BF69A
 	release
 	end
 
 EventScript_167E19:: @ 8167E19
 	special GetDaycareMonNicknames
-	loadword 0, gUnknown_81BF789
-	callstd 4
+	msgbox gUnknown_81BF789
 	special SetDaycareCompatibilityString
 	special sub_80CA68C
 	waitmessage
@@ -153,8 +144,7 @@ FourIsland_EventScript_167E2E:: @ 8167E2E
 	faceplayer
 	checkflag FLAG_0x844
 	goto_if 1, EventScript_167E43
-	loadword 0, gUnknown_8182A2B
-	callstd 4
+	msgbox gUnknown_8182A2B
 	release
 	end
 
@@ -162,8 +152,7 @@ EventScript_167E43:: @ 8167E43
 	setvar VAR_0x8004, 9
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_8182A75
-	callstd 4
+	msgbox gUnknown_8182A75
 	release
 	end
 
@@ -173,22 +162,18 @@ FourIsland_EventScript_167E5A:: @ 8167E5A
 	setvar VAR_0x8004, 9
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_8182CE3
-	callstd 4
+	msgbox gUnknown_8182CE3
 	release
 	end
 
 FourIsland_EventScript_167E73:: @ 8167E73
-	loadword 0, gUnknown_8182D8E
-	callstd 2
+	msgbox gUnknown_8182D8E, 2
 	end
 
 FourIsland_EventScript_167E7C:: @ 8167E7C
-	loadword 0, gUnknown_8182A03
-	callstd 3
+	msgbox gUnknown_8182A03, 3
 	end
 
 FourIsland_EventScript_167E85:: @ 8167E85
-	loadword 0, gUnknown_8182DEB
-	callstd 3
+	msgbox gUnknown_8182DEB, 3
 	end

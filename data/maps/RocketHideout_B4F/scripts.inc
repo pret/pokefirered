@@ -27,8 +27,7 @@ RocketHideout_B4F_EventScript_161317:: @ 8161317
 	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0
 	waitbuttonpress
 	trainerbattle 3, 348, 0, Text_175318
-	loadword 0, gUnknown_817532D
-	callstd 4
+	msgbox gUnknown_817532D
 	fadescreen 1
 	closemessage
 	removeobject 1
@@ -56,14 +55,12 @@ RocketHideout_B4F_EventScript_161363:: @ 8161363
 
 RocketHideout_B4F_EventScript_161381:: @ 8161381
 	trainerbattle 2, 368, 0, Text_175488, Text_1754B9, EventScript_16139D
-	loadword 0, gUnknown_81754BD
-	callstd 4
+	msgbox gUnknown_81754BD
 	release
 	end
 
 EventScript_16139D:: @ 816139D
-	loadword 0, gUnknown_81754BD
-	callstd 4
+	msgbox gUnknown_81754BD
 	addobject 4
 	clearflag FLAG_0x036
 	release
@@ -84,8 +81,7 @@ RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
 
 RocketHideout_B4F_EventScript_1613CE:: @ 81613CE
 	trainerbattle 2, 366, 0, Text_1753D0, Text_1753FE, EventScript_1613E9
-	loadword 0, gUnknown_817540C
-	callstd 6
+	msgbox gUnknown_817540C, 6
 	end
 
 EventScript_1613E9:: @ 81613E9
@@ -103,8 +99,7 @@ EventScript_1613E9:: @ 81613E9
 
 RocketHideout_B4F_EventScript_161418:: @ 8161418
 	trainerbattle 2, 367, 0, Text_175437, Text_175463, EventScript_161433
-	loadword 0, gUnknown_817546A
-	callstd 6
+	msgbox gUnknown_817546A, 6
 	end
 
 EventScript_161433:: @ 8161433

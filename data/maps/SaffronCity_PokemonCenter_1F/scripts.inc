@@ -15,13 +15,11 @@ SaffronCity_PokemonCenter_1F_EventScript_16EFFB:: @ 816EFFB
 	end
 
 SaffronCity_PokemonCenter_1F_EventScript_16F004:: @ 816F004
-	loadword 0, gUnknown_819C058
-	callstd 2
+	msgbox gUnknown_819C058, 2
 	end
 
 SaffronCity_PokemonCenter_1F_EventScript_16F00D:: @ 816F00D
-	loadword 0, gUnknown_819C023
-	callstd 2
+	msgbox gUnknown_819C023, 2
 	end
 
 SaffronCity_PokemonCenter_1F_EventScript_16F016:: @ 816F016
@@ -29,13 +27,11 @@ SaffronCity_PokemonCenter_1F_EventScript_16F016:: @ 816F016
 	faceplayer
 	compare_var_to_value VAR_0x4060, 1
 	goto_if 1, EventScript_16F02D
-	loadword 0, gUnknown_819C0B4
-	callstd 4
+	msgbox gUnknown_819C0B4
 	release
 	end
 
 EventScript_16F02D:: @ 816F02D
-	loadword 0, gUnknown_819C102
-	callstd 4
+	msgbox gUnknown_819C102
 	release
 	end

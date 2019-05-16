@@ -39,8 +39,7 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_164346
 	textcolor 0
-	loadword 0, gUnknown_817BD97
-	callstd 4
+	msgbox gUnknown_817BD97
 	closemessage
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_164351
@@ -59,8 +58,7 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	call_if 1, EventScript_164304
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_164304
-	loadword 0, gUnknown_817BDD4
-	callstd 4
+	msgbox gUnknown_817BDD4
 	closemessage
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_1643A5

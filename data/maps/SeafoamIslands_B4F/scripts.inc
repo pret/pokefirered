@@ -208,11 +208,9 @@ EventScript_163222:: @ 8163222
 	end
 
 SeafoamIslands_B4F_EventScript_163223:: @ 8163223
-	loadword 0, gUnknown_8179B36
-	callstd 3
+	msgbox gUnknown_8179B36, 3
 	end
 
 SeafoamIslands_B4F_EventScript_16322C:: @ 816322C
-	loadword 0, gUnknown_8179B65
-	callstd 3
+	msgbox gUnknown_8179B65, 3
 	end

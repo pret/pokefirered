@@ -2,8 +2,7 @@ PokemonTower_2F_MapScripts:: @ 8163285
 	.byte 0
 
 PokemonTower_2F_EventScript_163286:: @ 8163286
-	loadword 0, gUnknown_8179EAE
-	callstd 2
+	msgbox gUnknown_8179EAE, 2
 	end
 
 PokemonTower_2F_EventScript_16328F:: @ 816328F
@@ -29,8 +28,7 @@ EventScript_1632A7:: @ 81632A7
 	waitmovement 0
 	applymovement 1, Movement_1A75DD
 	waitmovement 0
-	loadword 0, gUnknown_8179CFF
-	callstd 4
+	msgbox gUnknown_8179CFF
 	setvar VAR_LAST_TALKED, 1
 	compare_var_to_value VAR_STARTER_MON, 2
 	call_if 1, EventScript_16335D
@@ -38,8 +36,7 @@ EventScript_1632A7:: @ 81632A7
 	call_if 1, EventScript_163368
 	compare_var_to_value VAR_STARTER_MON, 0
 	call_if 1, EventScript_163373
-	loadword 0, gUnknown_8179DD4
-	callstd 4
+	msgbox gUnknown_8179DD4
 	closemessage
 	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
 	compare_var_to_value VAR_0x4001, 0

@@ -7,16 +7,13 @@ SevenIsland_MapScript1_167EB9:: @ 8167EB9
 	end
 
 SevenIsland_EventScript_167EBD:: @ 8167EBD
-	loadword 0, gUnknown_8183046
-	callstd 3
+	msgbox gUnknown_8183046, 3
 	end
 
 SevenIsland_EventScript_167EC6:: @ 8167EC6
-	loadword 0, gUnknown_818306C
-	callstd 2
+	msgbox gUnknown_818306C, 2
 	end
 
 SevenIsland_EventScript_167ECF:: @ 8167ECF
-	loadword 0, gUnknown_8183143
-	callstd 2
+	msgbox gUnknown_8183143, 2
 	end

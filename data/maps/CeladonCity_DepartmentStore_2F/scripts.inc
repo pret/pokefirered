@@ -2,18 +2,15 @@ CeladonCity_DepartmentStore_2F_MapScripts:: @ 816BAF4
 	.byte 0
 
 CeladonCity_DepartmentStore_2F_EventScript_16BAF5:: @ 816BAF5
-	loadword 0, gUnknown_81955C7
-	callstd 2
+	msgbox gUnknown_81955C7, 2
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_16BAFE:: @ 816BAFE
-	loadword 0, gUnknown_819560F
-	callstd 2
+	msgbox gUnknown_819560F, 2
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_16BB07:: @ 816BB07
-	loadword 0, gUnknown_8195638
-	callstd 3
+	msgbox gUnknown_8195638, 3
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_16BB10:: @ 816BB10
@@ -25,8 +22,7 @@ CeladonCity_DepartmentStore_2F_EventScript_16BB10:: @ 816BB10
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16BB38
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 
@@ -54,8 +50,7 @@ CeladonCity_DepartmentStore_2F_EventScript_16BB4E:: @ 816BB4E
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16BB74
-	loadword 0, gUnknown_81A5190
-	callstd 4
+	msgbox gUnknown_81A5190
 	release
 	end
 

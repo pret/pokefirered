@@ -151,14 +151,12 @@ EventScript_16B843:: @ 816B843
 	goto_if 1, EventScript_16B89E
 	compare_var_to_var VAR_0x8004, VAR_0x8008
 	goto_if 1, EventScript_16B885
-	loadword 0, gUnknown_8195289
-	callstd 4
+	msgbox gUnknown_8195289
 	releaseall
 	end
 
 EventScript_16B885:: @ 816B885
-	loadword 0, gUnknown_81952A8
-	callstd 4
+	msgbox gUnknown_81952A8
 	playse SE_PIN
 	waitse
 	call EventScript_16B6BC
@@ -170,8 +168,7 @@ EventScript_16B885:: @ 816B885
 EventScript_16B89E:: @ 816B89E
 	compare_var_to_var VAR_0x8005, VAR_0x8008
 	goto_if 1, EventScript_16B8CB
-	loadword 0, gUnknown_819536C
-	callstd 4
+	msgbox gUnknown_819536C
 	clearflag FLAG_0x001
 	special sub_80CADEC
 	copyvar VAR_0x4000, VAR_0x8004
@@ -182,8 +179,7 @@ EventScript_16B89E:: @ 816B89E
 	end
 
 EventScript_16B8CB:: @ 816B8CB
-	loadword 0, gUnknown_8195330
-	callstd 4
+	msgbox gUnknown_8195330
 	closemessage
 	call EventScript_16B717
 	special DrawWholeMapView
@@ -194,8 +190,7 @@ EventScript_16B8CB:: @ 816B8CB
 	end
 
 EventScript_16B8E5:: @ 816B8E5
-	loadword 0, gUnknown_8195289
-	callstd 4
+	msgbox gUnknown_8195289
 	releaseall
 	end
 
@@ -219,8 +214,7 @@ VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
 	trainerbattle 1, 416, 0, Text_194BA4, Text_194E03, EventScript_16B97C
 	checkflag FLAG_0x231
 	goto_if 0, EventScript_16B9AF
-	loadword 0, gUnknown_8194C8E
-	callstd 4
+	msgbox gUnknown_8194C8E
 	release
 	end
 
@@ -243,22 +237,19 @@ EventScript_16B9AB:: @ 816B9AB
 	return
 
 EventScript_16B9AF:: @ 816B9AF
-	loadword 0, gUnknown_8194CFA
-	callstd 4
+	msgbox gUnknown_8194CFA
 	checkitemspace ITEM_TM34, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16B9F0
 	additem ITEM_TM34, 1
 	giveitemfanfaremsg gUnknown_8194D87, ITEM_TM34
 	setflag FLAG_0x231
-	loadword 0, gUnknown_8194DA8
-	callstd 4
+	msgbox gUnknown_8194DA8
 	release
 	end
 
 EventScript_16B9F0:: @ 816B9F0
-	loadword 0, gUnknown_8194DE3
-	callstd 4
+	msgbox gUnknown_8194DE3
 	release
 	end
 
@@ -267,14 +258,12 @@ VermilionCity_Gym_EventScript_16B9FA:: @ 816B9FA
 	setvar VAR_0x8004, 4
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_8195004
-	callstd 6
+	msgbox gUnknown_8195004, 6
 	end
 
 VermilionCity_Gym_EventScript_16BA1E:: @ 816BA1E
 	trainerbattle 0, 220, 0, Text_194F1F, Text_194F6F
-	loadword 0, gUnknown_8194F76
-	callstd 6
+	msgbox gUnknown_8194F76, 6
 	end
 
 VermilionCity_Gym_EventScript_16BA35:: @ 816BA35
@@ -282,8 +271,7 @@ VermilionCity_Gym_EventScript_16BA35:: @ 816BA35
 	setvar VAR_0x8004, 4
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_8194EBD
-	callstd 6
+	msgbox gUnknown_8194EBD, 6
 	end
 
 EventScript_16BA5D:: @ 816BA5D
@@ -298,14 +286,12 @@ VermilionCity_Gym_EventScript_16BA6C:: @ 816BA6C
 	faceplayer
 	checkflag FLAG_0x4B2
 	goto_if 1, EventScript_16BA81
-	loadword 0, gUnknown_81950B4
-	callstd 4
+	msgbox gUnknown_81950B4
 	release
 	end
 
 EventScript_16BA81:: @ 816BA81
-	loadword 0, gUnknown_81951EC
-	callstd 4
+	msgbox gUnknown_81951EC
 	release
 	end
 
@@ -313,13 +299,11 @@ VermilionCity_Gym_EventScript_16BA8B:: @ 816BA8B
 	lockall
 	checkflag FLAG_0x822
 	goto_if 1, EventScript_16BA9F
-	loadword 0, gUnknown_819520B
-	callstd 4
+	msgbox gUnknown_819520B
 	releaseall
 	end
 
 EventScript_16BA9F:: @ 816BA9F
-	loadword 0, gUnknown_8195248
-	callstd 4
+	msgbox gUnknown_8195248
 	releaseall
 	end

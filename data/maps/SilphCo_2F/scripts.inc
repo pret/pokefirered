@@ -16,30 +16,25 @@ EventScript_16165F:: @ 816165F
 	end
 
 SilphCo_2F_EventScript_161660:: @ 8161660
-	loadword 0, gUnknown_8175894
-	callstd 3
+	msgbox gUnknown_8175894, 3
 	end
 
 SilphCo_2F_EventScript_161669:: @ 8161669
 	trainerbattle 0, 336, 0, Text_175562, Text_17557E
-	loadword 0, gUnknown_817559F
-	callstd 6
+	msgbox gUnknown_817559F, 6
 	end
 
 SilphCo_2F_EventScript_161680:: @ 8161680
 	trainerbattle 0, 337, 0, Text_1755C6, Text_1755E5
-	loadword 0, gUnknown_81755F2
-	callstd 6
+	msgbox gUnknown_81755F2, 6
 	end
 
 SilphCo_2F_EventScript_161697:: @ 8161697
 	trainerbattle 0, 373, 0, Text_17562D, Text_17564A
-	loadword 0, gUnknown_8175651
-	callstd 6
+	msgbox gUnknown_8175651, 6
 	end
 
 SilphCo_2F_EventScript_1616AE:: @ 81616AE
 	trainerbattle 0, 374, 0, Text_1756AD, Text_1756D8
-	loadword 0, gUnknown_81756E2
-	callstd 6
+	msgbox gUnknown_81756E2, 6
 	end

@@ -64,8 +64,7 @@ EventScript_169002:: @ 8169002
 	end
 
 EventScript_169035:: @ 8169035
-	loadword 0, gUnknown_818EE60
-	callstd 4
+	msgbox gUnknown_818EE60
 	closemessage
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_169174
@@ -75,18 +74,15 @@ EventScript_169035:: @ 8169035
 	call_if 1, EventScript_169194
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_169194
-	loadword 0, gUnknown_818EF59
-	callstd 4
+	msgbox gUnknown_818EF59
 	fadedefaultbgm
-	loadword 0, gUnknown_818F004
-	callstd 4
+	msgbox gUnknown_818F004
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_1691DB
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_1691E6
 	textcolor 3
-	loadword 0, gUnknown_818F062
-	callstd 4
+	msgbox gUnknown_818F062
 	closemessage
 	call EventScript_1A6675
 	compare_var_to_value VAR_FACING, 2
@@ -100,8 +96,7 @@ EventScript_169035:: @ 8169035
 	addobject 9
 	addobject 10
 	delay 30
-	loadword 0, gUnknown_818F085
-	callstd 4
+	msgbox gUnknown_818F085
 	closemessage
 	removeobject 9
 	removeobject 10
@@ -121,10 +116,8 @@ EventScript_169035:: @ 8169035
 	waitfanfare
 	call EventScript_1A6675
 	special EnableNationalPokedex
-	loadword 0, gUnknown_818F103
-	callstd 4
-	loadword 0, gUnknown_818F1DB
-	callstd 4
+	msgbox gUnknown_818F103
+	msgbox gUnknown_818F1DB
 	closemessage
 	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
 	compare_var_to_value VAR_FACING, 2
@@ -234,20 +227,16 @@ EventScript_16923E:: @ 816923E
 	clearflag FLAG_SPECIAL_FLAG_0x4001
 	savebgm SE_STOP
 	fadedefaultbgm
-	loadword 0, gUnknown_818DC94
-	callstd 4
+	msgbox gUnknown_818DC94
 	closemessage
 	delay 60
-	loadword 0, gUnknown_818DFBC
-	callstd 4
+	msgbox gUnknown_818DFBC
 	closemessage
 	delay 30
 	applymovement 8, Movement_1692C0
 	waitmovement 0
-	loadword 0, gUnknown_818DCB9
-	callstd 4
-	loadword 0, gUnknown_818E0EA
-	callstd 4
+	msgbox gUnknown_818DCB9
+	msgbox gUnknown_818E0EA
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	releaseall
 	end
@@ -282,8 +271,7 @@ PalletTown_ProfessorOaksLab_EventScript_1692C3:: @ 81692C3
 	textcolor 0
 	applymovement 4, Movement_1A75F1
 	waitmovement 0
-	loadword 0, gUnknown_818E177
-	callstd 4
+	msgbox gUnknown_818E177
 	closemessage
 	applymovement 255, Movement_1692E5
 	waitmovement 0
@@ -319,8 +307,7 @@ EventScript_16930B:: @ 816930B
 	waitmovement 0
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
-	loadword 0, gUnknown_818DDA4
-	callstd 4
+	msgbox gUnknown_818DDA4
 	closemessage
 	applymovement 4, Movement_1A75F1
 	waitmovement 0
@@ -502,8 +489,7 @@ Movement_1694BE:: @ 81694BE
 
 EventScript_1694C2:: @ 81694C2
 	special sp000_heal_pokemon
-	loadword 0, gUnknown_818DE38
-	callstd 4
+	msgbox gUnknown_818DE38
 	closemessage
 	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
 	compare_var_to_value VAR_0x4002, 1
@@ -592,20 +578,17 @@ PalletTown_ProfessorOaksLab_EventScript_16955F:: @ 816955F
 	goto_if 1, EventScript_16958B
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if 1, EventScript_169581
-	loadword 0, gUnknown_818DC67
-	callstd 4
+	msgbox gUnknown_818DC67
 	release
 	end
 
 EventScript_169581:: @ 8169581
-	loadword 0, gUnknown_818DCE2
-	callstd 4
+	msgbox gUnknown_818DCE2
 	release
 	end
 
 EventScript_16958B:: @ 816958B
-	loadword 0, gUnknown_818DD75
-	callstd 4
+	msgbox gUnknown_818DD75
 	release
 	end
 
@@ -630,32 +613,27 @@ PalletTown_ProfessorOaksLab_EventScript_169595:: @ 8169595
 	goto_if 1, EventScript_169614
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 1, EventScript_16960A
-	loadword 0, gUnknown_818E116
-	callstd 4
+	msgbox gUnknown_818E116
 	release
 	end
 
 EventScript_169600:: @ 8169600
-	loadword 0, gUnknown_81A72AD
-	callstd 4
+	msgbox gUnknown_81A72AD
 	release
 	end
 
 EventScript_16960A:: @ 816960A
-	loadword 0, gUnknown_818E330
-	callstd 4
+	msgbox gUnknown_818E330
 	release
 	end
 
 EventScript_169614:: @ 8169614
-	loadword 0, gUnknown_818E3AD
-	callstd 4
+	msgbox gUnknown_818E3AD
 	release
 	end
 
 EventScript_16961E:: @ 816961E
-	loadword 0, gUnknown_818E405
-	callstd 4
+	msgbox gUnknown_818E405
 	textcolor 3
 	playfanfare MUS_ME_WAZA
 	message Text_18E4AF
@@ -663,11 +641,9 @@ EventScript_16961E:: @ 816961E
 	waitfanfare
 	call EventScript_1A6675
 	removeitem ITEM_OAKS_PARCEL, 1
-	loadword 0, gUnknown_818E4CA
-	callstd 4
+	msgbox gUnknown_818E4CA
 	playbgm BGM_FRLG_RIVAL, 0
-	loadword 0, gUnknown_818DE8D
-	callstd 4
+	msgbox gUnknown_818DE8D
 	closemessage
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_169A82
@@ -678,8 +654,7 @@ EventScript_16961E:: @ 816961E
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_169A9E
 	fadedefaultbgm
-	loadword 0, gUnknown_818DE99
-	callstd 4
+	msgbox gUnknown_818DE99
 	closemessage
 	delay 30
 	playse SE_PIN
@@ -695,8 +670,7 @@ EventScript_16961E:: @ 816961E
 	call_if 1, EventScript_169AF5
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_169B86
-	loadword 0, gUnknown_818E508
-	callstd 4
+	msgbox gUnknown_818E508
 	closemessage
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_169882
@@ -706,12 +680,10 @@ EventScript_16961E:: @ 816961E
 	call_if 1, EventScript_1698A6
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_1698B8
-	loadword 0, gUnknown_818E536
-	callstd 4
+	msgbox gUnknown_818E536
 	closemessage
 	delay 40
-	loadword 0, gUnknown_818E5C5
-	callstd 4
+	msgbox gUnknown_818E5C5
 	closemessage
 	applymovement 4, Movement_1A75E9
 	waitmovement 0
@@ -737,19 +709,15 @@ EventScript_16961E:: @ 816961E
 	setflag FLAG_0x829
 	special sub_810B810
 	setvar VAR_0x407C, 1
-	loadword 0, gUnknown_818E612
-	callstd 4
+	msgbox gUnknown_818E612
 	additem ITEM_POKE_BALL, 5
 	giveitemfanfaremsg gUnknown_818E6B3, ITEM_POKE_BALL, 5
-	loadword 0, gUnknown_818E6D0
-	callstd 4
+	msgbox gUnknown_818E6D0
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_818E784
-	callstd 4
-	loadword 0, gUnknown_818DEC8
-	callstd 4
+	msgbox gUnknown_818E784
+	msgbox gUnknown_818DEC8
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_169B33
 	compare_var_to_value VAR_FACING, 1
@@ -758,8 +726,7 @@ EventScript_16961E:: @ 816961E
 	call_if 1, EventScript_169B57
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_169B57
-	loadword 0, gUnknown_818DEF3
-	callstd 4
+	msgbox gUnknown_818DEF3
 	closemessage
 	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
 	compare_var_to_value VAR_FACING, 2
@@ -903,8 +870,7 @@ EventScript_169913:: @ 8169913
 	waitmovement 0
 	closemessage
 	delay 70
-	loadword 0, gUnknown_81A72AD
-	callstd 4
+	msgbox gUnknown_81A72AD
 	setflag FLAG_0x002
 	release
 	end
@@ -1011,8 +977,7 @@ EventScript_1699CE:: @ 81699CE
 	checkflag FLAG_SYS_RIBBON_GET
 	goto_if 0, EventScript_1699F9
 	delay 30
-	loadword 0, gUnknown_818EDF5
-	callstd 4
+	msgbox gUnknown_818EDF5
 	goto EventScript_169035
 	end
 
@@ -1042,8 +1007,7 @@ EventScript_169A34:: @ 8169A34
 	end
 
 EventScript_169A45:: @ 8169A45
-	loadword 0, gUnknown_818E89C
-	callstd 4
+	msgbox gUnknown_818E89C
 	additem ITEM_POKE_BALL, 5
 	giveitemfanfaremsg gUnknown_818E6B3, ITEM_POKE_BALL, 5
 	setflag FLAG_0x247
@@ -1051,14 +1015,12 @@ EventScript_169A45:: @ 8169A45
 	end
 
 EventScript_169A6E:: @ 8169A6E
-	loadword 0, gUnknown_818E871
-	callstd 4
+	msgbox gUnknown_818E871
 	release
 	end
 
 EventScript_169A78:: @ 8169A78
-	loadword 0, gUnknown_818E98E
-	callstd 4
+	msgbox gUnknown_818E98E
 	release
 	end
 
@@ -1192,8 +1154,7 @@ PalletTown_ProfessorOaksLab_EventScript_169BAB:: @ 8169BAB
 	goto_if 4, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if 1, EventScript_169BE1
-	loadword 0, gUnknown_818EA19
-	callstd 4
+	msgbox gUnknown_818EA19
 	release
 	end
 
@@ -1211,8 +1172,7 @@ EventScript_169BE1:: @ 8169BE1
 	end
 
 EventScript_169C14:: @ 8169C14
-	loadword 0, gUnknown_818E272
-	callstd 5
+	msgbox gUnknown_818E272, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_169C74
 	compare_var_to_value VAR_RESULT, 0
@@ -1220,8 +1180,7 @@ EventScript_169C14:: @ 8169C14
 	end
 
 EventScript_169C33:: @ 8169C33
-	loadword 0, gUnknown_818E207
-	callstd 5
+	msgbox gUnknown_818E207, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_169C74
 	compare_var_to_value VAR_RESULT, 0
@@ -1229,8 +1188,7 @@ EventScript_169C33:: @ 8169C33
 	end
 
 EventScript_169C52:: @ 8169C52
-	loadword 0, gUnknown_818E194
-	callstd 5
+	msgbox gUnknown_818E194, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_169C74
 	compare_var_to_value VAR_RESULT, 0
@@ -1245,8 +1203,7 @@ EventScript_169C71:: @ 8169C71
 EventScript_169C74:: @ 8169C74
 	erasemonpic
 	removeobject VAR_LAST_TALKED
-	loadword 0, gUnknown_818E2E5
-	callstd 4
+	msgbox gUnknown_818E2E5
 	call EventScript_1A6675
 	setflag FLAG_0x828
 	setflag FLAG_0x291
@@ -1257,8 +1214,7 @@ EventScript_169C74:: @ 8169C74
 	waitmessage
 	playfanfare BGM_FRLG_ME_KEYITEM
 	waitfanfare
-	loadword 0, gUnknown_81A56A7
-	callstd 5
+	msgbox gUnknown_81A56A7, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_169CCC
 	compare_var_to_value VAR_RESULT, 0
@@ -1301,8 +1257,7 @@ EventScript_169D1F:: @ 8169D1F
 
 EventScript_169D2F:: @ 8169D2F
 	textcolor 0
-	loadword 0, gUnknown_818DD34
-	callstd 4
+	msgbox gUnknown_818DD34
 	removeobject VAR_0x4004
 	textcolor 3
 	getspeciesname 0, 16387
@@ -1359,8 +1314,7 @@ PalletTown_ProfessorOaksLab_EventScript_169D78:: @ 8169D78
 	goto_if 4, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if 1, EventScript_169BE1
-	loadword 0, gUnknown_818EA19
-	callstd 4
+	msgbox gUnknown_818EA19
 	release
 	end
 
@@ -1375,14 +1329,12 @@ PalletTown_ProfessorOaksLab_EventScript_169DAE:: @ 8169DAE
 	goto_if 4, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if 1, EventScript_169BE1
-	loadword 0, gUnknown_818EA19
-	callstd 4
+	msgbox gUnknown_818EA19
 	release
 	end
 
 EventScript_169DE4:: @ 8169DE4
-	loadword 0, gUnknown_818EA45
-	callstd 4
+	msgbox gUnknown_818EA45
 	release
 	end
 
@@ -1391,8 +1343,7 @@ PalletTown_ProfessorOaksLab_EventScript_169DEE:: @ 8169DEE
 	faceplayer
 	checkflag FLAG_0x82C
 	goto_if 1, EventScript_169E03
-	loadword 0, gUnknown_818EBE6
-	callstd 4
+	msgbox gUnknown_818EBE6
 	release
 	end
 
@@ -1400,8 +1351,7 @@ EventScript_169E03:: @ 8169E03
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_818ED15
-	callstd 4
+	msgbox gUnknown_818ED15
 	release
 	end
 
@@ -1410,8 +1360,7 @@ PalletTown_ProfessorOaksLab_EventScript_169E1A:: @ 8169E1A
 	faceplayer
 	checkflag FLAG_0x82C
 	goto_if 1, EventScript_169E2F
-	loadword 0, gUnknown_818EBE6
-	callstd 4
+	msgbox gUnknown_818EBE6
 	release
 	end
 
@@ -1419,8 +1368,7 @@ EventScript_169E2F:: @ 8169E2F
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_818EC0B
-	callstd 4
+	msgbox gUnknown_818EC0B
 	release
 	end
 
@@ -1430,37 +1378,31 @@ PalletTown_ProfessorOaksLab_EventScript_169E46:: @ 8169E46
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gUnknown_818ED81
-	callstd 4
+	msgbox gUnknown_818ED81
 	release
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_169E5F:: @ 8169E5F
-	loadword 0, gUnknown_818E9E5
-	callstd 2
+	msgbox gUnknown_818E9E5, 2
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_169E68:: @ 8169E68
-	loadword 0, gUnknown_818EAF4
-	callstd 3
+	msgbox gUnknown_818EAF4, 3
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_169E71:: @ 8169E71
-	loadword 0, gUnknown_818EA66
-	callstd 3
+	msgbox gUnknown_818EA66, 3
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_169E7A:: @ 8169E7A
 	lockall
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	goto_if 4, EventScript_169E90
-	loadword 0, gUnknown_818EA84
-	callstd 4
+	msgbox gUnknown_818EA84
 	releaseall
 	end
 
 EventScript_169E90:: @ 8169E90
-	loadword 0, gUnknown_818EAB6
-	callstd 4
+	msgbox gUnknown_818EAB6
 	releaseall
 	end

@@ -2,11 +2,11 @@
 .global SPECIAL_\ptr
 .set SPECIAL_\ptr, __special__
 .set __special__, __special__ + 1
-    .4byte \ptr
-    .endm
+	.4byte \ptr
+	.endm
 
 .set __special__, 0
-    .align 2
+	.align 2
 
 gSpecials:: @ 815FD60
 	def_special sp000_heal_pokemon

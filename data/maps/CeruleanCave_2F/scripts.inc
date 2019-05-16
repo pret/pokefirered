@@ -1,2 +1,2 @@
 CeruleanCave_2F_MapScripts:: @ 81624BD
-    .byte 0
+	.byte 0

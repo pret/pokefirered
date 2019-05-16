@@ -9,6 +9,7 @@
 #include "constants/trainer_classes.h"
 #include "constants/vars.h"
 #include "constants/battle.h"
+#include "constants/spawn_points.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 @	.include "constants/constants.inc"
@@ -45,16 +46,16 @@ gSpecialVars:: @ 815FD0C
 
     .align 2
 gStdScripts:: @ 8160450
-	.4byte gStdScript_81A667B
-	.4byte gStdScript_81A67B3
-	.4byte gStdScript_81A4E3F
-	.4byte gStdScript_81A4E4A
-	.4byte gStdScript_81A4E54
-	.4byte gStdScript_81A4E5C
-	.4byte gStdScript_81A501F
-	.4byte gStdScript_81A676C
-	.4byte gStdScript_81A8E58
-	.4byte gStdScript_81A4E66
+	.4byte gStdScript_0
+	.4byte gStdScript_1
+	.4byte gStdScript_2
+	.4byte gStdScript_3
+	.4byte gStdScript_4
+	.4byte gStdScript_5
+	.4byte gStdScript_Message_WaitButton_AndRelease
+	.4byte gStdScript_7
+	.4byte gStdScript_8
+	.4byte gStdScript_ItemMessageAndFanfare
 gStdScriptsEnd::
 
 	.include "data/map_event_scripts.inc"

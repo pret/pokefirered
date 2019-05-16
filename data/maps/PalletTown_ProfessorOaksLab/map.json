@@ -173,7 +173,7 @@
       "x": 5,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4055",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB",
       "var_value": 2,
       "script": "PalletTown_ProfessorOaksLab_EventScript_1692C3"
     },
@@ -182,7 +182,7 @@
       "x": 6,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4055",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB",
       "var_value": 2,
       "script": "PalletTown_ProfessorOaksLab_EventScript_1692C3"
     },
@@ -191,7 +191,7 @@
       "x": 7,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4055",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB",
       "var_value": 2,
       "script": "PalletTown_ProfessorOaksLab_EventScript_1692C3"
     },
@@ -200,7 +200,7 @@
       "x": 5,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4055",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB",
       "var_value": 3,
       "script": "PalletTown_ProfessorOaksLab_EventScript_1692E7"
     },
@@ -209,7 +209,7 @@
       "x": 6,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4055",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB",
       "var_value": 3,
       "script": "PalletTown_ProfessorOaksLab_EventScript_1692F3"
     },
@@ -218,7 +218,7 @@
       "x": 7,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4055",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB",
       "var_value": 3,
       "script": "PalletTown_ProfessorOaksLab_EventScript_1692FF"
     }

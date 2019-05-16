@@ -102,7 +102,7 @@
       "x": 26,
       "y": 19,
       "elevation": 1,
-      "var": "VAR_0x4063",
+      "var": "VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F",
       "var_value": 0,
       "script": "SeafoamIslands_B4F_EventScript_16319D"
     },
@@ -111,7 +111,7 @@
       "x": 27,
       "y": 19,
       "elevation": 1,
-      "var": "VAR_0x4063",
+      "var": "VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F",
       "var_value": 0,
       "script": "SeafoamIslands_B4F_EventScript_16319D"
     },
@@ -120,7 +120,7 @@
       "x": 28,
       "y": 19,
       "elevation": 1,
-      "var": "VAR_0x4063",
+      "var": "VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F",
       "var_value": 0,
       "script": "SeafoamIslands_B4F_EventScript_16319D"
     }

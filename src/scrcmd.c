@@ -276,7 +276,7 @@ bool8 ScrCmd_setmysteryeventstatus(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdCF(struct ScriptContext *ctx)
+bool8 ScrCmd_execram(struct ScriptContext *ctx)
 {
     const u8 * script = sub_8069E48();
     if (script != NULL)
@@ -599,7 +599,7 @@ bool8 ScrCmd_comparestattoword(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdD0(struct ScriptContext *ctx)
+bool8 ScrCmd_setworldmapflag(struct ScriptContext *ctx)
 {
     u16 value = ScriptReadHalfword(ctx);
     sub_8115748(value);
@@ -798,7 +798,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_warpD1(struct ScriptContext *ctx)
+bool8 ScrCmd_warpteleport2(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -1261,7 +1261,7 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdC7(struct ScriptContext *ctx)
+bool8 ScrCmd_textcolor(struct ScriptContext *ctx)
 {
     gUnknown_20370DC = gUnknown_20370DA;
     gUnknown_20370DA = ScriptReadByte(ctx);
@@ -1278,7 +1278,7 @@ bool8 ScrCmd_message(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdC8(struct ScriptContext *ctx)
+bool8 ScrCmd_loadhelp(struct ScriptContext *ctx)
 {
     const u8 *msg = (const u8 *)ScriptReadWord(ctx);
 
@@ -1289,7 +1289,7 @@ bool8 ScrCmd_cmdC8(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdC9(struct ScriptContext *ctx)
+bool8 ScrCmd_unloadhelp(struct ScriptContext *ctx)
 {
     sub_80F7998();
     return FALSE;
@@ -2226,13 +2226,13 @@ bool8 ScrCmd_takecoins(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdCA(struct ScriptContext *ctx)
+bool8 ScrCmd_signmsg(struct ScriptContext *ctx)
 {
     sub_8069A20();
     return FALSE;
 }
 
-bool8 ScrCmd_cmdCB(struct ScriptContext *ctx)
+bool8 ScrCmd_normalmsg(struct ScriptContext *ctx)
 {
     sub_8069A2C();
     return FALSE;

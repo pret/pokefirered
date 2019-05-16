@@ -1,254 +1,247 @@
 PokemonLeague_ChampionsRoom_MapScripts:: @ 8162AE2
-    map_script 4, PokemonLeague_ChampionsRoom_MapScript1_162B5D
-    map_script 5, PokemonLeague_ChampionsRoom_MapScript2_162AF2
-    map_script 2, PokemonLeague_ChampionsRoom_MapScript3_162B6C
-    .byte 0
+	map_script 4, PokemonLeague_ChampionsRoom_MapScript1_162B5D
+	map_script 5, PokemonLeague_ChampionsRoom_MapScript2_162AF2
+	map_script 2, PokemonLeague_ChampionsRoom_MapScript3_162B6C
+	.byte 0
 
 PokemonLeague_ChampionsRoom_MapScript2_162AF2:: @ 8162AF2
-    setvar VAR_0x8004, 4
-    call EventScript_1A75D5
-    compare_var_to_value VAR_STARTER_MON, 2
-    call_if 1, EventScript_162B1E
-    compare_var_to_value VAR_STARTER_MON, 1
-    call_if 1, EventScript_162B31
-    compare_var_to_value VAR_STARTER_MON, 0
-    call_if 1, EventScript_162B44
-    end
+	setvar VAR_0x8004, 4
+	call EventScript_1A75D5
+	compare_var_to_value VAR_STARTER_MON, 2
+	call_if 1, EventScript_162B1E
+	compare_var_to_value VAR_STARTER_MON, 1
+	call_if 1, EventScript_162B31
+	compare_var_to_value VAR_STARTER_MON, 0
+	call_if 1, EventScript_162B44
+	end
 
 EventScript_162B1E:: @ 8162B1E
-    checktrainerflag 438
-    goto_if 1, EventScript_162B57
-    checktrainerflag 739
-    goto_if 1, EventScript_162B57
-    return
+	checktrainerflag FLAG_0x1B6
+	goto_if_eq EventScript_162B57
+	checktrainerflag FLAG_0x2E3
+	goto_if_eq EventScript_162B57
+	return
 
 EventScript_162B31:: @ 8162B31
-    checktrainerflag 439
-    goto_if 1, EventScript_162B57
-    checktrainerflag 740
-    goto_if 1, EventScript_162B57
-    return
+	checktrainerflag FLAG_0x1B7
+	goto_if_eq EventScript_162B57
+	checktrainerflag FLAG_0x2E4
+	goto_if_eq EventScript_162B57
+	return
 
 EventScript_162B44:: @ 8162B44
-    checktrainerflag 440
-    goto_if 1, EventScript_162B57
-    checktrainerflag 741
-    goto_if 1, EventScript_162B57
-    return
+	checktrainerflag FLAG_0x1B8
+	goto_if_eq EventScript_162B57
+	checktrainerflag FLAG_0x2E5
+	goto_if_eq EventScript_162B57
+	return
 
 EventScript_162B57:: @ 8162B57
-    setvar VAR_0x4001, 1
-    return
+	setvar VAR_0x4001, 1
+	return
 
 PokemonLeague_ChampionsRoom_MapScript1_162B5D:: @ 8162B5D
-    map_script_2 VAR_0x4001, 0, EventScript_162B67
-    .2byte 0
+	map_script_2 VAR_0x4001, 0, EventScript_162B67
+	.2byte 0
 
 EventScript_162B67:: @ 8162B67
-    turnobject 255, 2
-    end
+	turnobject 255, 2
+	end
 
 PokemonLeague_ChampionsRoom_MapScript3_162B6C:: @ 8162B6C
-    map_script_2 VAR_0x4001, 0, EventScript_162B76
-    .2byte 0
+	map_script_2 VAR_0x4001, 0, EventScript_162B76
+	.2byte 0
 
 EventScript_162B76:: @ 8162B76
-    lockall
-    textcolor 0
-    setflag FLAG_0x002
-    applymovement 255, Movement_162D07
-    waitmovement 0
-    delay 20
-    checkflag 2092
-    call_if 0, EventScript_162CB3
-    checkflag 2092
-    call_if 1, EventScript_162CBC
-    special sub_8110AB4
-    compare_var_to_value VAR_RESULT, 2
-    goto_if 1, EventScript_162C68
-    setflag FLAG_0x003
-    setflag FLAG_0x005
-    savebgm BGM_FRLG_KACHI_LEADER
-    checkflag 2116
-    call_if 0, EventScript_162C6F
-    checkflag 2116
-    call_if 1, EventScript_162C91
-    setflag FLAG_0x004
-    clearflag FLAG_0x005
-    setflag FLAG_0x4BC
-    setflag FLAG_0x004
-    loadword 0, gUnknown_8178F2F
-    callstd 4
-    playbgm BGM_FRLG_HALL_OF_FAME_PALLET_TOWN, 0
-    addobject 2
-    loadword 0, gUnknown_8178FC6
-    callstd 4
-    closemessage
-    applymovement 255, Movement_162D1F
-    applymovement 1, Movement_162D41
-    applymovement 2, Movement_162D2A
-    waitmovement 0
-    delay 25
-    specialvar VAR_RESULT, ScrSpecial_GetStarter
-    getspeciesname 0, 32781
-    loadword 0, gUnknown_8178FCF
-    callstd 4
-    applymovement 2, Movement_1A75EB
-    applymovement 1, Movement_1A75E7
-    waitmovement 0
-    loadword 0, gUnknown_817908F
-    callstd 4
-    closemessage
-    applymovement 2, Movement_1A75ED
-    waitmovement 0
-    delay 20
-    loadword 0, gUnknown_81791A3
-    callstd 4
-    closemessage
-    delay 13
-    applymovement 2, Movement_162D37
-    applymovement 255, Movement_162D12
-    waitmovement 0
-    setvar VAR_0x4001, 1
-    warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 255, 5, 12
-    waitstate
-    releaseall
-    end
+	lockall
+	textcolor 0
+	setflag FLAG_0x002
+	applymovement 255, Movement_162D07
+	waitmovement 0
+	delay 20
+	checkflag FLAG_0x82C
+	call_if 0, EventScript_162CB3
+	checkflag FLAG_0x82C
+	call_if 1, EventScript_162CBC
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if_eq EventScript_162C68
+	setflag FLAG_0x003
+	setflag FLAG_0x005
+	savebgm BGM_FRLG_KACHI_LEADER
+	checkflag FLAG_0x844
+	call_if 0, EventScript_162C6F
+	checkflag FLAG_0x844
+	call_if 1, EventScript_162C91
+	setflag FLAG_0x004
+	clearflag FLAG_0x005
+	setflag FLAG_0x4BC
+	setflag FLAG_0x004
+	msgbox gUnknown_8178F2F
+	playbgm BGM_FRLG_HALL_OF_FAME_PALLET_TOWN, 0
+	addobject 2
+	msgbox gUnknown_8178FC6
+	closemessage
+	applymovement 255, Movement_162D1F
+	applymovement 1, Movement_162D41
+	applymovement 2, Movement_162D2A
+	waitmovement 0
+	delay 25
+	specialvar VAR_RESULT, ScrSpecial_GetStarter
+	getspeciesname 0, VAR_RESULT
+	msgbox gUnknown_8178FCF
+	applymovement 2, Movement_1A75EB
+	applymovement 1, Movement_1A75E7
+	waitmovement 0
+	msgbox gUnknown_817908F
+	closemessage
+	applymovement 2, Movement_1A75ED
+	waitmovement 0
+	delay 20
+	msgbox gUnknown_81791A3
+	closemessage
+	delay 13
+	applymovement 2, Movement_162D37
+	applymovement 255, Movement_162D12
+	waitmovement 0
+	setvar VAR_0x4001, 1
+	warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 255, 5, 12
+	waitstate
+	releaseall
+	end
 
 EventScript_162C68:: @ 8162C68
-    call EventScript_162B57
-    releaseall
-    end
+	call EventScript_162B57
+	releaseall
+	end
 
 EventScript_162C6F:: @ 8162C6F
-    compare_var_to_value VAR_STARTER_MON, 2
-    call_if 1, EventScript_162CC5
-    compare_var_to_value VAR_STARTER_MON, 1
-    call_if 1, EventScript_162CD0
-    compare_var_to_value VAR_STARTER_MON, 0
-    call_if 1, EventScript_162CDB
-    return
+	compare_var_to_value VAR_STARTER_MON, 2
+	call_if 1, EventScript_162CC5
+	compare_var_to_value VAR_STARTER_MON, 1
+	call_if 1, EventScript_162CD0
+	compare_var_to_value VAR_STARTER_MON, 0
+	call_if 1, EventScript_162CDB
+	return
 
 EventScript_162C91:: @ 8162C91
-    compare_var_to_value VAR_STARTER_MON, 2
-    call_if 1, EventScript_162CE6
-    compare_var_to_value VAR_STARTER_MON, 1
-    call_if 1, EventScript_162CF1
-    compare_var_to_value VAR_STARTER_MON, 0
-    call_if 1, EventScript_162CFC
-    return
+	compare_var_to_value VAR_STARTER_MON, 2
+	call_if 1, EventScript_162CE6
+	compare_var_to_value VAR_STARTER_MON, 1
+	call_if 1, EventScript_162CF1
+	compare_var_to_value VAR_STARTER_MON, 0
+	call_if 1, EventScript_162CFC
+	return
 
 EventScript_162CB3:: @ 8162CB3
-    loadword 0, gUnknown_8178B6C
-    callstd 4
-    return
+	msgbox gUnknown_8178B6C
+	return
 
 EventScript_162CBC:: @ 8162CBC
-    loadword 0, gUnknown_8178CD4
-    callstd 4
-    return
+	msgbox gUnknown_8178CD4
+	return
 
 EventScript_162CC5:: @ 8162CC5
-    trainerbattle 3, 438, 0, Text_178E3F
-    return
+	trainerbattle 3, 438, 0, Text_178E3F
+	return
 
 EventScript_162CD0:: @ 8162CD0
-    trainerbattle 3, 439, 0, Text_178E3F
-    return
+	trainerbattle 3, 439, 0, Text_178E3F
+	return
 
 EventScript_162CDB:: @ 8162CDB
-    trainerbattle 3, 440, 0, Text_178E3F
-    return
+	trainerbattle 3, 440, 0, Text_178E3F
+	return
 
 EventScript_162CE6:: @ 8162CE6
-    trainerbattle 3, 739, 0, Text_178E3F
-    return
+	trainerbattle 3, 739, 0, Text_178E3F
+	return
 
 EventScript_162CF1:: @ 8162CF1
-    trainerbattle 3, 740, 0, Text_178E3F
-    return
+	trainerbattle 3, 740, 0, Text_178E3F
+	return
 
 EventScript_162CFC:: @ 8162CFC
-    trainerbattle 3, 741, 0, Text_178E3F
-    return
+	trainerbattle 3, 741, 0, Text_178E3F
+	return
 
 Movement_162D07:: @ 8162D07
-    step_11
-    step_11
-    step_11
-    step_11
-    step_11
-    step_11
-    step_11
-    step_11
-    step_11
-    step_11
-    step_end
+	step_11
+	step_11
+	step_11
+	step_11
+	step_11
+	step_11
+	step_11
+	step_11
+	step_11
+	step_11
+	step_end
 
 Movement_162D12:: @ 8162D12
-    step_1c
-    step_12
-    step_11
-    step_11
-    step_11
-    step_13
-    step_11
-    step_11
-    step_11
-    step_11
-    step_1b
-    step_60
-    step_end
+	step_1c
+	step_12
+	step_11
+	step_11
+	step_11
+	step_13
+	step_11
+	step_11
+	step_11
+	step_11
+	step_1b
+	step_60
+	step_end
 
 Movement_162D1F:: @ 8162D1F
-    step_1b
-    step_2d
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_2f
-    step_end
+	step_1b
+	step_2d
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_2f
+	step_end
 
 Movement_162D2A:: @ 8162D2A
-    step_1c
-    step_1c
-    step_11
-    step_11
-    step_11
-    step_11
-    step_11
-    step_12
-    step_11
-    step_11
-    step_2d
-    step_1c
-    step_end
+	step_1c
+	step_1c
+	step_11
+	step_11
+	step_11
+	step_11
+	step_11
+	step_12
+	step_11
+	step_11
+	step_2d
+	step_1c
+	step_end
 
 Movement_162D37:: @ 8162D37
-    step_11
-    step_11
-    step_13
-    step_11
-    step_11
-    step_11
-    step_11
-    step_1b
-    step_60
-    step_end
+	step_11
+	step_11
+	step_13
+	step_11
+	step_11
+	step_11
+	step_11
+	step_1b
+	step_60
+	step_end
 
 Movement_162D41:: @ 8162D41
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_1c
-    step_2f
-    step_end
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_1c
+	step_2f
+	step_end

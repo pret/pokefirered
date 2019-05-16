@@ -13,7 +13,7 @@ GetHealLocationIndexFromMapGroupAndNum: @ 80BFC50
 	lsls r1, 16
 	lsrs r1, 16
 	movs r3, 0
-	ldr r2, _080BFC74 @ =gUnknown_83EEBF8
+	ldr r2, _080BFC74 @ =sSpawnPoints
 _080BFC5E:
 	movs r0, 0
 	ldrsb r0, [r2, r0]
@@ -26,7 +26,7 @@ _080BFC5E:
 	adds r0, r3, 0x1
 	b _080BFC82
 	.align 2, 0
-_080BFC74: .4byte gUnknown_83EEBF8
+_080BFC74: .4byte sSpawnPoints
 _080BFC78:
 	adds r2, 0x8
 	adds r3, 0x1
@@ -50,11 +50,11 @@ GetHealLocationPointerFromMapGroupAndNum: @ 80BFC88
 	cmp r0, 0
 	beq _080BFCA8
 	lsls r0, 3
-	ldr r1, _080BFCA4 @ =gUnknown_83EEBF0
+	ldr r1, _080BFCA4 @ =sSpawnPoints - 8
 	adds r0, r1
 	b _080BFCAA
 	.align 2, 0
-_080BFCA4: .4byte gUnknown_83EEBF0
+_080BFCA4: .4byte sSpawnPoints - 8
 _080BFCA8:
 	movs r0, 0
 _080BFCAA:
@@ -70,11 +70,11 @@ GetHealLocationPointer: @ 80BFCB0
 	cmp r0, 0x14
 	bhi _080BFCC8
 	lsls r0, 3
-	ldr r1, _080BFCC4 @ =gUnknown_83EEBF0
+	ldr r1, _080BFCC4 @ =sSpawnPoints - 8
 	adds r0, r1
 	b _080BFCCA
 	.align 2, 0
-_080BFCC4: .4byte gUnknown_83EEBF0
+_080BFCC4: .4byte sSpawnPoints - 8
 _080BFCC8:
 	movs r0, 0
 _080BFCCA:

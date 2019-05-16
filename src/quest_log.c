@@ -2515,7 +2515,7 @@ void sub_81130BC(struct Var4038Struct * varPtr)
         FlagClear(FLAG_0x06D);
         FlagClear(FLAG_0x06E);
         FlagClear(FLAG_0x06F);
-        VarSet(VAR_0x4073, 1);
+        VarSet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1);
     }
 }
 
@@ -2523,7 +2523,7 @@ ALIGNED(4) const u8 gUnknown_8456934[] = {2, 1, 2, 1};
 
 u8 sub_8113114(struct Var4038Struct * a0, u8 a1)
 {
-    if (VarGet(VAR_0x4073) == 2)
+    if (VarGet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2)
     {
         if (a0->unk_0_0 + gUnknown_8456934[a1] >= 20)
         {
@@ -2743,7 +2743,7 @@ void sub_81134B8(void)
 
 void sub_81134CC(struct Var4038Struct * a0)
 {
-    if (VarGet(VAR_0x4073) == 2)
+    if (VarGet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2)
     {
         sub_8113078(a0);
         if (gUnknown_2023E8A == 1)

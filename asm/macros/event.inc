@@ -1434,3 +1434,11 @@
 	setorcopyvar 0x8001, \amount
 	callstd \function
 	.endm
+
+	.macro giveitemfanfaremsg msg, item, amount=1, fanfare=MUS_FANFA1
+	loadword 0, \msg
+	setorcopyvar 0x8000, \item
+	setorcopyvar 0x8001, \amount
+	setorcopyvar 0x8002, \fanfare
+	callstd 9
+	.endm

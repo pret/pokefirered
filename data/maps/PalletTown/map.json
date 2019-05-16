@@ -93,7 +93,7 @@
       "x": 12,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_0x4050",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN",
       "var_value": 0,
       "script": "PalletTown_EventScript_1655ED"
     },
@@ -102,7 +102,7 @@
       "x": 13,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_0x4050",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN",
       "var_value": 0,
       "script": "PalletTown_EventScript_1655F9"
     },

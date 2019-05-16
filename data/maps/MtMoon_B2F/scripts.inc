@@ -24,9 +24,9 @@ MtMoon_B2F_EventScript_1606C2:: @ 81606C2
 	lock
 	faceplayer
 	checkflag FLAG_0x232
-	goto_if 1, EventScript_160707
+	goto_if_eq EventScript_160707
 	checktrainerflag FLAG_0x0AA
-	goto_if 1, EventScript_160711
+	goto_if_eq EventScript_160711
 	call EventScript_1606DD
 	release
 	end
@@ -58,7 +58,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	faceplayer
 	msgbox gUnknown_8172E77, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1607DE
+	goto_if_eq EventScript_1607DE
 	removeobject 1
 	additem ITEM_DOME_FOSSIL, 1
 	giveitemfanfaremsg gUnknown_8172ECD, ITEM_DOME_FOSSIL, 1, BGM_FRLG_ME_KEYITEM
@@ -91,7 +91,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	faceplayer
 	msgbox gUnknown_8172E94, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1607DE
+	goto_if_eq EventScript_1607DE
 	removeobject 2
 	additem ITEM_HELIX_FOSSIL, 1
 	giveitemfanfaremsg gUnknown_8172EB2, ITEM_HELIX_FOSSIL, 1, BGM_FRLG_ME_KEYITEM

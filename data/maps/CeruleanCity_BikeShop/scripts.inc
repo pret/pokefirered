@@ -5,20 +5,17 @@ CeruleanCity_BikeShop_EventScript_16ABBD:: @ 816ABBD
 	lock
 	faceplayer
 	checkflag FLAG_0x271
-	goto_if 1, EventScript_16AC58
+	goto_if_eq EventScript_16AC58
 	checkflag FLAG_0x241
-	goto_if 1, EventScript_16AC22
+	goto_if_eq EventScript_16AC22
 	showmoneybox 0, 0, 0
 	message Text_192755
 	waitmessage
 	multichoice 11, 0, 13, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16AC07
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16AC15
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16AC15
+	switch VAR_RESULT
+	case 0, EventScript_16AC07
+	case 1, EventScript_16AC15
+	case 127, EventScript_16AC15
 	end
 
 EventScript_16AC07:: @ 816AC07
@@ -62,7 +59,7 @@ CeruleanCity_BikeShop_EventScript_16AC75:: @ 816AC75
 	lock
 	faceplayer
 	checkflag FLAG_0x271
-	goto_if 1, EventScript_16AC8A
+	goto_if_eq EventScript_16AC8A
 	msgbox gUnknown_8192937
 	release
 	end

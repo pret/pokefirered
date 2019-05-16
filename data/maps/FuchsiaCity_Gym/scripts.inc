@@ -28,7 +28,7 @@ EventScript_16D5A6:: @ 816D5A6
 	msgbox gUnknown_819850E
 	checkitemspace ITEM_TM06, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16D5E7
+	goto_if_eq EventScript_16D5E7
 	additem ITEM_TM06, 1
 	giveitemfanfaremsg gUnknown_819858F, ITEM_TM06
 	setflag FLAG_0x259
@@ -78,7 +78,7 @@ FuchsiaCity_Gym_EventScript_16D688:: @ 816D688
 	lock
 	faceplayer
 	checkflag FLAG_0x4B4
-	goto_if 1, EventScript_16D69D
+	goto_if_eq EventScript_16D69D
 	msgbox gUnknown_8198A5E
 	release
 	end
@@ -91,7 +91,7 @@ EventScript_16D69D:: @ 816D69D
 FuchsiaCity_Gym_EventScript_16D6A7:: @ 816D6A7
 	lockall
 	checkflag FLAG_UNK824
-	goto_if 1, EventScript_16D6BB
+	goto_if_eq EventScript_16D6BB
 	msgbox gUnknown_8198B4B
 	releaseall
 	end

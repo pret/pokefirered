@@ -38,7 +38,7 @@ VermilionCity_EventScript_166920:: @ 8166920
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if 1, EventScript_166937
+	goto_if_eq EventScript_166937
 	msgbox gUnknown_817F776
 	release
 	end
@@ -52,7 +52,7 @@ VermilionCity_EventScript_166941:: @ 8166941
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if 1, EventScript_166996
+	goto_if_eq EventScript_166996
 	msgbox gUnknown_817FA22
 	release
 	end
@@ -62,7 +62,7 @@ EventScript_166958:: @ 8166958
 	goto_if 0, EventScript_1A77B0
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1A77B0
+	goto_if_eq EventScript_1A77B0
 	goto EventScript_1A77AA
 	end
 
@@ -71,7 +71,7 @@ EventScript_166977:: @ 8166977
 	goto_if 0, EventScript_1A77B0
 	checkitem ITEM_AURORA_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1A77B0
+	goto_if_eq EventScript_1A77B0
 	goto EventScript_1A77AA
 	end
 
@@ -88,14 +88,14 @@ EventScript_166996:: @ 8166996
 EventScript_1669BB:: @ 81669BB
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	call EventScript_166958
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_1669FD
+	goto_if_eq EventScript_1669FD
 	call EventScript_166977
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_166A5F
+	goto_if_eq EventScript_166A5F
 	setvar VAR_0x8004, 0
 	message Text_17FBB8
 	waitmessage
@@ -105,21 +105,17 @@ EventScript_1669BB:: @ 81669BB
 EventScript_1669FD:: @ 81669FD
 	call EventScript_166977
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_166AB1
+	goto_if_eq EventScript_166AB1
 	checkflag FLAG_0x2F0
 	call_if 0, EventScript_166A53
 	message Text_17FCC1
 	waitmessage
 	multichoice 17, 6, 54, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_1A911E
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_166B0B
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_1A90F6
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_1A90F6
+	switch VAR_RESULT
+	case 0, EventScript_1A911E
+	case 1, EventScript_166B0B
+	case 2, EventScript_1A90F6
+	case 127, EventScript_1A90F6
 	end
 
 EventScript_166A53:: @ 8166A53
@@ -133,15 +129,11 @@ EventScript_166A5F:: @ 8166A5F
 	message Text_17FCC1
 	waitmessage
 	multichoice 13, 6, 55, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_1A911E
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_166B23
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_1A90F6
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_1A90F6
+	switch VAR_RESULT
+	case 0, EventScript_1A911E
+	case 1, EventScript_166B23
+	case 2, EventScript_1A90F6
+	case 127, EventScript_1A90F6
 	end
 
 EventScript_166AA5:: @ 8166AA5
@@ -157,17 +149,12 @@ EventScript_166AB1:: @ 8166AB1
 	message Text_17FCC1
 	waitmessage
 	multichoice 13, 5, 56, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_1A911E
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_166B0B
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_166B23
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_1A90F6
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_1A90F6
+	switch VAR_RESULT
+	case 0, EventScript_1A911E
+	case 1, EventScript_166B0B
+	case 2, EventScript_166B23
+	case 3, EventScript_1A90F6
+	case 127, EventScript_1A90F6
 	end
 
 EventScript_166B0B:: @ 8166B0B
@@ -189,17 +176,12 @@ EventScript_166B3B:: @ 8166B3B
 	waitmessage
 	setvar VAR_0x8004, 0
 	multichoice 19, 5, 57, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_1A8FEE
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_1A8FF9
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_1A9004
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_1A90F6
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_1A90F6
+	switch VAR_RESULT
+	case 0, EventScript_1A8FEE
+	case 1, EventScript_1A8FF9
+	case 2, EventScript_1A9004
+	case 3, EventScript_1A90F6
+	case 127, EventScript_1A90F6
 	end
 
 EventScript_166B88:: @ 8166B88
@@ -228,7 +210,7 @@ EventScript_166BA0:: @ 8166BA0
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if 1, EventScript_166BED
+	goto_if_eq EventScript_166BED
 	msgbox gUnknown_817FA3C
 	checkflag FLAG_0x234
 	goto_if 0, EventScript_166BDE

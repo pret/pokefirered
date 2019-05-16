@@ -33,7 +33,7 @@ gUnknown_8168CE4:: @ 8168CE4
 PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
 	setvar VAR_0x8004, 32
 	special sub_812B220

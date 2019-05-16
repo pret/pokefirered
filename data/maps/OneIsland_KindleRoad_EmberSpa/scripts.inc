@@ -31,7 +31,7 @@ OneIsland_KindleRoad_EmberSpa_EventScript_165399:: @ 8165399
 	lock
 	faceplayer
 	checkflag FLAG_0x2EF
-	goto_if 1, EventScript_1653C5
+	goto_if_eq EventScript_1653C5
 	msgbox gUnknown_817D622
 	giveitem ITEM_HM06
 	setflag FLAG_0x2EF

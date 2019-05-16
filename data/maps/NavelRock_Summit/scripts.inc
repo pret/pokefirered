@@ -18,7 +18,7 @@ EventScript_164FBD:: @ 8164FBD
 EventScript_164FC6:: @ 8164FC6
 	setvar VAR_0x4001, 1
 	checkflag FLAG_0x2F6
-	goto_if 1, EventScript_1A77A9
+	goto_if_eq EventScript_1A77A9
 	setvar VAR_0x4001, 0
 	clearflag FLAG_0x09C
 	return
@@ -38,7 +38,7 @@ EventScript_164FE7:: @ 8164FE7
 NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lockall
 	setvar VAR_0x4001, 1
@@ -75,11 +75,11 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	setvar VAR_LAST_TALKED, 1
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_1650B4
+	goto_if_eq EventScript_1650B4
 	compare_var_to_value VAR_RESULT, 4
-	goto_if 1, EventScript_1650C2
+	goto_if_eq EventScript_1650C2
 	compare_var_to_value VAR_RESULT, 5
-	goto_if 1, EventScript_1650C2
+	goto_if_eq EventScript_1650C2
 	setflag FLAG_0x2F3
 	releaseall
 	end

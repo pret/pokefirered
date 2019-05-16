@@ -126,7 +126,7 @@ FuchsiaCity_EventScript_166E83:: @ 8166E83
 FuchsiaCity_EventScript_166E9C:: @ 8166E9C
 	lockall
 	checkflag FLAG_0x272
-	goto_if 1, EventScript_166EBE
+	goto_if_eq EventScript_166EBE
 	setvar VAR_0x8004, SPECIES_KABUTO
 	special sub_80CBDCC
 	drawmonpic SPECIES_KABUTO, 10, 3

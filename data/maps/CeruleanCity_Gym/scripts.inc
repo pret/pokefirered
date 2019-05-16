@@ -28,7 +28,7 @@ EventScript_16AAF9:: @ 816AAF9
 	msgbox gUnknown_81922F7
 	checkitemspace ITEM_TM03, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16AB3A
+	goto_if_eq EventScript_16AB3A
 	additem ITEM_TM03, 1
 	giveitemfanfaremsg gUnknown_81923F1, ITEM_TM03
 	setflag FLAG_0x297
@@ -58,7 +58,7 @@ CeruleanCity_Gym_EventScript_16AB7F:: @ 816AB7F
 	lock
 	faceplayer
 	checkflag FLAG_0x4B1
-	goto_if 1, EventScript_16AB94
+	goto_if_eq EventScript_16AB94
 	msgbox gUnknown_81925AC
 	release
 	end
@@ -71,7 +71,7 @@ EventScript_16AB94:: @ 816AB94
 CeruleanCity_Gym_EventScript_16AB9E:: @ 816AB9E
 	lockall
 	checkflag FLAG_0x821
-	goto_if 1, EventScript_16ABB2
+	goto_if_eq EventScript_16ABB2
 	msgbox gUnknown_81926E1
 	releaseall
 	end

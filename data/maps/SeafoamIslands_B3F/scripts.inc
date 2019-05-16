@@ -40,7 +40,7 @@ EventScript_162FA2:: @ 8162FA2
 	checkflag FLAG_0x047
 	call_if 0, EventScript_162FF0
 	compare_var_to_value VAR_0x4002, 2
-	goto_if 1, EventScript_16300C
+	goto_if_eq EventScript_16300C
 	getplayerxy VAR_0x8008, VAR_0x8009
 	compare_var_to_value VAR_0x8008, 24
 	call_if 0, EventScript_162FF6

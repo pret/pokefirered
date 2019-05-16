@@ -13,7 +13,7 @@ Route12_NorthEntrance_2F_EventScript_16FE8A:: @ 816FE8A
 	lock
 	faceplayer
 	checkflag FLAG_0x25B
-	goto_if 1, EventScript_16FF01
+	goto_if_eq EventScript_16FF01
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_16FEE5
@@ -21,7 +21,7 @@ Route12_NorthEntrance_2F_EventScript_16FE8A:: @ 816FE8A
 	call_if 1, EventScript_16FEEE
 	checkitemspace ITEM_TM27, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16FEF7
+	goto_if_eq EventScript_16FEF7
 	additem ITEM_TM27, 1
 	giveitemfanfaremsg gUnknown_819EE9F, ITEM_TM27
 	msgbox gUnknown_819EEC6

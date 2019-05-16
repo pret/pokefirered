@@ -4,7 +4,7 @@ SSAnne_CaptainsOffice_MapScripts:: @ 8160B39
 SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 	lock
 	checkflag FLAG_0x237
-	goto_if 1, EventScript_160BB5
+	goto_if_eq EventScript_160BB5
 	msgbox gUnknown_8173646
 	textcolor 3
 	message Text_173676

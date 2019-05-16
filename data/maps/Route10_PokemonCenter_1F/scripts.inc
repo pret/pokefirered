@@ -32,10 +32,10 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	faceplayer
 	call EventScript_16FCF1
 	checkflag FLAG_0x2FA
-	goto_if 1, EventScript_16FCE7
+	goto_if_eq EventScript_16FCE7
 	msgbox gUnknown_819E5FB, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1A7AD1
+	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, sub_80CA3D8
 	getnumberstring 2, VAR_0x8006
@@ -45,7 +45,7 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	msgbox gUnknown_819E733
 	checkitemspace ITEM_EVERSTONE, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1A7AC7
+	goto_if_eq EventScript_1A7AC7
 	additem ITEM_EVERSTONE, 1
 	giveitemfanfaremsg gUnknown_819E786, ITEM_EVERSTONE
 	setflag FLAG_0x2FA

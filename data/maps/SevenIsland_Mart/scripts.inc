@@ -4,7 +4,7 @@ SevenIsland_Mart_MapScripts:: @ 8170B30
 SevenIsland_Mart_EventScript_170B31:: @ 8170B31
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	message Text_1A6211

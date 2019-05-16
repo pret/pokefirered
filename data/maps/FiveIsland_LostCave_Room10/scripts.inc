@@ -27,7 +27,7 @@ EventScript_164C52:: @ 8164C52
 	msgbox gUnknown_817D062
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_164CB6
+	goto_if_eq EventScript_164CB6
 	trainerbattle 3, 606, 0, Text_17D086
 	msgbox gUnknown_817D0B2
 	closemessage

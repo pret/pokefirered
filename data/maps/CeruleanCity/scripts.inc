@@ -174,7 +174,7 @@ CeruleanCity_EventScript_166603:: @ 8166603
 	lock
 	faceplayer
 	checktrainerflag FLAG_0x163
-	goto_if 1, EventScript_16662E
+	goto_if_eq EventScript_16662E
 	message Text_17EE0E
 	waitmessage
 	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0
@@ -188,7 +188,7 @@ EventScript_16662E:: @ 816662E
 	msgbox gUnknown_817EE9C
 	checkitemspace ITEM_TM28, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_166677
+	goto_if_eq EventScript_166677
 	additem ITEM_TM28, 1
 	giveitemfanfaremsg gUnknown_817EEBF, ITEM_TM28
 	msgbox gUnknown_817EEED
@@ -249,7 +249,7 @@ CeruleanCity_EventScript_1666FE:: @ 81666FE
 	lock
 	faceplayer
 	checkflag FLAG_0x234
-	goto_if 1, EventScript_166713
+	goto_if_eq EventScript_166713
 	msgbox gUnknown_817F01D
 	release
 	end

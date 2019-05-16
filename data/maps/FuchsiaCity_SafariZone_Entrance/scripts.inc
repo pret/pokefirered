@@ -39,7 +39,7 @@ EventScript_16D312:: @ 816D312
 	textcolor 0
 	msgbox gUnknown_8197E1A, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16D345
+	goto_if_eq EventScript_16D345
 	msgbox gUnknown_8197E48
 	closemessage
 	applymovement 255, Movement_16D362
@@ -103,7 +103,7 @@ EventScript_16D391:: @ 816D391
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_8197C87, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16D3CA
+	goto_if_eq EventScript_16D3CA
 	msgbox gUnknown_8197DE9
 	goto EventScript_16D49A
 	end
@@ -112,7 +112,7 @@ EventScript_16D3CA:: @ 816D3CA
 	call EventScript_16D462
 	checkmoney 500, 0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16D48C
+	goto_if_eq EventScript_16D48C
 	takemoney 500, 0
 	updatemoneybox 0, 0, 0
 	msgbox gUnknown_8197D07
@@ -159,7 +159,7 @@ EventScript_16D462:: @ 816D462
 	goto_if 5, EventScript_1A77A9
 	specialvar VAR_RESULT, sub_80CABD0
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_1A77A9
+	goto_if_eq EventScript_1A77A9
 	msgbox gUnknown_81BFEAC
 	goto EventScript_16D49A
 	end
@@ -205,7 +205,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_16D4B7:: @ 816D4B7
 	faceplayer
 	msgbox gUnknown_8197EB0, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16D4D6
+	goto_if_eq EventScript_16D4D6
 	msgbox gUnknown_819809E
 	release
 	end

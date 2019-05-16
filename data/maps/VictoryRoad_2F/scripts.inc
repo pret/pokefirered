@@ -22,7 +22,7 @@ EventScript_160FC2:: @ 8160FC2
 VictoryRoad_2F_EventScript_160FD5:: @ 8160FD5
 	lockall
 	compare_var_to_value VAR_0x4065, 100
-	goto_if 1, EventScript_161004
+	goto_if_eq EventScript_161004
 	setmetatile 13, 10, 721, 0
 	setmetatile 13, 11, 737, 0
 	playse SE_MU_PACHI
@@ -40,7 +40,7 @@ EventScript_161004:: @ 8161004
 VictoryRoad_2F_EventScript_161006:: @ 8161006
 	lockall
 	compare_var_to_value VAR_0x4066, 100
-	goto_if 1, EventScript_161035
+	goto_if_eq EventScript_161035
 	setmetatile 33, 16, 721, 0
 	setmetatile 33, 17, 737, 0
 	playse SE_MU_PACHI

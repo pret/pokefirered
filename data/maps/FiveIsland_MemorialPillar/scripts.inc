@@ -4,9 +4,9 @@ FiveIsland_MemorialPillar_MapScripts:: @ 81689D2
 FiveIsland_MemorialPillar_EventScript_1689D3:: @ 81689D3
 	lock
 	checkflag FLAG_0x236
-	goto_if 1, EventScript_168A18
+	goto_if_eq EventScript_168A18
 	checkflag FLAG_0x2D7
-	goto_if 1, EventScript_168A22
+	goto_if_eq EventScript_168A22
 	msgbox gUnknown_818B02E
 	closemessage
 	applymovement 1, Movement_1A75E1
@@ -28,7 +28,7 @@ EventScript_168A22:: @ 8168A22
 	msgbox gUnknown_818B282
 	giveitem ITEM_TM42
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_168AFE
+	goto_if_eq EventScript_168AFE
 	call EventScript_168AE8
 	release
 	end
@@ -36,24 +36,24 @@ EventScript_168A22:: @ 8168A22
 FiveIsland_MemorialPillar_EventScript_168A48:: @ 8168A48
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lockall
 	checkflag FLAG_0x236
-	goto_if 1, EventScript_168B0B
+	goto_if_eq EventScript_168B0B
 	checkflag FLAG_0x2D7
-	goto_if 1, EventScript_168B0B
+	goto_if_eq EventScript_168B0B
 	msgbox gUnknown_818B095
 	checkitem ITEM_LEMONADE, 1
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_168A86
+	goto_if_eq EventScript_168A86
 	releaseall
 	end
 
 EventScript_168A86:: @ 8168A86
 	msgbox gUnknown_818B105, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_168A9B
+	goto_if_eq EventScript_168A9B
 	releaseall
 	end
 
@@ -70,7 +70,7 @@ EventScript_168A9B:: @ 8168A9B
 	msgbox gUnknown_818B171
 	giveitem ITEM_TM42
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_168AFE
+	goto_if_eq EventScript_168AFE
 	call EventScript_168AE8
 	releaseall
 	end

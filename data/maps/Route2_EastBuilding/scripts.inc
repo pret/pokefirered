@@ -6,10 +6,10 @@ Route2_EastBuilding_EventScript_16F67F:: @ 816F67F
 	faceplayer
 	call EventScript_16F70B
 	checkflag FLAG_0x23B
-	goto_if 1, EventScript_16F701
+	goto_if_eq EventScript_16F701
 	msgbox gUnknown_819D64F, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1A7AD1
+	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, sub_80CA3D8
 	getnumberstring 2, VAR_0x8006
@@ -19,7 +19,7 @@ Route2_EastBuilding_EventScript_16F67F:: @ 816F67F
 	msgbox gUnknown_819D74E
 	checkitemspace ITEM_HM05, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1A7AC7
+	goto_if_eq EventScript_1A7AC7
 	additem ITEM_HM05, 1
 	giveitemfanfaremsg gUnknown_819D7A1, ITEM_HM05
 	setflag FLAG_0x23B

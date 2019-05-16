@@ -13,7 +13,7 @@ SevenIsland_TrainerTower_Lobby_MapScript1_164853:: @ 8164853
 	setvar VAR_0x8004, 18
 	special sub_815D9E8
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_164886
+	goto_if_eq EventScript_164886
 	setvar VAR_0x4000, 0
 	setobjectxy 255, 9, 7
 	applymovement 255, Movement_164AD4
@@ -69,13 +69,10 @@ EventScript_1648ED:: @ 81648ED
 	setvar VAR_0x4000, 1
 	setvar VAR_0x8004, 12
 	special sub_815D9E8
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_164920
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_164938
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16495C
+	switch VAR_RESULT
+	case 0, EventScript_164920
+	case 1, EventScript_164938
+	case 2, EventScript_16495C
 
 EventScript_164920:: @ 8164920
 	lock
@@ -115,7 +112,7 @@ SevenIsland_TrainerTower_Lobby_EventScript_164966:: @ 8164966
 	setvar VAR_0x8004, 20
 	special sub_815D9E8
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_164988
+	goto_if_eq EventScript_164988
 	msgbox gUnknown_817C9A2
 	goto EventScript_164990
 
@@ -129,7 +126,7 @@ EventScript_164990:: @ 8164990
 SevenIsland_TrainerTower_Lobby_EventScript_164992:: @ 8164992
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	message Text_1A6211
@@ -162,7 +159,7 @@ SevenIsland_TrainerTower_Lobby_EventScript_1649CE:: @ 81649CE
 	setvar VAR_0x8004, 17
 	special sub_815D9E8
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_164A00
+	goto_if_eq EventScript_164A00
 	msgbox gUnknown_817C7D9
 	goto EventScript_164A08
 
@@ -173,15 +170,11 @@ EventScript_164A08:: @ 8164A08
 	message Text_17C88D
 	waitmessage
 	multichoice 18, 6, 16, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_164A53
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_164ABF
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_164A45
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_164ABF
+	switch VAR_RESULT
+	case 0, EventScript_164A53
+	case 1, EventScript_164ABF
+	case 2, EventScript_164A45
+	case 127, EventScript_164ABF
 	end
 
 EventScript_164A45:: @ 8164A45
@@ -191,19 +184,13 @@ EventScript_164A45:: @ 8164A45
 
 EventScript_164A53:: @ 8164A53
 	multichoice 13, 3, 64, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_164AA0
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_164AA0
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_164AA0
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_164AA0
-	compare_var_to_value VAR_0x8000, 4
-	goto_if 1, EventScript_164ABF
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_164ABF
+	switch VAR_RESULT
+	case 0, EventScript_164AA0
+	case 1, EventScript_164AA0
+	case 2, EventScript_164AA0
+	case 3, EventScript_164AA0
+	case 4, EventScript_164ABF
+	case 127, EventScript_164ABF
 	end
 
 EventScript_164AA0:: @ 8164AA0

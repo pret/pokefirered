@@ -56,7 +56,7 @@ SeafoamIslands_B4F_MapScript3_1630B1:: @ 81630B1
 	checkflag FLAG_0x04D
 	call_if 0, EventScript_163169
 	compare_var_to_value VAR_0x4002, 2
-	goto_if 1, EventScript_1630D4
+	goto_if_eq EventScript_1630D4
 	end
 
 EventScript_1630D4:: @ 81630D4
@@ -100,7 +100,7 @@ EventScript_163121:: @ 8163121
 	checkflag FLAG_0x04D
 	call_if 0, EventScript_163169
 	compare_var_to_value VAR_0x4002, 2
-	goto_if 1, EventScript_163185
+	goto_if_eq EventScript_163185
 	getplayerxy VAR_0x8008, VAR_0x8009
 	compare_var_to_value VAR_0x8008, 9
 	call_if 0, EventScript_16316F
@@ -165,7 +165,7 @@ Movement_1631AA:: @ 81631AA
 SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -184,11 +184,11 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16320F
+	goto_if_eq EventScript_16320F
 	compare_var_to_value VAR_RESULT, 4
-	goto_if 1, EventScript_163218
+	goto_if_eq EventScript_163218
 	compare_var_to_value VAR_RESULT, 5
-	goto_if 1, EventScript_163218
+	goto_if_eq EventScript_163218
 	setflag FLAG_0x2BE
 	release
 	end

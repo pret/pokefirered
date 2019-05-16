@@ -11,7 +11,7 @@ SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	lock
 	faceplayer
 	checkflag FLAG_0x250
-	goto_if 1, EventScript_161E75
+	goto_if_eq EventScript_161E75
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_161E59
@@ -19,7 +19,7 @@ SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	call_if 1, EventScript_161E62
 	checkitemspace ITEM_MASTER_BALL, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_161E6B
+	goto_if_eq EventScript_161E6B
 	additem ITEM_MASTER_BALL, 1
 	giveitemfanfaremsg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, BGM_FRLG_ME_KEYITEM
 	msgbox gUnknown_8176FEB

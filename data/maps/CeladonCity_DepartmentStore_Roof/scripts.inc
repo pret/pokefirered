@@ -4,13 +4,13 @@ CeladonCity_DepartmentStore_Roof_MapScripts:: @ 816BCCC
 CeladonCity_DepartmentStore_Roof_EventScript_16BCCD:: @ 816BCCD
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
 	call EventScript_16BCF6
 	compare_var_to_value VAR_0x4001, 0
-	goto_if 1, EventScript_16C00E
+	goto_if_eq EventScript_16C00E
 	goto EventScript_16BD3E
 	end
 
@@ -42,120 +42,87 @@ EventScript_16BD38:: @ 816BD38
 EventScript_16BD3E:: @ 816BD3E
 	msgbox gUnknown_8195D22, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16C00C
+	goto_if_eq EventScript_16C00C
 	textcolor 3
 	message Text_195D5F
 	waitmessage
 	textcolor 1
-	copyvar VAR_0x8000, VAR_0x4001
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16BDAE
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16BDDA
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_16BE06
-	compare_var_to_value VAR_0x8000, 4
-	goto_if 1, EventScript_16BE3D
-	compare_var_to_value VAR_0x8000, 5
-	goto_if 1, EventScript_16BE69
-	compare_var_to_value VAR_0x8000, 6
-	goto_if 1, EventScript_16BEA0
-	compare_var_to_value VAR_0x8000, 7
-	goto_if 1, EventScript_16BED7
+	switch VAR_0x4001
+	case 1, EventScript_16BDAE
+	case 2, EventScript_16BDDA
+	case 3, EventScript_16BE06
+	case 4, EventScript_16BE3D
+	case 5, EventScript_16BE69
+	case 6, EventScript_16BEA0
+	case 7, EventScript_16BED7
 	end
 
 EventScript_16BDAE:: @ 816BDAE
 	multichoice 0, 0, 32, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16BF19
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16C00C
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16C00C
+	switch VAR_RESULT
+	case 0, EventScript_16BF19
+	case 1, EventScript_16C00C
+	case 127, EventScript_16C00C
 	end
 
 EventScript_16BDDA:: @ 816BDDA
 	multichoice 0, 0, 33, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16BF3A
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16C00C
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16C00C
+	switch VAR_RESULT
+	case 0, EventScript_16BF3A
+	case 1, EventScript_16C00C
+	case 127, EventScript_16C00C
 	end
 
 EventScript_16BE06:: @ 816BE06
 	multichoice 0, 0, 34, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16BF19
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16BF3A
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16C00C
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16C00C
+	switch VAR_RESULT
+	case 0, EventScript_16BF19
+	case 1, EventScript_16BF3A
+	case 2, EventScript_16C00C
+	case 127, EventScript_16C00C
 	end
 
 EventScript_16BE3D:: @ 816BE3D
 	multichoice 0, 0, 35, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16BF5B
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16C00C
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16C00C
+	switch VAR_RESULT
+	case 0, EventScript_16BF5B
+	case 1, EventScript_16C00C
+	case 127, EventScript_16C00C
 	end
 
 EventScript_16BE69:: @ 816BE69
 	multichoice 0, 0, 36, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16BF19
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16BF5B
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16C00C
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16C00C
+	switch VAR_RESULT
+	case 0, EventScript_16BF19
+	case 1, EventScript_16BF5B
+	case 2, EventScript_16C00C
+	case 127, EventScript_16C00C
 	end
 
 EventScript_16BEA0:: @ 816BEA0
 	multichoice 0, 0, 37, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16BF3A
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16BF5B
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16C00C
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16C00C
+	switch VAR_RESULT
+	case 0, EventScript_16BF3A
+	case 1, EventScript_16BF5B
+	case 2, EventScript_16C00C
+	case 127, EventScript_16C00C
 	end
 
 EventScript_16BED7:: @ 816BED7
 	multichoice 0, 0, 38, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16BF19
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16BF3A
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16BF5B
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_16C00C
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16C00C
+	switch VAR_RESULT
+	case 0, EventScript_16BF19
+	case 1, EventScript_16BF3A
+	case 2, EventScript_16BF5B
+	case 3, EventScript_16C00C
+	case 127, EventScript_16C00C
 	end
 
 EventScript_16BF19:: @ 816BF19
 	setvar VAR_0x8008, ITEM_FRESH_WATER
 	setvar VAR_0x8009, ITEM_TM16
 	checkflag FLAG_0x296
-	goto_if 1, EventScript_16C018
+	goto_if_eq EventScript_16C018
 	msgbox gUnknown_8195D75
 	goto EventScript_16BF7C
 	end
@@ -164,7 +131,7 @@ EventScript_16BF3A:: @ 816BF3A
 	setvar VAR_0x8008, ITEM_SODA_POP
 	setvar VAR_0x8009, ITEM_TM20
 	checkflag FLAG_0x295
-	goto_if 1, EventScript_16C018
+	goto_if_eq EventScript_16C018
 	msgbox gUnknown_8195E33
 	goto EventScript_16BF7C
 	end
@@ -173,7 +140,7 @@ EventScript_16BF5B:: @ 816BF5B
 	setvar VAR_0x8008, ITEM_LEMONADE
 	setvar VAR_0x8009, ITEM_TM33
 	checkflag FLAG_0x294
-	goto_if 1, EventScript_16C018
+	goto_if_eq EventScript_16C018
 	msgbox gUnknown_8195EBF
 	goto EventScript_16BF7C
 	end
@@ -184,7 +151,7 @@ EventScript_16BF7C:: @ 816BF7C
 	removeitem VAR_0x8008, 1
 	checkitemspace VAR_0x8009, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16C002
+	goto_if_eq EventScript_16C002
 	additem VAR_0x8009, 1
 	textcolor 3
 	playfanfare MUS_FANFA1
@@ -255,13 +222,10 @@ CeladonCity_DepartmentStore_Roof_EventScript_16C034:: @ 816C034
 EventScript_16C045:: @ 816C045
 	multichoice 12, 0, 26, 0
 	copyvar VAR_0x4001, VAR_RESULT
-	copyvar VAR_0x8000, VAR_0x4001
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16C083
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16C094
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16C0A5
+	switch VAR_0x4001
+	case 0, EventScript_16C083
+	case 1, EventScript_16C094
+	case 2, EventScript_16C0A5
 	msgbox gUnknown_81960AE
 	goto EventScript_16C14D
 	end
@@ -298,10 +262,10 @@ EventScript_16C0C4:: @ 816C0C4
 
 EventScript_16C0CB:: @ 816C0CB
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16C131
+	goto_if_eq EventScript_16C131
 	checkitemspace VAR_0x4000, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16C13F
+	goto_if_eq EventScript_16C13F
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_16C0B6
 	compare_var_to_value VAR_0x4001, 1

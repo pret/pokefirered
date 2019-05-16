@@ -27,7 +27,7 @@ EventScript_163B2F:: @ 8163B2F
 MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -46,11 +46,11 @@ MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_163B96
+	goto_if_eq EventScript_163B96
 	compare_var_to_value VAR_RESULT, 4
-	goto_if 1, EventScript_163B9F
+	goto_if_eq EventScript_163B9F
 	compare_var_to_value VAR_RESULT, 5
-	goto_if 1, EventScript_163B9F
+	goto_if_eq EventScript_163B9F
 	setflag FLAG_0x2BD
 	release
 	end

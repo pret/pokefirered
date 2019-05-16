@@ -105,7 +105,7 @@ PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_0x4BB
-	goto_if 1, EventScript_162AA1
+	goto_if_eq EventScript_162AA1
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars

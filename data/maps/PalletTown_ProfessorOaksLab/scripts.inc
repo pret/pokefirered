@@ -312,20 +312,20 @@ EventScript_16930B:: @ 816930B
 	applymovement 4, Movement_1A75F1
 	waitmovement 0
 	compare_var_to_value VAR_STARTER_MON, 0
-	goto_if 1, EventScript_1693D2
+	goto_if_eq EventScript_1693D2
 	compare_var_to_value VAR_STARTER_MON, 1
-	goto_if 1, EventScript_16944D
+	goto_if_eq EventScript_16944D
 	compare_var_to_value VAR_STARTER_MON, 2
-	goto_if 1, EventScript_16935A
+	goto_if_eq EventScript_16935A
 	end
 
 EventScript_16935A:: @ 816935A
 	compare_var_to_value VAR_0x4002, 1
-	goto_if 1, EventScript_16937C
+	goto_if_eq EventScript_16937C
 	compare_var_to_value VAR_0x4002, 2
-	goto_if 1, EventScript_16938C
+	goto_if_eq EventScript_16938C
 	compare_var_to_value VAR_0x4002, 3
-	goto_if 1, EventScript_16939C
+	goto_if_eq EventScript_16939C
 	end
 
 EventScript_16937C:: @ 816937C
@@ -377,11 +377,11 @@ Movement_1693CD:: @ 81693CD
 
 EventScript_1693D2:: @ 81693D2
 	compare_var_to_value VAR_0x4002, 1
-	goto_if 1, EventScript_1693F4
+	goto_if_eq EventScript_1693F4
 	compare_var_to_value VAR_0x4002, 2
-	goto_if 1, EventScript_169404
+	goto_if_eq EventScript_169404
 	compare_var_to_value VAR_0x4002, 3
-	goto_if 1, EventScript_169414
+	goto_if_eq EventScript_169414
 	end
 
 EventScript_1693F4:: @ 81693F4
@@ -436,11 +436,11 @@ Movement_169447:: @ 8169447
 
 EventScript_16944D:: @ 816944D
 	compare_var_to_value VAR_0x4002, 1
-	goto_if 1, EventScript_16946F
+	goto_if_eq EventScript_16946F
 	compare_var_to_value VAR_0x4002, 2
-	goto_if 1, EventScript_16947F
+	goto_if_eq EventScript_16947F
 	compare_var_to_value VAR_0x4002, 3
-	goto_if 1, EventScript_16948F
+	goto_if_eq EventScript_16948F
 	end
 
 EventScript_16946F:: @ 816946F
@@ -575,9 +575,9 @@ PalletTown_ProfessorOaksLab_EventScript_16955F:: @ 816955F
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
-	goto_if 1, EventScript_16958B
+	goto_if_eq EventScript_16958B
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
-	goto_if 1, EventScript_169581
+	goto_if_eq EventScript_169581
 	msgbox gUnknown_818DC67
 	release
 	end
@@ -596,23 +596,23 @@ PalletTown_ProfessorOaksLab_EventScript_169595:: @ 8169595
 	lock
 	faceplayer
 	checkflag FLAG_0x002
-	goto_if 1, EventScript_169600
+	goto_if_eq EventScript_169600
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9
-	goto_if 1, EventScript_169903
+	goto_if_eq EventScript_169903
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
-	goto_if 1, EventScript_169A6E
+	goto_if_eq EventScript_169A6E
 	checkflag FLAG_0x82C
-	goto_if 1, EventScript_1699CE
+	goto_if_eq EventScript_1699CE
 	compare_var_to_value VAR_0x4052, 1
-	goto_if 1, EventScript_169903
+	goto_if_eq EventScript_169903
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
-	goto_if 1, EventScript_1698D6
+	goto_if_eq EventScript_1698D6
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	goto_if 4, EventScript_16961E
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 4
-	goto_if 1, EventScript_169614
+	goto_if_eq EventScript_169614
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
-	goto_if 1, EventScript_16960A
+	goto_if_eq EventScript_16960A
 	msgbox gUnknown_818E116
 	release
 	end
@@ -842,14 +842,14 @@ EventScript_1698D6:: @ 81698D6
 	getnumberstring 0, VAR_0x8008
 	getnumberstring 1, VAR_0x8009
 	compare_var_to_value VAR_0x8009, 1
-	goto_if 1, EventScript_1699FB
+	goto_if_eq EventScript_1699FB
 	goto EventScript_169903
 	end
 
 EventScript_169903:: @ 8169903
 	call EventScript_1A737B
 	checkflag FLAG_0x2F4
-	goto_if 1, EventScript_169913
+	goto_if_eq EventScript_169913
 	release
 	end
 
@@ -988,15 +988,15 @@ EventScript_1699F9:: @ 81699F9
 EventScript_1699FB:: @ 81699FB
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	checkflag FLAG_0x24F
-	goto_if 1, EventScript_169A6E
+	goto_if_eq EventScript_169A6E
 	checkflag FLAG_0x247
-	goto_if 1, EventScript_169A78
+	goto_if_eq EventScript_169A78
 	checkitem ITEM_POKE_BALL, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_169A34
+	goto_if_eq EventScript_169A34
 	goto EventScript_169A6E
 	end
 
@@ -1153,7 +1153,7 @@ PalletTown_ProfessorOaksLab_EventScript_169BAB:: @ 8169BAB
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 4, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
-	goto_if 1, EventScript_169BE1
+	goto_if_eq EventScript_169BE1
 	msgbox gUnknown_818EA19
 	release
 	end
@@ -1164,35 +1164,35 @@ EventScript_169BE1:: @ 8169BE1
 	drawmonpic VAR_0x4002, 10, 3
 	textcolor 0
 	compare_var_to_value VAR_0x4001, 0
-	goto_if 1, EventScript_169C14
+	goto_if_eq EventScript_169C14
 	compare_var_to_value VAR_0x4001, 1
-	goto_if 1, EventScript_169C33
+	goto_if_eq EventScript_169C33
 	compare_var_to_value VAR_0x4001, 2
-	goto_if 1, EventScript_169C52
+	goto_if_eq EventScript_169C52
 	end
 
 EventScript_169C14:: @ 8169C14
 	msgbox gUnknown_818E272, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_169C74
+	goto_if_eq EventScript_169C74
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_169C71
+	goto_if_eq EventScript_169C71
 	end
 
 EventScript_169C33:: @ 8169C33
 	msgbox gUnknown_818E207, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_169C74
+	goto_if_eq EventScript_169C74
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_169C71
+	goto_if_eq EventScript_169C71
 	end
 
 EventScript_169C52:: @ 8169C52
 	msgbox gUnknown_818E194, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_169C74
+	goto_if_eq EventScript_169C74
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_169C71
+	goto_if_eq EventScript_169C71
 	end
 
 EventScript_169C71:: @ 8169C71
@@ -1216,9 +1216,9 @@ EventScript_169C74:: @ 8169C74
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_169CCC
+	goto_if_eq EventScript_169CCC
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_169CDC
+	goto_if_eq EventScript_169CDC
 	end
 
 EventScript_169CCC:: @ 8169CCC
@@ -1230,11 +1230,11 @@ EventScript_169CCC:: @ 8169CCC
 EventScript_169CDC:: @ 8169CDC
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
-	goto_if 1, EventScript_169CFF
+	goto_if_eq EventScript_169CFF
 	compare_var_to_value VAR_0x4001, 1
-	goto_if 1, EventScript_169D1F
+	goto_if_eq EventScript_169D1F
 	compare_var_to_value VAR_0x4001, 2
-	goto_if 1, EventScript_169D0F
+	goto_if_eq EventScript_169D0F
 	end
 
 EventScript_169CFF:: @ 8169CFF
@@ -1313,7 +1313,7 @@ PalletTown_ProfessorOaksLab_EventScript_169D78:: @ 8169D78
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 4, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
-	goto_if 1, EventScript_169BE1
+	goto_if_eq EventScript_169BE1
 	msgbox gUnknown_818EA19
 	release
 	end
@@ -1328,7 +1328,7 @@ PalletTown_ProfessorOaksLab_EventScript_169DAE:: @ 8169DAE
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 4, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
-	goto_if 1, EventScript_169BE1
+	goto_if_eq EventScript_169BE1
 	msgbox gUnknown_818EA19
 	release
 	end
@@ -1342,7 +1342,7 @@ PalletTown_ProfessorOaksLab_EventScript_169DEE:: @ 8169DEE
 	lock
 	faceplayer
 	checkflag FLAG_0x82C
-	goto_if 1, EventScript_169E03
+	goto_if_eq EventScript_169E03
 	msgbox gUnknown_818EBE6
 	release
 	end
@@ -1359,7 +1359,7 @@ PalletTown_ProfessorOaksLab_EventScript_169E1A:: @ 8169E1A
 	lock
 	faceplayer
 	checkflag FLAG_0x82C
-	goto_if 1, EventScript_169E2F
+	goto_if_eq EventScript_169E2F
 	msgbox gUnknown_818EBE6
 	release
 	end

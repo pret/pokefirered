@@ -43,7 +43,7 @@ EventScript_166F52:: @ 8166F52
 
 EventScript_166F5E:: @ 8166F5E
 	checkflag FLAG_0x1A8
-	goto_if 1, EventScript_166F68
+	goto_if_eq EventScript_166F68
 	return
 
 EventScript_166F68:: @ 8166F68
@@ -109,9 +109,9 @@ EventScript_166FCD:: @ 8166FCD
 	msgbox gUnknown_8180C90
 	msgbox gUnknown_8180CAA, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_167068
+	goto_if_eq EventScript_167068
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_167078
+	goto_if_eq EventScript_167078
 	end
 
 EventScript_167032:: @ 8167032

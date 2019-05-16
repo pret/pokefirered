@@ -15,10 +15,10 @@ Route18_EastEntrance_2F_EventScript_17047E:: @ 817047E
 	setvar VAR_0x8008, 5
 	call EventScript_1A8CAD
 	checkflag FLAG_0x257
-	goto_if 1, EventScript_1704F0
+	goto_if_eq EventScript_1704F0
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1704D8
+	goto_if_eq EventScript_1704D8
 	call EventScript_1A8CBD
 	compare_var_to_value VAR_0x8004, 6
 	goto_if 4, EventScript_1704D8

@@ -51,7 +51,7 @@ PokemonLeague_BrunosRoom_EventScript_1626EC:: @ 81626EC
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_0x4B9
-	goto_if 1, EventScript_162779
+	goto_if_eq EventScript_162779
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars

@@ -26,7 +26,7 @@ EventScript_16523C:: @ 816523C
 
 EventScript_165243:: @ 8165243
 	checkflag FLAG_0x2F7
-	goto_if 1, EventScript_1A77A9
+	goto_if_eq EventScript_1A77A9
 	clearflag FLAG_0x09A
 	clearflag FLAG_0x848
 	return
@@ -48,19 +48,15 @@ BirthIsland_Exterior_EventScript_165271:: @ 8165271
 	faceplayer
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	special sub_80CCDFC
 	waitstate
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_1652BA
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_1652BC
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_1652C0
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_1652BE
+	switch VAR_RESULT
+	case 0, EventScript_1652BA
+	case 1, EventScript_1652BC
+	case 2, EventScript_1652C0
+	case 3, EventScript_1652BE
 	end
 
 EventScript_1652BA:: @ 81652BA
@@ -101,11 +97,11 @@ EventScript_1652C0:: @ 81652C0
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16533A
+	goto_if_eq EventScript_16533A
 	compare_var_to_value VAR_RESULT, 4
-	goto_if 1, EventScript_165348
+	goto_if_eq EventScript_165348
 	compare_var_to_value VAR_RESULT, 5
-	goto_if 1, EventScript_165348
+	goto_if_eq EventScript_165348
 	setflag FLAG_0x2E4
 	release
 	end

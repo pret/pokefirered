@@ -4,7 +4,7 @@ TwoIsland_House_MapScripts:: @ 8171618
 TwoIsland_House_EventScript_171619:: @ 8171619
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -12,7 +12,7 @@ TwoIsland_House_EventScript_171619:: @ 8171619
 	clearflag FLAG_0x003
 	clearflag FLAG_0x004
 	checkflag FLAG_0x001
-	goto_if 1, EventScript_17164F
+	goto_if_eq EventScript_17164F
 	msgbox gUnknown_81A2B88
 	setflag FLAG_0x001
 	goto EventScript_17164F
@@ -26,9 +26,9 @@ EventScript_17164F:: @ 817164F
 	compare_var_to_value VAR_RESULT, 1
 	call_if 1, EventScript_1717AC
 	checkflag FLAG_0x002
-	goto_if 1, EventScript_171687
+	goto_if_eq EventScript_171687
 	checkflag FLAG_0x003
-	goto_if 1, EventScript_171696
+	goto_if_eq EventScript_171696
 	goto EventScript_17179E
 	end
 
@@ -47,7 +47,7 @@ EventScript_171696:: @ 8171696
 EventScript_1716A5:: @ 81716A5
 	msgbox gUnknown_81A2C63, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_17179E
+	goto_if_eq EventScript_17179E
 	goto EventScript_1716BE
 	end
 
@@ -59,9 +59,9 @@ EventScript_1716BE:: @ 81716BE
 	goto_if 4, EventScript_17179E
 	special sub_80BFC14
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_171790
+	goto_if_eq EventScript_171790
 	compare_var_to_value VAR_0x8005, 0
-	goto_if 1, EventScript_171782
+	goto_if_eq EventScript_171782
 	goto EventScript_1716F4
 	end
 
@@ -70,13 +70,13 @@ EventScript_1716F4:: @ 81716F4
 	special sub_80E4634
 	waitstate
 	compare_var_to_value VAR_0x8004, 0
-	goto_if 1, EventScript_1716BE
+	goto_if_eq EventScript_1716BE
 	checkflag FLAG_0x004
-	goto_if 1, EventScript_17175B
+	goto_if_eq EventScript_17175B
 	checkflag FLAG_0x002
-	goto_if 1, EventScript_171727
+	goto_if_eq EventScript_171727
 	checkflag FLAG_0x003
-	goto_if 1, EventScript_171741
+	goto_if_eq EventScript_171741
 	end
 
 EventScript_171727:: @ 8171727
@@ -99,11 +99,9 @@ EventScript_17175B:: @ 817175B
 	message Text_1A2D43
 	waitmessage
 	multichoice 0, 0, 51, 1
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_171741
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_171727
+	switch VAR_RESULT
+	case 0, EventScript_171741
+	case 1, EventScript_171727
 	end
 
 EventScript_171782:: @ 8171782

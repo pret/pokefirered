@@ -10,27 +10,17 @@ CeruleanCity_House1_EventScript_16A7F0:: @ 816A7F0
 	setvar VAR_0x8004, 0
 	special sub_80CB7C4
 	waitstate
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16A8FB
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16A909
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16A917
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_16A925
-	compare_var_to_value VAR_0x8000, 4
-	goto_if 1, EventScript_16A933
-	compare_var_to_value VAR_0x8000, 5
-	goto_if 1, EventScript_16A941
-	compare_var_to_value VAR_0x8000, 6
-	goto_if 1, EventScript_16A94F
-	compare_var_to_value VAR_0x8000, 7
-	goto_if 1, EventScript_16A95D
-	compare_var_to_value VAR_0x8000, 8
-	goto_if 1, EventScript_16A96B
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16A96B
+	switch VAR_RESULT
+	case 0, EventScript_16A8FB
+	case 1, EventScript_16A909
+	case 2, EventScript_16A917
+	case 3, EventScript_16A925
+	case 4, EventScript_16A933
+	case 5, EventScript_16A941
+	case 6, EventScript_16A94F
+	case 7, EventScript_16A95D
+	case 8, EventScript_16A96B
+	case 127, EventScript_16A96B
 	end
 
 EventScript_16A87D:: @ 816A87D
@@ -38,27 +28,17 @@ EventScript_16A87D:: @ 816A87D
 	waitmessage
 	special sub_80CBC5C
 	waitstate
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16A8FB
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16A909
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16A917
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_16A925
-	compare_var_to_value VAR_0x8000, 4
-	goto_if 1, EventScript_16A933
-	compare_var_to_value VAR_0x8000, 5
-	goto_if 1, EventScript_16A941
-	compare_var_to_value VAR_0x8000, 6
-	goto_if 1, EventScript_16A94F
-	compare_var_to_value VAR_0x8000, 7
-	goto_if 1, EventScript_16A95D
-	compare_var_to_value VAR_0x8000, 8
-	goto_if 1, EventScript_16A96B
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16A96B
+	switch VAR_RESULT
+	case 0, EventScript_16A8FB
+	case 1, EventScript_16A909
+	case 2, EventScript_16A917
+	case 3, EventScript_16A925
+	case 4, EventScript_16A933
+	case 5, EventScript_16A941
+	case 6, EventScript_16A94F
+	case 7, EventScript_16A95D
+	case 8, EventScript_16A96B
+	case 127, EventScript_16A96B
 	end
 
 EventScript_16A8FB:: @ 816A8FB

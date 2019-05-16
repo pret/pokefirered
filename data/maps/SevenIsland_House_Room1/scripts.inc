@@ -78,7 +78,7 @@ SevenIsland_House_Room1_EventScript_170958:: @ 8170958
 	compare_var_to_value VAR_RESULT, 1
 	call_if 1, EventScript_17097D
 	compare_var_to_value VAR_0x4001, 1
-	goto_if 1, EventScript_170987
+	goto_if_eq EventScript_170987
 	msgbox gUnknown_81A049B
 	release
 	end
@@ -93,17 +93,17 @@ EventScript_170987:: @ 8170987
 	special sub_80CAAAC
 	msgbox gUnknown_81A0598, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_170A11
+	goto_if_eq EventScript_170A11
 	call EventScript_170A1E
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_170A11
+	goto_if_eq EventScript_170A11
 	msgbox gUnknown_81A0788, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_170A11
+	goto_if_eq EventScript_170A11
 	special LoadPlayerParty
 	call EventScript_1A4EAF
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_170A11
+	goto_if_eq EventScript_170A11
 	special SavePlayerParty
 	special sub_80A03D8
 	msgbox gUnknown_81A07C4

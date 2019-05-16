@@ -91,7 +91,7 @@ ViridianCity_EventScript_1659CA:: @ 81659CA
 	lock
 	faceplayer
 	compare_var_to_value VAR_0x405A, 1
-	goto_if 1, EventScript_1659EC
+	goto_if_eq EventScript_1659EC
 	msgbox gUnknown_817DB39
 	closemessage
 	applymovement 3, Movement_1A75E5
@@ -108,19 +108,19 @@ ViridianCity_EventScript_1659F6:: @ 81659F6
 	lock
 	faceplayer
 	checkflag FLAG_UNK820
-	goto_if 1, EventScript_165A23
+	goto_if_eq EventScript_165A23
 	compare_var_to_value VAR_0x4051, 2
 	goto_if 4, EventScript_165A4A
 	compare_var_to_value VAR_0x4051, 1
-	goto_if 1, EventScript_165A54
+	goto_if_eq EventScript_165A54
 	compare_var_to_value VAR_0x4051, 0
-	goto_if 1, EventScript_165A84
+	goto_if_eq EventScript_165A84
 	end
 
 EventScript_165A23:: @ 8165A23
 	msgbox gUnknown_817E046, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_165A40
+	goto_if_eq EventScript_165A40
 	msgbox gUnknown_817E0EA
 	release
 	end
@@ -149,7 +149,7 @@ EventScript_165A65:: @ 8165A65
 	msgbox gUnknown_817DE9B
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	special sub_807F888
 	waitstate
@@ -167,9 +167,9 @@ ViridianCity_EventScript_165A8F:: @ 8165A8F
 	faceplayer
 	msgbox gUnknown_817DB98, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_165AB0
+	goto_if_eq EventScript_165AB0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_165ABA
+	goto_if_eq EventScript_165ABA
 	end
 
 EventScript_165AB0:: @ 8165AB0
@@ -186,7 +186,7 @@ ViridianCity_EventScript_165AC4:: @ 8165AC4
 	lock
 	faceplayer
 	compare_var_to_value VAR_0x4051, 0
-	goto_if 1, EventScript_165ADB
+	goto_if_eq EventScript_165ADB
 	msgbox gUnknown_817DC99
 	release
 	end
@@ -244,7 +244,7 @@ EventScript_165B4C:: @ 8165B4C
 	closemessage
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	special sub_807F888
 	waitstate

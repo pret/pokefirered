@@ -14,11 +14,9 @@ SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	waitmessage
 	setvar VAR_0x8004, 6
 	specialvar VAR_RESULT, sub_80CB328
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_164B46
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_164B52
+	switch VAR_RESULT
+	case 0, EventScript_164B46
+	case 1, EventScript_164B52
 	end
 
 EventScript_164B46:: @ 8164B46
@@ -32,22 +30,18 @@ EventScript_164B52:: @ 8164B52
 	end
 
 EventScript_164B5E:: @ 8164B5E
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_164BCD
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_164B90
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_164BD3
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_164BD3
+	switch VAR_RESULT
+	case 0, EventScript_164BCD
+	case 1, EventScript_164B90
+	case 2, EventScript_164BD3
+	case 127, EventScript_164BD3
 	end
 
 EventScript_164B90:: @ 8164B90
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
 	compare_var_to_value VAR_0x403A, 3
-	goto_if 1, EventScript_164BD3
+	goto_if_eq EventScript_164BD3
 	call EventScript_164BD8
 	setvar VAR_0x403A, 3
 	special sub_80CB63C

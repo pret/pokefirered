@@ -6,7 +6,7 @@ FuchsiaCity_House3_EventScript_16D895:: @ 816D895
 	faceplayer
 	msgbox gUnknown_81993B9, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16D8B0
+	goto_if_eq EventScript_16D8B0
 	goto EventScript_16D941
 	end
 
@@ -18,20 +18,20 @@ EventScript_16D8B0:: @ 816D8B0
 	goto_if 4, EventScript_16D941
 	special sub_80BFC14
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16D937
+	goto_if_eq EventScript_16D937
 	special ScrSpecial_CountPokemonMoves
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16D92A
+	goto_if_eq EventScript_16D92A
 	msgbox gUnknown_8199445
 	fadescreen 1
 	special sub_80BF9BC
 	fadescreen 0
 	compare_var_to_value VAR_0x8005, 4
-	goto_if 1, EventScript_16D8B0
+	goto_if_eq EventScript_16D8B0
 	special ScrSpecial_GetPokemonNicknameAndMoveName
 	msgbox gUnknown_8199485, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16D919
+	goto_if_eq EventScript_16D919
 	goto EventScript_16D941
 	end
 

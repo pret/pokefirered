@@ -4,7 +4,7 @@ Route11_EastEntrance_2F_MapScripts:: @ 816FD34
 Route11_EastEntrance_2F_EventScript_16FD35:: @ 816FD35
 	lockall
 	checkflag FLAG_0x253
-	goto_if 1, EventScript_16FD49
+	goto_if_eq EventScript_16FD49
 	msgbox gUnknown_819EC8A
 	releaseall
 	end
@@ -24,10 +24,10 @@ Route11_EastEntrance_2F_EventScript_16FD5C:: @ 816FD5C
 	setvar VAR_0x8008, 4
 	call EventScript_1A8CAD
 	checkflag FLAG_0x251
-	goto_if 1, EventScript_16FDCE
+	goto_if_eq EventScript_16FDCE
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16FDB6
+	goto_if_eq EventScript_16FDB6
 	call EventScript_1A8CBD
 	compare_var_to_value VAR_0x8004, 6
 	goto_if 4, EventScript_16FDB6
@@ -61,10 +61,10 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	faceplayer
 	call EventScript_16FE64
 	checkflag FLAG_0x252
-	goto_if 1, EventScript_16FE5A
+	goto_if_eq EventScript_16FE5A
 	msgbox gUnknown_819E9E5, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1A7AD1
+	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, sub_80CA3D8
 	getnumberstring 2, VAR_0x8006
@@ -74,7 +74,7 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	msgbox gUnknown_819EAE4
 	checkitemspace ITEM_ITEMFINDER, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1A7AC7
+	goto_if_eq EventScript_1A7AC7
 	additem ITEM_ITEMFINDER, 1
 	giveitemfanfaremsg gUnknown_819EB37, ITEM_ITEMFINDER
 	setflag FLAG_0x252

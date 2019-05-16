@@ -42,7 +42,7 @@ VermilionCity_Gym_MapScript2_16B772:: @ 816B772
 
 EventScript_16B778:: @ 816B778
 	checkflag FLAG_0x264
-	goto_if 1, EventScript_1A77A9
+	goto_if_eq EventScript_1A77A9
 	special sub_80CADEC
 	copyvar VAR_0x4000, VAR_0x8004
 	copyvar VAR_0x4001, VAR_0x8005
@@ -141,16 +141,16 @@ VermilionCity_Gym_EventScript_16B837:: @ 816B837
 EventScript_16B843:: @ 816B843
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	copyvar VAR_0x8004, VAR_0x4000
 	copyvar VAR_0x8005, VAR_0x4001
 	checkflag FLAG_0x264
-	goto_if 1, EventScript_16B8E5
+	goto_if_eq EventScript_16B8E5
 	checkflag FLAG_0x001
-	goto_if 1, EventScript_16B89E
+	goto_if_eq EventScript_16B89E
 	compare_var_to_var VAR_0x8004, VAR_0x8008
-	goto_if 1, EventScript_16B885
+	goto_if_eq EventScript_16B885
 	msgbox gUnknown_8195289
 	releaseall
 	end
@@ -167,7 +167,7 @@ EventScript_16B885:: @ 816B885
 
 EventScript_16B89E:: @ 816B89E
 	compare_var_to_var VAR_0x8005, VAR_0x8008
-	goto_if 1, EventScript_16B8CB
+	goto_if_eq EventScript_16B8CB
 	msgbox gUnknown_819536C
 	clearflag FLAG_0x001
 	special sub_80CADEC
@@ -240,7 +240,7 @@ EventScript_16B9AF:: @ 816B9AF
 	msgbox gUnknown_8194CFA
 	checkitemspace ITEM_TM34, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16B9F0
+	goto_if_eq EventScript_16B9F0
 	additem ITEM_TM34, 1
 	giveitemfanfaremsg gUnknown_8194D87, ITEM_TM34
 	setflag FLAG_0x231
@@ -285,7 +285,7 @@ VermilionCity_Gym_EventScript_16BA6C:: @ 816BA6C
 	lock
 	faceplayer
 	checkflag FLAG_0x4B2
-	goto_if 1, EventScript_16BA81
+	goto_if_eq EventScript_16BA81
 	msgbox gUnknown_81950B4
 	release
 	end
@@ -298,7 +298,7 @@ EventScript_16BA81:: @ 816BA81
 VermilionCity_Gym_EventScript_16BA8B:: @ 816BA8B
 	lockall
 	checkflag FLAG_0x822
-	goto_if 1, EventScript_16BA9F
+	goto_if_eq EventScript_16BA9F
 	msgbox gUnknown_819520B
 	releaseall
 	end

@@ -5,9 +5,9 @@ FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
 	lock
 	faceplayer
 	checkflag FLAG_0x23A
-	goto_if 1, EventScript_16D7FA
+	goto_if_eq EventScript_16D7FA
 	checkflag FLAG_0x189
-	goto_if 1, EventScript_16D780
+	goto_if_eq EventScript_16D780
 	msgbox gUnknown_8198DF9, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	call_if 1, EventScript_16D7E8

@@ -27,7 +27,7 @@ EventScript_1624F1:: @ 81624F1
 CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -46,11 +46,11 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_162558
+	goto_if_eq EventScript_162558
 	compare_var_to_value VAR_RESULT, 4
-	goto_if 1, EventScript_162561
+	goto_if_eq EventScript_162561
 	compare_var_to_value VAR_RESULT, 5
-	goto_if 1, EventScript_162561
+	goto_if_eq EventScript_162561
 	setflag FLAG_0x2BC
 	release
 	end

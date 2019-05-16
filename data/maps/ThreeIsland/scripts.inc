@@ -29,9 +29,9 @@ ThreeIsland_EventScript_1677D8:: @ 81677D8
 ThreeIsland_EventScript_1677E5:: @ 81677E5
 	lock
 	checkflag FLAG_0x2FC
-	goto_if 1, EventScript_167806
+	goto_if_eq EventScript_167806
 	compare_var_to_value VAR_0x407B, 4
-	goto_if 1, EventScript_16781A
+	goto_if_eq EventScript_16781A
 	setvar VAR_0x4001, 0
 	call EventScript_16786F
 	release
@@ -50,7 +50,7 @@ EventScript_16781A:: @ 816781A
 	msgbox gUnknown_818275A
 	checkitemspace ITEM_FULL_RESTORE, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_167865
+	goto_if_eq EventScript_167865
 	giveitemfanfaremsg gUnknown_81827BE, ITEM_FULL_RESTORE
 	additem ITEM_FULL_RESTORE, 1
 	setflag FLAG_0x2FC
@@ -137,7 +137,7 @@ EventScript_167973:: @ 8167973
 ThreeIsland_EventScript_167989:: @ 8167989
 	lock
 	compare_var_to_value VAR_0x407B, 4
-	goto_if 1, EventScript_1679A1
+	goto_if_eq EventScript_1679A1
 	setvar VAR_0x4001, 1
 	call EventScript_16786F
 	release
@@ -224,7 +224,7 @@ EventScript_167A59:: @ 8167A59
 	playbgm BGM_FRLG_BOY_EYE, 0
 	msgbox gUnknown_81823ED, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_167C35
+	goto_if_eq EventScript_167C35
 	msgbox gUnknown_818247D
 	setvar VAR_LAST_TALKED, 5
 	trainerbattle 3, 527, 0, Text_1824B7

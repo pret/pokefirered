@@ -31,7 +31,7 @@ EventScript_16EE3D:: @ 816EE3D
 	msgbox gUnknown_819B6FA
 	checkitemspace ITEM_TM04, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16EE7E
+	goto_if_eq EventScript_16EE7E
 	additem ITEM_TM04, 1
 	giveitemfanfaremsg gUnknown_819B7D3, ITEM_TM04
 	setflag FLAG_0x29A
@@ -86,7 +86,7 @@ SaffronCity_Gym_EventScript_16EF36:: @ 816EF36
 	lock
 	faceplayer
 	checkflag FLAG_0x4B5
-	goto_if 1, EventScript_16EF4B
+	goto_if_eq EventScript_16EF4B
 	msgbox gUnknown_819BCF6
 	release
 	end
@@ -99,7 +99,7 @@ EventScript_16EF4B:: @ 816EF4B
 SaffronCity_Gym_EventScript_16EF55:: @ 816EF55
 	lockall
 	checkflag FLAG_0x825
-	goto_if 1, EventScript_16EF69
+	goto_if_eq EventScript_16EF69
 	msgbox gUnknown_819BDFE
 	releaseall
 	end

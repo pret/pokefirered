@@ -27,7 +27,7 @@ EventScript_1654A2:: @ 81654A2
 
 EventScript_1654A8:: @ 81654A8
 	checkflag FLAG_0x291
-	goto_if 1, EventScript_1654BD
+	goto_if_eq EventScript_1654BD
 	setobjectxyperm 1, 5, 15
 	setobjectmovementtype 1, 7
 	return
@@ -377,13 +377,13 @@ Movement_165758:: @ 8165758
 PalletTown_EventScript_16575C:: @ 816575C
 	lock
 	compare_var_to_value VAR_0x4070, 2
-	goto_if 1, EventScript_1657ED
+	goto_if_eq EventScript_1657ED
 	compare_var_to_value VAR_0x4070, 1
-	goto_if 1, EventScript_165815
+	goto_if_eq EventScript_165815
 	compare_var_to_value VAR_0x4002, 1
-	goto_if 1, EventScript_1658C2
+	goto_if_eq EventScript_1658C2
 	checkflag FLAG_0x002
-	goto_if 1, EventScript_165801
+	goto_if_eq EventScript_165801
 	msgbox gUnknown_81B1C8B
 	applymovement 1, Movement_1A75E1
 	waitmovement 0

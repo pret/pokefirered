@@ -22,7 +22,7 @@ CeladonCity_GameCorner_EventScript_16C684:: @ 816C684
 CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	showmoneybox 0, 0, 0
@@ -31,24 +31,20 @@ CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
 	waitmessage
 	multichoice 13, 0, 27, 0
 	copyvar VAR_0x8009, VAR_RESULT
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16C6E6
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16C6E6
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16C782
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16C782
+	switch VAR_RESULT
+	case 0, EventScript_16C6E6
+	case 1, EventScript_16C6E6
+	case 2, EventScript_16C782
+	case 127, EventScript_16C782
 	end
 
 EventScript_16C6E6:: @ 816C6E6
 	checkflag FLAG_0x243
 	goto_if 0, EventScript_16C790
 	compare_var_to_value VAR_0x8009, 0
-	goto_if 1, EventScript_16C734
+	goto_if_eq EventScript_16C734
 	compare_var_to_value VAR_0x8009, 1
-	goto_if 1, EventScript_16C706
+	goto_if_eq EventScript_16C706
 	end
 
 EventScript_16C706:: @ 816C706
@@ -57,7 +53,7 @@ EventScript_16C706:: @ 816C706
 	goto_if 4, EventScript_16C79E
 	checkmoney 10000, 0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16C7AC
+	goto_if_eq EventScript_16C7AC
 	givecoins 500
 	takemoney 10000, 0
 	goto EventScript_16C762
@@ -69,7 +65,7 @@ EventScript_16C734:: @ 816C734
 	goto_if 4, EventScript_16C79E
 	checkmoney 1000, 0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16C7AC
+	goto_if_eq EventScript_16C7AC
 	givecoins 50
 	takemoney 1000, 0
 	goto EventScript_16C762
@@ -136,7 +132,7 @@ CeladonCity_GameCorner_EventScript_16C7E7:: @ 816C7E7
 	lock
 	faceplayer
 	checkflag FLAG_0x26E
-	goto_if 1, EventScript_16C849
+	goto_if_eq EventScript_16C849
 	msgbox gUnknown_8196AF3
 	checkflag FLAG_0x243
 	goto_if 0, EventScript_16C839
@@ -172,7 +168,7 @@ CeladonCity_GameCorner_EventScript_16C857:: @ 816C857
 	lock
 	faceplayer
 	checkflag FLAG_0x4B3
-	goto_if 1, EventScript_16C870
+	goto_if_eq EventScript_16C870
 	msgbox gUnknown_8196BAD
 	goto EventScript_16C7CA
 	end
@@ -200,7 +196,7 @@ CeladonCity_GameCorner_EventScript_16C89E:: @ 816C89E
 	lock
 	faceplayer
 	checkflag FLAG_0x26F
-	goto_if 1, EventScript_16C8F0
+	goto_if_eq EventScript_16C8F0
 	msgbox gUnknown_8196D2B
 	checkflag FLAG_0x243
 	goto_if 0, EventScript_16C839
@@ -230,7 +226,7 @@ CeladonCity_GameCorner_EventScript_16C8FE:: @ 816C8FE
 	lock
 	faceplayer
 	checkflag FLAG_0x270
-	goto_if 1, EventScript_16C950
+	goto_if_eq EventScript_16C950
 	msgbox gUnknown_8196DB7
 	checkflag FLAG_0x243
 	goto_if 0, EventScript_16C839
@@ -271,7 +267,7 @@ EventScript_16C96C:: @ 816C96C
 	goto_if 0, EventScript_16CAA0
 	msgbox gUnknown_8196F46, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16C96A
+	goto_if_eq EventScript_16C96A
 	setfieldeffectarg 0, 255
 	setfieldeffectarg 1, 10
 	setfieldeffectarg 2, 14

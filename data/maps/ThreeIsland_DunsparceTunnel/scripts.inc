@@ -25,10 +25,10 @@ ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 	lock
 	faceplayer
 	checkflag FLAG_0x2E2
-	goto_if 1, EventScript_164DC2
+	goto_if_eq EventScript_164DC2
 	specialvar VAR_RESULT, sub_806E25C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_164D90
+	goto_if_eq EventScript_164D90
 	msgbox gUnknown_817D13B
 	closemessage
 	applymovement 1, Movement_1A75E5
@@ -40,7 +40,7 @@ EventScript_164D90:: @ 8164D90
 	msgbox gUnknown_817D1C9
 	giveitem ITEM_NUGGET
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_164DB8
+	goto_if_eq EventScript_164DB8
 	setflag FLAG_0x2E2
 	goto EventScript_164DC2
 	end

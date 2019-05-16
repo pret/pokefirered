@@ -5,11 +5,11 @@ Route16_House_EventScript_17014F:: @ 817014F
 	lock
 	faceplayer
 	checkflag FLAG_0x238
-	goto_if 1, EventScript_1701A5
+	goto_if_eq EventScript_1701A5
 	msgbox gUnknown_819F851
 	checkitemspace ITEM_HM02, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_17019B
+	goto_if_eq EventScript_17019B
 	additem ITEM_HM02, 1
 	giveitemfanfaremsg gUnknown_819F8C0, ITEM_HM02
 	msgbox gUnknown_819F8E0

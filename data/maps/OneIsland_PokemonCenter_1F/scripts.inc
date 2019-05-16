@@ -193,7 +193,7 @@ OneIsland_PokemonCenter_1F_EventScript_170E94:: @ 8170E94
 OneIsland_PokemonCenter_1F_EventScript_170E9D:: @ 8170E9D
 	lock
 	checkflag FLAG_0x2A1
-	goto_if 1, EventScript_170EB1
+	goto_if_eq EventScript_170EB1
 	msgbox gUnknown_81A1266
 	release
 	end
@@ -209,22 +209,22 @@ OneIsland_PokemonCenter_1F_EventScript_170EC5:: @ 8170EC5
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 7
-	goto_if 1, EventScript_170F35
+	goto_if_eq EventScript_170F35
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
-	goto_if 1, EventScript_170F9B
+	goto_if_eq EventScript_170F9B
 	checkflag FLAG_0x2DC
-	goto_if 1, EventScript_170FA5
+	goto_if_eq EventScript_170FA5
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if 1, EventScript_17103A
+	goto_if_eq EventScript_17103A
 	checkflag FLAG_0x2DD
-	goto_if 1, EventScript_171044
+	goto_if_eq EventScript_171044
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	goto_if 1, EventScript_1710F2
+	goto_if_eq EventScript_1710F2
 	specialvar VAR_RESULT, sub_806E25C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_1710FC
+	goto_if_eq EventScript_1710FC
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
-	goto_if 1, EventScript_171134
+	goto_if_eq EventScript_171134
 	msgbox gUnknown_81A1321
 	closemessage
 	applymovement 3, Movement_1A75E5
@@ -236,9 +236,9 @@ EventScript_170F35:: @ 8170F35
 	msgbox gUnknown_81A1EBD
 	random 3
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_170F6D
+	goto_if_eq EventScript_170F6D
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_170F84
+	goto_if_eq EventScript_170F84
 	setvar VAR_0x8004, 13
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
@@ -331,14 +331,14 @@ EventScript_171044:: @ 8171044
 	waitmovement 0
 	msgbox gUnknown_81A19AA, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_171099
+	goto_if_eq EventScript_171099
 	goto EventScript_1710B2
 	end
 
 EventScript_171099:: @ 8171099
 	msgbox gUnknown_81A1A08, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_171099
+	goto_if_eq EventScript_171099
 	goto EventScript_1710B2
 	end
 
@@ -411,7 +411,7 @@ OneIsland_PokemonCenter_1F_EventScript_17115A:: @ 817115A
 	lock
 	faceplayer
 	checkflag FLAG_0x844
-	goto_if 1, EventScript_17116F
+	goto_if_eq EventScript_17116F
 	msgbox gUnknown_81A218D
 	release
 	end
@@ -424,9 +424,9 @@ EventScript_17116F:: @ 817116F
 OneIsland_PokemonCenter_1F_EventScript_171179:: @ 8171179
 	lockall
 	checkflag FLAG_0x844
-	goto_if 1, EventScript_1711A0
+	goto_if_eq EventScript_1711A0
 	checkflag FLAG_0x2A1
-	goto_if 1, EventScript_171196
+	goto_if_eq EventScript_171196
 	msgbox gUnknown_81A223F
 	releaseall
 	end

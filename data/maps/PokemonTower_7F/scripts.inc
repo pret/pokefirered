@@ -27,11 +27,11 @@ EventScript_1635A1:: @ 81635A1
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 10
-	goto_if 1, EventScript_1635E0
+	goto_if_eq EventScript_1635E0
 	compare_var_to_value VAR_0x8004, 11
-	goto_if 1, EventScript_1635F0
+	goto_if_eq EventScript_1635F0
 	compare_var_to_value VAR_0x8004, 9
-	goto_if 1, EventScript_163600
+	goto_if_eq EventScript_163600
 	applymovement 2, Movement_16362C
 	waitmovement 0
 	goto EventScript_163616
@@ -117,9 +117,9 @@ EventScript_163658:: @ 8163658
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 12
-	goto_if 1, EventScript_163699
+	goto_if_eq EventScript_163699
 	compare_var_to_value VAR_0x8004, 13
-	goto_if 1, EventScript_1636A9
+	goto_if_eq EventScript_1636A9
 	applymovement 3, Movement_1636C6
 	waitmovement 0
 	goto EventScript_1636B9
@@ -182,9 +182,9 @@ EventScript_1636F1:: @ 81636F1
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 10
-	goto_if 1, EventScript_163725
+	goto_if_eq EventScript_163725
 	compare_var_to_value VAR_0x8004, 9
-	goto_if 1, EventScript_163735
+	goto_if_eq EventScript_163735
 	applymovement 4, Movement_163754
 	waitmovement 0
 	goto EventScript_163745

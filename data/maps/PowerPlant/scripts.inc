@@ -40,7 +40,7 @@ EventScript_1637B4:: @ 81637B4
 PowerPlant_EventScript_1637B8:: @ 81637B8
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -59,11 +59,11 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16381B
+	goto_if_eq EventScript_16381B
 	compare_var_to_value VAR_RESULT, 4
-	goto_if 1, EventScript_163824
+	goto_if_eq EventScript_163824
 	compare_var_to_value VAR_RESULT, 5
-	goto_if 1, EventScript_163824
+	goto_if_eq EventScript_163824
 	setflag FLAG_0x2BF
 	release
 	end
@@ -81,7 +81,7 @@ EventScript_163824:: @ 8163824
 PowerPlant_EventScript_16382F:: @ 816382F
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 34, ITEM_NONE
@@ -95,11 +95,11 @@ PowerPlant_EventScript_16382F:: @ 816382F
 	special sub_8112364
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_163884
+	goto_if_eq EventScript_163884
 	compare_var_to_value VAR_RESULT, 4
-	goto_if 1, EventScript_163884
+	goto_if_eq EventScript_163884
 	compare_var_to_value VAR_RESULT, 5
-	goto_if 1, EventScript_163884
+	goto_if_eq EventScript_163884
 	setflag FLAG_0x2D0
 	release
 	end
@@ -112,7 +112,7 @@ EventScript_163884:: @ 8163884
 PowerPlant_EventScript_16388D:: @ 816388D
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 34, ITEM_NONE
@@ -126,11 +126,11 @@ PowerPlant_EventScript_16388D:: @ 816388D
 	special sub_8112364
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_1638E2
+	goto_if_eq EventScript_1638E2
 	compare_var_to_value VAR_RESULT, 4
-	goto_if 1, EventScript_1638E2
+	goto_if_eq EventScript_1638E2
 	compare_var_to_value VAR_RESULT, 5
-	goto_if 1, EventScript_1638E2
+	goto_if_eq EventScript_1638E2
 	setflag FLAG_0x2D1
 	release
 	end

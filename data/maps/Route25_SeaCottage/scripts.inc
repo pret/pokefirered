@@ -22,16 +22,16 @@ Route25_SeaCottage_EventScript_17054B:: @ 817054B
 	lock
 	faceplayer
 	checkflag FLAG_0x003
-	goto_if 1, EventScript_1706C8
+	goto_if_eq EventScript_1706C8
 	checkflag FLAG_0x234
-	goto_if 1, EventScript_170640
+	goto_if_eq EventScript_170640
 	checkflag FLAG_0x233
-	goto_if 1, EventScript_17064A
+	goto_if_eq EventScript_17064A
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_170580
+	goto_if_eq EventScript_170580
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_17058E
+	goto_if_eq EventScript_17058E
 	end
 
 EventScript_170580:: @ 8170580
@@ -112,7 +112,7 @@ EventScript_17064A:: @ 817064A
 	call_if 1, EventScript_1706B5
 	checkitemspace ITEM_SS_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1706BE
+	goto_if_eq EventScript_1706BE
 	additem ITEM_SS_TICKET, 1
 	giveitemfanfaremsg gUnknown_81A028E, ITEM_SS_TICKET, 1, BGM_FRLG_ME_KEYITEM
 	setflag FLAG_0x235
@@ -160,9 +160,9 @@ Movement_1706DB:: @ 81706DB
 Route25_SeaCottage_EventScript_1706DD:: @ 81706DD
 	lockall
 	checkflag FLAG_0x003
-	goto_if 1, EventScript_1707CA
+	goto_if_eq EventScript_1707CA
 	checkflag FLAG_0x002
-	goto_if 1, EventScript_1706FA
+	goto_if_eq EventScript_1706FA
 	msgbox gUnknown_81A0402
 	releaseall
 	end
@@ -251,19 +251,13 @@ EventScript_1707D8:: @ 81707D8
 	message Text_1A0479
 	waitmessage
 	multichoice 0, 0, 1, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_17082B
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_170840
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_170855
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_17086A
-	compare_var_to_value VAR_0x8000, 4
-	goto_if 1, EventScript_17087F
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_17087F
+	switch VAR_RESULT
+	case 0, EventScript_17082B
+	case 1, EventScript_170840
+	case 2, EventScript_170855
+	case 3, EventScript_17086A
+	case 4, EventScript_17087F
+	case 127, EventScript_17087F
 	end
 
 EventScript_17082B:: @ 817082B

@@ -31,7 +31,7 @@ EventScript_16D0C6:: @ 816D0C6
 	msgbox gUnknown_8197327
 	checkitemspace ITEM_TM19, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16D107
+	goto_if_eq EventScript_16D107
 	additem ITEM_TM19, 1
 	loadword 0, gUnknown_81973BA
 	setorcopyvar VAR_0x8000, ITEM_TM19
@@ -92,7 +92,7 @@ CeladonCity_Gym_EventScript_16D1B5:: @ 816D1B5
 CeladonCity_Gym_EventScript_16D1CC:: @ 816D1CC
 	lockall
 	checkflag FLAG_0x823
-	goto_if 1, EventScript_16D1E0
+	goto_if_eq EventScript_16D1E0
 	msgbox gUnknown_8197874
 	releaseall
 	end

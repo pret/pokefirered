@@ -43,7 +43,7 @@ SaffronCity_Duplicate_EventScript_1673B0:: @ 81673B0
 SaffronCity_Duplicate_EventScript_1673B9:: @ 81673B9
 	lock
 	checkflag FLAG_0x23C
-	goto_if 1, EventScript_1673D7
+	goto_if_eq EventScript_1673D7
 	applymovement 6, Movement_1A75E1
 	waitmovement 0
 	msgbox gUnknown_81812CA

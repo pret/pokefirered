@@ -5,12 +5,12 @@ Route1_EventScript_167EFE:: @ 8167EFE
 	lock
 	faceplayer
 	checkflag FLAG_0x230
-	goto_if 1, EventScript_167F48
+	goto_if_eq EventScript_167F48
 	msgbox gUnknown_818329D
 	textcolor 3
 	checkitemspace ITEM_POTION, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1A6BF9
+	goto_if_eq EventScript_1A6BF9
 	getitemname 1, ITEM_POTION
 	playfanfare MUS_FANFA1
 	message Text_1A51F6

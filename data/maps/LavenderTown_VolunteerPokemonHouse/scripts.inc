@@ -5,11 +5,11 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B14A:: @ 816B14A
 	lock
 	faceplayer
 	checkflag FLAG_0x23D
-	goto_if 1, EventScript_16B196
+	goto_if_eq EventScript_16B196
 	msgbox gUnknown_81936FF
 	checkitemspace ITEM_POKE_FLUTE, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16B1A0
+	goto_if_eq EventScript_16B1A0
 	setflag FLAG_0x23D
 	additem ITEM_POKE_FLUTE, 1
 	giveitemfanfaremsg gUnknown_81937BD, ITEM_POKE_FLUTE, 1, BGM_FRLG_ME_KEYITEM
@@ -45,7 +45,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B1CC:: @ 816B1CC
 	lock
 	faceplayer
 	checkflag FLAG_0x23C
-	goto_if 1, EventScript_16B1E1
+	goto_if_eq EventScript_16B1E1
 	msgbox gUnknown_81935ED
 	release
 	end

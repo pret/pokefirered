@@ -84,9 +84,9 @@ OneIsland_EventScript_167517:: @ 8167517
 	lock
 	faceplayer
 	checkflag FLAG_0x844
-	goto_if 1, EventScript_16753F
+	goto_if_eq EventScript_16753F
 	checkflag FLAG_0x2A1
-	goto_if 1, EventScript_167535
+	goto_if_eq EventScript_167535
 	msgbox gUnknown_818174E
 	release
 	end

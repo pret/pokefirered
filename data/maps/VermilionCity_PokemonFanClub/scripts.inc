@@ -5,10 +5,10 @@ VermilionCity_PokemonFanClub_EventScript_16B47F:: @ 816B47F
 	lock
 	faceplayer
 	checkflag FLAG_0x241
-	goto_if 1, EventScript_16B4A7
+	goto_if_eq EventScript_16B4A7
 	msgbox gUnknown_819457E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16B4B1
+	goto_if_eq EventScript_16B4B1
 	msgbox gUnknown_8194860
 	release
 	end
@@ -22,7 +22,7 @@ EventScript_16B4B1:: @ 816B4B1
 	msgbox gUnknown_8194628
 	checkitemspace ITEM_BIKE_VOUCHER, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16B4F2
+	goto_if_eq EventScript_16B4F2
 	setflag FLAG_0x241
 	additem ITEM_BIKE_VOUCHER, 1
 	giveitemfanfaremsg gUnknown_819474E, ITEM_BIKE_VOUCHER, 1, BGM_FRLG_ME_KEYITEM
@@ -39,7 +39,7 @@ VermilionCity_PokemonFanClub_EventScript_16B4FC:: @ 816B4FC
 	lock
 	faceplayer
 	checkflag FLAG_0x82C
-	goto_if 1, EventScript_16B511
+	goto_if_eq EventScript_16B511
 	msgbox gUnknown_81948E6
 	release
 	end
@@ -56,7 +56,7 @@ VermilionCity_PokemonFanClub_EventScript_16B528:: @ 816B528
 	lock
 	faceplayer
 	checkflag FLAG_0x003
-	goto_if 1, EventScript_16B54B
+	goto_if_eq EventScript_16B54B
 	msgbox gUnknown_81944CC
 	closemessage
 	applymovement 5, Movement_1A75E5
@@ -78,7 +78,7 @@ VermilionCity_PokemonFanClub_EventScript_16B563:: @ 816B563
 	lock
 	faceplayer
 	checkflag FLAG_0x002
-	goto_if 1, EventScript_16B586
+	goto_if_eq EventScript_16B586
 	msgbox gUnknown_819446F
 	closemessage
 	applymovement 6, Movement_1A75E5
@@ -133,10 +133,10 @@ VermilionCity_House2_EventScript_16B5D7:: @ 816B5D7
 	setvar VAR_0x8008, 3
 	call EventScript_1A8CAD
 	checkflag FLAG_0x24D
-	goto_if 1, EventScript_16B649
+	goto_if_eq EventScript_16B649
 	msgbox gUnknown_81949CB, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16B631
+	goto_if_eq EventScript_16B631
 	call EventScript_1A8CBD
 	compare_var_to_value VAR_0x8004, 6
 	goto_if 4, EventScript_16B631

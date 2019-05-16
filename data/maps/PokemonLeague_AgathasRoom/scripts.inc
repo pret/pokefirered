@@ -51,7 +51,7 @@ PokemonLeague_AgathasRoom_EventScript_162877:: @ 8162877
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_0x4BA
-	goto_if 1, EventScript_162911
+	goto_if_eq EventScript_162911
 	setvar VAR_0x8004, 11
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars

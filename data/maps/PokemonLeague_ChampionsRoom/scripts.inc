@@ -17,23 +17,23 @@ PokemonLeague_ChampionsRoom_MapScript2_162AF2:: @ 8162AF2
 
 EventScript_162B1E:: @ 8162B1E
 	checktrainerflag FLAG_0x1B6
-	goto_if 1, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	checktrainerflag FLAG_0x2E3
-	goto_if 1, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	return
 
 EventScript_162B31:: @ 8162B31
 	checktrainerflag FLAG_0x1B7
-	goto_if 1, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	checktrainerflag FLAG_0x2E4
-	goto_if 1, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	return
 
 EventScript_162B44:: @ 8162B44
 	checktrainerflag FLAG_0x1B8
-	goto_if 1, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	checktrainerflag FLAG_0x2E5
-	goto_if 1, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	return
 
 EventScript_162B57:: @ 8162B57
@@ -65,7 +65,7 @@ EventScript_162B76:: @ 8162B76
 	call_if 1, EventScript_162CBC
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_162C68
+	goto_if_eq EventScript_162C68
 	setflag FLAG_0x003
 	setflag FLAG_0x005
 	savebgm BGM_FRLG_KACHI_LEADER

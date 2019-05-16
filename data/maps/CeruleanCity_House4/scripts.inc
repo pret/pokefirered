@@ -4,25 +4,25 @@ CeruleanCity_House4_MapScripts:: @ 816ACEE
 CeruleanCity_House4_EventScript_16ACEF:: @ 816ACEF
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	specialvar VAR_0x8004, sub_8146CE8
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8004, 0
-	goto_if 1, EventScript_16AD59
+	goto_if_eq EventScript_16AD59
 	compare_var_to_value VAR_0x8004, 1
-	goto_if 1, EventScript_16AD63
+	goto_if_eq EventScript_16AD63
 	compare_var_to_value VAR_0x8004, 2
-	goto_if 1, EventScript_16AD89
+	goto_if_eq EventScript_16AD89
 	compare_var_to_value VAR_0x8004, 3
-	goto_if 1, EventScript_16ADAF
+	goto_if_eq EventScript_16ADAF
 	compare_var_to_value VAR_0x8004, 4
-	goto_if 1, EventScript_16ADC3
+	goto_if_eq EventScript_16ADC3
 	compare_var_to_value VAR_0x8004, 5
-	goto_if 1, EventScript_16ADE9
+	goto_if_eq EventScript_16ADE9
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 1, EventScript_16AE0F
+	goto_if_eq EventScript_16AE0F
 	end
 
 EventScript_16AD59:: @ 816AD59
@@ -35,7 +35,7 @@ EventScript_16AD63:: @ 816AD63
 	msgbox gUnknown_8192B43
 	giveitem VAR_0x8008
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16AE45
+	goto_if_eq EventScript_16AE45
 	release
 	end
 
@@ -44,7 +44,7 @@ EventScript_16AD89:: @ 816AD89
 	msgbox gUnknown_8192C07
 	giveitem VAR_0x8008, 4
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16AE45
+	goto_if_eq EventScript_16AE45
 	release
 	end
 
@@ -60,7 +60,7 @@ EventScript_16ADC3:: @ 816ADC3
 	msgbox gUnknown_8192D4B
 	giveitem VAR_0x8008
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16AE45
+	goto_if_eq EventScript_16AE45
 	release
 	end
 
@@ -69,7 +69,7 @@ EventScript_16ADE9:: @ 816ADE9
 	msgbox gUnknown_8192DE3
 	giveitem VAR_0x8008, 4
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16AE45
+	goto_if_eq EventScript_16AE45
 	release
 	end
 

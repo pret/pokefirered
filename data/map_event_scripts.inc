@@ -7324,15 +7324,15 @@ EventScript_1A6697:: @ 81A6697
 EventScript_1A66BC:: @ 81A66BC
 	copyvar VAR_0x8000, VAR_RESULT
 	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_1A66F9
+	goto_if_eq EventScript_1A66F9
 	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_1A6709
+	goto_if_eq EventScript_1A6709
 	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_1A6719
+	goto_if_eq EventScript_1A6719
 	compare_var_to_value VAR_0x8000, 4
-	goto_if 1, EventScript_1A6729
+	goto_if_eq EventScript_1A6729
 	compare_var_to_value VAR_0x8000, 5
-	goto_if 1, EventScript_1A6739
+	goto_if_eq EventScript_1A6739
 	end
 
 EventScript_1A66F9:: @ 81A66F9

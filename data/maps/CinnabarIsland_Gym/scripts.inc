@@ -4,7 +4,7 @@ CinnabarIsland_Gym_MapScripts:: @ 816D94B
 
 CinnabarIsland_Gym_MapScript1_16D951:: @ 816D951
 	checkflag FLAG_0x4B6
-	goto_if 1, EventScript_16D991
+	goto_if_eq EventScript_16D991
 	checkflag FLAG_0x265
 	call_if 1, EventScript_16D9B0
 	checkflag FLAG_0x267
@@ -81,7 +81,7 @@ EventScript_16DA34:: @ 816DA34
 	msgbox gUnknown_819969E
 	checkitemspace ITEM_TM38, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16DA75
+	goto_if_eq EventScript_16DA75
 	additem ITEM_TM38, 1
 	giveitemfanfaremsg gUnknown_81996FF, ITEM_TM38
 	setflag FLAG_0x24E
@@ -196,7 +196,7 @@ CinnabarIsland_Gym_EventScript_16DBAB:: @ 816DBAB
 	lock
 	faceplayer
 	checkflag FLAG_0x4B6
-	goto_if 1, EventScript_16DBC0
+	goto_if_eq EventScript_16DBC0
 	msgbox gUnknown_8199B81
 	release
 	end
@@ -209,7 +209,7 @@ EventScript_16DBC0:: @ 816DBC0
 CinnabarIsland_Gym_EventScript_16DBCA:: @ 816DBCA
 	lockall
 	checkflag FLAG_UNK826
-	goto_if 1, EventScript_16DBDE
+	goto_if_eq EventScript_16DBDE
 	msgbox gUnknown_8199C29
 	releaseall
 	end
@@ -235,9 +235,9 @@ EventScript_16DC00:: @ 816DC00
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199D5A, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16DC43
+	goto_if_eq EventScript_16DC43
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16DC6A
+	goto_if_eq EventScript_16DC6A
 	end
 
 EventScript_16DC27:: @ 816DC27
@@ -257,7 +257,7 @@ EventScript_16DC34:: @ 816DC34
 EventScript_16DC43:: @ 816DC43
 	call EventScript_16DC27
 	checkflag FLAG_0x265
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DC58
 	releaseall
 	end
@@ -290,7 +290,7 @@ EventScript_16DC7A:: @ 816DC7A
 	msgbox gUnknown_819983F
 	trainerbattle 3, 213, 0, Text_199870
 	checkflag FLAG_0x265
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DC58
 	releaseall
 	end
@@ -332,15 +332,15 @@ EventScript_16DCF5:: @ 816DCF5
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199D79, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16DD41
+	goto_if_eq EventScript_16DD41
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16DD1C
+	goto_if_eq EventScript_16DD1C
 	end
 
 EventScript_16DD1C:: @ 816DD1C
 	call EventScript_16DC27
 	checkflag FLAG_0x267
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DD31
 	releaseall
 	end
@@ -369,7 +369,7 @@ EventScript_16DD51:: @ 816DD51
 	msgbox gUnknown_81998BD
 	trainerbattle 3, 178, 0, Text_1998ED
 	checkflag FLAG_0x267
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DD31
 	releaseall
 	end
@@ -420,15 +420,15 @@ EventScript_16DDD3:: @ 816DDD3
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199DA9, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16DE1F
+	goto_if_eq EventScript_16DE1F
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16DDFA
+	goto_if_eq EventScript_16DDFA
 	end
 
 EventScript_16DDFA:: @ 816DDFA
 	call EventScript_16DC27
 	checkflag FLAG_0x268
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DE0F
 	releaseall
 	end
@@ -457,7 +457,7 @@ EventScript_16DE2F:: @ 816DE2F
 	msgbox gUnknown_8199948
 	trainerbattle 3, 214, 0, Text_199973
 	checkflag FLAG_0x268
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DE0F
 	releaseall
 	end
@@ -499,15 +499,15 @@ EventScript_16DEAA:: @ 816DEAA
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199DC6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16DEF6
+	goto_if_eq EventScript_16DEF6
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16DED1
+	goto_if_eq EventScript_16DED1
 	end
 
 EventScript_16DED1:: @ 816DED1
 	call EventScript_16DC27
 	checkflag FLAG_0x269
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DEE6
 	releaseall
 	end
@@ -536,7 +536,7 @@ EventScript_16DF06:: @ 816DF06
 	msgbox gUnknown_81999B7
 	trainerbattle 3, 179, 0, Text_1999DB
 	checkflag FLAG_0x269
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DEE6
 	releaseall
 	end
@@ -578,15 +578,15 @@ EventScript_16DF81:: @ 816DF81
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199E00, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16DFA8
+	goto_if_eq EventScript_16DFA8
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16DFCD
+	goto_if_eq EventScript_16DFCD
 	end
 
 EventScript_16DFA8:: @ 816DFA8
 	call EventScript_16DC27
 	checkflag FLAG_0x26A
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DFBD
 	releaseall
 	end
@@ -615,7 +615,7 @@ EventScript_16DFDD:: @ 816DFDD
 	msgbox gUnknown_8199A7F
 	trainerbattle 3, 215, 0, Text_199AB9
 	checkflag FLAG_0x26A
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16DFBD
 	releaseall
 	end
@@ -657,15 +657,15 @@ EventScript_16E058:: @ 816E058
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199E36, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16E0A4
+	goto_if_eq EventScript_16E0A4
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16E07F
+	goto_if_eq EventScript_16E07F
 	end
 
 EventScript_16E07F:: @ 816E07F
 	call EventScript_16DC27
 	checkflag FLAG_0x26B
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16E094
 	releaseall
 	end
@@ -694,7 +694,7 @@ EventScript_16E0B4:: @ 816E0B4
 	msgbox gUnknown_8199AFC
 	trainerbattle 3, 180, 0, Text_199B16
 	checkflag FLAG_0x26B
-	goto_if 1, EventScript_16DC68
+	goto_if_eq EventScript_16DC68
 	call EventScript_16E094
 	releaseall
 	end

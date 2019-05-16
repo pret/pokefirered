@@ -26,15 +26,15 @@ ViridianCity_House2_EventScript_16A0AB:: @ 816A0AB
 	msgbox gUnknown_818FC65
 	msgbox gUnknown_818FF19, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16A11B
+	goto_if_eq EventScript_16A11B
 	msgbox gUnknown_818FD23
 	msgbox gUnknown_818FF19, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16A11B
+	goto_if_eq EventScript_16A11B
 	msgbox gUnknown_818FDA8
 	msgbox gUnknown_818FF19, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16A11B
+	goto_if_eq EventScript_16A11B
 	msgbox gUnknown_818FE5C
 	applymovement 2, Movement_1A75E9
 	waitmovement 0
@@ -57,21 +57,14 @@ EventScript_16A12C:: @ 816A12C
 	message Text_18FF88
 	waitmessage
 	multichoicegrid 7, 1, 15, 3, 0
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_16A18B
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16A1A7
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_16A1C3
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_16A199
-	compare_var_to_value VAR_0x8000, 4
-	goto_if 1, EventScript_16A1B5
-	compare_var_to_value VAR_0x8000, 5
-	goto_if 1, EventScript_16A1D1
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_16A1D1
+	switch VAR_RESULT
+	case 0, EventScript_16A18B
+	case 1, EventScript_16A1A7
+	case 2, EventScript_16A1C3
+	case 3, EventScript_16A199
+	case 4, EventScript_16A1B5
+	case 5, EventScript_16A1D1
+	case 127, EventScript_16A1D1
 	end
 
 EventScript_16A18B:: @ 816A18B

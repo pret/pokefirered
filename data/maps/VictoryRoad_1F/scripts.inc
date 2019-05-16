@@ -20,7 +20,7 @@ VictoryRoad_1F_MapScript2_160F2F:: @ 8160F2F
 VictoryRoad_1F_EventScript_160F33:: @ 8160F33
 	lockall
 	compare_var_to_value VAR_0x4064, 100
-	goto_if 1, EventScript_160F62
+	goto_if_eq EventScript_160F62
 	setmetatile 12, 14, 721, 0
 	setmetatile 12, 15, 737, 0
 	playse SE_MU_PACHI

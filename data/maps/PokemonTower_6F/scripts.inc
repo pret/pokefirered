@@ -7,13 +7,13 @@ PokemonTower_6F_EventScript_1634B8:: @ 81634B8
 	msgbox gUnknown_817A2F8
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if 1, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	setwildbattle SPECIES_MAROWAK, 30, ITEM_NONE
 	special sub_807F904
 	waitstate
 	special sub_8112364
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_1634F5
+	goto_if_eq EventScript_1634F5
 	applymovement 255, Movement_163512
 	waitmovement 0
 	releaseall

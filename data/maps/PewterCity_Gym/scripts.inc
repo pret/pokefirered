@@ -30,7 +30,7 @@ EventScript_16A5F3:: @ 816A5F3
 	msgbox gUnknown_8190FC1
 	checkitemspace ITEM_TM39, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16A634
+	goto_if_eq EventScript_16A634
 	additem ITEM_TM39, 1
 	giveitemfanfaremsg gUnknown_8190FDB, ITEM_TM39
 	setflag FLAG_0x254
@@ -52,12 +52,12 @@ PewterCity_Gym_EventScript_16A655:: @ 816A655
 	lock
 	faceplayer
 	checkflag FLAG_0x4B0
-	goto_if 1, EventScript_16A67F
+	goto_if_eq EventScript_16A67F
 	msgbox gUnknown_8191298, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if 1, EventScript_16A689
+	goto_if_eq EventScript_16A689
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 1, EventScript_16A697
+	goto_if_eq EventScript_16A697
 	end
 
 EventScript_16A67F:: @ 816A67F
@@ -83,7 +83,7 @@ EventScript_16A6A5:: @ 816A6A5
 PewterCity_Gym_EventScript_16A6AF:: @ 816A6AF
 	lockall
 	checkflag FLAG_UNK820
-	goto_if 1, EventScript_16A6C3
+	goto_if_eq EventScript_16A6C3
 	msgbox gUnknown_819146E
 	releaseall
 	end

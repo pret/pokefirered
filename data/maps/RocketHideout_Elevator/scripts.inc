@@ -14,13 +14,10 @@ RocketHideout_Elevator_EventScript_1614D9:: @ 81614D9
 	waitmessage
 	setvar VAR_0x8004, 2
 	specialvar VAR_RESULT, sub_80CB328
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_161530
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_16153C
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_161548
+	switch VAR_RESULT
+	case 0, EventScript_161530
+	case 1, EventScript_16153C
+	case 2, EventScript_161548
 	end
 
 EventScript_161530:: @ 8161530
@@ -45,24 +42,19 @@ EventScript_161553:: @ 8161553
 	end
 
 EventScript_161554:: @ 8161554
-	copyvar VAR_0x8000, VAR_RESULT
-	compare_var_to_value VAR_0x8000, 0
-	goto_if 1, EventScript_161591
-	compare_var_to_value VAR_0x8000, 1
-	goto_if 1, EventScript_1615B9
-	compare_var_to_value VAR_0x8000, 2
-	goto_if 1, EventScript_1615E1
-	compare_var_to_value VAR_0x8000, 3
-	goto_if 1, EventScript_161609
-	compare_var_to_value VAR_0x8000, 127
-	goto_if 1, EventScript_161609
+	switch VAR_RESULT
+	case 0, EventScript_161591
+	case 1, EventScript_1615B9
+	case 2, EventScript_1615E1
+	case 3, EventScript_161609
+	case 127, EventScript_161609
 	end
 
 EventScript_161591:: @ 8161591
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B1F, 255, 24, 25
 	compare_var_to_value VAR_0x403A, 3
-	goto_if 1, EventScript_161609
+	goto_if_eq EventScript_161609
 	call EventScript_16160E
 	setvar VAR_0x403A, 3
 	goto EventScript_161609
@@ -74,7 +66,7 @@ EventScript_1615B9:: @ 81615B9
 	setvar VAR_0x8006, 2
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B2F, 255, 28, 16
 	compare_var_to_value VAR_0x403A, 2
-	goto_if 1, EventScript_161609
+	goto_if_eq EventScript_161609
 	call EventScript_16160E
 	setvar VAR_0x403A, 2
 	goto EventScript_161609
@@ -86,7 +78,7 @@ EventScript_1615E1:: @ 81615E1
 	setvar VAR_0x8006, 0
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B4F, 255, 20, 23
 	compare_var_to_value VAR_0x403A, 0
-	goto_if 1, EventScript_161609
+	goto_if_eq EventScript_161609
 	call EventScript_16160E
 	setvar VAR_0x403A, 0
 	goto EventScript_161609

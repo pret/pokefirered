@@ -75,7 +75,7 @@ FuchsiaCity_EventScript_166E07:: @ 8166E07
 
 FuchsiaCity_EventScript_166E1F:: @ 8166E1F
 	lockall
-	setvar VAR_0x8004, 113
+	setvar VAR_0x8004, SPECIES_CHANSEY
 	special sub_80CBDCC
 	drawmonpic SPECIES_CHANSEY, 10, 3
 	msgbox gUnknown_81807A9
@@ -85,7 +85,7 @@ FuchsiaCity_EventScript_166E1F:: @ 8166E1F
 
 FuchsiaCity_EventScript_166E38:: @ 8166E38
 	lockall
-	setvar VAR_0x8004, 100
+	setvar VAR_0x8004, SPECIES_VOLTORB
 	special sub_80CBDCC
 	drawmonpic SPECIES_VOLTORB, 10, 3
 	msgbox gUnknown_81807D9
@@ -95,7 +95,7 @@ FuchsiaCity_EventScript_166E38:: @ 8166E38
 
 FuchsiaCity_EventScript_166E51:: @ 8166E51
 	lockall
-	setvar VAR_0x8004, 115
+	setvar VAR_0x8004, SPECIES_KANGASKHAN
 	special sub_80CBDCC
 	drawmonpic SPECIES_KANGASKHAN, 10, 3
 	msgbox gUnknown_8180806
@@ -105,7 +105,7 @@ FuchsiaCity_EventScript_166E51:: @ 8166E51
 
 FuchsiaCity_EventScript_166E6A:: @ 8166E6A
 	lockall
-	setvar VAR_0x8004, 79
+	setvar VAR_0x8004, SPECIES_SLOWPOKE
 	special sub_80CBDCC
 	drawmonpic SPECIES_SLOWPOKE, 10, 3
 	msgbox gUnknown_8180859
@@ -115,7 +115,7 @@ FuchsiaCity_EventScript_166E6A:: @ 8166E6A
 
 FuchsiaCity_EventScript_166E83:: @ 8166E83
 	lockall
-	setvar VAR_0x8004, 131
+	setvar VAR_0x8004, SPECIES_LAPRAS
 	special sub_80CBDCC
 	drawmonpic SPECIES_LAPRAS, 10, 3
 	msgbox gUnknown_8180887
@@ -127,7 +127,7 @@ FuchsiaCity_EventScript_166E9C:: @ 8166E9C
 	lockall
 	checkflag FLAG_0x272
 	goto_if 1, EventScript_166EBE
-	setvar VAR_0x8004, 140
+	setvar VAR_0x8004, SPECIES_KABUTO
 	special sub_80CBDCC
 	drawmonpic SPECIES_KABUTO, 10, 3
 	msgbox gUnknown_81808FA
@@ -136,7 +136,7 @@ FuchsiaCity_EventScript_166E9C:: @ 8166E9C
 	end
 
 EventScript_166EBE:: @ 8166EBE
-	setvar VAR_0x8004, 138
+	setvar VAR_0x8004, SPECIES_OMANYTE
 	special sub_80CBDCC
 	drawmonpic SPECIES_OMANYTE, 10, 3
 	msgbox gUnknown_81808AE

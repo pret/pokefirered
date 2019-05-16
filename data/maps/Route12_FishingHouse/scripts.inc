@@ -35,7 +35,7 @@ EventScript_16FF7F:: @ 816FF7F
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
 	special sub_8112364
-	setvar VAR_0x8004, 129
+	setvar VAR_0x8004, SPECIES_MAGIKARP
 	specialvar VAR_RESULT, sub_80CC48C
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16FFF5

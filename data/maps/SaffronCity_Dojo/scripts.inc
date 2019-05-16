@@ -23,7 +23,7 @@ SaffronCity_Dojo_EventScript_16EC00:: @ 816EC00
 	checkflag FLAG_0x278
 	goto_if 1, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONLEE, 10, 3
-	setvar VAR_0x4001, 106
+	setvar VAR_0x4001, SPECIES_HITMONLEE
 	applymovement 5, Movement_1A75E9
 	waitmovement 0
 	textcolor 0
@@ -46,7 +46,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 	checkflag FLAG_0x278
 	goto_if 1, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONCHAN, 10, 3
-	setvar VAR_0x4001, 107
+	setvar VAR_0x4001, SPECIES_HITMONCHAN
 	applymovement 5, Movement_1A75E9
 	waitmovement 0
 	textcolor 0

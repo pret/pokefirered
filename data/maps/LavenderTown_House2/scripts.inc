@@ -28,7 +28,7 @@ EventScript_16B2AA:: @ 816B2AA
 
 EventScript_16B2B4:: @ 816B2B4
 	specialvar VAR_RESULT, sub_80CAD54
-	compare_var_to_value VAR_RESULT, 412
+	compare_var_to_value VAR_RESULT, SPECIES_EGG
 	goto_if 1, EventScript_16B307
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	special TV_CheckMonOTIDEqualsPlayerID

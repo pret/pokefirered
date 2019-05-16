@@ -73,77 +73,77 @@ EventScript_16AEC8:: @ 816AEC8
 
 EventScript_16AF6C:: @ 816AF6C
 	getitemname 0, ITEM_ENERGY_POWDER
-	setvar VAR_0x8008, 30
+	setvar VAR_0x8008, ITEM_ENERGY_POWDER
 	setvar VAR_0x8009, 50
 	goto EventScript_16B055
 	end
 
 EventScript_16AF80:: @ 816AF80
 	getitemname 0, ITEM_ENERGY_ROOT
-	setvar VAR_0x8008, 31
+	setvar VAR_0x8008, ITEM_ENERGY_ROOT
 	setvar VAR_0x8009, 80
 	goto EventScript_16B055
 	end
 
 EventScript_16AF94:: @ 816AF94
 	getitemname 0, ITEM_HEAL_POWDER
-	setvar VAR_0x8008, 32
+	setvar VAR_0x8008, ITEM_HEAL_POWDER
 	setvar VAR_0x8009, 50
 	goto EventScript_16B055
 	end
 
 EventScript_16AFA8:: @ 816AFA8
 	getitemname 0, ITEM_REVIVAL_HERB
-	setvar VAR_0x8008, 33
+	setvar VAR_0x8008, ITEM_REVIVAL_HERB
 	setvar VAR_0x8009, 300
 	goto EventScript_16B055
 	end
 
 EventScript_16AFBC:: @ 816AFBC
 	getitemname 0, ITEM_PROTEIN
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, ITEM_PROTEIN
 	setvar VAR_0x8009, 1000
 	goto EventScript_16B055
 	end
 
 EventScript_16AFD0:: @ 816AFD0
 	getitemname 0, ITEM_IRON
-	setvar VAR_0x8008, 65
+	setvar VAR_0x8008, ITEM_IRON
 	setvar VAR_0x8009, 1000
 	goto EventScript_16B055
 	end
 
 EventScript_16AFE4:: @ 816AFE4
 	getitemname 0, ITEM_CARBOS
-	setvar VAR_0x8008, 66
+	setvar VAR_0x8008, ITEM_CARBOS
 	setvar VAR_0x8009, 1000
 	goto EventScript_16B055
 	end
 
 EventScript_16AFF8:: @ 816AFF8
 	getitemname 0, ITEM_CALCIUM
-	setvar VAR_0x8008, 67
+	setvar VAR_0x8008, ITEM_CALCIUM
 	setvar VAR_0x8009, 1000
 	goto EventScript_16B055
 	end
 
 EventScript_16B00C:: @ 816B00C
 	getitemname 0, ITEM_ZINC
-	setvar VAR_0x8008, 70
+	setvar VAR_0x8008, ITEM_ZINC
 	setvar VAR_0x8009, 1000
 	goto EventScript_16B055
 	end
 
 EventScript_16B020:: @ 816B020
 	getitemname 0, ITEM_HP_UP
-	setvar VAR_0x8008, 63
+	setvar VAR_0x8008, ITEM_HP_UP
 	setvar VAR_0x8009, 1000
 	goto EventScript_16B055
 	end
 
 EventScript_16B034:: @ 816B034
 	getitemname 0, ITEM_PP_UP
-	setvar VAR_0x8008, 69
+	setvar VAR_0x8008, ITEM_PP_UP
 	setvar VAR_0x8009, 3000
 	goto EventScript_16B055
 	end

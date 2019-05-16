@@ -91,7 +91,7 @@ EventScript_1652C0:: @ 81652C0
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, 2
-	setvar VAR_0x8004, 410
+	setvar VAR_0x8004, SPECIES_DEOXYS
 	setvar VAR_0x8005, 30
 	setvar VAR_0x8006, 0
 	special sub_8044838
@@ -112,12 +112,12 @@ EventScript_1652C0:: @ 81652C0
 
 EventScript_16533A:: @ 816533A
 	setflag FLAG_0x2F7
-	setvar VAR_0x8004, 410
+	setvar VAR_0x8004, SPECIES_DEOXYS
 	goto EventScript_1A9236
 	end
 
 EventScript_165348:: @ 8165348
-	setvar VAR_0x8004, 410
+	setvar VAR_0x8004, SPECIES_DEOXYS
 	goto EventScript_1A9236
 	end
 

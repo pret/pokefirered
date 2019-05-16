@@ -64,7 +64,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	applymovement 1, Movement_1650D7
 	waitmovement 0
 	special RemoveScriptFieldObject
-	setvar VAR_0x8004, 250
+	setvar VAR_0x8004, SPECIES_HO_OH
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
 	special sub_8044838
@@ -86,12 +86,12 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 
 EventScript_1650B4:: @ 81650B4
 	setflag FLAG_0x2F6
-	setvar VAR_0x8004, 250
+	setvar VAR_0x8004, SPECIES_HO_OH
 	goto EventScript_1A9236
 	end
 
 EventScript_1650C2:: @ 81650C2
-	setvar VAR_0x8004, 250
+	setvar VAR_0x8004, SPECIES_HO_OH
 	goto EventScript_1A9236
 	end
 

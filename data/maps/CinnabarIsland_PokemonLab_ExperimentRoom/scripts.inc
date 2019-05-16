@@ -29,7 +29,7 @@ EventScript_16E45B:: @ 816E45B
 	end
 
 EventScript_16E465:: @ 816E465
-	getspeciesname 0, 32777
+	getspeciesname 0, VAR_0x8009
 	msgbox gUnknown_81A59C6
 	release
 	end

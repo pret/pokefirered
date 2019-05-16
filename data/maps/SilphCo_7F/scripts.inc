@@ -133,7 +133,7 @@ SilphCo_7F_EventScript_161AC8:: @ 8161AC8
 	checkflag FLAG_0x246
 	goto_if 1, EventScript_161B8D
 	msgbox gUnknown_8176266
-	setvar VAR_0x4001, 131
+	setvar VAR_0x4001, SPECIES_LAPRAS
 	givemon SPECIES_LAPRAS, 25, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_161B12

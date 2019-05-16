@@ -88,7 +88,7 @@ EventScript_162B76:: @ 8162B76
 	waitmovement 0
 	delay 25
 	specialvar VAR_RESULT, ScrSpecial_GetStarter
-	getspeciesname 0, 32781
+	getspeciesname 0, VAR_RESULT
 	msgbox gUnknown_8178FCF
 	applymovement 2, Movement_1A75EB
 	applymovement 1, Movement_1A75E7

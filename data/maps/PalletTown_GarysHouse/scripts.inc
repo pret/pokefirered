@@ -64,7 +64,7 @@ EventScript_168DB9:: @ 8168DB9
 	compare_var_to_value VAR_0x8004, 6
 	goto_if 4, EventScript_168E3C
 	specialvar VAR_RESULT, sub_80CAD54
-	compare_var_to_value VAR_RESULT, 412
+	compare_var_to_value VAR_RESULT, SPECIES_EGG
 	goto_if 1, EventScript_168E32
 	msgbox gUnknown_818D8CC
 	closemessage

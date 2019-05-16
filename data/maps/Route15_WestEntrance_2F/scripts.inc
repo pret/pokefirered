@@ -8,7 +8,7 @@ Route15_WestEntrance_2F_EventScript_170093:: @ 8170093
 	delay 20
 	waitbuttonpress
 	erasemonpic
-	setvar VAR_0x8004, 144
+	setvar VAR_0x8004, SPECIES_ARTICUNO
 	special sub_80CBDCC
 	releaseall
 	end

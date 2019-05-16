@@ -8,7 +8,7 @@ SixIsland_WaterPath_House1_EventScript_17206D:: @ 817206D
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
 	special sub_8112364
-	setvar VAR_0x8004, 214
+	setvar VAR_0x8004, SPECIES_HERACROSS
 	specialvar VAR_RESULT, sub_80CC48C
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1720E5

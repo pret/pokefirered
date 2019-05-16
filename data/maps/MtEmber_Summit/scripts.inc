@@ -61,6 +61,6 @@ EventScript_163B96:: @ 8163B96
 	end
 
 EventScript_163B9F:: @ 8163B9F
-	setvar VAR_0x8004, 146
+	setvar VAR_0x8004, SPECIES_MOLTRES
 	goto EventScript_1A9236
 	end

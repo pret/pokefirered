@@ -201,7 +201,7 @@ EventScript_163217:: @ 8163217
 	end
 
 EventScript_163218:: @ 8163218
-	setvar VAR_0x8004, 144
+	setvar VAR_0x8004, SPECIES_ARTICUNO
 	goto EventScript_1A9236
 
 EventScript_163222:: @ 8163222

@@ -270,7 +270,7 @@ EventScript_17082B:: @ 817082B
 	drawmonpic SPECIES_EEVEE, 10, 3
 	waitbuttonpress
 	erasemonpic
-	setvar VAR_0x8004, 133
+	setvar VAR_0x8004, SPECIES_EEVEE
 	special sub_80CBDCC
 	goto EventScript_1707D8
 	end
@@ -279,7 +279,7 @@ EventScript_170840:: @ 8170840
 	drawmonpic SPECIES_FLAREON, 10, 3
 	waitbuttonpress
 	erasemonpic
-	setvar VAR_0x8004, 136
+	setvar VAR_0x8004, SPECIES_FLAREON
 	special sub_80CBDCC
 	goto EventScript_1707D8
 	end
@@ -288,7 +288,7 @@ EventScript_170855:: @ 8170855
 	drawmonpic SPECIES_JOLTEON, 10, 3
 	waitbuttonpress
 	erasemonpic
-	setvar VAR_0x8004, 135
+	setvar VAR_0x8004, SPECIES_JOLTEON
 	special sub_80CBDCC
 	goto EventScript_1707D8
 	end
@@ -297,7 +297,7 @@ EventScript_17086A:: @ 817086A
 	drawmonpic SPECIES_VAPOREON, 10, 3
 	waitbuttonpress
 	erasemonpic
-	setvar VAR_0x8004, 134
+	setvar VAR_0x8004, SPECIES_VAPOREON
 	special sub_80CBDCC
 	goto EventScript_1707D8
 	end

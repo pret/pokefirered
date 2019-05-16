@@ -49,31 +49,31 @@ EventScript_16CC10:: @ 816CC10
 	end
 
 EventScript_16CC15:: @ 816CC15
-	setvar VAR_0x4001, 63
+	setvar VAR_0x4001, SPECIES_ABRA
 	setvar VAR_0x4002, 180
 	goto EventScript_16CC65
 	end
 
 EventScript_16CC25:: @ 816CC25
-	setvar VAR_0x4001, 35
+	setvar VAR_0x4001, SPECIES_CLEFAIRY
 	setvar VAR_0x4002, 500
 	goto EventScript_16CC65
 	end
 
 EventScript_16CC35:: @ 816CC35
-	setvar VAR_0x4001, 147
+	setvar VAR_0x4001, SPECIES_DRATINI
 	setvar VAR_0x4002, 2800
 	goto EventScript_16CC65
 	end
 
 EventScript_16CC45:: @ 816CC45
-	setvar VAR_0x4001, 123
+	setvar VAR_0x4001, SPECIES_SCYTHER
 	setvar VAR_0x4002, 5500
 	goto EventScript_16CC65
 	end
 
 EventScript_16CC55:: @ 816CC55
-	setvar VAR_0x4001, 137
+	setvar VAR_0x4001, SPECIES_PORYGON
 	setvar VAR_0x4002, 9999
 	goto EventScript_16CC65
 	end
@@ -88,17 +88,17 @@ EventScript_16CC65:: @ 816CC65
 	goto_if 0, EventScript_16CDA5
 	textcolor 3
 	copyvar VAR_0x8000, VAR_0x4001
-	compare_var_to_value VAR_0x8000, 63
+	compare_var_to_value VAR_0x8000, SPECIES_ABRA
 	goto_if 1, EventScript_16CCD4
-	compare_var_to_value VAR_0x8000, 35
+	compare_var_to_value VAR_0x8000, SPECIES_CLEFAIRY
 	goto_if 1, EventScript_16CCE9
-	compare_var_to_value VAR_0x8000, 147
+	compare_var_to_value VAR_0x8000, SPECIES_DRATINI
 	goto_if 1, EventScript_16CCFE
-	compare_var_to_value VAR_0x8000, 123
+	compare_var_to_value VAR_0x8000, SPECIES_SCYTHER
 	goto_if 1, EventScript_16CD13
-	compare_var_to_value VAR_0x8000, 137
+	compare_var_to_value VAR_0x8000, SPECIES_PORYGON
 	goto_if 1, EventScript_16CD28
-	compare_var_to_value VAR_0x8000, 127
+	compare_var_to_value VAR_0x8000, SPECIES_PINSIR
 	goto_if 1, EventScript_16CD3D
 	end
 
@@ -236,35 +236,35 @@ EventScript_16CE47:: @ 816CE47
 	end
 
 EventScript_16CEA5:: @ 816CEA5
-	setvar VAR_0x4001, 301
+	setvar VAR_0x4001, ITEM_TM13
 	setvar VAR_0x4002, 4000
 	getmovename 1, MOVE_ICE_BEAM
 	goto EventScript_16CF09
 	end
 
 EventScript_16CEB9:: @ 816CEB9
-	setvar VAR_0x4001, 311
+	setvar VAR_0x4001, ITEM_TM23
 	setvar VAR_0x4002, 3500
 	getmovename 1, MOVE_IRON_TAIL
 	goto EventScript_16CF09
 	end
 
 EventScript_16CECD:: @ 816CECD
-	setvar VAR_0x4001, 312
+	setvar VAR_0x4001, ITEM_TM24
 	setvar VAR_0x4002, 4000
 	getmovename 1, MOVE_THUNDERBOLT
 	goto EventScript_16CF09
 	end
 
 EventScript_16CEE1:: @ 816CEE1
-	setvar VAR_0x4001, 318
+	setvar VAR_0x4001, ITEM_TM30
 	setvar VAR_0x4002, 4500
 	getmovename 1, MOVE_SHADOW_BALL
 	goto EventScript_16CF09
 	end
 
 EventScript_16CEF5:: @ 816CEF5
-	setvar VAR_0x4001, 323
+	setvar VAR_0x4001, ITEM_TM35
 	setvar VAR_0x4002, 4000
 	getmovename 1, MOVE_FLAMETHROWER
 	goto EventScript_16CF09
@@ -341,31 +341,31 @@ EventScript_16CFB2:: @ 816CFB2
 	end
 
 EventScript_16D010:: @ 816D010
-	setvar VAR_0x4001, 194
+	setvar VAR_0x4001, ITEM_SMOKE_BALL
 	setvar VAR_0x4002, 800
 	goto EventScript_16CF22
 	end
 
 EventScript_16D020:: @ 816D020
-	setvar VAR_0x4001, 205
+	setvar VAR_0x4001, ITEM_MIRACLE_SEED
 	setvar VAR_0x4002, 1000
 	goto EventScript_16CF22
 	end
 
 EventScript_16D030:: @ 816D030
-	setvar VAR_0x4001, 215
+	setvar VAR_0x4001, ITEM_CHARCOAL
 	setvar VAR_0x4002, 1000
 	goto EventScript_16CF22
 	end
 
 EventScript_16D040:: @ 816D040
-	setvar VAR_0x4001, 209
+	setvar VAR_0x4001, ITEM_MYSTIC_WATER
 	setvar VAR_0x4002, 1000
 	goto EventScript_16CF22
 	end
 
 EventScript_16D050:: @ 816D050
-	setvar VAR_0x4001, 40
+	setvar VAR_0x4001, ITEM_YELLOW_FLUTE
 	setvar VAR_0x4002, 1600
 	goto EventScript_16CF22
 	end

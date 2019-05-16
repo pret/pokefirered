@@ -37,7 +37,7 @@ EventScript_1704D8:: @ 81704D8
 	end
 
 EventScript_1704E2:: @ 81704E2
-	getspeciesname 0, 32777
+	getspeciesname 0, VAR_0x8009
 	msgbox gUnknown_81A59C6
 	release
 	end

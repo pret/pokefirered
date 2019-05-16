@@ -60,7 +60,7 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	playmoncry SPECIES_LUGIA, 2
 	waitmoncry
 	delay 20
-	setvar VAR_0x8004, 249
+	setvar VAR_0x8004, SPECIES_LUGIA
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
 	special sub_8044838
@@ -81,11 +81,11 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 
 EventScript_1651D9:: @ 81651D9
 	setflag FLAG_0x2F5
-	setvar VAR_0x8004, 249
+	setvar VAR_0x8004, SPECIES_LUGIA
 	goto EventScript_1A9236
 	end
 
 EventScript_1651E7:: @ 81651E7
-	setvar VAR_0x8004, 249
+	setvar VAR_0x8004, SPECIES_LUGIA
 	goto EventScript_1A9236
 	end

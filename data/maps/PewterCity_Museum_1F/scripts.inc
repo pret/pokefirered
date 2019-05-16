@@ -87,7 +87,7 @@ EventScript_16A402:: @ 816A402
 	call_if 1, EventScript_16A460
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_16A46B
-	playse 248
+	playse SE_CASHIER
 	takemoney 50, 0
 	updatemoneybox 0, 0, 0
 	waitse
@@ -187,7 +187,7 @@ PewterCity_Museum_1F_EventScript_16A509:: @ 816A509
 
 PewterCity_Museum_1F_EventScript_16A512:: @ 816A512
 	lockall
-	setvar VAR_0x8004, 142
+	setvar VAR_0x8004, SPECIES_AERODACTYL
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
 	special sub_809D504
@@ -198,7 +198,7 @@ PewterCity_Museum_1F_EventScript_16A512:: @ 816A512
 
 PewterCity_Museum_1F_EventScript_16A532:: @ 816A532
 	lockall
-	setvar VAR_0x8004, 141
+	setvar VAR_0x8004, SPECIES_KABUTOPS
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
 	special sub_809D504

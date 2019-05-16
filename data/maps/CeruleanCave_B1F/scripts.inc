@@ -63,7 +63,7 @@ EventScript_162560:: @ 8162560
 	end
 
 EventScript_162561:: @ 8162561
-	setvar VAR_0x8004, 150
+	setvar VAR_0x8004, SPECIES_MEWTWO
 	goto EventScript_1A9236
 
 EventScript_16256B:: @ 816256B

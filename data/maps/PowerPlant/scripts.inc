@@ -74,7 +74,7 @@ EventScript_16381B:: @ 816381B
 	end
 
 EventScript_163824:: @ 8163824
-	setvar VAR_0x8004, 145
+	setvar VAR_0x8004, SPECIES_ZAPDOS
 	goto EventScript_1A9236
 	end
 

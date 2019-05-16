@@ -36,7 +36,7 @@ EventScript_171993:: @ 8171993
 	goto_if 1, EventScript_171A24
 	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
 	waitse
-	playmoncry 32773, 0
+	playmoncry VAR_0x8005, 0
 	msgbox gUnknown_81BF860
 	waitmoncry
 	special StoreSelectedPokemonInDaycare
@@ -137,7 +137,7 @@ EventScript_171B05:: @ 8171B05
 	playse SE_T_KAMI2
 	msgbox gUnknown_81BFA67
 	waitse
-	playmoncry 32781, 0
+	playmoncry VAR_RESULT, 0
 	textcolor 3
 	msgbox gUnknown_81BFA85
 	call EventScript_1A6675

@@ -8,7 +8,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_16C464:: @ 816C464
 CeladonCity_Condominiums_RoofRoom_EventScript_16C46D:: @ 816C46D
 	lock
 	faceplayer
-	setvar VAR_0x4001, 133
+	setvar VAR_0x4001, SPECIES_EEVEE
 	givemon SPECIES_EEVEE, 25, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C4A6

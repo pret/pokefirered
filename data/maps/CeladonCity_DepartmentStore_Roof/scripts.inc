@@ -152,8 +152,8 @@ EventScript_16BED7:: @ 816BED7
 	end
 
 EventScript_16BF19:: @ 816BF19
-	setvar VAR_0x8008, 26
-	setvar VAR_0x8009, 304
+	setvar VAR_0x8008, ITEM_FRESH_WATER
+	setvar VAR_0x8009, ITEM_TM16
 	checkflag FLAG_0x296
 	goto_if 1, EventScript_16C018
 	msgbox gUnknown_8195D75
@@ -161,8 +161,8 @@ EventScript_16BF19:: @ 816BF19
 	end
 
 EventScript_16BF3A:: @ 816BF3A
-	setvar VAR_0x8008, 27
-	setvar VAR_0x8009, 308
+	setvar VAR_0x8008, ITEM_SODA_POP
+	setvar VAR_0x8009, ITEM_TM20
 	checkflag FLAG_0x295
 	goto_if 1, EventScript_16C018
 	msgbox gUnknown_8195E33
@@ -170,8 +170,8 @@ EventScript_16BF3A:: @ 816BF3A
 	end
 
 EventScript_16BF5B:: @ 816BF5B
-	setvar VAR_0x8008, 28
-	setvar VAR_0x8009, 321
+	setvar VAR_0x8008, ITEM_LEMONADE
+	setvar VAR_0x8009, ITEM_TM33
 	checkflag FLAG_0x294
 	goto_if 1, EventScript_16C018
 	msgbox gUnknown_8195EBF
@@ -179,13 +179,13 @@ EventScript_16BF5B:: @ 816BF5B
 	end
 
 EventScript_16BF7C:: @ 816BF7C
-	getitemname 0, 32776
-	getitemname 1, 32777
-	removeitem 32776, 1
-	checkitemspace 32777, 1
+	getitemname 0, VAR_0x8008
+	getitemname 1, VAR_0x8009
+	removeitem VAR_0x8008, 1
+	checkitemspace VAR_0x8009, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C002
-	additem 32777, 1
+	additem VAR_0x8009, 1
 	textcolor 3
 	playfanfare MUS_FANFA1
 	message Text_195DAD
@@ -193,11 +193,11 @@ EventScript_16BF7C:: @ 816BF7C
 	waitfanfare
 	giveitem VAR_0x8009, 1, 8
 	call EventScript_1A6675
-	compare_var_to_value VAR_0x8008, 26
+	compare_var_to_value VAR_0x8008, ITEM_FRESH_WATER
 	call_if 1, EventScript_16BFDE
-	compare_var_to_value VAR_0x8008, 27
+	compare_var_to_value VAR_0x8008, ITEM_SODA_POP
 	call_if 1, EventScript_16BFEA
-	compare_var_to_value VAR_0x8008, 28
+	compare_var_to_value VAR_0x8008, ITEM_LEMONADE
 	call_if 1, EventScript_16BFF6
 	release
 	end
@@ -267,19 +267,19 @@ EventScript_16C045:: @ 816C045
 	end
 
 EventScript_16C083:: @ 816C083
-	setvar VAR_0x4000, 26
+	setvar VAR_0x4000, ITEM_FRESH_WATER
 	checkmoney 200, 0
 	goto EventScript_16C0CB
 	end
 
 EventScript_16C094:: @ 816C094
-	setvar VAR_0x4000, 27
+	setvar VAR_0x4000, ITEM_SODA_POP
 	checkmoney 300, 0
 	goto EventScript_16C0CB
 	end
 
 EventScript_16C0A5:: @ 816C0A5
-	setvar VAR_0x4000, 28
+	setvar VAR_0x4000, ITEM_LEMONADE
 	checkmoney 350, 0
 	goto EventScript_16C0CB
 	end
@@ -299,7 +299,7 @@ EventScript_16C0C4:: @ 816C0C4
 EventScript_16C0CB:: @ 816C0CB
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C131
-	checkitemspace 16384, 1
+	checkitemspace VAR_0x4000, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16C13F
 	compare_var_to_value VAR_0x4001, 0
@@ -309,10 +309,10 @@ EventScript_16C0CB:: @ 816C0CB
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_16C0C4
 	updatemoneybox 0, 0, 0
-	getitemname 0, 16384
+	getitemname 0, VAR_0x4000
 	playse SE_C_PASI
 	msgbox gUnknown_8196076
-	additem 16384, 1
+	additem VAR_0x4000, 1
 	goto EventScript_16C125
 	end
 

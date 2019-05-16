@@ -33,7 +33,7 @@ EventScript_16E31C:: @ 816E31C
 	end
 
 EventScript_16E326:: @ 816E326
-	getspeciesname 0, 32777
+	getspeciesname 0, VAR_0x8009
 	msgbox gUnknown_81A5A6A
 	release
 	end
@@ -81,7 +81,7 @@ EventScript_16E3BC:: @ 816E3BC
 	end
 
 EventScript_16E3C6:: @ 816E3C6
-	getspeciesname 0, 32777
+	getspeciesname 0, VAR_0x8009
 	msgbox gUnknown_81A5B18
 	release
 	end

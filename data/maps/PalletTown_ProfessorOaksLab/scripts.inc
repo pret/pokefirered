@@ -1260,7 +1260,7 @@ EventScript_169D2F:: @ 8169D2F
 	msgbox gUnknown_818DD34
 	removeobject VAR_0x4004
 	textcolor 3
-	getspeciesname 0, 16387
+	getspeciesname 0, VAR_0x4003
 	message Text_18DD52
 	waitmessage
 	playfanfare BGM_FRLG_ME_KEYITEM

@@ -9,6 +9,7 @@
 #include "constants/trainer_classes.h"
 #include "constants/vars.h"
 #include "constants/battle.h"
+#include "constants/spawn_points.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 @	.include "constants/constants.inc"

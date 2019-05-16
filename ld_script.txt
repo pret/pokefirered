@@ -161,6 +161,7 @@ SECTIONS {
         asm/mail.o(.text);
         asm/menu_helpers.o(.text);
         asm/script_pokemon_util_80BF8FC.o(.text);
+        src/heal_location.o(.text);
         asm/heal_location.o(.text);
         asm/region_map.o(.text);
         src/battle_ai_script_commands.o(.text);
@@ -390,6 +391,8 @@ SECTIONS {
         data/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         data/data_835B488.o(.rodata);
+        src/heal_location.o(.rodata);
+        data/data_835B488.o(.rodata.83EEC98);
         src/battle_ai_script_commands.o(.rodata);
         data/data_83F5738.o(.rodata);
         src/save.o(.rodata);

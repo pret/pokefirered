@@ -1051,34 +1051,7 @@ gUnknown_83EEAC4:: @ 83EEAC4
 gUnknown_83EEB68:: @ 83EEB68
 	.incbin "baserom.gba", 0x3EEB68, 0x90
 
-	.macro spawn_point map_id, x, y
-	map \map_id
-	.2byte \x, \y
-	.align 2
-	.endm
-
-	.align 2
-sSpawnPoints:: @ 83EEBF8
-	spawn_point MAP_PALLET_TOWN,             0x06, 0x08
-	spawn_point MAP_VIRIDIAN_CITY,           0x1a, 0x1b
-	spawn_point MAP_PEWTER_CITY,             0x11, 0x1a
-	spawn_point MAP_CERULEAN_CITY,           0x16, 0x14
-	spawn_point MAP_LAVENDER_TOWN,           0x06, 0x06
-	spawn_point MAP_VERMILION_CITY,          0x0f, 0x07
-	spawn_point MAP_CELADON_CITY,            0x30, 0x0c
-	spawn_point MAP_FUCHSIA_CITY,            0x19, 0x20
-	spawn_point MAP_CINNABAR_ISLAND,         0x0e, 0x0c
-	spawn_point MAP_INDIGO_PLATEAU_EXTERIOR, 0x0b, 0x07
-	spawn_point MAP_SAFFRON_CITY_DUPLICATE,  0x18, 0x27
-	spawn_point MAP_ROUTE4,                  0x0c, 0x06
-	spawn_point MAP_ROUTE10,                 0x0d, 0x15
-	spawn_point MAP_ONE_ISLAND,              0x0e, 0x06
-	spawn_point MAP_TWO_ISLAND,              0x15, 0x08
-	spawn_point MAP_THREE_ISLAND,            0x0e, 0x1c
-	spawn_point MAP_FOUR_ISLAND,             0x12, 0x15
-	spawn_point MAP_FIVE_ISLAND,             0x12, 0x07
-	spawn_point MAP_SEVEN_ISLAND,            0x0c, 0x04
-	spawn_point MAP_SIX_ISLAND,              0x0b, 0x0c
+	.section .rodata.83EEC98
 
 	.align 2
 gUnknown_83EEC98:: @ 83EEC98

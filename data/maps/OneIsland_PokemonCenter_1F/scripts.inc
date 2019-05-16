@@ -113,22 +113,14 @@ EventScript_170CB1:: @ 8170CB1
 	waitmovement 0
 	loadword 0, gUnknown_81A0FB1
 	callstd 4
-	loadword 0, gUnknown_81A10EE
-	setorcopyvar VAR_0x8000, 280
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81A10EE, ITEM_METEORITE, 1, BGM_FRLG_ME_KEYITEM
 	additem ITEM_METEORITE, 1
 	applymovement 3, Movement_1A75ED
 	waitmovement 0
 	loadword 0, gUnknown_81A1113
 	callstd 4
 	additem ITEM_TRI_PASS, 1
-	loadword 0, gUnknown_81A231B
-	setorcopyvar VAR_0x8000, 367
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81A231B, ITEM_TRI_PASS, 1, BGM_FRLG_ME_KEYITEM
 	loadword 0, gUnknown_81A1150
 	callstd 4
 	compare_var_to_value VAR_0x4058, 2
@@ -171,11 +163,7 @@ EventScript_170E58:: @ 8170E58
 	setflag FLAG_0x039
 	setvar VAR_0x4058, 2
 	additem ITEM_TOWN_MAP, 1
-	loadword 0, gUnknown_81A1218
-	setorcopyvar VAR_0x8000, 361
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81A1218, ITEM_TOWN_MAP, 1, BGM_FRLG_ME_KEYITEM
 	return
 
 Movement_170E7D:: @ 8170E7D

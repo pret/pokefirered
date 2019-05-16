@@ -25,11 +25,7 @@ Route12_NorthEntrance_2F_EventScript_16FE8A:: @ 816FE8A
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16FEF7
 	additem ITEM_TM27, 1
-	loadword 0, gUnknown_819EE9F
-	setorcopyvar VAR_0x8000, 315
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_819EE9F, ITEM_TM27
 	loadword 0, gUnknown_819EEC6
 	callstd 4
 	setflag FLAG_0x25B

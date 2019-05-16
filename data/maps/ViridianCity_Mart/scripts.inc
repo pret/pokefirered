@@ -32,11 +32,7 @@ EventScript_16A205:: @ 816A205
 	callstd 4
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	additem ITEM_OAKS_PARCEL, 1
-	loadword 0, gUnknown_8190289
-	setorcopyvar VAR_0x8000, 349
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_8190289, ITEM_OAKS_PARCEL, 1, BGM_FRLG_ME_KEYITEM
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 5
 	releaseall
 	end

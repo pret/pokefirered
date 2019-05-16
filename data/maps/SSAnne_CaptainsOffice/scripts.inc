@@ -19,11 +19,7 @@ SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 	loadword 0, gUnknown_81736A6
 	callstd 4
 	additem ITEM_HM01, 1
-	loadword 0, gUnknown_81737AF
-	setorcopyvar VAR_0x8000, 339
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81737AF, ITEM_HM01, 1, BGM_FRLG_ME_KEYITEM
 	loadword 0, gUnknown_81737D2
 	callstd 4
 	setflag FLAG_0x237

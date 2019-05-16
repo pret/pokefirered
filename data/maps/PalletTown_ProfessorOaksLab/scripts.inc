@@ -740,11 +740,7 @@ EventScript_16961E:: @ 816961E
 	loadword 0, gUnknown_818E612
 	callstd 4
 	additem ITEM_POKE_BALL, 5
-	loadword 0, gUnknown_818E6B3
-	setorcopyvar VAR_0x8000, 4
-	setorcopyvar VAR_0x8001, 5
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_818E6B3, ITEM_POKE_BALL, 5
 	loadword 0, gUnknown_818E6D0
 	callstd 4
 	setvar VAR_0x8004, 0
@@ -1049,11 +1045,7 @@ EventScript_169A45:: @ 8169A45
 	loadword 0, gUnknown_818E89C
 	callstd 4
 	additem ITEM_POKE_BALL, 5
-	loadword 0, gUnknown_818E6B3
-	setorcopyvar VAR_0x8000, 4
-	setorcopyvar VAR_0x8001, 5
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_818E6B3, ITEM_POKE_BALL, 5
 	setflag FLAG_0x247
 	release
 	end

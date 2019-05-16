@@ -197,11 +197,7 @@ EventScript_16662E:: @ 816662E
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_166677
 	additem ITEM_TM28, 1
-	loadword 0, gUnknown_817EEBF
-	setorcopyvar VAR_0x8000, 316
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_817EEBF, ITEM_TM28
 	loadword 0, gUnknown_817EEED
 	callstd 4
 	closemessage

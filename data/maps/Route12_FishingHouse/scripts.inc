@@ -22,11 +22,7 @@ EventScript_16FF34:: @ 816FF34
 	additem ITEM_SUPER_ROD, 1
 	loadword 0, gUnknown_819F05B
 	callstd 4
-	loadword 0, gUnknown_819F0B2
-	setorcopyvar VAR_0x8000, 264
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_819F0B2, ITEM_SUPER_ROD
 	setflag FLAG_0x255
 	loadword 0, gUnknown_819F0EB
 	callstd 4

@@ -58,11 +58,7 @@ EventScript_168678:: @ 8168678
 
 EventScript_1686B9:: @ 81686B9
 	additem ITEM_NUGGET, 1
-	loadword 0, gUnknown_8188C93
-	setorcopyvar VAR_0x8000, 110
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_8188C93, ITEM_NUGGET
 	message Text_188CDB
 	waitmessage
 	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0

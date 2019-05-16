@@ -178,11 +178,7 @@ PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
 	setflag FLAG_0x25E
 	removeobject 4
 	additem ITEM_OLD_AMBER, 1
-	loadword 0, gUnknown_8190866
-	setorcopyvar VAR_0x8000, 354
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_8190866, ITEM_OLD_AMBER, 1, BGM_FRLG_ME_KEYITEM
 	release
 	end
 

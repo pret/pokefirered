@@ -32,11 +32,7 @@ EventScript_16D5A6:: @ 816D5A6
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16D5E7
 	additem ITEM_TM06, 1
-	loadword 0, gUnknown_819858F
-	setorcopyvar VAR_0x8000, 294
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_819858F, ITEM_TM06
 	setflag FLAG_0x259
 	loadword 0, gUnknown_81985AB
 	callstd 4

@@ -28,11 +28,7 @@ EventScript_16D849:: @ 816D849
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16D88A
 	additem ITEM_GOOD_ROD, 1
-	loadword 0, gUnknown_819925E
-	setorcopyvar VAR_0x8000, 263
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_819925E, ITEM_GOOD_ROD
 	loadword 0, gUnknown_8199296
 	callstd 4
 	setflag FLAG_0x244

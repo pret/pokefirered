@@ -21,11 +21,7 @@ SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_161E6B
 	additem ITEM_MASTER_BALL, 1
-	loadword 0, gUnknown_8176FBD
-	setorcopyvar VAR_0x8000, 1
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, BGM_FRLG_ME_KEYITEM
 	loadword 0, gUnknown_8176FEB
 	callstd 4
 	setflag FLAG_0x250

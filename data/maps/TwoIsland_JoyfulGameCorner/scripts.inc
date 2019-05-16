@@ -186,11 +186,7 @@ EventScript_1715C4:: @ 81715C4
 	goto_if 1, EventScript_1715FF
 	additem ITEM_MOON_STONE, 1
 	setflag FLAG_0x2FB
-	loadword 0, gUnknown_81A2A9A
-	setorcopyvar VAR_0x8000, 94
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81A2A9A, ITEM_MOON_STONE
 	release
 	end
 

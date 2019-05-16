@@ -120,11 +120,7 @@ EventScript_17064A:: @ 817064A
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1706BE
 	additem ITEM_SS_TICKET, 1
-	loadword 0, gUnknown_81A028E
-	setorcopyvar VAR_0x8000, 265
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81A028E, ITEM_SS_TICKET, 1, BGM_FRLG_ME_KEYITEM
 	setflag FLAG_0x235
 	setflag FLAG_0x031
 	setflag FLAG_0x234

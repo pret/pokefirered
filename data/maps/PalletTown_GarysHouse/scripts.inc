@@ -181,11 +181,7 @@ EventScript_168EF6:: @ 8168EF6
 	waitmovement 0
 	delay 12
 	additem ITEM_TOWN_MAP, 1
-	loadword 0, gUnknown_818D661
-	setorcopyvar VAR_0x8000, 361
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_818D661, ITEM_TOWN_MAP, 1, BGM_FRLG_ME_KEYITEM
 	release
 	end
 

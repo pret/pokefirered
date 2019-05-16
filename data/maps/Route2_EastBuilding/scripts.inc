@@ -23,11 +23,7 @@ Route2_EastBuilding_EventScript_16F67F:: @ 816F67F
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7AC7
 	additem ITEM_HM05, 1
-	loadword 0, gUnknown_819D7A1
-	setorcopyvar VAR_0x8000, 343
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_819D7A1, ITEM_HM05
 	setflag FLAG_0x23B
 	loadword 0, gUnknown_819D7C1
 	callstd 4

@@ -22,11 +22,7 @@ CeladonCity_Restaurant_EventScript_16D1FD:: @ 816D1FD
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_16D241
 	additem ITEM_COIN_CASE, 1
-	loadword 0, gUnknown_8197A38
-	setorcopyvar VAR_0x8000, 260
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_8197A38, ITEM_COIN_CASE
 	setflag FLAG_0x243
 	release
 	end

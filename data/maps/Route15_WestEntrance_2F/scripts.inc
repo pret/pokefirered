@@ -41,11 +41,7 @@ Route15_WestEntrance_2F_EventScript_1700B9:: @ 81700B9
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7AC7
 	additem ITEM_EXP_SHARE, 1
-	loadword 0, gUnknown_819F6FD
-	setorcopyvar VAR_0x8000, 182
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_819F6FD, ITEM_EXP_SHARE
 	setflag FLAG_0x256
 	loadword 0, gUnknown_819F71F
 	callstd 4

@@ -13,11 +13,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B14A:: @ 816B14A
 	goto_if 1, EventScript_16B1A0
 	setflag FLAG_0x23D
 	additem ITEM_POKE_FLUTE, 1
-	loadword 0, gUnknown_81937BD
-	setorcopyvar VAR_0x8000, 350
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81937BD, ITEM_POKE_FLUTE, 1, BGM_FRLG_ME_KEYITEM
 	loadword 0, gUnknown_81937E5
 	callstd 4
 	release

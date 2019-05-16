@@ -29,11 +29,7 @@ EventScript_16B4B1:: @ 816B4B1
 	goto_if 1, EventScript_16B4F2
 	setflag FLAG_0x241
 	additem ITEM_BIKE_VOUCHER, 1
-	loadword 0, gUnknown_819474E
-	setorcopyvar VAR_0x8000, 352
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_819474E, ITEM_BIKE_VOUCHER, 1, BGM_FRLG_ME_KEYITEM
 	loadword 0, gUnknown_819477C
 	callstd 4
 	release

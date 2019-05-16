@@ -65,11 +65,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	goto_if 1, EventScript_1607DE
 	removeobject 1
 	additem ITEM_DOME_FOSSIL, 1
-	loadword 0, gUnknown_8172ECD
-	setorcopyvar VAR_0x8000, 358
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_8172ECD, ITEM_DOME_FOSSIL, 1, BGM_FRLG_ME_KEYITEM
 	closemessage
 	special sub_8112364
 	delay 10
@@ -103,11 +99,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	goto_if 1, EventScript_1607DE
 	removeobject 2
 	additem ITEM_HELIX_FOSSIL, 1
-	loadword 0, gUnknown_8172EB2
-	setorcopyvar VAR_0x8000, 357
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_8172EB2, ITEM_HELIX_FOSSIL, 1, BGM_FRLG_ME_KEYITEM
 	closemessage
 	special sub_8112364
 	delay 10

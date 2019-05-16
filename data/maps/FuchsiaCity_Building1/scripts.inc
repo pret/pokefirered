@@ -32,11 +32,7 @@ EventScript_16D780:: @ 816D780
 	compare_var_to_value VAR_RESULT, 1
 	call_if 1, EventScript_16D7DF
 	additem ITEM_HM04, 1
-	loadword 0, gUnknown_8199068
-	setorcopyvar VAR_0x8000, 342
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_8199068, ITEM_HM04
 	setflag FLAG_0x23A
 	removeitem ITEM_GOLD_TEETH, 1
 	release

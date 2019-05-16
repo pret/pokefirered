@@ -12,11 +12,7 @@ Route16_House_EventScript_17014F:: @ 817014F
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_17019B
 	additem ITEM_HM02, 1
-	loadword 0, gUnknown_819F8C0
-	setorcopyvar VAR_0x8000, 340
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_819F8C0, ITEM_HM02
 	loadword 0, gUnknown_819F8E0
 	callstd 4
 	setflag FLAG_0x238

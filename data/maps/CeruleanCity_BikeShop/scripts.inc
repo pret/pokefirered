@@ -39,11 +39,7 @@ EventScript_16AC15:: @ 816AC15
 EventScript_16AC22:: @ 816AC22
 	loadword 0, gUnknown_81927B2
 	callstd 4
-	loadword 0, gUnknown_81927E1
-	setorcopyvar VAR_0x8000, 360
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 318
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81927E1, ITEM_BICYCLE, 1, BGM_FRLG_ME_KEYITEM
 	setflag FLAG_0x271
 	additem ITEM_BICYCLE, 1
 	removeitem ITEM_BIKE_VOUCHER, 1

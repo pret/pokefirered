@@ -53,11 +53,7 @@ EventScript_16781A:: @ 816781A
 	checkitemspace ITEM_FULL_RESTORE, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_167865
-	loadword 0, gUnknown_81827BE
-	setorcopyvar VAR_0x8000, 19
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81827BE, ITEM_FULL_RESTORE
 	additem ITEM_FULL_RESTORE, 1
 	setflag FLAG_0x2FC
 	loadword 0, gUnknown_81827F1

@@ -43,11 +43,7 @@ Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7AC7
 	additem ITEM_AMULET_COIN, 1
-	loadword 0, gUnknown_819FC68
-	setorcopyvar VAR_0x8000, 189
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, 257
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_819FC68, ITEM_AMULET_COIN
 	setflag FLAG_0x2FD
 	loadword 0, gUnknown_819FC93
 	callstd 4

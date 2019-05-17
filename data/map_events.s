@@ -8,7 +8,7 @@
 #include "constants/maps.h"
 @#include "constants/secret_bases.h"
 #include "constants/vars.h"
-@#include "constants/weather.h"
+#include "constants/weather.h"
 @#include "constants/trainer_hill.h"
     .include "asm/macros.inc"
     .include "constants/constants.inc"

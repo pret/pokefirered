@@ -63,7 +63,7 @@ const u16 sBlackoutRespawnHealCenterMapIdxs[][2] = {
 // or the Nurse for healing.
 // This array defines the index of the NPC on the map defined above
 // with whom your character interacts in this cutscene.
-static const u8 sBlackoutRespawnHealerNpcIdx[] = {
+static const u8 sBlackoutRespawnHealerNpcIds[] = {
     [SPAWN_PALLET_TOWN     - 1] = 1,
     [SPAWN_VIRIDIAN_CITY   - 1] = 1,
     [SPAWN_PEWTER_CITY     - 1] = 3,
@@ -172,5 +172,5 @@ void SetBlackoutRespawnWarpAndHealerNpc(struct WarpData * warp)
 
 void SetBlackoutRespawnHealerNpcAsLastTalked(u32 healLocationIdx)
 {
-    gSpecialVar_LastTalked = sBlackoutRespawnHealerNpcIdx[healLocationIdx - 1];
+    gSpecialVar_LastTalked = sBlackoutRespawnHealerNpcIds[healLocationIdx - 1];
 }

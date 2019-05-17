@@ -167,7 +167,7 @@ SECTIONS {
         asm/rom6.o(.text);
         asm/fldeff_flash.o(.text);
         asm/post_battle_event_funcs.o(.text);
-        asm/prof_pc.o(.text);
+        src/prof_pc.o(.text);
         asm/hof_pc.o(.text);
         asm/field_specials.o(.text);
         asm/battle_records.o(.text);

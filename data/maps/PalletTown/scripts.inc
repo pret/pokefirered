@@ -54,7 +54,7 @@ EventScript_1654D8:: @ 81654D8
 	goto_if 0, EventScript_1655A1
 	msgbox gUnknown_817D8BF
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, sub_80CA3D8
+	specialvar VAR_RESULT, Special_GetPokedexCount
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
 	getnumberstring 0, VAR_0x8008

@@ -221,7 +221,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CA3D8
+	def_special Special_GetPokedexCount
 	def_special sub_80CA524
 	def_special sub_80CA86C
 	def_special sub_80CA9A8

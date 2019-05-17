@@ -66,7 +66,7 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, sub_80CA3D8
+	specialvar VAR_RESULT, Special_GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call EventScript_16FE64
 	compare_var_to_value VAR_0x8006, 30

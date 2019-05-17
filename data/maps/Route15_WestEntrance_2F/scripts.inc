@@ -27,7 +27,7 @@ Route15_WestEntrance_2F_EventScript_1700B9:: @ 81700B9
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, sub_80CA3D8
+	specialvar VAR_RESULT, Special_GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call EventScript_170145
 	compare_var_to_value VAR_0x8006, 50

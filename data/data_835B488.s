@@ -605,12 +605,9 @@ gUnknown_83DF0F2:: @ 83DF0F2
 	.incbin "baserom.gba", 0x3DF0F2, 0x6
 
 gUnknown_83DF0F8:: @ 83DF0F8
-	.incbin "baserom.gba", 0x3DF0F8, 0x6D4
+	.incbin "baserom.gba", 0x3DF0F8, 0x6F0
 
-gUnknown_83DF7CC:: @ 83DF7CC
-	.incbin "baserom.gba", 0x3DF7CC, 0x1C
-
-gUnknown_83DF7E8:: @ 83DF7E8
+sBerries:: @ 83DF7E8
 	.incbin "baserom.gba", 0x3DF7E8, 0x4B4
 
 gUnknown_83DFC9C:: @ 83DFC9C

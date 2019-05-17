@@ -141,7 +141,7 @@ SECTIONS {
         asm/battle_anim_80989F8.o(.text);
         asm/item.o(.text);
         asm/shop.o(.text);
-        asm/berry.o(.text);
+        src/berry.o(.text);
         asm/script_menu.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);

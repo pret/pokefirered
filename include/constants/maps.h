@@ -40,17 +40,20 @@
 #define MAP_TYPE_8 8
 #define MAP_TYPE_9 9
 
-#define WEATHER_0 0
-#define WEATHER_1 1
-#define WEATHER_2 2
-#define WEATHER_3 3
-#define WEATHER_4 4
-#define WEATHER_5 5
-#define WEATHER_6 6
-#define WEATHER_7 7
-#define WEATHER_8 8
-#define WEATHER_9 9
-#define WEATHER_10 10
-#define WEATHER_11 11
+#define WEATHER_NONE               0
+#define WEATHER_SUNNY_CLOUDS       1   // unused
+#define WEATHER_SUNNY              2
+#define WEATHER_RAIN               3   // unused
+#define WEATHER_SNOW               4   // unused
+#define WEATHER_RAIN_THUNDERSTORM  5   // unused
+#define WEATHER_FOG_HORIZONTAL     6
+#define WEATHER_VOLCANIC_ASH       7   // unused
+#define WEATHER_SANDSTORM          8   // unused
+#define WEATHER_FOG_DIAGONAL       9   // unused
+#define WEATHER_UNDERWATER         10  // unused
+#define WEATHER_CLOUDY             11
+#define WEATHER_DROUGHT            12  // unused and broken in overworld
+#define WEATHER_DOWNPOUR           13  // unused
+#define WEATHER_UNDERWATER_BUBBLES 14  // unused
 
 #endif  // GUARD_CONSTANTS_MAPS_H

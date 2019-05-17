@@ -5,7 +5,7 @@
   "music": "BGM_FRLG_MT_EMBER",
   "region_map_section": "MAPSEC_LOST_CAVE",
   "requires_flash": false,
-  "weather": "WEATHER_6",
+  "weather": "WEATHER_FOG_HORIZONTAL",
   "map_type": "MAP_TYPE_4",
   "unknown_18": 1,
   "unknown_19": 7,

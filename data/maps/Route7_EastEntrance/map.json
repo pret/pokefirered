@@ -5,7 +5,7 @@
   "music": "BGM_FRLG_VIRIDIAN_CITY",
   "region_map_section": "MAPSEC_ROUTE_7",
   "requires_flash": false,
-  "weather": "WEATHER_0",
+  "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_8",
   "unknown_18": 1,
   "unknown_19": 2,

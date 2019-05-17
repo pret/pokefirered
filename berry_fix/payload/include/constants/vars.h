@@ -159,18 +159,18 @@
 #define VAR_MT_PYRE_STATE                 0x40B9
 #define VAR_NEW_MAUVILLE_STATE            0x40BA
 
-#define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON 0x40BC
-#define VAR_JAGGED_PASS_ASH_WEATHER       0x40BD
-#define VAR_GLASS_WORKSHOP_STATE          0x40BE
-#define VAR_METEOR_FALLS_STATE            0x40BF
-#define VAR_GAME_CORNER_STATE             0x40C0
-#define VAR_TRICK_HOUSE_PRIZE_PICKUP      0x40C1
-#define VAR_PACIFIDLOG_TM_RECEIVED_DAY    0x40C2
-#define VAR_VICTORY_ROAD_1F_STATE         0x40C3
-#define VAR_FOSSIL_RESURRECTION_STATE     0x40C4
-#define VAR_WHICH_FOSSIL_REVIVED          0x40C5
-#define VAR_STEVENS_HOUSE_STATE           0x40C6
-#define VAR_OLDALE_STATE                  0x40C7
+#define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON    0x40BC
+#define VAR_JAGGED_PASS_VOLCANIC_ASH_WEATHER 0x40BD
+#define VAR_GLASS_WORKSHOP_STATE             0x40BE
+#define VAR_METEOR_FALLS_STATE               0x40BF
+#define VAR_GAME_CORNER_STATE                0x40C0
+#define VAR_TRICK_HOUSE_PRIZE_PICKUP         0x40C1
+#define VAR_PACIFIDLOG_TM_RECEIVED_DAY       0x40C2
+#define VAR_VICTORY_ROAD_1F_STATE            0x40C3
+#define VAR_FOSSIL_RESURRECTION_STATE        0x40C4
+#define VAR_WHICH_FOSSIL_REVIVED             0x40C5
+#define VAR_STEVENS_HOUSE_STATE              0x40C6
+#define VAR_OLDALE_STATE                     0x40C7
 
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.

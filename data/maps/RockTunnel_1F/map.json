@@ -5,7 +5,7 @@
   "music": "BGM_FRLG_MT_MOON",
   "region_map_section": "MAPSEC_ROCK_TUNNEL",
   "requires_flash": true,
-  "weather": "WEATHER_0",
+  "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_4",
   "unknown_18": 1,
   "unknown_19": 7,

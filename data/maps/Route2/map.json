@@ -5,7 +5,7 @@
   "music": "BGM_FRLG_ROUTE_1",
   "region_map_section": "MAPSEC_ROUTE_2",
   "requires_flash": false,
-  "weather": "WEATHER_2",
+  "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_3",
   "unknown_18": 1,
   "unknown_19": 6,

@@ -4,7 +4,7 @@ This is a disassembly of Pokémon FireRed and LeafGreen.
 
 It builds the following ROM:
 
-* **pokefirered.gba** `sha1: 41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc`
+* [**pokefirered.gba**](https://datomatic.no-intro.org/?page=show_record&s=23&n=1616) `sha1: 41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc`
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
@@ -22,8 +22,8 @@ Other disassembly and/or decompilation projects:
 * [**Pokémon Crystal**](https://github.com/pret/pokecrystal)
 * [**Pokémon Ruby and Sapphire**](https://github.com/pret/pokeruby)
 * [**Pokémon Pinball: Ruby & Sapphire**](https://github.com/pret/pokepinballrs)
-* [**Pokémon Mystery Dungeon: Red Rescue Team**](https://github.com/pret/pmd-red)
 * [**Pokémon Emerald**](https://github.com/pret/pokeemerald)
+* [**Pokémon Mystery Dungeon: Red Rescue Team**](https://github.com/pret/pmd-red)
 
 
 ## Contacts

@@ -5,7 +5,7 @@
   "music": "BGM_FRLG_TANOBY_RUINS",
   "region_map_section": "MAPSEC_VIAPOIS_CHAMBER",
   "requires_flash": false,
-  "weather": "WEATHER_0",
+  "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_4",
   "unknown_18": 1,
   "unknown_19": 7,

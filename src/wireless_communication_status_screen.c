@@ -37,6 +37,7 @@ extern const u8 gUnknown_841E29E[];
 void sub_814F1E4(void);
 void sub_814F46C(u8 taskId);
 u8 sub_8116DE0(void);
+void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx);
 
 const u16 gUnknown_846F4D0[][16] = {
     INCBIN_U16("graphics/misc/unk_846f4d0.gbapal"),
@@ -240,4 +241,25 @@ void sub_814F364(s16 * unk0, s16 * unk1)
     }
     idx = *unk1 + 2;
     LoadPalette(gUnknown_846F4D0[idx], 0, 16);
+}
+
+void sub_814F3A8(void)
+{
+    s32 i;
+    u32 width;
+
+    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(2, 0);
+    width = 0xC0 - GetStringWidth(3, gUnknown_846FAAC[0], 0);
+    sub_814F65C(0, 3, gUnknown_846FAAC[0], width / 2, 6, 3);
+    for (i = 0; i < 3; i++)
+    {
+        sub_814F65C(1, 3, gUnknown_846FAAC[i + 1], 0, 30 * i + 10, 1);
+    }
+    sub_814F65C(1, 3, gUnknown_846FAAC[i + 1], 0, 30 * i + 10, 2);
+    PutWindowTilemap(0);
+    CopyWindowToVram(0, 2);
+    PutWindowTilemap(1);
+    CopyWindowToVram(1, 2);
 }

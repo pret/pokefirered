@@ -321,16 +321,4 @@ gUnknown_846FB0C:: @ 846FB0C
 	.incbin "baserom.gba", 0x46FB0C, 0x1000
 
 gUnknown_8470B0C:: @ 8470B0C
-	.incbin "baserom.gba", 0x470B0C, 0xF40
-
-gUnknown_8471A4C:: @ 8471A4C
-	.incbin "baserom.gba", 0x471A4C, 0x120
-
-gUnknown_8471B6C:: @ 8471B6C
-	.incbin "baserom.gba", 0x471B6C, 0x280
-
-gUnknown_8471DEC:: @ 8471DEC
-	.incbin "baserom.gba", 0x471DEC, 0xA0
-
-gUnknown_8471E8C:: @ 8471E8C
-	.incbin "baserom.gba", 0x471E8C, 0x50
+	.incbin "baserom.gba", 0x470B0C, 0x260

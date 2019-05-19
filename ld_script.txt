@@ -100,7 +100,7 @@ SECTIONS {
         asm/map_obj_80688E4.o(.text);
         asm/field_message_box.o(.text);
         asm/map_obj_lock.o(.text);
-        asm/text_window_graphics.o(.text);
+        src/text_window_graphics.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
@@ -428,6 +428,7 @@ SECTIONS {
         . = ALIGN(4);
         src/seagallop.o(.rodata);
         data/data_8468C98.o(.rodata);
+        src/text_window_graphics.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);
         src/unk_815C980.o(.rodata);

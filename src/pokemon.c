@@ -1001,7 +1001,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 damage /= 2;
 
             // sunny
-            if (gBattleWeather & WEATHER_SUN_ANY)
+            if (gBattleWeather & WEATHER_SUNNY_ANY)
             {
                 switch (type)
                 {

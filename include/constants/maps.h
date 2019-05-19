@@ -40,17 +40,4 @@
 #define MAP_TYPE_8 8
 #define MAP_TYPE_9 9
 
-#define WEATHER_0 0
-#define WEATHER_1 1
-#define WEATHER_2 2
-#define WEATHER_3 3
-#define WEATHER_4 4
-#define WEATHER_5 5
-#define WEATHER_6 6
-#define WEATHER_7 7
-#define WEATHER_8 8
-#define WEATHER_9 9
-#define WEATHER_10 10
-#define WEATHER_11 11
-
 #endif  // GUARD_CONSTANTS_MAPS_H

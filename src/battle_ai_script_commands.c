@@ -1623,7 +1623,7 @@ static void BattleAICmd_if_status_not_in_party(void)
 
 enum
 {
-    WEATHER_TYPE_SUN,
+    WEATHER_TYPE_SUNNY,
     WEATHER_TYPE_RAIN,
     WEATHER_TYPE_SANDSTORM,
     WEATHER_TYPE_HAIL,
@@ -1637,8 +1637,8 @@ static void BattleAICmd_get_weather(void)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_RAIN;
     if (gBattleWeather & WEATHER_SANDSTORM_ANY)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SANDSTORM;
-    if (gBattleWeather & WEATHER_SUN_ANY)
-        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SUN;
+    if (gBattleWeather & WEATHER_SUNNY_ANY)
+        AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SUNNY;
     if (gBattleWeather & WEATHER_HAIL)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_HAIL;
 

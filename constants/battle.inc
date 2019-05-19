@@ -40,10 +40,10 @@
 .equiv TARGET, 0
 .equiv USER, 1
 
-.equiv WEATHER_SUN, 0
-.equiv WEATHER_RAIN, 1
-.equiv WEATHER_SANDSTORM, 2
-.equiv WEATHER_HAIL, 3
+.equiv BATTLE_WEATHER_SUNNY, 0
+.equiv BATTLE_WEATHER_RAIN, 1
+.equiv BATTLE_WEATHER_SANDSTORM, 2
+.equiv BATTLE_WEATHER_HAIL, 3
 
 	enum_start 1
 	enum ATTACK

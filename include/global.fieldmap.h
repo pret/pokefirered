@@ -331,7 +331,7 @@ struct Camera
 };
 
 extern struct MapObject gMapObjects[NUM_FIELD_OBJECTS];
-extern u8 gSelectedMapObject;
+extern u8 gSelectedEventObject;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 extern struct Camera gCamera;

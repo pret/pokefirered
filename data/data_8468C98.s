@@ -319,6 +319,3 @@ gUnknown_846FB08:: @ 846FB08
 
 gUnknown_846FB0C:: @ 846FB0C
 	.incbin "baserom.gba", 0x46FB0C, 0x1000
-
-gUnknown_8470B0C:: @ 8470B0C
-	.incbin "baserom.gba", 0x470B0C, 0x260

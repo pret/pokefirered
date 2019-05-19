@@ -1,6 +1,8 @@
 #include "global.h"
 #include "text_window_graphics.h"
 
+const u16 gUnknown_8470B0C[] = INCBIN_U16("graphics/text_window/unk_8470B0C.4bpp");
+
 static const u16 gUnknown_8470D6C[] = INCBIN_U16("graphics/text_window/unk_8470D6C.4bpp");
 static const u16 gUnknown_8470E8C[] = INCBIN_U16("graphics/text_window/unk_8470E8C.4bpp");
 static const u16 gUnk_Empty_Space_8470FAC[16] = {0};

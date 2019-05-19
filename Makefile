@@ -76,6 +76,10 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
+all: rom
+
+rom: $(ROM)
+
 tools:
 	@$(MAKE) -C tools/gbagfx
 	@$(MAKE) -C tools/scaninc
@@ -88,10 +92,8 @@ tools:
 	@$(MAKE) -C tools/gbafix
 	@$(MAKE) -C tools/mapjson
 
-rom: $(ROM)
-
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: $(ROM)
+compare: rom
 	@$(SHA1) rom.sha1
 
 clean: tidy
@@ -101,7 +103,17 @@ clean: tidy
 	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
-	@$(MAKE) -C berry_fix clean
+	@$(MAKE) clean -C berry_fix
+	@$(MAKE) clean -C tools/gbagfx
+	@$(MAKE) clean -C tools/scaninc
+	@$(MAKE) clean -C tools/preproc
+	@$(MAKE) clean -C tools/bin2c
+	@$(MAKE) clean -C tools/rsfont
+	@$(MAKE) clean -C tools/aif2pcm
+	@$(MAKE) clean -C tools/ramscrgen
+	@$(MAKE) clean -C tools/mid2agb
+	@$(MAKE) clean -C tools/gbafix
+	@$(MAKE) clean -C tools/mapjson
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)

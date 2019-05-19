@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#define PIXEL_FILL(num) ((num) | ((num) << 4))
+
 enum
 {
     WINDOW_PRIORITY,

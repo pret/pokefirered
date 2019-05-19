@@ -313,9 +313,3 @@ gUnknown_846FAAC:: @ 846FAAC
 
 gUnknown_846FAC0:: @ 846FAC0
 	.incbin "baserom.gba", 0x46FAC0, 0x48
-
-gUnknown_846FB08:: @ 846FB08
-	.incbin "baserom.gba", 0x46FB08, 0x4
-
-gUnknown_846FB0C:: @ 846FB0C
-	.incbin "baserom.gba", 0x46FB0C, 0x1000

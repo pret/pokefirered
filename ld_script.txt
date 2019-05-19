@@ -252,7 +252,7 @@ SECTIONS {
         asm/berry_crush_2.o(.text);
         asm/berry_crush_3.o(.text);
         asm/wireless_communication_status_screen.o(.text);
-        asm/braille_text.o(.text);
+        src/braille_text.o(.text);
         asm/text_window.o(.text);
         src/quest_log_8150454.o(.text);
         asm/dodrio_berry_picking.o(.text);
@@ -428,6 +428,7 @@ SECTIONS {
         . = ALIGN(4);
         src/seagallop.o(.rodata);
         data/data_8468C98.o(.rodata);
+        src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);

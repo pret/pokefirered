@@ -2372,7 +2372,79 @@ gUnknown_841E21E:: @ 841E21E
 	.incbin "baserom.gba", 0x41E21E, 0x16
 
 gUnknown_841E234:: @ 841E234
-	.incbin "baserom.gba", 0x41E234, 0xF1
+	.string "From $"
+
+gUnknown_841E23A:: @ 841E23A
+	.string "$"
+
+gUnknown_841E23B:: @ 841E23B
+	.string "$"
+
+gUnknown_841E23C:: @ 841E23C
+	.string "$"
+
+gUnknown_841E23D:: @ 841E23D
+	.string "$"
+
+gUnknown_841E23E:: @ 841E23E
+	.string "$"
+
+gUnknown_841E23F:: @ 841E23F
+	.string "$"
+
+gUnknown_841E240:: @ 841E240
+	.string "$"
+
+gUnknown_841E241:: @ 841E241
+	.string "$"
+
+gUnknown_841E242:: @ 841E242
+	.string "$"
+
+gUnknown_841E243:: @ 841E243
+	.string "$"
+
+gUnknown_841E244:: @ 841E244
+	.string "$"
+
+gUnknown_841E245:: @ 841E245
+	.string "Wireless Communication Status$"
+
+gUnknown_841E263:: @ 841E263
+	.string "People trading:$"
+
+gUnknown_841E273:: @ 841E273
+	.string "People battling:$"
+
+gUnknown_841E284:: @ 841E284
+	.string "People in the UNION ROOM:$"
+
+gUnknown_841E29E:: @ 841E29E
+	.string "People communicating:$"
+
+gUnknown_841E2B4:: @ 841E2B4
+	.string "{UNKNOWN_F7 0x00} players$"
+
+gUnknown_841E2BF:: @ 841E2BF
+	.string "{UNKNOWN_F7 0x01} player$"
+
+gUnknown_841E2C9:: @ 841E2C9
+	.string "{UNKNOWN_F7 0x02} players$"
+
+gUnknown_841E2D4:: @ 841E2D4
+	.string "{UNKNOWN_F7 0x03} players$"
+
+gUnknown_841E2DF:: @ 841E2DF
+	.incbin "baserom.gba", 0x41e2df, 0xd
+
+gUnknown_841E2EC:: @ 841E2EC
+	.incbin "baserom.gba", 0x41e2ec, 0x9
+
+gUnknown_841E2F5:: @ 841E2F5
+	.incbin "baserom.gba", 0x41e2f5, 0x2d
+
+gUnknown_841E322:: @ 841E322
+	.string "{UNKNOWN_F9 0x07}$"
 
 gUnknown_841E325:: @ 841E325
 	.string "Communication standby…$"

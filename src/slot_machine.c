@@ -8,6 +8,7 @@
 #include "quest_log.h"
 #include "overworld.h"
 #include "slot_machine.h"
+#include "menu.h"
 #include "constants/songs.h"
 
 struct SlotMachineState
@@ -16,33 +17,33 @@ struct SlotMachineState
     u16 machineidx;
     u16 field_06;
     u8 filler_08[2];
-    u16 field_0A;
+    u16 slotRewardClass;
     u8 filler_0C[2];
     u16 bet;
     u8 field_10;
     u8 field_11;
     TaskFunc field_14[3];
-    u16 field_20[3];
-    u16 field_26[3];
-    u16 field_2C[3];
+    s16 field_20[3];
+    s16 field_26[3];
+    s16 field_2C[3];
     u8 filler_32[0x1E];
-    u16 field_50;
+    u16 payout;
 };
 
-EWRAM_DATA struct SlotMachineState * gUnknown_203F3A0 = NULL;
+EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
 
 void sub_813F84C(struct SlotMachineState * ptr);
 void sub_813F898(void);
 void sub_813F92C(void);
 void sub_813F94C(void);
-void sub_813F964(u8 taskId);
-void sub_813FBC0(u8 taskId);
-void sub_813FC2C(u8 taskId);
-void sub_813FCAC(u8 taskId);
-void sub_813FD84(u8 taskId);
-void sub_813FE1C(u8 taskId);
-void sub_813FFD8(u8 taskId);
-void sub_8140030(TaskFunc taskFunc);
+void MainTask_SlotsGameLoop(u8 taskId);
+void MainTask_NoCoinsGameOver(u8 taskId);
+void MainTask_ShowHelp(u8 taskId);
+void MainTask_ConfirmExitGame(u8 taskId);
+void MainTask_DarnNoPayout(u8 taskId);
+void MainTask_WinHandlePayout(u8 taskId);
+void MainTask_ExitSlots(u8 taskId);
+static void SetMainTask(TaskFunc taskFunc);
 void sub_8140060(u8 taskId);
 void sub_8140148(void);
 void sub_814016C(u16, u16);
@@ -50,6 +51,7 @@ bool32 sub_81401A0(u16);
 void sub_81409B4(void);
 void sub_8140A70(void);
 u16 sub_8140A80(void);
+void sub_8140D7C(s16 *, s16 *);
 bool32 sub_814104C(void);
 void sub_8141094(void);
 void sub_8141148(u16 a0, u8 a1);
@@ -59,16 +61,16 @@ void sub_8141C30(u8, u8);
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
 {
     ResetTasks();
-    gUnknown_203F3A0 = Alloc(sizeof(*gUnknown_203F3A0));
-    if (gUnknown_203F3A0 == NULL)
+    sSlotMachineState = Alloc(sizeof(*sSlotMachineState));
+    if (sSlotMachineState == NULL)
         SetMainCallback2(savedCallback);
     else
     {
         if (machineIdx > 5)
             machineIdx = 0;
-        gUnknown_203F3A0->machineidx = machineIdx;
-        gUnknown_203F3A0->savedCallback = savedCallback;
-        sub_813F84C(gUnknown_203F3A0);
+        sSlotMachineState->machineidx = machineIdx;
+        sSlotMachineState->savedCallback = savedCallback;
+        sub_813F84C(sSlotMachineState);
         SetMainCallback2(sub_813F898);
     }
 }
@@ -79,14 +81,14 @@ void sub_813F84C(struct SlotMachineState * ptr)
 
     ptr->field_06 = 0;
     ptr->bet = 0;
-    ptr->field_50 = 0;
+    ptr->payout = 0;
     // for whatever reason, the loop does not use the ptr param
     for (i = 0; i < 3; i++)
     {
-        gUnknown_203F3A0->field_14[i] = NULL;
-        gUnknown_203F3A0->field_20[i] =    0;
-        gUnknown_203F3A0->field_26[i] =    0;
-        gUnknown_203F3A0->field_2C[i] =   21;
+        sSlotMachineState->field_14[i] = NULL;
+        sSlotMachineState->field_20[i] =    0;
+        sSlotMachineState->field_26[i] =    0;
+        sSlotMachineState->field_2C[i] =   21;
     }
 }
 
@@ -101,7 +103,7 @@ void sub_813F898(void)
     case 0:
         if (sub_814104C())
         {
-            SetMainCallback2(gUnknown_203F3A0->savedCallback);
+            SetMainCallback2(sSlotMachineState->savedCallback);
             sub_813F92C();
         }
         else
@@ -111,10 +113,10 @@ void sub_813F898(void)
         }
         break;
     case 1:
-        if (sub_8141180(0) == 0)
+        if (!sub_8141180(0))
         {
-            gUnknown_203F3A0->field_10 = CreateTask(sub_813F964, 0);
-            gUnknown_203F3A0->field_11 = CreateTask(sub_8140060, 1);
+            sSlotMachineState->field_10 = CreateTask(MainTask_SlotsGameLoop, 0);
+            sSlotMachineState->field_11 = CreateTask(sub_8140060, 1);
             SetMainCallback2(sub_813F94C);
         }
         break;
@@ -124,10 +126,10 @@ void sub_813F898(void)
 void sub_813F92C(void)
 {
     sub_8141094();
-    if (gUnknown_203F3A0 != NULL)
+    if (sSlotMachineState != NULL)
     {
-        Free(gUnknown_203F3A0);
-        gUnknown_203F3A0 = NULL;
+        Free(sSlotMachineState);
+        sSlotMachineState = NULL;
     }
 }
 
@@ -139,7 +141,7 @@ void sub_813F94C(void)
     UpdatePaletteFade();
 }
 
-void sub_813F964(u8 taskId)
+void MainTask_SlotsGameLoop(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -148,11 +150,11 @@ void sub_813F964(u8 taskId)
     case 0:
         if (GetCoins() == 0)
         {
-            sub_8140030(sub_813FBC0);
+            SetMainTask(MainTask_NoCoinsGameOver);
         }
         else if (JOY_NEW(DPAD_DOWN))
         {
-            gUnknown_203F3A0->bet++;
+            sSlotMachineState->bet++;
             TakeCoins(1);
             PlaySE(SE_T_KAMI2);
             sub_8141148(8, 0);
@@ -161,15 +163,15 @@ void sub_813F964(u8 taskId)
         }
         else if (JOY_NEW(R_BUTTON))
         {
-            s32 toAdd = 3 - gUnknown_203F3A0->bet;
+            s32 toAdd = 3 - sSlotMachineState->bet;
             if (GetCoins() >= toAdd)
             {
-                gUnknown_203F3A0->bet = 3;
+                sSlotMachineState->bet = 3;
                 TakeCoins(toAdd);
             }
             else
             {
-                gUnknown_203F3A0->bet += GetCoins();
+                sSlotMachineState->bet += GetCoins();
                 SetCoins(0);
             }
             PlaySE(SE_T_KAMI2);
@@ -177,23 +179,23 @@ void sub_813F964(u8 taskId)
             sub_8141148(2, 1);
             data[0] = 1;
         }
-        else if (JOY_NEW(A_BUTTON) && gUnknown_203F3A0->bet != 0)
+        else if (JOY_NEW(A_BUTTON) && sSlotMachineState->bet != 0)
         {
             data[0] = 2;
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            sub_8140030(sub_813FCAC);
+            SetMainTask(MainTask_ConfirmExitGame);
         }
         else if (JOY_NEW(DPAD_RIGHT))
         {
-            sub_8140030(sub_813FC2C);
+            SetMainTask(MainTask_ShowHelp);
         }
         break;
     case 1:
-        if (sub_8141180(0) == 0 && sub_8141180(1) == 0)
+        if (!sub_8141180(0) && !sub_8141180(1))
         {
-            if (gUnknown_203F3A0->bet == 3 || GetCoins() == 0)
+            if (sSlotMachineState->bet == 3 || GetCoins() == 0)
                 data[0] = 2;
             else
                 data[0] = 0;
@@ -203,39 +205,39 @@ void sub_813F964(u8 taskId)
         sub_811539C();
         sub_81409B4();
         sub_8140148();
-        gUnknown_203F3A0->field_06 = 0;
+        sSlotMachineState->field_06 = 0;
         sub_8141148(3, 0);
         data[0] = 3;
         break;
     case 3:
-        if (sub_8141180(0) == 0)
+        if (!sub_8141180(0))
         {
             if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_JYUNI);
-                sub_814016C(gUnknown_203F3A0->field_06, gUnknown_203F3A0->field_06);
-                sub_8141C30(gUnknown_203F3A0->field_06, 0);
+                sub_814016C(sSlotMachineState->field_06, sSlotMachineState->field_06);
+                sub_8141C30(sSlotMachineState->field_06, 0);
                 data[0] = 4;
             }
         }
         break;
     case 4:
-        if (sub_81401A0(gUnknown_203F3A0->field_06) == 0 && sub_8141180(0) == 0)
+        if (sub_81401A0(sSlotMachineState->field_06) == 0 && !sub_8141180(0))
         {
-            gUnknown_203F3A0->field_06++;
-            if (gUnknown_203F3A0->field_06 >= 3)
+            sSlotMachineState->field_06++;
+            if (sSlotMachineState->field_06 >= 3)
             {
-                gUnknown_203F3A0->field_0A = sub_8140A80();
-                gUnknown_203F3A0->bet = 0;
-                gUnknown_203F3A0->field_06 = 0;
-                if (gUnknown_203F3A0->field_0A == 0)
-                    sub_8140030(sub_813FD84);
+                sSlotMachineState->slotRewardClass = sub_8140A80();
+                sSlotMachineState->bet = 0;
+                sSlotMachineState->field_06 = 0;
+                if (sSlotMachineState->slotRewardClass == 0)
+                    SetMainTask(MainTask_DarnNoPayout);
                 else
                 {
-                    if (gUnknown_203F3A0->field_0A == 6)
+                    if (sSlotMachineState->slotRewardClass == 6)
                         IncrementGameStat(GAME_STAT_SLOT_JACKPOTS);
                     sub_8140A70();
-                    sub_8140030(sub_813FE1C);
+                    SetMainTask(MainTask_WinHandlePayout);
                 }
             }
             else
@@ -245,7 +247,7 @@ void sub_813F964(u8 taskId)
     }
 }
 
-void sub_813FBC0(u8 taskId)
+void MainTask_NoCoinsGameOver(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -256,12 +258,242 @@ void sub_813FBC0(u8 taskId)
         data[0]++;
         break;
     case 1:
-        if (sub_8141180(0) == 0)
+        if (!sub_8141180(0))
             data[0]++;
         break;
     case 2:
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
-            sub_8140030(sub_813FFD8);
+            SetMainTask(MainTask_ExitSlots);
         break;
     }
+}
+
+void MainTask_ShowHelp(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        sub_8141148(14, 0);
+        data[0]++;
+        break;
+    case 1:
+        if (!sub_8141180(0))
+            data[0]++;
+        break;
+    case 2:
+        if (JOY_NEW(DPAD_LEFT))
+        {
+            sub_8141148(15, 0);
+            data[0]++;
+        }
+        break;
+    case 3:
+        if (!sub_8141180(0))
+            SetMainTask(MainTask_SlotsGameLoop);
+        break;
+    }
+}
+
+void MainTask_ConfirmExitGame(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        sub_8141148(10, 0);
+        data[0]++;
+        break;
+    case 1:
+        if (!sub_8141180(0))
+            data[0]++;
+        break;
+    case 2:
+        switch (Menu_ProcessInputNoWrapClearOnChoose())
+        {
+        case 0:
+            GiveCoins(sSlotMachineState->bet);
+            sub_8141148(8, 0);
+            data[0] = 3;
+            break;
+        case 1:
+        case -1:
+            sub_8141148(11, 0);
+            data[0] = 4;
+            break;
+        }
+        break;
+    case 3:
+        if (!sub_8141180(0))
+            SetMainTask(MainTask_ExitSlots);
+        break;
+    case 4:
+        if (!sub_8141180(0))
+            SetMainTask(MainTask_SlotsGameLoop);
+        break;
+    }
+}
+
+void MainTask_DarnNoPayout(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        sub_8141148(6, 0);
+        data[1] = 0;
+        data[0]++;
+        break;
+    case 1:
+        data[1]++;
+        if (data[1] > 60)
+        {
+            sub_8141148(7, 0);
+            sub_8141148(2, 1);
+            sub_8141148(13, 2);
+            data[0]++;
+        }
+        break;
+    case 2:
+        if (!sub_8141180(0) && !sub_8141180(1) && !sub_8141180(2))
+            SetMainTask(MainTask_SlotsGameLoop);
+        break;
+    }
+}
+
+void MainTask_WinHandlePayout(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        if (sSlotMachineState->slotRewardClass == 5 || sSlotMachineState->slotRewardClass == 6)
+            PlayFanfare(MUS_ME_B_BIG);
+        else
+            PlayFanfare(MUS_ME_B_SMALL);
+        sub_8141148(8, 0);
+        sub_8141148(4, 1);
+        data[1] = 8;
+        data[0]++;
+        break;
+    case 1:
+        data[1]++;
+        if (data[1] > 120)
+        {
+            data[1] = 8;
+            if (JOY_HELD(A_BUTTON))
+                data[1] = 2;
+            data[0]++;
+        }
+        break;
+    case 2:
+        if (!sub_8141180(0))
+        {
+            if (IsFanfareTaskInactive() && JOY_NEW(START_BUTTON))
+            {
+                GiveCoins(sSlotMachineState->payout);
+                sSlotMachineState->payout = 0;
+            }
+            else
+            {
+                data[1]--;
+                if (data[1] == 0)
+                {
+                    if (IsFanfareTaskInactive())
+                        PlaySE(SE_PIN);
+                    if (sSlotMachineState->payout != 0)
+                    {
+                        GiveCoins(1);
+                        sSlotMachineState->payout--;
+                    }
+                    data[1] = 8;
+                    if (JOY_HELD(A_BUTTON))
+                        data[1] = 2;
+                }
+            }
+            sub_8141148(8, 0);
+            if (sSlotMachineState->payout == 0)
+                data[0]++;
+        }
+        break;
+    case 3:
+        if (IsFanfareTaskInactive() && !sub_8141180(0))
+        {
+            sub_8141148(5, 0);
+            data[0]++;
+        }
+        break;
+    case 4:
+        if (!sub_8141180(0))
+        {
+            sub_8141148(2, 0);
+            sub_8141148(13, 1);
+            data[0]++;
+        }
+        break;
+    case 5:
+        if (!sub_8141180(0) && !sub_8141180(1))
+            SetMainTask(MainTask_SlotsGameLoop);
+        break;
+    }
+}
+
+void MainTask_ExitSlots(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        sub_8141148(1, 0);
+        data[0]++;
+        break;
+    case 1:
+        if (!sub_8141180(0))
+        {
+            SetMainCallback2(sSlotMachineState->savedCallback);
+            sub_813F92C();
+        }
+        break;
+    }
+}
+
+static void SetMainTask(TaskFunc taskFunc)
+{
+    gTasks[sSlotMachineState->field_10].func = taskFunc;
+    gTasks[sSlotMachineState->field_10].data[0] = 0;
+}
+
+void sub_8140060(u8 taskId)
+{
+    // taskId is never used
+
+    s32 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (sSlotMachineState->field_14[i] != NULL || sSlotMachineState->field_26[i] != 0)
+        {
+            if (sSlotMachineState->field_26[i] != 0 || sSlotMachineState->field_20[i] != sSlotMachineState->field_2C[i])
+            {
+                sSlotMachineState->field_26[i]++;
+                if (sSlotMachineState->field_26[i] > 2)
+                {
+                    sSlotMachineState->field_26[i] = 0;
+                    sSlotMachineState->field_20[i]--;
+                    if (sSlotMachineState->field_20[i] < 0)
+                        sSlotMachineState->field_20[i] = 20;
+                }
+                if (sSlotMachineState->field_20[i] != sSlotMachineState->field_2C[i])
+                    continue;
+            }
+            sSlotMachineState->field_2C[i] = 21;
+            sSlotMachineState->field_14[i] = NULL;
+        }
+    }
+    sub_8140D7C(sSlotMachineState->field_20, sSlotMachineState->field_26);
 }

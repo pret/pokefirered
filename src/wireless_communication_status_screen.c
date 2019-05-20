@@ -13,11 +13,17 @@
 #include "unk_text_util.h"
 #include "overworld.h"
 #include "sound.h"
+#include "menu.h"
+#include "librfu.h"
+#include "link_rfu.h"
+#include "union_room.h"
 #include "constants/songs.h"
 
 struct WirelessCommunicationStatusScreenStruct
 {
-    u32 field_00[6][4];
+    u32 field_00[4];
+    u32 field_10[4];
+    u32 field_20[16];
     u8 field_60;
     u8 field_61;
     u8 filler_62[0xA];
@@ -37,9 +43,8 @@ extern const u8 gUnknown_841E29E[];
 
 void sub_814F1E4(void);
 void sub_814F46C(u8 taskId);
-u8 sub_8116DE0(void);
 void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx);
-bool32 sub_814F7E4(u32 * a0, u32 * a1, u32 * a2, u8 a3);
+bool32 sub_814F7E4(u32 * a0, u32 * a1, u32 * a2, u8 taskId);
 
 const u16 gUnknown_846F4D0[][16] = {
     INCBIN_U16("graphics/misc/unk_846f4d0.gbapal"),
@@ -148,8 +153,7 @@ const u8 gUnknown_846FAC0[][3] = {
     {0x54, 0x02, 0x01},
     {0x53, 0x02, 0x02},
     {0x51, 0x02, 0x01},
-    {0x52, 0x02, 0x01},
-    {0x00, 0x00, 0x00}
+    {0x52, 0x02, 0x01}
 };
 
 void sub_814F19C(void)
@@ -197,7 +201,7 @@ void sub_814F1E4(void)
     SetVBlankCallback(sub_814F1C0);
     gUnknown_3002040->field_60 = CreateTask(sub_814F46C, 0);
     gUnknown_3002040->field_61 = sub_8116DE0();
-    gUnknown_3002040->field_00[1][3] = 1;
+    gUnknown_3002040->field_10[3] = 1;
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
@@ -287,12 +291,12 @@ void sub_814F46C(u8 taskId)
             gTasks[taskId].data[0]++;
         break;
     case 3:
-        if (sub_814F7E4(gUnknown_3002040->field_00[0], gUnknown_3002040->field_00[1], gUnknown_3002040->field_00[2], gUnknown_3002040->field_61))
+        if (sub_814F7E4(gUnknown_3002040->field_00, gUnknown_3002040->field_10, gUnknown_3002040->field_20, gUnknown_3002040->field_61))
         {
             FillWindowPixelBuffer(2, 0x00);
             for (i = 0; i < 4; i++)
             {
-                ConvertIntToDecimalStringN(gStringVar4, gUnknown_3002040->field_00[0][i], STR_CONV_MODE_RIGHT_ALIGN, 2);
+                ConvertIntToDecimalStringN(gStringVar4, gUnknown_3002040->field_00[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
                 if (i != 3)
                     sub_814F65C(2, 3, gStringVar4, 4, 30 * i + 10, 1);
                 else
@@ -321,4 +325,112 @@ void sub_814F46C(u8 taskId)
         }
         break;
     }
+}
+
+void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx)
+{
+    struct TextColor textColor;
+    switch (palIdx)
+    {
+    case 0:
+        textColor.fgColor = 0;
+        textColor.bgColor = 2;
+        textColor.shadowColor = 3;
+        break;
+    case 1:
+        textColor.fgColor = 0;
+        textColor.bgColor = 1;
+        textColor.shadowColor = 3;
+        break;
+    case 2:
+        textColor.fgColor = 0;
+        textColor.bgColor = 4;
+        textColor.shadowColor = 5;
+        break;
+    case 3:
+        textColor.fgColor = 0;
+        textColor.bgColor = 7;
+        textColor.shadowColor = 6;
+        break;
+    case 4:
+        textColor.fgColor = 0;
+        textColor.bgColor = 1;
+        textColor.shadowColor = 2;
+        break;
+    // default: UB
+    }
+    AddTextPrinterParametrized2(windowId, fontId,x, y, fontId == 0 ? 0 : 1, 0, &textColor, -1, str);
+}
+
+u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)
+{
+    u32 r8 = unk20->unk.field_0.unk_0a_0;
+    s32 i, j, k;
+
+    for (i = 0; i < NELEMS(gUnknown_846FAC0); i++)
+    {
+        if (r8 == gUnknown_846FAC0[i][0] && unk20->field_1A_0 == 1)
+        {
+            if (gUnknown_846FAC0[i][2] == 0)
+            {
+                k = 0;
+                for (j = 0; j < 4; j++)
+                {
+                    if (unk20->unk.field_0.unk_04[j] != 0) k++;
+                }
+                k++;
+                arg1[gUnknown_846FAC0[i][1]] += k;
+            }
+            else
+            {
+                arg1[gUnknown_846FAC0[i][1]] += gUnknown_846FAC0[i][2];
+            }
+        }
+    }
+
+    return r8;
+}
+
+bool32 sub_814F7BC(const u32 * ptr0, const u32 * ptr1)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (ptr0[i] != ptr1[i])
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 sub_814F7E4(u32 * a0, u32 * a1, u32 * a2, u8 taskId)
+{
+    bool32 r8 = FALSE;
+    u32 sp0[4] = {0, 0, 0, 0};
+    struct UnkStruct_Group * group = (void *)gTasks[taskId].data;
+    s32 i;
+
+    for (i = 0; i < 16; i++)
+    {
+        u32 r1 = sub_814F714(&group->field_0->arr[i], sp0);
+        if (r1 != a2[i])
+        {
+            a2[i] = r1;
+            r8 = TRUE;
+        }
+    }
+
+    if (sub_814F7BC(sp0, a1) == FALSE)
+    {
+        if (r8 == TRUE)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    memcpy(a0, sp0, sizeof(sp0));
+    memcpy(a1, sp0, sizeof(sp0));
+    a0[3] = a0[0] + a0[1] + a0[2];
+    return TRUE;
 }

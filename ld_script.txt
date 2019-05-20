@@ -237,6 +237,7 @@ SECTIONS {
         asm/berry_pouch.o(.text);
         asm/itemfinder.o(.text);
         asm/buy_menu_helpers.o(.text);
+        src/slot_machine.o(.text);
         asm/slot_machine.o(.text);
         src/roamer.o(.text);
         src/mystery_gift_menu.o(.text);

@@ -22,6 +22,7 @@ extern const u16 gUnknown_84566A8[];
 
 void sub_8112720(u8);
 void sub_8113550(u16, const u16 *);
+void sub_811539C(void);
 void sub_8115748(u16);
 u8 sub_8112CAC(void);
 bool8 sub_81119D4(void (*func)(void));

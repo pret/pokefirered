@@ -9,14 +9,15 @@
 #include "new_menu_helpers.h"
 #include "scanline_effect.h"
 #include "m4a.h"
+#include "string_util.h"
 #include "unk_text_util.h"
 #include "overworld.h"
+#include "sound.h"
+#include "constants/songs.h"
 
 struct WirelessCommunicationStatusScreenStruct
 {
-    u8 filler_00[0x1C];
-    u32 field_1C;
-    u8 filler_20[0x40];
+    u32 field_00[6][4];
     u8 field_60;
     u8 field_61;
     u8 filler_62[0xA];
@@ -38,6 +39,7 @@ void sub_814F1E4(void);
 void sub_814F46C(u8 taskId);
 u8 sub_8116DE0(void);
 void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx);
+bool32 sub_814F7E4(u32 * a0, u32 * a1, u32 * a2, u8 a3);
 
 const u16 gUnknown_846F4D0[][16] = {
     INCBIN_U16("graphics/misc/unk_846f4d0.gbapal"),
@@ -195,7 +197,7 @@ void sub_814F1E4(void)
     SetVBlankCallback(sub_814F1C0);
     gUnknown_3002040->field_60 = CreateTask(sub_814F46C, 0);
     gUnknown_3002040->field_61 = sub_8116DE0();
-    gUnknown_3002040->field_1C = 1;
+    gUnknown_3002040->field_00[1][3] = 1;
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
@@ -262,4 +264,61 @@ void sub_814F3A8(void)
     CopyWindowToVram(0, 2);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
+}
+
+void sub_814F46C(u8 taskId)
+{
+    s32 i;
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        sub_814F3A8();
+        gTasks[taskId].data[0]++;
+        break;
+    case 1:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        ShowBg(1);
+        CopyBgTilemapBufferToVram(0);
+        ShowBg(0);
+        gTasks[taskId].data[0]++;
+        break;
+    case 2:
+        if (!gPaletteFade.active)
+            gTasks[taskId].data[0]++;
+        break;
+    case 3:
+        if (sub_814F7E4(gUnknown_3002040->field_00[0], gUnknown_3002040->field_00[1], gUnknown_3002040->field_00[2], gUnknown_3002040->field_61))
+        {
+            FillWindowPixelBuffer(2, 0x00);
+            for (i = 0; i < 4; i++)
+            {
+                ConvertIntToDecimalStringN(gStringVar4, gUnknown_3002040->field_00[0][i], STR_CONV_MODE_RIGHT_ALIGN, 2);
+                if (i != 3)
+                    sub_814F65C(2, 3, gStringVar4, 4, 30 * i + 10, 1);
+                else
+                    sub_814F65C(2, 3, gStringVar4, 4, 100, 2);
+            }
+            PutWindowTilemap(2);
+            CopyWindowToVram(2, 3);
+        }
+        if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            gTasks[gUnknown_3002040->field_61].data[15] = 0xFF;
+            gTasks[taskId].data[0]++;
+        }
+        sub_814F364(&gTasks[taskId].data[7], &gTasks[taskId].data[8]);
+        break;
+    case 4:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].data[0]++;
+        break;
+    case 5:
+        if (!gPaletteFade.active)
+        {
+            SetMainCallback2(sub_814F32C);
+            DestroyTask(taskId);
+        }
+        break;
+    }
 }

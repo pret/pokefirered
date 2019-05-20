@@ -90,7 +90,7 @@ const struct BgTemplate gUnknown_846FA74[] = {
 
 const struct WindowTemplate gUnknown_846FA7C[] = {
     {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x03,
         .tilemapTop = 0x00,
         .width = 0x18,
@@ -98,7 +98,7 @@ const struct WindowTemplate gUnknown_846FA7C[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0001
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x03,
         .tilemapTop = 0x04,
         .width = 0x16,
@@ -106,7 +106,7 @@ const struct WindowTemplate gUnknown_846FA7C[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0049
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x19,
         .tilemapTop = 0x04,
         .width = 0x02,

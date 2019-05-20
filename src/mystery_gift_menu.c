@@ -153,7 +153,7 @@ const struct BgTemplate sBGTemplates[] = {
 
 const struct WindowTemplate sMainWindows[] = {
     {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x00,
         .tilemapTop = 0x00,
         .width = 0x1e,
@@ -161,7 +161,7 @@ const struct WindowTemplate sMainWindows[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0013
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x01,
         .tilemapTop = 0x0f,
         .width = 0x1c,
@@ -169,7 +169,7 @@ const struct WindowTemplate sMainWindows[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x004f
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x00,
         .tilemapTop = 0x0f,
         .width = 0x1e,
@@ -182,7 +182,7 @@ const struct WindowTemplate sMainWindows[] = {
 };
 
 const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width28 = {
-    .priority = 0x00,
+    .bg = 0x00,
     .tilemapLeft = 0x01,
     .tilemapTop = 0x0f,
     .width = 0x1c,
@@ -192,7 +192,7 @@ const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width28 = {
 };
 
 const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width20 = {
-    .priority = 0x00,
+    .bg = 0x00,
     .tilemapLeft = 0x01,
     .tilemapTop = 0x0f,
     .width = 0x14,
@@ -202,7 +202,7 @@ const struct WindowTemplate sWindowTemplate_PromptYesOrNo_Width20 = {
 };
 
 const struct WindowTemplate sMysteryGiftMenuWindowTemplate = {
-    .priority = 0x00,
+    .bg = 0x00,
     .tilemapLeft = 0x01,
     .tilemapTop = 0x0f,
     .width = 0x13,
@@ -212,7 +212,7 @@ const struct WindowTemplate sMysteryGiftMenuWindowTemplate = {
 };
 
 const struct WindowTemplate sWindowTemplate_ThreeOptions = {
-    .priority = 0x00,
+    .bg = 0x00,
     .tilemapLeft = 0x08,
     .tilemapTop = 0x05,
     .width = 0x0e,
@@ -222,7 +222,7 @@ const struct WindowTemplate sWindowTemplate_ThreeOptions = {
 };
 
 const struct WindowTemplate sWindowTemplate_YesNoBox = {
-    .priority = 0x00,
+    .bg = 0x00,
     .tilemapLeft = 0x17,
     .tilemapTop = 0x0f,
     .width = 0x06,
@@ -232,7 +232,7 @@ const struct WindowTemplate sWindowTemplate_YesNoBox = {
 };
 
 const struct WindowTemplate sWindowTemplate_7by8 = {
-    .priority = 0x00,
+    .bg = 0x00,
     .tilemapLeft = 0x16,
     .tilemapTop = 0x0c,
     .width = 0x07,
@@ -242,7 +242,7 @@ const struct WindowTemplate sWindowTemplate_7by8 = {
 };
 
 const struct WindowTemplate sWindowTemplate_7by6 = {
-    .priority = 0x00,
+    .bg = 0x00,
     .tilemapLeft = 0x16,
     .tilemapTop = 0x0e,
     .width = 0x07,
@@ -252,7 +252,7 @@ const struct WindowTemplate sWindowTemplate_7by6 = {
 };
 
 const struct WindowTemplate sWindowTemplate_7by4 = {
-    .priority = 0x00,
+    .bg = 0x00,
     .tilemapLeft = 0x16,
     .tilemapTop = 0x0f,
     .width = 0x07,

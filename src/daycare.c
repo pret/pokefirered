@@ -114,7 +114,7 @@ EWRAM_DATA static u16 sHatchedEggMotherMoves[4] = {0};
 
 static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 12,
     .tilemapTop = 1,
     .width = 17,
@@ -333,7 +333,7 @@ static const struct BgTemplate sBgTemplates_EggHatch[2] =
 static const struct WindowTemplate sWinTemplates_EggHatch[2] =
     {
         {
-            .priority = 0,
+            .bg = 0,
             .tilemapLeft = 2,
             .tilemapTop = 15,
             .width = 26,
@@ -346,7 +346,7 @@ static const struct WindowTemplate sWinTemplates_EggHatch[2] =
 
 static const struct WindowTemplate sYesNoWinTemplate =
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 9,
         .width = 6,

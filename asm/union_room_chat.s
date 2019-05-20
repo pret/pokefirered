@@ -4495,7 +4495,7 @@ _0812A642:
 	adds r0, r5, 0
 	movs r1, 0xA
 	movs r2, 0x2
-	bl sub_81501D0
+	bl DrawTextBorderInner
 	ldrb r3, [r4, 0x5]
 	adds r3, 0x8
 	lsls r3, 24

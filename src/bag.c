@@ -21,7 +21,7 @@ const struct TextColor gUnknown_84530B8[] = {
 };
 const struct WindowTemplate gUnknown_84530C4[] = {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0x0b,
         .tilemapTop = 0x01,
         .width = 0x12,
@@ -29,7 +29,7 @@ const struct WindowTemplate gUnknown_84530C4[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x008a
     }, {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0x05,
         .tilemapTop = 0x0e,
         .width = 0x19,
@@ -37,7 +37,7 @@ const struct WindowTemplate gUnknown_84530C4[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0162
     }, {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0x01,
         .tilemapTop = 0x01,
         .width = 0x09,
@@ -48,7 +48,7 @@ const struct WindowTemplate gUnknown_84530C4[] = {
 };
 const struct WindowTemplate gUnknown_84530E4[] = {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0x0b,
         .tilemapTop = 0x01,
         .width = 0x12,
@@ -56,7 +56,7 @@ const struct WindowTemplate gUnknown_84530E4[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x008a
     }, {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0x05,
         .tilemapTop = 0x0e,
         .width = 0x19,
@@ -64,7 +64,7 @@ const struct WindowTemplate gUnknown_84530E4[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0162
     }, {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0x01,
         .tilemapTop = 0x01,
         .width = 0x08,
@@ -75,7 +75,7 @@ const struct WindowTemplate gUnknown_84530E4[] = {
 };
 const struct WindowTemplate gUnknown_8453104[] = {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 15,
         .width = 5,
@@ -83,7 +83,7 @@ const struct WindowTemplate gUnknown_8453104[] = {
         .paletteNum = 0xF,
         .baseBlock = 0x242
     }, {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 9,
         .width = 12,
@@ -91,7 +91,7 @@ const struct WindowTemplate gUnknown_8453104[] = {
         .paletteNum = 0xF,
         .baseBlock = 0x242
     }, {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 8,
@@ -102,7 +102,7 @@ const struct WindowTemplate gUnknown_8453104[] = {
 };
 
 const struct WindowTemplate gUnknown_845311C = {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 23,
     .tilemapTop = 15,
     .width = 6,
@@ -112,7 +112,7 @@ const struct WindowTemplate gUnknown_845311C = {
 };
 
 const struct WindowTemplate gUnknown_8453124 = {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 9,
     .width = 6,
@@ -123,7 +123,7 @@ const struct WindowTemplate gUnknown_8453124 = {
 
 const struct WindowTemplate gUnknown_845312C[] = {
     {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x02,
         .tilemapTop = 0x0f,
         .width = 0x1a,
@@ -131,7 +131,7 @@ const struct WindowTemplate gUnknown_845312C[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x02a2
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x0f,
         .width = 0x0e,
@@ -139,7 +139,7 @@ const struct WindowTemplate gUnknown_845312C[] = {
         .paletteNum = 0x0c,
         .baseBlock = 0x02a2
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x0f,
         .width = 0x0f,
@@ -147,7 +147,7 @@ const struct WindowTemplate gUnknown_845312C[] = {
         .paletteNum = 0x0c,
         .baseBlock = 0x02da
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x0f,
         .width = 0x10,
@@ -155,7 +155,7 @@ const struct WindowTemplate gUnknown_845312C[] = {
         .paletteNum = 0x0c,
         .baseBlock = 0x0316
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x0f,
         .width = 0x17,
@@ -163,7 +163,7 @@ const struct WindowTemplate gUnknown_845312C[] = {
         .paletteNum = 0x0c,
         .baseBlock = 0x0356
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x16,
         .tilemapTop = 0x11,
         .width = 0x07,
@@ -171,7 +171,7 @@ const struct WindowTemplate gUnknown_845312C[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x020a
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x16,
         .tilemapTop = 0x0f,
         .width = 0x07,
@@ -179,7 +179,7 @@ const struct WindowTemplate gUnknown_845312C[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x020a
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x16,
         .tilemapTop = 0x0d,
         .width = 0x07,
@@ -187,7 +187,7 @@ const struct WindowTemplate gUnknown_845312C[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x020a
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x16,
         .tilemapTop = 0x0b,
         .width = 0x07,

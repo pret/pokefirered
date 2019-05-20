@@ -7,7 +7,7 @@
 
 enum
 {
-    WINDOW_PRIORITY,
+    WINDOW_BG,
     WINDOW_TILEMAP_LEFT,
     WINDOW_TILEMAP_TOP,
     WINDOW_WIDTH,
@@ -19,7 +19,7 @@ enum
 
 struct WindowTemplate
 {
-    u8 priority;
+    u8 bg;
     u8 tilemapLeft;
     u8 tilemapTop;
     u8 width;

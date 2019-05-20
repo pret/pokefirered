@@ -7,6 +7,7 @@ struct TextWindowGraphics
     const void * palette;
 };
 
+extern const u16 gUnknown_8470B0C[];
 extern const u16 gUnknown_8471A4C[];
 extern const u16 gUnknown_8471B6C[];
 extern const u16 gUnknown_8471DEC[][16];

@@ -2291,7 +2291,7 @@ void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
     }
 }
 
-const u16 gUnknown_84566A8[][16] = INCBIN_U16("data/graphics/unknown_84566a8.bin");
+const u16 gUnknown_84566A8[] = INCBIN_U16("data/graphics/unknown_84566a8.bin");
 
 const struct WindowTemplate gUnknown_8456928 = {
     0x00, 0, 15, 30, 5, 15, 0x008F
@@ -2349,7 +2349,7 @@ void sub_8112F18(u8 a0)
                 else
                     k = 5;
                 CpuCopy32(
-                    gUnknown_84566A8[k], // operand swap on "add" instruction
+                    (void *)gUnknown_84566A8 + 32 * k, // operand swap on "add" instruction
                     buffer + 32 * (i * width + j),
                     32
                 );

@@ -165,7 +165,7 @@ static const struct BgTemplate sBgTemplates[3] = {
 
 static const struct WindowTemplate sHelpDocsWindowTemplates1[] = {
     {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x00,
         .tilemapTop = 0x07,
         .width = 0x1e,
@@ -177,7 +177,7 @@ static const struct WindowTemplate sHelpDocsWindowTemplates1[] = {
 
 static const struct WindowTemplate sHelpDocsWindowTemplates2[] = {
     {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x03,
         .width = 0x18,
@@ -185,7 +185,7 @@ static const struct WindowTemplate sHelpDocsWindowTemplates2[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0001
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x0a,
         .width = 0x18,
@@ -193,7 +193,7 @@ static const struct WindowTemplate sHelpDocsWindowTemplates2[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0092
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x0f,
         .width = 0x18,
@@ -205,7 +205,7 @@ static const struct WindowTemplate sHelpDocsWindowTemplates2[] = {
 
 static const struct WindowTemplate sHelpDocsWindowTemplates3[] = {
     {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x03,
         .width = 0x18,
@@ -213,7 +213,7 @@ static const struct WindowTemplate sHelpDocsWindowTemplates3[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0001
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x08,
         .width = 0x18,
@@ -221,7 +221,7 @@ static const struct WindowTemplate sHelpDocsWindowTemplates3[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0062
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x06,
         .tilemapTop = 0x0d,
         .width = 0x18,
@@ -239,7 +239,7 @@ static const struct WindowTemplate *const sHelpDocsWindowTemplatePtrs[3] = {
 
 static const struct WindowTemplate sNewGameAdventureIntroWindowTemplates[] = {
     {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x01,
         .tilemapTop = 0x04,
         .width = 0x1c,
@@ -247,7 +247,7 @@ static const struct WindowTemplate sNewGameAdventureIntroWindowTemplates[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0001
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x12,
         .tilemapTop = 0x09,
         .width = 0x09,
@@ -255,7 +255,7 @@ static const struct WindowTemplate sNewGameAdventureIntroWindowTemplates[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0174
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x02,
         .tilemapTop = 0x02,
         .width = 0x06,
@@ -263,7 +263,7 @@ static const struct WindowTemplate sNewGameAdventureIntroWindowTemplates[] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0180
     }, {
-        .priority = 0x00,
+        .bg = 0x00,
         .tilemapLeft = 0x02,
         .tilemapTop = 0x02,
         .width = 0x0c,

@@ -773,30 +773,162 @@ EventScript_1A4EAA:: @ 81A4EAA
 EventScript_1A4EAE:: @ 81A4EAE
 	return
 
-
-
 EventScript_1A4EAF:: @ 81A4EAF
-	.incbin "baserom.gba", 0x1A4EAF, 0x5
+	special sub_806F67C
+	waitstate
+	return
 
 gUnknown_81A4EB4:: @ 81A4EB4
-	.incbin "baserom.gba", 0x1A4EB4, 0xD
+	lock
+	special sub_8080628
+	special ScrSpecial_EndTrainerApproach
+	waitstate
+	goto EventScript_1A4FC7
 
 gUnknown_81A4EC1:: @ 81A4EC1
-	.incbin "baserom.gba", 0x1A4EC1, 0x28
+	lock
+	faceplayer
+	applymovement VAR_LAST_TALKED, Movement_1A4FC5
+	waitmovement 0
+	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, EventScript_1A4EE8
+	special sub_8080628
+	special sub_8080398
+	goto EventScript_1A4FC7
+
+EventScript_1A4EE8:: @ 81A4EE8
+	ontrainerbattleend
 
 gUnknown_81A4EE9:: @ 81A4EE9
-	.incbin "baserom.gba", 0x1A4EE9, 0x38
+	lock
+	faceplayer
+	call EventScript_1A4FBA
+	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, EventScript_1A4F20
+	special CheckForAlivePartyMons
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, EventScript_1A4F19
+	special sub_8080628
+	special sub_8080398
+	goto EventScript_1A4FC7
+
+EventScript_1A4F19:: @ 81A4F19
+	special sub_8080618
+	waitmessage
+	waitbuttonpress
+	release
+	end
+
+EventScript_1A4F20:: @ 81A4F20
+	ontrainerbattleend
 
 gUnknown_81A4F21:: @ 81A4F21
-	.incbin "baserom.gba", 0x1A4F21, 0x1D
+	applymovement VAR_LAST_TALKED, Movement_1A4FC5
+	waitmovement 0
+	special sub_8080628
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if_eq EventScript_1A501A
+	battlebegin
+	ontrainerbattleend
 
 gUnknown_81A4F3E:: @ 81A4F3E
-	.incbin "baserom.gba", 0x1A4F3E, 0x35
+	call EventScript_1A4FBA
+	specialvar VAR_RESULT, sub_810CEB4
+	compare_var_to_value VAR_RESULT, 0
+	goto_if_eq EventScript_1A4F72
+	special sub_8080628
+	special sub_8080398
+	special sub_80805D8
+	waitmessage
+	waitbuttonpress
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if_eq EventScript_1A4FB8
+	special sub_80805B0
+	waitstate
+	releaseall
+	end
+
+EventScript_1A4F72:: @ 81A4F72
+	ontrainerbattleend
 
 gUnknown_81A4F73:: @ 81A4F73
-	.incbin "baserom.gba", 0x1A4F73, 0xAC
+	specialvar VAR_RESULT, sub_810CEB4
+	compare_var_to_value VAR_RESULT, 0
+	goto_if_eq EventScript_1A4FB0
+	special CheckForAlivePartyMons
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, EventScript_1A4FB1
+	special sub_8080628
+	special sub_8080398
+	special sub_80805D8
+	waitmessage
+	waitbuttonpress
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if_eq EventScript_1A4FB8
+	special sub_80805B0
+	waitstate
+	releaseall
+	end
 
+EventScript_1A4FB0:: @ 81A4FB0
+	ontrainerbattleend
 
+EventScript_1A4FB1:: @ 81A4FB1
+	special sub_8080618
+	waitmessage
+	waitbuttonpress
+	release
+	end
+
+EventScript_1A4FB8:: @ 81A4FB8
+	releaseall
+	end
+
+EventScript_1A4FBA:: @ 81A4FBA
+	applymovement VAR_LAST_TALKED, Movement_1A4FC5
+	waitmovement 0
+	return
+
+Movement_1A4FC5:: @ 81A4FC5
+	step_67
+	step_end
+
+EventScript_1A4FC7:: @ 81A4FC7
+	special sub_80805D8
+	waitmessage
+	waitbuttonpress
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if_eq EventScript_1A501A
+	battlebegin
+	specialvar VAR_RESULT, sub_80803CC
+	compare_var_to_value VAR_RESULT, 0
+	goto_if_eq EventScript_1A5017
+	compare_var_to_value VAR_RESULT, 2
+	goto_if_eq EventScript_1A5019
+	compare_var_to_value VAR_RESULT, 1
+	goto_if_eq EventScript_1A5019
+	compare_var_to_value VAR_RESULT, 6
+	goto_if_eq EventScript_1A5019
+	compare_var_to_value VAR_RESULT, 8
+	goto_if_eq EventScript_1A5019
+
+EventScript_1A5017:: @ 81A5017
+	releaseall
+	end
+
+EventScript_1A5019:: @ 81A5019
+	ontrainerbattleendgoto
+
+EventScript_1A501A:: @ 81A501A
+	special sub_80803FC
+	releaseall
+	end
 
 gStdScript_Message_WaitButton_AndRelease:: @ 81A501F
 	message 0x0
@@ -1304,20 +1436,7 @@ Text_1A644F:: @ 81A644F
 
 
 
-gUnknown_81A6481:: @ 81A6481
-    .incbin "baserom.gba", 0x1A6481, 0x99
 
-EventScript_1A651A:: @ 81A651A
-	.incbin "baserom.gba", 0x1A651A, 0x31
-
-gUnknown_81A654B:: @ 81A654B
-	.incbin "baserom.gba", 0x1A654B, 0x2D
-
-EventScript_1A6578:: @ 81A6578
-	.incbin "baserom.gba", 0x1A6578, 0xFD
-
-EventScript_1A6675:: @ 81A6675
-	.incbin "baserom.gba", 0x1A6675, 0x6
 
 gStdScript_0:: @ 81A667B
 	copyvar VAR_MON_BOX_POS, VAR_MON_BOX_ID

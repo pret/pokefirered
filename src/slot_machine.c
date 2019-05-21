@@ -9,6 +9,7 @@
 #include "overworld.h"
 #include "slot_machine.h"
 #include "menu.h"
+#include "random.h"
 #include "constants/songs.h"
 
 struct SlotMachineState
@@ -26,7 +27,8 @@ struct SlotMachineState
     s16 field_20[3];
     s16 field_26[3];
     s16 field_2C[3];
-    u8 filler_32[0x1E];
+    u16 field_32;
+    u8 filler_34[0x1C];
     u16 payout;
 };
 
@@ -547,34 +549,26 @@ s16 sub_81401B4(u16 whichReel)
     return position;
 }
 
-/*
 void sub_81401F0(u16 whichReel)
 {
-    s32 i;
+    s32 i, j;
     s16 r2;
-    s16 r6;
-    s16 sp0C = sub_81401B4(whichReel);
-    u32 r8 = 0;
-    u32 sp08;
-    u32 r10;
     u8 sp0[5];
+    s16 sp0C = sub_81401B4(whichReel);
+    s32 r8 = 0;
 
     if (sSlotMachineState->field_08 == 0 && whichReel == 0)
     {
-        sp08 = 0;
-        r10 = 0;
         for (i = 0; i < 5; i++)
         {
-            r6 = 0;
-            r2 = sp0C - i + 1;
-            for (; r6 < 3; r6++)
+            for (j = 0, r2 = sp0C - i + 1; j < 3; j++, r2++)
             {
                 if (r2 >= 21)
                     r2 = 0;
-                if (sub_81408F4(1, gUnknown_8464926[r10][r2]))
+                if (sub_81408F4(1, gUnknown_8464926[whichReel][r2]))
                     break;
             }
-            if (r6 == 3)
+            if (j == 3)
             {
                 sp0[r8] = i;
                 r8++;
@@ -583,10 +577,39 @@ void sub_81401F0(u16 whichReel)
     }
     else if (sSlotMachineState->field_08 != 1 || whichReel == 0)
     {
-        for (i = 0, r2 = whichReel + 1; i < 3; i++)
+        for (i = 0, r2 = sp0C + 1; i < 3; i++, r2++)
         {
-            if (sub_81408F4(sSlotMachineState->field_08, gUnknown_8464926[]))
+            if (r2 >= 21)
+                r2 = 0;
+            if (sub_81408F4(sSlotMachineState->field_08, gUnknown_8464926[whichReel][r2]))
+            {
+                sp0[0] = 0;
+                r8 = 1;
+                break;
+            }
+        }
+        for (i = 0, r2 = sp0C; i < 4; i++, r2--)
+        {
+            if (r2 < 0)
+                r2 = 20;
+            if (sub_81408F4(sSlotMachineState->field_08, gUnknown_8464926[whichReel][r2]))
+            {
+                sp0[r8] = i + 1;
+                r8++;
+            }
         }
     }
+    if (r8 == 0)
+    {
+        r2 = Random() % 5;
+    }
+    else
+    {
+        r2 = sp0[Random() % r8];
+    }
+    r2 = sp0C - r2;
+    if (r2 < 0)
+        r2 += 21;
+    sSlotMachineState->field_32 = whichReel;
+    sSlotMachineState->field_2C[whichReel] = r2;
 }
-*/

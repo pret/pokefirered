@@ -16,7 +16,7 @@ struct SlotMachineState
     MainCallback savedCallback;
     u16 machineidx;
     u16 field_06;
-    u8 filler_08[2];
+    u16 field_08;
     u16 slotRewardClass;
     u8 filler_0C[2];
     u16 bet;
@@ -46,11 +46,12 @@ void MainTask_ExitSlots(u8 taskId);
 static void SetMainTask(TaskFunc taskFunc);
 void sub_8140060(u8 taskId);
 void sub_8140148(void);
-void sub_814016C(u16 whichPosition, u16 whichReel);
-void sub_81401F0(u16 whichPosition);
-void sub_81403BC(u16 whichPosition);
-void sub_81404B8(u16 whichPosition);
+void sub_814016C(u16 whichReel, u16 whichReel2);
 bool32 sub_81401A0(u16);
+void sub_81401F0(u16 whichReel);
+void sub_81403BC(u16 whichReel);
+void sub_81404B8(u16 whichReel);
+bool32 sub_81408F4(u32 a0, u32 a1);
 void sub_81409B4(void);
 void sub_8140A70(void);
 u16 sub_8140A80(void);
@@ -60,6 +61,8 @@ void sub_8141094(void);
 void sub_8141148(u16 a0, u8 a1);
 bool32 sub_8141180(u8 a0);
 void sub_8141C30(u8, u8);
+
+extern const u8 gUnknown_8464926[][21];
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
 {
@@ -511,18 +514,18 @@ void sub_8140148(void)
     }
 }
 
-void sub_814016C(u16 whichPosition, u16 whichReel)
+void sub_814016C(u16 whichReel, u16 whichReel2)
 {
-    switch (whichReel)
+    switch (whichReel2)
     {
     case 0:
-        sub_81401F0(whichPosition);
+        sub_81401F0(whichReel);
         break;
     case 1:
-        sub_81403BC(whichPosition);
+        sub_81403BC(whichReel);
         break;
     case 2:
-        sub_81404B8(whichPosition);
+        sub_81404B8(whichReel);
         break;
     }
 }
@@ -543,3 +546,47 @@ s16 sub_81401B4(u16 whichReel)
     }
     return position;
 }
+
+/*
+void sub_81401F0(u16 whichReel)
+{
+    s32 i;
+    s16 r2;
+    s16 r6;
+    s16 sp0C = sub_81401B4(whichReel);
+    u32 r8 = 0;
+    u32 sp08;
+    u32 r10;
+    u8 sp0[5];
+
+    if (sSlotMachineState->field_08 == 0 && whichReel == 0)
+    {
+        sp08 = 0;
+        r10 = 0;
+        for (i = 0; i < 5; i++)
+        {
+            r6 = 0;
+            r2 = sp0C - i + 1;
+            for (; r6 < 3; r6++)
+            {
+                if (r2 >= 21)
+                    r2 = 0;
+                if (sub_81408F4(1, gUnknown_8464926[r10][r2]))
+                    break;
+            }
+            if (r6 == 3)
+            {
+                sp0[r8] = i;
+                r8++;
+            }
+        }
+    }
+    else if (sSlotMachineState->field_08 != 1 || whichReel == 0)
+    {
+        for (i = 0, r2 = whichReel + 1; i < 3; i++)
+        {
+            if (sub_81408F4(sSlotMachineState->field_08, gUnknown_8464926[]))
+        }
+    }
+}
+*/

@@ -27,8 +27,9 @@ struct SlotMachineState
     s16 field_20[3];
     s16 field_26[3];
     s16 field_2C[3];
-    u16 field_32;
-    u8 filler_34[0x1C];
+    s16 field_32[3];
+    u32 field_38;
+    u8 filler_3C[0x14];
     u16 payout;
 };
 
@@ -54,6 +55,8 @@ void sub_81401F0(u16 whichReel);
 void sub_81403BC(u16 whichReel);
 void sub_81404B8(u16 whichReel);
 bool32 sub_81408F4(u32 a0, u32 a1);
+bool32 sub_814054C(u32, u32, u32, u32, u32);
+bool32 sub_81406E8(u32, u32, u32);
 void sub_81409B4(void);
 void sub_8140A70(void);
 u16 sub_8140A80(void);
@@ -610,6 +613,91 @@ void sub_81401F0(u16 whichReel)
     r2 = sp0C - r2;
     if (r2 < 0)
         r2 += 21;
-    sSlotMachineState->field_32 = whichReel;
+    sSlotMachineState->field_32[0] = whichReel;
+    sSlotMachineState->field_2C[whichReel] = r2;
+}
+
+void sub_81403BC(u16 whichReel)
+{
+    s16 r2, r4, r7, sp10;
+    s32 i;
+    u32 r6;
+    u8 sp4[5];
+
+    r7 = sSlotMachineState->field_32[0];
+    r4 = sSlotMachineState->field_20[r7] + 1;
+    if (r4 >= 21)
+        r4 = 0;
+    sp10 = sub_81401B4(whichReel);
+    r2 = sp10 + 1;
+    if (r2 >= 21)
+        r2 = 0;
+    r6 = 0;
+    for (i = 0; i < 5; i++)
+    {
+        if (sub_814054C(r7, r4, whichReel, r2, sSlotMachineState->field_08))
+        {
+            sp4[r6] = i;
+            r6++;
+        }
+        r2--;
+        if (r2 < 0)
+            r2 = 20;
+    }
+    if (r6 == 0)
+    {
+        sSlotMachineState->field_38 = 0;
+        if (sSlotMachineState->field_08 == 5 || sSlotMachineState->field_08 == 6)
+            r2 = 4;
+        else
+            r2 = 0;
+    }
+    else
+    {
+        sSlotMachineState->field_38 = 1;
+        r2 = sp4[0];
+    }
+    r2 = sp10 - r2;
+    if (r2 < 0)
+        r2 += 21;
+    sSlotMachineState->field_32[1] = whichReel;
+    sSlotMachineState->field_2C[whichReel] = r2;
+}
+
+void sub_81404B8(u16 whichReel)
+{
+    s32 i;
+    u32 r6;
+    s32 r9;
+    s32 r4;
+    s32 r2;
+    u8 sp0[5];
+
+    r9 = sub_81401B4(whichReel);
+    r4 = r9;
+    r6 = 0;
+    for (i = 0; i < 5; i++)
+    {
+        if (sub_81406E8(whichReel, r4, sSlotMachineState->field_08))
+        {
+            sp0[r6] = i;
+            r6++;
+        }
+        r4--;
+        if (r4 < 0)
+            r4 = 20;
+    }
+    if (r6 == 0)
+    {
+        if (sSlotMachineState->field_08 == 5 || sSlotMachineState->field_08 == 6)
+            r2 = 4;
+        else
+            r2 = 0;
+    }
+    else
+        r2 = sp0[0];
+    r2 = r9 - r2;
+    if (r2 < 0)
+        r2 += 21;
     sSlotMachineState->field_2C[whichReel] = r2;
 }

@@ -54,9 +54,9 @@ bool32 sub_81401A0(u16);
 void sub_81401F0(u16 whichReel);
 void sub_81403BC(u16 whichReel);
 void sub_81404B8(u16 whichReel);
-bool32 sub_81408F4(u32 a0, u32 a1);
-bool32 sub_814054C(u32, u32, u32, u32, u32);
-bool32 sub_81406E8(u32, u32, u32);
+bool32 sub_814054C(s32, s32, s32, s32, s32);
+bool32 sub_81406E8(s32, s32, s32);
+bool32 sub_81408F4(s32, s32);
 void sub_81409B4(void);
 void sub_8140A70(void);
 u16 sub_8140A80(void);
@@ -67,6 +67,7 @@ void sub_8141148(u16 a0, u8 a1);
 bool32 sub_8141180(u8 a0);
 void sub_8141C30(u8, u8);
 
+extern const u8 gUnknown_8464890[][2];
 extern const u8 gUnknown_8464926[][21];
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
@@ -621,7 +622,7 @@ void sub_81403BC(u16 whichReel)
 {
     s16 r2, r4, r7, sp10;
     s32 i;
-    u32 r6;
+    s32 r6;
     u8 sp4[5];
 
     r7 = sSlotMachineState->field_32[0];
@@ -667,7 +668,7 @@ void sub_81403BC(u16 whichReel)
 void sub_81404B8(u16 whichReel)
 {
     s32 i;
-    u32 r6;
+    s32 r6;
     s32 r9;
     s32 r4;
     s32 r2;
@@ -700,4 +701,78 @@ void sub_81404B8(u16 whichReel)
     if (r2 < 0)
         r2 += 21;
     sSlotMachineState->field_2C[whichReel] = r2;
+}
+
+bool32 sub_814054C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
+{
+    s32 i;
+    s32 r5;
+    u8 sp0[9] = {};
+    
+    for (i = 0; i < 9; i++)
+        sp0[i] = 7;
+    
+    for (i = 0; i < 3; i++)
+    {
+        sp0[3 * a0 + i] = gUnknown_8464926[a0][a1];
+        sp0[3 * a2 + i] = gUnknown_8464926[a2][a3];
+        a1++;
+        if (a1 >= 21)
+            a1 = 0;
+        a3++;
+        if (a3 >= 21)
+            a3 = 0;
+    }
+
+    switch (a4)
+    {
+    case 0:
+        for (i = 0; i < 3; i++)
+        {
+            if (sub_81408F4(1, sp0[i]))
+                return FALSE;
+        }
+        for (i = 0; i < 15; i++)
+        {
+            if (sp0[gUnknown_8464890[i][0]] == sp0[gUnknown_8464890[i][1]])
+                return TRUE;
+        }
+        return FALSE;
+    case 1:
+        if (a0 == 0 || a2 == 0)
+        {
+            if (a0 == 1 || a2 == 1)
+            {
+                for (i = 0; i < 15; i += 3)
+                {
+                    if (sp0[gUnknown_8464890[i][0]] == sp0[gUnknown_8464890[i][1]])
+                        return FALSE;
+                }
+            }
+            for (i = 0; i < 3; i++)
+            {
+                if (sub_81408F4(a4, sp0[i]))
+                    return TRUE;
+            }
+            return FALSE;
+        }
+        else
+            return TRUE;
+    case 2:
+        if (a0 == 2 || a2 == 2)
+        {
+            for (i = 0; i < 9; i++)
+            {
+                if (sub_81408F4(a4, sp0[i]))
+                    return TRUE;
+            }
+            return FALSE; // wrong level
+        }
+    }
+    for (i = 0; i < 15; i++)
+    {
+        if (sp0[gUnknown_8464890[i][0]] == sp0[gUnknown_8464890[i][1]] && sub_81408F4(a4, sp0[gUnknown_8464890[i][0]]))
+            return TRUE;
+    }
+    return FALSE;
 }

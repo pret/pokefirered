@@ -1435,6 +1435,182 @@ Text_1A644F:: @ 81A644F
 	.string "once. Is that okay?$"
 
 
+gUnknown_81A6481:: @ 81A6481
+	setflag FLAG_0x02B
+	setflag FLAG_0x02C
+	setflag FLAG_0x033
+	setflag FLAG_0x092
+	setflag FLAG_0x035
+	setflag FLAG_0x036
+	setflag FLAG_0x037
+	setflag FLAG_0x03C
+	setflag FLAG_0x03D
+	setflag FLAG_0x0A1
+	setflag FLAG_0x03F
+	setflag FLAG_0x04F
+	setflag FLAG_0x05A
+	setflag FLAG_0x0A3
+	setflag FLAG_0x0A4
+	setflag FLAG_0x062
+	setflag FLAG_0x06B
+	setflag FLAG_0x0A2
+	setflag FLAG_0x08C
+	setflag FLAG_0x06C
+	setflag FLAG_0x06D
+	setflag FLAG_0x06E
+	setflag FLAG_0x06F
+	setflag FLAG_0x075
+	setflag FLAG_0x074
+	setflag FLAG_0x07B
+	setflag FLAG_0x07C
+	setflag FLAG_0x07D
+	setflag FLAG_0x076
+	setflag FLAG_0x091
+	setflag FLAG_0x097
+	setflag FLAG_0x090
+	setflag FLAG_0x094
+	setflag FLAG_0x095
+	setflag FLAG_0x096
+	setflag FLAG_0x099
+	setflag FLAG_0x0A5
+	setflag FLAG_0x0A6
+	setflag FLAG_0x0A7
+	setflag FLAG_0x0A8
+	setflag FLAG_0x0A9
+	setflag FLAG_0x0AA
+	setflag FLAG_0x0AB
+	setflag FLAG_0x0AC
+	setflag FLAG_0x09D
+	setflag FLAG_0x09E
+	setflag FLAG_0x09F
+	setflag FLAG_0x0A0
+	setflag FLAG_0x0AE
+	setvar VAR_MIRAGE_RND_L, 500
+	end
+
+EventScript_1A651A:: @ 81A651A
+	clearflag FLAG_0x09D
+	call EventScript_1A6551
+	special sub_81130A8
+	specialvar VAR_RESULT, sub_806E25C
+	compare_var_to_value VAR_RESULT, 0
+	call_if 1, EventScript_1A653B
+	call EventScript_1A6541
+	return
+
+EventScript_1A653B:: @ 81A653B
+	setvar VAR_MAP_SCENE_PALLET_TOWN, 2
+	return
+
+EventScript_1A6541:: @ 81A6541
+	clearflag FLAG_0x2F5
+	clearflag FLAG_0x2F6
+	clearflag FLAG_0x2F7
+	return
+
+gUnknown_81A654B:: @ 81A654B
+	call EventScript_1A6551
+	end
+
+EventScript_1A6551:: @ 81A6551
+	clearflag FLAG_0x4B8
+	clearflag FLAG_0x4B9
+	clearflag FLAG_0x4BA
+	clearflag FLAG_0x4BB
+	clearflag FLAG_0x4BC
+	cleartrainerflag 438
+	cleartrainerflag 439
+	cleartrainerflag 440
+	cleartrainerflag 739
+	cleartrainerflag 740
+	cleartrainerflag 741
+	setvar VAR_0x4068, 0
+	return
+
+EventScript_1A6578:: @ 81A6578
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
+	message Text_1A5483
+	waitmessage
+	multichoice 19, 8, 0, 2
+	switch VAR_RESULT
+	case 0, EventScript_1A65B8
+	case 1 EventScript_1A6663
+	case 127, EventScript_1A6663
+	end
+
+EventScript_1A65B8:: @ 81A65B8
+	incrementgamestat 15
+	message Text_1A54E1
+	waitmessage
+	call EventScript_1A65CE
+	special sub_80CC524
+	goto EventScript_1A65EC
+	end
+
+EventScript_1A65CE:: @ 81A65CE
+	applymovement VAR_LAST_TALKED, Movement_1A75E7
+	waitmovement 0
+	dofieldeffect 25
+	waitfieldeffect 25
+	applymovement VAR_LAST_TALKED, Movement_1A75ED
+	waitmovement 0
+	special sp000_heal_pokemon
+	return
+
+EventScript_1A65EC:: @ 81A65EC
+	specialvar VAR_RESULT, sub_80CD074
+	compare_var_to_value VAR_RESULT, 0
+	goto_if_eq EventScript_1A661D
+	specialvar VAR_RESULT, sp182_move_string
+	copyvar VAR_0x8008, VAR_RESULT
+	compare_var_to_value VAR_0x8008, 0
+	goto_if_eq EventScript_1A661D
+	compare_var_to_value VAR_0x8008, 1
+	goto_if_eq EventScript_1A6636
+	end
+
+EventScript_1A661D:: @ 81A661D
+	message Text_1A552B
+	waitmessage
+	applymovement VAR_LAST_TALKED, Movement_1A666C
+	waitmovement 0
+	loadword 0, Text_1A5511
+	callstd 4
+	return
+
+EventScript_1A6636:: @ 81A6636
+	checkflag 2114
+	goto_if_eq EventScript_1A661D
+	loadword 0, Text_1A552B
+	callstd 4
+	setflag 2114
+	message Text_1BCCCA
+	waitmessage
+	applymovement VAR_LAST_TALKED, Movement_1A666C
+	waitmovement 0
+	loadword 0, Text_1A5511
+	callstd 4
+	return
+
+EventScript_1A6663:: @ 81A6663
+	loadword 0, Text_1A5511
+	callstd 4
+	return
+
+Movement_1A666C:: @ 81A666C
+	step_5b
+	step_1a
+	step_end
+
+EventScript_1A666F:: @ 81A666F
+	copyvar VAR_MON_BOX_POS, VAR_MON_BOX_ID
+	return
+
+EventScript_1A6675:: @ 81A6675
+	copyvar VAR_MON_BOX_ID, VAR_MON_BOX_POS
+	return
 
 
 
@@ -3341,7 +3517,10 @@ gUnknown_81BC50D:: @ 81BC50D
 	.incbin "baserom.gba", 0x1BC50D, 0x3F
 
 gUnknown_81BC54C:: @ 81BC54C
-	.incbin "baserom.gba", 0x1BC54C, 0x19C7
+	.incbin "baserom.gba", 0x1BC54C, 0x77E
+
+Text_1BCCCA:: @ 81BCCCA
+	.incbin "baserom.gba", 0x1BCCCA, 0x1249
 
 CeladonCity_EventScript_1BDF13:: @ 81BDF13
 CeladonCity_Gym_EventScript_1BDF13:: @ 81BDF13

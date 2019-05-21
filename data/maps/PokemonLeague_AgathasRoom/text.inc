@@ -1,0 +1,41 @@
+gUnknown_817844D:: @ 817844D
+    .string "I am AGATHA of the ELITE FOUR.\p"
+    .string "I hear OAK's taken a lot of\n"
+    .string "interest in you, child.\p"
+    .string "That old duff was once tough and\n"
+    .string "handsome.\p"
+    .string "But that was decades ago.\n"
+    .string "He's a shadow of his former self.\p"
+    .string "Now he just wants to fiddle with\n"
+    .string "his POKéDEX.\p"
+    .string "He's wrong.\n"
+    .string "POKéMON are for battling!\p"
+    .string "{PLAYER}! I'll show you how a real\n"
+    .string "TRAINER battles!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+
+gUnknown_817858D:: @ 817858D
+    .string "I am AGATHA of the ELITE FOUR.\p"
+    .string "You're the child that OAK's taken\n"
+    .string "under his wing, aren't you?\p"
+    .string "That old duff was once tough and\n"
+    .string "handsome.\p"
+    .string "But that was decades ago.\n"
+    .string "He's a shadow of his former self.\p"
+    .string "Now he just wants to fiddle with\n"
+    .string "his POKéDEX.\p"
+    .string "He's wrong.\n"
+    .string "POKéMON are for battling!\p"
+    .string "{PLAYER}! I'll show you how a real\n"
+    .string "TRAINER battles!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+
+Text_1786D7:: @ 81786D7
+    .string "Oh, my!\n"
+    .string "You're something special, child!$"
+
+gUnknown_8178700:: @ 8178700
+    .string "You win!\p"
+    .string "I see what the old duff sees in\n"
+    .string "you now.\p"
+    .string "I have nothing else to say.\n"
+    .string "Run along now, child!$"
+

@@ -128,7 +128,7 @@ gMapSecName_UndergroundPath_2::
 	.string "UNDERGROUND PATH$"
 
 gMapSecName_DiglettsCave::
-	.string "DIGLETT’S CAVE$"
+	.string "DIGLETT'S CAVE$"
 
 gMapSecName_VictoryRoad::
 	.string "VICTORY ROAD$"

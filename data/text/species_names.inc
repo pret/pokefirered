@@ -81,7 +81,7 @@
 	.string "SLOWBRO$", 11
 	.string "MAGNEMITE$", 11
 	.string "MAGNETON$", 11
-	.string "FARFETCH’D$", 11
+	.string "FARFETCH'D$", 11
 	.string "DODUO$", 11
 	.string "DODRIO$", 11
 	.string "SEEL$", 11

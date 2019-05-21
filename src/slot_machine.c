@@ -22,7 +22,7 @@ struct SlotMachineState
     u16 bet;
     u8 field_10;
     u8 field_11;
-    TaskFunc field_14[3];
+    bool32 field_14[3];
     s16 field_20[3];
     s16 field_26[3];
     s16 field_2C[3];
@@ -46,7 +46,10 @@ void MainTask_ExitSlots(u8 taskId);
 static void SetMainTask(TaskFunc taskFunc);
 void sub_8140060(u8 taskId);
 void sub_8140148(void);
-void sub_814016C(u16, u16);
+void sub_814016C(u16 whichPosition, u16 whichReel);
+void sub_81401F0(u16 whichPosition);
+void sub_81403BC(u16 whichPosition);
+void sub_81404B8(u16 whichPosition);
 bool32 sub_81401A0(u16);
 void sub_81409B4(void);
 void sub_8140A70(void);
@@ -85,10 +88,10 @@ void sub_813F84C(struct SlotMachineState * ptr)
     // for whatever reason, the loop does not use the ptr param
     for (i = 0; i < 3; i++)
     {
-        sSlotMachineState->field_14[i] = NULL;
-        sSlotMachineState->field_20[i] =    0;
-        sSlotMachineState->field_26[i] =    0;
-        sSlotMachineState->field_2C[i] =   21;
+        sSlotMachineState->field_14[i] = FALSE;
+        sSlotMachineState->field_20[i] =     0;
+        sSlotMachineState->field_26[i] =     0;
+        sSlotMachineState->field_2C[i] =    21;
     }
 }
 
@@ -476,7 +479,7 @@ void sub_8140060(u8 taskId)
 
     for (i = 0; i < 3; i++)
     {
-        if (sSlotMachineState->field_14[i] != NULL || sSlotMachineState->field_26[i] != 0)
+        if (sSlotMachineState->field_14[i] || sSlotMachineState->field_26[i] != 0)
         {
             if (sSlotMachineState->field_26[i] != 0 || sSlotMachineState->field_20[i] != sSlotMachineState->field_2C[i])
             {
@@ -492,8 +495,51 @@ void sub_8140060(u8 taskId)
                     continue;
             }
             sSlotMachineState->field_2C[i] = 21;
-            sSlotMachineState->field_14[i] = NULL;
+            sSlotMachineState->field_14[i] = FALSE;
         }
     }
     sub_8140D7C(sSlotMachineState->field_20, sSlotMachineState->field_26);
+}
+
+void sub_8140148(void)
+{
+    s32 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        sSlotMachineState->field_14[i] = TRUE;
+    }
+}
+
+void sub_814016C(u16 whichPosition, u16 whichReel)
+{
+    switch (whichReel)
+    {
+    case 0:
+        sub_81401F0(whichPosition);
+        break;
+    case 1:
+        sub_81403BC(whichPosition);
+        break;
+    case 2:
+        sub_81404B8(whichPosition);
+        break;
+    }
+}
+
+bool32 sub_81401A0(u16 whichReel)
+{
+    return sSlotMachineState->field_14[whichReel];
+}
+
+s16 sub_81401B4(u16 whichReel)
+{
+    s16 position = sSlotMachineState->field_20[whichReel];
+    if (sSlotMachineState->field_26[whichReel] != 0)
+    {
+        position--;
+        if (position < 0)
+            position = 20;
+    }
+    return position;
 }

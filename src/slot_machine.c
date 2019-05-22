@@ -19,7 +19,7 @@ struct SlotMachineState
     u16 field_06;
     u16 field_08;
     u16 slotRewardClass;
-    u8 filler_0C[2];
+    u16 field_0C;
     u16 bet;
     u8 field_10;
     u8 field_11;
@@ -29,7 +29,7 @@ struct SlotMachineState
     s16 field_2C[3];
     s16 field_32[3];
     u32 field_38;
-    u8 filler_3C[0x14];
+    u32 field_3C[5];
     u16 payout;
 };
 
@@ -98,11 +98,11 @@ const u8 gUnknown_84648AE[][3] = {
 };
 
 const u8 gUnknown_84648BD[][4] = {
-    {0x00, 0x04, 0x08, 0x03},
-    {0x00, 0x03, 0x06, 0x02},
-    {0x01, 0x04, 0x07, 0x01},
-    {0x02, 0x05, 0x08, 0x02},
-    {0x02, 0x04, 0x06, 0x03}
+    {0x00, 0x04, 0x08, 0x03}, // tl-br
+    {0x00, 0x03, 0x06, 0x02}, // top row
+    {0x01, 0x04, 0x07, 0x01}, // middle row
+    {0x02, 0x05, 0x08, 0x02}, // bottom row
+    {0x02, 0x04, 0x06, 0x03}  // bl-tr
 };
 
 const u16 gUnknown_84648D2[][7] = {
@@ -1195,3 +1195,130 @@ bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
                 "_081408F0: .4byte gUnknown_84648AE");
 }
 #endif //NONMATCHING
+
+bool32 sub_81408F4(s32 a0, s32 a1)
+{
+    switch (a0)
+    {
+    case 0:
+        return a1 ^ 4 ? TRUE : FALSE;
+    case 1:
+    case 2:
+        return a1 == 4 ? TRUE : FALSE;
+    case 3:
+        return a1 == 5 || a1 == 6 ? TRUE : FALSE;
+    case 4:
+        return a1 == 2 || a1 == 3 ? TRUE : FALSE;
+    case 5:
+        return a1 == 1 ? TRUE : FALSE;
+    case 6:
+        return a1 == 0 ? TRUE : FALSE;
+    default:
+        return FALSE;
+    }
+}
+
+u8 sub_814096C(s32 a0)
+{
+    switch (a0)
+    {
+    default:
+    case 4:
+        return 1;
+    case 5:
+    case 6:
+        return 3;
+    case 2:
+    case 3:
+        return 4;
+    case 1:
+        return 5;
+    case 0:
+        return 6;
+    }
+}
+
+void sub_81409B4(void)
+{
+    u16 r2 = Random() / 4;
+    s32 i;
+    const u16 * r4 = gUnknown_84648D2[sSlotMachineState->machineidx];
+    for (i = 0; i < 6; i++)
+    {
+        if (r2 < r4[i])
+            break;
+    }
+    if (sSlotMachineState->field_08 < 5)
+    {
+        if (sSlotMachineState->field_0C == 0)
+        {
+            if ((Random() & 0x3FFF) < r4[6])
+                sSlotMachineState->field_0C = (Random() & 1) ? 5 : 60;
+        }
+        if (sSlotMachineState->field_0C != 0)
+        {
+            if (i == 0 && (Random() & 0x3FFF) < 0x2CCC)
+                sSlotMachineState->field_0C = (Random() & 1) ? 5 : 60;
+            sSlotMachineState->field_0C--;
+        }
+        sSlotMachineState->field_08 = i;
+    }
+}
+
+void sub_8140A70(void)
+{
+    sSlotMachineState->field_08 = 0;
+}
+
+u16 sub_8140A80(void)
+{
+    u8 sp0[9] = {};
+    s32 i;
+    s32 r4, r3, r2;
+    s32 r9;
+
+    for (i = 0; i < 5; i++)
+        sSlotMachineState->field_3C[i] = 0;
+
+    r9 = 0;
+    r4 = sSlotMachineState->field_20[0];
+    r3 = sSlotMachineState->field_20[1];
+    r2 = sSlotMachineState->field_20[2];
+
+    for (i = 0; i < 3; i++)
+    {
+        r4++;
+        if (r4 >= 21)
+            r4 = 0;
+        r3++;
+        if (r3 >= 21)
+            r3 = 0;
+        r2++;
+        if (r2 >= 21)
+            r2 = 0;
+        sp0[0 * 3 + i] = gUnknown_8464926[0][r4];
+        sp0[1 * 3 + i] = gUnknown_8464926[1][r3];
+        sp0[2 * 3 + i] = gUnknown_8464926[2][r2];
+    }
+    sSlotMachineState->payout = 0;
+    for (i = 0; i < 5; i++)
+    {
+        if (sSlotMachineState->bet >= gUnknown_84648BD[i][3])
+        {
+            if (sub_81408F4(1, sp0[gUnknown_84648BD[i][0]]))
+                r3 = sub_81408F4(2, sp0[gUnknown_84648BD[i][1]]) ? 2 : 1;
+            else if (sp0[gUnknown_84648BD[i][0]] == sp0[gUnknown_84648BD[i][1]] && sp0[gUnknown_84648BD[i][0]] == sp0[gUnknown_84648BD[i][2]])
+                r3 = sub_814096C(sp0[gUnknown_84648BD[i][0]]);
+            else
+                r3 = 0;
+            if (r3 != 0)
+            {
+                sSlotMachineState->field_3C[i] = 1;
+                sSlotMachineState->payout += gUnknown_8464966[r3];
+            }
+            if (r3 > r9)
+                r9 = r3;
+        }
+    }
+    return r9;
+}

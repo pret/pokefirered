@@ -416,6 +416,7 @@ SECTIONS {
         data/berry_pouch.o(.rodata);
         data/itemfinder.o(.rodata);
         data/buy_menu_helpers.o(.rodata);
+        src/slot_machine.o(.rodata);
         data/slot_machine.o(.rodata);
         src/roamer.o(.rodata);
         src/mystery_gift_menu.o(.rodata);

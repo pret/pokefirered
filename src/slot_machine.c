@@ -67,8 +67,68 @@ void sub_8141148(u16 a0, u8 a1);
 bool32 sub_8141180(u8 a0);
 void sub_8141C30(u8, u8);
 
-extern const u8 gUnknown_8464890[][2];
-extern const u8 gUnknown_8464926[][21];
+const u8 gUnknown_8464890[][2] = {
+    {0x00, 0x03},
+    {0x00, 0x06},
+    {0x03, 0x06},
+
+    {0x01, 0x04},
+    {0x01, 0x07},
+    {0x04, 0x07},
+
+    {0x02, 0x05},
+    {0x02, 0x08},
+    {0x05, 0x08},
+
+    {0x00, 0x04},
+    {0x00, 0x08},
+    {0x04, 0x08},
+
+    {0x02, 0x04},
+    {0x02, 0x06},
+    {0x04, 0x06}
+};
+
+const u8 gUnknown_84648AE[][3] = {
+    {0x00, 0x03, 0x06}, // top row
+    {0x01, 0x04, 0x07}, // middle row
+    {0x02, 0x05, 0x08}, // bottom row
+    {0x00, 0x04, 0x08}, // tl-br
+    {0x02, 0x04, 0x06}  // bl-tr
+};
+
+const u8 gUnknown_84648BD[][4] = {
+    {0x00, 0x04, 0x08, 0x03},
+    {0x00, 0x03, 0x06, 0x02},
+    {0x01, 0x04, 0x07, 0x01},
+    {0x02, 0x05, 0x08, 0x02},
+    {0x02, 0x04, 0x06, 0x03}
+};
+
+const u16 gUnknown_84648D2[][7] = {
+    {0x1fa1, 0x2eab, 0x3630, 0x39f3, 0x3bd4, 0x3bfc, 0x0049},
+    {0x1f97, 0x2ea2, 0x3627, 0x39e9, 0x3bca, 0x3bf8, 0x0049},
+    {0x1f91, 0x2e9b, 0x3620, 0x39e3, 0x3bc4, 0x3bf4, 0x0049},
+    {0x1f87, 0x2e92, 0x3617, 0x39d9, 0x3bba, 0x3bef, 0x0050},
+    {0x1f7f, 0x2e89, 0x360e, 0x39d1, 0x3bb2, 0x3bea, 0x0050},
+    {0x1fc9, 0x2efc, 0x3696, 0x3a63, 0x3c49, 0x3c8b, 0x0073},
+};
+
+const u8 gUnknown_8464926[][21] = {
+    {0x00, 0x03, 0x04, 0x01, 0x02, 0x06, 0x02, 0x05, 0x00, 0x06, 0x03, 0x01, 0x04, 0x02, 0x06, 0x00, 0x05, 0x02, 0x01, 0x06, 0x02},
+    {0x00, 0x05, 0x04, 0x03, 0x01, 0x05, 0x04, 0x03, 0x02, 0x05, 0x04, 0x03, 0x00, 0x05, 0x04, 0x01, 0x03, 0x06, 0x05, 0x03, 0x04},
+    {0x00, 0x03, 0x06, 0x05, 0x02, 0x03, 0x06, 0x05, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x01},
+};
+
+const u16 gUnknown_8464966[] = {
+      0,
+      2,
+      6,
+      8,
+     15,
+    100,
+    300
+};
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
 {
@@ -776,3 +836,362 @@ bool32 sub_814054C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
     }
     return FALSE;
 }
+
+#ifdef NONMATCHING
+bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
+{
+    u8 sp0[9];
+    s32 r3, r6;
+    s32 i;
+
+    r6 = sSlotMachineState->field_20[sSlotMachineState->field_32[0]] + 1;
+    r3 = sSlotMachineState->field_20[sSlotMachineState->field_32[1]] + 1;
+    a1++;
+    if (r6 >= 21)
+        r6 = 0;
+    if (r3 >= 21)
+        r3 = 0;
+    if (a1 >= 21)
+        a1 = 0;
+    for (i = 0; i < 3; i++)
+    {
+        sp0[sSlotMachineState->field_32[0] * 3 + i] = gUnknown_8464926[sSlotMachineState->field_32[0]][r6];
+        sp0[sSlotMachineState->field_32[1] * 3 + i] = gUnknown_8464926[sSlotMachineState->field_32[1]][r3];
+        sp0[a0 * 3 + i] = gUnknown_8464926[a0][a1];
+        r6++;
+        if (r6 >= 21)
+            r6 = 0;
+        r3++;
+        if (r3 >= 21)
+            r3 = 0;
+        a1++;
+        if (a1 >= 21)
+            a1++;
+    }
+    switch (a2)
+    {
+    case 0:
+        for (i = 0; i < 3; i++)
+        {
+            if (sub_81408F4(1, sp0[i]))
+                return FALSE;
+        }
+        for (i = 0; i < 5; i++)
+        {
+            if (sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][1]] && sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][2]])
+                return FALSE;
+        }
+        return TRUE;
+    case 1:
+        for (i = 0; i < 5; i++)
+        {
+            if (sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][1]] && sub_81408F4(a2, sp0[gUnknown_84648AE[i][0]]))
+                return FALSE;
+        }
+        for (i = 0; i < 3; i++)
+        {
+            if (sub_81408F4(a2, sp0[i]))
+                return TRUE;
+        }
+        return FALSE;
+    case 2:
+        for (i = 0; i < 5; i++)
+        {
+            if (sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][1]] && sub_81408F4(a2, sp0[gUnknown_84648AE[i][0]]))
+                return TRUE;
+        }
+        return FALSE;
+    }
+    for (i = 0; i < 5; i++)
+    {
+        if (sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][1]] && sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][2]] && sub_81408F4(a2, sp0[gUnknown_84648AE[i][0]]))
+            return TRUE;
+    }
+    return FALSE;
+}
+#else
+NAKED
+bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tsub sp, 0x10\n"
+                "\tadds r7, r0, 0\n"
+                "\tadds r5, r1, 0\n"
+                "\tmov r8, r2\n"
+                "\tldr r0, _081407C8 @ =sSlotMachineState\n"
+                "\tldr r2, [r0]\n"
+                "\tmovs r1, 0x32\n"
+                "\tldrsh r0, [r2, r1]\n"
+                "\tlsls r0, 1\n"
+                "\tadds r1, r2, 0\n"
+                "\tadds r1, 0x20\n"
+                "\tadds r0, r1, r0\n"
+                "\tmovs r3, 0\n"
+                "\tldrsh r0, [r0, r3]\n"
+                "\tadds r6, r0, 0x1\n"
+                "\tmovs r3, 0x34\n"
+                "\tldrsh r0, [r2, r3]\n"
+                "\tlsls r0, 1\n"
+                "\tadds r1, r0\n"
+                "\tmovs r3, 0\n"
+                "\tldrsh r0, [r1, r3]\n"
+                "\tadds r3, r0, 0x1\n"
+                "\tadds r5, 0x1\n"
+                "\tcmp r6, 0x14\n"
+                "\tble _08140726\n"
+                "\tmovs r6, 0\n"
+                "_08140726:\n"
+                "\tcmp r3, 0x14\n"
+                "\tble _0814072C\n"
+                "\tmovs r3, 0\n"
+                "_0814072C:\n"
+                "\tcmp r5, 0x14\n"
+                "\tble _08140732\n"
+                "\tmovs r5, 0\n"
+                "_08140732:\n"
+                "\tmovs r4, 0\n"
+                "\tlsls r1, r7, 1\n"
+                "\tlsls r0, r7, 2\n"
+                "\tmov r9, r2\n"
+                "\tldr r2, _081407CC @ =gUnknown_8464926\n"
+                "\tmov r10, r2\n"
+                "\tadds r1, r7\n"
+                "\tadd r1, sp\n"
+                "\tmov r12, r1\n"
+                "\tadds r0, r7\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r7\n"
+                "\tstr r0, [sp, 0xC]\n"
+                "_0814074C:\n"
+                "\tmov r7, r9\n"
+                "\tmovs r0, 0x32\n"
+                "\tldrsh r1, [r7, r0]\n"
+                "\tlsls r0, r1, 1\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, r4\n"
+                "\tmov r7, sp\n"
+                "\tadds r2, r7, r0\n"
+                "\tlsls r0, r1, 2\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, r6, r0\n"
+                "\tadd r0, r10\n"
+                "\tldrb r0, [r0]\n"
+                "\tstrb r0, [r2]\n"
+                "\tmov r0, r9\n"
+                "\tmovs r2, 0x34\n"
+                "\tldrsh r1, [r0, r2]\n"
+                "\tlsls r0, r1, 1\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, r4\n"
+                "\tadds r2, r7, r0\n"
+                "\tlsls r0, r1, 2\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, r3, r0\n"
+                "\tadd r0, r10\n"
+                "\tldrb r0, [r0]\n"
+                "\tstrb r0, [r2]\n"
+                "\tldr r7, [sp, 0xC]\n"
+                "\tadds r0, r5, r7\n"
+                "\tadd r0, r10\n"
+                "\tldrb r0, [r0]\n"
+                "\tmov r1, r12\n"
+                "\tstrb r0, [r1]\n"
+                "\tadds r6, 0x1\n"
+                "\tcmp r6, 0x14\n"
+                "\tble _0814079E\n"
+                "\tmovs r6, 0\n"
+                "_0814079E:\n"
+                "\tadds r3, 0x1\n"
+                "\tcmp r3, 0x14\n"
+                "\tble _081407A6\n"
+                "\tmovs r3, 0\n"
+                "_081407A6:\n"
+                "\tadds r5, 0x1\n"
+                "\tcmp r5, 0x14\n"
+                "\tble _081407AE\n"
+                "\tmovs r5, 0\n"
+                "_081407AE:\n"
+                "\tmovs r2, 0x1\n"
+                "\tadd r12, r2\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x2\n"
+                "\tble _0814074C\n"
+                "\tmov r3, r8\n"
+                "\tcmp r3, 0x1\n"
+                "\tbeq _08140828\n"
+                "\tcmp r3, 0x1\n"
+                "\tbgt _081407D0\n"
+                "\tcmp r3, 0\n"
+                "\tbeq _081407D8\n"
+                "\tb _081408A0\n"
+                "\t.align 2, 0\n"
+                "_081407C8: .4byte sSlotMachineState\n"
+                "_081407CC: .4byte gUnknown_8464926\n"
+                "_081407D0:\n"
+                "\tmov r6, r8\n"
+                "\tcmp r6, 0x2\n"
+                "\tbeq _08140870\n"
+                "\tb _081408A0\n"
+                "_081407D8:\n"
+                "\tmovs r4, 0\n"
+                "_081407DA:\n"
+                "\tmov r7, sp\n"
+                "\tadds r0, r7, r4\n"
+                "\tldrb r1, [r0]\n"
+                "\tmovs r0, 0x1\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _081408DC_return_false\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x2\n"
+                "\tble _081407DA\n"
+                "\tmovs r4, 0\n"
+                "\tldr r2, _08140824 @ =gUnknown_84648AE\n"
+                "\tmovs r3, 0\n"
+                "\tadds r5, r2, 0x2\n"
+                "_081407F8:\n"
+                "\tldrb r0, [r2]\n"
+                "\tmov r6, sp\n"
+                "\tadds r1, r6, r0\n"
+                "\tldrb r0, [r2, 0x1]\n"
+                "\tadd r0, sp\n"
+                "\tldrb r1, [r1]\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r1, r0\n"
+                "\tbne _08140816\n"
+                "\tadds r0, r3, r5\n"
+                "\tldrb r0, [r0]\n"
+                "\tadd r0, sp\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r1, r0\n"
+                "\tbeq _081408DC_return_false\n"
+                "_08140816:\n"
+                "\tadds r2, 0x3\n"
+                "\tadds r3, 0x3\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x4\n"
+                "\tble _081407F8\n"
+                "_08140820_return_true:\n"
+                "\tmovs r0, 0x1\n"
+                "\tb _081408DE\n"
+                "\t.align 2, 0\n"
+                "_08140824: .4byte gUnknown_84648AE\n"
+                "_08140828:\n"
+                "\tmovs r4, 0\n"
+                "\tldr r5, _0814086C @ =gUnknown_84648AE\n"
+                "_0814082C:\n"
+                "\tldrb r0, [r5]\n"
+                "\tmov r7, sp\n"
+                "\tadds r2, r7, r0\n"
+                "\tldrb r0, [r5, 0x1]\n"
+                "\tadds r1, r7, r0\n"
+                "\tldrb r0, [r2]\n"
+                "\tldrb r1, [r1]\n"
+                "\tcmp r0, r1\n"
+                "\tbne _0814084A\n"
+                "\tadds r1, r0, 0\n"
+                "\tmov r0, r8\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _081408DC_return_false\n"
+                "_0814084A:\n"
+                "\tadds r5, 0x3\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x4\n"
+                "\tble _0814082C\n"
+                "\tmovs r4, 0\n"
+                "_08140854:\n"
+                "\tmov r1, sp\n"
+                "\tadds r0, r1, r4\n"
+                "\tldrb r1, [r0]\n"
+                "\tmov r0, r8\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08140820_return_true\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x2\n"
+                "\tble _08140854\n"
+                "\tb _081408DC_return_false\n"
+                "\t.align 2, 0\n"
+                "_0814086C: .4byte gUnknown_84648AE\n"
+                "_08140870:\n"
+                "\tmovs r4, 0\n"
+                "\tldr r5, _0814089C @ =gUnknown_84648AE\n"
+                "_08140874:\n"
+                "\tldrb r0, [r5]\n"
+                "\tmov r3, sp\n"
+                "\tadds r2, r3, r0\n"
+                "\tldrb r0, [r5, 0x1]\n"
+                "\tadds r1, r3, r0\n"
+                "\tldrb r0, [r2]\n"
+                "\tldrb r1, [r1]\n"
+                "\tcmp r0, r1\n"
+                "\tbne _08140892\n"
+                "\tadds r1, r0, 0\n"
+                "\tmov r0, r8\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08140820_return_true\n"
+                "_08140892:\n"
+                "\tadds r5, 0x3\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x4\n"
+                "\tble _08140874\n"
+                "\tb _081408DC_return_false\n"
+                "\t.align 2, 0\n"
+                "_0814089C: .4byte gUnknown_84648AE\n"
+                "_081408A0:\n"
+                "\tmovs r4, 0\n"
+                "\tldr r5, _081408F0 @ =gUnknown_84648AE\n"
+                "\tadds r7, r5, 0\n"
+                "\tmovs r6, 0\n"
+                "_081408A8:\n"
+                "\tldrb r0, [r5]\n"
+                "\tmov r1, sp\n"
+                "\tadds r2, r1, r0\n"
+                "\tadds r0, r7, 0x1\n"
+                "\tadds r0, r6, r0\n"
+                "\tldrb r0, [r0]\n"
+                "\tadd r0, sp\n"
+                "\tldrb r1, [r2]\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r1, r0\n"
+                "\tbne _081408D2\n"
+                "\tldrb r0, [r5, 0x2]\n"
+                "\tadd r0, sp\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r1, r0\n"
+                "\tbne _081408D2\n"
+                "\tmov r0, r8\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08140820_return_true\n"
+                "_081408D2:\n"
+                "\tadds r5, 0x3\n"
+                "\tadds r6, 0x3\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x4\n"
+                "\tble _081408A8\n"
+                "_081408DC_return_false:\n"
+                "\tmovs r0, 0\n"
+                "_081408DE:\n"
+                "\tadd sp, 0x10\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r1}\n"
+                "\tbx r1\n"
+                "\t.align 2, 0\n"
+                "_081408F0: .4byte gUnknown_84648AE");
+}
+#endif //NONMATCHING

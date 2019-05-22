@@ -192,7 +192,7 @@ gUnknown_847AF8C::
 	trainerid 133, 0 @ OT ID
 	ivs 10, 10, 10, 10, 10, 10, 1 @ IVs, ability
 	.4byte 0x00000085 @ personality
-	.string "FARFETCH’D$", 11
+	.string "FARFETCH'D$", 11
 	.byte 255 @ friendship
 
 	.align 2

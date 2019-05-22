@@ -80,7 +80,7 @@ gUnknown_8482ECC:: @ 8482ECC
 	.string "A quick kick from a\nrolling spin.\nIt may make the\nfoe flinch.$"
 
 gUnknown_8482F0A:: @ 8482F0A
-	.string "A lot of sand is\nhurled in the foe’s\nface, reducing its\naccuracy.$"
+	.string "A lot of sand is\nhurled in the foe's\nface, reducing its\naccuracy.$"
 
 gUnknown_8482F4C:: @ 8482F4C
 	.string "The user sticks its\nhead out and rams.\nIt may make the\nfoe flinch.$"
@@ -179,10 +179,10 @@ gUnknown_84837A1:: @ 84837A1
 	.string "A peculiar ray is\nshot at the foe.\nIt may leave the\nfoe confused.$"
 
 gUnknown_84837E3:: @ 84837E3
-	.string "A spray of bubbles\nstrikes the foe.\nIt may lower the\nfoe’s SPEED stat.$"
+	.string "A spray of bubbles\nstrikes the foe.\nIt may lower the\nfoe's SPEED stat.$"
 
 gUnknown_848382A:: @ 848382A
-	.string "A rainbow-colored\nattack beam.\nIt may lower the\nfoe’s ATTACK stat.$"
+	.string "A rainbow-colored\nattack beam.\nIt may lower the\nfoe's ATTACK stat.$"
 
 gUnknown_848386D:: @ 848386D
 	.string "A severely damaging\nattack that makes\nthe user rest on\nthe next turn.$"
@@ -203,7 +203,7 @@ gUnknown_84839AE:: @ 84839AE
 	.string "A retaliation move\nthat counters any\nphysical hit with\ndouble the damage.$"
 
 gUnknown_84839F8:: @ 84839F8
-	.string "A gravity-fed throw\nthat causes damage\nmatching the user’s\nlevel.$"
+	.string "A gravity-fed throw\nthat causes damage\nmatching the user's\nlevel.$"
 
 gUnknown_8483A3A:: @ 8483A3A
 	.string "The foe is slugged\nat maximum power.\nCan also be used\nto move boulders.$"
@@ -218,7 +218,7 @@ gUnknown_8483B0C:: @ 8483B0C
 	.string "A seed is planted\non the foe to steal\nsome HP for the \nuser on every turn.$"
 
 gUnknown_8483B57:: @ 8483B57
-	.string "The user’s body is\nforced to grow,\nraising the SP.\nATK stat.$"
+	.string "The user's body is\nforced to grow,\nraising the SP.\nATK stat.$"
 
 gUnknown_8483B94:: @ 8483B94
 	.string "The foe is hit with\na cutting leaf.\nIt has a high\ncritical-hit ratio.$"
@@ -278,7 +278,7 @@ gUnknown_8484058:: @ 8484058
 	.string "A weak telekinetic\nattack that may\nalso leave the foe\nconfused.$"
 
 gUnknown_8484098:: @ 8484098
-	.string "A strong telekinetic\nattack. It may also\nlower the foe’s\nSP. DEF stat.$"
+	.string "A strong telekinetic\nattack. It may also\nlower the foe's\nSP. DEF stat.$"
 
 gUnknown_84840DF:: @ 84840DF
 	.string "Hypnotic suggestion\nis used to make the\nfoe fall into a\ndeep sleep.$"
@@ -299,19 +299,19 @@ gUnknown_848422E:: @ 848422E
 	.string "Use it to flee from\nany wild POKéMON.\nAlso warps to the\nlast POKé CENTER.$"
 
 gUnknown_8484278:: @ 8484278
-	.string "An attack with a\nmirage that inflicts\ndamage matching\nthe user’s level.$"
+	.string "An attack with a\nmirage that inflicts\ndamage matching\nthe user's level.$"
 
 gUnknown_84842C0:: @ 84842C0
 	.string "The user copies the\nmove last used by\nthe foe for the\nrest of the battle.$"
 
 gUnknown_848430A:: @ 848430A
-	.string "An ear-splitting\nscreech is emitted\nto sharply reduce\nthe foe’s DEFENSE.$"
+	.string "An ear-splitting\nscreech is emitted\nto sharply reduce\nthe foe's DEFENSE.$"
 
 gUnknown_8484353:: @ 8484353
 	.string "The user creates\nillusory copies of\nitself to raise its\nevasiveness.$"
 
 gUnknown_8484398:: @ 8484398
-	.string "A self-healing move\nthat restores HP by\nup to half of the\nuser’s maximum HP.$"
+	.string "A self-healing move\nthat restores HP by\nup to half of the\nuser's maximum HP.$"
 
 gUnknown_84843E5:: @ 84843E5
 	.string "The user stiffens\nall the muscles in\nits body to raise\nits DEFENSE stat.$"
@@ -320,7 +320,7 @@ gUnknown_848442E:: @ 848442E
 	.string "The user compresses\nall the cells in its\nbody to raise its\nevasiveness.$"
 
 gUnknown_8484476:: @ 8484476
-	.string "An obscuring cloud\nof smoke or ink\nreduces the foe’s\naccuracy.$"
+	.string "An obscuring cloud\nof smoke or ink\nreduces the foe's\naccuracy.$"
 
 gUnknown_84844B5:: @ 84844B5
 	.string "The foe is exposed\nto a sinister ray\nthat triggers\nconfusion.$"
@@ -380,7 +380,7 @@ gUnknown_8484986:: @ 8484986
 	.string "A powerful charge\nattack. It can also\nbe used to climb\na waterfall.$"
 
 gUnknown_84849CA:: @ 84849CA
-	.string "The foe is clamped\nand squeezed by\nthe user’s shell for\ntwo to five turns.$"
+	.string "The foe is clamped\nand squeezed by\nthe user's shell for\ntwo to five turns.$"
 
 gUnknown_8484A15:: @ 8484A15
 	.string "Star-shaped rays\nthat never miss are\nfired at all foes in\nbattle.$"
@@ -431,7 +431,7 @@ gUnknown_8484E18:: @ 8484E18
 	.string "The user transforms\ninto a copy of the\nfoe with even the\nsame move set.$"
 
 gUnknown_8484E60:: @ 8484E60
-	.string "A spray of bubbles\nhits the foe.\nIt may lower the\nfoe’s SPEED stat.$"
+	.string "A spray of bubbles\nhits the foe.\nIt may lower the\nfoe's SPEED stat.$"
 
 gUnknown_8484EA4:: @ 8484EA4
 	.string "The foe is hit with\na rhythmic punch\nthat may leave it\nconfused.$"
@@ -440,7 +440,7 @@ gUnknown_8484EE5:: @ 8484EE5
 	.string "The user scatters\nbursts of fine\nspores that induce\nsleep.$"
 
 gUnknown_8484F20:: @ 8484F20
-	.string "A blast of light\nthat cuts the foe’s\naccuracy. It also\nilluminates caves.$"
+	.string "A blast of light\nthat cuts the foe's\naccuracy. It also\nilluminates caves.$"
 
 gUnknown_8484F6A:: @ 8484F6A
 	.string "The foe is attacked\nwith an odd, hot\nenergy wave that\nvaries in intensity.$"
@@ -482,7 +482,7 @@ gUnknown_84852B8:: @ 84852B8
 	.string "A simultaneous\n3-beam attack that\nmay paralyze, burn,\nor freeze the foe.$"
 
 gUnknown_8485301:: @ 8485301
-	.string "The user attacks\nwith sharp fangs\nand halves the\nfoe’s HP.$"
+	.string "The user attacks\nwith sharp fangs\nand halves the\nfoe's HP.$"
 
 gUnknown_848533C:: @ 848533C
 	.string "The foe is slashed\nwith claws, etc.\nIt has a high\ncritical-hit ratio.$"
@@ -500,13 +500,13 @@ gUnknown_8485446:: @ 8485446
 	.string "A 3-kick attack\nthat becomes more\npowerful with each\nsuccessive hit.$"
 
 gUnknown_848548B:: @ 848548B
-	.string "An attack that may\ntake the foe’s held\nitem if the user\nisn’t holding one.$"
+	.string "An attack that may\ntake the foe's held\nitem if the user\nisn't holding one.$"
 
 gUnknown_84854D6:: @ 84854D6
-	.string "Ensnares the foe \nwith sticky string\nso it doesn’t flee\nor switch out.$"
+	.string "Ensnares the foe \nwith sticky string\nso it doesn't flee\nor switch out.$"
 
 gUnknown_848551D:: @ 848551D
-	.string "The user predicts\nthe foe’s action to\nensure its next\nattack hits.$"
+	.string "The user predicts\nthe foe's action to\nensure its next\nattack hits.$"
 
 gUnknown_8485560:: @ 8485560
 	.string "A sleeping foe is\nshown a nightmare\nthat inflicts some\ndamage every turn.$"
@@ -563,19 +563,19 @@ gUnknown_84859F2:: @ 84859F2
 	.string "Filthy sludge is\nhurled at the foe.\nIt may poison the\ntarget.$"
 
 gUnknown_8485A30:: @ 8485A30
-	.string "Mud is hurled in\nthe foe’s face to\ninflict damage and\nlower its accuracy.$"
+	.string "Mud is hurled in\nthe foe's face to\ninflict damage and\nlower its accuracy.$"
 
 gUnknown_8485A7A:: @ 8485A7A
-	.string "Ink is blasted in\nthe foe’s face or\neyes to damage and\nlower accuracy.$"
+	.string "Ink is blasted in\nthe foe's face or\neyes to damage and\nlower accuracy.$"
 
 gUnknown_8485AC1:: @ 8485AC1
-	.string "A trap of spikes is\nlaid around the\nfoe’s party to hurt\nfoes switching in.$"
+	.string "A trap of spikes is\nlaid around the\nfoe's party to hurt\nfoes switching in.$"
 
 gUnknown_8485B0C:: @ 8485B0C
 	.string "An electric blast is\nfired like a cannon\nto inflict damage\nand paralyze.$"
 
 gUnknown_8485B55:: @ 8485B55
-	.string "Completely negates\nthe foe’s efforts to\nheighten its ability\nto evade.$"
+	.string "Completely negates\nthe foe's efforts to\nheighten its ability\nto evade.$"
 
 gUnknown_8485B9C:: @ 8485B9C
 	.string "If the user faints,\nthe foe delivering\nthe final hit also\nfaints.$"
@@ -608,7 +608,7 @@ gUnknown_8485E09:: @ 8485E09
 	.string "The user endures\nany hit with 1 HP\nleft. It may fail if\nused in succession.$"
 
 gUnknown_8485E55:: @ 8485E55
-	.string "The foe is charmed\nby the user’s cute\nappeals, sharply\ncutting its ATTACK.$"
+	.string "The foe is charmed\nby the user's cute\nappeals, sharply\ncutting its ATTACK.$"
 
 gUnknown_8485EA0:: @ 8485EA0
 	.string "A 5-turn rolling\nattack that becomes\nstronger each time\nit hits.$"
@@ -629,7 +629,7 @@ gUnknown_8485FF5:: @ 8485FF5
 	.string "An attack that\ngrows stronger on\neach successive\nhit.$"
 
 gUnknown_848602B:: @ 848602B
-	.string "The foe is hit with\nwings of steel.\nIt may also raise\nthe user’s DEFENSE.$"
+	.string "The foe is hit with\nwings of steel.\nIt may also raise\nthe user's DEFENSE.$"
 
 gUnknown_8486075:: @ 8486075
 	.string "The foe is fixed\nwith a mean look\nthat prevents it\nfrom escaping.$"
@@ -653,10 +653,10 @@ gUnknown_848621B:: @ 848621B
 	.string "This attack move\ngrows more powerful\nthe less the user\nlikes its TRAINER.$"
 
 gUnknown_8486265:: @ 8486265
-	.string "It protects the\nuser’s party from\nall status problems\nfor five turns.$"
+	.string "It protects the\nuser's party from\nall status problems\nfor five turns.$"
 
 gUnknown_84862AB:: @ 84862AB
-	.string "The user adds its\nHP to the foe’s HP,\nthen equally shares\nthe total HP.$"
+	.string "The user adds its\nHP to the foe's HP,\nthen equally shares\nthe total HP.$"
 
 gUnknown_84862F3:: @ 84862F3
 	.string "A mystical and\npowerful fire\nattack that may\ninflict a burn.$"
@@ -665,7 +665,7 @@ gUnknown_8486330:: @ 8486330
 	.string "A ground-shaking\nattack against all\nstanding POKéMON.\nIts power varies.$"
 
 gUnknown_8486378:: @ 8486378
-	.string "The foe is punched\nwith the user’s full\npower. It confuses\nthe foe if it hits.$"
+	.string "The foe is punched\nwith the user's full\npower. It confuses\nthe foe if it hits.$"
 
 gUnknown_84863C7:: @ 84863C7
 	.string "A brutal ramming\nattack delivered\nwith a tough and\nimpressive horn.$"
@@ -689,22 +689,22 @@ gUnknown_8486579:: @ 8486579
 	.string "Allures the foe to\nreduce evasiveness.\nIt also attracts\nwild POKéMON.$"
 
 gUnknown_84865BF:: @ 84865BF
-	.string "An attack with a\nsteel-hard tail.\nIt may lower the\nfoe’s DEFENSE stat.$"
+	.string "An attack with a\nsteel-hard tail.\nIt may lower the\nfoe's DEFENSE stat.$"
 
 gUnknown_8486606:: @ 8486606
-	.string "The foe is attacked\nwith steel claws.\nIt may also raise\nthe user’s ATTACK.$"
+	.string "The foe is attacked\nwith steel claws.\nIt may also raise\nthe user's ATTACK.$"
 
 gUnknown_8486651:: @ 8486651
 	.string "Makes the user\nattack after the\nfoe. In return,\nit will not miss.$"
 
 gUnknown_8486693:: @ 8486693
-	.string "Restores the user’s\nHP. The amount of\nHP regained varies\nwith the weather.$"
+	.string "Restores the user's\nHP. The amount of\nHP regained varies\nwith the weather.$"
 
 gUnknown_84866DE:: @ 84866DE
-	.string "Restores the user’s\nHP. The amount of\nHP regained varies\nwith the weather.$"
+	.string "Restores the user's\nHP. The amount of\nHP regained varies\nwith the weather.$"
 
 gUnknown_8486729:: @ 8486729
-	.string "Restores the user’s\nHP. The amount of\nHP regained varies\nwith the weather.$"
+	.string "Restores the user's\nHP. The amount of\nHP regained varies\nwith the weather.$"
 
 gUnknown_8486774:: @ 8486774
 	.string "An attack that\nvaries in type and\nintensity depending\non the user.$"
@@ -722,10 +722,10 @@ gUnknown_848687C:: @ 848687C
 	.string "The sun blazes for\nfive turns, powering\nup FIRE-type\nmoves.$"
 
 gUnknown_84868B8:: @ 84868B8
-	.string "The foe is crunched\nwith sharp fangs.\nIt may lower the\nfoe’s SP. DEF.$"
+	.string "The foe is crunched\nwith sharp fangs.\nIt may lower the\nfoe's SP. DEF.$"
 
 gUnknown_84868FE:: @ 84868FE
-	.string "A retaliation move\nthat pays back the\nfoe’s special attack\ndouble.$"
+	.string "A retaliation move\nthat pays back the\nfoe's special attack\ndouble.$"
 
 gUnknown_8486941:: @ 8486941
 	.string "The user hypnotizes\nitself into copying\nany stat change\nmade by the foe.$"
@@ -734,10 +734,10 @@ gUnknown_848698A:: @ 848698A
 	.string "A blindingly speedy\ncharge attack that\nalways goes before\nany other.$"
 
 gUnknown_84869CF:: @ 84869CF
-	.string "An ancient power is\nused to attack. It\nmay also raise all\nthe user’s stats.$"
+	.string "An ancient power is\nused to attack. It\nmay also raise all\nthe user's stats.$"
 
 gUnknown_8486A1B:: @ 8486A1B
-	.string "A shadowy blob is\nhurled at the foe.\nMay also lower the\nfoe’s SP. DEF.$"
+	.string "A shadowy blob is\nhurled at the foe.\nMay also lower the\nfoe's SP. DEF.$"
 
 gUnknown_8486A62:: @ 8486A62
 	.string "Two turns after\nthis move is used,\nthe foe is attacked\npsychically.$"
@@ -782,7 +782,7 @@ gUnknown_8486DF2:: @ 8486DF2
 	.string "A sinister, bluish\nwhite flame is shot\nat the foe to\ninflict a burn.$"
 
 gUnknown_8486E37:: @ 8486E37
-	.string "The user faints,\nbut sharply lowers\nthe foe’s ATTACK\nand SP. ATK.$"
+	.string "The user faints,\nbut sharply lowers\nthe foe's ATTACK\nand SP. ATK.$"
 
 gUnknown_8486E79:: @ 8486E79
 	.string "An attack that is\nboosted if user is\nburned, poisoned,\nor paralyzed.$"
@@ -791,13 +791,13 @@ gUnknown_8486EBE:: @ 8486EBE
 	.string "An attack that is\nexecuted last.\nThe user flinches\nif hit beforehand.$"
 
 gUnknown_8486F04:: @ 8486F04
-	.string "Doubly effective on\na paralyzed foe,\nbut it also cures\nthe foe’s paralysis.$"
+	.string "Doubly effective on\na paralyzed foe,\nbut it also cures\nthe foe's paralysis.$"
 
 gUnknown_8486F50:: @ 8486F50
 	.string "The user draws\nattention to itself,\nmaking foes attack\nonly the user.$"
 
 gUnknown_8486F96:: @ 8486F96
-	.string "An attack that\nchanges type\ndepending on the\nuser’s location.$"
+	.string "An attack that\nchanges type\ndepending on the\nuser's location.$"
 
 gUnknown_8486FD4:: @ 8486FD4
 	.string "The user charges\npower to boost the\nELECTRIC move it\nuses next.$"
@@ -806,13 +806,13 @@ gUnknown_8487014:: @ 8487014
 	.string "The foe is taunted\ninto a rage that\nallows it to use\nonly attack moves.$"
 
 gUnknown_848705C:: @ 848705C
-	.string "A move that boosts\nthe power of the\nally’s attack in a\nbattle.$"
+	.string "A move that boosts\nthe power of the\nally's attack in a\nbattle.$"
 
 gUnknown_848709B:: @ 848709B
 	.string "A move that tricks\nthe foe into\ntrading held items\nwith the user.$"
 
 gUnknown_84870DD:: @ 84870DD
-	.string "The user mimics the\nfoe completely and\ncopies the foe’s\nability.$"
+	.string "The user mimics the\nfoe completely and\ncopies the foe's\nability.$"
 
 gUnknown_848711E:: @ 848711E
 	.string "A self-healing move\nthat restores half\nthe full HP on the\nnext turn.$"
@@ -821,13 +821,13 @@ gUnknown_8487163:: @ 8487163
 	.string "The user randomly\npicks and uses a\nmove of an allied\nPOKéMON.$"
 
 gUnknown_84871A1:: @ 84871A1
-	.string "The user lays roots\nthat restore HP on\nevery turn.\nIt can’t switch out.$"
+	.string "The user lays roots\nthat restore HP on\nevery turn.\nIt can't switch out.$"
 
 gUnknown_84871E9:: @ 84871E9
-	.string "A powerful attack,\nbut it also lowers\nthe user’s ATTACK\nand DEFENSE stats.$"
+	.string "A powerful attack,\nbut it also lowers\nthe user's ATTACK\nand DEFENSE stats.$"
 
 gUnknown_8487234:: @ 8487234
-	.string "Reflects back the\nfoe’s LEECH SEED\nand any status-\ndamaging move.$"
+	.string "Reflects back the\nfoe's LEECH SEED\nand any status-\ndamaging move.$"
 
 gUnknown_8487276:: @ 8487276
 	.string "A move that\nrecycles a used\nitem for use once\nmore.$"
@@ -842,13 +842,13 @@ gUnknown_8487338:: @ 8487338
 	.string "A huge yawn lulls\nthe foe into falling\nasleep on the next\nturn.$"
 
 gUnknown_8487378:: @ 8487378
-	.string "Knocks down the\nfoe’s held item to\nprevent its use\nduring the battle.$"
+	.string "Knocks down the\nfoe's held item to\nprevent its use\nduring the battle.$"
 
 gUnknown_84873BE:: @ 84873BE
 	.string "Gains power the\nfewer HP the user\nhas compared with\nthe foe.$"
 
 gUnknown_84873FB:: @ 84873FB
-	.string "The higher the\nuser’s HP, the more\npowerful this\nattack becomes.$"
+	.string "The higher the\nuser's HP, the more\npowerful this\nattack becomes.$"
 
 gUnknown_848743C:: @ 848743C
 	.string "The user employs\nits psychic power\nto swap abilities\nwith the foe.$"
@@ -863,7 +863,7 @@ gUnknown_848750D:: @ 848750D
 	.string "If the user faints,\nthis move deletes\nthe PP of the move\nthat finished it.$"
 
 gUnknown_8487558:: @ 8487558
-	.string "Steals the effects\nof the foe’s\nhealing or status-\nchanging move.$"
+	.string "Steals the effects\nof the foe's\nhealing or status-\nchanging move.$"
 
 gUnknown_848759A:: @ 848759A
 	.string "An attack that may\nhave an additional\neffect that varies\nwith the terrain.$"
@@ -875,16 +875,16 @@ gUnknown_8487628:: @ 8487628
 	.string "A quick flurry of\nstraight-arm\npunches that hit\ntwo to five times.$"
 
 gUnknown_848766B:: @ 848766B
-	.string "Alters the user’s\ntype depending on\nthe location’s\nterrain.$"
+	.string "Alters the user's\ntype depending on\nthe location's\nterrain.$"
 
 gUnknown_84876A7:: @ 84876A7
 	.string "The user flashes a\nlight that sharply\nraises its SP. ATK\nstat.$"
 
 gUnknown_84876E6:: @ 84876E6
-	.string "A burst of light\ninjures the foe. It\nmay also lower the\nfoe’s SP. DEF.$"
+	.string "A burst of light\ninjures the foe. It\nmay also lower the\nfoe's SP. DEF.$"
 
 gUnknown_848772D:: @ 848772D
-	.string "A flurry of down\nhits the foe. It\nmay also lower the\nfoe’s SP. ATK.$"
+	.string "A flurry of down\nhits the foe. It\nmay also lower the\nfoe's SP. ATK.$"
 
 gUnknown_8487771:: @ 8487771
 	.string "The foe is covered\nwith a mass of down\nthat sharply cuts\nthe ATTACK stat.$"
@@ -914,16 +914,16 @@ gUnknown_8487976:: @ 8487976
 	.string "The foe is bitten\nwith toxic fangs.\nIt may also badly\npoison the foe.$"
 
 gUnknown_84879BC:: @ 84879BC
-	.string "The foe is attacked\nwith sharp claws.\nIt may also lower\nthe foe’s DEFENSE.$"
+	.string "The foe is attacked\nwith sharp claws.\nIt may also lower\nthe foe's DEFENSE.$"
 
 gUnknown_8487A07:: @ 8487A07
-	.string "The foe is hit with\na huge explosion.\nThe user can’t move\non the next turn.$"
+	.string "The foe is hit with\na huge explosion.\nThe user can't move\non the next turn.$"
 
 gUnknown_8487A53:: @ 8487A53
-	.string "The foe is hit with\na watery cannon.\nThe user can’t move\non the next turn.$"
+	.string "The foe is hit with\na watery cannon.\nThe user can't move\non the next turn.$"
 
 gUnknown_8487A9E:: @ 8487A9E
-	.string "The foe is hit with\na hard, fast punch.\nIt may also raise\nthe user’s ATTACK.$"
+	.string "The foe is hit with\na hard, fast punch.\nIt may also raise\nthe user's ATTACK.$"
 
 gUnknown_8487AEB:: @ 8487AEB
 	.string "An attack using a\nstartling shout.\nIt also may make\nthe foe flinch.$"
@@ -932,28 +932,28 @@ gUnknown_8487B2F:: @ 8487B2F
 	.string "An attack that\nvaries in power and\ntype depending on\nthe weather.$"
 
 gUnknown_8487B71:: @ 8487B71
-	.string "A soothing scent is\nreleased to heal\nall status problems\nin the user’s party.$"
+	.string "A soothing scent is\nreleased to heal\nall status problems\nin the user's party.$"
 
 gUnknown_8487BBF:: @ 8487BBF
-	.string "The user feigns\ncrying to sharply\nlower the foe’s\nSP. DEF stat.$"
+	.string "The user feigns\ncrying to sharply\nlower the foe's\nSP. DEF stat.$"
 
 gUnknown_8487BFF:: @ 8487BFF
 	.string "The foe is hit with\nrazor-like wind.\nIt has a high\ncritical-hit ratio.$"
 
 gUnknown_8487C46:: @ 8487C46
-	.string "An intense attack\nthat also sharply\nreduces the user’s\nSP. ATK stat.$"
+	.string "An intense attack\nthat also sharply\nreduces the user's\nSP. ATK stat.$"
 
 gUnknown_8487C8B:: @ 8487C8B
-	.string "Completely negates\nthe foe’s efforts to\nheighten its ability\nto evade.$"
+	.string "Completely negates\nthe foe's efforts to\nheighten its ability\nto evade.$"
 
 gUnknown_8487CD2:: @ 8487CD2
-	.string "Boulders are hurled\nat the foe. It also\nlowers the foe’s\nSPEED if it hits.$"
+	.string "Boulders are hurled\nat the foe. It also\nlowers the foe's\nSPEED if it hits.$"
 
 gUnknown_8487D1D:: @ 8487D1D
-	.string "The foe is attacked\nwith a silver dust.\nIt may raise all\nthe user’s stats.$"
+	.string "The foe is attacked\nwith a silver dust.\nIt may raise all\nthe user's stats.$"
 
 gUnknown_8487D68:: @ 8487D68
-	.string "A horrible metallic\nscreech is used to\nsharply lower the\nfoe’s SP. DEF.$"
+	.string "A horrible metallic\nscreech is used to\nsharply lower the\nfoe's SP. DEF.$"
 
 gUnknown_8487DB0:: @ 8487DB0
 	.string "A pleasant melody\nis played to lull\nthe foe into a deep\nsleep.$"
@@ -965,7 +965,7 @@ gUnknown_8487E30:: @ 8487E30
 	.string "The user absorbs a\nmystic power to\nraise its DEFENSE\nand SP. DEF.$"
 
 gUnknown_8487E72:: @ 8487E72
-	.string "The higher the\nuser’s HP, the more\npowerful this\nattack becomes.$"
+	.string "The higher the\nuser's HP, the more\npowerful this\nattack becomes.$"
 
 gUnknown_8487EB3:: @ 8487EB3
 	.string "The foe is hit with\na flashing beam\nthat may also\ncause confusion.$"
@@ -986,22 +986,22 @@ gUnknown_8487FF9:: @ 8487FF9
 	.string "The foe is attacked\nwith ultimate cold\nthat causes fainting\nif it hits.$"
 
 gUnknown_8488041:: @ 8488041
-	.string "The user attacks\nwith muddy water.\nIt may also lower\nthe foe’s accuracy.$"
+	.string "The user attacks\nwith muddy water.\nIt may also lower\nthe foe's accuracy.$"
 
 gUnknown_848808A:: @ 848808A
 	.string "The user shoots\nseeds at the foe.\nTwo to five seeds\nare shot at once.$"
 
 gUnknown_84880D0:: @ 84880D0
-	.string "An extremely fast\nattack against one\ntarget. It can’t be\nevaded.$"
+	.string "An extremely fast\nattack against one\ntarget. It can't be\nevaded.$"
 
 gUnknown_8488111:: @ 8488111
 	.string "Sharp icicles are\nfired at the foe.\nIt strikes two to\nfive times.$"
 
 gUnknown_8488153:: @ 8488153
-	.string "The user hardens\nits body’s surface\nto sharply raise its\nDEFENSE stat.$"
+	.string "The user hardens\nits body's surface\nto sharply raise its\nDEFENSE stat.$"
 
 gUnknown_848819A:: @ 848819A
-	.string "The user blocks the\nfoe’s way with arms\nspread wide to\nprevent escape.$"
+	.string "The user blocks the\nfoe's way with arms\nspread wide to\nprevent escape.$"
 
 gUnknown_84881E1:: @ 84881E1
 	.string "The user howls to\nraise its spirit and\nboost its ATTACK\nstat.$"
@@ -1010,7 +1010,7 @@ gUnknown_848821F:: @ 848821F
 	.string "Sharp, huge claws\nhook and slash the\nfoe quickly and\nwith great power.$"
 
 gUnknown_8488266:: @ 8488266
-	.string "The foe is hit with\nan enormous branch.\nThe user can’t move\non the next turn.$"
+	.string "The foe is hit with\nan enormous branch.\nThe user can't move\non the next turn.$"
 
 gUnknown_84882B4:: @ 84882B4
 	.string "The user bulks up\nits body to boost\nboth its ATTACK and\nDEFENSE stats.$"
@@ -1019,13 +1019,13 @@ gUnknown_84882FB:: @ 84882FB
 	.string "The user bounces\non the foe on the\n2nd turn. It may\nparalyze the foe.$"
 
 gUnknown_8488341:: @ 8488341
-	.string "The user attacks by\nhurling mud.\nIt also reduces the\nfoe’s SPEED.$"
+	.string "The user attacks by\nhurling mud.\nIt also reduces the\nfoe's SPEED.$"
 
 gUnknown_8488383:: @ 8488383
 	.string "An attack with a\nhigh critical-hit\nratio. It may also\npoison the foe.$"
 
 gUnknown_84883C9:: @ 84883C9
-	.string "A cutely executed\nattack that also\nsteals the foe’s\nhold item.$"
+	.string "A cutely executed\nattack that also\nsteals the foe's\nhold item.$"
 
 gUnknown_8488408:: @ 8488408
 	.string "The user throws an\nelectrified tackle.\nIt hurts the user\na little.$"
@@ -1043,13 +1043,13 @@ gUnknown_8488507:: @ 8488507
 	.string "The foe is slashed\nwith a sharp leaf.\nIt has a high\ncritical-hit ratio.$"
 
 gUnknown_848854F:: @ 848854F
-	.string "A mystic, powerful\ndance that boosts\nthe user’s ATTACK\nand SPEED stats.$"
+	.string "A mystic, powerful\ndance that boosts\nthe user's ATTACK\nand SPEED stats.$"
 
 gUnknown_8488597:: @ 8488597
 	.string "The user hurls two\nto five hard rocks\nat the foe to\nattack.$"
 
 gUnknown_84885D3:: @ 84885D3
-	.string "A rapid jolt of\nelectricity strikes\nthe foe. It can’t\nbe evaded.$"
+	.string "A rapid jolt of\nelectricity strikes\nthe foe. It can't\nbe evaded.$"
 
 gUnknown_8488614:: @ 8488614
 	.string "An attack with a\npulsing blast of\nwater. It may also\nconfuse the foe.$"
@@ -1058,7 +1058,7 @@ gUnknown_848865A:: @ 848865A
 	.string "A move that attacks\nthe foe with a\nblast of light two\nturns after use.$"
 
 gUnknown_84886A1:: @ 84886A1
-	.string "An intense attack\nthat also sharply\nreduces the user’s\nSP. ATK stat.$"
+	.string "An intense attack\nthat also sharply\nreduces the user's\nSP. ATK stat.$"
 
 gUnknown_84886E6:: @ 84886E6
 	.string "  "

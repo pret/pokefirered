@@ -1,5 +1,6 @@
 #include "global.h"
 #include "palette.h"
+#include "decompress.h"
 #include "task.h"
 #include "main.h"
 #include "malloc.h"
@@ -33,7 +34,15 @@ struct SlotMachineState
     u16 payout;
 };
 
+struct SlotMachineGfxManager
+{
+    u32 field_00[3];
+    u32 field_0C[3][5];
+    u8 filler_4C[0x2C];
+};
+
 EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
+EWRAM_DATA struct SlotMachineGfxManager * gUnknown_203F3A4 = NULL;
 
 void sub_813F84C(struct SlotMachineState * ptr);
 void sub_813F898(void);
@@ -60,6 +69,7 @@ bool32 sub_81408F4(s32, s32);
 void sub_81409B4(void);
 void sub_8140A70(void);
 u16 sub_8140A80(void);
+void sub_8140C6C(struct SlotMachineGfxManager * manager);
 void sub_8140D7C(s16 *, s16 *);
 bool32 sub_814104C(void);
 void sub_8141094(void);
@@ -128,6 +138,34 @@ const u16 gUnknown_8464966[] = {
      15,
     100,
     300
+};
+
+const u16 gUnknown_8464974[] = INCBIN_U16("graphics/slot_machine/unk_8464974.gbapal");
+const u16 gUnknown_8464994[] = INCBIN_U16("graphics/slot_machine/unk_8464994.gbapal");
+const u16 gUnknown_84649B4[] = INCBIN_U16("graphics/slot_machine/unk_84649b4.gbapal");
+const u16 gUnknown_84649D4[] = INCBIN_U16("graphics/slot_machine/unk_84649d4.gbapal");
+const u16 gUnknown_84649F4[] = INCBIN_U16("graphics/slot_machine/unk_84649f4.gbapal");
+const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
+const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_846504c.gbapal");
+const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
+const u16 gUnknown_8465524[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
+const u32 gUnknown_8465544[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
+
+const struct CompressedSpriteSheet gUnknown_84655B0[] = {
+    {(const void *)gUnknown_8464A14, 0xe00, 0},
+    {(const void *)gUnknown_846506C, 0xc00, 1},
+    {(const void *)gUnknown_8465544, 0x280, 2},
+};
+
+const struct SpritePalette gUnknown_84655C8[] = {
+    {gUnknown_8464974, 0},
+    {gUnknown_8464994, 1},
+    {gUnknown_84649B4, 2},
+    {gUnknown_84649D4, 3},
+    {gUnknown_84649F4, 4},
+    {gUnknown_846504C, 5},
+    {gUnknown_8465524, 6},
+    {NULL}
 };
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
@@ -1321,4 +1359,56 @@ u16 sub_8140A80(void)
         }
     }
     return r9;
+}
+
+u16 sub_8140BDC(void)
+{
+    return sSlotMachineState->payout;
+}
+
+u8 sub_8140BEC(void)
+{
+    return sSlotMachineState->bet;
+}
+
+bool32 sub_8140BF8(s32 a0)
+{
+    return sSlotMachineState->field_3C[a0];
+}
+
+bool32 sub_8140C0C(void)
+{
+    s32 i;
+
+    for (i = 0; i < NELEMS(gUnknown_84655B0); i++)
+        LoadCompressedObjectPic(&gUnknown_84655B0[i]);
+    LoadSpritePalettes(gUnknown_84655C8);
+    gUnknown_203F3A4 = Alloc(sizeof(*gUnknown_203F3A4));
+    if (gUnknown_203F3A4 == NULL)
+        return FALSE;
+    sub_8140C6C(gUnknown_203F3A4);
+    return TRUE;
+}
+
+void sub_8140C50(void)
+{
+    if (gUnknown_203F3A4 != NULL)
+    {
+        Free(gUnknown_203F3A4);
+        gUnknown_203F3A4 = NULL;
+    }
+}
+
+void sub_8140C6C(struct SlotMachineGfxManager * manager)
+{
+    s32 i, j;
+
+    for (i = 0; i < 3; i++)
+    {
+        manager->field_00[i] = 0;
+        for (j = 0; j < 5; j++)
+        {
+            manager->field_0C[i][j] = 0;
+        }
+    }
 }

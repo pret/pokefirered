@@ -1592,9 +1592,6 @@ gUnknown_203F39C: @ 203F39C
 	.align 2
 	.include "src/slot_machine.o"
 
-gUnknown_203F3A4: @ 203F3A4
-	.space 0x4
-
 sLocationHistory: @ 203F3A8
 	.space 0x6
 

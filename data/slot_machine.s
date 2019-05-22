@@ -2,52 +2,7 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-	.align 2
-gUnknown_8464974::
-	.incbin "graphics/slot_machine/unk_8464974.gbapal"
-
-gUnknown_8464994::
-	.incbin "graphics/slot_machine/unk_8464994.gbapal"
-
-gUnknown_84649B4::
-	.incbin "graphics/slot_machine/unk_84649b4.gbapal"
-
-gUnknown_84649D4::
-	.incbin "graphics/slot_machine/unk_84649d4.gbapal"
-
-gUnknown_84649F4::
-	.incbin "graphics/slot_machine/unk_84649f4.gbapal"
-
-gUnknown_8464A14::
-	.incbin "graphics/slot_machine/unk_8464a14.4bpp.lz"
-
-gUnknown_846504C::
-	.incbin "graphics/slot_machine/unk_846504c.gbapal"
-
-gUnknown_846506C::
-	.incbin "graphics/slot_machine/unk_846506c.4bpp.lz"
-
-gUnknown_8465524::
-	.incbin "graphics/slot_machine/unk_8465524.gbapal"
-
-gUnknown_8465544::
-	.incbin "graphics/slot_machine/unk_8465544.4bpp.lz"
-
-gUnknown_84655B0:: @ 84655B0
-	obj_tiles gUnknown_8464A14, 0x0e00, 0
-	obj_tiles gUnknown_846506C, 0x0c00, 1
-	obj_tiles gUnknown_8465544, 0x0280, 2
-
-gUnknown_84655C8:: @ 84655C8
-	obj_pal gUnknown_8464974, 0
-	obj_pal gUnknown_8464994, 1
-	obj_pal gUnknown_84649B4, 2
-	obj_pal gUnknown_84649D4, 3
-	obj_pal gUnknown_84649F4, 4
-	obj_pal gUnknown_846504C, 5
-	obj_pal gUnknown_8465524, 6
-	null_obj_pal
-
+	.align 1
 gUnknown_8465608:: @ 8465608
 	.2byte 0x0002, 0x0002, 0x0000, 0x0000, 0x0002, 0x0004, 0x0003
 

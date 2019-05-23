@@ -38,12 +38,14 @@ struct SlotMachineGfxManager
 {
     u32 field_00[3];
     struct Sprite * field_0C[3][5];
-    u8 filler_4C[0x28];
-    u32 field_70;
+    struct Sprite * field_48[4];
+    struct Sprite * field_58[4];
+    struct Sprite * field_68[2];
+    vu16 * field_70;
 };
 
 EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
-EWRAM_DATA struct SlotMachineGfxManager * gUnknown_203F3A4 = NULL;
+EWRAM_DATA struct SlotMachineGfxManager * sSlotMachineGfxManager = NULL;
 
 void sub_813F84C(struct SlotMachineState * ptr);
 void sub_813F898(void);
@@ -71,7 +73,7 @@ void sub_81409B4(void);
 void sub_8140A70(void);
 u16 sub_8140A80(void);
 void sub_8140C6C(struct SlotMachineGfxManager * manager);
-void sub_8140D7C(s16 *, s16 *);
+void sub_8140D7C(const s16 *, const s16 *);
 bool32 sub_814104C(void);
 void sub_8141094(void);
 void sub_8141148(u16 a0, u8 a1);
@@ -195,6 +197,8 @@ const u8 gUnknown_84656D6[] = {
 };
 
 extern const struct SpriteTemplate gUnknown_84657E4;
+extern const struct SpriteTemplate gUnknown_846587C;
+extern const struct SpriteTemplate gUnknown_84658D8;
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
 {
@@ -1411,19 +1415,19 @@ bool32 sub_8140C0C(void)
     for (i = 0; i < NELEMS(gUnknown_84655B0); i++)
         LoadCompressedObjectPic(&gUnknown_84655B0[i]);
     LoadSpritePalettes(gUnknown_84655C8);
-    gUnknown_203F3A4 = Alloc(sizeof(*gUnknown_203F3A4));
-    if (gUnknown_203F3A4 == NULL)
+    sSlotMachineGfxManager = Alloc(sizeof(*sSlotMachineGfxManager));
+    if (sSlotMachineGfxManager == NULL)
         return FALSE;
-    sub_8140C6C(gUnknown_203F3A4);
+    sub_8140C6C(sSlotMachineGfxManager);
     return TRUE;
 }
 
 void sub_8140C50(void)
 {
-    if (gUnknown_203F3A4 != NULL)
+    if (sSlotMachineGfxManager != NULL)
     {
-        Free(gUnknown_203F3A4);
-        gUnknown_203F3A4 = NULL;
+        Free(sSlotMachineGfxManager);
+        sSlotMachineGfxManager = NULL;
     }
 }
 
@@ -1461,8 +1465,109 @@ void sub_8140CA0(void)
             sprite->data[2] = j;
             sprite->data[3] = 0;
             sprite->oam.matrixNum = 0;
-            gUnknown_203F3A4->field_0C[i][j] = sprite;
-            gUnknown_203F3A4->field_70 = 0x07000006;
+            sSlotMachineGfxManager->field_0C[i][j] = sprite;
+            sSlotMachineGfxManager->field_70 = (vu16 *)(OAM + 0 * sizeof(struct OamData) + offsetof(struct OamData, affineParam));
         }
+    }
+}
+
+void sub_8140D7C(const s16 * a0, const s16 * a1)
+{
+    s32 i, j;
+    s32 r6, r10;
+
+    for (i = 0; i < 3; i++)
+    {
+        r6 = *a0;
+        r10 = *a1 * 8;
+        for (j = 0; j < 5; j++)
+        {
+            sSlotMachineGfxManager->field_0C[i][j]->pos2.y = r10;
+            {
+                s32 r4 = gUnknown_8464926[i][r6];
+                struct Sprite * sprite = sSlotMachineGfxManager->field_0C[i][j];
+                StartSpriteAnim(sprite, r4);
+            }
+            {
+                s32 r4 = gUnknown_8464926[i][r6];
+                struct Sprite * sprite = sSlotMachineGfxManager->field_0C[i][j];
+                StartSpriteAnim(sprite, r4);
+            }
+            sSlotMachineGfxManager->field_0C[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(gUnknown_8465608[gUnknown_8464926[i][r6]]);
+            r6++;
+            if (r6 >= 21)
+                r6 = 0;
+        }
+        a0++;
+        a1++;
+    }
+}
+
+void sub_8140E40(void)
+{
+    s32 vcount = REG_VCOUNT - 0x2B;
+    if (vcount >= 0 && vcount < 0x54)
+    {
+        *sSlotMachineGfxManager->field_70 = gUnknown_8465616[vcount];
+        REG_BLDY = gUnknown_84656D6[vcount];
+    }
+    else
+    {
+        *sSlotMachineGfxManager->field_70 = 0x100;
+        REG_BLDY = 0;
+    }
+}
+
+void sub_8140E9C(void)
+{
+    s32 i;
+    s32 spriteId;
+
+    for (i = 0; i < 4; i++)
+    {
+        spriteId = CreateSprite(&gUnknown_846587C, 0x55 + 7 * i, 30, 0);
+        sSlotMachineGfxManager->field_48[i] = &gSprites[spriteId];
+        spriteId = CreateSprite(&gUnknown_846587C, 0x85 + 7 * i, 30, 0);
+        sSlotMachineGfxManager->field_58[i] = &gSprites[spriteId];
+    }
+}
+
+void sub_8140F2C(void)
+{
+    s32 coins = GetCoins();
+    s32 payout = sub_8140BDC();
+    s32 i;
+    s32 divisor = 1000;
+    s32 quotient;
+
+    for (i = 0; i < 4; i++)
+    {
+        quotient = coins / divisor;
+        StartSpriteAnim(sSlotMachineGfxManager->field_48[i], quotient);
+        coins -= quotient * divisor;
+        quotient = payout / divisor;
+        StartSpriteAnim(sSlotMachineGfxManager->field_58[i], quotient);
+        payout -= quotient * divisor;
+        divisor /= 10;
+    }
+}
+
+void sub_8140FC4(void)
+{
+    s32 spriteId;
+
+    spriteId = CreateSprite(&gUnknown_84658D8, 0x10, 0x88, 1);
+    sSlotMachineGfxManager->field_68[0] = &gSprites[spriteId];
+    spriteId = CreateSprite(&gUnknown_84658D8, 0xE0, 0x88, 1);
+    sSlotMachineGfxManager->field_68[1] = &gSprites[spriteId];
+    sSlotMachineGfxManager->field_68[1]->hFlip = TRUE;
+}
+
+void sub_8141020(u8 a0)
+{
+    s32 i;
+    for (i = 0; i < 2; i++)
+    {
+        StartSpriteAnim(sSlotMachineGfxManager->field_68[i], a0);
     }
 }

@@ -165,7 +165,13 @@ SECTIONS {
         asm/flying.o(.text);
         asm/psychic.o(.text);
         asm/bug.o(.text);
-        asm/battle_anim_80A22E8.o(.text);
+        asm/rock.o(.text);
+        asm/ghost.o(.text);
+        asm/dragon.o(.text);
+        asm/dark.o(.text);
+        asm/ground.o(.text);
+        asm/normal.o(.text);
+        asm/battle_anim_utility_funcs.o(.text);
         asm/bike.o(.text);
         asm/easy_chat.o(.text);
         asm/mon_markings.o(.text);

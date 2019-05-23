@@ -906,7 +906,7 @@ gUnknown_841633F:: @ 841633F
 	.incbin "baserom.gba", 0x41633F, 0x1F
 
 gText_ItemCantBeHeld:: @ 841635E
-	.string "The {STR_VAR_1} can’t be held.$"
+	.string "The {STR_VAR_1} can't be held.$"
 
 gUnknown_8416374:: @ 8416374
 	.incbin "baserom.gba", 0x416374, 0x1B
@@ -1028,7 +1028,7 @@ gUnknown_841689E:: @ 841689E
 
 gText_OhNoICantBuyThat:: @ 84168F1
 	.string "{STR_VAR_1}? Oh, no.\n"
-	.string "I can’t buy that.{PAUSE_UNTIL_PRESS}$"
+	.string "I can't buy that.{PAUSE_UNTIL_PRESS}$"
 
 gText_HowManyWouldYouLikeToSell:: @ 8416911
 	.string "{STR_VAR_1}?\n"
@@ -1379,7 +1379,7 @@ gUnknown_8418C83:: @ 8418C83
 
 gUnknown_8418CD9:: @ 8418CD9
 	.string "The backup memory is damaged or\n"
-	.string "the game’s battery has run dry.\n"
+	.string "the game's battery has run dry.\n"
 	.string "The game can be played, but its\n"
 	.string "progress cannot be saved.\n"
 	.string "“Please press the A Button.”$"
@@ -1733,7 +1733,7 @@ gUnknown_8419E57:: @ 8419E57
 
 gUnknown_8419F54:: @ 8419F54
 	.string "SAVING…\n"
-	.string "DON’T TURN OFF THE POWER.$"
+	.string "DON'T TURN OFF THE POWER.$"
 
 // Start menu option descriptions
 gUnknown_8419F76:: @ 8419F76 // Pokedex
@@ -1909,20 +1909,20 @@ gUnknown_841B83D:: @ 841B83D
 	.string "……… ……… ………\p"
 	.string "Come on, let me hear you!\n"
 	.string "HELLO, TRAINERS!\l"
-	.string "It’s me, the POKé DUDE!\p"
+	.string "It's me, the POKé DUDE!\p"
 	.string "$"
 
 gUnknown_841B8BF:: @ 841B8BF
-	.string "Today, the POKé DUDE’s here to\n"
+	.string "Today, the POKé DUDE's here to\n"
 	.string "tell you about how you can battle\l"
 	.string "POKéMON!\p"
-	.string "Say you’re out for a stroll when,\n"
+	.string "Say you're out for a stroll when,\n"
 	.string "suddenly, a wild POKéMON appears!\p"
-	.string "It’s up to you to smartly use your\n"
+	.string "It's up to you to smartly use your\n"
 	.string "POKéMON and their moves to reduce\l"
-	.string "the opponent’s HP to nothing, and\l"
+	.string "the opponent's HP to nothing, and\l"
 	.string "claim victory!\p"
-	.string "I’ll show you how to do that in\n"
+	.string "I'll show you how to do that in\n"
 	.string "person and for sure!\p"
 	.string "All righty, here goes!\p"
 	.string "Keep your eyes glued to the super\n"
@@ -1930,7 +1930,7 @@ gUnknown_841B8BF:: @ 841B8BF
 
 gUnknown_841BA41:: @ 841BA41
 	.string "Well, did you get that?\p"
-	.string "Even if your own POKéMON’s HP\n"
+	.string "Even if your own POKéMON's HP\n"
 	.string "falls to zero, and it becomes\l"
 	.string "unable to battle, not to worry!\p"
 	.string "Just take it to any POKéMON\n"
@@ -1940,7 +1940,7 @@ gUnknown_841BA41:: @ 841BA41
 	.string "a day brings happiness to stay!$"
 
 gUnknown_841BB40:: @ 841BB40
-	.string "Today, the POKé DUDE’s here to\n"
+	.string "Today, the POKé DUDE's here to\n"
 	.string "tell you about status problems!\p"
 	.string "Status problems include poisoning,\n"
 	.string "paralysis, sleep, burn…\p"
@@ -1952,21 +1952,21 @@ gUnknown_841BB40:: @ 841BB40
 	.string "to see a POKéMON suffer…\p"
 	.string "So, what should you do if your\n"
 	.string "POKéMON gets a status problem?\p"
-	.string "Well, you’ve got me to show you!\p"
+	.string "Well, you've got me to show you!\p"
 	.string "All righty, here goes!\p"
 	.string "Keep your eyes glued to the super\n"
 	.string "POKé DUDE SHOW!$"
 
 gUnknown_841BD10:: @ 841BD10
-	.string "Poisoning or paralysis don’t go\n"
+	.string "Poisoning or paralysis don't go\n"
 	.string "away after a battle.\p"
 	.string "If a POKéMON is poisoned, it loses\n"
-	.string "HP even while you’re walking.\p"
+	.string "HP even while you're walking.\p"
 	.string "You should heal POKéMON of these\n"
 	.string "kinds of problems right away.\p"
 	.string "Use an item, or try to get to a\n"
 	.string "POKéMON CENTER for healing.\p"
-	.string "That wasn’t hard, was it?\n"
+	.string "That wasn't hard, was it?\n"
 	.string "All righty, be seeing you!\p"
 	.string "Remember, TRAINERS, a good deed\n"
 	.string "a day brings happiness to stay!$"
@@ -1986,7 +1986,7 @@ gUnknown_841BE76:: @ 841BE76
 	.string "match up, the damage can change.\p"
 	.string "You see, it depends on whether\n"
 	.string "the type matchup is good or bad.\p"
-	.string "If you don’t know how matchups\n"
+	.string "If you don't know how matchups\n"
 	.string "work, battles will be tough.\p"
 	.string "So, let me demonstrate exactly\n"
 	.string "what I mean.\p"
@@ -2011,12 +2011,12 @@ gUnknown_841C0AF:: @ 841C0AF
 	.string "brings happiness to stay!$"
 
 gUnknown_841C23B:: @ 841C23B
-	.string "Today, the POKé DUDE’s going to\n"
+	.string "Today, the POKé DUDE's going to\n"
 	.string "show you how to catch POKéMON!\p"
 	.string "Just imagine… A groovy POKéMON\n"
 	.string "suddenly appearing in the wild!\p"
 	.string "Oh, you want it!\n"
-	.string "You just can’t help it!\p"
+	.string "You just can't help it!\p"
 	.string "Oh, you have to catch it!\n"
 	.string "You gotta have it!\p"
 	.string "Let me show you how you can make\n"
@@ -2027,9 +2027,9 @@ gUnknown_841C23B:: @ 841C23B
 
 gUnknown_841C384:: @ 841C384
 	.string "If your first POKé BALL fails to\n"
-	.string "catch the POKéMON, don’t give up!\p"
+	.string "catch the POKéMON, don't give up!\p"
 	.string "Keep throwing POKé BALLS…\n"
-	.string "It’s bound to work sometime!\p"
+	.string "It's bound to work sometime!\p"
 	.string "All righty, be seeing you!\p"
 	.string "Remember, TRAINERS, a good deed\n"
 	.string "a day brings happiness to stay!$"
@@ -2041,7 +2041,7 @@ gUnknown_841C459:: @ 841C459
 	.string "amazingly great item!\p"
 	.string "It teaches POKéMON a move that\n"
 	.string "it may not learn when leveling up!\p"
-	.string "Isn’t that just great? What a\n"
+	.string "Isn't that just great? What a\n"
 	.string "convenient world we live in!\p"
 	.string "Open the TM CASE and check out\n"
 	.string "the TMs you have.\p"
@@ -2057,16 +2057,16 @@ gPokeDudeText_TMTypes:: @ 841C587
 	.string "suitable for WATER-type POKéMON.\p"
 	.string "BULLET SEED is a move that most\n"
 	.string "GRASS-type POKéMON can learn.\p"
-	.string "There’s one other thing!$"
+	.string "There's one other thing!$"
 
 gPokeDudeText_ReadTMDescription:: @ 841C693
-	.string "Don’t just look at the type, read\n"
+	.string "Don't just look at the type, read\n"
 	.string "the description, too.\p"
 	.string "It will contain hints about what\n"
 	.string "POKéMON might learn the move.\p"
 	.string "For example, take a move like\n"
 	.string "FOCUS PUNCH.\p"
-	.string "It doesn’t sound like anything a\n"
+	.string "It doesn't sound like anything a\n"
 	.string "bird or fish POKéMON can learn.\p"
 	.string "So, try using it on POKéMON with\n"
 	.string "arms that can throw punches!$"
@@ -2078,16 +2078,16 @@ gUnknown_841C7B4:: @ 841C7B4
 	.string "a day brings happiness to stay!$"
 
 gUnknown_841C82A:: @ 841C82A
-	.string "A TRAINER’s BAG has a bunch of\n"
+	.string "A TRAINER's BAG has a bunch of\n"
 	.string "nifty, convenient features!\p"
 	.string "Take stuff in the KEY ITEMS\n"
 	.string "POCKET, for instance.\p"
 	.string "You can use a key item without\n"
 	.string "opening the BAG every time.\p"
-	.string "For example, let’s pretend I have\n"
+	.string "For example, let's pretend I have\n"
 	.string "a TEACHY TV in my BAG.\p"
 	.string "I can register it for instant use,\n"
-	.string "and I’ll show you how!\p"
+	.string "and I'll show you how!\p"
 	.string "All righty, here goes!\p"
 	.string "Keep your eyes glued to the sorta\n"
 	.string "super POKé DUDE SHOW!$"
@@ -2096,11 +2096,11 @@ gUnknown_841C994:: @ 841C994
 	.string "And now, your TEACHY TV is\n"
 	.string "registered.\p"
 	.string "How do you use it?\n"
-	.string "Well, here’s how it works.\p"
+	.string "Well, here's how it works.\p"
 	.string "Once an item in the KEY ITEMS\n"
 	.string "POKCET is registered, you can use\l"
 	.string "it by pressing SELECT.\p"
-	.string "So, you’ve given yourself\n"
+	.string "So, you've given yourself\n"
 	.string "one-touch access to TEACHY TV.\p"
 	.string "All it takes for you to see me is\n"
 	.string "pressing one button!\p"
@@ -2456,7 +2456,7 @@ gDaycareText_GetAlong:: @ 841E361
 	.string "The two seem to get along.$"
 
 gDaycareText_DontLikeOther:: @ 841E37C
-	.string "The two don’t seem to like\neach other much.$"
+	.string "The two don't seem to like\neach other much.$"
 
 gDaycareText_PlayOther:: @ 841E3A8
 	.string "The two prefer to play with other\nPOKéMON than each other.$"
@@ -2533,10 +2533,10 @@ gText_ReturnToTitle:: @ 841E685
 	.string "Return to the title screen.$"
 
 gText_DontHaveCardNewOneInput:: @ 841E6A1
-	.string "You don’t have a WONDER CARD,\nso a new CARD will be input.$"
+	.string "You don't have a WONDER CARD,\nso a new CARD will be input.$"
 
 gText_DontHaveNewsNewOneInput:: @ 841E6DC
-	.string "You don’t have any WONDER NEWS,\nso new NEWS will be input.$"
+	.string "You don't have any WONDER NEWS,\nso new NEWS will be input.$"
 
 gText_WhereShouldCardBeAccessed:: @ 841E717
 	.string "Where should the WONDER CARD\nbe accessed?$"
@@ -2563,7 +2563,7 @@ gText_ThrowAwayWonderCard:: @ 841E7F2
 	.string "Throw away the WONDER CARD\nand input a new CARD?$"
 
 gText_HaventReceivedCardsGift:: @ 841E823
-	.string "You haven’t received the CARD’s gift\nyet. Input a new CARD anyway?$"
+	.string "You haven't received the CARD's gift\nyet. Input a new CARD anyway?$"
 
 gText_WonderCardReceivedFrom:: @ 841E866
 	.string "A WONDER CARD has been received\nfrom {STR_VAR_1}.$"
@@ -2593,16 +2593,16 @@ gText_AlreadyHadStamp:: @ 841E98F
 	.string "You already had that\nSTAMP.$"
 
 gText_NoMoreRoomForStamps:: @ 841E9AB
-	.string "There’s no more room for adding\nSTAMPS.$"
+	.string "There's no more room for adding\nSTAMPS.$"
 
 gText_RecordUploadedViaWireless:: @ 841E9D3
 	.string "Your record has been uploaded via\nWIRELESS COMMUNICATION.$"
 
 gText_CantAcceptCardFromTrainer:: @ 841EA0D
-	.string "You can’t accept a WONDER CARD\nfrom this TRAINER.$"
+	.string "You can't accept a WONDER CARD\nfrom this TRAINER.$"
 
 gText_CantAcceptNewsFromTrainer:: @ 841EA3F
-	.string "You can’t accept WONDER NEWS\nfrom this TRAINER.$"
+	.string "You can't accept WONDER NEWS\nfrom this TRAINER.$"
 
 gText_NothingSentOver:: @ 841EA6F
 	.string "Nothing was sent over…$"
@@ -2644,16 +2644,16 @@ gText_OtherTrainerCanceled:: @ 841EC40
 	.string "The other TRAINER canceled\ncommunication.$"
 
 gText_CantSendGiftToTrainer:: @ 841EC6A
-	.string "You can’t send a MYSTERY GIFT to\nthis TRAINER.$"
+	.string "You can't send a MYSTERY GIFT to\nthis TRAINER.$"
 
 gText_IfThrowAwayCardEventWontHappen:: @ 841EC99
-	.string "If you throw away the CARD,\nits event won’t happen. Okay?$"
+	.string "If you throw away the CARD,\nits event won't happen. Okay?$"
 
 gText_OkayToDiscardNews:: @ 841ECD3
 	.string "Is it okay to discard this\nNEWS item?$"
 
 gText_HaventReceivedGiftOkayToDiscard:: @ 841ECF9
-	.string "You haven’t received the\nGIFT. Is it okay to discard?$"
+	.string "You haven't received the\nGIFT. Is it okay to discard?$"
 
 gText_DataWillBeSaved:: @ 841ED2F
 	.string "Data will be saved.\nPlease wait.$"

@@ -196,9 +196,242 @@ const u8 gUnknown_84656D6[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x03, 0x03, 0x04, 0x05, 0x06, 0x06, 0x07, 0x08, 0x09, 0x09, 0x0a, 0x0b, 0x0c, 0x0c, 0x0d, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f
 };
 
-extern const struct SpriteTemplate gUnknown_84657E4;
-extern const struct SpriteTemplate gUnknown_846587C;
-extern const struct SpriteTemplate gUnknown_84658D8;
+const struct OamData gUnknown_8465738 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_2,
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const union AnimCmd gUnknown_8465740[] = {
+    ANIMCMD_FRAME(0x00, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465748[] = {
+    ANIMCMD_FRAME(0x10, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465750[] = {
+    ANIMCMD_FRAME(0x20, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465758[] = {
+    ANIMCMD_FRAME(0x30, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465760[] = {
+    ANIMCMD_FRAME(0x40, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465768[] = {
+    ANIMCMD_FRAME(0x50, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465770[] = {
+    ANIMCMD_FRAME(0x60, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465778[] = {
+    ANIMCMD_FRAME(0x20, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465780[] = {
+    ANIMCMD_FRAME(0x30, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465788[] = {
+    ANIMCMD_FRAME(0x40, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465790[] = {
+    ANIMCMD_FRAME(0x50, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465798[] = {
+    ANIMCMD_FRAME(0x60, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_84657A0[] = {
+    gUnknown_8465740,
+    gUnknown_8465748,
+    gUnknown_8465750,
+    gUnknown_8465758,
+    gUnknown_8465760,
+    gUnknown_8465768,
+    gUnknown_8465770,
+    gUnknown_8465778,
+    gUnknown_8465780,
+    gUnknown_8465788,
+    gUnknown_8465790,
+    gUnknown_8465798
+};
+
+const union AffineAnimCmd gUnknown_84657D0[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 1),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gUnknown_84657E0[] = {
+    gUnknown_84657D0
+};
+
+const struct SpriteTemplate gUnknown_84657E4 = {
+    0, 0, &gUnknown_8465738, gUnknown_84657A0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct OamData gUnknown_84657FC = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_V_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_0,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const union AnimCmd gUnknown_8465804[] = {
+    ANIMCMD_FRAME(0x00, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_846580C[] = {
+    ANIMCMD_FRAME(0x02, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465814[] = {
+    ANIMCMD_FRAME(0x04, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_846581C[] = {
+    ANIMCMD_FRAME(0x06, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465824[] = {
+    ANIMCMD_FRAME(0x08, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_846582C[] = {
+    ANIMCMD_FRAME(0x0a, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465834[] = {
+    ANIMCMD_FRAME(0x0c, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_846583C[] = {
+    ANIMCMD_FRAME(0x0e, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_8465844[] = {
+    ANIMCMD_FRAME(0x10, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_846584C[] = {
+    ANIMCMD_FRAME(0x12, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_8465854[] = {
+    gUnknown_8465804,
+    gUnknown_846580C,
+    gUnknown_8465814,
+    gUnknown_846581C,
+    gUnknown_8465824,
+    gUnknown_846582C,
+    gUnknown_8465834,
+    gUnknown_846583C,
+    gUnknown_8465844,
+    gUnknown_846584C
+};
+
+const struct SpriteTemplate gUnknown_846587C = {
+    2, 6, &gUnknown_84657FC, gUnknown_8465854, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct OamData gUnknown_8465894 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const union AnimCmd gUnknown_846589C[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_84658A4[] = {
+    ANIMCMD_FRAME( 0, 24),
+    ANIMCMD_FRAME(16, 24),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gUnknown_84658B0[] = {
+    ANIMCMD_FRAME(32, 28),
+    ANIMCMD_FRAME(48, 28),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gUnknown_84658BC[] = {
+    ANIMCMD_FRAME(64, 12),
+    ANIMCMD_FRAME(80, 12),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gUnknown_84658C8[] = {
+    gUnknown_846589C,
+    gUnknown_84658A4,
+    gUnknown_84658B0,
+    gUnknown_84658BC
+};
+
+const struct SpriteTemplate gUnknown_84658D8 = {
+    1, 5, &gUnknown_8465894, gUnknown_84658C8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
 {

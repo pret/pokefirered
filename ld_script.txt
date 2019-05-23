@@ -159,6 +159,12 @@ SECTIONS {
         asm/water.o(.text);
         asm/fire.o(.text);
         asm/electric.o(.text);
+        asm/ice.o(.text);
+        asm/fighting.o(.text);
+        asm/poison.o(.text);
+        asm/flying.o(.text);
+        asm/psychic.o(.text);
+        asm/bug.o(.text);
         asm/battle_anim_80A22E8.o(.text);
         asm/bike.o(.text);
         asm/easy_chat.o(.text);

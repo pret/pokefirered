@@ -1,5 +1,6 @@
 #include "global.h"
 #include "palette.h"
+#include "decompress.h"
 #include "task.h"
 #include "main.h"
 #include "malloc.h"
@@ -19,7 +20,7 @@ struct SlotMachineState
     u16 field_06;
     u16 field_08;
     u16 slotRewardClass;
-    u8 filler_0C[2];
+    u16 field_0C;
     u16 bet;
     u8 field_10;
     u8 field_11;
@@ -29,11 +30,20 @@ struct SlotMachineState
     s16 field_2C[3];
     s16 field_32[3];
     u32 field_38;
-    u8 filler_3C[0x14];
+    u32 field_3C[5];
     u16 payout;
 };
 
+struct SlotMachineGfxManager
+{
+    u32 field_00[3];
+    struct Sprite * field_0C[3][5];
+    u8 filler_4C[0x28];
+    u32 field_70;
+};
+
 EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
+EWRAM_DATA struct SlotMachineGfxManager * gUnknown_203F3A4 = NULL;
 
 void sub_813F84C(struct SlotMachineState * ptr);
 void sub_813F898(void);
@@ -60,6 +70,7 @@ bool32 sub_81408F4(s32, s32);
 void sub_81409B4(void);
 void sub_8140A70(void);
 u16 sub_8140A80(void);
+void sub_8140C6C(struct SlotMachineGfxManager * manager);
 void sub_8140D7C(s16 *, s16 *);
 bool32 sub_814104C(void);
 void sub_8141094(void);
@@ -67,8 +78,123 @@ void sub_8141148(u16 a0, u8 a1);
 bool32 sub_8141180(u8 a0);
 void sub_8141C30(u8, u8);
 
-extern const u8 gUnknown_8464890[][2];
-extern const u8 gUnknown_8464926[][21];
+const u8 gUnknown_8464890[][2] = {
+    {0x00, 0x03},
+    {0x00, 0x06},
+    {0x03, 0x06},
+
+    {0x01, 0x04},
+    {0x01, 0x07},
+    {0x04, 0x07},
+
+    {0x02, 0x05},
+    {0x02, 0x08},
+    {0x05, 0x08},
+
+    {0x00, 0x04},
+    {0x00, 0x08},
+    {0x04, 0x08},
+
+    {0x02, 0x04},
+    {0x02, 0x06},
+    {0x04, 0x06}
+};
+
+const u8 gUnknown_84648AE[][3] = {
+    {0x00, 0x03, 0x06}, // top row
+    {0x01, 0x04, 0x07}, // middle row
+    {0x02, 0x05, 0x08}, // bottom row
+    {0x00, 0x04, 0x08}, // tl-br
+    {0x02, 0x04, 0x06}  // bl-tr
+};
+
+const u8 gUnknown_84648BD[][4] = {
+    {0x00, 0x04, 0x08, 0x03}, // tl-br
+    {0x00, 0x03, 0x06, 0x02}, // top row
+    {0x01, 0x04, 0x07, 0x01}, // middle row
+    {0x02, 0x05, 0x08, 0x02}, // bottom row
+    {0x02, 0x04, 0x06, 0x03}  // bl-tr
+};
+
+const u16 gUnknown_84648D2[][7] = {
+    {0x1fa1, 0x2eab, 0x3630, 0x39f3, 0x3bd4, 0x3bfc, 0x0049},
+    {0x1f97, 0x2ea2, 0x3627, 0x39e9, 0x3bca, 0x3bf8, 0x0049},
+    {0x1f91, 0x2e9b, 0x3620, 0x39e3, 0x3bc4, 0x3bf4, 0x0049},
+    {0x1f87, 0x2e92, 0x3617, 0x39d9, 0x3bba, 0x3bef, 0x0050},
+    {0x1f7f, 0x2e89, 0x360e, 0x39d1, 0x3bb2, 0x3bea, 0x0050},
+    {0x1fc9, 0x2efc, 0x3696, 0x3a63, 0x3c49, 0x3c8b, 0x0073},
+};
+
+const u8 gUnknown_8464926[][21] = {
+    {0x00, 0x03, 0x04, 0x01, 0x02, 0x06, 0x02, 0x05, 0x00, 0x06, 0x03, 0x01, 0x04, 0x02, 0x06, 0x00, 0x05, 0x02, 0x01, 0x06, 0x02},
+    {0x00, 0x05, 0x04, 0x03, 0x01, 0x05, 0x04, 0x03, 0x02, 0x05, 0x04, 0x03, 0x00, 0x05, 0x04, 0x01, 0x03, 0x06, 0x05, 0x03, 0x04},
+    {0x00, 0x03, 0x06, 0x05, 0x02, 0x03, 0x06, 0x05, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x01},
+};
+
+const u16 gUnknown_8464966[] = {
+      0,
+      2,
+      6,
+      8,
+     15,
+    100,
+    300
+};
+
+const u16 gUnknown_8464974[] = INCBIN_U16("graphics/slot_machine/unk_8464974.gbapal");
+const u16 gUnknown_8464994[] = INCBIN_U16("graphics/slot_machine/unk_8464994.gbapal");
+const u16 gUnknown_84649B4[] = INCBIN_U16("graphics/slot_machine/unk_84649b4.gbapal");
+const u16 gUnknown_84649D4[] = INCBIN_U16("graphics/slot_machine/unk_84649d4.gbapal");
+const u16 gUnknown_84649F4[] = INCBIN_U16("graphics/slot_machine/unk_84649f4.gbapal");
+const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
+const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_846504c.gbapal");
+const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
+const u16 gUnknown_8465524[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
+const u32 gUnknown_8465544[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
+
+const struct CompressedSpriteSheet gUnknown_84655B0[] = {
+    {(const void *)gUnknown_8464A14, 0xe00, 0},
+    {(const void *)gUnknown_846506C, 0xc00, 1},
+    {(const void *)gUnknown_8465544, 0x280, 2},
+};
+
+const struct SpritePalette gUnknown_84655C8[] = {
+    {gUnknown_8464974, 0},
+    {gUnknown_8464994, 1},
+    {gUnknown_84649B4, 2},
+    {gUnknown_84649D4, 3},
+    {gUnknown_84649F4, 4},
+    {gUnknown_846504C, 5},
+    {gUnknown_8465524, 6},
+    {NULL}
+};
+
+const u16 gUnknown_8465608[] = {
+    2,
+    2,
+    0,
+    0,
+    2,
+    4,
+    3
+};
+
+const u16 gUnknown_8465616[] = {
+    0x0120, 0x011f, 0x011e, 0x011d, 0x011c, 0x011b, 0x011a, 0x0119, 0x0118, 0x0117, 0x0116, 0x0115, 0x0114, 0x0113, 0x0112, 0x0111,
+    0x0110, 0x010f, 0x010e, 0x010d, 0x010c, 0x010b, 0x010a, 0x0109, 0x0108, 0x0107, 0x0106, 0x0105, 0x0104, 0x0103, 0x0102, 0x0101,
+    0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100,
+    0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100,
+    0x0101, 0x0102, 0x0103, 0x0104, 0x0105, 0x0106, 0x0107, 0x0108, 0x0109, 0x010a, 0x010b, 0x010c, 0x010d, 0x010e, 0x010f, 0x0110,
+    0x0111, 0x0112, 0x0113, 0x0114, 0x0115, 0x0116, 0x0117, 0x0118, 0x0119, 0x011a, 0x011b, 0x011c, 0x011d, 0x011e, 0x011f, 0x0120
+};
+
+const u8 gUnknown_84656D6[] = {
+    0x10, 0x10, 0x10, 0x10, 0x0f, 0x0e, 0x0d, 0x0d, 0x0c, 0x0b, 0x0a, 0x0a, 0x09, 0x08, 0x07, 0x07, 0x06, 0x05, 0x04, 0x04, 0x03, 0x02, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x03, 0x03, 0x04, 0x05, 0x06, 0x06, 0x07, 0x08, 0x09, 0x09, 0x0a, 0x0b, 0x0c, 0x0c, 0x0d, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f
+};
+
+extern const struct SpriteTemplate gUnknown_84657E4;
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
 {
@@ -775,4 +901,568 @@ bool32 sub_814054C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
             return TRUE;
     }
     return FALSE;
+}
+
+#ifdef NONMATCHING
+bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
+{
+    u8 sp0[9];
+    s32 r3, r6;
+    s32 i;
+
+    r6 = sSlotMachineState->field_20[sSlotMachineState->field_32[0]] + 1;
+    r3 = sSlotMachineState->field_20[sSlotMachineState->field_32[1]] + 1;
+    a1++;
+    if (r6 >= 21)
+        r6 = 0;
+    if (r3 >= 21)
+        r3 = 0;
+    if (a1 >= 21)
+        a1 = 0;
+    for (i = 0; i < 3; i++)
+    {
+        sp0[sSlotMachineState->field_32[0] * 3 + i] = gUnknown_8464926[sSlotMachineState->field_32[0]][r6];
+        sp0[sSlotMachineState->field_32[1] * 3 + i] = gUnknown_8464926[sSlotMachineState->field_32[1]][r3];
+        sp0[a0 * 3 + i] = gUnknown_8464926[a0][a1];
+        r6++;
+        if (r6 >= 21)
+            r6 = 0;
+        r3++;
+        if (r3 >= 21)
+            r3 = 0;
+        a1++;
+        if (a1 >= 21)
+            a1++;
+    }
+    switch (a2)
+    {
+    case 0:
+        for (i = 0; i < 3; i++)
+        {
+            if (sub_81408F4(1, sp0[i]))
+                return FALSE;
+        }
+        for (i = 0; i < 5; i++)
+        {
+            if (sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][1]] && sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][2]])
+                return FALSE;
+        }
+        return TRUE;
+    case 1:
+        for (i = 0; i < 5; i++)
+        {
+            if (sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][1]] && sub_81408F4(a2, sp0[gUnknown_84648AE[i][0]]))
+                return FALSE;
+        }
+        for (i = 0; i < 3; i++)
+        {
+            if (sub_81408F4(a2, sp0[i]))
+                return TRUE;
+        }
+        return FALSE;
+    case 2:
+        for (i = 0; i < 5; i++)
+        {
+            if (sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][1]] && sub_81408F4(a2, sp0[gUnknown_84648AE[i][0]]))
+                return TRUE;
+        }
+        return FALSE;
+    }
+    for (i = 0; i < 5; i++)
+    {
+        if (sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][1]] && sp0[gUnknown_84648AE[i][0]] == sp0[gUnknown_84648AE[i][2]] && sub_81408F4(a2, sp0[gUnknown_84648AE[i][0]]))
+            return TRUE;
+    }
+    return FALSE;
+}
+#else
+NAKED
+bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tsub sp, 0x10\n"
+                "\tadds r7, r0, 0\n"
+                "\tadds r5, r1, 0\n"
+                "\tmov r8, r2\n"
+                "\tldr r0, _081407C8 @ =sSlotMachineState\n"
+                "\tldr r2, [r0]\n"
+                "\tmovs r1, 0x32\n"
+                "\tldrsh r0, [r2, r1]\n"
+                "\tlsls r0, 1\n"
+                "\tadds r1, r2, 0\n"
+                "\tadds r1, 0x20\n"
+                "\tadds r0, r1, r0\n"
+                "\tmovs r3, 0\n"
+                "\tldrsh r0, [r0, r3]\n"
+                "\tadds r6, r0, 0x1\n"
+                "\tmovs r3, 0x34\n"
+                "\tldrsh r0, [r2, r3]\n"
+                "\tlsls r0, 1\n"
+                "\tadds r1, r0\n"
+                "\tmovs r3, 0\n"
+                "\tldrsh r0, [r1, r3]\n"
+                "\tadds r3, r0, 0x1\n"
+                "\tadds r5, 0x1\n"
+                "\tcmp r6, 0x14\n"
+                "\tble _08140726\n"
+                "\tmovs r6, 0\n"
+                "_08140726:\n"
+                "\tcmp r3, 0x14\n"
+                "\tble _0814072C\n"
+                "\tmovs r3, 0\n"
+                "_0814072C:\n"
+                "\tcmp r5, 0x14\n"
+                "\tble _08140732\n"
+                "\tmovs r5, 0\n"
+                "_08140732:\n"
+                "\tmovs r4, 0\n"
+                "\tlsls r1, r7, 1\n"
+                "\tlsls r0, r7, 2\n"
+                "\tmov r9, r2\n"
+                "\tldr r2, _081407CC @ =gUnknown_8464926\n"
+                "\tmov r10, r2\n"
+                "\tadds r1, r7\n"
+                "\tadd r1, sp\n"
+                "\tmov r12, r1\n"
+                "\tadds r0, r7\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r7\n"
+                "\tstr r0, [sp, 0xC]\n"
+                "_0814074C:\n"
+                "\tmov r7, r9\n"
+                "\tmovs r0, 0x32\n"
+                "\tldrsh r1, [r7, r0]\n"
+                "\tlsls r0, r1, 1\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, r4\n"
+                "\tmov r7, sp\n"
+                "\tadds r2, r7, r0\n"
+                "\tlsls r0, r1, 2\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, r6, r0\n"
+                "\tadd r0, r10\n"
+                "\tldrb r0, [r0]\n"
+                "\tstrb r0, [r2]\n"
+                "\tmov r0, r9\n"
+                "\tmovs r2, 0x34\n"
+                "\tldrsh r1, [r0, r2]\n"
+                "\tlsls r0, r1, 1\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, r4\n"
+                "\tadds r2, r7, r0\n"
+                "\tlsls r0, r1, 2\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r1\n"
+                "\tadds r0, r3, r0\n"
+                "\tadd r0, r10\n"
+                "\tldrb r0, [r0]\n"
+                "\tstrb r0, [r2]\n"
+                "\tldr r7, [sp, 0xC]\n"
+                "\tadds r0, r5, r7\n"
+                "\tadd r0, r10\n"
+                "\tldrb r0, [r0]\n"
+                "\tmov r1, r12\n"
+                "\tstrb r0, [r1]\n"
+                "\tadds r6, 0x1\n"
+                "\tcmp r6, 0x14\n"
+                "\tble _0814079E\n"
+                "\tmovs r6, 0\n"
+                "_0814079E:\n"
+                "\tadds r3, 0x1\n"
+                "\tcmp r3, 0x14\n"
+                "\tble _081407A6\n"
+                "\tmovs r3, 0\n"
+                "_081407A6:\n"
+                "\tadds r5, 0x1\n"
+                "\tcmp r5, 0x14\n"
+                "\tble _081407AE\n"
+                "\tmovs r5, 0\n"
+                "_081407AE:\n"
+                "\tmovs r2, 0x1\n"
+                "\tadd r12, r2\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x2\n"
+                "\tble _0814074C\n"
+                "\tmov r3, r8\n"
+                "\tcmp r3, 0x1\n"
+                "\tbeq _08140828\n"
+                "\tcmp r3, 0x1\n"
+                "\tbgt _081407D0\n"
+                "\tcmp r3, 0\n"
+                "\tbeq _081407D8\n"
+                "\tb _081408A0\n"
+                "\t.align 2, 0\n"
+                "_081407C8: .4byte sSlotMachineState\n"
+                "_081407CC: .4byte gUnknown_8464926\n"
+                "_081407D0:\n"
+                "\tmov r6, r8\n"
+                "\tcmp r6, 0x2\n"
+                "\tbeq _08140870\n"
+                "\tb _081408A0\n"
+                "_081407D8:\n"
+                "\tmovs r4, 0\n"
+                "_081407DA:\n"
+                "\tmov r7, sp\n"
+                "\tadds r0, r7, r4\n"
+                "\tldrb r1, [r0]\n"
+                "\tmovs r0, 0x1\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _081408DC_return_false\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x2\n"
+                "\tble _081407DA\n"
+                "\tmovs r4, 0\n"
+                "\tldr r2, _08140824 @ =gUnknown_84648AE\n"
+                "\tmovs r3, 0\n"
+                "\tadds r5, r2, 0x2\n"
+                "_081407F8:\n"
+                "\tldrb r0, [r2]\n"
+                "\tmov r6, sp\n"
+                "\tadds r1, r6, r0\n"
+                "\tldrb r0, [r2, 0x1]\n"
+                "\tadd r0, sp\n"
+                "\tldrb r1, [r1]\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r1, r0\n"
+                "\tbne _08140816\n"
+                "\tadds r0, r3, r5\n"
+                "\tldrb r0, [r0]\n"
+                "\tadd r0, sp\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r1, r0\n"
+                "\tbeq _081408DC_return_false\n"
+                "_08140816:\n"
+                "\tadds r2, 0x3\n"
+                "\tadds r3, 0x3\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x4\n"
+                "\tble _081407F8\n"
+                "_08140820_return_true:\n"
+                "\tmovs r0, 0x1\n"
+                "\tb _081408DE\n"
+                "\t.align 2, 0\n"
+                "_08140824: .4byte gUnknown_84648AE\n"
+                "_08140828:\n"
+                "\tmovs r4, 0\n"
+                "\tldr r5, _0814086C @ =gUnknown_84648AE\n"
+                "_0814082C:\n"
+                "\tldrb r0, [r5]\n"
+                "\tmov r7, sp\n"
+                "\tadds r2, r7, r0\n"
+                "\tldrb r0, [r5, 0x1]\n"
+                "\tadds r1, r7, r0\n"
+                "\tldrb r0, [r2]\n"
+                "\tldrb r1, [r1]\n"
+                "\tcmp r0, r1\n"
+                "\tbne _0814084A\n"
+                "\tadds r1, r0, 0\n"
+                "\tmov r0, r8\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _081408DC_return_false\n"
+                "_0814084A:\n"
+                "\tadds r5, 0x3\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x4\n"
+                "\tble _0814082C\n"
+                "\tmovs r4, 0\n"
+                "_08140854:\n"
+                "\tmov r1, sp\n"
+                "\tadds r0, r1, r4\n"
+                "\tldrb r1, [r0]\n"
+                "\tmov r0, r8\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08140820_return_true\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x2\n"
+                "\tble _08140854\n"
+                "\tb _081408DC_return_false\n"
+                "\t.align 2, 0\n"
+                "_0814086C: .4byte gUnknown_84648AE\n"
+                "_08140870:\n"
+                "\tmovs r4, 0\n"
+                "\tldr r5, _0814089C @ =gUnknown_84648AE\n"
+                "_08140874:\n"
+                "\tldrb r0, [r5]\n"
+                "\tmov r3, sp\n"
+                "\tadds r2, r3, r0\n"
+                "\tldrb r0, [r5, 0x1]\n"
+                "\tadds r1, r3, r0\n"
+                "\tldrb r0, [r2]\n"
+                "\tldrb r1, [r1]\n"
+                "\tcmp r0, r1\n"
+                "\tbne _08140892\n"
+                "\tadds r1, r0, 0\n"
+                "\tmov r0, r8\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08140820_return_true\n"
+                "_08140892:\n"
+                "\tadds r5, 0x3\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x4\n"
+                "\tble _08140874\n"
+                "\tb _081408DC_return_false\n"
+                "\t.align 2, 0\n"
+                "_0814089C: .4byte gUnknown_84648AE\n"
+                "_081408A0:\n"
+                "\tmovs r4, 0\n"
+                "\tldr r5, _081408F0 @ =gUnknown_84648AE\n"
+                "\tadds r7, r5, 0\n"
+                "\tmovs r6, 0\n"
+                "_081408A8:\n"
+                "\tldrb r0, [r5]\n"
+                "\tmov r1, sp\n"
+                "\tadds r2, r1, r0\n"
+                "\tadds r0, r7, 0x1\n"
+                "\tadds r0, r6, r0\n"
+                "\tldrb r0, [r0]\n"
+                "\tadd r0, sp\n"
+                "\tldrb r1, [r2]\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r1, r0\n"
+                "\tbne _081408D2\n"
+                "\tldrb r0, [r5, 0x2]\n"
+                "\tadd r0, sp\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r1, r0\n"
+                "\tbne _081408D2\n"
+                "\tmov r0, r8\n"
+                "\tbl sub_81408F4\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08140820_return_true\n"
+                "_081408D2:\n"
+                "\tadds r5, 0x3\n"
+                "\tadds r6, 0x3\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x4\n"
+                "\tble _081408A8\n"
+                "_081408DC_return_false:\n"
+                "\tmovs r0, 0\n"
+                "_081408DE:\n"
+                "\tadd sp, 0x10\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r1}\n"
+                "\tbx r1\n"
+                "\t.align 2, 0\n"
+                "_081408F0: .4byte gUnknown_84648AE");
+}
+#endif //NONMATCHING
+
+bool32 sub_81408F4(s32 a0, s32 a1)
+{
+    switch (a0)
+    {
+    case 0:
+        return a1 ^ 4 ? TRUE : FALSE;
+    case 1:
+    case 2:
+        return a1 == 4 ? TRUE : FALSE;
+    case 3:
+        return a1 == 5 || a1 == 6 ? TRUE : FALSE;
+    case 4:
+        return a1 == 2 || a1 == 3 ? TRUE : FALSE;
+    case 5:
+        return a1 == 1 ? TRUE : FALSE;
+    case 6:
+        return a1 == 0 ? TRUE : FALSE;
+    default:
+        return FALSE;
+    }
+}
+
+u8 sub_814096C(s32 a0)
+{
+    switch (a0)
+    {
+    default:
+    case 4:
+        return 1;
+    case 5:
+    case 6:
+        return 3;
+    case 2:
+    case 3:
+        return 4;
+    case 1:
+        return 5;
+    case 0:
+        return 6;
+    }
+}
+
+void sub_81409B4(void)
+{
+    u16 r2 = Random() / 4;
+    s32 i;
+    const u16 * r4 = gUnknown_84648D2[sSlotMachineState->machineidx];
+    for (i = 0; i < 6; i++)
+    {
+        if (r2 < r4[i])
+            break;
+    }
+    if (sSlotMachineState->field_08 < 5)
+    {
+        if (sSlotMachineState->field_0C == 0)
+        {
+            if ((Random() & 0x3FFF) < r4[6])
+                sSlotMachineState->field_0C = (Random() & 1) ? 5 : 60;
+        }
+        if (sSlotMachineState->field_0C != 0)
+        {
+            if (i == 0 && (Random() & 0x3FFF) < 0x2CCC)
+                sSlotMachineState->field_0C = (Random() & 1) ? 5 : 60;
+            sSlotMachineState->field_0C--;
+        }
+        sSlotMachineState->field_08 = i;
+    }
+}
+
+void sub_8140A70(void)
+{
+    sSlotMachineState->field_08 = 0;
+}
+
+u16 sub_8140A80(void)
+{
+    u8 sp0[9] = {};
+    s32 i;
+    s32 r4, r3, r2;
+    s32 r9;
+
+    for (i = 0; i < 5; i++)
+        sSlotMachineState->field_3C[i] = 0;
+
+    r9 = 0;
+    r4 = sSlotMachineState->field_20[0];
+    r3 = sSlotMachineState->field_20[1];
+    r2 = sSlotMachineState->field_20[2];
+
+    for (i = 0; i < 3; i++)
+    {
+        r4++;
+        if (r4 >= 21)
+            r4 = 0;
+        r3++;
+        if (r3 >= 21)
+            r3 = 0;
+        r2++;
+        if (r2 >= 21)
+            r2 = 0;
+        sp0[0 * 3 + i] = gUnknown_8464926[0][r4];
+        sp0[1 * 3 + i] = gUnknown_8464926[1][r3];
+        sp0[2 * 3 + i] = gUnknown_8464926[2][r2];
+    }
+    sSlotMachineState->payout = 0;
+    for (i = 0; i < 5; i++)
+    {
+        if (sSlotMachineState->bet >= gUnknown_84648BD[i][3])
+        {
+            if (sub_81408F4(1, sp0[gUnknown_84648BD[i][0]]))
+                r3 = sub_81408F4(2, sp0[gUnknown_84648BD[i][1]]) ? 2 : 1;
+            else if (sp0[gUnknown_84648BD[i][0]] == sp0[gUnknown_84648BD[i][1]] && sp0[gUnknown_84648BD[i][0]] == sp0[gUnknown_84648BD[i][2]])
+                r3 = sub_814096C(sp0[gUnknown_84648BD[i][0]]);
+            else
+                r3 = 0;
+            if (r3 != 0)
+            {
+                sSlotMachineState->field_3C[i] = 1;
+                sSlotMachineState->payout += gUnknown_8464966[r3];
+            }
+            if (r3 > r9)
+                r9 = r3;
+        }
+    }
+    return r9;
+}
+
+u16 sub_8140BDC(void)
+{
+    return sSlotMachineState->payout;
+}
+
+u8 sub_8140BEC(void)
+{
+    return sSlotMachineState->bet;
+}
+
+bool32 sub_8140BF8(s32 a0)
+{
+    return sSlotMachineState->field_3C[a0];
+}
+
+bool32 sub_8140C0C(void)
+{
+    s32 i;
+
+    for (i = 0; i < NELEMS(gUnknown_84655B0); i++)
+        LoadCompressedObjectPic(&gUnknown_84655B0[i]);
+    LoadSpritePalettes(gUnknown_84655C8);
+    gUnknown_203F3A4 = Alloc(sizeof(*gUnknown_203F3A4));
+    if (gUnknown_203F3A4 == NULL)
+        return FALSE;
+    sub_8140C6C(gUnknown_203F3A4);
+    return TRUE;
+}
+
+void sub_8140C50(void)
+{
+    if (gUnknown_203F3A4 != NULL)
+    {
+        Free(gUnknown_203F3A4);
+        gUnknown_203F3A4 = NULL;
+    }
+}
+
+void sub_8140C6C(struct SlotMachineGfxManager * manager)
+{
+    s32 i, j;
+
+    for (i = 0; i < 3; i++)
+    {
+        manager->field_00[i] = 0;
+        for (j = 0; j < 5; j++)
+        {
+            manager->field_0C[i][j] = NULL;
+        }
+    }
+}
+
+void sub_8140CA0(void)
+{
+    struct Sprite * sprite;
+    s32 i, j;
+    s32 spriteId;
+    s32 animId;
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 5; j++)
+        {
+            spriteId = CreateSprite(&gUnknown_84657E4, 80 + 40 * i, 44 + 24 * j, 2);
+            animId =  gUnknown_8464926[i][j];
+            sprite = &gSprites[spriteId];
+            StartSpriteAnim(sprite, animId);
+            sprite->oam.paletteNum = IndexOfSpritePaletteTag(gUnknown_8465608[animId]);
+            sprite->data[0] = i;
+            sprite->data[1] = j;
+            sprite->data[2] = j;
+            sprite->data[3] = 0;
+            sprite->oam.matrixNum = 0;
+            gUnknown_203F3A4->field_0C[i][j] = sprite;
+            gUnknown_203F3A4->field_70 = 0x07000006;
+        }
+    }
 }
